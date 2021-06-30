@@ -379,6 +379,10 @@
 		n2o_euphoria = EUPHORIA_INACTIVE
 		clear_alert(ALERT_TOO_MUCH_N2O)
 
+		on_anesthetic = check_anesthetic(SA_pp, SA_sleep_min) // NON-MODULE CHANGE
+
+
+
 	//-- NITRIUM --//
 	if(nitrium_pp)
 		var/need_mob_update = FALSE
