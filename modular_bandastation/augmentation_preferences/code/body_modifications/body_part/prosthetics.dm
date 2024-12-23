@@ -1,9 +1,9 @@
-/datum/body_modification/bodypart_prosthetics
-	name = "Body Part Prosthetics"
-	abstract_type = /datum/body_modification/bodypart_prosthetics
+/datum/body_modification/bodypart_prosthesis
+	name = "Body Part Prosthesis"
+	abstract_type = /datum/body_modification/bodypart_prosthesis
 	var/replacement_bodypart_type = null
 
-/datum/body_modification/bodypart_prosthetics/apply_to_carbon(mob/living/carbon/target)
+/datum/body_modification/bodypart_prosthesis/apply_to_human(mob/living/carbon/target)
 	. = ..()
 	if(!.)
 		return
@@ -12,38 +12,38 @@
 	replacement_bodypart.replace_limb(target, TRUE)
 	return TRUE
 
-/datum/body_modification/bodypart_prosthetics/head
-	key = "head_prosthetics"
+/datum/body_modification/bodypart_prosthesis/head
+	key = "head_prosthesis"
 	name = "Протез головы"
-	replacement_bodypart = /obj/item/bodypart/head/robot
+	replacement_bodypart_type = /obj/item/bodypart/head/robot
 
-/datum/body_modification/bodypart_prosthetics/chest
-	key = "chest_prosthetics"
+/datum/body_modification/bodypart_prosthesis/chest
+	key = "chest_prosthesis"
 	name = "Протез торса"
-	replacement_bodypart = /obj/item/bodypart/chest/robot
+	replacement_bodypart_type = /obj/item/bodypart/chest/robot
 
-/datum/body_modification/bodypart_prosthetics/arm
-	abstract_type = /datum/body_modification/bodypart_prosthetics/arm
+/datum/body_modification/bodypart_prosthesis/arm
+	abstract_type = /datum/body_modification/bodypart_prosthesis/arm
 
-/datum/body_modification/bodypart_prosthetics/arm/left
-	key = "left_arm_amputation"
+/datum/body_modification/bodypart_prosthesis/arm/left
+	key = "left_arm_prosthetic"
 	name = "Протез левой руки"
-	replacement_bodypart = /obj/item/bodypart/arm/left/robot
+	replacement_bodypart_type = /obj/item/bodypart/arm/left/robot
 
-/datum/body_modification/bodypart_prosthetics/arm/right
-	key = "right_arm_amputation"
+/datum/body_modification/bodypart_prosthesis/arm/right
+	key = "right_arm_prosthesis"
 	name = "Протез правой руки"
-	replacement_bodypart = /obj/item/bodypart/arm/right/robot
+	replacement_bodypart_type = /obj/item/bodypart/arm/right/robot
 
-/datum/body_modification/bodypart_prosthetics/leg
-	abstract_type = /datum/body_modification/bodypart_prosthetics/leg
+/datum/body_modification/bodypart_prosthesis/leg
+	abstract_type = /datum/body_modification/bodypart_prosthesis/leg
 
-/datum/body_modification/bodypart_prosthetics/leg/left
-	key = "left_leg_amputation"
+/datum/body_modification/bodypart_prosthesis/leg/left
+	key = "left_leg_prosthesis"
 	name = "Протез левой ноги"
-	replacement_bodypart = /obj/item/bodypart/leg/left/robot
+	replacement_bodypart_type = /obj/item/bodypart/leg/left/robot
 
-/datum/body_modification/bodypart_prosthetics/leg/right
-	key = "right_leg_amputation"
+/datum/body_modification/bodypart_prosthesis/leg/right
+	key = "right_leg_prosthesis"
 	name = "Протез правой ноги"
-	replacement_bodypart = /obj/item/bodypart/leg/right/robot
+	replacement_bodypart_type = /obj/item/bodypart/leg/right/robot
