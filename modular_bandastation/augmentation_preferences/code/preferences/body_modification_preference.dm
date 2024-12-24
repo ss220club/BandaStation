@@ -4,6 +4,17 @@
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	can_randomize = FALSE
 
+/datum/preference/body_modifications/is_valid(value)
+	if(!islist(value))
+		return FALSE
+
+	var/list/values = value
+	for(var/body_modification_key in values)
+		if(isnull(GLOB.body_modifications[body_modification_key]))
+			return FALSE
+
+	return TRUE
+
 /datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, value)
 	if(!islist(value))
 		return

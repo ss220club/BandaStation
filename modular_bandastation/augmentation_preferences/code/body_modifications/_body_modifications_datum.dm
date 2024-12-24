@@ -25,13 +25,24 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 /datum/body_modification/proc/apply_to_human(mob/living/carbon/target)
 	SHOULD_CALL_PARENT(TRUE)
 
-	return can_be_applied()
+	return can_be_applied(target)
 
 /// Returns TRUE if this body modification can be applied
 /datum/body_modification/proc/can_be_applied(mob/living/carbon/target)
 	SHOULD_CALL_PARENT(TRUE)
 
-	return !isnull(target) && length(incompatible_body_modifications && target.client?.prefs?.read_preference(/datum/preference/body_modifications))
+	if(isnull(target))
+		return FALSE
+
+	var/list/applied_body_modifications = target.client?.prefs?.read_preference(/datum/preference/body_modifications)
+	if(length(applied_body_modifications) == 0)
+		return TRUE
+
+	for(var/incompatible_body_modification in incompatible_body_modifications)
+		if(incompatible_body_modification in applied_body_modifications)
+			return FALSE
+
+	return TRUE
 
 /// Returns the list of body modifications incompatible with this body modification
 /datum/body_modification/proc/get_conflicting_body_modifications(mob/living/carbon/target)

@@ -12,16 +12,6 @@
 	replacement_bodypart.replace_limb(target, TRUE)
 	return TRUE
 
-/datum/body_modification/bodypart_prosthesis/head
-	key = "head_prosthesis"
-	name = "Протез головы"
-	replacement_bodypart_type = /obj/item/bodypart/head/robot
-
-/datum/body_modification/bodypart_prosthesis/chest
-	key = "chest_prosthesis"
-	name = "Протез торса"
-	replacement_bodypart_type = /obj/item/bodypart/chest/robot
-
 /datum/body_modification/bodypart_prosthesis/arm
 	abstract_type = /datum/body_modification/bodypart_prosthesis/arm
 
