@@ -1,3 +1,4 @@
 #include "_medical.dm"
 
 #include "code/surgery/vocal_cords.dm"
+#include "code/surgery/surgery_fail_chance.dm"
