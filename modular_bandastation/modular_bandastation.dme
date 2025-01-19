@@ -11,6 +11,7 @@
 #include "aesthetics/_aesthetics.dme"
 #include "aesthetics_sounds/_aesthetics_sounds.dme"
 #include "ai_laws/_ai_laws.dme"
+#include "augmentation_preferences/_augmentation_preferences.dme"
 #include "announcers/_announcers.dme"
 #include "autohiss/_autohiss.dme"
 #include "automapper/_automapper.dme"

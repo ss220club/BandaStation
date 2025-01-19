@@ -181,11 +181,15 @@ export type PreferencesMenuData = {
 
   window: Window;
 
-  tts_seed: string; // BANDASTATION ADD
-  tts_enabled: BooleanLike; // BANDASTATION ADD
+  // BANDASTATION ADD START
+  tts_seed: string;
+  tts_enabled: BooleanLike;
+  incompatible_body_modifications: string[];
+  applied_body_modifications: string[];
+  // BANDASTATION ADD END
 };
 
-// BANDASTATION EDIT START
+// BANDASTATION ADD START
 export type Seed = {
   name: string;
   value: string;
@@ -206,10 +210,19 @@ export type TtsData = {
   phrases: string[];
 };
 
-// BANDASTATION EDIT END
+export type BodyModification = {
+  key: string;
+  name: string;
+  description: string;
+  cost: number;
+};
+// BANDASTATION ADD END
 
 export type ServerData = {
-  text_to_speech: TtsData; // BANDASTATION ADD
+  // BANDASTATION ADD START
+  text_to_speech: TtsData;
+  body_modifications: BodyModification[];
+  // BANDASTATION ADD END
   jobs: {
     departments: Record<string, Department>;
     jobs: Record<string, Job>;

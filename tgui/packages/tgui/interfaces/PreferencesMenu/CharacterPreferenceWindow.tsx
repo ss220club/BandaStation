@@ -5,6 +5,7 @@ import { exhaustiveCheck } from 'tgui-core/exhaustive';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 import { AntagsPage } from './AntagsPage';
+import { BodyModificationsPage } from './BodyModificationsPage'; // BANDASTATION EDIT ADD - TTS
 import { PreferencesMenuData } from './data';
 import { JobsPage } from './JobsPage';
 import { LoadoutPage } from './loadout/index';
@@ -21,8 +22,10 @@ enum Page {
   Species,
   Quirks,
   Loadout,
-  // BANDASTATION EDIT ADD - TTS
+  // BANDASTATION ADD START
   Voice,
+  BodyModifications,
+  // BANDASTATION ADD END
 }
 
 const CharacterProfiles = (props: {
@@ -83,10 +86,14 @@ export const CharacterPreferenceWindow = (props) => {
     case Page.Loadout:
       pageContents = <LoadoutPage />;
       break;
-    // BANDASTATION EDIT ADD - TTS
+    // BANDASTATION ADD START
     case Page.Voice:
       pageContents = <VoicePage />;
       break;
+    case Page.BodyModifications:
+      pageContents = <BodyModificationsPage />;
+      break;
+    // BANDASTATION ADD END
     default:
       exhaustiveCheck(currentPage);
   }
@@ -166,6 +173,16 @@ export const CharacterPreferenceWindow = (props) => {
                   setPage={setCurrentPage}
                 >
                   Quirks
+                </PageButton>
+              </Stack.Item>
+
+              <Stack.Item grow>
+                <PageButton
+                  currentPage={currentPage}
+                  page={Page.BodyModifications}
+                  setPage={setCurrentPage}
+                >
+                  Body Modifications
                 </PageButton>
               </Stack.Item>
 
