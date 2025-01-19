@@ -26,5 +26,6 @@
 	"workbench.editorAssociations": {
 		"*.dmi": "dmiEditor.dmiEditor"
 	},
-	"Lua.diagnostics.enable": false
+	"Lua.diagnostics.enable": false,
+	"git.ignoreLimitWarning": true
 }
