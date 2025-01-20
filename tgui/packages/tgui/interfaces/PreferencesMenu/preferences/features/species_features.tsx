@@ -125,7 +125,7 @@ export const heterochromatic: Feature<string> = {
 };
 
 // BANDASTATION EDIT START
-
+// MARK: Vulpkanin features
 export const feature_vulpkanin_tail: FeatureChoiced = {
   name: 'Хвост',
   component: (
@@ -193,5 +193,62 @@ export const feature_vulpkanin_tail_markings: FeatureChoiced = {
 
 export const vulpkanin_tail_markings_color: Feature<string> = {
   name: 'Хвост - цвет',
+  component: FeatureColorInput,
+};
+
+// MARK: Tajaran features
+export const feature_tajaran_tail: FeatureChoiced = {
+  name: 'Хвост',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
+export const feature_tajaran_head_markings: FeatureChoiced = {
+  name: 'Узор меха головы',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
+export const tajaran_head_markings_color: Feature<string> = {
+  name: 'Узор меха головы - цвет',
+  component: FeatureColorInput,
+};
+
+export const tajaran_body_markings_color: Feature<string> = {
+  name: 'Узор меха - цвет',
+  component: FeatureColorInput,
+};
+
+export const feature_tajaran_facial_hair: FeatureChoiced = {
+  name: 'Растительность на лице',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
+export const tajaran_facial_hair_color: Feature<string> = {
+  name: 'Растительность на лице - цвет',
+  component: FeatureColorInput,
+};
+
+export const feature_tajaran_tail_markings: FeatureChoiced = {
+  name: 'Хвост - узор',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
+export const tajaran_tail_markings_color: Feature<string> = {
+  name: 'Хвост - цвет узора',
   component: FeatureColorInput,
 };
