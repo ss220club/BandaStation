@@ -529,6 +529,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		species_human.overlays_standing[BODY_LAYER] = standing
 
 	species_human.apply_overlay(BODY_LAYER)
+	// BANDASTATION EDIT START - Удалить после фикса на апстриме
+	update_body_markings(species_human)
+	// BANDASTATION EDIT STOP
 
 //This exists so sprite accessories can still be per-layer without having to include that layer's
 //number in their sprite name, which causes issues when those numbers change.
@@ -2033,6 +2036,24 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			people_part.add_bodypart_overlay(overlay)
 
 		qdel(markings)
+
+// BANDASTATION EDIT START - Удалить после фикса на апстриме
+/datum/species/proc/update_body_markings(mob/living/carbon/human/hooman)
+	if(HAS_TRAIT(hooman, TRAIT_INVISIBLE_MAN))
+		remove_body_markings(hooman)
+		return
+
+	var/needs_update = FALSE
+	for(var/datum/bodypart_overlay/simple/body_marking/marking as anything in body_markings)
+		if(initial(marking.dna_feature_key) == body_markings[marking]) // dna is same as our species (sort of mini-cache), so no update needed
+			continue
+		needs_update = TRUE
+		break
+
+	if(needs_update)
+		remove_body_markings(hooman)
+		add_body_markings(hooman)
+// BANDASTATION EDIT STOP
 
 /// Remove body markings
 /datum/species/proc/remove_body_markings(mob/living/carbon/human/hooman)

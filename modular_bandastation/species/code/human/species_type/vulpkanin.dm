@@ -214,29 +214,20 @@
 /datum/species/vulpkanin/add_body_markings(mob/living/carbon/human/vulp) // OVERRIDE /datum/species/proc/add_body_markings
 	for(var/markings_type in body_markings)
 		var/datum/bodypart_overlay/simple/body_marking/markings = new markings_type()
-		var/accessory_name = vulp.dna.features[markings.dna_feature_key]
+
+		var/accessory_name = vulp.dna.features[markings.dna_feature_key] || body_markings[markings_type]
 		var/datum/sprite_accessory/vulpkanin_body_markings/accessory = markings.get_accessory(accessory_name)
-
-		if(isnull(accessory))
-			return
-
 		for(var/obj/item/bodypart/part as anything in markings.applies_to)
 			var/obj/item/bodypart/people_part = vulp.get_bodypart(initial(part.body_zone))
 
-			if(!people_part || !istype(people_part, part))
+			if(isnull(people_part) || !istype(people_part, part))
 				continue
 
 			var/datum/bodypart_overlay/simple/body_marking/vulpkanin/overlay = new markings_type()
-
-			overlay.icon = accessory.icon
-			overlay.icon_state = accessory.icon_state
-			overlay.use_gender = accessory.gender_specific
-			overlay.draw_color = accessory.color_src ? vulp.dna.features["furcolor_first"] : null
-
-			if(istype(accessory, /datum/sprite_accessory/vulpkanin_body_markings) && accessory.colored_paws && (istype(people_part, /obj/item/bodypart/arm/left/vulpkanin) || istype(people_part, /obj/item/bodypart/arm/right/vulpkanin)))
-				overlay.aux_color_paw = accessory.color_src ? vulp.dna.features["furcolor_first"] : null
+			overlay.set_appearance(accessory_name, vulp.dna.features["furcolor_first"], people_part)
 
 			people_part.add_bodypart_overlay(overlay)
+		qdel(markings)
 
 /obj/item/bodypart/head/get_hair_and_lips_icon(dropped)
 	. = ..()

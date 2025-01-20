@@ -14,6 +14,29 @@
 		a.color = aux_color_paw
 	return
 
+/datum/bodypart_overlay/simple/body_marking/vulpkanin/set_appearance(name, set_color, bodypart)
+	var/datum/sprite_accessory/vulpkanin_body_markings/accessory = get_accessory(name)
+	if(isnull(accessory))
+		return
+
+	icon = accessory.icon
+	icon_state = accessory.icon_state
+	use_gender = accessory.gender_specific
+	draw_color = accessory.color_src ? set_color : null
+
+	if(istype(accessory, /datum/sprite_accessory/vulpkanin_body_markings) && accessory.colored_paws && (istype(bodypart, /obj/item/bodypart/arm/left/vulpkanin) || istype(bodypart, /obj/item/bodypart/arm/right/vulpkanin)))
+		aux_color_paw = accessory.color_src ? set_color : null
+
+	cache_key = jointext(generate_icon_cache(), "_")
+
+/datum/bodypart_overlay/simple/body_marking/vulpkanin/generate_icon_cache()
+	. = ..()
+	. += use_gender
+	. += draw_color
+
+/datum/bodypart_overlay/simple/body_marking/vulpkanin/can_draw_on_bodypart(mob/living/carbon/human/human)
+	return icon_state != SPRITE_ACCESSORY_NONE
+
 /datum/sprite_accessory/vulpkanin_body_markings
 	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body_markings.dmi'
 	name = "None"
