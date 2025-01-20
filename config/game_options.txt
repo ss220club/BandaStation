@@ -85,7 +85,7 @@ STATION_GOAL_BUDGET 1
 ## GAME MODES ###
 
 ## Uncomment to not send a roundstart intercept report. Gamemodes may override this.
-NO_INTERCEPT_REPORT
+## NO_INTERCEPT_REPORT
 
 ## Percent weight reductions for three of the most recent modes
 

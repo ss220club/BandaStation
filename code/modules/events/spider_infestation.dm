@@ -16,6 +16,7 @@
 
 /datum/round_event/spider_infestation/setup()
 	announce_when = rand(announce_when, announce_when + 50)
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/spider_infestation/announce(fake)
 	priority_announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", ANNOUNCER_ALIENS)

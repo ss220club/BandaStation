@@ -14,7 +14,7 @@
 	admin_setup = list(/datum/event_admin_setup/listed_options/pirates)
 	map_flags = EVENT_SPACE_ONLY
 
-/datum/round_event_control/pirates/preRunEvent()
+/datum/round_event_control/pirates/preRunEvent(scheduled = FALSE) // BANDASTATION EDIT - STORYTELLER
 	if (SSmapping.is_planetary())
 		return EVENT_CANT_RUN
 	return ..()

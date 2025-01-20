@@ -46,6 +46,7 @@
 		kill()
 		return
 	origin_machine = pick_n_take(vending_machines)
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/brand_intelligence/announce(fake)
 	var/machine_name = initial(origin_machine.name)
