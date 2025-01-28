@@ -4,7 +4,7 @@ import { useBackend } from 'tgui/backend';
 import { Box, Dropdown, Flex } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
-import { PreferencesMenuData } from '../../../data';
+import { PreferencesMenuData } from '../../../types';
 import {
   CheckboxInput,
   FeatureChoiced,
@@ -15,9 +15,9 @@ import {
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const ghost_accs: FeatureChoiced = {
-  name: 'Ghost accessories',
-  category: 'GHOST',
-  description: 'Determines what adjustments your ghost will have.',
+  name: 'Призрак: аксессуары',
+  category: 'ПРИЗРАК',
+  description: 'Влияет на то, какие изменения будет иметь ваш призрак.',
   component: FeatureDropdownInput,
 };
 
@@ -26,12 +26,13 @@ type GhostForm = {
   value: string;
 };
 
-const insertGhostForm = (collection: GhostForm[], value: GhostForm) =>
-  binaryInsertWith(collection, value, ({ value }) => value);
+function insertGhostForm(collection: GhostForm[], value: GhostForm) {
+  return binaryInsertWith(collection, value, ({ value }) => value);
+}
 
-const GhostFormInput = (
+function GhostFormInput(
   props: FeatureValueProps<string, string, FeatureChoicedServerData>,
-) => {
+) {
   const { data } = useBackend<PreferencesMenuData>();
 
   const serverData = props.serverData;
@@ -89,28 +90,28 @@ const GhostFormInput = (
       options={options}
     />
   );
-};
+}
 
 export const ghost_form: FeatureChoiced = {
-  name: 'Ghosts form',
-  category: 'GHOST',
-  description: 'The appearance of your ghost. Requires BYOND membership.',
+  name: 'Призрак: форма',
+  category: 'ПРИЗРАК',
+  description: 'Внешний вид вашего призрака. Нужна подписка BYOND.',
   component: GhostFormInput,
 };
 
 export const ghost_hud: FeatureToggle = {
-  name: 'Ghost HUD',
-  category: 'GHOST',
-  description: 'Enable HUD buttons for ghosts.',
+  name: 'Призрак: HUD',
+  category: 'ПРИЗРАК',
+  description: 'Переключает наличие кнопок на HUD призрака.',
   component: CheckboxInput,
 };
 
 export const ghost_orbit: FeatureChoiced = {
-  name: 'Ghost orbit',
-  category: 'GHOST',
+  name: 'Призрак: орбитирование',
+  category: 'ПРИЗРАК',
   description: `
-    The shape in which your ghost will orbit.
-    Requires BYOND membership.
+    Форма, по которой ваш призрак будет орбитировать.
+    Необходима подписка BYOND.
   `,
   component: (
     props: FeatureValueProps<string, string, FeatureChoicedServerData>,
@@ -124,30 +125,30 @@ export const ghost_orbit: FeatureChoiced = {
 };
 
 export const ghost_others: FeatureChoiced = {
-  name: 'Ghosts of others',
-  category: 'GHOST',
+  name: 'Призрак: окружающие',
+  category: 'ПРИЗРАК',
   description: `
-    Do you want the ghosts of others to show up as their own setting, as
-    their default sprites, or always as the default white ghost?
+    Должны ли призраки других показываться с их настройками, только с их
+    стандартным спрайтом, или только показывать их стандартным белым призраком?
   `,
   component: FeatureDropdownInput,
 };
 
 export const inquisitive_ghost: FeatureToggle = {
-  name: 'Ghost inquisitiveness',
-  category: 'GHOST',
-  description: 'Clicking on something as a ghost will examine it.',
+  name: 'Призрак: осмотр',
+  category: 'ПРИЗРАК',
+  description: 'Нажатие по чему-то будет вызывать осмотр.',
   component: CheckboxInput,
 };
 
 export const ghost_roles: FeatureToggle = {
-  name: 'Get ghost roles',
-  category: 'GHOST',
+  name: 'Получать гост-роли',
+  category: 'ПРИЗРАК',
   description: `
-    If you de-select this, you will not get any ghost role pop-ups what-so-ever!
-    Every single type of these pop-ups WILL be muted for you when you are
-    ghosted. Very useful for those who find ghost roles or the
-    pop-ups annoying, use at your own peril.
+    Если вы отключите это, вы не будете получать оповещения о гост-ролях, вообще!
+    Каждое оповещение БУДЕТ заглушено для вас, когда вы являетесь призраком.
+    Полезная опция для тех, кто не хочет играть на гост-ролях или не любит их
+    оповещения, используйте на свой страх и риск.
 `,
   component: CheckboxInput,
 };

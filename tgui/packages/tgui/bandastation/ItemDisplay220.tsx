@@ -1,7 +1,7 @@
 import { Box, Button, ImageButton } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
-import { LoadoutItem } from '../interfaces/PreferencesMenu/loadout/base';
+import { LoadoutItem } from '../interfaces/PreferencesMenu/CharacterPreferences/loadout/base';
 
 export const ItemDisplay220 = (props: {
   active: boolean;

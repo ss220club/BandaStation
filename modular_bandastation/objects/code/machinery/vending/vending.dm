@@ -20,6 +20,7 @@
 		/obj/item/clothing/under/rank/rnd/roboticist/alt/hoodie = 2,
 		/obj/item/clothing/under/rank/rnd/roboticist/alt/skirt = 2,
 		/obj/item/clothing/under/rank/rnd/roboticist/alt/skirt/red = 2,
+		/obj/item/clothing/suit/jacket/bomber/roboticist =2,
 		)
 	. = ..()
 

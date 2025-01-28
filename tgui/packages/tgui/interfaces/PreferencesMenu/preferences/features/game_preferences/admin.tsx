@@ -7,49 +7,49 @@ import {
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const asaycolor: Feature<string> = {
-  name: 'Admin chat color',
-  category: 'ADMIN',
-  description: 'The color of your messages in Adminsay.',
+  name: 'Цвет админских сообщений',
+  category: 'АДМИН',
+  description: 'Цвет ваших сообщений в Adminsay.',
   component: FeatureColorInput,
 };
 
 export const brief_outfit: Feature<string> = {
-  name: 'Brief outfit',
-  category: 'ADMIN',
-  description: 'The outfit to gain when spawning as the briefing officer.',
+  name: 'Экипировка для брифинга',
+  category: 'АДМИН',
+  description: 'Экипировка, выдаваемая вам на роли брифинг офицера.',
   component: FeatureDropdownInput,
 };
 
 export const bypass_deadmin_in_centcom: FeatureToggle = {
-  name: 'Bypass deadmin options when in CentCom',
-  category: 'ADMIN',
+  name: 'Игнорировать deadmin при спавне на ЦК',
+  category: 'АДМИН',
   description:
-    'Whether or not to always remain an admin when spawned in CentCom.',
+    'Оставаться ли с правами администратора, когда вы появляетесь на ЦК.',
   component: CheckboxInput,
 };
 
 export const fast_mc_refresh: FeatureToggle = {
-  name: 'Enable fast MC stat panel refreshes',
-  category: 'ADMIN',
+  name: 'Включить ускоренное обновление MC',
+  category: 'АДМИН',
   description:
-    'Whether or not the MC tab of the Stat Panel refreshes fast. This is expensive so make sure you need it.',
+    'Должна ли панель MC со стат-панели обновляться быстрее обычного. Используйте, только если она нужна!',
   component: CheckboxInput,
 };
 
 export const ghost_roles_as_admin: FeatureToggle = {
-  name: 'Get ghost roles while adminned',
-  category: 'ADMIN',
+  name: 'Получать гост-роли будучи админом',
+  category: 'АДМИН',
   description: `
-    If you de-select this, you will not get any ghost role pop-ups while
-    adminned! Every single pop-up WILL never show up for you in an adminned
-    state. However, this does not suppress notifications when you are
-    a regular player (deadminned).
+    Если вы отключите это, то вы не будете получать предложения о гост-ролях,
+    когда вы с правами администратора. НИКАКОЕ оповещение не будет повляться для вас.
+    Но эта опция ничего не делает, если вы являетесь обычным игроком
+    (deadmin).
 `,
   component: CheckboxInput,
 };
 
 export const comms_notification: FeatureToggle = {
-  name: 'Enable comms console sound',
-  category: 'ADMIN',
+  name: 'Звуковое оповещение о факсах на ЦК',
+  category: 'АДМИН',
   component: CheckboxInput,
 };

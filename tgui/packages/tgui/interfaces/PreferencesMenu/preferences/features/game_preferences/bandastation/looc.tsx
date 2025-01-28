@@ -1,9 +1,9 @@
 import { CheckboxInput, FeatureToggle } from '../../base';
 
 export const looc_admin_pref: FeatureToggle = {
-  name: 'See admin LOOC',
-  category: 'ADMIN',
+  name: 'Слышать LOOC чат',
+  category: 'АДМИН',
   description:
-    'Toggles whether you want to see LOOC anywhere as an admin or not.',
+    'Если включено, вы будете получать LOOC сообщения от всех мобов.',
   component: CheckboxInput,
 };

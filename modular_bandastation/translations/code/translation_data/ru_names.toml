@@ -1633,6 +1633,87 @@ instrumental = "маячком ДРАГнета"
 prepositional = "маячке ДРАГнета"
 gender = "male"
 
+["security bomber"]
+nominative = "бомбер службы безопасности"
+genitive = "бомбера службы безопасности"
+dative = "бомберу службы безопасности"
+accusative = "бомбер службы безопасности"
+instrumental = "бомбером службы безопасности"
+prepositional = "бомбере службы безопасности"
+gender = "male"
+
+["security coat"]
+nominative = "пальто службы безопасности"
+genitive = "пальто службы безопасности"
+dative = "пальто службы безопасности"
+accusative = "пальто службы безопасности"
+instrumental = "пальто службы безопасности"
+prepositional = "пальто службы безопасности"
+gender = "male"
+
+["security caftan"]
+nominative = "кафтан службы безопасности"
+genitive = "кафтана службы безопасности"
+dative = "кафтану службы безопасности"
+accusative = "кафтан службы безопасности"
+instrumental = "кафтаном службы безопасности"
+prepositional = "кафтане службы безопасности"
+gender = "male"
+
+["security cowboy hat"]
+nominative = "ковбойская шляпа службы безопасности"
+genitive = "ковбойской шляпы службы безопасности"
+dative = "ковбойской шляпе службы безопасности"
+accusative = "ковбойская шляпа службы безопасности"
+instrumental = "ковбойской шляпой службы безопасности"
+prepositional = "ковбойской шляпе службы безопасности"
+gender = "female"
+
+["security beanie"]
+nominative = "берендейка службы безопасности"
+genitive = "берендейкой службы безопасности"
+dative = "берендейке службы безопасности"
+accusative = "берендейка службы безопасности"
+instrumental = "берендейкой службы безопасности"
+prepositional = "берендейке службы безопасности"
+gender = "female"
+
+["cortporate security cap"]
+nominative = "корпоративная кепка службы безопасности"
+genitive = "корпоративной кепкой службы безопасности"
+dative = "корпоративной кепке службы безопасности"
+accusative = "корпоративная кепка службы безопасности"
+instrumental = "корпоративной кепкой службы безопасности"
+prepositional = "корпоративной кепке службы безопасности"
+gender = "female"
+
+["security poncho"]
+nominative = "пончо службы безопасности"
+genitive = "пончо службы безопасности"
+dative = "пончо службы безопасности"
+accusative = "пончо службы безопасности"
+instrumental = "пончо службы безопасности"
+prepositional = "пончо службы безопасности"
+gender = "male"
+
+["security corporate uniform"]
+nominative = "корпоративная униформа службы безопасности"
+genitive = "корпоративной униформой службы безопасности"
+dative = "корпоративной униформе службы безопасности"
+accusative = "корпоративная униформа службы безопасности"
+instrumental = "корпоративной униформой службы безопасности"
+prepositional = "корпоративной униформе службы безопасности"
+gender = "female"
+
+["security corporate skirt"]
+nominative = "корпоративная юбка службы безопасности"
+genitive = "корпоративной юбкой службы безопасности"
+dative = "корпоративной юбке службы безопасности"
+accusative = "корпоративная юбка службы безопасности"
+instrumental = "корпоративной юбкой службы безопасности"
+prepositional = "корпоративной юбке службы безопасности"
+gender = "female"
+
 # MARK: Warden
 ["warden's locker"]
 nominative = "шкафчик смотрителя"
@@ -6814,6 +6895,33 @@ instrumental = "оболочкой реактивной брони"
 prepositional = "оболочке реактивной брони"
 gender = "female"
 
+["science's cowboy hat"]
+nominative = "ковбойская шляпа ученого"
+genitive = "ковбойской шляпы ученого"
+dative = "ковбойской шляпе ученого"
+accusative = "ковбойскую шляпу ученого"
+instrumental = "ковбойской шляпой ученого"
+prepositional = "ковбойской шляпе ученого"
+gender = "female"
+
+["science bomber"]
+nominative = "бомбер ученого"
+genitive = "бомбера ученого"
+dative = "бомберу ученого"
+accusative = "бомбер ученого"
+instrumental = "бомбером ученого"
+prepositional = "бомберу ученого"
+gender = "male"
+
+["scientist's mantle"]
+nominative = "мантия ученого"
+genitive = "мантии ученого"
+dative = "мантии ученого"
+accusative = "мантию ученого"
+instrumental = "мантией ученого"
+prepositional = "мантию ученого"
+gender = "female"
+
 # MARK: Circuits
 ["integrated circuit"]
 nominative = "интегральная схема"
@@ -7061,6 +7169,15 @@ nominative = "модуль переименования киборга"
 
 ["cyborg emergency reboot module"]
 nominative = "модуль экстренной перезагрузки киборга"
+
+["roboticist bomber"]
+nominative = "бомбер робототехника"
+genitive = "бомбера робототехника"
+dative = "бомберу робототехника"
+accusative = "бомбер робототехника"
+instrumental = "бомбером робототехника"
+prepositional = "бомберу робототехника"
+gender = "male"
 
 # MARK: Exosuits
 # Ripley

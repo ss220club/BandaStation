@@ -1,9 +1,9 @@
 import { CheckboxInput, FeatureToggle } from '../../base';
 
 export const donor_public: FeatureToggle = {
-  name: 'Publicize Donor status',
-  category: 'CHAT',
+  name: 'Отображать статус бустера',
+  category: 'ЧАТ',
   description:
-    'When enabled, a donor badge will be shown next to your name in OOC.',
+    'Если включено, в OOC чате будет отображаться значок тира подписки.',
   component: CheckboxInput,
 };

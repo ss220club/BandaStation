@@ -16,7 +16,12 @@ GLOBAL_LIST(badge_icons_cache)
 	var/list/parts = list()
 	if(length(badge_parts))
 		parts += badge_parts
-	parts += "<font color='[prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour]'>[key]</font>"
+
+	if(donator_level && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
+		parts += "<font color='[prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour]'>[key]</font>"
+	else
+		parts += "[key]"
+
 	return jointext(parts, "<div style='display: inline-block; width: 3px;'></div>")
 
 /client/proc/get_donator_badge()

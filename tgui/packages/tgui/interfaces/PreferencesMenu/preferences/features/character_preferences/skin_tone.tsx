@@ -14,11 +14,12 @@ type SkinToneServerData = FeatureChoicedServerData & {
   to_hex: Record<string, HexValue>;
 };
 
-const sortHexValues = (array: [string, HexValue][]) =>
-  sortBy(array, ([_, hexValue]) => -hexValue.lightness);
+function sortHexValues(array: [string, HexValue][]) {
+  return sortBy(array, ([_, hexValue]) => -hexValue.lightness);
+}
 
 export const skin_tone: Feature<string, string, SkinToneServerData> = {
-  name: 'Skin tone',
+  name: 'Тон кожи',
   component: (props: FeatureValueProps<string, string, SkinToneServerData>) => {
     const { handleSetValue, serverData } = props;
 

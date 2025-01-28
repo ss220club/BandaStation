@@ -38,3 +38,11 @@ ROUNDSTART_RACES vulpkanin
 
 ## Time in deciseconds the mob must be clientless for to be despawned by cryopod. 30 minutes by default
 #CRYO_MIN_SSD_TIME 18000
+
+## Speech filter for players
+
+## If enabled, some words will be removed from player's messages.
+# ENABLE_SPEECH_FILTER
+## List of ckeys, that bypass speech filter.
+# SPEECH_FILTER_BYPASS ckey
+# SPEECH_FILTER_BYPASS ckey

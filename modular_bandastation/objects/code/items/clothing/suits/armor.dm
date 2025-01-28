@@ -37,3 +37,29 @@
 /obj/item/clothing/suit/armor/vest/blueshield_jacket/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/toggle_icon)
+
+// Security
+/obj/item/clothing/suit/armor/vest/bomber
+	name = "security bomber"
+	desc = "Стильная черная куртка-бомбер, украшенная красной полосой слева. Выглядит сурово."
+	icon_state = "bombersec"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+/obj/item/clothing/suit/armor/vest/bomber/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/toggle_icon)
+
+/obj/item/clothing/suit/armor/vest/coat
+	name = "security coat"
+	desc = "Пальто, усиленный специальным сплавом для защиты и стиля."
+	icon_state = "secgreatcoat"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+/obj/item/clothing/suit/armor/vest/caftan
+	name = "security caftan"
+	desc = "Это длинный и довольно удобный наряд, плотно сидящий на плечах. Выглядит так, как будто он создан в трудные времена."
+	icon_state = "seccaftan"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'

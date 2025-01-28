@@ -9,6 +9,15 @@
 	icon_state = "cowboy_robostics"
 	worn_icon_state = "cowboy_robostics"
 
+// Science
+/obj/item/clothing/head/cowboy/science
+	name = "science's cowboy hat"
+	desc = "Ковбойская шляпа с фиолетовой лентой, сочетающая стиль и функциональность. Отличный выбор для тех, кто хочет выделиться на космической станции."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/cowboy.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/cowboy.dmi'
+	icon_state = "cowboy_science"
+	worn_icon_state = "cowboy_science"
+
 // CentCom
 /obj/item/clothing/head/beret/cent_intern
 	name = "fleet junior-officer's beret"
@@ -89,3 +98,22 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/cap.dmi'
 	icon_state = "towel_head"
+
+// Security
+/obj/item/clothing/head/cowboy/security
+	name = "security cowboy hat"
+	desc = "Ковбойская шляпа с красной лентой, сочетающая стиль и функциональность. Вариация для службы безопасности, имеющая тонкий армированный слой."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/cowboy.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/cowboy.dmi'
+	icon_state = "cowboy_sec"
+	worn_icon_state = "cowboy_sec"
+	armor_type = /datum/armor/cosmetic_sec
+
+/obj/item/clothing/head/sec_beanie
+	name = "security beanie"
+	desc = "Мягкая и бронированная берендейка, которая меняет свой порядок."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "secbeanie"
+	worn_icon_state = "secbeanie"
+	armor_type = /datum/armor/cosmetic_sec
