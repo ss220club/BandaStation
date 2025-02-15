@@ -1,7 +1,7 @@
 /datum/round_event_control/antagonist/solo/traitor
 	antag_flag = ROLE_SYNDICATE_INFILTRATOR
 	tags = list(TAG_COMBAT)
-	antag_datum = /datum/antagonist/traitor/infiltrator
+	antag_datum = /datum/antagonist/traitor
 	protected_roles = list(
 		JOB_CAPTAIN,
 		JOB_HEAD_OF_PERSONNEL,
@@ -45,6 +45,6 @@
 /datum/round_event_control/antagonist/solo/traitor/midround
 	name = "Sleeper Agents (Traitors)"
 	antag_flag = ROLE_SLEEPER_AGENT
-	antag_datum = /datum/antagonist/traitor/infiltrator/sleeper_agent
+	antag_datum = /datum/antagonist/traitor
 	prompted_picking = FALSE
 	can_change_count = TRUE
