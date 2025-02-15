@@ -5,9 +5,9 @@
 		return TRUE
 	return ..()
 
-/mob/living/set_pull_offsets(mob/living/pull_target, grab_state)
+/mob/living/set_pull_offsets(mob/living/pull_target, grab_state, animate)
 	. = ..()
-	SEND_SIGNAL(pull_target, COMSIG_LIVING_SET_PULL_OFFSET, grab_state)
+	SEND_SIGNAL(pull_target, COMSIG_LIVING_SET_PULL_OFFSET, grab_state, animate)
 
 /mob/living/reset_pull_offsets(mob/living/pull_target, override)
 	. = ..()

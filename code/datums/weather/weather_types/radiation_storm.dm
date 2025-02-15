@@ -3,17 +3,17 @@
 	name = "radiation storm"
 	desc = "A cloud of intense radiation passes through the area dealing rad damage to those who are unprotected."
 
-	telegraph_duration = 400
+	telegraph_duration = 40 SECONDS
 	telegraph_message = span_danger("Воздух начинает нагреваться.")
 
 	weather_message = span_userdanger("<i>Вы чувствуете, как вас окутывают волны тепла! Найдите убежище!</i>")
 	weather_overlay = "ash_storm"
-	weather_duration_lower = 600
-	weather_duration_upper = 1500
+	weather_duration_lower = 1 MINUTES
+	weather_duration_upper = 2.5 MINUTES
 	weather_color = "green"
 	weather_sound = 'sound/announcer/alarm/bloblarm.ogg'
 
-	end_duration = 100
+	end_duration = 10 SECONDS
 	end_message = span_notice("Кажется, воздух снова остывает.")
 
 	area_type = /area
