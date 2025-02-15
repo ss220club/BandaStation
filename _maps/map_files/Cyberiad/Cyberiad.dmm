@@ -13751,7 +13751,6 @@
 /area/space/nearstation)
 "dmh" = (
 /obj/structure/table,
-/obj/machinery/power/apc/auto_name/directional/east,
 /obj/effect/turf_decal/trimline/tram/line{
 	dir = 4
 	},
@@ -24307,7 +24306,7 @@
 	location = "Kitchen"
 	},
 /turf/open/floor/plating,
-/area/station/hallway/secondary/service)
+/area/station/service/kitchen)
 "fSY" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -33698,6 +33697,11 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
+"iii" = (
+/obj/machinery/power/apc/auto_name/directional/north,
+/obj/structure/cable,
+/turf/open/floor/wood/parquet,
+/area/station/hallway/secondary/service)
 "iik" = (
 /obj/structure/cable,
 /obj/machinery/holopad/secure,
@@ -203684,10 +203688,10 @@ vix
 mfF
 rzJ
 dRD
-vix
-vix
-vix
-vix
+pHh
+pHh
+pHh
+pHh
 fSS
 pHh
 uqu
@@ -204710,13 +204714,13 @@ gKm
 jkH
 vix
 sjU
-tli
+rFc
 dRD
 pRT
-vix
-vix
-vix
-vix
+dWX
+dWX
+dWX
+dWX
 pHh
 eUf
 tJk
@@ -204967,7 +204971,7 @@ mdo
 wdZ
 vix
 vix
-rFc
+iii
 dRD
 dWX
 dWX
