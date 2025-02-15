@@ -521,15 +521,19 @@ SUBSYSTEM_DEF(gamemode)
 	return can_run
 
 /datum/controller/subsystem/gamemode/proc/get_sec_mult()
-	var/sec_mult = length(department_crew_count[STS_SEC]) / length(full_department_roles[STS_SEC])
-	var/antags_count = get_antag_count()
-	if(antags_count)
-		var/mult1 = length(department_crew_count[STS_SEC]) / antags_count
-		sec_mult *= mult1
+	var/sec_mult
+	if(length(full_department_roles[STS_SEC]))
+		sec_mult = length(department_crew_count[STS_SEC]) / length(full_department_roles[STS_SEC])
+		var/antags_count = get_antag_count()
+		if(antags_count)
+			var/mult1 = length(department_crew_count[STS_SEC]) / antags_count
+			sec_mult *= mult1
+		else
+			sec_mult *= length(full_department_roles[STS_SEC])
+		var/mult2 = department_crew_power[STS_SEC] / (length(full_department_roles[STS_SEC]) * max_depart_power / 2)
+		sec_mult *= mult2
 	else
-		sec_mult *= length(full_department_roles[STS_SEC])
-	var/mult2 = department_crew_power[STS_SEC] / (length(full_department_roles[STS_SEC]) * max_depart_power / 2)
-	sec_mult *= mult2
+		sec_mult = 1
 	return sec_mult
 
 /datum/controller/subsystem/gamemode/proc/update_pop_scaling()
