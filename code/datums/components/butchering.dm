@@ -89,7 +89,7 @@
 		H.visible_message(span_danger("[user] slits [H]'s throat!"), \
 					span_userdanger("[user] slits your throat..."))
 		log_combat(user, H, "wounded via throat slitting", source)
-		H.apply_damage(source.force * THROAT_SLIT_DAMAGE_MODIFIER, BRUTE, BODY_ZONE_HEAD, wound_bonus=CANT_WOUND) // easy tiger, we'll get to that in a sec
+		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD, wound_bonus=CANT_WOUND) // easy tiger, we'll get to that in a sec
 		var/obj/item/bodypart/slit_throat = H.get_bodypart(BODY_ZONE_HEAD)
 		if (H.cause_wound_of_type_and_severity(WOUND_SLASH, slit_throat, WOUND_SEVERITY_CRITICAL))
 			H.apply_status_effect(/datum/status_effect/neck_slice)
