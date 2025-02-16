@@ -486,12 +486,12 @@ SUBSYSTEM_DEF(gamemode)
 		for(var/mob/player_mob as anything in department_crew_count[department])
 			var/playtime = player_mob.client.get_exp_living(pure_numeric = TRUE)
 			var/is_intern = (intern_threshold >= playtime) && (player_mob.mind?.assigned_role.job_flags & JOB_CAN_BE_INTERN)
-			var/depart_power = is_intern ? 0 : clamp(playtime / 100, min_depart_power, max_depart_power)
+			var/depart_power = is_intern ? 0 : clamp(playtime, min_depart_power, max_depart_power)
 			crew_power += depart_power
 		if(length(department_crew_count[department]))
 			var/active_power = crew_power / length(department_crew_count[department])
 			var/max_power = department_max_crew * max_depart_power
-			var/department_power = active_power / max_power
+			var/department_power = (active_power / max_power)
 			department_crew_power[department] = department_power
 
 /datum/controller/subsystem/gamemode/proc/fill_count(mob/player_mob)
@@ -532,6 +532,7 @@ SUBSYSTEM_DEF(gamemode)
 			sec_mult *= length(full_department_roles[STS_SEC])
 		var/mult2 = department_crew_power[STS_SEC] / (length(full_department_roles[STS_SEC]) * max_depart_power / 2)
 		sec_mult *= mult2
+		sec_mult = clamp(sec_mult, 1, full_department_roles[STS_SEC])
 	else
 		sec_mult = 1
 	return sec_mult
