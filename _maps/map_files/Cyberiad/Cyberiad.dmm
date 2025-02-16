@@ -19216,7 +19216,7 @@
 	dir = 8;
 	color = "#6e6e6e"
 	},
-/obj/machinery/light/small/blacklight/directional/south,
+/obj/machinery/light/small/directional/south,
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/iron/dark,
@@ -42199,9 +42199,7 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "knI" = (
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "knL" = (
@@ -46160,6 +46158,21 @@
 /obj/effect/turf_decal/tile/dark_red/full,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/ai_monitored/security/armory)
+"lkf" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/cable,
+/obj/machinery/duct,
+/obj/structure/table/wood,
+/obj/item/kitchen/rollingpin{
+	pixel_y = 4
+	},
+/obj/item/clothing/head/utility/chefhat,
+/turf/open/floor/wood/parquet,
+/area/station/hallway/secondary/service)
 "lkr" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
@@ -47364,6 +47377,9 @@
 /area/station/ai_monitored/turret_protected/aisat/service)
 "lya" = (
 /obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "lyd" = (
@@ -50020,10 +50036,6 @@
 /obj/effect/spawner/random/food_or_drink/donkpockets{
 	pixel_y = 4
 	},
-/obj/item/kitchen/rollingpin{
-	pixel_y = 4
-	},
-/obj/item/clothing/head/utility/chefhat,
 /turf/open/floor/wood/parquet,
 /area/station/hallway/secondary/service)
 "mfG" = (
@@ -55556,6 +55568,15 @@
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/engineering/atmos)
+"nwv" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
+/turf/open/floor/iron/cafeteria,
+/area/station/service/kitchen)
 "nwx" = (
 /turf/closed/wall/r_wall,
 /area/station/security/execution)
@@ -58031,9 +58052,7 @@
 /area/station/maintenance/ghetto/port)
 "obW" = (
 /obj/machinery/disposal/bin,
-/obj/structure/disposalpipe/trunk{
-	dir = 4
-	},
+/obj/structure/disposalpipe/trunk,
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
@@ -63434,6 +63453,12 @@
 /obj/item/bedsheet/brown,
 /turf/open/floor/wood,
 /area/station/maintenance/ghetto/fore/starboard)
+"pqR" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet,
+/area/station/hallway/secondary/service)
 "prg" = (
 /obj/structure/chair{
 	dir = 8
@@ -64082,7 +64107,6 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/engineering/atmos/hfr_room)
 "pyx" = (
-/obj/machinery/airalarm/directional/west,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
@@ -73364,6 +73388,13 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
+"rOi" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/iron/cafeteria,
+/area/station/service/kitchen)
 "rOk" = (
 /obj/structure/sink/directional/west,
 /obj/structure/mirror/directional/east,
@@ -73891,9 +73922,6 @@
 	},
 /obj/structure/table,
 /obj/machinery/airalarm/directional/north,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "rVa" = (
@@ -81052,9 +81080,6 @@
 "tIt" = (
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "tIw" = (
@@ -81219,9 +81244,6 @@
 /area/station/maintenance/ghetto/central/aft)
 "tKk" = (
 /obj/machinery/smartfridge/drying,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/structure/sign/poster/official/fruit_bowl/directional/north,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
@@ -83753,9 +83775,6 @@
 	pixel_y = 8
 	},
 /obj/structure/table,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "uqw" = (
@@ -84181,9 +84200,11 @@
 /obj/structure/disposalpipe/segment{
 	dir = 5
 	},
-/obj/item/kirbyplants/random,
 /obj/structure/cable,
 /obj/machinery/duct,
+/obj/structure/chair/wood{
+	dir = 1
+	},
 /turf/open/floor/wood/parquet,
 /area/station/hallway/secondary/service)
 "uxw" = (
@@ -87309,7 +87330,6 @@
 /obj/machinery/light/small/directional/north,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/duct,
-/obj/machinery/airalarm/directional/north,
 /turf/open/floor/wood/large,
 /area/station/service/hydroponics/ghetto)
 "vnc" = (
@@ -203151,7 +203171,7 @@ nvd
 vix
 rlr
 xFd
-tli
+pqR
 sTZ
 kAC
 eMv
@@ -203159,7 +203179,7 @@ qbT
 lNm
 sTZ
 rUZ
-lya
+rOi
 gVV
 gry
 lWz
@@ -203416,7 +203436,7 @@ dmh
 fPT
 sTZ
 tKk
-lya
+rOi
 dKr
 dKr
 dKr
@@ -203665,7 +203685,7 @@ wdZ
 vix
 mfF
 rzJ
-dRD
+lkf
 sTZ
 sTZ
 sTZ
@@ -203673,7 +203693,7 @@ sTZ
 fSS
 sTZ
 uqu
-lya
+rOi
 dKr
 unf
 pLB
@@ -203930,7 +203950,7 @@ rOn
 tli
 pHh
 tIt
-lya
+rOi
 dKr
 kIg
 kvX
@@ -204187,7 +204207,7 @@ iSS
 iSS
 iEj
 knI
-hJN
+nwv
 fxv
 mdc
 wCj
