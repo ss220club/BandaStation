@@ -1,9 +1,10 @@
 /datum/status_effect/neck_slice/on_remove()
 	. = ..()
-	owner.remove_traits(list(TRAIT_MUTE), REF(src))
+	REMOVE_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/neck_slice/on_apply()
-	if (!..())
-		return
-	owner.add_traits(list(TRAIT_MUTE), REF(src))
 	. = ..()
+	if (!.)
+		return
+		
+	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
