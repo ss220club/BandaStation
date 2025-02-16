@@ -72860,7 +72860,7 @@
 	},
 /obj/machinery/door/window/left/directional/west{
 	name = "Chemistry Lab Access Hatch";
-	req_access = list("plumbing")в)
+	req_access = list("plumbing")
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
