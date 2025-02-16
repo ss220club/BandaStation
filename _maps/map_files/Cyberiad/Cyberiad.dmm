@@ -57843,10 +57843,6 @@
 "nZT" = (
 /turf/closed/wall,
 /area/station/service/bar)
-"nZU" = (
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
-/area/space)
 "nZZ" = (
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
 	dir = 9
@@ -129382,7 +129378,7 @@ txs
 guN
 bsv
 guN
-nZU
+vbK
 doz
 doz
 doz
@@ -129639,7 +129635,7 @@ doz
 guN
 skM
 guN
-nZU
+vbK
 doz
 doz
 doz
