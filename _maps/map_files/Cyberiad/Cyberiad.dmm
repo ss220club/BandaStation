@@ -16205,7 +16205,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "dQW" = (
-/obj/machinery/door/airlock/service,
+/obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
 /obj/machinery/duct,
@@ -20282,6 +20282,13 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
+"eVb" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/obj/machinery/meter,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/central/fore)
 "eVl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -26670,13 +26677,6 @@
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet/locker)
-"gxo" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/meter,
-/turf/open/floor/catwalk_floor/iron_smooth,
-/area/station/maintenance/ghetto/central)
 "gxu" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/maintenance,
@@ -49235,7 +49235,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/machinery/door/airlock/service,
+/obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/duct,
@@ -49911,6 +49911,13 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/smooth,
 /area/station/commons/toilet/restrooms)
+"mdv" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/obj/machinery/meter,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/central)
 "mdx" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 1
@@ -131741,7 +131748,7 @@ bsv
 bsv
 aNR
 liU
-bsv
+eVb
 rqb
 bCC
 mOI
@@ -132004,9 +132011,9 @@ gJQ
 bBe
 dEJ
 bBe
-gxo
+bBe
 rqb
-dlM
+mdv
 dlM
 mOI
 doz
