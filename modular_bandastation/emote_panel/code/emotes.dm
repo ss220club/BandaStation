@@ -16,8 +16,7 @@
 	mob_type_allowed_typecache += list(/mob/living/carbon/human)
 	. = ..()
 
-// Vulpkanin
-
+// MARK: Vulpkanin emotes
 /datum/emote/living/carbon/human/vulpkanin/can_run_emote(mob/user, status_check = TRUE, intentional = FALSE)
 	var/organ = user.get_organ_slot(ORGAN_SLOT_TONGUE)
 	if(istype(organ, /obj/item/organ/tongue/vulpkanin))
@@ -83,3 +82,77 @@
 	vary = TRUE
 	cooldown = 2 SECONDS
 	sound = 'modular_bandastation/emote_panel/audio/wbark.ogg'
+
+// MARK: Tajaran emotes
+/datum/emote/living/carbon/human/tajaran/can_run_emote(mob/user, status_check = TRUE, intentional, params)
+	if(!istype(user.get_organ_slot(ORGAN_SLOT_TONGUE), /obj/item/organ/tongue/tajaran))
+		return FALSE
+	return ..()
+
+/datum/emote/living/carbon/human/tajaran/emote_meow
+	name = "Мяукнуть"
+	key = "meow_t"
+	key_third_person = "meows"
+	message = "мяукает."
+	message_mime = "бесшумно мяукает."
+	message_param = "мяукает на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	vary = TRUE
+	cooldown = 4 SECONDS
+	sound = 'modular_bandastation/emote_panel/audio/tajaran/tajaran_meow.ogg'
+
+/datum/emote/living/carbon/human/tajaran/emote_mow
+	name = "Мяукнуть раздражённо"
+	key = "mow"
+	key_third_person = "mows"
+	message = "раздражённо мяукает."
+	message_mime = "бесшумно раздражённо мяукает."
+	message_param = "раздражённо мяукает на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	vary = TRUE
+	cooldown = 4 SECONDS
+	sound = 'modular_bandastation/emote_panel/audio/tajaran/tajaran_annoyed_meow.ogg'
+
+/datum/emote/living/carbon/human/tajaran/emote_purr
+	name = "Мурчать"
+	key = "purr_t"
+	key_third_person = "purrs"
+	message = "мурчит."
+	message_mime = "бесшумно мурчит."
+	message_param = "мурчит на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	cooldown = 4 SECONDS
+	sound = 'modular_bandastation/emote_panel/audio/tajaran/tajaran_purr.ogg'
+
+/datum/emote/living/carbon/human/tajaran/emote_pur
+	name = "Мурчать кратко"
+	key = "pur"
+	key_third_person = "purs"
+	message = "кратко мурчит."
+	message_mime = "бесшумно кратко мурчит."
+	message_param = "кратко мурчит на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	cooldown = 4 SECONDS
+	sound = 'modular_bandastation/emote_panel/audio/tajaran/tajaran_purr_short.ogg'
+
+/datum/emote/living/carbon/human/tajaran/emote_purrr
+	name = "Мурчать дольше"
+	key = "purrr"
+	key_third_person = "purrrs"
+	message = "длительно мурчит."
+	message_mime = "бесшумно длительно мурчит."
+	message_param = "длительно мурчит на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	cooldown = 4 SECONDS
+	sound = 'modular_bandastation/emote_panel/audio/tajaran/tajaran_purr_long.ogg'
+
+/datum/emote/living/carbon/human/tajaran/emote_hiss_t
+	name = "Шипеть"
+	key = "hiss_t"
+	key_third_person = "hisses"
+	message = "шипит."
+	message_mime = "бесшумно шипит."
+	message_param = "шипит на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	cooldown = 4 SECONDS
+	sound = 'modular_bandastation/emote_panel/audio/tajaran/tajaran_hiss.ogg'

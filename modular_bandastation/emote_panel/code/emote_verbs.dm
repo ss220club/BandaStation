@@ -496,3 +496,34 @@
 	set name = "◦ " + EMOTE_SHIVER + " "
 	set category = "Эмоции"
 	emote("shiver", intentional = TRUE)
+
+// MARK: Tajaran emotes
+/mob/living/carbon/human/species/tajaran/proc/emote_meow()
+	set name = "▷ " + EMOTE_HUMAN_MEOW + " "
+	set category = "Эмоции"
+	emote("meow_t", intentional = TRUE)
+
+/mob/living/carbon/human/species/tajaran/proc/emote_mow()
+	set name = "▷ " + EMOTE_HUMAN_MOW + " "
+	set category = "Эмоции"
+	emote("mow", intentional = TRUE)
+
+/mob/living/carbon/human/species/tajaran/proc/emote_purr()
+	set name = "▷ " + EMOTE_HUMAN_PURR + " "
+	set category = "Эмоции"
+	emote("purr_t", intentional = TRUE)
+
+/mob/living/carbon/human/species/tajaran/proc/emote_pur()
+	set name = "▷ " + EMOTE_HUMAN_PUR + " "
+	set category = "Эмоции"
+	emote("pur", intentional = TRUE)
+
+/mob/living/carbon/human/species/tajaran/proc/emote_purrr()
+	set name = "▷ " + EMOTE_HUMAN_PURRR + " "
+	set category = "Эмоции"
+	emote("purrr", intentional = TRUE)
+
+/mob/living/carbon/human/species/tajaran/proc/emote_hiss_t()
+	set name = "▷ " + EMOTE_HUMAN_HISST + " "
+	set category = "Эмоции"
+	emote("hiss_t", intentional = TRUE)
