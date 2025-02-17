@@ -1,6 +1,8 @@
 #include "_objects.dm"
 
 #include "code/shuttles.dm"
+#include "code/melee_weapon.dm"
+#include "code/stealthy.dm"
 
 #include "code/effects/decal.dm"
 #include "code/effects/turf_decal.dm"
@@ -80,3 +82,6 @@
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
 
 #include "code/mecha/mecha.dm"
+
+
+

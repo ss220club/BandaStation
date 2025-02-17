@@ -1,6 +1,6 @@
 /obj/item/melee/garrote
 	name = "fiber wire"
-	desc = "A length of razor-thin wire with an elegant wooden handle on either end.<br>You suspect you'd have to be behind the target to use this weapon effectively."
+	desc = "A length of razor-thin wire with an elegant wooden handle on either end. \n You suspect you'd have to be behind the target to use this weapon effectively."
 	w_class = WEIGHT_CLASS_TINY
 	icon = 'modular_bandastation/objects/icons/obj/weapons/misc.dmi'
 	icon_state = "garrot_wrap"
@@ -100,7 +100,7 @@
 	/// Made via tablecrafting
 /obj/item/melee/garrote/improvised
 	name = "garrote"
-	desc = "A length of cable with a shoddily-carved wooden handle tied to either end.<br>You suspect you'd have to be behind the target to use this weapon effectively."
+	desc = "A length of cable with a shoddily-carved wooden handle tied to either end. \n You suspect you'd have to be behind the target to use this weapon effectively."
 	icon_state = "garrot_I_wrap"
 
 /obj/item/melee/garrote/improvised/Initialize(mapload)
@@ -142,7 +142,7 @@
 
 /obj/item/melee/garrote/syndicate
 	name = "fiber wire"
-	desc = "A length of razor-thin wire with an elegant wooden handle on either end.<br>You suspect you'd have to be behind the target to use this weapon effectively."
+	desc = "A length of razor-thin wire with an elegant wooden handle on either end. \n You suspect you'd have to be behind the target to use this weapon effectively."
 	w_class = WEIGHT_CLASS_TINY
 	icon = 'modular_bandastation/objects/icons/obj/weapons/misc.dmi'
 	icon_state = "garrot_wrap"

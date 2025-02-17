@@ -1,7 +1,7 @@
 /datum/modpack/objects
 	name = "Объекты"
 	desc = "В основном включает в себя портированные объекты и всякие мелочи, которым не нужен отдельный модпак."
-	author = "dj-34, Chorden"
+	author = "dj-34, Chorden, npukoJl"
 
 /datum/modpack/objects/initialize()
 	. = ..()
