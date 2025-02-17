@@ -1,4 +1,0 @@
-author: "Ez-Briz"
-delete-after: True
-changes:
-  - admin: "У админов появилась возможность открыть PP через Ctrl+LMB и VV через Ctrl+Shift+LMB из гостов."
