@@ -39,13 +39,13 @@
 
 /datum/action/cooldown/mob_cooldown/charge/triple_charge/ravager
 	name = "Triple Charge Attack"
-	desc = "Позволяет трижды совершить рывок к указанной точке, растаптывая всех на своём пути."
-	cooldown_time = 30 SECONDS
-	charge_delay = 0.3 SECONDS
+	desc = "Позволяет трижды совершить рывок к указанной точке, растаптывая всех на своём пути. Каждый рывок наносит дополнительный удар рукой, если вы в агресивном режиме"
+	cooldown_time = 60 SECONDS
+	charge_delay = 0.2 SECONDS
 	charge_distance = 7
 	charge_past = 3
 	destroy_objects = FALSE
-	charge_damage = 25
+	charge_damage = 8
 	button_icon = 'modular_bandastation/xeno_rework/icons/xeno_actions.dmi'
 	button_icon_state = "ravager_charge"
 	unset_after_click = TRUE
