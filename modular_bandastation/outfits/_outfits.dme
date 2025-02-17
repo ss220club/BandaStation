@@ -5,3 +5,4 @@
 #include "code/magistrate.dm"
 #include "code/nanotrasen_representative.dm"
 #include "code/syndicate.dm"
+#include "code/mind.dm"
