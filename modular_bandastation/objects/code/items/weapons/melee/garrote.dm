@@ -11,6 +11,21 @@
 
 /obj/item/melee/garrote/proc/on_attack()
 
+/obj/item/melee/garrote/proc/post_attack(mob/living/carbon/human/target, mob/living/carbon/user)
+	if(!strangling)
+		playsound(loc, 'sound/items/weapons/cablecuff.ogg', 15, TRUE, -10, ignore_walls = FALSE)
+		target.visible_message(
+		span_danger("[user] comes from behind and begins garroting [target] with [src]!"), \
+		span_userdanger("[user] begins garroting you with [src] You are unable to speak!"), \
+		"You hear struggling and wire strain against flesh!"
+		)
+
+	target.dir = user.dir
+	COOLDOWN_START(src, garrote_cooldown, 5 SECONDS)
+	START_PROCESSING(SSobj, src)
+	strangling = target
+	update_icon(UPDATE_ICON_STATE)
+
 /obj/item/melee/garrote/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed)
@@ -62,6 +77,7 @@
 			span_warning("[user] loses [user.p_their()] grip on [strangling]'s neck."), \
 			span_warning("You lose your grip on [strangling]'s neck.")
 		)
+		user.stop_pulling()
 		strangling = null
 		update_icon(UPDATE_ICON_STATE)
 		STOP_PROCESSING(SSobj, src)
@@ -111,20 +127,11 @@
 		if(user.grab_state != GRAB_KILL)
 			to_chat(user, span_warning("You strengthen your grip on [target]!"))
 			user.setGrabState(user.grab_state + 1)
-	if(!strangling)
-		playsound(loc, 'sound/items/weapons/cablecuff.ogg', 15, TRUE, -10, ignore_walls = FALSE)
-		target.visible_message(
-		span_danger("[user] comes from behind and begins garroting [target] with [src]!"), \
-		span_userdanger("[user] begins garroting you with [src] You are unable to speak!"), \
-		"You hear struggling and wire strain against flesh!"
-		)
-	target.Stun(3 SECONDS)
-	COOLDOWN_START(src, garrote_cooldown, 5 SECONDS)
-	START_PROCESSING(SSobj, src)
-	strangling = target
-	update_icon(UPDATE_ICON_STATE)
 
-/obj/item/melee/garrote/improvised/on_process(var/mob/living/carbon/human/user)
+	target.Stun(3 SECONDS)
+	post_attack(target,user)
+
+/obj/item/melee/garrote/improvised/on_process(mob/living/carbon/human/user)
 	if(user.grab_state < GRAB_NECK) // Only possible with improvised garrotes, essentially this will stun people as if they were aggressively grabbed. Allows for resisting out if you're quick, but not running away.
 		strangling.Immobilize(3 SECONDS)
 	strangling.adjust_stutter(6 SECONDS)
@@ -159,21 +166,11 @@
 		if(user.grab_state != GRAB_KILL)
 			to_chat(user, span_warning("You strengthen your grip on [target]!"))
 			user.setGrabState(user.grab_state + 1)
-	if(!strangling)
-		playsound(loc, 'sound/items/weapons/cablecuff.ogg', 15, TRUE, -10, ignore_walls = FALSE)
-		target.visible_message(
-		span_danger("[user] comes from behind and begins garroting [target] with [src]!"), \
-		span_userdanger("[user] begins garroting you with [src] You are unable to speak!"), \
-		"You hear struggling and wire strain against flesh!"
-		)
 	target.adjust_silence(2 SECONDS)
-	target.dir = user.dir
-	COOLDOWN_START(src, garrote_cooldown, 5 SECONDS)
-	START_PROCESSING(SSobj, src)
-	strangling = target
-	update_icon(UPDATE_ICON_STATE)
+	post_attack(target,user)
 
-/obj/item/melee/garrote/syndicate/on_process(var/mob/living/carbon/human/user)
+
+/obj/item/melee/garrote/syndicate/on_process(mob/living/carbon/human/user)
 	strangling.adjust_silence(6 SECONDS) // Non-improvised effects
 	if(user.grab_state == GRAB_KILL)
 		strangling.losebreath += 6
