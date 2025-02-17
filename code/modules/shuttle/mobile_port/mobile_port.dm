@@ -654,6 +654,14 @@
 	// This previously was played from each door at max volume, and was one of the worst things I had ever seen.
 	// Now it's instead played from the nearest engine if close, or the first engine in the list if far since it doesn't really matter.
 	// Or a door if for some reason the shuttle has no engine, fuck oh hi daniel fuck it
+
+	// BANDASTATION ADDITION START - Allow shuttles to override the default sound paths
+	var/custom_sound = get_custom_sound(phase)
+	var/original_selected_sound = selected_sound
+	if(custom_sound)
+		selected_sound = custom_sound
+	// BANDASTATION ADDITION END - Allow shuttles to override the default sound paths
+
 	var/range = (engine_coeff * max(width, height))
 	var/long_range = range * 2.5
 	var/atom/distant_source
@@ -671,6 +679,7 @@
 	for(var/mob/zlevel_mobs as anything in SSmobs.clients_by_zlevel[z])
 		var/dist_far = get_dist(zlevel_mobs, distant_source)
 		if(dist_far <= long_range && dist_far > range)
+			selected_sound = original_selected_sound // BANDASTATION ADDITION - Allow shuttles to override the default sound paths
 			zlevel_mobs.playsound_local(distant_source, "sound/runtime/hyperspace/[selected_sound]_distance.ogg", 100)
 		else if(dist_far <= range)
 			var/source
@@ -683,7 +692,18 @@
 					if(dist_near < closest_dist)
 						source = engines
 						closest_dist = dist_near
-			zlevel_mobs.playsound_local(source, "sound/runtime/hyperspace/[selected_sound].ogg", 100)
+
+			// BANDASTATION ADDITION START - Allow shuttles to override the default sound paths
+			if(custom_sound)
+				zlevel_mobs.playsound_local(source, selected_sound, 100)
+			else
+				zlevel_mobs.playsound_local(source, "sound/runtime/hyperspace/[selected_sound].ogg", 100)
+			// BANDASTATION ADDITION END - Allow shuttles to override the default sound paths
+
+// BANDASTATION ADDITION START - Allow shuttles to override the default sound paths
+/obj/docking_port/mobile/proc/get_custom_sound(phase)
+	return null
+// BANDASTATION ADDITION END - Allow shuttles to override the default sound paths
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time
