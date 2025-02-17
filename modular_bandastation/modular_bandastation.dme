@@ -16,6 +16,7 @@
 #include "automatic_crew_transfer/_automatic_crew_transfer.dme"
 #include "autowiki/_autowiki.dme"
 #include "balance/_balance.dme"
+#include "bar_hookahs/_bar_hookahs.dme"
 #include "barsigns/_barsigns.dme"
 #include "changelog/_changelog.dme"
 #include "chat_badges/_chat_badges.dme"
