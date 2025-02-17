@@ -4,7 +4,7 @@
  */
 
 ///Time in ticks before the anomaly goes poof/explodes depending on type.
-#define ANOMALY_COUNTDOWN_TIMER (120 SECONDS)
+#define ANOMALY_COUNTDOWN_TIMER (200 SECONDS) // BANDASTATION EDIT - STORYTELLER: 120 seconds -> 200 seconds
 
 /**
  * Nuisance/funny anomalies
