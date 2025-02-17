@@ -26,6 +26,21 @@
 /area/station/service/library/ghetto
 	name = "Library Lower Floor"
 
+/area/station/service/hydroponics/ghetto
+	name = "Hydroponics Lower Floor"
+
+/area/station/service/bar/atrium/ghetto
+	name = "Bar Atrium Lower Floor"
+
+/area/station/service/bar/backroom/ghetto
+	name = "Bar Backroom Lower Floor"
+
+/area/station/service/kitchen/coldroom/ghetto
+	name = "Kitchen Cold Room Lower Floor"
+
+/area/station/service/kitchen/kitchen_backroom/ghetto
+	name = "Kitchen Backroom Lower Floor"
+
 /area/station/medical/chemistry/ghetto
 	name = "Chemistry Lower Floor"
 
