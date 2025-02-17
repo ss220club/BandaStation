@@ -70,6 +70,7 @@
 #include "code/items/weapons/melee/centcom/rapier.dm"
 #include "code/items/weapons/ranged/energy/awaymission_gun.dm"
 #include "code/items/weapons/ranged/energy/eg_14.dm"
+#include "code/items/weapons/melee/garrote.dm"
 
 #include "code/machinery/papershredder.dm"
 #include "code/machinery/photocopier.dm"
