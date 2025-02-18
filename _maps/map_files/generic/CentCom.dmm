@@ -11685,6 +11685,7 @@
 /area/centcom/central_command_areas/courtroom)
 "Be" = (
 /obj/structure/chair/comfy/corp,
+/obj/effect/landmark/ert_brief_spawn,
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},

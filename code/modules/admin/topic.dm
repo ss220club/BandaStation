@@ -1282,6 +1282,15 @@
 		message_admins("[key_name_admin(usr)] has set the self-destruct \
 			code to \"[code]\".")
 
+	// BANDASTATION ADDITION - START
+	else if(href_list["ert_respond"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/ert_manager/tgui = new(usr)
+		tgui.ui_interact(usr)
+		message_admins("[key_name_admin(usr)] answered an ERT request.")
+	// BANDASTATION ADDITION - END
+
 	else if(href_list["add_station_goal"])
 		if(!check_rights(R_ADMIN))
 			return

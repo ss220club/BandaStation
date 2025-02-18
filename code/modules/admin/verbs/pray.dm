@@ -84,3 +84,15 @@
 	to_chat(GLOB.admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
 	for(var/obj/machinery/computer/communications/console in GLOB.shuttle_caller_list)
 		console.override_cooldown()
+
+// BANDASTATION ADDITION - START
+/proc/ert_request(text, mob/sender)
+	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
+	GLOB.requests.ert_request(sender.client, msg)
+	msg = span_adminnotice("<b><font color=orange>ERT REQUEST:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_CENTCOM_REPLY(sender)] [ADMIN_ERT_RESPOND]:</b> [msg]")
+	for(var/client/staff as anything in GLOB.admins)
+		SEND_SOUND(staff, sound('sound/misc/server-ready.ogg'))
+	to_chat(GLOB.admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
+	for(var/obj/machinery/computer/communications/console in GLOB.shuttle_caller_list)
+		console.override_cooldown()
+// BANDASTATION ADDITION - END
