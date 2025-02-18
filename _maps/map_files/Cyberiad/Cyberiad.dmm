@@ -3293,6 +3293,12 @@
 /obj/effect/landmark/start/hangover,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /obj/structure/extinguisher_cabinet/directional/north,
+/obj/machinery/button/door/directional/west{
+	id = "vip_room2";
+	name = "Door Control";
+	specialfunctions = 4;
+	normaldoorcontrol = 1
+	},
 /turf/open/floor/iron/checker,
 /area/station/service/bar/atrium/ghetto)
 "aPQ" = (
@@ -6480,6 +6486,12 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 1
 	},
+/obj/machinery/button/door/directional/west{
+	id = "vip_room1";
+	name = "Door Control";
+	specialfunctions = 4;
+	normaldoorcontrol = 1
+	},
 /turf/open/floor/iron/cafeteria,
 /area/station/service/bar/atrium/ghetto)
 "bCJ" = (
@@ -8158,7 +8170,6 @@
 /obj/item/circuitboard/computer/slot_machine,
 /obj/item/vending_refill/cigarette,
 /obj/item/vending_refill/coffee,
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/wood/parquet,
 /area/station/service/bar/backroom/ghetto)
 "bYr" = (
@@ -14973,7 +14984,6 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/checker,
 /area/station/service/bar/atrium/ghetto)
 "dAB" = (
@@ -18391,6 +18401,13 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/button/door/directional/east{
+	id = "vip_room1";
+	name = "Door Control";
+	specialfunctions = 4;
+	normaldoorcontrol = 1;
+	req_access = list("kitchen", "bar")
+	},
 /turf/open/floor/wood/large,
 /area/station/service/bar/atrium/ghetto)
 "euX" = (
@@ -31772,6 +31789,7 @@
 "hHb" = (
 /obj/machinery/holopad,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/event_spawn,
 /turf/open/floor/stone,
 /area/station/service/hydroponics/ghetto)
 "hHe" = (
@@ -31887,6 +31905,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/public{
+	id_tag = "vip_room2"
+	},
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/iron/checker,
 /area/station/service/bar/atrium/ghetto)
@@ -50286,6 +50307,10 @@
 "miI" = (
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/lab)
+"miQ" = (
+/obj/machinery/gibber,
+/turf/open/floor/iron/freezer,
+/area/station/service/kitchen/coldroom/ghetto)
 "miT" = (
 /obj/structure/table/wood/fancy/green,
 /obj/item/reagent_containers/cup/glass/bottle/whiskey{
@@ -62148,8 +62173,6 @@
 /obj/effect/turf_decal/trimline/dark/corner{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/checker,
 /area/station/service/bar/atrium/ghetto)
 "paX" = (
@@ -86799,6 +86822,13 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/button/door/directional/east{
+	id = "vip_room2";
+	name = "Door Control";
+	specialfunctions = 4;
+	normaldoorcontrol = 1;
+	req_access = list("kitchen", "bar")
+	},
 /turf/open/floor/wood/large,
 /area/station/service/bar/atrium/ghetto)
 "vhi" = (
@@ -91229,7 +91259,6 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/railing{
 	dir = 1;
 	color = "#6e6e6e"
@@ -96756,8 +96785,6 @@
 /obj/effect/turf_decal/trimline/dark/corner{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment{
 	dir = 5
 	},
@@ -97281,8 +97308,6 @@
 /obj/effect/turf_decal/trimline/dark/warning{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/item/reagent_containers/cup/rag{
 	pixel_x = 6;
 	pixel_y = 12
@@ -98287,8 +98312,11 @@
 "xWy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/curtain/cloth/fancy,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/public{
+	id_tag = "vip_room1"
+	},
+/obj/structure/curtain/cloth/fancy,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/bar/atrium/ghetto)
 "xWE" = (
@@ -133547,7 +133575,7 @@ raA
 nbO
 vPK
 paU
-oqM
+ckY
 hzy
 wFf
 mca
@@ -135346,7 +135374,7 @@ vCA
 ayP
 hiq
 xCG
-qST
+ckY
 mMv
 gsW
 eIx
@@ -137908,7 +137936,7 @@ klF
 wWh
 ugR
 lyW
-lyW
+miQ
 gyK
 cXX
 wWh
