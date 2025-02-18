@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - rscadd: "Добавляет кулдаун в 1 секунду для point to. Анимация стрелочки занимает 0.6 секунд, вместо 0.17"
