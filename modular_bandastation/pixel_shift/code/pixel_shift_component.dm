@@ -57,8 +57,7 @@
 	passthroughable = NONE
 	if(is_shifted)
 		var/mob/living/owner = parent
-		owner.pixel_x = owner.body_position_pixel_x_offset + owner.base_pixel_x
-		owner.pixel_y = owner.body_position_pixel_y_offset + owner.base_pixel_y
+		owner.remove_offsets(type)
 	qdel(src)
 
 /datum/component/pixel_shift/proc/pixel_shift(mob/source, direct)

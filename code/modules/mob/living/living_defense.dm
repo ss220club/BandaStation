@@ -374,7 +374,7 @@
 			to_chat(user, span_danger("Вы начинаете душить [declent_ru(ACCUSATIVE)]!"))
 			if(!buckled && !density)
 				Move(user.loc)
-	user.set_pull_offsets(src, grab_state)
+	user.set_pull_offsets(src, user.grab_state)
 	return TRUE
 
 /mob/living/attack_animal(mob/living/simple_animal/user, list/modifiers)
