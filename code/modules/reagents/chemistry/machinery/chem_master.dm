@@ -2,7 +2,7 @@
 
 /obj/machinery/chem_master
 	name = "ChemMaster 3000"
-	desc = "Used to separate chemicals and distribute them in a variety of forms."
+	desc = "Используется для выведения и разделения химикатов и их различных форм."
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "chemmaster"
 	base_icon_state = "chemmaster"
@@ -293,7 +293,7 @@
 	if(!QDELETED(beaker))
 		beaker_data = list()
 		beaker_data["maxVolume"] = beaker.volume
-		beaker_data["currentVolume"] = round(beaker.reagents.total_volume, CHEMICAL_VOLUME_ROUNDING)
+		beaker_data["currentVolume"] = beaker.reagents.total_volume
 		var/list/beakerContents = list()
 		if(length(beaker.reagents.reagent_list))
 			for(var/datum/reagent/reagent as anything in beaker.reagents.reagent_list)
@@ -315,7 +315,7 @@
 	//contents of buffer
 	beaker_data = list()
 	beaker_data["maxVolume"] = reagents.maximum_volume
-	beaker_data["currentVolume"] = round(reagents.total_volume, CHEMICAL_VOLUME_ROUNDING)
+	beaker_data["currentVolume"] = reagents.total_volume
 	var/list/beakerContents = list()
 	if(length(reagents.reagent_list))
 		for(var/datum/reagent/reagent as anything in reagents.reagent_list)
@@ -415,7 +415,7 @@
 
 			if(amount == -1) // Set custom amount
 				var/mob/user = ui.user //Hold a reference of the user if the UI is closed
-				amount = FLOOR(tgui_input_number(user, "Enter amount to transfer", "Transfer amount", round_value = FALSE), CHEMICAL_VOLUME_ROUNDING)
+				amount = round(tgui_input_number(user, "Enter amount to transfer", "Transfer amount", round_value = FALSE), CHEMICAL_VOLUME_ROUNDING)
 				if(!amount || !user.can_perform_action(src))
 					return FALSE
 
@@ -550,7 +550,7 @@
 
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"
-	desc = "Used to create condiments and other cooking supplies."
+	desc = "Используется для создания приправ."
 	icon_state = "condimaster"
 
 /obj/machinery/chem_master/condimaster/load_printable_containers()

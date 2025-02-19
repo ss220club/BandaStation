@@ -284,7 +284,7 @@
 		if ("set_radius")
 			if (active)
 				return
-			var/change_radius = max(1,(text2num(params["new_radius"])))
+			var/change_radius = clamp(text2num(params["new_radius"]), 1, max_radius)
 			if(change_radius >= 10)
 				radius = round(change_radius)//if its over 10 we don't allow decimals
 				return
@@ -678,7 +678,7 @@
 	density = FALSE
 	alpha = 100
 	resistance_flags = INDESTRUCTIBLE //the shield itself is indestructible or at least should be
-	no_damage_feedback = "weakening the generator sustaining it"
+	no_damage_feedback = "ослабляя поддерживающий генератор"
 
 	///The shield generator sustaining us
 	var/obj/machinery/modular_shield_generator/shield_generator

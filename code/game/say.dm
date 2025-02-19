@@ -149,7 +149,18 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	//Speaker name
 	var/namepart
 	var/list/stored_name = list(null)
-	SEND_SIGNAL(speaker, COMSIG_MOVABLE_MESSAGE_GET_NAME_PART, stored_name, visible_name)
+
+	if(iscarbon(speaker)) //First, try to pull the modified title from a carbon's ID. This will override both visual and audible names.
+		var/mob/living/carbon/carbon_human = speaker
+		var/obj/item/id_slot = carbon_human.get_item_by_slot(ITEM_SLOT_ID)
+		if(id_slot)
+			var/obj/item/card/id/id_card = id_slot?.GetID()
+			if(id_card)
+				SEND_SIGNAL(id_card, COMSIG_ID_GET_HONORIFIC, stored_name, carbon_human)
+
+	if(!stored_name[NAME_PART_INDEX]) //Otherwise, we just use whatever the name signal gives us.
+		SEND_SIGNAL(speaker, COMSIG_MOVABLE_MESSAGE_GET_NAME_PART, stored_name, visible_name)
+
 	namepart = "<span style='color: [speaker.chat_color]'>[stored_name[NAME_PART_INDEX] || speaker.GetVoice()]</span>" // Bandastation Addition: span with color
 
 	//End name span.
@@ -204,7 +215,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
  * like human_say.dm's tongue-based verb_say changes.
  */
 /atom/movable/proc/get_default_say_verb()
-	return verb_say
+	return ru_say_verb(verb_say)
 
 /**
  * This prock is used to generate a message for chat
@@ -292,7 +303,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return "0"
 
 /atom/proc/GetVoice()
-	return "[src]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
+	return "[capitalize(declent_ru(NOMINATIVE))]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
 
 //HACKY VIRTUALSPEAKER STUFF BEYOND THIS POINT
 //these exist mostly to deal with the AIs hrefs and job stuff.

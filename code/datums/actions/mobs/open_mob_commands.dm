@@ -1,6 +1,6 @@
 /datum/action/cooldown/open_mob_commands
-	name = "Command Star Gazer"
-	desc = "Open the command menu for your star gazer."
+	name = "Приказ звездочету"
+	desc = "Открывает меню приказов для вашего звездочета."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -23,4 +23,4 @@
 	if(our_mob_resolved)
 		var/datum/component/obeys_commands/command_component = our_mob_resolved.GetComponent(/datum/component/obeys_commands)
 		if(command_component)
-			command_component.display_menu(our_mob_resolved, owner)
+			command_component.display_menu(owner)

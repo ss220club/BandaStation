@@ -39,7 +39,7 @@
 
 /datum/round_event/vent_clog/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Minor biological obstruction detected in the ventilation network. Blockage is believed to be in the [event_area].", "Custodial Notification")
+	priority_announce("Обнаружено незначительное биологическое препятствие в вентиляции. Предполагается, что засор находится в [event_area].", "Оповещение о загрязнении")
 
 /datum/round_event/vent_clog/setup()
 	vent = get_vent()
@@ -232,7 +232,7 @@
 
 /datum/round_event/vent_clog/major/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Major biological obstruction detected in the ventilation network. Blockage is believed to be in the [event_area] area.", "Infestation Alert")
+	priority_announce("Обнаружено значительное биологическое препятствие в вентиляции. Предполагается, что засор находится в [event_area].", "Заражение вредителями")
 
 /datum/round_event_control/vent_clog/critical
 	name = "Ventilation Clog: Critical"
@@ -256,7 +256,7 @@
 
 /datum/round_event/vent_clog/critical/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Potentially hazardous lifesigns detected in the [event_area] ventilation network.", "Security Alert")
+	priority_announce("Потенциально опасные формы жизни обнаружены в вентиляции [event_area].", "Отчет о безопасности")
 
 /datum/round_event/vent_clog/critical/get_mob()
 	var/static/list/mob_list = list(
@@ -289,17 +289,17 @@
 
 /datum/round_event/vent_clog/strange/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Unusual lifesign readings detected in the [event_area] ventilation network.", "Lifesign Alert", ANNOUNCER_ALIENS)
+	priority_announce("Обнаружены необычные формы жизни в вентиляции [event_area].", "Неопознанные формы жизни", ANNOUNCER_ALIENS)
 
 /datum/round_event/vent_clog/strange/get_mob()
 	var/static/list/mob_list = list(
 		/mob/living/basic/bear,
 		/mob/living/basic/cockroach/glockroach/mobroach,
+		/mob/living/basic/goose,
 		/mob/living/basic/lightgeist,
 		/mob/living/basic/mothroach,
 		/mob/living/basic/mushroom,
 		/mob/living/basic/viscerator,
-		/mob/living/simple_animal/hostile/retaliate/goose, //Janitors HATE geese.
 		/mob/living/basic/pet/gondola,
 	)
 	return pick(mob_list)

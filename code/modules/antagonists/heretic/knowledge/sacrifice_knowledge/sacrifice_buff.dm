@@ -3,7 +3,7 @@
 /// Screen alert for the below status effect.
 /atom/movable/screen/alert/status_effect/unholy_determination
 	name = "Unholy Determination"
-	desc = "You appear in a unfamiliar room. The darkness begins to close in. Panic begins to set in. There is no time. Fight on, or die!"
+	desc = "Вы появляетесь в незнакомой комнате. Темнота начинает смыкаться. Начинается паника. Времени нет. Сражайтесь или умрите!"
 	icon_state = "wounded"
 
 /// The buff given to people within the shadow realm to assist them in surviving.
@@ -21,11 +21,11 @@
 	return ..()
 
 /datum/status_effect/unholy_determination/on_apply()
-	owner.add_traits(list(TRAIT_COAGULATING, TRAIT_NOCRITDAMAGE, TRAIT_NOSOFTCRIT), type)
+	owner.add_traits(list(TRAIT_COAGULATING, TRAIT_NOCRITDAMAGE, TRAIT_NOSOFTCRIT), TRAIT_STATUS_EFFECT(id))
 	return TRUE
 
 /datum/status_effect/unholy_determination/on_remove()
-	owner.remove_traits(list(TRAIT_COAGULATING, TRAIT_NOCRITDAMAGE, TRAIT_NOSOFTCRIT), type)
+	owner.remove_traits(list(TRAIT_COAGULATING, TRAIT_NOCRITDAMAGE, TRAIT_NOSOFTCRIT), TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/unholy_determination/tick(seconds_between_ticks)
 	// The amount we heal of each damage type per tick. If we're missing legs we heal better because we can't dodge.
@@ -34,12 +34,12 @@
 	// In softcrit you're, strong enough to stay up.
 	if(owner.health <= owner.crit_threshold && owner.health >= owner.hardcrit_threshold)
 		if(prob(5))
-			to_chat(owner, span_hypnophrase("Your body feels like giving up, but you fight on!"))
+			to_chat(owner, span_hypnophrase("Ваше тело готово сдаться, но вы продолжаете бороться!"))
 		healing_amount *= 2
 	// ...But reach hardcrit and you're done. You now die faster.
 	if (owner.health < owner.hardcrit_threshold)
 		if(prob(5))
-			to_chat(owner, span_big(span_hypnophrase("You can't hold on for much longer...")))
+			to_chat(owner, span_big(span_hypnophrase("Вы не сможете долго держаться...")))
 		healing_amount *= -0.5
 
 	if(owner.health > owner.crit_threshold && prob(4))
@@ -109,15 +109,15 @@
 	bloodiest_wound.adjust_blood_flow(-0.5 * seconds_between_ticks)
 
 /// Torment the target with a frightening hand
-/proc/fire_curse_hand(mob/living/carbon/victim, turf/forced_turf)
+/proc/fire_curse_hand(mob/living/carbon/victim, turf/forced_turf, range = 8, projectile_type = /obj/projectile/curse_hand/hel)
 	var/grab_dir = turn(victim.dir, pick(-90, 90, 180, 180)) // Not in front, favour behind
-	var/turf/spawn_turf = get_ranged_target_turf(victim, grab_dir, 8)
+	var/turf/spawn_turf = get_ranged_target_turf(victim, grab_dir, range)
 	spawn_turf = forced_turf ? forced_turf : spawn_turf
 	if (isnull(spawn_turf))
 		return
 	new /obj/effect/temp_visual/dir_setting/curse/grasp_portal(spawn_turf, victim.dir)
 	playsound(spawn_turf, 'sound/effects/curse/curse2.ogg', 80, TRUE, -1)
-	var/obj/projectile/curse_hand/hel/hand = new (spawn_turf)
+	var/obj/projectile/hand = new projectile_type(spawn_turf)
 	hand.aim_projectile(victim, spawn_turf)
 	if (QDELETED(hand)) // safety check if above fails - above has a stack trace if it does fail
 		return

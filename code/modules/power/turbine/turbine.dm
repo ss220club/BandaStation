@@ -92,7 +92,7 @@
 		. += span_notice("Currently at tier [installed_part.current_tier].")
 		if(installed_part.current_tier + 1 < TURBINE_PART_TIER_FOUR)
 			. += span_notice("Can be upgraded by using a tier [installed_part.current_tier + 1] part.")
-		. += span_notice("The [installed_part.name] can be [EXAMINE_HINT("pried")] out.")
+		. += span_notice("\The [installed_part] can be [EXAMINE_HINT("pried")] out.")
 	else
 		. += span_warning("Is missing a [initial(part_path.name)].")
 	. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"].")
@@ -169,7 +169,7 @@
 		balloon_alert(user, "turn it off!")
 		return
 	if(!anchored)
-		balloon_alert(user, "anchor first!")
+		balloon_alert(user, "нужно прикрутить!")
 		return
 
 	tool.play_tool_sound(src, 50)

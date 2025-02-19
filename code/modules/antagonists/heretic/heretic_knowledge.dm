@@ -13,7 +13,7 @@
 	var/name = "Basic knowledge"
 	/// Description of the knowledge, shown to the heretic. Describes what it unlocks / does.
 	var/desc = "Basic knowledge of forbidden arts."
-	/// What's shown to the heretic when the knowledge is aquired
+	/// What's shown to the heretic when the knowledge is acquired
 	var/gain_text
 	/// The abstract parent type of the knowledge, used in determine mutual exclusivity in some cases
 	var/datum/heretic_knowledge/abstract_parent_type = /datum/heretic_knowledge
@@ -441,34 +441,34 @@
 
 		potential_targets[human_to_check.real_name] = human_to_check
 
-	var/chosen_mob = tgui_input_list(user, "Select the victim you wish to curse.", name, sort_list(potential_targets, GLOBAL_PROC_REF(cmp_text_asc)))
+	var/chosen_mob = tgui_input_list(user, "Выберите жертву, которую вы хотите проклясть.", name, sort_list(potential_targets, GLOBAL_PROC_REF(cmp_text_asc)))
 	if(isnull(chosen_mob))
 		return FALSE
 
 	var/mob/living/carbon/human/to_curse = potential_targets[chosen_mob]
 	if(QDELETED(to_curse))
-		loc.balloon_alert(user, "ritual failed, invalid choice!")
+		loc.balloon_alert(user, "ритуал провален, некорректный выбор!")
 		return FALSE
 
 	// Yes, you COULD curse yourself, not sure why but you could
 	if(to_curse == user)
-		var/are_you_sure = tgui_alert(user, "Are you sure you want to curse yourself?", name, list("Yes", "No"))
-		if(are_you_sure != "Yes")
+		var/are_you_sure = tgui_alert(user, "Вы уверены, что хотите проклясть себя?", name, list("Да", "Нет"))
+		if(are_you_sure != "Да")
 			return FALSE
 
 	var/boosted = (to_curse in boosted_targets)
 	var/turf/curse_turf = get_turf(to_curse)
 	if(!boosted && (!is_valid_z_level(curse_turf, loc) || get_dist(curse_turf, loc) > max_range * 1.5)) // Give a bit of leeway on max range for people moving around
-		loc.balloon_alert(user, "ritual failed, too far!")
+		loc.balloon_alert(user, "ритуал провален, слишком далеко!")
 		return FALSE
 
 	if(to_curse.can_block_magic(MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY, charge_cost = 0))
-		to_chat(to_curse, span_warning("You feel a ghastly chill, but the feeling passes shortly."))
+		to_chat(to_curse, span_warning("Вы чувствуете жуткий озноб, но это ощущение вскоре проходит."))
 		return TRUE
 
 	log_combat(user, to_curse, "cursed via heretic ritual", addition = "([boosted ? "Boosted" : ""] [name])")
 	curse(to_curse, boosted)
-	to_chat(user, span_hierophant("You cast a[boosted ? "n empowered":""] [name] upon [to_curse.real_name]."))
+	to_chat(user, span_hierophant("Вы наносите [boosted ? "усиленное":""] [name] на [to_curse.real_name]."))
 
 	fingerprints = null
 	blood_samples = null
@@ -536,7 +536,7 @@
 	message_admins("A [summoned.name] is being summoned by [ADMIN_LOOKUPFLW(user)] in [ADMIN_COORDJMP(summoned)].")
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_HERETIC, poll_time = 10 SECONDS, checked_target = summoned, ignore_category = poll_ignore_define, alert_pic = summoned, role_name_text = summoned.name)
 	if(isnull(chosen_one))
-		loc.balloon_alert(user, "ritual failed, no ghosts!")
+		loc.balloon_alert(user, "ритуал провален, нет призраков!")
 		animate(summoned, 0.5 SECONDS, alpha = 0)
 		QDEL_IN(summoned, 0.6 SECONDS)
 		return FALSE
@@ -568,8 +568,8 @@
  */
 /datum/heretic_knowledge/knowledge_ritual
 	name = "Ritual of Knowledge"
-	desc = "A randomly generated transmutation ritual that rewards knowledge points and can only be completed once."
-	gain_text = "Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise."
+	desc = "Случайно создаваемый ритуал трансмутации, который вознаграждается очками знаний и может быть выполнен только один раз."
+	gain_text = "Все может стать ключом к разгадке секретов, скрытых за Вратами. Я должен быть осторожным и мудрым."
 	abstract_parent_type = /datum/heretic_knowledge/knowledge_ritual
 	cost = 1
 	priority = MAX_KNOWLEDGE_PRIORITY - 10 // A pretty important midgame ritual.
@@ -627,15 +627,15 @@
 
 	var/list/requirements_string = list()
 
-	to_chat(user, span_hierophant("The [name] requires the following:"))
+	to_chat(user, span_hierophant("Для [name] требуется следующее:"))
 	for(var/obj/item/path as anything in required_atoms)
 		var/amount_needed = required_atoms[path]
 		to_chat(user, span_hypnophrase("[amount_needed] [initial(path.name)]\s..."))
 		requirements_string += "[amount_needed == 1 ? "":"[amount_needed] "][initial(path.name)]\s"
 
-	to_chat(user, span_hierophant("Completing it will reward you [KNOWLEDGE_RITUAL_POINTS] knowledge points. You can check the knowledge in your Researched Knowledge to be reminded."))
+	to_chat(user, span_hierophant("За его выполнение вы получите [KNOWLEDGE_RITUAL_POINTS] очков знаний. Вы можете проверить знания в ваших \"иследованных знаниях\"."))
 
-	desc = "Allows you to transmute [english_list(requirements_string)] for [KNOWLEDGE_RITUAL_POINTS] bonus knowledge points. This can only be completed once."
+	desc = "Позволяет трансмутировать [english_list(requirements_string)] для получения [KNOWLEDGE_RITUAL_POINTS] бонусных очков знаний. Это можно выполнить только один раз."
 
 /datum/heretic_knowledge/knowledge_ritual/can_be_invoked(datum/antagonist/heretic/invoker)
 	return !was_completed
@@ -648,9 +648,9 @@
 	our_heretic.knowledge_points += KNOWLEDGE_RITUAL_POINTS
 	was_completed = TRUE
 
-	to_chat(user, span_boldnotice("[name] completed!"))
+	to_chat(user, span_boldnotice("[name] завершено!"))
 	to_chat(user, span_hypnophrase(span_big("[pick_list(HERETIC_INFLUENCE_FILE, "drain_message")]")))
-	desc += " (Completed!)"
+	desc += " (Завершен!)"
 	log_heretic_knowledge("[key_name(user)] completed a [name] at [worldtime2text()].")
 	user.add_mob_memory(/datum/memory/heretic_knowledge_ritual)
 	return TRUE
@@ -729,9 +729,9 @@
 	SSblackbox.record_feedback("tally", "heretic_ascended", 1, GLOB.heretic_research_tree[type][HKT_ROUTE])
 	log_heretic_knowledge("[key_name(user)] completed their final ritual at [worldtime2text()].")
 	notify_ghosts(
-		"[user] has completed an ascension ritual!",
+		"[user] завершил ритуал вознесения!",
 		source = user,
-		header = "A Heretic is Ascending!",
+		header = "Еретик вознесся!",
 	)
 	priority_announce(
 		text = replacetext(replacetext(announcement_text, "%NAME%", user.real_name), "%SPOOKY%", GLOBAL_PROC_REF(generate_heretic_text)),

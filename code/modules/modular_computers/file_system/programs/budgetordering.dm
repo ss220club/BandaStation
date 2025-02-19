@@ -3,7 +3,7 @@
 	filedesc = "NT IRN"
 	downloader_category = PROGRAM_CATEGORY_SUPPLY
 	program_open_overlay = "request"
-	extended_desc = "Nanotrasen Internal Requisition Network interface for supply purchasing using a department budget account."
+	extended_desc = "Nanotrasen Internal Requisition - Сетевой интерфейс для закупки поставок с использованием счета отдела."
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
 	can_run_on_flags = PROGRAM_LAPTOP | PROGRAM_PDA
 	size = 10
@@ -94,13 +94,18 @@
 			)
 		if((P.hidden && (P.contraband && !contraband) || (P.special && !P.special_enabled) || P.drop_pod_only))
 			continue
+
+		var/obj/item/first_item = length(P.contains) > 0 ? P.contains[1] : null
 		data["supplies"][P.group]["packs"] += list(list(
 			"name" = P.name,
 			"cost" = P.get_cost(),
 			"id" = pack,
 			"desc" = P.desc || P.name, // If there is a description, use it. Otherwise use the pack's name.
+			"first_item_icon" = first_item?.icon,
+			"first_item_icon_state" = first_item?.icon_state,
 			"goody" = P.goody,
-			"access" = P.access
+			"access" = P.access,
+			"contains" = P.get_contents_ui_data(),
 		))
 
 	//Data regarding the User's capability to buy things.

@@ -5,7 +5,7 @@
 	icon_state = "sakhno"
 	w_class = WEIGHT_CLASS_BULKY
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction
-	bolt_wording = "bolt"
+	bolt_wording = "затвора"
 	bolt_type = BOLT_TYPE_LOCKING
 	semi_auto = FALSE
 	internal_magazine = TRUE
@@ -19,7 +19,7 @@
 
 /obj/item/gun/ballistic/rifle/rack(mob/user = null)
 	if (bolt_locked == FALSE)
-		balloon_alert(user, "bolt opened")
+		balloon_alert(user, "открытие [bolt_wording]")
 		playsound(src, rack_sound, rack_sound_volume, rack_sound_vary)
 		process_chamber(FALSE, FALSE, FALSE)
 		bolt_locked = TRUE
@@ -35,7 +35,7 @@
 
 /obj/item/gun/ballistic/rifle/examine(mob/user)
 	. = ..()
-	. += "The bolt is [bolt_locked ? "open" : "closed"]."
+	. += "Затвор [bolt_locked ? "открыт" : "закрыт"]."
 
 ///////////////////////
 // BOLT ACTION RIFLE //
@@ -77,17 +77,16 @@
 		update_appearance()
 
 /obj/item/gun/ballistic/rifle/boltaction/attack_self(mob/user)
-	if(can_jam)
-		if(jammed)
-			if(prob(unjam_chance))
-				jammed = FALSE
-				unjam_chance = 10
-			else
-				unjam_chance += 10
-				balloon_alert(user, "jammed!")
-				playsound(user,'sound/items/weapons/jammed.ogg', 75, TRUE)
-				return FALSE
-	..()
+	if(jammed)
+		if(prob(unjam_chance))
+			jammed = FALSE
+			unjam_chance = initial(unjam_chance)
+		else
+			unjam_chance += 10
+			balloon_alert(user, "jammed!")
+			playsound(user,'sound/items/weapons/jammed.ogg', 75, TRUE)
+			return FALSE
+	return ..()
 
 /obj/item/gun/ballistic/rifle/boltaction/process_fire(mob/user)
 	if(can_jam)
@@ -104,15 +103,6 @@
 		return
 
 	. = ..()
-
-	if(istype(item, /obj/item/gun_maintenance_supplies))
-		if(!can_jam)
-			balloon_alert(user, "can't jam!")
-			return
-		if(do_after(user, 10 SECONDS, target = src))
-			user.visible_message(span_notice("[user] finishes maintaining [src]."))
-			jamming_chance = initial(jamming_chance)
-			qdel(item)
 
 /obj/item/gun/ballistic/rifle/boltaction/blow_up(mob/user)
 	. = FALSE
@@ -210,9 +200,9 @@
 	internal_magazine = TRUE
 	can_modify_ammo = FALSE
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_SUITSTORE
-	bolt_wording = "bowstring"
-	magazine_wording = "rod"
-	cartridge_wording = "rod"
+	bolt_wording = "тетивы"
+	magazine_wording = "прута"
+	cartridge_wording = "прутов"
 	weapon_weight = WEAPON_HEAVY
 	initial_caliber = CALIBER_REBAR
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/rebarxbow/normal
@@ -319,7 +309,7 @@
 
 /obj/item/gun/ballistic/rifle/boltaction/pipegun/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<b><i>Looking down at the [name], you recall a tale told to you in some distant memory...</i></b>")
+	. += span_notice("<b><i>Looking down at \the [src], you recall a tale told to you in some distant memory...</i></b>")
 
 	. += span_info("It's said that the first slaying committed on a Nanotrasen space station was by an assistant.")
 	. += span_info("That this act, done by toolbox, maybe spear, was what consigned their kind to a life of destitution, rejection and violence.")

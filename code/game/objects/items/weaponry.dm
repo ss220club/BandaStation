@@ -151,7 +151,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	AddComponent(/datum/component/alternative_sharpness, SHARP_POINTY, alt_continuous, alt_simple, -15)
 
 /obj/item/claymore/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is falling on [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is falling on [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/claymore/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
@@ -554,7 +554,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	tool_behaviour = (active ? TOOL_KNIFE : NONE)
 
 /obj/item/switchblade/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is slitting [user.p_their()] own throat with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is slitting [user.p_their()] own throat with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/switchblade/extended
@@ -576,9 +576,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/phone/suicide_act(mob/living/user)
 	if(locate(/obj/structure/chair/stool) in user.loc)
-		user.visible_message(span_suicide("[user] begins to tie a noose with [src]'s cord! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] begins to tie a noose with [src]'s cord! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	else
-		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]'s cord! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]'s cord! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/bambostaff
@@ -908,7 +908,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY)
 	AddComponent(/datum/component/effect_remover, \
 	success_feedback = "You disrupt the magic of %THEEFFECT with %THEWEAPON.", \
-	success_forcesay = "BEGONE FOUL MAGICKS!!", \
+	success_forcesay = "ПРОЧЬ ЗЛАЯ СКВЕРНА!!", \
 	tip_text = "Clear rune", \
 	on_clear_callback = CALLBACK(src, PROC_REF(on_cult_rune_removed)), \
 	effects_we_clear = list(/obj/effect/rune, /obj/effect/heretic_rune) \
@@ -1025,7 +1025,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		angle = 180
 	if(target.dir & target_to_user)
 		angle = 360
-	var/turf/return_to_sender = get_ranged_target_turf_direct(user, throw_datum.starting_turf, round(target.throw_range * 1.5, 1), offset = angle + (rand(-1, 1) * 10))
+	var/turf/return_to_sender = get_ranged_target_turf_direct(user, throw_datum.starting_turf, max(3, round(target.throw_range * 1.5, 1)), offset = angle + (rand(-1, 1) * 10))
 	throw_datum.finalize(hit = FALSE)
 	target.mouse_opacity = MOUSE_OPACITY_TRANSPARENT //dont mess with our ball
 	target.color = list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,3) //make them super light
@@ -1359,7 +1359,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	animate(src, duration*0.5, color = slash_color, transform = scaled_transform, alpha = 255)
 
 /obj/item/highfrequencyblade/wizard
-	desc = "A blade that was mastercrafted by a legendary blacksmith. Its' enchantments let it slash through anything."
+	desc = "A blade that was mastercrafted by a legendary blacksmith. Its enchantments let it slash through anything."
 	force = 8
 	throwforce = 20
 	wound_bonus = 20

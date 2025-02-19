@@ -8,118 +8,118 @@ import {
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const sound_ambience_volume: Feature<number> = {
-  name: 'Ambience volume',
-  category: 'SOUND',
-  description: `Ambience refers to the more noticeable ambient sounds that play on occasion.`,
+  name: 'Громкость окружения',
+  category: 'ЗВУК',
+  description: `Различные звуки оружения, играющие по ситуации.`,
   component: FeatureSliderInput,
 };
 
 export const sound_breathing: FeatureToggle = {
-  name: 'Enable breathing sounds',
-  category: 'SOUND',
-  description: 'When enabled, hear breathing sounds when using internals.',
+  name: 'Включить звук дыхания',
+  category: 'ЗВУК',
+  description: 'Слышать звук дыхания, когда подключен баллон.',
   component: CheckboxInput,
 };
 
 export const sound_announcements: FeatureToggle = {
-  name: 'Enable announcement sounds',
-  category: 'SOUND',
-  description: 'When enabled, hear sounds for command reports, notices, etc.',
+  name: 'Включить звук анонсов',
+  category: 'ЗВУК',
+  description: 'Играть звук при оповещениях с ЦК, уведомлений и тд.',
   component: CheckboxInput,
 };
 
 export const sound_combatmode: FeatureToggle = {
-  name: 'Enable combat mode sound',
-  category: 'SOUND',
-  description: 'When enabled, hear sounds when toggling combat mode.',
+  name: 'Включить звук режима боя',
+  category: 'ЗВУК',
+  description: 'Играть звук при переключении режима боя.',
   component: CheckboxInput,
 };
 
 export const sound_endofround: FeatureToggle = {
-  name: 'Enable end of round sounds',
-  category: 'SOUND',
-  description: 'When enabled, hear a sound when the server is rebooting.',
+  name: 'Включить звук конца раунда',
+  category: 'ЗВУК',
+  description: 'Играть звук, когда сервер начинает перезапуск.',
   component: CheckboxInput,
 };
 
 export const sound_instruments: FeatureToggle = {
-  name: 'Enable instruments',
-  category: 'SOUND',
-  description: 'When enabled, be able hear instruments in game.',
+  name: 'Включить звук музыкальных инструментов',
+  category: 'ЗВУК',
+  description: 'Играть звук музыкальных инструментов.',
   component: CheckboxInput,
 };
 
 export const sound_tts: FeatureChoiced = {
-  name: 'Enable TTS',
-  category: 'SOUND',
+  name: 'TTS - включить',
+  category: 'ЗВУК',
   description: `
-    When enabled, be able to hear text-to-speech sounds in game.
-    When set to "Blips", text to speech will be replaced with blip sounds based on the voice.
+    Играть звук text-to-speech.
+    Функция "Blips" не работает.
   `,
   component: FeatureDropdownInput,
 };
 
 export const sound_tts_volume: Feature<number> = {
-  name: 'TTS Volume',
-  category: 'SOUND',
-  description: 'The volume that the text-to-speech sounds will play at.',
+  name: 'TTS - громкость',
+  category: 'ЗВУК',
+  description: 'Громкость text-to-speech.',
   component: FeatureSliderInput,
 };
 
 export const sound_jukebox: FeatureToggle = {
-  name: 'Enable jukebox music',
-  category: 'SOUND',
-  description: 'When enabled, hear music for jukeboxes, dance machines, etc.',
+  name: 'Включить звук музыкальных автоматов',
+  category: 'ЗВУК',
+  description: 'Играть звук музыкальных автоматов, диско-машин и тд.',
   component: CheckboxInput,
 };
 
 export const sound_lobby_volume: Feature<number> = {
-  name: 'Lobby music volume',
-  category: 'SOUND',
+  name: 'Громкость музыки в лобби',
+  category: 'ЗВУК',
   component: FeatureSliderInput,
 };
 
 export const sound_midi: FeatureToggle = {
-  name: 'Enable admin music',
-  category: 'SOUND',
-  description: 'When enabled, admins will be able to play music to you.',
+  name: 'Включить звук админской музыки',
+  category: 'ЗВУК',
+  description: 'Играть звук музыки, запускаемой администрацией.',
   component: CheckboxInput,
 };
 
 export const sound_ship_ambience_volume: Feature<number> = {
-  name: 'Ship ambience volume',
-  category: 'SOUND',
-  description: `Ship ambience refers to the low ambient buzz that plays on loop.`,
+  name: 'Громкость звуков корабля',
+  category: 'ЗВУК',
+  description: `Зацикленный звук окружения корабля (низкий гул).`,
   component: FeatureSliderInput,
 };
 
 export const sound_elevator: FeatureToggle = {
-  name: 'Enable elevator music',
-  category: 'SOUND',
+  name: 'Включить музыку в лифтах',
+  category: 'ЗВУК',
   component: CheckboxInput,
 };
 
 export const sound_achievement: FeatureChoiced = {
-  name: 'Achievement unlock sound',
-  category: 'SOUND',
+  name: 'Звук при получении достижений',
+  category: 'ЗВУК',
   description: `
-    The sound that's played when unlocking an achievement.
-    If disabled, no sound will be played.
+    Выбор звука, который будет играть при получении достижения.
+    При отключении звука не будет.
   `,
   component: FeatureDropdownInput,
 };
 
 export const sound_radio_noise: Feature<number> = {
-  name: 'Radio noise volume',
-  category: 'SOUND',
-  description: `Volume of talking and hearing radio chatter sounds.`,
+  name: 'Громкость оповещения рации',
+  category: 'ЗВУК',
+  description: `Громкость оповещений, когда в рацию кто-то говорит.`,
   component: FeatureSliderInput,
 };
 
 export const sound_ai_vox: FeatureToggle = {
-  name: 'Enable AI VOX announcements',
-  category: 'SOUND',
+  name: 'Включить звук VOX ИИ',
+  category: 'ЗВУК',
   description:
-    'When enabled, hear vocal AI announcements (also known as "VOX").',
+    'Слышать краткие озвученные сообщения от ИИ (также известные, как "VOX").',
   component: CheckboxInput,
 };

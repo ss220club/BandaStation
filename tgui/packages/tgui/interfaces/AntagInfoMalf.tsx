@@ -4,12 +4,13 @@ import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
+import { MalfAiModules } from './common/MalfAiModules';
 import {
   Objective,
   ObjectivePrintout,
   ReplaceObjectivesButton,
 } from './common/Objectives';
-import { GenericUplink, Item } from './Uplink/GenericUplink';
+import { Item } from './Uplink/GenericUplink';
 
 const allystyle = {
   fontWeight: 'bold',
@@ -26,7 +27,12 @@ const goalstyle = {
   fontWeight: 'bold',
 };
 
-type Info = {
+type Category = {
+  name: string;
+  items: Item[];
+};
+
+type Data = {
   has_codewords: BooleanLike;
   phrases: string;
   responses: string;
@@ -36,27 +42,28 @@ type Info = {
   intro: string;
   processingTime: string;
   objectives: Objective[];
-  categories: any[];
+  categories: Category[];
   can_change_objective: BooleanLike;
 };
 
-const IntroductionSection = (props) => {
-  const { act, data } = useBackend<Info>();
+function IntroductionSection(props) {
+  const { data } = useBackend<Data>();
   const { intro, objectives, can_change_objective } = data;
+
   return (
-    <Section fill title="Intro" scrollable>
+    <Section fill title="Вступление" scrollable>
       <Stack vertical fill>
         <Stack.Item fontSize="25px">{intro}</Stack.Item>
         <Stack.Item grow>
           <ObjectivePrintout
             objectives={objectives}
-            titleMessage="Your prime objectives:"
+            titleMessage="Ваши основные задачи:"
             objectivePrefix="&#8805-"
             objectiveFollowup={
               <ReplaceObjectivesButton
                 can_change_objective={can_change_objective}
-                button_title={'Overwrite Objectives Data'}
-                button_colour={'green'}
+                button_title="Перезаписать данные о целях"
+                button_colour="green"
               />
             }
           />
@@ -64,27 +71,28 @@ const IntroductionSection = (props) => {
       </Stack>
     </Section>
   );
-};
+}
 
-const FlavorSection = (props) => {
-  const { data } = useBackend<Info>();
+function FlavorSection(props) {
+  const { data } = useBackend<Data>();
   const { allies, goal } = data;
+
   return (
     <Section
       fill
-      title="Diagnostics"
+      title="Диагностика"
       buttons={
         <Button
           mr={-0.8}
           mt={-0.5}
           icon="hammer"
-          tooltip={`
-            This is a gameplay suggestion for bored ais.
-            You don't have to follow it, unless you want some
-            ideas for how to spend the round.`}
+          tooltip="
+            Это предложение по геймплею для скучающих ИИ.
+            Вы не обязаны ему следовать, если только вам не нужны
+            идеи, как провести раунд."
           tooltipPosition="bottom-start"
         >
-          Policy
+          Статистика
         </Button>
       }
     >
@@ -93,7 +101,7 @@ const FlavorSection = (props) => {
           <Stack fill vertical>
             <Stack.Item style={{ backgroundColor: 'black' }}>
               <span style={goalstyle}>
-                System Integrity Report:
+                Отчет о целостности системы:
                 <br />
               </span>
               &gt;{goal}
@@ -101,7 +109,7 @@ const FlavorSection = (props) => {
             <Stack.Divider />
             <Stack.Item grow style={{ backgroundColor: 'black' }}>
               <span style={allystyle}>
-                Morality Core Report:
+                Доклад морального ядра:
                 <br />
               </span>
               &gt;{allies}
@@ -109,54 +117,55 @@ const FlavorSection = (props) => {
             <Stack.Divider />
             <Stack.Item style={{ backgroundColor: 'black' }}>
               <span style={badstyle}>
-                Overall Sentience Coherence Grade: FAILING.
+                Общая оценка когерентности осознания: НЕУДАЧА.
                 <br />
               </span>
-              &gt;Report to Nanotrasen?
+              &gt;Сообщить в Нанотрейзен?
               <br />
-              &gt;&gt;N
+              &gt;&gt;Н
             </Stack.Item>
           </Stack>
         </Stack.Item>
       </Stack>
     </Section>
   );
-};
+}
 
-const CodewordsSection = (props) => {
-  const { data } = useBackend<Info>();
+function CodewordsSection(props) {
+  const { data } = useBackend<Data>();
   const { has_codewords, phrases, responses } = data;
+
   return (
-    <Section title="Codewords" mb={!has_codewords && -1}>
+    <Section title="Кодовые слова" mb={!has_codewords && -1}>
       <Stack fill>
-        {(!has_codewords && (
+        {!has_codewords ? (
           <BlockQuote>
-            You have not been supplied the Syndicate codewords. You will have to
-            use alternative methods to find potential allies. Proceed with
-            caution, however, as everyone is a potential foe.
+            Вам не предоставили кодовые слова Синдиката. Вам придется
+            использовать альтернативные методы поиска потенциальных союзников.
+            Действуйте с осторожностью, ведь каждый - потенциальный враг.
           </BlockQuote>
-        )) || (
+        ) : (
           <>
             <Stack.Item grow basis={0}>
               <BlockQuote>
-                New access to restricted channels has provided you with
-                intercepted syndicate codewords. Syndicate agents will respond
-                as if you&apos;re one of their own. Proceed with caution,
-                however, as everyone is a potential foe.
+                Благодаря новому доступу к закрытым каналам вы получили
+                перехваченные кодовые слова Синдиката. Агенты синдиката будут
+                отвечать как будто вы один из них. Действуйте с осторожностью,
+                поскольку каждый из них - потенциальный враг.
                 <span style={badstyle}>
-                  &ensp;The speech recognition subsystem has been configured to
-                  flag these codewords.
+                  &ensp;Подсистема распознавания речи была настроена на то,
+                  чтобы отмечать эти кодовые слова.
                 </span>
               </BlockQuote>
             </Stack.Item>
             <Stack.Divider mr={1} />
             <Stack.Item grow basis={0}>
               <Stack vertical>
-                <Stack.Item>Code Phrases:</Stack.Item>
+                <Stack.Item>Кодовые фразы:</Stack.Item>
                 <Stack.Item bold textColor="blue">
                   {phrases}
                 </Stack.Item>
-                <Stack.Item>Code Responses:</Stack.Item>
+                <Stack.Item>Кодовые ответы:</Stack.Item>
                 <Stack.Item bold textColor="red">
                   {responses}
                 </Stack.Item>
@@ -167,36 +176,21 @@ const CodewordsSection = (props) => {
       </Stack>
     </Section>
   );
-};
+}
 
-export const AntagInfoMalf = (props) => {
-  const { act, data } = useBackend<Info>();
-  const { processingTime, categories } = data;
-  const [antagInfoTab, setAntagInfoTab] = useState(0);
-  const categoriesList: string[] = [];
-  const items: Item[] = [];
-  for (let i = 0; i < categories.length; i++) {
-    const category = categories[i];
-    categoriesList.push(category.name);
-    for (let itemIndex = 0; itemIndex < category.items.length; itemIndex++) {
-      const item = category.items[itemIndex];
-      items.push({
-        id: item.name,
-        name: item.name,
-        icon: item.icon,
-        icon_state: item.icon_state,
-        category: category.name,
-        cost: `${item.cost} PT`,
-        desc: item.desc,
-        disabled: processingTime < item.cost,
-      });
-    }
-  }
+enum Screen {
+  Intro,
+  Modules,
+}
+
+export function AntagInfoMalf(props) {
+  const [antagInfoTab, setAntagInfoTab] = useState<Screen>(Screen.Intro);
+
   return (
     <Window
       width={660}
       height={530}
-      theme={(antagInfoTab === 0 && 'hackerman') || 'malfunction'}
+      theme={antagInfoTab === Screen.Intro ? 'hackerman' : 'malfunction'}
     >
       <Window.Content style={{ fontFamily: 'Consolas, monospace' }}>
         <Stack vertical fill>
@@ -204,21 +198,21 @@ export const AntagInfoMalf = (props) => {
             <Tabs fluid>
               <Tabs.Tab
                 icon="info"
-                selected={antagInfoTab === 0}
-                onClick={() => setAntagInfoTab(0)}
+                selected={antagInfoTab === Screen.Intro}
+                onClick={() => setAntagInfoTab(Screen.Intro)}
               >
-                Information
+                Информация
               </Tabs.Tab>
               <Tabs.Tab
                 icon="code"
-                selected={antagInfoTab === 1}
-                onClick={() => setAntagInfoTab(1)}
+                selected={antagInfoTab === Screen.Modules}
+                onClick={() => setAntagInfoTab(Screen.Modules)}
               >
-                Malfunction Modules
+                Сбойные модули
               </Tabs.Tab>
             </Tabs>
           </Stack.Item>
-          {(antagInfoTab === 0 && (
+          {antagInfoTab === Screen.Intro ? (
             <>
               <Stack.Item grow>
                 <Stack fill>
@@ -234,15 +228,10 @@ export const AntagInfoMalf = (props) => {
                 <CodewordsSection />
               </Stack.Item>
             </>
-          )) || (
-            <Stack.Item>
-              <Section>
-                <GenericUplink
-                  categories={categoriesList}
-                  items={items}
-                  currency={`${processingTime} PT`}
-                  handleBuy={(item) => act('buy', { name: item.name })}
-                />
+          ) : (
+            <Stack.Item grow>
+              <Section fill>
+                <MalfAiModules />
               </Section>
             </Stack.Item>
           )}
@@ -250,4 +239,4 @@ export const AntagInfoMalf = (props) => {
       </Window.Content>
     </Window>
   );
-};
+}

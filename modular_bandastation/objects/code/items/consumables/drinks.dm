@@ -363,7 +363,7 @@
 /datum/reagent/consumable/ethanol/vampiro/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
 	. = ..()
 	if(volume > 20 && SPT_PROB(50, seconds_per_tick))
-		drinker.visible_message(span_warning("Глаза [drinker] ослепительно вспыхивают!"))
+		drinker.visible_message(span_warning("Глаза [drinker.declent_ru(GENITIVE)] ослепительно вспыхивают!"))
 
 /datum/glass_style/drinking_glass/vampiro
 	required_drink_type = /datum/reagent/consumable/ethanol/vampiro

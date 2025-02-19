@@ -307,12 +307,12 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 		// But we can still see them speak
 		if(speaker_is_signing)
-			deaf_message = "[span_name("[speaker]")] [speaker.get_default_say_verb()] something, but the motions are too subtle to make out from afar."
+			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [speaker.get_default_say_verb()] что-то, но движения едва заметны, чтобы разобрать их."
 		else if(can_hear()) // If we can't hear we want to continue to the default deaf message
 			var/mob/living/living_speaker = speaker
 			if(istype(living_speaker) && living_speaker.is_mouth_covered()) // Can't see them speak if their mouth is covered
 				return FALSE
-			deaf_message = "[span_name("[speaker]")] [speaker.verb_whisper] something, but you are too far away to hear [speaker.p_them()]."
+			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [ru_say_verb(speaker.verb_whisper)] что-то, но вы слишком далеко, чтобы услышать [speaker.ru_p_them()]."
 
 		if(deaf_message)
 			deaf_type = MSG_VISUAL
@@ -352,10 +352,10 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	if(speaker != src)
 		if(!radio_freq) //These checks have to be separate, else people talking on the radio will make "You can't hear yourself!" appear when hearing people over the radio while deaf.
-			deaf_message = "[span_name("[speaker]")] [speaker.get_default_say_verb()] something but you cannot hear [speaker.p_them()]."
+			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [speaker.get_default_say_verb()] что-то, но вы не слышите [speaker.ru_p_them()]."
 			deaf_type = MSG_VISUAL
 	else
-		deaf_message = span_notice("You can't hear yourself!")
+		deaf_message = span_notice("Вы не слышите себя!")
 		deaf_type = MSG_AUDIBLE // Since you should be able to hear yourself without looking
 
 	// Create map text prior to modifying message for goonchat
@@ -547,7 +547,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(message_mods[WHISPER_MODE] == MODE_WHISPER)
 		. = verb_whisper
 	else if(message_mods[WHISPER_MODE] == MODE_WHISPER_CRIT && !HAS_TRAIT(src, TRAIT_SUCCUMB_OVERRIDE))
-		. = "[verb_whisper] in [p_their()] last breath"
+		. = "[ru_say_verb(verb_whisper)] своим последним вздохом"
 	else if(message_mods[MODE_SING])
 		. = verb_sing
 	// Any subtype of slurring in our status effects make us "slur"

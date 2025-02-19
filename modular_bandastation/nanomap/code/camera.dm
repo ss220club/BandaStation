@@ -24,13 +24,8 @@
 
 /obj/machinery/computer/security/ui_act(action, params)
 	. = ..()
-	if(. && action == "switch_camera")
-		if(!active_camera)
-			return
-		current_z_level_index = z_levels.Find("[active_camera.z]")
 	if(.)
 		return
-
 	if(action == "switch_z_level")
 		var/z_dir = params["z_dir"]
 		current_z_level_index = clamp(current_z_level_index + z_dir, 1, length(z_levels))
@@ -54,3 +49,16 @@
 	// Sort it by z levels
 	z_levels = sort_list(z_levels)
 	return data
+
+/obj/machinery/computer/security/proc/update_available_z_levels(list/cameras_data)
+	PRIVATE_PROC(TRUE)
+
+	for(var/list/entry as anything in cameras_data)
+		if(z_levels["[entry["z"]]"])
+			continue
+
+		var/obj/machinery/camera/camera = locate(entry["ref"])
+		if(isnull(camera?.nanomap_png))
+			continue
+
+		z_levels["[camera.z]"] = camera.nanomap_png

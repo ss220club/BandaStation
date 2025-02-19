@@ -186,12 +186,14 @@
 	if(smoothing_flags & SMOOTH_QUEUED)
 		SSicon_smooth.remove_from_queues(src)
 
+#ifndef DISABLE_DREAMLUAU
 	// These lists cease existing when src does, so we need to clear any lua refs to them that exist.
 	if(!(datum_flags & DF_STATIC_OBJECT))
 		DREAMLUAU_CLEAR_REF_USERDATA(contents)
 		DREAMLUAU_CLEAR_REF_USERDATA(filters)
 		DREAMLUAU_CLEAR_REF_USERDATA(overlays)
 		DREAMLUAU_CLEAR_REF_USERDATA(underlays)
+#endif
 
 	return ..()
 
@@ -480,7 +482,7 @@
 		return
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 25
-		balloon_alert(user, "can't move while buckled!")
+		balloon_alert(user, "вы пристегнуты - нельзя двигаться!")
 	return
 
 /**
@@ -734,7 +736,6 @@
 
 	pixel_x = pixel_x + base_pixel_x - .
 
-
 ///Setter for the `base_pixel_y` variable to append behavior related to its changing.
 /atom/proc/set_base_pixel_y(new_value)
 	if(base_pixel_y == new_value)
@@ -883,7 +884,7 @@
 	var/shift_lmb_ctrl_shift_lmb_line = ""
 	var/extra_lines = 0
 	var/extra_context = ""
-	var/used_name = name
+	var/used_name = declent_ru(NOMINATIVE)
 
 	if(isliving(user) || isovermind(user) || iscameramob(user) || (ghost_screentips && isobserver(user)))
 		var/obj/item/held_item = user.get_active_held_item()

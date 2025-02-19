@@ -153,7 +153,7 @@
 
 /obj/item/fish/fryish/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] swallows [src] whole! It looks like [user.p_theyre()] trying to commit suicide!"))
-	user.say("Mmmm! Delicious!", forced = "fryfish suicide")
+	user.say("Мммм! Вкуснятина!", forced = "fryfish suicide")
 	qdel(src)
 	return OXYLOSS
 
@@ -255,8 +255,8 @@
 	desc = "A <u>deliciously</u> extremophile alien fish. This one is so big, you could write legends about it."
 	icon = 'icons/obj/aquarium/wide.dmi'
 	icon_state = "nessiefish"
-	base_pixel_x = -16
-	pixel_x = -16
+	base_pixel_w = -16
+	pixel_w = -16
 	sprite_width = 12
 	sprite_height = 4
 	average_size = 150

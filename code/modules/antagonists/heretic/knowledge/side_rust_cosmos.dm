@@ -13,10 +13,10 @@
 
 /datum/heretic_knowledge/essence
 	name = "Priest's Ritual"
-	desc = "Allows you to transmute a tank of water and a glass shard into a Flask of Eldritch Essence. \
-		Eldritch water can be consumed for potent healing, or given to heathens for deadly poisoning."
-	gain_text = "This is an old recipe. The Owl whispered it to me. \
-		Created by the Priest - the Liquid that both was and is not."
+	desc = "Позволяет трансмутировать емкость с водой и осколок стекла в Колбу с мистической эссенцией. \
+		Мистическую эссенцию можно употреблять для мощного исцеления или давать язычникам для смертельного отравления."
+	gain_text = "Это старый рецепт. Сова шепнула мне его. \
+		Созданная Жрецом - Жидкость, которая есть, и которой нет."
 
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
@@ -31,8 +31,8 @@
 
 /datum/heretic_knowledge/entropy_pulse
 	name = "Pulse of Entropy"
-	desc = "Allows you to transmute 10 iron sheets and a garbage item to fill the surrounding vicinity of the rune with rust."
-	gain_text = "Reality begins to whisper to me. To give it its entropic end."
+	desc = "Позволяет трансмутировать 10 железа и мусорный предмет, чтобы заполнить ржавчиной окружение вокруг руны."
+	gain_text = "Реальность начинает нашептывать мне, чтобы дать ей энтропийный конец."
 	required_atoms = list(
 		/obj/item/stack/sheet/iron = 10,
 		/obj/item/trash = 1,
@@ -57,10 +57,10 @@
 
 /datum/heretic_knowledge/curse/corrosion
 	name = "Curse of Corrosion"
-	desc = "Allows you to transmute wirecutters, a pool of vomit, and a heart to cast a curse of sickness on a crew member. \
-		While cursed, the victim will repeatedly vomit while their organs will take constant damage. You can additionally supply an item \
-		that a victim has touched or is covered in the victim's blood to make the curse last longer."
-	gain_text = "The body of humanity is temporary. Their weaknesses cannot be stopped, like iron falling to rust. Show them all."
+	desc = "Позволяет трансмутировать кусачки, лужу рвоты и сердце, чтобы наложить проклятие болезни на члена экипажа. \
+		При проклятии жертву будет постоянно рвать, а ее органы будут получать постоянный урон. Вы можете дополнительно снабдить предмет \
+		к которому прикоснулась жертва или который покрыт кровью жертвы, чтобы придать увеличить длительность проклятия."
+	gain_text = "Тело человечества временно. Их слабости невозможно остановить, как поддающееся ржавчине железо. Покажите им всем."
 
 	required_atoms = list(
 		/obj/item/wirecutters = 1,
@@ -77,7 +77,7 @@
 
 
 /datum/heretic_knowledge/curse/corrosion/curse(mob/living/carbon/human/chosen_mob, boosted = FALSE)
-	to_chat(chosen_mob, span_danger("You feel very ill..."))
+	to_chat(chosen_mob, span_danger("Вы чувствуете себя очень плохо..."))
 	chosen_mob.apply_status_effect(/datum/status_effect/corrosion_curse)
 	return ..()
 
@@ -86,7 +86,7 @@
 		return
 
 	chosen_mob.remove_status_effect(/datum/status_effect/corrosion_curse)
-	to_chat(chosen_mob, span_green("You start to feel better."))
+	to_chat(chosen_mob, span_green("Вы начинаете чувствовать себя лучше."))
 	return ..()
 
 /datum/heretic_knowledge/summon/rusty

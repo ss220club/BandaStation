@@ -26,7 +26,7 @@
 	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/melee/chainofcommand/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/melee/synthetic_arm_blade
@@ -130,7 +130,7 @@
 	playsound(container.parent, 'sound/items/sheath.ogg', 25, TRUE)
 
 /obj/item/melee/sabre/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is trying to cut off all [user.p_their()] limbs with [src]! it looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is trying to cut off all [user.p_their()] limbs with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	var/i = 0
 	ADD_TRAIT(src, TRAIT_NODROP, SABRE_SUICIDE_TRAIT)
 	if(iscarbon(user))
@@ -175,7 +175,7 @@
 
 /obj/item/melee/parsnip_sabre
 	name = "parsnip sabre"
-	desc = "A weird, yet elegant weapon. Suprisingly sharp for something made from a parsnip."
+	desc = "A weird, yet elegant weapon. Surprisingly sharp for something made from a parsnip."
 	icon = 'icons/obj/weapons/sword.dmi'
 	icon_state = "parsnip_sabre"
 	inhand_icon_state = "parsnip_sabre"
@@ -248,7 +248,7 @@
 		carbon_target.reagents.add_reagent(/datum/reagent/toxin, 4)
 
 /obj/item/melee/beesword/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is stabbing [user.p_them()]self in the throat with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is stabbing [user.p_them()]self in the throat with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(get_turf(src), hitsound, 75, TRUE, -1)
 	return TOXLOSS
 

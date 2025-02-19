@@ -79,10 +79,10 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 /obj/item/nuclear_challenge/proc/war_was_declared(mob/living/user, memo)
 	priority_announce(
 		text = memo,
-		title = "Declaration of War",
+		title = "Объявление войны",
 		sound = 'sound/announcer/alarm/nuke_alarm.ogg',
 		has_important_message = TRUE,
-		sender_override = "Nuclear Operative Outpost",
+		sender_override = "Аванпост ядерных оперативников",
 		color_override = "red",
 	)
 	if(user)
@@ -191,10 +191,10 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 
 	priority_announce(
 		text = memo,
-		title = "Declaration of War",
+		title = "Объявление войны",
 		sound = 'sound/announcer/alarm/nuke_alarm.ogg',
 		has_important_message = TRUE,
-		sender_override = "Nuclear Operative Outpost",
+		sender_override = "Аванпост ядерных оперативников",
 		color_override = "red",
 	)
 

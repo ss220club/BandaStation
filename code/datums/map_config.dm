@@ -23,7 +23,7 @@
 	var/space_empty_levels = DEFAULT_SPACE_EMPTY_LEVELS
 	/// Boolean that tells us if this is a planetary station. (like IceBoxStation)
 	var/planetary = FALSE
-	
+
 	///The type of mining Z-level that should be loaded.
 	var/minetype = "lavaland"
 	///If no minetype is set, this will be the blacklist file used
@@ -48,6 +48,11 @@
 
 	/// Boolean that tells SSmapping to load all away missions in the codebase.
 	var/load_all_away_missions = FALSE
+
+	// BANDASTATION ADDITION START - Underfloor Blobs
+	/// Main floor of the map. Null as default, if not specified in json
+	var/main_floor = null
+	// BANDASTATION ADDITION END - Underfloor Blobs
 
 	// BANDASTATION ADDITION START - Station Fluff
 	/// This name will override all other station names, like holiday or randomly generated.
@@ -198,6 +203,11 @@
 
 	if ("load_all_away_missions" in json)
 		load_all_away_missions = json["load_all_away_missions"]
+
+	// BANDASTATION ADDITION START - Underfloor Blobs
+	if ("main_floor" in json)
+		main_floor = json["main_floor"]
+	// BANDASTATION ADDITION END - Underfloor Blobs
 
 	// BANDASTATION ADDITION START - Station Fluff
 	if ("fluff_name" in json)

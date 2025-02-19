@@ -205,7 +205,7 @@
 		icon = 'modular_bandastation/aesthetics/walls/icons/reinforced_states.dmi' // SS220 EDIT - AESTHETICS
 		icon_state = "[base_decon_state]-[d_state]"
 	else
-		icon = 'modular_bandastation/aesthetics/walls/icons/reinforced_wall.dmi' // SS220 EDIT - AESTHETICS
+		icon = 'icons/bandastation/walls/reinforced_wall.dmi' // SS220 EDIT - AESTHETICS
 		icon_state = "[base_icon_state]-[smoothing_junction]"
 	return ..()
 

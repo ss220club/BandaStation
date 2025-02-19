@@ -6,10 +6,8 @@
 	var/time_string = time2text(world.timeofday, format)
 	return show_ds ? "[time_string]:[world.timeofday % 10]" : time_string
 
-/proc/gameTimestamp(format = "hh:mm:ss", wtime=null)
-	if(!wtime)
-		wtime = world.time
-	return time2text(wtime - GLOB.timezoneOffset, format)
+/proc/gameTimestamp(format = "hh:mm:ss", wtime=world.time, timezone) // BANDASTATION ADDITION - timezone
+	return time2text(wtime, format, timezone) // BANDASTATION ADDITION - timezone
 
 /proc/station_time(display_only = FALSE, wtime=world.time)
 	return ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % 864000) - (display_only? GLOB.timezoneOffset : 0)
@@ -97,29 +95,29 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 /proc/DisplayTimeText(time_value, round_seconds_to = 0.1)
 	var/second = FLOOR(time_value * 0.1, round_seconds_to)
 	if(!second)
-		return "right now"
+		return "сейчас же"
 	if(second < 60)
-		return "[second] second[(second != 1)? "s":""]"
+		return "[second] [declension_ru(second, "секунда", "секунды", "секунд")]"
 	var/minute = FLOOR(second / 60, 1)
 	second = FLOOR(MODULUS(second, 60), round_seconds_to)
 	var/secondT
 	if(second)
-		secondT = " and [second] second[(second != 1)? "s":""]"
+		secondT = " и [second] [declension_ru(second, "секунда", "секунды", "секунд")]"
 	if(minute < 60)
-		return "[minute] minute[(minute != 1)? "s":""][secondT]"
+		return "[minute] [declension_ru(minute, "минута", "минуты", "минут")][secondT]"
 	var/hour = FLOOR(minute / 60, 1)
 	minute = MODULUS(minute, 60)
 	var/minuteT
 	if(minute)
-		minuteT = " and [minute] minute[(minute != 1)? "s":""]"
+		minuteT = ", [minute] [declension_ru(minute, "минута", "минуты", "минут")]"
 	if(hour < 24)
-		return "[hour] hour[(hour != 1)? "s":""][minuteT][secondT]"
+		return "[hour] [declension_ru(minute, "час", "часа", "часов")][minuteT][secondT]"
 	var/day = FLOOR(hour / 24, 1)
 	hour = MODULUS(hour, 24)
 	var/hourT
 	if(hour)
-		hourT = " and [hour] hour[(hour != 1)? "s":""]"
-	return "[day] day[(day != 1)? "s":""][hourT][minuteT][secondT]"
+		hourT = ", [hour] [declension_ru(minute, "час", "часа", "часов")]"
+	return "[day] [declension_ru(minute, "день", "дня", "дней")][hourT][minuteT][secondT]"
 
 
 /proc/daysSince(realtimev)

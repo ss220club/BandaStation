@@ -277,7 +277,7 @@
 
 	//Hands
 	for(var/obj/item/held_thing in held_items)
-		if(held_thing.item_flags & (ABSTRACT|EXAMINE_SKIP|HAND_ITEM))
+		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
 		. += "It has [held_thing.examine_title(user)] in its [get_held_index_name(get_held_index_of_item(held_thing))]."
 
@@ -368,7 +368,7 @@
 		LoadComponent(/datum/component/shy, mob_whitelist=not_shy_of, shy_range=3, message="Your laws prevent this action near %TARGET.", keyless_shy=FALSE, clientless_shy=TRUE, dead_shy=FALSE, dead_shy_immediate=TRUE, machine_whitelist=shy_machine_whitelist)
 		init_shy_in_room_component(drone_bad_areas)
 		LoadComponent(/datum/component/technoshy, 20 SECONDS, "%TARGET was touched by a being recently, using it could break your laws.")
-		LoadComponent(/datum/component/itempicky, drone_good_items, "Using %TARGET could break your laws.")
+		LoadComponent(/datum/component/itempicky, drone_good_items, "Использование %TARGET может нарушить ваши законы.")
 		RegisterSignal(src, COMSIG_TRY_USE_MACHINE, PROC_REF(blacklist_on_try_use_machine))
 		RegisterSignal(src, COMSIG_TRY_WIRES_INTERACT, PROC_REF(blacklist_on_try_wires_interact))
 	else

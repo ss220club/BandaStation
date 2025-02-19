@@ -7,7 +7,7 @@
  */
 /datum/action/cooldown/spell/jaunt/space_crawl
 	name = "Space Phase"
-	desc = "Allows you to phase in and out of existence while in space or misc tiles."
+	desc = "Позволяет вам появляться и исчезать, находясь на космическом или схожему ему тайле."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 
@@ -36,7 +36,7 @@
 	if(isspaceturf(get_turf(owner)) || ismiscturf(get_turf(owner)))
 		return TRUE
 	if(feedback)
-		to_chat(owner, span_warning("You must stand on a space or misc turf!"))
+		to_chat(owner, span_warning("Вы должны стоять на космическом или схожему ему тайле!"))
 	return FALSE
 
 /datum/action/cooldown/spell/jaunt/space_crawl/cast(mob/living/cast_on)
@@ -57,7 +57,7 @@
 
 	if(!.)
 		reset_spell_cooldown()
-		to_chat(jaunter, span_warning("You are unable to space crawl!"))
+		to_chat(jaunter, span_warning("Вы не можете проползти в пространстве!"))
 
 /**
  * Attempts to enter the passed space or misc turfs.
@@ -89,7 +89,7 @@
 	jaunter.add_traits(jaunting_traits, SPACE_PHASING)
 	RegisterSignal(jaunter, SIGNAL_REMOVETRAIT(TRAIT_ALLOW_HERETIC_CASTING), PROC_REF(on_focus_lost))
 	playsound(our_turf, 'sound/effects/magic/cosmic_energy.ogg', 50, TRUE, -1)
-	our_turf.visible_message(span_warning("[jaunter] sinks into [our_turf]!"))
+	our_turf.visible_message(span_warning("[jaunter.declent_ru(NOMINATIVE)] погружается в [our_turf.declent_ru(ACCUSATIVE)]!"))
 	new /obj/effect/temp_visual/space_explosion(our_turf)
 	jaunter.extinguish_mob()
 
@@ -101,13 +101,13 @@
  */
 /datum/action/cooldown/spell/jaunt/space_crawl/proc/try_exit_jaunt(turf/our_turf, mob/living/jaunter, force = FALSE)
 	if(!force && HAS_TRAIT_FROM(jaunter, TRAIT_NO_TRANSFORM, REF(src)))
-		to_chat(jaunter, span_warning("You cannot exit yet!!"))
+		to_chat(jaunter, span_warning("Вы еще не можете выйти!!"))
 		return FALSE
 
 	if(!exit_jaunt(jaunter, our_turf))
 		return FALSE
 	jaunter.remove_traits(jaunting_traits, SPACE_PHASING)
-	our_turf.visible_message(span_boldwarning("[jaunter] rises out of [our_turf]!"))
+	our_turf.visible_message(span_boldwarning("[capitalize(jaunter.declent_ru(NOMINATIVE))] встаёт из [our_turf.declent_ru(GENITIVE)]!"))
 	return TRUE
 
 /datum/action/cooldown/spell/jaunt/space_crawl/on_jaunt_exited(obj/effect/dummy/phased_mob/jaunt, mob/living/unjaunter)
@@ -130,7 +130,7 @@
 /// Spacecrawl "hands", prevent the user from holding items in spacecrawl
 /obj/item/space_crawl
 	name = "space crawl"
-	desc = "You are unable to hold anything while in this form."
+	desc = "Находясь в этой форме, вы не можете ничего держать в руках."
 	icon = 'icons/obj/antags/eldritch.dmi'
 	item_flags = ABSTRACT | DROPDEL
 

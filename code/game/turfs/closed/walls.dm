@@ -155,7 +155,7 @@
 		return
 	if(prob(hardness))
 		playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ), forced = "hulk")
+		user.say(pick(";РААААААХХ!", ";ХХХХЫААА!", ";ГГГРРРААА!", "ГГГХЫЫЫААА!", ";ААААААГХ!" ), forced = "hulk")
 		hulk_recoil(arm, user)
 		dismantle_wall(1)
 

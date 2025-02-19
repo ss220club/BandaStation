@@ -59,7 +59,7 @@ export const Fabricator = (props) => {
         </Stack>
         {!!onHold && (
           <Dimmer style={{ fontSize: '2em', textAlign: 'center' }}>
-            Mineral access is on hold, please contact the quartermaster.
+            Доступ к минералам ограничен. Обратитесь к квартирмейстеру.
           </Dimmer>
         )}
       </Window.Content>
@@ -141,7 +141,7 @@ const CustomPrint = (props: CustomPrintProps) => {
           })
         }
       >
-        [Max: {maxMult}]
+        [Макс: {maxMult}]
       </Button.Input>
     </div>
   );

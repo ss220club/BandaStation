@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 
 /obj/machinery/announcement_system
 	density = TRUE
-	name = "\improper Automated Announcement System"
+	name = "Автоматическая система оповещений"
 	desc = "An automated announcement system that handles minor announcements over the radio."
 	icon = 'icons/obj/machines/telecomms.dmi'
 	icon_state = "AAS_On"
@@ -19,11 +19,11 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	///The headset that we use for broadcasting
 	var/obj/item/radio/headset/radio
 	///The message that we send when someone is joining.
-	var/arrival = "%PERSON has signed up as %RANK"
+	var/arrival = "%PERSON, %RANK, прибывает на станцию."
 	///Whether the arrival message is sent
 	var/arrival_toggle = TRUE
 	///The message that we send when a department head arrives.
-	var/newhead = "%PERSON, %RANK, is the department head."
+	var/newhead = "%PERSON, %RANK, является главой отдела."
 	///Whether the newhead message is sent.
 	var/newhead_toggle = TRUE
 
@@ -34,7 +34,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	///If true, researched nodes will be announced to the appropriate channels
 	var/announce_research_node = TRUE
 	/// The text that we send when announcing researched nodes.
-	var/node_message = "The %NODE techweb node has been researched"
+	var/node_message = "Узел %NODE техсети был изучен"
 
 /obj/machinery/announcement_system/Initialize(mapload)
 	. = ..()
@@ -85,7 +85,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 
 /obj/machinery/announcement_system/proc/CompileText(str, user, rank) //replaces user-given variables with actual thingies.
 	str = replacetext(str, "%PERSON", "[user]")
-	str = replacetext(str, "%RANK", "[rank]")
+	str = replacetext(str, "%RANK", "[job_title_ru(rank)]")
 	return str
 
 /obj/machinery/announcement_system/proc/announce(message_type, target, rank, list/channels)
@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	if (!is_operational)
 		return
 
-	broadcast("Officer [officer.real_name] has been assigned to [department].", list(RADIO_CHANNEL_SECURITY))
+	broadcast("Офицер [officer.real_name] был назначен к отделу: [department].", list(RADIO_CHANNEL_SECURITY))
 
 /// Sends a message to the appropriate channels.
 /obj/machinery/announcement_system/proc/broadcast(message, list/channels)
@@ -142,7 +142,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	data["node_toggle"] = announce_research_node
 	return data
 
-/obj/machinery/announcement_system/ui_act(action, param)
+/obj/machinery/announcement_system/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
@@ -154,17 +154,17 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 		return
 	switch(action)
 		if("ArrivalText")
-			var/new_message = trim(html_encode(param["newText"]), MAX_MESSAGE_LEN)
+			var/new_message = trim(html_encode(params["newText"]), MAX_MESSAGE_LEN)
 			if(new_message)
 				arrival = new_message
 				usr.log_message("updated the arrivals announcement to: [new_message]", LOG_GAME)
 		if("NewheadText")
-			var/new_message = trim(html_encode(param["newText"]), MAX_MESSAGE_LEN)
+			var/new_message = trim(html_encode(params["newText"]), MAX_MESSAGE_LEN)
 			if(new_message)
 				newhead = new_message
 				usr.log_message("updated the head announcement to: [new_message]", LOG_GAME)
 		if("node_message")
-			var/new_message = trim(html_encode(param["newText"]), MAX_MESSAGE_LEN)
+			var/new_message = trim(html_encode(params["newText"]), MAX_MESSAGE_LEN)
 			if(new_message)
 				node_message = new_message
 				usr.log_message("updated the researched node announcement to: [node_message]", LOG_GAME)

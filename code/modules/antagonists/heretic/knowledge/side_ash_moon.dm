@@ -11,9 +11,9 @@
 // Sidepaths for knowledge between Ash and Flesh.
 /datum/heretic_knowledge/medallion
 	name = "Ashen Eyes"
-	desc = "Allows you to transmute a pair of eyes, a candle, and a glass shard into an Eldritch Medallion. \
-		The Eldritch Medallion grants you thermal vision while worn, and also functions as a focus."
-	gain_text = "Piercing eyes guided them through the mundane. Neither darkness nor terror could stop them."
+	desc = "Позволяет трансмутировать пару глаз, свечу и осколок стекла в Мистический медальон. \
+		Мистический медальон дает вам термальное зрение при ношении, а также действует как фокус."
+	gain_text = "Пронзительные глаза вели их сквозь обыденность. Ни тьма, ни ужас не могли остановить их."
 
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
@@ -27,10 +27,10 @@
 
 /datum/heretic_knowledge/curse/paralysis
 	name = "Curse of Paralysis"
-	desc = "Allows you to transmute a hatchet and both a left and right leg to cast a curse of immobility on a crew member. \
-		While cursed, the victim will be unable to walk. You can additionally supply an item that a victim has touched \
-		or is covered in the victim's blood to make the curse last longer."
-	gain_text = "The flesh of humanity is weak. Make them bleed. Show them their fragility."
+	desc = "Позволяет трансмутировать топорик и левую, и правую ногу, чтобы наложить проклятие неподвижности на члена экипажа. \
+		Во время проклятия жертва не сможет ходить. Для увеличения длительности проклятия можно дополнительно предоставить предмет, к которому прикасалась \
+		ертва или который покрыт кровью жертвы."
+	gain_text = "Плоть человечества слаба. Заставьте их истечь кровью. Покажите им их хрупкость."
 
 	required_atoms = list(
 		/obj/item/bodypart/leg/left = 1,
@@ -48,10 +48,10 @@
 
 /datum/heretic_knowledge/curse/paralysis/curse(mob/living/carbon/human/chosen_mob, boosted = FALSE)
 	if(chosen_mob.usable_legs <= 0) // What're you gonna do, curse someone who already can't walk?
-		to_chat(chosen_mob, span_notice("You feel a slight pain for a moment, but it passes shortly. Odd."))
+		to_chat(chosen_mob, span_notice("На мгновение вы чувствуете легкую боль, но она вскоре проходит. Странно."))
 		return
 
-	to_chat(chosen_mob, span_danger("You suddenly lose feeling in your leg[chosen_mob.usable_legs == 1 ? "":"s"]!"))
+	to_chat(chosen_mob, span_danger("Вы внезапно перестаете чувствовать ног[chosen_mob.usable_legs == 1 ? "у" : "и"]!"))
 	chosen_mob.add_traits(list(TRAIT_PARALYSIS_L_LEG, TRAIT_PARALYSIS_R_LEG), type)
 	return ..()
 
@@ -61,15 +61,15 @@
 
 	chosen_mob.remove_traits(list(TRAIT_PARALYSIS_L_LEG, TRAIT_PARALYSIS_R_LEG), type)
 	if(chosen_mob.usable_legs > 1)
-		to_chat(chosen_mob, span_green("You regain feeling in your leg[chosen_mob.usable_legs == 1 ? "":"s"]!"))
+		to_chat(chosen_mob, span_green("Вы снова чувствуете ног[chosen_mob.usable_legs == 1 ? "у":"и"]!"))
 	return ..()
 
 /datum/heretic_knowledge/summon/ashy
 	name = "Ashen Ritual"
-	desc = "Allows you to transmute a head, a pile of ash, and a book to create an Ash Spirit. \
-		Ash Spirits have a short range jaunt and the ability to cause bleeding in foes at range. \
-		They also have the ability to create a ring of fire around themselves for a length of time."
-	gain_text = "I combined my principle of hunger with my desire for destruction. The Marshal knew my name, and the Nightwatcher gazed on."
+	desc = "Позволяет трансмутировать голову, кучу пепла и книгу, чтобы создать Пепельного духа. \
+		Пепельные духи обладают коротким джаунтом и способностью вызывать кровотечение у противников на расстоянии. \
+		Они также обладают способностью создавать вокруг себя огненное кольцо на длительное время."
+	gain_text = "Я объединил свой принцип голода с желанием разрушения. Маршал знал мое имя, а Ночной дозорный наблюдал."
 
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,

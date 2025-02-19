@@ -1,3 +1,6 @@
+/datum/greyscale_config/material_airlock
+	icon_file = 'modular_bandastation/aesthetics/airlocks/icons/station/material.dmi'
+
 // MARK: Station airlocks
 /obj/machinery/door/airlock/command
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/heads/command.dmi'

@@ -378,11 +378,11 @@
 	var/healthpercent = round((atom_integrity/max_integrity) * 100, 1)
 	switch(healthpercent)
 		if(50 to 99)
-			. += span_info("It looks slightly damaged.")
+			. += span_info("Имеет незначительные повреждения.")
 		if(25 to 50)
-			. += span_info("It appears heavily damaged.")
+			. += span_info("Имеет значительные повреждения.")
 		if(0 to 25)
-			. += span_warning("It's falling apart!")
+			. += span_warning("Разваливается на части!")
 
 	if(long_ranged)
 		. += "It is upgraded with an experimental long-ranged network capabilities, picking up NTNet frequencies while further away."
@@ -926,6 +926,8 @@
 	if(inserted_disk)
 		user.put_in_hands(inserted_disk)
 		balloon_alert(user, "disks swapped")
+	else
+		balloon_alert(user, "disk inserted")
 	inserted_disk = disk
 	playsound(src, 'sound/machines/card_slide.ogg', 50)
 	return ITEM_INTERACT_SUCCESS

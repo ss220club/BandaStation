@@ -7,7 +7,7 @@
 	hits = 1 //Instantly splatters apart when it hits anything.
 	hitpwr = EXPLODE_LIGHT
 	threat = 100
-	signature = "xenobiological lifesign" //In the extremely unlikely one-in-a-million chance that one of these gets reported by the stray meteor event
+	signature = "ксенобиологических форм жизни" //In the extremely unlikely one-in-a-million chance that one of these gets reported by the stray meteor event
 	///Where we want our changeling to, by whatever means, end up at.
 	var/atom/landing_target
 
@@ -38,7 +38,7 @@
 	for(var/atom/movable/changeling in contents)
 		changeling.forceMove(get_turf(src))
 		changeling.throw_at(landing_target, 2, 2)
-		changeling.visible_message(span_warning("[changeling] is launched out from inside of the [name]"), span_changeling("Sensing that something is terribly wrong, we forcibly eject ourselves from the [name]!"))
+		changeling.visible_message(span_warning("[changeling] is launched out from inside of \the [src]!"), span_changeling("Sensing that something is terribly wrong, we forcibly eject ourselves from \the [src]!"))
 		playsound(changeling, 'sound/effects/splat.ogg', 50, pressure_affected = FALSE)
 
 	return ..()

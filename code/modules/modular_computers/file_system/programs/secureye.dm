@@ -6,7 +6,7 @@
 	downloader_category = PROGRAM_CATEGORY_SECURITY
 	ui_header = "borg_mon.gif"
 	program_open_overlay = "generic"
-	extended_desc = "This program allows access to standard security camera networks."
+	extended_desc = "Эта программа позволяет получить доступ к стандартным сетям камер безопасности."
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
 	download_access = list(ACCESS_SECURITY)
 	can_run_on_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
@@ -127,15 +127,7 @@
 	data["network"] = network
 	data["mapRef"] = cam_screen.assigned_map
 	data["can_spy"] = !!spying
-	var/list/cameras = get_camera_list(network)
-	data["cameras"] = list()
-	for(var/i in cameras)
-		var/obj/machinery/camera/C = cameras[i]
-		data["cameras"] += list(list(
-			name = C.c_tag,
-			ref = REF(C),
-		))
-
+	data["cameras"] = GLOB.cameranet.get_available_cameras_data(network)
 	return data
 
 /datum/computer_file/program/secureye/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)

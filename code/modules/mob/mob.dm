@@ -242,7 +242,7 @@
 	// voice muffling
 	if(stat == UNCONSCIOUS || stat == HARD_CRIT)
 		if(type & MSG_AUDIBLE) //audio
-			to_chat(src, "<I>... You can almost hear something ...</I>")
+			to_chat(src, "<I>... Вы почти слышите что-то ...</I>")
 		return FALSE
 	to_chat(src, msg, avoid_highlighting = avoid_highlighting)
 	return .
@@ -281,7 +281,7 @@
 
 	var/raw_msg = message
 	if(visible_message_flags & EMOTE_MESSAGE)
-		message = span_emote("<b>[src]</b> [message]")
+		message = span_emote("<b>[capitalize(declent_ru(NOMINATIVE))]</b> [message]")
 
 	for(var/mob/M in hearers)
 		if(!M.client)
@@ -318,7 +318,7 @@
 	var/raw_self_message = self_message
 	var/self_runechat = FALSE
 	if(visible_message_flags & EMOTE_MESSAGE)
-		self_message = span_emote("<b>[src]</b> [self_message]") // May make more sense as "You do x"
+		self_message = span_emote("<b>[capitalize(declent_ru(NOMINATIVE))]</b> [self_message]") // May make more sense as "You do x"
 
 	if(visible_message_flags & ALWAYS_SHOW_SELF_MESSAGE)
 		to_chat(src, self_message)
@@ -348,7 +348,7 @@
 		hearers -= src
 	var/raw_msg = message
 	if(audible_message_flags & EMOTE_MESSAGE)
-		message = span_emote("<b>[src]</b> [message]")
+		message = span_emote("<b>[capitalize(declent_ru(NOMINATIVE))]</b> [message]")
 	for(var/mob/M in hearers)
 		if(audible_message_flags & EMOTE_MESSAGE && runechat_prefs_check(M, audible_message_flags) && M.can_hear())
 			M.create_chat_message(src, raw_message = raw_msg, runechat_flags = audible_message_flags)
@@ -372,7 +372,7 @@
 	var/raw_self_message = self_message
 	var/self_runechat = FALSE
 	if(audible_message_flags & EMOTE_MESSAGE)
-		self_message = span_emote("<b>[src]</b> [self_message]")
+		self_message = span_emote("<b>[capitalize(declent_ru(NOMINATIVE))]</b> [self_message]")
 	if(audible_message_flags & ALWAYS_SHOW_SELF_MESSAGE)
 		to_chat(src, self_message)
 		self_runechat = TRUE
@@ -531,7 +531,7 @@
 		if(examine_time && (world.time - examine_time < EXAMINE_MORE_WINDOW))
 			var/list/result = examinify.examine_more(src)
 			if(!length(result))
-				result += span_notice("<i>You examine [examinify] closer, but find nothing of interest...</i>")
+				result += span_notice("<i>Вы осматриваете [examinify.declent_ru(ACCUSATIVE)] подробнее, но не находите ничего интересного...</i>")
 			result_combined = boxed_message(jointext(result, "<br>"))
 
 		else
@@ -555,7 +555,7 @@
 /mob/living/blind_examine_check(atom/examined_thing)
 	//need to be next to something and awake
 	if(!Adjacent(examined_thing) || incapacitated)
-		to_chat(src, span_warning("Something is there, but you can't see it!"))
+		to_chat(src, span_warning("Тут что-то есть, но вы не видите это!"))
 		return FALSE
 
 	//you can examine things you're holding directly, but you can't examine other things if your hands are full
@@ -566,22 +566,22 @@
 		if(HAS_TRAIT(active_item, TRAIT_BLIND_TOOL))
 			boosted = TRUE
 		else if(active_item != examined_thing)
-			to_chat(src, span_warning("Your hands are too full to examine this!"))
+			to_chat(src, span_warning("Ваши руки заняты, чтобы осмотреть это!"))
 			return FALSE
 
 	//you can only initiate exaimines if you have a hand, it's not disabled, and only as many examines as you have hands
-	/// our active hand, to check if it's disabled/detatched
+	/// our active hand, to check if it's disabled/detached
 	var/obj/item/bodypart/active_hand = has_active_hand()? get_active_hand() : null
 	if(!active_hand || active_hand.bodypart_disabled || do_after_count() >= usable_hands)
-		to_chat(src, span_warning("You don't have a free hand to examine this!"))
+		to_chat(src, span_warning("У вас нет свободной руки для осмотра этого!"))
 		return FALSE
 
 	//you can only queue up one examine on something at a time
 	if(DOING_INTERACTION_WITH_TARGET(src, examined_thing))
 		return FALSE
 
-	to_chat(src, span_notice("You start feeling around for something..."))
-	visible_message(span_notice(" [name] begins feeling around for \the [examined_thing.name]..."))
+	to_chat(src, span_notice("Вы начинаете прощупывать вокруг..."))
+	visible_message(span_notice(" [capitalize(declent_ru(NOMINATIVE))] начинает прощупывать вокруг [examined_thing.declent_ru(GENITIVE)]..."))
 
 	/// how long it takes for the blind person to find the thing they're examining
 	var/examine_delay_length = rand(1 SECONDS, 2 SECONDS)
@@ -595,7 +595,7 @@
 		examine_delay_length *= 2
 
 	if(examine_delay_length > 0 && !do_after(src, examine_delay_length, target = examined_thing))
-		to_chat(src, span_notice("You can't get a good feel for what is there."))
+		to_chat(src, span_notice("Вы не можете ощупом понять, что это такое."))
 		return FALSE
 
 	//now we touch the thing we're examining
@@ -642,13 +642,13 @@
 	if(examined_mob.is_face_visible() && SEND_SIGNAL(src, COMSIG_MOB_EYECONTACT, examined_mob, TRUE) != COMSIG_BLOCK_EYECONTACT)
 		var/obj/item/clothing/eye_cover = examined_mob.is_eyes_covered()
 		if (!eye_cover || (!eye_cover.tint && !eye_cover.flash_protect))
-			var/msg = span_smallnotice("You make eye contact with [examined_mob].")
+			var/msg = span_smallnotice("Вы смотрите в глаза [examined_mob.declent_ru(GENITIVE)].")
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), src, msg), 0.3 SECONDS) // so the examine signal has time to fire and this will print after
 
 	if(!imagined_eye_contact && is_face_visible() && !examined_mob.is_blind() && SEND_SIGNAL(examined_mob, COMSIG_MOB_EYECONTACT, src, FALSE) != COMSIG_BLOCK_EYECONTACT)
 		var/obj/item/clothing/eye_cover = is_eyes_covered()
 		if (!eye_cover || (!eye_cover.tint && !eye_cover.flash_protect))
-			var/msg = span_smallnotice("[src] makes eye contact with you.")
+			var/msg = span_smallnotice("[capitalize(declent_ru(NOMINATIVE))] смотрит вам в глаза.")
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), examined_mob, msg), 0.3 SECONDS)
 
 /**
@@ -741,7 +741,7 @@
 
 	switch(CONFIG_GET(flag/allow_respawn))
 		if(RESPAWN_FLAG_NEW_CHARACTER)
-			if(tgui_alert(usr, "Note, respawning is only allowed as another character. If you don't have another free slot you may not be able to respawn.", "Respawn", list("Ok", "Nevermind")) != "Ok")
+			if(tgui_alert(usr, "Заметьте, что возвращаться в игру с лобби необходимо другим персонажем. Если у вас не осталось неиспользованных в раунде слотов, вы не сможете вернуться в лобби.", "Respawn", list("Хорошо", "Забудьте")) != "Хорошо")
 				return
 
 		if(RESPAWN_FLAG_FREE)
@@ -749,13 +749,13 @@
 
 		if(RESPAWN_FLAG_DISABLED)
 			if (!check_rights_for(usr.client, R_ADMIN))
-				to_chat(usr, span_boldnotice("Respawning is not enabled!"))
+				to_chat(usr, span_boldnotice("Возврат в лобби отключен!"))
 				return
-			if (tgui_alert(usr, "Respawning is currently disabled, do you want to use your permissions to circumvent it?", "Respawn", list("Yes", "No")) != "Yes")
+			if (tgui_alert(usr, "Возврат в лобби отключен, хотите ли вы воспользоваться своими правами для обхода?", "Respawn", list("Да", "Нет")) != "Да")
 				return
 
 	if (stat != DEAD)
-		to_chat(usr, span_boldnotice("You must be dead to use this!"))
+		to_chat(usr, span_boldnotice("Вы должны быть мертвы, чтобы использовать это!"))
 		return
 
 	if(!check_respawn_delay())
@@ -763,7 +763,7 @@
 
 	usr.log_message("used the respawn button.", LOG_GAME)
 
-	to_chat(usr, span_boldnotice("Please roleplay correctly!"))
+	to_chat(usr, span_boldnotice("Пожалуйста, соблюдайте ролевую игру!"))
 
 	if(!client)
 		usr.log_message("respawn failed due to disconnect.", LOG_GAME)
@@ -793,10 +793,10 @@
 
 	if(death_time < required_delay)
 		if(!check_rights_for(usr.client, R_ADMIN))
-			to_chat(usr, "You have been dead for [DisplayTimeText(death_time, 1)].")
-			to_chat(usr, span_warning("You must wait [DisplayTimeText(required_delay, 1)] to respawn!"))
+			to_chat(usr, "Вы были мертвы [DisplayTimeText(death_time, 1)].")
+			to_chat(usr, span_warning("Вы должны ждать [DisplayTimeText(required_delay, 1)], чтобы вернуться в лобби!"))
 			return FALSE
-		if(tgui_alert(usr, "You have been dead for [DisplayTimeText(death_time, 1)] out of required [DisplayTimeText(required_delay, 1)]. Do you want to use your permissions to circumvent it?", "Respawn", list("Yes", "No")) != "Yes")
+		if(tgui_alert(usr, "Вы были мертвы [DisplayTimeText(death_time, 1)] из необходимых [DisplayTimeText(required_delay, 1)]. Хотите ли вы использовать свои права для обхода?", "Respawn", list("Да", "Нет")) != "Да")
 			return FALSE
 	return TRUE
 
@@ -860,7 +860,7 @@
 	var/obj/item/held_item = get_active_held_item()
 	if(SEND_SIGNAL(src, COMSIG_MOB_SWAPPING_HANDS, held_item) & COMPONENT_BLOCK_SWAP)
 		if (!silent)
-			to_chat(src, span_warning("Your other hand is too busy holding [held_item]."))
+			to_chat(src, span_warning("Ваша другая рука уже занята и держит [held_item.declent_ru(ACCUSATIVE)]."))
 		return FALSE
 
 	var/result = perform_hand_swap(held_index)
@@ -926,7 +926,7 @@
 		return mind.grab_ghost(force = force)
 
 ///Notify a ghost that its body is being revived
-/mob/proc/notify_revival(message = "Someone is trying to revive you. Re-enter your corpse if you want to be revived!", sound = 'sound/effects/genetics.ogg', atom/source = null, flashwindow = TRUE)
+/mob/proc/notify_revival(message = "Кто-то пытается оживить вас. Вернитесь в свой труп, если хотите оживления!", sound = 'sound/effects/genetics.ogg', atom/source = null, flashwindow = TRUE)
 	var/mob/dead/observer/ghost = get_ghost()
 	if(ghost)
 		ghost.send_revival_notification(message, sound, source, flashwindow)
@@ -986,8 +986,8 @@
 
 	if(magic_flags & MAGIC_RESISTANCE)
 		visible_message(
-			span_warning("[src] pulses red as [ismob(antimagic_source) ? p_they() : antimagic_source] absorbs magic energy!"),
-			span_userdanger("An intense magical aura pulses around [ismob(antimagic_source) ? "you" : antimagic_source] as it dissipates into the air!"),
+			span_warning("[capitalize(declent_ru(NOMINATIVE))] пульсирует красным, когда [ismob(antimagic_source) ? ru_p_they() : antimagic_source.declent_ru(NOMINATIVE)] поглощает магическую энергию!"),
+			span_userdanger("Сильная магическая аура пульсирует вокруг [ismob(antimagic_source) ? "вас" : antimagic_source.declent_ru(GENITIVE)], когда она рассеивается в воздухе!"),
 		)
 		antimagic_effect = mutable_appearance('icons/effects/effects.dmi', "shield-red", MOB_SHIELD_LAYER)
 		antimagic_color = LIGHT_COLOR_BLOOD_MAGIC
@@ -995,8 +995,8 @@
 
 	else if(magic_flags & MAGIC_RESISTANCE_HOLY)
 		visible_message(
-			span_warning("[src] starts to glow as [ismob(antimagic_source) ? p_they() : antimagic_source] emits a halo of light!"),
-			span_userdanger("A feeling of warmth washes over [ismob(antimagic_source) ? "you" : antimagic_source] as rays of light surround your body and protect you!"),
+			span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает светится, когда [ismob(antimagic_source) ? ru_p_they() : antimagic_source.declent_ru(NOMINATIVE)] начинает излучать ореол света!"),
+			span_userdanger("Теплое ощущение охватывает [ismob(antimagic_source) ? "вас" : antimagic_source.declent_ru(ACCUSATIVE)], когда лучи света окружают ваше тело и защищают вас!"),
 		)
 		antimagic_effect = mutable_appearance('icons/mob/effects/genetics.dmi', "servitude", -MUTATIONS_LAYER)
 		antimagic_color = LIGHT_COLOR_HOLY_MAGIC
@@ -1004,8 +1004,8 @@
 
 	else if(magic_flags & MAGIC_RESISTANCE_MIND)
 		visible_message(
-			span_warning("[src] forehead shines as [ismob(antimagic_source) ? p_they() : antimagic_source] repulses magic from their mind!"),
-			span_userdanger("A feeling of cold splashes on [ismob(antimagic_source) ? "you" : antimagic_source] as your forehead reflects magic usering your mind!"),
+			span_warning("Лоб [capitalize(declent_ru(GENITIVE))] сияет, когда [ismob(antimagic_source) ? ru_p_they() : antimagic_source.declent_ru(NOMINATIVE)] отражают магию от их разума!"),
+			span_userdanger("Холодное ощущение охватывает [ismob(antimagic_source) ? "вас" : antimagic_source.declent_ru(ACCUSATIVE)], когда ваш лоб отражает магию силой вашего разума!"),
 		)
 		antimagic_effect = mutable_appearance('icons/mob/effects/genetics.dmi', "telekinesishead", MOB_SHIELD_LAYER)
 		antimagic_color = LIGHT_COLOR_DARK_BLUE
@@ -1024,25 +1024,6 @@
 	if(M.buckled)
 		return FALSE
 	return ..(M, force, check_loc, buckle_mob_flags)
-
-///Call back post buckle to a mob to offset your visual height
-/mob/post_buckle_mob(mob/living/M)
-	var/height = M.get_mob_buckling_height(src)
-	M.pixel_y = initial(M.pixel_y) + height
-	if(M.layer <= layer) //make sure they stay above our current layer
-		M.layer = layer + 0.1
-///Call back post unbuckle from a mob, (reset your visual height here)
-/mob/post_unbuckle_mob(mob/living/M)
-	M.layer = initial(M.layer)
-	M.pixel_y = initial(M.pixel_y)
-
-///returns the height in pixel the mob should have when buckled to another mob.
-/mob/proc/get_mob_buckling_height(mob/seat)
-	if(isliving(seat))
-		var/mob/living/L = seat
-		if(L.mob_size <= MOB_SIZE_SMALL) //being on top of a small mob doesn't put you very high.
-			return 0
-	return 9
 
 ///Can the mob interact() with an atom?
 /mob/proc/can_interact_with(atom/A, treat_mob_as_adjacent)
@@ -1276,15 +1257,15 @@
 	var/pen_info = writing_instrument.get_writing_implement_details()
 	if(!pen_info || (pen_info["interaction_mode"] != MODE_WRITING))
 		if(!silent_if_not_writing_tool)
-			to_chat(src, span_warning("You can't write with the [writing_instrument]!"))
+			to_chat(src, span_warning("Вы не можете писать с помощью [writing_instrument.declent_ru(GENITIVE)]!"))
 		return FALSE
 
 	if(!is_literate())
-		to_chat(src, span_warning("You try to write, but don't know how to spell anything!"))
+		to_chat(src, span_warning("Вы пытаетесь писать, но вы же не умеете писать!"))
 		return FALSE
 
 	if(!has_light_nearby() && !has_nightvision())
-		to_chat(src, span_warning("It's too dark in here to write anything!"))
+		to_chat(src, span_warning("Здесь слишком темно для письма!"))
 		return FALSE
 
 	if(has_gravity())
@@ -1293,7 +1274,7 @@
 	var/obj/item/pen/pen = writing_instrument
 
 	if(istype(pen) && pen.requires_gravity)
-		to_chat(src, span_warning("You try to write, but the [writing_instrument] doesn't work in zero gravity!"))
+		to_chat(src, span_warning("Вы пытаетесь писать с помощью [writing_instrument.declent_ru(GENITIVE)], но нужна гравитация!"))
 		return FALSE
 
 	return TRUE
@@ -1321,12 +1302,12 @@
 /mob/proc/can_read(atom/viewed_atom, reading_check_flags = (READING_CHECK_LITERACY|READING_CHECK_LIGHT), silent = FALSE)
 	if((reading_check_flags & READING_CHECK_LITERACY) && !is_literate())
 		if(!silent)
-			to_chat(src, span_warning("You try to read [viewed_atom], but can't comprehend any of it."))
+			to_chat(src, span_warning("Вы пытаетесь прочитать [viewed_atom.declent_ru(ACCUSATIVE)], но ничего не понимаете."))
 		return FALSE
 
 	if((reading_check_flags & READING_CHECK_LIGHT) && !has_light_nearby() && !has_nightvision())
 		if(!silent)
-			to_chat(src, span_warning("It's too dark in here to read!"))
+			to_chat(src, span_warning("Здесь слишком темно, чтобы читать!"))
 		return FALSE
 
 	return TRUE
@@ -1338,7 +1319,8 @@
 	. = ..()
 	VV_DROPDOWN_OPTION("", "---------")
 	VV_DROPDOWN_OPTION(VV_HK_GIB, "Gib")
-	VV_DROPDOWN_OPTION(VV_HK_REMOVE_SPELL, "Remove Spell")
+	VV_DROPDOWN_OPTION(VV_HK_GIVE_AI, "Give AI Controller")
+	VV_DROPDOWN_OPTION(VV_HK_GIVE_AI_SPEECH, "Give Random AI Speech")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_SPELL, "Give Spell")
 	VV_DROPDOWN_OPTION(VV_HK_REMOVE_SPELL, "Remove Spell")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_MOB_ACTION, "Give Mob Ability")
@@ -1379,6 +1361,12 @@
 		if(!check_rights(R_ADMIN))
 			return
 		usr.client.cmd_admin_godmode(src)
+
+	if(href_list[VV_HK_GIVE_AI])
+		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/give_ai_controller, src)
+
+	if(href_list[VV_HK_GIVE_AI_SPEECH])
+		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/give_ai_speech, src)
 
 	if(href_list[VV_HK_GIVE_MOB_ACTION])
 		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/give_mob_action, src)
@@ -1564,9 +1552,9 @@
 	set category = "IC"
 	set desc = "View your character's memories."
 	if(!mind)
-		var/fail_message = "You have no mind!"
+		var/fail_message = "У вас нет разума!"
 		if(isobserver(src))
-			fail_message += " You have to be in the current round at some point to have one."
+			fail_message += " Вы должны поучавствовать в раунде, чтобы получить разум."
 		to_chat(src, span_warning(fail_message))
 		return
 	if(!mind.memory_panel)

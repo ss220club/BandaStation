@@ -1,14 +1,14 @@
 /datum/job/head_of_security
 	title = JOB_HEAD_OF_SECURITY
-	description = "Coordinate security personnel, ensure they are not corrupt, \
-		make sure every department is protected."
+	description = "Руководите отделом службы безопасности, убедитесь в их неподкупности, \
+		следите за тем, чтобы все отделы охранялись."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
 	department_head = list(JOB_CAPTAIN)
 	head_announce = list(RADIO_CHANNEL_SECURITY)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = SUPERVISOR_CAPTAIN
+	supervisors = JOB_CAPTAIN_RU
 	req_admin_notify = 1
 	minimal_player_age = 14
 	exp_requirements = 300
@@ -43,7 +43,7 @@
 
 
 /datum/job/head_of_security/get_captaincy_announcement(mob/living/captain)
-	return "Due to staffing shortages, newly promoted Acting Captain [captain.real_name] on deck!"
+	return "В связи с нехваткой персонала, недавно назначенный исполняющий обязанности капитана [captain.real_name] на борту!"
 
 
 /datum/outfit/job/hos
@@ -57,6 +57,7 @@
 	suit_store = /obj/item/gun/energy/e_gun
 	backpack_contents = list(
 		/obj/item/evidencebag = 1,
+		/obj/item/melee/baton/security/loaded/hos = 1,
 		)
 	belt = /obj/item/modular_computer/pda/heads/hos
 	ears = /obj/item/radio/headset/heads/hos/alt
