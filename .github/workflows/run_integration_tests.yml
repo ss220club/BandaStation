@@ -37,6 +37,12 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v4
+      - name: Install required packages
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install zlib1g-dev:i386
+      - uses: actions/checkout@v4
       - name: Setup database
         run: |
           sudo systemctl start mysql

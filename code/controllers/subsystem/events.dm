@@ -179,7 +179,8 @@ GLOBAL_LIST(holidays)
 	if(GLOB.holidays.len)
 		shuffle_inplace(GLOB.holidays)
 		// regenerate station name because holiday prefixes.
-		set_station_name(new_station_name())
+		if(isnull(SSmapping.current_map?.fluff_name)) // BANDASTATION ADDITION - Station Fluff
+			set_station_name(new_station_name())
 		world.update_status()
 
 	return TRUE

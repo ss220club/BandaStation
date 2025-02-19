@@ -1,6 +1,6 @@
 /// Glasses Slot Items (Moves overrided items to backpack)
 /datum/loadout_category/glasses
-	category_name = "Glasses"
+	category_name = "Очки"
 	category_ui_icon = FA_ICON_GLASSES
 	type_to_generate = /datum/loadout_item/glasses
 	tab_order = /datum/loadout_category/head::tab_order + 1
@@ -16,7 +16,7 @@
 /datum/loadout_item/glasses/prescription_glasses
 	name = "Glasses"
 	item_path = /obj/item/clothing/glasses/regular
-	additional_displayed_text = list("Prescription")
+	additional_displayed_text = list("Слабовидящие")
 
 /datum/loadout_item/glasses/prescription_glasses/circle_glasses
 	name = "Circle Glasses"

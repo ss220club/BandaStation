@@ -358,6 +358,12 @@ em {
   color: hsl(0, 100%, 32%);
 }
 
+// BANDASTATION ADDITION START
+.justiceradio {
+  color: hsl(341, 97%, 62%);
+}
+// BANDASTATION ADDITION END
+
 .medradio {
   color: hsl(201.8, 49.3%, 39.4%);
 }
@@ -1240,4 +1246,9 @@ $border-width-px: $border-width * 1px;
       $space: hsl
     );
   }
+}
+
+// BANDASTATION ADDITION START
+.looc {
+  color: #6699cc;
 }

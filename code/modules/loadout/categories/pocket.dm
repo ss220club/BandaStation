@@ -1,6 +1,6 @@
 /// Pocket items (Moved to backpack)
 /datum/loadout_category/pocket
-	category_name = "Other"
+	category_name = "Другое"
 	category_ui_icon = FA_ICON_QUESTION
 	type_to_generate = /datum/loadout_item/pocket_items
 	tab_order = /datum/loadout_category/head::tab_order + 5
@@ -9,7 +9,7 @@
 
 /datum/loadout_category/pocket/New()
 	. = ..()
-	category_info = "([max_allowed] allowed)"
+	category_info = "(максимум: [max_allowed])"
 
 /datum/loadout_category/pocket/handle_duplicate_entires(
 	datum/preference_middleware/loadout/manager,
@@ -100,7 +100,7 @@
 	name = "Plush (Lizard, Random)"
 	can_be_greyscale = DONT_GREYSCALE
 	item_path = /obj/item/toy/plush/lizard_plushie
-	additional_displayed_text = list("Random color")
+	additional_displayed_text = list("Случайный цвет")
 
 /datum/loadout_item/pocket_items/plush/moth
 	name = "Plush (Moth)"

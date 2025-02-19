@@ -1,6 +1,6 @@
 /datum/antagonist/nukeop
 	name = ROLE_NUCLEAR_OPERATIVE
-	roundend_category = "syndicate operatives" //just in case
+	roundend_category = "Оперативники Синдиката" //just in case
 	antagpanel_category = ANTAG_GROUP_SYNDICATE
 	job_rank = ROLE_OPERATIVE
 	antag_hud_name = "synd"

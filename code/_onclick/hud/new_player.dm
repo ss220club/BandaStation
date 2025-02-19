@@ -10,7 +10,7 @@
 
 /datum/hud/new_player/New(mob/owner)
 	. = ..()
-
+	/* BANDASTATION REMOVAL - HTML Title Screen
 	if (!owner || !owner.client)
 		return
 
@@ -482,7 +482,7 @@
 	. = ..()
 	if(QDELETED(src) || !desc)
 		return
-	openToolTip(usr, tip_src = src, params = params, title = name, content = desc,)
+	openToolTip(usr, tip_src = src, params = params, title = declent_ru(NOMINATIVE), content = desc,)
 
 /atom/movable/screen/lobby/button/sign_up/MouseExited()
 	. = ..()
@@ -614,23 +614,23 @@
 
 	//pull the shutter back off-screen
 	animate(transform = matrix(), time = SHUTTER_MOVEMENT_DURATION, easing = CUBIC_EASING|EASE_IN)
-
+*/
 /// LOCALHOST ONLY - Start Now button
-/atom/movable/screen/lobby/button/start_now
-	name = "Start Now (LOCALHOST ONLY)"
-	screen_loc = "TOP:-146,CENTER:-54"
-	icon = 'icons/hud/lobby/start_now.dmi'
-	icon_state = "start_now"
-	base_icon_state = "start_now"
-	always_available = FALSE
-	select_sound_play = FALSE
+// /atom/movable/screen/lobby/button/start_now
+// 	name = "Start Now (LOCALHOST ONLY)"
+// 	screen_loc = "TOP:-146,CENTER:-54"
+// 	icon = 'icons/hud/lobby/start_now.dmi'
+// 	icon_state = "start_now"
+// 	base_icon_state = "start_now"
+// 	always_available = FALSE
+// 	select_sound_play = FALSE
 
-/atom/movable/screen/lobby/button/start_now/Click(location, control, params)
-	. = ..()
-	if(!. || !usr.client.is_localhost() || !check_rights_for(usr.client, R_SERVER))
-		return
-	SEND_SOUND(hud.mymob, sound('sound/effects/splat.ogg', volume = 50))
-	SSticker.start_immediately = TRUE
+// /atom/movable/screen/lobby/button/start_now/Click(location, control, params)
+// 	. = ..()
+// 	if(!. || !usr.client.is_localhost() || !check_rights_for(usr.client, R_SERVER))
+// 		return
+// 	SEND_SOUND(hud.mymob, sound('sound/effects/splat.ogg', volume = 50))
+// 	SSticker.start_immediately = TRUE
 
 #undef SHUTTER_MOVEMENT_DURATION
 #undef SHUTTER_WAIT_DURATION

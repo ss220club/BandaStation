@@ -141,7 +141,7 @@
 			text = "Fatal error occurred in emergency shuttle uplink during transit. Unable to reestablish connection.",
 			title = "Shuttle Failure",
 			sound =  'sound/announcer/announcement/announce_dig.ogg',
-			sender_override = "Emergency Shuttle Uplink Alert",
+			sender_override = "Система оповещения эвакуационного шаттла",
 			color_override = "grey",
 		)
 	else
