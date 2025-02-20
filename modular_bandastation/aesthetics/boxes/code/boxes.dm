@@ -195,6 +195,10 @@
 	icon_state = "medical"
 	illustration = "beaker_bs"
 
+/obj/item/storage/box/alchemist_random_chems
+	icon_state = "syndie"
+	illustration = "beaker"
+
 // MARK: Emergency
 /obj/item/storage/box/emergencytank
 	icon_state = "internals"

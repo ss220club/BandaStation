@@ -36,7 +36,7 @@ export function LoadoutPage(props) {
   );
 
   if (!serverData) {
-    return <NoticeBox>Loading...</NoticeBox>;
+    return <NoticeBox>Загрузка...</NoticeBox>;
   }
 
   return (
@@ -55,7 +55,7 @@ export function LoadoutPage(props) {
             <Input
               width="200px"
               onInput={(_, value) => setSearchLoadout(value)}
-              placeholder="Search for an item..."
+              placeholder="Поиск по названию..."
               value={searchLoadout}
             />
           }
@@ -136,7 +136,7 @@ function LoadoutTabs(props: LoadoutTabsProps) {
       <Stack.Item grow>
         {searching || activeCategory?.contents ? (
           <Section
-            title={searching ? 'Searching...' : 'Catalog'}
+            title={searching ? 'Поиск...' : 'Каталог'}
             fill
             scrollable
             buttons={
@@ -162,7 +162,7 @@ function LoadoutTabs(props: LoadoutTabsProps) {
           </Section>
         ) : (
           <Section fill>
-            <Box>No contents for selected tab.</Box>
+            <Box>Нет содержимого для данной категории.</Box>
           </Section>
         )}
       </Stack.Item>
@@ -257,10 +257,10 @@ function LoadoutSelectedSection(props: LoadoutSelectedSectionProps) {
           color="red"
           align="center"
           disabled={!loadout_list || Object.keys(loadout_list).length === 0}
-          tooltip="Clears ALL selected items from all categories."
+          tooltip="Очищает выбор ВСЕХ предметов из всех категорий."
           onClick={() => act('clear_all_items')}
         >
-          Clear All
+          Очистить всё
         </Button.Confirm>
       }
     >
@@ -294,7 +294,7 @@ function LoadoutPreviewSection() {
           checked={data.job_clothes}
           onClick={() => act('toggle_job_clothes')}
         >
-          Job Clothes
+          Показывать профессию
         </Button.Checkbox>
       }
     >

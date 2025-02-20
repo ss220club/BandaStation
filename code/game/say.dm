@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
  * like human_say.dm's tongue-based verb_say changes.
  */
 /atom/movable/proc/get_default_say_verb()
-	return verb_say
+	return ru_say_verb(verb_say)
 
 /**
  * This prock is used to generate a message for chat
@@ -303,7 +303,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return "0"
 
 /atom/proc/GetVoice()
-	return "[src]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
+	return "[capitalize(declent_ru(NOMINATIVE))]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
 
 //HACKY VIRTUALSPEAKER STUFF BEYOND THIS POINT
 //these exist mostly to deal with the AIs hrefs and job stuff.

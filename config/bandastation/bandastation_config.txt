@@ -46,3 +46,6 @@ ROUNDSTART_RACES vulpkanin
 ## List of ckeys, that bypass speech filter.
 # SPEECH_FILTER_BYPASS ckey
 # SPEECH_FILTER_BYPASS ckey
+
+## Boolean value to derminate is it posible to die permanently due death of brain or not (value true means it's enabled)
+BRAIN_PERMANENT_DEATH

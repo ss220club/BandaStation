@@ -2,7 +2,7 @@
 	savefile_key = "feature_moth_antennae"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
-	main_feature_name = "Antennae"
+	main_feature_name = "Антенна"
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/moth_antennae/init_possible_values()
@@ -32,7 +32,7 @@
 	savefile_key = "feature_moth_markings"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
-	main_feature_name = "Body markings"
+	main_feature_name = "Метки на теле"
 	should_generate_icons = TRUE
 	relevant_body_markings = /datum/bodypart_overlay/simple/body_marking/moth
 
@@ -84,7 +84,7 @@
 	savefile_key = "feature_moth_wings"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
-	main_feature_name = "Moth wings"
+	main_feature_name = "Крылья моли"
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/moth_wings/init_possible_values()

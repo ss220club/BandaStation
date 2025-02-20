@@ -58,11 +58,11 @@
 
 /obj/item/gun/syringe/examine(mob/user)
 	. = ..()
-	. += "Can hold [max_syringes] syringe\s. Has [syringes.len] syringe\s remaining."
+	. += "Может держать в себе [max_syringes] шприц[declension_ru(max_syringes, "", "а", "ов")]. Имеет внутри [syringes.len] шприц[declension_ru(syringes.len, "", "а", "ов")]."
 
 /obj/item/gun/syringe/attack_self(mob/living/user)
 	if(!syringes.len)
-		balloon_alert(user, "it's empty!")
+		balloon_alert(user, "пусто!")
 		return FALSE
 
 	var/obj/item/reagent_containers/syringe/S = syringes[syringes.len]
@@ -72,26 +72,26 @@
 	user.put_in_hands(S)
 
 	syringes.Remove(S)
-	balloon_alert(user, "[S.name] unloaded")
+	balloon_alert(user, "снятие [S.declent_ru(GENITIVE)]")
 	update_appearance()
 
 	return TRUE
 
 /obj/item/gun/syringe/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(istype(tool, /obj/item/reagent_containers/syringe/bluespace))
-		balloon_alert(user, "[tool.name] is too big!")
+		balloon_alert(user, "[tool.declent_ru(NOMINATIVE)] не влезает!")
 		return ITEM_INTERACT_BLOCKING
 	if(istype(tool, /obj/item/reagent_containers/syringe))
 		if(syringes.len < max_syringes)
 			if(!user.transferItemToLoc(tool, src))
 				return ITEM_INTERACT_BLOCKING
-			balloon_alert(user, "[tool.name] loaded")
+			balloon_alert(user, "вставка [tool.declent_ru(GENITIVE)]")
 			syringes += tool
 			recharge_newshot()
 			update_appearance()
 			playsound(src, load_sound, 40)
 			return ITEM_INTERACT_SUCCESS
-		balloon_alert(user, "it's full!")
+		balloon_alert(user, "нет места!")
 		return ITEM_INTERACT_BLOCKING
 	return NONE
 
@@ -162,18 +162,18 @@
 	if(istype(tool, /obj/item/dnainjector))
 		var/obj/item/dnainjector/D = tool
 		if(D.used)
-			balloon_alert(user, "[D.name] is used up!")
+			balloon_alert(user, "внутри [D.declent_ru(GENITIVE)] пусто!")
 			return ITEM_INTERACT_BLOCKING
 		if(syringes.len < max_syringes)
 			if(!user.transferItemToLoc(D, src))
 				return ITEM_INTERACT_BLOCKING
-			balloon_alert(user, "[D.name] loaded")
+			balloon_alert(user, "вставка [D.declent_ru(GENITIVE)]")
 			syringes += D
 			recharge_newshot()
 			update_appearance()
 			playsound(loc, load_sound, 40)
 			return ITEM_INTERACT_SUCCESS
-		balloon_alert(user, "it's already full!")
+		balloon_alert(user, "нет места!")
 		return ITEM_INTERACT_BLOCKING
 	return NONE
 
@@ -198,7 +198,7 @@
 	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
 
 /obj/item/gun/syringe/blowgun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
-	visible_message(span_danger("[user] shoots the blowgun!"))
+	visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет из [declent_ru(GENITIVE)]!"))
 
 	user.adjustStaminaLoss(20, updating_stamina = FALSE)
 	user.adjustOxyLoss(20)

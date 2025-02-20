@@ -24,10 +24,18 @@
 #define FUGITIVE_RESULT_FUGITIVE_VICTORY 7
 #define FUGITIVE_RESULT_MAJOR_FUGITIVE 8
 
+// Wizard's contract school types
 #define APPRENTICE_DESTRUCTION "destruction"
 #define APPRENTICE_BLUESPACE "bluespace"
 #define APPRENTICE_ROBELESS "robeless"
 #define APPRENTICE_HEALING "healing"
+
+#define ALL_APPRENTICE_TYPES list( \
+	APPRENTICE_DESTRUCTION, \
+	APPRENTICE_BLUESPACE, \
+	APPRENTICE_ROBELESS, \
+	APPRENTICE_HEALING, \
+)
 
 //Pirates
 
@@ -78,16 +86,16 @@
 
 
 // Heretic path defines.
-#define PATH_START "Start Path"
-#define PATH_SIDE "Side Path"
-#define PATH_ASH "Ash Path"
-#define PATH_RUST "Rust Path"
-#define PATH_FLESH "Flesh Path"
-#define PATH_VOID "Void Path"
-#define PATH_BLADE "Blade Path"
-#define PATH_COSMIC "Cosmic Path"
-#define PATH_LOCK "Lock Path"
-#define PATH_MOON "Moon Path"
+#define PATH_START "Стартовый путь"
+#define PATH_SIDE "Вторичный путь"
+#define PATH_ASH "Путь пепла"
+#define PATH_RUST "Путь ржавчины"
+#define PATH_FLESH "Путь плоти"
+#define PATH_VOID "Путь пустоты"
+#define PATH_BLADE "Путь клинка"
+#define PATH_COSMIC "Путь космоса"
+#define PATH_LOCK "Путь замка"
+#define PATH_MOON "Путь луны"
 
 //Heretic knowledge tree defines
 #define HKT_NEXT "next"

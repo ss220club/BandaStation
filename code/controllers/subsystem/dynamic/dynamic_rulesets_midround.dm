@@ -230,7 +230,7 @@
 /datum/dynamic_ruleset/midround/from_living/autotraitor
 	name = "Syndicate Sleeper Agent"
 	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
-	antag_datum = /datum/antagonist/traitor/infiltrator/sleeper_agent
+	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_SLEEPER_AGENT
 	antag_flag_override = ROLE_TRAITOR
 	protected_roles = list(
@@ -268,7 +268,7 @@
 	var/mob/M = pick(candidates)
 	assigned += M
 	candidates -= M
-	var/datum/antagonist/traitor/infiltrator/sleeper_agent/newTraitor = new
+	var/datum/antagonist/traitor/newTraitor = new
 	M.mind.add_antag_datum(newTraitor)
 	message_admins("[ADMIN_LOOKUPFLW(M)] was selected by the [name] ruleset and has been made into a midround traitor.")
 	log_dynamic("[key_name(M)] was selected by the [name] ruleset and has been made into a midround traitor.")
@@ -327,7 +327,7 @@
 	new_malf_ai.mind.special_role = antag_flag
 	new_malf_ai.mind.add_antag_datum(malf_antag_datum)
 	if(prob(MALF_ION_PROB))
-		priority_announce("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert", ANNOUNCER_IONSTORM)
+		priority_announce("Вблизи станции обнаружен ионный шторм. Пожалуйста, проверьте все оборудование, управляемое ИИ, на наличие ошибок.", "Обнаружена аномалия", ANNOUNCER_IONSTORM)
 		if(prob(REPLACE_LAW_WITH_ION_PROB))
 			new_malf_ai.replace_random_law(generate_ion_law(), list(LAW_INHERENT, LAW_SUPPLIED, LAW_ION), LAW_ION)
 		else
@@ -621,7 +621,7 @@
 	playsound(S, 'sound/effects/magic/ethereal_exit.ogg', 50, TRUE, -1)
 	message_admins("[ADMIN_LOOKUPFLW(S)] has been made into a Space Dragon by the midround ruleset.")
 	log_dynamic("[key_name(S)] was spawned as a Space Dragon by the midround ruleset.")
-	priority_announce("A large organic energy flux has been recorded near of [station_name()], please stand-by.", "Lifesign Alert")
+	priority_announce("Зафиксирован большой поток органической энергии вблизи станции [station_name()]. Будьте наготове.", "Неопознанные формы жизни")
 	return S
 
 /datum/dynamic_ruleset/midround/from_ghosts/abductors
@@ -973,7 +973,7 @@
 	cost = 5
 	minimum_players = 40
 	repeatable = TRUE
-	signup_item_path = /obj/item/cosmic_skull
+	signup_item_path = /obj/item/clothing/head/helmet/skull/cosmic
 	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_VOIDWALKER_VOID)
 	/// The space turf we find in acceptable(), cached for ease
 	var/space_turf

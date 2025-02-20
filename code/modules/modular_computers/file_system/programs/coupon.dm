@@ -6,7 +6,7 @@
 	filename = "couponmaster"
 	filedesc = "Coupon Master"
 	downloader_category = PROGRAM_CATEGORY_SUPPLY
-	extended_desc = "Program for receiving discounts for several cargo goodies. After redeeming a coupon, hit a photocopier with your PDA to print it."
+	extended_desc = "Программа для получения скидок на несколько грузовых товаров. Погасив купон, нажмите на принтер с помощью КПК, чтобы распечатать его."
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
 	size = 5
 	tgui_id = "NtosCouponMaster"
@@ -88,7 +88,7 @@
  * Normally, modular PCs can be print paper already, but I find this additional step
  * to be less lazy and fitting to the "I gotta go print it before it expires" aspect of it.
  */
-/datum/computer_file/program/coupon/tap(atom/tapped_atom, mob/living/user, params)
+/datum/computer_file/program/coupon/tap(atom/tapped_atom, mob/living/user, list/modifiers)
 	if(!istype(tapped_atom, /obj/machinery/photocopier))
 		return FALSE
 	var/obj/item/card/id/user_id = computer.computer_id_slot

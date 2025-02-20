@@ -8,6 +8,7 @@
 #include "code/cargo/packs/livestock.dm"
 #include "code/cargo/packs/science.dm"
 #include "code/cargo/packs/security.dm"
+#include "code/blob.dm"
 #include "code/crew_manifest.dm"
 #include "code/dynamic.dm"
 #include "code/events.dm"
@@ -19,5 +20,6 @@
 #include "code/station_traits.dm"
 #include "code/supply_packs.dm"
 #include "code/wounds/cranial_fissure.dm"
+#include "code/_brain.dm"
 
 #include "code/~undefs.dm"

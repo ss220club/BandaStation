@@ -1,8 +1,8 @@
 // Realignment. It's like Fleshmend but solely for stamina damage and stuns. Sec meta
 /datum/action/cooldown/spell/realignment
 	name = "Realignment"
-	desc = "Realign yourself, rapidly regenerating stamina and reducing any stuns or knockdowns. \
-		You cannot attack while realigning. Can be casted multiple times in short succession, but each cast lengthens the cooldown."
+	desc = "Выровняйте себя, быстро восстанавливая стамину и уменьшая любые оглушения и сбивания с ног. \
+		Вы не можете атаковать во время выравнивания. Можно применять несколько раз подряд, но каждое применение удлиняет перезярядку."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/hud/implants.dmi'
@@ -24,7 +24,7 @@
 /datum/action/cooldown/spell/realignment/cast(mob/living/cast_on)
 	. = ..()
 	cast_on.apply_status_effect(/datum/status_effect/realignment)
-	to_chat(cast_on, span_notice("We begin to realign ourselves."))
+	to_chat(cast_on, span_notice("Мы начинаем выравнивать себя."))
 
 /datum/action/cooldown/spell/realignment/after_cast(atom/cast_on)
 	. = ..()
@@ -61,7 +61,7 @@
 	return span_notice("[owner.p_Theyre()] glowing a soft white.")
 
 /datum/status_effect/realignment/on_apply()
-	owner.add_traits(realignment_traits, id)
+	owner.add_traits(realignment_traits, TRAIT_STATUS_EFFECT(id))
 	owner.add_filter(id, 2, list("type" = "outline", "color" = "#d6e3e7", "size" = 2))
 	var/filter = owner.get_filter(id)
 	animate(filter, alpha = 127, time = 1 SECONDS, loop = -1)
@@ -69,7 +69,7 @@
 	return TRUE
 
 /datum/status_effect/realignment/on_remove()
-	owner.remove_traits(realignment_traits, id)
+	owner.remove_traits(realignment_traits, TRAIT_STATUS_EFFECT(id))
 	owner.remove_filter(id)
 
 /datum/status_effect/realignment/tick(seconds_between_ticks)
@@ -78,5 +78,5 @@
 
 /atom/movable/screen/alert/status_effect/realignment
 	name = "Realignment"
-	desc = "You're realignment yourself. You cannot attack, but are rapidly regenerating stamina."
+	desc = "Вы выравниваете себя. Вы не можете атаковать, но быстро восстанавливаете стамину."
 	icon_state = "realignment"

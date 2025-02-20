@@ -84,7 +84,7 @@
 
 /obj/item/hierophant_club/suicide_act(mob/living/user)
 	say("Xverwpsgexmrk...", forced = "hierophant club suicide")
-	user.visible_message(span_suicide("[user] holds [src] into the air! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] holds [src] into the air! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	new/obj/effect/temp_visual/hierophant/telegraph(get_turf(user))
 	playsound(user,'sound/machines/airlock/airlockopen.ogg', 75, TRUE)
 	user.visible_message(span_hierophant_warning("[user] fades out, leaving [user.p_their()] belongings behind!"))
@@ -249,6 +249,10 @@
 	icon_state = "vial"
 
 /obj/item/mayhem/attack_self(mob/user)
+	if(tgui_alert(user, "Breaking the bottle will cause nearby crewmembers to go into a murderous frenzy. Be sure you know what you are doing...","Break the bottle?",list("Break it!","DON'T")) != "Break it!")
+		return
+	if(QDELETED(src) || !user.is_holding(src) || user.incapacitated)
+		return
 	for(var/mob/living/carbon/human/target in range(7,user))
 		target.apply_status_effect(/datum/status_effect/mayhem)
 	to_chat(user, span_notice("You shatter the bottle!"))
@@ -919,7 +923,7 @@
 	. += span_notice("Transforming it immediately after an attack causes the next attack to come out faster.")
 
 /obj/item/melee/cleaving_saw/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is [HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) ? "closing [src] on [user.p_their()] neck" : "opening [src] into [user.p_their()] chest"]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is [HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) ? "closing [src] on [user.p_their()] neck" : "opening [src] into [user.p_their()] chest"]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	attack_self(user)
 	return BRUTELOSS
 

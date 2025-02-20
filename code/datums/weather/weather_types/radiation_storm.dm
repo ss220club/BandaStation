@@ -3,18 +3,18 @@
 	name = "radiation storm"
 	desc = "A cloud of intense radiation passes through the area dealing rad damage to those who are unprotected."
 
-	telegraph_duration = 400
-	telegraph_message = span_danger("The air begins to grow warm.")
+	telegraph_duration = 40 SECONDS
+	telegraph_message = span_danger("Воздух начинает нагреваться.")
 
-	weather_message = span_userdanger("<i>You feel waves of heat wash over you! Find shelter!</i>")
+	weather_message = span_userdanger("<i>Вы чувствуете, как вас окутывают волны тепла! Найдите убежище!</i>")
 	weather_overlay = "ash_storm"
-	weather_duration_lower = 600
-	weather_duration_upper = 1500
+	weather_duration_lower = 1 MINUTES
+	weather_duration_upper = 2.5 MINUTES
 	weather_color = "green"
 	weather_sound = 'sound/announcer/alarm/bloblarm.ogg'
 
-	end_duration = 100
-	end_message = span_notice("The air seems to be cooling off again.")
+	end_duration = 10 SECONDS
+	end_message = span_notice("Кажется, воздух снова остывает.")
 
 	area_type = /area
 	protected_areas = list(/area/station/maintenance, /area/station/ai_monitored/turret_protected/ai_upload, /area/station/ai_monitored/turret_protected/ai_upload_foyer,
@@ -60,7 +60,7 @@
 /datum/weather/rad_storm/end()
 	if(..())
 		return
-	priority_announce("The radiation threat has passed. Please return to your workplaces.", "Anomaly Alert")
+	priority_announce("Радиационная угроза миновала. Пожалуйста, вернитесь на свои рабочие места.", "Обнаружена аномалия")
 	status_alarm(FALSE)
 
 /datum/weather/rad_storm/proc/do_mutate(mob/living/carbon/human/mutant)

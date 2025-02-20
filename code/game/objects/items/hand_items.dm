@@ -94,7 +94,7 @@
 
 	if(HAS_TRAIT(owner, TRAIT_HULK))
 		owner.visible_message(span_danger("[owner] bops [sucker] with [owner.p_their()] [src.name] much harder than intended, sending [sucker.p_them()] flying!"), \
-			span_danger("You bop [sucker] with your [src.name] much harder than intended, sending [sucker.p_them()] flying!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), ignored_mobs=list(sucker))
+			span_danger("You bop [sucker] with your [src.name] much harder than intended, sending [sucker.p_them()] flying!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), ignored_mobs=list(sucker))
 		to_chat(sucker, span_userdanger("[owner] bops you incredibly hard with [owner.p_their()] [src.name], sending you flying!"))
 		sucker.apply_damage(50, STAMINA)
 		sucker.Knockdown(50)
@@ -480,14 +480,8 @@
 	return ranged_interact_with_atom(interacting_with, user, modifiers)
 
 /obj/item/hand_item/kisser/ranged_interact_with_atom(atom/target, mob/living/user, list/modifiers)
-	if(HAS_TRAIT(user, TRAIT_GARLIC_BREATH))
-		kiss_type = /obj/projectile/kiss/french
-
-	if(HAS_TRAIT(user, TRAIT_CHEF_KISS))
-		kiss_type = /obj/projectile/kiss/chef
-
 	var/obj/projectile/blown_kiss = new kiss_type(get_turf(user))
-	user.visible_message("<b>[user]</b> blows \a [blown_kiss] at [target]!", span_notice("You blow \a [blown_kiss] at [target]!"))
+	user.visible_message("<b>[capitalize(user.declent_ru(NOMINATIVE))]</b> отправляет [blown_kiss.declent_ru(ACCUSATIVE)] [target.declent_ru(DATIVE)]!", span_notice("Вы отправляете [blown_kiss.declent_ru(ACCUSATIVE)] [target.declent_ru(DATIVE)]!"))
 
 	//Shooting Code:
 	blown_kiss.original = target
@@ -545,6 +539,18 @@
 	color = COLOR_ALMOST_BLACK
 	kiss_type = /obj/projectile/kiss/ink
 
+/obj/item/hand_item/kisser/french
+	name = "french kiss"
+	desc = "You really should brush your teeth."
+	color = COLOR_GRAY
+	kiss_type = /obj/projectile/kiss/french
+
+/obj/item/hand_item/kisser/chef
+	name = "chef's kiss"
+	desc = "The secret ingridient is love. And opium, but mostly love."
+	color = COLOR_LIGHT_PINK
+	kiss_type = /obj/projectile/kiss/chef
+
 /obj/projectile/kiss
 	name = "kiss"
 	icon = 'icons/mob/simple/animal.dmi'
@@ -587,7 +593,7 @@
 /obj/projectile/kiss/proc/harmless_on_hit(mob/living/living_target)
 	playsound(get_turf(living_target), hitsound, 100, TRUE)
 	if(!suppressed)  // direct
-		living_target.visible_message(span_danger("[living_target] is hit by \a [src]."), span_userdanger("You're hit by \a [src]!"), vision_distance=COMBAT_MESSAGE_RANGE)
+		living_target.visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] попадает по [living_target.declent_ru(DATIVE)]."), span_userdanger("[capitalize(declent_ru(NOMINATIVE))] попадает по вам!"), vision_distance=COMBAT_MESSAGE_RANGE)
 
 	living_target.add_mob_memory(/datum/memory/kissed, deuteragonist = firer)
 	living_target.add_mood_event("kiss", /datum/mood_event/kiss, firer, suppressed)

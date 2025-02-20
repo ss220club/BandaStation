@@ -103,7 +103,7 @@
 	if (user.is_blind())
 		user.visible_message(span_suicide("[user] is putting [src] close to [user.p_their()] eyes and turning it on... but [user.p_theyre()] blind!"))
 		return SHAME
-	user.visible_message(span_suicide("[user] is putting [src] close to [user.p_their()] eyes and turning it on! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is putting [src] close to [user.p_their()] eyes and turning it on! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return FIRELOSS
 
 /obj/item/flashlight/proc/eye_examine(mob/living/carbon/human/M, mob/living/user)
@@ -792,11 +792,13 @@
 	/// The timer id powering our burning
 	var/timer_id = TIMER_ID_NULL
 
-/obj/item/flashlight/glowstick/Initialize(mapload, fuel_override = null)
+/obj/item/flashlight/glowstick/Initialize(mapload, fuel_override = null, fuel_type_override = null)
+	max_fuel = isnull(fuel_override) ? rand(20, 25) : fuel_override
+	if (fuel_type_override)
+		fuel_type = fuel_type_override
 	create_reagents(max_fuel + oxygen_added, DRAWABLE | INJECTABLE)
 	reagents.add_reagent(fuel_type, max_fuel)
 	. = ..()
-	max_fuel = isnull(fuel_override) ? rand(20, 25) : fuel_override
 	set_light_color(color)
 	AddComponent(/datum/component/edible,\
 		food_flags = FOOD_NO_EXAMINE,\
@@ -910,7 +912,7 @@
 	if(!eyes)
 		user.visible_message(span_suicide("[user] is trying to squirt [src]'s fluids into [user.p_their()] eyes... but [user.p_they()] don't have any!"))
 		return SHAME
-	user.visible_message(span_suicide("[user] is squirting [src]'s fluids into [user.p_their()] eyes! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is squirting [src]'s fluids into [user.p_their()] eyes! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	burn_loop(get_fuel())
 	return FIRELOSS
 

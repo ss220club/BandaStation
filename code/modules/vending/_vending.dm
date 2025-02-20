@@ -177,7 +177,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	///fontawesome icon name to use in to display the user's balance in the vendor UI
 	var/displayed_currency_icon = "coins"
 	///String of the used currency to display in the vendor UI
-	var/displayed_currency_name = " cr"
+	var/displayed_currency_name = " кр"
 	///Whether our age check is currently functional
 	var/age_restrictions = TRUE
 	/// How many credits does this vending machine have? 20% of all sales go to this pool, and are given freely when the machine is restocked, or successfully tilted. Lost on deconstruction.
@@ -214,9 +214,6 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 
 	///Name of lighting mask for the vending machine
 	var/light_mask
-
-	/// used for narcing on underages
-	var/obj/item/radio/sec_radio
 
 	//the path of the fish_source datum to use for the fishing_spot component
 	var/fish_source_path = /datum/fish_source/vending
@@ -286,9 +283,18 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 /obj/machinery/vending/Destroy()
 	QDEL_NULL(coin)
 	QDEL_NULL(bill)
-	QDEL_NULL(sec_radio)
 	GLOB.vending_machines_to_restock -= src
 	return ..()
+
+/obj/machinery/vending/vv_edit_var(vname, vval)
+	. = ..()
+	if (vname == NAMEOF(src, all_products_free))
+		if (all_products_free)
+			qdel(GetComponent(/datum/component/payment))
+			GLOB.vending_machines_to_restock -= src
+		else
+			AddComponent(/datum/component/payment, 0, SSeconomy.get_dep_account(payment_department), PAYMENT_VENDING)
+			GLOB.vending_machines_to_restock += src
 
 /obj/machinery/vending/can_speak(allow_mimes)
 	return is_operational && !shut_up && ..()
@@ -425,7 +431,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 
 		var/obj/item/temp = typepath
 		var/datum/data/vending_product/new_record = new /datum/data/vending_product()
-		new_record.name = initial(temp.name)
+		new_record.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
 		new_record.product_path = typepath
 		if(!start_empty)
 			new_record.amount = amount
@@ -453,8 +459,8 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 */
 /obj/machinery/vending/proc/build_inventories(start_empty)
 	build_inventory(products, product_records, product_categories, start_empty)
-	build_inventory(contraband, hidden_records, create_categories_from("Contraband", "mask", contraband), start_empty, premium = TRUE)
-	build_inventory(premium, coin_records, create_categories_from("Premium", "coins", premium), start_empty, premium = TRUE)
+	build_inventory(contraband, hidden_records, create_categories_from("Контрабанда", "mask", contraband), start_empty, premium = TRUE)
+	build_inventory(premium, coin_records, create_categories_from("Премиум", "coins", premium), start_empty, premium = TRUE)
 
 /**
  * Returns a list of data about the category
@@ -1239,7 +1245,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
  */
 /obj/machinery/vending/proc/collect_records_for_static_data(list/records, list/categories, premium)
 	var/static/list/default_category = list(
-		"name" = "Products",
+		"name" = "Товары",
 		"icon" = "cart-shopping",
 	)
 
@@ -1422,11 +1428,12 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 		if(age_restrictions && item_record.age_restricted && (!card_used.registered_age || card_used.registered_age < AGE_MINOR))
 			speak("You are not of legal age to purchase [item_record.name].")
 			if(!(usr in GLOB.narcd_underages))
-				if (isnull(sec_radio))
-					sec_radio = new (src)
-					sec_radio.set_listening(FALSE)
-				sec_radio.set_frequency(FREQ_SECURITY)
-				sec_radio.talk_into(src, "SECURITY ALERT: Underaged crewmember [usr] recorded attempting to purchase [item_record.name] in [get_area(src)]. Please watch for substance abuse.", FREQ_SECURITY)
+				aas_config_announce(/datum/aas_config_entry/vendomat_age_control, list(
+					"PERSON" = usr.name,
+					"LOCATION" = get_area_name(src),
+					"VENDOR" = name,
+					"PRODUCT" = item_record.name
+				), src, list(RADIO_CHANNEL_SECURITY))
 				GLOB.narcd_underages += usr
 			flick(icon_deny,src)
 			vend_ready = TRUE
@@ -1437,7 +1444,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 			return
 
 	if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)
-		var/vend_response = vend_reply || "Thank you for shopping with [src]!"
+		var/vend_response = vend_reply || "Благодарим за покупку в [declent_ru(INSTRUMENTAL)]!"
 		speak(vend_response)
 		purchase_message_cooldown = world.time + 5 SECONDS
 		//This is not the best practice, but it's safe enough here since the chances of two people using a machine with the same ref in 5 seconds is fuck low
@@ -1898,5 +1905,17 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	slogan_list = list("[GLOB.deity] says: It's your divine right to buy!")
 	add_filter("vending_outline", 9, list("type" = "outline", "color" = COLOR_VERY_SOFT_YELLOW))
 	add_filter("vending_rays", 10, list("type" = "rays", "size" = 35, "color" = COLOR_VIVID_YELLOW))
+
+/datum/aas_config_entry/vendomat_age_control
+	name = "Security Alert: Underaged Substance Abuse"
+	announcement_lines_map = list(
+		"Message" = "SECURITY ALERT: Underaged crewmember %PERSON recorded attempting to purchase %PRODUCT in %LOCATION by %VENDOR. Please watch for substance abuse."
+	)
+	vars_and_tooltips_map = list(
+		"PERSON" = "will be replaced with the name of the crewmember",
+		"PRODUCT" = "with the product, he attempted to purchase",
+		"LOCATION" = "with place of purchase",
+		"VENDOR" = "with the vending machine"
+	)
 
 #undef MAX_VENDING_INPUT_AMOUNT

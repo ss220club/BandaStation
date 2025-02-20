@@ -42,7 +42,7 @@
 /datum/round_event/stray_cargo/announce(fake)
 	if(fake)
 		impact_area = find_event_area()
-	priority_announce("Stray cargo pod detected on long-range scanners. Expected location of impact: [impact_area.name].", "Collision Alert")
+	priority_announce("Бродячая грузовая капсула обнаружена на сканерах дальнего действия. Ожидаемое место падения: [impact_area.name].", "Предупреждение о столкновении")
 
 /**
 * Tries to find a valid area, throws an error if none are found
@@ -166,7 +166,6 @@
 		"Nuke Op" = UPLINK_NUKE_OPS,
 		"Clown Op" = UPLINK_CLOWN_OPS,
 		"Lone Op" = UPLINK_LONE_OP,
-		"Infiltrator" = UPLINK_INFILTRATORS,
 		"Spy" = UPLINK_SPY
 		)
 	var/uplink_type = tgui_input_list(usr, "Choose uplink to draw items from.", "Choose uplink type.", possible_uplinks)

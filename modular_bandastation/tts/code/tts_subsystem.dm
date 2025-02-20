@@ -386,9 +386,9 @@ SUBSYSTEM_DEF(tts220)
 /datum/controller/subsystem/tts220/proc/output_tts(atom/speaker, mob/listener, filename2play, is_local = TRUE, preSFX = null, postSFX = null)
 	var/volume
 	if(findtext(filename2play, "radio"))
-		volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/sound_tts_volume_radio)
+		volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_radio)
 	else
-		volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/sound_tts_volume)
+		volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume)
 
 	if(!volume)
 		return

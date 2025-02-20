@@ -25,14 +25,14 @@
 	if(user.is_blind())
 		return SHAME
 	var/mob/living/living_user = user
-	user.visible_message(span_suicide("[user] looks through [src] and looks overwhelmed with the information! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] looks through [src] and looks overwhelmed with the information! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	if(living_user.get_organ_loss(ORGAN_SLOT_BRAIN) >= BRAIN_DAMAGE_SEVERE)
 		var/mob/thing = pick((/mob in view()) - user)
 		if(thing)
-			user.say("VALID MAN IS WANTER, ARREST HE!!")
+			user.say("ВАЛИД МЭН ХОЧЕТ, ЧТОБЫ ЕГО АРЕСТОВАЛИ!!")
 			user.pointed(thing)
 		else
-			user.say("WHY IS THERE A BAR ON MY HEAD?!!")
+			user.say("ПОЧЕМУ У МЕНЯ НАД ГОЛОВОЙ ПОЛОСА?!!")
 	return OXYLOSS
 
 /obj/item/clothing/glasses/hud/equipped(mob/living/user, slot)
@@ -89,8 +89,8 @@
 
 /obj/item/clothing/glasses/hud/health/night/science
 	name = "night vision medical science scanner HUD"
-	desc = "An clandestine medical science heads-up display that allows operatives to find \
-		dying captains and the perfect poison to finish them off in complete darkness."
+	desc = "A clandestine medical science heads-up display that allows operatives to find \
+		both dying captains and the perfect poison to finish them off, all in complete darkness."
 	clothing_traits = list(TRAIT_REAGENT_SCANNER, TRAIT_MEDICAL_HUD)
 	forced_glass_color = FALSE
 

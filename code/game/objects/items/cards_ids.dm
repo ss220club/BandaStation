@@ -36,7 +36,7 @@
 	var/honorific_title
 
 /obj/item/card/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins to swipe [user.p_their()] neck with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins to swipe [user.p_their()] neck with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/card/update_overlays()
@@ -920,20 +920,15 @@
 
 /// Re-generates the honorific title. Returns the compiled honorific_title value
 /obj/item/card/id/proc/update_honorific()
-	var/is_mononym = is_mononym(registered_name)
 	switch(honorific_position)
 		if(HONORIFIC_POSITION_FIRST)
 			honorific_title = "[chosen_honorific] [first_name(registered_name)]"
 		if(HONORIFIC_POSITION_LAST)
 			honorific_title = "[chosen_honorific] [last_name(registered_name)]"
 		if(HONORIFIC_POSITION_FIRST_FULL)
-			honorific_title = "[chosen_honorific] [first_name(registered_name)]"
-			if(!is_mononym)
-				honorific_title += " [last_name(registered_name)]"
+			honorific_title = "[chosen_honorific] [registered_name]"
 		if(HONORIFIC_POSITION_LAST_FULL)
-			if(!is_mononym)
-				honorific_title += "[first_name(registered_name)] "
-			honorific_title += "[last_name(registered_name)][chosen_honorific]"
+			honorific_title = "[registered_name][chosen_honorific]"
 	return honorific_title
 
 /// Returns the trim assignment name.
@@ -1206,7 +1201,7 @@
 /obj/item/card/id/advanced/update_overlays()
 	. = ..()
 
-	if(registered_name && registered_name != "Captain")
+	if(registered_name && registered_name != JOB_CAPTAIN_RU)
 		. += mutable_appearance(icon, assigned_icon_state)
 
 	var/trim_icon_file = trim_icon_override ? trim_icon_override : trim?.trim_icon
@@ -1290,13 +1285,13 @@
 /obj/item/card/id/advanced/gold/captains_spare
 	name = "captain's spare ID"
 	desc = "The spare ID of the High Lord himself."
-	registered_name = "Captain"
+	registered_name = JOB_CAPTAIN_RU
 	trim = /datum/id_trim/job/captain
 	registered_age = null
 
 /obj/item/card/id/advanced/gold/captains_spare/update_label() //so it doesn't change to Captain's ID card (Captain) on a sneeze
-	if(registered_name == "Captain")
-		name = "[initial(name)][(!assignment || assignment == "Captain") ? "" : " ([assignment])"]"
+	if(registered_name == JOB_CAPTAIN_RU)
+		name = "[initial(name)][(!assignment || assignment == JOB_CAPTAIN_RU) ? "" : " ([assignment])"]"
 		update_appearance(UPDATE_ICON)
 	else
 		..()
@@ -1467,7 +1462,7 @@
 /obj/item/card/id/advanced/prisoner/proc/set_sentence_time(mob/living/user, obj/item/card/id/our_card)
 	var/list/id_access = our_card.GetAccess()
 	if(!(ACCESS_BRIG in id_access))
-		balloon_alert(user, "access denied!")
+		balloon_alert(user, "в доступе отказано!")
 		return ITEM_INTERACT_BLOCKING
 	if(!user.is_holding(src))
 		to_chat(user, span_warning("You must be holding the ID to continue!"))
@@ -1593,9 +1588,9 @@
 		return ..()
 	balloon_alert(user, "flipped")
 	if(trim_assignment_override)
-		SSid_access.remove_trim_from_chameleon_card(src)
+		SSid_access.remove_trim_override(src)
 	else
-		SSid_access.apply_trim_to_chameleon_card(src, alt_trim)
+		SSid_access.apply_trim_override(src, alt_trim)
 	update_label()
 	update_appearance()
 
@@ -1811,7 +1806,7 @@
 	if(forged) //reset the ID if forged
 		registered_name = initial(registered_name)
 		assignment = initial(assignment)
-		SSid_access.remove_trim_from_chameleon_card(src)
+		SSid_access.remove_trim_override(src)
 		REMOVE_TRAIT(src, TRAIT_MAGNETIC_ID_CARD, CHAMELEON_ITEM_TRAIT)
 		user.log_message("reset \the [initial(name)] named \"[src]\" to default.", LOG_GAME)
 		update_label()
@@ -1866,7 +1861,7 @@
 
 	registered_name = input_name
 	if(selected_trim_path)
-		SSid_access.apply_trim_to_chameleon_card(src, trim_list[selected_trim_path])
+		SSid_access.apply_trim_override(src, trim_list[selected_trim_path])
 	if(target_occupation)
 		assignment = sanitize(target_occupation)
 	if(new_age)

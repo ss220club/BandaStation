@@ -6,7 +6,7 @@
 
 	circuit = /obj/item/circuitboard/machine/quantum_server
 	density = TRUE
-	desc = "A hulking computational machine designed to fabricate virtual domains."
+	desc = "Громоздкая вычислительная машина, предназначенная для создания виртуальных доменов."
 	icon = 'icons/obj/machines/bitrunning.dmi'
 	base_icon_state = "qserver"
 	icon_state = "qserver"
@@ -28,8 +28,6 @@
 	var/list/datum/weakref/spawned_threat_refs = list()
 	/// Scales loot with extra players
 	var/multiplayer_bonus = 1.1
-	///The radio the console can speak into
-	var/obj/item/radio/radio
 	/// The amount of points in the system, used to purchase maps
 	var/points = 0
 	/// Keeps track of the number of times someone has built a hololadder
@@ -54,11 +52,6 @@
 /obj/machinery/quantum_server/post_machine_initialize()
 	. = ..()
 
-	radio = new(src)
-	radio.keyslot = new /obj/item/encryptionkey/headset_cargo()
-	radio.set_listening(FALSE)
-	radio.recalculateChannels()
-
 	RegisterSignals(src, list(COMSIG_MACHINERY_BROKEN, COMSIG_MACHINERY_POWER_LOST), PROC_REF(on_broken))
 	RegisterSignal(src, COMSIG_QDELETING, PROC_REF(on_delete))
 
@@ -70,31 +63,30 @@
 	spawned_threat_refs.Cut()
 	QDEL_NULL(exit_turfs)
 	QDEL_NULL(generated_domain)
-	QDEL_NULL(radio)
 
 /obj/machinery/quantum_server/examine(mob/user)
 	. = ..()
 
-	. += span_infoplain("Can be resource intensive to run. Ensure adequate power supply.")
+	. += span_infoplain("Может требовать много ресурсов при работе. Обеспечьте достаточное энергоснабжение.")
 
 	var/upgraded = FALSE
 	if(capacitor_coefficient < 1)
-		. += span_infoplain("- Its coolant capacity reduces cooldown time by [(1 - capacitor_coefficient) * 100]%.")
+		. += span_infoplain("- Вместимость охладителя уменьшает время задержки на [(1 - capacitor_coefficient) * 100]%.")
 		upgraded = TRUE
 
 	if(servo_bonus > 0.2)
-		. += span_infoplain("- Its manipulation potential is increasing rewards by [servo_bonus]x.")
-		. += span_infoplain("- Injury from unsafe ejection reduced [servo_bonus * 100]%.")
+		. += span_infoplain("- Потенциал манипуляторов увеличивает награду на [servo_bonus]x.")
+		. += span_infoplain("- Повреждения, получаемые при небезопасном выходе, уменьшены на [servo_bonus * 100]%.")
 		upgraded = TRUE
 
 	if(!upgraded)
-		. += span_notice("Its output is suboptimal. Improved components will grant domain information, reduce cooldowns and increase rewards.")
+		. += span_notice("Его производительность неоптимальна. Улучшенные компоненты дадут информацию о домене, сократят время действия и увеличат награду.")
 
 	if(!is_ready)
-		. += span_notice("It is currently cooling down. Give it a few moments.")
+		. += span_notice("Сервер охлаждается, пожалуйста, ожидайте.")
 
 	if(isobserver(user) && (obj_flags & EMAGGED))
-		. += span_notice("Ominous warning lights are blinking red. This server has been tampered with.")
+		. += span_notice("Предупреждающие индикаторы зловеще мигают красным. Этот сервер подвергся вмешательству.")
 
 /obj/machinery/quantum_server/emag_act(mob/user, obj/item/card/emag/emag_card)
 	. = ..()
@@ -178,3 +170,10 @@
 	servo_bonus = servo_rating
 
 	return ..()
+
+/datum/aas_config_entry/bitrunning_QS_ready_announcement
+	name = "Cargo Alert: Bitrunning QS Ready"
+	general_tooltip = "Announces when the quantum server is ready to be used. No variables provided"
+	announcement_lines_map = list(
+		"Message" = "Quantum Server report: Thermal systems within operational parameters. Proceeding to domain configuration."
+	)

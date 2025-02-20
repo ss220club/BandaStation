@@ -1,5 +1,5 @@
 /obj/item
-	var/icon/worn_icon_species
+	var/list/worn_icon_species
 
 /obj/item/clothing/head/mod
 	worn_icon_species = list(

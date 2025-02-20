@@ -4,8 +4,8 @@
 	icon_state = "clothes"
 	icon_deny = "clothes-deny"
 	panel_type = "panel15"
-	product_slogans = "Dress for success!;Prepare to look swagalicious!;Look at all this swag!;Why leave style up to fate? Use the ClothesMate!"
-	vend_reply = "Thank you for using the ClothesMate!"
+	product_slogans = "Одежда для успеха!;Приготовьтесь выглядеть шикарно!;Только посмотрите на эту красоту!;Зачем оставлять стиль на произвол судьбы? Воспользуйтесь ClothesMate!"
+	vend_reply = "Благодарим за использование ClothesMate!"
 	product_categories = list(
 		list(
 			"name" = "Head",

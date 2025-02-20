@@ -76,7 +76,7 @@ GLOBAL_VAR(command_name)
 	if (GLOB.command_name)
 		return GLOB.command_name
 
-	var/name = "Central Command"
+	var/name = "Центральное Командование"
 
 	GLOB.command_name = name
 	return name

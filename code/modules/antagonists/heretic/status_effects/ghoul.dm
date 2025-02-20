@@ -36,12 +36,12 @@
 	. = ..()
 
 	if(master_mind)
-		linked_alert.desc += " You are an eldritch monster reanimated to serve its master, [master_mind]."
+		linked_alert.desc += " Вы мистический монстр, возрожденный, чтобы служить своему хозяину, [master_mind]."
 	if(isnum(new_max_health))
 		if(new_max_health > initial(new_owner.maxHealth))
-			linked_alert.desc += " You are stronger in this form."
+			linked_alert.desc += " В этой форме вы сильнее."
 		else
-			linked_alert.desc += " You are more fragile in this form."
+			linked_alert.desc += " В этой форме вы более хрупки."
 
 /datum/status_effect/ghoul/on_apply()
 	if(!ishuman(owner))
@@ -60,8 +60,8 @@
 		human_target.health = new_max_health
 
 	on_made_callback?.Invoke(human_target)
-	ADD_TRAIT(human_target, TRAIT_FAKEDEATH, REF(src))
-	human_target.become_husk(MAGIC_TRAIT)
+	ADD_TRAIT(human_target, TRAIT_FAKEDEATH, TRAIT_STATUS_EFFECT(id))
+	human_target.become_husk(TRAIT_STATUS_EFFECT(id))
 	human_target.faction |= FACTION_HERETIC
 
 	if(human_target.mind)
@@ -89,8 +89,8 @@
 		human_target.setMaxHealth(initial(human_target.maxHealth))
 
 	on_lost_callback?.Invoke(human_target)
-	REMOVE_TRAIT(human_target, TRAIT_FAKEDEATH, REF(src))
-	human_target.cure_husk(MAGIC_TRAIT)
+	REMOVE_TRAIT(human_target, TRAIT_FAKEDEATH, TRAIT_STATUS_EFFECT(id))
+	human_target.cure_husk(TRAIT_STATUS_EFFECT(id))
 	human_target.faction -= FACTION_HERETIC
 	human_target.mind?.remove_antag_datum(/datum/antagonist/heretic_monster)
 
@@ -100,5 +100,5 @@
 
 /atom/movable/screen/alert/status_effect/ghoul
 	name = "Flesh Servant"
-	desc = "You are a Ghoul!"
+	desc = "Вы гуль!"
 	icon_state = ALERT_MIND_CONTROL

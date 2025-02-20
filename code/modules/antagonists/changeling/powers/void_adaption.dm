@@ -1,9 +1,9 @@
 /datum/action/changeling/void_adaption
 	name = "Void Adaption"
-	desc = "We prepare our cells to resist the hostile environment outside of the station. We may freely travel wherever we wish."
-	helptext = "This ability is passive, and will automatically protect you in situations of extreme cold or vacuum, \
-		as well as removing your need to breathe. While it is actively protecting you from temperature or pressure \
-		it reduces your chemical regeneration rate."
+	desc = "Мы готовим наши клетки к противостоянию враждебной среде за пределами станции. Мы можем свободно перемещаться, куда пожелаем."
+	helptext = "Эта способность пассивна и автоматически защищает вас в условиях сильного холода или вакуума, \
+		а также лишает вас необходимости дышать. В то время как она активно защищает вас от температуры или давления, \
+		она снижает скорость химической регенерации."
 	owner_has_control = FALSE
 	dna_cost = 2
 
@@ -23,7 +23,7 @@
 	remove_from.remove_traits(gain_traits, REF(src))
 	UnregisterSignal(remove_from, COMSIG_LIVING_LIFE)
 	if (currently_active)
-		on_removed_adaption(remove_from, "Our cells relax, despite the danger!")
+		on_removed_adaption(remove_from, "Наши клетки расслабляются, несмотря на опасность!")
 	return ..()
 
 /// Checks if we would be providing any useful benefit at present
@@ -53,10 +53,10 @@
 		return
 
 	if (!should_be_active)
-		on_removed_adaption(void_adapted, "Our cells relax in safer air.")
+		on_removed_adaption(void_adapted, "Наши клетки отдыхают в безопасном воздухе.")
 		return
 	var/datum/antagonist/changeling/changeling_data = IS_CHANGELING(void_adapted)
-	to_chat(void_adapted, span_changeling("Our cells harden themselves against the [pick(active_reasons)]."))
+	to_chat(void_adapted, span_changeling("Наши клетки укрепляются против [pick(active_reasons)]."))
 	changeling_data?.chem_recharge_slowdown -= recharge_slowdown
 	currently_active = TRUE
 

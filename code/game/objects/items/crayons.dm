@@ -201,7 +201,7 @@
 	return isfloorturf(surface)
 
 /obj/item/toy/crayon/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is jamming [src] up [user.p_their()] nose and into [user.p_their()] brain. It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is jamming [src] up [user.p_their()] nose and into [user.p_their()] brain. Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	user.add_atom_colour(color_transition_filter(paint_color, SATURATION_OVERRIDE), ADMIN_COLOUR_PRIORITY)
 	return (BRUTELOSS|OXYLOSS)
 
@@ -508,7 +508,7 @@
 		clicky = clamp(text2num(LAZYACCESS(modifiers, ICON_Y)) - 16, -(ICON_SIZE_Y/2), ICON_SIZE_Y/2)
 
 	if(!instant)
-		to_chat(user, span_notice("You start drawing a [temp] on the [target.name]..."))
+		to_chat(user, span_notice("You start drawing a [temp] on \the [target]..."))
 
 	if(pre_noise)
 		audible_message(span_notice("You hear spraying."))
@@ -793,6 +793,7 @@
 	var/static/list/direct_color_types = typecacheof(list(
 		/obj/item/paper, // Uses color for TGUI backgrounds, doesn't look very good either
 		/obj/item/fish, // Used for aquarium sprites
+		/obj/structure/window, // Does not play nice with window tint
 	))
 
 /obj/item/toy/crayon/spraycan/Initialize(mapload)
@@ -840,11 +841,11 @@
 	var/used = min(charges_left, 10)
 	if(is_capped || !actually_paints || !use_charges(user, 10, FALSE))
 		user.visible_message(span_suicide("[user] shakes up [src] with a rattle and lifts it to [user.p_their()] mouth, but nothing happens!"))
-		user.say("MEDIOCRE!!", forced = "spraycan suicide")
+		user.say("БЕЗДАРНОСТЬ!!!", forced = "spraycan suicide")
 		return SHAME
 
 	user.visible_message(span_suicide("[user] shakes up [src] with a rattle and lifts it to [user.p_their()] mouth, spraying paint across [user.p_their()] teeth!"))
-	user.say("WITNESS ME!!", forced = "spraycan suicide")
+	user.say("ОСВИДЕТЕЛЬСТВУЙТЕ МЕНЯ!!!", forced = "spraycan suicide")
 	if(pre_noise || post_noise)
 		playsound(src, 'sound/effects/spray.ogg', 5, TRUE, 5)
 	if(can_change_colour)
@@ -899,6 +900,9 @@
 	if(iscarbon(target))
 		if(pre_noise || post_noise)
 			playsound(user.loc, 'sound/effects/spray.ogg', 25, TRUE, 5)
+
+		if(SEND_SIGNAL(target, COMSIG_CARBON_SPRAYPAINTED, user, src))
+			return ITEM_INTERACT_BLOCKING
 
 		var/mob/living/carbon/carbon_target = target
 		user.visible_message(span_danger("[user] sprays [src] into the face of [target]!"))

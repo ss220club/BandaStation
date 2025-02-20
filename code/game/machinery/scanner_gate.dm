@@ -39,7 +39,7 @@
 	///Base false positive/negative chance
 	var/base_false_beep = 5
 	///List of species that can be scanned by the gate. Supports adding more species' IDs during in-game.
-	var/list/available_species = list(
+	var/static/list/available_species = list(
 		SPECIES_HUMAN,
 		SPECIES_LIZARD,
 		SPECIES_FLYPERSON,
@@ -50,6 +50,31 @@
 		SPECIES_PODPERSON,
 		SPECIES_GOLEM,
 		SPECIES_ZOMBIE,
+	)
+	/// All scan modes available to the scanner
+	var/static/list/all_modes = list(
+		SCANGATE_NONE,
+		SCANGATE_MINDSHIELD,
+		SCANGATE_DISEASE,
+		SCANGATE_GUNS,
+		SCANGATE_WANTED,
+		SCANGATE_SPECIES,
+		SCANGATE_NUTRITION,
+	)
+	/// All disease severity thresholds available to the scanner
+	var/static/list/all_disease_thresholds = list(
+		DISEASE_SEVERITY_POSITIVE,
+		DISEASE_SEVERITY_NONTHREAT,
+		DISEASE_SEVERITY_MINOR,
+		DISEASE_SEVERITY_MEDIUM,
+		DISEASE_SEVERITY_HARMFUL,
+		DISEASE_SEVERITY_DANGEROUS,
+		DISEASE_SEVERITY_BIOHAZARD,
+	)
+	/// All nutrition levels available to the scanner
+	var/static/list/nutrition_modes = list(
+		"Starving",
+		"Obese",
 	)
 	/// Overlay object we're using for scanlines
 	var/obj/effect/overlay/scanline = null
@@ -157,20 +182,20 @@
 			return
 		if(SCANGATE_WANTED)
 			if(ishuman(thing))
-				detected_thing = "Warrant"
+				detected_thing = "ордер на задержание"
 				var/mob/living/carbon/human/scanned_human = thing
 				var/perpname = scanned_human.get_face_name(scanned_human.get_id_name())
 				var/datum/record/crew/target = find_record(perpname)
 				if(!target || (target.wanted_status == WANTED_ARREST))
 					beep = TRUE
 		if(SCANGATE_MINDSHIELD)
-			detected_thing = "Mindshield"
+			detected_thing = "имплант защиты разума"
 			if(ishuman(thing))
 				var/mob/living/carbon/human/scanned_human = thing
 				if(HAS_TRAIT(scanned_human, TRAIT_MINDSHIELD))
 					beep = TRUE
 		if(SCANGATE_DISEASE)
-			detected_thing = "[disease_threshold] infection"
+			detected_thing = "инфекцию уровня «[disease_threshold]»"
 			if(iscarbon(thing))
 				var/mob/living/carbon/scanned_carbon = thing
 				if(get_disease_severity_value(scanned_carbon.check_virus()) >= get_disease_severity_value(disease_threshold))
@@ -185,11 +210,11 @@
 				if(is_species(scanned_human, scan_species))
 					beep = TRUE
 				if(detect_species_id == SPECIES_ZOMBIE) //Can detect dormant zombies
-					detected_thing = "Romerol infection"
+					detected_thing = "вирус Ромерола"
 					if(scanned_human.get_organ_slot(ORGAN_SLOT_ZOMBIE))
 						beep = TRUE
 		if(SCANGATE_GUNS)
-			detected_thing = "Weapons"
+			detected_thing = "оружие"
 			if(isgun(thing))
 				beep = TRUE
 			else if(ishuman(thing))
@@ -212,10 +237,10 @@
 				var/mob/living/carbon/human/scanned_human = thing
 				if(scanned_human.nutrition <= detect_nutrition && detect_nutrition == NUTRITION_LEVEL_STARVING)
 					beep = TRUE
-					detected_thing = "Starvation"
+					detected_thing = "голодание"
 				if(scanned_human.nutrition >= detect_nutrition && detect_nutrition == NUTRITION_LEVEL_FAT)
 					beep = TRUE
-					detected_thing = "Obesity"
+					detected_thing = "ожирение"
 
 	if(reverse)
 		beep = !beep
@@ -233,7 +258,7 @@
 	else
 		SEND_SIGNAL(src, COMSIG_SCANGATE_PASS_NO_TRIGGER, thing)
 		if(bypassed)
-			say("[detected_thing] detection bypassed.")
+			say("Отмена сканирования на [detected_thing].")
 		if(!ignore_signals)
 			color = wires.get_color_of_wire(WIRE_DENY)
 			var/obj/item/assembly/assembly = wires.get_attached(color)
@@ -247,7 +272,7 @@
 		return
 
 	if(detected_thing)
-		say("[detected_thing][reverse ? " not " : " "]detected!!")
+		say("Сканирование[reverse ? " не " : " "]обнаружило [detected_thing]!")
 
 	COOLDOWN_START(src, next_beep, 2 SECONDS)
 	playsound(source = src, soundin = 'sound/machines/scanner/scanbuzz.ogg', vol = 30, vary = FALSE, extrarange = MEDIUM_RANGE_SOUND_EXTRARANGE, falloff_distance = 4)
@@ -292,6 +317,8 @@
 	switch(action)
 		if("set_mode")
 			var/new_mode = params["new_mode"]
+			if(!new_mode || !(new_mode in all_modes))
+				return
 			scangate_mode = new_mode
 			. = TRUE
 		if("toggle_reverse")
@@ -303,26 +330,25 @@
 			. = TRUE
 		if("set_disease_threshold")
 			var/new_threshold = params["new_threshold"]
+			if(!new_threshold || !(new_threshold in all_disease_thresholds))
+				return
 			disease_threshold = new_threshold
 			. = TRUE
 		if("set_target_species")
 			var/new_specie_id = params["new_species_id"]
-			if(!(new_specie_id in available_species))
+			if(!new_specie_id || !(new_specie_id in available_species))
 				return
 			detect_species_id = new_specie_id
 			. = TRUE
 		if("set_target_nutrition")
 			var/new_nutrition = params["new_nutrition"]
-			var/nutrition_list = list(
-				"Starving",
-				"Obese"
-			)
-			if(new_nutrition && (new_nutrition in nutrition_list))
-				switch(new_nutrition)
-					if("Starving")
-						detect_nutrition = NUTRITION_LEVEL_STARVING
-					if("Obese")
-						detect_nutrition = NUTRITION_LEVEL_FAT
+			if(!new_nutrition || !(new_nutrition in nutrition_modes))
+				return
+			switch(new_nutrition)
+				if("Starving")
+					detect_nutrition = NUTRITION_LEVEL_STARVING
+				if("Obese")
+					detect_nutrition = NUTRITION_LEVEL_FAT
 			. = TRUE
 
 /obj/machinery/scanner_gate/preset_guns

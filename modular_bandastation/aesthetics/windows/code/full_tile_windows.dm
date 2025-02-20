@@ -1,12 +1,15 @@
 #define WINDOW_COLOR "#99BBFF"
 #define PLASMA_WINDOW_COLOR "#C800FF"
 #define TINTED_WINDOW_COLOR "#5A6E82"
+#define EDGE_OVERLAY_COLOR "#4f4f4f"
 
 // MARK: Windows
 /obj/structure/window
 	layer = ABOVE_WINDOW_LAYER + 0.05
 	/// Used to define what file the edging sprite is contained within
 	var/edge_overlay_file
+	/// Used to define the color of the edging
+	var/edge_overlay_color = EDGE_OVERLAY_COLOR
 	/// Tracks the edging appearence sprite
 	var/mutable_appearance/edge_overlay
 
@@ -16,6 +19,7 @@
 		return
 
 	edge_overlay = mutable_appearance(edge_overlay_file, "edge-[smoothing_junction]", layer + 0.01, appearance_flags = RESET_COLOR|KEEP_APART)
+	edge_overlay.color = edge_overlay_color
 	. += edge_overlay
 
 /obj/structure/window/fulltile

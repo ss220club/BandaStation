@@ -352,7 +352,7 @@
 
 	if(isliving(talking_movable))
 		var/mob/living/talking_living = talking_movable
-		var/volume_modifier = (talking_living.client?.prefs.read_preference(/datum/preference/numeric/sound_radio_noise))
+		var/volume_modifier = (talking_living.client?.prefs.read_preference(/datum/preference/numeric/volume/sound_radio_noise))
 		if(radio_noise && talking_living.can_hear() && volume_modifier && !LAZYACCESS(message_mods, MODE_SEQUENTIAL) && COOLDOWN_FINISHED(src, audio_cooldown)) // BANDASTATION EDIT - Remove: signal.frequency != FREQ_COMMON
 			COOLDOWN_START(src, audio_cooldown, 0.5 SECONDS)
 			var/sound/radio_noise = sound('sound/items/radio/radio_talk.ogg', volume = volume_modifier)
@@ -435,8 +435,8 @@
 	// BANDASTATION REMOVAL - START
 	/**
 	var/mob/living/holder = loc
-	var/volume_modifier = (holder.client?.prefs.read_preference(/datum/preference/numeric/sound_radio_noise))
-	if(!radio_noise || HAS_TRAIT(holder, TRAIT_DEAF) || !holder.client?.prefs.read_preference(/datum/preference/numeric/sound_radio_noise))
+	var/volume_modifier = (holder.client?.prefs.read_preference(/datum/preference/numeric/volume/sound_radio_noise))
+	if(!radio_noise || HAS_TRAIT(holder, TRAIT_DEAF) || !holder.client?.prefs.read_preference(/datum/preference/numeric/volume/sound_radio_noise))
 		return
 	var/list/spans = data["spans"]
 	if(COOLDOWN_FINISHED(src, audio_cooldown))
@@ -529,13 +529,13 @@
 				. = TRUE
 
 /obj/item/radio/examine(mob/user)
-	. = ..()
+	. = ..() // translate
 	if (frequency && in_range(src, user))
-		. += span_notice("It is set to broadcast over the [span_radio("[frequency/10]")] frequency.")
+		. += span_notice("Передача настроена на частоту [span_radio("[frequency/10]")].")
 	if (unscrewed)
-		. += span_notice("It can be attached and modified.")
+		. += span_notice("Можно подсоединить или модифицировать.")
 	else
-		. += span_notice("It cannot be modified or attached.")
+		. += span_notice("Нельзя модифицировать или подсоединить.")
 
 /obj/item/radio/update_overlays()
 	. = ..()
@@ -573,7 +573,7 @@
 	addtimer(CALLBACK(src, PROC_REF(end_emp_effect), curremp), 20 SECONDS)
 
 /obj/item/radio/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] starts bouncing [src] off [user.p_their()] head! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] starts bouncing [src] off [user.p_their()] head! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/radio/proc/end_emp_effect(curremp)
@@ -693,7 +693,7 @@
 
 /obj/item/radio/entertainment/speakers/physical // Can be used as a physical item
 	name = "entertainment radio"
-	desc = "A portable one-way radio permamently tuned into entertainment frequency."
+	desc = "A portable one-way radio permanently tuned into entertainment frequency."
 	icon_state = "radio"
 	inhand_icon_state = "radio"
 	worn_icon_state = "radio"
