@@ -156,7 +156,7 @@
 	if(!message)
 		return
 	var/datum/preferences/prefs = listener?.client?.prefs
-	if(prefs?.read_preference(/datum/preference/choiced/sound_tts) != TTS_SOUND_ENABLED || prefs?.read_preference(/datum/preference/numeric/sound_tts_volume) == 0)
+	if(prefs?.read_preference(/datum/preference/choiced/sound_tts) != TTS_SOUND_ENABLED || prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume) == 0)
 		return
 	if(HAS_TRAIT(listener, TRAIT_DEAF))
 		return
