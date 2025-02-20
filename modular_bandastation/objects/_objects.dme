@@ -70,6 +70,12 @@
 #include "code/items/weapons/melee/centcom/rapier.dm"
 #include "code/items/weapons/ranged/energy/awaymission_gun.dm"
 #include "code/items/weapons/ranged/energy/eg_14.dm"
+#include "code/items/weapons/ranged/ballistic/wespe.dm"
+#include "code/items/weapons/ranged/ballistic/ammo_casings.dm"
+#include "code/items/weapons/ranged/ballistic/supply_packs.dm"
+#include "code/items/weapons/ranged/ballistic/magazines.dm"
+#include "code/items/weapons/ranged/ballistic/projectiles.dm"
+#include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
 
 #include "code/machinery/papershredder.dm"
 #include "code/machinery/photocopier.dm"
