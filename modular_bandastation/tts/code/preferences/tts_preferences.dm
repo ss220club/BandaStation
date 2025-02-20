@@ -11,7 +11,7 @@
 	target.dna.tts_seed_dna = seed
 	GLOB.human_to_tts["[target.real_name]"] = seed
 
-/datum/preference/numeric/sound_tts_volume_radio
+/datum/preference/numeric/volume/sound_tts_volume_radio
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
 	savefile_key = "sound_tts_volume_radio"
 	savefile_identifier = PREFERENCE_PLAYER
@@ -19,7 +19,7 @@
 	minimum = 0
 	maximum = 200
 
-/datum/preference/numeric/sound_tts_volume_radio/create_default_value()
+/datum/preference/numeric/volume/sound_tts_volume_radio/create_default_value()
 	return maximum / 2
 
 /mob/living/carbon/human/randomize_human_appearance(randomize_flags)
