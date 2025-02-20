@@ -1,6 +1,8 @@
 /datum/id_trim/job/explorer
 	assignment = JOB_EXPLORER
-	trim_state = "trim_explorer"
+	// trim_state = "trim_blueshield"
+ 	// trim_icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
+
 	department_color = COLOR_SERVICE_LIME
 	subdepartment_color = COLOR_SERVICE_LIME
 	sechud_icon_state = SECHUD_BITRUNNER // change
@@ -11,5 +13,4 @@
 		ACCESS_EXTERNAL_AIRLOCKS,
 		ACCESS_GATEWAY,
 	)
- 	// trim_icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
 	job = /datum/job/explorer

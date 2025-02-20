@@ -18,7 +18,7 @@
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "EXPLORER"
 
-	//plasmaman_outfit = /datum/outfit/plasmaman/explorer
+	plasmaman_outfit = /datum/outfit/plasmaman/explorer
 
 	paycheck = PAYCHECK_CREW
 	paycheck_department = ACCOUNT_CAR
@@ -28,7 +28,7 @@
 		/datum/job_department/cargo,
 	)
 
-	//family_heirlooms = list(/obj/item/bedsheet/captain, /obj/item/clothing/head/beret/blueshield)
+	family_heirlooms = list(/obj/item/flashlight/eyelight, /obj/item/multitool)
 
 	mail_goodies = list(
 		/obj/item/stack/spacecash/c500 = 3,

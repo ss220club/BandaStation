@@ -2,22 +2,16 @@
 	name = "Blueshield"
 
 	jobtype = /datum/job/explorer
-	uniform = /obj/item/clothing/under/color/red
+	uniform = /obj/item/clothing/under/color/blue
 	gloves = /obj/item/clothing/gloves/color/black
 	id_trim = /datum/id_trim/job/explorer
-	// shoes = /obj/item/clothing/shoes/jackboots
-	// ears = /obj/item/radio/headset/blueshield/alt
-	// glasses = /obj/item/clothing/glasses/hud/security/sunglasses
-	// implants = list(/obj/item/implant/mindshield)
+	ears = /obj/item/radio/headset/headset_cargo
 
 	backpack = /obj/item/storage/backpack/explorer
-	// backpack_contents = list(
-	// 	/obj/item/storage/box/deathimp
-	// )
 	satchel = /obj/item/storage/backpack/satchel/explorer
 	duffelbag = /obj/item/storage/backpack/duffelbag/explorer
 
-	head = /obj/item/clothing/head/caphat/beret_black
+	head = /obj/item/clothing/head/beret
 	box = /obj/item/storage/box/survival/mining
 	belt = /obj/item/modular_computer/pda
 
