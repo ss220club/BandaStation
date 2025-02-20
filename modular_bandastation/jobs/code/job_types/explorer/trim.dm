@@ -11,5 +11,5 @@
 		ACCESS_EXTERNAL_AIRLOCKS,
 		ACCESS_GATEWAY,
 	)
-// 	trim_icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
+ 	// trim_icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
 	job = /datum/job/explorer
