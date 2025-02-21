@@ -50,11 +50,6 @@
 /datum/round_event_control/antagonist/solo/brother/midround
 	name = "Blood Brothers (Admin spawn)"
 	earliest_start = 0 SECONDS
-	extra_spawned_events = list(
-		/datum/round_event_control/antagonist/solo/traitor/adds = 12,
-		/datum/round_event_control/antagonist/solo/heretic/adds = 10,
-		/datum/round_event_control/antagonist/solo/changeling/adds = 8,
-	)
 	weight = 0
 
 /datum/round_event/antagonist/solo/brother/add_datum_to_mind(datum/mind/antag_mind)
