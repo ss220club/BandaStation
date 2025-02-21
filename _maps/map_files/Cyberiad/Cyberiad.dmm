@@ -11743,12 +11743,6 @@
 /obj/effect/turf_decal/tile/purple,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
-"cMF" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/wood/large,
-/area/station/service/bar/atrium/ghetto)
 "cMI" = (
 /obj/structure/fermenting_barrel,
 /turf/open/floor/wood,
@@ -19159,6 +19153,9 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced/spawner/directional/west,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 8
+	},
 /turf/open/floor/engine,
 /area/station/medical/pharmacy)
 "ezi" = (
@@ -25669,14 +25666,6 @@
 /obj/effect/decal/cleanable/insectguts,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard/aft)
-"gdl" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron/dark,
-/area/station/medical/chemistry)
 "gdo" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -29014,7 +29003,9 @@
 /turf/open/floor/plating,
 /area/station/maintenance/disposal)
 "gSP" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 8
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "gTj" = (
@@ -37190,16 +37181,6 @@
 /obj/structure/steam_vent,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
-"iTS" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/tile/yellow/half/contrasted{
-	dir = 4
-	},
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 8
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/pharmacy)
 "iTU" = (
 /obj/machinery/plate_press,
 /obj/effect/turf_decal/tile/yellow/opposingcorners{
@@ -37933,6 +37914,12 @@
 /obj/machinery/light/directional/east,
 /turf/open/floor/wood/large,
 /area/station/commons/lounge)
+"jcp" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/wood/large,
+/area/station/service/bar/atrium/ghetto)
 "jct" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -38649,15 +38636,11 @@
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/fore/starboard)
 "jmp" = (
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
-	dir = 8
-	},
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
-/obj/structure/table/reinforced/rglass,
 /obj/item/reagent_containers/cup/beaker/large{
 	pixel_y = 6
 	},
@@ -38667,6 +38650,7 @@
 /obj/item/reagent_containers/dropper{
 	pixel_y = -1
 	},
+/obj/structure/table/reinforced/rglass,
 /turf/open/floor/engine,
 /area/station/medical/pharmacy)
 "jmq" = (
@@ -45648,9 +45632,6 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "kVI" = (
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
-	dir = 8
-	},
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 4
 	},
@@ -55664,7 +55645,7 @@
 	},
 /obj/machinery/door/window/left/directional/west{
 	name = "Chemistry Lab Access Hatch";
-	req_access = list("plumbing")в)
+	req_access = list("plumbing")
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
@@ -61839,6 +61820,11 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/break_room)
+"oMb" = (
+/obj/effect/turf_decal/stripes,
+/obj/structure/cable,
+/turf/open/floor/iron/smooth,
+/area/station/medical/chemistry)
 "oMe" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 9
@@ -66717,6 +66703,12 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/psychology)
+"pTp" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 8
+	},
+/turf/open/floor/iron/white,
+/area/station/medical/pharmacy)
 "pTr" = (
 /obj/machinery/light_switch/directional/west,
 /obj/machinery/camera/directional/south{
@@ -75998,9 +75990,6 @@
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
-"siJ" = (
-/turf/closed/wall,
-/area/station/maintenance/ghetto/bar)
 "siL" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -76440,6 +76429,14 @@
 	dir = 8
 	},
 /area/station/maintenance/ghetto/garden)
+"smZ" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/yellow/half/contrasted{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/medical/pharmacy)
 "snc" = (
 /obj/effect/landmark/start/scientist,
 /obj/effect/turf_decal/tile/purple/fourcorners,
@@ -76861,13 +76858,6 @@
 "srK" = (
 /turf/closed/wall/r_wall,
 /area/station/maintenance/starboard/fore)
-"srU" = (
-/obj/effect/turf_decal/trimline/yellow/filled/line{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry)
 "ssc" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -86922,6 +86912,13 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/science/research)
+"uWI" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/white,
+/area/station/medical/chemistry)
 "uWT" = (
 /obj/structure/chair/sofa/bench{
 	dir = 4
@@ -94098,6 +94095,14 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
+"wIJ" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/station/medical/chemistry)
 "wIM" = (
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 1
@@ -95311,11 +95316,6 @@
 /obj/structure/sign/poster/random/directional/north,
 /turf/open/floor/iron/small,
 /area/station/maintenance/ghetto/central)
-"wXV" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/stripes,
-/turf/open/floor/iron/smooth,
-/area/station/medical/chemistry)
 "wYe" = (
 /turf/open/floor/wood,
 /area/station/service/library)
@@ -95576,11 +95576,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/rd)
-"xbj" = (
-/obj/effect/turf_decal/stripes,
-/obj/structure/cable,
-/turf/open/floor/iron/smooth,
-/area/station/medical/chemistry)
 "xbk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
@@ -96898,6 +96893,11 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/station/security/courtroom)
+"xso" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/stripes,
+/turf/open/floor/iron/smooth,
+/area/station/medical/chemistry)
 "xss" = (
 /obj/structure/cable,
 /obj/effect/turf_decal/siding/wood{
@@ -134668,7 +134668,7 @@ lLg
 meZ
 iGT
 otm
-wXV
+xso
 bjt
 dYY
 dYY
@@ -134925,7 +134925,7 @@ iDV
 meZ
 iGT
 qiS
-wXV
+xso
 jKF
 fAj
 dYY
@@ -135182,8 +135182,8 @@ rtp
 meZ
 iGT
 dmp
-xbj
-srU
+oMb
+uWI
 dYY
 dYY
 dYY
@@ -135439,8 +135439,8 @@ rtp
 meZ
 iGT
 dsn
-xbj
-srU
+oMb
+uWI
 dYY
 dYY
 dYY
@@ -135697,7 +135697,7 @@ meZ
 iGT
 jlj
 iJG
-srU
+uWI
 dYY
 dYY
 dYY
@@ -135953,8 +135953,8 @@ bFj
 qvO
 iGT
 lYZ
-gdl
-srU
+wIJ
+uWI
 dYY
 tQi
 dYY
@@ -136211,7 +136211,7 @@ lCw
 iGT
 gme
 oZL
-srU
+uWI
 dYY
 dYY
 dYY
@@ -136462,13 +136462,13 @@ poo
 mVP
 mVP
 hRV
-cMF
-cMF
+jcp
+jcp
 cFb
 iGT
 bjA
 qEH
-srU
+uWI
 iiz
 dYY
 dYY
@@ -136724,7 +136724,7 @@ vcv
 iGK
 iGT
 euO
-gdl
+wIJ
 ldK
 rAT
 dYY
@@ -140062,7 +140062,7 @@ doz
 doz
 ceC
 txs
-siJ
+doz
 doz
 ipz
 ipz
@@ -140319,7 +140319,7 @@ doz
 doz
 ceC
 vbK
-siJ
+doz
 doz
 ipz
 nOk
@@ -140576,7 +140576,7 @@ doz
 vbK
 ceC
 vbK
-siJ
+doz
 doz
 hRA
 byE
@@ -140833,7 +140833,7 @@ doz
 vbK
 ceC
 vbK
-siJ
+doz
 doz
 hRA
 qTP
@@ -141090,7 +141090,7 @@ ceC
 ceC
 ceC
 vbK
-siJ
+doz
 doz
 hRA
 qTP
@@ -141347,7 +141347,7 @@ oFI
 ipz
 ceC
 vbK
-siJ
+doz
 doz
 ipz
 brP
@@ -141604,7 +141604,7 @@ qTP
 ipz
 ceC
 doz
-siJ
+doz
 doz
 ipz
 xmv
@@ -141861,7 +141861,7 @@ fHl
 ipz
 ipz
 doz
-siJ
+doz
 hRA
 hRA
 ipz
@@ -200461,7 +200461,7 @@ nke
 ckR
 igl
 fnp
-cTi
+pTp
 wtF
 qeB
 vSF
@@ -200718,8 +200718,8 @@ nke
 ckR
 igl
 qCV
-iTS
 hLS
+smZ
 ggD
 waA
 szv
