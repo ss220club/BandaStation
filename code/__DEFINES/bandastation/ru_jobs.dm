@@ -48,6 +48,7 @@
 #define JOB_CARGO_GORILLA_RU "Cargo Gorilla"
 #define JOB_SHAFT_MINER_RU "Шахтер"
 #define JOB_BITRUNNER_RU "Битраннер"
+#define JOB_EXPLORER_RU "Исследователь"
 //Service
 #define JOB_BARTENDER_RU "Бармен"
 #define JOB_BOTANIST_RU "Ботаник"

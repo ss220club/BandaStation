@@ -1,5 +1,5 @@
 /datum/outfit/job/explorer
-	name = "Blueshield"
+	name = "Explorer"
 
 	jobtype = /datum/job/explorer
 	uniform = /obj/item/clothing/under/color/blue
