@@ -222,9 +222,9 @@ export class Uplink extends Component<{}, UplinkState> {
             <Box>{item.desc}</Box>
             {(item.lock_other_purchases && (
               <NoticeBox mt={1}>
-                Taking this item will lock you from further purchasing from the
-                marketplace. Additionally, if you have already purchased an
-                item, you will not be able to purchase this.
+                Покупка этого предмета навсегда заблокирует возможность
+                дальнейших покупок. К тому же, если вы купили любой другой
+                предмет, то вы не сможете купить этот.
               </NoticeBox>
             )) ||
               null}
@@ -280,25 +280,26 @@ export class Uplink extends Component<{}, UplinkState> {
                         content={
                           <Box>
                             <Box>
-                              <Box>Your current level of threat.</Box> Threat
-                              determines what items you can purchase.&nbsp;
+                              <Box>Ваше текущее значение угрозы.</Box> Угроза
+                              определяет, какие предметы вы можете
+                              приобрести.&nbsp;
                               <Box mt={0.5}>
                                 {/* A minute in deciseconds */}
-                                Threat passively increases by{' '}
+                                Угроза пассивно увеличивается на{' '}
                                 <Box color="green" as="span">
                                   {calculateProgression(
                                     current_progression_scaling,
                                   )}
                                 </Box>
-                                &nbsp;every minute
+                                &nbsp;каждую минуту
                               </Box>
                               {Math.abs(progressionPercentage) > 0 && (
                                 <Box mt={0.5}>
-                                  Because your threat level is
+                                  Так как ваша угроза
                                   {progressionPercentage < 0
-                                    ? ' ahead '
-                                    : ' behind '}
-                                  of where it should be, you are getting
+                                    ? ' выше '
+                                    : ' ниже '}
+                                  той, на которой вы должны быть, вы получаете
                                   <Box
                                     as="span"
                                     color={
@@ -311,8 +312,10 @@ export class Uplink extends Component<{}, UplinkState> {
                                   >
                                     {progressionPercentage}%
                                   </Box>
-                                  {progressionPercentage < 0 ? 'less' : 'more'}{' '}
-                                  threat every minute
+                                  {progressionPercentage < 0
+                                    ? 'меньше'
+                                    : 'больше'}{' '}
+                                  угрозы каждую минуту
                                 </Box>
                               )}
                               {dangerLevelsTooltip}
@@ -338,7 +341,7 @@ export class Uplink extends Component<{}, UplinkState> {
                             selected={currentTab === 0}
                             onClick={() => this.setState({ currentTab: 0 })}
                           >
-                            Primary Objectives
+                            Основные задачи
                           </Tabs.Tab>
                         )}
                         <Tabs.Tab
@@ -351,7 +354,7 @@ export class Uplink extends Component<{}, UplinkState> {
                           selected={currentTab === 2}
                           onClick={() => this.setState({ currentTab: 2 })}
                         >
-                          Market
+                          Рынок
                         </Tabs.Tab>
                       </Tabs>
                     </Stack.Item>
@@ -367,7 +370,7 @@ export class Uplink extends Component<{}, UplinkState> {
                         px={2}
                         onClick={() => act('lock')}
                       >
-                        Lock
+                        Закрыть
                       </Button>
                     </Stack.Item>
                   )}
@@ -403,7 +406,7 @@ export class Uplink extends Component<{}, UplinkState> {
                         align={'top'}
                         as="span"
                       >
-                        SHOP LOCKED
+                        РЫНОК ЗАБЛОКИРОВАН
                       </Box>
                     </Dimmer>
                   )) ||

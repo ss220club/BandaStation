@@ -333,44 +333,44 @@
 
 /// Prints the users mood, sanity, and moodies to chat
 /datum/mood/proc/print_mood(mob/user)
-	var/msg = "[span_info("<EM>My current mental status:</EM>")]\n"
-	msg += span_notice("My current sanity: ") //Long term
+	var/msg = "[span_info("<EM>Мое текущее ментальное состояние:</EM>")]\n"
+	msg += span_notice("Мой текущий рассудок: ") //Long term
 	switch(sanity)
 		if(SANITY_GREAT to INFINITY)
-			msg += "[span_boldnicegreen("My mind feels like a temple!")]\n"
+			msg += "[span_boldnicegreen("Мой разум словно храм!")]\n"
 		if(SANITY_NEUTRAL to SANITY_GREAT)
-			msg += "[span_nicegreen("I have been feeling great lately!")]\n"
+			msg += "[span_nicegreen("Я чувствую себя прекрасно!")]\n"
 		if(SANITY_DISTURBED to SANITY_NEUTRAL)
-			msg += "[span_nicegreen("I have felt quite decent lately.")]\n"
+			msg += "[span_nicegreen("Я чувствую себя вполне прилично.")]\n"
 		if(SANITY_UNSTABLE to SANITY_DISTURBED)
-			msg += "[span_warning("I'm feeling a little bit unhinged...")]\n"
+			msg += "[span_warning("Я чувствую себя немного не в своей тарелке...")]\n"
 		if(SANITY_CRAZY to SANITY_UNSTABLE)
-			msg += "[span_warning("I'm freaking out!!")]\n"
+			msg += "[span_warning("Я схожу с ума!!")]\n"
 		if(SANITY_INSANE to SANITY_CRAZY)
-			msg += "[span_boldwarning("AHAHAHAHAHAHAHAHAHAH!!")]\n"
+			msg += "[span_boldwarning("АХАХАХАХАХАХАХАХАХАХ!!")]\n"
 
-	msg += span_notice("My current mood: ") //Short term
+	msg += span_notice("Мое текущее настроение: ") //Short term
 	switch(mood_level)
 		if(MOOD_LEVEL_SAD4)
-			msg += "[span_boldwarning("I wish I was dead!")]\n"
+			msg += "[span_boldwarning("Я хочу умереть!")]\n"
 		if(MOOD_LEVEL_SAD3)
-			msg += "[span_boldwarning("I feel terrible...")]\n"
+			msg += "[span_boldwarning("Я чувствую себя ужасно...")]\n"
 		if(MOOD_LEVEL_SAD2)
-			msg += "[span_boldwarning("I feel very upset.")]\n"
+			msg += "[span_boldwarning("Я чувствую себя расстроенно.")]\n"
 		if(MOOD_LEVEL_SAD1)
-			msg += "[span_warning("I'm a bit sad.")]\n"
+			msg += "[span_warning("Я немного грущу.")]\n"
 		if(MOOD_LEVEL_NEUTRAL)
-			msg += "[span_grey("I'm alright.")]\n"
+			msg += "[span_grey("Я в порядке.")]\n"
 		if(MOOD_LEVEL_HAPPY1)
-			msg += "[span_nicegreen("I feel pretty okay.")]\n"
+			msg += "[span_nicegreen("Я чувствую себя вполне нормально.")]\n"
 		if(MOOD_LEVEL_HAPPY2)
-			msg += "[span_boldnicegreen("I feel pretty good.")]\n"
+			msg += "[span_boldnicegreen("Я чувствую себя довольно хорошо.")]\n"
 		if(MOOD_LEVEL_HAPPY3)
-			msg += "[span_boldnicegreen("I feel amazing!")]\n"
+			msg += "[span_boldnicegreen("Я чувствую себя потрясающе!")]\n"
 		if(MOOD_LEVEL_HAPPY4)
-			msg += "[span_boldnicegreen("I love life!")]\n"
+			msg += "[span_boldnicegreen("Я обожаю жизнь!")]\n"
 
-	msg += "[span_notice("Moodlets:")]\n"//All moodlets
+	msg += "[span_notice("Модификаторы:")]\n"//All moodlets
 	if(mood_events.len)
 		for(var/category in mood_events)
 			var/datum/mood_event/event = mood_events[category]
@@ -388,7 +388,7 @@
 				if(MOOD_HAPPY2 to INFINITY)
 					msg += span_boldnicegreen(event.description + "\n")
 	else
-		msg += "[span_grey("I don't have much of a reaction to anything right now.")]\n"
+		msg += "[span_grey("Сейчас у меня нет особой реакции на что-либо.")]\n"
 	to_chat(user, boxed_message(msg))
 
 /// Updates the mob's moodies, if the area provides a mood bonus

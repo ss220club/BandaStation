@@ -394,8 +394,27 @@ There are several things that need to be remembered:
 			return
 
 		var/icon_file = 'icons/mob/clothing/head/default.dmi'
+		// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
+		var/list/icon_files_species = list(
+			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/head.dmi',
+		)
 
-		var/mutable_appearance/head_overlay = head.build_worn_icon(default_layer = HEAD_LAYER, default_icon_file = icon_file)
+		var/mutant_override = FALSE
+
+		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
+		if(worn_item.worn_icon_species?[bodypart_head.species_bodytype])
+			icon_file = worn_item.worn_icon_species[bodypart_head.species_bodytype]
+			mutant_override = TRUE
+		else if(bodypart_head.species_bodytype in icon_files_species)
+			icon_file = icon_files_species[bodypart_head.species_bodytype]
+			mutant_override = FALSE
+
+		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
+			icon_file = 'icons/mob/clothing/head/default.dmi'
+			mutant_override = FALSE
+
+		var/mutable_appearance/head_overlay = head.build_worn_icon(default_layer = HEAD_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null)
+		// BANDASTATION EDIT STOP - SPECIES CLOTHING ICONS
 		var/obj/item/bodypart/head/my_head = get_bodypart(BODY_ZONE_HEAD)
 		my_head?.worn_head_offset?.apply_offset(head_overlay)
 		overlays_standing[HEAD_LAYER] = head_overlay
@@ -447,8 +466,27 @@ There are several things that need to be remembered:
 			return
 
 		var/icon_file = DEFAULT_SUIT_FILE
+		// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
+		var/list/icon_files_species = list(
+			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/suit.dmi',
+		)
 
-		var/mutable_appearance/suit_overlay = wear_suit.build_worn_icon(default_layer = SUIT_LAYER, default_icon_file = icon_file)
+		var/mutant_override = FALSE
+
+		var/obj/item/bodypart/chest/bodypart_chest = src.get_bodypart(BODY_ZONE_CHEST)
+		if(worn_item.worn_icon_species?[bodypart_chest.species_bodytype])
+			icon_file = worn_item.worn_icon_species[bodypart_chest.species_bodytype]
+			mutant_override = TRUE
+		else if(bodypart_chest.species_bodytype in icon_files_species)
+			icon_file = icon_files_species[bodypart_chest.species_bodytype]
+			mutant_override = FALSE
+
+		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
+			icon_file = DEFAULT_SUIT_FILE
+			mutant_override = FALSE
+
+		var/mutable_appearance/suit_overlay = wear_suit.build_worn_icon(default_layer = SUIT_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null)
+		// BANDASTATION EDIT STOP - SPECIES CLOTHING ICONS
 		var/obj/item/bodypart/chest/my_chest = get_bodypart(BODY_ZONE_CHEST)
 		my_chest?.worn_suit_offset?.apply_offset(suit_overlay)
 		overlays_standing[SUIT_LAYER] = suit_overlay
@@ -499,13 +537,33 @@ There are several things that need to be remembered:
 			return
 
 		var/icon_file = 'icons/mob/clothing/mask.dmi'
+		var/list/icon_files_species = list(
+			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/mask.dmi',
+		)
 
-		var/mutable_appearance/mask_overlay = wear_mask.build_worn_icon(default_layer = FACEMASK_LAYER, default_icon_file = icon_file)
+		var/mutant_override = FALSE
+
+		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
+		if(worn_item.worn_icon_species?[bodypart_head.species_bodytype])
+			icon_file = worn_item.worn_icon_species[bodypart_head.species_bodytype]
+			mutant_override = TRUE
+		else if(bodypart_head.species_bodytype in icon_files_species)
+			icon_file = icon_files_species[bodypart_head.species_bodytype]
+			mutant_override = FALSE
+
+		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
+			icon_file = 'icons/mob/clothing/mask.dmi'
+			mutant_override = FALSE
+
+		var/mutable_appearance/mask_overlay = wear_mask.build_worn_icon(default_layer = FACEMASK_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null)
 		my_head.worn_mask_offset?.apply_offset(mask_overlay)
 		overlays_standing[FACEMASK_LAYER] = mask_overlay
 
 	apply_overlay(FACEMASK_LAYER)
 	check_body_shape(BODYSHAPE_SNOUTED, ITEM_SLOT_MASK)
+	// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
+	update_body_parts()
+	// BANDASTATION EDIT STOP - SPECIES CLOTHING ICONS
 
 /mob/living/carbon/human/update_worn_back(update_obscured = TRUE)
 	remove_overlay(BACK_LAYER)
