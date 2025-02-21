@@ -11743,6 +11743,12 @@
 /obj/effect/turf_decal/tile/purple,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
+"cMF" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/wood/large,
+/area/station/service/bar/atrium/ghetto)
 "cMI" = (
 /obj/structure/fermenting_barrel,
 /turf/open/floor/wood,
@@ -37914,12 +37920,6 @@
 /obj/machinery/light/directional/east,
 /turf/open/floor/wood/large,
 /area/station/commons/lounge)
-"jcp" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/wood/large,
-/area/station/service/bar/atrium/ghetto)
 "jct" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -52635,6 +52635,14 @@
 /obj/structure/chair/office/light,
 /turf/open/floor/iron/white,
 /area/station/medical/psychology)
+"mDA" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/yellow/half/contrasted{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/medical/pharmacy)
 "mDE" = (
 /obj/structure/table,
 /obj/item/storage/box/lights/mixed,
@@ -61820,11 +61828,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/break_room)
-"oMb" = (
-/obj/effect/turf_decal/stripes,
-/obj/structure/cable,
-/turf/open/floor/iron/smooth,
-/area/station/medical/chemistry)
 "oMe" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 9
@@ -61854,6 +61857,12 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
+"oMF" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 8
+	},
+/turf/open/floor/iron/white,
+/area/station/medical/pharmacy)
 "oMH" = (
 /turf/closed/wall/r_wall,
 /area/station/commons/storage/primary)
@@ -66704,11 +66713,9 @@
 /turf/open/floor/iron/white,
 /area/station/medical/psychology)
 "pTp" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 8
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/pharmacy)
+/obj/effect/turf_decal/trimline/dark/warning,
+/turf/open/floor/iron/checker,
+/area/station/service/bar/atrium/ghetto)
 "pTr" = (
 /obj/machinery/light_switch/directional/west,
 /obj/machinery/camera/directional/south{
@@ -72778,10 +72785,6 @@
 /obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/security/lockers)
-"rtp" = (
-/obj/effect/turf_decal/trimline/dark/warning,
-/turf/open/floor/iron/checker,
-/area/station/service/bar/atrium/ghetto)
 "rtr" = (
 /obj/machinery/light/directional/north,
 /obj/effect/turf_decal/tile/blue{
@@ -76429,14 +76432,6 @@
 	dir = 8
 	},
 /area/station/maintenance/ghetto/garden)
-"smZ" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/tile/yellow/half/contrasted{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron/white,
-/area/station/medical/pharmacy)
 "snc" = (
 /obj/effect/landmark/start/scientist,
 /obj/effect/turf_decal/tile/purple/fourcorners,
@@ -95316,6 +95311,11 @@
 /obj/structure/sign/poster/random/directional/north,
 /turf/open/floor/iron/small,
 /area/station/maintenance/ghetto/central)
+"wXV" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/stripes,
+/turf/open/floor/iron/smooth,
+/area/station/medical/chemistry)
 "wYe" = (
 /turf/open/floor/wood,
 /area/station/service/library)
@@ -95576,6 +95576,11 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/rd)
+"xbj" = (
+/obj/effect/turf_decal/stripes,
+/obj/structure/cable,
+/turf/open/floor/iron/smooth,
+/area/station/medical/chemistry)
 "xbk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
@@ -96893,11 +96898,6 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/station/security/courtroom)
-"xso" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/stripes,
-/turf/open/floor/iron/smooth,
-/area/station/medical/chemistry)
 "xss" = (
 /obj/structure/cable,
 /obj/effect/turf_decal/siding/wood{
@@ -134668,7 +134668,7 @@ lLg
 meZ
 iGT
 otm
-xso
+wXV
 bjt
 dYY
 dYY
@@ -134925,7 +134925,7 @@ iDV
 meZ
 iGT
 qiS
-xso
+wXV
 jKF
 fAj
 dYY
@@ -135178,11 +135178,11 @@ aPd
 mVP
 rqU
 fDv
-rtp
+pTp
 meZ
 iGT
 dmp
-oMb
+xbj
 uWI
 dYY
 dYY
@@ -135435,11 +135435,11 @@ eXU
 mVP
 kfU
 fDv
-rtp
+pTp
 meZ
 iGT
 dsn
-oMb
+xbj
 uWI
 dYY
 dYY
@@ -136462,8 +136462,8 @@ poo
 mVP
 mVP
 hRV
-jcp
-jcp
+cMF
+cMF
 cFb
 iGT
 bjA
@@ -142907,11 +142907,11 @@ vbK
 vbK
 doz
 doz
-ceC
 doz
-ipz
-qTP
-ipz
+doz
+doz
+doz
+doz
 ceC
 doz
 iYR
@@ -143164,11 +143164,11 @@ ceC
 ceC
 doz
 doz
-vbK
 doz
-ipz
-fHl
-ipz
+doz
+doz
+doz
+doz
 ceC
 ceC
 iYR
@@ -143423,9 +143423,9 @@ ceC
 doz
 doz
 doz
-vbK
-jEk
-vbK
+doz
+doz
+doz
 doz
 doz
 iYR
@@ -200461,7 +200461,7 @@ nke
 ckR
 igl
 fnp
-pTp
+oMF
 wtF
 qeB
 vSF
@@ -200719,7 +200719,7 @@ ckR
 igl
 qCV
 hLS
-smZ
+mDA
 ggD
 waA
 szv
