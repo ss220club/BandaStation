@@ -1006,6 +1006,7 @@
 		exposed_mob.visible_message(span_warning("[exposed_mob]'s body does not react..."))
 		return
 
+
 	if(iscarbon(exposed_mob) && !(methods & (INGEST|INHALE))) //simplemobs can still be splashed
 		return ..()
 

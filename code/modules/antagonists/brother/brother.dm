@@ -24,6 +24,12 @@
 	return team
 
 /datum/antagonist/brother/on_gain()
+	// BANDASTATION EDIT START - STORYTELLER - фикс ББ на отсутствие задач и команды
+	if(!team)
+		var/datum/team/brother_team/brother_team = new /datum/team/brother_team
+		brother_team.add_member(owner)
+		create_team(brother_team)
+	// BANDASTATION EDIT END - STORYTELLER - фикс ББ на отсутствие задач и команды
 	objectives += team.objectives
 	owner.special_role = special_role
 	finalize_brother()

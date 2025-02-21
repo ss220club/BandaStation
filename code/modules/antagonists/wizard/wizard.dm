@@ -122,7 +122,7 @@ GLOBAL_LIST_EMPTY(wizard_spellbook_purchases_by_key)
 
 /datum/antagonist/wizard/proc/send_to_lair()
 	// And now we ensure that its loaded
-	SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_WIZARDDEN)
+	// SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_WIZARDDEN) // BANDASTATION EDIT - STORYTELLER
 
 	if(!owner.current)
 		return

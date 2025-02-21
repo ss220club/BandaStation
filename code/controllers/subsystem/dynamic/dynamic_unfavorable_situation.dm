@@ -29,18 +29,25 @@
 		return list()
 
 	var/list/possible_heavies = list()
-	for (var/datum/dynamic_ruleset/midround/ruleset as anything in midround_rules)
+	// BANDASTATION EDIT START - STORYTELLER
+	var/list/generated_midround_rules = init_rulesets(/datum/dynamic_ruleset/midround)
+	for (var/datum/dynamic_ruleset/midround/ruleset as anything in generated_midround_rules)
+	// BANDASTATION EDIT END - STORYTELLER
 		if (ruleset.midround_ruleset_style != MIDROUND_RULESET_STYLE_HEAVY)
 			continue
 
 		if (ruleset.weight == 0)
 			continue
 
+		// BANDASTATION EDIT START - STORYTELLER
+		/*
 		if (ruleset.cost > max_threat_level)
 			continue
 
 		if (!ruleset.acceptable(GLOB.alive_player_list.len, threat_level))
 			continue
+		*/
+		// BANDASTATION EDIT END - STORYTELLER
 
 		if (ruleset.minimum_round_time > world.time - SSticker.round_start_time)
 			continue
