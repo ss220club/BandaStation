@@ -8,7 +8,7 @@
 	liked_foodtypes = RAW | MEAT | SEAFOOD
 	disliked_foodtypes =  FRUIT | NUTS | GROSS | GRAIN
 
-/obj/item/organ/tongue/vulpkanin/get_possible_languages()
+/obj/item/organ/tongue/get_possible_languages()
 	return ..() + /datum/language/canilunzt
 
 /obj/item/organ/tongue/vulpkanin/on_mob_insert(mob/living/carbon/owner)
