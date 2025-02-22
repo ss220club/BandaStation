@@ -39,45 +39,49 @@ GLOBAL_LIST_INIT(heavy_cavity_implants, typecacheof(list(/obj/item/transfer_valv
 			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает вставлять [tool.w_class > WEIGHT_CLASS_SMALL ? tool.declent_ru(ACCUSATIVE) : "что-то"] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]."),
 		)
 		display_pain(target, "Вы чувствуете, как что-то вставляют в вашу [ru_parse_zone(target_zone, declent = ACCUSATIVE)], это чертовски больно!")
-	else
-		display_results(
-			user,
-			target,
-			span_notice("Вы проверяете на наличие предметов в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
-			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] проверяет на наличие предметов в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
-			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] ищет что-то в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] [target.declent_ru(PREPOSITIONAL)]."),
-		)
+		return
+
+	display_results(
+		user,
+		target,
+		span_notice("Вы проверяете на наличие предметов в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] проверяет на наличие предметов в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] ищет что-то в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] [target.declent_ru(PREPOSITIONAL)]."),
+	)
 
 /datum/surgery_step/handle_cavity/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery = FALSE)
 	var/obj/item/bodypart/chest/target_chest = target.get_bodypart(BODY_ZONE_CHEST)
 	if(tool)
-		if(item_for_cavity || ((tool.w_class > WEIGHT_CLASS_NORMAL) && !is_type_in_typecache(tool, GLOB.heavy_cavity_implants)) || HAS_TRAIT(tool, TRAIT_NODROP) || isorgan(tool))
+		if(item_for_cavity || ((tool.w_class > WEIGHT_CLASS_NORMAL) && !is_type_in_typecache(tool, GLOB.heavy_cavity_implants)) || HAS_TRAIT(tool, TRAIT_NODROP) || (tool.item_flags & ABSTRACT) || isorgan(tool))
 			to_chat(user, span_warning("Кажется, вы не можете поместить [tool.declent_ru(ACCUSATIVE)] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"))
 			return FALSE
-		else
-			display_results(
-				user,
-				target,
-				span_notice("Вы помещаете [tool.declent_ru(ACCUSATIVE)] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]."),
-				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает [tool.declent_ru(ACCUSATIVE)] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"),
-				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает [tool.w_class > WEIGHT_CLASS_SMALL ? tool.declent_ru(ACCUSATIVE) : "что-то"] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]."),
-			)
-			user.transferItemToLoc(tool, target, TRUE)
-			target_chest.cavity_item = tool
-			return ..()
-	else
-		if(item_for_cavity)
-			display_results(
-				user,
-				target,
-				span_notice("Вы вытягиваете [item_for_cavity.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]."),
-				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вытягивает [item_for_cavity.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]!"),
-				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вытягивает [item_for_cavity.w_class > WEIGHT_CLASS_SMALL ? item_for_cavity.declent_ru(ACCUSATIVE) : "что-то"] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]."),
-			)
-			display_pain(target, "Что-то вытягивают из вашей [ru_parse_zone(target_zone, declent = GENITIVE)]! Это чертовски больно!")
-			user.put_in_hands(item_for_cavity)
-			target_chest.cavity_item = null
-			return ..()
-		else
-			to_chat(user, span_warning("Вы ничего не нашли в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."))
+
+		display_results(
+			user,
+			target,
+			span_notice("Вы помещаете [tool.declent_ru(ACCUSATIVE)] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает [tool.declent_ru(ACCUSATIVE)] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает [tool.w_class > WEIGHT_CLASS_SMALL ? tool.declent_ru(ACCUSATIVE) : "что-то"] в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]."),
+		)
+
+		if (!user.transferItemToLoc(tool, target, TRUE))
 			return FALSE
+
+		target_chest.cavity_item = tool
+		return ..()
+
+	if(!item_for_cavity)
+		to_chat(user, span_warning("Вы ничего не находите у [target.declent_ru(GENITIVE)] в [ru_parse_zone(target_zone, GENITIVE)]."))
+		return FALSE
+
+	display_results(
+		user,
+		target,
+		span_notice("Вы вытягиваете [item_for_cavity.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вытягивает [item_for_cavity.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вытягивает [item_for_cavity.w_class > WEIGHT_CLASS_SMALL ? item_for_cavity.declent_ru(ACCUSATIVE) : "что-то"] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]."),
+	)
+	display_pain(target, "Что-то вытягивают из вашей [ru_parse_zone(target_zone, declent = GENITIVE)]! Это чертовски больно!")
+	user.put_in_hands(item_for_cavity)
+	target_chest.cavity_item = null
+	return ..()
