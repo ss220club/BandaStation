@@ -35,18 +35,11 @@ export const sound_combatmode: FeatureToggle = {
   component: CheckboxInput,
 };
 
-export const sound_endofround: FeatureToggle = {
-  name: 'Включить звук конца раунда',
-  category: 'ЗВУК',
-  description: 'Играть звук, когда сервер начинает перезапуск.',
-  component: CheckboxInput,
-};
-
-export const sound_instruments: FeatureToggle = {
+export const sound_instruments: Feature<number> = {
   name: 'Включить звук музыкальных инструментов',
   category: 'ЗВУК',
   description: 'Играть звук музыкальных инструментов.',
-  component: CheckboxInput,
+  component: FeatureSliderInput,
 };
 
 export const sound_tts: FeatureChoiced = {
@@ -66,24 +59,17 @@ export const sound_tts_volume: Feature<number> = {
   component: FeatureSliderInput,
 };
 
-export const sound_jukebox: FeatureToggle = {
-  name: 'Включить звук музыкальных автоматов',
-  category: 'ЗВУК',
-  description: 'Играть звук музыкальных автоматов, диско-машин и тд.',
-  component: CheckboxInput,
-};
-
 export const sound_lobby_volume: Feature<number> = {
   name: 'Громкость музыки в лобби',
   category: 'ЗВУК',
   component: FeatureSliderInput,
 };
 
-export const sound_midi: FeatureToggle = {
-  name: 'Включить звук админской музыки',
+export const sound_midi: Feature<number> = {
+  name: 'Громкость админской музыки',
   category: 'ЗВУК',
-  description: 'Играть звук музыки, запускаемой администрацией.',
-  component: CheckboxInput,
+  description: 'Громкость музыки, запускаемой администрацией.',
+  component: FeatureSliderInput,
 };
 
 export const sound_ship_ambience_volume: Feature<number> = {
@@ -91,12 +77,6 @@ export const sound_ship_ambience_volume: Feature<number> = {
   category: 'ЗВУК',
   description: `Зацикленный звук окружения корабля (низкий гул).`,
   component: FeatureSliderInput,
-};
-
-export const sound_elevator: FeatureToggle = {
-  name: 'Включить музыку в лифтах',
-  category: 'ЗВУК',
-  component: CheckboxInput,
 };
 
 export const sound_achievement: FeatureChoiced = {
@@ -116,10 +96,9 @@ export const sound_radio_noise: Feature<number> = {
   component: FeatureSliderInput,
 };
 
-export const sound_ai_vox: FeatureToggle = {
-  name: 'Включить звук VOX ИИ',
+export const sound_ai_vox: Feature<number> = {
+  name: 'Громкость оповещения VOX ИИ',
   category: 'ЗВУК',
-  description:
-    'Слышать краткие озвученные сообщения от ИИ (также известные, как "VOX").',
-  component: CheckboxInput,
+  description: 'Громкость вокальных оповещений ИИ (также известных как "VOX").',
+  component: FeatureSliderInput,
 };

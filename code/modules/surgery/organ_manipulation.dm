@@ -183,9 +183,13 @@
 		preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
 		success_sound = 'sound/items/handling/surgery/organ2.ogg'
 		target_organ = tool
+		if(!target_organ.pre_surgical_insertion(user, target, target_zone, tool))
+			return SURGERY_STEP_FAIL
+
 		if(target_zone != target_organ.zone || target.get_organ_slot(target_organ.slot))
 			to_chat(user, span_warning("Здесь нет места для [target_organ.declent_ru(GENITIVE)] в [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"))
 			return SURGERY_STEP_FAIL
+
 		var/obj/item/organ/meatslab = tool
 		if(!meatslab.useable)
 			to_chat(user, span_warning("Кажется, что имеются повреждения у [target_organ.declent_ru(GENITIVE)], вы не сможете имплантировать это!"))
