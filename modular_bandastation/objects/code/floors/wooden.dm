@@ -8,86 +8,53 @@
 #define COLOR_GUAIACUM "#5C6250"
 
 /// Automatically generates all subtypes for a wooden floor with tiles.
-#define WOODEN_FLOOR_HELPER(path, tile)\
-##path/oak {\
-	color = COLOR_OAK;\
-	floor_tile = ##tile/oak;\
-}\
-##tile/oak {\
-	name = "oak floor tiles";\
-	singular_name = "oak floor tile";\
-	color = COLOR_OAK;\
-	turf_type = ##path/oak;\
-	merge_type = ##tile/oak;\
-}\
-##path/birch {\
-	color = COLOR_BIRCH;\
-	floor_tile = ##tile/birch;\
-}\
-##tile/birch {\
-	name = "birch floor tiles";\
-	singular_name = "birch floor tile";\
-	color = COLOR_BIRCH;\
-	turf_type = ##path/birch;\
-	merge_type = ##tile/birch;\
-}\
-##path/cherry {\
-	color = COLOR_CHERRY;\
-	floor_tile = ##tile/cherry;\
-}\
-##tile/cherry {\
-	name = "cherry floor tiles";\
-	singular_name = "cherry floor tile";\
-	color = COLOR_CHERRY;\
-	turf_type = ##path/cherry;\
-	merge_type = ##tile/cherry;\
-}\
-##path/amaranth {\
-	color = COLOR_AMARANTH;\
-	floor_tile = ##tile/amaranth;\
-}\
-##tile/amaranth {\
-	name = "amaranth floor tiles";\
-	singular_name = "amaranth floor tile";\
-	color = COLOR_AMARANTH;\
-	turf_type = ##path/amaranth;\
-	merge_type = ##tile/amaranth;\
-}\
-##path/ebonite {\
-	color = COLOR_EBONITE;\
-	floor_tile = ##tile/ebonite;\
-}\
-##tile/ebonite {\
-	name = "ebonite floor tiles";\
-	singular_name = "ebonite floor tile";\
-	color = COLOR_EBONITE;\
-	turf_type = ##path/ebonite;\
-	merge_type = ##tile/ebonite;\
-}\
-##path/pink_ivory {\
-	color = COLOR_PINK_IVORY;\
-	floor_tile = ##tile/pink_ivory;\
-}\
-##tile/pink_ivory {\
-	name = "pink ivory floor tiles";\
-	singular_name = "pink ivory floor tile";\
-	color = COLOR_PINK_IVORY;\
-	turf_type = ##path/pink_ivory;\
-	merge_type = ##tile/pink_ivory;\
-}\
-##path/guaiacum {\
-	color = COLOR_GUAIACUM;\
-	floor_tile = ##tile/guaiacum;\
-}\
-##tile/guaiacum {\
-	name = "guaiacum floor tiles";\
-	singular_name = "guaiacum floor tile";\
-	color = COLOR_GUAIACUM;\
-	turf_type = ##path/guaiacum;\
-	merge_type = ##tile/guaiacum;\
-}\
+#define WOODEN_FLOOR_HELPER(type, floor_name, floor_color)\
+/turf/open/floor/wood/##type {\
+	color = ##floor_color;\
+	floor_tile = /obj/item/stack/tile/wood/##type;\
+};\
+/obj/item/stack/tile/wood/##type {\
+	name = ##floor_name + " floor tiles";\
+	singular_name = ##floor_name + " floor tile";\
+	color = ##floor_color;\
+	turf_type = /turf/open/floor/wood/##type;\
+	merge_type = /obj/item/stack/tile/wood/##type;\
+};\
+/turf/open/floor/wood/large/##type {\
+	color = ##floor_color;\
+	floor_tile = /obj/item/stack/tile/wood/large/##type;\
+};\
+/obj/item/stack/tile/wood/large/##type {\
+	name = "large " + ##floor_name + " floor tiles";\
+	singular_name = "large " + ##floor_name + " floor tile";\
+	color = ##floor_color;\
+	turf_type = /turf/open/floor/wood/large/##type;\
+	merge_type = /obj/item/stack/tile/wood/large/##type;\
+};\
+/turf/open/floor/wood/parquet/##type {\
+	color = ##floor_color;\
+	floor_tile = /obj/item/stack/tile/wood/parquet/##type;\
+};\
+/obj/item/stack/tile/wood/parquet/##type {\
+	name = ##floor_name + " parquet floor tiles";\
+	singular_name = ##floor_name + " parquet floor tile";\
+	color = ##floor_color;\
+	turf_type = /turf/open/floor/wood/parquet/##type;\
+	merge_type = /obj/item/stack/tile/wood/parquet/##type;\
+};\
+/turf/open/floor/wood/tile/##type {\
+	color = ##floor_color;\
+	floor_tile = /obj/item/stack/tile/wood/tile/##type;\
+};\
+/obj/item/stack/tile/wood/tile/##type {\
+	name = "tiled " + ##floor_name + " parquet floor tiles";\
+	singular_name = "tiled " + ##floor_name + " parquet floor tile";\
+	color = ##floor_color;\
+	turf_type = /turf/open/floor/wood/tile/##type;\
+	merge_type = /obj/item/stack/tile/wood/tile/##type;\
+};\
 
-// Wood
+// MARK: Common Wood
 /obj/item/stack/tile/wood
 	icon = 'modular_bandastation/objects/icons/turf/wooden/tiles.dmi'
 	icon_state = "tile-wood"
@@ -107,64 +74,50 @@
 	. = ..()
 	add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
-WOODEN_FLOOR_HELPER(/turf/open/floor/wood, /obj/item/stack/tile/wood)
-
-// Fancy Wood
+// MARK: Fancy Wood
 /obj/item/stack/tile/wood/large
-	name = "fancy wood floor tiles"
-	singular_name = "fancy wood floor tile"
 	icon_state = "tile-wood-fancy"
 	color = COLOR_WOOD
-	turf_type = /turf/open/floor/wood/large
-	merge_type = /obj/item/stack/tile/wood/large
 
 /turf/open/floor/wood/large
 	icon_state = "wood_fancy"
 	color = COLOR_WOOD
-	floor_tile = /obj/item/stack/tile/wood/large
 
 /turf/open/floor/wood/large/broken_states()
 	return list("wood_fancy-broken", "wood_fancy-broken2", "wood_fancy-broken3")
 
-WOODEN_FLOOR_HELPER(/turf/open/floor/wood/large, /obj/item/stack/tile/wood/large)
-
-// Parquet
+// MARK: Parquet
 /obj/item/stack/tile/wood/parquet
-	name = "parquet floor tiles"
-	singular_name = "parquet floor tile"
 	icon_state = "tile-wood-parquet"
 	color = COLOR_WOOD
-	turf_type = /turf/open/floor/wood/parquet
-	merge_type = /obj/item/stack/tile/wood/parquet
 
 /turf/open/floor/wood/parquet
 	icon_state = "wood_parquet"
 	color = COLOR_WOOD
-	floor_tile = /obj/item/stack/tile/wood/parquet
 
 /turf/open/floor/wood/parquet/broken_states()
 	return list("wood_parquet-broken", "wood_parquet-broken2", "wood_parquet-broken3", "wood_parquet-broken4", "wood_parquet-broken5", "wood_parquet-broken6", "wood_parquet-broken7")
 
-WOODEN_FLOOR_HELPER(/turf/open/floor/wood/parquet, /obj/item/stack/tile/wood/parquet)
-
-// Tiled Parquet
+// MARK: Tiled Parquet
 /obj/item/stack/tile/wood/tile
-	name = "tiled parquet floor tiles"
-	singular_name = "tiled parquet floor tile"
 	icon_state = "tile-wood-tile"
 	color = COLOR_WOOD
-	turf_type = /turf/open/floor/wood/tile
-	merge_type = /obj/item/stack/tile/wood/tile
 
 /turf/open/floor/wood/tile
 	icon_state = "wood_tile"
 	color = COLOR_WOOD
-	floor_tile = /obj/item/stack/tile/wood/tile
 
 /turf/open/floor/wood/tile/broken_states()
 	return list("wood_tile-broken", "wood_tile-broken2", "wood_tile-broken3")
 
-WOODEN_FLOOR_HELPER(/turf/open/floor/wood/tile, /obj/item/stack/tile/wood/tile)
+// MARK: Unique colors
+WOODEN_FLOOR_HELPER(oak, "oak", COLOR_OAK)
+WOODEN_FLOOR_HELPER(birch, "birch", COLOR_BIRCH)
+WOODEN_FLOOR_HELPER(cherry, "cherry", COLOR_CHERRY)
+WOODEN_FLOOR_HELPER(amaranth, "amaranth", COLOR_AMARANTH)
+WOODEN_FLOOR_HELPER(ebonite, "ebonite", COLOR_EBONITE)
+WOODEN_FLOOR_HELPER(pink_ivory, "pink ivory", COLOR_PINK_IVORY)
+WOODEN_FLOOR_HELPER(guaiacum, "guaiacum", COLOR_GUAIACUM)
 
 #undef COLOR_WOOD
 #undef COLOR_OAK
