@@ -34,6 +34,9 @@
         "Blueshield": {
             "spawn_positions": 1
         },
+		"Explorer": {
+            "spawn_positions": 4
+        },
         "Magistrate": {
             "spawn_positions": 1
         }
