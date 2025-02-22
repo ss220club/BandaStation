@@ -24,7 +24,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 	var/inquisitor_slots = 0
 
 /datum/ert_manager/ui_state(mob/user)
-	return GLOB.admin_state
+	return ADMIN_STATE(R_ADMIN)
 
 /datum/ert_manager/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
