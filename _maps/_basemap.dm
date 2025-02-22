@@ -14,6 +14,9 @@
 		#include "map_files\tramstation\tramstation.dmm"
 		#include "map_files\NebulaStation\NebulaStation.dmm"
 		#include "map_files\wawastation\wawastation.dmm"
+		// BANDASTATION - ADDITION STAT
+		#include "map_files\Cyberiad\Cyberiad.dmm"
+		// BANDASTATION - ADDITION END
 
 		#ifdef CIBUILDING
 			#include "templates.dm"

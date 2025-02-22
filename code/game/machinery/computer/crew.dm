@@ -241,7 +241,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 		if (id_card)
 			entry["name"] = id_card.registered_name
 			entry["assignment"] = id_card.assignment
-			var/trim_assignment = id_card.get_trim_assignment()
+			var/trim_assignment = job_title_ru_to_en(id_card.get_trim_assignment())
 			if (jobs[trim_assignment] != null)
 				entry["ijob"] = jobs[trim_assignment]
 

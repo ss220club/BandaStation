@@ -1,9 +1,9 @@
 /datum/quirk/claustrophobia
 	name = "Claustrophobia"
-	desc = "You are terrified of small spaces and certain jolly figures. If you are placed inside any container, locker, or machinery, a panic attack sets in and you struggle to breathe."
+	desc = "Вы боитесь маленьких пространств и некоторых праздничных персонажей. Если вы оказываетесь внутри какого-либо контейнера, шкафчика или механизма, у вас начинается приступ паники и вам становится труднее дышать."
 	icon = FA_ICON_BOX_OPEN
 	value = -4
-	medical_record_text = "Patient demonstrates a fear of tight spaces."
+	medical_record_text = "Пациент испытывает страх в замкнутых пространствах."
 	hardcore_value = 5
 	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_PROCESSES
 	mail_goodies = list(/obj/item/reagent_containers/syringe/convermol) // to help breathing
@@ -29,9 +29,9 @@
 	quirk_holder.losebreath += 0.25 // miss a breath one in four times
 	if(SPT_PROB(25, seconds_per_tick))
 		if(nick_spotted)
-			to_chat(quirk_holder, span_warning("Santa Claus is here! I gotta get out of here!"))
+			to_chat(quirk_holder, span_warning("Дед Мороз пришел за мной! Надо сваливать!"))
 		else
-			to_chat(quirk_holder, span_warning("You feel trapped!  Must escape... can't breathe..."))
+			to_chat(quirk_holder, span_warning("Вы оказались в ловушке! Нужно выбираться... не могу дышать..."))
 
 ///investigates whether possible_saint_nick possesses a high level of christmas cheer
 /datum/quirk/claustrophobia/proc/evaluate_jolly_levels(mob/living/carbon/human/possible_saint_nick)

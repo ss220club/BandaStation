@@ -56,4 +56,7 @@ export const JOB2ICON = {
   'Veteran Security Advisor': 'ribbon',
   'Pun Pun': 'paw',
   Warden: 'handcuffs',
+  Blueshield: 'shield',
+  'Nanotrasen Representative': 'user-tie',
+  Magistrate: 'scale-balanced',
 } as const;

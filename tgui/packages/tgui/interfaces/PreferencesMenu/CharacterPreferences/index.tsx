@@ -11,6 +11,7 @@ import { LoadoutPage } from './loadout';
 import { MainPage } from './MainPage';
 import { QuirksPage } from './QuirksPage';
 import { SpeciesPage } from './SpeciesPage';
+import { VoicePage } from './VoicePage'; // BANDASTATION ADD - TTS
 
 enum Page {
   Antags,
@@ -19,6 +20,7 @@ enum Page {
   Species,
   Quirks,
   Loadout,
+  Voice, // BANDASTATION EDIT ADD - TTS
 }
 
 type ProfileProps = {
@@ -41,7 +43,7 @@ function CharacterProfiles(props: ProfileProps) {
             }}
             fluid
           >
-            {profile ?? 'New Character'}
+            {profile ?? 'Новый персонаж'}
           </Button>
         </Stack.Item>
       ))}
@@ -83,6 +85,12 @@ export function CharacterPreferenceWindow(props) {
       pageContents = <LoadoutPage />;
       break;
 
+    // BANDASTATION ADDITION START - TTS
+    case Page.Voice:
+      pageContents = <VoicePage />;
+      break;
+    // BANDASTATION ADDITION END - TTS
+
     default:
       exhaustiveCheck(currentPage);
   }
@@ -102,7 +110,7 @@ export function CharacterPreferenceWindow(props) {
       </Stack.Item>
       {!data.content_unlocked && (
         <Stack.Item align="center">
-          Buy BYOND premium for more slots!
+          Купите BYOND премиум, чтобы открыть больше слотов!
         </Stack.Item>
       )}
       <Stack.Divider />
@@ -115,7 +123,7 @@ export function CharacterPreferenceWindow(props) {
               setPage={setCurrentPage}
               otherActivePages={[Page.Species]}
             >
-              Character
+              Персонаж
             </PageButton>
           </Stack.Item>
 
@@ -125,7 +133,7 @@ export function CharacterPreferenceWindow(props) {
               page={Page.Loadout}
               setPage={setCurrentPage}
             >
-              Loadout
+              Снаряжение
             </PageButton>
           </Stack.Item>
 
@@ -139,7 +147,7 @@ export function CharacterPreferenceWindow(props) {
                     Fun fact: This isn't "Jobs" so that it intentionally
                     catches your eyes, because it's really important!
                   */}
-              Occupations
+              Должности
             </PageButton>
           </Stack.Item>
 
@@ -149,7 +157,7 @@ export function CharacterPreferenceWindow(props) {
               page={Page.Antags}
               setPage={setCurrentPage}
             >
-              Antagonists
+              Антагонисты
             </PageButton>
           </Stack.Item>
 
@@ -159,13 +167,25 @@ export function CharacterPreferenceWindow(props) {
               page={Page.Quirks}
               setPage={setCurrentPage}
             >
-              Quirks
+              Черты
             </PageButton>
           </Stack.Item>
+
+          {Boolean(data.tts_enabled) && (
+            <Stack.Item grow>
+              <PageButton
+                currentPage={currentPage}
+                page={Page.Voice}
+                setPage={setCurrentPage}
+              >
+                Голос
+              </PageButton>
+            </Stack.Item>
+          )}
         </Stack>
       </Stack.Item>
       <Stack.Divider />
-      <Stack.Item>{pageContents}</Stack.Item>
+      <Stack.Item grow>{pageContents}</Stack.Item>
     </Stack>
   );
 }
