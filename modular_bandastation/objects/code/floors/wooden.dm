@@ -36,6 +36,12 @@
 	color = ##floor_color;\
 	turf_type = /turf/open/floor/wood/large/##type;\
 	merge_type = /obj/item/stack/tile/wood/large/##type;\
+	tile_reskin_types = list(\
+		/obj/item/stack/tile/wood/##type,\
+		/obj/item/stack/tile/wood/large/##type,\
+		/obj/item/stack/tile/wood/parquet/##type,\
+		/obj/item/stack/tile/wood/tile/##type,\
+	);\
 };\
 /turf/open/floor/wood/parquet/##type {\
 	color = ##floor_color;\
@@ -47,6 +53,12 @@
 	color = ##floor_color;\
 	turf_type = /turf/open/floor/wood/parquet/##type;\
 	merge_type = /obj/item/stack/tile/wood/parquet/##type;\
+	tile_reskin_types = list(\
+		/obj/item/stack/tile/wood/##type,\
+		/obj/item/stack/tile/wood/large/##type,\
+		/obj/item/stack/tile/wood/parquet/##type,\
+		/obj/item/stack/tile/wood/tile/##type,\
+	);\
 };\
 /turf/open/floor/wood/tile/##type {\
 	color = ##floor_color;\
@@ -58,6 +70,12 @@
 	color = ##floor_color;\
 	turf_type = /turf/open/floor/wood/tile/##type;\
 	merge_type = /obj/item/stack/tile/wood/tile/##type;\
+	tile_reskin_types = list(\
+		/obj/item/stack/tile/wood/##type,\
+		/obj/item/stack/tile/wood/large/##type,\
+		/obj/item/stack/tile/wood/parquet/##type,\
+		/obj/item/stack/tile/wood/tile/##type,\
+	);\
 };\
 
 // MARK: Common Wood
