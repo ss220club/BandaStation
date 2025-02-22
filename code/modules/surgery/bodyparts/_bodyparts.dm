@@ -958,13 +958,17 @@
 		species_color = ""
 
 	update_draw_color()
-
-	// Recolors mutant overlays to match new mutant colors
-	for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
-		overlay.inherit_color(src, force = TRUE)
-	// Ensures marking overlays are updated accordingly as well
-	for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
-		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], species_color)
+// BANDASTATION EDIT START
+	recolor_bodypart_overlays()
+// BANDASTATION EDIT END
+// BANDASTATION REMOVAL START
+	// // Recolors mutant overlays to match new mutant colors
+	// for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
+	// 	overlay.inherit_color(src, force = TRUE)
+	// // Ensures marking overlays are updated accordingly as well
+	// for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
+	// 	marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], species_color)
+// BANDASTATION REMOVAL END
 
 	return TRUE
 
@@ -1327,6 +1331,13 @@
 	if(current_gauze.absorption_capacity <= 0)
 		owner.visible_message(span_danger("\The [current_gauze.name] on [owner]'s [name] falls away in rags."), span_warning("\The [current_gauze.name] on your [name] falls away in rags."), vision_distance=COMBAT_MESSAGE_RANGE)
 		QDEL_NULL(current_gauze)
+
+// BANDASTATION EDIT START
+///Loops through all of the bodypart's external organs and update's their color.
+/obj/item/bodypart/proc/recolor_bodypart_overlays()
+	for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
+		overlay.inherit_color(src, force = TRUE)
+// BANDASTATION EDIT END
 
 ///A multi-purpose setter for all things immediately important to the icon and iconstate of the limb.
 /obj/item/bodypart/proc/change_appearance(icon, id, greyscale, dimorphic)
