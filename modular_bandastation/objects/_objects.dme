@@ -2,8 +2,6 @@
 
 #include "code/shuttles.dm"
 
-#include "code/components/components.dm"
-
 #include "code/effects/decal.dm"
 #include "code/effects/spawners.dm"
 #include "code/effects/turf_decal.dm"

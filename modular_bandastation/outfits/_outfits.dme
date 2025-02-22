@@ -3,6 +3,6 @@
 #include "code/centcom.dm"
 #include "code/lawyer.dm"
 #include "code/magistrate.dm"
+#include "code/mind.dm"
 #include "code/nanotrasen_representative.dm"
 #include "code/syndicate.dm"
-#include "code/mind.dm"
