@@ -14007,12 +14007,29 @@
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port)
 "eut" = (
-/obj/structure/window/reinforced/spawner/directional/south,
+/obj/structure/table/wood/fancy/black,
 /obj/effect/turf_decal/siding/wood{
-	dir = 1
+	dir = 10
 	},
-/obj/effect/turf_decal/siding/wood,
-/obj/structure/bookcase/random,
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/wine{
+	pixel_x = 5;
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_x = -7;
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_x = -4;
+	pixel_y = 1
+	},
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/item/wallframe/picture{
+	pixel_x = -32
+	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "eux" = (
@@ -14226,12 +14243,22 @@
 /turf/open/water/beach,
 /area/centcom/central_command_areas/arboretum)
 "eWW" = (
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/structure/bookcase/random,
-/obj/effect/turf_decal/siding/wood/end{
-	dir = 4
+/obj/structure/table/wood/fancy/black,
+/obj/item/storage/fancy/cigarettes/cigars,
+/obj/item/lighter{
+	pixel_x = 9;
+	pixel_y = -6
 	},
-/obj/structure/bookcase/random,
+/obj/item/cigarette/cigar/premium{
+	pixel_x = 9;
+	pixel_y = 9
+	},
+/obj/item/cigarette/cigar/havana{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/obj/effect/turf_decal/siding/wood/end,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "eYw" = (
@@ -14693,24 +14720,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
-"geV" = (
-/obj/structure/table/wood/fancy/black,
-/obj/item/storage/fancy/cigarettes/cigars,
-/obj/item/lighter{
-	pixel_x = 9;
-	pixel_y = -6
-	},
-/obj/item/cigarette/cigar/premium{
-	pixel_x = 9;
-	pixel_y = 9
-	},
-/obj/item/cigarette/cigar/havana{
-	pixel_x = 7;
-	pixel_y = 10
-	},
-/obj/effect/turf_decal/siding/wood/end,
-/turf/open/floor/wood,
-/area/centcom/central_command_areas/admin)
 "ggj" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/clipboard{
@@ -15776,10 +15785,10 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "iwt" = (
-/obj/structure/aquarium/prefilled,
-/obj/effect/turf_decal/siding/wood/end{
-	dir = 8
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
 	},
+/obj/effect/turf_decal/siding/wood/corner,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "ixN" = (
@@ -16032,12 +16041,11 @@
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/srt/brief_srt)
 "iSK" = (
-/obj/structure/chair/sofa/corp/right,
-/obj/structure/sign/flag/nanotrasen/directional/north,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/wood,
+/obj/structure/sign/poster/greenscreen/directional/north,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "iSM" = (
@@ -17449,26 +17457,8 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "mkt" = (
-/obj/structure/table/wood/fancy/black,
-/obj/effect/turf_decal/siding/wood{
-	dir = 10
-	},
-/obj/effect/turf_decal/siding/wood/corner{
-	dir = 4
-	},
-/obj/item/reagent_containers/cup/glass/bottle/wine{
-	pixel_x = 5;
-	pixel_y = 2
-	},
-/obj/item/reagent_containers/cup/glass/drinkingglass{
-	pixel_x = -7;
-	pixel_y = 5
-	},
-/obj/item/reagent_containers/cup/glass/drinkingglass{
-	pixel_x = -4;
-	pixel_y = 1
-	},
-/turf/open/floor/wood,
+/obj/structure/aquarium/prefilled,
+/turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/admin)
 "mlY" = (
 /obj/structure/table/reinforced/plastitaniumglass,
@@ -17784,6 +17774,13 @@
 /obj/machinery/door/window/left/directional/east,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/hotel)
+"mVG" = (
+/obj/machinery/greenscreen_camera{
+	name = "centcom-caster";
+	dir = 1
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/central_command_areas/admin)
 "mZD" = (
 /obj/structure/chair/sofa/right/brown{
 	dir = 1
@@ -19685,10 +19682,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/cabin/captain)
 "sfN" = (
-/obj/effect/turf_decal/siding/wood/end{
-	dir = 1
-	},
-/obj/structure/chair/comfy/corp,
+/obj/effect/turf_decal/siding/wood/end,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "sge" = (
@@ -20745,10 +20739,6 @@
 /turf/open/indestructible/stone,
 /area/centcom/central_command_areas/arboretum)
 "uzw" = (
-/obj/structure/chair/sofa/corp/left,
-/obj/item/wallframe/picture{
-	pixel_y = 32
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
 	},
@@ -70002,8 +69992,8 @@ fei
 mZD
 aOn
 iSK
-kpd
-kpd
+mVG
+byo
 eut
 iLJ
 rxd
@@ -70259,7 +70249,7 @@ uBQ
 cmi
 aOn
 uzw
-geV
+sfN
 kpd
 eWW
 lCp
