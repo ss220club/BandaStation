@@ -19,6 +19,12 @@
 	color = ##floor_color;\
 	turf_type = /turf/open/floor/wood/##type;\
 	merge_type = /obj/item/stack/tile/wood/##type;\
+	tile_reskin_types = list(\
+		/obj/item/stack/tile/wood/##type,\
+		/obj/item/stack/tile/wood/large/##type,\
+		/obj/item/stack/tile/wood/parquet/##type,\
+		/obj/item/stack/tile/wood/tile/##type,\
+	);\
 };\
 /turf/open/floor/wood/large/##type {\
 	color = ##floor_color;\
