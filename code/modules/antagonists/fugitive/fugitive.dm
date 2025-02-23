@@ -1,7 +1,7 @@
 
 /datum/antagonist/fugitive
 	name = "\improper Fugitive"
-	roundend_category = "Fugitive"
+	roundend_category = "Беглецы"
 	job_rank = ROLE_FUGITIVE
 	silent = TRUE //greet called by the event
 	show_in_antagpanel = FALSE

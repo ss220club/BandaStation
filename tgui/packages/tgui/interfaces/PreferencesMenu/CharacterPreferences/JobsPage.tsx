@@ -4,6 +4,7 @@ import { useBackend } from 'tgui/backend';
 import { Box, Button, Dropdown, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
+import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import {
   createSetPreference,
   Job,
@@ -95,13 +96,13 @@ function PriorityHeaders() {
     <Stack>
       <Stack.Item grow />
 
-      <Stack.Item className={className}>Off</Stack.Item>
+      <Stack.Item className={className}>Откл.</Stack.Item>
 
-      <Stack.Item className={className}>Low</Stack.Item>
+      <Stack.Item className={className}>Низк.</Stack.Item>
 
-      <Stack.Item className={className}>Medium</Stack.Item>
+      <Stack.Item className={className}>Средн.</Stack.Item>
 
-      <Stack.Item className={className}>High</Stack.Item>
+      <Stack.Item className={className}>Высок.</Stack.Item>
     </Stack>
   );
 }
@@ -127,7 +128,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
       {isOverflow ? (
         <>
           <PriorityButton
-            name="Off"
+            name="Отключить"
             modifier="off"
             color="light-grey"
             enabled={!priority}
@@ -144,7 +145,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
       ) : (
         <>
           <PriorityButton
-            name="Off"
+            name="Отключить"
             modifier="off"
             color="light-grey"
             enabled={!priority}
@@ -152,21 +153,21 @@ function PriorityButtons(props: PriorityButtonsProps) {
           />
 
           <PriorityButton
-            name="Low"
+            name="Низкий"
             color="red"
             enabled={priority === JobPriority.Low}
             onClick={createSetPriority(JobPriority.Low)}
           />
 
           <PriorityButton
-            name="Medium"
+            name="Средний"
             color="yellow"
             enabled={priority === JobPriority.Medium}
             onClick={createSetPriority(JobPriority.Medium)}
           />
 
           <PriorityButton
-            name="High"
+            name="Высокий"
             color="green"
             enabled={priority === JobPriority.High}
             onClick={createSetPriority(JobPriority.High)}
@@ -205,7 +206,7 @@ function JobRow(props: JobRowProps) {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
         <Stack.Item grow textAlign="right">
-          <b>{hoursNeeded}h</b> as {experience_type}
+          <b>{hoursNeeded}h</b> как {experience_type}
         </Stack.Item>
       </Stack>
     );
@@ -213,7 +214,7 @@ function JobRow(props: JobRowProps) {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
         <Stack.Item grow textAlign="right">
-          <b>{daysLeft}</b> day{daysLeft === 1 ? '' : 's'} left
+          Нужно ещё дней: <b>{daysLeft}</b>
         </Stack.Item>
       </Stack>
     );
@@ -221,7 +222,7 @@ function JobRow(props: JobRowProps) {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
         <Stack.Item grow textAlign="right">
-          <b>Banned</b>
+          <b>Забанен</b>
         </Stack.Item>
       </Stack>
     );
@@ -246,7 +247,7 @@ function JobRow(props: JobRowProps) {
               paddingLeft: '0.3em',
             }}
           >
-            {name}
+            {JOBS_RU[name] || name}
           </Stack.Item>
         </Tooltip>
 
@@ -264,7 +265,7 @@ type DepartmentProps = {
 
 function Department(props: DepartmentProps) {
   const { children, department: name } = props;
-  const className = `PreferencesMenu__Jobs__departments--${name}`;
+  const className = `PreferencesMenu__Jobs__departments--${name.replace(' ', '')}`;
 
   const data = useServerPrefs();
   if (!data) return;
@@ -323,15 +324,15 @@ function JoblessRoleDropdown(props) {
 
   const options = [
     {
-      displayText: `Join as ${data.overflow_role} if unavailable`,
+      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] || data.overflow_role} если не удалось войти`,
       value: JoblessRole.BeOverflow,
     },
     {
-      displayText: `Join as a random job if unavailable`,
+      displayText: `Выбрать случайную должность, если не удалось войти`,
       value: JoblessRole.BeRandomJob,
     },
     {
-      displayText: `Return to lobby if unavailable`,
+      displayText: `Вернуться в лобби, если не удалось войти`,
       value: JoblessRole.ReturnToLobby,
     },
   ];
@@ -389,6 +390,10 @@ export function JobsPage() {
                 <Gap amount={6} />
               </Department>
 
+              <Department department="NT Representation">
+                <Gap amount={6} />
+              </Department>
+
               <Department department="Service">
                 <Gap amount={6} />
               </Department>
@@ -402,6 +407,10 @@ export function JobsPage() {
               <PriorityHeaders />
 
               <Department department="Security">
+                <Gap amount={6} />
+              </Department>
+
+              <Department department="Justice">
                 <Gap amount={6} />
               </Department>
 
