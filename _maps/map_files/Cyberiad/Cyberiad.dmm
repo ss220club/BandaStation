@@ -9008,7 +9008,6 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "cgQ" = (
@@ -30456,18 +30455,11 @@
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/department/engine/atmos)
 "hnc" = (
-/obj/structure/cable,
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor{
-	density = 0;
-	icon_state = "open";
-	id = "quarantine";
-	name = "Quarantine Lockdown";
-	opacity = 0
+/obj/machinery/atmospherics/components/unary/passive_vent/layer2{
+	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/plating,
-/area/station/medical/virology)
+/turf/open/floor/plating/airless,
+/area/space/nearstation)
 "hne" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
@@ -33723,12 +33715,6 @@
 /obj/structure/statue/station_map/cyberiad/w,
 /turf/open/floor/iron,
 /area/station/command/bridge)
-"ibe" = (
-/obj/machinery/atmospherics/components/unary/passive_vent/layer2{
-	dir = 1
-	},
-/turf/open/floor/plating/airless,
-/area/space/nearstation)
 "ibl" = (
 /obj/machinery/light/floor,
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -42581,7 +42567,6 @@
 /area/station/engineering/supermatter/room)
 "kiV" = (
 /obj/effect/decal/cleanable/blood/old,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "kjo" = (
@@ -52013,7 +51998,6 @@
 /area/station/common/cryopods)
 "mwc" = (
 /obj/effect/landmark/start/hangover,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "mwf" = (
@@ -52924,6 +52908,10 @@
 	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain)
+"mGL" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden,
+/turf/closed/wall/r_wall,
+/area/station/medical/virology)
 "mGR" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/plating,
@@ -61525,7 +61513,6 @@
 "oJb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/directional/north,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "oJe" = (
@@ -62959,6 +62946,19 @@
 /obj/machinery/firealarm/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/security/holding_cell)
+"pbH" = (
+/obj/structure/cable,
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor{
+	density = 0;
+	icon_state = "open";
+	id = "quarantine";
+	name = "Quarantine Lockdown";
+	opacity = 0
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/plating,
+/area/station/medical/virology)
 "pbI" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/preopen{
@@ -70416,10 +70416,6 @@
 /obj/structure/chair/sofa/corp/left,
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/exit/departure_lounge)
-"qQW" = (
-/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden,
-/turf/closed/wall/r_wall,
-/area/station/medical/virology)
 "qRm" = (
 /obj/effect/spawner/random/trash/bin,
 /obj/machinery/light/directional/south,
@@ -87229,7 +87225,7 @@
 /area/station/service/theater)
 "vbm" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
+/obj/effect/spawner/random/trash/garbage,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "vbq" = (
@@ -92900,6 +92896,7 @@
 "wuZ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/directional/east,
+/obj/effect/spawner/random/trash/garbage,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "wva" = (
@@ -97982,7 +97979,6 @@
 "xFW" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/medical,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "xGc" = (
@@ -138313,8 +138309,8 @@ doz
 doz
 cYX
 xFW
-vbm
-vbm
+nxa
+nxa
 nxa
 wuZ
 nxa
@@ -138568,8 +138564,8 @@ doz
 doz
 doz
 doz
-cYX
-vbm
+dMt
+nxa
 lCk
 lCk
 lCk
@@ -138825,8 +138821,8 @@ doz
 doz
 doz
 doz
-cYX
-vbm
+dMt
+nxa
 lCk
 fLQ
 jyO
@@ -139597,7 +139593,7 @@ cYX
 cYX
 cYX
 mwc
-vbm
+nxa
 lCk
 jDN
 wHO
@@ -140130,8 +140126,8 @@ cuh
 thG
 uXK
 oKY
+pbH
 hnc
-ibe
 doz
 doz
 doz
@@ -140367,7 +140363,7 @@ ujv
 fkn
 qTP
 iDU
-kwC
+qTP
 lCk
 sTs
 rxv
@@ -140381,7 +140377,7 @@ lCk
 mws
 bgK
 ikp
-qQW
+mGL
 lbM
 eLN
 pxg
