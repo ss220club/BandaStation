@@ -32,6 +32,7 @@
 	)
 	grant_actions_by_list(innate_actions)
 
+	ADD_TRAIT(src, TRAIT_NOFIRE, INNATE_TRAIT)
 	REMOVE_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 
 /mob/living/carbon/alien/adult/banda/ravager/add_tts_component()
