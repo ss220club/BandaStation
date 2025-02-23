@@ -167,8 +167,3 @@
 		/obj/item/storage/medkit/regular = 1,
 		/obj/item/disk/nuclear,
 	)
-
-/datum/outfit/centcom/death_commando/post_equip(mob/living/carbon/human/squaddie, visuals_only = FALSE) // For some reasons these guys don't have by default
-	. = ..()
-	var/obj/item/implant/mindshield/mindshield = new /obj/item/implant/mindshield(squaddie)
-	mindshield.implant(squaddie, null, silent = TRUE)
