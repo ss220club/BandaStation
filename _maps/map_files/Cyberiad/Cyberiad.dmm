@@ -6483,6 +6483,7 @@
 /area/station/medical/abandoned)
 "bBv" = (
 /obj/machinery/light/small/directional/east,
+/obj/machinery/space_heater,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "bBw" = (
@@ -16962,6 +16963,12 @@
 	},
 /turf/open/floor/plating,
 /area/station/science/robotics/lab)
+"dXk" = (
+/obj/machinery/atmospherics/components/unary/passive_vent/layer2{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/space/nearstation)
 "dXr" = (
 /obj/machinery/conveyor{
 	dir = 10;
@@ -17080,6 +17087,10 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/wood/parquet,
 /area/station/security/courtroom)
+"dYW" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/department/medical/morgue)
 "dYY" = (
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry)
@@ -28043,11 +28054,11 @@
 /turf/open/floor/wood/parquet,
 /area/station/security/courtroom)
 "gIm" = (
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
-	dir = 8
+/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden{
+	dir = 4
 	},
-/turf/open/floor/grass,
-/area/station/medical/virology)
+/turf/closed/wall,
+/area/station/maintenance/department/medical/morgue)
 "gIo" = (
 /obj/structure/closet/wardrobe/atmospherics_yellow,
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -30455,11 +30466,11 @@
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/department/engine/atmos)
 "hnc" = (
-/obj/machinery/atmospherics/components/unary/passive_vent/layer2{
-	dir = 1
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 8
 	},
-/turf/open/floor/plating/airless,
-/area/space/nearstation)
+/turf/open/floor/grass,
+/area/station/medical/virology)
 "hne" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
@@ -52908,10 +52919,6 @@
 	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain)
-"mGL" = (
-/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden,
-/turf/closed/wall/r_wall,
-/area/station/medical/virology)
 "mGR" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/plating,
@@ -62946,19 +62953,6 @@
 /obj/machinery/firealarm/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/security/holding_cell)
-"pbH" = (
-/obj/structure/cable,
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor{
-	density = 0;
-	icon_state = "open";
-	id = "quarantine";
-	name = "Quarantine Lockdown";
-	opacity = 0
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/plating,
-/area/station/medical/virology)
 "pbI" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/preopen{
@@ -68978,10 +68972,9 @@
 /turf/open/floor/iron/white,
 /area/station/medical/psychology)
 "qyM" = (
-/obj/structure/rack,
-/obj/item/wrench,
-/obj/item/crowbar/red,
-/obj/item/restraints/handcuffs,
+/obj/machinery/atmospherics/components/binary/valve/on{
+	dir = 4
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "qyV" = (
@@ -73151,6 +73144,7 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "ryH" = (
 /obj/effect/spawner/random/structure/table_or_rack,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "ryQ" = (
@@ -76354,8 +76348,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "smL" = (
-/obj/machinery/space_heater,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/rack,
+/obj/item/wrench,
+/obj/item/crowbar/red,
+/obj/item/restraints/handcuffs,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "smM" = (
@@ -85090,12 +85087,12 @@
 /area/station/hallway/primary/starboard/west)
 "uyr" = (
 /obj/machinery/duct,
-/obj/machinery/door/airlock/maintenance{
-	name = "Virology Service Room"
-	},
 /obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/door/airlock/maintenance{
+	name = "Virology Service Room"
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "uyA" = (
@@ -87091,6 +87088,19 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security/prison)
+"uZs" = (
+/obj/structure/cable,
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor{
+	density = 0;
+	icon_state = "open";
+	id = "quarantine";
+	name = "Quarantine Lockdown";
+	opacity = 0
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/plating,
+/area/station/medical/virology)
 "uZz" = (
 /obj/structure/lattice/catwalk,
 /turf/open/space/openspace,
@@ -95474,6 +95484,7 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "wZS" = (
 /obj/effect/spawner/random/trash/graffiti,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
 "wZX" = (
@@ -97250,6 +97261,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/ghetto/port)
+"xwv" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden,
+/turf/closed/wall/r_wall,
+/area/station/medical/virology)
 "xww" = (
 /obj/effect/spawner/structure/electrified_grille,
 /turf/open/floor/plating,
@@ -139091,7 +139106,7 @@ hNk
 cva
 jVM
 ifs
-naR
+dYW
 aDt
 asp
 uWZ
@@ -139862,7 +139877,7 @@ omM
 lCk
 cYX
 uyr
-cYX
+gIm
 aDt
 xux
 tIx
@@ -140126,8 +140141,8 @@ cuh
 thG
 uXK
 oKY
-pbH
-hnc
+uZs
+dXk
 doz
 doz
 doz
@@ -140377,7 +140392,7 @@ lCk
 mws
 bgK
 ikp
-mGL
+xwv
 lbM
 eLN
 pxg
@@ -140638,7 +140653,7 @@ aDt
 oij
 btK
 tXx
-gIm
+hnc
 xux
 aDt
 doz
