@@ -56,6 +56,7 @@
 #include "turfs/_turfs.dme"
 #include "whitelist220/_whitelist220.dme"
 #include "world_topics/_world_topics.dme"
+#include "xeno_rework/_xeno_rework.dme"
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
 // --- MODULES END --- //
