@@ -31,7 +31,7 @@
 			return FALSE
 
 		if(exploded_blades >= explode_blade_limit)
-			loc.balloon_alert(user, "ritual failed, at limit, we can't exlode our blades anymore!")
+			loc.balloon_alert(user, "ritual failed, at limit, we can't explode our blades anymore!")
 			return FALSE
 
 		if(farthest_item)
