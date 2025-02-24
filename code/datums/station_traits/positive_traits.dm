@@ -297,6 +297,7 @@
 		/datum/job/nanotrasen_representative = /obj/item/organ/cyberimp/arm/paperwork,
 		/datum/job/blueshield = /obj/item/organ/cyberimp/arm/flash,
 		/datum/job/magistrate = /obj/item/organ/cyberimp/arm/paperwork,
+		/datum/job/explorer = /obj/item/organ/cyberimp/arm/toolset,
 		// BANDASTATION ADD - END
 	)
 
