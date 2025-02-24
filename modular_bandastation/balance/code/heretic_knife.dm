@@ -1,5 +1,14 @@
 #define MIN_DISTANSE_TO_EXPLODE 10
 
+/datum/heretic_knowledge/limited_amount/starting
+	var/explode_blade_limit
+	var/exploded_blades
+
+/datum/heretic_knowledge/limited_amount/starting/on_research(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
+
+	explode_blade_limit = floor(limit / 2)
+
 /datum/heretic_knowledge/limited_amount/starting/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	for(var/datum/weakref/ref as anything in created_items)
 		var/atom/real_thing = ref.resolve()
@@ -21,8 +30,13 @@
 			loc.balloon_alert(user, "ritual failed, at limit!")
 			return FALSE
 
+		if(exploded_blades >= explode_blade_limit)
+			loc.balloon_alert(user, "ritual failed, at limit, we can't exlode our blades anymore!")
+			return FALSE
+
 		if(farthest_item)
 			explode_blade(farthest_item, 'sound/effects/magic/hereticknock.ogg')
+			exploded_blades++
 			return TRUE
 
 	return TRUE
