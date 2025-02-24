@@ -16,8 +16,8 @@
 			LAZYREMOVE(created_items, ref)
 
 	if(LAZYLEN(created_items) >= limit)
-		var/atom/farthest_item = null
-		var/farthest_distance = 0
+		var/atom/farthest_item
+		var/farthest_distance
 
 		for(var/datum/weakref/ref as anything in created_items)
 			var/atom/item = ref.resolve()
