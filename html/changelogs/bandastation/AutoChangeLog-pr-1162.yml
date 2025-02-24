@@ -1,0 +1,4 @@
+author: "AyIong"
+delete-after: True
+changes:
+  - qol: "Стрелочка при указывании теперь двигается быстрее и не линейно"
