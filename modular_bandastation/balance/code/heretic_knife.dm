@@ -31,10 +31,11 @@
 			return FALSE
 
 		if(exploded_blades >= explode_blade_limit)
-			loc.balloon_alert(user, "ritual failed, at limit, we can't explode our blades anymore!")
+			loc.balloon_alert(user, "ritual failed, at limit, we can't renounce our blades anymore!")
 			return FALSE
 
 		if(farthest_item)
+			loc.balloon_alert(user, "we renounce the furthest blade!")
 			explode_blade(farthest_item, 'sound/effects/magic/hereticknock.ogg')
 			exploded_blades++
 			return TRUE
