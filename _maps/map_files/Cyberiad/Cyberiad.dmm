@@ -18039,13 +18039,10 @@
 /area/station/hallway/secondary/entry)
 "eky" = (
 /obj/structure/window/reinforced/spawner/directional/east,
-/obj/effect/turf_decal/trimline/neutral/filled/line{
-	dir = 5
-	},
-/obj/effect/turf_decal/trimline/neutral/filled/line{
-	dir = 5
-	},
 /obj/machinery/smartfridge/organ,
+/obj/effect/turf_decal/tile/neutral/anticorner{
+	dir = 4
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "ekG" = (
@@ -22760,7 +22757,7 @@
 	},
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
-/obj/effect/turf_decal/trimline/neutral/filled/line,
+/obj/effect/turf_decal/tile/neutral/half,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "fuT" = (
@@ -31706,10 +31703,10 @@
 /area/station/maintenance/department/electrical)
 "hCU" = (
 /obj/machinery/iv_drip,
-/obj/effect/turf_decal/trimline/neutral/filled/line{
+/obj/item/radio/intercom/directional/west,
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
 	},
-/obj/item/radio/intercom/directional/west,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "hCX" = (
@@ -32586,9 +32583,9 @@
 	dir = 6
 	},
 /obj/structure/cable,
-/obj/effect/turf_decal/trimline/neutral/filled/line,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/tile/neutral/half,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "hNu" = (
@@ -32912,10 +32909,10 @@
 	name = "janitorial supplies"
 	},
 /obj/item/pushbroom,
-/obj/effect/turf_decal/trimline/neutral/filled/line{
-	dir = 9
-	},
 /obj/machinery/light/directional/west,
+/obj/effect/turf_decal/tile/neutral/anticorner{
+	dir = 1
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "hRP" = (
@@ -39130,11 +39127,11 @@
 /area/station/hallway/secondary/service)
 "jtt" = (
 /obj/item/kirbyplants/random,
-/obj/effect/turf_decal/trimline/neutral/filled/line{
-	dir = 10
-	},
 /obj/machinery/firealarm/directional/west,
 /obj/machinery/light_switch/directional/south,
+/obj/effect/turf_decal/tile/neutral/anticorner{
+	dir = 8
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "jtA" = (
@@ -59496,9 +59493,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/obj/effect/turf_decal/trimline/neutral/filled/line{
-	dir = 6
-	},
+/obj/effect/turf_decal/tile/neutral/anticorner,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "omR" = (
@@ -64254,10 +64249,10 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/turf_decal/trimline/neutral/filled/line{
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "psq" = (
@@ -64299,9 +64294,9 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/effect/turf_decal/trimline/neutral/filled/line,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/tile/neutral/half,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
 "psV" = (
