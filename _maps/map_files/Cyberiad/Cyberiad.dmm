@@ -18832,9 +18832,6 @@
 /area/station/engineering/atmos)
 "euI" = (
 /obj/effect/landmark/start/chemist,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 8
-	},
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "euJ" = (
@@ -22346,12 +22343,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
-"fqe" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/turf/open/floor/iron/white,
-/area/station/medical/pharmacy)
 "fql" = (
 /obj/effect/turf_decal/tile/dark_green,
 /obj/effect/decal/cleanable/dirt,
@@ -53090,8 +53081,10 @@
 /obj/structure/sign/poster/official/science/directional/west,
 /obj/machinery/light/directional/west,
 /obj/structure/window/reinforced/spawner/directional/south,
-/obj/effect/turf_decal/siding/yellow/end,
 /obj/effect/turf_decal/tile/yellow/fourcorners,
+/obj/effect/turf_decal/siding/yellow/end{
+	dir = 8
+	},
 /obj/machinery/plumbing/receiver{
 	dir = 1
 	},
@@ -61767,10 +61760,14 @@
 /area/station/maintenance/department/medical/ghetto/morgue)
 "oNb" = (
 /obj/structure/window/reinforced/spawner/directional/south,
-/obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
-	dir = 8
+/obj/effect/turf_decal/tile/yellow/fourcorners,
+/obj/effect/turf_decal/siding/yellow/end{
+	dir = 4
 	},
-/turf/open/floor/iron/white,
+/obj/machinery/plumbing/receiver{
+	dir = 1
+	},
+/turf/open/floor/plating,
 /area/station/medical/pharmacy)
 "oNd" = (
 /obj/structure/table/wood,
@@ -64356,9 +64353,7 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "ptw" = (
-/obj/effect/turf_decal/tile/yellow/half/contrasted{
-	dir = 8
-	},
+/obj/effect/turf_decal/tile/yellow/half/contrasted,
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "ptx" = (
@@ -70247,14 +70242,10 @@
 	c_tag = "Medbay Chemistry";
 	dir = 8
 	},
-/obj/machinery/plumbing/receiver{
-	dir = 1
+/obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
+	dir = 8
 	},
-/obj/effect/turf_decal/tile/yellow/fourcorners,
-/obj/effect/turf_decal/siding/yellow/end{
-	dir = 1
-	},
-/turf/open/floor/plating,
+/turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "qQo" = (
 /obj/structure/table,
@@ -73923,9 +73914,6 @@
 /turf/open/floor/plating,
 /area/station/engineering/atmos/mix/ghetto)
 "rKU" = (
-/obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
-	dir = 8
-	},
 /obj/structure/table/reinforced/rglass,
 /obj/item/storage/box/beakers{
 	pixel_y = 6;
@@ -73937,6 +73925,9 @@
 	},
 /obj/item/storage/box/syringes{
 	pixel_y = -4
+	},
+/obj/effect/turf_decal/tile/yellow/half/contrasted{
+	dir = 8
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
@@ -200161,8 +200152,8 @@ xOd
 cTi
 pBa
 gVi
-fqe
 dCy
+rEH
 rEH
 rEH
 ewR
