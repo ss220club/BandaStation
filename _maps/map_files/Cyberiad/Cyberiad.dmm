@@ -11386,6 +11386,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 5
 	},
+/obj/structure/sign/warning/bodysposal/directional/east,
 /turf/open/floor/iron/white,
 /area/station/medical/cryo)
 "cJh" = (
@@ -25885,7 +25886,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical/ghetto)
 "ggi" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/disposalpipe/segment{
@@ -39286,6 +39286,7 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/trimline/blue/filled/line,
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/theatre)
 "jvF" = (
@@ -47800,7 +47801,7 @@
 /turf/open/floor/engine,
 /area/station/maintenance/disposal/incinerator)
 "lxK" = (
-/obj/structure/sign/warning/bodysposal/directional/north,
+/obj/structure/sign/warning/biohazard/directional/north,
 /turf/open/openspace,
 /area/station/medical/cryo)
 "lxO" = (
@@ -75659,7 +75660,7 @@
 /area/station/hallway/secondary/entry)
 "sfW" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
-	dir = 1
+	dir = 4
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/aft)
@@ -77427,7 +77428,6 @@
 /obj/machinery/duct,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -99305,10 +99305,10 @@
 /turf/open/floor/iron/white,
 /area/station/maintenance/department/medical/ghetto/central)
 "xYF" = (
-/obj/machinery/door/firedoor,
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
 	},
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/theatre)
 "xYK" = (
@@ -199923,8 +199923,8 @@ sfW
 jSn
 vsP
 tgC
-dfc
 mtY
+dfc
 gva
 smD
 wDJ
@@ -200425,8 +200425,8 @@ wtF
 qeB
 vSF
 vSF
-gSP
 vSF
+gSP
 ayv
 skq
 yee
@@ -201722,7 +201722,7 @@ gLU
 aoB
 ffK
 lRa
-spc
+oZN
 ggi
 nHJ
 gkB
@@ -201979,7 +201979,7 @@ ame
 own
 lcZ
 oKZ
-oZN
+spc
 gxW
 nHJ
 ejV
@@ -203774,7 +203774,7 @@ oOp
 gcA
 oOp
 oOp
-blI
+vDA
 heV
 ffK
 lRa
@@ -204031,7 +204031,7 @@ oOg
 lmT
 oOp
 oOp
-oOp
+blI
 tAR
 lcZ
 nXS
@@ -204291,8 +204291,8 @@ bHQ
 vRM
 aWz
 lcZ
-xYF
-pKO
+tpY
+oZN
 sAO
 kLF
 rBm
@@ -204548,8 +204548,8 @@ xqS
 rpZ
 lcZ
 lcZ
-tpY
-oZN
+xYF
+pKO
 jvw
 kLF
 kLF
@@ -204801,9 +204801,9 @@ bjd
 gsI
 vOr
 iov
-sqG
 cMi
 lQJ
+twT
 alU
 bBw
 qbQ
@@ -204811,7 +204811,7 @@ oJx
 jPR
 qbQ
 sqG
-twT
+sqG
 sqG
 sqG
 sqG
