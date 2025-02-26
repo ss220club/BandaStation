@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import {
   Button,
+  Icon,
+  LabeledList,
+  Modal,
   Section,
   Stack,
-  Icon,
-  Tooltip,
   Table,
-  Modal,
-  LabeledList,
+  Tooltip,
 } from 'tgui-core/components';
 import { BooleanLike } from 'tgui-core/react';
 
@@ -164,7 +164,7 @@ function Clients(props) {
   const { setSubjectRef } = props;
 
   const [searchText, setSearchText] = useState('');
-  const [moreInfo, setMoreInfo] = useState(true);
+  const [moreInfo, setMoreInfo] = useState(false);
 
   const clientsList = Object.values(clients).flat();
   const sortedClients = clientsList
@@ -363,27 +363,39 @@ function SubjectInfoList(props) {
       <LabeledList.Item label="Повреждения">
         <Stack>
           <Tooltip content="Механические">
-            <Stack.Item color="red">{subject.health?.brute}</Stack.Item>
+            <Stack.Item color="red">
+              {Math.round(subject.health?.brute)}
+            </Stack.Item>
           </Tooltip>
           <Stack.Divider />
           <Tooltip content="Ожоги">
-            <Stack.Item color="orange">{subject.health?.burn}</Stack.Item>
+            <Stack.Item color="orange">
+              {Math.round(subject.health?.burn)}
+            </Stack.Item>
           </Tooltip>
           <Stack.Divider />
           <Tooltip content="Отравление">
-            <Stack.Item color="green">{subject.health?.toxin}</Stack.Item>
+            <Stack.Item color="green">
+              {Math.round(subject.health?.toxin)}
+            </Stack.Item>
           </Tooltip>
           <Stack.Divider />
           <Tooltip content="Кислород">
-            <Stack.Item color="blue">{subject.health?.oxygen}</Stack.Item>
+            <Stack.Item color="blue">
+              {Math.round(subject.health?.oxygen)}
+            </Stack.Item>
           </Tooltip>
           <Stack.Divider />
           <Tooltip content="Мозг">
-            <Stack.Item color="pink">{subject.health?.brain}</Stack.Item>
+            <Stack.Item color="pink">
+              {Math.round(subject.health?.brain)}
+            </Stack.Item>
           </Tooltip>
           <Stack.Divider />
           <Tooltip content="Стамина">
-            <Stack.Item color="yellow">{subject.health?.stamina}</Stack.Item>
+            <Stack.Item color="yellow">
+              {Math.round(subject.health?.stamina)}
+            </Stack.Item>
           </Tooltip>
         </Stack>
       </LabeledList.Item>
@@ -413,12 +425,19 @@ function SubjectInfoActions(props) {
   return (
     <Stack fill textAlign="center">
       <Stack.Item grow>
-        <Button fluid>Player Panel</Button>
+        <Button fluid onClick={() => act('player_panel', { ref: subjectRef })}>
+          Player Panel
+        </Button>
       </Stack.Item>
       <Stack.Item grow>
-        <Button fluid>Traitor Panel</Button>
+        <Button fluid onClick={() => act('traitor_panel', { ref: subjectRef })}>
+          Traitor Panel
+        </Button>
       </Stack.Item>
-      <Stack.Item grow>
+      <Stack.Item
+        grow
+        onClick={() => act('view_variables', { ref: subjectRef })}
+      >
         <Button fluid>Variables</Button>
       </Stack.Item>
       <Stack.Item>

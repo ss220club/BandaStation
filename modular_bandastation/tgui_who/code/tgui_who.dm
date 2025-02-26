@@ -88,19 +88,27 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		return
 
 	var/mob/user = viewer.mob
+	// Free to use by anyone
 	switch(action)
 		if("update")
 			update_static_data(user)
 			return TRUE
 
+		if("hide_more_info")
+			modal_open = FALSE
+			subject = null
+			return TRUE
+
+	if(!check_rights(R_ADMIN))
+		return FALSE
+
+	var/mob/user_subject = locate(params["ref"])
+	if(!user_subject)
+		return FALSE
+
+	// Admin only actions
+	switch(action)
 		if("show_more_info")
-			if(!check_rights(R_ADMIN))
-				return FALSE
-
-			var/mob/user_subject = locate(params["ref"])
-			if(!user_subject)
-				return FALSE
-
 			if(!isliving(user_subject))
 				to_chat(viewer, span_warning("Просматривать дополнительную информацию, можно только у /mob/living!"))
 				return FALSE
@@ -109,16 +117,60 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			subject = user_subject
 			return TRUE
 
-		if("hide_more_info")
-			modal_open = FALSE
-			subject = null
-			return TRUE
-
 		if("follow")
 			if(!isobserver(user) && !check_rights(R_ADMIN))
 				return FALSE
 
-			user.client.admin_follow(locate(params["ref"]))
+			user.client.admin_follow(user_subject)
+			return TRUE
+
+		if("logs")
+			if(!ismob(user_subject))
+				to_chat(viewer, "Это может быть использовано только у /mob.")
+				return FALSE
+
+			show_individual_logging_panel(user_subject)
+			return TRUE
+
+		if("smite")
+			if(!ismob(user_subject))
+				to_chat(viewer, "Это может быть использовано только у /mob.")
+				return FALSE
+
+			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/admin_smite, user_subject)
+			return TRUE
+
+		if("subtlepm")
+			if(!ismob(user_subject))
+				to_chat(viewer, "Это может быть использовано только у /mob.")
+				return FALSE
+
+			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/cmd_admin_subtle_message, user_subject)
+			return TRUE
+
+		if("view_variables")
+			viewer.debug_variables(user_subject)
+			return TRUE
+
+		if("traitor_panel")
+			if(!SSticker.HasRoundStarted())
+				tgui_alert(viewer,"Игра ещё не началась!")
+				return FALSE
+
+			if(ismob(user_subject))
+				SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/show_traitor_panel, user_subject)
+				return TRUE
+
+			var/datum/mind/mind = user_subject
+			if(!istype(mind))
+				to_chat(viewer, "Кажется ты пытаешься использовать это на бездушной сущности.", confidential = TRUE)
+				return FALSE
+
+			mind.traitor_panel()
+			return TRUE
+
+		if("player_panel")
+			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/show_player_panel, user_subject)
 			return TRUE
 
 /datum/tgui_who/proc/get_status(mob/living/user)
