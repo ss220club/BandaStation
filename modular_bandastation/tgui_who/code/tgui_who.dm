@@ -84,6 +84,8 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	else
 		status["where"] = "Играет за [client.mob.real_name]"
 		switch(client.mob.stat)
+			if(CONSCIOUS)
+				status["state"] = "Живой"
 			if(UNCONSCIOUS)
 				status["state"] = "Без сознания"
 			if(SOFT_CRIT|HARD_CRIT)

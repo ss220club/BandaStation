@@ -3,7 +3,8 @@ import {
   Button,
   Section,
   Stack,
-  LabeledList,
+  Icon,
+  Tooltip,
   Table,
 } from 'tgui-core/components';
 import { BooleanLike } from 'tgui-core/react';
@@ -51,31 +52,32 @@ type AccountInfo = {
 };
 
 const getStateColor = (client) => {
-  if (!client.status) return '';
   switch (client.status.state) {
-    case 'Наблюдает':
-      return 'grey';
+    case 'Живой':
+      return 'green';
     case 'Без сознания':
       return 'yellow';
     case 'В крите':
       return 'orange';
     case 'Мёртв':
       return 'red';
+    case 'Наблюдает':
+      return 'grey';
     default:
-      return 'green';
+      return '';
   }
 };
 
 export function Who(props) {
   return (
-    <Window title="Who's there?" width={500} height={625}>
+    <Window title="Who's there?" width={550} height={650}>
       <Window.Content>
         <Stack fill vertical>
-          <Stack.Item>
-            <UserInfo />
-          </Stack.Item>
           <Stack.Item grow>
             <Clients />
+          </Stack.Item>
+          <Stack.Item>
+            <UserInfo />
           </Stack.Item>
         </Stack>
       </Window.Content>
@@ -88,8 +90,20 @@ function UserInfo(props) {
   const { user } = data;
 
   return (
-    <Section title={user.ckey}>
-      <ShowPing user={user} />
+    <Section>
+      <Stack fill ml={0.5} mr={0.5} justify="space-between">
+        <Stack.Item bold fontSize={1.2}>
+          {user.ckey}{' '}
+          {user.admin && (
+            <Tooltip content={'Администратор'}>
+              <Icon name="crown" color="gold" />
+            </Tooltip>
+          )}
+        </Stack.Item>
+        <Stack.Item align="center">
+          <ShowPing user={user} />
+        </Stack.Item>
+      </Stack>
     </Section>
   );
 }
@@ -202,13 +216,18 @@ function ShowPing(props) {
   const { user } = props;
 
   return (
-    <LabeledList>
-      <LabeledList.Item label="Текущий пинг">
-        {Math.round(user.ping.lastPing)}ms
-      </LabeledList.Item>
-      <LabeledList.Item label="Средний пинг">
-        {Math.round(user.ping.avgPing)}ms
-      </LabeledList.Item>
-    </LabeledList>
+    <Stack wrap color="label">
+      <Tooltip content="Текущий пинг" position={'bottom-end'}>
+        <Stack.Item color="green">
+          <Icon name="clock-rotate-left" /> {Math.round(user.ping.lastPing)}ms
+        </Stack.Item>
+      </Tooltip>
+      <Stack.Divider />
+      <Tooltip content="Средний пинг" position={'bottom-end'}>
+        <Stack.Item color="orange">
+          <Icon name="chart-simple" /> {Math.round(user.ping.avgPing)}ms
+        </Stack.Item>
+      </Tooltip>
+    </Stack>
   );
 }
