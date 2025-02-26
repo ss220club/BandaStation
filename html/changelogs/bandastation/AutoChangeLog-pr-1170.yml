@@ -1,0 +1,4 @@
+author: "AyIong"
+delete-after: True
+changes:
+  - bugfix: "Мы забрали админ кнопки в лобби у не админов"
