@@ -3,9 +3,9 @@
 
 /datum/outfit/equip(mob/living/carbon/human/user, visuals_only = FALSE)
 	. = ..()
-	if (!.)
+	if(!.)
 		return
-	if (organs)
-		for (var/organ_path in organs)
+	if(organs)
+		for(var/organ_path in organs)
 			var/obj/item/organ/organ_instance = SSwardrobe.provide_type(organ_path, user)
 			organ_instance.replace_into(user)
