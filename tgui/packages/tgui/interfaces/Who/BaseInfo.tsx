@@ -10,10 +10,10 @@ import {
 
 import { useBackend } from '../../backend';
 import { SearchBar } from '../common/SearchBar';
+import { NEW_ACCOUNT_AGE, NEW_ACCOUNT_NOTICE } from './constants';
 import { getConditionColor } from './helpers';
 import { ShowPing } from './Ping';
 import { WhoData } from './types';
-import { NEW_ACCOUNT_AGE, NEW_ACCOUNT_NOTICE } from './constants';
 
 export function UserInfo(props) {
   const { act, data } = useBackend<WhoData>();
