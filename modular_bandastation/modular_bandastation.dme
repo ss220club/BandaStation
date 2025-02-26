@@ -28,7 +28,6 @@
 #include "discord/_discord.dme"
 #include "emote_panel/_emote_panel.dme"
 #include "examine_panel/_examine_panel.dme"
-#include "game/_game.dme"
 #include "gunhud/_gunhud.dme"
 #include "hydroponics/_hydroponics.dme"
 #include "jobs/_jobs.dme"
@@ -37,8 +36,8 @@
 #include "loadout/_loadout.dme"
 #include "mapping/_mapping.dme"
 #include "medical/_medical.dme"
-#include "minesweeper/_minesweeper.dme"
 #include "mobs/_mobs.dme"
+#include "minesweeper/_minesweeper.dme"
 #include "nanomap/_nanomap.dme"
 #include "objects/_objects.dme"
 #include "orderables/_orderables.dme"
@@ -51,7 +50,6 @@
 #include "species/_species.dme"
 #include "speech_filter/_speech_filter.dme"
 #include "status_effects/_status_effects.dme"
-#include "storyteller/_storyteller.dme"
 #include "tgui_who/_tgui_who.dme"
 #include "title_screen/_title_screen.dme"
 #include "translations/_translations.dme"
@@ -59,6 +57,8 @@
 #include "turfs/_turfs.dme"
 #include "whitelist220/_whitelist220.dme"
 #include "world_topics/_world_topics.dme"
+#include "storyteller/_storyteller.dme"
+#include "game/_game.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
