@@ -14,3 +14,16 @@ export const getConditionColor = (condition) => {
       return '';
   }
 };
+
+export const getPingColor = (ping) => {
+  switch (true) {
+    case ping < 100:
+      return 'green';
+    case ping > 100:
+      return 'orange';
+    case ping > 220:
+      return 'red';
+    default:
+      return '';
+  }
+};

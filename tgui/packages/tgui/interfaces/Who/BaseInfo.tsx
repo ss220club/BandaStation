@@ -11,7 +11,7 @@ import {
 import { useBackend } from '../../backend';
 import { SearchBar } from '../common/SearchBar';
 import { NEW_ACCOUNT_AGE, NEW_ACCOUNT_NOTICE } from './constants';
-import { getConditionColor } from './helpers';
+import { getConditionColor, getPingColor } from './helpers';
 import { ShowPing } from './Ping';
 import { WhoData } from './types';
 
@@ -118,23 +118,22 @@ function ClientsTable(props) {
               client.accountAge < NEW_ACCOUNT_AGE && 'hsla(60, 100%, 25%, 0.25)'
             }
           >
-            <Tooltip
-              content={
-                client.accountAge < NEW_ACCOUNT_AGE && NEW_ACCOUNT_NOTICE
-              }
-            >
-              <Table.Cell bold>
-                {client.accountAge < NEW_ACCOUNT_AGE && (
-                  <Icon name="baby" color="green" size={1.25} />
-                )}{' '}
-                {client.ckey}
-              </Table.Cell>
-            </Tooltip>
+            {client.accountAge < NEW_ACCOUNT_AGE ? (
+              <Tooltip content={NEW_ACCOUNT_NOTICE}>
+                <Table.Cell bold>
+                  <Icon name="baby" color="green" size={1.25} /> {client.ckey}
+                </Table.Cell>
+              </Tooltip>
+            ) : (
+              <Table.Cell bold>{client.ckey}</Table.Cell>
+            )}
             <Table.Cell>{status?.where}</Table.Cell>
             <Table.Cell color={getConditionColor(client.status?.state)}>
               {status?.state}
             </Table.Cell>
-            <Table.Cell>{Math.round(client.ping.avgPing)}ms</Table.Cell>
+            <Table.Cell color={getPingColor(client.ping.avgPing)}>
+              {Math.round(client.ping.avgPing)}ms
+            </Table.Cell>
             <Table.Cell collapsing>
               <Button
                 icon="question"
@@ -163,9 +162,9 @@ function ClientsCompact(props) {
       color={getConditionColor(client.status?.state)}
       tooltip={
         <Stack vertical align="center">
-          <Stack.Item>
-            {client.accountAge < NEW_ACCOUNT_AGE && NEW_ACCOUNT_NOTICE}
-          </Stack.Item>
+          {client.accountAge < NEW_ACCOUNT_AGE && (
+            <Stack.Item>{NEW_ACCOUNT_NOTICE}</Stack.Item>
+          )}
           <Stack.Item>
             <ShowPing user={client} />
           </Stack.Item>
