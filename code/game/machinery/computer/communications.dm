@@ -552,7 +552,7 @@
 				data["canMessageAssociates"] = FALSE
 				data["canRecallShuttles"] = !HAS_SILICON_ACCESS(user)
 				data["canRequestNuke"] = FALSE
-				data["canRequestERT"] = FALSE	// BANDASTATION ADDITION
+				data["canRequestERT"] = FALSE // BANDASTATION ADDITION
 				data["canSendToSectors"] = FALSE
 				data["canSetAlertLevel"] = FALSE
 				data["canToggleEmergencyAccess"] = FALSE
@@ -570,7 +570,7 @@
 				if (authenticated_as_non_silicon_captain(user))
 					data["canMessageAssociates"] = TRUE
 					data["canRequestNuke"] = TRUE
-					data["canRequestERT"] = TRUE	// BANDASTATION ADDITION
+					data["canRequestERT"] = TRUE // BANDASTATION ADDITION
 
 				if (can_send_messages_to_other_sectors(user))
 					data["canSendToSectors"] = TRUE

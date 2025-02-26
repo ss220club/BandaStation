@@ -111,7 +111,6 @@ GLOBAL_DATUM_INIT(requests, /datum/request_manager, new)
  * * C - The client who is sending the request
  * * message - The message
  */
-
 /datum/request_manager/proc/ert_request(client/C, message)
 	request_for_client(C, REQUEST_ERT, message)
 // BANDASTATION ADDITION - END
