@@ -228,7 +228,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		return
 
 	var/list/location_info = list()
-	location_info["area"] = "\proper [position.loc || user.loc]"
+	location_info["area"] = "\improper [position.loc || user.loc]"
 	location_info["x"] = position.x
 	location_info["y"] = position.y
 	location_info["z"] = position.z
