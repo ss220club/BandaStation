@@ -1,0 +1,50 @@
+@use '../base.scss' as base;
+
+.Who_Table {
+  margin: -1px;
+  border: 1px solid hsla(0, 0%, 100%, 0.2);
+
+  .Table__row--header {
+    position: sticky;
+    top: -0.75em;
+    background-color: base.$color-bg;
+    z-index: 1;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: base.$color-bg-section;
+      z-index: -2;
+    }
+
+    td {
+      padding: 0.33em 0.5em;
+      border-right: 1px solid hsla(0, 0%, 100%, 0.3);
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    td {
+      padding: 0.33em 0.5em !important;
+      border-right: 1px solid hsla(0, 0%, 100%, 0.2);
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}

@@ -3,6 +3,10 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 /datum/tgui_who
 	/// Client of whoever is using this datum
 	var/client/viewer
+	/// Selected client mob for advanced info. Admin only.
+	var/mob/living/subject
+	/// If true, modal window with additional mob info is open. Admin only.
+	var/modal_open = FALSE
 
 /datum/tgui_who/New(user)
 	if(istype(user, /client))
@@ -31,6 +35,27 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		),
 		"admin"  = !!viewer.holder,
 	)
+	data["modalOpen"] = modal_open
+	if(modal_open)
+		data["subject"] = list(
+			"key" = subject.client.key,
+			"ping" = list(
+				"lastPing" = subject.client.lastping,
+				"avgPing" = subject.client.avgping,
+			),
+			"name" = list(
+				"real" = subject?.real_name,
+				"mind" = subject?.mind.name,
+			),
+			"role" = get_role(subject),
+			"type" = subject.type,
+			"gender" = subject.gender,
+			"state" = get_state(subject),
+			"health" = get_health(subject),
+			"location" = get_position(subject),
+			"byondVersion" = subject.client.byond_version,
+			"byondBuild" = subject.client.byond_build,
+		)
 	return data
 
 /datum/tgui_who/ui_static_data(mob/user)
@@ -50,13 +75,11 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		// More info for admins in observe
 		if(viewer.holder && check_rights(R_ADMIN, FALSE) && isobserver(viewer.mob))
 			clients[client] += list(
-				"status" = get_status(client),
-				"account" = get_account_info(client),
+				"status" = get_status(client.mob),
 				"mobRef" = REF(client.mob),
 			)
 
 	data["clients"] = clients
-
 	return data
 
 /datum/tgui_who/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -70,6 +93,27 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			update_static_data(user)
 			return TRUE
 
+		if("show_more_info")
+			if(!check_rights(R_ADMIN))
+				return FALSE
+
+			var/mob/user_subject = locate(params["ref"])
+			if(!user_subject)
+				return FALSE
+
+			if(!isliving(user_subject))
+				to_chat(viewer, span_warning("Просматривать дополнительную информацию, можно только у /mob/living!"))
+				return FALSE
+
+			modal_open = TRUE
+			subject = user_subject
+			return TRUE
+
+		if("hide_more_info")
+			modal_open = FALSE
+			subject = null
+			return TRUE
+
 		if("follow")
 			if(!isobserver(user) && !check_rights(R_ADMIN))
 				return FALSE
@@ -77,43 +121,72 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			user.client.admin_follow(locate(params["ref"]))
 			return TRUE
 
-/datum/tgui_who/proc/get_status(client/client)
+/datum/tgui_who/proc/get_status(mob/living/user)
 	var/list/status = list()
-	if(isnewplayer(client.mob))
+	if(isnewplayer(user))
 		status["where"] = "В лобби"
 	else
-		status["where"] = "Играет за [client.mob.real_name]"
-		switch(client.mob.stat)
-			if(CONSCIOUS)
-				status["state"] = "Живой"
-			if(UNCONSCIOUS)
-				status["state"] = "Без сознания"
-			if(SOFT_CRIT|HARD_CRIT)
-				status["state"] = "В крите"
-			if(DEAD)
-				if(!isobserver(client.mob))
-					status["state"] = "Мёртв"
-				else
-					var/mob/dead/observer/observer = client.mob
-					if(observer.started_as_observer)
-						status["state"] = "Наблюдает"
-					else
-						status["state"] = "Мёртв"
+		status["where"] = "[user.real_name]"
+		status["state"] = get_state(user)
 
-		if(is_special_character(client.mob))
-			status["antag"] = TRUE
+		if(is_special_character(user))
+			status["antagonist"] = TRUE
 		else
-			status["antag"] = FALSE
+			status["antagonist"] = FALSE
 
 	return status
 
-/datum/tgui_who/proc/get_account_info(client/client)
-	var/list/account = list()
-	account["age"] = client.account_age
-	account["donorTier"] = client.donator_level
-	account["byondVersion"] = client.byond_version
-	account["byondBuild"] = client.byond_build
-	return account
+/datum/tgui_who/proc/get_state(mob/living/user)
+	switch(user.stat)
+		if(CONSCIOUS)
+			return "Живой"
+		if(UNCONSCIOUS)
+			return "Без сознания"
+		if(SOFT_CRIT, HARD_CRIT)
+			return "В крите"
+		if(DEAD)
+			if(!isobserver(user))
+				return "Мёртв"
+			else
+				var/mob/dead/observer/observer = user
+				if(observer.started_as_observer)
+					return "Наблюдает"
+				else
+					return "Мёртв"
+
+/datum/tgui_who/proc/get_health(mob/living/user)
+	if(!isliving(user))
+		return
+
+	var/list/health = list()
+	health["brute"] = user.getBruteLoss()
+	health["burn"] = user.getFireLoss()
+	health["toxin"] = user.getToxLoss()
+	health["oxygen"] = user.getOxyLoss()
+	health["brain"] = user.get_organ_loss(ORGAN_SLOT_BRAIN)
+	health["stamina"] = user.getStaminaLoss()
+	return health
+
+/datum/tgui_who/proc/get_position(mob/living/user)
+	var/turf/position = get_turf(user)
+	if(!isturf(position))
+		return
+
+	var/list/location_info = list()
+	location_info["area"] = position.loc || user.loc
+	location_info["x"] = position.x
+	location_info["y"] = position.y
+	location_info["z"] = position.z
+	return location_info
+
+/datum/tgui_who/proc/get_role(mob/living/user)
+	if(!user.mind)
+		return
+
+	var/list/role = list()
+	role["assigned"] = job_title_ru(user.mind.assigned_role.title)
+	role["antagonist"] = user.mind.antag_datums
+	return role
 
 /client/who()
 	set name = "Who"
