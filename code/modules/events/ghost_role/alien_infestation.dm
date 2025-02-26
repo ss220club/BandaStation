@@ -9,7 +9,7 @@
 	category = EVENT_CATEGORY_ENTITIES
 	description = "A xenomorph larva spawns on a random vent."
 
-/datum/round_event_control/alien_infestation/can_spawn_event(players_amt, allow_magic = FALSE)
+/datum/round_event_control/alien_infestation/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
 	. = ..()
 	if(!.)
 		return .
@@ -33,6 +33,7 @@
 	announce_when = rand(announce_when, announce_when + 50)
 	if(prob(50))
 		spawncount++
+	setup = TRUE
 
 /datum/round_event/ghost_role/alien_infestation/announce(fake)
 	var/living_aliens = FALSE

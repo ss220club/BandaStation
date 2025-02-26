@@ -6,6 +6,7 @@
 #include "_helpers220/_helpers220.dme"
 #include "_signals220/_signals220.dme"
 #include "_singletons/_singletons.dme"
+#include "~components/_components.dme"
 #include "admin/_admin.dme"
 #include "aesthetics/_aesthetics.dme"
 #include "aesthetics_sounds/_aesthetics_sounds.dme"
@@ -55,8 +56,9 @@
 #include "turfs/_turfs.dme"
 #include "whitelist220/_whitelist220.dme"
 #include "world_topics/_world_topics.dme"
+#include "storyteller/_storyteller.dme"
+#include "game/_game.dme"
 // --- MODULES END --- //
-
 
 // --- PRIME --- //
 // #define DISABLE_PRIME_MODPACKS
@@ -64,4 +66,6 @@
 // Модпаки включены по умолчанию для запуска всех тестов и для этого кода тоже.
 #ifndef DISABLE_PRIME_MODPACKS
 #include "prime_only/_prime_only.dme"
+#include "storyteller/code/storytellers/storyteller_prime.dm"
+#include "storyteller/code/storytellers/storyteller_prime_moon.dm"
 #endif
