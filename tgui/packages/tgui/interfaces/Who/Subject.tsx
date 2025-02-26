@@ -7,9 +7,10 @@ import {
   Stack,
   Tooltip,
 } from 'tgui-core/components';
+import { toTitleCase } from 'tgui-core/string';
 
 import { useBackend } from '../../backend';
-import { getConditionColor } from './helpers';
+import { getConditionColor, numberToDays } from './helpers';
 import { ShowPing } from './Ping';
 import { WhoData } from './types';
 
@@ -70,7 +71,9 @@ function SubjectInfoList(props) {
             {subject.role?.antagonist?.join(', ') || 'Нет'}
           </LabeledList.Item>
           <LabeledList.Item label="Тип моба">{subject.type}</LabeledList.Item>
-          <LabeledList.Item label="Пол">{subject.gender}</LabeledList.Item>
+          <LabeledList.Item label="Пол">
+            {toTitleCase(subject.gender)}
+          </LabeledList.Item>
           <LabeledList.Item
             label="Состояние"
             color={getConditionColor(subject.state)}
@@ -81,43 +84,43 @@ function SubjectInfoList(props) {
             <Stack>
               <Tooltip content="Механические">
                 <Stack.Item color="red">
-                  {Math.round(subject.health?.brute)}
+                  {Math.round(subject.health?.brute) || 'N/A'}
                 </Stack.Item>
               </Tooltip>
               <Stack.Divider />
               <Tooltip content="Ожоги">
                 <Stack.Item color="orange">
-                  {Math.round(subject.health?.burn)}
+                  {Math.round(subject.health?.burn) || 'N/A'}
                 </Stack.Item>
               </Tooltip>
               <Stack.Divider />
               <Tooltip content="Отравление">
                 <Stack.Item color="green">
-                  {Math.round(subject.health?.toxin)}
+                  {Math.round(subject.health?.toxin) || 'N/A'}
                 </Stack.Item>
               </Tooltip>
               <Stack.Divider />
               <Tooltip content="Кислород">
                 <Stack.Item color="blue">
-                  {Math.round(subject.health?.oxygen)}
+                  {Math.round(subject.health?.oxygen) || 'N/A'}
                 </Stack.Item>
               </Tooltip>
               <Stack.Divider />
               <Tooltip content="Мозг">
                 <Stack.Item color="pink">
-                  {Math.round(subject.health?.brain)}
+                  {Math.round(subject.health?.brain) || 'N/A'}
                 </Stack.Item>
               </Tooltip>
               <Stack.Divider />
               <Tooltip content="Стамина">
                 <Stack.Item color="yellow">
-                  {Math.round(subject.health?.stamina)}
+                  {Math.round(subject.health?.stamina) || 'N/A'}
                 </Stack.Item>
               </Tooltip>
             </Stack>
           </LabeledList.Item>
           <LabeledList.Item label="Локация">
-            {subject.location?.area || 'Неизвестно'}
+            {toTitleCase(subject.location?.area) || 'Неизвестно'}
           </LabeledList.Item>
           <LabeledList.Item label="Местоположение">
             <Stack>
@@ -148,7 +151,7 @@ function SubjectInfoList(props) {
             {showSpoiler ? subject.accountIp : 'СКРЫТО'}
           </LabeledList.Item>
           <LabeledList.Item label="Возраст аккаунта">
-            {subject.accountAge}
+            {numberToDays(subject.accountAge)}
           </LabeledList.Item>
           <LabeledList.Item label="Версия Byond">
             {subject.byondVersion}.{subject.byondBuild}
