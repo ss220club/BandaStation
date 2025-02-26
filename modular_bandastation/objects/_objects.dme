@@ -23,6 +23,7 @@
 #include "code/items/role_tablet_presets.dm"
 #include "code/items/stamp.dm"
 #include "code/items/wallets.dm"
+#include "code/items/spy_spider.dm"
 #include "code/items/clothing/accessories/accessories.dm"
 #include "code/items/clothing/glasses/glasses.dm"
 #include "code/items/clothing/gloves/gloves.dm"
