@@ -7,10 +7,23 @@ SUBSYSTEM_DEF(security_level)
 	/// A list of initialised security level datums.
 	var/list/available_levels = list()
 
+// BANDASTATION ADDITION - START
+/proc/cmp_security_levels(datum/security_level/a, datum/security_level/b)
+	return cmp_numeric_asc(a.number_level, b.number_level)
+// BANDASTATION ADDITION - END
+
 /datum/controller/subsystem/security_level/Initialize()
+	// BANDASTATION EDIT - START
+	var/list/levels = list()
 	for(var/iterating_security_level_type in subtypesof(/datum/security_level))
-		var/datum/security_level/new_security_level = new iterating_security_level_type
-		available_levels[new_security_level.name] = new_security_level
+		levels += new iterating_security_level_type
+
+	sortTim(levels, GLOBAL_PROC_REF(cmp_security_levels))
+
+	for(var/datum/security_level/level as anything in levels)
+		available_levels[level.name] = level
+	// BANDASTATION EDIT - END
+
 	current_security_level = available_levels[number_level_to_text(SEC_LEVEL_GREEN)]
 	return SS_INIT_SUCCESS
 
