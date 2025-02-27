@@ -1,7 +1,7 @@
 /datum/job/explorer
 	title = JOB_EXPLORER
-	department_head = list("Квартермейстер")
-	supervisors = "Квартермейстер"
+	department_head = list(JOB_QUARTERMASTER) // JOB_QUARTERMASTER converts to JOB_QUARTERMASTER_RU
+	supervisors = JOB_QUARTERMASTER
 	description = "Исследователь космоса и Врат"
 	display_order = JOB_DISPLAY_ORDER_EXPLORER
 	departments_list = list(
@@ -28,7 +28,7 @@
 		/datum/job_department/cargo,
 	)
 
-	family_heirlooms = list(/obj/item/flashlight/eyelight, /obj/item/multitool)
+	family_heirlooms = list(/obj/item/gps, /obj/item/multitool)
 
 	mail_goodies = list(
 		/obj/item/stack/spacecash/c500 = 3,
