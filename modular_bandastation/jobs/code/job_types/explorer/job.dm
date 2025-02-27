@@ -22,17 +22,13 @@
 
 	paycheck = PAYCHECK_CREW
 	paycheck_department = ACCOUNT_CAR
-
 	bounty_types = CIV_JOB_BASIC
 	departments_list = list(
 		/datum/job_department/cargo,
 	)
-
 	family_heirlooms = list(/obj/item/gps, /obj/item/multitool)
-
 	mail_goodies = list(
 		/obj/item/stack/spacecash/c500 = 3,
 	)
-
 	rpg_title = "Explorer"
 	job_flags = STATION_JOB_FLAGS
