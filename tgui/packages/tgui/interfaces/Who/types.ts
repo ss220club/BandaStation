@@ -58,7 +58,6 @@ type Client = {
   ckey: string;
   ping: Ping;
   status: Status | null;
-  adminRank: BooleanLike | null;
   mobRef: string | null;
   accountAge: number | null;
   byondVerstion: string | null;

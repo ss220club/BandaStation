@@ -69,8 +69,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			"ping" = list(
 				"lastPing" = client.lastping,
 				"avgPing" = client.avgping,
-			),
-			"adminRank" = client?.holder?.ranks[1],
+			)
 		)
 
 		// More info for admins
