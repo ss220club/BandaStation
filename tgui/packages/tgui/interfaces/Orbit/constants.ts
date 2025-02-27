@@ -74,7 +74,7 @@ export const DEPARTMENT2COLOR: Record<string, Department> = {
     color: 'purple',
     trims: ['Lawyer', 'Magistrate', 'Магистрат'],
   },
-  // BANDASTATION ADD - START
+  // BANDASTATION ADD - END
 };
 
 export const THREAT = {
