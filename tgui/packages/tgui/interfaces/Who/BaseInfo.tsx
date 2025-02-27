@@ -23,7 +23,7 @@ export function UserInfo(props) {
     <Section>
       <Stack fill ml={0.5} mr={0.5}>
         <Stack.Item grow bold fontSize={1.2}>
-          {user.ckey}{' '}
+          {user.key}{' '}
           {!!user.admin && (
             <Tooltip content={'Администратор'}>
               <Icon name="crown" color="gold" />
@@ -58,7 +58,7 @@ export function Clients(props) {
   const clientsList = Object.values(clients).flat();
   const sortedClients = clientsList
     .filter((client) =>
-      client.ckey.toLowerCase().includes(searchText.toLowerCase()),
+      client.key.toLowerCase().includes(searchText.toLowerCase()),
     )
     .sort(sortTypes[sortType]);
 
@@ -128,7 +128,7 @@ function ClientsTable(props) {
         const status = client?.status;
         return (
           <Table.Row
-            key={client.ckey}
+            key={client.key}
             backgroundColor={
               client.accountAge < NEW_ACCOUNT_AGE &&
               'hsla(120, 100%, 25%, 0.25)'

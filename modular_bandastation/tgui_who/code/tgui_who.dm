@@ -28,7 +28,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 /datum/tgui_who/ui_data(mob/user)
 	var/list/data = list()
 	data["user"] = list(
-		"ckey" = viewer.key,
+		"key" = viewer.key,
 		"ping" = list(
 			"lastPing" = viewer.lastping,
 			"avgPing" = viewer.avgping,
@@ -65,7 +65,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	var/list/clients = list()
 	for(var/client/client in GLOB.clients)
 		clients[client] += list(
-			"ckey" = client.ckey,
+			"key" = client.ckey,
 			"ping" = list(
 				"lastPing" = client.lastping,
 				"avgPing" = client.avgping,

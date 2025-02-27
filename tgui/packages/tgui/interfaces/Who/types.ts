@@ -8,13 +8,13 @@ export type WhoData = {
 };
 
 type User = {
-  ckey: string;
+  key: string;
   admin: BooleanLike;
   ping: Ping;
 };
 
 type Client = {
-  ckey: string;
+  key: string;
   ping: Ping;
   status: Status | null;
   mobRef: string | null;
