@@ -66,7 +66,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	var/list/clients = list()
 	for(var/client/client in GLOB.clients)
 		clients[client] += list(
-			"key" = client.ckey,
+			"key" = client.key,
 			"ping" = list(
 				"lastPing" = client.lastping,
 				"avgPing" = client.avgping,

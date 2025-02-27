@@ -137,21 +137,21 @@ function ClientsTable(props) {
             {client.accountAge < NEW_ACCOUNT_AGE ? (
               <Tooltip content={NEW_ACCOUNT_NOTICE}>
                 <Table.Cell bold>
-                  <Icon name="baby" color="green" size={1.25} /> {client.ckey}
+                  <Icon name="baby" color="green" size={1.25} /> {client.key}
                 </Table.Cell>
               </Tooltip>
             ) : (
-              <Table.Cell bold>{client.ckey}</Table.Cell>
+              <Table.Cell bold>{client.key}</Table.Cell>
             )}
             <Table.Cell>
               {!['Возраст аккаунта', 'Версия BYOND'].includes(sortType)
                 ? client.status?.where
                 : sortType === 'Версия BYOND'
                   ? client.byondVersion
-                  : client.accountAge}
+                  : numberToDays(client.accountAge)}
             </Table.Cell>
             <Table.Cell color={getConditionColor(client.status?.state)}>
-              {status?.state}
+              {client.status?.state}
             </Table.Cell>
             <Table.Cell color={getPingColor(client.ping.avgPing)}>
               {Math.round(client.ping.avgPing)}ms
@@ -179,7 +179,7 @@ function ClientsCompact(props) {
   const { clients, sortType, setSubjectRef } = props;
   return clients.map((client) => (
     <Button
-      key={client.ckey}
+      key={client.key}
       color={
         sortType === 'Пинг'
           ? getPingColor(client.ping.avgPing)
@@ -214,7 +214,7 @@ function ClientsCompact(props) {
     >
       <Stack align="center">
         {client.accountAge < NEW_ACCOUNT_AGE && <Icon name="baby" />}
-        <Stack.Item>{client.ckey}</Stack.Item>
+        <Stack.Item>{client.key}</Stack.Item>
         {sortType === 'Пинг' && (
           <Stack.Item>{Math.round(client.ping.avgPing)}ms</Stack.Item>
         )}
