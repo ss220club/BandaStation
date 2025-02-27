@@ -34,6 +34,7 @@ export const JOBS_RU = {
   'Cargo Technician': 'Грузчик',
   'Shaft Miner': 'Шахтер',
   Bitrunner: 'Битраннер',
+  Explorer: 'Исследователь',
   Bartender: 'Бармен',
   Botanist: 'Ботаник',
   Cook: 'Повар',
