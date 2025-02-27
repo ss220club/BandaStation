@@ -84,8 +84,9 @@
 
 	if(!scrubbers.len)
 		return kill()
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
-/datum/round_event_control/scrubber_overflow/can_spawn_event(players_amt, allow_magic = FALSE)
+/datum/round_event_control/scrubber_overflow/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
 	. = ..()
 	if(!.)
 		return
