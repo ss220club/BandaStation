@@ -1,6 +1,8 @@
 #include "_objects.dm"
 
 #include "code/shuttles.dm"
+#include "code/melee_weapon.dm"
+#include "code/stealthy.dm"
 
 #include "code/effects/decal.dm"
 #include "code/effects/spawners.dm"
@@ -72,6 +74,7 @@
 #include "code/items/weapons/melee/centcom/legendary_swords.dm"
 #include "code/items/weapons/ranged/energy/awaymission_gun.dm"
 #include "code/items/weapons/ranged/energy/eg_14.dm"
+#include "code/items/weapons/melee/garrote.dm"
 
 #include "code/machinery/papershredder.dm"
 #include "code/machinery/photocopier.dm"
@@ -90,3 +93,6 @@
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
 
 #include "code/mecha/mecha.dm"
+
+
+
