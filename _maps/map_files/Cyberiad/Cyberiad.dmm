@@ -244,10 +244,10 @@
 /turf/open/floor/iron,
 /area/station/engineering/storage_shared)
 "adh" = (
-/obj/machinery/suit_storage_unit/medical,
 /obj/effect/turf_decal/bot_white{
 	color = "#52B4E9"
 	},
+/obj/machinery/suit_storage_unit/medical,
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "adk" = (
@@ -8754,6 +8754,12 @@
 	pixel_y = -2
 	},
 /obj/structure/cable,
+/obj/item/storage/belt/medical{
+	pixel_y = 6
+	},
+/obj/item/clothing/glasses/hud/health{
+	pixel_y = -2
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/paramedic)
 "ccJ" = (
@@ -14030,14 +14036,14 @@
 /area/station/command/bridge)
 "dmG" = (
 /obj/structure/table,
+/obj/effect/turf_decal/trimline/blue/filled/line,
+/obj/item/gun/syringe{
+	pixel_x = -12
+	},
 /obj/item/gun/syringe{
 	pixel_x = -12;
 	pixel_y = 6
 	},
-/obj/item/gun/syringe{
-	pixel_x = -12
-	},
-/obj/effect/turf_decal/trimline/blue/filled/line,
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "dmU" = (
@@ -22418,9 +22424,13 @@
 /turf/open/floor/carpet/black,
 /area/station/commons/lounge)
 "fqT" = (
-/obj/structure/tank_dispenser/oxygen,
-/obj/effect/turf_decal/delivery/white{
-	color = "#52B4E9"
+/obj/structure/table,
+/obj/item/wheelchair{
+	pixel_y = -3
+	},
+/obj/item/wheelchair,
+/obj/item/wheelchair{
+	pixel_y = 3
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
@@ -34401,16 +34411,16 @@
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/table,
 /obj/item/clothing/glasses/hud/health{
-	pixel_y = 10
-	},
-/obj/item/clothing/glasses/hud/health{
-	pixel_y = 6
+	pixel_y = -2
 	},
 /obj/item/clothing/glasses/hud/health{
 	pixel_y = 2
 	},
 /obj/item/clothing/glasses/hud/health{
-	pixel_y = -2
+	pixel_y = 6
+	},
+/obj/item/clothing/glasses/hud/health{
+	pixel_y = 10
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
@@ -47075,8 +47085,11 @@
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/captain)
 "loR" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/light_switch/directional/west,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/effect/turf_decal/delivery/white{
+	color = "#52B4E9"
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "loT" = (
@@ -49920,8 +49933,6 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
 	},
-/obj/structure/window/reinforced/spawner/directional/east,
-/obj/structure/window/reinforced/spawner/directional/south,
 /obj/item/storage/medkit/brute{
 	pixel_x = 6;
 	pixel_y = 6
@@ -49932,6 +49943,9 @@
 	pixel_y = -3
 	},
 /obj/structure/table/reinforced,
+/obj/machinery/door/window/left/directional/south{
+	req_access = list("medical")
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "lWI" = (
@@ -56747,10 +56761,10 @@
 "nDg" = (
 /obj/machinery/light/directional/west,
 /obj/machinery/rnd/production/techfab/department/medical,
+/obj/structure/extinguisher_cabinet/directional/west,
 /obj/effect/turf_decal/bot_white{
 	color = "#52B4E9"
 	},
-/obj/structure/extinguisher_cabinet/directional/west,
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "nDm" = (
@@ -72212,6 +72226,8 @@
 /obj/item/mod/module/plasma_stabilizer,
 /obj/item/mod/module/thermal_regulator,
 /obj/item/mod/module/signlang_radio,
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "ror" = (
@@ -76949,6 +76965,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/ghetto/fore/starboard)
+"svd" = (
+/obj/effect/turf_decal/delivery/white{
+	color = "#52B4E9"
+	},
+/obj/structure/tank_dispenser/oxygen,
+/turf/open/floor/iron/white,
+/area/station/medical/storage)
 "svg" = (
 /obj/effect/turf_decal/tile/yellow/fourcorners,
 /obj/machinery/door/airlock/medical/glass,
@@ -79157,8 +79180,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "sXY" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/item/radio/intercom/directional/west,
+/obj/effect/turf_decal/bot_white{
+	color = "#52B4E9"
+	},
+/obj/machinery/suit_storage_unit/medical,
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "sYa" = (
@@ -94948,9 +94974,13 @@
 	},
 /area/station/engineering/atmos)
 "wTr" = (
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/effect/turf_decal/delivery/white{
-	color = "#52B4E9"
+/obj/structure/table,
+/obj/item/emergency_bed,
+/obj/item/emergency_bed{
+	pixel_y = 3
+	},
+/obj/item/emergency_bed{
+	pixel_y = 6
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
@@ -202526,7 +202556,7 @@ rrp
 sNP
 vTc
 loR
-adh
+svd
 nDg
 adh
 sXY
