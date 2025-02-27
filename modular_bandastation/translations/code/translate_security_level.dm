@@ -12,3 +12,9 @@
 
 /datum/security_level/delta
 	ru_name = "дельта"
+
+/datum/security_level/gamma
+	ru_name = "гамма"
+
+/datum/security_level/epsilon
+	ru_name = "эпсилон"
