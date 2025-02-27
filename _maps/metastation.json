@@ -23,7 +23,7 @@
             "spawn_positions": 1
         },
 		"Explorer": {
-            "spawn_positions": 4
+			"spawn_positions": 4
         }
 	}
 }
