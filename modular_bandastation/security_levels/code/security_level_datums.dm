@@ -5,6 +5,18 @@
 /datum/config_entry/string/alert_epsilon
 	default = "Центральным командованием был установлен код ЭПСИЛОН. Все контракты расторгнуты."
 
+/datum/security_level
+	/// Delay before this security level is set
+	var/set_delay = 0
+
+/// Called before setting or planning to set the security level
+/datum/security_level/proc/pre_set_security_level()
+	return
+
+/// Called after setting security level, just before sending `COMSIG_SECURITY_LEVEL_CHANGED`
+/datum/security_level/proc/post_set_security_level()
+	return
+
 /**
  * Gamma
  *
@@ -36,6 +48,27 @@
 	lowering_to_configuration_key = /datum/config_entry/string/alert_epsilon
 	elevating_to_configuration_key = /datum/config_entry/string/alert_epsilon
 	shuttle_call_time_mod = 10
+	set_delay = 15 SECONDS
 
-#undef SEC_LEVEL_GAMMA
-#undef SEC_LEVEL_EPSILON
+/datum/security_level/epsilon/pre_set_security_level()
+	power_fail(set_delay, set_delay)
+
+/datum/security_level/epsilon/post_set_security_level()
+	for(var/obj/machinery/light/light_to_update as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
+		if(is_station_level(light_to_update.z))
+			light_to_update.set_major_emergency_light()
+
+		CHECK_TICK
+
+	for(var/obj/machinery/power/apc/current_apc as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/apc))
+		if(!current_apc.cell || !SSmapping.level_trait(current_apc.z, ZTRAIT_STATION))
+			continue
+
+		var/area/apc_area = current_apc.area
+		if(is_type_in_typecache(apc_area, GLOB.typecache_powerfailure_safe_areas))
+			continue
+
+		current_apc.reboot()
+		CHECK_TICK
+
+

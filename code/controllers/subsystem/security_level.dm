@@ -2,6 +2,7 @@ SUBSYSTEM_DEF(security_level)
 	name = "Security Level"
 	can_fire = FALSE // We will control when we fire in this subsystem
 	init_order = INIT_ORDER_SECURITY_LEVEL
+	var/set_timer_id = null // BANDASTATION ADDITION
 	/// Currently set security level
 	var/datum/security_level/current_security_level
 	/// A list of initialised security level datums.
@@ -53,6 +54,22 @@ SUBSYSTEM_DEF(security_level)
 	if(!selected_level)
 		CRASH("set_level was called with an invalid security level([new_level])")
 
+	// BANDASTATION EDIT - START
+	if(!isnull(set_timer_id))
+		deltimer(set_timer_id)
+		set_timer_id = null
+
+	selected_level.pre_set_security_level()
+	if(selected_level.set_delay > 0)
+		set_timer_id = addtimer(CALLBACK(src, PROC_REF(set_level_instantly), selected_level, announce), selected_level.set_delay)
+	else
+		set_level_instantly(selected_level, announce)
+	// BANDASTATION EDIT - END
+
+// BANDASTATION ADDITION - START
+/datum/controller/subsystem/security_level/proc/set_level_instantly(datum/security_level/selected_level, announce = TRUE)
+	PRIVATE_PROC(TRUE)
+
 	if(SSnightshift.can_fire && (selected_level.number_level >= SEC_LEVEL_RED || current_security_level.number_level >= SEC_LEVEL_RED))
 		SSnightshift.next_fire = world.time + 7 SECONDS // Fire nightshift after the security level announcement is complete
 
@@ -70,8 +87,11 @@ SUBSYSTEM_DEF(security_level)
 	if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL) // By god this is absolutely shit
 		SSshuttle.emergency.alert_coeff_change(selected_level.shuttle_call_time_mod)
 
+	selected_level.post_set_security_level()
+
 	SEND_SIGNAL(src, COMSIG_SECURITY_LEVEL_CHANGED, selected_level.number_level)
 	SSblackbox.record_feedback("tally", "security_level_changes", 1, selected_level.name)
+// BANDASTATION ADDITION - END
 
 /**
  * Returns the current security level as a number
