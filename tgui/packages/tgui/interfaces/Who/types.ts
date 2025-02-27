@@ -2,7 +2,7 @@ import { BooleanLike } from 'tgui-core/react';
 
 export type WhoData = {
   user: User;
-  subject: Subject;
+  subject: Subject | null;
   clients: Record<string, Client[]>;
   modalOpen: BooleanLike;
 };
@@ -11,47 +11,6 @@ type User = {
   ckey: string;
   admin: BooleanLike;
   ping: Ping;
-};
-
-type Subject = {
-  key: string | null;
-  type: string | null;
-  gender: string | null;
-  state: string | null;
-  ping: Ping | null;
-  name: SubjectName | null;
-  role: SubjectRole | null;
-  health: SubjectHealth | null;
-  location: SubjectLocation | null;
-  accountAge: number | null;
-  accountIp: string | null;
-  byondVersion: string | null;
-};
-
-type SubjectName = {
-  real: string;
-  mind: string;
-};
-
-type SubjectRole = {
-  assigned: string;
-  antagonist: string[];
-};
-
-type SubjectHealth = {
-  brute: number;
-  burn: number;
-  toxin: number;
-  oxygen: number;
-  brain: number;
-  stamina: number;
-};
-
-type SubjectLocation = {
-  area: string;
-  x: number;
-  y: number;
-  z: number;
 };
 
 type Client = {
@@ -72,4 +31,45 @@ type Status = {
   where: string;
   state: string;
   antag: BooleanLike;
+};
+
+type Subject = {
+  key: string;
+  type: string;
+  gender: string;
+  state: string;
+  ping: Ping;
+  name: SubjectName | null;
+  role: SubjectRole;
+  health: SubjectHealth | null;
+  location: SubjectLocation | null;
+  accountAge: number;
+  accountIp: string;
+  byondVersion: string;
+};
+
+type SubjectName = {
+  real: string | null;
+  mind: string | null;
+};
+
+type SubjectRole = {
+  assigned: string;
+  antagonist: string[] | null;
+};
+
+type SubjectHealth = {
+  brute: number;
+  burn: number;
+  toxin: number;
+  oxygen: number;
+  brain: number;
+  stamina: number;
+};
+
+type SubjectLocation = {
+  area: string;
+  x: number;
+  y: number;
+  z: number;
 };
