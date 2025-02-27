@@ -22,7 +22,7 @@ export function Subject(props) {
   return (
     <Modal p={1} style={{ width: '80vw' }}>
       <Section
-        title={subject.key}
+        title={subject?.key}
         buttons={
           <Stack align="center">
             <Stack.Item mr={1}>
