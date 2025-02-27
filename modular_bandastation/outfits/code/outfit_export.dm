@@ -8,5 +8,7 @@
 
 /datum/outfit/load_from(list/outfit_data)
 	. = ..()
+	if(!.)
+		return
 	organs = text2path(outfit_data["organs"])
 	return TRUE
