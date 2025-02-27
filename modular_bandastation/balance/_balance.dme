@@ -12,6 +12,7 @@
 #include "code/crew_manifest.dm"
 #include "code/dynamic.dm"
 #include "code/events.dm"
+#include "code/heretic_knife.dm"
 #include "code/laser.dm"
 #include "code/materials_market.dm"
 #include "code/religion.dm"
