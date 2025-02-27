@@ -90,7 +90,7 @@ GLOBAL_LIST_EMPTY(objectives)
 
 	open_machine(density_to_set = TRUE)
 
-/obj/machinery/cryopod/close_machine(atom/movable/target, density_to_set = TRUE)
+/obj/machinery/cryopod/close_machine(atom/movable/target, density_to_set)
 	find_control_computer()
 
 	if(!can_be_put_inside(target))

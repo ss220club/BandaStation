@@ -53,7 +53,7 @@ export const Autolathe = (props) => {
 
   return (
     <Window title="Автолат" width={800} height={600}>
-      <Window.Content scrollable>
+      <Window.Content>
         <Stack vertical fill>
           <Stack.Item>
             <Section title="Всего материалов">

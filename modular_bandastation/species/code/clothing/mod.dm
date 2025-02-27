@@ -15,7 +15,7 @@
 	var/mob/living/carbon/user = usr
 	if(istype(user))
 		var/obj/item/bodypart/head/bodypart_head = user.get_bodypart(BODY_ZONE_HEAD)
-		if(bodypart_head && worn_icon_species && worn_icon_species[bodypart_head.species_bodytype])
+		if(bodypart_head && worn_icon_species?[bodypart_head.species_bodytype])
 			module_icon = mutable_appearance(worn_icon_species[bodypart_head.species_bodytype], used_overlay, layer = standing.layer + 0.1)
 	if(!use_mod_colors)
 		module_icon.appearance_flags |= RESET_COLOR

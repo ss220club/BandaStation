@@ -69,7 +69,10 @@
 	else if(href_list["gamemode_panel"])
 		if(!check_rights(R_ADMIN))
 			return
-		SSdynamic.admin_panel()
+		// BANDASTATION EDIT START - STORYTELLER
+		//SSdynamic.admin_panel()
+		SSgamemode.admin_panel(usr)
+		// BANDASTATION EDIT END - STORYTELLER
 
 	else if(href_list["call_shuttle"])
 		if(!check_rights(R_ADMIN))
@@ -1699,6 +1702,7 @@
 			return
 		return usr.client?.mark_datum(datum_to_mark)
 
+#ifndef DISABLE_DREAMLUAU
 	else if(href_list["lua_state"])
 		if(!check_rights(R_DEBUG))
 			return
@@ -1715,6 +1719,7 @@
 				editor.force_view_chunk = log_entry["chunk"]
 				editor.force_modal = "viewChunk"
 		editor.ui_interact(usr)
+#endif
 
 	else if(href_list["show_paper"])
 		if(!check_rights(R_ADMIN))

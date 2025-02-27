@@ -214,8 +214,8 @@ export const DesignBrowser = <T extends Design = Design>(
             <Stack.Item>
               <Section title="Категории" fitted />
             </Stack.Item>
-            <Stack.Item grow>
-              <Section fill style={{ overflow: 'auto' }}>
+            <Stack.Item grow style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+              <Section fill>
                 <div className="FabricatorTabs">
                   <div
                     className={classes([
@@ -275,8 +275,8 @@ export const DesignBrowser = <T extends Design = Design>(
                 />
               </Section>
             </Stack.Item>
-            <Stack.Item grow>
-              <Section fill style={{ overflow: 'auto' }}>
+            <Stack.Item grow style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+              <Section fill>
                 {searchText.length > 0 ? (
                   <VirtualList>
                     {sortBy(

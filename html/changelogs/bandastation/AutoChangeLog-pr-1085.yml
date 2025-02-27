@@ -1,4 +1,0 @@
-author: "Gaxeer"
-delete-after: True
-changes:
-  - rscadd: "rust_utils обновлен до 0.2.0 и используются преимущества обновленной работы с HTTP"

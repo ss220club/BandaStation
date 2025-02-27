@@ -5,7 +5,7 @@
 	route = PATH_SIDE
 
 	tier1 = /datum/heretic_knowledge/essence
-	tier2 = list(/datum/heretic_knowledge/curse/corrosion, /datum/heretic_knowledge/entropy_pulse)
+	tier2 = list(/datum/heretic_knowledge/entropy_pulse, /datum/heretic_knowledge/rust_sower)
 	tier3 = /datum/heretic_knowledge/summon/rusty
 
 
@@ -14,7 +14,7 @@
 /datum/heretic_knowledge/essence
 	name = "Priest's Ritual"
 	desc = "Позволяет трансмутировать емкость с водой и осколок стекла в Колбу с мистической эссенцией. \
-		Мистическую воду можно употреблять для мощного исцеления или давать язычникам для смертельного отравления."
+		Мистическую эссенцию можно употреблять для мощного исцеления или давать язычникам для смертельного отравления."
 	gain_text = "Это старый рецепт. Сова шепнула мне его. \
 		Созданная Жрецом - Жидкость, которая есть, и которой нет."
 
@@ -28,6 +28,19 @@
 
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
 	research_tree_icon_state = "eldritch_flask"
+
+/datum/heretic_knowledge/rust_sower
+	name = "Rust Sower Grenade"
+	desc = "Allws you to combine a chemical grenade casing and a liver to conjure a cursed grenade filled with Eldritch Rust, upon detonating it releases a huge cloud that blinds organics, rusts affected turfs and obliterates Silicons and Mechs."
+	gain_text = "The choked vines of the Rusted Hills are burdened with such overripe fruits. It undoes the markers of progress, leaving a clean slate to work into new shapes."
+	required_atoms = list(
+		/obj/item/grenade/chem_grenade = 1,
+		/obj/item/organ/liver = 1,
+	)
+	result_atoms = list(/obj/item/grenade/chem_grenade/rust_sower)
+	cost = 1
+	research_tree_icon_path = 'icons/obj/weapons/grenade.dmi'
+	research_tree_icon_state = "rustgrenade"
 
 /datum/heretic_knowledge/entropy_pulse
 	name = "Pulse of Entropy"
@@ -54,40 +67,6 @@
 			continue
 		nearby_turf.rust_heretic_act()
 	return TRUE
-
-/datum/heretic_knowledge/curse/corrosion
-	name = "Curse of Corrosion"
-	desc = "Позволяет трансмутировать кусачки, лужу рвоты и сердце, чтобы наложить проклятие болезни на члена экипажа. \
-		При проклятии жертву будет постоянно рвать, а ее органы будут получать постоянный урон. Вы можете дополнительно снабдить предмет \
-		к которому прикоснулась жертва или который покрыт кровью жертвы, чтобы придать увеличить длительность проклятия."
-	gain_text = "Тело человечества временно. Их слабости невозможно остановить, как поддающееся ржавчине железо. Покажите им всем."
-
-	required_atoms = list(
-		/obj/item/wirecutters = 1,
-		/obj/effect/decal/cleanable/vomit = 1,
-		/obj/item/organ/heart = 1,
-	)
-	duration = 0.5 MINUTES
-	duration_modifier = 4
-	curse_color = "#c1ffc9"
-	cost = 1
-
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "curse_corrosion"
-
-
-/datum/heretic_knowledge/curse/corrosion/curse(mob/living/carbon/human/chosen_mob, boosted = FALSE)
-	to_chat(chosen_mob, span_danger("Вы чувствуете себя очень плохо..."))
-	chosen_mob.apply_status_effect(/datum/status_effect/corrosion_curse)
-	return ..()
-
-/datum/heretic_knowledge/curse/corrosion/uncurse(mob/living/carbon/human/chosen_mob, boosted = FALSE)
-	if(QDELETED(chosen_mob))
-		return
-
-	chosen_mob.remove_status_effect(/datum/status_effect/corrosion_curse)
-	to_chat(chosen_mob, span_green("Вы начинаете чувствовать себя лучше."))
-	return ..()
 
 /datum/heretic_knowledge/summon/rusty
 	name = "Rusted Ritual"
