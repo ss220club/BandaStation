@@ -55,8 +55,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			"location" = get_position(subject),
 			"accountAge" = subject.client.account_age,
 			"accountIp" = subject.client.address,
-			"byondVersion" = subject.client.byond_version,
-			"byondBuild" = subject.client.byond_build,
+			"byondVersion" = "[subject.client.byond_version].[subject.client.byond_build]",
 		)
 	return data
 
@@ -80,6 +79,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 				"status" = get_status(client.mob),
 				"mobRef" = REF(client.mob),
 				"accountAge" = client.account_age,
+				"byondVersion" = "[client.byond_version].[client.byond_build]",
 			)
 
 	data["clients"] = clients
@@ -207,7 +207,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		return
 
 	var/list/location_info = list()
-	location_info["area"] = position.loc.name || user.loc.name
+	location_info["area"] = get_area_name(position, TRUE) || get_area_name(user, TRUE)
 	location_info["x"] = position.x
 	location_info["y"] = position.y
 	location_info["z"] = position.z

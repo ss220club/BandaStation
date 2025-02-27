@@ -4,12 +4,11 @@
 $border-color: color.change(base.$color-bg, $lightness: 20%);
 
 .Who_Table {
-  margin: -1px;
   border: 1px solid $border-color;
 
   .Table__row--header {
     position: sticky;
-    top: -0.75em;
+    top: -0.5em;
     box-shadow: 0px 1px 0 $border-color;
     z-index: 1;
 
@@ -44,8 +43,10 @@ $border-color: color.change(base.$color-bg, $lightness: 20%);
       border-bottom: none;
     }
 
-    td {
-      padding: 0.33em 0.5em !important;
+    td,
+    td:first-child,
+    td:last-child {
+      padding: 0.33em 0.5em;
       border-right: 1px solid base.$color-bg;
 
       &:last-child {

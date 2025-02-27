@@ -25,8 +25,7 @@ type Subject = {
   location: SubjectLocation | null;
   accountAge: number | null;
   accountIp: string | null;
-  byondVersion: number | null;
-  byondBuild: number | null;
+  byondVersion: string | null;
 };
 
 type SubjectName = {
@@ -62,6 +61,7 @@ type Client = {
   adminRank: BooleanLike | null;
   mobRef: string | null;
   accountAge: number | null;
+  byondVerstion: string | null;
 };
 
 type Ping = {

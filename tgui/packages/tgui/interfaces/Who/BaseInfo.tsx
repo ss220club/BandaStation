@@ -9,9 +9,9 @@ import {
 } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import { SearchBar } from '../common/SearchBar';
-import { NEW_ACCOUNT_AGE, NEW_ACCOUNT_NOTICE } from './constants';
-import { getConditionColor, getPingColor } from './helpers';
+import { NEW_ACCOUNT_AGE, NEW_ACCOUNT_NOTICE, sortTypes } from './constants';
+import { Filters } from './Filters';
+import { getConditionColor, getPingColor, numberToDays } from './helpers';
 import { ShowPing } from './Ping';
 import { WhoData } from './types';
 
@@ -51,6 +51,7 @@ export function Clients(props) {
   const { user, clients } = data;
   const { setSubjectRef } = props;
 
+  const [sortType, setSortType] = useState(Object.keys(sortTypes)[0]);
   const [searchText, setSearchText] = useState('');
   const [moreInfo, setMoreInfo] = useState(false);
 
@@ -59,52 +60,66 @@ export function Clients(props) {
     .filter((client) =>
       client.ckey.toLowerCase().includes(searchText.toLowerCase()),
     )
-    .sort((a, b) => a.ckey.localeCompare(b.ckey));
+    .sort(sortTypes[sortType]);
 
   return (
     <Section
       fill
-      scrollable
       title={`Онлайн: ${clientsList.length}`}
       buttons={
-        <Stack>
-          <Stack.Item>
-            <SearchBar
-              style={{ width: '15em' }}
-              query={searchText}
-              onSearch={(value) => setSearchText(value)}
-            />
-          </Stack.Item>
-          {!!user.admin && (
-            <Stack.Item>
-              <Button
-                icon={moreInfo ? 'compress' : 'expand'}
-                tooltip={moreInfo ? 'Меньше информации' : 'Больше информации'}
-                tooltipPosition={'bottom-end'}
-                onClick={() => setMoreInfo(!moreInfo)}
-              />
-            </Stack.Item>
-          )}
-        </Stack>
+        !!user.admin && (
+          <Button
+            icon={moreInfo ? 'compress' : 'expand'}
+            tooltip={moreInfo ? 'Меньше информации' : 'Больше информации'}
+            tooltipPosition={'bottom-end'}
+            onClick={() => setMoreInfo(!moreInfo)}
+          />
+        )
       }
     >
-      {moreInfo && !!user.admin ? (
-        <ClientsTable clients={sortedClients} setSubjectRef={setSubjectRef} />
-      ) : (
-        <ClientsCompact clients={sortedClients} setSubjectRef={setSubjectRef} />
-      )}
+      <Stack fill vertical>
+        <Stack.Item>
+          <Filters
+            sortType={sortType}
+            setSortType={setSortType}
+            searchText={searchText}
+            setSearchText={setSearchText}
+          />
+        </Stack.Item>
+        <Stack.Divider />
+        <Stack.Item grow overflowY="auto">
+          {moreInfo && !!user.admin ? (
+            <ClientsTable
+              sortType={sortType}
+              clients={sortedClients}
+              setSubjectRef={setSubjectRef}
+            />
+          ) : (
+            <ClientsCompact
+              sortType={sortType}
+              clients={sortedClients}
+              setSubjectRef={setSubjectRef}
+            />
+          )}
+        </Stack.Item>
+      </Stack>
     </Section>
   );
 }
 
 function ClientsTable(props) {
   const { act } = useBackend();
-  const { clients, setSubjectRef } = props;
+  const { clients, sortType, setSubjectRef } = props;
+
   return (
     <Table className="Who_Table">
       <Table.Row header>
         <Table.Cell>CKEY</Table.Cell>
-        <Table.Cell>Персонаж</Table.Cell>
+        <Table.Cell>
+          {!['Возраст аккаунта', 'Версия BYOND'].includes(sortType)
+            ? 'Персонаж'
+            : sortType}
+        </Table.Cell>
         <Table.Cell>Состояние</Table.Cell>
         <Table.Cell>Пинг</Table.Cell>
         <Table.Cell />
@@ -115,7 +130,8 @@ function ClientsTable(props) {
           <Table.Row
             key={client.ckey}
             backgroundColor={
-              client.accountAge < NEW_ACCOUNT_AGE && 'hsla(60, 100%, 25%, 0.25)'
+              client.accountAge < NEW_ACCOUNT_AGE &&
+              'hsla(120, 100%, 25%, 0.25)'
             }
           >
             {client.accountAge < NEW_ACCOUNT_AGE ? (
@@ -127,7 +143,13 @@ function ClientsTable(props) {
             ) : (
               <Table.Cell bold>{client.ckey}</Table.Cell>
             )}
-            <Table.Cell>{status?.where}</Table.Cell>
+            <Table.Cell>
+              {!['Возраст аккаунта', 'Версия BYOND'].includes(sortType)
+                ? client.status?.where
+                : sortType === 'Версия BYOND'
+                  ? client.byondVersion
+                  : client.accountAge}
+            </Table.Cell>
             <Table.Cell color={getConditionColor(client.status?.state)}>
               {status?.state}
             </Table.Cell>
@@ -154,21 +176,28 @@ function ClientsTable(props) {
 
 function ClientsCompact(props) {
   const { act, data } = useBackend<WhoData>();
-  const { clients, setSubjectRef } = props;
+  const { clients, sortType, setSubjectRef } = props;
   return clients.map((client) => (
     <Button
       key={client.ckey}
-      icon={client.accountAge < NEW_ACCOUNT_AGE && 'baby'}
-      color={getConditionColor(client.status?.state)}
+      color={
+        sortType === 'Пинг'
+          ? getPingColor(client.ping.avgPing)
+          : getConditionColor(client.status?.state)
+      }
       tooltip={
-        <Stack vertical align="center">
-          {client.accountAge < NEW_ACCOUNT_AGE && (
-            <Stack.Item>{NEW_ACCOUNT_NOTICE}</Stack.Item>
-          )}
-          <Stack.Item>
-            <ShowPing user={client} />
-          </Stack.Item>
-        </Stack>
+        (sortType !== 'Пинг' || client.accountAge < NEW_ACCOUNT_AGE) && (
+          <Stack vertical align="center">
+            {client.accountAge < NEW_ACCOUNT_AGE && (
+              <Stack.Item>{NEW_ACCOUNT_NOTICE}</Stack.Item>
+            )}
+            {sortType !== 'Пинг' && (
+              <Stack.Item>
+                <ShowPing user={client} />
+              </Stack.Item>
+            )}
+          </Stack>
+        )
       }
       tooltipPosition={'bottom-start'}
       onClick={() => {
@@ -183,7 +212,19 @@ function ClientsCompact(props) {
         act('follow', { ref: client.mobRef });
       }}
     >
-      {client.ckey}
+      <Stack align="center">
+        {client.accountAge < NEW_ACCOUNT_AGE && <Icon name="baby" />}
+        <Stack.Item>{client.ckey}</Stack.Item>
+        {sortType === 'Пинг' && (
+          <Stack.Item>{Math.round(client.ping.avgPing)}ms</Stack.Item>
+        )}
+        {sortType === 'Возраст аккаунта' && (
+          <Stack.Item>{numberToDays(client.accountAge)}</Stack.Item>
+        )}
+        {sortType === 'Версия BYOND' && (
+          <Stack.Item>{client.byondVersion}</Stack.Item>
+        )}
+      </Stack>
     </Button>
   ));
 }

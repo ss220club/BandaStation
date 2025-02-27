@@ -3,7 +3,7 @@ import { Icon, Stack, Tooltip } from 'tgui-core/components';
 export function ShowPing(props) {
   const { user } = props;
   return (
-    <Stack wrap color="label">
+    <Stack wrap>
       <Tooltip content="Текущий пинг" position={'bottom-end'}>
         <Stack.Item color="green">
           <Icon name="clock-rotate-left" /> {Math.round(user.ping.lastPing)}ms

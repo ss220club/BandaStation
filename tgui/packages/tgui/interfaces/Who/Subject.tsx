@@ -154,7 +154,7 @@ function SubjectInfoList(props) {
             {numberToDays(subject.accountAge)}
           </LabeledList.Item>
           <LabeledList.Item label="Версия Byond">
-            {subject.byondVersion}.{subject.byondBuild}
+            {subject.byondVersion}
           </LabeledList.Item>
         </LabeledList>
       </Stack.Item>
