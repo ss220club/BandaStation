@@ -122,7 +122,7 @@ function ClientsTable(props) {
         </Table.Cell>
         <Table.Cell>Состояние</Table.Cell>
         <Table.Cell>Пинг</Table.Cell>
-        <Table.Cell />
+        <Table.Cell collapsing />
       </Table.Row>
       {clients.map((client) => {
         const status = client?.status;
