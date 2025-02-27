@@ -6954,7 +6954,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/aft)
 "bLp" = (
-/obj/effect/landmark/start/explorer,
 /turf/open/floor/iron/dark,
 /area/station/command/gateway)
 "bLz" = (
@@ -41344,7 +41343,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/effect/landmark/start/explorer,
 /turf/open/floor/iron/dark,
 /area/station/command/gateway)
 "ksS" = (
@@ -75918,7 +75916,6 @@
 /area/station/science/xenobiology)
 "sWY" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/landmark/start/explorer,
 /turf/open/floor/iron/dark,
 /area/station/command/gateway)
 "sXi" = (
@@ -88648,7 +88645,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/holopad,
 /obj/effect/landmark/event_spawn,
-/obj/effect/landmark/start/explorer,
 /turf/open/floor/iron/dark,
 /area/station/command/gateway)
 "wlG" = (

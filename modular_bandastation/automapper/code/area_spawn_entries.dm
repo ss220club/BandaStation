@@ -41,3 +41,8 @@
 */
 
 // Этот блок - пример для создания новой зоны, так как автомаппару ТРЕБУЕТСЯ, чтобы у каждого турфа была привязка к зоне
+
+// Explorer landmark in gateway area
+/datum/area_spawn/explorer_landmark
+	target_areas = list(/area/station/command/gateway)
+	desired_atom = /obj/effect/landmark/start/explorer
