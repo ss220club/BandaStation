@@ -18,15 +18,24 @@ export function Subject(props) {
   const { act, data } = useBackend<WhoData>();
   const { subject } = data;
   const { subjectRef, setSubjectRef } = props;
+  const [showCkey, setShowCkey] = useState(false);
 
   return (
     <Modal p={1} style={{ width: '80vw' }}>
       <Section
-        title={subject?.key}
+        title={showCkey ? subject?.ckey : subject?.key}
         buttons={
           <Stack align="center">
             <Stack.Item mr={1}>
               <ShowPing user={subject} />
+            </Stack.Item>
+            <Stack.Item>
+              <Button
+                tooltip={showCkey ? 'Показать CKEY' : 'Показать KEY'}
+                icon={'eye'}
+                selected={showCkey}
+                onClick={() => setShowCkey(!showCkey)}
+              />
             </Stack.Item>
             <Stack.Item>
               <Button

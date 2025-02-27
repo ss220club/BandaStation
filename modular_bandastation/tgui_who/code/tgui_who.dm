@@ -39,6 +39,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	if(modal_open)
 		data["subject"] = list(
 			"key" = subject.client.key,
+			"ckey" = subject.client.ckey,
 			"ping" = list(
 				"lastPing" = subject.client.lastping,
 				"avgPing" = subject.client.avgping,

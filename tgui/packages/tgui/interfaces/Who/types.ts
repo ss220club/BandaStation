@@ -35,6 +35,7 @@ type Status = {
 
 type Subject = {
   key: string;
+  ckey: string;
   type: string;
   gender: string;
   state: string;
