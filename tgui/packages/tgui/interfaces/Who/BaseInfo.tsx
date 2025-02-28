@@ -68,12 +68,21 @@ export function Clients(props) {
       title={`Онлайн: ${clientsList.length}`}
       buttons={
         !!user.admin && (
-          <Button
-            icon={moreInfo ? 'compress' : 'expand'}
-            tooltip={moreInfo ? 'Меньше информации' : 'Больше информации'}
-            tooltipPosition={'bottom-end'}
-            onClick={() => setMoreInfo(!moreInfo)}
-          />
+          <>
+            {!moreInfo && (
+              <Button
+                icon={'question'}
+                tooltip={'ПКМ позволяет обсёрвить моба клиента.'}
+                tooltipPosition={'bottom-end'}
+              />
+            )}
+            <Button
+              icon={moreInfo ? 'compress' : 'expand'}
+              tooltip={moreInfo ? 'Меньше информации' : 'Больше информации'}
+              tooltipPosition={'bottom-end'}
+              onClick={() => setMoreInfo(!moreInfo)}
+            />
+          </>
         )
       }
     >
@@ -125,7 +134,6 @@ function ClientsTable(props) {
         <Table.Cell collapsing />
       </Table.Row>
       {clients.map((client) => {
-        const status = client?.status;
         return (
           <Table.Row
             key={client.key}
@@ -136,12 +144,22 @@ function ClientsTable(props) {
           >
             {client.accountAge < NEW_ACCOUNT_AGE ? (
               <Tooltip content={NEW_ACCOUNT_NOTICE}>
-                <Table.Cell bold>
+                <Table.Cell
+                  bold
+                  className="Who_Table--clickable"
+                  onClick={() => act('follow', { ref: client.mobRef })}
+                >
                   <Icon name="baby" color="green" size={1.25} /> {client.key}
                 </Table.Cell>
               </Tooltip>
             ) : (
-              <Table.Cell bold>{client.key}</Table.Cell>
+              <Table.Cell
+                bold
+                className="Who_Table--clickable"
+                onClick={() => act('follow', { ref: client.mobRef })}
+              >
+                {client.key}
+              </Table.Cell>
             )}
             <Table.Cell>
               {!['Возраст аккаунта', 'Версия BYOND'].includes(sortType)
@@ -158,7 +176,7 @@ function ClientsTable(props) {
             </Table.Cell>
             <Table.Cell collapsing>
               <Button
-                icon="question"
+                icon="bars"
                 tooltip="Подробнее"
                 tooltipPosition={'bottom-end'}
                 onClick={() => {

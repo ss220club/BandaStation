@@ -54,4 +54,13 @@ $border-color: color.change(base.$color-bg, $lightness: 20%);
       }
     }
   }
+
+  &--clickable {
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: hsla(0, 0%, 100%, 0.2);
+    }
+  }
 }
