@@ -201,7 +201,7 @@ function ClientsCompact(props) {
       color={
         sortType === 'Пинг'
           ? getPingColor(client.ping.avgPing)
-          : getConditionColor(client?.status?.state)
+          : getConditionColor(client.status?.state)
       }
       tooltip={
         (sortType !== 'Пинг' || client.accountAge < NEW_ACCOUNT_AGE) && (
