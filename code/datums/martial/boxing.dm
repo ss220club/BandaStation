@@ -306,7 +306,7 @@
 	default_damage_type = BRUTE
 	boxing_traits = list(TRAIT_BOXING_READY)
 	/// The mobs we are looking for to pass the honor check
-	var/honorable_mob_biotypes = MOB_BEAST | MOB_SPECIAL | MOB_PLANT | MOB_BUG
+	var/honorable_mob_biotypes = MOB_BEAST | MOB_SPECIAL | MOB_PLANT | MOB_BUG | MOB_MINING
 	/// Our crit shout words. First word is then paired with a second word to form an attack name.
 	var/list/first_word_strike = list("Вымирающим", "Брутализирующим", "Взрывным", "Приключенческим", "Громовым", "Молниеносным", "Сверхзвуковым", "Атомизирующим", "Вихривым", "Торнадо", "Акульим", "Сокольным")
 	var/list/second_word_strike = list(" ударом", " джебом", " хуком", " кулаком", " апперкотом", " стрейтом", " страйком", " выпадом")
