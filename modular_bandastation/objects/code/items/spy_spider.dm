@@ -8,7 +8,7 @@
 
 /obj/item/clothing/accessory/stealth/spy_spider/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/pinnable_accessory)
+	AddComponent(/datum/component/pinnable_accessory, silent = TRUE)
 	transmitter = new /obj/item/radio/spider_transmitter(src)
 
 /obj/item/clothing/accessory/stealth/spy_spider/Destroy()
