@@ -1,6 +1,6 @@
 /datum/job/explorer
 	title = JOB_EXPLORER
-	department_head = list(JOB_QUARTERMASTER) // JOB_QUARTERMASTER converts to JOB_QUARTERMASTER_RU
+	department_head = list(JOB_QUARTERMASTER)
 	supervisors = JOB_QUARTERMASTER
 	description = "Исследователь космоса и Врат"
 	display_order = JOB_DISPLAY_ORDER_EXPLORER
