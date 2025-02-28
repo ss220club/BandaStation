@@ -43,7 +43,7 @@
 
 	if(isliving(victim))
 		var/mob/living/mob_victim = victim
-		if(mob_victim.stat == DEAD || !IS_HERETIC_MONSTER(mob_victim))
+		if(mob_victim.stat == DEAD || !HAS_TRAIT(mob_victim, TRAIT_HERETIC_SUMMON))
 			return SECONDARY_ATTACK_CALL_NORMAL
 
 		if(heal_heretic_monster(hand, mob_victim, caster))
@@ -73,7 +73,7 @@
 			context[SCREENTIP_CONTEXT_LMB] = "Извлечь орган"
 			. = CONTEXTUAL_SCREENTIP_SET
 
-		if(IS_HERETIC_MONSTER(mob_victim))
+		if(HAS_TRAIT(mob_victim, TRAIT_HERETIC_SUMMON))
 			context[SCREENTIP_CONTEXT_RMB] = "Вылечить [ishuman(mob_victim) ? "миньона" : "призванного"]"
 			. = CONTEXTUAL_SCREENTIP_SET
 
