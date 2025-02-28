@@ -7,7 +7,7 @@
 ## SS Central
 #SS_CENTRAL_URL http://127.0.0.1:8000
 #SS_CENTRAL_TOKEN 12345678
-#WHITELIST_TYPE default
+#SERVER_TYPE default
 ## Entry from the general config.txt
 ## New behavior - enabled PANIC_BUNKER_INTERVIEW allows only whitelisted players to play, passing interview gives a year long whitelist
 #USEWHITELIST
