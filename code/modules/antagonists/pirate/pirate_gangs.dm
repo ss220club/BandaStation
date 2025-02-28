@@ -94,8 +94,8 @@ GLOBAL_LIST_INIT(heavy_pirate_gangs, init_pirate_gangs(is_heavy = TRUE))
 	ship_template_id = "silverscale"
 	ship_name_pool = "silverscale_names"
 
-	threat_title = "Просьба о дани уважения"
-	threat_content = "Это %SHIPNAME. Серебряные Весы желают некоторой дани \
+	threat_title = "Запрос на выплату дани"
+	threat_content = "Это %SHIPNAME. Серебряные Чешуи желают получить кое-какую дань \
 		от ваших плебейских ящеров. %PAYOFF кредитов должно хватить."
 	arrival_announcement = "Разумеется, вы не заслуживаете всего этого на борту своего судна. Оно подойдет нам гораздо лучше."
 	possible_answers = list("Мы заплатим.","Дань? Серьёзно? Проваливайте.")

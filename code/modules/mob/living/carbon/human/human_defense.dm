@@ -140,11 +140,9 @@
 	if(src == target || LAZYFIND(target.buckled_mobs, src) || !iscarbon(target))
 		return
 	if(!(shove_flags & SHOVE_KNOCKDOWN_BLOCKED))
-		target.Knockdown(SHOVE_KNOCKDOWN_HUMAN)
-		target.apply_status_effect(/datum/status_effect/next_shove_stuns)
+		target.Knockdown(SHOVE_KNOCKDOWN_HUMAN, daze_amount = 3 SECONDS)
 	if(!HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED))
-		Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
-		apply_status_effect(/datum/status_effect/next_shove_stuns)
+		Knockdown(SHOVE_KNOCKDOWN_COLLATERAL, daze_amount = 3 SECONDS)
 	target.visible_message(span_danger("[capitalize(shover.declent_ru(NOMINATIVE))] толкает [target.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]!"),
 		span_userdanger("Вы врезаетесь в [declent_ru(ACCUSATIVE)] из-за толчка [shover.declent_ru(GENITIVE)]!"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), COMBAT_MESSAGE_RANGE, src)
 	to_chat(src, span_danger("Вы толкаете [target.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]!"))

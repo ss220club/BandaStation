@@ -9,15 +9,22 @@
 
 #include "code/human/species/skills.dm"
 #include "code/human/species_type/vulpkanin.dm"
+#include "code/human/species_type/tajaran.dm"
 #include "code/human/sprite_accessories/hair.dm"
 #include "code/human/sprite_accessories/vulpkanin.dm"
+#include "code/human/sprite_accessories/tajaran.dm"
 #include "code/human/carbon.dm"
 
 #include "code/preferences/species_features/vulpkanin.dm"
+#include "code/preferences/species_features/tajaran.dm"
 
 #include "code/reagents/mutation.dm"
 
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
+#include "code/surgery/bodyparts/tajaran_bodyparts.dm"
+
 #include "code/surgery/organs/external/vulpkanin_external.dm"
 #include "code/surgery/organs/internal/vulpkanin_internal.dm"
+#include "code/surgery/organs/external/tajaran_external.dm"
+#include "code/surgery/organs/internal/tajaran_internal.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"

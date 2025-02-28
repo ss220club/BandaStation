@@ -134,6 +134,10 @@ SUBSYSTEM_DEF(vote)
 		return
 	if(CONFIG_GET(flag/no_dead_vote) && voter.stat == DEAD && !voter.client?.holder)
 		return
+	// BANDASTATION EDIT START - STORYTELLER
+	if(!current_vote.can_vote(voter))
+		return
+	// BANDASTATION EDIT END - STORYTELLER
 
 	// If user has already voted, remove their specific vote
 	if(voter.ckey in current_vote.choices_by_ckey)
@@ -156,6 +160,10 @@ SUBSYSTEM_DEF(vote)
 		return
 	if(!voter?.ckey)
 		return
+	// BANDASTATION EDIT START - STORYTELLER
+	if(!current_vote.can_vote(voter))
+		return
+	// BANDASTATION EDIT END - STORYTELLER
 	if(CONFIG_GET(flag/no_dead_vote) && voter.stat == DEAD && !voter.client?.holder)
 		return
 
@@ -240,10 +248,9 @@ SUBSYSTEM_DEF(vote)
 		voting_action.name = "Vote: [current_vote.override_question || current_vote.name]"
 		voting_action.Grant(new_voter.mob)
 
-		new_voter.player_details.player_actions += voting_action
+		new_voter.persistent_client.player_actions += voting_action
 		generated_actions += voting_action
-
-		if(current_vote.vote_sound && (new_voter.prefs.read_preference(/datum/preference/toggle/sound_announcements)))
+		if(current_vote.vote_sound && new_voter.prefs.read_preference(/datum/preference/toggle/sound_announcements))
 			SEND_SOUND(new_voter, sound(current_vote.vote_sound))
 
 	return TRUE
@@ -330,6 +337,11 @@ SUBSYSTEM_DEF(vote)
 			"message" = can_vote == VOTE_AVAILABLE ? vote.default_message : can_vote,
 		)
 
+		// BANDASTATION EDIT START - STORYTELLER
+		if(vote.has_desc)
+			vote_data += list("desc" = vote.return_desc(vote_name))
+		// BANDASTATION EDIT END - STORYTELLER
+
 		if(vote == current_vote)
 			var/list/choices = list()
 			for(var/key in current_vote.choices)
@@ -346,6 +358,7 @@ SUBSYSTEM_DEF(vote)
 				"displayStatistics" = current_vote.display_statistics,
 				"choices" = choices,
 				"vote" = vote_data,
+				"canVote" = current_vote.can_vote(user), // BANDASTATION EDIT - STORYTELLER
 			)
 
 		all_vote_data += list(vote_data)
@@ -473,12 +486,12 @@ SUBSYSTEM_DEF(vote)
 
 // We also need to remove our action from the player actions when we're cleaning up.
 /datum/action/vote/Remove(mob/removed_from)
-	if(removed_from.client)
-		removed_from.client?.player_details.player_actions -= src
+	if(removed_from.persistent_client)
+		removed_from.persistent_client.player_actions -= src
 
 	else if(removed_from.ckey)
-		var/datum/player_details/associated_details = GLOB.player_details[removed_from.ckey]
-		associated_details?.player_actions -= src
+		var/datum/persistent_client/persistent_client = GLOB.persistent_clients_by_ckey[removed_from.ckey]
+		persistent_client?.player_actions -= src
 
 	return ..()
 

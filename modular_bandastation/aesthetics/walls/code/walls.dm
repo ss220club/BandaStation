@@ -30,6 +30,13 @@
 	base_icon_state = "cult_wall"
 	canSmoothWith = SMOOTH_GROUP_GIRDER + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 
+/turf/closed/wall/material
+	icon = 'icons/bandastation/walls/material_wall.dmi'
+	icon_state = "material_wall-0"
+	base_icon_state = "material_wall"
+	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
+	canSmoothWith = SMOOTH_GROUP_GIRDER + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+
 // MARK: Indestructible walls
 /turf/closed/indestructible/riveted
 	icon = 'icons/bandastation/walls/reinforced_wall.dmi'

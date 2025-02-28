@@ -205,10 +205,12 @@
 		to_chat(target, announcement)
 		if(!should_play_sound || (should_play_sound_callback && !should_play_sound_callback.Invoke(target)))
 			continue
-
 		if(target.client?.prefs.read_preference(/datum/preference/toggle/sound_announcements))
-			// SEND_SOUND(target, sound(sound_to_play)) // Bandastion Removal
-			/// SS220 TTS START
+			// BANDASTATION EDIT START - TTS
+			if(!SStts220.is_enabled)
+				SEND_SOUND(target, sound(sound_to_play))
+				return
+
 			var/datum/tts_seed/announcement_tts_seed = tts_override?.tts_seed
 			if(isnull(announcement_tts_seed))
 				var/mob/living/silicon/ai/active_ai = DEFAULTPICK(active_ais(TRUE, null), null)
@@ -226,7 +228,7 @@
 				null, \
 				sound_to_play \
 			)
-			/// SS220 TTS END
+			// BANDASTATION EDIT END - TTS
 
 #undef MAJOR_ANNOUNCEMENT_TITLE
 #undef MAJOR_ANNOUNCEMENT_TEXT

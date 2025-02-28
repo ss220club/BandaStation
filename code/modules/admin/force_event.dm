@@ -20,7 +20,7 @@ ADMIN_VERB(force_event, R_FUN, "Trigger Event", "Forces an event to occur.", ADM
 		ui.open()
 
 /datum/force_event/ui_state(mob/user)
-	return GLOB.fun_state
+	return ADMIN_STATE(R_FUN)
 
 /datum/force_event/ui_static_data(mob/user)
 	var/static/list/category_to_icons
@@ -56,12 +56,12 @@ ADMIN_VERB(force_event, R_FUN, "Trigger Event", "Forces an event to occur.", ADM
 			))
 		//add event, with one value matching up the category
 		UNTYPED_LIST_ADD(events, list(
-			"name" = event_control.name,
-			"description" = event_control.description,
-			"type" = event_control.type,
-			"category" = event_control.category,
-			"has_customization" = !!length(event_control.admin_setup),
-		))
+				"name" = event_control.name,
+				"description" = event_control.description,
+				"type" = event_control.type,
+				"category" = event_control.category,
+				"has_customization" = !!length(event_control.admin_setup),
+			))
 	data["categories"] = categories
 	data["events"] = events
 	return data

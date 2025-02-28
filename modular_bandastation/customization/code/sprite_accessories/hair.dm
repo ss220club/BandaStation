@@ -122,3 +122,8 @@
 	name = "Vivi"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_vivi"
+
+/datum/sprite_accessory/hair/birdnest
+	name = "Birdnest"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_birdnest"

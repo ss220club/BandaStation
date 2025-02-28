@@ -1006,6 +1006,7 @@
 		exposed_mob.visible_message(span_warning("[exposed_mob]'s body does not react..."))
 		return
 
+
 	if(iscarbon(exposed_mob) && !(methods & (INGEST|INHALE))) //simplemobs can still be splashed
 		return ..()
 
@@ -1421,7 +1422,7 @@
 		affected_mob.adjust_hallucinations(-10 SECONDS * REM * seconds_per_tick)
 
 	if(affected_mob.getStaminaLoss() >= 100)
-		affected_mob.reagents.remove_reagent(type, 2 * REM * seconds_per_tick)
+		affected_mob.reagents.remove_reagent(type, metabolization_rate * REM * seconds_per_tick)
 
 	var/need_mob_update = FALSE
 	if(SPT_PROB(10, seconds_per_tick))
