@@ -8,7 +8,7 @@
 	var/hivemind_spans = "alien"
 	if(big_voice)
 		hivemind_spans += " big"
-	var/rendered = "<i><span class='[hivemind_spans]'>Hivemind, [span_name("[shown_name]")] <span class='message'>[message_a]</span></span></i>"
+	var/rendered = "<i><span class='[hivemind_spans]'>Связь улья, [span_name("[shown_name]")] <span class='message'>[message_a]</span></span></i>"
 	for(var/mob/S in GLOB.player_list)
 		if(!S.stat && S.hivecheck())
 			to_chat(S, rendered)
@@ -16,7 +16,7 @@
 			var/link = FOLLOW_LINK(S, src)
 			to_chat(S, "[link] [rendered]")
 
-/mob/living/carbon/alien/adult/royal/queen/alien_talk(message, shown_name = name)
+/mob/living/carbon/alien/adult/royal/queen/alien_talk(message, shown_name = declent_ru(NOMINATIVE))
 	..(message, shown_name, TRUE)
 
 /mob/living/carbon/hivecheck()
