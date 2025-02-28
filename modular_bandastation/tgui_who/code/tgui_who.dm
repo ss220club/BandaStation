@@ -155,22 +155,22 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/show_player_panel, user_subject)
 			return TRUE
 
-/datum/tgui_who/proc/get_status(mob/living/user)
+/datum/tgui_who/proc/get_status(mob/user)
 	var/list/status = list()
 	if(isnewplayer(user))
 		status["where"] = "В лобби"
 	else
 		status["where"] = "[user.real_name]"
-		status["state"] = get_state(user)
 
 		if(is_special_character(user))
 			status["antagonist"] = TRUE
 		else
 			status["antagonist"] = FALSE
 
+	status["state"] = get_state(user)
 	return status
 
-/datum/tgui_who/proc/get_state(mob/living/user)
+/datum/tgui_who/proc/get_state(mob/user)
 	switch(user.stat)
 		if(CONSCIOUS)
 			return "Живой"
@@ -201,7 +201,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	health["stamina"] = user.getStaminaLoss()
 	return health
 
-/datum/tgui_who/proc/get_position(mob/living/user)
+/datum/tgui_who/proc/get_position(mob/user)
 	var/turf/position = get_turf(user)
 	if(!isturf(position))
 		return
