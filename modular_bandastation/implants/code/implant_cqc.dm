@@ -1,5 +1,5 @@
 /obj/item/implant/cqc
-	name = "CQC Имплант"
+	name = "CQC implant"
 	desc = "Обучает тебя навыкам боевого искусства Close Quarters Combat за 5 коротких видео-инструкций проецируемых прямо в глаза."
 	icon = 'icons/obj/scrolls.dmi'
 	icon_state ="scroll2"
