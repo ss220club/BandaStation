@@ -1,5 +1,7 @@
 export function getConditionColor(condition) {
   switch (condition) {
+    case 'В лобби':
+      return 'teal';
     case 'Живой':
       return 'green';
     case 'Без сознания':
@@ -9,8 +11,6 @@ export function getConditionColor(condition) {
     case 'Мёртв':
       return 'red';
     case 'Наблюдает':
-      return 'grey';
-    case 'Неизвестно':
       return 'grey';
     default:
       return '';
