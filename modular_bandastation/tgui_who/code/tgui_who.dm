@@ -158,7 +158,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 /datum/tgui_who/proc/get_status(mob/user)
 	var/list/status = list()
 	if(isnewplayer(user))
-		status["where"] = "В лобби"
+		status["where"] = "Тело отсутствует"
 	else
 		status["where"] = "[user.real_name]"
 
@@ -175,14 +175,14 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		if(SOFT_CRIT, HARD_CRIT)
 			return "В крите"
 		if(DEAD)
-			if(!isobserver(user))
-				return "Мёртв"
-			else
+			if(isnewplayer(user))
+				return "В лобби"
+
+			if(isobserver(user))
 				var/mob/dead/observer/observer = user
 				if(observer.started_as_observer)
 					return "Наблюдает"
 				return "Мёртв"
-	return "Неизвестно"
 
 /datum/tgui_who/proc/get_health(mob/living/user)
 	if(!isliving(user))
