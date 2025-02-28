@@ -6,11 +6,13 @@
 	var/datum/martial_art/cqc/style
 
 /obj/item/implant/cqc/get_data()
-	var/dat = {"<b>Implant Specifications:</b><BR>
-				<b>Name:</b> CQC Implant<BR>
-				<b>Life:</b> 4 hours after death of host<BR>
-				<b>Implant Details:</b> <BR>
-				<b>Function:</b> Teaches even the clumsiest host the arts of Close Quarters Combat."}
+	var/dat = {"
+		<b>Implant Specifications:</b><BR>
+		<b>Name:</b> CQC Implant<BR>
+		<b>Life:</b> 4 hours after death of host<BR>
+		<b>Implant Details:</b> <BR>
+		<b>Function:</b> Teaches even the clumsiest host the arts of Close Quarters Combat.
+	"}
 	return dat
 
 /obj/item/implant/cqc/Initialize(mapload)
