@@ -10,6 +10,8 @@ export function getConditionColor(condition) {
       return 'red';
     case 'Наблюдает':
       return 'grey';
+    case 'Неизвестно':
+      return 'grey';
     default:
       return '';
   }

@@ -168,8 +168,8 @@ function ClientsTable(props) {
                   ? client.byondVersion
                   : numberToDays(client.accountAge)}
             </Table.Cell>
-            <Table.Cell color={getConditionColor(client.status?.state)}>
-              {client.status?.state}
+            <Table.Cell color={getConditionColor(client.status.state)}>
+              {client.status.state}
             </Table.Cell>
             <Table.Cell color={getPingColor(client.ping.avgPing)}>
               {Math.round(client.ping.avgPing)}ms
@@ -201,7 +201,7 @@ function ClientsCompact(props) {
       color={
         sortType === 'Пинг'
           ? getPingColor(client.ping.avgPing)
-          : getConditionColor(client.status?.state)
+          : getConditionColor(client.status.state)
       }
       tooltip={
         (sortType !== 'Пинг' || client.accountAge < NEW_ACCOUNT_AGE) && (

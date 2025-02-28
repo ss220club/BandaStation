@@ -51,7 +51,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			"role" = get_role(subject),
 			"type" = subject.type,
 			"gender" = subject.gender,
-			"state" = get_state(subject) || "Неизвестно",
+			"state" = get_state(subject),
 			"health" = get_health(subject),
 			"location" = get_position(subject),
 			"accountAge" = subject.client.account_age,
@@ -186,6 +186,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 				if(observer.started_as_observer)
 					return "Наблюдает"
 				return "Мёртв"
+	return "Неизвестно"
 
 /datum/tgui_who/proc/get_health(mob/living/user)
 	if(!isliving(user))

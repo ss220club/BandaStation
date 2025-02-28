@@ -29,7 +29,7 @@ type Ping = {
 
 type Status = {
   where: string;
-  state: string | null;
+  state: string;
   antag: BooleanLike;
 };
 
