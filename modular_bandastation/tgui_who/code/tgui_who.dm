@@ -158,7 +158,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 /datum/tgui_who/proc/get_status(mob/user)
 	var/list/status = list()
 	if(isnewplayer(user))
-		status["where"] = "Тело отсутствует"
+		status["where"] = "Неизвестно"
 	else
 		status["where"] = "[user.real_name]"
 
