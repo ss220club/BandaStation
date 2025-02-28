@@ -162,11 +162,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	else
 		status["where"] = "[user.real_name]"
 
-		if(is_special_character(user))
-			status["antagonist"] = TRUE
-		else
-			status["antagonist"] = FALSE
-
+	status["antagonist"] = is_special_character(user)
 	status["state"] = get_state(user)
 	return status
 
