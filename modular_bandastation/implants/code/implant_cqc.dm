@@ -43,10 +43,10 @@
 	style.teach(imp_in, TRUE)
 
 /obj/item/implanter/cqc
-	name = "Имплантер (CQC)"
+	name = "implanter (CQC)"
 	imp_type = /obj/item/implant/cqc
 
 /obj/item/implantcase/cqc
-	name = "Кейс с имплантами - 'Close Quarters Combat'"
+	name = "implant case - 'Close Quarters Combat'"
 	desc = "Стеклянный кейс содержащий имплант, который может обучить носителя навыкам боевого искусства Close Quarters Combat."
 	imp_type = /obj/item/implant/cqc
