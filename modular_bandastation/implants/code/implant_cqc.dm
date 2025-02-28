@@ -1,17 +1,26 @@
 /obj/item/implant/cqc
-	name = "cqc implant"
-	desc = "Teaches you the arts of Close Quarters Combat in 5 short instructional videos beamed directly into your eyeballs."
+	name = "CQC Имплант"
+	desc = "Обучает тебя навыкам боевого искусства Close Quarters Combat за 5 коротких видео-инструкций проецируемых прямо в глаза."
 	icon = 'icons/obj/scrolls.dmi'
 	icon_state ="scroll2"
 	var/datum/martial_art/cqc/style
 
 /obj/item/implant/cqc/get_data()
 	var/dat = {"
-		<b>Implant Specifications:</b><BR>
-		<b>Name:</b> CQC Implant<BR>
-		<b>Life:</b> 4 hours after death of host<BR>
-		<b>Implant Details:</b> <BR>
-		<b>Function:</b> Teaches even the clumsiest host the arts of Close Quarters Combat.
+		<b>Характеристики импланта:</b>
+
+		<b>Название:</b> CQC Имплант
+
+		<b>Срок службы:</b> Практически неограниченный
+
+		<b>Важные замечания:</b> <font color='red'>Запрещено</font>
+
+		<HR>
+		<b>Подробности об импланте:</b>
+
+		<b>Функция:</b> Обучает даже самого безнадёжного носителя навыкам боевого искусства Close Quarters Combat.
+
+		<b>Отказ от ответственности:</b> Работоспособность может быть ограничена в зонах с сильными помехами или экранированием сигналов.
 	"}
 	return dat
 
@@ -34,10 +43,10 @@
 	style.teach(imp_in, TRUE)
 
 /obj/item/implanter/cqc
-	name = "implanter (cqc)"
+	name = "Имплантер (CQC)"
 	imp_type = /obj/item/implant/cqc
 
 /obj/item/implantcase/cqc
-	name = "implant case - 'Close Quarters Combat'"
-	desc = "A glass case containing an implant that can teach the user the arts of Close Quarters Combat."
+	name = "Кейс с имплантами - 'Close Quarters Combat'"
+	desc = "Стеклянный кейс содержащий имплант, который может обучить носителя навыкам боевого искусства Close Quarters Combat."
 	imp_type = /obj/item/implant/cqc
