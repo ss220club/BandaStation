@@ -201,7 +201,7 @@ function ClientsCompact(props) {
       color={
         sortType === 'Пинг'
           ? getPingColor(client.ping.avgPing)
-          : getConditionColor(client.status.state)
+          : getConditionColor(client?.status?.state)
       }
       tooltip={
         (sortType !== 'Пинг' || client.accountAge < NEW_ACCOUNT_AGE) && (
@@ -226,6 +226,9 @@ function ClientsCompact(props) {
         act('show_more_info', { ref: client.mobRef });
       }}
       onContextMenu={(e) => {
+        if (!data.user.admin) {
+          return;
+        }
         e.preventDefault();
         act('follow', { ref: client.mobRef });
       }}
