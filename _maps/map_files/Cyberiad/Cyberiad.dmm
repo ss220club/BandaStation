@@ -7126,9 +7126,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/aft)
-"bLp" = (
-/turf/open/floor/iron/dark,
-/area/station/command/gateway)
 "bLz" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 1
@@ -189329,7 +189326,7 @@ wEz
 eAl
 hdR
 sWY
-bLp
+iCz
 olI
 hnX
 qVo
@@ -189586,7 +189583,7 @@ buU
 nco
 rty
 wlt
-bLp
+iCz
 olI
 hnX
 qVo
