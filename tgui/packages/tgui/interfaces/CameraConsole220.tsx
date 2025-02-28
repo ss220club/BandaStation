@@ -207,32 +207,18 @@ const CameraListSelector = (props) => {
 export const CameraMapSelector = (props) => {
   const { act, data } = useBackend<Data>();
   const cameras = selectCameras(data.cameras, '');
-  const [zoom, setZoom] = useState(1);
   const { activeCamera, mapUrl, selected_z_level } = data;
 
   return (
     <Stack fill>
       <Stack.Item style={{ overflow: 'hidden' }}>
-        <NanoMap onZoom={(v) => setZoom(v)} mapUrl={mapUrl}>
-          {cameras
-            .filter((cam) => cam.z === Number(selected_z_level))
-            .map((cm) => (
-              <NanoMap.NanoButton
-                props={props}
-                activeCamera={activeCamera}
-                key={cm.ref}
-                x={cm.x}
-                y={cm.y}
-                zoom={zoom}
-                icon={null}
-                tooltip={cm.name}
-                name={cm.name}
-                color={'blue'}
-                status={cm.status}
-                cam_ref={cm.ref}
-              />
-            ))}
-        </NanoMap>
+        <NanoMap
+          mapUrl={mapUrl}
+          objects={cameras.filter((cam) => cam.z === Number(selected_z_level))}
+          onObjectClick={(camera) =>
+            act('switch_camera', { camera: camera.ref })
+          }
+        />
       </Stack.Item>
     </Stack>
   );
