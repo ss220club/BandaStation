@@ -10,10 +10,10 @@
 	. = ..()
 	if(!.)
 		return
-	var/list/org = outfit_data["organs"]
+	var/list/organ_text_paths = outfit_data["organs"]
 	organs = list()
-	for(var/O in org)
-		var/orgtype = text2path(O)
-		if(orgtype)
-			organs += orgtype
+	for(var/organ_text_path in organ_text_paths)
+		var/organ_type = text2path(organ_text_path)
+		if(organ_type)
+			organs += organ_type
 	return TRUE
