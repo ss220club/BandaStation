@@ -147,6 +147,7 @@ function MapButton(props) {
         <Button
           className="NanoMap__Object"
           {...rest}
+          tooltipPosition={'top-end'}
           onClick={(event) => {
             zoomToElement(`Camera-${posX}_${posY}`, zoom, 200);
             if (props.onClick) {
