@@ -237,7 +237,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			if (istype(requested_preference, /datum/preference/name))
 				tainted_character_profiles = TRUE
-
+			// BANDASTATION ADDITION - HTML Title Screen
+			for (var/datum/preference_middleware/preference_middleware as anything in middleware)
+				if (preference_middleware.post_set_preference(usr, requested_preference_key, value))
+					return TRUE
+			// BANDASTATION ADDITION END
 			return TRUE
 		if ("set_color_preference")
 			var/requested_preference_key = params["preference"]

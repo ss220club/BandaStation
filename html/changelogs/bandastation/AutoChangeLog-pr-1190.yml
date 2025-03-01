@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - bugfix: "Исправлен баг со слежкой за мясными мешками от лица ИИ"

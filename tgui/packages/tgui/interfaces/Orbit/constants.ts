@@ -60,11 +60,21 @@ export const DEPARTMENT2COLOR: Record<string, Department> = {
       'Cook',
       'Curator',
       'Janitor',
-      'Lawyer',
+      // 'Lawyer', BANDASTATION REMOVE
       'Mime',
       'Psychologist',
     ],
   },
+  // BANDASTATION ADD - START
+  'nt representation': {
+    color: 'label',
+    trims: ['Nanotrasen Representative', 'Blueshield'],
+  },
+  justice: {
+    color: 'purple',
+    trims: ['Lawyer', 'Magistrate', 'Магистрат'],
+  },
+  // BANDASTATION ADD - START
 };
 
 export const THREAT = {

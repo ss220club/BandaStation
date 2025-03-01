@@ -16,5 +16,9 @@
 		"stamp-chap" = 'icons/stamp_icons/large_stamp-chap.png',
 		"stamp-mime" = 'icons/stamp_icons/large_stamp-mime.png',
 		"stamp-centcom" = 'icons/stamp_icons/large_stamp-centcom.png',
-		"stamp-syndicate" = 'icons/stamp_icons/large_stamp-syndicate.png'
+		"stamp-syndicate" = 'icons/stamp_icons/large_stamp-syndicate.png',
+		// BANDASTATION EDIT START
+		"stamp-magistrate" = 'modular_bandastation/objects/icons/stamp_icons/large_stamp-magistrate.png',
+		"stamp-nanotrasen_representative" = 'modular_bandastation/objects/icons/stamp_icons/large_stamp-nanotrasen_representative.png'
+		// BANDASTATION EDIT END
 	)
