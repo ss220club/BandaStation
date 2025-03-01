@@ -7,6 +7,10 @@ $box-shadow: 0 0 0.5rem hsl(0, 0%, 0%);
 $blur: saturate(150%) blur(12px);
 
 .NanoMap {
+  &__Image {
+    image-rendering: pixelated;
+  }
+
   &__Minimap {
     user-select: none;
     background-color: $background-color;

@@ -26,7 +26,9 @@ const defaultZoom = 0.225;
 
 export function NanoMap(props: Props) {
   const { children, mapUrl, onZoom } = props;
-  const mapImage = <img src={resolveAsset(mapUrl || '')} />;
+  const mapImage = (
+    <img className="NanoMap__Image" src={resolveAsset(mapUrl || '')} />
+  );
 
   return (
     <TransformWrapper
@@ -74,7 +76,7 @@ function NanoMapControls() {
         <Button
           className="NanoMap__Minimap--button"
           icon="plus"
-          onClick={() => zoomIn()}
+          onClick={() => zoomIn(2)}
         />
       </Stack.Item>
       <Stack.Item>
@@ -89,7 +91,7 @@ function NanoMapControls() {
         <Button
           className="NanoMap__Minimap--button"
           icon="minus"
-          onClick={() => zoomOut()}
+          onClick={() => zoomOut(2)}
         />
       </Stack.Item>
     </Stack>
@@ -128,7 +130,6 @@ type NanoMapButtonProps = {
   zoom?: number;
 }
 */
-
 function MapButton(props) {
   const { zoom = defaultZoom, posX, posY, ...rest } = props;
   const { zoomToElement } = useControls();
