@@ -120,7 +120,7 @@ SUBSYSTEM_DEF(central)
 			return
 
 		else
-			stack_trace("Не удалось добавить в вайтлист: HTTP status code [response.status_code] - [response.body]")
+			stack_trace("Could not add to whitelist: HTTP status code [response.status_code] - [response.body]")
 			return
 
 	log_admin("Игрок [ckey] успешно добавлен в вайтлист")
