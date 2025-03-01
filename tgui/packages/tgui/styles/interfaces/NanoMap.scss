@@ -1,10 +1,66 @@
+@use '../functions.scss' as *;
+
+$background-color: hsla(0, 0%, 10%, 0.85);
+$border-color: hsla(255, 255%, 255%, 0.1);
+$border-radius: 0.5rem;
+$box-shadow: 0 0 0.5rem hsl(0, 0%, 0%);
+$blur: saturate(150%) blur(12px);
+
 .NanoMap {
+  &__Minimap {
+    user-select: none;
+    background-color: $background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    backdrop-filter: $blur;
+
+    &--container {
+      position: absolute !important;
+      top: 0.25rem;
+      left: 0.25rem;
+      z-index: 3;
+    }
+
+    &--levelSelector {
+      position: absolute;
+      top: 0.25rem;
+      right: -2.25rem;
+      z-index: 3;
+    }
+
+    &--controls {
+      position: absolute;
+      right: 0;
+      bottom: -2.1rem;
+      left: 0;
+      z-index: 3;
+    }
+
+    &--button {
+      cursor: pointer;
+      pointer-events: all;
+      background-color: $background-color;
+      color: hsla(255, 255%, 255%, 0.66);
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
+      backdrop-filter: $blur;
+
+      &:hover {
+        background-color: lighten($background-color, 25%);
+        color: hsla(255, 255%, 255%, 1);
+      }
+    }
+  }
+
   &__Object {
+    cursor: pointer;
     font-size: 6px;
     line-height: 0;
     padding: 0;
-    height: 10px;
-    width: 10px;
+    height: 12px;
+    width: 12px;
     border: 2px solid black;
   }
 }

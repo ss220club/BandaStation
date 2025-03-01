@@ -1,52 +1,43 @@
 import '../../styles/interfaces/NanoMap.scss';
 
-import { useState } from 'react';
 import {
-  TransformWrapper,
-  TransformComponent,
   KeepScale,
+  MiniMap,
+  TransformComponent,
+  TransformWrapper,
   useControls,
 } from 'react-zoom-pan-pinch';
-import {
-  Button,
-  Icon,
-  LabeledList,
-  Section,
-  Slider,
-  Stack,
-  Tooltip,
-} from 'tgui-core/components';
+import { Button, Section, Stack } from 'tgui-core/components';
 
 import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
 
 const defaultZoom = 0.225;
 export function NanoMap(props) {
-  const { children, mapUrl, objects, onObjectClick } = props;
-  const [zoom, setZoom] = useState(defaultZoom);
+  const { children, mapUrl, onZoom } = props;
+  const mapImage = <img src={resolveAsset(mapUrl)} />;
 
   return (
     <TransformWrapper
       centerOnInit
       initialScale={defaultZoom}
       minScale={defaultZoom}
-      maxScale={8}
-      onZoomStop={({ state }) => setZoom(state.scale)}
+      maxScale={2}
+      smooth={false}
+      wheel={{ step: 0.25 }}
+      doubleClick={{ mode: 'reset' }}
+      onZoomStop={({ state }) => onZoom(state.scale)}
     >
       <Section fill>
         <Stack fill vertical>
-          <Stack.Item>
-            <Stack fill justify="space-between">
-              <Stack.Item>
-                <NanoMapControls />
-              </Stack.Item>
-              <Stack.Item>
-                <NanoMapZSelector />
-              </Stack.Item>
-            </Stack>
-          </Stack.Item>
-          <Stack.Divider />
-          <Stack.Item grow>
+          <Stack.Item grow style={{ position: 'relative' }}>
+            <div className="NanoMap__Minimap--container">
+              <NanoMapZSelector />
+              <MiniMap className="NanoMap__Minimap" width={150}>
+                {mapImage}
+              </MiniMap>
+              <NanoMapControls />
+            </div>
             <TransformComponent
               wrapperStyle={{
                 overflow: 'hidden',
@@ -54,31 +45,8 @@ export function NanoMap(props) {
                 height: '100%',
               }}
             >
-              <div>
-                <img src={resolveAsset(mapUrl)} />
-                <div>
-                  {objects.map((object) => (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        left: object.x * 8 + 'px',
-                        bottom: object.y * 8 + 'px',
-                        transform: 'translate(-100%, 50%)',
-                        zIndex: 2,
-                      }}
-                    >
-                      <KeepScale>
-                        <Button
-                          className="NanoMap__Object"
-                          key={object.ref}
-                          tooltip={object.name}
-                          onClick={() => onObjectClick(object)}
-                        />
-                      </KeepScale>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              {mapImage}
+              <div>{children}</div>
             </TransformComponent>
           </Stack.Item>
         </Stack>
@@ -87,60 +55,89 @@ export function NanoMap(props) {
   );
 }
 
-const NanoMapControls = (props, context) => {
-  const { act } = useBackend();
+const NanoMapControls = () => {
   const { zoomIn, zoomOut, centerView } = useControls();
 
   return (
-    <Stack>
+    <Stack justify="center" className="NanoMap__Minimap--controls">
       <Stack.Item>
         <Button
+          className="NanoMap__Minimap--button"
           icon="plus"
-          tooltip="Увеличить"
-          tooltipPosition="bottom-start"
           onClick={() => zoomIn()}
         />
       </Stack.Item>
       <Stack.Item>
         <Button
-          icon="minus"
-          tooltip="Уменьшить"
-          tooltipPosition="bottom-start"
-          onClick={() => zoomOut()}
-        />
+          className="NanoMap__Minimap--button"
+          onClick={() => centerView()}
+        >
+          Центр
+        </Button>
       </Stack.Item>
       <Stack.Item>
         <Button
-          icon="arrows-to-circle"
-          tooltip="Центрировать"
-          tooltipPosition="bottom"
-          onClick={() => centerView()}
+          className="NanoMap__Minimap--button"
+          icon="minus"
+          onClick={() => zoomOut()}
         />
       </Stack.Item>
     </Stack>
   );
 };
 
-const NanoMapZSelector = (props, context) => {
+const NanoMapZSelector = () => {
   const { act } = useBackend();
   return (
-    <Stack>
+    <Stack vertical className="NanoMap__Minimap--levelSelector">
       <Stack.Item>
         <Button
-          icon={'chevron-down'}
-          tooltip={'Уровнем ниже'}
-          tooltipPosition={'bottom-end'}
-          onClick={() => act('switch_z_level', { z_dir: -1 })}
+          className="NanoMap__Minimap--button"
+          icon={'chevron-up'}
+          onClick={() => act('switch_z_level', { z_dir: 1 })}
         />
       </Stack.Item>
+
       <Stack.Item>
         <Button
-          icon={'chevron-up'}
-          tooltip={'Уровнем выше'}
-          tooltipPosition={'bottom-end'}
-          onClick={() => act('switch_z_level', { z_dir: 1 })}
+          className="NanoMap__Minimap--button"
+          icon={'chevron-down'}
+          onClick={() => act('switch_z_level', { z_dir: -1 })}
         />
       </Stack.Item>
     </Stack>
   );
 };
+
+const NanoMapButton = (props) => {
+  const { zoom = defaultZoom, posX, posY, ...rest } = props;
+  const { zoomToElement } = useControls();
+
+  return (
+    <div
+      id={`Camera-${posX}_${posY}`}
+      style={{
+        position: 'absolute',
+        left: posX * 8 + 'px',
+        bottom: posY * 8 + 'px',
+        transform: 'translate(-82.5%, 82.5%)',
+        zIndex: 2,
+      }}
+    >
+      <KeepScale>
+        <Button
+          className="NanoMap__Object"
+          {...rest}
+          onClick={(event) => {
+            zoomToElement(`Camera-${posX}_${posY}`, zoom, 200);
+            if (props.onClick) {
+              props.onClick(event);
+            }
+          }}
+        />
+      </KeepScale>
+    </div>
+  );
+};
+
+NanoMap.Button = NanoMapButton;
