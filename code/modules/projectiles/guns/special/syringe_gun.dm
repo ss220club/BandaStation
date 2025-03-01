@@ -81,7 +81,7 @@
 	user.put_in_hands(syringe)
 
 	syringes.Remove(syringe)
-	balloon_alert(user, "снятие [S.declent_ru(GENITIVE)]")
+	balloon_alert(user, "снятие [syringe.declent_ru(GENITIVE)]")
 	update_appearance()
 	return TRUE
 
