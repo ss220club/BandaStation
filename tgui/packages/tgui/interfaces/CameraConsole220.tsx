@@ -208,7 +208,7 @@ export const CameraMapSelector = (props) => {
   const { act, data } = useBackend<Data>();
   const { activeCamera, mapUrl, selected_z_level } = data;
   const cameras = selectCameras(data.cameras, '');
-  const [zoom, setZoom] = useState();
+  const [zoom, setZoom] = useState<number>();
 
   return (
     <Stack fill>
@@ -244,7 +244,6 @@ const CameraControls = (props: { searchText: string; selectedTab: string }) => {
   const { searchText, selectedTab } = props;
 
   const cameras = selectCameras(data.cameras, searchText);
-
   const [prevCamera, nextCamera] = prevNextCamera(cameras, activeCamera);
 
   return (

@@ -1,5 +1,6 @@
 import '../../styles/interfaces/NanoMap.scss';
 
+import type { ReactNode } from 'react';
 import {
   KeepScale,
   MiniMap,
@@ -12,10 +13,20 @@ import { Button, Section, Stack } from 'tgui-core/components';
 import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
 
+type Props = Partial<{
+  /** Content on map. Like buttons. Use only NanoMap.xxx components */
+  children: ReactNode;
+  /** Name of PNG map image. Example: 'Cyberiad_nanomap_z2' */
+  mapUrl: string;
+  /** Called when zoom level changes. Returns zoom level */
+  onZoom: (zoom: number) => void;
+}>;
+
 const defaultZoom = 0.225;
-export function NanoMap(props) {
+
+export function NanoMap(props: Props) {
   const { children, mapUrl, onZoom } = props;
-  const mapImage = <img src={resolveAsset(mapUrl)} />;
+  const mapImage = <img src={resolveAsset(mapUrl || '')} />;
 
   return (
     <TransformWrapper
@@ -26,7 +37,7 @@ export function NanoMap(props) {
       smooth={false}
       wheel={{ step: 0.25 }}
       doubleClick={{ mode: 'reset' }}
-      onZoomStop={({ state }) => onZoom(state.scale)}
+      onZoomStop={({ state }) => onZoom && onZoom(state.scale)}
     >
       <Section fill>
         <Stack fill vertical>
@@ -55,9 +66,8 @@ export function NanoMap(props) {
   );
 }
 
-const NanoMapControls = () => {
+function NanoMapControls() {
   const { zoomIn, zoomOut, centerView } = useControls();
-
   return (
     <Stack justify="center" className="NanoMap__Minimap--controls">
       <Stack.Item>
@@ -84,9 +94,9 @@ const NanoMapControls = () => {
       </Stack.Item>
     </Stack>
   );
-};
+}
 
-const NanoMapZSelector = () => {
+function NanoMapZSelector() {
   const { act } = useBackend();
   return (
     <Stack vertical className="NanoMap__Minimap--levelSelector">
@@ -97,7 +107,6 @@ const NanoMapZSelector = () => {
           onClick={() => act('switch_z_level', { z_dir: 1 })}
         />
       </Stack.Item>
-
       <Stack.Item>
         <Button
           className="NanoMap__Minimap--button"
@@ -107,12 +116,22 @@ const NanoMapZSelector = () => {
       </Stack.Item>
     </Stack>
   );
-};
+}
 
-const NanoMapButton = (props) => {
+/**
+ * It's imposible to make types now, cause <Button> props is not exported
+ */
+/*
+type NanoMapButtonProps = {
+  posX: number;
+  posY: number;
+  zoom?: number;
+}
+*/
+
+function MapButton(props) {
   const { zoom = defaultZoom, posX, posY, ...rest } = props;
   const { zoomToElement } = useControls();
-
   return (
     <div
       id={`Camera-${posX}_${posY}`}
@@ -138,6 +157,6 @@ const NanoMapButton = (props) => {
       </KeepScale>
     </div>
   );
-};
+}
 
-NanoMap.Button = NanoMapButton;
+NanoMap.Button = MapButton;
