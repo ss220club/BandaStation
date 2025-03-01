@@ -10,5 +10,10 @@
 	. = ..()
 	if(!.)
 		return
-	organs = text2path(outfit_data["organs"])
+	var/list/org = outfit_data["organs"]
+	organs = list()
+	for(var/O in org)
+		var/orgtype = text2path(O)
+		if(orgtype)
+			organs += orgtype
 	return TRUE
