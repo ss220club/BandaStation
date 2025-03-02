@@ -35,7 +35,8 @@
 			return FALSE
 
 		if(farthest_item)
-			loc.balloon_alert(user, "we renounce the furthest blade!")
+			playsound(src, 'sound/effects/magic/hereticknock.ogg', 100, TRUE, 3)
+			addtimer(CALLBACK(loc, TYPE_PROC_REF(/atom, balloon_alert), user, "we renounce the furthest blade!"), 0.5 SECONDS)
 			explode_blade(farthest_item, 'sound/effects/magic/hereticknock.ogg')
 			exploded_blades++
 			return TRUE
@@ -44,7 +45,7 @@
 
 /datum/heretic_knowledge/limited_amount/starting/proc/explode_blade(atom/item_to_explode, sound_path)
 	var/sound_length = rustg_sound_length(sound_path)
-	playsound(item_to_explode, sound_path, 100, TRUE, -1)
+	playsound(item_to_explode, sound_path, 100, TRUE, 3)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), item_to_explode, 0, 0, 1), sound_length)
 	addtimer(CALLBACK(src, PROC_REF(delete_blade), item_to_explode), (sound_length + 1))
 
