@@ -1,4 +1,0 @@
-author: "Ez-Briz"
-delete-after: True
-changes:
-  - admin: "Select Equipment теперь позволяет сохранить и копировать органы из другого сетапа"
