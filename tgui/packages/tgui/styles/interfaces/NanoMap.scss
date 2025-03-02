@@ -1,14 +1,68 @@
+@use '../colors.scss' as colors;
 @use '../functions.scss' as *;
 
 $background-color: hsla(0, 0%, 10%, 0.85);
 $border-color: hsla(255, 255%, 255%, 0.1);
 $border-radius: 0.5rem;
-$box-shadow: 0 0 0.5rem hsl(0, 0%, 0%);
+$box-shadow: 0 1px 0.2rem hsla(0, 0%, 0%, 0.75);
 $blur: saturate(150%) blur(12px);
+
+@mixin nanoButton() {
+  cursor: pointer;
+  pointer-events: all;
+  background-color: $background-color;
+  color: hsla(255, 255%, 255%, 0.66);
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  backdrop-filter: $blur;
+
+  &:hover {
+    background-color: lighten($background-color, 25%);
+    color: hsla(255, 255%, 255%, 1);
+  }
+
+  &--selected {
+    color: colors.$green;
+
+    &:hover {
+      color: lighten(colors.$green, 25%);
+    }
+  }
+}
 
 .NanoMap {
   &__Image {
     image-rendering: pixelated;
+  }
+
+  &__Controls {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    bottom: -2.1rem;
+    left: 0;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+    z-index: 3;
+
+    .Button {
+      @include nanoButton();
+    }
+  }
+
+  &__Buttons {
+    position: absolute;
+    top: 0;
+    right: -2.25rem;
+    bottom: 0;
+    padding: 0.5rem 0;
+    z-index: 3;
+
+    .Button {
+      @include nanoButton();
+    }
   }
 
   &__Minimap {
@@ -21,7 +75,7 @@ $blur: saturate(150%) blur(12px);
 
     .rzpp-preview {
       border: 1px solid rgba($border-color, 0.33) !important;
-      box-shadow: rgba(0, 0, 0, 0.33) 0px 0px 0px 9999px !important;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 9999px !important;
     }
 
     &--container {
@@ -30,37 +84,6 @@ $blur: saturate(150%) blur(12px);
       left: 0.25rem;
       z-index: 3;
     }
-
-    &--levelSelector {
-      position: absolute;
-      top: 0.25rem;
-      right: -2.25rem;
-      z-index: 3;
-    }
-
-    &--controls {
-      position: absolute;
-      right: 0;
-      bottom: -2.1rem;
-      left: 0;
-      z-index: 3;
-    }
-
-    &--button {
-      cursor: pointer;
-      pointer-events: all;
-      background-color: $background-color;
-      color: hsla(255, 255%, 255%, 0.66);
-      border: 1px solid $border-color;
-      border-radius: $border-radius;
-      box-shadow: $box-shadow;
-      backdrop-filter: $blur;
-
-      &:hover {
-        background-color: lighten($background-color, 25%);
-        color: hsla(255, 255%, 255%, 1);
-      }
-    }
   }
 
   &__Object {
@@ -68,8 +91,9 @@ $blur: saturate(150%) blur(12px);
     font-size: 6px;
     line-height: 0;
     padding: 0;
-    height: 12px;
-    width: 12px;
-    border: 2px solid black;
+    height: 2em;
+    width: 2em;
+    border: 2px solid rgba(0, 0, 0, 0.66);
+    border-radius: 0.25rem;
   }
 }

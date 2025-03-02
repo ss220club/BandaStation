@@ -209,11 +209,44 @@ export const CameraMapSelector = (props) => {
   const { activeCamera, mapUrl, selected_z_level } = data;
   const cameras = selectCameras(data.cameras, '');
   const [zoom, setZoom] = useState<number>();
+  const [tracking, setTracking] = useState(false);
 
   return (
     <Stack fill>
       <Stack.Item style={{ overflow: 'hidden' }}>
-        <NanoMap mapUrl={mapUrl} onZoom={setZoom}>
+        <NanoMap
+          mapImage={mapUrl}
+          onZoom={setZoom}
+          buttons={
+            <Stack fill vertical>
+              <Stack.Item>
+                <Button
+                  icon="chevron-up"
+                  onClick={() => act('switch_z_level', { z_dir: 1 })}
+                />
+              </Stack.Item>
+              <Stack.Item grow mt={0.5}>
+                <Button
+                  icon="chevron-down"
+                  onClick={() => act('switch_z_level', { z_dir: -1 })}
+                />
+              </Stack.Item>
+              <Stack.Item>
+                <Button
+                  icon="wheelchair-move"
+                  selected={tracking}
+                  tooltip={
+                    tracking
+                      ? 'Не центрировать на выбранную камеры'
+                      : 'Центрировать на выбранную камеры'
+                  }
+                  tooltipPosition="right"
+                  onClick={() => setTracking(!tracking)}
+                />
+              </Stack.Item>
+            </Stack>
+          }
+        >
           {cameras
             .filter((camera) => camera.z === Number(selected_z_level))
             .map((camera) => (
@@ -224,6 +257,7 @@ export const CameraMapSelector = (props) => {
                 tooltip={camera.name}
                 color={!camera.status && 'red'}
                 selected={activeCamera?.ref === camera.ref}
+                tracking={tracking}
                 zoom={zoom}
                 onClick={() =>
                   act('switch_camera', {
