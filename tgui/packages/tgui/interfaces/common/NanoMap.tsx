@@ -1,6 +1,6 @@
 import '../../styles/interfaces/NanoMap.scss';
 
-import { type ReactNode, useState } from 'react';
+import type { ReactNode } from 'react';
 import {
   KeepScale,
   MiniMap,
@@ -9,6 +9,7 @@ import {
   useControls,
 } from 'react-zoom-pan-pinch';
 import { Button, Section, Stack } from 'tgui-core/components';
+import { useLocalStorage } from 'usehooks-ts';
 
 import { resolveAsset } from '../../assets';
 
@@ -27,7 +28,7 @@ const defaultZoom = 0.225;
 
 export function NanoMap(props: Props) {
   const { children, buttons, mapImage, onZoom } = props;
-  const [velocity, setVelocity] = useState(true);
+  const [velocity, setVelocity] = useLocalStorage('nanomap-velocity', true);
   const image = (
     <img className="NanoMap__Image" src={resolveAsset(mapImage || '')} />
   );

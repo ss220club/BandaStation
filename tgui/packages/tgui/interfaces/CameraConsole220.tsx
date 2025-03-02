@@ -11,6 +11,7 @@ import {
 } from 'tgui-core/components';
 import { BooleanLike, classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
+import { useLocalStorage } from 'usehooks-ts';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -209,7 +210,10 @@ export const CameraMapSelector = (props) => {
   const { activeCamera, mapUrl, selected_z_level } = data;
   const cameras = selectCameras(data.cameras, '');
   const [zoom, setZoom] = useState<number>();
-  const [tracking, setTracking] = useState(false);
+  const [tracking, setTracking] = useLocalStorage(
+    'camera-console-tracking',
+    false,
+  );
 
   return (
     <Stack fill>
