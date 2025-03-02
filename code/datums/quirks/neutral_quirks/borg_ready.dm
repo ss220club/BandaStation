@@ -8,7 +8,7 @@
 	medical_record_text = "Пациент стал зарегистрированным донором мозга для исследований в области робототехники."
 
 /datum/quirk/item_quirk/borg_ready/add_unique(client/client_source)
-	if(is_banned_from(quirk_holder.ckey, JOB_CYBORG))
+	if(is_banned_from(client_source.ckey, JOB_CYBORG))
 		return FALSE
 	var/obj/item/clothing/accessory/dogtag/borg_ready/borgtag = new(get_turf(quirk_holder))
 	give_item_to_holder(borgtag, list(LOCATION_BACKPACK = ITEM_SLOT_BACKPACK, LOCATION_HANDS = ITEM_SLOT_HANDS))
