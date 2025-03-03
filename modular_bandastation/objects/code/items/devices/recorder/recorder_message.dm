@@ -15,4 +15,12 @@
 	src.tts_seed = tts_seed
 
 /datum/tape_message/proc/get_composed_message()
-	return "[timestamp] [speaker_name]: [text]"
+	var/list/message_parts = list()
+	if(timestamp)
+		message_parts += "\[[timestamp]\]"
+	if(speaker_name)
+		message_parts += "[speaker_name]:"
+	if(text)
+		message_parts += text
+
+	return message_parts.Join(" ")
