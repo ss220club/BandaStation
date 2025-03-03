@@ -7,9 +7,6 @@
 	doorClose = 'modular_bandastation/aesthetics/airlocks/sound/close.ogg'
 	boltUp = 'modular_bandastation/aesthetics/airlocks/sound/bolts_up.ogg'
 	boltDown = 'modular_bandastation/aesthetics/airlocks/sound/bolts_down.ogg'
-
-
-	smoothing_groups = list(SMOOTH_GROUP_AIRLOCK)
 	var/has_open_lights = TRUE
 
 /obj/machinery/door/airlock/update_overlays()
