@@ -1,6 +1,5 @@
 import '../../styles/interfaces/NanoMap.scss';
 
-import { BooleanLike } from 'tgui-core/react';
 import { type ReactNode, useState } from 'react';
 import {
   KeepScale,
@@ -11,6 +10,7 @@ import {
 } from 'react-zoom-pan-pinch';
 import { Button, Section, Stack } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
+import { BooleanLike } from 'tgui-core/react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { resolveAsset } from '../../assets';
