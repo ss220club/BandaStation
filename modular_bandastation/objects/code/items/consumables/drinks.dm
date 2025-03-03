@@ -494,3 +494,123 @@
 		/datum/reagent/consumable/ethanol/screwdrivercocktail = 1,
 		/datum/reagent/consumable/ethanol/gargle_blaster = 1,
 	)
+
+// Коктейли набора коммунизма
+
+/datum/reagent/consumable/ethanol/communism_beach
+
+	name = "Communism On The Beach"
+	description = "Этот пляж принадлежит всем в равной степени"
+	color = "#bb2020"
+	boozepwr = 40
+	taste_description = "Вкус равенства, горький и сладкий"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_EASY
+
+/datum/reagent/consumable/ethanol/communism_beach/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
+	. = ..()
+	if(SPT_PROB(5, seconds_per_tick))
+		drinker.say(pick("За СССП!", "Равенство для всех!", "Революция вперед!", "К черту власть капитализма!"))
+
+/datum/glass_style/drinking_glass/communism_beach
+
+	required_drink_type = /datum/reagent/consumable/ethanol/communism_beach
+	name = "Коммунизм на Пляже"
+	desc = "Этот пляж принадлежит всем в равной степени"
+	icon = 'modular_bandastation/objects/icons/obj/items/communism.dmi'
+	icon_state = "communism_beach"
+
+/datum/chemical_reaction/drink/communism_beach
+
+	results = list(/datum/reagent/consumable/ethanol/communism_beach = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/ethanol/vodka = 2,
+		/datum/reagent/silicon = 1,
+		/datum/reagent/consumable/grenadine = 2,
+	)
+
+/datum/reagent/consumable/ethanol/red_january
+
+	name = "Red January"
+	description = "От этого напитка так и пахнет Революцией"
+	color = "#bb2020"
+	boozepwr = 30
+	taste_description = "Принятный вкус крови капитализма"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_VERYGOOD
+	glass_price = DRINK_PRICE_EASY
+
+/datum/glass_style/drinking_glass/red_january
+
+	required_drink_type = /datum/reagent/consumable/ethanol/red_january
+	name = "Красный Январь"
+	desc = "От этого напитка так и пахнет Революцией"
+	icon = 'modular_bandastation/objects/icons/obj/items/communism.dmi'
+	icon_state = "red_january"
+
+/datum/chemical_reaction/drink/red_january
+
+	results = list(/datum/reagent/consumable/ethanol/red_january = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/ethanol/absinthe = 2,
+		/datum/reagent/consumable/ethanol/rum = 1,
+		/datum/reagent/consumable/orangejuice = 1,
+		/datum/reagent/consumable/ice = 1,
+	)
+
+/datum/reagent/consumable/five_year_plan
+
+	name = "Five-Year Plan"
+	description = "Высокая в небе звезда зовет меня в путь"
+	color = "#1f1911"
+	taste_description = "Пятилетку за смену - выполним!"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_VERYGOOD
+	glass_price = DRINK_PRICE_EASY
+
+/datum/glass_style/drinking_glass/five_year_plan
+
+	required_drink_type = /datum/reagent/consumable/five_year_plan
+	name = "Пятилетка"
+	desc = "Высокая в небе звезда зовет меня в путь"
+	icon = 'modular_bandastation/objects/icons/obj/items/communism.dmi'
+	icon_state = "five_year_plan"
+
+/datum/chemical_reaction/drink/five_year_plan
+
+	results = list(/datum/reagent/consumable/five_year_plan = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/coffee = 2,
+		/datum/reagent/fuel = 3,
+	)
+
+/datum/reagent/consumable/ethanol/galactional
+
+	name = "Galactional"
+	description = "Пролетарии Галактики - объединяйтесь!"
+	color = "#e65333"
+	taste_description = "Галактическое единство близко"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_FANTASTIC
+	glass_price = DRINK_PRICE_EASY
+
+/datum/glass_style/drinking_glass/galactional
+
+	required_drink_type = /datum/reagent/consumable/ethanol/galactional
+	name = "Галактционал"
+	desc = "Пролетарии Галактики - объединяйтесь!"
+	icon = 'modular_bandastation/objects/icons/obj/items/communism.dmi'
+	icon_state = "galactional"
+
+/datum/chemical_reaction/drink/galactional
+
+	results = list(/datum/reagent/consumable/ethanol/galactional = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/ethanol/vodka = 1,
+		/datum/reagent/consumable/ethanol/beer = 1,
+		/datum/reagent/consumable/ethanol/wine = 1,
+		/datum/reagent/consumable/triple_citrus = 1,
+		/datum/reagent/consumable/space_cola = 1,
+	)
+
