@@ -22,6 +22,24 @@
 	edge_overlay.color = edge_overlay_color
 	. += edge_overlay
 
+/**
+ * Frames objects
+ * Used for SpacemanDMM map generation
+ */
+/obj/structure/window/fulltile/frame
+	name = "DONT USE THIS"
+	icon = 'icons/bandastation/windows/window_edges.dmi'
+	icon_state = "edge-0"
+	base_icon_state = "edge"
+	color = EDGE_OVERLAY_COLOR
+
+/obj/structure/window/reinforced/fulltile/frame
+	name = "DONT USE THIS"
+	icon = 'icons/bandastation/windows/reinforced_window_edges.dmi'
+	icon_state = "edge-0"
+	base_icon_state = "edge"
+	color = EDGE_OVERLAY_COLOR
+
 /obj/structure/window/fulltile
 	icon = 'icons/bandastation/windows/window.dmi'
 	edge_overlay_file = 'icons/bandastation/windows/window_edges.dmi'
@@ -74,6 +92,24 @@
 // MARK: Spawners
 /obj/effect/spawner/structure/window
 	icon = 'modular_bandastation/aesthetics/windows/icons/spawners.dmi'
+
+/obj/effect/spawner/structure/window
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/fulltile), list(/obj/structure/grille, /obj/structure/window/fulltile, /obj/structure/window/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/reinforced/fulltile), list(/obj/structure/grille, /obj/structure/window/reinforced/fulltile, /obj/structure/window/reinforced/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced/tinted
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/reinforced/tinted/fulltile), list(/obj/structure/grille, /obj/structure/window/reinforced/tinted/fulltile, /obj/structure/window/reinforced/fulltile/frame))
+
+/obj/effect/spawner/structure/window/plasma
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/plasma/fulltile), list(/obj/structure/grille, /obj/structure/window/plasma/fulltile, /obj/structure/window/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced/plasma
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/reinforced/plasma/fulltile), list(/obj/structure/grille, /obj/structure/window/reinforced/plasma/fulltile, /obj/structure/window/reinforced/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced/indestructible
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille/indestructible, /obj/structure/window/reinforced/fulltile/indestructible), list(/obj/structure/grille/indestructible, /obj/structure/window/reinforced/fulltile/indestructible, /obj/structure/window/reinforced/fulltile/frame))
 
 // Override to original
 /obj/effect/spawner/structure/window/bronze

@@ -24,21 +24,37 @@ type Props = Partial<{
   onZoom: (zoom: number) => void;
 }>;
 
-const defaultZoom = 0.225;
+const defaultZoom = 0.25;
+
+/**
+ * Converts object position to pixel position.
+ */
+const defaultMapSize = 4080;
+const tileSize = defaultMapSize / 255;
+function posToPx(pos: number) {
+  return `${pos * tileSize - tileSize}px`;
+}
 
 export function NanoMap(props: Props) {
   const { children, buttons, mapImage, onZoom } = props;
   const [velocity, setVelocity] = useLocalStorage('nanomap-velocity', true);
   const image = (
-    <img className="NanoMap__Image" src={resolveAsset(mapImage || '')} />
+    <img
+      style={{
+        width: `${defaultMapSize}px`,
+        height: `${defaultMapSize}px`,
+        imageRendering: 'pixelated',
+      }}
+      src={resolveAsset(mapImage || '')}
+    />
   );
 
   return (
     <TransformWrapper
       centerOnInit
       initialScale={defaultZoom}
-      minScale={defaultZoom}
-      maxScale={2}
+      minScale={defaultZoom / 2}
+      maxScale={defaultZoom * 4}
       smooth={false}
       wheel={{ step: 0.25 }}
       doubleClick={{ mode: 'reset' }}
@@ -129,9 +145,9 @@ function MapButton(props) {
       id={`Camera-${posX}_${posY}`}
       style={{
         position: 'absolute',
-        left: posX * 8 + 'px',
-        bottom: posY * 8 + 'px',
-        transform: 'translate(-82.5%, 82.5%)',
+        left: posToPx(posX),
+        bottom: posToPx(posY),
+        transform: 'translate(17.5%, 5%)',
         zIndex: 2,
       }}
     >

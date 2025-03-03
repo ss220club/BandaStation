@@ -32,10 +32,6 @@ $blur: saturate(150%) blur(12px);
 }
 
 .NanoMap {
-  &__Image {
-    image-rendering: pixelated;
-  }
-
   &__Controls {
     display: flex;
     justify-content: center;
