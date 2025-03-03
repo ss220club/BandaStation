@@ -164,7 +164,6 @@ SUBSYSTEM_DEF(gamemode)
 	var/list/presetuped_ocupations = list()
 	var/empty_event_chance = 0
 	var/roundstart_budget = 0
-	var/pre_roundstart_budget = 0
 	var/roundstart_budget_set = -1
 
 /datum/controller/subsystem/gamemode/Initialize(time, zlevel)
@@ -757,7 +756,6 @@ SUBSYSTEM_DEF(gamemode)
 	var/pop_count = ready_players + (length(department_crew_count[STS_SEC]) * current_storyteller.sec_antag_modifier)
 	var/calculated_roundstart_budget = pop_count
 	roundstart_budget = roundstart_budget_set == -1 ? calculated_roundstart_budget : roundstart_budget_set
-	pre_roundstart_budget = roundstart_budget
 
 /datum/controller/subsystem/gamemode/proc/rountstart_general_events_run(valid_events, track)
 
@@ -843,14 +841,8 @@ SUBSYSTEM_DEF(gamemode)
 	//Расчитать новый максимум и минимум антагов
 	exclusive_event.base_antags += addition_antags
 	exclusive_event.maximum_antags += addition_antags
-	add_roundstart_roleset_points()
 	roundstart_budget = 0
 	return exclusive_event
-
-/datum/controller/subsystem/gamemode/proc/add_roundstart_roleset_points()
-	var/percent = roundstart_budget / pre_roundstart_budget
-	var/points = point_thresholds[EVENT_TRACK_ROLESET] * percent
-	event_track_points[EVENT_TRACK_ROLESET] += points
 
 /datum/controller/subsystem/gamemode/proc/recalculate_roundstart_costs(track)
 	full_department_roles[STS_SEC] = list()
