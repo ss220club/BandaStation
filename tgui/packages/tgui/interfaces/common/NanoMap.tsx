@@ -1,6 +1,7 @@
 import '../../styles/interfaces/NanoMap.scss';
 
-import type { ReactNode } from 'react';
+import { BooleanLike } from 'tgui-core/react';
+import { type ReactNode, useState } from 'react';
 import {
   KeepScale,
   MiniMap,
@@ -9,6 +10,7 @@ import {
   useControls,
 } from 'react-zoom-pan-pinch';
 import { Button, Section, Stack } from 'tgui-core/components';
+import { clamp01 } from 'tgui-core/math';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { resolveAsset } from '../../assets';
@@ -20,11 +22,18 @@ type Props = Partial<{
   buttons: ReactNode;
   /** Name of PNG map image. Example: 'Cyberiad_nanomap_z2' */
   mapImage: string;
+  /**
+   * Do we have any target in selection?
+   * If yes then center button will teleport you to it
+   */
+  selectedTarget: BooleanLike;
   /** Called when zoom level changes. Returns zoom level */
   onZoom: (zoom: number) => void;
 }>;
 
-const defaultZoom = 0.25;
+const defaultScale = 0.25;
+const minScale = defaultScale / 2;
+const maxScale = defaultScale * 4;
 
 /**
  * Converts object position to pixel position.
@@ -36,14 +45,14 @@ function posToPx(pos: number) {
 }
 
 export function NanoMap(props: Props) {
-  const { children, buttons, mapImage, onZoom } = props;
+  const { children, buttons, mapImage, selectedTarget, onZoom } = props;
   const [velocity, setVelocity] = useLocalStorage('nanomap-velocity', true);
+  const [zoom, setZoom] = useState(defaultScale);
   const image = (
     <img
       style={{
         width: `${defaultMapSize}px`,
         height: `${defaultMapSize}px`,
-        imageRendering: 'pixelated',
       }}
       src={resolveAsset(mapImage || '')}
     />
@@ -52,14 +61,17 @@ export function NanoMap(props: Props) {
   return (
     <TransformWrapper
       centerOnInit
-      initialScale={defaultZoom}
-      minScale={defaultZoom / 2}
-      maxScale={defaultZoom * 4}
+      initialScale={defaultScale}
+      minScale={minScale}
+      maxScale={maxScale}
       smooth={false}
-      wheel={{ step: 0.25 }}
-      doubleClick={{ mode: 'reset' }}
+      wheel={{ step: defaultScale / 2 }}
       panning={{ velocityDisabled: velocity }}
-      onZoomStop={({ state }) => onZoom && onZoom(state.scale)}
+      doubleClick={{ disabled: true }}
+      onZoomStop={({ state }) => {
+        onZoom && onZoom(state.scale);
+        setZoom(state.scale);
+      }}
     >
       <Section fill>
         <Stack fill vertical>
@@ -71,7 +83,11 @@ export function NanoMap(props: Props) {
               <MiniMap className="NanoMap__Minimap" width={150}>
                 {image}
               </MiniMap>
-              <NanoMapControls />
+              <NanoMapControls
+                zoom={zoom}
+                setZoom={setZoom}
+                selectedTarget={selectedTarget}
+              />
             </div>
             <TransformComponent
               wrapperStyle={{
@@ -90,20 +106,45 @@ export function NanoMap(props: Props) {
   );
 }
 
-function NanoMapControls() {
-  const { zoomIn, zoomOut, centerView } = useControls();
+function NanoMapControls(props) {
+  const { zoom, setZoom, selectedTarget } = props;
+  const { zoomIn, zoomOut, centerView, zoomToElement } = useControls();
+
   return (
     <div className="NanoMap__Controls">
       <Stack.Item>
-        <Button icon="plus" onClick={() => zoomIn(2)} />
+        <Button
+          icon="plus"
+          onClick={() => {
+            zoomIn(maxScale);
+            setZoom(maxScale);
+          }}
+        />
       </Stack.Item>
       <Stack.Item grow textAlign="center">
-        <Button fluid onClick={() => centerView()}>
+        <Button
+          fluid
+          onClick={() =>
+            selectedTarget ? zoomToElement('selected', zoom, 200) : centerView()
+          }
+        >
+          <div
+            className="NanoMap__Controls--zoom"
+            style={{
+              width: `${clamp01(zoom) * 100}%`,
+            }}
+          />
           Центр
         </Button>
       </Stack.Item>
       <Stack.Item>
-        <Button icon="minus" onClick={() => zoomOut(2)} />
+        <Button
+          icon="minus"
+          onClick={() => {
+            zoomOut(maxScale);
+            setZoom(minScale);
+          }}
+        />
       </Stack.Item>
     </div>
   );
@@ -138,11 +179,12 @@ type NanoMapButtonProps = {
 }
 */
 function MapButton(props) {
-  const { tracking = false, zoom = defaultZoom, posX, posY, ...rest } = props;
+  const { tracking = false, zoom = defaultScale, posX, posY, ...rest } = props;
   const { zoomToElement } = useControls();
+  const buttonId = `${posX}_${posY}`;
   return (
     <div
-      id={`Camera-${posX}_${posY}`}
+      id={props.selected ? 'selected' : buttonId}
       style={{
         position: 'absolute',
         left: posToPx(posX),
@@ -157,7 +199,7 @@ function MapButton(props) {
           className="NanoMap__Object"
           tooltipPosition={'top-end'}
           onClick={(event) => {
-            tracking && zoomToElement(`Camera-${posX}_${posY}`, zoom, 200);
+            tracking && zoomToElement(buttonId, zoom, 200);
             if (props.onClick) {
               props.onClick(event);
             }

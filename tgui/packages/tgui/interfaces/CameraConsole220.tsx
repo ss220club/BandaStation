@@ -220,6 +220,7 @@ export const CameraMapSelector = (props) => {
       <Stack.Item style={{ overflow: 'hidden' }}>
         <NanoMap
           mapImage={mapUrl}
+          selectedTarget={!!activeCamera.ref}
           onZoom={setZoom}
           buttons={
             <Stack fill vertical>
@@ -241,8 +242,8 @@ export const CameraMapSelector = (props) => {
                   selected={tracking}
                   tooltip={
                     tracking
-                      ? 'Не центрировать на выбранную камеры'
-                      : 'Центрировать на выбранную камеры'
+                      ? 'Не перемещать к выбранной камере'
+                      : 'Перемещать к выбранной камере'
                   }
                   tooltipPosition="right"
                   onClick={() => setTracking(!tracking)}

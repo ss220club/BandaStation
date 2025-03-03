@@ -46,6 +46,16 @@ $blur: saturate(150%) blur(12px);
     .Button {
       @include nanoButton();
     }
+
+    &--zoom {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      background-color: rgba(lighten(colors.$green, 25%), 0.33);
+      border-radius: $border-radius;
+      transition: width 0.2s;
+      z-index: -1;
+    }
   }
 
   &__Buttons {
