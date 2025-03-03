@@ -2,7 +2,6 @@ export const JOBS_RU = {
   Assistant: 'Ассистент',
   Prisoner: 'Заключенный',
   Captain: 'Капитан',
-  'Nanotrasen Representative': 'Представитель Нанотрейзен',
   'Head of Personnel': 'Глава персонала',
   'Head of Security': 'Глава службы безопасности',
   'Research Director': 'Директор исследований',
@@ -46,6 +45,7 @@ export const JOBS_RU = {
   // BANDASTATION jobs
   Blueshield: 'Офицер «Синий щит»',
   Magistrate: 'Магистрат',
+  'Nanotrasen Representative': 'Представитель Нанотрейзен',
   // Event jobs
   'Veteran Security Advisor': 'Ветеран советчик СБ',
   'Bridge Assistant': 'Адъютант',
