@@ -161,7 +161,7 @@
 
 	if(mytape && recording)
 		mytape.timestamp += mytape.used_capacity
-		mytape.storedinfo += new /datum/tape_message(time2text(mytape.used_capacity, "mm:ss"), speaker.GetVoice(), raw_message, speaker.get_tts_seed())
+		mytape.storedinfo += new /datum/tape_message(time2text(mytape.used_capacity, "mm:ss"), speaker.GetVoice(), raw_message, speaker.get_tts_seed()) // BANDASTATION ADDITION - TTS
 
 
 /obj/item/taperecorder/verb/record()
@@ -262,9 +262,10 @@
 			balloon_alert(usr, "запись закончена")
 			stoplag(1 SECONDS) //prevents multiple balloon alerts covering each other
 			break
-
+		// BANDASTATION EDIT START - TTS
 		var/datum/tape_message/message = mytape.storedinfo[i]
 		say(message.get_composed_message(), sanitize=FALSE, message_mods = list(MODE_SEQUENTIAL = TRUE, MODE_TTS_SEED_OVERRIDE = message.tts_seed, MODE_TTS_MESSAGE_OVERRIDE = message.text))//We want to display this properly, don't double encode
+		// BANDASTATION EDIT END - TTS
 		if(mytape.storedinfo.len < i + 1)
 			playsleepseconds = 1
 			sleep(1 SECONDS)
@@ -332,9 +333,11 @@
 	var/initial_tape_name = initial(mytape.name)
 	var/paper_name = "paper- '[tape_name == initial_tape_name ? "Tape" : "[tape_name]"] Transcript'"
 
+	// BANDASTATION EDIT START - TTS
 	for(var/datum/tape_message/message as anything in transcribed_info)
 		var/composed_message = message.get_composed_message()
 		var/excerpt_length = length(composed_message)
+	// BANDASTATION EDIT END - TTS
 
 		// Very unexpected. Better abort non-gracefully.
 		if(excerpt_length > MAX_PAPER_LENGTH)
@@ -351,7 +354,7 @@
 			transcribed_text = ""
 			page_count++
 
-		transcribed_text += "[composed_message]<br>"
+		transcribed_text += "[composed_message]<br>" // BANDASTATION EDIT - TTS
 
 	var/obj/item/paper/transcript_paper = new /obj/item/paper(get_turf(src))
 	transcript_paper.add_raw_text(transcribed_text)
