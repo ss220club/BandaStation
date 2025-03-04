@@ -13,6 +13,12 @@ SUBSYSTEM_DEF(central)
 	var/list/discord_links = list()
 	flags = SS_NO_FIRE
 
+/datum/controller/subsystem/central/vv_edit_var(var_name, var_value)
+	return FALSE
+
+/datum/controller/subsystem/central/CanProcCall(procname)
+	return FALSE
+
 /datum/controller/subsystem/central/Initialize()
 	if(!(CONFIG_GET(string/ss_central_url) && CONFIG_GET(string/ss_central_token)))
 		return SS_INIT_NO_NEED

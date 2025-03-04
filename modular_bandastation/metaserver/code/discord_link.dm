@@ -1,6 +1,11 @@
 /datum/preferences
 	var/discord_id
 
+/datum/preferences/vv_edit_var(var_name, var_value)
+	if(var_name == "discord_id")
+		return FALSE
+	return ..()
+
 /client/New()
 	. = ..()
 	SScentral.get_player_discord_async(src)
