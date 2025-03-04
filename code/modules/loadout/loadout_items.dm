@@ -306,13 +306,13 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	displayed_text += (additional_displayed_text || list())
 
 	if(can_be_greyscale)
-		displayed_text += "Recolorable"
+		displayed_text += "Смена цвета"
 
 	if(can_be_named)
-		displayed_text += "Renamable"
+		displayed_text += "Смена имени"
 
 	if(can_be_reskinned)
-		displayed_text += "Reskinnable"
+		displayed_text += "Смена стиля"
 
 	return displayed_text
 
@@ -336,7 +336,7 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 
 	if(can_be_greyscale)
 		UNTYPED_LIST_ADD(button_list, list(
-			"label" = "Recolor",
+			"label" = "Перекрасить",
 			"act_key" = "select_color",
 			"button_icon" = FA_ICON_PALETTE,
 			"active_key" = INFO_GREYSCALE,
@@ -344,7 +344,7 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 
 	if(can_be_named)
 		UNTYPED_LIST_ADD(button_list, list(
-			"label" = "Rename",
+			"label" = "Переименовать",
 			"act_key" = "set_name",
 			"button_icon" = FA_ICON_PEN,
 			"active_key" = INFO_NAMED,

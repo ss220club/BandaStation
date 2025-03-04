@@ -1,0 +1,970 @@
+From 23ae4a311afdd7aba78288914a2a1b21c0d825db Mon Sep 17 00:00:00 2001
+From: larentoun <31931237+larentoun@users.noreply.github.com>
+Date: Thu, 11 Apr 2024 23:58:04 +0300
+Subject: [PATCH 1/4] prefs
+
+---
+ code/modules/client/preferences/clothing.dm   | 10 +++++-----
+ code/modules/client/preferences/names.dm      | 20 +++++++++----------
+ .../preferences/species_features/basic.dm     |  4 ++--
+ .../client/preferences/uplink_location.dm     |  8 ++++----
+ .../PreferencesMenu/SpeciesPage.tsx           |  4 +---
+ .../character_preferences/examine_panel.tsx   |  4 ++--
+ .../PreferencesMenu/preferences/gender.ts     |  8 ++++----
+ 7 files changed, 28 insertions(+), 30 deletions(-)
+
+diff --git a/code/modules/client/preferences/clothing.dm b/code/modules/client/preferences/clothing.dm
+index cf200ad1ffd657..8d310da5f9a683 100644
+--- a/code/modules/client/preferences/clothing.dm
++++ b/code/modules/client/preferences/clothing.dm
+@@ -16,7 +16,7 @@
+ /datum/preference/choiced/backpack
+ 	savefile_key = "backpack"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+-	main_feature_name = "Backpack"
++	main_feature_name = "Сумка"
+ 	category = PREFERENCE_CATEGORY_CLOTHING
+ 	should_generate_icons = TRUE
+ 
+@@ -66,7 +66,7 @@
+ /datum/preference/choiced/jumpsuit
+ 	savefile_key = "jumpsuit_style"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+-	main_feature_name = "Jumpsuit"
++	main_feature_name = "Комбинезон"
+ 	category = PREFERENCE_CATEGORY_CLOTHING
+ 	should_generate_icons = TRUE
+ 
+@@ -90,7 +90,7 @@
+ /datum/preference/choiced/socks
+ 	savefile_key = "socks"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+-	main_feature_name = "Socks"
++	main_feature_name = "Носки"
+ 	category = PREFERENCE_CATEGORY_CLOTHING
+ 	should_generate_icons = TRUE
+ 
+@@ -114,7 +114,7 @@
+ /datum/preference/choiced/undershirt
+ 	savefile_key = "undershirt"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+-	main_feature_name = "Undershirt"
++	main_feature_name = "Одежда"
+ 	category = PREFERENCE_CATEGORY_CLOTHING
+ 	should_generate_icons = TRUE
+ 
+@@ -149,7 +149,7 @@
+ /datum/preference/choiced/underwear
+ 	savefile_key = "underwear"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+-	main_feature_name = "Underwear"
++	main_feature_name = "Нижнее белье"
+ 	category = PREFERENCE_CATEGORY_CLOTHING
+ 	should_generate_icons = TRUE
+ 
+diff --git a/code/modules/client/preferences/names.dm b/code/modules/client/preferences/names.dm
+index 476fc7381a28f8..e4fef1051e7d53 100644
+--- a/code/modules/client/preferences/names.dm
++++ b/code/modules/client/preferences/names.dm
+@@ -34,7 +34,7 @@
+ 
+ /// A character's real name
+ /datum/preference/name/real_name
+-	explanation = "Name"
++	explanation = "Имя"
+ 	// The `_` makes it first in ABC order.
+ 	group = "_real_name"
+ 	savefile_key = "real_name"
+@@ -68,7 +68,7 @@
+ 
+ /// The name for a backup human, when nonhumans are made into head of staff
+ /datum/preference/name/backup_human
+-	explanation = "Backup human name"
++	explanation = "Запасное имя для человека"
+ 	group = "backup_human"
+ 	savefile_key = "human_name"
+ 
+@@ -80,7 +80,7 @@
+ /datum/preference/name/clown
+ 	savefile_key = "clown_name"
+ 
+-	explanation = "Clown name"
++	explanation = "Имя для Клоуна"
+ 	group = "fun"
+ 	relevant_job = /datum/job/clown
+ 
+@@ -90,7 +90,7 @@
+ /datum/preference/name/mime
+ 	savefile_key = "mime_name"
+ 
+-	explanation = "Mime name"
++	explanation = "Имя для Мима"
+ 	group = "fun"
+ 	relevant_job = /datum/job/mime
+ 
+@@ -103,7 +103,7 @@
+ 	allow_numbers = TRUE
+ 	can_randomize = FALSE
+ 
+-	explanation = "Cyborg name"
++	explanation = "Имя для Киборга"
+ 	group = "silicons"
+ 	relevant_job = /datum/job/cyborg
+ 
+@@ -114,7 +114,7 @@
+ 	savefile_key = "ai_name"
+ 
+ 	allow_numbers = TRUE
+-	explanation = "AI name"
++	explanation = "Имя для ИИ"
+ 	group = "silicons"
+ 	relevant_job = /datum/job/ai
+ 
+@@ -126,7 +126,7 @@
+ 
+ 	allow_numbers = TRUE
+ 
+-	explanation = "Religion name"
++	explanation = "Название религии"
+ 	group = "religion"
+ 
+ /datum/preference/name/religion/create_default_value()
+@@ -138,7 +138,7 @@
+ 	allow_numbers = TRUE
+ 	can_randomize = FALSE
+ 
+-	explanation = "Deity name"
++	explanation = "Имя божества"
+ 	group = "religion"
+ 
+ /datum/preference/name/deity/create_default_value()
+@@ -150,7 +150,7 @@
+ 	allow_numbers = TRUE
+ 	can_randomize = FALSE
+ 
+-	explanation = "Bible name"
++	explanation = "Название библии"
+ 	group = "religion"
+ 
+ /datum/preference/name/bible/create_default_value()
+@@ -160,7 +160,7 @@
+ /datum/preference/name/operative_alias
+ 	savefile_key = "operative_alias"
+ 	allow_numbers = TRUE //You can get a little wacky with your alias nobody will judge you
+-	explanation = "Operative Alias"
++	explanation = "Имя для Оперативника"
+ 	group = "antagonists"
+ 
+ /datum/preference/name/operative_alias/create_default_value()
+diff --git a/code/modules/client/preferences/species_features/basic.dm b/code/modules/client/preferences/species_features/basic.dm
+index abf4ea0e44e208..a35d9228e15a74 100644
+--- a/code/modules/client/preferences/species_features/basic.dm
++++ b/code/modules/client/preferences/species_features/basic.dm
+@@ -56,7 +56,7 @@
+ 	savefile_key = "facial_style_name"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Facial hair"
++	main_feature_name = "Лицевая растительность"
+ 	should_generate_icons = TRUE
+ 	relevant_head_flag = HEAD_FACIAL_HAIR
+ 
+@@ -132,7 +132,7 @@
+ 	savefile_key = "hairstyle_name"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Hairstyle"
++	main_feature_name = "Прическа"
+ 	should_generate_icons = TRUE
+ 	relevant_head_flag = HEAD_HAIR
+ 
+diff --git a/code/modules/client/preferences/uplink_location.dm b/code/modules/client/preferences/uplink_location.dm
+index 8ae892bb4024e9..1a50045db43b71 100644
+--- a/code/modules/client/preferences/uplink_location.dm
++++ b/code/modules/client/preferences/uplink_location.dm
+@@ -11,10 +11,10 @@
+ 	var/list/data = ..()
+ 
+ 	data[CHOICED_PREFERENCE_DISPLAY_NAMES] = list(
+-		UPLINK_PDA = "PDA",
+-		UPLINK_RADIO = "Radio",
+-		UPLINK_PEN = "Pen",
+-		UPLINK_IMPLANT = "Implant ([UPLINK_IMPLANT_TELECRYSTAL_COST]TC)",
++		UPLINK_PDA = "КПК",
++		UPLINK_RADIO = "Радио",
++		UPLINK_PEN = "Ручка",
++		UPLINK_IMPLANT = "Имплант ([UPLINK_IMPLANT_TELECRYSTAL_COST]ТК)",
+ 	)
+ 
+ 	return data
+diff --git a/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx b/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx
+index 4db05f344345ad..2fed7c732e0d6d 100644
+--- a/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx
++++ b/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx
+@@ -310,9 +310,7 @@ const SpeciesPageInner = (props: {
+                         )
+                       }
+                     >
+-                      <Section title="Description">
+-                        {currentSpecies.desc}
+-                      </Section>
++                      <Section title="Описание">{currentSpecies.desc}</Section>
+ 
+                       <Section title="Черты">
+                         <SpeciesPerks perks={currentSpecies.perks} />
+diff --git a/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/character_preferences/examine_panel.tsx b/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/character_preferences/examine_panel.tsx
+index 0bd38dd3618d0e..a2d0a5f37d722d 100644
+--- a/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/character_preferences/examine_panel.tsx
++++ b/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/character_preferences/examine_panel.tsx
+@@ -2,13 +2,13 @@ import { Feature } from '../base';
+ import { FeatureTextInput } from '../base_bandastation';
+ 
+ export const flavor_text: Feature<string> = {
+-  name: 'Flavor Text',
++  name: 'Описание внешности',
+   description: 'Опишите вашего персонажа!',
+   component: FeatureTextInput,
+ };
+ 
+ export const silicon_flavor_text: Feature<string> = {
+-  name: 'Flavor Text (Silicon)',
++  name: 'Описание внешности (Силикон)',
+   description: 'Опишите вашего силикона!',
+   component: FeatureTextInput,
+ };
+diff --git a/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/gender.ts b/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/gender.ts
+index baac8655593210..93ae37f4308458 100644
+--- a/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/gender.ts
++++ b/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/gender.ts
+@@ -8,21 +8,21 @@ export enum Gender {
+ export const GENDERS = {
+   [Gender.Male]: {
+     icon: 'mars',
+-    text: 'He/Him',
++    text: 'Он/Его',
+   },
+ 
+   [Gender.Female]: {
+     icon: 'venus',
+-    text: 'She/Her',
++    text: 'Она/Ее',
+   },
+ 
+   [Gender.Other]: {
+     icon: 'transgender',
+-    text: 'They/Them',
++    text: 'Они/Их',
+   },
+ 
+   [Gender.Other2]: {
+     icon: 'neuter',
+-    text: 'It/Its',
++    text: 'Оно/Его',
+   },
+ };
+
+From 0b058e8b2036309478d6fff9fc6f0f65e93bdc6b Mon Sep 17 00:00:00 2001
+From: larentoun <31931237+larentoun@users.noreply.github.com>
+Date: Thu, 11 Apr 2024 23:58:26 +0300
+Subject: [PATCH 2/4] species features
+
+---
+ .../preferences/species_features/lizard.dm    |  6 ++--
+ .../preferences/species_features/moth.dm      |  6 ++--
+ .../mob/living/carbon/human/_species.dm       |  8 +++---
+ .../carbon/human/species_types/ethereal.dm    | 22 +++++++--------
+ .../carbon/human/species_types/felinid.dm     | 20 ++++++-------
+ .../carbon/human/species_types/humans.dm      | 10 +++----
+ .../human/species_types/lizardpeople.dm       |  8 +++---
+ .../carbon/human/species_types/mothmen.dm     | 20 ++++++-------
+ .../carbon/human/species_types/plasmamen.dm   | 28 +++++++++----------
+ 9 files changed, 64 insertions(+), 64 deletions(-)
+
+diff --git a/code/modules/client/preferences/species_features/lizard.dm b/code/modules/client/preferences/species_features/lizard.dm
+index 4ce09715483ad2..0c56c8aeb9f51a 100644
+--- a/code/modules/client/preferences/species_features/lizard.dm
++++ b/code/modules/client/preferences/species_features/lizard.dm
+@@ -27,7 +27,7 @@
+ 	savefile_key = "feature_lizard_body_markings"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Body markings"
++	main_feature_name = "Метки на теле"
+ 	should_generate_icons = TRUE
+ 	relevant_mutant_bodypart = "body_markings"
+ 
+@@ -77,7 +77,7 @@
+ 	savefile_key = "feature_lizard_horns"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Horns"
++	main_feature_name = "Рога"
+ 	should_generate_icons = TRUE
+ 
+ /datum/preference/choiced/lizard_horns/init_possible_values()
+@@ -105,7 +105,7 @@
+ 	savefile_key = "feature_lizard_snout"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Snout"
++	main_feature_name = "Морда"
+ 	should_generate_icons = TRUE
+ 
+ /datum/preference/choiced/lizard_snout/init_possible_values()
+diff --git a/code/modules/client/preferences/species_features/moth.dm b/code/modules/client/preferences/species_features/moth.dm
+index 120a7ea822bec9..d44cb0e58f03a0 100644
+--- a/code/modules/client/preferences/species_features/moth.dm
++++ b/code/modules/client/preferences/species_features/moth.dm
+@@ -2,7 +2,7 @@
+ 	savefile_key = "feature_moth_antennae"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Antennae"
++	main_feature_name = "Антенна"
+ 	should_generate_icons = TRUE
+ 
+ /datum/preference/choiced/moth_antennae/init_possible_values()
+@@ -32,7 +32,7 @@
+ 	savefile_key = "feature_moth_markings"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Body markings"
++	main_feature_name = "Метки на теле"
+ 	should_generate_icons = TRUE
+ 	relevant_mutant_bodypart = "moth_markings"
+ 
+@@ -84,7 +84,7 @@
+ 	savefile_key = "feature_moth_wings"
+ 	savefile_identifier = PREFERENCE_CHARACTER
+ 	category = PREFERENCE_CATEGORY_FEATURES
+-	main_feature_name = "Moth wings"
++	main_feature_name = "Крылья моли"
+ 	should_generate_icons = TRUE
+ 
+ /datum/preference/choiced/moth_wings/init_possible_values()
+diff --git a/code/modules/mob/living/carbon/human/_species.dm b/code/modules/mob/living/carbon/human/_species.dm
+index 46e0b0e967cbe9..012fae25f47665 100644
+--- a/code/modules/mob/living/carbon/human/_species.dm
++++ b/code/modules/mob/living/carbon/human/_species.dm
+@@ -2071,16 +2071,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "comment",
+-			SPECIES_PERK_NAME = "Native Speaker",
+-			SPECIES_PERK_DESC = "Alongside [initial(common_language.name)], [plural_form] gain the ability to speak [english_list(bonus_languages)].",
++			SPECIES_PERK_NAME = "Родной язык",
++			SPECIES_PERK_DESC = "Вместе с [initial(common_language.name)], вы так же можете говорить на [english_list(bonus_languages)].",
+ 		))
+ 
+ 	else
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "comment",
+-			SPECIES_PERK_NAME = "Foreign Speaker",
+-			SPECIES_PERK_DESC = "[plural_form] may not speak [initial(common_language.name)], but they can speak [english_list(bonus_languages)].",
++			SPECIES_PERK_NAME = "Иностраннец",
++			SPECIES_PERK_DESC = "Вы не можете говорить на [initial(common_language.name)], но зато знаете [english_list(bonus_languages)].",
+ 		))
+ 
+ 	return to_add
+diff --git a/code/modules/mob/living/carbon/human/species_types/ethereal.dm b/code/modules/mob/living/carbon/human/species_types/ethereal.dm
+index e37e7ca81447f3..172df2d6f738ce 100644
+--- a/code/modules/mob/living/carbon/human/species_types/ethereal.dm
++++ b/code/modules/mob/living/carbon/human/species_types/ethereal.dm
+@@ -216,33 +216,33 @@
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "bolt",
+-			SPECIES_PERK_NAME = "Shockingly Tasty",
+-			SPECIES_PERK_DESC = "Ethereals can feed on electricity from APCs, and do not otherwise need to eat.",
++			SPECIES_PERK_NAME = "Шокирующе вкусно",
++			SPECIES_PERK_DESC = "Эфириалы могут питаться от электричества с ЛКП, и другая пища им не подходит.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "lightbulb",
+-			SPECIES_PERK_NAME = "Disco Ball",
+-			SPECIES_PERK_DESC = "Ethereals passively generate their own light.",
++			SPECIES_PERK_NAME = "Дискошар",
++			SPECIES_PERK_DESC = "Эфириалы пассивно излучают свой собственный свет.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "gem",
+-			SPECIES_PERK_NAME = "Crystal Core",
+-			SPECIES_PERK_DESC = "The Ethereal's heart will encase them in crystal should they die, returning them to life after a time - \
+-				at the cost of a permanent brain trauma.",
++			SPECIES_PERK_NAME = "Кристаллическое ядро",
++			SPECIES_PERK_DESC = "В случае смерти, сердце эфириала заключит тело в кристалл, который вернет его к жизни через некоторое время \
++				ценой постоянной травмы мозга.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "fist-raised",
+-			SPECIES_PERK_NAME = "Elemental Attacker",
+-			SPECIES_PERK_DESC = "Ethereals deal burn damage with their punches instead of brute.",
++			SPECIES_PERK_NAME = "Элементальный атакующий",
++			SPECIES_PERK_DESC = "Эфириалы наносят урон ожогами своими ударами, вместо физического.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "biohazard",
+-			SPECIES_PERK_NAME = "Starving Artist",
+-			SPECIES_PERK_DESC = "Ethereals take toxin damage while starving.",
++			SPECIES_PERK_NAME = "Голодающий художник",
++			SPECIES_PERK_DESC = "Эфириалы получают урон токсинами во время голодания.",
+ 		),
+ 	)
+ 
+diff --git a/code/modules/mob/living/carbon/human/species_types/felinid.dm b/code/modules/mob/living/carbon/human/species_types/felinid.dm
+index 731b6047a06443..8112c78b028e3e 100644
+--- a/code/modules/mob/living/carbon/human/species_types/felinid.dm
++++ b/code/modules/mob/living/carbon/human/species_types/felinid.dm
+@@ -169,28 +169,28 @@
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "grin-tongue",
+-			SPECIES_PERK_NAME = "Grooming",
+-			SPECIES_PERK_DESC = "Felinids can lick wounds to reduce bleeding.",
++			SPECIES_PERK_NAME = "Уход за собой",
++			SPECIES_PERK_DESC = "Фелиниды могут лизать раны, чтобы остановить кровотечение.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = FA_ICON_PERSON_FALLING,
+-			SPECIES_PERK_NAME = "Catlike Grace",
+-			SPECIES_PERK_DESC = "Felinids have catlike instincts allowing them to land upright on their feet.  \
+-				Instead of being knocked down from falling, you only recieve a short slowdown. \
+-				However, they do not have catlike legs, and the fall will deal additional damage.",
++			SPECIES_PERK_NAME = "Кошачья грация",
++			SPECIES_PERK_DESC = "Фелиниды обладают кошачьими инстинктами, позволяющими им приземляться на ноги.  \
++				Вместо того, чтобы быть сбитым с ног при падении, вы получите только короткое замедление. \
++				Однако у них нет кошачьих лап, и падение наносит повышенный урон.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "assistive-listening-systems",
+-			SPECIES_PERK_NAME = "Sensitive Hearing",
+-			SPECIES_PERK_DESC = "Felinids are more sensitive to loud sounds, such as flashbangs.",
++			SPECIES_PERK_NAME = "Чувствительный слух",
++			SPECIES_PERK_DESC = "Фелиниды более чувствительны к громким звукам, например от светошумовых гранат.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "shower",
+-			SPECIES_PERK_NAME = "Hydrophobia",
+-			SPECIES_PERK_DESC = "Felinids don't like getting soaked with water.",
++			SPECIES_PERK_NAME = "Гидрофобия",
++			SPECIES_PERK_DESC = "Фелиниды не любят, когда на них попадает вода.",
+ 		),
+ 	)
+ 
+diff --git a/code/modules/mob/living/carbon/human/species_types/humans.dm b/code/modules/mob/living/carbon/human/species_types/humans.dm
+index c7a181027e64eb..d62bc86014509a 100644
+--- a/code/modules/mob/living/carbon/human/species_types/humans.dm
++++ b/code/modules/mob/living/carbon/human/species_types/humans.dm
+@@ -65,17 +65,17 @@
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "robot",
+-			SPECIES_PERK_NAME = "Asimov Superiority",
+-			SPECIES_PERK_DESC = "The AI and their cyborgs are, by default, subservient only \
+-				to humans. As a human, silicons are required to both protect and obey you.",
++			SPECIES_PERK_NAME = "Превосходство Азимова",
++			SPECIES_PERK_DESC = "ИИ и киборги, по-умолчанию, подчиняются только людям \
++				Будучи человеком, силиконы обязаны защищать и выполнять ваши указания.",
+ 		))
+ 
+ 	if(CONFIG_GET(flag/enforce_human_authority))
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "bullhorn",
+-			SPECIES_PERK_NAME = "Chain of Command",
+-			SPECIES_PERK_DESC = "Nanotrasen only recognizes humans for command roles, such as Captain.",
++			SPECIES_PERK_NAME = "Цепь командования",
++			SPECIES_PERK_DESC = "Нанотрейзен признает только людей на роли командования, таких как Капитана.",
+ 		))
+ 
+ 	return to_add
+diff --git a/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm b/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm
+index 3e20d6b1a77508..edbc7d96cdbea6 100644
+--- a/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm
++++ b/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm
+@@ -107,10 +107,10 @@
+ 	to_add += list(list(
+ 		SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 		SPECIES_PERK_ICON = "thermometer-empty",
+-		SPECIES_PERK_NAME = "Cold-blooded",
+-		SPECIES_PERK_DESC = "Lizardpeople have higher tolerance for hot temperatures, but lower \
+-			tolerance for cold temperatures. Additionally, they cannot self-regulate their body temperature - \
+-			they are as cold or as warm as the environment around them is. Stay warm!",
++		SPECIES_PERK_NAME = "Хладнокровный",
++		SPECIES_PERK_DESC = "Ящеры лучше переносят высокие температуры, но хуже \
++			низкие. Кроме того, они не могут самостоятельно регулировать температуру своего тела - \
++			они имеют такую же температуру, что и окружающая среда. Держитесь в тепле!",
+ 	))
+ 
+ 	return to_add
+diff --git a/code/modules/mob/living/carbon/human/species_types/mothmen.dm b/code/modules/mob/living/carbon/human/species_types/mothmen.dm
+index 68fb87142f6c98..3a4999406049fa 100644
+--- a/code/modules/mob/living/carbon/human/species_types/mothmen.dm
++++ b/code/modules/mob/living/carbon/human/species_types/mothmen.dm
+@@ -98,28 +98,28 @@
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "feather-alt",
+-			SPECIES_PERK_NAME = "Precious Wings",
+-			SPECIES_PERK_DESC = "Moths can fly in pressurized, zero-g environments and safely land short falls using their wings.",
++			SPECIES_PERK_NAME = "Прелестные крылья",
++			SPECIES_PERK_DESC = "Моли могут летать в помещениях под давлением в условиях невесомости и безопасно приземляться с небольшой высоты.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "tshirt",
+-			SPECIES_PERK_NAME = "Meal Plan",
+-			SPECIES_PERK_DESC = "Moths can eat clothes for temporary nourishment.",
++			SPECIES_PERK_NAME = "План питания",
++			SPECIES_PERK_DESC = "Моли могут поедать одежду, чтобы временно подкрепиться.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "fire",
+-			SPECIES_PERK_NAME = "Ablazed Wings",
+-			SPECIES_PERK_DESC = "Moth wings are fragile, and can be easily burnt off.",
++			SPECIES_PERK_NAME = "Опаленные крылья",
++			SPECIES_PERK_DESC = "Крылья молей хрупкие и легко сгорают.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "sun",
+-			SPECIES_PERK_NAME = "Bright Lights",
+-			SPECIES_PERK_DESC = "Moths need an extra layer of flash protection to protect \
+-				themselves, such as against security officers or when welding. Welding \
+-				masks will work.",
++			SPECIES_PERK_NAME = "Яркие огоньки",
++			SPECIES_PERK_DESC = "Молям нужен дополнительный слой защиты от вспышек, чтобы защитить глаза \
++				от офицеров службы безопасности или сварочных аппаратов. Сварочные \
++				маски полностью спасают от вспышек.",
+ 		),
+ 	)
+ 
+diff --git a/code/modules/mob/living/carbon/human/species_types/plasmamen.dm b/code/modules/mob/living/carbon/human/species_types/plasmamen.dm
+index 2d053813e5b839..14d24db328be58 100644
+--- a/code/modules/mob/living/carbon/human/species_types/plasmamen.dm
++++ b/code/modules/mob/living/carbon/human/species_types/plasmamen.dm
+@@ -182,40 +182,40 @@
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "user-shield",
+-			SPECIES_PERK_NAME = "Protected",
+-			SPECIES_PERK_DESC = "Plasmamen are immune to radiation, poisons, and most diseases.",
++			SPECIES_PERK_NAME = "Защищенные",
++			SPECIES_PERK_DESC = "Плазмамены защищены от радиации, ядов и большинства болезней.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "bone",
+-			SPECIES_PERK_NAME = "Wound Resistance",
+-			SPECIES_PERK_DESC = "Plasmamen have higher tolerance for damage that would wound others.",
++			SPECIES_PERK_NAME = "Сопротивление травмам",
++			SPECIES_PERK_DESC = "Плазмамены обладают повышенной устойчивостью к получению травм.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "wind",
+-			SPECIES_PERK_NAME = "Plasma Healing",
+-			SPECIES_PERK_DESC = "Plasmamen can heal wounds by consuming plasma.",
++			SPECIES_PERK_NAME = "Лечение плазмой",
++			SPECIES_PERK_DESC = "Плазмамены могут лечиться, потребляя плазму.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "hard-hat",
+-			SPECIES_PERK_NAME = "Protective Helmet",
+-			SPECIES_PERK_DESC = "Plasmamen's helmets provide them shielding from the flashes of welding, as well as an inbuilt flashlight.",
++			SPECIES_PERK_NAME = "Защитный шлем",
++			SPECIES_PERK_DESC = "Шлема плазмаменов имеют защиту от вспышек и встроенный фонарик.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "fire",
+-			SPECIES_PERK_NAME = "Living Torch",
+-			SPECIES_PERK_DESC = "Plasmamen instantly ignite when their body makes contact with oxygen.",
++			SPECIES_PERK_NAME = "Живой факел",
++			SPECIES_PERK_DESC = "Плазмамены мгновенно воспламеняются при контакте их тела с кислородом.",
+ 		),
+ 		list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "briefcase-medical",
+-			SPECIES_PERK_NAME = "Complex Biology",
+-			SPECIES_PERK_DESC = "Plasmamen take specialized medical knowledge to be \
+-				treated. Do not expect speedy revival, if you are lucky enough to get \
+-				one at all.",
++			SPECIES_PERK_NAME = "Комплексная биология",
++			SPECIES_PERK_DESC = "Для лечения плазмаменов нужны специальные медицинские \
++				знания. Не ожидайте быстрого воскрешения, если вам вообще посчастливится \
++				его получить.",
+ 		),
+ 	)
+ 
+
+From f6bdda58ceb334b9389532a6026bda2077e16b28 Mon Sep 17 00:00:00 2001
+From: larentoun <31931237+larentoun@users.noreply.github.com>
+Date: Fri, 12 Apr 2024 00:02:47 +0300
+Subject: [PATCH 3/4] more prefs
+
+---
+ .../interfaces/PreferencesMenu/RandomizationButton.tsx    | 6 +++---
+ .../tgui/interfaces/PreferencesMenu/SpeciesPage.tsx       | 6 +-----
+ .../preferences/features/randomization.tsx                | 8 +++++---
+ 3 files changed, 9 insertions(+), 11 deletions(-)
+
+diff --git a/tgui/packages/tgui/interfaces/PreferencesMenu/RandomizationButton.tsx b/tgui/packages/tgui/interfaces/PreferencesMenu/RandomizationButton.tsx
+index 4152e2d77c196b..1c8835bbd32839 100644
+--- a/tgui/packages/tgui/interfaces/PreferencesMenu/RandomizationButton.tsx
++++ b/tgui/packages/tgui/interfaces/PreferencesMenu/RandomizationButton.tsx
+@@ -5,17 +5,17 @@ import { RandomSetting } from './data';
+ 
+ const options = [
+   {
+-    displayText: 'Do not randomize',
++    displayText: 'Не рандомизировать',
+     value: RandomSetting.Disabled,
+   },
+ 
+   {
+-    displayText: 'Always randomize',
++    displayText: 'Всегда рандомизировать',
+     value: RandomSetting.Enabled,
+   },
+ 
+   {
+-    displayText: 'Randomize when antagonist',
++    displayText: 'Рандомизировать при антагонизме',
+     value: RandomSetting.AntagOnly,
+   },
+ ];
+diff --git a/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx b/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx
+index 2fed7c732e0d6d..2d16ecaa31e796 100644
+--- a/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx
++++ b/tgui/packages/tgui/interfaces/PreferencesMenu/SpeciesPage.tsx
+@@ -259,11 +259,7 @@ const SpeciesPageInner = (props: {
+   return (
+     <Stack vertical fill>
+       <Stack.Item>
+-        <Button
+-          icon="arrow-left"
+-          onClick={props.handleClose}
+-          content="Возврат"
+-        />
++        <Button icon="arrow-left" onClick={props.handleClose} content="Назад" />
+       </Stack.Item>
+ 
+       <Stack.Item grow>
+diff --git a/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/randomization.tsx b/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/randomization.tsx
+index 4e443ad653c3cc..56eb86da9a1bc0 100644
+--- a/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/randomization.tsx
++++ b/tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/randomization.tsx
+@@ -29,19 +29,21 @@ export const random_body: Feature<RandomSetting> = {
+                   setRandomToggle(false);
+                 }}
+               >
+-                Randomize
++                Рандомизировать
+               </Button>
+             </Stack.Item>
+ 
+             <Stack.Item>
+               <Button color="red" onClick={() => setRandomToggle(false)}>
+-                Cancel
++                Отмена
+               </Button>
+             </Stack.Item>
+           </>
+         ) : (
+           <Stack.Item>
+-            <Button onClick={() => setRandomToggle(true)}>Randomize</Button>
++            <Button onClick={() => setRandomToggle(true)}>
++              Рандомизировать
++            </Button>
+           </Stack.Item>
+         )}
+       </Stack>
+
+From 97350510f6ff0e3546492ec36c093b1f7a11aeb6 Mon Sep 17 00:00:00 2001
+From: larentoun <31931237+larentoun@users.noreply.github.com>
+Date: Fri, 12 Apr 2024 00:25:41 +0300
+Subject: [PATCH 4/4] more species features
+
+---
+ .../mob/living/carbon/human/_species.dm       | 94 +++++++++----------
+ .../human/species_types/lizardpeople.dm       |  2 +-
+ 2 files changed, 48 insertions(+), 48 deletions(-)
+
+diff --git a/code/modules/mob/living/carbon/human/_species.dm b/code/modules/mob/living/carbon/human/_species.dm
+index 012fae25f47665..2796450fd3c4c5 100644
+--- a/code/modules/mob/living/carbon/human/_species.dm
++++ b/code/modules/mob/living/carbon/human/_species.dm
+@@ -1759,16 +1759,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "band-aid",
+-			SPECIES_PERK_NAME = "Brutal Weakness",
+-			SPECIES_PERK_DESC = "[plural_form] are weak to brute damage.",
++			SPECIES_PERK_NAME = "Слабость к физическому урону",
++			SPECIES_PERK_DESC = "[plural_form] слабы к физическому урону.",
+ 		))
+ 
+ 	if(initial(fake_chest.brute_modifier) < 1)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "shield-alt",
+-			SPECIES_PERK_NAME = "Brutal Resilience",
+-			SPECIES_PERK_DESC = "[plural_form] are resilient to brute damage.",
++			SPECIES_PERK_NAME = "Устойчивость к физическому урону",
++			SPECIES_PERK_DESC = "[plural_form] устойчивы к физическому урону.",
+ 		))
+ 
+ 	// Burn related
+@@ -1776,16 +1776,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "burn",
+-			SPECIES_PERK_NAME = "Burn Weakness",
+-			SPECIES_PERK_DESC = "[plural_form] are weak to burn damage.",
++			SPECIES_PERK_NAME = "Слабость к ожогам",
++			SPECIES_PERK_DESC = "[plural_form] слабы к ожоговому урону.",
+ 		))
+ 
+ 	if(initial(fake_chest.burn_modifier) < 1)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "shield-alt",
+-			SPECIES_PERK_NAME = "Burn Resilience",
+-			SPECIES_PERK_DESC = "[plural_form] are resilient to burn damage.",
++			SPECIES_PERK_NAME = "Устойчивость к ожогам",
++			SPECIES_PERK_DESC = "[plural_form] устойчивы к ожоговому урону.",
+ 		))
+ 
+ 	// Shock damage
+@@ -1793,16 +1793,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "bolt",
+-			SPECIES_PERK_NAME = "Shock Vulnerability",
+-			SPECIES_PERK_DESC = "[plural_form] are vulnerable to being shocked.",
++			SPECIES_PERK_NAME = "Уязвимость к шоку",
++			SPECIES_PERK_DESC = "[plural_form] уязвимы к ударам от тока.",
+ 		))
+ 
+ 	if(siemens_coeff < 1)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "shield-alt",
+-			SPECIES_PERK_NAME = "Shock Resilience",
+-			SPECIES_PERK_DESC = "[plural_form] are resilient to being shocked.",
++			SPECIES_PERK_NAME = "Устойчивость к току",
++			SPECIES_PERK_DESC = "[plural_form] устойчивы к ударам от тока.",
+ 		))
+ 
+ 	return to_add
+@@ -1820,16 +1820,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "temperature-high",
+-			SPECIES_PERK_NAME = "Heat Vulnerability",
+-			SPECIES_PERK_DESC = "[plural_form] are vulnerable to high temperatures.",
++			SPECIES_PERK_NAME = "Уязвимость к жаре",
++			SPECIES_PERK_DESC = "[plural_form] уязвимы к высоким температурам.",
+ 		))
+ 
+ 	if(heatmod < 1 || bodytemp_heat_damage_limit > BODYTEMP_HEAT_DAMAGE_LIMIT)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "thermometer-empty",
+-			SPECIES_PERK_NAME = "Heat Resilience",
+-			SPECIES_PERK_DESC = "[plural_form] are resilient to hotter environments.",
++			SPECIES_PERK_NAME = "Устойчивость к жаре",
++			SPECIES_PERK_DESC = "[plural_form] устойчивы к высоким температурам.",
+ 		))
+ 
+ 	// Cold temperature tolerance
+@@ -1837,16 +1837,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "temperature-low",
+-			SPECIES_PERK_NAME = "Cold Vulnerability",
+-			SPECIES_PERK_DESC = "[plural_form] are vulnerable to cold temperatures.",
++			SPECIES_PERK_NAME = "Уязвимость к холоду",
++			SPECIES_PERK_DESC = "[plural_form] узвимы к низким температурам.",
+ 		))
+ 
+ 	if(coldmod < 1 || bodytemp_cold_damage_limit < BODYTEMP_COLD_DAMAGE_LIMIT)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "thermometer-empty",
+-			SPECIES_PERK_NAME = "Cold Resilience",
+-			SPECIES_PERK_DESC = "[plural_form] are resilient to colder environments.",
++			SPECIES_PERK_NAME = "Устойчивость к холоду",
++			SPECIES_PERK_DESC = "[plural_form] устойчивы к низким температурам.",
+ 		))
+ 
+ 	return to_add
+@@ -1864,8 +1864,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "tint-slash",
+-			SPECIES_PERK_NAME = "Bloodletted",
+-			SPECIES_PERK_DESC = "[plural_form] do not have blood.",
++			SPECIES_PERK_NAME = "Обескровленный",
++			SPECIES_PERK_DESC = "[plural_form] не имеют крови.",
+ 		))
+ 
+ 	// Otherwise, check if their exotic blood is a valid typepath
+@@ -1874,7 +1874,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "tint",
+ 			SPECIES_PERK_NAME = initial(exotic_blood.name),
+-			SPECIES_PERK_DESC = "[name] blood is [initial(exotic_blood.name)], which can make recieving medical treatment harder.",
++			SPECIES_PERK_DESC = "Кровь у [name] - [initial(exotic_blood.name)], что может затруднить получение медицинской помощи.",
+ 		))
+ 
+ 	// Otherwise otherwise, see if they have an exotic bloodtype set
+@@ -1882,8 +1882,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "tint",
+-			SPECIES_PERK_NAME = "Exotic Blood",
+-			SPECIES_PERK_DESC = "[plural_form] have \"[exotic_bloodtype]\" type blood, which can make recieving medical treatment harder.",
++			SPECIES_PERK_NAME = "Экзотическая кровь",
++			SPECIES_PERK_DESC = "Кровь у [plural_form] - тип \"[exotic_bloodtype]\", что может затруднить получение медицинской помощи.",
+ 		))
+ 
+ 	return to_add
+@@ -1900,50 +1900,50 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "user-plus",
+-			SPECIES_PERK_NAME = "Limbs Easily Reattached",
+-			SPECIES_PERK_DESC = "[plural_form] limbs are easily readded, and as such do not \
+-				require surgery to restore. Simply pick it up and pop it back in, champ!",
++			SPECIES_PERK_NAME = "Конечности легко прикрепляются",
++			SPECIES_PERK_DESC = "Конечности у [plural_form] легко присоединяются обратно, и потому \
++				им не нужна для этого операция. Просто поднимите ее и вставьте обратно!",
+ 		))
+ 
+ 	if(TRAIT_EASYDISMEMBER in inherent_traits)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "user-times",
+-			SPECIES_PERK_NAME = "Limbs Easily Dismembered",
+-			SPECIES_PERK_DESC = "[plural_form] limbs are not secured well, and as such they are easily dismembered.",
++			SPECIES_PERK_NAME = "Конечности легко расчленяются",
++			SPECIES_PERK_DESC = "Конечности у [plural_form] не закреплены хорошо, и потому их легко расчленить.",
+ 		))
+ 
+ 	if(TRAIT_EASILY_WOUNDED in inherent_traits)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "user-times",
+-			SPECIES_PERK_NAME = "Easily Wounded",
+-			SPECIES_PERK_DESC = "[plural_form] skin is very weak and fragile. They are much easier to apply serious wounds to.",
++			SPECIES_PERK_NAME = "Легко ранимый",
++			SPECIES_PERK_DESC = "Кожа у [plural_form] очень слабая и хрупкая. Им гораздо легче получить серьезные травмы.",
+ 		))
+ 
+ 	if(TRAIT_TOXINLOVER in inherent_traits)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "syringe",
+-			SPECIES_PERK_NAME = "Toxins Lover",
+-			SPECIES_PERK_DESC = "Toxins damage dealt to [plural_form] are reversed - healing toxins will instead cause harm, and \
+-				causing toxins will instead cause healing. Be careful around purging chemicals!",
++			SPECIES_PERK_NAME = "Любитель токсинов",
++			SPECIES_PERK_DESC = "Токсины у [plural_form] работают наоборот - лечение токсинов нанесет вред, а \
++				урон токсинами вылечит их. Будьте аккуратны при очистке химикатов!",
+ 		))
+ 
+ 	if (TRAIT_GENELESS in inherent_traits)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "dna",
+-			SPECIES_PERK_NAME = "No Genes",
+-			SPECIES_PERK_DESC = "[plural_form] have no genes, making genetic scrambling a useless weapon, but also locking them out from getting genetic powers.",
++			SPECIES_PERK_NAME = "Нет генов",
++			SPECIES_PERK_DESC = "У [plural_form] нет генов, что делает генетический скрэмблинг бесполезным оружием, но также лишает их возможности получить генетические способности.",
+ 		))
+ 
+ 	if (TRAIT_NOBREATH in inherent_traits)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "wind",
+-			SPECIES_PERK_NAME = "No Respiration",
+-			SPECIES_PERK_DESC = "[plural_form] have no need to breathe!",
++			SPECIES_PERK_NAME = "Бездыханные",
++			SPECIES_PERK_DESC = "[plural_form] не нужно дышать!",
+ 		))
+ 
+ 	return to_add
+@@ -2013,15 +2013,15 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 	var/shrugging_difference = tox_shrugging - initial(base_liver.toxTolerance)
+ 	if (shrugging_difference != 0)
+ 		var/difference_positive = (shrugging_difference > 0)
+-		var/more_or_less = (difference_positive) ? "more" : "less"
++		var/more_or_less = (difference_positive) ? "больше" : "меньше"
+ 		var/perk_type = (difference_positive) ? SPECIES_POSITIVE_PERK : SPECIES_NEGATIVE_PERK
+-		var/perk_name = ("Toxin " + ((difference_positive) ? "Resistant" : "Vulnerable")) + " Liver"
++		var/perk_name = (((difference_positive) ? "Устойчивая" : "Уязвимая")) + " к токсинам " + " печень"
+ 
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = perk_type,
+ 			SPECIES_PERK_ICON = "biohazard",
+ 			SPECIES_PERK_NAME = perk_name,
+-			SPECIES_PERK_DESC = "[name] livers are capable of rapidly shrugging off [tox_shrugging]u of toxins, which is [more_or_less] than humans."
++			SPECIES_PERK_DESC = "Печень [name] могут быстро избавляется от [tox_shrugging]u токсинов, что [more_or_less], чем у людей."
+ 		))
+ 
+ 	return to_add
+@@ -2038,8 +2038,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+ 			SPECIES_PERK_ICON = "wind",
+-			SPECIES_PERK_NAME = "[capitalize(breathid)] Breathing",
+-			SPECIES_PERK_DESC = "[plural_form] must breathe [breathid] to survive. You receive a tank when you arrive.",
++			SPECIES_PERK_NAME = "Дышит [capitalize(breathid)]",
++			SPECIES_PERK_DESC = "[plural_form] должны дышать [breathid], чтобы выжить. Вы получаете баллон по прибытии.",
+ 		))
+ 
+ 	return to_add
+@@ -2072,15 +2072,15 @@ GLOBAL_LIST_EMPTY(features_by_species)
+ 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+ 			SPECIES_PERK_ICON = "comment",
+ 			SPECIES_PERK_NAME = "Родной язык",
+-			SPECIES_PERK_DESC = "Вместе с [initial(common_language.name)], вы так же можете говорить на [english_list(bonus_languages)].",
++			SPECIES_PERK_DESC = "Вместе с [initial(common_language.name)], [plural_form] так же могут говорить на [english_list(bonus_languages)].",
+ 		))
+ 
+ 	else
+ 		to_add += list(list(
+ 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 			SPECIES_PERK_ICON = "comment",
+-			SPECIES_PERK_NAME = "Иностраннец",
+-			SPECIES_PERK_DESC = "Вы не можете говорить на [initial(common_language.name)], но зато знаете [english_list(bonus_languages)].",
++			SPECIES_PERK_NAME = "Иностраннцы",
++			SPECIES_PERK_DESC = "[plural_form] не могут говорить на [initial(common_language.name)], но зато знают [english_list(bonus_languages)].",
+ 		))
+ 
+ 	return to_add
+diff --git a/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm b/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm
+index edbc7d96cdbea6..96cce29ec8a489 100644
+--- a/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm
++++ b/code/modules/mob/living/carbon/human/species_types/lizardpeople.dm
+@@ -108,7 +108,7 @@
+ 		SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+ 		SPECIES_PERK_ICON = "thermometer-empty",
+ 		SPECIES_PERK_NAME = "Хладнокровный",
+-		SPECIES_PERK_DESC = "Ящеры лучше переносят высокие температуры, но хуже \
++		SPECIES_PERK_DESC = "[plural_form] лучше переносят высокие температуры, но хуже \
+ 			низкие. Кроме того, они не могут самостоятельно регулировать температуру своего тела - \
+ 			они имеют такую же температуру, что и окружающая среда. Держитесь в тепле!",
+ 	))

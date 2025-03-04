@@ -442,7 +442,7 @@
 			/obj/item/reagent_containers/cup/soup_pot,
 		),
 	) //Should cover: Bottles, Beakers, Bowls, Booze, Glasses, Food, Food Containers, Food Trash, Organs, Tobacco Products, Lighters, and Kitchen Tools.
-	atom_storage.insert_preposition = "on"
+	atom_storage.insert_preposition = "на"
 	atom_storage.max_slots = 8
 	atom_storage.max_total_storage = 16
 

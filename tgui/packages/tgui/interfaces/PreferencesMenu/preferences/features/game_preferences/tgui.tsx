@@ -2,51 +2,51 @@ import { CheckboxInput, Feature, FeatureToggle } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const tgui_fancy: FeatureToggle = {
-  name: 'Enable fancy TGUI',
-  category: 'UI',
-  description: 'Makes TGUI windows look better, at the cost of compatibility.',
+  name: 'Включить красивый TGUI',
+  category: 'ИНТЕРФЕЙС',
+  description: 'Окна TGUI будут выглядишь лучше ценой совместимости.',
   component: CheckboxInput,
 };
 
 export const tgui_input: FeatureToggle = {
-  name: 'Input: Enable TGUI',
-  category: 'UI',
-  description: 'Renders input boxes in TGUI.',
+  name: 'Ввод: включить TGUI',
+  category: 'ИНТЕРФЕЙС',
+  description: 'Окна ввода будут иметь TGUI.',
   component: CheckboxInput,
 };
 
 export const tgui_input_large: FeatureToggle = {
-  name: 'Input: Larger buttons',
-  category: 'UI',
-  description: 'Makes TGUI buttons less traditional, more functional.',
+  name: 'Ввод: большие кнопки',
+  category: 'ИНТЕРФЕЙС',
+  description: 'Менее традиционные, но более функциональные кнопки TGUI.',
   component: CheckboxInput,
 };
 
 export const tgui_input_swapped: FeatureToggle = {
-  name: 'Input: Swap Submit/Cancel buttons',
-  category: 'UI',
-  description: 'Makes TGUI buttons less traditional, more functional.',
+  name: 'Ввод: инвентировать ввод/отмена',
+  category: 'ИНТЕРФЕЙС',
+  description: 'Менее традиционные, но более функциональные кнопки TGUI.',
   component: CheckboxInput,
 };
 
 export const tgui_layout: Feature<string> = {
-  name: 'Default TGUI Layout',
-  category: 'UI',
+  name: 'Стандартный макет TGUI',
+  category: 'ИНТЕРФЕЙС',
   description:
-    'Applies the selected layout type to all interfaces where it possible. Like on Smartfridge.',
+    'Применяет выбранный тип макета на все интерфейсы, где это возможно. Например: Smartfridge.',
   component: FeatureDropdownInput,
 };
 
 export const tgui_lock: FeatureToggle = {
-  name: 'Lock TGUI to main monitor',
-  category: 'UI',
-  description: 'Locks TGUI windows to your main monitor.',
+  name: 'TGUI только на главном дисплее',
+  category: 'ИНТЕРФЕЙС',
+  description: 'Блокирует местоположение TGUI на главном дисплее.',
   component: CheckboxInput,
 };
 
 export const tgui_say_light_mode: FeatureToggle = {
-  name: 'Say: Light mode',
-  category: 'UI',
-  description: 'Sets TGUI Say to use a light mode.',
+  name: 'Говорить: светлая тема',
+  category: 'ИНТЕРФЕЙС',
+  description: 'TGUI поле ввода для разговора будет в светлой теме.',
   component: CheckboxInput,
 };
