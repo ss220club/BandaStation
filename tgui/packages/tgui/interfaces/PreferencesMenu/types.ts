@@ -181,11 +181,39 @@ export type PreferencesMenuData = {
 
   active_slot: number;
   name_to_use: string;
-
   window: PrefsWindow;
+
+  // BANDASTATION ADDITION START
+  tts_seed: string;
+  tts_enabled: BooleanLike;
+  // BANDASTATION ADDITION END
 };
 
+// BANDASTATION ADDITION START
+export type Seed = {
+  name: string;
+  value: string;
+  category: string;
+  gender: string;
+  provider: string;
+  donator_level: number;
+};
+
+export type TtsProvider = {
+  name: string;
+  is_enabled: BooleanLike;
+};
+
+export type TtsData = {
+  providers: Array<TtsProvider>;
+  seeds: Array<Seed>;
+  phrases: string[];
+};
+
+// BANDASTATION ADDITION END
+
 export type ServerData = {
+  text_to_speech: TtsData; // BANDASTATION ADD
   jobs: {
     departments: Record<string, Department>;
     jobs: Record<string, Job>;

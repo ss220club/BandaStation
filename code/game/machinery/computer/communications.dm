@@ -302,7 +302,7 @@
 			nuke_request(reason, user)
 			to_chat(user, span_notice("Request sent."))
 			user.log_message("has requested the nuclear codes from CentCom with reason \"[reason]\"", LOG_SAY)
-			priority_announce("The codes for the on-station nuclear self-destruct have been requested by [user]. Confirmation or denial of this request will be sent shortly.", "Nuclear Self-Destruct Codes Requested", SSstation.announcer.get_rand_report_sound())
+			priority_announce("[user] запросил коды для запуска механизма ядерного самоуничтожения станции. В ближайшее время будет отправлено уведомление о подтверждении или отклонении данного запроса.", "Запрос кода самоуничтожения станции", SSstation.announcer.get_rand_report_sound())
 			playsound(src, 'sound/machines/terminal/terminal_prompt.ogg', 50, FALSE)
 			COOLDOWN_START(src, important_action_cooldown, IMPORTANT_ACTION_COOLDOWN)
 		if ("restoreBackupRoutingData")
@@ -863,23 +863,23 @@
 				/datum/dynamic_ruleset/midround/dangerous_pirates,
 			)
 			priority_announce(
-				"Attention crew: sector monitoring reports a massive jump-trace from an enemy vessel destined for your system. Prepare for imminent hostile contact.",
-				"[command_name()] High-Priority Update",
+				"Внимание экипажу, система секторного мониторинга сообщает о массивном прыжковом следе вражеского космического судна, направляющегося в вашу систему. Приготовьтесь к неминуемому контакту с врагом.",
+				"[command_name()]: Высокоприоритетное оповещение",
 			)
 			SSdynamic.picking_specific_rule(pick(pirate_rulesets), forced = TRUE, ignore_cost = TRUE)
 
 		if(HACK_FUGITIVES) // Triggers fugitives, which can cause confusion / chaos as the crew decides which side help
 			priority_announce(
-				"Attention crew: sector monitoring reports a jump-trace from an unidentified vessel destined for your system. Prepare for probable contact.",
-				"[command_name()] High-Priority Update",
+				"Внимание экипажу, система секторного мониторинга сообщает о массивном прыжковом следе неизвестного космического судна, направляющегося в вашу систему. Приготовьтесь к возможному контакту.",
+				"[command_name()]: Высокоприоритетное оповещение",
 			)
 
 			force_event_after(/datum/round_event_control/fugitives, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
 
 		if(HACK_THREAT) // Force an unfavorable situation on the crew
 			priority_announce(
-				"Attention crew, the Nanotrasen Department of Intelligence has received intel suggesting increased enemy activity in your sector beyond that initially reported in today's threat advisory.",
-				"[command_name()] High-Priority Update",
+				"Внимание экипажу, департамент разведки Нанотрейзен получил сведения, свидетельствующие о повышении вражеской активности в вашем секторе.",
+				"[command_name()]: Высокоприоритетное оповещение",
 			)
 
 			for(var/mob/crew_member as anything in GLOB.player_list)
@@ -890,7 +890,19 @@
 			SSdynamic.unfavorable_situation()
 
 		if(HACK_SLEEPER) // Trigger one or multiple sleeper agents with the crew (or for latejoining crew)
-			var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
+			// BANDASTATION EDIT START - inject storyteller events instead of dynamic rulesets
+			var/event_to_spawn = pick_weight(list(
+				/datum/round_event_control/antagonist/solo/traitor/midround = 75,
+				// hmmm, let's rarely spawn some non-traitor antags just to spice things up a bit
+				/datum/round_event_control/antagonist/solo/heretic/midround = 15,
+				/datum/round_event_control/antagonist/solo/from_ghosts/wizard = 1
+			))
+			force_event_after(event_to_spawn, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
+			priority_announce(
+				"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
+				"[command_name()] High-Priority Update",
+			)
+			/* var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
 			var/max_number_of_sleepers = clamp(round(length(GLOB.alive_player_list) / 20), 1, 3)
 			var/num_agents_created = 0
 			for(var/num_agents in 1 to rand(1, max_number_of_sleepers))
@@ -905,9 +917,10 @@
 			else
 				// We spawned some sleeper agents, nice - give them a report to kickstart the paranoia
 				priority_announce(
-					"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
-					"[command_name()] High-Priority Update",
+					"Внимание экипажу, похоже, зафиксирован взлом системы телекоммуникаций с последующей передачей неизвестного сигнала.",
+					"[command_name()]: Высокоприоритетное оповещение",
 				)
+			*/ // BANDASTATION EDIT END
 
 #undef HACK_PIRATE
 #undef HACK_FUGITIVES

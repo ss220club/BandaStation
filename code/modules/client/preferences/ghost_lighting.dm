@@ -1,8 +1,8 @@
 GLOBAL_LIST_INIT(ghost_lighting_options, list(
-	"Fullbright" = LIGHTING_CUTOFF_FULLBRIGHT,
-	"Night Vision" = LIGHTING_CUTOFF_HIGH,
-	"Darker" = LIGHTING_CUTOFF_MEDIUM,
-	"Normal" = LIGHTING_CUTOFF_VISIBLE,
+	"Полное освещение" = LIGHTING_CUTOFF_FULLBRIGHT,
+	"Ночное зрение" = LIGHTING_CUTOFF_HIGH,
+	"Темнее" = LIGHTING_CUTOFF_MEDIUM,
+	"Стандартное" = LIGHTING_CUTOFF_VISIBLE,
 ))
 
 /// How bright a ghost's lighting plane is
@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(ghost_lighting_options, list(
 	savefile_identifier = PREFERENCE_PLAYER
 
 /datum/preference/choiced/ghost_lighting/create_default_value()
-	return "Darker"
+	return "Темнее"
 
 /datum/preference/choiced/ghost_lighting/init_possible_values()
 	var/list/values = list()
