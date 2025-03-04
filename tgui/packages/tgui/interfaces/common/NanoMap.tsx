@@ -8,7 +8,14 @@ import {
   TransformWrapper,
   useControls,
 } from 'react-zoom-pan-pinch';
-import { Button, Section, Stack } from 'tgui-core/components';
+import {
+  Button,
+  Icon,
+  LabeledList,
+  Modal,
+  Section,
+  Stack,
+} from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
 import { BooleanLike, classes } from 'tgui-core/react';
 import { useLocalStorage } from 'usehooks-ts';
@@ -27,17 +34,31 @@ type Props = Partial<{
    * If yes then center button will teleport you to it
    */
   /** Allows you to disable minimap */
-  minimap: BooleanLike;
+  minimapDisabled: BooleanLike;
   /**
    * Changes minimap position.
-   * Allowed values: 'top-left', 'top-right', 'bottom-left', 'bottom-right',
+   * Allowed values: 'top-left', 'top-right', 'bottom-left', 'bottom-right'
+   * Default: 'top-left'
    */
-  minimapPos: string;
+  minimapPosition: MinimapPosition;
   /** Enables centering on selected target */
   selectedTarget: BooleanLike;
   /** Called when zoom level changes. Returns zoom level */
   onZoom: (zoom: number) => void;
 }>;
+
+type MinimapPosition =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right';
+
+const minimapPositions: Record<MinimapPosition, number> = {
+  'top-left': -90,
+  'top-right': 0,
+  'bottom-left': 180,
+  'bottom-right': 90,
+};
 
 const defaultScale = 0.25;
 const minScale = defaultScale / 2;
@@ -57,13 +78,22 @@ export function NanoMap(props: Props) {
     children,
     buttons,
     mapImage,
-    minimap = true,
-    minimapPos = 'top-left',
+    minimapDisabled,
+    minimapPosition,
     selectedTarget,
     onZoom,
   } = props;
-  const [velocity, setVelocity] = useLocalStorage('nanomap-velocity', true);
+  const [prefs, setPrefs] = useState(false);
   const [zoom, setZoom] = useState(defaultScale);
+  const [velocity, setVelocity] = useLocalStorage('nanomap-velocity', true);
+  const [minimapPref, setMinimapPref] = useLocalStorage(
+    'nanomap-minimap',
+    true,
+  );
+  const [minimapPositionPref, setMinimapPositionPref] = useLocalStorage(
+    'nanomap-minimapPosition',
+    'top-left',
+  );
   const image = (
     <img
       style={{
@@ -77,7 +107,7 @@ export function NanoMap(props: Props) {
   return (
     <TransformWrapper
       centerOnInit
-      initialScale={defaultScale}
+      initialScale={minScale}
       minScale={minScale}
       maxScale={maxScale}
       smooth={false}
@@ -90,21 +120,38 @@ export function NanoMap(props: Props) {
       }}
     >
       <Section fill>
+        {prefs && (
+          <NanoMapPreferences
+            setPrefs={setPrefs}
+            velocity={velocity}
+            setVelocity={setVelocity}
+            minimapDisabled={minimapDisabled}
+            minimapPref={minimapPref}
+            setMinimap={setMinimapPref}
+            minimapPosition={minimapPositionPref}
+            setMinimapPosition={setMinimapPositionPref}
+          />
+        )}
         <Stack fill vertical>
           <Stack.Item
             grow
-            className={classes(['NanoMap', `NanoMap--${minimapPos}`])}
+            className={classes([
+              'NanoMap',
+              `NanoMap--${minimapPosition ? minimapPosition : minimapPositionPref}`,
+            ])}
           >
             <div
               className={classes([
                 'NanoMap__Minimap--container',
-                !minimap && `NanoMap__Minimap--disabled`,
+                minimapDisabled
+                  ? 'NanoMap__Minimap--disabled'
+                  : !minimapPref && 'NanoMap__Minimap--disabled',
               ])}
             >
-              <NanoMapButtons velocity={velocity} setVelocity={setVelocity}>
+              <NanoMapButtons prefs={prefs} setPrefs={setPrefs}>
                 {buttons}
               </NanoMapButtons>
-              {minimap && (
+              {!minimapDisabled && minimapPref && (
                 <MiniMap className="NanoMap__Minimap" width={150}>
                   {image}
                 </MiniMap>
@@ -177,20 +224,86 @@ function NanoMapControls(props) {
 }
 
 function NanoMapButtons(props) {
-  const { children, velocity, setVelocity } = props;
+  const { children, prefs, setPrefs } = props;
   return (
     <Stack vertical className="NanoMap__Buttons">
       {children}
       <Stack.Item mt={0.5}>
         <Button
-          icon={'wind'}
-          selected={!velocity}
-          tooltip="Инерция"
+          icon={'gear'}
+          tooltip="Параметры"
           tooltipPosition="right"
-          onClick={() => setVelocity(!velocity)}
+          onClick={() => setPrefs(!prefs)}
         />
       </Stack.Item>
     </Stack>
+  );
+}
+
+function NanoMapPreferences(props) {
+  const {
+    setPrefs,
+    velocity,
+    setVelocity,
+    minimapDisabled,
+    minimapPref,
+    setMinimap,
+    minimapPosition,
+    setMinimapPosition,
+  } = props;
+  const cannotSetPrefText = minimapDisabled
+    ? 'В данном интерфейсе нельзя изменять параметры мини-карты, и её состояние.'
+    : undefined;
+
+  return (
+    <Modal p={1}>
+      <Section
+        fill
+        m={0}
+        title="Параметры карты"
+        backgroundColor="rgba(0, 0, 0, 0.33)"
+        buttons={
+          <Button color="red" icon="times" onClick={() => setPrefs(false)} />
+        }
+      >
+        <LabeledList>
+          <LabeledList.Item label="Позиция мини-карты">
+            <Stack wrap width={5}>
+              {Object.keys(minimapPositions).map((key) => (
+                <Button
+                  key={key}
+                  color="transparent"
+                  selected={minimapPosition === key}
+                  onClick={() => setMinimapPosition(key)}
+                >
+                  <Icon
+                    name="location-arrow"
+                    rotation={minimapPositions[key]}
+                  />
+                </Button>
+              ))}
+            </Stack>
+          </LabeledList.Item>
+          <LabeledList.Item
+            label="Инерция"
+            tooltip="Если включено, карта продолжит двигаться по инерции после отпускания мыши при перемещении."
+          >
+            <Button.Checkbox
+              checked={!velocity}
+              onClick={() => setVelocity(!velocity)}
+            />
+          </LabeledList.Item>
+          <LabeledList.Item label="Мини-карта">
+            <Button.Checkbox
+              checked={minimapPref}
+              disabled={minimapDisabled}
+              tooltip={cannotSetPrefText}
+              onClick={() => setMinimap(!minimapPref)}
+            />
+          </LabeledList.Item>
+        </LabeledList>
+      </Section>
+    </Modal>
   );
 }
 
