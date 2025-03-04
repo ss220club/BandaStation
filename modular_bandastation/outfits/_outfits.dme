@@ -6,5 +6,6 @@
 #include "code/mind.dm"
 #include "code/nanotrasen_representative.dm"
 #include "code/syndicate.dm"
+#include "code/explorer.dm"
 #include "code/outfit_organs.dm"
 #include "code/outfit_export.dm"
