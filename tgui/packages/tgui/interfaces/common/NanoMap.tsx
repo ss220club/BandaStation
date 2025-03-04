@@ -11,11 +11,11 @@ import {
 import {
   Button,
   Icon,
+  Image,
   LabeledList,
   Modal,
   Section,
   Stack,
-  Image,
 } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
 import { BooleanLike, classes } from 'tgui-core/react';
