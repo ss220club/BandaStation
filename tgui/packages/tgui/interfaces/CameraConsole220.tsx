@@ -15,7 +15,7 @@ import { useLocalStorage } from 'usehooks-ts';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
-import { NanoMap } from './common/NanoMap';
+import { type MapData, NanoMap } from './common/NanoMap';
 
 type Data = {
   activeCamera: Camera & { status: BooleanLike };
@@ -23,8 +23,7 @@ type Data = {
   can_spy: BooleanLike;
   mapRef: string;
   network: string[];
-  mapUrl: string;
-  selected_z_level: number;
+  mapData: MapData;
 };
 
 type Camera = {
@@ -207,9 +206,11 @@ const CameraListSelector = (props) => {
 
 export const CameraMapSelector = (props) => {
   const { act, data } = useBackend<Data>();
-  const { activeCamera, mapUrl, selected_z_level } = data;
+  const { activeCamera, mapData } = data;
   const cameras = selectCameras(data.cameras, '');
+
   const [zoom, setZoom] = useState<number>();
+  const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
   const [tracking, setTracking] = useLocalStorage(
     'camera-console-tracking',
     false,
@@ -219,41 +220,26 @@ export const CameraMapSelector = (props) => {
     <Stack fill>
       <Stack.Item style={{ overflow: 'hidden' }}>
         <NanoMap
-          mapImage={mapUrl}
+          mapData={mapData}
+          changeLevel={setSelectedLevel}
           selectedTarget={!!activeCamera?.ref}
           onZoom={setZoom}
           buttons={
-            <>
-              <Stack.Item>
-                <Button
-                  icon="chevron-up"
-                  onClick={() => act('switch_z_level', { z_dir: 1 })}
-                />
-              </Stack.Item>
-              <Stack.Item grow mt={0.5}>
-                <Button
-                  icon="chevron-down"
-                  onClick={() => act('switch_z_level', { z_dir: -1 })}
-                />
-              </Stack.Item>
-              <Stack.Item>
-                <Button
-                  icon="wheelchair-move"
-                  selected={tracking}
-                  tooltip={
-                    tracking
-                      ? 'Не перемещать к выбранной камере'
-                      : 'Перемещать к выбранной камере'
-                  }
-                  tooltipPosition="right"
-                  onClick={() => setTracking(!tracking)}
-                />
-              </Stack.Item>
-            </>
+            <Button
+              icon="wheelchair-move"
+              selected={tracking}
+              tooltip={
+                tracking
+                  ? 'Не перемещать к выбранной камере'
+                  : 'Перемещать к выбранной камере'
+              }
+              tooltipPosition="right"
+              onClick={() => setTracking(!tracking)}
+            />
           }
         >
           {cameras
-            .filter((camera) => camera.z === Number(selected_z_level))
+            .filter((camera) => camera.z === selectedLevel)
             .map((camera) => (
               <NanoMap.Button
                 key={camera.ref}

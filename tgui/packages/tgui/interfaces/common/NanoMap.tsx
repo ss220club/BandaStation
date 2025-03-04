@@ -15,6 +15,7 @@ import {
   Modal,
   Section,
   Stack,
+  Image,
 } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
 import { BooleanLike, classes } from 'tgui-core/react';
@@ -22,30 +23,40 @@ import { useLocalStorage } from 'usehooks-ts';
 
 import { resolveAsset } from '../../assets';
 
-type Props = Partial<{
+export type MapData = {
+  name: string;
+  minFloor: number;
+  mainFloor: number;
+  maxFloor: number;
+  lavalandLevel: number;
+};
+
+type Props = {
   /** Content on map. Like buttons. Use only NanoMap.xxx components */
-  children: ReactNode;
+  children?: ReactNode;
   /** Additional control buttons container */
-  buttons: ReactNode;
-  /** Name of PNG map image. Example: 'Cyberiad_nanomap_z2' */
-  mapImage: string;
+  buttons?: ReactNode;
+  /** All needed map data from backend */
+  mapData: MapData;
   /**
    * Do we have any target in selection?
    * If yes then center button will teleport you to it
    */
   /** Allows you to disable minimap */
-  minimapDisabled: BooleanLike;
+  minimapDisabled?: BooleanLike;
   /**
    * Changes minimap position.
    * Allowed values: 'top-left', 'top-right', 'bottom-left', 'bottom-right'
    * Default: 'top-left'
    */
-  minimapPosition: MinimapPosition;
+  minimapPosition?: MinimapPosition;
   /** Enables centering on selected target */
-  selectedTarget: BooleanLike;
+  selectedTarget?: BooleanLike;
+  /** Called when level changes. Returns current level */
+  changeLevel: (level: number) => void;
   /** Called when zoom level changes. Returns zoom level */
-  onZoom: (zoom: number) => void;
-}>;
+  onZoom?: (zoom: number) => void;
+};
 
 type MinimapPosition =
   | 'top-left'
@@ -77,14 +88,17 @@ export function NanoMap(props: Props) {
   const {
     children,
     buttons,
-    mapImage,
+    mapData,
     minimapDisabled,
     minimapPosition,
     selectedTarget,
+    changeLevel,
     onZoom,
   } = props;
+
   const [prefs, setPrefs] = useState(false);
   const [zoom, setZoom] = useState(defaultScale);
+  const [currentLevel, setCurrentLevel] = useState(mapData.mainFloor);
   const [velocity, setVelocity] = useLocalStorage('nanomap-velocity', true);
   const [minimapPref, setMinimapPref] = useLocalStorage(
     'nanomap-minimap',
@@ -94,13 +108,21 @@ export function NanoMap(props: Props) {
     'nanomap-minimapPosition',
     'top-left',
   );
+
+  function getMapImage(level) {
+    if (level === mapData.lavalandLevel) {
+      return resolveAsset(`Lavaland_nanomap_z1.png`);
+    } else {
+      return resolveAsset(`${mapData.name}_nanomap_z${level - 1}.png`);
+    }
+  }
+
   const image = (
-    <img
-      style={{
-        width: `${defaultMapSize}px`,
-        height: `${defaultMapSize}px`,
-      }}
-      src={resolveAsset(mapImage || '')}
+    <Image
+      fixBlur={false}
+      width={`${defaultMapSize}px`}
+      height={`${defaultMapSize}px`}
+      src={getMapImage(currentLevel)}
     />
   );
 
@@ -148,7 +170,14 @@ export function NanoMap(props: Props) {
                   : !minimapPref && 'NanoMap__Minimap--disabled',
               ])}
             >
-              <NanoMapButtons prefs={prefs} setPrefs={setPrefs}>
+              <NanoMapButtons
+                mapData={mapData}
+                currentLevel={currentLevel}
+                setCurrentLevel={setCurrentLevel}
+                changeLevel={changeLevel}
+                prefs={prefs}
+                setPrefs={setPrefs}
+              >
                 {buttons}
               </NanoMapButtons>
               {!minimapDisabled && minimapPref && (
@@ -223,11 +252,81 @@ function NanoMapControls(props) {
   );
 }
 
+function NanoMapLevelSelector(props) {
+  const { mapData, currentLevel, setCurrentLevel, changeLevel } = props;
+
+  function changeAllLevels(level) {
+    setCurrentLevel(level);
+    changeLevel(level);
+  }
+
+  return (
+    <Stack.Item grow>
+      <Stack vertical>
+        {mapData.min_floor !== mapData.maxFloor && (
+          <>
+            <Stack.Item>
+              <Button
+                icon="chevron-up"
+                disabled={currentLevel >= mapData.maxFloor}
+                onClick={() => changeAllLevels(currentLevel + 1)}
+              />
+            </Stack.Item>
+            <Stack.Item>
+              <Button
+                icon="chevron-down"
+                disabled={
+                  currentLevel > mapData.maxFloor ||
+                  currentLevel <= mapData.minFloor
+                }
+                onClick={() => {
+                  changeAllLevels(currentLevel - 1);
+                }}
+              />
+            </Stack.Item>
+          </>
+        )}
+        {mapData.lavalandLevel > 0 && (
+          <Stack.Item>
+            <Button
+              icon="volcano"
+              selected={currentLevel === mapData.lavalandLevel}
+              tooltip="Лаваленд"
+              onClick={() => {
+                if (currentLevel === mapData.lavalandLevel) {
+                  changeAllLevels(mapData.mainFloor);
+                } else {
+                  changeAllLevels(mapData.lavalandLevel);
+                }
+              }}
+            />
+          </Stack.Item>
+        )}
+      </Stack>
+    </Stack.Item>
+  );
+}
+
 function NanoMapButtons(props) {
-  const { children, prefs, setPrefs } = props;
+  const {
+    children,
+    prefs,
+    setPrefs,
+    mapData,
+    currentLevel,
+    setCurrentLevel,
+    changeLevel,
+  } = props;
+
   return (
     <Stack vertical className="NanoMap__Buttons">
-      {children}
+      <NanoMapLevelSelector
+        mapData={mapData}
+        currentLevel={currentLevel}
+        setCurrentLevel={setCurrentLevel}
+        changeLevel={changeLevel}
+      />
+      <Stack.Item>{children}</Stack.Item>
       <Stack.Item mt={0.5}>
         <Button
           icon={'gear'}

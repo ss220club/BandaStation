@@ -29,6 +29,12 @@ $blur: saturate(150%) blur(12px);
       color: lighten(colors.$green, 25%);
     }
   }
+
+  &--disabled {
+    cursor: unset;
+    background-color: lighten($background-color, 25%) !important;
+    color: lighten(colors.$red, 25%) !important;
+  }
 }
 
 .NanoMap {
