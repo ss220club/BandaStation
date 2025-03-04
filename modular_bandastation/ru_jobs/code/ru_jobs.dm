@@ -159,7 +159,6 @@
 	. = ..()
 	alternate_titles += list(JOB_MAGISTRATE_RU)
 
-
 /datum/job/explorer/New()
 	. = ..()
 	alternate_titles += list(JOB_EXPLORER_RU)
