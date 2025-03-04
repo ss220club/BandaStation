@@ -1,58 +1,25 @@
-/// Value by which the number of floors in the station will be subtracted
-#define FLOOR_SUBSTRACTION 1
+/**
+ * Returns a list of data for the nanomap map UI
+ */
+/datum/controller/subsystem/mapping/proc/get_map_ui_data()
+    if(!initialized)
+        stack_trace("get_map_ui_data called before initialization")
+        return list()
 
-/datum/nanomap
-	/// Current station name.
-	var/static/map_name
-	/// Minimum possible station level..
-	var/static/min_floor
-	/// Level of main station floor.
-	var/static/main_floor
-	/// Maximum possible station level.
-	var/static/max_floor
-	/// Lavaland level, if we have lavaland.
-	var/static/lavaland_level
+    var/static/list/map_ui_data = list()
+    if(!length(map_ui_data))
+        var/list/station_z_levels = levels_by_trait(ZTRAIT_STATION)
+        var/min_station_z_level = station_z_levels[1]
+        var/main_station_z_level = isnull(current_map.main_floor) ? min_station_z_level : min_station_z_level + current_map.main_floor - 1
+        var/max_station_z_level = station_z_levels[length(station_z_levels)]
 
-/datum/nanomap/New()
-	. = ..()
-	if(!map_name)
-		map_name = SSmapping.current_map.map_name
+        var/list/mining_levels = levels_by_trait(ZTRAIT_MINING)
+        var/lavaland_z_level = length(mining_levels) ? mining_levels[1] : null
 
-	if(!min_floor)
-		for(var/datum/space_level/level in SSmapping.z_list)
-			if(!findtext(level.name, "Station"))
-				continue
-			min_floor = level.z_value
-			break
+        map_ui_data["name"] = current_map.map_name
+        map_ui_data["minFloor"] = min_station_z_level
+        map_ui_data["mainFloor"] = main_station_z_level
+        map_ui_data["maxFloor"] = max_station_z_level
+        map_ui_data["lavalandLevel"] = lavaland_z_level
 
-	if(!main_floor)
-		main_floor = min_floor + (SSmapping.current_map.main_floor - FLOOR_SUBSTRACTION || 0)
-
-	if(!max_floor)
-		var/levels = 0
-		if(islist(SSmapping.current_map.traits))
-			for(var/level in SSmapping.current_map.traits)
-				levels++
-
-		max_floor = min_floor + levels - FLOOR_SUBSTRACTION
-
-	if(!lavaland_level)
-		if(SSmapping.current_map.minetype != "none")
-			for(var/datum/space_level/level in SSmapping.z_list)
-				if(!findtext(level.name, "Lavaland"))
-					continue
-				lavaland_level = level.z_value
-				break
-		else
-			lavaland_level = FALSE
-
-/datum/nanomap/proc/get_tgui_data()
-	return list(
-		"name" = map_name,
-		"minFloor" = min_floor,
-		"mainFloor" = main_floor,
-		"maxFloor" = max_floor,
-		"lavalandLevel" = lavaland_level,
-	)
-
-#undef FLOOR_SUBSTRACTION
+    return map_ui_data
