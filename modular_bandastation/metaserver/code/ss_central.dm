@@ -164,7 +164,7 @@ SUBSYSTEM_DEF(central)
 		return
 
 	var/list/data = json_decode(response.body)
-	if(data["total"] != 0)
+	if(length(data["items"]))
 		player.donator_level = data["items"][1]["tier"]
 	player.can_save_donator_level = TRUE
 
@@ -176,6 +176,6 @@ SUBSYSTEM_DEF(central)
 		return
 
 	var/list/data = json_decode(response.body)
-	if(data["total"] != 0)
-		player.donator_level = data["items"][0]["tier"]
+	if(length(data["items"]))
+		player.donator_level = data["items"][1]["tier"]
 	player.can_save_donator_level = TRUE
