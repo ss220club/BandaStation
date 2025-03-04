@@ -595,9 +595,9 @@
 	results = list(/datum/reagent/consumable/ethanol/galactional = 5)
 	required_reagents = list(
 		/datum/reagent/consumable/ethanol/vodka = 1,
-		/datum/reagent/consumable/ethanol/beer = 1,
+		/datum/reagent/consumable/ethanol/bitters = 1,
 		/datum/reagent/consumable/ethanol/wine = 1,
-		/datum/reagent/consumable/triple_citrus = 1,
+		/datum/reagent/consumable/ethanol/champagne = 1,
 		/datum/reagent/consumable/space_cola = 1,
 	)
 
