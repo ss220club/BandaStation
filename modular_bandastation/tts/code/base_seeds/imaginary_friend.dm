@@ -3,7 +3,8 @@
 
 /mob/eye/imaginary_friend/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods, message_range)
 	. = ..()
-	speaker.cast_tts(src, raw_message, is_radio = !!radio_freq)
+	var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
+	speaker.cast_tts(src, message_to_tts, is_radio = !!radio_freq, tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE))
 
 /mob/eye/imaginary_friend/setup_friend_from_prefs(datum/preferences/appearance_from_prefs)
 	. = ..()
