@@ -35,10 +35,6 @@ $blur: saturate(150%) blur(12px);
   &__Controls {
     display: flex;
     justify-content: center;
-    position: absolute;
-    right: 0;
-    bottom: -2.1rem;
-    left: 0;
     gap: 0.25rem;
     padding: 0 0.5rem;
     z-index: 3;
@@ -59,10 +55,6 @@ $blur: saturate(150%) blur(12px);
   }
 
   &__Buttons {
-    position: absolute;
-    top: 0;
-    right: -2.25rem;
-    bottom: 0;
     padding: 0.5rem 0;
     z-index: 3;
 
@@ -83,13 +75,6 @@ $blur: saturate(150%) blur(12px);
       border: 1px solid rgba($border-color, 0.33) !important;
       box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 9999px !important;
     }
-
-    &--container {
-      position: absolute !important;
-      top: 0.25rem;
-      left: 0.25rem;
-      z-index: 3;
-    }
   }
 
   &__Object {
@@ -101,5 +86,99 @@ $blur: saturate(150%) blur(12px);
     width: 2em;
     border: 2px solid rgba(0, 0, 0, 0.66);
     border-radius: 0.25rem;
+  }
+}
+
+/** Positioning */
+.NanoMap {
+  position: relative;
+
+  &__Controls,
+  &__Buttons,
+  &__Minimap--container {
+    position: absolute;
+  }
+
+  &__Minimap--container {
+    top: 0.25rem;
+    left: 0.25rem;
+    z-index: 3;
+  }
+
+  &__Controls {
+    right: 0;
+    bottom: -2.1rem;
+    left: 0;
+  }
+
+  &__Buttons {
+    top: 0;
+    right: -2.25rem;
+    bottom: 0;
+  }
+
+  &--top-right,
+  &--bottom-right {
+    .NanoMap__Minimap--container {
+      right: 0.25rem;
+      left: unset;
+    }
+  }
+
+  &--bottom-left,
+  &--bottom-right {
+    .NanoMap__Minimap--container {
+      top: unset;
+      bottom: 0.25rem;
+    }
+  }
+
+  &--bottom-left,
+  &--bottom-right {
+    .NanoMap__Controls {
+      top: -2.1rem;
+      bottom: unset;
+    }
+  }
+
+  &--top-right,
+  &--bottom-right {
+    .NanoMap__Buttons {
+      right: unset;
+      left: -2.25rem;
+    }
+  }
+
+  /** Disabled minimap layout */
+  &__Minimap--disabled {
+    pointer-events: none;
+    inset: 0 !important;
+    display: flex;
+    margin: 0.25rem;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .NanoMap__Controls,
+    .NanoMap__Buttons {
+      position: relative;
+      pointer-events: all;
+      inset: unset;
+      padding: 0;
+
+      * {
+        flex-basis: unset !important;
+      }
+    }
+
+    .NanoMap__Controls {
+      width: 150px;
+    }
+  }
+
+  &--bottom-left,
+  &--bottom-right {
+    .NanoMap__Minimap--disabled {
+      align-items: flex-end;
+    }
   }
 }

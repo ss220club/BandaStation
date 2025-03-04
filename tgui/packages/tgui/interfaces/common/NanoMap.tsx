@@ -10,7 +10,7 @@ import {
 } from 'react-zoom-pan-pinch';
 import { Button, Section, Stack } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
-import { BooleanLike } from 'tgui-core/react';
+import { BooleanLike, classes } from 'tgui-core/react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { resolveAsset } from '../../assets';
@@ -18,7 +18,7 @@ import { resolveAsset } from '../../assets';
 type Props = Partial<{
   /** Content on map. Like buttons. Use only NanoMap.xxx components */
   children: ReactNode;
-  /** Additional control buttons container. */
+  /** Additional control buttons container */
   buttons: ReactNode;
   /** Name of PNG map image. Example: 'Cyberiad_nanomap_z2' */
   mapImage: string;
@@ -26,6 +26,14 @@ type Props = Partial<{
    * Do we have any target in selection?
    * If yes then center button will teleport you to it
    */
+  /** Allows you to disable minimap */
+  minimap: BooleanLike;
+  /**
+   * Changes minimap position.
+   * Allowed values: 'top-left', 'top-right', 'bottom-left', 'bottom-right',
+   */
+  minimapPos: string;
+  /** Enables centering on selected target */
   selectedTarget: BooleanLike;
   /** Called when zoom level changes. Returns zoom level */
   onZoom: (zoom: number) => void;
@@ -45,7 +53,15 @@ function posToPx(pos: number) {
 }
 
 export function NanoMap(props: Props) {
-  const { children, buttons, mapImage, selectedTarget, onZoom } = props;
+  const {
+    children,
+    buttons,
+    mapImage,
+    minimap = true,
+    minimapPos = 'top-left',
+    selectedTarget,
+    onZoom,
+  } = props;
   const [velocity, setVelocity] = useLocalStorage('nanomap-velocity', true);
   const [zoom, setZoom] = useState(defaultScale);
   const image = (
@@ -75,14 +91,24 @@ export function NanoMap(props: Props) {
     >
       <Section fill>
         <Stack fill vertical>
-          <Stack.Item grow style={{ position: 'relative' }}>
-            <div className="NanoMap__Minimap--container">
+          <Stack.Item
+            grow
+            className={classes(['NanoMap', `NanoMap--${minimapPos}`])}
+          >
+            <div
+              className={classes([
+                'NanoMap__Minimap--container',
+                !minimap && `NanoMap__Minimap--disabled`,
+              ])}
+            >
               <NanoMapButtons velocity={velocity} setVelocity={setVelocity}>
                 {buttons}
               </NanoMapButtons>
-              <MiniMap className="NanoMap__Minimap" width={150}>
-                {image}
-              </MiniMap>
+              {minimap && (
+                <MiniMap className="NanoMap__Minimap" width={150}>
+                  {image}
+                </MiniMap>
+              )}
               <NanoMapControls
                 zoom={zoom}
                 setZoom={setZoom}
@@ -154,7 +180,7 @@ function NanoMapButtons(props) {
   const { children, velocity, setVelocity } = props;
   return (
     <Stack vertical className="NanoMap__Buttons">
-      <Stack.Item grow>{children}</Stack.Item>
+      {children}
       <Stack.Item mt={0.5}>
         <Button
           icon={'wind'}

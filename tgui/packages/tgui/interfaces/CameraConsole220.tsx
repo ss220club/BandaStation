@@ -220,10 +220,10 @@ export const CameraMapSelector = (props) => {
       <Stack.Item style={{ overflow: 'hidden' }}>
         <NanoMap
           mapImage={mapUrl}
-          selectedTarget={!!activeCamera.ref}
+          selectedTarget={!!activeCamera?.ref}
           onZoom={setZoom}
           buttons={
-            <Stack fill vertical>
+            <>
               <Stack.Item>
                 <Button
                   icon="chevron-up"
@@ -249,7 +249,7 @@ export const CameraMapSelector = (props) => {
                   onClick={() => setTracking(!tracking)}
                 />
               </Stack.Item>
-            </Stack>
+            </>
           }
         >
           {cameras
