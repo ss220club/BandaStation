@@ -53,6 +53,9 @@ SUBSYSTEM_DEF(central)
 		stack_trace("Failed to get player discord: HTTP status code [response.status_code] - [response.error] - [response.body]")
 		return
 
+	if(response.status_code == 404)
+		return
+
 	var/list/data = json_decode(response.body)
 	var/discord_id = data["discord_id"]
 	var/ckey = data["ckey"]
@@ -85,6 +88,8 @@ SUBSYSTEM_DEF(central)
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists?sever_type=[CONFIG_GET(string/sever_type)]&ckey=[ckey]&page=1&page_size=1"
 	var/datum/http_response/response = SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list())
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
+		stack_trace("Failed to check whitelist: HTTP error - [response.error]")
+	if(response.status_code == 404)
 		return FALSE
 
 	var/result = json_decode(response.body)
