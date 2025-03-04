@@ -158,3 +158,12 @@
 /datum/job/magistrate/New()
 	. = ..()
 	alternate_titles += list(JOB_MAGISTRATE_RU)
+
+// Event jobs
+/datum/job/bridge_assistant/New()
+	. = ..()
+	alternate_titles += list(JOB_BRIDGE_ASSISTANT_RU)
+
+/datum/job/veteran_advisor/New()
+	. = ..()
+	alternate_titles += list(JOB_VETERAN_ADVISOR_RU)

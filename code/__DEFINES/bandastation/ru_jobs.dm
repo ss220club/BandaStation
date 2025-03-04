@@ -9,7 +9,7 @@
 #define JOB_RESEARCH_DIRECTOR_RU "Директор исследований"
 #define JOB_CHIEF_ENGINEER_RU "Главный инженер"
 #define JOB_CHIEF_MEDICAL_OFFICER_RU "Главный врач"
-#define JOB_BRIDGE_ASSISTANT_RU "Консультант мостика"
+#define JOB_BRIDGE_ASSISTANT_RU "Адъютант"
 #define JOB_VETERAN_ADVISOR_RU "Ветеран советчик СБ"
 //NT Reprsentation
 #define JOB_NANOTRASEN_REPRESENTATIVE_RU "Представитель Нанотрейзен"
