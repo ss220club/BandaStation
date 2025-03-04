@@ -119,7 +119,6 @@ export function NanoMap(props: Props) {
 
   const image = (
     <Image
-      fixBlur={false}
       width={`${defaultMapSize}px`}
       height={`${defaultMapSize}px`}
       src={getMapImage(currentLevel)}
