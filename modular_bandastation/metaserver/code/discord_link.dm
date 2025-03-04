@@ -44,3 +44,6 @@
 	player << link(login_endpoint)
 	SScentral.get_player_discord_async(player)
 	addtimer(CALLBACK(SScentral, TYPE_PROC_REF(/datum/controller/subsystem/central, get_player_discord_async), player), 30 SECONDS)
+
+/datum/config_entry/flag/force_discord_verification
+	default = FALSE

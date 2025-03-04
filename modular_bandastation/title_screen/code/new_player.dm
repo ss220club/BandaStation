@@ -10,7 +10,15 @@
 	if(src != usr)
 		return
 
-	if(!client || client.interviewee)
+	if(!client)
+		return
+
+	if(CONFIG_GET(flag/force_discord_verification))
+		if(!SScentral.is_player_discord_linked(client))
+			to_chat(usr, custom_boxed_message("red_box", span_alertwarning("Вам необходимо привязать дискорд-профиль к аккаунту!<br>Перейдите во вкладку '<b>OOC</b>', она справа сверху, и нажмите '<b>Привязать Discord</b>' для получения инструкций.")))
+			return FALSE
+
+	if(client.interviewee)
 		return
 
 	if(href_list["toggle_ready"])
