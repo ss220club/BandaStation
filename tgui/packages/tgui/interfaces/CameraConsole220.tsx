@@ -147,7 +147,7 @@ export const CameraContent = (props) => {
         </Stack>
       </Stack.Item>
       <Stack.Item grow={tab === 'Map' ? 1.5 : 3} ml={tab === 'Map' && 0}>
-        <CameraControls searchText={searchText} selectedTab={tab} />
+        <CameraControls searchText={searchText} />
       </Stack.Item>
     </Stack>
   );
@@ -263,10 +263,10 @@ export const CameraMapSelector = (props) => {
   );
 };
 
-const CameraControls = (props: { searchText: string; selectedTab: string }) => {
+const CameraControls = (props: { searchText: string }) => {
   const { act, data } = useBackend<Data>();
   const { activeCamera, can_spy, mapRef } = data;
-  const { searchText, selectedTab } = props;
+  const { searchText } = props;
 
   const cameras = selectCameras(data.cameras, searchText);
   const [prevCamera, nextCamera] = prevNextCamera(cameras, activeCamera);
@@ -319,9 +319,7 @@ const CameraControls = (props: { searchText: string; selectedTab: string }) => {
         <Stack.Item grow>
           <ByondUi
             height="100%"
-            // Это пиздец, но если этот ебейших масштабов костыль не сделать,
-            // то ByondUI не обновит свой размер после изменения grow в CameraContent
-            width={selectedTab === 'Map' ? '100%' : '99.999%'}
+            width="100%"
             params={{
               id: mapRef,
               type: 'map',
