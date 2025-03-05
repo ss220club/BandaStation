@@ -9,7 +9,7 @@
 #define JOB_RESEARCH_DIRECTOR_RU "Директор исследований"
 #define JOB_CHIEF_ENGINEER_RU "Главный инженер"
 #define JOB_CHIEF_MEDICAL_OFFICER_RU "Главный врач"
-#define JOB_BRIDGE_ASSISTANT_RU "Консультант мостика"
+#define JOB_BRIDGE_ASSISTANT_RU "Адъютант"
 #define JOB_VETERAN_ADVISOR_RU "Ветеран советчик СБ"
 //NT Reprsentation
 #define JOB_NANOTRASEN_REPRESENTATIVE_RU "Представитель Нанотрейзен"
@@ -48,6 +48,7 @@
 #define JOB_CARGO_GORILLA_RU "Cargo Gorilla"
 #define JOB_SHAFT_MINER_RU "Шахтер"
 #define JOB_BITRUNNER_RU "Битраннер"
+#define JOB_EXPLORER_RU "Исследователь"
 //Service
 #define JOB_BARTENDER_RU "Бармен"
 #define JOB_BOTANIST_RU "Ботаник"
@@ -110,6 +111,7 @@ GLOBAL_LIST_INIT(job_titles_ru, list(
 	JOB_CARGO_GORILLA = JOB_CARGO_GORILLA_RU,
 	JOB_SHAFT_MINER = JOB_SHAFT_MINER_RU,
 	JOB_BITRUNNER = JOB_BITRUNNER_RU,
+	JOB_EXPLORER = JOB_EXPLORER_RU,
 	//Service
 	JOB_BARTENDER = JOB_BARTENDER_RU,
 	JOB_BOTANIST = JOB_BOTANIST_RU,

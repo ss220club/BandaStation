@@ -21,7 +21,13 @@ type Department = {
 export const DEPARTMENT2COLOR: Record<string, Department> = {
   cargo: {
     color: 'brown',
-    trims: ['Bitrunner', 'Cargo Technician', 'Shaft Miner', 'Quartermaster'],
+    trims: [
+      'Bitrunner',
+      'Cargo Technician',
+      'Shaft Miner',
+      'Quartermaster',
+      'Explorer',
+    ],
   },
   command: {
     color: 'blue',
@@ -74,7 +80,7 @@ export const DEPARTMENT2COLOR: Record<string, Department> = {
     color: 'purple',
     trims: ['Lawyer', 'Magistrate', 'Магистрат'],
   },
-  // BANDASTATION ADD - START
+  // BANDASTATION ADD - END
 };
 
 export const THREAT = {
