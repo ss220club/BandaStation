@@ -236,25 +236,24 @@ export const CameraMapSelector = (props) => {
         />
       }
     >
-      {cameras
-        .filter((camera) => camera.z === selectedLevel)
-        .map((camera) => (
-          <NanoMap.Button
-            key={camera.ref}
-            posX={camera.x}
-            posY={camera.y}
-            tooltip={camera.name}
-            color={!camera.status && 'red'}
-            selected={activeCamera?.ref === camera.ref}
-            tracking={tracking}
-            zoom={zoom}
-            onClick={() =>
-              act('switch_camera', {
-                camera: camera.ref,
-              })
-            }
-          />
-        ))}
+      {cameras.map((camera) => (
+        <NanoMap.Button
+          key={camera.ref}
+          posX={camera.x}
+          posY={camera.y}
+          tooltip={camera.name}
+          color={!camera.status && 'red'}
+          selected={activeCamera?.ref === camera.ref}
+          hidden={camera.z !== selectedLevel}
+          tracking={tracking}
+          zoom={zoom}
+          onClick={() =>
+            act('switch_camera', {
+              camera: camera.ref,
+            })
+          }
+        />
+      ))}
     </NanoMap>
   );
 };

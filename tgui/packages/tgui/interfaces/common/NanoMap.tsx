@@ -387,13 +387,17 @@ function NanoMapPreferences(props) {
 
 /** TODO: Add types when <Button> types will exported */
 function MapButton(props) {
-  const { tracking = false, zoom, posX, posY, ...rest } = props;
+  const { tracking = false, zoom, posX, posY, hidden, ...rest } = props;
   const { zoomToElement } = useControls();
   const buttonId = `${posX}_${posY}`;
+
   return (
     <div
       id={props.selected ? 'selected' : buttonId}
-      className="NanoMap__Object--wrapper"
+      className={classes([
+        'NanoMap__Object--wrapper',
+        hidden && 'NanoMap__Object--hidden',
+      ])}
       style={{ left: posToPx(posX), bottom: posToPx(posY) }}
     >
       <KeepScale>
