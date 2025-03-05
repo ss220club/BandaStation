@@ -23,6 +23,7 @@ SUBSYSTEM_DEF(central)
 	if(!(CONFIG_GET(string/ss_central_url) && CONFIG_GET(string/ss_central_token)))
 		return SS_INIT_NO_NEED
 	load_whitelist()
+	// TODO: preload links
 
 /datum/controller/subsystem/central/stat_entry(msg)
 	if(!initialized)
