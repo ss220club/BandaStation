@@ -497,10 +497,10 @@
 
 /datum/reagent/consumable/ethanol/communism_beach
 	name = "Communism On The Beach"
-	description = "Этот пляж принадлежит всем в равной степени"
+	description = "Этот пляж принадлежит всем в равной степени."
 	color = "#bb2020"
 	boozepwr = 40
-	taste_description = "Вкус равенства, горький и сладкий"
+	taste_description = "Равенство"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_GOOD
 	glass_price = DRINK_PRICE_EASY
@@ -513,7 +513,7 @@
 /datum/glass_style/drinking_glass/communism_beach
 	required_drink_type = /datum/reagent/consumable/ethanol/communism_beach
 	name = "Коммунизм на Пляже"
-	desc = "Этот пляж принадлежит всем в равной степени"
+	desc = "Этот пляж принадлежит всем в равной степени."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "communism_beach"
 
@@ -527,10 +527,10 @@
 
 /datum/reagent/consumable/ethanol/red_january
 	name = "Red January"
-	description = "От этого напитка так и пахнет Революцией"
+	description = "От этого напитка так и пахнет Революцией."
 	color = "#bb2020"
 	boozepwr = 30
-	taste_description = "Принятный вкус крови капитализма"
+	taste_description = "Кровь капитализма"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_VERYGOOD
 	glass_price = DRINK_PRICE_EASY
@@ -538,7 +538,7 @@
 /datum/glass_style/drinking_glass/red_january
 	required_drink_type = /datum/reagent/consumable/ethanol/red_january
 	name = "Красный Январь"
-	desc = "От этого напитка так и пахнет Революцией"
+	desc = "От этого напитка так и пахнет Революцией."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "red_january"
 
@@ -553,9 +553,9 @@
 
 /datum/reagent/consumable/five_year_plan
 	name = "Five-Year Plan"
-	description = "Высокая в небе звезда зовет меня в путь"
+	description = "Высокая в небе звезда зовет меня в путь."
 	color = "#1f1911"
-	taste_description = "Пятилетку за смену - выполним!"
+	taste_description = "Переработки во имя светлого будущего"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_VERYGOOD
 	glass_price = DRINK_PRICE_EASY
@@ -563,7 +563,7 @@
 /datum/glass_style/drinking_glass/five_year_plan
 	required_drink_type = /datum/reagent/consumable/five_year_plan
 	name = "Пятилетка"
-	desc = "Высокая в небе звезда зовет меня в путь"
+	desc = "Высокая в небе звезда зовет меня в путь."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "five_year_plan"
 
@@ -586,7 +586,7 @@
 
 /datum/glass_style/drinking_glass/galactional
 	required_drink_type = /datum/reagent/consumable/ethanol/galactional
-	name = "Галактционал"
+	name = "Галактионал"
 	desc = "Пролетарии Галактики - объединяйтесь!"
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "galactional"
