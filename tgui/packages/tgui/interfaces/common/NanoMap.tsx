@@ -109,11 +109,12 @@ export function NanoMap(props: Props) {
       });
 
   function getMapImage(level) {
+    const { name, lavalandLevel, minFloor } = mapData;
     let imageAsset;
-    if (level === mapData.lavalandLevel) {
+    if (level === lavalandLevel && lavalandLevel !== minFloor) {
       imageAsset = resolveAsset(`Lavaland_nanomap_z1.png`);
     } else {
-      imageAsset = resolveAsset(`${mapData.name}_nanomap_z${level - 1}.png`);
+      imageAsset = resolveAsset(`${name}_nanomap_z${level - 1}.png`);
     }
     return (
       <Image
@@ -264,7 +265,7 @@ function NanoMapButtons(props) {
 
 function NanoMapLevelSelector(props) {
   const { mapData, mapState, setMapState } = props;
-  const { minFloor, maxFloor, mainFloor, lavaland } = mapData;
+  const { minFloor, maxFloor, mainFloor, lavalandLevel } = mapData;
   const { currentLevel } = mapState;
 
   function setLevel(level: number) {
@@ -296,14 +297,16 @@ function NanoMapLevelSelector(props) {
           </Stack.Item>
         </>
       )}
-      {lavaland > 0 && (
+      {lavalandLevel > maxFloor && (
         <Stack.Item mt={minFloor !== maxFloor && 0.5}>
           <Button
             icon="volcano"
-            selected={currentLevel === lavaland}
+            selected={currentLevel === lavalandLevel}
             tooltip="Лаваленд"
             onClick={() =>
-              setLevel(currentLevel === lavaland ? mainFloor : lavaland)
+              setLevel(
+                currentLevel === lavalandLevel ? mainFloor : lavalandLevel,
+              )
             }
           />
         </Stack.Item>
