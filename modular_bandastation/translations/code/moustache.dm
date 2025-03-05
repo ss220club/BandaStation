@@ -8,6 +8,7 @@
 
 /obj/item/clothing/mask/fakemoustache/italian/Initialize(mapload)
 	. = ..()
+	qdel(src.GetComponent(/datum/component/speechmod))
 	AddComponent(\
 		/datum/component/speechmod,\
 		replacements = strings("italian_replacement_ru.json", "italian"),\
