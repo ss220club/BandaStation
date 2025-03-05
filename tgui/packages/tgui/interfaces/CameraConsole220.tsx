@@ -215,12 +215,12 @@ export const CameraMapSelector = (props) => {
     'camera-console-tracking',
     false,
   );
-
   return (
     <NanoMap
       mapData={mapData}
+      uiName="camera-console"
       selectedTarget={!!activeCamera?.ref}
-      onZoom={setZoom}
+      onZoomChange={setZoom}
       onLevelChange={setSelectedLevel}
       buttons={
         <Button
