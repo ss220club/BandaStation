@@ -217,49 +217,45 @@ export const CameraMapSelector = (props) => {
   );
 
   return (
-    <Stack fill>
-      <Stack.Item style={{ overflow: 'hidden' }}>
-        <NanoMap
-          mapData={mapData}
-          selectedTarget={!!activeCamera?.ref}
-          onZoom={setZoom}
-          onLevelChange={setSelectedLevel}
-          buttons={
-            <Button
-              icon="wheelchair-move"
-              selected={tracking}
-              tooltip={
-                tracking
-                  ? 'Не перемещать к выбранной камере'
-                  : 'Перемещать к выбранной камере'
-              }
-              tooltipPosition="right"
-              onClick={() => setTracking(!tracking)}
-            />
+    <NanoMap
+      mapData={mapData}
+      selectedTarget={!!activeCamera?.ref}
+      onZoom={setZoom}
+      onLevelChange={setSelectedLevel}
+      buttons={
+        <Button
+          icon="wheelchair-move"
+          selected={tracking}
+          tooltip={
+            tracking
+              ? 'Не перемещать к выбранной камере'
+              : 'Перемещать к выбранной камере'
           }
-        >
-          {cameras
-            .filter((camera) => camera.z === selectedLevel)
-            .map((camera) => (
-              <NanoMap.Button
-                key={camera.ref}
-                posX={camera.x}
-                posY={camera.y}
-                tooltip={camera.name}
-                color={!camera.status && 'red'}
-                selected={activeCamera?.ref === camera.ref}
-                tracking={tracking}
-                zoom={zoom}
-                onClick={() =>
-                  act('switch_camera', {
-                    camera: camera.ref,
-                  })
-                }
-              />
-            ))}
-        </NanoMap>
-      </Stack.Item>
-    </Stack>
+          tooltipPosition="right"
+          onClick={() => setTracking(!tracking)}
+        />
+      }
+    >
+      {cameras
+        .filter((camera) => camera.z === selectedLevel)
+        .map((camera) => (
+          <NanoMap.Button
+            key={camera.ref}
+            posX={camera.x}
+            posY={camera.y}
+            tooltip={camera.name}
+            color={!camera.status && 'red'}
+            selected={activeCamera?.ref === camera.ref}
+            tracking={tracking}
+            zoom={zoom}
+            onClick={() =>
+              act('switch_camera', {
+                camera: camera.ref,
+              })
+            }
+          />
+        ))}
+    </NanoMap>
   );
 };
 
