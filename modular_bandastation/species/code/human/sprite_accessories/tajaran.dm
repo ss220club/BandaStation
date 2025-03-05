@@ -25,7 +25,7 @@
 			return -BODYPARTS_HIGH_LAYER
 
 /datum/sprite_accessory/tajaran_body_markings
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body_markings.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body_markings.dmi'
 	name = "None"
 	icon_state = "none"
 	color_src = "tajaran_body_markings_color"
@@ -64,7 +64,7 @@
 
 // MARK: Tajaran tail
 /datum/sprite_accessory/tails/tajaran
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body_accessory.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body_accessory.dmi'
 	spine_key = "tajaran"
 
 /datum/sprite_accessory/tails/tajaran/tiny
@@ -85,7 +85,7 @@
 
 // MARK: Tajaran head markings
 /datum/sprite_accessory/tajaran_head_markings
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/head_markings.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/head_markings.dmi'
 	name = "None"
 	icon_state = "none"
 	color_src = "tajaran_head_markings_color"
@@ -136,7 +136,7 @@
 
 // MARK: Tajaran facial hair
 /datum/sprite_accessory/tajaran_facial_hair
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/facial_hair.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/facial_hair.dmi'
 	name = "None"
 	icon_state = "none"
 	color_src = "tajaran_facial_hair_color"
@@ -171,7 +171,7 @@
 
 // MARK: Tajaran tail markings
 /datum/sprite_accessory/tajaran_tail_markings
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/tail_markings.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/tail_markings.dmi'
 	name = "None"
 	icon_state = "none"
 	em_block = TRUE

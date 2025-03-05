@@ -13,34 +13,37 @@
 
 /datum/preference/choiced/vulpkanin_body_markings/create_default_value()
 	var/datum/sprite_accessory/vulpkanin_body_markings/markings = /datum/sprite_accessory/vulpkanin_body_markings
-	return initial(markings.name)
+	return markings::name
 
 /datum/preference/choiced/vulpkanin_body_markings/icon_for(value)
-	var/static/icon/body
-	if (isnull(body))
-		body = icon('icons/blanks/32x32.dmi', "nothing")
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_chest_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_hand"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_hand"), ICON_OVERLAY)
-		body.Blend(COLOR_ORANGE, ICON_MULTIPLY)
+	var/static/list/body_parts = list(
+		/obj/item/bodypart/chest/vulpkanin,
+		/obj/item/bodypart/arm/left/vulpkanin,
+		/obj/item/bodypart/arm/right/vulpkanin,
+		/obj/item/bodypart/leg/left/vulpkanin,
+		/obj/item/bodypart/leg/right/vulpkanin,
+	)
+
+	var/static/datum/universal_icon/vulpkanin_body
+	if(isnull(vulpkanin_body))
+		vulpkanin_body = uni_icon('icons/blanks/32x32.dmi', "nothing")
+		for(var/obj/item/bodypart/bodypart_path as anything in body_parts)
+			vulpkanin_body.blend_icon(uni_icon(bodypart_path::icon, bodypart_path::icon_state), ICON_OVERLAY)
 
 	var/datum/sprite_accessory/markings = SSaccessories.vulpkanin_body_markings_list[value]
-	var/icon/icon_with_markings = new(body)
+	var/datum/universal_icon/final_icon = vulpkanin_body.copy()
 
-	if (value != "None")
-		var/icon/body_part_icon = icon(markings.icon, "[markings.icon_state]")
-		body_part_icon.Crop(1, 1, 32, 32)
-		body_part_icon.Blend(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		icon_with_markings.Blend(body_part_icon, ICON_OVERLAY)
+	if(value != SPRITE_ACCESSORY_NONE)
+		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "[markings.icon_state]")
+		body_part_icon.crop(1, 1, 32, 32)
+		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 
-	icon_with_markings.Scale(64, 64)
-	icon_with_markings.Crop(15, 38, 15 + 31, 7)
+		final_icon.blend_icon(body_part_icon, ICON_OVERLAY)
 
-	return icon_with_markings
+	final_icon.scale(64, 64)
+	final_icon.crop(15, 38, 15 + 31, 7)
+
+	return final_icon
 
 /datum/preference/choiced/vulpkanin_body_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["vulpkanin_body_markings"] = value
@@ -96,36 +99,23 @@
 	return assoc_to_keys_features(SSaccessories.vulpkanin_head_markings_list)
 
 /datum/preference/choiced/vulpkanin_head_markings/icon_for(value)
-	var/static/icon/body
-	if (isnull(body))
-		body = icon('icons/blanks/32x32.dmi', "nothing")
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_head_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_chest_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_hand"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_hand"), ICON_OVERLAY)
-		body.Blend(COLOR_ORANGE, ICON_MULTIPLY)
-
 	var/datum/sprite_accessory/markings = SSaccessories.vulpkanin_head_markings_list[value]
-	var/icon/icon_with_markings = new(body)
+	var/datum/universal_icon/final_icon = uni_icon('icons/bandastation/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_head_m")
 
-	if (value != "None")
-		var/icon/body_part_icon = icon(markings.icon, "m_vulpkanin_head_markings_[markings.icon_state]_ADJ")
-		body_part_icon.Crop(1, 1, 32, 32)
-		body_part_icon.Blend(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		icon_with_markings.Blend(body_part_icon, ICON_OVERLAY)
+	if(value != SPRITE_ACCESSORY_NONE)
+		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "m_vulpkanin_head_markings_[markings.icon_state]_ADJ")
+		body_part_icon.crop(1, 1, 32, 32)
+		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 
-	icon_with_markings.Scale(64, 64)
-	icon_with_markings.Crop(15, 64, 15 + 31, 64 - 31)
+		final_icon.blend_icon(body_part_icon, ICON_OVERLAY)
 
-	return icon_with_markings
+	final_icon.scale(64, 64)
+
+	return final_icon
 
 /datum/preference/choiced/vulpkanin_head_markings/create_default_value()
 	var/datum/sprite_accessory/vulpkanin_head_markings/markings = /datum/sprite_accessory/vulpkanin_head_markings
-	return initial(markings.name)
+	return markings::name
 
 /datum/preference/choiced/vulpkanin_head_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["vulpkanin_head_markings"] = value
@@ -164,34 +154,23 @@
 	return assoc_to_keys_features(SSaccessories.vulpkanin_head_accessories_list)
 
 /datum/preference/choiced/vulpkanin_head_accessories/icon_for(value)
-	var/static/icon/body
-	if (isnull(body))
-		body = icon('icons/blanks/32x32.dmi', "nothing")
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_head_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_chest_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_l_hand"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_r_hand"), ICON_OVERLAY)
-		body.Blend(COLOR_ORANGE, ICON_MULTIPLY)
-
 	var/datum/sprite_accessory/markings = SSaccessories.vulpkanin_head_accessories_list[value]
-	var/icon/icon_with_markings = new(body)
+	var/datum/universal_icon/final_icon = uni_icon('icons/bandastation/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_head_m")
 
-	if (value != "None")
-		var/icon/body_part_icon = icon(markings.icon, "m_vulpkanin_head_accessories_[markings.icon_state]_ADJ")
-		body_part_icon.Crop(1, 1, 32, 32)
-		body_part_icon.Blend(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		icon_with_markings.Blend(body_part_icon, ICON_OVERLAY)
+	if(value != SPRITE_ACCESSORY_NONE)
+		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "m_vulpkanin_head_accessories_[markings.icon_state]_ADJ")
+		body_part_icon.crop(1, 1, 32, 32)
+		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
+		final_icon.blend_icon(body_part_icon, ICON_OVERLAY)
 
-	icon_with_markings.Scale(64, 64)
-	icon_with_markings.Crop(15, 64, 15 + 31, 64 - 31)
+	final_icon.scale(64, 64)
+	final_icon.crop(15, 64, 15 + 31, 64 - 31)
 
-	return icon_with_markings
+	return final_icon
 
 /datum/preference/choiced/vulpkanin_head_accessories/create_default_value()
 	var/datum/sprite_accessory/vulpkanin_head_accessories/markings = /datum/sprite_accessory/vulpkanin_head_accessories
-	return initial(markings.name)
+	return markings::name
 
 /datum/preference/choiced/vulpkanin_head_accessories/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["vulpkanin_head_accessories"] = value
@@ -231,27 +210,21 @@
 
 /datum/preference/choiced/vulpkanin_facial_hair/icon_for(value)
 	var/datum/sprite_accessory/markings = SSaccessories.vulpkanin_facial_hair_list[value]
-	var/static/icon/head_icon
-	if (isnull(head_icon))
-		head_icon = icon('modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_head_m")
-		head_icon.Blend(COLOR_ORANGE, ICON_MULTIPLY)
+	var/datum/universal_icon/final_icon = uni_icon('icons/bandastation/mob/species/vulpkanin/sprite_accessories/body.dmi', "vulpkanin_head_m")
 
-	var/icon/final_icon = new(head_icon)
-	if (!isnull(markings))
-		ASSERT(istype(markings))
+	if(!isnull(markings))
+		var/datum/universal_icon/head_accessory_icon = uni_icon(markings.icon, "m_vulpkanin_facial_hair_[markings.icon_state]_ADJ")
+		head_accessory_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
+		final_icon.blend_icon(head_accessory_icon, ICON_OVERLAY)
 
-		var/icon/head_accessory_icon = icon(markings.icon, "m_vulpkanin_facial_hair_[markings.icon_state]_ADJ")
-		head_accessory_icon.Blend(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		final_icon.Blend(head_accessory_icon, ICON_OVERLAY)
-
-	final_icon.Crop(10, 19, 22, 31)
-	final_icon.Scale(32, 32)
+	final_icon.crop(10, 19, 22, 31)
+	final_icon.scale(32, 32)
 
 	return final_icon
 
 /datum/preference/choiced/vulpkanin_facial_hair/create_default_value()
 	var/datum/sprite_accessory/vulpkanin_facial_hair/markings = /datum/sprite_accessory/vulpkanin_facial_hair
-	return initial(markings.name)
+	return markings::name
 
 /datum/preference/choiced/vulpkanin_facial_hair/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["vulpkanin_facial_hair"] = value
@@ -289,7 +262,7 @@
 
 /datum/preference/choiced/vulpkanin_tail_markings/create_default_value()
 	var/datum/sprite_accessory/vulpkanin_tail_markings/markings = /datum/sprite_accessory/vulpkanin_tail_markings
-	return initial(markings.name)
+	return markings::name
 
 /datum/preference/choiced/vulpkanin_tail_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tail_markings"] = value

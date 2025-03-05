@@ -1,12 +1,12 @@
 /obj/item/bodypart/head/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = SPECIES_TAJARAN
 	is_dimorphic = TRUE
 	head_flags = HEAD_LIPS|HEAD_EYESPRITES|HEAD_EYECOLOR|HEAD_EYEHOLES|HEAD_DEBRAIN|HEAD_HAIR|HEAD_TAJARAN
 	species_bodytype = SPECIES_TAJARAN
 
 /obj/item/bodypart/chest/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = SPECIES_TAJARAN
 	is_dimorphic = TRUE
 	wing_types = list(/obj/item/organ/wings/functional/dragon)
@@ -16,7 +16,7 @@
 	return icon('icons/mob/butts.dmi', BUTT_SPRITE_CAT)
 
 /obj/item/bodypart/arm/left/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = SPECIES_TAJARAN
 	unarmed_attack_verbs = list("slash")
 	grappled_attack_verb = "lacerate"
@@ -45,7 +45,7 @@
 	return .
 
 /obj/item/bodypart/arm/right/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = SPECIES_TAJARAN
 	unarmed_attack_verbs = list("slash")
 	grappled_attack_verb = "lacerate"
@@ -54,15 +54,15 @@
 	unarmed_miss_sound = 'sound/items/weapons/slashmiss.ogg'
 
 /obj/item/bodypart/leg/left/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = SPECIES_TAJARAN
 
 /obj/item/bodypart/leg/right/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = SPECIES_TAJARAN
 
 /obj/item/bodypart/leg/left/digitigrade/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = BODYPART_ID_DIGITIGRADE
 	bodyshape = BODYSHAPE_DIGITIGRADE
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
@@ -73,7 +73,7 @@
 	limb_id = owner?.is_digitigrade_squished() ? SPECIES_TAJARAN : BODYPART_ID_DIGITIGRADE
 
 /obj/item/bodypart/leg/right/digitigrade/tajaran
-	icon_greyscale = 'modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi'
+	icon_greyscale = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi'
 	limb_id = BODYPART_ID_DIGITIGRADE
 	bodyshape = BODYSHAPE_DIGITIGRADE
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS

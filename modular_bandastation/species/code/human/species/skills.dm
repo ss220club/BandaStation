@@ -7,11 +7,11 @@
 	desc = "Вы обнюхиваете предмет и определяете, кто с ним взаимодействовал. Также, вы можете запомнить запах определённого человека, обнюхав его."
 	check_flags = AB_CHECK_IMMOBILE | AB_CHECK_CONSCIOUS | AB_CHECK_INCAPACITATED
 	cooldown_time = 2 SECONDS
-	button_icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/skills.dmi'
+	button_icon = 'icons/bandastation/mob/species/vulpkanin/skills.dmi'
 	button_icon_state = "sniff"
-	overlay_icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/skills.dmi'
+	overlay_icon = 'icons/bandastation/mob/species/vulpkanin/skills.dmi'
 	overlay_icon_state = "frame_border"
-	background_icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/skills.dmi'
+	background_icon = 'icons/bandastation/mob/species/vulpkanin/skills.dmi'
 	background_icon_state = "frame"
 	click_to_activate = TRUE
 	var/list/sniffed_species_ue = list()

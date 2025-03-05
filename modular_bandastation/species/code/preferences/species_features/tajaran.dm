@@ -15,29 +15,29 @@
 	return initial(markings.name)
 
 /datum/preference/choiced/tajaran_body_markings/icon_for(value)
-	var/static/icon/body
+	var/static/datum/universal_icon/body
 	if(isnull(body))
-		body = icon('icons/blanks/32x32.dmi', "nothing")
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_chest_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_hand"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_hand"), ICON_OVERLAY)
-		body.Blend(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
+		body = uni_icon('icons/blanks/32x32.dmi', "nothing")
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_chest_m"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_leg"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_leg"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_arm"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_arm"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_hand"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_hand"), ICON_OVERLAY)
+		body.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/markings = SSaccessories.tajaran_body_markings_list[value]
-	var/icon/icon_with_markings = new(body)
+	var/datum/universal_icon/icon_with_markings = body.copy()
 
-	if(value != "None")
-		var/icon/body_part_icon = icon(markings.icon, "[markings.icon_state]")
-		body_part_icon.Crop(1, 1, 32, 32)
-		body_part_icon.Blend(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		icon_with_markings.Blend(body_part_icon, ICON_OVERLAY)
+	if(value != SPRITE_ACCESSORY_NONE)
+		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "[markings.icon_state]")
+		body_part_icon.crop(1, 1, 32, 32)
+		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
+		icon_with_markings.blend_icon(body_part_icon, ICON_OVERLAY)
 
-	icon_with_markings.Scale(64, 64)
-	icon_with_markings.Crop(15, 38, 15 + 31, 7)
+	icon_with_markings.scale(64, 64)
+	icon_with_markings.crop(15, 38, 15 + 31, 7)
 
 	return icon_with_markings
 
@@ -93,30 +93,30 @@
 	return assoc_to_keys_features(SSaccessories.tajaran_head_markings_list)
 
 /datum/preference/choiced/tajaran_head_markings/icon_for(value)
-	var/static/icon/body
+	var/static/datum/universal_icon/body
 	if(isnull(body))
-		body = icon('icons/blanks/32x32.dmi', "nothing")
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_chest_m"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_digi_l_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_digi_r_leg"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_arm"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_hand"), ICON_OVERLAY)
-		body.Blend(icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_hand"), ICON_OVERLAY)
-		body.Blend(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
+		body = uni_icon('icons/blanks/32x32.dmi', "nothing")
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_chest_m"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_digi_l_leg"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_digi_r_leg"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_arm"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_arm"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_hand"), ICON_OVERLAY)
+		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_hand"), ICON_OVERLAY)
+		body.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/markings = SSaccessories.tajaran_head_markings_list[value]
-	var/icon/icon_with_markings = new(body)
+	var/datum/universal_icon/icon_with_markings = body.copy()
 
-	if(value != "None")
-		var/icon/body_part_icon = icon(markings.icon, "m_tajaran_head_markings_[markings.icon_state]_ADJ")
-		body_part_icon.Crop(1, 1, 32, 32)
-		body_part_icon.Blend(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		icon_with_markings.Blend(body_part_icon, ICON_OVERLAY)
+	if(value != SPRITE_ACCESSORY_NONE)
+		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "m_tajaran_head_markings_[markings.icon_state]_ADJ")
+		body_part_icon.crop(1, 1, 32, 32)
+		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
+		icon_with_markings.blend_icon(body_part_icon, ICON_OVERLAY)
 
-	icon_with_markings.Scale(64, 64)
-	icon_with_markings.Crop(15, 64, 15 + 31, 64 - 31)
+	icon_with_markings.scale(64, 64)
+	icon_with_markings.crop(15, 64, 15 + 31, 64 - 31)
 
 	return icon_with_markings
 
@@ -161,21 +161,21 @@
 
 /datum/preference/choiced/tajaran_facial_hair/icon_for(value)
 	var/datum/sprite_accessory/markings = SSaccessories.tajaran_facial_hair_list[value]
-	var/static/icon/head_icon
+	var/static/datum/universal_icon/head_icon
 	if(isnull(head_icon))
-		head_icon = icon('modular_bandastation/species/icons/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m")
-		head_icon.Blend(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
+		head_icon = uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m")
+		head_icon.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
 
-	var/icon/final_icon = new(head_icon)
+	var/datum/universal_icon/final_icon = head_icon.copy()
 	if(!isnull(markings))
 		ASSERT(istype(markings))
 
-		var/icon/head_accessory_icon = icon(markings.icon, "m_tajaran_facial_hair_[markings.icon_state]_ADJ")
-		head_accessory_icon.Blend(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		final_icon.Blend(head_accessory_icon, ICON_OVERLAY)
+		var/datum/universal_icon/head_accessory_icon = uni_icon(markings.icon, "m_tajaran_facial_hair_[markings.icon_state]_ADJ")
+		head_accessory_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
+		final_icon.blend_icon(head_accessory_icon, ICON_OVERLAY)
 
-	final_icon.Crop(10, 19, 22, 31)
-	final_icon.Scale(32, 32)
+	final_icon.crop(10, 19, 22, 31)
+	final_icon.scale(32, 32)
 
 	return final_icon
 

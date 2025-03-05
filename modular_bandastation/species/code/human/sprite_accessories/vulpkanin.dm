@@ -15,7 +15,7 @@
 	return
 
 /datum/sprite_accessory/vulpkanin_body_markings
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body_markings.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/body_markings.dmi'
 	name = "None"
 	icon_state = "none"
 	color_src = "vulpkanin_body_markings_color"
@@ -66,7 +66,7 @@
 // TAIL
 
 /datum/sprite_accessory/tails/vulpkanin
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/body_accessory.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/body_accessory.dmi'
 	spine_key = "vulpkanin"
 
 /datum/sprite_accessory/tails/vulpkanin/fluffy
@@ -88,7 +88,7 @@
 // HEAD ACCESSORY
 
 /datum/sprite_accessory/vulpkanin_head_accessories
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/facial_hair.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/facial_hair.dmi'
 	name = "None"
 	icon_state = "none"
 	color_src = "vulpkanin_head_accessories_color"
@@ -130,12 +130,12 @@
 	icon_state = "swift"
 
 /datum/sprite_accessory/vulpkanin_head_accessories/vulp_nose
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/head_markings.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/head_markings.dmi'
 	name = "Vulpkanin Nose"
 	icon_state = "nose"
 
 /datum/sprite_accessory/vulpkanin_head_accessories/vulp_nose2
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/head_markings.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/head_markings.dmi'
 	name = "Vulpkanin Nose Alt."
 	icon_state = "nose_alt"
 
@@ -150,7 +150,7 @@
 // HEAD MARKINGS
 
 /datum/sprite_accessory/vulpkanin_head_markings
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/head_markings.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/head_markings.dmi'
 	name = "None"
 	icon_state = "none"
 	color_src = "vulpkanin_head_markings_color"
@@ -190,7 +190,7 @@
 // FACIAL HAIR
 
 /datum/sprite_accessory/vulpkanin_facial_hair
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/facial_hair.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/facial_hair.dmi'
 	name = "None"
 	icon_state = "none"
 	color_src = "vulpkanin_facial_hair_color"
@@ -246,7 +246,7 @@
 // TAIL MARKINGS
 
 /datum/sprite_accessory/vulpkanin_tail_markings
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/sprite_accessories/tail_markings.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/tail_markings.dmi'
 	name = "None"
 	icon_state = "none"
 	em_block = TRUE
