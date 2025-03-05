@@ -102,7 +102,7 @@ $blur: saturate(150%) blur(12px);
     }
 
     &--hidden {
-      visibility: hidden;
+      display: none;
     }
   }
 }
