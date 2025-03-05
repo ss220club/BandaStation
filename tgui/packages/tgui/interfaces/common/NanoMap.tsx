@@ -20,7 +20,6 @@ import {
 import { clamp01 } from 'tgui-core/math';
 import { BooleanLike, classes } from 'tgui-core/react';
 import { useLocalStorage } from 'usehooks-ts';
-
 import { resolveAsset } from '../../assets';
 
 export type MapData = {
@@ -42,8 +41,8 @@ type Props = {
   minimapDisabled?: BooleanLike;
   /**
    * Changes minimap position.
-   * Allowed values: 'top-left', 'top-right', 'bottom-left', 'bottom-right'
-   * Default: 'top-left'
+   ** Allowed values: 'top-left', 'top-right', 'bottom-left', 'bottom-right'
+   ** Default: 'top-left'
    */
   minimapPosition?: MinimapPosition;
   /** All needed map data from backend */
@@ -60,9 +59,8 @@ type MinimapPosition =
   | 'bottom-left'
   | 'bottom-right';
 
-const defaultScale = 0.25;
-const minScale = defaultScale / 2;
-const maxScale = defaultScale * 4;
+const defaultScale = 0.125;
+const maxScale = defaultScale * 8;
 
 const defaultMapSize = 4080;
 const tileSize = defaultMapSize / 255;
@@ -116,16 +114,15 @@ export function NanoMap(props: Props) {
   return (
     <TransformWrapper
       centerOnInit
-      initialScale={minScale}
-      minScale={minScale}
+      initialScale={defaultScale}
+      minScale={defaultScale}
       maxScale={maxScale}
       smooth={false}
-      wheel={{ step: defaultScale / 2 }}
+      wheel={{ step: defaultScale }}
       panning={{ velocityDisabled: mapPrefs.velocity }}
       doubleClick={{ disabled: true }}
-      onZoomStop={({ state }) => {
-        setZoom(state.scale);
-      }}
+      onZoomStop={({ state }) => state.scale}
+      onTransformed={({ state }) => setZoom(state.scale)}
     >
       <Section fill>
         {prefs && (
@@ -166,18 +163,10 @@ export function NanoMap(props: Props) {
                   {getMapImage(currentLevel)}
                 </MiniMap>
               )}
-              <NanoMapControls
-                zoom={zoom}
-                setZoom={setZoom}
-                selectedTarget={selectedTarget}
-              />
+              <NanoMapControls zoom={zoom} selectedTarget={selectedTarget} />
             </div>
             <TransformComponent
-              wrapperStyle={{
-                overflow: 'hidden',
-                width: '100%',
-                height: '100%',
-              }}
+              wrapperStyle={{ width: '100%', height: '100%' }}
             >
               {getMapImage(currentLevel)}
               <div>{children}</div>
@@ -190,47 +179,31 @@ export function NanoMap(props: Props) {
 }
 
 function NanoMapControls(props) {
-  const { zoom, setZoom, selectedTarget } = props;
+  const { zoom, selectedTarget } = props;
   const { zoomIn, zoomOut, centerView, zoomToElement } = useControls();
-
   return (
     <div className="NanoMap__Controls">
-      <Button
-        icon="plus"
-        onClick={() => {
-          zoomIn(maxScale);
-          setZoom(maxScale);
-        }}
-      />
+      <Button icon="plus" onClick={() => zoomIn(maxScale)} />
       <Button
         fluid
         width="100%"
         onClick={() =>
-          selectedTarget ? zoomToElement('selected', zoom, 200) : centerView()
+          selectedTarget ? zoomToElement('selected', 200) : centerView()
         }
       >
         <div
           className="NanoMap__Controls--zoom"
-          style={{
-            width: `${clamp01(zoom) * 100}%`,
-          }}
+          style={{ width: `${clamp01(zoom) * 100}%` }}
         />
         Центр
       </Button>
-      <Button
-        icon="minus"
-        onClick={() => {
-          zoomOut(maxScale);
-          setZoom(minScale);
-        }}
-      />
+      <Button icon="minus" onClick={() => zoomOut(maxScale)} />
     </div>
   );
 }
 
 function NanoMapButtons(props) {
   const { children, prefs, setPrefs, mapData, level, setLevel } = props;
-
   return (
     <Stack fill vertical className="NanoMap__Buttons">
       <Stack.Item grow>
@@ -243,7 +216,7 @@ function NanoMapButtons(props) {
       <Stack.Item>{children}</Stack.Item>
       <Stack.Item mt={0.5}>
         <Button
-          icon={'gear'}
+          icon="gear"
           tooltip="Параметры"
           tooltipPosition="right"
           onClick={() => setPrefs(!prefs)}
@@ -367,19 +340,14 @@ function NanoMapPreferences(props) {
 
 /** TODO: Add types when <Button> types will exported */
 function MapButton(props) {
-  const { tracking = false, zoom = defaultScale, posX, posY, ...rest } = props;
+  const { tracking = false, zoom, posX, posY, ...rest } = props;
   const { zoomToElement } = useControls();
   const buttonId = `${posX}_${posY}`;
   return (
     <div
       id={props.selected ? 'selected' : buttonId}
-      style={{
-        position: 'absolute',
-        left: posToPx(posX),
-        bottom: posToPx(posY),
-        transform: 'translate(17.5%, 5%)',
-        zIndex: 2,
-      }}
+      className="NanoMap__Object--wrapper"
+      style={{ left: posToPx(posX), bottom: posToPx(posY) }}
     >
       <KeepScale>
         <Button

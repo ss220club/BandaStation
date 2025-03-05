@@ -94,6 +94,12 @@ $blur: saturate(150%) blur(12px);
     width: 2em;
     border: 2px solid rgba(0, 0, 0, 0.66);
     border-radius: 0.25rem;
+
+    &--wrapper {
+      position: absolute;
+      transform: translate(17.5%, 5%);
+      z-index: 2;
+    }
   }
 }
 
