@@ -40,7 +40,9 @@ $blur: saturate(150%) blur(12px);
 .NanoMap {
   &__Controls {
     display: flex;
+    align-items: baseline;
     justify-content: center;
+    text-align: center;
     gap: 0.25rem;
     padding: 0 0.5rem;
     z-index: 3;
@@ -113,7 +115,7 @@ $blur: saturate(150%) blur(12px);
 
   &__Controls {
     right: 0;
-    bottom: -2.1rem;
+    bottom: -2.25rem;
     left: 0;
   }
 

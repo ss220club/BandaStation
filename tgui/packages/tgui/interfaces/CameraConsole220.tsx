@@ -221,9 +221,9 @@ export const CameraMapSelector = (props) => {
       <Stack.Item style={{ overflow: 'hidden' }}>
         <NanoMap
           mapData={mapData}
-          changeLevel={setSelectedLevel}
           selectedTarget={!!activeCamera?.ref}
           onZoom={setZoom}
+          onLevelChange={setSelectedLevel}
           buttons={
             <Button
               icon="wheelchair-move"

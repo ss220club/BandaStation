@@ -49,7 +49,7 @@ type Props = {
   /** All needed map data from backend */
   mapData: MapData;
   /** Called when level changes. Returns current level */
-  changeLevel: (level: number) => void;
+  onLevelChange: (level: number) => void;
   /** Called when zoom level changes. Returns zoom level */
   onZoom?: (zoom: number) => void;
 };
@@ -80,7 +80,7 @@ export function NanoMap(props: Props) {
     minimapDisabled,
     minimapPosition,
     selectedTarget,
-    changeLevel,
+    onLevelChange,
     onZoom,
   } = props;
 
@@ -109,6 +109,10 @@ export function NanoMap(props: Props) {
     );
   }
 
+  // Send component data to UI, if he has useState for them.
+  onZoom && onZoom(zoom);
+  onLevelChange && onLevelChange(currentLevel);
+
   return (
     <TransformWrapper
       centerOnInit
@@ -120,7 +124,6 @@ export function NanoMap(props: Props) {
       panning={{ velocityDisabled: mapPrefs.velocity }}
       doubleClick={{ disabled: true }}
       onZoomStop={({ state }) => {
-        onZoom && onZoom(state.scale);
         setZoom(state.scale);
       }}
     >
@@ -151,9 +154,8 @@ export function NanoMap(props: Props) {
             >
               <NanoMapButtons
                 mapData={mapData}
-                currentLevel={currentLevel}
-                setCurrentLevel={setCurrentLevel}
-                changeLevel={changeLevel}
+                level={currentLevel}
+                setLevel={setCurrentLevel}
                 prefs={prefs}
                 setPrefs={setPrefs}
               >
@@ -193,63 +195,51 @@ function NanoMapControls(props) {
 
   return (
     <div className="NanoMap__Controls">
-      <Stack.Item>
-        <Button
-          icon="plus"
-          onClick={() => {
-            zoomIn(maxScale);
-            setZoom(maxScale);
+      <Button
+        icon="plus"
+        onClick={() => {
+          zoomIn(maxScale);
+          setZoom(maxScale);
+        }}
+      />
+      <Button
+        fluid
+        width="100%"
+        onClick={() =>
+          selectedTarget ? zoomToElement('selected', zoom, 200) : centerView()
+        }
+      >
+        <div
+          className="NanoMap__Controls--zoom"
+          style={{
+            width: `${clamp01(zoom) * 100}%`,
           }}
         />
-      </Stack.Item>
-      <Stack.Item grow textAlign="center">
-        <Button
-          fluid
-          onClick={() =>
-            selectedTarget ? zoomToElement('selected', zoom, 200) : centerView()
-          }
-        >
-          <div
-            className="NanoMap__Controls--zoom"
-            style={{
-              width: `${clamp01(zoom) * 100}%`,
-            }}
-          />
-          Центр
-        </Button>
-      </Stack.Item>
-      <Stack.Item>
-        <Button
-          icon="minus"
-          onClick={() => {
-            zoomOut(maxScale);
-            setZoom(minScale);
-          }}
-        />
-      </Stack.Item>
+        Центр
+      </Button>
+      <Button
+        icon="minus"
+        onClick={() => {
+          zoomOut(maxScale);
+          setZoom(minScale);
+        }}
+      />
     </div>
   );
 }
 
 function NanoMapButtons(props) {
-  const {
-    children,
-    prefs,
-    setPrefs,
-    mapData,
-    currentLevel,
-    setCurrentLevel,
-    changeLevel,
-  } = props;
+  const { children, prefs, setPrefs, mapData, level, setLevel } = props;
 
   return (
-    <Stack vertical className="NanoMap__Buttons">
-      <NanoMapLevelSelector
-        mapData={mapData}
-        currentLevel={currentLevel}
-        setCurrentLevel={setCurrentLevel}
-        changeLevel={changeLevel}
-      />
+    <Stack fill vertical className="NanoMap__Buttons">
+      <Stack.Item grow>
+        <NanoMapLevelSelector
+          mapData={mapData}
+          level={level}
+          setLevel={setLevel}
+        />
+      </Stack.Item>
       <Stack.Item>{children}</Stack.Item>
       <Stack.Item mt={0.5}>
         <Button
@@ -264,57 +254,44 @@ function NanoMapButtons(props) {
 }
 
 function NanoMapLevelSelector(props) {
-  const { mapData, currentLevel, setCurrentLevel, changeLevel } = props;
-
-  function changeAllLevels(level) {
-    setCurrentLevel(level);
-    changeLevel(level);
-  }
-
+  const { mapData, level, setLevel } = props;
   return (
-    <Stack.Item grow>
-      <Stack vertical>
-        {mapData.min_floor !== mapData.maxFloor && (
-          <>
-            <Stack.Item>
-              <Button
-                icon="chevron-up"
-                disabled={currentLevel >= mapData.maxFloor}
-                onClick={() => changeAllLevels(currentLevel + 1)}
-              />
-            </Stack.Item>
-            <Stack.Item>
-              <Button
-                icon="chevron-down"
-                disabled={
-                  currentLevel > mapData.maxFloor ||
-                  currentLevel <= mapData.minFloor
-                }
-                onClick={() => {
-                  changeAllLevels(currentLevel - 1);
-                }}
-              />
-            </Stack.Item>
-          </>
-        )}
-        {mapData.lavalandLevel > 0 && (
+    <Stack vertical>
+      {mapData.min_floor !== mapData.maxFloor && (
+        <>
           <Stack.Item>
             <Button
-              icon="volcano"
-              selected={currentLevel === mapData.lavalandLevel}
-              tooltip="Лаваленд"
-              onClick={() => {
-                if (currentLevel === mapData.lavalandLevel) {
-                  changeAllLevels(mapData.mainFloor);
-                } else {
-                  changeAllLevels(mapData.lavalandLevel);
-                }
-              }}
+              icon="chevron-up"
+              disabled={level >= mapData.maxFloor}
+              onClick={() => setLevel(level + 1)}
             />
           </Stack.Item>
-        )}
-      </Stack>
-    </Stack.Item>
+          <Stack.Item mt={0.5}>
+            <Button
+              icon="chevron-down"
+              disabled={level > mapData.maxFloor || level <= mapData.minFloor}
+              onClick={() => setLevel(level - 1)}
+            />
+          </Stack.Item>
+        </>
+      )}
+      {mapData.lavalandLevel > 0 && (
+        <Stack.Item mt={mapData.min_floor !== mapData.maxFloor && 0.5}>
+          <Button
+            icon="volcano"
+            selected={level === mapData.lavalandLevel}
+            tooltip="Лаваленд"
+            onClick={() =>
+              setLevel(
+                level === mapData.lavalandLevel
+                  ? mapData.mainFloor
+                  : mapData.lavalandLevel,
+              )
+            }
+          />
+        </Stack.Item>
+      )}
+    </Stack>
   );
 }
 
@@ -388,7 +365,7 @@ function NanoMapPreferences(props) {
   );
 }
 
-/** TODO: Add types when <Button /> types will exported */
+/** TODO: Add types when <Button> types will exported */
 function MapButton(props) {
   const { tracking = false, zoom = defaultScale, posX, posY, ...rest } = props;
   const { zoomToElement } = useControls();
