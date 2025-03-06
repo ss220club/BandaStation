@@ -2,8 +2,8 @@
 
 /datum/preference/choiced/vulpkanin_body_markings
 	savefile_key = "feature_vulpkanin_body_markings"
-	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
+	savefile_identifier = PREFERENCE_CHARACTER
 	main_feature_name = "Раскраска тела"
 	should_generate_icons = TRUE
 	relevant_body_markings = /datum/bodypart_overlay/simple/body_marking/vulpkanin
@@ -16,40 +16,38 @@
 	return markings::name
 
 /datum/preference/choiced/vulpkanin_body_markings/icon_for(value)
-	var/static/list/body_parts = list(
-		/obj/item/bodypart/chest/vulpkanin,
-		/obj/item/bodypart/arm/left/vulpkanin,
-		/obj/item/bodypart/arm/right/vulpkanin,
-		/obj/item/bodypart/leg/left/vulpkanin,
-		/obj/item/bodypart/leg/right/vulpkanin,
+	var/static/list/body_part_icon_states = list(
+		"vulpkanin_head_m",
+		"vulpkanin_chest_m",
+		"groin_m",
+		"vulpkanin_r_arm",
+		"vulpkanin_l_arm",
+		"vulpkanin_r_hand",
+		"vulpkanin_l_hand"
 	)
 
 	var/static/datum/universal_icon/vulpkanin_body
 	if(isnull(vulpkanin_body))
 		vulpkanin_body = uni_icon('icons/blanks/32x32.dmi', "nothing")
-		for(var/obj/item/bodypart/bodypart_path as anything in body_parts)
-			vulpkanin_body.blend_icon(uni_icon(bodypart_path::icon, bodypart_path::icon_state), ICON_OVERLAY)
+		for(var/icon_state as anything in body_part_icon_states)
+			vulpkanin_body.blend_icon(uni_icon('icons/bandastation/mob/species/vulpkanin/sprite_accessories/body.dmi', icon_state), ICON_OVERLAY)
 
 	var/datum/sprite_accessory/markings = SSaccessories.vulpkanin_body_markings_list[value]
 	var/datum/universal_icon/final_icon = vulpkanin_body.copy()
 
 	if(value != SPRITE_ACCESSORY_NONE)
-		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "[markings.icon_state]")
-		body_part_icon.crop(1, 1, 32, 32)
-		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-
-		final_icon.blend_icon(body_part_icon, ICON_OVERLAY)
+		var/datum/universal_icon/marking_icon = uni_icon(markings.icon, "[markings.icon_state]")
+		marking_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
+		final_icon.blend_icon(marking_icon, ICON_OVERLAY)
 
 	final_icon.scale(64, 64)
-	final_icon.crop(15, 38, 15 + 31, 7)
 
 	return final_icon
 
 /datum/preference/choiced/vulpkanin_body_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["vulpkanin_body_markings"] = value
 
-// VULPKANIN TAIL
-
+// MARK: Tail
 /datum/preference/choiced/tail_vulpkanin
 	savefile_key = "feature_vulpkanin_tail"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -72,6 +70,7 @@
 
 	return data
 
+// MARK: Body markings color
 /datum/preference/color/vulpkanin_body_markings_color
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	savefile_key = "vulpkanin_body_markings_color"
@@ -83,10 +82,9 @@
 	return COLOR_WHITE
 
 /datum/preference/color/vulpkanin_body_markings_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["furcolor_first"] = value
+	target.dna.features["vulpkanin_body_markings_color"] = value
 
-/// VULPKANIN HEAD MARKINGS
-
+// MARK: Head markings
 /datum/preference/choiced/vulpkanin_head_markings
 	savefile_key = "feature_vulpkanin_head_markings"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -104,7 +102,6 @@
 
 	if(value != SPRITE_ACCESSORY_NONE)
 		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "m_vulpkanin_head_markings_[markings.icon_state]_ADJ")
-		body_part_icon.crop(1, 1, 32, 32)
 		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 
 		final_icon.blend_icon(body_part_icon, ICON_OVERLAY)
@@ -127,6 +124,7 @@
 
 	return data
 
+// MARK: Head markings color
 /datum/preference/color/vulpkanin_head_markings_color
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	savefile_key = "vulpkanin_head_markings_color"
@@ -138,10 +136,9 @@
 	return COLOR_WHITE
 
 /datum/preference/color/vulpkanin_head_markings_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["furcolor_third"] = value
+	target.dna.features["vulpkanin_head_markings_color"] = value
 
-/// VULPKANIN HEAD ACCESSORIES
-
+// MARK: Head Accessories
 /datum/preference/choiced/vulpkanin_head_accessories
 	savefile_key = "feature_vulpkanin_head_accessories"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -159,12 +156,10 @@
 
 	if(value != SPRITE_ACCESSORY_NONE)
 		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "m_vulpkanin_head_accessories_[markings.icon_state]_ADJ")
-		body_part_icon.crop(1, 1, 32, 32)
 		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 		final_icon.blend_icon(body_part_icon, ICON_OVERLAY)
 
 	final_icon.scale(64, 64)
-	final_icon.crop(15, 64, 15 + 31, 64 - 31)
 
 	return final_icon
 
@@ -182,6 +177,7 @@
 
 	return data
 
+// MARK: Head accessories color
 /datum/preference/color/vulpkanin_head_accessories_color
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	savefile_key = "vulpkanin_head_accessories_color"
@@ -193,7 +189,7 @@
 	return COLOR_WHITE
 
 /datum/preference/color/vulpkanin_head_accessories_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["furcolor_fourth"] = value
+	target.dna.features["vulpkanin_head_accessories_color"] = value
 
 /// VULPKANIN FACIAL HAIR
 
@@ -217,7 +213,6 @@
 		head_accessory_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 		final_icon.blend_icon(head_accessory_icon, ICON_OVERLAY)
 
-	final_icon.crop(10, 19, 22, 31)
 	final_icon.scale(32, 32)
 
 	return final_icon
@@ -247,7 +242,7 @@
 	return COLOR_WHITE
 
 /datum/preference/color/vulpkanin_facial_hair_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["furcolor_fifth"] = value
+	target.dna.features["vulpkanin_facial_hair_color"] = value
 
 /// VULPKANIN TAIL MARKINGS
 
@@ -290,7 +285,7 @@
 	return COLOR_WHITE
 
 /datum/preference/color/vulpkanin_tail_markings_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["furcolor_second"] = value
+	target.dna.features["vulpkanin_tail_markings_color"] = value
 
 /datum/preference/color/vulpkanin_tail_markings_color/is_accessible(datum/preferences/preferences)
 	if (!..(preferences))
