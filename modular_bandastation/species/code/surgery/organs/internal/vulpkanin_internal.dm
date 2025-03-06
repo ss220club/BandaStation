@@ -32,12 +32,12 @@
 
 /obj/item/organ/liver/vulpkanin
 	name = "vulpkanin liver"
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/organs.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'
 	alcohol_tolerance = ALCOHOL_RATE * 2.5
 
 /obj/item/organ/eyes/vulpkanin
 	name = "vulpkanin eyeballs"
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/organs.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'
 
 /obj/item/organ/ears/vulpkanin
 	desc = "Большие ушки позволяют легче слышать шепот."
@@ -53,16 +53,16 @@
 
 /obj/item/organ/heart/vulpkanin
 	name = "vulpkanin heart"
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/organs.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'
 
 /obj/item/organ/brain/vulpkanin
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/organs.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'
 	actions_types = list(/datum/action/cooldown/sniff)
 
 /obj/item/organ/lungs/vulpkanin
 	name = "vulpkanin lungs"
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/organs.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'
 
 /obj/item/organ/kidneys/vulpkanin
 	name = "vulpkanin kidneys"
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/organs.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'

@@ -55,10 +55,10 @@
 	features["tajaran_facial_hair"] = prob(50) ? pick(SSaccessories.tajaran_facial_hair_list) : "None"
 
 	var/furcolor = "#[random_color()]"
-	features["furcolor_tajaran_first"] = furcolor
-	features["furcolor_tajaran_second"] = furcolor
-	features["furcolor_tajaran_third"] = furcolor
-	features["furcolor_tajaran_fourth"] = furcolor
+	features["tajaran_body_markings_color"] = furcolor
+	features["tajaran_head_markings_color"] = furcolor
+	features["tajaran_tail_markings_color"] = furcolor
+	features["tajaran_facial_hair_color"] = furcolor
 	return features
 
 /datum/species/tajaran/get_physical_attributes()
@@ -260,10 +260,10 @@
 			overlay.icon = accessory.icon
 			overlay.icon_state = accessory.icon_state
 			overlay.use_gender = accessory.gender_specific
-			overlay.draw_color = accessory.color_src ? tajaran.dna.features["furcolor_tajaran_first"] : null
+			overlay.draw_color = accessory.color_src ? tajaran.dna.features["tajaran_body_markings_color"] : null
 
 			if(istype(accessory, /datum/sprite_accessory/tajaran_body_markings) && accessory.colored_paws && (istype(people_part, /obj/item/bodypart/arm/left/tajaran) || istype(people_part, /obj/item/bodypart/arm/right/tajaran)))
-				overlay.aux_color_paw = accessory.color_src ? tajaran.dna.features["furcolor_tajaran_first"] : null
+				overlay.aux_color_paw = accessory.color_src ? tajaran.dna.features["tajaran_body_markings_color"] : null
 
 			if((istype(people_part, /obj/item/bodypart/leg/left/digitigrade/tajaran) || istype(people_part, /obj/item/bodypart/leg/right/digitigrade/tajaran))) {
 				overlay.icon_state = overlay.icon_state + "_digi"
@@ -301,12 +301,12 @@
 		sprite_accessory = SSaccessories.tajaran_head_markings_list[user.dna.features["tajaran_head_markings"]]
 		if(sprite_accessory)
 			facial_hair_overlay = image(sprite_accessory.icon, "m_tajaran_head_markings_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
-			facial_hair_overlay.color = user.dna.features["furcolor_tajaran_second"]
+			facial_hair_overlay.color = user.dna.features["tajaran_head_markings_color"]
 			. += facial_hair_overlay
 
 		sprite_accessory = SSaccessories.tajaran_facial_hair_list[user.dna.features["tajaran_facial_hair"]]
 		if(sprite_accessory)
 			facial_hair_overlay = image(sprite_accessory.icon, "m_tajaran_facial_hair_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
-			facial_hair_overlay.color = user.dna.features["furcolor_tajaran_fourth"]
+			facial_hair_overlay.color = user.dna.features["tajaran_facial_hair_color"]
 			. += facial_hair_overlay
 	return .

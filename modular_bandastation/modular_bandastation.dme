@@ -59,6 +59,7 @@
 #include "world_topics/_world_topics.dme"
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
+#include "implants/_implants.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
