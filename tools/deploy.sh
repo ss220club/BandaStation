@@ -16,7 +16,8 @@ mkdir -p \
     $1/sound/runtime \
     $1/strings \
     $1/tgui/public \
-    $1/tgui/packages/tgfont/dist
+    $1/tgui/packages/tgfont/dist \
+    $1/modular_bandastation
 
 if [ -d ".git" ]; then
   mkdir -p $1/.git/logs
@@ -30,6 +31,7 @@ cp -r sound/runtime/* $1/sound/runtime/
 cp -r strings/* $1/strings/
 cp -r tgui/public/* $1/tgui/public/
 cp -r tgui/packages/tgfont/dist/* $1/tgui/packages/tgfont/dist/
+rsync -av --exclude='**/*.dm' --exclude='**/*.dme' modular_bandastation/* $1/modular_bandastation/
 
 #remove .dm files from _maps
 
