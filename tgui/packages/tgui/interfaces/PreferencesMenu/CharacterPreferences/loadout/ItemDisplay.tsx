@@ -9,6 +9,7 @@ import {
 } from 'tgui-core/components';
 import { createSearch } from 'tgui-core/string';
 
+import { ItemDisplay220 } from '../../../../bandastation/ItemDisplay220'; // BANDASTATION EDIT
 import { LoadoutCategory, LoadoutItem, LoadoutManagerData } from './base';
 
 type Props = {
@@ -108,16 +109,15 @@ export function ItemListDisplay(props: ListProps) {
   const { loadout_list } = data.character_preferences.misc;
 
   return (
-    <Flex wrap>
+    <div style={{ display: `flex`, flexWrap: `wrap` }}>
       {props.items.map((item) => (
-        <Flex.Item key={item.name} mr={2} mb={2}>
-          <ItemDisplay
-            item={item}
-            active={loadout_list && loadout_list[item.path] !== undefined}
-          />
-        </Flex.Item>
+        <ItemDisplay220
+          key={item.name}
+          item={item}
+          active={loadout_list && loadout_list[item.path] !== undefined}
+        />
       ))}
-    </Flex>
+    </div>
   );
 }
 

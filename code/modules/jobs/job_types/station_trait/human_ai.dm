@@ -1,12 +1,12 @@
 /datum/job/human_ai
 	title = JOB_HUMAN_AI
-	description = "Assist the crew, open airlocks, follow your lawset, and coordinate your cyborgs."
+	description = "Помогайте экипажу, открывайте шлюзы, следуйте своему своду законов и координируйтесь с другими киборгами."
 	auto_deadmin_role_flags = DEADMIN_POSITION_SILICON
 	department_head = list(JOB_RESEARCH_DIRECTOR)
 	faction = FACTION_STATION
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "the Captain, Research Director, and your lawset"
+	supervisors = "Капитаном, Директором Исследований и вашим сводом законов"
 	minimal_player_age = 7
 	exp_requirements = 180
 	exp_required_type = EXP_TYPE_CREW
