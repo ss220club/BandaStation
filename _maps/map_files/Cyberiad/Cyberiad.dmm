@@ -12392,9 +12392,10 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "cUG" = (
-/obj/structure/table/glass,
-/obj/item/paper,
-/obj/item/pen/blue,
+/obj/machinery/greenscreen_camera{
+	name = "bridge-caster";
+	dir = 1
+	},
 /turf/open/floor/carpet/green,
 /area/station/command/bridge)
 "cUI" = (
@@ -22494,11 +22495,13 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard/west)
 "frz" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/tile/red{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/blue,
+/obj/structure/chair/sofa/corp/left{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "frC" = (
@@ -24960,8 +24963,6 @@
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
 "fVf" = (
-/obj/structure/table/glass,
-/obj/item/cigarette/pipe,
 /turf/open/floor/carpet/green,
 /area/station/command/bridge)
 "fVh" = (
@@ -31001,11 +31002,6 @@
 "htm" = (
 /turf/closed/wall/r_wall,
 /area/station/maintenance/starboard/upper)
-"htp" = (
-/obj/structure/table/glass,
-/obj/item/paper_bin,
-/turf/open/floor/carpet/green,
-/area/station/command/bridge)
 "htt" = (
 /obj/machinery/light/directional/south,
 /obj/effect/turf_decal/tile/blue{
@@ -37250,8 +37246,8 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/storage/gas)
 "iVe" = (
-/obj/structure/chair/sofa/corp,
 /obj/machinery/light/directional/north,
+/obj/structure/sign/poster/greenscreen/directional/north,
 /turf/open/floor/carpet/green,
 /area/station/command/bridge)
 "iVr" = (
@@ -43113,7 +43109,6 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "kpW" = (
-/obj/structure/chair/sofa/corp/right,
 /obj/machinery/camera/directional/west{
 	c_tag = "Bridge - Lounge Zone South";
 	dir = 1
@@ -48315,12 +48310,14 @@
 /turf/open/floor/circuit,
 /area/station/ai_monitored/turret_protected/ai)
 "lDz" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
+	},
+/obj/structure/chair/sofa/corp/left{
+	dir = 4
 	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
@@ -49304,6 +49301,9 @@
 	pixel_y = 3
 	},
 /obj/item/toy/figure/borg,
+/obj/structure/sign/plaques/kiddie{
+	pixel_y = -28
+	},
 /turf/open/floor/circuit,
 /area/station/ai_monitored/turret_protected/ai_upload)
 "lPb" = (
@@ -54701,12 +54701,14 @@
 /turf/open/floor/iron,
 /area/station/security/checkpoint/supply)
 "neC" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
+	},
+/obj/structure/chair/sofa/corp/right{
+	dir = 4
 	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
@@ -66687,6 +66689,9 @@
 /area/station/science/xenobiology)
 "pTS" = (
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted,
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "pTX" = (
@@ -75002,6 +75007,9 @@
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 8
 	},
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "rXt" = (
@@ -76820,10 +76828,6 @@
 /obj/machinery/status_display/evac/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
-"ssE" = (
-/obj/structure/sign/plaques/kiddie,
-/turf/closed/wall/r_wall,
-/area/station/ai_monitored/turret_protected/ai_upload)
 "ssS" = (
 /obj/structure/chair,
 /obj/machinery/light/small/directional/north,
@@ -81072,10 +81076,6 @@
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
 /area/station/engineering/gravity_generator)
-"txc" = (
-/obj/structure/chair/sofa/corp/left,
-/turf/open/floor/carpet/green,
-/area/station/command/bridge)
 "txk" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -83405,9 +83405,7 @@
 /turf/open/floor/wood/parquet,
 /area/station/hallway/secondary/service)
 "uaB" = (
-/obj/structure/chair/comfy/brown{
-	color = "#514E58"
-	},
+/obj/structure/chair/comfy/corp,
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "uaD" = (
@@ -99265,11 +99263,13 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/fore)
 "xWZ" = (
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /obj/effect/turf_decal/tile/red{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/blue,
+/obj/structure/chair/sofa/corp/right{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "xXq" = (
@@ -194815,7 +194815,7 @@ lMx
 tYJ
 gPI
 lOX
-ssE
+iHv
 iVe
 cUG
 uHz
@@ -195073,8 +195073,8 @@ dUv
 diA
 qKH
 iHv
-txc
-htp
+fVf
+fVf
 qod
 jdV
 oRY

@@ -8,6 +8,7 @@ export const JOB2ICON = {
   Bartender: 'cocktail',
   'Bit Avatar': 'code',
   Bitrunner: 'gamepad',
+  Explorer: 'compass',
   Botanist: 'seedling',
   'Bridge Assistant': 'building-shield',
   Captain: 'crown',

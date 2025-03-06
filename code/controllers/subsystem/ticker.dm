@@ -109,7 +109,7 @@ SUBSYSTEM_DEF(ticker)
 				music += S
 
 	var/old_login_music = trim(file2text("data/last_round_lobby_music.txt"))
-	if(music.len > 1)
+	if(length(music) > 1)
 		music -= old_login_music
 
 	for(var/S in music)
@@ -122,10 +122,11 @@ SUBSYSTEM_DEF(ticker)
 
 	if(!length(music))
 		music = world.file2list(ROUND_START_MUSIC_LIST, "\n")
-		login_music = pick(music)
+		if(length(music) > 1)
+			music -= old_login_music
+		set_lobby_music(pick(music))
 	else
-		login_music = "[global.config.directory]/title_music/sounds/[pick(music)]"
-
+		set_lobby_music("[global.config.directory]/title_music/sounds/[pick(music)]")
 
 	if(!GLOB.syndicate_code_phrase)
 		GLOB.syndicate_code_phrase = generate_code_phrase(return_list=TRUE)
@@ -163,11 +164,13 @@ SUBSYSTEM_DEF(ticker)
 			for(var/channel_tag in CONFIG_GET(str_list/channel_announce_new_game))
 				send2chat(new /datum/tgs_message_content("New round starting on [SSmapping.current_map.map_name]!"), channel_tag)
 			current_state = GAME_STATE_PREGAME
+			//SSvote.initiate_vote(/datum/vote/storyteller, "Storyteller Vote", forced = TRUE) // BANDASTATION EDIT - STORYTELLER
 			SEND_SIGNAL(src, COMSIG_TICKER_ENTER_PREGAME)
 
 			fire()
 		if(GAME_STATE_PREGAME)
 				//lobby stats for statpanels
+			SSgamemode.init_storyteller() // BANDASTATION EDIT - STORYTELLER
 			if(isnull(timeLeft))
 				timeLeft = max(0,start_at - world.time)
 			totalPlayers = LAZYLEN(GLOB.new_player_list)
@@ -232,11 +235,14 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, span_boldannounce("Starting game..."))
 	var/init_start = world.timeofday
-
+	// BANDASTATION EDIT START - STORYTELLER
 	CHECK_TICK
 	//Configure mode and assign player to antagonists
 	var/can_continue = FALSE
-	can_continue = SSdynamic.pre_setup() //Choose antagonists
+
+	CHECK_TICK
+	can_continue = SSgamemode.pre_setup()
+	// BANDASTATION EDIT END - STORYTELLER
 	CHECK_TICK
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PRE_JOBS_ASSIGNED, src)
 	can_continue = can_continue && SSjob.divide_occupations() //Distribute jobs
@@ -302,7 +308,8 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/PostSetup()
 	set waitfor = FALSE
-	SSdynamic.post_setup()
+	//SSdynamic.post_setup() // BANDASTATION EDIT - STORYTELLER
+	SSgamemode.post_setup() // BANDASTATION EDIT - STORYTELLER
 	GLOB.start_state = new /datum/station_state()
 	GLOB.start_state.count()
 
@@ -748,6 +755,14 @@ SUBSYSTEM_DEF(ticker)
 		possible_themes += themes
 	if(possible_themes.len)
 		return "[global.config.directory]/reboot_themes/[pick(possible_themes)]"
+
+/// Updates the lobby music
+/// Does not update if override is FALSE and login_music is already set
+/datum/controller/subsystem/ticker/proc/set_lobby_music(new_music, override = FALSE)
+	if(!override && login_music)
+		return
+
+	login_music = new_music
 
 #undef ROUND_START_MUSIC_LIST
 #undef SS_TICKER_TRAIT
