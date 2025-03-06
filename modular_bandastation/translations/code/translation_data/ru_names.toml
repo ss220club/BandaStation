@@ -2009,12 +2009,12 @@ prepositional = "кейсе импланта"
 gender = "male"
 
 ["implant case - 'Sad Trombone'"]
-nominative = "кейс импланта - 'Close Quarters Combat'"
-genitive = "кейса импланта - 'Close Quarters Combat'"
-dative = "кейсу импланта - 'Close Quarters Combat'"
-accusative = "кейс импланта - 'Close Quarters Combat'"
-instrumental = "кейсом импланта - 'Close Quarters Combat'"
-prepositional = "кейсе импланта - 'Close Quarters Combat'"
+nominative = "кейс импланта - 'Грустный тромбон'"
+genitive = "кейса импланта - 'Грустный тромбон'"
+dative = "кейсу импланта - 'Грустный тромбон'"
+accusative = "кейс импланта - 'Грустный тромбон'"
+instrumental = "кейсом импланта - 'Грустный тромбон'"
+prepositional = "кейсе импланта - 'Грустный тромбон'"
 gender = "male"
 
 ["implant case - 'Remote Chemical'"]
