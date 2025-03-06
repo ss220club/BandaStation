@@ -4,7 +4,7 @@
 	helptext = "Мы станем контролировать маленькое, хрупкое существо. Мы можем атаковать труп, чтобы заложить яйцо, которое медленно созреет и превратится в новую форму для нас."
 	button_icon_state = "last_resort"
 	chemical_cost = 20
-	dna_cost = CHANGELING_POWER_INNATE
+	dna_cost = 1
 	req_stat = DEAD
 	ignores_fakedeath = TRUE
 	disabled_by_fire = FALSE
