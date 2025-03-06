@@ -127,3 +127,23 @@
 	name = "Birdnest"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_birdnest"
+
+/datum/sprite_accessory/hair/ponytail
+	name = "Ponytail"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_ponytail"
+
+/datum/sprite_accessory/hair/twincurls_2
+	name = "Twincurls 2"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_twincurls_2"
+
+/datum/sprite_accessory/hair/ponytail_alt_80s
+	name = "Ponytail 80s alt"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_ponytail_alt_80s"
+
+/datum/sprite_accessory/hair/ponytail_80s
+	name = "Ponytail 80s"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_ponytail_80s"
