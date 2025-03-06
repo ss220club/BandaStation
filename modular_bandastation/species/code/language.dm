@@ -9,7 +9,7 @@
 	"ист","йеин","ентч","звич","тут","мирr","во","бис","эс","вор","ник","гро","эл","энем","зантх","тзч","ноч", \
 	"хел","исчт","фар","ва","барам","йеренг","теч","лач","сам","мак","лич","ген","ор","аг","ект","гек","стаг","онн", \
 	"бин","кет","ярл","вульф","эйнеч","кресвз","азунейн","гхчв")
-	icon = 'modular_bandastation/species/icons/mob/species/vulpkanin/lang.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/lang.dmi'
 	icon_state = "vulptail"
 	default_priority = 90
 
@@ -50,7 +50,7 @@
 	"ми","джри","дин","манк","рхе","зар","ррхаз","кал","чур","ич","тхаа","дра","джурл","мах","сану","дра","ии'р", \
 	"ка","ааси","фар","ва","бак","ара","кара","зар","сам","мак","храр","нджа","рир","хан","джун","дар","рик","ках", \
 	"хал","кет","джурл","мах","тул","крещ","азу","рах")
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/lang.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/lang.dmi'
 	icon_state = "taj_face"
 	default_priority = 90
 
