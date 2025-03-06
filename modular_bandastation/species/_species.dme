@@ -13,7 +13,6 @@
 
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_body_markings.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_facial_hair.dm"
-#include "code/human/sprite_accessories/vulpkanin/vulpkanin_head_accessories.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_head_markings.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_markings_bodypart_overlay.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_tail_markings.dm"

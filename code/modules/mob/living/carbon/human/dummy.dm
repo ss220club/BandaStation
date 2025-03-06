@@ -124,14 +124,12 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	// vulpkanin
 	target.dna.features["vulpkanin_body_markings"] = get_consistent_feature_entry(SSaccessories.vulpkanin_body_markings_list)
 	target.dna.features["vulpkanin_head_markings"] = get_consistent_feature_entry(SSaccessories.vulpkanin_head_markings_list)
-	target.dna.features["vulpkanin_head_accessories"] = get_consistent_feature_entry(SSaccessories.vulpkanin_head_accessories_list)
 	target.dna.features["tail_vulpkanin"] = get_consistent_feature_entry(SSaccessories.tails_list_vulpkanin)
 	target.dna.features["tail_markings"] = get_consistent_feature_entry(SSaccessories.vulpkanin_tail_markings_list)
 	target.dna.features["vulpkanin_facial_hair"] = get_consistent_feature_entry(SSaccessories.vulpkanin_facial_hair_list)
 	target.dna.features["vulpkanin_body_markings_color"] = COLOR_WHITE
 	target.dna.features["vulpkanin_tail_markings_color"] = COLOR_WHITE
 	target.dna.features["vulpkanin_head_markings_color"] = COLOR_WHITE
-	target.dna.features["vulpkanin_head_accessories_color"] = COLOR_WHITE
 	target.dna.features["vulpkanin_facial_hair_color"] = COLOR_WHITE
 	// tajaran
 	target.dna.features["tajaran_body_markings"] = get_consistent_feature_entry(SSaccessories.tajaran_body_markings_list)

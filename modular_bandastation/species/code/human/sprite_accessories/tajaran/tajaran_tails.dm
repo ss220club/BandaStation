@@ -1,5 +1,5 @@
 /datum/sprite_accessory/tails/tajaran
-	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/body_accessory.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/tails.dmi'
 	spine_key = "tajaran"
 
 /datum/sprite_accessory/tails/tajaran/tiny

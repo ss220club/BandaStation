@@ -1,5 +1,5 @@
 /datum/sprite_accessory/tails/vulpkanin
-	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/body_accessory.dmi'
+	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/tails.dmi'
 	spine_key = "vulpkanin"
 
 /datum/sprite_accessory/tails/vulpkanin/fluffy

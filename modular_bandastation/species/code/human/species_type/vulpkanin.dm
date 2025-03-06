@@ -40,11 +40,9 @@
 	vulpkanin.set_haircolor("#A26324", update = FALSE) // brown
 	vulpkanin.set_hairstyle("Jagged", update = TRUE)
 	vulpkanin.dna.features["mcolor"] = "#D69E67"
-	vulpkanin.dna.features["vulpkanin_head_accessories"] = "Vulpkanin Earfluff"
 	vulpkanin.dna.features["vulpkanin_body_markings_color"] = "#bd762f"
 	vulpkanin.dna.features["vulpkanin_tail_markings_color"] = "#2b2015"
 	vulpkanin.dna.features["vulpkanin_head_markings_color"] = "#2b2015"
-	vulpkanin.dna.features["vulpkanin_head_accessories_color"] = "#ffa2be"
 	vulpkanin.dna.features["vulpkanin_facial_hair_color"] = "#bd762f"
 	vulpkanin.update_body(is_creating = TRUE)
 
@@ -53,14 +51,12 @@
 	features["vulpkanin_body_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_body_markings_list) : "None"
 	features["tail_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : "None"
 	features["vulpkanin_head_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : "None"
-	features["vulpkanin_head_accessories"] = prob(50) ? pick(SSaccessories.vulpkanin_head_accessories_list) : "None"
 	features["vulpkanin_facial_hair"] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : "None"
 
 	var/furcolor = "#[random_color()]"
 	features["vulpkanin_body_markings_color"] = furcolor
 	features["vulpkanin_tail_markings_color"] = furcolor
 	features["vulpkanin_head_markings_color"] = furcolor
-	features["vulpkanin_head_accessories_color"] = furcolor
 	features["vulpkanin_facial_hair_color"] = furcolor
 	return features
 
@@ -252,12 +248,6 @@
 		if(sprite_accessory)
 			facial_hair_overlay = image(sprite_accessory.icon, "m_vulpkanin_head_markings_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
 			facial_hair_overlay.color = user.dna.features["vulpkanin_head_markings_color"]
-			. += facial_hair_overlay
-
-		sprite_accessory = SSaccessories.vulpkanin_head_accessories_list[user.dna.features["vulpkanin_head_accessories"]]
-		if(sprite_accessory)
-			facial_hair_overlay = image(sprite_accessory.icon, "m_vulpkanin_head_accessories_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
-			facial_hair_overlay.color = user.dna.features["vulpkanin_head_accessories_color"]
 			. += facial_hair_overlay
 
 		sprite_accessory = SSaccessories.vulpkanin_facial_hair_list[user.dna.features["vulpkanin_facial_hair"]]

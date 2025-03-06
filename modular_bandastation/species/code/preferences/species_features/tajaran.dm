@@ -10,34 +10,38 @@
 /datum/preference/choiced/tajaran_body_markings/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.tajaran_body_markings_list)
 
-/datum/preference/choiced/tajaran_body_markings/create_default_value()
-	var/datum/sprite_accessory/tajaran_body_markings/markings = /datum/sprite_accessory/tajaran_body_markings
-	return initial(markings.name)
-
 /datum/preference/choiced/tajaran_body_markings/icon_for(value)
+	var/static/list/body_part_icon_states = list(
+		"tajaran_chest_m",
+		"tajaran_l_leg",
+		"tajaran_r_leg",
+		"tajaran_l_arm",
+		"tajaran_r_arm",
+		"tajaran_l_hand",
+		"tajaran_r_hand"
+	)
+
 	var/static/datum/universal_icon/body
 	if(isnull(body))
 		body = uni_icon('icons/blanks/32x32.dmi', "nothing")
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_chest_m"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_leg"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_leg"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_arm"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_arm"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_hand"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_hand"), ICON_OVERLAY)
+		for(var/body_part_icon_state in body_part_icon_states)
+			body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', body_part_icon_state), ICON_OVERLAY)
+
 		body.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
 
-	var/datum/sprite_accessory/markings = SSaccessories.tajaran_body_markings_list[value]
-	var/datum/universal_icon/icon_with_markings = body.copy()
+	var/datum/universal_icon/final_icon = body.copy()
 
 	if(value != SPRITE_ACCESSORY_NONE)
-		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "[markings.icon_state]")
-		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		icon_with_markings.blend_icon(body_part_icon, ICON_OVERLAY)
+		var/datum/sprite_accessory/body_marking = SSaccessories.tajaran_body_markings_list[value]
+		var/datum/universal_icon/body_marking_icon = uni_icon(body_marking.icon, "[body_marking.icon_state]")
+		body_marking_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 
-	icon_with_markings.scale(64, 64)
+		final_icon.blend_icon(body_marking_icon, ICON_OVERLAY)
 
-	return icon_with_markings
+	final_icon.crop(8, 1, 24, 22)
+	final_icon.scale(32, 32)
+
+	return final_icon
 
 /datum/preference/choiced/tajaran_body_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tajaran_body_markings"] = value
@@ -75,9 +79,6 @@
 /datum/preference/choiced/tail_tajaran/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tail_tajaran"] = value
 
-/datum/preference/choiced/tail_tajaran/create_default_value()
-	return /datum/sprite_accessory/tails/tajaran/wingertail::name
-
 // MARK: Tajaran head markings
 /datum/preference/choiced/tajaran_head_markings
 	savefile_key = "feature_tajaran_head_markings"
@@ -91,34 +92,20 @@
 	return assoc_to_keys_features(SSaccessories.tajaran_head_markings_list)
 
 /datum/preference/choiced/tajaran_head_markings/icon_for(value)
-	var/static/datum/universal_icon/body
-	if(isnull(body))
-		body = uni_icon('icons/blanks/32x32.dmi', "nothing")
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_chest_m"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "digitigrade_l_leg"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "digitigrade_r_leg"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_arm"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_arm"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_l_hand"), ICON_OVERLAY)
-		body.blend_icon(uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_r_hand"), ICON_OVERLAY)
-		body.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
-
-	var/datum/sprite_accessory/markings = SSaccessories.tajaran_head_markings_list[value]
-	var/datum/universal_icon/icon_with_markings = body.copy()
+	var/datum/universal_icon/final_icon = uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m")
+	final_icon.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
 
 	if(value != SPRITE_ACCESSORY_NONE)
-		var/datum/universal_icon/body_part_icon = uni_icon(markings.icon, "m_tajaran_head_markings_[markings.icon_state]_ADJ")
-		body_part_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		icon_with_markings.blend_icon(body_part_icon, ICON_OVERLAY)
+		var/datum/sprite_accessory/head_marking = SSaccessories.tajaran_head_markings_list[value]
+		var/datum/universal_icon/head_marking_icon = uni_icon(head_marking.icon, "m_tajaran_head_markings_[head_marking.icon_state]_ADJ")
+		head_marking_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 
-	icon_with_markings.scale(64, 64)
+		final_icon.blend_icon(head_marking_icon, ICON_OVERLAY)
 
-	return icon_with_markings
+	final_icon.crop(12, 22, 20, 32)
+	final_icon.scale(32, 32)
 
-/datum/preference/choiced/tajaran_head_markings/create_default_value()
-	var/datum/sprite_accessory/tajaran_head_markings/markings = /datum/sprite_accessory/tajaran_head_markings
-	return initial(markings.name)
+	return final_icon
 
 /datum/preference/choiced/tajaran_head_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tajaran_head_markings"] = value
@@ -156,27 +143,20 @@
 	return assoc_to_keys_features(SSaccessories.tajaran_facial_hair_list)
 
 /datum/preference/choiced/tajaran_facial_hair/icon_for(value)
-	var/datum/sprite_accessory/markings = SSaccessories.tajaran_facial_hair_list[value]
-	var/static/datum/universal_icon/head_icon
-	if(isnull(head_icon))
-		head_icon = uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m")
-		head_icon.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
+	var/datum/universal_icon/final_icon = uni_icon('icons/bandastation/mob/species/tajaran/sprite_accessories/body.dmi', "tajaran_head_m")
+	final_icon.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
 
-	var/datum/universal_icon/final_icon = head_icon.copy()
-	if(!isnull(markings))
-		ASSERT(istype(markings))
+	if(value != SPRITE_ACCESSORY_NONE)
+		var/datum/sprite_accessory/facial_hair = SSaccessories.tajaran_facial_hair_list[value]
+		var/datum/universal_icon/facial_hair_icon = uni_icon(facial_hair.icon, "m_tajaran_facial_hair_[facial_hair.icon_state]_ADJ")
+		facial_hair_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
 
-		var/datum/universal_icon/head_accessory_icon = uni_icon(markings.icon, "m_tajaran_facial_hair_[markings.icon_state]_ADJ")
-		head_accessory_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
-		final_icon.blend_icon(head_accessory_icon, ICON_OVERLAY)
+		final_icon.blend_icon(facial_hair_icon, ICON_OVERLAY)
 
+	final_icon.crop(12, 21, 20, 32)
 	final_icon.scale(32, 32)
 
 	return final_icon
-
-/datum/preference/choiced/tajaran_facial_hair/create_default_value()
-	var/datum/sprite_accessory/tajaran_facial_hair/markings = /datum/sprite_accessory/tajaran_facial_hair
-	return initial(markings.name)
 
 /datum/preference/choiced/tajaran_facial_hair/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tajaran_facial_hair"] = value
@@ -210,10 +190,6 @@
 
 /datum/preference/choiced/tajaran_tail_markings/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.tajaran_tail_markings_list)
-
-/datum/preference/choiced/tajaran_tail_markings/create_default_value()
-	var/datum/sprite_accessory/tajaran_tail_markings/markings = /datum/sprite_accessory/tajaran_tail_markings
-	return initial(markings.name)
 
 /datum/preference/choiced/tajaran_tail_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tajaran_tail_markings"] = value
