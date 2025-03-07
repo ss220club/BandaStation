@@ -21,5 +21,6 @@
 #include "code/supply_packs.dm"
 #include "code/wounds/cranial_fissure.dm"
 #include "code/_brain.dm"
+#include "code/headslug.dm"
 
 #include "code/~undefs.dm"
