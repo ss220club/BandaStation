@@ -7,10 +7,11 @@
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/cryopod/prison, 18)
 
-/obj/machinery/cryopod/prison/close_machine(atom/movable/target, density_to_set = FALSE)
+/obj/machinery/cryopod/prison/close_machine(atom/movable/target, density_to_set)
 	. = ..()
 	flick("prisonpod-open", src)
+	set_density(FALSE)
 
-/obj/machinery/cryopod/prison/open_machine(drop = TRUE, density_to_set = FALSE)
+/obj/machinery/cryopod/prison/open_machine(drop = TRUE, density_to_set)
 	. = ..()
 	flick("prisonpod-open", src)

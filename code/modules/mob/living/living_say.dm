@@ -368,6 +368,20 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 	var/show_message_success = show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlight)
+
+	// BANDASTATION ADDITION START - TTS
+	if(show_message_success && radio_freq != FREQ_ENTERTAINMENT)
+		var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
+		speaker.cast_tts(
+			src,
+			message_to_tts,
+			is_local = (message_range != INFINITY),
+			is_radio = !!radio_freq,
+			effects = LAZYACCESS(message_mods, MODE_TTS_FILTERS),
+			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE)
+		)
+	// BANDASTATION ADDITION END - TTS
+
 	return understood && show_message_success
 
 /mob/living/send_speech(message_raw, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language = null, list/message_mods = list(), forced = null, tts_message, list/tts_filter)

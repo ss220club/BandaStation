@@ -39,7 +39,7 @@ SUBSYSTEM_DEF(tts220)
 	VAR_PRIVATE/tts_rrps = 0
 	VAR_PRIVATE/tts_rrps_counter = 0
 
-	VAR_PRIVATE/is_enabled = TRUE
+	var/is_enabled = TRUE
 	/// List of all available TTS seeds
 	var/list/datum/tts_seed/tts_seeds = list()
 	/// List of all available TTS providers

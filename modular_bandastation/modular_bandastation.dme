@@ -12,6 +12,7 @@
 #include "aesthetics_sounds/_aesthetics_sounds.dme"
 #include "ai_laws/_ai_laws.dme"
 #include "announcers/_announcers.dme"
+#include "antagonists/_antagonists.dme"
 #include "autohiss/_autohiss.dme"
 #include "automapper/_automapper.dme"
 #include "automatic_crew_transfer/_automatic_crew_transfer.dme"
@@ -58,6 +59,7 @@
 #include "world_topics/_world_topics.dme"
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
+#include "implants/_implants.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //

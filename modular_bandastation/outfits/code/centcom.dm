@@ -1,6 +1,7 @@
 // MARK: Nanotrasen CentCom //
 
 /datum/outfit/centcom/post_equip(mob/living/carbon/human/centcom_member, visuals_only = FALSE)
+	. = ..() // Now centcom staff have mindshield implants
 	if(centcom_member.mind)
 		centcom_member.mind.centcom_role = CENTCOM_ROLE_OFFICER
 
@@ -69,6 +70,8 @@
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom,
 		/obj/item/stamp/centcom,
+		/obj/item/lighter,
+		/obj/item/door_remote/omni,
 	)
 	belt = /obj/item/gun/energy/pulse/pistol/m1911
 	ears = /obj/item/radio/headset/headset_cent/commander
@@ -77,7 +80,7 @@
 	head = /obj/item/clothing/head/helmet/space/beret
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/laceup
-	r_pocket = /obj/item/lighter
+	r_pocket = /obj/item/modular_computer/pda/heads/centcom
 	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites
 
 /datum/id_trim/centcom/commander
@@ -99,7 +102,7 @@
 	head = /obj/item/clothing/head/helmet/space/beret
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/jackboots/centcom
-	r_pocket = /obj/item/lighter
+	r_pocket = /obj/item/modular_computer/pda/heads/centcom
 
 /datum/id_trim/centcom/commander/field
 	assignment = "Nanotrasen Navy Field Officer"
@@ -153,3 +156,14 @@
 /datum/id_trim/centcom/ert/commander/New()
 	. = ..()
 	access = access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
+
+// DeathSquad outifit
+/datum/outfit/centcom/death_commando/officer
+	backpack_contents = list(
+		/obj/item/ammo_box/a357 = 1,
+		/obj/item/flashlight = 1,
+		/obj/item/grenade/c4/x4 = 1,
+		/obj/item/storage/box/flashbangs = 1,
+		/obj/item/storage/medkit/regular = 1,
+		/obj/item/disk/nuclear,
+	)
