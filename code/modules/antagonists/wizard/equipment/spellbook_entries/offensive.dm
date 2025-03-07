@@ -128,13 +128,13 @@
 
 /datum/spellbook_entry/item/mjolnir
 	name = "Mjolnir"
-	desc = "Могучий молот, одолженный у Тора, бога грома. Он трещит от едва сдерживаемой силы."
+	desc = "Могучий молот, одолженный у Тора, бога грома. Он трещит от едва сдерживаемой силы. Требует обе руки для раскрытия полного потенциала."
 	item_path = /obj/item/mjollnir
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
 
 /datum/spellbook_entry/item/singularity_hammer
 	name = "Singularity Hammer"
-	desc = "Молот, который создает мощное поле гравитации в месте удара, притягивая все, что находится рядом, к точке удара."
+	desc = "Молот, который создает мощное поле гравитации в месте удара, притягивая все, что находится рядом, к точке удара. Требует обе руки для раскрытия полного потенциала."
 	item_path = /obj/item/singularityhammer
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
 

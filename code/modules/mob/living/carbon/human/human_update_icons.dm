@@ -396,7 +396,8 @@ There are several things that need to be remembered:
 		var/icon_file = 'icons/mob/clothing/head/default.dmi'
 		// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
 		var/list/icon_files_species = list(
-			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/head.dmi',
+			"vulpkanin" = 'icons/bandastation/mob/species/vulpkanin/clothing/head.dmi',
+			"tajaran" = 'icons/bandastation/mob/species/tajaran/clothing/head.dmi'
 		)
 
 		var/mutant_override = FALSE
@@ -468,7 +469,8 @@ There are several things that need to be remembered:
 		var/icon_file = DEFAULT_SUIT_FILE
 		// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
 		var/list/icon_files_species = list(
-			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/suit.dmi',
+			"vulpkanin" = 'icons/bandastation/mob/species/vulpkanin/clothing/suit.dmi',
+			"tajaran" = 'icons/bandastation/mob/species/tajaran/clothing/suit.dmi'
 		)
 
 		var/mutant_override = FALSE
@@ -514,7 +516,7 @@ There are several things that need to be remembered:
 			if(hud_used.hud_shown)
 				client.screen += r_store
 			update_observer_view(r_store)
-
+	// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
 /mob/living/carbon/human/update_worn_mask(update_obscured = TRUE)
 	remove_overlay(FACEMASK_LAYER)
 
@@ -538,7 +540,8 @@ There are several things that need to be remembered:
 
 		var/icon_file = 'icons/mob/clothing/mask.dmi'
 		var/list/icon_files_species = list(
-			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/mask.dmi',
+			"vulpkanin" = 'icons/bandastation/mob/species/vulpkanin/clothing/mask.dmi',
+			"tajaran" = 'icons/bandastation/mob/species/tajaran/clothing/mask.dmi'
 		)
 
 		var/mutant_override = FALSE
@@ -557,6 +560,7 @@ There are several things that need to be remembered:
 
 		var/mutable_appearance/mask_overlay = wear_mask.build_worn_icon(default_layer = FACEMASK_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null)
 		my_head.worn_mask_offset?.apply_offset(mask_overlay)
+	// BANDASTATION EDIT STOP - SPECIES CLOTHING ICONS
 		overlays_standing[FACEMASK_LAYER] = mask_overlay
 
 	apply_overlay(FACEMASK_LAYER)

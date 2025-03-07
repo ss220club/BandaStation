@@ -102,6 +102,10 @@
 	var/list/failed_special_equipment
 	/// A list to keep track of which books a person has read (to prevent people from reading the same book again and again for positive mood events)
 	var/list/book_titles_read
+	// BANDASTATION EDIT START - STORYTELLER
+	/// Variable that lets the event picker see if someones getting chosen or not
+	var/picking = FALSE
+	// BANDASTATION EDIT END - STORYTELLER
 
 /datum/mind/New(_key)
 	key = _key
@@ -205,7 +209,7 @@
 
 	RegisterSignal(new_character, COMSIG_LIVING_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
-		new_character.key = key //now transfer the key to link the client to our new body
+		new_character.PossessByPlayer(key) //now transfer the key to link the client to our new body
 	if(new_character.client)
 		LAZYCLEARLIST(new_character.client.recent_examines)
 		new_character.client.init_verbs() // re-initialize character specific verbs

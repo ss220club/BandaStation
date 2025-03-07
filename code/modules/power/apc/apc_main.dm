@@ -508,10 +508,7 @@
 			if(get_malf_status(user))
 				malfvacate()
 		if("reboot")
-			failure_timer = 0
-			force_update = FALSE
-			update_appearance()
-			update()
+			reboot() // BANDASTATION EDIT START - moved code to reboot proc
 		if("emergency_lighting")
 			emergency_lights = !emergency_lights
 			for (var/list/zlevel_turfs as anything in area.get_zlevel_turf_lists())
@@ -527,6 +524,14 @@
 	. = ..()
 	if(user == remote_control_user)
 		disconnect_remote_access()
+
+// BANDASTATION ADDITION START
+/obj/machinery/power/apc/proc/reboot()
+	failure_timer = 0
+	force_update = FALSE
+	update_appearance()
+	update()
+// BANDASTATION ADDITION END
 
 /**
  * APC early processing. This gets processed after any other machine on the powernet does.
