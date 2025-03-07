@@ -1,5 +1,3 @@
-GLOBAL_DATUM(who_tgui, /datum/tgui_who)
-
 /datum/tgui_who
 	/// Client of whoever is using this datum
 	var/client/viewer
