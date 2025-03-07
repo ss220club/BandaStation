@@ -2,6 +2,7 @@
 
 #include "code/~defines.dm"
 
+#include "code/_brain.dm"
 #include "code/bodyparts/head.dm"
 #include "code/cargo/exports/materials.dm"
 #include "code/cargo/packs/goodies.dm"
@@ -21,6 +22,5 @@
 #include "code/supply_packs.dm"
 #include "code/weapons/baton.dm"
 #include "code/wounds/cranial_fissure.dm"
-#include "code/_brain.dm"
 
 #include "code/~undefs.dm"
