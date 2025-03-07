@@ -49,3 +49,9 @@
 
 // Scientist
 #include "code/job_types/scientist/trim.dm"
+
+// Explorer
+#include "code/job_types/explorer/job.dm"
+#include "code/job_types/explorer/landmarks.dm"
+#include "code/job_types/explorer/pda.dm"
+#include "code/job_types/explorer/trim.dm"

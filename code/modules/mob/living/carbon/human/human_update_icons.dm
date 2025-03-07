@@ -396,8 +396,8 @@ There are several things that need to be remembered:
 		var/icon_file = 'icons/mob/clothing/head/default.dmi'
 		// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
 		var/list/icon_files_species = list(
-			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/head.dmi',
-			"tajaran" = 'modular_bandastation/species/icons/mob/species/tajaran/clothing/head.dmi'
+			"vulpkanin" = 'icons/bandastation/mob/species/vulpkanin/clothing/head.dmi',
+			"tajaran" = 'icons/bandastation/mob/species/tajaran/clothing/head.dmi'
 		)
 
 		var/mutant_override = FALSE
@@ -469,8 +469,8 @@ There are several things that need to be remembered:
 		var/icon_file = DEFAULT_SUIT_FILE
 		// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
 		var/list/icon_files_species = list(
-			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/suit.dmi',
-			"tajaran" = 'modular_bandastation/species/icons/mob/species/tajaran/clothing/suit.dmi'
+			"vulpkanin" = 'icons/bandastation/mob/species/vulpkanin/clothing/suit.dmi',
+			"tajaran" = 'icons/bandastation/mob/species/tajaran/clothing/suit.dmi'
 		)
 
 		var/mutant_override = FALSE
@@ -540,8 +540,8 @@ There are several things that need to be remembered:
 
 		var/icon_file = 'icons/mob/clothing/mask.dmi'
 		var/list/icon_files_species = list(
-			"vulpkanin" = 'modular_bandastation/species/icons/mob/species/vulpkanin/clothing/mask.dmi',
-			"tajaran" = 'modular_bandastation/species/icons/mob/species/tajaran/clothing/mask.dmi'
+			"vulpkanin" = 'icons/bandastation/mob/species/vulpkanin/clothing/mask.dmi',
+			"tajaran" = 'icons/bandastation/mob/species/tajaran/clothing/mask.dmi'
 		)
 
 		var/mutant_override = FALSE
