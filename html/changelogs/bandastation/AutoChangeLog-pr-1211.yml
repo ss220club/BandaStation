@@ -1,4 +1,0 @@
-author: "AyIong"
-delete-after: True
-changes:
-  - bugfix: "TGUI Say снова распознаёт кириллицу в ключах, и LOOC/Whisper теперь не чёрные."
