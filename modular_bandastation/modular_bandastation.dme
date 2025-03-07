@@ -60,7 +60,6 @@
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
 #include "implants/_implants.dme"
-#include "weapons/_weapons.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
