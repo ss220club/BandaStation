@@ -500,7 +500,7 @@
 	description = "Этот пляж принадлежит всем в равной степени."
 	color = "#bb2020"
 	boozepwr = 40
-	taste_description = "Равенство"
+	taste_description = "равенство"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_GOOD
 	glass_price = DRINK_PRICE_EASY
@@ -524,13 +524,14 @@
 		/datum/reagent/silicon = 1,
 		/datum/reagent/consumable/grenadine = 2,
 	)
+	mix_message = "Красный свет из сосуда заполняет всё вокруг."
 
 /datum/reagent/consumable/ethanol/red_january
 	name = "Red January"
 	description = "От этого напитка так и пахнет Революцией."
 	color = "#bb2020"
 	boozepwr = 30
-	taste_description = "Кровь капитализма"
+	taste_description = "кровь капитализма"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_VERYGOOD
 	glass_price = DRINK_PRICE_EASY
@@ -550,12 +551,13 @@
 		/datum/reagent/consumable/orangejuice = 1,
 		/datum/reagent/consumable/ice = 1,
 	)
+	mix_message = "Звучат призывы к кровавой революции."
 
 /datum/reagent/consumable/five_year_plan
 	name = "Five-Year Plan"
 	description = "Высокая в небе звезда зовет меня в путь."
 	color = "#1f1911"
-	taste_description = "Переработки во имя светлого будущего"
+	taste_description = "переработки во имя светлого будущего"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_VERYGOOD
 	glass_price = DRINK_PRICE_EASY
@@ -573,16 +575,17 @@
 		/datum/reagent/consumable/coffee = 2,
 		/datum/reagent/fuel = 3,
 	)
+	mix_message = "Из сосуда начинает валить дым."
 
 /datum/reagent/consumable/ethanol/galactional
 	name = "Galactional"
 	description = "Пролетарии Галактики - объединяйтесь!"
 	color = "#e65333"
-	boozepwr = 30
-	taste_description = "Галактическое единство близко"
+	boozepwr = 50
+	taste_description = "галактическое единство близко"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_FANTASTIC
-	glass_price = DRINK_PRICE_EASY
+	glass_price = DRINK_PRICE_MEDIUM
 
 /datum/glass_style/drinking_glass/galactional
 	required_drink_type = /datum/reagent/consumable/ethanol/galactional
@@ -600,4 +603,5 @@
 		/datum/reagent/consumable/ethanol/champagne = 1,
 		/datum/reagent/consumable/space_cola = 1,
 	)
+	mix_message = "Красный свет из сосуда заполняет всё вокруг."
 
