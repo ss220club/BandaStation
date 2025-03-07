@@ -1,0 +1,3 @@
+#include "_weapons.dm"
+
+#include "code/baton.dm"
