@@ -321,7 +321,7 @@
 			ert_request(reason, user)
 			to_chat(user, span_notice("ERT request sent."))
 			user.log_message("has requested an Emergency Response Team from CentCom with reason \"[reason]\"", LOG_SAY)
-			priority_announce("An Emergency Request Team has been requested by [user]. Confirmation or denial of this request will be sent shortly.", "[command_name()] Emergency Response Team Division", SSstation.announcer.get_rand_report_sound())
+			priority_announce("Отправлен запрос ОБР. Инициатор: [name]. Запрос принят к рассмотрению. Решение будет направлено в ближайшее время.", "[command_name()]: Служба быстрого реагирования", SSstation.announcer.get_rand_report_sound())
 			playsound(src, 'sound/machines/terminal/terminal_prompt.ogg', 50, FALSE)
 			COOLDOWN_START(src, important_action_cooldown, IMPORTANT_ACTION_COOLDOWN)
 		// BANDASTATION ADDITION - END

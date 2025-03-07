@@ -109,7 +109,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 			var/slot_text = english_list(slots_list)
 			message_admins("[key_name_admin(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
 			log_admin("[key_name(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
-			priority_announce("Attention, [station_name()]. We are attempting to assemble an ERT. Standby.", "ERT Protocol Activated")
+			priority_announce("Внимание, [station_name()]. Мы рассматриваем возможность отправки ОБР, ожидайте.", "Активирован протокол ОБР")
 			makeERTFromSlots(new_ert, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots)
 
 		if("view_player_panel")
@@ -117,10 +117,10 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 
 		if("denyErt")
 			GLOB.ert_request_answered = TRUE
-			var/message = "[station_name()], we are unfortunately unable to send you an Emergency Response Team at this time."
+			var/message = "[station_name()], к сожалению, в данный момент мы не можем направить к вам ОБР."
 			if(params["reason"])
 				message += " Your ERT request has been denied for the following reasons:\n\n[params["reason"]]"
-			priority_announce(message, "ERT Unavailable")
+			priority_announce(message, "ОБР недоступно")
 		else
 			return FALSE
 
