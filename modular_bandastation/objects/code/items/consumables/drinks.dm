@@ -582,7 +582,7 @@
 	description = "Пролетарии Галактики - объединяйтесь!"
 	color = "#e65333"
 	boozepwr = 50
-	taste_description = "галактическое единство близко"
+	taste_description = "галактическое единство"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_FANTASTIC
 	glass_price = DRINK_PRICE_MEDIUM
