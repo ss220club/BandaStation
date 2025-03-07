@@ -300,6 +300,13 @@
 		else
 			new_mail.junk_mail()
 
+	if(check_holidays(APRIL_FOOLS))
+		var/static/mail_ghoul = FALSE
+		if(!mail_ghoul && prob(3 * mail_count))
+			var/obj/effect/mob_spawn/ghost_role/human/mail_ghoul/ghoul = new(src)
+			mail_ghoul = TRUE
+			ghoul.do_poll()
+
 	update_icon()
 
 /// Crate for mail that automatically depletes the economy subsystem's pending mail counter.

@@ -326,3 +326,240 @@
 		/obj/item/gun/ballistic/automatic/pistol/aps,
 		/obj/item/paper/fluff/ruins/forgottenship/password,
 	)
+
+/obj/effect/mob_spawn/ghost_role/human/mail_ghoul
+	name = "ominous package"
+	icon = 'icons/obj/storage/wrapping.dmi'
+	icon_state = "deliverypackage5"
+	prompt_name = "a mail ghoul"
+	you_are_text = "You are the mail ghoul!"
+	flavour_text = "You are the mail ghoul, a former mail carrier who fell into the depths of central command's mailroom. \
+		You have escaped, and now - corrupted by the endless waves of paper, stamps, and spam - you seek to deliver people... to the afterlife!... \
+		If they neglect the four digit code on the destination address or forget to sign for their package. Otherwise you just wanna get back to work."
+	outfit = /datum/outfit/mail_ghoul
+	mob_species = /datum/species/zombie
+	hairstyle = /datum/sprite_accessory/hair/bald::name
+	facial_hairstyle = /datum/sprite_accessory/facial_hair/shaved::name
+	var/polling = FALSE
+
+/obj/effect/mob_spawn/ghost_role/human/mail_ghoul/attack_ghost(mob/dead/observer/user)
+	if(!polling)
+		return ..()
+	to_chat(user, span_warning("The mail ghoul is being polled for."))
+
+/obj/effect/mob_spawn/ghost_role/human/mail_ghoul/proc/do_poll()
+	set waitfor = FALSE
+
+	if(polling)
+		return
+
+	polling = TRUE
+	notify_ghosts(
+		"A mail ghoul has arrived!",
+		source = src,
+		header = "Delivery",
+	)
+	var/mob/ghost = SSpolling.poll_ghosts_for_target(
+		question = "Do you want to play as the mail ghoul?",
+		check_jobban = ROLE_SYNDICATE,
+		poll_time = 20 SECONDS,
+		checked_target = src,
+		alert_pic = src,
+		role_name_text = "mail ghoul",
+	)
+	if(isnull(ghost))
+		polling = FALSE
+		if(iscloset(loc))
+			RegisterSignal(loc, COMSIG_CLOSET_POST_OPEN, PROC_REF(del_package))
+		return
+	create_from_ghost(ghost)
+
+/obj/effect/mob_spawn/ghost_role/human/mail_ghoul/proc/del_package(datum/source, mob/user)
+	SIGNAL_HANDLER
+	to_chat(user, span_warning("You feel an ominous aura from [source], but there's nothing out of the ordinary inside."))
+	qdel(src)
+
+/obj/effect/mob_spawn/ghost_role/human/mail_ghoul/create(mob/mob_possessor, newname)
+	var/mob/living/spawned_mob = ..()
+	for(var/obj/structure/closet/box in spawned_mob.loc)
+		spawned_mob.set_resting(TRUE, instant = TRUE)
+		spawned_mob.forceMove(box)
+		spawned_mob.AddComponent(/datum/component/block_walking_out_early, box)
+		spawned_mob.set_resting(FALSE, silent = FALSE)
+		var/obj/item/satchel = spawned_mob.get_item_by_slot(ITEM_SLOT_BELT)
+		for(var/obj/item/mail/mail in box)
+			if(prob(50) && length(satchel?.contents) < 7)
+				mail.forceMove(satchel)
+		break
+	return spawned_mob
+
+/obj/effect/mob_spawn/ghost_role/human/mail_ghoul/equip(mob/living/spawned_mob)
+	. = ..()
+	for(var/obj/item/equipment in spawned_mob.get_equipped_items())
+		ADD_TRAIT(equipment, TRAIT_NODROP, INNATE_TRAIT)
+	var/obj/item/clothing/under/mailsuit = spawned_mob.get_item_by_slot(ITEM_SLOT_ICLOTHING)
+	if(istype(mailsuit))
+		mailsuit.has_sensor = BROKEN_SENSORS
+		mailsuit.sensor_mode = SENSOR_OFF
+		mailsuit.update_wearer_status()
+
+/obj/effect/mob_spawn/ghost_role/human/mail_ghoul/special(mob/living/carbon/human/spawned_mob, mob/mob_possessor)
+	. = ..()
+	var/datum/antagonist/ghoul = new()
+	ghoul.silent = TRUE
+	ghoul.name = "Mail Ghoul"
+	var/datum/objective/rip = new()
+	rip.no_failure = TRUE
+	rip.explanation_text = "Maul whoever opens your crate."
+	ghoul.objectives += rip
+	var/datum/objective/tear = new()
+	tear.no_failure = TRUE
+	tear.explanation_text = "Deliver the former mail carrier's body to someone. \
+		Good choices include the coroner, the detective, the quartermaster, or the chaplain."
+	ghoul.objectives += tear
+	var/datum/objective/until_it_is_done = new()
+	until_it_is_done.no_failure = TRUE
+	until_it_is_done.explanation_text = "Take over as the station's new mail carrier. \
+		If anyone forgets to pick up their package, remind them... With force if necessary. But try words first."
+	ghoul.objectives += until_it_is_done
+
+	ADD_TRAIT(spawned_mob, TRAIT_HULK, INNATE_TRAIT)
+	ADD_TRAIT(spawned_mob, TRAIT_STRONG_GRABBER, INNATE_TRAIT)
+	ADD_TRAIT(spawned_mob, TRAIT_CHUNKYFINGERS, INNATE_TRAIT)
+	spawned_mob.add_movespeed_mod_immunities(INNATE_TRAIT, /datum/movespeed_modifier/damage_slowdown)
+	spawned_mob.mind.add_antag_datum(ghoul)
+	spawned_mob.AddComponent(/datum/component/strong_pull)
+	spawned_mob.AddComponent( \
+		/datum/component/mutant_hands, \
+		mutant_hand_path = /obj/item/mutant_hand/mailghoul, \
+		ignored = LEFT_HANDS, \
+	)
+	spawned_mob.AddComponent( \
+		/datum/component/regenerator, \
+		regeneration_delay = 4 SECONDS, \
+		brute_per_second = 0.25, \
+		burn_per_second = 0.25, \
+		tox_per_second = 0.1, \
+		oxy_per_second = 0.5, \
+		heals_wounds = TRUE, \
+	)
+	for(var/obj/item/bodypart/leg in spawned_mob.bodyparts)
+		leg.speed_modifier = 0.95
+	spawned_mob.update_bodypart_speed_modifier()
+	// my antag will have stun immunity and god mode and
+	spawned_mob.physiology.stun_mod *= 0.25
+	spawned_mob.physiology.stamina_mod *= 0.25
+	spawned_mob.physiology.knockdown_mod *= (1.5 * (1 / spawned_mob.physiology.stun_mod)) // stunmod applies to knockdowns
+	spawned_mob.physiology.damage_resistance = 33
+	spawned_mob.set_combat_mode(TRUE)
+
+	var/obj/item/organ/tongue/ghoul/tongue = new()
+	tongue.Insert(spawned_mob, movement_flags = DELETE_IF_REPLACED)
+
+	spawned_mob.grant_language(/datum/language/uncommon, source = LANGUAGE_MIND)
+	spawned_mob.grant_language(/datum/language/common, source = LANGUAGE_MIND)
+
+/datum/outfit/mail_ghoul
+	name = "Mail Ghoul"
+	id = /obj/item/card/id/advanced/mailman
+	uniform = /obj/item/clothing/under/misc/mailman
+	head = /obj/item/clothing/head/costume/mailman
+	shoes = /obj/item/clothing/shoes/laceup
+	r_pocket = /obj/item/tank/internals/emergency_oxygen
+	ears = /obj/item/radio/headset
+	belt = /obj/item/storage/bag/mail
+	back = /obj/item/storage/backpack/satchel/leather
+
+/obj/item/card/id/advanced/mailman
+	name = "mail carrier ID"
+	desc = "An ID card for a mail carrier. Looks quite dated."
+	trim = /datum/id_trim/job/cargo_technician
+
+/obj/item/card/id/advanced/mailman/Initialize(mapload)
+	. = ..()
+	registered_age = rand(40, 80)
+	assignment = "Mail Carrier"
+	update_label()
+
+/obj/item/mutant_hand/mailghoul
+	name = "mail ghoul claw"
+	desc = "A clawed hand, once capable of delivering mail, now capable of delivering death... AND mail."
+	hitsound = 'sound/effects/hallucinations/growl1.ogg'
+	force = 16
+	demolition_mod = 1.5
+	wound_bonus = -30
+	bare_wound_bonus = 30
+	sharpness = SHARP_EDGED
+	obj_flags = CONDUCTS_ELECTRICITY
+
+/obj/item/organ/tongue/ghoul
+	name = "ghoul tongue"
+	desc = "I'm here to pick up an order. Two large pepperoni and a calzone. Name is \"Fuck you.\""
+	icon_state = "tonguezombie"
+	say_mod = "moans"
+	modifies_speech = TRUE
+	taste_sensitivity = 32
+	liked_foodtypes = MEAT | GRAIN | VEGETABLES | DAIRY
+	disliked_foodtypes = NONE
+
+/obj/item/organ/tongue/ghoul/modify_speech(datum/source, list/speech_args)
+	var/message = speech_args[SPEECH_MESSAGE]
+	var/list/words = splittext(message, " ")
+	var/list/new_sentence = list()
+	for(var/word in words)
+		switch(copytext_char(word, -1))
+			if("!", ".", "?")
+				word += ".."
+			else
+				if(word == words[length(words)])
+					word += "..."
+
+		new_sentence += word
+	speech_args[SPEECH_MESSAGE] = jointext(new_sentence, " ")
+
+/datum/component/block_walking_out_early
+	COOLDOWN_DECLARE(spam_cd)
+	VAR_PRIVATE/obj/structure/closet/box
+
+/datum/component/block_walking_out_early/Initialize(obj/structure/closet/box)
+	. = ..()
+	src.box = box
+	RegisterSignal(box, COMSIG_CLOSET_PRE_OPEN, PROC_REF(block_walk))
+	RegisterSignal(box, COMSIG_ATOM_EXITED, PROC_REF(someone_left))
+	RegisterSignal(box, COMSIG_QDELETING, PROC_REF(qdel_us))
+	addtimer(CALLBACK(src, PROC_REF(timeout)), 5 MINUTES, TIMER_DELETE_ME)
+
+/datum/component/block_walking_out_early/Destroy()
+	UnregisterSignal(box, list(
+		COMSIG_CLOSET_PRE_OPEN,
+		COMSIG_ATOM_EXITED,
+		COMSIG_QDELETING,
+	))
+	box = null
+	return ..()
+
+/datum/component/block_walking_out_early/proc/block_walk(datum/source, mob/user)
+	SIGNAL_HANDLER
+	if(user != parent)
+		return NONE
+	if(COOLDOWN_FINISHED(src, spam_cd))
+		to_chat(user, span_warning("I don't want to get up yet. It's comfy in here. 5 more minutes..."))
+		COOLDOWN_START(src, spam_cd, 5 SECONDS)
+	return BLOCK_OPEN
+
+/datum/component/block_walking_out_early/proc/someone_left(datum/source, atom/gone)
+	SIGNAL_HANDLER
+	if(gone != parent)
+		return
+	qdel(src)
+
+/datum/component/block_walking_out_early/proc/qdel_us(datum/source)
+	SIGNAL_HANDLER
+	qdel(src)
+
+/datum/component/block_walking_out_early/proc/timeout()
+	SIGNAL_HANDLER
+	if(QDELETED(src))
+		return
+	to_chat(parent, span_red("Okay, is seriously NO ONE coming in to pick up the mail? Fine, I guess I'll go deliver it myself."))
+	qdel(src)
