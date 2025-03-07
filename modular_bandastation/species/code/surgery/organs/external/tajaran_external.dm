@@ -71,7 +71,7 @@
 		tail_markings_overlay = new
 		tail_markings_overlay.tail_markings_key = tail_markings_key
 		tail_markings_overlay.color_source = ORGAN_COLOR_OVERRIDE
-		tail_markings_overlay.tajaran_tail_markings_color = owner.dna.features["furcolor_tajaran_third"]
+		tail_markings_overlay.tajaran_tail_markings_color = owner.dna.features["tajaran_tail_markings_color"]
 		tail_markings_overlay.set_appearance_from_name(feature_name)
 		bodypart.add_bodypart_overlay(tail_markings_overlay)
 
