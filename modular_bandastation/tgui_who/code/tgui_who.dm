@@ -1,20 +1,21 @@
 GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 
 /datum/tgui_who
-	/// Client of whoever is using this datum
-	var/client/viewer
-	/// Selected client mob for advanced info. Admin only.
-	var/mob/living/subject
 	/// If true, modal window with additional mob info is open. Admin only.
 	var/modal_open = FALSE
+	/// Weakref to selected mob for advanced info. Admin only.
+	var/datum/weakref/mob_subject_ref = null
+	/// Weakref to client of whoever is using this datum.
+	var/datum/weakref/viewer_client_ref = null
 
 /datum/tgui_who/New(user)
 	if(istype(user, /client))
-		var/client/client = user
-		viewer = client
-	else
+		viewer_client_ref = WEAKREF(user)
+	else if(istype(user, /mob))
 		var/mob/mob = user
-		viewer = mob.client
+		viewer_client_ref = WEAKREF(mob.client)
+	else
+		CRASH("not client or mob passed: [user]")
 
 /datum/tgui_who/ui_state()
 	return GLOB.always_state
@@ -27,6 +28,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 
 /datum/tgui_who/ui_data(mob/user)
 	var/list/data = list()
+	var/client/viewer = get_viewer()
 	data["user"] = list(
 		"key" = viewer.key,
 		"ping" = list(
@@ -36,51 +38,32 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		"admin"  = !!viewer.holder,
 	)
 	data["modalOpen"] = modal_open
+
 	if(modal_open)
-		data["subject"] = list(
-			"key" = subject.client.key,
-			"ckey" = subject.client.ckey,
-			"ping" = list(
-				"lastPing" = subject.client.lastping,
-				"avgPing" = subject.client.avgping,
-			),
-			"name" = list(
-				"real" = subject?.real_name,
-				"mind" = subject?.mind?.name,
-			),
-			"role" = get_role(subject),
-			"type" = subject.type,
-			"gender" = subject.gender,
-			"state" = get_state(subject),
-			"health" = get_health(subject),
-			"location" = get_position(subject),
-			"accountAge" = subject.client.account_age,
-			"accountIp" = subject.client.address,
-			"byondVersion" = "[subject.client.byond_version].[subject.client.byond_build]",
-		)
+		data["subject"] = get_subject_ui_data()
+
 	return data
 
 /datum/tgui_who/ui_static_data(mob/user)
 	var/list/data = list()
 
 	var/list/clients = list()
-	for(var/client/client in GLOB.clients)
-		clients[client] += list(
-			"key" = client.key,
-			"ping" = list(
-				"lastPing" = client.lastping,
-				"avgPing" = client.avgping,
-			)
+	for(var/client/client as anything in GLOB.clients)
+		var/list/client_data = list()
+		client_data["key"] = client.key
+		client_data["ping"] = list(
+			"lastPing" = client.lastping,
+			"avgPing" = client.avgping,
 		)
 
 		// More info for admins
-		if(viewer.holder && check_rights(R_ADMIN, FALSE))
-			clients[client] += list(
-				"status" = get_status(client.mob),
-				"mobRef" = REF(client.mob),
-				"accountAge" = client.account_age,
-				"byondVersion" = "[client.byond_version].[client.byond_build]",
-			)
+		if(get_viewer().holder && check_rights(R_ADMIN, FALSE))
+			client_data["status"] = get_status(client.mob)
+			client_data["mobRef"] = REF(client.mob)
+			client_data["accountAge"] = client.account_age
+			client_data["byondVersion"] = "[client.byond_version].[client.byond_build]"
+
+		clients[client] = client_data
 
 	data["clients"] = clients
 	return data
@@ -90,7 +73,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	if(.)
 		return
 
-	var/mob/user = viewer.mob
+	var/mob/user = get_viewer().mob
 	// Free to use by anyone
 	switch(action)
 		if("update")
@@ -98,8 +81,7 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			return TRUE
 
 		if("hide_more_info")
-			modal_open = FALSE
-			subject = null
+			hide_more_info()
 			return TRUE
 
 	if(!check_rights(R_ADMIN))
@@ -110,14 +92,15 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 		return FALSE
 
 	if(!ismob(user_subject))
-		to_chat(viewer, "Просматривать дополнительную информацию, можно только у /mob.")
+		to_chat(get_viewer(), "Просматривать дополнительную информацию, можно только у /mob.")
 		return FALSE
 
 	// Admin only actions
 	switch(action)
 		if("show_more_info")
 			modal_open = TRUE
-			subject = user_subject
+			mob_subject_ref = WEAKREF(user_subject)
+			RegisterSignal(user_subject, COMSIG_QDELETING, PROC_REF(on_subject_qdeleting))
 			return TRUE
 
 		if("follow")
@@ -132,28 +115,56 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 			return TRUE
 
 		if("smite")
-			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/admin_smite, user_subject)
+			SSadmin_verbs.dynamic_invoke_verb(get_viewer(), /datum/admin_verb/admin_smite, user_subject)
 			return TRUE
 
 		if("subtlepm")
-			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/cmd_admin_subtle_message, user_subject)
+			SSadmin_verbs.dynamic_invoke_verb(get_viewer(), /datum/admin_verb/cmd_admin_subtle_message, user_subject)
 			return TRUE
 
 		if("view_variables")
-			viewer.debug_variables(user_subject)
+
+			get_viewer().debug_variables(user_subject)
 			return TRUE
 
 		if("traitor_panel")
 			if(!SSticker.HasRoundStarted())
-				tgui_alert(viewer,"Игра ещё не началась!")
+				tgui_alert(get_viewer(), "Игра ещё не началась!")
 				return FALSE
 
-			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/show_traitor_panel, user_subject)
+			SSadmin_verbs.dynamic_invoke_verb(get_viewer(), /datum/admin_verb/show_traitor_panel, user_subject)
 			return TRUE
 
 		if("player_panel")
-			SSadmin_verbs.dynamic_invoke_verb(viewer, /datum/admin_verb/show_player_panel, user_subject)
+			SSadmin_verbs.dynamic_invoke_verb(get_viewer(), /datum/admin_verb/show_player_panel, user_subject)
 			return TRUE
+
+/datum/tgui_who/proc/get_subject_ui_data()
+	var/mob/subject = mob_subject_ref?.resolve()
+	if(isnull(subject))
+		return list()
+
+	return list(
+		"key" = subject.client.key,
+		"ckey" = subject.client.ckey,
+		"ping" = list(
+			"lastPing" = subject.client.lastping,
+			"avgPing" = subject.client.avgping,
+		),
+		"name" = list(
+			"real" = subject?.real_name,
+			"mind" = subject?.mind?.name,
+		),
+		"role" = get_role(subject),
+		"type" = subject.type,
+		"gender" = subject.gender,
+		"state" = get_state(subject),
+		"health" = get_health(subject),
+		"location" = get_position(subject),
+		"accountAge" = subject.client.account_age,
+		"accountIp" = subject.client.address,
+		"byondVersion" = "[subject.client.byond_version].[subject.client.byond_build]",
+	)
 
 /datum/tgui_who/proc/get_status(mob/user)
 	var/list/status = list()
@@ -218,9 +229,40 @@ GLOBAL_DATUM(who_tgui, /datum/tgui_who)
 	role["antagonist"] = user.mind.antag_datums
 	return role
 
+/datum/tgui_who/proc/on_subject_qdeleting()
+	SIGNAL_HANDLER
+
+	hide_more_info()
+
+/datum/tgui_who/proc/hide_more_info()
+	mob_subject_ref = null
+	modal_open = FALSE
+
+/datum/tgui_who/proc/get_viewer() as /client
+	if(isnull(viewer_client_ref))
+		CRASH("viewer_client_ref is null")
+
+	var/client/viewer = viewer_client_ref.resolve()
+	if(isnull(viewer))
+		CRASH("client was removed but this datum still exists")
+
+	return viewer
+
+
+/client
+	/// Reference to existing tgui_who datum, created in `client/proc/who()`.
+	/// Used to avoid spam of creating those datums.
+	var/datum/tgui_who/who = null
+
 /client/who()
 	set name = "Who"
 	set category = "OOC"
 
-	var/datum/tgui_who/who = new(src)
+	if(isnull(who))
+		who = new(src)
+
 	who.ui_interact(mob)
+
+/client/Destroy()
+	QDEL_NULL(who)
+	. = ..()
