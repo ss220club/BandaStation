@@ -83,7 +83,7 @@
 /datum/job/human_ai/announce_job(mob/living/joining_mob)
 	. = ..()
 	if(SSticker.HasRoundStarted())
-		minor_announce("Из-за неудачного исследования, [joining_mob] был отправлен в качестве замены вашего ИИ в [AREACOORD(joining_mob)]. Пожалуйста, относитесь к нему с уважанием.")
+		minor_announce("Из-за неудачного опыта [joining_mob] был отправлен в качестве замены вашего ИИ в [AREACOORD(joining_mob)]. Пожалуйста, относитесь к нему с уважанием.")
 
 /datum/job/human_ai/get_radio_information()
 	return "<b>Prefix your message with :b to speak with cyborgs.</b>"
