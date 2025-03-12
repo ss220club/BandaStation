@@ -25,7 +25,7 @@ export function Copypasta(props) {
           />
           <Button
             fluid
-            content="Create Object"
+            content={'Create Object'}
             onClick={() => act('create-object')}
           />
           <Button
