@@ -6343,6 +6343,7 @@
 	icon_state = "dirt-flat-1"
 	},
 /obj/effect/decal/cleanable/cobweb/cobweb2,
+/obj/structure/rack,
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
@@ -8596,6 +8597,7 @@
 "bKt" = (
 /obj/item/weldingtool,
 /obj/item/clothing/head/utility/welding,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/lesser)
 "bKw" = (
@@ -10593,6 +10595,7 @@
 /obj/item/target/clown,
 /obj/item/target/syndicate,
 /obj/item/radio/intercom/directional/west,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/science/auxlab/firing_range)
 "cdU" = (
@@ -20658,6 +20661,8 @@
 	},
 /obj/effect/spawner/random/engineering/tool,
 /obj/effect/spawner/random/engineering/tool,
+/obj/structure/rack,
+/obj/structure/rack,
 /turf/open/floor/iron/dark/side,
 /area/station/maintenance/department/science)
 "dZy" = (
@@ -24059,6 +24064,8 @@
 "eGW" = (
 /obj/effect/turf_decal/bot,
 /obj/effect/spawner/random/maintenance/two,
+/obj/structure/rack,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/cargo/warehouse)
 "eGY" = (
@@ -49894,6 +49901,8 @@
 "jMn" = (
 /obj/item/storage/toolbox/mechanical,
 /obj/machinery/light/small/directional/south,
+/obj/structure/rack,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/lesser)
 "jMr" = (
@@ -52476,6 +52485,7 @@
 "kiX" = (
 /obj/item/pipe_dispenser,
 /obj/effect/turf_decal/bot,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/lesser)
 "kiY" = (
@@ -74702,6 +74712,7 @@
 "oBw" = (
 /obj/effect/turf_decal/bot,
 /obj/effect/spawner/random/maintenance,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/cargo/warehouse)
 "oBx" = (
@@ -75211,6 +75222,9 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
+"oHa" = (
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/security/brig)
 "oHd" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
@@ -80731,6 +80745,7 @@
 "pMQ" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/camera/autoname/directional/north,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/cargo/warehouse)
 "pMW" = (
@@ -83139,6 +83154,7 @@
 "qlt" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/cargo/warehouse)
 "qlu" = (
@@ -87287,6 +87303,7 @@
 	icon_state = "dirt-flat-1"
 	},
 /obj/effect/spawner/random/engineering/tool,
+/obj/structure/rack,
 /turf/open/floor/iron/dark/side,
 /area/station/maintenance/department/science)
 "qYH" = (
@@ -121112,8 +121129,13 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "xxP" = (
-/turf/closed/wall/r_wall,
-/area/station/maintenance/department/security/brig)
+/obj/effect/turf_decal/bot,
+/obj/structure/rack,
+/obj/structure/rack,
+/obj/structure/rack,
+/obj/structure/rack,
+/turf/open/floor/iron/dark,
+/area/station/cargo/warehouse)
 "xxQ" = (
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-flat-1"
@@ -122249,6 +122271,9 @@
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-flat-1"
 	},
+/obj/structure/rack,
+/obj/structure/rack,
+/obj/structure/rack,
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
@@ -123719,6 +123744,7 @@
 /obj/effect/turf_decal/bot,
 /obj/machinery/status_display/ai/directional/south,
 /obj/machinery/light/directional/south,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/science/auxlab/firing_range)
 "xZT" = (
@@ -158040,11 +158066,11 @@ dvq
 dvq
 dvq
 dvq
-xxP
-xxP
-xxP
+oHa
+oHa
+oHa
 iLd
-xxP
+oHa
 nOi
 nOi
 gkm
@@ -158301,7 +158327,7 @@ ljF
 hcY
 kuh
 kuh
-xxP
+oHa
 fZI
 fZI
 gkm
@@ -158557,8 +158583,8 @@ hcY
 kgW
 joa
 nFX
-xxP
-xxP
+oHa
+oHa
 xJH
 xJH
 xJn
@@ -158814,7 +158840,7 @@ vwh
 pgA
 pgA
 nFX
-xxP
+oHa
 xyU
 nrT
 nrT
@@ -159071,8 +159097,8 @@ vtA
 vKO
 iJM
 nFX
-xxP
-xxP
+oHa
+oHa
 xJH
 xJH
 xJn
@@ -159329,7 +159355,7 @@ anL
 pQl
 nFX
 akG
-xxP
+oHa
 fZI
 fZI
 gkm
@@ -159570,11 +159596,11 @@ fZI
 fZI
 fZI
 fZI
-xxP
-xxP
-xxP
-xxP
-xxP
+oHa
+oHa
+oHa
+oHa
+oHa
 kgW
 vbK
 nsI
@@ -159586,7 +159612,7 @@ gaK
 gaK
 nFX
 bII
-xxP
+oHa
 wfB
 wfB
 gkm
@@ -159824,10 +159850,10 @@ fZI
 fZI
 fZI
 fZI
-xxP
+oHa
 ger
-xxP
-xxP
+oHa
+oHa
 dmB
 pQl
 bVe
@@ -160078,10 +160104,10 @@ fZI
 iqz
 xJH
 xJH
-xxP
-xxP
-xxP
-xxP
+oHa
+oHa
+oHa
+oHa
 tup
 mUy
 voN
@@ -161106,21 +161132,21 @@ iqz
 xJH
 xJH
 xJH
-xxP
-xxP
-xxP
-xxP
+oHa
+oHa
+oHa
+oHa
 tbY
-xxP
-xxP
+oHa
+oHa
 wfB
 wfB
 wfB
-xxP
-xxP
-xxP
-xxP
-xxP
+oHa
+oHa
+oHa
+oHa
+oHa
 cLU
 cLU
 cLU
@@ -164792,7 +164818,7 @@ eFn
 tOi
 oBw
 qlt
-gjC
+xxP
 xdU
 qnw
 kxz
