@@ -50,6 +50,6 @@ function FpsInput(props: FeatureValueProps<number, number, FpsServerData>) {
 
 export const clientfps: Feature<number, number, FpsServerData> = {
   name: 'FPS',
-  category: 'GAMEPLAY',
+  category: 'ГЕЙМПЛЕЙ',
   component: FpsInput,
 };

@@ -8,13 +8,13 @@
 	They will become honorbound like you, and you will gain a massive favor boost!"
 	ritual_length = 30 SECONDS
 	ritual_invocations = list(
-		"A good, honorable crusade against evil is required.",
-		"We need the righteous ...",
-		"... the unflinching ...",
-		"... and the just.",
-		"Sinners must be silenced ...",
+		"Взываю к благородному крестовому походу против зла.",
+		"Нам нужны праведные ...",
+		"... непоколебимые ...",
+		"... и справедливые.",
+		"Грешники должны замолчать ...",
 	)
-	invoke_msg = "... And the code must be upheld!"
+	invoke_msg = "... И кодекс будет соблюдён!"
 	///the invited crusader
 	var/mob/living/carbon/human/new_crusader
 
@@ -78,7 +78,7 @@
 /datum/religion_rites/forgive
 	name = "Forgive"
 	desc = "Forgives someone, making them no longer considered guilty. A kind gesture, all things considered!"
-	invoke_msg = "You are absolved of sin."
+	invoke_msg = "Я отпускаю твои грехи."
 	var/mob/living/who
 
 /datum/religion_rites/forgive/perform_rite(mob/living/carbon/human/user, atom/religious_tool)
@@ -111,7 +111,7 @@
 /datum/religion_rites/summon_rules
 	name = "Summon Honorbound Rules"
 	desc = "Enscribes a paper with the honorbound rules and regulations."
-	invoke_msg = "Bring forth the holy writ!"
+	invoke_msg = "Взываю к святому писанию!"
 	///paper to turn into holy writ
 	var/obj/item/paper/writ_target
 
