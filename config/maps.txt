@@ -69,3 +69,8 @@ map cyberiad
 	maxplayers 100
 	votable
 endmap
+
+map blueshift
+	minplayers 50
+	votable
+endmap

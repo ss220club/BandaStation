@@ -16,6 +16,7 @@
 		#include "map_files\wawastation\wawastation.dmm"
 		// BANDASTATION - ADDITION STAT
 		#include "map_files\Cyberiad\Cyberiad.dmm"
+		#include "map_files\NSVBlueshift\Blueshift-bandastation.dmm"
 		// BANDASTATION - ADDITION END
 
 		#ifdef CIBUILDING
