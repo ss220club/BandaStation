@@ -6,7 +6,7 @@
 	default = ""
 	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
-/datum/config_entry/string/sever_type
+/datum/config_entry/string/server_type
 	default = "default"
 
 SUBSYSTEM_DEF(central)
@@ -29,11 +29,11 @@ SUBSYSTEM_DEF(central)
 	if(!initialized)
 		msg = "OFFLINE"
 	else
-		msg = "WL: [CONFIG_GET(flag/usewhitelist)] [CONFIG_GET(string/sever_type)]"
+		msg = "WL: [CONFIG_GET(flag/usewhitelist)] [CONFIG_GET(string/server_type)]"
 	return ..()
 
 /datum/controller/subsystem/central/proc/load_whitelist()
-	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists/ckeys?sever_type=[CONFIG_GET(string/sever_type)]&active_only=true&page=1&page_size=9999"
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists/ckeys?server_type=[CONFIG_GET(string/server_type)]&active_only=true&page=1&page_size=9999"
 
 	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(load_whitelist_callback)))
 
@@ -92,7 +92,7 @@ SUBSYSTEM_DEF(central)
 	if(ckey in GLOB.whitelist)
 		return TRUE
 
-	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists?sever_type=[CONFIG_GET(string/sever_type)]&ckey=[ckey]&page=1&page_size=1"
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists?server_type=[CONFIG_GET(string/server_type)]&ckey=[ckey]&page=1&page_size=1"
 	var/datum/http_response/response = SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list())
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
 		stack_trace("Failed to check whitelist: HTTP error - [response.error]")
@@ -111,7 +111,7 @@ SUBSYSTEM_DEF(central)
 	var/list/body = list()
 	body["player_ckey"] = ckey
 	body["admin_ckey"] = added_by
-	body["sever_type"] = CONFIG_GET(string/sever_type)
+	body["server_type"] = CONFIG_GET(string/server_type)
 	body["duration_days"] = duration_days
 
 	SShttp.create_async_request(RUSTG_HTTP_METHOD_POST, endpoint, json_encode(body), headers, CALLBACK(src, PROC_REF(add_to_whitelist_callback), ckey))
@@ -146,7 +146,7 @@ SUBSYSTEM_DEF(central)
 	var/list/body = list()
 	body["player_ckey"] = player_ckey
 	body["admin_ckey"] = admin_ckey
-	body["sever_type"] = CONFIG_GET(string/sever_type)
+	body["server_type"] = CONFIG_GET(string/server_type)
 	body["duration_days"] = duration_days
 	body["reason"] = reason
 
