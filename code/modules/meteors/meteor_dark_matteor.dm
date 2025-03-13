@@ -10,7 +10,7 @@
 	meteordrop = list(/obj/singularity/dark_matter) //what the FUCK
 	dropamt = 1
 	threat = 100
-	signature = "dark matter"
+	signature = "темной материи"
 	/// distortion to really give you that sense of oh shit
 	var/atom/movable/warp_effect/warp
 	/// and another oh shit in the form of quantum sparks

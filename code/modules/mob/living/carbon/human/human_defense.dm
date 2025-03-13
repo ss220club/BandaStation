@@ -51,8 +51,8 @@
 	if(bullet.reflectable)
 		if(check_reflect(def_zone)) // Checks if you've passed a reflection% check
 			visible_message(
-				span_danger("\The [bullet] gets reflected by [src]!"),
-				span_userdanger("\The [bullet] gets reflected by [src]!"),
+				span_danger("[capitalize(bullet.declent_ru(NOMINATIVE))] отражается от [declent_ru(GENITIVE)]!"),
+				span_userdanger("[capitalize(bullet.declent_ru(NOMINATIVE))] отражается от [declent_ru(GENITIVE)]!"),
 			)
 			// Finds and plays the block_sound of item which reflected
 			for(var/obj/item/held_item in held_items)
@@ -64,7 +64,7 @@
 			bullet.reflect(src)
 			return BULLET_ACT_FORCE_PIERCE // complete projectile permutation
 
-	if(check_block(bullet, bullet.damage, "\the [bullet]", PROJECTILE_ATTACK, bullet.armour_penetration, bullet.damage_type))
+	if(check_block(bullet, bullet.damage, "[bullet.declent_ru(ACCUSATIVE)]", PROJECTILE_ATTACK, bullet.armour_penetration, bullet.damage_type))
 		bullet.on_hit(src, 100, def_zone, piercing_hit)
 		return BULLET_ACT_HIT
 
@@ -83,7 +83,7 @@
 			return TRUE
 	return FALSE
 
-/mob/living/carbon/human/check_block(atom/hit_by, damage, attack_text = "the attack", attack_type = MELEE_ATTACK, armour_penetration = 0, damage_type = BRUTE)
+/mob/living/carbon/human/check_block(atom/hit_by, damage, attack_text = "атаку", attack_type = MELEE_ATTACK, armour_penetration = 0, damage_type = BRUTE)
 	. = ..()
 	if(. == SUCCESSFUL_BLOCK)
 		return SUCCESSFUL_BLOCK
@@ -113,14 +113,14 @@
 	. = ..()
 	if(!.)
 		return
-	var/hulk_verb = pick("smash","pummel")
-	if(check_block(user, 15, "the [hulk_verb]ing", attack_type = UNARMED_ATTACK))
+	var/hulk_verb = pick("крушит","избивает")
+	if(check_block(user, 15, "крушащий удар", attack_type = UNARMED_ATTACK))
 		return
 	var/obj/item/bodypart/arm/active_arm = user.get_active_hand()
 	playsound(loc, active_arm.unarmed_attack_sound, 25, TRUE, -1)
-	visible_message(span_danger("[user] [hulk_verb]ed [src]!"), \
-					span_userdanger("[user] [hulk_verb]ed [src]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), null, user)
-	to_chat(user, span_danger("You [hulk_verb] [src]!"))
+	visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [hulk_verb] [declent_ru(ACCUSATIVE)]!"), \
+					span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] [hulk_verb] [declent_ru(ACCUSATIVE)]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), null, user)
+	to_chat(user, span_danger("Вы [hulk_verb]е [declent_ru(ACCUSATIVE)]!"))
 	apply_damage(15, BRUTE, wound_bonus=10)
 
 /mob/living/carbon/human/attack_hand(mob/user, list/modifiers)
@@ -143,9 +143,9 @@
 		target.Knockdown(SHOVE_KNOCKDOWN_HUMAN, daze_amount = 3 SECONDS)
 	if(!HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED))
 		Knockdown(SHOVE_KNOCKDOWN_COLLATERAL, daze_amount = 3 SECONDS)
-	target.visible_message(span_danger("[shover] shoves [target.name] into [name]!"),
-		span_userdanger("You're shoved into [name] by [shover]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
-	to_chat(src, span_danger("You shove [target.name] into [name]!"))
+	target.visible_message(span_danger("[capitalize(shover.declent_ru(NOMINATIVE))] толкает [target.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]!"),
+		span_userdanger("Вы врезаетесь в [declent_ru(ACCUSATIVE)] из-за толчка [shover.declent_ru(GENITIVE)]!"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), COMBAT_MESSAGE_RANGE, src)
+	to_chat(src, span_danger("Вы толкаете [target.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]!"))
 	log_combat(shover, target, "shoved", addition = "into [name][weapon ? " with [weapon]" : ""]")
 	return COMSIG_LIVING_SHOVE_HANDLED
 
@@ -157,23 +157,23 @@
 		var/obj/item/I = get_active_held_item()
 		if(I && !(I.item_flags & ABSTRACT) && dropItemToGround(I))
 			playsound(loc, 'sound/items/weapons/slash.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[user] disarmed [src]!"), \
-							span_userdanger("[user] disarmed you!"), span_hear("You hear aggressive shuffling!"), null, user)
-			to_chat(user, span_danger("You disarm [src]!"))
+			visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] обезоруживает [declent_ru(ACCUSATIVE)]!"), \
+							span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] обезоруживает вас!"), span_hear("Вы слышите агрессивное шарканье!"), null, user)
+			to_chat(user, span_danger("Вы обезоруживаете [declent_ru(ACCUSATIVE)]!"))
 		else if(!user.client || prob(5)) // only natural monkeys get to stun reliably, (they only do it occasionaly)
 			playsound(loc, 'sound/items/weapons/pierce.ogg', 25, TRUE, -1)
 			if (src.IsKnockdown() && !src.IsParalyzed())
 				Paralyze(40)
 				log_combat(user, src, "pinned")
-				visible_message(span_danger("[user] pins [src] down!"), \
-								span_userdanger("[user] pins you down!"), span_hear("You hear shuffling and a muffled groan!"), null, user)
-				to_chat(user, span_danger("You pin [src] down!"))
+				visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] наваливается на [declent_ru(ACCUSATIVE)]!"), \
+								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] наваливается на вас!"), span_hear("Вы слышите шарканье и приглушенный стон!"), null, user)
+				to_chat(user, span_danger("Вы наваливаетесь на [declent_ru(ACCUSATIVE)]!"))
 			else
 				Knockdown(30)
 				log_combat(user, src, "tackled")
-				visible_message(span_danger("[user] tackles [src] down!"), \
-								span_userdanger("[user] tackles you down!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), null, user)
-				to_chat(user, span_danger("You tackle [src] down!"))
+				visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] сбивает с ног [declent_ru(ACCUSATIVE)]"), \
+								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] сбивает вас с ног!"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), null, user)
+				to_chat(user, span_danger("Вы сбиваете с ног [declent_ru(ACCUSATIVE)]!"))
 		return TRUE
 
 	if(!user.combat_mode)
@@ -189,7 +189,7 @@
 			var/damage = HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER) ? monkey_mouth.unarmed_damage_high : rand(monkey_mouth.unarmed_damage_low, monkey_mouth.unarmed_damage_high)
 			if(!damage)
 				return FALSE
-			if(check_block(user, damage, "\the [user]", attack_type = UNARMED_ATTACK))
+			if(check_block(user, damage, "[user.declent_ru(ACCUSATIVE)]", attack_type = UNARMED_ATTACK))
 				return FALSE
 			apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, MELEE))
 		return TRUE
@@ -203,24 +203,24 @@
 		var/obj/item/I = get_active_held_item()
 		if(I && dropItemToGround(I))
 			playsound(loc, 'sound/items/weapons/slash.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[user] disarms [src]!"), \
-							span_userdanger("[user] disarms you!"), span_hear("You hear aggressive shuffling!"), null, user)
-			to_chat(user, span_danger("You disarm [src]!"))
+			visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] обезоруживает [declent_ru(ACCUSATIVE)]!"), \
+							span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] обезоруживает вас!"), span_hear("Вы слышите агрессивное шарканье!"), null, user)
+			to_chat(user, span_danger("Вы обезоруживаете [declent_ru(ACCUSATIVE)]!"))
 		else if(!HAS_TRAIT(src, TRAIT_INCAPACITATED))
 			playsound(loc, 'sound/items/weapons/pierce.ogg', 25, TRUE, -1)
 			var/shovetarget = get_edge_target_turf(user, get_dir(user, get_step_away(src, user)))
 			adjustStaminaLoss(35)
 			throw_at(shovetarget, 4, 2, user, force = MOVE_FORCE_OVERPOWERING)
 			log_combat(user, src, "shoved")
-			visible_message(span_danger("[user] tackles [src] down!"), \
-							span_userdanger("[user] shoves you with great force!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), null, user)
-			to_chat(user, span_danger("You shove [src] with great force!"))
+			visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] сбивает с ног [declent_ru(ACCUSATIVE)]!"), \
+							span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] толкает вас с огромной силой"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), null, user)
+			to_chat(user, span_danger("Вы толкаете [declent_ru(ACCUSATIVE)] с огромной силой!"))
 		else
 			Paralyze(5 SECONDS)
 			playsound(loc, 'sound/items/weapons/punch3.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[user] slams [src] into the floor!"), \
-							span_userdanger("[user] slams you into the ground!"), span_hear("You hear something slam loudly onto the floor!"), null, user)
-			to_chat(user, span_danger("You slam [src] into the floor beneath you!"))
+			visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] впечатывает [declent_ru(ACCUSATIVE)] в пол!"), \
+							span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] впечатывает вас в пол!"), span_hear("Вы слышите, как что-то громко падает на пол!"), null, user)
+			to_chat(user, span_danger("Вы впечатываете [declent_ru(ACCUSATIVE)] в пол под вами!"))
 			log_combat(user, src, "slammed into the ground")
 		return TRUE
 
@@ -230,17 +230,17 @@
 		var/damage = prob(90) ? rand(user.melee_damage_lower, user.melee_damage_upper) : 0
 		if(!damage)
 			playsound(loc, 'sound/items/weapons/slashmiss.ogg', 50, TRUE, -1)
-			visible_message(span_danger("[user] lunges at [src]!"), \
-							span_userdanger("[user] lunges at you!"), span_hear("You hear a swoosh!"), null, user)
-			to_chat(user, span_danger("You lunge at [src]!"))
+			visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] бросается на [declent_ru(ACCUSATIVE)]!"), \
+							span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] бросается на вас!"), span_hear("Вы слышите свист!"), null, user)
+			to_chat(user, span_danger("Вы бросаетесь на [declent_ru(ACCUSATIVE)]!"))
 			return FALSE
 		var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(user.zone_selected))
 		var/armor_block = run_armor_check(affecting, MELEE,"","",10)
 
 		playsound(loc, 'sound/items/weapons/slice.ogg', 25, TRUE, -1)
-		visible_message(span_danger("[user] slashes at [src]!"), \
-						span_userdanger("[user] slashes at you!"), span_hear("You hear a sickening sound of a slice!"), null, user)
-		to_chat(user, span_danger("You slash at [src]!"))
+		visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] режет [declent_ru(ACCUSATIVE)]!"), \
+						span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] режет вас!"), span_hear("Вы слышите противный звук разрезания!"), null, user)
+		to_chat(user, span_danger("Вы режете [declent_ru(ACCUSATIVE)]!"))
 		log_combat(user, src, "attacked")
 		if(!dismembering_strike(user, user.zone_selected)) //Dismemberment successful
 			return TRUE
@@ -253,7 +253,7 @@
 	var/damage = rand(worm.melee_damage_lower, worm.melee_damage_upper)
 	if(!damage)
 		return
-	if(check_block(worm, damage, "\the [worm]", attack_type = UNARMED_ATTACK))
+	if(check_block(worm, damage, "[worm.declent_ru(ACCUSATIVE)]", attack_type = UNARMED_ATTACK))
 		return FALSE
 	if(stat != DEAD)
 		worm.amount_grown = min(worm.amount_grown + damage, worm.max_grown)
@@ -351,7 +351,7 @@
 /mob/living/carbon/human/blob_act(obj/structure/blob/B)
 	if(stat == DEAD)
 		return
-	show_message(span_userdanger("The blob attacks you!"))
+	show_message(span_userdanger("Блоб атакует вас!"))
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(dam_zone))
 	apply_damage(5, BRUTE, affecting, run_armor_check(affecting, MELEE))
@@ -389,7 +389,7 @@
 		if(undergoing_cardiac_arrest() && can_heartattack() && (shock_damage * siemens_coeff >= 1) && prob(25))
 			var/obj/item/organ/heart/heart = get_organ_slot(ORGAN_SLOT_HEART)
 			if(heart.Restart() && stat == CONSCIOUS)
-				to_chat(src, span_notice("You feel your heart beating again!"))
+				to_chat(src, span_notice("Вы чувстуете, как ваше сердце снова бьется!"))
 	if (!(flags & SHOCK_NO_HUMAN_ANIM))
 		electrocution_animation(4 SECONDS)
 
@@ -416,7 +416,7 @@
 				update_worn_neck()
 				update_worn_head()
 			else
-				to_chat(src, span_notice("Your [head_clothes.name] protects your head and face from the acid!"))
+				to_chat(src, span_notice("[capitalize(head_clothes.declent_ru(NOMINATIVE))] защищает вашу голову и лицо от кислоты!"))
 		else
 			. = get_bodypart(BODY_ZONE_HEAD)
 			if(.)
@@ -437,7 +437,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice("Your [chest_clothes.name] protects your body from the acid!"))
+				to_chat(src, span_notice("[capitalize(chest_clothes.declent_ru(NOMINATIVE))] защищает ваше тело от кислоты!"))
 		else
 			. = get_bodypart(BODY_ZONE_CHEST)
 			if(.)
@@ -469,7 +469,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice("Your [arm_clothes.name] protects your arms and hands from the acid!"))
+				to_chat(src, span_notice("[capitalize(arm_clothes.declent_ru(NOMINATIVE))] защищает руки и кисти от кислоты!"))
 		else
 			. = get_bodypart(BODY_ZONE_R_ARM)
 			if(.)
@@ -495,7 +495,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice("Your [leg_clothes.name] protects your legs and feet from the acid!"))
+				to_chat(src, span_notice("[capitalize(leg_clothes.declent_ru(NOMINATIVE))] защищает ноги и ступы от кислоты!"))
 		else
 			. = get_bodypart(BODY_ZONE_R_LEG)
 			if(.)
@@ -558,9 +558,9 @@
 		return
 	var/list/combined_msg = list()
 
-	visible_message(span_notice("[src] examines [p_them()]self."))
+	visible_message(span_notice("[capitalize(declent_ru(NOMINATIVE))] осматривает себя."))
 
-	combined_msg += span_notice("<b>You check yourself for injuries.</b>")
+	combined_msg += span_notice("<b>Вы осматриваете себя на предмет ранений.</b>")
 
 	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
@@ -572,7 +572,7 @@
 		body_part.check_for_injuries(src, combined_msg)
 
 	for(var/t in missing)
-		combined_msg += span_bolddanger("Your [parse_zone(t)] is missing!")
+		combined_msg += span_bolddanger("У вас отсутствует [parse_zone(t)]!")
 
 	if(is_bleeding())
 		var/list/obj/item/bodypart/bleeding_limbs = list()
@@ -581,53 +581,53 @@
 				bleeding_limbs += part
 
 		var/num_bleeds = LAZYLEN(bleeding_limbs)
-		var/bleed_text = "<span class='danger'>You are bleeding from your"
+		var/bleed_text = "<span class='danger'>Вы истекаете кровью из:"
 		switch(num_bleeds)
 			if(1 to 2)
-				bleed_text += " [bleeding_limbs[1].name][num_bleeds == 2 ? " and [bleeding_limbs[2].name]" : ""]"
+				bleed_text += " [bleeding_limbs[1].declent_ru(GENITIVE)][num_bleeds == 2 ? " и [bleeding_limbs[2].declent_ru(GENITIVE)]" : ""]"
 			if(3 to INFINITY)
 				for(var/i in 1 to (num_bleeds - 1))
 					var/obj/item/bodypart/BP = bleeding_limbs[i]
-					bleed_text += " [BP.name],"
-				bleed_text += " and [bleeding_limbs[num_bleeds].name]"
+					bleed_text += " [BP.declent_ru(GENITIVE)],"
+				bleed_text += " и [bleeding_limbs[num_bleeds].declent_ru(GENITIVE)]"
 		bleed_text += "!</span>"
 		combined_msg += bleed_text
 
 	if(getStaminaLoss())
 		if(getStaminaLoss() > 30)
-			combined_msg += span_info("You're completely exhausted.")
+			combined_msg += span_info("Вы абсолютно обессилены.")
 		else
-			combined_msg += span_info("You feel fatigued.")
+			combined_msg += span_info("Вы чувствуете усталость.")
 	if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
 		if(toxloss)
 			if(toxloss > 10)
-				combined_msg += span_danger("You feel sick.")
+				combined_msg += span_danger("Вы чувствуете недомогание.")
 			else if(toxloss > 20)
-				combined_msg += span_danger("You feel nauseated.")
+				combined_msg += span_danger("Вас тошнит.")
 			else if(toxloss > 40)
-				combined_msg += span_danger("You feel very unwell!")
+				combined_msg += span_danger("Вы чувствуете себя очень плохо!")
 		if(oxyloss)
 			if(oxyloss > 10)
-				combined_msg += span_danger("You feel lightheaded.")
+				combined_msg += span_danger("У вас кружится голова.")
 			else if(oxyloss > 20)
-				combined_msg += span_danger("Your thinking is clouded and distant.")
+				combined_msg += span_danger("Ваши мысли затуманены и находятся где-то далеко.")
 			else if(oxyloss > 30)
-				combined_msg += span_danger("You're choking!")
+				combined_msg += span_danger("Вы задыхаетесь!")
 
 	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
 		switch(nutrition)
 			if(NUTRITION_LEVEL_FULL to INFINITY)
-				combined_msg += span_info("You're completely stuffed!")
+				combined_msg += span_info("Вы наелись до отказа!")
 			if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-				combined_msg += span_info("You're well fed!")
+				combined_msg += span_info("Вы наелись!")
 			if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-				combined_msg += span_info("You're not hungry.")
+				combined_msg += span_info("Вы не голодны.")
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-				combined_msg += span_info("You could use a bite to eat.")
+				combined_msg += span_info("Вам не помешает перекусить.")
 			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-				combined_msg += span_info("You feel quite hungry.")
+				combined_msg += span_info("Вы чувствуете сильный голод.")
 			if(0 to NUTRITION_LEVEL_STARVING)
-				combined_msg += span_danger("You're starving!")
+				combined_msg += span_danger("Вы умираете с голоду!")
 
 	//Compiles then shows the list of damaged organs and broken organs
 	var/list/broken = list()
@@ -649,7 +649,7 @@
 	//Checks to enforce proper grammar, inserts words as necessary into the list
 	if(broken.len)
 		if(broken.len > 1)
-			broken.Insert(broken.len, "and ")
+			broken.Insert(broken.len, "и ")
 			broken_plural = TRUE
 		else
 			var/holder = broken[1] //our one and only element
@@ -658,10 +658,10 @@
 		//Put the items in that list into a string of text
 		for(var/B in broken)
 			broken_message += B
-		combined_msg += span_warning("Your [broken_message] [broken_plural ? "are" : "is"] non-functional!")
+		combined_msg += span_warning("У вас не функционируют: [broken_plural ? broken_message : broken_message]")
 	if(damaged.len)
 		if(damaged.len > 1)
-			damaged.Insert(damaged.len, "and ")
+			damaged.Insert(damaged.len, "и ")
 			damaged_plural = TRUE
 		else
 			var/holder = damaged[1]
@@ -669,10 +669,10 @@
 				damaged_plural = TRUE
 		for(var/D in damaged)
 			damaged_message += D
-		combined_msg += span_info("Your [damaged_message] [damaged_plural ? "are" : "is"] hurt.")
+		combined_msg += span_info("У вас болят: [damaged_plural ? damaged_message : damaged_message].")
 
 	if(quirks.len)
-		combined_msg += span_notice("You have these quirks: [get_quirk_string(FALSE, CAT_QUIRK_ALL)].")
+		combined_msg += span_notice("У вас имеются следующий черты: [get_quirk_string(FALSE, CAT_QUIRK_ALL)].")
 
 	to_chat(src, boxed_message(combined_msg.Join("\n")))
 

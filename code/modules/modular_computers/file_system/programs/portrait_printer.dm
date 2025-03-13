@@ -14,7 +14,7 @@
 	filedesc = "Marlowe Treeby's Art Galaxy"
 	downloader_category = PROGRAM_CATEGORY_EQUIPMENT
 	program_open_overlay = "dummy"
-	extended_desc = "This program connects to a Spinward Sector community art site for viewing and printing art."
+	extended_desc = "Эта программа подключается к сайту художественного сообщества Spinward Sector для просмотра и печати произведений искусства."
 	download_access = list(ACCESS_LIBRARY)
 	can_run_on_flags = PROGRAM_CONSOLE
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET

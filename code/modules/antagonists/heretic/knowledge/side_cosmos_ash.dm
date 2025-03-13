@@ -13,10 +13,10 @@
 
 /datum/heretic_knowledge/summon/fire_shark
 	name = "Scorching Shark"
-	desc = "Allows you to transmute a pool of ash, a liver, and a sheet of plasma into a Fire Shark. \
-		Fire Sharks are fast and strong in groups, but die quickly. They are also highly resistant against fire attacks. \
-		Fire Sharks inject phlogiston into its victims and spawn plasma once they die."
-	gain_text = "The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators."
+	desc = "Позволяет трансмутировать лужу пепла, печень и лист плазмы в Огненную акулу. \
+		Огненные акулы быстры и сильны в группах, но быстро погибают. Они также очень устойчивы к огненным атакам. \
+		Огненные акулы впрыскивают флогистон в своих жертв и порождают плазму после своей смерти."
+	gain_text = "Колыбель туманности была холодной, но не безжизненной. Свет и тепло проникают даже в самую глубокую тьму, и даже они пища для своих хищников."
 
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,
@@ -32,9 +32,9 @@
 
 /datum/heretic_knowledge/spell/space_phase
 	name = "Space Phase"
-	desc = "Grants you Space Phase, a spell that allows you to move freely through space. \
-		You can only phase in and out when you are on a space or misc turf."
-	gain_text = "You feel like your body can move through space as if you where dust."
+	desc = "Дарует вам Space Phase - заклинание, позволяющее свободно перемещаться в космосе. \
+		Появляться и исчезать можно только тогда, когда вы находитесь в на космических или схожих тайлах."
+	gain_text = "Вы чувствуете, что ваше тело может перемещаться по космосу, как будто вы пылинка."
 
 	action_to_add = /datum/action/cooldown/spell/jaunt/space_crawl
 	cost = 1
@@ -44,11 +44,11 @@
 
 /datum/heretic_knowledge/eldritch_coin
 	name = "Eldritch Coin"
-	desc = "Allows you to transmute a sheet of plasma and a diamond to create an Eldritch Coin. \
-		The coin will open or close nearby doors when landing on heads and toggle their bolts \
-		when landing on tails. If you insert the coin into an airlock, it will be consumed \
-		to fry its electronics, opening the airlock permanently unless bolted. "
-	gain_text = "The Mansus is a place of all sorts of sins. But greed held a special role."
+	desc = "Позволяет трансмутировать лист плазмы и алмаз, чтобы создать Мистическую монету. \
+		Монета будет открывать или закрывать близлежащие двери, если приземлится на орла, и болтировать или отболтировать их, \
+		если приземлится на решку. Если вы вставите монету в дверь, монета будет использована, \
+		чтобы спалить электронику, открывая и болтируя дверь навсегда. "
+	gain_text = "Мансус это место для всевозможных грехов. Но жадность имела особую роль."
 
 	required_atoms = list(
 		/obj/item/stack/sheet/mineral/diamond = 1,

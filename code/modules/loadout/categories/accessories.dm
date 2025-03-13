@@ -1,6 +1,6 @@
 /// Accessory Items (Moves overrided items to backpack)
 /datum/loadout_category/accessories
-	category_name = "Accessory"
+	category_name = "Аксессуары"
 	category_ui_icon = FA_ICON_VEST
 	type_to_generate = /datum/loadout_item/accessory
 	tab_order = /datum/loadout_category/head::tab_order + 3
@@ -84,7 +84,7 @@
 /datum/loadout_item/accessory/full_pocket_protector
 	name = "Pocket Protector (Filled)"
 	item_path = /obj/item/clothing/accessory/pocketprotector/full
-	additional_displayed_text = list("Contains pens")
+	additional_displayed_text = list("Внутри - ручки")
 
 /datum/loadout_item/accessory/pride
 	name = "Pride Pin"

@@ -56,7 +56,7 @@ function CharacterControls(props: CharacterControlsProps) {
           onClick={props.handleRotate}
           fontSize="22px"
           icon="undo"
-          tooltip="Rotate"
+          tooltip="Повернуть"
           tooltipPosition="top"
         />
       </Stack.Item>
@@ -66,7 +66,7 @@ function CharacterControls(props: CharacterControlsProps) {
           onClick={props.handleOpenSpecies}
           fontSize="22px"
           icon="paw"
-          tooltip="Species"
+          tooltip="Вид"
           tooltipPosition="top"
         />
       </Stack.Item>
@@ -98,7 +98,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
   const [getSearchText, searchTextSet] = useState('');
 
   if (!catalog.icons) {
-    return <Box color="red">Provided catalog had no icons!</Box>;
+    return <Box color="red">В предоставленном каталоге не было иконок!</Box>;
   }
 
   return (
@@ -136,7 +136,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
                   textAlign: 'center',
                 }}
               >
-                Select {props.name.toLowerCase()}
+                Выбрать {props.name.toLowerCase()}
               </Box>
             </Stack.Item>
 
@@ -151,7 +151,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
         <Stack.Item overflowX="hidden" overflowY="scroll">
           <Autofocus>
             <Input
-              placeholder="Search..."
+              placeholder="Поиск..."
               style={{
                 margin: '0px 5px',
                 width: '95%',
@@ -227,25 +227,23 @@ function GenderButton(props: GenderButtonProps) {
       placement="right-end"
       content={
         <Stack backgroundColor="white" ml={0.5} p={0.3}>
-          {[Gender.Male, Gender.Female, Gender.Other, Gender.Other2].map(
-            (gender) => {
-              return (
-                <Stack.Item key={gender}>
-                  <Button
-                    selected={gender === props.gender}
-                    onClick={() => {
-                      props.handleSetGender(gender);
-                      setGenderMenuOpen(false);
-                    }}
-                    fontSize="22px"
-                    icon={GENDERS[gender].icon}
-                    tooltip={GENDERS[gender].text}
-                    tooltipPosition="top"
-                  />
-                </Stack.Item>
-              );
-            },
-          )}
+          {[Gender.Male, Gender.Female].map((gender) => {
+            return (
+              <Stack.Item key={gender}>
+                <Button
+                  selected={gender === props.gender}
+                  onClick={() => {
+                    props.handleSetGender(gender);
+                    setGenderMenuOpen(false);
+                  }}
+                  fontSize="22px"
+                  icon={GENDERS[gender].icon}
+                  tooltip={GENDERS[gender].text}
+                  tooltipPosition="top"
+                />
+              </Stack.Item>
+            );
+          })}
         </Stack>
       }
     >
@@ -255,7 +253,7 @@ function GenderButton(props: GenderButtonProps) {
         }}
         fontSize="22px"
         icon={GENDERS[props.gender].icon}
-        tooltip="Gender"
+        tooltip="Пол"
         tooltipPosition="top"
       />
     </Popper>
@@ -419,7 +417,7 @@ export function PreferenceList(props: PreferenceListProps) {
             if (feature === undefined) {
               return (
                 <Stack.Item key={featureId}>
-                  <b>Feature {featureId} is not recognized.</b>
+                  <b>Компонент {featureId} не распознан.</b>
                 </Stack.Item>
               );
             }
@@ -670,7 +668,7 @@ export function MainPage(props: MainPageProps) {
                   } // check if existing chars more than one
                   onClick={() => setDeleteCharacterPopupOpen(true)}
                 >
-                  Delete Character
+                  Удалить персонажа
                 </Button>
               </Box>
             </PreferenceList>
