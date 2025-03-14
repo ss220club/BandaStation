@@ -506,6 +506,7 @@
 /obj/effect/turf_decal/tile/purple/anticorner/contrasted{
 	dir = 8
 	},
+/obj/structure/closet,
 /turf/open/floor/iron/dark,
 /area/station/security/prison/upper)
 "afx" = (
@@ -2024,7 +2025,6 @@
 /obj/structure/table/reinforced,
 /obj/item/inducer,
 /obj/item/construction/rld,
-/obj/structure/window/spawner/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage/tech)
 "avw" = (
@@ -4776,10 +4776,6 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/item/clothing/suit/costume/judgerobe,
-/obj/item/clothing/head/costume/powdered_wig{
-	pixel_y = 11
-	},
 /turf/open/floor/wood,
 /area/station/security/courtroom)
 "aYi" = (
@@ -6675,6 +6671,7 @@
 /obj/item/clothing/suit/hooded/ablative,
 /obj/item/gun/energy/temperature/security,
 /obj/structure/cable,
+/obj/structure/closet,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "bqk" = (
@@ -9208,8 +9205,8 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/iron/stairs/old{
-	dir = 4
+/turf/open/floor/iron/stairs{
+	dir = 8
 	},
 /area/station/service/theater/abandoned)
 "bPO" = (
@@ -17502,6 +17499,9 @@
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "dsF" = (
+/obj/structure/railing/corner/end/flip{
+	dir = 8
+	},
 /turf/open/floor/iron/stairs{
 	dir = 1
 	},
@@ -22120,11 +22120,8 @@
 /obj/structure/railing,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/decal/cleanable/dirt{
-	icon_state = "dirt-flat-1"
-	},
-/turf/open/floor/iron/stairs/old{
-	dir = 8
+/turf/open/floor/iron/stairs{
+	dir = 4
 	},
 /area/station/commons/fitness/recreation/entertainment)
 "epP" = (
@@ -23529,6 +23526,15 @@
 	dir = 1
 	},
 /area/station/medical/psychology)
+"eBY" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/railing/corner/end/flip{
+	dir = 8
+	},
+/obj/structure/railing/corner/end/flip,
+/turf/open/floor/iron/dark,
+/area/station/commons/fitness/recreation/entertainment)
 "eBZ" = (
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/hidden{
 	dir = 4
@@ -24884,8 +24890,8 @@
 /area/station/maintenance/department/bridge)
 "eOB" = (
 /obj/structure/railing,
-/turf/open/floor/iron/stairs/old{
-	dir = 8;
+/turf/open/floor/iron/stairs{
+	dir = 4;
 	initial_gas_mix = "n2=100;TEMP=80"
 	},
 /area/station/tcommsat/server)
@@ -26940,7 +26946,7 @@
 	name = "Basmati Rice Sack (4KG)";
 	volume = 150
 	},
-/obj/machinery/light/small/directional/north,
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/security/prison/mess)
 "fhW" = (
@@ -48784,6 +48790,10 @@
 "jBj" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/secure_closet/magistrate,
+/obj/item/clothing/suit/costume/judgerobe,
+/obj/item/clothing/head/costume/powdered_wig{
+	pixel_y = 11
+	},
 /turf/open/floor/iron,
 /area/station/security/courtroom)
 "jBn" = (
@@ -51596,6 +51606,10 @@
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-flat-1"
 	},
+/obj/structure/railing/corner/end{
+	dir = 4
+	},
+/obj/structure/railing/corner/end,
 /turf/open/floor/iron/dark,
 /area/station/commons/fitness/recreation/entertainment)
 "kbD" = (
@@ -75421,6 +75435,9 @@
 	},
 /area/station/maintenance/port/greater)
 "oIz" = (
+/obj/structure/railing/corner/end{
+	dir = 8
+	},
 /turf/open/floor/iron/stairs,
 /area/station/security/brig)
 "oII" = (
@@ -76479,6 +76496,9 @@
 /obj/item/hfr_box/corner,
 /obj/item/hfr_box/corner,
 /obj/item/hfr_box/core,
+/obj/machinery/camera/directional/north{
+	c_tag = "Atmospherics - Hypertorus Fusion Reactor Chamber Fore"
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/engineering/atmos/hfr_room)
 "oTr" = (
@@ -77661,7 +77681,7 @@
 /area/station/maintenance/port/aft)
 "phz" = (
 /obj/structure/cable,
-/turf/open/floor/iron/stairs/old{
+/turf/open/floor/iron/stairs{
 	dir = 4
 	},
 /area/station/maintenance/starboard/fore)
@@ -80609,8 +80629,8 @@
 /area/station/engineering/atmos/pumproom)
 "pLM" = (
 /obj/structure/railing,
-/turf/open/floor/iron/stairs/old{
-	dir = 4;
+/turf/open/floor/iron/stairs{
+	dir = 8;
 	initial_gas_mix = "n2=100;TEMP=80"
 	},
 /area/station/tcommsat/server)
@@ -86726,8 +86746,8 @@
 /area/station/maintenance/fore/lesser)
 "qTw" = (
 /obj/machinery/newscaster/directional/north,
-/obj/effect/turf_decal/siding/thinplating_new,
 /obj/machinery/holopad,
+/obj/effect/turf_decal/siding/thinplating_new,
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/service)
 "qTy" = (
@@ -88700,6 +88720,7 @@
 "rme" = (
 /obj/effect/turf_decal/siding/thinplating_new,
 /obj/structure/disposalpipe/segment,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/service)
 "rmi" = (
@@ -91281,7 +91302,9 @@
 "rMA" = (
 /obj/effect/turf_decal/siding/wood,
 /obj/effect/mapping_helpers/airlock/access/any/command/magistrate,
-/obj/machinery/door/airlock/lawyer,
+/obj/machinery/door/airlock/lawyer{
+	name = "Magistrate's Desk"
+	},
 /turf/open/floor/iron,
 /area/station/security/courtroom)
 "rMM" = (
@@ -101284,8 +101307,8 @@
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-flat-1"
 	},
-/turf/open/floor/iron/stairs/old{
-	dir = 4
+/turf/open/floor/iron/stairs{
+	dir = 8
 	},
 /area/station/commons/fitness/recreation/entertainment)
 "tJA" = (
@@ -101322,9 +101345,6 @@
 /obj/item/hfr_box/body/fuel_input,
 /obj/item/hfr_box/body/interface,
 /obj/machinery/light/no_nightlight/directional/north,
-/obj/machinery/camera/directional/north{
-	c_tag = "Atmospherics - Hypertorus Fusion Reactor Chamber Fore"
-	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/engineering/atmos/hfr_room)
 "tJS" = (
@@ -116955,7 +116975,7 @@
 "wGe" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/turf_decal/bot,
-/obj/machinery/light/small/directional/north,
+/obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/hfr_room)
 "wGh" = (
@@ -117061,14 +117081,12 @@
 "wHi" = (
 /obj/structure/cable,
 /obj/effect/landmark/start/botanist,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment{
 	dir = 10
 	},
 /obj/machinery/duct,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "wHn" = (
@@ -122181,8 +122199,8 @@
 "xJN" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/turf_decal/bot,
-/obj/machinery/light/small/directional/north,
 /obj/machinery/camera/autoname/directional/west,
+/obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/engineering/gravity_generator)
 "xJP" = (
@@ -147033,7 +147051,7 @@ qBq
 ufv
 hHH
 hjt
-fKz
+eBY
 dmA
 xUb
 tEb
@@ -163509,7 +163527,7 @@ wyA
 aqk
 dVy
 tVI
-tVI
+fqP
 fqP
 fqP
 dcL
