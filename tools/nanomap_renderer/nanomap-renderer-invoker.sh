@@ -1,16 +1,16 @@
 #!/bin/bash
 set -e
 # Generate maps
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Birdshot/birdshot.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Blueshift/Blueshift.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Cyberiad/Cyberiad.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Deltastation/DeltaStation2.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/IceBoxStation/IceBoxStation.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/MetaStation/MetaStation.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/NebulaStation/NebulaStation.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/tramstation/tramstation.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/wawastation/wawastation.dmm"
-tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Mining/Lavaland.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Birdshot/birdshot.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Blueshift/Blueshift.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Cyberiad/Cyberiad.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Deltastation/DeltaStation2.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/IceBoxStation/IceBoxStation.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/MetaStation/MetaStation.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/NebulaStation/NebulaStation.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/tramstation/tramstation.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/wawastation/wawastation.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Mining/Lavaland.dmm"
 # Move and rename files so the game understands them
 cd "data/nanomaps"
 mv "birdshot_nanomap_z1.png" "Birdshot Station_nanomap_z1.png"
