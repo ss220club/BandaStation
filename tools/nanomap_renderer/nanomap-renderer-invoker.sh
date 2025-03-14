@@ -2,6 +2,7 @@
 set -e
 # Generate maps
 tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Birdshot/birdshot.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Blueshift/Blueshift.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Cyberiad/Cyberiad.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/Deltastation/DeltaStation2.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap --w 2040 --h 2040 "./_maps/map_files/IceBoxStation/IceBoxStation.dmm"
@@ -23,6 +24,8 @@ mv "wawastation_nanomap_z1.png" "Wawastation_nanomap_z1.png"
 mv "wawastation_nanomap_z2.png" "Wawastation_nanomap_z2.png"
 cd "../../"
 cp "data/nanomaps/Birdshot Station_nanomap_z1.png" "icons/_nanomaps"
+cp "data/nanomaps/Blueshift_nanomap_z1.png" "icons/_nanomaps"
+cp "data/nanomaps/Blueshift_nanomap_z2.png" "icons/_nanomaps"
 cp "data/nanomaps/Cyberiad_nanomap_z1.png" "icons/_nanomaps"
 cp "data/nanomaps/Cyberiad_nanomap_z2.png" "icons/_nanomaps"
 cp "data/nanomaps/Delta Station_nanomap_z1.png" "icons/_nanomaps"

@@ -1,8 +1,8 @@
 {
 	"version": 1,
 	"map_name": "Blueshift",
-	"map_path": "map_files/NSVBlueshift",
-	"map_file": "Blueshift-bandastation.dmm",
+	"map_path": "map_files/Blueshift",
+	"map_file": "Blueshift.dmm",
 	"traits": [
 		{
 			"Linkage": "Cross"
