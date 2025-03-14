@@ -18,8 +18,10 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-popper": "^2.3.0",
+    "react-zoom-pan-pinch": "^3.7.0",
     "tgui-core": "^1.8.1",
     "tgui-dev-server": "workspace:*",
-    "tgui-polyfill": "workspace:*"
+    "tgui-polyfill": "workspace:*",
+    "usehooks-ts": "^3.1.1"
   }
 }
