@@ -397,6 +397,15 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security/interrogation)
+"aeA" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/railing/corner/end/flip{
+	dir = 8
+	},
+/obj/structure/railing/corner/end/flip,
+/turf/open/floor/iron/dark,
+/area/station/commons/fitness/recreation/entertainment)
 "aeM" = (
 /obj/machinery/light/directional/south,
 /obj/structure/cable,
@@ -4777,10 +4786,6 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/item/clothing/suit/costume/judgerobe,
-/obj/item/clothing/head/costume/powdered_wig{
-	pixel_y = 11
-	},
 /turf/open/floor/wood,
 /area/station/security/courtroom)
 "aYi" = (
@@ -9210,8 +9215,8 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/iron/stairs/old{
-	dir = 4
+/turf/open/floor/iron/stairs{
+	dir = 8
 	},
 /area/station/service/theater/abandoned)
 "bPO" = (
@@ -22122,11 +22127,8 @@
 /obj/structure/railing,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/decal/cleanable/dirt{
-	icon_state = "dirt-flat-1"
-	},
-/turf/open/floor/iron/stairs/old{
-	dir = 8
+/turf/open/floor/iron/stairs{
+	dir = 4
 	},
 /area/station/commons/fitness/recreation/entertainment)
 "epP" = (
@@ -24886,9 +24888,8 @@
 /area/station/maintenance/department/bridge)
 "eOB" = (
 /obj/structure/railing,
-/turf/open/floor/iron/stairs/old{
-	dir = 8;
-	initial_gas_mix = "n2=100;TEMP=80"
+/turf/open/floor/iron/stairs{
+	dir = 4
 	},
 /area/station/tcommsat/server)
 "eOH" = (
@@ -48786,6 +48787,10 @@
 "jBj" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/secure_closet/magistrate,
+/obj/item/clothing/suit/costume/judgerobe,
+/obj/item/clothing/head/costume/powdered_wig{
+	pixel_y = 11
+	},
 /turf/open/floor/iron,
 /area/station/security/courtroom)
 "jBn" = (
@@ -51598,6 +51603,10 @@
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-flat-1"
 	},
+/obj/structure/railing/corner/end{
+	dir = 4
+	},
+/obj/structure/railing/corner/end,
 /turf/open/floor/iron/dark,
 /area/station/commons/fitness/recreation/entertainment)
 "kbD" = (
@@ -77663,7 +77672,7 @@
 /area/station/maintenance/port/aft)
 "phz" = (
 /obj/structure/cable,
-/turf/open/floor/iron/stairs/old{
+/turf/open/floor/iron/stairs{
 	dir = 4
 	},
 /area/station/maintenance/starboard/fore)
@@ -80611,9 +80620,8 @@
 /area/station/engineering/atmos/pumproom)
 "pLM" = (
 /obj/structure/railing,
-/turf/open/floor/iron/stairs/old{
-	dir = 4;
-	initial_gas_mix = "n2=100;TEMP=80"
+/turf/open/floor/iron/stairs{
+	dir = 8
 	},
 /area/station/tcommsat/server)
 "pLR" = (
@@ -101287,8 +101295,8 @@
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-flat-1"
 	},
-/turf/open/floor/iron/stairs/old{
-	dir = 4
+/turf/open/floor/iron/stairs{
+	dir = 8
 	},
 /area/station/commons/fitness/recreation/entertainment)
 "tJA" = (
@@ -117064,14 +117072,12 @@
 "wHi" = (
 /obj/structure/cable,
 /obj/effect/landmark/start/botanist,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment{
 	dir = 10
 	},
 /obj/machinery/duct,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "wHn" = (
@@ -147036,7 +147042,7 @@ qBq
 ufv
 hHH
 hjt
-fKz
+aeA
 dmA
 xUb
 tEb
