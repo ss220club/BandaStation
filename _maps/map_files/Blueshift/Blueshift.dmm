@@ -397,15 +397,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security/interrogation)
-"aeA" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/railing/corner/end/flip{
-	dir = 8
-	},
-/obj/structure/railing/corner/end/flip,
-/turf/open/floor/iron/dark,
-/area/station/commons/fitness/recreation/entertainment)
 "aeM" = (
 /obj/machinery/light/directional/south,
 /obj/structure/cable,
@@ -2034,7 +2025,6 @@
 /obj/structure/table/reinforced,
 /obj/item/inducer,
 /obj/item/construction/rld,
-/obj/structure/window/spawner/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage/tech)
 "avw" = (
@@ -26943,7 +26933,7 @@
 	name = "Basmati Rice Sack (4KG)";
 	volume = 150
 	},
-/obj/machinery/light/small/directional/north,
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/security/prison/mess)
 "fhW" = (
@@ -34987,6 +34977,15 @@
 /obj/effect/mapping_helpers/requests_console/information,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/command/heads_quarters/ce)
+"gOR" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/railing/corner/end/flip{
+	dir = 8
+	},
+/obj/structure/railing/corner/end/flip,
+/turf/open/floor/iron/dark,
+/area/station/commons/fitness/recreation/entertainment)
 "gOT" = (
 /obj/structure/closet/l3closet/virology,
 /obj/effect/turf_decal/bot,
@@ -76490,6 +76489,9 @@
 /obj/item/hfr_box/corner,
 /obj/item/hfr_box/corner,
 /obj/item/hfr_box/core,
+/obj/machinery/camera/directional/north{
+	c_tag = "Atmospherics - Hypertorus Fusion Reactor Chamber Fore"
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/engineering/atmos/hfr_room)
 "oTr" = (
@@ -86736,8 +86738,8 @@
 /area/station/maintenance/fore/lesser)
 "qTw" = (
 /obj/machinery/newscaster/directional/north,
-/obj/effect/turf_decal/siding/thinplating_new,
 /obj/machinery/holopad,
+/obj/effect/turf_decal/siding/thinplating_new,
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/service)
 "qTy" = (
@@ -101333,9 +101335,6 @@
 /obj/item/hfr_box/body/fuel_input,
 /obj/item/hfr_box/body/interface,
 /obj/machinery/light/no_nightlight/directional/north,
-/obj/machinery/camera/directional/north{
-	c_tag = "Atmospherics - Hypertorus Fusion Reactor Chamber Fore"
-	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/engineering/atmos/hfr_room)
 "tJS" = (
@@ -116966,7 +116965,7 @@
 "wGe" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/turf_decal/bot,
-/obj/machinery/light/small/directional/north,
+/obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/hfr_room)
 "wGh" = (
@@ -122190,8 +122189,8 @@
 "xJN" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/turf_decal/bot,
-/obj/machinery/light/small/directional/north,
 /obj/machinery/camera/autoname/directional/west,
+/obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/engineering/gravity_generator)
 "xJP" = (
@@ -147042,7 +147041,7 @@ qBq
 ufv
 hHH
 hjt
-aeA
+gOR
 dmA
 xUb
 tEb
