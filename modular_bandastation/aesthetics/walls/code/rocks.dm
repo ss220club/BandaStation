@@ -18,6 +18,13 @@
 	color = rock_color(ROCK_COLOR)
 	transform = null
 
+/turf/closed/mineral/minimap
+	name = "DO NOT USE!!!"
+	icon = DEFAULT_ROCKS
+	icon_state = "smoothrocks-0"
+	base_icon_state = "smoothrocks"
+	color = ROCK_COLOR
+
 /turf/closed/mineral/strong
 	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
 	icon_state = rock_icon_state("rock2")

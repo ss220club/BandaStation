@@ -98,9 +98,6 @@
 	data["network"] = network
 	data["mapRef"] = cam_screen.assigned_map
 	data["cameras"] = GLOB.cameranet.get_available_cameras_data(network)
-
-	update_available_z_levels(data["cameras"]) // BANDASTATION ADDITION - Nanomap
-
 	return data
 
 /obj/machinery/computer/security/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -114,8 +111,6 @@
 
 		if(isnull(active_camera))
 			return TRUE
-
-		current_z_level_index = z_levels.Find("[active_camera.z]") // BANDASTATION ADDITION - Nanomap
 
 		update_active_camera_screen()
 
