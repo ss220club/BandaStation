@@ -506,6 +506,7 @@
 /obj/effect/turf_decal/tile/purple/anticorner/contrasted{
 	dir = 8
 	},
+/obj/structure/closet,
 /turf/open/floor/iron/dark,
 /area/station/security/prison/upper)
 "afx" = (
@@ -6675,6 +6676,7 @@
 /obj/item/clothing/suit/hooded/ablative,
 /obj/item/gun/energy/temperature/security,
 /obj/structure/cable,
+/obj/structure/closet,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "bqk" = (
@@ -88700,6 +88702,7 @@
 "rme" = (
 /obj/effect/turf_decal/siding/thinplating_new,
 /obj/structure/disposalpipe/segment,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/service)
 "rmi" = (
@@ -163509,7 +163512,7 @@ wyA
 aqk
 dVy
 tVI
-tVI
+fqP
 fqP
 fqP
 dcL
