@@ -355,7 +355,7 @@
 		else
 			is_disabled += " и"
 
-	check_list += "<span class='[no_damage ? "notice" : "warning"]'>Ваша [plaintext_zone.declent_ru(NOMINATIVE)][is_disabled][self_aware ? " имеет " : " выглядит "][status].</span>"
+	check_list += "<span class='[no_damage ? "notice" : "warning"]'>Ваша [declent_ru(NOMINATIVE)][is_disabled][self_aware ? " имеет " : " выглядит "][status].</span>"
 
 	var/adept_organ_feeler = owner == examiner && HAS_TRAIT(examiner, TRAIT_SELF_AWARE)
 	for(var/obj/item/organ/organ in src)
@@ -375,7 +375,7 @@
 			continue
 		var/harmless = embedded_thing.get_embed().is_harmless()
 		var/stuck_wordage = harmless ? "застрял" : "прилип"
-		var/embed_text = "\t<a href='byond://?src=[REF(examiner)];embedded_object=[REF(embedded_thing)];embedded_limb=[REF(src)]'> There is [icon2html(embedded_thing, examiner)] \a [embedded_thing] [stuck_wordage == "застрял" ? "в" : "к"] вашей [plaintext_zone.declent_ru(DATIVE)]!</a>"
+		var/embed_text = "\t<a href='byond://?src=[REF(examiner)];embedded_object=[REF(embedded_thing)];embedded_limb=[REF(src)]'> There is [icon2html(embedded_thing, examiner)] \a [embedded_thing] [stuck_wordage == "застрял" ? "в" : "к"] вашей [declent_ru(DATIVE)]!</a>"
 		if (harmless)
 			check_list += span_italics(span_notice(embed_text))
 		else
