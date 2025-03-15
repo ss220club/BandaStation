@@ -35229,7 +35229,7 @@
 	pixel_x = 4
 	},
 /obj/item/stock_parts/power_store/cell/high,
-/obj/item/reagent_containers/pill/patch/aiuri,
+/obj/item/reagent_containers/applicator/patch/aiuri,
 /obj/item/clothing/glasses/meson{
 	pixel_y = 4
 	},
@@ -88176,25 +88176,25 @@
 "vuy" = (
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/table/reinforced/rglass,
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6
 	},
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6;
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6;
 	pixel_y = 4
 	},
