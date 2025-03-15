@@ -1,10 +1,10 @@
 /datum/action/cooldown/spell/touch/star_touch
 	name = "Star Touch"
-	desc = "Manifests cosmic fields on tiles next to you while marking the victim with a star mark \
-		or consuming an already present star mark to put them to sleep for 4 seconds. \
-		They will then be linked to you with a cosmic ray, burning them for up to a minute, or \
-		until they can escape your sight. Star Touch can also remove Cosmic Runes, or teleport you \
-		to your Star Gazer when used on yourself."
+	desc = "Создает космические поля на тайлах рядом с вами, помечая цель Меткой звезды \
+		или снимая существующую метку, чтобы усыпить цель на 4 секунды. \
+		Цель будет связана с вами космическим лучом, обжигающим ее в течении минуты, или \
+		пока цель не скорется с вашего поля зрения. Способность также может удалять космические руны, \
+		телепортировать вас к вашему звездочету, если вы используете её на себе."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -31,7 +31,7 @@
 
 /datum/action/cooldown/spell/touch/star_touch/on_antimagic_triggered(obj/item/melee/touch_attack/hand, atom/victim, mob/living/carbon/caster)
 	victim.visible_message(
-		span_danger("The spell bounces off of you!"),
+		span_danger("Заклинание отскакивает от вас!"),
 	)
 
 /datum/action/cooldown/spell/touch/star_touch/cast_on_hand_hit(obj/item/melee/touch_attack/hand, mob/living/victim, mob/living/carbon/caster)
@@ -67,8 +67,8 @@
 
 /obj/item/melee/touch_attack/star_touch
 	name = "Star Touch"
-	desc = "A sinister looking aura that distorts the flow of reality around it. \
-		Causes people with a star mark to sleep for 4 seconds, and causes people without a star mark to get one."
+	desc = "Зловещая аура, искажающая течение реальности вокруг себя. \
+		Вызывает сон на 4 секунды у людей с Меткой звезды и создает метку у тех, у кого ее нет."
 	icon_state = "star"
 	inhand_icon_state = "star"
 
@@ -76,8 +76,8 @@
 	. = ..()
 	AddComponent(\
 		/datum/component/effect_remover, \
-		success_feedback = "You remove %THEEFFECT.", \
-		tip_text = "Clear rune", \
+		success_feedback = "Вы убираете %THEEFFECT.", \
+		tip_text = "Чистит руну", \
 		on_clear_callback = CALLBACK(src, PROC_REF(after_clear_rune)), \
 		effects_we_clear = list(/obj/effect/cosmic_rune), \
 	)
@@ -92,14 +92,14 @@
 	remove_hand_with_no_refund(user)
 
 /obj/item/melee/touch_attack/star_touch/ignition_effect(atom/to_light, mob/user)
-	. = span_rose("[user] effortlessly snaps [user.p_their()] fingers near [to_light], igniting it with cosmic energies. Fucking badass!")
+	. = span_rose("[capitalize(user.declent_ru(NOMINATIVE))] без труда щелкает своими пальцами возле [to_light.declent_ru(GENITIVE)], зажигая мистической энергией. Чертовски круто!")
 	remove_hand_with_no_refund(user)
 
 /obj/item/melee/touch_attack/star_touch/attack_self(mob/living/user)
 	var/datum/action/cooldown/spell/touch/star_touch/star_touch_spell = spell_which_made_us?.resolve()
 	var/mob/living/basic/heretic_summon/star_gazer/star_gazer_mob = star_touch_spell?.get_star_gazer()
 	if(!star_gazer_mob)
-		balloon_alert(user, "no linked star gazer!")
+		balloon_alert(user, "нет соединенного звездочета!")
 		return ..()
 	new /obj/effect/temp_visual/cosmic_explosion(get_turf(user))
 	do_teleport(
@@ -180,7 +180,7 @@
  */
 /datum/status_effect/cosmic_beam/proc/beam_died()
 	SIGNAL_HANDLER
-	to_chat(owner, span_warning("You lose control of the beam!"))
+	to_chat(owner, span_warning("Вы теряете контроль над лучом!"))
 	lose_target()
 	duration = 0
 
