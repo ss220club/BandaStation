@@ -52,6 +52,7 @@
 #include "species/_species.dme"
 #include "speech_filter/_speech_filter.dme"
 #include "status_effects/_status_effects.dme"
+#include "tgui_who/_tgui_who.dme"
 #include "title_screen/_title_screen.dme"
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"
