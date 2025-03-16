@@ -44,7 +44,7 @@
 /datum/component/living_heart/proc/on_organ_removed(obj/item/organ/source, mob/living/carbon/old_owner)
 	SIGNAL_HANDLER
 
-	to_chat(old_owner, span_userdanger("As your living [source.name] leaves your body, you feel less connected to the Mansus!"))
+	to_chat(old_owner, span_userdanger("Когда [source.ru_p_yours()] [source.declent_ru(NOMINATIVE)] покидает ваше тело, вы чувствуете себя менее привязанным к Мансусу!"))
 	qdel(src)
 
 /**
@@ -67,7 +67,7 @@
  */
 /datum/action/cooldown/track_target
 	name = "Living Heartbeat"
-	desc = "LMB: Chose one of your sacrifice targets to track. RMB: Repeats last target you chose to track."
+	desc = "ЛКМ: Выберите одну из целей для отслеживания. ПКМ: Повторяет последнюю цель, которую вы выбрали для отслеживания."
 	check_flags = AB_CHECK_CONSCIOUS
 	background_icon_state = "bg_heretic"
 	button_icon = 'icons/obj/antags/eldritch.dmi'
@@ -76,7 +76,7 @@
 
 	/// Tracks whether we were right clicked or left clicked in our last trigger
 	var/right_clicked = FALSE
-	/// The real name of the last mob we tracked
+	/// The real name of the last thing we tracked
 	var/last_tracked_name
 	/// Whether the target radial is currently opened.
 	var/radial_open = FALSE
@@ -108,16 +108,40 @@
 /datum/action/cooldown/track_target/Activate(atom/target)
 	var/datum/antagonist/heretic/heretic_datum = GET_HERETIC(owner)
 	var/datum/heretic_knowledge/sac_knowledge = heretic_datum.get_knowledge(/datum/heretic_knowledge/hunt_and_sacrifice)
+
 	if(!LAZYLEN(heretic_datum.sac_targets))
-		owner.balloon_alert(owner, "no targets, visit a rune!")
+		owner.balloon_alert(owner, "нет цели, посетите руну")
 		StartCooldown(1 SECONDS)
 		return TRUE
 
-	var/list/targets_to_choose = list()
-	var/list/mob/living/carbon/human/human_targets = list()
+	// Holds a list of `name = image` used to display the radial menu when you left click the living heart
+	var/list/choosable_targets = list()
+	// Holds a list of 'name = atom/thing` used to check if our thing still exists after we've made our selection
+	var/list/possible_tracked_atoms = list()
+
+	// Checks if our heretic has a blade research, and then checks if they have made blades
+	// adds them to our list of target when pulsing the living heart so that you can locate them
+	var/datum/heretic_knowledge/limited_amount/starting/blade_knowledge
+	for(var/datum/potential_knowledge as anything in subtypesof(/datum/heretic_knowledge/limited_amount/starting))
+		blade_knowledge = heretic_datum.get_knowledge(potential_knowledge)
+		if(blade_knowledge)
+			break
+	for(var/datum/weakref/blade_ref as anything in blade_knowledge?.created_items)
+		var/obj/item/melee/sickly_blade/blade = blade_ref.resolve()
+		if(QDELETED(blade))
+			blade_knowledge.created_items -= blade_ref
+			continue
+		if(!istype(blade, /obj/item/melee/sickly_blade))
+			continue // Just in case someone makes a /datum/heretic_knowledge/limited_amount/starting that doesn't create blades
+		if(get(blade, /mob/living) == owner)
+			continue
+		// Means our blade is somewhere, but not on our person, so let's make it trackable
+		choosable_targets[blade.name] = image(icon = blade.icon, icon_state = blade.icon_state)
+		possible_tracked_atoms[blade.name] = blade
+
 	for(var/mob/living/carbon/human/sac_target as anything in heretic_datum.sac_targets)
-		human_targets[sac_target.real_name] = sac_target
-		targets_to_choose[sac_target.real_name] = heretic_datum.sac_targets[sac_target]
+		choosable_targets[sac_target.real_name] = heretic_datum.sac_targets[sac_target]
+		possible_tracked_atoms[sac_target.real_name] = sac_target
 
 	// If we don't have a last tracked name, open a radial to set one.
 	// If we DO have a last tracked name, we skip the radial if they right click the action.
@@ -126,7 +150,7 @@
 		last_tracked_name = show_radial_menu(
 			owner,
 			owner,
-			targets_to_choose,
+			choosable_targets,
 			custom_check = CALLBACK(src, PROC_REF(check_menu)),
 			radius = 40,
 			require_near = TRUE,
@@ -138,19 +162,20 @@
 	if(isnull(last_tracked_name))
 		return FALSE
 
-	var/mob/living/carbon/human/tracked_mob = human_targets[last_tracked_name]
-	if(QDELETED(tracked_mob))
+	var/atom/tracked_thing = possible_tracked_atoms[last_tracked_name]
+	if(QDELETED(tracked_thing))
 		last_tracked_name = null
 		return FALSE
 
 	playsound(owner, 'sound/effects/singlebeat.ogg', 50, TRUE, SILENCED_SOUND_EXTRARANGE)
-	owner.balloon_alert(owner, get_balloon_message(tracked_mob))
-
+	owner.balloon_alert(owner, get_balloon_message(tracked_thing))
 
 	// Let them know how to sacrifice people if they're able to be sac'd
-	if(tracked_mob.stat == DEAD)
-		to_chat(owner, span_hierophant("[tracked_mob] is dead. Bring them to a transmutation rune \
-			and invoke \"[sac_knowledge.name]\" to sacrifice them!"))
+	if(ismob(tracked_thing))
+		var/mob/tracked_mob = tracked_thing
+		if(tracked_mob.stat == DEAD)
+			to_chat(owner, span_hierophant("[capitalize(tracked_mob.declent_ru(NOMINATIVE))] в состоянии смерти. Принесите их к руне трансмутации \
+				и вызовите \"[sac_knowledge.name]\", чтобы принести их в жертву!"))
 
 	StartCooldown()
 	return TRUE
@@ -184,9 +209,9 @@
 	return TRUE
 
 /// Gets the balloon message for who we're tracking.
-/datum/action/cooldown/track_target/proc/get_balloon_message(mob/living/carbon/human/tracked_mob)
+/datum/action/cooldown/track_target/proc/get_balloon_message(atom/tracked_thing)
 	var/balloon_message = "error text!"
-	var/turf/their_turf = get_turf(tracked_mob)
+	var/turf/their_turf = get_turf(tracked_thing)
 	var/turf/our_turf = get_turf(owner)
 	var/their_z = their_turf?.z
 	var/our_z = our_turf?.z
@@ -194,7 +219,7 @@
 	// One of us is in somewhere we shouldn't be
 	if(!our_z || !their_z)
 		// "Hell if I know"
-		balloon_message = "on another plane!"
+		balloon_message = "в другом мире!"
 
 	// They're not on the same z-level as us
 	else if(our_z != their_z)
@@ -203,24 +228,24 @@
 			// We're on a multi-z station
 			if(is_station_level(our_z))
 				if(our_z > their_z)
-					balloon_message = "below you!"
+					balloon_message = "под вами!"
 				else
-					balloon_message = "above you!"
+					balloon_message = "над вами!"
 			// We're off station, they're not
 			else
-				balloon_message = "on station!"
+				balloon_message = "на станции!"
 
 		// Mining
 		else if(is_mining_level(their_z))
-			balloon_message = "on lavaland!"
+			balloon_message = "на лавалэнде!"
 
 		// In the gateway
 		else if(is_away_level(their_z) || is_secret_level(their_z))
-			balloon_message = "beyond the gateway!"
+			balloon_message = "во вратах!"
 
 		// They're somewhere we probably can't get too - sacrifice z-level, centcom, etc
 		else
-			balloon_message = "on another plane!"
+			balloon_message = "в другом мире!"
 
 	// They're on the same z-level as us!
 	else
@@ -231,22 +256,24 @@
 
 		switch(dist)
 			if(0 to 15)
-				balloon_message = "very near, [dir2text(dir)]!"
+				balloon_message = "очень близко, [dir2text(dir)]!"
 				arrow_color = COLOR_GREEN
 			if(16 to 31)
-				balloon_message = "near, [dir2text(dir)]!"
+				balloon_message = "близко, [dir2text(dir)]!"
 				arrow_color = COLOR_YELLOW
 			if(32 to 127)
-				balloon_message = "far, [dir2text(dir)]!"
+				balloon_message = "далеко, [dir2text(dir)]!"
 				arrow_color = COLOR_ORANGE
 			else
-				balloon_message = "very far!"
+				balloon_message = "очень далеко!"
 				arrow_color = COLOR_RED
 
 		make_navigate_arrow(their_turf, arrow_color)
 
-	if(tracked_mob.stat == DEAD)
-		balloon_message = "they're dead, " + balloon_message
+	if(ismob(tracked_thing))
+		var/mob/tracked_mob = tracked_thing
+		if(tracked_mob.stat == DEAD)
+			balloon_message = "мертвы, " + balloon_message
 
 	return balloon_message
 

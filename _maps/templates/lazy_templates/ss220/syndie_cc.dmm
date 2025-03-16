@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aad" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo10"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -426,7 +426,7 @@
 /obj/structure/chair/comfy/purp{
 	dir = 8
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo5"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -489,7 +489,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/outside)
 "bit" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo3"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -654,7 +654,7 @@
 /turf/open/floor/iron/dark/smooth_edge,
 /area/centcom/syndicate_base/jail)
 "bIG" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo3"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -757,7 +757,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "bRe" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo7"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -937,7 +937,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/cargo)
 "cgm" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo16"
 	},
 /obj/effect/turf_decal/siding/dark/inner_corner{
@@ -952,7 +952,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/infteam)
 "chj" = (
-/obj/effect/turf_decal/syndie_logo,
+/obj/effect/decal/syndie_logo,
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/elite_squad)
 "chA" = (
@@ -985,7 +985,7 @@
 /turf/open/floor/grass,
 /area/centcom/syndicate_base/outside)
 "cie" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo10"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -1058,7 +1058,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "crr" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo9"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -1159,7 +1159,7 @@
 /turf/open/floor/iron/white,
 /area/centcom/syndicate_base/elite_squad)
 "cLI" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo15"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -1281,7 +1281,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "cZH" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo6"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -1327,7 +1327,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/jail)
 "ddY" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo15"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -1454,7 +1454,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/infteam)
 "drn" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo19"
 	},
 /obj/effect/turf_decal/siding/dark/inner_corner,
@@ -1950,7 +1950,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/infteam)
 "eFN" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo4"
 	},
 /obj/effect/turf_decal/siding/dark/inner_corner{
@@ -1959,7 +1959,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "eJs" = (
-/obj/effect/turf_decal/syndie_logo,
+/obj/effect/decal/syndie_logo,
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 9
 	},
@@ -2022,7 +2022,7 @@
 /turf/open/floor/grass,
 /area/centcom/syndicate_base/outside)
 "eRO" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo13"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -2031,7 +2031,7 @@
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/cargo)
 "eSO" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo16"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -2097,7 +2097,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "eXq" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo2"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -2278,7 +2278,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "fnG" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo5"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -2445,7 +2445,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base/infteam)
 "fOP" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo19"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -2740,7 +2740,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "gFS" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo17"
 	},
 /obj/effect/turf_decal/siding/dark,
@@ -2861,7 +2861,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "gVv" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo8"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -2956,7 +2956,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/elite_squad)
 "hdo" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo17"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -3088,7 +3088,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/infteam)
 "hoH" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo19"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -3175,7 +3175,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "hEp" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo6"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -3269,7 +3269,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "hLU" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo17"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -3335,7 +3335,7 @@
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base/elite_squad)
 "hVc" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo18"
 	},
 /obj/effect/turf_decal/siding/dark,
@@ -3363,7 +3363,7 @@
 	},
 /area/centcom/syndicate_base/jail)
 "hZP" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo5"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -3422,7 +3422,7 @@
 	},
 /area/centcom/syndicate_base/jail)
 "ijR" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo9"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -3442,7 +3442,7 @@
 /obj/structure/chair/sofa/corp/right{
 	dir = 1
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo3"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -3609,7 +3609,7 @@
 /turf/open/floor/grass,
 /area/centcom/syndicate_base/outside)
 "iJD" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo7"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -3849,7 +3849,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/syndicate_base/elite_squad)
 "jsD" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo14"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -4243,7 +4243,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base/infteam)
 "kox" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo12"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -4442,7 +4442,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/syndicate_base/elite_squad)
 "lae" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo16"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -4726,7 +4726,7 @@
 "lEt" = (
 /obj/machinery/light/small/directional/east,
 /obj/structure/sign/poster/contraband/syndicate_recruitment/directional/east,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo12"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -4789,7 +4789,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/syndicate_base/elite_squad)
 "lMN" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo19"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -4921,13 +4921,13 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "lWm" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo2"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/syndicate_base/infteam)
 "lWx" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo19"
 	},
 /obj/effect/turf_decal/siding/dark/inner_corner,
@@ -5044,7 +5044,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/cargo)
 "miA" = (
-/obj/effect/turf_decal/syndie_logo,
+/obj/effect/decal/syndie_logo,
 /obj/effect/turf_decal/siding/dark/inner_corner{
 	dir = 1
 	},
@@ -5106,7 +5106,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/cargo)
 "mnU" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo3"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -5129,7 +5129,7 @@
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
 "mpO" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo13"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -5138,7 +5138,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "mqM" = (
-/obj/effect/turf_decal/syndie_logo,
+/obj/effect/decal/syndie_logo,
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/syndicate_base/infteam)
 "mrL" = (
@@ -5428,7 +5428,7 @@
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
 "nby" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo17"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark,
@@ -5585,7 +5585,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base/infteam)
 "npy" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo15"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -5603,7 +5603,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
 "nrf" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo12"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -5646,7 +5646,7 @@
 /obj/structure/chair/stool{
 	dir = 1
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo14"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -5780,7 +5780,7 @@
 /turf/open/floor/carpet/red,
 /area/centcom/syndicate_base/control)
 "nOK" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo6"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -5791,7 +5791,7 @@
 	},
 /area/centcom/syndicate_base/infteam)
 "nPa" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo11"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -5818,7 +5818,7 @@
 /obj/structure/chair/comfy/purp{
 	dir = 4
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo8"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -5835,7 +5835,7 @@
 "nTf" = (
 /obj/machinery/light/small/directional/west,
 /obj/structure/sign/poster/contraband/random/directional/west,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo9"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -5906,14 +5906,14 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "odA" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo17"
 	},
 /obj/effect/turf_decal/siding/dark,
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "oea" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo11"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -5974,7 +5974,7 @@
 /turf/open/floor/iron/dark/smooth_corner,
 /area/centcom/syndicate_base/jail)
 "onr" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo11"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -6066,7 +6066,7 @@
 	},
 /area/centcom/syndicate_base/elite_squad)
 "owu" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo18"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -6120,7 +6120,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/cargo)
 "oDo" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo2"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -6195,7 +6195,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "oRq" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo13"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -6462,7 +6462,7 @@
 /area/centcom/syndicate_base/elite_squad)
 "pub" = (
 /obj/structure/chair/stool,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo7"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -6676,7 +6676,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "pSO" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo10"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -6723,7 +6723,7 @@
 /turf/open/floor/iron/white,
 /area/centcom/syndicate_base/elite_squad)
 "qbl" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo12"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -6960,7 +6960,7 @@
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
 "qFs" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo11"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -7025,7 +7025,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
 "qKJ" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo18"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark,
@@ -7055,7 +7055,7 @@
 "qNC" = (
 /obj/machinery/light/small/directional/west,
 /obj/structure/sign/poster/contraband/c20r/directional/west,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo9"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -7202,7 +7202,7 @@
 "rjq" = (
 /obj/structure/table/wood,
 /obj/item/food/watermelonslice,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo11"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -7218,14 +7218,14 @@
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
 "rlk" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo7"
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "rlY" = (
 /obj/structure/chair/stool,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo6"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -7439,7 +7439,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base/infteam)
 "rKA" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo3"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -7463,7 +7463,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "rOI" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo16"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -7596,7 +7596,7 @@
 	},
 /area/centcom/syndicate_base/jail)
 "rXG" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo14"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -7760,7 +7760,7 @@
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/infteam)
 "suN" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo13"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -7799,7 +7799,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base/infteam)
 "sDK" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo5"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -8081,7 +8081,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "tsj" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo14"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -8251,7 +8251,7 @@
 /turf/open/floor/wood/parquet,
 /area/centcom/syndicate_base/control)
 "tHS" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo5"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -8320,7 +8320,7 @@
 /turf/open/misc/asteroid,
 /area/centcom/syndicate_base/outside)
 "tJr" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo15"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -8338,7 +8338,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "tMz" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo7"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -8415,7 +8415,7 @@
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
 "tVG" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo10"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -8505,7 +8505,7 @@
 /turf/open/floor/grass,
 /area/centcom/syndicate_base/outside)
 "uoU" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo4"
 	},
 /obj/effect/turf_decal/siding/dark/inner_corner{
@@ -8658,7 +8658,7 @@
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/infteam)
 "uNg" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo18"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -8707,13 +8707,13 @@
 "uOO" = (
 /obj/machinery/light/small/directional/east,
 /obj/structure/sign/poster/contraband/syndicate_pistol/directional/east,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo12"
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/elite_squad)
 "uPs" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo8"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -8798,7 +8798,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "veo" = (
-/obj/effect/turf_decal/syndie_logo,
+/obj/effect/decal/syndie_logo,
 /obj/effect/turf_decal/siding/dark/inner_corner{
 	dir = 1
 	},
@@ -8830,7 +8830,7 @@
 /turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base/infteam)
 "vgC" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo6"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -8867,7 +8867,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
 "vkn" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo2"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -8904,7 +8904,7 @@
 /area/centcom/syndicate_base)
 "vqa" = (
 /obj/structure/table/wood,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo12"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -8948,7 +8948,7 @@
 	pixel_x = -6;
 	pixel_y = 4
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo10"
 	},
 /obj/item/reagent_containers/cup/glass/waterbottle/large{
@@ -9106,7 +9106,7 @@
 /turf/open/floor/iron/dark/smooth_corner,
 /area/centcom/syndicate_base/control)
 "vDx" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo16"
 	},
 /obj/effect/turf_decal/siding/dark/inner_corner{
@@ -9172,7 +9172,7 @@
 /obj/structure/chair/stool{
 	dir = 1
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo15"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -9214,7 +9214,7 @@
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
 "vPU" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo4"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -9270,7 +9270,7 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/syndicate_base/cargo)
 "vXr" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo13"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -9464,7 +9464,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "wrP" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo18"
 	},
 /obj/effect/turf_decal/siding/dark,
@@ -9492,7 +9492,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/jail)
 "wAF" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo4"
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -9607,7 +9607,7 @@
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
 "wNi" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo4"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -9623,7 +9623,7 @@
 /obj/structure/chair/sofa/corp/left{
 	dir = 1
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo2"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -9653,7 +9653,7 @@
 /obj/structure/chair/comfy/black{
 	dir = 4
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo9"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -9948,7 +9948,7 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base/infteam)
 "xuw" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo9"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -9991,7 +9991,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/jail)
 "xxf" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo8"
 	},
 /obj/effect/turf_decal/siding/dark{
@@ -10112,7 +10112,7 @@
 /area/centcom/syndicate_base/jail)
 "xKy" = (
 /obj/structure/chair/stool,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo8"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -10188,7 +10188,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/syndicate_base/elite_squad)
 "yaB" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo14"
 	},
 /turf/open/floor/mineral/plastitanium/red,

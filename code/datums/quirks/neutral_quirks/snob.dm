@@ -1,10 +1,10 @@
 /datum/quirk/snob
 	name = "Snob"
-	desc = "You care about the finer things, if a room doesn't look nice its just not really worth it, is it?"
+	desc = "У вас утончённый вкус, и если комната выглядит некрасиво, она того не стоит, не так ли?"
 	icon = FA_ICON_USER_TIE
 	value = 0
-	gain_text = span_notice("You feel like you understand what things should look like.")
-	lose_text = span_notice("Well who cares about deco anyways?")
-	medical_record_text = "Patient seems to be rather stuck up."
+	gain_text = span_notice("Вы ощущаете, что прекрасно понимаете, как должно выглядеть окружение.")
+	lose_text = span_notice("Да кого вообще волнует как тут все выглядит?")
+	medical_record_text = "Пациент выглядит довольно замороченным."
 	mob_trait = TRAIT_SNOB
 	mail_goodies = list(/obj/item/chisel, /obj/item/paint_palette)

@@ -227,7 +227,7 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
  *
  * Arguments:
  * * preference_source - the datum/preferences our loadout item originated from - cannot be null
- * * equipper - the mob we're equipping this item onto - cannot be null
+ * * equipper - the mob we're equipping this item onto
  * * visuals_only - whether or not this is only concerned with visual things (not backpack, not renaming, etc)
  * * preference_list - what the raw loadout list looks like in the preferences
  *
@@ -240,7 +240,8 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	mob/living/carbon/human/equipper,
 	visuals_only = FALSE,
 )
-	ASSERT(!isnull(equipped_item))
+	if(isnull(equipped_item))
+		return NONE
 
 	if(!visuals_only)
 		ADD_TRAIT(equipped_item, TRAIT_ITEM_OBJECTIVE_BLOCKED, "Loadout")
@@ -306,13 +307,13 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	displayed_text += (additional_displayed_text || list())
 
 	if(can_be_greyscale)
-		displayed_text += "Recolorable"
+		displayed_text += "Смена цвета"
 
 	if(can_be_named)
-		displayed_text += "Renamable"
+		displayed_text += "Смена имени"
 
 	if(can_be_reskinned)
-		displayed_text += "Reskinnable"
+		displayed_text += "Смена стиля"
 
 	return displayed_text
 
@@ -336,7 +337,7 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 
 	if(can_be_greyscale)
 		UNTYPED_LIST_ADD(button_list, list(
-			"label" = "Recolor",
+			"label" = "Перекрасить",
 			"act_key" = "select_color",
 			"button_icon" = FA_ICON_PALETTE,
 			"active_key" = INFO_GREYSCALE,
@@ -344,7 +345,7 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 
 	if(can_be_named)
 		UNTYPED_LIST_ADD(button_list, list(
-			"label" = "Rename",
+			"label" = "Переименовать",
 			"act_key" = "set_name",
 			"button_icon" = FA_ICON_PEN,
 			"active_key" = INFO_NAMED,

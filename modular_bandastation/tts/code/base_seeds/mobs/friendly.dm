@@ -30,7 +30,7 @@
 /mob/living/basic/pig/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/anubarak)
 
-/mob/living/simple_animal/hostile/retaliate/goose/add_tts_component()
+/mob/living/basic/goose/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/pantheon)
 
 /mob/living/basic/pet/fox/add_tts_component()

@@ -1124,7 +1124,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 			if(!can_unlock(user, user.get_idcard(), registered_id))
 				error_msg = "not your locker!"
 		else if(!can_unlock(user, user.get_idcard()))
-			error_msg = "access denied!"
+			error_msg = "в доступе отказано!"
 		if(error_msg)
 			if(!silent)
 				balloon_alert(user, error_msg)
@@ -1218,13 +1218,14 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 		return
 	if(!opened && ((shove_flags & SHOVE_KNOCKDOWN_BLOCKED) || !(shove_flags & SHOVE_BLOCKED)))
 		return
-	if(opened)
+	if (!toggle())
+		return
+	if(!opened) // Reversed because we should've toggled already
 		if (target.loc != loc)
 			return
 		target.forceMove(src)
 	else
 		target.Knockdown(SHOVE_KNOCKDOWN_SOLID)
-	toggle()
 	update_icon()
 	target.visible_message(span_danger("[shover.name] shoves [target.name] into [src]!"),
 		span_userdanger("You're shoved into [src] by [shover.name]!"),

@@ -1,20 +1,20 @@
 import { CheckboxInput, FeatureToggle } from '../base';
 
 export const darkened_flash: FeatureToggle = {
-  name: 'Enable darkened flashes',
-  category: 'ACCESSIBILITY',
+  name: 'Включить затемненные вспышки',
+  category: 'ДОСТУПНОСТЬ',
   description: `
-    When toggled, being flashed will show a dark screen rather than a
-    bright one.
+    Если включено, яркие вспышки теперь будут затемнять
+    ваш экран.
   `,
   component: CheckboxInput,
 };
 
 export const screen_shake_darken: FeatureToggle = {
-  name: 'Darken screen shake',
-  category: 'ACCESSIBILITY',
+  name: 'Замена дрожи экрана затемнением',
+  category: 'ДОСТУПНОСТЬ',
   description: `
-      When toggled, experiencing screen shake will darken your screen.
+      Если включено, дрожь экрана будет заменена затемнением экрана.
     `,
   component: CheckboxInput,
 };

@@ -16,7 +16,7 @@
 	var/content_overlays = FALSE //If this is true, the belt will gain overlays based on what it's holding
 
 /obj/item/storage/belt/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins belting [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins belting [user.p_them()]self with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/storage/belt/update_overlays()
@@ -247,7 +247,7 @@
 		/obj/item/reagent_containers/cup/tube,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/reagent_containers/medigel,
-		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/applicator,
 		/obj/item/reagent_containers/spray,
 		/obj/item/reagent_containers/syringe,
 		/obj/item/retractor,
@@ -264,6 +264,7 @@
 		/obj/item/tank/internals/emergency_oxygen,
 		/obj/item/wrench/medical,
 		/obj/item/knife/ritual,
+		/obj/item/flesh_shears,
 	))
 
 /obj/item/storage/belt/medical/paramedic
@@ -352,7 +353,7 @@
 	))
 	atom_storage.open_sound = 'sound/items/handling/holster_open.ogg'
 	atom_storage.open_sound_vary = TRUE
-	atom_storage.rustle_sound = FALSE
+	atom_storage.rustle_sound = null
 
 /obj/item/storage/belt/security/full/PopulateContents()
 	new /obj/item/reagent_containers/spray/pepper(src)
@@ -407,7 +408,7 @@
 		/obj/item/reagent_containers/cup/glass,
 		/obj/item/reagent_containers/cup/glass/bottle,
 		/obj/item/reagent_containers/hypospray,
-		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/applicator/pill,
 		/obj/item/resonator,
 		/obj/item/screwdriver,
 		/obj/item/shovel,
@@ -844,7 +845,7 @@
 
 /obj/item/storage/belt/grass_sabre
 	name = "sabre sheath"
-	desc = "An simple grass sheath designed to hold a sabre of... some sort. Actual metal one might be too sharp, though..."
+	desc = "A simple grass sheath designed to hold a sabre of... some sort. An actual metal one might be too sharp, though..."
 	icon_state = "grass_sheath"
 	inhand_icon_state = "grass_sheath"
 	worn_icon_state = "grass_sheath"

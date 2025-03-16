@@ -113,7 +113,7 @@
 
 /obj/item/construction/plumbing/ui_assets(mob/user)
 	return list(
-		get_asset_datum(/datum/asset/spritesheet/plumbing),
+		get_asset_datum(/datum/asset/spritesheet_batched/plumbing),
 	)
 
 /obj/item/construction/plumbing/ui_static_data(mob/user)
@@ -259,7 +259,7 @@
 
 			var/obj/machinery/machine_target = interacting_with
 			if(machine_target.anchored)
-				balloon_alert(user, "unanchor first!")
+				balloon_alert(user, "нужно открутить!")
 				return ITEM_INTERACT_BLOCKING
 			if(do_after(user, 2 SECONDS, target = interacting_with))
 				machine_target.deconstruct() //Let's not substract matter

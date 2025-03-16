@@ -543,6 +543,7 @@ Possible to do for anyone motivated enough:
 		var/obj/effect/overlay/holo_pad_hologram/hologram = new(loc)//Spawn a blank effect at the location.
 		var/atom/work_off = AI?.hologram_appearance || user
 
+		hologram.AddComponent(/datum/component/tts_component, user.get_tts_seed(), user.get_tts_effects(list(/datum/singleton/sound_effect/radio))) // Bandastation Addition
 		hologram.icon = work_off.icon
 		hologram.icon_state = work_off.icon_state
 		hologram.copy_overlays(work_off, TRUE)

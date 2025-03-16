@@ -38,11 +38,11 @@
 
 #define TOGGLES_DEFAULT_CHAT (CHAT_OOC|CHAT_DEAD|CHAT_PRAYER|CHAT_PULLR|CHAT_GHOSTPDA|CHAT_GHOSTRADIO|CHAT_BANKCARD|CHAT_GHOSTLAWS|CHAT_LOGIN_LOGOUT)
 
-#define PARALLAX_INSANE "Insane"
-#define PARALLAX_HIGH "High"
-#define PARALLAX_MED "Medium"
-#define PARALLAX_LOW "Low"
-#define PARALLAX_DISABLE "Disabled"
+#define PARALLAX_INSANE "Безумный"
+#define PARALLAX_HIGH "Высокий"
+#define PARALLAX_MED "Средний"
+#define PARALLAX_LOW "Низкий"
+#define PARALLAX_DISABLE "Отключен"
 
 #define SCALING_METHOD_NORMAL "normal"
 #define SCALING_METHOD_DISTORT "distort"
@@ -79,6 +79,13 @@
 
 #define DEFAULT_CYBORG_NAME "Default Cyborg Name"
 
+// Choose grid or list TGUI layouts for UI's, when possible.
+/// Default layout will be used. It can be either a grid or a list
+#define TGUI_LAYOUT_DEFAULT "default"
+/// Force grid layout, even if default is a list.
+#define TGUI_LAYOUT_GRID "grid"
+/// Force list layout, even if default is a grid.
+#define TGUI_LAYOUT_LIST "list"
 
 //Job preferences levels
 #define JP_ANY 0
@@ -158,3 +165,8 @@
 #define INFO_RESKIN "reskin"
 /// Handles which layer the item will be on, for accessories
 #define INFO_LAYER "layer"
+
+// Lipstick styles
+#define UPPER_LIP "Upper"
+#define MIDDLE_LIP "Middle"
+#define LOWER_LIP "Lower"

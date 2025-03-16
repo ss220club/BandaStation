@@ -1,15 +1,16 @@
 import { useBackend } from 'tgui/backend';
 import { Button, Stack } from 'tgui-core/components';
 
-import { PreferencesMenuData, RandomSetting } from '../../data';
-import { RandomizationButton } from '../../RandomizationButton';
+import { RandomizationButton } from '../../components/RandomizationButton';
+import { PreferencesMenuData, RandomSetting } from '../../types';
 import { useRandomToggleState } from '../../useRandomToggleState';
 import { CheckboxInput, Feature, FeatureToggle } from './base';
 
 export const random_body: Feature<RandomSetting> = {
-  name: 'Random body',
+  name: 'Случайное тело',
   component: (props) => {
     const [randomToggle, setRandomToggle] = useRandomToggleState();
+    const { act } = useBackend();
 
     return (
       <Stack>
@@ -26,23 +27,25 @@ export const random_body: Feature<RandomSetting> = {
               <Button
                 color="green"
                 onClick={() => {
-                  props.act('randomize_character');
+                  act('randomize_character');
                   setRandomToggle(false);
                 }}
               >
-                Randomize
+                Рандомизировать
               </Button>
             </Stack.Item>
 
             <Stack.Item>
               <Button color="red" onClick={() => setRandomToggle(false)}>
-                Cancel
+                Отмена
               </Button>
             </Stack.Item>
           </>
         ) : (
           <Stack.Item>
-            <Button onClick={() => setRandomToggle(true)}>Randomize</Button>
+            <Button onClick={() => setRandomToggle(true)}>
+              Рандомизировать
+            </Button>
           </Stack.Item>
         )}
       </Stack>
@@ -51,12 +54,12 @@ export const random_body: Feature<RandomSetting> = {
 };
 
 export const random_hardcore: FeatureToggle = {
-  name: 'Hardcore random',
+  name: 'Тотальный рандом',
   component: CheckboxInput,
 };
 
 export const random_name: Feature<RandomSetting> = {
-  name: 'Random name',
+  name: 'Случайное имя',
   component: (props) => {
     return (
       <RandomizationButton
@@ -68,7 +71,7 @@ export const random_name: Feature<RandomSetting> = {
 };
 
 export const random_species: Feature<RandomSetting> = {
-  name: 'Random species',
+  name: 'Случайный вид',
   component: (props) => {
     const { act, data } = useBackend<PreferencesMenuData>();
 

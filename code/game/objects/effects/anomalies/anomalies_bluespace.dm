@@ -10,7 +10,7 @@
 	///Distance we can teleport someone passively
 	var/teleport_distance = 4
 
-/obj/effect/anomaly/bluespace/Initialize(mapload, new_lifespan, drops_core)
+/obj/effect/anomaly/bluespace/Initialize(mapload, new_lifespan)
 	. = ..()
 	apply_wibbly_filters(src)
 
@@ -55,7 +55,7 @@
 	var/turf/TO = get_turf(chosen) // the turf of origin we're travelling TO
 
 	playsound(TO, 'sound/effects/phasein.ogg', 100, TRUE)
-	priority_announce("Massive bluespace translocation detected.", "Anomaly Alert")
+	priority_announce("Зафиксирован массивный выброс блюспейс энергии.", "Обнаружена аномалия")
 
 	var/list/flashers = list()
 	for(var/mob/living/carbon/C in viewers(TO, null))
@@ -97,7 +97,7 @@
 	teleport_distance = 12
 	anomaly_core = null
 
-/obj/effect/anomaly/bluespace/big/Initialize(mapload, new_lifespan, drops_core)
+/obj/effect/anomaly/bluespace/big/Initialize(mapload, new_lifespan)
 	. = ..()
 
 	transform *= 3

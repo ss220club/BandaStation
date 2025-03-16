@@ -30,7 +30,7 @@
 /datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	var/success = FALSE
 	if(surgery.organ_to_manipulate && !target.get_organ_slot(surgery.organ_to_manipulate))
-		to_chat(user, span_warning("[target] seems to be missing the organ necessary to complete this surgery!"))
+		to_chat(user, span_warning("Кажется, у [target.declent_ru(GENITIVE)] не хватает необходимого органа, для завершения этой операции!"))
 		return FALSE
 
 	if(accept_hand)
@@ -65,7 +65,7 @@
 			if(get_location_accessible(target, target_zone) || (surgery.surgery_flags & SURGERY_IGNORE_CLOTHES))
 				initiate(user, target, target_zone, tool, surgery, try_to_fail)
 			else
-				to_chat(user, span_warning("You need to expose [target]'s [target.parse_zone_with_bodypart(target_zone)] to perform surgery on it!"))
+				to_chat(user, span_warning("Вам надо снять все, что может закрывать [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)], для того чтобы начать операцию!"))
 			return TRUE //returns TRUE so we don't stab the guy in the dick or wherever.
 
 	if(repeatable)
@@ -97,8 +97,8 @@
 	var/advance = FALSE
 
 	if(!chem_check(target))
-		user.balloon_alert(user, "missing [LOWER_TEXT(get_chem_list())]!")
-		to_chat(user, span_warning("[target] is missing the [LOWER_TEXT(get_chem_list())] required to perform this surgery step!"))
+		user.balloon_alert(user, "отсутствует [LOWER_TEXT(get_chem_list())]!")
+		to_chat(user, span_warning("[capitalize(target.declent_ru(NOMINATIVE))] не имеет [LOWER_TEXT(get_chem_list())], необходимых для совершения данного шага операции!"))
 		surgery.step_in_progress = FALSE
 		return FALSE
 
@@ -196,14 +196,12 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to perform surgery on [target]..."),
-		span_notice("[user] begins to perform surgery on [target]."),
-		span_notice("[user] begins to perform surgery on [target]."),
+		span_notice("Вы начинаете проводить операцию на [target.declent_ru(PREPOSITIONAL)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на [target.declent_ru(PREPOSITIONAL)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на [target.declent_ru(PREPOSITIONAL)]."),
 	)
 
 /datum/surgery_step/proc/play_preop_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	if(!preop_sound)
-		return
 	var/sound_file_use
 	if(islist(preop_sound))
 		for(var/typepath in preop_sound)//iterate and assign subtype to a list, works best if list is arranged from subtype first and parent last
@@ -212,7 +210,9 @@
 				break
 	else
 		sound_file_use = preop_sound
-	playsound(get_turf(target), sound_file_use, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
+	if(!sound_file_use)
+		return
+	playsound(target, sound_file_use, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 
 /datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	SEND_SIGNAL(user, COMSIG_MOB_SURGERY_STEP_SUCCESS, src, target, target_zone, tool, surgery, default_display_results)
@@ -220,9 +220,9 @@
 		display_results(
 			user,
 			target,
-			span_notice("You succeed."),
-			span_notice("[user] succeeds!"),
-			span_notice("[user] finishes."),
+			span_notice("Вам удалось."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] удалось!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает."),
 		)
 	return TRUE
 
@@ -235,18 +235,18 @@
 	var/screwedmessage = ""
 	switch(fail_prob)
 		if(0 to 24)
-			screwedmessage = " You almost had it, though."
+			screwedmessage = " А ведь у вас почти получилось."
 		if(50 to 74)//25 to 49 = no extra text
-			screwedmessage = " This is hard to get right in these conditions..."
+			screwedmessage = " В таких условиях трудно сделать все правильно...."
 		if(75 to 99)
-			screwedmessage = " This is practically impossible in these conditions..."
+			screwedmessage = " В таких условиях это практически невозможно..."
 
 	display_results(
 		user,
 		target,
-		span_warning("You screw up![screwedmessage]"),
-		span_warning("[user] screws up!"),
-		span_notice("[user] finishes."), TRUE) //By default the patient will notice if the wrong thing has been cut
+		span_warning("Вы ошибаетесь![screwedmessage]"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] ошибается."), TRUE) //By default the patient will notice if the wrong thing has been cut
 	return FALSE
 
 /datum/surgery_step/proc/play_failure_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -297,15 +297,15 @@
 /datum/surgery_step/proc/display_results(mob/user, mob/living/target, self_message, detailed_message, vague_message, target_detailed = FALSE)
 	user.visible_message(detailed_message, self_message, vision_distance = 1, ignored_mobs = target_detailed ? null : target)
 	if(!target_detailed)
-		var/you_feel = pick("a brief pain", "your body tense up", "an unnerving sensation")
+		var/you_feel = pick("легкую боль", ", как ваше тело напрягается", "тревожное ощущение")
 		if(!vague_message)
 			if(detailed_message)
 				stack_trace("DIDN'T GET PASSED A VAGUE MESSAGE.")
 				vague_message = detailed_message
 			else
 				stack_trace("NO MESSAGES TO SEND TO TARGET!")
-				vague_message = span_notice("You feel [you_feel] as you are operated on.")
-		target.show_message(vague_message, MSG_VISUAL, span_notice("You feel [you_feel] as you are operated on."))
+				vague_message = span_notice("Вы чувствуете [you_feel], по мере того как вас оперируют.")
+		target.show_message(vague_message, MSG_VISUAL, span_notice("Вы чувствуете [you_feel], по мере того как вас оперируют."))
 /**
  * Sends a pain message to the target, including a chance of screaming.
  *
@@ -319,7 +319,7 @@
 		if(HAS_TRAIT(target, TRAIT_ANALGESIA))
 			if(!pain_message)
 				return
-			to_chat(target, span_notice("You feel a dull, numb sensation as your body is surgically operated on."))
+			to_chat(target, span_notice("Вы чувствуете онемение, пока ваше тело оперируют."))
 		else
 			if(!pain_message)
 				return

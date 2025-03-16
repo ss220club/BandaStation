@@ -2,7 +2,7 @@
 	filename = "phys_scanner"
 	filedesc = "Physical Scanner"
 	downloader_category = PROGRAM_CATEGORY_EQUIPMENT
-	extended_desc = "This program allows the tablet to scan physical objects and display a data output."
+	extended_desc = "Эта программа позволяет планшету сканировать физические объекты и выводить данные на экран."
 	size = 2
 	can_run_on_flags = PROGRAM_PDA
 	tgui_id = "NtosPhysScanner"
@@ -10,7 +10,7 @@
 	/// Information from the last scanned person, to display on the app.
 	var/last_record = ""
 
-/datum/computer_file/program/maintenance/phys_scanner/tap(atom/tapped_atom, mob/living/user, params)
+/datum/computer_file/program/maintenance/phys_scanner/tap(atom/tapped_atom, mob/living/user, list/modifiers)
 	. = ..()
 
 	if(!iscarbon(tapped_atom))

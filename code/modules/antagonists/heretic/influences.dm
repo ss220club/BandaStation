@@ -85,7 +85,7 @@
 /obj/effect/visible_heretic_influence/Initialize(mapload)
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(show_presence)), 15 SECONDS)
-	AddComponent(/datum/component/fishing_spot, GLOB.preset_fish_sources[/datum/fish_source/dimensional_rift])
+	// AddComponent(/datum/component/fishing_spot, GLOB.preset_fish_sources[/datum/fish_source/dimensional_rift]) // BANDASTATION REMOVAL
 
 	var/image/silicon_image = image('icons/effects/eldritch.dmi', src, null, OBJ_LAYER)
 	silicon_image.override = TRUE
@@ -105,17 +105,17 @@
 		return
 
 	if(IS_HERETIC(user))
-		to_chat(user, span_boldwarning("You know better than to tempt forces out of your control!"))
+		to_chat(user, span_boldwarning("Вам лучше не искушать неподвластные вам силы!"))
 		return TRUE
 
 	var/mob/living/carbon/human/human_user = user
 	var/obj/item/bodypart/their_poor_arm = human_user.get_active_hand()
 	if(prob(25))
-		to_chat(human_user, span_userdanger("An otherwordly presence tears and atomizes your [their_poor_arm.name] as you try to touch the hole in the very fabric of reality!"))
+		to_chat(human_user, span_userdanger("Потустороннее присутствие разрывает и распыляет [their_poor_arm.ru_p_yours(ACCUSATIVE)] [their_poor_arm.declent_ru(ACCUSATIVE)], когда вы пытаетесь коснуться дыры в самой ткани реальности!"))
 		their_poor_arm.dismember()
-		qdel(their_poor_arm)
+		forceMove(their_poor_arm, src) // stored for later fishage
 	else
-		to_chat(human_user,span_danger("You pull your hand away from the hole as the eldritch energy flails, trying to latch onto existence itself!"))
+		to_chat(human_user,span_danger("Вы отдёргиваете руку от отверстия, когда мистическая энергия бьется, пытаясь зацепиться за этот мир!"))
 	return TRUE
 
 /obj/effect/visible_heretic_influence/attack_tk(mob/user)
@@ -125,18 +125,23 @@
 	. = COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(IS_HERETIC(user))
-		to_chat(user, span_boldwarning("You know better than to tempt forces out of your control!"))
+		to_chat(user, span_boldwarning("Вам лучше не искушать неподвластные вам силы!"))
 		return
 
 	var/mob/living/carbon/human/human_user = user
 
+	// You see, these tendrils are psychic. That's why you can't see them. Definitely not laziness. Just psychic. The character can feel but not see them.
+	// Because they're psychic. Yeah.
+	if(human_user.can_block_magic(MAGIC_RESISTANCE_MIND))
+		visible_message(span_danger("Psychic endrils lash out from [src], batting ineffectively at [user]'s head."))
+		return
+
 	// A very elaborate way to suicide
-	to_chat(human_user, span_userdanger("Eldritch energy lashes out, piercing your fragile mind, tearing it to pieces!"))
-	human_user.ghostize()
+	visible_message(span_userdanger("Psychic tendrils lash out from [src], psychically grabbing onto [user]'s psychically sensitive mind and tearing [user.p_their()] head off!"))
 	var/obj/item/bodypart/head/head = locate() in human_user.bodyparts
 	if(head)
 		head.dismember()
-		qdel(head)
+		forceMove(head, src) // stored for later fishage
 	else
 		human_user.gib(DROP_ALL_REMAINS)
 	human_user.investigate_log("has died from using telekinesis on a heretic influence.", INVESTIGATE_DEATHS)
@@ -150,7 +155,7 @@
 		return
 
 	var/mob/living/carbon/human/human_user = user
-	to_chat(human_user, span_userdanger("Your mind burns as you stare at the tear!"))
+	to_chat(human_user, span_userdanger("Ваш разум горит, когда вы смотрите на разрыв!"))
 	human_user.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10, 190)
 	human_user.add_mood_event("gates_of_mansus", /datum/mood_event/gates_of_mansus)
 
@@ -190,7 +195,7 @@
 		return SECONDARY_ATTACK_CALL_NORMAL
 
 	if(being_drained)
-		loc.balloon_alert(user, "already being drained!")
+		loc.balloon_alert(user, "уже добывается!")
 	else
 		INVOKE_ASYNC(src, PROC_REF(drain_influence), user, 1)
 
@@ -210,7 +215,7 @@
 		return FALSE
 	if(!codex.book_open)
 		codex.attack_self(user) // open booke
-	INVOKE_ASYNC(src, PROC_REF(drain_influence), user, 2)
+	INVOKE_ASYNC(src, PROC_REF(drain_influence), user, 2, codex.drain_speed)
 	return TRUE
 
 /**
@@ -219,18 +224,18 @@
  *
  * If successful, the influence is drained and deleted.
  */
-/obj/effect/heretic_influence/proc/drain_influence(mob/living/user, knowledge_to_gain)
+/obj/effect/heretic_influence/proc/drain_influence(mob/living/user, knowledge_to_gain, drain_speed = 10 SECONDS)
 
 	being_drained = TRUE
-	loc.balloon_alert(user, "draining influence...")
+	loc.balloon_alert(user, "добыча влияния...")
 
-	if(!do_after(user, 10 SECONDS, src, hidden = TRUE))
+	if(!do_after(user, drain_speed, src, hidden = TRUE))
 		being_drained = FALSE
-		loc.balloon_alert(user, "interrupted!")
+		loc.balloon_alert(user, "прервано!")
 		return
 
 	// We don't need to set being_drained back since we delete after anyways
-	loc.balloon_alert(user, "influence drained")
+	loc.balloon_alert(user, "влияние добыто")
 
 	var/datum/antagonist/heretic/heretic_datum = GET_HERETIC(user)
 	heretic_datum.knowledge_points += knowledge_to_gain
@@ -244,7 +249,7 @@
 /obj/effect/heretic_influence/proc/after_drain(mob/living/user)
 	if(user)
 		to_chat(user, span_hypnophrase(pick_list(HERETIC_INFLUENCE_FILE, "drain_message")))
-		to_chat(user, span_warning("[src] begins to fade into reality!"))
+		to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает проясняться в реальность!"))
 
 	var/obj/effect/visible_heretic_influence/illusion = new /obj/effect/visible_heretic_influence(drop_location())
 	illusion.name = "\improper" + pick_list(HERETIC_INFLUENCE_FILE, "drained") + " " + format_text(name)

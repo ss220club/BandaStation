@@ -600,7 +600,7 @@ GLOBAL_LIST_INIT(command_strings, list(
 		return
 	var/mob/the_user = ui.user
 	if(!allowed(the_user))
-		balloon_alert(the_user, "access denied!")
+		balloon_alert(the_user, "в доступе отказано!")
 		return
 
 	if(action == "lock")
@@ -719,7 +719,7 @@ GLOBAL_LIST_INIT(command_strings, list(
 		if(isnull(mind))
 			mind.transfer_to(paicard.pai)
 		else
-			paicard.pai.key = key
+			paicard.pai.PossessByPlayer(key)
 	else
 		ghostize(FALSE) // The pAI card that just got ejected was dead.
 

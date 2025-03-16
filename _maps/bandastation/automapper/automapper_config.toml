@@ -17,14 +17,6 @@
 # coordinates = [133, 182, 1]
 # trait_name = "Station"
 
-# CentCom Crew Quarters
-[templates.CentCom_kekypaj]
-map_files = ["CentCom.dmm"]
-directory = "_maps/bandastation/automapper/templates/centcom/"
-required_map = "builtin"
-coordinates = [12, 53, 1]
-trait_name = "CentCom"
-
 # DeltaStation
 [templates.deltastation_lawyer_office]
 map_files = ["deltastation_lawyer_office.dmm"]
@@ -47,6 +39,27 @@ required_map = "DeltaStation2.dmm"
 coordinates = [146, 108, 1]
 trait_name = "Station"
 
+[templates.deltastation_argos_specops_ferry_ports_office]
+map_files = ["deltastation_argos_specops_ferry_ports.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [141, 194, 1]
+trait_name = "Station"
+
+[templates.deltastation_cryo]
+map_files = ["deltastation_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [216, 93, 1]
+trait_name = "Station"
+
+[templates.deltastation_perma_cryo]
+map_files = ["deltastation_perma_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [206, 168, 1]
+trait_name = "Station"
+
 # MetaStation
 [templates.metastation_lawyer_office]
 map_files = ["metastation_lawyer_office.dmm"]
@@ -67,6 +80,34 @@ map_files = ["metastation_ntr_blueshield_office.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
 coordinates = [101, 115, 1]
+trait_name = "Station"
+
+[templates.metastation_argos_port]
+map_files = ["metastation_argos_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [31, 142, 1]
+trait_name = "Station"
+
+[templates.metastation_specops_port]
+map_files = ["metastation_specops_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [31, 128, 1]
+trait_name = "Station"
+
+[templates.metastation_cryo]
+map_files = ["metastation_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [133, 182, 1]
+trait_name = "Station"
+
+[templates.metastation_perma_cryo]
+map_files = ["metastation_perma_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [84, 189, 1]
 trait_name = "Station"
 
 # IceBoxStation
@@ -98,6 +139,34 @@ required_map = "IceBoxStation.dmm"
 coordinates = [92, 147, 2]
 trait_name = "Station"
 
+[templates.iceboxstation_specops_port]
+map_files = ["iceboxstation_specops_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [33, 109, 3]
+trait_name = "Station"
+
+[templates.iceboxstation_argos_port]
+map_files = ["iceboxstation_argos_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [27, 150, 3]
+trait_name = "Station"
+
+[templates.icebox_cryo]
+map_files = ["icebox_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [117, 142, 3]
+trait_name = "Station"
+
+[templates.icebox_perma_cryo]
+map_files = ["icebox_perma_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [108, 184, 2]
+trait_name = "Station"
+
 # TramStation
 [templates.tramstation_detective_office]
 map_files = ["tramstation_detective_office.dmm"]
@@ -118,56 +187,8 @@ map_files = ["tramstation_ntr_blueshield_office.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [79, 130, 2]
-
-# Metastation Cryo
-[templates.metastation_cryo]
-map_files = ["metastation_cryo.dmm"]
-directory = "_maps/bandastation/automapper/templates/metastation/"
-required_map = "MetaStation.dmm"
-coordinates = [133, 182, 1]
 trait_name = "Station"
 
-# Metastation Perma Cryo
-[templates.metastation_perma_cryo]
-map_files = ["metastation_perma_cryo.dmm"]
-directory = "_maps/bandastation/automapper/templates/metastation/"
-required_map = "MetaStation.dmm"
-coordinates = [84, 189, 1]
-trait_name = "Station"
-
-# Deltastation Cryo
-[templates.deltastation_cryo]
-map_files = ["deltastation_cryo.dmm"]
-directory = "_maps/bandastation/automapper/templates/deltastation/"
-required_map = "DeltaStation2.dmm"
-coordinates = [216, 93, 1]
-trait_name = "Station"
-
-# Deltastation Perma Cryo
-[templates.deltastation_perma_cryo]
-map_files = ["deltastation_perma_cryo.dmm"]
-directory = "_maps/bandastation/automapper/templates/deltastation/"
-required_map = "DeltaStation2.dmm"
-coordinates = [206, 168, 1]
-trait_name = "Station"
-
-# Icebox Cryo
-[templates.icebox_cryo]
-map_files = ["icebox_cryo.dmm"]
-directory = "_maps/bandastation/automapper/templates/iceboxstation/"
-required_map = "IceBoxStation.dmm"
-coordinates = [117, 142, 3]
-trait_name = "Station"
-
-# Icebox Perma Cryo
-[templates.icebox_perma_cryo]
-map_files = ["icebox_perma_cryo.dmm"]
-directory = "_maps/bandastation/automapper/templates/iceboxstation/"
-required_map = "IceBoxStation.dmm"
-coordinates = [108, 184, 2]
-trait_name = "Station"
-
-# Tramstation Cryo
 [templates.tramstation_cryo]
 map_files = ["tramstation_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
@@ -175,15 +196,14 @@ required_map = "tramstation.dmm"
 coordinates = [68, 102, 2]
 trait_name = "Station"
 
-# Tramstation Perma Cryo
 [templates.tramstation_perma_cryo]
 map_files = ["tramstation_perma_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
-coordinates = [79, 149, 1]
+coordinates = [70, 155, 1]
 trait_name = "Station"
 
-# Birdshot Cryo
+# Birdshot
 [templates.birdshot_cryo]
 map_files = ["birdshot_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/birdshot/"
@@ -191,7 +211,6 @@ required_map = "birdshot.dmm"
 coordinates = [142, 84, 1]
 trait_name = "Station"
 
-# Birdshot Perma Cryo
 [templates.birdshot_perma_cryo]
 map_files = ["birdshot_perma_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/birdshot/"
@@ -199,7 +218,7 @@ required_map = "birdshot.dmm"
 coordinates = [76, 33, 1]
 trait_name = "Station"
 
-# Nebulastation Cryo
+# Nebulastation
 [templates.nebulastation_cryo]
 map_files = ["nebulastation_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/nebulastation/"
@@ -207,10 +226,23 @@ required_map = "NebulaStation.dmm"
 coordinates = [81, 145, 1]
 trait_name = "Station"
 
-# Nebulastation Perma Cryo
 [templates.nebulastation_perma_cryo]
 map_files = ["nebulastation_perma_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/nebulastation/"
 required_map = "NebulaStation.dmm"
 coordinates = [154, 86, 2]
+trait_name = "Station"
+
+[templates.tramstation_argos_port]
+map_files = ["tramstation_argos_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [23, 130, 2]
+trait_name = "Station"
+
+[templates.tramstation_specops_port]
+map_files = ["tramstation_specops_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [9, 114, 2]
 trait_name = "Station"

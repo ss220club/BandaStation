@@ -42,7 +42,7 @@
 /datum/round_event/stray_cargo/announce(fake)
 	if(fake)
 		impact_area = find_event_area()
-	priority_announce("Stray cargo pod detected on long-range scanners. Expected location of impact: [impact_area.name].", "Collision Alert")
+	priority_announce("Бродячая грузовая капсула обнаружена на сканерах дальнего действия. Ожидаемое место падения: [impact_area.name].", "Предупреждение о столкновении")
 
 /**
 * Tries to find a valid area, throws an error if none are found
@@ -66,6 +66,7 @@
 			var/datum/supply_pack/pack_type = pack
 			if(initial(pack_type.special))
 				stray_spawnable_supply_packs -= pack
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 ///Spawns a random supply pack, puts it in a pod, and spawns it on a random tile of the selected area
 /datum/round_event/stray_cargo/start()
@@ -149,7 +150,7 @@
 	var/admin_selected_pack = tgui_alert(usr,"Customize Pod contents?", "Pod Contents", list("Yes", "No", "Cancel"))
 	switch(admin_selected_pack)
 		if("Yes")
-			override_contents()
+			return override_contents()
 		if("No")
 			pack_type_override = null
 		else
@@ -161,7 +162,13 @@
 	var/pack_telecrystals = tgui_input_number(usr, "Please input crate's value in telecrystals.", "Set Telecrystals.", 30)
 	if(isnull(pack_telecrystals))
 		return ADMIN_CANCEL_EVENT
-	var/list/possible_uplinks = list("Traitor" = UPLINK_TRAITORS, "Nuke Op" = UPLINK_NUKE_OPS, "Clown Op" = UPLINK_CLOWN_OPS)
+	var/list/possible_uplinks = list(
+		"Traitor" = UPLINK_TRAITORS,
+		"Nuke Op" = UPLINK_NUKE_OPS,
+		"Clown Op" = UPLINK_CLOWN_OPS,
+		"Lone Op" = UPLINK_LONE_OP,
+		"Spy" = UPLINK_SPY
+		)
 	var/uplink_type = tgui_input_list(usr, "Choose uplink to draw items from.", "Choose uplink type.", possible_uplinks)
 	var/selection
 	if(!isnull(uplink_type))

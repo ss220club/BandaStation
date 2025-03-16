@@ -21,3 +21,7 @@
 /mob/living/basic/clown/banana
 	// Базовое значение -1
 	speed = 0.5
+
+/turf/open/floor/bluespace
+	// Базовое значение -1
+	slowdown = -0.25

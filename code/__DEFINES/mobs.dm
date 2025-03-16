@@ -73,8 +73,12 @@
 #define MOB_PLANT (1 << 10)
 ///The mob is a goopy creature, probably coming from xenobiology.
 #define MOB_SLIME (1 << 11)
-/// Mob is fish or water-related.
+///The mob is fish or water-related.
 #define MOB_AQUATIC (1 << 12)
+///The mob is a mining-related mob. It's the plasma, you see. Gets in ya bones.
+#define MOB_MINING (1 << 13)
+///The mob is a crustacean. Like crabs. Or lobsters.
+#define MOB_CRUSTACEAN (1 << 14)
 
 //Lung respiration type flags
 #define RESPIRATION_OXYGEN (1 << 0)
@@ -95,6 +99,10 @@
 #define BODYTYPE_GOLEM (1<<4)
 //The limb is a peg limb
 #define BODYTYPE_PEG (1<<5)
+//The limb is plantly (and will regen if photosynthesis is active)
+#define BODYTYPE_PLANT (1<<6)
+//This limb is shadowy and will regen if shadowheal is active
+#define BODYTYPE_SHADOW (1<<7)
 
 // Bodyshape defines for how things can be worn, i.e., what "shape" the mob sprite is
 ///The limb fits the human mold. This is not meant to be literal, if the sprite "fits" on a human, it is "humanoid", regardless of origin.
@@ -329,6 +337,9 @@
 //Slime extract crossing. Controls how many extracts is required to feed to a slime to core-cross.
 #define SLIME_EXTRACT_CROSSING_REQUIRED 10
 
+//How many slimes can be on the same tile before it can no longer reproduce.
+#define SLIME_OVERCROWD_AMOUNT 2
+
 //Slime commands defines
 #define SLIME_FRIENDSHIP_FOLLOW 3 //Min friendship to order it to follow
 #define SLIME_FRIENDSHIP_STOPEAT 5 //Min friendship to order it to stop eating someone
@@ -478,11 +489,11 @@
 #define MAX_REVIVE_FIRE_DAMAGE 180
 #define MAX_REVIVE_BRUTE_DAMAGE 180
 
-#define DEFAULT_BRUTE_EXAMINE_TEXT "bruising"
-#define DEFAULT_BURN_EXAMINE_TEXT "burns"
+#define DEFAULT_BRUTE_EXAMINE_TEXT "ушибы"
+#define DEFAULT_BURN_EXAMINE_TEXT "ожоги"
 
-#define ROBOTIC_BRUTE_EXAMINE_TEXT "denting"
-#define ROBOTIC_BURN_EXAMINE_TEXT "charring"
+#define ROBOTIC_BRUTE_EXAMINE_TEXT "вмятины"
+#define ROBOTIC_BURN_EXAMINE_TEXT "обугления"
 
 #define GLASSY_BRUTE_EXAMINE_TEXT "cracking"
 #define GLASSY_BURN_EXAMINE_TEXT "deformation"
@@ -516,13 +527,13 @@
 // Randomization keys for calling wabbajack with.
 // Note the contents of these keys are important, as they're displayed to the player
 // Ex: (You turn into a "monkey", You turn into a "xenomorph")
-#define WABBAJACK_MONKEY "monkey"
-#define WABBAJACK_ROBOT "robot"
-#define WABBAJACK_CLOWN "clown"
-#define WABBAJACK_SLIME "slime"
-#define WABBAJACK_XENO "xenomorph"
-#define WABBAJACK_HUMAN "humanoid"
-#define WABBAJACK_ANIMAL "animal"
+#define WABBAJACK_MONKEY "мартышки"
+#define WABBAJACK_ROBOT "робота"
+#define WABBAJACK_CLOWN "клоуна"
+#define WABBAJACK_SLIME "слайма"
+#define WABBAJACK_XENO "ксеноморфа"
+#define WABBAJACK_HUMAN "гуманоида"
+#define WABBAJACK_ANIMAL "животного"
 
 // Reasons a defibrillation might fail
 #define DEFIB_POSSIBLE (1<<0)
@@ -536,6 +547,7 @@
 #define DEFIB_FAIL_NO_INTELLIGENCE (1<<8)
 #define DEFIB_FAIL_BLACKLISTED (1<<9)
 #define DEFIB_NOGRAB_AGHOST (1<<10)
+#define DEFIB_FAIL_PERMANENTLY_DEAD (1<<11) // BANDASTATION ADDITION - PERMA-DEATH
 
 // Bit mask of possible return values by can_defib that would result in a revivable patient
 #define DEFIB_REVIVABLE_STATES (DEFIB_FAIL_NO_HEART | DEFIB_FAIL_FAILING_HEART | DEFIB_FAIL_HUSK | DEFIB_FAIL_TISSUE_DAMAGE | DEFIB_FAIL_FAILING_BRAIN | DEFIB_POSSIBLE)
@@ -827,12 +839,13 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 #define ALL_EXTERNAL_OVERLAYS EXTERNAL_FRONT | EXTERNAL_ADJACENT | EXTERNAL_BEHIND
 
 // Bitflags for external organs restylability
+#define EXTERNAL_RESTYLE_ALL ALL
 /// This organ allows restyle through plant restyling (like secateurs)
-#define EXTERNAL_RESTYLE_PLANT (1 << 1)
+#define EXTERNAL_RESTYLE_PLANT (1 << 0)
 /// This organ allows restyling with flesh restyling stuff (surgery or something idk)
-#define EXTERNAL_RESTYLE_FLESH (1 << 2)
+#define EXTERNAL_RESTYLE_FLESH (1 << 1)
 /// This organ allows restyling with enamel restyling (like a fucking file or something?). It's for horns and shit
-#define EXTERNAL_RESTYLE_ENAMEL (1 << 3)
+#define EXTERNAL_RESTYLE_ENAMEL (1 << 2)
 
 //Mob Overlay Index Shortcuts for alternate_worn_layer, layers
 //Because I *KNOW* somebody will think layer+1 means "above"

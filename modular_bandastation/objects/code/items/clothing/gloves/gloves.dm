@@ -28,3 +28,10 @@
 	. = ..()
 	if(clothing_flags & FIBERLESS_GLOVES)
 		.["безволоконная"] = "Не оставляет волокна."
+
+/obj/item/clothing/gloves/fingerless/biker_gloves
+	name = "biker gloves"
+	desc = "Обычные черные перчатки с черепом."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/gloves.dmi'
+	icon_state = "bike_gloves"

@@ -1,14 +1,14 @@
 /datum/job/captain
 	title = JOB_CAPTAIN
-	description = "Be responsible for the station, manage your Heads of Staff, \
-		keep the crew alive, be prepared to do anything and everything or die \
-		horribly trying."
+	description = "Будьте ответственны за станцию, руководите главами, \
+		сохраните жизнь экипажу, будьте готовы сделать всё возможное или умрите \
+		в муках, пытаясь это сделать."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
 	department_head = list("CentCom")
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Nanotrasen officials and Space Law"
+	supervisors = "официальными лицами Нанотрейзен"
 	req_admin_notify = 1
 	minimal_player_age = 14
 	exp_requirements = 180
@@ -52,11 +52,11 @@
 
 
 /datum/job/captain/get_captaincy_announcement(mob/living/captain)
-	return "Captain [captain.real_name] on deck!"
+	return "Капитан [captain.real_name] на борту!"
 
 /datum/job/captain/get_radio_information()
 	. = ..()
-	. += "\nYou have access to all radio channels, but they are not automatically tuned. Check your radio for more information."
+	. += "\nУ вас есть доступ к радиоканалам всех отделов на станции, но по умолчанию они отключены. Для получения большей информации осмотрите наушник."
 
 /datum/outfit/job/captain
 	name = "Captain"
@@ -67,7 +67,7 @@
 	uniform = /obj/item/clothing/under/rank/captain
 	suit = /obj/item/clothing/suit/armor/vest/capcarapace
 	backpack_contents = list(
-		/obj/item/melee/baton/telescopic = 1,
+		/obj/item/melee/baton/telescopic/gold = 1,
 		/obj/item/station_charter = 1,
 		)
 	belt = /obj/item/modular_computer/pda/heads/captain

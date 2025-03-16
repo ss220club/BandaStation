@@ -48,7 +48,7 @@
 	if((item_flags & ABSTRACT) || HAS_TRAIT(src, TRAIT_NODROP))
 		return
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, span_notice("You set [src] down gently on the ground."))
+		to_chat(user, span_notice("Вы осторожно кладете [declent_ru(ACCUSATIVE)] на землю."))
 		release()
 		return
 
@@ -71,13 +71,13 @@
 	if(isliving(loc))
 		var/mob/living/L = loc
 		if(display_messages)
-			to_chat(L, span_warning("[released_mob] wriggles free!"))
+			to_chat(L, span_warning("[capitalize(released_mob.declent_ru(NOMINATIVE))] вырывается из рук!"))
 		L.dropItemToGround(src)
 	released_mob.forceMove(drop_location())
 	released_mob.reset_perspective()
 	released_mob.setDir(SOUTH)
 	if(display_messages)
-		released_mob.visible_message(span_warning("[released_mob] uncurls!"))
+		released_mob.visible_message(span_warning("[capitalize(released_mob.declent_ru(NOMINATIVE))] расправляется!"))
 	if(del_on_release && !destroying)
 		qdel(src)
 	return TRUE
@@ -95,8 +95,8 @@
 
 /obj/item/clothing/head/mob_holder/on_found(mob/finder)
 	if(held_mob?.will_escape_storage())
-		to_chat(finder, span_warning("\A [held_mob.name] pops out! "))
-		finder.visible_message(span_warning("\A [held_mob.name] pops out of the container [finder] is opening!"), ignored_mobs = finder)
+		to_chat(finder, span_warning("[capitalize(held_mob.declent_ru(NOMINATIVE))] вылезает! "))
+		finder.visible_message(span_warning("[capitalize(held_mob.declent_ru(NOMINATIVE))] вылезает из контейнера, который открывает [finder.declent_ru(NOMINATIVE)]!"), ignored_mobs = finder)
 		release(TRUE, FALSE)
 		return
 

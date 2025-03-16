@@ -22,7 +22,7 @@
 		/obj/item/storage/fancy/cigarettes/cigpack_shadyjims = 10,
 		/obj/item/storage/box/donkpockets = 10,
 		/obj/effect/spawner/random/contraband/plus = 10,
-		/obj/item/reagent_containers/pill/maintenance = 5,
+		/obj/item/reagent_containers/applicator/pill/maintenance = 5,
 		/obj/item/survivalcapsule/fishing = 5,
 	)
 
@@ -161,7 +161,7 @@
 	loot = list(
 		/obj/item/grenade/chem_grenade/metalfoam,
 		/obj/item/grenade/chem_grenade/cleaner,
-		/obj/effect/spawner/random/entertainment/colorful_grenades,
+		// /obj/effect/spawner/random/entertainment/colorful_grenades, /// BANDASATION REMOVAL - Remove Fun
 		/obj/item/grenade/smokebomb,
 		/obj/item/grenade/chem_grenade/antiweed,
 		/obj/item/grenade/spawnergrenade/syndiesoap,

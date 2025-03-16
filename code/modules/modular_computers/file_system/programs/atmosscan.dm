@@ -8,7 +8,7 @@
 	filedesc = "AtmoZphere"
 	downloader_category = PROGRAM_CATEGORY_ENGINEERING
 	program_open_overlay = "air"
-	extended_desc = "A small built-in sensor reads out the atmospheric conditions around the device."
+	extended_desc = "Небольшой встроенный датчик считывает данные об атмосферных изменениях вокруг устройства."
 	size = 4
 	tgui_id = "NtosGasAnalyzer"
 	program_icon = "thermometer-half"
@@ -28,12 +28,12 @@
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /// Keep this in sync with its tool based counterpart [/obj/proc/analyzer_act] and [/atom/proc/tool_act]
-/datum/computer_file/program/atmosscan/tap(atom/A, mob/living/user, params)
+/datum/computer_file/program/atmosscan/tap(atom/tapped_atom, mob/living/user, list/modifiers)
 	if(atmozphere_mode != ATMOZPHERE_SCAN_CLICK)
 		return FALSE
-	if(!atmos_scan(user=user, target=A, silent=FALSE))
+	if(!atmos_scan(user, tapped_atom))
 		return FALSE
-	on_analyze(source=computer, target=A)
+	on_analyze(computer, tapped_atom)
 	return TRUE
 
 /// Updates our gasmix data if on click mode.

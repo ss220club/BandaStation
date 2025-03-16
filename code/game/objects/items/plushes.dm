@@ -729,7 +729,7 @@
 	var/suicide_count = 0
 
 /obj/item/toy/plush/moth/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] stares deeply into the eyes of [src] and it begins consuming [user.p_them()]!  It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] stares deeply into the eyes of [src] and it begins consuming [user.p_them()]!  Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	suicide_count++
 	if(suicide_count < 3)
 		desc = "A plushie depicting an unsettling mothperson. After killing [suicide_count] [suicide_count == 1 ? "person" : "people"] it's not looking so huggable now..."
@@ -800,3 +800,15 @@
 	icon_state = "donkpocket"
 	attack_verb_continuous = list("donks")
 	attack_verb_simple = list("donk")
+
+/obj/item/toy/plush/human
+	name = "human plushie"
+	desc = "This is a felt plush of a human. All craftsmanship is of the lowest quality. The human is crying. The human is screaming."
+	icon_state = "plushie_human"
+	inhand_icon_state = null //i would rather not have a blue coder plushie inhand
+	attack_verb_continuous = list("screams at", "strikes", "bashes")
+	attack_verb_simple = list("scream at", "strike", "bash")
+	squeak_override = list(
+		'sound/mobs/humanoids/human/scream/malescream_2.ogg' = 10, //10% chance to scream, rare but not abysmal
+		'sound/items/weapons/smash.ogg' = 90,
+		)

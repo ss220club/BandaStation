@@ -62,3 +62,29 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
 	icon_state = "blueshield_cloak"
+
+/obj/item/clothing/neck/cloak/armor/captain/black
+	name = "black captain cloak"
+	desc = "Носится верховным лидером станции."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
+	icon_state = "capcloak_black"
+	worn_icon_state = "capcloak_black"
+
+/obj/item/clothing/neck/cloak/armor/captain/black/Initialize(mapload)
+	. = ..()
+	desc = "Носится верховным лидером станции [station_name()]."
+
+/obj/item/clothing/neck/cloak/deathsquad/officer/field/cloak_nt
+	name = "armored cloak of nanotrassen navy officer"
+	desc = "Один из вариантов торжественного одеяния сотрудников Верховного Командования Нанотрейзен, подойдет для официальной встречи или важного вылета. Сшита из лёгкой и сверхпрочной ткани."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
+	icon_state = "ntsc_cloak"
+
+/obj/item/clothing/neck/cloak/deathsquad/officer/field/cloak_nt/coat_nt
+	name = "cloak of field nanotrassen navy officer"
+	desc = "Парадный плащ нового образца, внедряемый на объектах компании в последнее время. Отличительной чертой является стоячий воротник и резаный подол. Невысокие показатели защиты нивелируются пафосом, источаемым этим плащом."
+	icon_state = "ntsc_coat"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'

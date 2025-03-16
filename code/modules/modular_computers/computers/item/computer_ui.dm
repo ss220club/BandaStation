@@ -46,14 +46,12 @@
 // Operates TGUI
 /obj/item/modular_computer/ui_interact(mob/user, datum/tgui/ui)
 	if(!enabled || !user.can_read(src, READING_CHECK_LITERACY))
-		if(ui)
-			ui.close()
+		ui?.close()
 		return
 
 	// Robots don't really need to see the screen, their wireless connection works as long as computer is on.
 	if(!screen_on && !issilicon(user))
-		if(ui)
-			ui.close()
+		ui?.close()
 		return
 
 	if(honkvirus_amount > 0) // EXTRA annoying, huh!
@@ -63,6 +61,8 @@
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		update_tablet_open_uis(user)
+	else if(active_program?.always_update_ui)
+		active_program.ui_interact(user, ui)
 
 /obj/item/modular_computer/ui_assets(mob/user)
 	var/list/data = list()
@@ -120,6 +120,10 @@
 			"alert" = program.alert_pending,
 		))
 
+	data["alert_style"] = get_security_level_relevancy()
+	data["alert_color"] = SSsecurity_level?.current_security_level?.announcement_color
+	data["alert_name"] = SSsecurity_level?.current_security_level?.name_shortform
+
 	return data
 
 // Handles user's GUI input
@@ -131,7 +135,7 @@
 	if(ishuman(usr) && !allow_chunky)
 		var/mob/living/carbon/human/human_user = usr
 		if(human_user.check_chunky_fingers())
-			balloon_alert(human_user, "fingers are too big!")
+			balloon_alert(human_user, "слишком большие пальцы!")
 			return TRUE
 
 	switch(action)

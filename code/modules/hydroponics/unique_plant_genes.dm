@@ -6,7 +6,7 @@
 /datum/plant_gene/trait/anti_magic
 	name = "Anti-Magic Vacuoles"
 	description = "You can hide behind it from a fireball!"
-	icon = "hand-sparkles"
+	icon = FA_ICON_HAND_SPARKLES
 	/// The amount of anti-magic blocking uses we have.
 	var/shield_uses = 1
 
@@ -15,15 +15,16 @@
 	if(!.)
 		return
 	var/obj/item/seeds/our_seed = our_plant.get_plant_seed()
-	shield_uses = round(our_seed.potency / 20)
+	shield_uses = round(our_seed.potency / 95) // BANDASTATION EDIT - Original:  / 20)
 	//deliver us from evil o melon god
-	our_plant.AddComponent(/datum/component/anti_magic, \
-		antimagic_flags = MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY, \
-		inventory_flags = ITEM_SLOT_HANDS, \
-		charges = shield_uses, \
-		drain_antimagic = CALLBACK(src, PROC_REF(drain_antimagic)), \
-		expiration = CALLBACK(src, PROC_REF(expire)), \
-	)
+	if(shield_uses >= 1) // BANDASTATION Addition - No more shield if potency less than 95
+		our_plant.AddComponent(/datum/component/anti_magic, \
+			antimagic_flags = MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY, \
+			inventory_flags = ITEM_SLOT_HANDS, \
+			charges = shield_uses, \
+			drain_antimagic = CALLBACK(src, PROC_REF(drain_antimagic)), \
+			expiration = CALLBACK(src, PROC_REF(expire)), \
+		)
 
 /// When the plant our gene is hosted in is drained of an anti-magic charge.
 /datum/plant_gene/trait/anti_magic/proc/drain_antimagic(mob/user, obj/item/our_plant)
@@ -39,7 +40,7 @@
 /datum/plant_gene/trait/attack
 	name = "On Attack Trait"
 	description = "It is a very dangerous weapon."
-	icon = "hand-fist"
+	icon = FA_ICON_HAND_FIST
 	/// The multiplier we apply to the potency to calculate force. Set to 0 to not affect the force.
 	var/force_multiplier = 0
 	/// If TRUE, our plant will degrade in force every hit until diappearing.
@@ -153,7 +154,7 @@
 /// Traits for plants with backfire effects. These are negative effects that occur when a plant is handled without gloves/unsafely.
 /datum/plant_gene/trait/backfire
 	name = "Backfire Trait"
-	icon = "mitten"
+	icon = FA_ICON_MITTEN
 	description = "Be careful when holding it without protection."
 	/// Whether our actions are cancelled when the backfire triggers.
 	var/cancel_action_on_backfire = FALSE
@@ -313,7 +314,7 @@
 /datum/plant_gene/trait/mob_transformation
 	name = "Dormant Ferocity"
 	description = "It comes to life when shaken in hand."
-	icon = "heart-pulse"
+	icon = FA_ICON_HEART_PULSE
 	trait_ids = ATTACK_SELF_ID
 	/// Whether mobs spawned by this trait are dangerous or not.
 	var/dangerous = FALSE
@@ -456,7 +457,7 @@
 /datum/plant_gene/trait/one_bite
 	name = "Large Bites"
 	description = "You can't hold off from eating this in one bite!"
-	icon = "drumstick-bite"
+	icon = FA_ICON_DRUMSTICK_BITE
 
 /datum/plant_gene/trait/one_bite/on_new_plant(obj/item/our_plant, newloc)
 	. = ..()
@@ -470,8 +471,8 @@
 /// Traits for plants with a different base max_volume.
 /datum/plant_gene/trait/modified_volume
 	name = "Deep Vesicles"
-	description = "It has more reagents than usual."
-	icon = "vials"
+	description = "It has extra reagent volume."
+	icon = FA_ICON_VIALS
 	/// The new number we set the plant's max_volume to.
 	var/new_capcity = 100
 
@@ -487,18 +488,21 @@
 /// Omegaweed's funny 420 max volume gene
 /datum/plant_gene/trait/modified_volume/omega_weed
 	name = "Dank Vesicles"
+	description = "It can hold up to 420 units of reagents."
+	icon = FA_ICON_CANNABIS
 	new_capcity = 420
 
 /// Cherry Bomb's increased max volume gene
 /datum/plant_gene/trait/modified_volume/cherry_bomb
 	name = "Powder-Filled Bulbs"
+	description = "It can hold up to 125 units of reagents."
 	new_capcity = 125
 
 /// Plants that explode when used (based on their reagent contents)
 /datum/plant_gene/trait/bomb_plant
 	name = "Explosive Contents"
 	description = "Don't shake it, the contents may explode."
-	icon = "bomb"
+	icon = FA_ICON_BOMB
 	trait_ids = ATTACK_SELF_ID
 
 /datum/plant_gene/trait/bomb_plant/on_new_plant(obj/item/our_plant, newloc)
@@ -606,7 +610,7 @@
 /datum/plant_gene/trait/gas_production
 	name = "Miasma Gas Production"
 	description = "This plant stinks when grown."
-	icon = "wind"
+	icon = FA_ICON_WIND
 	/// The location of our tray, if we have one.
 	var/datum/weakref/home_tray
 	/// The seed emitting gas.
@@ -676,6 +680,14 @@
 	stank.gases[/datum/gas/miasma][MOLES] = (seed.yield + 6) * 3.5 * MIASMA_CORPSE_MOLES * seconds_per_tick // this process is only being called about 2/7 as much as corpses so this is 12-32 times a corpses
 	stank.temperature = T20C // without this the room would eventually freeze and miasma mining would be easier
 	tray_turf.assume_air(stank)
+
+/// Hard caps the yield at 5 (effectively)
+/datum/plant_gene/trait/complex_harvest
+	name = "Complex Harvest"
+	description = "Halves the maximum yield of the plant, and prevents it from benefiting from pollination's yield bonus."
+	icon = FA_ICON_SLASH
+	trait_flags = TRAIT_HALVES_YIELD|TRAIT_NO_POLLINATION
+	mutability_flags = NONE
 
 /// Starthistle's essential invasive spreading
 /datum/plant_gene/trait/invasive/galaxythistle

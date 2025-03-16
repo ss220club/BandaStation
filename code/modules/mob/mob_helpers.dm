@@ -216,18 +216,6 @@
 			return M
 	return 0
 
-///Find the first name of a mob from the real name with regex
-/mob/proc/first_name()
-	var/static/regex/firstname = new("^\[^\\s-\]+") //First word before whitespace or "-"
-	firstname.Find(real_name)
-	return firstname.match
-
-/// Find the last name of a mob from the real name with regex
-/mob/proc/last_name()
-	var/static/regex/lasttname = new("\[^\\s-\]+$") //First word before whitespace or "-"
-	lasttname.Find(real_name)
-	return lasttname.match
-
 ///Returns a mob's real name between brackets. Useful when you want to display a mob's name alongside their real name
 /mob/proc/get_realname_string()
 	if(real_name && real_name != name)
@@ -369,30 +357,30 @@
  * Automatic logging and uses poll_candidates_for_mob, how convenient
  */
 /proc/offer_control(mob/M)
-	to_chat(M, "Control of your mob has been offered to dead players.")
+	to_chat(M, "Контроль над вашей куклой был предложен мертвым игрокам.")
 	if(usr)
 		log_admin("[key_name(usr)] has offered control of ([key_name(M)]) to ghosts.")
 		message_admins("[key_name_admin(usr)] has offered control of ([ADMIN_LOOKUPFLW(M)]) to ghosts")
-	var/poll_message = "Do you want to play as [span_danger(M.real_name)]?"
+	var/poll_message = "Хотите ли вы играть за - [span_danger(M.real_name)]?"
 	if(M.mind)
-		poll_message = "[poll_message] Job: [span_notice(M.mind.assigned_role.title)]."
+		poll_message = "[poll_message] Должность: [span_notice(job_title_ru(M.mind.assigned_role.title))]."
 		if(M.mind.special_role)
-			poll_message = "[poll_message] Status: [span_boldnotice(M.mind.special_role)]."
+			poll_message = "[poll_message] Роль: [span_boldnotice(M.mind.special_role)]."
 		else
 			var/datum/antagonist/A = M.mind.has_antag_datum(/datum/antagonist/)
 			if(A)
-				poll_message = "[poll_message] Status: [span_boldnotice(A.name)]."
+				poll_message = "[poll_message] Роль: [span_boldnotice(A.name)]."
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(poll_message, check_jobban = ROLE_PAI, poll_time = 10 SECONDS, checked_target = M, alert_pic = M, role_name_text = "ghost control")
 
 	if(chosen_one)
-		to_chat(M, "Your mob has been taken over by a ghost!")
+		to_chat(M, "Ваша кукла была передана призраку!")
 		message_admins("[key_name_admin(chosen_one)] has taken control of ([ADMIN_LOOKUPFLW(M)])")
 		M.ghostize(FALSE)
-		M.key = chosen_one.key
+		M.PossessByPlayer(chosen_one.key)
 		M.client?.init_verbs()
 		return TRUE
 	else
-		to_chat(M, "There were no ghosts willing to take control.")
+		to_chat(M, "Не было найдено желающих призраков для передачи контроля.")
 		message_admins("No ghosts were willing to take control of [ADMIN_LOOKUPFLW(M)])")
 		return FALSE
 

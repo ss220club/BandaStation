@@ -32,7 +32,7 @@
 		/obj/item/reagent_containers/cup/beaker,
 		/obj/item/reagent_containers/cup/bottle,
 		/obj/item/reagent_containers/cup/tube,
-		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/applicator,
 		/obj/item/reagent_containers/syringe,
 		/obj/item/reagent_containers/medigel,
 		/obj/item/reagent_containers/spray,
@@ -91,7 +91,7 @@
 	desc = "A first aid kit with the ability to heal common types of injuries."
 
 /obj/item/storage/medkit/regular/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins giving [user.p_them()]self aids with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins giving [user.p_them()]self aids with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/storage/medkit/regular/PopulateContents()
@@ -108,6 +108,7 @@
 
 /obj/item/storage/medkit/emergency
 	icon_state = "medbriefcase"
+	inhand_icon_state = "medkit-emergency"
 	name = "emergency medkit"
 	desc = "A very simple first aid kit meant to secure and stabilize serious wounds for later treatment."
 
@@ -127,7 +128,7 @@
 /obj/item/storage/medkit/surgery
 	name = "surgical medkit"
 	icon_state = "medkit_surgery"
-	inhand_icon_state = "medkit"
+	inhand_icon_state = "medkit-surgical"
 	desc = "A high capacity aid kit for doctors, full of medical supplies and basic surgical equipment."
 
 /obj/item/storage/medkit/surgery/Initialize(mapload)
@@ -178,7 +179,7 @@
 	damagetype_healed = BURN
 
 /obj/item/storage/medkit/fire/get_medbot_skin()
-	return "ointment"
+	return "burn"
 
 /obj/item/storage/medkit/fire/suicide_act(mob/living/carbon/user)
 	user.visible_message(span_suicide("[user] begins rubbing \the [src] against [user.p_them()]self! It looks like [user.p_theyre()] trying to start a fire!"))
@@ -188,7 +189,7 @@
 	if(empty)
 		return
 	var/static/items_inside = list(
-		/obj/item/reagent_containers/pill/patch/aiuri = 3,
+		/obj/item/reagent_containers/applicator/patch/aiuri = 3,
 		/obj/item/reagent_containers/spray/hercuri = 1,
 		/obj/item/reagent_containers/hypospray/medipen/oxandrolone = 1,
 		/obj/item/reagent_containers/hypospray/medipen = 1)
@@ -205,7 +206,7 @@
 	return "tox"
 
 /obj/item/storage/medkit/toxin/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins licking the lead paint off \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins licking the lead paint off \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return TOXLOSS
 
 
@@ -229,10 +230,10 @@
 	damagetype_healed = OXY
 
 /obj/item/storage/medkit/o2/get_medbot_skin()
-	return "o2"
+	return "oxy"
 
 /obj/item/storage/medkit/o2/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins hitting [user.p_their()] neck with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins hitting [user.p_their()] neck with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/storage/medkit/o2/PopulateContents()
@@ -256,14 +257,14 @@
 	return "brute"
 
 /obj/item/storage/medkit/brute/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins beating [user.p_them()]self over the head with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins beating [user.p_them()]self over the head with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/storage/medkit/brute/PopulateContents()
 	if(empty)
 		return
 	var/static/items_inside = list(
-		/obj/item/reagent_containers/pill/patch/libital = 3,
+		/obj/item/reagent_containers/applicator/patch/libital = 3,
 		/obj/item/stack/medical/gauze = 1,
 		/obj/item/storage/pill_bottle/probital = 1,
 		/obj/item/reagent_containers/hypospray/medipen/salacid = 1,
@@ -275,18 +276,18 @@
 	name = "advanced first aid kit"
 	desc = "An advanced kit to help deal with advanced wounds."
 	icon_state = "medkit_advanced"
-	inhand_icon_state = "medkit-rad"
+	inhand_icon_state = "medkit-advanced"
 	custom_premium_price = PAYCHECK_COMMAND * 6
 	damagetype_healed = HEAL_ALL_DAMAGE
 
 /obj/item/storage/medkit/advanced/get_medbot_skin()
-	return "advanced"
+	return "adv"
 
 /obj/item/storage/medkit/advanced/PopulateContents()
 	if(empty)
 		return
 	var/static/items_inside = list(
-		/obj/item/reagent_containers/pill/patch/synthflesh = 3,
+		/obj/item/reagent_containers/applicator/patch/synthflesh = 3,
 		/obj/item/reagent_containers/hypospray/medipen/atropine = 2,
 		/obj/item/stack/medical/gauze = 1,
 		/obj/item/storage/pill_bottle/penacid = 1)
@@ -294,8 +295,8 @@
 
 /obj/item/storage/medkit/tactical_lite
 	name = "combat first aid kit"
-	icon_state = "medkit_tactical"
-	inhand_icon_state = "medkit-tactical"
+	icon_state = "medkit_tactical_lite"
+	inhand_icon_state = "medkit-tactical-lite"
 	damagetype_healed = HEAL_ALL_DAMAGE
 
 /obj/item/storage/medkit/tactical_lite/get_medbot_skin()
@@ -342,14 +343,16 @@
 		/obj/item/stack/medical/gauze = 2,
 		/obj/item/stack/medical/suture/medicated = 2,
 		/obj/item/stack/medical/mesh/advanced = 2,
-		/obj/item/reagent_containers/pill/patch/libital = 4,
-		/obj/item/reagent_containers/pill/patch/aiuri = 4,
+		/obj/item/reagent_containers/applicator/patch/libital = 4,
+		/obj/item/reagent_containers/applicator/patch/aiuri = 4,
 	)
 	generate_items_inside(items_inside,src)
 
 /obj/item/storage/medkit/tactical/premium
 	name = "premium combat medical kit"
 	desc = "May or may not contain traces of lead."
+	icon_state = "medkit_tactical_premium"
+	inhand_icon_state = "medkit-tactical-premium"
 	grind_results = list(/datum/reagent/lead = 10)
 
 /obj/item/storage/medkit/tactical/premium/Initialize(mapload)
@@ -366,8 +369,8 @@
 	var/static/list/items_inside = list(
 		/obj/item/stack/medical/suture/medicated = 2,
 		/obj/item/stack/medical/mesh/advanced = 2,
-		/obj/item/reagent_containers/pill/patch/libital = 3,
-		/obj/item/reagent_containers/pill/patch/aiuri = 3,
+		/obj/item/reagent_containers/applicator/patch/libital = 3,
+		/obj/item/reagent_containers/applicator/patch/aiuri = 3,
 		/obj/item/healthanalyzer/advanced = 1,
 		/obj/item/stack/medical/gauze = 2,
 		/obj/item/mod/module/thread_ripper = 1,
@@ -443,8 +446,7 @@
 
 /// Gets what skin (icon_state) this medkit uses for a medbot
 /obj/item/storage/medkit/proc/get_medbot_skin()
-	// The skin var is nullsafe so returning nothing is A-OK
-	return
+	return "generic"
 
 /*
  * Pill Bottles
@@ -467,14 +469,15 @@
 	. = ..()
 	atom_storage.allow_quick_gather = TRUE
 	atom_storage.set_holdable(list(
-		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/applicator/pill,
+		/obj/item/reagent_containers/applicator/patch,
 		/obj/item/food/bait/natural,
 	))
 	atom_storage.open_sound = 'sound/items/handling/pill_bottle_open.ogg'
 	atom_storage.open_sound_vary = FALSE
 
 /obj/item/storage/pill_bottle/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is trying to get the cap off [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is trying to get the cap off [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return TOXLOSS
 
 /obj/item/storage/pill_bottle/multiver
@@ -483,13 +486,13 @@
 
 /obj/item/storage/pill_bottle/multiver/PopulateContents()
 	for(var/i in 1 to 7)
-		new /obj/item/reagent_containers/pill/multiver(src)
+		new /obj/item/reagent_containers/applicator/pill/multiver(src)
 
 /obj/item/storage/pill_bottle/multiver/less
 
 /obj/item/storage/pill_bottle/multiver/less/PopulateContents()
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/pill/multiver(src)
+		new /obj/item/reagent_containers/applicator/pill/multiver(src)
 
 /obj/item/storage/pill_bottle/epinephrine
 	name = "bottle of epinephrine pills"
@@ -497,7 +500,7 @@
 
 /obj/item/storage/pill_bottle/epinephrine/PopulateContents()
 	for(var/i in 1 to 7)
-		new /obj/item/reagent_containers/pill/epinephrine(src)
+		new /obj/item/reagent_containers/applicator/pill/epinephrine(src)
 
 /obj/item/storage/pill_bottle/mutadone
 	name = "bottle of mutadone pills"
@@ -505,7 +508,7 @@
 
 /obj/item/storage/pill_bottle/mutadone/PopulateContents()
 	for(var/i in 1 to 7)
-		new /obj/item/reagent_containers/pill/mutadone(src)
+		new /obj/item/reagent_containers/applicator/pill/mutadone(src)
 
 /obj/item/storage/pill_bottle/potassiodide
 	name = "bottle of potassium iodide pills"
@@ -513,7 +516,7 @@
 
 /obj/item/storage/pill_bottle/potassiodide/PopulateContents()
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/pill/potassiodide(src)
+		new /obj/item/reagent_containers/applicator/pill/potassiodide(src)
 
 /obj/item/storage/pill_bottle/probital
 	name = "bottle of probital pills"
@@ -521,7 +524,7 @@
 
 /obj/item/storage/pill_bottle/probital/PopulateContents()
 	for(var/i in 1 to 4)
-		new /obj/item/reagent_containers/pill/probital(src)
+		new /obj/item/reagent_containers/applicator/pill/probital(src)
 
 /obj/item/storage/pill_bottle/iron
 	name = "bottle of iron pills"
@@ -529,7 +532,7 @@
 
 /obj/item/storage/pill_bottle/iron/PopulateContents()
 	for(var/i in 1 to 4)
-		new /obj/item/reagent_containers/pill/iron(src)
+		new /obj/item/reagent_containers/applicator/pill/iron(src)
 
 /obj/item/storage/pill_bottle/mannitol
 	name = "bottle of mannitol pills"
@@ -537,7 +540,7 @@
 
 /obj/item/storage/pill_bottle/mannitol/PopulateContents()
 	for(var/i in 1 to 7)
-		new /obj/item/reagent_containers/pill/mannitol(src)
+		new /obj/item/reagent_containers/applicator/pill/mannitol(src)
 
 //Contains 4 pills instead of 7, and 5u pills instead of 50u (50u pills heal 250 brain damage, 5u pills heal 25)
 /obj/item/storage/pill_bottle/mannitol/braintumor
@@ -545,7 +548,7 @@
 
 /obj/item/storage/pill_bottle/mannitol/braintumor/PopulateContents()
 	for(var/i in 1 to 4)
-		new /obj/item/reagent_containers/pill/mannitol/braintumor(src)
+		new /obj/item/reagent_containers/applicator/pill/mannitol/braintumor(src)
 
 /obj/item/storage/pill_bottle/stimulant
 	name = "bottle of stimulant pills"
@@ -553,7 +556,7 @@
 
 /obj/item/storage/pill_bottle/stimulant/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/stimulant(src)
+		new /obj/item/reagent_containers/applicator/pill/stimulant(src)
 
 /obj/item/storage/pill_bottle/sansufentanyl
 	name = "bottle of experimental medication"
@@ -561,16 +564,16 @@
 
 /obj/item/storage/pill_bottle/sansufentanyl/PopulateContents()
 	for(var/i in 1 to 6)
-		new /obj/item/reagent_containers/pill/sansufentanyl(src)
+		new /obj/item/reagent_containers/applicator/pill/sansufentanyl(src)
 
 /obj/item/storage/pill_bottle/mining
 	name = "bottle of patches"
 	desc = "Contains patches used to treat brute and burn damage."
 
 /obj/item/storage/pill_bottle/mining/PopulateContents()
-	new /obj/item/reagent_containers/pill/patch/aiuri(src)
+	new /obj/item/reagent_containers/applicator/patch/aiuri(src)
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/pill/patch/libital(src)
+		new /obj/item/reagent_containers/applicator/patch/libital(src)
 
 /obj/item/storage/pill_bottle/zoom
 	name = "suspicious pill bottle"
@@ -578,7 +581,7 @@
 
 /obj/item/storage/pill_bottle/zoom/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/zoom(src)
+		new /obj/item/reagent_containers/applicator/pill/zoom(src)
 
 /obj/item/storage/pill_bottle/happy
 	name = "suspicious pill bottle"
@@ -586,7 +589,7 @@
 
 /obj/item/storage/pill_bottle/happy/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/happy(src)
+		new /obj/item/reagent_containers/applicator/pill/happy(src)
 
 /obj/item/storage/pill_bottle/lsd
 	name = "suspicious pill bottle"
@@ -594,7 +597,7 @@
 
 /obj/item/storage/pill_bottle/lsd/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/lsd(src)
+		new /obj/item/reagent_containers/applicator/pill/lsd(src)
 
 /obj/item/storage/pill_bottle/aranesp
 	name = "suspicious pill bottle"
@@ -602,7 +605,7 @@
 
 /obj/item/storage/pill_bottle/aranesp/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/aranesp(src)
+		new /obj/item/reagent_containers/applicator/pill/aranesp(src)
 
 /obj/item/storage/pill_bottle/psicodine
 	name = "bottle of psicodine pills"
@@ -610,7 +613,7 @@
 
 /obj/item/storage/pill_bottle/psicodine/PopulateContents()
 	for(var/i in 1 to 7)
-		new /obj/item/reagent_containers/pill/psicodine(src)
+		new /obj/item/reagent_containers/applicator/pill/psicodine(src)
 
 /obj/item/storage/pill_bottle/penacid
 	name = "bottle of pentetic acid pills"
@@ -618,7 +621,7 @@
 
 /obj/item/storage/pill_bottle/penacid/PopulateContents()
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/pill/penacid(src)
+		new /obj/item/reagent_containers/applicator/pill/penacid(src)
 
 
 /obj/item/storage/pill_bottle/neurine
@@ -627,7 +630,7 @@
 
 /obj/item/storage/pill_bottle/neurine/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/neurine(src)
+		new /obj/item/reagent_containers/applicator/pill/neurine(src)
 
 /obj/item/storage/pill_bottle/maintenance_pill
 	name = "bottle of maintenance pills"
@@ -635,16 +638,16 @@
 
 /obj/item/storage/pill_bottle/maintenance_pill/Initialize(mapload)
 	. = ..()
-	var/obj/item/reagent_containers/pill/P = locate() in src
+	var/obj/item/reagent_containers/applicator/pill/P = locate() in src
 	name = "bottle of [P.name]s"
 
 /obj/item/storage/pill_bottle/maintenance_pill/PopulateContents()
 	for(var/i in 1 to rand(1,7))
-		new /obj/item/reagent_containers/pill/maintenance(src)
+		new /obj/item/reagent_containers/applicator/pill/maintenance(src)
 
 /obj/item/storage/pill_bottle/maintenance_pill/full/PopulateContents()
 	for(var/i in 1 to 7)
-		new /obj/item/reagent_containers/pill/maintenance(src)
+		new /obj/item/reagent_containers/applicator/pill/maintenance(src)
 
 ///////////////////////////////////////// Psychologist inventory pillbottles
 /obj/item/storage/pill_bottle/happinesspsych
@@ -653,7 +656,7 @@
 
 /obj/item/storage/pill_bottle/happinesspsych/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/happinesspsych(src)
+		new /obj/item/reagent_containers/applicator/pill/happinesspsych(src)
 
 /obj/item/storage/pill_bottle/lsdpsych
 	name = "mindbreaker toxin pills"
@@ -661,7 +664,7 @@
 
 /obj/item/storage/pill_bottle/lsdpsych/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/lsdpsych(src)
+		new /obj/item/reagent_containers/applicator/pill/lsdpsych(src)
 
 /obj/item/storage/pill_bottle/paxpsych
 	name = "pax pills"
@@ -669,7 +672,7 @@
 
 /obj/item/storage/pill_bottle/paxpsych/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/paxpsych(src)
+		new /obj/item/reagent_containers/applicator/pill/paxpsych(src)
 
 /obj/item/storage/pill_bottle/naturalbait
 	name = "freshness jar"
@@ -685,12 +688,12 @@
 
 /obj/item/storage/pill_bottle/ondansetron/PopulateContents()
 	for(var/i in 1 to 5)
-		new /obj/item/reagent_containers/pill/patch/ondansetron(src)
+		new /obj/item/reagent_containers/applicator/patch/ondansetron(src)
 
 /// A box which takes in coolant and uses it to preserve organs and body parts
 /obj/item/storage/organbox
 	name = "organ transport box"
-	desc = "An advanced box with an cooling mechanism that uses cryostylane or other cold reagents to keep the organs or bodyparts inside preserved."
+	desc = "An advanced box with a cooling mechanism that uses cryostylane or other cold reagents to keep the organs or bodyparts inside preserved."
 	icon = 'icons/obj/storage/case.dmi'
 	icon_state = "organbox"
 	base_icon_state = "organbox"
@@ -774,14 +777,14 @@
 	if(HAS_TRAIT(user, TRAIT_RESISTCOLD)) //if they're immune to cold, just do the box suicide
 		var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)
 		if(myhead)
-			user.visible_message(span_suicide("[user] puts [user.p_their()] head into \the [src] and begins closing it! It looks like [user.p_theyre()] trying to commit suicide!"))
+			user.visible_message(span_suicide("[user] puts [user.p_their()] head into \the [src] and begins closing it! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 			myhead.dismember()
 			myhead.forceMove(src) //force your enemies to kill themselves with your head collection box!
 			playsound(user, "desecration-01.ogg", 50, TRUE, -1)
 			return BRUTELOSS
-		user.visible_message(span_suicide("[user] is beating [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is beating [user.p_them()]self with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		return BRUTELOSS
-	user.visible_message(span_suicide("[user] is putting [user.p_their()] head inside the [src], it looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is putting [user.p_their()] head inside the [src], Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	user.adjust_bodytemperature(-300)
 	user.apply_status_effect(/datum/status_effect/freon)
 	return FIRELOSS

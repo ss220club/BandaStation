@@ -25,59 +25,60 @@
 // Department's Lower Floor
 /area/station/service/library/ghetto
 	name = "Library Lower Floor"
-	icon_state = "library"
+
+/area/station/service/hydroponics/ghetto
+	name = "Hydroponics Lower Floor"
+
+/area/station/service/bar/atrium/ghetto
+	name = "Bar Atrium Lower Floor"
+
+/area/station/service/bar/backroom/ghetto
+	name = "Bar Backroom Lower Floor"
+
+/area/station/service/kitchen/coldroom/ghetto
+	name = "Kitchen Cold Room Lower Floor"
+
+/area/station/service/kitchen/kitchen_backroom/ghetto
+	name = "Kitchen Backroom Lower Floor"
 
 /area/station/medical/chemistry/ghetto
 	name = "Chemistry Lower Floor"
-	icon_state = "chem"
 
 /area/station/engineering/atmos/mix/ghetto
 	name = "Atmospherics Mixing Room Lower Floor"
-	icon_state = "atmos_mix"
 
 /area/station/security/prison/ghetto
 	name = "Prison Wing Lower Floor"
-	icon_state = "sec_prison"
+
+/area/station/security/interrogation/ghetto
+	name = "In-Depth Interrogation Room Lower Floor"
 
 /area/station/cargo/storage/ghetto
 	name = "Cargo Bay Lower Floor"
-	icon_state = "cargo_bay"
 
 /area/station/cargo/storage/ghetto/depot
 	name = "Cargo Bay Depot Lower Floor"
-	icon_state = "cargo_bay"
-
-/area/station/cargo/mining_oresmeltery/ghetto
-	name = "Mining Ore Smeltery Lower Floor"
-	icon_state = "mining_production"
 
 /area/station/cargo/drone_bay/ghetto
 	name = "Drone Bay Lower Floor"
-	icon_state = "cargo_drone"
 
 /area/station/maintenance/department/engine/ghetto
 	name = "Engineering Abandoned Engine Lower Floor"
-	icon_state = "maint_engi"
 
 /area/station/maintenance/department/electrical/ghetto
 	name = "Electrical Maintenance Lower Floor"
-	icon_state = "maint_electrical"
 
 /area/station/maintenance/department/security/ghetto
 	name = "Brig Lower Floor"
-	icon_state = "maint_sec"
 
 /area/station/maintenance/department/security/ghetto/fore
 	name = "Security Maintenance Fore Lower Floor"
-	icon_state = "maint_sec"
 
 /area/station/maintenance/department/security/ghetto/aft
 	name = "Security Maintenance Aft Lower Floor"
-	icon_state = "maint_sec"
 
 /area/station/maintenance/department/medical/ghetto
 	name = "Ghetto Abandoned Medbay"
-	icon_state = "medbay_maint"
 
 /area/station/maintenance/department/medical/ghetto/morgue
 	name = "Ghetto Abandoned Medbay Morgue"

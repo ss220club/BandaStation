@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 					var/mob/living/carbon/human/H = L
 					category = "humans"
 					if(H.mind)
-						mob_data["job"] = H.mind.assigned_role.title
+						mob_data["job"] = job_title_ru(H.mind.assigned_role.title)
 					else
 						mob_data["job"] = "Unknown"
 					mob_data["species"] = H.dna.species.name
@@ -224,7 +224,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	for(var/client/C in GLOB.clients)
 		if(!C?.credits)
 			C?.RollCredits()
-		C?.playtitlemusic(40)
+		C?.playtitlemusic(volume_multiplier = 0.5)
 		if(speed_round && was_forced != ADMIN_FORCE_END_ROUND)
 			C?.give_award(/datum/award/achievement/misc/speed_round, C?.mob)
 		HandleRandomHardcoreScore(C)
@@ -243,10 +243,15 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 	//Set news report and mode result
 	SSdynamic.set_round_result()
+	// BANDASTATION EDIT START - STORYTELLER
+	SSgamemode.round_end_report()
+	SSgamemode.store_roundend_data() // store data on roundend for next round
+	// BANDASTATION EDIT END - STORYTELLER
 
 	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>The round has ended."))))
 	log_game("The round has ended.")
-	send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Round [GLOB.round_id]" : "The round has"] just ended."), CONFIG_GET(string/channel_announce_end_game))
+	for(var/channel_tag in CONFIG_GET(str_list/channel_announce_end_game))
+		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Round [GLOB.round_id]" : "The round has"] just ended."), channel_tag)
 	send2adminchat("Server", "Round just ended.")
 
 	if(length(CONFIG_GET(keyed_list/cross_server)))
@@ -288,6 +293,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	//stop collecting feedback during grifftime
 	SSblackbox.Seal()
 
+	world.TgsTriggerEvent("tg-Roundend", wait_for_completion = TRUE)
+
 	sleep(5 SECONDS)
 	ready_for_reboot = TRUE
 	standard_reboot()
@@ -304,6 +311,9 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 //Common part of the report
 /datum/controller/subsystem/ticker/proc/build_roundend_report()
 	var/list/parts = list()
+
+	//might want to make this a full section
+	parts += SSgamemode.create_roundend_score() // BANDASTATION EDIT - STORYTELLER
 
 	//AI laws
 	parts += law_report()
@@ -354,8 +364,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			else
 				parts += "[FOURSPACES]<i>Nobody died this shift!</i>"
 
+	// BANDASTATION EDIT START - STORYTELLER
+	/*
 	parts += "[FOURSPACES]Threat level: [SSdynamic.threat_level]"
 	parts += "[FOURSPACES]Threat left: [SSdynamic.mid_round_budget]"
+
 	if(SSdynamic.roundend_threat_log.len)
 		parts += "[FOURSPACES]Threat edits:"
 		for(var/entry as anything in SSdynamic.roundend_threat_log)
@@ -363,7 +376,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	parts += "[FOURSPACES]Executed rules:"
 	for(var/datum/dynamic_ruleset/rule in SSdynamic.executed_rules)
 		parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -[rule.cost + rule.scaled_times * rule.scaling_cost] threat"
-
+	*/
+	// BANDASTATION EDIT END - STORYTELLER
 	return parts.Join("<br>")
 
 /client/proc/roundend_report_file()
@@ -614,12 +628,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	for(var/datum/team/active_teams as anything in all_teams)
 		//check if we should show the team
 		if(!active_teams.show_roundend_report)
+			all_teams -= active_teams
 			continue
-
-		//remove the team's individual antag reports, if the team actually shows up in the report.
-		for(var/datum/mind/team_minds as anything in active_teams.members)
-			if(!isnull(team_minds.antag_datums)) // is_special_character passes if they have a special role instead of an antag
-				all_antagonists -= team_minds.antag_datums
 
 		result += active_teams.roundend_report()
 		result += " "//newline between teams
@@ -632,6 +642,10 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 	for(var/datum/antagonist/antagonists in all_antagonists)
 		if(!antagonists.show_in_roundend)
+			continue
+		// if the antag datum is associated with a team that appeared in the report, skip it.
+		var/datum/team/antag_team = antagonists.get_team()
+		if(!isnull(antag_team) && (antag_team in all_teams))
 			continue
 		if(antagonists.roundend_category != currrent_category)
 			if(previous_category)
@@ -658,7 +672,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 /datum/controller/subsystem/ticker/proc/give_show_report_button(client/C)
 	var/datum/action/report/R = new
-	C.player_details.player_actions += R
+	C.persistent_client.player_actions += R
 	R.Grant(C.mob)
 	to_chat(C,span_infoplain("<a href='byond://?src=[REF(R)];report=1'>Show roundend report again</a>"))
 
@@ -685,8 +699,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /proc/printplayer(datum/mind/ply, fleecheck)
 	var/jobtext = ""
 	if(!is_unassigned_job(ply.assigned_role))
-		jobtext = " the <b>[ply.assigned_role.title]</b>"
-	var/text = "<b>[ply.key]</b> was <b>[ply.name]</b>[jobtext] and"
+		jobtext = ", <b>[job_title_ru(ply.assigned_role.title)],</b>"
+	var/text = "<b>[ply.key]</b> был <b>[ply.name]</b>[jobtext] and"
 	if(ply.current)
 		if(ply.current.stat == DEAD)
 			text += " [span_redtext("died")]"

@@ -22,7 +22,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "ae" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo19"
 	},
 /obj/item/banner/syndicate,
@@ -51,7 +51,7 @@
 /area/shuttle/syndicate/bridge)
 "aj" = (
 /obj/machinery/computer/crew/syndie,
-/obj/effect/turf_decal/syndie_logo,
+/obj/effect/decal/syndie_logo,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "ak" = (
@@ -66,21 +66,21 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/bridge)
 "ap" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo5"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "aq" = (
 /obj/machinery/computer/camera_advanced/shuttle_docker/syndicate,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo2"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "ar" = (
 /obj/machinery/computer/camera_advanced/syndie,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo4"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -99,7 +99,7 @@
 /turf/closed/wall/r_wall/syndicate,
 /area/shuttle/syndicate/airlock)
 "aD" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo18"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -143,13 +143,13 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/syndicate/hallway)
 "aQ" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo15"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "aS" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo12"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -208,7 +208,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/hallway)
 "bk" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo16"
 	},
 /obj/item/banner/syndicate,
@@ -313,7 +313,7 @@
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 1
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo7"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -342,7 +342,7 @@
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 1
 	},
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo6"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -546,7 +546,7 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/syndicate/engineering)
 "lm" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo10"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -646,7 +646,7 @@
 /area/shuttle/syndicate/medical)
 "tG" = (
 /obj/machinery/computer/shuttle/syndicate,
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo3"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -662,7 +662,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "vv" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo17"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -692,13 +692,13 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/hallway)
 "AZ" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo14"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "BH" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo11"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -722,13 +722,13 @@
 /turf/open/floor/plating,
 /area/shuttle/syndicate/airlock)
 "CC" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo8"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "CZ" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo13"
 	},
 /turf/open/floor/mineral/plastitanium,
@@ -899,7 +899,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/hallway)
 "TD" = (
-/obj/effect/turf_decal/syndie_logo{
+/obj/effect/decal/syndie_logo{
 	icon_state = "logo9"
 	},
 /turf/open/floor/mineral/plastitanium,

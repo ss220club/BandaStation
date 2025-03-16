@@ -529,7 +529,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		species_human.overlays_standing[BODY_LAYER] = standing
 
 	species_human.apply_overlay(BODY_LAYER)
+	// BANDASTATION EDIT START
 	update_body_markings(species_human)
+	// BANDASTATION EDIT END
 
 //This exists so sprite accessories can still be per-layer without having to include that layer's
 //number in their sprite name, which causes issues when those numbers change.
@@ -639,7 +641,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			if((H.bodyshape & BODYSHAPE_DIGITIGRADE) && !(I.item_flags & IGNORE_DIGITIGRADE))
 				if(!(I.supports_variations_flags & DIGITIGRADE_VARIATIONS))
 					if(!disable_warning)
-						to_chat(H, span_warning("The footwear around here isn't compatible with your feet!"))
+						to_chat(H, span_warning("Обувь здесь не подходит к вашим ступам!"))
 					return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(ITEM_SLOT_BELT)
@@ -647,7 +649,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 			if(!H.w_uniform && !HAS_TRAIT(H, TRAIT_NO_JUMPSUIT) && (!O || IS_ORGANIC_LIMB(O)))
 				if(!disable_warning)
-					to_chat(H, span_warning("You need a jumpsuit before you can attach this [I.name]!"))
+					to_chat(H, span_warning("Вам нужно сперва надеть комбинезон, чтобы прикрепить [I.declent_ru(ACCUSATIVE)]"))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(ITEM_SLOT_BELTPACK)
@@ -675,7 +677,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			var/obj/item/bodypart/O = H.get_bodypart(BODY_ZONE_CHEST)
 			if(!H.w_uniform && !HAS_TRAIT(H, TRAIT_NO_JUMPSUIT) && (!O || IS_ORGANIC_LIMB(O)))
 				if(!disable_warning)
-					to_chat(H, span_warning("You need a jumpsuit before you can attach this [I.name]!"))
+					to_chat(H, span_warning("Вам нужно сперва надеть комбинезон, чтобы прикрепить [I.declent_ru(ACCUSATIVE)]!"))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(ITEM_SLOT_LPOCKET)
@@ -688,7 +690,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 			if(!H.w_uniform && !HAS_TRAIT(H, TRAIT_NO_JUMPSUIT) && (!O || IS_ORGANIC_LIMB(O)))
 				if(!disable_warning)
-					to_chat(H, span_warning("You need a jumpsuit before you can attach this [I.name]!"))
+					to_chat(H, span_warning("Вам нужно сперва надеть комбинезон, чтобы прикрепить [I.declent_ru(ACCUSATIVE)]!"))
 				return FALSE
 			return TRUE
 		if(ITEM_SLOT_RPOCKET)
@@ -701,7 +703,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 			if(!H.w_uniform && !HAS_TRAIT(H, TRAIT_NO_JUMPSUIT) && (!O || IS_ORGANIC_LIMB(O)))
 				if(!disable_warning)
-					to_chat(H, span_warning("You need a jumpsuit before you can attach this [I.name]!"))
+					to_chat(H, span_warning("Вам нужно сперва надеть комбинезон, чтобы прикрепить [I.declent_ru(ACCUSATIVE)]!"))
 				return FALSE
 			return TRUE
 		if(ITEM_SLOT_SUITSTORE)
@@ -709,15 +711,15 @@ GLOBAL_LIST_EMPTY(features_by_species)
 				return FALSE
 			if(!H.wear_suit)
 				if(!disable_warning)
-					to_chat(H, span_warning("You need a suit before you can attach this [I.name]!"))
+					to_chat(H, span_warning("Вам нужно сперва надеть костюм, чтобы прикрепить [I.declent_ru(ACCUSATIVE)]!"))
 				return FALSE
 			if(!H.wear_suit.allowed)
 				if(!disable_warning)
-					to_chat(H, span_warning("You somehow have a suit with no defined allowed items for suit storage, stop that."))
+					to_chat(H, span_warning("Каким-то образом этот костюм не имеет списка разрешенных хранимых предметов. Сообщите кодерам!"))
 				return FALSE
 			if(I.w_class > WEIGHT_CLASS_BULKY)
 				if(!disable_warning)
-					to_chat(H, span_warning("The [I.name] is too big to attach!")) //should be src?
+					to_chat(H, span_warning("[capitalize(I.declent_ru(NOMINATIVE))] имеет слишком большой размер!")) //should be src?
 				return FALSE
 			if( istype(I, /obj/item/modular_computer/pda) || istype(I, /obj/item/pen) || is_type_in_list(I, H.wear_suit.allowed) )
 				return TRUE
@@ -743,7 +745,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 /datum/species/proc/equip_delay_self_check(obj/item/I, mob/living/carbon/human/H, bypass_equip_delay_self)
 	if(!I.equip_delay_self || bypass_equip_delay_self)
 		return TRUE
-	H.visible_message(span_notice("[H] start putting on [I]..."), span_notice("You start putting on [I]..."))
+	H.visible_message(span_notice("[capitalize(H.declent_ru(NOMINATIVE))] начинает надевать [I.declent_ru(ACCUSATIVE)]..."), span_notice("Вы начинаете надевать [I.declent_ru(ACCUSATIVE)]..."))
 	return do_after(H, I.equip_delay_self, target = H)
 
 
@@ -793,13 +795,13 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		if(!source.IsParalyzed())
 			source.emote("collapse")
 		source.Paralyze(RAD_MOB_KNOCKDOWN_AMOUNT)
-		to_chat(source, span_danger("You feel weak."))
+		to_chat(source, span_danger("Вы чувствуете слабость."))
 
 	if(time_since_irradiated > RAD_MOB_VOMIT && SPT_PROB(RAD_MOB_VOMIT_PROB, seconds_per_tick))
 		source.vomit(VOMIT_CATEGORY_BLOOD, lost_nutrition = 10)
 
 	if(time_since_irradiated > RAD_MOB_MUTATE && SPT_PROB(RAD_MOB_MUTATE_PROB, seconds_per_tick))
-		to_chat(source, span_danger("You mutate!"))
+		to_chat(source, span_danger("Вы мутируете!"))
 		source.easy_random_mutate(NEGATIVE + MINOR_NEGATIVE)
 		source.emote("gasp")
 		source.domutcheck()
@@ -807,7 +809,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	if(time_since_irradiated > RAD_MOB_HAIRLOSS && SPT_PROB(RAD_MOB_HAIRLOSS_PROB, seconds_per_tick))
 		var/obj/item/bodypart/head/head = source.get_bodypart(BODY_ZONE_HEAD)
 		if(!(source.hairstyle == "Bald") && (head?.head_flags & HEAD_HAIR|HEAD_FACIAL_HAIR))
-			to_chat(source, span_danger("Your hair starts to fall out in clumps..."))
+			to_chat(source, span_danger("Ваши волосы начинают выпадать клочьями..."))
 			addtimer(CALLBACK(src, PROC_REF(go_bald), source), 5 SECONDS)
 
 /**
@@ -841,7 +843,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 ///This proc handles punching damage. IMPORTANT: Our owner is the TARGET and not the USER in this proc. For whatever reason...
 /datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM) && !attacker_style?.pacifist_style)
-		to_chat(user, span_warning("You don't want to harm [target]!"))
+		to_chat(user, span_warning("Вы не хотите причинить вред [target.declent_ru(DATIVE)]!"))
 		return FALSE
 
 	var/obj/item/organ/brain/brain = user.get_organ_slot(ORGAN_SLOT_BRAIN)
@@ -855,42 +857,48 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	if(atk_effect == ATTACK_EFFECT_BITE)
 		if(user.is_mouth_covered(ITEM_SLOT_MASK))
-			to_chat(user, span_warning("You can't [atk_verb] with your mouth covered!"))
+			to_chat(user, span_warning("Вы не можете атаковать с закрытым ртом!")) //TODO220 - this again... need to use atk_verb here
 			return FALSE
 	user.do_attack_animation(target, atk_effect)
 
 	//has our target been shoved recently? If so, they're staggered and we get an easy hit.
-	var/staggered = FALSE
+	var/staggered = target.has_status_effect(/datum/status_effect/staggered)
 
 	//Someone in a grapple is much more vulnerable to being harmed by punches.
-	var/grappled = FALSE
-
-	if(target.get_timed_status_effect_duration(/datum/status_effect/staggered))
-		staggered = TRUE
-
-	if(target.pulledby && target.pulledby.grab_state >= GRAB_AGGRESSIVE)
-		grappled = TRUE
+	var/grappled = (target.pulledby && target.pulledby.grab_state >= GRAB_AGGRESSIVE)
 
 	var/damage = rand(attacking_bodypart.unarmed_damage_low, attacking_bodypart.unarmed_damage_high)
 	var/limb_accuracy = attacking_bodypart.unarmed_effectiveness
+
+	if(grappled)
+		var/pummel_bonus = attacking_bodypart.unarmed_pummeling_bonus
+		damage = floor(damage * pummel_bonus)
+		limb_accuracy = floor(limb_accuracy * pummel_bonus)
+
+	//Get our puncher's combined brute and burn damage.
+	var/puncher_brute_and_burn = (user.getFireLoss() + user.getBruteLoss())
+
+	//Get our targets combined brute and burn damage.
+	var/target_brute_and_burn = (target.getFireLoss() + target.getBruteLoss())
 
 	// In a brawl, drunkenness can make you swing more wildly and with more force, and thus catch your opponent off guard, but it could also totally throw you off if you're too intoxicated
 	// But god is it going to make you sick moving too much while drunk
 	var/user_drunkenness = user.get_drunk_amount()
 
-	if(user_drunkenness && HAS_TRAIT(user, TRAIT_DRUNKEN_BRAWLER)) // Drunken brawlers only need to be intoxicated, doesn't matter how much
-		limb_accuracy += clamp((user.getFireLoss() + user.getBruteLoss()) * 0.5, 10, 200)
-		damage += damage * clamp((user.getFireLoss() + user.getBruteLoss()) / 100, 0.3, 2) //Basically a multiplier of how much extra damage you get based on how low your health is overall. A floor of about a 30%.
-		var/drunken_martial_descriptor = pick("Drunken", "Intoxicated", "Tipsy", "Inebriated", "Delirious", "Day-Drinker's", "Firegut", "Blackout")
-		atk_verb = "[drunken_martial_descriptor] [atk_verb]"
+	if(user_drunkenness)
+		if(HAS_TRAIT(user, TRAIT_DRUNKEN_BRAWLER)) // Drunken brawlers only need to be intoxicated, doesn't matter how much
+			limb_accuracy += clamp(puncher_brute_and_burn / 2, 10, 200)
+			damage += damage * clamp(puncher_brute_and_burn / 100, 0.3, 2) //Basically a multiplier of how much extra damage you get based on how low your health is overall. A floor of about a 30%.
+			var/drunken_martial_descriptor = pick("пьяно", "опьянено", "подвыпивше", "опьяневше", "бредово", "огнегриво", "выключаемо")
+			atk_verb = "[drunken_martial_descriptor] [ru_attack_verb(atk_verb, GLOB.ru_attack_verbs_unarmed)]"
 
-	else if(user_drunkenness > 30 && user_drunkenness < 60)
-		limb_accuracy *= 1.2
-		user.adjust_disgust(2)
+		else if(user_drunkenness >= 60)
+			limb_accuracy = -limb_accuracy // good luck landing a punch now, you drunk fuck
+			user.adjust_disgust(5)
 
-	else if(user_drunkenness >= 60)
-		limb_accuracy = -limb_accuracy // good luck landing a punch now, you drunk fuck
-		user.adjust_disgust(5)
+		else if(user_drunkenness >= 30)
+			limb_accuracy *= 1.2
+			user.adjust_disgust(2)
 
 	var/obj/item/bodypart/affecting = target.get_bodypart(target.get_random_valid_zone(user.zone_selected))
 
@@ -899,13 +907,13 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		if((target.body_position == LYING_DOWN) || HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER) || staggered || user_drunkenness && HAS_TRAIT(user, TRAIT_DRUNKEN_BRAWLER)) //kicks and attacks against staggered targets never miss (provided your species deals more than 0 damage). Drunken brawlers while drunk also don't miss
 			miss_chance = 0
 		else
-			miss_chance = clamp(UNARMED_MISS_CHANCE_BASE - limb_accuracy + (user.getFireLoss()*0.5 + user.getBruteLoss()*0.5), 0, UNARMED_MISS_CHANCE_MAX) //Limb miss chance + various damage. capped at 80 so there is at least a chance to land a hit.
+			miss_chance = clamp(UNARMED_MISS_CHANCE_BASE - limb_accuracy + (puncher_brute_and_burn / 2), 0, UNARMED_MISS_CHANCE_MAX) //Limb miss chance + various damage. capped at 80 so there is at least a chance to land a hit.
 
 	if(!damage || !affecting || prob(miss_chance))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 		playsound(target.loc, attacking_bodypart.unarmed_miss_sound, 25, TRUE, -1)
-		target.visible_message(span_danger("[user]'s [atk_verb] misses [target]!"), \
-						span_danger("You avoid [user]'s [atk_verb]!"), span_hear("You hear a swoosh!"), COMBAT_MESSAGE_RANGE, user)
-		to_chat(user, span_warning("Your [atk_verb] misses [target]!"))
+		target.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [ru_attack_verb(atk_verb, GLOB.ru_attack_verbs_unarmed)] и промахивается по [target.declent_ru(DATIVE)]!"), \
+						span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [ru_attack_verb(atk_verb, GLOB.ru_attack_verbs_unarmed)] и промахивается по вам!"), span_hear("Вы слышите свист!"), COMBAT_MESSAGE_RANGE, user)
+		to_chat(user, span_warning("Вы [ru_attack_verb(atk_verb, GLOB.ru_attack_verbs_unarmed)]е и промахиваетесь по [target.declent_ru(DATIVE)]!"))
 		log_combat(user, target, "attempted to punch")
 		return FALSE
 
@@ -914,24 +922,26 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	// In a brawl, drunkenness is a boon if you're a bit drunk but not too much. Else you're easier to hit.
 	// But, generally, getting hit while drunk is probably a good way to start throwing up
 	var/target_drunkenness = target.get_drunk_amount()
-	if(target_drunkenness && HAS_TRAIT(target, TRAIT_DRUNKEN_BRAWLER)) // Drunken brawlers only need to be intoxicated, doesn't matter how much
-		armor_block += 20
 
-	else if(target_drunkenness > 30 && target_drunkenness < 60)
-		armor_block += 10
-		target.adjust_disgust(2)
+	if(target_drunkenness)
+		if(HAS_TRAIT(target, TRAIT_DRUNKEN_BRAWLER)) // Drunken brawlers only need to be intoxicated, doesn't matter how much
+			armor_block += 20
 
-	else if(target_drunkenness >= 60)
-		armor_block *= 0.5
-		target.adjust_disgust(5)
+		else if(target_drunkenness >= 60)
+			armor_block *= 0.5
+			target.adjust_disgust(5)
+
+		else if(target_drunkenness >= 30)
+			armor_block += 10
+			target.adjust_disgust(2)
 
 	playsound(target.loc, attacking_bodypart.unarmed_attack_sound, 25, TRUE, -1)
 
 	if(grappled && attacking_bodypart.grappled_attack_verb)
 		atk_verb = attacking_bodypart.grappled_attack_verb
-	target.visible_message(span_danger("[user] [atk_verb]ed [target]!"), \
-					span_userdanger("You're [atk_verb]ed by [user]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), COMBAT_MESSAGE_RANGE, user)
-	to_chat(user, span_danger("You [atk_verb] [target]!"))
+	target.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [ru_attack_verb(atk_verb, GLOB.ru_attack_verbs_unarmed)] [target.declent_ru(ACCUSATIVE)]!"), \
+					span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] [ru_attack_verb(atk_verb, GLOB.ru_attack_verbs_unarmed)] вас!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), COMBAT_MESSAGE_RANGE, user)
+	to_chat(user, span_danger("Вы [ru_attack_verb(atk_verb, GLOB.ru_attack_verbs_unarmed)]е [target.declent_ru(ACCUSATIVE)]!"))
 
 	target.lastattacker = user.real_name
 	target.lastattackerckey = user.ckey
@@ -941,16 +951,21 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	var/attack_direction = get_dir(user, target)
 	var/attack_type = attacking_bodypart.attack_type
-	if(atk_effect == ATTACK_EFFECT_KICK || grappled) //kicks and punches when grappling bypass armor slightly.
+	var/kicking = (atk_effect == ATTACK_EFFECT_KICK)
+	var/final_armor_block = armor_block
+	if(kicking || grappled) //kicks and punches when grappling bypass armor slightly.
 		if(damage >= 9)
 			target.force_say()
 		log_combat(user, target, grappled ? "grapple punched" : "kicked")
-		target.apply_damage(damage, attack_type, affecting, armor_block - limb_accuracy, attack_direction = attack_direction)
+		final_armor_block -= limb_accuracy
+		target.apply_damage(damage, attack_type, affecting, final_armor_block, attack_direction = attack_direction)
 	else // Normal attacks do not gain the benefit of armor penetration.
 		target.apply_damage(damage, attack_type, affecting, armor_block, attack_direction = attack_direction)
 		if(damage >= 9)
 			target.force_say()
 		log_combat(user, target, "punched")
+
+	SEND_SIGNAL(target, COMSIG_HUMAN_GOT_PUNCHED, user, damage, attack_type, affecting, final_armor_block, kicking)
 
 	// If our target is staggered and has sustained enough damage, we can apply a randomly determined status effect to inflict when we punch them.
 	// The effects are based on the punching effectiveness of our attacker. Some effects are not reachable by the average human, and require augmentation to reach or being a species with a heavy punch effectiveness.
@@ -958,57 +973,58 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	if(HAS_TRAIT(target, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED) || target.stat == DEAD) //If our target is dead or has specailized armor, there is no way to inflict these effects.
 		return
 
-	// If our target is staggered, the target's armor, minus our limb effectiveness sets the minimum necessary amount of damage sustained to cause an effect. Minimum 40, max 200 for sanity reasons
-	if(staggered && (target.getFireLoss()*0.5 + target.getBruteLoss()*0.5) >= min(armor_block - limb_accuracy, 40, 200))
+	// If our target is staggered, the target's armor, minus our limb effectiveness sets the minimum necessary amount of damage sustained to cause an effect. We clamp the value for sanity reasons.
+	var/effective_armor = max(armor_block, UNARMED_COMBO_HIT_HEALTH_BASE) - limb_accuracy
+	if(staggered && target_brute_and_burn >= clamp(effective_armor, 0, 200))
 		stagger_combo(user, target, atk_verb, limb_accuracy, armor_block)
 
 /// Handles the stagger combo effect of our punch. Follows the same logic as the above proc, target is our owner, user is our attacker.
-/datum/species/proc/stagger_combo(mob/living/carbon/human/user, mob/living/carbon/human/target, atk_verb = "hit", limb_accuracy = 0, armor_block = 0)
+/datum/species/proc/stagger_combo(mob/living/carbon/human/user, mob/living/carbon/human/target, atk_verb = "ударяет", limb_accuracy = 0, armor_block = 0)
 	// Randomly determines the effects of our punch. Limb accuracy is a bonus, armor block is a defense
 	var/roll_them_bones = rand(-20, 20) + limb_accuracy - armor_block
 
 	switch(roll_them_bones)
 		if (-INFINITY to 0) //Mostly a gimmie, this one just keeps them staggered briefly
 			target.adjust_staggered_up_to(1 SECONDS, 10 SECONDS)
-			target.visible_message(span_warning("[user]'s [atk_verb] briefly winds [target]!"), \
-				span_warning("You are briefly winded by [user]'s [atk_verb]!"), span_hear("You hear a thud!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_warning("Your [atk_verb] briefly winds [target]!"))
+			target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] и выдувает воздух из [target.declent_ru(GENITIVE)]!"), \
+				span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] и выдувает воздух из вас!"), span_hear("Вы слышите стук!"), COMBAT_MESSAGE_RANGE, user)
+			to_chat(user, span_warning("Вы [atk_verb]е и выдуваете воздух из [target.declent_ru(GENITIVE)]!"))
 
 		if (1 to 10)
 			target.adjust_eye_blur_up_to(5 SECONDS, 10 SECONDS)
-			target.visible_message(span_warning("[user]'s [atk_verb] hits [target] so hard, their eyes water! Ouch!"), \
-				span_warning("You are hit viciously by [user]'s [atk_verb], and your eyes begin to water!"), span_hear("You hear a thud!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_warning("Your [atk_verb] causes [target] to tear up!"))
+			target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] [target] так сильно, что аж [target.ru_p_them()] глаза заслезились! Ауч!"), \
+				span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] вас так сильно, что аж ваши глаза заслезились!"), span_hear("Вы слышите стук!"), COMBAT_MESSAGE_RANGE, user)
+			to_chat(user, span_warning("Вы [atk_verb]е и заставляете прослезиться [target]!"))
 
 		if (11 to 30)
 			target.adjust_dizzy_up_to(5 SECONDS, 10 SECONDS)
 			target.adjust_eye_blur_up_to(5 SECONDS, 10 SECONDS)
 			target.adjust_confusion_up_to(5 SECONDS, 10 SECONDS)
-			target.visible_message(span_warning("[user]'s [atk_verb] hits [target] so hard, they are sent reeling in agony! Damn!"), \
-				span_warning("You are hit viciously by [user]'s [atk_verb], and everything becomes a dizzying blur!"), span_hear("You hear a thud!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_warning("Your [atk_verb] causes [target] to go stumbling about in a confuzed daze!"))
+			target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] [target] так сильно, что [target.ru_p_they()] начинает корчиться от боли! Вау!"), \
+				span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] вас, и всё вокруг размазывается!"), span_hear("Вы слышите стук!"), COMBAT_MESSAGE_RANGE, user)
+			to_chat(user, span_warning("Вы [atk_verb]е [target.declent_ru(ACCUSATIVE)], и [target.ru_p_they()] начинает растерянно спотыкаться!"))
 
 		if(31 to 40)
 			target.adjust_dizzy_up_to(5 SECONDS, 10 SECONDS)
 			target.adjust_confusion_up_to(5 SECONDS, 10 SECONDS)
 			target.adjust_temp_blindness_up_to(5 SECONDS, 10 SECONDS)
-			target.visible_message(span_warning("[user]'s [atk_verb] hits [target] so hard, they are sent reeling blindly in agony! Goddamn!"), \
-				span_warning("You are hit viciously by [user]'s [atk_verb], and everything becomes a dizzying, blinding blur!"), span_hear("You hear a thud!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_warning("Your [atk_verb] causes [target] to go stumbling about in a confuzed, blind daze!"))
+			target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] [target] так сильно, что [target.ru_p_they()] начинает слепо корчиться от боли! Емаё!"), \
+				span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] вас, и всё вокруг размазывается в слепой дымке!"), span_hear("Вы слышите стук!"), COMBAT_MESSAGE_RANGE, user)
+			to_chat(user, span_warning("Вы [atk_verb]е [target.declent_ru(ACCUSATIVE)], и [target.ru_p_they()] начинает слепо и растерянно спотыкаться!"))
 
 		if (41 to 45)
 			target.apply_effect(4 SECONDS, EFFECT_KNOCKDOWN, armor_block)
-			target.visible_message(span_warning("[user]'s [atk_verb] hits [target] so hard, you knock them off their feet! Holy shit!"), \
-				span_warning("You are hit viciously by [user]'s [atk_verb] and sent toppling head over heels!"), span_hear("You hear a sickening thud!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_warning("Your [atk_verb] lands, and you send [target] sailing off their feet!"))
+			target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] [target] так сильно, что отправляет [target.ru_p_them()] в полёт! Вот это да!"), \
+				span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] вас и отправляет вас в полёт!"), span_hear("Вы слышите противный стук!"), COMBAT_MESSAGE_RANGE, user)
+			to_chat(user, span_warning("Вы [atk_verb]е [target.declent_ru(ACCUSATIVE)] и отправляете [target.ru_p_them()] в полёт!"))
 
 		if (46 to INFINITY)
 			target.apply_effect(4 SECONDS, EFFECT_KNOCKDOWN, armor_block)
 			var/obj/item/bodypart/affecting = target.get_bodypart(target.get_random_valid_zone(user.zone_selected))
 			target.apply_damage(5, BRUTE, affecting, armor_block, wound_bonus = limb_accuracy * 2) //Mostly for the crunchy wounding effect than actually doing damage
-			target.visible_message(span_warning("[user]'s [atk_verb] hits [target] so hard, you hit them off their feet with a loud crunch! Fucking hell!"), \
-				span_warning("You are hit viciously by [user]'s [atk_verb], and suddenly feel an overwhelming pain as you topple head over heels!"), span_hear("You hear a sickening crack and a loud thud!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_warning("Your [atk_verb] lands, and [target] is sent crashing to the floor with the immense force! Good god!"))
+			target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] [target] так сильно, что отправляет [target.ru_p_them()] в полёт с громким хрустом! Чёрт побери!"), \
+				span_warning("[capitalize(user.declent_ru(NOMINATIVE))] [atk_verb] вас, и вы резко начинаете чувствовать невероятную боль, пока вас отправляют в полёт!"), span_hear("Вы слышите противный хруст и последующий стук!"), COMBAT_MESSAGE_RANGE, user)
+			to_chat(user, span_warning("Вы [atk_verb]е [target.declent_ru(ACCUSATIVE)] и отправляете [target.ru_p_them()] в полёт с хрустом! Боже мой!"))
 
 
 /datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
@@ -1030,11 +1046,11 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		return
 	if(owner.mind)
 		attacker_style = owner.mind.martial_art
-	if((owner != target) && target.check_block(owner, 0, owner.name, attack_type = UNARMED_ATTACK))
+	if((owner != target) && target.check_block(owner, 0, owner.declent_ru(ACCUSATIVE), attack_type = UNARMED_ATTACK))
 		log_combat(owner, target, "attempted to touch")
-		target.visible_message(span_warning("[owner] attempts to touch [target]!"), \
-						span_danger("[owner] attempts to touch you!"), span_hear("You hear a swoosh!"), COMBAT_MESSAGE_RANGE, owner)
-		to_chat(owner, span_warning("You attempt to touch [target]!"))
+		target.visible_message(span_warning("[capitalize(owner.declent_ru(NOMINATIVE))] пытается прикоснуться к [target.declent_ru(DATIVE)]!"), \
+						span_danger("[capitalize(owner.declent_ru(NOMINATIVE))] пытается прикоснуться к вам!"), span_hear("Вы слышите свист!"), COMBAT_MESSAGE_RANGE, owner)
+		to_chat(owner, span_warning("Вы пытаетесь прикоснуться к [target.declent_ru(DATIVE)]!"))
 		return
 
 	SEND_SIGNAL(owner, COMSIG_MOB_ATTACK_HAND, owner, target, attacker_style)
@@ -1632,16 +1648,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "band-aid",
-			SPECIES_PERK_NAME = "Brutal Weakness",
-			SPECIES_PERK_DESC = "[plural_form] are weak to brute damage.",
+			SPECIES_PERK_NAME = "Слабость к ушибам",
+			SPECIES_PERK_DESC = "[plural_form] слабы к получению ушибов.",
 		))
 
 	if(initial(fake_chest.brute_modifier) < 1)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "shield-alt",
-			SPECIES_PERK_NAME = "Brutal Resilience",
-			SPECIES_PERK_DESC = "[plural_form] are resilient to brute damage.",
+			SPECIES_PERK_NAME = "Устойчивость к ушибам",
+			SPECIES_PERK_DESC = "[plural_form] устойчивы к получению ушибов.",
 		))
 
 	// Burn related
@@ -1649,16 +1665,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "burn",
-			SPECIES_PERK_NAME = "Burn Weakness",
-			SPECIES_PERK_DESC = "[plural_form] are weak to burn damage.",
+			SPECIES_PERK_NAME = "Слабость к ожогам",
+			SPECIES_PERK_DESC = "[plural_form] слабы к получению ожогов.",
 		))
 
 	if(initial(fake_chest.burn_modifier) < 1)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "shield-alt",
-			SPECIES_PERK_NAME = "Burn Resilience",
-			SPECIES_PERK_DESC = "[plural_form] are resilient to burn damage.",
+			SPECIES_PERK_NAME = "Устойчивость к ожогам",
+			SPECIES_PERK_DESC = "[plural_form] устойчивы к получению ожогов.",
 		))
 
 	// Shock damage
@@ -1666,16 +1682,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "bolt",
-			SPECIES_PERK_NAME = "Shock Vulnerability",
-			SPECIES_PERK_DESC = "[plural_form] are vulnerable to being shocked.",
+			SPECIES_PERK_NAME = "Уязвимость к шоку",
+			SPECIES_PERK_DESC = "[plural_form] уязвимы к ударам от тока.",
 		))
 
 	if(siemens_coeff < 1)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "shield-alt",
-			SPECIES_PERK_NAME = "Shock Resilience",
-			SPECIES_PERK_DESC = "[plural_form] are resilient to being shocked.",
+			SPECIES_PERK_NAME = "Устойчивость к току",
+			SPECIES_PERK_DESC = "[plural_form] устойчивы к ударам от тока.",
 		))
 
 	return to_add
@@ -1693,16 +1709,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "temperature-high",
-			SPECIES_PERK_NAME = "Heat Vulnerability",
-			SPECIES_PERK_DESC = "[plural_form] are vulnerable to high temperatures.",
+			SPECIES_PERK_NAME = "Уязвимость к жаре",
+			SPECIES_PERK_DESC = "[plural_form] уязвимы к высоким температурам.",
 		))
 
 	if(heatmod < 1 || bodytemp_heat_damage_limit > BODYTEMP_HEAT_DAMAGE_LIMIT)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "thermometer-empty",
-			SPECIES_PERK_NAME = "Heat Resilience",
-			SPECIES_PERK_DESC = "[plural_form] are resilient to hotter environments.",
+			SPECIES_PERK_NAME = "Устойчивость к жаре",
+			SPECIES_PERK_DESC = "[plural_form] устойчивы к высоким температурам.",
 		))
 
 	// Cold temperature tolerance
@@ -1710,16 +1726,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "temperature-low",
-			SPECIES_PERK_NAME = "Cold Vulnerability",
-			SPECIES_PERK_DESC = "[plural_form] are vulnerable to cold temperatures.",
+			SPECIES_PERK_NAME = "Уязвимость к холоду",
+			SPECIES_PERK_DESC = "[plural_form] узвимы к низким температурам.",
 		))
 
 	if(coldmod < 1 || bodytemp_cold_damage_limit < BODYTEMP_COLD_DAMAGE_LIMIT)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "thermometer-empty",
-			SPECIES_PERK_NAME = "Cold Resilience",
-			SPECIES_PERK_DESC = "[plural_form] are resilient to colder environments.",
+			SPECIES_PERK_NAME = "Устойчивость к холоду",
+			SPECIES_PERK_DESC = "[plural_form] устойчивы к низким температурам.",
 		))
 
 	return to_add
@@ -1737,8 +1753,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "tint-slash",
-			SPECIES_PERK_NAME = "Bloodletted",
-			SPECIES_PERK_DESC = "[plural_form] do not have blood.",
+			SPECIES_PERK_NAME = "Обескровленный",
+			SPECIES_PERK_DESC = "[plural_form] не имеют крови.",
 		))
 
 	// Otherwise, check if their exotic blood is a valid typepath
@@ -1747,7 +1763,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "tint",
 			SPECIES_PERK_NAME = initial(exotic_blood.name),
-			SPECIES_PERK_DESC = "[name] blood is [initial(exotic_blood.name)], which can make receiving medical treatment harder.",
+			SPECIES_PERK_DESC = "Кровь у [name] - [initial(exotic_blood.name)], что может затруднить получение медицинской помощи.",
 		))
 
 	// Otherwise otherwise, see if they have an exotic bloodtype set
@@ -1755,8 +1771,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "tint",
-			SPECIES_PERK_NAME = "Exotic Blood",
-			SPECIES_PERK_DESC = "[plural_form] have \"[exotic_bloodtype]\" type blood, which can make receiving medical treatment harder.",
+			SPECIES_PERK_NAME = "Экзотическая кровь",
+			SPECIES_PERK_DESC = "Кровь у [plural_form] - тип \"[exotic_bloodtype]\", что может затруднить получение медицинской помощи.",
 		))
 
 	return to_add
@@ -1773,50 +1789,50 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "user-plus",
-			SPECIES_PERK_NAME = "Limbs Easily Reattached",
-			SPECIES_PERK_DESC = "[plural_form] limbs are easily readded, and as such do not \
-				require surgery to restore. Simply pick it up and pop it back in, champ!",
+			SPECIES_PERK_NAME = "Конечности легко прикрепляются",
+			SPECIES_PERK_DESC = "Конечности у [plural_form] легко присоединяются обратно, и потому \
+				им не нужна для этого операция. Просто поднимите ее и вставьте обратно!",
 		))
 
 	if(TRAIT_EASYDISMEMBER in inherent_traits)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "user-times",
-			SPECIES_PERK_NAME = "Limbs Easily Dismembered",
-			SPECIES_PERK_DESC = "[plural_form] limbs are not secured well, and as such they are easily dismembered.",
+			SPECIES_PERK_NAME = "Конечности легко расчленяются",
+			SPECIES_PERK_DESC = "Конечности у [plural_form] не закреплены хорошо, и потому их легко расчленить.",
 		))
 
 	if(TRAIT_EASILY_WOUNDED in inherent_traits)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "user-times",
-			SPECIES_PERK_NAME = "Easily Wounded",
-			SPECIES_PERK_DESC = "[plural_form] skin is very weak and fragile. They are much easier to apply serious wounds to.",
+			SPECIES_PERK_NAME = "Легко ранимый",
+			SPECIES_PERK_DESC = "Кожа у [plural_form] очень слабая и хрупкая. Им гораздо легче получить серьезные раны.",
 		))
 
 	if(TRAIT_TOXINLOVER in inherent_traits)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "syringe",
-			SPECIES_PERK_NAME = "Toxins Lover",
-			SPECIES_PERK_DESC = "Toxins damage dealt to [plural_form] are reversed - healing toxins will instead cause harm, and \
-				causing toxins will instead cause healing. Be careful around purging chemicals!",
+			SPECIES_PERK_NAME = "Любитель токсинов",
+			SPECIES_PERK_DESC = "Токсины у [plural_form] работают наоборот - лечение токсинов нанесет вред, а \
+				урон токсинами вылечит их. Будьте аккуратны при очистке химикатов!",
 		))
 
 	if (TRAIT_GENELESS in inherent_traits)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "dna",
-			SPECIES_PERK_NAME = "No Genes",
-			SPECIES_PERK_DESC = "[plural_form] have no genes, making genetic scrambling a useless weapon, but also locking them out from getting genetic powers.",
+			SPECIES_PERK_NAME = "Нет генов",
+			SPECIES_PERK_DESC = "У [plural_form] нет генов, что делает генетический скрэмблинг бесполезным оружием, но также лишает их возможности получить генетические способности.",
 		))
 
 	if (TRAIT_NOBREATH in inherent_traits)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "wind",
-			SPECIES_PERK_NAME = "No Respiration",
-			SPECIES_PERK_DESC = "[plural_form] have no need to breathe!",
+			SPECIES_PERK_NAME = "Бездыханные",
+			SPECIES_PERK_DESC = "[plural_form] не нужно дышать!",
 		))
 
 	return to_add
@@ -1870,31 +1886,31 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	if (tolerance_difference != 0)
 		var/difference_positive = (tolerance_difference > 0)
-		var/more_or_less = (difference_positive) ? "more" : "less"
+		var/more_or_less = (difference_positive) ? "менее" : "более"
 		var/perk_type = (difference_positive) ? SPECIES_NEGATIVE_PERK : SPECIES_POSITIVE_PERK
-		var/perk_name = "Alcohol " + ((difference_positive) ? "Weakness" : "Tolerance")
+		var/perk_name = ((difference_positive) ? "Слабость к " : "Устойчивость к") + " алкоголю"
 		var/percent_difference = (alcohol_tolerance / initial(base_liver.alcohol_tolerance)) * 100
 
 		to_add += list(list(
 			SPECIES_PERK_TYPE = perk_type,
 			SPECIES_PERK_ICON = "wine-glass",
 			SPECIES_PERK_NAME = perk_name,
-			SPECIES_PERK_DESC = "[name] livers are [more_or_less] susceptable to alcohol than human livers, by about [percent_difference]%."
+			SPECIES_PERK_DESC = "Печень [name] [more_or_less] устойчива к алкоголю, чем у людей, примерно на [percent_difference]%."
 		))
 
 	var/tox_shrugging = initial(mutantliver.toxTolerance)
 	var/shrugging_difference = tox_shrugging - initial(base_liver.toxTolerance)
 	if (shrugging_difference != 0)
 		var/difference_positive = (shrugging_difference > 0)
-		var/more_or_less = (difference_positive) ? "more" : "less"
+		var/more_or_less = (difference_positive) ? "больше" : "меньше"
 		var/perk_type = (difference_positive) ? SPECIES_POSITIVE_PERK : SPECIES_NEGATIVE_PERK
-		var/perk_name = ("Toxin " + ((difference_positive) ? "Resistant" : "Vulnerable")) + " Liver"
+		var/perk_name = (((difference_positive) ? "Устойчивая" : "Уязвимая")) + " к токсинам " + " печень"
 
 		to_add += list(list(
 			SPECIES_PERK_TYPE = perk_type,
 			SPECIES_PERK_ICON = "biohazard",
 			SPECIES_PERK_NAME = perk_name,
-			SPECIES_PERK_DESC = "[name] livers are capable of rapidly shrugging off [tox_shrugging]u of toxins, which is [more_or_less] than humans."
+			SPECIES_PERK_DESC = "Печень [name] могут быстро избавляется от [tox_shrugging]u токсинов, что [more_or_less], чем у людей."
 		))
 
 	return to_add
@@ -1911,8 +1927,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "wind",
-			SPECIES_PERK_NAME = "[capitalize(breathid)] Breathing",
-			SPECIES_PERK_DESC = "[plural_form] must breathe [breathid] to survive. You receive a tank when you arrive.",
+			SPECIES_PERK_NAME = "Дышит [capitalize(breathid)]",
+			SPECIES_PERK_DESC = "[plural_form] должны дышать [breathid], чтобы выжить. Вы получаете баллон по прибытии.",
 		))
 
 	return to_add
@@ -1944,16 +1960,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "comment",
-			SPECIES_PERK_NAME = "Native Speaker",
-			SPECIES_PERK_DESC = "Alongside [initial(common_language.name)], [plural_form] gain the ability to speak [english_list(bonus_languages)].",
+			SPECIES_PERK_NAME = "Родной язык",
+			SPECIES_PERK_DESC = "Вместе с [initial(common_language.name)], [plural_form] так же могут говорить на [english_list(bonus_languages)].",
 		))
 
 	else
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "comment",
-			SPECIES_PERK_NAME = "Foreign Speaker",
-			SPECIES_PERK_DESC = "[plural_form] may not speak [initial(common_language.name)], but they can speak [english_list(bonus_languages)].",
+			SPECIES_PERK_NAME = "Иностраннцы",
+			SPECIES_PERK_DESC = "[plural_form] не могут говорить на [initial(common_language.name)], но зато знают [english_list(bonus_languages)].",
 		))
 
 	return to_add
@@ -2023,27 +2039,17 @@ GLOBAL_LIST_EMPTY(features_by_species)
 /datum/species/proc/add_body_markings(mob/living/carbon/human/hooman)
 	for(var/markings_type in body_markings) //loop through possible species markings
 		var/datum/bodypart_overlay/simple/body_marking/markings = new markings_type() // made to die... mostly because we cant use initial on lists but its convenient and organized
-		var/accessory_name = hooman.dna.features[markings.dna_feature_key] //get the accessory name from dna
-		var/datum/sprite_accessory/moth_markings/accessory = markings.get_accessory(accessory_name) //get the actual datum
-
-		if(isnull(accessory))
-			CRASH("Value: [accessory_name] did not have a corresponding sprite accessory!")
-
+		var/accessory_name = hooman.dna.features[markings.dna_feature_key] || body_markings[markings_type] //get the accessory name from dna
 		for(var/obj/item/bodypart/part as anything in markings.applies_to) //check through our limbs
 			var/obj/item/bodypart/people_part = hooman.get_bodypart(initial(part.body_zone)) // and see if we have a compatible marking for that limb
-
-			if(!people_part)
+			if(isnull(people_part))
 				continue
 
-			var/datum/bodypart_overlay/simple/body_marking/overlay = new markings_type ()
-
-			// Tell the overlay what it should look like
-			overlay.icon = accessory.icon
-			overlay.icon_state = accessory.icon_state
-			overlay.use_gender = accessory.gender_specific
-			overlay.draw_color = accessory.color_src ? hooman.dna.features["mcolor"] : null
-
+			var/datum/bodypart_overlay/simple/body_marking/overlay = new markings_type()
+			overlay.set_appearance(accessory_name, hooman.dna.features["mcolor"])
 			people_part.add_bodypart_overlay(overlay)
+
+		qdel(markings)
 
 /// Remove body markings
 /datum/species/proc/remove_body_markings(mob/living/carbon/human/hooman)
@@ -2051,6 +2057,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		for(var/datum/bodypart_overlay/simple/body_marking/marking in part.bodypart_overlays)
 			part.remove_bodypart_overlay(marking)
 
+// BANDASTATION EDIT START
 /// Update the overlays if necessary
 /datum/species/proc/update_body_markings(mob/living/carbon/human/hooman)
 	if(HAS_TRAIT(hooman, TRAIT_INVISIBLE_MAN))
@@ -2067,3 +2074,19 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	if(needs_update)
 		remove_body_markings(hooman)
 		add_body_markings(hooman)
+// BANDASTATION EDIT END
+
+/**
+ * Calculates the expected height values for this species
+ *
+ * Return a height value corresponding to a specific height filter
+ * Return null to just use the mob's base height
+ */
+/datum/species/proc/update_species_heights(mob/living/carbon/human/holder)
+	if(HAS_TRAIT(holder, TRAIT_DWARF))
+		return HUMAN_HEIGHT_DWARF
+
+	if(HAS_TRAIT(holder, TRAIT_TOO_TALL))
+		return HUMAN_HEIGHT_TALLEST
+
+	return null

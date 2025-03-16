@@ -4,7 +4,7 @@
 	icon_state = "med"
 	icon_deny = "med-deny"
 	panel_type = "panel11"
-	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
+	product_ads = "Спасите пару жизней!;Лучшие вещи для вашего меда.;Только самые лучшие инструменты.;Натуральные химикаты!;Эти вещи спасают жизни.;Разве вы не хотите это?;Пинг!"
 	products = list(
 		/obj/item/stack/medical/gauze = 8,
 		/obj/item/reagent_containers/syringe = 12,
@@ -71,12 +71,12 @@
 	icon_state = "drug"
 	icon_deny = "drug-deny"
 	panel_type = "panel11"
-	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
+	product_ads = "Спасите пару жизней!;Лучшие вещи для вашего меда.;Только самые лучшие инструменты.;Натуральные химикаты!;Эти вещи спасают жизни.;Разве вы не хотите это?;Пинг!"
 	products = list(
-		/obj/item/reagent_containers/pill/patch/libital = 5,
-		/obj/item/reagent_containers/pill/patch/aiuri = 5,
+		/obj/item/reagent_containers/applicator/patch/libital = 5,
+		/obj/item/reagent_containers/applicator/patch/aiuri = 5,
 		/obj/item/reagent_containers/syringe/convermol = 2,
-		/obj/item/reagent_containers/pill/insulin = 5,
+		/obj/item/reagent_containers/applicator/pill/insulin = 5,
 		/obj/item/reagent_containers/cup/bottle/multiver = 2,
 		/obj/item/reagent_containers/cup/bottle/syriniver = 2,
 		/obj/item/reagent_containers/cup/bottle/calomel = 2,
@@ -91,9 +91,9 @@
 		/obj/item/reagent_containers/medigel/sterilizine = 1,
 	)
 	contraband = list(
-		/obj/item/reagent_containers/pill/tox = 3,
-		/obj/item/reagent_containers/pill/morphine = 4,
-		/obj/item/reagent_containers/pill/multiver = 6,
+		/obj/item/reagent_containers/applicator/pill/tox = 3,
+		/obj/item/reagent_containers/applicator/pill/morphine = 4,
+		/obj/item/reagent_containers/applicator/pill/multiver = 6,
 	)
 	premium = list(
 		/obj/item/reagent_containers/medigel/synthflesh = 2,

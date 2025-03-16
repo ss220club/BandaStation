@@ -7,6 +7,10 @@
 	failing_desc = "seems to be broken."
 	var/implant_color = COLOR_WHITE
 
+/obj/item/organ/cyberimp/feel_for_damage(self_aware)
+	// No feeling in implants (yet?)
+	return ""
+
 //[[[[BRAIN]]]]
 
 /obj/item/organ/cyberimp/brain
@@ -64,7 +68,7 @@
 	for(var/obj/item/stored_item as anything in stored_items)
 		throw_target = pick(oview(range))
 		stored_item.throw_at(throw_target, range, 2)
-		to_chat(owner, span_warning("Your [owner.get_held_index_name(owner.get_held_index_of_item(stored_item))] spasms and throws the [stored_item.name]!"))
+		to_chat(owner, span_warning("Your [owner.get_held_index_name(owner.get_held_index_of_item(stored_item))] spasms and throws \the [stored_item]!"))
 	stored_items = list()
 
 

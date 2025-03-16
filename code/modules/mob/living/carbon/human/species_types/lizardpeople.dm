@@ -7,12 +7,14 @@
 		TRAIT_MUTANT_COLORS,
 	)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_REPTILE
-	body_markings = list(/datum/bodypart_overlay/simple/body_marking/lizard = "None")
+	body_markings = list(
+		/datum/bodypart_overlay/simple/body_marking/lizard = SPRITE_ACCESSORY_NONE,
+	)
 	mutant_organs = list(
-		/obj/item/organ/horns = "None",
-		/obj/item/organ/frills = "None",
+		/obj/item/organ/horns = SPRITE_ACCESSORY_NONE,
+		/obj/item/organ/frills = SPRITE_ACCESSORY_NONE,
 		/obj/item/organ/snout = "Round",
-		/obj/item/organ/spines = "None",
+		/obj/item/organ/spines = SPRITE_ACCESSORY_NONE,
 		/obj/item/organ/tail/lizard = "Smooth",
 	)
 	mutanttongue = /obj/item/organ/tongue/lizard
@@ -154,10 +156,10 @@
 	to_add += list(list(
 		SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 		SPECIES_PERK_ICON = "thermometer-empty",
-		SPECIES_PERK_NAME = "Cold-blooded",
-		SPECIES_PERK_DESC = "Lizardpeople have higher tolerance for hot temperatures, but lower \
-			tolerance for cold temperatures. Additionally, they cannot self-regulate their body temperature - \
-			they are as cold or as warm as the environment around them is. Stay warm!",
+		SPECIES_PERK_NAME = "Хладнокровный",
+		SPECIES_PERK_DESC = "[plural_form] лучше переносят высокие температуры, но хуже \
+			низкие. Кроме того, они не могут самостоятельно регулировать температуру своего тела - \
+			они имеют такую же температуру, что и окружающая среда. Держитесь в тепле!",
 	))
 
 	return to_add

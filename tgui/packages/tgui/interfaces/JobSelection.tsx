@@ -5,13 +5,18 @@ import {
   Button,
   Icon,
   NoticeBox,
+  Section,
   Stack,
   StyleableSection,
 } from 'tgui-core/components';
 import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
-import { DEPARTMENTS_RU, JOBS_RU } from '../bandastation/ru_jobs'; // BANDASTATION EDIT
+import {
+  DEPARTMENTS_RU,
+  JOBS_RU,
+  ReverseJobsRu,
+} from '../bandastation/ru_jobs'; // BANDASTATION EDIT
 import { Window } from '../layouts';
 import { JOB2ICON } from './common/JobToIcon';
 
@@ -40,16 +45,18 @@ type Data = {
   round_duration: string;
 };
 
-export const JobEntry = (data: {
+type JobEntryProps = {
   jobName: string;
   job: Job;
   department: Department;
   onClick: () => void;
-}) => {
-  const jobName = data.jobName;
-  const job = data.job;
-  const department = data.department;
-  const jobIcon = JOB2ICON[jobName] || null;
+};
+
+function JobEntry(props: JobEntryProps) {
+  const { jobName, job, department, onClick } = props;
+
+  const jobIcon = JOB2ICON[ReverseJobsRu(jobName)] || null;
+
   return (
     <Button
       fluid
@@ -79,129 +86,147 @@ export const JobEntry = (data: {
           job.description
         ))
       }
+      tooltipPosition="top"
       onClick={() => {
-        !job.unavailable_reason && data.onClick();
+        !job.unavailable_reason && onClick();
       }}
     >
-      <>
-        {jobIcon && <Icon style={{ marginRight: '0.1em' }} name={jobIcon} />}
-        {job.command ? (
-          <b>{JOBS_RU[jobName] || jobName}</b>
-        ) : (
-          JOBS_RU[jobName] || jobName
+      <Stack fill>
+        {jobIcon && (
+          <Stack.Item>
+            <Icon style={{ marginRight: '0.1em' }} name={jobIcon} />
+          </Stack.Item>
         )}
-        <span
-          style={{
-            whiteSpace: 'nowrap',
-            position: 'absolute',
-            right: '0.5em',
-          }}
-        >
-          {job.used_slots} / {job.open_slots}
-        </span>
-      </>
+        <Stack.Item grow>
+          {job.command ? (
+            <b>{JOBS_RU[jobName] || jobName}</b>
+          ) : (
+            JOBS_RU[jobName] || jobName
+          )}
+        </Stack.Item>
+        <Stack.Item>
+          <span
+            style={{
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {job.used_slots} / {job.open_slots}
+          </span>
+        </Stack.Item>
+      </Stack>
     </Button>
   );
+}
+
+type DepartmentEntryProps = {
+  name: string;
+  department: Department;
 };
 
-export const JobSelection = (props) => {
+function DepartmentEntry(props: DepartmentEntryProps) {
+  const { name, department } = props;
+  const { act } = useBackend<Data>();
+
+  return (
+    <Box minWidth="30%">
+      <StyleableSection
+        title={
+          <>
+            {name}
+            <span
+              style={{
+                fontSize: '1rem',
+                whiteSpace: 'nowrap',
+                position: 'absolute',
+                right: '1em',
+                color: Color.fromHex(department.color).darken(60).toString(),
+              }}
+            >
+              {'позиций доступно: ' + department.open_slots}
+            </span>
+          </>
+        }
+        style={{
+          backgroundColor: department.color,
+          marginBottom: '1em',
+          breakInside: 'avoid-column',
+        }}
+        titleStyle={{
+          'border-bottom-color': Color.fromHex(department.color)
+            .darken(50)
+            .toString(),
+        }}
+        textStyle={{
+          color: Color.fromHex(department.color).darken(80).toString(),
+        }}
+      >
+        <Stack vertical>
+          {Object.entries(department.jobs).map(([name, job]) => (
+            <Stack.Item key={name}>
+              <JobEntry
+                key={name}
+                jobName={name}
+                job={job}
+                department={department}
+                onClick={() => {
+                  act('select_job', { job: name });
+                }}
+              />
+            </Stack.Item>
+          ))}
+        </Stack>
+      </StyleableSection>
+    </Box>
+  );
+}
+
+export function JobSelection(props) {
   const { act, data } = useBackend<Data>();
   if (!data?.departments_static) {
     return null; // Stop TGUI whitescreens with TGUI-dev!
   }
+
   const departments: Record<string, Department> = deepMerge(
     data.departments,
     data.departments_static,
   );
 
+  const { shuttle_status, round_duration } = data;
+
   return (
-    <Window
-      width={1012}
-      height={data.shuttle_status ? 690 : 666 /* Hahahahahaha */}
-    >
-      <Window.Content scrollable>
-        <StyleableSection
+    <Window width={1012} height={shuttle_status ? 690 : 666 /* Hahahahahaha */}>
+      <Window.Content>
+        <Section
+          buttons={
+            <Button
+              onClick={() => act('select_job', { job: 'Random' })}
+              tooltip="Случайно выбрать профессию. Вы можете повторно выбирать случайную профессию или отказаться от этого."
+            >
+              Случайная профессия!
+            </Button>
+          }
+          fill
+          scrollable
           title={
             <>
-              {data.shuttle_status && (
-                <NoticeBox info>{data.shuttle_status}</NoticeBox>
-              )}
-              <span style={{ color: 'grey' }}>
-                It is currently {data.round_duration} into the shift.
-              </span>
-              <Button
-                style={{ position: 'absolute', right: '1em' }}
-                onClick={() => act('select_job', { job: 'Random' })}
-                content="Random Job!"
-                tooltip="Roll target random job. You can re-roll or cancel your random job if you don't like it."
-              />
+              {shuttle_status && <NoticeBox info>{shuttle_status}</NoticeBox>}
+              <Box as="span" color="label">
+                It is currently {round_duration} into the shift.
+              </Box>
             </>
           }
-          titleStyle={{ minHeight: '3.4em' }}
         >
           <Box style={{ columns: '20em' }}>
-            {Object.entries(departments).map((departmentEntry) => {
-              const departmentName = departmentEntry[0];
-              const entry = departmentEntry[1];
-              return (
-                <Box key={departmentName} minWidth="30%">
-                  <StyleableSection
-                    title={
-                      <>
-                        {DEPARTMENTS_RU[departmentName] || departmentName}
-                        <span
-                          style={{
-                            fontSize: '1rem',
-                            whiteSpace: 'nowrap',
-                            position: 'absolute',
-                            right: '1em',
-                            color: Color.fromHex(entry.color)
-                              .darken(60)
-                              .toString(),
-                          }}
-                        >
-                          {entry.open_slots +
-                            (entry.open_slots === 1 ? ' slot' : ' slots') +
-                            ' available'}
-                        </span>
-                      </>
-                    }
-                    style={{
-                      backgroundColor: entry.color,
-                      marginBottom: '1em',
-                      breakInside: 'avoid-column',
-                    }}
-                    titleStyle={{
-                      'border-bottom-color': Color.fromHex(entry.color)
-                        .darken(50)
-                        .toString(),
-                    }}
-                    textStyle={{
-                      color: Color.fromHex(entry.color).darken(80).toString(),
-                    }}
-                  >
-                    <Stack vertical>
-                      {Object.entries(entry.jobs).map((job) => (
-                        <Stack.Item key={job[0]}>
-                          <JobEntry
-                            key={job[0]}
-                            jobName={job[0]}
-                            job={job[1]}
-                            department={entry}
-                            onClick={() => {
-                              act('select_job', { job: job[0] });
-                            }}
-                          />
-                        </Stack.Item>
-                      ))}
-                    </Stack>
-                  </StyleableSection>
-                </Box>
-              );
-            })}
+            {Object.entries(departments).map(([name, department]) => (
+              <DepartmentEntry
+                key={name}
+                name={DEPARTMENTS_RU[name] || name}
+                department={department}
+              />
+            ))}
           </Box>
-        </StyleableSection>
+        </Section>
       </Window.Content>
     </Window>
   );
-};
+}

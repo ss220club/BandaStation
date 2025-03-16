@@ -200,7 +200,7 @@
 	SIGNAL_HANDLER
 
 	travel_remaining = 0
-	bumped_atom.visible_message(span_userdanger("The [bumped_atom.name] crashes into the field violently!"))
+	bumped_atom.visible_message(span_userdanger("\The [bumped_atom] crashes into the field violently!"))
 	for(var/obj/structure/transport/linear/tram/transport_module as anything in transport_modules)
 		transport_module.set_travelling(FALSE)
 		for(var/explosive_target in transport_module.transport_contents)
@@ -625,7 +625,7 @@
 	log_transport("TC: [specific_transport_id] ending Tram Malfunction event.")
 
 /datum/transport_controller/linear/tram/proc/announce_malf_event()
-	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please stand by, engineering has been dispatched to the tram to perform a reset.", "[command_name()] Engineering Division")
+	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please stand by, engineering has been dispatched to the tram to perform a reset.", "[command_name()] Инженерный отдел")
 
 /datum/transport_controller/linear/tram/proc/register_collision(points = 1)
 	tram_registration.collisions += points
@@ -865,7 +865,7 @@
 	if(cover_locked)
 		var/obj/item/card/id/id_card = user.get_idcard(TRUE)
 		if(isnull(id_card))
-			balloon_alert(user, "access denied!")
+			balloon_alert(user, "в доступе отказано!")
 			return
 
 		try_toggle_lock(user, id_card)
@@ -881,7 +881,7 @@
 	if(!cover_open)
 		var/obj/item/card/id/id_card = user.get_idcard(TRUE)
 		if(isnull(id_card))
-			balloon_alert(user, "access denied!")
+			balloon_alert(user, "в доступе отказано!")
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 		try_toggle_lock(user, id_card)
@@ -911,7 +911,7 @@
 		update_appearance()
 		return TRUE
 
-	balloon_alert(user, "access denied!")
+	balloon_alert(user, "в доступе отказано!")
 	return FALSE
 
 /obj/machinery/transport/tram_controller/wrench_act_secondary(mob/living/user, obj/item/tool)
@@ -1152,7 +1152,7 @@
 /// Controller that sits in the telecoms room
 /obj/machinery/transport/tram_controller/tcomms
 	name = "tram central controller"
-	desc = "This semi-conductor is half of the brains controlling the tram and its auxillary equipment."
+	desc = "This semiconductor is half of the brains controlling the tram and its auxiliary equipment."
 	icon_state = "home-controller"
 	base_icon_state = "home"
 	density = TRUE

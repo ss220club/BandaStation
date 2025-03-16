@@ -83,7 +83,7 @@
 	name = "Radio Jammer"
 	desc = "This device will disrupt any nearby outgoing radio communication when activated. Does not affect binary chat."
 	item = /obj/item/jammer
-	cost = 5
+	cost = 1
 
 /datum/uplink_item/stealthy_tools/smugglersatchel
 	name = "Smuggler's Satchel"
@@ -131,7 +131,7 @@
 	desc = "When purchased, a virus will be uploaded to the engineering processing servers to force a routine power grid check, forcing all APCs on the station to be temporarily disabled."
 	item = ABSTRACT_UPLINK_ITEM
 	surplus = 0
-	progression_minimum = 20 MINUTES
+	progression_minimum = 15 MINUTES
 	limited_stock = 1
 	cost = 6
 	restricted = TRUE

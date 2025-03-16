@@ -43,7 +43,7 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 
 /client/proc/looc_message(msg, wall_pierce)
 	if(GLOB.say_disabled)
-		to_chat(usr, span_danger("Speech is currently admin-disabled."))
+		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
 		return
 
 	if(!mob)

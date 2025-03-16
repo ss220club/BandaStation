@@ -10,7 +10,7 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/angel)
 
 /mob/living/silicon/add_tts_component()
-	AddComponent(/datum/component/tts_component, null, TTS_TRAIT_ROBOTIZE)
+	AddComponent(/datum/component/tts_component, null, list(/datum/singleton/sound_effect/robot))
 
 /mob/living/carbon/add_tts_component()
 	var/random_tts_seed_key = SStts220.pick_tts_seed_by_gender(gender)

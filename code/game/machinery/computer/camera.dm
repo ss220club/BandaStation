@@ -97,23 +97,7 @@
 	var/list/data = list()
 	data["network"] = network
 	data["mapRef"] = cam_screen.assigned_map
-	var/list/cameras = get_camera_list(network)
-	data["cameras"] = list()
-	for(var/i in cameras)
-		var/obj/machinery/camera/C = cameras[i]
-		data["cameras"] += list(list(
-			name = C.c_tag,
-			ref = REF(C),
-		// BANDASTATION EDIT START - Nanomap
-			x = C.x,
-			y = C.y,
-			z = C.z,
-			status = C.camera_enabled,
-		))
-		if(("[C.z]" in z_levels) || !C.nanomap_png)
-			continue
-		z_levels += list("[C.z]" = C.nanomap_png)
-		// BANDASTATION EDIT END - Nanomap
+	data["cameras"] = GLOB.cameranet.get_available_cameras_data(network)
 	return data
 
 /obj/machinery/computer/security/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

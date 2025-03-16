@@ -35,7 +35,7 @@
 	addtimer(CALLBACK(src, PROC_REF(spawn_carp)), 0.6 SECONDS)
 
 /obj/item/toy/plush/carpplushie/dehy_carp/suicide_act(mob/living/carbon/human/user)
-	user.visible_message(span_suicide("[user] starts eating [src]. It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] starts eating [src]. Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(src, 'sound/items/eatfood.ogg', 50, TRUE)
 	if(!istype(user))
 		return BRUTELOSS
@@ -62,6 +62,7 @@
 	//Make carp non-hostile to user
 	if(owner)
 		spawned_mob.faction = list("[REF(owner)]")
+		spawned_mob.grant_language(/datum/language/common, UNDERSTOOD_LANGUAGE, LANGUAGE_ATOM)
 	for(var/mob/living/viewer in viewers(5, get_turf(src)))
 		to_chat(viewer, viewer == owner ? span_notice("The newly grown [spawned_mob.name] looks up at you with friendly eyes.") : span_warning("You have a bad feeling about this."))
 	qdel(src)

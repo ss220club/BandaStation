@@ -1,7 +1,7 @@
 //Uncategorized mobs
 
 /mob/living/silicon/ai/add_tts_component()
-	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/glados, TTS_TRAIT_ROBOTIZE)
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/glados, list(/datum/singleton/sound_effect/robot))
 
 /obj/item/nullrod/scythe/talking/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/sylvanas)

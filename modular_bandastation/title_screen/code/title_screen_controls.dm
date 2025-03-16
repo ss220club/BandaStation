@@ -61,6 +61,7 @@ ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB
 	set category = "Special"
 
 	if(!isnewplayer(src.mob))
+		SStitle.hide_title_screen_from(src)
 		return
 
 	SStitle.show_title_screen_to(src)

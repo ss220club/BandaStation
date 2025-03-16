@@ -46,7 +46,7 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 		ui.open()
 
 /datum/log_holder/ui_state(mob/user)
-	return GLOB.admin_state
+	return ADMIN_STATE(R_ADMIN | R_DEBUG)
 
 /datum/log_holder/ui_static_data(mob/user)
 	var/list/data = list(
@@ -320,6 +320,14 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 	if(!log_category)
 		Log(LOG_CATEGORY_INTERNAL_CATEGORY_NOT_FOUND, message, data)
 		CRASH("Attempted to log to a category that doesn't exist! [category]")
+
+	// BANDASTATION EDIT START - Logis
+	// Duplicate it for Logis
+	if(category != LOG_CATEGORY_GAME)
+		var/duplicate_category = LOG_CATEGORY_GAME
+		var/duplicate_message = "[uppertext(category)]: [message]"
+		Log(duplicate_category, duplicate_message, data)
+	// BANDASTATION EDIT END
 
 	var/list/semver_store = null
 	if(length(data))

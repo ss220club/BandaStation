@@ -1,41 +1,62 @@
+// MARK: Walls
 /turf/closed/wall
-	icon = 'modular_bandastation/aesthetics/walls/icons/wall.dmi'
+	icon = 'icons/bandastation/walls/wall.dmi'
 	icon_state = "wall-0"
 	base_icon_state = "wall"
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 
 /turf/closed/wall/rust
-	icon = 'modular_bandastation/aesthetics/walls/icons/wall.dmi'
+	icon = 'icons/bandastation/walls/wall.dmi'
 	icon_state = "wall-0"
 	base_icon_state = "wall"
 
 /turf/closed/wall/r_wall
-	icon = 'modular_bandastation/aesthetics/walls/icons/reinforced_wall.dmi'
+	icon = 'icons/bandastation/walls/reinforced_wall.dmi'
 	icon_state = "reinforced_wall-0"
 	base_icon_state = "reinforced_wall"
 
 /turf/closed/wall/r_wall/rust
-	icon = 'modular_bandastation/aesthetics/walls/icons/reinforced_wall.dmi'
+	icon = 'icons/bandastation/walls/reinforced_wall.dmi'
 	icon_state = "reinforced_wall-0"
 	base_icon_state = "reinforced_wall"
 
-/turf/closed/wall/mineral/titanium
-	smoothing_groups = SMOOTH_GROUP_TITANIUM_WALLS + SMOOTH_GROUP_CLOSED_TURFS
-	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE + SMOOTH_GROUP_TITANIUM_WALLS
+/turf/closed/wall/mineral/cult
+	icon = 'icons/bandastation/walls/cult_wall.dmi'
+	icon_state = "cult_wall-0"
+	base_icon_state = "cult_wall"
 
-// Falsewalls
+/turf/closed/wall/material
+	icon = 'icons/bandastation/walls/material_wall.dmi'
+	icon_state = "material_wall-0"
+	base_icon_state = "material_wall"
+
+// MARK: Indestructible walls
+/turf/closed/indestructible/riveted
+	icon = 'icons/bandastation/walls/reinforced_wall.dmi'
+	icon_state = "reinforced_wall-0"
+	base_icon_state = "reinforced_wall"
+
+/turf/closed/indestructible/reinforced
+	icon = 'icons/bandastation/walls/reinforced_wall.dmi'
+	icon_state = "reinforced_wall-0"
+	base_icon_state = "reinforced_wall"
+
+/turf/closed/indestructible/cult
+	icon = 'icons/bandastation/walls/cult_wall.dmi'
+	icon_state = "cult_wall-0"
+	base_icon_state = "cult_wall"
+
+// MARK: Falsewalls
 /obj/structure/falsewall
 	icon = 'modular_bandastation/aesthetics/walls/icons/false_walls.dmi'
 	base_icon_state = "wall"
 	icon_state = "wall-open"
-	fake_icon = 'modular_bandastation/aesthetics/walls/icons/wall.dmi'
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	fake_icon = 'icons/bandastation/walls/wall.dmi'
 
 /obj/structure/falsewall/reinforced
 	icon_state = "reinforced_wall-open"
 	base_icon_state = "reinforced_wall"
 	icon = 'modular_bandastation/aesthetics/walls/icons/false_walls.dmi'
-	fake_icon = 'modular_bandastation/aesthetics/walls/icons/reinforced_wall.dmi'
+	fake_icon = 'icons/bandastation/walls/reinforced_wall.dmi'
 
 /obj/structure/falsewall/uranium
 	icon = 'icons/turf/walls/false_walls.dmi'

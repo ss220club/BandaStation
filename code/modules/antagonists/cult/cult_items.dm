@@ -371,7 +371,7 @@ Striking a noncultist, however, will tear their flesh."}
 
 	// Get the heretic's new body and antag datum.
 	trapped_entity = trapped_mind?.current
-	trapped_entity.key = trapped_mind?.key
+	trapped_entity.PossessByPlayer(trapped_mind?.key)
 	var/datum/antagonist/heretic/heretic_holder = GET_HERETIC(trapped_entity)
 	if(!heretic_holder)
 		stack_trace("[soul_to_bind] in but not a heretic on the heretic soul blade.")
@@ -919,8 +919,8 @@ Striking a noncultist, however, will tear their flesh."}
 
 		var/curse_message = pick_n_take(remaining_curses) || "Something has gone horrendously wrong..."
 
-		curse_message += " The shuttle will be delayed by three minutes."
-		priority_announce("[curse_message]", "System Failure", 'sound/announcer/notice/notice1.ogg')
+		curse_message += " Эвакуационный шаттл задерживается на три минуты."
+		priority_announce("[curse_message]", "Обнаружена неисправность в системе", 'sound/announcer/notice/notice1.ogg')
 		if(MAX_SHUTTLE_CURSES-totalcurses <= 0)
 			to_chat(user, span_danger(span_big("You sense that the emergency escape shuttle can no longer be cursed. It would be unwise to create more cursed orbs.")))
 		else if(MAX_SHUTTLE_CURSES-totalcurses == 1)

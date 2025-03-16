@@ -234,7 +234,7 @@
 				continue //putting them at the edge is dumb
 			if(dangerous_turf.y > world.maxy - PORTAL_DANGEROUS_EDGE_LIMIT || dangerous_turf.y < PORTAL_DANGEROUS_EDGE_LIMIT)
 				continue
-			if(!check_teleport_valid(src, teleport_location))
+			if(!check_teleport_valid(src, dangerous_turf))
 				continue
 			dangerous_turfs += dangerous_turf
 
@@ -317,7 +317,7 @@
 
 /obj/item/hand_tele/suicide_act(mob/living/user)
 	if(iscarbon(user))
-		user.visible_message(span_suicide("[user] is creating a weak portal and sticking [user.p_their()] head through! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is creating a weak portal and sticking [user.p_their()] head through! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		var/mob/living/carbon/itemUser = user
 		var/obj/item/bodypart/head/head = itemUser.get_bodypart(BODY_ZONE_HEAD)
 		if(head)

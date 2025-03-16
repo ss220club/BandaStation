@@ -6,6 +6,7 @@ GLOBAL_LIST_INIT(petsplosion_candidates, typecacheof(list(
 	/mob/living/basic/chicken,
 	/mob/living/basic/cow,
 	/mob/living/basic/goat,
+	/mob/living/basic/goose/vomit,
 	/mob/living/basic/lizard,
 	/mob/living/basic/mothroach,
 	/mob/living/basic/mouse/brown/tom,
@@ -17,7 +18,6 @@ GLOBAL_LIST_INIT(petsplosion_candidates, typecacheof(list(
 	/mob/living/basic/sloth,
 	/mob/living/basic/snake,
 	/mob/living/basic/spider/giant/sgt_araneus,
-	/mob/living/simple_animal/hostile/retaliate/goose/vomit,
 )))
 
 /datum/round_event_control/wizard/petsplosion //the horror
@@ -32,7 +32,7 @@ GLOBAL_LIST_INIT(petsplosion_candidates, typecacheof(list(
 	/// Number of mobs we're going to duplicate
 	var/mobs_to_dupe = 0
 
-/datum/round_event_control/wizard/petsplosion/preRunEvent()
+/datum/round_event_control/wizard/petsplosion/preRunEvent(scheduled = FALSE) // BANDASTATION EDIT - STORYTELLER
 	for(var/mob/living/basic/dupe_animal in GLOB.alive_mob_list)
 		count_mob(dupe_animal)
 	for(var/mob/living/simple_animal/dupe_animal in GLOB.alive_mob_list)

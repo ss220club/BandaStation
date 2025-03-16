@@ -12,7 +12,7 @@
  */
 /mob/living/basic/carp
 	name = "space carp"
-	desc = "A ferocious, fang-bearing creature that resembles a fish."
+	desc = "Свирепое, клыкастое существо, внешне схожее с рыбой."
 	icon = 'icons/mob/simple/carp.dmi'
 	icon_state = "base"
 	icon_living = "base"
@@ -40,6 +40,7 @@
 	butcher_results = list(/obj/item/food/fishmeat/carp = 2, /obj/item/stack/sheet/animalhide/carp = 1)
 	greyscale_config = /datum/greyscale_config/carp
 	ai_controller = /datum/ai_controller/basic_controller/carp
+	initial_language_holder = /datum/language_holder/carp
 	habitable_atmos = null
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = 1500
@@ -104,7 +105,8 @@
 		AddElement(/datum/element/ai_flee_while_injured)
 	setup_eating()
 
-	AddComponent(/datum/component/aggro_emote, emote_list = string_list(list("gnashes")))
+	AddComponent(/datum/component/speechmod, replacements = strings("crustacean_replacement.json", "crustacean"))
+	AddComponent(/datum/component/aggro_emote, emote_list = string_list(list("скалится")))
 	AddComponent(/datum/component/regenerator, outline_colour = regenerate_colour)
 	AddComponent(/datum/component/profound_fisher)
 	if (tamer)
@@ -118,6 +120,10 @@
 	teleport.Grant(src)
 	ai_controller.set_blackboard_key(BB_CARP_RIFT, teleport)
 	ai_controller.set_blackboard_key(BB_OBSTACLE_TARGETING_WHITELIST, allowed_obstacle_targets)
+
+/mob/living/basic/carp/Destroy()
+	QDEL_NULL(teleport)
+	return ..()
 
 /// Tell the elements and the blackboard what food we want to eat
 /mob/living/basic/carp/proc/setup_eating()
@@ -139,7 +145,7 @@
 	if (!feedback)
 		return
 	spin(spintime = 10, speed = 1)
-	visible_message("[src] spins in a circle as it seems to bond with [tamer].")
+	visible_message("[capitalize(declent_ru(NOMINATIVE))] крутится на месте и, видимо, сближается с [tamer.declent_ru(INSTRUMENTAL)].")
 
 /// Teleport when you right click away from you
 /mob/living/basic/carp/ranged_secondary_attack(atom/atom_target, modifiers)
@@ -192,6 +198,7 @@
 	gold_core_spawnable = NO_SPAWN
 	gender = FEMALE // Both current existing pet carp are female but you can remove this if someone else gets a male one?
 	ai_controller = /datum/ai_controller/basic_controller/carp/pet
+	initial_language_holder = /datum/language_holder/carp/hear_common
 
 /mob/living/basic/carp/pet/Initialize(mapload)
 	. = ..()
@@ -203,9 +210,9 @@
  * Has a lot more health than a normal carp because she's meant to be a mildly more threatening pet to have to assassinate than an aging corgi.
  */
 /mob/living/basic/carp/pet/lia
-	name = "Lia"
-	real_name = "Lia"
-	desc = "A failed experiment of Nanotrasen to create weaponised carp technology. This less than intimidating carp now serves as the Head of Security's pet."
+	name = "Лия"
+	real_name = "Лия"
+	desc = "Провальный эксперимент Nanotrasen по созданию оружия из космокарпа. Этот менее устрашающий карп теперь служит питомцем для главы службы безопасности."
 	faction = list(FACTION_NEUTRAL)
 	maxHealth = 200
 	health = 200
@@ -224,9 +231,9 @@
  * Is very talented and also capable of holding the nuclear disk.
  */
 /mob/living/basic/carp/pet/cayenne
-	name = "Cayenne"
-	real_name = "Cayenne"
-	desc = "A failed Syndicate experiment in weaponized space carp technology, it now serves as a lovable mascot."
+	name = "Кайенна"
+	real_name = "Кайенна"
+	desc = "Провальный эксперимент Синдиката по созданию оружия из обычного космокарпа, ныне милый талисман."
 	faction = list(ROLE_SYNDICATE)
 	/// Overlay to apply to display the disk
 	var/mutable_appearance/disk_overlay
@@ -270,9 +277,9 @@
 
 ///Carp-parasite from carpellosis disease
 /mob/living/basic/carp/ella
-	name = "Ella"
-	real_name = "Ella"
-	desc = "It came out of someone."
+	name = "Элла"
+	real_name = "Элла"
+	desc = "Карп-паразит, который живет в своём носителе до созревания и кажется он уже \"вылупился\"."
 	gold_core_spawnable = NO_SPAWN
 
 /mob/living/basic/carp/ella/Initialize(mapload)
@@ -282,7 +289,7 @@
 ///Wild carp that just vibe ya know
 /mob/living/basic/carp/passive
 	name = "false carp"
-	desc = "A close relative of the space carp which is entirely toothless and feeds by stealing its cousin's leftovers."
+	desc = "Беззубый близкий родственник космического карпа. Питается путем воровства остатков из добычи своего кузена."
 
 	icon_state = "base_friend"
 	icon_living = "base_friend"

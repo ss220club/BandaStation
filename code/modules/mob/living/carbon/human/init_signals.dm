@@ -3,6 +3,7 @@
 
 	RegisterSignals(src, list(SIGNAL_ADDTRAIT(TRAIT_UNKNOWN), SIGNAL_REMOVETRAIT(TRAIT_UNKNOWN)), PROC_REF(on_unknown_trait))
 	RegisterSignals(src, list(SIGNAL_ADDTRAIT(TRAIT_DWARF), SIGNAL_REMOVETRAIT(TRAIT_DWARF)), PROC_REF(on_dwarf_trait))
+	RegisterSignals(src, list(SIGNAL_ADDTRAIT(TRAIT_TOO_TALL), SIGNAL_REMOVETRAIT(TRAIT_TOO_TALL)), PROC_REF(on_tootall_trait))
 	RegisterSignal(src, COMSIG_MOVABLE_MESSAGE_GET_NAME_PART, PROC_REF(get_name_part))
 
 	RegisterSignals(src, list(SIGNAL_ADDTRAIT(TRAIT_FAT), SIGNAL_REMOVETRAIT(TRAIT_FAT)), PROC_REF(on_fat))
@@ -17,17 +18,21 @@
 	name = get_visible_name()
 	sec_hud_set_ID()
 
-/// Gaining or losing [TRAIT_DWARF] updates our height
+/// Gaining or losing [TRAIT_DWARF] updates our height and grants passtable
 /mob/living/carbon/human/proc/on_dwarf_trait(datum/source)
 	SIGNAL_HANDLER
 
-	// We need to regenerate everything for height
-	regenerate_icons()
+	update_mob_height()
 	// Toggle passtable
 	if(HAS_TRAIT(src, TRAIT_DWARF))
 		passtable_on(src, TRAIT_DWARF)
 	else
 		passtable_off(src, TRAIT_DWARF)
+
+/// Gaining or losing [TRAIT_TOO_TALL] updates our height
+/mob/living/carbon/human/proc/on_tootall_trait(datum/source)
+	SIGNAL_HANDLER
+	update_mob_height()
 
 ///From compose_message(). Snowflake code converted into its own signal proc
 /mob/living/carbon/human/proc/get_name_part(datum/source, list/stored_name, visible_name)
@@ -41,7 +46,7 @@
 		return
 	var/voice_name = GetVoice()
 	if(name != voice_name)
-		voice_name += " (as [get_id_name("Unknown")])"
+		voice_name += " (как [get_id_name("Неизвестный")])"
 	stored_name[NAME_PART_INDEX] = voice_name
 
 /mob/living/carbon/human/proc/on_fat(datum/source)
@@ -76,8 +81,8 @@
 	if(!dropItemToGround(changed, force = TRUE))
 		return
 	visible_message(
-		span_warning("[changed] falls out of [src]'s pockets!"),
-		span_warning("[changed] falls out of your pockets!"),
+		span_warning("[capitalize(changed.declent_ru(NOMINATIVE))] падает из карманов [declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(changed.declent_ru(NOMINATIVE))] падает из ваших карманов!"),
 		vision_distance = COMBAT_MESSAGE_RANGE,
 	)
 	playsound(src, SFX_RUSTLE, 50, TRUE, -5, frequency = 0.8)

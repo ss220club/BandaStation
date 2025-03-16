@@ -1,11 +1,11 @@
 /datum/job/cook
 	title = JOB_COOK
-	description = "Serve food, cook meat, keep the crew fed."
+	description = "Обеспечьте станцию едой, жарьте стейки, следите за тем, чтобы экипаж был сыт."
 	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 1
-	supervisors = SUPERVISOR_HOP
+	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "COOK"
 	var/cooks = 0 //Counts cooks amount
@@ -100,7 +100,7 @@
 		return
 	var/assignment = worn_id.get_trim_assignment()
 	if(!isnull(assignment))
-		pda.imprint_id(user.real_name, assignment)
+		pda.imprint_id(user.real_name, assignment, worn_id)
 
 /datum/outfit/job/cook/get_types_to_preload()
 	. = ..()

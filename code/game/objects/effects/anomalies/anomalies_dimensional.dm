@@ -20,7 +20,7 @@
 	/// Maximum teleports it will do before going away permanently
 	var/maximum_teleports = 4
 
-/obj/effect/anomaly/dimensional/Initialize(mapload, new_lifespan, drops_core)
+/obj/effect/anomaly/dimensional/Initialize(mapload, new_lifespan)
 	. = ..()
 	overlays += mutable_appearance('icons/effects/effects.dmi', "dimensional_overlay")
 
@@ -88,7 +88,7 @@
 	var/area/new_area = placer.findValidArea()
 	var/turf/new_turf = placer.findValidTurf(new_area)
 
-	priority_announce("Dimensional instability relocated. Expected location: [new_area.name].", "Anomaly Alert")
+	priority_announce("Пространственная аномалия переместилась. Предполагаемая локация: [new_area.name].", "Обнаружена аномалия")
 	src.forceMove(new_turf)
 	prepare_area()
 

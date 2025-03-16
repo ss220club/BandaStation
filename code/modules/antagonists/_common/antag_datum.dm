@@ -7,7 +7,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	///Public name for this antagonist. Appears for player prompts and round-end reports.
 	var/name = "\improper Antagonist"
 	///Section of roundend report, datums with same category will be displayed together, also default header for the section
-	var/roundend_category = "other antagonists"
+	var/roundend_category = "Другие антагонисты"
 	///Set to false to hide the antagonists from roundend report
 	var/show_in_roundend = TRUE
 	///If false, the roundtype will still convert with this antag active
@@ -302,11 +302,11 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = job_rank, role = job_rank, poll_time = 5 SECONDS, checked_target = owner.current, alert_pic = owner.current, role_name_text = name)
 	if(chosen_one)
-		to_chat(owner, "Your mob has been taken over by a ghost! Appeal your job ban if you want to avoid this in the future!")
+		to_chat(owner, "Your mob has been taken over by a ghost! Обжалуйте ваш джоббан, чтобы такого не случилось в будущем!")
 		message_admins("[key_name_admin(chosen_one)] has taken control of ([key_name_admin(owner)]) to replace antagonist banned player.")
 		log_game("[key_name(chosen_one)] has taken control of ([key_name(owner)]) to replace antagonist banned player.")
 		owner.current.ghostize(FALSE)
-		owner.current.key = chosen_one.key
+		owner.current.PossessByPlayer(chosen_one.key)
 	else
 		log_game("Couldn't find antagonist ban replacement for ([key_name(owner)]).")
 
@@ -343,7 +343,7 @@ GLOBAL_LIST_EMPTY(antagonists)
  */
 /datum/antagonist/proc/greet()
 	if(!silent)
-		to_chat(owner.current, span_big("You are \the [src]."))
+		to_chat(owner.current, span_big("Ты [src.name]."))
 		play_stinger()
 
 /// Plays the antag stinger sound, if we have one
@@ -359,7 +359,7 @@ GLOBAL_LIST_EMPTY(antagonists)
  */
 /datum/antagonist/proc/farewell()
 	if(!silent)
-		to_chat(owner.current, span_userdanger("You are no longer \the [src]!"))
+		to_chat(owner.current, span_userdanger("Вы больше не [src.name]!"))
 
 /**
  * Proc that assigns this antagonist's ascribed moodlet to the player.
@@ -405,9 +405,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 				break
 
 	if(objectives.len == 0 || objectives_complete)
-		report += "<span class='greentext big'>The [name] was successful!</span>"
+		report += "<span class='greentext big'>[name] был успешен!</span>"
 	else
-		report += "<span class='redtext big'>The [name] has failed!</span>"
+		report += "<span class='redtext big'>[name] провалился!</span>"
 
 	return report.Join("<br>")
 
@@ -417,7 +417,7 @@ GLOBAL_LIST_EMPTY(antagonists)
  * Appears at start of roundend_catagory section.
  */
 /datum/antagonist/proc/roundend_report_header()
-	return span_header("The [roundend_category] were:<br>")
+	return span_header("[roundend_category] были:<br>")
 
 /**
  * Proc that sends string data for the round-end report.
@@ -559,17 +559,18 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 /**
  * Allows player to replace their objectives with a new one they wrote themselves.
+ * Returns true if they did it successfully.
  * * retain_existing - If true, will just be added as a new objective instead of replacing existing ones.
  * * retain_escape - If true, will retain specifically 'escape alive' objectives (or similar)
  * * force - Skips the check about whether this antagonist is supposed to set its own objectives, for badminning
  */
 /datum/antagonist/proc/submit_player_objective(retain_existing = FALSE, retain_escape = TRUE, force = FALSE)
 	if (isnull(owner) || isnull(owner.current))
-		return
+		return FALSE
 	var/mob/living/owner_mob = owner.current
 	if (!force && !can_assign_self_objectives)
 		owner_mob.balloon_alert(owner_mob, "can't do that!")
-		return
+		return FALSE
 	var/custom_objective_text = tgui_input_text(
 		owner_mob,
 		message = "Specify your new objective.",
@@ -578,7 +579,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 		max_length = CUSTOM_OBJECTIVE_MAX_LENGTH,
 	)
 	if (QDELETED(src) || QDELETED(owner_mob) || isnull(custom_objective_text))
-		return // Some people take a long-ass time to type maybe they got dusted
+		return FALSE // Some people take a long-ass time to type maybe they got dusted
 
 	log_game("[key_name(owner_mob)] [retain_existing ? "" : "opted out of their original objectives and "]chose a custom objective: [custom_objective_text]")
 	message_admins("[ADMIN_LOOKUPFLW(owner_mob)] has chosen a custom antagonist objective: [span_syndradio("[custom_objective_text]")] | [ADMIN_SMITE(owner_mob)] | [ADMIN_SYNDICATE_REPLY(owner_mob)]")
@@ -607,5 +608,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 	can_assign_self_objectives = FALSE
 	owner.announce_objectives()
+
+	return TRUE
 
 #undef CUSTOM_OBJECTIVE_MAX_LENGTH

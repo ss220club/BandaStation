@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/pointed/projectile/furious_steel
 	name = "Furious Steel"
 	desc = "Summon three silver blades which orbit you. \
-		While orbiting you, these blades will protect you from from attacks, but will be consumed on use. \
+		While orbiting you, these blades will protect you from attacks, but will be consumed on use. \
 		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
@@ -16,8 +16,8 @@
 
 	spell_requirements = NONE
 
-	active_msg = "You summon forth three blades of furious silver."
-	deactive_msg = "You conceal the blades of furious silver."
+	active_msg = "Вы вызываете три клинка из яростного серебра."
+	deactive_msg = "Ты скрываешь клинки из яростного серебра."
 	cast_range = 20
 	projectile_type = /obj/projectile/floating_blade
 	projectile_amount = 3
@@ -128,7 +128,7 @@
 				return PROJECTILE_PIERCE_PHASE
 
 		if(victim.can_block_magic(MAGIC_RESISTANCE))
-			visible_message(span_warning("[src] drops to the ground and melts on contact [victim]!"))
+			visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] падает на землю и тает при контакте с [victim.declent_ru(INSTRUMENTAL)]!"))
 			return PROJECTILE_DELETE_WITHOUT_HITTING
 
 	return ..()
@@ -151,7 +151,7 @@
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/haunted
 	name = "Cursed Steel"
 	desc = "Summon two cursed blades which orbit you. \
-		While orbiting you, these blades will protect you from from attacks, but will be consumed on use. \
+		While orbiting you, these blades will protect you from attacks, but will be consumed on use. \
 		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
 	background_icon_state = "bg_heretic" // kept intentionally
 	overlay_icon_state = "bg_cult_border"

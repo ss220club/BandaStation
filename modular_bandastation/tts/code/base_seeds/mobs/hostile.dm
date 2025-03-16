@@ -42,5 +42,8 @@
 /mob/living/basic/giant_spider/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/anubarak)
 
+/mob/living/basic/regal_rat/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/floop)
+
 /mob/living/simple_animal/hostile/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/vort_e2)
