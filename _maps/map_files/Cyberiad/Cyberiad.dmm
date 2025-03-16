@@ -5250,6 +5250,7 @@
 	pixel_y = 2
 	},
 /obj/item/stack/package_wrap,
+/obj/item/toy/figure/chemist,
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "bmk" = (
@@ -71094,12 +71095,6 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/station/hallway/secondary/service)
-"rap" = (
-/obj/item/toy/figure/chemist{
-	pixel_y = -9
-	},
-/turf/closed/wall/r_wall,
-/area/station/medical/paramedic)
 "raq" = (
 /obj/machinery/door/window/left/directional/north{
 	name = "AI Core Door";
@@ -200990,7 +200985,7 @@ ubd
 oJI
 jPJ
 jPJ
-rap
+jPJ
 jPJ
 jPJ
 rpD
