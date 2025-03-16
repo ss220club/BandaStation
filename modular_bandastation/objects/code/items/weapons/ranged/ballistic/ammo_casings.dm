@@ -15,7 +15,6 @@
 	harmful = FALSE
 
 // .35 Sol ripper, similar to the detective revolver's dumdum rounds, causes slash wounds and is weak to armor
-
 /obj/item/ammo_casing/c35sol/ripper
 	name = ".35 Sol Short ripper bullet casing"
 	desc = "Стандартный экспансивный пистолетный патрон ТСФ калибра .35 Sol Short. Наносит целям режущие раны, но слаб против брони."
