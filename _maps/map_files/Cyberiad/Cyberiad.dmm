@@ -30400,6 +30400,7 @@
 /obj/machinery/airalarm/directional/south,
 /obj/structure/closet/secure_closet/security/cargo,
 /obj/item/book/manual/wiki/security_space_law,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/supply)
 "hmw" = (
@@ -63341,8 +63342,9 @@
 	name = "Engineering Security Doors";
 	id = "engineering_lockdown"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/construction,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/iron,
 /area/station/engineering/hallway)
 "phb" = (
@@ -95064,8 +95066,9 @@
 	name = "Engineering Security Doors";
 	id = "engineering_lockdown"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/construction,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/iron,
 /area/station/engineering/hallway)
 "wUN" = (
