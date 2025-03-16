@@ -22,8 +22,7 @@
 	icon_state = "35sol_shrapnel"
 	projectile_type = /obj/projectile/bullet/c35sol/ripper
 
-//.35 sol armor piercing are the AP rounds for this weapon
-
+// .35 sol armor piercing are the AP rounds for this weapon
 /obj/item/ammo_casing/c35sol/ap
 	name = ".35 Sol Short armor piercing bullet casing"
 	desc = "Стандартный бронебойный пистолетный патрон ТСФ калибра .35 Sol Short. Пробивает броню, но довольно слаб против небронированных целей."
