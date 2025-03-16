@@ -971,6 +971,23 @@ prepositional = "заметке свода законов"
 gender = "female"
 
 # MARK: Mobs. Uncategorized
+["crocodile"]
+nominative = "крокодил"
+genitive = "крокодила"
+dative = "крокодилу"
+accusative = "крокодила"
+instrumental = "крокодилом"
+prepositional = "крокодиле"
+gender = "male"
+
+["Gena"]
+nominative = "Гена"
+genitive = "Гену"
+dative = "Гене"
+accusative = "Гену"
+instrumental = "Геной"
+prepositional = "Гене"
+gender = "male"
 
 # MARK: Mobs. Aliens
 [alien]
