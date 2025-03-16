@@ -22,12 +22,31 @@
 	edge_overlay.color = edge_overlay_color
 	. += edge_overlay
 
+/**
+ * Рамки окон но как отдельный объект.
+ * НЕ ИСПОЛЬЗОВАТЬ!!!
+ *
+ * Только для рендера карт.
+ */
+/obj/structure/window/fulltile/frame
+	name = "DONT USE THIS"
+	icon = 'icons/bandastation/windows/window_edges.dmi'
+	icon_state = "edge-0"
+	base_icon_state = "edge"
+	color = EDGE_OVERLAY_COLOR
+
+/obj/structure/window/reinforced/fulltile/frame
+	name = "DONT USE THIS"
+	icon = 'icons/bandastation/windows/reinforced_window_edges.dmi'
+	icon_state = "edge-0"
+	base_icon_state = "edge"
+	color = EDGE_OVERLAY_COLOR
+
 /obj/structure/window/fulltile
 	icon = 'icons/bandastation/windows/window.dmi'
 	edge_overlay_file = 'icons/bandastation/windows/window_edges.dmi'
 	icon_state = "window-0"
 	base_icon_state = "window"
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	color = WINDOW_COLOR
 
 /obj/structure/window/reinforced/fulltile
@@ -35,7 +54,6 @@
 	edge_overlay_file = 'icons/bandastation/windows/reinforced_window_edges.dmi'
 	icon_state = "reinforced_window-0"
 	base_icon_state = "reinforced_window"
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	color = WINDOW_COLOR
 
 /obj/structure/window/reinforced/tinted/fulltile
@@ -43,7 +61,6 @@
 	edge_overlay_file = 'icons/bandastation/windows/reinforced_window_edges.dmi'
 	icon_state = "reinforced_window-0"
 	base_icon_state = "reinforced_window"
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	flags_1 = UNPAINTABLE_1
 	color = TINTED_WINDOW_COLOR
 
@@ -52,7 +69,6 @@
 	edge_overlay_file = 'icons/bandastation/windows/window_edges.dmi'
 	icon_state = "window-0"
 	base_icon_state = "window"
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	flags_1 = UNPAINTABLE_1
 	color = PLASMA_WINDOW_COLOR
 
@@ -61,12 +77,8 @@
 	edge_overlay_file = 'icons/bandastation/windows/reinforced_window_edges.dmi'
 	icon_state = "reinforced_window-0"
 	base_icon_state = "reinforced_window"
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	flags_1 = UNPAINTABLE_1
 	color = PLASMA_WINDOW_COLOR
-
-/obj/structure/window/reinforced/shuttle
-	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE + SMOOTH_GROUP_TITANIUM_WALLS
 
 /obj/structure/window/reinforced/fulltile/ice
 	edge_overlay_file = null
@@ -74,6 +86,24 @@
 // MARK: Spawners
 /obj/effect/spawner/structure/window
 	icon = 'modular_bandastation/aesthetics/windows/icons/spawners.dmi'
+
+/obj/effect/spawner/structure/window
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/fulltile), list(/obj/structure/grille, /obj/structure/window/fulltile, /obj/structure/window/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/reinforced/fulltile), list(/obj/structure/grille, /obj/structure/window/reinforced/fulltile, /obj/structure/window/reinforced/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced/tinted
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/reinforced/tinted/fulltile), list(/obj/structure/grille, /obj/structure/window/reinforced/tinted/fulltile, /obj/structure/window/reinforced/fulltile/frame))
+
+/obj/effect/spawner/structure/window/plasma
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/plasma/fulltile), list(/obj/structure/grille, /obj/structure/window/plasma/fulltile, /obj/structure/window/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced/plasma
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille, /obj/structure/window/reinforced/plasma/fulltile), list(/obj/structure/grille, /obj/structure/window/reinforced/plasma/fulltile, /obj/structure/window/reinforced/fulltile/frame))
+
+/obj/effect/spawner/structure/window/reinforced/indestructible
+	spawn_list = MAP_SWITCH(list(/obj/structure/grille/indestructible, /obj/structure/window/reinforced/fulltile/indestructible), list(/obj/structure/grille/indestructible, /obj/structure/window/reinforced/fulltile/indestructible, /obj/structure/window/reinforced/fulltile/frame))
 
 // Override to original
 /obj/effect/spawner/structure/window/bronze
@@ -99,7 +129,6 @@
 	icon = 'icons/bandastation/windows/reinforced_window.dmi'
 	icon_state = "reinforced_window-0"
 	base_icon_state = "reinforced_window"
-	canSmoothWith = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	color = WINDOW_COLOR
 	/// Used to define what file the edging sprite is contained within
 	var/edge_overlay_file = 'icons/bandastation/windows/reinforced_window_edges.dmi'
