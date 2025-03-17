@@ -1,6 +1,6 @@
 import '../../styles/interfaces/NanoMap.scss';
 
-import { type ReactNode, useMemo, useState } from 'react';
+import { type ReactNode, useRef, useState } from 'react';
 import {
   KeepScale,
   MiniMap,
@@ -37,8 +37,6 @@ type Props = {
   children?: ReactNode;
   /** Additional control buttons container */
   buttons?: ReactNode;
-  /** Enables centering on selected target */
-  selectedTarget?: BooleanLike;
   /** Allows you to disable minimap */
   minimapDisabled?: BooleanLike;
   /**
@@ -53,8 +51,6 @@ type Props = {
   uiName?: string;
   /** Called when level changes. Returns current level */
   onLevelChange: (level: number) => void;
-  /** Called when zoom level changes. Returns zoom level */
-  onZoomChange?: (zoom: number) => void;
 };
 
 type MinimapPosition =
@@ -82,9 +78,7 @@ export function NanoMap(props: Props) {
     uiName,
     minimapDisabled,
     minimapPosition,
-    selectedTarget,
     onLevelChange,
-    onZoomChange,
   } = props;
 
   const [prefs, setPrefs] = useState(false);
@@ -132,10 +126,6 @@ export function NanoMap(props: Props) {
       positionY: state.positionY,
       currentLevel: mapState.currentLevel,
     });
-
-    if (onZoomChange) {
-      onZoomChange(state.scale);
-    }
   }
 
   return (
@@ -147,7 +137,6 @@ export function NanoMap(props: Props) {
       initialPositionX={mapState.positionX}
       initialPositionY={mapState.positionY}
       smooth={false}
-      limitToBounds={false}
       wheel={{ step: defaultScale }}
       panning={{ velocityDisabled: true }}
       doubleClick={{ disabled: true }}
@@ -193,10 +182,7 @@ export function NanoMap(props: Props) {
                   {getMapImage(mapState.currentLevel)}
                 </MiniMap>
               )}
-              <NanoMapControls
-                zoom={mapState.scale}
-                selectedTarget={selectedTarget}
-              />
+              <NanoMapControls zoom={mapState.scale} />
             </div>
             <NanoMapTransformComponent
               mapState={mapState}
@@ -215,13 +201,20 @@ export function NanoMap(props: Props) {
 function NanoMapTransformComponent(props) {
   const { children, mapState, uiName, getMapImage } = props;
   const { setTransform } = useControls();
+  const mapStateRef = useRef(mapState);
 
-  uiName &&
-    useMemo(
-      () =>
-        setTransform(mapState.positionX, mapState.positionY, mapState.scale),
-      [mapState.positionX, mapState.positionY, mapState.scale],
-    );
+  if (uiName) {
+    const prevMapState = mapStateRef.current;
+    if (
+      prevMapState.positionX !== mapState.positionX ||
+      prevMapState.positionY !== mapState.positionY ||
+      prevMapState.scale !== mapState.scale
+    ) {
+      // TODO: Найти способ красиво отсрочить это, дабы оно не возвращало позицию за края карты, когда юзер пытается за них выйти.
+      setTransform(mapState.positionX, mapState.positionY, mapState.scale);
+    }
+    mapStateRef.current = mapState;
+  }
 
   return (
     <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
@@ -232,18 +225,13 @@ function NanoMapTransformComponent(props) {
 }
 
 function NanoMapControls(props) {
-  const { zoom, selectedTarget } = props;
-  const { zoomIn, zoomOut, centerView, zoomToElement } = useControls();
+  const { zoom } = props;
+  const { zoomIn, zoomOut, centerView } = useControls();
+
   return (
     <div className="NanoMap__Controls">
       <Button icon="plus" onClick={() => zoomIn(maxScale)} />
-      <Button
-        fluid
-        width="100%"
-        onClick={() =>
-          selectedTarget ? zoomToElement('selected', 200) : centerView()
-        }
-      >
+      <Button fluid width="100%" onClick={() => centerView()}>
         <div
           className="NanoMap__Controls--zoom"
           style={{ width: `${clamp01(zoom) * 100}%` }}
@@ -392,8 +380,7 @@ function NanoMapPreferences(props) {
 
 /** TODO: Add types when <Button> types will exported */
 function MapButton(props) {
-  const { tracking = false, zoom, posX, posY, hidden, ...rest } = props;
-  const { zoomToElement } = useControls();
+  const { posX, posY, hidden, ...rest } = props;
   const buttonId = `${posX}_${posY}`;
 
   return (
@@ -411,7 +398,6 @@ function MapButton(props) {
           className="NanoMap__Object"
           tooltipPosition={'top-end'}
           onClick={(event) => {
-            tracking && zoomToElement(buttonId, zoom, 200);
             if (props.onClick) {
               props.onClick(event);
             }
