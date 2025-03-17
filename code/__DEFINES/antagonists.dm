@@ -24,10 +24,18 @@
 #define FUGITIVE_RESULT_FUGITIVE_VICTORY 7
 #define FUGITIVE_RESULT_MAJOR_FUGITIVE 8
 
+// Wizard's contract school types
 #define APPRENTICE_DESTRUCTION "destruction"
 #define APPRENTICE_BLUESPACE "bluespace"
 #define APPRENTICE_ROBELESS "robeless"
 #define APPRENTICE_HEALING "healing"
+
+#define ALL_APPRENTICE_TYPES list( \
+	APPRENTICE_DESTRUCTION, \
+	APPRENTICE_BLUESPACE, \
+	APPRENTICE_ROBELESS, \
+	APPRENTICE_HEALING, \
+)
 
 //Pirates
 
@@ -392,6 +400,12 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 
 // This flag disables certain checks that presume antagonist datums mean 'baddie'.
 #define FLAG_FAKE_ANTAG (1 << 0)
+// BANDASTATION EDIT START - STORYTELLER
+// The storyteller will ignore this antag datum as counting against the antag cap.
+#define FLAG_ANTAG_CAP_IGNORE			(1 << 1)
+// The storyteller will count everyone on this antag's team as a singular antag instead.
+#define FLAG_ANTAG_CAP_TEAM				(1 << 2)
+// BANDASTATION EDIT END - STORYTELLER
 
 #define HUNTER_PACK_COPS "Spacepol Fugitive Hunters"
 #define HUNTER_PACK_RUSSIAN "Russian Fugitive Hunters"

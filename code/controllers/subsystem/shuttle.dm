@@ -17,6 +17,8 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/mobile_docking_ports = list()
 	/// A list of all the stationary docking ports.
 	var/list/stationary_docking_ports = list()
+	/// A list of all the custom shuttles.
+	var/list/custom_shuttles = list()
 	/// A list of all the beacons that can be docked to.
 	var/list/beacon_list = list()
 	/// A list of all the transit docking ports.
@@ -319,21 +321,21 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/proc/canEvac()
 	var/shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
 	if(world.time - SSticker.round_start_time < shuttle_refuel_delay)
-		return "The emergency shuttle is refueling. Please wait [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))] before attempting to call."
+		return "Эвакуационный шаттл на дозаправке. Следующий вызов будет доступен в течении [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))]."
 
 	switch(emergency.mode)
 		if(SHUTTLE_RECALL)
-			return "The emergency shuttle may not be called while returning to CentCom."
+			return "Эвакуационный шаттл не может быть отозван на пути к Центральному Командованию."
 		if(SHUTTLE_CALL)
-			return "The emergency shuttle is already on its way."
+			return "Эвакуационный шаттл уже в пути."
 		if(SHUTTLE_DOCKED)
-			return "The emergency shuttle is already here."
+			return "Эвакуационный шаттл уже состыкован со станцией."
 		if(SHUTTLE_IGNITING)
-			return "The emergency shuttle is firing its engines to leave."
+			return "Эвакуационный шаттл производит запуск двигателей для отлёта."
 		if(SHUTTLE_ESCAPE)
-			return "The emergency shuttle is moving away to a safe distance."
+			return "Эвакуационный шаттл удаляется на безопасное расстояние."
 		if(SHUTTLE_STRANDED)
-			return "The emergency shuttle has been disabled by CentCom."
+			return "Вызов эвакуационного шаттла был заблокирован Центральным Командованием."
 
 	return TRUE
 
@@ -396,7 +398,7 @@ SUBSYSTEM_DEF(shuttle)
 
 	call_reason = trim(html_encode(call_reason))
 
-	var/emergency_reason = "\n\nNature of emergency:\n[call_reason]"
+	var/emergency_reason = "\n\nХарактер происшествия:\n[call_reason]"
 
 	emergency.request(
 		signal_origin = signal_origin,
@@ -978,7 +980,7 @@ SUBSYSTEM_DEF(shuttle)
 		QDEL_NULL(preview_reservation)
 
 /datum/controller/subsystem/shuttle/ui_state(mob/user)
-	return GLOB.admin_state
+	return ADMIN_STATE(R_ADMIN)
 
 /datum/controller/subsystem/shuttle/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)

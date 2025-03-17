@@ -230,7 +230,7 @@
 /datum/dynamic_ruleset/midround/from_living/autotraitor
 	name = "Syndicate Sleeper Agent"
 	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
-	antag_datum = /datum/antagonist/traitor/infiltrator/sleeper_agent
+	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_SLEEPER_AGENT
 	antag_flag_override = ROLE_TRAITOR
 	protected_roles = list(
@@ -268,7 +268,7 @@
 	var/mob/M = pick(candidates)
 	assigned += M
 	candidates -= M
-	var/datum/antagonist/traitor/infiltrator/sleeper_agent/newTraitor = new
+	var/datum/antagonist/traitor/newTraitor = new
 	M.mind.add_antag_datum(newTraitor)
 	message_admins("[ADMIN_LOOKUPFLW(M)] was selected by the [name] ruleset and has been made into a midround traitor.")
 	log_dynamic("[key_name(M)] was selected by the [name] ruleset and has been made into a midround traitor.")
@@ -387,7 +387,7 @@
 	cost = 7
 	minimum_round_time = 70 MINUTES
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
-	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE)
+	//ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE) // BANDASTATION EDIT - STORYTELLER
 	flags = HIGH_IMPACT_RULESET
 	signup_item_path = /obj/machinery/nuclearbomb
 

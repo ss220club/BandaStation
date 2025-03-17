@@ -321,7 +321,7 @@
 			if (!COOLDOWN_FINISHED(src, important_action_cooldown))
 				return
 
-			var/message = trim(params["message"], MAX_MESSAGE_LEN)
+			var/message = trim(html_encode(params["message"]), MAX_MESSAGE_LEN)
 			if (!message)
 				return
 
@@ -335,13 +335,16 @@
 			if(soft_filter_result)
 				if(tgui_alert(user,"Your message contains \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". \"[soft_filter_result[CHAT_FILTER_INDEX_REASON]]\", Are you sure you want to use it?", "Soft Blocked Word", list("Yes", "No")) != "Yes")
 					return
-				message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". They may be using a disallowed term for a cross-station message. Increasing delay time to reject.\n\n Message: \"[html_encode(message)]\"")
+				message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". They may be using a disallowed term for a cross-station message. Increasing delay time to reject.\n\n Message: \"[message]\"")
 				log_admin_private("[key_name(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". They may be using a disallowed term for a cross-station message. Increasing delay time to reject.\n\n Message: \"[message]\"")
 				GLOB.communications_controller.soft_filtering = TRUE
 
 			playsound(src, 'sound/machines/terminal/terminal_prompt_confirm.ogg', 50, FALSE)
 
 			var/destination = params["destination"]
+			if (!(destination in CONFIG_GET(keyed_list/cross_server)) && destination != "all")
+				message_admins("[ADMIN_LOOKUPFLW(user)] has passed an invalid destination into comms console cross-sector message. Message: \"[message]\"")
+				return
 
 			user.log_message("is about to send the following message to [destination]: [message]", LOG_GAME)
 			to_chat(
@@ -350,7 +353,7 @@
 					"<b color='orange'>CROSS-SECTOR MESSAGE (OUTGOING):</b> [ADMIN_LOOKUPFLW(user)] is about to send \
 					the following message to <b>[destination]</b> (will autoapprove in [GLOB.communications_controller.soft_filtering ? DisplayTimeText(EXTENDED_CROSS_SECTOR_CANCEL_TIME) : DisplayTimeText(CROSS_SECTOR_CANCEL_TIME)]): \
 					<b><a href='byond://?src=[REF(src)];reject_cross_comms_message=1'>REJECT</a></b><br> \
-					[html_encode(message)]" \
+					[message]" \
 				)
 			)
 
@@ -887,7 +890,19 @@
 			SSdynamic.unfavorable_situation()
 
 		if(HACK_SLEEPER) // Trigger one or multiple sleeper agents with the crew (or for latejoining crew)
-			var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
+			// BANDASTATION EDIT START - inject storyteller events instead of dynamic rulesets
+			var/event_to_spawn = pick_weight(list(
+				/datum/round_event_control/antagonist/solo/traitor/midround = 75,
+				// hmmm, let's rarely spawn some non-traitor antags just to spice things up a bit
+				/datum/round_event_control/antagonist/solo/heretic/midround = 15,
+				/datum/round_event_control/antagonist/solo/from_ghosts/wizard = 1
+			))
+			force_event_after(event_to_spawn, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
+			priority_announce(
+				"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
+				"[command_name()] High-Priority Update",
+			)
+			/* var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
 			var/max_number_of_sleepers = clamp(round(length(GLOB.alive_player_list) / 20), 1, 3)
 			var/num_agents_created = 0
 			for(var/num_agents in 1 to rand(1, max_number_of_sleepers))
@@ -905,6 +920,7 @@
 					"Внимание экипажу, похоже, зафиксирован взлом системы телекоммуникаций с последующей передачей неизвестного сигнала.",
 					"[command_name()]: Высокоприоритетное оповещение",
 				)
+			*/ // BANDASTATION EDIT END
 
 #undef HACK_PIRATE
 #undef HACK_FUGITIVES

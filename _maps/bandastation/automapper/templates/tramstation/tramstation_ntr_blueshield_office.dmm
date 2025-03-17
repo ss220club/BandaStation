@@ -1,6 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "az" = (
 /obj/machinery/duct,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "aP" = (
@@ -52,10 +54,10 @@
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "bN" = (
-/obj/structure/table/glass,
 /obj/machinery/light/warm/directional/west,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 4
+	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "cn" = (
@@ -117,11 +119,9 @@
 /turf/open/floor/carpet,
 /area/station/command/heads_quarters/captain)
 "ey" = (
-/obj/structure/bed{
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "eA" = (
@@ -389,9 +389,9 @@
 /turf/closed/mineral/random/stationside/asteroid/porus,
 /area/station/asteroid)
 "mY" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 8
-	},
+/obj/effect/landmark/event_spawn,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "mZ" = (
@@ -534,6 +534,16 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
+"td" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/table/glass,
+/turf/open/floor/wood,
+/area/station/command/heads_quarters/captain/private)
 "ty" = (
 /turf/closed/wall/r_wall,
 /area/station/command/heads_quarters/captain/private)
@@ -595,13 +605,11 @@
 	dir = 1
 	},
 /obj/machinery/light/warm/directional/west,
+/obj/item/radio/intercom/command/directional/west,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "uN" = (
 /obj/machinery/status_display/ai/directional/north,
-/obj/structure/bed{
-	dir = 4
-	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "uV" = (
@@ -756,7 +764,7 @@
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/captain/private)
 "xR" = (
-/obj/item/radio/intercom/command/directional/north,
+/obj/structure/sign/poster/greenscreen/directional/north,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "ym" = (
@@ -873,10 +881,10 @@
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/captain/private)
 "BC" = (
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
-	dir = 8
+/obj/machinery/greenscreen_camera{
+	dir = 1
 	},
-/obj/effect/landmark/event_spawn,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "BP" = (
@@ -1395,6 +1403,9 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/bed{
 	dir = 4
 	},
 /turf/open/floor/wood,
@@ -1939,7 +1950,7 @@ hk
 rV
 ty
 Th
-TP
+td
 TP
 aP
 NP

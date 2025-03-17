@@ -216,7 +216,7 @@
 	to_chat(owner, span_hypnophrase(("ЛУНА УКАЗЫВАЕТ ТЕБЕ ПРАВДУ И ЛЖЕЦЫ ПЫТАЮТСЯ СКРЫТЬ ЕЕ, УБЕЙ ИХ ВСЕХ!!!</span>")))
 	owner.balloon_alert(owner, "они лгут... ОНИ ВСЕ ЛГУТ!!!")
 	owner.AdjustUnconscious(7 SECONDS, ignore_canstun = FALSE)
-	ADD_TRAIT(owner, TRAIT_MUTE, REF(src))
+	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
 	RegisterSignal(owner, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(update_owner_overlay))
 	owner.update_appearance(UPDATE_OVERLAYS)
 	owner.cause_hallucination(/datum/hallucination/delusion/preset/moon, "[id] status effect", duration = duration, affects_us = FALSE, affects_others = TRUE)
@@ -243,7 +243,7 @@
 /datum/status_effect/moon_converted/on_remove()
 	// Span warning and unconscious so they realize they aren't evil anymore
 	to_chat(owner, span_warning("Ваш разум очищен от влияний Мансуса, ваша лояльность вернулась к прежней"))
-	REMOVE_TRAIT(owner, TRAIT_MUTE, REF(src))
+	REMOVE_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
 	owner.AdjustUnconscious(5 SECONDS, ignore_canstun = FALSE)
 	owner.log_message("[owner] is no longer insane.", LOG_GAME)
 	UnregisterSignal(owner, COMSIG_ATOM_UPDATE_OVERLAYS)

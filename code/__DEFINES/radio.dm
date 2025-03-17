@@ -47,6 +47,8 @@
 #define RADIO_TOKEN_JUSTICE ":l"
 // BANDASTATION ADDITION END
 
+#define STATUS_DISPLAY_RELAY "Captain-Cast"
+
 #define RADIO_CHANNEL_SYNDICATE "Синдикат"
 #define RADIO_KEY_SYNDICATE "t"
 #define RADIO_TOKEN_SYNDICATE ":t"
@@ -84,7 +86,6 @@
 #define FREQ_SECURITY 1359 // Security comms frequency, red
 #define FREQ_JUSTICE 1361 // Precedure comms frequency, raspberry pink // BANDASTATION ADD - Jobs Module
 #define FREQ_ENTERTAINMENT 1415 // Used by entertainment monitors, cyan
-
 #define FREQ_HOLOGRID_SOLUTION 1433
 #define FREQ_STATUS_DISPLAYS 1435
 
