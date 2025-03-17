@@ -89,7 +89,6 @@ export function NanoMap(props: Props) {
 
   const [prefs, setPrefs] = useState(false);
   const [mapPrefs, setMapPrefs] = useLocalStorage('nanomap-preferences', {
-    velocity: true,
     minimap: true,
     minimapPosition: 'top-left',
   });
@@ -150,7 +149,7 @@ export function NanoMap(props: Props) {
       smooth={false}
       limitToBounds={false}
       wheel={{ step: defaultScale }}
-      panning={{ velocityDisabled: mapPrefs.velocity }}
+      panning={{ velocityDisabled: true }}
       doubleClick={{ disabled: true }}
       onZoomStop={handleTransformed}
       onPanningStop={handleTransformed}
@@ -373,17 +372,6 @@ function NanoMapPreferences(props) {
                 </Button>
               ))}
             </Stack>
-          </LabeledList.Item>
-          <LabeledList.Item
-            label="Инерция"
-            tooltip="Если включено, карта продолжит двигаться по инерции после отпускания мыши при перемещении."
-          >
-            <Button.Checkbox
-              checked={!mapPrefs.velocity}
-              onClick={() =>
-                setMapPrefs((old) => ({ ...old, velocity: !old.velocity }))
-              }
-            />
           </LabeledList.Item>
           <LabeledList.Item label="Мини-карта">
             <Button.Checkbox
