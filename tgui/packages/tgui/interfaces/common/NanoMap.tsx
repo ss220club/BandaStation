@@ -19,7 +19,6 @@ import {
 } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
 import { BooleanLike, classes } from 'tgui-core/react';
-import { debounce } from 'tgui-core/timer';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { resolveAsset } from '../../assets';
@@ -127,22 +126,18 @@ export function NanoMap(props: Props) {
 
   // Send component data to UI, if he has useState for them.
   onLevelChange && onLevelChange(mapState.currentLevel);
-  const handleTransformed = useMemo(
-    () =>
-      debounce(({ state }) => {
-        setMapState({
-          scale: state.scale,
-          positionX: state.positionX,
-          positionY: state.positionY,
-          currentLevel: mapState.currentLevel,
-        });
+  function handleTransformed({ state }) {
+    setMapState({
+      scale: state.scale,
+      positionX: state.positionX,
+      positionY: state.positionY,
+      currentLevel: mapState.currentLevel,
+    });
 
-        if (onZoomChange) {
-          onZoomChange(state.scale);
-        }
-      }, 125),
-    [mapState.currentLevel],
-  );
+    if (onZoomChange) {
+      onZoomChange(state.scale);
+    }
+  }
 
   return (
     <TransformWrapper
@@ -153,10 +148,12 @@ export function NanoMap(props: Props) {
       initialPositionX={mapState.positionX}
       initialPositionY={mapState.positionY}
       smooth={false}
+      limitToBounds={false}
       wheel={{ step: defaultScale }}
       panning={{ velocityDisabled: mapPrefs.velocity }}
       doubleClick={{ disabled: true }}
-      onTransformed={handleTransformed}
+      onZoomStop={handleTransformed}
+      onPanningStop={handleTransformed}
     >
       <Section fill>
         {prefs && (
