@@ -199,11 +199,12 @@ export function NanoMap(props: Props) {
               />
             </div>
             <NanoMapTransformComponent
-              children={children}
               mapState={mapState}
               uiName={uiName}
               getMapImage={getMapImage}
-            />
+            >
+              {children}
+            </NanoMapTransformComponent>
           </Stack.Item>
         </Stack>
       </Section>
