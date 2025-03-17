@@ -12,6 +12,7 @@
 #include "aesthetics_sounds/_aesthetics_sounds.dme"
 #include "ai_laws/_ai_laws.dme"
 #include "announcers/_announcers.dme"
+#include "antagonists/_antagonists.dme"
 #include "autohiss/_autohiss.dme"
 #include "automapper/_automapper.dme"
 #include "automatic_crew_transfer/_automatic_crew_transfer.dme"
@@ -27,6 +28,7 @@
 #include "database220/_database220.dme"
 #include "discord/_discord.dme"
 #include "emote_panel/_emote_panel.dme"
+#include "ert/_ert.dme"
 #include "examine_panel/_examine_panel.dme"
 #include "gunhud/_gunhud.dme"
 #include "hydroponics/_hydroponics.dme"
@@ -50,6 +52,7 @@
 #include "species/_species.dme"
 #include "speech_filter/_speech_filter.dme"
 #include "status_effects/_status_effects.dme"
+#include "tgui_who/_tgui_who.dme"
 #include "title_screen/_title_screen.dme"
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"
@@ -58,6 +61,7 @@
 #include "world_topics/_world_topics.dme"
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
+#include "implants/_implants.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //

@@ -8,11 +8,24 @@
 #include "code/clothing/mod.dm"
 
 #include "code/human/species/skills.dm"
-#include "code/human/species_type/vulpkanin.dm"
 #include "code/human/species_type/tajaran.dm"
+#include "code/human/species_type/vulpkanin.dm"
+
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_body_markings.dm"
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_facial_hair.dm"
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_head_markings.dm"
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_markings_bodypart_overlay.dm"
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_tail_markings.dm"
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_tails.dm"
+
+#include "code/human/sprite_accessories/tajaran/tajaran_body_markings.dm"
+#include "code/human/sprite_accessories/tajaran/tajaran_facial_hair.dm"
+#include "code/human/sprite_accessories/tajaran/tajaran_head_markings.dm"
+#include "code/human/sprite_accessories/tajaran/tajaran_markings_bodypart_overlay.dm"
+#include "code/human/sprite_accessories/tajaran/tajaran_tail_markings.dm"
+#include "code/human/sprite_accessories/tajaran/tajaran_tails.dm"
+
 #include "code/human/sprite_accessories/hair.dm"
-#include "code/human/sprite_accessories/vulpkanin.dm"
-#include "code/human/sprite_accessories/tajaran.dm"
 #include "code/human/carbon.dm"
 
 #include "code/preferences/species_features/vulpkanin.dm"

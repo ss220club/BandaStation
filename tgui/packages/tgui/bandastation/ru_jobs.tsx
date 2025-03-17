@@ -2,14 +2,11 @@ export const JOBS_RU = {
   Assistant: 'Ассистент',
   Prisoner: 'Заключенный',
   Captain: 'Капитан',
-  'Nanotrasen Representative': 'Представитель Нанотрейзен',
   'Head of Personnel': 'Глава персонала',
   'Head of Security': 'Глава службы безопасности',
   'Research Director': 'Директор исследований',
   'Chief Engineer': 'Главный инженер',
   'Chief Medical Officer': 'Главный врач',
-  Blueshield: 'Офицер «Синий щит»',
-  Magistrate: 'Магистрат',
   AI: 'ИИ',
   Cyborg: 'Киборг',
   'Personal AI': 'Персональный ИИ',
@@ -34,6 +31,7 @@ export const JOBS_RU = {
   'Cargo Technician': 'Грузчик',
   'Shaft Miner': 'Шахтер',
   Bitrunner: 'Битраннер',
+  Explorer: 'Исследователь',
   Bartender: 'Бармен',
   Botanist: 'Ботаник',
   Cook: 'Повар',
@@ -45,6 +43,13 @@ export const JOBS_RU = {
   Lawyer: 'Юрист',
   Chaplain: 'Священник',
   Psychologist: 'Психолог',
+  // BANDASTATION jobs
+  Blueshield: 'Офицер «Синий щит»',
+  Magistrate: 'Магистрат',
+  'Nanotrasen Representative': 'Представитель Нанотрейзен',
+  // Event jobs
+  'Veteran Security Advisor': 'Ветеран советчик СБ',
+  'Bridge Assistant': 'Адъютант',
 };
 
 const REVERSED_JOBS_RU = Object.entries(JOBS_RU).reduce(

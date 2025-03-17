@@ -5,7 +5,7 @@
  */
 /datum/title_screen/proc/get_title_html(client/viewer, mob/user, styles)
 	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
-	var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/chat)
+	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 	var/mob/dead/new_player/player = user
 	var/list/html = list()
 	html += {"
@@ -94,7 +94,7 @@
 
 		html += {"</div>"}
 
-	html += {"<div id="lobby_admin" class="lobby_buttons-right [check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "invisible"]>"}
+	html += {"<div id="lobby_admin" class="lobby_buttons-right [check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "invisible"]">"}
 	html += create_icon_button(player, "start_now", "Запустить раунд", "right", SSticker && SSticker.current_state <= GAME_STATE_PREGAME)
 	html += create_icon_button(player, "delay", "Отложить начало раунда", "right", SSticker && SSticker.current_state <= GAME_STATE_PREGAME)
 	html += create_icon_button(player, "notice", "Оставить уведомление", "right")

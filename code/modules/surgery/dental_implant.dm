@@ -17,7 +17,7 @@
 
 	ASSERT(teeth_receptangle)
 
-	for(var/obj/item/reagent_containers/pill/dental in teeth_receptangle)
+	for(var/obj/item/reagent_containers/applicator/pill/dental in teeth_receptangle)
 		count++
 
 	if(teeth_receptangle.teeth_count == 0)
@@ -30,7 +30,7 @@
 
 /datum/surgery_step/insert_pill
 	name = "вставьте таблетку"
-	implements = list(/obj/item/reagent_containers/pill = 100)
+	implements = list(/obj/item/reagent_containers/applicator/pill = 100)
 	time = 16
 
 /datum/surgery_step/insert_pill/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -44,7 +44,7 @@
 	)
 	display_pain(target, "Что-то засовывают вам в [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)]!")
 
-/datum/surgery_step/insert_pill/success(mob/user, mob/living/carbon/target, target_zone, obj/item/reagent_containers/pill/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/insert_pill/success(mob/user, mob/living/carbon/target, target_zone, obj/item/reagent_containers/applicator/pill/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(!istype(tool))
 		return FALSE
 
@@ -75,9 +75,7 @@
 		return FALSE
 	return ..()
 
-/datum/action/item_action/activate_pill/Trigger(trigger_flags)
-	if(!..())
-		return FALSE
+/datum/action/item_action/activate_pill/do_effect(trigger_flags)
 	owner.balloon_alert_to_viewers("[owner.declent_ru(NOMINATIVE)] прикусывает зубы!", "Вы прикусываете зубами.")
 	if(!do_after(owner, owner.stat * (2.5 SECONDS), owner,  IGNORE_USER_LOC_CHANGE | IGNORE_INCAPACITATED))
 		return FALSE
