@@ -140,6 +140,7 @@ export function NanoMap(props: Props) {
       wheel={{ step: defaultScale }}
       panning={{ velocityDisabled: true }}
       doubleClick={{ disabled: true }}
+      alignmentAnimation={{ disabled: true }}
       onZoomStop={handleTransformed}
       onPanningStop={handleTransformed}
     >
@@ -210,7 +211,6 @@ function NanoMapTransformComponent(props) {
       prevMapState.positionY !== mapState.positionY ||
       prevMapState.scale !== mapState.scale
     ) {
-      // TODO: Найти способ красиво отсрочить это, дабы оно не возвращало позицию за края карты, когда юзер пытается за них выйти.
       setTransform(mapState.positionX, mapState.positionY, mapState.scale);
     }
     mapStateRef.current = mapState;
