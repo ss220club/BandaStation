@@ -202,16 +202,35 @@ export function NanoMap(props: Props) {
                 selectedTarget={selectedTarget}
               />
             </div>
-            <TransformComponent
-              wrapperStyle={{ width: '100%', height: '100%' }}
-            >
-              {getMapImage(mapState.currentLevel)}
-              <div>{children}</div>
-            </TransformComponent>
+            <NanoMapTransformComponent
+              children={children}
+              mapState={mapState}
+              uiName={uiName}
+              getMapImage={getMapImage}
+            />
           </Stack.Item>
         </Stack>
       </Section>
     </TransformWrapper>
+  );
+}
+
+function NanoMapTransformComponent(props) {
+  const { children, mapState, uiName, getMapImage } = props;
+  const { setTransform } = useControls();
+
+  uiName &&
+    useMemo(
+      () =>
+        setTransform(mapState.positionX, mapState.positionY, mapState.scale),
+      [mapState.positionX, mapState.positionY, mapState.scale],
+    );
+
+  return (
+    <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
+      {getMapImage(mapState.currentLevel)}
+      <div>{children}</div>
+    </TransformComponent>
   );
 }
 
