@@ -5,7 +5,7 @@
 /datum/gamepanel/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, "Copypasta")
+		ui = new(user, src, "GamePanel")
 		ui.open()
 
 /datum/gamepanel/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up variables.
