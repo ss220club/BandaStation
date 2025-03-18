@@ -3,7 +3,7 @@ import { Button, Stack } from 'tgui-core/components';
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
-export function Copypasta(props) {
+export function GamePanel(props) {
   const { act } = useBackend();
   return (
     <Window height={240} title="Game Panel" width={280} theme="admin">
