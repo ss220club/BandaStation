@@ -66,7 +66,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 
 /datum/gamepanel/create_panels/mob_panel/ui_data(mob/user)
 	var/list/data = list()
-	data["mobs"] = list(typesof(/mob))
+	data["mobs"] = typesof(/mob)
 	return data
 
 /datum/gamepanel/create_panels/mob_panel/ui_state(mob/user)

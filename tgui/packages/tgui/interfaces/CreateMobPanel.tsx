@@ -21,9 +21,9 @@ export function CreateMobPanel(props) {
           fillPositionedParent
         />
         <LabeledList>
-          {mobs.map((mob) => {
-            return <LabeledList.Item key={mob}>{mob}</LabeledList.Item>;
-          })}
+          {mobs.map((mob: string, index: number) => (
+            <LabeledList.Item key={index}>{mob}</LabeledList.Item>
+          ))}
         </LabeledList>
       </Window.Content>
     </Window>
