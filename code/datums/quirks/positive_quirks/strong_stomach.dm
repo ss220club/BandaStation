@@ -8,5 +8,5 @@
 	lose_text = span_danger("Смотря на еду на земле, тебя начинает немного подташнивать.")
 	medical_record_text = "У пациента иммунная система организма сильнее, чем среднестатическая...  К пищевому отравлению, по крайней мере."
 	mail_goodies = list(
-		/obj/item/reagent_containers/pill/ondansetron,
+		/obj/item/reagent_containers/applicator/pill/ondansetron,
 	)

@@ -1,29 +1,202 @@
-$background-color: rgba(0, 0, 0, 0.33) !default;
+@use '../colors.scss' as colors;
+@use '../functions.scss' as *;
 
-.NanoMap__container {
-  overflow: hidden;
+$background-color: hsla(0, 0%, 10%, 0.85);
+$border-color: hsla(255, 255%, 255%, 0.1);
+$border-radius: 0.5rem;
+$box-shadow: 0 1px 0.2rem hsla(0, 0%, 0%, 0.75);
+$blur: saturate(150%) blur(12px);
+
+@mixin nanoButton() {
+  cursor: pointer;
+  pointer-events: all;
+  background-color: $background-color;
+  color: hsla(255, 255%, 255%, 0.66);
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  backdrop-filter: $blur;
+
+  &:hover {
+    background-color: lighten($background-color, 25%);
+    color: hsla(255, 255%, 255%, 1);
+  }
+
+  &--selected {
+    color: colors.$green;
+
+    &:hover {
+      color: lighten(colors.$green, 25%);
+    }
+  }
+
+  &--disabled {
+    cursor: unset;
+    background-color: lighten($background-color, 25%) !important;
+    color: lighten(colors.$red, 25%) !important;
+  }
+}
+
+.NanoMap {
+  &__Controls {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    text-align: center;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+    z-index: 3;
+
+    .Button {
+      @include nanoButton();
+    }
+
+    &--zoom {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      background-color: rgba(lighten(colors.$green, 25%), 0.33);
+      border-radius: $border-radius;
+      transition: width 0.2s;
+      z-index: -1;
+    }
+  }
+
+  &__Buttons {
+    padding: 0.5rem 0;
+    z-index: 3;
+
+    .Button {
+      @include nanoButton();
+    }
+  }
+
+  &__Minimap {
+    user-select: none;
+    background-color: $background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    backdrop-filter: $blur;
+
+    .rzpp-preview {
+      border: 1px solid rgba($border-color, 0.33) !important;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 9999px !important;
+    }
+  }
+
+  &__Object {
+    cursor: pointer;
+    font-size: 6px;
+    line-height: 0;
+    padding: 0;
+    height: 2em;
+    width: 2em;
+    border: 2px solid rgba(0, 0, 0, 0.66);
+    border-radius: 0.25rem;
+
+    &--wrapper {
+      position: absolute;
+      transform: translate(17.5%, 5%);
+      z-index: 2;
+    }
+
+    &--hidden {
+      display: none;
+    }
+  }
+}
+
+/** Positioning */
+.NanoMap {
   position: relative;
-  z-index: 1;
-}
 
-.NanoMap__toolbar {
-  width: 49%;
-  z-index: 2;
-}
+  &__Controls,
+  &__Buttons,
+  &__Minimap--container {
+    position: absolute;
+  }
 
-.NanoMap__marker {
-  z-index: 10;
-  padding: 0px;
-  margin: 0px;
-}
+  &__Minimap--container {
+    top: 0.25rem;
+    left: 0.25rem;
+    z-index: 3;
+  }
 
-.NanoMap__button {
-  padding: 3px 3px;
-  font-size: 6px;
-  border: 2px solid black;
-  height: 10px;
-}
+  &__Controls {
+    right: 0;
+    bottom: -2.25rem;
+    left: 0;
+  }
 
-.NanoMap__button:hover {
-  background-color: greenyellow;
+  &__Buttons {
+    top: 0;
+    right: -2.25rem;
+    bottom: 0;
+  }
+
+  &--top-right,
+  &--bottom-right {
+    .NanoMap__Minimap--container {
+      right: 0.25rem;
+      left: unset;
+    }
+  }
+
+  &--bottom-left,
+  &--bottom-right {
+    .NanoMap__Minimap--container {
+      top: unset;
+      bottom: 0.25rem;
+    }
+  }
+
+  &--bottom-left,
+  &--bottom-right {
+    .NanoMap__Controls {
+      top: -2.1rem;
+      bottom: unset;
+    }
+  }
+
+  &--top-right,
+  &--bottom-right {
+    .NanoMap__Buttons {
+      right: unset;
+      left: -2.25rem;
+    }
+  }
+
+  /** Disabled minimap layout */
+  &__Minimap--disabled {
+    pointer-events: none;
+    inset: 0 !important;
+    display: flex;
+    margin: 0.25rem;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .NanoMap__Controls,
+    .NanoMap__Buttons {
+      position: relative;
+      pointer-events: all;
+      inset: unset;
+      padding: 0;
+
+      * {
+        flex-basis: unset !important;
+      }
+    }
+
+    .NanoMap__Controls {
+      width: 150px;
+    }
+  }
+
+  &--bottom-left,
+  &--bottom-right {
+    .NanoMap__Minimap--disabled {
+      align-items: flex-end;
+    }
+  }
 }

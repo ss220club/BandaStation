@@ -305,6 +305,26 @@
 			priority_announce("[user] запросил коды для запуска механизма ядерного самоуничтожения станции. В ближайшее время будет отправлено уведомление о подтверждении или отклонении данного запроса.", "Запрос кода самоуничтожения станции", SSstation.announcer.get_rand_report_sound())
 			playsound(src, 'sound/machines/terminal/terminal_prompt.ogg', 50, FALSE)
 			COOLDOWN_START(src, important_action_cooldown, IMPORTANT_ACTION_COOLDOWN)
+		// BANDASTATION ADDITION - START
+		if ("requestERT")
+			if (!authenticated_as_non_silicon_captain(user))
+				return
+			if (!COOLDOWN_FINISHED(src, important_action_cooldown))
+				return
+			var/reason = trim(html_encode(params["reason"]), MAX_MESSAGE_LEN)
+			var/insert_this = list(list(
+				"time" = station_time_timestamp(),
+				"sender_real_name" = "[user.real_name ? user.real_name : user.name]",
+				"sender_uid" = REF(user),
+				"message" = reason))
+			GLOB.ert_request_messages.Insert(1, insert_this) // insert it to the top of the list
+			ert_request(reason, user)
+			to_chat(user, span_notice("ERT request sent."))
+			user.log_message("has requested an Emergency Response Team from CentCom with reason \"[reason]\"", LOG_SAY)
+			priority_announce("Отправлен запрос ОБР. Инициатор: [name]. Запрос принят к рассмотрению. Решение будет направлено в ближайшее время.", "[command_name()]: Служба быстрого реагирования", SSstation.announcer.get_rand_report_sound())
+			playsound(src, 'sound/machines/terminal/terminal_prompt.ogg', 50, FALSE)
+			COOLDOWN_START(src, important_action_cooldown, IMPORTANT_ACTION_COOLDOWN)
+		// BANDASTATION ADDITION - END
 		if ("restoreBackupRoutingData")
 			if (!authenticated_as_non_silicon_captain(user))
 				return
@@ -532,6 +552,7 @@
 				data["canMessageAssociates"] = FALSE
 				data["canRecallShuttles"] = !HAS_SILICON_ACCESS(user)
 				data["canRequestNuke"] = FALSE
+				data["canRequestERT"] = FALSE // BANDASTATION ADDITION
 				data["canSendToSectors"] = FALSE
 				data["canSetAlertLevel"] = FALSE
 				data["canToggleEmergencyAccess"] = FALSE
@@ -549,6 +570,7 @@
 				if (authenticated_as_non_silicon_captain(user))
 					data["canMessageAssociates"] = TRUE
 					data["canRequestNuke"] = TRUE
+					data["canRequestERT"] = TRUE // BANDASTATION ADDITION
 
 				if (can_send_messages_to_other_sectors(user))
 					data["canSendToSectors"] = TRUE

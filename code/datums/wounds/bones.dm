@@ -108,7 +108,7 @@
 		if(!victim || !limb)
 			qdel(src)
 			return
-		to_chat(victim, span_green("Ваша травма \"[name]\" на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] излечивается!"))
+		to_chat(victim, span_green("Ваша травма \"[undiagnosed_name || name]\" на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] излечивается!"))
 		remove_wound()
 
 /// If we're a human who's punching something with a broken arm, we might hurt ourselves doing so
@@ -229,6 +229,8 @@
 /// Joint Dislocation (Moderate Blunt)
 /datum/wound/blunt/bone/moderate
 	name = "Вывих сустава"
+	undiagnosed_name = "Вывих"
+	a_or_from = "a"
 	desc = "Конечность пациента выпала из пазухи, вызывая боль и моторную дисфункцию."
 	treat_text = "Используйте костоправ на поврежденной конечности. \
 		Можно вправить руками если агрессивно схватить конечность и твердым объятием вставить на место."
@@ -271,6 +273,9 @@
 
 	return ..()
 
+/datum/wound/blunt/bone/moderate/get_self_check_description(self_aware)
+	return span_warning("It feels dislocated!")
+
 /// Getting smushed in an airlock/firelock is a last-ditch attempt to try relocating your limb
 /datum/wound/blunt/bone/moderate/proc/door_crush()
 	SIGNAL_HANDLER
@@ -285,7 +290,7 @@
 		return FALSE
 
 	if(user.grab_state == GRAB_PASSIVE)
-		to_chat(user, span_warning("Вы должны держать [victim.declent_ru(ACCUSATIVE)] в агрессивном захвате, чтобы вылечить [victim.ru_p_them()] [LOWER_TEXT(name)]!"))
+		to_chat(user, span_warning("Вы должны держать [victim.declent_ru(ACCUSATIVE)] в агрессивном захвате, чтобы вылечить [victim.ru_p_them()] [LOWER_TEXT(undiagnosed_name || name)]!"))
 		return TRUE
 
 	if(user.grab_state >= GRAB_AGGRESSIVE)
@@ -402,6 +407,8 @@
 /// Compound Fracture (Critical Blunt)
 /datum/wound/blunt/bone/critical
 	name = "Открытый перелом"
+	undiagnosed_name = null // you can tell it's a compound fracture at a glance because of a skin breakage
+	a_or_from = "a"
 	desc = "Кости пациента получили множественные переломы, \
 		сопровождающиеся разрывом кожи, вызывая значительную боль и практически полную бесполезность конечности."
 	treat_text = "Немедленно перевяжите поврежденную конечность марлей или наложите шину. Проведите хирургическое лечение. \
@@ -409,7 +416,6 @@
 	treat_text_short = "Проведите хирургическое лечение или нанесите костный гель и хирургическую ленту. Также следует использовать шину или повязку из марли."
 	examine_desc = "полностью раздроблена и треснута, обнажая осколки кости"
 	occur_text = "раскалывается, обнажая сломанные кости"
-
 	severity = WOUND_SEVERITY_CRITICAL
 	interaction_efficiency_penalty = 2.5
 	limp_slowdown = 7

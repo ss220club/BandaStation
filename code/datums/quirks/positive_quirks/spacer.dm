@@ -14,7 +14,7 @@
 	medical_record_text = "Пациент хорошо адаптирован к неземной среде."
 	mail_goodies = list(
 		/obj/item/storage/pill_bottle/ondansetron,
-		/obj/item/reagent_containers/pill/gravitum,
+		/obj/item/reagent_containers/applicator/pill/gravitum,
 	)
 	/// How high spacers get bumped up to
 	var/modded_height = HUMAN_HEIGHT_TALLER
