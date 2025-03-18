@@ -3686,6 +3686,15 @@ instrumental = "реактивным пистолетом"
 prepositional = "реактивном пистолете"
 gender = "male"
 
+["'Wespe' pistol"]
+nominative = "пистолет 'Оса'"
+genitive = "пистолета 'Оса'"
+dative = "пистолету 'Оса'"
+accusative = "пистолет 'Оса'"
+instrumental = "пистолетом 'Оса'"
+prepositional = "пистолете 'Оса'"
+gender = "male"
+
 # MARK: Projectiles
 ["kiss"]
 nominative = "поцелуй"
@@ -4091,6 +4100,114 @@ accusative = "специализированный магазин (.75)"
 instrumental = "специализированным магазином (.75)"
 prepositional = "специализированном магазине (.75)"
 gender = "male"
+
+["Sol pistol magazine"]
+nominative = "стандартный магазин (.35 Sol Short)"
+genitive = "стандартного магазина (.35 Sol Short)"
+dative = "стандартному магазину (.35 Sol Short)"
+accusative = "стандартный магазин (.35 Sol Short)"
+instrumental = "стандартным магазином (.35 Sol Short)"
+prepositional = "стандартном магазине (.35 Sol Short)"
+gender = "male"
+
+["Sol extended pistol magazine"]
+nominative = "увеличенный магазин (.35 Sol Short)"
+genitive = "увеличенного магазина (.35 Sol Short)"
+dative = "увеличенному магазину (.35 Sol Short)"
+accusative = "увеличенный магазин (.35 Sol Short)"
+instrumental = "увеличенным магазином (.35 Sol Short)"
+prepositional = "увеличенном магазине (.35 Sol Short)"
+gender = "male"
+
+["Sol rubber pistol magazine"]
+nominative = "стандартный магазин (.35 Sol Short резина)"
+genitive = "стандартного магазина (.35 Sol Short резина)"
+dative = "стандартному магазину (.35 Sol Short резина)"
+accusative = "стандартный магазин (.35 Sol Short резина)"
+instrumental = "стандартным магазином (.35 Sol Short резина)"
+prepositional = "стандартном магазине (.35 Sol Short резина)"
+gender = "male"
+
+["Sol rubber extended pistol magazine"]
+nominative = "увеличенный магазин (.35 Sol Short резина)"
+genitive = "увеличенного магазина (.35 Sol Short резина)"
+dative = "увеличенному магазину (.35 Sol Short резина)"
+accusative = "увеличенный магазин (.35 Sol Short резина)"
+instrumental = "увеличенным магазином (.35 Sol Short резина)"
+prepositional = "увеличенном магазине (.35 Sol Short резина)"
+gender = "male"
+
+["Sol AP pistol magazine"]
+nominative = "стандартный магазин (.35 Sol Short бронебойные)"
+genitive = "стандартного магазина (.35 Sol Short бронебойные)"
+dative = "стандартному магазину (.35 Sol Short бронебойные)"
+accusative = "стандартный магазин (.35 Sol Short бронебойные)"
+instrumental = "стандартным магазином (.35 Sol Short бронебойные)"
+prepositional = "стандартном магазине (.35 Sol Short бронебойные)"
+gender = "male"
+
+["Sol AP extended pistol magazine"]
+nominative = "увеличенный магазин (.35 Sol Short бронебойные)"
+genitive = "увеличенного магазина (.35 Sol Short бронебойные)"
+dative = "увеличенному магазину (.35 Sol Short бронебойные)"
+accusative = "увеличенный магазин (.35 Sol Short бронебойные)"
+instrumental = "увеличенным магазином (.35 Sol Short бронебойные)"
+prepositional = "увеличенном магазине (.35 Sol Short бронебойные)"
+gender = "male"
+
+["Sol HP pistol magazine"]
+nominative = "стандартный магазин (.35 Sol Short экспансивные)"
+genitive = "стандартного магазина (.35 Sol Short экспансивные)"
+dative = "стандартному магазину (.35 Sol Short экспансивные)"
+accusative = "стандартный магазин (.35 Sol Short экспансивные)"
+instrumental = "стандартным магазином (.35 Sol Short экспансивные)"
+prepositional = "стандартном магазине (.35 Sol Short экспансивные)"
+gender = "male"
+
+["Sol HP extended pistol magazine"]
+nominative = "увеличенный магазин (.35 Sol Short экспансивные)"
+genitive = "увеличенного магазина (.35 Sol Short экспансивные)"
+dative = "увеличенному магазину (.35 Sol Short экспансивные)"
+accusative = "увеличенный магазин (.35 Sol Short экспансивные)"
+instrumental = "увеличенным магазином (.35 Sol Short экспансивные)"
+prepositional = "увеличенном магазине (.35 Sol Short экспансивные)"
+gender = "male"
+
+["ammo box (.35 Sol Short lethal)"]
+nominative = "коробка патронов (.35 Sol Short)"
+genitive = "коробки патронов (.35 Sol Short)"
+dative = "коробке патронов (.35 Sol Short)"
+accusative = "коробку патронов (.35 Sol Short)"
+instrumental = "коробкой патронов (.35 Sol Short)"
+prepositional = "коробке патронов (.35 Sol Short)"
+gender = "female"
+
+["ammo box (.35 Sol Short rubber)"]
+nominative = "коробка патронов (.35 Sol Short резина)"
+genitive = "коробки патронов (.35 Sol Short резина)"
+dative = "коробке патронов (.35 Sol Short резина)"
+accusative = "коробку патронов (.35 Sol Short резина)"
+instrumental = "коробкой патронов (.35 Sol Short резина)"
+prepositional = "коробке патронов (.35 Sol Short резина)"
+gender = "female"
+
+["ammo box (.35 Sol Short ripper)"]
+nominative = "коробка патронов (.35 Sol Short экспансивные)"
+genitive = "коробки патронов (.35 Sol Short экспансивные)"
+dative = "коробке патронов (.35 Sol Short экспансивные)"
+accusative = "коробку патронов (.35 Sol Short экспансивные)"
+instrumental = "коробкой патронов (.35 Sol Short экспансивные)"
+prepositional = "коробке патронов (.35 Sol Short экспансивные)"
+gender = "female"
+
+["ammo box (.35 Sol Short armor piercing)"]
+nominative = "коробка патронов (.35 Sol Short бронебойные)"
+genitive = "коробки патронов (.35 Sol Short бронебойные)"
+dative = "коробке патронов (.35 Sol Short бронебойные)"
+accusative = "коробку патронов (.35 Sol Short бронебойные)"
+instrumental = "коробкой патронов (.35 Sol Short бронебойные)"
+prepositional = "коробке патронов (.35 Sol Short бронебойные)"
+gender = "female"
 
 # MARK: Service
 ["fish-porter 3000"]
