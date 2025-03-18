@@ -10,7 +10,6 @@
 #include "code/categories/hands.dm"
 #include "code/categories/masks.dm"
 #include "code/categories/shoes.dm"
-#include "code/categories/wallets.dm"
 #include "code/categories/backpack.dm"
 #include "code/categories/heads.dm"
 #include "code/categories/suits.dm"
