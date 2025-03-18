@@ -1,21 +1,21 @@
-/datum/copypasta
+/datum/gamepanel
 	var/client/user_client
 	var/variable = null
 
-/datum/copypasta/ui_interact(mob/user, datum/tgui/ui)
+/datum/gamepanel/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "Copypasta")
 		ui.open()
 
-/datum/copypasta/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up variables.
+/datum/gamepanel/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up variables.
 	qdel(src)
 
-/datum/copypasta/ui_state(mob/user)
+/datum/gamepanel/ui_state(mob/user)
 	. = ..()
 	return ADMIN_STATE(R_ADMIN)
 
-/datum/copypasta/ui_act(action, params)
+/datum/gamepanel/ui_act(action, params)
 	if(..())
 		return
 	switch(action)
@@ -30,10 +30,11 @@
 		if("create-mob")
 			user_client.holder.create_mob(user_client.mob)
 
-ADMIN_VERB(copypasta, R_ADMIN, "AACopypasta", "Description!", ADMIN_CATEGORY_MAIN)
-	new /datum/copypasta(user.mob)
+ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel menu.", ADMIN_CATEGORY_GAME)
+	new /datum/gamepanel(user.mob)
+	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
 
-/datum/copypasta/New(user)
+/datum/gamepanel/New(user)
     if(istype(user, /client))
         var/client/temp_user_client = user
         user_client = temp_user_client //if its a client, assign it to user_client
