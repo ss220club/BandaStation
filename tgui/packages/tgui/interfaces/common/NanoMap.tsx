@@ -206,11 +206,7 @@ function NanoMapTransformComponent(props) {
 
   if (uiName) {
     const prevMapState = mapStateRef.current;
-    if (
-      prevMapState.positionX !== mapState.positionX ||
-      prevMapState.positionY !== mapState.positionY ||
-      prevMapState.scale !== mapState.scale
-    ) {
+    if (JSON.stringify(prevMapState) !== JSON.stringify(mapState)) {
       setTransform(mapState.positionX, mapState.positionY, mapState.scale);
     }
     mapStateRef.current = mapState;
