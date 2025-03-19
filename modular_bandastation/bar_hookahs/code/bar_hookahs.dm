@@ -188,7 +188,7 @@
 		to_chat(user, span_notice("Вы добавляете [this_item] в [src.declent_ru(NOMINATIVE)]."))
 		return
 	if(istype(this_item, /obj/item/reagent_containers))
-		if(istype(this_item, /obj/item/reagent_containers/pill))
+		if(istype(this_item, /obj/item/reagent_containers/applicator/pill))
 			return
 		var/obj/item/reagent_containers/container = this_item
 		if(!container.reagents.total_volume)
