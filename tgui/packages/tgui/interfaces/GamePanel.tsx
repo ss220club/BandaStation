@@ -9,14 +9,8 @@ export function GamePanel(props) {
     <Window height={240} title="Game Panel" width={280} theme="admin">
       <Window.Content>
         <Stack
-          height="100%"
+          fill
           vertical
-          align="center"
-          verticalAlign="center"
-          textAlign="center"
-          direction="column"
-          justify="space-around"
-          fillPositionedParent
         >
           <Button
             fluid
