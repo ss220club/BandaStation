@@ -25,6 +25,10 @@
 	anchored = FALSE
 	can_be_unanchored = TRUE
 
+	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
+	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
+	inhand_icon_state = "beaker"
+
 	w_class = WEIGHT_CLASS_HUGE
 	pixel_y = 10
 
@@ -63,9 +67,9 @@
 		var/count = 1
 		for(var/obj/item/food/this_food in food_items)
 			food_string += this_food.name
-			if(count == length(food_items) - 1)
+			if(count == length(food_items) - 3)
 				food_string += " и "
-			if(count == length(food_items) - 2)
+			if(count == length(food_items) - 4)
 				food_string += ", "
 			count += 1
 		. += span_notice("Внутри [length(food_items) ? "- [food_string]" : "ничего нет"].")
@@ -300,7 +304,7 @@
 				return CLICK_ACTION_BLOCKING
 			var/mob/living/living_user = user
 			if(this_mouthpiece in living_user.held_items)
-				visible_message(span_notice("[user] глубоко затягивается..."), span_notice("Вы делаете глубокую затяжку..."))
+				user.visible_message(span_notice("[user] глубоко затягивается..."), span_notice("Вы делаете глубокую затяжку..."))
 				if(!do_after(user, 5 SECONDS, src))
 					return CLICK_ACTION_BLOCKING
 				this_mouthpiece.inhale_smoke(living_user, BASE_INHALE_VOLUME * 2, TRUE)
@@ -396,11 +400,20 @@
 		to_chat(user, span_notice("Вы вдыхаете дым из [src.declent_ru(GENITIVE)]."))
 		user.add_mood_event("smoked", /datum/mood_event/smoked)
 		if(world.time < (last_inhale + INHALE_COOLDOWN) || transferred > BASE_INHALE_LIMIT)
-			visible_message(span_warning(pick("[user] закашливается!", "[user] морщится, откашливаясь.", "[user] задыхается!")), span_warning(pick("Голова кружится...", "Вы закашливаетесь, морщась от острого покалывания в горле.", "Вы задыхаетесь!")))
+			user.visible_message(span_warning(pick("[user] закашливается!", "[user] морщится, откашливаясь.", "[user] задыхается!")), span_warning(pick("Голова кружится...", "Вы закашливаетесь, морщась от острого покалывания в горле.", "Вы задыхаетесь!")))
 			user.emote("cough")
 			user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * (transferred / BASE_INHALE_LIMIT))
+		switch(smoke_efficiency * 100)
+			if(0 to 20)
+				to_chat(user, span_warning("Ваше горло словно обжигает..."))
+				user.emote("cough")
+			if(20 to 40)
+				to_chat(user, span_notice("Слегка горчит."))
+			if(40 to 80)
+				to_chat(user, span_notice("Довольно приятный вкус..."))
+			else
+				to_chat(user, span_notice("Неплохой дымок."))
 		last_inhale = world.time
-		var/last_smoke = source_hookah.smoke_amount
 		source_hookah.smoke_amount = min(source_hookah.smoke_amount + rand(amount * 2, amount), 100)
 		addtimer(CALLBACK(src, .proc/delayed_puff, user, amount_to_waste), 1 SECONDS)
 
