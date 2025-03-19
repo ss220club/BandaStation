@@ -38,8 +38,8 @@
 	var/datum/mouthpiece_attachment/attachment
 	var/fuel = 0
 	var/lit = FALSE
-	var/last_fuel_consume = 0
-	var/last_smoke_decrease = 0
+	COOLDOWN_DECLARE(fuel_consume_cooldown)
+	COOLDOWN_DECLARE(smoke_decrease_cooldown)
 	var/mutable_appearance/coal_overlay
 	var/mutable_appearance/coal_lit_overlay
 	var/mutable_appearance/lit_emissive
@@ -51,7 +51,7 @@
 
 	var/static/allowed_ingridients = typecacheof(list(
 		/obj/item/food/grown,
-		/obj/item/food/cheese
+		/obj/item/food/cheese,
 		))
 
 /obj/item/hookah/add_context(atom/source, list/context, atom/target, mob/user)
@@ -66,7 +66,7 @@
 		var/food_string = ""
 		var/count = 1
 		for(var/obj/item/food/this_food in food_items)
-			food_string += this_food.name
+			food_string += this_food.declent_ru(NOMINATIVE)
 			if(count == length(food_items) - 3)
 				food_string += " и "
 			if(count == length(food_items) - 4)
@@ -79,12 +79,8 @@
 /datum/mouthpiece_attachment
 	var/obj/item/hookah/this_hookah
 	var/atom/attached_to
-	VAR_PRIVATE
-		datum/beam/beam
-/datum/mouthpiece_attachment/New(
-	obj/item/hookah/this_hookah,
-	atom/attached_to
-)
+	VAR_PRIVATE/datum/beam/beam
+/datum/mouthpiece_attachment/New(obj/item/hookah/this_hookah, atom/attached_to)
 	src.this_hookah = this_hookah
 	src.attached_to = attached_to
 	beam = this_hookah.Beam(
@@ -180,25 +176,25 @@
 		to_chat(user, span_notice("Вы добавляете угли в [src.declent_ru(NOMINATIVE)]."))
 		return
 	if(istype(this_item, /obj/item/food))
-		if(food_items.len >= MAX_FOOD_ITEMS)
+		if(length(food_items) >= MAX_FOOD_ITEMS)
 			to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] уже достаточно ингридиентов!"))
 			return
 		food_items += this_item
 		this_item.forceMove(src)
-		to_chat(user, span_notice("Вы добавляете [this_item] в [src.declent_ru(NOMINATIVE)]."))
+		to_chat(user, span_notice("Вы добавляете [this_item.declent_ru(NOMINATIVE)] в [src.declent_ru(NOMINATIVE)]."))
 		return
 	if(istype(this_item, /obj/item/reagent_containers))
 		if(istype(this_item, /obj/item/reagent_containers/applicator/pill))
 			return
 		var/obj/item/reagent_containers/container = this_item
 		if(!container.reagents.total_volume)
-			to_chat(user, span_warning("[container] пуст!"))
+			to_chat(user, span_warning("Внутри [container.declent_ru(GENITIVE)] ничего нет!"))
 			return
 		if(!reagent_container)
 			to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет контейнера для жидкости!"))
 			return
 		var/transferred = container.reagents.trans_to(reagent_container, container.amount_per_transfer_from_this)
-		user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы перелили [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
+		user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
 		return
 	if(try_light(this_item, user))
 		return
@@ -212,7 +208,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	var/obj/item/hookah/source_hookah
 	var/datum/beam/beam
-	var/last_inhale = 0
+	COOLDOWN_DECLARE(inhale_cooldown)
 	var/particle_type
 
 /obj/item/hookah_mouthpiece/Initialize(mapload, obj/item/hookah/hookah)
@@ -233,9 +229,6 @@
 	if(source_hookah)
 		source_hookah.return_mouthpiece(src)
 
-/obj/item/hookah_mouthpiece/pickup(mob/user)
-	. = ..()
-
 /obj/item/hookah_coals
 	name = "hookah coals"
 	desc = "Плотные угольки, филигранно обработанные до состояния кубика."
@@ -245,38 +238,41 @@
 
 /obj/item/hookah_coals/examine()
 	. = ..()
-	. += "<span class='info'>В кучке три кубика.</span>"
+	. += span_info("В кучке три кубика.")
 
 /obj/item/hookah/process()
 	if(!lit || !fuel)
 		return PROCESS_KILL
 
-	if(world.time > last_fuel_consume + FUEL_CONSUME_INTERVAL)
+	if(COOLDOWN_FINISHED(src, fuel_consume_cooldown))
 		fuel = max(fuel - 1, 0)
-		last_fuel_consume = world.time
+		COOLDOWN_START(src, fuel_consume_cooldown, FUEL_CONSUME_INTERVAL)
 		if(fuel <= 0)
 			put_out()
 			return PROCESS_KILL
 
-	if(world.time > last_smoke_decrease + SMOKE_CONSUME_INTERVAL && (smoke_amount - SMOKE_CONSUME_AMOUNT >= 0))
+	if(COOLDOWN_FINISHED(src, smoke_decrease_cooldown) && (smoke_amount - SMOKE_CONSUME_AMOUNT >= 0))
 		smoke_amount -= SMOKE_CONSUME_AMOUNT
+		COOLDOWN_START(src, smoke_decrease_cooldown, SMOKE_CONSUME_INTERVAL)
 
-	if(attachment)
-		var/atom/attached_to = attachment.attached_to
-		if(!(get_dist(src, attached_to) <= 1 && isturf(attached_to.loc)))
-			if(ismob(attached_to))
-				var/mob/user = attached_to
-				user.dropItemToGround(this_mouthpiece)
-				to_chat(user, span_warning("Вы отпускаете [src.declent_ru(NOMINATIVE)]."))
-			QDEL_NULL(attachment)
+	if(!attachment)
+		return
+	var/atom/attached_to = attachment.attached_to
+	if(!(get_dist(src, attached_to) <= 1 && isturf(attached_to.loc)))
+		if(ismob(attached_to))
+			var/mob/user = attached_to
+			user.dropItemToGround(this_mouthpiece)
+			to_chat(user, span_warning("Вы отпускаете [src.declent_ru(NOMINATIVE)]."))
+		QDEL_NULL(attachment)
 
 /obj/item/hookah/click_alt_secondary(mob/user)
 	var/static/list/hookah_radial_options = list()
 	if(lit)
 		hookah_radial_options["Потушить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "extinguish")
-		if(length(food_items) || reagent_container?.reagents?.total_volume)
-			hookah_radial_options["Раскурить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "blow")
-			hookah_radial_options["Очистить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "eject")
+	if((length(food_items) || reagent_container?.reagents?.total_volume) && lit)
+		hookah_radial_options["Раскурить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "blow")
+	if(length(food_items) || reagent_container?.reagents?.total_volume)
+		hookah_radial_options["Очистить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "eject")
 
 	var/choice = show_radial_menu(user, src, hookah_radial_options, require_near = TRUE)
 	switch(choice)
@@ -294,7 +290,7 @@
 			if(!do_after(user, 2 SECONDS, src))
 				return CLICK_ACTION_BLOCKING
 			reagent_container.reagents.clear_reagents()
-			to_chat(user, span_notice("Вы очистили внутреннее хранилище реагентов [src.declent_ru(GENITIVE)]."))
+			to_chat(user, span_notice("Вы очищаете чашу [src.declent_ru(GENITIVE)]."))
 			return CLICK_ACTION_SUCCESS
 		if("Раскурить")
 			if(!lit)
@@ -321,6 +317,8 @@
 	update_appearance()
 	set_light(2, 1, LIGHT_COLOR_ORANGE)
 	smoke_amount = 30
+	COOLDOWN_START(src, fuel_consume_cooldown, FUEL_CONSUME_INTERVAL)
+	COOLDOWN_START(src, smoke_decrease_cooldown, SMOKE_CONSUME_INTERVAL)
 
 /obj/item/hookah/proc/put_out()
 	lit = FALSE
@@ -366,7 +364,7 @@
 			continue
 		if(!is_type_in_typecache(this_food, source_hookah.allowed_ingridients))
 			is_safe = FALSE
-		this_food.reagents.trans_to(these_reagents, amount / source_hookah.food_items.len)
+		this_food.reagents.trans_to(these_reagents, amount / length(source_hookah.food_items))
 		if(!this_food.reagents.total_volume)
 			source_hookah.food_items -= this_food
 			qdel(this_food)
@@ -399,7 +397,7 @@
 	if(transferred)
 		to_chat(user, span_notice("Вы вдыхаете дым из [src.declent_ru(GENITIVE)]."))
 		user.add_mood_event("smoked", /datum/mood_event/smoked)
-		if(world.time < (last_inhale + INHALE_COOLDOWN) || transferred > BASE_INHALE_LIMIT)
+		if(!COOLDOWN_FINISHED(src, inhale_cooldown) || transferred > BASE_INHALE_LIMIT)
 			user.visible_message(span_warning(pick("[user] закашливается!", "[user] морщится, откашливаясь.", "[user] задыхается!")), span_warning(pick("Голова кружится...", "Вы закашливаетесь, морщась от острого покалывания в горле.", "Вы задыхаетесь!")))
 			user.emote("cough")
 			user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * (transferred / BASE_INHALE_LIMIT))
@@ -413,7 +411,7 @@
 				to_chat(user, span_notice("Довольно приятный вкус..."))
 			else
 				to_chat(user, span_notice("Неплохой дымок."))
-		last_inhale = world.time
+		COOLDOWN_START(src, inhale_cooldown, INHALE_COOLDOWN)
 		source_hookah.smoke_amount = min(source_hookah.smoke_amount + rand(amount * 2, amount), 100)
 		addtimer(CALLBACK(src, .proc/delayed_puff, user, amount_to_waste), 1 SECONDS)
 
