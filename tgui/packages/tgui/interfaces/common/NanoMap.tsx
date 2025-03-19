@@ -130,7 +130,7 @@ export function NanoMap(props: Props) {
 
   return (
     <TransformWrapper
-      centerOnInit={!uiName}
+      centerOnInit={mapState.positionX === 0 && mapState.positionY === 0}
       minScale={defaultScale}
       maxScale={maxScale}
       initialScale={mapState.scale}
