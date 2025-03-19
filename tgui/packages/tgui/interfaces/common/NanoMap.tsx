@@ -140,7 +140,7 @@ export function NanoMap(props: Props) {
       wheel={{ step: defaultScale }}
       panning={{ velocityDisabled: true }}
       doubleClick={{ disabled: true }}
-      alignmentAnimation={{ disabled: true }}
+      alignmentAnimation={{ animationTime: 0 }}
       onZoomStop={handleTransformed}
       onPanningStop={handleTransformed}
     >
