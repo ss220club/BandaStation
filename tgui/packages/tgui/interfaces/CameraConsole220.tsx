@@ -11,7 +11,6 @@ import {
 } from 'tgui-core/components';
 import { BooleanLike, classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
-import { useLocalStorage } from 'usehooks-ts';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -208,33 +207,13 @@ export const CameraMapSelector = (props) => {
   const { act, data } = useBackend<Data>();
   const { activeCamera, mapData } = data;
   const cameras = selectCameras(data.cameras, '');
-
-  const [zoom, setZoom] = useState<number>();
   const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
-  const [tracking, setTracking] = useLocalStorage(
-    'camera-console-tracking',
-    false,
-  );
+
   return (
     <NanoMap
       mapData={mapData}
       uiName="camera-console"
-      selectedTarget={!!activeCamera?.ref}
-      onZoomChange={setZoom}
       onLevelChange={setSelectedLevel}
-      buttons={
-        <Button
-          icon="wheelchair-move"
-          selected={tracking}
-          tooltip={
-            tracking
-              ? 'Не перемещать к выбранной камере'
-              : 'Перемещать к выбранной камере'
-          }
-          tooltipPosition="right"
-          onClick={() => setTracking(!tracking)}
-        />
-      }
     >
       {cameras.map((camera) => (
         <NanoMap.Button
@@ -245,8 +224,6 @@ export const CameraMapSelector = (props) => {
           color={!camera.status && 'red'}
           selected={activeCamera?.ref === camera.ref}
           hidden={camera.z !== selectedLevel}
-          tracking={tracking}
-          zoom={zoom}
           onClick={() =>
             act('switch_camera', {
               camera: camera.ref,
