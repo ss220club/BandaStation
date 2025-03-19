@@ -9,8 +9,7 @@
 	default_skin = "praetorian"
 	armor_type = /datum/armor/mod_theme_security
 	complexity_max = DEFAULT_MAX_COMPLEXITY - 2
-	slowdown_inactive = 0.75
-	slowdown_active = 0.25
+	slowdown_deployed = 0.25
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	siemens_coefficient = 0

@@ -66,6 +66,7 @@
 			var/datum/supply_pack/pack_type = pack
 			if(initial(pack_type.special))
 				stray_spawnable_supply_packs -= pack
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 ///Spawns a random supply pack, puts it in a pod, and spawns it on a random tile of the selected area
 /datum/round_event/stray_cargo/start()
@@ -166,7 +167,6 @@
 		"Nuke Op" = UPLINK_NUKE_OPS,
 		"Clown Op" = UPLINK_CLOWN_OPS,
 		"Lone Op" = UPLINK_LONE_OP,
-		"Infiltrator" = UPLINK_INFILTRATORS,
 		"Spy" = UPLINK_SPY
 		)
 	var/uplink_type = tgui_input_list(usr, "Choose uplink to draw items from.", "Choose uplink type.", possible_uplinks)

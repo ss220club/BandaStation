@@ -19,8 +19,8 @@
 	. = ..()
 	add_tts_component()
 
-/atom/proc/cast_tts(mob/listener, message, atom/location, is_local = TRUE, is_radio = FALSE, list/effects, traits = TTS_TRAIT_RATE_FASTER, preSFX, postSFX)
-	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX)
+/atom/proc/cast_tts(mob/listener, message, atom/location, is_local = TRUE, is_radio = FALSE, list/effects, traits = TTS_TRAIT_RATE_FASTER, preSFX, postSFX, tts_seed_override)
+	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override)
 
 // TODO: Do it better?
 /atom/proc/get_tts_seed()
