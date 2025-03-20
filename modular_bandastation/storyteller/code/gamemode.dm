@@ -524,7 +524,9 @@ SUBSYSTEM_DEF(gamemode)
 	if(length(full_department_roles[STS_SEC]))
 		var/avg_count = length(full_department_roles[STS_SEC]) / 2
 		var/antags_count = get_antag_count()
-		sec_mult = antags_count ? avg_count / antags_count : length(full_department_roles[STS_SEC]) * 100
+		sec_mult = antags_count ? avg_count / antags_count : length(full_department_roles[STS_SEC])
+	if(!get_antag_cap())
+		sec_mult = 0
 	return sec_mult
 
 /datum/controller/subsystem/gamemode/proc/update_pop_scaling()
@@ -837,6 +839,7 @@ SUBSYSTEM_DEF(gamemode)
 		while(exclusive_event.price_to_buy_adds <= roundstart_budget)
 			roundstart_budget -= exclusive_event.price_to_buy_adds
 			addition_antags++
+			message_admins("Storyteller purchased and triggered [exclusive_event] and buy additional antag. Left balance: [roundstart_budget].")
 	//Расчитать новый максимум и минимум антагов
 	exclusive_event.base_antags += addition_antags
 	exclusive_event.maximum_antags += addition_antags
