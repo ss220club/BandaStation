@@ -3,6 +3,7 @@ SUBSYSTEM_DEF(http)
 	flags = SS_TICKER | SS_BACKGROUND | SS_NO_INIT // Measure in ticks, but also only run if we have the spare CPU.
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY // All the time
+	init_order = INIT_ORDER_DBCORE
 	// Assuming for the worst, since only discord is hooked into this for now, but that may change
 	/// List of all async HTTP requests in the processing chain
 	var/list/datum/http_request/active_async_requests = list()
