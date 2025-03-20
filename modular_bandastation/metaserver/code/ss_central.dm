@@ -172,11 +172,10 @@ SUBSYSTEM_DEF(central)
 		return
 
 	var/list/data = json_decode(response.body)
-	if(length(data["items"]))
-		player.donator_level = data["items"][1]["tier"]
+	get_max_donation_tier_from_response_data(data)
 	player.can_save_donator_level = TRUE
 
-/datum/controller/subsystem/central/proc/get_player_donate_tier_blocking(client/player)
+/datum/controller/subsystem/central/proc/update_player_donate_tier_blocking(client/player)
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/donates?ckey=[player.ckey]&active_only=true&page=1&page_size=1"
 	var/datum/http_response/response = SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list())
 	if(response.errored || response.status_code != 200)
@@ -184,6 +183,15 @@ SUBSYSTEM_DEF(central)
 		return
 
 	var/list/data = json_decode(response.body)
-	if(length(data["items"]))
-		player.donator_level = data["items"][1]["tier"]
+	player.donator_level = get_max_donation_tier_from_response_data(data)
 	player.can_save_donator_level = TRUE
+
+/datum/controller/subsystem/central/proc/get_max_donation_tier_from_response_data(list/data)
+	if(!length(data["items"]))
+		return 0
+
+	var/list/tiers = list()
+	for(var/list/item in data["items"])
+		tiers += item["tier"]
+
+	return max(tiers)
