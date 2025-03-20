@@ -380,7 +380,7 @@
 		user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * 4)
 		return
 	if(!source_hookah.reagent_container || !source_hookah.reagent_container.reagents.total_volume)
-		to_chat(user, span_warning("В кальяне нет жидкости!"))
+		to_chat(user, span_warning("В [src.declent_ru(GENITIVE)] нет жидкости!"))
 		return
 
 	var/smoke_efficiency = min(source_hookah.smoke_amount, 100) / 100
