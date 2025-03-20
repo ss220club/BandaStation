@@ -11,6 +11,7 @@
 
 SUBSYSTEM_DEF(central)
 	var/list/discord_links = list()
+	init_order = INIT_ORDER_DBCORE
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/central/vv_edit_var(var_name, var_value)
