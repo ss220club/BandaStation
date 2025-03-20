@@ -47,7 +47,7 @@
 
 	to_chat(player, boxed_message("Авторизуйтесь в открывшемся окне и ожидайте 30 секунд.<br/>Если окно не открывается, можете открыть ссылку в браузере самостоятельно:<br/><a href='[login_endpoint]'>Привязать дискорд.</a>."))
 	player << link(login_endpoint)
-	SScentral.get_player_discord_async(player)
+	get_player_discord_async(player)
 	addtimer(CALLBACK(SScentral, TYPE_PROC_REF(/datum/controller/subsystem/central, get_player_discord_async), player), 30 SECONDS)
 
 /datum/config_entry/flag/force_discord_verification

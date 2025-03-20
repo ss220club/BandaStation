@@ -79,12 +79,12 @@ SUBSYSTEM_DEF(central)
 		return TRUE
 
 	// If player somehow losed its id. Not sure if needed
-	if(SScentral.discord_links[player.ckey])
-		player.persistent_client.discord_id = SScentral.discord_links[player.ckey]
+	if(discord_links[player.ckey])
+		player.persistent_client.discord_id = discord_links[player.ckey]
 		return TRUE
 
 	// Update the info just in case
-	SScentral.get_player_discord_async(player)
+	get_player_discord_async(player)
 
 	return FALSE
 
