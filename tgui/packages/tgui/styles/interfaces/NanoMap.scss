@@ -85,7 +85,8 @@ $blur: saturate(150%) blur(12px);
     }
   }
 
-  &__Object {
+  &__Object,
+  &__Marker {
     cursor: pointer;
     font-size: 6px;
     line-height: 0;
@@ -103,6 +104,15 @@ $blur: saturate(150%) blur(12px);
 
     &--hidden {
       display: none;
+    }
+  }
+
+  &__Marker {
+    border-radius: 99999px;
+    transition: transform 0.2s;
+
+    &--selected {
+      transform: scale(1.5);
     }
   }
 }

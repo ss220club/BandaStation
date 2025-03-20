@@ -164,7 +164,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 /datum/crewmonitor/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if (!ui)
-		ui = new(user, src, "CrewConsole")
+		ui = new(user, src, "CrewConsole220") // BANDASTATION ADDITION
 		ui.open()
 
 /datum/crewmonitor/proc/show(mob/M, source)
@@ -274,7 +274,15 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 
 		// Location
 		if (sensor_mode >= SENSOR_COORDS)
+			/* BANDASTATION REPLACEMENT - Start
 			entry["area"] = get_area_name(tracked_living_mob, format_text = TRUE)
+			*/
+			entry["position"] = list(
+				"area" = get_area_name(tracked_living_mob, format_text = TRUE),
+				"x" = tracked_living_mob.x,
+				"y" = tracked_living_mob.y,
+				"z" = tracked_living_mob.z,
+			)
 
 		// Trackability
 		entry["can_track"] = tracked_living_mob.can_track()
