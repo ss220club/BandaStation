@@ -15,6 +15,14 @@
 
 #define MAX_FOOD_ITEMS 5
 
+#define RADIAL_CLEAR image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "eject")
+#define RADIAL_EXTINGUISH image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "extinguish")
+#define RADIAL_BLOW image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "blow")
+
+#define OPTION_CLEAR "Очистить чашу"
+#define OPTION_EXTINGUISH "Погасить угли"
+#define OPTION_BLOW "Раскурить"
+
 /obj/item/hookah
 	name = "hookah"
 	desc = "Простой стеклянный водный кальян."
@@ -266,17 +274,17 @@
 		QDEL_NULL(attachment)
 
 /obj/item/hookah/click_alt_secondary(mob/user)
-	var/static/list/hookah_radial_options = list()
+	var/list/hookah_radial_options = list()
 	if(lit)
-		hookah_radial_options["Потушить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "extinguish")
+		hookah_radial_options[OPTION_EXTINGUISH] = RADIAL_EXTINGUISH
 	if((length(food_items) || reagent_container?.reagents?.total_volume) && lit)
-		hookah_radial_options["Раскурить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "blow")
+		hookah_radial_options[OPTION_BLOW] = RADIAL_BLOW
 	if(length(food_items) || reagent_container?.reagents?.total_volume)
-		hookah_radial_options["Очистить"] = image(icon = 'modular_bandastation/bar_hookahs/icons/radial.dmi', icon_state = "eject")
+		hookah_radial_options[OPTION_CLEAR] = RADIAL_CLEAR
 
 	var/choice = show_radial_menu(user, src, hookah_radial_options, require_near = TRUE)
 	switch(choice)
-		if("Потушить")
+		if(OPTION_EXTINGUISH)
 			if(!lit)
 				return CLICK_ACTION_BLOCKING
 			to_chat(user, span_notice("Вы начинаете тушить [src.declent_ru(NOMINATIVE)]..."))
@@ -284,7 +292,7 @@
 				return CLICK_ACTION_BLOCKING
 			put_out()
 			return CLICK_ACTION_SUCCESS
-		if("Очистить")
+		if(OPTION_BLOW)
 			if(!reagent_container)
 				return CLICK_ACTION_BLOCKING
 			if(!do_after(user, 2 SECONDS, src))
@@ -292,7 +300,7 @@
 			reagent_container.reagents.clear_reagents()
 			to_chat(user, span_notice("Вы очищаете чашу [src.declent_ru(GENITIVE)]."))
 			return CLICK_ACTION_SUCCESS
-		if("Раскурить")
+		if(OPTION_CLEAR)
 			if(!lit)
 				return CLICK_ACTION_BLOCKING
 			if(!length(food_items) && !reagent_container?.reagents?.total_volume)
@@ -501,3 +509,9 @@
 #undef BASE_INHALE_VOLUME
 #undef BASE_INHALE_LIMIT
 #undef MAX_FOOD_ITEMS
+#undef RADIAL_CLEAR
+#undef RADIAL_EXTINGUISH
+#undef RADIAL_BLOW
+#undef OPTION_CLEAR
+#undef OPTION_EXTINGUISH
+#undef OPTION_BLOW
