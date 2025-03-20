@@ -525,6 +525,8 @@ SUBSYSTEM_DEF(gamemode)
 		var/avg_count = length(full_department_roles[STS_SEC]) / 2
 		var/antags_count = get_antag_count()
 		sec_mult = antags_count ? avg_count / antags_count : length(full_department_roles[STS_SEC])
+	if(!get_antag_cap())
+		sec_mult = 0
 	return sec_mult
 
 /datum/controller/subsystem/gamemode/proc/update_pop_scaling()
