@@ -32,7 +32,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	if(!can_announce(user, is_silicon))
 		return FALSE
 	if(is_silicon)
-		minor_announce(html_decode(input),"[user.name] announces:", players = players)
+		minor_announce(html_decode(input),"[user.name] объявляет:", players = players)
 		COOLDOWN_START(src, silicon_message_cooldown, COMMUNICATION_COOLDOWN_AI)
 	else
 		var/list/message_data = user.treat_message(input)
