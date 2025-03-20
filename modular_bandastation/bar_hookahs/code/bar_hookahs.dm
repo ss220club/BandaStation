@@ -208,46 +208,6 @@
 		return
 	return ..()
 
-/obj/item/hookah_mouthpiece
-	name = "mouthpiece"
-	desc = "Мундштук, выполненный из какого-то лёгкого металла. На его ручке что-то выгравировано."
-	icon = 'modular_bandastation/bar_hookahs/icons/hookah.dmi'
-	icon_state = "mouthpiece"
-	w_class = WEIGHT_CLASS_BULKY
-	var/obj/item/hookah/source_hookah
-	var/datum/beam/beam
-	COOLDOWN_DECLARE(inhale_cooldown)
-	var/particle_type
-
-/obj/item/hookah_mouthpiece/Initialize(mapload, obj/item/hookah/hookah)
-	. = ..()
-	if(hookah)
-		source_hookah = hookah
-
-/obj/item/hookah_mouthpiece/Destroy()
-	if(source_hookah)
-		if(source_hookah.attachment)
-			QDEL_NULL(source_hookah.attachment)
-		source_hookah?.stop_smoke()
-		source_hookah.this_mouthpiece = null
-	return ..()
-
-/obj/item/hookah_mouthpiece/dropped(mob/user)
-	. = ..()
-	if(source_hookah)
-		source_hookah.return_mouthpiece(src)
-
-/obj/item/hookah_coals
-	name = "hookah coals"
-	desc = "Плотные угольки, филигранно обработанные до состояния кубика."
-	icon = 'modular_bandastation/bar_hookahs/icons/hookah.dmi'
-	icon_state = "coals"
-	custom_premium_price = PAYCHECK_CREW * 1.5
-
-/obj/item/hookah_coals/examine()
-	. = ..()
-	. += span_info("В кучке три кубика.")
-
 /obj/item/hookah/process()
 	if(!lit || !fuel)
 		return PROCESS_KILL
@@ -337,6 +297,89 @@
 	stop_smoke()
 	set_light(0)
 	smoke_amount = 0
+
+/obj/item/hookah/proc/stop_smoke()
+	if(particle_type)
+		remove_shared_particles(particle_type)
+		particle_type = null
+
+/obj/item/hookah/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+	. = ..()
+	if(QDELETED(src))
+		return
+	atom_destruction()
+
+/obj/item/hookah/atom_destruction(damage_flag)
+	fuel = 0
+	new /obj/item/shard(get_turf(src))
+	if(reagent_container && reagent_container.reagents?.total_volume)
+		reagent_container.reagents.expose(get_turf(src), TOUCH)
+	if(length(food_items))
+		for(var/obj/item/food/this_food in food_items)
+			var/turf/drop_loc = get_turf(src)
+			var/obj/item/food/food_item = this_food
+			if(food_item.reagents?.total_volume)
+				food_item.reagents.expose(drop_loc, TOUCH)
+			qdel(food_item)
+	if(this_mouthpiece)
+		qdel(this_mouthpiece)
+	QDEL_LIST(food_items)
+	visible_message(span_warning("[capitalize(src.declent_ru(NOMINATIVE))] с треском разлетается на осколки!"))
+	playsound(src, SFX_SHATTER, 50)
+	return ..()
+
+/obj/item/hookah/pickup(mob/user)
+	. = ..()
+	if(this_mouthpiece && !(this_mouthpiece in contents))
+		return_mouthpiece(this_mouthpiece)
+		if(attachment)
+			QDEL_NULL(attachment)
+		to_chat(user, span_notice("Мундштук возвращается в [src.declent_ru(NOMINATIVE)]."))
+
+/obj/item/hookah/Destroy()
+	if(reagent_container)
+		reagent_container = null
+	if(particle_type)
+		remove_shared_particles(particle_type)
+		particle_type = null
+	QDEL_LIST(food_items)
+	if(this_mouthpiece)
+		this_mouthpiece.source_hookah = null
+		qdel(this_mouthpiece)
+	if(attachment)
+		attachment = null
+	set_light(0)
+	return ..()
+
+/obj/item/hookah_mouthpiece
+	name = "mouthpiece"
+	desc = "Мундштук, выполненный из какого-то лёгкого металла. На его ручке что-то выгравировано."
+	icon = 'modular_bandastation/bar_hookahs/icons/hookah.dmi'
+	icon_state = "mouthpiece"
+	w_class = WEIGHT_CLASS_BULKY
+	var/obj/item/hookah/source_hookah
+	var/datum/beam/beam
+	COOLDOWN_DECLARE(inhale_cooldown)
+	var/particle_type
+
+/obj/item/hookah_mouthpiece/Initialize(mapload, obj/item/hookah/hookah)
+	. = ..()
+	if(hookah)
+		source_hookah = hookah
+
+/obj/item/hookah_mouthpiece/Destroy()
+	if(source_hookah)
+		if(source_hookah.attachment)
+			QDEL_NULL(source_hookah.attachment)
+		source_hookah?.stop_smoke()
+		source_hookah.this_mouthpiece = null
+	return ..()
+
+/obj/item/hookah_mouthpiece/dropped(mob/user)
+	. = ..()
+	if(source_hookah)
+		source_hookah.return_mouthpiece(src)
+
 
 /obj/item/hookah_mouthpiece/attack_self(mob/living/carbon/human/user)
 	if(!source_hookah || !source_hookah.lit)
@@ -428,50 +471,16 @@
 	puff.set_up(amount / 5, amount * 0.2, location = user.loc, carry = source_hookah.reagent_container.reagents)
 	puff.start()
 
-/obj/item/hookah/proc/stop_smoke()
-	if(particle_type)
-		remove_shared_particles(particle_type)
-		particle_type = null
+/obj/item/hookah_coals
+	name = "hookah coals"
+	desc = "Плотные угольки, филигранно обработанные до состояния кубика."
+	icon = 'modular_bandastation/bar_hookahs/icons/hookah.dmi'
+	icon_state = "coals"
+	custom_premium_price = PAYCHECK_CREW * 1.5
 
-/obj/item/hookah/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/obj/item/hookah_coals/examine()
 	. = ..()
-	if(QDELETED(src))
-		return
-	atom_destruction()
-
-/obj/item/hookah/atom_destruction(damage_flag)
-	fuel = 0
-	new /obj/item/shard(get_turf(src))
-	if(reagent_container && reagent_container.reagents?.total_volume)
-		reagent_container.reagents.expose(get_turf(src), TOUCH)
-	if(length(food_items))
-		for(var/obj/item/food/this_food in food_items)
-			var/turf/drop_loc = get_turf(src)
-			var/obj/item/food/food_item = this_food
-			if(food_item.reagents?.total_volume)
-				food_item.reagents.expose(drop_loc, TOUCH)
-			qdel(food_item)
-	if(this_mouthpiece)
-		qdel(this_mouthpiece)
-	QDEL_LIST(food_items)
-	visible_message(span_warning("[capitalize(src.declent_ru(NOMINATIVE))] с треском разлетается на осколки!"))
-	playsound(src, SFX_SHATTER, 50)
-	return ..()
-
-/obj/item/hookah/Destroy()
-	if(reagent_container)
-		reagent_container = null
-	if(particle_type)
-		remove_shared_particles(particle_type)
-		particle_type = null
-	QDEL_LIST(food_items)
-	if(this_mouthpiece)
-		this_mouthpiece.source_hookah = null
-		qdel(this_mouthpiece)
-	if(attachment)
-		attachment = null
-	set_light(0)
-	return ..()
+	. += span_info("В кучке три кубика.")
 
 /obj/machinery/vending/cigarette/New()
 	premium += list(
@@ -488,14 +497,6 @@
 		/obj/item/hookah_coals = 3
 	)
 	crate_name = "ящик с набором для кальяна"
-
-/obj/item/hookah/pickup(mob/user)
-	. = ..()
-	if(this_mouthpiece && !(this_mouthpiece in contents))
-		return_mouthpiece(this_mouthpiece)
-		if(attachment)
-			QDEL_NULL(attachment)
-		to_chat(user, span_notice("Мундштук возвращается в [src.declent_ru(NOMINATIVE)]."))
 
 #undef INTERNAL_VOLUME
 #undef MAX_FUEL
