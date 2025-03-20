@@ -1,4 +1,4 @@
-/datum/preferences
+/datum/persistent_client
 	var/discord_id
 
 /datum/preferences/vv_edit_var(var_name, var_value)

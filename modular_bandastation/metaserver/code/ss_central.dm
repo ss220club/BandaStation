@@ -69,18 +69,18 @@ SUBSYSTEM_DEF(central)
 	var/ckey = data["ckey"]
 	discord_links[ckey] = discord_id
 
-	player.prefs.discord_id = discord_id
+	player.persistent_client.discord_id = discord_id
 
 /datum/controller/subsystem/central/proc/is_player_discord_linked(client/player)
 	if(!player)
 		return FALSE
 
-	if(player.prefs.discord_id)
+	if(player.persistent_client.discord_id)
 		return TRUE
 
 	// If player somehow losed its id. Not sure if needed
 	if(SScentral.discord_links[player.ckey])
-		player.prefs.discord_id = SScentral.discord_links[player.ckey]
+		player.persistent_client.discord_id = SScentral.discord_links[player.ckey]
 		return TRUE
 
 	// Update the info just in case
