@@ -129,8 +129,7 @@
 		. += coal_lit_overlay
 		. += lit_emissive
 
-/obj/item/hookah/proc/return_mouthpiece(mouthpiece)
-	var/obj/item/hookah_mouthpiece/current_mouthpiece = mouthpiece
+/obj/item/hookah/proc/return_mouthpiece(obj/item/hookah_mouthpiece/current_mouthpiece)
 	if(current_mouthpiece.source_hookah != src)
 		return FALSE
 	if(this_mouthpiece in contents)
@@ -171,30 +170,30 @@
 		ignite()
 		return TRUE
 
-/obj/item/hookah/attackby(obj/item/this_item, mob/user, params)
-	if(istype(this_item, /obj/item/hookah_mouthpiece))
-		return_mouthpiece(this_item)
+/obj/item/hookah/attackby(obj/item/attacking_item, mob/user, params)
+	if(istype(attacking_item, /obj/item/hookah_mouthpiece))
+		return_mouthpiece(attacking_item)
 		return
-	if(istype(this_item, /obj/item/hookah_coals))
+	if(istype(attacking_item, /obj/item/hookah_coals))
 		if(fuel + FUEL_PER_COAL > MAX_FUEL)
 			to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] уже достаточно углей!"))
 			return
 		fuel += FUEL_PER_COAL
-		qdel(this_item)
+		qdel(attacking_item)
 		to_chat(user, span_notice("Вы добавляете угли в [src.declent_ru(NOMINATIVE)]."))
 		return
-	if(istype(this_item, /obj/item/food))
+	if(istype(attacking_item, /obj/item/food))
 		if(length(food_items) >= MAX_FOOD_ITEMS)
 			to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] уже достаточно ингридиентов!"))
 			return
-		food_items += this_item
-		this_item.forceMove(src)
-		to_chat(user, span_notice("Вы добавляете [this_item.declent_ru(NOMINATIVE)] в [src.declent_ru(NOMINATIVE)]."))
+		food_items += attacking_item
+		attacking_item.forceMove(src)
+		to_chat(user, span_notice("Вы добавляете [attacking_item.declent_ru(NOMINATIVE)] в [src.declent_ru(NOMINATIVE)]."))
 		return
-	if(istype(this_item, /obj/item/reagent_containers))
-		if(istype(this_item, /obj/item/reagent_containers/applicator/pill))
+	if(istype(attacking_item, /obj/item/reagent_containers))
+		if(istype(attacking_item, /obj/item/reagent_containers/applicator/pill))
 			return
-		var/obj/item/reagent_containers/container = this_item
+		var/obj/item/reagent_containers/container = attacking_item
 		if(!container.reagents.total_volume)
 			to_chat(user, span_warning("Внутри [container.declent_ru(GENITIVE)] ничего нет!"))
 			return
@@ -204,7 +203,7 @@
 		var/transferred = container.reagents.trans_to(reagent_container, container.amount_per_transfer_from_this)
 		user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
 		return
-	if(try_light(this_item, user))
+	if(try_light(attacking_item, user))
 		return
 	return ..()
 
