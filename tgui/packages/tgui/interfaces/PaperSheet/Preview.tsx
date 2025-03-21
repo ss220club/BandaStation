@@ -23,7 +23,65 @@ import {
 import { StampView } from './StampView';
 import { PaperContext, PaperInput, PaperReplacement } from './types';
 
+interface CustomToken {
+  token: string;
+  element: string;
+  isBlock?: boolean;
+}
+
+const CUSTOM_TOKENS: CustomToken[] = [
+  {
+    token: '!',
+    element: 'label',
+    isBlock: false,
+  },
+  {
+    token: '-#',
+    element: 'small',
+    isBlock: false,
+  },
+  {
+    token: '---',
+    element: 'br',
+    isBlock: false,
+  },
+];
+
 const SPECIAL_TOKENS = {
+  blank_header: (value: string) => {
+    const content = value.replace(/^\[blank_header\s*|\]$/g, '').trim();
+
+    const id = content.match(blankPropRegex('id'))?.[1]?.trim();
+    const name = content.match(blankPropRegex('name'))?.[1]?.trim();
+    const category = content.match(blankPropRegex('category'))?.[1]?.trim();
+    const info = content.match(blankPropRegex('info'))?.[1]?.trim();
+
+    return `
+      <div class='blank'>
+        <div class='blank_header'>
+          <div class='blank_logo'>
+            [nt_logo]
+          </div>
+          <div class='blank_content'>
+            <span class='id'>Форма ${id || ''}</span>
+            <span class='name'>${name || ''}</span>
+            <hr>
+            <span class='station'>
+              Научная станция Nanotrasen
+              <br>
+              <span class='station_name'>[station_name]</span>
+            </span>
+            <span class='category'>${category || ''}</span>
+          </div>
+        </div>
+        <span class='blank_footer'>
+          <hr>
+          ${info || 'Перед заполнением прочитать от начала до конца | Во всех PDA имеется ручка'}
+          <hr>
+        </span>
+      </div>
+    `;
+  },
   nt_logo: (value: string) => {
     const matchArray = value.match(propRegex('width'));
     const widthValue = matchArray ? matchArray[1] : '';
@@ -38,6 +96,10 @@ const SPECIAL_TOKENS = {
 
 function propRegex(propName: string) {
   return new RegExp(`${propName}=([a-zA-Z0-9]+)`, 'i');
+}
+
+function blankPropRegex(propName: string) {
+  return new RegExp(`${propName}\\s*=\\s*([^;\\]]+)(?:;|$)`, 'i');
 }
 
 type PreviewViewProps = {
@@ -55,7 +117,7 @@ type PreviewViewProps = {
 // Regex that finds [input_field] fields.
 const fieldRegex: RegExp = /\[input_field\]/gi;
 const childInputRegex: RegExp = /\[child_(\d+)\]/gi;
-const specialTokenRegex: RegExp = /\[(\w+)(?:\s+(?:\w+=\w+))*\]/gi;
+const specialTokenRegex: RegExp = /\[(\w+)[^\[]*?\]/gi;
 
 /**
  * Real-time text preview section. When not editing, this is simply
@@ -332,12 +394,27 @@ export function PreviewView(props: PreviewViewProps) {
       const specialTokenResolver: (value: string) => string =
         SPECIAL_TOKENS[p1];
 
-      return specialTokenResolver ? specialTokenResolver(match) : match;
+      if (!specialTokenResolver) {
+        return match;
+      }
+
+      const resolved = specialTokenResolver(match);
+
+      return parseSpecialTokens(resolved);
     });
   }
 
   function createAndConfigureMarked() {
     const markedInstance = new Marked();
+
+    const customRules = CUSTOM_TOKENS.map((token) => ({
+      pattern: new RegExp(`^${token.token}\\s+(.+)$`, 'm'),
+      render: (match: RegExpExecArray) => {
+        const content = markedInstance.parseInline(match[1]);
+        return `<${token.element}>${content}</${token.element}>${token.isBlock ? '\n' : ''}`;
+      },
+    }));
+
     markedInstance.use(
       {
         breaks: true,
@@ -346,6 +423,16 @@ export function PreviewView(props: PreviewViewProps) {
         renderer: {
           paragraph(tokens) {
             return marked.parseInline(tokens.text) as string;
+          },
+          text(tokens) {
+            let result = tokens.text;
+            for (const rule of customRules) {
+              const match = rule.pattern.exec(result);
+              if (match) {
+                return rule.render(match);
+              }
+            }
+            return result;
           },
         },
       },

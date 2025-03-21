@@ -42,5 +42,64 @@
         pointer-events: none;
       }
     }
+
+    label {
+      font-size: 1.3rem;
+    }
+
+    small {
+      font-size: 0.75rem;
+    }
+
+    // MARK: Blank header
+    .blank {
+      display: flex;
+      flex-direction: column;
+
+      &_header {
+        display: flex;
+      }
+
+      &_content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 1rem 0.5rem;
+
+        .name {
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
+
+        .id {
+          font-size: 0.75rem;
+        }
+
+        .station {
+          text-align: left;
+          height: 100%;
+          margin-bottom: 0.5rem;
+
+          &_name {
+            font-weight: bold;
+            font-size: 1.2rem;
+          }
+        }
+
+        .category {
+          text-align: right;
+          font-size: 1.5rem;
+        }
+      }
+
+      &_footer {
+        text-align: center;
+        font-size: 0.75rem;
+      }
+
+      hr {
+        width: 100%;
+      }
+    }
   }
 }
