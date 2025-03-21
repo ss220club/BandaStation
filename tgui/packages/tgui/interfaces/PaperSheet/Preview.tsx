@@ -132,7 +132,7 @@ export function PreviewView(props: PreviewViewProps) {
     fontFace: fontFace,
     fontColor: fontColor,
     fontBold: fontBold,
-    advanced_html_user: advanced_html_user,
+    advancedHtmlUser: advanced_html_user,
   };
 
   if (
