@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import {
-  Box,
   Button,
   Icon,
-  Input,
+  Dropdown,
   Section,
   Stack,
   Table,
@@ -47,10 +46,6 @@ type CrewConsoleData = {
   mapData: MapData;
 };
 
-type CrewEntryProps = {
-  sensor_data: CrewSensor;
-};
-
 const HEALTH_COLOR_BY_LEVEL = [
   '#17d568',
   '#c4cf2d',
@@ -60,21 +55,10 @@ const HEALTH_COLOR_BY_LEVEL = [
   '#801308',
 ];
 
-const SORT_NAMES = {
-  ijob: 'Job',
-  name: 'Name',
-  area: 'Position',
-  health: 'Vitals',
-  head: 'Head',
-};
-
 const STAT_LIVING = 0;
 const STAT_DEAD = 4;
 
-const SORT_OPTIONS = ['health', 'ijob', 'name', 'area', 'head'];
-
 const jobIsHead = (jobId: number) => jobId % 10 === 0;
-
 const jobToColor = (jobId: number) => {
   if (jobId === 0) {
     return COLORS.department.captain;
@@ -113,12 +97,11 @@ const statToIcon = (life_status: number) => {
   return 'heartbeat';
 };
 
-const healthSort = (a: CrewSensor, b: CrewSensor) => {
-  if (a.life_status > b.life_status) return -1;
-  if (a.life_status < b.life_status) return 1;
-  if (a.health < b.health) return -1;
-  if (a.health > b.health) return 1;
-  return 0;
+const healthToAttribute = (sensor: CrewSensor, attributeList: string[]) => {
+  const { oxydam, toxdam, burndam, brutedam } = sensor;
+  const healthSum = oxydam + toxdam + burndam + brutedam;
+  const level = Math.min(Math.max(Math.ceil(healthSum / 25), 0), 5);
+  return attributeList[level];
 };
 
 const areaSort = (a: CrewSensor, b: CrewSensor) => {
@@ -135,186 +118,248 @@ const headSort = (a: CrewSensor, b: CrewSensor) => {
   else return a.ijob - b.ijob;
 };
 
-const healthToAttribute = (
-  oxy: number,
-  tox: number,
-  burn: number,
-  brute: number,
-  attributeList: string[],
-) => {
-  const healthSum = oxy + tox + burn + brute;
-  const level = Math.min(Math.max(Math.ceil(healthSum / 25), 0), 5);
-  return attributeList[level];
+const healthSort = (a: CrewSensor, b: CrewSensor) => {
+  if (a.life_status > b.life_status) return -1;
+  if (a.life_status < b.life_status) return 1;
+  if (a.health < b.health) return -1;
+  if (a.health > b.health) return 1;
+  return 0;
 };
 
-type HealthStatProps = {
-  type: string;
-  value: number;
+const sortTypes = {
+  Name: (a, b) => (a.name > b.name ? 1 : -1),
+  Job: (a, b) => a.ijob - b.ijob,
+  Head: (a, b) => headSort(a, b),
+  Health: (a, b) => healthSort(a, b),
+  Area: (a, b) => areaSort(a, b),
 };
 
-const HealthStat = (props: HealthStatProps) => {
-  const { type, value } = props;
+const HealthStat = (props) => {
+  const { sensor_data } = props;
+  const { oxydam, toxdam, burndam, brutedam, life_status } = sensor_data;
   return (
-    <Box inline width={2} color={COLORS.damageType[type]} textAlign="center">
-      {value}
-    </Box>
+    <Stack fill textAlign="center">
+      {oxydam !== undefined ? (
+        <>
+          <Stack.Item color={COLORS.damageType['oxy']}>{oxydam}</Stack.Item>
+          <Stack.Divider />
+          <Stack.Item color={COLORS.damageType['toxin']}>{toxdam}</Stack.Item>
+          <Stack.Divider />
+          <Stack.Item color={COLORS.damageType['burn']}>{burndam}</Stack.Item>
+          <Stack.Divider />
+          <Stack.Item color={COLORS.damageType['brute']}>{brutedam}</Stack.Item>
+        </>
+      ) : life_status !== STAT_DEAD ? (
+        <Stack.Item grow>Живой</Stack.Item>
+      ) : (
+        <Stack.Item grow>Мёртв</Stack.Item>
+      )}
+    </Stack>
   );
 };
 
 export const CrewConsole220 = () => {
-  const [tab, setTab] = useSharedState('crew-console-tab', 'List');
-  const [sortAsc, setSortAsc] = useSharedState('crew-console-sort-asc', true);
-  const [searchQuery, setSearchQuery] = useSharedState(
-    'crew-console-search',
-    '',
-  );
-  const [sortBy, setSortBy] = useSharedState(
-    'crew-console-sort-by',
-    SORT_OPTIONS[0],
-  );
-
-  const cycleSortBy = () => {
-    let idx = SORT_OPTIONS.indexOf(sortBy) + 1;
-    if (idx === SORT_OPTIONS.length) idx = 0;
-    setSortBy(SORT_OPTIONS[idx]);
-  };
-
   return (
     <Window title="Crew Monitor" width={1000} height={750}>
       <Window.Content>
-        <Stack fill vertical>
-          <Stack.Item>
-            <Section
-              fill
-              title={
-                <Stack fill m={-0.75} pt={1} pl={1} pr={1}>
-                  <Stack.Item grow>
-                    <Tabs m={-1}>
-                      <Tabs.Tab
-                        icon="list"
-                        selected={tab === 'List'}
-                        onClick={() => setTab('List')}
-                      >
-                        List
-                      </Tabs.Tab>
-                      <Tabs.Tab
-                        icon="map"
-                        selected={tab === 'Map'}
-                        onClick={() => setTab('Map')}
-                      >
-                        Map
-                      </Tabs.Tab>
-                    </Tabs>
-                  </Stack.Item>
-                  <Stack.Item>
-                    <SearchBar
-                      noIcon
-                      style={{ width: '20rem' }}
-                      query={searchQuery}
-                      onSearch={setSearchQuery}
-                    />
-                  </Stack.Item>
-                  <Stack.Item>
-                    <Button onClick={cycleSortBy}>{SORT_NAMES[sortBy]}</Button>
-                    <Button onClick={() => setSortAsc(!sortAsc)}>
-                      <Icon name={sortAsc ? 'chevron-up' : 'chevron-down'} />
-                    </Button>
-                  </Stack.Item>
-                </Stack>
-              }
-            />
-          </Stack.Item>
-          <Stack.Item grow mt={0}>
-            {tab === 'List' && (
-              <CrewTable
-                searchQuery={searchQuery}
-                sortBy={sortBy}
-                sortAsc={sortAsc}
-              />
-            )}
-            {tab === 'Map' && (
-              <CrewMap
-                searchQuery={searchQuery}
-                sortBy={sortBy}
-                sortAsc={sortAsc}
-              />
-            )}
-          </Stack.Item>
-        </Stack>
+        <CrewContent />
       </Window.Content>
     </Window>
   );
 };
 
-function CrewTable(props) {
-  const { data } = useBackend<CrewConsoleData>();
-  const { sortAsc, searchQuery, sortBy } = props;
+export function CrewContent() {
+  const { act, data } = useBackend<CrewConsoleData>();
   const { sensors } = data;
 
-  const nameSearch = createSearch(searchQuery, (crew: CrewSensor) => crew.name);
+  const [tab, setTab] = useSharedState('crewConsole-tab', 'List');
+  const [searchText, setSearchText] = useSharedState('crewConsole-search', '');
+  const [highlightedSensors, setHighlightedSensors] = useSharedState(
+    'crewConsole-highlighted2',
+    [],
+  );
+  const [headsOnly, setHeadsOnly] = useSharedState('crewConsole-heads', false);
+  const [sortAsc, setSortAsc] = useSharedState('crewConsole-sortAsc', true);
+  const [sortBy, setSortBy] = useSharedState(
+    'crewConsole-sortBy',
+    Object.keys(sortTypes)[0],
+  );
 
-  const sorted = sensors.filter(nameSearch).sort((a, b) => {
-    switch (sortBy) {
-      case 'name':
-        return sortAsc ? +(a.name > b.name) : +(b.name > a.name);
-      case 'ijob':
-        return sortAsc ? a.ijob - b.ijob : b.ijob - a.ijob;
-      case 'health':
-        return sortAsc ? healthSort(a, b) : healthSort(b, a);
-      case 'area':
-        return sortAsc ? areaSort(a, b) : areaSort(b, a);
-      case 'head':
-        return sortAsc ? headSort(a, b) : headSort(b, a);
+  const nameSearch = createSearch(searchText, (crew: CrewSensor) => crew.name);
+  let sorted = sensors;
+  if (searchText) {
+    sorted = sensors.filter(nameSearch);
+  }
+
+  sorted.sort(sortTypes[sortBy]);
+  if (!sortAsc) {
+    sorted = sorted.reverse();
+  }
+
+  const decideTab = (tab) => {
+    switch (tab) {
+      case 'List':
+        return (
+          <CrewTable
+            sorted_sensors={sorted}
+            highlightedSensors={highlightedSensors}
+            setHighlightedSensors={setHighlightedSensors}
+          />
+        );
+      case 'Map':
+        return (
+          <CrewMap
+            sorted_sensors={sorted}
+            highlightedSensors={highlightedSensors}
+            searchText={searchText}
+            headsOnly={headsOnly}
+          />
+        );
       default:
-        return 0;
+        return "WE SHOULDN'T BE HERE!";
     }
-  });
+  };
 
+  return (
+    <Stack fill vertical>
+      <Stack.Item>
+        <Section
+          fill
+          fitted
+          title={
+            <Stack fill m={-0.75} pt={1} pl={1} pr={1}>
+              <Stack.Item grow>
+                <Tabs m={-1}>
+                  <Tabs.Tab
+                    icon="table"
+                    selected={tab === 'List'}
+                    onClick={() => setTab('List')}
+                  >
+                    List
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    icon="map"
+                    selected={tab === 'Map'}
+                    onClick={() => setTab('Map')}
+                  >
+                    Map
+                  </Tabs.Tab>
+                </Tabs>
+              </Stack.Item>
+              <Stack.Item>
+                <SearchBar
+                  noIcon
+                  style={{ width: '20rem', height: '2.2rem' }}
+                  query={searchText}
+                  onSearch={setSearchText}
+                />
+              </Stack.Item>
+              {tab === 'Map' && (
+                <Stack.Item>
+                  <Button
+                    icon="wheelchair-move"
+                    tooltip="Показывать только глав"
+                    tooltipPosition="bottom-end"
+                    selected={headsOnly}
+                    onClick={() => setHeadsOnly(!headsOnly)}
+                  />
+                </Stack.Item>
+              )}
+              {tab === 'List' && (
+                <>
+                  <Stack.Item>
+                    <Dropdown
+                      selected={sortBy}
+                      options={Object.keys(sortTypes)}
+                      onSelected={(value) => setSortBy(value)}
+                    />
+                  </Stack.Item>
+                  <Stack.Item>
+                    <Button
+                      icon={
+                        sortAsc
+                          ? 'arrow-down-short-wide'
+                          : 'arrow-down-wide-short'
+                      }
+                      onClick={() => setSortAsc(!sortAsc)}
+                    />
+                  </Stack.Item>
+                </>
+              )}
+            </Stack>
+          }
+        />
+      </Stack.Item>
+      <Stack.Item grow mt={0}>
+        {decideTab(tab)}
+      </Stack.Item>
+    </Stack>
+  );
+}
+
+function CrewTable(props) {
+  const { data } = useBackend<CrewConsoleData>();
+  const { sorted_sensors, highlightedSensors, setHighlightedSensors } = props;
   return (
     <Section fill scrollable>
       <Table>
         <Table.Row>
-          <Table.Cell bold>Name</Table.Cell>
+          <Table.Cell bold collapsing>
+            <Button
+              tooltip="Очистить подсветку на карте"
+              icon="square-xmark"
+              onClick={() => setHighlightedSensors([])}
+            />
+          </Table.Cell>
+          <Table.Cell bold>Имя</Table.Cell>
           <Table.Cell bold collapsing />
           <Table.Cell bold collapsing textAlign="center">
-            Vitals
+            Состояние
           </Table.Cell>
           <Table.Cell bold textAlign="center">
-            Position
+            Местоположение
           </Table.Cell>
           {!!data.link_allowed && (
             <Table.Cell bold collapsing textAlign="center">
-              Tracking
+              Трекинг
             </Table.Cell>
           )}
         </Table.Row>
-        {sorted.map((sensor) => (
-          <CrewTableEntry sensor_data={sensor} key={sensor.ref} />
+        {sorted_sensors.map((sensor) => (
+          <CrewTableEntry
+            key={sensor.ref}
+            sensor_data={sensor}
+            highlightedSensors={highlightedSensors}
+            setHighlightedSensors={setHighlightedSensors}
+          />
         ))}
       </Table>
     </Section>
   );
 }
 
-const CrewTableEntry = (props: CrewEntryProps) => {
+const CrewTableEntry = (props) => {
   const { act, data } = useBackend<CrewConsoleData>();
   const { link_allowed } = data;
-  const { sensor_data } = props;
-  const {
-    name,
-    assignment,
-    ijob,
-    life_status,
-    oxydam,
-    toxdam,
-    burndam,
-    brutedam,
-    position,
-    can_track,
-  } = sensor_data;
+  const { sensor_data, highlightedSensors, setHighlightedSensors } = props;
+  const { name, assignment, ijob, life_status, oxydam, position, can_track } =
+    sensor_data;
 
   return (
     <Table.Row className="candystripe">
+      <Table.Cell>
+        <Button.Checkbox
+          checked={highlightedSensors.includes(name)}
+          tooltip="Пометить на карте"
+          onClick={() =>
+            setHighlightedSensors(
+              highlightedSensors.includes(name)
+                ? highlightedSensors.filter((n) => n !== name)
+                : [...highlightedSensors, name],
+            )
+          }
+        />
+      </Table.Cell>
       <Table.Cell bold={jobIsHead(ijob)} color={jobToColor(ijob)}>
         {name}
         {assignment !== undefined ? ` (${assignment})` : ''}
@@ -323,13 +368,7 @@ const CrewTableEntry = (props: CrewEntryProps) => {
         {oxydam !== undefined ? (
           <Icon
             name={statToIcon(life_status)}
-            color={healthToAttribute(
-              oxydam,
-              toxdam,
-              burndam,
-              brutedam,
-              HEALTH_COLOR_BY_LEVEL,
-            )}
+            color={healthToAttribute(sensor_data, HEALTH_COLOR_BY_LEVEL)}
             size={1}
           />
         ) : life_status !== STAT_DEAD ? (
@@ -339,21 +378,7 @@ const CrewTableEntry = (props: CrewEntryProps) => {
         )}
       </Table.Cell>
       <Table.Cell collapsing textAlign="center">
-        {oxydam !== undefined ? (
-          <Box inline>
-            <HealthStat type="oxy" value={oxydam} />
-            {'|'}
-            <HealthStat type="toxin" value={toxdam} />
-            {'|'}
-            <HealthStat type="burn" value={burndam} />
-            {'|'}
-            <HealthStat type="brute" value={brutedam} />
-          </Box>
-        ) : life_status !== STAT_DEAD ? (
-          'Живой'
-        ) : (
-          'Мёртв'
-        )}
+        <HealthStat sensor_data={sensor_data} />
       </Table.Cell>
       <Table.Cell>
         {position?.area !== '~' && position?.area !== undefined ? (
@@ -383,7 +408,7 @@ const CrewTableEntry = (props: CrewEntryProps) => {
 function CrewMap(props) {
   const { act, data } = useBackend<CrewConsoleData>();
   const { mapData, sensors } = data;
-  const { searchQuery, sortBy, sortAsc } = props;
+  const { sorted_sensors, highlightedSensors, searchText, headsOnly } = props;
   const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
 
   return (
@@ -400,15 +425,17 @@ function CrewMap(props) {
               key={sensor.ref}
               posX={sensor.position?.x}
               posY={sensor.position?.y}
-              color={healthToAttribute(
-                sensor.oxydam,
-                sensor.toxdam,
-                sensor.burndam,
-                sensor.brutedam,
-                HEALTH_COLOR_BY_LEVEL,
-              )}
+              color={healthToAttribute(sensor, HEALTH_COLOR_BY_LEVEL)}
+              icon={sensor.life_status === STAT_DEAD && 'skull'}
               tooltip={<CrewMapTooltip sensor_data={sensor} />}
-              hidden={sensor.position?.z !== selectedLevel}
+              hidden={
+                sensor.position?.z !== selectedLevel ||
+                (headsOnly && sensor.ijob % 10 !== 0)
+              }
+              selected={
+                (searchText && sorted_sensors.includes(sensor)) ||
+                highlightedSensors.includes(sensor.name)
+              }
               onClick={() =>
                 act('select_person', {
                   name: sensor.name,
@@ -421,24 +448,25 @@ function CrewMap(props) {
   );
 }
 
-const CrewMapTooltip = (props: CrewEntryProps) => {
+const CrewMapTooltip = (props) => {
   const { sensor_data } = props;
   const position = sensor_data.position;
-
   return (
     <Section m={-1} title={sensor_data.name} fontSize={0.9}>
       <LabeledList>
-        <LabeledList.Item label="Состояние">
-          {sensor_data.life_status !== STAT_DEAD ? 'Живой' : 'Труп'}
+        <LabeledList.Item
+          label="Состояние"
+          color={sensor_data.life_status === STAT_DEAD ? '#e74c3c' : '#17d568'}
+        >
+          {sensor_data.life_status === STAT_DEAD ? 'Мёртв' : 'Живой'}
         </LabeledList.Item>
-        {!!position && (
-          <>
-            <LabeledList.Item label="Локация">{position.area}</LabeledList.Item>
-            <LabeledList.Item label="Местоположение">
-              X: {position.x}, Y: {position.y}, Z: {position.z}
-            </LabeledList.Item>
-          </>
-        )}
+        <LabeledList.Item label="Здоровье">
+          <HealthStat sensor_data={sensor_data} />
+        </LabeledList.Item>
+        <LabeledList.Item label="Локация">{position?.area}</LabeledList.Item>
+        <LabeledList.Item label="Местоположение">
+          X: {position?.x}, Y: {position?.y}, Z: {position?.z}
+        </LabeledList.Item>
       </LabeledList>
     </Section>
   );

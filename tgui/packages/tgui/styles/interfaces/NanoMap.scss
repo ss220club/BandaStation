@@ -109,10 +109,16 @@ $blur: saturate(150%) blur(12px);
 
   &__Marker {
     border-radius: 99999px;
+    transform: scale(1.25);
     transition: transform 0.2s;
 
     &--selected {
       transform: scale(1.5);
+    }
+
+    .Icon {
+      margin: 0;
+      transform: translate(-0.25px, 1.25px);
     }
   }
 }

@@ -424,7 +424,10 @@ function MapMarker(props) {
       <KeepScale>
         <Button
           {...rest}
-          className="NanoMap__Marker"
+          className={classes([
+            'NanoMap__Marker',
+            props.selected && 'NanoMap__Marker--selected',
+          ])}
           style={{ backgroundColor: color }}
           tooltipPosition={'top-end'}
           onClick={(event) => {
