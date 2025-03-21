@@ -70,7 +70,7 @@
 	pixel_y = base_pixel_y + rand(-8, 8)
 
 	if(default_raw_text)
-		add_raw_text(default_raw_text)
+		add_raw_text(replace_text_keys(default_raw_text))
 
 	update_appearance()
 
@@ -666,25 +666,6 @@
 	for(var/datum/paper_input/line as anything in raw_text_inputs)
 		paper_contents += line.get_raw_text() + "/"
 	return paper_contents
-
-/obj/item/paper/proc/replace_text_keys(raw_text, mob/user)
-	var/regex/key_regex = new(@"\[\w+\]","gm")
-
-	var/result = raw_text
-	while(key_regex.Find(result))
-		var/matched_text = key_regex.match
-		var/key = copytext(matched_text, 2, length(matched_text))
-
-		var/datum/paper_replacement/replacement = GLOB.paper_replacements[key]
-		if(!replacement)
-			continue
-
-		var/replacement_text = replacement.get_replacement(user)
-		result = splicetext(result, key_regex.index, key_regex.index + length(matched_text), replacement_text)
-
-		key_regex.next = key_regex.next + (length(matched_text) - length(replacement_text))
-
-	return result
 
 /obj/item/paper/proc/add_raw_text_to_input_field(datum/paper_input/field_holder, input_field_id, raw_text, list/writing_implement_data, mob/user)
 	PRIVATE_PROC(TRUE)

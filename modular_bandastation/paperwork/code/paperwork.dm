@@ -7,6 +7,21 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 		paper_replacements[paper_replacement.key] = paper_replacement
 	return paper_replacements
 
+/proc/replace_text_keys(raw_text, mob/user)
+	var/regex/key_regex = new(@"\[(\w+)\]","gm")
+
+	var/result = raw_text
+	while(key_regex.Find(result))
+		var/matched_text = key_regex.match
+		var/datum/paper_replacement/replacement = GLOB.paper_replacements[key_regex.group[1]]
+		if(!replacement)
+			continue
+
+		var/replacement_text = replacement.get_replacement(user)
+		result = splicetext(result, key_regex.index, key_regex.index + length(matched_text), replacement_text)
+
+	return result
+
 
 /datum/paper_replacement
 	var/key = null
@@ -14,6 +29,13 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 
 /datum/paper_replacement/proc/get_replacement(mob/user)
 	CRASH("Paper replacement get_replacement not implemented.")
+
+/datum/paper_replacement/name
+	key = "name"
+	name = "Имя"
+
+/datum/paper_replacement/name/get_replacement(mob/user)
+	return user.real_name || "неизвестный"
 
 /datum/paper_replacement/sign
 	key = "sign"

@@ -281,7 +281,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 			if(!(params["code"] in GLOB.paper_blanks))
 				return FALSE
 			var/list/blank = GLOB.paper_blanks[params["code"]]
-			do_copies(CALLBACK(src, PROC_REF(make_blank_print), blank), usr, PAPER_PAPER_USE, PAPER_TONER_USE, num_copies)
+			do_copies(CALLBACK(src, PROC_REF(make_blank_print), blank, ui.user), usr, PAPER_PAPER_USE, PAPER_TONER_USE, num_copies)
 			return TRUE
 
 /// Returns the color used for the printing operation. If the color is below TONER_LOW_PERCENTAGE, it returns a gray color.
@@ -475,7 +475,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	return copied_paperwork
 
 /// Handles the copying of blanks. No mutating state, so this should not fail.
-/obj/machinery/photocopier/proc/make_blank_print(list/blank)
+/obj/machinery/photocopier/proc/make_blank_print(list/blank, mob/user)
 	var/copy_colour = get_toner_color()
 	var/obj/item/paper/printblank = get_empty_paper()
 
@@ -483,7 +483,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	var/printinfo = blank["info"]
 
 	printblank.name = "paper - '[printname]'"
-	printblank.add_raw_text(printinfo, color = copy_colour)
+	printblank.add_raw_text(replace_text_keys(printinfo, user), color = copy_colour)
 	printblank.update_appearance()
 
 	toner_cartridge.charges -= PAPER_TONER_USE
