@@ -3,7 +3,10 @@ import { markedSmartypants } from 'marked-smartypants';
 
 import { sanitizeText } from './sanitize';
 
-export const processedText = (value: string) => {
+export const processedText = (value: string | null) => {
+  if (!value) {
+    return undefined;
+  }
   const markedInstance = new Marked();
   markedInstance.use(
     {
