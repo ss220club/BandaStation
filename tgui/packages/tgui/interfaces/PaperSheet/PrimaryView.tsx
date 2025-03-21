@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState } from 'react';
+import { MutableRefObject, RefObject, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -15,6 +15,8 @@ import { PreviewView } from './Preview';
 import { PaperSheetStamper } from './Stamper';
 import { PaperContext, PaperInput, PaperReplacement } from './types';
 
+const replacementTokenStartRegex = /\[(\w*)$/;
+
 // Overarching component that holds the primary view for papercode.
 export function PrimaryView() {
   const [textAreaActive, setTextAreaActive] = useState(false);
@@ -22,15 +24,14 @@ export function PrimaryView() {
   const [lastDistanceFromBottom, setLastDistanceFromBottom] = useState(0);
   const [textAreaText, setTextAreaText] = useState('');
   const [parsedTextBox, setParsedTextBox] = useState('');
-  const [usedReplacements, setUsedReplacements] = useState<PaperReplacement[]>(
-    [],
-  );
+  const usedReplacementsRef = useRef<PaperReplacement[]>([]);
+
   // Reference that gets passed to the <Section> holding the main preview.
   // Eventually gets filled with a reference to the section's scroll bar
   // funtionality.
-  const scrollableRef: RefObject<HTMLDivElement> = useRef(null);
+  const scrollableRef = useRef<HTMLDivElement>(null);
 
-  const { act, data } = useBackend<PaperContext>();
+  const { data } = useBackend<PaperContext>();
   const { held_item_details } = data;
   const writeMode = canEdit(held_item_details);
 
@@ -57,7 +58,7 @@ export function PrimaryView() {
             parsedTextBox={parsedTextBox}
             setParsedTextBox={setParsedTextBox}
             setTextAreaActive={setTextAreaActive}
-            setUsedReplacements={setUsedReplacements}
+            usedReplacementsRef={usedReplacementsRef}
           />
         </Flex.Item>
         {writeMode &&
@@ -70,9 +71,9 @@ export function PrimaryView() {
                 setTextAreaText={setTextAreaText}
                 setParsedTextBox={setParsedTextBox}
                 setTextAreaActive={setTextAreaActive}
+                usedReplacementsRef={usedReplacementsRef}
                 scrollableRef={scrollableRef}
                 lastDistanceFromBottom={lastDistanceFromBottom}
-                usedReplacements={usedReplacements}
               />
             </Flex.Item>
           ) : (
@@ -103,9 +104,9 @@ type TextAreaSectionProps = {
   setTextAreaText: (textAreaText: string) => any;
   setParsedTextBox: (parsedTextBox: string) => any;
   setTextAreaActive: (textAreaActive: boolean) => any;
+  usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
   scrollableRef: RefObject<HTMLDivElement>;
   lastDistanceFromBottom: number;
-  usedReplacements: PaperReplacement[];
 };
 
 function TextAreaSection(props: TextAreaSectionProps) {
@@ -117,6 +118,7 @@ function TextAreaSection(props: TextAreaSectionProps) {
     paper_color,
     held_item_details,
     max_length,
+    replacements,
   } = data;
   const {
     activeWriteButtonId,
@@ -127,8 +129,10 @@ function TextAreaSection(props: TextAreaSectionProps) {
     setParsedTextBox,
     scrollableRef,
     lastDistanceFromBottom,
-    usedReplacements,
+    usedReplacementsRef,
   } = props;
+
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const useFont = held_item_details?.font || default_pen_font;
   const useColor = held_item_details?.color || default_pen_color;
@@ -152,7 +156,7 @@ function TextAreaSection(props: TextAreaSectionProps) {
 
     const textAreaTextWithReplacements = parseReplacements(
       `${textAreaText}${!activeWriteButtonId ? '<br>' : ''}`,
-      usedReplacements,
+      usedReplacementsRef.current,
     );
     const addTextData = activeWriteButtonId
       ? (() => {
@@ -170,6 +174,39 @@ function TextAreaSection(props: TextAreaSectionProps) {
     act('add_text', addTextData);
     setTextAreaText('');
     setParsedTextBox('');
+  }
+
+  function getReplacementHints(): PaperReplacement[] {
+    if (!textAreaRef.current) {
+      return [];
+    }
+
+    console.log('selection start: ' + textAreaRef.current.selectionStart);
+    console.log('text content: ' + textAreaRef.current.value);
+    const textAreaValue = textAreaRef.current.value;
+    const selectionStart = textAreaRef.current.selectionStart;
+    if (!textAreaValue || !selectionStart) {
+      return [];
+    }
+
+    const match = textAreaValue
+      .substring(0, selectionStart)
+      .match(replacementTokenStartRegex);
+
+    if (!match) {
+      return [];
+    }
+
+    if (match[0] === '[') {
+      return replacements.sort((a, b) => a.key.length - b.key.length);
+    }
+
+    const tokenKey = match[1];
+    console.log('tokenKey: ' + tokenKey);
+
+    return replacements
+      .filter((value) => value.key.startsWith(tokenKey))
+      .sort((a, b) => a.key.length - b.key.length);
   }
 
   return (
@@ -201,6 +238,7 @@ function TextAreaSection(props: TextAreaSectionProps) {
       }
     >
       <TextArea
+        ref={textAreaRef}
         autoFocus
         scrollbar
         noborder
@@ -210,6 +248,14 @@ function TextAreaSection(props: TextAreaSectionProps) {
         bold={useBold}
         height="100%"
         backgroundColor={paper_color}
+        onKeyUp={() => {
+          // TODO: сделать хинт над вводимым текстом
+          console.log('replacement: ' + JSON.stringify(getReplacementHints()));
+        }}
+        onClick={() => {
+          // TODO: сделать хинт над вводимым текстом
+          console.log('replacement: ' + JSON.stringify(getReplacementHints()));
+        }}
         onInput={(e, text) => {
           setTextAreaText(text);
 

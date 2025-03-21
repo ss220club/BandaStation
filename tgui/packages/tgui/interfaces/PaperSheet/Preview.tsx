@@ -1,6 +1,13 @@
 import { Marked } from 'marked';
 import { markedSmartypants } from 'marked-smartypants';
-import { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
+import {
+  MutableRefObject,
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { Box, Section } from 'tgui-core/components';
 import { debounce } from 'tgui-core/timer';
 
@@ -42,7 +49,7 @@ type PreviewViewProps = {
   parsedTextBox: string;
   setParsedTextBox: (activeWriteButtonId: string) => any;
   setTextAreaActive: (textAreaActive: boolean) => any;
-  setUsedReplacements: (usedReplacements: PaperReplacement[]) => any;
+  usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
 };
 
 // Regex that finds [input_field] fields.
@@ -71,7 +78,7 @@ export function PreviewView(props: PreviewViewProps) {
     parsedTextBox,
     setParsedTextBox,
     setTextAreaActive,
-    setUsedReplacements,
+    usedReplacementsRef,
   } = props;
 
   const { data } = useBackend<PaperContext>();
@@ -114,6 +121,7 @@ export function PreviewView(props: PreviewViewProps) {
         advancedHtmlUser,
         replacements,
       ) => {
+        usedReplacementsRef.current = replacements;
         setParsedTextBox(
           parseReplacements(
             formatAndProcessRawText(
@@ -126,7 +134,6 @@ export function PreviewView(props: PreviewViewProps) {
             replacements,
           ),
         );
-        setUsedReplacements(replacements);
       },
       500,
     ),
