@@ -8,6 +8,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
     var/variable = null
     var/subwindowTitle = ""
     var/objList = list()
+    var/whereDropdownValue = ""
 
 /datum/gamepanel/New(user)
     if(istype(user, /client))
@@ -47,6 +48,9 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
         if("create-mob")
             subwindowTitle = "Create Mob"
             objList = typesof(/mob)
+        if("where-dropdown-changed")
+            whereDropdownValue = params?["newWhere"]
+
 
 // /datum/gamepanel/ui_static_data(mob/user)
 // 	. = ..()
@@ -57,6 +61,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 /datum/gamepanel/ui_data(mob/user)
     . = ..()
     var/list/data = list()
-    data["subwindowTitle"] = subwindowTitle
+    data["subwindowTitle"] = subwindowTitle || "nothing"
     data["objList"] = objList
+    data["whereDropdownValue"] = whereDropdownValue
     return data
