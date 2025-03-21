@@ -126,5 +126,9 @@ $font-size: 24px;
 
   .Section__title {
     border-bottom: none;
+
+    &Text {
+      color: black;
+    }
   }
 }

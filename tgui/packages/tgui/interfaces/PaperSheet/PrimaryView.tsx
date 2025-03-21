@@ -151,7 +151,7 @@ function TextAreaSection(props: TextAreaSectionProps) {
     }
 
     const textAreaTextWithReplacements = parseReplacements(
-      textAreaText,
+      `${textAreaText}${!activeWriteButtonId ? '<br>' : ''}`,
       usedReplacements,
     );
     const addTextData = activeWriteButtonId
@@ -174,10 +174,9 @@ function TextAreaSection(props: TextAreaSectionProps) {
 
   return (
     <Section
-      color="black"
-      title="Insert Text"
-      fitted
       fill
+      fitted
+      title="Вставьте текст"
       buttons={
         <>
           <Box inline pr={'5px'} color={tooManyCharacters ? 'bad' : 'default'}>
@@ -188,7 +187,7 @@ function TextAreaSection(props: TextAreaSectionProps) {
             color="good"
             onClick={onConfirmButtonClick}
           >
-            Save
+            Сохранить
           </Button.Confirm>
           <Button
             iconPosition="right"
@@ -202,6 +201,7 @@ function TextAreaSection(props: TextAreaSectionProps) {
       }
     >
       <TextArea
+        autoFocus
         scrollbar
         noborder
         value={textAreaText}

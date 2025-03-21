@@ -5,14 +5,42 @@
   * @license ISC
   */
 
+@use '../colors';
+
 .Paper {
   &__Stamp {
     position: absolute;
     pointer-events: none;
     user-select: none;
   }
+
   &__Page {
     word-break: break-word;
     word-wrap: break-word;
+
+    button {
+      cursor: pointer;
+      padding: 0.1rem 0.33rem;
+      background-color: hsla(0, 0%, 50%, 0.1);
+      border: 1px solid hsla(0, 0%, 0%, 0.2);
+      border-radius: 0.25rem;
+
+      &:hover {
+        background-color: hsla(0, 0%, 50%, 0.2);
+      }
+
+      &[aria-checked='true'] {
+        background-color: transparent;
+        border-color: colors.$green;
+      }
+
+      &.icon_only {
+        padding: 0.1rem 0.175rem;
+      }
+
+      i {
+        pointer-events: none;
+      }
+    }
   }
 }

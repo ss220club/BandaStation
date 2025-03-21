@@ -11,7 +11,6 @@ import {
   canEdit,
   createWriteButtonId,
   parseReplacements,
-  tokenizer,
   walkTokens,
 } from './helpers';
 import { StampView } from './StampView';
@@ -214,13 +213,13 @@ export function PreviewView(props: PreviewViewProps) {
   ) {
     return editMode
       ? insertTextAreaPreview(parsedDmText, parsedTextBox, writeButtonId) +
-          "<button id='document_end'>Писать в конец</button>"
+          "<button id='document_end'><i class='fa fa-file-pen'></i> Писать в конец</button>"
       : parsedDmText;
   }
 
   function createWriteButton(id?: string): string {
     return editMode
-      ? `<button${id ? ` id='${id}'` : ''} class='write-button'>Write</button>`
+      ? `<button${id ? ` id='${id}'` : ''} class='icon_only'><i class='fa fa-pen'></i></button>`
       : '';
   }
 
@@ -235,7 +234,6 @@ export function PreviewView(props: PreviewViewProps) {
   }
 
   function onEndWriteButtonClick(ev: MouseEvent) {
-    const button = ev.target as HTMLInputElement;
     if (activeWriteButtonId) {
       setActiveWriteButtonId('');
     }
@@ -333,22 +331,8 @@ export function PreviewView(props: PreviewViewProps) {
 
   function createAndConfigureMarked() {
     const markedInstance = new Marked();
-    const inputField = {
-      name: 'inputField',
-      level: 'inline',
-      start(src) {
-        return src.match(/\[/)?.index;
-      },
-      tokenizer,
-      renderer(token) {
-        return `${token.raw}`;
-      },
-      walkTokens,
-    };
-
     markedInstance.use(
       {
-        extensions: [inputField],
         breaks: true,
         gfm: true,
         walkTokens: walkTokens,
@@ -375,14 +359,14 @@ export function PreviewView(props: PreviewViewProps) {
     const buttons = document.querySelectorAll("[id^='paperfield_']");
     [].forEach.call(buttons, (button: HTMLButtonElement) => {
       if (button.id === activeButtonId) {
-        button.style.backgroundColor = 'white';
+        button.ariaChecked = 'true';
       }
       button.addEventListener('click', onWriteButtonClick);
     });
     return () =>
       [].forEach.call(buttons, (button: HTMLButtonElement) => {
         if (button.id === activeButtonId) {
-          button.style.backgroundColor = '';
+          button.ariaChecked = 'false';
         }
         button.removeEventListener('click', onWriteButtonClick);
       });
