@@ -656,7 +656,7 @@
 /obj/item/paper/proc/get_total_length()
 	var/total_length = 0
 	for(var/datum/paper_input/entry as anything in raw_text_inputs)
-		total_length += entry.get_raw_text_lenght()
+		total_length += entry.get_raw_text_length()
 
 	return total_length
 
@@ -786,13 +786,13 @@
 
 	return final_raw_text
 
-/datum/paper_input/proc/get_raw_text_lenght()
+/datum/paper_input/proc/get_raw_text_length()
 	var/static/child_key_base_length = 8
 	var/total_length = length(raw_text)
 	for(var/index = 1, index <= length(children), index++)
 		var/datum/paper_input/child = children[index]
 		var/key_total_length = child_key_base_length + length("[index]")
-		total_length += child.get_raw_text_lenght() - key_total_length
+		total_length += child.get_raw_text_length() - key_total_length
 
 	return total_length
 
