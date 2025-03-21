@@ -78,7 +78,10 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 	name = "Должность"
 
 /datum/paper_replacement/job/get_replacement(mob/user)
-	return istype(user) ? job_title_ru(user.job) : "отсутствует"
+	if(!istype(user))
+		return "отсутствует"
+
+	return isnull(user.job) ? "отсутствует" : job_title_ru(user.job)
 
 /datum/paper_replacement/species
 	key = "species"

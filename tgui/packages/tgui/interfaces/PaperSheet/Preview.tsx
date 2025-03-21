@@ -355,17 +355,16 @@ export function PreviewView(props: PreviewViewProps) {
   );
 
   useEffect(() => {
-    const activeButtonId = activeWriteButtonId;
     const buttons = document.querySelectorAll("[id^='paperfield_']");
     [].forEach.call(buttons, (button: HTMLButtonElement) => {
-      if (button.id === activeButtonId) {
+      if (button.id === activeWriteButtonId) {
         button.ariaChecked = 'true';
       }
       button.addEventListener('click', onWriteButtonClick);
     });
     return () =>
       [].forEach.call(buttons, (button: HTMLButtonElement) => {
-        if (button.id === activeButtonId) {
+        if (button.id === activeWriteButtonId) {
           button.ariaChecked = 'false';
         }
         button.removeEventListener('click', onWriteButtonClick);
@@ -374,10 +373,22 @@ export function PreviewView(props: PreviewViewProps) {
 
   useEffect(() => {
     const endButton = document.getElementById('document_end');
-    endButton?.addEventListener('click', onEndWriteButtonClick);
+    if (endButton) {
+      endButton.addEventListener('click', onEndWriteButtonClick);
+      if (!activeWriteButtonId) {
+        endButton.ariaChecked = 'true';
+      }
+    }
 
-    return () => endButton?.removeEventListener('click', onEndWriteButtonClick);
-  }, [previewText]);
+    return () => {
+      if (endButton) {
+        endButton.removeEventListener('click', onEndWriteButtonClick);
+        if (!activeWriteButtonId) {
+          endButton.ariaChecked = 'false';
+        }
+      }
+    };
+  }, [previewText, activeWriteButtonId]);
 
   const textHTML = {
     __html: `<span class='paper-text'>${previewText}</span>`,
