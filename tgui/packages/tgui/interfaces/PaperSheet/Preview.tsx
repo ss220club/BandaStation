@@ -6,7 +6,6 @@ import { debounce } from 'tgui-core/timer';
 
 import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
-import { createLogger } from '../../logging';
 import { sanitizeText } from '../../sanitize';
 import {
   canEdit,
@@ -64,8 +63,6 @@ const specialTokenRegex: RegExp = /\[(\w+)(?:\s+(?:\w+=\w+))*\]/gi;
  * raw and field input arrays.
  */
 export function PreviewView(props: PreviewViewProps) {
-  const logger = createLogger('PaperPreview');
-
   const {
     scrollableRef,
     handleOnScroll,
@@ -109,21 +106,31 @@ export function PreviewView(props: PreviewViewProps) {
   });
 
   const parseTextBoxDataCallback = useCallback(
-    debounce((textArea, fontFace, fontColor, fontBold, advancedHtmlUser) => {
-      setParsedTextBox(
-        parseReplacements(
-          formatAndProcessRawText(
-            textArea,
-            fontFace,
-            fontColor,
-            fontBold,
-            advancedHtmlUser,
+    debounce(
+      (
+        textArea,
+        fontFace,
+        fontColor,
+        fontBold,
+        advancedHtmlUser,
+        replacements,
+      ) => {
+        setParsedTextBox(
+          parseReplacements(
+            formatAndProcessRawText(
+              textArea,
+              fontFace,
+              fontColor,
+              fontBold,
+              advancedHtmlUser,
+            ),
+            replacements,
           ),
-          replacements,
-        ),
-      );
-      setUsedReplacements(replacements);
-    }, 500),
+        );
+        setUsedReplacements(replacements);
+      },
+      500,
+    ),
     [],
   );
 
@@ -146,6 +153,7 @@ export function PreviewView(props: PreviewViewProps) {
       fontColor,
       fontBold,
       advanced_html_user,
+      replacements,
     );
   }
 
