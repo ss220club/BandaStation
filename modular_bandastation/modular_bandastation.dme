@@ -72,3 +72,5 @@
 #include "storyteller/code/storytellers/storyteller_prime.dm"
 #include "storyteller/code/storytellers/storyteller_prime_moon.dm"
 #endif
+
+#include "paperwork/_paperwork.dme"

@@ -119,66 +119,12 @@ $font-size: 24px;
   }
 
   .paper-text {
-    input:disabled {
-      position: relative;
-      display: inline-block;
-      border: none;
-      background: transparent;
-      border-bottom: 1px solid hsl(0, 0%, 0%);
-      outline: none;
-      background-color: hsla(60, 100%, 60%, 0.8);
-      padding: 0 4px;
-      margin-right: 2px;
-      line-height: 17px;
-      overflow: visible;
-    }
-
-    input {
-      position: relative;
-      display: inline-block;
-      border: none;
-      background: transparent;
-      border-bottom: 1px solid hsl(0, 0%, 0%);
-      outline: none;
-      background-color: hsla(60, 100%, 60%, 0.8);
-      padding: 0 4px;
-      margin-right: 2px;
-      line-height: 17px;
-      overflow: visible;
+    td:has(img) {
+      vertical-align: middle;
     }
   }
 
   .Section__title {
     border-bottom: none;
-  }
-
-  .paper-field {
-    position: relative;
-    display: inline-block;
-
-    border: none;
-    background: transparent;
-    border-bottom: 1px solid hsl(0, 0%, 0%);
-    outline: none;
-    background-color: hsla(60, 100%, 60%, 0.8);
-    padding: 0 4px;
-    margin-right: 2px;
-    line-height: 17px;
-    overflow: visible;
-
-    input:disabled {
-      position: relative;
-      display: inline-block;
-
-      border: none;
-      background: transparent;
-      border-bottom: 1px solid hsl(0, 0%, 0%);
-      outline: none;
-      background-color: hsla(60, 100%, 60%, 0.8);
-      padding: 0 4px;
-      margin-right: 2px;
-      line-height: 17px;
-      overflow: visible;
-    }
   }
 }
