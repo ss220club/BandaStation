@@ -15,10 +15,9 @@ export function PaperSheet(props) {
       width={600}
       height={500 + TEXTAREA_INPUT_HEIGHT}
     >
-      <Window.Content backgroundColor={paper_color} className="Paper">
+      <Window.Content backgroundColor={paper_color}>
         <PrimaryView />
       </Window.Content>
     </Window>
   );
 }
-  
