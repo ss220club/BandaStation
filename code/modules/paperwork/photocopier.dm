@@ -55,13 +55,14 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	var/list/parsed_blanks = list()
 	for(var/paper_blank in blanks_json)
 		var/blank_info = paper_blank["info"]
+		var/info_file_path = "[BLANKS_CONTENT_FOLDER]/[blank_info]"
 		if(islist(blank_info))
 			var/list/blank_info_list = blank_info
 			paper_blank["info"] = blank_info_list.Join("")
+		else if(fexists(info_file_path))
+			paper_blank["info"] = file2text(info_file_path)
 		else
-			var/info_file_path = "[BLANKS_CONTENT_FOLDER]/[blank_info]"
-			if(fexists(info_file_path))
-				paper_blank["info"] = file2text(info_file_path)
+			continue
 
 		parsed_blanks["[paper_blank["code"]]"] = paper_blank
 
