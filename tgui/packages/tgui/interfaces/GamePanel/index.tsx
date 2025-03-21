@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Button, Dropdown, Input, Stack, Tabs } from 'tgui-core/components';
+import {
+  Button,
+  Dropdown,
+  Input,
+  Stack,
+  Table,
+  Tabs,
+} from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
@@ -7,22 +14,31 @@ import { Window } from '../../layouts';
 export function GamePanel(props) {
   const { act, data } = useBackend<GamePanelData>();
   const { subwindowTitle, objList, whereDropdownValue } = data;
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(-1);
+  const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
+  const [selectedObj, setSelectedObj] = useState(0);
   const [whereDropdownVal, setWhereDropdownVal] = useState(
     'On floor below own mob',
   );
+  let newSearchTextValue: string = '/';
   const whereDropdownOptions = [
     'On floor below own mob',
     'On floor below own mob, dropped via supply pod',
     "In own's mob hand",
     'In marked object',
   ];
+  function clearSearchText() {
+    newSearchTextValue = '/';
+    setSearchText('');
+  }
+
   const tabs = [
     {
       content: 'Create Object',
       handleClick: () => {
         setSelectedTab(0);
+        clearSearchText();
         act('create-object');
       },
       icon: 'fa-wrench',
@@ -31,6 +47,7 @@ export function GamePanel(props) {
       content: 'Quick Create Object',
       handleClick: () => {
         setSelectedTab(1);
+        clearSearchText();
         act('quick-create-object');
       },
       icon: 'fa-bolt',
@@ -39,6 +56,7 @@ export function GamePanel(props) {
       content: 'Create Turf',
       handleClick: () => {
         setSelectedTab(2);
+        clearSearchText();
         act('create-turf');
       },
       icon: 'fa-map',
@@ -47,6 +65,7 @@ export function GamePanel(props) {
       content: 'Create Mob',
       handleClick: () => {
         setSelectedTab(3);
+        clearSearchText();
         act('create-mob');
       },
       icon: 'fa-person',
@@ -99,8 +118,18 @@ export function GamePanel(props) {
                   width="280px"
                   ml={1}
                   placeholder={'Search for ' + subwindowTitle?.split(' ')[1]}
+                  onEnter={(e, value) => {
+                    value = value === '' ? '/' : value;
+                    newSearchTextValue = value;
+                    setSearchText(value);
+                  }}
+                  onChange={(e, value) => {
+                    newSearchTextValue = value;
+                  }}
                 />
-                <Button onClick={() => act('update-search')}>Search</Button>
+                <Button onClick={() => setSearchText(newSearchTextValue)}>
+                  Search
+                </Button>
               </Stack.Item>
               <Stack.Item>
                 Offset: <Input width="250px" mr={2} placeholder="x,y,z" />
@@ -130,7 +159,9 @@ export function GamePanel(props) {
                 Name: <Input width="180px" mr={1} />
               </Stack.Item>
               <Stack.Item>
+                Where:
                 <Dropdown
+                  ml={1}
                   width="320px"
                   options={whereDropdownOptions}
                   onSelected={(value) => {
@@ -141,6 +172,38 @@ export function GamePanel(props) {
                   }}
                   selected={whereDropdownVal}
                 />
+              </Stack.Item>
+              <Stack.Item>
+                <Button onClick={() => act('create-object')}>Spawn</Button>
+              </Stack.Item>
+              <Stack.Divider />
+              <Stack.Item overflow="auto">
+                <Table>
+                  {objList
+                    .filter((obj) => {
+                      return searchText === ''
+                        ? false
+                        : obj.includes(searchText);
+                    })
+                    .map((obj, index) => (
+                      <Table.Row key={index} height="25px">
+                        <Table.Cell height="25px">
+                          <Button
+                            height="25px"
+                            color="transparent"
+                            fluid
+                            selected={selectedObj === index}
+                            onClick={() => {
+                              setSelectedObj(index);
+                              act('selected-object-changed', { newObj: index });
+                            }}
+                          >
+                            {obj}
+                          </Button>
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                </Table>
               </Stack.Item>
             </Stack>
           </Stack.Item>
