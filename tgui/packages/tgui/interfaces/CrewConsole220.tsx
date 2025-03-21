@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import {
   Button,
-  Icon,
   Dropdown,
+  Icon,
+  LabeledList,
   Section,
   Stack,
   Table,
   Tabs,
-  LabeledList,
 } from 'tgui-core/components';
 import { BooleanLike } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
@@ -430,7 +430,7 @@ function CrewMap(props) {
               tooltip={<CrewMapTooltip sensor_data={sensor} />}
               hidden={
                 sensor.position?.z !== selectedLevel ||
-                (headsOnly && sensor.ijob % 10 !== 0)
+                (headsOnly && jobIsHead(sensor.ijob))
               }
               selected={
                 (searchText && sorted_sensors.includes(sensor)) ||
