@@ -1,4 +1,4 @@
-import { createRef, RefObject, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -28,7 +28,7 @@ export function PrimaryView() {
   // Reference that gets passed to the <Section> holding the main preview.
   // Eventually gets filled with a reference to the section's scroll bar
   // funtionality.
-  const scrollableRef: RefObject<HTMLDivElement> = createRef();
+  const scrollableRef: RefObject<HTMLDivElement> = useRef(null);
 
   const { act, data } = useBackend<PaperContext>();
   const { held_item_details } = data;
