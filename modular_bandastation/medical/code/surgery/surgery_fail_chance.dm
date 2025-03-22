@@ -26,8 +26,8 @@
 
 /datum/status_effect/grouped/stasis/on_apply()
 	. = ..()
-	add_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
+	owner.add_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/grouped/stasis/on_remove()
 	. = ..()
-	remove_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
+	owner.remove_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
