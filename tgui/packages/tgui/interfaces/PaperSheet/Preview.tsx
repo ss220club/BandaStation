@@ -3,7 +3,6 @@ import { markedSmartypants } from 'marked-smartypants';
 import { MutableRefObject, RefObject, useEffect, useMemo } from 'react';
 import { Box, Section } from 'tgui-core/components';
 
-import { useBackend } from '../../backend';
 import { sanitizeText } from '../../sanitize';
 import { SPECIAL_TOKENS } from './constants';
 import {
@@ -40,6 +39,7 @@ const CUSTOM_TOKENS: CustomToken[] = [
 ];
 
 type PreviewViewProps = {
+  paperContext: PaperContext;
   scrollableRef: RefObject<HTMLDivElement>;
   handleOnScroll: (this: GlobalEventHandlers, ev: Event) => any;
   activeWriteButtonId: string;
@@ -69,6 +69,7 @@ const DOCUMENT_END_BUTTON_ID = 'document_end';
  */
 export function PreviewView(props: PreviewViewProps) {
   const {
+    paperContext,
     scrollableRef,
     handleOnScroll,
     activeWriteButtonId,
@@ -78,7 +79,6 @@ export function PreviewView(props: PreviewViewProps) {
     usedReplacementsRef,
   } = props;
 
-  const { data } = useBackend<PaperContext>();
   const {
     raw_text_input,
     default_pen_font,
@@ -87,7 +87,7 @@ export function PreviewView(props: PreviewViewProps) {
     advanced_html_user,
     paper_color,
     replacements,
-  } = data;
+  } = paperContext;
 
   const editMode = canEdit(held_item_details);
   const fontFace = held_item_details?.font || default_pen_font;

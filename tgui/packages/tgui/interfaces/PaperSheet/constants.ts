@@ -2,6 +2,7 @@ import { resolveAsset } from '../../assets';
 import { blankPropRegex, propRegex } from './helpers';
 
 export const TEXTAREA_INPUT_HEIGHT = 300;
+export const replacementTokenStartRegex = /\[(\w*)$/;
 
 export const SPECIAL_TOKENS = {
   blank_header: (value: string) => {
