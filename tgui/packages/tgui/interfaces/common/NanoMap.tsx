@@ -408,7 +408,7 @@ NanoMap.Button = MapButton;
 
 /** TODO: Add types when <Button> types will exported */
 function MapMarker(props) {
-  const { posX, posY, hidden, color, ...rest } = props;
+  const { posX, posY, hidden, color, highlighted, ...rest } = props;
   const markerId = `${posX}_${posY}`;
 
   return (
@@ -418,24 +418,28 @@ function MapMarker(props) {
         'NanoMap__Marker--wrapper',
         hidden && 'NanoMap__Marker--hidden',
         props.selected && 'NanoMap__Marker--selected',
+        highlighted && 'highlighted',
       ])}
       style={{ left: posToPx(posX), bottom: posToPx(posY) }}
     >
       <KeepScale>
-        <Button
-          {...rest}
-          className={classes([
-            'NanoMap__Marker',
-            props.selected && 'NanoMap__Marker--selected',
-          ])}
-          style={{ backgroundColor: color }}
-          tooltipPosition={'top-end'}
-          onClick={(event) => {
-            if (props.onClick) {
-              props.onClick(event);
-            }
-          }}
-        />
+        <div className="NanoMap__Marker--container">
+          <div className={highlighted && 'NanoMap__Marker--highlighted'} />
+          <Button
+            {...rest}
+            className={classes([
+              'NanoMap__Marker',
+              props.selected && 'NanoMap__Marker--selected',
+            ])}
+            style={{ backgroundColor: color }}
+            tooltipPosition={'top-end'}
+            onClick={(event) => {
+              if (props.onClick) {
+                props.onClick(event);
+              }
+            }}
+          />
+        </div>
       </KeepScale>
     </div>
   );

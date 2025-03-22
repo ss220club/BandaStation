@@ -1,15 +1,21 @@
-import { Button, Dropdown, Section, Stack, Tabs } from 'tgui-core/components';
+import {
+  Button,
+  Dropdown,
+  Section,
+  Stack,
+  Tabs,
+  Input,
+} from 'tgui-core/components';
 import { createSearch } from 'tgui-core/string';
 
 import { useBackend, useSharedState } from '../../backend';
 import { Window } from '../../layouts';
-import { SearchBar } from '../common/SearchBar';
 import { sortTypes } from './constants';
 import { MapView } from './MapView';
 import { TableView } from './TableView';
 import type { CrewConsoleData, CrewSensor } from './types';
 
-export const CrewConsole220 = () => {
+export function CrewConsole220(props) {
   return (
     <Window title="Crew Monitor" width={1000} height={750}>
       <Window.Content>
@@ -17,7 +23,7 @@ export const CrewConsole220 = () => {
       </Window.Content>
     </Window>
   );
-};
+}
 
 function CrewContent() {
   const { data } = useBackend<CrewConsoleData>();
@@ -25,8 +31,8 @@ function CrewContent() {
 
   const [tab, setTab] = useSharedState('crewConsole-tab', 'List');
   const [searchText, setSearchText] = useSharedState('crewConsole-search', '');
-  const [highlightedSensors, setHighlightedSensors] = useSharedState(
-    'crewConsole-highlighted2',
+  const [highlightedSensors, setHighlightedSensors] = useSharedState<string[]>(
+    'crewConsole-highlighted',
     [],
   );
   const [headsOnly, setHeadsOnly] = useSharedState('crewConsole-heads', false);
@@ -52,14 +58,15 @@ function CrewContent() {
       case 'List':
         return (
           <TableView
+            highlight={highlight}
             sorted_sensors={sorted}
             highlightedSensors={highlightedSensors}
-            setHighlightedSensors={setHighlightedSensors}
           />
         );
       case 'Map':
         return (
           <MapView
+            highlight={highlight}
             sorted_sensors={sorted}
             highlightedSensors={highlightedSensors}
             searchText={searchText}
@@ -71,6 +78,19 @@ function CrewContent() {
     }
   };
 
+  function highlight(name: string) {
+    if (name === 'clear') {
+      setHighlightedSensors([]);
+      return;
+    }
+
+    setHighlightedSensors(
+      highlightedSensors.includes(name)
+        ? highlightedSensors.filter((n) => n !== name)
+        : [...highlightedSensors, name],
+    );
+  }
+
   return (
     <Stack fill vertical>
       <Stack.Item>
@@ -81,7 +101,6 @@ function CrewContent() {
             <TitleActions
               tab={tab}
               setTab={setTab}
-              searchText={searchText}
               setSearchText={setSearchText}
               headsOnly={headsOnly}
               setHeadsOnly={setHeadsOnly}
@@ -104,7 +123,6 @@ function TitleActions(props) {
   const {
     tab,
     setTab,
-    searchText,
     setSearchText,
     headsOnly,
     setHeadsOnly,
@@ -134,12 +152,13 @@ function TitleActions(props) {
           </Tabs.Tab>
         </Tabs>
       </Stack.Item>
-      <Stack.Item>
-        <SearchBar
-          noIcon
-          style={{ width: '20rem', height: '2.2rem' }}
-          query={searchText}
-          onSearch={setSearchText}
+      <Stack.Item style={{ width: '20rem', height: '2.2rem' }}>
+        <Input
+          fluid
+          placeholder="Поиск по имени..."
+          onInput={(e) =>
+            setSearchText((e.target as HTMLTextAreaElement).value)
+          }
         />
       </Stack.Item>
       {tab === 'Map' && (

@@ -14,7 +14,7 @@ import type { CrewConsoleData } from './types';
 
 export function TableView(props) {
   const { data } = useBackend<CrewConsoleData>();
-  const { sorted_sensors, highlightedSensors, setHighlightedSensors } = props;
+  const { highlight, sorted_sensors, highlightedSensors } = props;
   return (
     <Section fill scrollable>
       <Table>
@@ -23,7 +23,7 @@ export function TableView(props) {
             <Button
               tooltip="Очистить подсветку на карте"
               icon="square-xmark"
-              onClick={() => setHighlightedSensors([])}
+              onClick={() => highlight('clear')}
             />
           </Table.Cell>
           <Table.Cell bold>Имя</Table.Cell>
@@ -44,8 +44,8 @@ export function TableView(props) {
           <CrewTableEntry
             key={sensor.ref}
             sensor_data={sensor}
+            highlight={highlight}
             highlightedSensors={highlightedSensors}
-            setHighlightedSensors={setHighlightedSensors}
           />
         ))}
       </Table>
@@ -56,7 +56,7 @@ export function TableView(props) {
 function CrewTableEntry(props) {
   const { act, data } = useBackend<CrewConsoleData>();
   const { link_allowed } = data;
-  const { sensor_data, highlightedSensors, setHighlightedSensors } = props;
+  const { highlight, sensor_data, highlightedSensors } = props;
   const { name, assignment, ijob, life_status, oxydam, position, can_track } =
     sensor_data;
 
@@ -66,13 +66,7 @@ function CrewTableEntry(props) {
         <Button.Checkbox
           checked={highlightedSensors.includes(name)}
           tooltip="Пометить на карте"
-          onClick={() =>
-            setHighlightedSensors(
-              highlightedSensors.includes(name)
-                ? highlightedSensors.filter((n) => n !== name)
-                : [...highlightedSensors, name],
-            )
-          }
+          onClick={() => highlight(name)}
         />
       </Table.Cell>
       <Table.Cell bold={jobIsHead(ijob)} color={jobToColor(ijob)}>

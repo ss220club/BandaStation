@@ -7,6 +7,23 @@ $border-radius: 0.5rem;
 $box-shadow: 0 1px 0.2rem hsla(0, 0%, 0%, 0.75);
 $blur: saturate(150%) blur(12px);
 
+@keyframes highlighted {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  75% {
+    transform: scale(2.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
 @mixin nanoButton() {
   cursor: pointer;
   pointer-events: all;
@@ -100,6 +117,10 @@ $blur: saturate(150%) blur(12px);
       position: absolute;
       transform: translate(17.5%, 5%);
       z-index: 2;
+
+      &.highlighted {
+        z-index: 5;
+      }
     }
 
     &--hidden {
@@ -112,8 +133,21 @@ $blur: saturate(150%) blur(12px);
     transform: scale(1.25);
     transition: transform 0.2s;
 
+    &--container {
+      position: relative;
+      display: inline-flex;
+    }
+
     &--selected {
       transform: scale(1.5);
+    }
+
+    &--highlighted {
+      position: absolute;
+      inset: 0;
+      border: 1px solid colors.$green;
+      border-radius: 99999px;
+      animation: 1.5s highlighted infinite;
     }
 
     .Icon {

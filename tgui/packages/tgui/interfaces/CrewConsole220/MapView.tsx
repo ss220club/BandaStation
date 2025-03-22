@@ -15,7 +15,13 @@ import type { CrewConsoleData } from './types';
 export function MapView(props) {
   const { act, data } = useBackend<CrewConsoleData>();
   const { mapData, sensors } = data;
-  const { sorted_sensors, highlightedSensors, searchText, headsOnly } = props;
+  const {
+    highlight,
+    sorted_sensors,
+    highlightedSensors,
+    searchText,
+    headsOnly,
+  } = props;
   const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
 
   return (
@@ -37,17 +43,21 @@ export function MapView(props) {
               tooltip={<CrewMapTooltip sensor_data={sensor} />}
               hidden={
                 sensor.position?.z !== selectedLevel ||
-                (headsOnly && jobIsHead(sensor.ijob))
+                (headsOnly && !jobIsHead(sensor.ijob))
               }
-              selected={
-                (searchText && sorted_sensors.includes(sensor)) ||
-                highlightedSensors.includes(sensor.name)
-              }
-              onClick={() =>
+              selected={searchText && sorted_sensors.includes(sensor)}
+              highlighted={highlightedSensors.includes(sensor.name)}
+              onClick={() => highlight(sensor.name)}
+              onContextMenu={(event) => {
+                if (props.disabled) {
+                  return;
+                }
+
+                event.preventDefault();
                 act('select_person', {
                   name: sensor.name,
-                })
-              }
+                });
+              }}
             />
           ),
       )}
@@ -59,7 +69,11 @@ const CrewMapTooltip = (props) => {
   const { sensor_data } = props;
   const position = sensor_data.position;
   return (
-    <Section m={-1} title={sensor_data.name} fontSize={0.9}>
+    <Section
+      m={-1}
+      title={`${sensor_data.name} (${sensor_data.assignment})`}
+      fontSize={0.9}
+    >
       <LabeledList>
         <LabeledList.Item
           label="Состояние"
