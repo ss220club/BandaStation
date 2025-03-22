@@ -114,7 +114,7 @@ export function PrimaryView() {
       );
 
       if (selectedButton) {
-        selectedButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        selectedButton.scrollIntoView({ behavior: 'auto', block: 'nearest' });
       }
 
       return clampedId;
