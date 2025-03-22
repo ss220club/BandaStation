@@ -9,6 +9,7 @@ export const SPECIAL_TOKENS = {
 
     const id = content.match(blankPropRegex('id'))?.[1]?.trim();
     const name = content.match(blankPropRegex('name'))?.[1]?.trim();
+    const station = content.match(blankPropRegex('station'))?.[1]?.trim();
     const category = content.match(blankPropRegex('category'))?.[1]?.trim();
     const info = content.match(blankPropRegex('info'))?.[1]?.trim();
 
@@ -25,7 +26,9 @@ export const SPECIAL_TOKENS = {
 			  <span class='station'>
 				Научная станция Nanotrasen
 				<br>
-				<span class='station_name'>[station_name]</span>
+				<span class='station_name'>
+          ${station || ''}
+        </span>
 			  </span>
 			  <span class='category'>${category || ''}</span>
 			</div>

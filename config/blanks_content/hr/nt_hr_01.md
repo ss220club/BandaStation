@@ -1,6 +1,7 @@
 [blank_header
 id = NT-HR-01;
 name = Заявление о приёме на работу;
+station = [station_name];
 category = Отдел кадров
 ]
 
