@@ -1,4 +1,10 @@
-import { MutableRefObject, RefObject, useRef, useState } from 'react';
+import {
+  MutableRefObject,
+  RefObject,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import {
   Box,
   Button,
@@ -7,6 +13,7 @@ import {
   Stack,
   TextArea,
 } from 'tgui-core/components';
+import { debounce } from 'tgui-core/timer';
 
 import { useBackend } from '../../backend';
 import { TEXTAREA_INPUT_HEIGHT } from './constants';
@@ -23,8 +30,13 @@ export function PrimaryView() {
   const [activeWriteButtonId, setActiveWriteButtonId] = useState('');
   const [lastDistanceFromBottom, setLastDistanceFromBottom] = useState(0);
   const [textAreaText, setTextAreaText] = useState('');
-  const [parsedTextBox, setParsedTextBox] = useState('');
+  const [textAreaTextForPreview, setTextAreaTextForPreview] = useState('');
+  const [paperReplacementHint, setPaperReplacementHint] = useState<
+    PaperReplacement[]
+  >([]);
+
   const usedReplacementsRef = useRef<PaperReplacement[]>([]);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   // Reference that gets passed to the <Section> holding the main preview.
   // Eventually gets filled with a reference to the section's scroll bar
@@ -52,15 +64,25 @@ export function PrimaryView() {
           <PreviewView
             scrollableRef={scrollableRef}
             handleOnScroll={onScrollHandler}
-            textArea={textAreaText}
             activeWriteButtonId={activeWriteButtonId}
             setActiveWriteButtonId={setActiveWriteButtonId}
-            parsedTextBox={parsedTextBox}
-            setParsedTextBox={setParsedTextBox}
+            textAreaTextForPreview={textAreaTextForPreview}
             setTextAreaActive={setTextAreaActive}
             usedReplacementsRef={usedReplacementsRef}
           />
         </Flex.Item>
+        {paperReplacementHint.length > 0 && (
+          <Flex.Item>
+            <ReplacementHint
+              paperReplacementHint={paperReplacementHint}
+              setPaperReplacementHint={setPaperReplacementHint}
+              textAreaRef={textAreaRef}
+              setTextAreaText={setTextAreaText}
+              setTextAreaTextForPreview={setTextAreaTextForPreview}
+            />
+          </Flex.Item>
+        )}
+
         {writeMode &&
           (textAreaActive ? (
             <Flex.Item shrink={1} height={TEXTAREA_INPUT_HEIGHT + 'px'}>
@@ -69,11 +91,13 @@ export function PrimaryView() {
                 setActiveWriteButtonId={setActiveWriteButtonId}
                 textAreaText={textAreaText}
                 setTextAreaText={setTextAreaText}
-                setParsedTextBox={setParsedTextBox}
+                setTextAreaTextForPreview={setTextAreaTextForPreview}
                 setTextAreaActive={setTextAreaActive}
+                setPaperReplacementHint={setPaperReplacementHint}
                 usedReplacementsRef={usedReplacementsRef}
                 scrollableRef={scrollableRef}
                 lastDistanceFromBottom={lastDistanceFromBottom}
+                textAreaRef={textAreaRef}
               />
             </Flex.Item>
           ) : (
@@ -102,11 +126,13 @@ type TextAreaSectionProps = {
   setActiveWriteButtonId: (activeWriteButtonId: string) => any;
   textAreaText: string;
   setTextAreaText: (textAreaText: string) => any;
-  setParsedTextBox: (parsedTextBox: string) => any;
+  setTextAreaTextForPreview: (textAreaTextForPreview: string) => any;
   setTextAreaActive: (textAreaActive: boolean) => any;
+  setPaperReplacementHint: (paperReplacementHint: PaperReplacement[]) => any;
   usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
   scrollableRef: RefObject<HTMLDivElement>;
   lastDistanceFromBottom: number;
+  textAreaRef: RefObject<HTMLTextAreaElement>;
 };
 
 function TextAreaSection(props: TextAreaSectionProps) {
@@ -125,14 +151,19 @@ function TextAreaSection(props: TextAreaSectionProps) {
     setActiveWriteButtonId,
     textAreaText,
     setTextAreaText,
+    setTextAreaTextForPreview,
     setTextAreaActive,
-    setParsedTextBox,
+    setPaperReplacementHint,
     scrollableRef,
     lastDistanceFromBottom,
     usedReplacementsRef,
+    textAreaRef,
   } = props;
 
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const setTextAreaTextForPreviewWithDelayCallback = useCallback(
+    debounce((text) => setTextAreaTextForPreview(text), 500),
+    [],
+  );
 
   const useFont = held_item_details?.font || default_pen_font;
   const useColor = held_item_details?.color || default_pen_color;
@@ -173,7 +204,7 @@ function TextAreaSection(props: TextAreaSectionProps) {
 
     act('add_text', addTextData);
     setTextAreaText('');
-    setParsedTextBox('');
+    setTextAreaTextForPreview('');
   }
 
   function getReplacementHints(): PaperReplacement[] {
@@ -181,8 +212,6 @@ function TextAreaSection(props: TextAreaSectionProps) {
       return [];
     }
 
-    console.log('selection start: ' + textAreaRef.current.selectionStart);
-    console.log('text content: ' + textAreaRef.current.value);
     const textAreaValue = textAreaRef.current.value;
     const selectionStart = textAreaRef.current.selectionStart;
     if (!textAreaValue || !selectionStart) {
@@ -202,7 +231,6 @@ function TextAreaSection(props: TextAreaSectionProps) {
     }
 
     const tokenKey = match[1];
-    console.log('tokenKey: ' + tokenKey);
 
     return replacements
       .filter((value) => value.key.startsWith(tokenKey))
@@ -249,15 +277,14 @@ function TextAreaSection(props: TextAreaSectionProps) {
         height="100%"
         backgroundColor={paper_color}
         onKeyUp={() => {
-          // TODO: сделать хинт над вводимым текстом
-          console.log('replacement: ' + JSON.stringify(getReplacementHints()));
+          setPaperReplacementHint(getReplacementHints());
         }}
         onClick={() => {
-          // TODO: сделать хинт над вводимым текстом
-          console.log('replacement: ' + JSON.stringify(getReplacementHints()));
+          setPaperReplacementHint(getReplacementHints());
         }}
         onInput={(e, text) => {
           setTextAreaText(text);
+          setTextAreaTextForPreviewWithDelayCallback(text);
 
           if (scrollableRef.current) {
             let thisDistFromBottom =
@@ -269,5 +296,76 @@ function TextAreaSection(props: TextAreaSectionProps) {
         }}
       />
     </Section>
+  );
+}
+
+type ReplacementHintProps = {
+  paperReplacementHint: PaperReplacement[];
+  setPaperReplacementHint: (paperReplacementHint: PaperReplacement[]) => any;
+  textAreaRef: RefObject<HTMLTextAreaElement>;
+  setTextAreaText: (textAreaText: string) => any;
+  setTextAreaTextForPreview: (textAreaTextForPreview: string) => any;
+};
+
+function ReplacementHint(props: ReplacementHintProps) {
+  const {
+    paperReplacementHint,
+    setPaperReplacementHint,
+    textAreaRef,
+    setTextAreaText,
+    setTextAreaTextForPreview,
+  } = props;
+
+  function onHintButtonClick(buttonKey: string) {
+    if (!textAreaRef?.current) {
+      return;
+    }
+
+    const textAreaValue = textAreaRef.current.value;
+    const selectionStart = textAreaRef.current.selectionStart;
+    if (!textAreaValue || !selectionStart) {
+      return [];
+    }
+
+    const match = textAreaValue
+      .substring(0, selectionStart)
+      .match(replacementTokenStartRegex);
+
+    if (!match) {
+      return;
+    }
+
+    const matchedText = match[0];
+    const matchIndex = match.index;
+    if (matchIndex === undefined) {
+      return;
+    }
+
+    const updatedTextArea =
+      textAreaValue.slice(0, matchIndex) +
+      `[${buttonKey}]` +
+      textAreaValue.slice(matchIndex + matchedText.length);
+
+    setTextAreaText(updatedTextArea);
+    setTextAreaTextForPreview(updatedTextArea);
+    setPaperReplacementHint([]);
+  }
+
+  return (
+    <Stack vertical>
+      {paperReplacementHint.map((value) => {
+        return (
+          <Stack.Item key={value.key}>
+            <Button fluid onClick={() => onHintButtonClick(value.key)}>
+              <Box
+                dangerouslySetInnerHTML={{
+                  __html: `${value.key} [${value.name}] - ${value.value}`,
+                }}
+              />
+            </Button>
+          </Stack.Item>
+        );
+      })}
+    </Stack>
   );
 }

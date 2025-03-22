@@ -1,15 +1,7 @@
 import { Marked } from 'marked';
 import { markedSmartypants } from 'marked-smartypants';
-import {
-  MutableRefObject,
-  RefObject,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { MutableRefObject, RefObject, useEffect, useMemo } from 'react';
 import { Box, Section } from 'tgui-core/components';
-import { debounce } from 'tgui-core/timer';
 
 import { useBackend } from '../../backend';
 import { sanitizeText } from '../../sanitize';
@@ -50,11 +42,9 @@ const CUSTOM_TOKENS: CustomToken[] = [
 type PreviewViewProps = {
   scrollableRef: RefObject<HTMLDivElement>;
   handleOnScroll: (this: GlobalEventHandlers, ev: Event) => any;
-  textArea: string;
   activeWriteButtonId: string;
   setActiveWriteButtonId: (activeWriteButtonId: string) => any;
-  parsedTextBox: string;
-  setParsedTextBox: (activeWriteButtonId: string) => any;
+  textAreaTextForPreview: string;
   setTextAreaActive: (textAreaActive: boolean) => any;
   usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
 };
@@ -63,6 +53,8 @@ type PreviewViewProps = {
 const fieldRegex: RegExp = /\[input_field\]/gi;
 const childInputRegex: RegExp = /\[child_(\d+)\]/gi;
 const specialTokenRegex: RegExp = /\[(\w+)[^\[]*?\]/gi;
+
+const DOCUMENT_END_BUTTON_ID = 'document_end';
 
 /**
  * Real-time text preview section. When not editing, this is simply
@@ -79,12 +71,10 @@ export function PreviewView(props: PreviewViewProps) {
   const {
     scrollableRef,
     handleOnScroll,
-    textArea,
     activeWriteButtonId,
     setActiveWriteButtonId,
-    parsedTextBox,
-    setParsedTextBox,
     setTextAreaActive,
+    textAreaTextForPreview,
     usedReplacementsRef,
   } = props;
 
@@ -110,65 +100,20 @@ export function PreviewView(props: PreviewViewProps) {
     [raw_text_input, default_pen_font, default_pen_color, editMode],
   );
 
-  const oldParseTextBoxDataPropsRef = useRef({
-    textArea: textArea,
-    fontFace: fontFace,
-    fontColor: fontColor,
-    fontBold: fontBold,
-    advancedHtmlUser: advanced_html_user,
-  });
-
-  const parseTextBoxDataCallback = useCallback(
-    debounce(
-      (
-        textArea,
-        fontFace,
-        fontColor,
-        fontBold,
-        advancedHtmlUser,
+  const parseTextAreaText = useMemo(
+    () =>
+      parseReplacements(
+        formatAndProcessRawText(
+          textAreaTextForPreview,
+          fontFace,
+          fontColor,
+          fontBold,
+          advanced_html_user,
+        ),
         replacements,
-      ) => {
-        usedReplacementsRef.current = replacements;
-        setParsedTextBox(
-          parseReplacements(
-            formatAndProcessRawText(
-              textArea,
-              fontFace,
-              fontColor,
-              fontBold,
-              advancedHtmlUser,
-            ),
-            replacements,
-          ),
-        );
-      },
-      500,
-    ),
-    [],
+      ),
+    [textAreaTextForPreview, fontFace, fontColor, fontBold, advanced_html_user],
   );
-
-  const newParseTextBoxDataProps = {
-    textArea: textArea,
-    fontFace: fontFace,
-    fontColor: fontColor,
-    fontBold: fontBold,
-    advancedHtmlUser: advanced_html_user,
-  };
-
-  if (
-    JSON.stringify(oldParseTextBoxDataPropsRef.current) !==
-    JSON.stringify(newParseTextBoxDataProps)
-  ) {
-    oldParseTextBoxDataPropsRef.current = newParseTextBoxDataProps;
-    parseTextBoxDataCallback(
-      textArea,
-      fontFace,
-      fontColor,
-      fontBold,
-      advanced_html_user,
-      replacements,
-    );
-  }
 
   // Wraps the given raw text in a font span based on the supplied props.
   function setFontInText(
@@ -227,7 +172,7 @@ export function PreviewView(props: PreviewViewProps) {
   ) {
     return editMode
       ? insertTextAreaPreview(parsedDmText, parsedTextBox, writeButtonId) +
-          "<button id='document_end'><i class='fa fa-file-pen'></i> Писать в конец</button>"
+          `<button id='${DOCUMENT_END_BUTTON_ID}'><i class='fa fa-file-pen'></i> Писать в конец</button>`
       : parsedDmText;
   }
 
@@ -320,16 +265,15 @@ export function PreviewView(props: PreviewViewProps) {
     insertText: string,
     buttonId: string,
   ): string {
+    const highlightedInsertText = `<span style='background-color:yellow'>${insertText}</span>`;
     if (!buttonId) {
-      return text + insertText;
+      return text + highlightedInsertText;
     }
 
     return text.replace(
       new RegExp(`<button[^>]*id=["']${buttonId}["'][^>]*>`),
       (match) => {
-        return (
-          `<span style='background-color:yellow'>${insertText}</span>` + match
-        );
+        return highlightedInsertText + match;
       },
     );
   }
@@ -388,7 +332,7 @@ export function PreviewView(props: PreviewViewProps) {
 
   const previewText = generatePreviewText(
     parsedDmText,
-    parsedTextBox,
+    parseTextAreaText,
     editMode,
     activeWriteButtonId,
   );
@@ -411,7 +355,7 @@ export function PreviewView(props: PreviewViewProps) {
   }, [previewText, activeWriteButtonId]);
 
   useEffect(() => {
-    const endButton = document.getElementById('document_end');
+    const endButton = document.getElementById(DOCUMENT_END_BUTTON_ID);
     if (endButton) {
       endButton.addEventListener('click', onEndWriteButtonClick);
       if (!activeWriteButtonId) {
@@ -428,6 +372,19 @@ export function PreviewView(props: PreviewViewProps) {
       }
     };
   }, [previewText, activeWriteButtonId]);
+
+  useEffect(() => {
+    usedReplacementsRef.current = replacements;
+    return () => {
+      usedReplacementsRef.current = [];
+    };
+  }, [
+    textAreaTextForPreview,
+    fontFace,
+    fontColor,
+    fontBold,
+    advanced_html_user,
+  ]);
 
   const textHTML = {
     __html: `<span class='paper-text'>${previewText}</span>`,
