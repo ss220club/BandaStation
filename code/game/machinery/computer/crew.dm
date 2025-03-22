@@ -78,10 +78,11 @@
 /obj/machinery/computer/crew/syndie
 	icon_keyboard = "syndie_key"
 
+/** BANDASTATION REMOVAL - Crew Monitor NanoMap
 /obj/machinery/computer/crew/ui_interact(mob/user)
 	. = ..()
 	GLOB.crewmonitor.show(user,src)
-
+*/
 GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 
 /datum/crewmonitor
@@ -164,7 +165,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 /datum/crewmonitor/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if (!ui)
-		ui = new(user, src, "CrewConsole220") // BANDASTATION ADDITION
+		ui = new(user, src, "CrewConsole220") // BANDASTATION REPLACEMENT: CrewConsole
 		ui.open()
 
 /datum/crewmonitor/proc/show(mob/M, source)

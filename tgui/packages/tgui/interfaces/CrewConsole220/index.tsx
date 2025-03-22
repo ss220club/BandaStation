@@ -101,6 +101,7 @@ function CrewContent() {
             <TitleActions
               tab={tab}
               setTab={setTab}
+              searchText={searchText}
               setSearchText={setSearchText}
               headsOnly={headsOnly}
               setHeadsOnly={setHeadsOnly}
@@ -123,6 +124,7 @@ function TitleActions(props) {
   const {
     tab,
     setTab,
+    searchText,
     setSearchText,
     headsOnly,
     setHeadsOnly,
@@ -155,6 +157,7 @@ function TitleActions(props) {
       <Stack.Item style={{ width: '20rem', height: '2.2rem' }}>
         <Input
           fluid
+          value={searchText}
           placeholder="Поиск по имени..."
           onInput={(e) =>
             setSearchText((e.target as HTMLTextAreaElement).value)
