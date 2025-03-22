@@ -19,23 +19,30 @@ interface CustomToken {
   token: string;
   element: string;
   isBlock?: boolean;
+  closingTag?: boolean;
 }
 
 const CUSTOM_TOKENS: CustomToken[] = [
   {
     token: '!',
-    element: 'label',
+    element: 'strong',
     isBlock: false,
   },
   {
     token: '-#',
     element: 'small',
-    isBlock: false,
+    isBlock: true,
   },
   {
     token: '---',
-    element: 'br',
+    element: 'hr',
     isBlock: false,
+  },
+  {
+    token: '===',
+    element: 'center',
+    isBlock: false,
+    closingTag: true,
   },
 ];
 
@@ -297,10 +304,13 @@ export function PreviewView(props: PreviewViewProps) {
     const markedInstance = new Marked();
 
     const customRules = CUSTOM_TOKENS.map((token) => ({
-      pattern: new RegExp(`^${token.token}\\s+(.+)$`, 'm'),
+      pattern: new RegExp(
+        `^${token.token}\\s+(.+?)(?:\\s*${token.closingTag && token.token}$|$)`,
+        'm',
+      ),
       render: (match: RegExpExecArray) => {
         const content = markedInstance.parseInline(match[1]);
-        return `<${token.element}>${content}</${token.element}>${token.isBlock ? '\n' : ''}`;
+        return `<${token.element}>${content}</${token.element}>${token.isBlock ? '<br>' : ''}`;
       },
     }));
 

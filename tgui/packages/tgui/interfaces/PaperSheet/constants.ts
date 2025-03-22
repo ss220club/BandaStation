@@ -30,13 +30,23 @@ export const SPECIAL_TOKENS = {
 			  <span class='category'>${category || ''}</span>
 			</div>
 		  </div>
-		  <span class='blank_footer'>
+		  <span class='blank_notice'>
 			<hr>
 			${info || 'Перед заполнением прочитать от начала до конца | Во всех PDA имеется ручка'}
 			<hr>
 		  </span>
 		</div>
 	  `;
+  },
+  blank_footer: (value: string) => {
+    const content = value.replace(/^\[blank_footer\s*|\]$/g, '').trim();
+    const info = content.match(blankPropRegex('content'))?.[1]?.trim();
+    return `
+      <div class='blank_footer'>
+        <hr>
+        ${info || ''}
+      </div>
+    `;
   },
   nt_logo: (value: string) => {
     const matchArray = value.match(propRegex('width'));
