@@ -105,17 +105,20 @@ export function PrimaryView() {
   function handleArrowKeys(key: KEY.Up | KEY.Down) {
     const lastIndex = paperReplacementHint.length - 1;
     const firstIndex = 0;
-    if (key === KEY.Up) {
-      setSelectedHintButtonId((id) => {
-        const newId = id - 1;
-        return newId >= firstIndex ? newId : lastIndex;
-      });
-    } else {
-      setSelectedHintButtonId((id) => {
-        const newId = id + 1;
-        return newId <= lastIndex ? newId : firstIndex;
-      });
-    }
+
+    setSelectedHintButtonId((id) => {
+      const newId = key === KEY.Up ? id - 1 : id + 1;
+      const clampedId = Math.max(firstIndex, Math.min(lastIndex, newId));
+      const selectedButton = document.querySelector(
+        `#Paper__Hints .Paper__Hints--hint:nth-child(${clampedId + 1})`,
+      );
+
+      if (selectedButton) {
+        selectedButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      return clampedId;
+    });
   }
 
   function handleEnterKey() {

@@ -22,6 +22,7 @@
 
   &__Hints {
     overflow: hidden auto;
+    scroll-padding: 0.5rem;
     height: 100%;
     max-height: 30vh;
     padding: 0.5rem;
@@ -48,13 +49,11 @@
       z-index: -1;
     }
 
-    &--content {
-      gap: 0.33rem;
-    }
-
     /* We need to somehow override the specificity so that we don't use !important */
     .Paper__Hints--button {
       &.Button {
+        border-radius: 0.33rem;
+
         &:hover:not(.Button--selected) {
           background-color: hsla(0, 0%, 0%, 0.1);
           color: inherit;
