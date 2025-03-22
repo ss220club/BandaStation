@@ -197,7 +197,7 @@
 	if(istype(item, /obj/item/toy/crayon))
 		var/obj/item/toy/crayon/crayon = item
 		can_item_write = TRUE
-		marked_cheating_color = (crayon.crayon_color == "mime" && "invisible") || crayon.crayon_color
+		marked_cheating_color = (crayon.crayon_color == "mime" && "invisible ") || crayon.crayon_color
 
 	if(can_item_write && !blank) // You cheated not only the game, but yourself
 		marked_color = marked_cheating_color
