@@ -176,6 +176,7 @@ export function PrimaryView() {
                 setTextAreaActive={setTextAreaActive}
                 setTextAreaTextForPreview={setTextAreaTextForPreview}
                 setPaperReplacementHint={setPaperReplacementHint}
+                setSelectedHintButtonId={setSelectedHintButtonId}
                 setActiveWriteButtonId={setActiveWriteButtonId}
               />
             </Stack.Item>

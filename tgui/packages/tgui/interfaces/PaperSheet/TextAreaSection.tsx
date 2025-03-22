@@ -6,6 +6,7 @@ import {
   useCallback,
 } from 'react';
 import { Box, Button, Section, TextArea } from 'tgui-core/components';
+import { KEY } from 'tgui-core/keys';
 import { debounce } from 'tgui-core/timer';
 
 import { useBackend } from '../../backend';
@@ -27,6 +28,7 @@ type TextAreaSectionProps = {
   setTextAreaActive: (value: SetStateAction<boolean>) => void;
   setTextAreaTextForPreview: (value: SetStateAction<string>) => void;
   setPaperReplacementHint: (value: SetStateAction<PaperReplacement[]>) => void;
+  setSelectedHintButtonId: (value: SetStateAction<number>) => void;
   setActiveWriteButtonId: (value: SetStateAction<string>) => void;
 };
 
@@ -45,6 +47,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
     setTextAreaTextForPreview,
     paperReplacementHint,
     setPaperReplacementHint,
+    setSelectedHintButtonId,
     setActiveWriteButtonId,
   } = props;
 
@@ -106,8 +109,15 @@ export function TextAreaSection(props: TextAreaSectionProps) {
     setTextAreaTextForPreview('');
   }
 
-  function updatePaperReplacentHints() {
+  function updatePaperReplacentHints(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === KEY.Up || event.key === KEY.Down) {
+      if (paperReplacementHint.length) {
+        return;
+      }
+    }
+
     setPaperReplacementHint(getReplacementHints());
+    setSelectedHintButtonId(0);
   }
 
   function getReplacementHints(): PaperReplacement[] {
