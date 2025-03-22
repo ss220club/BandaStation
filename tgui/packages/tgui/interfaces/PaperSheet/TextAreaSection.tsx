@@ -21,6 +21,7 @@ type TextAreaSectionProps = {
   usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
   textAreaRef: RefObject<HTMLTextAreaElement>;
   scrollableRef: RefObject<HTMLDivElement>;
+  paperReplacementHint: PaperReplacement[];
   handleTextAreaKeyDown: (event: KeyboardEvent<HTMLDivElement>) => void;
   setTextAreaText: (value: SetStateAction<string>) => void;
   setTextAreaActive: (value: SetStateAction<boolean>) => void;
@@ -42,6 +43,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
     setTextAreaText,
     setTextAreaActive,
     setTextAreaTextForPreview,
+    paperReplacementHint,
     setPaperReplacementHint,
     setActiveWriteButtonId,
   } = props;
@@ -177,6 +179,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
         bold={useBold}
         height="100%"
         backgroundColor={paper_color}
+        dontUseTabForIndent={paperReplacementHint.length > 0}
         onKeyDown={handleTextAreaKeyDown}
         onKeyUp={updatePaperReplacentHints}
         onClick={updatePaperReplacentHints}

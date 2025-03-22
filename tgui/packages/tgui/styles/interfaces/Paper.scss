@@ -6,6 +6,7 @@
   */
 
 @use '../colors';
+@use '../base';
 
 .Paper {
   &__Stamp {
@@ -18,12 +19,69 @@
     word-break: break-word;
     word-wrap: break-word;
   }
+
+  &__Hints {
+    overflow: hidden auto;
+    scroll-padding: 0.5rem;
+    scrollbar-width: thin;
+    height: 100%;
+    max-height: 30vh;
+    padding: 0.5rem;
+
+    &--wrapper {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0 1.75rem 0 0.5rem; // 1.25rem for scrollbar
+      background-color: hsla(0, 0%, 80%, 0.5);
+      border: 1px solid hsla(0, 0%, 0%, 0.1);
+      border-radius: 0.33rem;
+      box-shadow: 0px -0.25rem 0.66rem 1px hsla(0, 0%, 0%, 0.2);
+      transform: translateY(calc(-100% - 0.5rem));
+      z-index: 1;
+    }
+
+    &--blur {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(12px);
+      z-index: -1;
+    }
+
+    /* We need to somehow override the specificity so that we don't use !important */
+    .Paper__Hints--button {
+      &.Button {
+        border-radius: 0.33rem;
+
+        &:hover:not(.Button--selected) {
+          background-color: hsla(0, 0%, 0%, 0.1);
+          color: inherit;
+        }
+      }
+
+      &--content {
+        padding: 0.25rem 0;
+        line-height: 1.3rem;
+      }
+
+      .key {
+        font-weight: bold;
+      }
+
+      .desc {
+        opacity: 0.66;
+      }
+    }
+  }
 }
 
 // MARK: Typography
 .Paper__Page {
   button {
     cursor: pointer;
+    margin: 0.25rem;
     padding: 0.1rem 0.33rem;
     background-color: hsla(0, 0%, 50%, 0.1);
     border: 1px solid hsla(0, 0%, 0%, 0.2);
@@ -39,7 +97,10 @@
     }
 
     &.icon_only {
+      position: absolute;
+      margin: 0;
       padding: 0.1rem 0.175rem;
+      transform: translate(0.5rem, -0.1rem);
     }
 
     i {
@@ -69,6 +130,10 @@
 
   small {
     font-size: 0.75rem;
+  }
+
+  hr {
+    width: 100%;
   }
 }
 
@@ -126,10 +191,6 @@
 
     &_footer {
       margin: 1rem 0 0.5rem;
-    }
-
-    hr {
-      width: 100%;
     }
   }
 }
