@@ -2,18 +2,18 @@
 id = NT-SEC-03;
 name = Заявление о краже;
 category = Служба безопасности;
-station = station_name;
+station = [station_name];
 ]
 
-Я, [input_field], в должности [input_field], заявляю: [input_field]
+Я, [input_field autofill_type=name], в должности [input_field autofill_type=job], заявляю: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись потерпевшего: [input_field]
-! Подпись принимавшего заявление: [input_field]
-! Время принятия заявления: [input_field]
+! Подпись потерпевшего: [input_field autofill_type=sign]
+! Подпись принимавшего заявление: [input_field autofill_type=sign]
+! Время принятия заявления: [input_field autofill_type=time]
 
 [blank_footer
 content = *Данный документ подлежит ксерокопированию, для сохранения в архиве уполномоченных лиц, и выдаче потерпевшему.

@@ -2,7 +2,7 @@
 id = NT-MD-04;
 name = Сводка о вирусе;
 category = Медицинский отдел;
-station = station_name;
+station = [station_name];
 ]
 
 # === Вирус: [input_field] ===
@@ -12,15 +12,17 @@ station = station_name;
 Передача вируса: [input_field]
 Побочные эффекты: [input_field]
 <br>
+
 Дополнительная информация: [input_field]
 <br>
+
 Лечение вируса: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись вирусолога: [input_field]
+! Подпись вирусолога: [input_field autofill_type=sign]
 
 [blank_footer
 content = *В дополнительной информации, указывается вся остальная информация, по поводу данного вируса.

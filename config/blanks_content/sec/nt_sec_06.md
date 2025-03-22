@@ -2,24 +2,24 @@
 id = NT-SEC-06;
 name = Разрешение на присваивание канала связи;
 category = Служба безопасности;
-station = station_name;
+station = [station_name];
 ]
 
 # === Разрешение ===
 
-Я [input_field], прошу Вашего разрешения на присваивание канала связи [input_field], для грамотной работы организации.
+Я, [input_field autofill_type=name], прошу Вашего разрешения на присваивание канала связи [input_field], для грамотной работы организации.
 <br>
 
-Должность заявителя: [input_field]
+Должность заявителя: [input_field autofill_type=job]
 
 ---
 
 # === Подписи и штампы ===
 
-! Время: [input_field]
-! Подпись заявителя: [input_field]
-! Подпись главы персонала: [input_field]
-! Подпись главы службы безопасности: [input_field]
+! Время: [input_field autofill_type=time]
+! Подпись заявителя: [input_field autofill_type=sign]
+! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись главы службы безопасности: [input_field autofill_type=sign]
 
 [blank_footer
 content = *Обязательно провести копирование документа для главы персонала, оригинал документа должен быть выдан заявителю.

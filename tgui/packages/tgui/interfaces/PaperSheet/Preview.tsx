@@ -1,13 +1,21 @@
 import { Marked } from 'marked';
 import { markedSmartypants } from 'marked-smartypants';
-import { MutableRefObject, RefObject, useEffect, useMemo } from 'react';
+import {
+  MutableRefObject,
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useMemo,
+} from 'react';
 import { Box, Section } from 'tgui-core/components';
 
+import { useBackend } from '../../backend';
 import { sanitizeText } from '../../sanitize';
 import { SPECIAL_TOKENS } from './constants';
 import {
   canEdit,
   createWriteButtonId,
+  getWriteButtonLocation,
   parseReplacements,
   walkTokens,
 } from './helpers';
@@ -20,6 +28,8 @@ interface CustomToken {
   isBlock?: boolean;
   closingTag?: boolean;
 }
+
+const INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE = 'autofill-type';
 
 const CUSTOM_TOKENS: CustomToken[] = [
   {
@@ -48,16 +58,16 @@ const CUSTOM_TOKENS: CustomToken[] = [
 type PreviewViewProps = {
   paperContext: PaperContext;
   scrollableRef: RefObject<HTMLDivElement>;
-  handleOnScroll: (this: GlobalEventHandlers, ev: Event) => any;
   activeWriteButtonId: string;
-  setActiveWriteButtonId: (activeWriteButtonId: string) => any;
   textAreaTextForPreview: string;
-  setTextAreaActive: (textAreaActive: boolean) => any;
   usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
+  handleOnScroll: (this: GlobalEventHandlers, event: Event) => any;
+  setActiveWriteButtonId: (value: SetStateAction<string>) => void;
+  setTextAreaActive: (value: SetStateAction<boolean>) => void;
 };
 
 // Regex that finds [input_field] fields.
-const fieldRegex: RegExp = /\[input_field\]/gi;
+const fieldRegex: RegExp = /\[input_field(?:\]|\s+autofill_type=(\w+)\])/gi;
 const childInputRegex: RegExp = /\[child_(\d+)\]/gi;
 const specialTokenRegex: RegExp = /\[(\w+)[^[]*?\]/gi;
 
@@ -75,6 +85,8 @@ const DOCUMENT_END_BUTTON_ID = 'document_end';
  * raw and field input arrays.
  */
 export function PreviewView(props: PreviewViewProps) {
+  const { act } = useBackend();
+
   const {
     paperContext,
     scrollableRef,
@@ -164,9 +176,10 @@ export function PreviewView(props: PreviewViewProps) {
 
   function createWriteButtons(text: string, paperInputRef?: string): string {
     let counter = 0;
-    return text.replace(fieldRegex, () => {
+    return text.replace(fieldRegex, (match, p1) => {
       return createWriteButton(
         paperInputRef && createWriteButtonId(paperInputRef, counter++),
+        p1,
       );
     });
   }
@@ -183,14 +196,29 @@ export function PreviewView(props: PreviewViewProps) {
       : parsedDmText;
   }
 
-  function createWriteButton(id?: string): string {
-    return editMode
-      ? `<button${id ? ` id='${id}'` : ''} class='icon_only'><i class='fa fa-pen'></i></button>`
-      : '';
+  function createWriteButton(id?: string, autofillType?: string): string {
+    if (!editMode) {
+      return '';
+    }
+
+    const inputFieldButton = document.createElement('button');
+    if (id) {
+      inputFieldButton.id = id;
+    }
+    if (autofillType) {
+      inputFieldButton.setAttribute(
+        INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE,
+        autofillType,
+      );
+    }
+    inputFieldButton.classList.add('icon_only');
+    inputFieldButton.innerHTML = "<i class='fa fa-pen'></i>";
+
+    return inputFieldButton.outerHTML;
   }
 
-  function onWriteButtonClick(ev: MouseEvent) {
-    const button = ev.target as HTMLInputElement;
+  function onWriteButtonClick(event: MouseEvent) {
+    const button = event.target as HTMLButtonElement;
     if (button.id === activeWriteButtonId) {
       setActiveWriteButtonId('');
     } else {
@@ -199,12 +227,39 @@ export function PreviewView(props: PreviewViewProps) {
     }
   }
 
-  function onEndWriteButtonClick(ev: MouseEvent) {
+  function onEndWriteButtonClick() {
     if (activeWriteButtonId) {
       setActiveWriteButtonId('');
     }
 
     setTextAreaActive(true);
+  }
+
+  function onAutofillButtonContextMenu(event: MouseEvent) {
+    const button = event.target as HTMLButtonElement;
+    const autofillType = button.getAttribute(
+      INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE,
+    );
+    console.log('Clicked autofillType: ' + autofillType);
+    if (!autofillType) {
+      return;
+    }
+
+    const replacement = usedReplacementsRef.current.find(
+      (replacement) => replacement.key === autofillType,
+    );
+    console.log('Clicked replacement: ' + replacement);
+    if (!replacement) {
+      return;
+    }
+    event.preventDefault();
+
+    const location = getWriteButtonLocation(button.id);
+    act('add_text', {
+      text: replacement.value,
+      paper_input_ref: location.paperInputRef,
+      field_id: location.fieldId + 1,
+    });
   }
 
   // Creates the partial inline HTML for previewing or reading the paper from
@@ -349,17 +404,28 @@ export function PreviewView(props: PreviewViewProps) {
 
   useEffect(() => {
     const buttons = document.querySelectorAll("[id^='paperfield_']");
-    [].forEach.call(buttons, (button: HTMLButtonElement) => {
+
+    buttons.forEach((button: HTMLButtonElement) => {
       if (button.id === activeWriteButtonId) {
         button.ariaChecked = 'true';
       }
       button.addEventListener('click', onWriteButtonClick);
+
+      const autofillType = button.getAttribute(
+        INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE,
+      );
+      console.log('autofillType: ' + autofillType);
+      if (autofillType) {
+        button.addEventListener('contextmenu', onAutofillButtonContextMenu);
+      }
     });
+
     return () =>
-      [].forEach.call(buttons, (button: HTMLButtonElement) => {
+      buttons.forEach((button: HTMLButtonElement) => {
         if (button.id === activeWriteButtonId) {
           button.ariaChecked = 'false';
         }
+        button.removeEventListener('contextmenu', onAutofillButtonContextMenu);
         button.removeEventListener('click', onWriteButtonClick);
       });
   }, [previewText, activeWriteButtonId]);

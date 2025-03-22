@@ -5,15 +5,15 @@ category = Медицинский отдел;
 station = [station_name];
 ]
 
-Я, [input_field], в должности [input_field], запрашиваю следующие химические медикаменты, для служебного использования в медбее: [input_field]
+Я, [input_field autofill_type=name], в должности [input_field autofill_type=job], запрашиваю следующие химические медикаменты, для служебного использования в медбее: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись заказчика: [input_field]
-! Подпись исполняющего: [input_field]
-! Время заказа: [input_field]
+! Подпись заказчика: [input_field autofill_type=sign]
+! Подпись исполняющего: [input_field autofill_type=sign]
+! Время заказа: [input_field autofill_type=time]
 
 [blank_footer
 content = *Данный документ подлежит ксерокопированию, для сохранения в архиве уполномоченных лиц, и выдаче лицу исполнившему заказ.

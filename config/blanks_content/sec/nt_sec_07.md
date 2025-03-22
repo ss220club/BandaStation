@@ -2,13 +2,13 @@
 id = NT-SEC-07;
 name = Лицензия на использование канала связи и владение дополнительным оборудованием;
 category = Служба безопасности;
-station = station_name;
+station = [station_name];
 ]
 
 # === Лицензия ===
 
-Имя обладателя лицензии: [input_field]
-Должность обладателя лицензии: [input_field]
+Имя обладателя лицензии: [input_field autofill_type=name]
+Должность обладателя лицензии: [input_field autofill_type=job]
 Зарегистрированный канал связи: [input_field]
 Перечень зарегистрированной экипировки: [input_field]
 
@@ -16,10 +16,10 @@ station = station_name;
 
 # === Подписи и штампы ===
 
-! Время: [input_field]
-! Подпись заявителя: [input_field]
-! Подпись главы персонала: [input_field]
-! Подпись главы службы безопасности: [input_field]
+! Время: [input_field autofill_type=time]
+! Подпись заявителя: [input_field autofill_type=sign]
+! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись главы службы безопасности: [input_field autofill_type=sign]
 
 [blank_footer
 content = *Обязательно провести копирование документа для главы персонала, оригинал документа должен быть выдан обладателю лицензии.

@@ -14,8 +14,8 @@ station = [station_name];
 
 # === Подписи и штампы ===
 
-! Подпись психолога: [input_field]
-! Время обследования: [input_field]
+! Подпись психолога: [input_field autofill_type=sign]
+! Время обследования: [input_field autofill_type=time]
 
 [blank_footer
 content = *Данный документ подлежит ксерокопированию, для сохранения в архиве уполномоченных лиц, и выдаче пациенту.

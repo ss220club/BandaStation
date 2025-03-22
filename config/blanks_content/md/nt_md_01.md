@@ -4,14 +4,14 @@ name = Постановление на поставку медикаментов
 category = Медицинский отдел;
 station = [station_name];
 ]
-Я, [input_field], в должности [input_field], запрашиваю следующие медикаменты на поставку в медбей: [input_field]
+Я, [input_field autofill_type=name], в должности [input_field autofill_type=job], запрашиваю следующие медикаменты на поставку в медбей: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись заказчика: [input_field]
-! Подпись грузчика: [input_field]
+! Подпись заказчика: [input_field autofill_type=sign]
+! Подпись грузчика: [input_field autofill_type=sign]
 
 [blank_footer
 content = *Данный документ подлежит ксерокопированию, для сохранения в архиве уполномоченных лиц, и выдаче грузчику или производившему поставку.

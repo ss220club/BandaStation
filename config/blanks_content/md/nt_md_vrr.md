@@ -7,7 +7,7 @@ station = [station_name];
 
 # === Основная информация ===
 
-Я, [input_field], в должности – [input_field], запрашиваю право на распространение вируса среди экипажа станции.
+Я, [input_field autofill_type=name], в должности – [input_field autofill_type=job], запрашиваю право на распространение вируса среди экипажа станции.
 <br>
 
 Название вируса: [input_field]
@@ -19,9 +19,9 @@ station = [station_name];
 
 # === Подписи и штампы ===
 
-! Подпись вирусолога: [input_field]
-! Подпись глав. Врача: [input_field]
-! Подпись капитана: [input_field]
+! Подпись вирусолога: [input_field autofill_type=sign]
+! Подпись глав. Врача: [input_field autofill_type=sign]
+! Подпись капитана: [input_field autofill_type=sign]
 
 [blank_footer
 content = *Производитель вируса несет полную ответственность за его распространение, изолирование и лечение

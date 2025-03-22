@@ -2,13 +2,13 @@
 id = NT-SEC-02;
 name = Отчёт по результатам расследования;
 category = Служба безопасности;
-station = station_name;
+station = [station_name];
 ]
 
 # === Дело [input_field] ===
 
 Тип проишествия/преступления: [input_field]
-Время проишествия/преступления: [input_field]
+Время проишествия/преступления: [input_field autofill_type=time]
 Местоположение: [input_field]
 Краткое описание: [input_field]
 
@@ -37,9 +37,9 @@ station = station_name;
 
 # === Подписи и штампы ===
 
-! Время: [input_field]
-! Подпись уполномоченного лица: [input_field]
-! Должность уполномоченного лица: [input_field]
+! Время: [input_field autofill_type=time]
+! Подпись уполномоченного лица: [input_field autofill_type=sign]
+! Должность уполномоченного лица: [input_field autofill_type=sign]
 
 [blank_footer
 content = Данный документ является недействительным при отсутствии печати.

@@ -23,6 +23,7 @@ station = [station_name];
 Метки и раны: [input_field]
 Вероятная причина смерти: [input_field]
 <br>
+
 Детали: [input_field]
 
 
@@ -30,8 +31,8 @@ station = [station_name];
 
 # === Подписи и штампы ===
 
-! Время: [input_field]
-! Вскрытие провёл: [input_field]
+! Время: [input_field autofill_type=time]
+! Вскрытие провёл: [input_field autofill_type=name]
 
 [blank_footer
 content = Подписи главы являются доказательством их согласия.

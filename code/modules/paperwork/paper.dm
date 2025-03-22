@@ -742,7 +742,7 @@
 	return children_as_lists
 
 /datum/paper_input/proc/add_child_to_field(datum/paper_input/new_child, input_field_id)
-	var/regex/input_field_regex = new(@"\[input_field\]", "gm")
+	var/regex/input_field_regex = new(@"\[input_field(?:\]|\s+[\w=\s]*\])", "gm")
 	var/field_counter = 0
 	while(input_field_regex.Find(raw_text))
 		field_counter++
@@ -750,7 +750,10 @@
 			continue
 
 		var/new_child_index = add_child(new_child)
-		raw_text = copytext(raw_text, 1, input_field_regex.index) +  "\[child_[new_child_index]\]" + copytext(raw_text, input_field_regex.index)
+		var/text_before_child_input = copytext(raw_text, 1, input_field_regex.index)
+		var/text_after_child_input = splicetext(copytext(raw_text, input_field_regex.index), 1, length(input_field_regex.match) + 1, "\[input_field\]");
+
+		raw_text = text_before_child_input +  "\[child_[new_child_index]\]" + text_after_child_input
 		return TRUE
 
 	return FALSE

@@ -2,23 +2,23 @@
 id = NT-SEC-11;
 name = Ордер на обыск;
 category = Служба безопасности;
-station = station_name;
+station = [station_name];
 ]
 
 # === Информация о свидетеле ===
 
-Имя свидетеля: [input_field]
+Имя свидетеля: [input_field autofill_type=name]
 -# Полностью и без ошибок
-Номер аккаунта свидетеля: [input_field]
+Номер аккаунта свидетеля: [input_field autofill_type=bank_id]
 -# Эта информация есть у главы персонала
-Должность свидетеля: [input_field]
+Должность свидетеля: [input_field autofill_type=job]
 -# Указано на ID карте
 
 ---
 
 # === Ордер ===
 
-В целях обыска: [input_field]
+В целях обыска: [input_field autofill_type=name]
 -# (помещения, имущества, лица)
 <br>
 

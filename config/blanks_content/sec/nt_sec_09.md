@@ -2,27 +2,27 @@
 id = NT-SEC-09;
 name = Запрет на реанимацию;
 category = Служба безопасности;
-station = station_name;
+station = [station_name];
 ]
 
-Я, [input_field], в должности [input_field], сообщаю о запрете реанимации в отношении: [input_field]
+Я, [input_field autofill_type=name], в должности [input_field autofill_type=job], сообщаю о запрете реанимации в отношении: [input_field]
 <br>
 
 Исходя из того, что вышеупомянутый член экипажа нарушил одну или несколько статей Космического Закона, а именно: [input_field].
 Дополнительные сведения: [input_field]
 <br>
 
-Подпись уполномоченного: [input_field]
+Подпись уполномоченного: [input_field autofill_type=sign]
 <br>
 
-Время вступления запрета в силу: [input_field]
+Время вступления запрета в силу: [input_field autofill_type=time]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись уполномоченного: [input_field]
-! Подпись получателя: [input_field]
+! Подпись уполномоченного: [input_field autofill_type=sign]
+! Подпись получателя: [input_field autofill_type=sign]
 
 [blank_footer
 content = Тело будет помещено на хранение, утилизировано или космировано.

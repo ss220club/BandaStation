@@ -109,13 +109,17 @@ export function TextAreaSection(props: TextAreaSectionProps) {
     setTextAreaTextForPreview('');
   }
 
-  function updatePaperReplacentHints(event: KeyboardEvent<HTMLDivElement>) {
+  function handleTextAreaKeyUp(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === KEY.Up || event.key === KEY.Down) {
       if (paperReplacementHint.length) {
         return;
       }
     }
 
+    updatePaperReplacentHints();
+  }
+
+  function updatePaperReplacentHints() {
     setPaperReplacementHint(getReplacementHints());
     setSelectedHintButtonId(0);
   }
@@ -191,7 +195,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
         backgroundColor={paper_color}
         dontUseTabForIndent={paperReplacementHint.length > 0}
         onKeyDown={handleTextAreaKeyDown}
-        onKeyUp={updatePaperReplacentHints}
+        onKeyUp={handleTextAreaKeyUp}
         onClick={updatePaperReplacentHints}
         onInput={(e, text) => {
           setTextAreaText(text);

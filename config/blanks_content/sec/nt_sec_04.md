@@ -2,19 +2,19 @@
 id = NT-SEC-04;
 name = Заявление о причинении вреда здоровью или имуществу;
 category = Служба безопасности;
-station = station_name;
+station = [station_name];
 ]
 
-Я, [input_field], в должности [input_field], заявляю: [input_field]
+Я, [input_field  autofill_type=name], в должности [input_field autofill_type=job], заявляю: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись пострадавшего: [input_field]
-! Время происшествия: [input_field]
-! Подпись уполномоченного: [input_field]
-! Время принятия заявления: [input_field]
+! Подпись пострадавшего: [input_field autofill_type=sign]
+! Время происшествия: [input_field autofill_type=time]
+! Подпись уполномоченного: [input_field autofill_type=sign]
+! Время принятия заявления: [input_field autofill_type=sign]
 
 [blank_footer
 content = *Данный документ подлежит ксерокопированию, для сохранения в архиве уполномоченных лиц, и выдаче пострадавшему.

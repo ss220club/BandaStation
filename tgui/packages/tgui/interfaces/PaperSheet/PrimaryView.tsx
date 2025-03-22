@@ -1,5 +1,5 @@
 import { KeyboardEvent, useRef, useState } from 'react';
-import { Button, Flex, Stack } from 'tgui-core/components';
+import { Button, Stack } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 
 import { useBackend } from '../../backend';
