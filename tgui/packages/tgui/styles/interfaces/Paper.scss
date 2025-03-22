@@ -17,89 +17,119 @@
   &__Page {
     word-break: break-word;
     word-wrap: break-word;
+  }
+}
 
-    button {
-      cursor: pointer;
-      padding: 0.1rem 0.33rem;
-      background-color: hsla(0, 0%, 50%, 0.1);
-      border: 1px solid hsla(0, 0%, 0%, 0.2);
-      border-radius: 0.25rem;
+// MARK: Typography
+.Paper__Page {
+  button {
+    cursor: pointer;
+    padding: 0.1rem 0.33rem;
+    background-color: hsla(0, 0%, 50%, 0.1);
+    border: 1px solid hsla(0, 0%, 0%, 0.2);
+    border-radius: 0.25rem;
 
-      &:hover {
-        background-color: hsla(0, 0%, 50%, 0.2);
-      }
-
-      &[aria-checked='true'] {
-        background-color: transparent;
-        border-color: colors.$green;
-      }
-
-      &.icon_only {
-        padding: 0.1rem 0.175rem;
-      }
-
-      i {
-        pointer-events: none;
-      }
+    &:hover {
+      background-color: hsla(0, 0%, 50%, 0.2);
     }
 
-    label {
-      font-size: 1.3rem;
+    &[aria-checked='true'] {
+      background-color: transparent;
+      border-color: colors.$green;
     }
 
-    small {
-      font-size: 0.75rem;
+    &.icon_only {
+      padding: 0.1rem 0.175rem;
     }
 
-    // MARK: Blank header
-    .blank {
+    i {
+      pointer-events: none;
+    }
+  }
+
+  h1 {
+    padding: 0 0 0.25rem;
+  }
+
+  hr {
+    margin: 0.75rem 0;
+  }
+
+  strong {
+    display: inline-block;
+    margin-top: 0.75rem;
+    line-height: 1.33rem;
+    font-size: 1.25rem;
+
+    span {
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+  }
+
+  small {
+    font-size: 0.75rem;
+  }
+}
+
+// MARK: Blank templates
+.Paper__Page {
+  .blank {
+    display: flex;
+    flex-direction: column;
+
+    &_header {
+      display: flex;
+    }
+
+    &_content {
       display: flex;
       flex-direction: column;
+      flex: 1;
+      padding: 1rem 0.5rem;
 
-      &_header {
-        display: flex;
+      .name {
+        font-weight: bold;
+        font-size: 1.5rem;
       }
 
-      &_content {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        padding: 1rem 0.5rem;
-
-        .name {
-          font-weight: bold;
-          font-size: 1.5rem;
-        }
-
-        .id {
-          font-size: 0.75rem;
-        }
-
-        .station {
-          text-align: left;
-          height: 100%;
-          margin-bottom: 0.5rem;
-
-          &_name {
-            font-weight: bold;
-            font-size: 1.2rem;
-          }
-        }
-
-        .category {
-          text-align: right;
-          font-size: 1.5rem;
-        }
-      }
-
-      &_footer {
-        text-align: center;
+      .id {
         font-size: 0.75rem;
       }
 
-      hr {
-        width: 100%;
+      .station {
+        text-align: left;
+        height: 100%;
+        margin-bottom: 0.5rem;
+
+        &_name {
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
       }
+
+      .category {
+        text-align: right;
+        font-size: 1.5rem;
+      }
+    }
+
+    &_notice,
+    &_footer {
+      text-align: center;
+      font-size: 0.75rem;
+
+      hr {
+        margin: 0.33rem 0;
+      }
+    }
+
+    &_footer {
+      margin: 1rem 0 0.5rem;
+    }
+
+    hr {
+      width: 100%;
     }
   }
 }

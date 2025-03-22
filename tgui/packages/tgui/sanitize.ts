@@ -45,7 +45,6 @@ const defTag = [
   'ul',
 
   'small',
-  'label',
 ];
 
 // Advanced HTML tags that we can trust admins (but not players) with
