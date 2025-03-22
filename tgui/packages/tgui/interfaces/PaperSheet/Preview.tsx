@@ -11,9 +11,9 @@ import {
 import { Box, Section } from 'tgui-core/components';
 import { debounce } from 'tgui-core/timer';
 
-import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
 import { sanitizeText } from '../../sanitize';
+import { SPECIAL_TOKENS } from './constants';
 import {
   canEdit,
   createWriteButtonId,
@@ -46,61 +46,6 @@ const CUSTOM_TOKENS: CustomToken[] = [
     isBlock: false,
   },
 ];
-
-const SPECIAL_TOKENS = {
-  blank_header: (value: string) => {
-    const content = value.replace(/^\[blank_header\s*|\]$/g, '').trim();
-
-    const id = content.match(blankPropRegex('id'))?.[1]?.trim();
-    const name = content.match(blankPropRegex('name'))?.[1]?.trim();
-    const category = content.match(blankPropRegex('category'))?.[1]?.trim();
-    const info = content.match(blankPropRegex('info'))?.[1]?.trim();
-
-    return `
-      <div class='blank'>
-        <div class='blank_header'>
-          <div class='blank_logo'>
-            [nt_logo]
-          </div>
-          <div class='blank_content'>
-            <span class='id'>Форма ${id || ''}</span>
-            <span class='name'>${name || ''}</span>
-            <hr>
-            <span class='station'>
-              Научная станция Nanotrasen
-              <br>
-              <span class='station_name'>[station_name]</span>
-            </span>
-            <span class='category'>${category || ''}</span>
-          </div>
-        </div>
-        <span class='blank_footer'>
-          <hr>
-          ${info || 'Перед заполнением прочитать от начала до конца | Во всех PDA имеется ручка'}
-          <hr>
-        </span>
-      </div>
-    `;
-  },
-  nt_logo: (value: string) => {
-    const matchArray = value.match(propRegex('width'));
-    const widthValue = matchArray ? matchArray[1] : '';
-    return `<img src='${resolveAsset('ntlogo.png')}' ${widthValue && `width='${widthValue}`}'>`;
-  },
-  syndie_logo: (value: string) => {
-    const matchArray = value.match(propRegex('width'));
-    const widthValue = matchArray ? matchArray[1] : '';
-    return `<img src='${resolveAsset('syndielogo.png')}' ${widthValue && `width='${widthValue}`}'>`;
-  },
-};
-
-function propRegex(propName: string) {
-  return new RegExp(`${propName}=([a-zA-Z0-9]+)`, 'i');
-}
-
-function blankPropRegex(propName: string) {
-  return new RegExp(`${propName}\\s*=\\s*([^;\\]]+)(?:;|$)`, 'i');
-}
 
 type PreviewViewProps = {
   scrollableRef: RefObject<HTMLDivElement>;

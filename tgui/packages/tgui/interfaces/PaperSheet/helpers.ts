@@ -64,3 +64,11 @@ export function createWriteButtonId(
 ): string {
   return `paperfield_${paperInputRef.replaceAll(/[[\]]/g, '')}_${fieldId}`;
 }
+
+export function propRegex(propName: string) {
+  return new RegExp(`${propName}=([a-zA-Z0-9]+)`, 'i');
+}
+
+export function blankPropRegex(propName: string) {
+  return new RegExp(`${propName}\\s*=\\s*([^;\\]]+)(?:;|$)`, 'i');
+}
