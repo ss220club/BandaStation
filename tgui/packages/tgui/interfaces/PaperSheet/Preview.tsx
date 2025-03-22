@@ -52,7 +52,7 @@ type PreviewViewProps = {
 // Regex that finds [input_field] fields.
 const fieldRegex: RegExp = /\[input_field\]/gi;
 const childInputRegex: RegExp = /\[child_(\d+)\]/gi;
-const specialTokenRegex: RegExp = /\[(\w+)[^\[]*?\]/gi;
+const specialTokenRegex: RegExp = /\[(\w+)[^[]*?\]/gi;
 
 const DOCUMENT_END_BUTTON_ID = 'document_end';
 

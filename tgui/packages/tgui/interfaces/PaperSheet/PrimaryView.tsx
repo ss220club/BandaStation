@@ -43,7 +43,7 @@ export function PrimaryView() {
     }
   }
 
-  function applyReplacement(buttonKey: string) {
+  function applyReplacementByHint(buttonKey: string) {
     if (!textAreaRef?.current) {
       return;
     }
@@ -77,9 +77,15 @@ export function PrimaryView() {
     setTextAreaTextForPreview(updatedTextArea);
     setPaperReplacementHint([]);
     setSelectedHintButtonId(0);
+
+    textAreaRef.current.focus();
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>): void {
+  function handleHintListInteraction(event: KeyboardEvent<HTMLDivElement>): void {
+    if (!paperReplacementHint.length || !textAreaActive) {
+      return;
+    }
+
     switch (event.key) {
       case KEY.Up:
       case KEY.Down:
@@ -94,14 +100,24 @@ export function PrimaryView() {
   }
 
   function handleArrowKeys(key: KEY.Up | KEY.Down) {
+    const lastIndex = paperReplacementHint.length - 1;
+    const firstIndex = 0;
     if (key === KEY.Up) {
-      setSelectedHintButtonId((id) => Math.max(id - 1, 0));
+      setSelectedHintButtonId((id) => {
+        const newId = id - 1;
+        return newId >= firstIndex ? newId : lastIndex;
+      });
     } else {
-      setSelectedHintButtonId((id) => Math.min(id - 1, 0));
+      setSelectedHintButtonId((id) => {
+        const newId = id + 1;
+        return newId <= lastIndex ? newId : firstIndex;
+      });
     }
   }
 
-  function handleEnterKey() {}
+  function handleEnterKey() {
+    applyReplacementByHint(paperReplacementHint[selectedHintButtonId].key);
+  }
 
   return (
     <>
@@ -119,13 +135,13 @@ export function PrimaryView() {
             usedReplacementsRef={usedReplacementsRef}
           />
         </Flex.Item>
-        {paperReplacementHint.length > 0 && (
+        {paperReplacementHint.length > 0 && textAreaActive && (
           <Flex.Item>
             <ReplacementHint
-              onKeyDown={handleKeyDown}
+              onKeyDown={handleHintListInteraction}
               paperReplacementHint={paperReplacementHint}
               selectedHintButtonId={selectedHintButtonId}
-              onHintButtonClick={applyReplacement}
+              onHintButtonClick={applyReplacementByHint}
             />
           </Flex.Item>
         )}
@@ -141,7 +157,7 @@ export function PrimaryView() {
                 usedReplacementsRef={usedReplacementsRef}
                 textAreaRef={textAreaRef}
                 scrollableRef={scrollableRef}
-                handleTextAreaKeyDown={handleKeyDown}
+                handleTextAreaKeyDown={handleHintListInteraction}
                 setTextAreaText={setTextAreaText}
                 setTextAreaActive={setTextAreaActive}
                 setTextAreaTextForPreview={setTextAreaTextForPreview}
