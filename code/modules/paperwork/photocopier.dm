@@ -483,7 +483,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	var/printinfo = blank["info"]
 
 	printblank.name = "paper - '[printname]'"
-	printblank.add_raw_text(replace_text_keys(printinfo, user), color = copy_colour)
+	printblank.add_raw_text(replace_text_keys(printinfo, user), color = copy_colour, advanced_html = TRUE)
 	printblank.update_appearance()
 
 	toner_cartridge.charges -= PAPER_TONER_USE
