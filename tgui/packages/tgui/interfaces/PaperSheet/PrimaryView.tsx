@@ -81,7 +81,9 @@ export function PrimaryView() {
     textAreaRef.current.focus();
   }
 
-  function handleHintListInteraction(event: KeyboardEvent<HTMLDivElement>): void {
+  function handleHintListInteraction(
+    event: KeyboardEvent<HTMLDivElement>,
+  ): void {
     if (!paperReplacementHint.length || !textAreaActive) {
       return;
     }
@@ -92,6 +94,7 @@ export function PrimaryView() {
         handleArrowKeys(event.key);
         event.preventDefault();
         break;
+      case KEY.Tab:
       case KEY.Enter:
         handleEnterKey();
         event.preventDefault();
@@ -122,8 +125,8 @@ export function PrimaryView() {
   return (
     <>
       <PaperSheetStamper scrollableRef={scrollableRef} />
-      <Flex direction="column" fillPositionedParent>
-        <Flex.Item grow={3} basis={1}>
+      <Stack vertical fillPositionedParent>
+        <Stack.Item grow={3} basis={1}>
           <PreviewView
             paperContext={data}
             scrollableRef={scrollableRef}
@@ -134,21 +137,28 @@ export function PrimaryView() {
             setTextAreaActive={setTextAreaActive}
             usedReplacementsRef={usedReplacementsRef}
           />
-        </Flex.Item>
-        {paperReplacementHint.length > 0 && textAreaActive && (
-          <Flex.Item>
-            <ReplacementHint
-              onKeyDown={handleHintListInteraction}
-              paperReplacementHint={paperReplacementHint}
-              selectedHintButtonId={selectedHintButtonId}
-              onHintButtonClick={applyReplacementByHint}
-            />
-          </Flex.Item>
-        )}
-
+        </Stack.Item>
         {writeMode &&
           (textAreaActive ? (
-            <Flex.Item shrink={1} height={TEXTAREA_INPUT_HEIGHT + 'px'}>
+            <Stack.Item
+              m={0}
+              shrink={1}
+              height={TEXTAREA_INPUT_HEIGHT + 'px'}
+              position="relative"
+            >
+              {paperReplacementHint.length > 0 && textAreaActive && (
+                <Stack className="Paper__Hints--wrapper">
+                  <Stack.Item className="Paper__Hints" grow>
+                    <ReplacementHint
+                      onKeyDown={handleHintListInteraction}
+                      paperReplacementHint={paperReplacementHint}
+                      selectedHintButtonId={selectedHintButtonId}
+                      onHintButtonClick={applyReplacementByHint}
+                    />
+                  </Stack.Item>
+                  <Stack.Item className="Paper__Hints--blur" m={0} />
+                </Stack>
+              )}
               <TextAreaSection
                 paperContext={data}
                 textAreaText={textAreaText}
@@ -157,6 +167,7 @@ export function PrimaryView() {
                 usedReplacementsRef={usedReplacementsRef}
                 textAreaRef={textAreaRef}
                 scrollableRef={scrollableRef}
+                paperReplacementHint={paperReplacementHint}
                 handleTextAreaKeyDown={handleHintListInteraction}
                 setTextAreaText={setTextAreaText}
                 setTextAreaActive={setTextAreaActive}
@@ -164,24 +175,19 @@ export function PrimaryView() {
                 setPaperReplacementHint={setPaperReplacementHint}
                 setActiveWriteButtonId={setActiveWriteButtonId}
               />
-            </Flex.Item>
+            </Stack.Item>
           ) : (
-            <Flex.Item>
-              <Stack reverse>
-                <Stack.Item>
-                  <Button
-                    align={'right'}
-                    iconPosition="right"
-                    icon={'up-long'}
-                    onClick={() => setTextAreaActive(true)}
-                  >
-                    Открыть редактор
-                  </Button>
-                </Stack.Item>
-              </Stack>
-            </Flex.Item>
+            <Stack.Item m={0} textAlign="right">
+              <Button
+                iconPosition="right"
+                icon={'up-long'}
+                onClick={() => setTextAreaActive(true)}
+              >
+                Открыть редактор
+              </Button>
+            </Stack.Item>
           ))}
-      </Flex>
+      </Stack>
     </>
   );
 }

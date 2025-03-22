@@ -19,18 +19,25 @@ export function ReplacementHint(props: ReplacementHintProps) {
   } = props;
 
   return (
-    <Stack vertical onKeyDown={onKeyDown}>
+    <Stack className="Paper__Hints--content" vertical onKeyDown={onKeyDown}>
       {paperReplacementHint.map((value, index) => {
         return (
-          <Stack.Item key={index}>
+          <Stack.Item key={index} m={0}>
             <Button
               fluid
+              color="transparent"
+              className="Paper__Hints--button"
               selected={index === selectedHintButtonId}
               onClick={() => onHintButtonClick(value.key)}
             >
               <Box
+                className="Paper__Hints--button--content"
                 dangerouslySetInnerHTML={{
-                  __html: `${value.key} [${value.name}] - ${value.value}`,
+                  __html: `
+                    <span class='key'>[${value.key}]</span> - <span class='value'>${value.value}</span>
+                    <br>
+                    <span class='desc'>${value.name}</span>
+                  `,
                 }}
               />
             </Button>
