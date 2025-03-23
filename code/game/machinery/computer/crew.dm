@@ -284,6 +284,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 				"y" = tracked_living_mob.y,
 				"z" = tracked_living_mob.z,
 			)
+			// BANDASTATION REPLACEMENT - END
 
 		// Trackability
 		entry["can_track"] = tracked_living_mob.can_track()
