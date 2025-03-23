@@ -201,7 +201,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /// Returns a line to be displayed regarding valid insertion zones
 /obj/item/organ/proc/zones_tip()
 	if (!valid_zones)
-		return span_notice("олжно вставляться в [ru_parse_zone(zone, declent = ACCUSATIVE)].")
+		return span_notice("Должно вставляться в [ru_parse_zone(zone, declent = ACCUSATIVE)].")
 
 	var/list/fit_zones = list()
 	for (var/valid_zone in valid_zones)
