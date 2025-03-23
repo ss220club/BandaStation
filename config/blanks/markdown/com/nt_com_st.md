@@ -6,20 +6,22 @@ category = Главы станции
 ]
 
 # === Приветствую Центральное командование ===
-! Сообщает вам [input_field], в должности [input_field].
-!
-! В данный момент на станции код: [input_field]
-! Активные угрозы для станции: [input_field]
-! Потери среди экипажа: [input_field]
-! Повреждения на станции: [input_field]
-! Общее состояние станции: [input_field]
-! Дополнительная информация: [input_field]
+
+Сообщает вам [input_field autofill_type=name], в должности [input_field autofill_type=job].
+<br>
+
+В данный момент на станции код: [input_field]
+Активные угрозы для станции: [input_field]
+Потери среди экипажа: [input_field]
+Повреждения на станции: [input_field]
+Общее состояние станции: [input_field]
+Дополнительная информация: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись: [input_field]
+! Подпись: [input_field autofill_type=sign]
 
 ---
 

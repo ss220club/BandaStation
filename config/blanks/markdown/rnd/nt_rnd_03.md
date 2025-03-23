@@ -24,7 +24,7 @@ station = station_name;
 
 # === Подписи и штампы ===
 
-! Дата и время: [input_field autofill_type=time]
+! Дата и время: [input_field autofill_type=datetime]
 ! Подпись заявителя: [input_field autofill_type=sign]
 ! Подпись Директора Исследований: [input_field autofill_type=sign]
 ! Подпись выполняющего установку имплантата: [input_field autofill_type=sign]

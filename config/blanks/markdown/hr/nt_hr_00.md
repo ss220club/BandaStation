@@ -7,13 +7,11 @@ category = Общие формы
 
 # === Основная информация ===
 
-! Имя заявителя: [input_field]
+Имя заявителя: [input_field autofill_type=name]
 -# Полностью и без ошибок
-
-! Номер аккаунта заявителя: [input_field]
+Номер аккаунта заявителя: [input_field autofill_type=bank_id]
 -# Эта информация есть в ваших заметках
-
-! Текущая должность: [input_field]
+Должность заявителя: [input_field autofill_type=job]
 -# Указано на ID карте
 
 # === Заявление ===
@@ -22,10 +20,10 @@ category = Общие формы
 
 # === Подписи и штампы ===
 
-! Время: [input_field]
-! Подпись заявителя: [input_field]
-! Подпись главы персонала: [input_field]
-! Подпись (дополнительная): [input_field]
+! Время: [input_field autofill_type=time]
+! Подпись заявителя: [input_field autofill_type=sign]
+! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись (дополнительная): [input_field autofill_type=sign]
 
 [blank_footer
 content = Подписи главы являются доказательством их согласия.

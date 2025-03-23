@@ -69,6 +69,13 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 /datum/paper_replacement/date/get_replacement(mob/user)
 	return "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR]"
 
+/datum/paper_replacement/datetime
+	key = "datetime"
+	name = "Текущая дата и время"
+
+/datum/paper_replacement/datetime/get_replacement(mob/user)
+	return "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR] [station_time_timestamp()]"
+
 /datum/paper_replacement/station_name
 	key = "station_name"
 	name = "Название станции"
@@ -96,6 +103,23 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 	var/job = human_user.get_assignment(if_no_id = null, if_no_job = null) || human_user?.mind?.assigned_role?.title
 
 	return isnull(job) ? "отсутствует" : job_title_ru(job)
+
+/datum/paper_replacement/department
+	key = "department"
+	name = "Отдел"
+
+/datum/paper_replacement/department/get_replacement(mob/user)
+	if(!ishuman(user))
+		return "отсутствует"
+
+	var/mob/living/carbon/human/human_user = user
+	var/job = human_user.get_assignment(if_no_id = null, if_no_job = null) || human_user?.mind?.assigned_role?.title
+	var/datum/job/user_job = SSjob.get_job(job)
+	if(isnull(job))
+		return "отсутствует"
+
+	var/datum/job_department/department_type = user_job.department_for_prefs || user_job.departments_list?[1]
+	return department_type::department_name || "отсутствует"
 
 /datum/paper_replacement/species
 	key = "species"

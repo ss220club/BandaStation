@@ -1,20 +1,21 @@
 [blank_header
 id = NT-COM-REQ;
-name = Запрос на поставку с Центрального командования;
+name = Запрос на поставку с центрального командования;
 station = [station_name];
 category = Главы станции
 ]
 
 # === Приветствую Центральное командование ===
-! Сообщает вам [input_field], в должности [input_field].
+
+! Сообщает вам [input_field autofill_type=name], в должности [input_field autofill_type=job].
 ! Текст запроса: [input_field]
-! Принича запроса: [input_field]
+! Причина запроса: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись: [input_field]
+! Подпись: [input_field autofill_type=sign]
 
 ---
 

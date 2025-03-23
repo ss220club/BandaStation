@@ -7,17 +7,18 @@ category = Отдел кадров
 
 # === Заявление ===
 
-! Я, [input_field], прошу Вашего разрешения на перестройку/перестановку под свои нужны или нужды организации.
-!
-! Должность заявителя: [input_field]
+Я, [input_field autofill_type=name], прошу Вашего разрешения на перестройку/перестановку под свои нужны или нужды организации.
+<br>
+
+Должность заявителя:  [input_field autofill_type=job]
 
 ---
 
 # === Подписи и штампы ===
 
-! Время: [input_field]
-! Подпись заявителя: [input_field]
-! Подпись главы персонала: [input_field]
+! Время: [input_field autofill_type=time]
+! Подпись заявителя: [input_field autofill_type=sign]
+! Подпись главы персонала: [input_field autofill_type=sign]
 
 ---
 

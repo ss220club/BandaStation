@@ -6,15 +6,15 @@ category = Отдел сервиса
 ]
 
 
-Объявляется, что [input_field], и, [input_field], официально прошли процедуру заключения гражданского брака
+Объявляется, что [input_field autofill_type=name], и, [input_field autofill_type=name], официально прошли процедуру заключения гражданского брака
 
 ---
 
 # === Подписи и штампы ===
 
-! Подпись уполномоченного: [input_field]
-! Подпись свидетеля: [input_field]
-! Подпись свидетеля: [input_field]
+! Подпись уполномоченного: [input_field autofill_type=sign]
+! Подпись свидетеля: [input_field autofill_type=sign]
+! Подпись свидетеля: [input_field autofill_type=sign]
 
 ---
 

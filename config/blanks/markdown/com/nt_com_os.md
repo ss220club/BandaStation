@@ -5,19 +5,19 @@ station = [station_name];
 category = Главы станции
 ]
 
-! Цель станции: [input_field]
-! Статус цели: [input_field]
-! Общее состояние станции: [input_field]
-! Активные угрозы: [input_field]
-! Оценка работы экипажа: [input_field]
-! Дополнительные замечания: [input_field]
+Цель станции: [input_field]
+Статус цели: [input_field]
+Общее состояние станции: [input_field]
+Активные угрозы: [input_field]
+Оценка работы экипажа: [input_field]
+Дополнительные замечания: [input_field]
 
 ---
 
 # === Подписи и штампы ===
 
-! Должность уполномоченного лица: [input_field]
-! Подпись уполномоченного лица: [input_field]
+! Должность уполномоченного лица:  [input_field autofill_type=job]
+! Подпись уполномоченного лица: [input_field autofill_type=sign]
 
 ---
 
