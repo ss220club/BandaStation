@@ -156,6 +156,8 @@ export function NanoMap(props: Props) {
         <Stack fill vertical>
           <Stack.Item
             grow
+            minWidth={0}
+            minHeight={0}
             className={classes([
               'NanoMap',
               `NanoMap--${minimapPosition ? minimapPosition : mapPrefs.minimapPosition}`,
