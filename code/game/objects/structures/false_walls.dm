@@ -66,7 +66,7 @@
 	if(opening)
 		smoothing_flags = NONE
 	else
-		smoothing_flags = SMOOTH_BITMASK
+		smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ // BANDASTATION ADDITION - SMOOTH_OBJ
 		QUEUE_SMOOTH(src)
 
 /obj/structure/falsewall/update_icon_state()
