@@ -148,7 +148,7 @@
 	QDEL_NULL(hacking_cable)
 	QDEL_NULL(instrument)
 	QDEL_NULL(internal_gps)
-	QDEL_NULL(crew_monitor)
+	QDEL_NULL(crew_monitor) // BANDASTATION ADDITION
 	QDEL_NULL(newscaster)
 	QDEL_NULL(signaler)
 	QDEL_NULL(leash)
