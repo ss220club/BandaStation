@@ -57,6 +57,9 @@
         },
         "Magistrate": {
             "spawn_positions": 1
+        },
+        "Explorer": {
+            "spawn_positions": 4
         }
 	}
 }

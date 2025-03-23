@@ -14,7 +14,7 @@ import { createSearch } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
-import { NanoMap } from './common/NanoMap';
+import { type MapData, NanoMap } from './common/NanoMap';
 
 type Data = {
   activeCamera: Camera & { status: BooleanLike };
@@ -22,8 +22,7 @@ type Data = {
   can_spy: BooleanLike;
   mapRef: string;
   network: string[];
-  mapUrl: string;
-  selected_z_level: number;
+  mapData: MapData;
 };
 
 type Camera = {
@@ -147,7 +146,7 @@ export const CameraContent = (props) => {
         </Stack>
       </Stack.Item>
       <Stack.Item grow={tab === 'Map' ? 1.5 : 3} ml={tab === 'Map' && 0}>
-        <CameraControls searchText={searchText} selectedTab={tab} />
+        <CameraControls searchText={searchText} />
       </Stack.Item>
     </Stack>
   );
@@ -206,45 +205,42 @@ const CameraListSelector = (props) => {
 
 export const CameraMapSelector = (props) => {
   const { act, data } = useBackend<Data>();
+  const { activeCamera, mapData } = data;
   const cameras = selectCameras(data.cameras, '');
-  const [zoom, setZoom] = useState(1);
-  const { activeCamera, mapUrl, selected_z_level } = data;
+  const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
 
   return (
-    <Stack fill>
-      <Stack.Item style={{ overflow: 'hidden' }}>
-        <NanoMap onZoom={(v) => setZoom(v)} mapUrl={mapUrl}>
-          {cameras
-            .filter((cam) => cam.z === Number(selected_z_level))
-            .map((cm) => (
-              <NanoMap.NanoButton
-                props={props}
-                activeCamera={activeCamera}
-                key={cm.ref}
-                x={cm.x}
-                y={cm.y}
-                zoom={zoom}
-                icon={null}
-                tooltip={cm.name}
-                name={cm.name}
-                color={'blue'}
-                status={cm.status}
-                cam_ref={cm.ref}
-              />
-            ))}
-        </NanoMap>
-      </Stack.Item>
-    </Stack>
+    <NanoMap
+      mapData={mapData}
+      uiName="camera-console"
+      onLevelChange={setSelectedLevel}
+    >
+      {cameras.map((camera) => (
+        <NanoMap.Button
+          key={camera.ref}
+          posX={camera.x}
+          posY={camera.y}
+          tooltip={camera.name}
+          color={!camera.status && 'red'}
+          selected={activeCamera?.ref === camera.ref}
+          hidden={camera.z !== selectedLevel}
+          onClick={() =>
+            act('switch_camera', {
+              camera: camera.ref,
+            })
+          }
+        />
+      ))}
+    </NanoMap>
   );
 };
 
-const CameraControls = (props: { searchText: string; selectedTab: string }) => {
+const CameraControls = (props: { searchText: string }) => {
   const { act, data } = useBackend<Data>();
   const { activeCamera, can_spy, mapRef } = data;
-  const { searchText, selectedTab } = props;
+  const { searchText } = props;
 
   const cameras = selectCameras(data.cameras, searchText);
-
   const [prevCamera, nextCamera] = prevNextCamera(cameras, activeCamera);
 
   return (
@@ -295,9 +291,7 @@ const CameraControls = (props: { searchText: string; selectedTab: string }) => {
         <Stack.Item grow>
           <ByondUi
             height="100%"
-            // Это пиздец, но если этот ебейших масштабов костыль не сделать,
-            // то ByondUI не обновит свой размер после изменения grow в CameraContent
-            width={selectedTab === 'Map' ? '100%' : '99.999%'}
+            width="100%"
             params={{
               id: mapRef,
               type: 'map',

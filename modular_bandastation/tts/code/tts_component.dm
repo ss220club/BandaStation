@@ -148,7 +148,8 @@
 	list/additional_effects = list(),
 	traits = TTS_TRAIT_RATE_FASTER,
 	preSFX,
-	postSFX
+	postSFX,
+	tts_seed_override
 )
 
 	SIGNAL_HANDLER
@@ -180,7 +181,7 @@
 	tts_args[TTS_CAST_TRAITS] = traits
 	tts_args[TTS_CAST_PRE_SFX] = preSFX
 	tts_args[TTS_CAST_POST_SFX] = postSFX
-	tts_args[TTS_CAST_SEED] = tts_seed
+	tts_args[TTS_CAST_SEED] = tts_seed_override || tts_seed
 	tts_args[TTS_PRIORITY] = TTS_PRIORITY_VOICE
 	finalize_tts(tts_args)
 

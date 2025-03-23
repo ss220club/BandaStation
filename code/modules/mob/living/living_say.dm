@@ -290,7 +290,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			understood = FALSE
 
 	var/speaker_is_signing = HAS_TRAIT(speaker, TRAIT_SIGN_LANG)
-
+	var/use_runechat = client?.prefs.read_preference(/datum/preference/toggle/enable_runechat)
+	if (stat == UNCONSCIOUS || stat == HARD_CRIT)
+		use_runechat = FALSE
+	else if (!ismob(speaker) && !client?.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs))
+		use_runechat = FALSE
 
 	// if someone is whispering we make an extra type of message that is obfuscated for people out of range
 	// Less than or equal to 0 means normal hearing. More than 0 and less than or equal to EAVESDROP_EXTRA_RANGE means
@@ -309,9 +313,12 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		if(speaker_is_signing)
 			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [speaker.get_default_say_verb()] что-то, но движения едва заметны, чтобы разобрать их."
 		else if(can_hear()) // If we can't hear we want to continue to the default deaf message
-			var/mob/living/living_speaker = speaker
-			if(istype(living_speaker) && living_speaker.is_mouth_covered()) // Can't see them speak if their mouth is covered
-				return FALSE
+			if(isliving(speaker))
+				var/mob/living/living_speaker = speaker
+				var/mouth_hidden = living_speaker.is_mouth_covered() || HAS_TRAIT(living_speaker, TRAIT_FACE_COVERED)
+				if(!HAS_TRAIT(src, TRAIT_EMPATH) && mouth_hidden) // Can't see them speak if their mouth is covered or hidden, unless we're an empath
+					return FALSE
+
 			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [ru_say_verb(speaker.verb_whisper)] что-то, но вы слишком далеко, чтобы услышать [speaker.ru_p_them()]."
 
 		if(deaf_message)
@@ -336,7 +343,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			deaf_type = MSG_AUDIBLE
 
 		// Create map text prior to modifying message for goonchat, sign lang edition
-		if (client?.prefs.read_preference(/datum/preference/toggle/enable_runechat) && !(stat == UNCONSCIOUS || stat == HARD_CRIT || is_blind()) && (client.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs) || ismob(speaker)))
+		if (use_runechat && !is_blind())
 			if (message_mods[MODE_CUSTOM_SAY_ERASE_INPUT])
 				create_chat_message(speaker, null, message_mods[MODE_CUSTOM_SAY_EMOTE], spans, EMOTE_MESSAGE)
 			else
@@ -359,7 +366,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		deaf_type = MSG_AUDIBLE // Since you should be able to hear yourself without looking
 
 	// Create map text prior to modifying message for goonchat
-	if (client?.prefs.read_preference(/datum/preference/toggle/enable_runechat) && !(stat == UNCONSCIOUS || stat == HARD_CRIT) && (ismob(speaker) || client.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs)) && can_hear())
+	if (use_runechat && can_hear())
 		if (message_mods[MODE_CUSTOM_SAY_ERASE_INPUT])
 			create_chat_message(speaker, null, message_mods[MODE_CUSTOM_SAY_EMOTE], spans, EMOTE_MESSAGE)
 		else
@@ -368,6 +375,20 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 	var/show_message_success = show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlight)
+
+	// BANDASTATION ADDITION START - TTS
+	if(show_message_success && radio_freq != FREQ_ENTERTAINMENT)
+		var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
+		speaker.cast_tts(
+			src,
+			message_to_tts,
+			is_local = (message_range != INFINITY),
+			is_radio = !!radio_freq,
+			effects = LAZYACCESS(message_mods, MODE_TTS_FILTERS),
+			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE)
+		)
+	// BANDASTATION ADDITION END - TTS
+
 	return understood && show_message_success
 
 /mob/living/send_speech(message_raw, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language = null, list/message_mods = list(), forced = null, tts_message, list/tts_filter)

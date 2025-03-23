@@ -39,9 +39,13 @@
 /datum/bodypart_overlay/mutant/vulpkanin_tail_markings/get_base_icon_state()
 	return (!isnull(tail_markings_key) ? "[tail_markings_key]_" : "") + (wagging ? "wagging_" : "") + sprite_datum.icon_state
 
-/datum/bodypart_overlay/mutant/vulpkanin_tail_markings/can_draw_on_bodypart(mob/living/carbon/human/human)
+/datum/bodypart_overlay/mutant/vulpkanin_tail_markings/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
 	. = ..()
-	if(human.wear_suit && (human.wear_suit.flags_inv & HIDEJUMPSUIT))
+	var/mob/living/carbon/human/human = bodypart_owner.owner
+	if(!istype(human))
+		return TRUE
+
+	if(human.wear_suit && (human.wear_suit?.flags_inv & HIDEJUMPSUIT))
 		return FALSE
 
 /datum/bodypart_overlay/mutant/vulpkanin_tail_markings/override_color(rgb_value)
@@ -75,7 +79,7 @@
 		tail_markings_overlay = new
 		tail_markings_overlay.tail_markings_key = tail_markings_key
 		tail_markings_overlay.color_source = ORGAN_COLOR_OVERRIDE
-		tail_markings_overlay.tail_markings_color = owner.dna.features["furcolor_second"]
+		tail_markings_overlay.tail_markings_color = owner.dna.features["vulpkanin_tail_markings_color"]
 		tail_markings_overlay.set_appearance_from_name(feature_name)
 		bodypart.add_bodypart_overlay(tail_markings_overlay)
 

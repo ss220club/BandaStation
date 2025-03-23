@@ -15,7 +15,6 @@
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_WALLS
-	can_be_unanchored = FALSE
 	can_atmos_pass = ATMOS_PASS_DENSITY
 	rad_insulation = RAD_MEDIUM_INSULATION
 	material_flags = MATERIAL_EFFECTS
@@ -66,7 +65,6 @@
 
 	if(opening)
 		smoothing_flags = NONE
-		clear_smooth_overlays()
 	else
 		smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ // BANDASTATION ADDITION - SMOOTH_OBJ
 		QUEUE_SMOOTH(src)
@@ -146,6 +144,10 @@
 /obj/structure/falsewall/examine_status(mob/user) //So you can't detect falsewalls by examine.
 	to_chat(user, span_notice("The outer plating is <b>welded</b> firmly in place."))
 	return null
+
+/obj/structure/falsewall/mouse_drop_receive(mob/living/dropping, mob/user, params)
+	. = ..()
+	LoadComponent(/datum/component/leanable, dropping)
 
 /*
  * False R-Walls

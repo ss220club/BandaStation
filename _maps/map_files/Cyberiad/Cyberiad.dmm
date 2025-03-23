@@ -29975,6 +29975,7 @@
 /obj/machinery/airalarm/directional/south,
 /obj/structure/closet/secure_closet/security/cargo,
 /obj/item/book/manual/wiki/security_space_law,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/supply)
 "hmw" = (
@@ -35228,7 +35229,7 @@
 	pixel_x = 4
 	},
 /obj/item/stock_parts/power_store/cell/high,
-/obj/item/reagent_containers/pill/patch/aiuri,
+/obj/item/reagent_containers/applicator/patch/aiuri,
 /obj/item/clothing/glasses/meson{
 	pixel_y = 4
 	},
@@ -62599,8 +62600,9 @@
 	name = "Engineering Security Doors";
 	id = "engineering_lockdown"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/construction,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/iron,
 /area/station/engineering/hallway)
 "phb" = (
@@ -88174,25 +88176,25 @@
 "vuy" = (
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/table/reinforced/rglass,
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6
 	},
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6;
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6;
 	pixel_y = 4
 	},
@@ -94133,8 +94135,9 @@
 	name = "Engineering Security Doors";
 	id = "engineering_lockdown"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/construction,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/iron,
 /area/station/engineering/hallway)
 "wUN" = (

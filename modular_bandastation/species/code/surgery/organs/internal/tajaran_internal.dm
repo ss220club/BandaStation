@@ -47,13 +47,13 @@
 
 /obj/item/organ/liver/tajaran
 	name = "tajaran liver"
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/organs.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
 	alcohol_tolerance = ALCOHOL_RATE * 2
 
 /obj/item/organ/eyes/tajaran
 	name = "tajaran eyeballs"
 	desc = "Глаза, приспособленные к темному освещению, но чувствительные к вспышкам."
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/organs.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
 	lighting_cutoff = LIGHTING_CUTOFF_REAL_LOW
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 
@@ -71,15 +71,15 @@
 
 /obj/item/organ/heart/tajaran
 	name = "tajaran heart"
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/organs.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
 
 /obj/item/organ/brain/tajaran
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/organs.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
 
 /obj/item/organ/lungs/tajaran
 	name = "tajaran lungs"
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/organs.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
 
 /obj/item/organ/kidneys/tajaran
 	name = "tajaran kidneys"
-	icon = 'modular_bandastation/species/icons/mob/species/tajaran/organs.dmi'
+	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
