@@ -1,6 +1,6 @@
 /// Name of the blanks file
-#define BLANKS_FILE_NAME "config/blanks.json"
-#define BLANKS_CONTENT_FOLDER "config/blanks_content"
+#define BLANKS_FOLDER "config/blanks"
+#define BLANKS_FILE_NAME "[BLANKS_FOLDER]/blanks.json"
 
 /// For use with the `color_mode` var. Photos will be printed in greyscale while the var has this value.
 #define PHOTO_GREYSCALE "Greyscale"
@@ -55,7 +55,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	var/list/parsed_blanks = list()
 	for(var/paper_blank in blanks_json)
 		var/blank_info = paper_blank["info"]
-		var/info_file_path = "[BLANKS_CONTENT_FOLDER]/[blank_info]"
+		var/info_file_path = "[BLANKS_FOLDER]/[blank_info]"
 		if(islist(blank_info))
 			var/list/blank_info_list = blank_info
 			paper_blank["info"] = blank_info_list.Join("")
@@ -144,11 +144,20 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 /obj/machinery/photocopier/ui_static_data(mob/user)
 	var/list/static_data = list()
 
+	var/list/user_access = list()
+	if(isliving(user))
+		var/mob/living/living_user = user
+		user_access = living_user.get_access()
+
 	var/list/blank_infos = list()
 	var/list/category_names = list()
 	if(GLOB.paper_blanks)
 		for(var/blank_id in GLOB.paper_blanks)
 			var/list/paper_blank = GLOB.paper_blanks[blank_id]
+			var/required_access = paper_blank["required_access"]
+			if(required_access && !(required_access in user_access))
+				continue
+
 			blank_infos += list(list(
 				name = paper_blank["name"],
 				category = paper_blank["category"],
@@ -695,7 +704,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 
 #undef PHOTOCOPIER_FEE
 #undef BLANKS_FILE_NAME
-#undef BLANKS_CONTENT_FOLDER
+#undef BLANKS_FOLDER
 #undef PAPER_PAPER_USE
 #undef PHOTO_PAPER_USE
 #undef DOCUMENT_PAPER_USE

@@ -37,6 +37,17 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 /datum/paper_replacement/name/get_replacement(mob/user)
 	return user.real_name || "неизвестный"
 
+/datum/paper_replacement/age
+	key = "age"
+	name = "Возраст"
+
+/datum/paper_replacement/age/get_replacement(mob/user)
+	if(!ishuman(user))
+		return "неизвестный"
+
+	var/mob/living/carbon/human/human_user = user
+	return isnull(human_user.age) ? "неизвестный" : human_user.age
+
 /datum/paper_replacement/sign
 	key = "sign"
 	name = "Подпись"
@@ -78,10 +89,13 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 	name = "Должность"
 
 /datum/paper_replacement/job/get_replacement(mob/user)
-	if(!istype(user))
+	if(!ishuman(user))
 		return "отсутствует"
 
-	return isnull(user.job) ? "отсутствует" : job_title_ru(user.job)
+	var/mob/living/carbon/human/human_user = user
+	var/job = human_user.get_assignment(if_no_id = null, if_no_job = null) || human_user?.mind?.assigned_role?.title
+
+	return isnull(job) ? "отсутствует" : job_title_ru(job)
 
 /datum/paper_replacement/species
 	key = "species"
