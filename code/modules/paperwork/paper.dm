@@ -772,7 +772,7 @@
 
 /datum/paper_input/proc/get_raw_text_length()
 	var/static/child_key_base_length = 8
-	var/total_length = length(raw_text)
+	var/total_length = length_char(raw_text)
 	for(var/index = 1, index <= length(children), index++)
 		var/datum/paper_input/child = children[index]
 		var/key_total_length = child_key_base_length + length("[index]")
