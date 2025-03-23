@@ -114,8 +114,9 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 
 	var/mob/living/carbon/human/human_user = user
 	var/job = human_user.get_assignment(if_no_id = null, if_no_job = null) || human_user?.mind?.assigned_role?.title
+
 	var/datum/job/user_job = SSjob.get_job(job)
-	if(isnull(job))
+	if(isnull(user_job))
 		return "отсутствует"
 
 	var/datum/job_department/department_type = user_job.department_for_prefs || user_job.departments_list?[1]
