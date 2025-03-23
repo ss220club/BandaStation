@@ -1,10 +1,10 @@
 import {
   Button,
   Dropdown,
+  Input,
   Section,
   Stack,
   Tabs,
-  Input,
 } from 'tgui-core/components';
 import { createSearch } from 'tgui-core/string';
 
