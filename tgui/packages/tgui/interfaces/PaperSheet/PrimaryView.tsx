@@ -3,7 +3,10 @@ import { Button, Stack } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 
 import { useBackend } from '../../backend';
-import { replacementTokenStartRegex, TEXTAREA_INPUT_HEIGHT } from './constants';
+import {
+  REPLACEMENT_TOKEN_START_REGEX,
+  TEXTAREA_INPUT_HEIGHT,
+} from './constants';
 import { canEdit } from './helpers';
 import { PreviewView } from './Preview';
 import { ReplacementHint } from './ReplacementHint';
@@ -56,7 +59,7 @@ export function PrimaryView() {
 
     const match = textAreaValue
       .substring(0, selectionStart)
-      .match(replacementTokenStartRegex);
+      .match(REPLACEMENT_TOKEN_START_REGEX);
 
     if (!match) {
       return;

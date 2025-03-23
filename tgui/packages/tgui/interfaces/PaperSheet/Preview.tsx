@@ -29,8 +29,6 @@ interface CustomToken {
   closingTag?: boolean;
 }
 
-const INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE = 'autofill-type';
-
 const CUSTOM_TOKENS: CustomToken[] = [
   {
     token: '!',
@@ -67,11 +65,12 @@ type PreviewViewProps = {
 };
 
 // Regex that finds [input_field] fields.
-const fieldRegex: RegExp = /\[input_field(?:\]|\s+autofill_type=(\w+)\])/gi;
-const childInputRegex: RegExp = /\[child_(\d+)\]/gi;
-const specialTokenRegex: RegExp = /\[(\w+)[^[]*?\]/gi;
+const FIELD_REGEX: RegExp = /\[input_field(?:\]|\s+autofill_type=(\w+)\])/gi;
+const CHILD_INPUT_REGEX: RegExp = /\[child_(\d+)\]/gi;
+const SPECIAL_TOKEN_REGEX: RegExp = /\[(\w+)[^[]*?\]/gi;
 
 const DOCUMENT_END_BUTTON_ID = 'document_end';
+const INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE = 'autofill-type';
 
 /**
  * Real-time text preview section. When not editing, this is simply
@@ -176,7 +175,7 @@ export function PreviewView(props: PreviewViewProps) {
 
   function createWriteButtons(text: string, paperInputRef?: string): string {
     let counter = 0;
-    return text.replace(fieldRegex, (match, p1) => {
+    return text.replace(FIELD_REGEX, (match, p1) => {
       return createWriteButton(
         paperInputRef && createWriteButtonId(paperInputRef, counter++),
         p1,
@@ -302,7 +301,7 @@ export function PreviewView(props: PreviewViewProps) {
     }
 
     return processedParentPaperInput.replaceAll(
-      childInputRegex,
+      CHILD_INPUT_REGEX,
       (match, p1) => {
         if (!paperInput.children) {
           return '';
@@ -341,7 +340,7 @@ export function PreviewView(props: PreviewViewProps) {
   }
 
   function parseSpecialTokens(text: string) {
-    return text.replace(specialTokenRegex, (match, p1) => {
+    return text.replace(SPECIAL_TOKEN_REGEX, (match, p1) => {
       const specialTokenResolver: (value: string) => string =
         SPECIAL_TOKENS[p1];
 

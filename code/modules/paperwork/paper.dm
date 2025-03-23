@@ -742,7 +742,7 @@
 	return children_as_lists
 
 /datum/paper_input/proc/add_child_to_field(datum/paper_input/new_child, input_field_id)
-	var/regex/input_field_regex = new(@"\[input_field(?:\]|\s+[\w=\s]*\])", "gm")
+	var/regex/input_field_regex = new(@"\[input_field(?:\]|\s+autofill_type=\w+\])", "gm")
 	var/field_counter = 0
 	while(input_field_regex.Find(raw_text))
 		field_counter++

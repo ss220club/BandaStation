@@ -10,7 +10,7 @@ import { KEY } from 'tgui-core/keys';
 import { debounce } from 'tgui-core/timer';
 
 import { useBackend } from '../../backend';
-import { replacementTokenStartRegex } from './constants';
+import { REPLACEMENT_TOKEN_START_REGEX } from './constants';
 import { getWriteButtonLocation, parseReplacements } from './helpers';
 import { PaperContext, PaperInput, PaperReplacement } from './types';
 
@@ -137,7 +137,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
 
     const match = textAreaValue
       .substring(0, selectionStart)
-      .match(replacementTokenStartRegex);
+      .match(REPLACEMENT_TOKEN_START_REGEX);
 
     if (!match) {
       return [];

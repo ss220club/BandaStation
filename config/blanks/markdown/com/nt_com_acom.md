@@ -5,7 +5,7 @@ station = [station_name];
 category = Главы станции
 ]
 
-Я, [input_field input_field=name], в должности сотрудника отделения [input_field autofill_type=department], прошу согласовать нынешнее командование [station_name], в повышении меня до и.о. главы [input_field autofill_type=department].
+Я, [input_field autofill_type=name], в должности сотрудника отделения [input_field autofill_type=department], прошу согласовать нынешнее командование [station_name], в повышении меня до и.о. главы [input_field autofill_type=department].
 
 При назначении меня на данную должность, я обязуюсь выполнять все рекомендации и правила, которые присутствуют на главы отделения. До появления основного главы отделения, я обеспечиваю порядок и управление отделом, сохранность и безопасность личных вещей главы отделения.
 
