@@ -1045,9 +1045,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	if(!istype(owner)) //sanity check for drones.
 		return
 	if(owner.mind)
-		attacker_style = owner.mind.martial_art
+		attacker_style = GET_ACTIVE_MARTIAL_ART(owner)
 	if((owner != target) && target.check_block(owner, 0, owner.declent_ru(ACCUSATIVE), attack_type = UNARMED_ATTACK))
-		log_combat(owner, target, "attempted to touch")
+		log_combat(owner, target, "попытался прикоснуться к")
 		target.visible_message(span_warning("[capitalize(owner.declent_ru(NOMINATIVE))] пытается прикоснуться к [target.declent_ru(DATIVE)]!"), \
 						span_danger("[capitalize(owner.declent_ru(NOMINATIVE))] пытается прикоснуться к вам!"), span_hear("Вы слышите свист!"), COMBAT_MESSAGE_RANGE, owner)
 		to_chat(owner, span_warning("Вы пытаетесь прикоснуться к [target.declent_ru(DATIVE)]!"))

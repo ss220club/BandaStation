@@ -141,7 +141,7 @@
 
 /turf/closed/indestructible/fakeglass/update_icon_state()
 	. = ..()
-	if(smoothing_flags & (SMOOTH_CORNERS|SMOOTH_BITMASK))
+	if(smoothing_flags & SMOOTH_BITMASK)
 		QUEUE_SMOOTH(src)
 
 /turf/closed/indestructible/fakeglass/update_overlays()
