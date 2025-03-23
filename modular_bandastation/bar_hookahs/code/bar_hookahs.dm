@@ -30,8 +30,6 @@
 	icon_state = "hookah"
 	max_integrity = 50
 	integrity_failure = 0
-	anchored = FALSE
-	can_be_unanchored = TRUE
 
 	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
