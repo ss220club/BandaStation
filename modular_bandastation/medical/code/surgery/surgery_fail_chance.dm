@@ -1,6 +1,6 @@
 #define SURGFAIL_LIGHT_AMOUNT_REQUERED 0.6
 #define SURGFAIL_LIGHT_AMOUNT_MULTIPLIER 20
-#define SURGFAIL_NO_PAINKILLER 80
+#define SURGFAIL_NO_PAINKILLER 70
 #define BASIC_SURGERY_SUCCESS_CHANCE 100
 #define CRITICAL_SUCCESS_CHANCE 100
 
@@ -17,10 +17,9 @@
 		if (light_amount < SURGFAIL_LIGHT_AMOUNT_REQUERED)
 			success_prob -= (SURGFAIL_LIGHT_AMOUNT_REQUERED - clamp(light_amount, 0, SURGFAIL_LIGHT_AMOUNT_REQUERED)) * SURGFAIL_LIGHT_AMOUNT_MULTIPLIER
 	if(!(target_part.bodytype & BODYTYPE_ROBOTIC))
-		if ((!(target.stat == UNCONSCIOUS || target.IsSleeping()) && target.stat != DEAD) && !HAS_TRAIT(target, TRAIT_ANALGESIA))
+		if (!(target.stat == UNCONSCIOUS || target.IsSleeping() || target.stat == DEAD || HAS_TRAIT(target, TRAIT_ANALGESIA)))
 			success_prob -= SURGFAIL_NO_PAINKILLER
 	var/fail_prob = CRITICAL_SUCCESS_CHANCE - success_prob
-	fail_prob *= modded_time / time
 
 	return fail_prob
 
