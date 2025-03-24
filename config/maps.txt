@@ -71,6 +71,6 @@ map cyberiad
 endmap
 
 map blueshift
-	minplayers 50
+	minplayers 70
 	votable
 endmap
