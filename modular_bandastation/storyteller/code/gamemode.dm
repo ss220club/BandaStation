@@ -521,11 +521,11 @@ SUBSYSTEM_DEF(gamemode)
 
 /datum/controller/subsystem/gamemode/proc/get_sec_mult()
 	var/sec_mult = 1
-	if(length(full_department_roles[STS_SEC]))
-		var/avg_count = length(full_department_roles[STS_SEC]) / 2
-		var/antags_count = get_antag_count()
-		sec_mult = antags_count ? avg_count / antags_count : length(full_department_roles[STS_SEC])
-	if(!get_antag_cap())
+	var/antag_cap = get_antag_cap()
+	if(antag_cap)
+		var/antag_count = get_antag_count()
+		sec_mult = 2 - (antag_count / antag_cap)
+	else
 		sec_mult = 0
 	return sec_mult
 
