@@ -9512,6 +9512,7 @@
 	dir = 4
 	},
 /obj/machinery/duct,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /turf/open/floor/carpet/green,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "bSQ" = (
@@ -13562,34 +13563,16 @@
 /obj/structure/closet/secure_closet/freezer/fridge/all_access,
 /obj/item/storage/box/ingredients/vegetarian,
 /obj/item/storage/box/ingredients/italian,
-/obj/item/storage/box/ingredients/fruity,
-/obj/item/storage/box/ingredients/fiesta,
-/obj/item/storage/box/ingredients/american,
-/obj/item/reagent_containers/condiment/flour{
-	list_reagents = list(/datum/reagent/consumable/flour=600);
-	name = "Premium All-Purpose Flour (16KG)";
-	volume = 600
-	},
 /obj/item/reagent_containers/condiment/milk,
-/obj/item/reagent_containers/condiment/enzyme{
-	list_reagents = list(/datum/reagent/consumable/enzyme=500);
-	name = "universe-sized universal enyzyme";
-	volume = 500
-	},
-/obj/item/reagent_containers/condiment/rice{
-	list_reagents = list(/datum/reagent/consumable/rice=150);
-	name = "Basmati Rice Sack (4KG)";
-	volume = 150
-	},
-/obj/item/food/meat/slab,
-/obj/item/food/meat/slab,
-/obj/item/food/meat/slab,
 /obj/item/food/meat/rawbacon,
 /obj/item/food/meat/rawbacon,
 /obj/item/food/meat/rawbacon,
 /obj/item/food/meat/slab/chicken,
 /obj/item/food/meat/slab/chicken,
 /obj/item/food/meat/slab/chicken,
+/obj/item/reagent_containers/condiment/rice,
+/obj/item/reagent_containers/condiment/flour,
+/obj/item/reagent_containers/condiment/enzyme,
 /turf/open/floor/iron/cafeteria,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "cFh" = (
@@ -38671,6 +38654,7 @@
 /obj/machinery/door/airlock/corporate{
 	name = "Representative's Office"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /turf/open/floor/carpet/green,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "hCU" = (
@@ -66769,12 +66753,10 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
 	},
+/obj/structure/table/wood/fancy/green,
+/obj/item/statuebust/hippocratic,
 /obj/structure/railing{
 	dir = 5
-	},
-/obj/structure/table/wood/fancy/green,
-/obj/item/statuebust/hippocratic{
-	pixel_y = 8
 	},
 /turf/open/floor/wood/parquet,
 /area/station/command/heads_quarters/nanotrasen_representative)
@@ -73464,6 +73446,7 @@
 	dir = 4
 	},
 /obj/machinery/duct,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /turf/open/floor/wood/parquet,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "ooF" = (
@@ -80584,6 +80567,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/duct,
 /obj/effect/landmark/navigate_destination,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "pLg" = (
@@ -121849,7 +121833,7 @@
 	},
 /obj/structure/table/wood/fancy/green,
 /obj/structure/statue/bronze/marx{
-	pixel_y = 10
+	pixel_y = 6
 	},
 /turf/open/floor/wood/parquet,
 /area/station/command/heads_quarters/nanotrasen_representative)
