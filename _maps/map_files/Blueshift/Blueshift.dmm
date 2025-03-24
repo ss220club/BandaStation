@@ -11424,6 +11424,7 @@
 	dir = 6
 	},
 /obj/effect/spawner/random/medical/medkit,
+/obj/structure/rack,
 /turf/open/floor/iron,
 /area/station/medical/patients_rooms)
 "clW" = (
@@ -38932,7 +38933,10 @@
 	linked_elevator_id = "publicElevator"
 	},
 /obj/machinery/light/directional/north,
-/obj/machinery/door/window/elevator/left/directional/west,
+/obj/machinery/door/window/elevator/left/directional/west{
+	elevator_mode = 1;
+	transport_linked_id = "publicElevator"
+	},
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/central)
 "hES" = (
@@ -86316,7 +86320,10 @@
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 8
 	},
-/obj/machinery/door/window/elevator/right/directional/west,
+/obj/machinery/door/window/elevator/right/directional/west{
+	elevator_mode = 1;
+	transport_linked_id = "publicElevator"
+	},
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/central)
 "qOZ" = (
@@ -107272,7 +107279,10 @@
 	linked_elevator_id = "publicElevator"
 	},
 /obj/machinery/light/directional/north,
-/obj/machinery/door/window/elevator/right/directional/east,
+/obj/machinery/door/window/elevator/right/directional/east{
+	elevator_mode = 1;
+	transport_linked_id = "publicElevator"
+	},
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/central)
 "uQl" = (
