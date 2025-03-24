@@ -19,7 +19,7 @@
 	if(!(target_part.bodytype & BODYTYPE_ROBOTIC))
 		if (!(target.stat == UNCONSCIOUS || target.IsSleeping() || target.stat == DEAD || HAS_TRAIT(target, TRAIT_ANALGESIA)))
 			success_prob -= SURGFAIL_NO_PAINKILLER
-	var/fail_prob = CRITICAL_SUCCESS_CHANCE - success_prob
+	var/fail_prob = clamp(CRITICAL_SUCCESS_CHANCE - success_prob, 0, 100)
 
 	return fail_prob
 
