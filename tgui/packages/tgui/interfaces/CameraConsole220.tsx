@@ -118,7 +118,7 @@ export const CameraContent = (props) => {
 
   return (
     <Stack fill>
-      <Stack.Item grow>
+      <Stack.Item grow minWidth={0}>
         <Stack fill vertical>
           <Stack.Item textAlign="center">
             <Tabs fluid>
