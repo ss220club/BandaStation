@@ -83,7 +83,7 @@
 
 /obj/item/station_charter/proc/rename_station(designation, uname, ureal_name, ukey)
 	set_station_name(designation)
-	minor_announce("[ureal_name] переименовал вашу станцию [html_decode(station_name())]", "Капитанская хартия") //decode station_name to avoid minor_announce double encode
+	minor_announce("[ureal_name] переименовал вашу станцию в [html_decode(station_name())]", "Капитанская хартия") //decode station_name to avoid minor_announce double encode
 	log_game("[ukey] has renamed the station as [station_name()].")
 
 	name = "station charter for [station_name()]"
