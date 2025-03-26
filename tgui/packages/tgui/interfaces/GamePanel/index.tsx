@@ -13,7 +13,12 @@ import { Window } from '../../layouts';
 
 export function GamePanel(props) {
   const { act, data } = useBackend<GamePanelData>();
-  const { subwindowTitle, objList, whereDropdownValue } = data;
+  const {
+    subwindowTitle,
+    objList,
+    whereDropdownValue,
+    currentList = '',
+  } = data;
   const [selectedTab, setSelectedTab] = useState(-1);
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
@@ -29,14 +34,17 @@ export function GamePanel(props) {
     'In marked object',
   ];
   function clearSearchText() {
-    newSearchTextValue = '/';
     setSearchText('');
   }
-
+  function clearSelectedObject() {
+    setSelectedObj(-1);
+    act('selected-object-changed', { newObj: -1 });
+  }
   const tabs = [
     {
       content: 'Create Object',
       handleClick: () => {
+        clearSelectedObject();
         setSelectedTab(0);
         clearSearchText();
         act('create-object');
@@ -46,6 +54,7 @@ export function GamePanel(props) {
     {
       content: 'Quick Create Object',
       handleClick: () => {
+        clearSelectedObject();
         setSelectedTab(1);
         clearSearchText();
         act('quick-create-object');
@@ -55,6 +64,7 @@ export function GamePanel(props) {
     {
       content: 'Create Turf',
       handleClick: () => {
+        clearSelectedObject();
         setSelectedTab(2);
         clearSearchText();
         act('create-turf');
@@ -64,6 +74,7 @@ export function GamePanel(props) {
     {
       content: 'Create Mob',
       handleClick: () => {
+        clearSelectedObject();
         setSelectedTab(3);
         clearSearchText();
         act('create-mob');
@@ -103,7 +114,7 @@ export function GamePanel(props) {
                 onClick={() => act('game-mode-panel')}
                 icon="fa-gamepad"
               >
-                (Game Mode Panel)
+                Game Mode Panel
               </Button>
             </Stack.Item>
           </Stack>
@@ -120,7 +131,6 @@ export function GamePanel(props) {
                   placeholder={'Search for ' + subwindowTitle?.split(' ')[1]}
                   onEnter={(e, value) => {
                     value = value === '' ? '/' : value;
-                    newSearchTextValue = value;
                     setSearchText(value);
                   }}
                   onChange={(e, value) => {
@@ -174,12 +184,14 @@ export function GamePanel(props) {
                 />
               </Stack.Item>
               <Stack.Item>
-                <Button onClick={() => act('create-object')}>Spawn</Button>
+                <Button onClick={() => act('create-object-action')}>
+                  Spawn {currentList}
+                </Button>
               </Stack.Item>
               <Stack.Divider />
               <Stack.Item overflow="auto">
                 <Table>
-                  {objList
+                  {objList[currentList === 'mob' ? 'mob' : 'obj']
                     .filter((obj) => {
                       return searchText === ''
                         ? false
@@ -195,7 +207,11 @@ export function GamePanel(props) {
                             selected={selectedObj === index}
                             onClick={() => {
                               setSelectedObj(index);
-                              act('selected-object-changed', { newObj: index });
+                              act('selected-object-changed', {
+                                newObj: objList[currentList].findIndex(
+                                  (item) => item === obj,
+                                ),
+                              });
                             }}
                           >
                             {obj}
@@ -221,6 +237,7 @@ interface tab {
 
 export type GamePanelData = {
   subwindowTitle: string;
-  objList: string[];
+  objList: string[][];
   whereDropdownValue: string;
+  currentList: string;
 };
