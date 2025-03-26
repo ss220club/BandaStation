@@ -1,4 +1,0 @@
-author: "Ez-Briz"
-delete-after: True
-changes:
-  - bugfix: "Исправлен рантайм при генерации скринтипа для измельчителя бумаги"
