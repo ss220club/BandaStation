@@ -60,7 +60,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 		if("game-mode-panel")
 			SSgamemode.admin_panel(usr)
 		if("create-object")
-			sub_window_title = "Create Object"
+			sub_window_title = "Object"
 			obj_list = typesof(/obj)
 		if("quick-create-object")
 			// ADD
@@ -71,10 +71,10 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 			// 	/obj/item/reagent_containers, /obj/item/gun)
 			// var/sorted_quick_options = sort_list(create_object_forms, GLOBAL_PROC_REF(cmp_typepaths_asc))
 		if("create-turf")
-			sub_window_title = "Create Turf"
+			sub_window_title = "Turf"
 			obj_list = typesof(/turf)
 		if("create-mob")
-			sub_window_title = "Create Mob"
+			sub_window_title = "Mob"
 			obj_list = typesof(/mob)
 		if("where-dropdown-changed")
 			where_dropdown_value = params?["newWhere"]
@@ -93,13 +93,22 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 		if("selected-object-changed")
 			selected_object = params?["newObj"]
 		if("create-object-action")
-			spawn_item(selected_object)
+			spawn_item(list(
+				object_list = text2path(selected_object),
+				object_count = object_count,
+				offset = offset,
+				object_dir = dir,
+				object_name = object_name,
+				object_where = get_dropdown_value(where_dropdown_value),
+				offset_type = offset_type,
+				)
+			)
 
 /datum/admins/gamepanel/ui_data(mob/user)
 	. = ..()
 	var/list/data = list()
-	data["sub_window_title"] = sub_window_title || "nothing"
-	data["obj_list"] = obj_list
+	data["subWindowTitle"] = sub_window_title
+	data["objList"] = obj_list
 	return data
 
 /**
@@ -117,50 +126,27 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 			return "inhand"
 		if(MARKED_OBJECT)
 			return "inmarked"
-	return 0
+	return
 
-/**
- * Calls Topic() function with object_list and other params to spawn chosen object
- */
-/datum/admins/gamepanel/proc/spawn_item(spawn_path = "")
-	var/atom/spawn_item = text2path(spawn_path)
-	if (!ispath(spawn_item))
+/datum/admins/gamepanel/proc/spawn_item(list/spawn_params)
+	if(!check_rights_for(user_client, R_ADMIN) || !spawn_params)
 		return
 
 	var/dropdown = get_dropdown_value(where_dropdown_value)
 	if(!dropdown)
 		return
 
-	Topic(src, list(
-		// admin_token = user_client.holder.href_token,
-		object_list = spawn_path,
-		object_count = object_count,
-		offset = offset,
-		object_dir = dir,
-		object_name = object_name,
-		object_where = dropdown,
-		offset_type = offset_type
-	))
-
-/**
- * Overrides parent Topic() call
- */
-/datum/admins/gamepanel/Topic(href, href_list) // TEMPORARY
-	// FIX TOKEN
-	// if(!CheckAdminHref(href, href_list))
-	// 	return
-
-	if(href_list["object_list"]) //this is the laggiest thing ever
+	if(spawn_params["object_list"]) //this is the laggiest thing ever
 		if(!check_rights(R_SPAWN))
 			return
 
 		var/atom/loc = usr.loc
 
 		var/dirty_paths
-		if (istext(href_list["object_list"]))
-			dirty_paths = list(href_list["object_list"])
-		else if (istype(href_list["object_list"], /list))
-			dirty_paths = href_list["object_list"]
+		if (istext(spawn_params["object_list"]))
+			dirty_paths = list(spawn_params["object_list"])
+		else if (istype(spawn_params["object_list"], /list))
+			dirty_paths = spawn_params["object_list"]
 
 		var/paths = list()
 
@@ -176,23 +162,23 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 			tgui_alert(usr,"The path list you sent is empty.")
 			return
 
-		var/number = clamp(text2num(href_list["object_count"]), 1, ADMIN_SPAWN_CAP)
+		var/number = clamp(text2num(spawn_params["object_count"]), 1, ADMIN_SPAWN_CAP)
 		if(length(paths) * number > ADMIN_SPAWN_CAP)
 			tgui_alert(usr,"Select fewer object types!")
 			return
 
-		var/list/offset = splittext(href_list["offset"],",")
+		var/list/offset = splittext(spawn_params["offset"],",")
 		var/X = offset.len > 0 ? text2num(offset[1]) : 0
 		var/Y = offset.len > 1 ? text2num(offset[2]) : 0
 		var/Z = offset.len > 2 ? text2num(offset[3]) : 0
-		var/obj_dir = text2num(href_list["object_dir"])
+		var/obj_dir = text2num(spawn_params["object_dir"])
 		if(obj_dir && !(obj_dir in list(1,2,4,8,5,6,9,10)))
 			obj_dir = null
-		var/obj_name = sanitize(href_list["object_name"])
+		var/obj_name = sanitize(spawn_params["object_name"])
 
 
 		var/atom/target //Where the object will be spawned
-		var/where = href_list["object_where"]
+		var/where = spawn_params["object_where"]
 		if (!( where in list("onfloor","frompod","inhand","inmarked") ))
 			where = "onfloor"
 
@@ -205,7 +191,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 				target = usr
 
 			if("onfloor", "frompod")
-				switch(href_list["offset_type"])
+				switch(spawn_params["offset_type"])
 					if ("absolute")
 						target = locate(0 + X,0 + Y,0 + Z)
 					if ("relative")
@@ -275,6 +261,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 					message_admins("[key_name_admin(usr)] created [number] instances of [english_list(paths)]")
 					break
 		return
+
 
 #undef MARKED_OBJECT
 #undef MOB_HAND
