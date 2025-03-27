@@ -13,12 +13,7 @@ import { Window } from '../../layouts';
 
 export function GamePanel(props) {
   const { act, data } = useBackend<GamePanelData>();
-  const {
-    subwindowTitle,
-    objList,
-    whereDropdownValue,
-    currentList = '',
-  } = data;
+  const { subwindowTitle, objList } = data;
   const [selectedTab, setSelectedTab] = useState(-1);
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
@@ -142,7 +137,17 @@ export function GamePanel(props) {
                 </Button>
               </Stack.Item>
               <Stack.Item>
-                Offset: <Input width="250px" mr={2} placeholder="x,y,z" />
+                Offset:{' '}
+                <Input
+                  width="250px"
+                  mr={2}
+                  placeholder="x,y,z"
+                  onChange={(e, value) =>
+                    value
+                      ? act('offset-changed', { newOffset: value })
+                      : undefined
+                  }
+                />
                 <Button.Checkbox
                   circular
                   selected={selectedRadio === 0}
@@ -164,9 +169,29 @@ export function GamePanel(props) {
                 />
               </Stack.Item>
               <Stack.Item>
-                Number: <Input width="30px" mr={1} value={1} />
-                Dir: <Input width="30px" mr={1} />
-                Name: <Input width="180px" mr={1} />
+                Number:{' '}
+                <Input
+                  width="30px"
+                  mr={1}
+                  value={1}
+                  onChange={(e, value) =>
+                    act('number-changed', { newNumber: value })
+                  }
+                />
+                Dir:{' '}
+                <Input
+                  width="30px"
+                  mr={1}
+                  onChange={(e, value) => act('dir-changed', { newDir: value })}
+                />
+                Name:{' '}
+                <Input
+                  width="180px"
+                  mr={1}
+                  onChange={(e, value) =>
+                    act('name-changed', { newName: value })
+                  }
+                />
               </Stack.Item>
               <Stack.Item>
                 Where:
@@ -185,13 +210,13 @@ export function GamePanel(props) {
               </Stack.Item>
               <Stack.Item>
                 <Button onClick={() => act('create-object-action')}>
-                  Spawn {currentList}
+                  Spawn
                 </Button>
               </Stack.Item>
               <Stack.Divider />
               <Stack.Item overflow="auto">
                 <Table>
-                  {objList[currentList === 'mob' ? 'mob' : 'obj']
+                  {objList
                     .filter((obj) => {
                       return searchText === ''
                         ? false
@@ -208,9 +233,7 @@ export function GamePanel(props) {
                             onClick={() => {
                               setSelectedObj(index);
                               act('selected-object-changed', {
-                                newObj: objList[currentList].findIndex(
-                                  (item) => item === obj,
-                                ),
+                                newObj: obj,
                               });
                             }}
                           >
@@ -237,7 +260,11 @@ interface tab {
 
 export type GamePanelData = {
   subwindowTitle: string;
-  objList: string[][];
-  whereDropdownValue: string;
-  currentList: string;
+  objList: string[];
+  // whereDropdownValue: string;
+  selected_object: string;
+  item_count: number;
+  dir: number;
+  offset: string;
+  offset_type: string;
 };

@@ -2,125 +2,283 @@
 #define SUPPLY_BELOW_MOB "On floor below own mob, dropped via supply pod"
 #define MOB_HAND "In own's mob hand"
 #define MARKED_OBJECT "In marked object"
+#define ABSOLUTE_OFFSET "absolute"
+#define RELATIVE_OFFSET "relative"
 
 ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_CATEGORY_GAME)
-	var/datum/gamepanel/tgui = new(user)
-	tgui.ui_interact(user.mob)
+	user.holder.gamepanel_tgui = new(user)
+	user.holder.gamepanel_tgui.ui_interact(user.mob)
 	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
 
-/datum/gamepanel
-	var/client/user_client
-	var/subwindowTitle = ""
-	var/objList = list()
-	var/whereDropdownValue = FLOOR_BELOW_MOB
-	var/selected_object = ""
-	var/itemCount = 1
-	var/item = null
-	var/loc = null
-	var/currentList = "obj"
+/datum/admins
+	var/datum/admins/gamepanel/gamepanel_tgui
 
-/datum/gamepanel/New(user)
+/datum/admins/New(list/datum/admin_rank/ranks, ckey, force_active = FALSE, protected)
+	. = ..(ranks, ckey, force_active, protected)
+	if(!.)
+		return
+
+	gamepanel_tgui = new()
+
+/datum/admins/gamepanel
+	var/client/user_client
+	var/sub_window_title = ""
+	var/obj_list = list()
+	var/where_dropdown_value = FLOOR_BELOW_MOB
+	var/selected_object = ""
+	var/object_count = 1
+	var/object_name
+	var/dir = 1
+	var/offset = ""
+	var/offset_type = "relative"
+
+/datum/admins/gamepanel/New(user)
 	if(istype(user, /client))
 		var/client/temp_user_client = user
 		user_client = temp_user_client //if its a client, assign it to user_client
 	else
 		var/mob/user_mob = user
 		user_client = user_mob.client //if its a mob, assign the mob's client to user_client
-	if(!objList["obj"])
-		objList["obj"] = typesof(/obj)
 
-/datum/gamepanel/ui_interact(mob/user, datum/tgui/ui)
+/datum/admins/gamepanel/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "GamePanel")
 		ui.open()
 
-/datum/gamepanel/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up variables.
+/datum/admins/gamepanel/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up variables.
 	qdel(src)
 
-/datum/gamepanel/ui_state(mob/user)
+/datum/admins/gamepanel/ui_state(mob/user)
 	. = ..()
 	return ADMIN_STATE(R_ADMIN)
 
-/datum/gamepanel/ui_act(action, params)
+/datum/admins/gamepanel/ui_act(action, params)
 	if(..())
 		return
 	switch(action)
 		if("game-mode-panel")
 			SSgamemode.admin_panel(usr)
 		if("create-object")
-			subwindowTitle = "Create Object"
-			if(!objList["obj"])
-				objList["obj"] = typesof(/obj)
-			currentList = "obj"
+			sub_window_title = "Create Object"
+			obj_list = typesof(/obj)
 		if("quick-create-object")
+			// ADD
 			user_client.holder.quick_create_object(user_client.mob)
+			// var/static/list/create_object_forms = list(
+			// 	/obj, /obj/structure, /obj/machinery, /obj/effect,
+			// 	/obj/item, /obj/item/clothing, /obj/item/stack, /obj/item,
+			// 	/obj/item/reagent_containers, /obj/item/gun)
+			// var/sorted_quick_options = sort_list(create_object_forms, GLOBAL_PROC_REF(cmp_typepaths_asc))
 		if("create-turf")
-			subwindowTitle = "Create Turf"
-			if(!objList["turf"])
-				objList["turf"] = typesof(/turf)
-			currentList = "turf"
+			sub_window_title = "Create Turf"
+			obj_list = typesof(/turf)
 		if("create-mob")
-			subwindowTitle = "Create Mob"
-			if(!objList["mob"])
-				objList["mob"] = typesof(/mob)
-			currentList = "mob"
+			sub_window_title = "Create Mob"
+			obj_list = typesof(/mob)
 		if("where-dropdown-changed")
-			whereDropdownValue = params?["newWhere"]
-		// if("set-relative-cords")
-		//     cords = RELATIVE_CORDS
-		// if("set-absolute-cords")
-		//     whereDropdownValue = params?["newWhere"]
+			where_dropdown_value = params?["newWhere"]
+		if("set-relative-cords")
+			offset_type = RELATIVE_OFFSET
+		if("set-absolute-cords")
+			offset_type = ABSOLUTE_OFFSET
+		if("offset-changed")
+			offset = params?["newOffset"]
+		if("number-changed")
+			object_count = params?["newNumber"]
+		if("dir-changed")
+			dir = params?["newDir"]
+		if("name-changed")
+			object_name = params?["newName"]
 		if("selected-object-changed")
 			selected_object = params?["newObj"]
 		if("create-object-action")
-			spawn_item(objList[currentList][selected_object], user_client, whereDropdownValue, loc)
+			spawn_item(selected_object)
 
-/datum/gamepanel/ui_data(mob/user)
+/datum/admins/gamepanel/ui_data(mob/user)
 	. = ..()
 	var/list/data = list()
-	data["subwindowTitle"] = subwindowTitle || "nothing"
+	data["sub_window_title"] = sub_window_title || "nothing"
+	data["obj_list"] = obj_list
 	return data
 
-/datum/gamepanel/proc/spawn_item(spawn_path, mob/user, spawn_action, loc)
-	switch(spawn_action)
+/**
+ * Transforms UI dropdown text to keywords for spawn type
+ *
+ * return keyword as a text.
+ */
+/datum/admins/gamepanel/proc/get_dropdown_value(dropdown_value)
+	switch(dropdown_value)
 		if(FLOOR_BELOW_MOB)
-			to_chat(usr, "below")
-			// if(ismovable(spawn_path))
-			//     var/atom/movable/return_item = new spawn_path()
-			//     if(isnull(return_item))
-			//         return_item.moveToNullspace()
-			//     else
-			//         return_item.forceMove(get_turf(user))
-			//     return return_item
-			// if(ispath(spawn_path))
-			//     return new spawn_path(get_turf(user))
-			if(ispath(spawn_path))
-				spawn_atom_to_turf(spawn_path, user_client.mob, itemCount, TRUE)
+			return "onfloor"
 		if(SUPPLY_BELOW_MOB)
-			to_chat(usr, "supply")
-			var/obj/structure/closet/supplypod/spawned_pod = podspawn(list(
-				"target" = user_client.mob,
-			))
-			return new spawn_path(spawned_pod)
+			return "frompod"
 		if(MOB_HAND)
-			to_chat(usr, "hand")
-			var/mob/living/carbon/human_user = user
-			if(istype(human_user) && isitem(spawn_path) && human_user.put_in_hands(spawn_path))
-				return
+			return "inhand"
 		if(MARKED_OBJECT)
-			to_chat(usr, "marked")
+			return "inmarked"
+	return 0
 
-/datum/gamepanel/ui_data(mob/user)
-	. = ..()
-	var/list/data = list()
-	data["subwindowTitle"] = subwindowTitle || "nothing"
-	data["objList"] = objList
-	data["whereDropdownValue"] = whereDropdownValue
-	data["currentList"] = currentList
-	return data
+/**
+ * Calls Topic() function with object_list and other params to spawn chosen object
+ */
+/datum/admins/gamepanel/proc/spawn_item(spawn_path = "")
+	var/atom/spawn_item = text2path(spawn_path)
+	if (!ispath(spawn_item))
+		return
+
+	var/dropdown = get_dropdown_value(where_dropdown_value)
+	if(!dropdown)
+		return
+
+	Topic(src, list(
+		// admin_token = user_client.holder.href_token,
+		object_list = spawn_path,
+		object_count = object_count,
+		offset = offset,
+		object_dir = dir,
+		object_name = object_name,
+		object_where = dropdown,
+		offset_type = offset_type
+	))
+
+/**
+ * Overrides parent Topic() call
+ */
+/datum/admins/gamepanel/Topic(href, href_list) // TEMPORARY
+	// FIX TOKEN
+	// if(!CheckAdminHref(href, href_list))
+	// 	return
+
+	if(href_list["object_list"]) //this is the laggiest thing ever
+		if(!check_rights(R_SPAWN))
+			return
+
+		var/atom/loc = usr.loc
+
+		var/dirty_paths
+		if (istext(href_list["object_list"]))
+			dirty_paths = list(href_list["object_list"])
+		else if (istype(href_list["object_list"], /list))
+			dirty_paths = href_list["object_list"]
+
+		var/paths = list()
+
+		for(var/dirty_path in dirty_paths)
+			var/path = text2path(dirty_path)
+			if(!path)
+				continue
+			else if(!ispath(path, /obj) && !ispath(path, /turf) && !ispath(path, /mob))
+				continue
+			paths += path
+
+		if(!paths)
+			tgui_alert(usr,"The path list you sent is empty.")
+			return
+
+		var/number = clamp(text2num(href_list["object_count"]), 1, ADMIN_SPAWN_CAP)
+		if(length(paths) * number > ADMIN_SPAWN_CAP)
+			tgui_alert(usr,"Select fewer object types!")
+			return
+
+		var/list/offset = splittext(href_list["offset"],",")
+		var/X = offset.len > 0 ? text2num(offset[1]) : 0
+		var/Y = offset.len > 1 ? text2num(offset[2]) : 0
+		var/Z = offset.len > 2 ? text2num(offset[3]) : 0
+		var/obj_dir = text2num(href_list["object_dir"])
+		if(obj_dir && !(obj_dir in list(1,2,4,8,5,6,9,10)))
+			obj_dir = null
+		var/obj_name = sanitize(href_list["object_name"])
+
+
+		var/atom/target //Where the object will be spawned
+		var/where = href_list["object_where"]
+		if (!( where in list("onfloor","frompod","inhand","inmarked") ))
+			where = "onfloor"
+
+
+		switch(where)
+			if("inhand")
+				if (!iscarbon(usr) && !iscyborg(usr))
+					to_chat(usr, "Can only spawn in hand when you're a carbon mob or cyborg.", confidential = TRUE)
+					where = "onfloor"
+				target = usr
+
+			if("onfloor", "frompod")
+				switch(href_list["offset_type"])
+					if ("absolute")
+						target = locate(0 + X,0 + Y,0 + Z)
+					if ("relative")
+						target = locate(loc.x + X,loc.y + Y,loc.z + Z)
+			if("inmarked")
+				if(!marked_datum)
+					to_chat(usr, "You don't have any object marked. Abandoning spawn.", confidential = TRUE)
+					return
+				else if(!istype(marked_datum, /atom))
+					to_chat(usr, "The object you have marked cannot be used as a target. Target must be of type /atom. Abandoning spawn.", confidential = TRUE)
+					return
+				else
+					target = marked_datum
+
+		var/obj/structure/closet/supplypod/centcompod/pod
+
+		if(target)
+			if(where == "frompod")
+				pod = new()
+
+			for (var/path in paths)
+				for (var/i = 0; i < number; i++)
+					if(path in typesof(/turf))
+						var/turf/O = target
+						var/turf/N = O.ChangeTurf(path)
+						if(N && obj_name)
+							N.name = obj_name
+					else
+						var/atom/O
+						if(where == "frompod")
+							O = new path(pod)
+						else
+							O = new path(target)
+
+						if(!QDELETED(O))
+							O.flags_1 |= ADMIN_SPAWNED_1
+							if(obj_dir)
+								O.setDir(obj_dir)
+							if(obj_name)
+								O.name = obj_name
+								if(ismob(O))
+									var/mob/M = O
+									M.real_name = obj_name
+							if(where == "inhand" && isliving(usr) && isitem(O))
+								var/mob/living/L = usr
+								var/obj/item/I = O
+								L.put_in_hands(I)
+								if(iscyborg(L))
+									var/mob/living/silicon/robot/R = L
+									if(R.model)
+										R.model.add_module(I, TRUE, TRUE)
+										R.activate_module(I)
+
+		if(pod)
+			new /obj/effect/pod_landingzone(target, pod)
+
+		if (number == 1)
+			log_admin("[key_name(usr)] created an instance of [english_list(paths)]")
+			for(var/path in paths)
+				if(ispath(path, /mob))
+					message_admins("[key_name_admin(usr)] created an instance of [english_list(paths)]")
+					break
+		else
+			log_admin("[key_name(usr)] created [number] instances of [english_list(paths)]")
+			for(var/path in paths)
+				if(ispath(path, /mob))
+					message_admins("[key_name_admin(usr)] created [number] instances of [english_list(paths)]")
+					break
+		return
 
 #undef MARKED_OBJECT
 #undef MOB_HAND
 #undef SUPPLY_BELOW_MOB
 #undef FLOOR_BELOW_MOB
+#undef ABSOLUTE_OFFSET
+#undef RELATIVE_OFFSET
