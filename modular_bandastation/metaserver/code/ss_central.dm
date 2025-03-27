@@ -162,7 +162,6 @@ SUBSYSTEM_DEF(central)
 	GLOB.whitelist -= ckey
 
 /datum/controller/subsystem/central/proc/update_player_donate_tier_async(client/player)
-	// TODO: handle cases when player has several donate tiers???
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/donates?ckey=[player.ckey]&active_only=true&page=1&page_size=1"
 	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(update_player_donate_tier_callback), player))
 
@@ -172,7 +171,7 @@ SUBSYSTEM_DEF(central)
 		return
 
 	var/list/data = json_decode(response.body)
-	get_max_donation_tier_from_response_data(data)
+	player.donator_level = max(player.donator_level, get_max_donation_tier_from_response_data(data))
 	player.can_save_donator_level = TRUE
 
 /datum/controller/subsystem/central/proc/update_player_donate_tier_blocking(client/player)
@@ -183,7 +182,7 @@ SUBSYSTEM_DEF(central)
 		return
 
 	var/list/data = json_decode(response.body)
-	player.donator_level = get_max_donation_tier_from_response_data(data)
+	player.donator_level = max(player.donator_level, get_max_donation_tier_from_response_data(data))
 	player.can_save_donator_level = TRUE
 
 /datum/controller/subsystem/central/proc/get_max_donation_tier_from_response_data(list/data)
