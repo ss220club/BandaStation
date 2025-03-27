@@ -261,10 +261,4 @@ interface tab {
 export type GamePanelData = {
   subwindowTitle: string;
   objList: string[];
-  // whereDropdownValue: string;
-  selected_object: string;
-  item_count: number;
-  dir: number;
-  offset: string;
-  offset_type: string;
 };
