@@ -13,7 +13,7 @@ import { Window } from '../../layouts';
 
 export function GamePanel(props) {
   const { act, data } = useBackend<GamePanelData>();
-  const { subwindowTitle, objList } = data;
+  const { subWindowTitle, objList } = data;
   const [selectedTab, setSelectedTab] = useState(-1);
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
@@ -123,7 +123,11 @@ export function GamePanel(props) {
                 <Input
                   width="280px"
                   ml={1}
-                  placeholder={'Search for ' + subwindowTitle?.split(' ')[1]}
+                  placeholder={
+                    subWindowTitle
+                      ? 'Search for ' + subWindowTitle
+                      : 'Select Tab to search'
+                  }
                   onEnter={(e, value) => {
                     value = value === '' ? '/' : value;
                     setSearchText(value);
@@ -259,6 +263,6 @@ interface tab {
 }
 
 export type GamePanelData = {
-  subwindowTitle: string;
+  subWindowTitle: string;
   objList: string[];
 };
