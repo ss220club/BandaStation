@@ -146,7 +146,7 @@ export function CreateObject(props) {
   );
 }
 
-export type GamePanelData = {
+type GamePanelData = {
   subWindowTitle: string;
   objList: string[];
 };
