@@ -26,6 +26,9 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 	var/obj_list = list()
 	var/where_dropdown_value = FLOOR_BELOW_MOB
 	var/selected_object = ""
+	/* ICON PREVIEW CODE
+	var/selected_object_icon = null
+	var/selected_object_icon_state = null */
 	var/object_count = 1
 	var/object_name
 	var/dir = 1
@@ -103,12 +106,25 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 				offset_type = offset_type,
 				)
 			)
+		/* ICON PREVIEW CODE
+		if("load-new-icon")
+			var/obj/object_path = text2path(selected_object)
+			if(!object_path)
+				return
+			var/temp_object = new object_path()
+			var/obj/temp_temp_object = temp_object
+			selected_object_icon = temp_temp_object.icon_preview
+			selected_object_icon_state = temp_temp_object.icon_state_preview
+			qdel(temp_object); */
 
 /datum/admins/gamepanel/ui_data(mob/user)
 	. = ..()
 	var/list/data = list()
 	data["subWindowTitle"] = sub_window_title
 	data["objList"] = obj_list
+	/* ICON PREVIEW CODE
+	data["icon"] = selected_object_icon
+	data["icon_state"] = selected_object_icon_state */
 	return data
 
 /datum/admins/gamepanel/proc/get_dropdown_value(dropdown_value)
