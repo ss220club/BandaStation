@@ -12,7 +12,6 @@ export function GamePanel(props) {
     {
       content: 'Create Object',
       handleClick: () => {
-        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(0);
         act('create-object');
       },
@@ -21,7 +20,6 @@ export function GamePanel(props) {
     {
       content: 'Quick Create Object',
       handleClick: () => {
-        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(1);
         act('quick-create-object');
       },
@@ -30,7 +28,6 @@ export function GamePanel(props) {
     {
       content: 'Create Turf',
       handleClick: () => {
-        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(2);
         act('create-turf');
       },
@@ -39,7 +36,6 @@ export function GamePanel(props) {
     {
       content: 'Create Mob',
       handleClick: () => {
-        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(3);
         act('create-mob');
       },
