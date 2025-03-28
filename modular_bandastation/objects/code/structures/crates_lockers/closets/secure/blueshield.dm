@@ -5,11 +5,13 @@
 	req_access = list(ACCESS_BLUESHIELD)
 
 /obj/structure/closet/secure_closet/blueshield/PopulateContents()
-	new /obj/item/storage/briefcase/secure(src)
-	new /obj/item/storage/medkit/advanced(src)
-	new /obj/item/storage/belt/security/full(src)
-	new /obj/item/storage/bag/garment/blueshield(src)
-	new /obj/item/radio/headset/blueshield(src)
-	new /obj/item/radio/headset/blueshield/alt(src)
-	new /obj/item/sensor_device(src)
-	new /obj/item/pinpointer/crew(src)
+	return list(
+		/obj/item/storage/briefcase/secure,
+		/obj/item/storage/medkit/advanced,
+		/obj/item/storage/belt/security/full,
+		/obj/item/storage/bag/garment/blueshield,
+		/obj/item/radio/headset/blueshield,
+		/obj/item/radio/headset/blueshield/alt,
+		/obj/item/sensor_device,
+		/obj/item/pinpointer/crew,
+	)
