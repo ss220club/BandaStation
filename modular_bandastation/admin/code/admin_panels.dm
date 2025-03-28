@@ -94,7 +94,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 			selected_object = params?["newObj"]
 		if("create-object-action")
 			spawn_item(list(
-				object_list = text2path(selected_object),
+				object_list = selected_object,
 				object_count = object_count,
 				offset = offset,
 				object_dir = dir,
@@ -109,6 +109,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 	var/list/data = list()
 	data["subWindowTitle"] = sub_window_title
 	data["objList"] = obj_list
+	data["selectedObject"] = selected_object
 	return data
 
 /**
