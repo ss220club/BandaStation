@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Button, Dropdown, Input, Stack, Table } from 'tgui-core/components';
+import {
+  Button,
+  Collapsible,
+  Dropdown,
+  Input,
+  Stack,
+  Table,
+} from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
 
@@ -44,72 +51,74 @@ export function CreateObject(props) {
           Search
         </Button>
       </Stack.Item>
-      <Stack.Item>
-        Offset:{' '}
-        <Input
-          width="250px"
-          mr={2}
-          placeholder="x,y,z"
-          onChange={(e, value) =>
-            value ? act('offset-changed', { newOffset: value }) : undefined
-          }
-        />
-        <Button.Checkbox
-          circular
-          selected={selectedRadio === 0}
-          mr={1}
-          icon="fa-a"
-          onClick={() => {
-            setSelectedRadio(0);
-            act('set-absolute-cords');
-          }}
-        />
-        <Button.Checkbox
-          circular
-          selected={selectedRadio === 1}
-          icon="fa-r"
-          onClick={() => {
-            setSelectedRadio(1);
-            act('set-relative-cords');
-          }}
-        />
-      </Stack.Item>
-      <Stack.Item>
-        Number:{' '}
-        <Input
-          width="30px"
-          mr={1}
-          value={1}
-          onChange={(e, value) => act('number-changed', { newNumber: value })}
-        />
-        Dir:{' '}
-        <Input
-          width="30px"
-          mr={1}
-          onChange={(e, value) => act('dir-changed', { newDir: value })}
-        />
-        Name:{' '}
-        <Input
-          width="180px"
-          mr={1}
-          onChange={(e, value) => act('name-changed', { newName: value })}
-        />
-      </Stack.Item>
-      <Stack.Item>
-        Where:
-        <Dropdown
-          ml={1}
-          width="320px"
-          options={whereDropdownOptions}
-          onSelected={(value) => {
-            setWhereDropdownVal(value);
-            act('where-dropdown-changed', {
-              newWhere: value,
-            });
-          }}
-          selected={whereDropdownVal}
-        />
-      </Stack.Item>
+      <Collapsible mt={1} title="Settings">
+        <Stack.Item m={1}>
+          Offset:{' '}
+          <Input
+            width="250px"
+            mr={2}
+            placeholder="x,y,z"
+            onChange={(e, value) =>
+              value ? act('offset-changed', { newOffset: value }) : undefined
+            }
+          />
+          <Button.Checkbox
+            circular
+            selected={selectedRadio === 0}
+            mr={1}
+            icon="fa-a"
+            onClick={() => {
+              setSelectedRadio(0);
+              act('set-absolute-cords');
+            }}
+          />
+          <Button.Checkbox
+            circular
+            selected={selectedRadio === 1}
+            icon="fa-r"
+            onClick={() => {
+              setSelectedRadio(1);
+              act('set-relative-cords');
+            }}
+          />
+        </Stack.Item>
+        <Stack.Item m={1}>
+          Number:{' '}
+          <Input
+            width="30px"
+            mr={1}
+            value={1}
+            onChange={(e, value) => act('number-changed', { newNumber: value })}
+          />
+          Dir:{' '}
+          <Input
+            width="30px"
+            mr={1}
+            onChange={(e, value) => act('dir-changed', { newDir: value })}
+          />
+          Name:{' '}
+          <Input
+            width="180px"
+            mr={1}
+            onChange={(e, value) => act('name-changed', { newName: value })}
+          />
+        </Stack.Item>
+        <Stack.Item m={1}>
+          Where:
+          <Dropdown
+            ml={1}
+            width="320px"
+            options={whereDropdownOptions}
+            onSelected={(value) => {
+              setWhereDropdownVal(value);
+              act('where-dropdown-changed', {
+                newWhere: value,
+              });
+            }}
+            selected={whereDropdownVal}
+          />
+        </Stack.Item>
+      </Collapsible>
       <Stack.Item>
         <Button onClick={() => act('create-object-action')}>Spawn</Button>
       </Stack.Item>
