@@ -7,13 +7,12 @@ import { CreateObject } from './CreateObject';
 
 export function GamePanel(props) {
   const { act } = useBackend();
-  const [selectedObj, setSelectedObj] = useState(-1);
   const [selectedTab, setSelectedTab] = useState(-1);
   const tabs = [
     {
       content: 'Create Object',
       handleClick: () => {
-        clearSelectedObject();
+        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(0);
         act('create-object');
       },
@@ -22,7 +21,7 @@ export function GamePanel(props) {
     {
       content: 'Quick Create Object',
       handleClick: () => {
-        clearSelectedObject();
+        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(1);
         act('quick-create-object');
       },
@@ -31,7 +30,7 @@ export function GamePanel(props) {
     {
       content: 'Create Turf',
       handleClick: () => {
-        clearSelectedObject();
+        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(2);
         act('create-turf');
       },
@@ -40,18 +39,13 @@ export function GamePanel(props) {
     {
       content: 'Create Mob',
       handleClick: () => {
-        clearSelectedObject();
+        act('selected-object-changed', { newObj: -1 });
         setSelectedTab(3);
         act('create-mob');
       },
       icon: 'fa-person',
     },
   ] as tab[];
-
-  function clearSelectedObject() {
-    setSelectedObj(-1);
-    act('selected-object-changed', { newObj: -1 });
-  }
 
   return (
     <Window height={500} title="Game Panel" width={700} theme="admin">
