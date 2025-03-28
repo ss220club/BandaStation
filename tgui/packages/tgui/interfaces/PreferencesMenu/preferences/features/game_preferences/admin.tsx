@@ -55,8 +55,8 @@ export const comms_notification: FeatureToggle = {
 };
 
 export const auto_deadmin_on_ready_or_latejoin: FeatureToggle = {
-  name: 'Auto deadmin - Ready or Latejoin',
-  category: 'ADMIN',
+  name: 'Авто deadmin - Готов или Лейтджоин',
+  category: 'АДМИН',
   description: `
     When enabled, you will automatically deadmin when you click to ready up or latejoin a round.
 `,
