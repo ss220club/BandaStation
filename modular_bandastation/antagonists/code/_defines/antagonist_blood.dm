@@ -1,3 +1,6 @@
+/// You have special interactions with Bloodsuckers
+#define TRAIT_BLOODSUCKER_HUNTER "bloodsucker_hunter"
+
 ///Вызывается когда вампир повышает ранг: (datum/bloodsucker_datum, mob/owner, mob/target)
 #define BLOODSUCKER_RANK_UP "bloodsucker_rank_up"
 ///Вызывается когда вампир взаимодействует с подданым на стойке подношения.
