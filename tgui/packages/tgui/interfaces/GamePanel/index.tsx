@@ -8,27 +8,31 @@ import { CreateObject } from './CreateObject';
 export function GamePanel(props) {
   const { act } = useBackend();
   const [selectedTab, setSelectedTab] = useState(-1);
+  const [compact, setCompact] = useState(1);
   const tabs = [
     {
       content: 'Create Object',
       handleClick: () => {
         setSelectedTab(0);
+        setCompact(0);
         act('create-object');
       },
       icon: 'fa-wrench',
     },
-    {
-      content: 'Quick Create Object',
-      handleClick: () => {
-        setSelectedTab(1);
-        act('quick-create-object');
-      },
-      icon: 'fa-bolt',
-    },
+    // {
+    //   content: 'Quick Create Object',
+    //   handleClick: () => {
+    //     setSelectedTab(1);
+    //     setCompact(0);
+    //     act('quick-create-object');
+    //   },
+    //   icon: 'fa-bolt',
+    // },
     {
       content: 'Create Turf',
       handleClick: () => {
-        setSelectedTab(2);
+        setSelectedTab(1);
+        setCompact(0);
         act('create-turf');
       },
       icon: 'fa-map',
@@ -36,7 +40,8 @@ export function GamePanel(props) {
     {
       content: 'Create Mob',
       handleClick: () => {
-        setSelectedTab(3);
+        setSelectedTab(2);
+        setCompact(0);
         act('create-mob');
       },
       icon: 'fa-person',
@@ -44,7 +49,12 @@ export function GamePanel(props) {
   ] as tab[];
 
   return (
-    <Window height={500} title="Game Panel" width={700} theme="admin">
+    <Window
+      height={compact ? 80 : 500}
+      title="Game Panel"
+      width={500}
+      theme="admin"
+    >
       <Window.Content>
         {/* Tabs and main window */}
         <Stack vertical fill>
@@ -81,7 +91,7 @@ export function GamePanel(props) {
           <Stack.Divider />
           {/* Main window */}
           <Stack.Item grow basis="85%">
-            <CreateObject />
+            {compact ? '' : <CreateObject />}
           </Stack.Item>
         </Stack>
       </Window.Content>
