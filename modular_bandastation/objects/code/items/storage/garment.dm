@@ -19,7 +19,6 @@
 		/obj/item/clothing/under/rank/blueshield/formal,
 		/obj/item/clothing/neck/cloak/blueshield,
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/clothing/glasses/hud/security/sunglasses,
 		/obj/item/clothing/glasses/hud/health/sunglasses,
 		/obj/item/clothing/shoes/jackboots/sec,
 		/obj/item/clothing/shoes/laceup,
