@@ -13,6 +13,7 @@ import { useBackend } from '../../backend';
 export function CreateObject(props) {
   const { act, data } = useBackend<GamePanelData>();
   const { subWindowTitle, objList } = data;
+  //  icon, icon_state } = data;
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
   const [selectedObj, setSelectedObj] = useState(-1);
@@ -51,6 +52,10 @@ export function CreateObject(props) {
           Search
         </Button>
       </Stack.Item>
+      {/* ICON PREVIEW CODE
+      <Collapsible>
+        <DmIcon icon={icon || ''} icon_state={icon_state || ''} />
+      </Collapsible> */}
       <Collapsible mt={1} title="Settings">
         <Stack.Item m={1}>
           Offset:{' '}
@@ -142,6 +147,8 @@ export function CreateObject(props) {
                       act('selected-object-changed', {
                         newObj: obj,
                       });
+                      /* ICON PREVIEW CODE
+                      act('load-new-icon'); */
                     }}
                   >
                     {obj}
@@ -158,4 +165,7 @@ export function CreateObject(props) {
 type GamePanelData = {
   subWindowTitle: string;
   objList: string[];
+  /* ICON PREVIEW CODE
+  icon: string;
+  icon_state: string; */
 };
