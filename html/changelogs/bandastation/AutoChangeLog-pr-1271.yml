@@ -1,0 +1,4 @@
+author: "tgstation"
+delete-after: True
+changes:
+  - refactor: "Изменены многие случаи использования pixel_x и pixel_y на правильные pixel_w и pixel_z, что исправило проблемы со слоями."
