@@ -8,7 +8,7 @@ export function CreateObject(props) {
   const { subWindowTitle, objList } = data;
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
-  const [selectedObj, setSelectedObj] = useState(0);
+  const [selectedObj, setSelectedObj] = useState(-1);
   const [whereDropdownVal, setWhereDropdownVal] = useState(
     'On floor below own mob',
   );
@@ -149,5 +149,4 @@ export function CreateObject(props) {
 export type GamePanelData = {
   subWindowTitle: string;
   objList: string[];
-  selectedObject: string;
 };

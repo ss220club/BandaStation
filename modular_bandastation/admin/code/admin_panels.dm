@@ -109,14 +109,8 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 	var/list/data = list()
 	data["subWindowTitle"] = sub_window_title
 	data["objList"] = obj_list
-	data["selectedObject"] = selected_object
 	return data
 
-/**
- * Transforms UI dropdown text to keywords for spawn type
- *
- * return keyword as a text.
- */
 /datum/admins/gamepanel/proc/get_dropdown_value(dropdown_value)
 	switch(dropdown_value)
 		if(FLOOR_BELOW_MOB)
@@ -262,7 +256,6 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 					message_admins("[key_name_admin(usr)] created [number] instances of [english_list(paths)]")
 					break
 		return
-
 
 #undef MARKED_OBJECT
 #undef MOB_HAND
