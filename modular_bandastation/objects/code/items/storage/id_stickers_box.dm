@@ -6,6 +6,7 @@
 	illustration = "id_stickers_box_label"
 
 /obj/item/storage/box/id_stickers/PopulateContents()
+	var/list/insert = list()
 	for(var/i in 1 to 3)
-		var/skin = pick(subtypesof(/obj/item/id_sticker))
-		new skin(src)
+		insert += pick(subtypesof(/obj/item/id_sticker))
+	return insert
