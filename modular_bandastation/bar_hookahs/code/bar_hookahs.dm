@@ -41,7 +41,6 @@
 	var/obj/item/reagent_container
 	/// Mouthpiece that belongs to this hookah
 	var/obj/item/hookah_mouthpiece/hookah_mouthpiece
-	var/datum/mouthpiece_attachment/attachment
 	var/fuel = 0
 	var/lit = FALSE
 	COOLDOWN_DECLARE(fuel_consume_cooldown)
@@ -73,28 +72,6 @@
 	. += span_notice("В чаше [english_list(food_item_list, nothing_text = "пусто", and_text = " и ", comma_text = ", ")].")
 	if(lit)
 		. += span_notice("[capitalize(src.declent_ru(NOMINATIVE))] зажжён.")
-
-/datum/mouthpiece_attachment
-	var/obj/item/hookah/current_hookah
-	var/atom/attached_to
-	VAR_PRIVATE/datum/beam/beam
-/datum/mouthpiece_attachment/New(obj/item/hookah/current_hookah, atom/attached_to)
-	src.current_hookah = current_hookah
-	src.attached_to = attached_to
-	beam = current_hookah.Beam(
-		attached_to,
-		icon = 'icons/effects/beam.dmi',
-		icon_state = "1-full",
-		beam_color = COLOR_BLACK,
-		layer = BELOW_MOB_LAYER,
-		override_origin_pixel_y = 0,
-	)
-
-/datum/mouthpiece_attachment/Destroy(force)
-	current_hookah = null
-	attached_to = null
-	QDEL_NULL(beam)
-	return ..()
 
 /obj/item/hookah/Initialize(mapload)
 	. = ..()
@@ -129,7 +106,7 @@
 /obj/item/hookah/update_appearance()
 	. = ..()
 	if(hookah_mouthpiece in contents)
-		QDEL_NULL(attachment)
+		hookah_mouthpiece.disconnect()
 
 /obj/item/hookah/attack_hand_secondary(mob/user, list/modifiers)
 	if(ismob(loc))
@@ -143,7 +120,7 @@
 	hookah_mouthpiece.source_hookah = src
 	to_chat(user, span_notice("Вы берёте [src.declent_ru(NOMINATIVE)] в руку."))
 	update_appearance(UPDATE_OVERLAYS)
-	attachment = new(src, user)
+	hookah_mouthpiece.connect_to(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/hookah/proc/try_light(obj/item/O, mob/user)
@@ -160,7 +137,7 @@
 		return TRUE
 
 /obj/item/hookah/attackby(obj/item/attacking_item, mob/user, params)
-	if(istype(attacking_item, /obj/item/hookah_mouthpiece))
+	if(attacking_item == hookah_mouthpiece)
 		return_mouthpiece(attacking_item)
 		return
 	if(istype(attacking_item, /obj/item/hookah_coals))
@@ -211,16 +188,14 @@
 		smoke_amount -= SMOKE_CONSUME_AMOUNT
 		COOLDOWN_START(src, smoke_decrease_cooldown, SMOKE_CONSUME_INTERVAL)
 
-	if(!attachment)
-		return
-
-	var/atom/attached_to = attachment.attached_to
-	if(!(get_dist(src, attached_to) <= 1 && isturf(attached_to.loc)))
-		if(ismob(attached_to))
-			var/mob/user = attached_to
-			user.dropItemToGround(hookah_mouthpiece)
-			to_chat(user, span_warning("Вы отпускаете [src.declent_ru(NOMINATIVE)]."))
-		QDEL_NULL(attachment)
+	if(!(hookah_mouthpiece in contents) && hookah_mouthpiece.attached_to)
+		var/atom/attached_to = hookah_mouthpiece.attached_to
+		if(!(get_dist(src, attached_to) <= 1 && isturf(attached_to.loc)))
+			if(ismob(attached_to))
+				var/mob/user = attached_to
+				user.dropItemToGround(hookah_mouthpiece)
+				to_chat(user, span_warning("Вы отпускаете [src.declent_ru(NOMINATIVE)]."))
+			hookah_mouthpiece.disconnect()
 
 /obj/item/hookah/click_alt_secondary(mob/user)
 	if(!ishuman(user))
@@ -339,8 +314,6 @@
 	. = ..()
 	if(hookah_mouthpiece && !(hookah_mouthpiece in contents))
 		return_mouthpiece(hookah_mouthpiece)
-		if(attachment)
-			QDEL_NULL(attachment)
 		to_chat(user, span_notice("Мундштук возвращается в [src.declent_ru(NOMINATIVE)]."))
 
 /obj/item/hookah/Destroy()
@@ -354,10 +327,8 @@
 	QDEL_LIST(food_items)
 	if(hookah_mouthpiece)
 		hookah_mouthpiece.source_hookah = null
+		hookah_mouthpiece.disconnect()
 		qdel(hookah_mouthpiece)
-
-	if(attachment)
-		attachment = null
 
 	set_light(0)
 	return ..()
@@ -370,6 +341,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	var/obj/item/hookah/source_hookah
 	var/datum/beam/beam
+	var/atom/attached_to
 	COOLDOWN_DECLARE(inhale_cooldown)
 	var/particle_type
 
@@ -378,19 +350,36 @@
 	if(hookah)
 		source_hookah = hookah
 
+/obj/item/hookah_mouthpiece/proc/connect_to(atom/target)
+	if(!source_hookah || !target)
+		return FALSE
+
+	attached_to = target
+	beam = source_hookah.Beam(
+		target,
+		icon = 'icons/effects/beam.dmi',
+		icon_state = "1-full",
+		beam_color = COLOR_BLACK,
+		layer = BELOW_MOB_LAYER,
+		override_origin_pixel_y = 0,
+	)
+	return TRUE
+
+/obj/item/hookah_mouthpiece/proc/disconnect()
+	attached_to = null
+	QDEL_NULL(beam)
+
 /obj/item/hookah_mouthpiece/Destroy()
 	if(source_hookah)
-		if(source_hookah.attachment)
-			QDEL_NULL(source_hookah.attachment)
 		source_hookah?.stop_smoke()
 		source_hookah.hookah_mouthpiece = null
+	disconnect()
 	return ..()
 
 /obj/item/hookah_mouthpiece/dropped(mob/user)
 	. = ..()
 	if(source_hookah)
 		source_hookah.return_mouthpiece(src)
-
 
 /obj/item/hookah_mouthpiece/attack_self(mob/living/carbon/human/user)
 	if(!source_hookah || !source_hookah.lit)
