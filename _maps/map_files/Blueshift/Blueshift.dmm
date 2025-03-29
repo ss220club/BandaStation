@@ -4670,7 +4670,6 @@
 /obj/structure/table/wood/fancy/red,
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/south,
-/obj/machinery/power/apc/auto_name/directional/south,
 /turf/open/floor/wood,
 /area/station/commons/dorms/room4)
 "aWE" = (
@@ -5102,7 +5101,6 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/commons/fitness/recreation/entertainment)
@@ -15419,9 +15417,7 @@
 /area/station/security/checkpoint)
 "cWg" = (
 /obj/effect/turf_decal/trimline/purple/filled/warning,
-/obj/machinery/door/window/left/directional/north{
-	dir = 2
-	},
+/obj/machinery/door/window/left/directional/south,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
 "cWh" = (
@@ -16639,9 +16635,8 @@
 	dir = 8
 	},
 /obj/structure/cable,
-/obj/machinery/door/window/left/directional/east{
-	req_access = list("psychology");
-	dir = 8
+/obj/machinery/door/window/left/directional/west{
+	req_access = list("psychology")
 	},
 /turf/open/floor/iron/dark,
 /area/station/medical/psychology)
@@ -29553,6 +29548,8 @@
 "fKz" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/commons/fitness/recreation/entertainment)
 "fKK" = (
@@ -33818,10 +33815,11 @@
 /turf/open/floor/iron/freezer,
 /area/station/service/kitchen/coldroom)
 "gAJ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/north,
-/turf/open/floor/plating,
-/area/station/maintenance/department/chapel/monastery)
+/turf/open/floor/iron,
+/area/station/commons/fitness/recreation/entertainment)
 "gAL" = (
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /obj/structure/sign/poster/random/directional/south,
@@ -66254,8 +66252,6 @@
 /obj/structure/disposalpipe/segment,
 /obj/effect/turf_decal/bot,
 /obj/structure/table,
-/obj/structure/table,
-/obj/structure/table,
 /turf/open/floor/iron/dark/side,
 /area/station/security/office)
 "mSE" = (
@@ -68720,7 +68716,6 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/south,
 /turf/open/floor/plating,
 /area/station/commons/fitness/recreation/entertainment)
 "nud" = (
@@ -74780,7 +74775,6 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/window/reinforced/spawner/directional/north,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /obj/effect/turf_decal/tile/neutral/opposingcorners{
 	dir = 1
@@ -80011,9 +80005,8 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/door/window/left/directional/west{
-	req_access = list("psychology");
-	dir = 4
+/obj/machinery/door/window/left/directional/east{
+	req_access = list("psychology")
 	},
 /turf/open/floor/iron/dark,
 /area/station/medical/psychology)
@@ -85382,14 +85375,10 @@
 /obj/machinery/keycard_auth/wall_mounted/directional/south{
 	pixel_y = -23
 	},
-/obj/effect/mapping_helpers/requests_console/announcement,
-/obj/effect/mapping_helpers/requests_console/information,
-/obj/effect/mapping_helpers/requests_console/assistance,
 /obj/machinery/camera/directional/south{
 	c_tag = "Bridge - Command Chair";
 	name = "command camera"
 	},
-/obj/machinery/light/directional/south,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -86291,7 +86280,6 @@
 	dir = 8;
 	pixel_x = 5
 	},
-/obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/commons/fitness/recreation/entertainment)
@@ -86747,7 +86735,6 @@
 /turf/open/floor/iron,
 /area/station/engineering/storage/tech)
 "qRF" = (
-/obj/machinery/vending/wardrobe/engi_wardrobe,
 /obj/machinery/vending/wardrobe/engi_wardrobe,
 /turf/open/floor/iron,
 /area/station/engineering/storage_shared)
@@ -94126,20 +94113,6 @@
 /obj/effect/turf_decal/tile/green/opposingcorners,
 /turf/open/floor/iron/white,
 /area/station/medical/virology)
-"soq" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "chemisttop";
-	name = "Chemistry Lobby Shutters";
-	dir = 8
-	},
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "chemisttop";
-	name = "Chemistry Lobby Shutters";
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/station/medical/pharmacy)
 "sot" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -96194,6 +96167,7 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
 /turf/open/floor/iron/dark/side{
 	dir = 8
 	},
@@ -96917,7 +96891,6 @@
 	},
 /obj/item/storage/briefcase/secure,
 /obj/machinery/light/directional/north,
-/obj/machinery/light/directional/north,
 /turf/open/floor/carpet,
 /area/station/service/library/printer)
 "sPB" = (
@@ -96994,7 +96967,6 @@
 /obj/structure/closet/crate/freezer,
 /obj/item/storage/cans/sixsoda,
 /obj/item/storage/cans/sixsoda,
-/obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/iron/dark,
@@ -107422,6 +107394,9 @@
 	department = "Bridge";
 	name = "Bridge Requests Console"
 	},
+/obj/effect/mapping_helpers/requests_console/information,
+/obj/effect/mapping_helpers/requests_console/assistance,
+/obj/effect/mapping_helpers/requests_console/announcement,
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "uOU" = (
@@ -108309,6 +108284,7 @@
 "uXJ" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/commons/fitness/recreation/entertainment)
 "uXP" = (
@@ -118756,11 +118732,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/mineral/plastitanium,
 /area/station/science/robotics/lab)
-"wWC" = (
-/obj/structure/barricade/wooden,
-/obj/structure/barricade/wooden,
-/turf/open/floor/wood,
-/area/station/service/barber)
 "wWH" = (
 /obj/effect/turf_decal/delivery,
 /obj/effect/spawner/random/structure/crate,
@@ -148347,7 +148318,7 @@ vti
 tSr
 iiE
 tSr
-tSr
+gAJ
 aEX
 mFn
 oeQ
@@ -169905,7 +169876,7 @@ fZI
 fZI
 fZI
 fZI
-bnn
+xJH
 xJH
 iqz
 xJH
@@ -208803,7 +208774,7 @@ xbi
 nwt
 cov
 dEu
-wWC
+dEu
 cov
 lJw
 xbi
@@ -224212,7 +224183,7 @@ hHN
 hHN
 cra
 uwN
-soq
+uwN
 uwN
 cra
 iUm
@@ -232480,7 +232451,7 @@ tEA
 qzi
 qzi
 tiN
-gAJ
+nXP
 nXP
 bBU
 nXP
