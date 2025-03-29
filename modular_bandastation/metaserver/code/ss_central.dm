@@ -52,6 +52,8 @@ SUBSYSTEM_DEF(central)
 
 	var/list/ckeys = result["items"]
 
+	if(!GLOB.whitelist)
+		GLOB.whitelist = list()
 	GLOB.whitelist |= ckeys
 
 /datum/controller/subsystem/central/proc/get_player_discord_async(ckey)
