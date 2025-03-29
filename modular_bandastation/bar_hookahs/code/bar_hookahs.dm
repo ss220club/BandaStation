@@ -415,24 +415,17 @@
 	return ..()
 
 /obj/item/hookah_mouthpiece/proc/start_inhale(target_mob)
-	if(!ishuman(target_mob))
+	var/mob/living/living_user = target_mob
+	living_user.visible_message(span_notice("[living_user] затягивается из [src.declent_ru(GENITIVE)]."), span_notice("Вы затягиваетесь..."))
+	if(!do_after(living_user, 2 SECONDS, src))
 		return
-	var/mob/living/carbon/human/user = target_mob
-	user.visible_message(span_notice("[user] затягивается из [src.declent_ru(GENITIVE)]."), span_notice("Вы затягиваетесь..."))
-	if(!do_after(user, 2 SECONDS, src))
-		return
-	inhale_smoke(user, BASE_INHALE_VOLUME)
+	inhale_smoke(living_user, BASE_INHALE_VOLUME)
 
 /obj/item/hookah_mouthpiece/proc/inhale_smoke(target_mob, amount, skip_calculations = FALSE)
-	if(!ishuman(target_mob))
-		return
-
-	var/mob/living/carbon/human/user = target_mob
-
 	var/is_safe = TRUE
-	var/mob/living/living_user = user
+	var/mob/living/living_user = target_mob
 	if(HAS_TRAIT(living_user, TRAIT_NOBREATH))
-		to_chat(user, span_warning("Вы не можете сделать и вдоха!"))
+		to_chat(living_user, span_warning("Вы не можете сделать и вдоха!"))
 		return
 
 	if(!source_hookah || !source_hookah.reagent_container || !source_hookah.reagent_container.reagents)
@@ -458,14 +451,14 @@
 		black_smoke.start()
 		QDEL_LIST(source_hookah.food_items)
 		these_reagents?.clear_reagents()
-		to_chat(user, span_warning("Вы чувствуете резкий неприятный запах!"))
-		user.dropItemToGround(src)
-		user.emote("cough")
-		user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * 4)
+		to_chat(living_user, span_warning("Вы чувствуете резкий неприятный запах!"))
+		living_user.dropItemToGround(src)
+		living_user.emote("cough")
+		living_user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * 4)
 		return
 
 	if(!source_hookah.reagent_container || !source_hookah.reagent_container.reagents.total_volume)
-		to_chat(user, span_warning("В [src.declent_ru(GENITIVE)] нет жидкости!"))
+		to_chat(living_user, span_warning("В [src.declent_ru(GENITIVE)] нет жидкости!"))
 		return
 
 	var/smoke_efficiency = min(source_hookah.smoke_amount, 100) / 100
@@ -477,32 +470,32 @@
 		amount_to_transfer = amount * smoke_efficiency
 
 	var/amount_to_waste = amount - amount_to_transfer
-	var/transferred = these_reagents.trans_to(user, amount_to_transfer, methods = INHALE)
+	var/transferred = these_reagents.trans_to(living_user, amount_to_transfer, methods = INHALE)
 
 	playsound(src, 'sound/effects/bubbles/bubbles.ogg', 20)
 	if(transferred)
-		to_chat(user, span_notice("Вы вдыхаете дым из [src.declent_ru(GENITIVE)]."))
-		user.add_mood_event("smoked", /datum/mood_event/smoked)
+		to_chat(living_user, span_notice("Вы вдыхаете дым из [src.declent_ru(GENITIVE)]."))
+		living_user.add_mood_event("smoked", /datum/mood_event/smoked)
 
 		if(!COOLDOWN_FINISHED(src, inhale_cooldown) || transferred > BASE_INHALE_LIMIT)
-			user.visible_message(span_warning(pick("[user] закашливается!", "[user] морщится, откашливаясь.", "[user] задыхается!")), span_warning(pick("Голова кружится...", "Вы закашливаетесь, морщась от острого покалывания в горле.", "Вы задыхаетесь!")))
-			user.emote("cough")
-			user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * (transferred / BASE_INHALE_LIMIT))
+			living_user.visible_message(span_warning(pick("[living_user] закашливается!", "[living_user] морщится, откашливаясь.", "[living_user] задыхается!")), span_warning(pick("Голова кружится...", "Вы закашливаетесь, морщась от острого покалывания в горле.", "Вы задыхаетесь!")))
+			living_user.emote("cough")
+			living_user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * (transferred / BASE_INHALE_LIMIT))
 
 		switch(smoke_efficiency * 100)
 			if(-INFINITY to 20)
-				to_chat(user, span_warning("Ваше горло словно обжигает..."))
-				user.emote("cough")
+				to_chat(living_user, span_warning("Ваше горло словно обжигает..."))
+				living_user.emote("cough")
 			if(20 to 40)
-				to_chat(user, span_notice("Слегка горчит."))
+				to_chat(living_user, span_notice("Слегка горчит."))
 			if(40 to 80)
-				to_chat(user, span_notice("Довольно приятный вкус..."))
+				to_chat(living_user, span_notice("Довольно приятный вкус..."))
 			else
-				to_chat(user, span_notice("Неплохой дымок."))
+				to_chat(living_user, span_notice("Неплохой дымок."))
 
 		COOLDOWN_START(src, inhale_cooldown, INHALE_COOLDOWN)
 		source_hookah.smoke_amount = min(source_hookah.smoke_amount + rand(amount * 2, amount), 100)
-		addtimer(CALLBACK(src, .proc/delayed_puff, user, amount_to_waste), 1 SECONDS)
+		addtimer(CALLBACK(src, .proc/delayed_puff, living_user, amount_to_waste), 1 SECONDS)
 
 /obj/item/hookah_mouthpiece/proc/delayed_puff(mob/user, amount)
 	var/datum/effect_system/fluid_spread/smoke/chem/quick/puff = new
