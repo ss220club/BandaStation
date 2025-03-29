@@ -36,10 +36,11 @@
 	inhand_icon_state = "beaker"
 
 	w_class = WEIGHT_CLASS_HUGE
-	pixel_y = 10
 
 	var/mutable_appearance/pipe_overlay
+	/// The embedded container that holds the reagents to smoke
 	var/obj/item/reagent_container
+	/// Mouthpiece that belongs to this hookah
 	var/obj/item/hookah_mouthpiece/this_mouthpiece
 	var/datum/mouthpiece_attachment/attachment
 	var/fuel = 0
@@ -51,10 +52,12 @@
 	var/mutable_appearance/lit_emissive
 	var/particle_type
 	var/datum/light_source/glow_light
+	/// Food ingridients inside the bowl
 	var/list/food_items = list()
-	/// Насколько кальян хорошо раскурен?
+	/// How well smoked is this hookah?
 	var/smoke_amount = 0
 
+	/// List of food ingridients that are safe to process
 	var/static/allowed_ingridients = typecacheof(list(
 		/obj/item/food/grown,
 		/obj/item/food/cheese,
@@ -68,17 +71,10 @@
 
 /obj/item/hookah/examine()
 	. = ..()
-	if(length(food_items))
-		var/food_string = ""
-		var/count = 1
-		for(var/obj/item/food/this_food in food_items)
-			food_string += this_food.declent_ru(NOMINATIVE)
-			if(count == length(food_items) - 3)
-				food_string += " и "
-			if(count == length(food_items) - 4)
-				food_string += ", "
-			count += 1
-		. += span_notice("Внутри [length(food_items) ? "- [food_string]" : "ничего нет"].")
+	var/list/food_item_list = list()
+	for(var/obj/item/food/food_item in food_items)
+		food_item_list += food_item.declent_ru(NOMINATIVE)
+	. += span_notice("В чаше [english_list(food_item_list, nothing_text = "пусто", and_text = " и ", comma_text = ", ")].")
 	if(lit)
 		. += span_notice("[capitalize(src.declent_ru(NOMINATIVE))] зажжён.")
 
@@ -413,14 +409,12 @@
 		return
 	return ..()
 
-// мелкий прок для дуафтера
 /obj/item/hookah_mouthpiece/proc/start_inhale(mob/living/carbon/human/user)
 	user.visible_message(span_notice("[user] затягивается из [src.declent_ru(GENITIVE)]."), span_notice("Вы затягиваетесь..."))
-	if(!do_after(user, 2 SECONDS, src)) // дымим?
+	if(!do_after(user, 2 SECONDS, src))
 		return
 	inhale_smoke(user, BASE_INHALE_VOLUME)
 
-// дымим, господа! разрешили!
 /obj/item/hookah_mouthpiece/proc/inhale_smoke(mob/living/carbon/human/user, amount, skip_calculations = FALSE)
 	var/is_safe = TRUE
 	var/mob/living/living_user = user
@@ -513,7 +507,7 @@
 	. = ..()
 	. += span_info("В кучке три кубика.")
 
-/obj/machinery/vending/cigarette/New()
+/obj/machinery/vending/cigarette/Initialize()
 	premium += list(
 		/obj/item/hookah_coals = 3,
 	)
@@ -521,7 +515,7 @@
 
 /datum/supply_pack/misc/hookah_kit
 	name = "Набор для кальяна"
-	desc = "Комплект для любителей подымить и культурно расслабиться. Наполнение не включено."
+	desc = "Комплект для любителей подымить и культурно расслабиться."
 	cost = 200
 	contains = list(
 		/obj/item/hookah,
