@@ -41,7 +41,7 @@
 	/// The embedded container that holds the reagents to smoke
 	var/obj/item/reagent_container
 	/// Mouthpiece that belongs to this hookah
-	var/obj/item/hookah_mouthpiece/this_mouthpiece
+	var/obj/item/hookah_mouthpiece/hookah_mouthpiece
 	var/datum/mouthpiece_attachment/attachment
 	var/fuel = 0
 	var/lit = FALSE
@@ -79,13 +79,13 @@
 		. += span_notice("[capitalize(src.declent_ru(NOMINATIVE))] зажжён.")
 
 /datum/mouthpiece_attachment
-	var/obj/item/hookah/this_hookah
+	var/obj/item/hookah/current_hookah
 	var/atom/attached_to
 	VAR_PRIVATE/datum/beam/beam
-/datum/mouthpiece_attachment/New(obj/item/hookah/this_hookah, atom/attached_to)
-	src.this_hookah = this_hookah
+/datum/mouthpiece_attachment/New(obj/item/hookah/current_hookah, atom/attached_to)
+	src.current_hookah = current_hookah
 	src.attached_to = attached_to
-	beam = this_hookah.Beam(
+	beam = current_hookah.Beam(
 		attached_to,
 		icon = 'icons/effects/beam.dmi',
 		icon_state = "1-full",
@@ -95,7 +95,7 @@
 	)
 
 /datum/mouthpiece_attachment/Destroy(force)
-	this_hookah = null
+	current_hookah = null
 	attached_to = null
 	QDEL_NULL(beam)
 	return ..()
@@ -103,8 +103,8 @@
 /obj/item/hookah/Initialize(mapload)
 	. = ..()
 	pipe_overlay = mutable_appearance('modular_bandastation/bar_hookahs/icons/hookah.dmi', "pipe")
-	this_mouthpiece = new(src)
-	this_mouthpiece.source_hookah = src
+	hookah_mouthpiece = new(src)
+	hookah_mouthpiece.source_hookah = src
 	update_appearance(UPDATE_OVERLAYS)
 	create_reagents(INTERNAL_VOLUME, TRANSPARENT)
 	reagent_container = src
@@ -115,7 +115,7 @@
 
 /obj/item/hookah/update_overlays()
 	. = ..()
-	if(this_mouthpiece in contents)
+	if(hookah_mouthpiece in contents)
 		. += pipe_overlay
 	if(fuel > 0)
 		. += coal_overlay
@@ -127,7 +127,7 @@
 	if(current_mouthpiece.source_hookah != src)
 		return FALSE
 
-	if(this_mouthpiece in contents)
+	if(hookah_mouthpiece in contents)
 		return FALSE
 
 	current_mouthpiece.forceMove(src)
@@ -136,19 +136,19 @@
 
 /obj/item/hookah/update_appearance()
 	. = ..()
-	if(this_mouthpiece in contents)
+	if(hookah_mouthpiece in contents)
 		QDEL_NULL(attachment)
 
 /obj/item/hookah/attack_hand_secondary(mob/user, list/modifiers)
 	if(ismob(loc))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	if(!(this_mouthpiece in contents))
+	if(!(hookah_mouthpiece in contents))
 		balloon_alert(user, "уже занято!")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	user.put_in_hands(this_mouthpiece)
-	this_mouthpiece.source_hookah = src
+	user.put_in_hands(hookah_mouthpiece)
+	hookah_mouthpiece.source_hookah = src
 	to_chat(user, span_notice("Вы берёте [src.declent_ru(NOMINATIVE)] в руку."))
 	update_appearance(UPDATE_OVERLAYS)
 	attachment = new(src, user)
@@ -226,11 +226,13 @@
 	if(!(get_dist(src, attached_to) <= 1 && isturf(attached_to.loc)))
 		if(ismob(attached_to))
 			var/mob/user = attached_to
-			user.dropItemToGround(this_mouthpiece)
+			user.dropItemToGround(hookah_mouthpiece)
 			to_chat(user, span_warning("Вы отпускаете [src.declent_ru(NOMINATIVE)]."))
 		QDEL_NULL(attachment)
 
 /obj/item/hookah/click_alt_secondary(mob/user)
+	if(!ishuman(user))
+		return
 	var/list/hookah_radial_options = list()
 	if(lit)
 		hookah_radial_options[OPTION_EXTINGUISH] = RADIAL_EXTINGUISH
@@ -267,12 +269,12 @@
 				return CLICK_ACTION_BLOCKING
 
 			var/mob/living/living_user = user
-			if(this_mouthpiece in living_user.held_items)
+			if(hookah_mouthpiece in living_user.held_items)
 				user.visible_message(span_notice("[user] глубоко затягивается..."), span_notice("Вы делаете глубокую затяжку..."))
 				if(!do_after(user, 5 SECONDS, src))
 					return CLICK_ACTION_BLOCKING
 
-				this_mouthpiece.inhale_smoke(living_user, BASE_INHALE_VOLUME * 2, TRUE)
+				hookah_mouthpiece.inhale_smoke(living_user, BASE_INHALE_VOLUME * 2, TRUE)
 				return CLICK_ACTION_SUCCESS
 
 		if(OPTION_CLEAR)
@@ -326,15 +328,15 @@
 		reagent_container.reagents.expose(get_turf(src), TOUCH)
 
 	if(length(food_items))
-		for(var/obj/item/food/this_food in food_items)
+		for(var/obj/item/food/some_food in food_items)
 			var/turf/drop_loc = get_turf(src)
-			var/obj/item/food/food_item = this_food
+			var/obj/item/food/food_item = some_food
 			if(food_item.reagents?.total_volume)
 				food_item.reagents.expose(drop_loc, TOUCH)
 			qdel(food_item)
 
-	if(this_mouthpiece)
-		qdel(this_mouthpiece)
+	if(hookah_mouthpiece)
+		qdel(hookah_mouthpiece)
 
 	QDEL_LIST(food_items)
 	visible_message(span_warning("[capitalize(src.declent_ru(NOMINATIVE))] с треском разлетается на осколки!"))
@@ -343,8 +345,8 @@
 
 /obj/item/hookah/pickup(mob/user)
 	. = ..()
-	if(this_mouthpiece && !(this_mouthpiece in contents))
-		return_mouthpiece(this_mouthpiece)
+	if(hookah_mouthpiece && !(hookah_mouthpiece in contents))
+		return_mouthpiece(hookah_mouthpiece)
 		if(attachment)
 			QDEL_NULL(attachment)
 		to_chat(user, span_notice("Мундштук возвращается в [src.declent_ru(NOMINATIVE)]."))
@@ -358,9 +360,9 @@
 		particle_type = null
 
 	QDEL_LIST(food_items)
-	if(this_mouthpiece)
-		this_mouthpiece.source_hookah = null
-		qdel(this_mouthpiece)
+	if(hookah_mouthpiece)
+		hookah_mouthpiece.source_hookah = null
+		qdel(hookah_mouthpiece)
 
 	if(attachment)
 		attachment = null
@@ -389,7 +391,7 @@
 		if(source_hookah.attachment)
 			QDEL_NULL(source_hookah.attachment)
 		source_hookah?.stop_smoke()
-		source_hookah.this_mouthpiece = null
+		source_hookah.hookah_mouthpiece = null
 	return ..()
 
 /obj/item/hookah_mouthpiece/dropped(mob/user)
@@ -403,19 +405,30 @@
 		return ..()
 	start_inhale(user)
 
-/obj/item/hookah_mouthpiece/attack(mob/living/carbon/human/this_human, mob/living/carbon/human/user)
-	if(this_human == user && source_hookah?.lit)
+/obj/item/hookah_mouthpiece/attack(mob/living/target_mob, mob/living/user)
+	if(!ishuman(target_mob))
+		return
+	var/mob/living/carbon/human/target_human = target_mob
+	if(target_human == user && source_hookah?.lit)
 		start_inhale(user)
 		return
 	return ..()
 
-/obj/item/hookah_mouthpiece/proc/start_inhale(mob/living/carbon/human/user)
+/obj/item/hookah_mouthpiece/proc/start_inhale(target_mob)
+	if(!ishuman(target_mob))
+		return
+	var/mob/living/carbon/human/user = target_mob
 	user.visible_message(span_notice("[user] затягивается из [src.declent_ru(GENITIVE)]."), span_notice("Вы затягиваетесь..."))
 	if(!do_after(user, 2 SECONDS, src))
 		return
 	inhale_smoke(user, BASE_INHALE_VOLUME)
 
-/obj/item/hookah_mouthpiece/proc/inhale_smoke(mob/living/carbon/human/user, amount, skip_calculations = FALSE)
+/obj/item/hookah_mouthpiece/proc/inhale_smoke(target_mob, amount, skip_calculations = FALSE)
+	if(!ishuman(target_mob))
+		return
+
+	var/mob/living/carbon/human/user = target_mob
+
 	var/is_safe = TRUE
 	var/mob/living/living_user = user
 	if(HAS_TRAIT(living_user, TRAIT_NOBREATH))
@@ -426,18 +439,18 @@
 		return
 
 	var/datum/reagents/these_reagents = source_hookah.reagent_container.reagents
-	for(var/obj/item/food/this_food in source_hookah.food_items)
-		if(!this_food.reagents)
-			qdel(this_food)
+	for(var/obj/item/food/some_food_item in source_hookah.food_items)
+		if(!some_food_item.reagents)
+			qdel(some_food_item)
 			continue
 
-		if(!is_type_in_typecache(this_food, source_hookah.allowed_ingridients))
+		if(!is_type_in_typecache(some_food_item, source_hookah.allowed_ingridients))
 			is_safe = FALSE
 
-		this_food.reagents.trans_to(these_reagents, amount / length(source_hookah.food_items))
-		if(!this_food.reagents.total_volume)
-			source_hookah.food_items -= this_food
-			qdel(this_food)
+		some_food_item.reagents.trans_to(these_reagents, amount / length(source_hookah.food_items))
+		if(!some_food_item.reagents.total_volume)
+			source_hookah.food_items -= some_food_item
+			qdel(some_food_item)
 
 	if(!is_safe)
 		var/datum/effect_system/fluid_spread/smoke/chem/black_smoke = new
