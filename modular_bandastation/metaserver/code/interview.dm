@@ -17,15 +17,15 @@
 		return
 	. = ..()
 	add_owner_to_whitelist(approved_by)
-	send_interview_webhook(src, "[approved_by.ckey] принял:")
+	send_interview_webhook("[approved_by.ckey] принял:")
 
 /datum/interview_manager/enqueue(datum/interview/to_queue)
 	. = ..()
-	send_interview_webhook(to_queue, "Новое интервью в очереди:")
+	to_queue.send_interview_webhook("Новое интервью в очереди:")
 
 /datum/interview/deny(client/denied_by)
 	. = ..()
-	send_interview_webhook(src, "[denied_by.ckey] отказал:")
+	send_interview_webhook("[denied_by.ckey] отказал:")
 
 /datum/interview/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	if(action != "submit")
@@ -53,13 +53,13 @@
 		.["fields"] += list(question_data)
 	return .
 
-/proc/send_interview_webhook(datum/interview/interview, additional_msg)
+/datum/interview/proc/send_interview_webhook(additional_msg)
 	var/webhook = CONFIG_GET(string/interview_webhook_url)
-	if(!webhook || !interview)
+	if(!webhook)
 		return
 	var/list/webhook_info = list()
 	webhook_info["content"] = additional_msg
-	webhook_info["embeds"] = list(interview.serialize_embed())
+	webhook_info["embeds"] = list(serialize_embed())
 	var/list/headers = list()
 	headers["Content-Type"] = "application/json"
 	SShttp.create_async_request(RUSTG_HTTP_METHOD_POST, webhook, json_encode(webhook_info), headers)
