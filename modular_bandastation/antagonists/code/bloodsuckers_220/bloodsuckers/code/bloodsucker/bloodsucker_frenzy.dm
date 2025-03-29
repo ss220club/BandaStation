@@ -70,7 +70,9 @@
 		was_tooluser = TRUE
 		REMOVE_TRAIT(owner, TRAIT_ADVANCEDTOOLUSER, SPECIES_TRAIT)
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/dna_vault_speedup)
-	bloodsuckerdatum.frenzygrab.teach(user, TRUE)
+	bloodsuckerdatum.frenzygrab = new(src)
+	bloodsuckerdatum.frenzygrab.teach(user)
+	bloodsuckerdatum.frenzygrab.locked_to_use = TRUE
 	owner.add_client_colour(/datum/client_colour/manual_heart_blood)
 	var/obj/cuffs = user.get_item_by_slot(ITEM_SLOT_HANDCUFFED)
 	var/obj/legcuffs = user.get_item_by_slot(ITEM_SLOT_LEGCUFFED)
