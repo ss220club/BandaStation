@@ -37,7 +37,6 @@
 
 	w_class = WEIGHT_CLASS_HUGE
 
-	var/mutable_appearance/pipe_overlay
 	/// The embedded container that holds the reagents to smoke
 	var/obj/item/reagent_container
 	/// Mouthpiece that belongs to this hookah
@@ -102,26 +101,22 @@
 
 /obj/item/hookah/Initialize(mapload)
 	. = ..()
-	pipe_overlay = mutable_appearance('modular_bandastation/bar_hookahs/icons/hookah.dmi', "pipe")
 	hookah_mouthpiece = new(src)
 	hookah_mouthpiece.source_hookah = src
 	update_appearance(UPDATE_OVERLAYS)
 	create_reagents(INTERNAL_VOLUME, TRANSPARENT)
 	reagent_container = src
-	coal_overlay = mutable_appearance(icon, "coal")
-	coal_lit_overlay = mutable_appearance(icon, "coal_lit")
-	lit_emissive = emissive_appearance(icon, "lit_overlay", src, alpha = src.alpha)
 	register_context()
 
 /obj/item/hookah/update_overlays()
 	. = ..()
 	if(hookah_mouthpiece in contents)
-		. += pipe_overlay
+		. += "pipe"
 	if(fuel > 0)
-		. += coal_overlay
+		. += "coal"
 	if(lit)
-		. += coal_lit_overlay
-		. += lit_emissive
+		. += "coal_lit"
+		. += emissive_appearance(icon, "lit_overlay", src, alpha = src.alpha)
 
 /obj/item/hookah/proc/return_mouthpiece(obj/item/hookah_mouthpiece/current_mouthpiece)
 	if(current_mouthpiece.source_hookah != src)
