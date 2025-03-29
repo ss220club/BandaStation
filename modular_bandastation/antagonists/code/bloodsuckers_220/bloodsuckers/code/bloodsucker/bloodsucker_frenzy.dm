@@ -88,6 +88,7 @@
 	return ..()
 
 /datum/status_effect/frenzy/on_remove()
+	var/mob/living/carbon/human/user = owner
 	owner.balloon_alert(owner, "You come back to your senses.")
 	owner.remove_traits(list(TRAIT_MUTE, TRAIT_DEAF), FRENZY_TRAIT)
 	if(was_tooluser)
