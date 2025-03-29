@@ -50,7 +50,7 @@
 	var/list/data = json_decode(response.body)
 	var/login_endpoint = "[CONFIG_GET(string/ss_central_url)]/oauth/login?token=[data]"
 
-	to_chat(player, boxed_message("Авторизуйтесь в открывшемся окне и ожидайте 30 секунд.<br/>Если окно не открывается, можете открыть ссылку в браузере самостоятельно:<br/><a href='[login_endpoint]'>Привязать дискорд.</a>."))
+	to_chat(player, boxed_message("Авторизуйтесь в открывшемся окне и ожидайте 30 секунд.<br/>Если окно не открывается, можете открыть ссылку в браузере самостоятельно:<br/><a href='[login_endpoint]'>Привязать дискорд</a>."))
 	player << link(login_endpoint)
 	get_player_discord_async(player.ckey)
 	addtimer(CALLBACK(SScentral, TYPE_PROC_REF(/datum/controller/subsystem/central, get_player_discord_async), player.ckey), 30 SECONDS)
