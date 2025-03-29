@@ -124,39 +124,41 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/hookah/proc/try_light(obj/item/O, mob/user)
+	var/msg = O.ignition_effect(src, user)
+	if(!msg)
+		return FALSE
+
 	if(lit)
 		to_chat(user, span_warning("[capitalize(src.declent_ru(NOMINATIVE))] уже зажжён!"))
-		return
+		return FALSE
+
 	if(!fuel)
 		to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет углей!"))
-		return
-	var/msg = O.ignition_effect(src, user)
-	if(msg)
-		visible_message(msg)
-		ignite()
-		return TRUE
+		return FALSE
+
+	visible_message(msg)
+	ignite()
+	return TRUE
 
 /obj/item/hookah/attackby(obj/item/attacking_item, mob/user, params)
-	if(try_light(attacking_item, user))
-		return
-
 	if(attacking_item == hookah_mouthpiece)
 		return_mouthpiece(attacking_item)
 		return
 
-	switch(attacking_item.type)
-		if(/obj/item/hookah_coals)
-			add_coals(user, attacking_item)
-			return
+	if(istype(attacking_item, /obj/item/hookah_coals))
+		add_coals(user, attacking_item)
+		return
 
-		if(/obj/item/food)
-			add_food(user, attacking_item)
-			return
+	if(istype(attacking_item, /obj/item/food))
+		add_food(user, attacking_item)
+		return
 
-		if(/obj/item/reagent_containers)
-			add_reagents(user, attacking_item)
-			return
+	if(istype(attacking_item, /obj/item/reagent_containers))
+		add_reagents(user, attacking_item)
+		return
 
+	if(try_light(attacking_item, user))
+		return
 	return ..()
 
 /obj/item/hookah/proc/add_coals(mob/user, obj/item/hookah_coals/coal)
