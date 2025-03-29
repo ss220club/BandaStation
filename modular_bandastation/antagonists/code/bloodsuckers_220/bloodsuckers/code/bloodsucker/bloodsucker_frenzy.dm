@@ -78,8 +78,8 @@
 	var/obj/legcuffs = user.get_item_by_slot(ITEM_SLOT_LEGCUFFED)
 	if(user.handcuffed || user.legcuffed)
 		playsound(get_turf(user), 'sound/effects/grillehit.ogg', 80, 1, -1)
-		user.clear_cuffs(cuffs, TRUE)
-		user.clear_cuffs(legcuffs, TRUE)
+		qdel(user.handcuffed)
+		qdel(user.legcuffed)
 	bloodsuckerdatum.frenzied = TRUE
 
 	// Determine if the owner is part of the Brujah clan
