@@ -1,5 +1,10 @@
 /datum/persistent_client
 	var/discord_id
+	var/ckey
+
+/datum/persistent_client/New(ckey, client)
+	. = ..()
+	src.ckey = ckey
 
 /datum/preferences/vv_edit_var(var_name, var_value)
 	if(var_name == "discord_id")
@@ -8,7 +13,7 @@
 
 /client/New()
 	. = ..()
-	SScentral.get_player_discord_async(src)
+	SScentral.get_player_discord_async(ckey)
 
 /mob/dead/new_player/register_for_interview()
 	. = ..()
@@ -47,8 +52,8 @@
 
 	to_chat(player, boxed_message("Авторизуйтесь в открывшемся окне и ожидайте 30 секунд.<br/>Если окно не открывается, можете открыть ссылку в браузере самостоятельно:<br/><a href='[login_endpoint]'>Привязать дискорд.</a>."))
 	player << link(login_endpoint)
-	get_player_discord_async(player)
-	addtimer(CALLBACK(SScentral, TYPE_PROC_REF(/datum/controller/subsystem/central, get_player_discord_async), player), 30 SECONDS)
+	get_player_discord_async(player.ckey)
+	addtimer(CALLBACK(SScentral, TYPE_PROC_REF(/datum/controller/subsystem/central, get_player_discord_async), player.ckey), 30 SECONDS)
 
 /datum/config_entry/flag/force_discord_verification
 	default = FALSE

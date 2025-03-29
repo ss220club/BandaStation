@@ -54,12 +54,12 @@ SUBSYSTEM_DEF(central)
 
 	GLOB.whitelist = ckeys
 
-/datum/controller/subsystem/central/proc/get_player_discord_async(client/player)
-	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[player.ckey]"
+/datum/controller/subsystem/central/proc/get_player_discord_async(ckey)
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[ckey]"
 
-	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(get_player_discord_callback), player))
+	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(get_player_discord_callback), ckey))
 
-/datum/controller/subsystem/central/proc/get_player_discord_callback(client/player, datum/http_response/response)
+/datum/controller/subsystem/central/proc/get_player_discord_callback(ckey, datum/http_response/response)
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
 		stack_trace("Failed to get player discord: HTTP status code [response.status_code] - [response.error] - [response.body]")
 		return
@@ -69,25 +69,21 @@ SUBSYSTEM_DEF(central)
 
 	var/list/data = json_decode(response.body)
 	var/discord_id = data["discord_id"]
-	var/ckey = data["ckey"]
 	discord_links[ckey] = discord_id
 
-	player.persistent_client.discord_id = discord_id
+	GLOB.persistent_clients_by_ckey[ckey].discord_id = discord_id
 
-/datum/controller/subsystem/central/proc/is_player_discord_linked(client/player)
-	if(!player)
+/datum/controller/subsystem/central/proc/is_player_discord_linked(ckey)
+	var/datum/persistent_client/pclient = GLOB.persistent_clients_by_ckey[ckey]
+
+	if(!pclient)
 		return FALSE
 
-	if(player.persistent_client.discord_id)
-		return TRUE
-
-	// If player somehow losed its id. Not sure if needed
-	if(discord_links[player.ckey])
-		player.persistent_client.discord_id = discord_links[player.ckey]
+	if(pclient.discord_id)
 		return TRUE
 
 	// Update the info just in case
-	get_player_discord_async(player)
+	get_player_discord_async(ckey)
 
 	return FALSE
 

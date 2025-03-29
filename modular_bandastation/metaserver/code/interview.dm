@@ -10,10 +10,10 @@
 /datum/config_entry/string/interview_webhook_url
 
 /datum/interview/approve(client/approved_by)
-	if(!SScentral.is_player_discord_linked(owner))
+	if(!SScentral.is_player_discord_linked(owner_ckey))
 		to_chat(approved_by, span_warning("У игрока не привязана своя учетная запись Discord!"))
 		to_chat(owner, span_warning("Ваше интервью не удалось принять по причине: У вас не привязана учетная запись Discord!"))
-		log_admin("[key_name(approved_by)] попытался безуспешно принять интервью [key_name(owner)]. Причина: Дискорд игрока не привязан.")
+		log_admin("[key_name(approved_by)] попытался безуспешно принять интервью [owner_ckey]. Причина: Дискорд игрока не привязан.")
 		return
 	. = ..()
 	add_owner_to_whitelist(approved_by)
@@ -33,7 +33,7 @@
 	if(!isnull(owner.persistent_client.discord_id))
 		return ..()
 	to_chat(owner, PLAYER_REQUIRES_LINKED_DISCORD_CHAT_MESSAGE)
-	SScentral.get_player_discord_async(owner)
+	SScentral.get_player_discord_async(owner.ckey)
 	return TRUE
 
 /datum/interview/proc/serialize_embed()
@@ -43,7 +43,7 @@
 			"name" = owner_ckey
 			),
 		"title" = "Интервью",
-		"description" = "Дискорд: <@[owner.persistent_client.discord_id]>"
+		"description" = "Дискорд: <@[GLOB.persistent_clients_by_ckey[owner_ckey].discord_id]>"
 	)
 	for(var/question_id in 1 to length(questions))
 		var/list/question_data = list(
