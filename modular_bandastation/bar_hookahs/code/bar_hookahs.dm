@@ -406,11 +406,8 @@
 	start_inhale(user)
 
 /obj/item/hookah_mouthpiece/attack(mob/living/target_mob, mob/living/user)
-	if(!ishuman(target_mob))
-		return
-	var/mob/living/carbon/human/target_human = target_mob
-	if(target_human == user && source_hookah?.lit)
-		start_inhale(user)
+	if(target_mob == user && source_hookah?.lit)
+		start_inhale(target_mob)
 		return
 	return ..()
 
