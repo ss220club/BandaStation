@@ -46,9 +46,6 @@
 	var/lit = FALSE
 	COOLDOWN_DECLARE(fuel_consume_cooldown)
 	COOLDOWN_DECLARE(smoke_decrease_cooldown)
-	var/mutable_appearance/coal_overlay
-	var/mutable_appearance/coal_lit_overlay
-	var/mutable_appearance/lit_emissive
 	var/particle_type
 	var/datum/light_source/glow_light
 	/// Food ingridients inside the bowl
