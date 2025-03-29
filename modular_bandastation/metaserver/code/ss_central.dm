@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(central)
 
 	var/list/ckeys = result["items"]
 
-	GLOB.whitelist = ckeys
+	GLOB.whitelist |= ckeys
 
 /datum/controller/subsystem/central/proc/get_player_discord_async(ckey)
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[ckey]"
