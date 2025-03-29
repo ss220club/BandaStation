@@ -5,10 +5,13 @@
 	req_access = list(ACCESS_NANOTRASEN_REPRESENTATIVE)
 
 /obj/structure/closet/secure_closet/nanotrasen_representative/PopulateContents()
-	new /obj/item/storage/briefcase/secure(src)
-	new /obj/item/radio/headset/heads/nanotrasen_representative(src)
-	new /obj/item/pai_card(src)
-	new /obj/item/assembly/flash/handheld(src)
-	new /obj/item/taperecorder(src)
-	new /obj/item/storage/box/tapes(src)
-	new /obj/item/storage/bag/garment/nanotrasen_representative(src)
+	return list(
+		/obj/item/storage/briefcase/secure,
+		/obj/item/radio/headset/heads/nanotrasen_representative,
+		/obj/item/pai_card,
+		/obj/item/assembly/flash/handheld,
+		/obj/item/taperecorder,
+		/obj/item/storage/box/tapes,
+		/obj/item/storage/bag/garment/nanotrasen_representative,
+	)
+

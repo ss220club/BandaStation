@@ -35,6 +35,7 @@
 	/// Do not set directly, use set_holdable
 	VAR_FINAL/list/obj/item/cant_hold
 	/// Typecache of items that can always be inserted into this storage, regardless of size.
+	/// Do not set directly, use set_holdable
 	VAR_FINAL/list/obj/item/exception_hold
 	/// For use with an exception typecache:
 	/// The maximum amount of items of the exception type that can be inserted into this storage.
@@ -146,7 +147,6 @@
 	src.max_total_storage = max_total_storage
 
 /datum/storage/Destroy()
-
 	for(var/mob/person in is_using)
 		hide_contents(person)
 
@@ -287,35 +287,44 @@
 /// ~Lemon
 GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
-/datum/storage/proc/set_holdable(list/can_hold_list, list/cant_hold_list)
-	if(!isnull(can_hold_list) && !islist(can_hold_list))
-		can_hold_list = list(can_hold_list)
-	if(!isnull(cant_hold_list) && !islist(cant_hold_list))
-		cant_hold_list = list(cant_hold_list)
-
+/datum/storage/proc/set_holdable(list/can_hold_list, list/cant_hold_list, list/exception_hold_list)
+	can_hold = null
 	if (!isnull(can_hold_list))
-		if(isnull(can_hold_description))
-			can_hold_description = generate_hold_desc(can_hold_list)
+		if(!islist(can_hold_list))
+			can_hold_list = list(can_hold_list)
 
 		var/unique_key = can_hold_list.Join("-")
 		if(!GLOB.cached_storage_typecaches[unique_key])
 			GLOB.cached_storage_typecaches[unique_key] = typecacheof(can_hold_list)
 		can_hold = GLOB.cached_storage_typecaches[unique_key]
 
+	cant_hold = null
 	if (!isnull(cant_hold_list))
+		if(!islist(cant_hold_list))
+			cant_hold_list = list(cant_hold_list)
+
 		var/unique_key = cant_hold_list.Join("-")
 		if(!GLOB.cached_storage_typecaches[unique_key])
 			GLOB.cached_storage_typecaches[unique_key] = typecacheof(cant_hold_list)
 		cant_hold = GLOB.cached_storage_typecaches[unique_key]
 
-/// Generates a description, primarily for clothing storage.
-/datum/storage/proc/generate_hold_desc(can_hold_list)
-	var/list/desc = list()
+	exception_hold = null
+	if (!isnull(exception_hold_list))
+		if(!islist(exception_hold_list))
+			exception_hold_list = list(exception_hold_list)
 
-	for(var/obj/item/valid_item as anything in can_hold_list)
-		desc += "[declent_ru_initial(valid_item::name, NOMINATIVE, valid_item::name)]"
+		var/unique_key = exception_hold_list.Join("-")
+		if(!GLOB.cached_storage_typecaches[unique_key])
+			GLOB.cached_storage_typecaches[unique_key] = typecacheof(exception_hold_list)
+		exception_hold = GLOB.cached_storage_typecaches[unique_key]
 
-	return "\n\t[span_notice("[desc.Join("\n\t")]")]"
+	can_hold_description = null
+	var/list/holdables = can_hold_list | exception_hold
+	if(length(holdables))
+		var/list/desc = list()
+		for(var/obj/item/valid_item as anything in holdables)
+			desc += "[declent_ru_initial(valid_item::name, NOMINATIVE, valid_item::name)]"
+		can_hold_description = "\n\t[span_notice("[desc.Join("\n\t")]")]"
 
 /// Updates the action button for toggling collectmode.
 /datum/storage/proc/update_actions(atom/source, mob/equipper, slot)
@@ -353,71 +362,114 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  */
 /datum/storage/proc/can_insert(obj/item/to_insert, mob/user, messages = TRUE, force = STORAGE_NOT_LOCKED)
 	if(QDELETED(to_insert) || !istype(to_insert))
+		if(messages == STORAGE_ERROR_INSERT)
+			stack_trace("[parent.type]:deleted/non object type [to_insert.type] was being inserted")
+		return FALSE
+
+	if((to_insert == parent) || (to_insert == real_location))
+		if(messages == STORAGE_ERROR_INSERT)
+			stack_trace("[parent.type]:cannot insert storage into itself")
+		return FALSE
+
+	if(locked > force)
+		if(messages)
+			if(messages == STORAGE_ERROR_INSERT)
+				stack_trace("[parent.type]:lock force of [force] cannot bypass lock level [locked]")
+			else if(user)
+				user.balloon_alert(user, "закрыто!")
 		return FALSE
 
 	//stops you from putting stuff like off-hand thingy inside. Hologram storages can accept only hologram items
 	if(to_insert.item_flags & ABSTRACT)
+		if(messages == STORAGE_ERROR_INSERT)
+			stack_trace("[parent.type]:[to_insert.type] is an abstract object")
 		return FALSE
 	if(parent.flags_1 & HOLOGRAM_1)
 		if(!(to_insert.flags_1 & HOLOGRAM_1))
+			if(messages == STORAGE_ERROR_INSERT)
+				stack_trace("[parent.type]:[to_insert.type] is real and cannot be stored inside an hologram parent")
 			return FALSE
 	else if(to_insert.flags_1 & HOLOGRAM_1)
-		return FALSE
-
-	if(locked > force)
-		if(messages && user)
-			user.balloon_alert(user, "закрыто!")
-		return FALSE
-
-	if((to_insert == parent) || (to_insert == real_location))
+		if(messages == STORAGE_ERROR_INSERT)
+			stack_trace("[parent.type]:[to_insert.type] is a hologram and cannot be stored inside an real parent")
 		return FALSE
 
 	if(to_insert.w_class > max_specific_storage)
 		if(!is_type_in_typecache(to_insert, exception_hold))
-			if(messages && user)
-				user.balloon_alert(user, "не помещается!")
+			if(messages)
+				if(messages == STORAGE_ERROR_INSERT)
+					stack_trace("[parent.type]:[to_insert.type] of weight class [to_insert.w_class] exceeds max_specific_storage of [max_specific_storage] but is not on the exception_hold list")
+				else if(user)
+					user.balloon_alert(user, "не помещается!")
 			return FALSE
+
 		if(exception_max <= get_exception_count())
-			if(messages && user)
-				user.balloon_alert(user, "нет места!")
+			if(messages)
+				if(messages == STORAGE_ERROR_INSERT)
+					stack_trace("[parent.type]:cannot hold any more exceptional objects [get_exception_count()]/[exception_max] like [to_insert.type] that exceeds max_specific_storage of [max_specific_storage]")
+				else if(user)
+					user.balloon_alert(user, "нет места!")
 			return FALSE
 
 	if(real_location.contents.len >= max_slots)
-		if(messages && user && !silent_for_user)
-			user.balloon_alert(user, "нет места!")
+		if(messages)
+			if(messages == STORAGE_ERROR_INSERT)
+				stack_trace("[parent.type]: max slot capacity of [real_location.contents.len]/[max_slots] reached, cannot insert [to_insert.type]")
+			else if(user)
+				user.balloon_alert(user, "нет места!")
 		return FALSE
 
 	if(to_insert.w_class + get_total_weight() > max_total_storage)
-		if(messages && user && !silent_for_user)
-			user.balloon_alert(user, "нет места!")
+		if(messages)
+			if(messages == STORAGE_ERROR_INSERT)
+				stack_trace("[parent.type]:Current weight capacity is [get_total_weight()]/[max_total_storage] no more space for [to_insert.type] who's weight is [to_insert.w_class]")
+			else if(user)
+				user.balloon_alert(user, "нет места!")
 		return FALSE
 
 	var/can_hold_it = isnull(can_hold) || is_type_in_typecache(to_insert, can_hold) || is_type_in_typecache(to_insert, exception_hold)
 	var/cant_hold_it = is_type_in_typecache(to_insert, cant_hold)
 	var/trait_says_no = HAS_TRAIT(to_insert, TRAIT_NO_STORAGE_INSERT)
 	if(!can_hold_it || cant_hold_it || trait_says_no)
-		if(messages && user)
-			user.balloon_alert(user, "не может вмещать!")
+		if(messages)
+			if(messages == STORAGE_ERROR_INSERT)
+				if(!can_hold_it)
+					stack_trace("[parent.type]:[to_insert.type] is neither whitelisted nor an exception hold")
+				if(cant_hold_it)
+					stack_trace("[parent.type]:[to_insert.type] has been blacklisted")
+				if(trait_says_no)
+					stack_trace("[parent.type]:[to_insert.type] has TRAIT_NO_STORAGE_INSERT")
+			else if(user)
+				user.balloon_alert(user, "не может вмещать!")
 		return FALSE
 
 	if(HAS_TRAIT(to_insert, TRAIT_NODROP))
-		if(messages && user)
-			user.balloon_alert(user, "застревает на руке!")
+		if(messages)
+			if(messages == STORAGE_ERROR_INSERT)
+				stack_trace("[parent.type]:[to_insert.type] has TRAIT_NODROP")
+			else if(user)
+				user.balloon_alert(user, "застревает на руке!")
 		return FALSE
 
-	// this is valid if the container our location is being held in is a storage item
-	var/datum/storage/bigger_fish = parent.loc.atom_storage
+	// this is valid if the container our location is being held in is a storage item, warddrobe subsystem inits our parent in nullspace so we have to check for that
+	var/datum/storage/bigger_fish = parent.loc?.atom_storage
 	if(bigger_fish && bigger_fish.max_specific_storage < max_specific_storage)
-		if(messages && user)
-			user.balloon_alert(user, "[LOWER_TEXT(parent.loc.declent_ru(NOMINATIVE))] на пути!")
+		if(messages)
+			if(messages == STORAGE_ERROR_INSERT)
+				stack_trace("[parent.type]:[LOWER_TEXT(parent.loc.type)] is in the way!")
+			else if(user)
+				user.balloon_alert(user, "[LOWER_TEXT(parent.loc.declent_ru(NOMINATIVE))] на пути!")
 		return FALSE
 
 	if(isitem(parent))
 		var/obj/item/item_parent = parent
 		var/datum/storage/smaller_fish = to_insert.atom_storage
 		if(smaller_fish && !allow_big_nesting && to_insert.w_class >= item_parent.w_class)
-			if(messages && user)
-				user.balloon_alert(user, "не помещается!")
+			if(messages)
+				if(messages == STORAGE_ERROR_INSERT)
+					stack_trace("[parent.type]:[to_insert.type] has an internal storage of weight [to_insert.w_class] that does not allow nested storage inside of parent of weight [item_parent.w_class]")
+				else if(user)
+					user.balloon_alert(user, "слишком большое!")
 			return FALSE
 
 	return TRUE
@@ -457,7 +509,6 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	SEND_SIGNAL(src, COMSIG_STORAGE_STORED_ITEM, to_insert, user, force)
 	to_insert.forceMove(real_location)
 	item_insertion_feedback(user, to_insert, override)
-	parent.update_appearance()
 	return TRUE
 
 /// Since items inside storages ignore transparency for QOL reasons, we're tracking when things are dropped onto them instead of our UI elements
@@ -527,10 +578,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(animated)
 		animate_parent()
 
-	if(override)
-		return
-
-	if(silent)
+	if(override || silent)
 		return
 
 	if(do_rustle && rustle_sound)
@@ -723,7 +771,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	var/amount = length(pick_up)
 	if(!amount)
-		parent.balloon_alert(user, "nothing to pick up!")
+		parent.balloon_alert(user, "нечего собирать!")
 		return
 
 	var/datum/progressbar/progress = new(user, amount, thing.loc)
@@ -737,7 +785,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	var/list/current_contents = holder.contents.Copy()
 	if(length(pick_up | current_contents) == length(current_contents))
 		return
-	parent.balloon_alert(user, "picked up")
+	parent.balloon_alert(user, "собрано")
 
 /// Signal handler for whenever we drag the storage somewhere.
 /datum/storage/proc/on_mousedrop_onto(datum/source, atom/over_object, mob/user)
@@ -790,7 +838,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  */
 /datum/storage/proc/dump_content_at(atom/dest_object, dump_loc, mob/user)
 	if(locked)
-		user.balloon_alert(user, "closed!")
+		user.balloon_alert(user, "закрыто!")
 		return
 	if(!user.CanReach(parent) || !user.CanReach(dest_object))
 		return
@@ -800,7 +848,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	// Storage to storage transfer is instant
 	if(dest_object.atom_storage)
-		to_chat(user, span_notice("You dump the contents of [parent] into [dest_object]."))
+		to_chat(user, span_notice("Вы вытряхиваете содержимое [parent.declent_ru(GENITIVE)] в [dest_object.declent_ru(ACCUSATIVE)]."))
 
 		if(do_rustle)
 			playsound(parent, SFX_RUSTLE, 50, TRUE, -5)
@@ -812,7 +860,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return
 
 	// Storage to loc transfer requires a do_after
-	to_chat(user, span_notice("You start dumping out the contents of [parent] onto [dest_object]..."))
+	to_chat(user, span_notice("Вы начинаете вытряхивать [parent.declent_ru(NOMINATIVE)] на [dest_object.declent_ru(NOMINATIVE)]..."))
 	if(!do_after(user, 2 SECONDS, target = dest_object))
 		return
 
@@ -910,7 +958,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(locked)
 		if(!silent)
-			parent.balloon_alert(to_show, "closed!")
+			parent.balloon_alert(to_show, "закрыто!")
 		return FALSE
 
 	// If we're quickdrawing boys
@@ -923,8 +971,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			INVOKE_ASYNC(src, PROC_REF(put_in_hands_async), to_show, to_remove)
 			if(!silent)
 				to_show.visible_message(
-					span_warning("[to_show] draws [to_remove] from [parent]!"),
-					span_notice("You draw [to_remove] from [parent]."),
+					span_warning("[to_show] достаёт [to_remove.declent_ru(NOMINATIVE)] из [parent.declent_ru(GENITIVE)]!"),
+					span_notice("Вы достаёте [to_remove.declent_ru(NOMINATIVE)] из [parent.declent_ru(GENITIVE)]."),
 				)
 			return TRUE
 
@@ -945,7 +993,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /datum/storage/proc/put_in_hands_async(mob/to_show, obj/item/toremove)
 	if(!to_show.put_in_hands(toremove))
 		if(!silent)
-			toremove.balloon_alert(to_show, "fumbled!")
+			toremove.balloon_alert(to_show, "не вышло!")
 		return TRUE
 
 /// Signal handler for whenever a mob walks away with us, close if they can't reach us.
@@ -1119,11 +1167,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	collection_mode = (collection_mode + 1) % 3
 	switch(collection_mode)
 		if(COLLECT_SAME)
-			parent.balloon_alert(user, "will now only pick up a single type")
+			parent.balloon_alert(user, "теперь будет собирать только один тип")
 		if(COLLECT_EVERYTHING)
-			parent.balloon_alert(user, "will now pick up everything")
+			parent.balloon_alert(user, "теперь будет собирать всё")
 		if(COLLECT_ONE)
-			parent.balloon_alert(user, "will now pick up one at a time")
+			parent.balloon_alert(user, "теперь будет собирать по одному.")
 
 /// Gives a spiffy animation to our parent to represent opening and closing.
 /datum/storage/proc/animate_parent()
@@ -1140,4 +1188,4 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!attempt_remove(changed, parent.drop_location()))
 		return
 
-	changed.visible_message(span_warning("[changed] falls out of [parent]!"), vision_distance = COMBAT_MESSAGE_RANGE)
+	changed.visible_message(span_warning("[changed.declent_ru(NOMINATIVE)] выпадает из [parent.declent_ru(GENITIVE)]!"), vision_distance = COMBAT_MESSAGE_RANGE)
