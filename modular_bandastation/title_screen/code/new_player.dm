@@ -15,7 +15,7 @@
 
 	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"]))
 		if(!SScentral.is_player_discord_linked(client))
-			to_chat(usr, custom_boxed_message("red_box", span_alertwarning("Вам необходимо привязать дискорд-профиль к аккаунту!<br>Перейдите во вкладку '<b>OOC</b>', она справа сверху, и нажмите '<b>Привязать Discord</b>' для получения инструкций.<br>Если вы уверены, что ваш аккаунт уже привязан, подождите синхронизации.")))
+			to_chat(usr, PLAYER_REQUIRES_LINKED_DISCORD_CHAT_MESSAGE)
 			return FALSE
 
 	if(client.interviewee)

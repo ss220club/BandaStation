@@ -187,7 +187,7 @@ SUBSYSTEM_DEF(central)
 
 /datum/controller/subsystem/central/proc/get_max_donation_tier_from_response_data(list/data)
 	if(!length(data["items"]))
-		return 0
+		return BASIC_DONATOR_LEVEL
 
 	var/list/tiers = list()
 	for(var/list/item in data["items"])

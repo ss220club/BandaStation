@@ -27,12 +27,23 @@
 	. = ..()
 	send_interview_webhook(src, "[denied_by.ckey] отказал:")
 
+/datum/interview/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	if(action != "submit")
+		return ..()
+	if(!isnull(owner.persistent_client.discord_id))
+		return ..()
+	to_chat(owner, PLAYER_REQUIRES_LINKED_DISCORD_CHAT_MESSAGE)
+	SScentral.get_player_discord_async(owner)
+	return TRUE
+
 /datum/interview/proc/serialize_embed()
 	. = list(
 		"fields" = list(),
 		"author" = list(
 			"name" = owner_ckey
-			)
+			),
+		"title" = "Интервью",
+		"description" = "Дискорд: <@[owner.persistent_client.discord_id]>"
 	)
 	for(var/question_id in 1 to length(questions))
 		var/list/question_data = list(
