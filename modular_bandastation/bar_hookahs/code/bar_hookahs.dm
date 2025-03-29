@@ -57,7 +57,7 @@
 	var/static/allowed_ingridients = typecacheof(list(
 		/obj/item/food/grown,
 		/obj/item/food/cheese,
-		))
+	))
 
 /obj/item/hookah/add_context(atom/source, list/context, atom/target, mob/user)
 	. = ..()
