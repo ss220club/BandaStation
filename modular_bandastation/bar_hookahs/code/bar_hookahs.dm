@@ -137,41 +137,59 @@
 		return TRUE
 
 /obj/item/hookah/attackby(obj/item/attacking_item, mob/user, params)
+	if(try_light(attacking_item, user))
+		return
+
 	if(attacking_item == hookah_mouthpiece)
 		return_mouthpiece(attacking_item)
 		return
-	if(istype(attacking_item, /obj/item/hookah_coals))
-		if(fuel + FUEL_PER_COAL > MAX_FUEL)
-			to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] уже достаточно углей!"))
+
+	switch(attacking_item.type)
+		if(/obj/item/hookah_coals)
+			add_coals(user, attacking_item)
 			return
-		fuel += FUEL_PER_COAL
-		qdel(attacking_item)
-		to_chat(user, span_notice("Вы добавляете угли в [src.declent_ru(NOMINATIVE)]."))
-		return
-	if(istype(attacking_item, /obj/item/food))
-		if(length(food_items) >= MAX_FOOD_ITEMS)
-			to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] уже достаточно ингридиентов!"))
+
+		if(/obj/item/food)
+			add_food(user, attacking_item)
 			return
-		food_items += attacking_item
-		attacking_item.forceMove(src)
-		to_chat(user, span_notice("Вы добавляете [attacking_item.declent_ru(NOMINATIVE)] в [src.declent_ru(NOMINATIVE)]."))
-		return
-	if(istype(attacking_item, /obj/item/reagent_containers))
-		if(istype(attacking_item, /obj/item/reagent_containers/applicator/pill))
+
+		if(/obj/item/reagent_containers)
+			add_reagents(user, attacking_item)
 			return
-		var/obj/item/reagent_containers/container = attacking_item
-		if(!container.reagents.total_volume)
-			to_chat(user, span_warning("Внутри [container.declent_ru(GENITIVE)] ничего нет!"))
-			return
-		if(!reagent_container)
-			to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет контейнера для жидкости!"))
-			return
-		var/transferred = container.reagents.trans_to(reagent_container, container.amount_per_transfer_from_this)
-		user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
-		return
-	if(try_light(attacking_item, user))
-		return
+
 	return ..()
+
+/obj/item/hookah/proc/add_coals(mob/user, obj/item/hookah_coals/coal)
+	if(fuel + FUEL_PER_COAL > MAX_FUEL)
+		to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] уже достаточно углей!"))
+		return
+	fuel += FUEL_PER_COAL
+	qdel(coal)
+	to_chat(user, span_notice("Вы добавляете угли в [src.declent_ru(NOMINATIVE)]."))
+
+/obj/item/hookah/proc/add_food(mob/user, obj/item/food/food_item)
+	if(length(food_items) >= MAX_FOOD_ITEMS)
+		to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] уже достаточно ингридиентов!"))
+		return
+	food_items += food_item
+	food_item.forceMove(src)
+	to_chat(user, span_notice("Вы добавляете [food_item.declent_ru(NOMINATIVE)] в [src.declent_ru(NOMINATIVE)]."))
+	return
+
+/obj/item/hookah/proc/add_reagents(mob/user, obj/item/reagent_containers/container)
+	if(istype(container, /obj/item/reagent_containers/applicator/pill))
+		return
+
+	if(!reagent_container)
+		return
+
+	if(!container.reagents.total_volume)
+		to_chat(user, span_warning("Внутри [container.declent_ru(GENITIVE)] ничего нет!"))
+		return
+
+	var/transferred = container.reagents.trans_to(reagent_container, container.amount_per_transfer_from_this)
+	user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
+	return
 
 /obj/item/hookah/process()
 	if(!lit || !fuel)
@@ -187,15 +205,6 @@
 	if(COOLDOWN_FINISHED(src, smoke_decrease_cooldown) && (smoke_amount - SMOKE_CONSUME_AMOUNT >= 0))
 		smoke_amount -= SMOKE_CONSUME_AMOUNT
 		COOLDOWN_START(src, smoke_decrease_cooldown, SMOKE_CONSUME_INTERVAL)
-
-	if(!(hookah_mouthpiece in contents) && hookah_mouthpiece.attached_to)
-		var/atom/attached_to = hookah_mouthpiece.attached_to
-		if(!(get_dist(src, attached_to) <= 1 && isturf(attached_to.loc)))
-			if(ismob(attached_to))
-				var/mob/user = attached_to
-				user.dropItemToGround(hookah_mouthpiece)
-				to_chat(user, span_warning("Вы отпускаете [src.declent_ru(NOMINATIVE)]."))
-			hookah_mouthpiece.disconnect()
 
 /obj/item/hookah/click_alt_secondary(mob/user)
 	if(!ishuman(user))
@@ -294,13 +303,12 @@
 	if(reagent_container && reagent_container.reagents?.total_volume)
 		reagent_container.reagents.expose(get_turf(src), TOUCH)
 
-	if(length(food_items))
-		for(var/obj/item/food/some_food in food_items)
-			var/turf/drop_loc = get_turf(src)
-			var/obj/item/food/food_item = some_food
-			if(food_item.reagents?.total_volume)
-				food_item.reagents.expose(drop_loc, TOUCH)
-			qdel(food_item)
+	for(var/obj/item/food/some_food in food_items)
+		var/turf/drop_loc = get_turf(src)
+		var/obj/item/food/food_item = some_food
+		if(food_item.reagents?.total_volume)
+			food_item.reagents.expose(drop_loc, TOUCH)
+		qdel(food_item)
 
 	if(hookah_mouthpiece)
 		qdel(hookah_mouthpiece)
@@ -363,11 +371,26 @@
 		layer = BELOW_MOB_LAYER,
 		override_origin_pixel_y = 0,
 	)
+
+	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(check_distance))
 	return TRUE
 
 /obj/item/hookah_mouthpiece/proc/disconnect()
+	if(attached_to)
+		UnregisterSignal(attached_to, COMSIG_MOVABLE_MOVED)
 	attached_to = null
 	QDEL_NULL(beam)
+
+/obj/item/hookah_mouthpiece/proc/check_distance()
+	if(!source_hookah || !attached_to)
+		return
+
+	if(!(get_dist(source_hookah, attached_to) <= 1 && isturf(attached_to.loc)))
+		if(ismob(attached_to))
+			var/mob/user = attached_to
+			user.dropItemToGround(src)
+			to_chat(user, span_warning("Вы отпускаете [source_hookah.declent_ru(NOMINATIVE)]."))
+		disconnect()
 
 /obj/item/hookah_mouthpiece/Destroy()
 	if(source_hookah)
@@ -381,8 +404,8 @@
 	if(source_hookah)
 		source_hookah.return_mouthpiece(src)
 
-/obj/item/hookah_mouthpiece/attack_self(mob/living/carbon/human/user)
-	if(!source_hookah || !source_hookah.lit)
+/obj/item/hookah_mouthpiece/attack_self(mob/user)
+	if(!source_hookah || !source_hookah.lit || !ishuman(user))
 		return ..()
 	start_inhale(user)
 
@@ -392,8 +415,7 @@
 		return
 	return ..()
 
-/obj/item/hookah_mouthpiece/proc/start_inhale(target_mob)
-	var/mob/living/living_user = target_mob
+/obj/item/hookah_mouthpiece/proc/start_inhale(mob/living/carbon/human/living_user)
 	living_user.visible_message(span_notice("[living_user] затягивается из [src.declent_ru(GENITIVE)]."), span_notice("Вы затягиваетесь..."))
 	if(!do_after(living_user, 2 SECONDS, src))
 		return
@@ -424,15 +446,7 @@
 			qdel(some_food_item)
 
 	if(!is_safe)
-		var/datum/effect_system/fluid_spread/smoke/chem/black_smoke = new
-		black_smoke.set_up(2, location = source_hookah.loc, carry = these_reagents)
-		black_smoke.start()
-		QDEL_LIST(source_hookah.food_items)
-		these_reagents?.clear_reagents()
-		to_chat(living_user, span_warning("Вы чувствуете резкий неприятный запах!"))
-		living_user.dropItemToGround(src)
-		living_user.emote("cough")
-		living_user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * 4)
+		make_black_smoke(living_user, source_hookah.loc, these_reagents)
 		return
 
 	if(!source_hookah.reagent_container || !source_hookah.reagent_container.reagents.total_volume)
@@ -473,7 +487,23 @@
 
 		COOLDOWN_START(src, inhale_cooldown, INHALE_COOLDOWN)
 		source_hookah.smoke_amount = min(source_hookah.smoke_amount + rand(amount * 2, amount), 100)
-		addtimer(CALLBACK(src, .proc/delayed_puff, living_user, amount_to_waste), 1 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(delayed_puff), living_user, amount_to_waste), 1 SECONDS)
+
+/obj/item/hookah_mouthpiece/proc/make_black_smoke(mob/living_user, location, datum/reagents/some_reagents)
+	var/datum/effect_system/fluid_spread/smoke/chem/black_smoke = new
+	black_smoke.set_up(2, location = location, carry = some_reagents)
+	black_smoke.start()
+	QDEL_LIST(source_hookah.food_items)
+	some_reagents?.clear_reagents()
+	to_chat(living_user, span_warning("Вы чувствуете резкий неприятный запах!"))
+	living_user.dropItemToGround(src)
+	living_user.emote("cough")
+
+	if(!ishuman(living_user))
+		return
+
+	var/mob/living/carbon/human/human_user = living_user
+	human_user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * 4)
 
 /obj/item/hookah_mouthpiece/proc/delayed_puff(mob/user, amount)
 	var/datum/effect_system/fluid_spread/smoke/chem/quick/puff = new
@@ -486,6 +516,7 @@
 	icon = 'modular_bandastation/bar_hookahs/icons/hookah.dmi'
 	icon_state = "coals"
 	custom_premium_price = PAYCHECK_CREW * 1.5
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/hookah_coals/examine()
 	. = ..()
