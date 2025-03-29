@@ -33814,12 +33814,6 @@
 	},
 /turf/open/floor/iron/freezer,
 /area/station/service/kitchen/coldroom)
-"gAJ" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/turf/open/floor/iron,
-/area/station/commons/fitness/recreation/entertainment)
 "gAL" = (
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /obj/structure/sign/poster/random/directional/south,
@@ -42481,7 +42475,6 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "imC" = (
-/obj/item/plate/large,
 /obj/structure/table,
 /obj/effect/turf_decal/siding/wood,
 /obj/machinery/camera/autoname/directional/north,
@@ -42489,9 +42482,9 @@
 	pixel_y = 7;
 	pixel_x = -7
 	},
-/obj/item/food/burger/fivealarm{
-	pixel_y = 4;
-	pixel_x = 6
+/obj/item/food/burger/mcguffin{
+	pixel_y = 5;
+	pixel_x = 7
 	},
 /obj/item/food/burger/big_blue,
 /turf/open/floor/iron/dark,
@@ -88762,9 +88755,8 @@
 	pixel_y = 11
 	},
 /obj/structure/sign/flag/nanotrasen/directional/north,
-/obj/item/plate,
-/obj/item/food/spaghetti/pastatomato{
-	pixel_y = 6
+/obj/item/food/spaghetti/beefnoodle{
+	pixel_y = 3
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/corporate_suite)
@@ -118732,6 +118724,12 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/mineral/plastitanium,
 /area/station/science/robotics/lab)
+"wWC" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/station/commons/fitness/recreation/entertainment)
 "wWH" = (
 /obj/effect/turf_decal/delivery,
 /obj/effect/spawner/random/structure/crate,
@@ -148318,7 +148316,7 @@ vti
 tSr
 iiE
 tSr
-gAJ
+wWC
 aEX
 mFn
 oeQ
