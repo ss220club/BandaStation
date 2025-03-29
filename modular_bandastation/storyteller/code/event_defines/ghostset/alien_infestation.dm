@@ -2,7 +2,7 @@
 	name = "Alien Infestation"
 	typepath = /datum/round_event/antagonist/solo/ghost/alien_infestation
 	weight = 3
-	track = EVENT_TRACK_ROLESET
+	track = EVENT_TRACK_MAJOR
 
 	min_players = 15
 
