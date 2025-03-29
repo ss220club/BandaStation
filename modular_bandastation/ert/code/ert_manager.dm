@@ -22,7 +22,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 	var/engineering_slots = 0
 	var/janitor_slots = 0
 	var/inquisitor_slots = 0
-	var/should_be_announced = FALSE
+	var/should_be_announced = TRUE
 
 /datum/ert_manager/ui_state(mob/user)
 	return ADMIN_STATE(R_ADMIN)
