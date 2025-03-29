@@ -33,6 +33,9 @@ SUBSYSTEM_DEF(central)
 		msg = "WL: [CONFIG_GET(flag/usewhitelist)] [CONFIG_GET(string/server_type)]"
 	return ..()
 
+/datum/controller/subsystem/central/Recover()
+	discord_links = SScentral.discord_links.Copy()
+
 /datum/controller/subsystem/central/proc/load_whitelist()
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists/ckeys?server_type=[CONFIG_GET(string/server_type)]&active_only=true&page=1&page_size=9999"
 
