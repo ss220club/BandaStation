@@ -74,8 +74,6 @@
 	bloodsuckerdatum.frenzygrab.teach(user)
 	bloodsuckerdatum.frenzygrab.locked_to_use = TRUE
 	owner.add_client_colour(/datum/client_colour/manual_heart_blood, TRAUMA_TRAIT)
-	var/obj/cuffs = user.get_item_by_slot(ITEM_SLOT_HANDCUFFED)
-	var/obj/legcuffs = user.get_item_by_slot(ITEM_SLOT_LEGCUFFED)
 	if(user.handcuffed || user.legcuffed)
 		playsound(get_turf(user), 'sound/effects/grillehit.ogg', 80, 1, -1)
 		qdel(user.handcuffed)
