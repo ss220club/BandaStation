@@ -30,6 +30,7 @@ type Data = {
   totalSlots: number;
   ertSpawnpoints: number;
   ertRequestMessages: MessageType[];
+  shouldBeAnnounced: BooleanLike;
 };
 
 type MessageType = {
@@ -136,8 +137,14 @@ const ERTOverview = (props) => {
 
 const SendERT = (props) => {
   const { act, data } = useBackend<Data>();
-  const { ertType, adminSlots, commanderSlots, totalSlots, ertSpawnpoints } =
-    data;
+  const {
+    ertType,
+    adminSlots,
+    commanderSlots,
+    totalSlots,
+    ertSpawnpoints,
+    shouldBeAnnounced,
+  } = data;
 
   const ertNum = [0, 1, 2, 3, 4, 5];
   enum ERTJOB {
@@ -186,6 +193,16 @@ const SendERT = (props) => {
                   onClick={() => act('toggleAdmin')}
                 >
                   {adminSlots ? 'Yes' : 'No'}
+                </Button>
+              </LabeledList.Item>
+              <LabeledList.Item label="Should be announced?">
+                <Button
+                  icon={shouldBeAnnounced ? 'toggle-on' : 'toggle-off'}
+                  selected={shouldBeAnnounced}
+                  tooltip="Последует оповещение после отказа/одобрения запроса?"
+                  onClick={() => act('toggleAnnounce')}
+                >
+                  {shouldBeAnnounced ? 'Yes' : 'No'}
                 </Button>
               </LabeledList.Item>
               <LabeledList.Item label="Commander">
