@@ -22,6 +22,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 	var/engineering_slots = 0
 	var/janitor_slots = 0
 	var/inquisitor_slots = 0
+	var/should_be_announced = FALSE
 
 /datum/ert_manager/ui_state(mob/user)
 	return ADMIN_STATE(R_ADMIN)
@@ -48,6 +49,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 	data["inquisitorSlots"] = inquisitor_slots
 	data["totalSlots"] = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + inquisitor_slots
 	data["ertSpawnpoints"] = length(GLOB.emergencyresponseteamspawn)
+	data["shouldBeAnnounced"] = should_be_announced
 
 	data["ertRequestMessages"] = GLOB.ert_request_messages
 	return data
@@ -65,6 +67,8 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 			admin_slots = admin_slots ? 0 : 1
 		// if("toggleCom")
 		// 	commander_slots = commander_slots ? 0 : 1	no can do sir, leader must be
+		if("toggleAnnounce")
+			should_be_announced = !should_be_announced
 		if("setSec")
 			security_slots = text2num(params["setSec"])
 		if("setMed")
@@ -109,7 +113,8 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 			var/slot_text = english_list(slots_list)
 			message_admins("[key_name_admin(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
 			log_admin("[key_name(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
-			priority_announce("Внимание, [station_name()]. Мы рассматриваем возможность отправки ОБР, ожидайте.", "Активирован протокол ОБР")
+			if(should_be_announced)
+				priority_announce("Внимание, [station_name()]. Мы рассматриваем возможность отправки ОБР, ожидайте.", "Активирован протокол ОБР")
 			makeERTFromSlots(new_ert, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots)
 
 		if("view_player_panel")
@@ -182,6 +187,8 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 	var/obj/effect/landmark/ert_brief_spawn/brief_spawn = locate()
 
 	if(!length(candidates))
+		if(should_be_announced)
+			minor_announce("Внимание, [station_name()]. К сожалению, в настоящее время мы не можем направить к вам отряд быстрого реагирования.", "ОБР недоступен")
 		return FALSE
 
 	if(ertemplate.spawn_admin)
@@ -274,6 +281,14 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 
 	if (teamSpawned)
 		message_admins("[ertemplate.polldesc] has spawned with the mission: [ertemplate.mission]")
+		if(should_be_announced)
+			switch(ert_type)
+				if("Amber")
+					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «ЭМБЕР». Ожидайте.", "ОБР в пути")
+				if("Red")
+					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «РЭД». Ожидайте.", "ОБР в пути")
+				if("Gamma")
+					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
 
 	//Open the Armory doors
 	if(ertemplate.opendoors)
