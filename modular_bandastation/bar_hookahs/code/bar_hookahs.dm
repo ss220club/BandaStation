@@ -119,8 +119,8 @@
 	to_chat(user, span_notice("Вы берёте [src.declent_ru(NOMINATIVE)] в руку."))
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/hookah/proc/try_light(obj/item/O, mob/user)
-	var/msg = O.ignition_effect(src, user)
+/obj/item/hookah/proc/try_light(obj/item/lighter_object, mob/user)
+	var/msg = lighter_object.ignition_effect(src, user)
 	if(!msg)
 		return FALSE
 
