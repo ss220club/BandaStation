@@ -369,7 +369,7 @@
 	if(!source_hookah || !attached_to)
 		return
 
-	if(get_dist(source_hookah, attached_to) > 1 || !isturf(attached_to.loc))
+	if((get_dist(source_hookah, attached_to) <= 1) && isturf(attached_to.loc))
 		return
 
 	if(ismob(attached_to))
