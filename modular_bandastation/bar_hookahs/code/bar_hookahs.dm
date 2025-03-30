@@ -243,13 +243,15 @@
 				return CLICK_ACTION_BLOCKING
 
 			var/mob/living/living_user = user
-			if(hookah_mouthpiece in living_user.held_items)
-				user.visible_message(span_notice("[user] глубоко затягивается..."), span_notice("Вы делаете глубокую затяжку..."))
-				if(!do_after(user, 5 SECONDS, src))
-					return CLICK_ACTION_BLOCKING
+			if(!(hookah_mouthpiece in living_user.held_items))
+				return CLICK_ACTION_BLOCKING
 
-				hookah_mouthpiece.inhale_smoke(living_user, BASE_INHALE_VOLUME * 2, TRUE)
-				return CLICK_ACTION_SUCCESS
+			user.visible_message(span_notice("[user] глубоко затягивается..."), span_notice("Вы делаете глубокую затяжку..."))
+			if(!do_after(user, 5 SECONDS, src))
+				return CLICK_ACTION_BLOCKING
+
+			hookah_mouthpiece.inhale_smoke(living_user, BASE_INHALE_VOLUME * 2, TRUE)
+			return CLICK_ACTION_SUCCESS
 
 		if(OPTION_CLEAR)
 			if(!do_after(user, 2 SECONDS, src))
