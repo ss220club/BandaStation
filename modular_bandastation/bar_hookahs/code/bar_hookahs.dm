@@ -33,8 +33,6 @@
 	inhand_icon_state = "beaker"
 	w_class = WEIGHT_CLASS_HUGE
 
-	/// The embedded container that holds the reagents to smoke
-	var/obj/item/reagent_container
 	/// Mouthpiece that belongs to this hookah
 	var/obj/item/hookah_mouthpiece/hookah_mouthpiece
 	var/fuel = 0
@@ -135,24 +133,24 @@
 	ignite()
 	return TRUE
 
-/obj/item/hookah/attackby(obj/item/attacking_item, mob/user, params)
-	if(attacking_item == hookah_mouthpiece)
-		return_mouthpiece(attacking_item)
+/obj/item/hookah/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(tool == hookah_mouthpiece)
+		return_mouthpiece(tool)
 		return
 
-	if(istype(attacking_item, /obj/item/hookah_coals))
-		add_coals(user, attacking_item)
+	if(istype(tool, /obj/item/hookah_coals))
+		add_coals(user, tool)
 		return
 
-	if(istype(attacking_item, /obj/item/food))
-		add_food(user, attacking_item)
+	if(istype(tool, /obj/item/food))
+		add_food(user, tool)
 		return
 
-	if(istype(attacking_item, /obj/item/reagent_containers))
-		add_reagents(user, attacking_item)
+	if(istype(tool, /obj/item/reagent_containers))
+		add_reagents(user, tool)
 		return
 
-	if(try_light(attacking_item, user))
+	if(try_light(tool, user))
 		return
 	return ..()
 
@@ -171,13 +169,9 @@
 	food_items += food_item
 	food_item.forceMove(src)
 	to_chat(user, span_notice("Вы добавляете [food_item.declent_ru(NOMINATIVE)] в [src.declent_ru(NOMINATIVE)]."))
-	return
 
 /obj/item/hookah/proc/add_reagents(mob/user, obj/item/reagent_containers/container)
 	if(istype(container, /obj/item/reagent_containers/applicator/pill))
-		return
-
-	if(!reagent_container)
 		return
 
 	if(!container.reagents.total_volume)
@@ -186,7 +180,6 @@
 
 	var/transferred = container.reagents.trans_to(src, container.amount_per_transfer_from_this)
 	user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
-	return
 
 /obj/item/hookah/process()
 	if(!lit || !fuel)
