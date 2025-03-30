@@ -96,9 +96,6 @@
 	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
-/obj/item/hookah/update_appearance()
-	. = ..()
-
 /obj/item/hookah/attack_hand_secondary(mob/user, list/modifiers)
 	if(ismob(loc))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
