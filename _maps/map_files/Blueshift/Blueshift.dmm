@@ -2465,6 +2465,12 @@
 "azk" = (
 /turf/closed/wall/r_wall,
 /area/station/maintenance/department/crew_quarters/bar)
+"azs" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "azu" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/captain/double,
@@ -4037,6 +4043,12 @@
 	dir = 1
 	},
 /area/station/hallway/primary/starboard)
+"aPG" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "aPM" = (
 /obj/structure/table,
 /obj/effect/turf_decal/bot,
@@ -12284,7 +12296,6 @@
 /area/station/security/prison/mess)
 "ctK" = (
 /obj/structure/rack,
-/obj/machinery/newscaster/directional/north,
 /obj/machinery/status_display/ai/directional/west,
 /obj/structure/extinguisher_cabinet/directional/north,
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
@@ -13109,6 +13120,12 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/engine,
 /area/station/maintenance/department/bridge)
+"cAn" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "cAp" = (
 /obj/structure/table/wood,
 /obj/machinery/computer/records/medical/laptop,
@@ -20154,6 +20171,12 @@
 /obj/machinery/duct,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/rd)
+"dTr" = (
+/obj/effect/turf_decal/stripes{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "dTu" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
@@ -25814,6 +25837,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/blueshield)
+"eWH" = (
+/obj/effect/turf_decal/stripes/corner,
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "eWJ" = (
 /obj/structure/table,
 /obj/item/plate,
@@ -32907,10 +32934,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
-"grv" = (
-/obj/effect/turf_decal/stripes,
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "grD" = (
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/iron/dark/side{
@@ -41148,6 +41171,12 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/security/execution/education)
+"hYS" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "hYV" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -51315,12 +51344,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
-"jXe" = (
-/obj/effect/turf_decal/stripes{
-	dir = 1
-	},
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "jXA" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment,
@@ -55149,12 +55172,6 @@
 /obj/machinery/duct,
 /turf/open/floor/wood,
 /area/station/service/chapel/office)
-"kGR" = (
-/obj/effect/turf_decal/stripes/corner{
-	dir = 1
-	},
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "kGX" = (
 /obj/effect/spawner/random/trash/graffiti,
 /obj/item/reagent_containers/syringe/contraband/fentanyl,
@@ -58455,12 +58472,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
-"lqy" = (
-/obj/effect/turf_decal/stripes{
-	dir = 8
-	},
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "lqB" = (
 /obj/effect/turf_decal/bot,
 /obj/effect/turf_decal/loading_area{
@@ -63829,12 +63840,6 @@
 	dir = 1
 	},
 /area/station/maintenance/department/bridge)
-"mux" = (
-/obj/effect/turf_decal/stripes/corner{
-	dir = 8
-	},
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "muK" = (
 /obj/structure/cable,
 /obj/machinery/door/airlock/hatch{
@@ -73522,6 +73527,10 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/central)
+"ond" = (
+/obj/effect/turf_decal/stripes,
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "ono" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/structure/table/reinforced,
@@ -79904,12 +79913,6 @@
 /obj/structure/table/wood/poker,
 /turf/open/floor/wood,
 /area/station/service/bar/atrium)
-"pBS" = (
-/obj/effect/turf_decal/stripes/corner{
-	dir = 4
-	},
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "pBT" = (
 /obj/structure/fireplace,
 /turf/open/floor/iron/dark,
@@ -96331,12 +96334,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/service/library/private)
-"sJG" = (
-/obj/effect/turf_decal/stripes{
-	dir = 4
-	},
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "sJP" = (
 /obj/structure/filingcabinet,
 /turf/open/floor/iron/dark,
@@ -102993,6 +102990,12 @@
 /obj/item/clothing/glasses/welding,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/starboard/fore)
+"tXr" = (
+/obj/effect/turf_decal/stripes{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/station/engineering/atmos/hfr_room)
 "tXu" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/structure/cable,
@@ -115731,10 +115734,6 @@
 /obj/machinery/photocopier,
 /turf/open/floor/wood,
 /area/station/service/lawoffice)
-"wsd" = (
-/obj/effect/turf_decal/stripes/corner,
-/turf/open/floor/iron/smooth,
-/area/station/engineering/atmos/hfr_room)
 "wse" = (
 /obj/item/kirbyplants/random,
 /obj/effect/turf_decal/tile/neutral{
@@ -167009,10 +167008,10 @@ tHY
 aCz
 cIm
 ylh
-sJG
-sJG
-sJG
-pBS
+dTr
+dTr
+dTr
+aPG
 ylh
 qLp
 lcB
@@ -167264,13 +167263,13 @@ mIg
 aCz
 rdq
 pzk
-wsd
+eWH
 lfM
 lnM
 nsN
 lnM
 oLq
-pBS
+aPG
 qLp
 ubH
 vcA
@@ -167521,13 +167520,13 @@ wbe
 aCz
 oTo
 cIm
-grv
+ond
 lnM
 nCA
 tjJ
 wAh
 lnM
-jXe
+hYS
 qLp
 eAs
 fvp
@@ -167778,13 +167777,13 @@ uFN
 aCz
 tJP
 cIm
-grv
+ond
 kEa
 eZj
 iqk
 ePG
 lnM
-jXe
+hYS
 qLp
 eAs
 fvp
@@ -168035,13 +168034,13 @@ wbe
 aCz
 bxi
 cIm
-grv
+ond
 lnM
 wAh
 bKs
 nCA
 lnM
-jXe
+hYS
 qLp
 eAs
 fvp
@@ -168292,13 +168291,13 @@ oBO
 aCz
 rdq
 hhd
-mux
+azs
 tIk
 lnM
 ecm
 lnM
 aya
-kGR
+cAn
 qLp
 ubH
 aQq
@@ -168550,11 +168549,11 @@ aCz
 aCz
 aCz
 cIm
-mux
-lqy
-lqy
-lqy
-kGR
+azs
+tXr
+tXr
+tXr
+cAn
 ylh
 qLp
 sQr
