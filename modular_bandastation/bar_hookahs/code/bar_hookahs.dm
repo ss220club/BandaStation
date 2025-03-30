@@ -87,7 +87,7 @@
 		. += emissive_appearance(icon, "lit_overlay", src, alpha = src.alpha)
 
 /obj/item/hookah/proc/return_mouthpiece(obj/item/hookah_mouthpiece/current_mouthpiece)
-	if(current_mouthpiece.source_hookah != src)
+	if(hookah_mouthpiece != current_mouthpiece)
 		return FALSE
 
 	if(hookah_mouthpiece in contents)
