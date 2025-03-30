@@ -20,6 +20,7 @@
 			/obj/item/gun/ballistic/rifle/boltaction, //fits if you make it an obrez
 			/obj/item/gun/energy/laser/captain,
 			/obj/item/gun/energy/e_gun/hos,
+			/obj/item/gun/energy/eg_14, /// BANDASTATION ADD
 		)
 
 	set_holdable(holdable_override)
@@ -38,6 +39,7 @@
 		/obj/item/gun/energy/recharge/ebow,
 		/obj/item/gun/energy/laser/captain,
 		/obj/item/gun/energy/e_gun/hos,
+		/obj/item/gun/energy/eg_14, /// BANDASTATION ADD
 	)
 
 	return ..()
@@ -67,6 +69,7 @@
 		/obj/item/gun/energy/laser/captain,
 		/obj/item/gun/energy/e_gun/hos,
 		/obj/item/gun/ballistic/rifle/boltaction, //fits if you make it an obrez
+		/obj/item/gun/energy/eg_14, /// BANDASTATION ADD
 	)
 
 	return ..()
@@ -95,6 +98,7 @@
 		/obj/item/gun/energy/dueling,
 		/obj/item/gun/energy/laser/captain,
 		/obj/item/gun/energy/e_gun/hos,
+		/obj/item/gun/energy/eg_14, /// BANDASTATION ADD
 	)
 
 	return ..()
