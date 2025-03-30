@@ -65,8 +65,8 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 			ert_type = params["ertType"]
 		if("toggleAdmin")
 			admin_slots = admin_slots ? 0 : 1
-		// if("toggleCom")
-		// 	commander_slots = commander_slots ? 0 : 1	no can do sir, leader must be
+		if("toggleCom")
+			commander_slots = commander_slots ? 0 : 1
 		if("toggleAnnounce")
 			should_be_announced = !should_be_announced
 		if("setSec")
@@ -197,7 +197,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 			var/chosen_outfit = usr.client?.prefs?.read_preference(/datum/preference/choiced/brief_outfit)
 			usr.client.prefs.safe_transfer_prefs_to(admin_officer, is_antag = TRUE)
 			admin_officer.equipOutfit(chosen_outfit)
-			admin_officer.key = usr.key
+			admin_officer.PossessByPlayer(usr.key)
 		else
 			to_chat(usr, span_warning("Could not spawn you in as briefing officer as you are not a ghost!"))
 
@@ -218,7 +218,6 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 	ert_team.mission = missionobj
 
 	var/mob/dead/observer/earmarked_leader
-	var/leader_spawned = FALSE // just in case the earmarked leader disconnects or becomes unavailable, we can try giving leader to the last guy to get chosen
 
 	if(ertemplate.leader_experience)
 		var/list/candidate_living_exps = list()
@@ -254,7 +253,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 		else
 			ert_operative = new /mob/living/carbon/human(spawnloc)
 			chosen_candidate.client.prefs.safe_transfer_prefs_to(ert_operative, is_antag = TRUE)
-		ert_operative.key = chosen_candidate.key
+		ert_operative.PossessByPlayer(chosen_candidate.key)
 
 		if(ertemplate.enforce_human || !(ert_operative.dna.species.changesource_flags & ERT_SPAWN))
 			ert_operative.set_species(/datum/species/human)
@@ -262,10 +261,9 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 		//Give antag datum
 		var/datum/antagonist/ert/ert_antag
 
-		if((chosen_candidate == earmarked_leader) || (numagents == 1 && !leader_spawned))
+		if(commander_slots > 0 && (chosen_candidate == earmarked_leader))
 			ert_antag = new ertemplate.leader_role ()
 			earmarked_leader = null
-			leader_spawned = TRUE
 		else
 			ert_antag = ertemplate.roles[WRAP(numagents,1,length(ertemplate.roles) + 1)]
 			ert_antag = new ert_antag ()
