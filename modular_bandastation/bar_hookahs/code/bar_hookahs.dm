@@ -93,14 +93,13 @@
 	if(hookah_mouthpiece in contents)
 		return FALSE
 
+	current_mouthpiece.disconnect()
 	current_mouthpiece.forceMove(src)
 	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
 /obj/item/hookah/update_appearance()
 	. = ..()
-	if(hookah_mouthpiece in contents)
-		hookah_mouthpiece.disconnect()
 
 /obj/item/hookah/attack_hand_secondary(mob/user, list/modifiers)
 	if(ismob(loc))
