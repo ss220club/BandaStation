@@ -30,11 +30,7 @@
 	icon_state = "hookah"
 	max_integrity = 50
 	integrity_failure = 0
-
-	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
-	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
 	inhand_icon_state = "beaker"
-
 	w_class = WEIGHT_CLASS_HUGE
 
 	/// The embedded container that holds the reagents to smoke
@@ -75,11 +71,9 @@
 
 /obj/item/hookah/Initialize(mapload)
 	. = ..()
-	hookah_mouthpiece = new(src)
-	hookah_mouthpiece.source_hookah = src
+	hookah_mouthpiece = new(src, src)
 	update_appearance(UPDATE_OVERLAYS)
 	create_reagents(INTERNAL_VOLUME, TRANSPARENT)
-	reagent_container = src
 	register_context()
 
 /obj/item/hookah/update_overlays()
@@ -116,12 +110,14 @@
 		balloon_alert(user, "уже занято!")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
+	take_mouthpiece(user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/hookah/proc/take_mouthpiece(mob/user)
 	user.put_in_hands(hookah_mouthpiece)
-	hookah_mouthpiece.source_hookah = src
+	hookah_mouthpiece.connect_to(user)
 	to_chat(user, span_notice("Вы берёте [src.declent_ru(NOMINATIVE)] в руку."))
 	update_appearance(UPDATE_OVERLAYS)
-	hookah_mouthpiece.connect_to(user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/hookah/proc/try_light(obj/item/O, mob/user)
 	var/msg = O.ignition_effect(src, user)
@@ -189,7 +185,7 @@
 		to_chat(user, span_warning("Внутри [container.declent_ru(GENITIVE)] ничего нет!"))
 		return
 
-	var/transferred = container.reagents.trans_to(reagent_container, container.amount_per_transfer_from_this)
+	var/transferred = container.reagents.trans_to(src, container.amount_per_transfer_from_this)
 	user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
 	return
 
@@ -215,10 +211,10 @@
 	if(lit)
 		hookah_radial_options[OPTION_EXTINGUISH] = RADIAL_EXTINGUISH
 
-	if((length(food_items) || reagent_container?.reagents?.total_volume) && lit)
+	if((length(food_items) || src?.reagents?.total_volume) && lit)
 		hookah_radial_options[OPTION_BLOW] = RADIAL_BLOW
 
-	if(length(food_items) || reagent_container?.reagents?.total_volume)
+	if(length(food_items) || src?.reagents?.total_volume)
 		hookah_radial_options[OPTION_CLEAR] = RADIAL_CLEAR
 
 	var/choice = show_radial_menu(user, src, hookah_radial_options, require_near = TRUE)
@@ -242,7 +238,7 @@
 			if(!lit)
 				return CLICK_ACTION_BLOCKING
 
-			if(!length(food_items) && !reagent_container?.reagents?.total_volume)
+			if(!length(food_items) && !src?.reagents?.total_volume)
 				to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет ингридиентов!"))
 				return CLICK_ACTION_BLOCKING
 
@@ -256,13 +252,10 @@
 				return CLICK_ACTION_SUCCESS
 
 		if(OPTION_CLEAR)
-			if(!reagent_container)
-				return CLICK_ACTION_BLOCKING
-
 			if(!do_after(user, 2 SECONDS, src))
 				return CLICK_ACTION_BLOCKING
 
-			reagent_container.reagents.clear_reagents()
+			src.reagents.clear_reagents()
 			to_chat(user, span_notice("Вы очищаете чашу [src.declent_ru(GENITIVE)]."))
 			return CLICK_ACTION_SUCCESS
 
@@ -302,8 +295,8 @@
 /obj/item/hookah/atom_destruction(damage_flag)
 	fuel = 0
 	new /obj/item/shard(get_turf(src))
-	if(reagent_container && reagent_container.reagents?.total_volume)
-		reagent_container.reagents.expose(get_turf(src), TOUCH)
+	if(src.reagents?.total_volume)
+		src.reagents.expose(get_turf(src), TOUCH)
 
 	for(var/obj/item/food/some_food in food_items)
 		var/turf/drop_loc = get_turf(src)
@@ -327,9 +320,6 @@
 		to_chat(user, span_notice("Мундштук возвращается в [src.declent_ru(NOMINATIVE)]."))
 
 /obj/item/hookah/Destroy()
-	if(reagent_container)
-		reagent_container = null
-
 	if(particle_type)
 		remove_shared_particles(particle_type)
 		particle_type = null
@@ -359,14 +349,17 @@
 	. = ..()
 	if(hookah)
 		source_hookah = hookah
+	else
+		qdel(src)
+		CRASH("Hookah mouthpiece created without hookah!")
 
-/obj/item/hookah_mouthpiece/proc/connect_to(atom/target)
-	if(!source_hookah || !target)
+/obj/item/hookah_mouthpiece/proc/connect_to(mob/living_mob)
+	if(!source_hookah || !living_mob)
 		return FALSE
 
-	attached_to = target
+	attached_to = living_mob
 	beam = source_hookah.Beam(
-		target,
+		living_mob,
 		icon = 'icons/effects/beam.dmi',
 		icon_state = "1-full",
 		beam_color = COLOR_BLACK,
@@ -374,7 +367,7 @@
 		override_origin_pixel_y = 0,
 	)
 
-	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(check_distance))
+	RegisterSignal(living_mob, COMSIG_MOVABLE_MOVED, PROC_REF(check_distance))
 	return TRUE
 
 /obj/item/hookah_mouthpiece/proc/disconnect()
@@ -387,12 +380,14 @@
 	if(!source_hookah || !attached_to)
 		return
 
-	if(!(get_dist(source_hookah, attached_to) <= 1 && isturf(attached_to.loc)))
-		if(ismob(attached_to))
-			var/mob/user = attached_to
-			user.dropItemToGround(src)
-			to_chat(user, span_warning("Вы отпускаете [source_hookah.declent_ru(NOMINATIVE)]."))
-		disconnect()
+	if(get_dist(source_hookah, attached_to) > 1 || !isturf(attached_to.loc))
+		return
+
+	if(ismob(attached_to))
+		var/mob/user = attached_to
+		user.dropItemToGround(src)
+		to_chat(user, span_warning("Вы отпускаете [source_hookah.declent_ru(NOMINATIVE)]."))
+	disconnect()
 
 /obj/item/hookah_mouthpiece/Destroy()
 	if(source_hookah)
@@ -430,10 +425,10 @@
 		to_chat(living_user, span_warning("Вы не можете сделать и вдоха!"))
 		return
 
-	if(!source_hookah || !source_hookah.reagent_container || !source_hookah.reagent_container.reagents)
+	if(!source_hookah || !source_hookah.reagents)
 		return
 
-	var/datum/reagents/these_reagents = source_hookah.reagent_container.reagents
+	var/datum/reagents/these_reagents = source_hookah.reagents
 	for(var/obj/item/food/some_food_item in source_hookah.food_items)
 		if(!some_food_item.reagents)
 			qdel(some_food_item)
@@ -451,7 +446,7 @@
 		make_black_smoke(living_user, source_hookah.loc, these_reagents)
 		return
 
-	if(!source_hookah.reagent_container || !source_hookah.reagent_container.reagents.total_volume)
+	if(!source_hookah || !source_hookah.reagents.total_volume)
 		to_chat(living_user, span_warning("В [src.declent_ru(GENITIVE)] нет жидкости!"))
 		return
 
@@ -509,7 +504,7 @@
 
 /obj/item/hookah_mouthpiece/proc/delayed_puff(mob/user, amount)
 	var/datum/effect_system/fluid_spread/smoke/chem/quick/puff = new
-	puff.set_up(amount / 5, amount * 0.2, location = user.loc, carry = source_hookah.reagent_container.reagents)
+	puff.set_up(amount / 5, amount * 0.2, location = user.loc, carry = source_hookah.reagents)
 	puff.start()
 
 /obj/item/hookah_coals
