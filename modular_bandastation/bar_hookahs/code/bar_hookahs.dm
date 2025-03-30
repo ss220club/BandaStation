@@ -391,7 +391,7 @@
 		source_hookah.return_mouthpiece(src)
 
 /obj/item/hookah_mouthpiece/attack_self(mob/user)
-	if(!source_hookah || !source_hookah.lit || !ishuman(user))
+	if(!source_hookah?.lit || !ishuman(user))
 		return ..()
 	start_inhale(user)
 
