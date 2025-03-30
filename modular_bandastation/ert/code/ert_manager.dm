@@ -292,9 +292,9 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 				if("Amber")
 					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «ЭМБЕР». Ожидайте.", "ОБР в пути")
 				if("Red")
-					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «РЭД». Ожидайте.", "ОБР в пути")
+					priority_announce("Внимание, [station_name()]. Мы направляем усиленный отряд быстрого реагирования кода «РЭД». Ожидайте.", "ОБР в пути")
 				if("Gamma")
-					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
+					priority_announce("Внимание, [station_name()]. Мы направляем элитный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
 
 	//Open the Armory doors
 	if(ertemplate.opendoors)
