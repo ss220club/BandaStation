@@ -1,0 +1,58 @@
+@use '../base.scss';
+@use '../functions.scss' as *;
+
+.Minesweeper__closed {
+  cursor: pointer;
+  vertical-align: middle;
+  border: base.em(2px) outset rgba(125, 125, 125, 0.5) !important;
+  outline: none !important;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.Minesweeper__open {
+  position: relative;
+  pointer-events: none;
+  vertical-align: middle;
+  text-align: center;
+  font-size: medium;
+  outline: none !important;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.2);
+    z-index: 1;
+  }
+}
+
+.Minesweeper__list {
+  tr > td {
+    text-align: center;
+  }
+
+  tr:not(:first-child) {
+    height: 2em;
+    line-height: 1.75em;
+    transition: background-color 50ms;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: base.$color-bg;
+    }
+  }
+}
+
+.Minesweeper__infobox {
+  max-height: 8em;
+  border: base.em(3px) outset rgba(125, 125, 125, 0.5);
+  user-select: none;
+  -ms-user-select: none; // Remove with Byond 516 release
+}

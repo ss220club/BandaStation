@@ -670,17 +670,44 @@
     <!-- Root element for tgui interfaces -->
     <div id="react-root"></div>
 
-    <!-- Fatal error container -->
-    <div id="FatalError" class="FatalError">
-      <!-- prettier-ignore -->
-      <div class="FatalError__logo">
-ooooo      ooo     .     .oooooo.    .oooooo..o
-`888b.     `8'   .o8    d8P'  `Y8b  d8P'    `Y8
- 8 `88b.    8  .o888oo 888      888 Y88bo.
- 8   `88b.  8    888   888      888  `"Y8888o.
- 8     `88b.8    888   888      888      `"Y88b
- 8       `888    888 . `88b    d88' oo     .d8P
-o8o        `8    "888"  `Y8bood8P'  8""88888P'
+@keyframes FatalError__tfmX {
+  0% { left: 15px; }
+  100% { left: -15px; }
+}
+
+@keyframes FatalError__tfmY {
+  100% { top: -15px; }
+}
+</style>
+
+<!-- tgui:inline-css -->
+</head>
+<body>
+
+<!-- tgui:inline-polyfill -->
+<!-- tgui:assets -->
+<!-- tgui:inline-html-start -->
+<!-- tgui:inline-html -->
+<!-- tgui:inline-html-end -->
+<!-- tgui:inline-js -->
+
+<!-- Root element for tgui interfaces -->
+<div id="react-root"></div>
+
+<!-- Fatal error container -->
+<div id="FatalError" class="FatalError">
+<div class="FatalError__logo">
+████████╗    ██████╗  ████████╗  ████████╗  ██╗
+████████║    ██████║  ████████║  ████████║  ██║
+██╔═════╝    ██╔╗██║  ██╔═══██║     ██╔══╝  ██║
+██╚═════╗    ██║║██║  ██║   ██║     ██║     ██╚═════╗
+████████║    ██║║██║  ████████║     ██║     ████████║
+████████║    ██║║██║  ████████║     ██║     ████████║
+██╔═══██║    ██║║██║    ██╔╗██║     ██║     ██╔═══██║
+██║   ██║    ██║║██║    ██║║██║     ██║     ██║   ██║
+████████║  ████║║██║  ████║║██║     ██║     ████████║
+████████║  ████║║██║  ████║║██║     ██║     ████████║
+╚═══════╝  ╚═══╝╚══╝  ╚═══╝╚══╝     ╚═╝     ╚═══════╝
 </div>
       <marquee class="FatalError__header">
         A fatal exception has occurred at 002B:C562F1B7 in TGUI. The current

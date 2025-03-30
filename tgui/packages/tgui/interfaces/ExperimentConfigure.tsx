@@ -110,6 +110,7 @@ function TechwebServer(props) {
                 ? act('clear_server')
                 : act('select_server', { ref: server.ref })
             }
+            content={server.selected ? 'Отключиться' : 'Подключиться'}
             backgroundColor={server.selected ? 'good' : 'rgba(0, 0, 0, 0.4)'}
             className="ExperimentTechwebServer__ConnectButton"
           >
@@ -118,9 +119,7 @@ function TechwebServer(props) {
         </Stack.Item>
       </Stack>
       <Box className="ExperimentTechwebServer__WebContent">
-        <span>
-          Connectivity to this web is maintained by the following servers...
-        </span>
+        <span>Соединение к этой сети поддерживают следующие сервера...</span>
         <LabeledList>
           {server.all_servers.map((individual_servers, new_index) => (
             <Box key={new_index}>{individual_servers}</Box>
@@ -131,8 +130,85 @@ function TechwebServer(props) {
   ));
 }
 
-export function Experiment(props) {
-  const { act } = useBackend<Data>();
+export const ExperimentConfigure = (props) => {
+  const { act, data } = useBackend();
+  const { always_active, has_start_callback } = data;
+  let techwebs = data.techwebs ?? [];
+
+  const experiments = sortBy(data.experiments ?? [], (exp) => exp.name);
+
+  // Group servers together by web
+  let webs = new Map();
+  techwebs.forEach((x) => {
+    if (x.web_id !== null) {
+      if (!webs.has(x.web_id)) {
+        webs.set(x.web_id, []);
+      }
+      webs.get(x.web_id).push(x);
+    }
+  });
+
+  return (
+    <Window resizable width={600} height={735}>
+      <Window.Content>
+        <Flex direction="column" height="100%">
+          <Flex.Item mb={1}>
+            <Section title="Сервера">
+              <Box>
+                {webs.size > 0
+                  ? 'Пожалуйста, выберите техсеть для подключения...'
+                  : 'Не найдены сервера, подключенные к техсети!'}
+              </Box>
+              {webs.size > 0 &&
+                Array.from(webs, ([techweb, techwebs]) => (
+                  <TechwebServer key={techweb} techwebs={techwebs} />
+                ))}
+            </Section>
+          </Flex.Item>
+          <Flex.Item mb={has_start_callback ? 1 : 0} grow={1}>
+            {techwebs.some((e) => e.selected) && (
+              <Section
+                title="Эксперименты"
+                className="ExperimentConfigure__ExperimentsContainer"
+              >
+                <Flex.Item mb={1}>
+                  {(experiments.length &&
+                    always_active &&
+                    'Это устройство настроено для выполнения всех доступных' +
+                      ' экспериментов. Дальнейшие настройки не нужны.') ||
+                    (experiments.length &&
+                      'Выберите один из следующих экспериментов...') ||
+                    'Не найдены эксперименты в этой сети'}
+                </Flex.Item>
+                <Flex.Item>
+                  {experiments.map((exp, i) => {
+                    return <Experiment key={i} exp={exp} />;
+                  })}
+                </Flex.Item>
+              </Section>
+            )}
+          </Flex.Item>
+          {!!has_start_callback && (
+            <Flex.Item>
+              <Button
+                fluid
+                className="ExperimentConfigure__PerformExperiment"
+                onClick={() => act('start_experiment_callback')}
+                disabled={!experiments.some((e) => e.selected)}
+                icon="flask"
+              >
+                Выполнить эксперимент
+              </Button>
+            </Flex.Item>
+          )}
+        </Flex>
+      </Window.Content>
+    </Window>
+  );
+};
+
+export const Experiment = (props) => {
+  const { act, data } = useBackend();
   const { exp } = props;
   const { name, description, tag, selected, progress, performance_hint, ref } =
     exp;
