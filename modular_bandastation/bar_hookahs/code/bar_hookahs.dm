@@ -206,7 +206,7 @@
 
 /obj/item/hookah/click_alt_secondary(mob/user)
 	if(!ishuman(user))
-		return
+		return CLICK_ACTION_BLOCKING
 	var/list/hookah_radial_options = list()
 	if(lit)
 		hookah_radial_options[OPTION_EXTINGUISH] = RADIAL_EXTINGUISH
