@@ -211,10 +211,10 @@
 	if(lit)
 		hookah_radial_options[OPTION_EXTINGUISH] = RADIAL_EXTINGUISH
 
-	if((length(food_items) || src.reagents.total_volume) && lit)
+	if((length(food_items) || reagents.total_volume) && lit)
 		hookah_radial_options[OPTION_BLOW] = RADIAL_BLOW
 
-	if(length(food_items) || src.reagents.total_volume)
+	if(length(food_items) || reagents.total_volume)
 		hookah_radial_options[OPTION_CLEAR] = RADIAL_CLEAR
 
 	var/choice = show_radial_menu(user, src, hookah_radial_options, require_near = TRUE)
@@ -238,7 +238,7 @@
 			if(!lit)
 				return CLICK_ACTION_BLOCKING
 
-			if(!length(food_items) && !src.reagents.total_volume)
+			if(!length(food_items) && !reagents.total_volume)
 				to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет ингридиентов!"))
 				return CLICK_ACTION_BLOCKING
 
@@ -257,7 +257,7 @@
 			if(!do_after(user, 2 SECONDS, src))
 				return CLICK_ACTION_BLOCKING
 
-			src.reagents.clear_reagents()
+			reagents.clear_reagents()
 			to_chat(user, span_notice("Вы очищаете чашу [src.declent_ru(GENITIVE)]."))
 			return CLICK_ACTION_SUCCESS
 
@@ -297,8 +297,8 @@
 /obj/item/hookah/atom_destruction(damage_flag)
 	fuel = 0
 	new /obj/item/shard(get_turf(src))
-	if(src.reagents.total_volume)
-		src.reagents.expose(get_turf(src), TOUCH)
+	if(reagents.total_volume)
+		reagents.expose(get_turf(src), TOUCH)
 
 	for(var/obj/item/food/some_food in food_items)
 		var/turf/drop_loc = get_turf(src)
