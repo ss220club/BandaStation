@@ -218,6 +218,7 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 	ert_team.mission = missionobj
 
 	var/mob/dead/observer/earmarked_leader
+	var/leader_spawned = FALSE // just in case the earmarked leader disconnects or becomes unavailable, we can try giving leader to the last guy to get chosen
 
 	if(ertemplate.leader_experience)
 		var/list/candidate_living_exps = list()
@@ -261,9 +262,10 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 		//Give antag datum
 		var/datum/antagonist/ert/ert_antag
 
-		if(commander_slots > 0 && (chosen_candidate == earmarked_leader))
+		if((chosen_candidate == earmarked_leader) && (commander_slots > 0 && !leader_spawned))
 			ert_antag = new ertemplate.leader_role ()
 			earmarked_leader = null
+			leader_spawned = TRUE
 		else
 			ert_antag = ertemplate.roles[WRAP(numagents,1,length(ertemplate.roles) + 1)]
 			ert_antag = new ert_antag ()

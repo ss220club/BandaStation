@@ -209,7 +209,7 @@ const SendERT = (props) => {
                 <Button
                   icon={commanderSlots ? 'toggle-on' : 'toggle-off'}
                   selected={commanderSlots}
-                  tooltip="Лидер должен быть"
+                  tooltip="Будет лидер при создании отряда или нет?"
                   onClick={() => act('toggleCom')}
                 >
                   {commanderSlots ? 'Yes' : 'No'}
