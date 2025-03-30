@@ -320,9 +320,7 @@
 		to_chat(user, span_notice("Мундштук возвращается в [src.declent_ru(NOMINATIVE)]."))
 
 /obj/item/hookah/Destroy()
-	if(particle_type)
-		remove_shared_particles(particle_type)
-		particle_type = null
+	stop_smoke()
 
 	QDEL_LIST(food_items)
 	if(hookah_mouthpiece)
@@ -373,7 +371,7 @@
 /obj/item/hookah_mouthpiece/proc/disconnect()
 	if(attached_to)
 		UnregisterSignal(attached_to, COMSIG_MOVABLE_MOVED)
-	attached_to = null
+		attached_to = null
 	QDEL_NULL(beam)
 
 /obj/item/hookah_mouthpiece/proc/check_distance()
@@ -451,13 +449,7 @@
 		return
 
 	var/smoke_efficiency = min(source_hookah.smoke_amount, 100) / 100
-	var/amount_to_transfer = 0
-
-	if(skip_calculations)
-		amount_to_transfer = amount
-	else
-		amount_to_transfer = amount * smoke_efficiency
-
+	var/amount_to_transfer = skip_calculations ? amount : amount * smoke_efficiency
 	var/amount_to_waste = amount - amount_to_transfer
 	var/transferred = these_reagents.trans_to(living_user, amount_to_transfer, methods = INHALE)
 
