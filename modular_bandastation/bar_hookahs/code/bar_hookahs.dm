@@ -211,10 +211,10 @@
 	if(lit)
 		hookah_radial_options[OPTION_EXTINGUISH] = RADIAL_EXTINGUISH
 
-	if((length(food_items) || src?.reagents?.total_volume) && lit)
+	if((length(food_items) || src.reagents?.total_volume) && lit)
 		hookah_radial_options[OPTION_BLOW] = RADIAL_BLOW
 
-	if(length(food_items) || src?.reagents?.total_volume)
+	if(length(food_items) || src.reagents?.total_volume)
 		hookah_radial_options[OPTION_CLEAR] = RADIAL_CLEAR
 
 	var/choice = show_radial_menu(user, src, hookah_radial_options, require_near = TRUE)
@@ -238,7 +238,7 @@
 			if(!lit)
 				return CLICK_ACTION_BLOCKING
 
-			if(!length(food_items) && !src?.reagents?.total_volume)
+			if(!length(food_items) && !src.reagents?.total_volume)
 				to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет ингридиентов!"))
 				return CLICK_ACTION_BLOCKING
 
