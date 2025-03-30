@@ -211,10 +211,10 @@
 	if(lit)
 		hookah_radial_options[OPTION_EXTINGUISH] = RADIAL_EXTINGUISH
 
-	if((length(food_items) || src.reagents?.total_volume) && lit)
+	if((length(food_items) || src.reagents.total_volume) && lit)
 		hookah_radial_options[OPTION_BLOW] = RADIAL_BLOW
 
-	if(length(food_items) || src.reagents?.total_volume)
+	if(length(food_items) || src.reagents.total_volume)
 		hookah_radial_options[OPTION_CLEAR] = RADIAL_CLEAR
 
 	var/choice = show_radial_menu(user, src, hookah_radial_options, require_near = TRUE)
@@ -238,7 +238,7 @@
 			if(!lit)
 				return CLICK_ACTION_BLOCKING
 
-			if(!length(food_items) && !src.reagents?.total_volume)
+			if(!length(food_items) && !src.reagents.total_volume)
 				to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет ингридиентов!"))
 				return CLICK_ACTION_BLOCKING
 
@@ -295,13 +295,13 @@
 /obj/item/hookah/atom_destruction(damage_flag)
 	fuel = 0
 	new /obj/item/shard(get_turf(src))
-	if(src.reagents?.total_volume)
+	if(src.reagents.total_volume)
 		src.reagents.expose(get_turf(src), TOUCH)
 
 	for(var/obj/item/food/some_food in food_items)
 		var/turf/drop_loc = get_turf(src)
 		var/obj/item/food/food_item = some_food
-		if(food_item.reagents?.total_volume)
+		if(food_item.reagents.total_volume)
 			food_item.reagents.expose(drop_loc, TOUCH)
 		qdel(food_item)
 
@@ -389,7 +389,7 @@
 
 /obj/item/hookah_mouthpiece/Destroy()
 	if(source_hookah)
-		source_hookah?.stop_smoke()
+		source_hookah.stop_smoke()
 		source_hookah.hookah_mouthpiece = null
 	disconnect()
 	return ..()
@@ -405,7 +405,7 @@
 	start_inhale(user)
 
 /obj/item/hookah_mouthpiece/attack(mob/living/target_mob, mob/living/user)
-	if(target_mob == user && source_hookah?.lit)
+	if(target_mob == user && source_hookah.lit)
 		start_inhale(target_mob)
 		return
 	return ..()
@@ -483,7 +483,7 @@
 	black_smoke.set_up(2, location = location, carry = some_reagents)
 	black_smoke.start()
 	QDEL_LIST(source_hookah.food_items)
-	some_reagents?.clear_reagents()
+	some_reagents.clear_reagents()
 	to_chat(living_user, span_warning("Вы чувствуете резкий неприятный запах!"))
 	living_user.dropItemToGround(src)
 	living_user.emote("cough")
