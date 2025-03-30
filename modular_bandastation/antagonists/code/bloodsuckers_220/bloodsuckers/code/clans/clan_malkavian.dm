@@ -46,7 +46,7 @@ GLOBAL_LIST_EMPTY(masquerade_breakers)
 
 /datum/bloodsucker_clan/malkavian/handle_clan_life(datum/antagonist/bloodsucker/source)
 	. = ..()
-	if(prob(85) || bloodsuckerdatum.owner.current.stat != CONSCIOUS || HAS_TRAIT(bloodsuckerdatum.owner.current, TRAIT_MASQUERADE))
+	if(prob(90) || bloodsuckerdatum.owner.current.stat != CONSCIOUS || HAS_TRAIT(bloodsuckerdatum.owner.current, TRAIT_MASQUERADE))
 		return
 	var/message = pick(strings("malkavian_revelations.json", "revelations", "modular_bandastation/antagonists/code/bloodsuckers_220/bloodsuckers/strings"))
 	INVOKE_ASYNC(bloodsuckerdatum.owner.current, TYPE_PROC_REF(/atom/movable, say), message, , , , , , CLAN_MALKAVIAN)
