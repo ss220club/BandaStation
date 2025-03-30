@@ -22502,3 +22502,27 @@ dative = "своим"
 accusative = "свои"
 instrumental = "своими"
 prepositional = "своих"
+
+["hookah"]
+nominative = "кальян"
+genitive = "кальяна"
+dative = "кальяну"
+accusative = "кальян"
+instrumental = "кальяном"
+prepositional = "кальяне"
+
+["mouthpiece"]
+nominative = "кальянный мундштук"
+genitive = "кальянного мундштука"
+dative = "кальянному мундштуку"
+accusative = "кальянного мундштука"
+instrumental = "кальянным мундштуком"
+prepositional = "кальянном мундштуке"
+
+["hookah coals"]
+nominative = "угли для кальяна"
+genitive = "углей для кальяна"
+dative = "углям для кальяна"
+accusative = "угли для кальяна"
+instrumental = "углями для кальяна"
+prepositional = "углях для кальяна"
