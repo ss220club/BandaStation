@@ -414,7 +414,7 @@
 		to_chat(living_user, span_warning("Вы не можете сделать и вдоха!"))
 		return
 
-	if(!source_hookah || !source_hookah.reagents)
+	if(!source_hookah?.reagents)
 		return
 
 	var/datum/reagents/these_reagents = source_hookah.reagents
