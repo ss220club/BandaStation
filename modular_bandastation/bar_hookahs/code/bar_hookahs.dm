@@ -136,23 +136,23 @@
 /obj/item/hookah/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(tool == hookah_mouthpiece)
 		return_mouthpiece(tool)
-		return
+		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/hookah_coals))
 		add_coals(user, tool)
-		return
+		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/food))
 		add_food(user, tool)
-		return
+		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/reagent_containers))
 		add_reagents(user, tool)
-		return
+		return ITEM_INTERACT_SUCCESS
 
 	if(try_light(tool, user))
 		return
-	return ..()
+	return NONE
 
 /obj/item/hookah/proc/add_coals(mob/user, obj/item/hookah_coals/coal)
 	if(fuel + FUEL_PER_COAL > MAX_FUEL)
