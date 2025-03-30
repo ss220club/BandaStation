@@ -199,7 +199,7 @@ const SendERT = (props) => {
                 <Button
                   icon={shouldBeAnnounced ? 'toggle-on' : 'toggle-off'}
                   selected={shouldBeAnnounced}
-                  tooltip="Последует оповещение после отказа/одобрения запроса?"
+                  tooltip="Последует ли оповещение после отказа/одобрения запроса?"
                   onClick={() => act('toggleAnnounce')}
                 >
                   {shouldBeAnnounced ? 'Yes' : 'No'}
