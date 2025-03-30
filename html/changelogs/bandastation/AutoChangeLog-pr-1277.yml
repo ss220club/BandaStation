@@ -1,0 +1,5 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - bugfix: "eg14 (пистолет БЩ) снова лезет в кобуру"
+  - bugfix: "шкафы НТРа и БЩ снова корректно заполняются содержимым"
