@@ -349,8 +349,8 @@
 	if(hookah)
 		source_hookah = hookah
 	else
-		qdel(src)
-		CRASH("Hookah mouthpiece created without hookah!")
+		stack_trace("Hookah mouthpiece created without hookah!")
+		return INITIALIZE_HINT_QDEL
 
 /obj/item/hookah_mouthpiece/proc/connect_to(mob/living_mob)
 	if(!source_hookah || !living_mob)
