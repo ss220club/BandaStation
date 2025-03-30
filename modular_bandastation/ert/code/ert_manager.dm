@@ -92,6 +92,12 @@ ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATE
 					to_chat(usr, "<span class='userdanger'>Invalid ERT type.</span>")
 					return
 
+			if((commander_slots + medical_slots + janitor_slots + inquisitor_slots + security_slots + engineering_slots) == 0)
+				message_admins("[key_name_admin(usr)] tried to create a [ert_type] ERT with zero slots available!")
+				log_admin("[key_name(usr)] tried to create a [ert_type] ERT with zero slots available.")
+				to_chat(usr, span_userdanger("ERT must have at least 1 slot available!"))
+				return
+
 			new_ert.teamsize = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + inquisitor_slots
 			new_ert.roles = slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots, ert_type)
 
