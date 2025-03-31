@@ -84,12 +84,16 @@
 
 /datum/action/cooldown/bloodsucker/targeted/tremere/auspex/ActivatePower(trigger_flags)
 	. = ..()
+	var/mob/living/user = owner
 	owner.AddElement(/datum/element/digitalcamo)
 	animate(owner, alpha = 15, time = 1 SECONDS)
+	user.balloon_alert(user, "cloak turned on.")
 
 /datum/action/cooldown/bloodsucker/targeted/tremere/auspex/DeactivatePower()
+	var/mob/living/user = owner
 	animate(owner, alpha = 255, time = 1 SECONDS)
 	owner.RemoveElement(/datum/element/digitalcamo)
+	user.balloon_alert(user, "cloak turned off.")
 	return ..()
 
 /datum/action/cooldown/bloodsucker/targeted/tremere/auspex/FireTargetedPower(atom/target_atom)

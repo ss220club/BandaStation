@@ -199,13 +199,10 @@
 		DeactivatePower()
 		return FALSE
 	// We can keep this up (For now), so Pay Cost!
-	if(!(power_flags & BP_AM_COSTLESS_UNCONSCIOUS) && owner.stat != CONSCIOUS)
+	if(!(power_flags & BP_AM_COSTLESS_UNCONSCIOUS) && owner.stat == CONSCIOUS)
 		if(bloodsuckerdatum_power)
-			bloodsuckerdatum_power.AddBloodVolume(-constant_bloodcost)
-		else
 			var/mob/living/living_owner = owner
-			if(!HAS_TRAIT(living_owner, TRAIT_NOBLOOD))
-				living_owner.blood_volume -= constant_bloodcost
+			bloodsuckerdatum_power.AddBloodVolume(-constant_bloodcost)
 	return TRUE
 
 /// Checks to make sure this power can stay active
