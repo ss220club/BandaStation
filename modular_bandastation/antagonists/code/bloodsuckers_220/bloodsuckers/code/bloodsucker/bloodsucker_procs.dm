@@ -146,25 +146,28 @@
 	return returnIcon + returnString
 
 // При осмотре члена клана насферату, человек видет как он невероятно уродлив
-/datum/antagonist/bloodsucker/proc/return_vamp_examine_nosferatu(mob/living/target, mob/living/viewer)
+/datum/antagonist/bloodsucker/proc/return_vamp_examine_nosferatu(mob/living/carbon/human/target, mob/living/viewer)
 	if(!viewer.mind)
 		return FALSE
-	if(istype(my_clan, /datum/bloodsucker_clan/nosferatu))
-		if(viewer != target)
-			if(target.gender == FEMALE)
-				var/returnString = "\[<span class='warning'><EM>Она невероятно уродлива!</EM></span>\]"
-				returnString += "\n"
-				return returnString
-			else
-				var/returnString = "\[<span class='warning'><EM>Он невероятно уродлив!</EM></span>\]"
-				returnString += "\n"
-				return returnString
+	if(!istype(my_clan, /datum/bloodsucker_clan/nosferatu))
+		return FALSE
+	if((target.wear_mask && (target.wear_mask.flags_inv & HIDEFACE)) || (target.head && (target.head.flags_inv & HIDEFACE)))
+		return FALSE
+	if(viewer != target)
+		if(target.gender == FEMALE)
+			var/returnString = "\[<span class='warning'><EM>Она чудовищно уродлива!</EM></span>\]"
+			returnString += "\n"
+			return returnString
 		else
-			if(target.gender == FEMALE)
-				var/returnString = "\[<span class='warning'><EM>Я невероятно уродлива!</EM></span>\]"
-				returnString += "\n"
-				return returnString
-			else
-				var/returnString = "\[<span class='warning'><EM>Я невероятно уродлив!</EM></span>\]"
-				returnString += "\n"
-				return returnString
+			var/returnString = "\[<span class='warning'><EM>Он чудовищно уродлив!</EM></span>\]"
+			returnString += "\n"
+			return returnString
+	else
+		if(target.gender == FEMALE)
+			var/returnString = "\[<span class='warning'><EM>Я не красавица</EM></span>\]"
+			returnString += "\n"
+			return returnString
+		else
+			var/returnString = "\[<span class='warning'><EM>Я не красавец</EM></span>\]"
+			returnString += "\n"
+			return returnString

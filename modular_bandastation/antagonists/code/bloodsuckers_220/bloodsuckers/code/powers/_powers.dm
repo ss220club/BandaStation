@@ -201,7 +201,6 @@
 	// We can keep this up (For now), so Pay Cost!
 	if(!(power_flags & BP_AM_COSTLESS_UNCONSCIOUS) && owner.stat == CONSCIOUS)
 		if(bloodsuckerdatum_power)
-			var/mob/living/living_owner = owner
 			bloodsuckerdatum_power.AddBloodVolume(-constant_bloodcost)
 	return TRUE
 
