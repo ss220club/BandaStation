@@ -155,19 +155,19 @@
 		return FALSE
 	if(viewer != target)
 		if(target.gender == FEMALE)
-			var/returnString = "\[<span class='warning'><EM>Она чудовищно уродлива!</EM></span>\]"
+			var/returnString = "\<span class='warning'><EM>Она чудовищно уродлива!</EM></span>\"
 			returnString += "\n"
 			return returnString
 		else
-			var/returnString = "\[<span class='warning'><EM>Он чудовищно уродлив!</EM></span>\]"
+			var/returnString = "\<span class='warning'><EM>Он чудовищно уродлив!</EM></span>\"
 			returnString += "\n"
 			return returnString
 	else
 		if(target.gender == FEMALE)
-			var/returnString = "\[<span class='warning'><EM>Я не красавица</EM></span>\]"
+			var/returnString = "\<span class='warning'><EM>Я не красавица</EM></span>\"
 			returnString += "\n"
 			return returnString
 		else
-			var/returnString = "\[<span class='warning'><EM>Я не красавец</EM></span>\]"
+			var/returnString = "\<span class='warning'><EM>Я не красавец</EM></span>\"
 			returnString += "\n"
 			return returnString
