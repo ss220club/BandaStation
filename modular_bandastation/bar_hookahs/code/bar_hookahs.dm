@@ -176,7 +176,14 @@
 		return
 
 	var/transferred = container.reagents.trans_to(src, container.amount_per_transfer_from_this)
-	user.visible_message(span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."), span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)]."))
+	if(transferred <= 0)
+		to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет места!"))
+		return
+		
+	user.visible_message(
+		span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."),
+		span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)].")
+	)
 
 /obj/item/hookah/process()
 	if(!lit || !fuel)
