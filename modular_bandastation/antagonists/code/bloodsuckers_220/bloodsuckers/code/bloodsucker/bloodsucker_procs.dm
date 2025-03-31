@@ -4,8 +4,11 @@
 	if(!iscarbon(source))
 		return
 	var/vamp_examine = return_vamp_examine(examiner)
+	var/vamp_examine_nosferatu = return_vamp_examine_nosferatu(source, examiner)
 	if(vamp_examine)
 		examine_text += vamp_examine
+	if(vamp_examine_nosferatu)
+		examine_text += vamp_examine_nosferatu
 
 ///Called when a Bloodsucker buys a power: (power)
 /datum/antagonist/bloodsucker/proc/BuyPower(datum/action/cooldown/bloodsucker/power)
@@ -141,3 +144,27 @@
 
 	//returnString += "\n"  Don't need spacers. Using . += "" in examine.dm does this on its own.
 	return returnIcon + returnString
+
+// При осмотре члена клана насферату, человек видет как он невероятно уродлив
+/datum/antagonist/bloodsucker/proc/return_vamp_examine_nosferatu(mob/living/target, mob/living/viewer)
+	if(!viewer.mind)
+		return FALSE
+	if(istype(my_clan, /datum/bloodsucker_clan/nosferatu))
+		if(viewer != target)
+			if(target.gender == FEMALE)
+				var/returnString = "\[<span class='warning'><EM>Она невероятно уродлива!</EM></span>\]"
+				returnString += "\n"
+				return returnString
+			else
+				var/returnString = "\[<span class='warning'><EM>Он невероятно уродлив!</EM></span>\]"
+				returnString += "\n"
+				return returnString
+		else
+			if(target.gender == FEMALE)
+				var/returnString = "\[<span class='warning'><EM>Я невероятно уродлива!</EM></span>\]"
+				returnString += "\n"
+				return returnString
+			else
+				var/returnString = "\[<span class='warning'><EM>Я невероятно уродлив!</EM></span>\]"
+				returnString += "\n"
+				return returnString
