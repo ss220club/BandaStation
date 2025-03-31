@@ -6,6 +6,7 @@
 #define RELATIVE_OFFSET "relative"
 
 ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_CATEGORY_GAME)
+	// if (!user.holder.gamepanel_tgui)
 	user.holder.gamepanel_tgui = new(user)
 	user.holder.gamepanel_tgui.ui_interact(user.mob)
 	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
@@ -14,11 +15,13 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 	var/datum/admins/gamepanel/gamepanel_tgui
 
 /datum/admins/New(list/datum/admin_rank/ranks, ckey, force_active = FALSE, protected)
-	. = ..(ranks, ckey, force_active, protected)
-	if(!.)
-		return
+	. = ..()
 
 	gamepanel_tgui = new()
+
+/datum/admins/Destroy()
+	. = ..()
+	qdel(gamepanel_tgui)
 
 /datum/admins/gamepanel
 	var/client/user_client
@@ -62,23 +65,6 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 	switch(action)
 		if("game-mode-panel")
 			SSgamemode.admin_panel(usr)
-		if("create-object")
-			sub_window_title = "Object"
-			obj_list = typesof(/obj)
-		if("quick-create-object")
-			// ADD
-			user_client.holder.quick_create_object(user_client.mob)
-			// var/static/list/create_object_forms = list(
-			// 	/obj, /obj/structure, /obj/machinery, /obj/effect,
-			// 	/obj/item, /obj/item/clothing, /obj/item/stack, /obj/item,
-			// 	/obj/item/reagent_containers, /obj/item/gun)
-			// var/sorted_quick_options = sort_list(create_object_forms, GLOBAL_PROC_REF(cmp_typepaths_asc))
-		if("create-turf")
-			sub_window_title = "Turf"
-			obj_list = typesof(/turf)
-		if("create-mob")
-			sub_window_title = "Mob"
-			obj_list = typesof(/mob)
 		if("where-dropdown-changed")
 			where_dropdown_value = params?["newWhere"]
 		if("set-relative-cords")
@@ -117,15 +103,21 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 			selected_object_icon_state = temp_temp_object.icon_state_preview
 			qdel(temp_object); */
 
+
 /datum/admins/gamepanel/ui_data(mob/user)
 	. = ..()
-	var/list/data = list()
-	data["subWindowTitle"] = sub_window_title
-	data["objList"] = obj_list
-	/* ICON PREVIEW CODE
-	data["icon"] = selected_object_icon
-	data["icon_state"] = selected_object_icon_state */
-	return data
+	// var/list/data = list()
+	// data["subWindowTitle"] = sub_window_title
+	// data["objList"] = obj_list
+	// /* ICON PREVIEW CODE
+	// data["icon"] = selected_object_icon
+	// data["icon_state"] = selected_object_icon_state */
+	// return data
+
+/datum/admins/gamepanel/ui_assets(mob/user)
+	return list(
+		get_asset_datum(/datum/asset/json/gamepanel),
+	)
 
 /datum/admins/gamepanel/proc/get_dropdown_value(dropdown_value)
 	switch(dropdown_value)

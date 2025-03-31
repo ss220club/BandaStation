@@ -4,18 +4,20 @@ import { Button, Stack, Tabs } from 'tgui-core/components';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 import { CreateObject } from './CreateObject';
+import { tab } from './types';
 
 export function GamePanel(props) {
   const { act } = useBackend();
   const [selectedTab, setSelectedTab] = useState(-1);
   const [compact, setCompact] = useState(1);
+  let currentTabName = '';
   const tabs = [
     {
       content: 'Create Object',
       handleClick: () => {
         setSelectedTab(0);
         setCompact(0);
-        act('create-object');
+        currentTabName = 'Object';
       },
       icon: 'fa-wrench',
     },
@@ -33,7 +35,7 @@ export function GamePanel(props) {
       handleClick: () => {
         setSelectedTab(1);
         setCompact(0);
-        act('create-turf');
+        currentTabName = 'Turf';
       },
       icon: 'fa-map',
     },
@@ -42,7 +44,7 @@ export function GamePanel(props) {
       handleClick: () => {
         setSelectedTab(2);
         setCompact(0);
-        act('create-mob');
+        currentTabName = 'Mob';
       },
       icon: 'fa-person',
     },
@@ -91,16 +93,10 @@ export function GamePanel(props) {
           <Stack.Divider />
           {/* Main window */}
           <Stack.Item grow basis="85%">
-            {compact ? '' : <CreateObject />}
+            {compact ? '' : <CreateObject currentPanel={currentTabName} />}
           </Stack.Item>
         </Stack>
       </Window.Content>
     </Window>
   );
-}
-
-interface tab {
-  content: string;
-  handleClick: (e: any) => void;
-  icon;
 }

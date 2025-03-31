@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Collapsible,
@@ -7,16 +7,20 @@ import {
   Stack,
   Table,
 } from 'tgui-core/components';
+import { fetchRetry } from 'tgui-core/http';
 
+import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
+import { logger } from '../../logging';
+import { Data } from './types';
 
 export function CreateObject(props) {
-  const { act, data } = useBackend<GamePanelData>();
-  const { subWindowTitle, objList } = data;
-  //  icon, icon_state } = data;
+  const { act } = useBackend();
+  const panel = props?.currentPanel;
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
   const [selectedObj, setSelectedObj] = useState(-1);
+  const [data, setData] = useState<Data>();
   const [whereDropdownVal, setWhereDropdownVal] = useState(
     'On floor below own mob',
   );
@@ -27,7 +31,16 @@ export function CreateObject(props) {
     "In own's mob hand",
     'In marked object',
   ];
-
+  useEffect(() => {
+    fetchRetry(resolveAsset('gamepanel.json'))
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        logger.log('Failed to fetch gamepanel.json', error);
+      });
+  }, []);
   return (
     <Stack fill vertical>
       <Stack.Item>
@@ -35,11 +48,11 @@ export function CreateObject(props) {
         <Input
           width="280px"
           ml={1}
-          placeholder={
-            subWindowTitle
-              ? 'Search for ' + subWindowTitle
-              : 'Select Tab to search'
-          }
+          // placeholder={
+          //   data[panel]?.subWindowTitle
+          //     ? 'Search for ' + data[panel]?.subWindowTitle || ''
+          //     : 'Select Tab to search'
+          // }
           onEnter={(e, value) => {
             value = value === '' ? '/' : value;
             setSearchText(value);
@@ -130,7 +143,8 @@ export function CreateObject(props) {
       <Stack.Divider />
       <Stack.Item overflow="auto">
         <Table>
-          {objList
+          {data === null ? 'null' : Object.keys(data)}
+          {/* {data[panel].objList
             .filter((obj) => {
               return searchText === '' ? false : obj.includes(searchText);
             })
@@ -147,25 +161,25 @@ export function CreateObject(props) {
                       act('selected-object-changed', {
                         newObj: obj,
                       });
-                      /* ICON PREVIEW CODE
-                      act('load-new-icon'); */
+                      // ICON PREVIEW CODE
+                      // act('load-new-icon');
                     }}
                   >
                     {obj}
                   </Button>
                 </Table.Cell>
               </Table.Row>
-            ))}
+            ))} */}
         </Table>
       </Stack.Item>
     </Stack>
   );
 }
 
-type GamePanelData = {
-  subWindowTitle: string;
-  objList: string[];
-  /* ICON PREVIEW CODE
-  icon: string;
-  icon_state: string; */
-};
+// type GamePanelData = {
+//   subWindowTitle: string;
+//   objList: string[];
+//   /* ICON PREVIEW CODE
+//   icon: string;
+//   icon_state: string; */
+// };
