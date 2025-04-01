@@ -24,6 +24,10 @@
 
 	/// Angle of the icon, used for piercing and slashing attack animations, clockwise from *east-facing* sprites
 	var/icon_angle = 0
+	///icon file for an alternate attack icon
+	var/attack_icon
+	///icon state for an alternate attack icon
+	var/attack_icon_state
 
 	///Icon file for mob worn overlays.
 	var/icon/worn_icon
@@ -885,7 +889,7 @@
 	else
 		playsound(hit_atom, 'sound/items/weapons/throwtap.ogg', volume, TRUE, -1)
 
-/obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE, quickstart = TRUE)
+/obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE, quickstart = TRUE, throw_type_path = /datum/thrownthing)
 	if(HAS_TRAIT(src, TRAIT_NODROP))
 		return
 	thrownby = WEAKREF(thrower)
@@ -956,7 +960,7 @@
 		owner.update_worn_id()
 	if(flags & ITEM_SLOT_BELT)
 		owner.update_worn_belt()
-	if(flags & ITEM_SLOT_BACK)
+	if(flags & ITEM_SLOT_BACK || flags & ITEM_SLOT_BACK_ALT)
 		owner.update_worn_back()
 	if(flags & ITEM_SLOT_NECK)
 		owner.update_worn_neck()
@@ -1581,7 +1585,7 @@
 	if (isnull(used_item))
 		return
 
-	var/image/attack_image = image(icon = used_item)
+	var/image/attack_image = isnull(used_item.attack_icon) ? image(icon = used_item) : image(icon = used_item.attack_icon, icon_state = used_item.attack_icon_state)
 	attack_image.plane = attacked_atom.plane + 1
 	attack_image.pixel_w = used_item.base_pixel_x + used_item.base_pixel_w
 	attack_image.pixel_z = used_item.base_pixel_y + used_item.base_pixel_z
@@ -1745,7 +1749,7 @@
  */
 /obj/item/proc/compare_zone_to_item_slot(zone)
 	switch(slot_flags)
-		if(ITEM_SLOT_ICLOTHING, ITEM_SLOT_OCLOTHING, ITEM_SLOT_BACK)
+		if(ITEM_SLOT_ICLOTHING, ITEM_SLOT_OCLOTHING, ITEM_SLOT_BACK, ITEM_SLOT_BACK_ALT)
 			return (zone == BODY_ZONE_CHEST)
 		if(ITEM_SLOT_BELT)
 			return (zone == BODY_ZONE_PRECISE_GROIN)

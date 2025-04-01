@@ -346,10 +346,10 @@
 			to_chat(helper, span_notice("Вы заключаете [declent_ru(ACCUSATIVE)] в крепких медвежьих объятиях!"))
 			to_chat(src, span_notice("[capitalize(helper.declent_ru(NOMINATIVE))] заключает вас в крепких медвежьих объятиях!"))
 		else
-			helper.visible_message(span_notice("[capitalize(helper.declent_ru(NOMINATIVE))] обнимает [declent_ru(ACCUSATIVE)], чтобы поднять [ru_p_them()] настроение!"), \
-						null, span_hear("Вы слышите шорох одежды."), DEFAULT_MESSAGE_RANGE, list(helper, src))
-			to_chat(helper, span_notice("Вы обнимаете [declent_ru(ACCUSATIVE)], чтобы поднять [ru_p_them()] настроение!"))
-			to_chat(src, span_notice("[capitalize(helper.declent_ru(NOMINATIVE))] обнимает вас, чтобы поднять ваше настроение!"))
+			helper.visible_message(span_notice("[helper] [hug_verb]s [src] to make [p_them()] feel better!"), \
+						null, span_hear("You hear the rustling of clothes."), DEFAULT_MESSAGE_RANGE, list(helper, src))
+			to_chat(helper, span_notice("You [hug_verb] [src] to make [p_them()] feel better!"))
+			to_chat(src, span_notice("[helper] [hug_verb]s you to make you feel better!"))
 
 		// Warm them up with hugs
 		share_bodytemperature(helper)
@@ -371,14 +371,14 @@
 
 		// Let people know if they hugged someone really warm or really cold
 		if(helper.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
-			to_chat(src, span_warning("Кажется, что [helper.declent_ru(NOMINATIVE)] в состоянии перегрева, когда [helper.ru_p_they()] обнимает вас."))
+			to_chat(src, span_warning("It feels like [helper] is over heating as [helper.p_they()] [hug_verb][helper.p_s()] you."))
 		else if(helper.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT)
-			to_chat(src, span_warning("Кажется, что [helper.declent_ru(NOMINATIVE)] в состоянии переохлаждения, когда [helper.ru_p_they()] обнимает вас."))
+			to_chat(src, span_warning("It feels like [helper] is freezing as [helper.p_they()] [hug_verb][helper.p_s()] you."))
 
 		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
-			to_chat(helper, span_warning("Кажется, что [declent_ru(NOMINATIVE)] в состоянии перегрева, когда вы обнимаете [ru_p_them()]."))
+			to_chat(helper, span_warning("It feels like [src] is over heating as you [hug_verb] [p_them()]."))
 		else if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT)
-			to_chat(helper, span_warning("Кажется, что [declent_ru(NOMINATIVE)] в состоянии переохлаждения, когда вы обнимаете [ru_p_them()]."))
+			to_chat(helper, span_warning("It feels like [src] is freezing as you [hug_verb] [p_them()]."))
 
 		if(HAS_TRAIT(helper, TRAIT_FRIENDLY) || force_friendly)
 			if (helper.mob_mood.sanity >= SANITY_GREAT)
@@ -388,7 +388,7 @@
 				add_mood_event("friendly_hug", /datum/mood_event/betterhug, helper)
 
 		if(HAS_TRAIT(src, TRAIT_BADTOUCH))
-			to_chat(helper, span_warning("[capitalize(declent_ru(NOMINATIVE))] выглядит заметно расстроенно, когда вы обнимаете [ru_p_them()]."))
+			to_chat(helper, span_warning("[src] looks visibly upset as you [hug_verb] [p_them()]."))
 
 	SEND_SIGNAL(src, COMSIG_CARBON_HELP_ACT, helper)
 	SEND_SIGNAL(helper, COMSIG_CARBON_HELPED, src)

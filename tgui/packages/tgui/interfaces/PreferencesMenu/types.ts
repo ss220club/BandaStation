@@ -1,6 +1,7 @@
 import { BooleanLike } from 'tgui-core/react';
 
 import { sendAct } from '../../backend';
+import { SpriteEditorData } from '../SpriteEditor/Types/types';
 import {
   LoadoutCategory,
   LoadoutList,
@@ -182,6 +183,9 @@ export type PreferencesMenuData = {
   active_slot: number;
   name_to_use: string;
   window: PrefsWindow;
+
+  editingIcon: BooleanLike;
+  workspaceData?: SpriteEditorData;
 
   // BANDASTATION ADDITION START
   tts_seed: string;
