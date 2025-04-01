@@ -1,55 +1,70 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Stack, Tabs } from 'tgui-core/components';
+import { fetchRetry } from 'tgui-core/http';
 
+import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
+import { logger } from '../../logging';
 import { CreateObject } from './CreateObject';
-import { tab } from './types';
+import { Data, tab } from './types';
 
 export function GamePanel(props) {
   const { act } = useBackend();
   const [selectedTab, setSelectedTab] = useState(-1);
   const [compact, setCompact] = useState(1);
-  let currentTabName = '';
+  const [data, setData] = useState<Data>(null);
+  const [selectedTabName, setSelectedTabName] = useState();
+  // const [searchTextValue, setSearchTextValue] = useState('');
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const tabs = [
     {
       content: 'Create Object',
       handleClick: () => {
-        setSelectedTab(0);
-        setCompact(0);
-        currentTabName = 'Object';
+        loadTab('Object', 0);
       },
       icon: 'fa-wrench',
     },
-    // {
-    //   content: 'Quick Create Object',
-    //   handleClick: () => {
-    //     setSelectedTab(1);
-    //     setCompact(0);
-    //     act('quick-create-object');
-    //   },
-    //   icon: 'fa-bolt',
-    // },
     {
       content: 'Create Turf',
       handleClick: () => {
-        setSelectedTab(1);
-        setCompact(0);
-        currentTabName = 'Turf';
+        loadTab('Turf', 1);
       },
       icon: 'fa-map',
     },
     {
       content: 'Create Mob',
       handleClick: () => {
-        setSelectedTab(2);
-        setCompact(0);
-        currentTabName = 'Mob';
+        loadTab('Mob', 2);
       },
       icon: 'fa-person',
     },
   ] as tab[];
 
+  function loadTab(tabName, tabIndex) {
+    setSelectedTabName(tabName);
+    setSelectedTab(tabIndex);
+    // setSearchTextValue('');
+    setCompact(0);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 0);
+  }
+
+  useEffect(
+    () =>
+      fetchRetry(resolveAsset('gamepanel.json'))
+        .then((response) => response.json())
+        .then((data) => {
+          setData(data);
+        })
+        .catch((error) => {
+          logger.log('Failed to fetch gamepanel.json', error);
+        }),
+    [],
+  );
+  function isReadyToRender(): boolean {
+    return !compact && data && data[selectedTabName] && !isLoading;
+  }
   return (
     <Window
       height={compact ? 80 : 500}
@@ -93,7 +108,13 @@ export function GamePanel(props) {
           <Stack.Divider />
           {/* Main window */}
           <Stack.Item grow basis="85%">
-            {compact ? '' : <CreateObject currentPanel={currentTabName} />}
+            {isReadyToRender() && (
+              <CreateObject
+                // searchTextValue={searchTextValue}
+                data={data}
+                currentPanel={selectedTabName}
+              />
+            )}
           </Stack.Item>
         </Stack>
       </Window.Content>

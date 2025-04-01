@@ -5,14 +5,12 @@
 	var/list/data = list()
 	var/list/panels = list("Object", "Turf", "Mob")
 	for(var/panel in panels)
-		data[panel] = list()
-		data[panel]["subWindowTitle"] = panel
 		switch(panel)
 			if("Object")
-				data[panel]["objList"] = typesof(/obj)
+				data[panel] = typesof(/obj)
 			if("Turf")
-				data[panel]["objList"] = typesof(/turf)
+				data[panel] = typesof(/turf)
 			if("Mob")
-				data[panel]["objList"] = typesof(/mob)
+				data[panel] = typesof(/mob)
 
 	return data
