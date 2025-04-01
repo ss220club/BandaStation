@@ -5,5 +5,6 @@
 	illustration = "pepper_spray"
 
 /obj/item/storage/box/pepper_spray/PopulateContents()
-	for(var/i in 1 to 6)
-		new /obj/item/reagent_containers/spray/pepper(src)
+	return flatten_quantified_list(list(
+		/obj/item/reagent_containers/spray/pepper = 6
+	))
