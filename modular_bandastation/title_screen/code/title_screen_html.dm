@@ -25,7 +25,7 @@
 	"}
 
 	if(screen_image_url)
-		html += {"<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">"}
+		html += {"<img id="screen_image" class="bg" src="[SSassets.transport.get_asset_url(asset_name = "half_clown.png")]" alt="Загрузка..." onerror="fix_image()">"}
 
 	html += {"<input type="checkbox" id="hide_menu">"}
 	html += {"<div id="container_notice" class="[SStitle.notice ? "" : "hidden"]">[SStitle.notice]</div>"}
@@ -44,7 +44,7 @@
 
 	html += {"<div class="lobby_buttons-center">"}
 	if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
-		html += create_main_button(player, "toggle_ready", "Готов", player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad")
+		html += create_main_button(player, "toggle_ready", "[player.ready == PLAYER_READY_TO_PLAY ? "Готов" : "Не готов"]")
 	else
 		html += create_main_button(player, "late_join", "Играть")
 
@@ -120,18 +120,17 @@
 
 			let ready_int = 0;
 			const readyID = document.querySelector(".lobby-toggle_ready");
-			const ready_class = \[ "bad", "good" \];
+			const ready_marks = \[ "Не готов", "Готов" \];
 			function toggle_ready(setReady) {
 				if(setReady) {
 					ready_int = setReady;
-					readyID.classList.add(ready_class\[ready_int\]);
-					readyID.classList.remove(ready_class\[1 - ready_int\]);
-				} else {
+					readyID.innerHTML = ready_marks\[ready_int\];
+				}
+				else {
 					ready_int++;
-					if(ready_int === ready_class.length)
+					if (ready_int === ready_marks.length)
 						ready_int = 0;
-					readyID.classList.add("good");
-					readyID.classList.remove("bad");
+					readyID.innerHTML = ready_marks\[ready_int\];
 				}
 			}
 

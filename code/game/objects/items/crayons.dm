@@ -846,7 +846,7 @@
 	user.visible_message(span_suicide("[user] shakes up [src] with a rattle and lifts it to [user.p_their()] mouth, spraying paint across [user.p_their()] teeth!"))
 	user.say("ОСВИДЕТЕЛЬСТВУЙТЕ МЕНЯ!!!", forced = "spraycan suicide")
 	if(pre_noise || post_noise)
-		playsound(src, 'sound/effects/spray.ogg', 5, TRUE, 5)
+		playsound(src, 'sound/effects/spray.ogg', 25, FALSE, 5)
 	if(can_change_colour)
 		set_painting_tool_color(COLOR_SILVER)
 	update_appearance()
@@ -937,7 +937,7 @@
 		reagents.trans_to(target, ., volume_multiplier, transferred_by = user, methods = VAPOR)
 
 		if(pre_noise || post_noise)
-			playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)
+			playsound(user.loc, 'sound/effects/spray.ogg', 25, FALSE, 5)
 		user.visible_message(span_notice("[user] coats [target] with spray paint!"), span_notice("You coat [target] with spray paint."))
 		return ITEM_INTERACT_SUCCESS
 
@@ -951,7 +951,7 @@
 		reagents.trans_to(target, ., volume_multiplier, transferred_by = user, methods = VAPOR)
 
 		if(pre_noise || post_noise)
-			playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)
+			playsound(user.loc, 'sound/effects/spray.ogg', 25, FALSE, 5)
 		user.visible_message(span_notice("[user] coats [target] with spray paint!"), span_notice("You coat [target] with spray paint."))
 		return ITEM_INTERACT_SUCCESS
 
@@ -992,7 +992,7 @@
 	reagents.trans_to(target, ., volume_multiplier, transferred_by = user, methods = VAPOR)
 
 	if(pre_noise || post_noise)
-		playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)
+		playsound(user.loc, 'sound/effects/spray.ogg', 25, FALSE, 5)
 	user.visible_message(span_notice("[user] coats [target] with spray paint!"), span_notice("You coat [target] with spray paint."))
 	return ITEM_INTERACT_SUCCESS
 
@@ -1015,7 +1015,7 @@
 		skins += list("[skin_option]" = part_image)
 	var/choice = show_radial_menu(user, src, skins, require_near = TRUE)
 	if(choice && (use_charges(user, 5, requires_full = FALSE)))
-		playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)
+		playsound(user.loc, 'sound/effects/spray.ogg', 25, FALSE, 5)
 		limb.change_appearance(style_list_icons[choice], greyscale = FALSE)
 	return TRUE
 

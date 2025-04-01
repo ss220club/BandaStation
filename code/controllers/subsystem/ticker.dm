@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(ticker)
 	/// Boolean to track and check if our subsystem setup is done.
 	var/setup_done = FALSE
 
-	var/login_music //music played in pregame lobby
+	var/login_music = 'sound/music/afd/hl-decay.ogg' //music played in pregame lobby
 	var/round_end_sound //music/jingle played when the world reboots
 	var/round_end_sound_sent = TRUE //If all clients have loaded it
 
@@ -86,7 +86,7 @@ SUBSYSTEM_DEF(ticker)
 		"aiff" = TRUE,
 	)
 
-	var/list/provisional_title_music = flist("[global.config.directory]/title_music/sounds/")
+	var/list/provisional_title_music = flist("sound/music/afd/")
 	var/list/music = list()
 	var/use_rare_music = prob(1)
 
@@ -126,7 +126,7 @@ SUBSYSTEM_DEF(ticker)
 			music -= old_login_music
 		set_lobby_music(pick(music))
 	else
-		set_lobby_music("[global.config.directory]/title_music/sounds/[pick(music)]")
+		set_lobby_music("sound/music/afd/hl-decay.ogg")
 
 	if(!GLOB.syndicate_code_phrase)
 		GLOB.syndicate_code_phrase = generate_code_phrase(return_list=TRUE)
@@ -750,13 +750,7 @@ SUBSYSTEM_DEF(ticker)
 	text2file(login_music, "data/last_round_lobby_music.txt")
 
 /datum/controller/subsystem/ticker/proc/choose_round_end_song()
-	var/list/reboot_sounds = flist("[global.config.directory]/reboot_themes/")
-	var/list/possible_themes = list()
-
-	for(var/themes in reboot_sounds)
-		possible_themes += themes
-	if(possible_themes.len)
-		return "[global.config.directory]/reboot_themes/[pick(possible_themes)]"
+	return 'sound/music/afd/hl-decay.ogg'
 
 /// Updates the lobby music
 /// Does not update if override is FALSE and login_music is already set

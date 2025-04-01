@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(available_lobby_styles, list(
 
 	SSassets.transport.send_assets(viewer, screen_image.name)
 	if(!title_css)
-		viewer << browse(get_title_html(viewer, viewer.mob, GLOB.available_lobby_styles[viewer.prefs.read_preference(/datum/preference/choiced/lobby_style)]), "window=title_browser")
+		viewer << browse(get_title_html(viewer, viewer.mob, 'modular_bandastation/title_screen/html/title_screen_afd.css'), "window=title_browser")
 	else
 		viewer << browse(get_title_html(viewer, viewer.mob, title_css), "window=title_browser")
 

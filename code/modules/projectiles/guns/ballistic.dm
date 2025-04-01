@@ -7,7 +7,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	pickup_sound = 'sound/items/handling/gun/gun_pick_up.ogg'
 	drop_sound = 'sound/items/handling/gun/gun_drop.ogg'
-	sound_vary = TRUE
+	sound_vary = FALSE
 	unique_reskin_changes_base_icon_state = TRUE
 
 	///sound when inserting magazine

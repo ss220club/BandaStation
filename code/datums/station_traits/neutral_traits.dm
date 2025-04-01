@@ -118,7 +118,7 @@
 /datum/station_trait/announcement_intern
 	name = "Announcement Intern"
 	trait_type = STATION_TRAIT_NEUTRAL
-	weight = 1
+	weight = 0
 	show_in_report = TRUE
 	report_message = "Please be nice to him."
 	blacklist = list(/datum/station_trait/announcement_medbot, /datum/station_trait/birthday)
@@ -135,7 +135,7 @@
 /datum/station_trait/announcement_medbot
 	name = "Announcement \"System\""
 	trait_type = STATION_TRAIT_NEUTRAL
-	weight = 1
+	weight = 0
 	show_in_report = TRUE
 	report_message = "Our announcement system is under scheduled maintanance at the moment. Thankfully, we have a backup."
 	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/birthday)
@@ -162,7 +162,7 @@
 /datum/station_trait/birthday
 	name = "Employee Birthday"
 	trait_type = STATION_TRAIT_NEUTRAL
-	weight = 2
+	weight = 0
 	show_in_report = TRUE
 	report_message = "We here at Nanotrasen would all like to wish Employee Name a very happy birthday"
 	trait_to_give = STATION_TRAIT_BIRTHDAY

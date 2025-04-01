@@ -133,6 +133,4 @@
 		winset(client, "map", "focus=true")
 
 /mob/dead/new_player/proc/lobby_button_sound()
-	var/sound/ui_select_sound = sound('sound/misc/menu/ui_select1.ogg')
-	ui_select_sound.frequency = get_rand_frequency_low_range()
-	SEND_SOUND(src, ui_select_sound)
+	return TRUE

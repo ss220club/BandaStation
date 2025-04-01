@@ -186,13 +186,9 @@
 	S.status = SOUND_UPDATE
 	SEND_SOUND(src, S)
 
-/client/proc/playtitlemusic(volume_multiplier = 1)
+/client/proc/playtitlemusic(volume_multiplier = 50)
 	set waitfor = FALSE
-	UNTIL(SSticker.login_music) //wait for SSticker init to set the login music
-
-	var/music_volume = prefs.read_preference(/datum/preference/numeric/volume/sound_lobby_volume) * volume_multiplier
-	if((prefs && music_volume) && !CONFIG_GET(flag/disallow_title_music))
-		SEND_SOUND(src, sound(SSticker.login_music, repeat = 0, wait = 0, volume = music_volume, channel = CHANNEL_LOBBYMUSIC)) // MAD JAMS
+	SEND_SOUND(src, sound('sound/music/afd/hl-decay.ogg', repeat = TRUE, wait = 0, volume = volume_multiplier, channel = CHANNEL_LOBBYMUSIC)) // MAD JAMS
 
 ///get a random frequency.
 /proc/get_rand_frequency()
