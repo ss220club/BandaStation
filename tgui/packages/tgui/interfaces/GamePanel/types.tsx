@@ -15,6 +15,11 @@ export type GamePanelTab = {
 };
 
 export type CreateObjectProps = {
-  data: string[];
+  objList: string[];
   tabName: string;
+};
+
+export type SelectedObjectIcon = {
+  icon: string;
+  icon_state: string;
 };
