@@ -28,7 +28,7 @@
 	skinned_type = /obj/item/stack/sheet/animalhide/lizard
 	exotic_bloodtype = "L"
 	inert_mutation = /datum/mutation/human/firebreath
-	death_sound = 'sound/mobs/humanoids/lizard/deathsound.ogg'
+	death_sound = 'sound/mobs/death_gasp.ogg'
 	species_language_holder = /datum/language_holder/lizard
 	digitigrade_customization = DIGITIGRADE_OPTIONAL
 

@@ -27,7 +27,7 @@
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
 	death_message = "collapses on its side."
-	death_sound = 'sound/effects/magic/demon_dies.ogg'
+	death_sound = 'sound/mobs/death_gasp.ogg'
 
 	attack_sound = 'sound/effects/magic/demon_attack1.ogg'
 	move_force = MOVE_FORCE_VERY_STRONG

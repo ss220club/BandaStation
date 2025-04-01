@@ -24,7 +24,7 @@
 	crusher_loot = /obj/item/crusher_trophy/ice_demon_cube
 	ai_controller = /datum/ai_controller/basic_controller/ice_demon
 	death_message = "fades as the energies that tied it to this world dissipate."
-	death_sound = 'sound/effects/magic/demon_dies.ogg'
+	death_sound = 'sound/mobs/death_gasp.ogg'
 
 /mob/living/basic/mining/ice_demon/Initialize(mapload)
 	. = ..()

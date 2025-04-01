@@ -19,7 +19,7 @@
 	faction = list(FACTION_NETHER)
 	speak_emote = list("screams", "clicks", "chitters", "barks", "moans", "growls", "meows", "reverberates", "roars", "squeaks", "rattles", "exclaims", "yells", "remarks", "mumbles", "jabbers", "stutters", "seethes")
 	death_message = "wails as its form turns into a pulpy mush."
-	death_sound = 'sound/mobs/non-humanoids/hiss/hiss6.ogg'
+	death_sound = 'sound/mobs/death_gasp.ogg'
 	unsuitable_atmos_damage = 0
 	unsuitable_cold_damage = 0
 	unsuitable_heat_damage = 0

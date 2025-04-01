@@ -43,7 +43,7 @@
 	maptext_height = 64
 	maptext_width = 64
 	mouse_opacity = MOUSE_OPACITY_ICON
-	death_sound = 'sound/mobs/non-humanoids/space_dragon/space_dragon_roar.ogg'
+	death_sound = 'sound/mobs/death_gasp.ogg'
 	death_message = "вопя в агонии, он рушится на пол, теперь его жизнь угасла."
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
 	initial_language_holder = /datum/language_holder/carp/dragon

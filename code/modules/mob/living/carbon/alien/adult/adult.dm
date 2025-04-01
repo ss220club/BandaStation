@@ -14,7 +14,7 @@
 	var/leap_on_click = 0
 	var/pounce_cooldown = 0
 	var/pounce_cooldown_time = 30
-	death_sound = 'sound/mobs/non-humanoids/hiss/hiss6.ogg'
+	death_sound = 'sound/mobs/death_gasp.ogg'
 	bodyparts = list(
 		/obj/item/bodypart/chest/alien,
 		/obj/item/bodypart/head/alien,

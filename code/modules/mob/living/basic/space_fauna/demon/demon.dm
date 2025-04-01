@@ -34,7 +34,7 @@
 	melee_damage_upper = 15
 	melee_attack_cooldown = CLICK_CD_MELEE
 	death_message = "screams in agony as it sublimates into a sulfurous smoke."
-	death_sound = 'sound/effects/magic/demon_dies.ogg'
+	death_sound = 'sound/mobs/death_gasp.ogg'
 
 	habitable_atmos = null
 	minimum_survivable_temperature = T0C - 25 //Weak to cold
