@@ -92,7 +92,7 @@ export function GamePanel(props) {
           <Stack.Item grow basis="85%">
             {selectedTabData && (
               <CreateObject
-                data={selectedTabData}
+                objList={selectedTabData}
                 tabName={selectedTab || ''}
               />
             )}

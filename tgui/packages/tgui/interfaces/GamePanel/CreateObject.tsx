@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   Button,
   Collapsible,
+  DmIcon,
   Dropdown,
   Input,
   Stack,
@@ -10,17 +11,17 @@ import {
 } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import { CreateObjectProps } from './types';
+import { CreateObjectProps, SelectedObjectIcon } from './types';
 
 export function CreateObject(props: CreateObjectProps) {
-  const { act } = useBackend();
+  const { act, data } = useBackend<SelectedObjectIcon>();
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
   const [selectedObj, setSelectedObj] = useState(-1);
   const [whereDropdownVal, setWhereDropdownVal] = useState(
     'On floor below own mob',
   );
-  const { data, tabName } = props;
+  const { objList, tabName } = props;
 
   let newSearchTextValue: string = '/';
   const whereDropdownOptions = [
@@ -49,10 +50,12 @@ export function CreateObject(props: CreateObjectProps) {
           Search
         </Button>
       </Stack.Item>
-      {/* ICON PREVIEW CODE
       <Collapsible>
-        <DmIcon icon={icon || ''} icon_state={icon_state || ''} />
-      </Collapsible> */}
+        <Button onClick={(e) => act('load-new-icon')}>PREVIEW</Button>
+        {data && (
+          <DmIcon icon={data.icon || ''} icon_state={data.icon_state || ''} />
+        )}
+      </Collapsible>
       <Collapsible mt={1} title="Settings">
         <Stack.Item m={1}>
           Offset:{' '}
@@ -128,7 +131,7 @@ export function CreateObject(props: CreateObjectProps) {
       <Stack.Item overflow="auto">
         <Table>
           <VirtualList>
-            {data
+            {objList
               .filter((obj: string) => {
                 return searchText === '' ? false : obj.includes(searchText);
               })
