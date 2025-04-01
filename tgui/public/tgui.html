@@ -116,7 +116,7 @@
     }
 
     // Perform a standard call via location.href
-    if (url.length < 2048) {
+    if (url.length < 64000) {
       location.href = 'byond://' + url;
       return;
     }
