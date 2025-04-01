@@ -6,21 +6,26 @@ import {
   Input,
   Stack,
   Table,
+  VirtualList,
 } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import { Data } from './types';
 
-export function CreateObject(props) {
+type CreateObjectProps = {
+  data: string[];
+  tabName: string;
+};
+
+export function CreateObject(props: CreateObjectProps) {
   const { act } = useBackend();
-  const [currentPanel, setCurrentPanel] = useState(props?.currentPanel);
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
   const [selectedObj, setSelectedObj] = useState(-1);
-  const [data, setData] = useState<Data>(props?.data);
   const [whereDropdownVal, setWhereDropdownVal] = useState(
     'On floor below own mob',
   );
+  const { data, tabName } = props;
+
   let newSearchTextValue: string = '/';
   const whereDropdownOptions = [
     'On floor below own mob',
@@ -35,11 +40,7 @@ export function CreateObject(props) {
         <Input
           width="280px"
           ml={1}
-          placeholder={
-            currentPanel
-              ? 'Search for ' + currentPanel || ''
-              : 'Select Tab to search'
-          }
+          placeholder={'Search for ' + tabName}
           onEnter={(e, value) => {
             value = value === '' ? '/' : value;
             setSearchText(value);
@@ -130,32 +131,34 @@ export function CreateObject(props) {
       <Stack.Divider />
       <Stack.Item overflow="auto">
         <Table>
-          {data[currentPanel]
-            .filter((obj: string) => {
-              return searchText === '' ? false : obj.includes(searchText);
-            })
-            .map((obj, index) => (
-              <Table.Row key={index} height="25px">
-                <Table.Cell height="25px">
-                  <Button
-                    height="25px"
-                    color="transparent"
-                    fluid
-                    selected={selectedObj === index}
-                    onClick={() => {
-                      setSelectedObj(index);
-                      act('selected-object-changed', {
-                        newObj: obj,
-                      });
-                      // ICON PREVIEW CODE
-                      // act('load-new-icon');
-                    }}
-                  >
-                    {obj}
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
+          <VirtualList>
+            {data
+              .filter((obj: string) => {
+                return searchText === '' ? false : obj.includes(searchText);
+              })
+              .map((obj, index) => (
+                <Table.Row key={index} height="25px">
+                  <Table.Cell height="25px">
+                    <Button
+                      height="25px"
+                      color="transparent"
+                      fluid
+                      selected={selectedObj === index}
+                      onClick={() => {
+                        setSelectedObj(index);
+                        act('selected-object-changed', {
+                          newObj: obj,
+                        });
+                        // ICON PREVIEW CODE
+                        // act('load-new-icon');
+                      }}
+                    >
+                      {obj}
+                    </Button>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+          </VirtualList>
         </Table>
       </Stack.Item>
     </Stack>
