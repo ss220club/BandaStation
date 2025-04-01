@@ -6,8 +6,8 @@
 #define RELATIVE_OFFSET "relative"
 
 ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_CATEGORY_GAME)
-	// if (!user.holder.gamepanel_tgui)
-	user.holder.gamepanel_tgui = new(user)
+	if (!user.holder.gamepanel_tgui)
+		user.holder.gamepanel_tgui = new(user)
 	user.holder.gamepanel_tgui.ui_interact(user.mob)
 	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
 
@@ -17,7 +17,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 /datum/admins/New(list/datum/admin_rank/ranks, ckey, force_active = FALSE, protected)
 	. = ..()
 
-	gamepanel_tgui = new()
+	gamepanel_tgui = new(usr)
 
 /datum/admins/Destroy()
 	. = ..()

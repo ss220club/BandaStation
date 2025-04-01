@@ -1,10 +1,5 @@
-export interface PanelData {
-  subWindowTitle: string;
-  objList: string[];
-}
-
 export interface Data {
-  [panelName: string]: PanelData; // Now an array of PanelData objects
+  [panelName: string]: string[]; // Now an array of PanelData objects
 }
 
 export interface tab {
