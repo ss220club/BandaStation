@@ -7,67 +7,61 @@ import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 import { logger } from '../../logging';
 import { CreateObject } from './CreateObject';
-import { Data, tab } from './types';
+import { Data } from './types';
+
+enum GamePanelTabName {
+  createObject = 'Object',
+  createTurf = 'Turf',
+  createMob = 'Mob',
+}
+
+type GamePanelTab = {
+  name: GamePanelTabName;
+  content: string;
+  icon: string;
+};
+
+const GamePanelTabs = [
+  {
+    name: GamePanelTabName.createObject,
+    content: 'Create Object',
+    icon: 'fa-wrench',
+  },
+  {
+    name: GamePanelTabName.createTurf,
+    content: 'Create Turf',
+    icon: 'fa-map',
+  },
+  {
+    name: GamePanelTabName.createMob,
+    content: 'Create Mob',
+    icon: 'fa-person',
+  },
+] as GamePanelTab[];
 
 export function GamePanel(props) {
   const { act } = useBackend();
-  const [selectedTab, setSelectedTab] = useState(-1);
-  const [compact, setCompact] = useState(1);
-  const [data, setData] = useState<Data>(null);
-  const [selectedTabName, setSelectedTabName] = useState();
-  // const [searchTextValue, setSearchTextValue] = useState('');
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const tabs = [
-    {
-      content: 'Create Object',
-      handleClick: () => {
-        loadTab('Object', 0);
-      },
-      icon: 'fa-wrench',
-    },
-    {
-      content: 'Create Turf',
-      handleClick: () => {
-        loadTab('Turf', 1);
-      },
-      icon: 'fa-map',
-    },
-    {
-      content: 'Create Mob',
-      handleClick: () => {
-        loadTab('Mob', 2);
-      },
-      icon: 'fa-person',
-    },
-  ] as tab[];
+  const [selectedTab, setSelectedTab] = useState<
+    GamePanelTabName | undefined
+  >();
+  const [data, setData] = useState<Data | undefined>();
 
-  function loadTab(tabName, tabIndex) {
-    setSelectedTabName(tabName);
-    setSelectedTab(tabIndex);
-    // setSearchTextValue('');
-    setCompact(0);
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 0);
-  }
+  useEffect(() => {
+    fetchRetry(resolveAsset('gamepanel.json'))
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        logger.log('Failed to fetch gamepanel.json', error);
+      });
+  }, []);
 
-  useEffect(
-    () =>
-      fetchRetry(resolveAsset('gamepanel.json'))
-        .then((response) => response.json())
-        .then((data) => {
-          setData(data);
-        })
-        .catch((error) => {
-          logger.log('Failed to fetch gamepanel.json', error);
-        }),
-    [],
-  );
-  function isReadyToRender(): boolean {
-    return !compact && data && data[selectedTabName] && !isLoading;
-  }
+  const selectedTabData = data && selectedTab && data[selectedTab];
+
   return (
     <Window
-      height={compact ? 80 : 500}
+      height={selectedTab ? 500 : 80}
       title="Game Panel"
       width={500}
       theme="admin"
@@ -79,14 +73,14 @@ export function GamePanel(props) {
           <Stack vertical={false}>
             <Stack.Item shrink={3} basis="70%">
               <Tabs fluid>
-                {tabs.map((tabElement: tab, index: number) => (
+                {GamePanelTabs.map((tab) => (
                   <Tabs.Tab
-                    key={index}
-                    onClick={tabElement.handleClick}
-                    selected={selectedTab === index}
-                    icon={tabElement.icon}
+                    key={tab.name}
+                    onClick={() => setSelectedTab(tab.name)}
+                    selected={selectedTab === tab.name}
+                    icon={tab.icon}
                   >
-                    {tabElement.content}
+                    {tab.content}
                   </Tabs.Tab>
                 ))}
               </Tabs>
@@ -108,11 +102,11 @@ export function GamePanel(props) {
           <Stack.Divider />
           {/* Main window */}
           <Stack.Item grow basis="85%">
-            {isReadyToRender() && (
+            {selectedTabData && (
               <CreateObject
                 // searchTextValue={searchTextValue}
-                data={data}
-                currentPanel={selectedTabName}
+                data={selectedTabData}
+                tabName={selectedTab || ''}
               />
             )}
           </Stack.Item>
