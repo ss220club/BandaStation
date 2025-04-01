@@ -10,11 +10,7 @@ import {
 } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-
-type CreateObjectProps = {
-  data: string[];
-  tabName: string;
-};
+import { CreateObjectProps } from './types';
 
 export function CreateObject(props: CreateObjectProps) {
   const { act } = useBackend();
@@ -164,11 +160,3 @@ export function CreateObject(props: CreateObjectProps) {
     </Stack>
   );
 }
-
-// type GamePanelData = {
-//   subWindowTitle: string;
-//   objList: string[];
-//   /* ICON PREVIEW CODE
-//   icon: string;
-//   icon_state: string; */
-// };

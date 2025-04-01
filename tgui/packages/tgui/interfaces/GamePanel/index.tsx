@@ -7,19 +7,7 @@ import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 import { logger } from '../../logging';
 import { CreateObject } from './CreateObject';
-import { Data } from './types';
-
-enum GamePanelTabName {
-  createObject = 'Object',
-  createTurf = 'Turf',
-  createMob = 'Mob',
-}
-
-type GamePanelTab = {
-  name: GamePanelTabName;
-  content: string;
-  icon: string;
-};
+import { Data, GamePanelTab, GamePanelTabName } from './types';
 
 const GamePanelTabs = [
   {
@@ -104,7 +92,6 @@ export function GamePanel(props) {
           <Stack.Item grow basis="85%">
             {selectedTabData && (
               <CreateObject
-                // searchTextValue={searchTextValue}
                 data={selectedTabData}
                 tabName={selectedTab || ''}
               />
