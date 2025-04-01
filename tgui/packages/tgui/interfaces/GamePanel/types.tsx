@@ -21,5 +21,5 @@ export type CreateObjectProps = {
 
 export type SelectedObjectIcon = {
   icon: string;
-  icon_state: string;
+  iconState: string;
 };

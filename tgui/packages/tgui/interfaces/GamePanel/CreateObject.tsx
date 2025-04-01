@@ -50,10 +50,11 @@ export function CreateObject(props: CreateObjectProps) {
           Search
         </Button>
       </Stack.Item>
+      {/* REMOVE SHIT BELOW THIS COMMENT */}
       <Collapsible>
         <Button onClick={(e) => act('load-new-icon')}>PREVIEW</Button>
         {data && (
-          <DmIcon icon={data.icon || ''} icon_state={data.icon_state || ''} />
+          <DmIcon icon={data.icon || ''} icon_state={data.iconState || ''} />
         )}
       </Collapsible>
       <Collapsible mt={1} title="Settings">

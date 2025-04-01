@@ -98,13 +98,16 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 				return
 			var/temp_object = new object_path()
 			var/obj/temp_temp_object = temp_object
-			selected_object_icon = temp_temp_object.icon_preview
-			selected_object_icon_state = temp_temp_object.icon_state_preview
+			selected_object_icon = temp_temp_object.icon || temp_temp_object.icon_preview
+			selected_object_icon_state = temp_temp_object.icon_state || temp_temp_object.icon_state_preview
 			qdel(temp_object);
 
 
 /datum/admins/gamepanel/ui_data(mob/user)
-	. = ..()
+	var/data = list()
+	data["icon"] = selected_object_icon
+	data["iconState"] = selected_object_icon_state
+	return data;
 
 /datum/admins/gamepanel/ui_assets(mob/user)
 	return list(
