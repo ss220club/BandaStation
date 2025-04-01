@@ -343,6 +343,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(thing.maptext)
 		thing.maptext = ""
 
+#define STORAGE_ERROR_INSERT "blyat"
 /**
  * Checks if an item is capable of being inserted into the storage.
  *

@@ -563,6 +563,7 @@ There are several things that need to be remembered:
 
 		var/mutable_appearance/suit_overlay
 		var/icon_file = DEFAULT_SUIT_FILE
+
 		// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
 		var/list/icon_files_species = list(
 			"vulpkanin" = 'icons/bandastation/mob/species/vulpkanin/clothing/suit.dmi',
@@ -583,7 +584,7 @@ There are several things that need to be remembered:
 			icon_file = DEFAULT_SUIT_FILE
 			mutant_override = FALSE
 
-		var/mutable_appearance/suit_overlay = wear_suit.build_worn_icon(default_layer = SUIT_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null)
+		suit_overlay = wear_suit.build_worn_icon(default_layer = SUIT_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null)
 		// BANDASTATION EDIT STOP - SPECIES CLOTHING ICONS
 
 		if(bodyshape & BODYSHAPE_PONY && !(wear_suit.supports_variations_flags & CLOTHING_PONY_MASK))
