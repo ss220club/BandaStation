@@ -690,7 +690,6 @@ SUBSYSTEM_DEF(gamemode)
 
 #ifndef MAP_TEST
 	print_command_report(., "[command_name()] Status Summary", announce=FALSE)
-	priority_announce("Отчет был скопирован и распечатан на всех консолях связи.", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound())
 #endif
 
 	return .

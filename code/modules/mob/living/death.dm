@@ -161,6 +161,7 @@
 
 	if(!gibbed && (death_sound || death_message || (living_flags & ALWAYS_DEATHGASP)))
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "fuckingdies")
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "deathgasp")
 
 	set_stat(DEAD)
 	timeofdeath = world.time
