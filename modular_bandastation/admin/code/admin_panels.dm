@@ -25,8 +25,6 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 
 /datum/admins/gamepanel
 	var/client/user_client
-	var/sub_window_title = ""
-	var/obj_list = list()
 	var/where_dropdown_value = FLOOR_BELOW_MOB
 	var/selected_object = ""
 	/* ICON PREVIEW CODE
@@ -53,7 +51,8 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 		ui.open()
 
 /datum/admins/gamepanel/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up variables.
-	qdel(src)
+	// qdel(src)
+	. = ..()
 
 /datum/admins/gamepanel/ui_state(mob/user)
 	. = ..()
@@ -106,13 +105,6 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 
 /datum/admins/gamepanel/ui_data(mob/user)
 	. = ..()
-	// var/list/data = list()
-	// data["subWindowTitle"] = sub_window_title
-	// data["objList"] = obj_list
-	// /* ICON PREVIEW CODE
-	// data["icon"] = selected_object_icon
-	// data["icon_state"] = selected_object_icon_state */
-	// return data
 
 /datum/admins/gamepanel/ui_assets(mob/user)
 	return list(
@@ -133,10 +125,6 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 
 /datum/admins/gamepanel/proc/spawn_item(list/spawn_params)
 	if(!check_rights_for(user_client, R_ADMIN) || !spawn_params)
-		return
-
-	var/dropdown = get_dropdown_value(where_dropdown_value)
-	if(!dropdown)
 		return
 
 	if(spawn_params["object_list"]) //this is the laggiest thing ever
