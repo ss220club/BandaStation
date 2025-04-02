@@ -11,12 +11,13 @@ import {
 } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import { CreateObjectProps, SelectedObjectIcon } from './types';
+import { CreateObjectIcon, CreateObjectProps } from './types';
 
 export function CreateObject(props: CreateObjectProps) {
-  const { act, data } = useBackend<SelectedObjectIcon>();
+  const { act, data } = useBackend<CreateObjectIcon>();
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState(1);
+  const [tooltipIcon, setTooltipIcon] = useState(false);
   const [selectedObj, setSelectedObj] = useState(-1);
   const [whereDropdownVal, setWhereDropdownVal] = useState(
     'On floor below own mob',
@@ -50,13 +51,6 @@ export function CreateObject(props: CreateObjectProps) {
           Search
         </Button>
       </Stack.Item>
-      {/* REMOVE SHIT BELOW THIS COMMENT */}
-      <Collapsible>
-        <Button onClick={(e) => act('load-new-icon')}>PREVIEW</Button>
-        {data && (
-          <DmIcon icon={data.icon || ''} icon_state={data.iconState || ''} />
-        )}
-      </Collapsible>
       <Collapsible mt={1} title="Settings">
         <Stack.Item m={1}>
           Offset:{' '}
@@ -132,25 +126,45 @@ export function CreateObject(props: CreateObjectProps) {
       <Stack.Item overflow="auto">
         <Table>
           <VirtualList>
-            {objList
+            {Object.keys(objList)
               .filter((obj: string) => {
                 return searchText === '' ? false : obj.includes(searchText);
               })
               .map((obj, index) => (
                 <Table.Row key={index} height="25px">
-                  <Table.Cell height="25px">
+                  <Table.Cell height="25px" width="100%">
                     <Button
+                      width={parent.innerWidth}
                       height="25px"
                       color="transparent"
+                      tooltip={
+                        tooltipIcon && (
+                          <DmIcon
+                            // backgroundColor="transparent"
+                            icon={objList[obj].icon}
+                            icon_state={objList[obj].icon_state}
+                          />
+                        )
+                      }
+                      tooltipPosition="top-start"
                       fluid
                       selected={selectedObj === index}
+                      onDoubleClick={(e) => act('create-object-action')}
+                      onMouseDown={(e) => {
+                        if (e.button === 0 && e.shiftKey) {
+                          setTooltipIcon(true);
+                        }
+                      }}
+                      onMouseUp={(e) => {
+                        if (e.button === 0) {
+                          setTooltipIcon(false);
+                        }
+                      }}
                       onClick={() => {
                         setSelectedObj(index);
                         act('selected-object-changed', {
                           newObj: obj,
                         });
-                        // ICON PREVIEW CODE
-                        // act('load-new-icon');
                       }}
                     >
                       {obj}

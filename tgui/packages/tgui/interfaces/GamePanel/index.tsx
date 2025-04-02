@@ -39,6 +39,7 @@ export function GamePanel(props) {
       .then((response) => response.json())
       .then((data) => {
         setData(data);
+        // logger.log(data);
       })
       .catch((error) => {
         logger.log('Failed to fetch gamepanel.json', error);

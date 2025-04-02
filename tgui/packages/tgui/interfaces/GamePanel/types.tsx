@@ -1,5 +1,5 @@
 export interface Data {
-  [panelName: string]: string[]; // Now an array of PanelData objects
+  [panelName: string]: CreateObjectData[];
 }
 
 export enum GamePanelTabName {
@@ -15,11 +15,14 @@ export type GamePanelTab = {
 };
 
 export type CreateObjectProps = {
-  objList: string[];
+  objList: CreateObjectData[];
   tabName: string;
 };
+export type CreateObjectData = {
+  [objectPath: string]: CreateObjectIcon;
+};
 
-export type SelectedObjectIcon = {
+export type CreateObjectIcon = {
   icon: string;
   iconState: string;
 };
