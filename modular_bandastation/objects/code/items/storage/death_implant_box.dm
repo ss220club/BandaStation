@@ -4,7 +4,6 @@
 	illustration = "implant"
 
 /obj/item/storage/box/deathimp/PopulateContents()
-	return flatten_quantified_list(list(
-		/obj/item/implanter/death_alarm = 1,
-		/obj/item/implantcase/death_alarm = 6
-	))
+	new /obj/item/implanter/death_alarm(src)
+	for(var/i in 1 to 6)
+		new /obj/item/implantcase/death_alarm(src)
