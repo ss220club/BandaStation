@@ -26,6 +26,8 @@
 	var/datum/weakref/target_ref
 	///Are we feeding with passive grab or not?
 	var/silent_feed = TRUE
+	///Was the target dead when we started feeding?
+	var/target_was_dead = FALSE
 
 /datum/action/cooldown/bloodsucker/feed/can_use(mob/living/carbon/user, trigger_flags)
 	. = ..()
@@ -61,7 +63,7 @@
 	else
 		log_combat(user, feed_target, "fed on blood", addition="(and took [blood_taken] blood)")
 		to_chat(user, span_notice("You slowly release [feed_target]."))
-		if(feed_target.stat == DEAD && blood_taken > 0)
+		if(feed_target.stat == DEAD && !target_was_dead && blood_taken > 0)
 			user.add_mood_event("drankkilled", /datum/mood_event/drankkilled)
 			bloodsuckerdatum_power.AddHumanityLost(10)
 
@@ -74,6 +76,7 @@
 
 /datum/action/cooldown/bloodsucker/feed/ActivatePower(trigger_flags)
 	var/mob/living/feed_target = target_ref.resolve()
+	target_was_dead = (feed_target.stat == DEAD)
 	if(istype(feed_target, /mob/living/basic/mouse))
 		to_chat(owner, span_notice("You recoil at the taste of a lesser lifeform."))
 		if(bloodsuckerdatum_power.my_clan && bloodsuckerdatum_power.my_clan.blood_drink_type != BLOODSUCKER_DRINK_INHUMANELY)
