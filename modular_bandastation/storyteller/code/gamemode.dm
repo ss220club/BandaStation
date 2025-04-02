@@ -177,13 +177,10 @@ SUBSYSTEM_DEF(gamemode)
 		storytellers[type] = new type()
 
 	for(var/datum/round_event_control/event_type as anything in typesof(/datum/round_event_control))
-		if(!event_type::typepath || !event_type::name)
-			continue
-
 		var/datum/round_event_control/event = new event_type
-		if(!event.valid_for_map())
-			qdel(event)
+		if(!event_type.name || !event.typepath || !event.valid_for_map())
 			continue // event isn't good for this map no point in trying to add it to the list
+
 		control += event //add it to the list of all events (controls)
 
 	load_config_vars()
