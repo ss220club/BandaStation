@@ -125,6 +125,9 @@
 
 	power_activated_sucessfully()
 	var/power_time = 90 + level_current * 15
+	if(IS_MONSTERHUNTER(target))
+		to_chat(target, span_notice("You feel you something crawling under your skin, but it passes."))
+		return
 	if(HAS_TRAIT_FROM(target, TRAIT_MUTE, BLOODSUCKER_TRAIT))
 		owner.balloon_alert(owner, "[target] is already in some form of hypnotic gaze.")
 		return

@@ -2,5 +2,6 @@
 #define IS_VASSAL(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/vassal))
 #define IS_FAVORITE_VASSAL(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/vassal/favorite))
 #define IS_REVENGE_VASSAL(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/vassal/revenge))
+#define IS_MONSTERHUNTER(mob) HAS_TRAIT(mob, TRAIT_BLOODSUCKER_HUNTER)
 
 //Blodsuckers helpers ended//
