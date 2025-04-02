@@ -144,3 +144,17 @@
 	time = 8 SECONDS
 	category = CAT_WEAPON_MELEE
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
+
+/datum/crafting_recipe/bloodaltar
+	name = "Blood Altar"
+	result = /obj/structure/bloodsucker/bloodaltar
+	tool_behaviors = list(TOOL_WELDER, TOOL_WRENCH)
+	reqs = list(
+		/obj/item/stack/rods = 5,
+		/obj/item/stack/sheet/iron = 5,
+		/obj/effect/decal/cleanable/blood = 1,
+		/datum/reagent/ash = 30,
+	)
+	time = 13 SECONDS
+	category = CAT_STRUCTURE
+	crafting_flags =  CRAFT_MUST_BE_LEARNED

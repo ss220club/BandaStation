@@ -37,6 +37,9 @@
 	for(var/datum/action/cooldown/bloodsucker/power in powers)
 		if(istype(power, /datum/action/cooldown/bloodsucker/gohome))
 			RemovePower(power)
+	if(altar_uses)
+		to_chat(owner, span_boldnotice("Your Altar uses have been reset!"))
+		altar_uses = 0
 
 /// Cycle through all vamp antags and check if they're inside a closet.
 /datum/antagonist/bloodsucker/proc/handle_sol()

@@ -48,6 +48,8 @@
 	if(bloodsuckerdatum)
 		. += ""
 		. += "Blood Drank: [bloodsuckerdatum.total_blood_drank]"
+		if(bloodsuckerdatum.has_task)
+			. += "Task Blood Drank: [bloodsuckerdatum.task_blood_drank]"
 
 /datum/outfit/bloodsucker_outfit
 	name = "Bloodsucker outfit (Preview only)"

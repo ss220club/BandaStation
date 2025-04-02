@@ -48,6 +48,10 @@
 	var/frenzy_threshold = FRENZY_MINIMUM_THRESHOLD_ENTER
 	///If we are currently in a Frenzy
 	var/frenzied = FALSE
+	///If we have a task assigned
+	var/has_task = FALSE
+	///How many times have we used a blood altar
+	var/altar_uses = 0
 
 	///ALL Powers currently owned
 	var/list/datum/action/cooldown/bloodsucker/powers = list()
@@ -72,6 +76,10 @@
 	var/area/bloodsucker_lair_area
 	var/obj/structure/closet/crate/claimed_coffin
 	var/total_blood_drank = 0
+	var/task_heart_required = 0
+	var/task_blood_required = 0
+	var/task_blood_drank = 0
+	var/task_memory = ""//Optional little objectives that are to be removed on a certain milestone
 
 	///Blood display HUD
 	var/atom/movable/screen/bloodsucker/blood_counter/blood_display
