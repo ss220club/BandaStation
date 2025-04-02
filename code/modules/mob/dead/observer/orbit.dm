@@ -69,6 +69,7 @@ GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 	var/list/ghosts = list()
 	var/list/misc = list()
 	var/list/npcs = list()
+	var/list/ssds = list()
 
 	for(var/name in new_mob_pois)
 		var/list/serialized = list()
@@ -108,6 +109,12 @@ GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 		if(isliving(mob_poi))
 			serialized += get_living_data(mob_poi)
 
+		if(isliving(mob_poi))
+			var/mob/living/ssd = mob_poi
+			if(!ssd.player_logged)
+				ssds += list(serialized)
+				continue
+
 		var/list/antag_data = get_antag_data(mob_poi.mind, is_admin)
 		if(length(antag_data))
 			serialized += antag_data
@@ -146,6 +153,7 @@ GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 		"ghosts" = ghosts,
 		"misc" = misc,
 		"npcs" = npcs,
+		"ssds" = ssds
 	)
 
 

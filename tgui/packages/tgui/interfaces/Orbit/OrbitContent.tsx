@@ -60,6 +60,10 @@ export function OrbitContent(props) {
       content: data.npcs,
       title: 'NPCs',
     },
+    {
+      content: data.ssds,
+      title: 'SSD',
+    },
   ];
 
   return (
