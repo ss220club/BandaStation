@@ -511,15 +511,46 @@
 		You alone can toggle it from afar by <b>ctrl-clicking</b> it."
 	vassal_desc = "This magical candle drains the sanity of those fools who havent yet accepted your master while active."
 	hunter_desc = "This magical candle causes insanity to those near it while active."
+	var/obj/effect/candelabrum_zone/active_zone
 
-/obj/structure/bloodsucker/lighting/cendelabrum/process()
+/obj/structure/bloodsucker/lighting/candelabrum/toggle(mob/user)
 	. = ..()
-	for(var/mob/living/carbon/nearly_people in viewers(7, src))
-		/// We dont want Bloodsuckers or Vassals affected by this
-		if(IS_VASSAL(nearly_people) || IS_BLOODSUCKER(nearly_people))
-			continue
-		nearly_people.adjust_hallucinations(5 SECONDS)
-		nearly_people.add_mood_event("vampcandle", /datum/mood_event/vampcandle)
+	if(lit)
+		active_zone = new(get_turf(src))
+	else if(active_zone)
+		QDEL_NULL(active_zone)
+
+/obj/effect/candelabrum_zone
+	name = "candelabrum zone"
+	desc = "You feel uneasy here."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "null"
+	invisibility = INVISIBILITY_ABSTRACT
+	anchored = TRUE
+	var/range = 7
+
+/obj/effect/candelabrum_zone/Initialize(mapload)
+	. = ..()
+	var/list/affected_turfs = list()
+	for(var/turf/T in range(range, get_turf(src)))
+		affected_turfs += T
+		RegisterSignal(T, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
+	RegisterSignal(src, COMSIG_QDELETING, PROC_REF(on_destroy))
+
+/obj/effect/candelabrum_zone/proc/on_entered(datum/source, atom/movable/arrived)
+	SIGNAL_HANDLER
+	if(!isliving(arrived))
+		return
+	var/mob/living/carbon/L = arrived
+	if(!istype(L) || IS_VASSAL(L) || IS_BLOODSUCKER(L))
+		return
+	L.adjust_hallucinations(5 SECONDS)
+	L.add_mood_event("vampcandle", /datum/mood_event/vampcandle)
+
+/obj/effect/candelabrum_zone/proc/on_destroy()
+	SIGNAL_HANDLER
+	for(var/turf/T in range(range, get_turf(src)))
+		UnregisterSignal(T, COMSIG_ATOM_ENTERED)
 
 // Brazier - Currently nothing more than an aesthetic light with roughly the brightness of a bonfire
 /obj/structure/bloodsucker/lighting/brazier
