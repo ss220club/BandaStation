@@ -1,27 +1,43 @@
 GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/ssd_indicator/icons/ssd_indicator.dmi', "default0", FLY_LAYER))
 
-/mob/living
-	var/ssd_indicator = FALSE
+/datum/element/ssd
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 
-/mob/living/proc/set_ssd_indicator(state)
-	if(state == ssd_indicator)
-		return
-	ssd_indicator = state
-	if(ssd_indicator)
-		add_overlay(GLOB.ssd_indicator_overlay)
-		log_message("<font color='green'>has went SSD and got their indicator!</font>", LOG_ATTACK)
-	else
-		cut_overlay(GLOB.ssd_indicator_overlay)
-		log_message("<font color='green'>is no longer SSD and lost their indicator!</font>", LOG_ATTACK)
-
-/mob/living/Login()
+/datum/element/ssd/Attach(datum/target)
 	. = ..()
-	set_ssd_indicator(FALSE)
+	if(!isliving(target))
+		return ELEMENT_INCOMPATIBLE
+	RegisterSignal(target, COMSIG_MOB_LOGOUT, PROC_REF(on_mob_logout))
+	RegisterSignal(target, COMSIG_MOB_LOGIN, PROC_REF(on_mob_login))
+	RegisterSignal(target, COMSIG_LIVING_DEATH, PROC_REF(on_mob_death))
+
+/datum/element/ssd/Detach(datum/source, ...)
+	. = ..()
+	UnregisterSignal(source, COMSIG_MOB_LOGIN)
+	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
+	UnregisterSignal(source, COMSIG_LIVING_DEATH)
+
+/datum/element/ssd/proc/on_mob_logout(mob/living/source)
+	SIGNAL_HANDLER
+
+	source.add_overlay(GLOB.ssd_indicator_overlay)
+	source.player_logged = FALSE
+
+/datum/element/ssd/proc/on_mob_login(mob/living/source)
+	SIGNAL_HANDLER
+
+	source.cut_overlay(GLOB.ssd_indicator_overlay)
+	source.player_logged = TRUE
+	Detach(source)
+
+/datum/element/ssd/proc/on_mob_death(mob/living/source)
+	SIGNAL_HANDLER
+
+	source.cut_overlay(GLOB.ssd_indicator_overlay)
 
 /mob/living/Logout()
-	set_ssd_indicator(TRUE)
+	AddElement(/datum/element/ssd)
 	. = ..()
 
-/mob/living/ghostize(can_reenter_corpse = TRUE)
-	. = ..()
-	set_ssd_indicator(FALSE)
+/mob/living
+	var/player_logged = TRUE
