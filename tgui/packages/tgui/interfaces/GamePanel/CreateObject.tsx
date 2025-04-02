@@ -132,15 +132,13 @@ export function CreateObject(props: CreateObjectProps) {
               })
               .map((obj, index) => (
                 <Table.Row key={index} height="25px">
-                  <Table.Cell height="25px" width="100%">
+                  <Table.Cell height="25px">
                     <Button
-                      width={parent.innerWidth}
                       height="25px"
                       color="transparent"
                       tooltip={
                         tooltipIcon && (
                           <DmIcon
-                            // backgroundColor="transparent"
                             icon={objList[obj].icon}
                             icon_state={objList[obj].icon_state}
                           />
