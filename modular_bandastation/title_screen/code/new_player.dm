@@ -10,7 +10,15 @@
 	if(src != usr)
 		return
 
-	if(!client || client.interviewee)
+	if(!client)
+		return
+
+	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"]))
+		if(!SScentral.is_player_discord_linked(ckey))
+			to_chat(usr, PLAYER_REQUIRES_LINKED_DISCORD_CHAT_MESSAGE)
+			return FALSE
+
+	if(client.interviewee)
 		return
 
 	if(href_list["toggle_ready"])

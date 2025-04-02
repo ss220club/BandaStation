@@ -232,7 +232,7 @@
 	dir = 4
 	},
 /obj/machinery/button/door/directional/west{
-	id = "lawyer_shutters";
+	id = "magistrate_shutters";
 	name = "Privacy Shutters"
 	},
 /obj/effect/landmark/start/magistrate,
