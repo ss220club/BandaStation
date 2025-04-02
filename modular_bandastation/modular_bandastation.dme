@@ -58,7 +58,7 @@
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"
 #include "turfs/_turfs.dme"
-#include "whitelist220/_whitelist220.dme"
+#include "metaserver/_metaserver.dme"
 #include "world_topics/_world_topics.dme"
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
