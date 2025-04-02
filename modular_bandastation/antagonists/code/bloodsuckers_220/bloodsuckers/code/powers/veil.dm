@@ -8,7 +8,7 @@
 		Turning the ability off again will undo its effects.\n\
 		Clothing, gear, and security/medical HUD status is kept the same while this power is active."
 	power_flags = BP_AM_TOGGLE
-	check_flags = BP_CANT_USE_IN_FRENZY
+	check_flags = BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_STAKED
 	purchase_flags = BLOODSUCKER_DEFAULT_POWER
 	bloodcost = 15
 	constant_bloodcost = 0.1

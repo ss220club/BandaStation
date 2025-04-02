@@ -120,7 +120,12 @@
 	var/staketime = 12 SECONDS
 
 /datum/embedding/stake
-	embed_chance = 20
+	embed_chance = 1
+	fall_chance = 0
+	pain_chance = 20  // Деревянный кол самый грубый, поэтому больше шанс боли
+	jostle_chance = 15 // Может шевелиться из-за неровной поверхности
+	pain_mult = 2
+	ignore_throwspeed_threshold = TRUE
 
 /obj/item/stake/attack(mob/living/target, mob/living/user, params)
 	. = ..()
@@ -129,23 +134,23 @@
 	if(target == user)
 		return
 	if(!target.can_be_staked()) // Oops! Can't.
-		to_chat(user, span_danger("You can't stake [target] when they are moving about! They have to be laying down or grabbed by the neck!"))
+		to_chat(user, span_danger("You can't stake [target] when they are moving about! They have to be laying down or grabbed aggressively!"))
 		return
 	if(HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
-		to_chat(user, span_danger("[target]'s chest resists the stake. It won't go in."))
+		to_chat(user, span_danger("[target]'s [parse_zone(user.zone_selected)] resists the stake. It won't go in."))
 		return
 
-	to_chat(user, span_notice("You put all your weight into embedding the stake into [target]'s chest..."))
+	to_chat(user, span_notice("You put all your weight into embedding the stake into [target]'s [parse_zone(user.zone_selected)]..."))
 	playsound(user, 'sound/effects/magic/Demon_consume.ogg', 50, 1)
-	if(!do_after(user, staketime, target, extra_checks = CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon, can_be_staked)))) // user / target / time / uninterruptable / show progress bar / extra checks
+	if(!do_after(user, staketime, target, extra_checks = CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon, can_be_staked))))
 		return
 	playsound(get_turf(target), 'sound/effects/splat.ogg', 40, 1)
-	var/obj/item/bodypart/chest = target.get_bodypart(BODY_ZONE_CHEST)
-	force_embed(victim = target, target_limb = chest)
+	var/obj/item/bodypart/target_bodypart = target.get_bodypart(user.zone_selected)
+	force_embed(victim = target, target_limb = target_bodypart)
 	// Drop & Embed Stake
 	user.visible_message(
-		span_danger("[user.name] drives the [src] into [target]'s chest!"),
-		span_danger("You drive the [src] into [target]'s chest!"),
+		span_danger("[user.name] drives the [src] into [target]'s [parse_zone(user.zone_selected)]!"),
+		span_danger("You drive the [src] into [target]'s [parse_zone(user.zone_selected)]!"),
 	)
 
 	if(QDELETED(src)) // in case trying to embed it caused its deletion (say, if it's DROPDEL)
@@ -180,11 +185,16 @@
 	force = 8
 	throwforce = 12
 	armour_penetration = 10
-	embed_data = /datum/embedding/hardened_stake
+	embed_type = /datum/embedding/hardened_stake
 	staketime = 80
 
 /datum/embedding/hardened_stake
-	embed_chance = 35
+	embed_chance = 2
+	fall_chance = 0
+	pain_chance = 15  // Более гладкая поверхность = меньше боли
+	jostle_chance = 10 // Более стабильный
+	pain_mult = 1.5
+	ignore_throwspeed_threshold = TRUE
 
 /obj/item/stake/hardened/silver
 	name = "silver stake"
@@ -194,11 +204,16 @@
 	siemens_coefficient = 1 //flags = CONDUCT // var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
 	force = 9
 	armour_penetration = 25
-	embed_data = /datum/embedding/silver_stake
+	embed_type = /datum/embedding/silver_stake
 	staketime = 60
 
 /datum/embedding/silver_stake
-	embed_chance = 65
+	embed_chance = 5
+	fall_chance = 0
+	pain_chance = 0  // слишком гладкий и чистый чтобы наносить боль, увы
+	jostle_chance = 0  // слишком гладкий и чистый чтобы наносить боль, увы
+	pain_mult = 0
+	ignore_throwspeed_threshold = TRUE
 
 //////////////////////
 //     ARCHIVES     //

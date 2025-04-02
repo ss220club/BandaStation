@@ -16,7 +16,7 @@
 	button_icon_state = "power_thaumaturgy"
 	power_explanation = "Thaumaturgy:\n\
 		Gives you a one shot blood bolt spell, firing it at a person deals 20 burn damage"
-	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS
+	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
 	bloodcost = 20
 	constant_bloodcost = 0
 	cooldown_time = 6 SECONDS

@@ -7,7 +7,7 @@
 		This power goes through all obstacles except walls.\n\
 		Higher levels make the power faster and quieter."
 	power_flags = BP_AM_TOGGLE
-	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS
+	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
 	purchase_flags = BLOODSUCKER_CAN_BUY|VASSAL_CAN_BUY
 	bloodcost = 10
 	cooldown_time = 8 SECONDS
