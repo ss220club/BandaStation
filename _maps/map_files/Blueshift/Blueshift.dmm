@@ -4608,8 +4608,7 @@
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
 "aVN" = (
-/obj/machinery/light/cold/no_nightlight/directional/west,
-/obj/machinery/light/cold/no_nightlight/directional/west,
+/obj/machinery/light/very_dim/directional/west,
 /turf/open/floor/iron/dark/side{
 	dir = 8
 	},
@@ -8661,6 +8660,7 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/light/floor,
 /turf/open/floor/wood,
 /area/station/service/library)
 "bKr" = (
@@ -21376,6 +21376,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 9
 	},
+/obj/machinery/light/floor,
 /turf/open/floor/wood,
 /area/station/service/library)
 "egt" = (
@@ -46296,7 +46297,7 @@
 /area/station/maintenance/department/medical/central)
 "jaB" = (
 /obj/machinery/status_display/ai/directional/west,
-/obj/machinery/light/cold/no_nightlight/directional/west,
+/obj/machinery/light/cold/dim/directional/west,
 /turf/open/floor/iron/dark/side{
 	dir = 8
 	},
@@ -53979,7 +53980,7 @@
 /area/station/command/heads_quarters/hop)
 "kvH" = (
 /obj/machinery/status_display/evac/directional/east,
-/obj/machinery/light/cold/no_nightlight/directional/east,
+/obj/machinery/light/cold/dim/directional/east,
 /turf/open/floor/iron/dark/side{
 	dir = 4
 	},
@@ -54645,7 +54646,6 @@
 /area/station/cargo/miningdock)
 "kAY" = (
 /obj/effect/turf_decal/tile/neutral,
-/obj/machinery/light/directional/south,
 /obj/structure/sign/poster/random/directional/south,
 /obj/structure/window/spawner/directional/east,
 /turf/open/floor/iron,
@@ -56925,6 +56925,7 @@
 /obj/machinery/door/airlock/public/glass{
 	name = "Central Hallway"
 	},
+/obj/machinery/light/floor,
 /turf/open/floor/iron/dark/side{
 	dir = 8
 	},
@@ -61716,7 +61717,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "lXO" = (
-/obj/machinery/light/cold/no_nightlight/directional/east,
+/obj/machinery/light/very_dim/directional/east,
 /turf/open/floor/iron/dark/side{
 	dir = 4
 	},
@@ -66212,7 +66213,6 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/machinery/light/directional/west,
 /obj/machinery/status_display/ai/directional/west,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
@@ -79761,7 +79761,6 @@
 	pixel_y = 3
 	},
 /obj/item/newspaper,
-/obj/machinery/light/directional/south,
 /obj/machinery/light_switch/directional/south,
 /obj/item/storage/crayons{
 	pixel_y = 15
@@ -97460,7 +97459,6 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/machinery/light/directional/south,
 /obj/structure/sign/poster/random/directional/south,
 /obj/structure/window/spawner/directional/west,
 /turf/open/floor/iron,
@@ -104415,6 +104413,12 @@
 "ukN" = (
 /turf/closed/wall,
 /area/station/commons/fitness/recreation/pool)
+"ukO" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/light/floor,
+/turf/open/floor/wood,
+/area/station/service/library)
 "ukP" = (
 /obj/machinery/light_switch/directional/west,
 /obj/machinery/light/directional/west,
@@ -108966,7 +108970,6 @@
 	c_tag = "Library Upper";
 	name = "library camera"
 	},
-/obj/machinery/light/directional/east,
 /obj/machinery/firealarm/directional/east,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -113032,7 +113035,6 @@
 /area/station/security/prison/visit)
 "vQo" = (
 /obj/effect/turf_decal/tile/neutral,
-/obj/machinery/light/directional/east,
 /obj/machinery/status_display/ai/directional/east,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
@@ -122095,7 +122097,6 @@
 	c_tag = "Library Lower";
 	name = "library camera"
 	},
-/obj/machinery/light/directional/east,
 /obj/machinery/light_switch/directional/east,
 /turf/open/floor/wood,
 /area/station/service/library)
@@ -153915,7 +153916,7 @@ uuF
 qbW
 qbW
 qbW
-uif
+ukO
 aaK
 fwc
 vXe
