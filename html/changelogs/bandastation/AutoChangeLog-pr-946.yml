@@ -1,0 +1,4 @@
+author: "Furrior"
+delete-after: True
+changes:
+  - rscadd: "Привязка дискорда через OAuth"
