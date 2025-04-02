@@ -6,7 +6,6 @@ import {
   Dropdown,
   Input,
   Stack,
-  Table,
   VirtualList,
 } from 'tgui-core/components';
 
@@ -124,54 +123,49 @@ export function CreateObject(props: CreateObjectProps) {
       </Stack.Item>
       <Stack.Divider />
       <Stack.Item overflow="auto">
-        <Table>
-          <VirtualList>
-            {Object.keys(objList)
-              .filter((obj: string) => {
-                return searchText === '' ? false : obj.includes(searchText);
-              })
-              .map((obj, index) => (
-                <Table.Row key={index} height="25px">
-                  <Table.Cell height="25px">
-                    <Button
-                      height="25px"
-                      color="transparent"
-                      tooltip={
-                        tooltipIcon && (
-                          <DmIcon
-                            icon={objList[obj].icon}
-                            icon_state={objList[obj].icon_state}
-                          />
-                        )
-                      }
-                      tooltipPosition="top-start"
-                      fluid
-                      selected={selectedObj === index}
-                      onDoubleClick={(e) => act('create-object-action')}
-                      onMouseDown={(e) => {
-                        if (e.button === 0 && e.shiftKey) {
-                          setTooltipIcon(true);
-                        }
-                      }}
-                      onMouseUp={(e) => {
-                        if (e.button === 0) {
-                          setTooltipIcon(false);
-                        }
-                      }}
-                      onClick={() => {
-                        setSelectedObj(index);
-                        act('selected-object-changed', {
-                          newObj: obj,
-                        });
-                      }}
-                    >
-                      {obj}
-                    </Button>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-          </VirtualList>
-        </Table>
+        <VirtualList>
+          {Object.keys(objList)
+            .filter((obj: string) => {
+              return searchText === '' ? false : obj.includes(searchText);
+            })
+            .map((obj, index) => (
+              <Button
+                key={index}
+                height="25px"
+                color="transparent"
+                tooltip={
+                  tooltipIcon && (
+                    <DmIcon
+                      icon={objList[obj].icon}
+                      icon_state={objList[obj].icon_state}
+                    />
+                  )
+                }
+                tooltipPosition="top-start"
+                fluid
+                selected={selectedObj === index}
+                onDoubleClick={(e) => act('create-object-action')}
+                onMouseDown={(e) => {
+                  if (e.button === 0 && e.shiftKey) {
+                    setTooltipIcon(true);
+                  }
+                }}
+                onMouseUp={(e) => {
+                  if (e.button === 0) {
+                    setTooltipIcon(false);
+                  }
+                }}
+                onClick={() => {
+                  setSelectedObj(index);
+                  act('selected-object-changed', {
+                    newObj: obj,
+                  });
+                }}
+              >
+                {obj}
+              </Button>
+            ))}
+        </VirtualList>
       </Stack.Item>
     </Stack>
   );
