@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(statpanels)
 			"Players Connected: [LAZYLEN(GLOB.clients)]", // BANDASTATION ADD
 			"Players in Lobby: [LAZYLEN(GLOB.new_player_list)]", // BANDASTATION ADD
 			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
-			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [STATION_TIME_PASSED() > MIDNIGHT_ROLLOVER ? "[round(STATION_TIME_PASSED() / MIDNIGHT_ROLLOVER)]:[gameTimestamp(wtime = STATION_TIME_PASSED())]" : gameTimestamp(wtime = STATION_TIME_PASSED())]", // BANDASTATION ADDITION - timezone
+			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [ROUND_TIME()]", // BANDASTATION ADD
 			"Station Time: [station_time_timestamp()]",
 			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"
 		)
