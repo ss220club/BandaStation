@@ -525,7 +525,7 @@
 	ACCESS_QM, \
 	ACCESS_SHIPPING, \
 	ACCESS_VAULT, \
-	ACCESS_EXPLORER,
+	ACCESS_EXPLORER, \
 )
 /// Name for the Command region.
 #define REGION_COMMAND "Command"
