@@ -1,56 +1,51 @@
 /datum/mood_event/drankblood
-	description = span_nicegreen("I have fed greedly from that which nourishes me.")
+	description = span_nicegreen("Я жадно поглощаю то, что питает меня.")
 	mood_change = 6
 	timeout = 8 MINUTES
 
 /datum/mood_event/drankblood_bad
-	description = span_boldwarning("I drank the blood of a lesser creature. Disgusting.")
+	description = span_boldwarning("Я выпил кровь низшего существа. Отвратительно.")
 	mood_change = -8
 	timeout = 3 MINUTES
 
 /datum/mood_event/drankblood_dead
-	description = span_boldwarning("I drank blood from the dead. I am better than this.")
-	mood_change = -10
-	timeout = 8 MINUTES
-
-/datum/mood_event/drankblood_synth
-	description = span_boldwarning("I drank synthetic blood. What is wrong with me?")
+	description = span_boldwarning("Я пил кровь мёртвеца. Я должен быть выше этого.")
 	mood_change = -10
 	timeout = 8 MINUTES
 
 /datum/mood_event/drankkilled
-	description = span_boldwarning("I fed off of someone until their death. I feel... less human.")
+	description = span_boldwarning("Я поглотил всю жизнь другово разумного существа. Я чувствую себя... менее человечным.")
 	mood_change = -20
 	timeout = 15 MINUTES
 
 /datum/mood_event/madevamp
-	description = span_boldwarning("A mortal has reached an apotheosis— undeath— by my own hand.")
+	description = span_boldwarning("Благодаря мне, смертный достиг апофеоза немёртвости.")
 	mood_change = 15
 	timeout = 10 MINUTES
 
 /datum/mood_event/coffinsleep
-	description = span_nicegreen("I slept in a coffin during the day. I feel whole again.")
+	description = span_nicegreen("Днем я спал в гробу. Я прекрасно выспался.")
 	mood_change = 10
 	timeout = 5 MINUTES
 
 /datum/mood_event/daylight_1
-	description = span_boldwarning("I slept poorly in a makeshift coffin during the day.")
+	description = span_boldwarning("Этот деревянный гроб ужасен! Я так и не смог нормально выспаться.")
 	mood_change = -3
 	timeout = 3 MINUTES
 
 /datum/mood_event/daylight_2
-	description = span_boldwarning("I have been scorched by the unforgiving rays of the sun.")
+	description = span_boldwarning("Лучи мерзкого солнца обожгли меня!")
 	mood_change = -7
 	timeout = 5 MINUTES
 
 ///Candelabrum's mood event to non Bloodsucker/Vassals
 /datum/mood_event/vampcandle
-	description = span_boldwarning("Something is making your mind feel... loose.")
+	description = span_boldwarning("Этот свет разрушает мою связь с реальностью!")
 	mood_change = -15
 	timeout = 5 MINUTES
 
 //Blood mirror's mood event to non-bloodsuckers/vassals that attempt to use it and get randomly warped.
 /datum/mood_event/bloodmirror
-	description = span_boldwarning("A PROPHECY OF BLOOD HAS SPREAD ITS SPLATTERED STAINS UPON MY PSYCHE.")
+	description = span_boldwarning("КРОВАВОЕ ПРОРОЧЕСТВО ЗАХВАТИЛО МОЮ ДУШУ.")
 	mood_change = -30
 	timeout = 7 MINUTES
