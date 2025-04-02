@@ -377,6 +377,7 @@ GLOBAL_PROTECT(tracy_init_reason)
 /world/Del()
 	shutdown_byond_tracy()
 	auxcleanup()
+	rustg_close_async_http_client() // BANDSATION ADDITION - Rust Utils
 	. = ..()
 
 /world/proc/update_status()

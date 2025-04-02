@@ -117,7 +117,7 @@
 	name = "Anosognosia"
 	desc = "Patient always feels healthy, regardless of their condition."
 	scan_desc = "self-awareness deficit"
-	gain_text = span_notice("You feel great!")
+	gain_text = span_notice("Вы чувствуете себя прекрасно!")
 	lose_text = span_warning("You no longer feel perfectly healthy.")
 
 /datum/brain_trauma/mild/healthy/on_gain()
