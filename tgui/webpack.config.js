@@ -134,7 +134,7 @@ module.exports = (env = {}, argv) => {
     const { EsbuildPlugin } = require('esbuild-loader');
     config.optimization.minimizer = [
       new EsbuildPlugin({
-        target: 'ie11',
+        target: 'chrome110',
         css: true,
       }),
     ];
