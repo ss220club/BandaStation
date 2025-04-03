@@ -623,8 +623,8 @@
 	REGION_RESEARCH, \
 	REGION_SECURITY, \
 	REGION_SUPPLY, \
-	REGION_ACCESS_JUSTICE, \
-	REGION_ACCESS_NT_REPRESENTATION, \
+	REGION_JUSTICE, \
+	REGION_NT_REPRESENTATION, \
 )
 
 /// Used in ID card access adding procs. Will try to add all accesses and utilises free wildcards, skipping over any accesses it can't add.

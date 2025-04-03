@@ -1,0 +1,4 @@
+author: "Chorden523"
+delete-after: True
+changes:
+  - bugfix: "Коды Гамма и Эпсилон теперь отображаются в пда."

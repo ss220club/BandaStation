@@ -1,4 +1,0 @@
-author: "Chorden523"
-delete-after: True
-changes:
-  - bugfix: "Створки в кабинете магистрата на Metastaion теперь вновь закрываются и открываются по нажатии на кнопку."
