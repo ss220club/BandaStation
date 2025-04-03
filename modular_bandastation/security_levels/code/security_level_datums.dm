@@ -28,6 +28,8 @@
 	sound = 'modular_bandastation/security_levels/sound/new_siren.ogg'
 	status_display_icon_state = "gammaalert"
 	fire_alarm_light_color = LIGHT_COLOR_ORANGE
+	announcement_color = "orange"
+	name_shortform = "Γ"
 	number_level = SEC_LEVEL_GAMMA
 	lowering_to_configuration_key = /datum/config_entry/string/alert_gamma
 	elevating_to_configuration_key = /datum/config_entry/string/alert_gamma
@@ -45,6 +47,8 @@
 	number_level = SEC_LEVEL_EPSILON
 	status_display_icon_state = "epsilonalert"
 	fire_alarm_light_color = LIGHT_COLOR_BLOOD_MAGIC
+	announcement_color = "red"
+	name_shortform = "Ε"
 	lowering_to_configuration_key = /datum/config_entry/string/alert_epsilon
 	elevating_to_configuration_key = /datum/config_entry/string/alert_epsilon
 	shuttle_call_time_mod = 10
