@@ -50,6 +50,8 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 /datum/element/ssd/proc/on_cyborg_update_overlays(mob/living/silicon/robot/cyborg)
 	SIGNAL_HANDLER
 
+	if(cyborg.stat == DEAD)
+		return
 	if(GLOB.ssd_indicator_overlay in cyborg.overlays)
 		return
 	cyborg.add_overlay(GLOB.ssd_indicator_overlay)
