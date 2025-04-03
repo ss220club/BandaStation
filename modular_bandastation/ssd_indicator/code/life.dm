@@ -1,4 +1,4 @@
 /mob/living/proc/handle_ssd(seconds_per_tick, times_fired)
-	if(player_logged)
+	if(player_logged || issilicon(src))
 		return
-	SetSleeping(2 SECONDS)
+	SetSleeping(4 SECONDS)

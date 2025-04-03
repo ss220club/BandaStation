@@ -22,7 +22,8 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 /datum/element/ssd/proc/on_mob_logout(mob/living/source)
 	SIGNAL_HANDLER
 
-	source.add_overlay(GLOB.ssd_indicator_overlay)
+	if(source.stat != DEAD)
+		source.add_overlay(GLOB.ssd_indicator_overlay)
 	source.player_logged = FALSE
 
 /datum/element/ssd/proc/on_mob_login(mob/living/source)
