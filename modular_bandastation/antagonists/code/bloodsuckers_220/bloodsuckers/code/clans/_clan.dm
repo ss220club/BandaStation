@@ -183,18 +183,18 @@
 
 /datum/bloodsucker_clan/proc/finalize_spend_rank(datum/antagonist/bloodsucker/source, cost_rank = TRUE, blood_cost)
 	bloodsuckerdatum.LevelUpPowers()
-	bloodsuckerdatum.bloodsucker_regen_rate += 0.05
+	bloodsuckerdatum.bloodsucker_regen_rate += 0.5 // Требуется тестирование для более тонкой настройки
 	bloodsuckerdatum.max_blood_volume += 100
 
 	if(ishuman(bloodsuckerdatum.owner.current))
 		var/mob/living/carbon/human/human_user = bloodsuckerdatum.owner.current
 		var/obj/item/bodypart/user_left_hand = human_user.get_bodypart(BODY_ZONE_L_ARM)
 		var/obj/item/bodypart/user_right_hand = human_user.get_bodypart(BODY_ZONE_R_ARM)
-		user_left_hand.unarmed_damage_low += 0.5
-		user_right_hand.unarmed_damage_low += 0.5
+		user_left_hand.unarmed_damage_low += 2 // Требуется тестирование для более тонкой настройки
+		user_right_hand.unarmed_damage_low += 2 // Требуется тестирование для более тонкой настройки
 		// This affects the hitting power of Brawn.
-		user_left_hand.unarmed_damage_high += 0.5
-		user_right_hand.unarmed_damage_high += 0.5
+		user_left_hand.unarmed_damage_high += 2 // Требуется тестирование для более тонкой настройки
+		user_right_hand.unarmed_damage_high += 2 // Требуется тестирование для более тонкой настройки
 
 	// We're almost done - Spend your Rank now.
 	bloodsuckerdatum.bloodsucker_level++
