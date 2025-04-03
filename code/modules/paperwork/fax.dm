@@ -337,10 +337,10 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE)
 
 			if(GLOB.fax_autoprinting)
 				for(var/obj/machinery/fax/admin/FAX as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/fax/admin))
+
 					if(FAX.fax_id != params["id"])
 						continue
 					FAX.receive(fax_paper, fax_name)
-					break
 
 			log_fax(fax_paper, params["id"], params["name"])
 			loaded_item_ref = null

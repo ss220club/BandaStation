@@ -1747,7 +1747,6 @@
 			if(FAX.fax_id != href_list["destination"])
 				continue
 			FAX.receive(locate(href_list["print_fax"]), href_list["sender_name"])
-			return
 
 	else if(href_list["play_internet"])
 		if(!check_rights(R_SOUND))
