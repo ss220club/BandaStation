@@ -238,7 +238,7 @@
 	else
 		loadedWeightClass--
 	AM.forceMove(get_turf(src))
-	AM.throw_at(target, pressure_setting * 10 * range_multiplier, pressure_setting * 2, user, spin_item, force = MOVE_FORCE_STRONG)
+	AM.throw_at(target, pressure_setting * 10 * range_multiplier, pressure_setting * 2, user, spin_item)
 	return TRUE
 
 /obj/item/pneumatic_cannon/proc/get_target(turf/target, turf/starting)
