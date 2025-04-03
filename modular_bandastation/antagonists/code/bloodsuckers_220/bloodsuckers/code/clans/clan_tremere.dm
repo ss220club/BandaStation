@@ -8,6 +8,7 @@
 	join_icon_state = "tremere"
 	join_description = "You will burn if you enter the chapel, lose all default powers, \
 		but gain blood spells instead, which are individually leveled up over time."
+	joinable_clan = FALSE
 
 /datum/bloodsucker_clan/tremere/New(mob/living/carbon/user)
 	. = ..()

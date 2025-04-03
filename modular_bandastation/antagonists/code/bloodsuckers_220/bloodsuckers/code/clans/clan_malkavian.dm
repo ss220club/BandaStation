@@ -9,6 +9,7 @@ GLOBAL_LIST_EMPTY(masquerade_breakers)
 	join_icon_state = "malkavian"
 	join_description = "Become completely insane, travel through tears in reality, ramble in whispers constantly, \
 		and become an enforcer of the Masquerade."
+	joinable_clan = FALSE
 	blood_drink_type = BLOODSUCKER_DRINK_INHUMANELY
 
 /datum/bloodsucker_clan/malkavian/on_enter_frenzy(datum/antagonist/bloodsucker/source)

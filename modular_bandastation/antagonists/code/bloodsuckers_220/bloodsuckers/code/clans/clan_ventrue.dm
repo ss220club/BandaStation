@@ -12,6 +12,7 @@
 	join_icon_state = "ventrue"
 	join_description = "Lose the ability to drink from the mindless; become unable to gain more than three powers, \
 		instead raise a vassal into a Bloodsucker."
+	joinable_clan = FALSE
 	blood_drink_type = BLOODSUCKER_DRINK_SNOBBY
 
 /datum/bloodsucker_clan/ventrue/spend_rank(datum/antagonist/bloodsucker/source, mob/living/carbon/target, cost_rank = TRUE, blood_cost)
