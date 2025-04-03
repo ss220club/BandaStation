@@ -10,12 +10,14 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	RegisterSignal(target, COMSIG_MOB_LOGOUT, PROC_REF(on_mob_logout))
 	RegisterSignal(target, COMSIG_MOB_LOGIN, PROC_REF(on_mob_login))
 	RegisterSignal(target, COMSIG_LIVING_DEATH, PROC_REF(on_mob_death))
+	RegisterSignal(target, COMSIG_LIVING_REVIVE, PROC_REF(on_mob_revive))
 
 /datum/element/ssd/Detach(datum/source, ...)
 	. = ..()
 	UnregisterSignal(source, COMSIG_MOB_LOGIN)
 	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
 	UnregisterSignal(source, COMSIG_LIVING_DEATH)
+	UnregisterSignal(source, COMSIG_LIVING_REVIVE)
 
 /datum/element/ssd/proc/on_mob_logout(mob/living/source)
 	SIGNAL_HANDLER
@@ -34,6 +36,11 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	SIGNAL_HANDLER
 
 	source.cut_overlay(GLOB.ssd_indicator_overlay)
+
+/datum/element/ssd/proc/on_mob_revive(mob/living/source)
+	SIGNAL_HANDLER
+
+	source.add_overlay(GLOB.ssd_indicator_overlay)
 
 /mob/living/Logout()
 	AddElement(/datum/element/ssd)
