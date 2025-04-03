@@ -3601,6 +3601,11 @@
 /obj/item/kirbyplants/organic/plant22,
 /turf/open/floor/wood,
 /area/station/service/library)
+"aKG" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/atmospherics/pipe/smart/simple/pink/visible,
+/turf/open/floor/plating,
+/area/station/engineering/supermatter/room)
 "aKI" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -13674,6 +13679,13 @@
 /obj/item/reagent_containers/condiment/enzyme,
 /turf/open/floor/iron/cafeteria,
 /area/station/command/heads_quarters/nanotrasen_representative)
+"cFg" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/components/unary/passive_vent{
+	dir = 1
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "cFh" = (
 /obj/structure/cable,
 /turf/open/floor/carpet,
@@ -19606,9 +19618,8 @@
 /obj/effect/turf_decal/stripes{
 	dir = 4
 	},
-/obj/machinery/atmospherics/components/binary/valve/digital/on{
-	dir = 4;
-	name = "Output Release"
+/obj/machinery/atmospherics/components/binary/valve{
+	dir = 4
 	},
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
@@ -19997,9 +20008,7 @@
 /area/station/science/xenobiology)
 "dSf" = (
 /obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/smart/simple/pink/visible{
-	dir = 8
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/pink,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "dSg" = (
@@ -27203,6 +27212,11 @@
 /obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage/tech)
+"fiV" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/smart/simple/pink/visible,
+/turf/open/space/basic,
+/area/space/nearstation)
 "fjc" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -28552,6 +28566,7 @@
 /obj/structure/reflector/box{
 	dir = 1
 	},
+/obj/machinery/atmospherics/pipe/smart/simple/pink/visible,
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
 "fyr" = (
@@ -39424,7 +39439,7 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
 	},
-/turf/open/floor/iron,
+/turf/open/floor/iron/dark,
 /area/station/engineering/engine_smes)
 "hIi" = (
 /obj/effect/turf_decal/bot,
@@ -42808,6 +42823,7 @@
 "ipQ" = (
 /obj/effect/decal/cleanable/glass,
 /obj/machinery/airalarm/directional/west,
+/obj/machinery/atmospherics/pipe/smart/simple/pink/visible,
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
 "ipR" = (
@@ -47466,6 +47482,10 @@
 /obj/machinery/camera/directional/north,
 /turf/open/floor/carpet,
 /area/station/service/library/lounge)
+"jmL" = (
+/obj/machinery/atmospherics/pipe/smart/simple/pink/visible,
+/turf/open/floor/plating,
+/area/station/engineering/supermatter/room)
 "jmM" = (
 /obj/effect/turf_decal/arrows/red,
 /obj/effect/turf_decal/stripes/red/line{
@@ -54742,6 +54762,7 @@
 /obj/item/tank/jetpack/carbondioxide,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/command/storage/eva/upper)
 "kCt" = (
@@ -74772,7 +74793,7 @@
 /obj/machinery/button/door/directional/north{
 	id = "gatewayshutters";
 	name = "Gateway Shutters";
-	req_access = list("command")
+	req_access = list("gateway")
 	},
 /obj/item/kirbyplants/random,
 /turf/open/floor/iron/dark,
@@ -83894,6 +83915,7 @@
 /obj/item/tank/jetpack/carbondioxide,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/command/storage/eva/upper)
 "qpu" = (
@@ -96352,9 +96374,6 @@
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/qm)
 "sJE" = (
-/obj/machinery/light_switch{
-	pixel_y = 26
-	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -96370,6 +96389,8 @@
 	anchored = 1;
 	name = "Daisy's bed"
 	},
+/obj/machinery/light_switch/directional/north,
+/obj/machinery/light_switch/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/service/library/private)
 "sJP" = (
@@ -99796,7 +99817,7 @@
 "trE" = (
 /obj/structure/cable,
 /obj/machinery/light_switch/directional/west,
-/turf/open/floor/iron,
+/turf/open/floor/iron/dark,
 /area/station/engineering/engine_smes)
 "trG" = (
 /obj/machinery/door/airlock/maintenance_hatch{
@@ -103360,9 +103381,10 @@
 /turf/open/floor/plating,
 /area/station/commons/fitness/recreation/entertainment)
 "ubH" = (
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/station/engineering/atmos/hfr_room)
+/obj/effect/turf_decal/stripes,
+/obj/machinery/atmospherics/components/binary/valve/on,
+/turf/open/floor/engine,
+/area/station/engineering/supermatter/room)
 "ubU" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
@@ -106716,6 +106738,7 @@
 /obj/item/tank/jetpack/carbondioxide,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/command/storage/eva/upper)
 "uGc" = (
@@ -120268,7 +120291,7 @@
 "xkR" = (
 /obj/item/radio/intercom/directional/north,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron,
+/turf/open/floor/iron/dark,
 /area/station/engineering/engine_smes)
 "xkU" = (
 /obj/machinery/scanner_gate,
@@ -121538,6 +121561,14 @@
 /obj/machinery/duct,
 /turf/open/floor/iron,
 /area/station/commons/dorms)
+"xxM" = (
+/obj/machinery/door/airlock/maintenance_hatch{
+	name = "Engineering Maintenance"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/machinery/atmospherics/pipe/smart/simple/pink/visible,
+/turf/open/floor/plating,
+/area/station/engineering/supermatter/room)
 "xxN" = (
 /obj/structure/window/reinforced/spawner/directional/north,
 /obj/structure/window/reinforced/spawner/directional/south,
@@ -158630,18 +158661,18 @@ xtd
 xtd
 ryb
 dSf
-psI
-fpY
-frp
+ubH
+xxM
+jmL
 ipQ
-frp
-frp
-frp
-frp
+jmL
+jmL
+jmL
+jmL
 fyn
-hLZ
-xJH
-xJH
+aKG
+fiV
+cFg
 xJH
 cTR
 oWJ
@@ -166568,9 +166599,9 @@ liN
 aCz
 aCz
 aCz
-ubH
-ubH
-ubH
+vyy
+vyy
+vyy
 aCz
 aCz
 aCz
