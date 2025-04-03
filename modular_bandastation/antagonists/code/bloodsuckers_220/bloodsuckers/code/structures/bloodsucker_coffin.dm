@@ -56,6 +56,11 @@
 	material_drop_amount = 2
 	armor_type = /datum/armor/blackcoffin
 
+/obj/structure/closet/crate/coffin/blackcoffin/bloodblackcoffin
+	desc = "For those departed who are not so dear. Its covered in blood"
+	icon_state = "coffin_bloody"
+	base_icon_state = "coffin_bloody"
+
 /datum/armor/blackcoffin
 	melee = 50
 	bullet = 20

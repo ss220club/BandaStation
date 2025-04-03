@@ -27,7 +27,8 @@
 	var/list/options = list()
 	var/list/radial_display = list()
 	for(var/datum/bloodsucker_clan/all_clans as anything in typesof(/datum/bloodsucker_clan))
-		if(!initial(all_clans.joinable_clan)) //flavortext only
+		// Проверяем не является ли клан Caitiff и доступен ли он для присоединения (или админ выбирает)
+		if((!initial(all_clans.joinable_clan) && !admin_selecting) || (!admin_selecting && initial(all_clans.name) == CLAN_NONE))
 			continue
 		options[initial(all_clans.name)] = all_clans
 
