@@ -3876,11 +3876,6 @@
 	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
-"bqC" = (
-/obj/effect/turf_decal/sand/plating/volcanic,
-/obj/structure/marker_beacon/olive,
-/turf/open/floor/plating/lavaland_atmos,
-/area/lavaland/surface/outdoors)
 "bqJ" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -12197,7 +12192,7 @@
 /area/station/commons/fitness/recreation)
 "epK" = (
 /obj/machinery/door/puzzle/keycard{
-	puzzle_id = yellow;
+	puzzle_id = "yellow";
 	color = red
 	},
 /turf/open/indestructible/necropolis,
@@ -22029,6 +22024,11 @@
 /obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
+"hSt" = (
+/obj/effect/turf_decal/sand/plating/volcanic,
+/obj/structure/marker_beacon/olive,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "hSG" = (
 /obj/structure/closet/lasertag/red,
 /obj/effect/landmark/start/hangover/closet,
@@ -43681,11 +43681,6 @@
 /obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/aisat/exterior)
-"pqI" = (
-/obj/docking_port/stationary/escape_pod,
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/plating/lavaland_atmos,
-/area/lavaland/surface/outdoors)
 "pqJ" = (
 /obj/machinery/door/airlock/mining{
 	name = "Mining Office"
@@ -43828,11 +43823,6 @@
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/hos)
-"psy" = (
-/obj/structure/marker_beacon/olive,
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/plating/lavaland_atmos,
-/area/lavaland/surface/outdoors)
 "psz" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
@@ -47548,6 +47538,11 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
+"qJH" = (
+/obj/docking_port/stationary/escape_pod,
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "qJU" = (
 /obj/structure/sign/map/right{
 	desc = "A framed picture of the station. Clockwise from security at the top (red), you see engineering (yellow), science (purple), escape (red and white), medbay (green), arrivals (blue and white), and finally cargo (brown).";
@@ -62119,6 +62114,11 @@
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/storage/gas)
+"vEO" = (
+/obj/structure/marker_beacon/olive,
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "vET" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -78871,7 +78871,7 @@ nWF
 nWF
 nWF
 nWF
-psy
+vEO
 cSm
 eeg
 wdr
@@ -78883,7 +78883,7 @@ qEt
 qEt
 qEt
 qEt
-bqC
+hSt
 cSm
 cSm
 cSm
@@ -78891,7 +78891,7 @@ cSm
 cSm
 cSm
 cSm
-bqC
+hSt
 qEt
 qEt
 qEt
@@ -78906,7 +78906,7 @@ qEt
 qEt
 qEt
 qEt
-bqC
+hSt
 cSm
 cSm
 cSm
@@ -79155,9 +79155,9 @@ ndI
 nDP
 qEt
 cSm
-psy
+vEO
 cSm
-psy
+vEO
 cSm
 qEt
 jjS
@@ -79389,7 +79389,7 @@ tkr
 cSm
 cSm
 cSm
-pqI
+qJH
 cSk
 auJ
 jMZ
@@ -79899,7 +79899,7 @@ nWF
 nWF
 nWF
 nWF
-psy
+vEO
 cSm
 eeg
 wdr
@@ -80191,7 +80191,7 @@ qEt
 yhK
 lGL
 qEt
-bqC
+hSt
 cSm
 cSm
 cSm
@@ -81981,11 +81981,11 @@ qEt
 sCZ
 vNM
 wdr
-bqC
+hSt
 lXm
 jrY
 qEt
-bqC
+hSt
 wdr
 sCZ
 eOm
@@ -82738,7 +82738,7 @@ dIP
 nPf
 nKG
 qEt
-bqC
+hSt
 cSm
 cSm
 cSm
@@ -82746,7 +82746,7 @@ nKr
 cSm
 cSm
 cSm
-bqC
+hSt
 qEt
 fsb
 lWa
