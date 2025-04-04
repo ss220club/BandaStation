@@ -336,15 +336,18 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE)
 					SEND_SOUND(staff, sound('sound/misc/server-ready.ogg'))
 
 			if(GLOB.fax_autoprinting)
+				var/original_sent = FALSE
 				for(var/obj/machinery/fax/admin/FAX as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/fax/admin))
 					if(FAX.fax_id != params["id"])
 						continue
+					if(!original_sent)
+						original_sent=TRUE
+						FAX.receive(fax_paper, fax_name)
 					FAX.receive(fax_paper.copy(), fax_name) // BANDASTATION EDIT
 
 			log_fax(fax_paper, params["id"], params["name"])
 			loaded_item_ref = null
 			update_appearance()
-			qdel(fax_paper)
 
 		if("history_clear")
 			history_clear()
