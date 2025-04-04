@@ -11358,11 +11358,6 @@
 	dir = 1
 	},
 /area/station/engineering/atmos)
-"ecD" = (
-/obj/structure/marker_beacon/olive,
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/plating/lavaland_atmos,
-/area/lavaland/surface/outdoors)
 "ecO" = (
 /turf/open/floor/carpet,
 /area/station/service/library)
@@ -14386,8 +14381,8 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "fgn" = (
-/obj/effect/turf_decal/sand/plating/volcanic,
 /obj/structure/marker_beacon/olive,
+/obj/effect/turf_decal/sand/plating/volcanic,
 /turf/open/floor/plating/lavaland_atmos,
 /area/lavaland/surface/outdoors)
 "fgu" = (
@@ -43687,8 +43682,8 @@
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/aisat/exterior)
 "pqI" = (
-/obj/docking_port/stationary/escape_pod,
 /obj/effect/turf_decal/sand/plating/volcanic,
+/obj/structure/marker_beacon/olive,
 /turf/open/floor/plating/lavaland_atmos,
 /area/lavaland/surface/outdoors)
 "pqJ" = (
@@ -43833,6 +43828,11 @@
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/hos)
+"psy" = (
+/obj/docking_port/stationary/escape_pod,
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "psz" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
@@ -66222,7 +66222,7 @@
 /obj/item/nullrod/pride_hammer{
 	name = "Chemists bane";
 	chaplain_spawnable = 0;
-	color = white
+	color = "#FFFFFF"
 	},
 /turf/open/floor/iron/dark/textured_edge{
 	dir = 4
@@ -78871,7 +78871,7 @@ nWF
 nWF
 nWF
 nWF
-ecD
+fgn
 cSm
 eeg
 wdr
@@ -78883,7 +78883,7 @@ qEt
 qEt
 qEt
 qEt
-fgn
+pqI
 cSm
 cSm
 cSm
@@ -78891,7 +78891,7 @@ cSm
 cSm
 cSm
 cSm
-fgn
+pqI
 qEt
 qEt
 qEt
@@ -78906,7 +78906,7 @@ qEt
 qEt
 qEt
 qEt
-fgn
+pqI
 cSm
 cSm
 cSm
@@ -79155,9 +79155,9 @@ ndI
 nDP
 qEt
 cSm
-ecD
+fgn
 cSm
-ecD
+fgn
 cSm
 qEt
 jjS
@@ -79389,7 +79389,7 @@ tkr
 cSm
 cSm
 cSm
-pqI
+psy
 cSk
 auJ
 jMZ
@@ -79899,7 +79899,7 @@ nWF
 nWF
 nWF
 nWF
-ecD
+fgn
 cSm
 eeg
 wdr
@@ -80191,7 +80191,7 @@ qEt
 yhK
 lGL
 qEt
-fgn
+pqI
 cSm
 cSm
 cSm
@@ -81981,11 +81981,11 @@ qEt
 sCZ
 vNM
 wdr
-fgn
+pqI
 lXm
 jrY
 qEt
-fgn
+pqI
 wdr
 sCZ
 eOm
@@ -82738,7 +82738,7 @@ dIP
 nPf
 nKG
 qEt
-fgn
+pqI
 cSm
 cSm
 cSm
@@ -82746,7 +82746,7 @@ nKr
 cSm
 cSm
 cSm
-fgn
+pqI
 qEt
 fsb
 lWa
