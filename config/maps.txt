@@ -11,11 +11,15 @@ Format:
 	voteweight [number] (How much to count each player vote as, defaults to 1, setting to 0.5 counts each vote as half a vote, 2 as double, etc, Setting to 0 disables the map but allows players to still pick it)
 	disabled (disables the map)
 	votable (is this map votable)
-	feedbacklink (link in-game shown to players to leave feedback for the map)
-	webmap_url (link to the a webmap to see the map in the user's browser)
 endmap
 
 # Production-level maps.
+
+map birdshot
+	#default
+	maxplayers 66
+	votable
+endmap
 
 map deltastation
 	minplayers 50
@@ -31,8 +35,6 @@ map metastation
 	minplayers 25
 	#voteweight 0.5
 	votable
-	#feedbacklink https://www.youtube.com/watch?v=XG8b7WhANNA
-	#webmap_url https://webmap.affectedarc07.co.uk/maps/tgstation/metastation
 endmap
 
 map tramstation
@@ -40,9 +42,19 @@ map tramstation
 	votable
 endmap
 
-map cyberiad
-	maxplayers 100
+map nebulastation
+	minplayers 35
 	votable
+endmap
+
+map wawastation
+	votable
+	minplayers 40
+endmap
+
+map hotmeta
+	votable
+	min players 25
 endmap
 
 # Debug-only maps.
@@ -54,4 +66,11 @@ map multiz_debug
 endmap
 
 map runtimestation
+endmap
+
+# SS220 maps.
+
+map cyberiad
+	maxplayers 100
+	votable
 endmap
