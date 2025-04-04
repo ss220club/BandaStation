@@ -344,6 +344,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE)
 			log_fax(fax_paper, params["id"], params["name"])
 			loaded_item_ref = null
 			update_appearance()
+			qdel(fax_paper)
 
 		if("history_clear")
 			history_clear()

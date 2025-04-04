@@ -1752,6 +1752,7 @@
 			if(istype(loaded, /obj/item/paper))
 				var/obj/item/paper/doc = loaded
 				FAX.receive(doc.copy(), href_list["sender_name"])
+				qdel(doc)
 			else
 				FAX.receive(loaded, href_list["sender_name"])
 			// BANDASTATION EDIT END
