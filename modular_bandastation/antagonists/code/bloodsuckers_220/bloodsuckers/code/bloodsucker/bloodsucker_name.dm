@@ -36,7 +36,7 @@
 		)
 
 ///Returns a Title for the Bloodsucker.
-/datum/antagonist/bloodsucker/proc/SelectTitle(am_fledgling = 0, forced = FALSE)
+/datum/antagonist/bloodsucker/proc/SelectTitle(am_fledgling = FALSE, forced = FALSE)
 	// Already have Title
 	if(!forced && bloodsucker_title != null)
 		return
@@ -71,7 +71,7 @@
 	to_chat(owner, span_announce("You have earned a title! You are now known as <i>[return_full_name()]</i>!"))
 
 ///Returns a Reputation for the Bloodsucker.
-/datum/antagonist/bloodsucker/proc/SelectReputation(am_fledgling = FALSE, forced = FALSE)
+/datum/antagonist/bloodsucker/proc/SelectReputation(am_fledgling = FALSE, forced = FALSE, special = FALSE)
 	// Already have Reputation
 	if(!forced && bloodsucker_reputation != null)
 		return
@@ -104,7 +104,7 @@
 			"Broken",
 			"Fresh",
 		)
-	else if(owner.current.gender == MALE && prob(10))
+	else if(owner.current.gender == MALE && special)
 		bloodsucker_reputation = pick(
 			"King of the Damned",
 			"Blood King",
@@ -112,7 +112,7 @@
 			"Sinlord",
 			"God-King",
 		)
-	else if(owner.current.gender == FEMALE && prob(10))
+	else if(owner.current.gender == FEMALE && special)
 		bloodsucker_reputation = pick(
 			"Queen of the Damned",
 			"Blood Queen",

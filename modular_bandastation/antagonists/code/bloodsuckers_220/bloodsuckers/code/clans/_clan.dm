@@ -182,36 +182,53 @@
 	finalize_spend_rank(bloodsuckerdatum, cost_rank, blood_cost)
 
 /datum/bloodsucker_clan/proc/finalize_spend_rank(datum/antagonist/bloodsucker/source, cost_rank = TRUE, blood_cost)
-	bloodsuckerdatum.LevelUpPowers()
-	bloodsuckerdatum.bloodsucker_regen_rate += 0.5 // Требуется тестирование для более тонкой настройки
-	bloodsuckerdatum.max_blood_volume += 100
+	// Cache commonly used values to improve performance
+	var/mob/living/carbon/human/human_user = bloodsuckerdatum.owner.current
+	var/is_human = ishuman(human_user)
 
-	if(ishuman(bloodsuckerdatum.owner.current))
-		var/mob/living/carbon/human/human_user = bloodsuckerdatum.owner.current
+	// Level up powers and increase base stats
+	bloodsuckerdatum.LevelUpPowers()
+	bloodsuckerdatum.bloodsucker_regen_rate += 0.5 // Increase blood regeneration
+	bloodsuckerdatum.max_blood_volume += 100 // Increase maximum blood capacity
+
+	// Only apply physical changes if we're dealing with a human
+	if(is_human)
 		var/obj/item/bodypart/user_left_hand = human_user.get_bodypart(BODY_ZONE_L_ARM)
 		var/obj/item/bodypart/user_right_hand = human_user.get_bodypart(BODY_ZONE_R_ARM)
-		user_left_hand.unarmed_damage_low += 2 // Требуется тестирование для более тонкой настройки
-		user_right_hand.unarmed_damage_low += 2 // Требуется тестирование для более тонкой настройки
-		// This affects the hitting power of Brawn.
-		user_left_hand.unarmed_damage_high += 2 // Требуется тестирование для более тонкой настройки
-		user_right_hand.unarmed_damage_high += 2 // Требуется тестирование для более тонкой настройки
+		var/damage_increase = 2 // Define damage increase to avoid magic numbers
 
-	// We're almost done - Spend your Rank now.
+		// Increase both low and high damage for both hands
+		user_left_hand.unarmed_damage_low += damage_increase
+		user_right_hand.unarmed_damage_low += damage_increase
+		// This affects the hitting power of Brawn
+		user_left_hand.unarmed_damage_high += damage_increase
+		user_right_hand.unarmed_damage_high += damage_increase
+
+	// Handle rank progression
 	bloodsuckerdatum.bloodsucker_level++
 	if(cost_rank)
 		bloodsuckerdatum.bloodsucker_level_unspent--
 	if(blood_cost)
 		bloodsuckerdatum.AddBloodVolume(-blood_cost)
 
-	// Ranked up enough to get your true Reputation?
-	if(bloodsuckerdatum.bloodsucker_level == 4)
+	// Check if we've reached level 5 for reputation
+	if(bloodsuckerdatum.bloodsucker_level == 5)
 		bloodsuckerdatum.SelectReputation(am_fledgling = FALSE, forced = TRUE)
 
+	if(bloodsuckerdatum.bloodsucker_level == 10)
+		bloodsuckerdatum.SelectTitle(forced = TRUE)
 
-	to_chat(bloodsuckerdatum.owner.current, span_notice("You are now a rank [bloodsuckerdatum.bloodsucker_level] Bloodsucker. \
-		Your strength, health, feed rate, regen rate, and maximum blood capacity have all increased! \n\
-		* Your existing powers have all ranked up as well!"))
-	bloodsuckerdatum.owner.current.playsound_local(null, 'sound/effects/pope_entry.ogg', 25, TRUE, pressure_affected = FALSE)
+	if(bloodsuckerdatum.bloodsucker_level == 20)
+		bloodsuckerdatum.SelectReputation(forced = TRUE, special = TRUE)
+
+	// Only show messages if we have a valid human mob
+	if(is_human)
+		to_chat(human_user, span_notice("You are now a rank [bloodsuckerdatum.bloodsucker_level] Bloodsucker. \
+			Your strength, health, feed rate, regen rate, and maximum blood capacity have all increased! \n\
+			* Your existing powers have all ranked up as well!"))
+		human_user.playsound_local(null, 'sound/effects/pope_entry.ogg', 25, TRUE, pressure_affected = FALSE)
+
+	// Update HUD to reflect changes
 	bloodsuckerdatum.update_hud()
 
 /**

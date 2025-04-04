@@ -5,7 +5,7 @@
 
 #include "code/_defines/antagonist_blood.dm"
 #include "code/_globalvars/antagonist_blood.dm"
-#include "code/bloodsuckers_220/bloodsuckers/code/job_edit_curator.dm"
+#include "code/bloodsuckers_220/bloodsuckers/code/job_edit_blood_sucker.dm"
 #include "code/bloodsuckers_220/world.dm"
 #include "code/bloodsuckers_220/bloodsuckers/rulesets.dm"
 #include "code/bloodsuckers_220/bloodsuckers/code/assets/bloodsucker_assets.dm"
