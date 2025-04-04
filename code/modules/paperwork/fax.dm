@@ -340,7 +340,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE)
 
 					if(FAX.fax_id != params["id"])
 						continue
-					FAX.receive(fax_paper, fax_name)
+					FAX.receive(fax_paper.copy(), fax_name) // BANDASTATION EDIT
 
 			log_fax(fax_paper, params["id"], params["name"])
 			loaded_item_ref = null
