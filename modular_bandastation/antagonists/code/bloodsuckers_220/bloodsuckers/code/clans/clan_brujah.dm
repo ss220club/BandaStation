@@ -1,14 +1,14 @@
 /datum/bloodsucker_clan/brujah
 	name = CLAN_BRUJAH
-	description = "The Brujah seek societal advancement through direct (and usually violent) means.\n\
-		With age they develop a powerful physique and become capable of obliterating almost anything with their bare hands.\n\
-		Be wary, as they are ferverous insurgents, rebels, and anarchists who always attempt to undermine local authorities. \n\
-		Their favorite vassal gains the regular Brawn ability and substantially strengthened fists."
+	description =  "Бруджа стремятся к захвату власти прямыми (и, как правило, насильственными) средствами.\n\
+		С возрастом они приобретают мощное телосложение и становятся способными уничтожить практически все голыми руками.\n\
+		С ними следует быть острожонее, так как это ярые повстанцы, бунтовщики и анархисты, которые всегда пытаются подорвать авторитет местных властей. \n\
+		Их любимый вассал получает частичку их необычайной физической силы в виде  the regular Brawn ability, а его кулаки становятся смертоносным оружием."
 	clan_objective = /datum/objective/brujah_clan_objective
-	join_icon_state = "brujah"
-	join_description = "Gain an enhanced version of the brawn ability that lets you destroy most structures (including walls!) \
-		Rebel against all authority and attempt to subvert it, but in turn <b>break the Masquerade immediately on joining</b>  \
-		and lose nearly all of your Humanity."
+	join_icon_state = "Бруджа"
+	join_description = "Вы получите улучшенную версию способности the brawn, которая позволит вам разрушать большинство сооружений (включая стены!) \
+		Восстаньте против власти и попытайся ниспровергнуть её, но, в свою очредь, вы <b>немедленно прекратите маскарад присоединившиь к нам</b>  \
+		и потеряете почти всю свою человечность."
 	blood_drink_type = BLOODSUCKER_DRINK_INHUMANELY
 
 
@@ -27,10 +27,10 @@
 	// Give them a quick warning about losing humanity on ranking up before actually ranking them up...
 	var/mob/living/carbon/human/our_antag = source.owner.current
 	var/warning_accepted = tgui_alert(our_antag, \
-		"Since you are part of the Brujah clan, increasing your rank will also decrease your humanity. \n\
-		This will increase your current Frenzy threshold from [source.frenzy_threshold] to \
-		[source.frenzy_threshold + 50]. Please ensure that you have enough blood available or risk entering Frenzy.", \
-		"BE ADVISED", \
+		"Поскольку вы являетесь частью клана Бруджа, повышение вашего ранга также уменьшит вашу человечность. \n\
+		Это увеличит ваш текущий порог вхождения в  безумие с  [source.frenzy_threshold] до \
+		[source.frenzy_threshold + 50]. Пожалуйста, убедитесь, что у вас достаточно крови, иначе вы рискуете впасть в безумие.", \
+		"ИМЕЙТЕ ЭТО В ВИДУ", \
 		list("Accept Warning", "Abort Ranking Up"))
 	if(warning_accepted != "Accept Warning")
 		return FALSE
@@ -77,8 +77,8 @@
 
 /datum/objective/brujah_clan_objective/update_explanation_text()
 	if(target?.current)
-		explanation_text = "Subvert the authority of [target.name] the [!target_role_type ? target.assigned_role.title : target.special_role] \
-			by turning [target.p_them()] into a Discordant Vassal with a persuassion rack."
+		explanation_text = "Подорвите авторитет [target.name] в роли [!target_role_type ? target.assigned_role.title : target.special_role] \
+			превратив [target.p_them()] в Анархичного вассала на стойке для убеждения."
 	else
 		explanation_text = "Free objective."
 
