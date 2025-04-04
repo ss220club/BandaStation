@@ -3876,6 +3876,11 @@
 	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
+"bqC" = (
+/obj/effect/turf_decal/sand/plating/volcanic,
+/obj/structure/marker_beacon/olive,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "bqJ" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -14380,11 +14385,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
-"fgn" = (
-/obj/effect/turf_decal/sand/plating/volcanic,
-/obj/structure/marker_beacon/olive,
-/turf/open/floor/plating/lavaland_atmos,
-/area/lavaland/surface/outdoors)
 "fgu" = (
 /obj/machinery/light/directional/south,
 /obj/effect/spawner/random/vending/colavend,
@@ -35495,11 +35495,6 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
-"myZ" = (
-/obj/docking_port/stationary/escape_pod,
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/plating/lavaland_atmos,
-/area/lavaland/surface/outdoors)
 "mzg" = (
 /obj/structure/cable,
 /obj/effect/turf_decal/siding/red,
@@ -43687,7 +43682,7 @@
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/aisat/exterior)
 "pqI" = (
-/obj/structure/marker_beacon/olive,
+/obj/docking_port/stationary/escape_pod,
 /obj/effect/turf_decal/sand/plating/volcanic,
 /turf/open/floor/plating/lavaland_atmos,
 /area/lavaland/surface/outdoors)
@@ -43833,6 +43828,11 @@
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/hos)
+"psy" = (
+/obj/structure/marker_beacon/olive,
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "psz" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
@@ -78871,7 +78871,7 @@ nWF
 nWF
 nWF
 nWF
-pqI
+psy
 cSm
 eeg
 wdr
@@ -78883,7 +78883,7 @@ qEt
 qEt
 qEt
 qEt
-fgn
+bqC
 cSm
 cSm
 cSm
@@ -78891,7 +78891,7 @@ cSm
 cSm
 cSm
 cSm
-fgn
+bqC
 qEt
 qEt
 qEt
@@ -78906,7 +78906,7 @@ qEt
 qEt
 qEt
 qEt
-fgn
+bqC
 cSm
 cSm
 cSm
@@ -79155,9 +79155,9 @@ ndI
 nDP
 qEt
 cSm
-pqI
+psy
 cSm
-pqI
+psy
 cSm
 qEt
 jjS
@@ -79389,7 +79389,7 @@ tkr
 cSm
 cSm
 cSm
-myZ
+pqI
 cSk
 auJ
 jMZ
@@ -79899,7 +79899,7 @@ nWF
 nWF
 nWF
 nWF
-pqI
+psy
 cSm
 eeg
 wdr
@@ -80191,7 +80191,7 @@ qEt
 yhK
 lGL
 qEt
-fgn
+bqC
 cSm
 cSm
 cSm
@@ -81981,11 +81981,11 @@ qEt
 sCZ
 vNM
 wdr
-fgn
+bqC
 lXm
 jrY
 qEt
-fgn
+bqC
 wdr
 sCZ
 eOm
@@ -82738,7 +82738,7 @@ dIP
 nPf
 nKG
 qEt
-fgn
+bqC
 cSm
 cSm
 cSm
@@ -82746,7 +82746,7 @@ nKr
 cSm
 cSm
 cSm
-fgn
+bqC
 qEt
 fsb
 lWa
