@@ -520,14 +520,8 @@ SUBSYSTEM_DEF(gamemode)
 	return can_run
 
 /datum/controller/subsystem/gamemode/proc/get_sec_mult()
-	var/sec_mult = 1
 	var/antag_cap = get_antag_cap()
-	if(antag_cap)
-		var/antag_count = get_antag_count()
-		sec_mult = 2 - (antag_count / antag_cap)
-	else
-		sec_mult = 0
-	return sec_mult
+	return antag_cap > 0 ? (2 - (get_antag_count() / antag_cap)) : 0
 
 /datum/controller/subsystem/gamemode/proc/update_pop_scaling()
 	for(var/track in event_tracks)
