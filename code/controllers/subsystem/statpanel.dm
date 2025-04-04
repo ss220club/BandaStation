@@ -30,8 +30,8 @@ SUBSYSTEM_DEF(statpanels)
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 			"Players Connected: [LAZYLEN(GLOB.clients)]", // BANDASTATION ADD
 			"Players in Lobby: [LAZYLEN(GLOB.new_player_list)]", // BANDASTATION ADD
-			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
-			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [STATION_TIME_PASSED() > MIDNIGHT_ROLLOVER ? "[round(STATION_TIME_PASSED() / MIDNIGHT_ROLLOVER)]:[gameTimestamp(wtime = STATION_TIME_PASSED(), timezone = 0)]" : gameTimestamp(wtime = STATION_TIME_PASSED(), timezone = 0)]", // BANDASTATION ADDITION - timezone
+			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
+			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [ROUND_TIME()]", // BANDASTATION ADD
 			"Station Time: [station_time_timestamp()]",
 			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"
 		)
@@ -104,14 +104,10 @@ SUBSYSTEM_DEF(statpanels)
 			return
 
 /datum/controller/subsystem/statpanels/proc/set_status_tab(client/target)
-#if MIN_COMPILER_VERSION > 515
-	#warn 516 is most certainly out of beta, remove this beta notice if you haven't already
-#endif
-	var/static/list/beta_notice = list("", "You are on BYOND 516, some visual glitches with UIs may be present!", "Please report issues, and switch back to BYOND 515 if things are causing too many issues for you.")
 	if(!global_data)//statbrowser hasnt fired yet and we were called from immediate_send_stat_data()
 		return
 	target.stat_panel.send_message("update_stat", list(
-		"global_data" = (target.byond_version < 516) ? global_data : (global_data + beta_notice),
+		"global_data" = global_data,
 		"ping_str" = "Ping: [round(target.lastping, 1)]ms (Average: [round(target.avgping, 1)]ms)",
 		"other_str" = target.mob?.get_status_tab_items(),
 	))

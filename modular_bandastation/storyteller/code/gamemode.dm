@@ -5,6 +5,7 @@
 #define MAX_POP_FOR_STORYTELLER_VOTE 25
 ///the duration into the round for which roundstart events are still valid to run
 #define ROUNDSTART_VALID_TIMEFRAME 3 MINUTES
+#define STATION_REPORT_TEMPLATE_PATH "modular_bandastation/storyteller/templates/station_report.md"
 
 SUBSYSTEM_DEF(gamemode)
 	name = "Gamemode"
@@ -176,13 +177,10 @@ SUBSYSTEM_DEF(gamemode)
 		storytellers[type] = new type()
 
 	for(var/datum/round_event_control/event_type as anything in typesof(/datum/round_event_control))
-		if(!event_type::typepath || !event_type::name)
-			continue
-
 		var/datum/round_event_control/event = new event_type
-		if(!event.valid_for_map())
-			qdel(event)
+		if(!event_type.name || !event.typepath || !event.valid_for_map())
 			continue // event isn't good for this map no point in trying to add it to the list
+
 		control += event //add it to the list of all events (controls)
 
 	load_config_vars()
@@ -623,7 +621,7 @@ SUBSYSTEM_DEF(gamemode)
 			)
 			query_round_game_mode.Execute()
 			qdel(query_round_game_mode)
-	SSstation.generate_station_goals(INFINITY)
+	SSstation.generate_station_goals(CONFIG_GET(number/station_goal_budget))
 	if(report)
 		generate_station_goal_report()
 	handle_post_setup_roundstart_events()
@@ -655,41 +653,70 @@ SUBSYSTEM_DEF(gamemode)
 		addtimer(CALLBACK(src, PROC_REF(generate_station_goal_report)), 10 SECONDS)
 		return
 
-	. = "<b><i>Департамент разведки и оценки угроз Nanotrasen, Текущий сектор, Дата и время: [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]:</i></b><hr>"
-	//. += SSdynamic.generate_advisory_level() - генерация псевдо-орбит
+	if(!fexists(STATION_REPORT_TEMPLATE_PATH))
+		stack_trace("station report template doesn't exist at path: [STATION_REPORT_TEMPLATE_PATH]")
+		return
+
+	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
+	if(!station_report_template)
+		stack_trace("station report template doesn't is empty at path: [STATION_REPORT_TEMPLATE_PATH]")
+		return
 
 	var/list/datum/station_goal/goals = SSstation.get_station_goals()
+	var/station_goals_section = ""
 	if(length(goals))
-		var/list/texts = list("<hr><b>Особые заказы для станции: [station_name()]:</b><br>")
+		var/list/station_goal_reports = list()
 		for(var/datum/station_goal/station_goal as anything in goals)
 			station_goal.on_report()
-			texts += station_goal.get_report()
-		. += texts.Join("<hr>")
+			station_goal_reports += station_goal.get_report()
 
-	var/list/trait_list_strings = list()
+		station_goals_section = list(
+			"# === Цели на смену ===\n",
+			station_goal_reports.Join("\n\n---\n\n"),
+		).Join()
+
+	station_report_template = replacetext(station_report_template, "%STATION_GOALS", station_goals_section);
+
+	var/list/trait_reports = list()
 	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
 		if(!station_trait.show_in_report)
 			continue
-		trait_list_strings += "[station_trait.get_report()]<BR>"
-	if(trait_list_strings.len > 0)
-		. += "<hr><b>Отчет отдела учета отклонений:</b><BR>" + trait_list_strings.Join()
 
+		trait_reports += "- [station_trait.get_report()]"
+
+	var/trait_reports_sections = ""
+	if(length(trait_reports))
+		trait_reports_sections = list(
+			"\n\n---\n\n",
+			"# === Обнаруженные отклонения ===\n",
+			trait_reports.Join("\n")
+		).Join()
+
+	station_report_template = replacetext(station_report_template, "%TRAIT_REPORTS", trait_reports_sections);
+
+	var/footnote_section = ""
 	if(length(GLOB.communications_controller.command_report_footnotes))
-		var/footnote_pile = ""
-
+		var/list/footnotes = list()
 		for(var/datum/command_footnote/footnote in GLOB.communications_controller.command_report_footnotes)
-			footnote_pile += "[footnote.message]<BR>"
-			footnote_pile += "<i>[footnote.signature]</i><BR>"
-			footnote_pile += "<BR>"
+			footnotes += "[footnote.message]<BR>"
+			footnotes += "<i>[footnote.signature]</i><BR>"
+			footnotes += "<BR>"
 
-		. += "<hr><b>Дополнительная информация: </b><BR><BR>" + footnote_pile
+		footnote_section = list(
+			"\n\n---\n\n",
+			"# === Дополнительная информация ===\n",
+			footnotes.Join()
+		).Join()
+
+	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section);
+	station_report_template = replacetext(station_report_template, "%SIGNING_OFFICER", "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]");
+
+	station_report_template = replace_text_keys(station_report_template)
 
 #ifndef MAP_TEST
-	print_command_report(., "[command_name()] Status Summary", announce=FALSE)
+	print_command_report(station_report_template, "[command_name()] Status Summary", announce=FALSE)
 	priority_announce("Отчет был скопирован и распечатан на всех консолях связи.", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound())
 #endif
-
-	return .
 
 /datum/controller/subsystem/gamemode/proc/recalculate_ready_pop()
 	ready_players = 0
@@ -868,21 +895,6 @@ SUBSYSTEM_DEF(gamemode)
 				break
 
 	return valid_events
-
-/*
- * Generate a list of active station traits to report to the crew.
- *
- * Returns a formatted string of all station traits (that are shown) affecting the station.
- */
-/datum/controller/subsystem/gamemode/proc/generate_station_trait_report()
-	if(!SSstation.station_traits.len)
-		return
-	. = "<hr><b>Identified shift divergencies:</b><BR>"
-	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
-		if(!station_trait.show_in_report)
-			continue
-		. += "[station_trait.get_report()]<BR>"
-	return
 
 //////////////////////////
 //Reports player logouts//
@@ -1585,3 +1597,4 @@ SUBSYSTEM_DEF(gamemode)
 #undef DEFAULT_STORYTELLER_VOTE_OPTIONS
 #undef MAX_POP_FOR_STORYTELLER_VOTE
 #undef ROUNDSTART_VALID_TIMEFRAME
+#undef STATION_REPORT_TEMPLATE_PATH

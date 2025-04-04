@@ -3477,13 +3477,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/marked@npm:4.3.2":
-  version: 4.3.2
-  resolution: "@types/marked@npm:4.3.2"
-  checksum: 10c0/6f44d28da5c940a719d6c6aca41e33f49c5fe957f7972939cc1cbb47d045951f4d969f382d655345d0463e47db1994635d2862018716fcef2fa85ceeceb116e7
-  languageName: node
-  linkType: hard
-
 "@types/minimatch@npm:*":
   version: 5.1.2
   resolution: "@types/minimatch@npm:5.1.2"
@@ -13264,12 +13257,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "marked@npm:4.3.0"
+"marked-base-url@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "marked-base-url@npm:1.1.6"
+  peerDependencies:
+    marked: ">= 4 < 16"
+  checksum: 10c0/346b8f3a912ab5192caec896d8e923b83113f81312eb4838ec9773aca620088cd3ed4d9fce773f3251d71c72f271c3df8554f025c1146cea3e76845b29e5be42
+  languageName: node
+  linkType: hard
+
+"marked-smartypants@npm:^1.1.9":
+  version: 1.1.9
+  resolution: "marked-smartypants@npm:1.1.9"
+  dependencies:
+    smartypants: "npm:^0.2.2"
+  peerDependencies:
+    marked: ">=4 <16"
+  checksum: 10c0/50a9f9ddeb67045933c26abdd8acf997368d96920990048b6d432c4d2374a513152c639b46c16c74934483b7a1df6093f8f26461f2409b9bf1e58f8ac759391f
+  languageName: node
+  linkType: hard
+
+"marked@npm:^15.0.7":
+  version: 15.0.7
+  resolution: "marked@npm:15.0.7"
   bin:
     marked: bin/marked.js
-  checksum: 10c0/0013463855e31b9c88d8bb2891a611d10ef1dc79f2e3cbff1bf71ba389e04c5971298c886af0be799d7fa9aa4593b086a136062d59f1210b0480b026a8c5dc47
+  checksum: 10c0/0b9d07bace37bbf0548bae356c4184765afa4d2296ed0be4418aa4bb0ce703f323dc1a475125d536581f9fe264797e6265dd0b57499d97c0fe0f29bc6d016343
   languageName: node
   linkType: hard
 
@@ -17663,6 +17676,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"smartypants@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "smartypants@npm:0.2.2"
+  bin:
+    smartypants: bin/smartypants.js
+    smartypantsu: bin/smartypantsu.js
+  checksum: 10c0/29b46df6acaed9ad6271624e26e055d6360c9da7f79433b7a83ebd40b50bd6b554d8f3793932f42be07e5badce889f547c89378fda77cb1f935b09a902c4527b
+  languageName: node
+  linkType: hard
+
 "snake-case@npm:^3.0.4":
   version: 3.0.4
   resolution: "snake-case@npm:3.0.4"
@@ -18740,17 +18763,17 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     tgui: "workspace:*"
-    tgui-core: "npm:^1.8.1"
+    tgui-core: "npm:^1.8.4"
   languageName: unknown
   linkType: soft
 
-"tgui-core@npm:^1.8.1":
-  version: 1.8.1
-  resolution: "tgui-core@npm:1.8.1"
+"tgui-core@npm:^1.8.4":
+  version: 1.8.4
+  resolution: "tgui-core@npm:1.8.4"
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 10c0/ae0bc55f177d98849b60beba413c2a8358ba3062166a851c2399a2d5dee76d7ebd7f72accc0481e30fa6d772358ba4031cd65f5963eb8c22034674a766cd4d4d
+  checksum: 10c0/90ab01ef064688a76cbb7179935ddba87c734df7da8c0ef3bc897d55d15b2b0d71486b07dedf93281d1abbab05e04cfa0e69f2bfa7f054c6a16913d9acea433c
   languageName: node
   linkType: hard
 
@@ -18778,7 +18801,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     tgui: "workspace:*"
-    tgui-core: "npm:^1.8.1"
+    tgui-core: "npm:^1.8.4"
     tgui-dev-server: "workspace:*"
     tgui-polyfill: "workspace:*"
   languageName: unknown
@@ -18805,7 +18828,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     tgui: "workspace:*"
-    tgui-core: "npm:^1.8.1"
+    tgui-core: "npm:^1.8.4"
     tgui-polyfill: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -18854,7 +18877,6 @@ __metadata:
   resolution: "tgui@workspace:packages/tgui"
   dependencies:
     "@popperjs/core": "npm:^2.11.8"
-    "@types/marked": "npm:4.3.2"
     "@types/react": "npm:^18.3.12"
     blob-polyfill: "npm:^9.0.20240710"
     common: "workspace:*"
@@ -18864,12 +18886,14 @@ __metadata:
     highlight.js: "npm:^11.10.0"
     jest: "npm:^29.7.0"
     js-yaml: "npm:^4.1.0"
-    marked: "npm:^4.3.0"
+    marked: "npm:^15.0.7"
+    marked-base-url: "npm:^1.1.6"
+    marked-smartypants: "npm:^1.1.9"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-popper: "npm:^2.3.0"
     react-zoom-pan-pinch: "npm:^3.7.0"
-    tgui-core: "npm:^1.8.1"
+    tgui-core: "npm:^1.8.4"
     tgui-dev-server: "workspace:*"
     tgui-polyfill: "workspace:*"
     usehooks-ts: "npm:^3.1.1"
