@@ -4,6 +4,7 @@ SUBSYSTEM_DEF(atoms)
 		/datum/controller/subsystem/processing/reagents,
 		/datum/controller/subsystem/fluids,
 		/datum/controller/subsystem/mapping,
+		/datum/controller/subsystem/automapper, // BANDASTATION ADDITION - AUTOMAPPER
 		/datum/controller/subsystem/job
 	)
 	flags = SS_NO_FIRE

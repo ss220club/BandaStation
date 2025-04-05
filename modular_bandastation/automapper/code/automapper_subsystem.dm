@@ -15,8 +15,7 @@
 SUBSYSTEM_DEF(automapper)
 	name = "Automapper"
 	dependencies = list(
-		/datum/controller/subsystem/atoms,
-		/datum/controller/subsystem/automapper
+		/datum/controller/subsystem/mapping
 	)
 	flags = SS_NO_FIRE
 	/// The path to our TOML file
