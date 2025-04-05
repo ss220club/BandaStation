@@ -76,6 +76,9 @@
 #define COMSIG_MOB_MIND_TRANSFERRED_OUT_OF "mob_mind_transferred_out_of"
 /// From /mob/proc/ghostize() Called when a mob successfully ghosts
 #define COMSIG_MOB_GHOSTIZED "mob_ghostized"
+// BANDASTATION ADD START - SSD INDICATOR
+#define COMSIG_MOB_ADMIN_GHOSTED "mod_admin_ghosted"
+// BANDASTATION ADD END - SSD INDICATOR
 /// can_roll_midround(datum/antagonist/antag_type) from certain midround rulesets, (mob/living/source, datum/mind/mind, datum/antagonist/antagonist)
 #define COMSIG_MOB_MIND_BEFORE_MIDROUND_ROLL "mob_mind_transferred_out_of"
 	#define CANCEL_ROLL (1<<1)
