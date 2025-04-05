@@ -1,0 +1,38 @@
+#define SURGFAIL_LIGHT_AMOUNT_REQUERED 0.6
+#define SURGFAIL_LIGHT_AMOUNT_MULTIPLIER 20
+#define SURGFAIL_NO_PAINKILLER 70
+#define BASIC_SURGERY_SUCCESS_CHANCE 100
+#define CRITICAL_SUCCESS_CHANCE 100
+
+
+/datum/surgery_step/proc/get_failure_probability(mob/living/user, mob/living/target, target_zone, obj/item/tool, var/modded_time)
+	var/success_prob = implement_type ? implements[implement_type] : BASIC_SURGERY_SUCCESS_CHANCE
+	var/obj/item/clothing/glasses/eyehud = user.get_item_by_slot(ITEM_SLOT_EYES)
+	var/is_nvg = eyehud?.color_cutoffs
+	//Проверить конечность - чекнуть что не робо
+	var/obj/item/bodypart/target_part = target.get_bodypart(target_zone)
+	if (!is_nvg || !length(is_nvg))
+		var/turf/target_turf = get_turf(target)
+		var/light_amount = target_turf.get_lumcount()
+		if (light_amount < SURGFAIL_LIGHT_AMOUNT_REQUERED)
+			success_prob -= (SURGFAIL_LIGHT_AMOUNT_REQUERED - clamp(light_amount, 0, SURGFAIL_LIGHT_AMOUNT_REQUERED)) * SURGFAIL_LIGHT_AMOUNT_MULTIPLIER
+	if(!(target_part.bodytype & BODYTYPE_ROBOTIC))
+		if (!(target.stat == UNCONSCIOUS || target.IsSleeping() || target.stat == DEAD || HAS_TRAIT(target, TRAIT_ANALGESIA)))
+			success_prob -= SURGFAIL_NO_PAINKILLER
+	var/fail_prob = clamp(CRITICAL_SUCCESS_CHANCE - success_prob, 0, 100)
+
+	return fail_prob
+
+#undef SURGFAIL_LIGHT_AMOUNT_REQUERED
+#undef SURGFAIL_LIGHT_AMOUNT_MULTIPLIER
+#undef SURGFAIL_NO_PAINKILLER
+#undef BASIC_SURGERY_SUCCESS_CHANCE
+#undef CRITICAL_SUCCESS_CHANCE
+
+/datum/status_effect/grouped/stasis/on_apply()
+	. = ..()
+	owner.add_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
+
+/datum/status_effect/grouped/stasis/on_remove()
+	. = ..()
+	owner.remove_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
