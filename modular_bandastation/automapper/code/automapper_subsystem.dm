@@ -14,9 +14,6 @@
 
 SUBSYSTEM_DEF(automapper)
 	name = "Automapper"
-	dependencies = list(
-		/datum/controller/subsystem/mapping
-	)
 	flags = SS_NO_FIRE
 	/// The path to our TOML file
 	var/config_file = "_maps/bandastation/automapper/automapper_config.toml"
