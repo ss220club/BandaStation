@@ -2,7 +2,7 @@
 /obj/item/guardian_creator/spawn_guardian(mob/living/user, mob/dead/candidate)
 	var/list/guardians = user.get_all_linked_holoparasites()
 	if(length(guardians) && !allow_multiple)
-		to_chat(user, span_holoparasite("You already have a [mob_name]!"))
+		to_chat(user, span_holoparasite("У вас уже есть [mob_name]!"))
 		used = FALSE
 		return
 	if(IS_BLOODSUCKER(user))
@@ -12,7 +12,7 @@
 		bloodsucker_guardian.key = candidate.key
 		user.log_message("has summoned [key_name(bloodsucker_guardian)], a [bloodsucker_guardian.creator_name] holoparasite.", LOG_GAME)
 		bloodsucker_guardian.log_message("was summoned as a [bloodsucker_guardian.creator_name] holoparasite.", LOG_GAME)
-		to_chat(user, "...And draw... The World, through sheer luck or perhaps destiny, maybe even your own physiology. Manipulator of time, a guardian powerful enough to control THE WORLD!")
+		to_chat(user, "Голопаразит изменяется, благодаря чистой случайности или, возможно, судьбе, а может быть, даже из-за особенностей вашей собственной физиологии. Он становится манипулятором времени, стражом, достаточно могущественным, чтобы управлять МИРОМ!")
 		to_chat(user, replacetext(success_message, "%GUARDIAN", mob_name))
 		bloodsucker_guardian.client?.init_verbs()
 		return
@@ -28,9 +28,9 @@
 	damage_coeff = list(BRUTE = 0.5, BURN = 2.5, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
 
 	creator_name = "Timestop"
-	creator_desc = "Devastating close combat attacks and high damage resistance. Can smash through weak walls and stop time."
+	creator_desc = "Разрушительные атаки в ближнем бою и высокая устойчивость к урону. Может пробивать не укреплённые стены и останавливать время."
 	creator_icon = "standard"
-	playstyle_string = span_holoparasite("As a <b>time manipulation</b> type you can stop time. You have a damage multiplier instead of armor as well as powerful melee attacks capable of smashing through walls.")
+	playstyle_string = span_holoparasite("В качестве представителя типа <b>манипуляции временем</b> вы обладаете способностью остановить время. Вместо брони у вас имеется множитель урона, а также мощные атаки ближнего боя, способные разрушать стены.")
 
 /mob/living/basic/guardian/standard/timestop/set_summoner(mob/living/to_who, different_person = FALSE)
 	. = ..()
@@ -41,8 +41,8 @@
 ///Guardian Timestop ability
 /datum/action/cooldown/spell/timestop/guardian
 	name = "Guardian Timestop"
-	desc = "This spell stops time for everyone except for you and your master, \
-		allowing you to move freely while your enemies and even projectiles are frozen."
+	desc = "Это заклинание останавливает время для всех, кроме вас и вашего хозяина, \
+		позволяя вам свободно передвигаться, в то время как ваши враги и даже снаряды заморожены."
 	cooldown_time = 60 SECONDS
 	spell_requirements = NONE
 	invocation_type = INVOCATION_NONE

@@ -29,7 +29,7 @@
 /// Prevents using a Memento Mori
 /obj/item/clothing/neck/necklace/memento_mori/memento(mob/living/carbon/human/user)
 	if(IS_BLOODSUCKER(user))
-		to_chat(user, span_warning("The Memento notices your undead soul, and refuses to react.."))
+		to_chat(user, span_warning("Мементо Мори замечает вашу осквернённую душу и отказывается реагировать..."))
 		return
 	return ..()
 
