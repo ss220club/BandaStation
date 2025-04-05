@@ -7,6 +7,9 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	. = ..()
 	if(!isliving(target))
 		return ELEMENT_INCOMPATIBLE
+	if(istype(target, /mob/living/silicon/robot/shell))
+		Detach(target)
+		return
 	RegisterSignal(target, COMSIG_MOB_LOGOUT, PROC_REF(on_mob_logout))
 	RegisterSignal(target, COMSIG_MOB_LOGIN, PROC_REF(on_mob_login))
 	RegisterSignal(target, COMSIG_LIVING_DEATH, PROC_REF(on_mob_death))
@@ -16,6 +19,8 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 
 /datum/element/ssd/Detach(datum/source, ...)
 	. = ..()
+	if(istype(source, /mob/living/silicon/robot/shell))
+		return
 	UnregisterSignal(source, COMSIG_MOB_LOGIN)
 	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
 	UnregisterSignal(source, COMSIG_LIVING_DEATH)
