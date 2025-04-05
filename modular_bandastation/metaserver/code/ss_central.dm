@@ -10,9 +10,11 @@
 	default = "default"
 
 SUBSYSTEM_DEF(central)
-	var/list/discord_links = list()
-	init_order = INIT_ORDER_DBCORE
+	dependencies = list(
+		/datum/controller/subsystem/dbcore
+	)
 	flags = SS_NO_FIRE
+	var/list/discord_links = list()
 
 /datum/controller/subsystem/central/vv_edit_var(var_name, var_value)
 	return FALSE

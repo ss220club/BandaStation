@@ -3,7 +3,8 @@ SUBSYSTEM_DEF(mapping)
 	dependencies = list(
 		/datum/controller/subsystem/job,
 		/datum/controller/subsystem/processing/station,
-		/datum/controller/subsystem/processing/reagents
+		/datum/controller/subsystem/processing/reagents,
+		/datum/controller/subsystem/automapper // SS220 ADDITION - AUTOMAPPER
 	)
 	runlevels = ALL
 
