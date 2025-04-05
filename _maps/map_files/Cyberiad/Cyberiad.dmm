@@ -1627,10 +1627,11 @@
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance)
 "avD" = (
-/obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_n3"
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "avG" = (
@@ -3635,12 +3636,17 @@
 "aTm" = (
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
+"aTq" = (
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external/glass{
+	id_tag = "airlock_exterior_1f_w1"
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
 "aTr" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
@@ -7677,10 +7683,11 @@
 "bRL" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "bRM" = (
@@ -7759,6 +7766,16 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/auxiliary)
+"bSF" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_n1";
+	idSelf = "airlock_control_2f_n1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/starboard/fore)
 "bSG" = (
 /obj/machinery/airalarm/directional/north,
 /obj/structure/closet/secure_closet/freezer,
@@ -9830,6 +9847,16 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical/ghetto)
+"csm" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_w2";
+	idSelf = "airlock_control_2f_w2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/port/aft)
 "csp" = (
 /obj/item/clothing/shoes/magboots{
 	pixel_y = 6
@@ -10092,6 +10119,16 @@
 	},
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
+"cvu" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_e3";
+	idSelf = "airlock_control_1f_e3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -4
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard/aft)
 "cvB" = (
 /obj/effect/turf_decal/siding/wood/end,
 /obj/effect/turf_decal/siding/dark/corner{
@@ -10573,11 +10610,12 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/engineering/atmos)
 "cBx" = (
-/obj/machinery/door/airlock/external,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_n3"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port/fore)
 "cBA" = (
@@ -10761,11 +10799,10 @@
 /turf/open/floor/iron,
 /area/station/security/prison/ghetto)
 "cDZ" = (
-/obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_n3"
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
@@ -10925,12 +10962,13 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "cFS" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "cFX" = (
@@ -12418,9 +12456,15 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "cXa" = (
-/obj/structure/sign/warning/vacuum/directional/south,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/starboard/aft)
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_w3";
+	idSelf = "airlock_control_2f_w3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/atmos)
 "cXd" = (
 /obj/machinery/light/directional/north,
 /obj/effect/spawner/random/vending/colavend,
@@ -14406,13 +14450,12 @@
 /turf/open/floor/wood,
 /area/station/service/library)
 "dtU" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_s2"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
 "dtX" = (
@@ -17562,6 +17605,10 @@
 /obj/effect/turf_decal/tile/purple/half/contrasted,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
+"ejg" = (
+/obj/machinery/light/directional/south,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/aft)
 "ejh" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/table,
@@ -17849,6 +17896,18 @@
 /obj/effect/turf_decal/stripes/corner,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/ghetto)
+"emT" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_n3";
+	idInterior = "airlock_interior_1f_n3";
+	idSelf = "airlock_control_1f_n3";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_n3";
+	pixel_x = -4
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/fore/starboard)
 "emW" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
@@ -18676,6 +18735,16 @@
 /obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron,
 /area/station/security/office)
+"ezY" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_s1";
+	idSelf = "airlock_control_2f_s1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/engineering/transit_tube)
 "eAc" = (
 /obj/effect/spawner/random/structure/crate,
 /turf/open/floor/plating,
@@ -18898,6 +18967,16 @@
 /obj/effect/spawner/random/structure/crate,
 /turf/open/floor/iron/white,
 /area/station/maintenance/department/medical/ghetto)
+"eCC" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_n3";
+	idSelf = "airlock_control_2f_n3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/port/fore)
 "eCM" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -18934,6 +19013,18 @@
 	},
 /turf/open/floor/carpet/red,
 /area/station/service/bar/atrium/ghetto)
+"eDh" = (
+/obj/machinery/door_buttons/airlock_controller{
+	pixel_x = -4;
+	idExterior = "airlock_exterior_2f_w1";
+	idInterior = "airlock_interior_2f_w1";
+	idSelf = "airlock_control_2f_w1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_w1"
+	},
+/turf/closed/wall,
+/area/station/maintenance/port/aft)
 "eDr" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/line{
 	dir = 6
@@ -19321,6 +19412,16 @@
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
+"eHT" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_w2";
+	idSelf = "airlock_control_1f_w2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port/aft)
 "eHU" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
@@ -20529,6 +20630,16 @@
 /obj/item/book/manual/wiki/security_space_law,
 /turf/open/floor/iron/dark,
 /area/station/security/checkpoint/engineering)
+"eXE" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_s3";
+	idSelf = "airlock_control_1f_s3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/ghetto)
 "eXQ" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
@@ -20664,6 +20775,14 @@
 /obj/item/radio/intercom/directional/north,
 /turf/open/floor/iron,
 /area/station/command/bridge)
+"eZN" = (
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external/glass{
+	id_tag = "airlock_interior_1f_w1"
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
 "eZW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/stripes/line{
@@ -20783,10 +20902,11 @@
 "fbN" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "fbS" = (
@@ -21003,6 +21123,18 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/turret_protected/aisat/service)
+"feR" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_w2";
+	idInterior = "airlock_interior_2f_w2";
+	idSelf = "airlock_control_2f_w2";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_w2";
+	pixel_y = -4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/port/aft)
 "feT" = (
 /obj/structure/bed/medical/emergency,
 /obj/effect/turf_decal/tile/dark_blue/opposingcorners,
@@ -21572,6 +21704,18 @@
 /obj/item/kirbyplants/random/dead,
 /turf/open/floor/wood/parquet,
 /area/station/maintenance/department/security/ghetto)
+"fkY" = (
+/obj/machinery/door_buttons/airlock_controller{
+	pixel_x = -4;
+	idExterior = "airlock_exterior_1f_n1";
+	idInterior = "airlock_interior_1f_n1";
+	idSelf = "airlock_control_1f_n1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_n1"
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port/greater)
 "flb" = (
 /obj/structure/chair/pew/right{
 	dir = 1
@@ -21971,6 +22115,16 @@
 /obj/machinery/meter,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
+"fqB" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_n2";
+	idSelf = "airlock_control_1f_n2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/security/ghetto/fore)
 "fqE" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/airalarm/directional/west,
@@ -22577,6 +22731,16 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
+"fxx" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_n3";
+	idSelf = "airlock_control_1f_n3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/fore/starboard)
 "fxy" = (
 /obj/machinery/vending/cola/space_up,
 /obj/effect/decal/cleanable/dirt,
@@ -23280,6 +23444,16 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/showroomfloor,
 /area/station/service/kitchen/abandoned)
+"fFF" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_s2";
+	idSelf = "airlock_control_2f_s2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/starboard/aft)
 "fFP" = (
 /obj/structure/cable,
 /turf/open/floor/plating,
@@ -23383,6 +23557,16 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
+"fGQ" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_e1";
+	idSelf = "airlock_control_1f_e1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/fore/starboard)
 "fGS" = (
 /obj/structure/chair/office,
 /obj/effect/landmark/start/lawyer,
@@ -23448,12 +23632,13 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "fHl" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "fHn" = (
@@ -23596,6 +23781,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage_shared)
+"fIZ" = (
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_e3"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard/aft)
 "fJa" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/sign/warning/deathsposal/directional/east,
@@ -24154,6 +24347,16 @@
 /obj/machinery/vending/coffee,
 /turf/open/floor/wood,
 /area/station/maintenance/starboard/aft)
+"fQh" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_w2";
+	idSelf = "airlock_control_1f_w2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port/aft)
 "fQm" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -25299,12 +25502,11 @@
 /turf/open/floor/wood,
 /area/station/service/library/ghetto)
 "ges" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_w2"
 	},
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/aft)
 "geu" = (
@@ -25479,6 +25681,18 @@
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
+"ggm" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_w2";
+	idInterior = "airlock_interior_1f_w2";
+	idSelf = "airlock_control_1f_w2";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_w2";
+	pixel_y = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/ghetto/port/aft)
 "ggq" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 8
@@ -25707,6 +25921,11 @@
 /obj/item/gun/ballistic/revolver/russian,
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
+"giT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/emcloset,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard/aft)
 "gjd" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -25755,6 +25974,18 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
+"gjX" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_e2";
+	idInterior = "airlock_interior_1f_e2";
+	idSelf = "airlock_control_1f_e2";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_e2";
+	pixel_y = -4
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard)
 "gjY" = (
 /obj/structure/railing/corner/end/flip{
 	dir = 4;
@@ -26887,6 +27118,16 @@
 	},
 /turf/open/floor/plating,
 /area/station/hallway/secondary/service)
+"gAG" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_w1";
+	idSelf = "airlock_control_1f_w1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port)
 "gAV" = (
 /obj/structure/railing{
 	dir = 8
@@ -27053,12 +27294,11 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway)
 "gCR" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_n2"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "gDg" = (
@@ -27187,10 +27427,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "gFe" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/machinery/door/airlock/external,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_n4"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "gFq" = (
@@ -27572,8 +27813,9 @@
 "gJc" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "gJd" = (
@@ -28617,6 +28859,16 @@
 "gVu" = (
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/abandoned_gambling_den)
+"gVz" = (
+/obj/machinery/door_buttons/access_button{
+	pixel_y = -5;
+	idDoor = "airlock_interior_1f_n3";
+	idSelf = "airlock_control_1f_n3";
+	req_access = list("engineering");
+	name = "Airlock Access Button"
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/fore/starboard)
 "gVD" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/kirbyplants/random,
@@ -29161,10 +29413,11 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/port)
 "hbO" = (
-/obj/machinery/door/airlock/external,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_w1"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "hcl" = (
@@ -29602,6 +29855,16 @@
 /obj/structure/chair,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/ce)
+"hhV" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_s2";
+	idSelf = "airlock_control_1f_s2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/ghetto)
 "hhW" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
@@ -29628,6 +29891,18 @@
 /obj/item/defibrillator/loaded,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
+"hij" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_n2";
+	idInterior = "airlock_interior_2f_n2";
+	idSelf = "airlock_control_2f_n2";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_n2";
+	pixel_y = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/fore)
 "hiq" = (
 /obj/effect/turf_decal/trimline/dark/warning{
 	dir = 5
@@ -29694,6 +29969,16 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
+"hiE" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_s3";
+	idSelf = "airlock_control_1f_s3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/ghetto)
 "hiG" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -30209,6 +30494,16 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/plating,
 /area/station/ai_monitored/turret_protected/aisat/maint)
+"hoy" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_s2";
+	idSelf = "airlock_control_2f_s2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/starboard/aft)
 "hoA" = (
 /obj/machinery/light/small/directional/south,
 /obj/structure/chair/wood,
@@ -30626,13 +30921,12 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "huw" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_w2"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port/aft)
 "hux" = (
@@ -32168,12 +32462,13 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "hLW" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/aft)
 "hMe" = (
@@ -33488,6 +33783,18 @@
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
+"ieu" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_e1";
+	idInterior = "airlock_interior_1f_e1";
+	idSelf = "airlock_control_1f_e1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_e1";
+	pixel_y = 4
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/fore/starboard)
 "iex" = (
 /obj/structure/flora/bush/jungle/a/style_random,
 /obj/structure/flora/rock/style_2{
@@ -33495,6 +33802,16 @@
 	},
 /turf/open/misc/dirt/dark/station,
 /area/station/service/bar/atrium/ghetto)
+"ieD" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_w1";
+	idSelf = "airlock_control_2f_w1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/port/aft)
 "ieH" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -33516,6 +33833,16 @@
 /obj/machinery/firealarm/directional/south,
 /turf/open/floor/wood,
 /area/station/service/kitchen/abandoned)
+"ieQ" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_e1";
+	idSelf = "airlock_control_2f_e1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/starboard/aft)
 "ieW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -34189,6 +34516,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
+"inM" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_n1";
+	idSelf = "airlock_control_1f_n1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port/greater)
 "inS" = (
 /obj/machinery/door/window/brigdoor/left/directional/north{
 	name = "Creature Pen";
@@ -34985,10 +35322,11 @@
 "iyE" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "iyG" = (
@@ -35343,12 +35681,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "iDY" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_e1"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "iEh" = (
@@ -36073,6 +36410,16 @@
 /obj/item/stock_parts/power_store/cell/high,
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical)
+"iMx" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_e1";
+	idSelf = "airlock_control_2f_e1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -4
+	},
+/turf/closed/wall,
+/area/station/maintenance/starboard/aft)
 "iMy" = (
 /obj/machinery/light/small/directional/east{
 	name = "maintenance light";
@@ -39641,12 +39988,13 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "jGX" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "jGY" = (
@@ -40649,12 +40997,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "jUs" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_w1"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "jUu" = (
@@ -40733,6 +41080,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/commons/dorms)
+"jVh" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_n2";
+	idSelf = "airlock_control_2f_n2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/fore)
 "jVi" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
@@ -41333,6 +41690,15 @@
 /obj/structure/table/wood/fancy/blue,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/turret_protected/ai_upload)
+"kbW" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_s3"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
+/turf/open/floor/iron/dark,
+/area/station/maintenance/department/engine/ghetto)
 "kco" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
@@ -41667,6 +42033,18 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/hallway/primary/fore)
+"kgZ" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_s1";
+	idInterior = "airlock_interior_2f_s1";
+	idSelf = "airlock_control_2f_s1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_s1";
+	pixel_y = -4
+	},
+/turf/closed/wall/r_wall,
+/area/station/engineering/transit_tube)
 "khb" = (
 /obj/effect/spawner/random/vending/snackvend,
 /obj/effect/turf_decal/tile/purple/half,
@@ -41698,9 +42076,15 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
 "khr" = (
-/obj/machinery/light/directional/north,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/port/aft)
+/obj/machinery/door_buttons/access_button{
+	pixel_y = -5;
+	idDoor = "airlock_interior_1f_n1";
+	idSelf = "airlock_control_1f_n1";
+	req_access = list("engineering");
+	name = "Airlock Access Button"
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port/greater)
 "kht" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
@@ -41878,6 +42262,16 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
+"kjZ" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_e2";
+	idSelf = "airlock_control_1f_e2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard)
 "kka" = (
 /obj/effect/turf_decal/tile/brown/half/contrasted,
 /obj/effect/spawner/random/structure/crate,
@@ -42075,12 +42469,13 @@
 /turf/open/floor/iron/dark,
 /area/station/service/chapel/office)
 "kmy" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "kmA" = (
@@ -42586,8 +42981,9 @@
 "ksr" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "kst" = (
@@ -42823,12 +43219,17 @@
 /turf/open/floor/iron/white,
 /area/station/maintenance/department/medical/ghetto)
 "kvb" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/turf/open/floor/plating,
-/area/station/maintenance/port/greater)
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_w3";
+	idInterior = "airlock_interior_2f_w3";
+	idSelf = "airlock_control_2f_w3";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_w3";
+	pixel_y = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/atmos)
 "kvh" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -42972,9 +43373,17 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "kwE" = (
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/station/engineering/transit_tube)
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_s3";
+	idInterior = "airlock_interior_1f_s3";
+	idSelf = "airlock_control_1f_s3";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_s3";
+	pixel_y = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/ghetto)
 "kwL" = (
 /obj/machinery/computer/mech_bay_power_console,
 /turf/open/floor/catwalk_floor,
@@ -43961,6 +44370,16 @@
 /obj/effect/turf_decal/siding/wood/corner,
 /turf/open/floor/carpet,
 /area/station/service/chapel)
+"kIf" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_e1";
+	idSelf = "airlock_control_1f_e1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/fore/starboard)
 "kIg" = (
 /obj/machinery/door/window/right/directional/north{
 	name = "Garden";
@@ -44854,14 +45273,14 @@
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/starboard/aft)
 "kSu" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_s3"
 	},
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/starboard/aft)
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
+/turf/open/floor/iron/dark,
+/area/station/maintenance/department/engine/ghetto)
 "kSv" = (
 /obj/structure/rack,
 /obj/effect/spawner/random/maintenance,
@@ -45168,12 +45587,11 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "kWY" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_s1"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/engineering/transit_tube)
 "kWZ" = (
@@ -46585,13 +47003,12 @@
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/command/nuke_storage)
 "lpy" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_e1"
 	},
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "lpB" = (
@@ -46967,11 +47384,12 @@
 /area/station/science/lab)
 "lsH" = (
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
 /obj/machinery/door/airlock/external/glass,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "lsJ" = (
@@ -46999,13 +47417,12 @@
 /turf/open/floor/iron/white/textured,
 /area/station/security/medical)
 "lsX" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_e1"
 	},
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "lsZ" = (
@@ -47459,6 +47876,28 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
+"lzA" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_n1";
+	idSelf = "airlock_control_2f_n1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/starboard/fore)
+"lzC" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_e3";
+	idInterior = "airlock_interior_1f_e3";
+	idSelf = "airlock_control_1f_e3";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_e3";
+	pixel_y = 4
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard/aft)
 "lzH" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -47716,6 +48155,16 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/port/greater)
+"lCK" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_w1";
+	idSelf = "airlock_control_1f_w1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port)
 "lCL" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
@@ -49328,12 +49777,11 @@
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/magistrate)
 "lWs" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_w2"
 	},
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/aft)
 "lWz" = (
@@ -50188,6 +50636,18 @@
 	},
 /turf/open/floor/engine/hull/reinforced,
 /area/space/nearstation)
+"mhi" = (
+/obj/machinery/door_buttons/airlock_controller{
+	pixel_x = -4;
+	idExterior = "airlock_exterior_1f_w1";
+	idInterior = "airlock_interior_1f_w1";
+	idSelf = "airlock_control_1f_w1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_w1"
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port)
 "mhl" = (
 /obj/structure/table/wood,
 /obj/item/storage/fancy/donut_box,
@@ -50879,6 +51339,16 @@
 "mri" = (
 /turf/closed/wall/r_wall,
 /area/station/security/courtroom/holding)
+"mrk" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_e3";
+	idSelf = "airlock_control_1f_e3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard/aft)
 "mrl" = (
 /obj/machinery/conveyor_switch/oneway{
 	id = "robo2"
@@ -51016,12 +51486,11 @@
 /turf/open/floor/plating,
 /area/station/engineering/storage)
 "msN" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_e1"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "msO" = (
@@ -51363,6 +51832,18 @@
 /obj/machinery/light_switch/directional/south,
 /turf/open/floor/iron,
 /area/station/security/processing)
+"mxl" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_s1";
+	idInterior = "airlock_interior_1f_s1";
+	idSelf = "airlock_control_1f_s1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_s1";
+	pixel_y = 4
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/auxiliary)
 "mxm" = (
 /obj/machinery/telecomms/bus/preset_two,
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
@@ -51903,11 +52384,10 @@
 /turf/open/floor/iron/kitchen,
 /area/station/maintenance/ghetto/bar)
 "mDW" = (
-/obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_n2"
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/fore)
@@ -52502,7 +52982,8 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "mKh" = (
@@ -53174,11 +53655,14 @@
 /turf/open/floor/grass,
 /area/station/service/hydroponics/ghetto)
 "mTa" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/turf/open/floor/plating,
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_e4";
+	idSelf = "airlock_control_1f_e4";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall,
 /area/station/maintenance/ghetto/starboard/aft)
 "mTb" = (
 /obj/structure/cable,
@@ -53540,13 +54024,12 @@
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/cmo)
 "mYc" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_n1"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/fore)
 "mYf" = (
@@ -53593,6 +54076,16 @@
 	},
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/ce)
+"mYv" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_n4";
+	idSelf = "airlock_control_2f_n4";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/port/greater)
 "mYz" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
@@ -55555,9 +56048,16 @@
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
 "nwo" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_n1";
+	idInterior = "airlock_interior_2f_n1";
+	idSelf = "airlock_control_2f_n1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_n1";
+	pixel_x = -4
+	},
+/turf/closed/wall/r_wall,
 /area/station/maintenance/solars/starboard/fore)
 "nwu" = (
 /obj/machinery/portable_atmospherics/pump,
@@ -55816,6 +56316,16 @@
 /obj/effect/turf_decal/stripes/box,
 /turf/open/floor/iron/smooth,
 /area/station/medical/chemistry/ghetto)
+"nAc" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_s1";
+	idSelf = "airlock_control_1f_s1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall/rust,
+/area/station/maintenance/ghetto/auxiliary)
 "nAh" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
@@ -59464,12 +59974,11 @@
 /area/station/maintenance/ghetto/garden)
 "osL" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_s2"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/department/engine/ghetto)
 "osV" = (
@@ -59889,6 +60398,16 @@
 /obj/item/banner/command,
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
+"oxM" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_e2";
+	idSelf = "airlock_control_1f_e2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard)
 "oxN" = (
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron/stairs/left{
@@ -60505,12 +61024,13 @@
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/aft)
 "oFI" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "oFK" = (
@@ -61127,6 +61647,16 @@
 /obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/station/maintenance/ghetto/fore/starboard)
+"oOl" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_w2";
+	idSelf = "airlock_control_2f_w2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/port/aft)
 "oOo" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 4
@@ -61225,7 +61755,6 @@
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry/ghetto)
 "oPo" = (
-/obj/structure/sign/warning/vacuum/external/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/engineering/transit_tube)
 "oPp" = (
@@ -64005,12 +64534,11 @@
 /turf/open/floor/iron/white,
 /area/station/science/lower)
 "pxB" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_n4"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "pxH" = (
@@ -65133,12 +65661,11 @@
 /area/station/science/research)
 "pKB" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_s2"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/department/engine/ghetto)
 "pKC" = (
@@ -65567,12 +66094,11 @@
 /area/station/maintenance/ghetto/auxiliary)
 "pPR" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_w3"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "pQe" = (
@@ -65668,12 +66194,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "pRu" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_e4"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard/aft)
 "pRx" = (
@@ -66640,12 +67165,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard/aft)
 "qeb" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
-/obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_n2"
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/fore)
 "qed" = (
@@ -66885,6 +67409,13 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/starboard)
+"qhU" = (
+/obj/effect/turf_decal/tile/yellow/fourcorners,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/station/maintenance/department/engine/ghetto)
 "qia" = (
 /obj/structure/reagent_dispensers/beerkeg,
 /turf/open/floor/plating,
@@ -66976,12 +67507,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical)
 "qjk" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_s1"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/engineering/transit_tube)
 "qjt" = (
@@ -67915,6 +68445,7 @@
 	pixel_y = 4
 	},
 /obj/effect/turf_decal/tile/blue,
+/obj/structure/sign/warning/vacuum/external/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/engineering/transit_tube)
 "qws" = (
@@ -68691,6 +69222,16 @@
 	},
 /turf/open/floor/engine/hull/reinforced,
 /area/space/nearstation)
+"qGe" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_s2";
+	idSelf = "airlock_control_1f_s2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/ghetto)
 "qGg" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -70598,12 +71139,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "rep" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_e2"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "rez" = (
@@ -70760,10 +71300,11 @@
 "rgt" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard/aft)
 "rgy" = (
@@ -70844,10 +71385,11 @@
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
 "rhm" = (
-/obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_n1"
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/greater)
 "rhq" = (
@@ -70910,6 +71452,16 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/port)
+"rhL" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_n4";
+	idSelf = "airlock_control_2f_n4";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/port/greater)
 "rhY" = (
 /obj/structure/cable,
 /obj/effect/decal/cleanable/generic,
@@ -71588,12 +72140,11 @@
 /turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "rpR" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_n2"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "rpV" = (
@@ -71953,6 +72504,16 @@
 	},
 /turf/open/floor/wood,
 /area/station/service/library)
+"ruc" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_n2";
+	idSelf = "airlock_control_2f_n2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall,
+/area/station/maintenance/fore)
 "ruf" = (
 /turf/open/openspace,
 /area/station/science/ordnance/office)
@@ -73885,7 +74446,8 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "rUG" = (
@@ -74354,6 +74916,18 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
+"rZs" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_s2";
+	idInterior = "airlock_interior_2f_s2";
+	idSelf = "airlock_control_2f_s2";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_s2";
+	pixel_x = -4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/starboard/aft)
 "rZB" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -75729,12 +76303,11 @@
 /area/station/maintenance/starboard/upper)
 "spM" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_w3"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "spQ" = (
@@ -76479,6 +77052,16 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
+"szJ" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_w3";
+	idSelf = "airlock_control_2f_w3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/atmos)
 "szL" = (
 /obj/item/reagent_containers/cup/glass/shaker,
 /obj/structure/table,
@@ -77526,12 +78109,13 @@
 /turf/open/floor/engine,
 /area/station/engineering/supermatter)
 "sNa" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "sNf" = (
@@ -78158,8 +78742,9 @@
 "sVY" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "sWx" = (
@@ -78299,12 +78884,11 @@
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/cmo)
 "sYo" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external/glass{
+	id_tag = "airlock_interior_1f_s1"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/auxiliary)
 "sYw" = (
@@ -78412,12 +78996,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "taj" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_e2"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "tay" = (
@@ -78444,6 +79027,18 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
+"tbc" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_s2";
+	idInterior = "airlock_interior_1f_s2";
+	idSelf = "airlock_control_1f_s2";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_s2";
+	pixel_y = -4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/engine/ghetto)
 "tbe" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/wood{
@@ -79760,6 +80355,18 @@
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
+"trc" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_n2";
+	idInterior = "airlock_interior_1f_n2";
+	idSelf = "airlock_control_1f_n2";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_n2";
+	pixel_y = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/security/ghetto/fore)
 "trg" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -83955,11 +84562,10 @@
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "utK" = (
-/obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_1f_n1"
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/greater)
@@ -84210,12 +84816,13 @@
 /turf/open/floor/iron/dark,
 /area/station/maintenance/ghetto/fore/starboard)
 "uxo" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "uxp" = (
@@ -85298,12 +85905,11 @@
 /turf/open/floor/plating,
 /area/station/service/chapel/monastery)
 "uMd" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+/obj/machinery/door/airlock/external/glass{
+	id_tag = "airlock_exterior_1f_s1"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/auxiliary)
 "uMf" = (
@@ -85999,12 +86605,13 @@
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/starboard)
 "uVw" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "uVD" = (
@@ -86039,6 +86646,16 @@
 /obj/structure/cable/layer1,
 /turf/open/floor/plating,
 /area/station/engineering/supermatter)
+"uVQ" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_n2";
+	idSelf = "airlock_control_1f_n2";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/department/security/ghetto/fore)
 "uVU" = (
 /obj/effect/landmark/start/cook,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -86174,6 +86791,18 @@
 /obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/kitchen)
+"uYn" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_1f_e4";
+	idInterior = "airlock_interior_1f_e4";
+	idSelf = "airlock_control_1f_e4";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_1f_e4";
+	pixel_y = -4
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard/aft)
 "uYv" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/decal/cleanable/dirt,
@@ -86248,12 +86877,11 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "uYW" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_e4"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard/aft)
 "uYX" = (
@@ -86857,6 +87485,16 @@
 /obj/effect/spawner/random/structure/grille,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
+"vhx" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_1f_s1";
+	idSelf = "airlock_control_1f_s1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/auxiliary)
 "vhz" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -89208,8 +89846,9 @@
 "vIw" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard/aft)
 "vIx" = (
@@ -89254,6 +89893,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/service/hydroponics/garden)
+"vIT" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_2f_n3";
+	idSelf = "airlock_control_2f_n3";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_y = -5
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/port/fore)
 "vIX" = (
 /obj/structure/closet/crate/bin,
 /turf/open/floor/plating,
@@ -90778,6 +91427,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/cmo)
+"wdA" = (
+/obj/effect/turf_decal/tile/yellow/fourcorners,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/sign/warning/vacuum/directional/south,
+/turf/open/floor/iron/dark,
+/area/station/maintenance/department/engine/ghetto)
 "wdB" = (
 /obj/structure/chair/stool{
 	dir = 4
@@ -90978,13 +91635,12 @@
 /turf/open/floor/wood,
 /area/station/service/library)
 "wha" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_w2"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port/aft)
 "whg" = (
@@ -91391,6 +92047,16 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/fore)
+"wkZ" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_w1";
+	idSelf = "airlock_control_2f_w1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/port/aft)
 "wlt" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/holopad,
@@ -93233,6 +93899,18 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway)
+"wIU" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_e1";
+	idInterior = "airlock_interior_2f_e1";
+	idSelf = "airlock_control_2f_e1";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_e1";
+	pixel_y = -4
+	},
+/turf/closed/wall,
+/area/station/maintenance/starboard/aft)
 "wJo" = (
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/stripes/line{
@@ -94432,12 +95110,13 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/kitchen)
 "wYX" = (
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/command/eva,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/aft)
 "wYY" = (
@@ -94529,6 +95208,14 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/plating,
 /area/station/commons/storage/emergency)
+"xaS" = (
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_1f_e3"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/locked,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard/aft)
 "xaT" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
@@ -94844,6 +95531,18 @@
 	},
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
+"xeb" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_n3";
+	idInterior = "airlock_interior_2f_n3";
+	idSelf = "airlock_control_2f_n3";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_n3";
+	pixel_x = -4
+	},
+/turf/closed/wall/r_wall,
+/area/station/maintenance/solars/port/fore)
 "xeg" = (
 /obj/machinery/smartfridge/chemistry/virology/preloaded,
 /obj/effect/turf_decal/trimline/green/filled/line{
@@ -95335,6 +96034,16 @@
 /obj/effect/turf_decal/tile/purple/half/contrasted,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
+"xjr" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_interior_1f_e4";
+	idSelf = "airlock_control_1f_e4";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = -5
+	},
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard/aft)
 "xju" = (
 /obj/machinery/atmospherics/components/binary/valve/on{
 	dir = 4
@@ -95778,6 +96487,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
+"xoG" = (
+/obj/machinery/door_buttons/access_button{
+	idDoor = "airlock_exterior_2f_s1";
+	idSelf = "airlock_control_2f_s1";
+	req_access = list("engineering");
+	name = "Airlock Access Button";
+	pixel_x = 5
+	},
+/turf/closed/wall/r_wall,
+/area/station/engineering/transit_tube)
 "xoI" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -96290,11 +97009,12 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/aft)
 "xwf" = (
-/obj/machinery/door/airlock/external,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_s2"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
 "xwi" = (
@@ -97086,11 +97806,12 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "xGB" = (
-/obj/machinery/door/airlock/external,
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_exterior_2f_n1"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/fore)
 "xGF" = (
@@ -97829,6 +98550,18 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/science/lower)
+"xPS" = (
+/obj/machinery/door_buttons/airlock_controller{
+	idExterior = "airlock_exterior_2f_n4";
+	idInterior = "airlock_interior_2f_n4";
+	idSelf = "airlock_control_2f_n4";
+	req_access = list("engineering");
+	name = "Airlock Access Controller";
+	interior_airlock = "airlock_control_2f_n4";
+	pixel_x = 4
+	},
+/turf/closed/wall,
+/area/station/maintenance/port/greater)
 "xPT" = (
 /obj/structure/railing/corner{
 	dir = 4
@@ -99049,13 +99782,12 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "ygO" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/machinery/door/airlock/external{
+	id_tag = "airlock_interior_2f_n3"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port/fore)
 "ygR" = (
@@ -111955,8 +112687,8 @@ doz
 doz
 doz
 iEV
-iEV
-iEV
+tbM
+tbM
 iEV
 cVi
 cVi
@@ -113236,9 +113968,9 @@ doz
 doz
 doz
 doz
-tbM
-tbM
-tbM
+iEV
+iEV
+iEV
 oXT
 lCE
 gPX
@@ -113750,9 +114482,9 @@ doz
 doz
 doz
 doz
-tbM
-tbM
-tbM
+inM
+fkY
+khr
 xyL
 dyB
 ivV
@@ -114818,9 +115550,9 @@ mQU
 mQU
 mQU
 mQU
-eHR
+eZN
 mQU
-aoJ
+aTq
 jEk
 doz
 doz
@@ -115074,10 +115806,10 @@ mQU
 pLM
 mLL
 tWQ
+gAG
 tWQ
-tWQ
-tWQ
-tWQ
+mhi
+lCK
 ceC
 doz
 doz
@@ -118456,7 +119188,7 @@ doz
 rmU
 ges
 ges
-rmU
+fQh
 doz
 ceC
 oVL
@@ -118967,10 +119699,10 @@ doz
 doz
 doz
 doz
-weS
-khr
-aec
 mBX
+aec
+ejg
+ggm
 ceC
 oVL
 oVL
@@ -119484,7 +120216,7 @@ ceC
 rmU
 nbK
 aec
-rmU
+eHT
 doz
 oVL
 doz
@@ -122572,8 +123304,8 @@ rmU
 doz
 dKo
 dKo
-pKB
-dKo
+kSu
+eXE
 job
 doz
 doz
@@ -122589,7 +123321,7 @@ doz
 doz
 doz
 ccJ
-dKo
+hhV
 pKB
 dKo
 cKv
@@ -123087,7 +123819,7 @@ doz
 dKo
 lcw
 inV
-dKo
+kwE
 ctJ
 fSc
 fSc
@@ -123103,7 +123835,7 @@ fSc
 fSc
 fSc
 fND
-dKo
+tbc
 tFN
 pMA
 obg
@@ -123343,8 +124075,8 @@ rmU
 eIA
 dKo
 dKo
-osL
-dKo
+kbW
+hiE
 ifG
 ifG
 ifG
@@ -123360,7 +124092,7 @@ ifG
 aRR
 aRR
 ifG
-dKo
+qGe
 osL
 dKo
 cKv
@@ -123617,8 +124349,8 @@ ese
 hir
 tSC
 exc
-jpa
-kpt
+qhU
+wdA
 dKo
 dKo
 dKo
@@ -126324,7 +127056,7 @@ doz
 yjB
 ugr
 mDW
-yjB
+uVQ
 oLS
 jxu
 jxu
@@ -126581,7 +127313,7 @@ doz
 ceC
 yjB
 aQY
-yjB
+trc
 oLS
 jxu
 xaY
@@ -127095,7 +127827,7 @@ doz
 ceC
 job
 job
-yjB
+fqB
 ovd
 jxu
 xaY
@@ -131581,7 +132313,7 @@ wcM
 doz
 uPA
 uMd
-uPA
+vhx
 doz
 doz
 doz
@@ -131838,7 +132570,7 @@ wcM
 doz
 uPA
 pZA
-uPA
+mxl
 doz
 doz
 doz
@@ -132095,7 +132827,7 @@ mDY
 uPA
 uPA
 sYo
-xfI
+nAc
 xfI
 xfI
 uPA
@@ -141496,9 +142228,9 @@ doz
 doz
 doz
 doz
-qqz
-qqz
-qqz
+pNZ
+pNZ
+pNZ
 eJq
 tbQ
 pNZ
@@ -142010,9 +142742,9 @@ doz
 doz
 doz
 doz
-qqz
-qqz
-qqz
+fxx
+emT
+gVz
 fZE
 tbQ
 vpn
@@ -147947,7 +148679,7 @@ ezB
 vpn
 sNB
 vpn
-pNZ
+fGQ
 doz
 nSN
 xAl
@@ -148461,7 +149193,7 @@ uyS
 gPs
 pNZ
 vpn
-pNZ
+ieu
 doz
 doz
 doz
@@ -148718,7 +149450,7 @@ alI
 gHs
 pNZ
 msN
-pNZ
+kIf
 doz
 doz
 doz
@@ -148995,7 +149727,7 @@ ceC
 hUE
 ceC
 ceC
-ipz
+oxM
 qTP
 fqF
 ghW
@@ -149509,7 +150241,7 @@ doz
 ceC
 doz
 doz
-ipz
+gjX
 qTP
 ipz
 doz
@@ -149766,7 +150498,7 @@ doz
 ceC
 doz
 doz
-ipz
+kjZ
 rep
 ipz
 vbK
@@ -149829,9 +150561,9 @@ iYR
 iYR
 iYR
 iYR
-cXa
+fKk
 iYR
-iYR
+doz
 doz
 doz
 doz
@@ -150084,13 +150816,13 @@ ssd
 iYR
 yaj
 kpd
-ifu
+giT
 fuc
 fKk
-lFh
-hzG
-hzG
-hzG
+iYR
+doz
+doz
+doz
 doz
 doz
 doz
@@ -150344,10 +151076,10 @@ fKk
 ifu
 ifu
 ifu
-fKk
-mTa
-fKk
-kSu
+iYR
+doz
+doz
+doz
 doz
 doz
 doz
@@ -150601,10 +151333,10 @@ fKk
 fKk
 fdb
 fKk
-vSA
-hzG
-hzG
-hzG
+iYR
+doz
+doz
+doz
 doz
 doz
 doz
@@ -150859,7 +151591,7 @@ iYR
 iYR
 iYR
 iYR
-iYR
+doz
 doz
 doz
 doz
@@ -154936,8 +155668,8 @@ doz
 doz
 iYR
 iYR
-pRu
-iYR
+fIZ
+cvu
 iYR
 doz
 doz
@@ -154962,7 +155694,7 @@ doz
 doz
 doz
 iYR
-iYR
+xjr
 pRu
 iYR
 iYR
@@ -155194,7 +155926,7 @@ doz
 doz
 iYR
 fKk
-iYR
+lzC
 doz
 doz
 doz
@@ -155219,7 +155951,7 @@ doz
 doz
 doz
 doz
-iYR
+uYn
 fKk
 iYR
 doz
@@ -155450,8 +156182,8 @@ doz
 doz
 doz
 iYR
-uYW
-iYR
+xaS
+mrk
 ceC
 ceC
 doz
@@ -155476,7 +156208,7 @@ doz
 doz
 doz
 doz
-iYR
+mTa
 uYW
 iYR
 doz
@@ -176720,10 +177452,10 @@ tYD
 tYD
 trM
 vrm
-rvO
-rvO
-rvO
-rvO
+rhL
+oBy
+xPS
+mYv
 wuv
 bix
 gsR
@@ -179282,9 +180014,9 @@ tYD
 aIv
 tYD
 tYD
-sDZ
-sDZ
-sDZ
+eCC
+xeb
+vIT
 pEG
 gBo
 iRa
@@ -179345,10 +180077,10 @@ fCJ
 coz
 xOp
 qfY
+ieD
+eDh
 oXc
-oXc
-oXc
-oXc
+wkZ
 oXc
 oXc
 tYD
@@ -179541,7 +180273,7 @@ nGS
 tYD
 kJd
 tYD
-sDZ
+eKq
 eKq
 eKq
 eKq
@@ -182884,7 +183616,7 @@ tYD
 tYD
 tYD
 tYD
-kvb
+aTm
 wNd
 wNd
 aTm
@@ -183141,7 +183873,7 @@ tYD
 tYD
 tYD
 tYD
-kvb
+aTm
 eyH
 wNd
 aTm
@@ -183989,7 +184721,7 @@ wRD
 sZW
 kJd
 kJd
-hWR
+csm
 huw
 hWR
 xRt
@@ -184246,7 +184978,7 @@ coz
 coz
 coz
 tYD
-hWR
+feR
 fFP
 hWR
 xRt
@@ -184502,8 +185234,8 @@ pVS
 oXc
 kAy
 coz
-spZ
-hWR
+coz
+oOl
 wha
 hWR
 hWR
@@ -187362,7 +188094,7 @@ tYD
 kJd
 iMe
 spM
-iMe
+szJ
 trM
 tYD
 tYD
@@ -187619,7 +188351,7 @@ kJd
 kJd
 iMe
 aWy
-iMe
+kvb
 trM
 trM
 tYD
@@ -187876,8 +188608,8 @@ xRt
 iMe
 iMe
 pPR
-iMe
-iMe
+cXa
+rgH
 trM
 tYD
 tYD
@@ -203948,7 +204680,7 @@ xLF
 xLF
 cTF
 xLF
-mZY
+jVh
 raF
 pOX
 pOX
@@ -204308,8 +205040,8 @@ qyb
 vTH
 ygf
 xFx
-kwE
 xFx
+ezY
 kWY
 xFx
 omY
@@ -204462,7 +205194,7 @@ fgy
 mZY
 mZY
 brR
-mZY
+hij
 tYD
 cdD
 tYD
@@ -204566,7 +205298,7 @@ dRA
 dRA
 hpN
 job
-xFx
+kgZ
 cZt
 xFx
 eaC
@@ -204719,7 +205451,7 @@ tYD
 tYD
 fgy
 rpR
-fgy
+ruc
 tYD
 tYD
 tYD
@@ -204823,7 +205555,7 @@ dRA
 fzd
 hpN
 job
-xFx
+xoG
 qjk
 xFx
 nGB
@@ -207543,9 +208275,9 @@ sJu
 sJu
 kJd
 kJd
-xeX
+bSF
 nwo
-xeX
+lzA
 xCx
 mzJ
 xgU
@@ -207802,7 +208534,7 @@ kJd
 kJd
 kJd
 kJd
-xeX
+lyf
 lyf
 lyf
 lyf
@@ -216142,9 +216874,9 @@ fOt
 pqA
 hGd
 dCU
-hdu
-hdu
-hdu
+hoy
+rZs
+fFF
 tYD
 tYD
 kJd
@@ -216399,7 +217131,7 @@ fOt
 fOt
 fOt
 fOt
-hdu
+fOt
 gJs
 gJs
 gJs
@@ -218672,8 +219404,8 @@ tfm
 vLK
 xRt
 bTH
-qWL
-qWL
+bTH
+iMx
 lpy
 qWL
 bTH
@@ -218930,7 +219662,7 @@ vLK
 xRt
 xRt
 xRt
-qWL
+wIU
 sZD
 qWL
 bTH
@@ -219187,7 +219919,7 @@ vLK
 aut
 xRt
 aut
-qWL
+ieQ
 lsX
 qWL
 bTH
