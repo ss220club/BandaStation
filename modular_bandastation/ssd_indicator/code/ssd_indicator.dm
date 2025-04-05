@@ -28,7 +28,7 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
 	UnregisterSignal(source, COMSIG_LIVING_DEATH)
 	UnregisterSignal(source, COMSIG_LIVING_REVIVE)
-	UnregisterSignal(source, COMSIG_MOB_GHOSTIZED)
+	UnregisterSignal(source, COMSIG_MOB_ADMIN_GHOSTED)
 	if(isAI(source))
 		UnregisterSignal(source, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF)
 	if(iscyborg(source))
