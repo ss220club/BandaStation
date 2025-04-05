@@ -1,6 +1,6 @@
 /datum/antagonist/nukeop
 	name = ROLE_NUCLEAR_OPERATIVE
-	roundend_category = "syndicate operatives" //just in case
+	roundend_category = "Оперативники Синдиката" //just in case
 	antagpanel_category = ANTAG_GROUP_SYNDICATE
 	job_rank = ROLE_OPERATIVE
 	antag_hud_name = "synd"
@@ -198,7 +198,7 @@
 /// Actually moves our nukie to where they should be
 /datum/antagonist/nukeop/proc/move_to_spawnpoint()
 	// Ensure that the nukiebase is loaded, and wait for it if required
-	SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_NUKIEBASE)
+	//SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_NUKIEBASE)  // BANDASTATION EDIT - STORYTELLER
 	var/turf/destination = get_spawnpoint()
 	owner.current.forceMove(destination)
 	if(!owner.current.onSyndieBase())

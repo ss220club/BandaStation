@@ -1010,6 +1010,7 @@
 		exposed_mob.visible_message(span_warning("[exposed_mob]'s body does not react..."))
 		return
 
+
 	if(iscarbon(exposed_mob) && !(methods & (INGEST|INHALE))) //simplemobs can still be splashed
 		return ..()
 
@@ -1116,7 +1117,7 @@
 	else
 		tips = world.file2list("strings/chemistrytips.txt")
 	var/message = pick(tips)
-	send_tip_of_the_round(affected_mob, message, source = "Chemical-induced wisdom")
+	send_tip_of_the_round(affected_mob, message, source = "Мудрость, вызванная химическими веществами")
 
 /datum/reagent/medicine/neurine
 	name = "Neurine"

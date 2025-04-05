@@ -1,0 +1,99 @@
+## Text-to-speech
+#TTS_TOKEN_SILERO mytoken
+#TTS_ENABLED
+#TTS_CACHE_ENABLED
+#TTS_API_URL_SILERO
+
+## SS Central
+#SS_CENTRAL_URL http://127.0.0.1:8000/v1
+#SS_CENTRAL_TOKEN 12345678
+#SERVER_TYPE default
+#FORCE_DISCORD_VERIFICATION
+## Entry from the general config.txt
+## New behavior - enabled PANIC_BUNKER_INTERVIEW allows only whitelisted players to play, passing interview gives a year long whitelist
+#USEWHITELIST
+#PANIC_BUNKER_INTERVIEW
+
+## A minimum amount of security required on roundstart
+## If there is less security than this value, a percent of roundstart threat will be pushed to midround
+## Example: with value of 5, if there is 2 security members out of 5, then 3/5 of roundstart threat will be moved to midround
+#ROUNDSTART_SECURITY_FOR_THREAT 5
+
+## Webhooks
+#TRANSLATE_SUGGEST_WEBHOOK_URL
+
+#INTERVIEW_WEBHOOK_URL
+
+## Bandastation Races
+ROUNDSTART_RACES vulpkanin
+ROUNDSTART_RACES tajaran
+
+#MIN_THREAT_TO_ROUNDSTART_PERCENT 30
+#MAX_THREAT_TO_ROUNDSTART_PERCENT 60
+#MIN_THREAT_LEVEL 20
+
+## Gamemode configurations
+
+## Multipliers for points gained over time for event tracks.
+MUNDANE_POINT_GAIN_MULTIPLIER 0.5
+MODERATE_POINT_GAIN_MULTIPLIER 0.5
+MAJOR_POINT_GAIN_MULTIPLIER 0.5
+ROLESET_POINT_GAIN_MULTIPLIER 0.5
+OBJECTIVES_POINT_GAIN_MULTIPLIER 0.5
+
+## Minimum population caps for event tracks to run their events.
+MUNDANE_MIN_POP 0
+MODERATE_MIN_POP 0
+MAJOR_MIN_POP 20
+ROLESET_MIN_POP 0
+OBJECTIVES_MIN_POP 0
+
+## Point thresholds for tracks to run events. The lesser the more frequent events will be.
+MUNDANE_POINT_THRESHOLD 500
+MODERATE_POINT_THRESHOLD 750
+MAJOR_POINT_THRESHOLD 2300
+ROLESET_POINT_THRESHOLD 1650
+OBJECTIVES_POINT_THRESHOLD 8000
+
+## Allows the storyteller to scale event frequencies based on population
+ALLOW_STORYTELLER_POP_SCALING
+
+## Thresholds that population frequency scalling penalize up to.
+MUNDANE_POP_SCALE_THRESHOLD 10
+MODERATE_POP_SCALE_THRESHOLD 15
+MAJOR_POP_SCALE_THRESHOLD 40
+ROLESET_POP_SCALE_THRESHOLD 45
+OBJECTIVES_POP_SCALE_THRESHOLD 40
+
+## The maximum penalties population scalling will apply to the tracks for having less pop than POP_SCALE_THRESHOLD. This is treated as percentages
+MUNDANE_POP_SCALE_PENALTY 30
+MODERATE_POP_SCALE_PENALTY 30
+MAJOR_POP_SCALE_PENALTY 30
+ROLESET_POP_SCALE_PENALTY 30
+OBJECTIVES_POP_SCALE_PENALTY 30
+
+## Automatic crew transfer
+
+## Time after the roundstart the automatic crew transfer will run. 1.5 hours by default
+#AUTOMATIC_CREW_TRANSFER_VOTE_DELAY 54000
+## Time the automatic crew transfer vote will automatically run after if previous one not passed. 30 minutes by default
+#AUTOMATIC_CREW_TRANSFER_VOTE_INTERVAL 18000
+## If players are able to create crew transfer vote
+#ALLOW_CREW_TRANSFER_VOTE
+## If automatic crew transfer is enabled
+#ENABLE_AUTOMATIC_CREW_TRANSFER
+
+# Cryo
+## Time in deciseconds the mob must be clientless for to be despawned by cryopod. 30 minutes by default
+#CRYO_MIN_SSD_TIME 18000
+
+## Speech filter for players
+
+## If enabled, some words will be removed from player's messages.
+# ENABLE_SPEECH_FILTER
+## List of ckeys, that bypass speech filter.
+# SPEECH_FILTER_BYPASS ckey
+# SPEECH_FILTER_BYPASS ckey
+
+## Boolean value to derminate is it posible to die permanently due death of brain or not (value true means it's enabled)
+BRAIN_PERMANENT_DEATH

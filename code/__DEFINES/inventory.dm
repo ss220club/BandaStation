@@ -309,20 +309,20 @@ GLOBAL_LIST_INIT(tool_items, list(
 ))
 
 /// String for items placed into the left pocket.
-#define LOCATION_LPOCKET "in your left pocket"
+#define LOCATION_LPOCKET "в левом кармане"
 /// String for items placed into the right pocket
-#define LOCATION_RPOCKET "in your right pocket"
+#define LOCATION_RPOCKET "в правом кармане"
 /// String for items placed into the backpack.
-#define LOCATION_BACKPACK "in your backpack"
+#define LOCATION_BACKPACK "в сумке"
 /// String for items placed into the hands.
-#define LOCATION_HANDS "in your hands"
+#define LOCATION_HANDS "в руках"
 /// String for items placed in the glove slot.
-#define LOCATION_GLOVES "on your hands"
+#define LOCATION_GLOVES "на руках"
 /// String for items placed in the eye/glasses slot.
-#define LOCATION_EYES "covering your eyes"
+#define LOCATION_EYES "на глазах"
 /// String for items placed on the head/hat slot.
-#define LOCATION_HEAD "on your head"
+#define LOCATION_HEAD "на голове"
 /// String for items placed in the neck slot.
-#define LOCATION_NECK "around your neck"
+#define LOCATION_NECK "на шее"
 /// String for items placed in the id slot
-#define LOCATION_ID "in your ID slot"
+#define LOCATION_ID "в кармашке ID карты"
