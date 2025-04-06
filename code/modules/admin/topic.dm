@@ -1747,13 +1747,8 @@
 			if(FAX.fax_id != href_list["destination"])
 				continue
 			// BANDASTATION EDIT START
-			var/obj/item/loaded = locate(href_list["print_fax"])
-
-			if(istype(loaded, /obj/item/paper))
-				var/obj/item/paper/doc = loaded
-				FAX.receive(doc.copy(), href_list["sender_name"])
-			else
-				FAX.receive(loaded, href_list["sender_name"])
+			var/obj/item/paper/doc = locate(href_list["print_fax"])
+			FAX.receive(doc.copy(), href_list["sender_name"])
 			// BANDASTATION EDIT END
 
 	else if(href_list["play_internet"])
