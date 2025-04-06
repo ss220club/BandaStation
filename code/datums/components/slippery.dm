@@ -22,7 +22,7 @@
 	/// How long the slip keeps the crossing mob knocked over (they can still crawl and use weapons) for.
 	var/knockdown_time = 0
 	/// How long the slip paralyzes (prevents the crossing mob doing anything) for.
-	var/paralyze_time = 0
+	var/paralyze_time = 2 SECONDS
 	/// How long the slip dazes (makes the crossing mob vulnerable to shove stuns) for.
 	var/daze_time = 3 SECONDS
 	/// Flags for how slippery the parent is. See [__DEFINES/mobs.dm]
@@ -64,7 +64,7 @@
 	knockdown,
 	lube_flags = NONE,
 	datum/callback/on_slip_callback,
-	paralyze,
+	paralyze = 2 SECONDS,
 	daze = 3 SECONDS,
 	force_drop = FALSE,
 	slot_whitelist,
