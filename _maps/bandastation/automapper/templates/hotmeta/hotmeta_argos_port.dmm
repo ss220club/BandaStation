@@ -1,7 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
-/area/space)
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "b" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -34,8 +35,9 @@
 	dwidth = 5;
 	dir = 8
 	},
-/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
-/area/space)
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "l" = (
 /obj/structure/sign/warning/docking,
 /turf/closed/wall/r_wall,
@@ -43,8 +45,9 @@
 "p" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/marker_beacon/olive,
-/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
-/area/space/nearstation)
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "w" = (
 /turf/closed/wall/r_wall,
 /area/station/hallway/secondary/entry)
@@ -98,8 +101,9 @@
 /obj/item/instrument/musicalmoth{
 	name = "Syl Labee"
 	},
-/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
-/area/space/nearstation)
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "Y" = (
 /obj/structure/sign/warning/vacuum/external/directional/south,
 /obj/effect/turf_decal/stripes/line,
