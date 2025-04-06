@@ -9,10 +9,22 @@
 		If you aren't a bloodless race, you will additionally heal burn damage.\n\
 		The power will halt if you are incapacitated or dead."
 	power_flags = BP_AM_TOGGLE
-	check_flags = BP_CANT_USE_WHILE_INCAPACITATED
+	check_flags = BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS
 	purchase_flags = NONE
 	bloodcost = 1.5
 	cooldown_time = 10 SECONDS
+
+/datum/action/cooldown/bloodsucker/recuperate/can_use(mob/living/carbon/user, trigger_flags)
+	. = ..()
+	if(!.)
+		return
+	if(user.blood_volume <= BLOOD_VOLUME_OKAY)
+		user.balloon_alert(user, "not enough blood!")
+		return FALSE
+	if(user.stat >= DEAD)
+		user.balloon_alert(user, "you are incapacitated...")
+		return FALSE
+	return TRUE
 
 /datum/action/cooldown/bloodsucker/recuperate/ActivatePower(trigger_flags)
 	. = ..()
@@ -30,7 +42,7 @@
 	var/datum/antagonist/vassal/vassaldatum = IS_VASSAL(user)
 	vassaldatum.master.AddBloodVolume(-1)
 	user.set_timed_status_effect(5 SECONDS, /datum/status_effect/jitter, only_if_higher = TRUE)
-	user.adjustStaminaLoss(bloodcost * 1.1)
+	user.adjustStaminaLoss(-bloodcost * 1.1)
 	user.adjustBruteLoss(-2.5)
 	user.adjustToxLoss(-2, forced = TRUE)
 	// Plasmamen won't lose blood, they don't have any, so they don't heal from Burn.
@@ -43,6 +55,8 @@
 			part.generic_bleedstacks--
 
 /datum/action/cooldown/bloodsucker/recuperate/ContinueActive(mob/living/user, mob/living/target)
+	if(!user)
+		return FALSE
 	if(user.stat >= DEAD)
 		return FALSE
 	if(user.incapacitated)
@@ -51,5 +65,5 @@
 	return TRUE
 
 /datum/action/cooldown/bloodsucker/recuperate/DeactivatePower()
-	owner.balloon_alert(owner, "recuperate turned off.")
+	owner?.balloon_alert(owner, "recuperate turned off.")
 	return ..()

@@ -8,7 +8,7 @@
 		can be used to reset ex-vassal deconversion timers. \
 		Right-Click will show the status of all vassals."
 	power_flags = NONE
-	check_flags = NONE
+	check_flags = BP_CANT_USE_WHILE_UNCONSCIOUS
 	purchase_flags = NONE
 	bloodcost = 10
 	cooldown_time = 10 SECONDS
@@ -42,7 +42,7 @@
 		target_ref = WEAKREF(owner.pulling)
 		return TRUE
 
-	var/blood_bag = locate(/obj/item/reagent_containers/blood) in user.held_items
+	var/obj/item/reagent_containers/blood/blood_bag = user.is_holding_item_of_type(/obj/item/reagent_containers/blood)
 	if(!blood_bag)
 		owner.balloon_alert(owner, "blood bag needed!")
 		return FALSE
@@ -86,6 +86,6 @@
 		var/mob/living/living_owner = owner
 		living_owner.blood_volume -= 150
 		QDEL_NULL(bloodbag)
-		var/obj/item/reagent_containers/blood/o_minus/bloodsucker/new_bag = new(owner.loc)
-		owner.put_in_active_hand(new_bag)
+		var/obj/item/reagent_containers/blood/o_minus/bloodsucker/new_bag = new(owner.drop_location())
+		owner.put_in_hands(new_bag)
 		DeactivatePower()

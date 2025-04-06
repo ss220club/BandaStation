@@ -92,7 +92,7 @@
 ///Disables all powers, accounting for torpor
 /datum/antagonist/bloodsucker/proc/DisableAllPowers(forced = FALSE)
 	for(var/datum/action/cooldown/bloodsucker/power as anything in powers)
-		if(forced || ((power.check_flags & BP_CANT_USE_IN_TORPOR) && HAS_TRAIT(owner.current, TRAIT_NODEATH)))
+		if(forced || ((power.check_flags & BP_CANT_USE_IN_TORPOR) && is_in_torpor()))
 			if(power.active)
 				power.DeactivatePower()
 
@@ -132,7 +132,7 @@
 		return returnIcon + returnString
 	// Viewer not a Vamp AND not the target's vassal?
 	if(!viewer.mind.has_antag_datum((/datum/antagonist/bloodsucker)) && !(viewer in vassals))
-		if(!(HAS_TRAIT(viewer.mind, TRAIT_BLOODSUCKER_HUNTER) && broke_masquerade))
+		if(!(HAS_MIND_TRAIT(viewer, TRAIT_BLOODSUCKER_HUNTER) && broke_masquerade))
 			return FALSE
 	// Default String
 	var/returnString = "\[<span class='warning'><EM>[return_full_name()]</EM></span>\]"
@@ -171,3 +171,41 @@
 			var/returnString = "<span class='warning'><EM>Я не красавец</EM></span>"
 			returnString += "\n"
 			return returnString
+
+/**
+ * CARBON INTEGRATION
+ *
+ * All overrides of mob/living and mob/living/carbon
+ */
+/// Brute
+/mob/living/proc/getBruteLoss_nonProsthetic()
+	return getBruteLoss()
+
+/mob/living/carbon/getBruteLoss_nonProsthetic()
+	if(dna?.species?.inherent_biotypes & MOB_ROBOTIC) // technically it's not a prosthetic if it's a "natural" part of their species
+		return getBruteLoss()
+	. = 0
+	for(var/obj/item/bodypart/chosen_bodypart as anything in bodyparts)
+		if(!IS_ORGANIC_LIMB(chosen_bodypart))
+			continue
+		. += chosen_bodypart.brute_dam
+
+/// Burn
+/mob/living/proc/getFireLoss_nonProsthetic()
+	return getFireLoss()
+
+/mob/living/carbon/getFireLoss_nonProsthetic()
+	if(dna?.species?.inherent_biotypes & MOB_ROBOTIC) // technically it's not a prosthetic if it's a "natural" part of their species
+		return getFireLoss()
+	. = 0
+	for(var/obj/item/bodypart/chosen_bodypart as anything in bodyparts)
+		if(!IS_ORGANIC_LIMB(chosen_bodypart))
+			continue
+		. += chosen_bodypart.burn_dam
+
+/// Returns TRUE if the list has any items that are in said typecache, FALSE otherwise.
+/proc/typecached_item_in_list(list/things, list/typecache)
+	. = FALSE
+	for(var/datum/thingy as anything in things)
+		if(is_type_in_typecache(thingy, typecache))
+			return TRUE

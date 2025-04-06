@@ -21,17 +21,21 @@
 #define BLOODSUCKER_ENTERS_FRENZY "bloodsucker_enters_frenzy"
 ///Вызывается когда вампир выходит из безумия
 #define BLOODSUCKER_EXITS_FRENZY "bloodsucker_exits_frenzy"
-
+//Used in bloodsucker_life.dm
 #define MARTIALART_FRENZYGRAB "frenzy grabbing"
 
 /**
  * Blood-level defines
  */
+ /// Determines Bloodsucker regeneration rate
 #define BS_BLOOD_VOLUME_MAX_REGEN 700
+/// Cost to torture someone halfway, in blood. Called twice for full cost
 #define TORTURE_BLOOD_HALF_COST 8
+/// Cost to convert someone after successful torture, in blood
 #define TORTURE_CONVERSION_COST 50
+/// Once blood is this low, will enter Frenzy
 #define FRENZY_MINIMUM_THRESHOLD_ENTER 25
-#define FRENZY_EXTRA_BLOOD_NEEDED 50
+#define FRENZY_EXTRA_BLOOD_NEEDED 250
 
 /**
  * Vassal defines
@@ -71,22 +75,39 @@
 /**
  * Power defines
  */
+/// This Power can't be used in Torpor
 #define BP_CANT_USE_IN_TORPOR (1<<0)
+/// This Power can't be used in Frenzy.
 #define BP_CANT_USE_IN_FRENZY (1<<1)
+/// This Power can't be used with a stake in you
 #define BP_CANT_USE_WHILE_STAKED (1<<2)
+/// This Power can't be used while incapacitated
 #define BP_CANT_USE_WHILE_INCAPACITATED (1<<3)
+/// This Power can't be used while unconscious
 #define BP_CANT_USE_WHILE_UNCONSCIOUS (1<<4)
+/// This Power can't be used during Sol
+#define BP_CANT_USE_DURING_SOL (1<<5)
 
+/// This Power can be purchased by Bloodsuckers
 #define BLOODSUCKER_CAN_BUY (1<<0)
+/// This is a Default Power that all Bloodsuckers get.
 #define BLOODSUCKER_DEFAULT_POWER (1<<1)
+/// This Power can be purchased by Tremere Bloodsuckers
 #define TREMERE_CAN_BUY (1<<2)
+/// This Power can be purchased by Vassals
 #define VASSAL_CAN_BUY (1<<3)
+/// This is a Default Power for brujah Bloodsuckers
 #define BRUJAH_DEFAULT_POWER (1<<4)
 
+/// This Power is a Toggled Power
 #define BP_AM_TOGGLE (1<<0)
+/// This Power is a Single-Use Power
 #define BP_AM_SINGLEUSE (1<<1)
+/// This Power has a Static cooldown
 #define BP_AM_STATIC_COOLDOWN (1<<2)
+/// This Power doesn't cost bloot to run while unconscious
 #define BP_AM_COSTLESS_UNCONSCIOUS (1<<3)
+/// Динамический кулдаун для некоторых способностей
 #define BP_AM_VERY_DYNAMIC_COOLDOWN (1<<4)
 
 /**
@@ -105,6 +126,7 @@
 #define DANGER_LEVEL_SOL_ROSE 4
 #define DANGER_LEVEL_SOL_ENDED 5
 
+#define ACTIONSPEED_ID_BLOODSUCKER_SOL "bloodsucker_sol"
 /**
  * Clan defines
  *
@@ -131,14 +153,25 @@
 /**
  * Sources
  */
+ /// Source trait for Bloodsuckers-related traits
 #define BLOODSUCKER_TRAIT "bloodsucker_trait"
+/// Source trait for bloodsuckers in torpor.
+#define TORPOR_TRAIT "torpor_trait"
+/// Source trait for bloodsuckers using fortitude.
+#define FORTITUDE_TRAIT "fortitude_trait"
+/// Source trait for bloodsucker mesmerization.
+#define MESMERIZED_TRAIT "mesmerized_trait"
+/// Source trait while Feeding
 #define FEED_TRAIT "feed_trait"
+/// Source trait during a Frenzy
 #define FRENZY_TRAIT "frenzy_trait"
 
 /**
  * Traits
  */
+ /// Falsifies Health analyzer blood levels
 #define TRAIT_MASQUERADE "masquerade"
+/// Your body is literal room temperature. Does not make you immune to the temp
 #define TRAIT_COLDBLOODED "coldblooded"
 
 //Bloodsuckers defines ended//

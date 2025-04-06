@@ -95,7 +95,7 @@
 	// If we aren't in the dark, anyone watching us will cause us to drop out stuff
 	if(current_turf && current_turf.lighting_object && current_turf.get_lumcount() >= 0.2)
 		for(var/mob/living/watchers in viewers(world.view, get_turf(owner)) - owner)
-			if(!watchers.client)
+			if(!watchers.client || watchers.stat != CONSCIOUS)
 				continue
 			if(issilicon(watchers) || isdrone(watchers) || isbot(watchers))
 				continue
@@ -105,19 +105,20 @@
 				drop_item = TRUE
 				break
 	// Drop all necessary items (handcuffs, legcuffs, items if seen)
+	user.uncuff()
 	if(drop_item)
 		for(var/obj/item/literally_everything in user.get_all_gear())
 			owner.dropItemToGround(literally_everything, TRUE)
 
-	playsound(current_turf, 'sound/effects/magic/summon_karp.ogg', 60, 1)
+	playsound(current_turf, 'sound/effects/magic/summon_karp.ogg', vol = 60, vary = TRUE)
 
 	var/datum/effect_system/steam_spread/bloodsucker/puff = new(user.loc)
 	puff.set_up(3, 0, current_turf)
 	puff.start()
-
+	/// STEP FIVE: Create animal at prev location
 	var/mob/living/basic/new_mob = pick_weight(spawning_mobs)
 	new new_mob(current_turf)
-
+	/// TELEPORT: Move to Coffin & Close it!
 	user.set_resting(TRUE, TRUE, FALSE)
 	do_teleport(owner, bloodsuckerdatum_power.claimed_coffin, no_effects = TRUE, forced = TRUE, channel = TELEPORT_CHANNEL_QUANTUM)
 	bloodsuckerdatum_power.claimed_coffin.close(owner)

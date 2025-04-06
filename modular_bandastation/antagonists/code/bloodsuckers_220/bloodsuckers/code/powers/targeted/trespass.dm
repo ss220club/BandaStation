@@ -10,6 +10,7 @@
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
 	purchase_flags = BLOODSUCKER_CAN_BUY|VASSAL_CAN_BUY
 	bloodcost = 10
+	sol_multiplier = 10
 	cooldown_time = 8 SECONDS
 	prefire_message = "Select a destination."
 	//target_range = 2
@@ -71,7 +72,7 @@
 	)
 	// Effect Origin
 	var/sound_strength = max(60, 70 - level_current * 10)
-	playsound(get_turf(owner), 'sound/effects/magic/summon_karp.ogg', sound_strength, 1)
+	playsound(get_turf(owner), 'sound/effects/magic/summon_karp.ogg', vol = sound_strength, vary = TRUE)
 	var/datum/effect_system/steam_spread/bloodsucker/puff = new /datum/effect_system/steam_spread()
 	puff.set_up(3, 0, my_turf)
 	puff.start()
@@ -99,7 +100,7 @@
 	user.density = 1
 	user.invisibility = invis_was
 	// Effect Destination
-	playsound(get_turf(owner), 'sound/effects/magic/summon_karp.ogg', 60, 1)
+	playsound(get_turf(owner), 'sound/effects/magic/summon_karp.ogg', vol = 60, vary = TRUE)
 	puff = new /datum/effect_system/steam_spread/()
 	puff.effect_type = /obj/effect/particle_effect/fluid/smoke/vampsmoke
 	puff.set_up(3, 0, target_turf)

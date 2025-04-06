@@ -55,9 +55,7 @@
 	if(!active)
 		return
 	var/mob/living/user = owner
-	var/mob/living/feed_target
-	if(target_ref)
-		feed_target = target_ref.resolve()
+	var/mob/living/feed_target = target_ref?.resolve()
 	if(isnull(feed_target))
 		log_combat(user, user, "fed on blood (target not found)", addition="(and took [blood_taken] blood)")
 	else
@@ -130,7 +128,7 @@
 			continue
 		if(watchers.is_blind() || watchers.is_nearsighted_currently())
 			continue
-		if(IS_BLOODSUCKER(watchers) || IS_VASSAL(watchers) || HAS_TRAIT(watchers.mind, TRAIT_BLOODSUCKER_HUNTER))
+		if(IS_BLOODSUCKER(watchers) || IS_VASSAL(watchers) || HAS_MIND_TRAIT(watchers, TRAIT_BLOODSUCKER_HUNTER))
 			continue
 		owner.balloon_alert(owner, "feed noticed!")
 		bloodsuckerdatum_power.give_masquerade_infraction()
@@ -180,7 +178,7 @@
 	if(feed_strength_mult > 5 && feed_target.stat < DEAD)
 		user.add_mood_event("drankblood", /datum/mood_event/drankblood)
 	// Drank mindless as Ventrue? - BAD
-	if((bloodsuckerdatum_power.my_clan && bloodsuckerdatum_power.my_clan.blood_drink_type == BLOODSUCKER_DRINK_SNOBBY) && !feed_target.mind)
+	if((bloodsuckerdatum_power.my_clan?.blood_drink_type == BLOODSUCKER_DRINK_SNOBBY) && !feed_target.mind)
 		user.add_mood_event("drankblood", /datum/mood_event/drankblood_bad)
 	if(feed_target.stat >= DEAD)
 		user.add_mood_event("drankblood", /datum/mood_event/drankblood_dead)
@@ -238,7 +236,7 @@
 
 /datum/action/cooldown/bloodsucker/feed/proc/can_feed_from(mob/living/target, give_warnings = FALSE)
 	if(istype(target, /mob/living/basic/mouse))
-		if(bloodsuckerdatum_power.my_clan && bloodsuckerdatum_power.my_clan.blood_drink_type == BLOODSUCKER_DRINK_SNOBBY)
+		if(bloodsuckerdatum_power.my_clan?.blood_drink_type == BLOODSUCKER_DRINK_SNOBBY)
 			if(give_warnings)
 				owner.balloon_alert(owner, "too disgusting!")
 			return FALSE
@@ -256,7 +254,7 @@
 		if(give_warnings)
 			owner.balloon_alert(owner, "suit too thick!")
 		return FALSE
-	if((bloodsuckerdatum_power.my_clan && bloodsuckerdatum_power.my_clan.blood_drink_type == BLOODSUCKER_DRINK_SNOBBY) && !target_user.mind && !bloodsuckerdatum_power.frenzied)
+	if((bloodsuckerdatum_power.my_clan?.blood_drink_type == BLOODSUCKER_DRINK_SNOBBY) && !target_user.mind && !bloodsuckerdatum_power.frenzied)
 		if(give_warnings)
 			owner.balloon_alert(owner, "cant drink from mindless!")
 		return FALSE

@@ -21,7 +21,7 @@
 		At level 5, you will be able to mesmerize regardless of your target's direction.\n\
 		Higher levels will increase the time of the victim's paralysis."
 	power_flags = NONE
-	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
+	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_DURING_SOL
 	purchase_flags = BLOODSUCKER_CAN_BUY|VASSAL_CAN_BUY
 	bloodcost = 30
 	cooldown_time = 20 SECONDS
@@ -112,18 +112,18 @@
 	if(IS_MONSTERHUNTER(mesmerized_target))
 		to_chat(mesmerized_target, span_notice("You feel your eyes burn for a while, but it passes."))
 		return
-	if(HAS_TRAIT_FROM(mesmerized_target, TRAIT_MUTE, BLOODSUCKER_TRAIT))
+	if(HAS_TRAIT_FROM(mesmerized_target, TRAIT_MUTE, MESMERIZED_TRAIT))
 		owner.balloon_alert(owner, "[mesmerized_target] is already in a hypnotic gaze.")
 		return
 	if(iscarbon(mesmerized_target))
 		owner.balloon_alert(owner, "successfully mesmerized [mesmerized_target].")
 		if(level_current >= 2)
-			ADD_TRAIT(mesmerized_target, TRAIT_MUTE, BLOODSUCKER_TRAIT)
+			ADD_TRAIT(mesmerized_target, TRAIT_MUTE, MESMERIZED_TRAIT)
 		mesmerized_target.Immobilize(power_time)
 		mesmerized_target.adjust_silence(power_time)
 		//mesmerized_target.silent += power_time / 10 // Silent isn't based on ticks.
-		mesmerized_target.next_move = world.time + power_time // <--- Use direct change instead. We want an unmodified delay to their next move // mesmerized_target.changeNext_move(power_time) // check click.dm
-		ADD_TRAIT(mesmerized_target, TRAIT_NO_TRANSFORM, BLOODSUCKER_TRAIT)
+		COOLDOWN_START(mesmerized_target, next_move, power_time) // <--- Use direct change instead. We want an unmodified delay to their next move // mesmerized_target.changeNext_move(power_time) // check click.dm
+		ADD_TRAIT(mesmerized_target, TRAIT_NO_TRANSFORM, MESMERIZED_TRAIT)
 		addtimer(CALLBACK(src, PROC_REF(end_mesmerize), user, mesmerized_target), power_time)
 	power_activated_sucessfully() // PAY COST! BEGIN COOLDOWN!
 
@@ -132,8 +132,7 @@
 	. = ..()
 
 /datum/action/cooldown/bloodsucker/targeted/mesmerize/proc/end_mesmerize(mob/living/user, mob/living/target)
-	REMOVE_TRAIT(target, TRAIT_MUTE, BLOODSUCKER_TRAIT)
-	REMOVE_TRAIT(target, TRAIT_NO_TRANSFORM, BLOODSUCKER_TRAIT)
+	REMOVE_TRAITS_IN(target, MESMERIZED_TRAIT)
 	// They Woke Up! (Notice if within view)
 	if(istype(user) && target.stat == CONSCIOUS && (target in view(6, get_turf(user))))
 		owner.balloon_alert(owner, "[target] snapped out of their trance.")

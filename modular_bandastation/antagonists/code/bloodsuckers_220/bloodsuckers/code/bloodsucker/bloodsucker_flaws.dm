@@ -17,25 +17,22 @@
  * * admin_selecting - Set to TRUE if an admin is using this proc to select a clan for someone.
  */
 /datum/antagonist/bloodsucker/proc/assign_clan_and_bane(mob/person_selecting, admin_selecting = FALSE)
-	if(my_clan)
+	if(my_clan || owner.current.has_status_effect(/datum/status_effect/frenzy))
 		return
-	if(owner.current.has_status_effect(/datum/status_effect/frenzy))
-		return
-	if(!person_selecting)
-		person_selecting = owner.current
+	person_selecting ||= owner.current
 
 	var/list/options = list()
 	var/list/radial_display = list()
 	for(var/datum/bloodsucker_clan/all_clans as anything in typesof(/datum/bloodsucker_clan))
 		// Проверяем не является ли клан Caitiff и доступен ли он для присоединения (или админ выбирает)
-		if((!initial(all_clans.joinable_clan) && !admin_selecting) || (!admin_selecting && initial(all_clans.name) == CLAN_NONE))
+		if((!all_clans::joinable_clan && !admin_selecting) || (!admin_selecting && all_clans::name == CLAN_NONE))
 			continue
-		options[initial(all_clans.name)] = all_clans
+		options[all_clans::name] = all_clans
 
 		var/datum/radial_menu_choice/option = new
-		option.image = image(icon = initial(all_clans.join_icon), icon_state = initial(all_clans.join_icon_state))
-		option.info = "[initial(all_clans.name)] - [span_boldnotice(initial(all_clans.join_description))]"
-		radial_display[initial(all_clans.name)] = option
+		option.image = image(icon = all_clans::join_icon, icon_state = all_clans::join_icon_state)
+		option.info = "[all_clans::name] - [span_boldnotice(all_clans::join_description)]"
+		radial_display[all_clans::name] = option
 
 	var/chosen_clan
 	if(admin_selecting)

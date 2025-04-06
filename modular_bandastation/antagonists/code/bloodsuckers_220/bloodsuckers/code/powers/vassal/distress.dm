@@ -5,7 +5,7 @@
 	power_explanation = "Distress:\n\
 		Use this Power from anywhere and your master Bloodsucker will instantly be alerted of your location."
 	power_flags = NONE
-	check_flags = NONE
+	check_flags = BP_CANT_USE_WHILE_UNCONSCIOUS
 	purchase_flags = NONE
 	bloodcost = 10
 	cooldown_time = 10 SECONDS

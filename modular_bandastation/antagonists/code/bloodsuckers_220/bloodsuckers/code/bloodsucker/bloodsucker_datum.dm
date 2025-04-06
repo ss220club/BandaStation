@@ -30,6 +30,8 @@
 	COOLDOWN_DECLARE(bloodsucker_spam_sol_burn)
 	///Timer between alerts for Healing messages
 	COOLDOWN_DECLARE(bloodsucker_spam_healing)
+	/// Cooldown for bloodsuckers going into Frenzy.
+	COOLDOWN_DECLARE(bloodsucker_frenzy_cooldown)
 
 	///Used for assigning your name
 	var/bloodsucker_name
@@ -48,6 +50,8 @@
 	var/frenzy_threshold = FRENZY_MINIMUM_THRESHOLD_ENTER
 	///If we are currently in a Frenzy
 	var/frenzied = FALSE
+	/// Whether the death handling code is active or not.
+	var/handling_death = FALSE
 	///If we have a task assigned
 	var/has_task = FALSE
 	///How many times have we used a blood altar
@@ -105,6 +109,7 @@
 		TRAIT_RADIMMUNE,
 		TRAIT_GENELESS,
 		TRAIT_STABLEHEART,
+		TRAIT_STABLELIVER,
 		TRAIT_NOSOFTCRIT,
 		TRAIT_NOHARDCRIT,
 		TRAIT_AGEUSIA,
@@ -114,6 +119,13 @@
 		TRAIT_HARDLY_WOUNDED,
 		TRAIT_NO_MIRROR_REFLECTION, //Mirrors aren't THAT common— besides, Masquerade can cover this up.
 	)
+
+
+/// A typecache of organs we'll expel during Torpor.
+	var/static/list/yucky_organ_typecache = typecacheof(list(
+		/obj/item/organ/body_egg,
+		/obj/item/organ/zombie_infection,
+	))
 
 /**
  * Apply innate effects is everything given to the mob
@@ -133,6 +145,8 @@
 		on_hud_created()
 	else
 		RegisterSignal(current_mob, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+
+	ensure_brain_nonvital(current_mob)
 #ifdef BLOODSUCKER_TESTING
 	var/turf/user_loc = get_turf(current_mob)
 	new /obj/structure/closet/crate/coffin(user_loc)
@@ -223,6 +237,13 @@
 	UnregisterSignal(SSsunlight, list(COMSIG_SOL_RANKUP_BLOODSUCKERS, COMSIG_SOL_NEAR_START, COMSIG_SOL_END, COMSIG_SOL_RISE_TICK, COMSIG_SOL_WARNING_GIVEN))
 	clear_powers_and_stats()
 	check_cancel_sunlight() //check if sunlight should end
+	if(!iscarbon(owner.current))
+		return
+	var/mob/living/carbon/carbon_owner = owner.current
+	var/obj/item/organ/brain/not_vamp_brain = carbon_owner.get_organ_slot(ORGAN_SLOT_BRAIN)
+	if(not_vamp_brain && (not_vamp_brain.decoy_override != initial(not_vamp_brain.decoy_override)))
+		not_vamp_brain.organ_flags |= ORGAN_VITAL
+		not_vamp_brain.decoy_override = FALSE
 	return ..()
 
 /datum/antagonist/bloodsucker/on_body_transfer(mob/living/old_body, mob/living/new_body)
@@ -264,8 +285,7 @@
 		new_right_arm.unarmed_damage_high = old_right_arm_unarmed_damage_high
 
 	//Give Bloodsucker Traits
-	if(old_body)
-		old_body.remove_traits(bloodsucker_traits, BLOODSUCKER_TRAIT)
+	old_body?.remove_traits(bloodsucker_traits, BLOODSUCKER_TRAIT)
 	new_body.add_traits(bloodsucker_traits, BLOODSUCKER_TRAIT)
 
 	//Give the datum the blood volume of its new body.
@@ -371,7 +391,7 @@
 
 	// Default Report
 	var/objectives_complete = TRUE
-	if(objectives.len)
+	if(length(objectives))
 		report += printobjectives(objectives)
 		for(var/datum/objective/objective in objectives)
 			if(objective.objective_name == "Optional Objective")
@@ -381,10 +401,10 @@
 				break
 
 	// Now list their vassals
-	if(vassals.len)
-		report += "<span class='header'>Their vassals were...</span>"
+	if(length(objectives))
+		report += span_header("Their Vassals were...")
 		for(var/datum/antagonist/vassal/all_vassals as anything in vassals)
-			if(!all_vassals.owner)
+			if(QDELETED(all_vassals?.owner))
 				continue
 			var/list/vassal_report = list()
 			vassal_report += "<b>[all_vassals.owner.name]</b>"
@@ -397,12 +417,25 @@
 				vassal_report += " and was the <b>Revenge Vassal</b>"
 			report += vassal_report.Join()
 
-	if(objectives.len == 0 || objectives_complete)
+	if(!length(objectives) || objectives_complete)
 		report += "<span class='greentext big'>The [name] was successful!</span>"
 	else
 		report += "<span class='redtext big'>The [name] has failed!</span>"
 
 	return report.Join("<br>")
+
+/// "Oh, well, that's step one. What about two through ten?"
+/// Beheading bloodsuckers is kinda buggy and results in them being dead-dead without actually being final deathed, which is NOT something that's desired.
+/// Just stake them. No shortcuts.
+/datum/antagonist/bloodsucker/proc/ensure_brain_nonvital(mob/living/mob_override)
+	var/mob/living/carbon/carbon_owner = mob_override || owner.current
+	if(!iscarbon(carbon_owner))
+		return
+	var/obj/item/organ/brain/brain = carbon_owner.get_organ_slot(ORGAN_SLOT_BRAIN)
+	if(QDELETED(brain))
+		return
+	brain.organ_flags &= ~ORGAN_VITAL
+	brain.decoy_override = TRUE
 
 /datum/antagonist/bloodsucker/proc/give_starting_powers()
 	for(var/datum/action/cooldown/bloodsucker/all_powers as anything in all_bloodsucker_powers)
@@ -492,6 +525,18 @@
 	survive_objective.owner = owner
 	objectives += survive_objective
 
-	var/datum/objective/bloodsucker_lair/lair_objective = new
+	var/datum/objective/bloodsucker/lair/lair_objective = new
 	lair_objective.owner = owner
 	objectives += lair_objective
+
+	// Queue conversion objective to be assigned after 5 minutes
+	addtimer(CALLBACK(src, PROC_REF(assign_conversion_objective)), 5 MINUTES)
+
+/// Helper proc to assign the conversion objective after timer
+/datum/antagonist/bloodsucker/proc/assign_conversion_objective()
+	var/datum/objective/bloodsucker/conversion/chosen_subtype = pick(subtypesof(/datum/objective/bloodsucker/conversion))
+	var/datum/objective/bloodsucker/conversion/conversion_objective = new chosen_subtype
+	conversion_objective.owner = owner
+	conversion_objective.objective_name = "Optional Objective"
+	objectives += conversion_objective
+	owner.announce_objectives() // Re-announce objectives to show the new one

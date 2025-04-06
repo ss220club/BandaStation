@@ -22,6 +22,7 @@
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
 	bloodcost = 5
 	constant_bloodcost = 2
+	sol_multiplier = 5
 	cooldown_time = 12 SECONDS
 	target_range = 2
 	prefire_message = "Where do you wish to teleport to?"
@@ -88,6 +89,14 @@
 	owner.AddElement(/datum/element/digitalcamo)
 	animate(owner, alpha = 15, time = 1 SECONDS)
 	user.balloon_alert(user, "cloak turned on.")
+
+/datum/action/cooldown/bloodsucker/fortitude/process(seconds_per_tick)
+	// Checks that we can keep using this.
+	. = ..()
+	if(!.)
+		return
+	if(!active)
+		return
 
 /datum/action/cooldown/bloodsucker/targeted/tremere/auspex/DeactivatePower()
 	var/mob/living/user = owner

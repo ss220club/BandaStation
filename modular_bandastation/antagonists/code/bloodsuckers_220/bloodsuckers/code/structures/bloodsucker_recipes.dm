@@ -150,9 +150,9 @@
 	result = /obj/structure/bloodsucker/bloodaltar
 	tool_behaviors = list(TOOL_WELDER, TOOL_WRENCH)
 	reqs = list(
-		/obj/item/stack/rods = 5,
+		/obj/item/stack/sheet/mineral/wood = 5,
 		/obj/item/stack/sheet/iron = 5,
-		/obj/effect/decal/cleanable/blood = 1,
+		/obj/item/stack/sheet/cloth = 3,
 		/datum/reagent/ash = 30,
 	)
 	time = 13 SECONDS

@@ -5,15 +5,16 @@
  * target - The person we check for antag datums.
  */
 /datum/antagonist/bloodsucker/proc/AmValidAntag(mob/target)
+	. = VASSALIZATION_ALLOWED
 	if(HAS_MIND_TRAIT(target, TRAIT_UNCONVERTABLE))
 		return VASSALIZATION_BANNED
 
-	var/vassalization_status = VASSALIZATION_ALLOWED
 	for(var/datum/antagonist/antag_datum as anything in target.mind.antag_datums)
 		if(antag_datum.type in vassal_banned_antags)
 			return VASSALIZATION_BANNED
-		vassalization_status = VASSALIZATION_DISLOYAL
-	return vassalization_status
+		return VASSALIZATION_DISLOYAL
+	if(HAS_TRAIT(target, TRAIT_MINDSHIELD))
+		return VASSALIZATION_DISLOYAL
 
 /**
  * # can_make_vassal
@@ -38,7 +39,7 @@
 	if(!master || (master == owner.current))
 		return TRUE
 	var/datum/antagonist/bloodsucker/bloodsuckerdatum = master.mind.has_antag_datum(/datum/antagonist/bloodsucker)
-	if(bloodsuckerdatum && bloodsuckerdatum.broke_masquerade)
+	if(bloodsuckerdatum?.broke_masquerade)
 		//vassal stealing
 		return TRUE
 	to_chat(owner.current, span_danger("[conversion_target]'s mind is overwhelmed with too much external force to put your own!"))

@@ -28,16 +28,6 @@
 	mood_change = 10
 	timeout = 5 MINUTES
 
-/datum/mood_event/daylight_1
-	description = span_boldwarning("Этот деревянный гроб ужасен! Я так и не смог нормально выспаться.")
-	mood_change = -3
-	timeout = 3 MINUTES
-
-/datum/mood_event/daylight_2
-	description = span_boldwarning("Лучи мерзкого солнца обожгли меня!")
-	mood_change = -7
-	timeout = 5 MINUTES
-
 ///Candelabrum's mood event to non Bloodsucker/Vassals
 /datum/mood_event/vampcandle
 	description = span_boldwarning("Этот свет разрушает мою связь с реальностью!")

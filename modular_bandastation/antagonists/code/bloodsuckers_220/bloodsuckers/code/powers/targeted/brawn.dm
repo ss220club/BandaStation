@@ -9,7 +9,7 @@
 		At level 4, this ability wlil bash airlocks open as long as they aren't bolted.\n\
 		Higher levels will increase this ability's damage and knockdown."
 	power_flags = BP_AM_TOGGLE
-	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
+	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_DURING_SOL
 	purchase_flags = BLOODSUCKER_CAN_BUY|VASSAL_CAN_BUY
 	bloodcost = 8
 	cooldown_time = 9 SECONDS
@@ -186,7 +186,8 @@
 			playsound(get_turf(target_airlock), 'sound/effects/bang.ogg', 30, 1, -1)
 			if(brujah && level_current >= 3 && target_airlock.locked)
 				target_airlock.unbolt()
-			target_airlock.open(2) // open(2) is like a crowbar or jaws of life.
+			target_airlock.obj_flags |= EMAGGED
+			target_airlock.emag_act(user)  // Use emag_act instead of undefined handle_emag_effects
 
 /datum/action/cooldown/bloodsucker/targeted/brawn/CheckValidTarget(atom/target_atom)
 	. = ..()
