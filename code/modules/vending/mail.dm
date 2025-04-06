@@ -29,11 +29,13 @@
 	var/static/list/sorting_departments = list(
 		DEPARTMENT_ENGINEERING,
 		DEPARTMENT_SECURITY,
+		DEPARTMENT_JUSTICE,
 		DEPARTMENT_MEDICAL,
 		DEPARTMENT_SCIENCE,
 		DEPARTMENT_CARGO,
 		DEPARTMENT_SERVICE,
 		DEPARTMENT_COMMAND,
+		DEPARTMENT_NANOTRASEN_REPRESENTATION,
 	)
 	var/static/list/choices = list(
 		"Eject" = icon('icons/hud/radial.dmi', "radial_eject"),
@@ -278,17 +280,17 @@
 		var/image/mail_output = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_[output_dir]")
 		switch(output_dir)
 			if(NORTH)
-				mail_output.pixel_y = 32
+				mail_output.pixel_z = 32
 			if(SOUTH)
-				mail_output.pixel_y = -32
+				mail_output.pixel_z = -32
 			if(EAST)
-				mail_output.pixel_x = 32
+				mail_output.pixel_w = 32
 			if(WEST)
-				mail_output.pixel_x = -32
+				mail_output.pixel_w = -32
 		mail_output.color = COLOR_CRAYON_ORANGE
 		var/mutable_appearance/light_out = emissive_appearance(mail_output.icon, mail_output.icon_state, offset_spokesman = src, alpha = mail_output.alpha)
-		light_out.pixel_y = mail_output.pixel_y
-		light_out.pixel_x = mail_output.pixel_x
+		light_out.pixel_z = mail_output.pixel_z
+		light_out.pixel_w = mail_output.pixel_w
 		. += mail_output
 		. += light_out
 		. += mutable_appearance(base_icon_state, currentstate)

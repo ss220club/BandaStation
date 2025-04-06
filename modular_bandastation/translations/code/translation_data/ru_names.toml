@@ -6081,7 +6081,7 @@ instrumental = "ножом"
 prepositional = "ноже"
 gender = "male"
 
-["итальянские усы"]
+["italian moustache"]
 nominative = "итальянские усы"
 genitive = "итальянских усов"
 dative = "итальянским усам"
@@ -22502,3 +22502,63 @@ dative = "своим"
 accusative = "свои"
 instrumental = "своими"
 prepositional = "своих"
+
+["CQC implant"]
+nominative = "CQC имплант"
+genitive = "CQC импланта"
+dative = "CQC импланту"
+accusative = "CQC имплант"
+instrumental = "CQC имплантом"
+prepositional = "CQC импланте"
+gender = "male"
+
+["implanter (CQC)"]
+nominative = "имплантер (CQC)"
+genitive = "иплантера (CQC)"
+dative = "имплантеру (CQC)"
+accusative = "имплантер (CQC)"
+instrumental = "имплантером (CQC)"
+prepositional = "имплантере (CQC)"
+gender = "male"
+
+["implant case - 'Close Quarters Combat'"]
+nominative = "кейс импланта - 'Close Quarters Combat'"
+genitive = "кейса импланта - 'Close Quarters Combat'"
+dative = "кейсу импланта - 'Close Quarters Combat'"
+accusative = "кейс импланта - 'Close Quarters Combat'"
+instrumental = "кейсом импланта - 'Close Quarters Combat'"
+prepositional = "кейсе импланта - 'Close Quarters Combat'"
+gender = "male"
+
+["fake moustache"]
+nominative = "накладные усы"
+genitive = "накладных усов"
+dative = "накладным усам"
+accusative = "накладные усы"
+instrumental = "накладными усами"
+prepositional = "накладных усах"
+gender = "plural"
+
+["hookah"]
+nominative = "кальян"
+genitive = "кальяна"
+dative = "кальяну"
+accusative = "кальян"
+instrumental = "кальяном"
+prepositional = "кальяне"
+
+["mouthpiece"]
+nominative = "кальянный мундштук"
+genitive = "кальянного мундштука"
+dative = "кальянному мундштуку"
+accusative = "кальянного мундштука"
+instrumental = "кальянным мундштуком"
+prepositional = "кальянном мундштуке"
+
+["hookah coals"]
+nominative = "угли для кальяна"
+genitive = "углей для кальяна"
+dative = "углям для кальяна"
+accusative = "угли для кальяна"
+instrumental = "углями для кальяна"
+prepositional = "углях для кальяна"

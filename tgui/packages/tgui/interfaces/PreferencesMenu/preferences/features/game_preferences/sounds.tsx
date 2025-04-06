@@ -29,16 +29,16 @@ export const sound_announcements: FeatureToggle = {
 };
 
 export const sound_ghost_poll_prompt: FeatureChoiced = {
-  name: 'Ghost poll prompt',
-  category: 'SOUND',
-  description: 'Choose which sound prompt to play on getting ghost polls.',
+  name: 'Оповещения призрака',
+  category: 'ЗВУК',
+  description: 'Выберите какой звук будет при оповещении, когда вы призрак.',
   component: FeatureDropdownInput,
 };
 
 export const sound_ghost_poll_prompt_volume: Feature<number> = {
-  name: 'Ghost poll prompt volume',
-  category: 'SOUND',
-  description: 'The volume that ghost poll prompts will play at.',
+  name: 'Оповещения призрака - громкость',
+  category: 'ЗВУК',
+  description: 'Звук оповещенией призрака.',
   component: FeatureSliderInput,
 };
 

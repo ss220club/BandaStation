@@ -280,7 +280,7 @@
 					destination_dock = "emergency_syndicate"
 					minor_announce("Обнаружен сбой в \
 						навигационных протоколах. Пожалуйста, свяжитесь с \
-						руководством.", "КРИТИЧЕСКАЯ НЕИСПРАВНОСТЬ:", sound_override = 'sound/announcer/announcement/announce_syndi.ogg')
+						руководством.", "КРИТИЧЕСКАЯ НЕИСПРАВНОСТЬ", sound_override = 'sound/announcer/announcement/announce_syndi.ogg')
 
 				dock_id(destination_dock)
 				mode = SHUTTLE_ENDGAME
