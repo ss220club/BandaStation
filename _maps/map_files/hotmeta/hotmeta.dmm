@@ -41155,13 +41155,7 @@
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 4
 	},
-/obj/machinery/computer/security/telescreen{
-	desc = "Used for watching Prison Wing holding areas.";
-	dir = 8;
-	name = "Prison Monitor";
-	network = list("prison");
-	pixel_x = 30
-	},
+/obj/machinery/computer/security/telescreen/prison/directional/east,
 /turf/open/floor/iron,
 /area/station/security/warden)
 "ouX" = (

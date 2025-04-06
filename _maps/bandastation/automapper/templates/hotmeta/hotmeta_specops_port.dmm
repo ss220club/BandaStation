@@ -29,8 +29,9 @@
 "k" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/marker_beacon/olive,
-/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
-/area/space/nearstation)
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "m" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -49,8 +50,9 @@
 	shuttle_id = "specops_home";
 	width = 5
 	},
-/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
-/area/space)
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "z" = (
 /turf/closed/wall,
 /area/station/hallway/secondary/entry)
@@ -89,8 +91,9 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "T" = (
-/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
-/area/space)
+/obj/effect/turf_decal/sand/plating/volcanic,
+/turf/open/floor/plating/lavaland_atmos,
+/area/lavaland/surface/outdoors)
 "U" = (
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
