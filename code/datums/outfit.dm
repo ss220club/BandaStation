@@ -503,7 +503,7 @@
 	var/list/beltpack = outfit_data["belt_contents"]
 	belt_contents = list()
 	for(var/itype in beltpack)
-		var/inum = beltpack[type_to_load]
+		var/inum = beltpack[itype]
 		if(!isnum(inum))
 			inum = 1
 		for(var/i in 1 to inum)
