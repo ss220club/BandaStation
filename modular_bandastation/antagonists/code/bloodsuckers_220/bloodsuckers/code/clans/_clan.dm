@@ -10,10 +10,7 @@
 	///The name of the clan we're in.
 	var/name = CLAN_NONE
 	///Description of what the clan is, given when joining and through your antag UI.
-	var/description = "The Caitiff are as basic as you can get with Bloodsuckers. \n\
-		Entirely clanless, they are blissfully unaware of the greater clan structure. \n\
-		No additional abilities are gained, none are lost: if you want a plain Bloodsucker then this is it. \n\
-		The favorite vassal will gain the Brawn ability to help in combat."
+	var/description
 	///The clan objective that is required to greentext.
 	var/datum/objective/clan_objective
 	///The icon of the radial icon to join this clan.
@@ -21,14 +18,20 @@
 	///Same as join_icon, but the state
 	var/join_icon_state = "caitiff"
 	///Description shown when trying to join the clan.
-	var/join_description = "The default, classic Bloodsucker."
+	var/join_description
 	///Whether the clan can be joined by players. FALSE for flavortext-only clans.
 	var/joinable_clan = TRUE
 	///Boolean on whether the clan shows up in the Archives of the Kindred.
 	var/shows_in_archives = TRUE
+	/// От этого зависит доступный пул способностей клана.
+	var/aggressive_clan = FALSE
 
 	///How we will drink blood using Feed.
 	var/blood_drink_type = BLOODSUCKER_DRINK_NORMAL
+	///Whether this clan has a vassal limit
+	var/has_vassal_limit = FALSE
+	///Maximum number of vassals this clan can have
+	var/max_vassals = 3
 
 /datum/bloodsucker_clan/New(datum/antagonist/bloodsucker/owner_datum)
 	. = ..()
@@ -149,8 +152,14 @@
 	// Purchase Power Prompt
 	var/list/options = list()
 	for(var/datum/action/cooldown/bloodsucker/power as anything in bloodsuckerdatum.all_bloodsucker_powers)
-		if(initial(power.purchase_flags) & BLOODSUCKER_CAN_BUY && !(locate(power) in bloodsuckerdatum.powers))
-			options[initial(power.name)] = power
+		// Replace old check with new logic based on aggressive_clan
+		if(aggressive_clan && !(initial(power.purchase_flags) & AGGRESSIVE_CLAN_CAN_BUY))
+			continue
+		if(!aggressive_clan && !(initial(power.purchase_flags) & NON_AGGRESSIVE_CLAN_CAN_BUY))
+			continue
+		if(locate(power) in bloodsuckerdatum.powers)
+			continue
+		options[initial(power.name)] = power
 
 	if(options.len < 1)
 		to_chat(bloodsuckerdatum.owner.current, span_notice("You grow more ancient by the night!"))

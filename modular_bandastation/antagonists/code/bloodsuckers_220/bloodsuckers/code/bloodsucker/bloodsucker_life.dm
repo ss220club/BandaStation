@@ -19,6 +19,8 @@
 		if((COOLDOWN_FINISHED(src, bloodsucker_spam_healing)) && bloodsucker_blood_volume > 0)
 			to_chat(owner.current, span_notice("The power of your blood begins knitting your wounds..."))
 			COOLDOWN_START(src, bloodsucker_spam_healing, BLOODSUCKER_SPAM_HEALING)
+	// Почему это тут а не в другом месте? Потому что она постоянно спадает у вампира, а так она не спадаеты
+	owner.current.see_invisible = SEE_INVISIBLE_CRYPT
 	// Standard Updates
 	SEND_SIGNAL(src, COMSIG_BLOODSUCKER_ON_LIFETICK)
 	INVOKE_ASYNC(src, PROC_REF(handle_bloodsucker_starving))
@@ -120,8 +122,6 @@
 		else
 			fireheal = min(user.getFireLoss_nonProsthetic(), actual_regen) / 1.2 // 20% slower than being in a coffin
 			mult *= 3
-			if(check_limbs())
-				return TRUE
 	// Heal if Damaged
 	if((bruteheal + fireheal > 0) && mult > 0) // Just a check? Don't heal/spend, and return.
 		// We have damage. Let's heal (one time)

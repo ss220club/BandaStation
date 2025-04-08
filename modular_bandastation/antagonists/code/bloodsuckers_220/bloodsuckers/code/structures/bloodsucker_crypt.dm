@@ -106,8 +106,6 @@
 	icon_state = "bloodaltar"
 	density = TRUE
 	anchored = FALSE
-	layer = TABLE_LAYER
-	pass_flags = PASSSTRUCTURE | PASSTABLE | LETPASSTHROW
 	can_buckle = FALSE
 	var/sacrifices = 0
 	var/sacrificialtask = FALSE
@@ -128,6 +126,7 @@
 /obj/structure/bloodsucker/bloodaltar/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/climbable)
+	AddElement(/datum/element/elevation, pixel_shift = 12)
 
 /obj/structure/bloodsucker/bloodaltar/bolt()
 	. = ..()
@@ -238,8 +237,6 @@
 	icon_state = "vassalrack"
 	anchored = FALSE
 	density = TRUE
-	layer = TABLE_LAYER
-	pass_flags = PASSSTRUCTURE | PASSTABLE | LETPASSTHROW
 	can_buckle = TRUE
 	buckle_lying = 180
 	buckle_prevents_pull = TRUE

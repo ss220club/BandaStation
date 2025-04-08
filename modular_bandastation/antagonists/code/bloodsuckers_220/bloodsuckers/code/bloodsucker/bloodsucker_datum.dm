@@ -140,7 +140,7 @@
 	RegisterSignal(current_mob, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 	handle_clown_mutation(current_mob, mob_override ? null : "As a vampiric clown, you are no longer a danger to yourself. Your clownish nature has been subdued by your thirst for blood.")
 	add_team_hud(current_mob)
-
+	current_mob.set_invis_see(SEE_INVISIBLE_CRYPT)
 	if(current_mob.hud_used)
 		on_hud_created()
 	else
@@ -497,6 +497,8 @@
 	owner.current.setMaxHealth(initial(owner.current.maxHealth))
 	// Language
 	owner.current.remove_language(/datum/language/vampiric)
+	// видеть скрытое в логове
+	owner.current.set_invis_see(SEE_INVISIBLE_LIVING)
 	// Heart & Eyes
 	var/mob/living/carbon/user = owner.current
 	var/obj/item/organ/heart/newheart = owner.current.get_organ_slot(ORGAN_SLOT_HEART)
@@ -534,6 +536,14 @@
 
 /// Helper proc to assign the conversion objective after timer
 /datum/antagonist/bloodsucker/proc/assign_conversion_objective()
+	// If bloodsucker doesn't have a clan yet, wait 5 more minutes
+	if(!my_clan)
+		addtimer(CALLBACK(src, PROC_REF(assign_conversion_objective)), 5 MINUTES)
+		return
+	// If bloodsucker's clan has vassal limit, don't give conversion objective
+	if(my_clan.has_vassal_limit)
+		return
+	// Assign conversion objective
 	var/datum/objective/bloodsucker/conversion/chosen_subtype = pick(subtypesof(/datum/objective/bloodsucker/conversion))
 	var/datum/objective/bloodsucker/conversion/conversion_objective = new chosen_subtype
 	conversion_objective.owner = owner

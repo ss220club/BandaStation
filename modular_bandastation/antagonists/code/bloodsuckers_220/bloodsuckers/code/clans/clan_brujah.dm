@@ -1,22 +1,24 @@
 /datum/bloodsucker_clan/brujah
 	name = CLAN_BRUJAH
-	description =  "Бруджа стремятся к захвату власти прямыми (и, как правило, насильственными) средствами.\n\
+	description = "Бруджа стремятся к захвату власти прямыми (и, как правило, насильственными) средствами.\n\
 		С возрастом они приобретают мощное телосложение и становятся способными уничтожить практически все голыми руками.\n\
-		С ними следует быть острожонее, так как это ярые повстанцы, бунтовщики и анархисты, которые всегда пытаются подорвать авторитет местных властей. \n\
-		Их любимый вассал получает частичку их необычайной физической силы в виде  the regular Brawn ability, а его кулаки становятся смертоносным оружием."
+		С ними следует быть острожонее, так как это ярые повстанцы, бунтовщики и анархисты, которые всегда пытаются подорвать авторитет местных властей."
 	clan_objective = /datum/objective/brujah_clan_objective
 	join_icon_state = "Бруджа"
 	join_description = "Вы получите улучшенную версию способности the brawn, которая позволит вам разрушать большинство сооружений (включая стены!) \
 		Восстаньте против власти и попытайся ниспровергнуть её, но, в свою очредь, вы <b>немедленно прекратите маскарад присоединившиь к нам</b>  \
 		и потеряете почти всю свою человечность."
+	aggressive_clan = TRUE
 	blood_drink_type = BLOODSUCKER_DRINK_INHUMANELY
+	has_vassal_limit = TRUE
+	max_vassals = 1
 
 
 /datum/bloodsucker_clan/brujah/New(datum/antagonist/bloodsucker/owner_datum)
 	. = ..()
-	owner_datum.special_vassals -= DISCORDANT_VASSAL //Removes Discordant Vassal, which is in the list by default.
 	owner_datum.break_masquerade()
-	owner_datum.AddHumanityLost(37.5) // Frenzy at 400
+	owner_datum.AddHumanityLost(37.5)
+	owner_datum.special_vassals -= DISCORDANT_VASSAL //Removes Discordant Vassal, which is in the list by default.
 	bloodsuckerdatum.remove_nondefault_powers(return_levels = TRUE)
 	// Copied over from 'clan_tremere.dm' with appropriate adjustment.
 	for(var/datum/action/cooldown/bloodsucker/power as anything in bloodsuckerdatum.all_bloodsucker_powers)

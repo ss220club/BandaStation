@@ -32,6 +32,8 @@
 	var/mob/living/resident
 	///The time it takes to pry this open with a crowbar.
 	var/pry_lid_timer = 25 SECONDS
+	/// Whether this coffin/crypt is currently hidden
+	var/crypt_hidden = FALSE
 
 /obj/structure/closet/crate/coffin/examine(mob/user)
 	. = ..()
@@ -40,6 +42,7 @@
 		. += span_cult("Rest in it while injured to enter Torpor. Entering it with unspent ranks will allow you to spend one.")
 		. += span_cult("Alt-Click while inside the coffin to lock/unlock.")
 		. += span_cult("Alt-Click while outside of your coffin to unclaim it, unanchoring it and all your other structures as a result.")
+		. += span_cult("Ctrl-Click your coffin to hide/reveal your crypt from mortals.")
 
 /obj/structure/closet/crate/coffin/blackcoffin
 	name = "black coffin"
@@ -253,6 +256,58 @@
 			if("Yes")
 				unclaim_coffin(TRUE)
 		return CLICK_ACTION_SUCCESS
+
+/obj/structure/closet/crate/coffin/click_ctrl(mob/user)
+	// Only the resident bloodsucker can hide their crypt
+	if(user != resident)
+		return
+
+	var/datum/antagonist/bloodsucker/bloodsuckerdatum = user.mind.has_antag_datum(/datum/antagonist/bloodsucker)
+	if(!bloodsuckerdatum)
+		return
+
+	if(!crypt_hidden)
+		// Show dialog for hiding crypt
+		var/static/list/hide_options = list(
+			"Yes" = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_yes"),
+			"No" = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_no"))
+		balloon_alert(user, "hide crypt for 100 blood?")
+		var/hide_response = show_radial_menu(user, src, hide_options, radius = 36, require_near = TRUE)
+		if(hide_response != "Yes")
+			return
+
+		// Check blood cost
+		if(bloodsuckerdatum.bloodsucker_blood_volume < 100)
+			to_chat(user, span_warning("You need at least 100 blood to hide your crypt!"))
+			return
+
+		bloodsuckerdatum.bloodsucker_blood_volume -= 100
+		toggle_crypt_visibility(TRUE)
+		to_chat(user, span_notice("You use your blood powers to obscure your crypt from mortal eyes."))
+	else
+		toggle_crypt_visibility(FALSE)
+		to_chat(user, span_notice("You allow your crypt to become visible once more."))
+	return TRUE
+
+/// Toggle visibility of the crypt and all associated structures
+/obj/structure/closet/crate/coffin/proc/toggle_crypt_visibility(hide = TRUE)
+	crypt_hidden = hide
+	if(hide)
+		alpha = 128
+		invisibility = INVISIBILITY_CRYPT
+	else
+		alpha = initial(alpha)
+		invisibility = 0
+
+	var/area/current_area = get_area(src)
+	for(var/obj/structure/bloodsucker/structure in current_area)
+		if(structure.owner == resident)
+			if(hide)
+				structure.alpha = 128
+				structure.invisibility = INVISIBILITY_CRYPT
+			else
+				structure.alpha = initial(structure.alpha)
+				structure.invisibility = 0
 
 /obj/structure/closet/crate/proc/LockMe(mob/user, inLocked = TRUE)
 	if(user != resident)

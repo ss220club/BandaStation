@@ -95,6 +95,8 @@
 	/// Give Vampire Language & Hud
 	owner.current.get_language_holder().omnitongue = TRUE //Grants omnitongue
 	owner.current.grant_language(/datum/language/vampiric)
+	// видеть скрытое в логове
+	owner.current.set_invis_see(SEE_INVISIBLE_CRYPT)
 	return ..()
 
 /datum/antagonist/vassal/on_removal()
@@ -116,6 +118,8 @@
 		power.Remove(owner.current)
 	//Remove Language & Hud
 	owner.current.remove_language(/datum/language/vampiric)
+	// видеть скрытое в логове
+	owner.current.set_invis_see(SEE_INVISIBLE_LIVING)
 	return ..()
 
 /datum/antagonist/vassal/on_body_transfer(mob/living/old_body, mob/living/new_body)
