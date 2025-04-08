@@ -10,9 +10,13 @@
 	default = "default"
 
 SUBSYSTEM_DEF(central)
-	var/list/discord_links = list()
-	init_order = INIT_ORDER_DBCORE
+	dependencies = list(
+		/datum/controller/subsystem/http
+	)
 	flags = SS_NO_FIRE
+	init_stage = INITSTAGE_FIRST
+	var/active = FALSE
+	var/list/discord_links = list()
 
 /datum/controller/subsystem/central/vv_edit_var(var_name, var_value)
 	return FALSE
@@ -20,14 +24,21 @@ SUBSYSTEM_DEF(central)
 /datum/controller/subsystem/central/CanProcCall(procname)
 	return FALSE
 
+/datum/controller/subsystem/central/New()
+	. = ..()
+	active = can_run()
+
 /datum/controller/subsystem/central/Initialize()
-	if(!CONFIG_GET(string/ss_central_url) || !CONFIG_GET(string/ss_central_token))
+	if(!active)
 		return SS_INIT_NO_NEED
 	load_whitelist()
 	// TODO: preload links
 
+/datum/controller/subsystem/central/proc/can_run()
+	return CONFIG_GET(string/ss_central_url) && CONFIG_GET(string/ss_central_token)
+
 /datum/controller/subsystem/central/stat_entry(msg)
-	if(!initialized)
+	if(!initialized || !active)
 		msg = "OFFLINE"
 	else
 		msg = "WL: [CONFIG_GET(flag/usewhitelist)] [CONFIG_GET(string/server_type)]"
