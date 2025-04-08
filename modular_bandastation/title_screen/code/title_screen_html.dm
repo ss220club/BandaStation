@@ -25,6 +25,7 @@
 	"}
 
 	if(screen_image_url)
+		html += {"<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">"}
 		html += {"<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">"}
 
 	html += {"<input type="checkbox" id="hide_menu">"}
@@ -207,9 +208,11 @@
 
 			let image_src;
 			const image_container = document.getElementById("screen_image");
+			const image_blur_container = document.getElementById("screen_blur");
 			function update_image(image) {
 				image_src = image;
 				image_container.src = image_src;
+				image_blur_container.src = image_src;
 			}
 
 			let attempts = 0;
