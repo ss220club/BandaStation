@@ -14,7 +14,6 @@
 #include "announcers/_announcers.dme"
 #include "antagonists/_antagonists.dme"
 #include "autohiss/_autohiss.dme"
-#include "automapper/_automapper.dme"
 #include "automatic_crew_transfer/_automatic_crew_transfer.dme"
 #include "autowiki/_autowiki.dme"
 #include "balance/_balance.dme"
