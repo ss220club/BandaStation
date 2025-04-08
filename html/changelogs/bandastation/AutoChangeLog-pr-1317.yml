@@ -1,0 +1,4 @@
+author: "Furrior"
+delete-after: True
+changes:
+  - bugfix: "SSCentral больше не будет рантаймить на локалке"
