@@ -17,6 +17,8 @@ GLOBAL_LIST(whitelist)
 
 /proc/check_whitelist(ckey)
 	// BANDASTATION EDIT - SSCentral
+	if(!SScentral.active)
+		stack_trace("Using whitelist without SS Central is not supported")
 	return SScentral.is_player_whitelisted(ckey)
 
 #undef WHITELISTFILE
