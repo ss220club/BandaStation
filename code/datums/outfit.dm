@@ -503,9 +503,7 @@
 	var/list/beltpack = outfit_data["belt_contents"]
 	belt_contents = list()
 	for(var/itype in beltpack)
-		var/inum = beltpack[itype]
-		if(!isnum(inum))
-			inum = 1
+		var/inum = beltpack[itype] || 1
 		for(var/i in 1 to inum)
 			belt_contents += itype
 	box = text2path(outfit_data["box"])
