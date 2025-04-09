@@ -7,7 +7,7 @@
 /datum/heretic_knowledge/limited_amount/starting/on_research(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
 
-	explode_blade_limit = floor(limit / 2)
+	explode_blade_limit = 1
 
 /datum/heretic_knowledge/limited_amount/starting/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	for(var/datum/weakref/ref as anything in created_items)
