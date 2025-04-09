@@ -3,7 +3,7 @@
 	if(!CONFIG_GET(flag/panic_bunker_interview))
 		return
 
-	if(!SScentral.active)
+	if(!SScentral.can_run())
 		stack_trace("Using whitelists and interviews without SS Central is not supported")
 		return
 

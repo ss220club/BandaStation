@@ -13,7 +13,7 @@
 
 /client/New()
 	. = ..()
-	if(!SScentral.active)
+	if(!SScentral.can_run())
 		return
 	SScentral.get_player_discord_async(ckey)
 
@@ -26,7 +26,7 @@
 	set name = "Привязать Discord"
 	set desc = "Привязка аккаунта Discord к BYOND"
 
-	if(!SScentral.active)
+	if(!SScentral.can_run())
 		to_chat(src, span_warning("Привязка Discord сейчас недоступна."))
 		return
 
