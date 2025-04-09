@@ -56,6 +56,8 @@
 	var/has_task = FALSE
 	///How many times have we used a blood altar
 	var/altar_uses = 0
+	/// Список ритуалов
+	var/list/ritual_blood
 
 	///ALL Powers currently owned
 	var/list/datum/action/cooldown/bloodsucker/powers = list()
@@ -226,6 +228,8 @@
 		SelectReputation(am_fledgling = TRUE)
 		// Objectives
 		forge_bloodsucker_objectives()
+		// ритуалы
+		ritual_blood_update()
 
 	. = ..()
 	// Assign Powers
@@ -241,6 +245,7 @@
 		return
 	var/mob/living/carbon/carbon_owner = owner.current
 	var/obj/item/organ/brain/not_vamp_brain = carbon_owner.get_organ_slot(ORGAN_SLOT_BRAIN)
+	owner.current.remove_status_effect(/datum/status_effect/frenzy)
 	if(not_vamp_brain && (not_vamp_brain.decoy_override != initial(not_vamp_brain.decoy_override)))
 		not_vamp_brain.organ_flags |= ORGAN_VITAL
 		not_vamp_brain.decoy_override = FALSE

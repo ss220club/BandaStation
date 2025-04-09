@@ -220,14 +220,16 @@
 	if(blood_cost)
 		bloodsuckerdatum.AddBloodVolume(-blood_cost)
 
-	// Check if we've reached level 5 for reputation
-	if(bloodsuckerdatum.bloodsucker_level == 5)
+	// Получем простое прозвище
+	if(bloodsuckerdatum.bloodsucker_level == 4)
 		bloodsuckerdatum.SelectReputation(am_fledgling = FALSE, forced = TRUE)
 
-	if(bloodsuckerdatum.bloodsucker_level == 10)
+	// получаем титул
+	if(bloodsuckerdatum.bloodsucker_level == 7)
 		bloodsuckerdatum.SelectTitle(forced = TRUE)
 
-	if(bloodsuckerdatum.bloodsucker_level == 20)
+	// получаем легендарное прозвище
+	if(bloodsuckerdatum.bloodsucker_level == 13)
 		bloodsuckerdatum.SelectReputation(forced = TRUE, special = TRUE)
 
 	// Only show messages if we have a valid human mob
