@@ -343,6 +343,8 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE)
 					if(!original_sent)
 						original_sent=TRUE
 						FAX.receive(fax_paper, fax_name)
+						continue
+						
 					FAX.receive(fax_paper.copy(), fax_name) // BANDASTATION EDIT
 
 			log_fax(fax_paper, params["id"], params["name"])
