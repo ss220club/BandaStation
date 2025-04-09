@@ -11,9 +11,9 @@
 	power_flags = BP_AM_TOGGLE
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_WHILE_UNCONSCIOUS
 	purchase_flags = AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
-	bloodcost = 30
+	bloodcost = 25
 	cooldown_time = 8 SECONDS
-	constant_bloodcost = 0.2
+	constant_bloodcost = 0.5
 	sol_multiplier = 3
 	var/was_running
 	var/fortitude_resist // So we can raise and lower your brute resist based on what your level_current WAS.
@@ -24,11 +24,9 @@
 	to_chat(owner, span_notice("Your flesh, skin, and muscles become as steel."))
 	// Traits & Effects
 	owner.add_traits(list(TRAIT_PIERCEIMMUNE, TRAIT_NODISMEMBER, TRAIT_PUSHIMMUNE), FORTITUDE_TRAIT)
-	if(level_current >= 4)
-		owner.add_traits(TRAIT_STUNIMMUNE, FORTITUDE_TRAIT) // They'll get stun resistance + this, who cares.
 	var/mob/living/carbon/human/bloodsucker_user = owner
 	if(IS_BLOODSUCKER(owner) || IS_VASSAL(owner))
-		fortitude_resist = max(0.3, 0.7 - level_current * 0.1)
+		fortitude_resist = max(0.2, 0.7 - level_current * 0.1)
 		bloodsucker_user.physiology.brute_mod *= fortitude_resist
 		bloodsucker_user.physiology.stamina_mod *= fortitude_resist
 

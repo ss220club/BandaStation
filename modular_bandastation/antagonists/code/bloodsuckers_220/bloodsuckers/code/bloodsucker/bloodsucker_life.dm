@@ -243,7 +243,11 @@
 	else
 		if(bloodsucker_blood_volume < frenzy_threshold)
 			owner.current.apply_status_effect(/datum/status_effect/frenzy)
-
+	if(istype(my_clan, /datum/bloodsucker_clan/brujah))
+		if(bloodsucker_blood_volume == 0)
+			final_death()
+			return
+		AddBloodVolume(-2)
 	//BLOOD_VOLUME_BAD: [224] - Jitter
 	if(bloodsucker_blood_volume < BLOOD_VOLUME_BAD && prob(0.5) && !is_in_torpor() && !HAS_TRAIT(owner.current, TRAIT_MASQUERADE))
 		owner.current.set_timed_status_effect(3 SECONDS, /datum/status_effect/jitter, only_if_higher = TRUE)

@@ -16,8 +16,8 @@
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
 	purchase_flags = AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
 	bloodcost = 6
-	sol_multiplier = 10
-	cooldown_time = 12 SECONDS
+	sol_multiplier = 30
+	cooldown_time = 30 SECONDS
 	target_range = 15
 	power_activates_immediately = TRUE
 	///List of all people hit by our power, so we don't hit them again.

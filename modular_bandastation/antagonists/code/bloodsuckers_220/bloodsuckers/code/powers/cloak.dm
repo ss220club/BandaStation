@@ -10,7 +10,7 @@
 	power_flags = BP_AM_TOGGLE
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
 	purchase_flags = NON_AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
-	bloodcost = 5
+	bloodcost = 20
 	constant_bloodcost = 0.2
 	cooldown_time = 5 SECONDS
 	var/was_running
