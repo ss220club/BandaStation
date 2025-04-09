@@ -6,26 +6,9 @@ import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 import { logger } from '../../logging';
+import { GamePanelTabs } from './constants';
 import { CreateObject } from './CreateObject';
-import { Data, GamePanelTab, GamePanelTabName } from './types';
-
-const GamePanelTabs = [
-  {
-    name: GamePanelTabName.createObject,
-    content: 'Create Object',
-    icon: 'wrench',
-  },
-  {
-    name: GamePanelTabName.createTurf,
-    content: 'Create Turf',
-    icon: 'map',
-  },
-  {
-    name: GamePanelTabName.createMob,
-    content: 'Create Mob',
-    icon: 'person',
-  },
-] as GamePanelTab[];
+import { Data, GamePanelTabName } from './types';
 
 export function GamePanel(props) {
   const { act } = useBackend();
@@ -39,7 +22,6 @@ export function GamePanel(props) {
       .then((response) => response.json())
       .then((data) => {
         setData(data);
-        // logger.log(data);
       })
       .catch((error) => {
         logger.log('Failed to fetch gamepanel.json', error);
@@ -54,6 +36,18 @@ export function GamePanel(props) {
       title="Game Panel"
       width={500}
       theme="admin"
+      buttons={
+        <Button
+          height="100%"
+          align="center"
+          verticalAlignContent="middle"
+          fluid
+          onClick={() => act('game-mode-panel')}
+          icon="gamepad"
+        >
+          Game Mode Panel
+        </Button>
+      }
     >
       <Window.Content>
         {/* Tabs and main window */}
@@ -73,19 +67,6 @@ export function GamePanel(props) {
                   </Tabs.Tab>
                 ))}
               </Tabs>
-            </Stack.Item>
-            <Stack.Divider />
-            <Stack.Item grow>
-              <Button
-                height="100%"
-                align="center"
-                verticalAlignContent="middle"
-                fluid
-                onClick={() => act('game-mode-panel')}
-                icon="gamepad"
-              >
-                Game Mode Panel
-              </Button>
             </Stack.Item>
           </Stack>
           <Stack.Divider />

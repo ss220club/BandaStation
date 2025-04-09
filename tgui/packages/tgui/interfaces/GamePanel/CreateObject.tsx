@@ -10,26 +10,20 @@ import {
 } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import { CreateObjectIcon, CreateObjectProps } from './types';
+import { spawnLocationOptions } from './constants';
+import { CreateObjectProps } from './types';
 
 export function CreateObject(props: CreateObjectProps) {
-  const { act, data } = useBackend<CreateObjectIcon>();
+  const { act } = useBackend();
   const [searchText, setSearchText] = useState('');
-  const [selectedRadio, setSelectedRadio] = useState(1);
+  const [cordsType, setCordsType] = useState(1);
   const [tooltipIcon, setTooltipIcon] = useState(false);
   const [selectedObj, setSelectedObj] = useState(-1);
-  const [whereDropdownVal, setWhereDropdownVal] = useState(
-    'On floor below own mob',
-  );
+  const [spawnLocation, setSpawnLocation] = useState('On floor below own mob');
   const { objList, tabName } = props;
 
   let newSearchTextValue: string = '/';
-  const whereDropdownOptions = [
-    'On floor below own mob',
-    'On floor below own mob, dropped via supply pod',
-    "In own's mob hand",
-    'In marked object',
-  ];
+
   return (
     <Stack fill vertical>
       <Stack.Item>
@@ -63,20 +57,20 @@ export function CreateObject(props: CreateObjectProps) {
           />
           <Button.Checkbox
             circular
-            selected={selectedRadio === 0}
+            selected={cordsType === 0}
             mr={1}
             icon="a"
             onClick={() => {
-              setSelectedRadio(0);
+              setCordsType(0);
               act('set-absolute-cords');
             }}
           />
           <Button.Checkbox
             circular
-            selected={selectedRadio === 1}
+            selected={cordsType === 1}
             icon="r"
             onClick={() => {
-              setSelectedRadio(1);
+              setCordsType(1);
               act('set-relative-cords');
             }}
           />
@@ -107,14 +101,14 @@ export function CreateObject(props: CreateObjectProps) {
           <Dropdown
             ml={1}
             width="320px"
-            options={whereDropdownOptions}
+            options={spawnLocationOptions}
             onSelected={(value) => {
-              setWhereDropdownVal(value);
+              setSpawnLocation(value);
               act('where-dropdown-changed', {
                 newWhere: value,
               });
             }}
-            selected={whereDropdownVal}
+            selected={spawnLocation}
           />
         </Stack.Item>
       </Collapsible>
@@ -122,7 +116,7 @@ export function CreateObject(props: CreateObjectProps) {
         <Button onClick={() => act('create-object-action')}>Spawn</Button>
       </Stack.Item>
       <Stack.Divider />
-      <Stack.Item overflow="auto">
+      <Stack.Item grow overflow="auto">
         <VirtualList>
           {Object.keys(objList)
             .filter((obj: string) => {
@@ -131,7 +125,6 @@ export function CreateObject(props: CreateObjectProps) {
             .map((obj, index) => (
               <Button
                 key={index}
-                height="25px"
                 color="transparent"
                 tooltip={
                   tooltipIcon && (
