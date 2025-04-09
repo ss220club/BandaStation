@@ -1687,8 +1687,10 @@
 		for(var/obj/machinery/fax/admin/FAX as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/fax/admin))
 			if(FAX.fax_id != href_list["destination"])
 				continue
-			FAX.receive(locate(href_list["print_fax"]), href_list["sender_name"])
-			return
+			// BANDASTATION EDIT START
+			var/obj/item/paper/doc = locate(href_list["print_fax"])
+			FAX.receive(doc.copy(), href_list["sender_name"])
+			// BANDASTATION EDIT END
 
 	else if(href_list["play_internet"])
 		if(!check_rights(R_SOUND))
