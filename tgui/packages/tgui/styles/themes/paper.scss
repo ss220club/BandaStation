@@ -16,6 +16,7 @@
   --base-gradient-spread: 0;
 
   // Components
+  --button-color: var(--color-black);
   --button-background-default: hsl(50, 50%, 90%);
   --button-background-selected: hsl(0, 100%, 30%);
   --button-background-caution: hsl(30, 90%, 40%);
@@ -61,7 +62,7 @@
     background-color: transparent;
     color: inherit;
 
-    &:placeholder {
+    &::placeholder {
       font-style: italic;
       color: var(--input-color-placeholder);
     }

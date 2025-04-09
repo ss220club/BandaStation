@@ -19,10 +19,10 @@ export function ReplacementHint(props: ReplacementHintProps) {
   } = props;
 
   return (
-    <Stack id="Paper__Hints" vertical onKeyDown={onKeyDown}>
+    <Stack id="Paper__Hints" vertical g={0} onKeyDown={onKeyDown}>
       {paperReplacementHint.map((value, index) => {
         return (
-          <Stack.Item key={index} m={0} className="Paper__Hints--hint">
+          <Stack.Item key={index} className="Paper__Hints--hint">
             <Button
               fluid
               color="transparent"

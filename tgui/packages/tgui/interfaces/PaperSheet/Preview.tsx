@@ -1,12 +1,6 @@
 import { Marked } from 'marked';
 import { markedSmartypants } from 'marked-smartypants';
-import {
-  MutableRefObject,
-  RefObject,
-  SetStateAction,
-  useEffect,
-  useMemo,
-} from 'react';
+import { RefObject, SetStateAction, useEffect, useMemo } from 'react';
 import { Box, Section } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
@@ -58,7 +52,7 @@ type PreviewViewProps = {
   scrollableRef: RefObject<HTMLDivElement | null>;
   activeWriteButtonId: string;
   textAreaTextForPreview: string;
-  usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
+  usedReplacementsRef: RefObject<PaperReplacement[]>;
   handleOnScroll: (this: GlobalEventHandlers, event: Event) => any;
   setActiveWriteButtonId: (value: SetStateAction<string>) => void;
   setTextAreaActive: (value: SetStateAction<boolean>) => void;
@@ -461,9 +455,12 @@ export function PreviewView(props: PreviewViewProps) {
     advanced_html_user,
   ]);
 
-  const textHTML = {
-    __html: `<span class='paper-text'>${previewText}</span>`,
-  };
+  const textHTML = useMemo(
+    () => ({
+      __html: `<span class='paper-text'>${previewText}</span>`,
+    }),
+    [previewText],
+  );
 
   return (
     <Section
