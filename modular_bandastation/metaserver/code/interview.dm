@@ -1,13 +1,16 @@
 /// Doesnt need the panic bunker to work
 /mob/dead/new_player/proc/check_whitelist_or_make_interviewee()
 	if(!CONFIG_GET(flag/panic_bunker_interview))
-		if(!SScentral.active)
-			stack_trace("Using whitelists and interviews without SS Central is not supported")
-			return
 		return
+
+	if(!SScentral.can_run())
+		stack_trace("Using whitelists and interviews without SS Central is not supported")
+		return
+
 	if(SScentral.is_player_whitelisted(ckey))
 		client.interviewee = FALSE
 		return
+
 	client.interviewee = TRUE
 
 /datum/config_entry/string/interview_webhook_url
