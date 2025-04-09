@@ -67,20 +67,20 @@ function QuirkList(props: QuirkProps & QuirkListProps) {
   } = props;
 
   return (
-    // Stack is not used here for a variety of IE flex bugs
-    <Box className="PreferencesMenu__Quirks__QuirkList">
+    <Stack vertical>
       {quirks.map(([quirkKey, quirk]) => (
-        <QuirkDisplay
-          key={quirkKey}
-          onClick={onClick}
-          quirk={quirk}
-          quirkKey={quirkKey}
-          randomBodyEnabled={randomBodyEnabled}
-          selected={selected}
-          serverData={serverData}
-        />
+        <Stack.Item key={quirkKey} m={0}>
+          <QuirkDisplay
+            onClick={onClick}
+            quirk={quirk}
+            quirkKey={quirkKey}
+            randomBodyEnabled={randomBodyEnabled}
+            selected={selected}
+            serverData={serverData}
+          />
+        </Stack.Item>
       ))}
-    </Box>
+    </Stack>
   );
 }
 
@@ -383,7 +383,9 @@ export function QuirksPage(props) {
         }
       }
     }
-
+    if (data.species_disallowed_quirks.includes(quirk.name)) {
+      return 'This quirk is incompatible with your selected species.';
+    }
     return;
   }
 
@@ -432,7 +434,7 @@ export function QuirksPage(props) {
               onInput={(text, value) => setSearchQuery(value)}
             />
           </Stack.Item>
-          <Stack.Item grow width="100%">
+          <Stack.Item grow className="PreferencesMenu__Quirks__QuirkList">
             <QuirkList
               selected={false}
               onClick={(quirkName, quirk) => {
@@ -492,8 +494,8 @@ export function QuirksPage(props) {
               Текущие черты
             </Box>
           </Stack.Item>
-          &nbsp; {/* Filler to better align the menu*/}
-          <Stack.Item grow width="100%">
+          <Stack.Item p={1.5} /> {/* Filler to better align the menu*/}
+          <Stack.Item grow className="PreferencesMenu__Quirks__QuirkList">
             <QuirkList
               selected
               onClick={(quirkName, quirk) => {

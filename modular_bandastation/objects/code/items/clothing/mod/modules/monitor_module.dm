@@ -18,3 +18,7 @@
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.5,
 	)
 	build_path = /obj/item/mod/module/monitor
+
+/datum/techweb_node/medbay_equip/New()
+	. = ..()
+	design_ids += "mod_monitor"

@@ -372,13 +372,11 @@
 /obj/item/storage/bag/sheetsnatcher/debug/Initialize(mapload)
 	. = ..()
 	// Overrides so it can hold all possible sheets
-	atom_storage.set_holdable(
-		can_hold_list = list(
-			/obj/item/stack/sheet,
-			/obj/item/stack/sheet/mineral/sandstone,
-			/obj/item/stack/sheet/mineral/wood,
-		)
-	)
+	atom_storage.set_holdable(list(
+		/obj/item/stack/sheet,
+		/obj/item/stack/sheet/mineral/sandstone,
+		/obj/item/stack/sheet/mineral/wood,
+	))
 
 // -----------------------------
 //           Book bag
@@ -527,7 +525,7 @@
 		/obj/item/reagent_containers/cup/bottle,
 		/obj/item/reagent_containers/cup/tube,
 		/obj/item/reagent_containers/medigel,
-		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/applicator,
 		/obj/item/reagent_containers/syringe,
 	))
 
@@ -659,7 +657,7 @@
 		/obj/item/ammo_casing/rebar/hydrogen,
 		/obj/item/ammo_casing/rebar/zaukerite,
 		/obj/item/ammo_casing/rebar/paperball,
-		))
+	))
 
 /obj/item/storage/bag/rebar_quiver/syndicate
 	icon_state = "syndie_quiver_0"

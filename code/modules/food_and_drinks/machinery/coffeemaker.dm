@@ -525,13 +525,13 @@
 
 /obj/machinery/coffeemaker/impressa/Destroy()
 	QDEL_NULL(coffeepot)
-	QDEL_NULL(coffee)
+	QDEL_LIST(coffee)
 	return ..()
 
 /obj/machinery/coffeemaker/impressa/examine(mob/user)
 	. = ..()
 	if(coffee)
-		. += span_notice("Внутренняя кофемолка содержит [coffee.len] [declension_ru(coffee.len,"порцию","порции","порций")] кофейных зерен")
+		. += span_notice("Внутренняя кофемолка содержит [length(coffee)] [declension_ru(length(coffee),"порцию","порции","порций")] кофейных зерен")
 
 /obj/machinery/coffeemaker/impressa/update_overlays()
 	. = ..()
