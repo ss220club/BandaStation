@@ -185,7 +185,7 @@ GLOBAL_LIST_EMPTY(request_list)
 	var/message_count = 0
 
 /datum/feed_network/New()
-	create_feed_channel("Station Announcements", "SS13", "Company news, staff announcements, and all the latest information. Have a secure shift!", locked = TRUE, hardset_channel = 1000)
+	create_feed_channel("Станционные оповещения", "SS13", "Company news, staff announcements, and all the latest information. Have a secure shift!", locked = TRUE, hardset_channel = 1000)
 	wanted_issue = new /datum/wanted_message
 
 /datum/feed_network/proc/create_feed_channel(channel_name, author, desc, locked, adminChannel = FALSE, hardset_channel = null, author_ckey = null, cross_sector = FALSE, cross_sector_delay = null, receiving_cross_sector = FALSE)
