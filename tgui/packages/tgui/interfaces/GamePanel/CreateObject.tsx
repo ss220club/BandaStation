@@ -65,7 +65,7 @@ export function CreateObject(props: CreateObjectProps) {
             circular
             selected={selectedRadio === 0}
             mr={1}
-            icon="fa-a"
+            icon="a"
             onClick={() => {
               setSelectedRadio(0);
               act('set-absolute-cords');
@@ -74,7 +74,7 @@ export function CreateObject(props: CreateObjectProps) {
           <Button.Checkbox
             circular
             selected={selectedRadio === 1}
-            icon="fa-r"
+            icon="r"
             onClick={() => {
               setSelectedRadio(1);
               act('set-relative-cords');

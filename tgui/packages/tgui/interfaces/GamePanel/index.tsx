@@ -13,17 +13,17 @@ const GamePanelTabs = [
   {
     name: GamePanelTabName.createObject,
     content: 'Create Object',
-    icon: 'fa-wrench',
+    icon: 'wrench',
   },
   {
     name: GamePanelTabName.createTurf,
     content: 'Create Turf',
-    icon: 'fa-map',
+    icon: 'map',
   },
   {
     name: GamePanelTabName.createMob,
     content: 'Create Mob',
-    icon: 'fa-person',
+    icon: 'person',
   },
 ] as GamePanelTab[];
 
@@ -82,7 +82,7 @@ export function GamePanel(props) {
                 verticalAlignContent="middle"
                 fluid
                 onClick={() => act('game-mode-panel')}
-                icon="fa-gamepad"
+                icon="gamepad"
               >
                 Game Mode Panel
               </Button>
