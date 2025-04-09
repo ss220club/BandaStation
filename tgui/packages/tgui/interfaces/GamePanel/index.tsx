@@ -54,7 +54,7 @@ export function GamePanel(props) {
         <Stack vertical fill>
           {/* Tabs */}
           <Stack vertical={false}>
-            <Stack.Item shrink={3} basis="70%">
+            <Stack.Item shrink={3} width="100%">
               <Tabs fluid>
                 {GamePanelTabs.map((tab) => (
                   <Tabs.Tab
