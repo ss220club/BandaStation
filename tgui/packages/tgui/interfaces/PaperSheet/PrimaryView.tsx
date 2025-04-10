@@ -131,7 +131,7 @@ export function PrimaryView() {
   return (
     <>
       <PaperSheetStamper scrollableRef={scrollableRef} />
-      <Stack vertical fillPositionedParent>
+      <Stack vertical fillPositionedParent g={0}>
         <Stack.Item grow={3} basis={1}>
           <PreviewView
             paperContext={data}
@@ -147,7 +147,6 @@ export function PrimaryView() {
         {writeMode &&
           (textAreaActive ? (
             <Stack.Item
-              m={0}
               shrink={1}
               height={TEXTAREA_INPUT_HEIGHT + 'px'}
               position="relative"
@@ -184,10 +183,10 @@ export function PrimaryView() {
               />
             </Stack.Item>
           ) : (
-            <Stack.Item m={0} textAlign="right">
+            <Stack.Item textAlign="right">
               <Button
-                iconPosition="right"
                 icon={'up-long'}
+                iconPosition="right"
                 onClick={() => setTextAreaActive(true)}
               >
                 Открыть редактор

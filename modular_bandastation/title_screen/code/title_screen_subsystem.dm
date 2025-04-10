@@ -1,4 +1,5 @@
 /datum/controller/subsystem/title
+	init_stage = INITSTAGE_FIRST
 	/// The current notice text, or null.
 	var/notice
 	/// Currently set title screen
