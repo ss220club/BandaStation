@@ -1,14 +1,25 @@
-@use '../base.scss';
-@use '../functions.scss' as *;
+:root {
+  --mineswepper-border-base: var(--color-base);
+  --mineswepper-border: hsl(
+    from var(--mineswepper-border-base) h s calc(l + 20)
+  );
+
+  &.theme-ntOS95 {
+    --mineswepper-border-base: var(--color-section);
+  }
+}
 
 .Minesweeper__closed {
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   vertical-align: middle;
-  border: base.em(2px) outset rgba(125, 125, 125, 0.5) !important;
+  border: var(--border-thickness-small) outset var(--mineswepper-border) !important;
   outline: none !important;
+  transition-duration: 0s;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: hsl(
+      from var(--mineswepper-border) h s calc(l + 10)
+    ) !important;
   }
 }
 
@@ -18,18 +29,8 @@
   vertical-align: middle;
   text-align: center;
   font-size: medium;
+  background-color: hsl(from var(--mineswepper-border-base) h s calc(l + 7.5));
   outline: none !important;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: hsla(0, 0%, 0%, 0.2);
-    z-index: 1;
-  }
 }
 
 .Minesweeper__list {
@@ -38,21 +39,20 @@
   }
 
   tr:not(:first-child) {
+    cursor: var(--cursor-pointer);
     height: 2em;
     line-height: 1.75em;
     transition: background-color 50ms;
-    cursor: pointer;
 
     &:hover,
-    &:focus {
-      background-color: base.$color-bg;
+    &:active {
+      background-color: var(--color-base);
     }
   }
 }
 
 .Minesweeper__infobox {
-  max-height: 8em;
-  border: base.em(3px) outset rgba(125, 125, 125, 0.5);
   user-select: none;
-  -ms-user-select: none; // Remove with Byond 516 release
+  max-height: 8em;
+  border: var(--border-thickness-medium) outset var(--mineswepper-border);
 }
