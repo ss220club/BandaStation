@@ -47,12 +47,11 @@
 
 /mob/living/basic/crocodile/Initialize(mapload)
 	. = ..()
-	var/static/list/food_types = list(/obj/item/food/meat)
 	add_traits(list(TRAIT_FENCE_CLIMBER), INNATE_TRAIT)
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/nerfed_pulling, GLOB.typecache_general_bad_things_to_easily_move)
-	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = food_types)
+	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = string_list(list(/obj/item/food/meat)))
 	AddComponent(/datum/component/health_scaling_effects, min_health_slowdown = 1.5)
 
 /mob/living/basic/crocodile/Login()
