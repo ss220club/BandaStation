@@ -9,7 +9,6 @@
 	join_description = "You are permanetly disfigured, look like a Bloodsucker to all who examine you, \
 		lose your Masquerade ability, but become capable of ventcrawling."
 	aggressive_clan = TRUE
-	joinable_clan = FALSE
 	blood_drink_type = BLOODSUCKER_DRINK_INHUMANELY
 
 /datum/bloodsucker_clan/nosferatu/New(datum/antagonist/bloodsucker/owner_datum)
