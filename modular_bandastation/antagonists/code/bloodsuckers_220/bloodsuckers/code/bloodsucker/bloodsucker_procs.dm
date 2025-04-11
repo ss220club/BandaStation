@@ -32,7 +32,7 @@
 	if(broke_masquerade)
 		return
 	owner.current.playsound_local(null, 'modular_bandastation/antagonists/code/bloodsuckers_220/bloodsuckers/sounds/lunge_warn.ogg', 100, FALSE, pressure_affected = FALSE)
-	to_chat(owner.current, span_cult_bold_italic("You have broken the Masquerade!"))
+	to_chat(owner.current, span_cult_bold_italic("Вы нарушили маскарад!"))
 	to_chat(owner.current, span_warning("Bloodsucker Tip: When you break the Masquerade, you become open for termination by fellow Bloodsuckers, and your Vassals are no longer completely loyal to you, as other Bloodsuckers can steal them for themselves!"))
 	broke_masquerade = TRUE
 	antag_hud_name = "masquerade_broken"

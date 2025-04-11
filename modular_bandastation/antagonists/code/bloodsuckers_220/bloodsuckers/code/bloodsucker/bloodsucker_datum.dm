@@ -138,7 +138,7 @@
 	RegisterSignal(current_mob,COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(current_mob, COMSIG_LIVING_LIFE, PROC_REF(LifeTick))
 	RegisterSignal(current_mob, COMSIG_LIVING_DEATH, PROC_REF(on_death))
-	handle_clown_mutation(current_mob, mob_override ? null : "As a vampiric clown, you are no longer a danger to yourself. Your clownish nature has been subdued by your thirst for blood.")
+	handle_clown_mutation(current_mob, mob_override ? null : "Став клоуном-вампиром, вы больше не представляете опасности для себя. Ваша клоунская натура была подавлена вашей жаждой крови.")
 	add_team_hud(current_mob)
 
 	if(current_mob.hud_used)
@@ -308,12 +308,12 @@
 /datum/antagonist/bloodsucker/greet()
 	. = ..()
 	var/fullname = return_full_name()
-	to_chat(owner, span_userdanger("You are [fullname], a strain of vampire known as a Bloodsucker!"))
+	to_chat(owner, span_userdanger("Вы [fullname], разновидность вампиров, известная как Bloodsucker!"))
 	owner.announce_objectives()
 	if(bloodsucker_level_unspent >= 2)
-		to_chat(owner, span_announce("As a latejoiner, you have [bloodsucker_level_unspent] bonus ranks, entering your claimed coffin allows you to spend a rank."))
+		to_chat(owner, span_announce("Как поздний присоединившийся, вы получите бонусные ранги [bloodsucker_level_unspent], вход в захваченный вами гроб позволит вам потратить ранг."))
 	owner.current.playsound_local(null, 'modular_bandastation/antagonists/code/bloodsuckers_220/bloodsuckers/sounds/BloodsuckerAlert.ogg', 100, FALSE, pressure_affected = FALSE)
-	antag_memory += "Although you were born a mortal, in undeath you earned the name <b>[fullname]</b>.<br>"
+	antag_memory += "Хотя ты и родился смертным, в не жизни ты заслужил это имя <b>[fullname]</b>.<br>"
 
 /datum/antagonist/bloodsucker/farewell()
 	to_chat(owner.current, span_userdanger("<FONT size = 3>With a snap, your curse has ended. You are no longer a Bloodsucker. You live once more!</FONT>"))
