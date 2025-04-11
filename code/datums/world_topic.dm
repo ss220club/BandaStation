@@ -159,7 +159,7 @@
 
 	LAZYREMOVE(timers, timer_id)
 
-	minor_announce(input["message"], "Incoming message from [input["message_sender"]]")
+	minor_announce(input["message"], "Входящее сообщение от [input["message_sender"]]")
 	message_admins("Receiving a message from [input["sender_ckey"]] at [input["source"]]")
 	for(var/obj/machinery/computer/communications/communications_console in GLOB.shuttle_caller_list)
 		communications_console.override_cooldown()
@@ -168,7 +168,7 @@
 	keyword = "News_Report"
 
 /datum/world_topic/news_report/Run(list/input)
-	minor_announce(input["message"], "Breaking Update From [input["message_sender"]]")
+	minor_announce(input["message"], "Свежие новости от [input["message_sender"]]")
 
 /datum/world_topic/adminmsg
 	keyword = "adminmsg"

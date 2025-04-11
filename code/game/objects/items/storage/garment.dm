@@ -44,7 +44,7 @@
 	atom_storage.numerical_stacking = FALSE
 	atom_storage.max_total_storage = 200
 	atom_storage.max_slots = 15
-	atom_storage.insert_preposition = "in"
+	atom_storage.insert_preposition = "в"
 	atom_storage.set_holdable(/obj/item/clothing)
 
 /obj/item/storage/bag/garment/captain/PopulateContents()

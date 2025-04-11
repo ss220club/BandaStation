@@ -3666,11 +3666,11 @@ __metadata:
   linkType: hard
 
 "@types/react-dom@npm:^19.1.1":
-  version: 19.1.1
-  resolution: "@types/react-dom@npm:19.1.1"
+  version: 19.1.2
+  resolution: "@types/react-dom@npm:19.1.2"
   peerDependencies:
     "@types/react": ^19.0.0
-  checksum: 10c0/83833af502f501a372b370fdeb7cf933dfc8780903fe0e0d6e6a76b4ea3adbe5316159a62a0388d8afdd409afd76a40959e2ce82fbb788f57d32c786a63601ee
+  checksum: 10c0/100c341cacba9ec8ae1d47ee051072a3450e9573bf8eeb7262490e341cb246ea0f95a07a1f2077e61cf92648f812a0324c602fcd811bd87b7ce41db2811510cd
   languageName: node
   linkType: hard
 
@@ -13515,12 +13515,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "marked@npm:4.3.0"
+"marked-base-url@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "marked-base-url@npm:1.1.6"
+  peerDependencies:
+    marked: ">= 4 < 16"
+  checksum: 10c0/346b8f3a912ab5192caec896d8e923b83113f81312eb4838ec9773aca620088cd3ed4d9fce773f3251d71c72f271c3df8554f025c1146cea3e76845b29e5be42
+  languageName: node
+  linkType: hard
+
+"marked-smartypants@npm:^1.1.9":
+  version: 1.1.9
+  resolution: "marked-smartypants@npm:1.1.9"
+  dependencies:
+    smartypants: "npm:^0.2.2"
+  peerDependencies:
+    marked: ">=4 <16"
+  checksum: 10c0/50a9f9ddeb67045933c26abdd8acf997368d96920990048b6d432c4d2374a513152c639b46c16c74934483b7a1df6093f8f26461f2409b9bf1e58f8ac759391f
+  languageName: node
+  linkType: hard
+
+"marked@npm:^15.0.7":
+  version: 15.0.7
+  resolution: "marked@npm:15.0.7"
   bin:
     marked: bin/marked.js
-  checksum: 10c0/0013463855e31b9c88d8bb2891a611d10ef1dc79f2e3cbff1bf71ba389e04c5971298c886af0be799d7fa9aa4593b086a136062d59f1210b0480b026a8c5dc47
+  checksum: 10c0/0b9d07bace37bbf0548bae356c4184765afa4d2296ed0be4418aa4bb0ce703f323dc1a475125d536581f9fe264797e6265dd0b57499d97c0fe0f29bc6d016343
   languageName: node
   linkType: hard
 
@@ -16662,6 +16682,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-zoom-pan-pinch@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "react-zoom-pan-pinch@npm:3.7.0"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 10c0/96889849800a953128fe7f9e42bed0d5cbc48d03024995b136f5e972146236688efb24d7381d8e6f09598f5512b4897d2420f62d828a665fdf24b745b7d55911
+  languageName: node
+  linkType: hard
+
 "react@npm:^17.0.1":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
@@ -18025,6 +18055,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"smartypants@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "smartypants@npm:0.2.2"
+  bin:
+    smartypants: bin/smartypants.js
+    smartypantsu: bin/smartypantsu.js
+  checksum: 10c0/29b46df6acaed9ad6271624e26e055d6360c9da7f79433b7a83ebd40b50bd6b554d8f3793932f42be07e5badce889f547c89378fda77cb1f935b09a902c4527b
+  languageName: node
+  linkType: hard
+
 "snake-case@npm:^3.0.4":
   version: 3.0.4
   resolution: "snake-case@npm:3.0.4"
@@ -19240,11 +19280,15 @@ __metadata:
     highlight.js: "npm:^11.10.0"
     jest: "npm:^29.7.0"
     js-yaml: "npm:^4.1.0"
-    marked: "npm:^4.3.0"
+    marked: "npm:^15.0.7"
+    marked-base-url: "npm:^1.1.6"
+    marked-smartypants: "npm:^1.1.9"
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
+    react-zoom-pan-pinch: "npm:^3.7.0"
     tgui-core: "npm:^2.0.6"
     tgui-dev-server: "workspace:*"
+    usehooks-ts: "npm:^3.1.1"
   languageName: unknown
   linkType: soft
 
@@ -20035,6 +20079,17 @@ __metadata:
   version: 3.1.1
   resolution: "use@npm:3.1.1"
   checksum: 10c0/75b48673ab80d5139c76922630d5a8a44e72ed58dbaf54dee1b88352d10e1c1c1fc332066c782d8ae9a56503b85d3dc67ff6d2ffbd9821120466d1280ebb6d6e
+  languageName: node
+  linkType: hard
+
+"usehooks-ts@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "usehooks-ts@npm:3.1.1"
+  dependencies:
+    lodash.debounce: "npm:^4.0.8"
+  peerDependencies:
+    react: ^16.8.0  || ^17 || ^18 || ^19 || ^19.0.0-rc
+  checksum: 10c0/8bbebf52b063f2e705eb27364f08ec2eff987b9e8d28d82a28248652dd89ef53cb514e1f2ee1cbc6ac6e083a8dce86310301c3e92a99902b98c32a26381202d7
   languageName: node
   linkType: hard
 
