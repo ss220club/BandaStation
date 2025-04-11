@@ -114,7 +114,8 @@
 	//Passively accumulate burn damage (Bloodsuckers can't survive on low blood forever).
 	//Humanity loss is supposed to be a bad thing for Bloodsuckers so it adds to this damage.
 	//Brujah Bloodsuckers start with a lot of lost humanity so we give them a bit of leeway.
-	user.adjustFireLoss(1.5 + (brujah ? 1 : (bloodsuckerdatum.humanity_lost / 10)))
+	if(!brujah)
+		user.adjustFireLoss(1.5 + (bloodsuckerdatum.humanity_lost / 10))
 	if(prob(30))
 		user.do_jitter_animation(300)
 		return

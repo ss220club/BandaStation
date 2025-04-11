@@ -106,8 +106,6 @@
 	icon_state = "bloodaltar"
 	density = TRUE
 	anchored = FALSE
-	layer = TABLE_LAYER
-	pass_flags = PASSSTRUCTURE | PASSTABLE | LETPASSTHROW
 	can_buckle = FALSE
 	var/sacrifices = 0
 	var/sacrificialtask = FALSE
@@ -128,6 +126,7 @@
 /obj/structure/bloodsucker/bloodaltar/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/climbable)
+	AddElement(/datum/element/elevation, pixel_shift = 12)
 
 /obj/structure/bloodsucker/bloodaltar/bolt()
 	. = ..()
@@ -146,17 +145,26 @@
 	if(!IS_BLOODSUCKER(user)) //not bloodsucker
 		to_chat(user, span_warning("You can't figure out how this works."))
 		return
+
 	var/datum/antagonist/bloodsucker/bloodsuckerdatum = user.mind.has_antag_datum(/datum/antagonist/bloodsucker)
-	if(bloodsuckerdatum.has_task && !check_completion(user)) //not done but has a task? put them on their way
-		to_chat(user, span_warning("You already have a rank up task!"))
+	var/list/options = bloodsuckerdatum.ritual_blood
+
+	var/choice = tgui_input_list(user, "Выберите исполняемый ритуал", "Выбор ритуала", options)
+	if(!choice || !Adjacent(user) || QDELETED(src))
 		return
-	if(bloodsuckerdatum.altar_uses >= ALTAR_RANKS_PER_DAY) //used the altar already
-		to_chat(user, span_notice("You have done all tasks for the night, come back tomorrow for more."))
-		return
-	var/want_rank = tgui_alert(user, "Do you want to gain a task? This will cost 50 Blood.", "Task Manager", list("Yes", "No"))
-	if(want_rank != "Yes" || QDELETED(src))
-		return
-	generate_task(user) //generate
+
+	switch(options[choice])
+		if(1)
+			if(bloodsuckerdatum.has_task && !check_completion(user))
+				to_chat(user, span_warning("You already have a rank up task!"))
+				return
+			if(bloodsuckerdatum.altar_uses >= ALTAR_RANKS_PER_DAY)
+				to_chat(user, span_notice("You have done all tasks for the night, come back tomorrow for more."))
+				return
+			if(bloodsuckerdatum.bloodsucker_blood_volume < 50)
+				to_chat(user, span_danger("You don't have enough blood to gain a task!"))
+				return
+			generate_task(user)
 
 /obj/structure/bloodsucker/bloodaltar/proc/generate_task(mob/living/user)
 	var/task //just like amongus
@@ -167,18 +175,16 @@
 	if(!suckamount && !heartamount) // Generate random amounts if we don't already have them set
 		switch(bloodsuckerdatum.bloodsucker_level + bloodsuckerdatum.bloodsucker_level_unspent)
 			if(0 to 3)
-				suckamount = rand(100, 200)
+				suckamount = rand(100, 300)
 				heartamount = rand(1,2)
-			if(3 to 8)
-				suckamount = rand(200, 300)
-				heartamount = rand(1,2)
-			if(8 to INFINITY)
-				suckamount = rand(500, 600)
+			if(4 to 6)
+				suckamount = rand(300, 600)
+				heartamount = rand(3,4)
+			if(7 to 12)
+				suckamount = rand(500, 1200)
 				heartamount = rand(5,6)
-	if(crewmate.blood_volume < 50)
-		to_chat(user, span_danger("You don't have enough blood to gain a task!"))
-		return
-	bloodsuckerdatum.AddBloodVolume(-50)
+			if(13)
+				to_chat(user, span_danger("Ты достиг максимального могущества! Ты больше не можешь поднимать ранг"))
 	switch(rand(1, 3))
 		if(1,2)
 			bloodsuckerdatum.task_blood_required = suckamount
@@ -238,8 +244,6 @@
 	icon_state = "vassalrack"
 	anchored = FALSE
 	density = TRUE
-	layer = TABLE_LAYER
-	pass_flags = PASSSTRUCTURE | PASSTABLE | LETPASSTHROW
 	can_buckle = TRUE
 	buckle_lying = 180
 	buckle_prevents_pull = TRUE

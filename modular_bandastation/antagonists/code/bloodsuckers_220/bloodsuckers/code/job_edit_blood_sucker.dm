@@ -2,6 +2,7 @@
 	. = ..()
 	if(spawned.mind)
 		ADD_TRAIT(spawned.mind, TRAIT_BLOODSUCKER_HUNTER, JOB_TRAIT)
+		spawned.see_invisible = SEE_INVISIBLE_CRYPT
 
 /datum/job/chaplain/after_spawn(mob/living/spawned, client/player_client)
 	. = ..()
@@ -9,3 +10,4 @@
 		spawned.mind.teach_crafting_recipe(/datum/crafting_recipe/hardened_stake)
 		spawned.mind.teach_crafting_recipe(/datum/crafting_recipe/silver_stake)
 		ADD_TRAIT(spawned.mind, TRAIT_BLOODSUCKER_HUNTER, JOB_TRAIT)
+		spawned.see_invisible = SEE_INVISIBLE_CRYPT

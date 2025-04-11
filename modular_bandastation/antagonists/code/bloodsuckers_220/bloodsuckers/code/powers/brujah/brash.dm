@@ -29,8 +29,8 @@
 
 /datum/action/cooldown/bloodsucker/targeted/brawn/brash/ActivatePower(trigger_flags)
 	if(break_restraints())
-		cooldown_time = 5 SECONDS
-		bloodcost = 10
+		cooldown_time = 80 SECONDS
+		bloodcost = 100
 		power_activated_sucessfully()
 		return FALSE
 	if(level_current >= 1 && escape_puller())
@@ -60,8 +60,8 @@
 		return
 
 	if(istype(target_atom, /obj/structure/closet))
-		bloodcost = 8
-		cooldown_time = 7 SECONDS
+		bloodcost = 30
+		cooldown_time = 20 SECONDS
 		return
 
 	if(istype(target_atom, /obj/structure/girder))
@@ -104,15 +104,15 @@
 
 /// Copied over from '/datum/element/wall_tearer/proc/rip_and_tear' with appropriate adjustment.
 /datum/action/cooldown/bloodsucker/targeted/brawn/brash/proc/rip_and_tear(mob/living/tearer, atom/target)
-	var/tear_time = 0.75 SECONDS
+	var/tear_time = 2 SECONDS
 	var/reinforced_multiplier = 5
 	var/rip_time = (istype(target, /turf/closed/wall/r_wall) ? tear_time * reinforced_multiplier : tear_time)
 
 	if(istype(target, /turf/closed/wall/r_wall))
-		bloodcost = 40
+		bloodcost = 100
 		cooldown_time = 20 SECONDS
 	else
-		bloodcost = 20
+		bloodcost = 50
 		cooldown_time = 15 SECONDS
 
 	while(istype(target, /turf/closed/wall))

@@ -22,7 +22,7 @@
 		Higher levels will increase the time of the victim's paralysis."
 	power_flags = NONE
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_DURING_SOL
-	purchase_flags = BLOODSUCKER_CAN_BUY|VASSAL_CAN_BUY
+	purchase_flags = NON_AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
 	bloodcost = 30
 	cooldown_time = 20 SECONDS
 	target_range = 8

@@ -67,3 +67,20 @@
 	enrico.eye_color_right = "#663300"
 
 	enrico.update_body(is_creating = TRUE)
+
+/* Handle returning from ghost/observer to body for special roles
+/mob/living/carbon/human/mind_initialize()
+	. = ..()
+	if(!mind)
+		return
+	// Check for bloodsucker, vassal or hunter traits when returning to body
+	if(IS_BLOODSUCKER(src) || IS_VASSAL(src) || HAS_TRAIT(mind, TRAIT_BLOODSUCKER_HUNTER))
+		see_invisible = SEE_INVISIBLE_CRYPT
+*/
+/mob/set_invis_see()
+	if(!mind)
+		return ..()
+	if(IS_BLOODSUCKER(src) || IS_VASSAL(src) || IS_MONSTERHUNTER(src))
+		see_invisible = SEE_INVISIBLE_CRYPT
+		return
+	return ..()

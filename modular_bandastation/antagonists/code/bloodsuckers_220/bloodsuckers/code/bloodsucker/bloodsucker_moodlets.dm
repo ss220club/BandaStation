@@ -30,7 +30,7 @@
 
 ///Candelabrum's mood event to non Bloodsucker/Vassals
 /datum/mood_event/vampcandle
-	description = span_boldwarning("Этот свет разрушает мою связь с реальностью!")
+	description = span_boldwarning("Что-то заставляет мой разум... Терять связь с реальностью.")
 	mood_change = -15
 	timeout = 5 MINUTES
 

@@ -1,6 +1,9 @@
 /// You have special interactions with Bloodsuckers
 #define TRAIT_BLOODSUCKER_HUNTER "bloodsucker_hunter"
 
+#define INVISIBILITY_CRYPT 30
+#define SEE_INVISIBLE_CRYPT 30
+
 ///Вызывается когда вампир повышает ранг: (datum/bloodsucker_datum, mob/owner, mob/target)
 #define BLOODSUCKER_RANK_UP "bloodsucker_rank_up"
 ///Вызывается когда вампир взаимодействует с подданым на стойке подношения.
@@ -88,16 +91,18 @@
 /// This Power can't be used during Sol
 #define BP_CANT_USE_DURING_SOL (1<<5)
 
-/// This Power can be purchased by Bloodsuckers
-#define BLOODSUCKER_CAN_BUY (1<<0)
 /// This is a Default Power that all Bloodsuckers get.
-#define BLOODSUCKER_DEFAULT_POWER (1<<1)
+#define BLOODSUCKER_DEFAULT_POWER (1<<0)
 /// This Power can be purchased by Tremere Bloodsuckers
-#define TREMERE_CAN_BUY (1<<2)
+#define TREMERE_CAN_BUY (1<<1)
 /// This Power can be purchased by Vassals
-#define VASSAL_CAN_BUY (1<<3)
+#define VASSAL_CAN_BUY (1<<2)
 /// This is a Default Power for brujah Bloodsuckers
-#define BRUJAH_DEFAULT_POWER (1<<4)
+#define BRUJAH_DEFAULT_POWER (1<<3)
+/// This Power can be purchased by aggressive clan Bloodsuckers
+#define AGGRESSIVE_CLAN_CAN_BUY (1<<4)
+/// This Power can be purchased by non-aggressive clan Bloodsuckers
+#define NON_AGGRESSIVE_CLAN_CAN_BUY (1<<5)
 
 /// This Power is a Toggled Power
 #define BP_AM_TOGGLE (1<<0)

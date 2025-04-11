@@ -8,12 +8,12 @@
 		Higher levels make the power faster and quieter."
 	power_flags = BP_AM_TOGGLE
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED
-	purchase_flags = BLOODSUCKER_CAN_BUY|VASSAL_CAN_BUY
+	purchase_flags = NON_AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
 	bloodcost = 10
 	sol_multiplier = 10
 	cooldown_time = 8 SECONDS
 	prefire_message = "Select a destination."
-	//target_range = 2
+	target_range = 3
 	var/turf/target_turf // We need to decide where we're going based on where we clicked. It's not actually the tile we clicked.
 
 /datum/action/cooldown/bloodsucker/targeted/trespass/can_use(mob/living/carbon/user, trigger_flags)
@@ -44,14 +44,14 @@
 	// Are either tiles WALLS?
 	var/turf/from_turf = get_turf(owner)
 	var/this_dir // = get_dir(from_turf, target_turf)
-	for(var/i = 1 to 2)
+	for(var/i = 1 to target_range)
 		// Keep Prev Direction if we've reached final turf
 		if(from_turf != final_turf)
 			this_dir = get_dir(from_turf, final_turf) // Recalculate dir so we don't overshoot on a diagonal.
 		from_turf = get_step(from_turf, this_dir)
 		// ERROR! Wall!
 		if(iswallturf(from_turf))
-			var/wallwarning = (i == 1) ? "in the way" : "at your destination"
+			var/wallwarning = (i < target_range) ? "in the way" : "at your destination"
 			owner.balloon_alert(owner, "There is a wall [wallwarning].")
 			return FALSE
 	// Done

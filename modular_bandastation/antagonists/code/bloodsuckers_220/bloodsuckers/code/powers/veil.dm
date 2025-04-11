@@ -26,6 +26,7 @@
 	var/prev_undershirt
 	var/prev_socks
 	var/prev_disfigured
+	//var/prev_TTS
 	var/list/prev_features // For lizards and such
 	var/disguise_name
 
@@ -46,6 +47,7 @@
 /datum/action/cooldown/bloodsucker/veil/proc/veil_user()
 	// Change Name/Voice
 	var/mob/living/carbon/human/user = owner
+	//var/datum/component/tts_component/tts_component = GetComponent(/datum/component/tts_component)
 	to_chat(owner, span_warning("You mystify the air around your person: your identity is now altered."))
 
 	// Store Prev Appearance
@@ -59,6 +61,7 @@
 	prev_underwear = user.underwear
 	prev_undershirt = user.undershirt
 	prev_socks = user.socks
+	//prev_TTS = tts_component.tts_seed
 //	prev_eye_color
 	prev_disfigured = HAS_TRAIT(user, TRAIT_DISFIGURED) // I was disfigured! //prev_disabilities = user.disabilities
 	prev_features = user.dna.features
@@ -73,6 +76,7 @@
 	user.underwear = random_underwear(user.gender)
 	user.undershirt = random_undershirt(user.gender)
 	user.socks = random_socks(user.gender)
+	//tts_component.tts_seed = tts_component.get_random_tts_seed_by_gender()
 	//user.eye_color = random_eye_color()
 	if(prev_disfigured)
 		REMOVE_TRAIT(user, TRAIT_DISFIGURED, null)
@@ -95,6 +99,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/user = owner
+	//var/datum/component/tts_component/tts_component = GetComponent(/datum/component/tts_component)
 	// Revert Identity
 	user.UnsetSpecialVoice()
 
@@ -108,6 +113,7 @@
 	user.underwear = prev_underwear
 	user.undershirt = prev_undershirt
 	user.socks = prev_socks
+	//tts_component.tts_seed = prev_TTS
 
 	//user.disabilities = prev_disabilities // Restore HUSK, CLUMSY, etc.
 	if(prev_disfigured)

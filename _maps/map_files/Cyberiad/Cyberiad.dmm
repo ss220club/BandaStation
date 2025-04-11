@@ -10128,6 +10128,7 @@
 /turf/open/floor/iron/dark/small,
 /area/station/security/mechbay)
 "cvQ" = (
+/mob/living/basic/crocodile/gena,
 /turf/open/water/alternative/muddy/no_fishing,
 /area/station/service/kitchen/abandoned)
 "cvT" = (

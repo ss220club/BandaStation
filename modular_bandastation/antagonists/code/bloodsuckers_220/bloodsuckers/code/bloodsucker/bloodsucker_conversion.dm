@@ -42,6 +42,12 @@
 	if(bloodsuckerdatum?.broke_masquerade)
 		//vassal stealing
 		return TRUE
+
+	if(my_clan?.has_vassal_limit)
+		if(length(vassals) >= my_clan.max_vassals)
+			to_chat(owner.current, span_danger("Your clan's traditions limit you to [my_clan.max_vassals] vassals!"))
+			return FALSE
+
 	to_chat(owner.current, span_danger("[conversion_target]'s mind is overwhelmed with too much external force to put your own!"))
 	return FALSE
 

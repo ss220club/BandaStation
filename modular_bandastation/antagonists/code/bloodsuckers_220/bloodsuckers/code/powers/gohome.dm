@@ -22,7 +22,7 @@
 	power_flags = BP_AM_TOGGLE|BP_AM_SINGLEUSE|BP_AM_STATIC_COOLDOWN
 	check_flags = BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_STAKED
 	purchase_flags = NONE
-	bloodcost = 100
+	bloodcost = 200
 	constant_bloodcost = 2
 	cooldown_time = 100 SECONDS
 	///What stage of the teleportation are we in

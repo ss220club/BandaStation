@@ -60,7 +60,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	flags_inv = HIDEEARS | HIDEHAIR
-	hair_mask = HAIR_MASK_HIDE_WINTERHOOD
+	hair_mask = /datum/hair_mask/winterhood
 
 /obj/item/clothing/suit/soundhand_white_jacket
 	name = "soundhand silver jacket"

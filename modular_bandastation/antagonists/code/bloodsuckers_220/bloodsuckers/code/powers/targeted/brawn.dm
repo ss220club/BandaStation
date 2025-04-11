@@ -5,14 +5,15 @@
 	power_explanation = "Brawn:\n\
 		Click a person to bash into them. Use while restrained or grabbed to break restraints or knock your grabber down. Only one of these can be done per use.\n\
 		Punching a cyborg will heavily EMP them in addition to dealing damage.\n\
-		At level 3, this ability will break closets open. Additionally you may both break restraints and knock a grabber down in the same use.\n\
+		At level 3, this ability will break closets open.\n\
 		At level 4, this ability wlil bash airlocks open as long as they aren't bolted.\n\
+		At level 5, you may break restraints and knock a grabber down in the same use.\n\
 		Higher levels will increase this ability's damage and knockdown."
 	power_flags = BP_AM_TOGGLE
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_DURING_SOL
-	purchase_flags = BLOODSUCKER_CAN_BUY|VASSAL_CAN_BUY
-	bloodcost = 8
-	cooldown_time = 9 SECONDS
+	purchase_flags = AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
+	bloodcost = 100
+	cooldown_time = 25 SECONDS
 	target_range = 1
 	power_activates_immediately = TRUE
 	prefire_message = "Select a target."
@@ -25,11 +26,11 @@
 
 /datum/action/cooldown/bloodsucker/targeted/brawn/ActivatePower(trigger_flags)
 	// Did we break out of our handcuffs?
-	if(break_restraints())
+	if(level_current >= 5 && break_restraints())
 		power_activated_sucessfully()
 		return FALSE
 	// Did we knock a grabber down? We can only do this while not also breaking restraints if strong enough.
-	if(level_current >= 3 && escape_puller())
+	if(level_current >= 5 && escape_puller())
 		power_activated_sucessfully()
 		return FALSE
 	// Did neither, now we can PUNCH.
@@ -187,7 +188,7 @@
 			if(brujah && level_current >= 3 && target_airlock.locked)
 				target_airlock.unbolt()
 			target_airlock.obj_flags |= EMAGGED
-			target_airlock.emag_act(user)  // Use emag_act instead of undefined handle_emag_effects
+			target_airlock.emag_act(user)
 
 /datum/action/cooldown/bloodsucker/targeted/brawn/CheckValidTarget(atom/target_atom)
 	. = ..()

@@ -4,13 +4,14 @@ GLOBAL_LIST_EMPTY(masquerade_breakers)
 /datum/bloodsucker_clan/malkavian
 	name = CLAN_MALKAVIAN
 	description = "The history of the Malkavian clan is not well known, even to most modern Malkavians. \n\
-		Complete insanity and an almost puritanical devotion to the Masquerade are the most common themes throughout the literature. \n\
-		Their favorite vassal suffers from insanity just as they do."
+		Complete insanity and an almost puritanical devotion to the Masquerade are the most common themes throughout the literature."
 	join_icon_state = "malkavian"
 	join_description = "Become completely insane, travel through tears in reality, ramble in whispers constantly, \
 		and become an enforcer of the Masquerade."
 	joinable_clan = FALSE
 	blood_drink_type = BLOODSUCKER_DRINK_INHUMANELY
+	has_vassal_limit = TRUE
+	max_vassals = 0
 
 /datum/bloodsucker_clan/malkavian/on_enter_frenzy(datum/antagonist/bloodsucker/source)
 	ADD_TRAIT(bloodsuckerdatum.owner.current, TRAIT_STUNIMMUNE, FRENZY_TRAIT)
@@ -20,7 +21,6 @@ GLOBAL_LIST_EMPTY(masquerade_breakers)
 
 /datum/bloodsucker_clan/malkavian/New(datum/antagonist/bloodsucker/owner_datum)
 	. = ..()
-	RegisterSignal(SSdcs, COMSIG_BLOODSUCKER_BROKE_MASQUERADE, PROC_REF(on_bloodsucker_broke_masquerade))
 	ADD_TRAIT(bloodsuckerdatum.owner.current, TRAIT_XRAY_VISION, BLOODSUCKER_TRAIT)
 	var/mob/living/carbon/carbon_owner = bloodsuckerdatum.owner.current
 	if(istype(carbon_owner))
