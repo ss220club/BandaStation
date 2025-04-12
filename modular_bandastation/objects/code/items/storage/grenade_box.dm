@@ -5,6 +5,5 @@
 	illustration = "grenade"
 
 /obj/item/storage/box/smoke_grenade/PopulateContents()
-	return flatten_quantified_list(list(
-		/obj/item/grenade/smokebomb = 6
-	))
+	for(var/i in 1 to 6)
+		new /obj/item/grenade/smokebomb(src)

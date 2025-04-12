@@ -10,6 +10,7 @@
 	school = SCHOOL_FORBIDDEN
 	cooldown_time = 8 SECONDS
 
+	// Both of these are changed in before_cast
 	invocation = "Кто-то поднимает стену из ржавчины."
 	invocation_self_message = "Вы поднимаете стену из ржавчины."
 	invocation_type = INVOCATION_EMOTE

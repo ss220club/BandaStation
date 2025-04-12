@@ -67,7 +67,7 @@ function QuirkList(props: QuirkProps & QuirkListProps) {
   } = props;
 
   return (
-    <Stack vertical>
+    <Stack vertical g={0}>
       {quirks.map(([quirkKey, quirk]) => (
         <Stack.Item key={quirkKey} m={0}>
           <QuirkDisplay
@@ -383,7 +383,9 @@ export function QuirksPage(props) {
         }
       }
     }
-
+    if (data.species_disallowed_quirks.includes(quirk.name)) {
+      return 'This quirk is incompatible with your selected species.';
+    }
     return;
   }
 
