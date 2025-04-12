@@ -6589,10 +6589,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/evacuation/ship)
-"aFi" = (
-/obj/effect/landmark/basketball/game_area,
-/turf/open/space/basic,
-/area/space)
 "aFl" = (
 /obj/structure/table/reinforced,
 /obj/item/paper_bin{
@@ -47837,7 +47833,7 @@ aaa
 aaa
 aaa
 aaa
-aFi
+aaa
 aaa
 aaa
 aaa

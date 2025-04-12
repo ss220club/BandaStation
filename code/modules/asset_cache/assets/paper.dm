@@ -22,3 +22,9 @@
 		"stamp-nanotrasen_representative" = 'modular_bandastation/objects/icons/stamp_icons/large_stamp-nanotrasen_representative.png'
 		// BANDASTATION EDIT END
 	)
+
+/datum/asset/simple/paper_logos
+	assets = list(
+		"ntlogo.png" = 'icons/paper_icons/ntlogo.png',
+		"syndielogo.png" ='icons/paper_icons/syndielogo.png',
+	)
