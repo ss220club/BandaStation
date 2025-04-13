@@ -1,10 +1,4 @@
-import {
-  KeyboardEvent,
-  MutableRefObject,
-  RefObject,
-  SetStateAction,
-  useCallback,
-} from 'react';
+import { KeyboardEvent, RefObject, SetStateAction, useCallback } from 'react';
 import { Box, Button, Section, TextArea } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 import { debounce } from 'tgui-core/timer';
@@ -19,9 +13,9 @@ type TextAreaSectionProps = {
   textAreaText: string;
   activeWriteButtonId: string;
   lastDistanceFromBottom: number;
-  usedReplacementsRef: MutableRefObject<PaperReplacement[]>;
-  textAreaRef: RefObject<HTMLTextAreaElement>;
-  scrollableRef: RefObject<HTMLDivElement>;
+  usedReplacementsRef: RefObject<PaperReplacement[]>;
+  textAreaRef: RefObject<HTMLTextAreaElement | null>;
+  scrollableRef: RefObject<HTMLDivElement | null>;
   paperReplacementHint: PaperReplacement[];
   handleTextAreaKeyDown: (event: KeyboardEvent<HTMLDivElement>) => void;
   setTextAreaText: (value: SetStateAction<string>) => void;
