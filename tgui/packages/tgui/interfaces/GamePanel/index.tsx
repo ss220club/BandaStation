@@ -50,9 +50,7 @@ export function GamePanel(props) {
       }
     >
       <Window.Content>
-        {/* Tabs and main window */}
         <Stack vertical fill>
-          {/* Tabs */}
           <Stack vertical={false}>
             <Stack.Item shrink={3} width="100%">
               <Tabs fluid>
@@ -70,8 +68,7 @@ export function GamePanel(props) {
             </Stack.Item>
           </Stack>
           <Stack.Divider />
-          {/* Main window */}
-          <Stack.Item grow basis="85%">
+          <Stack.Item grow>
             {selectedTabData && (
               <CreateObject
                 objList={selectedTabData}
