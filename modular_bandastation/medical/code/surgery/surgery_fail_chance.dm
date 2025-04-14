@@ -28,11 +28,3 @@
 #undef SURGFAIL_NO_PAINKILLER
 #undef BASIC_SURGERY_SUCCESS_CHANCE
 #undef CRITICAL_SUCCESS_CHANCE
-
-/datum/status_effect/grouped/stasis/on_apply()
-	. = ..()
-	owner.add_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
-
-/datum/status_effect/grouped/stasis/on_remove()
-	. = ..()
-	owner.remove_traits(list(TRAIT_ANALGESIA), TRAIT_STATUS_EFFECT(id))
