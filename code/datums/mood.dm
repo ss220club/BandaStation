@@ -128,8 +128,10 @@
 			add_mood_event(MOOD_CATEGORY_NUTRITION, /datum/mood_event/fed)
 		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
 			clear_mood_event(MOOD_CATEGORY_NUTRITION)
-		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
+		if(NUTRITION_LEVEL_VERY_HUNGRY to NUTRITION_LEVEL_HUNGRY)
 			add_mood_event(MOOD_CATEGORY_NUTRITION, /datum/mood_event/hungry)
+		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_VERY_HUNGRY)
+			add_mood_event(MOOD_CATEGORY_NUTRITION, /datum/mood_event/hungry_very)
 		if(0 to NUTRITION_LEVEL_STARVING)
 			add_mood_event(MOOD_CATEGORY_NUTRITION, /datum/mood_event/starving)
 
@@ -339,7 +341,9 @@
 				msg += "[span_info("Я не голоден.")]<br>"
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
 				msg += "[span_info("Было бы неплохо что-то съесть.")]<br>"
-			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
+			if(NUTRITION_LEVEL_VERY_HUNGRY to NUTRITION_LEVEL_HUNGRY)
+				msg += "[span_warning("Я немного голоден.")]<br>"
+			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_VERY_HUNGRY)
 				msg += "[span_warning("Я очень голоден.")]<br>"
 			if(0 to NUTRITION_LEVEL_STARVING)
 				msg += "[span_boldwarning("Я умираю с голоду!")]<br>"

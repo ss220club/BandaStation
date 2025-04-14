@@ -14,7 +14,7 @@
 		return
 
 	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"]))
-		if(!SScentral.active)
+		if(!SScentral.can_run())
 			to_chat(usr, "Система привязок дискорда не активна, но включен режим проверки привязки. Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.")
 			stack_trace("Discord verification is enabled, but SS Central is not active.")
 			return

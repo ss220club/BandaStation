@@ -5,9 +5,6 @@
   * @license ISC
   */
 
-@use '../colors';
-@use '../base';
-
 .Paper {
   &__Stamp {
     position: absolute;
@@ -22,11 +19,12 @@
 
   &__Hints {
     overflow: hidden auto;
-    scroll-padding: 0.5rem;
+    scroll-padding: var(--space-m);
     scrollbar-width: thin;
+    scrollbar-color: var(--color-scrollbar-thumb) transparent;
     height: 100%;
     max-height: 30vh;
-    padding: 0.5rem;
+    padding: var(--space-m);
 
     &--wrapper {
       overflow: hidden;
@@ -34,7 +32,7 @@
       top: 0;
       left: 0;
       right: 0;
-      margin: 0 1.75rem 0 0.5rem; // 1.25rem for scrollbar
+      margin: 0 calc(1.25rem + var(--space-m)) 0 var(--space-m); // 1.25rem for scrollbar
       background-color: hsla(0, 0%, 80%, 0.5);
       border: 1px solid hsla(0, 0%, 0%, 0.1);
       border-radius: 0.33rem;
@@ -46,14 +44,18 @@
     &--blur {
       position: absolute;
       inset: 0;
-      backdrop-filter: blur(12px);
+      backdrop-filter: var(--blur-medium);
       z-index: -1;
     }
 
     /* We need to somehow override the specificity so that we don't use !important */
     .Paper__Hints--button {
       &.Button {
-        border-radius: 0.33rem;
+        border-radius: var(--border-radius-medium);
+
+        &--selected {
+          transition-duration: 0s;
+        }
 
         &:hover:not(.Button--selected) {
           background-color: hsla(0, 0%, 0%, 0.1);
@@ -62,7 +64,7 @@
       }
 
       &--content {
-        padding: 0.25rem 0;
+        padding: var(--space-s) 0;
         line-height: 1.3rem;
       }
 
@@ -81,11 +83,11 @@
 .Paper__Page {
   button {
     cursor: pointer;
-    margin: 0.25rem;
-    padding: 0.1rem 0.33rem;
+    margin: var(--space-s);
+    padding: var(--space-xxs) var(--space-sm);
     background-color: hsla(0, 0%, 50%, 0.1);
-    border: 1px solid hsla(0, 0%, 0%, 0.2);
-    border-radius: 0.25rem;
+    border: var(--border-thickness-tiny) solid hsla(0, 0%, 0%, 0.2);
+    border-radius: var(--border-radius-small);
 
     &:hover {
       background-color: hsla(0, 0%, 50%, 0.2);
@@ -93,11 +95,11 @@
 
     &[aria-checked='true'] {
       background-color: transparent;
-      border-color: colors.$green;
+      border-color: var(--color-green);
     }
 
     &.icon_only {
-      padding: 0.1rem 0.175rem;
+      padding: var(--space-xxs) var(--space-xs);
     }
 
     i {
