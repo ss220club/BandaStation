@@ -8,7 +8,7 @@
 
 	return finish_unequip_mob_pocket(item, source, user)
 
-/proc/finish_unequip_mob_pocket(obj/item/item, mob/source, mob/user)
+/datum/strippable_item/mob_item_slot/pocket/proc/finish_unequip_mob_pocket(obj/item/item, mob/source, mob/user)
 	if (!item.doStrip(user, source))
 		return FALSE
 	if(istype(user, /mob/living/carbon/human))
