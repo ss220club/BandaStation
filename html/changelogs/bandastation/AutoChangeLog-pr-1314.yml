@@ -1,4 +1,0 @@
-author: "Ez-Briz"
-delete-after: True
-changes:
-  - bugfix: "Select Equipment теперь корректно подгружает вещи в поясе из содержимого json файла."
