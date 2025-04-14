@@ -139,7 +139,7 @@
 	var/datum/mod_part/legs_to_move = get_part_datum_from_slot(ITEM_SLOT_FEET)
 	if(wearer && (!legs_to_move || !legs_to_move.sealed))
 		return FALSE
-	var/timemodifier = MOVE_DELAY * (ISDIAGONALDIR(direction) ? sqrt(2) : 1) * (wearer ? WEARER_DELAY : LONE_DELAY)
+	var/timemodifier = MOVE_DELAY * (ISDIAGONALDIR(direction) ? 2 : 1) * (wearer ? WEARER_DELAY : LONE_DELAY)
 	if(wearer && !wearer.Process_Spacemove(direction))
 		return FALSE
 	else if(!wearer && (!has_gravity() || !isturf(loc)))
