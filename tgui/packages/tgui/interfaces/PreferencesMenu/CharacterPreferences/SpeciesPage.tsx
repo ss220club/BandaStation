@@ -146,7 +146,7 @@ function Diet(props: DietProps) {
         <FoodList
           food={liked_food}
           icon="heart"
-          name="Liked food"
+          name="Любимая пища"
           className="color-pink"
         />
       </Stack.Item>
@@ -155,7 +155,7 @@ function Diet(props: DietProps) {
         <FoodList
           food={disliked_food.filter(notIn(IGNORE_UNLESS_LIKED))}
           icon="thumbs-down"
-          name="Disliked food"
+          name="Нелюбимая пища"
           className="color-red"
         />
       </Stack.Item>
@@ -164,7 +164,7 @@ function Diet(props: DietProps) {
         <FoodList
           food={toxic_food.filter(notIn(IGNORE_UNLESS_LIKED))}
           icon="biohazard"
-          name="Toxic food"
+          name="Токсичная пища"
           className="color-olive"
         />
       </Stack.Item>
@@ -281,7 +281,7 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
     <Stack vertical fill>
       <Stack.Item>
         <Button icon="arrow-left" onClick={props.handleClose}>
-          Go Back
+          Вернуться
         </Button>
       </Stack.Item>
 
@@ -329,11 +329,11 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
                         )
                       }
                     >
-                      <Section title="Description">
+                      <Section title="Описание вида">
                         {currentSpecies.desc}
                       </Section>
 
-                      <Section title="Features">
+                      <Section title="Черты">
                         <SpeciesPerks perks={currentSpecies.perks} />
                       </Section>
                     </Section>
@@ -349,7 +349,7 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
               </Box>
 
               <Box mt={1}>
-                <Section title="Lore">
+                <Section title="История">
                   <BlockQuote>
                     {currentSpecies.lore.map((text, index) => (
                       <Box key={index} maxWidth="100%">
