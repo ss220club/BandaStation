@@ -6,8 +6,8 @@
 import { useState } from 'react';
 import {
   Button,
+  Floating,
   Input,
-  Popper,
   Section,
   Stack,
   Table,
@@ -42,6 +42,7 @@ const displayTypeMap = {
   request_nuke: 'NUKE CODE',
   request_fax: 'FAX',
   request_internet_sound: 'INTERNET SOUND',
+  request_ert: 'ERT REASON', // BANDASTATION ADDITION - START
 };
 
 export const RequestManager = (props) => {
@@ -174,6 +175,13 @@ const RequestControls = (props) => {
       {request.req_type === 'request_internet_sound' && (
         <Button onClick={() => act('play', { id: request.id })}>PLAY</Button>
       )}
+      {/** BANDASTATION ADDITION - START */}
+      {request.req_type === 'request_ert' && (
+        <Button onClick={() => act('requestert', { id: request.id })}>
+          ERT
+        </Button>
+      )}
+      {/** BANDASTATION ADDITION - END */}
     </div>
   );
 };
@@ -184,43 +192,37 @@ const FilterPanel = (props) => {
 
   return (
     <div>
-      {' '}
-      <Button icon="cog" onClick={() => setFilterVisible(!filterVisible)}>
-        Type Filter
-      </Button>
-      <Popper
-        isOpen={filterVisible}
+      <Floating
         placement="bottom-end"
+        onOpenChange={setFilterVisible}
+        contentClasses="RequestManager__filterPanel"
         content={
-          <div
-            className="RequestManager__filterPanel"
-            style={{
-              display: 'block',
-            }}
-          >
-            <Table width="0">
-              {Object.keys(displayTypeMap).map((type) => {
-                return (
-                  <Table.Row className="candystripe" key={type}>
-                    <Table.Cell collapsing>
-                      <RequestType requestType={type} />
-                    </Table.Cell>
-                    <Table.Cell collapsing>
-                      <Button.Checkbox
-                        checked={typesList[type]}
-                        onClick={() => {
-                          updateFilter(type);
-                        }}
-                        my={0.25}
-                      />
-                    </Table.Cell>
-                  </Table.Row>
-                );
-              })}
-            </Table>
-          </div>
+          <Table width="0">
+            {Object.keys(displayTypeMap).map((type) => {
+              return (
+                <Table.Row className="candystripe" key={type}>
+                  <Table.Cell collapsing>
+                    <RequestType requestType={type} />
+                  </Table.Cell>
+                  <Table.Cell collapsing>
+                    <Button.Checkbox
+                      checked={typesList[type]}
+                      onClick={() => {
+                        updateFilter(type);
+                      }}
+                      my={0.25}
+                    />
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
+          </Table>
         }
-      />
+      >
+        <Button icon="cog" selected={filterVisible}>
+          Type Filter
+        </Button>
+      </Floating>
     </div>
   );
 };

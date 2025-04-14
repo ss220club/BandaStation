@@ -4,6 +4,6 @@
 	illustration = "implant"
 
 /obj/item/storage/box/deathimp/PopulateContents()
+	new /obj/item/implanter/death_alarm(src)
 	for(var/i in 1 to 6)
 		new /obj/item/implantcase/death_alarm(src)
-	new /obj/item/implanter/death_alarm(src)

@@ -95,11 +95,9 @@
 
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		examine_panel_screen.display_to(user)
-		user.client.register_map_obj(examine_panel_screen)
 		ui = new(user, src, "ExaminePanel")
 		ui.open()
-
+		examine_panel_screen.display_to(user, ui.window)
 
 /datum/component/examine_panel/ui_data(mob/user)
 	var/list/data = list()

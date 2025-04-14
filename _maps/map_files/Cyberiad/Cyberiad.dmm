@@ -10128,6 +10128,7 @@
 /turf/open/floor/iron/dark/small,
 /area/station/security/mechbay)
 "cvQ" = (
+/mob/living/basic/crocodile/gena,
 /turf/open/water/alternative/muddy/no_fishing,
 /area/station/service/kitchen/abandoned)
 "cvT" = (
@@ -25494,6 +25495,7 @@
 "ggv" = (
 /obj/structure/table/wood,
 /obj/item/hand_labeler,
+/obj/structure/cable,
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "ggA" = (
@@ -29343,6 +29345,7 @@
 /obj/structure/chair/comfy/black{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "heR" = (
@@ -30875,6 +30878,13 @@
 	},
 /turf/open/floor/carpet/red,
 /area/station/maintenance/department/security/ghetto)
+"hxi" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/cable,
+/turf/open/floor/wood,
+/area/station/command/meeting_room)
 "hxl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -31889,7 +31899,6 @@
 /obj/machinery/door/airlock/public{
 	id_tag = "vip_room2"
 	},
-/obj/structure/curtain/cloth/fancy,
 /turf/open/floor/iron/checker,
 /area/station/service/bar/atrium/ghetto)
 "hIA" = (
@@ -35229,7 +35238,7 @@
 	pixel_x = 4
 	},
 /obj/item/stock_parts/power_store/cell/high,
-/obj/item/reagent_containers/pill/patch/aiuri,
+/obj/item/reagent_containers/applicator/patch/aiuri,
 /obj/item/clothing/glasses/meson{
 	pixel_y = 4
 	},
@@ -35739,6 +35748,7 @@
 	id = "heads_meeting_outer"
 	},
 /obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/command/meeting_room)
 "iIJ" = (
@@ -37969,9 +37979,9 @@
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/shutters/preopen{
-	id = "ChangBottom"
+	id = "JimNortonBottom"
 	},
-/obj/machinery/door/window/right/directional/north{
+/obj/machinery/door/window/right/directional/south{
 	name = "Jim Norton's Quebecois Coffee"
 	},
 /turf/open/floor/plating,
@@ -58787,17 +58797,27 @@
 /obj/structure/table/wood,
 /obj/machinery/coffeemaker/impressa,
 /obj/machinery/button/door/directional/south{
-	name = "Jim Norton's Quebecois Coffee Bottom Shutters Control";
-	id = "JimNortonBottom";
-	pixel_x = 6
+	name = "Jim Norton's Quebecois Coffee South Shutters Control";
+	id = "JimNortonBottom"
 	},
 /obj/machinery/button/door/directional/south{
 	id = "JimNortonKitchen";
-	name = "Jim Norton's Quebecois Coffee Shutters Control";
-	pixel_x = -6
+	name = "Jim Norton's Quebecois Coffee North Shutters Control";
+	pixel_x = -10
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
+/obj/machinery/button/door/directional/west{
+	id = "vip_room2";
+	name = "Door Control";
+	specialfunctions = 4;
+	normaldoorcontrol = 1
+	},
+/obj/machinery/button/door/directional/south{
+	id = "JimNortonDoor";
+	name = "Jim Norton's Quebecois Coffee Door Lock";
+	pixel_x = 10
+	},
 /turf/open/floor/wood,
 /area/station/service/cafeteria)
 "olw" = (
@@ -67407,13 +67427,15 @@
 	normaldoorcontrol = 1;
 	pixel_x = -15;
 	specialfunctions = 4;
-	pixel_y = -2
+	pixel_y = -2;
+	req_access = list("psychology")
 	},
 /obj/machinery/button/door/directional/south{
 	id = "psychological_office_shutters";
 	name = "Psychological Office Shutters Control";
 	pixel_x = -15;
-	pixel_y = 8
+	pixel_y = 8;
+	req_access = list("psychology")
 	},
 /turf/open/floor/carpet,
 /area/station/medical/psychology)
@@ -81074,6 +81096,7 @@
 /obj/structure/chair/comfy/black{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "tId" = (
@@ -88176,25 +88199,25 @@
 "vuy" = (
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/table/reinforced/rglass,
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6
 	},
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/pill/patch/aiuri{
+/obj/item/reagent_containers/applicator/patch/aiuri{
 	pixel_x = 6;
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/pill/patch/libital{
+/obj/item/reagent_containers/applicator/patch/libital{
 	pixel_x = -6;
 	pixel_y = 4
 	},
@@ -89544,14 +89567,12 @@
 "vMr" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/public,
+/obj/machinery/door/airlock/public{
+	id_tag = "JimNortonDoor"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/poddoor/shutters/window/preopen{
-	dir = 4;
-	id = "JimNortonBottom"
-	},
 /turf/open/floor/wood,
 /area/station/service/cafeteria)
 "vMy" = (
@@ -94102,7 +94123,6 @@
 "wUk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/effect/turf_decal/siding/wood,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/wood,
 /area/station/service/cafeteria)
@@ -98315,7 +98335,6 @@
 /obj/machinery/door/airlock/public{
 	id_tag = "vip_room1"
 	},
-/obj/structure/curtain/cloth/fancy,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/bar/atrium/ghetto)
 "xWE" = (
@@ -190632,7 +190651,7 @@ xUN
 eyM
 npS
 mCw
-eyM
+hxi
 xUN
 gzC
 urm
