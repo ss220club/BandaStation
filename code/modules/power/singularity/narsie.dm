@@ -262,7 +262,6 @@
 		title = "[command_name()]: Отдел паранормальных явлений",
 		sound = 'sound/announcer/alarm/airraid.ogg',
 	)
-	SSsecurity_level.set_level(SEC_LEVEL_GAMMA) /// BANDASTATION EDIT - Cult
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_end_second_check)), 50 SECONDS)
 
 ///Second crew last second win check and flufftext for [/proc/begin_the_end()]
