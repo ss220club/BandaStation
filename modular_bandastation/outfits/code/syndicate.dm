@@ -2,7 +2,7 @@
 /datum/outfit/syndicate/central_command
 	name = "Syndicate Officer"
 	uniform = /obj/item/clothing/under/syndicate/tacticool
-	suit = /obj/item/clothing/suit/jacket/trenchcoat
+	suit = /obj/item/clothing/suit/toggle/jacket/trenchcoat
 	gloves = /obj/item/clothing/gloves/combat
 	glasses = /obj/item/clothing/glasses/sunglasses
 	head = /obj/item/clothing/head/hats/hos/beret/syndicate

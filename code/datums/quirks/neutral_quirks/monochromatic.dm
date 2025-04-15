@@ -5,8 +5,8 @@
 	value = 0
 	medical_record_text = "Пациент страдает почти полным дальтонизмом."
 	mail_goodies = list( // Noir detective wannabe
+		/obj/item/clothing/suit/toggle/jacket/det_trench/noir,
 		/obj/item/clothing/suit/jacket/det_suit/noir,
-		/obj/item/clothing/suit/jacket/det_suit/dark,
 		/obj/item/clothing/head/fedora/beige,
 		/obj/item/clothing/head/fedora/white,
 	)

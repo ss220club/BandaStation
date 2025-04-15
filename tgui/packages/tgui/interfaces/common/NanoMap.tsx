@@ -1,5 +1,6 @@
 import '../../styles/interfaces/NanoMap.scss';
 
+import { useLocalStorage } from '@uidotdev/usehooks';
 import { type ReactNode, useRef, useState } from 'react';
 import {
   KeepScale,
@@ -19,7 +20,6 @@ import {
 } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
 import { BooleanLike, classes } from 'tgui-core/react';
-import { useLocalStorage } from 'usehooks-ts';
 
 import { resolveAsset } from '../../assets';
 import { useSharedState } from '../../backend';
