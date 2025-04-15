@@ -57,7 +57,7 @@ function CharacterControls(props: CharacterControlsProps) {
           onClick={props.handleRotate}
           fontSize="22px"
           icon="undo"
-          tooltip="Rotate"
+          tooltip="Повернуть"
           tooltipPosition="top"
         />
       </Stack.Item>
@@ -67,7 +67,7 @@ function CharacterControls(props: CharacterControlsProps) {
           onClick={props.handleOpenSpecies}
           fontSize="22px"
           icon="paw"
-          tooltip="Species"
+          tooltip="Вид"
           tooltipPosition="top"
         />
       </Stack.Item>
@@ -87,7 +87,7 @@ function CharacterControls(props: CharacterControlsProps) {
           fontSize="22px"
           icon="trash"
           color="red"
-          tooltip="Delete Character"
+          tooltip="Удалить персонажа"
           tooltipPosition="top"
           disabled={!props.canDeleteCharacter}
         />
@@ -110,7 +110,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
   const [getSearchText, searchTextSet] = useState('');
 
   if (!catalog.icons) {
-    return <Box color="red">Provided catalog had no icons!</Box>;
+    return <Box color="red">В предоставленном каталоге не было иконок!</Box>;
   }
 
   return (
@@ -142,7 +142,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
             <Input
               autoFocus
               width="100%"
-              placeholder="Search..."
+              placeholder="Поиск..."
               onInput={(_, value) => searchTextSet(value)}
             />
           </Section>
@@ -232,7 +232,7 @@ function GenderButton(props: GenderButtonProps) {
         <Button
           fontSize="22px"
           icon={GENDERS[props.gender].icon}
-          tooltip="Gender"
+          tooltip="Пол"
           tooltipPosition="top"
         />
       </div>
@@ -378,7 +378,7 @@ export function PreferenceList(props: PreferenceListProps) {
             if (feature === undefined) {
               return (
                 <Stack.Item key={featureId}>
-                  <b>Feature {featureId} is not recognized.</b>
+                  <b>Компонент {featureId} не распознан.</b>
                 </Stack.Item>
               );
             }
