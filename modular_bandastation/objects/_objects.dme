@@ -82,8 +82,8 @@
 #include "code/items/weapons/ranged/ballistic/magazines.dm"
 #include "code/items/weapons/ranged/ballistic/projectiles.dm"
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
-#include "code/items/weapons/ranged/ballistic/ak.dm"
-#include "code/items/weapons/ranged/ballistic/fal.dm"
+#include "code/items/weapons/ranged/ballistic/akm.dm"
+#include "code/items/weapons/ranged/ballistic/sol_rifle.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
