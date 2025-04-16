@@ -61,7 +61,12 @@
 	else if(href_list["wiki"])
 		if(tgui_alert(usr, "Хотите открыть нашу вики?", "Вики", list("Да", "Нет")) != "Да")
 			return
-		client << link("https://tg.ss220.club")
+		client << link("https://bs.ss220.club")
+
+	else if(href_list["discord"])
+		if(tgui_alert(usr, "Хотите перейти в наш дискорд сервер?", "Дискорд", list("Да", "Нет")) != "Да")
+			return
+		client << link("https://discord.gg/ss220")
 
 	else if(href_list["trait_signup"])
 		var/datum/station_trait/clicked_trait
