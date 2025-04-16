@@ -1,8 +1,6 @@
 SUBSYSTEM_DEF(statpanels)
 	name = "Stat Panels"
 	wait = 4
-	init_order = INIT_ORDER_STATPANELS
-	init_stage = INITSTAGE_EARLY
 	priority = FIRE_PRIORITY_STATPANEL
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	flags = SS_NO_INIT
@@ -30,8 +28,8 @@ SUBSYSTEM_DEF(statpanels)
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 			"Players Connected: [LAZYLEN(GLOB.clients)]", // BANDASTATION ADD
 			"Players in Lobby: [LAZYLEN(GLOB.new_player_list)]", // BANDASTATION ADD
-			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
-			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [STATION_TIME_PASSED() > MIDNIGHT_ROLLOVER ? "[round(STATION_TIME_PASSED() / MIDNIGHT_ROLLOVER)]:[gameTimestamp(wtime = STATION_TIME_PASSED(), timezone = 0)]" : gameTimestamp(wtime = STATION_TIME_PASSED(), timezone = 0)]", // BANDASTATION ADDITION - timezone
+			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
+			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [ROUND_TIME()]", // BANDASTATION ADD
 			"Station Time: [station_time_timestamp()]",
 			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"
 		)
@@ -191,10 +189,10 @@ SUBSYSTEM_DEF(statpanels)
 		tracy_dll = TRACY_DLL_PATH
 		tracy_present = fexists(tracy_dll)
 	if(tracy_present)
-		if(GLOB.tracy_initialized)
-			mc_data.Insert(2, list(list("byond-tracy:", "Active (reason: [GLOB.tracy_init_reason || "N/A"])")))
-		else if(GLOB.tracy_init_error)
-			mc_data.Insert(2, list(list("byond-tracy:", "Errored ([GLOB.tracy_init_error])")))
+		if(Tracy.enabled)
+			mc_data.Insert(2, list(list("byond-tracy:", "Active (reason: [Tracy.init_reason || "N/A"])")))
+		else if(Tracy.error)
+			mc_data.Insert(2, list(list("byond-tracy:", "Errored ([Tracy.error])")))
 		else if(fexists(TRACY_ENABLE_PATH))
 			mc_data.Insert(2, list(list("byond-tracy:", "Queued for next round")))
 		else

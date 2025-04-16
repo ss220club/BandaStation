@@ -117,9 +117,9 @@ export const CameraContent = (props) => {
   };
 
   return (
-    <Stack fill>
+    <Stack fill g={0}>
       <Stack.Item grow minWidth={0}>
-        <Stack fill vertical>
+        <Stack fill vertical g={0}>
           <Stack.Item textAlign="center">
             <Tabs fluid>
               <Tabs.Tab
@@ -140,12 +140,10 @@ export const CameraContent = (props) => {
               </Tabs.Tab>
             </Tabs>
           </Stack.Item>
-          <Stack.Item grow={3} mt={tab === 'Map' && 0}>
-            {decideTab(tab)}
-          </Stack.Item>
+          <Stack.Item grow={3}>{decideTab(tab)}</Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item grow={tab === 'Map' ? 1.5 : 3} ml={tab === 'Map' && 0}>
+      <Stack.Item grow={tab === 'Map' ? 1.5 : 3}>
         <CameraControls searchText={searchText} />
       </Stack.Item>
     </Stack>
@@ -160,12 +158,11 @@ const CameraListSelector = (props) => {
 
   return (
     <Stack fill vertical>
-      <Stack.Item>
+      <Stack.Item mt={1}>
         <Input
           autoFocus
           expensive
           fluid
-          mt={1}
           placeholder="Search for a camera"
           onInput={(e, value) => setSearchText(value)}
           value={searchText}

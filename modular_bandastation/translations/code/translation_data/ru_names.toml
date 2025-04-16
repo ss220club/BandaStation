@@ -971,6 +971,23 @@ prepositional = "заметке свода законов"
 gender = "female"
 
 # MARK: Mobs. Uncategorized
+["crocodile"]
+nominative = "крокодил"
+genitive = "крокодила"
+dative = "крокодилу"
+accusative = "крокодила"
+instrumental = "крокодилом"
+prepositional = "крокодиле"
+gender = "male"
+
+["Gena"]
+nominative = "Гена"
+genitive = "Гену"
+dative = "Гене"
+accusative = "Гену"
+instrumental = "Геной"
+prepositional = "Гене"
+gender = "male"
 
 # MARK: Mobs. Aliens
 [alien]
@@ -6441,7 +6458,7 @@ instrumental = "ножом"
 prepositional = "ноже"
 gender = "male"
 
-["итальянские усы"]
+["italian moustache"]
 nominative = "итальянские усы"
 genitive = "итальянских усов"
 dative = "итальянским усам"
@@ -22862,6 +22879,42 @@ dative = "своим"
 accusative = "свои"
 instrumental = "своими"
 prepositional = "своих"
+
+["CQC implant"]
+nominative = "CQC имплант"
+genitive = "CQC импланта"
+dative = "CQC импланту"
+accusative = "CQC имплант"
+instrumental = "CQC имплантом"
+prepositional = "CQC импланте"
+gender = "male"
+
+["implanter (CQC)"]
+nominative = "имплантер (CQC)"
+genitive = "иплантера (CQC)"
+dative = "имплантеру (CQC)"
+accusative = "имплантер (CQC)"
+instrumental = "имплантером (CQC)"
+prepositional = "имплантере (CQC)"
+gender = "male"
+
+["implant case - 'Close Quarters Combat'"]
+nominative = "кейс импланта - 'Close Quarters Combat'"
+genitive = "кейса импланта - 'Close Quarters Combat'"
+dative = "кейсу импланта - 'Close Quarters Combat'"
+accusative = "кейс импланта - 'Close Quarters Combat'"
+instrumental = "кейсом импланта - 'Close Quarters Combat'"
+prepositional = "кейсе импланта - 'Close Quarters Combat'"
+gender = "male"
+
+["fake moustache"]
+nominative = "накладные усы"
+genitive = "накладных усов"
+dative = "накладным усам"
+accusative = "накладные усы"
+instrumental = "накладными усами"
+prepositional = "накладных усах"
+gender = "plural"
 
 ["hookah"]
 nominative = "кальян"

@@ -131,7 +131,6 @@ html {
 	font-size: 15px;
 	overflow: hidden;
 	text-align: center;
-	-ms-user-select: none;
 	user-select: none;
 	cursor: default;
 	position: static;
@@ -164,20 +163,22 @@ input,
 }
 
 .pixelated {
-	-ms-interpolation-mode: nearest-neighbor;
 	image-rendering: pixelated;
 }
 
 .bg {
+    object-fit: contain;
 	position: absolute;
-	width: auto;
-	height: 100vmin;
-	min-width: 100vmin;
-	min-height: 100vmin;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 0;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+	filter: drop-shadow(0 0 1em hsla(0, 0%, 0%, 0.33));
+    z-index: 0;
+}
+
+.bg-blur {
+	transform: scale(2);
+    filter: blur(2.5rem) brightness(0.75);
 }
 
 #container_notice {

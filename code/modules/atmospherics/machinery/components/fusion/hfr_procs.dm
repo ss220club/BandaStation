@@ -415,7 +415,7 @@
 		priority_announce("ПРЕДУПРЕЖДЕНИЕ - Взрыв, скорее всего, накроет большую часть станции, а грядущее ЭМИ уничтожит большую часть электроники. \
 			Отойдите как можно дальше от реактора или найдите способ его отключить.", "Внимание", 'sound/announcer/notice/notice3.ogg')
 	var/speaking = "[emergency_alert] Термоядерный реактор \"Гиперторус\" достиг критического нарушения целостности. Аварийные магнитные демпферы включены."
-	radio.talk_into(src, speaking, common_channel, language = get_selected_language())
+	radio.talk_into(src, speaking, common_channel)
 
 	notify_ghosts(
 		"The [src] has begun melting down!",
