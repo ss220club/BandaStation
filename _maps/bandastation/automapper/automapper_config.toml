@@ -64,49 +64,49 @@ trait_name = "Station"
 [templates.hotmeta_lawyer_office]
 map_files = ["hotmeta_lawyer_office.dmm"]
 directory = "_maps/bandastation/automapper/templates/hotmeta/"
-required_map = "hotmeta.dmm"
+required_map = "Hotmeta.dmm"
 coordinates = [57, 119, 1]
 trait_name = "Station"
 
 [templates.hotmeta_magistrate_office]
 map_files = ["hotmeta_magistrate_office.dmm"]
 directory = "_maps/bandastation/automapper/templates/hotmeta/"
-required_map = "hotmeta.dmm"
+required_map = "Hotmeta.dmm"
 coordinates = [119, 151, 1]
 trait_name = "Station"
 
 [templates.hotmeta_ntr_blueshield_office]
 map_files = ["hotmeta_ntr_blueshield_office.dmm"]
 directory = "_maps/bandastation/automapper/templates/hotmeta/"
-required_map = "hotmeta.dmm"
+required_map = "Hotmeta.dmm"
 coordinates = [101, 115, 1]
 trait_name = "Station"
 
 [templates.hotmeta_argos_port]
 map_files = ["hotmeta_argos_port.dmm"]
 directory = "_maps/bandastation/automapper/templates/hotmeta/"
-required_map = "hotmeta.dmm"
+required_map = "Hotmeta.dmm"
 coordinates = [31, 142, 1]
 trait_name = "Station"
 
 [templates.hotmeta_specops_port]
 map_files = ["hotmeta_specops_port.dmm"]
 directory = "_maps/bandastation/automapper/templates/hotmeta/"
-required_map = "hotmeta.dmm"
+required_map = "Hotmeta.dmm"
 coordinates = [31, 128, 1]
 trait_name = "Station"
 
 [templates.hotmeta_cryo]
 map_files = ["hotmeta_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/hotmeta/"
-required_map = "hotmeta.dmm"
+required_map = "Hotmeta.dmm"
 coordinates = [133, 182, 1]
 trait_name = "Station"
 
 [templates.hotmeta_perma_cryo]
 map_files = ["hotmeta_perma_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/hotmeta/"
-required_map = "hotmeta.dmm"
+required_map = "Hotmeta.dmm"
 coordinates = [84, 189, 1]
 trait_name = "Station"
 
