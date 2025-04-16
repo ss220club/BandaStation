@@ -102,7 +102,7 @@ input,
 
 .bg-blur {
 	transform: scale(2);
-    filter: blur(2.5rem) brightness(0.75);
+    filter: blur(38px) brightness(0.75);
 }
 
 .good {
