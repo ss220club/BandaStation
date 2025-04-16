@@ -150,13 +150,6 @@
 	if(dna.features["tajaran_facial_hair_color"])
 		dna.features["tajaran_facial_hair_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_TAJARAN_FACIAL_HAIR_COLOR))
 
-/proc/populate_total_uf_len_by_block_modular(last)
-	. = list()
-	var/total_block_len = last
-	for(var/blocknumber in 1 to DNA_MODULAR_BLOCKS_COUNT + 1)
-		total_block_len += GET_UF_BLOCK_LEN(blocknumber + DNA_FEATURE_BLOCKS - 1)
-		. += total_block_len
-
 // vulpkanin
 /mob/living/carbon/human/species/vulpkanin/random_mutate_unique_features()
 	if(!has_dna())
@@ -174,6 +167,9 @@
 	updateappearance(mutcolor_update = TRUE, mutations_overlay_update = TRUE)
 
 /datum/modpack/species/modular/post_initialize()
+	GLOB.total_uf_len_by_block += populate_total_uf_len_by_block_modular(GLOB.total_uf_len_by_block[DNA_FEATURE_BLOCKS])
+
+/datum/modpack/species/modular/post_initialize()
 	GLOB.features_block_lengths += list(
 		"[DNA_VULPKANIN_BODY_MARKINGS_COLOR]" = DNA_BLOCK_SIZE_COLOR,
 		"[DNA_VULPKANIN_TAIL_MARKINGS_COLOR]" = DNA_BLOCK_SIZE_COLOR,
@@ -185,3 +181,10 @@
 		"[DNA_TAJARAN_FACIAL_HAIR_COLOR]" = DNA_BLOCK_SIZE_COLOR,
 	)
 	GLOB.total_uf_len_by_block += populate_total_uf_len_by_block_modular(GLOB.total_uf_len_by_block[DNA_FEATURE_BLOCKS])
+
+/proc/populate_total_uf_len_by_block_modular(last)
+	. = list()
+	var/total_block_len = last
+	for(var/blocknumber in 1 to DNA_MODULAR_BLOCKS_COUNT + 1)
+		total_block_len += GET_UF_BLOCK_LEN(blocknumber + DNA_FEATURE_BLOCKS - 1)
+		. += total_block_len

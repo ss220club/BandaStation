@@ -1,7 +1,6 @@
 SUBSYSTEM_DEF(security_level)
 	name = "Security Level"
 	can_fire = FALSE // We will control when we fire in this subsystem
-	init_order = INIT_ORDER_SECURITY_LEVEL
 	var/set_timer_id = null // BANDASTATION ADDITION
 	/// Currently set security level
 	var/datum/security_level/current_security_level

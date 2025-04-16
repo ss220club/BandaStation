@@ -1,4 +1,3 @@
-#define INIT_ORDER_GAMEMODE 70
 ///how many storytellers can be voted for along with always_votable ones
 #define DEFAULT_STORYTELLER_VOTE_OPTIONS 4
 ///amount of players we can have before no longer running votes for storyteller
@@ -9,11 +8,13 @@
 
 SUBSYSTEM_DEF(gamemode)
 	name = "Gamemode"
-	init_order = INIT_ORDER_GAMEMODE
 	runlevels = RUNLEVEL_GAME
 	flags = SS_BACKGROUND | SS_KEEP_TIMING
 	priority = 20
 	wait = 2 SECONDS
+	dependencies = list(
+		/datum/controller/subsystem/mapping
+	)
 
 	/// List of our event tracks for fast access during for loops.
 	var/list/event_tracks = EVENT_TRACKS

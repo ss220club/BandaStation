@@ -73,7 +73,7 @@
 	return ..()
 
 /obj/item/storage/belt/centcom_sabre/PopulateContents()
-	return /obj/item/melee/sabre/centcom_sabre
+	new /obj/item/melee/sabre/centcom_sabre(src)
 
 /datum/storage/centcom_katana_belt
 	max_slots = 1
@@ -123,4 +123,4 @@
 	return ..()
 
 /obj/item/storage/belt/centcom_katana/PopulateContents()
-	return /obj/item/melee/sabre/centcom_katana
+	new /obj/item/melee/sabre/centcom_katana(src)

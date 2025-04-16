@@ -1,5 +1,11 @@
 ADMIN_VERB(wl_ban, R_BAN, "WL Ban", "Выписать игрока из вайтлиста.", ADMIN_CATEGORY_MAIN)
 	BLACKBOX_LOG_ADMIN_VERB("WL Ban")
+
+	if(!SScentral.can_run())
+		to_chat(user, span_bolddanger("Невозможно выписать игрока из вайтлиста. SS Central не настроен!"))
+		stack_trace("Using whitelist/whitelist bans without SS Central is not supported")
+		return
+
 	var/banned_ckey = input(user, "Укажите ckey игрока для выписки.", "Выписка", "") as text|null
 	banned_ckey = ckey(banned_ckey)
 	if(!banned_ckey)
