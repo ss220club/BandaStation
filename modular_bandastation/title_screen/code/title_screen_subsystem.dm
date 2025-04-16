@@ -32,10 +32,10 @@
 		return
 
 	var/time_remaining = SSticker.GetTimeLeft()
-	if(time_remaining == -10 || time_remaining > 9990)
+	if(time_remaining == -10 || time_remaining > 1 HOURS)
 		time_remaining = "<span class='bad'>ВЕЧНОСТЬ!!!</span>"
 	else if(time_remaining > 0)
-		time_remaining = "[round(time_remaining/10)] сек."
+		time_remaining = "[round(time_remaining / 10)] сек."
 	else
 		time_remaining = "<span class='good'>Раунд начинается...</span>"
 

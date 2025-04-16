@@ -1,6 +1,6 @@
 GLOBAL_LIST_INIT(available_lobby_styles, list(
 	"По-умолчанию" = null,
-	"Устаревшая" = 'modular_bandastation/title_screen/html/title_screen_old.css'
+	"Устаревший" = 'modular_bandastation/title_screen/html/title_screen_old.css'
 ))
 
 /datum/title_screen
