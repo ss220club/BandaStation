@@ -1,5 +1,3 @@
-#define MAX_STATION_TRAIT_BUTTONS_VERTICAL 4
-
 /**
  * Get the HTML of title screen.
  */
@@ -70,11 +68,7 @@
 			if(!trait.can_display_lobby_button(player.client))
 				continue
 
-			if(number > MAX_STATION_TRAIT_BUTTONS_VERTICAL)
-				break
-
 			number++
-
 			if(number == 1)
 				html += {"<hr>"}
 
@@ -108,7 +102,11 @@
 		</div>
 	"}
 
-	html += {"</div><label class="lobby_element lobby-collapse outside" for="hide_menu"></label></body>"}
+	html += {"</div>"}
+	html += {"<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>"}
+	html += {"<div id="lobby_info"></div>"}
+	html += {"</body>"}
+
 	html += {"
 		<script language="JavaScript">
 			function call_byond(href, value) {
@@ -216,6 +214,11 @@
 				}
 			}
 
+			const info_placement = document.getElementById("lobby_info");
+			function update_info(info) {
+				info_placement.innerHTML = info;
+			}
+
 			/* Return focus to Byond after click */
 			function reFocus() {
 				call_byond("focus", true);
@@ -232,5 +235,3 @@
 	html += "</html>"
 
 	return html.Join()
-
-#undef MAX_STATION_TRAIT_BUTTONS_VERTICAL

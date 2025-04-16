@@ -41,7 +41,6 @@ GLOBAL_LIST_INIT(available_lobby_styles, list(
 	else
 		viewer << browse(get_title_html(viewer, viewer.mob, title_css), "window=title_browser")
 
-
 /datum/title_screen/proc/hide_from(client/viewer)
 	if(viewer?.mob)
 		winset(viewer, "title_browser", "is-disabled=true;is-visible=false")
