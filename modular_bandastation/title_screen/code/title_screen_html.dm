@@ -18,7 +18,8 @@
 			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "font-awesome.css")]'>
 			[sheet.css_tag()]
 			<style type='text/css'>
-				[file2text(styles)]
+				[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
+				[styles ? file2text(styles) : ""]
 			</style>
 		</head>
 		<body>
