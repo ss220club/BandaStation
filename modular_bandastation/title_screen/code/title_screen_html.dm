@@ -14,6 +14,7 @@
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "font-awesome.css")]'>
+			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "brands.min.css")]'>
 			[sheet.css_tag()]
 			<style type='text/css'>
 				[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
