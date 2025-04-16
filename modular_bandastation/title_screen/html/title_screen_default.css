@@ -350,7 +350,7 @@ a.lobby_element:hover .lobby-tooltip {
     font-family: 'Pix Cyrillic';
     font-size: 26px;
     margin: 0.5rem;
-    padding: 0.475em 0.5em;
+    padding: 0.5em 0.5em 0.4em;
     width: calc(100vw - var(--menu-width) - 1.5rem);
     background-color: var(--color-base);
     color: var(--color-text-bad);
