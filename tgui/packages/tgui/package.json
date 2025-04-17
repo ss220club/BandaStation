@@ -3,8 +3,7 @@
   "name": "tgui",
   "version": "6.0.0",
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
-    "@types/react": "^18.3.12",
+    "@uidotdev/usehooks": "^2.4.1",
     "common": "workspace:*",
     "dateformat": "^5.0.3",
     "dompurify": "^2.5.7",
@@ -15,12 +14,16 @@
     "marked": "^15.0.7",
     "marked-base-url": "^1.1.6",
     "marked-smartypants": "^1.1.9",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-popper": "^2.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-zoom-pan-pinch": "^3.7.0",
-    "tgui-core": "^1.8.4",
-    "tgui-dev-server": "workspace:*",
-    "usehooks-ts": "^3.1.1"
+    "tgui-core": "^2.1.1",
+    "tgui-dev-server": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/marked": "4.3.2",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.2",
+    "vitest": "^3.1.1"
   }
 }
