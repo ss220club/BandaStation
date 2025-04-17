@@ -57,9 +57,9 @@
 
 /obj/projectile/bullet/a762x39/rubber
 	name = "7.62x39mm rubber bullet"
-	damage = 10
-	armour_penetration = 5
-	stamina = 35
+	damage = 5
+	armour_penetration = 0
+	stamina = 20
 	ricochets_max = 6
 	ricochet_incidence_leeway = 0
 	ricochet_chance = 130
@@ -71,15 +71,15 @@
 
 /obj/projectile/bullet/a762x39
 	name = "7.62x39mm bullet"
-	damage = 35
+	damage = 30
 	wound_bonus = 15
-	armour_penetration = 15
+	armour_penetration = 10
 	wound_falloff_tile = 0
 
 /obj/projectile/bullet/a762x39/ricochet
 	name = "7.62x39mm match bullet"
 	damage = 30
-	wound_bonus = 10
+	wound_bonus = 5
 	armour_penetration = 5
 	ricochets_max = 2
 	ricochet_chance = 100
@@ -102,7 +102,7 @@
 	name = "7.62x39mm ion bullet"
 	damage = 25
 	wound_bonus = 5
-	armour_penetration = 10
+	armour_penetration = 5
 	var/heavy_emp_radius = -1
 	var/light_emp_radius = 0
 
@@ -143,7 +143,7 @@
 	name = "7.62x39mm armor-piercing bullet"
 	damage = 30
 	wound_bonus = 15
-	armour_penetration = 60
+	armour_penetration = 40
 
 // .40 Sol Long
 
@@ -155,8 +155,8 @@
 
 /obj/projectile/bullet/c40sol/fragmentation
 	name = ".40 Sol Long fragmentation bullet"
-	damage = 15
-	stamina = 35
+	damage = 5
+	stamina = 25
 
 	weak_against_armour = TRUE
 
@@ -186,13 +186,13 @@
 
 	speed = 2
 
-	damage = 25
-	armour_penetration = 25
+	damage = 30
+	armour_penetration = 30
 
 	wound_bonus = -30
 	bare_wound_bonus = -10
 
-	projectile_piercing = PASSMOB | PASSTABLE | PASSGLASS | PASSGRILLE | PASSMACHINE | PASSDOORS
+	projectile_piercing = PASSMOB | PASSTABLE | PASSGRILLE | PASSMACHINE | PASSDOORS
 
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
 	if(isliving(target))
@@ -212,6 +212,6 @@
 	name = ".40 Sol Long incendiary bullet"
 	icon_state = "redtrac"
 
-	damage = 25
+	damage = 30
 	fire_stacks = 2
 	leaves_fire_trail = FALSE
