@@ -98,7 +98,11 @@
 /datum/preference_middleware/loadout/get_ui_data(mob/user)
 	var/list/data = list()
 	data["job_clothes"] = preferences.character_preview_view.show_job_clothes
-	data["loadout_leftpoints"] = preferences.loadout_points // SS220 ADD - Lodout points
+	/** BANDASTATION ADDITION - START */
+	data["loadout_leftpoints"] = preferences.loadout_points
+	data["loadout_maxpoints"] = preferences.get_loadout_points()
+	data["donator_level"] = preferences.parent.donator_level
+	/** BANDASTATION ADDITION - END */
 	return data
 
 /datum/preference_middleware/loadout/get_ui_static_data(mob/user)
