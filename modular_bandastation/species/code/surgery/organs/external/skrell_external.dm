@@ -1,0 +1,36 @@
+/obj/item/organ/head_tentacle
+	name = "skrell head tentacle"
+	desc = "Is it really tentacle?"
+
+	// icon = ''
+	// icon_state = "head_tentacle"
+
+	zone = BODY_ZONE_HEAD
+	slot = ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE
+
+	preference = "feature_skrell_head_tentacle"
+
+	dna_block = DNA_SKRELL_HEAD_TENTACLE_BLOCK
+	restyle_flags = EXTERNAL_RESTYLE_FLESH
+
+	bodypart_overlay = /datum/bodypart_overlay/mutant/head_tentacle
+
+	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
+
+
+/datum/bodypart_overlay/mutant/head_tentacle
+	layers = EXTERNAL_ADJACENT
+	feature_key = "skrell_head_tentacle"
+	dna_color_feature_key = "skrell_head_tentacle_color"
+	color_source = ORGAN_COLOR_FEATURE
+
+/datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()
+	return SSaccessories.skrell_head_tentacles_list
+
+/datum/bodypart_overlay/mutant/head_tentacle/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
+	var/mob/living/carbon/human/human = bodypart_owner.owner
+	if(!istype(human))
+		return TRUE
+	if((human.head?.flags_inv & HIDEHAIR) || (human.wear_mask?.flags_inv & HIDEHAIR))
+		return FALSE
+	return TRUE

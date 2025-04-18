@@ -207,17 +207,17 @@
 		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
 	)
 
-/datum/species/vulpkanin/add_body_markings(mob/living/carbon/human/vulp) // OVERRIDE /datum/species/proc/add_body_markings
+/datum/species/vulpkanin/add_body_markings(mob/living/carbon/human/hooman) // OVERRIDE /datum/species/proc/add_body_markings
 	for(var/markings_type in body_markings)
 		var/datum/bodypart_overlay/simple/body_marking/markings = new markings_type()
-		var/accessory_name = vulp.dna.features[markings.dna_feature_key]
+		var/accessory_name = hooman.dna.features[markings.dna_feature_key]
 		var/datum/sprite_accessory/vulpkanin_body_markings/accessory = markings.get_accessory(accessory_name)
 
 		if(isnull(accessory))
 			return
 
 		for(var/obj/item/bodypart/part as anything in markings.applies_to)
-			var/obj/item/bodypart/people_part = vulp.get_bodypart(initial(part.body_zone))
+			var/obj/item/bodypart/people_part = hooman.get_bodypart(initial(part.body_zone))
 
 			if(!people_part || !istype(people_part, part))
 				continue
@@ -227,10 +227,10 @@
 			overlay.icon = accessory.icon
 			overlay.icon_state = accessory.icon_state
 			overlay.use_gender = accessory.gender_specific
-			overlay.draw_color = accessory.color_src ? vulp.dna.features["vulpkanin_body_markings_color"] : null
+			overlay.draw_color = accessory.color_src ? hooman.dna.features["vulpkanin_body_markings_color"] : null
 
 			if(istype(accessory, /datum/sprite_accessory/vulpkanin_body_markings) && accessory.colored_paws && (istype(people_part, /obj/item/bodypart/arm/left/vulpkanin) || istype(people_part, /obj/item/bodypart/arm/right/vulpkanin)))
-				overlay.aux_color_paw = accessory.color_src ? vulp.dna.features["vulpkanin_body_markings_color"] : null
+				overlay.aux_color_paw = accessory.color_src ? hooman.dna.features["vulpkanin_body_markings_color"] : null
 
 			people_part.add_bodypart_overlay(overlay)
 

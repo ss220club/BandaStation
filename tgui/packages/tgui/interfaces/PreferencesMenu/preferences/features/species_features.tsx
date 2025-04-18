@@ -252,3 +252,19 @@ export const tajaran_tail_markings_color: Feature<string> = {
   name: 'Хвост - цвет узора',
   component: FeatureColorInput,
 };
+
+// MARK: Skrell features
+
+export const feature_skrell_head_tentacle: Feature<string> = {
+  name: 'Щупальца на голове',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
+export const skrell_head_tentacle_color: Feature<string> = {
+  name: 'Щупальца на голове: цвет',
+  component: FeatureColorInput,
+};

@@ -61,7 +61,7 @@
 /datum/preference/choiced/vulpkanin_body_markings/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "vulpkanin_body_markings_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/vulpkanin_body_markings_color::savefile_key
 
 	return data
 
@@ -112,7 +112,7 @@
 /datum/preference/choiced/vulpkanin_head_markings/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "vulpkanin_head_markings_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/vulpkanin_head_markings_color::savefile_key
 
 	return data
 
@@ -164,7 +164,7 @@
 /datum/preference/choiced/vulpkanin_facial_hair/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "vulpkanin_facial_hair_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/vulpkanin_facial_hair_color::savefile_key
 
 	return data
 
@@ -198,7 +198,7 @@
 /datum/preference/choiced/vulpkanin_tail_markings/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "vulpkanin_tail_markings_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/vulpkanin_tail_markings_color::savefile_key
 
 	return data
 
