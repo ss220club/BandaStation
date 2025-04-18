@@ -1,11 +1,11 @@
 import { useBackend } from 'tgui/backend';
 import {
+  Button,
   DmIcon,
   Icon,
   ImageButton,
   NoticeBox,
   Stack,
-  Tooltip,
 } from 'tgui-core/components';
 import { createSearch } from 'tgui-core/string';
 
@@ -51,51 +51,98 @@ export function ItemIcon(props: Props) {
 type DisplayProps = {
   active: boolean;
   item: LoadoutItem;
-  scale?: number;
 };
 
 export function ItemDisplay(props: DisplayProps) {
-  const { act } = useBackend();
-  const { active, item, scale = 3 } = props;
+  const { act, data } = useBackend<LoadoutManagerData>();
+  const { donator_level, loadout_leftpoints } = data;
+  const { active, item } = props;
+
+  const costText =
+    item.cost === 1
+      ? `${item.cost} очко`
+      : item.cost < 4
+        ? `${item.cost} очка`
+        : `${item.cost} очков`;
+
+  const textInfo = (
+    <Stack fill fontSize={1.2} textAlign="left">
+      <Stack.Item
+        grow
+        fontSize={1}
+        color="gold"
+        opacity={0.75}
+        style={{ textIndent: '0.25rem' }}
+      >
+        {item.tier > 0 && `Тир ${item.tier}`}
+      </Stack.Item>
+      <Stack.Item fontSize={0.75} opacity={0.66}>
+        {costText}
+      </Stack.Item>
+    </Stack>
+  );
+
+  function tooltipInfo() {
+    let disabledInfo: string[] = [];
+    if (!active && loadout_leftpoints === 0) {
+      disabledInfo.push('Недостаточно очков.');
+    }
+
+    if (item.tier > donator_level) {
+      disabledInfo.push(
+        'Этот предмет доступен на более высоком уровне подписки чем у вас.',
+      );
+    }
+
+    return (
+      <Stack fill vertical g={0.5}>
+        <Stack.Item mb={disabledInfo.length > 0 && 2}>{item.name}</Stack.Item>
+        {disabledInfo.length > 0 &&
+          disabledInfo.map((info, index) => (
+            <>
+              {index > 0 && <Stack.Divider />}
+              <Stack.Item key={index} color="bad">
+                {info}
+              </Stack.Item>
+            </>
+          ))}
+      </Stack>
+    );
+  }
 
   return (
-    <div style={{ position: 'relative' }}>
-      <ImageButton
-        imageSize={scale * 32}
-        color={active ? 'green' : 'default'}
-        style={{ textTransform: 'capitalize', zIndex: '1' }}
-        tooltip={item.name}
-        tooltipPosition={'bottom'}
-        dmIcon={item.icon}
-        dmIconState={item.icon_state}
-        onClick={() =>
-          act('select_item', {
-            path: item.path,
-            deselect: active,
-          })
-        }
-      />
-      <div
-        style={{ position: 'absolute', top: '8px', right: '8px', zIndex: '2' }}
-      >
-        {item.information.length > 0 && (
-          <Stack vertical>
-            {item.information.map((info) => (
-              <Stack.Item
-                key={info.icon}
-                fontSize="14px"
-                textColor={'darkgray'}
-                bold
-              >
-                <Tooltip position="right" content={info.tooltip}>
-                  <Icon name={info.icon} />
-                </Tooltip>
-              </Stack.Item>
-            ))}
-          </Stack>
-        )}
-      </div>
-    </div>
+    <ImageButton
+      m={0}
+      imageSize={90}
+      tooltip={tooltipInfo()}
+      tooltipPosition={'bottom-start'}
+      dmIcon={item.icon}
+      dmIconState={item.icon_state}
+      buttons={item.information.map((info) => (
+        <Button
+          key={info.icon}
+          icon={info.icon}
+          tooltip={info.tooltip}
+          tooltipPosition="top-start"
+          color="unset"
+          textColor="lightgray"
+          fontSize={1.2}
+        />
+      ))}
+      buttonsAlt={textInfo}
+      selected={active}
+      disabled={
+        !active && (loadout_leftpoints === 0 || item.tier > donator_level)
+      }
+      onClick={() =>
+        act('select_item', {
+          path: item.path,
+          deselect: active,
+        })
+      }
+    >
+      <span style={{ textTransform: 'capitalize' }}>{item.name}</span>
+    </ImageButton>
   );
 }
 
@@ -146,7 +193,7 @@ export function ItemListDisplay(props: ListProps) {
               </>
             )}
             <Stack.Item>
-              <Stack wrap g={0.5}>
+              <Stack wrap>
                 {group.items.map((item) => (
                   <Stack.Item key={item.name}>
                     <ItemDisplay
