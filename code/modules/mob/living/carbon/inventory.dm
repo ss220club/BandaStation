@@ -342,9 +342,9 @@
 	if (!target_tank)
 		return
 	if(internal || (is_external && external))
-		to_chat(src, span_notice("You switch your internals to [target_tank]."))
+		to_chat(src, span_notice("Вы начинаете дышать из [target_tank.declent_ru(GENITIVE)]."))
 	else
-		to_chat(src, span_notice("You open [target_tank] valve."))
+		to_chat(src, span_notice("Вы открываете клапан на [target_tank.declent_ru(PREPOSITIONAL)]."))
 	return open_internals(target_tank, is_external)
 
 /**
@@ -358,14 +358,14 @@
 /mob/living/carbon/proc/toggle_close_internals(is_external = FALSE)
 	if (!internal && !external)
 		return
-	to_chat(src, span_notice("You close [is_external ? external : internal] valve."))
+	to_chat(src, span_notice("Вы перекрываете клапан на [is_external ? external.declent_ru(PREPOSITIONAL) : internal.declent_ru(PREPOSITIONAL)]."))
 	return close_internals(is_external)
 
 /// Prepares emergency disconnect from open air tanks and notifies in chat. Usually called after mob suddenly unequips breathing apparatus.
 /mob/living/carbon/proc/cutoff_internals()
 	if (!external && !internal)
 		return
-	to_chat(src, span_notice("Your internals disconnect from [external || internal] and the valve closes."))
+	to_chat(src, span_notice("Вы перестаете дышать из [external?.declent_ru(GENITIVE) || internal?.declent_ru(GENITIVE)], и клапан перекрывается."))
 	close_all_airtanks()
 
 /**
@@ -401,49 +401,49 @@
  */
 /mob/living/carbon/proc/give(mob/living/carbon/offered)
 	if(has_status_effect(/datum/status_effect/offering))
-		to_chat(src, span_warning("You're already offering something!"))
+		to_chat(src, span_warning("Вы уже что-то предлагаете передать!"))
 		return
 
 	if(IS_DEAD_OR_INCAP(src))
-		to_chat(src, span_warning("You're unable to offer anything in your current state!"))
+		to_chat(src, span_warning("Вы не можете предложить предметы в вашем текущем состоянии!"))
 		return
 
 	var/obj/item/offered_item = get_active_held_item()
 	// if it's an abstract item, should consider it to be non-existent (unless it's a HAND_ITEM, which means it's an obj/item that is just a representation of our hand)
 	if(!offered_item || ((offered_item.item_flags & ABSTRACT) && !(offered_item.item_flags & HAND_ITEM)))
-		to_chat(src, span_warning("You're not holding anything to offer!"))
+		to_chat(src, span_warning("Вы ничего не держите, чтобы предложить передать!"))
 		return
 
 	if(offered)
 		if(offered == src)
 			if(!swap_hand(get_inactive_hand_index())) //have to swap hands first to take something
-				to_chat(src, span_warning("You try to take [offered_item] from yourself, but fail."))
+				to_chat(src, span_warning("Вы пытаетесь взять [offered_item.declent_ru(ACCUSATIVE)] от себя же, но проваливаетесь."))
 				return
 			if(!put_in_active_hand(offered_item))
-				to_chat(src, span_warning("You try to take [offered_item] from yourself, but fail."))
+				to_chat(src, span_warning("Вы пытаетесь взять [offered_item.declent_ru(ACCUSATIVE)] от себя же, но проваливаетесь."))
 				return
 			else
-				to_chat(src, span_notice("You take [offered_item] from yourself."))
+				to_chat(src, span_notice("Вы берете [offered_item.declent_ru(ACCUSATIVE)] от себя же."))
 				return
 
 		if(IS_DEAD_OR_INCAP(offered))
-			to_chat(src, span_warning("[offered.p_Theyre()] unable to take anything in [offered.p_their()] current state!"))
+			to_chat(src, span_warning("[offered.ru_p_they(TRUE)] не может ничего взять в своем текущем состоянии!"))
 			return
 
 		if(!CanReach(offered))
-			to_chat(src, span_warning("You have to be beside [offered.p_them()]!"))
+			to_chat(src, span_warning("[offered.ru_p_they(TRUE)] слишком далеко, подойдите ближе!"))
 			return
 	else
 		if(!(locate(/mob/living/carbon) in orange(1, src)))
-			to_chat(src, span_warning("There's nobody beside you to take it!"))
+			to_chat(src, span_warning("Нет никого рядом, кому можно было бы предложить предмет!"))
 			return
 
 	if(offered_item.on_offered(src)) // see if the item interrupts with its own behavior
 		return
 
-	balloon_alert_to_viewers("offers something")
-	visible_message(span_notice("[src] is offering [offered ? "[offered] " : ""][offered_item]."), \
-					span_notice("You offer [offered ? "[offered] " : ""][offered_item]."), null, 2)
+	balloon_alert_to_viewers("что-то предлагает")
+	visible_message(span_notice("[capitalize(declent_ru(NOMINATIVE))] предлагает [offered ? "[offered.declent_ru(DATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), \
+					span_notice("Вы предлагаете [offered ? "[offered.declent_ru(DATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), null, 2)
 
 	apply_status_effect(/datum/status_effect/offering, offered_item, null, offered)
 
@@ -459,27 +459,27 @@
 /mob/living/carbon/proc/take(mob/living/carbon/offerer, obj/item/I)
 	clear_alert("[offerer]")
 	if(IS_DEAD_OR_INCAP(src))
-		to_chat(src, span_warning("You're unable to take anything in your current state!"))
+		to_chat(src, span_warning("Вы не можете взять что-либо в вашем текущем состоянии!"))
 		return
 	if(get_dist(src, offerer) > 1)
-		to_chat(src, span_warning("[offerer] is out of range!"))
+		to_chat(src, span_warning("[capitalize(offerer.declent_ru(NOMINATIVE))] слишком далеко!"))
 		return
 	if(!I || offerer.get_active_held_item() != I)
-		to_chat(src, span_warning("[offerer] is no longer holding the item they were offering!"))
+		to_chat(src, span_warning("[capitalize(offerer.declent_ru(NOMINATIVE))] больше не держит предмет, который предлагался!"))
 		return
 	if(!get_empty_held_indexes())
-		to_chat(src, span_warning("You have no empty hands!"))
+		to_chat(src, span_warning("У вас нет пустых рук!"))
 		return
 
 	if(I.on_offer_taken(offerer, src)) // see if the item has special behavior for being accepted
 		return
 
 	if(!offerer.temporarilyRemoveItemFromInventory(I))
-		visible_message(span_notice("[offerer] tries to hand over [I] but it's stuck to them...."))
+		visible_message(span_notice("[capitalize(offerer.declent_ru(NOMINATIVE))] пытается передать [I.declent_ru(ACCUSATIVE)], но не может снять [I.ru_p_them()]..."))
 		return
 
-	visible_message(span_notice("[src] takes [I] from [offerer]."), \
-					span_notice("You take [I] from [offerer]."))
+	visible_message(span_notice("[capitalize(declent_ru(NOMINATIVE))] берет [I.declent_ru(ACCUSATIVE)] от [offerer.declent_ru(GENITIVE)]."), \
+					span_notice("Вы берете [I.declent_ru(ACCUSATIVE)] от [offerer.declent_ru(GENITIVE)]."))
 	put_in_hands(I)
 
 ///Returns a list of all body_zones covered by clothing
