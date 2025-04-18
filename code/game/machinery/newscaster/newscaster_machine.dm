@@ -633,14 +633,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 /obj/machinery/newscaster/proc/news_alert(channel, update_alert = TRUE)
 	if(channel)
 		if(update_alert)
-			say("Breaking news from [channel]!")
+			say("Срочные новости от: [channel]!")
 			playsound(loc, 'sound/machines/beep/twobeep_high.ogg', 75, TRUE)
 		alert = TRUE
 		update_appearance()
 		addtimer(CALLBACK(src, PROC_REF(remove_alert)), ALERT_DELAY, TIMER_UNIQUE|TIMER_OVERRIDE)
 
 	else if(!channel && update_alert)
-		say("Attention! Wanted issue distributed!")
+		say("Внимание! Выдан ордер на арест!")
 		playsound(loc, 'sound/machines/warning-buzzer.ogg', 75, TRUE)
 
 /**
