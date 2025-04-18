@@ -86,7 +86,7 @@
 	can_suppress = TRUE
 	fire_delay = 0.20 SECONDS
 	spread = 2.5
-	recoil = 0
+	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/akm/upp/examine_more(mob/user)
 	. = ..()
@@ -109,7 +109,7 @@
 	worn_icon_state = "akm_modern"
 	fire_delay = 0.20 SECONDS
 	spread = 2.5
-	recoil = 0
+	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/akm/modern/examine_more(mob/user)
 	. = ..()

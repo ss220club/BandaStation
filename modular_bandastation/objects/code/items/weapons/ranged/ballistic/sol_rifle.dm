@@ -25,6 +25,7 @@
 	actions_types = list()
 	spread = 5.5
 	projectile_wound_bonus = -10
+	recoil = 0.4
 
 /obj/item/gun/ballistic/automatic/sol_rifle/Initialize(mapload)
 	. = ..()
@@ -66,6 +67,7 @@
 	spread = 0
 	projectile_damage_multiplier = 1.2
 	projectile_wound_bonus = 10
+	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/sol_rifle/marksman/Initialize(mapload)
 	. = ..()
