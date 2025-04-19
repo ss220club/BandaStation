@@ -1,4 +1,0 @@
-author: "AyIong"
-delete-after: True
-changes:
-  - bugfix: "Стеклянные двери больше не колбасит при открытии/закрытии"
