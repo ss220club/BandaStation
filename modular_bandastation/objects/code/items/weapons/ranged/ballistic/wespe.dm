@@ -3,7 +3,7 @@
 	desc = "Стандартный служебный пистолет различных военных подразделений ТСФ. Использует патрон .35 Sol Short имеет встроенный фонарик."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic.dmi'
 	icon_state = "wespe"
-	fire_sound = 'modular_bandastation/objects/sounds/pistol_light.ogg'
+	fire_sound = 'modular_bandastation/objects/sounds/weapons/pistol_light.ogg'
 	w_class = WEIGHT_CLASS_NORMAL
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c35sol_pistol
 	special_mags = TRUE
