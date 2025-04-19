@@ -22,6 +22,7 @@ export type OrbitData = {
   // BANDASTATION ADD - SSD INDICATOR
   ssds: Observable[];
   orbiting: Observable | null;
+  can_observe: BooleanLike;
 };
 
 export type Observable = {

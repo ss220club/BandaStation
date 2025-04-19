@@ -157,7 +157,8 @@ GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 		"ghosts" = ghosts,
 		"misc" = misc,
 		"npcs" = npcs,
-		"ssds" = ssds, // BANDASTATION ADD - SSD INDICATOR
+		"can_observe" = !HAS_TRAIT(user, TRAIT_NO_OBSERVE),
+    "ssds" = ssds, // BANDASTATION ADD - SSD INDICATOR,
 	)
 
 
