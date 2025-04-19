@@ -17,9 +17,13 @@
 	toxic_foodtypes = SUGAR
 	organ_traits = list(TRAIT_WOUND_LICKER)
 
-/obj/item/organ/tongue/tajaran/New(class, timer, datum/mutation/human/copymut)
+/obj/item/organ/tongue/tajaran/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/speechmod, replacements = speech_replacements, should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech)))
+	AddComponent(\
+		/datum/component/speechmod,\
+		replacements = speech_replacements,\
+		should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech))\
+	)
 
 /obj/item/organ/tongue/get_possible_languages()
 	return ..() + /datum/language/siiktajr
@@ -78,8 +82,4 @@
 
 /obj/item/organ/lungs/tajaran
 	name = "tajaran lungs"
-	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
-
-/obj/item/organ/kidneys/tajaran
-	name = "tajaran kidneys"
 	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'

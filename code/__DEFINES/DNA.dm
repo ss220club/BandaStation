@@ -112,6 +112,9 @@
 #define ORGAN_SLOT_EXTERNAL_WINGS "wings"
 #define ORGAN_SLOT_EXTERNAL_ANTENNAE "antennae"
 #define ORGAN_SLOT_EXTERNAL_POD_HAIR "pod_hair"
+/// BADNASTATION ADDITION START - Skrell
+#define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE "head_tentacles"
+/// BADNASTATION ADDITION END - Skrell
 
 /// Xenomorph organ slots
 #define ORGAN_SLOT_XENO_ACIDGLAND "acid_gland"

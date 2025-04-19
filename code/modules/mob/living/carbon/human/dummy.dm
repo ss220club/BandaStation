@@ -141,6 +141,11 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["tajaran_head_markings_color"] = COLOR_WHITE
 	target.dna.features["tajaran_tail_markings_color"] = COLOR_WHITE
 	target.dna.features["tajaran_facial_hair_color"] = COLOR_WHITE
+
+	// skrell
+	target.dna.features["skrell_head_tentacle"] = get_consistent_feature_entry(SSaccessories.skrell_head_tentacles_list)
+	target.dna.features["skrell_head_tentacle_color"] = COLOR_WHITE
+
 	// BANDA STATION EDIT STOP
 	target.dna.initialize_dna(create_mutation_blocks = FALSE, randomize_features = FALSE)
 	// UF and UI are nondeterministic, even though the features are the same some blocks will randomize slightly

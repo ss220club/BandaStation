@@ -12,6 +12,15 @@
 		L[DNA_VULPKANIN_TAIL_MARKINGS - DNA_FEATURE_BLOCKS] = construct_block(SSaccessories.vulpkanin_tail_markings_list.Find(features["tail_markings"]), SSaccessories.vulpkanin_tail_markings_list.len)
 	if(features["vulpkanin_facial_hair"])
 		L[DNA_VULPKANIN_FACIAL_HAIR - DNA_FEATURE_BLOCKS] = construct_block(SSaccessories.vulpkanin_facial_hair_list.Find(features["vulpkanin_facial_hair"]), SSaccessories.vulpkanin_facial_hair_list.len)
+	if(features["vulpkanin_body_markings_color"])
+		L[DNA_VULPKANIN_BODY_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_body_markings_color"], include_crunch = FALSE)
+	if(features["vulpkanin_tail_markings_color"])
+		L[DNA_VULPKANIN_TAIL_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_tail_markings_color"], include_crunch = FALSE)
+	if(features["vulpkanin_head_markings_color"])
+		L[DNA_VULPKANIN_HEAD_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_head_markings_color"], include_crunch = FALSE)
+	if(features["vulpkanin_facial_hair_color"])
+		L[DNA_VULPKANIN_FACIAL_HAIR_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_facial_hair_color"], include_crunch = FALSE)
+
 	// tajaran
 	if(features["tajaran_body_markings"])
 		L[DNA_TAJARAN_BODY_MARKINGS - DNA_FEATURE_BLOCKS] = construct_block(SSaccessories.tajaran_body_markings_list.Find(features["tajaran_body_markings"]), SSaccessories.tajaran_body_markings_list.len)
@@ -23,17 +32,6 @@
 		L[DNA_TAJARAN_TAIL_MARKINGS - DNA_FEATURE_BLOCKS] = construct_block(SSaccessories.tajaran_tail_markings_list.Find(features["tajaran_tail_markings"]), SSaccessories.tajaran_tail_markings_list.len)
 	if(features["tajaran_facial_hair"])
 		L[DNA_TAJARAN_FACIAL_HAIR - DNA_FEATURE_BLOCKS] = construct_block(SSaccessories.tajaran_facial_hair_list.Find(features["tajaran_facial_hair"]), SSaccessories.tajaran_facial_hair_list.len)
-
-	// vulpkanin
-	if(features["vulpkanin_body_markings_color"])
-		L[DNA_VULPKANIN_BODY_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_body_markings_color"], include_crunch = FALSE)
-	if(features["vulpkanin_tail_markings_color"])
-		L[DNA_VULPKANIN_TAIL_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_tail_markings_color"], include_crunch = FALSE)
-	if(features["vulpkanin_head_markings_color"])
-		L[DNA_VULPKANIN_HEAD_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_head_markings_color"], include_crunch = FALSE)
-	if(features["vulpkanin_facial_hair_color"])
-		L[DNA_VULPKANIN_FACIAL_HAIR_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["vulpkanin_facial_hair_color"], include_crunch = FALSE)
-	// tajaran
 	if(features["tajaran_body_markings_color"])
 		L[DNA_TAJARAN_BODY_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["tajaran_body_markings_color"], include_crunch = FALSE)
 	if(features["tajaran_head_markings_color"])
@@ -42,6 +40,12 @@
 		L[DNA_TAJARAN_TAIL_MARKINGS_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["tajaran_tail_markings_color"], include_crunch = FALSE)
 	if(features["tajaran_facial_hair_color"])
 		L[DNA_TAJARAN_FACIAL_HAIR_COLOR - DNA_FEATURE_BLOCKS] = sanitize_hexcolor(features["tajaran_facial_hair_color"], include_crunch = FALSE)
+
+	// skrell
+	if(features["skrell_head_tentacle"])
+		L[DNA_SKRELL_HEAD_TENTACLE_BLOCK - DNA_FEATURE_BLOCKS] = construct_block(SSaccessories.skrell_head_tentacles_list.Find(features["skrell_head_tentacle"]), length(SSaccessories.skrell_head_tentacles_list))
+	if(features["skrell_head_tentacle_color"])
+		L[DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK - DNA_FEATURE_BLOCKS] =  sanitize_hexcolor(features["skrell_head_tentacle_color"], include_crunch = FALSE)
 
 	for(var/blocknum in 1 to DNA_MODULAR_BLOCKS_COUNT)
 		. += L[blocknum] || random_string(GET_UI_BLOCK_LEN(blocknum), GLOB.hex_characters)
@@ -60,6 +64,15 @@
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.vulpkanin_tail_markings_list.Find(features["tail_markings"]), SSaccessories.vulpkanin_tail_markings_list.len))
 		if(DNA_VULPKANIN_FACIAL_HAIR)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.vulpkanin_facial_hair_list.Find(features["vulpkanin_facial_hair"]), SSaccessories.vulpkanin_facial_hair_list.len))
+		if(DNA_VULPKANIN_BODY_MARKINGS_COLOR)
+			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_body_markings_color"], include_crunch = FALSE))
+		if(DNA_VULPKANIN_TAIL_MARKINGS_COLOR)
+			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_tail_markings_color"], include_crunch = FALSE))
+		if(DNA_VULPKANIN_HEAD_MARKINGS_COLOR)
+			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_head_markings_color"], include_crunch = FALSE))
+		if(DNA_VULPKANIN_FACIAL_HAIR_COLOR)
+			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_facial_hair_color"], include_crunch = FALSE))
+
 		// tajaran
 		if(DNA_TAJARAN_BODY_MARKINGS)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tajaran_body_markings_list.Find(features["tajaran_body_markings"]), SSaccessories.tajaran_body_markings_list.len))
@@ -71,16 +84,6 @@
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tajaran_tail_markings_list.Find(features["tajaran_tail_markings"]), SSaccessories.tajaran_tail_markings_list.len))
 		if(DNA_TAJARAN_FACIAL_HAIR)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tajaran_facial_hair_list.Find(features["tajaran_facial_hair"]), SSaccessories.tajaran_facial_hair_list.len))
-		// vulpkanin
-		if(DNA_VULPKANIN_BODY_MARKINGS_COLOR)
-			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_body_markings_color"], include_crunch = FALSE))
-		if(DNA_VULPKANIN_TAIL_MARKINGS_COLOR)
-			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_tail_markings_color"], include_crunch = FALSE))
-		if(DNA_VULPKANIN_HEAD_MARKINGS_COLOR)
-			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_head_markings_color"], include_crunch = FALSE))
-		if(DNA_VULPKANIN_FACIAL_HAIR_COLOR)
-			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_facial_hair_color"], include_crunch = FALSE))
-		// tajaran
 		if(DNA_TAJARAN_BODY_MARKINGS_COLOR)
 			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["tajaran_body_markings_color"], include_crunch = FALSE))
 		if(DNA_TAJARAN_HEAD_MARKINGS_COLOR)
@@ -90,10 +93,18 @@
 		if(DNA_TAJARAN_FACIAL_HAIR_COLOR)
 			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["tajaran_facial_hair_color"], include_crunch = FALSE))
 
+		// skrell
+		if(DNA_SKRELL_HEAD_TENTACLE_BLOCK)
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.skrell_head_tentacles_list.Find(features["skrell_head_tentacle"]), length(SSaccessories.skrell_head_tentacles_list)))
+		if(DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK)
+			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["skrell_head_tentacle_color"], include_crunch = FALSE))
+
+
 /mob/living/carbon/human/updateappearance(icon_update = TRUE, mutcolor_update = FALSE, mutations_overlay_update = FALSE)
 	. = ..()
 	var/features = dna.unique_features
-	// vulpkanin
+
+	// MARK: Vulpkanin features
 	if(dna.features["vulpkanin_body_markings"])
 		dna.features["vulpkanin_body_markings"] = SSaccessories.vulpkanin_body_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_VULPKANIN_BODY_MARKINGS), SSaccessories.vulpkanin_body_markings_list.len)]
 	if(dna.features["vulpkanin_head_markings"])
@@ -112,7 +123,18 @@
 			tail.Insert(src, special=TRUE, movement_flags = DELETE_IF_REPLACED)
 	if(dna.features["vulpkanin_facial_hair"])
 		dna.features["vulpkanin_facial_hair"] = SSaccessories.vulpkanin_facial_hair_list[deconstruct_block(get_uni_feature_block(features, DNA_VULPKANIN_FACIAL_HAIR), SSaccessories.vulpkanin_facial_hair_list.len)]
-	// tajaran
+
+	if(dna.features["vulpkanin_body_markings_color"])
+		dna.features["vulpkanin_body_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_BODY_MARKINGS_COLOR))
+	if(dna.features["vulpkanin_tail_markings_color"])
+		dna.features["vulpkanin_tail_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_TAIL_MARKINGS_COLOR))
+	if(dna.features["vulpkanin_head_markings_color"])
+		dna.features["vulpkanin_head_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_HEAD_MARKINGS_COLOR))
+	if(dna.features["vulpkanin_facial_hair_color"])
+		dna.features["vulpkanin_facial_hair_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_FACIAL_HAIR_COLOR))
+
+	// MARK: Tajaran  features
+
 	if(dna.features["tajaran_body_markings"])
 		dna.features["tajaran_body_markings"] = SSaccessories.tajaran_body_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_TAJARAN_BODY_MARKINGS), SSaccessories.tajaran_body_markings_list.len)]
 	if(dna.features["tajaran_head_markings"])
@@ -129,18 +151,9 @@
 		if (tail && tail.type == /obj/item/organ/tail/tajaran)
 			tail.Remove(src)
 			tail.Insert(src, special=TRUE, movement_flags = DELETE_IF_REPLACED)
+
 	if(dna.features["tajaran_facial_hair"])
 		dna.features["tajaran_facial_hair"] = SSaccessories.tajaran_facial_hair_list[deconstruct_block(get_uni_feature_block(features, DNA_TAJARAN_FACIAL_HAIR), SSaccessories.tajaran_facial_hair_list.len)]
-	// vulpkanin
-	if(dna.features["vulpkanin_body_markings_color"])
-		dna.features["vulpkanin_body_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_BODY_MARKINGS_COLOR))
-	if(dna.features["vulpkanin_tail_markings_color"])
-		dna.features["vulpkanin_tail_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_TAIL_MARKINGS_COLOR))
-	if(dna.features["vulpkanin_head_markings_color"])
-		dna.features["vulpkanin_head_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_HEAD_MARKINGS_COLOR))
-	if(dna.features["vulpkanin_facial_hair_color"])
-		dna.features["vulpkanin_facial_hair_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_FACIAL_HAIR_COLOR))
-	// tajaran
 	if(dna.features["tajaran_body_markings_color"])
 		dna.features["tajaran_body_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_TAJARAN_BODY_MARKINGS_COLOR))
 	if(dna.features["tajaran_head_markings_color"])
@@ -149,6 +162,13 @@
 		dna.features["tajaran_tail_markings_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_TAJARAN_TAIL_MARKINGS_COLOR))
 	if(dna.features["tajaran_facial_hair_color"])
 		dna.features["tajaran_facial_hair_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_TAJARAN_FACIAL_HAIR_COLOR))
+
+	// Skrell  features
+
+	if(dna.features["skrell_head_tentacle"])
+		dna.features["skrell_head_tentacle"] = SSaccessories.skrell_head_tentacles_list[deconstruct_block(get_uni_feature_block(features, DNA_SKRELL_HEAD_TENTACLE_BLOCK), length(SSaccessories.skrell_head_tentacles_list))]
+	if(dna.features["skrell_head_tentacle_color"])
+		dna.features["skrell_head_tentacle_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK))
 
 // vulpkanin
 /mob/living/carbon/human/species/vulpkanin/random_mutate_unique_features()
@@ -179,12 +199,13 @@
 		"[DNA_TAJARAN_HEAD_MARKINGS_COLOR]" = DNA_BLOCK_SIZE_COLOR,
 		"[DNA_TAJARAN_TAIL_MARKINGS_COLOR]" = DNA_BLOCK_SIZE_COLOR,
 		"[DNA_TAJARAN_FACIAL_HAIR_COLOR]" = DNA_BLOCK_SIZE_COLOR,
+		"[DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
 	)
 	GLOB.total_uf_len_by_block += populate_total_uf_len_by_block_modular(GLOB.total_uf_len_by_block[DNA_FEATURE_BLOCKS])
 
 /proc/populate_total_uf_len_by_block_modular(last)
 	. = list()
 	var/total_block_len = last
-	for(var/blocknumber in 1 to DNA_MODULAR_BLOCKS_COUNT + 1)
-		total_block_len += GET_UF_BLOCK_LEN(blocknumber + DNA_FEATURE_BLOCKS - 1)
+	for(var/blocknumber in 1 to DNA_MODULAR_BLOCKS_COUNT)
+		total_block_len += GET_UF_BLOCK_LEN(blocknumber + DNA_FEATURE_BLOCKS)
 		. += total_block_len

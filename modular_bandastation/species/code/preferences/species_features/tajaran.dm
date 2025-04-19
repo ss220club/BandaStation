@@ -49,7 +49,7 @@
 /datum/preference/choiced/tajaran_body_markings/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "tajaran_body_markings_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/tajaran_body_markings_color::savefile_key
 
 	return data
 
@@ -113,7 +113,7 @@
 /datum/preference/choiced/tajaran_head_markings/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "tajaran_head_markings_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/tajaran_head_markings_color::savefile_key
 
 	return data
 
@@ -164,7 +164,7 @@
 /datum/preference/choiced/tajaran_facial_hair/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "tajaran_facial_hair_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/tajaran_facial_hair_color::savefile_key
 
 	return data
 
@@ -197,7 +197,7 @@
 /datum/preference/choiced/tajaran_tail_markings/compile_constant_data()
 	var/list/data = ..()
 
-	data[SUPPLEMENTAL_FEATURE_KEY] = "tajaran_tail_markings_color"
+	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/tajaran_tail_markings_color::savefile_key
 
 	return data
 
