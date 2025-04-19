@@ -209,9 +209,6 @@
 	var/datum/bodypart_overlay/texture/texture_bodypart_overlay
 	/// Lazylist of /datum/status_effect/grouped/bodypart_effect types. Instances of this are applied to the carbon when added the limb is attached, and merged with similair limbs
 	var/list/bodypart_effects
-	// BANDASTATION EDIT START
-	var/species_bodytype
-	// BANDASTATION EDIT STOP
 
 /obj/item/bodypart/apply_fantasy_bonuses(bonus)
 	. = ..()
@@ -984,7 +981,15 @@
 		overlay.inherit_color(src, force = TRUE)
 	// Ensures marking overlays are updated accordingly as well
 	for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
-		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], species_color)
+		var/marking_color = species_color
+		if(marking.dna_color_feature_key)
+			var/color = human_owner.dna.features[marking.dna_color_feature_key]
+			if(color)
+				marking_color = color
+			else
+				stack_trace("Invalid dna_color_feature_key used for `[marking.type]`")
+
+		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], marking_color)
 
 	return TRUE
 

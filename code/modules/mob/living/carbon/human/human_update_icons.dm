@@ -403,11 +403,11 @@ There are several things that need to be remembered:
 		var/mutant_override = FALSE
 
 		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
-		if(worn_item.worn_icon_species?[bodypart_head.species_bodytype])
-			icon_file = worn_item.worn_icon_species[bodypart_head.species_bodytype]
+		if(worn_item.worn_icon_species?[bodypart_head.limb_id])
+			icon_file = worn_item.worn_icon_species[bodypart_head.limb_id]
 			mutant_override = TRUE
-		else if(bodypart_head.species_bodytype in icon_files_species)
-			icon_file = icon_files_species[bodypart_head.species_bodytype]
+		else if(bodypart_head.limb_id in icon_files_species)
+			icon_file = icon_files_species[bodypart_head.limb_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -476,11 +476,11 @@ There are several things that need to be remembered:
 		var/mutant_override = FALSE
 
 		var/obj/item/bodypart/chest/bodypart_chest = src.get_bodypart(BODY_ZONE_CHEST)
-		if(worn_item.worn_icon_species?[bodypart_chest.species_bodytype])
-			icon_file = worn_item.worn_icon_species[bodypart_chest.species_bodytype]
+		if(worn_item.worn_icon_species?[bodypart_chest.limb_id])
+			icon_file = worn_item.worn_icon_species[bodypart_chest.limb_id]
 			mutant_override = TRUE
-		else if(bodypart_chest.species_bodytype in icon_files_species)
-			icon_file = icon_files_species[bodypart_chest.species_bodytype]
+		else if(bodypart_chest.limb_id in icon_files_species)
+			icon_file = icon_files_species[bodypart_chest.limb_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -547,11 +547,11 @@ There are several things that need to be remembered:
 		var/mutant_override = FALSE
 
 		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
-		if(worn_item.worn_icon_species?[bodypart_head.species_bodytype])
-			icon_file = worn_item.worn_icon_species[bodypart_head.species_bodytype]
+		if(worn_item.worn_icon_species?[bodypart_head.limb_id])
+			icon_file = worn_item.worn_icon_species[bodypart_head.limb_id]
 			mutant_override = TRUE
-		else if(bodypart_head.species_bodytype in icon_files_species)
-			icon_file = icon_files_species[bodypart_head.species_bodytype]
+		else if(bodypart_head.limb_id in icon_files_species)
+			icon_file = icon_files_species[bodypart_head.limb_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -565,9 +565,6 @@ There are several things that need to be remembered:
 
 	apply_overlay(FACEMASK_LAYER)
 	check_body_shape(BODYSHAPE_SNOUTED, ITEM_SLOT_MASK)
-	// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
-	update_body_parts()
-	// BANDASTATION EDIT STOP - SPECIES CLOTHING ICONS
 
 /mob/living/carbon/human/update_worn_back(update_obscured = TRUE)
 	remove_overlay(BACK_LAYER)

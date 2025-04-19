@@ -6,16 +6,16 @@
 	say_mod = "мяучит"
 	modifies_speech = TRUE
 	languages_native = list(/datum/language/siiktajr)
+	liked_foodtypes = MEAT | SEAFOOD | DAIRY
+	disliked_foodtypes = NUTS | GROSS | ORANGES
+	toxic_foodtypes = SUGAR
+	organ_traits = list(TRAIT_WOUND_LICKER)
 	var/static/list/speech_replacements = list(
 		new /regex("r+", "g") = "rr",
 		new /regex("R+", "g") = "RR",
 		new /regex("р+", "g") = "рр",
 		new /regex("Р+", "g") = "РР",
 	)
-	liked_foodtypes = MEAT | SEAFOOD | DAIRY
-	disliked_foodtypes = NUTS | GROSS | ORANGES
-	toxic_foodtypes = SUGAR
-	organ_traits = list(TRAIT_WOUND_LICKER)
 
 /obj/item/organ/tongue/tajaran/Initialize(mapload)
 	. = ..()

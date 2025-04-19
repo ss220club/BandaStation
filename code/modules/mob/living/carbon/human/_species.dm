@@ -529,9 +529,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		species_human.overlays_standing[BODY_LAYER] = standing
 
 	species_human.apply_overlay(BODY_LAYER)
-	// BANDASTATION EDIT START
-	update_body_markings(species_human)
-	// BANDASTATION EDIT END
 
 //This exists so sprite accessories can still be per-layer without having to include that layer's
 //number in their sprite name, which causes issues when those numbers change.
@@ -2046,7 +2043,18 @@ GLOBAL_LIST_EMPTY(features_by_species)
 				continue
 
 			var/datum/bodypart_overlay/simple/body_marking/overlay = new markings_type()
-			overlay.set_appearance(accessory_name, hooman.dna.features["mcolor"])
+			/// BANDASTATION ADDITION START - Species
+			var/accessory_color = ""
+			if(markings.dna_color_feature_key)
+				accessory_color = hooman.dna.features[markings.dna_color_feature_key]
+				if(!accessory_color)
+					stack_trace("Invalid dna_color_feature_key used for `[markings.type]`")
+
+			if(!accessory_color)
+				accessory_color = hooman.dna.features["mcolor"]
+			/// BANDASTATION ADDITION END - Species
+
+			overlay.set_appearance(accessory_name, accessory_color) /// BANDASTATION EDIT - Species
 			people_part.add_bodypart_overlay(overlay)
 
 		qdel(markings)
@@ -2056,25 +2064,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	for(var/obj/item/bodypart/part as anything in hooman.bodyparts)
 		for(var/datum/bodypart_overlay/simple/body_marking/marking in part.bodypart_overlays)
 			part.remove_bodypart_overlay(marking)
-
-// BANDASTATION EDIT START
-/// Update the overlays if necessary
-/datum/species/proc/update_body_markings(mob/living/carbon/human/hooman)
-	if(HAS_TRAIT(hooman, TRAIT_INVISIBLE_MAN))
-		remove_body_markings(hooman)
-		return
-
-	var/needs_update = FALSE
-	for(var/datum/bodypart_overlay/simple/body_marking/marking as anything in body_markings)
-		if(initial(marking.dna_feature_key) == body_markings[marking]) // dna is same as our species (sort of mini-cache), so no update needed
-			continue
-		needs_update = TRUE
-		break
-
-	if(needs_update)
-		remove_body_markings(hooman)
-		add_body_markings(hooman)
-// BANDASTATION EDIT END
 
 /**
  * Calculates the expected height values for this species

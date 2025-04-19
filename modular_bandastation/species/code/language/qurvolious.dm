@@ -1,5 +1,5 @@
 /datum/language/qurvolious
-	name = "курволиус"
+	name = "Курволиус"
 	desc = "Государственный язык Королевской Области Кербаллак, Курволиус,\
 		обладает богатым и мелодичным звучанием, которое течёт, как вода.\
 		Некоторые слоги этого языка непостижимы для нечленов расы Скрелл."
@@ -7,8 +7,8 @@
 	syllables = list(
 
 	)
-	// icon = 'icons/bandastation/mob/species/skrell/lang.dmi'
-	// icon_state = "skrell"
+	icon = 'icons/bandastation/mob/species/skrell/lang.dmi'
+	icon_state = "skrell_face"
 	default_priority = 90
 	syllables = list(
 		"кур","квр","кэр","кр","кар","крр","курр","кэрр","карр","шук",

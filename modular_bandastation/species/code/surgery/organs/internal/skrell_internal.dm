@@ -11,8 +11,8 @@
 	desc = "Склизкий язык скрелла."
 	languages_native = list(/datum/language/qurvolious)
 	liked_foodtypes = VEGETABLES | FRUIT
-	disliked_foodtypes = SEAFOOD | MEAT
-	toxic_foodtypes = ALCOHOL
+	disliked_foodtypes = SEAFOOD
+	toxic_foodtypes = ALCOHOL | MEAT
 
 /obj/item/organ/tongue/get_possible_languages()
 	return ..() + /datum/language/qurvolious

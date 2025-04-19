@@ -2,8 +2,8 @@
 	name = "skrell head tentacle"
 	desc = "Is it really tentacle?"
 
-	// icon = ''
-	// icon_state = "head_tentacle"
+	icon = 'icons/bandastation/mob/species/skrell/organs.dmi'
+	icon_state = "head_tentacle"
 
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE

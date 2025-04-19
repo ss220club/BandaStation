@@ -11,11 +11,11 @@
 
 /datum/preference/choiced/skrell_head_tentacle/icon_for(value)
 	var/datum/universal_icon/head = uni_icon('icons/bandastation/mob/species/skrell/bodyparts.dmi', "skrell_head")
-	head.blend_color(COLOR_OLD_GLORY_BLUE, ICON_MULTIPLY)
+	head.blend_color(COLOR_TRUE_BLUE, ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/body_marking = SSaccessories.skrell_head_tentacles_list[value]
 	var/datum/universal_icon/body_marking_icon = uni_icon(body_marking.icon, "m_skrell_head_tentacle_[body_marking.icon_state]_ADJ")
-	body_marking_icon.blend_color(COLOR_MODERATE_BLUE, ICON_MULTIPLY)
+	body_marking_icon.blend_color(COLOR_COMMAND_BLUE, ICON_MULTIPLY)
 
 	head.blend_icon(body_marking_icon, ICON_OVERLAY)
 

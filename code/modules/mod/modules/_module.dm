@@ -31,6 +31,7 @@
 	var/overlay_state_use
 	/// Icon file for the overlay.
 	var/overlay_icon_file = 'icons/mob/clothing/modsuit/mod_modules.dmi'
+
 	/// Does the overlay use the control unit's colors?
 	var/use_mod_colors = FALSE
 	/// What modules are we incompatible with?
@@ -348,11 +349,19 @@
 	var/used_overlay = get_current_overlay_state()
 	if (!used_overlay)
 		return
+
+	/// BANDASTATION ADDITION START - Species
+	var/used_icon_file = overlay_icon_file
+	var/obj/item/bodypart/head/bodypart_head = mod?.wearer?.get_bodypart(BODY_ZONE_HEAD)
+	if(worn_icon_species?[bodypart_head?.limb_id])
+		used_icon_file = worn_icon_species[bodypart_head.limb_id]
+	/// BANDASTATION ADDITION END - Species
+
 	var/mutable_appearance/module_icon
 	if(mask_worn_overlay)
 		module_icon = mutable_appearance(get_module_icon_cache(used_overlay), layer = standing.layer + 0.1)
 	else
-		module_icon = mutable_appearance(overlay_icon_file, used_overlay, layer = standing.layer + 0.1)
+		module_icon = mutable_appearance(used_icon_file, used_overlay, layer = standing.layer + 0.1) /// BANDASTATION EDIT - Species
 	if(!use_mod_colors)
 		module_icon.appearance_flags |= RESET_COLOR
 
