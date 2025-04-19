@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - rscdel: "Удаляет блестки (с оверлеем газов) из `scrubber_overflow` ивента"
