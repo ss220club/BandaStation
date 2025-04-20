@@ -337,7 +337,7 @@
 	name = "Tajaran Rosa"
 	icon_state = "rosa"
 
-/datum/sprite_accessory/hair/tajaran/80s
+/datum/sprite_accessory/hair/tajaran/eighties
 	name = "Tajaran 80s"
 	icon_state = "80s"
 
