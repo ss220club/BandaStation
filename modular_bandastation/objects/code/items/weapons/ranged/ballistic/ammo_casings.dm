@@ -32,32 +32,32 @@
 
 //  7.62x39mm
 
-/obj/item/ammo_casing/realistic/a762x39
+/obj/item/ammo_casing/a762x39
 	name = "7.62x39mm bullet casing"
-	desc = "Патрон калибра 7.62x39 мм."
+	desc = "Патрон калибра 7.62x39мм."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "762x39-casing"
 	caliber = CALIBER_762x39mm
 	projectile_type = /obj/projectile/bullet/a762x39
 
-/obj/item/ammo_casing/realistic/a762x39/ricochet
+/obj/item/ammo_casing/a762x39/ricochet
 	name = "7.62x39mm match bullet casing"
-	desc = "Спортивный патрон калибра 7.62x39 мм."
+	desc = "Спортивный патрон калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/ricochet
 
-/obj/item/ammo_casing/realistic/a762x39/fire
+/obj/item/ammo_casing/a762x39/fire
 	name = "7.62x39mm incendiary bullet casing"
-	desc = "Патрон с зажигательной пулей калибра 7.62x39 мм."
+	desc = "Патрон с зажигательной пулей калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/incendiary/a762x39
 
-/obj/item/ammo_casing/realistic/a762x39/ap
+/obj/item/ammo_casing/a762x39/ap
 	name = "7.62x39mm armor-piercing bullet casing"
-	desc = "Патрон с бронебойной пулей калибра 7.62x39 мм."
+	desc = "Патрон с бронебойной пулей калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39
 
-/obj/item/ammo_casing/realistic/a762x39/emp
+/obj/item/ammo_casing/a762x39/emp
 	name = "7.62x39mm ion bullet casing"
-	desc = "Патрон с ионной пулей калибра 7.62x39 мм."
+	desc = "Патрон с ионной пулей калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/emp
 
 /obj/projectile/bullet/a762x39/emp/on_hit(atom/target, blocked = FALSE, pierce_hit)
@@ -65,21 +65,21 @@
 	empulse(target, heavy_emp_radius, light_emp_radius)
 	return BULLET_ACT_HIT
 
-/obj/item/ammo_casing/realistic/a762x39/civilian
+/obj/item/ammo_casing/a762x39/civilian
 	name = "7.62x39mm civilian bullet casing"
-	desc = "Гражданский патрон калибра 7.62x39 мм."
+	desc = "Гражданский патрон калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/civilian
 	caliber = CALIBER_762x39mmCiv
 
-/obj/item/ammo_casing/realistic/a762x39/civilian/rubber
+/obj/item/ammo_casing/a762x39/civilian/rubber
 	name = "7.62x39mm rubber bullet casing"
-	desc = "Патрон с резиновой пулей калибра 7.62x39 мм гражданского назначения."
+	desc = "Патрон с резиновой пулей калибра 7.62x39мм гражданского назначения."
 	projectile_type = /obj/projectile/bullet/a762x39/rubber
 	harmful = FALSE
 
-/obj/item/ammo_casing/realistic/a762x39/civilian/hunting
+/obj/item/ammo_casing/a762x39/civilian/hunting
 	name = "7.62x39mm hunting bullet casing"
-	desc = "Патрон с оболочечной пулей 7.62x39 мм с мягким наконечником."
+	desc = "Патрон с оболочечной пулей 7.62x39мм с мягким наконечником."
 	projectile_type = /obj/projectile/bullet/a762x39/hunting
 
 /obj/projectile/bullet/a762x39/hunting/prehit_pierce(mob/living/target, mob/living/carbon/human/user)
@@ -87,9 +87,9 @@
 		damage += nemesis_bonus_force
 	.=..()
 
-/obj/item/ammo_casing/realistic/a762x39/civilian/blank
+/obj/item/ammo_casing/a762x39/civilian/blank
 	name = "7.62x39mm blank bullet casing"
-	desc = "Холостой патрон калибра 7.62x39 мм."
+	desc = "Холостой патрон калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/blank
 	harmful = FALSE
 
