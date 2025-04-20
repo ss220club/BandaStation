@@ -1,8 +1,8 @@
 // Ye old forbidden book, the Codex Cicatrix.
 /obj/item/codex_cicatrix
 	name = "Codex Cicatrix"
-	desc = "This heavy tome is full of cryptic scribbles and impossible diagrams. \
-	According to legend, it can be deciphered to reveal the secrets of the veil between worlds."
+	desc = "Этот тяжелый том полон загадочных каракулей и невозможных диаграмм. \
+	Согласно легенде, его можно расшифровать, чтобы раскрыть секреты завесы между мирами."
 	icon = 'icons/obj/antags/eldritch.dmi'
 	base_icon_state = "book"
 	icon_state = "book"
@@ -18,8 +18,8 @@
 /obj/item/codex_cicatrix/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/effect_remover, \
-		success_feedback = "You remove %THEEFFECT.", \
-		tip_text = "Clear rune", \
+		success_feedback = "Вы убираете %THEEFFECT.", \
+		tip_text = "Очистить руну", \
 		on_clear_callback = CALLBACK(src, PROC_REF(after_clear_rune)), \
 		effects_we_clear = list(/obj/effect/heretic_rune))
 
@@ -32,9 +32,9 @@
 	if(!IS_HERETIC(user))
 		return
 
-	. += span_notice("Can be used to tap influences for additional knowledge points.")
-	. += span_notice("Can also be used to draw or remove transmutation runes with ease.")
-	. += span_notice("Additionally, it can work as a focus for your spells when held.")
+	. += span_notice("Может быть использован на влияниях для получения дополнительных очков знаний.")
+	. += span_notice("Упрощает начертание или удаление рун трансмутации.")
+	. += span_notice("Также, может быть использован как фокусировка, когда находится в руках, но рекомендуется более специализированный для этого предмет, так как этот может выпасть во время боя.")
 
 /obj/item/codex_cicatrix/attack_self(mob/user, modifiers)
 	. = ..()
