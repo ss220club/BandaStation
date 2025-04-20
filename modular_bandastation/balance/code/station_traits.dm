@@ -16,12 +16,5 @@
 
 /datum/station_trait/random_spawns
 	weight = 0
-
-/datum/station_trait/announcement_intern
-	weight = 0
-
-/datum/station_trait/announcement_medbot
-	weight = 0
-
 /datum/station_trait/colored_assistants
 	weight = 0
