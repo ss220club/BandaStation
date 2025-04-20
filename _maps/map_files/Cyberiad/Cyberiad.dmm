@@ -2682,7 +2682,7 @@
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "aHO" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/wood,
 /area/station/commons/vacant_room/office)
 "aHS" = (
@@ -10980,7 +10980,7 @@
 /area/station/ai_monitored/turret_protected/ai_upload)
 "cGw" = (
 /obj/machinery/light/directional/west,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/wood,
 /area/station/service/library/ghetto)
 "cGB" = (
@@ -11583,7 +11583,7 @@
 /turf/open/floor/iron,
 /area/station/cargo/storage/ghetto)
 "cNa" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "cNA" = (
@@ -13071,7 +13071,7 @@
 /turf/open/floor/wood/large,
 /area/station/maintenance/ghetto/port)
 "deT" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/airalarm/directional/west,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 8
@@ -26571,7 +26571,7 @@
 /turf/open/floor/wood,
 /area/station/service/library)
 "gwp" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/wood,
 /area/station/maintenance/ghetto/starboard)
@@ -27428,7 +27428,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
 "gHF" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
@@ -29364,7 +29364,7 @@
 /area/station/service/library)
 "heT" = (
 /obj/machinery/light/directional/west,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
@@ -29500,7 +29500,7 @@
 /area/station/security/holding_cell)
 "hgF" = (
 /obj/item/radio/intercom/directional/west,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/carpet,
 /area/station/medical/psychology)
 "hgJ" = (
@@ -30484,7 +30484,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "hrW" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron,
 /area/station/cargo/office)
 "hrZ" = (
@@ -31765,7 +31765,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "hGY" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
@@ -36899,7 +36899,7 @@
 /turf/open/floor/plating,
 /area/station/commons/storage/art)
 "iXc" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/camera/directional/west{
 	c_tag = "Lawyer's Office"
 	},
@@ -40929,7 +40929,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "jXc" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron/dark/small,
 /area/station/medical/morgue)
 "jXg" = (
@@ -44609,7 +44609,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/aft)
 "kPt" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/carpet,
 /area/station/command/heads_quarters/captain)
 "kPv" = (
@@ -45836,7 +45836,7 @@
 /turf/open/floor/iron,
 /area/station/security/brig/entrance)
 "lfU" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light_switch/directional/west,
 /turf/open/floor/iron,
@@ -49331,7 +49331,7 @@
 /area/station/maintenance/department/medical/ghetto/central)
 "lWq" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
@@ -63806,7 +63806,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/storage)
 "pvf" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/requests_console/directional/east{
 	name = "CE";
 	department = "CE Desk"
@@ -66451,7 +66451,7 @@
 /turf/open/floor/pod,
 /area/station/maintenance/ghetto/storage)
 "qaC" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "qaE" = (
@@ -69795,7 +69795,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "qTS" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/lobby)
 "qTY" = (
@@ -72111,7 +72111,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "rvB" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
@@ -74350,7 +74350,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "rZd" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/radio/intercom/directional/west,
 /turf/open/floor/iron,
@@ -79161,7 +79161,7 @@
 /turf/open/floor/wood/parquet,
 /area/station/hallway/secondary/service)
 "tlj" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "tlk" = (
@@ -90118,7 +90118,7 @@
 /turf/open/floor/engine/xenobio,
 /area/station/science/xenobiology)
 "vVi" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 4
 	},
@@ -95417,7 +95417,7 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage_shared)
 "xjR" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
@@ -96027,7 +96027,7 @@
 	name = "Science Requests Console"
 	},
 /obj/effect/mapping_helpers/requests_console/ore_update,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/tile/purple/anticorner{
 	dir = 8
 	},
@@ -98211,7 +98211,7 @@
 /area/station/command/heads_quarters/hos)
 "xUT" = (
 /obj/machinery/light/directional/east,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
