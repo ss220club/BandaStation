@@ -21,10 +21,15 @@
 	mutantliver = /obj/item/organ/liver/tajaran
 	mutantstomach = /obj/item/organ/stomach/tajaran
 	mutant_organs = list(
-		/obj/item/organ/tail/tajaran = "Long tail",
+		/obj/item/organ/tail/tajaran = /datum/sprite_accessory/tails/tajaran/wingertail::name,
 	)
 
-	body_markings = list(/datum/bodypart_overlay/simple/body_marking/tajaran = "None")
+	body_markings = list(
+		/datum/bodypart_overlay/simple/body_marking/tajaran_head = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/tajaran_chest = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/tajaran_limb = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/tajaran_facial_hair = SPRITE_ACCESSORY_NONE,
+	)
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/tajaran,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/tajaran,
@@ -40,19 +45,19 @@
 	bodytemp_heat_damage_limit = BODYTEMP_HEAT_DAMAGE_LIMIT + 15
 	bodytemp_cold_damage_limit = BODYTEMP_COLD_DAMAGE_LIMIT - 30
 
-/datum/species/tajaran/prepare_human_for_preview(mob/living/carbon/human/tajaran)
-	tajaran.set_hairstyle("None", update = TRUE)
-	tajaran.dna.features["tajaran_facial_hair"] = "None"
-	tajaran.dna.features["mcolor"] = "#e5b380"
-	tajaran.dna.features["tajaran_head_markings"] = "Muzzle and Inner ears"
-	tajaran.update_body(is_creating = TRUE)
+/datum/species/tajaran/prepare_human_for_preview(mob/living/carbon/human/human)
+	human.set_hairstyle(SPRITE_ACCESSORY_NONE, update = TRUE)
+	human.dna.features["tajaran_facial_hair"] = SPRITE_ACCESSORY_NONE
+	human.dna.features["mcolor"] = "#e5b380"
+	human.dna.features["tajaran_head_markings"] = "Muzzle and Inner ears"
+	human.update_body(is_creating = TRUE)
 
 /datum/species/tajaran/randomize_features()
 	var/list/features = ..()
-	features["tajaran_body_markings"] = prob(50) ? pick(SSaccessories.tajaran_body_markings_list) : "None"
-	features["tajaran_head_markings"] = prob(50) ? pick(SSaccessories.tajaran_head_markings_list) : "None"
-	features["tajaran_tail_markings"] = prob(50) ? pick(SSaccessories.tajaran_tail_markings_list) : "None"
-	features["tajaran_facial_hair"] = prob(50) ? pick(SSaccessories.tajaran_facial_hair_list) : "None"
+	features["tajaran_chest_markings"] = prob(50) ? pick(SSaccessories.tajaran_chest_markings_list) : SPRITE_ACCESSORY_NONE
+	features["tajaran_head_markings"] = prob(50) ? pick(SSaccessories.tajaran_head_markings_list) : SPRITE_ACCESSORY_NONE
+	features["tajaran_tail_markings"] = prob(50) ? pick(SSaccessories.tajaran_tail_markings_list) : SPRITE_ACCESSORY_NONE
+	features["tajaran_facial_hair"] = prob(50) ? pick(SSaccessories.tajaran_facial_hair_list) : SPRITE_ACCESSORY_NONE
 
 	var/furcolor = "#[random_color()]"
 	features["tajaran_body_markings_color"] = furcolor
@@ -150,29 +155,6 @@
 
 	return to_add
 
-/datum/species/tajaran/create_pref_temperature_perks()
-	return list(list(
-			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
-			SPECIES_PERK_ICON = "temperature-low",
-			SPECIES_PERK_NAME = "Термоустойчивость",
-			SPECIES_PERK_DESC = "[plural_form] лучше переносят перепады температур.",))
-
-/datum/species/tajaran/create_pref_liver_perks()
-	return list(list(
-			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
-			SPECIES_PERK_ICON = "wine-glass",
-			SPECIES_PERK_NAME = "Чувствительность к алкоголю",
-			SPECIES_PERK_DESC = "Таярская печень более восприимчива к алкоголю, чем печень человека, примерно на 150%."
-		))
-
-/datum/species/tajaran/create_pref_language_perk()
-	return list(list(
-			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
-			SPECIES_PERK_ICON = "comment",
-			SPECIES_PERK_NAME = "Носитель языка",
-			SPECIES_PERK_DESC = "[plural_form] получают возможность говорить на Сик'Таире.",
-		))
-
 /datum/species/tajaran/get_scream_sound(mob/living/carbon/human/tajaran)
 	if(tajaran.physique == FEMALE)
 		return 'modular_bandastation/emote_panel/audio/tajaran/tajaran_scream.ogg'
@@ -239,74 +221,3 @@
 		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
 		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
 	)
-
-/datum/species/tajaran/add_body_markings(mob/living/carbon/human/tajaran) // OVERRIDE /datum/species/proc/add_body_markings
-	for(var/markings_type in body_markings)
-		var/datum/bodypart_overlay/simple/body_marking/markings = new markings_type()
-		var/accessory_name = tajaran.dna.features[markings.dna_feature_key]
-		var/datum/sprite_accessory/tajaran_body_markings/accessory = markings.get_accessory(accessory_name)
-
-		if(isnull(accessory))
-			return
-
-		for(var/obj/item/bodypart/part as anything in markings.applies_to)
-			var/obj/item/bodypart/people_part = tajaran.get_bodypart(initial(part.body_zone))
-
-			if(!people_part || !istype(people_part, part))
-				continue
-
-			var/datum/bodypart_overlay/simple/body_marking/tajaran/overlay = new markings_type ()
-
-			overlay.icon = accessory.icon
-			overlay.icon_state = accessory.icon_state
-			overlay.use_gender = accessory.gender_specific
-			overlay.draw_color = accessory.color_src ? tajaran.dna.features["tajaran_body_markings_color"] : null
-
-			if(istype(accessory, /datum/sprite_accessory/tajaran_body_markings) && accessory.colored_paws && (istype(people_part, /obj/item/bodypart/arm/left/tajaran) || istype(people_part, /obj/item/bodypart/arm/right/tajaran)))
-				overlay.aux_color_paw = accessory.color_src ? tajaran.dna.features["tajaran_body_markings_color"] : null
-
-			if((istype(people_part, /obj/item/bodypart/leg/left/digitigrade/tajaran) || istype(people_part, /obj/item/bodypart/leg/right/digitigrade/tajaran))) {
-				overlay.icon_state = overlay.icon_state + "_digi"
-			}
-			people_part.add_bodypart_overlay(overlay)
-
-/datum/species/tajaran/replace_body(mob/living/carbon/target, datum/species/new_species)
-	var/list/final_bodypart_overrides = new_species.bodypart_overrides.Copy()
-	if((new_species.digitigrade_customization == DIGITIGRADE_OPTIONAL && target.dna.features["legs"] == DIGITIGRADE_LEGS) || new_species.digitigrade_customization == DIGITIGRADE_FORCED)
-		final_bodypart_overrides[BODY_ZONE_R_LEG] = /obj/item/bodypart/leg/right/digitigrade/tajaran
-		final_bodypart_overrides[BODY_ZONE_L_LEG] = /obj/item/bodypart/leg/left/digitigrade/tajaran
-
-	for(var/obj/item/bodypart/old_part as anything in target.bodyparts)
-		if((old_part.change_exempt_flags & BP_BLOCK_CHANGE_SPECIES) || (old_part.bodypart_flags & BODYPART_IMPLANTED))
-			continue
-
-		var/path = final_bodypart_overrides?[old_part.body_zone]
-		var/obj/item/bodypart/new_part
-		if(path)
-			new_part = new path()
-			new_part.replace_limb(target, TRUE)
-			new_part.update_limb(is_creating = TRUE)
-			new_part.set_initial_damage(old_part.brute_dam, old_part.burn_dam)
-		qdel(old_part)
-
-/obj/item/bodypart/head/get_hair_and_lips_icon(dropped)
-	. = ..()
-	var/image_dir = NONE
-	if(dropped)
-		image_dir = SOUTH
-	var/image/facial_hair_overlay
-	var/datum/sprite_accessory/sprite_accessory
-	var/mob/living/carbon/human/user = src.owner
-	if(istype(user) && user.dna && (head_flags & HEAD_TAJARAN))
-		sprite_accessory = SSaccessories.tajaran_head_markings_list[user.dna.features["tajaran_head_markings"]]
-		if(sprite_accessory)
-			facial_hair_overlay = image(sprite_accessory.icon, "m_tajaran_head_markings_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
-			facial_hair_overlay.color = user.dna.features["tajaran_head_markings_color"]
-			. += facial_hair_overlay
-
-		sprite_accessory = SSaccessories.tajaran_facial_hair_list[user.dna.features["tajaran_facial_hair"]]
-		if(sprite_accessory)
-			facial_hair_overlay = image(sprite_accessory.icon, "m_tajaran_facial_hair_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
-			facial_hair_overlay.color = user.dna.features["tajaran_facial_hair_color"]
-			. += facial_hair_overlay
-	return .
