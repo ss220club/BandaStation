@@ -164,7 +164,7 @@
 
 			var/color = bodypart_owner.owner?.dna?.features[dna_color_feature_key]
 			if(color)
-			draw_color = color
+				draw_color = color
 		/// BANDASTATION ADDITION END - Species
 
 	return TRUE
