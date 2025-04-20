@@ -352,9 +352,9 @@
 
 	/// BANDASTATION ADDITION START - Species
 	var/used_icon_file = overlay_icon_file
-	var/obj/item/bodypart/head/bodypart_head = mod?.wearer?.get_bodypart(BODY_ZONE_HEAD)
-	if(worn_icon_species?[bodypart_head?.limb_id])
-		used_icon_file = worn_icon_species[bodypart_head.limb_id]
+	var/species_id = mod?.wearer?.dna?.species?.id
+	if(worn_icon_species?[species_id])
+		used_icon_file = worn_icon_species[species_id]
 	/// BANDASTATION ADDITION END - Species
 
 	var/mutable_appearance/module_icon

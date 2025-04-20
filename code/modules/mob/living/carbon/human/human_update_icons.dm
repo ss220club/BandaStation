@@ -402,12 +402,12 @@ There are several things that need to be remembered:
 
 		var/mutant_override = FALSE
 
-		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
-		if(worn_item.worn_icon_species?[bodypart_head.limb_id])
-			icon_file = worn_item.worn_icon_species[bodypart_head.limb_id]
+		var/species_id = dna.species.id
+		if(worn_item.worn_icon_species?[species_id])
+			icon_file = worn_item.worn_icon_species[species_id]
 			mutant_override = TRUE
-		else if(bodypart_head.limb_id in icon_files_species)
-			icon_file = icon_files_species[bodypart_head.limb_id]
+		else if(icon_files_species[species_id])
+			icon_file = icon_files_species[species_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
