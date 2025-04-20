@@ -1109,7 +1109,5 @@
 	name = "pod eyes"
 	desc = "Strangest salad you've ever seen."
 	icon_state = "eyes_pod"
-	eye_color_left = "#375846"
-	eye_color_right = "#375846"
 	iris_overlay = null
 	foodtype_flags = PODPERSON_ORGAN_FOODTYPES
