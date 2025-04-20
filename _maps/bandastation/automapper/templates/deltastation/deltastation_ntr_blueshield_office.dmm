@@ -404,7 +404,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/aft)
 "IO" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
 "Kv" = (
@@ -506,7 +506,7 @@
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "TQ" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "TX" = (
