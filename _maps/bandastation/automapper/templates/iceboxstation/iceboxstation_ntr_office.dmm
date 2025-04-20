@@ -99,7 +99,7 @@
 /turf/open/floor/iron/dark/diagonal,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "r" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/structure/sign/poster/official/random/directional/south,
 /turf/open/floor/iron/dark/diagonal,
 /area/station/command/heads_quarters/nanotrasen_representative)

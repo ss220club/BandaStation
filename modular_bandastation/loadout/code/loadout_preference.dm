@@ -1,16 +1,15 @@
 /datum/preference_middleware/loadout/on_new_character(mob/user)
 	preferences.loadout_points = preferences.get_loadout_points()
-	.=..()
+	. = ..()
 
 // Handles selecting from the preferences UI
 /datum/preference_middleware/loadout/select_item(datum/loadout_item/selected_item)
 	var/donator_level = preferences.parent.get_donator_level()
+	if(donator_level < selected_item.donator_level)
+		return
+
 	if(preferences.loadout_points >= selected_item.cost && donator_level >= selected_item.donator_level)
 		return ..()
-	else if(donator_level < selected_item.donator_level)
-		to_chat(preferences.parent.mob, span_warning("У вас недостаточный уровень доната, чтобы взять [selected_item.name]!"))
-	else
-		to_chat(preferences.parent.mob, span_warning("У вас недостаточно свободных очков лодаута, чтобы взять [selected_item.name]!"))
 
 // Removes donator_level items from the user if their donator_level is insufficient
 /datum/preference/loadout/deserialize(input, datum/preferences/preferences)
