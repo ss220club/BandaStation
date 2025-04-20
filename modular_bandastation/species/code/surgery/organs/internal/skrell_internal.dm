@@ -5,6 +5,8 @@
 	name = "skrell eyeballs"
 	desc = "Глаза синеватого оттенка, но по своей структуре - глаза обычного гуманоида."
 	icon = 'icons/bandastation/mob/species/skrell/organs.dmi'
+	synchronized_blinking = FALSE
+	eye_icon_state = "skrell_eyes"
 
 /obj/item/organ/tongue/skrell
 	name = "skrell tongue"
