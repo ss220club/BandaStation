@@ -14,7 +14,7 @@
 	head.blend_color(COLOR_TRUE_BLUE, ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/body_marking = SSaccessories.skrell_head_tentacles_list[value]
-	var/datum/universal_icon/body_marking_icon = uni_icon(body_marking.icon, "m_skrell_head_tentacle_[body_marking.icon_state]_ADJ")
+	var/datum/universal_icon/body_marking_icon = uni_icon(body_marking.icon, "m_skrell_head_tentacle_[body_marking.icon_state]_FRONT")
 	body_marking_icon.blend_color(COLOR_COMMAND_BLUE, ICON_MULTIPLY)
 
 	head.blend_icon(body_marking_icon, ICON_OVERLAY)

@@ -45,7 +45,7 @@
 // MARK: Bodypart overlay
 
 /datum/bodypart_overlay/mutant/head_tentacle
-	layers = EXTERNAL_ADJACENT
+	layers = EXTERNAL_FRONT
 	feature_key = "skrell_head_tentacle"
 	dna_color_feature_key = "skrell_head_tentacle_color"
 	color_source = ORGAN_COLOR_FEATURE
