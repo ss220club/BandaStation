@@ -1109,5 +1109,9 @@
 	name = "pod eyes"
 	desc = "Strangest salad you've ever seen."
 	icon_state = "eyes_pod"
+	/// BANDASTATION REMOVAL START - Podman eye color fix
+	// eye_color_left = "#375846"
+	// eye_color_right = "#375846"
+	/// BANDASTATION REMOVAL END - Podman eye color fix
 	iris_overlay = null
 	foodtype_flags = PODPERSON_ORGAN_FOODTYPES
