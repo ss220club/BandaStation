@@ -262,10 +262,12 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		L[DNA_FISH_TAIL_BLOCK] = construct_block(SSaccessories.tails_list_fish.Find(features["fish_tail"]), length(SSaccessories.tails_list_fish))
 
 	/// BANDASTATION ADDITION START - Species
-	if(features["vulpkanin_body_markings"])
-		L[DNA_VULPKANIN_BODY_MARKINGS_BLOCK] = construct_block(SSaccessories.vulpkanin_body_markings_list.Find(features["vulpkanin_body_markings"]), SSaccessories.vulpkanin_body_markings_list.len)
 	if(features["vulpkanin_head_markings"])
 		L[DNA_VULPKANIN_HEAD_MARKINGS_BLOCK] = construct_block(SSaccessories.vulpkanin_head_markings_list.Find(features["vulpkanin_head_markings"]), SSaccessories.vulpkanin_head_markings_list.len)
+	if(features["vulpkanin_chest_markings"])
+		L[DNA_VULPKANIN_CHEST_MARKINGS_BLOCK] = construct_block(SSaccessories.vulpkanin_chest_markings_list.Find(features["vulpkanin_chest_markings"]), SSaccessories.vulpkanin_chest_markings_list.len)
+	if(features["vulpkanin_limb_markings"])
+		L[DNA_VULPKANIN_LIMB_MARKINGS_BLOCK] = construct_block(SSaccessories.vulpkanin_limb_markings_list.Find(features["vulpkanin_limb_markings"]), SSaccessories.vulpkanin_limb_markings_list.len)
 	if(features["tail_vulpkanin"])
 		L[DNA_VULPKANIN_TAIL_BLOCK] = construct_block(SSaccessories.tails_list_vulpkanin.Find(features["tail_vulpkanin"]), SSaccessories.tails_list_vulpkanin.len)
 	if(features["tail_markings"])
@@ -282,10 +284,13 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		L[DNA_VULPKANIN_FACIAL_HAIR_COLOR_BLOCK] = sanitize_hexcolor(features["vulpkanin_facial_hair_color"], include_crunch = FALSE)
 
 	// tajaran
-	if(features["tajaran_body_markings"])
-		L[DNA_TAJARAN_BODY_MARKINGS_BLOCK] = construct_block(SSaccessories.tajaran_body_markings_list.Find(features["tajaran_body_markings"]), SSaccessories.tajaran_body_markings_list.len)
 	if(features["tajaran_head_markings"])
 		L[DNA_TAJARAN_HEAD_MARKINGS_BLOCK] = construct_block(SSaccessories.tajaran_head_markings_list.Find(features["tajaran_head_markings"]), SSaccessories.tajaran_head_markings_list.len)
+	if(features["tajaran_chest_markings"])
+		L[DNA_TAJARAN_CHEST_MARKINGS_BLOCK] = construct_block(SSaccessories.tajaran_chest_markings_list.Find(features["tajaran_chest_markings"]), SSaccessories.tajaran_chest_markings_list.len)
+	if(features["tajaran_limb_markings"])
+		L[DNA_TAJARAN_LIMB_MARKINGS_BLOCK] = construct_block(SSaccessories.tajaran_limb_markings_list.Find(features["tajaran_limb_markings"]), SSaccessories.tajaran_limb_markings_list.len)
+
 	if(features["tail_tajaran"])
 		L[DNA_TAJARAN_TAIL_BLOCK] = construct_block(SSaccessories.tails_list_tajaran.Find(features["tail_tajaran"]), SSaccessories.tails_list_tajaran.len)
 	if(features["tajaran_tail_markings"])
@@ -417,10 +422,12 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 
 		/// BANDASTATION ADDITION START - Species
 		// Vulpkanin
-		if(DNA_VULPKANIN_BODY_MARKINGS_BLOCK)
-			set_uni_feature_block(blocknumber, construct_block(SSaccessories.vulpkanin_body_markings_list.Find(features["vulpkanin_body_markings"]), SSaccessories.vulpkanin_body_markings_list.len))
 		if(DNA_VULPKANIN_HEAD_MARKINGS_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.vulpkanin_head_markings_list.Find(features["vulpkanin_head_markings"]), SSaccessories.vulpkanin_head_markings_list.len))
+		if(DNA_VULPKANIN_CHEST_MARKINGS_BLOCK)
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.vulpkanin_chest_markings_list.Find(features["vulpkanin_chest_markings"]), SSaccessories.vulpkanin_chest_markings_list.len))
+		if(DNA_VULPKANIN_LIMB_MARKINGS_BLOCK)
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.vulpkanin_limb_markings_list.Find(features["vulpkanin_limb_markings"]), SSaccessories.vulpkanin_limb_markings_list.len))
 		if(DNA_VULPKANIN_TAIL_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tails_list_vulpkanin.Find(features["tail_vulpkanin"]), SSaccessories.tails_list_vulpkanin.len))
 		if(DNA_VULPKANIN_TAIL_MARKINGS_BLOCK)
@@ -437,10 +444,13 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["vulpkanin_facial_hair_color"], include_crunch = FALSE))
 
 		// Tajaran
-		if(DNA_TAJARAN_BODY_MARKINGS_BLOCK)
-			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tajaran_body_markings_list.Find(features["tajaran_body_markings"]), SSaccessories.tajaran_body_markings_list.len))
 		if(DNA_TAJARAN_HEAD_MARKINGS_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tajaran_head_markings_list.Find(features["tajaran_head_markings"]), SSaccessories.tajaran_head_markings_list.len))
+		if(DNA_TAJARAN_CHEST_MARKINGS_BLOCK)
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tajaran_chest_markings_list.Find(features["tajaran_chest_markings"]), SSaccessories.tajaran_chest_markings_list.len))
+		if(DNA_TAJARAN_LIMB_MARKINGS_BLOCK)
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tajaran_limb_markings_list.Find(features["tajaran_limb_markings"]), SSaccessories.tajaran_limb_markings_list.len))
+
 		if(DNA_TAJARAN_TAIL_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tails_list_tajaran.Find(features["tail_tajaran"]), SSaccessories.tails_list_tajaran.len))
 		if(DNA_TAJARAN_TAIL_MARKINGS_BLOCK)
@@ -806,10 +816,13 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 
 	/// BANDASTATION ADDITION START - Species
 	// Vulpkanin features
-	if(dna.features["vulpkanin_body_markings"])
-		dna.features["vulpkanin_body_markings"] = SSaccessories.vulpkanin_body_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_VULPKANIN_BODY_MARKINGS_BLOCK), SSaccessories.vulpkanin_body_markings_list.len)]
 	if(dna.features["vulpkanin_head_markings"])
 		dna.features["vulpkanin_head_markings"] = SSaccessories.vulpkanin_head_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_VULPKANIN_HEAD_MARKINGS_BLOCK), SSaccessories.vulpkanin_head_markings_list.len)]
+	if(dna.features["vulpkanin_chest_markings"])
+		dna.features["vulpkanin_chest_markings"] = SSaccessories.vulpkanin_chest_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_VULPKANIN_CHEST_MARKINGS_BLOCK), SSaccessories.vulpkanin_chest_markings_list.len)]
+	if(dna.features["vulpkanin_limb_markings"])
+		dna.features["vulpkanin_limb_markings"] = SSaccessories.vulpkanin_limb_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_VULPKANIN_LIMB_MARKINGS_BLOCK), SSaccessories.vulpkanin_limb_markings_list.len)]
+
 	if(dna.features["tail_vulpkanin"])
 		dna.features["tail_vulpkanin"] = SSaccessories.tails_list_vulpkanin[deconstruct_block(get_uni_feature_block(features, DNA_VULPKANIN_TAIL_BLOCK), SSaccessories.tails_list_vulpkanin.len)]
 	if(dna.features["tail_markings"])
@@ -827,10 +840,13 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		dna.features["vulpkanin_facial_hair_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_VULPKANIN_FACIAL_HAIR_COLOR_BLOCK))
 
 	// Tajaran  features
-	if(dna.features["tajaran_body_markings"])
-		dna.features["tajaran_body_markings"] = SSaccessories.tajaran_body_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_TAJARAN_BODY_MARKINGS_BLOCK), SSaccessories.tajaran_body_markings_list.len)]
 	if(dna.features["tajaran_head_markings"])
 		dna.features["tajaran_head_markings"] = SSaccessories.tajaran_head_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_TAJARAN_HEAD_MARKINGS_BLOCK), SSaccessories.tajaran_head_markings_list.len)]
+	if(dna.features["tajaran_chest_markings"])
+		dna.features["tajaran_chest_markings"] = SSaccessories.tajaran_chest_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_TAJARAN_CHEST_MARKINGS_BLOCK), SSaccessories.tajaran_chest_markings_list.len)]
+	if(dna.features["tajaran_limb_markings"])
+		dna.features["tajaran_limb_markings"] = SSaccessories.tajaran_limb_markings_list[deconstruct_block(get_uni_feature_block(features, DNA_TAJARAN_LIMB_MARKINGS_BLOCK), SSaccessories.tajaran_limb_markings_list.len)]
+
 	if(dna.features["tail_tajaran"])
 		dna.features["tail_tajaran"] = SSaccessories.tails_list_tajaran[deconstruct_block(get_uni_feature_block(features, DNA_TAJARAN_TAIL_BLOCK), SSaccessories.tails_list_tajaran.len)]
 	if(dna.features["tajaran_tail_markings"])

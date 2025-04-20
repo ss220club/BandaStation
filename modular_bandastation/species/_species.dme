@@ -11,13 +11,15 @@
 
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
 
-#include "code/human/sprite_accessories/vulpkanin/vulpkanin_body_markings.dm"
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_chest_markings.dm"
+#include "code/human/sprite_accessories/vulpkanin/vulpkanin_limb_markings.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_facial_hair.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_head_markings.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_tail_markings.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_tails.dm"
 
-#include "code/human/sprite_accessories/tajaran/tajaran_body_markings.dm"
+#include "code/human/sprite_accessories/tajaran/tajaran_chest_markings.dm"
+#include "code/human/sprite_accessories/tajaran/tajaran_limb_markings.dm"
 #include "code/human/sprite_accessories/tajaran/tajaran_facial_hair.dm"
 #include "code/human/sprite_accessories/tajaran/tajaran_head_markings.dm"
 #include "code/human/sprite_accessories/tajaran/tajaran_tail_markings.dm"
@@ -33,7 +35,8 @@
 #include "code/preferences/species_features/skrell/skrell_head_tentacle_color.dm"
 #include "code/preferences/species_features/skrell/skrell_head_tentacle.dm"
 
-#include "code/preferences/species_features/tajaran/body_markings/tajaran_body_markings.dm"
+#include "code/preferences/species_features/tajaran/body_markings/tajaran_chest_markings.dm"
+#include "code/preferences/species_features/tajaran/body_markings/tajaran_limb_markings.dm"
 #include "code/preferences/species_features/tajaran/body_markings/tajaran_body_markings_color.dm"
 #include "code/preferences/species_features/tajaran/facial_hair/tajaran_facial_hair.dm"
 #include "code/preferences/species_features/tajaran/facial_hair/tajaran_facial_hair_color.dm"
@@ -43,7 +46,8 @@
 #include "code/preferences/species_features/tajaran/tail_markings/tajaran_tail_markings.dm"
 #include "code/preferences/species_features/tajaran/tail_markings/tajaran_tail_markings_color.dm"
 
-#include "code/preferences/species_features/vulpkanin/body_markings/vulpkanin_body_markings.dm"
+#include "code/preferences/species_features/vulpkanin/body_markings/vulpkanin_limb_markings.dm"
+#include "code/preferences/species_features/vulpkanin/body_markings/vulpkanin_chest_markings.dm"
 #include "code/preferences/species_features/vulpkanin/body_markings/vulpkanin_body_markings_color.dm"
 #include "code/preferences/species_features/vulpkanin/facial_hair/vulpkanin_facial_hair.dm"
 #include "code/preferences/species_features/vulpkanin/facial_hair/vulpkanin_facial_hair_color.dm"

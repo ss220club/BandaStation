@@ -1,6 +1,6 @@
 /datum/sprite_accessory/skrell_head_tentacle
 	icon = 'icons/bandastation/mob/species/skrell/sprite_accessories/head_tentacles.dmi'
-	color_src = "skrell_head_tentacle_color"
+	color_src = TRUE
 	em_block = TRUE
 
 /datum/sprite_accessory/skrell_head_tentacle/male

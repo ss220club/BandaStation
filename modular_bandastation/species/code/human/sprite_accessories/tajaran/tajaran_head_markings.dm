@@ -1,6 +1,6 @@
 /datum/sprite_accessory/tajaran_head_markings
 	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/head_markings.dmi'
-	color_src = "tajaran_head_markings_color"
+	color_src = TRUE
 
 /datum/sprite_accessory/tajaran_head_markings/taj_tigerhead
 	name = "Tiger head"

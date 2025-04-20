@@ -1,6 +1,6 @@
 /datum/sprite_accessory/tajaran_tail_markings
 	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/tail_markings.dmi'
-	color_src = "tajaran_tail_markings_color"
+	color_src = TRUE
 	em_block = TRUE
 
 /datum/sprite_accessory/tajaran_tail_markings/taj_wingertail_stripes

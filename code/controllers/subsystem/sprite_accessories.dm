@@ -60,15 +60,17 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 
 	/// BANDASTATION ADDITION START - Species
 	// Vulpkanin
-	var/list/vulpkanin_body_markings_list
 	var/list/vulpkanin_head_markings_list
+	var/list/vulpkanin_chest_markings_list
+	var/list/vulpkanin_limb_markings_list
 	var/list/tails_list_vulpkanin
 	var/list/vulpkanin_tail_markings_list
 	var/list/vulpkanin_facial_hair_list
 
 	//  Tajaran
-	var/list/tajaran_body_markings_list
 	var/list/tajaran_head_markings_list
+	var/list/tajaran_chest_markings_list
+	var/list/tajaran_limb_markings_list
 	var/list/tails_list_tajaran
 	var/list/tajaran_tail_markings_list
 	var/list/tajaran_facial_hair_list
@@ -132,15 +134,19 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 
 	/// BANDASTATION ADDITION START - Species
 	//  vulpkanin
-	vulpkanin_body_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_body_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
 	vulpkanin_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
 	tails_list_vulpkanin = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/vulpkanin)[DEFAULT_SPRITE_LIST]
 	vulpkanin_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
 	vulpkanin_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
 
 	// tajaran
-	tajaran_body_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_body_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
 	tajaran_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
 	tails_list_tajaran = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/tajaran)[DEFAULT_SPRITE_LIST]
 	tajaran_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
 	tajaran_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]

@@ -2044,16 +2044,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 			var/datum/bodypart_overlay/simple/body_marking/overlay = new markings_type()
 			/// BANDASTATION ADDITION START - Species
-			var/accessory_color = ""
-			if(markings.dna_color_feature_key)
-				accessory_color = hooman.dna.features[markings.dna_color_feature_key]
-				if(!accessory_color)
-					stack_trace("Invalid dna_color_feature_key used for `[markings.type]`")
-
-			if(!accessory_color)
-				accessory_color = hooman.dna.features["mcolor"]
+			var/accessory_color = markings.dna_color_feature_key ? hooman.dna.features[markings.dna_color_feature_key] : hooman.dna.features["mcolor"]
 			/// BANDASTATION ADDITION END - Species
-
 			overlay.set_appearance(accessory_name, accessory_color) /// BANDASTATION EDIT - Species
 			people_part.add_bodypart_overlay(overlay)
 

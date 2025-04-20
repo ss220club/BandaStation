@@ -25,8 +25,9 @@
 	)
 
 	body_markings = list(
-		/datum/bodypart_overlay/simple/body_marking/tajaran_body = SPRITE_ACCESSORY_NONE,
 		/datum/bodypart_overlay/simple/body_marking/tajaran_head = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/tajaran_chest = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/tajaran_limb = SPRITE_ACCESSORY_NONE,
 		/datum/bodypart_overlay/simple/body_marking/tajaran_facial_hair = SPRITE_ACCESSORY_NONE,
 	)
 	bodypart_overrides = list(
@@ -53,7 +54,7 @@
 
 /datum/species/tajaran/randomize_features()
 	var/list/features = ..()
-	features["tajaran_body_markings"] = prob(50) ? pick(SSaccessories.tajaran_body_markings_list) : SPRITE_ACCESSORY_NONE
+	features["tajaran_chest_markings"] = prob(50) ? pick(SSaccessories.tajaran_chest_markings_list) : SPRITE_ACCESSORY_NONE
 	features["tajaran_head_markings"] = prob(50) ? pick(SSaccessories.tajaran_head_markings_list) : SPRITE_ACCESSORY_NONE
 	features["tajaran_tail_markings"] = prob(50) ? pick(SSaccessories.tajaran_tail_markings_list) : SPRITE_ACCESSORY_NONE
 	features["tajaran_facial_hair"] = prob(50) ? pick(SSaccessories.tajaran_facial_hair_list) : SPRITE_ACCESSORY_NONE

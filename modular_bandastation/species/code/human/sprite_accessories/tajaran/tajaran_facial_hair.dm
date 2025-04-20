@@ -1,6 +1,6 @@
 /datum/sprite_accessory/tajaran_facial_hair
 	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/facial_hair.dmi'
-	color_src = "tajaran_facial_hair_color"
+	color_src = TRUE
 
 /datum/sprite_accessory/tajaran_facial_hair/taj_goatee
 	name = "Goatee"

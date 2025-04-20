@@ -22,8 +22,9 @@
 	)
 
 	body_markings = list(
-		/datum/bodypart_overlay/simple/body_marking/vulpkanin_body = SPRITE_ACCESSORY_NONE,
 		/datum/bodypart_overlay/simple/body_marking/vulpkanin_head = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/vulpkanin_chest = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/vulpkanin_limb = SPRITE_ACCESSORY_NONE,
 		/datum/bodypart_overlay/simple/body_marking/vulpkanin_facial_hair = SPRITE_ACCESSORY_NONE,
 	)
 
@@ -53,7 +54,7 @@
 
 /datum/species/vulpkanin/randomize_features()
 	var/list/features = ..()
-	features["vulpkanin_body_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_body_markings_list) : SPRITE_ACCESSORY_NONE
+	features["vulpkanin_chest_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_chest_markings_list) : SPRITE_ACCESSORY_NONE
 	features["tail_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : SPRITE_ACCESSORY_NONE
 	features["vulpkanin_head_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : SPRITE_ACCESSORY_NONE
 	features["vulpkanin_facial_hair"] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : SPRITE_ACCESSORY_NONE

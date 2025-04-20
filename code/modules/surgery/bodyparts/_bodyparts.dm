@@ -981,15 +981,8 @@
 		overlay.inherit_color(src, force = TRUE)
 	// Ensures marking overlays are updated accordingly as well
 	for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
-		var/marking_color = species_color
-		if(marking.dna_color_feature_key)
-			var/color = human_owner.dna.features[marking.dna_color_feature_key]
-			if(color)
-				marking_color = color
-			else
-				stack_trace("Invalid dna_color_feature_key used for `[marking.type]`")
-
-		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], marking_color)
+		var/marking_color = marking.dna_color_feature_key ? human_owner.dna.features[marking.dna_color_feature_key] : species_color /// BANDASTATION ADDITION - Species
+		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], marking_color) /// BANDASTATION EDIT - Species
 
 	return TRUE
 
