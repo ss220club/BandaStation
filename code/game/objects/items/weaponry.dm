@@ -981,7 +981,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/baseball_bat/attack(mob/living/target, mob/living/user)
 	// we obtain the relative direction from the bat itself to the target
-	var/relative_direction = get_cardinal_dir(src, target)
+	var/relative_direction = get_dir(src, target) // BANDASTATION EDIT
 	var/atom/throw_target = get_edge_target_turf(target, relative_direction)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
@@ -990,7 +990,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		user.visible_message(span_userdanger("It's a home run!"))
 		if(!QDELETED(target))
 			target.throw_at(throw_target, rand(8,10), 14, user)
-		SSexplosions.medturf += throw_target
+		// SSexplosions.medturf += throw_target // BANDASTATION EDIT
 		playsound(get_turf(src), 'sound/items/weapons/homerun.ogg', 100, TRUE)
 		homerun_ready = FALSE
 		return
