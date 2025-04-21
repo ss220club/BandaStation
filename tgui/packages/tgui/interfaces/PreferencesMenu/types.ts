@@ -220,6 +220,7 @@ export type TtsData = {
 export type BodyModification = {
   key: string;
   name: string;
+  category: string;
   description: string;
   cost: number;
 };

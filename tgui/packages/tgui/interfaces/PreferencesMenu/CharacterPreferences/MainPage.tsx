@@ -29,6 +29,7 @@ import {
 } from '../types';
 import { useRandomToggleState } from '../useRandomToggleState';
 import { useServerPrefs } from '../useServerPrefs';
+import { BodyModificationsPage } from './BodyModificationsPage';
 import { DeleteCharacterPopup } from './DeleteCharacterPopup';
 import { MultiNameInput, NameInput } from './names';
 
@@ -47,6 +48,8 @@ type CharacterControlsProps = {
   showGender: boolean;
   canDeleteCharacter: boolean;
   handleDeleteCharacter: () => void;
+  handleAugmentation: () => void;
+  showAugmentation: boolean;
 };
 
 function CharacterControls(props: CharacterControlsProps) {
@@ -77,6 +80,18 @@ function CharacterControls(props: CharacterControlsProps) {
           <GenderButton
             gender={props.gender}
             handleSetGender={props.setGender}
+          />
+        </Stack.Item>
+      )}
+
+      {props.showAugmentation && (
+        <Stack.Item>
+          <Button
+            onClick={props.handleAugmentation}
+            fontSize="22px"
+            icon="robot"
+            tooltip="Аугментация"
+            tooltipPosition="top"
           />
         </Stack.Item>
       )}
@@ -456,6 +471,7 @@ export function MainPage(props: MainPageProps) {
   const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
     useState(false);
   const [multiNameInputOpen, setMultiNameInputOpen] = useState(false);
+  const [augmentationInputOpen, setAugmentationInputOpen] = useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
 
   const serverData = useServerPrefs();
@@ -514,6 +530,12 @@ export function MainPage(props: MainPageProps) {
         />
       )}
 
+      {augmentationInputOpen && (
+        <BodyModificationsPage
+          handleClose={() => setAugmentationInputOpen(false)}
+        />
+      )}
+
       {deleteCharacterPopupOpen && (
         <DeleteCharacterPopup
           close={() => setDeleteCharacterPopupOpen(false)}
@@ -533,6 +555,12 @@ export function MainPage(props: MainPageProps) {
                 setGender={createSetPreference(act, 'gender')}
                 showGender={
                   currentSpeciesData ? !!currentSpeciesData.sexes : true
+                }
+                handleAugmentation={() => {
+                  setAugmentationInputOpen(true);
+                }}
+                showAugmentation={
+                  currentSpeciesData ? !!currentSpeciesData.sexes : true // TODO SET AUGMENTATION
                 }
                 canDeleteCharacter={
                   Object.values(data.character_profiles).filter(

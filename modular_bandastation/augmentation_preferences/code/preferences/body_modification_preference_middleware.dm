@@ -21,7 +21,8 @@
 				"key" = body_modification.key,
 				"name" = body_modification.name,
 				"description" = body_modification.get_description(),
-				"cost" = body_modification.cost
+				"cost" = body_modification.cost,
+				"category" = body_modification.category
 			)
 		)
 
@@ -77,4 +78,5 @@
 
 	body_modifications -= body_modification_key
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications)
+	user.update_body()
 	return TRUE

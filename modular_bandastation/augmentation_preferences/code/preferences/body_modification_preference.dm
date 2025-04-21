@@ -20,6 +20,10 @@
 		return
 
 	var/list/body_modifications = value
+	for(var/obj/item/bodypart/limb in target.bodyparts) {
+		limb.drop_limb(special = TRUE)
+	}
+	target.regenerate_limbs()
 	for(var/body_modification_key in body_modifications)
 		GLOB.body_modifications[body_modification_key].apply_to_human(target)
 
