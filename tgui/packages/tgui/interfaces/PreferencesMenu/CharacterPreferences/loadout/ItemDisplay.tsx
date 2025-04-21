@@ -179,31 +179,38 @@ export function ItemListDisplay(props: ListProps) {
   const itemGroups = sortByGroup(props.items);
 
   return (
-    <Stack vertical>
-      {itemGroups.length > 1 && <Stack.Item />}
+    <Stack vertical g={3}>
       {itemGroups.map((group) => (
         <Stack.Item key={group.title}>
           <Stack vertical>
             {itemGroups.length > 1 && (
               <>
-                <Stack.Item mt={-1.5} mb={-0.8} ml={1.5}>
-                  <h3 color="grey">{group.title}</h3>
+                <Stack.Item bold fontSize={1.25} px={1}>
+                  {group.title}
                 </Stack.Item>
-                <Stack.Divider />
+                <Stack.Divider
+                  style={{ borderColor: 'var(--color-primary)' }}
+                />
               </>
             )}
             <Stack.Item>
               <Stack wrap>
-                {group.items.map((item) => (
-                  <Stack.Item key={item.name}>
-                    <ItemDisplay
-                      item={item}
-                      active={
-                        loadout_list && loadout_list[item.path] !== undefined
-                      }
-                    />
-                  </Stack.Item>
-                ))}
+                {group.items
+                  .sort((a, b) =>
+                    a.tier === b.tier
+                      ? a.name.localeCompare(b.name)
+                      : a.tier - b.tier,
+                  )
+                  .map((item) => (
+                    <Stack.Item key={item.name}>
+                      <ItemDisplay
+                        item={item}
+                        active={
+                          loadout_list && loadout_list[item.path] !== undefined
+                        }
+                      />
+                    </Stack.Item>
+                  ))}
               </Stack>
             </Stack.Item>
           </Stack>
@@ -246,7 +253,9 @@ export function SearchDisplay(props: SearchProps) {
   const validLoadoutItems = loadout_tabs
     .flatMap((tab) => tab.contents)
     .filter(search)
-    .sort((a, b) => (a.name > b.name ? 1 : -1));
+    .sort((a, b) =>
+      a.tier === b.tier ? a.name.localeCompare(b.name) : a.tier - b.tier,
+    );
 
   if (validLoadoutItems.length === 0) {
     return <NoticeBox>No items found!</NoticeBox>;
