@@ -78,6 +78,9 @@
 	max_ammo = 30
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 
+/obj/item/ammo_box/magazine/akm/starts_empty
+    start_empty = TRUE
+
 /obj/item/ammo_box/magazine/akm/ricochet
 	name = "AKM magazine (MATCH)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы с высокой рикошетностью."
@@ -115,6 +118,9 @@
 	max_ammo = 15
 	ammo_type = /obj/item/ammo_casing/a762x39/civilian
 	caliber = CALIBER_762x39mmCiv
+
+/obj/item/ammo_box/magazine/akm/civ/starts_empty
+    start_empty = TRUE
 
 /obj/item/ammo_box/magazine/akm/hunting
 	name = "AKM magazine (HUNT)"

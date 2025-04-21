@@ -65,7 +65,7 @@
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c40sol_rifle
 	fire_delay = 0.75 SECONDS
 	spread = 0
-	projectile_damage_multiplier = 1.2
+	projectile_damage_multiplier = 1.1
 	projectile_wound_bonus = 10
 	recoil = 0.1
 

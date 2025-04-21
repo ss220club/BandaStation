@@ -13,7 +13,7 @@
 
 /datum/supply_pack/security/wespe_ammo
 	name = ".35 Sol Short Ammo Crate"
-	desc = "Не хватает патронов? Не беспокойтесь, в этом ящике вы найдете два нелетальных магазина и два летальных магазина калибра .35 Sol Short, и соответствующие коробки с боеприпасами."
+	desc = "В этом ящике находятся два нелетальных магазина и два летальных магазина калибра .35 Sol Short, и соответствующие коробки с боеприпасами."
 	cost = CARGO_CRATE_VALUE * 6
 	access_view = ACCESS_SECURITY
 	contains = list(
@@ -26,7 +26,7 @@
 
 /datum/supply_pack/security/wespe_ammospecial
 	name = ".35 Sol Short Special Ammo Crate"
-	desc = "Нужны особые боеприпасы? Не беспокойтесь, в этом ящике вы найдете два бронебойных магазина и два экспансивных магазина калибра .35 Sol Short, и соответствующие коробки с боеприпасами."
+	desc = "В этом ящике находятся два бронебойных магазина и два экспансивных магазина калибра .35 Sol Short, и соответствующие коробки с боеприпасами."
 	cost = CARGO_CRATE_VALUE * 8
 	access_view = ACCESS_SECURITY
 	contains = list(
@@ -39,7 +39,7 @@
 
 /datum/supply_pack/security/wespe_mags_extended
 	name = ".35 Sol Short Extended Magazines Crate"
-	desc = "Не хватает патронов в магазине? Не беспокойтесь, в этом ящике находятся два увеличенных магазина калибра .35 Sol Short."
+	desc = "В этом ящике находятся два увеличенных магазина калибра .35 Sol Short."
 	cost = CARGO_CRATE_VALUE * 4
 	access_view = ACCESS_SECURITY
 	contains = list(
@@ -102,3 +102,98 @@
 	contains = list(
 		/obj/item/ammo_box/c35sol = 1,
 		)
+
+/datum/supply_pack/security/armory/akm_civ
+    name = "Sabel-42 Carbine Crate"
+	desc = "Вам нужна надежная винтовка для самообороны, спортивной стрельбы или охоты? Тогда 'Сабля' станет отличным вариантов для вас! \
+	В этом ящике находится один карабин 'Сабля-42' вместе с дополнительным магазином, а также коробками гражданских и нелетальных патронов калибра 7.62мм."
+	cost = CARGO_CRATE_VALUE * 100 //~20000
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/gun/ballistic/automatic/akm/civ = 1,
+		/obj/item/ammo_box/magazine/akm/civ = 1,
+		/obj/item/ammo_box/a762x39/civilian = 1,
+		/obj/item/ammo_box/a762x39/civilian/rubber = 1,
+		)
+	crate_name = "Sabel-42 carbine crate"
+
+/datum/supply_pack/security/armory/akm_civ_magazines
+    name = "Civilian 7.62x39mm Magazines Crate"
+	desc = "B этом ящике находятся два магазина гражданского назначения калибра 7.62мм."
+	cost = CARGO_CRATE_VALUE * 10 //~2000
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/ammo_box/magazine/akm/civ/starts_empty = 2,
+		)
+	crate_name = "Civilian 7.62x39mm magazines crate"
+
+/datum/supply_pack/security/armory/akm_civ_ammoboxes
+    name = "Civilian 7.62x39mm Ammo Crate"
+	desc = "В этом ящике находятся две коробки патронов гражданского назначения калибра 7.62мм."
+	cost = CARGO_CRATE_VALUE * 10 //~2000
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/ammo_box/a762x39/civilian = 1,
+		/obj/item/ammo_box/a762x39/civilian/rubber = 1,
+		)
+	crate_name = "Civilian 7.62x39mm ammo crate"
+
+/datum/supply_pack/goody/akm_hunting
+    name = "Civilian 7.62x39mm Hunting Ammo Box"
+	desc = "Хотите поохотится с вашим новым карабином? Не проблема, в этом ящике вы найдете коробку охотничьих калибра 7.62мм."
+	cost = CARGO_CRATE_VALUE * 12 //~2400
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/a762x39/civilian/hunting = 1,
+		)
+
+/datum/supply_pack/goody/akm_civ_goody
+    name = "Sabel-42 Carbine Single-Pack"
+	desc = "Вам нужна надежная винтовка для самообороны, спортивной стрельбы или охоты? Тогда 'Сабля' станет отличным вариантов для вас! \
+	В этом ящике находится один карабин 'Сабля-42'."
+	cost = CARGO_CRATE_VALUE * 75 //~15000
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/gun/ballistic/automatic/akm/civ = 1,
+		)
+
+/datum/supply_pack/goody/akm_civ_magazines_goody
+    name = "Civilian 7.62x39mm Magazines"
+	desc = "Нужны магазины калибра 7.62 для вашего карабина? Не проблема, в этом ящике вы найдете два магазина гражданского назначения калибра 7.62мм."
+	cost = CARGO_CRATE_VALUE * 12 //~2400
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/akm/civ/starts_empty = 2,
+		)
+
+/datum/supply_pack/goody/akm_civ_ammoboxes
+    name = "Civilian 7.62x39mm Ammo Boxes"
+	desc = "Нужны патроны калибра 7.62 для вашей винтовки? Не проблема, в этом ящике вы найдете коробку патронов гражданского назначения калибра 7.62мм."
+	cost = CARGO_CRATE_VALUE * 12 //~2400
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/a762x39/civilian = 1,
+		)
+
+/datum/supply_pack/security/armory/sol_rifle_marksman
+    name = ".40 Sol Long Carwo Marksman Rifle"
+	desc = "Этот ящик содержит одну тяжелую марксманскую винтовку ТСФ калибра .40 Sol Long вместе с одним магазином осколочно-резиновых патронов. \
+	Отличный инструмент для ликвидации серьезных угроз."
+	cost = CARGO_CRATE_VALUE * 125 //~25000
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/gun/ballistic/automatic/sol_rifle/marksman = 1,
+		/obj/item/magazine/c40sol_rifle/fragmentation = 1,
+		)
+	crate_name = "Carwo marksman rifle crate"
+
+/datum/supply_pack/security/armory/sol_rifle_ammo
+    name = ".40 Sol Long Ammo Crate"
+	desc = "Этот ящик содержит одну коробку нелетальных и одну коробку летальных боеприпасов калибра .40 Sol Long."
+	cost = CARGO_CRATE_VALUE * 20 //~4000
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/ammo_box/c40sol/fragmentation = 1,
+		/obj/item/ammo_box/c40sol = 1,
+		)
+	crate_name = ".40 Sol Long ammo crate"
