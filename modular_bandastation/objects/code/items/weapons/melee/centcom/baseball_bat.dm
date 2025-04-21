@@ -42,7 +42,7 @@
 		to_chat(user, span_userdanger("Это - оружие истинного правосудия. Тебе не дано обуздать его мощь."))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			H.apply_damage(rand(force/2, force), BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+			H.apply_damage(rand(force/2, force), BRUTE, H.get_active_hand())
 		else
 			user.adjustBruteLoss(rand(force/2, force))
 
