@@ -101,7 +101,7 @@
 	/** BANDASTATION ADDITION - START */
 	data["loadout_leftpoints"] = preferences.loadout_points
 	data["loadout_maxpoints"] = preferences.get_loadout_points()
-	data["donator_level"] = preferences.parent.donator_level
+	data["donator_level"] = preferences.parent.get_donator_level()
 	/** BANDASTATION ADDITION - END */
 	return data
 
