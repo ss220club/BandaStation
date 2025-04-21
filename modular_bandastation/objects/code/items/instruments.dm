@@ -29,7 +29,7 @@
 	legacy_instrument_path = "soundhand_drums"
 
 /obj/item/instrument/soundhand_metal_guitar
-	name = "гитара Арии"
+	name = "Aria's guitar"
 	desc = "Тяжелая гитара со встроенными эффектами дисторшена и овердрайва. Эта гитара украшена пламенем в районе корпуса и подписью Арии Вильвен."
 	icon_state = "elguitar_fire"
 	icon = 'modular_bandastation/objects/icons/obj/items/samurai_guitar.dmi'
@@ -45,7 +45,7 @@
 	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
 
 /obj/item/instrument/soundhand_bass_guitar
-	name = "бас-гитара"
+	name = "bass guitar"
 	desc = "Тяжелая гитара с сокращенным количеством широких струн для извлечения низкочастотных звуков."
 	icon_state = "bluegitara"
 	icon = 'modular_bandastation/objects/icons/obj/items/samurai_guitar.dmi'
@@ -61,7 +61,7 @@
 	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
 
 /obj/item/instrument/soundhand_rock_guitar
-	name = "рок-гитара"
+	name = "rock guitar"
 	desc = "Тяжелая гитара со встроенными эффектами дисторшена и овердрайва"
 	icon_state = "elguitar"
 	icon = 'modular_bandastation/objects/icons/obj/items/samurai_guitar.dmi'
@@ -73,7 +73,7 @@
 	allowed_instrument_ids = list("cshmetalgt", "cshrockgt", "csteelgt", "ccleangt")
 
 /obj/structure/musician/drumskit
-	name = "\proper барабанная установка"
+	name = "drum kit"
 	desc = "Складная барбанная установка с несколькими томами и тарелками."
 	icon = 'modular_bandastation/objects/icons/obj/items/samurai_guitar.dmi'
 	icon_state = "drum_red_unanchored"
