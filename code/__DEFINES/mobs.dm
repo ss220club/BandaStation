@@ -147,6 +147,11 @@
 #define SPECIES_ZOMBIE_INFECTIOUS "memezombie"
 #define SPECIES_ZOMBIE_KROKODIL "krokodil_zombie"
 #define SPECIES_VOIDWALKER "voidwalker"
+/// BANDASTATION ADDITION START - Species
+#define SPECIES_VULPKANIN "vulpkanin"
+#define SPECIES_TAJARAN "tajaran"
+#define SPECIES_SKRELL "skrell"
+/// BANDASTATION ADDITION END - Species
 
 // Like species IDs, but not specifically attached a species.
 #define BODYPART_ID_ALIEN "alien"
@@ -984,6 +989,9 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 #define BUTT_SPRITE_PLASMA "plasma"
 #define BUTT_SPRITE_FUZZY "fuzzy"
 #define BUTT_SPRITE_SLIME "slime"
+/// BANDASTATION ADDITION START - Species
+#define BUTT_SPRITE_VULPKANIN "vulpkanin"
+/// BANDASTATION ADDITION END - Species
 
 /// Distance which you can see someone's ID card
 /// Short enough that you can inspect over tables (bartender checking age)
