@@ -386,7 +386,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			is_radio = !!radio_freq,
 			effects = LAZYACCESS(message_mods, MODE_TTS_FILTERS),
 			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE),
-			radio_freq ? CHANNEL_TTS_RADIO : null
+			channel_override = radio_freq ? CHANNEL_TTS_RADIO : null
 		)
 	// BANDASTATION ADDITION END - TTS
 
