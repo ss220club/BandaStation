@@ -3,7 +3,7 @@
 	desc = "A large duffel bag for holding extra tactical supplies. It contains an oiled plastitanium zipper for maximum speed tactical zipping, and is better balanced on your back than an average duffelbag. Can hold three bulky items!"
 	icon_state = "duffel-syndie"
 	inhand_icon_state = "duffel-syndieammo"
-	storage_type = /datum/storage/duffel/syndie/centcom
+	storage_type = /datum/storage/duffel/syndicate/centcom
 	resistance_flags = FIRE_PROOF
 	// No slowdown while unzipped.
 	zip_slowdown = 0
