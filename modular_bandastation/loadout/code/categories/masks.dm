@@ -11,12 +11,12 @@
 		LAZYADD(outfit.backpack_contents, outfit.mask)
 	outfit.mask = item_path
 
-// MARK: Tier 0
+// MARK: Tier 1
 /datum/loadout_item/masks/breathscarf
 	name = "Шарф с системой дыхания"
 	item_path = /obj/item/clothing/mask/breath/breathscarf
+	donator_level = DONATOR_TIER_1
 
-// MARK: Tier 1
 /datum/loadout_item/masks/pig
 	name = "Маска свиньи"
 	item_path = /obj/item/clothing/mask/animal/pig
