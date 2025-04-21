@@ -1,4 +1,0 @@
-author: "AyIong"
-delete-after: True
-changes:
-  - bugfix: "Бэйджики в чате теперь правильно центрируются при кастомной высоте строки"

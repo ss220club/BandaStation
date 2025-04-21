@@ -14045,7 +14045,7 @@
 /obj/effect/turf_decal/tile/dark_blue/anticorner{
 	dir = 4
 	},
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "ewN" = (
@@ -15030,7 +15030,7 @@
 /area/centcom/central_command_areas/conference_room)
 "gHP" = (
 /obj/effect/turf_decal/tile/dark_blue/anticorner,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "gHY" = (
@@ -16333,7 +16333,7 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "jCW" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/requests_console/directional/west,
 /obj/effect/mapping_helpers/requests_console/assistance,
 /obj/effect/mapping_helpers/requests_console/announcement,

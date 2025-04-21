@@ -567,7 +567,7 @@
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain)
 "tV" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/wood/tile,
@@ -897,7 +897,7 @@
 "BS" = (
 /obj/machinery/firealarm/directional/west,
 /obj/machinery/light_switch/directional/north,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/carpet/royalblue,
 /area/station/command/heads_quarters/blueshield)
 "Cb" = (
