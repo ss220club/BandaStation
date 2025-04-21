@@ -80,70 +80,54 @@
 	base_icon_state = "drum_red"
 	layer = 2.5
 	anchored = FALSE
-	var/active = FALSE
-	allowed_instrument_ids = "drums"
-	//Использутся, чтобы отслеживать, персонаж должен лежать или "сидеть" (стоять)
 	buckle_lying = FALSE
-	//Задает состояния и флаги Атома (как я понял) - взято из машинерии, иначе в строчке 75 вышибается ошибка
-	var/stat = 0
+	allowed_instrument_ids = "drums"
+	var/active = FALSE
 
 /obj/structure/musician/drumskit/examine()
 	. = ..()
-	. += "<span class='notice'>Используйте гаечный ключ, чтобы разобрать для транспортировки и собрать для игры.</span>"
+	. += span_notice("Используйте гаечный ключ, чтобы разобрать для транспортировки и собрать для игры.")
 
 /obj/structure/musician/drumskit/Initialize(mapload)
 	. = ..()
-	//Выбирает инструмент по умолчанию
-	song = new(src, "drums")
 	song.instrument_range = 15
-	song.allowed_instrument_ids = "drums"
+	song.allowed_instrument_ids = list("drums")
 	// Для обновления иконки (код взят с кода наушников)
 	RegisterSignal(src, COMSIG_INSTRUMENT_START, PROC_REF(start_playing))
 	RegisterSignal(src, COMSIG_INSTRUMENT_END, PROC_REF(stop_playing))
 
+/obj/structure/musician/drumskit/Destroy()
+	. = ..()
+	UnregisterSignal(src, list(COMSIG_INSTRUMENT_START, COMSIG_INSTRUMENT_END))
+	return ..()
+
+/obj/structure/musician/drumskit/atom_break(damage_flag)
+	. = ..()
+	if(!broken)
+		broken = TRUE
+		update_icon(UPDATE_ICON_STATE)
+
 /obj/structure/musician/drumskit/proc/start_playing()
+	SIGNAL_HANDLER
 	active = TRUE
 	update_icon(UPDATE_ICON_STATE)
 
 /obj/structure/musician/drumskit/proc/stop_playing()
+	SIGNAL_HANDLER
 	active = FALSE
 	update_icon(UPDATE_ICON_STATE)
 
-/obj/structure/musician/drumskit/wrench_act(mob/living/user, obj/item/I)
-	if(active || (resistance_flags & INDESTRUCTIBLE))
-		return
-
-	if(!anchored && !isinspace())
-		to_chat(user, span_notice("You secure [src] to the floor."))
-		anchored = TRUE
-		can_buckle = TRUE
-		layer = 5
-	else if(anchored)
-		to_chat(user, span_notice("You unsecure and disconnect [src]."))
-		anchored = FALSE
-		can_buckle = FALSE
-		layer = 2.5
-
-	update_icon()
-	icon_state = "[base_icon_state][anchored ? null : "_unanchored"]"
-
-	playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
-
-	return TRUE
-
-/obj/structure/musician/drumskit/attack_hand(mob/user)
-	add_fingerprint(user)
-
+/obj/structure/musician/drumskit/ui_interact(mob/user)
 	if(!anchored)
 		return
-
-	ui_interact(user)
+	. = ..()
 
 /obj/structure/musician/drumskit/update_icon_state()
-	. = ..()
-	if(stat & (BROKEN))
-		icon_state = "[base_icon_state]_broken"
-	else if(anchored)
+	if(anchored)
 		icon_state = "[base_icon_state][active ? "_active" : null]"
+	else if(broken)
+		icon_state = "[base_icon_state]_broken"
+	else
+		icon_state = "[base_icon_state]_unanchored"
 
-	setDir(SOUTH)
+	return ..()
