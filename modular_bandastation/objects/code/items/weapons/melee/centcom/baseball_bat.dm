@@ -72,7 +72,6 @@
 		var/mob/living/carbon/human/H = user
 		H.update_overlays()
 	playsound(loc, extend_sound, 50, TRUE)
-	add_fingerprint(user)
 
 /obj/item/melee/baseball_bat/homerun/centcom/attack(mob/living/target, mob/living/user)
 	. = ..()
