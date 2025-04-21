@@ -38,8 +38,7 @@ export const tgui_lock: FeatureToggle = {
 export const ui_scale: FeatureToggle = {
   name: 'Масштабирование интерфейсов',
   category: 'ИНТЕРФЕЙС',
-  description:
-    'Должны ли интерфейсы масштабироваться дабы соответствовать масштабированию монитора?',
+  description: 'Должны ли интерфейсы масштабироваться под масштаб в системе?',
   component: CheckboxInput,
 };
 
