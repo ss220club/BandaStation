@@ -2,7 +2,6 @@
 	category_name = "Лицо"
 	category_ui_icon = FA_ICON_MASK
 	type_to_generate = /datum/loadout_item/masks
-	tab_order = /datum/loadout_category/head::tab_order + 1
 
 /datum/loadout_item/masks
 	abstract_type = /datum/loadout_item/masks

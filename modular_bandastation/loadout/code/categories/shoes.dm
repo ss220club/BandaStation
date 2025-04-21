@@ -1,8 +1,7 @@
 /datum/loadout_category/shoes
-	category_name = "Ноги"
+	category_name = "Обувь"
 	category_ui_icon = FA_ICON_SHOE_PRINTS
 	type_to_generate = /datum/loadout_item/shoes
-	tab_order = /datum/loadout_category/head::tab_order + 1
 
 /datum/loadout_item/shoes
 	abstract_type = /datum/loadout_item/shoes

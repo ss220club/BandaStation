@@ -1,8 +1,7 @@
 /datum/loadout_category/uniforms
 	category_name = "Униформы"
-	category_ui_icon = FA_ICON_CIRCLE_USER
+	category_ui_icon = FA_ICON_SHIRT
 	type_to_generate = /datum/loadout_item/uniforms
-	tab_order = /datum/loadout_category/head::tab_order + 1
 
 /datum/loadout_item/uniforms
 	abstract_type = /datum/loadout_item/uniforms

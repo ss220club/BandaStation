@@ -2,7 +2,6 @@
 	category_name = "Верхняя одежда"
 	category_ui_icon = FA_ICON_VEST
 	type_to_generate = /datum/loadout_item/suits
-	tab_order = /datum/loadout_category/head::tab_order + 1
 
 /datum/loadout_item/suits
 	abstract_type = /datum/loadout_item/suits

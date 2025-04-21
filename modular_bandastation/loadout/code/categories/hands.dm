@@ -2,7 +2,6 @@
 	category_name = "Руки"
 	category_ui_icon = FA_ICON_HANDS
 	type_to_generate = /datum/loadout_item/gloves
-	tab_order = /datum/loadout_category/head::tab_order + 1
 
 /datum/loadout_item/gloves
 	abstract_type = /datum/loadout_item/gloves

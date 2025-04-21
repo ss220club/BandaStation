@@ -2,7 +2,6 @@
 	category_name = "Наклейки"
 	category_ui_icon = FA_ICON_ID_CARD
 	type_to_generate = /datum/loadout_item/id_sticker
-	tab_order = /datum/loadout_category/head::tab_order + 1
 
 /datum/loadout_item/id_sticker
 	abstract_type = /datum/loadout_item/id_sticker
