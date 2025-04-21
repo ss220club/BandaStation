@@ -262,7 +262,7 @@ function QuirkPopper(props: QuirkPopperProps) {
           <Button
             selected={customizationExpanded}
             icon="cog"
-            tooltip="Customize"
+            tooltip="Настроить"
             style={{
               float: 'right',
             }}
@@ -345,9 +345,9 @@ export function QuirksPage(props) {
 
     if (quirk.value > 0) {
       if (maxPositiveQuirks !== -1 && positiveQuirks >= maxPositiveQuirks) {
-        return "You can't have any more positive quirks!";
+        return 'Вы не можете иметь еще больше позитивных черт!';
       } else if (pointsEnabled && balance + quirk.value > 0) {
-        return 'You need a negative quirk to balance this out!';
+        return 'Вам нужна отрицательная черта, чтобы получить очки!';
       }
     }
 
@@ -365,7 +365,7 @@ export function QuirksPage(props) {
           incompatibleQuirk !== quirk.name &&
           selectedQuirkNames.indexOf(incompatibleQuirk) !== -1
         ) {
-          return `This is incompatible with ${incompatibleQuirk}!`;
+          return `Несовместимо с ${incompatibleQuirk}!`;
         }
       }
     }
@@ -379,7 +379,7 @@ export function QuirksPage(props) {
     const quirk = quirkInfo[quirkName];
 
     if (pointsEnabled && balance - quirk.value > 0) {
-      return 'You need to remove a positive quirk first!';
+      return 'Нужно убрать позитивную черту!';
     }
 
     return;
@@ -391,7 +391,7 @@ export function QuirksPage(props) {
         <Stack vertical fill align="center">
           <Stack.Item>
             {maxPositiveQuirks > 0 ? (
-              <Box fontSize="1.3em">Positive Quirks</Box>
+              <Box fontSize="1.3em">Позитивные черты</Box>
             ) : (
               <Box mt={pointsEnabled ? 3.4 : 0} />
             )}
@@ -409,12 +409,12 @@ export function QuirksPage(props) {
 
           <Stack.Item>
             <Box as="b" fontSize="1.6em">
-              Available Quirks
+              Доступные черты
             </Box>
           </Stack.Item>
           <Stack.Item>
             <Input
-              placeholder="Search quirks..."
+              placeholder="Поиск черт..."
               width="200px"
               value={searchQuery}
               onInput={(text, value) => setSearchQuery(value)}
@@ -463,7 +463,7 @@ export function QuirksPage(props) {
         <Stack vertical fill align="center">
           <Stack.Item>
             {pointsEnabled ? (
-              <Box fontSize="1.3em">Quirk Balance</Box>
+              <Box fontSize="1.3em">Баланс черт</Box>
             ) : (
               <Box mt={maxPositiveQuirks > 0 ? 3.4 : 0} />
             )}
@@ -477,7 +477,7 @@ export function QuirksPage(props) {
           </Stack.Item>
           <Stack.Item>
             <Box as="b" fontSize="1.6em">
-              Current Quirks
+              Текущие черты
             </Box>
           </Stack.Item>
           <Stack.Item p={1.5} /> {/* Filler to better align the menu*/}
