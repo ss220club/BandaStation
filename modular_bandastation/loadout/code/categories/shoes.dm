@@ -7,12 +7,7 @@
 /datum/loadout_item/shoes
 	abstract_type = /datum/loadout_item/shoes
 
-/datum/loadout_item/glasses/insert_path_into_outfit(datum/outfit/outfit, mob/living/carbon/human/equipper, visuals_only = FALSE)
-	if(outfit.shoes)
-		LAZYADD(outfit.backpack_contents, outfit.shoes)
-	outfit.shoes = item_path
-
-///Т0
+// MARK: Tier 0
 /datum/loadout_item/shoes/sneakers
 	name = "Кросовки"
 	item_path = /obj/item/clothing/shoes/sneakers
@@ -28,10 +23,6 @@
 /datum/loadout_item/shoes/roman
 	name = "Римские сандалии"
 	item_path = /obj/item/clothing/shoes/roman
-
-/datum/loadout_item/shoes/ducky_shoes
-	name = "Утинные тапки"
-	item_path = /obj/item/clothing/shoes/ducky_shoes
 
 /datum/loadout_item/shoes/laceup
 	name = "Туфли"
@@ -49,10 +40,19 @@
 	name = "Берцы"
 	item_path = /obj/item/clothing/shoes/jackboots
 
+// MARK: Tier 1
+/datum/loadout_item/shoes/ducky_shoes
+	name = "Утинные тапки"
+	item_path = /obj/item/clothing/shoes/ducky_shoes
+	donator_level = DONATOR_TIER_1
+
+// MARK: Tier 2
 /datum/loadout_item/shoes/shark_shoes
 	name = "Акульи тапочки"
 	item_path = /obj/item/clothing/shoes/shark
+	donator_level = DONATOR_TIER_2
 
 /datum/loadout_item/shoes/shark_light_shoes
 	name = "Акульи тапочки (светло-голубые)"
 	item_path = /obj/item/clothing/shoes/shark/light
+	donator_level = DONATOR_TIER_2

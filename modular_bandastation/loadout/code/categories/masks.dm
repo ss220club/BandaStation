@@ -7,12 +7,12 @@
 /datum/loadout_item/masks
 	abstract_type = /datum/loadout_item/masks
 
-/datum/loadout_item/glasses/insert_path_into_outfit(datum/outfit/outfit, mob/living/carbon/human/equipper, visuals_only = FALSE)
+/datum/loadout_item/masks/insert_path_into_outfit(datum/outfit/outfit, mob/living/carbon/human/equipper, visuals_only = FALSE)
 	if(outfit.mask)
 		LAZYADD(outfit.backpack_contents, outfit.mask)
 	outfit.mask = item_path
 
-///Т0
+// MARK: Tier 0
 /datum/loadout_item/masks/pig
 	name = "Маска свиньи"
 	item_path = /obj/item/clothing/mask/animal/pig
@@ -29,7 +29,8 @@
 	name = "Шарф с системой дыхания"
 	item_path = /obj/item/clothing/mask/breath/breathscarf
 
-///Т2
+// MARK: Tier 2
 /datum/loadout_item/masks/red_gas
 	name = "ПРС-1"
 	item_path = /obj/item/clothing/mask/breath/red_gas
+	donator_level = DONATOR_TIER_2

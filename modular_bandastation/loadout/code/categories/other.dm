@@ -33,20 +33,3 @@
 /datum/loadout_item/pocket_items/plush/hampter_sec
 	name = "Хамптер офицер"
 	item_path = /obj/item/toy/plush/hampter/security
-
-///Т0
-/datum/loadout_item/pocket_items/wallet/nt
-	name = "Бумажник NT"
-	item_path = /obj/item/storage/wallet/nt
-
-/datum/loadout_item/pocket_items/wallet/ussp_1
-	name = "Бумажник СССП"
-	item_path = /obj/item/storage/wallet/ussp_1
-
-/datum/loadout_item/pocket_items/wallet/ussp_2
-	name = "Бумажник СССП"
-	item_path = /obj/item/storage/wallet/ussp_2
-
-/datum/loadout_item/pocket_items/wallet/wyci
-	name = "Бумажник W.Y.C.I."
-	item_path = /obj/item/storage/wallet/wyci
