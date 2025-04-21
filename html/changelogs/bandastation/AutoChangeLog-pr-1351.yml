@@ -1,5 +1,0 @@
-author: "Gaxeer"
-delete-after: True
-changes:
-  - rscdel: "Отключает такие трейты станции:\n- random_spawns\n- colored_assistants"
-  - balance: "Снизил шанс блекаута зоны при трейте блекаута с 60% до 30%"
