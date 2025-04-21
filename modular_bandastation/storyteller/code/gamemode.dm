@@ -201,7 +201,6 @@ SUBSYSTEM_DEF(gamemode)
 		flags |= SS_NO_FIRE
 		return SS_INIT_NO_NEED
 
-	selected_storyteller = /datum/storyteller/angryverse
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/gamemode/fire(resumed = FALSE)
