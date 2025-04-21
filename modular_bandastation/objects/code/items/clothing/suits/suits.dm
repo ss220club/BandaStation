@@ -28,9 +28,9 @@
 /obj/item/clothing/suit/hooded/shark_costume/light
 	name = "light shark costume"
 	icon_state = "shark_casual_light"
-	hoodtype = /obj/item/clothing/head/hooded/shark_hood/light_par
+	hoodtype = /obj/item/clothing/head/hooded/shark_hood_par/light_par
 
-/obj/item/clothing/head/hooded/shark_hood/light_par
+/obj/item/clothing/head/hooded/shark_hood_par/light_par
 	name = "light shark hood"
 	icon_state = "shark_casual_light"
 

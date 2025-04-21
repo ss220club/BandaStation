@@ -6,9 +6,6 @@
 /datum/loadout_item/id_sticker
 	abstract_type = /datum/loadout_item/id_sticker
 
-/datum/loadout_item/id_sticker/insert_path_into_outfit(datum/outfit/outfit, mob/living/carbon/human/equipper, visuals_only = FALSE)
-	return
-
 // MARK: Tier 0
 /datum/loadout_item/id_sticker/id_decal_colored
 	name = "Голографическая"
