@@ -91,7 +91,6 @@
 /obj/structure/musician/drumskit/Initialize(mapload)
 	. = ..()
 	song.instrument_range = 15
-	song.allowed_instrument_ids = list("drums")
 	// Для обновления иконки (код взят с кода наушников)
 	RegisterSignal(src, COMSIG_INSTRUMENT_START, PROC_REF(start_playing))
 	RegisterSignal(src, COMSIG_INSTRUMENT_END, PROC_REF(stop_playing))
