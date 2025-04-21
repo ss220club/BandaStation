@@ -226,7 +226,8 @@
 				FALSE, \
 				list(/datum/singleton/sound_effect/announcement), \
 				null, \
-				sound_to_play \
+				sound_to_play, \
+				CHANNEL_TTS_ANNOUNCEMENT, \
 			)
 			// BANDASTATION EDIT END - TTS
 
