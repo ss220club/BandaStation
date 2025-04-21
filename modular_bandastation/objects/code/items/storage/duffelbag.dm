@@ -9,7 +9,6 @@
 	zip_slowdown = 0
 	// Faster unzipping. Utilizes the same noise as zipping up to fit the unzip duration.
 	unzip_duration = 0.5 SECONDS
-	unzip_sfx = 'sound/items/zip/zip_up.ogg'
 
 /datum/storage/duffel/centcom
 	silent = TRUE
