@@ -6,7 +6,7 @@
 #define CHARGE_LEVEL_OVERCHARGE 4
 
 /obj/item/melee/sabre/vibroblade
-	name = "\improper vibroblade"
+	name = "vibroblade"
 	desc = "Виброклинок воинов Раскинта. Микрогенератор ультразвука в рукояти позволяет лезвию вибрировать \
 		с огромной частотой, что позволяет при его достаточной зарядке наносить глубокие раны даже ударами по касательной."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/vibroblade.dmi'
@@ -62,8 +62,7 @@
 		? span_danger("Следующий удар будет крайне травмирующим!") \
 		: span_warning("Следующий удар будет усиленным!")
 
-/obj/item/melee/sabre/vibroblade/attack_self(mob/living/user)
-	. = ..()
+/obj/item/melee/sabre/vibroblade/attack_self(mob/living/carbon/target, mob/living/user, def_zone)
 	if(charge_level >= max_charge_level)
 		user.visible_message(
 			span_notice("[user.name] пытается зарядить [src], но кнопка на рукояти не поддается!"),
@@ -82,11 +81,7 @@
 	do_sparks(1, TRUE, src)
 	set_charge_level(charge_level + 1)
 
-/obj/item/melee/sabre/vibroblade/pre_attack(atom/A, mob/living/user, params)
-	. = ..()
-	force = initial(force) * get_damage_factor()
-
-/obj/item/melee/sabre/vibroblade/attack_self(mob/living/carbon/target, mob/living/user, def_zone)
+/obj/item/melee/sabre/vibroblade/afterattack(mob/living/carbon/target, mob/user, click_parameters)
 	var/obj/item/bodypart/selected_bodypart
 	if(user.zone_selected in cutoff_candidates)
 		selected_bodypart = target.get_bodypart(user.zone_selected)
@@ -99,7 +94,7 @@
 
 		// We compare these in case the body part hasn't been cut off by standard attack logic
 		if(after_attack_bodypart == selected_bodypart)
-			after_attack_bodypart.drop_limb(TRUE)
+			after_attack_bodypart.dismember(TRUE)
 		user.visible_message(
 			span_danger("[user] изящно и непринужденно отсекает [selected_bodypart] [target]!"),
 			span_danger("Вы искусно отсекаете [selected_bodypart] [target]!")
@@ -107,12 +102,16 @@
 
 	set_charge_level(CHARGE_LEVEL_NONE)
 
+/obj/item/melee/sabre/vibroblade/pre_attack(atom/A, mob/living/user, params)
+	. = ..()
+	force = initial(force) * get_damage_factor()
+
 /obj/item/melee/sabre/vibroblade/suicide_act(mob/living/carbon/human/user)
 	var/obj/item/bodypart/head = user.get_bodypart(BODY_ZONE_HEAD)
 	user.visible_message(span_suicide("[user] прижимает лезвие [src] к своей шее и нажимает на кнопку зарядки микрогенератора. \
 		Кажется, это попытка самоубийства!"))
 	user.say("Слава Вечной Империи!")
-	head.drop_limb(TRUE, FALSE, TRUE)
+	head.dismember(SILENT)
 	set_charge_level(CHARGE_LEVEL_NONE)
 	return BRUTELOSS
 
