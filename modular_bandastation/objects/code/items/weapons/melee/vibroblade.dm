@@ -61,7 +61,7 @@
 		? span_danger("Следующий удар будет крайне травмирующим!") \
 		: span_warning("Следующий удар будет усиленным!")
 
-/obj/item/melee/sabre/vibroblade/attack_self(mob/living/user, def_zone)
+/obj/item/melee/sabre/vibroblade/attack_self(mob/living/user, modifiers)
 	if(charge_level >= max_charge_level)
 		user.visible_message(
 			span_notice("[user.name] пытается зарядить [declent_ru(ACCUSATIVE)], но кнопка на рукояти не поддается!"),
