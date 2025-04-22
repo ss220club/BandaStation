@@ -83,7 +83,7 @@
 /obj/item/melee/sabre/vibroblade/afterattack(mob/living/carbon/target, mob/user, click_parameters)
 	if(charge_level == CHARGE_LEVEL_HIGH)
 		target.Knockdown(1.5 SECONDS)
-	else if(charge_level == CHARGE_LEVEL_OVERCHARGE && ishuman(target) && user.zone_selected in cutoff_candidates)
+	else if(charge_level == CHARGE_LEVEL_OVERCHARGE && ishuman(target) && (user.zone_selected in cutoff_candidates))
 		var/obj/item/bodypart/target_bodypart = target.get_bodypart(check_zone(user.zone_selected))
 		if(target_bodypart)
 			target_bodypart.dismember(TRUE)
