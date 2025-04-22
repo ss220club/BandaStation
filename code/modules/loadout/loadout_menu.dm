@@ -66,12 +66,14 @@
 
 /// Select [path] item to [category_slot] slot.
 /datum/preference_middleware/loadout/proc/select_item(datum/loadout_item/selected_item)
+	/// BANDASTATION ADDITION START - Loadout
 	if(preferences.parent.get_donator_level() < selected_item.donator_level)
 		return
 
 	var/points_left = preferences.get_loadout_max_points() - preferences.loadout_points_spent
 	if(points_left < selected_item.cost)
 		return
+	/// BANDASTATION ADDITION END - Loadout
 
 	var/list/loadout = preferences.read_preference(/datum/preference/loadout)
 	var/list/datum/loadout_item/loadout_datums = loadout_list_to_datums(loadout)
