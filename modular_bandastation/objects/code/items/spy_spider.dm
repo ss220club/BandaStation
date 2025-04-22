@@ -8,7 +8,7 @@
 
 /obj/item/clothing/accessory/stealth/spy_spider/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/pinnable_accessory, silent = TRUE)
+	AddComponent(/datum/component/pinnable_accessory, silent = TRUE, pinning_time = 9 DECISECONDS)
 	transmitter = new /obj/item/radio/spider_transmitter(src)
 
 /obj/item/clothing/accessory/stealth/spy_spider/Destroy()
@@ -39,12 +39,6 @@
 
 /obj/item/radio/spider_transmitter/ui_state(mob/user)
 	return GLOB.always_state
-
-/obj/item/encryptionkey/spy_spider
-	name = "Spy Encryption Key"
-	icon = 'modular_bandastation/objects/icons/obj/items/spy_spider.dmi'
-	icon_state = "spy_cypherkey"
-	channels = list("Spy Spider" = TRUE)
 
 /obj/item/storage/lockbox/spy_kit
 	name = "набор жучков"
