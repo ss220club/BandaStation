@@ -1,5 +1,3 @@
-
-//Could be bitflags, but that would require a good amount of translations, which eh, either way works for me
 /// When the event is combat oriented (spawning monsters, inherently hostile antags)
 #define TAG_COMBAT "combat"
 /// When the event is spooky (broken lights, some antags)

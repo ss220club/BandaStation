@@ -27,7 +27,7 @@
 	pixel_y = 8
 	},
 /obj/structure/secure_safe/directional/south,
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/iron/grimy,
 /area/station/security/detectives_office)
 "e" = (

@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - rscadd: "Шарфу-маске теперь можно выбрать цвет"

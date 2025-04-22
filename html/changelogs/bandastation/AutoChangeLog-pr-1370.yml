@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - bugfix: "Лодаут теперь корректно тратит и отображает поинты"
