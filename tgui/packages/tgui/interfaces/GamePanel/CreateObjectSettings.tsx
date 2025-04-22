@@ -8,7 +8,7 @@ import {
   Stack,
   Table,
 } from 'tgui-core/components';
-import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from '@uidotdev/usehooks';
 
 import { useBackend } from '../../backend';
 import {
