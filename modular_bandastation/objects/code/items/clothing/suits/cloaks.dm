@@ -88,3 +88,11 @@
 	icon_state = "ntsc_coat"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
+
+// Skrell Emperor Guard
+/obj/item/clothing/neck/cloak/emperor_guard
+	name = "emperor guards's mantle"
+	desc = "Кроваво-белый плащ Клинков Императора."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "emperor_guard_manlte"
