@@ -1,3 +1,4 @@
+import { useLocalStorage } from '@uidotdev/usehooks';
 import { useState } from 'react';
 import {
   Button,
@@ -6,7 +7,6 @@ import {
   Stack,
   VirtualList,
 } from 'tgui-core/components';
-import { useLocalStorage } from '@uidotdev/usehooks';
 
 import { useBackend } from '../../backend';
 import { SearchBar } from '../common/SearchBar';
