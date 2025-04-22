@@ -61,7 +61,7 @@
 		? span_danger("Следующий удар будет крайне травмирующим!") \
 		: span_warning("Следующий удар будет усиленным!")
 
-/obj/item/melee/sabre/vibroblade/attack_self(mob/living/carbon/target, mob/living/user, def_zone)
+/obj/item/melee/sabre/vibroblade/attack_self(mob/living/user, def_zone)
 	if(charge_level >= max_charge_level)
 		user.visible_message(
 			span_notice("[user.name] пытается зарядить [declent_ru(ACCUSATIVE)], но кнопка на рукояти не поддается!"),
@@ -74,7 +74,7 @@
 		span_notice("Вы нажимаете на кнопку зарядки [declent_ru(ACCUSATIVE)], заряжая микрогенератор...")
 	)
 
-	if(!do_after(user, charge_time, target = src, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_HELD_ITEM))
+	if(!do_after(user, charge_time, target = src))
 		return
 	playsound(loc, 'sound/effects/sparks/sparks3.ogg', vol = 10, vary = TRUE)
 	do_sparks(1, TRUE, src)
