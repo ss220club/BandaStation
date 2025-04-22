@@ -25,9 +25,8 @@
 	var/charge_time = 4 SECONDS
 	/// TRUE if the item keeps charge only when is held in hands. FALSE if the item always keeps charge.
 	var/hold_to_be_charged = TRUE
-	var/emp_proof = FALSE
 	/// Body parts that can be cut off.
-	var/list/cutoff_candidates = list(
+	var/static/list/cutoff_candidates = list(
 		BODY_ZONE_L_LEG,
 		BODY_ZONE_R_LEG,
 		BODY_ZONE_L_ARM,
@@ -47,17 +46,17 @@
 	UnregisterSignal(src, COMSIG_MOVABLE_POST_THROW)
 
 /obj/item/melee/sabre/vibroblade/update_icon_state()
-	icon_state = initial(icon_state) + (charge_level > CHARGE_LEVEL_NONE ? "_[charge_level]" : "")
+	icon_state = "[initial(icon_state)][charge_level > CHARGE_LEVEL_NONE ? "_[charge_level]" : ""]"
 	return ..()
 
 /obj/item/melee/sabre/vibroblade/examine(mob/user)
 	. = ..()
-	. += span_notice("Используйте [src] в руке, чтобы повысить уровень заряда.")
+	. += span_notice("Используйте [declent_ru(ACCUSATIVE)] в руке, чтобы повысить уровень заряда.")
 	if(charge_level == CHARGE_LEVEL_NONE)
-		. += span_notice("[src] не заряжен.")
+		. += span_notice("[capitalize(declent_ru(NOMINATIVE))] не заряжен.")
 		return
 
-	. += span_notice("[src] заряжен на [(charge_level / max_charge_level)*100]%.")
+	. += span_notice("[capitalize(declent_ru(NOMINATIVE))] заряжен на [(charge_level / max_charge_level)*100]%.")
 	. += charge_level == max_charge_level \
 		? span_danger("Следующий удар будет крайне травмирующим!") \
 		: span_warning("Следующий удар будет усиленным!")
@@ -65,14 +64,14 @@
 /obj/item/melee/sabre/vibroblade/attack_self(mob/living/carbon/target, mob/living/user, def_zone)
 	if(charge_level >= max_charge_level)
 		user.visible_message(
-			span_notice("[user.name] пытается зарядить [src], но кнопка на рукояти не поддается!"),
-			span_notice("Вы пытаетесь нажать на кнопку зарядки [src], но она заблокирована.")
+			span_notice("[user.name] пытается зарядить [declent_ru(ACCUSATIVE)], но кнопка на рукояти не поддается!"),
+			span_notice("Вы пытаетесь нажать на кнопку зарядки [declent_ru(ACCUSATIVE)], но она заблокирована.")
 		)
 		return FALSE
 
 	user.visible_message(
-		span_notice("[user.name] нажимает на кнопку зарядки [src]..."),
-		span_notice("Вы нажимаете на кнопку зарядки [src], заряжая микрогенератор...")
+		span_notice("[user.name] нажимает на кнопку зарядки [declent_ru(ACCUSATIVE)]..."),
+		span_notice("Вы нажимаете на кнопку зарядки [declent_ru(ACCUSATIVE)], заряжая микрогенератор...")
 	)
 
 	if(!do_after(user, charge_time, target = src, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_HELD_ITEM))
@@ -82,23 +81,16 @@
 	set_charge_level(charge_level + 1)
 
 /obj/item/melee/sabre/vibroblade/afterattack(mob/living/carbon/target, mob/user, click_parameters)
-	var/obj/item/bodypart/selected_bodypart
-	if(user.zone_selected in cutoff_candidates)
-		selected_bodypart = target.get_bodypart(user.zone_selected)
-	. = ..()
-
 	if(charge_level == CHARGE_LEVEL_HIGH)
 		target.Knockdown(1.5 SECONDS)
-	else if(charge_level == CHARGE_LEVEL_OVERCHARGE && selected_bodypart && istype(target, /mob/living/carbon/human))
-		var/obj/item/bodypart/after_attack_bodypart = target.get_bodypart(user.zone_selected)
-
-		// We compare these in case the body part hasn't been cut off by standard attack logic
-		if(after_attack_bodypart == selected_bodypart)
-			after_attack_bodypart.dismember(TRUE)
-		user.visible_message(
-			span_danger("[user] изящно и непринужденно отсекает [selected_bodypart] [target]!"),
-			span_danger("Вы искусно отсекаете [selected_bodypart] [target]!")
-		)
+	else if(charge_level == CHARGE_LEVEL_OVERCHARGE && ishuman(target))
+		var/obj/item/bodypart/target_bodypart = target.get_bodypart(check_zone(user.zone_selected))
+		if(target_bodypart)
+			target_bodypart.dismember(TRUE)
+			user.visible_message(
+				span_danger("[user] изящно и непринужденно отсекает [target_bodypart] [target]!"),
+				span_danger("Вы искусно отсекаете [target_bodypart] [target]!")
+			)
 
 	set_charge_level(CHARGE_LEVEL_NONE)
 
@@ -106,18 +98,18 @@
 	. = ..()
 	force = initial(force) * get_damage_factor()
 
-/obj/item/melee/sabre/vibroblade/suicide_act(mob/living/carbon/human/user)
+/obj/item/melee/sabre/vibroblade/suicide_act(mob/living/user)
 	var/obj/item/bodypart/head = user.get_bodypart(BODY_ZONE_HEAD)
-	user.visible_message(span_suicide("[user] прижимает лезвие [src] к своей шее и нажимает на кнопку зарядки микрогенератора. \
+	user.visible_message(span_suicide("[user] прижимает лезвие [declent_ru(GENITIVE)] к своей шее и нажимает на кнопку зарядки микрогенератора. \
 		Кажется, это попытка самоубийства!"))
 	user.say("Слава Вечной Империи!")
-	head.dismember(SILENT)
+	head.dismember()
 	set_charge_level(CHARGE_LEVEL_NONE)
 	return BRUTELOSS
 
 /obj/item/melee/sabre/vibroblade/emp_act(severity)
 	. = ..()
-	if(emp_proof)
+	if(. & EMP_PROTECT_SELF)
 		return
 	set_charge_level(CHARGE_LEVEL_NONE)
 
@@ -153,10 +145,12 @@
 	icon_state = "vibroblade_elite"
 	inhand_icon_state = "vibroblade_elite"
 	force = 25
-	force = 25
 	charge_time = 2 SECONDS
 	hold_to_be_charged = FALSE
-	emp_proof = TRUE
+
+/obj/item/melee/sabre/vibroblade/emperor_guard/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
 
 #undef CHARGE_LEVEL_NONE
 #undef CHARGE_LEVEL_LOW
