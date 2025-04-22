@@ -1,26 +1,45 @@
-import { GamePanelTab, GamePanelTabName } from './types';
-
-export const GamePanelTabs = [
-  {
-    name: GamePanelTabName.createObject,
-    content: 'Create Object',
-    icon: 'wrench',
-  },
-  {
-    name: GamePanelTabName.createTurf,
-    content: 'Create Turf',
-    icon: 'map',
-  },
-  {
-    name: GamePanelTabName.createMob,
-    content: 'Create Mob',
-    icon: 'person',
-  },
-] as GamePanelTab[];
-
 export const spawnLocationOptions = [
-  'On floor below own mob',
-  'On floor below own mob, dropped via supply pod',
-  "In own's mob hand",
-  'In marked object',
+  'Current location',
+  'Current location (droppod)',
+  "In own mob's hand",
+  'At a marked object',
+  'Targeted location',
+  'Targeted location (droppod)',
+  "In targeted mob's hand",
 ];
+
+export const listTypes = {
+  Objects: 'cube',
+  Turfs: 'map',
+  Mobs: 'cat',
+};
+
+export const listNames = {
+  Objects: 'Search for objects',
+  Turfs: 'Search for turfs',
+  Mobs: 'Search for mobs',
+};
+
+export const spawnLocationIcons = {
+  'Current location': 'map-marker',
+  'Current location (droppod)': 'parachute-box',
+  "In own mob's hand": 'hand-holding',
+  'At a marked object': 'floppy-disk',
+  'Targeted location': 'crosshairs',
+  'Targeted location (droppod)': 'crosshairs',
+  "In targeted mob's hand": 'crosshairs',
+};
+
+export const directionIcons = {
+  1: 'arrow-up',
+  2: 'arrow-down',
+  4: 'arrow-right',
+  8: 'arrow-left',
+};
+
+export const directionNames = {
+  1: 'NORTH',
+  2: 'SOUTH',
+  4: 'EAST',
+  8: 'WEST',
+};

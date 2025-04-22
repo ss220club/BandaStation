@@ -14,15 +14,33 @@ export type GamePanelTab = {
   icon: string;
 };
 
-export type CreateObjectProps = {
-  objList: CreateObjectData[];
-  tabName: string;
-};
-export type CreateObjectData = {
-  [objectPath: string]: CreateObjectIcon;
-};
+export interface CreateObjectData {
+  Objects: {
+    [key: string]: {
+      icon: string;
+      icon_state: string;
+      name: string;
+      mapping: boolean;
+    };
+  };
+  Turfs: {
+    [key: string]: {
+      icon: string;
+      icon_state: string;
+      name: string;
+      mapping: boolean;
+    };
+  };
+  Mobs: {
+    [key: string]: {
+      icon: string;
+      icon_state: string;
+      name: string;
+      mapping: boolean;
+    };
+  };
+}
 
-export type CreateObjectIcon = {
-  icon: string;
-  iconState: string;
-};
+export interface CreateObjectProps {
+  objList: CreateObjectData;
+}
