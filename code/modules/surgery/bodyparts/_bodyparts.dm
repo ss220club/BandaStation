@@ -209,9 +209,6 @@
 	var/datum/bodypart_overlay/texture/texture_bodypart_overlay
 	/// Lazylist of /datum/status_effect/grouped/bodypart_effect types. Instances of this are applied to the carbon when added the limb is attached, and merged with similair limbs
 	var/list/bodypart_effects
-	// BANDASTATION EDIT START
-	var/species_bodytype
-	// BANDASTATION EDIT STOP
 
 /obj/item/bodypart/apply_fantasy_bonuses(bonus)
 	. = ..()
@@ -978,17 +975,14 @@
 		species_color = ""
 
 	update_draw_color()
-// BANDASTATION EDIT START
-	recolor_bodypart_overlays()
-// BANDASTATION EDIT END
-// BANDASTATION REMOVAL START
-	// // Recolors mutant overlays to match new mutant colors
-	// for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
-	// 	overlay.inherit_color(src, force = TRUE)
-	// // Ensures marking overlays are updated accordingly as well
-	// for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
-	// 	marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], species_color)
-// BANDASTATION REMOVAL END
+
+	// Recolors mutant overlays to match new mutant colors
+	for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
+		overlay.inherit_color(src, force = TRUE)
+	// Ensures marking overlays are updated accordingly as well
+	for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
+		var/marking_color = marking.dna_color_feature_key ? human_owner.dna.features[marking.dna_color_feature_key] : species_color /// BANDASTATION ADDITION - Species
+		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], marking_color) /// BANDASTATION EDIT - Species
 
 	return TRUE
 
@@ -1025,8 +1019,8 @@
 		icon_state = initial(icon_state)//no overlays found, we default back to initial icon.
 		return
 	for(var/image/img as anything in standing)
-		img.pixel_x += px_x
-		img.pixel_y += px_y
+		img.pixel_w += px_x
+		img.pixel_z += px_y
 	add_overlay(standing)
 
 /obj/item/bodypart/update_atom_colour()
@@ -1060,16 +1054,13 @@
 
 	. = list()
 
-	var/image_dir = NONE
-	if(dropped)
-		image_dir = SOUTH
-		if(dmg_overlay_type)
-			if(brutestate)
-				. += image('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0", -DAMAGE_LAYER, image_dir)
-			if(burnstate)
-				. += image('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]", -DAMAGE_LAYER, image_dir)
+	if(dropped && dmg_overlay_type)
+		if(brutestate)
+			. += image('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0", -DAMAGE_LAYER)
+		if(burnstate)
+			. += image('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]", -DAMAGE_LAYER)
 
-	var/image/limb = image(layer = -BODYPARTS_LAYER, dir = image_dir)
+	var/image/limb = image(layer = -BODYPARTS_LAYER)
 	var/image/aux
 
 	// Handles invisibility (not alpha or actual invisibility but invisibility)
@@ -1095,7 +1086,7 @@
 	. += limb
 
 	if(aux_zone) //Hand shit
-		aux = image(limb.icon, "[limb_id]_[aux_zone]", -aux_layer, image_dir)
+		aux = image(limb.icon, "[limb_id]_[aux_zone]", -aux_layer)
 		. += aux
 
 	update_draw_color()
@@ -1118,21 +1109,17 @@
 		var/atom/location = loc || owner || src
 		if(blocks_emissive != EMISSIVE_BLOCK_NONE)
 			var/mutable_appearance/limb_em_block = emissive_blocker(limb.icon, limb.icon_state, location, layer = limb.layer, alpha = limb.alpha)
-			limb_em_block.dir = image_dir
 			. += limb_em_block
 
 			if(aux_zone)
 				var/mutable_appearance/aux_em_block = emissive_blocker(aux.icon, aux.icon_state, location, layer = aux.layer, alpha = aux.alpha)
-				aux_em_block.dir = image_dir
 				. += aux_em_block
 		if(is_emissive)
 			var/mutable_appearance/limb_em = emissive_appearance(limb.icon, "[limb.icon_state]_e", location, layer = limb.layer, alpha = limb.alpha)
-			limb_em.dir = image_dir
 			. += limb_em
 
 			if(aux_zone)
 				var/mutable_appearance/aux_em = emissive_appearance(aux.icon, "[aux.icon_state]_e", location, layer = aux.layer, alpha = aux.alpha)
-				aux_em.dir = image_dir
 				. += aux_em
 	//EMISSIVE CODE END
 
@@ -1144,7 +1131,7 @@
 			//remove the old, unmasked image
 			. -= limb_image
 			//add two masked images based on the old one
-			. += leg_source.generate_masked_leg(limb_image, image_dir)
+			. += leg_source.generate_masked_leg(limb_image)
 
 	// And finally put bodypart_overlays on if not husked
 	if(!is_husked)
@@ -1364,13 +1351,6 @@
 	if(current_gauze.absorption_capacity <= 0)
 		owner.visible_message(span_danger("\The [current_gauze.name] on [owner]'s [name] falls away in rags."), span_warning("\The [current_gauze.name] on your [name] falls away in rags."), vision_distance=COMBAT_MESSAGE_RANGE)
 		QDEL_NULL(current_gauze)
-
-// BANDASTATION EDIT START
-///Loops through all of the bodypart's external organs and update's their color.
-/obj/item/bodypart/proc/recolor_bodypart_overlays()
-	for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
-		overlay.inherit_color(src, force = TRUE)
-// BANDASTATION EDIT END
 
 ///A multi-purpose setter for all things immediately important to the icon and iconstate of the limb.
 /obj/item/bodypart/proc/change_appearance(icon, id, greyscale, dimorphic)

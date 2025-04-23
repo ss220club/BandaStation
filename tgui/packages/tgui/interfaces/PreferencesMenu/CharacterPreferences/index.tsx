@@ -30,12 +30,13 @@ type ProfileProps = {
 };
 
 function CharacterProfiles(props: ProfileProps) {
+  const { data } = useBackend<PreferencesMenuData>();
   const { activeSlot, onClick, profiles } = props;
 
   return (
     <Stack justify="center" wrap>
       {profiles.map((profile, slot) => (
-        <Stack.Item key={slot} mb={1}>
+        <Stack.Item key={slot}>
           <Button
             selected={slot === activeSlot}
             onClick={() => {
@@ -47,6 +48,15 @@ function CharacterProfiles(props: ProfileProps) {
           </Button>
         </Stack.Item>
       ))}
+      {!data.content_unlocked && (
+        <Stack.Item>
+          <Button
+            disabled
+            icon="question"
+            tooltip="Купите BYOND премиум, чтобы открыть больше слотов!"
+          />
+        </Stack.Item>
+      )}
     </Stack>
   );
 }
@@ -108,11 +118,6 @@ export function CharacterPreferenceWindow(props) {
           profiles={data.character_profiles}
         />
       </Stack.Item>
-      {!data.content_unlocked && (
-        <Stack.Item align="center">
-          Купите BYOND премиум, чтобы открыть больше слотов!
-        </Stack.Item>
-      )}
       <Stack.Divider />
       <Stack.Item>
         <Stack fill>
@@ -185,7 +190,7 @@ export function CharacterPreferenceWindow(props) {
         </Stack>
       </Stack.Item>
       <Stack.Divider />
-      <Stack.Item grow position="relative" overflow="hidden auto">
+      <Stack.Item grow position="relative" overflowX="hidden" overflowY="auto">
         {pageContents}
       </Stack.Item>
     </Stack>

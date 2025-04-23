@@ -1,12 +1,13 @@
 SUBSYSTEM_DEF(security_level)
 	name = "Security Level"
 	can_fire = FALSE // We will control when we fire in this subsystem
-	init_order = INIT_ORDER_SECURITY_LEVEL
 	var/set_timer_id = null // BANDASTATION ADDITION
 	/// Currently set security level
 	var/datum/security_level/current_security_level
 	/// A list of initialised security level datums.
 	var/list/available_levels = list()
+	/// A list of alert icon states for use in [/obj/machinery/status_display/evac] (to differentiate them from other display images)
+	var/list/alert_level_icons = list()
 
 // BANDASTATION ADDITION - START
 /proc/cmp_security_levels(datum/security_level/a, datum/security_level/b)
@@ -23,6 +24,7 @@ SUBSYSTEM_DEF(security_level)
 
 	for(var/datum/security_level/level as anything in levels)
 		available_levels[level.name] = level
+		alert_level_icons += level.status_display_icon_state
 	// BANDASTATION EDIT - END
 
 	current_security_level = available_levels[number_level_to_text(SEC_LEVEL_GREEN)]

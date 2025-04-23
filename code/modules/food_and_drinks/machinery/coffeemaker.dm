@@ -492,11 +492,7 @@
 	open_status = FANCY_CONTAINER_ALWAYS_OPEN
 	spawn_type = /obj/item/coffee_cartridge
 	spawn_count = 1
-
-/obj/item/storage/fancy/coffee_cart_rack/Initialize(mapload)
-	. = ..()
-	atom_storage.max_slots = 4
-	atom_storage.set_holdable(/obj/item/coffee_cartridge)
+	storage_type = /datum/storage/coffee_cart_rack
 
 /*
  * impressa coffee maker
@@ -525,13 +521,13 @@
 
 /obj/machinery/coffeemaker/impressa/Destroy()
 	QDEL_NULL(coffeepot)
-	QDEL_NULL(coffee)
+	QDEL_LIST(coffee)
 	return ..()
 
 /obj/machinery/coffeemaker/impressa/examine(mob/user)
 	. = ..()
 	if(coffee)
-		. += span_notice("Внутренняя кофемолка содержит [coffee.len] [declension_ru(coffee.len,"порцию","порции","порций")] кофейных зерен")
+		. += span_notice("Внутренняя кофемолка содержит [length(coffee)] [declension_ru(length(coffee),"порцию","порции","порций")] кофейных зерен")
 
 /obj/machinery/coffeemaker/impressa/update_overlays()
 	. = ..()

@@ -1,8 +1,6 @@
-#define INIT_ORDER_MODPACKS 84
-
 SUBSYSTEM_DEF(modpacks)
 	name = "Modpacks"
-	init_order = INIT_ORDER_MODPACKS
+	init_stage = INITSTAGE_FIRST
 	flags = SS_NO_FIRE
 	var/list/loaded_modpacks = list()
 
@@ -30,7 +28,7 @@ SUBSYSTEM_DEF(modpacks)
 		var/fail_msg = package.post_initialize()
 		if(fail_msg)
 			CRASH("Modpack [(istype(package) && package.name) || "Unknown"] failed to post-initialize: [fail_msg]")
-	
+
 	return SS_INIT_SUCCESS
 
 /client/verb/modpacks_list()

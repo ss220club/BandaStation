@@ -20,6 +20,7 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/facial_hairstyles_female_list //! stores only hair names
 	var/list/hair_gradients_list //! stores /datum/sprite_accessory/hair_gradient indexed by name
 	var/list/facial_hair_gradients_list //! stores /datum/sprite_accessory/facial_hair_gradient indexed by name
+	var/list/hair_masks_list //! stores /datum/hair_mask indexed by type
 
 	//Underwear
 	var/list/underwear_list //! stores /datum/sprite_accessory/underwear indexed by name
@@ -57,9 +58,31 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/caps_list
 	var/list/pod_hair_list
 
+	/// BANDASTATION ADDITION START - Species
+	// Vulpkanin
+	var/list/vulpkanin_head_markings_list
+	var/list/vulpkanin_chest_markings_list
+	var/list/vulpkanin_limb_markings_list
+	var/list/tails_list_vulpkanin
+	var/list/vulpkanin_tail_markings_list
+	var/list/vulpkanin_facial_hair_list
+
+	//  Tajaran
+	var/list/tajaran_head_markings_list
+	var/list/tajaran_chest_markings_list
+	var/list/tajaran_limb_markings_list
+	var/list/tails_list_tajaran
+	var/list/tajaran_tail_markings_list
+	var/list/tajaran_facial_hair_list
+
+	// Skrell
+	var/list/skrell_head_tentacles_list
+	/// BANDASTATION ADDITION END - Species
+
 /datum/controller/subsystem/accessories/PreInit() // this stuff NEEDS to be set up before GLOB for preferences and stuff to work so this must go here. sorry
 	setup_lists()
 	init_hair_gradients()
+	init_hair_masks()
 
 /// Sets up all of the lists for later utilization in the round and building sprites.
 /// In an ideal world we could tack everything that just needed `DEFAULT_SPRITE_LIST` into static variables on the top, but due to the initialization order
@@ -109,6 +132,29 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	moth_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
 	pod_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair)[DEFAULT_SPRITE_LIST]
 
+	/// BANDASTATION ADDITION START - Species
+	//  vulpkanin
+	vulpkanin_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	tails_list_vulpkanin = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/vulpkanin)[DEFAULT_SPRITE_LIST]
+	vulpkanin_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	// tajaran
+	tajaran_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	tails_list_tajaran = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/tajaran)[DEFAULT_SPRITE_LIST]
+	tajaran_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	// skrell
+	skrell_head_tentacles_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/skrell_head_tentacle)[DEFAULT_SPRITE_LIST]
+	/// BANDASTATION ADDITION END - Species
+
 /// This proc just initializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
 /datum/controller/subsystem/accessories/proc/init_hair_gradients()
 	hair_gradients_list = list()
@@ -119,6 +165,12 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 			hair_gradients_list[gradient.name] = gradient
 		if(gradient.gradient_category & GRADIENT_APPLIES_TO_FACIAL_HAIR)
 			facial_hair_gradients_list[gradient.name] = gradient
+
+/datum/controller/subsystem/accessories/proc/init_hair_masks()
+	hair_masks_list = list()
+	for(var/path in subtypesof(/datum/hair_mask))
+		var/datum/hair_mask/mask = new path
+		hair_masks_list[path] = mask
 
 /// This reads the applicable sprite accessory datum's subtypes and adds it to the subsystem's list of sprite accessories.
 /// The boolean `add_blank` argument just adds a "None" option to the list of sprite accessories, like if a felinid doesn't want a tail or something, typically good for gated-off things.
