@@ -49,11 +49,13 @@ export function RandomizationButton(props: Props) {
     <Dropdown
       color={color}
       {...dropdownProps}
+      clipSelectedText={false}
       icon="dice-d20"
-      iconOnly
       options={options}
+      noChevron
       onSelected={setValue}
-      menuWidth={20}
+      menuWidth="120px"
+      width={1.85}
       selected="None"
     />
   );

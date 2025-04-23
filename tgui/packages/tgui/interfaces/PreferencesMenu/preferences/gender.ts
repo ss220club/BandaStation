@@ -1,6 +1,8 @@
 export enum Gender {
   Male = 'male',
   Female = 'female',
+  Other = 'plural',
+  Other2 = 'neuter',
 }
 
 export const GENDERS = {
@@ -12,5 +14,15 @@ export const GENDERS = {
   [Gender.Female]: {
     icon: 'venus',
     text: 'Она/Ее',
+  },
+
+  [Gender.Other]: {
+    icon: 'transgender',
+    text: 'Они/Их',
+  },
+
+  [Gender.Other2]: {
+    icon: 'neuter',
+    text: 'Оно/Его',
   },
 };

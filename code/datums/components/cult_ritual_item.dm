@@ -298,7 +298,6 @@
 	if(ispath(rune_to_scribe, /obj/effect/rune/narsie))
 		if(!scribe_narsie_rune(cultist, user_team))
 			return
-		our_turf = get_turf(cultist) //we may have moved. adjust as needed...
 
 	cultist.visible_message(
 		span_warning("[cultist] [cultist.blood_volume ? "cuts open [cultist.p_their()] arm and begins writing in [cultist.p_their()] own blood":"begins sketching out a strange design"]!"),
@@ -372,7 +371,7 @@
 	var/area/summon_location = get_area(cultist)
 	priority_announce(
 		text = "Зафиксирован призыв древнего божества культистом [cultist.real_name] в [summon_location.get_original_area_name()]. Прервите ритуал любой ценой!",
-		sound = 'modular_bandastation/aesthetics_sounds/sound/announcements/cult_summon.ogg',
+		sound = 'sound/music/antag/bloodcult/bloodcult_scribe.ogg',
 		sender_override = "[command_name()]: Отдел паранормальных явлений",
 		has_important_message = TRUE,
 	)

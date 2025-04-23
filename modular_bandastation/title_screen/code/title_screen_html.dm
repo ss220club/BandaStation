@@ -1,3 +1,5 @@
+#define MAX_STATION_TRAIT_BUTTONS_VERTICAL 4
+
 /**
  * Get the HTML of title screen.
  */
@@ -14,53 +16,53 @@
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "font-awesome.css")]'>
-			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "brands.min.css")]'>
 			[sheet.css_tag()]
 			<style type='text/css'>
-				[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
-				[styles ? file2text(styles) : ""]
+				[file2text(styles)]
 			</style>
 		</head>
 		<body>
 	"}
 
 	if(screen_image_url)
-		html += {"
-			<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">
-			<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">
-		"}
+		html += {"<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">"}
 
 	html += {"<input type="checkbox" id="hide_menu">"}
 	html += {"<div id="container_notice" class="[SStitle.notice ? "" : "hidden"]">[SStitle.notice]</div>"}
-
 	html += {"<div class="lobby_wrapper">"}
-	html += {"<div class="lobby_container">"}
-
 	html += {"
-		<div class="lobby_element lobby-name">
-			<label class="lobby_element lobby-collapse" for="hide_menu"></label>
-			<span id="character_name">[player.client.prefs.read_preference(/datum/preference/name/real_name)]</span>
-			<div class="logo">
-				<img src="[SSassets.transport.get_asset_url(asset_name = "ss220_logo.png")]">
-			</div>
-		</div>"}
-
-	html += {"<div class="lobby_buttons">"}
-
-	if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
-		html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
-	else
-		html += create_button(player, "late_join", "Присоединиться")
-
-	html += {"
-		[create_button(player, "observe", "Наблюдать")]
-		[create_button(player, "manifest", "Манифест персонала")]
-		<hr>
-		[create_button(player, "character_setup", "Настройка персонажа")]
-		[create_button(player, "settings", "Настройки игры")]
+		<div class="lobby_container">
+			<img class="lobby_background pixelated default" src="[SSassets.transport.get_asset_url(asset_name = "lobby_background.png")]">
+			<img class="lobby_shutter pixelated default" src="[SSassets.transport.get_asset_url(asset_name = "lobby_shutter.png")]">
 	"}
 
+	html += {"
+		<div class="logo">
+			<img src="[SSassets.transport.get_asset_url(asset_name = "ss220_logo.png")]">
+		</div>
+	"}
+
+	html += {"<div class="lobby_buttons-center">"}
+	if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
+		html += create_main_button(player, "toggle_ready", "Готов", player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad")
+	else
+		html += create_main_button(player, "late_join", "Играть")
+
+	html += create_main_button(player, "observe", "Следить")
+	html += create_main_button(player, "character_setup", "Настройка персонажа")
+	html += {"<div class="lobby_element lobby-name"><span id="character_name">[player.client.prefs.read_preference(/datum/preference/name/real_name)]</span></div>"}
+	html += {"</div>"}
+
+	html += {"<div class="lobby_buttons-bottom">"}
+	html += create_icon_button(player, "settings", "Настройки игры")
+	html += create_icon_button(player, "manifest", "Манифест персонала")
+	html += create_icon_button(player, "wiki", "Перейти на вики")
+	html += create_icon_button(player, "changelog", "Открыть чейнджлог")
+	html += {"</div>"}
+
 	if(length(GLOB.lobby_station_traits))
+		html += {"<div class="lobby_buttons-left">"}
+
 		var/number = 0
 		for(var/datum/station_trait/job/trait as anything in GLOB.lobby_station_traits)
 			if(!istype(trait))
@@ -69,49 +71,51 @@
 			if(!trait.can_display_lobby_button(player.client))
 				continue
 
-			number++
-			if(number == 1)
-				html += {"<hr>"}
+			if(number > MAX_STATION_TRAIT_BUTTONS_VERTICAL)
+				break
 
+			number++
+			var/traitID = replacetext(replacetext("[trait.type]", "/datum/station_trait/job/", ""), "/", "-")
 			var/assigned = LAZYFIND(trait.lobby_candidates, player)
 			html += {"
-				<a id="lobby-trait-[number]" class="lobby_element checkbox [assigned ? "good" : "bad"]" href='byond://?src=[REF(player)];trait_signup=[trait.name];id=[number]'>
-					<span class="lobby-text">[trait.name]</span>
-					<div class="lobby-tooltip" data-position="right">
+				<a id="lobby-trait-[number]" class="lobby_button lobby_element" href='byond://?src=[REF(user)];trait_signup=[trait.name];id=[number]'>
+					<div class="toggle">
+						<img class="pixelated default indicator trait_active [assigned ? "" : "hidden"]" src="[SSassets.transport.get_asset_url(asset_name = "lobby_active.png")]">
+						<img class="pixelated default indicator trait_disabled [!assigned ? "" : "hidden"]" src="[SSassets.transport.get_asset_url(asset_name = "lobby_disabled.png")]">
+						<img class="pixelated default indicator" src="[SSassets.transport.get_asset_url(asset_name = "lobby_highlight.png")]">
+					</div>
+					<img class="pixelated default" src="[SSassets.transport.get_asset_url(asset_name = "lobby_[traitID].png")]">
+					<div class="lobby-tooltip" data-position="left">
+						<span class="lobby-tooltip-title">[trait.name]</span>
 						<span class="lobby-tooltip-content">[trait.button_desc]</span>
 					</div>
 				</a>
 			"}
 
-	html += {"
-		<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
-			<hr>
-			[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
-			[create_button(player, "delay", "Отложить начало раунда", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
-			[create_button(player, "notice", "Оставить уведомление")]
-			[create_button(player, "picture", "Сменить изображение")]
-		</div>
-	"}
+		html += {"</div>"}
 
-	html += {"</div></div>"}
-
-	html += {"
-		<div class="lobby_buttons-end">
-			[create_button(player, "wiki", tooltip = "Перейти на вики", tooltip_position = "top-start")]
-			[create_button(player, "discord", tooltip = "Открыть наш дискорд", tooltip_position = "top")]
-			[create_button(player, "changelog", tooltip = "Открыть чейнджлог", tooltip_position = "top-end")]
-		</div>
-	"}
-
+	html += {"<div id="lobby_admin" class="lobby_buttons-right [check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "invisible"]">"}
+	html += create_icon_button(player, "start_now", "Запустить раунд", "right", SSticker && SSticker.current_state <= GAME_STATE_PREGAME)
+	html += create_icon_button(player, "delay", "Отложить начало раунда", "right", SSticker && SSticker.current_state <= GAME_STATE_PREGAME)
+	html += create_icon_button(player, "notice", "Оставить уведомление", "right")
+	html += create_icon_button(player, "picture", "Сменить изображение", "right")
 	html += {"</div>"}
-	html += {"<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>"}
-	html += {"<div id="lobby_info"></div>"}
-	html += {"</body>"}
 
+	html += {"
+		<label class="lobby_element lobby-collapse" for="hide_menu">
+			<span id="collapse" class="lobby-text toggle good">˄</span>
+			<img class="pixelated default" src="[SSassets.transport.get_asset_url(asset_name = "lobby_collapse.png")]">
+		</label>
+	"}
+
+	html += {"</div></div></body>"}
 	html += {"
 		<script language="JavaScript">
 			function call_byond(href, value) {
-				window.location = `byond://?src=[REF(player)];${href}=${value}`
+				const request = new XMLHttpRequest();
+				const url = "?src=[REF(player)];" + href + "=" + value;
+				request.open("GET", url);
+				request.send();
 			}
 
 			let ready_int = 0;
@@ -132,8 +136,11 @@
 			}
 
 			function job_sign(assign, id) {
+				/* I FUCKING HATE IE */
 				let traitID;
 				let trait_link;
+				let trait_active;
+				let trait_disabled;
 
 				if(!id) {
 					return
@@ -150,21 +157,26 @@
 				}
 
 				trait_link = document.getElementById(traitID);
+				trait_active = trait_link.querySelector(".trait_active");
+				trait_disabled = trait_link.querySelector(".trait_disabled");
+
 				if(assign === "true") {
-					trait_link.classList.add("good");
-					trait_link.classList.remove("bad");
+					trait_active.classList.remove("hidden");
+					trait_disabled.classList.add("hidden");
+					trait_link.classList.add("active");
 				} else {
-					trait_link.classList.remove("good");
-					trait_link.classList.add("bad");
+					trait_active.classList.add("hidden");
+					trait_disabled.classList.remove("hidden");
+					trait_link.classList.remove("active");
 				}
 			}
 
 			const admin_buttons = document.getElementById("lobby_admin")
 			function admin_buttons_visibility(visible) {
 				if(visible === "true") {
-					admin_buttons.classList.remove("hidden")
+					admin_buttons.classList.remove("invisible")
 				} else {
-					admin_buttons.classList.add("hidden")
+					admin_buttons.classList.add("invisible")
 				}
 			}
 
@@ -184,13 +196,23 @@
 				character_name_slot.textContent = name;
 			}
 
+			let collapsed = false;
+			const collapse = document.getElementById("collapse");
+			function update_collapse() {
+				call_byond("collapse", true)
+				collapsed = !collapsed;
+				if(collapsed) {
+					collapse.textContent = "˅";
+				} else {
+					collapse.textContent = "˄";
+				}
+			}
+
 			let image_src;
 			const image_container = document.getElementById("screen_image");
-			const image_blur_container = document.getElementById("screen_blur");
 			function update_image(image) {
 				image_src = image;
 				image_container.src = image_src;
-				image_blur_container.src = image_src;
 			}
 
 			let attempts = 0;
@@ -215,11 +237,6 @@
 				}
 			}
 
-			const info_placement = document.getElementById("lobby_info");
-			function update_info(info) {
-				info_placement.innerHTML = info;
-			}
-
 			/* Return focus to Byond after click */
 			function reFocus() {
 				call_byond("focus", true);
@@ -227,6 +244,7 @@
 
 			document.addEventListener('keyup', reFocus);
 			document.addEventListener('mouseup', reFocus);
+			collapse.addEventListener('mouseup', update_collapse);
 
 			/* Tell Byond that the title screen is ready */
 			call_byond("title_ready", true);
@@ -236,3 +254,5 @@
 	html += "</html>"
 
 	return html.Join()
+
+#undef MAX_STATION_TRAIT_BUTTONS_VERTICAL

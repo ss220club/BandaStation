@@ -26,7 +26,8 @@
 
 /obj/item/implant/cqc/Initialize(mapload)
 	. = ..()
-	style = new(src)
+	style = new()
+	style.allow_temp_override = FALSE
 
 /obj/item/implant/cqc/Destroy()
 	QDEL_NULL(style)
@@ -36,7 +37,7 @@
 	. = ..()
 	if(isnull(imp_in.mind))
 		return
-	if(style.unlearn(imp_in))
+	if(style.fully_remove(imp_in))
 		return
 
 	style.teach(imp_in, TRUE)

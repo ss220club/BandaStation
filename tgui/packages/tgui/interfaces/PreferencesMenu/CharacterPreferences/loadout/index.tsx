@@ -4,24 +4,23 @@ import { CharacterPreview } from 'tgui/interfaces/common/CharacterPreview';
 import {
   Box,
   Button,
+  Divider,
   Icon,
-  ImageButton,
   Input,
   NoticeBox,
-  ProgressBar,
   Section,
   Stack,
   Tabs,
 } from 'tgui-core/components';
 
 import { useServerPrefs } from '../../useServerPrefs';
-import type {
+import {
   LoadoutCategory,
   LoadoutItem,
   LoadoutManagerData,
   typePath,
 } from './base';
-import { LoadoutTabDisplay, SearchDisplay } from './ItemDisplay';
+import { ItemIcon, LoadoutTabDisplay, SearchDisplay } from './ItemDisplay';
 import { LoadoutModifyDimmer } from './ModifyPanel';
 
 export function LoadoutPage(props) {
@@ -51,7 +50,7 @@ export function LoadoutPage(props) {
         )}
         <Section
           fitted
-          title="Категории"
+          title="&nbsp;"
           buttons={
             <Input
               width="200px"
@@ -73,14 +72,12 @@ export function LoadoutPage(props) {
                   setSearchLoadout('');
                 }}
               >
-                <Stack g={0} vertical textAlign="center">
+                <Box>
                   {curTab.category_icon && (
-                    <Stack.Item>
-                      <Icon name={curTab.category_icon} />
-                    </Stack.Item>
+                    <Icon name={curTab.category_icon} mr={1} />
                   )}
-                  <Stack.Item>{curTab.name}</Stack.Item>
-                </Stack>
+                  {curTab.name}
+                </Box>
               </Tabs.Tab>
             ))}
           </Tabs>
@@ -108,8 +105,6 @@ type LoadoutTabsProps = {
 };
 
 function LoadoutTabs(props: LoadoutTabsProps) {
-  const { data } = useBackend<LoadoutManagerData>();
-  const { loadout_leftpoints, loadout_maxpoints } = data;
   const {
     loadout_tabs,
     currentTab,
@@ -121,13 +116,12 @@ function LoadoutTabs(props: LoadoutTabsProps) {
     return curTab.name === currentTab;
   });
   const searching = currentSearch.length > 1;
-  const leftPoints = loadout_leftpoints || 0;
 
   return (
     <Stack fill>
-      <Stack.Item width="calc(220px + 1rem)" height="100%" align="center">
+      <Stack.Item align="center" width="250px" height="100%">
         <Stack vertical fill>
-          <Stack.Item height="calc(220px + 5rem)">
+          <Stack.Item height="60%">
             <LoadoutPreviewSection />
           </Stack.Item>
           <Stack.Item grow>
@@ -142,33 +136,15 @@ function LoadoutTabs(props: LoadoutTabsProps) {
       <Stack.Item grow>
         {searching || activeCategory?.contents ? (
           <Section
-            title={searching ? 'Результаты поиска' : 'Каталог'}
+            title={searching ? 'Поиск...' : 'Каталог'}
             fill
             scrollable
             buttons={
-              <Stack align="center">
-                {activeCategory?.category_info && (
-                  <Stack.Item italic>{activeCategory.category_info}</Stack.Item>
-                )}
-                <Stack.Item>
-                  <ProgressBar
-                    width={15}
-                    minValue={0}
-                    value={leftPoints}
-                    maxValue={loadout_maxpoints}
-                    ranges={{
-                      good: [0.5 * loadout_maxpoints, 1 * loadout_maxpoints],
-                      average: [
-                        0.25 * loadout_maxpoints,
-                        0.5 * loadout_maxpoints,
-                      ],
-                      bad: [0, 0.25 * loadout_maxpoints],
-                    }}
-                  >
-                    Осталось очков: {leftPoints} / {loadout_maxpoints}
-                  </ProgressBar>
-                </Stack.Item>
-              </Stack>
+              activeCategory?.category_info ? (
+                <Box italic mt={0.5}>
+                  {activeCategory.category_info}
+                </Box>
+              ) : null
             }
           >
             <Stack vertical>
@@ -212,11 +188,12 @@ function typepathToLoadoutItem(
 type LoadoutSelectedItemProps = {
   path: typePath;
   all_tabs: LoadoutCategory[];
+  modifyItemDimmer: LoadoutItem | null;
   setModifyItemDimmer: (dimmer: LoadoutItem | null) => void;
 };
 
 function LoadoutSelectedItem(props: LoadoutSelectedItemProps) {
-  const { all_tabs, path, setModifyItemDimmer } = props;
+  const { all_tabs, path, modifyItemDimmer, setModifyItemDimmer } = props;
   const { act } = useBackend();
 
   const item = typepathToLoadoutItem(path, all_tabs);
@@ -225,34 +202,36 @@ function LoadoutSelectedItem(props: LoadoutSelectedItemProps) {
   }
 
   return (
-    <ImageButton
-      fluid
-      textAlign="left"
-      imageSize={32}
-      dmIcon={item.icon}
-      dmIconState={item.icon_state}
-      buttonsAlt={
-        <>
-          {!!item.buttons.length && (
-            <Button
-              icon="cogs"
-              color="transparent"
-              onClick={() => {
-                setModifyItemDimmer(item);
-              }}
-            />
-          )}
+    <Stack align={'center'}>
+      <Stack.Item>
+        <ItemIcon item={item} scale={1} />
+      </Stack.Item>
+      <Stack.Item width="55%">{item.name}</Stack.Item>
+      {item.buttons.length ? (
+        <Stack.Item>
           <Button
-            icon="times"
-            color="transparent"
-            textColor="red"
-            onClick={() => act('select_item', { path: path, deselect: true })}
-          />
-        </>
-      }
-    >
-      {item.name}
-    </ImageButton>
+            color="none"
+            width="32px"
+            onClick={() => {
+              setModifyItemDimmer(item);
+            }}
+          >
+            <Icon size={1.8} name="cogs" color="grey" />
+          </Button>
+        </Stack.Item>
+      ) : (
+        <Stack.Item width="32px" /> // empty space
+      )}
+      <Stack.Item>
+        <Button
+          color="none"
+          width="32px"
+          onClick={() => act('select_item', { path: path, deselect: true })}
+        >
+          <Icon size={2.4} name="times" color="red" />
+        </Button>
+      </Stack.Item>
+    </Stack>
   );
 }
 
@@ -266,30 +245,37 @@ function LoadoutSelectedSection(props: LoadoutSelectedSectionProps) {
   const { act, data } = useBackend<LoadoutManagerData>();
   const { loadout_list } = data.character_preferences.misc;
   const { all_tabs, modifyItemDimmer, setModifyItemDimmer } = props;
+  const loadout_leftpoints = data.loadout_leftpoints || '0'; // SS220 ADD - Lodout points
   return (
     <Section
-      title="Выбранные предметы"
+      title="Selected Items"
       scrollable
       fill
       buttons={
         <Button.Confirm
+          icon="times"
           color="red"
-          icon="trash-can"
+          align="center"
           disabled={!loadout_list || Object.keys(loadout_list).length === 0}
-          tooltip="Очистить выбранные предметы."
-          tooltipPosition="bottom-end"
+          tooltip="Очищает выбор ВСЕХ предметов из всех категорий."
           onClick={() => act('clear_all_items')}
-        />
+        >
+          Очистить всё
+        </Button.Confirm>
       }
     >
+      Осталось очков: {loadout_leftpoints}
       {loadout_list &&
         Object.entries(loadout_list).map(([path, item]) => (
-          <LoadoutSelectedItem
-            key={path}
-            path={path}
-            all_tabs={all_tabs}
-            setModifyItemDimmer={setModifyItemDimmer}
-          />
+          <Fragment key={path}>
+            <LoadoutSelectedItem
+              path={path}
+              all_tabs={all_tabs}
+              modifyItemDimmer={modifyItemDimmer}
+              setModifyItemDimmer={setModifyItemDimmer}
+            />
+            <Divider />
+          </Fragment>
         ))}
     </Section>
   );
@@ -301,46 +287,45 @@ function LoadoutPreviewSection() {
   return (
     <Section
       fill
-      title="Превью"
+      title="Preview"
       buttons={
-        <Stack>
-          <Stack.Item>
-            <Button
-              icon="chevron-left"
-              onClick={() =>
-                act('rotate_dummy', {
-                  dir: 'left',
-                })
-              }
-            />
-          </Stack.Item>
-          <Stack.Item>
-            <Button
-              icon="chevron-right"
-              onClick={() =>
-                act('rotate_dummy', {
-                  dir: 'right',
-                })
-              }
-            />
-          </Stack.Item>
-          <Stack.Item>
-            <Button
-              align="center"
-              selected={data.job_clothes}
-              color="transparent"
-              icon="user-tie"
-              tooltip="Показывать профессию"
-              tooltipPosition="left"
-              onClick={() => act('toggle_job_clothes')}
-            />
-          </Stack.Item>
-        </Stack>
+        <Button.Checkbox
+          align="center"
+          checked={data.job_clothes}
+          onClick={() => act('toggle_job_clothes')}
+        >
+          Показывать профессию
+        </Button.Checkbox>
       }
     >
       <Stack vertical fill>
         <Stack.Item grow align="center">
           <CharacterPreview height="100%" id={data.character_preview_view} />
+        </Stack.Item>
+        <Stack.Divider />
+        <Stack.Item align="center">
+          <Stack>
+            <Stack.Item>
+              <Button
+                icon="chevron-left"
+                onClick={() =>
+                  act('rotate_dummy', {
+                    dir: 'left',
+                  })
+                }
+              />
+            </Stack.Item>
+            <Stack.Item>
+              <Button
+                icon="chevron-right"
+                onClick={() =>
+                  act('rotate_dummy', {
+                    dir: 'right',
+                  })
+                }
+              />
+            </Stack.Item>
+          </Stack>
         </Stack.Item>
       </Stack>
     </Section>

@@ -30,32 +30,26 @@ export const NtosPortraitPrinter = (props) => {
         <Stack vertical fill>
           <Stack.Item>
             <Section title="Search">
-              <Stack>
-                <Stack.Item grow>
-                  <Input
-                    fluid
-                    placeholder="Search Paintings..."
-                    value={search_string}
-                    onChange={(e, value) => {
-                      act('search', {
-                        to_search: value,
-                      });
-                      setListIndex(0);
-                    }}
-                  />
-                </Stack.Item>
-                <Stack.Item>
-                  <Button
-                    content={search_mode}
-                    onClick={() => {
-                      act('change_search_mode');
-                      if (search_string) {
-                        setListIndex(0);
-                      }
-                    }}
-                  />
-                </Stack.Item>
-              </Stack>
+              <Input
+                fluid
+                placeholder="Search Paintings..."
+                value={search_string}
+                onChange={(e, value) => {
+                  act('search', {
+                    to_search: value,
+                  });
+                  setListIndex(0);
+                }}
+              />
+              <Button
+                content={search_mode}
+                onClick={() => {
+                  act('change_search_mode');
+                  if (search_string) {
+                    setListIndex(0);
+                  }
+                }}
+              />
             </Section>
           </Stack.Item>
           <Stack.Item grow={2}>

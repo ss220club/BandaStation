@@ -143,39 +143,32 @@ function AccessView(props) {
       <Stack.Item grow>
         <Section
           buttons={
-            <Stack fill>
-              <Tooltip
-                content="Включить/отключить трансляцию вашего битрана
-                  на станционные развлекательные экраны."
+            <>
+              <Button.Checkbox
+                checked={broadcasting}
+                disabled={broadcasting_on_cd}
+                onClick={() => act('broadcast')}
+                tooltip="Включить/отключить трансляцию вашего битрана на станционные развлекательные экраны."
               >
-                <Button.Checkbox
-                  checked={broadcasting}
-                  disabled={broadcasting_on_cd}
-                  onClick={() => act('broadcast')}
-                >
-                  Прямой эфир
-                </Button.Checkbox>
-              </Tooltip>
-              <Tooltip
-                content="Получите случайный домен для дополнительных наград.
+                Прямой эфир
+              </Button.Checkbox>
+              <Button
+                disabled={
+                  !ready || occupants > 0 || points < 1 || !!generated_domain
+                }
+                icon="random"
+                onClick={() => act('random_domain')}
+                mr={1}
+                tooltip="Получите случайный домен для дополнительных наград.
                   Взвешено по вашим текущим очкам. Минимум - 1 очко."
               >
-                <Button
-                  disabled={
-                    !ready || occupants > 0 || points < 1 || !!generated_domain
-                  }
-                  icon="random"
-                  onClick={() => act('random_domain')}
-                  mr={1}
-                >
-                  Случайно
-                </Button>
-              </Tooltip>
+                Случайно
+              </Button>
               <Tooltip content="Полученные очки для покупки доменов.">
                 <Icon color="pink" name="star" mr={1} />
                 {points}
               </Tooltip>
-            </Stack>
+            </>
           }
           fill
           scrollable
@@ -234,14 +227,13 @@ function AccessView(props) {
               <NoticeBox info={!!generated_domain}>{selected}</NoticeBox>
             </Stack.Item>
             <Stack.Item>
-              <Tooltip content="Начинает отключение. Уведомит всех подключенных.">
-                <Button.Confirm
-                  disabled={!ready || !generated_domain}
-                  onClick={() => act('stop_domain')}
-                >
-                  Остановить домен
-                </Button.Confirm>
-              </Tooltip>
+              <Button.Confirm
+                disabled={!ready || !generated_domain}
+                onClick={() => act('stop_domain')}
+                tooltip="Начинает отключение. Уведомит всех подключенных."
+              >
+                Остановить домен
+              </Button.Confirm>
             </Stack.Item>
           </Stack>
         </Section>
@@ -290,15 +282,14 @@ function DomainEntry(props: DomainEntryProps) {
   return (
     <Collapsible
       buttons={
-        <Tooltip content={!!generated_domain && 'Остановите текущий домен.'}>
-          <Button
-            disabled={!!generated_domain || !ready || occupied || points < cost}
-            icon={buttonIcon}
-            onClick={() => act('set_domain', { id })}
-          >
-            {buttonName}
-          </Button>
-        </Tooltip>
+        <Button
+          disabled={!!generated_domain || !ready || occupied || points < cost}
+          icon={buttonIcon}
+          onClick={() => act('set_domain', { id })}
+          tooltip={!!generated_domain && 'Остановите текущий домен.'}
+        >
+          {buttonName}
+        </Button>
       }
       color={getColor(difficulty)}
       title={
@@ -362,11 +353,13 @@ const AvatarDisplay = (props) => {
             </Stack.Item>
           )}
           <Stack.Item>
-            <Tooltip content="Обновить информацию аватаров.">
-              <Button icon="sync" onClick={() => act('refresh')}>
-                Обновить
-              </Button>
-            </Tooltip>
+            <Button
+              icon="sync"
+              onClick={() => act('refresh')}
+              tooltip="Обновить информацию аватаров."
+            >
+              Обновить
+            </Button>
           </Stack.Item>
         </Stack>
       }

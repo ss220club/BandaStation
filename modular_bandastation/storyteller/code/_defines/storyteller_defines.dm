@@ -1,3 +1,5 @@
+
+//Could be bitflags, but that would require a good amount of translations, which eh, either way works for me
 /// When the event is combat oriented (spawning monsters, inherently hostile antags)
 #define TAG_COMBAT "combat"
 /// When the event is spooky (broken lights, some antags)
@@ -51,7 +53,7 @@
 
 #define MUNDANE_POINT_THRESHOLD 500
 #define MODERATE_POINT_THRESHOLD 750
-#define MAJOR_POINT_THRESHOLD 2300
+#define MAJOR_POINT_THRESHOLD 1950
 #define ROLESET_POINT_THRESHOLD 1650
 #define OBJECTIVES_POINT_THRESHOLD 8000
 

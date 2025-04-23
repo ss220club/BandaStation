@@ -529,6 +529,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		species_human.overlays_standing[BODY_LAYER] = standing
 
 	species_human.apply_overlay(BODY_LAYER)
+	// BANDASTATION EDIT START
+	update_body_markings(species_human)
+	// BANDASTATION EDIT END
 
 //This exists so sprite accessories can still be per-layer without having to include that layer's
 //number in their sprite name, which causes issues when those numbers change.
@@ -1042,9 +1045,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	if(!istype(owner)) //sanity check for drones.
 		return
 	if(owner.mind)
-		attacker_style = GET_ACTIVE_MARTIAL_ART(owner)
+		attacker_style = owner.mind.martial_art
 	if((owner != target) && target.check_block(owner, 0, owner.declent_ru(ACCUSATIVE), attack_type = UNARMED_ATTACK))
-		log_combat(owner, target, "попытался прикоснуться к")
+		log_combat(owner, target, "attempted to touch")
 		target.visible_message(span_warning("[capitalize(owner.declent_ru(NOMINATIVE))] пытается прикоснуться к [target.declent_ru(DATIVE)]!"), \
 						span_danger("[capitalize(owner.declent_ru(NOMINATIVE))] пытается прикоснуться к вам!"), span_hear("Вы слышите свист!"), COMBAT_MESSAGE_RANGE, owner)
 		to_chat(owner, span_warning("Вы пытаетесь прикоснуться к [target.declent_ru(DATIVE)]!"))
@@ -2043,10 +2046,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 				continue
 
 			var/datum/bodypart_overlay/simple/body_marking/overlay = new markings_type()
-			/// BANDASTATION ADDITION START - Species
-			var/accessory_color = markings.dna_color_feature_key ? hooman.dna.features[markings.dna_color_feature_key] : hooman.dna.features["mcolor"]
-			/// BANDASTATION ADDITION END - Species
-			overlay.set_appearance(accessory_name, accessory_color) /// BANDASTATION EDIT - Species
+			overlay.set_appearance(accessory_name, hooman.dna.features["mcolor"])
 			people_part.add_bodypart_overlay(overlay)
 
 		qdel(markings)
@@ -2056,6 +2056,25 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	for(var/obj/item/bodypart/part as anything in hooman.bodyparts)
 		for(var/datum/bodypart_overlay/simple/body_marking/marking in part.bodypart_overlays)
 			part.remove_bodypart_overlay(marking)
+
+// BANDASTATION EDIT START
+/// Update the overlays if necessary
+/datum/species/proc/update_body_markings(mob/living/carbon/human/hooman)
+	if(HAS_TRAIT(hooman, TRAIT_INVISIBLE_MAN))
+		remove_body_markings(hooman)
+		return
+
+	var/needs_update = FALSE
+	for(var/datum/bodypart_overlay/simple/body_marking/marking as anything in body_markings)
+		if(initial(marking.dna_feature_key) == body_markings[marking]) // dna is same as our species (sort of mini-cache), so no update needed
+			continue
+		needs_update = TRUE
+		break
+
+	if(needs_update)
+		remove_body_markings(hooman)
+		add_body_markings(hooman)
+// BANDASTATION EDIT END
 
 /**
  * Calculates the expected height values for this species

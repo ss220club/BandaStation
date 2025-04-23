@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   Box,
   Button,
+  Icon,
   LabeledList,
   NoticeBox,
   NumberInput,
@@ -79,7 +80,7 @@ export function Biogenerator(props) {
               ))}
             </Tabs>
           </Stack.Item>
-          <Stack.Item grow>
+          <Stack.Item grow mt="2px">
             <Section fill scrollable>
               <Table>
                 {items.map((item) => (
@@ -116,8 +117,9 @@ function Controls() {
             <Button
               width={7}
               lineHeight={2}
+              align="center"
               icon="cog"
-              iconSpin={processing}
+              iconSpin={processing ? 1 : 0}
               disabled={!can_process || processing}
               onClick={() => act('activate')}
             >
@@ -236,10 +238,9 @@ function Item(props: Props) {
       </Table.Cell>
       <Table.Cell collapsing>
         <Button
+          align="right"
           width={5}
-          icon="leaf"
-          iconPosition="right"
-          textAlign="right"
+          pr={0}
           disabled={disabled}
           onClick={() =>
             act('create', {
@@ -248,7 +249,7 @@ function Item(props: Props) {
             })
           }
         >
-          {parseFloat((cost * amount).toFixed(2))}
+          {parseFloat((cost * amount).toFixed(2))} <Icon name="leaf" />
         </Button>
       </Table.Cell>
     </Table.Row>

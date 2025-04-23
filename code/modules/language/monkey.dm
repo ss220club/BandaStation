@@ -2,12 +2,7 @@
 	name = "Chimpanzee"
 	desc = "Ook ook ook."
 	key = "1"
-	space_chance = 0
-	sentence_chance = 0
-	between_word_sentence_chance = 10
-	between_word_space_chance = 75
-	additional_syllable_low = 0
-	additional_syllable_high = 0
+	space_chance = 100
 	syllables = list("oop", "aak", "chee", "eek")
 	default_priority = 80
 

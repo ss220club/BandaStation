@@ -24,11 +24,9 @@ type Category = {
 
 type Data = {
   current_volume: number;
-  pill_duration: number;
   product_name: string;
   min_volume: number;
   max_volume: number;
-  max_duration: number;
   packaging_category: string;
   packaging_types: Category[];
   packaging_type: string;
@@ -38,11 +36,9 @@ export const ChemPress = (props) => {
   const { act, data } = useBackend<Data>();
   const {
     current_volume,
-    pill_duration,
     product_name,
     min_volume,
     max_volume,
-    max_duration,
     packaging_category,
     packaging_types,
     packaging_type,
@@ -82,24 +78,6 @@ export const ChemPress = (props) => {
                 }
               />
             </LabeledList.Item>
-            {shownCategory.cat_name === 'pills' && (
-              <LabeledList.Item label="Duration">
-                <NumberInput
-                  value={pill_duration}
-                  unit="s"
-                  width="43px"
-                  minValue={0}
-                  maxValue={max_duration}
-                  step={1}
-                  stepPixelSize={2}
-                  onChange={(value) =>
-                    act('change_pill_duraton', {
-                      duration: value,
-                    })
-                  }
-                />
-              </LabeledList.Item>
-            )}
             <LabeledList.Item label="Name">
               <Input
                 value={product_name}
@@ -114,7 +92,7 @@ export const ChemPress = (props) => {
             <LabeledList.Item label="Styles">
               {shownCategory.products.map((design, j) => (
                 <Button
-                  key={design.ref}
+                  key={j}
                   selected={design.ref === packaging_type}
                   color="transparent"
                   onClick={() =>

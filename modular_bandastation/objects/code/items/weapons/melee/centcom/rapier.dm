@@ -25,16 +25,6 @@
 	block_chance = 95
 	armour_penetration = 100
 
-/datum/storage/centcom_sabre_belt
-	max_slots = 1
-	do_rustle = FALSE
-	max_specific_storage = WEIGHT_CLASS_BULKY
-	click_alt_open = FALSE
-
-/datum/storage/centcom_sabre_belt/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
-	. = ..()
-	set_holdable(/obj/item/melee/sabre/centcom_sabre)
-
 /obj/item/storage/belt/centcom_sabre
 	name = "fleet officer's rapier sheath"
 	desc = "Богато украшенные ножны, предназначенные для хранения офицерской рапиры."
@@ -45,7 +35,16 @@
 	icon_state = "centcom_sheath"
 	worn_icon_state = "centcom_sheath"
 	inhand_icon_state = "centcom_sheath"
-	storage_type = /datum/storage/centcom_sabre_belt
+
+/obj/item/storage/belt/centcom_sabre/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+	atom_storage.max_slots = 1
+	atom_storage.do_rustle = FALSE
+	atom_storage.max_specific_storage = WEIGHT_CLASS_BULKY
+	atom_storage.set_holdable(/obj/item/melee/sabre/centcom_sabre)
+	atom_storage.click_alt_open = FALSE
 
 /obj/item/storage/belt/centcom_sabre/examine(mob/user)
 	. = ..()
@@ -74,16 +73,7 @@
 
 /obj/item/storage/belt/centcom_sabre/PopulateContents()
 	new /obj/item/melee/sabre/centcom_sabre(src)
-
-/datum/storage/centcom_katana_belt
-	max_slots = 1
-	do_rustle = FALSE
-	max_specific_storage = WEIGHT_CLASS_BULKY
-	click_alt_open = FALSE
-
-/datum/storage/centcom_katana_belt/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
-	. = ..()
-	set_holdable(/obj/item/melee/sabre/centcom_katana)
+	update_appearance()
 
 /obj/item/storage/belt/centcom_katana
 	name = "fleet officer's katana sheath"
@@ -95,7 +85,16 @@
 	icon_state = "katana_sheath"
 	worn_icon_state = "katana_sheath"
 	inhand_icon_state = "katana_sheath"
-	storage_type = /datum/storage/centcom_katana_belt
+
+/obj/item/storage/belt/centcom_katana/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+	atom_storage.max_slots = 1
+	atom_storage.do_rustle = FALSE
+	atom_storage.max_specific_storage = WEIGHT_CLASS_BULKY
+	atom_storage.set_holdable(/obj/item/melee/sabre/centcom_katana)
+	atom_storage.click_alt_open = FALSE
 
 /obj/item/storage/belt/centcom_katana/examine(mob/user)
 	. = ..()
@@ -116,7 +115,7 @@
 	icon_state = initial(inhand_icon_state)
 	inhand_icon_state = initial(inhand_icon_state)
 	worn_icon_state = initial(worn_icon_state)
-	if(length(contents))
+	if(contents.len)
 		icon_state += "-sabre"
 		inhand_icon_state += "-sabre"
 		worn_icon_state += "-sabre"
@@ -124,3 +123,4 @@
 
 /obj/item/storage/belt/centcom_katana/PopulateContents()
 	new /obj/item/melee/sabre/centcom_katana(src)
+	update_appearance()

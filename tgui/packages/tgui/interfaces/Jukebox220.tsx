@@ -96,9 +96,13 @@ export const Jukebox220 = () => {
               <Section fill title="Проигрыватель">
                 <Stack fill vertical>
                   {song_selected && (
-                    <Button bold fluid ellipsis color="transparent">
-                      {song_selected.name}
-                    </Button>
+                    <Stack.Item bold maxWidth="240px">
+                      {song_selected.name.length > MAX_NAME_LENGTH ? (
+                        <marquee>{song_selected.name}</marquee>
+                      ) : (
+                        song_selected.name
+                      )}
+                    </Stack.Item>
                   )}
                   <Stack fill mt={1.5}>
                     <Stack.Item grow basis="0">

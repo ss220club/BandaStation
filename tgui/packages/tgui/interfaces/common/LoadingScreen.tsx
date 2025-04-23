@@ -18,18 +18,13 @@ import { Icon, Stack } from 'tgui-core/components';
  * )
  * ```
  */
-
-type LoadingScreenProps = {
-  label?: string;
-};
-
-export function LoadingScreen(props: LoadingScreenProps) {
+export function LoadingScreen(props) {
   return (
     <Stack align="center" fill justify="center" vertical>
       <Stack.Item>
         <Icon color="blue" name="toolbox" spin size={4} />
       </Stack.Item>
-      <Stack.Item>{props.label || 'Please wait...'}</Stack.Item>
+      <Stack.Item>Please wait...</Stack.Item>
     </Stack>
   );
 }

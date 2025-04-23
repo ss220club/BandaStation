@@ -2,24 +2,20 @@
 @use '../colors.scss';
 @use '../base.scss';
 
-$map-keys: colors.$color-map !default;
+$fg-map: colors.$fg-map !default;
 
 .CircuitInfo__Examined {
-  background-color: var(--color-black);
-  padding: var(--space-ml);
-  border-radius: var(--border-radius-large);
+  background-color: rgba(0, 0, 0, 1);
+  padding: 8px;
+  border-radius: 5px;
 
   user-select: none;
   pointer-events: none;
 }
 
-.ObjectComponent {
-  pointer-events: auto;
-}
-
 .ObjectComponent__Titlebar {
-  border-top-left-radius: var(--border-radius-huge);
-  border-top-right-radius: var(--border-radius-huge);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 
   white-space: nowrap;
 
@@ -29,7 +25,7 @@ $map-keys: colors.$color-map !default;
 
 .ObjectComponent__Content {
   white-space: nowrap;
-  background-color: hsla(0, 0%, 0%, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 
   -ms-user-select: none;
   user-select: none;
@@ -37,7 +33,7 @@ $map-keys: colors.$color-map !default;
 
 .ObjectComponent__Greyed_Content {
   white-space: nowrap;
-  background-color: hsla(0, 0%, 7.5%, 0.5);
+  background-color: rgba(19, 19, 19, 0.5);
 
   -ms-user-select: none;
   user-select: none;
@@ -51,22 +47,29 @@ $map-keys: colors.$color-map !default;
 
 .ObjectComponent__PortPos {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-@each $color-name, $color-value in $map-keys {
+@each $color-name, $color-value in $fg-map {
   .color-stroke-#{$color-name} {
-    stroke: hsl(from $color-value h s calc(l + var(--adjust-color))) !important;
+    stroke: $color-value !important;
   }
 
   .color-fill-#{$color-name} {
-    fill: hsl(from $color-value h s calc(l + var(--adjust-color))) !important;
+    fill: $color-value !important;
   }
 }
 
+$border-color: hsl(210, 100%, 73%) !default;
+$border-radius: base.$border-radius !default;
+
 .IntegratedCircuit__BlueBorder {
-  border: var(--border-thickness-tiny) solid var(--color-border-primary);
-  border-radius: var(--border-radius-small);
+  border: base.em(1px) solid $border-color;
+  border: base.em(1px) solid rgba($border-color, 0.75);
+  border-radius: $border-radius;
 }
 
 $category-colors: (

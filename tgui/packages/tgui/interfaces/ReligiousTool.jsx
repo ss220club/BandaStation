@@ -104,10 +104,8 @@ const SectSelectTab = (props) => {
         {sects.map((sect) => (
           <>
             <Collapsible
-              mb={-1}
-              childStyles={{ paddingTop: '0.5rem' }}
               title={
-                <Stack mt={-3.3} ml={4}>
+                <Stack mt={-3.3} ml={3}>
                   <Stack.Item>
                     <Icon
                       name={sect.icon}
@@ -138,7 +136,7 @@ const SectSelectTab = (props) => {
                 </Button>
               </Stack.Item>
             </Collapsible>
-            <Stack.Divider />
+            <Stack.Divider mt={-0.5} mb={0.5} />
           </>
         ))}
       </Stack>

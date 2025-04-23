@@ -4,11 +4,6 @@
 	desc = "A sparky language made by manipulating electrical discharge."
 	key = "v"
 	space_chance = 20
-	sentence_chance = 0
-	between_word_sentence_chance = 10
-	between_word_space_chance = 75
-	additional_syllable_low = 0
-	additional_syllable_high = 1
 	syllables = list(
 		"bzzt", "skrrt", "zzp", "mmm", "hzz", "tk", "shz", "k", "z",
 		"bzt", "zzt", "skzt", "skzz", "hmmt", "zrrt", "hzzt", "hz",

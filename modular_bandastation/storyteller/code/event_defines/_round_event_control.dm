@@ -310,21 +310,18 @@
 
 /// Prints the action buttons for this event.
 /datum/round_event_control/proc/get_href_actions()
-	var/button_code
 	if(SSticker.HasRoundStarted())
 		if(roundstart)
 			if(!can_run_post_roundstart)
-				button_code += "<a class='linkOff'>Fire</a><a class='linkOff'>Schedule</a>"
-			button_code += "<a href='byond://?src=[REF(src)];action=fire'>Fire</a><a href='byond://?src=[REF(src)];action=schedule'>Schedule</a>"
+				return "<a class='linkOff'>Fire</a> <a class='linkOff'>Schedule</a>"
+			return "<a href='byond://?src=[REF(src)];action=fire'>Fire</a> <a href='byond://?src=[REF(src)];action=schedule'>Schedule</a>"
 		else
-			button_code += "<a href='byond://?src=[REF(src)];action=fire'>Fire</a><a href='byond://?src=[REF(src)];action=schedule'>Schedule</a> <a href='byond://?src=[REF(src)];action=force_next'>Force Next</a>"
+			return "<a href='byond://?src=[REF(src)];action=fire'>Fire</a> <a href='byond://?src=[REF(src)];action=schedule'>Schedule</a> <a href='byond://?src=[REF(src)];action=force_next'>Force Next</a>"
 	else
 		if(roundstart)
-			button_code += "<a href='byond://?src=[REF(src)];action=schedule'>Add Roundstart</a><a href='byond://?src=[REF(src)];action=force_next'>Force Roundstart</a>"
+			return "<a href='byond://?src=[REF(src)];action=schedule'>Add Roundstart</a> <a href='byond://?src=[REF(src)];action=force_next'>Force Roundstart</a>"
 		else
-			button_code += "<a class='linkOff'>Fire</a><a class='linkOff'>Schedule</a><a class='linkOff'>Force Next</a>"
-	button_code += "<a href='byond://?src=[REF(src)];action=set_weight'>Set Weight</a>"
-	return button_code
+			return "<a class='linkOff'>Fire</a> <a class='linkOff'>Schedule</a> <a class='linkOff'>Force Next</a>"
 
 
 /datum/round_event_control/Topic(href, href_list)
@@ -339,13 +336,6 @@
 			message_admins("[key_name_admin(usr)] scheduled event [src.name] in [new_schedule] seconds.")
 			log_admin_private("[key_name(usr)] scheduled [src.name] in [new_schedule] seconds.")
 			SSgamemode.schedule_event(src, new_schedule SECONDS, 0, _forced = FALSE)
-		if("set_weight")
-			var/new_weight = input(usr, "New schedule time (in seconds):", "Reschedule Event") as num|null
-			if(isnull(new_weight) || QDELETED(src))
-				return
-			message_admins("[key_name_admin(usr)] set weight of event [src.name] to [new_weight].")
-			log_admin_private("[key_name(usr)] set weight of event [src.name] to [new_weight].")
-			src.weight = new_weight
 		if("force_next")
 			if(length(src.admin_setup))
 				for(var/datum/event_admin_setup/admin_setup_datum in src.admin_setup)

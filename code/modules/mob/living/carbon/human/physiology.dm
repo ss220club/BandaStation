@@ -34,11 +34,7 @@
 	/// Multiplied aplpied to just knockdowns, stacks with above multiplicatively
 	var/knockdown_mod = 1
 
-	/// Modifier to amount of blood lost when bleeding (both on life ticks and from flat bleed calls)
-	var/bleed_mod = 1
-	/// Modifier to amount blood regenerated per life tick
-	var/blood_regen_mod = 1
-
+	var/bleed_mod = 1 // % bleeding modifier
 	var/datum/armor/armor // internal armor datum
 
 	var/hunger_mod = 1 //% of hunger rate taken per tick.

@@ -9,11 +9,7 @@
 SUBSYSTEM_DEF(shuttle)
 	name = "Shuttle"
 	wait = 1 SECONDS
-	dependencies = list(
-		/datum/controller/subsystem/mapping,
-		/datum/controller/subsystem/atoms,
-		/datum/controller/subsystem/air,
-	)
+	init_order = INIT_ORDER_SHUTTLE
 	flags = SS_KEEP_TIMING
 	runlevels = RUNLEVEL_SETUP | RUNLEVEL_GAME
 
@@ -277,7 +273,7 @@ SUBSYSTEM_DEF(shuttle)
 			sender_override = "Система оповещения эвакуационного шаттла",
 			color_override = "orange",
 		)
-		if(EMERGENCY_IDLE_OR_RECALLED || emergency.timeLeft(1) > emergency_call_time * ALERT_COEFF_AUTOEVAC_CRITICAL)
+		if(emergency.timeLeft(1) > emergency_call_time * ALERT_COEFF_AUTOEVAC_CRITICAL)
 			emergency.request(null, set_coefficient = ALERT_COEFF_AUTOEVAC_CRITICAL)
 
 /datum/controller/subsystem/shuttle/proc/block_recall(lockout_timer)

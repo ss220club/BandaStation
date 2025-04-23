@@ -1,15 +1,16 @@
 import { useBackend } from 'tgui/backend';
 import {
+  Box,
   Button,
   DmIcon,
+  Flex,
   Icon,
-  ImageButton,
   NoticeBox,
-  Stack,
 } from 'tgui-core/components';
 import { createSearch } from 'tgui-core/string';
 
-import type { LoadoutCategory, LoadoutItem, LoadoutManagerData } from './base';
+import { ItemDisplay220 } from '../../../../bandastation/ItemDisplay220'; // BANDASTATION EDIT
+import { LoadoutCategory, LoadoutItem, LoadoutManagerData } from './base';
 
 type Props = {
   item: LoadoutItem;
@@ -51,89 +52,23 @@ export function ItemIcon(props: Props) {
 type DisplayProps = {
   active: boolean;
   item: LoadoutItem;
+  scale?: number;
 };
 
 export function ItemDisplay(props: DisplayProps) {
-  const { act, data } = useBackend<LoadoutManagerData>();
-  const { donator_level, loadout_leftpoints } = data;
-  const { active, item } = props;
+  const { act } = useBackend();
+  const { active, item, scale = 3 } = props;
 
-  const costText =
-    item.cost === 1
-      ? `${item.cost} очко`
-      : item.cost < 4
-        ? `${item.cost} очка`
-        : `${item.cost} очков`;
-
-  const textInfo = (
-    <Stack fill fontSize={1.2} textAlign="left">
-      <Stack.Item
-        grow
-        fontSize={1}
-        color="gold"
-        opacity={0.75}
-        style={{ textIndent: '0.25rem' }}
-      >
-        {item.tier > 0 && `Тир ${item.tier}`}
-      </Stack.Item>
-      <Stack.Item fontSize={0.75} opacity={0.66}>
-        {costText}
-      </Stack.Item>
-    </Stack>
-  );
-
-  function tooltipInfo() {
-    let disabledInfo: string[] = [];
-    if (!active && loadout_leftpoints === 0) {
-      disabledInfo.push('Недостаточно очков.');
-    }
-
-    if (item.tier > donator_level) {
-      disabledInfo.push(
-        'Этот предмет доступен на более высоком уровне подписки чем у вас.',
-      );
-    }
-
-    return (
-      <Stack fill vertical g={0.5}>
-        <Stack.Item mb={disabledInfo.length > 0 && 2}>{item.name}</Stack.Item>
-        {disabledInfo.length > 0 &&
-          disabledInfo.map((info, index) => (
-            <>
-              {index > 0 && <Stack.Divider />}
-              <Stack.Item key={index} color="bad">
-                {info}
-              </Stack.Item>
-            </>
-          ))}
-      </Stack>
-    );
-  }
+  const boxSize = `${scale * 32}px`;
 
   return (
-    <ImageButton
-      m={0}
-      imageSize={90}
-      tooltip={tooltipInfo()}
-      tooltipPosition={'bottom-start'}
-      dmIcon={item.icon}
-      dmIconState={item.icon_state}
-      buttons={item.information.map((info) => (
-        <Button
-          key={info.icon}
-          icon={info.icon}
-          tooltip={info.tooltip}
-          tooltipPosition="top-start"
-          color="unset"
-          textColor="lightgray"
-          fontSize={1.2}
-        />
-      ))}
-      buttonsAlt={textInfo}
-      selected={active}
-      disabled={
-        !active && (loadout_leftpoints === 0 || item.tier > donator_level)
-      }
+    <Button
+      height={boxSize}
+      width={boxSize}
+      color={active ? 'green' : 'default'}
+      style={{ textTransform: 'capitalize', zIndex: '1' }}
+      tooltip={item.name}
+      tooltipPosition={'bottom'}
       onClick={() =>
         act('select_item', {
           path: item.path,
@@ -141,8 +76,27 @@ export function ItemDisplay(props: DisplayProps) {
         })
       }
     >
-      <span style={{ textTransform: 'capitalize' }}>{item.name}</span>
-    </ImageButton>
+      <Flex vertical>
+        <Flex.Item>
+          <ItemIcon item={item} scale={scale} />
+        </Flex.Item>
+        {item.information.length > 0 && (
+          <Flex.Item ml={-5.5} style={{ zIndex: '3' }}>
+            {item.information.map((info) => (
+              <Box
+                height="9px"
+                key={info}
+                fontSize="9px"
+                textColor={'darkgray'}
+                bold
+              >
+                {info}
+              </Box>
+            ))}
+          </Flex.Item>
+        )}
+      </Flex>
+    </Button>
   );
 }
 
@@ -150,73 +104,20 @@ type ListProps = {
   items: LoadoutItem[];
 };
 
-type LoadoutGroup = {
-  items: LoadoutItem[];
-  title: string;
-};
-
-function sortByGroup(items: LoadoutItem[]): LoadoutGroup[] {
-  const groups: LoadoutGroup[] = [];
-
-  for (let i = 0; i < items.length; i++) {
-    const item: LoadoutItem = items[i];
-    let usedGroup: LoadoutGroup | undefined = groups.find(
-      (group) => group.title === item.group,
-    );
-    if (usedGroup === undefined) {
-      usedGroup = { items: [], title: item.group };
-      groups.push(usedGroup);
-    }
-    usedGroup.items.push(item);
-  }
-
-  return groups;
-}
-
 export function ItemListDisplay(props: ListProps) {
   const { data } = useBackend<LoadoutManagerData>();
   const { loadout_list } = data.character_preferences.misc;
-  const itemGroups = sortByGroup(props.items);
 
   return (
-    <Stack vertical g={3}>
-      {itemGroups.map((group) => (
-        <Stack.Item key={group.title}>
-          <Stack vertical>
-            {itemGroups.length > 1 && (
-              <>
-                <Stack.Item bold fontSize={1.25} px={1}>
-                  {group.title}
-                </Stack.Item>
-                <Stack.Divider
-                  style={{ borderColor: 'var(--color-primary)' }}
-                />
-              </>
-            )}
-            <Stack.Item>
-              <Stack wrap>
-                {group.items
-                  .sort((a, b) =>
-                    a.tier === b.tier
-                      ? a.name.localeCompare(b.name)
-                      : a.tier - b.tier,
-                  )
-                  .map((item) => (
-                    <Stack.Item key={item.name}>
-                      <ItemDisplay
-                        item={item}
-                        active={
-                          loadout_list && loadout_list[item.path] !== undefined
-                        }
-                      />
-                    </Stack.Item>
-                  ))}
-              </Stack>
-            </Stack.Item>
-          </Stack>
-        </Stack.Item>
+    <div style={{ display: `flex`, flexWrap: `wrap` }}>
+      {props.items.map((item) => (
+        <ItemDisplay220
+          key={item.name}
+          item={item}
+          active={loadout_list && loadout_list[item.path] !== undefined}
+        />
       ))}
-    </Stack>
+    </div>
   );
 }
 
@@ -253,9 +154,7 @@ export function SearchDisplay(props: SearchProps) {
   const validLoadoutItems = loadout_tabs
     .flatMap((tab) => tab.contents)
     .filter(search)
-    .sort((a, b) =>
-      a.tier === b.tier ? a.name.localeCompare(b.name) : a.tier - b.tier,
-    );
+    .sort((a, b) => (a.name > b.name ? 1 : -1));
 
   if (validLoadoutItems.length === 0) {
     return <NoticeBox>No items found!</NoticeBox>;

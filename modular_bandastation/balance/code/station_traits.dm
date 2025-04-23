@@ -13,9 +13,3 @@
 
 /datum/station_trait/pet_day
 	weight = 0
-
-/datum/station_trait/random_spawns
-	weight = 0
-
-/datum/station_trait/colored_assistants
-	weight = 0

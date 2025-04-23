@@ -52,7 +52,7 @@ export const NtosMessenger = (props) => {
     sending_virus,
   } = data;
 
-  let content: React.JSX.Element;
+  let content: JSX.Element;
   if (remote_silicon) {
     content = <AccessDeniedScreen />;
   } else if (open_chat !== null) {
@@ -355,6 +355,7 @@ const SendToAllSection = (props) => {
               icon="arrow-right"
               disabled={on_spam_cooldown || message === ''}
               tooltip={on_spam_cooldown && 'Wait before sending more messages!'}
+              tooltipPosition="auto-start"
               onClick={() => {
                 act('PDA_sendEveryone', { message: message });
                 setmessage('');

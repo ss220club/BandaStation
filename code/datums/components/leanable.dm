@@ -1,4 +1,4 @@
-/// Things with this component can be leaned onto
+/// Things with this component can be leaned onto, optionally exclusive to RMB dragging
 /datum/component/leanable
 	/// How much will mobs that lean onto this object be offset
 	var/leaning_offset = 11

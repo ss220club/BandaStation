@@ -29,6 +29,11 @@ type HoloPayData = {
   user: { name: string; balance: number };
 };
 
+const COPYRIGHT_SCROLLER = `Nanotrasen (c) 2525-2562. All sales final.
+Use of departmental funds is prohibited. For more information, visit
+the Head of Personnel. All rights reserved. All trademarks are property
+of their respective owners.`;
+
 export const HoloPay = (props) => {
   const { data } = useBackend<HoloPayData>();
   const { owner } = data;
@@ -118,7 +123,7 @@ const TerminalDisplay = (props) => {
       title="Terminal"
     >
       <Stack fill vertical>
-        <Stack.Item align="center" mt={3}>
+        <Stack.Item align="center">
           <Icon color="good" name={shop_logo} size={5} />
         </Stack.Item>
         <Stack.Item grow textAlign="center">
@@ -160,6 +165,15 @@ const TerminalDisplay = (props) => {
               textAlign="center"
             />
           )}
+        </Stack.Item>
+        <Stack.Item>
+          {/* @ts-ignore */}
+          <marquee scrollamount="2">
+            <Box color="darkgray" fontSize="8px">
+              {COPYRIGHT_SCROLLER}
+            </Box>
+            {/* @ts-ignore */}
+          </marquee>
         </Stack.Item>
       </Stack>
     </Section>

@@ -1,7 +1,6 @@
 import { useContext } from 'react';
-import { Collapsible, Stack } from 'tgui-core/components';
+import { Collapsible, Flex, Tooltip } from 'tgui-core/components';
 
-import { useBackend } from '../../backend';
 import { OrbitContext } from '.';
 import { VIEWMODE } from './constants';
 import {
@@ -10,6 +9,7 @@ import {
   sortByDisplayName,
 } from './helpers';
 import { OrbitItem } from './OrbitItem';
+import { OrbitTooltip } from './OrbitTooltip';
 import { Observable } from './types';
 
 type Props = {
@@ -23,8 +23,6 @@ type Props = {
  * Filters the results if there is a provided search query.
  */
 export function OrbitCollapsible(props: Props) {
-  const { act } = useBackend();
-
   const { color, section = [], title } = props;
 
   const { autoObserve, realNameDisplay, searchQuery, viewMode } =
@@ -40,7 +38,7 @@ export function OrbitCollapsible(props: Props) {
     filteredSection.sort(sortByDisplayName);
   }
 
-  if (filteredSection.length === 0) {
+  if (!filteredSection.length) {
     return;
   }
 
@@ -51,23 +49,34 @@ export function OrbitCollapsible(props: Props) {
       open={!!color}
       title={title + ` - (${filteredSection.length})`}
     >
-      <Stack wrap g={0.5}>
-        {filteredSection.map((item) => (
-          <Stack.Item
-            key={item.ref}
-            onClick={() =>
-              act('orbit', { auto_observe: autoObserve, ref: item.ref })
-            }
-          >
+      <Flex wrap>
+        {filteredSection.map((item) => {
+          const content = (
             <OrbitItem
+              autoObserve={autoObserve}
               realNameDisplay={realNameDisplay}
               color={color}
               item={item}
+              key={item.ref}
               viewMode={viewMode}
             />
-          </Stack.Item>
-        ))}
-      </Stack>
+          );
+
+          if (!item.health && !item.extra) {
+            return content;
+          }
+
+          return (
+            <Tooltip
+              content={<OrbitTooltip item={item} realNameDisplay={false} />}
+              key={item.ref}
+              position="bottom-start"
+            >
+              {content}
+            </Tooltip>
+          );
+        })}
+      </Flex>
     </Collapsible>
   );
 }

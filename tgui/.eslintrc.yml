@@ -17,7 +17,7 @@ plugins:
   - simple-import-sort
 settings:
   react:
-    version: '19.1'
+    version: '18.2'
 rules:
   ## Possible Errors
   ## ----------------------------------------

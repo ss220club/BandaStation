@@ -22,8 +22,7 @@
 	// see-through curtains should let emissives shine through
 	if(!opaque_closed)
 		blocks_emissive = EMISSIVE_BLOCK_NONE
-	. = ..()
-	ADD_TRAIT(src, TRAIT_INVERTED_DEMOLITION, INNATE_TRAIT)
+	return ..()
 
 /obj/structure/curtain/proc/toggle()
 	open = !open

@@ -223,7 +223,6 @@ export const DmTarget = new Juke.Target({
     'interface/**',
     'modular_bandastation/**', // BANDASTATION EDIT ADDITION - Making the CBT work
     'sound/**',
-    'tgui/public/tgui.html',
     `${DME_NAME}.dme`,
     NamedVersionFile,
   ],
@@ -357,7 +356,7 @@ export const TguiTarget = new Juke.Target({
   dependsOn: [YarnTarget],
   inputs: [
     'tgui/.yarn/install-target',
-    'tgui/rspack.config.cjs',
+    'tgui/webpack.config.js',
     'tgui/**/package.json',
     'tgui/packages/**/*.+(js|cjs|ts|tsx|jsx|scss)',
   ],

@@ -7,7 +7,7 @@
 GLOBAL_VAR_INIT(ert_request_answered, FALSE)
 GLOBAL_LIST_EMPTY(ert_request_messages)
 
-ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CATEGORY_GAME)
+ADMIN_VERB(ert_manager, R_NONE, "ERT Manager", "Manage ERT reqests.", ADMIN_CATEGORY_GAME)
 	var/datum/ert_manager/tgui = new(user)
 	tgui.ui_interact(user.mob)
 	BLACKBOX_LOG_ADMIN_VERB("ERT Manager")
@@ -22,7 +22,6 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	var/engineering_slots = 0
 	var/janitor_slots = 0
 	var/inquisitor_slots = 0
-	var/should_be_announced = TRUE
 
 /datum/ert_manager/ui_state(mob/user)
 	return ADMIN_STATE(R_ADMIN)
@@ -49,7 +48,6 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	data["inquisitorSlots"] = inquisitor_slots
 	data["totalSlots"] = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + inquisitor_slots
 	data["ertSpawnpoints"] = length(GLOB.emergencyresponseteamspawn)
-	data["shouldBeAnnounced"] = should_be_announced
 
 	data["ertRequestMessages"] = GLOB.ert_request_messages
 	return data
@@ -65,10 +63,8 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			ert_type = params["ertType"]
 		if("toggleAdmin")
 			admin_slots = admin_slots ? 0 : 1
-		if("toggleCom")
-			commander_slots = commander_slots ? 0 : 1
-		if("toggleAnnounce")
-			should_be_announced = !should_be_announced
+		// if("toggleCom")
+		// 	commander_slots = commander_slots ? 0 : 1	no can do sir, leader must be
 		if("setSec")
 			security_slots = text2num(params["setSec"])
 		if("setMed")
@@ -92,12 +88,6 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 					to_chat(usr, "<span class='userdanger'>Invalid ERT type.</span>")
 					return
 
-			if((commander_slots + medical_slots + janitor_slots + inquisitor_slots + security_slots + engineering_slots) == 0)
-				message_admins("[key_name_admin(usr)] tried to create a [ert_type] ERT with zero slots available!")
-				log_admin("[key_name(usr)] tried to create a [ert_type] ERT with zero slots available.")
-				to_chat(usr, span_userdanger("ERT must have at least 1 slot available!"))
-				return
-
 			new_ert.teamsize = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + inquisitor_slots
 			new_ert.roles = slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots, ert_type)
 
@@ -119,8 +109,7 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			var/slot_text = english_list(slots_list)
 			message_admins("[key_name_admin(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
 			log_admin("[key_name(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
-			if(should_be_announced)
-				priority_announce("Внимание, [station_name()]. Мы рассматриваем возможность отправки ОБР, ожидайте.", "Активирован протокол ОБР")
+			priority_announce("Внимание, [station_name()]. Мы рассматриваем возможность отправки ОБР, ожидайте.", "Активирован протокол ОБР")
 			makeERTFromSlots(new_ert, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots)
 
 		if("view_player_panel")
@@ -193,8 +182,6 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	var/obj/effect/landmark/ert_brief_spawn/brief_spawn = locate()
 
 	if(!length(candidates))
-		if(should_be_announced)
-			minor_announce("Внимание, [station_name()]. К сожалению, в настоящее время мы не можем направить к вам отряд быстрого реагирования.", "ОБР недоступен")
 		return FALSE
 
 	if(ertemplate.spawn_admin)
@@ -203,7 +190,7 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			var/chosen_outfit = usr.client?.prefs?.read_preference(/datum/preference/choiced/brief_outfit)
 			usr.client.prefs.safe_transfer_prefs_to(admin_officer, is_antag = TRUE)
 			admin_officer.equipOutfit(chosen_outfit)
-			admin_officer.PossessByPlayer(usr.key)
+			admin_officer.key = usr.key
 		else
 			to_chat(usr, span_warning("Could not spawn you in as briefing officer as you are not a ghost!"))
 
@@ -260,7 +247,7 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 		else
 			ert_operative = new /mob/living/carbon/human(spawnloc)
 			chosen_candidate.client.prefs.safe_transfer_prefs_to(ert_operative, is_antag = TRUE)
-		ert_operative.PossessByPlayer(chosen_candidate.key)
+		ert_operative.key = chosen_candidate.key
 
 		if(ertemplate.enforce_human || !(ert_operative.dna.species.changesource_flags & ERT_SPAWN))
 			ert_operative.set_species(/datum/species/human)
@@ -268,7 +255,7 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 		//Give antag datum
 		var/datum/antagonist/ert/ert_antag
 
-		if((chosen_candidate == earmarked_leader) && (commander_slots > 0 && !leader_spawned))
+		if((chosen_candidate == earmarked_leader) || (numagents == 1 && !leader_spawned))
 			ert_antag = new ertemplate.leader_role ()
 			earmarked_leader = null
 			leader_spawned = TRUE
@@ -287,14 +274,6 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 
 	if (teamSpawned)
 		message_admins("[ertemplate.polldesc] has spawned with the mission: [ertemplate.mission]")
-		if(should_be_announced)
-			switch(ert_type)
-				if("Amber")
-					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «ЭМБЕР». Ожидайте.", "ОБР в пути")
-				if("Red")
-					priority_announce("Внимание, [station_name()]. Мы направляем усиленный отряд быстрого реагирования кода «РЭД». Ожидайте.", "ОБР в пути")
-				if("Gamma")
-					priority_announce("Внимание, [station_name()]. Мы направляем элитный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
 
 	//Open the Armory doors
 	if(ertemplate.opendoors)

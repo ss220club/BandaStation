@@ -62,7 +62,7 @@
 			Useful for disrupting headsets, cameras, doors, lockers and borgs during stealth operations. \
 			Attacking a target with this flashlight will direct an EM pulse at it and consumes a charge."
 	item = /obj/item/flashlight/emp
-	cost = 2
+	cost = 4
 	surplus = 30
 
 /datum/uplink_item/stealthy_tools/emplight/New()
@@ -71,10 +71,10 @@
 		cost *= 3
 
 /datum/uplink_item/stealthy_tools/mulligan
-	name = "Mulligan Kit"
-	desc = "Screwed up and have security on your tail? This handy syringe and set of documents will give you a completely new identity \
-			and appearance, intercepting Nanotrasen communications to announce you as a freshly recruited Assistant."
-	item = /obj/item/storage/box/syndie_kit/mulligan
+	name = "Mulligan"
+	desc = "Screwed up and have security on your tail? This handy syringe will give you a completely new identity \
+			and appearance."
+	item = /obj/item/reagent_containers/syringe/mulligan
 	cost = 4
 	surplus = 30
 	purchasable_from = ~(UPLINK_ALL_SYNDIE_OPS)

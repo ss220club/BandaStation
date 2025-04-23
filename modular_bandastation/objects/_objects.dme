@@ -14,7 +14,6 @@
 #include "code/items/cards_ids.dm"
 #include "code/items/hampters.dm"
 #include "code/items/id_stickers.dm"
-#include "code/items/instruments.dm"
 #include "code/items/material_pouch.dm"
 #include "code/items/papers.dm"
 #include "code/items/pen.dm"

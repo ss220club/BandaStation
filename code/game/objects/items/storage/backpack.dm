@@ -86,7 +86,6 @@
 	icon_state = "giftbag0"
 	inhand_icon_state = "giftbag"
 	w_class = WEIGHT_CLASS_BULKY
-	storage_type = /datum/storage/backpack/santabag
 
 /obj/item/storage/backpack/santabag/Initialize(mapload)
 	. = ..()
@@ -239,7 +238,10 @@
 	icon = 'icons/obj/storage/ethereal.dmi'
 	worn_icon = 'icons/mob/clothing/back/ethereal.dmi'
 	icon_state = "saddlepack"
-	storage_type = /datum/storage/backpack/saddle
+
+/obj/item/storage/backpack/saddlepack/Initialize(mapload)
+	. = ..()
+	atom_storage.max_total_storage = 26
 
 // MEAT MEAT MEAT MEAT MEAT
 
@@ -386,11 +388,12 @@
 	icon_state = "satchel-flat"
 	inhand_icon_state = "satchel-flat"
 	w_class = WEIGHT_CLASS_NORMAL //Can fit in backpacks itself.
-	storage_type = /datum/storage/backpack/satchel_flat
 
 /obj/item/storage/backpack/satchel/flat/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/undertile, TRAIT_T_RAY_VISIBLE, INVISIBILITY_OBSERVER, use_anchor = TRUE)
+	atom_storage.max_total_storage = 15
+	atom_storage.set_holdable(cant_hold_list = /obj/item/storage/backpack/satchel/flat) //muh recursive backpacks
 	ADD_TRAIT(src, TRAIT_CONTRABAND_BLOCKER, INNATE_TRAIT)
 
 /obj/item/storage/backpack/satchel/flat/PopulateContents()
@@ -496,16 +499,19 @@
 	SEND_SIGNAL(src, COMSIG_DUFFEL_ZIP_CHANGE, new_zip)
 	if(zipped_up)
 		slowdown = initial(slowdown)
-		atom_storage.set_locked(STORAGE_SOFT_LOCKED)
+		atom_storage.locked = STORAGE_SOFT_LOCKED
 		atom_storage.display_contents = FALSE
+		for(var/obj/item/weapon as anything in get_all_contents_type(/obj/item)) //close ui of this and all items inside dufflebag
+			weapon.atom_storage?.close_all() //not everything has storage initialized
 	else
 		slowdown = zip_slowdown
-		atom_storage.set_locked(STORAGE_NOT_LOCKED)
+		atom_storage.locked = STORAGE_NOT_LOCKED
 		atom_storage.display_contents = TRUE
 
 	if(isliving(loc))
 		var/mob/living/wearer = loc
 		wearer.update_equipment_speed_mods()
+	update_appearance()
 
 /obj/item/storage/backpack/duffelbag/cursed
 	name = "living duffel bag"

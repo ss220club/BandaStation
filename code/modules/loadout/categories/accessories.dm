@@ -18,8 +18,10 @@
 /datum/loadout_item/accessory/get_ui_buttons()
 	if(!can_be_layer_adjusted)
 		return ..()
-	. = ..()
-	UNTYPED_LIST_ADD(., list(
+
+	var/list/buttons = ..()
+
+	UNTYPED_LIST_ADD(buttons, list(
 		"label" = "Layer",
 		"act_key" = "set_layer",
 		"active_key" = INFO_LAYER,
@@ -27,7 +29,7 @@
 		"inactive_text" = "Below Suit",
 	))
 
-	return .
+	return buttons
 
 /datum/loadout_item/accessory/handle_loadout_action(datum/preference_middleware/loadout/manager, mob/user, action, params)
 	if(action == "set_layer")
@@ -82,6 +84,7 @@
 /datum/loadout_item/accessory/full_pocket_protector
 	name = "Pocket Protector (Filled)"
 	item_path = /obj/item/clothing/accessory/pocketprotector/full
+	additional_displayed_text = list("Внутри - ручки")
 
 /datum/loadout_item/accessory/pride
 	name = "Pride Pin"

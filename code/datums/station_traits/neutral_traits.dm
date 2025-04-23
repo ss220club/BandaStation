@@ -503,7 +503,11 @@
 	icon_state = "skubpack"
 	illustration = "label_skub"
 	w_class = WEIGHT_CLASS_SMALL
-	storage_type = /datum/storage/box/skub
+
+/obj/item/storage/box/stickers/skub/Initialize(mapload)
+	. = ..()
+	atom_storage.max_slots = 3
+	atom_storage.exception_hold = typecacheof(list(/obj/item/skub, /obj/item/clothing/suit/costume/wellworn_shirt/skub))
 
 /obj/item/storage/box/stickers/skub/PopulateContents()
 	new /obj/item/skub(src)
@@ -515,7 +519,10 @@
 	desc = "The enemy may have been given a skub and a shirt, but I've got more stickers! Plus the pack can hold my anti-skub shirt."
 	icon_state = "skubpack"
 	illustration = "label_anti_skub"
-	storage_type = /datum/storage/box/anti_skub
+
+/obj/item/storage/box/stickers/anti_skub/Initialize(mapload)
+	. = ..()
+	atom_storage.exception_hold = typecacheof(list(/obj/item/clothing/suit/costume/wellworn_shirt/skub))
 
 /obj/item/storage/box/stickers/anti_skub/PopulateContents()
 	for(var/i in 1 to 4)

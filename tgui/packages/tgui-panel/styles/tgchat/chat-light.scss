@@ -11,7 +11,7 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  color: var(--color-black);
+  color: hsl(0, 0%, 0%);
 }
 
 body {
@@ -45,23 +45,23 @@ img.icon {
 }
 
 a {
-  color: hsl(from var(--color-hyperlink) h s calc(l - 40));
-
-  &:hover {
-    color: hsl(from var(--color-hyperlink) h s calc(l - 20));
-  }
+  color: hsl(240, 100%, 50%);
 }
 
-a.visited,
-a:visited {
-  color: hsl(from var(--color-hyperlink-visited) h s calc(l - 40));
+a.visited {
+  color: hsl(300, 100%, 50%);
+}
 
-  &:hover {
-    color: hsl(from var(--color-hyperlink-visited) h s calc(l - 20));
-  }
+a:visited {
+  color: hsl(300, 100%, 50%);
+}
+
+a.popt {
+  text-decoration: none;
 }
 
 /* POPUPS */
+
 .popup {
   position: fixed;
   top: 50%;
@@ -279,7 +279,7 @@ h6 {
 
 h1.alert,
 h2.alert {
-  color: var(--color-black);
+  color: hsl(0, 0%, 0%);
 }
 
 em {
@@ -329,7 +329,7 @@ em {
 
 .binarysay {
   color: hsl(114, 86.5%, 40.8%);
-  background-color: var(--color-black);
+  background-color: hsl(0, 0%, 0%);
   display: block;
 }
 
@@ -430,7 +430,7 @@ em {
 
 h1.alert,
 h2.alert {
-  color: var(--color-black);
+  color: hsl(0, 0%, 0%);
 }
 
 .userdanger {
@@ -491,12 +491,12 @@ h2.alert {
 }
 
 .minoralert {
-  color: var(--color-black);
+  color: hsl(0, 0%, 0%);
   font-size: 125%;
 }
 
 .priorityannounce {
-  color: var(--color-black);
+  color: hsl(0, 0%, 0%);
   font-weight: bold;
   font-size: 225%;
 }
@@ -603,11 +603,6 @@ h2.alert {
 .boldnicegreen {
   color: hsl(132.6, 78.7%, 36.9%);
   font-weight: bold;
-}
-
-.tinynicegreen {
-  color: hsl(132.6, 78.7%, 36.9%);
-  font-size: 85%;
 }
 
 .cult {

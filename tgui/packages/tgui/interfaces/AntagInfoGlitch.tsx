@@ -1,4 +1,4 @@
-import { Section, Stack } from 'tgui-core/components';
+import { Divider, Section, Stack } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -28,23 +28,20 @@ export const AntagInfoGlitch = (props) => {
         <Section scrollable fill>
           <Stack fill vertical>
             <Stack.Item>FN TERMINATE_INTRUDERS (REF)</Stack.Item>
-            <Stack.Divider />
-            <Stack.Item bold fontSize="16px">
+            <Divider />
+            <Stack.Item mb={1} bold fontSize="16px">
               <span style={textStyles.variable}>Initialize({antag_name})</span>
             </Stack.Item>
-            <Stack.Item mb={1}>
+            <Stack.Item mb={2}>
               <span style={textStyles.danger}>Bitrunning</span> is a crime. Your
               mission: <span style={textStyles.variable}>Eliminate</span>{' '}
               organic intruders to maintain the integrity of the system.
             </Stack.Item>
             <SpecificInfo />
-
-            <Stack.Divider />
             <Stack.Item>
-              <span style={{ opacity: 0.6 }}>
-                &#47;&#47; {objectives[0]?.explanation}
-              </span>
+              <marquee scrollamount="2">{objectives[0]?.explanation}</marquee>
             </Stack.Item>
+            <Divider />
             <Stack.Item>
               const <span style={textStyles.variable}>TARGETS</span> ={' '}
             </Stack.Item>
@@ -76,7 +73,7 @@ const SpecificInfo = (props) => {
     case 'Cyber Police':
       return (
         <>
-          <Stack.Item mb={1}>
+          <Stack.Item mb={2}>
             To assist your task, your program has been loaded with cutting edge{' '}
             <span style={textStyles.variable}>martial arts</span> skills.
           </Stack.Item>
@@ -89,7 +86,7 @@ const SpecificInfo = (props) => {
     case 'Cyber Tac':
       return (
         <>
-          <Stack.Item mb={1}>
+          <Stack.Item mb={2}>
             You are an advanced combat unit. You have been outfitted with{' '}
             <span style={textStyles.variable}>lethal weaponry</span>.
           </Stack.Item>

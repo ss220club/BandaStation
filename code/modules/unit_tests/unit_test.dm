@@ -277,8 +277,6 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 		//The abstract grown item expects a seed, but doesn't have one
 
 		/obj/item/food/grown,
-		// BANDASTATION ADD - Shouldn't exist without a parent hookah
-		/obj/item/hookah_mouthpiece,
 	)
 
 	// Everything that follows is a typesof() check.

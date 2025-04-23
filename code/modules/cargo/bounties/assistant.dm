@@ -41,36 +41,11 @@
 	wanted_types = list(/obj/item/spear = TRUE)
 
 /datum/bounty/item/assistant/toolbox
-	name = "Заполненные ящики для инструментов"
-	description = "Сотрудники ЦК недостаточно робастны. Поторопитесь и отправьте несколько полных тулбоксов (отвертка, гаечный ключ, сварка, лом, анализатор и кусачки) для решения проблемы."
+	name = "Тулбоксы"
+	description = "На ЦК отсутствует робаст. Поторопитесь и отправьте несколько тулбоксов для решения проблемы."
 	reward = CARGO_CRATE_VALUE * 4
+	required_count = 6
 	wanted_types = list(/obj/item/storage/toolbox = TRUE)
-	/// List of tools that we want to see sorted into a toolbox
-	var/static/list/static_packing_list = list(
-		/obj/item/screwdriver,
-		/obj/item/wrench,
-		/obj/item/weldingtool,
-		/obj/item/crowbar,
-		/obj/item/analyzer,
-		/obj/item/wirecutters,
-	)
-
-/datum/bounty/item/assistant/toolbox/applies_to(obj/shipped)
-	var/list/packing_list = static_packing_list.Copy()
-	for(var/obj/item_contents as anything in shipped.contents)
-		for(var/match_type in packing_list)
-			if(istype(item_contents, match_type))
-				packing_list -= match_type
-				break
-		if(!length(packing_list))
-			return ..()
-	return FALSE
-
-/datum/bounty/item/assistant/toolbox/ship(obj/shipped)
-	. = ..()
-	for(var/obj/object as anything in shipped.contents)
-		if(!is_type_in_list(object, static_packing_list))
-			object.forceMove(shipped.drop_location())
 
 /datum/bounty/item/assistant/statue
 	name = "Статуя"
@@ -158,11 +133,8 @@
 	name = "Комнатные растения"
 	description = "Центральное Командование хочет укомплектовать новую станцию класса BirdBoat. Вам был дан заказ на снабжение станции комнатными растениями."
 	reward = CARGO_CRATE_VALUE * 4
-	required_count = 3
-	wanted_types = list(
-		/obj/item/kirbyplants = TRUE,
-		/obj/item/kirbyplants/synthetic = FALSE
-		)
+	required_count = 8
+	wanted_types = list(/obj/item/kirbyplants = TRUE)
 
 /datum/bounty/item/assistant/monkey_cubes
 	name = "Кубы обезьян"
@@ -184,12 +156,12 @@
 	reward = CARGO_CRATE_VALUE * 6
 	wanted_types = list(/obj/item/food/meat/slab/corgi = TRUE)
 
-/datum/bounty/item/assistant/toys
-	name = "Игрушки"
-	description = "Сын вице-президента, увидев рекламу новых игрушек по телевизору, стал выпрашивать их. Отправьте несколько игрушек из аркадного автомата чтобы угомонить его."
+/datum/bounty/item/assistant/action_figures
+	name = "Фигурки"
+	description = "Сын вице-президента, увидев рекламу фигурок по телевизору, стал выпрашивать их. Отправьте несколько чтобы угомонить его."
 	reward = CARGO_CRATE_VALUE * 8
 	required_count = 5
-	wanted_types = list(/obj/item/toy = TRUE)
+	wanted_types = list(/obj/item/toy/figure = TRUE)
 
 /datum/bounty/item/assistant/paper_bin
 	name = "Корзины для бумаг"
@@ -204,6 +176,14 @@
 	reward = CARGO_CRATE_VALUE * 4
 	required_count = 8
 	wanted_types = list(/obj/item/toy/crayon = TRUE)
+
+/datum/bounty/item/assistant/pens
+	name = "Ручки"
+	description = "Мы проводим интергалактическе соревнования по балансировке ручек. Нам нужно, чтобы вы доставили несколько стандартизированных, чёрных, шариковых ручек."
+	reward = CARGO_CRATE_VALUE * 4
+	required_count = 10
+	include_subtypes = FALSE
+	wanted_types = list(/obj/item/pen = TRUE)
 
 /datum/bounty/item/assistant/water_tank
 	name = "Бак с водой"

@@ -59,6 +59,9 @@
 /datum/action/item_action/toggle_voice_box
 	name = "Toggle Voice Box"
 
+/datum/action/item_action/toggle_human_head
+	name = "Toggle Human Head"
+
 /datum/action/item_action/toggle_helmet
 	name = "Toggle Helmet"
 

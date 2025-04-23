@@ -57,23 +57,21 @@ const WireList = () => {
       <Button fluid icon="chevron-left" onClick={() => act('exit_legend')}>
         Back
       </Button>
-      <Stack fill wrap g={0.5} mt={1}>
+      <Box>
         {wire_devices.map((wire) => (
-          <Stack.Item key={wire.ref} grow basis={10}>
-            <Button
-              fluid
-              ellipsis
-              onClick={() =>
-                act('view_wireset', {
-                  view_wireset: wire.ref,
-                })
-              }
-            >
-              {wire.name}
-            </Button>
-          </Stack.Item>
+          <Button
+            width="49.5%"
+            key={wire.ref}
+            onClick={() =>
+              act('view_wireset', {
+                view_wireset: wire.ref,
+              })
+            }
+          >
+            {wire.name}
+          </Button>
         ))}
-      </Stack>
+      </Box>
     </Section>
   );
 };
@@ -109,12 +107,6 @@ const MainMenu = () => {
     viewing,
   } = data;
 
-  const buttonProps = {
-    fluid: true,
-    textAlign: 'center',
-    py: 0.75,
-  };
-
   return (
     <Section title={`${station_name} blueprints`}>
       <Box italic fontSize={0.9}>
@@ -127,7 +119,9 @@ const MainMenu = () => {
       <Stack fill vertical>
         <Stack.Item>
           <Button
-            {...buttonProps}
+            fluid
+            pb={0.75}
+            textAlign="center"
             icon="pencil"
             onClick={() => act('create_area')}
           >
@@ -135,13 +129,21 @@ const MainMenu = () => {
           </Button>
         </Stack.Item>
         <Stack.Item>
-          <Button {...buttonProps} icon="font" onClick={() => act('edit_area')}>
+          <Button
+            fluid
+            pb={0.75}
+            textAlign="center"
+            icon="font"
+            onClick={() => act('edit_area')}
+          >
             Change area name
           </Button>
         </Stack.Item>
         <Stack.Item>
           <Button
-            {...buttonProps}
+            fluid
+            pb={0.75}
+            textAlign="center"
             icon={area_allows_shuttle_docking ? 'toggle-on' : 'toggle-off'}
             iconPosition="right"
             onClick={() => act('toggle_allow_shuttle_docking')}
@@ -151,40 +153,53 @@ const MainMenu = () => {
         </Stack.Item>
         <Stack.Item>
           <Button
-            {...buttonProps}
+            fluid
+            pb={0.75}
+            textAlign="center"
             icon="chevron-right"
             onClick={() => act('view_legend')}
           >
             View wire color legend
           </Button>
         </Stack.Item>
-        <Stack.Item>
-          <Stack fill>
-            <Stack.Item grow>
+        {viewing ? (
+          <>
+            <Stack.Item>
               <Button
-                {...buttonProps}
+                fluid
+                pb={0.75}
+                textAlign="center"
                 icon="wrench"
-                color={!!viewing && 'red'}
-                onClick={() =>
-                  act(viewing ? 'hide_blueprints' : 'view_blueprints')
-                }
+                onClick={() => act('refresh')}
               >
-                {viewing ? 'Hide' : 'View'} structural data
+                Refresh structural data
               </Button>
             </Stack.Item>
-            {!!viewing && (
-              <Stack.Item>
-                <Button
-                  {...buttonProps}
-                  p={0.75}
-                  icon="refresh"
-                  tooltip="Refresh structural data"
-                  onClick={() => act('refresh')}
-                />
-              </Stack.Item>
-            )}
-          </Stack>
-        </Stack.Item>
+            <Stack.Item>
+              <Button
+                fluid
+                pb={0.75}
+                textAlign="center"
+                icon="wrench"
+                onClick={() => act('hide_blueprints')}
+              >
+                Hide structural data
+              </Button>
+            </Stack.Item>
+          </>
+        ) : (
+          <Stack.Item>
+            <Button
+              fluid
+              pb={0.75}
+              textAlign="center"
+              icon="wrench"
+              onClick={() => act('view_blueprints')}
+            >
+              View structural data
+            </Button>
+          </Stack.Item>
+        )}
       </Stack>
     </Section>
   );

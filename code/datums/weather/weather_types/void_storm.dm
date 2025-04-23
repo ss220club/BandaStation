@@ -16,6 +16,8 @@
 	end_duration = 10 SECONDS
 
 	area_type = /area
+	protect_indoors = FALSE
 	target_trait = ZTRAIT_VOIDSTORM
 
-	weather_flags = (WEATHER_INDOORS | WEATHER_BAROMETER | WEATHER_ENDLESS)
+	barometer_predictable = FALSE
+	perpetual = TRUE

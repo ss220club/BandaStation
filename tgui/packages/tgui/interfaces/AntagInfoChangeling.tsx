@@ -86,10 +86,10 @@ export const AntagInfoChangeling = (props) => {
           </Stack.Item>
           <Stack.Item grow={3}>
             <Stack fill>
-              <Stack.Item grow>
+              <Stack.Item grow basis={0}>
                 <MemoriesSection />
               </Stack.Item>
-              <Stack.Item grow>
+              <Stack.Item grow basis={0}>
                 <VictimPatternsSection />
               </Stack.Item>
             </Stack>
@@ -155,13 +155,14 @@ const IntroductionSection = (props) => {
   );
 };
 
-const AbilitiesSection = () => {
+const AbilitiesSection = (props) => {
+  const { data } = useBackend<Info>();
   return (
     <Section fill title="Способности">
       <Stack fill>
-        <Stack.Item grow>
+        <Stack.Item basis={0} grow>
           <Stack fill vertical>
-            <Stack.Item textColor="label" grow>
+            <Stack.Item basis={0} textColor="label" grow>
               Ваша способность<span style={absorbstyle}>&ensp;Absorb DNA</span>{' '}
               позволяет вам украсть ДНК и воспоминания жертвы. Способность
               <span style={absorbstyle}>&ensp;Extract DNA Sting</span> также
@@ -169,7 +170,7 @@ const AbilitiesSection = () => {
               воспоминаний или образцов речи.
             </Stack.Item>
             <Stack.Divider />
-            <Stack.Item textColor="label" grow>
+            <Stack.Item basis={0} textColor="label" grow>
               Ваша способность
               <span style={revivestyle}>&ensp;Reviving Stasis </span>
               позволяет вам возродиться. Это значит, что ничто, кроме полного
@@ -180,9 +181,9 @@ const AbilitiesSection = () => {
           </Stack>
         </Stack.Item>
         <Stack.Divider />
-        <Stack.Item grow>
+        <Stack.Item basis={0} grow>
           <Stack fill vertical>
-            <Stack.Item textColor="label" grow>
+            <Stack.Item basis={0} textColor="label" grow>
               Ваша способность
               <span style={transformstyle}>&ensp;Transform</span> позволяет вам
               превратиться в форму тех, у кого вы собрали ДНК, летально и
@@ -191,7 +192,7 @@ const AbilitiesSection = () => {
               слота.
             </Stack.Item>
             <Stack.Divider />
-            <Stack.Item textColor="label" grow>
+            <Stack.Item basis={0} textColor="label" grow>
               <span style={storestyle}>&ensp;Cellular Emporium</span> это место,
               где вы приобретаете новые способности, помимо стартового набора. У
               вас есть 10 генетических очков, которые вы можете потратить на

@@ -54,7 +54,6 @@
 
 // Alternate juggernaut themes
 /mob/living/basic/construct/juggernaut/angelic
-	faction = list(FACTION_HOLY)
 	theme = THEME_HOLY
 
 /mob/living/basic/construct/juggernaut/angelic/Initialize(mapload)
@@ -62,5 +61,4 @@
 	ADD_TRAIT(src, TRAIT_ANGELIC, INNATE_TRAIT)
 
 /mob/living/basic/construct/juggernaut/mystic
-	faction = list(ROLE_WIZARD)
 	theme = THEME_WIZARD

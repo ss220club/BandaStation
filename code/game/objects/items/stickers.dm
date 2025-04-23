@@ -66,14 +66,8 @@
  * picks random coordinates based on a `target`'s icon.
  */
 /obj/item/sticker/proc/attempt_attach(atom/target, mob/user, px, py)
-	/// BANDASTATION ADDITION - Stickers don't stick to mobs
-	if(ismob(target))
-		balloon_alert(user, "стикер не прилипает!")
-		return FALSE
-	/// BANDASTATION ADDITION - Stickers don't stick to mobs
-
 	if(COUNT_TRAIT_SOURCES(target, TRAIT_STICKERED) >= MAX_STICKER_COUNT)
-		balloon_alert_to_viewers("слишком много стикеров!")
+		balloon_alert_to_viewers("sticker won't stick!")
 		return FALSE
 
 	if(isnull(px) || isnull(py))
@@ -87,16 +81,13 @@
 
 	if(!isnull(user))
 		user.do_attack_animation(target, used_item = src)
-		target.balloon_alert(user, "стикер прилеплен")
+		target.balloon_alert(user, "sticker sticked")
+		var/mob/living/victim = target
+		if(istype(victim) && !isnull(victim.client))
+			user.log_message("stuck [src] to [key_name(victim)]", LOG_ATTACK)
+			victim.log_message("had [src] stuck to them by [key_name(user)]", LOG_ATTACK)
 
-		/// BANDASTATION REMOVAL - Stickers don't stick to mobs
-		// var/mob/living/victim = target
-		// if(istype(victim) && !isnull(victim.client))
-		// 	user.log_message("stuck [src] to [key_name(victim)]", LOG_ATTACK)
-		// 	victim.log_message("had [src] stuck to them by [key_name(user)]", LOG_ATTACK)
-		/// BANDASTATION REMOVAL - Stickers don't stick to mobs
-
-	target.AddComponent(/datum/component/sticker, src, get_dir(target, src), px, py, null, null, examine_text || "Приклеен стикер [name]")
+	target.AddComponent(/datum/component/sticker, src, get_dir(target, src), px, py, null, null, examine_text)
 	return TRUE
 
 #undef MAX_STICKER_COUNT

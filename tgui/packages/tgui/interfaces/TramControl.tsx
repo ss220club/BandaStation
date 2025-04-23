@@ -58,7 +58,7 @@ const marginDipped = 3;
 
 const dipUnderCircle = (dest, dep) => {
   const index = Object.keys(dest.dest_icons).indexOf(dep);
-  const dipped = index === 1;
+  const dipped = index >= 1 && index <= 2;
   return dipped ? marginDipped : marginNormal;
 };
 
@@ -164,23 +164,21 @@ const Destination = (props) => {
     <Stack vertical>
       <Stack.Item ml={5}>
         <Button
-          mb={0}
-          compact
+          mr={4.38}
+          color={getDestColor(dest)}
           circular
+          compact
           height={4.9}
           width={4.9}
-          color={getDestColor(dest)}
           tooltipPosition="top"
           tooltip={COLOR2BLURB[getDestColor(dest)]}
           onClick={() => setTransitIndex(destinations.indexOf(dest))}
         >
-          <Icon ml={-0.75} fontSize="59px" name="circle-o" />
+          <Icon ml={-2.3} fontSize="59px" name="circle-o" />
         </Button>
-        {destinations.length - 1 !== destinations.indexOf(dest) ? (
-          <Section title=" " mt={-7.5} ml={10} mr={-6} />
-        ) : (
-          <Box mt={-0.75} />
-        )}
+        {(destinations.length - 1 !== destinations.indexOf(dest) && (
+          <Section title=" " mt={-7.3} ml={10} mr={-6.1} />
+        )) || <Box mt={-2.3} />}
       </Stack.Item>
       {dest.dest_icons && (
         <Stack.Item>

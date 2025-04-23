@@ -108,7 +108,6 @@ Possible to do for anyone motivated enough:
 		)
 	)
 	AddElement(/datum/element/contextual_screentip_mob_typechecks, hovering_mob_typechecks)
-	set_wires(new /datum/wires/holopad(src))
 
 	if(on_network)
 		holopads += src
@@ -226,16 +225,10 @@ Possible to do for anyone motivated enough:
 
 /obj/machinery/holopad/examine(mob/user)
 	. = ..()
-	if(isAI(user) || in_range(user, src) || isobserver(user))
+	if(isAI(user))
+		. += span_notice("The status display reads: Current projection range: <b>[holo_range]</b> units. Use :h to speak through the projection. Right-click to project or cancel a projection. Alt-click to hangup all active and incomming calls. Ctrl-click to end projection without jumping to your last location.")
+	else if(in_range(user, src) || isobserver(user))
 		. += span_notice("The status display reads: Current projection range: <b>[holo_range]</b> units.")
-
-	if(!isAI(user))
-		return
-
-	. += span_info("Use :[/datum/saymode/holopad::key] to speak through the projection.")
-	. += span_info("Right-click to project or cancel a projection.")
-	. += span_info("Alt-click to hangup all active and incomming calls.")
-	. += span_info("Ctrl-click to end projection without jumping to your last location.")
 
 /obj/machinery/holopad/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
@@ -630,9 +623,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	return TRUE
 
 /obj/machinery/holopad/proc/clear_holo(datum/owner)
-	qdel(masters[owner])
+	qdel(masters[owner]) // Get rid of owner's hologram
 	unset_holo(owner)
 	return TRUE
+
 /**
  * Called by holocall to inform outgoing_call that the receiver picked up.
  */
@@ -760,14 +754,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	return hologram
 
 /obj/machinery/holopad/proc/replay_start()
-	if(!disk)
-		say("Please insert the disc to play the recording.")
-		return
-
-	if(!disk.record)
-		say("There is no record on the disc. Please check the disk.")
-		return
-
 	if(!replay_mode)
 		replay_mode = TRUE
 		replay_holo = setup_replay_holo(disk.record)
@@ -775,8 +761,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		replay_entry(1)
 
 /obj/machinery/holopad/proc/replay_stop()
-	if(!disk || !disk.record)
-		return FALSE
 	if(replay_mode)
 		replay_mode = FALSE
 		offset = FALSE
@@ -874,10 +858,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	initial_language_holder = /datum/language_holder/universal
 	var/mob/living/Impersonation
 	var/datum/holocall/HC
-
-/obj/effect/overlay/holo_pad_hologram/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/holographic_nature)
 
 /obj/effect/overlay/holo_pad_hologram/Destroy()
 	Impersonation = null

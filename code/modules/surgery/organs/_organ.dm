@@ -66,8 +66,6 @@
 	var/list/organ_effects
 	/// String displayed when the organ has decayed.
 	var/failing_desc = "пребывает под влиянием разложения слишком долго, что уже принимает болезненный цвет. Орган уже не заработает, если его не лечить."
-	/// Assoc list of alternate zones where this can organ be slotted to organ slot for that zone
-	var/list/valid_zones = null
 
 // Players can look at prefs before atoms SS init, and without this
 // they would not be able to see external organs, such as moth wings.
@@ -200,13 +198,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 
 /// Returns a line to be displayed regarding valid insertion zones
 /obj/item/organ/proc/zones_tip()
-	if (!valid_zones)
-		return span_notice("Должно вставляться в [ru_parse_zone(zone, declent = ACCUSATIVE)].")
-
-	var/list/fit_zones = list()
-	for (var/valid_zone in valid_zones)
-		fit_zones += parse_zone(valid_zone)
-	return span_notice("Должно вставляться в [english_list(fit_zones, and_text = " или ")].")
+	return span_notice("Должно вставляться в [ru_parse_zone(zone, declent = ACCUSATIVE)].")
 
 ///Used as callbacks by object pooling
 /obj/item/organ/proc/exit_wardrobe()

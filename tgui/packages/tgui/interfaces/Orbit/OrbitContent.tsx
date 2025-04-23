@@ -60,12 +60,6 @@ export function OrbitContent(props) {
       content: data.npcs,
       title: 'NPCs',
     },
-    // BANDASTATION ADD START - SSD INDICATOR
-    {
-      content: data.ssds,
-      title: 'SSD',
-    },
-    // BANDASTATION ADD END - SSD INDICATOR
   ];
 
   return (

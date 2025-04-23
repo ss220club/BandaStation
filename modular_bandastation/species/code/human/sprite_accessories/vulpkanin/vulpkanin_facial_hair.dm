@@ -1,6 +1,6 @@
 /datum/sprite_accessory/vulpkanin_facial_hair
 	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/facial_hair.dmi'
-	color_src = TRUE
+	color_src = "vulpkanin_facial_hair_color"
 
 /datum/sprite_accessory/vulpkanin_facial_hair/blaze
 	name = "Blaze"
@@ -53,14 +53,3 @@
 /datum/sprite_accessory/vulpkanin_facial_hair/earfluff
 	name = "Vulpkanin Earfluff"
 	icon_state = "earfluff"
-
-/// MARK: Bodypart overlay
-/datum/bodypart_overlay/simple/body_marking/vulpkanin_facial_hair
-	dna_feature_key = "vulpkanin_facial_hair"
-	dna_color_feature_key = "vulpkanin_facial_hair_color"
-	applies_to = list(
-		/obj/item/bodypart/head,
-	)
-
-/datum/bodypart_overlay/simple/body_marking/vulpkanin_facial_hair/get_accessory(name)
-	return SSaccessories.vulpkanin_facial_hair_list[name]

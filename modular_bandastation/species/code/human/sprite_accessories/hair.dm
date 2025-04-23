@@ -2,88 +2,88 @@
 /datum/sprite_accessory/hair/vulpkanin
 	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/hair.dmi'
 
-/datum/sprite_accessory/hair/vulpkanin/kajam
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_kajam
 	name = "Kajam"
 	icon_state = "kajam"
 
-/datum/sprite_accessory/hair/vulpkanin/keid
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_keid
 	name = "Keid"
 	icon_state = "keid"
 
-/datum/sprite_accessory/hair/vulpkanin/adhara
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_adhara
 	name = "Adhara"
 	icon_state = "adhara"
 
-/datum/sprite_accessory/hair/vulpkanin/kleeia
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_kleeia
 	name = "Kleeia"
 	icon_state = "kleeia"
 
-/datum/sprite_accessory/hair/vulpkanin/mizar
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_mizar
 	name = "Mizar"
 	icon_state = "mizar"
 
-/datum/sprite_accessory/hair/vulpkanin/apollo
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_apollo
 	name = "Apollo"
 	icon_state = "apollo"
 
-/datum/sprite_accessory/hair/vulpkanin/belle
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_belle
 	name = "Belle"
 	icon_state = "belle"
 
-/datum/sprite_accessory/hair/vulpkanin/bun
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_bun
 	name = "Bun"
 	icon_state = "bun"
 
-/datum/sprite_accessory/hair/vulpkanin/jagged
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_jagged
 	name = "Jagged"
 	icon_state = "jagged"
 
-/datum/sprite_accessory/hair/vulpkanin/curl
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_curl
 	name = "Curl"
 	icon_state = "curl"
 
-/datum/sprite_accessory/hair/vulpkanin/hawk
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_hawk
 	name = "Hawk"
 	icon_state = "hawk"
 
-/datum/sprite_accessory/hair/vulpkanin/anita
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_anita
 	name = "Anita"
 	icon_state = "anita"
 
-/datum/sprite_accessory/hair/vulpkanin/short
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_short
 	name = "Short"
 	icon_state = "short"
 
-/datum/sprite_accessory/hair/vulpkanin/spike
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_spike
 	name = "Spike"
 	icon_state = "spike"
 
-/datum/sprite_accessory/hair/vulpkanin/braided
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_braided
 	name = "Braided"
 	icon_state = "braided"
 
-/datum/sprite_accessory/hair/vulpkanin/punkbraided
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_punkbraided
 	name = "Punk Braided"
 	icon_state = "punkbraided"
 
-/datum/sprite_accessory/hair/vulpkanin/short2
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_short2
 	name = "Short Alt."
 	icon_state = "short2"
 
-/datum/sprite_accessory/hair/vulpkanin/rough
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_rough
 	name = "Rough-Cropped Mane"
 	icon_state = "rough"
 
-/datum/sprite_accessory/hair/vulpkanin/raine
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_raine
 	name = "Raine"
 	icon_state = "raine"
 	gender = FEMALE
 
-/datum/sprite_accessory/hair/vulpkanin/jeremy
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_jeremy
 	name = "Jeremy"
 	icon_state = "jeremy"
 
-/datum/sprite_accessory/hair/vulpkanin/clean_cut
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_clean_cut
 	name = "Clean Cut"
 	icon_state = "clean_cut"
 
@@ -209,154 +209,154 @@
 /datum/sprite_accessory/hair/tajaran
 	icon = 'icons/bandastation/mob/species/tajaran/sprite_accessories/hair.dmi'
 
-/datum/sprite_accessory/hair/tajaran/braid
+/datum/sprite_accessory/hair/tajaran/taj_hair_braid
 	name = "Tajaran Braid"
 	icon_state = "braid"
 
-/datum/sprite_accessory/hair/tajaran/clean
+/datum/sprite_accessory/hair/tajaran/taj_hair_clean
 	name = "Tajaran Clean"
 	icon_state = "clean"
 
-/datum/sprite_accessory/hair/tajaran/bangs
+/datum/sprite_accessory/hair/tajaran/taj_hair_bangs
 	name = "Tajaran Bangs"
 	icon_state = "bangs"
 
-/datum/sprite_accessory/hair/tajaran/shaggy
+/datum/sprite_accessory/hair/tajaran/taj_hair_shaggy
 	name = "Tajaran Shaggy"
 	icon_state = "shaggy"
 
-/datum/sprite_accessory/hair/tajaran/mohawk
+/datum/sprite_accessory/hair/tajaran/taj_hair_mohawk
 	name = "Tajaran Mohawk"
 	icon_state = "mohawk"
 
-/datum/sprite_accessory/hair/tajaran/plait
+/datum/sprite_accessory/hair/tajaran/taj_hair_plait
 	name = "Tajaran Plait"
 	icon_state = "plait"
 
-/datum/sprite_accessory/hair/tajaran/straight
+/datum/sprite_accessory/hair/tajaran/taj_hair_straight
 	name = "Tajaran Straight"
 	icon_state = "straight"
 
-/datum/sprite_accessory/hair/tajaran/long
+/datum/sprite_accessory/hair/tajaran/taj_hair_long
 	name = "Tajaran Long"
 	icon_state = "long"
 
-/datum/sprite_accessory/hair/tajaran/rattail
+/datum/sprite_accessory/hair/tajaran/taj_hair_rattail
 	name = "Tajaran Rattail"
 	icon_state = "rattail"
 
-/datum/sprite_accessory/hair/tajaran/spikey
+/datum/sprite_accessory/hair/tajaran/taj_hair_spikey
 	name = "Tajaran Spikey"
 	icon_state = "spikey"
 
-/datum/sprite_accessory/hair/tajaran/messy
+/datum/sprite_accessory/hair/tajaran/taj_hair_messy
 	name = "Tajaran Messy"
 	icon_state = "messy"
 
-/datum/sprite_accessory/hair/tajaran/ladiesretro
+/datum/sprite_accessory/hair/tajaran/taj_hair_ladiesretro
 	name = "Tajaran Ladiesretro"
 	icon_state = "ladiesretro"
 
-/datum/sprite_accessory/hair/tajaran/victory
+/datum/sprite_accessory/hair/tajaran/taj_hair_victory
 	name = "Tajaran Victory"
 	icon_state = "victory"
 
-/datum/sprite_accessory/hair/tajaran/bob
+/datum/sprite_accessory/hair/tajaran/taj_hair_bob
 	name = "Tajaran Bob"
 	icon_state = "bob"
 
-/datum/sprite_accessory/hair/tajaran/marmalade
+/datum/sprite_accessory/hair/tajaran/taj_marmalade
 	name = "Tajaran Marmalade"
 	icon_state = "marmalade"
 
-/datum/sprite_accessory/hair/tajaran/stasy_morning
+/datum/sprite_accessory/hair/tajaran/taj_stasy_morning
 	name = "Tajaran Stasy Morning"
 	icon_state = "stasy_morning"
 
-/datum/sprite_accessory/hair/tajaran/punk_lying
+/datum/sprite_accessory/hair/tajaran/taj_punk_lying
 	name = "Tajaran Punk Lying"
 	icon_state = "punk_lying"
 
-/datum/sprite_accessory/hair/tajaran/inari
+/datum/sprite_accessory/hair/tajaran/taj_inari
 	name = "Tajaran Inari"
 	icon_state = "inari"
 
-/datum/sprite_accessory/hair/tajaran/frontbraids
+/datum/sprite_accessory/hair/tajaran/taj_frontbraids
 	name = "Tajaran Frontbraids"
 	icon_state = "frontbraids"
 
-/datum/sprite_accessory/hair/tajaran/flipped
+/datum/sprite_accessory/hair/tajaran/taj_flipped
 	name = "Tajaran Flipped"
 	icon_state = "flipped"
 
-/datum/sprite_accessory/hair/tajaran/cotton
+/datum/sprite_accessory/hair/tajaran/taj_cotton
 	name = "Tajaran Cotton"
 	icon_state = "cotton"
 
-/datum/sprite_accessory/hair/tajaran/cottonalt
+/datum/sprite_accessory/hair/tajaran/taj_cottonalt
 	name = "Tajaran Cotton Alt."
 	icon_state = "cottonalt"
 
-/datum/sprite_accessory/hair/tajaran/baum
+/datum/sprite_accessory/hair/tajaran/taj_baum
 	name = "Tajaran Baum"
 	icon_state = "baum"
 
-/datum/sprite_accessory/hair/tajaran/twintail
+/datum/sprite_accessory/hair/tajaran/taj_twintail
 	name = "Tajaran Twintail"
 	icon_state = "twintail"
 
-/datum/sprite_accessory/hair/tajaran/stacy
+/datum/sprite_accessory/hair/tajaran/taj_stacy
 	name = "Tajaran Stacy"
 	icon_state = "stacy"
 
-/datum/sprite_accessory/hair/tajaran/himecut2
+/datum/sprite_accessory/hair/tajaran/taj_himecut2
 	name = "Tajaran Himecut"
 	icon_state = "himecut2"
 
-/datum/sprite_accessory/hair/tajaran/himeup
+/datum/sprite_accessory/hair/tajaran/taj_himeup
 	name = "Tajaran Hime-up"
 	icon_state = "himeup"
 
-/datum/sprite_accessory/hair/tajaran/pigtails
+/datum/sprite_accessory/hair/tajaran/taj_pigtails
 	name = "Tajaran Pigtails"
 	icon_state = "pigtails"
 
-/datum/sprite_accessory/hair/tajaran/shortovereye
+/datum/sprite_accessory/hair/tajaran/taj_shortovereye
 	name = "Tajaran Short Overeye"
 	icon_state = "shortovereye"
 
-/datum/sprite_accessory/hair/tajaran/drillhairextended
+/datum/sprite_accessory/hair/tajaran/taj_drillhairextended
 	name = "Tajaran Drill Hair Extended"
 	icon_state = "drillhairextended"
 
-/datum/sprite_accessory/hair/tajaran/long3
+/datum/sprite_accessory/hair/tajaran/taj_long3
 	name = "Tajaran Long"
 	icon_state = "long3"
 
-/datum/sprite_accessory/hair/tajaran/rosa
+/datum/sprite_accessory/hair/tajaran/taj_rosa
 	name = "Tajaran Rosa"
 	icon_state = "rosa"
 
-/datum/sprite_accessory/hair/tajaran/eighties
+/datum/sprite_accessory/hair/tajaran/taj_80s
 	name = "Tajaran 80s"
 	icon_state = "80s"
 
-/datum/sprite_accessory/hair/tajaran/country
+/datum/sprite_accessory/hair/tajaran/taj_country
 	name = "Tajaran Country"
 	icon_state = "country"
 
-/datum/sprite_accessory/hair/tajaran/ponytail7
+/datum/sprite_accessory/hair/tajaran/taj_ponytail7
 	name = "Tajaran Side Ponytail"
 	icon_state = "ponytail7"
 
-/datum/sprite_accessory/hair/tajaran/spikyponytail
+/datum/sprite_accessory/hair/tajaran/taj_spikyponytail
 	name = "Tajaran Spiky Ponytail"
 	icon_state = "spikyponytail"
 
-/datum/sprite_accessory/hair/tajaran/overeyetwo
+/datum/sprite_accessory/hair/tajaran/taj_overeyetwo
 	name = "Tajaran Overeye Alt."
 	icon_state = "overeyetwo"
 
-/datum/sprite_accessory/hair/tajaran/allthefuzz
+/datum/sprite_accessory/hair/tajaran/taj_allthefuzz
 	name = "Tajaran Allthefuzz"
 	icon_state = "allthefuzz"

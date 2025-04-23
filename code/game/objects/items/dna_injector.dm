@@ -94,7 +94,6 @@
 
 	if(!inject(target, user)) //Now we actually do the heavy lifting.
 		to_chat(user, span_notice("It appears that [target] does not have compatible DNA."))
-		return
 
 	used = TRUE
 	update_appearance()

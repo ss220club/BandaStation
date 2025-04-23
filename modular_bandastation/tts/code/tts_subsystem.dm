@@ -6,6 +6,7 @@
 
 SUBSYSTEM_DEF(tts220)
 	name = "Text-to-Speech 220"
+	init_order = INIT_ORDER_DEFAULT
 	wait = 0.5 SECONDS
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
@@ -235,8 +236,7 @@ SUBSYSTEM_DEF(tts220)
 	list/effect_types,
 	traits = TTS_TRAIT_RATE_MEDIUM,
 	preSFX = null,
-	postSFX = null,
-	channel_override,
+	postSFX = null
 )
 
 	if(!is_enabled)
@@ -286,11 +286,11 @@ SUBSYSTEM_DEF(tts220)
 	if(fexists("[filename].ogg"))
 		tts_reused++
 		tts_rrps_counter++
-		play_tts(speaker, listener, filename, is_local, effect_singletons, preSFX, postSFX, channel_override)
+		play_tts(speaker, listener, filename, is_local, effect_singletons, preSFX, postSFX)
 		return
 
 	var/datum/callback/play_tts_cb = CALLBACK(\
-		src, PROC_REF(play_tts), speaker, listener, filename, is_local, effect_singletons, preSFX, postSFX, channel_override
+		src, PROC_REF(play_tts), speaker, listener, filename, is_local, effect_singletons, preSFX, postSFX\
 	)
 
 	if(LAZYLEN(tts_queue[filename]))
@@ -358,8 +358,7 @@ SUBSYSTEM_DEF(tts220)
 	is_local = TRUE,
 	list/effects,
 	preSFX = null,
-	postSFX = null,
-	channel_override = null,
+	postSFX = null
 )
 
 	if(!listener?.client)
@@ -378,30 +377,18 @@ SUBSYSTEM_DEF(tts220)
 	var/filename2play = "[pure_filename][filename_suffixes.Join()].ogg"
 
 	if(!length(effects) || fexists(filename2play))
-		output_tts(speaker, listener, filename2play, is_local, preSFX, postSFX, channel_override)
+		output_tts(speaker, listener, filename2play, is_local, preSFX, postSFX)
 		return
 
-	var/datum/callback/output_tts_cb = CALLBACK(src, PROC_REF(output_tts), speaker, listener, filename2play, is_local, preSFX, postSFX, channel_override)
+	var/datum/callback/output_tts_cb = CALLBACK(src, PROC_REF(output_tts), speaker, listener, filename2play, is_local, preSFX, postSFX)
 	queue_sound_effect_processing(pure_filename, effects, filename2play, output_tts_cb)
 
-/datum/controller/subsystem/tts220/proc/output_tts(
-	atom/speaker,
-	mob/listener,
-	filename2play,
-	is_local = TRUE,
-	preSFX = null,
-	postSFX = null,
-	channel_override = null,
-)
-
+/datum/controller/subsystem/tts220/proc/output_tts(atom/speaker, mob/listener, filename2play, is_local = TRUE, preSFX = null, postSFX = null)
 	var/volume
-	switch(channel_override)
-		if(CHANNEL_TTS_RADIO)
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_radio)
-		if(CHANNEL_TTS_ANNOUNCEMENT)
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_announcement)
-		else
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume)
+	if(findtext(filename2play, "radio"))
+		volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_radio)
+	else
+		volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume)
 
 	if(!volume)
 		return
@@ -414,7 +401,7 @@ SUBSYSTEM_DEF(tts220)
 	if(!is_local || isnull(speaker))
 		output.wait = TRUE
 		output.environment = SOUND_ENVIRONMENT_NONE
-		output.channel = channel_override
+		output.channel = CHANNEL_TTS_RADIO
 
 		play_sfx_if_exists(listener, preSFX, output)
 		SEND_SOUND(listener, output)

@@ -173,8 +173,6 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/flashlight))
-		if(user.combat_mode)
-			return NONE
 		if(!opened)
 			balloon_alert(user, "open the chassis cover first!")
 			return ITEM_INTERACT_BLOCKING
@@ -442,7 +440,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	set_connected_ai(null)
 	message_admins("[ADMIN_LOOKUPFLW(user)] emagged cyborg [ADMIN_LOOKUPFLW(src)].  Laws overridden.")
 	log_silicon("EMAG: [key_name(user)] emagged cyborg [key_name(src)]. Laws overridden.")
-	var/time = time2text(world.realtime,"hh:mm:ss", TIMEZONE_UTC)
+	var/time = time2text(world.realtime,"hh:mm:ss")
 	if(user)
 		GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 	else

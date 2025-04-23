@@ -1,60 +1,39 @@
-:root {
-  --nanomap-blur: saturate(150%) var(--blur-medium);
-  --nanomap-shadow: 0 1px 0.2rem hsla(0, 0%, 0%, 0.75);
-  --nanomap-background: hsl(
-    from var(--color-base) h s calc(l - var(--adjust-color)) / 0.85
-  );
-}
+@use '../colors.scss' as colors;
+@use '../functions.scss' as *;
 
-@keyframes highlighted {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  75% {
-    transform: scale(2.5);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(3);
-    opacity: 0;
-  }
-}
+$background-color: hsla(0, 0%, 10%, 0.85);
+$border-color: hsla(255, 255%, 255%, 0.1);
+$border-radius: 0.5rem;
+$box-shadow: 0 1px 0.2rem hsla(0, 0%, 0%, 0.75);
+$blur: saturate(150%) blur(12px);
 
 @mixin nanoButton() {
+  cursor: pointer;
   pointer-events: all;
-  background-color: var(--nanomap-background);
-  color: hsla(0, 0%, 100%, 0.66);
-  border: var(--border-thickness-tiny) solid var(--color-border);
-  border-radius: var(--border-radius-large);
-  box-shadow: var(--nanomap-shadow);
-  backdrop-filter: var(--nanomap-blur);
+  background-color: $background-color;
+  color: hsla(255, 255%, 255%, 0.66);
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  backdrop-filter: $blur;
 
   &:hover {
-    background-color: hsl(
-      from var(--nanomap-background) h s calc(l + var(--adjust-hover))
-    );
-    color: hsla(0, 0%, 100%, 1);
+    background-color: lighten($background-color, 25%);
+    color: hsla(255, 255%, 255%, 1);
   }
 
   &--selected {
-    color: var(--color-green);
+    color: colors.$green;
 
     &:hover {
-      color: hsl(from var(--color-green) h s calc(l + var(--adjust-hover)));
+      color: lighten(colors.$green, 25%);
     }
   }
 
   &--disabled {
-    cursor: var(--cursor-default);
-    background-color: hsl(
-      from var(--nanomap-background) h s l / 0.33
-    ) !important;
-    color: hsl(
-      from var(--color-red) h s calc(l + var(--adjust-color))
-    ) !important;
+    cursor: unset;
+    background-color: lighten($background-color, 25%) !important;
+    color: lighten(colors.$red, 25%) !important;
   }
 }
 
@@ -64,8 +43,8 @@
     align-items: baseline;
     justify-content: center;
     text-align: center;
-    gap: var(--space-s);
-    padding: 0 var(--space-m);
+    gap: 0.25rem;
+    padding: 0 0.5rem;
     z-index: 3;
 
     .Button {
@@ -76,15 +55,15 @@
       position: absolute;
       inset: 0;
       height: 100%;
-      background-color: hsl(from var(--color-green) h s calc(l + 10) / 0.33);
-      border-radius: var(--border-radius-large);
-      transition: width var(--transition-time-medium);
+      background-color: rgba(lighten(colors.$green, 25%), 0.33);
+      border-radius: $border-radius;
+      transition: width 0.2s;
       z-index: -1;
     }
   }
 
   &__Buttons {
-    padding: var(--space-m) 0;
+    padding: 0.5rem 0;
     z-index: 3;
 
     .Button {
@@ -94,70 +73,36 @@
 
   &__Minimap {
     user-select: none;
-    background-color: var(--nanomap-background);
-    border: var(--border-thickness-tiny) solid var(--color-border);
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--nanomap-shadow);
-    backdrop-filter: var(--nanomap-blur);
+    background-color: $background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    backdrop-filter: $blur;
 
     .rzpp-preview {
-      border: var(--border-thickness-tine) solid
-        hsl(from var(--color-border) h s l / 0.33) !important;
-      box-shadow: hsla(0, 0%, 0%, 0.2) 0px 0px 0px 9999px !important;
+      border: 1px solid rgba($border-color, 0.33) !important;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 9999px !important;
     }
   }
 
-  &__Object,
-  &__Marker {
-    cursor: var(--cursor-pointer);
+  &__Object {
+    cursor: pointer;
     font-size: 6px;
     line-height: 0;
     padding: 0;
     height: 2em;
     width: 2em;
-    border: 2px solid hsl(from var(--color-border-dark) h s l / 0.66);
-    border-radius: var(--border-radius-small);
+    border: 2px solid rgba(0, 0, 0, 0.66);
+    border-radius: 0.25rem;
 
     &--wrapper {
       position: absolute;
       transform: translate(17.5%, 5%);
       z-index: 2;
-
-      &.highlighted {
-        z-index: 5;
-      }
     }
 
     &--hidden {
       display: none;
-    }
-  }
-
-  &__Marker {
-    border-radius: var(--border-radius-circular);
-    transform: scale(1.25);
-    transition: transform var(--transition-time-medium);
-
-    &--container {
-      position: relative;
-      display: inline-flex;
-    }
-
-    &--selected {
-      transform: scale(1.5);
-    }
-
-    &--highlighted {
-      position: absolute;
-      inset: 0;
-      border: var(--border-thickness-tiny) solid var(--color-green);
-      border-radius: var(--border-radius-circular);
-      animation: 1.5s highlighted infinite;
-    }
-
-    .Icon {
-      margin: 0;
-      transform: translate(-0.25px, 1.25px);
     }
   }
 }
@@ -173,8 +118,8 @@
   }
 
   &__Minimap--container {
-    top: var(--space-s);
-    left: var(--space-s);
+    top: 0.25rem;
+    left: 0.25rem;
     z-index: 3;
   }
 
@@ -193,7 +138,7 @@
   &--top-right,
   &--bottom-right {
     .NanoMap__Minimap--container {
-      right: var(--space-s);
+      right: 0.25rem;
       left: unset;
     }
   }
@@ -202,7 +147,7 @@
   &--bottom-right {
     .NanoMap__Minimap--container {
       top: unset;
-      bottom: var(--space-s);
+      bottom: 0.25rem;
     }
   }
 
@@ -227,7 +172,7 @@
     pointer-events: none;
     inset: 0 !important;
     display: flex;
-    margin: var(--space-s);
+    margin: 0.25rem;
     align-items: flex-start;
     justify-content: space-between;
 

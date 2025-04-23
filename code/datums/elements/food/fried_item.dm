@@ -20,22 +20,22 @@
 	var/atom/this_food = target
 
 	switch(fry_time)
-		if(0 to FRYING_TIME_FRIED)
+		if(0 to 15 SECONDS)
 			this_food.add_atom_colour(fried_colors[1], FIXED_COLOUR_PRIORITY)
 			this_food.name = "lightly-fried [this_food.name]"
 			this_food.desc += " It's been lightly fried in a deep fryer."
 
-		if(FRYING_TIME_FRIED to FRYING_TIME_PERFECT)
+		if(15 SECONDS to 50 SECONDS)
 			this_food.add_atom_colour(fried_colors[2], FIXED_COLOUR_PRIORITY)
 			this_food.name = "fried [this_food.name]"
 			this_food.desc += " It's been fried, increasing its tastiness value by [rand(1, 75)]%."
 
-		if(FRYING_TIME_PERFECT to FRYING_TIME_BURNT)
+		if(50 SECONDS to 85 SECONDS)
 			this_food.add_atom_colour(fried_colors[3], FIXED_COLOUR_PRIORITY)
 			this_food.name = "deep-fried [this_food.name]"
 			this_food.desc += " Deep-fried to perfection."
 
-		if(FRYING_TIME_BURNT to INFINITY)
+		if(85 SECONDS to INFINITY)
 			this_food.add_atom_colour(fried_colors[4], FIXED_COLOUR_PRIORITY)
 			this_food.name = "\proper the physical manifestation of the very concept of fried foods"
 			this_food.desc = "A heavily-fried... something. Who can tell anymore?"

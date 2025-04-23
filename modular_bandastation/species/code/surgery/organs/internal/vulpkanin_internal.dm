@@ -62,3 +62,7 @@
 /obj/item/organ/lungs/vulpkanin
 	name = "vulpkanin lungs"
 	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'
+
+/obj/item/organ/kidneys/vulpkanin
+	name = "vulpkanin kidneys"
+	icon = 'icons/bandastation/mob/species/vulpkanin/organs.dmi'

@@ -145,7 +145,7 @@ export const NtosNetChat = (props) => {
           </Stack.Item>
           <Stack.Divider />
           <Stack.Item grow={4}>
-            <Stack fill vertical g={0}>
+            <Stack vertical fill>
               <Stack.Item grow>
                 <Section scrollable fill>
                   {(in_channel &&
@@ -257,8 +257,8 @@ export const NtosNetChat = (props) => {
                     </Section>
                   </Stack.Item>
                   <Section>
-                    <Stack vertical g={0.5}>
-                      <Stack.Item>Настройки канала {title}:</Stack.Item>
+                    <Stack.Item mb="8px">Настройки канала {title}:</Stack.Item>
+                    <Stack.Item>
                       {!!(in_channel && authorized) && (
                         <>
                           <Button.Input
@@ -307,7 +307,7 @@ export const NtosNetChat = (props) => {
                           />
                         </>
                       )}
-                    </Stack>
+                    </Stack.Item>
                   </Section>
                 </Stack>
               </Stack.Item>

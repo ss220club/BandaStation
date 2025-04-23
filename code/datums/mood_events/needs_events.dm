@@ -17,14 +17,10 @@
 
 /datum/mood_event/hungry
 	description = "Я немного проголодался."
-	mood_change = -3
-
-/datum/mood_event/hungry_very
-	description = "Я голодаю!"
 	mood_change = -6
 
 /datum/mood_event/starving
-	description = "Я умираю с голода!"
+	description = "Я голодаю!"
 	mood_change = -10
 
 //charge

@@ -274,10 +274,9 @@ const CrimeAuthor = (props) => {
       <Stack.Item color="label">
         Штраф (оставьте пустым для ареста)
         <RestrictedInput
-          fluid
-          value={crimeFine}
-          maxValue={1000}
           onChange={(_, value) => setCrimeFine(value)}
+          fluid
+          maxValue={1000}
         />
       </Stack.Item>
       <Stack.Item>

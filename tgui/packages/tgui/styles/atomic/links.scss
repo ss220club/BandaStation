@@ -3,24 +3,15 @@
  * SPDX-License-Identifier: MIT
  */
 
-a {
-  cursor: var(--cursor-pointer);
-  color: var(--color-hyperlink);
-  transition: color var(--transition-time-medium);
+@use '../colors.scss';
 
+a {
+  &:link,
+  &:visited {
+    color: colors.$blue;
+  }
   &:hover,
   &:active {
-    color: hsl(from var(--color-hyperlink) h s calc(l + var(--adjust-hover)));
-  }
-
-  &:visited {
-    color: var(--color-hyperlink-visited);
-
-    &:hover,
-    &:active {
-      color: hsl(
-        from var(--color-hyperlink-visited) h s calc(l + var(--adjust-hover))
-      );
-    }
+    color: colors.$primary;
   }
 }

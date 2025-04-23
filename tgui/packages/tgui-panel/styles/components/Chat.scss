@@ -3,10 +3,16 @@
  * SPDX-License-Identifier: MIT
  */
 
+@use 'sass:color';
 @use 'sass:math';
+@use '~tgui/styles/base.scss';
+@use '~tgui/styles/colors.scss';
+
+$text-color: hsl(210, 50%, 80%) !default;
+$color-bg-section: base.$color-bg-section !default;
 
 .Chat {
-  color: var(--chat-text-color);
+  color: $text-color;
 }
 
 .Chat__badge {
@@ -49,20 +55,20 @@
     display: inline-block;
     border-radius: 1em;
     padding: 0 0.7em;
-    color: var(--color-red);
-    background-color: var(--color-section);
+    color: colors.$red;
+    background-color: $color-bg-section;
   }
 
   &:after {
     content: '';
     display: block;
     margin-top: -0.75em;
-    border-bottom: math.div(1em, 6) solid var(--color-red);
+    border-bottom: math.div(1em, 6) solid colors.$red;
   }
 }
 
 .Chat__highlight {
-  color: var(--color-black);
+  color: hsl(0, 0%, 0%);
 }
 
 .Chat__highlight--restricted {

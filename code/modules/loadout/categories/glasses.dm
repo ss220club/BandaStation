@@ -13,19 +13,20 @@
 		LAZYADD(outfit.backpack_contents, outfit.glasses)
 	outfit.glasses = item_path
 
-/datum/loadout_item/glasses/regular
+/datum/loadout_item/glasses/prescription_glasses
 	name = "Glasses"
 	item_path = /obj/item/clothing/glasses/regular
+	additional_displayed_text = list("Слабовидящие")
 
-/datum/loadout_item/glasses/circle_glasses
+/datum/loadout_item/glasses/prescription_glasses/circle_glasses
 	name = "Circle Glasses"
 	item_path = /obj/item/clothing/glasses/regular/circle
 
-/datum/loadout_item/glasses/hipster_glasses
+/datum/loadout_item/glasses/prescription_glasses/hipster_glasses
 	name = "Hipster Glasses"
 	item_path = /obj/item/clothing/glasses/regular/hipster
 
-/datum/loadout_item/glasses/jamjar_glasses
+/datum/loadout_item/glasses/prescription_glasses/jamjar_glasses
 	name = "Jamjar Glasses"
 	item_path = /obj/item/clothing/glasses/regular/jamjar
 
@@ -57,7 +58,7 @@
 	name = "Medical Eyepatch"
 	item_path = /obj/item/clothing/glasses/eyepatch/medical
 
-/datum/loadout_item/glasses/kim
+/datum/loadout_item/glasses/prescription_glasses/kim
 	name = "Thin Glasses"
 	item_path = /obj/item/clothing/glasses/regular/kim
 

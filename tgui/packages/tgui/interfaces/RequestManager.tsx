@@ -6,8 +6,8 @@
 import { useState } from 'react';
 import {
   Button,
-  Floating,
   Input,
+  Popper,
   Section,
   Stack,
   Table,
@@ -192,37 +192,43 @@ const FilterPanel = (props) => {
 
   return (
     <div>
-      <Floating
+      {' '}
+      <Button icon="cog" onClick={() => setFilterVisible(!filterVisible)}>
+        Type Filter
+      </Button>
+      <Popper
+        isOpen={filterVisible}
         placement="bottom-end"
-        onOpenChange={setFilterVisible}
-        contentClasses="RequestManager__filterPanel"
         content={
-          <Table width="0">
-            {Object.keys(displayTypeMap).map((type) => {
-              return (
-                <Table.Row className="candystripe" key={type}>
-                  <Table.Cell collapsing>
-                    <RequestType requestType={type} />
-                  </Table.Cell>
-                  <Table.Cell collapsing>
-                    <Button.Checkbox
-                      checked={typesList[type]}
-                      onClick={() => {
-                        updateFilter(type);
-                      }}
-                      my={0.25}
-                    />
-                  </Table.Cell>
-                </Table.Row>
-              );
-            })}
-          </Table>
+          <div
+            className="RequestManager__filterPanel"
+            style={{
+              display: 'block',
+            }}
+          >
+            <Table width="0">
+              {Object.keys(displayTypeMap).map((type) => {
+                return (
+                  <Table.Row className="candystripe" key={type}>
+                    <Table.Cell collapsing>
+                      <RequestType requestType={type} />
+                    </Table.Cell>
+                    <Table.Cell collapsing>
+                      <Button.Checkbox
+                        checked={typesList[type]}
+                        onClick={() => {
+                          updateFilter(type);
+                        }}
+                        my={0.25}
+                      />
+                    </Table.Cell>
+                  </Table.Row>
+                );
+              })}
+            </Table>
+          </div>
         }
-      >
-        <Button icon="cog" selected={filterVisible}>
-          Type Filter
-        </Button>
-      </Floating>
+      />
     </div>
   );
 };

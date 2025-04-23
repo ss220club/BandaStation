@@ -367,7 +367,12 @@
 	icon_broken = "medalbox+b"
 	base_icon_state = "medalbox"
 	icon_open = "medalboxopen"
-	storage_type = /datum/storage/lockbox/dueling
+
+/obj/item/storage/lockbox/dueling/Initialize(mapload)
+	. = ..()
+	atom_storage.max_specific_storage = WEIGHT_CLASS_SMALL
+	atom_storage.max_slots = 2
+	atom_storage.set_holdable(/obj/item/gun/energy/dueling)
 
 /obj/item/storage/lockbox/dueling/PopulateContents()
 	. = ..()

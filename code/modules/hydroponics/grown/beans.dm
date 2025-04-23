@@ -24,7 +24,7 @@
 	gender = PLURAL
 	icon_state = "soybeans"
 	foodtypes = VEGETABLES
-	juice_typepath = /datum/reagent/consumable/soymilk
+	grind_results = list(/datum/reagent/consumable/soymilk = 0)
 	tastes = list("soy" = 1)
 	distill_reagent = /datum/reagent/consumable/soysauce
 

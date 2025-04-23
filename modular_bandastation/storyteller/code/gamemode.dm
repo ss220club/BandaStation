@@ -1,20 +1,18 @@
+#define INIT_ORDER_GAMEMODE 70
 ///how many storytellers can be voted for along with always_votable ones
 #define DEFAULT_STORYTELLER_VOTE_OPTIONS 4
 ///amount of players we can have before no longer running votes for storyteller
 #define MAX_POP_FOR_STORYTELLER_VOTE 25
 ///the duration into the round for which roundstart events are still valid to run
 #define ROUNDSTART_VALID_TIMEFRAME 3 MINUTES
-#define STATION_REPORT_TEMPLATE_PATH "modular_bandastation/storyteller/templates/station_report.md"
 
 SUBSYSTEM_DEF(gamemode)
 	name = "Gamemode"
+	init_order = INIT_ORDER_GAMEMODE
 	runlevels = RUNLEVEL_GAME
 	flags = SS_BACKGROUND | SS_KEEP_TIMING
 	priority = 20
 	wait = 2 SECONDS
-	dependencies = list(
-		/datum/controller/subsystem/mapping
-	)
 
 	/// List of our event tracks for fast access during for loops.
 	var/list/event_tracks = EVENT_TRACKS
@@ -98,8 +96,7 @@ SUBSYSTEM_DEF(gamemode)
 		EVENT_TRACK_OBJECTIVES = 1,
 		)
 
-	/// List of all valid event by their name
-	var/list/events_by_name = list()
+
 
 	/// Associative list of control events by their track category. Compiled in Init
 	var/list/event_pools = list()
@@ -179,12 +176,14 @@ SUBSYSTEM_DEF(gamemode)
 		storytellers[type] = new type()
 
 	for(var/datum/round_event_control/event_type as anything in typesof(/datum/round_event_control))
-		var/datum/round_event_control/event = new event_type
-		if(!event_type.name || !event.typepath || !event.valid_for_map())
-			continue // event isn't good for this map no point in trying to add it to the list
+		if(!event_type::typepath || !event_type::name)
+			continue
 
+		var/datum/round_event_control/event = new event_type
+		if(!event.valid_for_map())
+			qdel(event)
+			continue // event isn't good for this map no point in trying to add it to the list
 		control += event //add it to the list of all events (controls)
-		events_by_name[name] = event
 
 	load_config_vars()
 	load_event_config_vars()
@@ -521,8 +520,12 @@ SUBSYSTEM_DEF(gamemode)
 	return can_run
 
 /datum/controller/subsystem/gamemode/proc/get_sec_mult()
-	var/antag_cap = get_antag_cap()
-	return antag_cap > 0 ? (2 - (get_antag_count() / antag_cap)) : 0
+	var/sec_mult = 1
+	if(length(full_department_roles[STS_SEC]))
+		var/avg_count = length(full_department_roles[STS_SEC]) / 2
+		var/antags_count = get_antag_count()
+		sec_mult = antags_count ? avg_count / antags_count : length(full_department_roles[STS_SEC]) * 100
+	return sec_mult
 
 /datum/controller/subsystem/gamemode/proc/update_pop_scaling()
 	for(var/track in event_tracks)
@@ -624,7 +627,7 @@ SUBSYSTEM_DEF(gamemode)
 			)
 			query_round_game_mode.Execute()
 			qdel(query_round_game_mode)
-	SSstation.generate_station_goals(CONFIG_GET(number/station_goal_budget))
+	SSstation.generate_station_goals(INFINITY)
 	if(report)
 		generate_station_goal_report()
 	handle_post_setup_roundstart_events()
@@ -656,70 +659,41 @@ SUBSYSTEM_DEF(gamemode)
 		addtimer(CALLBACK(src, PROC_REF(generate_station_goal_report)), 10 SECONDS)
 		return
 
-	if(!fexists(STATION_REPORT_TEMPLATE_PATH))
-		stack_trace("station report template doesn't exist at path: [STATION_REPORT_TEMPLATE_PATH]")
-		return
-
-	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
-	if(!station_report_template)
-		stack_trace("station report template doesn't is empty at path: [STATION_REPORT_TEMPLATE_PATH]")
-		return
+	. = "<b><i>Департамент разведки и оценки угроз Nanotrasen, Текущий сектор, Дата и время: [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]:</i></b><hr>"
+	//. += SSdynamic.generate_advisory_level() - генерация псевдо-орбит
 
 	var/list/datum/station_goal/goals = SSstation.get_station_goals()
-	var/station_goals_section = ""
 	if(length(goals))
-		var/list/station_goal_reports = list()
+		var/list/texts = list("<hr><b>Особые заказы для станции: [station_name()]:</b><br>")
 		for(var/datum/station_goal/station_goal as anything in goals)
 			station_goal.on_report()
-			station_goal_reports += station_goal.get_report()
+			texts += station_goal.get_report()
+		. += texts.Join("<hr>")
 
-		station_goals_section = list(
-			"# === Цели на смену ===\n",
-			station_goal_reports.Join("\n\n---\n\n"),
-		).Join()
-
-	station_report_template = replacetext(station_report_template, "%STATION_GOALS", station_goals_section);
-
-	var/list/trait_reports = list()
+	var/list/trait_list_strings = list()
 	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
 		if(!station_trait.show_in_report)
 			continue
+		trait_list_strings += "[station_trait.get_report()]<BR>"
+	if(trait_list_strings.len > 0)
+		. += "<hr><b>Отчет отдела учета отклонений:</b><BR>" + trait_list_strings.Join()
 
-		trait_reports += "- [station_trait.get_report()]"
-
-	var/trait_reports_sections = ""
-	if(length(trait_reports))
-		trait_reports_sections = list(
-			"\n\n---\n\n",
-			"# === Обнаруженные отклонения ===\n",
-			trait_reports.Join("\n")
-		).Join()
-
-	station_report_template = replacetext(station_report_template, "%TRAIT_REPORTS", trait_reports_sections);
-
-	var/footnote_section = ""
 	if(length(GLOB.communications_controller.command_report_footnotes))
-		var/list/footnotes = list()
+		var/footnote_pile = ""
+
 		for(var/datum/command_footnote/footnote in GLOB.communications_controller.command_report_footnotes)
-			footnotes += "[footnote.message]<BR>"
-			footnotes += "<i>[footnote.signature]</i><BR>"
-			footnotes += "<BR>"
+			footnote_pile += "[footnote.message]<BR>"
+			footnote_pile += "<i>[footnote.signature]</i><BR>"
+			footnote_pile += "<BR>"
 
-		footnote_section = list(
-			"\n\n---\n\n",
-			"# === Дополнительная информация ===\n",
-			footnotes.Join()
-		).Join()
-
-	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section);
-	station_report_template = replacetext(station_report_template, "%SIGNING_OFFICER", "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]");
-
-	station_report_template = replace_text_keys(station_report_template)
+		. += "<hr><b>Дополнительная информация: </b><BR><BR>" + footnote_pile
 
 #ifndef MAP_TEST
-	print_command_report(station_report_template, "[command_name()] Status Summary", announce=FALSE)
+	print_command_report(., "[command_name()] Status Summary", announce=FALSE)
 	priority_announce("Отчет был скопирован и распечатан на всех консолях связи.", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound())
 #endif
+
+	return .
 
 /datum/controller/subsystem/gamemode/proc/recalculate_ready_pop()
 	ready_players = 0
@@ -863,7 +837,6 @@ SUBSYSTEM_DEF(gamemode)
 		while(exclusive_event.price_to_buy_adds <= roundstart_budget)
 			roundstart_budget -= exclusive_event.price_to_buy_adds
 			addition_antags++
-			message_admins("Storyteller purchased and triggered [exclusive_event] and buy additional antag. Left balance: [roundstart_budget].")
 	//Расчитать новый максимум и минимум антагов
 	exclusive_event.base_antags += addition_antags
 	exclusive_event.maximum_antags += addition_antags
@@ -898,6 +871,21 @@ SUBSYSTEM_DEF(gamemode)
 				break
 
 	return valid_events
+
+/*
+ * Generate a list of active station traits to report to the crew.
+ *
+ * Returns a formatted string of all station traits (that are shown) affecting the station.
+ */
+/datum/controller/subsystem/gamemode/proc/generate_station_trait_report()
+	if(!SSstation.station_traits.len)
+		return
+	. = "<hr><b>Identified shift divergencies:</b><BR>"
+	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
+		if(!station_trait.show_in_report)
+			continue
+		. += "[station_trait.get_report()]<BR>"
+	return
 
 //////////////////////////
 //Reports player logouts//
@@ -1014,25 +1002,11 @@ SUBSYSTEM_DEF(gamemode)
 	min_pop_thresholds[EVENT_TRACK_ROLESET] = CONFIG_GET(number/roleset_min_pop)
 	min_pop_thresholds[EVENT_TRACK_OBJECTIVES] = CONFIG_GET(number/objectives_min_pop)
 
-	if(!CONFIG_GET(flag/events_config_enabled))
-		return
-
-	var/file_path = "[global.config.directory]/bandastation/events.toml"
-	if(!fexists(file_path))
-		return
-
-	var/list/configuration = rustg_read_toml_file(file_path)
-	for(var/variable in configuration)
-		var/datum/round_event_control/event = events_by_name[variable]
-		if(!event)
-			stack_trace("Invalid event [event] attempting to be configured.")
-			continue
-		for(var/event_variable in configuration[variable])
-			if(!(event.vars.Find(event_variable)))
-				stack_trace("Invalid event configuration variable [event_variable] in variable changes for [variable].")
-				continue
-			event.vars[event_variable] = configuration[variable][event_variable]
-
+	//point_thresholds[EVENT_TRACK_MUNDANE] = CONFIG_GET(number/mundane_point_threshold)
+	//point_thresholds[EVENT_TRACK_MODERATE] = CONFIG_GET(number/moderate_point_threshold)
+	//point_thresholds[EVENT_TRACK_MAJOR] = CONFIG_GET(number/major_point_threshold)
+	//point_thresholds[EVENT_TRACK_ROLESET] = CONFIG_GET(number/roleset_point_threshold)
+	//point_thresholds[EVENT_TRACK_OBJECTIVES] = CONFIG_GET(number/objectives_point_threshold)
 
 /datum/controller/subsystem/gamemode/proc/handle_picking_storyteller()
 	if(CONFIG_GET(flag/disable_storyteller))
@@ -1614,4 +1588,3 @@ SUBSYSTEM_DEF(gamemode)
 #undef DEFAULT_STORYTELLER_VOTE_OPTIONS
 #undef MAX_POP_FOR_STORYTELLER_VOTE
 #undef ROUNDSTART_VALID_TIMEFRAME
-#undef STATION_REPORT_TEMPLATE_PATH

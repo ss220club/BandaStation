@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Box, Stack } from 'tgui-core/components';
-import { classes } from 'tgui-core/react';
 
 import { DataEvidence } from './DataTypes';
 
@@ -49,10 +48,7 @@ export function Pin(props: PinProps) {
     <Stack>
       <Stack.Item>
         <Box
-          className={classes([
-            'Evidence__Pin',
-            creatingRope && 'Evidence__Pin--connecting',
-          ])}
+          className="Evidence__Pin"
           textAlign="center"
           onMouseDown={handleMouseDown}
           onMouseUp={(args) => onMouseUp(evidence, args)}

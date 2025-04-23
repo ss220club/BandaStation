@@ -29,18 +29,27 @@ import './styles/themes/admin.scss';
 import { perf } from 'common/perf';
 import { setupGlobalEvents } from 'tgui-core/events';
 import { setupHotKeys } from 'tgui-core/hotkeys';
-import { setupHotReloading } from 'tgui-dev-server/link/client.mjs';
+import { setupHotReloading } from 'tgui-dev-server/link/client.cjs';
 
-import { App } from './App';
 import { setGlobalStore } from './backend';
+import { loadIconRefMap } from './icons';
 import { captureExternalLinks } from './links';
-import { render } from './renderer';
+import { createRenderer } from './renderer';
 import { configureStore } from './store';
 
-perf.mark('inception', window.performance?.timeOrigin);
+perf.mark('inception', window.performance?.timing?.navigationStart);
 perf.mark('init');
 
 const store = configureStore();
+
+const renderApp = createRenderer(() => {
+  setGlobalStore(store);
+  loadIconRefMap();
+
+  const { getRoutedComponent } = require('./routes');
+  const Component = getRoutedComponent(store);
+  return <Component />;
+});
 
 function setupApp() {
   // Delay setup
@@ -49,26 +58,22 @@ function setupApp() {
     return;
   }
 
-  setGlobalStore(store);
-
   setupGlobalEvents();
   setupHotKeys();
   captureExternalLinks();
 
-  store.subscribe(() => render(<App />));
+  // Re-render UI on store updates
+  store.subscribe(renderApp);
 
   // Dispatch incoming messages as store actions
   Byond.subscribe((type, payload) => store.dispatch({ type, payload }));
 
   // Enable hot module reloading
-  if (import.meta.webpackHot) {
+  if (module.hot) {
     setupHotReloading();
-    import.meta.webpackHot.accept(
-      ['./debug', './layouts', './routes', './App'],
-      () => {
-        render(<App />);
-      },
-    );
+    module.hot.accept(['./debug', './layouts', './routes'], () => {
+      renderApp();
+    });
   }
 }
 

@@ -291,20 +291,20 @@ export function DetectiveBoard(props) {
                         connections={retrieveConnections(
                           movingEvidenceConnections,
                         )}
-                        zLayer={1}
+                        zLayer={99}
                       />
                     )}
                     {connection && (
                       <Connections
                         lineWidth={5}
                         connections={[connection]}
-                        zLayer={1}
+                        zLayer={99}
                       />
                     )}
                     <Connections
                       lineWidth={5}
                       connections={connections}
-                      zLayer={1}
+                      zLayer={99}
                     />
                     {item?.evidences?.map((evidence, index) => (
                       <Evidence

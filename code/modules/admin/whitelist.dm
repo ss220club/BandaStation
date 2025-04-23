@@ -11,15 +11,12 @@ GLOBAL_LIST(whitelist)
 			continue
 		GLOB.whitelist += ckey(line)
 
-	// BADNASTATION EDIT
-	// if(!GLOB.whitelist.len)
-	// 	GLOB.whitelist = null
+	if(!GLOB.whitelist.len)
+		GLOB.whitelist = null
 
 /proc/check_whitelist(ckey)
-	// BANDASTATION EDIT - SSCentral
-	if(!SScentral.can_run())
-		stack_trace("Using whitelist without SS Central is not supported")
-		return
-	return SScentral.is_player_whitelisted(ckey)
+	if(!GLOB.whitelist)
+		return FALSE
+	. = (ckey in GLOB.whitelist)
 
 #undef WHITELISTFILE

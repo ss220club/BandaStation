@@ -1,6 +1,5 @@
 /// Name of the blanks file
-#define BLANKS_FOLDER "config/blanks"
-#define BLANKS_FILE_NAME "[BLANKS_FOLDER]/blanks.json"
+#define BLANKS_FILE_NAME "config/blanks.json"
 
 /// For use with the `color_mode` var. Photos will be printed in greyscale while the var has this value.
 #define PHOTO_GREYSCALE "Greyscale"
@@ -54,17 +53,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 
 	var/list/parsed_blanks = list()
 	for(var/paper_blank in blanks_json)
-		var/blank_info = paper_blank["info"]
-		var/info_file_path = "[BLANKS_FOLDER]/[blank_info]"
-		if(islist(blank_info))
-			var/list/blank_info_list = blank_info
-			paper_blank["info"] = blank_info_list.Join("")
-		else if(fexists(info_file_path))
-			paper_blank["info"] = file2text(info_file_path)
-		else
-			continue
-
-		parsed_blanks["[paper_blank["code"]]"] = paper_blank
+		parsed_blanks += list("[paper_blank["code"]]" = paper_blank)
 
 	return parsed_blanks
 
@@ -78,7 +67,6 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	max_integrity = 300
 	integrity_failure = 0.33
 	interaction_flags_mouse_drop = NEED_DEXTERITY | ALLOW_RESTING
-	circuit = /obj/item/circuitboard/machine/photocopier
 
 	/// A reference to a mob on top of the photocopier trying to copy their ass. Null if there is no mob.
 	var/mob/living/ass
@@ -95,24 +83,14 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	/// Variable for the UI telling us how many copies are in the queue.
 	var/copies_left = 0
 	/// The amount of paper this photocoper starts with.
-	var/starting_paper = 0
+	var/starting_paper = 30
 	/// A stack for all the empty paper we have newly inserted (LIFO)
 	var/list/paper_stack = list()
-	/// Type path to the paper that's created when we're initalized
-	var/created_paper = /obj/item/paper
 
-/obj/machinery/photocopier/prebuilt
-	starting_paper = 30
-
-/obj/machinery/photocopier/prebuilt/Initialize(mapload)
-	toner_cartridge = new(src)
-	return ..()
 
 /obj/machinery/photocopier/Initialize(mapload)
 	. = ..()
-	// Creates the paper and inserts it so we can drop it when we get destroyed/deconstructed
-	for(var/i in 1 to starting_paper)
-		paper_stack += new created_paper(src)
+	toner_cartridge = new(src)
 	setup_components()
 	AddElement(/datum/element/elevation, pixel_shift = 8) //enough to look like your bums are on the machine.
 
@@ -155,20 +133,11 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 /obj/machinery/photocopier/ui_static_data(mob/user)
 	var/list/static_data = list()
 
-	var/list/user_access = list()
-	if(isliving(user))
-		var/mob/living/living_user = user
-		user_access = living_user.get_access()
-
 	var/list/blank_infos = list()
 	var/list/category_names = list()
 	if(GLOB.paper_blanks)
 		for(var/blank_id in GLOB.paper_blanks)
 			var/list/paper_blank = GLOB.paper_blanks[blank_id]
-			var/required_access = paper_blank["required_access"]
-			if(required_access && !(required_access in user_access))
-				continue
-
 			blank_infos += list(list(
 				name = paper_blank["name"],
 				category = paper_blank["category"],
@@ -301,7 +270,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 			if(!(params["code"] in GLOB.paper_blanks))
 				return FALSE
 			var/list/blank = GLOB.paper_blanks[params["code"]]
-			do_copies(CALLBACK(src, PROC_REF(make_blank_print), blank, ui.user), usr, PAPER_PAPER_USE, PAPER_TONER_USE, num_copies)
+			do_copies(CALLBACK(src, PROC_REF(make_blank_print), blank), usr, PAPER_PAPER_USE, PAPER_TONER_USE, num_copies)
 			return TRUE
 
 /// Returns the color used for the printing operation. If the color is below TONER_LOW_PERCENTAGE, it returns a gray color.
@@ -495,15 +464,17 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	return copied_paperwork
 
 /// Handles the copying of blanks. No mutating state, so this should not fail.
-/obj/machinery/photocopier/proc/make_blank_print(list/blank, mob/user)
+/obj/machinery/photocopier/proc/make_blank_print(list/blank)
 	var/copy_colour = get_toner_color()
 	var/obj/item/paper/printblank = get_empty_paper()
 
 	var/printname = blank["name"]
-	var/printinfo = blank["info"]
+	var/list/printinfo
+	for(var/infoline in blank["info"])
+		printinfo += infoline
 
 	printblank.name = "paper - '[printname]'"
-	printblank.add_raw_text(replace_text_keys(printinfo, user), color = copy_colour, advanced_html = TRUE)
+	printblank.add_raw_text(printinfo, color = copy_colour)
 	printblank.update_appearance()
 
 	toner_cartridge.charges -= PAPER_TONER_USE
@@ -550,16 +521,6 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 
 	to_chat(user, span_notice("You take [object] out of [src]. [busy ? "The [src] comes to a halt." : ""]"))
 
-/obj/machinery/photocopier/screwdriver_act(mob/living/user, obj/item/tool)
-	. = ..()
-	if(default_deconstruction_screwdriver(user, "photocopier2", "photocopier", tool))
-		return ITEM_INTERACT_SUCCESS
-
-/obj/machinery/photocopier/crowbar_act(mob/living/user, obj/item/tool)
-	. = ..()
-	if(default_deconstruction_crowbar(tool))
-		return ITEM_INTERACT_SUCCESS
-
 /obj/machinery/photocopier/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
 	default_unfasten_wrench(user, tool)
@@ -594,7 +555,6 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 /// Proc that handles insertion of empty paper, useful for copying later.
 /obj/machinery/photocopier/proc/insert_empty_paper(obj/item/paper/paper, mob/user)
 	if(istype(paper, /obj/item/paper/paperslip))
-		balloon_alert(user, "too small!")
 		return
 	if(get_paper_count() >= MAX_PAPER_CAPACITY)
 		balloon_alert(user, "cannot hold more paper!")
@@ -703,7 +663,6 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	desc = "A small, lightweight cartridge of Nanotrasen ValueBrand toner. Fits photocopiers and autopainters alike."
 	icon = 'icons/obj/service/bureaucracy.dmi'
 	icon_state = "tonercartridge"
-	w_class = WEIGHT_CLASS_SMALL
 	grind_results = list(/datum/reagent/iodine = 40, /datum/reagent/iron = 10)
 	var/charges = 5
 	var/max_charges = 5
@@ -727,7 +686,6 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 
 #undef PHOTOCOPIER_FEE
 #undef BLANKS_FILE_NAME
-#undef BLANKS_FOLDER
 #undef PAPER_PAPER_USE
 #undef PHOTO_PAPER_USE
 #undef DOCUMENT_PAPER_USE

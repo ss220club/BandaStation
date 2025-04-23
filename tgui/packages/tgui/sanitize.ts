@@ -43,8 +43,6 @@ const defTag = [
   'tr',
   'u',
   'ul',
-
-  'small',
 ];
 
 // Advanced HTML tags that we can trust admins (but not players) with
@@ -62,13 +60,13 @@ const defAttr = ['class', 'style', 'background'];
  * @param forbidAttr - List of forbidden HTML attributes
  * @param advTags - List of advanced HTML tags allowed for trusted sources
  */
-export function sanitizeText(
+export const sanitizeText = (
   input: string,
   advHtml = false,
   tags = defTag,
   forbidAttr = defAttr,
   advTags = advTag,
-) {
+) => {
   // This is VERY important to think first if you NEED
   // the tag you put in here.  We are pushing all this
   // though dangerouslySetInnerHTML and even though
@@ -81,4 +79,4 @@ export function sanitizeText(
     ALLOWED_TAGS: tags,
     FORBID_ATTR: forbidAttr,
   });
-}
+};

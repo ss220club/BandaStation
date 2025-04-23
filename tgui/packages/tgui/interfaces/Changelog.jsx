@@ -119,7 +119,7 @@ export class Changelog extends Component {
     const { dateChoices } = this;
 
     const dateDropdown = dateChoices.length > 0 && (
-      <Stack>
+      <Stack mb={1}>
         <Stack.Item>
           <Button
             className="Changelog__Button"

@@ -174,7 +174,6 @@ export type PreferencesMenuData = {
   keybindings: Record<string, string[]>;
   overflow_role: string;
   selected_quirks: string[];
-  species_disallowed_quirks: string[];
 
   antag_bans?: string[];
   antag_days_left?: Record<string, number>;
@@ -185,7 +184,6 @@ export type PreferencesMenuData = {
   window: PrefsWindow;
 
   // BANDASTATION ADDITION START
-  donator_level: number;
   tts_seed: string;
   tts_enabled: BooleanLike;
   // BANDASTATION ADDITION END

@@ -1,4 +1,4 @@
 /datum/modpack/links_change
-	name = "Дискорд."
-	desc = "Ссылка на дискорд."
+	name = "Привязка Дискорда."
+	desc = "Добавление привязки Дискорда."
 	author = "KOJIT2009"

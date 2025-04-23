@@ -93,7 +93,6 @@
 	event_group = /datum/event_group/debris
 
 /datum/round_event_control/wormholes
-	weight = 7
 	tags = list(TAG_COMMUNAL, TAG_MAGICAL)
 	event_group = /datum/event_group/anomalies
 

@@ -13,7 +13,7 @@ type PaperSheetStamperState = {
 };
 
 type PaperSheetStamperProps = {
-  scrollableRef: RefObject<HTMLDivElement | null>;
+  scrollableRef: RefObject<HTMLDivElement>;
 };
 
 type StampPosition = {

@@ -23,12 +23,6 @@
 	var/knockdown_time = 0
 	/// How long the slip paralyzes (prevents the crossing mob doing anything) for.
 	var/paralyze_time = 0
-
-	/// BANDASTATION ADDITION START - Immobilizing slippery
-	/// How long the slip immobilizes mob (prevents voluntary movement of the crossing mob)
-	var/immobilize_time = 2 SECONDS
-	/// BANDASTATION ADDITION END - Immobilizing slippery
-
 	/// How long the slip dazes (makes the crossing mob vulnerable to shove stuns) for.
 	var/daze_time = 3 SECONDS
 	/// Flags for how slippery the parent is. See [__DEFINES/mobs.dm]
@@ -65,7 +59,6 @@
  * * force_drop - should the crossing mob drop items in its hands or not
  * * slot_whitelist - flags controlling where on a mob this item can be equipped to make the parent mob slippery full list [here][ITEM_SLOT_OCLOTHING]
  * * datum/callback/on_slip_callback - Callback to add custom behaviours as the crossing mob is slipped
- * * immobilize - ength of time to immobilize the crossing mob for (Deciseconds)
  */
 /datum/component/slippery/Initialize(
 	knockdown,
@@ -76,7 +69,6 @@
 	force_drop = FALSE,
 	slot_whitelist,
 	datum/callback/can_slip_callback,
-	immobilize = 2 SECONDS, /// BANDASTATION ADDITION - Immobilizing slippery
 )
 	src.knockdown_time = max(knockdown, 0)
 	src.paralyze_time = max(paralyze, 0)
@@ -85,7 +77,6 @@
 	src.lube_flags = lube_flags
 	src.can_slip_callback = can_slip_callback
 	src.on_slip_callback = on_slip_callback
-	src.immobilize_time = max(immobilize, 0) /// BANDASTATION ADDITION - Immobilizing slippery
 	if(slot_whitelist)
 		src.slot_whitelist = slot_whitelist
 
@@ -108,7 +99,6 @@
 /datum/component/slippery/proc/apply_fantasy_bonuses(obj/item/source, bonus)
 	SIGNAL_HANDLER
 	knockdown_time = source.modify_fantasy_variable("knockdown_time", knockdown_time, bonus)
-	immobilize_time = source.modify_fantasy_variable("immobilize_time", immobilize_time, bonus) /// BANDASTATION ADDITION - Immobilizing slippery
 	if(bonus >= 5)
 		paralyze_time = source.modify_fantasy_variable("paralyze_time", paralyze_time, bonus)
 		LAZYSET(source.fantasy_modifications, "lube_flags", lube_flags)
@@ -119,7 +109,6 @@
 /datum/component/slippery/proc/remove_fantasy_bonuses(obj/item/source, bonus)
 	SIGNAL_HANDLER
 	knockdown_time = source.reset_fantasy_variable("knockdown_time", knockdown_time)
-	immobilize_time = source.reset_fantasy_variable("immobilize_time", immobilize_time) /// BANDASTATION ADDITION - Immobilizing slippery
 	paralyze_time = source.reset_fantasy_variable("paralyze_time", paralyze_time)
 	var/previous_lube_flags = LAZYACCESS(source.fantasy_modifications, "lube_flags")
 	LAZYREMOVE(source.fantasy_modifications, "lube_flags")
@@ -156,7 +145,6 @@
 		daze = component.daze_time
 		force_drop = component.force_drop_items
 		slot_whitelist = component.slot_whitelist
-		immobilize_time = component.immobilize_time /// BANDASTATION ADDITION - Immobilizing slippery
 
 	src.knockdown_time = max(knockdown, 0)
 	src.paralyze_time = max(paralyze, 0)
@@ -165,7 +153,6 @@
 	src.lube_flags = lube_flags
 	src.on_slip_callback = on_slip_callback
 	src.can_slip_callback = can_slip_callback
-	src.immobilize_time = immobilize_time  /// BANDASTATION ADDITION - Immobilizing slippery
 	if(slot_whitelist)
 		src.slot_whitelist = slot_whitelist
 /**
@@ -188,7 +175,7 @@
 		return
 	if(can_slip_callback && !can_slip_callback.Invoke(holder, victim))
 		return
-	if(victim.slip(knockdown_time, parent, lube_flags, paralyze_time, daze_time, force_drop_items, immobilize_time))  // BANDASTATION EDIT - Immobilizing slippery
+	if(victim.slip(knockdown_time, parent, lube_flags, paralyze_time, daze_time, force_drop_items))
 		on_slip_callback?.Invoke(victim)
 
 /**

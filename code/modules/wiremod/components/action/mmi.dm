@@ -1,5 +1,3 @@
-#define MMI_MESSAGE_COOLDOWN (1 SECONDS)
-
 /**
  * # Man-Machine Interface Component
  *
@@ -40,9 +38,6 @@
 	/// Maximum length of the message that can be sent to the MMI
 	var/max_length = 300
 
-	/// Cooldown for when the next message can be sent to the MMI.
-	COOLDOWN_DECLARE(message_cooldown)
-
 /obj/item/circuit_component/mmi/populate_ports()
 	message = add_input_port("Message", PORT_TYPE_STRING)
 	send = add_input_port("Send Message", PORT_TYPE_SIGNAL)
@@ -69,7 +64,7 @@
 	if(COMPONENT_TRIGGERED_BY(eject, port))
 		remove_current_brain()
 	if(COMPONENT_TRIGGERED_BY(send, port))
-		if(!message.value || !COOLDOWN_FINISHED(src, message_cooldown))
+		if(!message.value)
 			return
 
 		var/msg_str = copytext(html_encode(message.value), 1, max_length)
@@ -79,7 +74,6 @@
 			return
 
 		to_chat(target, "[span_bold("You hear a message in your ear: ")][msg_str]")
-		COOLDOWN_START(src, message_cooldown, MMI_MESSAGE_COOLDOWN)
 
 
 /obj/item/circuit_component/mmi/register_shell(atom/movable/shell)
@@ -176,5 +170,3 @@
 	REMOVE_TRAIT(removed_from, TRAIT_COMPONENT_MMI, REF(src))
 	remove_current_brain()
 	return ..()
-
-#undef MMI_MESSAGE_COOLDOWN

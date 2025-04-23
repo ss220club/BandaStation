@@ -255,7 +255,7 @@ interface NotePadTextAreaProps {
 }
 
 class NotePadTextArea extends Component<NotePadTextAreaProps> {
-  innerRef: RefObject<HTMLTextAreaElement | null>;
+  innerRef: RefObject<HTMLTextAreaElement>;
 
   constructor(props) {
     super(props);

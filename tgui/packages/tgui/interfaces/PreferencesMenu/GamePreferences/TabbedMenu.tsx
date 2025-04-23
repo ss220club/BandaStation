@@ -1,4 +1,10 @@
-import { ComponentProps, ReactNode, useRef } from 'react';
+import {
+  Component,
+  ComponentProps,
+  createRef,
+  ReactNode,
+  RefObject,
+} from 'react';
 import { Button, Flex, Section, Stack } from 'tgui-core/components';
 
 type TabbedMenuProps = {
@@ -6,63 +12,83 @@ type TabbedMenuProps = {
   contentProps?: ComponentProps<typeof Flex>;
 };
 
-export function TabbedMenu(props: TabbedMenuProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
+export class TabbedMenu extends Component<TabbedMenuProps> {
+  categoryRefs: Record<string, RefObject<HTMLDivElement>> = {};
+  sectionRef: RefObject<HTMLDivElement> = createRef();
 
-  return (
-    <Stack vertical fill>
-      <Stack.Item>
-        <Stack fill>
-          {props.categoryEntries.map(([category]) => (
-            <Stack.Item key={category} grow basis="content">
-              <Button
-                align="center"
-                fontSize="1.2em"
-                fluid
-                onClick={() => {
-                  const offsetTop = categoryRefs.current[category]?.offsetTop;
-                  if (offsetTop === undefined) {
-                    return;
-                  }
+  getCategoryRef(category: string): RefObject<HTMLDivElement> {
+    if (!this.categoryRefs[category]) {
+      this.categoryRefs[category] = createRef();
+    }
 
-                  const currentSection = sectionRef.current;
-                  if (!currentSection) {
-                    return;
-                  }
+    return this.categoryRefs[category];
+  }
 
-                  currentSection.scrollTop = offsetTop;
-                }}
-              >
-                {category}
-              </Button>
-            </Stack.Item>
-          ))}
-        </Stack>
-      </Stack.Item>
+  render() {
+    return (
+      <Stack vertical fill>
+        <Stack.Item>
+          <Stack fill px={5}>
+            {this.props.categoryEntries.map(([category]) => {
+              return (
+                <Stack.Item key={category} grow basis="content">
+                  <Button
+                    align="center"
+                    fontSize="1.2em"
+                    fluid
+                    onClick={() => {
+                      const offsetTop =
+                        this.categoryRefs[category].current?.offsetTop;
 
-      <Stack.Item
-        grow
-        ref={sectionRef}
-        position="relative"
-        overflowY="scroll"
-        {...props.contentProps}
-      >
-        <Stack vertical fill>
-          {props.categoryEntries.map(([category, children]) => (
-            <div
-              key={category}
-              ref={(ref) => {
-                categoryRefs.current[category] = ref;
-              }}
-            >
-              <Section fill title={category}>
-                {children}
-              </Section>
-            </div>
-          ))}
-        </Stack>
-      </Stack.Item>
-    </Stack>
-  );
+                      if (offsetTop === undefined) {
+                        return;
+                      }
+
+                      const currentSection = this.sectionRef.current;
+
+                      if (!currentSection) {
+                        return;
+                      }
+
+                      currentSection.scrollTop = offsetTop;
+                    }}
+                  >
+                    {category}
+                  </Button>
+                </Stack.Item>
+              );
+            })}
+          </Stack>
+        </Stack.Item>
+
+        <Stack.Item
+          grow
+          innerRef={this.sectionRef}
+          position="relative"
+          overflowY="scroll"
+          {...{
+            ...this.props.contentProps,
+
+            // Otherwise, TypeScript complains about invalid prop
+            className: undefined,
+          }}
+        >
+          <Stack vertical fill px={2}>
+            {this.props.categoryEntries.map(([category, children]) => {
+              return (
+                <Stack.Item
+                  key={category}
+                  innerRef={this.getCategoryRef(category)}
+                >
+                  <Section fill title={category}>
+                    {children}
+                  </Section>
+                </Stack.Item>
+              );
+            })}
+          </Stack>
+        </Stack.Item>
+      </Stack>
+    );
+  }
 }

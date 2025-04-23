@@ -50,7 +50,7 @@
 		/obj/item/reagent_containers/cup/soda_cans/space_mountain_wind = 50,
 		/obj/item/reagent_containers/cup/soda_cans/monkey_energy = 30,
 		/obj/item/reagent_containers/cup/soda_cans/volt_energy = 15,
-		/obj/item/reagent_containers/cup/soda_cans/thirteenloko = 5,
+		/obj/item/reagent_containers/cup/soda_cans/thirteenloko = 5, 
 	)
 
 /obj/item/storage/cans/sixenergydrink/PopulateContents()
@@ -73,11 +73,19 @@
 /obj/item/storage/bag/quiver/endless
 	name = "endless quiver"
 	desc = "Holds arrows for your bow. A deep digital void is contained within."
-	storage_type = /datum/storage/bag/quiver/endless
+	max_slots = 1
+
+/obj/item/storage/bag/quiver/endless/Initialize(mapload)
+	. = ..()
+	RegisterSignal(src, COMSIG_ATOM_EXITED, PROC_REF(handle_removed))
 
 /obj/item/storage/bag/quiver/endless/PopulateContents()
 	. = ..()
 	new arrow_path(src)
+
+/obj/item/storage/bag/quiver/endless/proc/handle_removed(datum/source, obj/item/gone)
+	new arrow_path(src)
+
 
 /datum/bitrunning_gimmick/fisher
 	name = "Fisher"
@@ -117,7 +125,7 @@
 		/obj/item/reagent_containers/cup/soda_cans/space_mountain_wind = 15,
 		/obj/item/reagent_containers/cup/soda_cans/monkey_energy = 15,
 		/obj/item/reagent_containers/cup/soda_cans/volt_energy = 10,
-		/obj/item/reagent_containers/cup/soda_cans/thirteenloko = 5,
+		/obj/item/reagent_containers/cup/soda_cans/thirteenloko = 5, 
 	)
 
 /obj/item/storage/cans/sixgamerdrink/PopulateContents()
