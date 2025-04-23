@@ -57,10 +57,6 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
     '',
   );
   const [offset, setOffset] = useLocalStorage('gamepanel-offset', '');
-  const [preciseMode, setPreciseMode] = useLocalStorage(
-    'gamepanel-precise_mode',
-    'Off',
-  );
 
   const isTargetMode =
     spawnLocation === 'Targeted location' ||
@@ -68,6 +64,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
     spawnLocation === "In targeted mob's hand";
 
   const isPreciseModeActive = data?.precise_mode === 'Target';
+  const isMarkModeActive = data?.precise_mode === 'Mark';
 
   const disablePreciseMode = () => {
     if (isPreciseModeActive) {
@@ -233,7 +230,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
                   alignContent: 'center',
                 }}
                 icon={spawnLocationIcons[spawnLocation]}
-                color={isTargetMode && isPreciseModeActive ? 'good' : undefined}
+                selected={isTargetMode && isPreciseModeActive}
               >
                 SPAWN
               </Button>
@@ -250,10 +247,11 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
                     icon="eye-dropper"
                     onClick={() => {
                       act('toggle-precise-mode', {
-                        newPreciseType: 'Mark',
+                        newPreciseType: isMarkModeActive ? 'Off' : 'Mark',
                       });
                     }}
                     disabled={spawnLocation !== 'At a marked object'}
+                    selected={isMarkModeActive}
                   />
                 </Stack.Item>
                 <Stack.Item grow>

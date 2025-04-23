@@ -214,21 +214,33 @@ ADMIN_VERB(game_panel, R_ADMIN, "Spawn Panel", "Opens Spawn Panel (TGUI).", ADMI
 	var/atom/target
 
 	if(where == WHERE_MOB_HAND || where == WHERE_TARGETED_MOB_HAND)
-		var/atom/target_reference = (where == WHERE_TARGETED_MOB_HAND ?  spawn_params["object_reference"] : usr)
+		var/atom/target_reference
+		switch(where)
+			if(WHERE_TARGETED_MOB_HAND)
+				target_reference = spawn_params["object_reference"]
+
+			if(WHERE_MOB_HAND)
+				target_reference = usr
+
 		if(!target_reference)
-			to_chat(usr, span_warning("No target reference provided. Abandoning spawn."))
+			to_chat(usr, span_warning("No target reference provided."))
 			return
+
+		if(!ismob(target_reference))
+			to_chat(usr, span_warning("The targeted atom is not a mob."))
+			return
+
 		if(!iscarbon(target_reference) && !iscyborg(target_reference))
-			to_chat(usr, span_warning("Can only spawn in hand when you're a carbon mob or cyborg."))
+			to_chat(usr, span_warning("Can only spawn in hand when the target is a carbon mob or cyborg."))
 			where = WHERE_FLOOR_BELOW_MOB
 		target = target_reference
 
 	else if(where == WHERE_MARKED_OBJECT)
 		if(!usr.client.holder.marked_datum)
-			to_chat(usr, span_warning("You don't have any object marked. Abandoning spawn."))
+			to_chat(usr, span_warning("You don't have any object marked."))
 			return
 		else if(!istype(usr.client.holder.marked_datum, /atom))
-			to_chat(usr, "The object you have marked cannot be used as a target. Target must be of type /atom. Abandoning spawn.", confidential = TRUE)
+			to_chat(usr, "The object you have marked cannot be used as a target. Target must be of type /atom.", confidential = TRUE)
 			return
 		else
 			target = get_turf(usr.client.holder.marked_datum)
