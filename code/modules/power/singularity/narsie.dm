@@ -252,11 +252,11 @@
 
 ///First crew last second win check and flufftext for [/proc/begin_the_end()]
 /proc/narsie_end_begin_check()
-	// if(QDELETED(GLOB.cult_narsie)) // uno
-	// 	priority_announce("Доклад статуса? Мы обнаружили аномалию, но она почти сразу же пропала.","[command_name()]: Отдел паранормальных явлений", 'sound/announcer/notice/notice1.ogg')
-	// 	GLOB.cult_narsie = null
-	// 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(cult_ending_helper), CULT_FAILURE_NARSIE_KILLED), 2 SECONDS)
-	// 	return
+	if(QDELETED(GLOB.cult_narsie)) // uno
+		priority_announce("Доклад статуса? Мы обнаружили аномалию, но она почти сразу же пропала.","[command_name()]: Отдел паранормальных явлений", 'sound/announcer/notice/notice1.ogg')
+		GLOB.cult_narsie = null
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(cult_ending_helper), CULT_FAILURE_NARSIE_KILLED), 2 SECONDS)
+		return
 	priority_announce(
 		/// BANDASTATION EDIT START - Cult
 		text = "Внимание, это приоритетное оповещение. \
