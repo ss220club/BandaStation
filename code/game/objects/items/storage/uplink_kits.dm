@@ -60,7 +60,7 @@
 			new /obj/item/computer_disk/syndicate/camera_app(src) // 1 tc
 			new /obj/item/multitool/ai_detect(src) // 1 tc
 			new /obj/item/encryptionkey/syndicate(src) // 2 tc
-			new /obj/item/reagent_containers/syringe/mulligan(src) // 4 tc
+			new /obj/item/storage/box/syndie_kit/mulligan(src) // 4 tc
 			new /obj/item/switchblade(src) //basically 1 tc as it can be bought from BM kits
 			new /obj/item/storage/fancy/cigarettes/cigpack_syndicate (src) // 2 tc this shit heals
 			new /obj/item/flashlight/emp(src) // 2 tc
@@ -437,11 +437,7 @@
 
 /obj/item/storage/box/syndie_kit/space
 	name = "boxed space suit and helmet"
-
-/obj/item/storage/box/syndie_kit/space/Initialize(mapload)
-	. = ..()
-	atom_storage.max_specific_storage = WEIGHT_CLASS_NORMAL
-	atom_storage.set_holdable(list(/obj/item/clothing/suit/space/syndicate, /obj/item/clothing/head/helmet/space/syndicate))
+	storage_type = /datum/storage/box/syndicate_space
 
 /obj/item/storage/box/syndie_kit/space/PopulateContents()
 	var/obj/item/clothing/suit/space/syndicate/spess_suit = pick(GLOB.syndicate_space_suits_to_helmets)
@@ -474,10 +470,7 @@
 
 /obj/item/storage/box/syndie_kit/chemical
 	name = "chemical kit"
-
-/obj/item/storage/box/syndie_kit/chemical/Initialize(mapload)
-	. = ..()
-	atom_storage.max_slots = 15
+	storage_type = /datum/storage/box/syndicate_chemical
 
 /obj/item/storage/box/syndie_kit/chemical/PopulateContents()
 	new /obj/item/reagent_containers/cup/bottle/polonium(src)
@@ -545,6 +538,9 @@
 	new /obj/item/gun/energy/laser/chameleon(src)
 	new /obj/item/chameleon_scanner(src)
 
+/obj/item/storage/box/syndie_kit/throwing_weapons
+	storage_type = /datum/storage/box/syndicate_throwing
+
 //5*(2*4) = 5*8 = 45, 45 damage if you hit one person with all 5 stars.
 //Not counting the damage it will do while embedded (2*4 = 8, at 15% chance)
 /obj/item/storage/box/syndie_kit/throwing_weapons/PopulateContents()
@@ -554,17 +550,6 @@
 		new /obj/item/paperplane/syndicate(src)
 	new /obj/item/restraints/legcuffs/bola/tactical(src)
 	new /obj/item/restraints/legcuffs/bola/tactical(src)
-
-/obj/item/storage/box/syndie_kit/throwing_weapons/Initialize(mapload)
-	. = ..()
-	atom_storage.max_slots = 9 // 5 + 2 + 2
-	atom_storage.max_specific_storage = WEIGHT_CLASS_NORMAL
-	atom_storage.max_total_storage = 18 // 5*2 + 2*1 + 3*2
-	atom_storage.set_holdable(list(
-		/obj/item/restraints/legcuffs/bola/tactical,
-		/obj/item/paperplane/syndicate,
-		/obj/item/throwing_star,
-	))
 
 /obj/item/storage/box/syndie_kit/cutouts/PopulateContents()
 	for(var/i in 1 to 3)
@@ -579,6 +564,11 @@
 /obj/item/storage/box/syndie_kit/ez_clean/PopulateContents()
 	for(var/i in 1 to 3)
 		new/obj/item/grenade/chem_grenade/ez_clean(src)
+
+/obj/item/storage/box/syndie_kit/mulligan/PopulateContents()
+	. = ..()
+	new /obj/item/reagent_containers/syringe/mulligan(src)
+	new /obj/item/fake_identity_kit(src)
 
 /obj/item/storage/box/hug/reverse_revolver/PopulateContents()
 	new /obj/item/gun/ballistic/revolver/reverse(src)
@@ -668,6 +658,17 @@
 /obj/item/storage/box/syndie_kit/sniper_surplus/PopulateContents()
 	for(var/i in 1 to 7)
 		new /obj/item/ammo_box/magazine/sniper_rounds/surplus(src)
+
+/obj/item/storage/box/syndie_kit/shotgun_surplus
+	name = "\improper Donk Co. 'Donk Spike' flechette 12g Bulldog magazine box"
+	desc = "A shoddy box full of Donk Co. 'Donk Spike' flechette 12g. It is debatable whether or not these are actually \
+		better or worse than standard flechette. Donk Co. did genuinely believe in this product being the future of military \
+		ammunition production. The only reason it didn't see wider adoption was a lack of faith in the product. Do you \
+		believe in Donk? Time to put that to the test."
+
+/obj/item/storage/box/syndie_kit/shotgun_surplus/PopulateContents()
+	for(var/i in 1 to 7)
+		new /obj/item/ammo_box/magazine/m12g/donk(src)
 
 ///Subtype for the sabotage bundle. Contains three C4, two X4 and 6 signalers
 /obj/item/storage/backpack/duffelbag/syndie/sabotage

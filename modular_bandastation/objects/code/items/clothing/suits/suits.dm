@@ -28,15 +28,11 @@
 /obj/item/clothing/suit/hooded/shark_costume/light
 	name = "light shark costume"
 	icon_state = "shark_casual_light"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
-	hoodtype = /obj/item/clothing/head/hooded/shark_hood/light_par
+	hoodtype = /obj/item/clothing/head/hooded/shark_hood_par/light_par
 
-/obj/item/clothing/head/hooded/shark_hood/light_par
+/obj/item/clothing/head/hooded/shark_hood_par/light_par
 	name = "light shark hood"
 	icon_state = "shark_casual_light"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
 
 /obj/item/clothing/suit/space/deathsquad/officer/syndie
 	name = "syndicate officer jacket"

@@ -113,7 +113,7 @@
 		tamed(tamer, feedback = FALSE)
 		befriend(tamer)
 	else
-		var/static/list/food_types = list(/obj/item/food/meat)
+		var/list/food_types = string_list(list(/obj/item/food/meat)) /// BANDASTATION EDIT - CROCODILE
 		AddComponent(/datum/component/tameable, food_types = food_types, tame_chance = 10, bonus_tame_chance = 5)
 
 	teleport = new(src)
@@ -185,6 +185,10 @@
 	basic_mob_flags = DEL_ON_DEATH
 	cell_line = NONE
 	regenerate_colour = "#ffffff"
+
+/mob/living/basic/carp/holographic/Initialize(mapload, mob/tamer)
+	. = ..()
+	AddComponent(/datum/component/holographic_nature)
 
 /// Holocarp don't eat food
 /mob/living/basic/carp/holographic/setup_eating()

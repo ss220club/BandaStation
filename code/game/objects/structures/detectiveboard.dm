@@ -52,12 +52,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/detectiveboard, 32)
 		attaching_evidence = TRUE
 		var/name = tgui_input_text(user, "Please enter the evidence name", "Detective's Board", max_length = MAX_NAME_LEN)
 		if(!name)
-			attaching_evidence = FALSE
-			return
+			name = item.name
 		var/desc = tgui_input_text(user, "Please enter the evidence description", "Detective's Board", max_length = MAX_DESC_LEN)
 		if(!desc)
-			attaching_evidence = FALSE
-			return
+			desc = item.desc
 
 		if(!user.transferItemToLoc(item, src))
 			attaching_evidence = FALSE
@@ -189,7 +187,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/detectiveboard, 32)
 			var/obj/item/paper/paper = evidence.item
 			var/paper_text = ""
 			for(var/datum/paper_input/text_input as anything in paper.raw_text_inputs)
-				paper_text += text_input.raw_text
+				paper_text += text_input.get_raw_text()
 			user << browse("<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>[paper.name]</title></head>" \
 			+ "<body style='overflow:hidden;padding:5px'>" \
 			+ "[paper_text]" \

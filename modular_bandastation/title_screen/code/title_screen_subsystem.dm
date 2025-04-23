@@ -1,4 +1,8 @@
 /datum/controller/subsystem/title
+	init_stage = INITSTAGE_FIRST
+	flags = SS_BACKGROUND
+	wait = 1 SECONDS
+	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP
 	/// The current notice text, or null.
 	var/notice
 	/// Currently set title screen
@@ -15,6 +19,41 @@
 /datum/controller/subsystem/title/Recover()
 	current_title_screen = SStitle.current_title_screen
 	title_images_pool = SStitle.title_images_pool
+
+/datum/controller/subsystem/title/fire(resumed = FALSE)
+	update_info()
+
+/datum/controller/subsystem/title/proc/update_info()
+	if(!current_title_screen)
+		return
+
+	if(!MC_RUNNING())
+		title_output_to_all("<div class='loading'>Загрузка...</div>", "update_info")
+		return
+
+	var/time_remaining = SSticker.GetTimeLeft()
+	if(time_remaining == -10 || time_remaining > 1 HOURS)
+		time_remaining = "<span class='bad'>ВЕЧНОСТЬ!!!</span>"
+	else if(time_remaining > 0)
+		time_remaining = "[round(time_remaining / 10)] сек."
+	else
+		time_remaining = "<span class='good'>Раунд начинается...</span>"
+
+	for(var/mob/dead/new_player/viewer as anything in GLOB.new_player_list)
+		var/info
+		info = {"
+			<div class="start-time">
+				<div class="text">До начала раунда</div>
+				<div class="time-left">[time_remaining]</div>
+			</div>
+			<hr>
+			<div class="ready-count">
+				<div class="players-ready">Игроков готово: [SSticker.totalPlayersReady] / [LAZYLEN(GLOB.clients)]</div>
+				[viewer.client.holder ? "<div class='admins-ready admin'>Админов готово: [SSticker.total_admins_ready] / [length(GLOB.admins)]</div>" : ""]
+			</div>
+		"}
+
+		title_output(viewer.client, info, "update_info")
 
 /**
  * Iterates over all files in `TITLE_SCREENS_LOCATION` and loads all valid title screens to `title_screens` var.

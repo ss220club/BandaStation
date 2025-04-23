@@ -169,7 +169,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(!try_speak(original_message, ignore_spam, forced, filterproof))
 		return
 
-	language = message_mods[LANGUAGE_EXTENSION] || get_selected_language()
+	language ||= message_mods[LANGUAGE_EXTENSION] || get_selected_language()
 
 	var/succumbed = FALSE
 
@@ -258,7 +258,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(pressure < ONE_ATMOSPHERE * (HAS_TRAIT(src, TRAIT_SPEECH_BOOSTER) ? 0.1 : 0.4)) //Thin air, let's italicise the message unless we have a loud low pressure speech trait and not in vacuum
 		spans |= SPAN_ITALICS
 
-	send_speech(message, message_range, src, bubble_type, spans, language, message_mods, tts_message = tts_message, tts_filter = tts_filter)//roughly 58% of living/say()'s total cost
+	send_speech(message, message_range, src, bubble_type, spans, language, message_mods, forced = forced, tts_message = tts_message, tts_filter = tts_filter)//roughly 58% of living/say()'s total cost
 	if(succumbed)
 		succumb(TRUE)
 		to_chat(src, compose_message(src, language, message, , spans, message_mods))
@@ -385,7 +385,8 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			is_local = (message_range != INFINITY),
 			is_radio = !!radio_freq,
 			effects = LAZYACCESS(message_mods, MODE_TTS_FILTERS),
-			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE)
+			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE),
+			channel_override = radio_freq ? CHANNEL_TTS_RADIO : null
 		)
 	// BANDASTATION ADDITION END - TTS
 

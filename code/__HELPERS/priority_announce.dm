@@ -63,7 +63,7 @@
 				header += SUBHEADER_ANNOUNCEMENT_TITLE(title)
 		if(ANNOUNCEMENT_TYPE_CAPTAIN)
 			header = MAJOR_ANNOUNCEMENT_TITLE("Оповещение от капитана")
-			GLOB.news_network.submit_article(text, "Оповещение от капитана", "Станционные оповещения", null)
+			GLOB.news_network.submit_article(text, "Оповещение от капитана", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 		if(ANNOUNCEMENT_TYPE_SYNDICATE)
 			header = MAJOR_ANNOUNCEMENT_TITLE("Оповещение от капитана Синдиката")
 		else
@@ -90,9 +90,9 @@
 
 	if(isnull(sender_override) && players == GLOB.player_list)
 		if(length(title) > 0)
-			GLOB.news_network.submit_article(title + "<br><br>" + text, "[command_name()]", "Станционные оповещения", null)
+			GLOB.news_network.submit_article(title + "<br><br>" + text, "[command_name()]", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 		else
-			GLOB.news_network.submit_article(text, "[command_name()]: Сообщение", "Станционные оповещения", null)
+			GLOB.news_network.submit_article(text, "[command_name()]: Сообщение", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 
 /proc/print_command_report(text = "", title = null, announce=TRUE)
 	if(!title)
@@ -226,7 +226,9 @@
 				FALSE, \
 				list(/datum/singleton/sound_effect/announcement), \
 				null, \
-				sound_to_play \
+				sound_to_play, \
+				null, \
+				CHANNEL_TTS_ANNOUNCEMENT, \
 			)
 			// BANDASTATION EDIT END - TTS
 
