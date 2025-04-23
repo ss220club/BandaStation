@@ -6965,8 +6965,23 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
 "bGS" = (
-/obj/item/kirbyplants/random,
 /obj/machinery/airalarm/directional/north,
+/obj/structure/table/wood,
+/obj/machinery/coffeemaker/impressa{
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/bottle/syrup_bottle/liqueur{
+	pixel_x = 13;
+	pixel_y = 11
+	},
+/obj/item/reagent_containers/cup/bottle/syrup_bottle/korta_nectar{
+	pixel_x = 13;
+	pixel_y = 6
+	},
+/obj/item/reagent_containers/cup/bottle/syrup_bottle/caramel{
+	pixel_x = 13;
+	pixel_y = 1
+	},
 /turf/open/floor/iron/cafeteria,
 /area/station/medical/break_room)
 "bGT" = (
@@ -27375,11 +27390,11 @@
 /area/station/maintenance/aft)
 "gCp" = (
 /obj/machinery/light/directional/north,
+/obj/structure/table/wood,
 /obj/machinery/microwave{
 	pixel_x = -1;
 	pixel_y = 6
 	},
-/obj/structure/table/wood,
 /turf/open/floor/iron/cafeteria,
 /area/station/medical/break_room)
 "gCq" = (
@@ -59753,7 +59768,9 @@
 /area/station/maintenance/department/engine/ghetto)
 "opf" = (
 /obj/structure/table/wood,
-/obj/item/storage/box/donkpockets,
+/obj/item/storage/box/donkpockets{
+	pixel_y = 5
+	},
 /obj/item/storage/box/donkpockets/donkpocketberry,
 /turf/open/floor/iron/cafeteria,
 /area/station/medical/break_room)
@@ -77221,10 +77238,11 @@
 "swb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
+/obj/machinery/airalarm/directional/east,
+/obj/item/reagent_containers/applicator/pill/maintenance,
+/obj/item/reagent_containers/applicator/pill/maintenance,
 /obj/item/storage/box/gum,
 /obj/item/toy/cattoy,
-/obj/item/toy/figure/md,
-/obj/machinery/airalarm/directional/east,
 /turf/open/floor/iron/white,
 /area/station/medical/abandoned)
 "swe" = (
@@ -90984,14 +91002,14 @@
 /obj/item/clipboard{
 	pixel_y = 2
 	},
-/obj/item/stamp/head/cmo{
-	pixel_y = 6
-	},
 /obj/item/clothing/glasses/hud/health/sunglasses{
 	pixel_y = -12
 	},
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 8
+	},
+/obj/item/stamp/head/cmo{
+	pixel_y = 6
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/cmo)
@@ -207694,7 +207712,7 @@ oXH
 fLm
 bpd
 uQe
-yeD
+mGe
 jnd
 plv
 udI
@@ -207948,7 +207966,7 @@ nAD
 crV
 xiN
 vrh
-ipx
+jXC
 ipx
 uQf
 mGe
