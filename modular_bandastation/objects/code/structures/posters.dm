@@ -56,16 +56,16 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/your_fate, 32)
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/watching_eye, 32)
 
 // Sword of Altam
+
+/obj/item/poster/random_sword_of_altam
+	name = "Random Sword Of Altam Posters (SOA)"
+	poster_type = /obj/structure/sign/poster/sword_of_altam/random
+	icon_state = "rolled_poster"
+
 /obj/structure/sign/poster/sword_of_altam
 	poster_item_name = "SOA poster"
 	poster_item_desc = "This poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as contraband aboard Nanotrasen space facilities."
 	poster_item_icon_state = "rolled_poster"
-
-/obj/item/poster/random_sword_of_altam
-	name = "Random Sword Of Altam Posters (SOA)"
-	random_basetype = /obj/structure/sign/poster/sword_of_altam
-	icon_state = "rolled_poster"
-	never_random = TRUE
 
 /obj/structure/sign/poster/sword_of_altam/random
 	name = "random SOA poster"
