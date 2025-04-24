@@ -14,11 +14,11 @@
 #define OFFSET_ABSOLUTE "Absolute offset"
 #define OFFSET_RELATIVE "Relative offset"
 
-ADMIN_VERB(game_panel, R_ADMIN, "Spawn Panel", "Opens Spawn Panel (TGUI).", ADMIN_CATEGORY_GAME)
+ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_CATEGORY_GAME)
 	if (!usr.client.holder.gamepanel_tgui)
 		usr.client.holder.gamepanel_tgui = new(usr.client)
 	usr.client.holder.gamepanel_tgui.ui_interact(usr)
-	BLACKBOX_LOG_ADMIN_VERB("Spawn Panel")
+	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
 
 /datum/admins
 	var/datum/admins/gamepanel/gamepanel_tgui
