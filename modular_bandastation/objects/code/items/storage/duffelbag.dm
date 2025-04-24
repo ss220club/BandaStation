@@ -16,11 +16,13 @@
 	unzip_duration = 0.5 SECONDS
 
 /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	name = "modified ammo duffel bag"
 	inhand_icon_state = "duffel-srtammo"
 	icon_state = "duffel-srtammo"
 	worn_icon_state = "duffel-srtammo-back"
 
 /obj/item/storage/backpack/duffelbag/syndie/centcom/med
+	name = "modified med duffel bag"
 	inhand_icon_state = "duffel-srtmed"
 	icon_state = "duffel-srtmed"
 	worn_icon_state = "duffel-srtmed-back"

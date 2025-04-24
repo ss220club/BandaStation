@@ -86,6 +86,10 @@
 		user.adjustBruteLoss(rand(force/2, force))
 
 /obj/item/melee/baseball_bat/homerun/centcom/attack(mob/living/target, mob/living/user)
+	if(!on)
+		target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."), \
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает вас с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."))
+			return
 	. = ..()
 	if(on)
 		homerun_ready = TRUE
