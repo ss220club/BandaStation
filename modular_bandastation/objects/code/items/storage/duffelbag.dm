@@ -1,6 +1,6 @@
 /obj/item/storage/backpack/duffelbag/syndie/centcom
 	name = "modified duffel bag"
-	desc = "A large duffel bag for holding extra tactical supplies. It contains an oiled plastitanium zipper for maximum speed tactical zipping, and is better balanced on your back than an average duffelbag. Can hold three bulky items!"
+	desc = "Большая сумка для хранения дополнительных тактических принадлежностей. Она оснащена смазанной пластитановой молнией для максимально быстрого тактического застегивания и лучше сбалансирована на спине, чем обычная сумка. Может вместить три громоздких предмета!"
 	icon_state = "duffel-srt"
 	icon = 'modular_bandastation/objects/icons/obj/storage/dufel-fufel/dufel_fufel.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/obj/clothing/back/dufel_fufel.dmi'
