@@ -2,10 +2,10 @@
 	name = "modified duffel bag"
 	desc = "Большая сумка для хранения дополнительных тактических принадлежностей. Она оснащена смазанной пластитановой молнией для максимально быстрого тактического застегивания и лучше сбалансирована на спине, чем обычная сумка. Может вместить три громоздких предмета!"
 	icon_state = "duffel-srt"
-	icon = 'modular_bandastation/objects/icons/obj/storage/dufel-fufel/dufel_fufel.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/obj/clothing/back/dufel_fufel.dmi'
-	lefthand_file = 'modular_bandastation/objects/icons/obj/storage/dufel-fufel/dufel_fufel_lefthand.dmi'
-	righthand_file = 'modular_bandastation/objects/icons/obj/storage/dufel-fufel/dufel_fufel_righthand.dmi'
+	icon = 'modular_bandastation/objects/icons/obj/storage/duffelbag/duffelbag.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/obj/clothing/back/duffelbag.dmi'
+	lefthand_file = 'modular_bandastation/objects/icons/obj/storage/duffelbag/duffelbag_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/obj/storage/duffelbag/duffelbag_righthand.dmi'
 	worn_icon_state = "duffel-srt-back"
 	inhand_icon_state = "duffel-srt"
 	storage_type = /datum/storage/duffel/syndicate/centcom
