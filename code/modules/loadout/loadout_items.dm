@@ -49,6 +49,8 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	/// Whether this item can be reskinned.
 	/// Only works if the item has a "unique reskin" list set.
 	var/can_be_reskinned = FALSE
+	/// Is this item animated?
+	var/animated = FALSE // BANDASTATION ADDITION
 	/// The abstract parent of this loadout item, to determine which items to not instantiate
 	var/abstract_type = /datum/loadout_item
 	/// The actual item path of the loadout item.
@@ -318,6 +320,9 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 
 	if(can_be_reskinned)
 		displayed_text[FA_ICON_SWATCHBOOK] = "Смена стиля"
+
+	if(animated)
+		displayed_text[FA_ICON_PERSON_RUNNING] = "Анимированно"  // BANDASTATION ADDITION
 
 	return displayed_text
 
