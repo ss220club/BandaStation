@@ -23451,14 +23451,6 @@ nominative = "рваные порезы"
 gender = "plural"
 genitive = "рваных порезов"
 
-["hookah coals"]
-nominative = "угли для кальяна"
-genitive = "углей для кальяна"
-dative = "углям для кальяна"
-accusative = "угли для кальяна"
-instrumental = "углями для кальяна"
-prepositional = "углях для кальяна"
-
 ["cuts"]
 nominative = "порезы"
 gender = "plural"
