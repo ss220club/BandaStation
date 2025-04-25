@@ -12,6 +12,7 @@
 	var/wound_bonus_on = 100
 	throwforce = 12
 	wound_bonus = -50
+	always_homerun = TRUE
 	icon = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_centcom.dmi'
 	lefthand_file = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_lefthand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_righthand.dmi'
@@ -22,8 +23,6 @@
 	var/on_sound = 'sound/items/weapons/batonextend.ogg'
 	/// Attack verbs when concealed (created on Initialize)
 	attack_verb_simple = list("hit", "poked")
-	homerun_ready = FALSE
-	homerun_able = FALSE
 	/// Attack verbs when extended (created on Initialize)
 	var/list/attack_verb_on = list("smacked", "struck", "cracked", "beaten")
 
@@ -52,8 +51,6 @@
 	else
 		wound_bonus = initial(wound_bonus)
 	playsound(src, on_sound, 50, TRUE)
-	homerun_ready = transform_component.active
-	homerun_able = transform_component.active
 
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
@@ -77,5 +74,3 @@
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает вас с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."))
 		return
 	. = ..()
-	if(transform_component.active)
-		homerun_ready = TRUE
