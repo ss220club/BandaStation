@@ -39,11 +39,19 @@ GLOBAL_LIST_EMPTY_TYPED(persistent_clients, /datum/persistent_client)
 	/// World.time this player last died
 	var/time_of_death = 0
 
+	/// BANDASTATION ADDITION START - SScentral
+	/// Discord of the player
+	var/discord_id
+	/// Ckey of the player
+	var/ckey
+	/// BANDASTATION ADDITION END - SScentral
+
 /datum/persistent_client/New(ckey, client)
 	src.client = client
 	achievements = new(ckey)
 	GLOB.persistent_clients_by_ckey[ckey] = src
 	GLOB.persistent_clients += src
+	src.ckey = ckey /// BANDASTATION ADDITION - SScentral
 
 /datum/persistent_client/Destroy(force)
 	SHOULD_CALL_PARENT(FALSE)

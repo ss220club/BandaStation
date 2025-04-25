@@ -34,10 +34,6 @@
 /datum/preference/loadout/proc/sanitize_loadout_list(list/passed_list, datum/preferences/preferences) as /list
 	var/list/sanitized_list
 	/// BANDASTATION ADDITION START - Loadout
-	var/loadout_owner = preferences.parent?.mob
-	if(!loadout_owner)
-		return null
-
 	var/total_points_spent = 0
 	var/points_cap = preferences.get_loadout_max_points()
 	var/donator_level = preferences.parent.get_donator_level()
@@ -46,7 +42,7 @@
 		// Loading from json has each path in the list as a string that we need to convert back to typepath
 		var/obj/item/real_path = istext(path) ? text2path(path) : path
 		if(!ispath(real_path, /obj/item))
-			to_chat(loadout_owner, span_boldnotice("The following invalid item path was found \
+			to_chat(preferences.parent, span_boldnotice("The following invalid item path was found \
 				in your character loadout: [real_path || "null"]. \
 				It has been removed, renamed, or is otherwise missing - \
 				You may want to check your loadout settings."))
@@ -55,7 +51,7 @@
 
 		var/datum/loadout_item/loadout_item = GLOB.all_loadout_datums[real_path] /// BANDASTATION ADDITION - Loadout
 		if(!istype(loadout_item, /datum/loadout_item))
-			to_chat(loadout_owner, span_boldnotice("The following invalid loadout item was found \
+			to_chat(preferences.parent, span_boldnotice("The following invalid loadout item was found \
 				in your character loadout: [real_path || "null"]. \
 				It has been removed, renamed, or is otherwise missing - \
 				You may want to check your loadout settings."))
@@ -64,7 +60,7 @@
 		/// BANDASTATION ADDITION START - Loadout
 		if(loadout_item.donator_level > donator_level)
 			to_chat(
-				loadout_owner,
+				preferences.parent,
 				span_boldnotice(\
 					"Ваш донат уровень ([donator_level]) недостаточен для [loadout_item.name] \
 						с уровнем [loadout_item.donator_level]. Предмет убран из снаряжения." \
@@ -74,7 +70,7 @@
 
 		if(loadout_item.cost + total_points_spent > points_cap)
 			to_chat(
-				loadout_owner,
+				preferences.parent,
 				span_boldnotice(\
 					"У вас недостаточно очков ([points_cap - total_points_spent]) \
 						для [loadout_item.name] за [loadout_item.cost] очков. Предмет убран из снаряжения." \
