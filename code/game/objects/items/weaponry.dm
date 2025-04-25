@@ -995,7 +995,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		if(!QDELETED(target))
 			target.throw_at(throw_target, rand(8,10), 14, user)
 		SSexplosions.medturf += throw_target
-		playsound(get_turf(src), 'sound/items/weapons/homerun.ogg', 100, TRUE)
+		playsound(get_turf(src), 'sound/items/weapons/homerun.ogg', 75, TRUE)
 		if(!always_homerun)
 			homerun_ready = FALSE
 
