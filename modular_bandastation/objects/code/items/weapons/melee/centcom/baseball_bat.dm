@@ -5,7 +5,6 @@
 	Выдаваясь только самым верным и эффективным офицерам Nanotrasen, это оружие является одновременно символом статуса \
 	и инструментом высшего правосудия."
 	w_class = WEIGHT_CLASS_SMALL
-	var/on = FALSE
 	/// Force when concealed
 	force = 5
 	/// Force when extended
@@ -17,13 +16,8 @@
 	lefthand_file = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_lefthand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_righthand.dmi'
 	/// Item state when concealed
-	inhand_icon_state = "centcom_bat_0"
-	/// Item state when extended
-	var/item_state_on = "centcom_bat_1"
-	/// Icon state when concealed
-	icon_state = "centcom_bat_0"
-	/// Icon state when extended
-	var/icon_state_on = "centcom_bat_1"
+	inhand_icon_state = "centcom_bat"
+	icon_state = "centcom_bat"
 	// Sound
 	var/on_sound = 'sound/items/weapons/batonextend.ogg'
 	/// Attack verbs when concealed (created on Initialize)
@@ -35,6 +29,7 @@
 
 /obj/item/melee/baseball_bat/homerun/centcom/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent( \
 		/datum/component/transforming, \
 		force_on = force_on, \
@@ -49,24 +44,16 @@
 /obj/item/melee/baseball_bat/homerun/centcom/proc/on_transform(obj/item/source, mob/user, active)
 	SIGNAL_HANDLER
 
-	on = active
+	var/datum/component/transforming/transform_component = GetComponent(/datum/component/transforming)
 	if(user)
 		balloon_alert(user, active ? "вытянуто" : "втянуто")
-	if(on)
-		inhand_icon_state = item_state_on
-		icon_state = icon_state_on
+	if(transform_component.active)
 		wound_bonus = wound_bonus_on
 	else
-		inhand_icon_state = initial(inhand_icon_state)
-		icon_state = initial(icon_state)
 		wound_bonus = initial(wound_bonus)
 	playsound(src, on_sound, 50, TRUE)
-	homerun_ready = on
-	homerun_able = on
-	// Update mob hand visuals
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		H.update_overlays()
+	homerun_ready = transform_component.active
+	homerun_able = transform_component.active
 
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
@@ -84,10 +71,11 @@
 		user.adjustBruteLoss(rand(force/2, force))
 
 /obj/item/melee/baseball_bat/homerun/centcom/attack(mob/living/target, mob/living/user)
-	if(!on)
+	var/datum/component/transforming/transform_component = GetComponent(/datum/component/transforming)
+	if(!transform_component.active)
 		target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."), \
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает вас с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."))
 		return
 	. = ..()
-	if(on)
+	if(transform_component.active)
 		homerun_ready = TRUE
