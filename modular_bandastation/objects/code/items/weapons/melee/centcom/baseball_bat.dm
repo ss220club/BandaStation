@@ -17,6 +17,7 @@
 	icon_state = "centcom_bat"
 	attack_verb_simple = list("hit", "poked")
 	homerun_able = TRUE
+	always_homerun = TRUE
 	/// Sound of extending the bat
 	var/on_sound = 'sound/items/weapons/batonextend.ogg'
 	/// Force when extended
@@ -25,7 +26,6 @@
 	var/wound_bonus_on = 100
 	/// Attack verbs when extended (created on Initialize)
 	var/list/attack_verb_on = list("smacked", "struck", "cracked", "beaten")
-	always_homerun = TRUE
 
 /obj/item/melee/baseball_bat/homerun/centcom/Initialize(mapload)
 	. = ..()
@@ -56,16 +56,19 @@
 
 /obj/item/melee/baseball_bat/homerun/centcom/pickup(mob/user)
 	. = ..()
-	if(user.mind.centcom_role)
+	if(!isliving(user))
 		return
-	user.AdjustKnockdown(10 SECONDS, daze_amount = 3 SECONDS)
-	user.Stun(5 SECONDS, TRUE)
+	var/mob/living/living_user = user
+	if(living_user.mind.centcom_role)
+		return
+	living_user.AdjustKnockdown(10 SECONDS, daze_amount = 3 SECONDS)
+	living_user.Stun(5 SECONDS, TRUE)
 	to_chat(user, span_userdanger("Это - оружие истинного правосудия. Тебе не дано обуздать его мощь."))
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
-		human_user.apply_damage(rand(force/2, force), BRUTE, human_user .get_active_hand())
+		human_user.apply_damage(rand(force/2, force), BRUTE, human_user.get_active_hand())
 	else
-		user.adjustBruteLoss(rand(force/2, force))
+		living_user.adjustBruteLoss(rand(force/2, force))
 
 /obj/item/melee/baseball_bat/homerun/centcom/pre_attack(atom/movable/target, mob/living/user, params)
 	var/datum/component/transforming/transform_component = GetComponent(/datum/component/transforming)
