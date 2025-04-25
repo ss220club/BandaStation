@@ -8,23 +8,24 @@
 	/// Force when concealed
 	force = 5
 	/// Force when extended
-	var/force_on = 100
-	var/wound_bonus_on = 100
 	throwforce = 12
 	wound_bonus = -50
-	always_homerun = TRUE
 	icon = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_centcom.dmi'
 	lefthand_file = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_lefthand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/obj/weapons/baseball_bat/baseball_bat_righthand.dmi'
-	/// Item state when concealed
 	inhand_icon_state = "centcom_bat"
 	icon_state = "centcom_bat"
-	// Sound
-	var/on_sound = 'sound/items/weapons/batonextend.ogg'
-	/// Attack verbs when concealed (created on Initialize)
 	attack_verb_simple = list("hit", "poked")
+	homerun_able = TRUE
+	/// Sound of extending the bat
+	var/on_sound = 'sound/items/weapons/batonextend.ogg'
+	/// Force when extended
+	var/force_on = 100
+	/// Wound bonus when extended
+	var/wound_bonus_on = 100
 	/// Attack verbs when extended (created on Initialize)
 	var/list/attack_verb_on = list("smacked", "struck", "cracked", "beaten")
+	always_homerun = TRUE
 
 /obj/item/melee/baseball_bat/homerun/centcom/Initialize(mapload)
 	. = ..()
@@ -43,10 +44,9 @@
 /obj/item/melee/baseball_bat/homerun/centcom/proc/on_transform(obj/item/source, mob/user, active)
 	SIGNAL_HANDLER
 
-	var/datum/component/transforming/transform_component = GetComponent(/datum/component/transforming)
 	if(user)
 		balloon_alert(user, active ? "вытянуто" : "втянуто")
-	if(transform_component.active)
+	if(active)
 		wound_bonus = wound_bonus_on
 	else
 		wound_bonus = initial(wound_bonus)
@@ -67,10 +67,12 @@
 	else
 		user.adjustBruteLoss(rand(force/2, force))
 
-/obj/item/melee/baseball_bat/homerun/centcom/attack(mob/living/target, mob/living/user)
+/obj/item/melee/baseball_bat/homerun/centcom/pre_attack(atom/movable/target, mob/living/user, params)
 	var/datum/component/transforming/transform_component = GetComponent(/datum/component/transforming)
-	if(!transform_component.active)
-		target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."), \
+	if(transform_component.active)
+		return FALSE
+
+	target.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."), \
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает вас с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."))
-		return
-	. = ..()
+
+	return TRUE
