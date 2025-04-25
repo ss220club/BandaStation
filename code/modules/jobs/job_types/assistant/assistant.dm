@@ -72,7 +72,7 @@ Assistant
 	/// BANDASTATION EDIT START - Loadout
 	if(uniform)
 		return
-	/// BANDASTATION EDIT START - Loadout
+	/// BANDASTATION EDIT END - Loadout
 
 	var/static/jumpsuit_number = 0
 	jumpsuit_number += 1
