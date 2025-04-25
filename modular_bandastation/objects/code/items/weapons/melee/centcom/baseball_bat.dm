@@ -54,7 +54,7 @@
 
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
-/obj/item/melee/baseball_bat/homerun/centcom/pickup(mob/living/user)
+/obj/item/melee/baseball_bat/homerun/centcom/pickup(mob/user)
 	. = ..()
 	if(user.mind.centcom_role)
 		return
@@ -62,8 +62,8 @@
 	user.Stun(5 SECONDS, TRUE)
 	to_chat(user, span_userdanger("Это - оружие истинного правосудия. Тебе не дано обуздать его мощь."))
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		H.apply_damage(rand(force/2, force), BRUTE, H.get_active_hand())
+		var/mob/living/carbon/human/human_user = user
+		human_user.apply_damage(rand(force/2, force), BRUTE, human_user .get_active_hand())
 	else
 		user.adjustBruteLoss(rand(force/2, force))
 
