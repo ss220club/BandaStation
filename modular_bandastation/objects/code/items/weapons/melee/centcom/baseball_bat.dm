@@ -54,7 +54,7 @@
 
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
-/obj/item/melee/baseball_bat/homerun/centcom/pickup(mob/living/user)
+/obj/item/melee/baseball_bat/homerun/centcom/pickup(mob/user)
 	. = ..()
 	if(user.mind.centcom_role)
 		return
