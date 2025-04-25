@@ -64,7 +64,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 
 /datum/admins/gamepanel/ui_state(mob/user)
 	. = ..()
-	return ADMIN_STATE(R_ADMIN)
+	return ADMIN_STATE(R_ADMIN | R_SPAWN)
 
 /datum/admins/gamepanel/ui_act(action, params)
 	if(..())
