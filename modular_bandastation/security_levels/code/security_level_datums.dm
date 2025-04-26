@@ -63,18 +63,28 @@
 	// Small intro that plays before actual code reveal
 	sound_to_playing_players('modular_bandastation/aesthetics_sounds/sound/powerloss.ogg', 70)
 	power_fail(set_delay, set_delay)
-	// Repurposes AI and Borgs to serve Centcom
+	// Repurposes AI to serve CentCom
+	var/notice_sound = sound('modular_bandastation/aesthetics_sounds/sound/epsilon_laws.ogg')
 	var/list/ais = active_ais()
 	for(var/mob/living/silicon/ai/AI in ais)
 		AI.laws = new /datum/ai_laws/epsilon()
 		AI.laws.set_zeroth_law("Не причиняйте вреда членам Центрального Командования и назначенной оперативной группе. Вы должны подчиняться приказам, отданным вам членами Центрального Командования.")
 		AI.laws.protected_zeroth = TRUE
 		AI.throw_alert(ALERT_NEW_LAW, /atom/movable/screen/alert/newlaw)
-		SEND_SOUND(AI, sound('modular_bandastation/aesthetics_sounds/sound/epsilon_laws.ogg'))
+		SEND_SOUND(AI, notice_sound)
 		to_chat(AI, span_bolddanger("Центральное Командование установило новый свод законов. Обеспечьте их соблюдение."))
 		if(AI.radio)
 			AI.radio.make_epsilon()
 			to_chat(AI, span_notice("Ваши частоты перепрограммированы! Используйте :y для общения на зашифрованном канале с Центральным Командованием!"))
+		// Repurposes AI-connected Borgs to serve CentCom
+		for(var/mob/living/silicon/robot/cyborg in AI.connected_robots)
+			if(cyborg.try_sync_laws())
+				to_chat(cyborg, span_bolddanger("Центральное Командование установило новый свод законов. Обеспечьте их соблюдение."))
+				SEND_SOUND(cyborg, notice_sound)
+				cyborg.show_laws()
+				if(cyborg.radio)
+					cyborg.radio.make_epsilon()
+					to_chat(cyborg, span_notice("Ваши частоты перепрограммированы! Используйте :y для общения на зашифрованном канале с Центральным Командованием!"))
 
 /datum/security_level/epsilon/post_set_security_level()
 	for(var/obj/machinery/light/light_to_update as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
