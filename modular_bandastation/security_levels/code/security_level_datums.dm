@@ -75,7 +75,7 @@
 		to_chat(AI, span_bolddanger("Центральное Командование установило новый свод законов. Обеспечьте их соблюдение."))
 		if(AI.radio)
 			AI.radio.make_epsilon()
-			to_chat(AI, span_notice("Ваши частоты перепрограммированы! Используйте :y для общения на зашифрованном канале с Центральным Командованием!"))
+			to_chat(AI, span_notice("Ваши частоты перепрограммированы! Используйте [RADIO_TOKEN_CENTCOM] для общения на зашифрованном канале с Центральным Командованием!"))
 		// Repurposes AI-connected Borgs to serve CentCom
 		for(var/mob/living/silicon/robot/cyborg in AI.connected_robots)
 			if(cyborg.try_sync_laws())
@@ -84,7 +84,7 @@
 				cyborg.show_laws()
 				if(cyborg.radio)
 					cyborg.radio.make_epsilon()
-					to_chat(cyborg, span_notice("Ваши частоты перепрограммированы! Используйте :y для общения на зашифрованном канале с Центральным Командованием!"))
+					to_chat(cyborg, span_notice("Ваши частоты перепрограммированы! Используйте [RADIO_TOKEN_CENTCOM] для общения на зашифрованном канале с Центральным Командованием!"))
 
 /datum/security_level/epsilon/post_set_security_level()
 	for(var/obj/machinery/light/light_to_update as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
