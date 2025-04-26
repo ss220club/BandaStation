@@ -57,7 +57,6 @@
 /obj/item/radio/proc/make_epsilon()
 	qdel(keyslot)
 	keyslot = new /obj/item/encryptionkey/headset_cent()
-	special_channels |= RADIO_SPECIAL_CENTCOM
 	recalculateChannels()
 
 /datum/security_level/epsilon/pre_set_security_level()
