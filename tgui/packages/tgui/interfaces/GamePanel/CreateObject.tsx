@@ -200,16 +200,6 @@ export function CreateObject(props: CreateObjectProps) {
                         sendPreferences({ object_list: selectedObject });
                       }
                     }}
-                    onMouseDown={(e) => {
-                      if (e.button === 0 && e.shiftKey) {
-                        setTooltipIcon(true);
-                      }
-                    }}
-                    onMouseUp={(e) => {
-                      if (e.button === 0) {
-                        setTooltipIcon(false);
-                      }
-                    }}
                     onClick={() => {
                       setSelectedObj(index);
                       act('selected-object-changed', {
