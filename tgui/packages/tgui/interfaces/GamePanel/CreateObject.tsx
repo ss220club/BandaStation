@@ -59,7 +59,7 @@ export function CreateObject(props: CreateObjectProps) {
   const currentList = objList?.[currentType] || {};
 
   // Функция для отправки предпочтений на бэкенд при создании объекта
-  const sendPreferences = (settings) => {
+  const sendPreferences = (settings = {}) => {
     // Конвертируем локальные состояния в формат бэкенда
     const prefsToSend = {
       hide_icons: hideIcons,
@@ -189,15 +189,13 @@ export function CreateObject(props: CreateObjectProps) {
                     style={{
                       backgroundColor:
                         selectedObj === index
-                          ? 'rgba(255, 255, 255, 0.1)'
+                          ? 'rgba(255, 255, 255, 0.2)'
                           : undefined,
                       color: selectedObj === index ? '#fff' : undefined,
                     }}
                     onDoubleClick={() => {
                       if (selectedObj !== -1) {
-                        const selectedObject =
-                          Object.keys(currentList)[selectedObj];
-                        sendPreferences({ object_list: selectedObject });
+                        sendPreferences();
                       }
                     }}
                     onClick={() => {
