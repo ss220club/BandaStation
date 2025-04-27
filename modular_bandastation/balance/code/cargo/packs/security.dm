@@ -15,7 +15,7 @@
 	cost = CARGO_CRATE_VALUE * 11 // Original price: 1400 New price: 2200
 
 /datum/supply_pack/security/armory/battle_rifle
-	cost = CARGO_CRATE_VALUE * 30 // Original price: 20000 New price: 6000
+	cost = CARGO_CRATE_VALUE * 60 // Original price: 20000 New price: 12000
 
 // MARK: AMMO
 /datum/supply_pack/security/ammo
