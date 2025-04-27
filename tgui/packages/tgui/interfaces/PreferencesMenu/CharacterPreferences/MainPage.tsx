@@ -207,24 +207,22 @@ function GenderButton(props: GenderButtonProps) {
       placement="right"
       content={
         <Stack backgroundColor="white" p={0.3}>
-          {[Gender.Male, Gender.Female, Gender.Other, Gender.Other2].map(
-            (gender) => {
-              return (
-                <Stack.Item key={gender}>
-                  <Button
-                    selected={gender === props.gender}
-                    onClick={() => {
-                      props.handleSetGender(gender);
-                    }}
-                    fontSize="22px"
-                    icon={GENDERS[gender].icon}
-                    tooltip={GENDERS[gender].text}
-                    tooltipPosition="top"
-                  />
-                </Stack.Item>
-              );
-            },
-          )}
+          {Object.values(Gender).map((gender) => {
+            return (
+              <Stack.Item key={gender}>
+                <Button
+                  selected={gender === props.gender}
+                  onClick={() => {
+                    props.handleSetGender(gender);
+                  }}
+                  fontSize="22px"
+                  icon={GENDERS[gender].icon}
+                  tooltip={GENDERS[gender].text}
+                  tooltipPosition="top"
+                />
+              </Stack.Item>
+            );
+          })}
         </Stack>
       }
     >

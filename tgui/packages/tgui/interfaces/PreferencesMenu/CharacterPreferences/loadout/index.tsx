@@ -73,12 +73,14 @@ export function LoadoutPage(props) {
                   setSearchLoadout('');
                 }}
               >
-                <Box>
+                <Stack g={0} vertical textAlign="center">
                   {curTab.category_icon && (
-                    <Icon name={curTab.category_icon} mr={1} />
+                    <Stack.Item>
+                      <Icon name={curTab.category_icon} />
+                    </Stack.Item>
                   )}
-                  {curTab.name}
-                </Box>
+                  <Stack.Item>{curTab.name}</Stack.Item>
+                </Stack>
               </Tabs.Tab>
             ))}
           </Tabs>
@@ -123,9 +125,9 @@ function LoadoutTabs(props: LoadoutTabsProps) {
 
   return (
     <Stack fill>
-      <Stack.Item align="center" width="250px" height="100%">
+      <Stack.Item width="calc(220px + 1rem)" height="100%" align="center">
         <Stack vertical fill>
-          <Stack.Item height="60%">
+          <Stack.Item height="calc(220px + 5rem)">
             <LoadoutPreviewSection />
           </Stack.Item>
           <Stack.Item grow>
@@ -301,45 +303,44 @@ function LoadoutPreviewSection() {
       fill
       title="Превью"
       buttons={
-        <Button
-          align="center"
-          selected={data.job_clothes}
-          color="transparent"
-          icon="user-tie"
-          tooltip="Показывать профессию"
-          tooltipPosition="left"
-          onClick={() => act('toggle_job_clothes')}
-        />
+        <Stack>
+          <Stack.Item>
+            <Button
+              icon="chevron-left"
+              onClick={() =>
+                act('rotate_dummy', {
+                  dir: 'left',
+                })
+              }
+            />
+          </Stack.Item>
+          <Stack.Item>
+            <Button
+              icon="chevron-right"
+              onClick={() =>
+                act('rotate_dummy', {
+                  dir: 'right',
+                })
+              }
+            />
+          </Stack.Item>
+          <Stack.Item>
+            <Button
+              align="center"
+              selected={data.job_clothes}
+              color="transparent"
+              icon="user-tie"
+              tooltip="Показывать профессию"
+              tooltipPosition="left"
+              onClick={() => act('toggle_job_clothes')}
+            />
+          </Stack.Item>
+        </Stack>
       }
     >
       <Stack vertical fill>
         <Stack.Item grow align="center">
           <CharacterPreview height="100%" id={data.character_preview_view} />
-        </Stack.Item>
-        <Stack.Divider />
-        <Stack.Item align="center">
-          <Stack>
-            <Stack.Item>
-              <Button
-                icon="chevron-left"
-                onClick={() =>
-                  act('rotate_dummy', {
-                    dir: 'left',
-                  })
-                }
-              />
-            </Stack.Item>
-            <Stack.Item>
-              <Button
-                icon="chevron-right"
-                onClick={() =>
-                  act('rotate_dummy', {
-                    dir: 'right',
-                  })
-                }
-              />
-            </Stack.Item>
-          </Stack>
         </Stack.Item>
       </Stack>
     </Section>

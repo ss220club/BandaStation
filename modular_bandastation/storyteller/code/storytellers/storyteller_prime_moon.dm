@@ -1,7 +1,3 @@
-/datum/controller/subsystem/gamemode/Initialize(time, zlevel)
-	. = ..()
-	selected_storyteller = /datum/storyteller/angryverse
-
 /datum/storyteller/angryverse
 	name = "Angryverse"
 	desc = "Angryverse is more combat-oriented storyteller to make shifts more agressive"

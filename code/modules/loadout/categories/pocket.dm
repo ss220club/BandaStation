@@ -5,7 +5,7 @@
 	type_to_generate = /datum/loadout_item/pocket_items
 	tab_order = /datum/loadout_category/head::tab_order + 5
 	/// How many pocket items are allowed
-	VAR_PRIVATE/max_allowed = 2
+	VAR_PRIVATE/max_allowed = 5 // BANDASTATION EDIT: 2 -> 5
 
 /datum/loadout_category/pocket/New()
 	. = ..()
