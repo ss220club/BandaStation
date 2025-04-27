@@ -28,9 +28,9 @@
 	return max(donator_level, get_donator_level_from_admin())
 
 /client/proc/get_donator_level_from_admin()
-	if(!holder)
+	var/rank_flags = get_player_admin_flags(src)
+	if(!rank_flags)
 		return BASIC_DONATOR_LEVEL
-	var/rank_flags = holder.rank_flags()
 	if(rank_flags & R_EVERYTHING)
 		return MAX_DONATOR_LEVEL
 	if(rank_flags & R_ADMIN)

@@ -258,9 +258,14 @@
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(cult_ending_helper), CULT_FAILURE_NARSIE_KILLED), 2 SECONDS)
 		return
 	priority_announce(
-		text = "В вашем секторе зафиксировано беспричинное изменения пространства. Назначена классификация угрозы типа ТОТАЛЬНОЕ ВЫМИРАНИЕ. Задействованы все имеющиеся ресурсы для моделирование решения. ВРЕМЯ ОЖИДАНИЯ: 60 СЕКУНД.",
+		/// BANDASTATION EDIT START - Cult
+		text = "Внимание, это приоритетное оповещение. \
+			Сектор Эпсилон Эридани был подвергнут вторжению древней богоподобной враждебной сущности, \
+			у нас есть подтвержденная информация о массовых порабощениях по всему сектору. Положению присвоен сценарий \
+			\"ПОЛНОЕ ИСТРЕБЛЕНИЕ\". Приказ на принятие мер получен и авторизован. Ожидаемое время готовности: 60 секунд.",
+		/// BANDASTATION EDIT END - Cult
 		title = "[command_name()]: Отдел паранормальных явлений",
-		sound = 'sound/announcer/alarm/airraid.ogg',
+		sound = 'modular_bandastation/aesthetics_sounds/sound/announcements/narsie_end_begin_announcement.ogg', /// BANDASTATION EDIT - Cult
 	)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_end_second_check)), 50 SECONDS)
 

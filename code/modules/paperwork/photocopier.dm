@@ -107,7 +107,13 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 /obj/machinery/photocopier/prebuilt/Initialize(mapload)
 	toner_cartridge = new(src)
 	return ..()
+/// BANDASTAION ADDITION START - Photocopier
+/obj/machinery/photocopier/prebuilt/free
+	desc = "Does the same important paperwork, but it's free to use! The best type of free."
 
+/obj/machinery/photocopier/prebuilt/free/setup_components()
+	AddComponent(/datum/component/payment, 0, SSeconomy.get_dep_account(ACCOUNT_CIV), PAYMENT_CLINICAL)
+/// BANDASTAION ADDITION END - Photocopier
 /obj/machinery/photocopier/Initialize(mapload)
 	. = ..()
 	// Creates the paper and inserts it so we can drop it when we get destroyed/deconstructed
