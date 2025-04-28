@@ -8,7 +8,6 @@
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 
 	species_language_holder = /datum/language_holder/vulpkanin
-	// digitigrade_customization = DIGITIGRADE_OPTIONAL
 
 	mutantbrain = /obj/item/organ/brain/vulpkanin
 	mutantheart = /obj/item/organ/heart/vulpkanin
@@ -19,10 +18,16 @@
 	mutantliver = /obj/item/organ/liver/vulpkanin
 	mutantstomach = /obj/item/organ/stomach/vulpkanin
 	mutant_organs = list(
-		/obj/item/organ/tail/vulpkanin = "Default",
+		/obj/item/organ/tail/vulpkanin = /datum/sprite_accessory/tails/vulpkanin/fluffy::name,
 	)
 
-	body_markings = list(/datum/bodypart_overlay/simple/body_marking/vulpkanin = "None")
+	body_markings = list(
+		/datum/bodypart_overlay/simple/body_marking/vulpkanin_head = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/vulpkanin_chest = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/vulpkanin_limb = SPRITE_ACCESSORY_NONE,
+		/datum/bodypart_overlay/simple/body_marking/vulpkanin_facial_hair = SPRITE_ACCESSORY_NONE,
+	)
+
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/vulpkanin,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/vulpkanin,
@@ -36,22 +41,23 @@
 	bodytemp_heat_damage_limit = BODYTEMP_HEAT_DAMAGE_LIMIT + 30
 	bodytemp_cold_damage_limit = BODYTEMP_COLD_DAMAGE_LIMIT - 60
 
-/datum/species/vulpkanin/prepare_human_for_preview(mob/living/carbon/human/vulpkanin)
-	vulpkanin.set_haircolor("#A26324", update = FALSE) // brown
-	vulpkanin.set_hairstyle("Jagged", update = TRUE)
-	vulpkanin.dna.features["mcolor"] = "#D69E67"
-	vulpkanin.dna.features["vulpkanin_body_markings_color"] = "#bd762f"
-	vulpkanin.dna.features["vulpkanin_tail_markings_color"] = "#2b2015"
-	vulpkanin.dna.features["vulpkanin_head_markings_color"] = "#2b2015"
-	vulpkanin.dna.features["vulpkanin_facial_hair_color"] = "#bd762f"
-	vulpkanin.update_body(is_creating = TRUE)
+
+/datum/species/vulpkanin/prepare_human_for_preview(mob/living/carbon/human/human)
+	human.set_haircolor("#A26324", update = FALSE) // brown
+	human.set_hairstyle("Jagged", update = TRUE)
+	human.dna.features["mcolor"] = "#D69E67"
+	human.dna.features["vulpkanin_body_markings_color"] = "#bd762f"
+	human.dna.features["vulpkanin_tail_markings_color"] = "#2b2015"
+	human.dna.features["vulpkanin_head_markings_color"] = "#2b2015"
+	human.dna.features["vulpkanin_facial_hair_color"] = "#bd762f"
+	human.update_body(is_creating = TRUE)
 
 /datum/species/vulpkanin/randomize_features()
 	var/list/features = ..()
-	features["vulpkanin_body_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_body_markings_list) : "None"
-	features["tail_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : "None"
-	features["vulpkanin_head_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : "None"
-	features["vulpkanin_facial_hair"] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : "None"
+	features["vulpkanin_chest_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_chest_markings_list) : SPRITE_ACCESSORY_NONE
+	features["tail_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : SPRITE_ACCESSORY_NONE
+	features["vulpkanin_head_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : SPRITE_ACCESSORY_NONE
+	features["vulpkanin_facial_hair"] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : SPRITE_ACCESSORY_NONE
 
 	var/furcolor = "#[random_color()]"
 	features["vulpkanin_body_markings_color"] = furcolor
@@ -118,29 +124,6 @@
 
 	return to_add
 
-/datum/species/vulpkanin/create_pref_temperature_perks()
-	return list(list(
-			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
-			SPECIES_PERK_ICON = "temperature-low",
-			SPECIES_PERK_NAME = "Термоустойчивость",
-			SPECIES_PERK_DESC = "[plural_form] лучше переносят перепады температур.",))
-
-/datum/species/vulpkanin/create_pref_liver_perks()
-	return list(list(
-			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
-			SPECIES_PERK_ICON = "wine-glass",
-			SPECIES_PERK_NAME = "Чувствительность к алкоголю",
-			SPECIES_PERK_DESC = "Вульпканская печень более восприимчива к алкоголю, чем печень человека, примерно на 150%."
-		))
-
-/datum/species/vulpkanin/create_pref_language_perk()
-	return list(list(
-			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
-			SPECIES_PERK_ICON = "comment",
-			SPECIES_PERK_NAME = "Носитель языка",
-			SPECIES_PERK_DESC = "[plural_form] получают возможность говорить на Канилунце.",
-		))
-
 /datum/species/vulpkanin/get_scream_sound(mob/living/carbon/human/human)
 	if(human.physique == MALE)
 		return pick(
@@ -206,54 +189,3 @@
 		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
 		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
 	)
-
-/datum/species/vulpkanin/add_body_markings(mob/living/carbon/human/vulp) // OVERRIDE /datum/species/proc/add_body_markings
-	for(var/markings_type in body_markings)
-		var/datum/bodypart_overlay/simple/body_marking/markings = new markings_type()
-		var/accessory_name = vulp.dna.features[markings.dna_feature_key]
-		var/datum/sprite_accessory/vulpkanin_body_markings/accessory = markings.get_accessory(accessory_name)
-
-		if(isnull(accessory))
-			return
-
-		for(var/obj/item/bodypart/part as anything in markings.applies_to)
-			var/obj/item/bodypart/people_part = vulp.get_bodypart(initial(part.body_zone))
-
-			if(!people_part || !istype(people_part, part))
-				continue
-
-			var/datum/bodypart_overlay/simple/body_marking/vulpkanin/overlay = new markings_type()
-
-			overlay.icon = accessory.icon
-			overlay.icon_state = accessory.icon_state
-			overlay.use_gender = accessory.gender_specific
-			overlay.draw_color = accessory.color_src ? vulp.dna.features["vulpkanin_body_markings_color"] : null
-
-			if(istype(accessory, /datum/sprite_accessory/vulpkanin_body_markings) && accessory.colored_paws && (istype(people_part, /obj/item/bodypart/arm/left/vulpkanin) || istype(people_part, /obj/item/bodypart/arm/right/vulpkanin)))
-				overlay.aux_color_paw = accessory.color_src ? vulp.dna.features["vulpkanin_body_markings_color"] : null
-
-			people_part.add_bodypart_overlay(overlay)
-
-/obj/item/bodypart/head/get_hair_and_lips_icon(dropped)
-	. = ..()
-
-	var/image_dir = NONE
-	if(dropped)
-		image_dir = SOUTH
-	var/image/facial_hair_overlay
-	var/datum/sprite_accessory/sprite_accessory
-	var/mob/living/carbon/human/user = src.owner
-	if(istype(user) && user.dna && (head_flags & HEAD_VULPKANIN))
-		sprite_accessory = SSaccessories.vulpkanin_head_markings_list[user.dna.features["vulpkanin_head_markings"]]
-		if(sprite_accessory)
-			facial_hair_overlay = image(sprite_accessory.icon, "m_vulpkanin_head_markings_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
-			facial_hair_overlay.color = user.dna.features["vulpkanin_head_markings_color"]
-			. += facial_hair_overlay
-
-		sprite_accessory = SSaccessories.vulpkanin_facial_hair_list[user.dna.features["vulpkanin_facial_hair"]]
-		if(sprite_accessory)
-			facial_hair_overlay = image(sprite_accessory.icon, "m_vulpkanin_facial_hair_[sprite_accessory.icon_state]_ADJ", -BODY_ADJ_LAYER, image_dir)
-			facial_hair_overlay.color = user.dna.features["vulpkanin_facial_hair_color"]
-			. += facial_hair_overlay
-
-	return .

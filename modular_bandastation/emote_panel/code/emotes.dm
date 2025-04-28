@@ -17,10 +17,8 @@
 	. = ..()
 
 // MARK: Vulpkanin emotes
-/datum/emote/living/carbon/human/vulpkanin/can_run_emote(mob/user, status_check = TRUE, intentional = FALSE)
-	var/organ = user.get_organ_slot(ORGAN_SLOT_TONGUE)
-	if(istype(organ, /obj/item/organ/tongue/vulpkanin))
-		return ..()
+/datum/emote/living/carbon/human/vulpkanin
+	species_type_whitelist_typecache = /datum/species/vulpkanin
 
 /datum/emote/living/carbon/human/vulpkanin/howl
 	name = "Выть"
@@ -84,10 +82,8 @@
 	sound = 'modular_bandastation/emote_panel/audio/wbark.ogg'
 
 // MARK: Tajaran emotes
-/datum/emote/living/carbon/human/tajaran/can_run_emote(mob/user, status_check = TRUE, intentional, params)
-	if(!istype(user.get_organ_slot(ORGAN_SLOT_TONGUE), /obj/item/organ/tongue/tajaran))
-		return FALSE
-	return ..()
+/datum/emote/living/carbon/human/tajaran
+	species_type_whitelist_typecache = /datum/species/tajaran
 
 /datum/emote/living/carbon/human/tajaran/emote_meow
 	name = "Мяукнуть"
@@ -156,3 +152,56 @@
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
 	cooldown = 4 SECONDS
 	sound = 'modular_bandastation/emote_panel/audio/tajaran/tajaran_hiss.ogg'
+
+// MARK: Skrell emotes
+/datum/emote/living/carbon/human/skrell
+	species_type_whitelist_typecache = /datum/species/skrell
+
+/datum/emote/living/carbon/human/screll/warble
+	name = "Трелить"
+	key = "warble"
+	key_third_person = "warbles"
+	message = "трелит."
+	message_param = "трелит на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	vary = TRUE
+	species_type_whitelist_typecache = list(/datum/species/skrell)
+
+/datum/emote/living/carbon/human/screll/warble/get_sound(mob/living/user)
+	return pick(
+		'modular_bandastation/emote_panel/audio/skrell/warble_1.ogg',
+		'modular_bandastation/emote_panel/audio/skrell/warble_2.ogg',
+	)
+
+/datum/emote/living/carbon/human/screll/croak
+	name = "Квакать"
+	key = "croak"
+	key_third_person = "croak"
+	message = "квакает."
+	message_param = "квакает на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	vary = TRUE
+	species_type_whitelist_typecache = list(/datum/species/skrell)
+
+/datum/emote/living/carbon/human/screll/croak/get_sound(mob/living/user)
+	return pick(
+		'modular_bandastation/emote_panel/audio/skrell/croak_1.ogg',
+		'modular_bandastation/emote_panel/audio/skrell/croak_2.ogg',
+		'modular_bandastation/emote_panel/audio/skrell/croak_3.ogg',
+	)
+
+/datum/emote/living/carbon/human/screll/croak/anger
+	name = "Гневно квакать"
+	key = "croak_anger"
+	key_third_person = "croak_anger"
+	message = "гневно квакает!"
+	message_param = "гневно квакает на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	vary = TRUE
+	species_type_whitelist_typecache = list(/datum/species/skrell)
+
+/datum/emote/living/carbon/human/croak/anger/get_sound(mob/living/user)
+	return pick(
+		'modular_bandastation/emote_panel/audio/skrell/anger_1.ogg',
+		'modular_bandastation/emote_panel/audio/skrell/anger_2.ogg',
+	)

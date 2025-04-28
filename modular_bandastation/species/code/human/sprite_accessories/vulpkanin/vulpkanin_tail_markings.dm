@@ -1,6 +1,6 @@
 /datum/sprite_accessory/vulpkanin_tail_markings
 	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/tail_markings.dmi'
-	color_src = "vulpkanin_tail_markings_color"
+	color_src = TRUE
 	em_block = TRUE
 
 /datum/sprite_accessory/vulpkanin_tail_markings/default_tip
