@@ -15,6 +15,9 @@
 		#include "map_files\CatwalkStation\CatwalkStation_2023.dmm"
 		#include "map_files\NebulaStation\NebulaStation.dmm"
 		#include "map_files\wawastation\wawastation.dmm"
+		// BANDASTATION - ADDITION STAT
+		#include "map_files\Cyberiad\Cyberiad.dmm"
+		// BANDASTATION - ADDITION END
 
 		#ifdef CIBUILDING
 			#include "templates.dm"

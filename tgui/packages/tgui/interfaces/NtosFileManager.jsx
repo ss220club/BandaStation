@@ -71,7 +71,7 @@ const FileTable = (props) => {
             {!file.undeletable ? (
               <Button.Input
                 fluid
-                buttonText="Rename"
+                buttonText="Переименовать"
                 value={file.name}
                 onCommit={(value) => onRename(file.name, value)}
               />
@@ -96,20 +96,20 @@ const FileTable = (props) => {
                   icon="trash"
                   confirmIcon="times"
                   confirmContent=""
-                  tooltip="Delete"
+                  tooltip="Удалить"
                   onClick={() => onDelete(file.name)}
                 />
                 {!!usbconnected &&
                   (usbmode ? (
                     <Button
                       icon="download"
-                      tooltip="Download"
+                      tooltip="Скачать"
                       onClick={() => onUpload(file.name)}
                     />
                   ) : (
                     <Button
                       icon="upload"
-                      tooltip="Upload"
+                      tooltip="Загрузить"
                       onClick={() => onUpload(file.name)}
                     />
                   ))}

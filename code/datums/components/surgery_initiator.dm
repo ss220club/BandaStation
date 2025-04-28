@@ -64,9 +64,9 @@
 
 	if(!length(available_surgeries))
 		if (target.body_position == LYING_DOWN || !(target.mobility_flags & MOBILITY_LIEDOWN))
-			target.balloon_alert(user, "no surgeries available!")
+			target.balloon_alert(user, "нет доступных операций!")
 		else
-			target.balloon_alert(user, "make them lie down!")
+			target.balloon_alert(user, "им нужно лечь!")
 
 		return
 
@@ -120,11 +120,11 @@
 	if(the_surgery.status == 1)
 		patient.surgeries -= the_surgery
 		user.visible_message(
-			span_notice("[user] removes [parent] from [patient]'s [patient.parse_zone_with_bodypart(selected_zone)]."),
-			span_notice("You remove [parent] from [patient]'s [patient.parse_zone_with_bodypart(selected_zone)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] снимает [parent.declent_ru(ACCUSATIVE)] с [patient.parse_zone_with_bodypart(selected_zone, declent = GENITIVE)] у [patient.declent_ru(GENITIVE)]."),
+			span_notice("Вы снимаете [parent.declent_ru(ACCUSATIVE)] с [patient.parse_zone_with_bodypart(selected_zone, declent = GENITIVE)] у [patient.declent_ru(GENITIVE)]."),
 		)
 
-		patient.balloon_alert(user, "stopped work on [patient.parse_zone_with_bodypart(selected_zone)]")
+		patient.balloon_alert(user, "прекращение работы над [patient.parse_zone_with_bodypart(selected_zone, declent = INSTRUMENTAL)]")
 
 		qdel(the_surgery)
 		return
@@ -136,7 +136,7 @@
 		required_tool_type = TOOL_SCREWDRIVER
 
 	if(!close_tool || close_tool.tool_behaviour != required_tool_type)
-		patient.balloon_alert(user, "need a [is_robotic ? "screwdriver": "cautery"] in your inactive hand to stop the surgery!")
+		patient.balloon_alert(user, "нужно иметь [is_robotic ? "отвертку": "каутеризатор"] в вашей неактивной руке для остановки операции!")
 		return
 
 	if(the_surgery.operated_bodypart)
@@ -145,11 +145,11 @@
 	patient.surgeries -= the_surgery
 
 	user.visible_message(
-		span_notice("[user] closes [patient]'s [patient.parse_zone_with_bodypart(selected_zone)] with [close_tool] and removes [parent]."),
-		span_notice("You close [patient]'s [patient.parse_zone_with_bodypart(selected_zone)] with [close_tool] and remove [parent]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] закрывает [patient.parse_zone_with_bodypart(selected_zone)] у [patient.declent_ru(GENITIVE)], используя [close_tool.declent_ru(ACCUSATIVE)] и снимая [parent.declent_ru(ACCUSATIVE)]."),
+		span_notice("Вы закрываете [patient.parse_zone_with_bodypart(selected_zone)] у [patient.declent_ru(GENITIVE)], используя [close_tool.declent_ru(ACCUSATIVE)] и снимая [parent.declent_ru(ACCUSATIVE)]."),
 	)
 
-	patient.balloon_alert(user, "closed up [patient.parse_zone_with_bodypart(selected_zone)]")
+	patient.balloon_alert(user, "закрытие [patient.parse_zone_with_bodypart(selected_zone, declent = GENITIVE)]")
 
 	qdel(the_surgery)
 
@@ -162,7 +162,7 @@
 		return
 
 	if (!isnull(last_user))
-		source.balloon_alert(last_user, "someone else started a surgery!")
+		source.balloon_alert(last_user, "кто-то уже начал операцию!")
 
 	ui_close()
 
@@ -274,45 +274,45 @@
 	if (!can_start_surgery(user, target))
 		// This could have a more detailed message, but the UI closes when this is true anyway, so
 		// if it ever comes up, it'll be because of lag.
-		target.balloon_alert(user, "can't start the surgery!")
+		target.balloon_alert(user, "нельзя остановить операцию!")
 		return
 
 	var/selected_zone = user.zone_selected
 	var/obj/item/bodypart/affecting_limb = target.get_bodypart(check_zone(selected_zone))
 
 	if ((surgery.surgery_flags & SURGERY_REQUIRE_LIMB) && isnull(affecting_limb))
-		target.balloon_alert(user, "patient has no [parse_zone(selected_zone)]!")
+		target.balloon_alert(user, "у пациента нет [ru_parse_zone(selected_zone, declent = GENITIVE)]!")
 		return
 
 	if (!isnull(affecting_limb))
 		if(surgery.requires_bodypart_type && !(affecting_limb.bodytype & surgery.requires_bodypart_type))
-			target.balloon_alert(user, "not the right type of limb!")
+			target.balloon_alert(user, "неправильный тип конечности!")
 			return
 		if(surgery.targetable_wound && !affecting_limb.get_wound_type(surgery.targetable_wound))
-			target.balloon_alert(user, "no wound to operate on!")
+			target.balloon_alert(user, "нет ран для лечения!")
 			return
 
 	if (IS_IN_INVALID_SURGICAL_POSITION(target, surgery))
-		target.balloon_alert(user, "patient is not lying down!")
+		target.balloon_alert(user, "пациент не лежит!")
 		return
 
 	if (!surgery.can_start(user, target))
-		target.balloon_alert(user, "can't start the surgery!")
+		target.balloon_alert(user, "нельзя начать операцию!")
 		return
 
 	if (surgery_needs_exposure(surgery, target))
-		target.balloon_alert(user, "expose [target.p_their()] [target.parse_zone_with_bodypart(selected_zone)]!")
+		target.balloon_alert(user, "раскройте у них [target.parse_zone_with_bodypart(selected_zone, declent = ACCUSATIVE)]!")
 		return
 
 	ui_close()
 
 	var/datum/surgery/procedure = new surgery.type(target, selected_zone, affecting_limb)
 
-	target.balloon_alert(user, "starting \"[LOWER_TEXT(procedure.name)]\"")
+	target.balloon_alert(user, "начинается \"[LOWER_TEXT(procedure.name)]\"")
 
 	user.visible_message(
-		span_notice("[user] drapes [parent] over [target]'s [target.parse_zone_with_bodypart(selected_zone)] to prepare for surgery."),
-		span_notice("You drape [parent] over [target]'s [target.parse_zone_with_bodypart(selected_zone)] to prepare for \an [procedure.name]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] накидывает [parent.declent_ru(ACCUSATIVE)] на [target.parse_zone_with_bodypart(selected_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)] для подготовки к операции."),
+		span_notice("Вы накидываете [parent.declent_ru(ACCUSATIVE)] на [target.parse_zone_with_bodypart(selected_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)] для подготовки к операции \"[procedure.name]\"."),
 	)
 
 	log_combat(user, target, "operated on", null, "(OPERATION TYPE: [procedure.name]) (TARGET AREA: [selected_zone])")
