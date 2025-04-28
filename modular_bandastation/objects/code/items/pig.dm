@@ -1,5 +1,5 @@
 /obj/item/toy/plush/pig
-	name = "Игрушечный Хряк"
+	name = "pig toy"
 	desc = "Капитан Дементий! Тащи свиней! Экипажу нужны свиньи!"
 	icon = 'modular_bandastation/objects/icons/obj/items/pigs.dmi'
 	icon_state = "pig"
