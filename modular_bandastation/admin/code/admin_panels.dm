@@ -64,12 +64,14 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 
 /datum/admins/gamepanel/ui_state(mob/user)
 	. = ..()
-	return ADMIN_STATE(R_ADMIN | R_SPAWN)
+	return ADMIN_STATE(R_ADMIN)
 
 /datum/admins/gamepanel/ui_act(action, params)
 	if(..())
 		return
 	switch(action)
+		if("game-mode-panel")
+			SSgamemode.admin_panel(usr)
 		if("selected-object-changed")
 			selected_object = params?["newObj"]
 			return TRUE
@@ -173,7 +175,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 	)
 
 /datum/admins/gamepanel/proc/spawn_item(list/spawn_params)
-	if(!check_rights_for(user_client, R_ADMIN) || !spawn_params)
+	if(!check_rights_for(user_client, R_ADMIN | R_SPAWN) || !spawn_params)
 		return
 
 	var/path = text2path(spawn_params["object_list"]) || null
