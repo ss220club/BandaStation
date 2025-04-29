@@ -7,6 +7,7 @@
 	"space_empty_levels": 0,
 	"planetary": 1,
 	"main_floor": 3,
+	"give_players_hooks": 1,
 	"shuttles": {
 		"cargo": "cargo_box",
 		"ferry": "ferry_fancy",
