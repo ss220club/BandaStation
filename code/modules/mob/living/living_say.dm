@@ -169,7 +169,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(!try_speak(original_message, ignore_spam, forced, filterproof))
 		return
 
-	language = message_mods[LANGUAGE_EXTENSION] || get_selected_language()
+	language ||= message_mods[LANGUAGE_EXTENSION] || get_selected_language()
 
 	var/succumbed = FALSE
 
@@ -385,7 +385,8 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			is_local = (message_range != INFINITY),
 			is_radio = !!radio_freq,
 			effects = LAZYACCESS(message_mods, MODE_TTS_FILTERS),
-			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE)
+			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE),
+			channel_override = radio_freq ? CHANNEL_TTS_RADIO : null
 		)
 	// BANDASTATION ADDITION END - TTS
 

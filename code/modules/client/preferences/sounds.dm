@@ -88,10 +88,10 @@
 	savefile_identifier = PREFERENCE_PLAYER
 
 /datum/preference/numeric/volume/sound_lobby_volume/apply_to_client_updated(client/client, value)
-	if (value && isnewplayer(client.mob))
-		client.playtitlemusic()
-	else
-		client.mob.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+	/// BANDASTATION EDIT START - Volume
+	if (isnewplayer(client.mob))
+		client.mob.set_sound_channel_volume(CHANNEL_LOBBYMUSIC, value)
+	/// BANDASTATION EDIT END - Volume
 
 /// Controls hearing admin music
 /datum/preference/numeric/volume/sound_midi
@@ -110,7 +110,6 @@
 
 /// Controls radio noise volume
 /datum/preference/numeric/volume/sound_radio_noise
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
 	savefile_key = "sound_radio_noise"
 	savefile_identifier = PREFERENCE_PLAYER
 
