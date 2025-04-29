@@ -14,9 +14,9 @@
 	power_flags = NONE
 	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_INCAPACITATED|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_DURING_SOL
 	purchase_flags = AGGRESSIVE_CLAN_CAN_BUY|NON_AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
-	bloodcost = 10
+	bloodcost = 50
 	target_range = 7
-	cooldown_time = 10 SECONDS
+	cooldown_time = 50 SECONDS
 	power_activates_immediately = FALSE
 
 /datum/action/cooldown/bloodsucker/targeted/lunge/upgrade_power()
@@ -161,7 +161,7 @@
 		// Did we knock them down?
 		if(!is_source_facing_target(target, owner) || owner.alpha <= 40)
 			target.Knockdown(10 + level_current * 5)
-			target.Paralyze(0.1)
+			target.adjustStaminaLoss(120)
 
 /datum/action/cooldown/bloodsucker/targeted/lunge/DeactivatePower()
 	REMOVE_TRAIT(owner, TRAIT_IMMOBILIZED, BLOODSUCKER_TRAIT)

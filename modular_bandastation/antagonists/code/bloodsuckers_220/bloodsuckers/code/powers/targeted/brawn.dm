@@ -1,19 +1,18 @@
 /datum/action/cooldown/bloodsucker/targeted/brawn
 	name = "Brawn"
-	desc = "Snap restraints, break lockers and doors, or deal substantial damage with your bare hands."
+	desc = "break lockers and doors, or deal substantial damage with your bare hands."
 	button_icon_state = "power_strength"
 	power_explanation = "Brawn:\n\
 		Click a person to bash into them. Use while restrained or grabbed to break restraints or knock your grabber down. Only one of these can be done per use.\n\
 		Punching a cyborg will heavily EMP them in addition to dealing damage.\n\
 		At level 3, this ability will break closets open.\n\
 		At level 4, this ability wlil bash airlocks open as long as they aren't bolted.\n\
-		At level 5, you may break restraints and knock a grabber down in the same use.\n\
 		Higher levels will increase this ability's damage and knockdown."
 	power_flags = BP_AM_TOGGLE
-	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_DURING_SOL
+	check_flags = BP_CANT_USE_IN_TORPOR|BP_CANT_USE_IN_FRENZY|BP_CANT_USE_WHILE_UNCONSCIOUS|BP_CANT_USE_WHILE_STAKED|BP_CANT_USE_DURING_SOL|BP_CANT_USE_WHILE_INCAPACITATED
 	purchase_flags = AGGRESSIVE_CLAN_CAN_BUY|VASSAL_CAN_BUY
-	bloodcost = 100
-	cooldown_time = 25 SECONDS
+	bloodcost = 75
+	cooldown_time = 10 SECONDS
 	target_range = 1
 	power_activates_immediately = TRUE
 	prefire_message = "Select a target."
@@ -24,19 +23,8 @@
 	/// bypass typical ability level restrictions. (There is probably a better way to do this.)
 	var/brujah = FALSE
 
-/datum/action/cooldown/bloodsucker/targeted/brawn/ActivatePower(trigger_flags)
-	// Did we break out of our handcuffs?
-	if(level_current >= 5 && break_restraints())
-		power_activated_sucessfully()
-		return FALSE
-	// Did we knock a grabber down? We can only do this while not also breaking restraints if strong enough.
-	if(level_current >= 5 && escape_puller())
-		power_activated_sucessfully()
-		return FALSE
-	// Did neither, now we can PUNCH.
-	return ..()
-
 // Look at 'biodegrade.dm' for reference
+// Используется только кланом бруджа
 /datum/action/cooldown/bloodsucker/targeted/brawn/proc/break_restraints()
 	var/mob/living/carbon/human/user = owner
 	///Only one form of shackles removed per use
@@ -91,6 +79,7 @@
 		closet.broken = TRUE
 		closet.open()
 
+// используется только кланом бруджа
 /datum/action/cooldown/bloodsucker/targeted/brawn/proc/escape_puller()
 	if(!owner.pulledby) // || owner.pulledby.grab_state <= GRAB_PASSIVE)
 		return FALSE

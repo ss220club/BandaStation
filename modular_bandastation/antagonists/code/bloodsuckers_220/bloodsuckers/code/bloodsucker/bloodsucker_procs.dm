@@ -61,7 +61,6 @@
 	if(!owner || !owner.current || IS_FAVORITE_VASSAL(owner.current))
 		return
 	bloodsucker_level_unspent++
-	ritual_blood_update()
 	if(!my_clan)
 		to_chat(owner.current, span_notice("You have gained a rank. Join a Clan to spend it."))
 		return
@@ -211,22 +210,4 @@
 		if(is_type_in_typecache(thingy, typecache))
 			return TRUE
 
-/datum/antagonist/bloodsucker/proc/ritual_blood_update()
-	ritual_blood = list() // Clear existing rituals
 
-	// Basic rituals available to all bloodsuckers
-	ritual_blood["Gain Task (50 Blood)"] = 1
-
-	var/total_rank = bloodsucker_level + bloodsucker_level_unspent
-
-	/*// Mid rank rituals (Rank 3+)
-	if(total_rank >= 3)
-		ritual_blood["тест"] = 2
-	// High rank rituals (Rank 7+)
-	if(total_rank >= 7)
-
-
-	// Ancient rank rituals (Rank 13+)
-	if(total_rank >= 13)
-
-*/

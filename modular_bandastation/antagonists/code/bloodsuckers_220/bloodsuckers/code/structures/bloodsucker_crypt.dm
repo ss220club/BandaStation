@@ -98,7 +98,7 @@
 	desc = "A disturbingly familiar face stares back at you. Those reds don't seem to be painted in oil..."
 /obj/item/restraints/legcuffs/beartrap/bloodsucker
 */
-#define ALTAR_RANKS_PER_DAY 2
+
 /obj/structure/bloodsucker/bloodaltar
 	name = "blood altar"
 	desc = "It is made of marble, lined with basalt, and radiates an unnerving chill that puts your skin on edge." // спрайт поменялся, так что описание требует изменений
@@ -138,104 +138,7 @@
 	set_anchored(FALSE)
 	set_density(FALSE)
 
-/obj/structure/bloodsucker/bloodaltar/attack_hand(mob/user, list/modifiers)
-	. = ..()
-	if(!.)
-		return
-	if(!IS_BLOODSUCKER(user)) //not bloodsucker
-		to_chat(user, span_warning("You can't figure out how this works."))
-		return
 
-	var/datum/antagonist/bloodsucker/bloodsuckerdatum = user.mind.has_antag_datum(/datum/antagonist/bloodsucker)
-	var/list/options = bloodsuckerdatum.ritual_blood
-
-	var/choice = tgui_input_list(user, "Выберите исполняемый ритуал", "Выбор ритуала", options)
-	if(!choice || !Adjacent(user) || QDELETED(src))
-		return
-
-	switch(options[choice])
-		if(1)
-			if(bloodsuckerdatum.has_task && !check_completion(user))
-				to_chat(user, span_warning("You already have a rank up task!"))
-				return
-			if(bloodsuckerdatum.altar_uses >= ALTAR_RANKS_PER_DAY)
-				to_chat(user, span_notice("You have done all tasks for the night, come back tomorrow for more."))
-				return
-			if(bloodsuckerdatum.bloodsucker_blood_volume < 50)
-				to_chat(user, span_danger("You don't have enough blood to gain a task!"))
-				return
-			generate_task(user)
-
-/obj/structure/bloodsucker/bloodaltar/proc/generate_task(mob/living/user)
-	var/task //just like amongus
-	var/mob/living/carbon/crewmate = user
-	var/datum/antagonist/bloodsucker/bloodsuckerdatum = crewmate.mind.has_antag_datum(/datum/antagonist/bloodsucker)
-	suckamount = bloodsuckerdatum.task_blood_required
-	heartamount = bloodsuckerdatum.task_heart_required
-	if(!suckamount && !heartamount) // Generate random amounts if we don't already have them set
-		switch(bloodsuckerdatum.bloodsucker_level + bloodsuckerdatum.bloodsucker_level_unspent)
-			if(0 to 3)
-				suckamount = rand(100, 300)
-				heartamount = rand(1,2)
-			if(4 to 6)
-				suckamount = rand(300, 600)
-				heartamount = rand(3,4)
-			if(7 to 12)
-				suckamount = rand(500, 1200)
-				heartamount = rand(5,6)
-			if(13)
-				to_chat(user, span_danger("Ты достиг максимального могущества! Ты больше не можешь поднимать ранг"))
-	switch(rand(1, 3))
-		if(1,2)
-			bloodsuckerdatum.task_blood_required = suckamount
-			task = "Suck [suckamount] units of pure blood."
-		if(3)
-			bloodsuckerdatum.task_heart_required = heartamount
-			task = "Sacrifice [heartamount] hearts by using them on the altar."
-			sacrificialtask = TRUE
-	bloodsuckerdatum.task_memory += "<B>Current Rank Up Task</B>: [task]<br>"
-	bloodsuckerdatum.has_task = TRUE
-	to_chat(user, span_boldnotice("You have gained a new Task! [task] Remember to collect it by using the blood altar!"))
-
-/obj/structure/bloodsucker/bloodaltar/proc/check_completion(mob/living/user)
-	var/datum/antagonist/bloodsucker/bloodsuckerdatum = user.mind.has_antag_datum(/datum/antagonist/bloodsucker)
-	if(bloodsuckerdatum.task_blood_drank < bloodsuckerdatum.task_blood_required || sacrifices < bloodsuckerdatum.task_heart_required)
-		return FALSE
-	bloodsuckerdatum.task_memory = null
-	bloodsuckerdatum.has_task = FALSE
-	bloodsuckerdatum.bloodsucker_level_unspent++
-	bloodsuckerdatum.altar_uses++
-	bloodsuckerdatum.task_blood_drank = 0
-	bloodsuckerdatum.task_blood_required = 0
-	bloodsuckerdatum.task_heart_required = 0
-	sacrifices = 0
-	to_chat(user, span_notice("You have sucessfully done a task and gained a rank!"))
-	sacrificialtask = FALSE
-	return TRUE
-
-/obj/structure/bloodsucker/bloodaltar/examine(mob/user)
-	. = ..()
-	if(sacrificialtask)
-		if(sacrifices)
-			. += span_boldnotice("It currently contains [sacrifices] [organ_name].")
-	else
-		return ..()
-
-/obj/structure/bloodsucker/bloodaltar/attackby(obj/item/H, mob/user, params)
-	if(!IS_BLOODSUCKER(user) && !IS_VASSAL(user))
-		return ..()
-	if(sacrificialtask)
-		if(istype(H, /obj/item/organ/heart))
-			if(istype(H, /obj/item/organ/heart/gland))
-				to_chat(usr, span_warning("This type of organ doesn't have blood to sustain the altar!"))
-				return ..()
-			organ_name = H.name
-			balloon_alert(user, "heart fed!")
-			qdel(H)
-			sacrifices++
-			return
-	return ..()
-#undef ALTAR_RANKS_PER_DAY
 
 /obj/structure/bloodsucker/vassalrack
 	name = "persuasion rack"

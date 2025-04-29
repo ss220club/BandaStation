@@ -21,6 +21,7 @@
 #include "code/bloodsuckers_220/bloodsuckers/code/bloodsucker/bloodsucker_name.dm"
 #include "code/bloodsuckers_220/bloodsuckers/code/bloodsucker/bloodsucker_objectives.dm"
 #include "code/bloodsuckers_220/bloodsuckers/code/bloodsucker/bloodsucker_procs.dm"
+#include "code/bloodsuckers_220/bloodsuckers/code/bloodsucker/bloodsucker_rituals.dm"
 #include "code/bloodsuckers_220/bloodsuckers/code/bloodsucker/bloodsucker_sol.dm"
 #include "code/bloodsuckers_220/bloodsuckers/code/bloodsucker/bloodsucker_torpor.dm"
 #include "code/bloodsuckers_220/bloodsuckers/code/bloodsucker/shaded_bloodsucker.dm"

@@ -77,7 +77,9 @@
 		if(target.mind)
 			task_blood_drank += blood_taken
 		else
-			to_chat(owner, span_warning("[target] is catatonic and won't yield any usable blood for tasks!"))
+			if(COOLDOWN_FINISHED(src, bloodsucker_spam_task))
+				to_chat(owner, span_warning("[target] is catatonic and won't yield any usable blood for tasks!"))
+				COOLDOWN_START(src, bloodsucker_spam_task, 30 SECONDS)
 	return blood_taken
 
 /**
@@ -177,7 +179,6 @@
 			current_heart.Stop()
 	var/obj/item/organ/eyes/current_eyes = bloodsuckeruser.get_organ_slot(ORGAN_SLOT_EYES)
 	if(current_eyes)
-		current_eyes.flash_protect = max(initial(current_eyes.flash_protect) - 1, FLASH_PROTECTION_SENSITIVE)
 		current_eyes.color_cutoffs = list(25, 8, 5)
 		current_eyes.sight_flags |= SEE_MOBS
 	bloodsuckeruser.update_sight()
@@ -220,6 +221,8 @@
 	if(owner.current.StakeCanKillMe() && owner.current.am_staked())
 		final_death()
 		return
+	if(frenzied)
+		final_death()
 	// Temporary Death? Convert to Torpor.
 	if(is_in_torpor())
 		return

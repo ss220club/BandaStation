@@ -32,6 +32,8 @@
 	COOLDOWN_DECLARE(bloodsucker_spam_healing)
 	/// Cooldown for bloodsuckers going into Frenzy.
 	COOLDOWN_DECLARE(bloodsucker_frenzy_cooldown)
+	///Timer between alerts for ефыл blood
+	COOLDOWN_DECLARE(bloodsucker_spam_task)
 
 	///Used for assigning your name
 	var/bloodsucker_name
@@ -228,8 +230,6 @@
 		SelectReputation(am_fledgling = TRUE)
 		// Objectives
 		forge_bloodsucker_objectives()
-		// ритуалы
-		ritual_blood_update()
 
 	. = ..()
 	// Assign Powers
@@ -511,7 +511,6 @@
 		newheart.Restart()
 	var/obj/item/organ/eyes/user_eyes = user.get_organ_slot(ORGAN_SLOT_EYES)
 	if(user_eyes)
-		user_eyes.flash_protect = initial(user_eyes.flash_protect)
 		user_eyes.color_cutoffs = initial(user_eyes.color_cutoffs)
 		user_eyes.sight_flags = initial(user_eyes.sight_flags)
 	user.update_sight()

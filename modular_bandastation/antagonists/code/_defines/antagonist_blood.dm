@@ -3,6 +3,7 @@
 
 #define INVISIBILITY_CRYPT 30
 #define SEE_INVISIBLE_CRYPT 30
+#define ALTAR_RANKS_PER_DAY 2
 
 ///Вызывается когда вампир повышает ранг: (datum/bloodsucker_datum, mob/owner, mob/target)
 #define BLOODSUCKER_RANK_UP "bloodsucker_rank_up"

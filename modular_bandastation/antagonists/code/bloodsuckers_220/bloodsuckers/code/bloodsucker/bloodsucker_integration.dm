@@ -54,6 +54,7 @@
 		. += "Blood Drank: [bloodsuckerdatum.total_blood_drank]"
 		if(bloodsuckerdatum.has_task)
 			. += "Task Blood Drank: [bloodsuckerdatum.task_blood_drank]"
+			. += "Task Blood goal: [bloodsuckerdatum.task_blood_required]"
 
 /datum/outfit/bloodsucker_outfit
 	name = "Bloodsucker outfit (Preview only)"
@@ -78,7 +79,7 @@
 		see_invisible = SEE_INVISIBLE_CRYPT
 */
 /mob/set_invis_see()
-	if(!mind)
+	if(!mind || isobserver(src))
 		return ..()
 	if(IS_BLOODSUCKER(src) || IS_VASSAL(src) || IS_MONSTERHUNTER(src))
 		see_invisible = SEE_INVISIBLE_CRYPT

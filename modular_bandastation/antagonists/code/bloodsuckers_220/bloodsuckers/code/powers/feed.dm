@@ -60,7 +60,7 @@
 		log_combat(user, user, "fed on blood (target not found)", addition="(and took [blood_taken] blood)")
 	else
 		log_combat(user, feed_target, "fed on blood", addition="(and took [blood_taken] blood)")
-		to_chat(user, span_notice("You slowly release [feed_target]."))
+		to_chat(user, span_warning("You slowly release [feed_target]."))
 		if(feed_target.stat == DEAD && !target_was_dead && blood_taken > 0)
 			user.add_mood_event("drankkilled", /datum/mood_event/drankkilled)
 			bloodsuckerdatum_power.AddHumanityLost(10)
@@ -76,7 +76,7 @@
 	var/mob/living/feed_target = target_ref.resolve()
 	target_was_dead = (feed_target.stat == DEAD)
 	if(istype(feed_target, /mob/living/basic/mouse))
-		to_chat(owner, span_notice("You recoil at the taste of a lesser lifeform."))
+		to_chat(owner, span_warning("You recoil at the taste of a lesser lifeform."))
 		if(bloodsuckerdatum_power.my_clan && bloodsuckerdatum_power.my_clan.blood_drink_type != BLOODSUCKER_DRINK_INHUMANELY)
 			var/mob/living/user = owner
 			user.add_mood_event("drankblood", /datum/mood_event/drankblood_bad)
@@ -114,8 +114,8 @@
 		// Only people who AREN'T the target will notice this action.
 		var/dead_message = feed_target.stat != DEAD ? " <i>[feed_target.p_they(TRUE)] looks dazed, and will not remember this.</i>" : ""
 		owner.visible_message(
-			span_notice("[owner] puts [feed_target]'s wrist up to [owner.p_their()] mouth."), \
-			span_notice("You slip your fangs into [feed_target]'s wrist.[dead_message]"), \
+			span_warning("[owner] puts [feed_target]'s wrist up to [owner.p_their()] mouth."), \
+			span_warning("You slip your fangs into [feed_target]'s wrist.[dead_message]"), \
 			vision_distance = FEED_NOTICE_RANGE, ignored_mobs = feed_target)
 
 	//check if we were seen

@@ -29,8 +29,8 @@
 
 /datum/action/cooldown/bloodsucker/targeted/brawn/brash/ActivatePower(trigger_flags)
 	if(break_restraints())
-		cooldown_time = 80 SECONDS
-		bloodcost = 100
+		cooldown_time = 180 SECONDS
+		bloodcost = 200
 		power_activated_sucessfully()
 		return FALSE
 	if(level_current >= 1 && escape_puller())
