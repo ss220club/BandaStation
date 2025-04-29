@@ -81,7 +81,7 @@
 
 /atom/movable/screen/alert/status_effect/masquerade
 	name = "Mask"
-	desc = "You are currently hiding your true nature using the Masquerade power. This halts vampiric healing."
+	desc = "You are currently hiding your true nature using the Mask power. This halts vampiric healing."
 	icon = 'modular_bandastation/antagonists/code/bloodsuckers_220/icons/bloodsuckers/actions_bloodsucker.dmi'
 	icon_state = "power_human"
 	alerttooltipstyle = "cult"
