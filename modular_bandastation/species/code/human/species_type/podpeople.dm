@@ -1,4 +1,3 @@
-// BANDASTATION AADDITION START Podman-Emotion-Add
 /datum/species/pod/get_scream_sound(mob/living/carbon/human/pod)
 	if(pod.physique == MALE)
 		return pick(
@@ -82,4 +81,3 @@
 /datum/species/pod/get_hiss_sound(mob/living/carbon/human/pod)
 	return 'sound/mobs/humanoids/human/hiss/human_hiss.ogg'
 
-// BANDASTATION ADDITION END Podman-Emotion-Add
