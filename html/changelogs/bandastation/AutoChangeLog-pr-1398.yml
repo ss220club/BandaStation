@@ -1,0 +1,5 @@
+author: "adskipups"
+delete-after: True
+changes:
+  - spellcheck: "Исправлен текст удара игрушечной свиньи"
+  - rscdel: "Удалена текстовая версия удара (верещит) игрушечной свиньи"
