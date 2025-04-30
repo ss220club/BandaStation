@@ -68,10 +68,10 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_longwavy"
 
-/datum/sprite_accessory/hair/ponytail6
+/datum/sprite_accessory/hair/ponytail_strict
 	name = "Ponytail Strict"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
-	icon_state = "hair_ponytail6"
+	icon_state = "hair_ponytail_strict"
 
 /datum/sprite_accessory/hair/quadcurls
 	name = "Quadcurls"
