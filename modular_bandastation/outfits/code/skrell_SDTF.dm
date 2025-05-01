@@ -41,6 +41,7 @@
 	uniform = /obj/item/clothing/under/syndicate/combat
 	neck = /obj/item/clothing/neck/cloak/emperor_guard
 	back = /obj/item/mod/control/pre_equipped/skrell_emperor_guard
+	implants = list(/obj/item/implant/cqc)
 	backpack_contents = list(
 		/obj/item/gun/energy/pulse/carbine,
 		/obj/item/storage/medkit/tactical,
@@ -61,7 +62,4 @@
 	if(visuals_only)
 		return
 
-	var/obj/item/implant/cqc/cqc_implant = new/obj/item/implant/cqc(skrell_guard)
-	cqc_implant.implant(skrell_guard)
 	skrell_guard.faction |= ROLE_EMPEROR_GUARD
-	skrell_guard.update_icons()
