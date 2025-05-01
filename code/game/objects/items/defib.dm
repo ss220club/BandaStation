@@ -407,7 +407,7 @@
 	update_appearance()
 
 /obj/item/shockpaddles/suicide_act(mob/living/user)
-	user.visible_message(span_danger("[user] is putting the live paddles on [user.p_their()] chest! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_danger("[user] is putting the live paddles on [user.p_their()] chest! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	if(req_defib)
 		defib.deductcharge(revivecost)
 	playsound(src, 'sound/machines/defib/defib_zap.ogg', 50, TRUE, -1)
@@ -606,6 +606,10 @@
 						fail_reason = "Tissue damage too severe, repair and try again."
 					if (DEFIB_FAIL_HUSK)
 						fail_reason = "Patient's body is a mere husk, repair and try again."
+					// BANDASTATION EDIT START - PERMA-DEATH
+					if (DEFIB_FAIL_PERMANENTLY_DEAD)
+						fail_reason = "Patient's brain electomagnetic activity gone. It's too late for them..."
+					// BANDASTATION EDIT END - PERMA-DEATH
 					if (DEFIB_FAIL_FAILING_BRAIN)
 						fail_reason = "Patient's brain is too damaged, repair and try again."
 					if (DEFIB_FAIL_NO_INTELLIGENCE)

@@ -13,7 +13,7 @@ export function TabbedMenu(props: TabbedMenuProps) {
   return (
     <Stack vertical fill>
       <Stack.Item>
-        <Stack fill px={5}>
+        <Stack fill>
           {props.categoryEntries.map(([category]) => (
             <Stack.Item key={category} grow basis="content">
               <Button
@@ -48,7 +48,7 @@ export function TabbedMenu(props: TabbedMenuProps) {
         overflowY="scroll"
         {...props.contentProps}
       >
-        <Stack vertical fill px={2}>
+        <Stack vertical fill>
           {props.categoryEntries.map(([category, children]) => (
             <div
               key={category}
