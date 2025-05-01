@@ -88,7 +88,7 @@
 	default_unfasten_wrench(user, tool)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/processor/attackby(obj/item/attacking_item, mob/living/user, params)
+/obj/machinery/processor/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
 	if(processing)
 		to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] находится в работе!"))
 		return TRUE

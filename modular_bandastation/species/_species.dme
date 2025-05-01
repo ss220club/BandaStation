@@ -8,6 +8,7 @@
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
+#include "code/human/species_type/podpeople.dm"
 
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
 
