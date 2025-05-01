@@ -271,7 +271,7 @@
 	name = "skrell emperor guard banner"
 	desc = "Баннер, прославляющий Императорских Клинков."
 	icon_state = "banner_skrell_guard"
-	inhand_icon_state = "banner_skrell_guard"
+	inhand_icon_state = "banner_skrell"
 	faction = "emperor_guard"
 	warcry = "Слава Вечной Империи!!!"
 	morale_cooldown = 20
