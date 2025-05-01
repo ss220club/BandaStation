@@ -110,10 +110,10 @@
 // MARK: Species banners
 /obj/item/banner/species
 	icon_state = null
-	var/mob/living/carbon/human/species
+	var/datum/species/species
 
 /obj/item/banner/species/check_inspiration(mob/living/carbon/human/H)
-	return istype(H, species)
+	return is_species(H, species)
 
 /obj/item/banner/species/special_inspiration(mob/living/carbon/human/H)
 	H.emote(emote)
