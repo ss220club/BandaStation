@@ -15,12 +15,6 @@ endmap
 
 # Production-level maps.
 
-map birdshot
-	#default
-	maxplayers 66
-	votable
-endmap
-
 map deltastation
 	minplayers 50
 	votable
@@ -42,14 +36,9 @@ map tramstation
 	votable
 endmap
 
-map nebulastation
-	minplayers 35
+map cyberiad
+	maxplayers 100
 	votable
-endmap
-
-map wawastation
-	votable
-	minplayers 40
 endmap
 
 map hotmeta
@@ -66,11 +55,4 @@ map multiz_debug
 endmap
 
 map runtimestation
-endmap
-
-# SS220 maps.
-
-map cyberiad
-	maxplayers 100
-	votable
 endmap
