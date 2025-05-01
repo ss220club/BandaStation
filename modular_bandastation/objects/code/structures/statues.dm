@@ -155,6 +155,87 @@
 /obj/structure/statue/station_map/delta/se
 	icon_state = "se"
 
+// Off-station monument
+/obj/structure/statue/station_map/monument
+	name = "monument"
+	desc = "Высеченный в черной монолитной скале сюжет старых легенд... Вы вряд ли сможете понять, о чем идет речь в надписях."
+	icon = 'modular_bandastation/objects/icons/obj/structures/monument.dmi'
+
+/obj/structure/statue/station_map/monument/nw
+	icon_state = "nw"
+	density = FALSE
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/statue/station_map/monument/north
+	icon_state = "north"
+	density = FALSE
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/statue/station_map/monument/ne
+	icon_state = "ne"
+	density = FALSE
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/statue/station_map/monument/w
+	icon_state = "west"
+
+/obj/structure/statue/station_map/monument/c
+	icon_state = "center"
+
+/obj/structure/statue/station_map/monument/e
+	icon_state = "east"
+
+/obj/structure/statue/station_map/monument/w/get_seethrough_map()
+	return SEE_THROUGH_MAP_STATION_STATUE
+
+/obj/structure/statue/station_map/monument/c/get_seethrough_map()
+	return SEE_THROUGH_MAP_STATION_STATUE
+
+/obj/structure/statue/station_map/monument/e/get_seethrough_map()
+	return SEE_THROUGH_MAP_STATION_STATUE
+
+/obj/structure/statue/station_map/monument/sw
+	icon_state = "sw"
+
+/obj/structure/statue/station_map/monument/s
+	icon_state = "south"
+
+/obj/structure/statue/station_map/monument/se
+	icon_state = "se"
+
+// Off-station Throne
+/obj/structure/statue/station_map/throne
+	name = "emperor throne"
+	desc = "Трончик."
+	icon = 'modular_bandastation/objects/icons/obj/structures/throne.dmi'
+
+/obj/structure/statue/station_map/throne/nw
+	icon_state = "nw"
+	density = FALSE
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/statue/station_map/throne/north
+	icon_state = "north"
+	density = FALSE
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/statue/station_map/throne/ne
+	icon_state = "ne"
+	density = FALSE
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/statue/station_map/throne/sw
+	icon_state = "sw"
+
+/obj/structure/statue/station_map/throne/s
+	icon_state = "south"
+	density = TRUE
+	can_buckle = TRUE
+	layer = TABLE_LAYER
+
+/obj/structure/statue/station_map/throne/se
+	icon_state = "se"
+
 // MARK: Off-station statues
 /obj/structure/statue/mooniverse
 	name = "Неизвестный агент"
@@ -230,6 +311,24 @@
 	layer = ABOVE_MOB_LAYER
 	abstract_type = /obj/structure/statue/statue_holoplanet
 
+/obj/structure/statue/fountain
+	name = "fountain"
+	desc = "Фонтан, собранный из настоящего, тёсанного камня."
+	icon = 'modular_bandastation/objects/icons/obj/structures/fountain.dmi'
+	icon_state = "fountain_g_work"
+	pixel_x = -17
+	anchored = TRUE
+	layer = ABOVE_MOB_LAYER
+	abstract_type = /obj/structure/statue/fountain
+
+/obj/structure/statue/fountain/old
+	name = "old fountain"
+	desc = "Фонтан, собранный из настоящего, тёсанного камня. Его помотало временем."
+	icon = 'modular_bandastation/objects/icons/obj/structures/fountain.dmi'
+	icon_state = "fountain_work"
+	anchored = TRUE
+	layer = ABOVE_MOB_LAYER
+	abstract_type = /obj/structure/statue/fountain/old
 
 // Dummies
 /**

@@ -3,6 +3,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/items/banner.dmi'
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/banners_lefthand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/banners_righthand.dmi'
+	var/emote = "salute"
 
 /obj/item/banner/atmos
 	name = "atmosia banner"
@@ -109,6 +110,14 @@
 // MARK: Species banners
 /obj/item/banner/species
 	icon_state = null
+	var/mob/living/carbon/human/species
+
+/obj/item/banner/species/check_inspiration(mob/living/carbon/human/H)
+	return istype(H, species)
+
+/obj/item/banner/species/special_inspiration(mob/living/carbon/human/H)
+	H.emote(emote)
+	. = ..()
 
 /obj/item/banner/species/vox
 	name = "vox banner"
@@ -214,6 +223,7 @@
 	desc = "Баннер, гордо провозглашающий превосходящее влияние Скреллов."
 	icon_state = "banner_skrell"
 	inhand_icon_state = "banner_skrell"
+	species = /mob/living/carbon/human/species/skrell
 
 /obj/item/banner/species/skrell/mundane
 	inspiration_available = FALSE
@@ -244,6 +254,31 @@
 
 /obj/item/banner/species/machine/mundane
 	inspiration_available = FALSE
+
+// MARK: Factions banners
+
+/obj/item/banner/faction
+	faction = "station"
+
+/obj/item/banner/faction/check_inspiration(mob/living/carbon/human/H)
+	return faction in H.faction
+
+/obj/item/banner/faction/special_inspiration(mob/living/carbon/human/H)
+	H.emote(emote)
+	. = ..()
+
+/obj/item/banner/faction/emperor_guard
+	name = "skrell emperor guard banner"
+	desc = "Баннер, прославляющий Императорских Клинков."
+	icon_state = "banner_skrell_guard"
+	inhand_icon_state = "banner_skrell_guard"
+	faction = "emperor_guard"
+	warcry = "Слава Вечной Империи!!!"
+	morale_cooldown = 20
+
+/obj/item/banner/faction/emperor_guard/special_inspiration(mob/living/carbon/human/H)
+	. = ..()
+	playsound(H, 'modular_bandastation/objects/sounds/banner/emperor_guard_ahu.ogg', 50, TRUE, FALSE)
 
 // MARK: Override to defaults
 /obj/item/banner/red

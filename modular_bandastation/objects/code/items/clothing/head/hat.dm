@@ -117,3 +117,11 @@
 	icon_state = "secbeanie"
 	worn_icon_state = "secbeanie"
 	armor_type = /datum/armor/cosmetic_sec
+
+//Misc
+/obj/item/clothing/head/costume/crown/tiara
+	name = "tiara"
+	desc = "Имперская тиара с огромной синей жемчужиной - неоспоримый признак превосходства."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "tiara"

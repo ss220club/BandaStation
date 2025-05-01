@@ -179,3 +179,21 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/cool_scientist, 
 	icon_state = "legit6"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/atmos_team, 32)
+
+// Flags
+/obj/structure/sign/flag/skrell
+	name = "flag of Skrellian Empire"
+	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
+	desc = "Государственный флаг Скреллианской Империи. Его узоры иллюстрируют картину редкого и знаменательного события, \
+	т.н. \"Жемчужную Корону\". Это редкое астрономическое явление родного мира скреллов, заключающееся в видимом синхронном транзите обеих лун Кверр'балака по ходу дневного движения звезды Кверр'валис."
+	icon_state = "flag_skrell"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/skrell, 32)
+
+/obj/structure/sign/flag/skrell/emperor_guard
+	name = "flag of Emperor Guard"
+	desc = "Знамя Имперской Гвардии - т.н. Имперских Клинков \"Кверр'воал Раскинта\". Используется исключительно ими и изредка Императором.\
+	Нетипичные для скрелльской геральдики красные и белые цвета трактуются как \"кровь врагов и благочестивость Его Величества\"."
+	icon_state = "flag_emperor_guard"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/skrell/emperor_guard, 32)

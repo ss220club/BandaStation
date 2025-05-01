@@ -21,3 +21,15 @@
 	icon = 'modular_bandastation/objects/icons/obj/effects/logos.dmi'
 	icon_state = "sol_logo1"
 	layer = MID_TURF_LAYER // Above other decals
+
+/obj/effect/decal/skrell_logo
+	name = "Skrellian Empire logo"
+	icon = 'modular_bandastation/objects/icons/obj/effects/logos.dmi'
+	icon_state = "skrell_1"
+	layer = MID_TURF_LAYER // Above other decals
+
+/obj/effect/decal/skrell_logo/guard
+	name = "Emperor Guard logo"
+	icon = 'modular_bandastation/objects/icons/obj/effects/logos.dmi'
+	icon_state = "skrell_guard_1"
+	layer = MID_TURF_LAYER // Above other decals

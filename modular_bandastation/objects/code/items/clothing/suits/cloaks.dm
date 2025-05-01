@@ -89,10 +89,17 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
 
-// Skrell Emperor Guard
+// Skrell
 /obj/item/clothing/neck/cloak/emperor_guard
 	name = "emperor guards's mantle"
 	desc = "Кроваво-белый плащ Клинков Императора."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
 	icon_state = "emperor_guard_manlte"
+
+/obj/item/clothing/neck/cloak/skrell_fancy
+	name = "fancy cloak"
+	desc = "Красиво выделанный плащ. Он настолько древний, что можно подумать, что это реликвия"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "fancy_cloak"
