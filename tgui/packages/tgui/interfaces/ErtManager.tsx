@@ -321,7 +321,7 @@ const DenyERT = (props) => {
               height={'100%'}
               placeholder="Enter ERT denial reason here. Multiline input is accepted."
               value={text}
-              onChange={(e, value) => setText(value)}
+              onChange={setText}
             />
           </Stack.Item>
           <Stack.Item>

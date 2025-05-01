@@ -58,6 +58,27 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/caps_list
 	var/list/pod_hair_list
 
+	/// BANDASTATION ADDITION START - Species
+	// Vulpkanin
+	var/list/vulpkanin_head_markings_list
+	var/list/vulpkanin_chest_markings_list
+	var/list/vulpkanin_limb_markings_list
+	var/list/tails_list_vulpkanin
+	var/list/vulpkanin_tail_markings_list
+	var/list/vulpkanin_facial_hair_list
+
+	//  Tajaran
+	var/list/tajaran_head_markings_list
+	var/list/tajaran_chest_markings_list
+	var/list/tajaran_limb_markings_list
+	var/list/tails_list_tajaran
+	var/list/tajaran_tail_markings_list
+	var/list/tajaran_facial_hair_list
+
+	// Skrell
+	var/list/skrell_head_tentacles_list
+	/// BANDASTATION ADDITION END - Species
+
 /datum/controller/subsystem/accessories/PreInit() // this stuff NEEDS to be set up before GLOB for preferences and stuff to work so this must go here. sorry
 	setup_lists()
 	init_hair_gradients()
@@ -110,6 +131,29 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	moth_antennae_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_antennae)[DEFAULT_SPRITE_LIST]
 	moth_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
 	pod_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair)[DEFAULT_SPRITE_LIST]
+
+	/// BANDASTATION ADDITION START - Species
+	//  vulpkanin
+	vulpkanin_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	tails_list_vulpkanin = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/vulpkanin)[DEFAULT_SPRITE_LIST]
+	vulpkanin_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	vulpkanin_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	// tajaran
+	tajaran_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	tails_list_tajaran = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/tajaran)[DEFAULT_SPRITE_LIST]
+	tajaran_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	tajaran_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+
+	// skrell
+	skrell_head_tentacles_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/skrell_head_tentacle)[DEFAULT_SPRITE_LIST]
+	/// BANDASTATION ADDITION END - Species
 
 /// This proc just initializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
 /datum/controller/subsystem/accessories/proc/init_hair_gradients()

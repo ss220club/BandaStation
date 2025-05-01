@@ -164,7 +164,7 @@ const CameraListSelector = (props) => {
           expensive
           fluid
           placeholder="Search for a camera"
-          onInput={(e, value) => setSearchText(value)}
+          onChange={setSearchText}
           value={searchText}
         />
       </Stack.Item>

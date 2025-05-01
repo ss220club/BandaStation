@@ -51,23 +51,42 @@
 				++alive
 
 	ASSERT(cultplayers) //we shouldn't be here.
-	var/ratio = alive ? cultplayers/alive : 1
-	if(ratio > CULT_RISEN && !cult_risen)
+
+	/// BANDASTATION EDIT START - Cult thresholds rebalance
+	var/highpop_thresold_reached = alive >= CULT_HIGHPOP_THRESHOLD
+	var/cult_risen_threshold = highpop_thresold_reached ? CULT_RISEN_HIGHPOP : CULT_RISEN_LOWPOP
+	var/cult_ascended_threshold = highpop_thresold_reached ? CULT_ASCENDENT_HIGHPOP : CULT_ASCENDENT_LOWPOP
+	var/ratio = alive ? cultplayers / alive : 1
+	/// BANDASTATION EDIT END - Cult thresholds rebalance
+
+	if(ratio >= cult_risen_threshold && !cult_risen) /// BANDASTATION EDIT - Cult thresholds rebalance
 		for(var/datum/mind/mind as anything in members)
 			if(mind.current)
-				SEND_SOUND(mind.current, 'sound/music/antag/bloodcult/bloodcult_eyes.ogg')
+				SEND_SOUND(mind.current, sound(SFX_HALLUCINATION_I_SEE_YOU)) /// BANDASTATION EDIT - Cult Sounds
 				to_chat(mind.current, span_cult_large(span_warning("The veil weakens as your cult grows, your eyes begin to glow...")))
 				mind.current.AddElement(/datum/element/cult_eyes)
 		cult_risen = TRUE
 		log_game("The blood cult has risen with [cultplayers] players.")
 
-	if(ratio > CULT_ASCENDENT && !cult_ascendent)
+	if(ratio >= cult_ascended_threshold && !cult_ascendent) /// BANDASTATION EDIT - Cult thresholds rebalance
 		for(var/datum/mind/mind as anything in members)
 			if(mind.current)
-				SEND_SOUND(mind.current, 'sound/music/antag/bloodcult/bloodcult_halos.ogg')
+				SEND_SOUND(mind.current, sound(SFX_HALLUCINATION_I_M_HERE)) /// BANDASTATION EDIT - Cult Sounds
 				to_chat(mind.current, span_cult_large(span_warning("Your cult is ascendant and the red harvest approaches - you cannot hide your true nature for much longer!!")))
 				mind.current.AddElement(/datum/element/cult_halo)
 		cult_ascendent = TRUE
+		/// BANDASTATION ADDITION START - Cult rebalance
+		priority_announce(
+			text = "Мы фиксируем активность из другого измерения, связаную с культом \"Nar'Sie\" на вашей станции. \
+				Согласно нашей информации, [floor(ratio * 100)]% экипажа станции были порабощены культом. \
+				Сотрудники службы безопасности наделены правом беспрепятственно применять летальную силу против культистов. \
+				Остальному экипажу надлежит приготовиться защищать себя и свои отделы, не ведя охоту на культистов. \
+				Погибшие члены экипажа должны быть реанимированы и деконвертированы, как только ситуация будет взята под контроль.",
+			title = "[command_name()]: Отдел паранормальных явлений",
+			sound = SSstation.announcer.get_rand_report_sound(),
+			has_important_message = TRUE,
+		)
+		/// BANDASTATION ADDITION END - Cult rebalance
 		log_game("The blood cult has ascended with [cultplayers] players.")
 #endif
 

@@ -55,6 +55,82 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/your_fate, 32)
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/watching_eye, 32)
 
+// Sword of Altam
+
+/obj/item/poster/random_sword_of_altam
+	name = "Random Sword Of Altam Posters (SOA)"
+	poster_type = /obj/structure/sign/poster/sword_of_altam/random
+	icon_state = "rolled_poster"
+
+/obj/structure/sign/poster/sword_of_altam
+	poster_item_name = "SOA poster"
+	poster_item_desc = "This poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as contraband aboard Nanotrasen space facilities."
+	poster_item_icon_state = "rolled_poster"
+
+/obj/structure/sign/poster/sword_of_altam/random
+	name = "random SOA poster"
+	icon_state = "random_contraband"
+	never_random = TRUE
+	random_basetype = /obj/structure/sign/poster/sword_of_altam
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/random, 32)
+
+/obj/structure/sign/poster/sword_of_altam/killer
+	name = "Убийца"
+	desc = "На плакате изображен мужчина в старом офицерском пальто Нанотрейзен. Краткая надпись снизу гласит: \"Убийца\"."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "contraband8"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/killer, 32)
+
+/obj/structure/sign/poster/sword_of_altam/nt_crap1
+	name = "Испорченный плакат НТ"
+	desc = "Кто-то с лихвой оторвался на логотипе Компании!"
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "contraband9"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/nt_crap1, 32)
+
+/obj/structure/sign/poster/sword_of_altam/fight_now
+	name = "Сражайся! Сейчас!"
+	desc = "Громогласный призыв на фоне потрепанного галактического флага вульпканинов. Наступают интересные времена."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "contraband10"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/fight_now, 32)
+
+/obj/structure/sign/poster/sword_of_altam/nt_crap2
+	name = "Испорченный плакат НТ"
+	desc = "Следы кровавой когтистой лапы на логотипе Компании. Ярый дух протеста!"
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "contraband11"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/nt_crap2, 32)
+
+/obj/structure/sign/poster/sword_of_altam/unite
+	name = "Объединяйтесь!"
+	desc = "Явно пропагандистский плакат, призывающий к единению вульпканинов."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "contraband12"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/unite, 32)
+
+/obj/structure/sign/poster/sword_of_altam/brotherhood
+	name = "Братство"
+	desc = "Изображение вульпканинов, объединенных одной целью. Такого история еще не видела."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "contraband13"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/brotherhood, 32)
+
+/obj/structure/sign/poster/sword_of_altam/altam_sword
+	name = "Меч Альтама"
+	desc = "Меч Альтама - радикальная повстанческая организация вульпканинов, действующая с 2569 года на территории ТСФ и объектах Нанотрейзен, жертвами беспощадных налетов которой являются исключительно люди. Их методы - террор, их цель - месть, их Родина - Альтам."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "contraband14"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/sword_of_altam/altam_sword, 32)
+
 // Legit
 /obj/structure/sign/poster/official/mars
 	name = "Плакат Марса"
@@ -87,3 +163,19 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/razumause, 32)
 	icon_state = "legit4"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/assist_pride, 32)
+
+/obj/structure/sign/poster/official/cool_scientist
+	name = "Крутой генетик"
+	desc = "Едва заметная ухмылка и стильные солнцезащитные очки этого мужчины как бы говорят вам: \"Будь крутым, чувак!\". Ниже имеются инициалы J.D. и подпись: \"Лучший генетик сектора Эридана.\""
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "legit5"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/cool_scientist, 32)
+
+/obj/structure/sign/poster/official/atmos_team
+	name = "Огонь и лёд"
+	desc = "Плакат изображает двух инженеров-атмосферников - рыжеволосого парня с пламенной улыбкой и беловолосую девушку с холодным взглядом. Небольшая надпись в низу гласит: \"С.О. & Э.Ж. - гордость отдела.\""
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "legit6"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/atmos_team, 32)

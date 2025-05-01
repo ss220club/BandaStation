@@ -179,8 +179,6 @@ export function TextAreaSection(props: TextAreaSectionProps) {
       <TextArea
         ref={textAreaRef}
         autoFocus
-        scrollbar
-        noborder
         value={textAreaText}
         textColor={useColor}
         fontFamily={useFont}
@@ -191,7 +189,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
         onKeyDown={handleTextAreaKeyDown}
         onKeyUp={handleTextAreaKeyUp}
         onClick={updatePaperReplacentHints}
-        onInput={(e, text) => {
+        onChange={(text) => {
           setTextAreaText(text);
           setTextAreaTextForPreviewWithDelayCallback(text);
 

@@ -135,6 +135,13 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	switch(href_list["action"])
 		if("openLink")
 			src << link(href_list["link"])
+		if("openWebMap")
+			if(!SSmapping.current_map.mapping_url)
+				return
+			if(is_station_level(mob.z))
+				src << link("[SSmapping.current_map.mapping_url][LOWER_TEXT(sanitize_css_class_name(SSmapping.current_map.map_name))]/?x=[mob.x]&y=[mob.y]&zoom=6")
+			else
+				src << link("[SSmapping.current_map.mapping_url][LOWER_TEXT(sanitize_css_class_name(SSmapping.current_map.map_name))]")
 	if (hsrc)
 		var/datum/real_src = hsrc
 		if(QDELETED(real_src))
@@ -259,6 +266,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		persistent_client = new(ckey)
 		persistent_client.byond_build = byond_build
 		persistent_client.byond_version = byond_version
+
+	if(SScentral.can_run())
+		SScentral.get_player_discord_async(ckey)
+		SScentral.update_player_donate_tier_blocking(src)
 
 	if(byond_version >= 516)
 		winset(src, null, list("browser-options" = "find,refresh,byondstorage"))

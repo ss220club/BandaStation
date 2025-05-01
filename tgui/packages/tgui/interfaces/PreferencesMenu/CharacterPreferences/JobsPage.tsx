@@ -364,6 +364,7 @@ export function JobsPage() {
               <Stack vertical>
                 <PriorityHeaders />
                 <Department department="Captain" />
+                <Department department="NT Representation" />
                 <Department department="Service" />
                 <Department department="Cargo" />
               </Stack>

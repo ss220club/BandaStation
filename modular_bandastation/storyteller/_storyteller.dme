@@ -51,6 +51,8 @@
 #include "code\storytellers\storyteller_operative.dm"
 #include "code\storytellers\storyteller_black_orbit.dm"
 #include "code\storytellers\storyteller_phantom.dm"
+#include "code\storytellers\storyteller_prime.dm"
+#include "code\storytellers\storyteller_prime_moon.dm"
 
 #include "code\dynamic_report.dm"
 #include "code\scheduled_event.dm"
