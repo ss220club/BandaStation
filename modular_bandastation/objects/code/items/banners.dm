@@ -223,7 +223,7 @@
 	desc = "Баннер, гордо провозглашающий превосходящее влияние Скреллов."
 	icon_state = "banner_skrell"
 	inhand_icon_state = "banner_skrell"
-	species = /mob/living/carbon/human/species/skrell
+	species = /datum/species/skrell
 
 /obj/item/banner/species/skrell/mundane
 	inspiration_available = FALSE
