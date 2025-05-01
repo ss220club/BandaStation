@@ -161,22 +161,22 @@
 /datum/config_entry/flag/arrivals_shuttle_require_safe_latejoin //Require the arrivals shuttle to be operational in order for latejoiners to join
 
 /datum/config_entry/string/alert_green
-	default = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
+	default = "Все угрозы для станции устранены. Все оружие должно быть в кобуре, и законы о конфиденциальности вновь полностью соблюдаются."
 
 /datum/config_entry/string/alert_blue_upto
-	default = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
+	default = "Станция получила надежные данные о возможной враждебной активности на борту. Служба безопасности может держать оружие на виду."
 
 /datum/config_entry/string/alert_blue_downto
-	default = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
+	default = "Непосредственная угроза миновала. Служба безопасности может больше не держать оружие в полной боевой готовности, но может по-прежнему держать его на виду. Выборочные обыски запрещены."
 
 /datum/config_entry/string/alert_red_upto
-	default = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
+	default = "Станции грозит серьёзная опасность. Службе безопасности рекомендуется иметь оружие в полной боевой готовности. Выборочные обыски разрешены."
 
 /datum/config_entry/string/alert_red_downto
-	default = "The station's destruction has been averted. There is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
+	default = "Код был снижен до красного. Станции по-прежнему грозит серьёзная опасность. Службе безопасности рекомендуется иметь оружие в полной боевой готовности. Выборочные обыски разрешены."
 
 /datum/config_entry/string/alert_delta
-	default = "Destruction of the station is imminent. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
+	default = "Механизм самоуничтожения станции задействован. Все члены экипажа обязаны подчиняться всем указаниям, данными главами отделов. Любые нарушения этих приказов наказуемы уничтожением на месте. Это не учебная тревога."
 
 /datum/config_entry/flag/revival_pod_plants
 
@@ -351,16 +351,6 @@
 
 /datum/config_entry/flag/forbid_station_traits
 
-/datum/config_entry/number/events_min_time_mul // Multipliers for random events minimal starting time and minimal players amounts
-	default = 1
-	min_val = 0
-	integer = FALSE
-
-/datum/config_entry/number/events_min_players_mul
-	default = 1
-	min_val = 0
-	integer = FALSE
-
 /datum/config_entry/number/events_frequency_lower
 	default = 2.5 MINUTES
 	min_val = 0
@@ -419,6 +409,8 @@
 	min_val = 0
 
 /datum/config_entry/flag/dynamic_config_enabled
+
+/datum/config_entry/flag/events_config_enabled
 
 /datum/config_entry/string/drone_required_role
 	default = "Silicon"

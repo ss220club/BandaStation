@@ -282,7 +282,7 @@ export const Jukebox220 = () => {
                           width="100%"
                           placeholder="Название трека..."
                           value={trackName}
-                          onChange={(e, value) => setTrackName(value)}
+                          onChange={setTrackName}
                         />
                       </LabeledList.Item>
                       <LabeledList.Item label="Продолжительность">

@@ -182,9 +182,13 @@ There are several things that need to be remembered:
 			// When byond gives us filters that respect dirs we can just use an alpha mask for this but until then, two icons weeeee
 			var/mutable_appearance/hands_combined = mutable_appearance(layer = -GLOVES_LAYER, appearance_flags = KEEP_TOGETHER)
 			if(has_left_hand(check_disabled = FALSE))
-				hands_combined.overlays += mutable_appearance('icons/effects/blood.dmi', "bloodyhands_left")
+				var/mutable_appearance/blood_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands_left")
+				blood_overlay.color = get_blood_dna_color(GET_ATOM_BLOOD_DNA(src))
+				hands_combined.overlays += blood_overlay
 			if(has_right_hand(check_disabled = FALSE))
-				hands_combined.overlays += mutable_appearance('icons/effects/blood.dmi', "bloodyhands_right")
+				var/mutable_appearance/blood_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands_right")
+				blood_overlay.color = get_blood_dna_color(GET_ATOM_BLOOD_DNA(src))
+				hands_combined.overlays += blood_overlay
 			overlays_standing[GLOVES_LAYER] = hands_combined
 			apply_overlay(GLOVES_LAYER)
 		return
@@ -402,12 +406,12 @@ There are several things that need to be remembered:
 
 		var/mutant_override = FALSE
 
-		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
-		if(worn_item.worn_icon_species?[bodypart_head.species_bodytype])
-			icon_file = worn_item.worn_icon_species[bodypart_head.species_bodytype]
+		var/species_id = dna.species.id
+		if(worn_item.worn_icon_species?[species_id])
+			icon_file = worn_item.worn_icon_species[species_id]
 			mutant_override = TRUE
-		else if(bodypart_head.species_bodytype in icon_files_species)
-			icon_file = icon_files_species[bodypart_head.species_bodytype]
+		else if(icon_files_species[species_id])
+			icon_file = icon_files_species[species_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -476,11 +480,11 @@ There are several things that need to be remembered:
 		var/mutant_override = FALSE
 
 		var/obj/item/bodypart/chest/bodypart_chest = src.get_bodypart(BODY_ZONE_CHEST)
-		if(worn_item.worn_icon_species?[bodypart_chest.species_bodytype])
-			icon_file = worn_item.worn_icon_species[bodypart_chest.species_bodytype]
+		if(worn_item.worn_icon_species?[bodypart_chest.limb_id])
+			icon_file = worn_item.worn_icon_species[bodypart_chest.limb_id]
 			mutant_override = TRUE
-		else if(bodypart_chest.species_bodytype in icon_files_species)
-			icon_file = icon_files_species[bodypart_chest.species_bodytype]
+		else if(bodypart_chest.limb_id in icon_files_species)
+			icon_file = icon_files_species[bodypart_chest.limb_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -547,11 +551,11 @@ There are several things that need to be remembered:
 		var/mutant_override = FALSE
 
 		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
-		if(worn_item.worn_icon_species?[bodypart_head.species_bodytype])
-			icon_file = worn_item.worn_icon_species[bodypart_head.species_bodytype]
+		if(worn_item.worn_icon_species?[bodypart_head.limb_id])
+			icon_file = worn_item.worn_icon_species[bodypart_head.limb_id]
 			mutant_override = TRUE
-		else if(bodypart_head.species_bodytype in icon_files_species)
-			icon_file = icon_files_species[bodypart_head.species_bodytype]
+		else if(bodypart_head.limb_id in icon_files_species)
+			icon_file = icon_files_species[bodypart_head.limb_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -565,9 +569,6 @@ There are several things that need to be remembered:
 
 	apply_overlay(FACEMASK_LAYER)
 	check_body_shape(BODYSHAPE_SNOUTED, ITEM_SLOT_MASK)
-	// BANDASTATION EDIT START - SPECIES CLOTHING ICONS
-	update_body_parts()
-	// BANDASTATION EDIT STOP - SPECIES CLOTHING ICONS
 
 /mob/living/carbon/human/update_worn_back(update_obscured = TRUE)
 	remove_overlay(BACK_LAYER)
@@ -970,7 +971,7 @@ generate/load female uniform sprites matching all previously decided variables
 
 	my_head.update_limb(is_creating = update_limb_data)
 
-	add_overlay(my_head.get_limb_icon())
+	add_overlay(my_head.get_limb_icon(dropped = FALSE, update_on = src))
 	update_worn_head()
 	update_worn_mask()
 

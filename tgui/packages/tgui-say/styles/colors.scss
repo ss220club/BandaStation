@@ -7,6 +7,7 @@ $lightBorder: hsl(0, 0%, 73.3%);
 $lightHover: hsl(0, 0%, 91.8%);
 $scrollbar-color-multiplier: 1 !default;
 
+// prettier-ignore
 $_channel_map: (
   'Admin': hsl(300, 100%, 86.7%),
   'AI': hsl(332.2, 59.6%, 60.2%),
@@ -47,7 +48,8 @@ $_channel_map: (
   'Юр': hsl(331, 90%, 51%),
   'Снаб': hsl(33.7, 44.9%, 49.8%),
   'Обсл': hsl(88.1, 60.6%, 40.8%),
-  'Синд': hsl(359.1, 31.8%, 42.5%), // BANDASTATION EDIT END
+  'Синд': hsl(359.1, 31.8%, 42.5%),
+  // BANDASTATION EDIT END
 );
 
 $channel_keys: map.keys($_channel_map) !default;

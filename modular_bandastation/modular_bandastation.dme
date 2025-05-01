@@ -46,6 +46,7 @@
 #include "orderables/_orderables.dme"
 #include "outfits/_outfits.dme"
 #include "overrides/_overrides.dme"
+#include "paperwork/_paperwork.dme"
 #include "pixel_shift/_pixel_shift.dme"
 #include "preferences/_preferences.dme"
 #include "ru_jobs/_ru_jobs.dme"
@@ -63,6 +64,7 @@
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
 #include "implants/_implants.dme"
+#include "ssd_indicator/_ssd_indicator.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
@@ -71,8 +73,4 @@
 // Модпаки включены по умолчанию для запуска всех тестов и для этого кода тоже.
 #ifndef DISABLE_PRIME_MODPACKS
 #include "prime_only/_prime_only.dme"
-#include "storyteller/code/storytellers/storyteller_prime.dm"
-#include "storyteller/code/storytellers/storyteller_prime_moon.dm"
 #endif
-
-#include "paperwork/_paperwork.dme"

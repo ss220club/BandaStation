@@ -1,5 +1,22 @@
 /datum/emote/living/carbon/human
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
+	/// BANDASTATION ADDITION START - SPECIES
+	/// Species allowed to use this emote. Null by default which means that all species are allowed
+	var/list/species_type_whitelist_typecache
+	/// BANDASTATION ADDITION END - SPECIES
+
+/// BANDASTATION ADDITION START - SPECIES
+/datum/emote/living/carbon/human/New()
+	..()
+	species_type_whitelist_typecache = typecacheof(species_type_whitelist_typecache)
+
+/datum/emote/living/carbon/human/can_run_emote(mob/user, status_check, intentional, params)
+	var/mob/living/carbon/human/human_user = user
+	if(species_type_whitelist_typecache && !is_type_in_typecache(human_user.dna.species, species_type_whitelist_typecache))
+		return FALSE
+
+	return ..()
+/// BANDASTATION ADDITION END - SPECIES
 
 /datum/emote/living/carbon/human/dap
 	key = "dap"

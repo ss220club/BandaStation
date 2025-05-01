@@ -11,6 +11,7 @@
 	#define TTS_CAST_POST_SFX "tts_postSFX"
 	#define TTS_CAST_SEED "tts_seed"
 	#define TTS_PRIORITY "tts_priority"
+	#define TTS_CHANNEL_OVERRIDE "tts_channel_override"
 	#define TTS_PRIORITY_VOICE 0
 	#define TTS_PRIORITY_MIMIC 1
 	#define TTS_PRIORITY_MASK 2

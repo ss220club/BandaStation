@@ -473,7 +473,7 @@
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "Kx" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/requests_console/directional/south{
 	name = "Blueshield's Requests Console";
 	department = "Blueshield's Office"
@@ -502,7 +502,7 @@
 /turf/template_noop,
 /area/template_noop)
 "LZ" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/requests_console/directional/south{
 	name = "Nanotrasen Representative's Requests Console";
 	department = "Nanotrasen Representative's Office"

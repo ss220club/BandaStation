@@ -106,7 +106,7 @@
 /datum/station_trait/blackout/on_round_start()
 	. = ..()
 	for(var/obj/machinery/power/apc/apc as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/apc))
-		if(is_station_level(apc.z) && prob(60))
+		if(is_station_level(apc.z) && prob(30)) /// BANDASTATION EDIT: original prob(60) - Station traits
 			apc.overload_lighting()
 
 /datum/station_trait/empty_maint

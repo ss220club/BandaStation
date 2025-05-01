@@ -14,6 +14,8 @@
 #include "code/dynamic.dm"
 #include "code/events.dm"
 #include "code/headslug.dm"
+#include "code/heretic_knife.dm"
+#include "code/human_stripping.dm"
 #include "code/laser.dm"
 #include "code/materials_market.dm"
 #include "code/religion.dm"

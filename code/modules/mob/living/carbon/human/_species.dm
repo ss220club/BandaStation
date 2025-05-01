@@ -381,19 +381,23 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	if(old_species.type != type)
 		replace_body(human_who_gained_species, src)
 
+	if(!human_who_gained_species.dna.blood_type.is_species_universal) // Clown blood is forever.
+		//Assigns exotic blood type if the species has one
+		if(exotic_bloodtype && human_who_gained_species.dna.blood_type != exotic_bloodtype)
+			human_who_gained_species.set_blood_type(get_blood_type(exotic_bloodtype))
+			// updates the cached organ blood types in case our blood type changed
+			human_who_gained_species.update_cached_blood_dna_info()
+		//Otherwise, check if the previous species had an exotic bloodtype and we do not have one and assign a random blood type
+		//(why the fuck is blood type not tied to a fucking DNA block?)
+		else if(old_species.exotic_bloodtype && isnull(exotic_bloodtype))
+			human_who_gained_species.set_blood_type(random_human_blood_type())
+			human_who_gained_species.update_cached_blood_dna_info()
+
 	regenerate_organs(human_who_gained_species, old_species, replace_current = FALSE, visual_only = human_who_gained_species.visual_only_organs)
 	// Update locked slots AFTER all organ and body stuff is handled
 	human_who_gained_species.hud_used?.update_locked_slots()
 	// Drop the items the new species can't wear
 	INVOKE_ASYNC(src, PROC_REF(worn_items_fit_body_check), human_who_gained_species, TRUE)
-
-	//Assigns exotic blood type if the species has one
-	if(exotic_bloodtype && human_who_gained_species.dna.blood_type != exotic_bloodtype)
-		human_who_gained_species.dna.blood_type = exotic_bloodtype
-	//Otherwise, check if the previous species had an exotic bloodtype and we do not have one and assign a random blood type
-	//(why the fuck is blood type not tied to a fucking DNA block?)
-	else if(old_species.exotic_bloodtype && !exotic_bloodtype)
-		human_who_gained_species.dna.blood_type = random_blood_type()
 
 	//Resets blood if it is excessively high so they don't gib
 	normalize_blood(human_who_gained_species)
@@ -529,9 +533,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		species_human.overlays_standing[BODY_LAYER] = standing
 
 	species_human.apply_overlay(BODY_LAYER)
-	// BANDASTATION EDIT START
-	update_body_markings(species_human)
-	// BANDASTATION EDIT END
 
 //This exists so sprite accessories can still be per-layer without having to include that layer's
 //number in their sprite name, which causes issues when those numbers change.
@@ -763,10 +764,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
  **/
 /datum/species/proc/handle_chemical(datum/reagent/chem, mob/living/carbon/human/affected, seconds_per_tick, times_fired)
 	SHOULD_CALL_PARENT(TRUE)
-	if(chem.type == exotic_blood)
-		affected.blood_volume = min(affected.blood_volume + round(chem.volume, 0.1), BLOOD_VOLUME_MAXIMUM)
-		affected.reagents.del_reagent(chem.type)
-		return COMSIG_MOB_STOP_REAGENT_CHECK
+	if(!istype(chem, /datum/reagent/blood)) // the blood reagent handles this itself, this is for exotic blood types
+		var/datum/blood_type/blood_type = affected.dna.blood_type
+		if(chem.type == blood_type?.reagent_type)
+			affected.blood_volume = min(affected.blood_volume + round(chem.volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+			affected.reagents.del_reagent(chem.type)
+			return COMSIG_MOB_STOP_REAGENT_CHECK
+		if(chem.type == blood_type?.restoration_chem && affected.blood_volume < BLOOD_VOLUME_NORMAL)
+			affected.blood_volume += BLOOD_REGEN_FACTOR * seconds_per_tick
+			affected.reagents.remove_reagent(chem.type, chem.metabolization_rate * seconds_per_tick)
+			return COMSIG_MOB_STOP_REAGENT_CHECK
 	if(!chem.overdosed && chem.overdose_threshold && chem.volume >= chem.overdose_threshold && !HAS_TRAIT(affected, TRAIT_OVERDOSEIMMUNE))
 		chem.overdosed = TRUE
 		chem.overdose_start(affected)
@@ -2046,7 +2053,10 @@ GLOBAL_LIST_EMPTY(features_by_species)
 				continue
 
 			var/datum/bodypart_overlay/simple/body_marking/overlay = new markings_type()
-			overlay.set_appearance(accessory_name, hooman.dna.features["mcolor"])
+			/// BANDASTATION ADDITION START - Species
+			var/accessory_color = markings.dna_color_feature_key ? hooman.dna.features[markings.dna_color_feature_key] : hooman.dna.features["mcolor"]
+			/// BANDASTATION ADDITION END - Species
+			overlay.set_appearance(accessory_name, accessory_color) /// BANDASTATION EDIT - Species
 			people_part.add_bodypart_overlay(overlay)
 
 		qdel(markings)
@@ -2056,25 +2066,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	for(var/obj/item/bodypart/part as anything in hooman.bodyparts)
 		for(var/datum/bodypart_overlay/simple/body_marking/marking in part.bodypart_overlays)
 			part.remove_bodypart_overlay(marking)
-
-// BANDASTATION EDIT START
-/// Update the overlays if necessary
-/datum/species/proc/update_body_markings(mob/living/carbon/human/hooman)
-	if(HAS_TRAIT(hooman, TRAIT_INVISIBLE_MAN))
-		remove_body_markings(hooman)
-		return
-
-	var/needs_update = FALSE
-	for(var/datum/bodypart_overlay/simple/body_marking/marking as anything in body_markings)
-		if(initial(marking.dna_feature_key) == body_markings[marking]) // dna is same as our species (sort of mini-cache), so no update needed
-			continue
-		needs_update = TRUE
-		break
-
-	if(needs_update)
-		remove_body_markings(hooman)
-		add_body_markings(hooman)
-// BANDASTATION EDIT END
 
 /**
  * Calculates the expected height values for this species

@@ -225,8 +225,9 @@
 	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
 
 /obj/item/gun/syringe/blowgun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+	. = ..()
+	if(!.)
+		return
 	visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет из [declent_ru(GENITIVE)]!"))
-
 	user.adjustStaminaLoss(20, updating_stamina = FALSE)
 	user.adjustOxyLoss(20)
-	return ..()

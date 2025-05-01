@@ -480,6 +480,7 @@
 
 	visible_message(span_notice("[capitalize(declent_ru(NOMINATIVE))] берет [I.declent_ru(ACCUSATIVE)] от [offerer.declent_ru(GENITIVE)]."), \
 					span_notice("Вы берете [I.declent_ru(ACCUSATIVE)] от [offerer.declent_ru(GENITIVE)]."))
+	I.do_pickup_animation(src, offerer)
 	put_in_hands(I)
 
 ///Returns a list of all body_zones covered by clothing

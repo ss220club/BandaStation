@@ -1,6 +1,6 @@
 /datum/sprite_accessory/vulpkanin_head_markings
 	icon = 'icons/bandastation/mob/species/vulpkanin/sprite_accessories/head_markings.dmi'
-	color_src = "vulpkanin_head_markings_color"
+	color_src = TRUE
 
 /datum/sprite_accessory/vulpkanin_head_markings/nose_default
 	name = "Vulpkanin Nose"
@@ -33,3 +33,14 @@
 /datum/sprite_accessory/vulpkanin_head_markings/points_sharp
 	name = "Vulpkanin Points Head 2"
 	icon_state = "points_sharp"
+
+/// MARK: Bodypart overlay
+/datum/bodypart_overlay/simple/body_marking/vulpkanin_head
+	dna_feature_key = "vulpkanin_head_markings"
+	dna_color_feature_key = "vulpkanin_head_markings_color"
+	applies_to = list(
+		/obj/item/bodypart/head,
+	)
+
+/datum/bodypart_overlay/simple/body_marking/vulpkanin_head/get_accessory(name)
+	return SSaccessories.vulpkanin_head_markings_list[name]

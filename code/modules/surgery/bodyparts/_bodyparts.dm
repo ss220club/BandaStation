@@ -41,7 +41,7 @@
 	///Defines when a bodypart should not be changed. Example: BP_BLOCK_CHANGE_SPECIES prevents the limb from being overwritten on species gain
 	var/change_exempt_flags = NONE
 	///Random flags that describe this bodypart
-	var/bodypart_flags = NONE
+	var/bodypart_flags = BODYPART_VIRGIN
 
 	///Whether the bodypart (and the owner) is husked.
 	var/is_husked = FALSE
@@ -209,9 +209,8 @@
 	var/datum/bodypart_overlay/texture/texture_bodypart_overlay
 	/// Lazylist of /datum/status_effect/grouped/bodypart_effect types. Instances of this are applied to the carbon when added the limb is attached, and merged with similair limbs
 	var/list/bodypart_effects
-	// BANDASTATION EDIT START
-	var/species_bodytype
-	// BANDASTATION EDIT STOP
+	/// The cached info about the blood this organ belongs to, set during on_removal()
+	var/list/blood_dna_info
 
 /obj/item/bodypart/apply_fantasy_bonuses(bonus)
 	. = ..()
@@ -243,6 +242,8 @@
 
 	if(!IS_ORGANIC_LIMB(src))
 		grind_results = null
+	else
+		blood_dna_info = list("UNKNOWN DNA" = get_blood_type(BLOOD_TYPE_O_PLUS))
 
 	ru_names_rename(ru_names_list("[limb_id] [parse_zone(body_zone)]", "[ru_parse_zone(body_zone, declent = NOMINATIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = GENITIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = DATIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = ACCUSATIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = INSTRUMENTAL)] ([limb_id])", "[ru_parse_zone(body_zone, declent = PREPOSITIONAL)] ([limb_id])", gender = FEMALE))
 	name = "[limb_id] [parse_zone(body_zone)]"
@@ -422,7 +423,7 @@
 				return
 	return ..()
 
-/obj/item/bodypart/attackby(obj/item/weapon, mob/user, params)
+/obj/item/bodypart/attackby(obj/item/weapon, mob/user, list/modifiers)
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(weapon.get_sharpness())
@@ -943,6 +944,14 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(IS_ORGANIC_LIMB(src))
+		// Try to add a cached blood type data, we must do it in here because for some reason DNA gets initialized AFTER the mob's limbs are created.
+		// Should be fine as this gets called before all the important stuff happens
+		if(!(bodypart_flags & ORGAN_VIRGIN) && owner?.dna?.blood_type)
+			blood_dna_info = owner.get_blood_dna_list()
+			// need to remove the synethic blood DNA that is initialized
+			// wash also adds the blood dna again
+			wash(CLEAN_TYPE_BLOOD)
+			bodypart_flags &= ~BODYPART_VIRGIN
 		if(!(bodypart_flags & BODYPART_UNHUSKABLE) && owner && HAS_TRAIT(owner, TRAIT_HUSK))
 			dmg_overlay_type = "" //no damage overlay shown when husked
 			is_husked = TRUE
@@ -978,17 +987,14 @@
 		species_color = ""
 
 	update_draw_color()
-// BANDASTATION EDIT START
-	recolor_bodypart_overlays()
-// BANDASTATION EDIT END
-// BANDASTATION REMOVAL START
-	// // Recolors mutant overlays to match new mutant colors
-	// for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
-	// 	overlay.inherit_color(src, force = TRUE)
-	// // Ensures marking overlays are updated accordingly as well
-	// for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
-	// 	marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], species_color)
-// BANDASTATION REMOVAL END
+
+	// Recolors mutant overlays to match new mutant colors
+	for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
+		overlay.inherit_color(src, force = TRUE)
+	// Ensures marking overlays are updated accordingly as well
+	for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
+		var/marking_color = marking.dna_color_feature_key ? human_owner.dna.features[marking.dna_color_feature_key] : species_color /// BANDASTATION ADDITION - Species
+		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], marking_color) /// BANDASTATION EDIT - Species
 
 	return TRUE
 
@@ -1015,12 +1021,19 @@
 	SIGNAL_HANDLER
 	wash(clean_types)
 
+/obj/item/bodypart/wash(clean_types)
+	. = ..()
+
+	// always add the original dna to the organ after it's washed
+	if(IS_ORGANIC_LIMB(src) && (clean_types & CLEAN_TYPE_BLOOD))
+		add_blood_DNA(blood_dna_info)
+
 /// To update the bodypart's icon when not attached to a mob
 /obj/item/bodypart/proc/update_icon_dropped()
 	SHOULD_CALL_PARENT(TRUE)
 
 	cut_overlays()
-	var/list/standing = get_limb_icon(TRUE)
+	var/list/standing = get_limb_icon(dropped = TRUE)
 	if(!standing.len)
 		icon_state = initial(icon_state)//no overlays found, we default back to initial icon.
 		return
@@ -1052,7 +1065,7 @@
 		update_icon_dropped()
 
 ///Generates an /image for the limb to be used as an overlay
-/obj/item/bodypart/proc/get_limb_icon(dropped)
+/obj/item/bodypart/proc/get_limb_icon(dropped, mob/living/carbon/update_on)
 	SHOULD_CALL_PARENT(TRUE)
 	RETURN_TYPE(/list)
 
@@ -1062,7 +1075,13 @@
 
 	if(dropped && dmg_overlay_type)
 		if(brutestate)
-			. += image('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0", -DAMAGE_LAYER)
+			// divided into two overlays: one that gets colored and one that doesn't.
+			var/image/brute_blood_overlay = image('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0", -DAMAGE_LAYER)
+			brute_blood_overlay.color = get_blood_dna_color(update_on ? update_on.get_blood_dna_list() : blood_dna_info) // living mobs can just get it fresh, dropped limbs use blood_dna_info
+			var/mutable_appearance/brute_damage_overlay = mutable_appearance('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_overlay", -DAMAGE_LAYER, appearance_flags = RESET_COLOR)
+			if(brute_damage_overlay)
+				brute_blood_overlay.overlays += brute_damage_overlay
+			. += brute_blood_overlay
 		if(burnstate)
 			. += image('icons/mob/effects/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]", -DAMAGE_LAYER)
 
@@ -1357,13 +1376,6 @@
 	if(current_gauze.absorption_capacity <= 0)
 		owner.visible_message(span_danger("\The [current_gauze.name] on [owner]'s [name] falls away in rags."), span_warning("\The [current_gauze.name] on your [name] falls away in rags."), vision_distance=COMBAT_MESSAGE_RANGE)
 		QDEL_NULL(current_gauze)
-
-// BANDASTATION EDIT START
-///Loops through all of the bodypart's external organs and update's their color.
-/obj/item/bodypart/proc/recolor_bodypart_overlays()
-	for(var/datum/bodypart_overlay/mutant/overlay in bodypart_overlays)
-		overlay.inherit_color(src, force = TRUE)
-// BANDASTATION EDIT END
 
 ///A multi-purpose setter for all things immediately important to the icon and iconstate of the limb.
 /obj/item/bodypart/proc/change_appearance(icon, id, greyscale, dimorphic)
