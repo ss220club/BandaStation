@@ -19612,10 +19612,6 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
-"rwM" = (
-/obj/effect/decal/fakelattice,
-/turf/open/space/basic,
-/area/space/nearstation)
 "rxd" = (
 /obj/structure/chair/comfy/corp{
 	dir = 4
@@ -81027,7 +81023,7 @@ aYn
 aYn
 aWC
 aSM
-rwM
+apV
 aSM
 aWC
 aSM
@@ -81280,12 +81276,12 @@ aYu
 amD
 amD
 amD
-rwM
-rwM
+apV
+apV
 bEe
-rwM
-rwM
-rwM
+apV
+apV
+apV
 bEe
 apV
 apV
@@ -81538,11 +81534,11 @@ amD
 amD
 awi
 aaa
-rwM
+apV
 bEe
-rwM
+apV
 aaa
-rwM
+apV
 bEe
 apV
 aaa
