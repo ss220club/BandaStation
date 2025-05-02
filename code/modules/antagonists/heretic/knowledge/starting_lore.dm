@@ -69,7 +69,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	desc = "Дарует вам Живое сердце, позволяющее отслеживать жертвенные цели. \
 		Если вы потеряете сердце, вы можете трансмутировать мак и лужу крови, \
 		чтобы пробудить свое сердце в Живое сердце. Если ваше сердце кибернетическое, \
-		то для трансмутации вам дополнительно потребуется пригодное для использования органическое сердце."
+		вы не сможете возродить его."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/blood = 1,
 		/obj/item/food/grown/poppy = 1,
@@ -80,8 +80,6 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
 	research_tree_icon_state = "living_heart"
 	research_tree_icon_frame = 1
-	/// The typepath of the organ type required for our heart.
-	var/required_organ_type = /obj/item/organ/heart
 
 /datum/heretic_knowledge/living_heart/on_research(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
@@ -108,18 +106,15 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 			// We found a replacement place to put our heart
 			where_to_put_our_heart = look_for_backup
 			our_heretic.living_heart_organ_slot = backup_slot
-			required_organ_type = backup_organs[backup_slot]
 			to_chat(user, span_boldnotice("Поскольку у вашего вида нет сердца, ваше Живое сердце находится в вашем [look_for_backup.name]."))
 			break
 
 	if(where_to_put_our_heart)
 		where_to_put_our_heart.AddComponent(/datum/component/living_heart)
-		desc = "Дарует вам Живое сердце, привязанное к вашему [where_to_put_our_heart.name], \
-			позволяя отслеживать жертвенные цели. \
+		desc = "Дарует вам Живое сердце, привязанное к вашему [where_to_put_our_heart.name], позволяя отслеживать жертвенные цели. \
 			Если вы потеряете [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)], вы можете трансмутировать мак и лужу крови, \
 			чтобы пробудить [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)] в Живое сердце. \
-			Если [where_to_put_our_heart.ru_p_yours()] [where_to_put_our_heart.declent_ru(NOMINATIVE)] кибернетическое, \
-			вам дополнительно потребуется [where_to_put_our_heart.declent_ru(NOMINATIVE)] из органики и без повреждений при трансмутации."
+			Если [where_to_put_our_heart.ru_p_yours()] [where_to_put_our_heart.declent_ru(NOMINATIVE)] кибернетическое, ритуал будет невозможен!"
 
 	else
 		to_chat(user, span_boldnotice("У вас нет сердца или каких-либо органов грудной клетки, если на то пошло. Вы не получили Живое сердце из-за этого."))
@@ -138,70 +133,29 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 /datum/heretic_knowledge/living_heart/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	var/datum/antagonist/heretic/our_heretic = GET_HERETIC(user)
 	var/obj/item/organ/our_living_heart = user.get_organ_slot(our_heretic.living_heart_organ_slot)
+	// No heart, nothing to give living heart to
+	if(QDELETED(our_living_heart))
+		loc.balloon_alert(user, "ритуал провален, [our_heretic.living_heart_organ_slot] отсутствует!")
+		return FALSE
+
 	// For sanity's sake, check if they've got a living heart -
 	// even though it's not invokable if you already have one,
 	// they may have gained one unexpectantly in between now and then
-	if(!QDELETED(our_living_heart))
-		if(HAS_TRAIT(our_living_heart, TRAIT_LIVING_HEART))
-			loc.balloon_alert(user, "ритуал провален, у вас уже есть Живое сердце!")
-			return FALSE
+	if(HAS_TRAIT(our_living_heart, TRAIT_LIVING_HEART))
+		loc.balloon_alert(user, "ритуал провален, у вас уже есть Живое сердце!")
+		return FALSE
 
-		// By this point they are making a new heart
-		// If their current heart is organic / not synthetic, we can continue the ritual as normal
-		if(is_valid_heart(our_living_heart))
-			return TRUE
-
-		// If their current heart is not organic / is synthetic, they need an organic replacement
-		// ...But if our organ-to-be-replaced is unremovable, we're screwed
-		if(our_living_heart.organ_flags & ORGAN_UNREMOVABLE)
-			loc.balloon_alert(user, "ритуал провален, [our_heretic.living_heart_organ_slot] неубираем!") // "heart unremovable!"
-			return FALSE
-
-	// Otherwise, seek out a replacement in our atoms
-	for(var/obj/item/organ/nearby_organ in atoms)
-		if(!istype(nearby_organ, required_organ_type))
-			continue
-		if(!is_valid_heart(nearby_organ))
-			continue
-
-		selected_atoms += nearby_organ
+	// By this point they are making a new heart
+	// If their current heart is organic / not synthetic, we can continue the ritual as normal
+	if(is_valid_heart(our_living_heart))
 		return TRUE
 
-	loc.balloon_alert(user, "ритуал провален, нужен заменяемый [our_heretic.living_heart_organ_slot]!") // "need a replacement heart!"
+	loc.balloon_alert(user, "ритуал провален, [our_heretic.living_heart_organ_slot] не может быть пробуждено!") // "heart can't be awakened!"
 	return FALSE
 
 /datum/heretic_knowledge/living_heart/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	var/datum/antagonist/heretic/our_heretic = GET_HERETIC(user)
 	var/obj/item/organ/our_new_heart = user.get_organ_slot(our_heretic.living_heart_organ_slot)
-
-	// Our heart is robotic or synthetic - we need to replace it, and we fortunately should have one by here
-	if(!is_valid_heart(our_new_heart))
-		var/obj/item/organ/our_replacement_heart = locate(required_organ_type) in selected_atoms
-		if(!our_replacement_heart)
-			CRASH("[type] required a replacement organic heart in on_finished_recipe, but did not find one.")
-		// Repair the organic heart, if needed, to just below the high threshold
-		if(our_replacement_heart.damage >= our_replacement_heart.high_threshold)
-			our_replacement_heart.set_organ_damage(our_replacement_heart.high_threshold - 1)
-		// And now, put our organic heart in its place
-		our_replacement_heart.Insert(user, TRUE, TRUE)
-		if(our_new_heart)
-			// Throw our current heart out of our chest, violently
-			user.visible_message(span_boldwarning("[capitalize(our_new_heart.declent_ru(NOMINATIVE))] у [user.declent_ru(GENITIVE)] внезапно вырывается из груди!"))
-			INVOKE_ASYNC(user, TYPE_PROC_REF(/mob, emote), "scream")
-			user.apply_damage(20, BRUTE, BODY_ZONE_CHEST)
-			selected_atoms -= our_new_heart // so we don't delete our old heart while we dramatically toss is out
-			our_new_heart.throw_at(get_edge_target_turf(user, pick(GLOB.alldirs)), 2, 2)
-		our_new_heart = our_replacement_heart
-
-	if(!our_new_heart)
-		CRASH("[type] somehow made it to on_finished_recipe without a heart. What?")
-
-	// Snowflakey, but if the user used a heart that wasn't beating
-	// they'll immediately collapse into a heart attack. Funny but not ideal.
-	if(iscarbon(user))
-		var/mob/living/carbon/carbon_user = user
-		carbon_user.set_heartattack(FALSE)
-
 	// Don't delete our shiny new heart
 	selected_atoms -= our_new_heart
 	// Make it the living heart

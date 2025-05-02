@@ -159,9 +159,7 @@ function TitleActions(props) {
           fluid
           value={searchText}
           placeholder="Поиск по имени..."
-          onInput={(e) =>
-            setSearchText((e.target as HTMLTextAreaElement).value)
-          }
+          onChange={setSearchText}
         />
       </Stack.Item>
       {tab === 'Map' && (
