@@ -8,6 +8,7 @@
 	attack_verb_simple = list("thump", "whomp", "bump")
 	w_class = WEIGHT_CLASS_SMALL
 	resistance_flags = FLAMMABLE
+	floor_placeable = TRUE
 	var/use_delay_override /// BANDASTATION EDIT: add `use_delay_override`
 	var/list/squeak_override //Weighted list; If you want your plush to have different squeak sounds use this
 	var/stuffed = TRUE //If the plushie has stuffing in it
