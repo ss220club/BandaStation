@@ -5,7 +5,7 @@
 #include "code/magistrate.dm"
 #include "code/mind.dm"
 #include "code/nanotrasen_representative.dm"
-#include "code/skrell_sdtf.dm"
+#include "code/skrell.dm"
 #include "code/syndicate.dm"
 #include "code/explorer.dm"
 #include "code/outfit_organs.dm"
