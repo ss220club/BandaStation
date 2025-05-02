@@ -175,7 +175,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 	)
 
 /datum/admins/gamepanel/proc/spawn_item(list/spawn_params)
-	if(!check_rights_for(user_client, R_ADMIN | R_SPAWN) || !spawn_params)
+	if(!check_rights(R_SPAWN) || !spawn_params)
 		return
 
 	var/path = text2path(spawn_params["object_list"]) || null
