@@ -206,7 +206,7 @@
 // Off-station Throne
 /obj/structure/statue/station_map/throne
 	name = "emperor throne"
-	desc = "Трончик."
+	desc = "Императорский трон."
 	icon = 'modular_bandastation/objects/icons/obj/structures/throne.dmi'
 
 /obj/structure/statue/station_map/throne/nw
@@ -346,7 +346,7 @@
 	impressiveness = 0
 	abstract_type = /obj/structure/statue/dummy
 
-/atom/movable/screen/proba
+/atom/movable/screen/kverrbalak
 	name = "Кверрбалак"
 	icon = 'modular_bandastation/objects/icons/obj/structures/parallax.dmi'
 	icon_state = "kvbrl"
