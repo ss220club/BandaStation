@@ -345,3 +345,10 @@
 	max_integrity = 1000
 	impressiveness = 0
 	abstract_type = /obj/structure/statue/dummy
+
+/atom/movable/screen/proba
+	name = "Кверрбалак"
+	icon = 'modular_bandastation/objects/icons/obj/structures/parallax.dmi'
+	icon_state = "kvbrl"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	plane = RENDER_PLANE_TRANSPARENT
