@@ -8581,7 +8581,7 @@
 /area/centcom/central_command_areas/evacuation/ship)
 "aLo" = (
 /obj/structure/window/reinforced/spawner/directional/south,
-/obj/effect/decal/fakelattice,
+/obj/structure/lattice,
 /turf/open/space/basic,
 /area/space/nearstation)
 "aLp" = (
@@ -10194,7 +10194,7 @@
 /area/centcom/central_command_areas/supply)
 "aSd" = (
 /obj/structure/window/reinforced/spawner/directional/north,
-/obj/effect/decal/fakelattice,
+/obj/structure/lattice,
 /turf/open/space/basic,
 /area/space/nearstation)
 "aSe" = (
