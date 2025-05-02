@@ -177,13 +177,13 @@ export function TextAreaSection(props: TextAreaSectionProps) {
       }
     >
       <TextArea
-        ref={textAreaRef}
         autoFocus
+        className="Paper__TextArea"
+        ref={textAreaRef}
         value={textAreaText}
         textColor={useColor}
         fontFamily={useFont}
         bold={useBold}
-        height="100%"
         backgroundColor={paper_color}
         dontUseTabForIndent={paperReplacementHint.length > 0}
         onKeyDown={handleTextAreaKeyDown}

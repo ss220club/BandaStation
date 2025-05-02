@@ -55,7 +55,7 @@
 /obj/item/card/id/advanced/update_desc(updates)
 	. = ..()
 	if(applied_sticker?.id_card_desc)
-		desc += "<br>[applied_sticker.id_card_desc]"
+		desc = "[src::desc]<br>[applied_sticker.id_card_desc]"
 	else
 		desc = src::desc
 
