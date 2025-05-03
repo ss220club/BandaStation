@@ -1,4 +1,0 @@
-author: "AyIong"
-delete-after: True
-changes:
-  - bugfix: "Наклейка больше не должна делать гигантское описание у карты"
