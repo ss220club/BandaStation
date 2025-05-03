@@ -109,6 +109,19 @@
 	unwieldsound = 'modular_bandastation/objects/sound/weapons/kel_saberoff.ogg'
 	hit_wield = 'modular_bandastation/objects/sound/weapons/kel_saberhit.ogg'
 
+/obj/item/dualsaber/legendary_saber/orphan
+	name = "Сирота"
+	desc = "\"Сирота\" -  "
+	icon_state = "lex_dualsaber0"
+	inhand_icon_state = "lex_dualsaber0"
+	saber_color = "lebel"
+	refusal_text = "Сироте ты не хозяин."
+	light_color = COLOR_AMMO_INCENDIARY
+	saber_name = "lex"
+	wieldsound = 'modular_bandastation/objects/sound/weapons/lex_saberon.ogg'
+	unwieldsound = 'modular_bandastation/objects/sound/weapons/lex_saberoff.ogg'
+	hit_wield = 'modular_bandastation/objects/sound/weapons/lex_saberhit.ogg'
+
 /obj/item/dualsaber/legendary_saber/pre_attack(atom/A, mob/living/user, params)
 	var/charged = FALSE
 	var/proximity = get_proximity(A, user)
