@@ -3754,6 +3754,24 @@ instrumental = "модернизированным автоматом АКМ"
 prepositional = "модернизированном автомате АКМ"
 gender = "male"
 
+["gauss AKM rifle"]
+nominative = "гаусс-автомат АКМ"
+genitive = "гаусс-автомата АКМ"
+dative = "гаусс-автомату АКМ"
+accusative = "гаусс-автомат АКМ"
+instrumental = "гаусс-автоматом АКМ"
+prepositional = "гаусс-автомате АКМ"
+gender = "male"
+
+["tactical gauss AKM rifle"]
+nominative = "тактический гаусс-автомат АКМ"
+genitive = "тактического гаусс-автомата АКМ"
+dative = "тактическому гаусс-автомату АКМ"
+accusative = "тактический гаусс-автомат АКМ"
+instrumental = "тактическим гаусс-автоматом АКМ"
+prepositional = "тактическом гаусс-автомате АКМ"
+gender = "male"
+
 ["vibroblade"]
 nominative = "виброклинок"
 genitive = "виброклинка"
