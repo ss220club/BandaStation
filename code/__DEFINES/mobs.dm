@@ -53,6 +53,10 @@
 #define BLOOD_TYPE_XENO "X*"
 #define BLOOD_TYPE_H2O "H2O"
 #define BLOOD_TYPE_SNAIL "S"
+/// BANDASTATION ADDITION START - Species
+#define BLOOD_TYPE_MOTH "M"
+#define BLOOD_TYPE_SKRELL "SK"
+/// BANDASTATION ADDITION START - Species
 
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0

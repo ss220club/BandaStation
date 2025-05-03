@@ -34,8 +34,3 @@
 /datum/preference/choiced/skrell_head_tentacle/create_informed_default_value(datum/preferences/preferences)
 	var/gender = preferences.read_preference(/datum/preference/choiced/gender)
 	return gender == MALE ? /datum/sprite_accessory/skrell_head_tentacle/male::name : /datum/sprite_accessory/skrell_head_tentacle/female::name
-
-/datum/preference/choiced/skrell_head_tentacle/compile_constant_data()
-	var/list/data = ..()
-	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/skrell_head_tentacle_color::savefile_key
-	return data

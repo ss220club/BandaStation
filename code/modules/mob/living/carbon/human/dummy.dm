@@ -146,7 +146,6 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 
 	// skrell
 	target.dna.features["skrell_head_tentacle"] = get_consistent_feature_entry(SSaccessories.skrell_head_tentacles_list)
-	target.dna.features["skrell_head_tentacle_color"] = COLOR_WHITE
 	// BANDA STATION EDIT STOP
 
 	target.dna.initialize_dna(newblood_type = get_blood_type(BLOOD_TYPE_O_MINUS), create_mutation_blocks = FALSE, randomize_features = FALSE)

@@ -87,7 +87,6 @@
 #define DNA_TAJARAN_FACIAL_HAIR_COLOR_BLOCK 36
 
 #define DNA_SKRELL_HEAD_TENTACLE_BLOCK 37
-#define DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK 38
 /// BANDASTATION ADDITION END - Species
 
 // Hey! Listen up if you're here because you're adding a species feature!
@@ -97,7 +96,7 @@
 // (Which means having a DNA block for a feature tied to a mob without DNA is entirely pointless.)
 
 /// Total amount of DNA blocks, must be equal to the highest DNA block number
-#define DNA_FEATURE_BLOCKS 38 /// BANDASTATION EDIT - Species
+#define DNA_FEATURE_BLOCKS 37 /// BANDASTATION EDIT - Species
 
 #define DNA_SEQUENCE_LENGTH 4
 #define DNA_MUTATION_BLOCKS 8
