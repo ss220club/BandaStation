@@ -14,18 +14,19 @@
 	var/injecting_notification = "You feel a rush of energy in your bloodstream."
 
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
-    if(synthesizing)
-        return
-    for(var/reagent_type in reagent_data)
-        var/list/data = reagent_data[reagent_type]
-        if(is_reagent_threshhold && !owner.reagents.has_reagent(target_reagent = reagent_type, amount = data[REAGENT_THRESHOLD]))
-            owner.reagents.add_reagent(reagent_type, data[REAGENT_AMOUNT])
-            synthesizing = TRUE
-    if(custom_check())
-        custom_effect()
-    if(synthesizing)
-        to_chat(owner, span_notice(injecting_notification))
-        addtimer(CALLBACK(src, PROC_REF(cooldown)), cooldown_time)
+	if(synthesizing)
+		return
+	for(var/reagent_type in reagent_data)
+		var/list/data = reagent_data[reagent_type]
+		if(is_reagent_threshhold && !owner.reagents.has_reagent(target_reagent = reagent_type, amount = data[REAGENT_THRESHOLD]))
+			owner.reagents.add_reagent(reagent_type, data[REAGENT_AMOUNT])
+			synthesizing = TRUE
+			log_game("synthesizing [reagent_type] in [owner]" )
+	if(custom_check())
+		custom_effect()
+	if(synthesizing)
+		to_chat(owner, span_notice(injecting_notification))
+		addtimer(CALLBACK(src, PROC_REF(cooldown)), cooldown_time)
 
 
 /obj/item/organ/cyberimp/chest/pump/proc/cooldown()
@@ -46,14 +47,26 @@
     name = "combat medicine pump"
     desc = "A small pump, used to inject extremely effective drugs into the bloodstream."
     reagent_data = list(
-        /datum/reagent/medicine/adminordrazine = list(
-            REAGENT_AMOUNT = 4,
-            REAGENT_THRESHOLD = 16
+        /datum/reagent/medicine/syndicate_nanites = list(
+            REAGENT_AMOUNT = 5,
+            REAGENT_THRESHOLD = 20
         ),
         /datum/reagent/medicine/synaptizine = list(
             REAGENT_AMOUNT = 1,
             REAGENT_THRESHOLD = 4
-        )
+        ),
+		/datum/reagent/medicine/leporazine = list(
+			REAGENT_AMOUNT = 2,
+			REAGENT_THRESHOLD = 8
+		),
+		/datum/reagent/medicine/coagulant = list(
+			REAGENT_AMOUNT = 4,
+			REAGENT_THRESHOLD = 16
+		),
+			/datum/reagent/medicine/salglu_solution = list(
+			REAGENT_AMOUNT = 10,
+			REAGENT_THRESHOLD = 50
+		)
     )
 
 /obj/item/organ/cyberimp/chest/pump/sansufentanyl
