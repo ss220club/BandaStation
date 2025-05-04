@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - bugfix: "Карточка исследователя теперь имеет цвета своего отдела (снабжения)"

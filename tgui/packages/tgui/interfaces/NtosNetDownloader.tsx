@@ -140,13 +140,11 @@ export const NtosNetDownloader = (props) => {
           <Input
             autoFocus
             height="23px"
-            width="100%"
             placeholder="Найти программу..."
             fluid
             value={searchItem}
-            onInput={(e, value) => {
-              setSearchItem(value);
-            }}
+            onChange={setSearchItem}
+            expensive
           />
         </Section>
         <Stack>

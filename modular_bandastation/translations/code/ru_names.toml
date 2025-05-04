@@ -984,6 +984,14 @@ accusative = "угли для кальяна"
 instrumental = "углями для кальяна"
 prepositional = "углях для кальяна"
 
+["emperor guards's mantle"]
+nominative = "мантия гвардии Императора"
+genitive = "мантии гвардии Императора"
+dative = "мантии гвардии Императора"
+accusative = "мантию гвардии Императора"
+instrumental = "мантией гвардии Императора"
+prepositional = "мантии гвардии Императора"
+
 # MARK: Human AI
 ["ai's uniform"]
 nominative = "униформа ИИ"
@@ -3673,6 +3681,42 @@ accusative = "пистолет 'Оса'"
 instrumental = "пистолетом 'Оса'"
 prepositional = "пистолете 'Оса'"
 gender = "male"
+
+["vibroblade"]
+nominative = "виброклинок"
+genitive = "виброклинка"
+dative = "виброклинку"
+accusative = "виброклинок"
+instrumental = "виброклинком"
+prepositional = "виброклинк"
+gender = "male"
+
+["emperor guard vibroblade"]
+nominative = "виброклинок гвардии Императора"
+genitive = "виброклинка гвардии Императора"
+dative = "виброклинку гвардии Императора"
+accusative = "виброклинок гвардии Императора"
+instrumental = "виброклинком гвардии Императора"
+prepositional = "виброклинк гвардии Императора"
+gender = "male"
+
+["vibroblade sheath"]
+nominative = "ножны для виброклинка"
+genitive = "ножен для виброклинка"
+dative = "ножнам для виброклинка"
+accusative = "ножны для виброклинка"
+instrumental = "ножнами для виброклинка"
+prepositional = "ножнах для виброклинка"
+gender = "female"
+
+["guard vibroblade sheath"]
+nominative = "ножны для виброклинка гвардии Императора"
+genitive = "ножен для виброклинка гвардии Императора"
+dative = "ножнам для виброклинка гвардии Императора"
+accusative = "ножны для виброклинка гвардии Императора"
+instrumental = "ножнами для виброклинка гвардии Императора"
+prepositional = "ножнах для виброклинка гвардии Императора"
+gender = "female"
 
 # MARK: Projectiles
 ["kiss"]
@@ -23725,3 +23769,12 @@ genitive = "свернувшихся обрубков"
 nominative = "изуродованные обрубки"
 gender = "plural"
 genitive = "изуродованных обрубков"
+
+["pig toy"]
+nominative = "игрушечный хряк"
+genitive = "игрушечного хряка"
+dative = "игрушечному хряку"
+accusative = "игрушечного хряка"
+instrumental = "игрушечным хряком"
+prepositional = "игрушечном хряке"
+gender = "male"
