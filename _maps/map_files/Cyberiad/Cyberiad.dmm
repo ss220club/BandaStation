@@ -11583,6 +11583,10 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white,
 /area/station/medical/cryo)
+"cMD" = (
+/obj/structure/displaycase/hos,
+/turf/open/floor/iron/dark,
+/area/station/command/heads_quarters/hos)
 "cMI" = (
 /obj/structure/fermenting_barrel,
 /turf/open/floor/wood,
@@ -201848,7 +201852,7 @@ kJd
 tVE
 tuM
 wKB
-pwb
+cMD
 tVE
 tVE
 tVE
