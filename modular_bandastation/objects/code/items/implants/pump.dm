@@ -5,7 +5,7 @@
 	aug_overlay = "nutripump"
 	slot = ORGAN_SLOT_STOMACH_AID
 	var/is_reagent_threshhold = TRUE
-	var/injecting_notification = null
+	var/injecting_notification = "injecting..."
 	/**
 	 * list of reagents with their injection and threshold amounts
 	 * * REAGENT_AMOUNT - amount of reagent to inject per time
@@ -19,8 +19,9 @@
 
 
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
-	if(synthesizing)
+	if(!TIMER_COOLDOWN_FINISHED(src, COOLDOWN_PUMP))
 		return
+	synthesizing = FALSE
 	for(var/reagent_type in reagent_data)
 		var/list/data = reagent_data[reagent_type]
 		if(is_reagent_threshhold && !owner.reagents.has_reagent(target_reagent = reagent_type, amount = data[REAGENT_THRESHOLD]))
@@ -31,11 +32,7 @@
 	if(synthesizing)
 		if(injecting_notification)
 			to_chat(owner, span_notice(injecting_notification))
-		addtimer(CALLBACK(src, PROC_REF(cooldown)), cooldown_time)
-
-
-/obj/item/organ/cyberimp/chest/pump/proc/cooldown()
-	synthesizing = FALSE
+		TIMER_COOLDOWN_START(src, COOLDOWN_PUMP, cooldown_time)
 
 /**
  * This is a stub, it should be overridden by the implant
