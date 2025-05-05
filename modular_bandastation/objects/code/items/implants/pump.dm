@@ -5,10 +5,18 @@
 	aug_overlay = "nutripump"
 	slot = ORGAN_SLOT_STOMACH_AID
 	var/is_reagent_threshhold = TRUE
-	var/list/reagent_data = list() // list of reagents with their injection and threshold amounts
-	var/synthesizing = FALSE // is implant on synthesizing cooldown
-	var/cooldown_time = 5 SECONDS // time between injections
 	var/injecting_notification = null
+	/**
+	 * list of reagents with their injection and threshold amounts
+	 * * REAGENT_AMOUNT - amount of reagent to inject per time
+	 * * REAGENT_THRESHOLD - amount of reagent to inject before the implant stops injecting
+	 */
+	var/list/reagent_data = list()
+	/// is implant on synthesizing cooldown
+	var/synthesizing = FALSE
+	/// time between injections
+	var/cooldown_time = 5 SECONDS
+
 
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
 	if(synthesizing)
@@ -29,14 +37,18 @@
 /obj/item/organ/cyberimp/chest/pump/proc/cooldown()
 	synthesizing = FALSE
 
+/**
+ * This is a stub, it should be overridden by the implant
+ * to check if the implant can be used or not for the specific actions.
+*/
 /obj/item/organ/cyberimp/chest/pump/proc/custom_check(seconds_per_tick, times_fired)
-	// This is a stub, it should be overridden by the implant
-	// to check if the implant can be used or not.
 	return FALSE
 
+/**
+ * This is a stub, it should be overridden by the implant
+ * to apply the specific effect of the implant.
+*/
 /obj/item/organ/cyberimp/chest/pump/proc/custom_effect(seconds_per_tick, times_fired)
-	// This is a stub, it should be overridden by the implant
-	// to apply the effect of the implant.
 	synthesizing = TRUE
 	return
 
