@@ -22,6 +22,7 @@
 		custom_effect(seconds_per_tick, times_fired)
 	if(synthesizing)
 		if(injecting_notification)
+			to_chat(owner, span_notice(injecting_notification))
 		addtimer(CALLBACK(src, PROC_REF(cooldown)), cooldown_time)
 
 
