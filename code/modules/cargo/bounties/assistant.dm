@@ -280,4 +280,4 @@
 	description = "Нам нужна рыба из [LOWER_TEXT(fluid_type)] для заселения наших аквариумов. Мёртвые или купленные в отделе снабжения рыбы будут оплачены лишь наполовину."
 
 /datum/bounty/item/assistant/fish/fluid/can_ship_fish(obj/item/fish/fishie)
-	return compatible_fluid_type(fishie.required_fluid_type, fluid_type)
+	return (fluid_type in GLOB.fish_compatible_fluid_types[fishie.required_fluid_type])

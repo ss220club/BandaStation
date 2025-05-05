@@ -218,9 +218,14 @@
 
 ///Colors for blood greyscale sprites
 #define BLOOD_COLOR_RED "#FF291E" // This is lighter than the blood reagent itself because for the greyscale to look the same as before it needs to be the lightest parts of the sprite.
+#define BLOOD_COLOR_LIZARD "#047200"
 #define BLOOD_COLOR_XENO "#D5FF2C"
 #define BLOOD_COLOR_OIL "#262626"
 #define BLOOD_COLOR_BLACK "#2C0903"
+/// BANDASTATION ADDITION START - Species
+#define BLOOD_COLOR_MOTH "#b9ae9c"
+#define BLOOD_COLOR_SKRELL "#1e40ff"
+/// BANDASTATION ADDITION END - Species
 
 ///Main colors for UI themes
 #define COLOR_THEME_MIDNIGHT "#6086A0"

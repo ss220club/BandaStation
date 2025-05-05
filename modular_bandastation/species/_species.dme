@@ -5,10 +5,11 @@
 #include "code/clothing/items.dm"
 
 #include "code/human/species/skills.dm"
+#include "code/human/species_type/moth.dm"
+#include "code/human/species_type/podpeople.dm"
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
-#include "code/human/species_type/podpeople.dm"
 
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
 
@@ -27,13 +28,13 @@
 #include "code/human/sprite_accessories/tajaran/tajaran_tails.dm"
 
 #include "code/human/sprite_accessories/hair.dm"
+#include "code/human/blood_types.dm"
 #include "code/human/carbon.dm"
 
 #include "code/language/canilunzt.dm"
 #include "code/language/qurvolious.dm"
 #include "code/language/siiktajr.dm"
 
-#include "code/preferences/species_features/skrell/skrell_head_tentacle_color.dm"
 #include "code/preferences/species_features/skrell/skrell_head_tentacle.dm"
 
 #include "code/preferences/species_features/tajaran/body_markings/tajaran_chest_markings.dm"
