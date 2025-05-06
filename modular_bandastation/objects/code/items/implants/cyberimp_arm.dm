@@ -56,5 +56,5 @@
 
 /obj/item/organ/cyberimp/arm/custom/Destroy()
 	if(active_item)
-		QDEL_NULL(active_item) /
+		QDEL_NULL(active_item)
 	return ..()
