@@ -3,9 +3,9 @@
 	trim_icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
 	trim_state = "trim_explorer"
 
-	department_color = COLOR_SERVICE_LIME
-	subdepartment_color = COLOR_SERVICE_LIME
-	sechud_icon_state = SECHUD_EXPLORER // change
+	department_color = COLOR_CARGO_BROWN
+	subdepartment_color = COLOR_CARGO_BROWN
+	sechud_icon_state = SECHUD_EXPLORER
 	minimal_access = list(
 		ACCESS_EVA,
 		ACCESS_CARGO,
