@@ -23,6 +23,7 @@
 	actions_types = list()
 	recoil = 0.5
 	spread = 6.5
+	obj_flags = UNIQUE_RENAME
 
 /obj/item/gun/ballistic/automatic/akm/Initialize(mapload)
 	. = ..()

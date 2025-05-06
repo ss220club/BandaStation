@@ -181,7 +181,7 @@
     cost = CARGO_CRATE_VALUE * 125 //~25000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/automatic/sol_rifle/marksman = 1,
+        /obj/item/gun/ballistic/automatic/sol_rifle/marksman/wooden = 1,
         /obj/item/ammo_box/magazine/c40sol_rifle/fragmentation = 1,
     )
     crate_name = "Carwo marksman rifle crate"

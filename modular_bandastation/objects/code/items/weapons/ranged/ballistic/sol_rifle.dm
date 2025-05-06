@@ -26,6 +26,7 @@
 	spread = 5.5
 	projectile_wound_bonus = -10
 	recoil = 0.4
+	obj_flags = UNIQUE_RENAME
 
 /obj/item/gun/ballistic/automatic/sol_rifle/Initialize(mapload)
 	. = ..()
@@ -58,7 +59,7 @@
 
 /obj/item/gun/ballistic/automatic/sol_rifle/marksman
 	name = "Cawil Marksman Rifle"
-	desc = "Тяжелая марксманская винтовка, часто встречающаяся в руках военных ТСФ. Принимает любой стандартный магазин винтовки ТСФ."
+	desc = "Тяжелая марксманская винтовка, стреляющая патронами калибра .40 Sol. Часто встречается в руках военных ТСФ. Принимает любой стандартный магазин винтовок ТСФ."
 	icon_state = "elite"
 	worn_icon_state = "elite"
 	inhand_icon_state = "elite"
@@ -91,11 +92,11 @@
 /obj/item/gun/ballistic/automatic/sol_rifle/marksman/no_mag
 	spawnwithmagazine = FALSE
 
-// Machinegun based on the base Sol rifle
+// Machineguns based on the base Sol rifle
 
 /obj/item/gun/ballistic/automatic/sol_rifle/machinegun/top
 	name = "Qarad Light Machinegun"
-	desc = "Увесистый пулемет, часто встречающийся в руках военных ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
+	desc = "Увесистый пулемет, стреляющий патронами калибра .40 Sol, часто встречающийся в руках военных ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
 	icon_state = "qarad"
 	bolt_type = BOLT_TYPE_OPEN
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c40sol_rifle/box
@@ -120,7 +121,7 @@
 
 /obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom
 	name = "Daraq Light Machinegun"
-	desc = "Увесистый пулемет, часто встречающийся в руках военных ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
+	desc = "Увесистый пулемет, стреляющий патронами калибра .40 Sol, часто встречающийся в руках военных ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
 	icon_state = "outomaties"
 	worn_icon_state = "outomaties"
 	inhand_icon_state = "outomaties"
@@ -159,11 +160,41 @@
 // Evil version of the rifle (nothing different it's just black)
 
 /obj/item/gun/ballistic/automatic/sol_rifle/evil
-	desc = "Тяжелая боевая винтовка, окрашенная в тактический черный цвет. Принимает любой стандартный магазин от винтовок ТСФ."
-
+	desc = "Тяжелая боевая винтовка, стреляющая патронами калибра .40 Sol, окрашенная в тактический черный цвет. Принимает любой стандартный магазин от винтовок ТСФ."
 	icon_state = "infanterie_evil"
 	worn_icon_state = "infanterie_evil"
 	inhand_icon_state = "infanterie_evil"
 
 /obj/item/gun/ballistic/automatic/sol_rifle/evil/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sol_rifle/wooden
+	desc = "Тяжелая боевая винтовка, стреляющая патронами калибра .40 Sol. Принимает любой стандартный магазин от винтовок ТСФ. Укороченный вариант с деревянной фурнитурой."
+	icon_state = "infanterie_wooden"
+	worn_icon_state = "infanterie_wooden"
+	inhand_icon_state = "infanterie_wooden"
+
+/obj/item/gun/ballistic/automatic/sol_rifle/wooden/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sol_rifle/marksman/wooden
+	desc = "Тяжелая марксманская винтовка, стреляющая патронами калибра .40 Sol. Принимает любой стандартный магазин винтовок ТСФ. Немного упрощенный вариант с деревянной фурнитурой."
+	icon_state = "elite_wooden"
+	worn_icon_state = "elite_wooden"
+	inhand_icon_state = "elite_wooden"
+	projectile_damage_multiplier = 1
+	projectile_wound_bonus = 5
+	fire_delay = 0.80 SECONDS
+
+/obj/item/gun/ballistic/automatic/sol_rifle/marksman/wooden/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom/wooden
+	name = "Daraq Light Machinegun"
+	desc = "Увесистый пулемет, стреляющий патронами калибра .40 Sol. Принимает любой стандартный магазин от винтовок ТСФ. Немного упрощенный вариант с деревянной фурнитурой."
+	icon_state = "outomaties_wooden"
+	worn_icon_state = "outomaties_wooden"
+	inhand_icon_state = "outomaties_wooden"
+
+/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom/wooden/no_mag
 	spawnwithmagazine = FALSE
