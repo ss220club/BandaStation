@@ -159,6 +159,7 @@ const SendERT = (props) => {
     Amber = 'orange',
     Red = 'red',
     Gamma = 'yellow',
+    Epsilon = 'purple',
   }
 
   return (

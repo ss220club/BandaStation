@@ -88,6 +88,8 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 					new_ert = new /datum/ert/red
 				if("Gamma")
 					new_ert = new /datum/ert/gamma
+				if("Epsilon")
+					new_ert = new /datum/ert/epsilon
 				else
 					to_chat(usr, "<span class='userdanger'>Invalid ERT type.</span>")
 					return
@@ -294,7 +296,9 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 				if("Red")
 					priority_announce("Внимание, [station_name()]. Мы направляем усиленный отряд быстрого реагирования кода «РЭД». Ожидайте.", "ОБР в пути")
 				if("Gamma")
-					priority_announce("Внимание, [station_name()]. Мы направляем элитный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
+					priority_announce("Внимание, [station_name()]. Мы направляем ударный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
+				if("Epsilon")
+					priority_announce("Внимание, [station_name()]. Мы направляем элитный отряд быстрого реагирования кода «ЭПСИЛОН». Ожидайте.", "ОБР в пути")
 
 	//Open the Armory doors
 	if(ertemplate.opendoors)
@@ -307,6 +311,11 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	leader_role = /datum/antagonist/ert/commander/red
 	roles = list(/datum/antagonist/ert/security/red, /datum/antagonist/ert/medic/red, /datum/antagonist/ert/engineer/red)
 	code = "Gamma"
+
+/datum/ert/epsilon
+	leader_role = /datum/antagonist/ert/commander/red
+	roles = list(/datum/antagonist/ert/security/red, /datum/antagonist/ert/medic/red, /datum/antagonist/ert/engineer/red)
+	code = "Epsilon"
 
 /obj/effect/landmark/ert_brief_spawn
 	name = "ertbriefspawn"
