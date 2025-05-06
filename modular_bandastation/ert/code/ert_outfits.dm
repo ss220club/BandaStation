@@ -79,6 +79,7 @@
 		/obj/item/lightreplacer/blue = 1,
 	)
 
+///////////////////// ДАЛЕЕ ЗАТЫЧКИ /////////////////////
 /datum/outfit/centcom/ert/commander/gamma
 	l_hand = /obj/item/gun/energy/disabler
 
