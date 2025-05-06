@@ -34,21 +34,31 @@
 	role = "Heavy Duty Janitor"
 	outfit = /datum/outfit/centcom/ert/janitor/heavy
 
+// GAMMA
+/datum/antagonist/ert/security/gamma
+	outfit = /datum/outfit/centcom/ert/security/gamma
+
+/datum/antagonist/ert/medic/gamma
+	outfit = /datum/outfit/centcom/ert/medic/gamma
+
+/datum/antagonist/ert/engineer/gamma
+	outfit = /datum/outfit/centcom/ert/engineer/gamma
+
 /datum/antagonist/ert/commander/gamma
 	outfit = /datum/outfit/centcom/ert/commander/gamma
 
+// EPSILON
+/datum/antagonist/ert/security/epsilon
+	outfit = /datum/outfit/centcom/ert/security/epsilon
+
+/datum/antagonist/ert/medic/epslion
+	outfit = /datum/outfit/centcom/ert/medic/epsilon
+
+/datum/antagonist/ert/engineer/epslion
+	outfit = /datum/outfit/centcom/ert/engineer/epsilon
+
 /datum/antagonist/ert/commander/epsilon
 	outfit = /datum/outfit/centcom/ert/commander/epsilon
-
-/datum/ert/gamma
-	leader_role = /datum/antagonist/ert/commander/gamma
-	roles = list(/datum/antagonist/ert/security/gamma, /datum/antagonist/ert/medic/gamma, /datum/antagonist/ert/engineer/gamma)
-	code = "Gamma"
-
-/datum/ert/epsilon
-	leader_role = /datum/antagonist/ert/commander/epsilon
-	roles = list(/datum/antagonist/ert/security/epslion, /datum/antagonist/ert/medic/epslion, /datum/antagonist/ert/engineer/epslion)
-	code = "Epsilon"
 
 /obj/effect/landmark/ert_brief_spawn
 	name = "ertbriefspawn"

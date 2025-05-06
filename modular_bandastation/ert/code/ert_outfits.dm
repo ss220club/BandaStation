@@ -27,9 +27,9 @@
 		/obj/item/pipe_dispenser = 1,
 		/obj/item/stack/sheet/iron = 50,
 		/obj/item/stack/sheet/glass = 50,
-		/obj/item/stack/sheet/plasteel = 50
-		/obj/item/melee/baton/security/boomerang = 1
-	)
+		/obj/item/stack/sheet/plasteel = 50,
+		/obj/item/melee/baton/security/boomerang = 1,
+		)
 
 /datum/outfit/centcom/ert/medic
 	backpack_contents = list(
@@ -58,7 +58,7 @@
 
 /datum/outfit/centcom/ert/commander/alert
 	l_hand = /obj/item/gun/energy/e_gun/nuclear
-	l_pocket = /obj/item/melee/energy/sword/blue
+	l_pocket = /obj/item/melee/energy/sword/saber/blue
 
 /datum/outfit/centcom/ert/janitor
 	backpack_contents = list(
@@ -80,17 +80,25 @@
 	)
 
 /datum/outfit/centcom/ert/commander/gamma
-
-/datum/antagonist/ert/security/gamma
-
-/datum/antagonist/ert/medic/gamma
-
-/datum/antagonist/ert/engineer/gamma
+	l_hand = /obj/item/gun/energy/disabler
 
 /datum/outfit/centcom/ert/commander/epsilon
+	l_hand = /obj/item/gun/energy/disabler
 
-/datum/antagonist/ert/security/epsilon
+/datum/outfit/centcom/ert/security/gamma
+	l_hand = /obj/item/gun/energy/disabler
 
-/datum/antagonist/ert/medic/epsilon
+/datum/outfit/centcom/ert/medic/gamma
+	l_hand = /obj/item/gun/energy/disabler
 
-/datum/antagonist/ert/engineer/epsilon
+/datum/outfit/centcom/ert/engineer/gamma
+	l_hand = /obj/item/gun/energy/disabler
+
+/datum/outfit/centcom/ert/security/epsilon
+	l_hand = /obj/item/gun/energy/disabler
+
+/datum/outfit/centcom/ert/medic/epsilon
+	l_hand = /obj/item/gun/energy/disabler
+
+/datum/outfit/centcom/ert/engineer/epsilon
+	l_hand = /obj/item/gun/energy/disabler
