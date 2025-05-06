@@ -2,7 +2,7 @@
 	name = "Fire Breath"
 	button_icon = 'icons/effects/magic.dmi'
 	button_icon_state = "fireball"
-	desc = "Breathe a line of flames towards the target."
+	desc = "Извергните огонь в сторону цели."
 	cooldown_time = 3 SECONDS
 	/// The range of the fire
 	var/fire_range = 15
@@ -72,7 +72,7 @@
 
 /// Do something unpleasant to someone we set on fire
 /datum/action/cooldown/mob_cooldown/fire_breath/proc/on_burn_mob(mob/living/barbecued, mob/living/source)
-	to_chat(barbecued, span_userdanger("You are burned by [source]'s fire breath!"))
+	to_chat(barbecued, span_userdanger("Вас подожгло огненное дыхание [source]!"))
 	barbecued.adjustFireLoss(fire_damage)
 
 /// Shoot three lines of fire in a sort of fork pattern approximating a cone

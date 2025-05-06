@@ -20,7 +20,7 @@ import { ServerPrefs } from './useServerPrefs';
 
 export function PreferencesMenu(props) {
   return (
-    <Window width={920} height={770}>
+    <Window width={900} height={730}>
       <Window.Content>
         <Suspense fallback={<LoadingScreen />}>
           <PrefsWindowInner />
@@ -43,11 +43,11 @@ function PrefsWindowInner(props) {
   switch (window) {
     case PrefsWindow.Character:
       content = <CharacterPreferenceWindow />;
-      title = 'Character Preferences';
+      title = 'Настройки персонажа';
       break;
     case PrefsWindow.Game:
       content = <GamePreferenceWindow />;
-      title = 'Game Preferences';
+      title = 'Настройки игры';
       break;
     case PrefsWindow.Keybindings:
       content = (
@@ -55,7 +55,7 @@ function PrefsWindowInner(props) {
           startingPage={GamePreferencesSelectedPage.Keybindings}
         />
       );
-      title = 'Keybindings';
+      title = 'Горячие клавиши';
       break;
     default:
       exhaustiveCheck(window);
