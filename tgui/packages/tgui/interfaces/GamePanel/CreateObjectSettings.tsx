@@ -194,7 +194,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
                     <Input
                       placeholder="x, y, z"
                       value={offset}
-                      onChange={(e, value) => setOffset(value)}
+                      onChange={(value) => setOffset(value)}
                       width="100%"
                       disabled={isTargetMode}
                     />
@@ -208,7 +208,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
               </Table.Cell>
               <Table.Cell>
                 <Input
-                  onChange={(e, value) => setObjectName(value)}
+                  onChange={(value) => setObjectName(value)}
                   value={objectName}
                   width="100%"
                   placeholder="leave empty for initial"
