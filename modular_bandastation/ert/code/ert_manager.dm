@@ -307,19 +307,6 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			CHECK_TICK
 	return TRUE
 
-/datum/ert/gamma
-	leader_role = /datum/antagonist/ert/commander/red
-	roles = list(/datum/antagonist/ert/security/red, /datum/antagonist/ert/medic/red, /datum/antagonist/ert/engineer/red)
-	code = "Gamma"
-
-/datum/ert/epsilon
-	leader_role = /datum/antagonist/ert/commander/red
-	roles = list(/datum/antagonist/ert/security/red, /datum/antagonist/ert/medic/red, /datum/antagonist/ert/engineer/red)
-	code = "Epsilon"
-
-/obj/effect/landmark/ert_brief_spawn
-	name = "ertbriefspawn"
-	icon_state = "ert_brief_spawn"
 
 #undef ERT_EXPERIENCED_LEADER_CHOOSE_TOP
 #undef DUMMY_HUMAN_SLOT_ADMIN
