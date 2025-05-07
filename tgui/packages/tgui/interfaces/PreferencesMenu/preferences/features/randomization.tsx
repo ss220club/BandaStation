@@ -6,6 +6,22 @@ import { PreferencesMenuData, RandomSetting } from '../../types';
 import { useRandomToggleState } from '../../useRandomToggleState';
 import { CheckboxInput, Feature, FeatureToggle } from './base';
 
+export const augmentation_body: Feature<RandomSetting> = {
+  name: 'Аугментация',
+  component: (props) => {
+    // const [randomToggle, setRandomToggle] = useRandomToggleState();
+    const { act } = useBackend();
+    // onClick={() => setRandomToggle(true)}>
+    return (
+      <Stack>
+        <Stack.Item>
+          <Button>Выбрать</Button>
+        </Stack.Item>
+      </Stack>
+    );
+  },
+};
+
 export const random_body: Feature<RandomSetting> = {
   name: 'Случайное тело',
   component: (props) => {

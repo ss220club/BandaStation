@@ -13,6 +13,7 @@
 #include "ai_laws/_ai_laws.dme"
 #include "announcers/_announcers.dme"
 #include "antagonists/_antagonists.dme"
+#include "augmentation_preferences/_augmentation_preferences.dme"
 #include "autohiss/_autohiss.dme"
 #include "automapper/_automapper.dme"
 #include "automatic_crew_transfer/_automatic_crew_transfer.dme"
