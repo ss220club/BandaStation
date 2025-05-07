@@ -1,3 +1,6 @@
+#define COLORS_LIST (COLOR_RED_LIGHT + LIGHT_COLOR_GREEN + LIGHT_COLOR_BLUE + COLOR_VIVID_YELLOW + LIGHT_COLOR_ORANGE + \
+LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_BLUEGREEN + LIGHT_COLOR_PINK)
+
 /obj/item/card/id/advanced
 	var/obj/item/id_sticker/applied_sticker = null
 
@@ -110,12 +113,14 @@
 		"Аквамариновый" = LIGHT_COLOR_BLUEGREEN,
 		"Розовый" = LIGHT_COLOR_PINK
 	)
+	greyscale_config = /datum/greyscale_config/id_sticker
+	greyscale_colors = COLORS_LIST
+	flags_1 = IS_PLAYER_COLORABLE_1
+
 /obj/item/id_sticker/colored/Initialize(mapload)
 	. = ..()
-	if(color)
-		return .
-
-	color = color_list[pick(color_list)]
+	set_greyscale(pick(COLOR_RED_LIGHT, LIGHT_COLOR_GREEN, LIGHT_COLOR_BLUE, COLOR_VIVID_YELLOW, LIGHT_COLOR_ORANGE, LIGHT_COLOR_LAVENDER, \
+	LIGHT_COLOR_LIGHT_CYAN, LIGHT_COLOR_CYAN, LIGHT_COLOR_BLUEGREEN, LIGHT_COLOR_PINK))
 
 /obj/item/id_sticker/colored/attack_self(mob/living)
 	var/choice = tgui_input_list(usr, "Какой цвет предпочитаете?", "Выбор цвета", list("Выбрать предустановленный", "Выбрать вручную"))
@@ -128,10 +133,10 @@
 			if(!color_to_set)
 				return
 
-			color = color_to_set
+			set_greyscale(color_to_set)
 
 		if("Выбрать вручную")
-			color = input(usr,"Выберите цвет") as color
+			set_greyscale(input(usr, "Выберите цвет") as color)
 
 /obj/item/id_sticker/donut
 	name = "donut ID sticker"
@@ -145,7 +150,7 @@
 /obj/item/id_sticker/colored/silver
 	name = "silver holographic ID sticker"
 	desc = "Голографическая наклейка на карту, изготовленная из специального материала, похожего на серебро. Вы можете выбрать цвет который она примет."
-	icon_state = "colored_shiny"
+	icon_state = "colored_silver"
 
 /obj/item/id_sticker/gold
 	name = "gold ID sticker"
@@ -269,3 +274,5 @@
 	cost = CARGO_CRATE_VALUE * 18
 	contains = list(/obj/effect/spawner/random/id_stickers = 5)
 	crate_name = "ID stickers crate"
+
+#undef COLORS_LIST

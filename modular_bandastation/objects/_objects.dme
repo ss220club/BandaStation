@@ -9,6 +9,7 @@
 #include "code/floors/wooden.dm"
 
 #include "code/greyscale/config_types/greyscale_clothes.dm"
+#include "code/greyscale/config_types/greyscale_items.dm"
 
 #include "code/items/banners.dm"
 #include "code/items/cards_ids.dm"
