@@ -119,8 +119,7 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 
 /obj/item/id_sticker/colored/Initialize(mapload)
 	. = ..()
-	set_greyscale(pick(COLOR_RED_LIGHT, LIGHT_COLOR_GREEN, LIGHT_COLOR_BLUE, COLOR_VIVID_YELLOW, LIGHT_COLOR_ORANGE, LIGHT_COLOR_LAVENDER, \
-	LIGHT_COLOR_LIGHT_CYAN, LIGHT_COLOR_CYAN, LIGHT_COLOR_BLUEGREEN, LIGHT_COLOR_PINK))
+	set_greyscale(color_list[pick(color_list)])
 
 /obj/item/id_sticker/colored/attack_self(mob/living)
 	var/choice = tgui_input_list(usr, "Какой цвет предпочитаете?", "Выбор цвета", list("Выбрать предустановленный", "Выбрать вручную"))
