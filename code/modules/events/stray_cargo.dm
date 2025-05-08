@@ -42,7 +42,7 @@
 /datum/round_event/stray_cargo/announce(fake)
 	if(fake)
 		impact_area = find_event_area()
-	priority_announce("Stray cargo pod detected on long-range scanners. Expected location of impact: [impact_area.name].", "Collision Alert")
+	priority_announce("Бродячая грузовая капсула обнаружена на сканерах дальнего действия. Ожидаемое место падения: [impact_area.name].", "Предупреждение о столкновении")
 
 /**
 * Tries to find a valid area, throws an error if none are found
@@ -66,6 +66,7 @@
 			var/datum/supply_pack/pack_type = pack
 			if(initial(pack_type.special))
 				stray_spawnable_supply_packs -= pack
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 ///Spawns a random supply pack, puts it in a pod, and spawns it on a random tile of the selected area
 /datum/round_event/stray_cargo/start()
