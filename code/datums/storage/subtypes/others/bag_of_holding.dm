@@ -8,15 +8,18 @@
 	var/list/obj/item/storage/backpack/holding/matching = typecache_filter_list(to_insert.get_all_contents(), typecacheof(/obj/item/storage/backpack/holding))
 	matching -= parent
 	matching -= real_location
-	/// BANDASTATION ADDITION START - Flatpack fix
-	set_holdable(cant_hold_list = /obj/item/flatpack)
-	/// BANDASTATION ADDITION END - Flatpack fix
 
 	if((istype(to_insert, /obj/item/storage/backpack/holding) || length(matching)) && can_insert(to_insert, user))
 		INVOKE_ASYNC(src, PROC_REF(recursive_insertion), to_insert, user)
 		return FALSE
 
 	return ..()
+
+	/// BANDASTATION ADDITION START - Flatpack fix
+/datum/storage/bag_of_holding/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(cant_hold_list = /obj/item/flatpack)
+	/// BANDASTATION ADDITION END - Flatpack fix
 
 /datum/storage/bag_of_holding/proc/recursive_insertion(obj/item/to_insert, mob/living/user)
 	var/area/bag_area = get_area(user)
