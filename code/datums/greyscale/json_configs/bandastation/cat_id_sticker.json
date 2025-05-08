@@ -1,8 +1,8 @@
 {
-	"colored": [
+	"colored_kitty": [
 		{
 			"type": "icon_state",
-			"icon_state": "colored",
+			"icon_state": "colored_kitty",
 			"blend_mode": "overlay",
 			"color_ids": [ 1 ]
 		}

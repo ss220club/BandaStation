@@ -149,6 +149,7 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 	name = "silver holographic ID sticker"
 	desc = "Голографическая наклейка на карту, изготовленная из специального материала, похожего на серебро. Вы можете выбрать цвет который она примет."
 	icon_state = "colored_silver"
+	greyscale_config = /datum/greyscale_config/id_sticker/silver
 
 /obj/item/id_sticker/gold
 	name = "gold ID sticker"
@@ -187,6 +188,7 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 	desc = "Какая же она яркая... Ещё и цвета меняет!"
 	icon_state = "colored_neon"
 	id_card_desc = "Кажется будто она светится."
+	greyscale_config = /datum/greyscale_config/id_sticker/neon
 
 /obj/item/id_sticker/missing
 	name = "black-and-pink ID sticker"
@@ -228,6 +230,7 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 	desc = "Прекрасная наклейка, которая делает вашу карту похожей на котика. Эта может менять цвет."
 	icon_state = "colored_kitty"
 	id_card_desc = "Так и хочется погладить, жаль это всего-лишь наклейка..."
+	greyscale_colors = /datum/greyscale_config/id_sticker/kitty
 
 /obj/item/id_sticker/cursedmiku
 	name = "anime ID sticker"
@@ -240,6 +243,7 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 	desc = "Она что-то загружает?"
 	icon_state = "snake"
 	id_card_desc = "Бегает и бегает..."
+	greyscale_config = /datum/greyscale_config/id_sticker/snake
 
 /obj/item/id_sticker/magic
 	name = "magical ID sticker"
