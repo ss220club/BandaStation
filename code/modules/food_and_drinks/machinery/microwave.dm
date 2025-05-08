@@ -612,7 +612,7 @@
 		if(istype(potential_fooditem, /obj/item/modular_computer) && prob(75))
 			pda_failure = TRUE
 			notify_ghosts(
-				"[capitalize(cooker.real_name.declent_ru(NOMINATIVE))] перегревает свой КПК!",
+				"[capitalize(cooker.declent_ru(NOMINATIVE))] перегревает свой КПК!",
 				source = src,
 				notify_flags = NOTIFY_CATEGORY_NOFLASH,
 				header = "Hunger Games: Catching Fire",
