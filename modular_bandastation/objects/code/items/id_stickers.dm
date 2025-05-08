@@ -230,7 +230,7 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 	desc = "Прекрасная наклейка, которая делает вашу карту похожей на котика. Эта может менять цвет."
 	icon_state = "colored_kitty"
 	id_card_desc = "Так и хочется погладить, жаль это всего-лишь наклейка..."
-	greyscale_colors = /datum/greyscale_config/id_sticker/kitty
+	greyscale_config = /datum/greyscale_config/id_sticker/kitty
 
 /obj/item/id_sticker/cursedmiku
 	name = "anime ID sticker"
