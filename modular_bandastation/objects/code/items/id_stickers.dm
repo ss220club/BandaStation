@@ -52,7 +52,6 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 	. = ..()
 	if(applied_sticker)
 		var/mutable_appearance/sticker_overlay = mutable_appearance(applied_sticker.icon, applied_sticker.icon_state)
-		sticker_overlay.color = applied_sticker.color
 		. += sticker_overlay
 
 /obj/item/card/id/advanced/update_desc(updates)
@@ -268,7 +267,7 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 
 /datum/supply_pack/misc/id_stickers
 	name = "ID stickers"
-	desc = "test"
+	desc = "Хотите выделиться среди всех работников? Тогда покупайте эти замечательные наклейки на вашу ID карту!"
 	crate_type = /obj/structure/closet/crate/wooden
 	cost = CARGO_CRATE_VALUE * 18
 	contains = list(/obj/effect/spawner/random/id_stickers = 5)
