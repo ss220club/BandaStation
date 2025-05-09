@@ -1,0 +1,4 @@
+author: "AloeNeverDie"
+delete-after: True
+changes:
+  - bugfix: "Флатпаки больше нельзя класть в БоХ"
