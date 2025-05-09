@@ -3772,6 +3772,24 @@ instrumental = "тактическим гаусс-автоматом АКМ"
 prepositional = "тактическом гаусс-автомате АКМ"
 gender = "male"
 
+["Renoster shotgun"]
+nominative = "дробовик 'Реностер'"
+genitive = "дробовика 'Реностер'"
+dative = "дробовику 'Реностер'"
+accusative = "дробовик 'Реностер'"
+instrumental = "дробовиком 'Реностер'"
+prepositional = "дробовике 'Реностер'"
+gender = "male"
+
+["tactical Renoster shotgun"]
+nominative = "тактический дробовик 'Реностер'"
+genitive = "тактического дробовика 'Реностер'"
+dative = "тактическому дробовику 'Реностер'"
+accusative = "тактический дробовик 'Реностер'"
+instrumental = "тактическим дробовиком 'Реностер'"
+prepositional = "тактическом дробовике 'Реностер'"
+gender = "male"
+
 ["vibroblade"]
 nominative = "виброклинок"
 genitive = "виброклинка"

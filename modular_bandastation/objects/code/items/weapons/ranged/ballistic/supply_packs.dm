@@ -150,7 +150,7 @@
     name = "Sabel-42 Carbine Single-Pack"
     desc = "Вам нужна надежная винтовка для самообороны, спортивной стрельбы или охоты? Тогда 'Сабля' станет отличным вариантов для вас! \
 	        В этом ящике находится один карабин 'Сабля-42'."
-    cost = CARGO_CRATE_VALUE * 75 //~15000
+    cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_WEAPONS
     contains = list(
         /obj/item/gun/ballistic/automatic/akm/civ = 1,
@@ -176,7 +176,7 @@
 
 /datum/supply_pack/security/armory/sol_rifle_marksman
     name = ".40 Sol Long Carwo Marksman Rifle"
-    desc = "Этот ящик содержит одну тяжелую марксманскую винтовку ТСФ калибра .40 Sol Long вместе с одним магазином осколочно-резиновых патронов. \
+    desc = "Этот ящик содержит одну тяжелую марксманскую винтовку Carwo калибра .40 Sol Long вместе с одним магазином осколочно-резиновых патронов. \
 	        Отличный инструмент для ликвидации серьезных угроз."
     cost = CARGO_CRATE_VALUE * 125 //~25000
     access_view = ACCESS_ARMORY
@@ -196,3 +196,24 @@
         /obj/item/ammo_box/c40sol = 1,
     )
     crate_name = ".40 Sol Long ammo crate"
+
+/datum/supply_pack/security/armory/sol_shotgun
+    name = "Renoster Shotgun Crate"
+    desc = "Этот ящик содержит два тяжелых дробовика Renoster. Используя тот же 12 калибр, наносит больше увечий. \
+	        Когда в споре требуется аргумент побольше."
+    cost = CARGO_CRATE_VALUE * 50 //~10000
+    access_view = ACCESS_ARMORY
+    contains = list(
+        /obj/item/gun/ballistic/shotgun/riot/sol = 2,
+    )
+    crate_name = "Renoster shotgun crate"
+
+/datum/supply_pack/goody/sol_shotgun
+    name = "Renoster Shotgun Crate"
+    desc = "Нужен серьезный аргумент в споре с соседом? Тогда вам отлично подойдет тяжелый дробовик Renoster. Используя тот же 12 калибр, наносит больше увечий. \
+	        Когда в споре требуется аргумент побольше."
+    cost = CARGO_CRATE_VALUE * 50 //~10000
+    access_view = ACCESS_WEAPONS
+    contains = list(
+        /obj/item/gun/ballistic/shotgun/riot/sol = 1,
+    )
