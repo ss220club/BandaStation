@@ -5,7 +5,6 @@
 	aug_overlay = "nutripump"
 	slot = ORGAN_SLOT_STOMACH_AID
 	var/is_reagent_threshhold = TRUE
-	var/injecting_notification = "injecting..."
 	/**
 	 * list of reagents with their injection and threshold amounts
 	 * * REAGENT_AMOUNT - amount of reagent to inject per time
@@ -29,10 +28,7 @@
 			synthesizing = TRUE
 	if(custom_check(seconds_per_tick, times_fired))
 		custom_effect(seconds_per_tick, times_fired)
-	if(synthesizing)
-		if(injecting_notification)
-			to_chat(owner, span_notice(injecting_notification))
-		TIMER_COOLDOWN_START(src, COOLDOWN_PUMP, cooldown_time)
+	TIMER_COOLDOWN_START(src, COOLDOWN_PUMP, cooldown_time)
 
 /**
  * This is a stub, it should be overridden by the implant
@@ -62,7 +58,7 @@
 			REAGENT_THRESHOLD = 8
 		),
         /datum/reagent/medicine/synaptizine = list(
-            REAGENT_AMOUNT = 1,
+            REAGENT_AMOUNT = 2,
             REAGENT_THRESHOLD = 4
         ),
 		/datum/reagent/medicine/coagulant = list(

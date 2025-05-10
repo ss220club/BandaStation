@@ -40,6 +40,8 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "jacket_syndie"
+	flags_inv = HIDEGLOVES|HIDEJUMPSUIT
+	slowdown = 0
 
 /obj/item/clothing/suit/space/deathsquad/officer/field
 	name = "field fleet officer's jacket"
