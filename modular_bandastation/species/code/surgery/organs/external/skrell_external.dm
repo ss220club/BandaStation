@@ -47,8 +47,7 @@
 /datum/bodypart_overlay/mutant/head_tentacle
 	layers = EXTERNAL_FRONT|EXTERNAL_ADJACENT
 	feature_key = "skrell_head_tentacle"
-	dna_color_feature_key = "skrell_head_tentacle_color"
-	color_source = ORGAN_COLOR_FEATURE
+	color_source = ORGAN_COLOR_INHERIT
 
 /datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()
 	return SSaccessories.skrell_head_tentacles_list
