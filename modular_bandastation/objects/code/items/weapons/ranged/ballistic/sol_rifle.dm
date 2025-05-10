@@ -159,13 +159,13 @@
 
 // Evil version of the rifle (nothing different it's just black)
 
-/obj/item/gun/ballistic/automatic/sol_rifle/evil
+/obj/item/gun/ballistic/automatic/sol_rifle/black
 	desc = "Тяжелая боевая винтовка, стреляющая патронами калибра .40 Sol, окрашенная в тактический черный цвет. Принимает любой стандартный магазин от винтовок ТСФ."
-	icon_state = "infanterie_evil"
-	worn_icon_state = "infanterie_evil"
-	inhand_icon_state = "infanterie_evil"
+	icon_state = "infanterie_black"
+	worn_icon_state = "infanterie_black"
+	inhand_icon_state = "infanterie_black"
 
-/obj/item/gun/ballistic/automatic/sol_rifle/evil/no_mag
+/obj/item/gun/ballistic/automatic/sol_rifle/black/no_mag
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/sol_rifle/wooden
