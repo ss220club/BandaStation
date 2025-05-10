@@ -16,6 +16,9 @@
 		"Black" = "wespe_black",
 	)
 
+/obj/item/gun/ballistic/automatic/pistol/wespe/examine(mob/user)
+	. = ..()
+	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \

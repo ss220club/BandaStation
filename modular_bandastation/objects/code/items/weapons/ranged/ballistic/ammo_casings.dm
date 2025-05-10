@@ -1,8 +1,6 @@
 /obj/item/ammo_casing/c35sol
 	name = ".35 Sol Short lethal bullet casing"
 	desc = "Стандартный летальный пистолетный патрон ТСФ калибра .35 Sol Short."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "35sol"
 	caliber = CALIBER_SOL35SHORT
 	projectile_type = /obj/projectile/bullet/c35sol
 
@@ -10,7 +8,7 @@
 	name = ".35 Sol Short rubber bullet casing"
 	desc = "Стандартный резиновый пистолетный патрон ТСФ калибра .35 Sol Short с пониженной летальностью. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "35sol_disabler"
+	icon_state = "sr-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/rubber
 	harmful = FALSE
 
@@ -19,7 +17,7 @@
 	name = ".35 Sol Short ripper bullet casing"
 	desc = "Стандартный экспансивный пистолетный патрон ТСФ калибра .35 Sol Short. Наносит целям режущие раны, но слаб против брони."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "35sol_shrapnel"
+	icon_state = "sl-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/ripper
 
 // .35 sol armor piercing are the AP rounds for this weapon
@@ -27,7 +25,7 @@
 	name = ".35 Sol Short armor piercing bullet casing"
 	desc = "Стандартный бронебойный пистолетный патрон ТСФ калибра .35 Sol Short. Пробивает броню, но довольно слаб против небронированных целей."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "35sol_ap"
+	icon_state = "sa-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/ap
 
 //  7.62x39mm
