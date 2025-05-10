@@ -176,7 +176,7 @@
 
 /datum/supply_pack/security/armory/sol_rifle_marksman
     name = ".40 Sol Long Carwo Marksman Rifle"
-    desc = "Этот ящик содержит одну тяжелую марксманскую винтовку Carwo калибра .40 Sol Long вместе с одним магазином осколочно-резиновых патронов. \
+    desc = "Этот ящик содержит одну тяжелую марксманскую винтовку Карво калибра .40 Sol Long вместе с одним магазином осколочно-резиновых патронов. \
 	        Отличный инструмент для ликвидации серьезных угроз."
     cost = CARGO_CRATE_VALUE * 125 //~25000
     access_view = ACCESS_ARMORY
@@ -198,8 +198,8 @@
     crate_name = ".40 Sol Long ammo crate"
 
 /datum/supply_pack/security/armory/sol_shotgun
-    name = "Renoster Shotgun Crate"
-    desc = "Этот ящик содержит два тяжелых дробовика Renoster. Используя тот же 12 калибр, наносит больше увечий. \
+    name = "Renoster Shotguns Crate"
+    desc = "Этот ящик содержит два тяжелых дробовика 'Реностер'. Используя тот же 12 калибр, наносит больше увечий. \
 	        Когда в споре требуется аргумент побольше."
     cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_ARMORY
@@ -209,11 +209,59 @@
     crate_name = "Renoster shotgun crate"
 
 /datum/supply_pack/goody/sol_shotgun
-    name = "Renoster Shotgun Crate"
-    desc = "Нужен серьезный аргумент в споре с соседом? Тогда вам отлично подойдет тяжелый дробовик Renoster. Используя тот же 12 калибр, наносит больше увечий. \
+    name = "Renoster Shotgun Single-Pack"
+    desc = "Нужен серьезный аргумент в споре с соседом? Тогда вам отлично подойдет тяжелый дробовик 'Реностер'. Используя тот же 12 калибр, наносит больше увечий. \
 	        Когда в споре требуется аргумент побольше."
     cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_WEAPONS
     contains = list(
         /obj/item/gun/ballistic/shotgun/riot/sol = 1,
+    )
+
+/datum/supply_pack/security/armory/sol_submachinegun
+    name = "Sindano Submachine Guns Crate"
+    desc = "Этот ящик содержит две ПП 'Синдано' калибра .35 Sol Short, вместе с двумя увеличенными магазинами заряженными резиной."
+    cost = CARGO_CRATE_VALUE * 50 //~10000
+    access_view = ACCESS_ARMORY
+    contains = list(
+        /obj/item/gun/ballistic/automatic/sol_smg/no_mag = 2,
+		/obj/item/ammo_box/magazine/c35sol_pistol/stendo/rubber = 2,
+    )
+    crate_name = "Sindano submachine guns crate"
+
+/datum/supply_pack/goody/sol_submachinegun
+    name = "Sindano Submachine Gun Single-Pack"
+    desc = "У вас есть много патронов .35, но не из чего стрелять? Тогда, вам определенно потребуется ПП 'Синдано'. Скорострельность гарантированна!"
+    cost = CARGO_CRATE_VALUE * 40 //~8000
+    access_view = ACCESS_ARMORY
+    contains = list(
+        /obj/item/gun/ballistic/automatic/sol_smg = 1,
+    )
+
+/datum/supply_pack/goody/sol_submachinegun_compact
+    name = "Sindano Submachine Gun Compact Single-Pack"
+    desc = "Нуждаетесь в скрострельном оружии но вам нужен малый размер? Тогда компактный вариант ПП 'Синдано' решит вашу проблему."
+    cost = CARGO_CRATE_VALUE * 20 //~4000
+    access_view = ACCESS_ARMORY
+    contains = list(
+        /obj/item/gun/ballistic/automatic/sol_smg/compact = 1,
+    )
+
+/datum/supply_pack/security/armory/drum35
+    name = ".35 Sol Short Drum Magazine Crate"
+    desc = "Этот ящик содержит один барабанный магазин калибра .35 Sol Short."
+    cost = CARGO_CRATE_VALUE * 30 //~6000
+    access_view = ACCESS_ARMORY
+    contains = list(
+        /obj/item/ammo_box/magazine/c35sol_pistol/drum/starts_empty = 1,
+    )
+    crate_name = ".35 Sol Short drum magazine crate"
+
+/datum/supply_pack/goody/drum35
+    name = ".35 Sol Short Drum Magazine"
+    desc = "Не любите перезаряжатся? Не проблема! Один барабанный магазин калибра .35 Sol Short уже ждет вас в этом ящике."
+    cost = CARGO_CRATE_VALUE * 10 //~2000
+    access_view = ACCESS_WEAPONS
+    contains = list(
+        /obj/item/ammo_box/magazine/c35sol_pistol/drum/starts_empty = 1,
     )

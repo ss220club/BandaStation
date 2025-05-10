@@ -89,6 +89,7 @@
 #include "code/items/weapons/ranged/ballistic/akm.dm"
 #include "code/items/weapons/ranged/ballistic/sol_rifle.dm"
 #include "code/items/weapons/ranged/ballistic/sol_shotgun.dm"
+#include "code/items/weapons/ranged/ballistic/sol_submachinegun.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"

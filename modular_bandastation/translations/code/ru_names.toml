@@ -3790,6 +3790,28 @@ instrumental = "тактическим дробовиком 'Реностер'"
 prepositional = "тактическом дробовике 'Реностер'"
 gender = "male"
 
+["Sindano submachine gun"]
+nominative = "ПП \"Синдано\""
+gender = "male"
+
+["compact Sindano submachine gun"]
+nominative = "компактный ПП \"Синдано\""
+genitive = "компактного ПП \"Синдано\""
+dative = "компактному ПП \"Синдано\""
+accusative = "компактный ПП \"Синдано\""
+instrumental = "компактным ПП \"Синдано\""
+prepositional = "компактном ПП \"Синдано\""
+gender = "male"
+
+["tactical Sindano submachine gun"]
+nominative = "тактический ПП \"Синдано\""
+genitive = "тактического ПП \"Синдано\""
+dative = "тактическому ПП \"Синдано\""
+accusative = "тактический ПП \"Синдано\""
+instrumental = "тактическим ПП \"Синдано\""
+prepositional = "тактическом ПП \"Синдано\""
+gender = "male"
+
 ["vibroblade"]
 nominative = "виброклинок"
 genitive = "виброклинка"

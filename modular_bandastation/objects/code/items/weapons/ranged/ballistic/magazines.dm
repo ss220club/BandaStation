@@ -64,6 +64,35 @@
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c35sol/ripper
 
+/obj/item/ammo_box/magazine/c35sol_pistol/drum
+	name = "Sol drum pistol magazine"
+	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 35 патронов."
+	icon_state = "pistol_35_drum"
+	base_icon_state = "pistol_35_drum"
+	w_class = WEIGHT_CLASS_NORMAL
+	max_ammo = 35
+
+/obj/item/ammo_box/magazine/c35sol_pistol/drum/starts_empty
+	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/c35sol_pistol/drum/rubber
+	name = "Sol rubber drum pistol magazine"
+	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 35 резиновых патронов."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c35sol/rubber
+
+/obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	name = "Sol AP drum pistol magazine"
+	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 35 бронебойных патронов."
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c35sol/ap
+
+/obj/item/ammo_box/magazine/c35sol_pistol/drum/ripper
+	name = "Sol HP drum pistol magazine"
+	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещающий 35 экспансивных патронов."
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c35sol/ripper
+
 //  AKM
 
 /obj/item/ammo_box/magazine/akm
