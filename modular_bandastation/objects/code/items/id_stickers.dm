@@ -1,6 +1,3 @@
-#define COLORS_LIST (COLOR_RED_LIGHT + LIGHT_COLOR_GREEN + LIGHT_COLOR_BLUE + COLOR_VIVID_YELLOW + LIGHT_COLOR_ORANGE + \
-LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_BLUEGREEN + LIGHT_COLOR_PINK)
-
 /obj/item/card/id/advanced
 	var/obj/item/id_sticker/applied_sticker = null
 
@@ -113,7 +110,6 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 		"Розовый" = LIGHT_COLOR_PINK
 	)
 	greyscale_config = /datum/greyscale_config/id_sticker
-	greyscale_colors = COLORS_LIST
 	flags_1 = IS_PLAYER_COLORABLE_1
 
 /obj/item/id_sticker/colored/Initialize(mapload)
@@ -276,5 +272,3 @@ LIGHT_COLOR_LAVENDER + LIGHT_COLOR_LIGHT_CYAN + LIGHT_COLOR_CYAN + LIGHT_COLOR_B
 	cost = CARGO_CRATE_VALUE * 18
 	contains = list(/obj/effect/spawner/random/id_stickers = 5)
 	crate_name = "ID stickers crate"
-
-#undef COLORS_LIST
