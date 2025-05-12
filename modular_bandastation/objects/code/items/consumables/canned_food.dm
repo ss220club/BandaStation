@@ -78,9 +78,9 @@
     icon_state = "condensedmilk"
     trash_type = /obj/item/trash/can/condensedmilk
     food_reagents = list(
-        /datum/reagent/consumable/milk = 25,
+        /datum/reagent/consumable/milk = 15,
         /datum/reagent/consumable/sugar = 10,
-        /datum/reagent/consumable/nutriment = 10,
+        /datum/reagent/consumable/nutriment = 5,
     )
     tastes = list("milk" = 5, "tin" = 1, "sugar" = 2)
     foodtypes = DAIRY | SUGAR
@@ -91,9 +91,9 @@
     icon_state = "cannedpizza"
     trash_type = /obj/item/trash/can/cannedpizza
     food_reagents = list(
-        /datum/reagent/consumable/nutriment/protein = 15,
-        /datum/reagent/consumable/ketchup = 10,
-        /datum/reagent/consumable/nutriment/vitamin = 15,
+        /datum/reagent/consumable/nutriment/protein = 10-,
+        /datum/reagent/consumable/ketchup = 5,
+        /datum/reagent/consumable/nutriment/vitamin = 10,
     )
     tastes = list("pizza" = 7, "tin" = 1)
     foodtypes = GRAIN | MEAT | VEGETABLES
