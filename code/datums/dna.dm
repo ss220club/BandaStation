@@ -34,7 +34,6 @@ GLOBAL_LIST_INIT(features_block_lengths, list(
 		"[DNA_TAJARAN_HEAD_MARKINGS_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
 		"[DNA_TAJARAN_TAIL_MARKINGS_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
 		"[DNA_TAJARAN_FACIAL_HAIR_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
-		"[DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
 		/// BANDASTATION ADDITION END - Species
 	))
 
@@ -311,8 +310,6 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	// skrell
 	if(features["skrell_head_tentacle"])
 		L[DNA_SKRELL_HEAD_TENTACLE_BLOCK] = construct_block(SSaccessories.skrell_head_tentacles_list.Find(features["skrell_head_tentacle"]), length(SSaccessories.skrell_head_tentacles_list))
-	if(features["skrell_head_tentacle_color"])
-		L[DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK] =  sanitize_hexcolor(features["skrell_head_tentacle_color"], include_crunch = FALSE)
 	/// BANDASTATION ADDITION END - Species
 
 	for(var/blocknum in 1 to DNA_FEATURE_BLOCKS)
@@ -471,8 +468,6 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		// Skrell
 		if(DNA_SKRELL_HEAD_TENTACLE_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.skrell_head_tentacles_list.Find(features["skrell_head_tentacle"]), length(SSaccessories.skrell_head_tentacles_list)))
-		if(DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK)
-			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["skrell_head_tentacle_color"], include_crunch = FALSE))
 		/// BANDASTATION ADDITION END - Species
 
 /datum/dna/proc/update_uf_block(blocknumber)
@@ -868,8 +863,6 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	// Skrell  features
 	if(dna.features["skrell_head_tentacle"])
 		dna.features["skrell_head_tentacle"] = SSaccessories.skrell_head_tentacles_list[deconstruct_block(get_uni_feature_block(features, DNA_SKRELL_HEAD_TENTACLE_BLOCK), length(SSaccessories.skrell_head_tentacles_list))]
-	if(dna.features["skrell_head_tentacle_color"])
-		dna.features["skrell_head_tentacle_color"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_SKRELL_HEAD_TENTACLE_COLOR_BLOCK))
 	/// BANDASTATION ADDITION END - Species
 
 	for(var/obj/item/organ/organ in organs)
