@@ -91,7 +91,7 @@
     icon_state = "cannedpizza"
     trash_type = /obj/item/trash/can/cannedpizza
     food_reagents = list(
-        /datum/reagent/consumable/nutriment/protein = 10-,
+        /datum/reagent/consumable/nutriment/protein = 10,
         /datum/reagent/consumable/ketchup = 5,
         /datum/reagent/consumable/nutriment/vitamin = 10,
     )
