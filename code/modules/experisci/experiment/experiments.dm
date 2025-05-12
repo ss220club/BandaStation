@@ -32,7 +32,7 @@
 	description = "Ученым нужны паразиты для опытов, используйте цитологическое оборудование, чтобы вырастить этих простых тварей!"
 	total_requirement = 3
 	max_requirement_per_type = 2
-	possible_types = list(/mob/living/basic/cockroach, /mob/living/basic/mouse)
+	possible_types = list(/mob/living/basic/cockroach, /mob/living/basic/mouse, /mob/living/basic/snail)
 
 /datum/experiment/scanning/random/cytology/medium
 	name = "Усоверш. эксперимент по изучению цитологии"
