@@ -7,15 +7,6 @@
 	has_owner = TRUE
 	ignore_suit_sensor_level = TRUE
 
-/obj/item/storage/box/contractor/fulton_extraction
-	name = "Fulton Extraction Kit"
-	icon_state = "syndiebox"
-	illustration = "writing_syndie"
-
-/obj/item/storage/box/contractor/fulton_extraction/PopulateContents()
-	new /obj/item/extraction_pack/syndicate(src)
-	new /obj/item/fulton_core(src)
-
 /obj/item/paper/contractor_guide
 	name = "Contractor Guide"
 	default_raw_text = {"Приветствую вас, агент, поздравляю с новой должностью контрактника. Помимо уже поставленных целей,\

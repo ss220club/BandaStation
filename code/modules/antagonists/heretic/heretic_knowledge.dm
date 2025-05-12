@@ -607,7 +607,7 @@
 	SSblackbox.record_feedback("tally", "heretic_ascended", 1, GLOB.heretic_research_tree[type][HKT_ROUTE])
 	log_heretic_knowledge("[key_name(user)] completed their final ritual at [gameTimestamp()].")
 	notify_ghosts(
-		"[user] завершил ритуал вознесения!",
+		"[user.real_name] завершил ритуал вознесения!",
 		source = user,
 		header = "Еретик вознесся!",
 	)
