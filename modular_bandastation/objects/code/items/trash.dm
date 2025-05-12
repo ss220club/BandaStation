@@ -8,18 +8,6 @@
 	item_flags = NOBLUDGEON|SKIP_FANTASY_ON_SPAWN
 	custom_materials = list(/datum/material/plastic=SMALL_MATERIAL_AMOUNT*2)
 
-/obj/item/trash/Initialize(mapload)
-	var/turf/T = get_turf(src)
-	if(T && is_station_level(T.z))
-		SSblackbox.record_feedback("tally", "station_mess_created", 1, name)
-	return ..()
-
-/obj/item/trash/Destroy()
-	var/turf/T = get_turf(src)
-	if(T && is_station_level(T.z))
-		SSblackbox.record_feedback("tally", "station_mess_destroyed", 1, name)
-	return ..()
-
 /obj/item/trash/can
 	icon = 'modular_bandastation/objects/icons/obj/items/cannedfood.dmi'
 	icon_state = "Expiredcannedfood_empty"
