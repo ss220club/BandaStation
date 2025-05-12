@@ -87,7 +87,7 @@
 
 /obj/item/food/cannedfood/cannedpizza
     name = "canned pizza"
-    desc = "Буквально целая пицца в консерв.... Погодите, это пицца пропущенная через блендер?"
+    desc = "Буквально целая пицца в консерв... Погодите, это пицца пропущенная через блендер?"
     icon_state = "cannedpizza"
     trash_type = /obj/item/trash/can/cannedpizza
     food_reagents = list(
