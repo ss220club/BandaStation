@@ -110,7 +110,3 @@
     tastes = list("tuna" = 4, "tin" = 1)
     foodtypes = SEAFOOD
 
-
-
-
-
