@@ -1,0 +1,5 @@
+author: "Chorden523"
+delete-after: True
+changes:
+  - rscadd: "Наклейки для ID карт теперь используют GAGS."
+  - spellcheck: "Наконец-то написано описание для пака наклеек на ID карту в карго."
