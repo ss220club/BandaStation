@@ -34,6 +34,7 @@
 #include "code/items/clothing/mod/modules/monitor_module.dm"
 #include "code/items/clothing/mod/types/praetorian/mod_theme.dm"
 #include "code/items/clothing/mod/types/praetorian/mod_types.dm"
+#include "code/items/clothing/neck/fancy.dm"
 #include "code/items/clothing/neck/holiday.dm"
 #include "code/items/clothing/neck/security.dm"
 #include "code/items/clothing/neck/science.dm"
