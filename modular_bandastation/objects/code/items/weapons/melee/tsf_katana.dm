@@ -21,7 +21,4 @@
     block_chance = 60
 
 /obj/item/melee/katana_tsf/proc/chill(mob/living/target, mob/living/user)
-	return
-
-/obj/item/melee/katana_tsf/chill(mob/living/target, mob/living/user)
 	target.apply_status_effect(/datum/status_effect/void_chill, 3)
