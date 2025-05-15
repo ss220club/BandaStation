@@ -9,7 +9,7 @@
 			Этот клинок - настоящее воплощение холодного нрава его владельца. \
 			Надпись на рукояти гласит - Перед вами один из двух образцов гениальных творений мастера Фигерса - сделанных по заказу Мистера К."
     icon = 'modular_bandastation/objects/icons/obj/weapons/sword.dmi'
-    icon = "katana_tsf"
+    icon_state = "katana_tsf"
     inhand_icon_state = "katana_tsf"
     icon_angle = 180
     lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_lefthand.dmi'
