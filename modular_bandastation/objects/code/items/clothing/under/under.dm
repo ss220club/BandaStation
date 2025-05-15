@@ -213,4 +213,4 @@
 	        Кому: Маргарет Эванс."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
-	icon_state = "netrun_under"
+	icon_state = "netrun"
