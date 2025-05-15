@@ -197,14 +197,14 @@
 		return
 	ammo_box = weapon
 	weapon.forceMove(src)
-	playsound(src, 'modular_bandastation/objects/sounds/weapons/sound/insert_ammobox.ogg', 100)
+	playsound(src, 'modular_bandastation/objects/sounds/weapons/insert_ammobox.ogg', 100)
 	balloon_alert(user, "ammo box inserted!")
 
 /obj/machinery/mounted_machine_gun/proc/remove_ammo_box(mob/living/user)
 	ammo_box.forceMove(drop_location())
 	user.put_in_hands(ammo_box)
 	ammo_box = null
-	playsound(src, 'modular_bandastation/objects/sounds/weapons/sound/remove_ammobox.ogg', 100)
+	playsound(src, 'modular_bandastation/objects/sounds/weapons/remove_ammobox.ogg', 100)
 	balloon_alert(user, "ammo box removed!")
 	update_appearance()
 
