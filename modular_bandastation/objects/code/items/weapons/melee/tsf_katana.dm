@@ -14,6 +14,7 @@
     icon_angle = 180
     lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_lefthand.dmi'
     righthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_righthand.dmi'
+    worn_icon_state = "energy_katana"
     slot_flags = ITEM_SLOT_BELT
     force = 25
     armour_penetration = 70
