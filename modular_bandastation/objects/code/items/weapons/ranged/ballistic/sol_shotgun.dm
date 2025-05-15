@@ -25,7 +25,7 @@
 	recoil = 2
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	projectile_damage_multiplier = 1.2
+	projectile_damage_multiplier = 1.4
 	obj_flags = UNIQUE_RENAME
 	unique_reskin = list(
 		"Default" = "renoster",
@@ -62,7 +62,7 @@
 	worn_icon_state = "renoster_black"
 	inhand_icon_state = "renoster_black"
 	recoil = 1
-	projectile_damage_multiplier = 1.3
+	projectile_damage_multiplier = 1.5
 
 /obj/item/gun/ballistic/shotgun/riot/sol/black/examine_more(mob/user)
 	. = ..()
