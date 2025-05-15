@@ -12,13 +12,16 @@
     icon_state = 'katana_tsf'
     inhand_icon_state = "katana_tsf"
     icon_angle = 180
-    lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/weapons/melee_lefthand.dmi'
-    righthand_file = 'modular_bandastation/objects/icons/mob/inhands/weapons/melee_righthand.dmi'
+    lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_lefthand.dmi'
+    righthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_righthand.dmi'
     worn_icon_state = "katana_tsf"
     slot_flags = ITEM_SLOT_BELT
     force = 25
     armour_penetration = 70
     block_chance = 60
+
+/obj/item/melee/katana_tsf/proc/chill(mob/living/target, mob/living/user)
+	return
 
 /obj/item/melee/katana_tsf/chill(mob/living/target, mob/living/user)
 	target.apply_status_effect(/datum/status_effect/void_chill, 3)
