@@ -18604,6 +18604,12 @@
 /obj/effect/landmark/start/hangover,
 /turf/open/floor/glass/reinforced,
 /area/station/service/chapel/monastery)
+"eyC" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/central/fore)
 "eyE" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
@@ -24465,14 +24471,14 @@
 /turf/open/floor/iron/white,
 /area/station/science/robotics/lab)
 "fTi" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 4
-	},
 /obj/structure/sign/directions/security/directional/north{
 	pixel_y = 36
 	},
 /obj/structure/sign/directions/medical/directional/north{
 	pixel_y = 28
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 4
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
@@ -88252,9 +88258,6 @@
 "vrY" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
-	dir = 8
-	},
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "vsh" = (
@@ -127822,7 +127825,7 @@ guN
 guN
 guN
 fTi
-hLM
+eyC
 bsv
 guN
 vbK
