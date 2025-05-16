@@ -14,11 +14,22 @@
     icon_angle = 180
     lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_lefthand.dmi'
     righthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_righthand.dmi'
-    worn_icon_state = "energy_katana"
+    worn_icon_state = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
     slot_flags = ITEM_SLOT_BELT
     force = 25
     armour_penetration = 70
     block_chance = 60
+	throwforce = 30
+	w_class = WEIGHT_CLASS_NORMAL
+	hitsound = 'modular_bandastation/objects/sound/weapons/tsf_katana_hit.ogg'
+	pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg''
+	drop_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_sheath.ogg'
+	block_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_block.ogg'
+	attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
+	attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
+	sharpness = SHARP_EDGED
+	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+	light_color = COLOR_BLUE_LIGHT
 
 /obj/item/melee/katana_tsf/proc/chill(mob/living/target, mob/living/user)
 	target.apply_status_effect(/datum/status_effect/void_chill, 3)
