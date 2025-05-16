@@ -22,7 +22,7 @@
 	throwforce = 30
 	w_class = WEIGHT_CLASS_NORMAL
 	hitsound = 'modular_bandastation/objects/sound/weapons/tsf_katana_hit.ogg'
-	pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg''
+	pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg'
 	drop_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_sheath.ogg'
 	block_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_block.ogg'
 	attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
