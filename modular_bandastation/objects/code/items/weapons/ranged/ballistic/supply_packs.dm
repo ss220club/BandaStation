@@ -106,7 +106,7 @@
 /datum/supply_pack/security/armory/akm_civ
     name = "Sabel-42 Carbine Crate"
     desc = "Вам нужна надежная винтовка для самообороны, спортивной стрельбы или охоты? Тогда 'Сабля' станет отличным выбором."
-    cost = CARGO_CRATE_VALUE * 100 //~20000
+    cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_ARMORY
     contains = list(
         /obj/item/gun/ballistic/automatic/akm/civ = 1,
@@ -140,7 +140,7 @@
 /datum/supply_pack/goody/akm_hunting
     name = "Civilian 7.62x39mm Hunting Ammo Box"
     desc = "Хотите поохотится с вашим новым карабином? Не проблема, в этом ящике вы найдете коробку охотничьих калибра 7.62мм."
-    cost = CARGO_CRATE_VALUE * 12 //~2400
+    cost = CARGO_CRATE_VALUE * 10 //~2000
     access_view = ACCESS_ARMORY
     contains = list(
         /obj/item/ammo_box/a762x39/civilian/hunting = 1,
@@ -150,7 +150,7 @@
     name = "Sabel-42 Carbine Single-Pack"
     desc = "Вам нужна надежная винтовка для самообороны, спортивной стрельбы или охоты? Тогда 'Сабля' станет отличным вариантов для вас! \
 	        В этом ящике находится один карабин 'Сабля-42'."
-    cost = CARGO_CRATE_VALUE * 50 //~10000
+    cost = CARGO_CRATE_VALUE * 40 //~8000
     access_view = ACCESS_WEAPONS
     contains = list(
         /obj/item/gun/ballistic/automatic/akm/civ = 1,
@@ -168,7 +168,7 @@
 /datum/supply_pack/goody/akm_civ_ammoboxes
     name = "Civilian 7.62x39mm Ammo Boxes"
     desc = "Нужны патроны калибра 7.62 для вашей винтовки? Не проблема, в этом ящике вы найдете коробку патронов гражданского назначения калибра 7.62мм."
-    cost = CARGO_CRATE_VALUE * 12 //~2400
+    cost = CARGO_CRATE_VALUE * 10 //~2000
     access_view = ACCESS_WEAPONS
     contains = list(
         /obj/item/ammo_box/a762x39/civilian = 1,
@@ -212,7 +212,7 @@
     name = "Renoster Shotgun Single-Pack"
     desc = "Нужен серьезный аргумент в споре с соседом? Тогда вам отлично подойдет тяжелый дробовик 'Реностер'. Используя тот же 12 калибр, наносит больше увечий. \
 	        Когда в споре требуется аргумент побольше."
-    cost = CARGO_CRATE_VALUE * 50 //~10000
+    cost = CARGO_CRATE_VALUE * 30 //~6000
     access_view = ACCESS_WEAPONS
     contains = list(
         /obj/item/gun/ballistic/shotgun/riot/sol = 1,
@@ -232,7 +232,7 @@
 /datum/supply_pack/goody/sol_submachinegun
     name = "Sindano Submachine Gun Single-Pack"
     desc = "У вас есть много патронов .35, но не из чего стрелять? Тогда, вам определенно потребуется ПП 'Синдано'. Скорострельность гарантированна!"
-    cost = CARGO_CRATE_VALUE * 40 //~8000
+    cost = CARGO_CRATE_VALUE * 25 //~5000
     access_view = ACCESS_ARMORY
     contains = list(
         /obj/item/gun/ballistic/automatic/sol_smg = 1,
@@ -241,26 +241,26 @@
 /datum/supply_pack/goody/sol_submachinegun_compact
     name = "Sindano Submachine Gun Compact Single-Pack"
     desc = "Нуждаетесь в скрострельном оружии но вам нужен малый размер? Тогда компактный вариант ПП 'Синдано' решит вашу проблему."
-    cost = CARGO_CRATE_VALUE * 20 //~4000
+    cost = CARGO_CRATE_VALUE * 30 //~6000
     access_view = ACCESS_ARMORY
     contains = list(
         /obj/item/gun/ballistic/automatic/sol_smg/compact = 1,
     )
 
 /datum/supply_pack/security/armory/drum35
-    name = ".35 Sol Short Drum Magazine Crate"
+    name = ".35 Sol Short Drums Magazine Crate"
     desc = "Этот ящик содержит один барабанный магазин калибра .35 Sol Short."
-    cost = CARGO_CRATE_VALUE * 30 //~6000
+    cost = CARGO_CRATE_VALUE * 10 //~2000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/ammo_box/magazine/c35sol_pistol/drum/starts_empty = 1,
+        /obj/item/ammo_box/magazine/c35sol_pistol/drum/starts_empty = 2,
     )
-    crate_name = ".35 Sol Short drum magazine crate"
+    crate_name = ".35 Sol Short drums magazine crate"
 
 /datum/supply_pack/goody/drum35
     name = ".35 Sol Short Drum Magazine"
     desc = "Не любите перезаряжатся? Не проблема! Один барабанный магазин калибра .35 Sol Short уже ждет вас в этом ящике."
-    cost = CARGO_CRATE_VALUE * 10 //~2000
+    cost = CARGO_CRATE_VALUE * 5 //~1000
     access_view = ACCESS_WEAPONS
     contains = list(
         /obj/item/ammo_box/magazine/c35sol_pistol/drum/starts_empty = 1,
