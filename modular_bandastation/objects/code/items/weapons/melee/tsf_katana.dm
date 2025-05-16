@@ -19,7 +19,7 @@
     force = 25
     armour_penetration = 70
     block_chance = 60
-	throwforce = 30
+    throwforce = 30
 	w_class = WEIGHT_CLASS_NORMAL
 	hitsound = 'modular_bandastation/objects/sound/weapons/tsf_katana_hit.ogg'
 	pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg'
