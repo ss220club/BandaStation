@@ -144,6 +144,11 @@
 	flags_1 = null
 	armor_type = /datum/armor/stealth_cloak
 	actions_types = list(/datum/action/item_action/stealth_mode/cloack)
+	allowed = list(
+		/obj/item/binoculars,
+		/obj/item/tank/internals/emergency_oxygen/double,
+		/obj/item/gun,
+	)
 	var/datum/component/toggle_attached_clothing/hood_component
 	var/accelerate = 0
 

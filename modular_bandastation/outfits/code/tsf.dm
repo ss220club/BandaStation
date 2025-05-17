@@ -400,12 +400,53 @@
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/infiltrator
 	uniform = /obj/item/clothing/under/syndicate/camo
-	head = /obj/item/clothing/head/beret/tsf_infiltrator
+	suit = /obj/item/clothing/suit/hooded/stealth_cloak
+	suit_store = /obj/item/gun/ballistic/automatic/c20r/unrestricted
+	belt = /obj/item/storage/belt/military/army/tsf_infiltrator/full
+	back = /obj/item/storage/backpack/tsf
+	backpack_contents = list(
+		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/medkit/emergency,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/c4 = 2,
+		/obj/item/grenade/empgrenade,
+		/obj/item/binoculars,
+		/obj/item/clothing/head/beret/tsf_infiltrator
+	)
+	implants = list(/obj/item/implant/emp, /obj/item/implant/cqc)
+	gloves = /obj/item/clothing/gloves/combat
+	shoes = /obj/item/clothing/shoes/jackboots
+	glasses = /obj/item/clothing/glasses/meson/night
+	mask = /obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
+	l_pocket = /obj/item/knife/combat
+
+/obj/item/storage/belt/military/army/tsf_infiltrator
+	name = "army belt"
+	desc = "A belt used by military forces."
+	icon_state = "military"
+	inhand_icon_state = "security"
+	worn_icon_state = "military"
+	storage_type = /datum/storage/military_belt/tsf
+
+/obj/item/storage/belt/military/army/tsf_infiltrator/full/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/suppressed(src)
+	new /obj/item/ammo_box/magazine/m9mm/ap(src)
+	new /obj/item/ammo_box/magazine/m9mm/ap(src)
+	new /obj/item/ammo_box/magazine/m9mm(src)
+	new /obj/item/ammo_box/magazine/smgm45/ap(src)
+	new /obj/item/ammo_box/magazine/smgm45/ap(src)
+
+/obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
+	greyscale_colors = COLOR_DARK_MODERATE_LIME_GREEN
+
+/datum/storage/military_belt/tsf
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_slots = 8
 
 /datum/id_trim/tsf/infiltrator
 	assignment = "TSF - Infiltrator"
 	trim_state = "trim_veteranadvisor"
-	sechud_icon_state = SECURITY_RESPONSE_OFFICER
+	sechud_icon_state = SECHUD_SECURITY_RESPONSE_OFFICER
 	big_pointer = FALSE
 
 /datum/id_trim/tsf/infiltrator/New()
