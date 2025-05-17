@@ -144,6 +144,23 @@
 	flags_1 = null
 	armor_type = /datum/armor/stealth_cloak
 	actions_types = list(/datum/action/item_action/stealth_mode/cloack)
+	var/datum/component/toggle_attached_clothing/hood_component
+	var/accelerate = 0
+
+/obj/item/clothing/suit/hooded/stealth_cloak/on_hood_down(obj/item/clothing/head/hooded/hood)
+	. = ..()
+	var/datum/action/item_action/stealth_mode/cloack/stealth_action = locate() in actions
+	if(!stealth_action)
+		return
+	if(!stealth_action.stealth_engaged)
+		return
+	stealth_action.stealth_off()
+
+/obj/item/clothing/suit/hooded/stealth_cloak/shinobi
+	name = "shinobi cloak"
+	greyscale_colors = COLOR_OLD_GLORY_BLUE
+	hoodtype = /obj/item/clothing/head/hooded/stealth_cloak/shinobi
+	accelerate = 0.8
 
 /obj/item/clothing/head/hooded/stealth_cloak
 	name = "infiltrator cloak's hood"
@@ -152,11 +169,18 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
 	icon_state = "stealth_cloak"
 	body_parts_covered = HEAD
-	flags_inv = HIDEHAIR|HIDEEARS
+	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACE
 	greyscale_colors = COLOR_OLIVE
 	greyscale_config = /datum/greyscale_config/stealth_cloak_hood
 	greyscale_config_worn = /datum/greyscale_config/stealth_cloak_hood/worn
 	flags_1 = null
+
+/obj/item/clothing/head/hooded/stealth_cloak/shinobi
+	greyscale_colors = COLOR_OLD_GLORY_BLUE
+
+/obj/item/clothing/suit/hooded/stealth_cloak/Initialize(mapload)
+	. = ..()
+	hood_component = GetComponent(/datum/component/toggle_attached_clothing)
 
 /datum/greyscale_config/stealth_cloak
 	name = "Stealth Cloak"
@@ -194,11 +218,22 @@
 	max_charge = 240 SECONDS
 
 /datum/action/item_action/stealth_mode/cloack/stealth_on()
-	. = ..()
+	var/obj/item/clothing/suit/hooded/stealth_cloak/cloak = target
+	if(!cloak.hood_component)
+		return
+	if(!cloak.hood_component.currently_deployed)
+		owner.balloon_alert(owner, "нужно надеть капюшон")
+		return
+	owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/stealth, multiplicative_slowdown = -cloak.accelerate)
 	ADD_TRAIT(owner, TRAIT_PACIFISM, src)
 	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
+	return ..()
 
 /datum/action/item_action/stealth_mode/cloack/stealth_off()
 	. = ..()
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/stealth)
 	REMOVE_TRAIT(owner, TRAIT_PACIFISM, src)
 	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
+
+/datum/movespeed_modifier/stealth
+	variable = TRUE
