@@ -228,3 +228,16 @@
 /obj/machinery/door/airlock/multi_tile/public/glass
 	opacity = FALSE
 	glass = TRUE
+
+// Fake doors
+/turf/closed/indestructible/fakedoor
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/centcom/centcom.dmi'
+
+/turf/closed/indestructible/fakedoor/maintenance
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/hatch/maintenance.dmi'
+
+/turf/closed/indestructible/fakedoor/glass_airlock
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/external/external.dmi'
+
+/turf/closed/indestructible/fakedoor/engineering
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/engineering.dmi'

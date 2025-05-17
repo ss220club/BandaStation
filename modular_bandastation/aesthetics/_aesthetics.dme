@@ -25,6 +25,7 @@
 #include "kitchen/code/microwave.dm"
 #include "lights/code/lights.dm"
 #include "lightswitch/code/lightswitch.dm"
+#include "medalbox/code/medalbox.dm"
 #include "rack/code/rack.dm"
 #include "radio/code/radio.dm"
 #include "railings/code/railings.dm"
