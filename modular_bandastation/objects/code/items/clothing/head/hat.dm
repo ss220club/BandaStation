@@ -117,3 +117,64 @@
 	icon_state = "secbeanie"
 	worn_icon_state = "secbeanie"
 	armor_type = /datum/armor/cosmetic_sec
+
+// TSF
+/obj/item/clothing/head/beret/tsf_commander
+	name = "TSF commander beret"
+	desc = "Берет командующего офицера КМП ТСФ."
+	icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#212121#cc9900"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marine
+	name = "TSF marine beret"
+	desc = "Берет бойца КМП ТСФ."
+	icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#526382#eeeeee"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marine_officer
+	name = "TSF marine officer beret"
+	desc = "Берет бойца КМП ТСФ."
+	icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#526382#cc9900"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marsoc
+	name = "TSF MARSOC beret"
+	desc = "Берет бойца КСОМП ТСФ."
+	icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#212121#eeeeee"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marsoc_officer
+	name = "TSF MARSOC officer beret"
+	desc = "Берет офицера КСОМП ТСФ."
+	icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#212121#cc9900"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_infiltrator
+	name = "TSF infiltrator operative beret"
+	desc = "Берет бойца-диверсанта ТСФ."
+	icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#43523d#a2abb0"
+	dog_fashion = null
+	flags_1 = NONE
