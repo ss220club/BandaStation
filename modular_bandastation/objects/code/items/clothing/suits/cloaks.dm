@@ -130,7 +130,7 @@
 //Stealth cloak
 /obj/item/clothing/suit/hooded/stealth_cloak
 	name = "infiltrator cloak"
-	decs = "Плащ, покрытый фотодинамическими пластинами, позволяет носителю максимально эффективно слиться с окружающей средой."
+	desc = "Плащ, покрытый фотодинамическими пластинами, позволяет носителю максимально эффективно слиться с окружающей средой."
 	icon_state = "stealth_cloak"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
