@@ -27,3 +27,14 @@
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_righthand.dmi'
 	icon_state = "duffel_blueshield"
 	inhand_icon_state = "duffel_blueshield"
+
+//TSF
+/obj/item/storage/backpack/tsf
+	name = "TSFMC backpack"
+	desc = "A robust backpack issued to TSF's finest."
+	icon = 'modular_bandastation/objects/icons/obj/storage/backpack.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/back.dmi'
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_righthand.dmi'
+	icon_state = "backpack_tsf"
+	inhand_icon_state = "backpack_tsf"
