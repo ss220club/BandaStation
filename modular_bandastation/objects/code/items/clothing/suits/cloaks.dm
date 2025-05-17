@@ -194,11 +194,11 @@
 	max_charge = 240 SECONDS
 
 /datum/action/item_action/stealth_mode/cloack/stealth_on()
-    . = ..()
-    ADD_TRAIT(owner, TRAIT_PACIFISM, src)
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_PACIFISM, src)
 	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
 
 /datum/action/item_action/stealth_mode/cloack/stealth_off()
-    . = ..()
-    REMOVE_TRAIT(owner, TRAIT_PACIFISM, src)
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, src)
 	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
