@@ -180,8 +180,6 @@
 		/obj/item/shield/riot/tele,
 		/obj/item/melee/baton/telescopic/silver,
 		/obj/item/gun/ballistic/automatic/pistol/m1911,
-		/obj/item/banner/solgov,
-		/obj/item/binoculars,
 	)
 	belt = /obj/item/storage/belt/military/assault/full
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
@@ -190,6 +188,7 @@
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	uniform = /obj/item/clothing/under/rank/tsf/marine_officer
 	mask = /obj/item/clothing/mask/gas/sechailer
+	accessory = /obj/item/binoculars
 	head = /obj/item/clothing/head/helmet/marine
 
 //Rifleman
@@ -253,6 +252,7 @@
 	suit_store = /obj/item/gun/ballistic/shotgun/lethal
 	head = /obj/item/clothing/head/helmet/marine/engineer
 	back = /obj/item/deployable_turret_folded
+	backpack_contents = null
 	uniform = /obj/item/clothing/under/rank/tsf/marine
 	belt = /obj/item/storage/belt/military/army/tsf/full
 	ears = /obj/item/radio/headset/headset_cent/alt
@@ -409,8 +409,7 @@
 		/obj/item/storage/medkit/emergency,
 		/obj/item/grenade/smokebomb = 2,
 		/obj/item/grenade/c4 = 2,
-		/obj/item/grenade/empgrenade,
-		/obj/item/binoculars,
+		/obj/item/suppressor,
 		/obj/item/clothing/head/beret/tsf_infiltrator
 	)
 	implants = list(/obj/item/implant/emp, /obj/item/implant/cqc)
@@ -418,7 +417,9 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/meson/night
 	mask = /obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
-	l_pocket = /obj/item/knife/combat
+	ears = /obj/item/radio/headset/heads/captain/alt/tsf
+	accessory = /obj/item/binoculars
+	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
 
 /obj/item/storage/belt/military/army/tsf_infiltrator
 	name = "army belt"
@@ -430,6 +431,7 @@
 
 /obj/item/storage/belt/military/army/tsf_infiltrator/full/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/suppressed(src)
+	new /obj/item/knife/combat(src)
 	new /obj/item/ammo_box/magazine/m9mm/ap(src)
 	new /obj/item/ammo_box/magazine/m9mm/ap(src)
 	new /obj/item/ammo_box/magazine/m9mm(src)
@@ -437,7 +439,7 @@
 	new /obj/item/ammo_box/magazine/smgm45/ap(src)
 
 /obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
-	greyscale_colors = COLOR_DARK_MODERATE_LIME_GREEN
+	greyscale_colors = COLOR_OLIVE
 
 /datum/storage/military_belt/tsf
 	max_specific_storage = WEIGHT_CLASS_NORMAL
