@@ -27,7 +27,7 @@
     block_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_block.ogg'
     attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
     attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
-   sharpness = SHARP_EDGED
+    sharpness = SHARP_EDGED
 
 /obj/item/melee/katana_tsf/proc/chill(mob/living/target, mob/living/user)
 	target.apply_status_effect(/datum/status_effect/void_chill, 3)
