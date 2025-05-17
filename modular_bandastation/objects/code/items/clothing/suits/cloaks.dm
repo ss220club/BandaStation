@@ -190,7 +190,7 @@
 /datum/action/item_action/stealth_mode/cloack
 	name = "Замаскироваться"
 	desc = "Производится подача напряжения на фотодинамические пластины и, спустя непродолжительную калибровку, маскировка выходит на максимальную эффективность."
-	charge = 4 MIN
+	charge = 240 SECONDS
 	max_charge = 240 SECONDS
 
 /datum/action/item_action/stealth_mode/cloack/stealth_on()
