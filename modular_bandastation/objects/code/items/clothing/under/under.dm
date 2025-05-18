@@ -216,7 +216,7 @@
 	icon_state = "netrun"
 
 /obj/item/clothing/under/tshirt_black
-	name = "black T=shirt"
+	name = "black T-shirt"
 	desc = "не придумал описание"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
