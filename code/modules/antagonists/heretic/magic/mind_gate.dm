@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/pointed/mind_gate
 	name = "Mind Gate"
-	desc = "Deals you 20 brain damage and the target suffers a hallucination, \
-			is left confused for 10 seconds, and suffers oxygen loss and brain damage."
+	desc = "Наносит вам 20 урона мозгу, и накладывает галлюцинации на цель, \
+			замешательство на 10 секунд, потерю дыхания и урон мозгу."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -16,7 +16,7 @@
 	spell_requirements = NONE
 	cast_range = 6
 
-	active_msg = "You prepare to open your mind..."
+	active_msg = "Вы готовитесь открыть свой разум..."
 
 /datum/action/cooldown/spell/pointed/mind_gate/can_cast_spell(feedback = TRUE)
 	return ..() && isliving(owner)
@@ -27,8 +27,8 @@
 /datum/action/cooldown/spell/pointed/mind_gate/cast(mob/living/carbon/human/cast_on)
 	. = ..()
 	if(cast_on.can_block_magic(antimagic_flags))
-		to_chat(cast_on, span_notice("Your mind feels closed."))
-		to_chat(owner, span_warning("Their mind doesn't swing open, but neither does yours."))
+		to_chat(cast_on, span_notice("Ваш разум чувствуется запертым."))
+		to_chat(owner, span_warning("Их разум не открывается, но и ваш тоже."))
 		return FALSE
 
 	cast_on.adjust_confusion(10 SECONDS)

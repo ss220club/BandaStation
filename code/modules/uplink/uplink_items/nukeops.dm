@@ -809,7 +809,7 @@
 	cant_discount = TRUE
 
 // Base Keys
-
+/* BANDASTATION REMOVAL
 /datum/uplink_category/base_keys
 	name = "Base Keys"
 	weight = 27
@@ -854,6 +854,7 @@
 	item = /obj/item/keycard/syndicate_fridge
 	cost = 5
 	purchasable_from = UPLINK_CLOWN_OPS | UPLINK_NUKE_OPS
+*/
 
 /datum/uplink_item/base_keys/custodial_key
 	name = "Syndicate Custodial Access Card"

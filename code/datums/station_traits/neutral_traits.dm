@@ -217,7 +217,7 @@
 
 /datum/station_trait/birthday/proc/announce_birthday()
 	report_message = "We here at Nanotrasen would all like to wish [birthday_person ? birthday_person_name : "Employee Name"] a very happy birthday."
-	priority_announce("Happy birthday to [birthday_person ? birthday_person_name : "Employee Name"]! Nanotrasen wishes you a very happy [birthday_person ? thtotext(birthday_person.age + 1) : "255th"] birthday.")
+	priority_announce("Поздравляем с днём рождения [birthday_person ? birthday_person_name : "Employee Name"]! Nanotrasen желает счастливого [birthday_person ? "[birthday_person.age + 1]-го" : "255-го"] Дня Рождения.")
 	if(birthday_person)
 		playsound(birthday_person, 'sound/items/party_horn.ogg', 50)
 		birthday_person.add_mood_event("birthday", /datum/mood_event/birthday)
@@ -414,10 +414,12 @@
 	. = ..()
 	RegisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN, PROC_REF(on_job_after_spawn))
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /datum/station_trait/skub/setup_lobby_button(atom/movable/screen/lobby/button/sign_up/lobby_button)
 	RegisterSignal(lobby_button, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_lobby_button_update_overlays))
 	lobby_button.desc = "Are you pro-skub or anti-skub? Click to cycle through pro-skub, anti-skub, random and neutral."
 	return ..()
+*/
 
 /// Let late-joiners jump on this gimmick too.
 /datum/station_trait/skub/can_display_lobby_button(client/player)
@@ -427,6 +429,7 @@
 /datum/station_trait/skub/on_round_start()
 	return
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /datum/station_trait/skub/on_lobby_button_update_icon(atom/movable/screen/lobby/button/sign_up/lobby_button, location, control, params, mob/dead/new_player/user)
 	var/mob/player = lobby_button.get_mob()
 	var/skub_stance = skubbers[player.ckey]
@@ -468,6 +471,7 @@
 			overlays += "neutral_skub"
 		if(RANDOM_SKUB)
 			overlays += "random_skub"
+*/
 
 /datum/station_trait/skub/proc/on_job_after_spawn(datum/source, datum/job/job, mob/living/spawned, client/player_client)
 	SIGNAL_HANDLER
@@ -523,10 +527,12 @@
 	. = ..()
 	RegisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN, PROC_REF(on_job_after_spawn))
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /datum/station_trait/pet_day/setup_lobby_button(atom/movable/screen/lobby/button/sign_up/lobby_button)
 	lobby_button.desc = "Want to bring your innocent pet to a giant metal deathtrap? Click here to customize it!"
 	RegisterSignal(lobby_button, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_lobby_button_update_overlays))
 	return ..()
+*/
 
 /datum/station_trait/pet_day/can_display_lobby_button(client/player)
 	return sign_up_button
@@ -534,6 +540,7 @@
 /datum/station_trait/pet_day/on_round_start()
 	return
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /datum/station_trait/pet_day/on_lobby_button_click(atom/movable/screen/lobby/button/sign_up/lobby_button, updates)
 	var/mob/our_player = lobby_button.get_mob()
 	var/client/player_client = our_player.client
@@ -543,6 +550,7 @@
 	if(isnull(customization))
 		customization = new(player_client)
 	INVOKE_ASYNC(customization, TYPE_PROC_REF(/datum, ui_interact), our_player)
+*/
 
 /datum/station_trait/pet_day/proc/on_job_after_spawn(datum/source, datum/job/job, mob/living/spawned, client/player_client)
 	SIGNAL_HANDLER
@@ -552,8 +560,10 @@
 		return
 	INVOKE_ASYNC(customization, TYPE_PROC_REF(/datum/pet_customization, create_pet), spawned, player_client)
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /datum/station_trait/pet_day/proc/on_lobby_button_update_overlays(atom/movable/screen/lobby/button/sign_up/lobby_button, list/overlays)
 	overlays += "select_pet"
+*/
 
 /// We're pulling a Jim Kramer with this one boys
 /datum/station_trait/gmm_spotlight
