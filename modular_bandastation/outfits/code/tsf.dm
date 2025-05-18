@@ -388,7 +388,7 @@
 		/obj/item/grenade/c4 = 2,
 		/obj/item/ammo_box/magazine/m223 = 4,
 		/obj/item/shield/riot/tele,
-		/obj/item/clothing/under/rank/tsf/marsoc_officer
+		/obj/item/clothing/under/rank/tsf/marsoc_officer,
 	)
 	suit_store = /obj/item/gun/ballistic/automatic/ar
 	belt = /obj/item/storage/belt/military/army/tsf/full
