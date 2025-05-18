@@ -214,3 +214,31 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
 	icon_state = "netrun"
+
+/obj/item/clothing/under/tshirt_black
+	name = "black T=shirt"
+	desc = "не придумал описание"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "tshirt_black"
+
+/obj/item/clothing/under/hoodie_black
+	name = "black hoodie"
+	desc = "не придумал описание"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "hoodie_black"
+
+/obj/item/clothing/under/shirt_black
+	name = "black shirt"
+	desc = "не придумал описание"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "shirt_black"
+
+/obj/item/clothing/under/shirt_white
+	name = "white shirt"
+	desc = "не придумал описание"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "shirt_white"

@@ -63,3 +63,14 @@
 	icon_state = "seccaftan"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+/obj/item/clothing/suit/armor/vest/chestplate
+	name = "chestplate armor"
+	desc = "не придумал описание"
+	icon_state = "ntci_chesplate_armor"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	armor_type = /datum/armor/vest_marine
+	clothing_flags = THICKMATERIAL
+	body_parts_covered = CHEST|GROIN
+	resistance_flags = FIRE_PROOF | ACID_PROOF

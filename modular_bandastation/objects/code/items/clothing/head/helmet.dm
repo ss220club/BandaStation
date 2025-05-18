@@ -36,3 +36,18 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "hardsuit0-sec"
+
+/obj/item/clothing/head/helmet/ntci_helmet
+	name = "tactical helmet"
+    desc = "не придумал описание"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+    worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "ntci_helmet"
+	armor_type = /datum/armor/pmc
+	clothing_flags = STACKABLE_HELMET_EXEMPT
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	dog_fashion = null
+	sound_vary = TRUE
+	equip_sound = 'sound/items/handling/helmet/helmet_equip1.ogg'
+	pickup_sound = 'sound/items/handling/helmet/helmet_pickup1.ogg'
+	drop_sound = 'sound/items/handling/helmet/helmet_drop1.ogg'
