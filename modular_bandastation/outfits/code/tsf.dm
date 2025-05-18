@@ -50,7 +50,6 @@
 	gloves = /obj/item/clothing/gloves/combat
 	head = /obj/item/clothing/head/beret/tsf_commander
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	mask = /obj/item/cigarette/pipe
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
 	r_pocket = /obj/item/lighter
@@ -274,7 +273,7 @@
 	suit = /obj/item/clothing/suit/armor/riot
 	suit_store = /obj/item/gun/ballistic/shotgun/riot_one_hand
 	head = /obj/item/clothing/head/helmet/toggleable/riot
-	mask = /obj/item/clothing/mask/gas/sechailer
+	mask = /obj/item/clothing/mask/gas/sechailer/swat
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	belt = /obj/item/storage/belt/security/full
 	back = /obj/item/storage/backpack/tsf
@@ -282,13 +281,15 @@
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/medkit/emergency,
 		/obj/item/storage/box/teargas,
-		/obj/item/storage/box/zipties,
 		/obj/item/grenade/flashbang = 2,
-		/obj/item/gun/energy/disabler,
 		/obj/item/megaphone/sec,
+		/obj/item/storage/box/rubbershot
+		/obj/item/storage/box/rubbershot
 		/obj/item/storage/box/rubbershot
 	)
 	r_hand = /obj/item/shield/riot/flash
+	l_pocket = /obj/item/restraints/handcuffs
+	r_pocket = /obj/item/restraints/handcuffs
 
 /obj/item/gun/ballistic/shotgun/riot_one_hand
 	name = "one-hand riot shotgun"
