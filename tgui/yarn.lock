@@ -3918,13 +3918,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/marked@npm:4.3.2":
-  version: 4.3.2
-  resolution: "@types/marked@npm:4.3.2"
-  checksum: 10c0/6f44d28da5c940a719d6c6aca41e33f49c5fe957f7972939cc1cbb47d045951f4d969f382d655345d0463e47db1994635d2862018716fcef2fa85ceeceb116e7
-  languageName: node
-  linkType: hard
-
 "@types/mime@npm:^1":
   version: 1.3.5
   resolution: "@types/mime@npm:1.3.5"
@@ -13854,7 +13847,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^15.0.7":
+"marked@npm:^15.0.11":
   version: 15.0.11
   resolution: "marked@npm:15.0.11"
   bin:
@@ -19935,7 +19928,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tgui@workspace:packages/tgui"
   dependencies:
-    "@types/marked": "npm:4.3.2"
     "@types/react": "npm:^19.1.0"
     "@types/react-dom": "npm:^19.1.2"
     "@uidotdev/usehooks": "npm:^2.4.1"
@@ -19946,7 +19938,7 @@ __metadata:
     highlight.js: "npm:^11.11.1"
     jest: "npm:^29.7.0"
     js-yaml: "npm:^4.1.0"
-    marked: "npm:^15.0.7"
+    marked: "npm:^15.0.11"
     marked-base-url: "npm:^1.1.6"
     marked-smartypants: "npm:^1.1.9"
     react: "npm:^19.1.0"
