@@ -26,8 +26,10 @@
 /datum/id_trim/tsf
 	access = list(ACCESS_CENT_GENERAL)
 	assignment = "TSF"
-	trim_state = "trim_royalguard"
-	sechud_icon_state = SECHUD_EMERGENCY_RESPONSE_TEAM_COMMANDER
+	trim_icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
+	trim_state = "trim_explorer"
+	trim_state = "trim_tsf"
+	sechud_icon_state = SECHUD_TSF
 	department_color = COLOR_TEAL
 	subdepartment_color = COLOR_TEAL
 	big_pointer = TRUE
@@ -56,7 +58,7 @@
 
 /datum/id_trim/tsf/commander
 	assignment = "TSF - Commander Officer"
-	trim_state = "trim_royaladvisor"
+	trim_state = "trim_tsf_command"
 
 /datum/id_trim/tsf/commander/New()
 	. = ..()
@@ -100,7 +102,7 @@
 
 /datum/id_trim/tsf/marine
 	assignment = "TSF - Marine"
-	sechud_icon_state = SECHUD_SECURITY_RESPONSE_OFFICER
+	sechud_icon_state = SECHUD_TSF
 	big_pointer = FALSE
 
 /datum/id_trim/tsf/marine/New()
@@ -128,8 +130,8 @@
 
 /datum/id_trim/tsf/marine/officer
 	assignment = "TSF - Marine Officer"
-	trim_state = "trim_ert_commander"
-	sechud_icon_state = SECHUD_EMERGENCY_RESPONSE_TEAM_COMMANDER
+	trim_state = "trim_tsf_officer"
+	sechud_icon_state = SECHUD_TSF
 
 /obj/item/storage/belt/military/army/tsf
 	name = "army belt"
@@ -187,7 +189,7 @@
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	uniform = /obj/item/clothing/under/rank/tsf/marine_officer
 	mask = /obj/item/clothing/mask/gas/sechailer
-	accessory = /obj/item/binoculars
+	neck = /obj/item/binoculars
 	head = /obj/item/clothing/head/helmet/marine
 
 //Rifleman
@@ -238,8 +240,8 @@
 
 /datum/id_trim/tsf/marine/corpsman
 	assignment = "TSF - Marine Corpsman"
-	trim_state = "trim_medicaldoctor"
-	sechud_icon_state = SECHUD_MEDICAL_RESPONSE_OFFICER
+	trim_state = "trim_tsf"
+	sechud_icon_state = SECHUD_TSF
 	big_pointer = FALSE
 
 //Engineer
@@ -260,8 +262,8 @@
 
 /datum/id_trim/tsf/marine/engineer
 	assignment = "TSF - Marine Weapon Specialist"
-	trim_state = "trim_stationengineer"
-	sechud_icon_state = SECHUD_ENGINEERING_RESPONSE_OFFICER
+	trim_state = "trim_tsf"
+	sechud_icon_state = SECHUD_TSF
 	big_pointer = FALSE
 
 //Riot
@@ -298,8 +300,8 @@
 
 /datum/id_trim/tsf/marine/riot
 	assignment = "TSF - Riot Specialist"
-	trim_state = "trim_warden"
-	sechud_icon_state = SECHUD_SECURITY_RESPONSE_OFFICER
+	trim_state = "trim_tsf"
+	sechud_icon_state = SECHUD_TSF
 	big_pointer = FALSE
 
 // TSF MARSOC - будут допилены иконки модов, оружие будет как зальют стволы Ингакема
@@ -321,8 +323,8 @@
 
 /datum/id_trim/tsf/marsoc
 	assignment = "TSF - MARSOC"
-	trim_state = "trim_veteranadventurer"
-	sechud_icon_state = SECHUD_DEATH_COMMANDO
+	trim_state = "trim_tsf"
+	sechud_icon_state = SECHUD_TSF
 
 /datum/id_trim/tsf/marsoc/New()
 	. = ..()
@@ -346,7 +348,7 @@
 
 /datum/id_trim/tsf/marsoc/officer
 	assignment = "TSF - MARSOC Officer"
-	trim_state = "trim_deathcommando"
+	trim_state = "trim_tsf_officer"
 
 // TSF MARSOC (MOD)
 /datum/outfit/tsf/marsoc
@@ -394,6 +396,7 @@
 	gloves = /obj/item/clothing/gloves/combat
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/jackboots
+	neck = /obj/item/binoculars
 
 // TSF infiltrator
 /datum/outfit/tsf/infiltrator
@@ -419,7 +422,7 @@
 	glasses = /obj/item/clothing/glasses/meson/night
 	mask = /obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	accessory = /obj/item/binoculars
+	neck = /obj/item/binoculars
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
 
 /obj/item/storage/belt/military/army/tsf_infiltrator
@@ -448,8 +451,8 @@
 
 /datum/id_trim/tsf/infiltrator
 	assignment = "TSF - Infiltrator"
-	trim_state = "trim_veteranadvisor"
-	sechud_icon_state = SECHUD_SECURITY_RESPONSE_OFFICER
+	trim_state = "trim_tsf_officer"
+	sechud_icon_state = SECHUD_TSF
 	big_pointer = FALSE
 
 /datum/id_trim/tsf/infiltrator/New()
