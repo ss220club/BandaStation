@@ -642,6 +642,7 @@
 "sv" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/light/floor,
+/mob/living/basic/bot/medbot/nukie,
 /turf/open/floor/iron/white,
 /area/shuttle/syndicate/medical)
 "tG" = (
