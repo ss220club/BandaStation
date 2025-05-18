@@ -283,9 +283,9 @@
 		/obj/item/storage/box/teargas,
 		/obj/item/grenade/flashbang = 2,
 		/obj/item/megaphone/sec,
-		/obj/item/storage/box/rubbershot
-		/obj/item/storage/box/rubbershot
-		/obj/item/storage/box/rubbershot
+		/obj/item/storage/box/rubbershot,
+		/obj/item/storage/box/rubbershot,
+		/obj/item/storage/box/rubbershot,
 	)
 	r_hand = /obj/item/shield/riot/flash
 	l_pocket = /obj/item/restraints/handcuffs

@@ -38,7 +38,8 @@
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_righthand.dmi'
 	icon_state = "backpack_tsf"
 	inhand_icon_state = "backpack_tsf"
+	storage_type = /datum/storage/backpack/tsf
 
-/obj/item/storage/backpack/tsf
+/datum/storage/backpack/tsf
 	max_total_storage = 26
 	max_slots = 26
