@@ -360,6 +360,7 @@
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/clothing/head/beret/tsf_marsoc,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
 		/obj/item/ammo_box/magazine/m223 = 4,
@@ -386,7 +387,8 @@
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
 		/obj/item/ammo_box/magazine/m223 = 4,
-		/obj/item/shield/riot/tele
+		/obj/item/shield/riot/tele,
+		/obj/item/clothing/under/rank/tsf/marsoc_officer
 	)
 	suit_store = /obj/item/gun/ballistic/automatic/ar
 	belt = /obj/item/storage/belt/military/army/tsf/full
