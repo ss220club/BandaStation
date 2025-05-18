@@ -39,9 +39,9 @@
 
 /obj/item/clothing/head/helmet/ntci_helmet
 	name = "tactical helmet"
-    desc = "не придумал описание"
+	desc = "не придумал описание"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
-    worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "ntci_helmet"
 	armor_type = /datum/armor/pmc
 	clothing_flags = STACKABLE_HELMET_EXEMPT
