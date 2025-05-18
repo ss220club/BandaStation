@@ -9,6 +9,7 @@
 		/obj/item/mod/module/magnetic_harness,
 		/obj/item/mod/module/jetpack,
 		/obj/item/mod/module/quick_cuff,
+		/obj/item/mod/module/flashlight,
 	)
 	default_pins = list(
 		/obj/item/mod/module/jetpack,
@@ -27,6 +28,7 @@
 		/obj/item/mod/module/magnetic_harness,
 		/obj/item/mod/module/jetpack,
 		/obj/item/mod/module/quick_cuff,
+		/obj/item/mod/module/flashlight,
 	)
 	default_pins = list(
 		/obj/item/mod/module/jetpack,
