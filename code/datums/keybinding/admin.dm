@@ -3,7 +3,7 @@
 	weight = WEIGHT_ADMIN
 
 /datum/keybinding/admin/can_use(client/user)
-	return user.holder ? TRUE : FALSE
+	return user.holder?.rank_flags() & R_ADMIN /// Bandastation edit: admins only admin chat
 
 /datum/keybinding/admin/admin_say
 	hotkey_keys = list("F3")
