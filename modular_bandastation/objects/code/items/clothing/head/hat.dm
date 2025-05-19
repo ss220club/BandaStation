@@ -178,3 +178,22 @@
 	greyscale_colors = "#43523d#a2abb0"
 	dog_fashion = null
 	flags_1 = NONE
+
+// USSP
+/obj/item/clothing/head/hats/ussp
+	name = "USSP pilotka"
+	desc = "Пилотка бойцов КА СССП."
+	icon_state = "ussp_pilotka"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+
+/obj/item/clothing/head/hats/ussp/officer
+	name = "USSP officer's hat"
+	desc = "Фуражка офицера КА СССП."
+	icon_state = "ussp_hat_officer"
+
+/obj/item/clothing/head/hats/ussp/command
+	name = "USSP komandir's hat"
+	desc = "Фуражка высшего командного состава КА СССП."
+	icon_state = "ussp_hat_komandir"
+

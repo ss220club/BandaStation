@@ -72,3 +72,18 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "tsf_command"
 	inhand_icon_state = null
+
+// USSP
+/obj/item/clothing/suit/armor/vest/ussp
+	name = "USSP overcoat"
+	desc = "Стандартная шинель производства Союза."
+	icon_state = "ussp_overcoat"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+/obj/item/clothing/suit/armor/vest/ussp/officer
+	name = "USSP officer overcoat"
+	desc = "Офицерская шинель производства Союза."
+	icon_state = "ussp_overcoat_officer"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
