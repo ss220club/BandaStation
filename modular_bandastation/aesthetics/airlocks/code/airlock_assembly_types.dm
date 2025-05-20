@@ -187,12 +187,17 @@
 /obj/structure/door_assembly/multi_tile
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/large.dmi'
 	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	airlock_type = /obj/machinery/door/airlock/multi_tile/public
 	opacity = TRUE
 	glass = FALSE
 
+/obj/structure/door_assembly/multi_tile/Initialize(mapload)
+	. = ..()
+	update_appearance()
+
 /obj/structure/door_assembly/multi_tile/door_assembly_public
-	name = "large public airlock assembly"
-	base_name = "large airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/public
+	glass_type = /obj/machinery/door/airlock/multi_tile/public/glass
 
 /obj/structure/door_assembly/multi_tile/command
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/command_large.dmi'
