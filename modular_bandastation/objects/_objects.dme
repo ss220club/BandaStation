@@ -55,6 +55,8 @@
 #include "code/items/clothing/under/carnival.dm"
 #include "code/items/clothing/under/jobs/blueshield.dm"
 #include "code/items/clothing/under/jobs/centcom.dm"
+#include "code/items/clothing/under/jobs/tsf.dm"
+#include "code/items/clothing/under/jobs/ussp.dm"
 #include "code/items/clothing/under/jobs/magistrate.dm"
 #include "code/items/clothing/under/jobs/nanotrasen_representative.dm"
 #include "code/items/clothing/under/jobs/research.dm"
@@ -93,6 +95,8 @@
 #include "code/items/weapons/ranged/ballistic/magazines.dm"
 #include "code/items/weapons/ranged/ballistic/projectiles.dm"
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
+#include "code/items/clothing/mod/types/tsf/mod_theme.dm"
+#include "code/items/clothing/mod/types/tsf/mod_types.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
