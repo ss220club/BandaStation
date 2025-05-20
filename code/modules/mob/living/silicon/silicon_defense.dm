@@ -6,23 +6,25 @@
 	return 2
 
 /mob/living/silicon/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
-	if(..()) //if harm or disarm intent
-		var/damage = rand(user.melee_damage_lower, user.melee_damage_upper)
-		if (prob(90))
-			log_combat(user, src, "attacked")
-			playsound(loc, 'sound/items/weapons/slash.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] режет [declent_ru(ACCUSATIVE)]!"), \
-							span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] режет вас!"), null, null, user)
-			to_chat(user, span_danger("Вы режете [declent_ru(ACCUSATIVE)]!"))
-			if(prob(8))
-				flash_act(affect_silicon = 1)
-			log_combat(user, src, "attacked")
-			adjustBruteLoss(damage)
-		else
-			playsound(loc, 'sound/items/weapons/slashmiss.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] промахивается режущим ударом по [declent_ru(DATIVE)]!"), \
-							span_danger("Вы избегаете режущий удар от [declent_ru(GENITIVE)]"), null, null, user)
-			to_chat(user, span_warning("Вы промахиваетесь режущим ударом по [declent_ru(DATIVE)]!"))
+	. = ..()
+	if(!.) //if harm or disarm intent
+		return
+	var/damage = rand(user.melee_damage_lower, user.melee_damage_upper)
+	if (prob(90))
+		playsound(loc, 'sound/items/weapons/slash.ogg', 25, TRUE, -1)
+		visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] режет [declent_ru(ACCUSATIVE)]!"), \
+						span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] режет вас!"), null, null, user)
+		to_chat(user, span_danger("Вы режете [declent_ru(ACCUSATIVE)]!"))
+		if(prob(8))
+			flash_act(affect_silicon = 1)
+		adjustBruteLoss(damage)
+		log_combat(user, src, "attacked")
+	else
+		playsound(loc, 'sound/items/weapons/slashmiss.ogg', 25, TRUE, -1)
+		visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] промахивается режущим ударом по [declent_ru(DATIVE)]!"),
+						span_danger("Вы избегаете режущий удар от [declent_ru(GENITIVE)]"), null, null, user)
+		to_chat(user, span_warning("Вы промахиваетесь режущим ударом по [declent_ru(DATIVE)]!"))
+		log_combat(user, src, "attacked and missed")
 
 /mob/living/silicon/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	. = ..()
