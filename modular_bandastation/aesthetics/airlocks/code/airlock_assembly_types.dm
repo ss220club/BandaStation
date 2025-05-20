@@ -185,5 +185,5 @@
 
 // Multi-tile airlocks
 /obj/structure/door_assembly/multi_tile
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/glass_large.dmi'
-	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/overlays.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
