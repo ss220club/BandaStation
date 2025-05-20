@@ -8055,7 +8055,7 @@
 	pixel_x = -13;
 	pixel_y = 10
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_x = -6;
 	pixel_y = 6
 	},
@@ -16451,7 +16451,7 @@
 "dTC" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_y = 6
 	},
 /turf/open/floor/light{
@@ -18779,7 +18779,7 @@
 /area/station/command/gateway)
 "eAp" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_y = 6
 	},
 /obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
@@ -45935,7 +45935,7 @@
 	pixel_x = 3;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_x = 15;
 	pixel_y = 4
 	},
@@ -55842,11 +55842,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
-"nwo" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/station/maintenance/solars/starboard/fore)
 "nwu" = (
 /obj/machinery/portable_atmospherics/pump,
 /obj/effect/turf_decal/stripes/line{
@@ -90435,7 +90430,7 @@
 	pixel_x = 9;
 	pixel_y = 3
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_y = 2;
 	pixel_x = -7
 	},
@@ -91550,7 +91545,7 @@
 	pixel_x = 13;
 	pixel_y = 7
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_y = 12;
 	pixel_x = 29
 	},
@@ -97795,7 +97790,7 @@
 /obj/effect/turf_decal/trimline/dark/warning{
 	dir = 1
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_x = 6;
 	pixel_y = 12
 	},
@@ -208034,7 +208029,7 @@ sJu
 kJd
 kJd
 xeX
-nwo
+xeX
 xeX
 xCx
 mzJ

@@ -23,7 +23,7 @@
 /area/shuttle/argos)
 "cP" = (
 /obj/structure/table/reinforced/rglass,
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_x = 3;
 	pixel_y = 16
 	},

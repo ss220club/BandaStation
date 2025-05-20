@@ -23,7 +23,8 @@
 	text_lose_indication = span_notice("Странное ощущение проходит.")
 
 /datum/mutation/human/wacky/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
@@ -46,7 +47,8 @@
 	locked = TRUE
 
 /datum/mutation/human/heckacious/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_LIVING_TREAT_MESSAGE, PROC_REF(handle_caps))
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
@@ -140,7 +142,8 @@
 	text_lose_indication = span_danger("Ты чувствуешь, что снова можешь говорить.")
 
 /datum/mutation/human/mute/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	ADD_TRAIT(owner, TRAIT_MUTE, GENETIC_MUTATION)
 
@@ -158,7 +161,8 @@
 	text_lose_indication = span_danger("Твой ум, кажется более ясным.")
 
 /datum/mutation/human/unintelligible/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	ADD_TRAIT(owner, TRAIT_UNINTELLIGIBLE_SPEECH, GENETIC_MUTATION)
 
@@ -227,7 +231,9 @@
 	text_lose_indication = span_notice("Ты чувствуешь, что твоё восприятие времени стало лучше.")
 
 /datum/mutation/human/stoner/on_acquiring(mob/living/carbon/human/owner)
-	..()
+	. = ..()
+	if(!.)
+		return
 	owner.grant_language(/datum/language/beachbum, source = LANGUAGE_STONER)
 	owner.add_blocked_language(subtypesof(/datum/language) - /datum/language/beachbum, LANGUAGE_STONER)
 
@@ -245,7 +251,8 @@
 	text_lose_indication = span_notice("Ты больше не стремишься к чему-либо.")
 
 /datum/mutation/human/medieval/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
@@ -286,7 +293,8 @@
 	text_lose_indication = span_notice("Кажется, это прошло.")
 
 /datum/mutation/human/piglatin/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
