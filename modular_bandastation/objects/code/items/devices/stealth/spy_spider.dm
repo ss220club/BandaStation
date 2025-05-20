@@ -30,6 +30,10 @@
 	canhear_range = 3
 	radio_noise = FALSE
 	interaction_flags_atom = parent_type::interaction_flags_atom | INTERACT_ATOM_ALLOW_USER_LOCATION
+	overlay_speaker_idle = null
+	overlay_speaker_active = null
+	overlay_mic_idle = null
+	overlay_mic_active = null
 
 /obj/item/radio/spider_transmitter/Initialize(mapload)
 	. = ..()

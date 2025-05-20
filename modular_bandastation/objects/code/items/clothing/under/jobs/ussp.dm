@@ -8,7 +8,7 @@
 /obj/item/clothing/under/rank/ussp/commander
 	name = "USSP komandir suit"
 	desc = "Униформа высшего командного состава СССП."
-	icon_state = "ussp_komandir"
+	icon_state = "ussp_commander"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/ussp/soldier
