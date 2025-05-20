@@ -221,9 +221,9 @@
 
 // Multi-tile airlocks
 /obj/machinery/door/airlock/multi_tile
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/glass_large.dmi'
-	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/overlays.dmi'
-	note_overlay_file = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/overlays.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	note_overlay_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
 
 /obj/machinery/door/airlock/multi_tile/public/glass
 	opacity = FALSE
