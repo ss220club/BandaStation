@@ -187,8 +187,6 @@
 /obj/structure/door_assembly/multi_tile
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/large.dmi'
 	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
-	airlock_type = /obj/machinery/door/airlock/multi_tile/public
-	glass_type = /obj/machinery/door/airlock/multi_tile/public/glass
 	opacity = TRUE
 	glass = FALSE
 
