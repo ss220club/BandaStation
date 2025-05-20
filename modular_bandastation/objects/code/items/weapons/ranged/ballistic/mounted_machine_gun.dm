@@ -27,3 +27,5 @@
 	overheatsound = 'sound/effects/wounds/sizzle2.ogg'
 	can_be_undeployed = TRUE
 	spawned_on_undeploy = /obj/item/mounted_machine_gun_folded
+	SET_BASE_PIXEL(-8, -8)
+
