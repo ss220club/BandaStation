@@ -217,10 +217,11 @@
 	leaves_fire_trail = FALSE
 
 /obj/projectile/bullet/p50/mmg
-	name =".50 BMG mmg bullet"
+	name =".50 BMG caseless bullet"
 	damage = 40
 	armour_penetration = 0
 	paralyze = 0
 	dismemberment = 0
 	catastropic_dismemberment = FALSE
 	icon_state = "gaussstrong"
+

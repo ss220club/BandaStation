@@ -28,4 +28,11 @@
 	can_be_undeployed = TRUE
 	spawned_on_undeploy = /obj/item/mounted_machine_gun_folded
 	SET_BASE_PIXEL(-8, -8)
+	always_anchored = TRUE
 
+/obj/machinery/deployable_turret/mounted_machine_gun/checkfire(atom/targeted_atom, mob/user)
+	target = targeted_atom
+	if(target == user || target == get_turf(src))
+		return
+	target_turf = get_turf(target)
+	fire_helper(user)

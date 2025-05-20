@@ -134,8 +134,3 @@
 	icon_state = "40sol_flame"
 
 	projectile_type = /obj/projectile/bullet/incendiary/c40sol
-
-/obj/item/ammo_casing/p50/penetrator/shuttle
-	name = ".50 BMG aggression dissuasion round bullet casing"
-	desc = "A .50 BMG aggression dissuasion round casing."
-	projectile_type = /obj/projectile/bullet/p50/penetrator/shuttle

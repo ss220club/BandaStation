@@ -304,13 +304,3 @@
     desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 зажигательных патронов."
     ammo_type = /obj/item/ammo_casing/c40sol/incendiary
     MAGAZINE_TYPE_INCENDIARY
-
-/obj/item/ammo_box/magazine/mmg_box
-	name = ".50 BMG ammo box"
-	desc = "Большая коробка, полная ленточных крупнокалиберных боеприпасов."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "ammobox50cal"
-	multiple_sprites = AMMO_BOX_FULL_EMPTY
-	max_ammo = 150
-	ammo_type = /obj/item/ammo_casing/p50/penetrator/shuttle
-	caliber = CALIBER_50BMG
