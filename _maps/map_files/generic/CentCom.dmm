@@ -2899,7 +2899,7 @@
 /area/centcom/central_command_areas/planetary_port/library)
 "ans" = (
 /obj/structure/table/reinforced/rglass,
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_x = 5;
 	pixel_y = 8
 	},
@@ -14606,7 +14606,7 @@
 	pixel_x = 6;
 	pixel_y = 9
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_x = 4;
 	pixel_y = 2
 	},

@@ -18,3 +18,13 @@
 /datum/quirk/quadruple_amputee/post_add()
 	to_chat(quirk_holder, span_bolddanger("Все ваши конечности были заменены на дешевые протезы. Они хрупкие и легко разлетаются на части под давлением. \
 	Кроме того, для их устранения необходимо использовать сварочный инструмент и кабели, а не бинты и мази."))
+
+/datum/quirk/quadruple_amputee/remove()
+	if(QDELING(quirk_holder))
+		return
+
+	var/mob/living/carbon/human/human_holder = quirk_holder
+	human_holder.reset_to_original_bodypart(BODY_ZONE_L_ARM)
+	human_holder.reset_to_original_bodypart(BODY_ZONE_R_ARM)
+	human_holder.reset_to_original_bodypart(BODY_ZONE_L_LEG)
+	human_holder.reset_to_original_bodypart(BODY_ZONE_R_LEG)
