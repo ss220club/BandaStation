@@ -124,3 +124,5 @@
 
 /obj/item/storage/belt/centcom_katana/PopulateContents()
 	new /obj/item/melee/sabre/centcom_katana(src)
+
+chek
