@@ -24,6 +24,11 @@
 /obj/item/food/cannedfood/attack_self(mob/user)
     if(!is_drainable())
         open_can(user)
+        update_icon_state()
+    return ..()
+
+/obj/item/food/cannedfood/update_icon_state()
+    if(preserved_food == FALSE)
         icon_state = "[icon_state]_open"
     return ..()
 
@@ -109,4 +114,3 @@
     )
     tastes = list("tuna" = 4, "tin" = 1)
     foodtypes = SEAFOOD
-
