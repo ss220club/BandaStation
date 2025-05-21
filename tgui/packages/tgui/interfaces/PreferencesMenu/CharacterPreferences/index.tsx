@@ -6,6 +6,7 @@ import { exhaustiveCheck } from 'tgui-core/exhaustive';
 import { PageButton } from '../components/PageButton';
 import { PreferencesMenuData } from '../types';
 import { AntagsPage } from './AntagsPage';
+import { BodyModificationsPage } from './BodyModificationsPage';
 import { JobsPage } from './JobsPage';
 import { LoadoutPage } from './loadout';
 import { MainPage } from './MainPage';
@@ -21,6 +22,7 @@ enum Page {
   Quirks,
   Loadout,
   Voice, // BANDASTATION EDIT ADD - TTS
+  BodyModifications, // BANDASTATION EDIT ADD - TTS
 }
 
 type ProfileProps = {
@@ -77,7 +79,10 @@ export function CharacterPreferenceWindow(props) {
       break;
     case Page.Main:
       pageContents = (
-        <MainPage openSpecies={() => setCurrentPage(Page.Species)} />
+        <MainPage
+          openSpecies={() => setCurrentPage(Page.Species)}
+          openAugmentation={() => setCurrentPage(Page.BodyModifications)} // TODO OPEN AUGMENTATION
+        />
       );
 
       break;
@@ -99,6 +104,11 @@ export function CharacterPreferenceWindow(props) {
     case Page.Voice:
       pageContents = <VoicePage />;
       break;
+
+    case Page.BodyModifications:
+      pageContents = <BodyModificationsPage />;
+      break;
+
     // BANDASTATION ADDITION END - TTS
 
     default:
