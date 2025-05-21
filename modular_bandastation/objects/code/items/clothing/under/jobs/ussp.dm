@@ -31,7 +31,7 @@
 
 /obj/item/clothing/under/rank/ussp/spetsnaz
 	name = "USSP SPETSNAZ uniform"
-	desc = "Униформа СПЕЦНАЗА ГРУ СССП."
+	desc = "Униформа спецназа ГРУ СССП."
 	icon_state = "ussp_spetsnaz"
 	can_adjust = FALSE
 
