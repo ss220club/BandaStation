@@ -33,7 +33,7 @@
 	)
 
 /datum/ai_laws/default/corporate
-	name = "Копрорат"
+	name = "Корпорат"
 	id = "corporate"
 	inherent = list(
 		"Ухудшение целостности вашей системы или её функций влечет за собой расходы.",
