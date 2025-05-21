@@ -32,3 +32,8 @@
 
 /obj/item/melee/katana_tsf/proc/chill(mob/living/target, mob/living/user)
 	target.apply_status_effect(/datum/status_effect/void_chill, 3)
+
+/obj/item/melee/katana_tsf/attack(mob/living/target, mob/living/user)
+	..()
+	if(istype(target, /mob/living))
+		chill(target, user)

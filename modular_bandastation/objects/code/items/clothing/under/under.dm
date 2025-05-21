@@ -221,6 +221,8 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
 	icon_state = "tshirt_black"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
+	can_adjust = FALSE
 
 /obj/item/clothing/under/hoodie_black
 	name = "black hoodie"
@@ -228,6 +230,8 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
 	icon_state = "hoodie_black"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
+	can_adjust = FALSE
 
 /obj/item/clothing/under/shirt_black
 	name = "black shirt"
@@ -235,6 +239,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
 	icon_state = "shirt_black"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
 
 /obj/item/clothing/under/shirt_white
 	name = "white shirt"
@@ -242,3 +247,4 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
 	icon_state = "shirt_white"
+	armor_type = /datum/armor/clothing_under/security_head_of_security

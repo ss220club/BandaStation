@@ -1,4 +1,4 @@
-/obj/item/clothing/suit/armor/vest/chestplate
+/obj/item/clothing/suit/armor/vest/ntci_chestplate
 	name = "chestplate armor"
 	desc = "не придумал описание"
 	icon_state = "ntci_chestplate_armor"
