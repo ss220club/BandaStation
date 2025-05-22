@@ -16,12 +16,16 @@
     righthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_righthand.dmi'
     worn_icon = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
     worn_icon_state = "katana_tsf"
+    light_system = OVERLAY_LIGHT
+    light_range = 2
+    light_color = LIGHT_COLOR_LIGHT_CYAN
     slot_flags = ITEM_SLOT_BELT
     force = 25
     armour_penetration = 70
     block_chance = 60
     throwforce = 30
     w_class = WEIGHT_CLASS_NORMAL
+    resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
     hitsound = 'modular_bandastation/objects/sound/weapons/tsf_katana_hit.ogg'
     pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg'
     drop_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_sheath.ogg'
@@ -34,6 +38,7 @@
 	target.apply_status_effect(/datum/status_effect/void_chill, 3)
 
 /obj/item/melee/katana_tsf/attack(mob/living/target, mob/living/user)
-	..()
-	if(istype(target, /mob/living))
-		chill(target, user)
+    ..()
+    if (istype(target, /mob/living))
+        if (prob(50))
+            chill(target, user)
