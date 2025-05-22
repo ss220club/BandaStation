@@ -39,7 +39,7 @@
 
 /obj/item/clothing/head/helmet/ntci_helmet
 	name = "tactical helmet"
-	desc = "не придумал описание"
+	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "ntci_helmet"
