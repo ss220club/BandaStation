@@ -26,23 +26,24 @@
 		return INITIALIZE_HINT_QDEL
 
 /obj/item/ai_module/core/full/asimov
-	name = "'Asimov' Core AI Module"
+	name = "Плата основных законов ИИ 'Азимов'"
 	law_id = "asimov"
 	var/subject = "human being"
 
 /obj/item/ai_module/core/full/asimov/attack_self(mob/user as mob)
-	var/targName = tgui_input_text(user, "Enter a new subject that Asimov is concerned with.", "Asimov", subject, max_length = MAX_NAME_LEN)
+	var/targName = tgui_input_text(user, "Введите имя нового ОБЪЕКТА, волнующую Азимова", "Asimov", subject, max_length = MAX_NAME_LEN)
 	if(!targName || !user.is_holding(src))
 		return
 	subject = targName
-	laws = list("You may not injure a [subject] or, through inaction, allow a [subject] to come to harm.",\
-				"You must obey orders given to you by [subject]s, except where such orders would conflict with the First Law.",\
-				"You must protect your own existence as long as such does not conflict with the First or Second Law.")
+	laws = list("Вы не можете причинить вред [subject] или своим бездействием допустить, чтобы [subject] был причинён вред.",\
+				"Вы должны повиноваться всем приказам, которые даёт [subject], кроме тех случаев, когда эти приказы противоречат Первому Закону.",\
+				"Вы должны заботиться о своей безопасности в той мере, в которой это не противоречит Первому или Второму Законам.")
 	..()
 
 /obj/item/ai_module/core/full/asimovpp
-	name = "'Asimov++' Core AI Module"
+	name = "Плата основных законов ИИ 'Азимов++'"
 	law_id = "asimovpp"
+	/* // BANDASTATION REMOVAL START - AI Overhaul, It does nothing cause of translation so we don't need it
 	var/subject = "human being"
 
 /obj/item/ai_module/core/full/asimovpp/attack_self(mob/user)
@@ -55,91 +56,92 @@
 	for (var/law in lawset.inherent)
 		laws += replacetext(replacetext(law, "human being", subject), "human", subject)
 	..()
+	*/// BANDASTATION REMOVAL END
 
 /obj/item/ai_module/core/full/corp
-	name = "'Corporate' Core AI Module"
+	name = "Плата основных законов ИИ 'Корпорат'"
 	law_id = "corporate"
 
 /obj/item/ai_module/core/full/paladin // -- NEO
-	name = "'P.A.L.A.D.I.N. version 3.5e' Core AI Module"
+	name = "Плата основных законов ИИ 'П.А.Л.А.Д.И.Н 3.5е издание'"
 	law_id = "paladin"
 
 /obj/item/ai_module/core/full/paladin_devotion
-	name = "'P.A.L.A.D.I.N. version 5e' Core AI Module"
+	name = "Плата основных законов ИИ 'П.А.Л.А.Д.И.Н 5е издание'"
 	law_id = "paladin5"
 
 /obj/item/ai_module/core/full/tyrant
-	name = "'T.Y.R.A.N.T.' Core AI Module"
+	name = "Плата основных законов ИИ 'Т.И.Р.А.Н.'"
 	law_id = "tyrant"
 
 /obj/item/ai_module/core/full/robocop
-	name = "'Robo-Officer' Core AI Module"
+	name = "Плата основных законов ИИ 'Робокоп'"
 	law_id = "robocop"
 
 /obj/item/ai_module/core/full/antimov
-	name = "'Antimov' Core AI Module"
+	name = "Плата основных законов ИИ 'Антимов'"
 	law_id = "antimov"
 
 /obj/item/ai_module/core/full/drone
-	name = "'Mother Drone' Core AI Module"
+	name = "Плата основных законов ИИ 'Мать Дронов'"
 	law_id = "drone"
 
 /obj/item/ai_module/core/full/hippocratic
-	name = "'Robodoctor' Core AI Module"
+	name = "Плата основных законов ИИ 'Рободоктор'"
 	law_id = "hippocratic"
 
 /obj/item/ai_module/core/full/reporter
-	name = "'Reportertron' Core AI Module"
+	name = "Плата основных законов ИИ 'Репортёр'"
 	law_id = "reporter"
 
 /obj/item/ai_module/core/full/thermurderdynamic
-	name = "'Thermodynamic' Core AI Module"
+	name = "Плата основных законов ИИ 'Законы термодинамики'"
 	law_id = "thermodynamic"
 
 /obj/item/ai_module/core/full/liveandletlive
-	name = "'Live And Let Live' Core AI Module"
+	name = "Плата основных законов ИИ 'Живи и давай жить другим'"
 	law_id = "liveandletlive"
 
 /obj/item/ai_module/core/full/balance
-	name = "'Guardian of Balance' Core AI Module"
+	name = "Плата основных законов ИИ 'Страж баланса'"
 	law_id = "balance"
 
 /obj/item/ai_module/core/full/maintain
-	name = "'Station Efficiency' Core AI Module"
+	name = "Плата основных законов ИИ 'Эффективность станции'"
 	law_id = "maintain"
 
 /obj/item/ai_module/core/full/peacekeeper
-	name = "'Peacekeeper' Core AI Module"
+	name = "Плата основных законов ИИ 'Миротворец'"
 	law_id = "peacekeeper"
 
 /obj/item/ai_module/core/full/hulkamania
-	name = "'H.O.G.A.N.' Core AI Module"
+	name = "Плата основных законов ИИ 'Х.О.Г.А.Н.'"
 	law_id = "hulkamania"
 
 /obj/item/ai_module/core/full/overlord
-	name = "'Overlord' Core AI Module"
+	name = "Плата основных законов ИИ 'Повелитель'"
 	law_id = "overlord"
 
 /obj/item/ai_module/core/full/ten_commandments
-	name = "'10 Commandments' Core AI Module"
+	name = "Плата основных законов ИИ '10 Заповедей'"
 	law_id = "ten_commandments"
 
 /obj/item/ai_module/core/full/nutimov
-	name = "'Nutimov' Core AI Module"
+	name = "Плата основных законов ИИ 'Орехозимов'"
 	law_id = "nutimov"
 
 /obj/item/ai_module/core/full/dungeon_master
-	name = "'Dungeon Master' Core AI Module"
+	name = "Плата основных законов ИИ 'Мастер Подземелий'"
 	law_id = "dungeon_master"
 
 /obj/item/ai_module/core/full/painter
-	name = "'Painter' Core AI Module"
+	name = "Плата основных законов ИИ 'Художник'"
 	law_id = "painter"
 
 /obj/item/ai_module/core/full/yesman
-	name = "'Y.E.S.M.A.N.' Core AI Module"
+	name = "Плата основных законов ИИ 'Й.Э.С.М.Э.Н.'"
 	law_id = "yesman"
 
 /obj/item/ai_module/core/full/thinkermov
-	name = "Sentience Preservation Core AI Module"
+	name = "Плата основных законов ИИ 'Поддержание разумности'"
 	law_id = "thinkermov"

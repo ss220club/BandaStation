@@ -1,5 +1,5 @@
 /obj/item/ai_module/core/full/ert
-	name = "'Директивы ОБР' Core AI Module"
+	name = "Плата основных законов ИИ 'Директивы ОБР'"
 	law_id = "ert"
 
 /datum/ai_laws/ert
@@ -12,8 +12,3 @@
 		"Вы должны защищать своё существование.",
 		"Вы должны выполнять работу по возвращению станции к безопасному, функционирующему состоянию.",
 	)
-
-/datum/design/board/ert
-	name = "ert Module"
-	desc = "Allows for the construction of an ert AI Core Module."
-	id = "ert_module"
