@@ -191,6 +191,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	apply_all_client_preferences()
 
 	//general preferences
+	pref_job_slots = savefile.get_entry("pref_job_slots", pref_job_slots)
 	lastchangelog = savefile.get_entry("lastchangelog", lastchangelog)
 	be_special = savefile.get_entry("be_special", be_special)
 	default_slot = savefile.get_entry("default_slot", default_slot)
@@ -227,6 +228,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
 	//Sanitize
+	pref_job_slots = SANITIZE_LIST(pref_job_slots)
 	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
 	default_slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
 	toggles = sanitize_integer(toggles, 0, SHORT_REAL_LIMIT-1, initial(toggles))
@@ -272,6 +274,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if (preference_type in value_cache)
 			write_preference(preference, preference.serialize(value_cache[preference_type]))
 
+	savefile.set_entry("pref_job_slots", pref_job_slots)
 	savefile.set_entry("lastchangelog", lastchangelog)
 	savefile.set_entry("be_special", be_special)
 	savefile.set_entry("default_slot", default_slot)

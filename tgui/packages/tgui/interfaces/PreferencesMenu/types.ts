@@ -188,6 +188,8 @@ export type PreferencesMenuData = {
   donator_level: number;
   tts_seed: string;
   tts_enabled: BooleanLike;
+  profile_index: Record<string, string>;
+  pref_job_slots: Record<string, number>;
   // BANDASTATION ADDITION END
 };
 
