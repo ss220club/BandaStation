@@ -5,12 +5,3 @@
 	desc = "its useless"
 	/// A string with authors of this modpack.
 	author = "Mira"
-
-/datum/modpack/job_slots_preferences/pre_initialize()
-	. = ..()
-
-/datum/modpack/job_slots_preferences/initialize()
-	. = ..()
-
-/datum/modpack/job_slots_preferences/post_initialize()
-	. = ..()

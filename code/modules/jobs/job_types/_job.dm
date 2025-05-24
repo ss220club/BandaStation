@@ -504,7 +504,7 @@
 
 
 /// Spawns the mob to be played as, taking into account preferences and the desired spawn point.
-/datum/job/proc/get_spawn_mob(client/player_client, atom/spawn_point, late_join = FALSE)
+/datum/job/proc/get_spawn_mob(client/player_client, atom/spawn_point, late_join = FALSE)  // BANDASTATION EDIT
 	var/mob/living/spawn_instance
 	if(ispath(spawn_type, /mob/living/silicon/ai))
 		// This is unfortunately necessary because of snowflake AI init code. To be refactored.
@@ -512,7 +512,7 @@
 	else
 		spawn_instance = new spawn_type(player_client.mob.loc)
 		spawn_point.JoinPlayerHere(spawn_instance, TRUE)
-	spawn_instance.apply_prefs_job(player_client, src, late_join)
+	spawn_instance.apply_prefs_job(player_client, src, late_join) // BANDASTATION EDIT
 	if(!player_client)
 		qdel(spawn_instance)
 		return // Disconnected while checking for the appearance ban.
@@ -523,12 +523,12 @@
 /mob/living/proc/apply_prefs_job(client/player_client, datum/job/job)
 
 
-/mob/living/carbon/human/apply_prefs_job(client/player_client, datum/job/job, late_join = FALSE)
+/mob/living/carbon/human/apply_prefs_job(client/player_client, datum/job/job, late_join = FALSE)  // BANDASTATION EDIT
 	var/fully_randomize = GLOB.current_anonymous_theme || player_client.prefs.should_be_random_hardcore(job, player_client.mob.mind) || is_banned_from(player_client.ckey, "Appearance")
 	if(!player_client)
 		return // Disconnected while checking for the appearance ban.
 
-	var/randomise_job_slot = player_client.prefs.set_assigned_slot(job.title, late_join)
+	var/randomise_job_slot = player_client.prefs.set_assigned_slot(job.title, late_join)  // BANDASTATION ADD
 
 	var/human_authority_setting = CONFIG_GET(string/human_authority)
 	var/require_human = FALSE
@@ -555,7 +555,7 @@
 
 	src.job = job.title
 
-	if(fully_randomize || randomise_job_slot)
+	if(fully_randomize || randomise_job_slot)  // BANDASTATION EDIT
 		player_client.prefs.apply_prefs_to(src)
 
 		if(require_human)
