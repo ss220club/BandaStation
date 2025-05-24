@@ -23,7 +23,7 @@
 			to_chat(user, span_alert("Upload failed! Check to make sure [current.name] is functioning properly."))
 			current = null
 			return
-		if(!is_valid_z_level(get_turf(current), get_turf(user)) && user.z != 1) //BANDASTATION EDIT - Original: , get_turf(user))) - We need this to upload AI laws from CentCom
+		if(!is_valid_z_level(get_turf(current), get_turf(user)))
 			to_chat(user, span_alert("Upload failed! Unable to establish a connection to [current.name]. You're too far away!"))
 			current = null
 			return
@@ -48,8 +48,7 @@
 		return INITIALIZE_HINT_QDEL
 
 /obj/machinery/computer/upload/ai/interact(mob/user)
-	var/z_filter = user?.z == 1 ? null : user.z // BANDASTATION ADDITION - AI laws overhaul - We need this to select AI from CentCom
-	current = select_active_ai(user, z_filter, TRUE) // BANDASTATION EDIT - Original: select_active_ai(user, z, TRUE)
+	current = select_active_ai(user, z, TRUE)
 
 	if (!current)
 		to_chat(user, span_alert("No active AIs detected!"))
