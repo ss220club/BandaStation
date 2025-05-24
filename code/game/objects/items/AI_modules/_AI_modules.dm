@@ -187,7 +187,7 @@
 	. = ..()
 	var/datum/ai_laws/default_laws = get_round_default_lawset()
 	default_laws = new default_laws()
-	name = "'[default_laws.name]' Core AI Module"
+	name = "Плата основных законов ИИ '[default_laws.name]'"
 	laws = default_laws.inherent
 
 /obj/item/ai_module/core/round_default_fallback/handle_unique_ai()

@@ -1,5 +1,10 @@
 #include "_ai_laws.dm"
 
+#include "code/crewsimov.dm"
 #include "code/crewsimovpp.dm"
+#include "code/ert.dm"
 #include "code/epsilon.dm"
 #include "code/nt_default.dm"
+#include "code/onecrew.dm"
+#include "code/petrovich.dm"
+#include "code/renter.dm"
