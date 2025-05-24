@@ -1,4 +1,10 @@
-// .35 Sol
+/obj/projectile/bullet
+	light_system = OVERLAY_LIGHT
+	light_range = 0
+	light_power = 0
+	light_color = null
+
+// // .35 Sol
 /obj/projectile/bullet/c35sol
 	name = ".35 Sol Short bullet"
 	damage = 15
@@ -145,6 +151,17 @@
 	wound_bonus = 15
 	armour_penetration = 40
 
+/obj/projectile/bullet/a762x39/gauss
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/projectiles.dmi'
+	icon_state = "gauss_ak"
+	name = "7.62x39mm gauss bullet"
+	damage = 35
+	wound_bonus = 15
+	armour_penetration = 20
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_BLUE
+
 // .40 Sol Long
 
 /obj/projectile/bullet/c40sol
@@ -180,7 +197,7 @@
 	rip_time = 0.5 SECONDS
 
 /obj/projectile/bullet/c40sol/pierce
-	name = ".40 Sol match bullet"
+	name = ".40 Sol pierce bullet"
 
 	icon_state = "gaussphase"
 
@@ -211,6 +228,9 @@
 /obj/projectile/bullet/incendiary/c40sol
 	name = ".40 Sol Long incendiary bullet"
 	icon_state = "redtrac"
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
 
 	damage = 30
 	fire_stacks = 2
@@ -224,4 +244,12 @@
 	dismemberment = 0
 	catastropic_dismemberment = FALSE
 	icon_state = "gaussstrong"
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_FIRE
 
+/obj/effect/temp_visual/dir_setting/firing_effect
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_FIRE

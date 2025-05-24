@@ -130,11 +130,10 @@
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
 	icon_state = "akm_gauss"
 	inhand_icon_state = "akm"
+	actions_types = list(/datum/action/item_action/toggle_gauss)
 	base_icon_state = "akm_gauss"
 	worn_icon_state = "akm"
-	projectile_damage_multiplier = 1.2
 	projectile_speed_multiplier = 1.2
-	fire_sound = 'modular_bandastation/objects/sounds/weapons/laser1.ogg'
 
 	/// Determines how many shots we can make before the weapon needs to be maintained.
 	var/shots_before_degradation = 30
@@ -154,8 +153,35 @@
 	/// Whether or not our gun is suffering an EMP related malfunction.
 	var/emp_malfunction = FALSE
 
+	var/gauss_mode_selection = TRUE
+
+	var/gauss_mode = FALSE
+
 	/// Our timer for when our gun is suffering an extreme malfunction. AKA it is going to explode
 	var/explosion_timer
+
+/datum/action/item_action/toggle_gauss
+	name = "Toggle Gauss"
+
+/obj/item/gun/ballistic/automatic/akm/gauss/ui_action_click(mob/user, actiontype)
+	if(istype(actiontype, /datum/action/item_action/toggle_gauss))
+		gauss_mode_select()
+	else
+		..()
+
+/obj/item/gun/ballistic/automatic/akm/gauss/proc/gauss_mode_select()
+	var/mob/living/carbon/human/user = usr
+	gauss_mode_selection = !gauss_mode_selection
+	if(!gauss_mode_selection)
+		gauss_mode = TRUE
+		balloon_alert(user, "режим - гаусс")
+	else
+		gauss_mode = FALSE
+		balloon_alert(user, "режим - обычный")
+
+	playsound(user, 'sound/items/weapons/empty.ogg', 100, TRUE)
+	update_appearance()
+	update_item_action_buttons()
 
 /obj/item/gun/ballistic/automatic/akm/gauss/examine_more(mob/user)
 	. = ..()
@@ -237,14 +263,20 @@
 		playsound(src, dry_fire_sound, dry_fire_sound_volume, TRUE)
 		return
 
-	if(chambered.loaded_projectile)
-		chambered.loaded_projectile.icon = 'modular_bandastation/objects/icons/obj/weapons/guns/projectiles.dmi'
-		chambered.loaded_projectile.icon_state = "gauss_ak"
+	if(chambered.loaded_projectile && gauss_mode)
+		chambered.loaded_projectile = new /obj/projectile/bullet/a762x39/gauss
+		fire_sound = 'modular_bandastation/objects/sounds/weapons/laser1.ogg'
+
+	if(chambered.loaded_projectile && !gauss_mode)
+		fire_sound = 'modular_bandastation/objects/sounds/weapons/akm_fire.ogg'
 
 	return ..()
 
 /// Proc to handle weapon degradation. Called when attempting to fire or immediately after an EMP takes place.
 /obj/item/gun/ballistic/automatic/akm/gauss/proc/attempt_degradation(force_increment = FALSE)
+	if(gauss_mode)
+		degradation_probability += 25 // Повышаем на 25% при активном режиме
+
 	if(!prob(degradation_probability) && !force_increment || degradation_stage == degradation_stage_max)
 		return //Only update if we actually increment our degradation stage
 
