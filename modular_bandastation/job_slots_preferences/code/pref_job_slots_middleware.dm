@@ -1,6 +1,7 @@
 /datum/preference_middleware/pref_job_slots
 	action_delegations = list(
 			"set_job_slot" = PROC_REF(set_job_slot),
+			"reset_job_slots" = PROC_REF(reset_job_slots),
 		)
 
 /datum/preference_middleware/pref_job_slots/get_ui_data(mob/user)
@@ -30,9 +31,11 @@
 		preferences.pref_job_slots[job_title] = slot_index
 
 	preferences.save_preferences()
-
 	return TRUE
 
+/datum/preference_middleware/pref_job_slots/proc/reset_job_slots(list/params, mob/user)
+	preferences.reset_job_slots()
+	return TRUE
 
 #undef JOB_SLOT_RANDOMISED_SLOT
 #undef JOB_SLOT_CURRENT_SLOT

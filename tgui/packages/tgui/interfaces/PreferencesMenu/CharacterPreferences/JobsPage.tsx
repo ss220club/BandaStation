@@ -239,19 +239,26 @@ function JobRow(props: JobRowProps) {
 
     const currentSlotNumber = data.pref_job_slots[name];
 
+    const currentSlotName =
+      data.profile_index[currentSlotNumber] || 'Текущий слот';
+
     rightSide = (
-      <Dropdown
-        width="100%"
-        selected={data.profile_index[currentSlotNumber] || 'Текущий слот'}
-        options={slotOptions}
-        onSelected={(value) => {
-          const { act } = useBackend<PreferencesMenuData>();
-          act('set_job_slot', {
-            job: name,
-            slot: Number(value),
-          });
-        }}
-      />
+      <Tooltip content={currentSlotName} position="bottom-start">
+        <Box align="left">
+          <Dropdown
+            width="120px"
+            selected={currentSlotName}
+            options={slotOptions}
+            onSelected={(value) => {
+              const { act } = useBackend<PreferencesMenuData>();
+              act('set_job_slot', {
+                job: name,
+                slot: Number(value),
+              });
+            }}
+          />
+        </Box>
+      </Tooltip>
     );
   } else {
     rightSide = (
@@ -374,22 +381,45 @@ function JoblessRoleDropdown(props) {
 }
 
 export function JobsPage() {
+  const { act } = useBackend<PreferencesMenuData>();
   const [slotMode, setSlotMode] = useState(false);
 
   return (
     <>
       <JoblessRoleDropdown />
       <Box position="absolute" right="0px" top="30px" width="30%">
-        <Button
-          fluid
-          textAlign="center"
-          color={slotMode ? 'green' : 'default'}
-          onClick={() => setSlotMode(!slotMode)}
-        >
-          {slotMode ? 'Назначение слотов' : 'Назначение приоритетов'}
-        </Button>
+        <Stack vertical>
+          <Stack.Item>
+            <Button
+              fluid
+              textAlign="left"
+              color={slotMode ? 'green' : 'default'}
+              onClick={() => setSlotMode(!slotMode)}
+              tooltip={
+                slotMode ? 'Режим приоритетов' : 'Режим назначения слотов'
+              }
+              tooltipPosition="bottom"
+            >
+              {slotMode ? 'Назначение приоритетов' : 'Назначение слотов'}
+            </Button>
+          </Stack.Item>
+          {slotMode && (
+            <Stack.Item mt={0}>
+              <Button.Confirm
+                fluid
+                textAlign="left"
+                color="red"
+                onClick={() => act('reset_job_slots')}
+                tooltip="Сбросить все назначенные слоты"
+                tooltipPosition="bottom"
+                confirmContent="Точно сбросить?"
+              >
+                Сбросить назначенные слоты
+              </Button.Confirm>
+            </Stack.Item>
+          )}
+        </Stack>
       </Box>
-
       <Stack vertical fill>
         <Stack.Item mt={15}>
           <Stack fill g={1} className="PreferencesMenu__Jobs">
