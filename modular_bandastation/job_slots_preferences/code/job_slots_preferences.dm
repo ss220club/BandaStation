@@ -2,6 +2,7 @@
 #define JOB_SLOT_CURRENT_SLOT 0
 #define JOB_SLOT_RANDOMISED_TEXT "Случайное имя и внешность"
 #define JOB_SLOT_CURRENT_TEXT "Текущий слот"
+#define MAX_CHARACTER_SLOTS 8 // should be max_save_slots, but switch need static variable
 
 /datum/preferences
 	var/list/pref_job_slots = list()
@@ -36,7 +37,7 @@
 			return TRUE
 		if(JOB_SLOT_CURRENT_SLOT)
 			return // explicit
-		if(1 to PLAYTIME_VETERAN) // just a big define, should be max_save_slots, but switch need static
+		if(1 to MAX_CHARACTER_SLOTS) // just a big define, should be max_save_slots, but switch need static
 			switch_to_slot(slot_for_job)
 
 ///Whether joining at roundstart ignores assigned character slot for the job and uses currently selected slot.
@@ -54,3 +55,4 @@
 
 #undef JOB_SLOT_RANDOMISED_TEXT
 #undef JOB_SLOT_CURRENT_TEXT
+#undef MAX_CHARACTER_SLOTS
