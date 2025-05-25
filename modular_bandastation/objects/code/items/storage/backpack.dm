@@ -43,3 +43,19 @@
 /datum/storage/backpack/tsf
 	max_total_storage = 26
 	max_slots = 26
+
+//USSP
+/obj/item/storage/backpack/ussp
+	name = "Red Army USSP backpack"
+	desc = "A robust backpack issued to USSP's finest."
+	icon = 'modular_bandastation/objects/icons/obj/storage/backpack.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/back.dmi'
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_righthand.dmi'
+	icon_state = "backpack_ussp"
+	inhand_icon_state = "backpack_ussp"
+	storage_type = /datum/storage/backpack/tsf
+
+/datum/storage/backpack/tsf
+	max_total_storage = 26
+	max_slots = 26

@@ -11,6 +11,12 @@
 	icon_state = "ussp_commander"
 	can_adjust = FALSE
 
+/obj/item/clothing/under/rank/ussp/representative
+	name = "USSP formal suit"
+	desc = "Униформа официальных лиц СССП высоких рангов."
+	icon_state = "ussp_representative"
+	can_adjust = FALSE
+
 /obj/item/clothing/under/rank/ussp/soldier
 	name = "USSP ryadovoy uniform"
 	desc = "Униформа бойца КА СССП."

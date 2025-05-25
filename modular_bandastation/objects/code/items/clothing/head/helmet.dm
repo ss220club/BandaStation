@@ -36,3 +36,25 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "hardsuit0-sec"
+
+// USSP
+
+/obj/item/clothing/head/helmet/marine/ussp_officer_kaska
+	name = "komandir's kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "ussp_command"
+	base_icon_state = "ussp_command"
+
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska
+	name = "heavy kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "ussp_security"
+	base_icon_state = "ussp_security"
+
+/obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
+	name = "OMON helmet"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "ussp_riot"

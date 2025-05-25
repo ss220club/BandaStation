@@ -195,7 +195,7 @@
 	name = "TSF - Marine Rifleman"
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/marine
-	suit = /obj/item/clothing/suit/armor/vest/marine
+	suit = /obj/item/clothing/suit/armor/vest/marine/security
 	suit_store = /obj/item/gun/ballistic/automatic/wt550
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
@@ -217,7 +217,7 @@
 	name = "TSF - Marine Corpsman"
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/marine/corpsman
-	suit = /obj/item/clothing/suit/armor/vest/marine
+	suit = /obj/item/clothing/suit/armor/vest/marine/medic
 	suit_store = /obj/item/gun/energy/e_gun/lethal
 	back = /obj/item/storage/backpack/tsf
 	l_pocket = /obj/item/healthanalyzer
@@ -413,6 +413,7 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	neck = /obj/item/binoculars
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
+	r_pocket = /obj/item/knife/combat
 
 /obj/item/storage/belt/military/army/tsf_infiltrator
 	name = "army belt"
@@ -422,12 +423,18 @@
 	worn_icon_state = "military"
 	storage_type = /datum/storage/military_belt/tsf
 
+/obj/item/gun/ballistic/automatic/pistol/wespe/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	w_class = WEIGHT_CLASS_SMALL
+
 /obj/item/storage/belt/military/army/tsf_infiltrator/full/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/suppressed(src)
-	new /obj/item/knife/combat(src)
-	new /obj/item/ammo_box/magazine/m9mm/ap(src)
-	new /obj/item/ammo_box/magazine/m9mm/ap(src)
-	new /obj/item/ammo_box/magazine/m9mm(src)
+	new /obj/item/gun/ballistic/automatic/pistol/wespe/suppressed(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ripper(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ap(src)
+	new /obj/item/ammo_box/magazine/smgm45/ap(src)
+	new /obj/item/ammo_box/magazine/smgm45/ap(src)
 	new /obj/item/ammo_box/magazine/smgm45/ap(src)
 	new /obj/item/ammo_box/magazine/smgm45/ap(src)
 

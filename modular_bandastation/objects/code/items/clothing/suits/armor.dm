@@ -108,3 +108,29 @@
 	icon_state = "ussp_overcoat_officer"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+/obj/item/clothing/suit/armor/vest/marine/ussp_officer
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_command"
+
+/obj/item/clothing/suit/armor/vest/marine/security/ussp_security
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_security"
+
+/obj/item/clothing/suit/armor/vest/marine/engineer/ussp_engineer
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_engineer"
+
+/obj/item/clothing/suit/armor/vest/marine/medic/ussp_medic
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_medic"
+
+/obj/item/clothing/suit/armor/riot/ussp_riot
+	name = "OMON suit"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_riot"
