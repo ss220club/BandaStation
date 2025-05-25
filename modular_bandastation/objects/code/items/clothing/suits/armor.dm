@@ -73,6 +73,26 @@
 	icon_state = "tsf_command"
 	inhand_icon_state = null
 
+/obj/item/clothing/suit/armor/vest/tsf_overcoat
+	name = "TSF overcoat"
+	desc = "Стильное пальто с отличительными знаками ТСФ.\
+	Неофициально считается деловой одеждой представителей Федерации."
+	icon_state = "tsf_overcoat"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	armor_type = /datum/armor/tsf_overcoat
+	dog_fashion = null
+
+/datum/armor/tsf_overcoat
+	melee = 5
+	bullet = 0
+	laser = 10
+	energy = 0
+	bomb = 0
+	fire = 5
+	acid = 0
+	wound = 0
+
 // USSP
 /obj/item/clothing/suit/armor/vest/ussp
 	name = "USSP overcoat"
@@ -80,6 +100,7 @@
 	icon_state = "ussp_overcoat"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	dog_fashion = null
 
 /obj/item/clothing/suit/armor/vest/ussp/officer
 	name = "USSP officer overcoat"

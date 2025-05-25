@@ -30,10 +30,10 @@
 	trim_state = "trim_explorer"
 	trim_state = "trim_tsf"
 	sechud_icon_state = SECHUD_TSF
-	department_color = COLOR_TEAL
-	subdepartment_color = COLOR_TEAL
+	department_color = COLOR_UNION_JACK_BLUE
+	subdepartment_color = COLOR_UNION_JACK_BLUE
 	big_pointer = TRUE
-	pointer_color = COLOR_TEAL
+	pointer_color = COLOR_UNION_JACK_BLUE
 
 // TSF Commander
 /datum/outfit/tsf/commander
@@ -46,7 +46,8 @@
 	backpack_contents = list(
 		/obj/item/storage/box/survival/security,
 		/obj/item/reagent_containers/hypospray/combat/nanites,
-		/obj/item/storage/fancy/cigarettes/cigars/havana
+		/obj/item/storage/fancy/cigarettes/cigars/havana,
+		/obj/item/stamp/tsf,
 	)
 	belt = /obj/item/storage/belt/holster/detective/full/ert/tsf_commander
 	gloves = /obj/item/clothing/gloves/combat
@@ -102,7 +103,6 @@
 
 /datum/id_trim/tsf/marine
 	assignment = "TSF - Marine"
-	sechud_icon_state = SECHUD_TSF
 	big_pointer = FALSE
 
 /datum/id_trim/tsf/marine/New()
@@ -131,7 +131,6 @@
 /datum/id_trim/tsf/marine/officer
 	assignment = "TSF - Marine Officer"
 	trim_state = "trim_tsf_officer"
-	sechud_icon_state = SECHUD_TSF
 
 /obj/item/storage/belt/military/army/tsf
 	name = "army belt"
@@ -146,13 +145,12 @@
 	max_slots = 5
 
 /obj/item/storage/belt/military/army/tsf/full/PopulateContents()
-	new /obj/item/knife/combat(src)
 	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
 	new /obj/item/ammo_box/magazine/m45(src)
 	new /obj/item/ammo_box/magazine/m45(src)
 	new /obj/item/ammo_box/magazine/m45(src)
 	new /obj/item/ammo_box/magazine/m45(src)
-
+	new /obj/item/knife/combat(src)
 
 /datum/storage/military_belt/tsf
 	max_specific_storage = WEIGHT_CLASS_NORMAL
@@ -240,9 +238,6 @@
 
 /datum/id_trim/tsf/marine/corpsman
 	assignment = "TSF - Marine Corpsman"
-	trim_state = "trim_tsf"
-	sechud_icon_state = SECHUD_TSF
-	big_pointer = FALSE
 
 //Engineer
 /datum/outfit/tsf/marine/engineer
@@ -262,9 +257,6 @@
 
 /datum/id_trim/tsf/marine/engineer
 	assignment = "TSF - Marine Weapon Specialist"
-	trim_state = "trim_tsf"
-	sechud_icon_state = SECHUD_TSF
-	big_pointer = FALSE
 
 //Riot
 /datum/outfit/tsf/marine/riot
@@ -300,9 +292,6 @@
 
 /datum/id_trim/tsf/marine/riot
 	assignment = "TSF - Riot Specialist"
-	trim_state = "trim_tsf"
-	sechud_icon_state = SECHUD_TSF
-	big_pointer = FALSE
 
 // TSF MARSOC - будут допилены иконки модов, оружие будет как зальют стволы Ингакема
 // TSF MARSOC (Unarmed)
@@ -323,8 +312,6 @@
 
 /datum/id_trim/tsf/marsoc
 	assignment = "TSF - MARSOC"
-	trim_state = "trim_tsf"
-	sechud_icon_state = SECHUD_TSF
 
 /datum/id_trim/tsf/marsoc/New()
 	. = ..()
@@ -460,3 +447,66 @@
 /datum/id_trim/tsf/infiltrator/New()
 	. = ..()
 	access = list(ACCESS_CENT_GENERAL) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
+
+// TSF representative
+/datum/outfit/tsf/representative
+	name = "TSF - Representative"
+	id = /obj/item/card/id/advanced/tsf
+	id_trim = /datum/id_trim/tsf/representative
+	uniform = /obj/item/clothing/under/rank/tsf/representative
+	suit = /obj/item/clothing/suit/armor/vest/tsf_overcoat
+	back = /obj/item/storage/backpack/satchel/leather
+	backpack_contents = list(
+		/obj/item/storage/box/survival/radio,
+		/obj/item/lighter/greyscale,
+		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
+		/obj/item/stamp/tsf,
+		/obj/item/folder/blue,
+		/obj/item/pen/fourcolor,
+	)
+	head = /obj/item/clothing/head/hats/tsf_fedora
+	gloves = /obj/item/clothing/gloves/color/white
+	ears = /obj/item/radio/headset/heads/captain/alt/tsf
+	shoes = /obj/item/clothing/shoes/laceup
+	glasses = /obj/item/clothing/glasses/sunglasses
+	l_pocket = /obj/item/stack/spacecash/c1000
+
+/datum/id_trim/tsf/representative
+	assignment = "Trans-Solar Federation Representative"
+
+/datum/id_trim/tsf/representative/New()
+	. = ..()
+	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_SECURITY - ACCESS_CAPTAIN - ACCESS_AI_UPLOAD)
+
+// TSF diplomat
+/datum/outfit/tsf/diplomat
+	name = "TSF - Diplomat"
+	id = /obj/item/card/id/advanced/tsf
+	id_trim = /datum/id_trim/tsf/diplomat
+	uniform = /obj/item/clothing/under/rank/tsf/formal
+	suit = /obj/item/clothing/suit/tsf_suitjacket
+	back = /obj/item/storage/backpack/satchel/leather
+	backpack_contents = list(
+		/obj/item/storage/box/survival/radio,
+		/obj/item/lighter,
+		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
+		/obj/item/stamp/tsf,
+		/obj/item/folder/blue,
+		/obj/item/pen/fourcolor,
+	)
+	gloves = /obj/item/clothing/gloves/color/white
+	head = /obj/item/clothing/head/beret/tsf_diplomat
+	ears = /obj/item/radio/headset/heads/captain/alt/tsf
+	shoes = /obj/item/clothing/shoes/laceup
+	l_hand = /obj/item/storage/briefcase
+	neck = /obj/item/clothing/neck/tsf_fancy_cloak
+	l_pocket = /obj/item/stack/spacecash/c1000
+	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
+
+/datum/id_trim/tsf/diplomat
+	assignment = "Trans-Solar Federation Diplomat"
+	trim_state = "trim_tsf_command"
+
+/datum/id_trim/tsf/diplomat/New()
+	. = ..()
+	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_SECURITY - ACCESS_CAPTAIN - ACCESS_AI_UPLOAD)

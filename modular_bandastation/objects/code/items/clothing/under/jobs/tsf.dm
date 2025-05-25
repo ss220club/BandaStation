@@ -35,3 +35,25 @@
 	icon_state = "tsf_marsoc_officer"
 	can_adjust = FALSE
 
+/obj/item/clothing/under/rank/tsf/representative
+	name = "TSF luxurious suit"
+	desc = "Эти роскошные одеяния можно увидеть на важных персонах Федерации."
+	icon_state = "tsf_representative"
+	can_adjust = FALSE
+
+/obj/item/clothing/under/rank/tsf/formal
+	name = "TSF formal suit"
+	desc = "Стандартный деловой костюм официальных лиц Транс-Солнечной Федерации."
+	icon_state = "tsf_formal_suit"
+	can_adjust = FALSE
+
+/obj/item/clothing/under/rank/tsf/formal/skirt
+	name = "TSF formal skirt"
+	desc = "Стандартная деловая юбка официальных лиц Транс-Солнечной Федерации."
+	icon_state = "tsf_formal_skirt"
+
+/obj/item/clothing/under/rank/tsf/formal/w_skirt
+	name = "TSF formal white skirt"
+	desc = "Ослепительно белая деловая юбка официальных лиц Транс-Солнечной Федерации. "
+	icon_state = "tsf_formal_wskirt"
+

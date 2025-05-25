@@ -78,3 +78,13 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "hardsuit-sec-old"
+
+//TSF
+/obj/item/clothing/suit/tsf_suitjacket
+	name = "TSF suit-jacket"
+	desc = "Дорогая куртка прямиком из Центральных Миров. Имеет отличительные знаки ТСФ."
+	icon_state = "tsf_suit_jacket"
+	worn_icon_state = "tsf_suit_jacket"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	body_parts_covered = CHEST|GROIN|ARMS

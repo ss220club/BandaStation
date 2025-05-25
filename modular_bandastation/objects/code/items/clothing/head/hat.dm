@@ -179,6 +179,31 @@
 	dog_fashion = null
 	flags_1 = NONE
 
+/obj/item/clothing/head/beret/tsf_diplomat
+	name = "TSF official's beret"
+	desc = "Берет официальных лиц ТСФ."
+	icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#102036#eeeeee"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/hats/tsf_fedora
+	name = "TSF fedora"
+	desc = "Темно-синяя федора.\
+	Feel like a Solar gangsta."
+	icon_state = "tsf_fedora"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+
+/obj/item/clothing/head/hats/tsf_cap
+	name = "TSF cap"
+	desc = "Мягкая кепка с опозновательными знаками ТСФ"
+	icon_state = "tsf_cap"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+
 // USSP
 /obj/item/clothing/head/hats/ussp
 	name = "USSP pilotka"
