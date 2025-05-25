@@ -16503,12 +16503,8 @@
 /area/station/engineering/storage_shared)
 "dUq" = (
 /obj/structure/table,
-/obj/item/assembly/flash/handheld{
-	pixel_x = -5
-	},
-/obj/item/assembly/flash/handheld{
-	pixel_x = 7
-	},
+/obj/item/electronics/apc,
+/obj/item/electronics/airlock,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "dUv" = (
@@ -37357,7 +37353,7 @@
 /area/station/service/bar/atrium/ghetto)
 "iZB" = (
 /obj/structure/rack,
-/obj/item/electronics/airlock,
+/obj/effect/spawner/random/techstorage/custom_shuttle,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "iZF" = (
@@ -62088,6 +62084,12 @@
 /obj/structure/table,
 /obj/item/aicard{
 	pixel_y = 4
+	},
+/obj/item/assembly/flash/handheld{
+	pixel_x = 7
+	},
+/obj/item/assembly/flash/handheld{
+	pixel_x = -5
 	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
