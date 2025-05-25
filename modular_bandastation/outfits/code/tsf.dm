@@ -394,7 +394,7 @@
 	id_trim = /datum/id_trim/tsf/infiltrator
 	uniform = /obj/item/clothing/under/syndicate/camo
 	suit = /obj/item/clothing/suit/hooded/stealth_cloak
-	suit_store = /obj/item/gun/ballistic/automatic/c20r/unrestricted
+	suit_store = /obj/item/gun/ballistic/automatic/c20r/unrestricted/suppressed
 	belt = /obj/item/storage/belt/military/army/tsf_infiltrator/full
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
@@ -402,7 +402,6 @@
 		/obj/item/storage/medkit/emergency,
 		/obj/item/grenade/smokebomb = 2,
 		/obj/item/grenade/c4 = 2,
-		/obj/item/suppressor,
 		/obj/item/clothing/head/beret/tsf_infiltrator
 	)
 	implants = list(/obj/item/implant/emp, /obj/item/implant/cqc)
@@ -428,6 +427,11 @@
 	var/obj/item/suppressor/S = new(src)
 	install_suppressor(S)
 	w_class = WEIGHT_CLASS_SMALL
+
+/obj/item/gun/ballistic/automatic/c20r/unrestricted/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
 
 /obj/item/storage/belt/military/army/tsf_infiltrator/full/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/wespe/suppressed(src)
