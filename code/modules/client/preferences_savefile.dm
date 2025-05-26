@@ -238,10 +238,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pref_job_slots = SANITIZE_LIST(pref_job_slots) // BANDASTATION ADD
 	job_preferences = SANITIZE_LIST(job_preferences) // BANDASTATION ADD
 
+	// BANDASTATION EDIT - Start
 	//Validate job prefs
 	for(var/j in job_preferences)
 		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
 			job_preferences -= j
+	// BANDASTATION EDIT - End
 
 	if(needs_update >= 0) //save the updated version
 		var/old_default_slot = default_slot

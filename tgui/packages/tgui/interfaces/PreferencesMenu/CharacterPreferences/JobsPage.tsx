@@ -1,10 +1,10 @@
 import { sortBy } from 'common/collections';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Box, Button, Dropdown, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
-import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
+import { JOBS_RU } from '../../../bandastation/ru_jobs';
 import {
   createSetPreference,
   Job,
@@ -13,6 +13,16 @@ import {
   PreferencesMenuData,
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
+
+const SLOT_ICONS = {
+  '-1': 'fa-random',
+  0: 'user',
+  1: 'fa-1',
+  2: 'fa-2',
+  3: 'fa-3',
+  4: 'fa-4',
+  5: 'fa-5',
+};
 
 function sortJobs(entries: [string, Job][], head?: string) {
   return sortBy(
@@ -182,12 +192,11 @@ type JobRowProps = {
   className?: string;
   job: Job;
   name: string;
-  slotMode: boolean;
 };
 
 function JobRow(props: JobRowProps) {
-  const { data } = useBackend<PreferencesMenuData>();
-  const { className, job, name, slotMode } = props;
+  const { data, act } = useBackend<PreferencesMenuData>();
+  const { className, job, name } = props;
 
   const isOverflow = data.overflow_role === name;
   const priority = data.job_preferences[name];
@@ -197,6 +206,16 @@ function JobRow(props: JobRowProps) {
   const experienceNeeded =
     data.job_required_experience && data.job_required_experience[name];
   const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
+
+  const { profile_index = {}, pref_job_slots = {} } = data;
+  const currentSlotNumber = pref_job_slots[name] || 0;
+  const valueToDisplay = Object.fromEntries(
+    Object.entries(profile_index).map(([text, key]) => [key, text]),
+  );
+  const currentSlotName = valueToDisplay[currentSlotNumber] || 'Текущий слот';
+  const slotOptions = Object.entries(profile_index)
+    .map(([text, val]) => ({ value: val, displayText: text }))
+    .sort((a, b) => a.value - b.value);
 
   let rightSide: ReactNode;
 
@@ -227,46 +246,34 @@ function JobRow(props: JobRowProps) {
         </Stack.Item>
       </Stack>
     );
-  } else if (slotMode) {
-    const profileEntries = Object.entries(data.profile_index || {});
-
-    const slotOptions = profileEntries
-      .map(([key, value]) => ({
-        value: key,
-        displayText: value,
-      }))
-      .sort((a, b) => Number(a.value) - Number(b.value));
-
-    const currentSlotNumber = data.pref_job_slots[name];
-
-    const currentSlotName =
-      data.profile_index[currentSlotNumber] || 'Текущий слот';
-
-    rightSide = (
-      <Tooltip content={currentSlotName} position="bottom-start">
-        <Box align="left">
-          <Dropdown
-            width="120px"
-            selected={currentSlotName}
-            options={slotOptions}
-            onSelected={(value) => {
-              const { act } = useBackend<PreferencesMenuData>();
-              act('set_job_slot', {
-                job: name,
-                slot: Number(value),
-              });
-            }}
-          />
-        </Box>
-      </Tooltip>
-    );
   } else {
     rightSide = (
-      <PriorityButtons
-        createSetPriority={createSetPriority}
-        isOverflow={isOverflow}
-        priority={priority}
-      />
+      <Stack align="center" height="100%" pr={1}>
+        <Tooltip content={currentSlotName} position="right">
+          <div>
+            <Dropdown
+              width="100%"
+              selected={currentSlotName}
+              onSelected={(value: number) => {
+                act('set_job_slot', {
+                  job: name,
+                  slot: value,
+                });
+              }}
+              options={slotOptions}
+              menuWidth="auto"
+              noChevron
+              iconOnly
+              icon={SLOT_ICONS[currentSlotNumber as keyof typeof SLOT_ICONS]}
+            />
+          </div>
+        </Tooltip>
+        <PriorityButtons
+          createSetPriority={createSetPriority}
+          isOverflow={isOverflow}
+          priority={priority}
+        />
+      </Stack>
     );
   }
 
@@ -295,11 +302,10 @@ function JobRow(props: JobRowProps) {
 
 type DepartmentProps = {
   department: string;
-  slotMode: boolean;
 } & PropsWithChildren;
 
 function Department(props: DepartmentProps) {
-  const { children, department: name, slotMode } = props;
+  const { children, department: name } = props;
   const className = `PreferencesMenu__Jobs__departments--${name.replace(' ', '')}`;
 
   const data = useServerPrefs();
@@ -334,12 +340,10 @@ function Department(props: DepartmentProps) {
               key={name}
               job={job}
               name={name}
-              slotMode={slotMode}
             />
           );
         })}
       </Stack>
-
       {children}
     </Box>
   );
@@ -381,75 +385,36 @@ function JoblessRoleDropdown(props) {
 }
 
 export function JobsPage() {
-  const { act } = useBackend<PreferencesMenuData>();
-  const [slotMode, setSlotMode] = useState(false);
-
   return (
     <>
       <JoblessRoleDropdown />
-      <Box position="absolute" right="0px" top="30px" width="30%">
-        <Stack vertical>
-          <Stack.Item>
-            <Button
-              fluid
-              textAlign="left"
-              color={slotMode ? 'green' : 'default'}
-              onClick={() => setSlotMode(!slotMode)}
-              tooltip={
-                slotMode ? 'Режим приоритетов' : 'Режим назначения слотов'
-              }
-              tooltipPosition="bottom"
-            >
-              {slotMode ? 'Назначение приоритетов' : 'Назначение слотов'}
-            </Button>
-          </Stack.Item>
-          {slotMode && (
-            <Stack.Item mt={0}>
-              <Button.Confirm
-                fluid
-                textAlign="left"
-                color="red"
-                onClick={() => act('reset_job_slots')}
-                tooltip="Сбросить все назначенные слоты"
-                tooltipPosition="bottom"
-                confirmContent="Точно сбросить?"
-              >
-                Сбросить назначенные слоты
-              </Button.Confirm>
-            </Stack.Item>
-          )}
-        </Stack>
-      </Box>
       <Stack vertical fill>
         <Stack.Item mt={15}>
           <Stack fill g={1} className="PreferencesMenu__Jobs">
             <Stack.Item>
               <Stack vertical>
                 <PriorityHeaders />
-                <Department department="Engineering" slotMode={slotMode} />
-                <Department department="Science" slotMode={slotMode} />
-                <Department department="Silicon" slotMode={slotMode} />
-                <Department department="Assistant" slotMode={slotMode} />
+                <Department department="Engineering" />
+                <Department department="Science" />
+                <Department department="Silicon" />
+                <Department department="Assistant" />
               </Stack>
             </Stack.Item>
             <Stack.Item mt={-5.9}>
               <Stack vertical>
                 <PriorityHeaders />
-                <Department department="Captain" slotMode={slotMode} />
-                <Department
-                  department="NT Representation"
-                  slotMode={slotMode}
-                />
-                <Department department="Service" slotMode={slotMode} />
-                <Department department="Cargo" slotMode={slotMode} />
+                <Department department="Captain" />
+                <Department department="NT Representation" />
+                <Department department="Service" />
+                <Department department="Cargo" />
               </Stack>
             </Stack.Item>
             <Stack.Item>
               <Stack vertical>
                 <PriorityHeaders />
-                <Department department="Security" slotMode={slotMode} />
-                <Department department="Justice" slotMode={slotMode} />
-                <Department department="Medical" slotMode={slotMode} />
+                <Department department="Security" />
+                <Department department="Justice" />
+                <Department department="Medical" />
               </Stack>
             </Stack.Item>
           </Stack>

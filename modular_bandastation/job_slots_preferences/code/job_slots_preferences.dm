@@ -10,8 +10,8 @@
 // Character slots
 /datum/preferences/proc/get_slot_options(mob/user, target_job)
 	var/list/slot_options = list(
-		num2text(JOB_SLOT_RANDOMISED_SLOT) = JOB_SLOT_RANDOMISED_TEXT,
-		num2text(JOB_SLOT_CURRENT_SLOT) = JOB_SLOT_CURRENT_TEXT
+		JOB_SLOT_RANDOMISED_TEXT = JOB_SLOT_RANDOMISED_SLOT,
+		JOB_SLOT_CURRENT_TEXT = JOB_SLOT_CURRENT_SLOT,
 		)
 	for(var/index in 1 to max_save_slots)
 		var/slot_name = (index == default_slot) \
@@ -19,7 +19,7 @@
 			: savefile.get_entry("character[index]")?["real_name"]
 
 		if(slot_name)
-			slot_options += list(num2text(index) = "[slot_name] (слот #[index])")
+			slot_options["[slot_name] (слот #[index])"] = index
 
 	return slot_options
 
@@ -37,7 +37,7 @@
 			return TRUE
 		if(JOB_SLOT_CURRENT_SLOT)
 			return // explicit
-		if(1 to MAX_CHARACTER_SLOTS) // just a big define, should be max_save_slots, but switch need static
+		if(1 to MAX_CHARACTER_SLOTS)
 			switch_to_slot(slot_for_job)
 
 ///Whether joining at roundstart ignores assigned character slot for the job and uses currently selected slot.
