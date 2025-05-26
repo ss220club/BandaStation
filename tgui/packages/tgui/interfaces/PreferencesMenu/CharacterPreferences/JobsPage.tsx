@@ -4,7 +4,7 @@ import { useBackend } from 'tgui/backend';
 import { Box, Button, Dropdown, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
-import { JOBS_RU } from '../../../bandastation/ru_jobs';
+import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import {
   createSetPreference,
   Job,
@@ -13,16 +13,7 @@ import {
   PreferencesMenuData,
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
-
-const SLOT_ICONS = {
-  '-1': 'fa-random',
-  0: 'user',
-  1: 'fa-1',
-  2: 'fa-2',
-  3: 'fa-3',
-  4: 'fa-4',
-  5: 'fa-5',
-};
+import { SlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD
 
 function sortJobs(entries: [string, Job][], head?: string) {
   return sortBy(
@@ -195,7 +186,7 @@ type JobRowProps = {
 };
 
 function JobRow(props: JobRowProps) {
-  const { data, act } = useBackend<PreferencesMenuData>();
+  const { data } = useBackend<PreferencesMenuData>();
   const { className, job, name } = props;
 
   const isOverflow = data.overflow_role === name;
@@ -206,16 +197,6 @@ function JobRow(props: JobRowProps) {
   const experienceNeeded =
     data.job_required_experience && data.job_required_experience[name];
   const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
-
-  const { profile_index = {}, pref_job_slots = {} } = data;
-  const currentSlotNumber = pref_job_slots[name] || 0;
-  const valueToDisplay = Object.fromEntries(
-    Object.entries(profile_index).map(([text, key]) => [key, text]),
-  );
-  const currentSlotName = valueToDisplay[currentSlotNumber] || 'Текущий слот';
-  const slotOptions = Object.entries(profile_index)
-    .map(([text, val]) => ({ value: val, displayText: text }))
-    .sort((a, b) => a.value - b.value);
 
   let rightSide: ReactNode;
 
@@ -249,25 +230,7 @@ function JobRow(props: JobRowProps) {
   } else {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
-        <Tooltip content={currentSlotName} position="right">
-          <div>
-            <Dropdown
-              width="100%"
-              selected={currentSlotName}
-              onSelected={(value: number) => {
-                act('set_job_slot', {
-                  job: name,
-                  slot: value,
-                });
-              }}
-              options={slotOptions}
-              menuWidth="auto"
-              noChevron
-              iconOnly
-              icon={SLOT_ICONS[currentSlotNumber as keyof typeof SLOT_ICONS]}
-            />
-          </div>
-        </Tooltip>
+        <SlotDropdown name={name} />
         <PriorityButtons
           createSetPriority={createSetPriority}
           isOverflow={isOverflow}

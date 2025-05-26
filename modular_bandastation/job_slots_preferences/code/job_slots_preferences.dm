@@ -7,21 +7,17 @@
 /datum/preferences
 	var/list/pref_job_slots = list()
 
-// Character slots
 /datum/preferences/proc/get_slot_options(mob/user, target_job)
-	var/list/slot_options = list(
-		JOB_SLOT_RANDOMISED_TEXT = JOB_SLOT_RANDOMISED_SLOT,
-		JOB_SLOT_CURRENT_TEXT = JOB_SLOT_CURRENT_SLOT,
-		)
+	var/list/slot_options = list(num2text(JOB_SLOT_CURRENT_SLOT) = JOB_SLOT_CURRENT_TEXT)
 	for(var/index in 1 to max_save_slots)
 		var/slot_name = (index == default_slot) \
 			? read_preference(/datum/preference/name/real_name) \
 			: savefile.get_entry("character[index]")?["real_name"]
 
 		if(slot_name)
-			slot_options["[slot_name] (слот #[index])"] = index
+			slot_options[num2text(index)] = slot_name
 
-	return slot_options
+	return slot_options += list(num2text(JOB_SLOT_RANDOMISED_SLOT) = JOB_SLOT_RANDOMISED_TEXT)
 
 /datum/preferences/proc/reset_job_slots()
 	pref_job_slots = list()
