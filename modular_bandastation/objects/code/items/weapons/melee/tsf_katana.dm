@@ -27,14 +27,10 @@
     attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
     sharpness = SHARP_EDGED
 
-/obj/item/melee/katana_tsf/proc/chill(mob/living/target, mob/living/user)
-	target.apply_status_effect(/datum/status_effect/void_chill, 3)
-
-/obj/item/melee/katana_tsf/attack(mob/living/target, mob/living/user)
-    ..()
-    if (istype(target, /mob/living))
-        if (prob(50))
-            chill(target, user)
+/obj/item/melee/katana_tsf/afterattack(atom/target, mob/user, list/modifiers)
+	if(isliving(target) && (prob(50))
+		var/mob/living/living_target = target
+		living_target.apply_status_effect(/datum/status_effect/void_chill, 3)
 
 /obj/item/melee/katana_tsf/examine(mob/user)
 	. = ..()
