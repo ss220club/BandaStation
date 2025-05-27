@@ -109,7 +109,7 @@
     cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/automatic/akm/civ = 1,
+        /obj/item/gun/ballistic/automatic/akm = 1,
         /obj/item/ammo_box/magazine/akm/civ = 1,
         /obj/item/ammo_box/a762x39/civilian = 1,
         /obj/item/ammo_box/a762x39/civilian/rubber = 1,
@@ -153,7 +153,7 @@
     cost = CARGO_CRATE_VALUE * 40 //~8000
     access_view = ACCESS_WEAPONS
     contains = list(
-        /obj/item/gun/ballistic/automatic/akm/civ = 1,
+        /obj/item/gun/ballistic/automatic/akm = 1,
     )
 
 /datum/supply_pack/goody/akm_civ_magazines_goody
