@@ -1,6 +1,6 @@
 /obj/item/storage/belt/military/holster
 	name = "army belt with holster"
-	desc = "A belt with holster used by military forces."
+	desc = "Пояс с кобурой используемый военными."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
 	icon_state = "military_holster"
 	inhand_icon_state = "security"
