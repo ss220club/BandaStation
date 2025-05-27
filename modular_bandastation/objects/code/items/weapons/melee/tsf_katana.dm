@@ -1,40 +1,40 @@
 /obj/item/melee/katana_tsf
-    name = "Дыхание Ночи"
-    desc = "Неоновая энергетическая катана синего цвета, сделанная в лучших традициях современных мастеров-мечников Транс-Солнечной Федерации."
-    icon = 'modular_bandastation/objects/icons/obj/weapons/sword.dmi'
-    icon_state = "katana_tsf"
-    inhand_icon_state = "katana_tsf"
-    icon_angle = 35
-    lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_lefthand.dmi'
-    righthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_righthand.dmi'
-    worn_icon = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
-    worn_icon_state = "katana_tsf"
-    light_system = OVERLAY_LIGHT
-    light_range = 2
-    light_color = LIGHT_COLOR_LIGHT_CYAN
-    slot_flags = ITEM_SLOT_BELT
-    force = 25
-    armour_penetration = 70
-    block_chance = 60
-    throwforce = 30
-    w_class = WEIGHT_CLASS_NORMAL
-    resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-    hitsound = 'modular_bandastation/objects/sound/weapons/tsf_katana_hit.ogg'
-    pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg'
-    drop_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_sheath.ogg'
-    block_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_block.ogg'
-    attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
-    attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
-    sharpness = SHARP_EDGED
+        name = "Дыхание Ночи"
+        desc = "Неоновая энергетическая катана синего цвета, сделанная в лучших традициях современных мастеров-мечников Транс-Солнечной Федерации."
+        icon = 'modular_bandastation/objects/icons/obj/weapons/sword.dmi'
+        icon_state = "katana_tsf"
+        inhand_icon_state = "katana_tsf"
+        icon_angle = 35
+        lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_lefthand.dmi'
+        righthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_righthand.dmi'
+        worn_icon = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
+        worn_icon_state = "katana_tsf"
+        light_system = OVERLAY_LIGHT
+        light_range = 2
+        light_color = LIGHT_COLOR_LIGHT_CYAN
+        slot_flags = ITEM_SLOT_BELT
+        force = 25
+        armour_penetration = 70
+        block_chance = 60
+        throwforce = 30
+        w_class = WEIGHT_CLASS_NORMAL
+        resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+        hitsound = 'modular_bandastation/objects/sound/weapons/tsf_katana_hit.ogg'
+        pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg'
+        drop_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_sheath.ogg'
+        block_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_block.ogg'
+        attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
+        attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
+        sharpness = SHARP_EDGED
 
 /obj/item/melee/katana_tsf/afterattack(atom/target, mob/user, list/modifiers)
-	if(isliving(target) && (prob(50))
-		var/mob/living/living_target = target
-		living_target.apply_status_effect(/datum/status_effect/void_chill, 3)
+    if(isliving(target) && (prob(50)))
+        var/mob/living/living_target = target
+        living_target.apply_status_effect(/datum/status_effect/void_chill, 3)
 
 /obj/item/melee/katana_tsf/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
+    . = ..()
+    . += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
 
 /obj/item/melee/katana_tsf/examine_more(mob/user)
     . = ..()
