@@ -1459,7 +1459,7 @@
 	if(can_be_disabled && (get_damage() / max_damage) >= robotic_emp_paralyze_damage_percent_threshold)
 		ADD_TRAIT(src, TRAIT_PARALYSIS, EMP_TRAIT)
 		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_PARALYSIS, EMP_TRAIT), time_needed)
-		owner?.visible_message(span_danger("[capitalize(owner.declent_ru(NOMINATIVE))], похоже, имеет не рабочую [ru_plaintext_zone(GENITIVE) || plaintext_zone]!"))
+		owner?.visible_message(span_danger("[capitalize(owner.declent_ru(NOMINATIVE))], похоже, имеет не рабочую [ru_plaintext_zone[GENITIVE] || plaintext_zone]!"))
 
 	return TRUE
 
