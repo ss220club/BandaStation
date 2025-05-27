@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/aoe/moon_ringleader
 	name = "Ringleaders Rise"
-	desc = "Big AoE spell that deals brain damage and causes hallucinations to everyone in the AoE. \
-			The worse their sanity, the stronger this spell becomes. \
-			If their sanity is low enough, they even snap and go insane, and the spell then further halves their sanity."
+	desc = "Заклинание по области, которое наносит больше урона мозгу в зависимости от отсутствующего рассудка у целей, \
+			также вызывает им галлюцинации, больше тем, у кого мало рассудка. \
+			Если их рассудок достаточно слабый, они обезумеют и потеряют половину рассудка."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'

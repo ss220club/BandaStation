@@ -488,4 +488,4 @@
 			balloon_alert(user, locked ? "locked" : "unlocked")
 			update_appearance()
 		else
-			balloon_alert(user, "access denied!")
+			balloon_alert(user, "в доступе отказано!")
