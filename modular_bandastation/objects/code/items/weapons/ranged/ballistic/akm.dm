@@ -6,6 +6,7 @@
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_lefthand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_righthand.dmi'
 	inhand_icon_state = "akm_civ"
+	fire_sound = 'modular_bandastation/objects/sounds/weapons/akm_fire.ogg'
 	worn_icon = 'modular_bandastation/objects/icons/mob/back/guns_back.dmi'
 	rack_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_cock.ogg'
 	load_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_magin.ogg'

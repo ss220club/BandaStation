@@ -28,15 +28,6 @@
 	recoil = 0.4
 	obj_flags = UNIQUE_RENAME
 
-/obj/item/gun/ballistic/automatic/sol_rifle/Initialize(mapload)
-	. = ..()
-
-	give_autofire()
-
-/// Separate proc for handling auto fire just because one of these subtypes isn't otomatica
-/obj/item/gun/ballistic/automatic/sol_rifle/proc/give_autofire()
-	AddComponent(/datum/component/automatic_fire, fire_delay)
-
 /obj/item/gun/ballistic/automatic/sol_rifle/examine(mob/user)
 	. = ..()
 	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
@@ -45,15 +36,21 @@
 	. = ..()
 
 	. += "Винтовки Карво-Кэвил создаются компанией Карво для использования различными пехотными подразделениями ТСФ. \
-	    В соответствии с довольно разумными военными требованиями, предусматривающими использование одного и того же ассортимента патронов и магазинов, \
-	    срок службы координаторов по логистике и квартирмейстеров повсеместно был продлен на несколько лет. \
-	    Хотя в прошлом они обычно продавались только военным, недавний крах некоторых неназванных производителей оружия \
-	    заставил Карво открыть многие образцы военного оружия для гражданской продажи, в том числе и этот."
+	В соответствии с довольно разумными военными требованиями, предусматривающими использование одного и того же ассортимента патронов и магазинов, \
+	срок службы координаторов по логистике и квартирмейстеров повсеместно был продлен на несколько лет. \
+	Хотя в прошлом они обычно продавались только военным, недавний крах некоторых неназванных производителей оружия \
+	заставил Карво открыть многие образцы военного оружия для гражданской продажи, в том числе и этот."
 
 	return .
 
 /obj/item/gun/ballistic/automatic/sol_rifle/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sol_rifle/auto
+
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/automatic_fire, fire_delay)
 
 // Sol marksman rifle
 
@@ -75,17 +72,14 @@
 
 	AddComponent(/datum/component/scope, range_modifier = 2)
 
-/obj/item/gun/ballistic/automatic/sol_rifle/marksman/give_autofire()
-	return
-
 /obj/item/gun/ballistic/automatic/sol_rifle/marksman/examine_more(mob/user)
 	. = ..()
 
 	. += "Этот вариант представляет собой марксманскую винтовку. \
-	    Автоматическая стрельба была упразднена ради полуавтоматического режима, \
-	    более удобной ложи и, чаще всего, оптического прицела. \
-	    Как правило, для удобства стрелка используется магазин меньшего размера, \
-	    но, как и для любой другой винтовки ТСФ, подходят все стандартные типы магазинов."
+	Автоматическая стрельба была упразднена ради полуавтоматического режима, \
+	более удобной ложи и, чаще всего, оптического прицела. \
+	Как правило, для удобства стрелка используется магазин меньшего размера, \
+	но, как и для любой другой винтовки ТСФ, подходят все стандартные типы магазинов."
 
 	return .
 
@@ -94,7 +88,7 @@
 
 // Machineguns based on the base Sol rifle
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/top
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/top_fed
 	name = "Qarad Light Machinegun"
 	desc = "Увесистый пулемет, стреляющий патронами калибра .40 Sol, часто встречающийся в руках военных ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
 	icon_state = "qarad"
@@ -105,21 +99,21 @@
 	spread = 12.5
 	projectile_wound_bonus = -10
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/top/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/top_fed/examine_more(mob/user)
 	. = ..()
 
 	. += "Вариант винтовки под названием «Кварад», который вы сейчас видите, - это модификация, превратившая оружие в сносный, \
-	    хотя и неоптимальный легкий пулемет. Для поддержки роли пулемета внутренности винтовки были переделаны таким образом, \
-	    чтобы превратить ее в более скорострельный автомат с открытым затвором. \
-	    Эти дополнения в сочетании с особенностями боевой винтовки, которая изначально не предназначалась \
-	    для использования в автоматическом режиме, сделали ее довольно громоздкой. \
-	    Однако пулемет остается пулеметом, как бы трудно ни было удерживать ствол на цели. \
-	    Данный экземляр является вариантом, где подача боеприпасов идет сверху, а не снизу. \
-	    Благодаря этой особенности скорострельность намного выше чем у 'Дарака', но точность намного хуже из-за неудобства прицеливания."
+	хотя и неоптимальный легкий пулемет. Для поддержки роли пулемета внутренности винтовки были переделаны таким образом, \
+	чтобы превратить ее в более скорострельный автомат с открытым затвором. \
+	Эти дополнения в сочетании с особенностями боевой винтовки, которая изначально не предназначалась \
+	для использования в автоматическом режиме, сделали ее довольно громоздкой. \
+	Однако пулемет остается пулеметом, как бы трудно ни было удерживать ствол на цели. \
+	Данный экземляр является вариантом, где подача боеприпасов идет сверху, а не снизу. \
+	Благодаря этой особенности скорострельность намного выше чем у 'Дарака', но точность намного хуже из-за неудобства прицеливания."
 
 	return .
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/bottom_fed
 	name = "Daraq Light Machinegun"
 	desc = "Увесистый пулемет, стреляющий патронами калибра .40 Sol, часто встречающийся в руках военных ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
 	icon_state = "outomaties"
@@ -133,48 +127,48 @@
 	spread = 10.5
 	projectile_wound_bonus = -10
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/update_overlays()
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/update_overlays()
 	. = ..()
 	if(istype(magazine, /obj/item/ammo_box/magazine/c40sol_rifle/box) && !magazine.ammo_count())
 		. += "[icon_state]_mag_rifle_box_empty"
 	return .
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/bottom_fed/examine_more(mob/user)
 	. = ..()
 
 	. += "Вариант винтовки под названием «Дарак», который вы сейчас видите, - это модификация, превратившая оружие в сносный, \
-	    хотя и неоптимальный легкий пулемет. Для поддержки роли пулемета внутренности винтовки были переделаны таким образом, \
-	    чтобы превратить ее в более скорострельный автомат с открытым затвором. \
-	    Эти дополнения в сочетании с особенностями боевой винтовки, которая изначально не предназначалась \
-	    для использования в автоматическом режиме, сделали ее довольно громоздкой. \
-	    Однако пулемет остается пулеметом, как бы трудно ни было удерживать ствол на цели."
+	хотя и неоптимальный легкий пулемет. Для поддержки роли пулемета внутренности винтовки были переделаны таким образом, \
+	чтобы превратить ее в более скорострельный автомат с открытым затвором. \
+	Эти дополнения в сочетании с особенностями боевой винтовки, которая изначально не предназначалась \
+	для использования в автоматическом режиме, сделали ее довольно громоздкой. \
+	Однако пулемет остается пулеметом, как бы трудно ни было удерживать ствол на цели."
 
 	return .
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom/no_mag
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/bottom_fed/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/top/no_mag
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/top_fed/no_mag
 	spawnwithmagazine = FALSE
 
 // Evil version of the rifle (nothing different it's just black)
 
-/obj/item/gun/ballistic/automatic/sol_rifle/black
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/black
 	desc = "Тяжелая боевая винтовка, стреляющая патронами калибра .40 Sol, окрашенная в тактический черный цвет. Принимает любой стандартный магазин от винтовок ТСФ."
 	icon_state = "infanterie_black"
 	worn_icon_state = "infanterie_black"
 	inhand_icon_state = "infanterie_black"
 
-/obj/item/gun/ballistic/automatic/sol_rifle/black/no_mag
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/black/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/sol_rifle/wooden
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/wooden
 	desc = "Тяжелая боевая винтовка, стреляющая патронами калибра .40 Sol. Принимает любой стандартный магазин от винтовок ТСФ. Укороченный вариант с деревянной фурнитурой."
 	icon_state = "infanterie_wooden"
 	worn_icon_state = "infanterie_wooden"
 	inhand_icon_state = "infanterie_wooden"
 
-/obj/item/gun/ballistic/automatic/sol_rifle/wooden/no_mag
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/wooden/no_mag
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/sol_rifle/marksman/wooden
@@ -189,12 +183,12 @@
 /obj/item/gun/ballistic/automatic/sol_rifle/marksman/wooden/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom/wooden
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/bottom_fed/wooden
 	name = "Daraq Light Machinegun"
 	desc = "Увесистый пулемет, стреляющий патронами калибра .40 Sol. Принимает любой стандартный магазин от винтовок ТСФ. Немного упрощенный вариант с деревянной фурнитурой."
 	icon_state = "outomaties_wooden"
 	worn_icon_state = "outomaties_wooden"
 	inhand_icon_state = "outomaties_wooden"
 
-/obj/item/gun/ballistic/automatic/sol_rifle/machinegun/bottom/wooden/no_mag
+/obj/item/gun/ballistic/automatic/sol_rifle/auto/machinegun/bottom_fed/wooden/no_mag
 	spawnwithmagazine = FALSE
