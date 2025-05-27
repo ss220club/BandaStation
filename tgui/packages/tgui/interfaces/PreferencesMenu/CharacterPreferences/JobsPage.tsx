@@ -13,7 +13,7 @@ import {
   PreferencesMenuData,
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
-import { SlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD
+import { JobSlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD
 
 function sortJobs(entries: [string, Job][], head?: string) {
   return sortBy(
@@ -229,14 +229,16 @@ function JobRow(props: JobRowProps) {
     );
   } else {
     rightSide = (
+      // BANDASTATION EDIT - Start
       <Stack align="center" height="100%" pr={1}>
-        <SlotDropdown name={name} />
+        <JobSlotDropdown name={name} />
         <PriorityButtons
           createSetPriority={createSetPriority}
           isOverflow={isOverflow}
           priority={priority}
         />
       </Stack>
+      // BANDASTATION EDIT - End
     );
   }
 
@@ -307,6 +309,7 @@ function Department(props: DepartmentProps) {
           );
         })}
       </Stack>
+
       {children}
     </Box>
   );

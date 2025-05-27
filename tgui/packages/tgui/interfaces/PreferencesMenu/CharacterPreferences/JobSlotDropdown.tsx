@@ -17,11 +17,11 @@ const SLOT_ICONS = {
   9: 'fa-9',
 };
 
-type SlotDropdownProps = {
+type JobSlotDropdownProps = {
   name: string;
 };
 
-export const SlotDropdown = (props: SlotDropdownProps) => {
+export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   const { data, act } = useBackend<PreferencesMenuData>();
   const { name } = props;
 
@@ -48,7 +48,7 @@ export const SlotDropdown = (props: SlotDropdownProps) => {
           menuWidth="auto"
           noChevron
           iconOnly
-          icon={SLOT_ICONS[currentSlotNumber as keyof typeof SLOT_ICONS]}
+          icon={SLOT_ICONS[currentSlotNumber]}
         />
       </div>
     </Tooltip>

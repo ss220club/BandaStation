@@ -324,6 +324,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Character
 	randomise = save_data?["randomise"]
 
+	//Load prefs
+	// job_preferences = save_data?["job_preferences"] // BANDASTATION MOVED
+
 	//Quirks
 	all_quirks = save_data?["all_quirks"]
 
@@ -334,7 +337,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Sanitize
 	randomise = SANITIZE_LIST(randomise)
+	// job_preferences = SANITIZE_LIST(job_preferences) // BANDASTATION MOVED
 	all_quirks = SANITIZE_LIST(all_quirks)
+
+	//Validate job prefs
+	// BANDASTATION MOVED - Start
+	// for(var/j in job_preferences)
+	// 	if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
+	// 		job_preferences -= j
+	// BANDASTATION MOVED - End
 
 	all_quirks = SSquirks.filter_invalid_quirks(SANITIZE_LIST(all_quirks))
 	validate_quirks()
@@ -372,6 +383,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Character
 	save_data["randomise"] = randomise
+
+	//Write prefs
+	// save_data["job_preferences"] = job_preferences // BANDASTATION MOVED
 
 	//Quirks
 	save_data["all_quirks"] = all_quirks
