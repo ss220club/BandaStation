@@ -6,7 +6,7 @@
 	gain_text = span_notice("Некоторые из слов ваших собеседников точно не являются обычными. Хорошо, что вы научились их понимать.")
 	lose_text = span_notice("Кажется, вы забыли свой второй язык.")
 	medical_record_text = "Пациент говорит на нескольких языках."
-	mail_goodies = list(/obj/item/taperecorder, /obj/item/clothing/head/frenchberet, /obj/item/clothing/mask/fakemoustache/italian)
+	mail_goodies = list(/obj/item/taperecorder, /obj/item/clothing/head/beret/frenchberet, /obj/item/clothing/mask/fakemoustache/italian)
 
 /datum/quirk_constant_data/bilingual
 	associated_typepath = /datum/quirk/bilingual
