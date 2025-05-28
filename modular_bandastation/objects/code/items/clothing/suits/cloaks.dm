@@ -173,9 +173,10 @@
 /obj/item/clothing/head/hooded/stealth_cloak
 	name = "infiltrator cloak's hood"
 	desc = "Капюшон плаща с фотодинамическими пластинами."
-	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
+	icon = 'icons/map_icons/clothing/mask.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
-	icon_state = "stealth_cloak"
+	icon_state = "/obj/item/clothing/head/hooded/stealth_cloak"
+	post_init_icon_state = "stealth_cloak"
 	body_parts_covered = HEAD
 	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACE
 	greyscale_colors = COLOR_OLIVE
