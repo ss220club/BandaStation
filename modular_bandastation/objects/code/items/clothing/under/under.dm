@@ -205,3 +205,46 @@
 	name = "short terry towel"
 	desc = "Полотенце, сотканное из синтетической ткани, на взгляд шершавое и маленькое. Можно обмотать вокруг тела."
 	icon_state = "towel_short_alt"
+
+/obj/item/clothing/under/netrun
+	name = "Битраннерский элитный комбинезон Марго"
+	desc = "Этот комбинезон, разработанный в Транс-Солнечной Федерации и сделанный из сверхпрочного термостойкого нановолокна, является незаменимым атрибутом в жизни каждого уважающего себя битраннера. Его элегантный воротник лишь подчёркивает статусность его владельца, а диоидные нейроускорители оптимизируют работу биомонитора и сенсоров, улучшая скорость исполнения сетевых операций и отправку протоколов. Создатели этого комбинезона отдаёт настоящую дань уважения всем земным раннерам далёкого прошлого. \
+	Сзади на воротнике можно разглядеть выгравированную надпись чёрными чернилами: Подарок от: Компания \"Наномед Индастриз\". \
+	Кому: Маргарет Эванс."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "netrun"
+
+/obj/item/clothing/under/tshirt_black
+	name = "black T-shirt"
+	desc = "Классика в мире одежды, предназначенной для повседневного ношения. Практичность и стиль в одном экземпляре."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "tshirt_black"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
+	can_adjust = FALSE
+
+/obj/item/clothing/under/hoodie_black
+	name = "black hoodie"
+	desc = "Классика в мире одежды, предназначенной для повседневного ношения. Практичность и стиль в одном экземпляре."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "hoodie_black"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
+	can_adjust = FALSE
+
+/obj/item/clothing/under/shirt_black
+	name = "black shirt"
+	desc = "Классика в мире одежды, предназначенной для повседневного ношения. Практичность и стиль в одном экземпляре."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "shirt_black"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
+
+/obj/item/clothing/under/shirt_white
+	name = "white shirt"
+	desc = "Классика в мире одежды, предназначенной для повседневного ношения. Практичность и стиль в одном экземпляре."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "shirt_white"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
