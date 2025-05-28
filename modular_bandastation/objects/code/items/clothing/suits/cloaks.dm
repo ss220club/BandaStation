@@ -133,8 +133,9 @@
 	name = "infiltrator cloak"
 	desc = "Плащ, покрытый фотодинамическими пластинами, позволяет носителю максимально эффективно слиться с окружающей средой.\
 	Наибольшую эффективность показывает в условиях пониженной освещенности."
-	icon_state = "stealth_cloak"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
+	icon_state = "/obj/item/clothing/suit/hooded/stealth_cloak"
+	post_init_icon_state = "stealth_cloak"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
 	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|ARMS
