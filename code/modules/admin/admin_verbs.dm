@@ -1,10 +1,12 @@
 /client/proc/add_admin_verbs()
 	control_freak = CONTROL_FREAK_SKIN | CONTROL_FREAK_MACROS
 	SSadmin_verbs.assosciate_admin(src)
+	SStitle.title_output(src, "true", "admin_buttons_visibility") // BANDASTATION ADDITION - HTML Title Screen
 
 /client/proc/remove_admin_verbs()
 	control_freak = initial(control_freak)
 	SSadmin_verbs.deassosciate_admin(src)
+	SStitle.title_output(src, "false", "admin_buttons_visibility") // BANDASTATION ADDITION - HTML Title Screen
 
 ADMIN_VERB(hide_verbs, R_NONE, "Adminverbs - Hide All", "Hide most of your admin verbs.", ADMIN_CATEGORY_MAIN)
 	user.remove_admin_verbs()
@@ -38,6 +40,7 @@ ADMIN_VERB(admin_ghost, R_ADMIN, "AGhost", "Become a ghost without DNR.", ADMIN_
 		user.init_verbs()
 		if(body && !body.key)
 			body.key = "@[user.key]" //Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
+		SEND_SIGNAL(body, COMSIG_MOB_ADMIN_GHOSTED) // BANDASTATION ADD - SSD INDICATOR
 		BLACKBOX_LOG_ADMIN_VERB("Admin Ghost")
 
 ADMIN_VERB(invisimin, R_ADMIN, "Invisimin", "Toggles ghost-like invisibility.", ADMIN_CATEGORY_GAME)

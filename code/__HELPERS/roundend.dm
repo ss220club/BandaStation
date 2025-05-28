@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 					var/mob/living/carbon/human/H = L
 					category = "humans"
 					if(H.mind)
-						mob_data["job"] = H.mind.assigned_role.title
+						mob_data["job"] = job_title_ru(H.mind.assigned_role.title)
 					else
 						mob_data["job"] = "Unknown"
 					mob_data["species"] = H.dna.species.name
@@ -244,6 +244,10 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 	//Set news report and mode result
 	SSdynamic.set_round_result()
+	// BANDASTATION EDIT START - STORYTELLER
+	SSgamemode.round_end_report()
+	SSgamemode.store_roundend_data() // store data on roundend for next round
+	// BANDASTATION EDIT END - STORYTELLER
 
 	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>The round has ended."))))
 	log_game("The round has ended.")
@@ -309,6 +313,9 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/build_roundend_report()
 	var/list/parts = list()
 
+	//might want to make this a full section
+	parts += SSgamemode.create_roundend_score() // BANDASTATION EDIT - STORYTELLER
+
 	//AI laws
 	parts += law_report()
 
@@ -359,8 +366,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			else
 				parts += "[FOURSPACES]<i>Nobody died this shift!</i>"
 
+	// BANDASTATION EDIT START - STORYTELLER
+	/*
 	parts += "[FOURSPACES]Threat level: [SSdynamic.threat_level]"
 	parts += "[FOURSPACES]Threat left: [SSdynamic.mid_round_budget]"
+
 	if(SSdynamic.roundend_threat_log.len)
 		parts += "[FOURSPACES]Threat edits:"
 		for(var/entry as anything in SSdynamic.roundend_threat_log)
@@ -368,7 +378,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	parts += "[FOURSPACES]Executed rules:"
 	for(var/datum/dynamic_ruleset/rule in SSdynamic.executed_rules)
 		parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -[rule.cost + rule.scaled_times * rule.scaling_cost] threat"
-
+	*/
+	// BANDASTATION EDIT END - STORYTELLER
 	return parts.Join("<br>")
 
 /client/proc/roundend_report_file()
@@ -690,8 +701,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /proc/printplayer(datum/mind/ply, fleecheck)
 	var/jobtext = ""
 	if(!is_unassigned_job(ply.assigned_role))
-		jobtext = " the <b>[ply.assigned_role.title]</b>"
-	var/text = "<b>[ply.key]</b> was <b>[ply.name]</b>[jobtext] and"
+		jobtext = ", <b>[job_title_ru(ply.assigned_role.title)],</b>"
+	var/text = "<b>[ply.key]</b> был <b>[ply.name]</b>[jobtext] and"
 	if(ply.current)
 		if(ply.current.stat == DEAD)
 			text += " [span_redtext("died")]"

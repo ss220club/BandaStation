@@ -32,8 +32,10 @@ SUBSYSTEM_DEF(events)
 	frequency_lower = CONFIG_GET(number/events_frequency_lower)
 	frequency_upper = CONFIG_GET(number/events_frequency_upper)
 
-	if(CONFIG_GET(flag/events_config_enabled))
-		setup_config()
+	/// BANDASTATION REMOVAL START - Storyteller
+	// if(CONFIG_GET(flag/events_config_enabled))
+	// 	setup_config()
+	/// BANDASTATION REMOVAL END - Storyteller
 
 	reschedule()
 	// Instantiate our holidays list if it hasn't been already
@@ -41,22 +43,24 @@ SUBSYSTEM_DEF(events)
 		fill_holidays()
 	return SS_INIT_SUCCESS
 
-///Takes the events config json and applies any var edits made there to their respective event.
-/datum/controller/subsystem/events/proc/setup_config()
-	var/json_file = file("[global.config.directory]/events.json")
-	if(!fexists(json_file))
-		return
-	var/list/configuration = json_decode(file2text(json_file))
-	for(var/variable in configuration)
-		var/datum/round_event_control/event = events_by_name[variable]
-		if(!event)
-			stack_trace("Invalid event [event] attempting to be configured.")
-			continue
-		for(var/event_variable in configuration[variable])
-			if(!(event.vars.Find(event_variable)))
-				stack_trace("Invalid event configuration variable [event_variable] in variable changes for [variable].")
-				continue
-			event.vars[event_variable] = configuration[variable][event_variable]
+/// BANDASTATION REMOVAL START - Storyteller
+// ///Takes the events config json and applies any var edits made there to their respective event.
+// /datum/controller/subsystem/events/proc/setup_config()
+// 	var/json_file = file("[global.config.directory]/events.json")
+// 	if(!fexists(json_file))
+// 		return
+// 	var/list/configuration = json_decode(file2text(json_file))
+// 	for(var/variable in configuration)
+// 		var/datum/round_event_control/event = events_by_name[variable]
+// 		if(!event)
+// 			stack_trace("Invalid event [event] attempting to be configured.")
+// 			continue
+// 		for(var/event_variable in configuration[variable])
+// 			if(!(event.vars.Find(event_variable)))
+// 				stack_trace("Invalid event configuration variable [event_variable] in variable changes for [variable].")
+// 				continue
+// 			event.vars[event_variable] = configuration[variable][event_variable]
+/// BANDASTATION REMOVAL END - Storyteller
 
 /datum/controller/subsystem/events/fire(resumed = FALSE)
 	if(!resumed)
@@ -98,7 +102,7 @@ SUBSYSTEM_DEF(events)
  */
 /datum/controller/subsystem/events/proc/spawnEvent(datum/round_event_control/excluded_event)
 	set waitfor = FALSE //for the admin prompt
-	if(!CONFIG_GET(flag/allow_random_events))
+	if(!CONFIG_GET(flag/allow_random_events) || !excluded_event) // BANDASTATION EDIT START - STORYTELLER - No SSevents spawn except rerolling
 		return
 
 	var/players_amt = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
@@ -111,8 +115,8 @@ SUBSYSTEM_DEF(events)
 			continue
 		if(!event_to_check.can_spawn_event(players_amt))
 			continue
-		if(event_to_check.weight < 0) //for round-start events etc.
-			var/res = TriggerEvent(event_to_check)
+		if(event_to_check.roundstart) //for round-start events etc.
+			var/res = SSgamemode.TriggerEvent(event_to_check)
 			if(res == EVENT_INTERRUPTED)
 				continue //like it never happened
 			if(res == EVENT_CANT_RUN)
@@ -122,15 +126,25 @@ SUBSYSTEM_DEF(events)
 
 	var/datum/round_event_control/event_to_run = pick_weight(event_roster)
 	if(event_to_run)
-		TriggerEvent(event_to_run)
+		// BANDASTATION EDIT START - STORYTELLER
+		/// TriggerEvent(event_to_run)
+		SSgamemode.TriggerEvent(event_to_run, forced = FALSE)
+		// BANDASTATION EDIT END - STORYTELLER
 
 ///Does the last pre-flight checks for the passed event, and runs it if the event is ready.
+
 /datum/controller/subsystem/events/proc/TriggerEvent(datum/round_event_control/event_to_trigger)
 	. = event_to_trigger.preRunEvent()
 	if(. == EVENT_CANT_RUN)//we couldn't run this event for some reason, set its max_occurrences to 0
 		event_to_trigger.max_occurrences = 0
 	else if(. == EVENT_READY)
-		event_to_trigger.run_event(random = TRUE)
+		// BANDASTATION EDIT START - STORYTELLER
+		//event_to_trigger.run_event(random = TRUE)
+		message_admins("<font color='[COLOR_DARK_MODERATE_LIME_GREEN]'>SSevents</font> runs and try to buy a event: [event_to_trigger.name]!")
+		log_game("<font color='[COLOR_DARK_MODERATE_LIME_GREEN]'>SSevents</font> runs and try to buy a event: [event_to_trigger.name]!")
+		SSgamemode.current_storyteller.try_buy_event(src)
+		// BANDASTATION EDIT END - STORYTELLER
+
 
 ///Toggles whether or not wizard events will be in the event pool, and sends a notification to the admins.
 /datum/controller/subsystem/events/proc/toggleWizardmode()
@@ -204,7 +218,8 @@ GLOBAL_LIST(holidays)
 	if(GLOB.holidays.len)
 		shuffle_inplace(GLOB.holidays)
 		// regenerate station name because holiday prefixes.
-		set_station_name(new_station_name())
+		if(isnull(SSmapping.current_map?.fluff_name)) // BANDASTATION ADDITION - Station Fluff
+			set_station_name(new_station_name())
 		world.update_status()
 
 	return TRUE

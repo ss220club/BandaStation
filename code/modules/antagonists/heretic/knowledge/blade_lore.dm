@@ -19,10 +19,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_blade
 	name = "The Cutting Edge"
-	desc = "Opens up the Path of Blades to you. \
-		Allows you to transmute a knife with one bar of silver or titanium to create a Sundered Blade. \
-		You can create up to four at a time."
-	gain_text = "Our great ancestors forged swords and practiced sparring on the eve of great battles."
+	desc = "Открывает перед вами Путь клинков. \
+		Позволяет трансмутировать нож с одним слитком серебра или титаниума для создания Закаленного клинка. \
+		Одновременно можно иметь не более четырех."
+	gain_text = "Наши великие предки ковали мечи и практиковали спарринги накануне великих сражений."
 	required_atoms = list(
 		/obj/item/knife = 1,
 		list(/obj/item/stack/sheet/mineral/silver, /obj/item/stack/sheet/mineral/titanium) = 1,
@@ -34,9 +34,9 @@
 
 /datum/heretic_knowledge/blade_grasp
 	name = "Grasp of the Blade"
-	desc = "Your Mansus Grasp will cause a short stun when used on someone lying down or facing away from you."
-	gain_text = "The story of the footsoldier has been told since antiquity. It is one of blood and valor, \
-		and is championed by sword, steel and silver."
+	desc = "Ваша Хватка Мансуса вызывает короткое оглушение при использовании на лежачей или стоящей спиной к вам цели."
+	gain_text = "История пехотинца рассказывается с древности. Это история крови и доблести, \
+		за которую выступают меч, сталь и серебро."
 	cost = 1
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "grasp_blade"
@@ -56,7 +56,7 @@
 	// We're officially behind them, apply effects
 	target.AdjustParalyzed(1.5 SECONDS)
 	target.apply_damage(10, BRUTE, wound_bonus = CANT_WOUND)
-	target.balloon_alert(source, "backstab!")
+	target.balloon_alert(source, "удар в спину!")
 	playsound(target, 'sound/items/weapons/guillotine.ogg', 100, TRUE)
 
 /// The cooldown duration between triggers of blade dance
@@ -64,10 +64,10 @@
 
 /datum/heretic_knowledge/blade_dance
 	name = "Dance of the Brand"
-	desc = "Being attacked while wielding a Heretic Blade in either hand will deliver a riposte \
-		towards your attacker. This effect can only trigger once every 20 seconds."
-	gain_text = "The footsoldier was known to be a fearsome duelist. \
-		Their general quickly appointed them as their personal Champion."
+	desc = "Если вас атакуют, когда вы держите клинок еретика в любой руке, вы рипостом \
+		наносите удар в сторону нападающего. Этот эффект может сработать только один раз в 20 секунд."
+	gain_text = "Пехотинец был известен как грозный дуэлянт. \
+		Их генерал быстро назначил своим личным чемпионом."
 	cost = 1
 	research_tree_icon_path = 'icons/mob/actions/actions_ecult.dmi'
 	research_tree_icon_state = "shatter"
@@ -137,28 +137,28 @@
 
 /datum/heretic_knowledge/blade_dance/proc/counter_attack(mob/living/carbon/human/source, mob/living/target, obj/item/melee/sickly_blade/weapon, attack_text)
 	playsound(get_turf(source), 'sound/items/weapons/parry.ogg', 100, TRUE)
-	source.balloon_alert(source, "riposte used")
+	source.balloon_alert(source, "рипост использован")
 	source.visible_message(
-		span_warning("[source] leans into [attack_text] and delivers a sudden riposte back at [target]!"),
-		span_warning("You lean into [attack_text] and deliver a sudden riposte back at [target]!"),
-		span_hear("You hear a clink, followed by a stab."),
+		span_warning("[capitalize(source.declent_ru(NOMINATIVE))] наклоняется к [attack_text] и наносит внезапный рипост [target.declent_ru(DATIVE)]!"),
+		span_warning("Вы наклоняетесь к [attack_text] и наносите внезапный рипост [target.declent_ru(DATIVE)]!"),
+		span_hear("Вы слышите лязг, за которым следует удар."),
 	)
 	weapon.melee_attack_chain(source, target)
 
 /datum/heretic_knowledge/blade_dance/proc/reset_riposte(mob/living/carbon/human/source)
 	riposte_ready = TRUE
-	source.balloon_alert(source, "riposte ready")
+	source.balloon_alert(source, "рипост готов")
 
 #undef BLADE_DANCE_COOLDOWN
 
 /datum/heretic_knowledge/mark/blade_mark
 	name = "Mark of the Blade"
-	desc = "Your Mansus Grasp now applies the Mark of the Blade. While marked, \
-		the victim will be unable to leave their current room until it expires or is triggered. \
-		Triggering the mark will summon a knife that will orbit you for a short time. \
-		The knife will block any attack directed towards you, but is consumed on use."
-	gain_text = "His general wished to end the war, but the Champion knew there could be no life without death. \
-		He would slay the coward himself, and anyone who tried to run."
+	desc = "Ваша Хватка Мансуса теперь накладывает Метку клинка. Во время действия метки \
+		жертва не сможет покинуть текущую комнату, пока не истечет срок ее действия или пока она не сработает. \
+		Срабатывание метки вызовет нож, который в течение короткого времени будет вращаться вокруг вас. \
+		Нож блокирует любую направленную на вас атаку, но расходуется при использовании."
+	gain_text = "Его генерал хотел закончить войну, но чемпион знал, что без смерти не может быть жизни. \
+		Он сам убьет труса и всех, кто попытается бежать."
 	mark_type = /datum/status_effect/eldritch/blade
 
 /datum/heretic_knowledge/mark/blade_mark/create_mark(mob/living/source, mob/living/target)
@@ -166,7 +166,7 @@
 	if(istype(blade_mark))
 		var/area/to_lock_to = get_area(target)
 		blade_mark.locked_to = to_lock_to
-		to_chat(target, span_hypnophrase("An otherworldly force is compelling you to stay in [get_area_name(to_lock_to)]!"))
+		to_chat(target, span_hypnophrase("Потусторонняя сила заставляет вас оставаться в [get_area_name(to_lock_to)]!"))
 	return blade_mark
 
 /datum/heretic_knowledge/mark/blade_mark/trigger_mark(mob/living/source, mob/living/target)
@@ -181,35 +181,35 @@
 
 /datum/heretic_knowledge/spell/realignment
 	name = "Realignment"
-	desc = "Grants you Realignment a spell that wil realign your body rapidly for a short period. \
-		During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack. \
-		This spell can be cast in rapid succession, but doing so will increase the cooldown."
-	gain_text = "In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on."
+	desc = "Дает вам заклинание Realignment, которое быстро и на короткое время выправит ваше тело. \
+		Во время этого процесса вы будете быстро восстанавливать стамину и быстро восстанавливаться после оглушения, однако вы не сможете атаковать. \
+		Это заклинание можно применять подряд, но при этом увеличивается время его перезарядки."
+	gain_text = "В шквале смертей он обрел мир внутри себя. Несмотря на неодолимые шансы, он ступал вперед."
 	action_to_add = /datum/action/cooldown/spell/realignment
 	cost = 1
 
 /datum/heretic_knowledge/spell/wolves_among_sheep
 	name = "Wolves Among Sheep"
-	desc = "Alters the fabric of reality, conjuring a magical arena unpassable to outsiders, \
-		all participants are trapped and immune to any form of crowd control or enviromental hazards; \
-		trapped participants are granted a Blade and are unable to leave or jaunt until they score a critical hit. \
-		Critical hits partially restore the Heretic's health."
-	gain_text = "Shadows crawl across the room, casting every chair, table \
-		and console into the looming shape of another traitorous hand. \
-		I have made an enemy of all, and peace will never be known to me \
-		again. I have shattered bonds and severed all alliances. In this truth, \
-		I know now the fragility of comradery. My enemies will be all, divided."
+	desc = "Изменяет материю реальности, создавая магическую арену, недоступную для посторонних, \
+		все участники находятся в ловушке и защищены от любых форм контроля толпы или опасностей окружающей среды; \
+		попавшим в ловушку участникам выдается Клинок, и они не могут выйти или телепортироваться, пока не нанесут критический удар. \
+		Критические удары частично восстанавливают здоровье еретика."
+	gain_text = "Тени расползаются по комнате, отбрасывая силуэты на каждый стул, стол \
+		и вырисовываются в фигуру еще одной предательской руки. \
+		Я стал всеобщим врагом, и мне никогда не обрести покоя. \
+		Я разрушил все связи и разорвал все союзы. В этой истине \
+		теперь я знаю, как непрочно товарищество. Враги мои будут повсюду, каждый по частям."
 	cost = 1
 	action_to_add = /datum/action/cooldown/spell/wolves_among_sheep
 
 /datum/heretic_knowledge/blade_upgrade/blade
 	name = "Empowered Blades"
-	desc = "Attacking someone with a Sundered Blade in both hands \
-		will now deliver a blow with both at once, dealing two attacks in rapid succession. \
-		The second blow will be slightly weaker. \
-		You are able to infuse your mansus grasp directly into your blades, and your blades are more effective against structures."
-	gain_text = "I found him cleaved in twain, halves locked in a duel without end; \
-		a flurry of blades, neither hitting their mark, for the Champion was indomitable."
+	desc = "Атакуя кого-либо с Закаленным клинком в обеих руках, \
+		теперь вы будете наносить удар обоими клинками сразу, нанося две атаки в быстрой последовательности. \
+		Второй удар будет немного слабее. \
+		Ваша Хватка мансуса может слиться с клинком, а сами клинки более эффективны против структур."
+	gain_text = "Я нашел его рассеченным на две части, половинки сцепились в дуэли без конца; \
+		шквал клинков, но ни один из них не попал в цель, ибо Чемпион был неукротим."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_blade"
 	/// How much force do we apply to the offhand?
@@ -300,29 +300,29 @@
 
 /datum/heretic_knowledge/spell/furious_steel
 	name = "Furious Steel"
-	desc = "Grants you Furious Steel, a targeted spell. Using it will summon three \
-		orbiting blades around you. These blades will protect you from all attacks, \
-		but are consumed on use. Additionally, you can click to fire the blades \
-		at a target, dealing damage and causing bleeding."
-	gain_text = "Without thinking, I took the knife of a fallen soldier and threw with all my might. My aim was true! \
-		The Torn Champion smiled at their first taste of agony, and with a nod, their blades became my own."
+	desc = "Дарует вам Furious Steel, заклинание с выбором цели. При его использовании вокруг вас появятся три \
+		вращающихся клинка. Эти клинки защищают вас от всех атак, \
+		но при использовании расходуются. Кроме того, вы можете использовать кнопку, чтобы выстрелить лезвиями \
+		в цель, нанося урон и вызывая кровотечение."
+	gain_text = "Не раздумывая, я взял нож павшего солдата и со всей силы метнул. Моя меткость оказалась верна! \
+		Чемпион Растерзаний улыбнулся их первому вкусу агонии, и, кивнув, их клинки стали моими собственными."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/furious_steel
 	cost = 1
 
 /datum/heretic_knowledge/ultimate/blade_final
 	name = "Maelstrom of Silver"
-	desc = "The ascension ritual of the Path of Blades. \
-		Bring 3 corpses with either no head or a split skull to a transmutation rune to complete the ritual. \
-		When completed, you will be surrounded in a constant, regenerating orbit of blades. \
-		These blades will protect you from all attacks, but are consumed on use. \
-		Your Furious Steel spell will also have a shorter cooldown. \
-		Additionally, you become a master of combat, gaining full wound immunity and the ability to shrug off short stuns. \
-		Your Sundered Blades deal bonus damage and heal you on attack for a portion of the damage dealt."
-	gain_text = "The Torn Champion is freed! I will become the blade reunited, and with my greater ambition, \
-		I AM UNMATCHED! A STORM OF STEEL AND SILVER IS UPON US! WITNESS MY ASCENSION!"
+	desc = "Ритуал вознесения Пути клинков. \
+		Принесите 3 безголовых или со сломанным черепом трупа к руне трансмутации, чтобы завершить ритуал. \
+		После завершения вы будете окружены постоянно восстанавливающимися вращающимися лезвиями. \
+		Эти клинки защищают вас от всех атак, но расходуются при использовании. \
+		Ваше заклинание Furious Steel также будет перезаряжаться быстрее. \
+		Кроме того, вы становитесь мастером боя, получая полный иммунитет к ранам и возможность снимать короткие оглушения. \
+		Ваши Закаленные клинки наносят бонусный урон и исцеляют вас при атаке на часть нанесенного урона."
+	gain_text = "Чемпион Растерзаний освобожден! Я стану воссоединенным клинком, и с моими более великими амбициями, \
+		МНЕ НЕТ РАВНЫХ! БУРЯ ИЗ СТАЛИ И СЕРЕБРА НАДВИГАЕТСЯ НА НАС! УЗРИТЕ МОЁ ВОЗНЕСЕНИЕ!"
 
 	ascension_achievement = /datum/award/achievement/misc/blade_ascension
-	announcement_text = "%SPOOKY% Master of blades, the Torn Champion's disciple, %NAME% has ascended! Their steel is that which will cut reality in a maelstom of silver! %SPOOKY%"
+	announcement_text = "%SPOOKY% Мастер клинков %NAME%, ученик Чемпиона Растерзаний, вознесся! Их сталь — та, что рассечет реальность в серебряном шторме! %SPOOKY%"
 	announcement_sound = 'sound/music/antag/heretic/ascend_blade.ogg'
 
 /datum/heretic_knowledge/ultimate/blade_final/is_valid_sacrifice(mob/living/carbon/human/sacrifice)
@@ -334,6 +334,7 @@
 
 /datum/heretic_knowledge/ultimate/blade_final/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	. = ..()
+
 	ADD_TRAIT(user, TRAIT_NEVER_WOUNDED, type)
 	RegisterSignal(user, COMSIG_HERETIC_BLADE_ATTACK, PROC_REF(on_eldritch_blade))
 	user.apply_status_effect(/datum/status_effect/protective_blades/recharging, null, 8, 30, 0.25 SECONDS, /obj/effect/floating_blade, 1 MINUTES)
