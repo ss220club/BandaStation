@@ -18891,7 +18891,12 @@
 	},
 /obj/machinery/status_display/ai/directional/north,
 /obj/machinery/light/small/directional/north,
-/obj/item/toy/figure/ninja,
+/obj/item/assembly/flash/handheld{
+	pixel_x = -5
+	},
+/obj/item/assembly/flash/handheld{
+	pixel_x = 7
+	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "eBD" = (
@@ -57277,6 +57282,9 @@
 /obj/item/stock_parts/power_store/cell/high{
 	pixel_y = 6
 	},
+/obj/item/stock_parts/power_store/cell/high{
+	pixel_y = 2
+	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "nOH" = (
@@ -62085,12 +62093,6 @@
 /obj/item/aicard{
 	pixel_y = 4
 	},
-/obj/item/assembly/flash/handheld{
-	pixel_x = 7
-	},
-/obj/item/assembly/flash/handheld{
-	pixel_x = -5
-	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "oWo" = (
@@ -62721,9 +62723,7 @@
 /obj/item/plant_analyzer{
 	pixel_y = 12
 	},
-/obj/item/stock_parts/power_store/cell/high{
-	pixel_y = 2
-	},
+/obj/item/toy/figure/ninja,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "peq" = (
