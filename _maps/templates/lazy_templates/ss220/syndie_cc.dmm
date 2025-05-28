@@ -2097,7 +2097,7 @@
 /obj/item/organ/cyberimp/arm/toolkit/combat,
 /obj/item/organ/cyberimp/arm/toolkit/esword,
 /obj/item/organ/cyberimp/arm/toolkit/flash,
-/obj/item/organ/cyberimp/arm/gun,
+/obj/item/organ/cyberimp/arm/toolkit/gun/laser,
 /obj/item/organ/cyberimp/arm/toolkit/medibeam,
 /obj/item/organ/cyberimp/arm/toolkit/surgery,
 /obj/item/organ/cyberimp/arm/toolkit/toolset,
