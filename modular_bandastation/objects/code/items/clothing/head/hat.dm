@@ -176,7 +176,7 @@
 /obj/item/clothing/head/beret/tsf_infiltrator
 	name = "TSF infiltrator operative beret"
 	desc = "Берет бойца-диверсанта ТСФ."
-	icon_state = "beret_badge"
+	icon_state = "/obj/item/clothing/head/beret/tsf_infiltrator"
 	greyscale_config = /datum/greyscale_config/beret_badge
 	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
 	greyscale_colors = "#43523d#a2abb0"
