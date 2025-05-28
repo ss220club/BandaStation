@@ -357,6 +357,10 @@
  * Automatic logging and uses poll_candidates_for_mob, how convenient
  */
 /proc/offer_control(mob/M)
+	if(isdead(M))
+		to_chat(usr, "Вы не можете дать призракам контроль над призраком. Они уже призраки.")
+		return FALSE
+
 	to_chat(M, "Контроль над вашей куклой был предложен мертвым игрокам.")
 	if(usr)
 		log_admin("[key_name(usr)] has offered control of ([key_name(M)]) to ghosts.")

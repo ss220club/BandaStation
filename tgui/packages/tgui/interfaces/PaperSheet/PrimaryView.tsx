@@ -85,7 +85,7 @@ export function PrimaryView() {
   }
 
   function handleHintListInteraction(
-    event: KeyboardEvent<HTMLDivElement>,
+    event: KeyboardEvent<HTMLTextAreaElement | HTMLDivElement>,
   ): void {
     if (!paperReplacementHint.length || !textAreaActive) {
       return;
