@@ -294,10 +294,10 @@
 		/datum/job/station_engineer = /obj/item/organ/cyberimp/arm/toolkit/toolset,
 		/datum/job/warden = /obj/item/organ/cyberimp/eyes/hud/security,
 		// BANDASTATION ADD - START
-		/datum/job/nanotrasen_representative = /obj/item/organ/cyberimp/arm/paperwork,
-		/datum/job/blueshield = /obj/item/organ/cyberimp/arm/flash,
-		/datum/job/magistrate = /obj/item/organ/cyberimp/arm/paperwork,
-		/datum/job/explorer = /obj/item/organ/cyberimp/arm/toolset,
+		/datum/job/nanotrasen_representative = /obj/item/organ/cyberimp/arm/toolkit/paperwork,
+		/datum/job/blueshield = /obj/item/organ/cyberimp/arm/toolkit/flash,
+		/datum/job/magistrate = /obj/item/organ/cyberimp/arm/toolkit/paperwork,
+		/datum/job/explorer = /obj/item/organ/cyberimp/arm/toolkit/toolset,
 		// BANDASTATION ADD - END
 	)
 
