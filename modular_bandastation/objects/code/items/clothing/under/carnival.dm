@@ -53,16 +53,19 @@
 	name = "Wolf's dress"
 	desc = "Платье, выполненное в особом стиле и пошитое неизвестной, но явно престижной компанией. \
 		Скорее всего такой наряд могут позволить себе единицы ввиду ограниченного тиража."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/carnival.dmi'
 	icon_state = "dress_mel"
 
 /obj/item/clothing/under/carnival/silco
 	name = "Industrialist's suit"
 	desc = "Костюм, вышитый золотом. На бирке виднеется надпись - \"чтобы править - вселяй страх\"."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/carnival.dmi'
 	icon_state = "silco"
 
 /obj/item/clothing/under/carnival/kim
 	name = "Kitsuragi's suit"
 	desc = "Явно одежда какого-то полицейского..."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/carnival.dmi'
 	icon_state = "kim"
 
 #undef _COLOR_WHITE
