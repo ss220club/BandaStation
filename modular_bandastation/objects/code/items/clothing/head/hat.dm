@@ -22,7 +22,9 @@
 /obj/item/clothing/head/beret/cent_intern
 	name = "fleet junior-officer's beret"
 	desc = "Носится младшим офицерским составом."
-	icon_state = "beret_badge"
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
+	icon_state = "/obj/item/clothing/head/beret/cent_intern"
+	post_init_icon_state = "beret_badge"
 	greyscale_config = /datum/greyscale_config/beret_badge
 	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
 	greyscale_colors = "#323253#acacac"
@@ -43,7 +45,9 @@
 /obj/item/clothing/head/beret/cent_diplomat
 	name = "fleet officer's white beret"
 	desc = "Изящный белый берет. На подкладке вышита надпись: \"НЕ ПОДЛЕЖИТ СТИРКЕ!\""
-	icon_state = "beret_badge"
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
+	icon_state = "/obj/item/clothing/head/beret/cent_diplomat"
+	post_init_icon_state = "beret_badge"
 	greyscale_config = /datum/greyscale_config/beret_badge
 	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
 	greyscale_colors = "#eeeeee#FFCE5B"

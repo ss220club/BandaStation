@@ -417,95 +417,6 @@
 	var/index = get_held_index_of_item(I)
 	return index && hand_bodyparts[index]
 
-/**
- * Proc called when offering an item to another player
- *
- * This handles creating an alert and adding an overlay to it
- */
-/mob/living/carbon/proc/give(mob/living/carbon/offered)
-	if(has_status_effect(/datum/status_effect/offering))
-		to_chat(src, span_warning("Вы уже что-то предлагаете передать!"))
-		return
-
-	if(IS_DEAD_OR_INCAP(src))
-		to_chat(src, span_warning("Вы не можете предложить предметы в вашем текущем состоянии!"))
-		return
-
-	var/obj/item/offered_item = get_active_held_item()
-	// if it's an abstract item, should consider it to be non-existent (unless it's a HAND_ITEM, which means it's an obj/item that is just a representation of our hand)
-	if(!offered_item || ((offered_item.item_flags & ABSTRACT) && !(offered_item.item_flags & HAND_ITEM)))
-		to_chat(src, span_warning("Вы ничего не держите, чтобы предложить передать!"))
-		return
-
-	if(offered)
-		if(offered == src)
-			if(!swap_hand(get_inactive_hand_index())) //have to swap hands first to take something
-				to_chat(src, span_warning("Вы пытаетесь взять [offered_item.declent_ru(ACCUSATIVE)] от себя же, но проваливаетесь."))
-				return
-			if(!put_in_active_hand(offered_item))
-				to_chat(src, span_warning("Вы пытаетесь взять [offered_item.declent_ru(ACCUSATIVE)] от себя же, но проваливаетесь."))
-				return
-			else
-				to_chat(src, span_notice("Вы берете [offered_item.declent_ru(ACCUSATIVE)] от себя же."))
-				return
-
-		if(IS_DEAD_OR_INCAP(offered))
-			to_chat(src, span_warning("[offered.ru_p_they(TRUE)] не может ничего взять в своем текущем состоянии!"))
-			return
-
-		if(!CanReach(offered))
-			to_chat(src, span_warning("[offered.ru_p_they(TRUE)] слишком далеко, подойдите ближе!"))
-			return
-	else
-		if(!(locate(/mob/living/carbon) in orange(1, src)))
-			to_chat(src, span_warning("Нет никого рядом, кому можно было бы предложить предмет!"))
-			return
-
-	if(offered_item.on_offered(src)) // see if the item interrupts with its own behavior
-		return
-
-	balloon_alert_to_viewers("что-то предлагает")
-	visible_message(span_notice("[capitalize(declent_ru(NOMINATIVE))] предлагает [offered ? "[offered.declent_ru(DATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), \
-					span_notice("Вы предлагаете [offered ? "[offered.declent_ru(DATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), null, 2)
-
-	apply_status_effect(/datum/status_effect/offering, offered_item, null, offered)
-
-/**
- * Proc called when the player clicks the give alert
- *
- * Handles checking if the player taking the item has open slots and is in range of the offerer
- * Also deals with the actual transferring of the item to the players hands
- * Arguments:
- * * offerer - The person giving the original item
- * * I - The item being given by the offerer
- */
-/mob/living/carbon/proc/take(mob/living/carbon/offerer, obj/item/I)
-	clear_alert("[offerer]")
-	if(IS_DEAD_OR_INCAP(src))
-		to_chat(src, span_warning("Вы не можете взять что-либо в вашем текущем состоянии!"))
-		return
-	if(get_dist(src, offerer) > 1)
-		to_chat(src, span_warning("[capitalize(offerer.declent_ru(NOMINATIVE))] слишком далеко!"))
-		return
-	if(!I || offerer.get_active_held_item() != I)
-		to_chat(src, span_warning("[capitalize(offerer.declent_ru(NOMINATIVE))] больше не держит предмет, который предлагался!"))
-		return
-	if(!get_empty_held_indexes())
-		to_chat(src, span_warning("У вас нет пустых рук!"))
-		return
-
-	if(I.on_offer_taken(offerer, src)) // see if the item has special behavior for being accepted
-		return
-
-	if(!offerer.temporarilyRemoveItemFromInventory(I))
-		visible_message(span_notice("[capitalize(offerer.declent_ru(NOMINATIVE))] пытается передать [I.declent_ru(ACCUSATIVE)], но не может снять [I.ru_p_them()]..."))
-		return
-
-	visible_message(span_notice("[capitalize(declent_ru(NOMINATIVE))] берет [I.declent_ru(ACCUSATIVE)] от [offerer.declent_ru(GENITIVE)]."), \
-					span_notice("Вы берете [I.declent_ru(ACCUSATIVE)] от [offerer.declent_ru(GENITIVE)]."))
-	I.do_pickup_animation(src, offerer)
-	put_in_hands(I)
-
 ///Returns a list of all body_zones covered by clothing
 /mob/living/carbon/proc/get_covered_body_zones()
 	RETURN_TYPE(/list)
@@ -539,7 +450,7 @@
 		"right pocket" = ITEM_SLOT_RPOCKET
 	)
 
-	var/placed_in = equip_in_one_of_slots(item, pockets, indirect_action = TRUE)
+	var/placed_in = equip_in_one_of_slots(item, pockets, qdel_on_fail = FALSE, indirect_action = TRUE)
 
 	if (!placed_in)
 		placed_in = equip_to_storage(item, ITEM_SLOT_BACK, indirect_action = TRUE)

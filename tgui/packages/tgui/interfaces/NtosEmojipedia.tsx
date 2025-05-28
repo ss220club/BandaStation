@@ -31,7 +31,6 @@ export const NtosEmojipedia = (props) => {
           buttons={
             <>
               <Input
-                expensive
                 placeholder="Найти по имени"
                 value={filter}
                 onChange={setFilter}
