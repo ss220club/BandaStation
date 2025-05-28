@@ -16503,12 +16503,8 @@
 /area/station/engineering/storage_shared)
 "dUq" = (
 /obj/structure/table,
-/obj/item/assembly/flash/handheld{
-	pixel_x = -5
-	},
-/obj/item/assembly/flash/handheld{
-	pixel_x = 7
-	},
+/obj/item/electronics/apc,
+/obj/item/electronics/airlock,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "dUv" = (
@@ -18895,7 +18891,12 @@
 	},
 /obj/machinery/status_display/ai/directional/north,
 /obj/machinery/light/small/directional/north,
-/obj/item/toy/figure/ninja,
+/obj/item/assembly/flash/handheld{
+	pixel_x = -5
+	},
+/obj/item/assembly/flash/handheld{
+	pixel_x = 7
+	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "eBD" = (
@@ -37357,7 +37358,7 @@
 /area/station/service/bar/atrium/ghetto)
 "iZB" = (
 /obj/structure/rack,
-/obj/item/electronics/airlock,
+/obj/effect/spawner/random/techstorage/custom_shuttle,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "iZF" = (
@@ -57281,6 +57282,9 @@
 /obj/item/stock_parts/power_store/cell/high{
 	pixel_y = 6
 	},
+/obj/item/stock_parts/power_store/cell/high{
+	pixel_y = 2
+	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "nOH" = (
@@ -62719,9 +62723,7 @@
 /obj/item/plant_analyzer{
 	pixel_y = 12
 	},
-/obj/item/stock_parts/power_store/cell/high{
-	pixel_y = 2
-	},
+/obj/item/toy/figure/ninja,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "peq" = (
