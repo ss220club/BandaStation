@@ -213,7 +213,7 @@ SECURITY_HAS_MAINT_ACCESS
 #EVERYONE_HAS_MAINT_ACCESS
 
 ## Comment this out this to make security officers spawn in departmental security posts
-SEC_START_BRIG
+#SEC_START_BRIG
 
 ## This variable is how you may configure "Scaling Access" for Departmental Security Officers.
 ## Set to 0/commented out for "off", Departmental Security Officers will never get additional room-specific access (beyond general departmental doors).
