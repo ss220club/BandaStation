@@ -30206,7 +30206,6 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos/project)
 "hmM" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
 /obj/machinery/atmospherics/components/unary/thermomachine/freezer/on/coldroom,
 /obj/effect/turf_decal/siding/white{
 	dir = 5
