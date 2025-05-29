@@ -43,17 +43,17 @@
 /obj/item/radio/spider_transmitter/ui_state(mob/user)
 	return GLOB.always_state
 
+/datum/storage/lockbox/detective
+	max_total_storage = 20
+	max_slots = 5
+	
 /obj/item/storage/lockbox/spy_kit
 	name = "набор жучков"
 	desc = "Не самый легальный из способов достать информацию, но какая разница, если никто не узнает?"
 	req_access = list(ACCESS_DETECTIVE)
+	storage_type = /datum/storage/lockbox/detective
 
-/obj/item/storage/lockbox/spy_kit/Initialize(mapload)
-	. = ..()
-	atom_storage.max_slots = 5
-	atom_storage.max_specific_storage = WEIGHT_CLASS_SMALL
-	atom_storage.max_total_storage = 20
-	atom_storage.locked = STORAGE_FULLY_LOCKED
+/obj/item/storage/lockbox/spy_kit/PopulateContents()
 	new /obj/item/stealth/spy_spider(src)
 	new /obj/item/stealth/spy_spider(src)
 	new /obj/item/stealth/spy_spider(src)
