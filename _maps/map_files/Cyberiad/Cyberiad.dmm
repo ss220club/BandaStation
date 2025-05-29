@@ -4777,8 +4777,9 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/window/reinforced/plasma/spawner/directional/north,
+/obj/structure/window/reinforced/plasma/spawner/directional/east,
+/obj/structure/window/reinforced/plasma/spawner/directional/west,
 /turf/open/floor/plating,
 /area/station/science/ordnance/testlab)
 "bhy" = (
@@ -5038,7 +5039,6 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 8
 	},
-/obj/machinery/duct,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "bkf" = (
@@ -9381,6 +9381,10 @@
 /obj/structure/table,
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
+"clJ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "clK" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/plating,
@@ -19575,11 +19579,8 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "eJu" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/turf_decal/siding/white/end{
-	dir = 8
-	},
-/turf/open/floor/iron/kitchen_coldroom/dark,
+/obj/machinery/duct,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "eJx" = (
 /obj/effect/decal/cleanable/dirt,
@@ -23112,6 +23113,12 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /turf/open/floor/iron,
 /area/station/commons/locker)
+"fCV" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden{
+	dir = 8
+	},
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "fDa" = (
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -26866,9 +26873,12 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/auxiliary)
 "gyK" = (
-/obj/machinery/light/small/directional/east,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/obj/machinery/gibber,
+/obj/effect/turf_decal/siding/white,
+/obj/effect/turf_decal/siding/white{
+	dir = 1
+	},
+/turf/open/floor/iron/kitchen_coldroom/dark,
 /area/station/service/kitchen/coldroom/ghetto)
 "gyL" = (
 /obj/effect/spawner/structure/window/reinforced,
@@ -30029,7 +30039,7 @@
 /turf/open/floor/iron,
 /area/station/security/prison)
 "hkN" = (
-/obj/effect/spawner/structure/window/reinforced,
+/obj/effect/spawner/structure/window/reinforced/plasma,
 /obj/machinery/door/poddoor/preopen{
 	id = "research_lockdown";
 	name = "Research Lockdown Blast Doors"
@@ -31779,7 +31789,6 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "hFm" = (
@@ -38578,6 +38587,12 @@
 /obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/wood,
 /area/station/maintenance/ghetto/fore/starboard)
+"jqs" = (
+/obj/machinery/atmospherics/pipe/heat_exchanging/junction{
+	dir = 1
+	},
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "jqv" = (
 /obj/structure/table/wood,
 /obj/structure/mirror/directional/north,
@@ -45970,10 +45985,10 @@
 	pixel_x = 15;
 	pixel_y = 4
 	},
-/obj/machinery/atmospherics/pipe/heat_exchanging/junction{
-	dir = 1
-	},
 /obj/structure/sign/poster/random/directional/west,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 6
+	},
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "ldi" = (
@@ -47086,11 +47101,11 @@
 /turf/open/floor/plating,
 /area/station/security/detectives_office)
 "lre" = (
-/obj/effect/decal/cleanable/blood/old,
-/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden{
+/obj/effect/turf_decal/siding/white/end{
 	dir = 8
 	},
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/iron/kitchen_coldroom/dark,
 /area/station/service/kitchen/coldroom/ghetto)
 "lrf" = (
 /obj/machinery/light/small/directional/east,
@@ -50605,15 +50620,6 @@
 "miI" = (
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/lab)
-"miQ" = (
-/obj/machinery/gibber,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/turf_decal/siding/white{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/white,
-/turf/open/floor/iron/kitchen_coldroom/dark,
-/area/station/service/kitchen/coldroom/ghetto)
 "miT" = (
 /obj/structure/table/wood/fancy/green,
 /obj/item/reagent_containers/cup/glass/bottle/whiskey{
@@ -55308,11 +55314,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port/aft)
 "noQ" = (
-/obj/machinery/door/window/left/directional/south{
+/obj/machinery/door/window/brigdoor/right/directional/north{
 	name = "Mass Driver Door";
 	req_access = list("ordnance")
 	},
-/obj/machinery/door/window/left/directional/north{
+/obj/machinery/door/window/brigdoor/right/directional/south{
 	name = "Mass Driver Door";
 	req_access = list("ordnance")
 	},
@@ -56448,6 +56454,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/ghetto)
+"nDd" = (
+/obj/machinery/atmospherics/pipe/heat_exchanging/junction{
+	dir = 1
+	},
+/obj/machinery/firealarm/directional/west,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "nDf" = (
 /obj/machinery/light/directional/south,
 /obj/effect/turf_decal/tile/neutral{
@@ -57361,6 +57374,10 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/starboard/fore)
+"nPj" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "nPk" = (
 /obj/effect/turf_decal/tile/purple,
 /obj/structure/closet/emcloset,
@@ -61041,9 +61058,6 @@
 /obj/item/food/grown/tomato{
 	pixel_x = 6;
 	pixel_y = -1
-	},
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
-	dir = 6
 	},
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
@@ -66840,10 +66854,6 @@
 "qaE" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/machinery/light_switch/directional/west,
-/mob/living/basic/goat/pete{
-	name = "Боря"
-	},
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "qaG" = (
@@ -73455,6 +73465,7 @@
 "rJy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/landmark/event_spawn,
+/obj/machinery/duct,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "rJA" = (
@@ -75043,6 +75054,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
+"sbY" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "sca" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -77267,7 +77282,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/door/airlock/freezer,
 /obj/structure/plasticflaps/kitchen,
-/obj/machinery/duct,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "sDN" = (
@@ -78725,7 +78739,7 @@
 /area/station/service/library)
 "sXk" = (
 /obj/effect/landmark/start/hangover,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "sXl" = (
@@ -78766,8 +78780,10 @@
 	},
 /area/station/engineering/hallway/west)
 "sXK" = (
-/obj/machinery/light/small/directional/west,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple,
+/mob/living/basic/goat/pete{
+	name = "Боря"
+	},
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "sXO" = (
@@ -80614,6 +80630,11 @@
 /obj/machinery/vending/cigarette,
 /turf/open/floor/iron,
 /area/station/commons/locker)
+"tuR" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
+/obj/machinery/light/small/directional/west,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "tuZ" = (
 /obj/machinery/light/small/directional/north,
 /obj/structure/cable,
@@ -85351,9 +85372,6 @@
 /area/station/maintenance/starboard/upper)
 "uGq" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
-	dir = 10
-	},
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/tlv_cold_room,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
@@ -88058,8 +88076,8 @@
 "vox" = (
 /obj/structure/table/reinforced,
 /obj/item/sharpener,
-/obj/machinery/atmospherics/pipe/heat_exchanging/junction{
-	dir = 1
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 10
 	},
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
@@ -137492,10 +137510,10 @@ oIg
 qaE
 ldb
 sXK
+nDd
+tuR
 sOd
 wWh
-ceC
-ceC
 ceC
 ceC
 ceC
@@ -137749,10 +137767,10 @@ uGq
 hFc
 vox
 sXk
+jqs
+nPj
 hmM
 wWh
-doz
-doz
 doz
 ceC
 ceC
@@ -138005,11 +138023,11 @@ sDM
 cRk
 dcl
 rJy
+clJ
+clJ
 lyW
 sWx
 wWh
-doz
-doz
 doz
 ceC
 ceC
@@ -138263,10 +138281,10 @@ bSG
 bka
 eJu
 lre
+clJ
+fCV
 cXX
 wWh
-ceC
-ceC
 vbK
 ceC
 vbK
@@ -138517,13 +138535,13 @@ lpU
 klF
 wWh
 ugR
+sbY
 mzG
-miQ
 gyK
+clJ
+clJ
 iOB
 wWh
-doz
-doz
 vbK
 ceC
 vbK
@@ -138779,8 +138797,8 @@ iBi
 iBi
 iBi
 iBi
-ceC
-ceC
+wWh
+wWh
 vbK
 jEk
 vbK
