@@ -115,20 +115,20 @@
 	ammo_type = /obj/item/ammo_casing/a762x39/civilian
 	max_ammo = 30
 
-/obj/item/ammo_box/a762x39/civilian/rubber
+/obj/item/ammo_box/a762x39/rubber
 	name = "ammo box (7.62x39mm rubber)"
 	desc = "Коробка с винтовочными патронами калибра 7.62x39мм, вмещает 45 патронов. Темно-синия марка указывает на то, что в ней должны храниться нелетальные боеприпасы."
 	icon_state = "762x39box_rubber"
-	ammo_type = /obj/item/ammo_casing/a762x39/civilian/rubber
+	ammo_type = /obj/item/ammo_casing/a762x39/rubber
 
-/obj/item/ammo_box/a762x39/civilian/hunting
+/obj/item/ammo_box/a762x39/hunting
 	name = "ammo box (7.62x39mm hunting)"
 	desc = "Коробка с винтовочными патронами калибра 7.62x39мм, вмещает 45 патронов. Темно-зеленая марка указывает на то, что в ней должны храниться охотничьи боеприпасы."
 	icon_state = "762x39box_xeno"
-	ammo_type = /obj/item/ammo_casing/a762x39/civilian/hunting
+	ammo_type = /obj/item/ammo_casing/a762x39/hunting
 
-/obj/item/ammo_box/a762x39/civilian/blank
+/obj/item/ammo_box/a762x39/blank
 	name = "ammo box (7.62x39mm blank)"
 	desc = "Коробка с винтовочными патронами калибра 7.62x39мм, вмещает 45 патронов. Белая марка указывает на то, что в ней должны храниться холостые боеприпасы."
 	icon_state = "762x39box_blank"
-	ammo_type = /obj/item/ammo_casing/a762x39/civilian/blank
+	ammo_type = /obj/item/ammo_casing/a762x39/blank

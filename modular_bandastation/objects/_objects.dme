@@ -91,10 +91,10 @@
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
 
 
-#include "code/items/weapons/ranged/ballistic/akm.dm"
-#include "code/items/weapons/ranged/ballistic/sol_rifle.dm"
-#include "code/items/weapons/ranged/ballistic/sol_shotgun.dm"
-#include "code/items/weapons/ranged/ballistic/sol_submachinegun.dm"
+#include "code/items/weapons/ranged/ballistic/sabel.dm"
+#include "code/items/weapons/ranged/ballistic/carwo.dm"
+#include "code/items/weapons/ranged/ballistic/renoster.dm"
+#include "code/items/weapons/ranged/ballistic/sindano.dm"
 #include "code/items/weapons/ranged/ballistic/mounted_machine_gun.dm"
 
 #include "code/machinery/nuclear_bomb.dm"

@@ -67,15 +67,14 @@
 	name = "7.62x39mm civilian bullet casing"
 	desc = "Гражданский патрон калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/civilian
-	caliber = CALIBER_762x39mmCiv
 
-/obj/item/ammo_casing/a762x39/civilian/rubber
+/obj/item/ammo_casing/a762x39/rubber
 	name = "7.62x39mm rubber bullet casing"
 	desc = "Патрон с резиновой пулей калибра 7.62x39мм гражданского назначения."
 	projectile_type = /obj/projectile/bullet/a762x39/rubber
 	harmful = FALSE
 
-/obj/item/ammo_casing/a762x39/civilian/hunting
+/obj/item/ammo_casing/a762x39/hunting
 	name = "7.62x39mm hunting bullet casing"
 	desc = "Патрон с оболочечной пулей 7.62x39мм с мягким наконечником."
 	projectile_type = /obj/projectile/bullet/a762x39/hunting
@@ -85,14 +84,13 @@
 		damage += nemesis_bonus_force
 	.=..()
 
-/obj/item/ammo_casing/a762x39/civilian/blank
+/obj/item/ammo_casing/a762x39/blank
 	name = "7.62x39mm blank bullet casing"
 	desc = "Холостой патрон калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/blank
 	harmful = FALSE
 
 // .40 Sol Long
-
 /obj/item/ammo_casing/c40sol
 	name = ".40 Sol Long lethal bullet casing"
 	desc = "Стандартный винтовочный патрон ТСФ калибра .40 Sol Long."
@@ -102,7 +100,6 @@
 	projectile_type = /obj/projectile/bullet/c40sol
 
 // .40 Sol fragmentation rounds, embeds shrapnel in the target almost every time at close to medium range. Teeeechnically less lethals.
-
 /obj/item/ammo_casing/c40sol/fragmentation
 	name = ".40 Sol Long rubber-fragmentation bullet casing"
 	desc = "Стандартный осколочно-резиновый винтовочный патрон ТСФ калибра .40 Sol Long. Разрывается при ударе, выбрасывая резиновую шрапнель, которая может вывести цель из строя."
@@ -114,7 +111,6 @@
 	harmful = FALSE
 
 // .40 Sol match grade, bounces a lot, and if there's less than 20 bullet armor on wherever these hit, it'll go completely through the target and out the other side
-
 /obj/item/ammo_casing/c40sol/pierce
 	name = ".40 Sol Long pierce bullet casing"
 	desc = "Стандартный бронебойный винтовочный патрон ТСФ калибра .40 Sol Long. Стреляет под более высоким давлением и, \
@@ -126,7 +122,6 @@
 	projectile_type = /obj/projectile/bullet/c40sol/pierce
 
 // .40 Sol incendiary
-
 /obj/item/ammo_casing/c40sol/incendiary
 	name = ".40 Sol Long incendiary bullet casing"
 	desc = "Стандартный зажигательный винтовочный патрон ТСФ калибра .40 Sol Long. Не оставляет огненного следа, воспламеняя цель только при попадании."

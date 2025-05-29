@@ -138,7 +138,7 @@
 	name = "AKM magazine (RUBBER)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит нелетальные резиновые боеприпасы."
 	ammo_band_color = COLOR_AMMO_RUBBER
-	ammo_type = /obj/item/ammo_casing/a762x39/civilian/rubber
+	ammo_type = /obj/item/ammo_casing/a762x39/rubber
 
 /obj/item/ammo_box/magazine/akm/civ
 	name = "Sabel magazine"
@@ -146,7 +146,6 @@
 	icon_state = "akm_civ"
 	max_ammo = 15
 	ammo_type = /obj/item/ammo_casing/a762x39/civilian
-	caliber = CALIBER_762x39mmCiv
 
 /obj/item/ammo_box/magazine/akm/civ/starts_empty
     start_empty = TRUE
@@ -155,9 +154,9 @@
 	name = "AKM magazine (HUNT)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы для охоты."
 	ammo_band_color = "#05880c"
-	ammo_type = /obj/item/ammo_casing/a762x39/civilian/hunting
+	ammo_type = /obj/item/ammo_casing/a762x39/hunting
 
-//  Fal aka Sol rifle
+//  Fal aka Carwo or Sol_rifles
 
 /obj/item/ammo_box/magazine/c40sol_rifle
 	name = "Sol rifle short magazine"

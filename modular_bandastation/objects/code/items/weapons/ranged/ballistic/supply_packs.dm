@@ -103,20 +103,20 @@
 		/obj/item/ammo_box/c35sol = 1,
 		)
 
-/datum/supply_pack/security/armory/akm_civ
+/datum/supply_pack/security/armory/sabel
     name = "Sabel-42 Carbine Crate"
     desc = "Вам нужна надежная винтовка для самообороны, спортивной стрельбы или охоты? Тогда 'Сабля' станет отличным выбором."
     cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/automatic/akm = 1,
+        /obj/item/gun/ballistic/automatic/sabel = 1,
         /obj/item/ammo_box/magazine/akm/civ = 1,
         /obj/item/ammo_box/a762x39/civilian = 1,
-        /obj/item/ammo_box/a762x39/civilian/rubber = 1,
+        /obj/item/ammo_box/a762x39/rubber = 1,
     )
     crate_name = "Sabel-42 carbine crate"
 
-/datum/supply_pack/security/armory/akm_civ_magazines
+/datum/supply_pack/security/armory/sabel_magazines
     name = "Civilian 7.62x39mm Magazines Crate"
     desc = "B этом ящике находятся два магазина гражданского назначения калибра 7.62мм."
     cost = CARGO_CRATE_VALUE * 10 //~2000
@@ -126,14 +126,14 @@
     )
     crate_name = "Civilian 7.62x39mm magazines crate"
 
-/datum/supply_pack/security/armory/akm_civ_ammoboxes
+/datum/supply_pack/security/armory/sabel_ammoboxes
     name = "Civilian 7.62x39mm Ammo Crate"
     desc = "В этом ящике находятся две коробки патронов гражданского назначения калибра 7.62мм."
     cost = CARGO_CRATE_VALUE * 10 //~2000
     access_view = ACCESS_ARMORY
     contains = list(
         /obj/item/ammo_box/a762x39/civilian = 1,
-        /obj/item/ammo_box/a762x39/civilian/rubber = 1,
+        /obj/item/ammo_box/a762x39/rubber = 1,
     )
     crate_name = "Civilian 7.62x39mm ammo crate"
 
@@ -143,20 +143,20 @@
     cost = CARGO_CRATE_VALUE * 10 //~2000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/ammo_box/a762x39/civilian/hunting = 1,
+        /obj/item/ammo_box/a762x39/hunting = 1,
     )
 
-/datum/supply_pack/goody/akm_civ_goody
+/datum/supply_pack/goody/sabel
     name = "Sabel-42 Carbine Single-Pack"
     desc = "Вам нужна надежная винтовка для самообороны, спортивной стрельбы или охоты? Тогда 'Сабля' станет отличным вариантов для вас! \
 	        В этом ящике находится один карабин 'Сабля-42'."
     cost = CARGO_CRATE_VALUE * 40 //~8000
     access_view = ACCESS_WEAPONS
     contains = list(
-        /obj/item/gun/ballistic/automatic/akm = 1,
+        /obj/item/gun/ballistic/automatic/sabel = 1,
     )
 
-/datum/supply_pack/goody/akm_civ_magazines_goody
+/datum/supply_pack/goody/sabel_magazines
     name = "Civilian 7.62x39mm Magazines"
     desc = "Нужны магазины калибра 7.62 для вашего карабина? Не проблема, в этом ящике вы найдете два магазина гражданского назначения калибра 7.62мм."
     cost = CARGO_CRATE_VALUE * 12 //~2400
@@ -165,7 +165,7 @@
         /obj/item/ammo_box/magazine/akm/civ/starts_empty = 2,
     )
 
-/datum/supply_pack/goody/akm_civ_ammoboxes
+/datum/supply_pack/goody/sabel_ammobox
     name = "Civilian 7.62x39mm Ammo Boxes"
     desc = "Нужны патроны калибра 7.62 для вашей винтовки? Не проблема, в этом ящике вы найдете коробку патронов гражданского назначения калибра 7.62мм."
     cost = CARGO_CRATE_VALUE * 10 //~2000
@@ -174,19 +174,19 @@
         /obj/item/ammo_box/a762x39/civilian = 1,
     )
 
-/datum/supply_pack/security/armory/sol_rifle_marksman
+/datum/supply_pack/security/armory/carwo_marksman
     name = ".40 Sol Long Carwo Marksman Rifle"
     desc = "Этот ящик содержит одну тяжелую марксманскую винтовку Карво калибра .40 Sol Long вместе с одним магазином осколочно-резиновых патронов. \
 	        Отличный инструмент для ликвидации серьезных угроз."
     cost = CARGO_CRATE_VALUE * 125 //~25000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/automatic/sol_rifle/marksman/wooden = 1,
+        /obj/item/gun/ballistic/automatic/carwo/marksman/wooden = 1,
         /obj/item/ammo_box/magazine/c40sol_rifle/fragmentation = 1,
     )
     crate_name = "Carwo marksman rifle crate"
 
-/datum/supply_pack/security/armory/sol_rifle_ammo
+/datum/supply_pack/security/armory/carwo_ammo
     name = ".40 Sol Long Ammo Crate"
     desc = "Этот ящик содержит одну коробку нелетальных и одну коробку летальных боеприпасов калибра .40 Sol Long."
     cost = CARGO_CRATE_VALUE * 20 //~4000
@@ -197,54 +197,54 @@
     )
     crate_name = ".40 Sol Long ammo crate"
 
-/datum/supply_pack/security/armory/sol_shotgun
+/datum/supply_pack/security/armory/renoster
     name = "Renoster Shotguns Crate"
     desc = "Этот ящик содержит два тяжелых дробовика 'Реностер'. Используя тот же 12 калибр, наносит больше увечий. \
 	        Когда в споре требуется аргумент побольше."
     cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/shotgun/riot/sol = 2,
+        /obj/item/gun/ballistic/shotgun/riot/renoster = 2,
     )
     crate_name = "Renoster shotgun crate"
 
-/datum/supply_pack/goody/sol_shotgun
+/datum/supply_pack/goody/renoster
     name = "Renoster Shotgun Single-Pack"
     desc = "Нужен серьезный аргумент в споре с соседом? Тогда вам отлично подойдет тяжелый дробовик 'Реностер'. Используя тот же 12 калибр, наносит больше увечий. \
 	        Когда в споре требуется аргумент побольше."
     cost = CARGO_CRATE_VALUE * 30 //~6000
     access_view = ACCESS_WEAPONS
     contains = list(
-        /obj/item/gun/ballistic/shotgun/riot/sol = 1,
+        /obj/item/gun/ballistic/shotgun/riot/renoster = 1,
     )
 
-/datum/supply_pack/security/armory/sol_submachinegun
+/datum/supply_pack/security/armory/sindano
     name = "Sindano Submachine Guns Crate"
     desc = "Этот ящик содержит две ПП 'Синдано' калибра .35 Sol Short, вместе с двумя увеличенными магазинами заряженными резиной."
     cost = CARGO_CRATE_VALUE * 50 //~10000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/automatic/sol_smg/no_mag = 2,
+        /obj/item/gun/ballistic/automatic/sindano/no_mag = 2,
 		/obj/item/ammo_box/magazine/c35sol_pistol/stendo/rubber = 2,
     )
     crate_name = "Sindano submachine guns crate"
 
-/datum/supply_pack/goody/sol_submachinegun
+/datum/supply_pack/goody/sindano
     name = "Sindano Submachine Gun Single-Pack"
     desc = "У вас есть много патронов .35, но не из чего стрелять? Тогда, вам определенно потребуется ПП 'Синдано'. Скорострельность гарантированна!"
     cost = CARGO_CRATE_VALUE * 25 //~5000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/automatic/sol_smg = 1,
+        /obj/item/gun/ballistic/automatic/sindano = 1,
     )
 
-/datum/supply_pack/goody/sol_submachinegun_compact
+/datum/supply_pack/goody/sindano_compact
     name = "Sindano Submachine Gun Compact Single-Pack"
     desc = "Нуждаетесь в скрострельном оружии но вам нужен малый размер? Тогда компактный вариант ПП 'Синдано' решит вашу проблему."
     cost = CARGO_CRATE_VALUE * 30 //~6000
     access_view = ACCESS_ARMORY
     contains = list(
-        /obj/item/gun/ballistic/automatic/sol_smg/compact = 1,
+        /obj/item/gun/ballistic/automatic/sindano/compact = 1,
     )
 
 /datum/supply_pack/security/armory/drum35

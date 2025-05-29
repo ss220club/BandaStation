@@ -1,6 +1,6 @@
 // Base Sol SMG
 
-/obj/item/gun/ballistic/automatic/sol_smg
+/obj/item/gun/ballistic/automatic/sindano
 	name = "Sindano submachine gun"
 	desc = "Небольшой пистолет-пулемет, стреляющий патронами калибра .35 Sol. Часто встречается в руках ЧВК и других неблагонадежных корпораций. Принимает любой стандартный магазин от пистолетов ТСФ."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic.dmi'
@@ -25,17 +25,16 @@
 	obj_flags = UNIQUE_RENAME
 	recoil = 0.5
 
-/obj/item/gun/ballistic/automatic/sol_smg/Initialize(mapload)
+/obj/item/gun/ballistic/automatic/sindano/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
-/obj/item/gun/ballistic/automatic/sol_smg/examine(mob/user)
+/obj/item/gun/ballistic/automatic/sindano/examine(mob/user)
 	. = ..()
 	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
 
-/obj/item/gun/ballistic/automatic/sol_smg/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sindano/examine_more(mob/user)
 	. = ..()
-
 	. += "Первоначально пистолет-пулемет Синдано производился по военному заказу. \
 		Эти ПП можно было увидеть в руках у всех: медиков, корабельных техников, логистов, \
 		а пилоты шаттлов часто имели по несколько пушек, чтобы просто похвастаться. Из-за потребности ТСФ \
@@ -44,12 +43,10 @@
 		малого калибра. Это позволяет использовать взаимозаменяемые магазины для пистолетов \
 		и пистолетов-пулеметов, круто!"
 
-	return .
-
-/obj/item/gun/ballistic/automatic/sol_smg/no_mag
+/obj/item/gun/ballistic/automatic/sindano/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/sol_smg/compact
+/obj/item/gun/ballistic/automatic/sindano/compact
 	name = "compact Sindano submachine gun"
 	icon_state = "sindano_compact"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -59,21 +56,18 @@
 	recoil = 0.7
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c35sol_pistol
 
-/obj/item/gun/ballistic/automatic/sol_smg/compact/no_mag
+/obj/item/gun/ballistic/automatic/sindano/compact/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/sol_smg/compact/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sindano/compact/examine_more(mob/user)
 	. = ..()
-
 	. += "Этот вариант Синдано является укороченной, компактной модификацией. \
 		Благодаря малым габаритам эту версию пистолета-пулемета может поместить в небольшую сумку даже \
 		с глушителем, что делает этот вариант идеальным для скрытого ношения. \
 		Но к сожалению, малая длина ствола и почти что несуществующий приклад не \
 		позволяют стрелять точно на далекие или средние дистанции."
 
-	return .
-
-/obj/item/gun/ballistic/automatic/sol_smg/black
+/obj/item/gun/ballistic/automatic/sindano/black
 	name = "tactical Sindano submachine gun"
 	icon_state = "sindano_black"
 	inhand_icon_state = "sindano_black"
@@ -82,15 +76,12 @@
 	fire_delay = 0.1 SECONDS
 	recoil = 0.3
 
-/obj/item/gun/ballistic/automatic/sol_smg/black/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sindano/black/examine_more(mob/user)
 	. = ..()
-
 	. += "На этом варианте Синдано установлены рукоятка и прицел, что позволяет \
 		серьезно улучшить контроль над оружием. Внутренний механизм также был настроен так \
 		чтобы выстреливать намного больше боеприпасов в секунду. Этот экземлпяр покрашен в черные \
 		цвета для повышения тактикульности и серьезности намерений владельца."
 
-	return .
-
-/obj/item/gun/ballistic/automatic/sol_smg/black/no_mag
+/obj/item/gun/ballistic/automatic/sindano/black/no_mag
 	spawnwithmagazine = FALSE

@@ -1,6 +1,7 @@
-/obj/item/gun/ballistic/automatic/akm
+/obj/item/gun/ballistic/automatic/sabel
 	name = "Sabel-42 carbine"
-	desc = "Нестареющий дизайн карабина под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
+	desc = "Нестареющий дизайн карабина под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой. \
+	Внесенные в оружие для невоенного использования лишили возможности вести автоматический огонь."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic40x32.dmi'
 	icon_state = "akm_civ"
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_lefthand.dmi'
@@ -26,25 +27,10 @@
 	obj_flags = UNIQUE_RENAME
 	SET_BASE_PIXEL(-5, 0)
 
-/obj/item/gun/ballistic/automatic/akm/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
-
-
-/obj/item/gun/ballistic/automatic/akm/examine_more(mob/user)
-	. = ..()
-
-	. += "Внутренние изменения, внесенные в оружие для невоенного использования, \
-	сделали его несовместимым с обычными боеприпасами и лишили возможности вести автоматический огонь. \
-	'Cабля-42' предназначен для стрельбы низкосортными гражданскими патронами, \
-	более мощные патроны разрушат нарезку и сделают оружие бесполезным."
-
-	return .
-
-/obj/item/gun/ballistic/automatic/akm/no_mag
+/obj/item/gun/ballistic/automatic/sabel/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/akm/auto
+/obj/item/gun/ballistic/automatic/sabel/auto
 	name = "АКМ rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
 	icon_state = "akm"
@@ -55,28 +41,25 @@
 	recoil = 0.5
 	spread = 6.5
 
-/obj/item/gun/ballistic/automatic/akm/auto/Initialize(mapload)
+/obj/item/gun/ballistic/automatic/sabel/auto/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
-/obj/item/gun/ballistic/automatic/akm/auto/examine(mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/examine(mob/user)
 	. = ..()
 	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
 
-/obj/item/gun/ballistic/automatic/akm/auto/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/examine_more(mob/user)
 	. = ..()
-
 	. += "АКМ — надежная штурмовая винтовка под патрон 7.62×39 мм. Обладает высокой убойной силой, \
 	хорошей пробиваемостью и стабильной эффективностью на средних дистанциях.\
 	Имеет заметную отдачу, но компенсируется уроном и доступностью боеприпасов. \
 	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии."
 
-	return .
-
-/obj/item/gun/ballistic/automatic/akm/auto/no_mag
+/obj/item/gun/ballistic/automatic/sabel/auto/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/akm/auto/upp
+/obj/item/gun/ballistic/automatic/sabel/auto/upp
 	name = "AK-462 rifle"
 	desc = "Модернизированный дизайн автомата под патрон 7.62 мм. Стадартный и надежный автомат солдат СССП."
 	icon_state = "akm_new"
@@ -87,20 +70,16 @@
 	spread = 2.5
 	recoil = 0.1
 
-/obj/item/gun/ballistic/automatic/akm/auto/upp/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/upp/examine_more(mob/user)
 	. = ..()
-
 	. += "Это усовершенствованная версия самого культового огнестрельного оружия, когда-либо созданного человеком, \
 	перепроектированная для уменьшения веса, улучшения управляемости и точности стрельбы, под патрон 7.62 мм. \
 	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-462 не использует компановку Бул-пап'."
 
-	return .
-
-
-/obj/item/gun/ballistic/automatic/akm/auto/upp/no_mag
+/obj/item/gun/ballistic/automatic/sabel/auto/upp/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/akm/auto/modern
+/obj/item/gun/ballistic/automatic/sabel/auto/modern
 	name = "modern АКМ rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
 	icon_state = "akm_modern"
@@ -110,19 +89,16 @@
 	spread = 2.5
 	recoil = 0.1
 
-/obj/item/gun/ballistic/automatic/akm/auto/modern/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/examine_more(mob/user)
 	. = ..()
-
 	. += "Этот вариант является модернизированной версией автомата АКМ с использованием более совершенных деталей. \
 	На замену оригинальных деталей были установлены новые, обновленные версии. \
 	Внутренний механизм был смазан и настроен, что повышает боевые способности данного варианта."
 
-	return .
-
-/obj/item/gun/ballistic/automatic/akm/auto/modern/no_mag
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss
 	name = "gauss AKM rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
 	icon_state = "akm_gauss"
@@ -160,13 +136,13 @@
 /datum/action/item_action/toggle_gauss
 	name = "Toggle Gauss"
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/ui_action_click(mob/user, actiontype)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/ui_action_click(mob/user, actiontype)
 	if(istype(actiontype, /datum/action/item_action/toggle_gauss))
 		gauss_mode_select()
 	else
 		..()
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/proc/gauss_mode_select()
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/gauss_mode_select()
 	var/mob/living/carbon/human/user = usr
 	gauss_mode_selection = !gauss_mode_selection
 	if(!gauss_mode_selection)
@@ -180,28 +156,25 @@
 	update_appearance()
 	update_item_action_buttons()
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/examine_more(mob/user)
 	. = ..()
-
 	. += "Этот вариант является эксперементальной переделкой автомата АКМ с использованием гаусс-технологий. \
 	На оригинальные детали были установлены капаситоры и катушки, используемые для ускорения пули в стволе. \
 	На прикладе имеется батарея с индикатором загруженности капаситоров. \
 	Из-за того что модификация сделана 'на коленке', о защите от ЭМИ можно только мечтать."
 
-	return .
-
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/Initialize(mapload)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/Initialize(mapload)
 	. = ..()
 	register_context()
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/add_context(atom/source, list/context, obj/item/held_item, mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 
 	if(held_item?.tool_behaviour == TOOL_MULTITOOL) //&& shots_before_degradation < max_shots_before_degradation)
 		context[SCREENTIP_CONTEXT_LMB] = "Перезагрузить капаситоры"
 		return CONTEXTUAL_SCREENTIP_SET
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/update_overlays()
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/update_overlays()
 	. = ..()
 	if(degradation_stage)
 		. += "[base_icon_state]_empty"
@@ -209,14 +182,14 @@
 		var/ratio_for_overlay = CEILING(clamp(shots_before_degradation / max_shots_before_degradation, 0, 1) * 3, 1)
 		. += "[icon_state]_stage_[ratio_for_overlay]"
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/emp_act(severity)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/emp_act(severity)
 	. = ..()
 	if (!(. & EMP_PROTECT_SELF) && prob(50 / severity))
 		shots_before_degradation = 0
 		emp_malfunction = TRUE
 		attempt_degradation(TRUE)
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/emag_act(mob/user, obj/item/card/emag/emag_card)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/emag_act(mob/user, obj/item/card/emag/emag_card)
 	. = ..()
 	if(obj_flags & EMAGGED)
 		return FALSE
@@ -225,7 +198,7 @@
 	balloon_alert(user, "капаситоры перегружены")
 	return TRUE
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/multitool_act(mob/living/user, obj/item/tool)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/multitool_act(mob/living/user, obj/item/tool)
 	if(!tool.use_tool(src, user, 20 SECONDS, volume = 50))
 		balloon_alert(user, "прервано!")
 		return ITEM_INTERACT_BLOCKING
@@ -239,7 +212,7 @@
 	balloon_alert(user, "капаситоры перезагружены")
 	return ITEM_INTERACT_SUCCESS
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/try_fire_gun(atom/target, mob/living/user, params)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/try_fire_gun(atom/target, mob/living/user, params)
 	. = ..()
 	if(!chambered || (chambered && !chambered.loaded_projectile))
 		return
@@ -254,7 +227,7 @@
 	else
 		attempt_degradation(FALSE)
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(chambered.loaded_projectile && prob(75) && (emp_malfunction || degradation_stage == degradation_stage_max))
 		balloon_alert_to_viewers("*шелк*")
 		playsound(src, dry_fire_sound, dry_fire_sound_volume, TRUE)
@@ -270,7 +243,7 @@
 	return ..()
 
 /// Proc to handle weapon degradation. Called when attempting to fire or immediately after an EMP takes place.
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/proc/attempt_degradation(force_increment = FALSE)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/attempt_degradation(force_increment = FALSE)
 	if(gauss_mode)
 		degradation_probability += 25
 
@@ -284,16 +257,16 @@
 	update_appearance()
 
 /// Proc to handle the countdown for our detonation
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/proc/perform_extreme_malfunction(mob/living/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/perform_extreme_malfunction(mob/living/user)
 	balloon_alert(user, "оружие сейчас взорвется, выкидывай его!")
 	explosion_timer = addtimer(CALLBACK(src, PROC_REF(fucking_explodes_you)), 5 SECONDS, (TIMER_UNIQUE|TIMER_OVERRIDE))
 	playsound(src, 'sound/items/weapons/gun/general/empty_alarm.ogg', 50, FALSE)
 
 /// proc to handle our detonation
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/proc/fucking_explodes_you()
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/fucking_explodes_you()
 	explosion(src, devastation_range = 1, heavy_impact_range = 3, light_impact_range = 6, explosion_cause = src)
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/tactical
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical
 	name = "tactical gauss AKM rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
 	icon_state = "akm_gauss_tacticool"
@@ -301,9 +274,6 @@
 	base_icon_state = "akm_gauss_tacticool"
 	worn_icon_state = "akm_modern"
 
-/obj/item/gun/ballistic/automatic/akm/auto/gauss/tactical/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/examine_more(mob/user)
 	. = ..()
-
-	. += "Этот экземпляр имеет более надежный и тактикульный вид, но о защите от ЭМИ все равно можно только мечтать."
-
-	return .
+	. += "Этот экземпляр имеет более надежный и тактикульный вид."
