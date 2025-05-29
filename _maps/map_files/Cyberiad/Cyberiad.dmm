@@ -56454,13 +56454,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/ghetto)
-"nDd" = (
-/obj/machinery/atmospherics/pipe/heat_exchanging/junction{
-	dir = 1
-	},
-/obj/machinery/firealarm/directional/west,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/station/service/kitchen/coldroom/ghetto)
 "nDf" = (
 /obj/machinery/light/directional/south,
 /obj/effect/turf_decal/tile/neutral{
@@ -77282,7 +77275,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/door/airlock/freezer,
 /obj/structure/plasticflaps/kitchen,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/turf/open/floor/iron/white,
 /area/station/service/kitchen/coldroom/ghetto)
 "sDN" = (
 /obj/machinery/camera/directional/north{
@@ -137510,7 +137503,7 @@ oIg
 qaE
 ldb
 sXK
-nDd
+jqs
 tuR
 sOd
 wWh
