@@ -262,6 +262,12 @@
 			SPECIES_PERK_NAME = "Гидрофобия",
 			SPECIES_PERK_DESC = "Фелиниды не любят, когда на них попадает вода.",
 		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = FA_ICON_ANGRY,
+			SPECIES_PERK_NAME = "'Fight or Flight' Defense Response",
+			SPECIES_PERK_DESC = "Felinids who become mentally unstable (and deprived of food) exhibit an \
+				extreme 'fight or flight' response against aggressors. They sometimes bite people. Violently.",
+		),
 	)
-
 	return to_add

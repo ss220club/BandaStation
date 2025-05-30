@@ -196,7 +196,6 @@ const CrewTable = () => {
           <Input
             placeholder="Search for name..."
             onChange={setSearchQuery}
-            expensive
             value={searchQuery}
           />
         </>

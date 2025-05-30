@@ -186,6 +186,8 @@
 	var/unarmed_effectiveness = 10
 	/// Multiplier applied to effectiveness and damage when attacking a grabbed target.
 	var/unarmed_pummeling_bonus = 1
+	/// The 'sharpness' of the limb. Could indicate claws, teeth or spines. Should default to NONE, or blunt.
+	var/unarmed_sharpness = NONE
 
 	/// Traits that are given to the holder of the part. This does not update automatically on life(), only when the organs are initially generated or inserted!
 	var/list/bodypart_traits = list()
@@ -356,7 +358,7 @@
 		else
 			is_disabled += " и"
 
-	check_list += "<span class='[no_damage ? "notice" : "warning"]'>Ваша [declent_ru(NOMINATIVE)][is_disabled][self_aware ? " имеет " : " выглядит "][status].</span>"
+	check_list += "<span class='[no_damage ? "notice" : "warning"]'>Ваша [ru_plaintext_zone[NOMINATIVE] || plaintext_zone][is_disabled][self_aware ? " имеет " : " выглядит "][status].</span>"
 
 	var/adept_organ_feeler = owner == examiner && HAS_TRAIT(examiner, TRAIT_SELF_AWARE)
 	for(var/obj/item/organ/organ in src)
@@ -376,7 +378,7 @@
 			continue
 		var/harmless = embedded_thing.get_embed().is_harmless()
 		var/stuck_wordage = harmless ? "застрял" : "прилип"
-		var/embed_text = "\t<a href='byond://?src=[REF(examiner)];embedded_object=[REF(embedded_thing)];embedded_limb=[REF(src)]'> There is [icon2html(embedded_thing, examiner)] \a [embedded_thing] [stuck_wordage == "застрял" ? "в" : "к"] вашей [declent_ru(DATIVE)]!</a>"
+		var/embed_text = "\t<a href='byond://?src=[REF(examiner)];embedded_object=[REF(embedded_thing)];embedded_limb=[REF(src)]'> There is [icon2html(embedded_thing, examiner)] \a [embedded_thing] [stuck_wordage == "застрял" ? "в" : "к"] вашей [ru_plaintext_zone[DATIVE] || plaintext_zone]!</a>"
 		if (harmless)
 			check_list += span_italics(span_notice(embed_text))
 		else
@@ -423,7 +425,7 @@
 				return
 	return ..()
 
-/obj/item/bodypart/attackby(obj/item/weapon, mob/user, list/modifiers)
+/obj/item/bodypart/attackby(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(weapon.get_sharpness())
@@ -1459,7 +1461,7 @@
 	if(can_be_disabled && (get_damage() / max_damage) >= robotic_emp_paralyze_damage_percent_threshold)
 		ADD_TRAIT(src, TRAIT_PARALYSIS, EMP_TRAIT)
 		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_PARALYSIS, EMP_TRAIT), time_needed)
-		owner?.visible_message(span_danger("[owner]'s [plaintext_zone] seems to malfunction!"))
+		owner?.visible_message(span_danger("[capitalize(owner.declent_ru(NOMINATIVE))], похоже, имеет не рабочую [ru_plaintext_zone[GENITIVE] || plaintext_zone]!"))
 
 	return TRUE
 
