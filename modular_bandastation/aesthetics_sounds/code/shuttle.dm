@@ -8,6 +8,9 @@
 	/// Custom sound for shuttle's HYPERSPACE_END. Doesn't include emergency & arrival shuttles
 	var/custom_hyperspace_end_sound = 'modular_bandastation/aesthetics_sounds/sound/shuttle/hyperspace_end_new.ogg'
 
+/obj/docking_port/mobile/proc/get_custom_sound(phase)
+	return null
+
 /obj/docking_port/mobile/get_custom_sound(phase)
 	if(shuttle_id != "emergency" && shuttle_id != "arrival")
 		switch(phase)
@@ -54,6 +57,3 @@
 					sound_played_start = FALSE
 				if(sound_played_end)
 					sound_played_end = FALSE
-					
-/obj/docking_port/mobile/proc/get_custom_sound(phase)
-	return null
