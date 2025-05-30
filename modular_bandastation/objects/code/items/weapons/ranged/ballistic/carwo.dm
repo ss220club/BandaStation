@@ -30,7 +30,7 @@
 
 /obj/item/gun/ballistic/automatic/carwo/examine(mob/user)
 	. = ..()
-	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
+	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
 /obj/item/gun/ballistic/automatic/carwo/examine_more(mob/user)
 	. = ..()

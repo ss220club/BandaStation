@@ -4,7 +4,7 @@
 	light_power = 0
 	light_color = null
 
-// // .35 Sol
+// .35 Sol
 /obj/projectile/bullet/c35sol
 	name = ".35 Sol Short bullet"
 	damage = 15
@@ -19,7 +19,6 @@
 	wound_bonus = -40
 	bare_wound_bonus = -20
 	weak_against_armour = TRUE
-
 	// The stats of the ricochet are a nerfed version of detective revolver rubber ammo
 	// This is due to the fact that there's a lot more rounds fired quickly from weapons that use this, over a revolver
 	ricochet_auto_aim_angle = 30
@@ -198,17 +197,12 @@
 
 /obj/projectile/bullet/c40sol/pierce
 	name = ".40 Sol pierce bullet"
-
 	icon_state = "gaussphase"
-
 	speed = 2
-
 	damage = 30
 	armour_penetration = 30
-
 	wound_bonus = -30
 	bare_wound_bonus = -10
-
 	projectile_piercing = PASSMOB | PASSTABLE | PASSGRILLE | PASSMACHINE | PASSDOORS
 
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
@@ -231,7 +225,6 @@
 	light_range = 2
 	light_power = 1
 	light_color = LIGHT_COLOR_INTENSE_RED
-
 	damage = 30
 	fire_stacks = 2
 	leaves_fire_trail = FALSE

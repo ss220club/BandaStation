@@ -14,7 +14,7 @@
 	load_empty_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_magin.ogg'
 	eject_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_magout.ogg'
 	burst_size = 1
-	accepted_magazine_type = /obj/item/ammo_box/magazine/akm/civ
+	accepted_magazine_type = /obj/item/ammo_box/magazine/akm
 	can_suppress = FALSE
 	actions_types = list()
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
@@ -31,7 +31,7 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/sabel/auto
-	name = "АКМ rifle"
+	name = "AMK rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
 	icon_state = "akm"
 	inhand_icon_state = "akm"
@@ -47,11 +47,11 @@
 
 /obj/item/gun/ballistic/automatic/sabel/auto/examine(mob/user)
 	. = ..()
-	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
+	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
 /obj/item/gun/ballistic/automatic/sabel/auto/examine_more(mob/user)
 	. = ..()
-	. += "АКМ — надежная штурмовая винтовка под патрон 7.62×39 мм. Обладает высокой убойной силой, \
+	. += "AMK — надежная штурмовая винтовка под патрон 7.62×39 мм. Обладает высокой убойной силой, \
 	хорошей пробиваемостью и стабильной эффективностью на средних дистанциях.\
 	Имеет заметную отдачу, но компенсируется уроном и доступностью боеприпасов. \
 	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии."
@@ -60,7 +60,7 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/sabel/auto/upp
-	name = "AK-462 rifle"
+	name = "AMK-462 rifle"
 	desc = "Модернизированный дизайн автомата под патрон 7.62 мм. Стадартный и надежный автомат солдат СССП."
 	icon_state = "akm_new"
 	inhand_icon_state = "akm_new"
@@ -80,7 +80,7 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/sabel/auto/modern
-	name = "modern АКМ rifle"
+	name = "modern AMK rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
 	icon_state = "akm_modern"
 	inhand_icon_state = "akm_modern"
@@ -91,7 +91,7 @@
 
 /obj/item/gun/ballistic/automatic/sabel/auto/modern/examine_more(mob/user)
 	. = ..()
-	. += "Этот вариант является модернизированной версией автомата АКМ с использованием более совершенных деталей. \
+	. += "Этот вариант является модернизированной версией автомата AMK с использованием более совершенных деталей. \
 	На замену оригинальных деталей были установлены новые, обновленные версии. \
 	Внутренний механизм был смазан и настроен, что повышает боевые способности данного варианта."
 
@@ -99,7 +99,7 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss
-	name = "gauss AKM rifle"
+	name = "gauss AMK rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
 	icon_state = "akm_gauss"
 	inhand_icon_state = "akm"
@@ -158,7 +158,7 @@
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/examine_more(mob/user)
 	. = ..()
-	. += "Этот вариант является эксперементальной переделкой автомата АКМ с использованием гаусс-технологий. \
+	. += "Этот вариант является эксперементальной переделкой автомата AMK с использованием гаусс-технологий. \
 	На оригинальные детали были установлены капаситоры и катушки, используемые для ускорения пули в стволе. \
 	На прикладе имеется батарея с индикатором загруженности капаситоров. \
 	Из-за того что модификация сделана 'на коленке', о защите от ЭМИ можно только мечтать."
@@ -267,7 +267,7 @@
 	explosion(src, devastation_range = 1, heavy_impact_range = 3, light_impact_range = 6, explosion_cause = src)
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical
-	name = "tactical gauss AKM rifle"
+	name = "tactical gauss AMK rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
 	icon_state = "akm_gauss_tacticool"
 	inhand_icon_state = "akm_modern"

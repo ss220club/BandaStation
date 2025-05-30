@@ -18,7 +18,7 @@
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/examine(mob/user)
 	. = ..()
-	. += span_notice("Вы можете <b>изучить подробнее</b>, чтобы узнать немного больше об этом оружии.")
+	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
@@ -34,7 +34,7 @@
 		функционировать во всех условиях, в которых обычно работает ТСФ. \
 		Так получилось, что эти качества сделали это оружие популярным \
 		в пограничном пространстве, и, скорее всего, именно поэтому вы сейчас смотрите на \
-		этот пистолет. Данный экземпляр является модификацией компании Etamin Industries."
+		этот пистолет."
 
 	return .
 

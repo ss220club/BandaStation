@@ -96,7 +96,7 @@
 //  AKM
 
 /obj/item/ammo_box/magazine/akm
-	name = "AKM magazine"
+	name = "AMK magazine"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами»."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "akm"
@@ -111,31 +111,31 @@
     start_empty = TRUE
 
 /obj/item/ammo_box/magazine/akm/ricochet
-	name = "AKM magazine (MATCH)"
+	name = "AMK magazine (MATCH)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы с высокой рикошетностью."
 	ammo_band_color = COLOR_AMMO_MATCH
 	ammo_type = /obj/item/ammo_casing/a762x39/ricochet
 
 /obj/item/ammo_box/magazine/akm/fire
-	name = "AKM magazine (INCENDIARY)"
+	name = "AMK magazine (INCENDIARY)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит зажигательные боеприпасы."
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/a762x39/fire
 
 /obj/item/ammo_box/magazine/akm/ap
-	name = "AKM magazine (ARMOR PIERCING)"
+	name = "AMK magazine (ARMOR PIERCING)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит бронебойные боеприпасы."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/a762x39/ap
 
 /obj/item/ammo_box/magazine/akm/emp
-	name = "AKM magazine (EMP)"
+	name = "AMK magazine (EMP)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит ионные боеприпасы, которые хорошо подходят для выведения из строя электроники и разрушения мехов."
 	ammo_band_color = "#1ea2ee"
 	ammo_type = /obj/item/ammo_casing/a762x39/emp
 
 /obj/item/ammo_box/magazine/akm/rubber
-	name = "AKM magazine (RUBBER)"
+	name = "AMK magazine (RUBBER)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит нелетальные резиновые боеприпасы."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/a762x39/rubber
@@ -151,7 +151,7 @@
     start_empty = TRUE
 
 /obj/item/ammo_box/magazine/akm/hunting
-	name = "AKM magazine (HUNT)"
+	name = "AMK magazine (HUNT)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы для охоты."
 	ammo_band_color = "#05880c"
 	ammo_type = /obj/item/ammo_casing/a762x39/hunting
