@@ -48,7 +48,7 @@
 					if(!destination_turf)
 						stack_trace("Destination turf is invalid. Sound not played.")
 						return
-					playsound(destination_turf, 'modular_bandastation/aesthetics_sounds/sound/shuttle/hyperspace_end_new.ogg', vol = 100, vary = TRUE, pressure_affected = FALSE)
+					playsound(destination_turf, custom_hyperspace_end_sound, vol = 100, vary = TRUE, pressure_affected = FALSE)
 		if(SHUTTLE_IDLE)
 			// Our sounds should be played once
 			if(sound_played_start)
