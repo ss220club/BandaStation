@@ -723,10 +723,6 @@
 				zlevel_mobs.playsound_local(source, "sound/runtime/hyperspace/[selected_sound].ogg", 100)
 			// BANDASTATION ADDITION END - Allow shuttles to override the default sound paths
 
-// BANDASTATION ADDITION START - Allow shuttles to override the default sound paths
-/obj/docking_port/mobile/proc/get_custom_sound(phase)
-	return null
-// BANDASTATION ADDITION END - Allow shuttles to override the default sound paths
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time

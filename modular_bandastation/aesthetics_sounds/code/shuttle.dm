@@ -54,3 +54,6 @@
 					sound_played_start = FALSE
 				if(sound_played_end)
 					sound_played_end = FALSE
+					
+/obj/docking_port/mobile/proc/get_custom_sound(phase)
+	return null
