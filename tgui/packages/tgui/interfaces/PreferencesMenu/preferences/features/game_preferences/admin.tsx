@@ -53,3 +53,12 @@ export const comms_notification: FeatureToggle = {
   category: 'АДМИН',
   component: CheckboxInput,
 };
+
+export const auto_deadmin_on_ready_or_latejoin: FeatureToggle = {
+  name: 'Авто deadmin - Готов или Лейтджоин',
+  category: 'АДМИН',
+  description: `
+    When enabled, you will automatically deadmin when you click to ready up or latejoin a round.
+`,
+  component: CheckboxInput,
+};

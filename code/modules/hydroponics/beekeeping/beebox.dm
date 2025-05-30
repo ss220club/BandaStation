@@ -145,7 +145,7 @@
 	default_unfasten_wrench(user, tool)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/structure/beebox/attackby(obj/item/item, mob/user, params)
+/obj/structure/beebox/attackby(obj/item/item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(item, /obj/item/honey_frame))
 		var/obj/item/honey_frame/frame = item
 		if(honey_frames.len < BEEBOX_MAX_FRAMES)
@@ -204,7 +204,7 @@
 		if(bees_attack)
 			visible_message(span_danger("[user] disturbs the bees!"))
 		else
-			visible_message(span_danger("[user] disturbs the [name] to no effect!"))
+			visible_message(span_danger("[user] disturbs \the [src] to no effect!"))
 	else
 		var/option = tgui_alert(user, "Which piece do you wish to remove?", "Apiary Adjustment", list("Honey Frame", "Queen Bee"))
 		if(!option || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, NEED_DEXTERITY))

@@ -30,7 +30,7 @@
 
 /obj/item/food/grown/banana/make_edible()
 	. = ..()
-	AddComponent(/datum/component/edible, check_liked = CALLBACK(src, PROC_REF(check_liked)))
+	AddComponentFrom(SOURCE_EDIBLE_INNATE, /datum/component/edible, check_liked = CALLBACK(src, PROC_REF(check_liked)))
 
 /obj/item/food/grown/banana/Initialize(mapload)
 	. = ..()
@@ -50,12 +50,12 @@
 		peel.grind_results = list(/datum/reagent/medicine/coagulant/banana_peel = peel.seed.potency * 0.2)
 
 /obj/item/food/grown/banana/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is aiming [src] at [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is aiming [src] at [user.p_them()]self! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(loc, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
 	sleep(2.5 SECONDS)
 	if(!user)
 		return OXYLOSS
-	user.say("BANG!", forced = /datum/reagent/consumable/banana)
+	user.say("ПУФ!", forced = /datum/reagent/consumable/banana)
 	sleep(2.5 SECONDS)
 	if(!user)
 		return OXYLOSS
@@ -85,7 +85,7 @@
 			icon_state = "[icon_state]_3"
 
 /obj/item/grown/bananapeel/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is deliberately slipping on [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is deliberately slipping on [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, TRUE, -1)
 	return BRUTELOSS
 
@@ -161,7 +161,7 @@
 
 /obj/item/food/grown/banana/bunch
 	name = "banana bunch"
-	desc = "Am exquisite bunch of bananas. The almost otherwordly plumpness steers the mind any discening entertainer towards the divine."
+	desc = "An exquisite bunch of bananas. The almost otherwordly plumpness steers the mind any discerning entertainer towards the divine."
 	icon_state = "banana_bunch"
 	bite_consumption_mod = 4
 	var/is_ripening = FALSE
@@ -171,6 +171,7 @@
 	reagents.clear_reagents()
 	reagents.add_reagent(/datum/reagent/consumable/monkey_energy, 10)
 	reagents.add_reagent(/datum/reagent/consumable/banana, 10)
+	AddElement(/datum/element/swabable, CELL_LINE_TABLE_CLOWNANA, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
 
 /obj/item/food/grown/banana/bunch/proc/start_ripening()
 	if(is_ripening)
@@ -205,3 +206,14 @@
 	if(!is_simian(user))
 		return to_chat(user, span_notice("You don't really know what to do with this."))
 	else start_ripening()
+
+/// Used for april fools mail
+/obj/item/grown/bananapeel/gros_michel
+	name = "gros michel peel"
+	desc = "A peel from a species of banana that's hyper-vulnerable to contamination."
+
+/obj/item/grown/bananapeel/gros_michel/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/germ_sensitive, mapload)
+	transform *= 1.25
+	AddComponent(/datum/component/decomposition, mapload, decomp_req_handle = TRUE, custom_time = 1 MINUTES, decomp_result = /obj/item/food/badrecipe/moldy)

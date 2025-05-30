@@ -1,7 +1,7 @@
 
 /datum/antagonist/nukeop/clownop
 	name = ROLE_CLOWN_OPERATIVE
-	roundend_category = "clown operatives"
+	roundend_category = "Клоуны-оперативники"
 	antagpanel_category = ANTAG_GROUP_CLOWNOPS
 	nukeop_outfit = /datum/outfit/syndicate/clownop
 	suicide_cry = "HAPPY BIRTHDAY!!"
@@ -42,7 +42,7 @@
 
 /datum/antagonist/nukeop/leader/clownop
 	name = "Clown Operative Leader"
-	roundend_category = "clown operatives"
+	roundend_category = "Клоуны-оперативники"
 	antagpanel_category = ANTAG_GROUP_CLOWNOPS
 	nukeop_outfit = /datum/outfit/syndicate/clownop/leader
 	challengeitem = /obj/item/nuclear_challenge/clownops
@@ -78,8 +78,7 @@
 
 /datum/outfit/clown_operative/post_equip(mob/living/carbon/human/H, visuals_only)
 	var/obj/item/mod/module/armor_booster/booster = locate() in H.back
-	booster.active = TRUE
-	H.update_worn_back()
+	booster.activate()
 
 /datum/outfit/clown_operative_elite
 	name = "Clown Operative (Elite, Preview only)"
@@ -89,5 +88,4 @@
 
 /datum/outfit/clown_operative_elite/post_equip(mob/living/carbon/human/H, visuals_only)
 	var/obj/item/mod/module/armor_booster/booster = locate() in H.back
-	booster.active = TRUE
-	H.update_worn_back()
+	booster.activate()

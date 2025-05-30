@@ -1,13 +1,13 @@
 /datum/job/security_officer
 	title = JOB_SECURITY_OFFICER
-	description = "Protect company assets, follow the Standard Operating \
-		Procedure, eat donuts."
+	description = "Защищайте активы компании, следуйте Стандартным Рабочим \
+		Процедурам, жрите пончики."
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	department_head = list(JOB_HEAD_OF_SECURITY)
 	faction = FACTION_STATION
 	total_positions = 5 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
 	spawn_positions = 5 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
-	supervisors = "the Head of Security, and the head of your assigned department (if applicable)"
+	supervisors = "Главой Службы Безопасности, Смотрителем"
 	minimal_player_age = 7
 	exp_requirements = 300
 	exp_required_type = EXP_TYPE_CREW
@@ -145,9 +145,9 @@ GLOBAL_LIST_EMPTY(security_officer_distribution)
 
 	if(player_client)
 		if(department)
-			to_chat(player_client, "<b>You have been assigned to [department]!</b>")
+			to_chat(player_client, "<b>Вы были закрепленны за [department]!</b>")
 		else
-			to_chat(player_client, "<b>You have not been assigned to any department. Patrol the halls and help where needed.</b>")
+			to_chat(player_client, "<b>Вы не были закрепленны за каким-либо отделом. Патрулируйте станцию и помогайте нуждающимся.</b>")
 
 	return department
 
@@ -157,11 +157,14 @@ GLOBAL_LIST_EMPTY(security_officer_distribution)
 	department,
 	distribution,
 )
-	var/obj/machinery/announcement_system/announcement_system = pick(GLOB.announcement_systems)
+	var/obj/machinery/announcement_system/announcement_system = get_announcement_system(/datum/aas_config_entry/announce_officer)
 	if (isnull(announcement_system))
 		return
 
-	announcement_system.announce_officer(officer, department)
+	announcement_system.announce(/datum/aas_config_entry/announce_officer, list(
+		"OFFICER" = officer.real_name,
+		"DEPARTMENT" = department,
+	), list(RADIO_CHANNEL_SECURITY))
 
 	var/list/targets = list()
 
@@ -182,10 +185,14 @@ GLOBAL_LIST_EMPTY(security_officer_distribution)
 	if (!targets.len)
 		return
 
+	// I thought it would be great, if AAS also modifies PDA messages. Especially because it's AASs message.
 	var/datum/signal/subspace/messaging/tablet_message/signal = new(announcement_system, list(
 		"fakename" = "Security Department Update",
 		"fakejob" = "Automated Announcement System",
-		"message" = "Officer [officer.real_name] has been assigned to your department, [department].",
+		"message" = announcement_system.compile_config_message(/datum/aas_config_entry/announce_officer, list(
+			"OFFICER" = officer.real_name,
+			"DEPARTMENT" = department,
+		)),
 		"targets" = targets,
 		"automated" = TRUE,
 	))

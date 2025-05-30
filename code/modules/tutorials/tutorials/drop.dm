@@ -18,8 +18,8 @@
 	QDEL_NULL(drop_preview)
 	return ..()
 
-/datum/tutorial/drop/perform(list/params)
-	create_drop_preview(params[SCREEN_LOC])
+/datum/tutorial/drop/perform(list/modifiers)
+	create_drop_preview(modifiers[SCREEN_LOC])
 	addtimer(CALLBACK(src, PROC_REF(show_instructions)), TIME_TO_START_MOVING_DROP_ICON)
 
 	RegisterSignal(user, COMSIG_MOB_DROPPING_ITEM, PROC_REF(on_dropped_item))
@@ -51,11 +51,11 @@
 		if (STAGE_DROP_ITEM)
 			show_instruction(keybinding_message(
 				/datum/keybinding/mob/drop_item,
-				"Press '%KEY%' to drop your current item",
-				"Click '<b>DROP</b>' to drop your current item",
+				"Нажмите '%KEY%', чтобы выбросить предмет с руки",
+				"Кликните по '<b>DROP</b>', чтобы выбросить предмет с руки",
 			))
 		if (STAGE_PICK_SOMETHING_UP)
-			show_instruction("Pick something up!")
+			show_instruction("Возьмите что-нибудь!")
 
 /datum/tutorial/drop/proc/on_swap_hands()
 	SIGNAL_HANDLER

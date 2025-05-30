@@ -96,13 +96,13 @@ function PriorityHeaders() {
     <Stack>
       <Stack.Item grow />
 
-      <Stack.Item className={className}>Off</Stack.Item>
+      <Stack.Item className={className}>Откл.</Stack.Item>
 
-      <Stack.Item className={className}>Low</Stack.Item>
+      <Stack.Item className={className}>Низк.</Stack.Item>
 
-      <Stack.Item className={className}>Medium</Stack.Item>
+      <Stack.Item className={className}>Средн.</Stack.Item>
 
-      <Stack.Item className={className}>High</Stack.Item>
+      <Stack.Item className={className}>Высок.</Stack.Item>
     </Stack>
   );
 }
@@ -128,7 +128,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
       {isOverflow ? (
         <>
           <PriorityButton
-            name="Off"
+            name="Отключить"
             modifier="off"
             color="light-grey"
             enabled={!priority}
@@ -145,7 +145,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
       ) : (
         <>
           <PriorityButton
-            name="Off"
+            name="Отключить"
             modifier="off"
             color="light-grey"
             enabled={!priority}
@@ -153,21 +153,21 @@ function PriorityButtons(props: PriorityButtonsProps) {
           />
 
           <PriorityButton
-            name="Low"
+            name="Низкий"
             color="red"
             enabled={priority === JobPriority.Low}
             onClick={createSetPriority(JobPriority.Low)}
           />
 
           <PriorityButton
-            name="Medium"
+            name="Средний"
             color="yellow"
             enabled={priority === JobPriority.Medium}
             onClick={createSetPriority(JobPriority.Medium)}
           />
 
           <PriorityButton
-            name="High"
+            name="Высокий"
             color="green"
             enabled={priority === JobPriority.High}
             onClick={createSetPriority(JobPriority.High)}
@@ -206,7 +206,7 @@ function JobRow(props: JobRowProps) {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
         <Stack.Item grow textAlign="right">
-          <b>{hoursNeeded}h</b> as {experience_type}
+          <b>{hoursNeeded}h</b> как {experience_type}
         </Stack.Item>
       </Stack>
     );
@@ -214,7 +214,7 @@ function JobRow(props: JobRowProps) {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
         <Stack.Item grow textAlign="right">
-          <b>{daysLeft}</b> day{daysLeft === 1 ? '' : 's'} left
+          Нужно ещё дней: <b>{daysLeft}</b>
         </Stack.Item>
       </Stack>
     );
@@ -222,7 +222,7 @@ function JobRow(props: JobRowProps) {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
         <Stack.Item grow textAlign="right">
-          <b>Banned</b>
+          <b>Забанен</b>
         </Stack.Item>
       </Stack>
     );
@@ -247,7 +247,7 @@ function JobRow(props: JobRowProps) {
               paddingLeft: '0.3em',
             }}
           >
-            {JOBS_RU[name] ? JOBS_RU[name] : name}
+            {JOBS_RU[name] || name}
           </Stack.Item>
         </Tooltip>
 
@@ -288,7 +288,7 @@ function Department(props: DepartmentProps) {
 
   return (
     <Box>
-      <Stack vertical fill>
+      <Stack fill vertical g={0}>
         {jobsForDepartment.map(([name, job]) => {
           return (
             <JobRow
@@ -309,30 +309,21 @@ function Department(props: DepartmentProps) {
   );
 }
 
-// *Please* find a better way to do this, this is RIDICULOUS.
-// All I want is for a gap to pretend to be an empty space.
-// But in order for everything to align, I also need to add the 0.2em padding.
-// But also, we can't be aligned with names that break into multiple lines!
-function Gap(props: { amount: number }) {
-  // 0.2em comes from the padding-bottom in the department listing
-  return <Box height={`calc(${props.amount}px + 0.2em)`} />;
-}
-
 function JoblessRoleDropdown(props) {
   const { act, data } = useBackend<PreferencesMenuData>();
   const selected = data.character_preferences.misc.joblessrole;
 
   const options = [
     {
-      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] ? JOBS_RU[data.overflow_role] : data.overflow_role} если не удалось войти`,
+      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] || data.overflow_role} если не удалось войти`,
       value: JoblessRole.BeOverflow,
     },
     {
-      displayText: `Join as a random job if unavailable`,
+      displayText: `Выбрать случайную должность, если не удалось войти`,
       value: JoblessRole.BeRandomJob,
     },
     {
-      displayText: `Return to lobby if unavailable`,
+      displayText: `Вернуться в лобби, если не удалось войти`,
       value: JoblessRole.ReturnToLobby,
     },
   ];
@@ -357,64 +348,34 @@ export function JobsPage() {
   return (
     <>
       <JoblessRoleDropdown />
-
       <Stack vertical fill>
-        <Gap amount={22} />
-
-        <Stack.Item>
-          <Stack fill className="PreferencesMenu__Jobs">
-            <Stack.Item mr={1}>
-              <Gap amount={36} />
-
-              <PriorityHeaders />
-
-              <Department department="Engineering">
-                <Gap amount={6} />
-              </Department>
-
-              <Department department="Science">
-                <Gap amount={6} />
-              </Department>
-
-              <Department department="Silicon">
-                <Gap amount={12} />
-              </Department>
-
-              <Department department="Assistant" />
-            </Stack.Item>
-
-            <Stack.Item mr={1}>
-              <PriorityHeaders />
-
-              <Department department="Captain">
-                <Gap amount={6} />
-              </Department>
-
-              <Department department="NT Representation">
-                <Gap amount={6} />
-              </Department>
-
-              <Department department="Service">
-                <Gap amount={6} />
-              </Department>
-
-              <Department department="Cargo" />
-            </Stack.Item>
-
+        <Stack.Item mt={15}>
+          <Stack fill g={1} className="PreferencesMenu__Jobs">
             <Stack.Item>
-              <Gap amount={36} />
-
-              <PriorityHeaders />
-
-              <Department department="Security">
-                <Gap amount={6} />
-              </Department>
-
-              <Department department="Justice">
-                <Gap amount={6} />
-              </Department>
-
-              <Department department="Medical" />
+              <Stack vertical>
+                <PriorityHeaders />
+                <Department department="Engineering" />
+                <Department department="Science" />
+                <Department department="Silicon" />
+                <Department department="Assistant" />
+              </Stack>
+            </Stack.Item>
+            <Stack.Item mt={-5.9}>
+              <Stack vertical>
+                <PriorityHeaders />
+                <Department department="Captain" />
+                <Department department="NT Representation" />
+                <Department department="Service" />
+                <Department department="Cargo" />
+              </Stack>
+            </Stack.Item>
+            <Stack.Item>
+              <Stack vertical>
+                <PriorityHeaders />
+                <Department department="Security" />
+                <Department department="Justice" />
+                <Department department="Medical" />
+              </Stack>
             </Stack.Item>
           </Stack>
         </Stack.Item>

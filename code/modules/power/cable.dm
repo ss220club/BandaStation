@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 	icon_state = dir_string
 	return ..()
 
-/obj/structure/cable/proc/handlecable(obj/item/W, mob/user, params)
+/obj/structure/cable/proc/handlecable(obj/item/W, mob/user, list/modifiers)
 	var/turf/T = get_turf(src)
 	if(T.underfloor_accessibility < UNDERFLOOR_INTERACTABLE)
 		return
@@ -207,8 +207,8 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 //   - Wirecutters : cut it duh !
 //   - Multitool : get the power currently passing through the cable
 //
-/obj/structure/cable/attackby(obj/item/W, mob/user, params)
-	handlecable(W, user, params)
+/obj/structure/cable/attackby(obj/item/item, mob/user, list/modifiers, list/attack_modifiers)
+	handlecable(item, user, modifiers)
 
 
 // shock the user with probability prb
@@ -468,10 +468,14 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 	. += "<b>Use it in hand</b> to change the layer you are placing on, amongst other things."
 
 /obj/item/stack/cable_coil/update_name()
+	if(novariants)
+		return
 	. = ..()
 	name = "cable [(amount < 3) ? "piece" : "coil"]"
 
 /obj/item/stack/cable_coil/update_desc()
+	if(novariants)
+		return
 	. = ..()
 	desc = "A [(amount < 3) ? "piece" : "coil"] of insulated power cable."
 
@@ -489,9 +493,9 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 
 /obj/item/stack/cable_coil/suicide_act(mob/living/user)
 	if(locate(/obj/structure/chair/stool) in get_turf(user))
-		user.visible_message(span_suicide("[user] is making a noose with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is making a noose with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	else
-		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/stack/cable_coil/proc/check_menu(mob/living/user)
@@ -526,36 +530,41 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 		return
 	switch(layer_result)
 		if("Layer 1")
+			icon = initial(icon)
+			novariants = FALSE
 			set_cable_color(CABLE_COLOR_RED)
 			target_type = /obj/structure/cable/layer1
 			target_layer = CABLE_LAYER_1
-			novariants = FALSE
 		if("Layer 2")
+			icon = initial(icon)
+			novariants = FALSE
 			set_cable_color(CABLE_COLOR_YELLOW)
 			target_type = /obj/structure/cable
 			target_layer = CABLE_LAYER_2
-			novariants = FALSE
 		if("Layer 3")
+			icon = initial(icon)
+			novariants = FALSE
 			set_cable_color(CABLE_COLOR_BLUE)
 			target_type = /obj/structure/cable/layer3
 			target_layer = CABLE_LAYER_3
-			novariants = FALSE
 		if("Multilayer cable hub")
 			name = "multilayer cable hub"
 			desc = "A multilayer cable hub."
+			icon = 'icons/obj/pipes_n_cables/structures.dmi'
 			icon_state = "cable_bridge"
+			novariants = TRUE
 			set_cable_color(CABLE_COLOR_WHITE)
 			target_type = /obj/structure/cable/multilayer
 			target_layer = CABLE_LAYER_2
-			novariants = TRUE
 		if("Multi Z layer cable hub")
 			name = "multi z layer cable hub"
 			desc = "A multi-z layer cable hub."
+			icon = 'icons/obj/pipes_n_cables/structures.dmi'
 			icon_state = "cablerelay-broken-cable"
+			novariants = TRUE
 			set_cable_color(CABLE_COLOR_WHITE)
 			target_type = /obj/structure/cable/multilayer/multiz
 			target_layer = CABLE_LAYER_2
-			novariants = TRUE
 		if("Cable restraints")
 			if (amount >= CABLE_RESTRAINTS_COST)
 				if(use(CABLE_RESTRAINTS_COST))
@@ -602,7 +611,7 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 	if(!do_after(user, use_delay, attacked_humanoid))
 		return ITEM_INTERACT_BLOCKING
 
-	if (!attacked_humanoid.item_heal(user, brute_heal = 0, burn_heal = 15, heal_message_brute = "dents", heal_message_burn = "burnt wires", required_bodytype = BODYTYPE_ROBOTIC))
+	if (!attacked_humanoid.item_heal(user, brute_heal = 0, burn_heal = 15, heal_message_brute = "вмятины", heal_message_burn = "сожженую проводку", required_bodytype = BODYTYPE_ROBOTIC))
 		return ITEM_INTERACT_BLOCKING
 
 	if (use(1) && amount > 0)
@@ -794,3 +803,9 @@ GLOBAL_LIST(hub_radial_layer_list)
 // This is a mapping aid. In order for this to be placed on a map and function, all three layers need to have their nodes active
 /obj/structure/cable/multilayer/connected
 		cable_layer = CABLE_LAYER_1 | CABLE_LAYER_2 | CABLE_LAYER_3
+
+/obj/structure/cable/multilayer/layer1
+		cable_layer = CABLE_LAYER_1
+
+/obj/structure/cable/multilayer/layer3
+		cable_layer =  CABLE_LAYER_3

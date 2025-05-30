@@ -21,6 +21,9 @@ export type NTOSData = {
   light_on: BooleanLike;
   login: Login;
   pai: string | null;
+  alert_style: number;
+  alert_color: string;
+  alert_name: string;
   PC_batteryicon: string | null;
   PC_batterypercent: string | null;
   PC_device_theme: string;
@@ -85,7 +88,7 @@ export const NtosWindow = (props) => {
             </Box>
             <Box inline italic mr={2} opacity={0.33}>
               {(PC_device_theme === 'syndicate' && 'Syndix') || 'NtOS'}
-              {!!PC_lowpower_mode && ' - RUNNING ON LOW POWER MODE'}
+              {!!PC_lowpower_mode && ' - РЕЖИМ ПОНИЖЕННОГО ЭНЕРГОПОТРЕБЛЕНИЯ'}
             </Box>
           </div>
           <div className="NtosHeader__right">
@@ -118,7 +121,7 @@ export const NtosWindow = (props) => {
               <Button
                 color="transparent"
                 icon="window-minimize-o"
-                tooltip="Minimize"
+                tooltip="Свернуть"
                 tooltipPosition="bottom"
                 onClick={() => act('PC_minimize')}
               />
@@ -127,7 +130,7 @@ export const NtosWindow = (props) => {
               <Button
                 color="transparent"
                 icon="window-close-o"
-                tooltip="Close"
+                tooltip="Закрыть"
                 tooltipPosition="bottom-start"
                 onClick={() => act('PC_exit')}
               />
@@ -137,7 +140,7 @@ export const NtosWindow = (props) => {
                 textAlign="center"
                 color="transparent"
                 icon="power-off"
-                tooltip="Power off"
+                tooltip="Выключить"
                 tooltipPosition="bottom-start"
                 onClick={() => act('PC_shutdown')}
               />

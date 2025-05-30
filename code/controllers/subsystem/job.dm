@@ -1,6 +1,8 @@
 SUBSYSTEM_DEF(job)
 	name = "Jobs"
-	init_order = INIT_ORDER_JOBS
+	dependencies = list(
+		/datum/controller/subsystem/processing/station,
+	)
 	flags = SS_NO_FIRE
 
 	/// List of all jobs.
@@ -84,6 +86,10 @@ SUBSYSTEM_DEF(job)
 	## The game will not read any line that is commented out with a '#', as to allow you to defer to codebase defaults.\n## If you want to override the codebase values, add the value and then uncomment that line by removing the # from the job key's name.\n\
 	## Ensure that the key is flush, do not introduce any whitespaces when you uncomment a key. For example:\n## \"# Total Positions\" should always be changed to \"Total Positions\", no additional spacing.\n\
 	## Best of luck editing!\n"
+	// BANDASTATIONE EDIT START - STORYTELLER
+	/// Assoc list of new players keyed to the type of job they will currently get
+	var/list/assigned_players_by_job = list()
+	// BANDASTATIONE EDIT END - STORYTELLER
 
 /datum/controller/subsystem/job/Initialize()
 	setup_job_lists()
@@ -554,6 +560,11 @@ SUBSYSTEM_DEF(job)
 		if (BEOVERFLOW)
 			var/datum/job/overflow_role_datum = get_job_type(overflow_role)
 
+			if((overflow_role_datum.current_positions >= overflow_role_datum.spawn_positions) && overflow_role_datum.spawn_positions != -1)
+				job_debug("HU: Overflow role player cap reached, trying to reject: [player]")
+				try_reject_player(player)
+				return
+
 			if(check_job_eligibility(player, overflow_role_datum, debug_prefix = "HU", add_job_to_log = TRUE) != JOB_AVAILABLE)
 				job_debug("HU: Player cannot be overflow, trying to reject: [player]")
 				try_reject_player(player)
@@ -590,7 +601,7 @@ SUBSYSTEM_DEF(job)
 	job.announce_job(equipping)
 
 	if(player_client?.holder)
-		if(CONFIG_GET(flag/auto_deadmin_players) || (player_client.prefs?.toggles & DEADMIN_ALWAYS))
+		if(CONFIG_GET(flag/auto_deadmin_always) || (player_client.prefs?.toggles & DEADMIN_ALWAYS))
 			player_client.holder.auto_deadmin()
 		else
 			handle_auto_deadmin_roles(player_client, job.title)
@@ -833,10 +844,10 @@ SUBSYSTEM_DEF(job)
 
 	var/paper = new /obj/item/folder/biscuit/confidential/spare_id_safe_code()
 	var/list/slots = list(
-		LOCATION_LPOCKET = ITEM_SLOT_LPOCKET,
-		LOCATION_RPOCKET = ITEM_SLOT_RPOCKET,
-		LOCATION_BACKPACK = ITEM_SLOT_BACKPACK,
-		LOCATION_HANDS = ITEM_SLOT_HANDS
+		LOCATION_LPOCKET,
+		LOCATION_RPOCKET,
+		LOCATION_BACKPACK,
+		LOCATION_HANDS,
 	)
 	var/where = new_captain.equip_in_one_of_slots(paper, slots, FALSE, indirect_action = TRUE) || "at your feet"
 
@@ -897,7 +908,13 @@ SUBSYSTEM_DEF(job)
 	// appear normal from the UI. By passing in JP_ANY, it will return all players that have the overflow job pref (which should be a toggle)
 	// set to any level.
 	var/list/overflow_candidates = find_occupation_candidates(overflow_datum, JP_ANY)
+	job_debug("OVRFLW: Attempting to assign the overflow role to [length(overflow_candidates)] players.")
 	for(var/mob/dead/new_player/player in overflow_candidates)
+		if((overflow_datum.current_positions >= overflow_datum.spawn_positions) && overflow_datum.spawn_positions != -1)
+			job_debug("OVRFLW: Overflow role cap reached, role only assigned to [overflow_datum.current_positions] players.")
+			job_debug("OVRFLW: Overflow Job is now full, Job: [overflow_datum], Positions: [overflow_datum.current_positions], Limit: [overflow_datum.spawn_positions]")
+			return
+
 		// Eligibility checks done as part of find_occupation_candidates, so skip them.
 		assign_role(player, get_job_type(overflow_role), do_eligibility_checks = FALSE)
 		job_debug("OVRFLW: Assigned overflow to player: [player]")
@@ -979,3 +996,98 @@ SUBSYSTEM_DEF(job)
 		return TRUE
 
 	return FALSE
+
+// BANDASTATION EDIT START - STORYTELLER
+/datum/controller/subsystem/job/proc/FreeRole(rank)
+	if(!rank)
+		return
+	job_debug("Freeing role: [rank]")
+	var/datum/job/job = get_job(rank)
+	if(!job)
+		return FALSE
+	job.current_positions = max(0, job.current_positions - 1)
+
+/datum/controller/subsystem/job/proc/SetupOccupations()
+	name_occupations = list()
+	type_occupations = list()
+
+	var/list/all_jobs = subtypesof(/datum/job)
+	if(!length(all_jobs))
+		all_occupations = list()
+		joinable_occupations = list()
+		joinable_departments = list()
+		joinable_departments_by_type = list()
+		experience_jobs_map = list()
+		to_chat(world, span_boldannounce("Error setting up jobs, no job datums found"))
+		return FALSE
+
+	var/list/new_all_occupations = list()
+	var/list/new_joinable_occupations = list()
+	var/list/new_joinable_departments = list()
+	var/list/new_joinable_departments_by_type = list()
+	var/list/new_experience_jobs_map = list()
+
+	for(var/job_type in all_jobs)
+		var/datum/job/job = new job_type()
+		if(!job.config_check())
+			continue
+		if(!job.map_check()) //Even though we initialize before mapping, this is fine because the config is loaded at new
+			log_job_debug("Removed [job.title] due to map config")
+			continue
+		new_all_occupations += job
+		name_occupations[job.title] = job
+		type_occupations[job_type] = job
+		if(job.job_flags & JOB_NEW_PLAYER_JOINABLE)
+			new_joinable_occupations += job
+			if(!LAZYLEN(job.departments_list))
+				var/datum/job_department/department = new_joinable_departments_by_type[/datum/job_department/undefined]
+				if(!department)
+					department = new /datum/job_department/undefined()
+					new_joinable_departments_by_type[/datum/job_department/undefined] = department
+				department.add_job(job)
+				continue
+			for(var/department_type in job.departments_list)
+				var/datum/job_department/department = new_joinable_departments_by_type[department_type]
+				if(!department)
+					department = new department_type()
+					new_joinable_departments_by_type[department_type] = department
+				department.add_job(job)
+
+	sortTim(new_all_occupations, GLOBAL_PROC_REF(cmp_job_display_asc))
+	for(var/datum/job/job as anything in new_all_occupations)
+		if(!job.exp_granted_type)
+			continue
+		new_experience_jobs_map[job.exp_granted_type] += list(job)
+
+	sortTim(new_joinable_departments_by_type, GLOBAL_PROC_REF(cmp_department_display_asc), associative = TRUE)
+	for(var/department_type in new_joinable_departments_by_type)
+		var/datum/job_department/department = new_joinable_departments_by_type[department_type]
+		sortTim(department.department_jobs, GLOBAL_PROC_REF(cmp_job_display_asc))
+		new_joinable_departments += department
+		if(department.department_experience_type)
+			new_experience_jobs_map[department.department_experience_type] = department.department_jobs.Copy()
+
+	all_occupations = new_all_occupations
+	joinable_occupations = sortTim(new_joinable_occupations, GLOBAL_PROC_REF(cmp_job_display_asc))
+	joinable_departments = new_joinable_departments
+	joinable_departments_by_type = new_joinable_departments_by_type
+	experience_jobs_map = new_experience_jobs_map
+
+	return TRUE
+
+/datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, buckle = TRUE)
+	var/atom/destination
+
+	if(M.mind && !is_unassigned_job(M.mind.assigned_role) && length(GLOB.jobspawn_overrides[M.mind.assigned_role.title])) //We're doing something special today.
+		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role.title])
+		destination.JoinPlayerHere(M, FALSE)
+		return TRUE
+
+	if(latejoin_trackers.len)
+		destination = pick(latejoin_trackers)
+		destination.JoinPlayerHere(M, buckle)
+		return TRUE
+
+	destination = get_last_resort_spawn_points()
+	destination.JoinPlayerHere(M, buckle)
+// BANDASTATION EDIT END - STORYTELLER

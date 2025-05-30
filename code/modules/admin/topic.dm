@@ -69,7 +69,10 @@
 	else if(href_list["gamemode_panel"])
 		if(!check_rights(R_ADMIN))
 			return
-		SSdynamic.admin_panel()
+		// BANDASTATION EDIT START - STORYTELLER
+		//SSdynamic.admin_panel()
+		SSgamemode.admin_panel(usr)
+		// BANDASTATION EDIT END - STORYTELLER
 
 	else if(href_list["call_shuttle"])
 		if(!check_rights(R_ADMIN))
@@ -108,7 +111,7 @@
 			return
 		SSshuttle.emergency.setTimer(timer SECONDS)
 		log_admin("[key_name(usr)] edited the Emergency Shuttle's timeleft to [timer] seconds.")
-		minor_announce("The emergency shuttle will reach its destination in [DisplayTimeText(timer SECONDS)].")
+		minor_announce("Эвакуационный шаттл достигнет места назначения через [DisplayTimeText(timer SECONDS)].")
 		message_admins(span_adminnotice("[key_name_admin(usr)] edited the Emergency Shuttle's timeleft to [timer] seconds."))
 	else if(href_list["trigger_centcom_recall"])
 		if(!check_rights(R_ADMIN))
@@ -793,7 +796,7 @@
 
 		//Job + antagonist
 		if(subject.mind)
-			special_role_description = "Role: <b>[subject.mind.assigned_role.title]</b>; Antagonist: <font color='red'><b>"
+			special_role_description = "Role: <b>[job_title_ru(subject.mind.assigned_role.title)]</b>; Antagonist: <font color='red'><b>"
 
 			if(subject.mind.antag_datums)
 				var/iterable = 0
@@ -1282,6 +1285,15 @@
 		message_admins("[key_name_admin(usr)] has set the self-destruct \
 			code to \"[code]\".")
 
+	// BANDASTATION ADDITION - START
+	else if(href_list["ert_respond"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/ert_manager/tgui = new(usr)
+		tgui.ui_interact(usr)
+		message_admins("[key_name_admin(usr)] answered an ERT request.")
+	// BANDASTATION ADDITION - END
+
 	else if(href_list["add_station_goal"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1388,66 +1400,7 @@
 		if(!check_rights(R_ADMIN))
 			return
 
-		if(!CONFIG_GET(string/centcom_ban_db))
-			to_chat(usr, span_warning("Centcom Galactic Ban DB is disabled!"))
-			return
-
-		var/ckey = href_list["centcomlookup"]
-
-		// Make the request
-		var/datum/http_request/request = new()
-		request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/centcom_ban_db)]/[ckey]", "", "")
-		request.begin_async()
-		UNTIL(request.is_complete() || !usr)
-		if (!usr)
-			return
-		var/datum/http_response/response = request.into_response()
-
-		var/list/bans
-
-		var/list/dat = list("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><body>")
-
-		if(response.errored)
-			dat += "<br>Failed to connect to CentCom."
-		else if(response.status_code != 200)
-			dat += "<br>Failed to connect to CentCom. Status code: [response.status_code]"
-		else
-			if(response.body == "[]")
-				dat += "<center><b>0 bans detected for [ckey]</b></center>"
-			else
-				bans = json_decode(response.body)
-
-				//Ignore bans from non-whitelisted sources, if a whitelist exists
-				var/list/valid_sources
-				if(CONFIG_GET(string/centcom_source_whitelist))
-					valid_sources = splittext(CONFIG_GET(string/centcom_source_whitelist), ",")
-					dat += "<center><b>Bans detected for [ckey]</b></center>"
-				else
-					//Ban count is potentially inaccurate if they're using a whitelist
-					dat += "<center><b>[bans.len] ban\s detected for [ckey]</b></center>"
-
-				for(var/list/ban in bans)
-					if(valid_sources && !(ban["sourceName"] in valid_sources))
-						continue
-					dat += "<b>Server: </b> [sanitize(ban["sourceName"])]<br>"
-					dat += "<b>RP Level: </b> [sanitize(ban["sourceRoleplayLevel"])]<br>"
-					dat += "<b>Type: </b> [sanitize(ban["type"])]<br>"
-					dat += "<b>Banned By: </b> [sanitize(ban["bannedBy"])]<br>"
-					dat += "<b>Reason: </b> [sanitize(ban["reason"])]<br>"
-					dat += "<b>Datetime: </b> [sanitize(ban["bannedOn"])]<br>"
-					var/expiration = ban["expires"]
-					dat += "<b>Expires: </b> [expiration ? "[sanitize(expiration)]" : "Permanent"]<br>"
-					if(ban["type"] == "job")
-						dat += "<b>Jobs: </b> "
-						var/list/jobs = ban["jobs"]
-						dat += sanitize(jobs.Join(", "))
-						dat += "<br>"
-					dat += "<hr>"
-
-		dat += "<br></body>"
-		var/datum/browser/popup = new(usr, "centcomlookup-[ckey]", "<div align='center'>Central Command Galactic Ban Database</div>", 700, 600)
-		popup.set_content(dat.Join())
-		popup.open(0)
+		open_centcom_bans(href_list["centcomlookup"])
 
 	else if(href_list["slowquery"])
 		if(!check_rights(R_ADMIN))
@@ -1699,6 +1652,7 @@
 			return
 		return usr.client?.mark_datum(datum_to_mark)
 
+#ifndef DISABLE_DREAMLUAU
 	else if(href_list["lua_state"])
 		if(!check_rights(R_DEBUG))
 			return
@@ -1715,6 +1669,7 @@
 				editor.force_view_chunk = log_entry["chunk"]
 				editor.force_modal = "viewChunk"
 		editor.ui_interact(usr)
+#endif
 
 	else if(href_list["show_paper"])
 		if(!check_rights(R_ADMIN))
@@ -1732,8 +1687,10 @@
 		for(var/obj/machinery/fax/admin/FAX as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/fax/admin))
 			if(FAX.fax_id != href_list["destination"])
 				continue
-			FAX.receive(locate(href_list["print_fax"]), href_list["sender_name"])
-			return
+			// BANDASTATION EDIT START
+			var/obj/item/paper/doc = locate(href_list["print_fax"])
+			FAX.receive(doc.copy(), href_list["sender_name"])
+			// BANDASTATION EDIT END
 
 	else if(href_list["play_internet"])
 		if(!check_rights(R_SOUND))

@@ -36,7 +36,6 @@
 		mytape = new starting_tape_type(src)
 	soundloop = new(src)
 	update_appearance()
-	become_hearing_sensitive()
 
 /obj/item/taperecorder/Destroy()
 	QDEL_NULL(soundloop)
@@ -85,7 +84,7 @@
 	else
 		soundloop.start()
 
-/obj/item/taperecorder/attackby(obj/item/I, mob/user, params)
+/obj/item/taperecorder/attackby(obj/item/I, mob/user, list/modifiers, list/attack_modifiers)
 	if(!mytape && istype(I, /obj/item/tape))
 		if(!user.transferItemToLoc(I,src))
 			return
@@ -156,12 +155,11 @@
 
 /obj/item/taperecorder/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, spans, list/message_mods = list(), message_range)
 	. = ..()
-	if(message_mods[MODE_RELAY])
+	if(message_mods[MODE_RELAY] || !mytape || istype(speaker, /obj/item/taperecorder))
 		return
 
-	if(mytape && recording)
-		mytape.timestamp += mytape.used_capacity
-		mytape.storedinfo += "\[[time2text(mytape.used_capacity,"mm:ss")]\] [speaker.GetVoice()]: [raw_message]"
+	mytape.timestamp += mytape.used_capacity
+	mytape.storedinfo += new /datum/tape_message(time2text(mytape.used_capacity, "mm:ss", NO_TIMEZONE), speaker.GetVoice(), raw_message, speaker.get_tts_seed()) // BANDASTATION ADDITION - TTS
 
 
 /obj/item/taperecorder/verb/record()
@@ -185,6 +183,7 @@
 
 	if(mytape.used_capacity < mytape.max_capacity)
 		recording = TRUE
+		become_hearing_sensitive()
 		balloon_alert(usr, "started recording")
 		update_sound()
 		update_appearance()
@@ -218,6 +217,7 @@
 		playsound(src, 'sound/items/taperecorder/taperecorder_stop.ogg', 50, FALSE)
 		balloon_alert(usr, "stopped recording")
 		recording = FALSE
+		lose_hearing_sensitivity()
 	else if(playing)
 		playsound(src, 'sound/items/taperecorder/taperecorder_stop.ogg', 50, FALSE)
 		balloon_alert(usr, "stopped playing")
@@ -249,7 +249,7 @@
 	playing = TRUE
 	update_appearance()
 	update_sound()
-	balloon_alert(usr, "started playing")
+	balloon_alert(usr, "начало проигрыша записи")
 	playsound(src, 'sound/items/taperecorder/taperecorder_play.ogg', 50, FALSE)
 	var/used = mytape.used_capacity //to stop runtimes when you eject the tape
 	var/max = mytape.max_capacity
@@ -259,18 +259,21 @@
 		if(playing == FALSE)
 			break
 		if(mytape.storedinfo.len < i)
-			balloon_alert(usr, "recording ended")
+			balloon_alert(usr, "запись закончена")
 			stoplag(1 SECONDS) //prevents multiple balloon alerts covering each other
 			break
-		say("[mytape.storedinfo[i]]", sanitize=FALSE, message_mods = list(MODE_SEQUENTIAL = TRUE))//We want to display this properly, don't double encode
+		// BANDASTATION EDIT START - TTS
+		var/datum/tape_message/message = mytape.storedinfo[i]
+		say(message.get_composed_message(), sanitize=FALSE, message_mods = list(MODE_SEQUENTIAL = TRUE, MODE_TTS_SEED_OVERRIDE = message.tts_seed, MODE_TTS_MESSAGE_OVERRIDE = message.text))//We want to display this properly, don't double encode
+		// BANDASTATION EDIT END - TTS
 		if(mytape.storedinfo.len < i + 1)
 			playsleepseconds = 1
 			sleep(1 SECONDS)
 		else
-			playsleepseconds = mytape.timestamp[i + 1] - mytape.timestamp[i]
+			playsleepseconds = max(mytape.timestamp[i + 1] - mytape.timestamp[i], 1 SECONDS)
 		if(playsleepseconds > 14 SECONDS)
 			sleep(1 SECONDS)
-			say("Skipping [playsleepseconds/10] seconds of silence.", message_mods = list(MODE_SEQUENTIAL = TRUE))
+			say("Пропуск [playsleepseconds/10] секунд тишины.", message_mods = list(MODE_SEQUENTIAL = TRUE))
 			playsleepseconds = 1 SECONDS
 		i++
 
@@ -330,8 +333,11 @@
 	var/initial_tape_name = initial(mytape.name)
 	var/paper_name = "paper- '[tape_name == initial_tape_name ? "Tape" : "[tape_name]"] Transcript'"
 
-	for(var/transcript_excerpt in transcribed_info)
-		var/excerpt_length = length(transcript_excerpt)
+	// BANDASTATION EDIT START - TTS
+	for(var/datum/tape_message/message as anything in transcribed_info)
+		var/composed_message = message.get_composed_message()
+		var/excerpt_length = length(composed_message)
+	// BANDASTATION EDIT END - TTS
 
 		// Very unexpected. Better abort non-gracefully.
 		if(excerpt_length > MAX_PAPER_LENGTH)
@@ -348,7 +354,7 @@
 			transcribed_text = ""
 			page_count++
 
-		transcribed_text += "[transcript_excerpt]<br>"
+		transcribed_text += "[composed_message]<br>" // BANDASTATION EDIT - TTS
 
 	var/obj/item/paper/transcript_paper = new /obj/item/paper(get_turf(src))
 	transcript_paper.add_raw_text(transcribed_text)

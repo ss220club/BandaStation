@@ -60,6 +60,7 @@
 #define ADMIN_LOOKUP(user) "[key_name_admin(user)][ADMIN_QUE(user)]"
 #define ADMIN_LOOKUPFLW(user) "[key_name_admin(user)][ADMIN_QUE(user)] [ADMIN_FLW(user)]"
 #define ADMIN_SET_SD_CODE "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];set_selfdestruct_code=1'>SETCODE</a>)"
+#define ADMIN_ERT_RESPOND "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];ert_respond=1'>ERT</a>)" // BANDASTATION ADDITION
 #define ADMIN_FULLMONTY_NONAME(user) "[ADMIN_QUE(user)] [ADMIN_PP(user)] [ADMIN_VV(user)] [ADMIN_SM(user)] [ADMIN_FLW(user)] [ADMIN_TP(user)] [ADMIN_INDIVIDUALLOG(user)] [ADMIN_SMITE(user)]"
 #define ADMIN_FULLMONTY(user) "[key_name_admin(user)] [ADMIN_FULLMONTY_NONAME(user)]"
 #define ADMIN_JMP(src) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)"
@@ -178,3 +179,11 @@ GLOBAL_VAR_INIT(ghost_role_flags, ALL)
 /// Used in logging uses of admin verbs (and sometimes some non-admin or debug verbs) to the blackbox
 /// Only pass it a string key, the verb being used.
 #define BLACKBOX_LOG_ADMIN_VERB(the_verb) SSblackbox.record_feedback("tally", "admin_verb", 1, the_verb)
+
+// Smite flags
+/// Plays sfx and adds an overlay to the target
+#define SMITE_DIVINE (1<<0)
+/// Adds a delay before the effect is applied
+#define SMITE_DELAY (1<<1)
+/// Stuns the target for a short duration, ignores stun immunity
+#define SMITE_STUN (1<<2)

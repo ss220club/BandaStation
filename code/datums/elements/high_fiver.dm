@@ -18,7 +18,7 @@
 	UnregisterSignal(source, list(COMSIG_ITEM_OFFERING, COMSIG_ITEM_OFFER_TAKEN))
 
 /// Signal proc for [COMSIG_ITEM_OFFERING] to set up the high-five on offer
-/datum/element/high_fiver/proc/on_offer(obj/item/source, mob/living/carbon/offerer)
+/datum/element/high_fiver/proc/on_offer(obj/item/source, mob/living/offerer)
 	SIGNAL_HANDLER
 
 	offerer.visible_message(
@@ -31,7 +31,7 @@
 	return COMPONENT_OFFER_INTERRUPT
 
 /// Signal proc for [COMSIG_ITEM_OFFER_TAKEN] to continue through with the high-five on take
-/datum/element/high_fiver/proc/on_offer_taken(obj/item/source, mob/living/carbon/offerer, mob/living/carbon/taker)
+/datum/element/high_fiver/proc/on_offer_taken(obj/item/source, mob/living/offerer, mob/living/taker)
 	SIGNAL_HANDLER
 
 	var/open_hands_taker = 0
@@ -63,7 +63,7 @@
 		offerer.visible_message(
 			span_notice("[taker] enthusiastically high-tens [offerer]!"),
 			span_nicegreen("Wow! You're high-tenned [taker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			ignored_mobs = taker,
 		)
 
@@ -74,7 +74,7 @@
 		offerer.visible_message(
 			span_notice("[taker] high-fives [offerer]!"),
 			span_nicegreen("All right! You're high-fived by [taker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			ignored_mobs = taker,
 		)
 

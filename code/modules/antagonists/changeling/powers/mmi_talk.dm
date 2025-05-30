@@ -1,8 +1,8 @@
 /datum/action/changeling/mmi_talk
 	name = "MMI Talk"
-	desc = "Our decoy brain has been implanted into a Man-Machine Interface. \
-		In order to maintain our secrecy, we can speak through the decoy as if a normal brain. \
-		The decoy brain will relay speech it hears to you in purple."
+	desc = "Наш ложный мозг был имплантирован в человеко-машинный интерфейс. \
+		Чтобы сохранить секретность, мы можем говорить через обманку, как через обычный мозг. \
+		Ложный мозг будет передавать вам услышанную речь в фиолетовом цвете."
 	button_icon = 'icons/obj/devices/assemblies.dmi'
 	button_icon_state = "mmi_off"
 	dna_cost = CHANGELING_POWER_UNOBTAINABLE
@@ -83,8 +83,7 @@
 		// Generate movement detector (to update the view on MMI movement)
 		update_view_tracker = new(brain_ref, CALLBACK(src, PROC_REF(update_mmi_view)))
 
-	// Shows the view to the user foremost
-	mmi_view.display_to(user)
+	// Register map objects
 	user.client.register_map_obj(mmi_view_background)
 	update_mmi_view()
 	// Makes the MMI relay heard messages
@@ -97,6 +96,8 @@
 	if(!ui)
 		ui = new(user, src, "LingMMITalk")
 		ui.open()
+		// Open map view
+		mmi_view.display_to(user, ui.window)
 
 /datum/action/changeling/mmi_talk/ui_close(mob/user)
 	var/obj/item/mmi/mmi = brain_ref.loc
@@ -113,7 +114,7 @@
 
 	var/obj/item/mmi/mmi = brain_ref.loc
 	if(mmi.brainmob.stat != CONSCIOUS)
-		to_chat(usr, span_warning("Our decoy brain is too damaged to speak."))
+		to_chat(usr, span_warning("Наш ложный мозг слишком поврежден, чтобы говорить."))
 	else
 		// Say will perform input sanitization and such for us
 		mmi.brainmob.say(params["message"], sanitize = TRUE)

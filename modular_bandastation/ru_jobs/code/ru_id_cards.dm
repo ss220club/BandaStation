@@ -126,3 +126,13 @@
 
 /datum/id_trim/job/magistrate
 	assignment = JOB_MAGISTRATE_RU
+
+/datum/id_trim/job/explorer
+	assignment = JOB_EXPLORER_RU
+  
+// Event jobs
+/datum/id_trim/job/bridge_assistant
+	assignment = JOB_BRIDGE_ASSISTANT_RU
+
+/datum/id_trim/job/veteran_advisor
+	assignment = JOB_VETERAN_ADVISOR_RU

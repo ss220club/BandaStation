@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/aoe/rust_conversion
 	name = "Aggressive Spread"
-	desc = "Spreads rust onto nearby surfaces."
+	desc = "Распространяет ржавчину на соседние поверхности."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -10,7 +10,7 @@
 	school = SCHOOL_FORBIDDEN
 	cooldown_time = 30 SECONDS
 
-	invocation = "A'GRSV SPR'D"
+	invocation = "A'GRSV SPR'D."
 	invocation_type = INVOCATION_WHISPER
 	spell_requirements = NONE
 

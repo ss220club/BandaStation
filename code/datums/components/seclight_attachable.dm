@@ -161,7 +161,7 @@
 	var/successful_toggle = light.toggle_light(user)
 	if(!successful_toggle)
 		return TRUE
-	user.balloon_alert(user, "[light.name] toggled [light.light_on ? "on":"off"]")
+	user.balloon_alert(user, "[light.declent_ru(NOMINATIVE)] [light.light_on ? "включается":"выключается"]")
 	update_light()
 	return TRUE
 
@@ -212,21 +212,21 @@
 	return COMPONENT_ACTION_HANDLED
 
 /// Signal proc for [COMSIG_ATOM_ATTACKBY] that allows a user to attach a seclite by hitting our parent with it.
-/datum/component/seclite_attachable/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/attacker, params)
+/datum/component/seclite_attachable/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/attacker, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(!is_type_in_typecache(attacking_item, valid_lights))
 		return
 
 	if(light)
-		source.balloon_alert(attacker, "already has \a [light]!")
+		source.balloon_alert(attacker, "уже имеется [light.declent_ru(NOMINATIVE)]!")
 		return
 
 	if(!attacker.transferItemToLoc(attacking_item, source))
 		return
 
 	add_light(attacking_item, attacker)
-	source.balloon_alert(attacker, "attached [attacking_item]")
+	source.balloon_alert(attacker, "прикрепление [attacking_item.declent_ru(GENITIVE)]")
 	return COMPONENT_NO_AFTERATTACK
 
 /// Signal proc for [COMSIG_ATOM_TOOL_ACT] via [TOOL_SCREWDRIVER] that removes any attached seclite.
@@ -242,7 +242,7 @@
 /// Invoked asyncronously from [proc/on_screwdriver]. Handles removing the light from our parent.
 /datum/component/seclite_attachable/proc/unscrew_light(obj/item/source, mob/user, obj/item/tool)
 	tool?.play_tool_sound(source)
-	source.balloon_alert(user, "unscrewed [light]")
+	source.balloon_alert(user, "отвинчивание [light.declent_ru(GENITIVE)]")
 
 	var/obj/item/flashlight/seclite/to_remove = light
 
@@ -256,9 +256,9 @@
 	SIGNAL_HANDLER
 
 	if(light)
-		examine_list += "It has \a [light] [is_light_removable ? "mounted on it with a few <b>screws</b>" : "permanently mounted on it"]."
+		examine_list += "[capitalize(light.declent_ru(NOMINATIVE))] [is_light_removable ? "держится на нескольких <b>винтах</b>" : "не снимается"]."
 	else
-		examine_list += "It has a mounting point for a <b>seclite</b>."
+		examine_list += "Имеется крепление для <b>фонарика</b>."
 
 /// Signal proc for [COMSIG_ATOM_UPDATE_OVERLAYS] that updates our parent with our seclite overlays, if we have some.
 /datum/component/seclite_attachable/proc/on_update_overlays(obj/item/source, list/overlays)
@@ -273,8 +273,8 @@
 
 	var/overlay_state = "[light_overlay][light.light_on ? "_on":""]"
 	var/mutable_appearance/flashlight_overlay = mutable_appearance(light_overlay_icon, overlay_state)
-	flashlight_overlay.pixel_x = overlay_x
-	flashlight_overlay.pixel_y = overlay_y
+	flashlight_overlay.pixel_w = overlay_x
+	flashlight_overlay.pixel_z = overlay_y
 	overlays += flashlight_overlay
 
 /// Signal proc for [COMSIG_ATOM_UPDATE_ICON_STATE] that updates our parent's icon state, if we have one.

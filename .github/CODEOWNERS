@@ -23,6 +23,8 @@
 /code/modules/tgs/ @Cyberboss
 /code/ze_genesis_call/ @Cyberboss
 /tools/tgs_test/ @Cyberboss
+/tools/Tgstation.DiscordDiscussions/ @Cyberboss
+/tools/Tgstation.PRAnnouncer/ @Cyberboss
 
 # Cobby
 
@@ -59,7 +61,7 @@
 /code/controllers/master.dm @LemonInTheDark
 /code/controllers/subsystem.dm @LemonInTheDark
 /code/controllers/subsystem/air.dm @LemonInTheDark
-/code/controllers/subsystem/timer.dm @MrStonedOne
+/code/controllers/subsystem/timer.dm @LemonInTheDark
 
 # Mothblocks
 
@@ -173,7 +175,7 @@
 # NamelessFairy
 
 /code/modules/capture_the_flag/ @NamelessFairy
-/_maps/map_files/CTF/ @NamelessFairy
+/_maps/minigame/CTF/ @NamelessFairy
 
 # Pickle-Coding
 
@@ -181,6 +183,10 @@
 /code/__DEFINES/reactions.dm @Pickle-Coding
 /code/modules/atmospherics/ @Pickle-Coding
 /code/modules/power/ @Pickle-Coding
+
+# grungussuss
+
+/sound/ @grungussuss
 
 # MULTIPLE OWNERS
 
@@ -209,8 +215,6 @@
 
 /tools/build/ @scriptis @stylemistake
 /tools/tgs_scripts/ @Cyberboss @scriptis
-
-/tools/WebhookProcessor/ @BraveMole @TiviPlus
 
 # Host Hell
 

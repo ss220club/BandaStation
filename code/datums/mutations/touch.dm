@@ -1,17 +1,17 @@
 /datum/mutation/human/shock
 	name = "Shock Touch"
-	desc = "The affected can channel excess electricity through their hands without shocking themselves, allowing them to shock others. Mostly harmless! Mostly... "
+	desc = "Подверженные данной мутации могут направить избыточное электричество через свои руки, позволяя им ударить током других. В основном безвредно! В основном..."
 	quality = POSITIVE
 	locked = TRUE
 	difficulty = 16
-	text_gain_indication = span_notice("You feel power flow through your hands.")
-	text_lose_indication = span_notice("The energy in your hands subsides.")
+	text_gain_indication = span_notice("Ты чувствуешь, как ток протекает через твои руки.")
+	text_lose_indication = span_notice("Электричество в твоих руках ослабевает.")
 	power_path = /datum/action/cooldown/spell/touch/shock
 	instability = POSITIVE_INSTABILITY_MODERATE // bad stun baton
 	energy_coeff = 1
 	power_coeff = 1
 
-/datum/mutation/human/shock/modify()
+/datum/mutation/human/shock/setup()
 	. = ..()
 	var/datum/action/cooldown/spell/touch/shock/to_modify =.
 
@@ -84,19 +84,19 @@
 
 /datum/mutation/human/lay_on_hands
 	name = "Mending Touch"
-	desc = "The affected can lay their hands on other people to transfer a small amount of their injuries to themselves."
+	desc = "Подверженные данной мутации могут приложить свои руки на других людей, чтобы забрать себе часть их ранений."
 	quality = POSITIVE
 	locked = FALSE
 	difficulty = 16
-	text_gain_indication = span_notice("Your hand feels blessed!")
-	text_lose_indication = span_notice("Your hand feels secular once more.")
+	text_gain_indication = span_notice("Твоя рука, будто бы священна!")
+	text_lose_indication = span_notice("Твоя рука снова кажется обычной.")
 	power_path = /datum/action/cooldown/spell/touch/lay_on_hands
 	instability = POSITIVE_INSTABILITY_MAJOR
 	energy_coeff = 1
 	power_coeff = 1
 	synchronizer_coeff = 1
 
-/datum/mutation/human/lay_on_hands/modify()
+/datum/mutation/human/lay_on_hands/setup()
 	. = ..()
 	var/datum/action/cooldown/spell/touch/lay_on_hands/to_modify =.
 
@@ -419,3 +419,4 @@
 	icon_state = "greyscale"
 	color = COLOR_VERY_PALE_LIME_GREEN
 	inhand_icon_state = "greyscale"
+	item_flags = parent_type::item_flags & ~NEEDS_PERMIT

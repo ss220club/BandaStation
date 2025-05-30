@@ -143,7 +143,7 @@ SUBSYSTEM_DEF(dynamic)
 	var/waittime_h = 1800
 
 	/// A number between 0 and 100. The maximum amount of threat allowed to generate.
-	var/max_threat_level = 100
+	var/max_threat_level = 0 // BANDASTATION EDIT - STORYTELLER
 
 	/// The extra chance multiplier that a heavy impact midround ruleset will run next time.
 	/// For example, if this is set to 50, then the next heavy roll will be about 50% more likely to happen.
@@ -247,9 +247,9 @@ SUBSYSTEM_DEF(dynamic)
 		if(!threatadd)
 			return
 		if(threatadd > 0)
-			create_threat(threatadd, threat_log, "[worldtime2text()]: increased by [key_name(usr)]")
+			create_threat(threatadd, threat_log, "[gameTimestamp()]: increased by [key_name(usr)]")
 		else
-			spend_midround_budget(-threatadd, threat_log, "[worldtime2text()]: decreased by [key_name(usr)]")
+			spend_midround_budget(-threatadd, threat_log, "[gameTimestamp()]: decreased by [key_name(usr)]")
 	else if (href_list["injectlate"])
 		latejoin_injection_cooldown = 0
 		late_forced_injection = TRUE
@@ -317,7 +317,7 @@ SUBSYSTEM_DEF(dynamic)
 		addtimer(CALLBACK(src, PROC_REF(send_intercept)), 10 SECONDS)
 		return
 
-	. = "<b><i>Nanotrasen Department of Intelligence Threat Advisory, Spinward Sector, TCD [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]:</i></b><hr>"
+	. = "<b><i>Информационное сообщение Департамента разведки Нанотрейзен, Сектор Спинвард, Дата [time2text(world.realtime, "DDD, MMM DD", NO_TIMEZONE)], [CURRENT_STATION_YEAR]:</i></b><hr>"
 	. += generate_advisory_level()
 
 	var/min_threat = 100
@@ -326,12 +326,13 @@ SUBSYSTEM_DEF(dynamic)
 			continue
 		min_threat = min(ruleset.cost, min_threat)
 
-	var/greenshift = GLOB.dynamic_forced_extended || (threat_level < min_threat) //if threat is below any ruleset, its extended time
+	// var/greenshift = GLOB.dynamic_forced_extended || (threat_level < min_threat) //if threat is below any ruleset, its extended time
+	var/greenshift = SSgamemode.current_storyteller.disable_distribution // BANDASTATION EDIT - STORYTELLER
 	SSstation.generate_station_goals(greenshift ? INFINITY : CONFIG_GET(number/station_goal_budget))
 
 	var/list/datum/station_goal/goals = SSstation.get_station_goals()
 	if(length(goals))
-		var/list/texts = list("<hr><b>Special Orders for [station_name()]:</b><br>")
+		var/list/texts = list("<hr><b>Специальные цели для [station_name()]:</b><br>")
 		for(var/datum/station_goal/station_goal as anything in goals)
 			station_goal.on_report()
 			texts += station_goal.get_report()
@@ -343,7 +344,7 @@ SUBSYSTEM_DEF(dynamic)
 			continue
 		trait_list_strings += "[station_trait.get_report()]<BR>"
 	if(trait_list_strings.len > 0)
-		. += "<hr><b>Identified shift divergencies:</b><BR>" + trait_list_strings.Join()
+		. += "<hr><b>Выявленные отклонения в смене:</b><BR>" + trait_list_strings.Join()
 
 	if(length(GLOB.communications_controller.command_report_footnotes))
 		var/footnote_pile = ""
@@ -353,12 +354,12 @@ SUBSYSTEM_DEF(dynamic)
 			footnote_pile += "<i>[footnote.signature]</i><BR>"
 			footnote_pile += "<BR>"
 
-		. += "<hr><b>Additional Notes: </b><BR><BR>" + footnote_pile
+		. += "<hr><b>Дополнительные примечания: </b><BR><BR>" + footnote_pile
 
 #ifndef MAP_TEST
 	print_command_report(., "[command_name()] Status Summary", announce=FALSE)
 	if(greenshift)
-		priority_announce("Thanks to the tireless efforts of our security and intelligence divisions, there are currently no credible threats to [station_name()]. All station construction projects have been authorized. Have a secure shift!", "Security Report", SSstation.announcer.get_rand_report_sound(), color_override = "green")
+		priority_announce("Благодаря невероятным усилиям наших отделов безопасности и разведки, в настоящее время нет никаких реальных угроз для [station_name()]. Все проекты на смену уже утверждены. Удачной смены!", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound(), color_override = "green")
 	else
 		/* BANDASTATION EDIT START - No Blue roundstart
 		if(SSsecurity_level.get_current_level_as_number() < SEC_LEVEL_BLUE)
@@ -379,14 +380,14 @@ SUBSYSTEM_DEF(dynamic)
 			advisory_string += "Advisory Level: <b>Yellow Star</b></center><BR>"
 			advisory_string += "Your sector's advisory level is Yellow Star. Surveillance shows a credible risk of enemy attack against our assets in the Spinward Sector. We advise a heightened level of security alongside maintaining vigilance against potential threats."
 		if(66 to 79)
-			advisory_string += "Advisory Level: <b>Red Star</b></center><BR>"
-			advisory_string += "Your sector's advisory level is Red Star. The Department of Intelligence has decrypted Cybersun communications suggesting a high likelihood of attacks on Nanotrasen assets within the Spinward Sector. Stations in the region are advised to remain highly vigilant for signs of enemy activity and to be on high alert."
+			advisory_string += "Уровень угрозы: <b>Красная звезда</b></center><BR>"
+			advisory_string += "В вашем секторе установлена угроза уровня Красная звезда. Департамент разведки расшифровал сообщения Cybersun, свидетельствующие о высокой вероятности нападения на активы Нанотрейзен в секторе Спинвард. Станциям в данном регионе следует сохранять повышенную бдительность в отношении признаков вражеской активности и быть в состоянии повышенной готовности."
 		if(80 to 99)
-			advisory_string += "Advisory Level: <b>Black Orbit</b></center><BR>"
-			advisory_string += "Your sector's advisory level is Black Orbit. Your sector's local communications network is currently undergoing a blackout, and we are therefore unable to accurately judge enemy movements within the region. However, information passed to us by GDI suggests a high amount of enemy activity in the sector, indicative of an impending attack. Remain on high alert and vigilant against any other potential threats."
+			advisory_string += "Уровень угрозы: <b>Чёрная орбита</b></center><BR>"
+			advisory_string += "В вашем секторе установлена угроза уровня Чёрная орбита. Местная сеть коммуникаций в вашем секторе отключена в настоящее время, потому мы не можем точно судить о передвижениях врага в регионе. Однако, информация, полученная нами от GDI, свидетельствует о высокой вражеской активности в секторе, указывающей на готовящуюся атаку. Сохраняйте повышенную бдительность и следите за любыми другими потенциальными угрозами."
 		if(100)
-			advisory_string += "Advisory Level: <b>Midnight Sun</b></center><BR>"
-			advisory_string += "Your sector's advisory level is Midnight Sun. Credible information passed to us by GDI suggests that the Syndicate is preparing to mount a major concerted offensive on Nanotrasen assets in the Spinward Sector to cripple our foothold there. All stations should remain on high alert and prepared to defend themselves."
+			advisory_string += "Уровень угрозы: <b>Полуночное солнце</b></center><BR>"
+			advisory_string += "В вашем секторе установлена угроза уровня Полуночное солнце. Получена достоверная информация от GDI, указывающая, что Синдикат готовит крупное согласованное наступление на активы Нанотрейзен в секторе Спинвард, чтобы подорвать здесь нашу позицию. Все станции должны оставаться в состоянии повышенной готовности и быть готовыми к обороне."
 
 	return advisory_string
 
@@ -398,7 +399,7 @@ SUBSYSTEM_DEF(dynamic)
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/list/out = list("<TITLE>Threat Log</TITLE><B><font size='3'>Threat Log</font></B><br><B>Starting Threat:</B> [threat_level]<BR>")
+	var/list/out = list("<B><font size='3'>Threat Log</font></B><br><B>Starting Threat:</B> [threat_level]<BR>")
 
 	for(var/entry in threat_log)
 		if(istext(entry))
@@ -406,7 +407,7 @@ SUBSYSTEM_DEF(dynamic)
 
 	out += "<B>Remaining threat/threat_level:</B> [mid_round_budget]/[threat_level]"
 
-	usr << browse(out.Join(), "window=threatlog;size=700x500")
+	usr << browse(HTML_SKELETON_TITLE("Threat Log", out.Join()), "window=threatlog;size=700x500")
 
 /// Generates the threat level using lorentz distribution and assigns peaceful_percentage.
 /datum/controller/subsystem/dynamic/proc/generate_threat()
@@ -549,7 +550,7 @@ SUBSYSTEM_DEF(dynamic)
 		roundstart(roundstart_rules)
 
 	log_dynamic("[round_start_budget] round start budget was left, donating it to midrounds.")
-	threat_log += "[worldtime2text()]: [round_start_budget] round start budget was left, donating it to midrounds."
+	threat_log += "[gameTimestamp()]: [round_start_budget] round start budget was left, donating it to midrounds."
 	mid_round_budget += round_start_budget
 
 	var/starting_rulesets = ""
@@ -753,7 +754,7 @@ SUBSYSTEM_DEF(dynamic)
 	var/added_threat = ruleset.scale_up(roundstart_pop_ready, scaled_times)
 
 	if(ruleset.pre_execute(roundstart_pop_ready))
-		threat_log += "[worldtime2text()]: Roundstart [ruleset.name] spent [ruleset.cost + added_threat]. [ruleset.scaling_cost ? "Scaled up [ruleset.scaled_times]/[scaled_times] times." : ""]"
+		threat_log += "[gameTimestamp()]: Roundstart [ruleset.name] spent [ruleset.cost + added_threat]. [ruleset.scaling_cost ? "Scaled up [ruleset.scaled_times]/[scaled_times] times." : ""]"
 		if(ruleset.flags & ONLY_RULESET)
 			only_ruleset_executed = TRUE
 		if(ruleset.flags & HIGH_IMPACT_RULESET)
@@ -811,7 +812,7 @@ SUBSYSTEM_DEF(dynamic)
 		new_rule.load_templates()
 		if (new_rule.ready(forced))
 			if (!ignore_cost)
-				spend_midround_budget(new_rule.cost, threat_log, "[worldtime2text()]: Forced rule [new_rule.name]")
+				spend_midround_budget(new_rule.cost, threat_log, "[gameTimestamp()]: Forced rule [new_rule.name]")
 			new_rule.pre_execute(population)
 			if (new_rule.execute()) // This should never fail since ready() returned 1
 				if(new_rule.flags & HIGH_IMPACT_RULESET)

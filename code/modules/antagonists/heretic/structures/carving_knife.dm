@@ -1,8 +1,8 @@
 // The rune carver, a heretic knife that can draw rune traps.
 /obj/item/melee/rune_carver
 	name = "carving knife"
-	desc = "A small knife made of cold steel, pure and perfect. Its sharpness can carve into titanium itself - \
-		but only few can evoke the dangers that lurk beneath reality."
+	desc = "Маленький нож из холодной стали, чистой и совершенной. Его острие способно прорезать сам титан - \
+		Но лишь немногие способны вызвать опасности, которые таятся под реальностью."
 	icon = 'icons/obj/antags/eldritch.dmi'
 	icon_state = "rune_carver"
 	icon_angle = -45
@@ -42,15 +42,15 @@
 	jostle_pain_mult = 5
 	pain_stam_pct = 0.4
 	pain_mult = 3
-	rip_time = 15
+	rip_time = 1.5 SECONDS
 
 /obj/item/melee/rune_carver/examine(mob/user)
 	. = ..()
 	if(!IS_HERETIC_OR_MONSTER(user) && !isobserver(user))
 		return
 
-	. += span_notice("<b>[length(current_runes)] / [max_rune_amt]</b> total carvings have been drawn.")
-	. += span_info("The following runes can be carved:")
+	. += span_notice("Всего было вырезано: <b>[length(current_runes)] / [max_rune_amt]</b>")
+	. += span_info("Можно вырезать следующие руны:")
 	for(var/obj/structure/trap/eldritch/trap as anything in subtypesof(/obj/structure/trap/eldritch))
 		var/potion_string = span_info("\tThe " + initial(trap.name) + " - " + initial(trap.carver_tip))
 		. += potion_string
@@ -69,11 +69,11 @@
  */
 /obj/item/melee/rune_carver/proc/try_carve_rune(turf/open/target_turf, mob/user)
 	if(drawing)
-		target_turf.balloon_alert(user, "already carving!")
+		target_turf.balloon_alert(user, "уже вырезаете!")
 		return
 
 	if(locate(/obj/structure/trap/eldritch) in range(1, target_turf))
-		target_turf.balloon_alert(user, "to close to another carving!")
+		target_turf.balloon_alert(user, "слишком близко к другой резьбе!")
 		return
 
 	for(var/datum/weakref/rune_ref as anything in current_runes)
@@ -81,7 +81,7 @@
 			current_runes -= rune_ref
 
 	if(length(current_runes) >= max_rune_amt)
-		target_turf.balloon_alert(user, "too many carvings!")
+		target_turf.balloon_alert(user, "слишком много резьбы!")
 		return
 
 	drawing = TRUE
@@ -116,19 +116,19 @@
 	if(!ispath(to_make, /obj/structure/trap/eldritch))
 		CRASH("[type] attempted to create a rune of incorrect type! (got: [to_make])")
 
-	target_turf.balloon_alert(user, "carving [picked_choice]...")
+	target_turf.balloon_alert(user, "вырезание [picked_choice]...")
 	user.playsound_local(target_turf, 'sound/items/sheath.ogg', 50, TRUE)
 	if(!do_after(user, 5 SECONDS, target = target_turf))
-		target_turf.balloon_alert(user, "interrupted!")
+		target_turf.balloon_alert(user, "прервано!")
 		return
 
-	target_turf.balloon_alert(user, "[picked_choice] carved")
+	target_turf.balloon_alert(user, "[picked_choice] вырезано")
 	var/obj/structure/trap/eldritch/new_rune = new to_make(target_turf, user)
 	current_runes += WEAKREF(new_rune)
 
 /datum/action/item_action/rune_shatter
 	name = "Rune Break"
-	desc = "Destroys all runes carved by this blade."
+	desc = "Уничтожает все руны, вырезанные этим клинком."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon_state = "rune_break"
@@ -156,11 +156,7 @@
 	if(!length(target_sword.current_runes))
 		return FALSE
 
-/datum/action/item_action/rune_shatter/Trigger(trigger_flags)
-	. = ..()
-	if(!.)
-		return
-
+/datum/action/item_action/rune_shatter/do_effect(trigger_flags)
 	owner.playsound_local(get_turf(owner), 'sound/effects/magic/blind.ogg', 50, TRUE)
 	var/obj/item/melee/rune_carver/target_sword = target
 	QDEL_LIST(target_sword.current_runes)
@@ -170,7 +166,7 @@
 // The actual rune traps the knife draws.
 /obj/structure/trap/eldritch
 	name = "elder carving"
-	desc = "Collection of unknown symbols, they remind you of days long gone..."
+	desc = "Коллекция неизвестных символов, они напоминают о давно ушедших днях..."
 	icon = 'icons/obj/service/hand_of_god_structures.dmi'
 	max_integrity = 60
 	/// A tip displayed to heretics who examine the rune carver. Explains what the rune does.
@@ -193,13 +189,14 @@
 		return
 	return ..()
 
-/obj/structure/trap/eldritch/attacked_by(obj/item/weapon, mob/living/user)
-	if(istype(weapon, /obj/item/melee/rune_carver) || istype(weapon, /obj/item/nullrod))
-		loc.balloon_alert(user, "carving dispelled")
+/obj/structure/trap/eldritch/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/melee/rune_carver) || istype(tool, /obj/item/nullrod))
+		loc.balloon_alert(user, "резьба развеяна")
 		playsound(src, 'sound/items/sheath.ogg', 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, ignore_walls = FALSE)
 		qdel(src)
+		return ITEM_INTERACT_SUCCESS
 
-	return ..()
+	return NONE
 
 /obj/structure/trap/eldritch/alert
 	name = "alert carving"
@@ -207,7 +204,7 @@
 	alpha = 10
 	time_between_triggers = 5 SECONDS
 	sparks = FALSE
-	carver_tip = "A nearly invisible rune that, when stepped on, alerts the carver who triggered it and where."
+	carver_tip = "Почти невидимая руна, которая, если на нее наступить, оповещает резчика о том, кто и где ее вызвал."
 
 /obj/structure/trap/eldritch/alert/trap_effect(mob/living/victim)
 	var/mob/living/real_owner = owner?.resolve()
@@ -220,7 +217,7 @@
 	icon_state = "tentacle_rune"
 	time_between_triggers = 45 SECONDS
 	charges = 1
-	carver_tip = "When stepped on, causes heavy damage leg damage and stuns the victim for 5 seconds. Has 1 charge."
+	carver_tip = "Когда на него наступают, наносит сильный урон по ногам и оглушает жертву на 5 секунд. Имеет 1 заряд."
 
 /obj/structure/trap/eldritch/tentacle/trap_effect(mob/living/victim)
 	if(!iscarbon(victim))
@@ -236,7 +233,7 @@
 	icon_state = "madness_rune"
 	time_between_triggers = 20 SECONDS
 	charges = 2
-	carver_tip = "When stepped on, causes heavy stamina damage, blindness, and a variety of ailments to the victim. Has 2 charges."
+	carver_tip = "При наступлении на жертву наносит большой урон стамине, слепоту и различные заболевания. Имеет 2 заряда."
 
 /obj/structure/trap/eldritch/mad/trap_effect(mob/living/victim)
 	if(!iscarbon(victim))

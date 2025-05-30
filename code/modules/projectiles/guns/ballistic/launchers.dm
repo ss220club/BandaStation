@@ -15,7 +15,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/unrestricted
 	pin = /obj/item/firing_pin
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/attackby(obj/item/A, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/attackby(obj/item/A, mob/user, list/modifiers, list/attack_modifiers)
 	..()
 	if(istype(A, /obj/item/ammo_box) || isammocasing(A))
 		chamber_round()
@@ -65,7 +65,7 @@
 	weapon_weight = WEAPON_HEAVY
 	bolt_type = BOLT_TYPE_NO_BOLT
 	internal_magazine = TRUE
-	cartridge_wording = "rocket"
+	cartridge_wording = "ракет"
 	empty_indicator = TRUE
 	tac_reloads = FALSE
 	/// Do we shit flames behind us when we fire?

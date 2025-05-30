@@ -84,12 +84,12 @@
 		if(isnull(user_head)) // So no head?
 			user.visible_message(span_suicide("[user] tries to behead [user.p_them()]self with [src], but [user.p_they()] [user.p_were()] already missing it! How embarassing!"))
 			return SHAME
-		user.visible_message(span_suicide("[user] is beheading [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is beheading [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		user_head.drop_limb()
 		playsound(loc, SFX_DESECRATION, 50, TRUE, -1)
 		return BRUTELOSS
 	// If we have no blade, just beat ourselves up
-	user.visible_message(span_suicide("[user] repeatedly bashes [src] against [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] repeatedly bashes [src] against [user.p_them()]self! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
 	return BRUTELOSS
 
@@ -110,12 +110,15 @@
 	blade_secured = !blade_secured
 	return ITEM_INTERACT_SUCCESS
 
-/obj/item/papercutter/attackby(obj/item/inserted_item, mob/user, params)
+/obj/item/papercutter/attackby(obj/item/inserted_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(inserted_item, /obj/item/paper))
 		if(is_type_in_list(inserted_item, list(
-			/obj/item/paper/paperslip, /obj/item/paper/report, /obj/item/paper/fake_report,
-			/obj/item/paper/calling_card, /obj/item/paper/pamphlet, /obj/item/paper/holy_writ)
-			))
+				/obj/item/paper/fake_report,
+				/obj/item/paper/holy_writ,
+				/obj/item/paper/pamphlet,
+				/obj/item/paper/paperslip,
+				/obj/item/paper/report,
+		)))
 			balloon_alert(user, "won't fit!")
 			return
 		if(stored_paper)

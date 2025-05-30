@@ -11,7 +11,9 @@ import {
 import { capitalizeAll, createSearch } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
+import { JOBS_RU } from '../bandastation/ru_jobs';
 import { Window } from '../layouts';
+import { getLayoutState, LAYOUT, LayoutToggle } from './common/LayoutToggle';
 
 type VendingData = {
   all_products_free: boolean;
@@ -143,7 +145,6 @@ export const Vending = (props) => {
               stockSearch={stockSearch}
               setStockSearch={setStockSearch}
               selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
             />
           </Stack.Item>
 
@@ -176,8 +177,8 @@ export const UserDetails = (props) => {
         </Stack.Item>
         <Stack.Item>
           {user
-            ? `${user.name || 'Unknown'} | ${user.job}`
-            : 'No ID detected! Contact the Head of Personnel.'}
+            ? `${user.name || 'Unknown'} | ${JOBS_RU[user.job] || user.job || 'Без работы'}`
+            : 'ID-карта не обнаружена! Обратитесь к главе персонала.'}
         </Stack.Item>
       </Stack>
     </NoticeBox>
@@ -191,17 +192,10 @@ const ProductDisplay = (props: {
   stockSearch: string;
   setStockSearch: (search: string) => void;
   selectedCategory: string | null;
-  setSelectedCategory: (category: string) => void;
 }) => {
   const { data } = useBackend<VendingData>();
-  const {
-    custom,
-    inventory,
-    stockSearch,
-    setStockSearch,
-    selectedCategory,
-    setSelectedCategory,
-  } = props;
+  const { custom, inventory, stockSearch, setStockSearch, selectedCategory } =
+    props;
   const {
     stock,
     all_products_free,
@@ -209,37 +203,31 @@ const ProductDisplay = (props: {
     displayed_currency_icon,
     displayed_currency_name,
   } = data;
-  const [toggleLayout, setToggleLayout] = useState(true);
+  const [toggleLayout, setToggleLayout] = useState(getLayoutState(LAYOUT.Grid));
 
   return (
     <Section
       fill
       scrollable
-      title="Products"
+      title="Товары"
       buttons={
         <Stack>
           {!all_products_free && user && (
             <Stack.Item fontSize="16px" color="green">
               {(user && user.cash) || 0}
-              {displayed_currency_name}{' '}
+              {displayed_currency_name}
               <Icon name={displayed_currency_icon} color="gold" />
             </Stack.Item>
           )}
           <Stack.Item>
             <Input
-              onInput={(_, value) => setStockSearch(value)}
-              placeholder="Search..."
+              onChange={setStockSearch}
+              expensive
+              placeholder="Поиск..."
               value={stockSearch}
             />
           </Stack.Item>
-          <Stack.Item>
-            <Button
-              icon={toggleLayout ? 'border-all' : 'list'}
-              tooltip={toggleLayout ? 'View as Grid' : 'View as List'}
-              tooltipPosition={'bottom-end'}
-              onClick={() => setToggleLayout(!toggleLayout)}
-            />
-          </Stack.Item>
+          <LayoutToggle state={toggleLayout} setState={setToggleLayout} />
         </Stack>
       }
     >
@@ -254,7 +242,7 @@ const ProductDisplay = (props: {
         .map((product) => (
           <Product
             key={product.path}
-            fluid={toggleLayout}
+            fluid={toggleLayout === LAYOUT.List}
             custom={custom}
             product={product}
             productStock={stock[product.path]}
@@ -361,7 +349,7 @@ const ProductList = (props) => {
           fontSize={0.8}
           color={'rgba(255, 255, 255, 0.5)'}
         >
-          {remaining} left
+          {remaining} ост.
         </Stack.Item>
         <Stack.Item
           width={3.5}
@@ -399,10 +387,10 @@ const ProductPrice = (props) => {
   const { act, data } = useBackend<VendingData>();
   const { access, displayed_currency_name } = data;
   const { custom, discount, free, product, redPrice } = props;
-  const customPrice = access ? 'Free' : product.price;
+  const customPrice = access ? 'Бесплатно' : product.price;
   let standardPrice = product.price;
   if (free) {
-    standardPrice = 'Free';
+    standardPrice = 'Бесплатно';
   } else if (discount) {
     standardPrice = redPrice;
   }
@@ -424,8 +412,8 @@ const ProductPrice = (props) => {
 };
 
 const CATEGORY_COLORS = {
-  Contraband: 'red',
-  Premium: 'yellow',
+  Контрабанда: 'red',
+  Премиум: 'yellow',
 };
 
 const CategorySelector = (props: {

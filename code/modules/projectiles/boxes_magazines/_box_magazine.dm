@@ -71,8 +71,8 @@
 	var/list/readout = list()
 
 	if(caliber && max_ammo) // Text references a 'magazine' as only magazines generally have the caliber variable initialized
-		readout += "Up to [span_warning("[max_ammo] [caliber] [casing_phrasing]s")] can be found within this magazine. \
-		\nAccidentally discharging any of these projectiles may void your insurance contract."
+		readout += "До [span_warning("[max_ammo] [caliber] [casing_phrasing]s")] могут находиться в магазине. \
+		\nСлучайное применение любого из этих снарядов может привести к аннулированию страховки."
 
 	var/obj/item/ammo_casing/mag_ammo = get_and_shuffle_round()
 
@@ -220,13 +220,13 @@
 /obj/item/ammo_box/examine(mob/user)
 	. = ..()
 	var/shells_left = LAZYLEN(stored_ammo)
-	var/top_round = get_round()
+	var/obj/item/ammo_casing/top_round = get_round()
 	if(!top_round)
 		return
 	. += "It has <b>[shells_left]</b> [casing_phrasing]\s remaining."
 	// this is kind of awkward phrasing, but it's the top/ready ammo in the box
 	// intended for people who have like three mislabeled magazines
-	. += span_notice("The [top_round] is ready in [src].")
+	. += span_notice("\A <b>[top_round]</b> is ready.")
 
 /obj/item/ammo_box/update_icon_state()
 	. = ..()

@@ -14,6 +14,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
 	obj_flags = CONDUCTS_ELECTRICITY
 	slot_flags = ITEM_SLOT_BELT
+	action_slots = ALL
 	force = 10
 	throwforce = 7
 	demolition_mod = 0.25
@@ -26,7 +27,7 @@
 	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/melee/chainofcommand/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/melee/synthetic_arm_blade
@@ -130,7 +131,7 @@
 	playsound(container.parent, 'sound/items/sheath.ogg', 25, TRUE)
 
 /obj/item/melee/sabre/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is trying to cut off all [user.p_their()] limbs with [src]! it looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is trying to cut off all [user.p_their()] limbs with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	var/i = 0
 	ADD_TRAIT(src, TRAIT_NODROP, SABRE_SUICIDE_TRAIT)
 	if(iscarbon(user))
@@ -175,7 +176,7 @@
 
 /obj/item/melee/parsnip_sabre
 	name = "parsnip sabre"
-	desc = "A weird, yet elegant weapon. Suprisingly sharp for something made from a parsnip."
+	desc = "A weird, yet elegant weapon. Surprisingly sharp for something made from a parsnip."
 	icon = 'icons/obj/weapons/sword.dmi'
 	icon_state = "parsnip_sabre"
 	inhand_icon_state = "parsnip_sabre"
@@ -242,13 +243,13 @@
 		final_block_chance = 0 //Don't bring a sword to a gunfight, and also you aren't going to really block someone full body tackling you with a sword
 	return ..()
 
-/obj/item/melee/beesword/afterattack(atom/target, mob/user, click_parameters)
+/obj/item/melee/beesword/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
 		carbon_target.reagents.add_reagent(/datum/reagent/toxin, 4)
 
 /obj/item/melee/beesword/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is stabbing [user.p_them()]self in the throat with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is stabbing [user.p_them()]self in the throat with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(get_turf(src), hitsound, 75, TRUE, -1)
 	return TOXLOSS
 
@@ -291,16 +292,16 @@
 		if(!isspaceturf(turf))
 			consume_turf(turf)
 
-/obj/item/melee/supermatter_sword/pre_attack(atom/A, mob/living/user, params)
+/obj/item/melee/supermatter_sword/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return .
 
-	if(A == user)
+	if(target == user)
 		user.dropItemToGround(src, TRUE)
 	else
-		user.do_attack_animation(A)
-	consume_everything(A)
+		user.do_attack_animation(target)
+	consume_everything(target)
 	return TRUE
 
 /obj/item/melee/supermatter_sword/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
@@ -385,7 +386,7 @@
 	attack_verb_simple = list("flog", "whip", "lash", "discipline")
 	hitsound = 'sound/items/weapons/whip.ogg'
 
-/obj/item/melee/curator_whip/afterattack(atom/target, mob/user, click_parameters)
+/obj/item/melee/curator_whip/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		human_target.drop_all_held_items()
@@ -487,10 +488,11 @@
 		return NONE
 	if (!is_type_in_typecache(interacting_with, ovens))
 		return NONE
-	if (istype(interacting_with, /obj/singularity) && get_dist(user, interacting_with) < 10)
+	if (istype(interacting_with, /obj/singularity) || istype(interacting_with, /obj/energy_ball) && get_dist(user, interacting_with) < 10)
 		to_chat(user, span_notice("You send [held_sausage] towards [interacting_with]."))
 		playsound(src, 'sound/items/tools/rped.ogg', 50, TRUE)
 		beam = user.Beam(interacting_with, icon_state = "rped_upgrade", time = 10 SECONDS)
+		finish_roasting(user, interacting_with)
 		return ITEM_INTERACT_SUCCESS
 	return NONE
 
@@ -520,8 +522,9 @@
 /obj/item/melee/cleric_mace
 	name = "cleric mace"
 	desc = "The grandson of the club, yet the grandfather of the baseball bat. Most notably used by holy orders in days past."
-	icon = 'icons/obj/weapons/cleric_mace.dmi'
-	icon_state = "default"
+	icon = 'icons/map_icons/items/_item.dmi'
+	icon_state = "/obj/item/melee/cleric_mace"
+	post_init_icon_state = "default"
 	inhand_icon_state = "default"
 	worn_icon_state = "default_worn"
 	icon_angle = -45

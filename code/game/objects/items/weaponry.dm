@@ -151,7 +151,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	AddComponent(/datum/component/alternative_sharpness, SHARP_POINTY, alt_continuous, alt_simple, -15)
 
 /obj/item/claymore/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is falling on [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is falling on [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/claymore/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
@@ -474,6 +474,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/carpenter_hammer/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/kneejerk)
 	AddComponent(/datum/component/item_killsound, \
 	allowed_mobs = list(/mob/living/carbon/human), \
 	killsound = 'sound/items/weapons/hammer_death_scream.ogg', \
@@ -554,7 +555,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	tool_behaviour = (active ? TOOL_KNIFE : NONE)
 
 /obj/item/switchblade/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is slitting [user.p_their()] own throat with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is slitting [user.p_their()] own throat with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/switchblade/extended
@@ -576,9 +577,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/phone/suicide_act(mob/living/user)
 	if(locate(/obj/structure/chair/stool) in user.loc)
-		user.visible_message(span_suicide("[user] begins to tie a noose with [src]'s cord! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] begins to tie a noose with [src]'s cord! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	else
-		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]'s cord! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]'s cord! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/bambostaff
@@ -734,7 +735,6 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		attack_verb_simple_on = list("smack", "strike", "crack", "beat"), \
 	)
 	RegisterSignal(src, COMSIG_TRANSFORMING_ON_TRANSFORM, PROC_REF(on_transform))
-	ADD_TRAIT(src, TRAIT_BLIND_TOOL, INNATE_TRAIT)
 
 /obj/item/cane/white/handle_limping(mob/living/user)
 	return HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) ? COMPONENT_CANCEL_LIMP : NONE
@@ -749,6 +749,12 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 	if(user)
 		balloon_alert(user, active ? "extended" : "collapsed")
+
+	if(!HAS_TRAIT(src, TRAIT_BLIND_TOOL))
+		ADD_TRAIT(src, TRAIT_BLIND_TOOL, INNATE_TRAIT)
+	else
+		REMOVE_TRAIT(src, TRAIT_BLIND_TOOL, INNATE_TRAIT)
+
 	playsound(src, 'sound/items/weapons/batonextend.ogg', 50, TRUE)
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
@@ -908,7 +914,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY)
 	AddComponent(/datum/component/effect_remover, \
 	success_feedback = "You disrupt the magic of %THEEFFECT with %THEWEAPON.", \
-	success_forcesay = "BEGONE FOUL MAGICKS!!", \
+	success_forcesay = "ПРОЧЬ ЗЛАЯ СКВЕРНА!!", \
 	tip_text = "Clear rune", \
 	on_clear_callback = CALLBACK(src, PROC_REF(on_cult_rune_removed)), \
 	effects_we_clear = list(/obj/effect/rune, /obj/effect/heretic_rune) \
@@ -947,6 +953,8 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	var/homerun_able = FALSE
 	/// Are we ready to do a homerun?
 	var/homerun_ready = FALSE
+	/// Does this bat always have homerun active?
+	var/always_homerun = FALSE
 	/// Can we launch mobs thrown at us away?
 	var/mob_thrower = FALSE
 	/// List of all thrown datums we sent.
@@ -962,32 +970,36 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		make_silly()
 
 /obj/item/melee/baseball_bat/attack_self(mob/user)
-	if(!homerun_able)
-		return ..()
-	if(homerun_ready)
-		to_chat(user, span_warning("You're already ready to do a home run!"))
-		return ..()
-	to_chat(user, span_warning("You begin gathering strength..."))
-	playsound(get_turf(src), 'sound/effects/magic/lightning_chargeup.ogg', 65, TRUE)
-	if(do_after(user, 9 SECONDS, target = src))
-		to_chat(user, span_userdanger("You gather power! Time for a home run!"))
-		homerun_ready = TRUE
+	if(!always_homerun)
+		if(!homerun_able)
+			return ..()
+		if(homerun_ready)
+			to_chat(user, span_warning("You're already ready to do a home run!"))
+			return ..()
+		to_chat(user, span_warning("You begin gathering strength..."))
+		playsound(get_turf(src), 'sound/effects/magic/lightning_chargeup.ogg', 65, TRUE)
+		if(do_after(user, 9 SECONDS, target = src))
+			to_chat(user, span_userdanger("You gather power! Time for a home run!"))
+			homerun_ready = TRUE
+
 	return ..()
 
 /obj/item/melee/baseball_bat/attack(mob/living/target, mob/living/user)
 	// we obtain the relative direction from the bat itself to the target
-	var/relative_direction = get_cardinal_dir(src, target)
+	var/relative_direction = get_dir(src, target)
 	var/atom/throw_target = get_edge_target_turf(target, relative_direction)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		return
-	if(homerun_ready)
+	if(homerun_ready || always_homerun)
 		user.visible_message(span_userdanger("It's a home run!"))
 		if(!QDELETED(target))
 			target.throw_at(throw_target, rand(8,10), 14, user)
 		SSexplosions.medturf += throw_target
-		playsound(get_turf(src), 'sound/items/weapons/homerun.ogg', 100, TRUE)
-		homerun_ready = FALSE
+		playsound(get_turf(src), 'sound/items/weapons/homerun.ogg', 75, TRUE)
+		if(!always_homerun)
+			homerun_ready = FALSE
+
 		return
 	else if(!QDELETED(target) && !target.anchored)
 		var/whack_speed = (prob(60) ? 1 : 4)
@@ -1000,7 +1012,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	thrown_datums.Cut()
 	return ..()
 
-/obj/item/melee/baseball_bat/pre_attack(atom/movable/target, mob/living/user, params)
+/obj/item/melee/baseball_bat/pre_attack(atom/movable/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	var/turf/target_turf = get_turf(target)
 	if(!target_turf)
 		return ..()
@@ -1126,7 +1138,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		))
 
 
-/obj/item/melee/flyswatter/afterattack(atom/target, mob/user, click_parameters)
+/obj/item/melee/flyswatter/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	if(is_type_in_typecache(target, splattable))
 		to_chat(user, span_warning("You easily splat [target]."))
 		if(isliving(target))
@@ -1163,12 +1175,11 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	name = "\improper ACME Extendo-Hand"
 	desc = "A novelty extendo-hand produced by the ACME corporation. Originally designed to knock out roadrunners."
 
-/obj/item/extendohand/attack(atom/M, mob/living/carbon/human/user, params)
+/obj/item/extendohand/attack(atom/M, mob/living/carbon/human/user, list/modifiers, list/attack_modifiers)
 	var/dist = get_dist(M, user)
 	if(dist < min_reach)
 		to_chat(user, span_warning("[M] is too close to use [src] on."))
 		return
-	var/list/modifiers = params2list(params)
 	M.attack_hand(user, modifiers)
 
 /obj/item/gohei
@@ -1276,16 +1287,16 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		return TRUE
 	return FALSE
 
-/obj/item/highfrequencyblade/pre_attack(atom/A, mob/living/user, params)
+/obj/item/highfrequencyblade/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return .
 	if(!HAS_TRAIT(src, TRAIT_WIELDED))
 		return . // Default attack
-	if(isliving(A) && HAS_TRAIT(src, TRAIT_PACIFISM))
+	if(isliving(target) && HAS_TRAIT(src, TRAIT_PACIFISM))
 		return . // Default attack (ultimately nothing)
 
-	return slash(A, user, params)
+	return slash(target, user, modifiers)
 
 /// triggered on wield of two handed item
 /obj/item/highfrequencyblade/proc/on_wield(obj/item/source, mob/user)
@@ -1295,9 +1306,8 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 /obj/item/highfrequencyblade/proc/on_unwield(obj/item/source, mob/user)
 	update_icon(UPDATE_ICON_STATE)
 
-/obj/item/highfrequencyblade/proc/slash(atom/target, mob/living/user, params)
+/obj/item/highfrequencyblade/proc/slash(atom/target, mob/living/user, list/modifiers)
 	user.do_attack_animation(target, "nothing")
-	var/list/modifiers = params2list(params)
 	var/damage_mod = 1
 	var/x_slashed = text2num(modifiers[ICON_X]) || ICON_SIZE_X/2 //in case we arent called by a client
 	var/y_slashed = text2num(modifiers[ICON_Y]) || ICON_SIZE_Y/2 //in case we arent called by a client
@@ -1359,7 +1369,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	animate(src, duration*0.5, color = slash_color, transform = scaled_transform, alpha = 255)
 
 /obj/item/highfrequencyblade/wizard
-	desc = "A blade that was mastercrafted by a legendary blacksmith. Its' enchantments let it slash through anything."
+	desc = "A blade that was mastercrafted by a legendary blacksmith. Its enchantments let it slash through anything."
 	force = 8
 	throwforce = 20
 	wound_bonus = 20

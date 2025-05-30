@@ -1,6 +1,6 @@
 /// Head Slot Items (Deletes overrided items)
 /datum/loadout_category/head
-	category_name = "Head"
+	category_name = "Голова"
 	category_ui_icon = FA_ICON_HAT_COWBOY
 	type_to_generate = /datum/loadout_item/head
 	tab_order = 1
@@ -155,4 +155,3 @@
 /datum/loadout_item/head/wig
 	name = "Natural Wig"
 	item_path = /obj/item/clothing/head/wig/natural
-	additional_displayed_text = list("Hair Color")

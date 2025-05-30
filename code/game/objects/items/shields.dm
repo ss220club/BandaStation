@@ -59,11 +59,11 @@
 	var/healthpercent = round((atom_integrity/max_integrity) * 100, 1)
 	switch(healthpercent)
 		if(50 to 99)
-			. += span_info("It looks slightly damaged.")
+			. += span_info("Имеет незначительные повреждения.")
 		if(25 to 50)
-			. += span_info("It appears heavily damaged.")
+			. += span_info("Имеет значительные повреждения.")
 		if(0 to 25)
-			. += span_warning("It's falling apart!")
+			. += span_warning("Разваливается на части!")
 
 /obj/item/shield/item_interaction(mob/living/user, obj/item/tool, list/modifiers, is_right_clicking)
 	. = ..()
@@ -178,7 +178,7 @@
 		slapcraft_recipes = slapcraft_recipe_list,\
 	)
 
-/obj/item/shield/riot/attackby(obj/item/attackby_item, mob/user, params)
+/obj/item/shield/riot/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
 			to_chat(user, span_warning("[src] is already in perfect condition."))
@@ -446,7 +446,7 @@
 	shield_break_leftover = /obj/item/stack/rods/ten
 	armor_type = /datum/armor/item_shield/ballistic
 
-/obj/item/shield/ballistic/attackby(obj/item/attackby_item, mob/user, params)
+/obj/item/shield/ballistic/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
 			to_chat(user, span_warning("[src] is already in perfect condition."))

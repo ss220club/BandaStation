@@ -12,7 +12,7 @@
  */
 /mob/living/basic/carp
 	name = "space carp"
-	desc = "A ferocious, fang-bearing creature that resembles a fish."
+	desc = "Свирепое, клыкастое существо, внешне схожее с рыбой."
 	icon = 'icons/mob/simple/carp.dmi'
 	icon_state = "base"
 	icon_living = "base"
@@ -22,6 +22,7 @@
 	mob_biotypes = MOB_ORGANIC | MOB_BEAST | MOB_AQUATIC
 	health = 25
 	maxHealth = 25
+	max_stamina = 120
 	pressure_resistance = 200
 	combat_mode = TRUE
 	obj_damage = 50
@@ -60,7 +61,7 @@
 		/datum/pet_command/idle,
 		/datum/pet_command/free,
 		/datum/pet_command/follow,
-		/datum/pet_command/attack
+		/datum/pet_command/attack,
 	)
 	/// Carp want to eat raw meat
 	var/static/list/desired_food = list(/obj/item/food/meat/slab, /obj/item/food/meat/rawcutlet)
@@ -106,14 +107,14 @@
 	setup_eating()
 
 	AddComponent(/datum/component/speechmod, replacements = strings("crustacean_replacement.json", "crustacean"))
-	AddComponent(/datum/component/aggro_emote, emote_list = string_list(list("gnashes")))
+	AddComponent(/datum/component/aggro_emote, emote_list = string_list(list("скалится")))
 	AddComponent(/datum/component/regenerator, outline_colour = regenerate_colour)
 	AddComponent(/datum/component/profound_fisher)
 	if (tamer)
 		tamed(tamer, feedback = FALSE)
 		befriend(tamer)
 	else
-		var/static/list/food_types = list(/obj/item/food/meat)
+		var/list/food_types = string_list(list(/obj/item/food/meat)) /// BANDASTATION EDIT - CROCODILE
 		AddComponent(/datum/component/tameable, food_types = food_types, tame_chance = 10, bonus_tame_chance = 5)
 
 	teleport = new(src)
@@ -145,7 +146,7 @@
 	if (!feedback)
 		return
 	spin(spintime = 10, speed = 1)
-	visible_message("[src] spins in a circle as it seems to bond with [tamer].")
+	visible_message("[capitalize(declent_ru(NOMINATIVE))] крутится на месте и, видимо, сближается с [tamer.declent_ru(INSTRUMENTAL)].")
 
 /// Teleport when you right click away from you
 /mob/living/basic/carp/ranged_secondary_attack(atom/atom_target, modifiers)
@@ -178,13 +179,17 @@
  * Holographic carp from the holodeck
  */
 /mob/living/basic/carp/holographic
-	icon_state = "holocarp"
+	icon_state = "base_friend"
 	icon_living = "holocarp"
 	gold_core_spawnable = NO_SPAWN
 	greyscale_config = NONE
 	basic_mob_flags = DEL_ON_DEATH
 	cell_line = NONE
 	regenerate_colour = "#ffffff"
+
+/mob/living/basic/carp/holographic/Initialize(mapload, mob/tamer)
+	. = ..()
+	AddComponent(/datum/component/holographic_nature)
 
 /// Holocarp don't eat food
 /mob/living/basic/carp/holographic/setup_eating()
@@ -210,16 +215,16 @@
  * Has a lot more health than a normal carp because she's meant to be a mildly more threatening pet to have to assassinate than an aging corgi.
  */
 /mob/living/basic/carp/pet/lia
-	name = "Lia"
-	real_name = "Lia"
-	desc = "A failed experiment of Nanotrasen to create weaponised carp technology. This less than intimidating carp now serves as the Head of Security's pet."
+	name = "Лия"
+	real_name = "Лия"
+	desc = "Провальный эксперимент Nanotrasen по созданию оружия из космокарпа. Этот менее устрашающий карп теперь служит питомцем для главы службы безопасности."
 	faction = list(FACTION_NEUTRAL)
 	maxHealth = 200
 	health = 200
+	icon_state = "magicarp"
 	icon_dead = "magicarp_dead"
 	icon_gib = "magicarp_gib"
 	icon_living = "magicarp"
-	icon_state = "magicarp"
 	greyscale_config = NONE
 
 /// Boosted chance for Cayenne to be silver
@@ -231,9 +236,9 @@
  * Is very talented and also capable of holding the nuclear disk.
  */
 /mob/living/basic/carp/pet/cayenne
-	name = "Cayenne"
-	real_name = "Cayenne"
-	desc = "A failed Syndicate experiment in weaponized space carp technology, it now serves as a lovable mascot."
+	name = "Кайенна"
+	real_name = "Кайенна"
+	desc = "Провальный эксперимент Синдиката по созданию оружия из обычного космокарпа, ныне милый талисман."
 	faction = list(ROLE_SYNDICATE)
 	/// Overlay to apply to display the disk
 	var/mutable_appearance/disk_overlay
@@ -277,9 +282,9 @@
 
 ///Carp-parasite from carpellosis disease
 /mob/living/basic/carp/ella
-	name = "Ella"
-	real_name = "Ella"
-	desc = "It came out of someone."
+	name = "Элла"
+	real_name = "Элла"
+	desc = "Карп-паразит, который живет в своём носителе до созревания и кажется он уже \"вылупился\"."
 	gold_core_spawnable = NO_SPAWN
 
 /mob/living/basic/carp/ella/Initialize(mapload)
@@ -289,8 +294,7 @@
 ///Wild carp that just vibe ya know
 /mob/living/basic/carp/passive
 	name = "false carp"
-	desc = "A close relative of the space carp which is entirely toothless and feeds by stealing its cousin's leftovers."
-
+	desc = "Беззубый близкий родственник космического карпа. Питается путем воровства остатков из добычи своего кузена."
 	icon_state = "base_friend"
 	icon_living = "base_friend"
 	icon_dead = "base_friend_dead"

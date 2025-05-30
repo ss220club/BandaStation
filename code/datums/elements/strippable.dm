@@ -90,9 +90,11 @@
 /datum/strippable_item/proc/try_equip(atom/source, obj/item/equipping, mob/user)
 	if(SEND_SIGNAL(user, COMSIG_TRY_STRIP, source, equipping) & COMPONENT_CANT_STRIP)
 		return FALSE
+	if(SEND_SIGNAL(source, COMSIG_BEING_STRIPPED, user, equipping) & COMPONENT_CANT_STRIP)
+		return FALSE
 
 	if (HAS_TRAIT(equipping, TRAIT_NODROP))
-		to_chat(user, span_warning("You can't put [equipping] on [source], it's stuck to your hand!"))
+		to_chat(user, span_warning("Вы не можете экипировать [equipping.declent_ru(ACCUSATIVE)] на [source.declent_ru(ACCUSATIVE)], предмет застрял на вашей руке!"))
 		return FALSE
 
 	if (equipping.item_flags & ABSTRACT)
@@ -125,6 +127,8 @@
 	if (ismob(source))
 		if(SEND_SIGNAL(user, COMSIG_TRY_STRIP, source, item) & COMPONENT_CANT_STRIP)
 			return FALSE
+		if(SEND_SIGNAL(source, COMSIG_BEING_STRIPPED, user, item) & COMPONENT_CANT_STRIP)
+			return FALSE
 		var/mob/mob_source = source
 		if (!item.canStrip(user, mob_source))
 			return FALSE
@@ -142,13 +146,13 @@
 		return FALSE
 
 	source.visible_message(
-		span_warning("[user] tries to remove [source]'s [item.name]."),
-		span_userdanger("[user] tries to remove your [item.name]."),
-		blind_message = span_hear("You hear rustling."),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] пытается снять [item.declent_ru(ACCUSATIVE)] у [source.declent_ru(GENITIVE)]."),
+		span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] пытается снять [item.ru_p_yours(ACCUSATIVE)] [item.declent_ru(ACCUSATIVE)]."),
+		blind_message = span_hear("Вы слышите шорох."),
 		ignored_mobs = user,
 	)
 
-	to_chat(user, span_danger("You try to remove [source]'s [item.name]..."))
+	to_chat(user, span_danger("Вы пытаетесь снять [item.declent_ru(ACCUSATIVE)] у [source.declent_ru(GENITIVE)]..."))
 	user.log_message("is stripping [key_name(source)] of [item].", LOG_ATTACK, color="red")
 	source.log_message("is being stripped of [item] by [key_name(user)].", LOG_VICTIM, color="orange", log_globally=FALSE)
 	item.add_fingerprint(src)
@@ -157,11 +161,11 @@
 		var/mob/living/carbon/human/victim_human = source
 		if(victim_human.key && !victim_human.client) // AKA braindead
 			if(victim_human.stat <= SOFT_CRIT && LAZYLEN(victim_human.afk_thefts) <= AFK_THEFT_MAX_MESSAGES)
-				var/list/new_entry = list(list(user.name, "tried unequipping your [item.name]", world.time))
+				var/list/new_entry = list(list(user.name, "пытался снять [item.ru_p_yours(ACCUSATIVE)] [item.declent_ru(ACCUSATIVE)]", world.time))
 				LAZYADD(victim_human.afk_thefts, new_entry)
 
 		else if(victim_human.is_blind())
-			to_chat(source, span_userdanger("You feel someone fumble with your belongings."))
+			to_chat(source, span_userdanger("Вы чувствуете, как кто-то шарится с вашими вещами."))
 
 	return TRUE
 
@@ -220,7 +224,7 @@
 		return FALSE
 
 	if (!equipping.mob_can_equip(source, item_slot, disable_warning = TRUE, bypass_equip_delay_self = TRUE))
-		to_chat(user, span_warning("\The [equipping] doesn't fit in that place!"))
+		to_chat(user, span_warning("[capitalize(equipping.declent_ru(NOMINATIVE))] не подходит сюда!"))
 		return FALSE
 
 	return TRUE
@@ -254,13 +258,17 @@
 	return finish_equip_mob(equipping, source, user)
 
 /datum/strippable_item/mob_item_slot/get_obscuring(atom/source)
-	if (iscarbon(source))
-		var/mob/living/carbon/carbon_source = source
-		return (carbon_source.check_obscured_slots() & item_slot) \
-			? STRIPPABLE_OBSCURING_COMPLETELY \
-			: STRIPPABLE_OBSCURING_NONE
+	if (!iscarbon(source))
+		return STRIPPABLE_OBSCURING_NONE
 
-	return FALSE
+	var/mob/living/carbon/carbon_source = source
+	if (carbon_source.check_obscured_slots() & item_slot)
+		return STRIPPABLE_OBSCURING_COMPLETELY
+
+	if (carbon_source.check_covered_slots() & item_slot)
+		return STRIPPABLE_OBSCURING_INACCESSIBLE
+
+	return STRIPPABLE_OBSCURING_NONE
 
 /datum/strippable_item/mob_item_slot/start_unequip(atom/source, mob/user)
 	. = ..()
@@ -356,13 +364,13 @@
 			LAZYSET(result, "interacting", TRUE)
 
 		var/obscuring = item_data.get_obscuring(owner)
-		if (obscuring != STRIPPABLE_OBSCURING_NONE)
-			LAZYSET(result, "obscured", obscuring)
+		LAZYSET(result, "obscured", obscuring)
+		if (obscuring != STRIPPABLE_OBSCURING_NONE && obscuring != STRIPPABLE_OBSCURING_INACCESSIBLE)
 			items[strippable_key] = result
 			continue
 
 		var/obj/item/item = item_data.get_item(owner)
-		if (isnull(item) || (HAS_TRAIT(item, TRAIT_NO_STRIP) || (item.item_flags & EXAMINE_SKIP)))
+		if (isnull(item) || (HAS_TRAIT(item, TRAIT_NO_STRIP) || HAS_TRAIT(item, TRAIT_EXAMINE_SKIP)))
 			items[strippable_key] = result
 			continue
 
@@ -409,7 +417,8 @@
 			if (!strippable_item.should_show(owner, user))
 				return
 
-			if (strippable_item.get_obscuring(owner) == STRIPPABLE_OBSCURING_COMPLETELY)
+			var/obscured = strippable_item.get_obscuring(owner)
+			if (obscured == STRIPPABLE_OBSCURING_COMPLETELY || obscured == STRIPPABLE_OBSCURING_INACCESSIBLE)
 				return
 
 			var/item = strippable_item.get_item(owner)
@@ -475,7 +484,8 @@
 			if (!strippable_item.should_show(owner, user))
 				return
 
-			if (strippable_item.get_obscuring(owner) == STRIPPABLE_OBSCURING_COMPLETELY)
+			var/obscured = strippable_item.get_obscuring(owner)
+			if (obscured == STRIPPABLE_OBSCURING_COMPLETELY || obscured == STRIPPABLE_OBSCURING_INACCESSIBLE)
 				return
 
 			var/item = strippable_item.get_item(owner)

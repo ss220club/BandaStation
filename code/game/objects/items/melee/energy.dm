@@ -92,6 +92,9 @@
 	playsound(loc, hitsound, get_clamped_volume(), TRUE, -1)
 	add_fingerprint(user)
 
+/obj/item/melee/energy/get_demolition_modifier(obj/target)
+	return HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) ? demolition_mod : 1
+
 /obj/item/melee/energy/update_icon_state()
 	. = ..()
 	if(!sword_color_icon)
@@ -166,7 +169,7 @@
 	RegisterSignal(src, COMSIG_TRANSFORMING_ON_TRANSFORM, PROC_REF(on_transform))
 
 /obj/item/melee/energy/axe/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] swings [src] towards [user.p_their()] head! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] swings [src] towards [user.p_their()] head! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return (BRUTELOSS|FIRELOSS)
 
 /// Energy swords.

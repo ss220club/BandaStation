@@ -87,6 +87,7 @@
 #define JOB_CARGO_GORILLA "Cargo Gorilla"
 #define JOB_SHAFT_MINER "Shaft Miner"
 #define JOB_BITRUNNER "Bitrunner"
+#define JOB_EXPLORER "Explorer" /// BANDASTATION ADDITION - Jobs Module
 //Service
 #define JOB_BARTENDER "Bartender"
 #define JOB_BOTANIST "Botanist"
@@ -96,7 +97,6 @@
 #define JOB_CLOWN "Clown"
 #define JOB_MIME "Mime"
 #define JOB_CURATOR "Curator"
-#define JOB_LAWYER "Lawyer"
 #define JOB_CHAPLAIN "Chaplain"
 #define JOB_PSYCHOLOGIST "Psychologist"
 #define JOB_PUN_PUN "Pun Pun"
@@ -122,6 +122,15 @@
 #define JOB_CENTCOM_RESEARCH_OFFICER "Research Officer"
 #define JOB_CENTCOM_SPECIAL_OFFICER "Special Ops Officer"
 #define JOB_CENTCOM_PRIVATE_SECURITY "Private Security Force"
+
+/// BANDASTATION ADDITION START - Jobs Module
+//NT Representation
+#define JOB_NANOTRASEN_REPRESENTATIVE "Nanotrasen Representative"
+#define JOB_BLUESHIELD "Blueshield"
+//Justice
+#define JOB_LAWYER "Lawyer"
+#define JOB_MAGISTRATE "Magistrate"
+/// BANDASTATION ADDITION END - Jobs Module
 
 //Lost crew
 #define JOB_LOSTCREW_ENGINEER "Visiting Engineer"
@@ -201,7 +210,9 @@
 #define DEPARTMENT_BITFLAG_CAPTAIN (1<<9)
 #define DEPARTMENT_CAPTAIN "Captain"
 // BANDASTATION ADD - START
+#define DEPARTMENT_NANOTRASEN_REPRESENTATION "NT Representation"
 #define DEPARTMENT_BITFLAG_NANOTRASEN_REPRESENTATION (1<<10)
+#define DEPARTMENT_JUSTICE "Justice"
 #define DEPARTMENT_BITFLAG_JUSTICE (1<<11)
 // BANDASTATION ADD - END
 

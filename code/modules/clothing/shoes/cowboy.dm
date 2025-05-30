@@ -4,7 +4,7 @@
 	icon_state = "cowboy_brown"
 	armor_type = /datum/armor/shoes_cowboy
 	custom_price = PAYCHECK_CREW
-	can_be_tied = FALSE
+	fastening_type = SHOES_SLIPON
 	interaction_flags_mouse_drop = NEED_HANDS | NEED_DEXTERITY
 
 	var/max_occupants = 4
@@ -47,7 +47,7 @@
 	INVOKE_ASYNC(src, PROC_REF(handle_table_slam), source)
 
 /obj/item/clothing/shoes/cowboy/proc/handle_table_slam(mob/living/user)
-	user.say(pick("Hot damn!", "Hoo-wee!", "Got-dang!"), spans = list(SPAN_YELL), forced=TRUE)
+	user.say(pick("Гаддэмн!", "Хоооу-и!", "Гат-дэнг!"), spans = list(SPAN_YELL), forced=TRUE)
 	user.client?.give_award(/datum/award/achievement/misc/hot_damn, user)
 
 /obj/item/clothing/shoes/cowboy/mouse_drop_receive(mob/living/target, mob/living/user, params)
@@ -106,3 +106,13 @@
 	armor_type = /datum/armor/shoes_combat
 	has_spurs = TRUE
 	body_parts_covered = FEET|LEGS
+
+// Laced variants for loadout
+/obj/item/clothing/shoes/cowboy/laced
+	fastening_type = SHOES_LACED
+
+/obj/item/clothing/shoes/cowboy/white/laced
+	fastening_type = SHOES_LACED
+
+/obj/item/clothing/shoes/cowboy/black/laced
+	fastening_type = SHOES_LACED

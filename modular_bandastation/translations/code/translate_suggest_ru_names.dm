@@ -18,7 +18,7 @@ ADMIN_VERB(ru_names_review_panel, R_ADMIN, "Ru Names Review", "Shows player-sugg
 	load_data()
 
 /datum/ru_names_review_panel/ui_state(mob/user)
-	return GLOB.admin_state
+	return ADMIN_STATE(R_DEBUG | R_ADMIN)
 
 /datum/ru_names_review_panel/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)

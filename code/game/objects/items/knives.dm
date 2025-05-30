@@ -54,9 +54,9 @@
 	AddComponent(/datum/component/alternative_sharpness, SHARP_POINTY, alt_continuous, alt_simple)
 
 /obj/item/knife/suicide_act(mob/living/user)
-	user.visible_message(pick(span_suicide("[user] is slitting [user.p_their()] wrists with the [src.name]! It looks like [user.p_theyre()] trying to commit suicide."), \
-		span_suicide("[user] is slitting [user.p_their()] throat with the [src.name]! It looks like [user.p_theyre()] trying to commit suicide."), \
-		span_suicide("[user] is slitting [user.p_their()] stomach open with the [src.name]! It looks like [user.p_theyre()] trying to commit seppuku.")))
+	user.visible_message(pick(span_suicide("[user] is slitting [user.p_their()] wrists with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство."), \
+		span_suicide("[user] is slitting [user.p_their()] throat with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство."), \
+		span_suicide("[user] is slitting [user.p_their()] stomach open with \the [src]! It looks like [user.p_theyre()] trying to commit seppuku.")))
 	return BRUTELOSS
 
 /obj/item/knife/ritual
@@ -88,7 +88,7 @@
 	/// Bleed stacks applied when an organic mob target is hit
 	var/bleed_stacks_per_hit = 3
 
-/obj/item/knife/bloodletter/afterattack(atom/target, mob/user, click_parameters)
+/obj/item/knife/bloodletter/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	if(!isliving(target))
 		return
 	var/mob/living/M = target
@@ -317,7 +317,7 @@
 	custom_materials = null
 
 /obj/item/knife/shiv/carrot/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] forcefully drives \the [src] into [user.p_their()] eye! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] forcefully drives \the [src] into [user.p_their()] eye! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/knife/shiv/parsnip
@@ -335,4 +335,3 @@
 	inhand_icon_state = "rootshiv"
 	icon_angle = -45
 	custom_materials = null
-

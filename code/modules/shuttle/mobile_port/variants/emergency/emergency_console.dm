@@ -42,7 +42,7 @@
 		if(hijack_announce)
 			. += span_warning("It is probably best to fortify your position as to be uninterrupted during the attempt, given the automatic announcements..")
 
-/obj/machinery/computer/emergency_shuttle/attackby(obj/item/I, mob/user,params)
+/obj/machinery/computer/emergency_shuttle/attackby(obj/item/I, mob/user,list/modifiers)
 	if(isidcard(I))
 		say("Please equip your ID card into your ID slot to authenticate.")
 	. = ..()
@@ -135,9 +135,9 @@
 		var/repeal = (authorized.len < old_len)
 		var/remaining = max(0, auth_need - authorized.len)
 		if(authorized.len && remaining)
-			minor_announce("[remaining] authorizations needed until shuttle is launched early", null, alert)
+			minor_announce("[remaining] авторизации необходимо для раннего запуска шаттла", null, alert)
 		if(repeal)
-			minor_announce("Early launch authorization revoked, [remaining] authorizations needed")
+			minor_announce("Авторизация на ранний запуск отозвана, [remaining] авторизации необходимо")
 
 	acted_recently += user
 	SStgui.update_user_uis(user, src)
@@ -184,8 +184,8 @@
 		// shuttle timers use 1/10th seconds internally
 		SSshuttle.emergency.setTimer(ENGINE_START_TIME)
 		var/system_error = obj_flags & EMAGGED ? "SYSTEM ERROR:" : null
-		minor_announce("The emergency shuttle will launch in \
-			[TIME_LEFT] seconds", system_error, alert=TRUE)
+		minor_announce("Эвакуационный шаттл будет запущен через \
+			[TIME_LEFT] секунд", system_error, alert=TRUE)
 		. = TRUE
 
 /obj/machinery/computer/emergency_shuttle/proc/increase_hijack_stage()

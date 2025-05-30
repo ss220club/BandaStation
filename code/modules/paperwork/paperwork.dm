@@ -39,7 +39,7 @@
 
 	detailed_desc = span_notice("<i>As you sift through the papers, you slowly start to piece together what you're reading.</i>")
 
-/obj/item/paperwork/attackby(obj/item/attacking_item, mob/user, params)
+/obj/item/paperwork/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return
@@ -77,7 +77,7 @@
 				. += span_info("Trying to read through it makes your head spin. Judging by the few words you can make out, this looks like a job for the [title].")
 
 /obj/item/paperwork/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] begins insulting the inefficiency of paperwork and bureaucracy. It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins insulting the inefficiency of paperwork and bureaucracy. Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 
 	var/obj/item/paper/new_paper = new /obj/item/paper(get_turf(src))
 	var/turf/turf_to_throw_at = get_ranged_target_turf(get_turf(src), pick(GLOB.alldirs))
@@ -234,7 +234,7 @@
 	else
 		. += span_notice("These appear to just be a photocopy of the original documents.")
 
-/obj/item/paperwork/photocopy/attackby(obj/item/attacking_item, mob/user, params)
+/obj/item/paperwork/photocopy/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attacking_item, /obj/item/stamp/void) && !stamped && !voided)
 		to_chat(user, span_notice("You plant the [attacking_item] firmly onto the front of the documents."))
 		stamp_overlay = mutable_appearance('icons/obj/service/bureaucracy.dmi', "paper_stamp-void")

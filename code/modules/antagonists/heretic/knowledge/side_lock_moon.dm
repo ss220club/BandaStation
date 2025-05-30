@@ -6,35 +6,27 @@
 
 	tier1 = /datum/heretic_knowledge/spell/mind_gate
 	tier2 = list(/datum/heretic_knowledge/unfathomable_curio, /datum/heretic_knowledge/painting)
-	tier3 = /datum/heretic_knowledge/dummy_moon_to_lock
+	tier3 = /datum/heretic_knowledge/codex_morbus
 
 // Sidepaths for knowledge between Knock and Moon.
 
-/datum/heretic_knowledge/dummy_moon_to_lock
-	name = "Lock and Moon ways"
-	desc = "Research this to gain access to the other path"
-	gain_text = "The powers of Madness are like a wound in one's soul, and every wound can be opened and closed."
-	cost = 1
-
-
-
 /datum/heretic_knowledge/spell/mind_gate
 	name = "Mind Gate"
-	desc = "Grants you Mind Gate, a spell which inflicts hallucinations, \
-		confusion, oxygen loss and brain damage to its target over 10 seconds.\
-		The caster takes 20 brain damage per use."
-	gain_text = "My mind swings open like a gate, and its insight will let me perceive the truth."
+	desc = "Дает вам заклинание Mind Gate, которое \
+		наносит вам 20 урона мозгу, и накладывает галлюцинации на цель, \
+		замешательство на 10 секунд, потерю дыхания и урон мозгу."
+	gain_text = "Мой разум распахивается, словно врата, и его озарение позволяет мне постичь правду."
 
 	action_to_add = /datum/action/cooldown/spell/pointed/mind_gate
 	cost = 1
 
 /datum/heretic_knowledge/unfathomable_curio
 	name = "Unfathomable Curio"
-	desc = "Allows you to transmute 3 rods, lungs and any belt into an Unfathomable Curio, \
-			a belt that can hold blades and items for rituals. Whilst worn it will also \
-			veil you, allowing you to take 5 hits without suffering damage, this veil will recharge very slowly \
-			outside of combat."
-	gain_text = "The mansus holds many a curio, some are not meant for the mortal eye."
+	desc = "Позволяет трансмутировать 3 железных стержня, легкие и любой пояс в Непостижимую диковинку\
+			, пояс, который может хранить клинки и предметы для ритуалов. Пока вы его носите, \
+			он также будет покрывать вас вуалью, позволяющей последующим 5 ударам не наносить по вам урон. \
+			Вуаль очень медленно перезаряжается вне боя."
+	gain_text = "В Мансусе хранится множество диковинок, но некоторые из них не предназначены для глаза смертных."
 
 	required_atoms = list(
 		/obj/item/organ/lungs = 1,
@@ -50,15 +42,16 @@
 
 /datum/heretic_knowledge/painting
 	name = "Unsealed Arts"
-	desc = "Allows you to transmute a canvas and an additional item to create a painting. \
-			Each painting has a unique effect and recipe. Possible paintings: \
-			The Sister and He Who Wept: Requires a pair of Eyes. Clears your own mind, and curses non-heretics with hallucinations. \
-			The Feast of Desire: Requires a severed limb. Supplies you with random organs, and curses non-heretics with a hunger for flesh. \
-			Great Chaparral Over Rolling Hills: Requires any plant produce. Spreads kudzu when placed, and supplies you with poppies and harebells. \
-			Lady of the Gate: Requires any pair of Gloves. Clears your mutations, mutates non-heretics and curses them with scratching. \
-			Master of the Rusted Mountain: Requires a piece of Trash. Curses non-heretics to rust the floor they walk on."
-	gain_text = "A wind of inspiration blows through me. Beyond the veil and past the gate great works exist, yet to be painted. \
-				They yearn for mortal eyes, so I shall give them an audience."
+	desc = "Позволяет трансмутировать холст и дополнительный предмет, чтобы создать произведение искусства. \
+			Эти картины имеют разные эффекты в зависимости от добавленного предмета. Можно создать следующие картины: \
+			Сестра и Тот, Кто Плакал: Глаза. Очищает ваш разум, но проклинает не-еретиков галлюцинациями. \
+			Первое Желание: Любая часть тела. Предоставляет вам случайные органы, но проклинает не-еретиков жаждой плоти. \
+			Великий чапараль над холмами: Любая выращенная еда. Распространяет кудзу при установке и осмотре не-еретиками. Также дает вам маки и колокольчики. \
+			Дама за воротами: Перчатки. Очищает ваши мутации, но мутирует всех не-еретиков и проклинает их чесоткой. \
+			Подъем на ржавые горы: Мусло. Проклинает всех не-еретиков, заставляя их оставлять ржавчину на своем пути. \
+			Не-еретики могут избавиться от этих эффектов, осматривая эти картины."
+	gain_text = "Ветер вдохновения дует через меня; за стенами и за вратами лежит вдохновение, которое еще предстоит изобразить \
+				Они снова жаждут взгляда смертных, и я исполню это желание."
 
 	required_atoms = list(/obj/item/canvas = 1)
 	result_atoms = list(/obj/item/canvas)
@@ -111,3 +104,36 @@
 
 	user.balloon_alert(user, "no additional atom present!")
 	return FALSE
+
+/**
+ * Codex Morbus, an upgrade to the base codex
+ * Functionally an upgraded version of the codex, but it also has the ability to cast curses by right clicking at a rune.
+ * Requires you to have the blood of your victim in your off-hand
+ */
+/datum/heretic_knowledge/codex_morbus
+	name = "Codex Morbus"
+	desc = "Allows you to to combine a codex cicatrix, and a body into a Codex Morbus. \
+		It draws runes and siphons essences a bit faster. \
+		Right Click on a rune to curse crewmembers, the target's blood is required in your off hand for a curse to take effect (Best combined with Phylactery Of Damnation)."
+	gain_text = "The spine of this leather-bound tome creaks with an eerily pained sigh. \
+		To ply page from place takes considerable effort, and I dare not linger on the suggestions the book makes for longer than necessary. \
+		It speaks of coming plagues, of waiting supplicants of dead and forgotten gods, and the undoing of mortal kind. \
+		It speaks of needles to peel the skin of the world back and leaving it to fester. And it speaks to me by name."
+	required_atoms = list(
+		/obj/item/codex_cicatrix = 1,
+		/mob/living/carbon/human = 1,
+	)
+	result_atoms = list(/obj/item/codex_cicatrix/morbus)
+	cost = 1
+	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
+	research_tree_icon_state = "book_morbus"
+
+/datum/heretic_knowledge/codex_morbus/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
+	. = ..()
+	var/mob/living/carbon/human/to_fuck_up = locate() in selected_atoms
+	for(var/_limb in to_fuck_up.bodyparts)
+		var/obj/item/bodypart/limb = _limb
+		limb.force_wound_upwards(/datum/wound/slash/flesh/critical)
+	for(var/obj/item/bodypart/limb as anything in to_fuck_up.bodyparts)
+		to_fuck_up.cause_wound_of_type_and_severity(WOUND_BLUNT, limb, WOUND_SEVERITY_CRITICAL)
+	return TRUE

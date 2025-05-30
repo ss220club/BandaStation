@@ -5,7 +5,7 @@
 	route = PATH_SIDE
 
 	tier1 = /datum/heretic_knowledge/essence
-	tier2 = list(/datum/heretic_knowledge/curse/corrosion, /datum/heretic_knowledge/entropy_pulse)
+	tier2 = list(/datum/heretic_knowledge/entropy_pulse, /datum/heretic_knowledge/rust_sower)
 	tier3 = /datum/heretic_knowledge/summon/rusty
 
 
@@ -13,10 +13,10 @@
 
 /datum/heretic_knowledge/essence
 	name = "Priest's Ritual"
-	desc = "Allows you to transmute a tank of water and a glass shard into a Flask of Eldritch Essence. \
-		Eldritch water can be consumed for potent healing, or given to heathens for deadly poisoning."
-	gain_text = "This is an old recipe. The Owl whispered it to me. \
-		Created by the Priest - the Liquid that both was and is not."
+	desc = "Позволяет трансмутировать емкость с водой и осколок стекла в Колбу с мистической эссенцией. \
+		Мистическую эссенцию можно употреблять для мощного исцеления или давать язычникам для смертельного отравления."
+	gain_text = "Это старый рецепт. Сова шепнула мне его. \
+		Созданная Жрецом - Жидкость, которая есть, и которой нет."
 
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
@@ -29,10 +29,23 @@
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
 	research_tree_icon_state = "eldritch_flask"
 
+/datum/heretic_knowledge/rust_sower
+	name = "Rust Sower Grenade"
+	desc = "Allws you to combine a chemical grenade casing and a liver to conjure a cursed grenade filled with Eldritch Rust, upon detonating it releases a huge cloud that blinds organics, rusts affected turfs and obliterates Silicons and Mechs."
+	gain_text = "The choked vines of the Rusted Hills are burdened with such overripe fruits. It undoes the markers of progress, leaving a clean slate to work into new shapes."
+	required_atoms = list(
+		/obj/item/grenade/chem_grenade = 1,
+		/obj/item/organ/liver = 1,
+	)
+	result_atoms = list(/obj/item/grenade/chem_grenade/rust_sower)
+	cost = 1
+	research_tree_icon_path = 'icons/obj/weapons/grenade.dmi'
+	research_tree_icon_state = "rustgrenade"
+
 /datum/heretic_knowledge/entropy_pulse
 	name = "Pulse of Entropy"
-	desc = "Allows you to transmute 10 iron sheets and a garbage item to fill the surrounding vicinity of the rune with rust."
-	gain_text = "Reality begins to whisper to me. To give it its entropic end."
+	desc = "Позволяет трансмутировать 10 железа и мусорный предмет, чтобы заполнить ржавчиной окружение вокруг руны."
+	gain_text = "Реальность начинает нашептывать мне, чтобы дать ей энтропийный конец."
 	required_atoms = list(
 		/obj/item/stack/sheet/iron = 10,
 		/obj/item/trash = 1,
@@ -54,40 +67,6 @@
 			continue
 		nearby_turf.rust_heretic_act()
 	return TRUE
-
-/datum/heretic_knowledge/curse/corrosion
-	name = "Curse of Corrosion"
-	desc = "Allows you to transmute wirecutters, a pool of vomit, and a heart to cast a curse of sickness on a crew member. \
-		While cursed, the victim will repeatedly vomit while their organs will take constant damage. You can additionally supply an item \
-		that a victim has touched or is covered in the victim's blood to make the curse last longer."
-	gain_text = "The body of humanity is temporary. Their weaknesses cannot be stopped, like iron falling to rust. Show them all."
-
-	required_atoms = list(
-		/obj/item/wirecutters = 1,
-		/obj/effect/decal/cleanable/vomit = 1,
-		/obj/item/organ/heart = 1,
-	)
-	duration = 0.5 MINUTES
-	duration_modifier = 4
-	curse_color = "#c1ffc9"
-	cost = 1
-
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "curse_corrosion"
-
-
-/datum/heretic_knowledge/curse/corrosion/curse(mob/living/carbon/human/chosen_mob, boosted = FALSE)
-	to_chat(chosen_mob, span_danger("You feel very ill..."))
-	chosen_mob.apply_status_effect(/datum/status_effect/corrosion_curse)
-	return ..()
-
-/datum/heretic_knowledge/curse/corrosion/uncurse(mob/living/carbon/human/chosen_mob, boosted = FALSE)
-	if(QDELETED(chosen_mob))
-		return
-
-	chosen_mob.remove_status_effect(/datum/status_effect/corrosion_curse)
-	to_chat(chosen_mob, span_green("You start to feel better."))
-	return ..()
 
 /datum/heretic_knowledge/summon/rusty
 	name = "Rusted Ritual"

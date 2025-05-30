@@ -66,11 +66,11 @@
 			qdel(target)
 			continue
 
-/obj/machinery/computer/records/security/attacked_by(obj/item/attacking_item, mob/living/user)
-	. = ..()
-	if(!istype(attacking_item, /obj/item/photo))
-		return
-	insert_new_record(user, attacking_item)
+/obj/machinery/computer/records/security/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/photo))
+		return NONE
+	insert_new_record(user, tool)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/computer/records/security/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
@@ -78,7 +78,6 @@
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		character_preview_view = create_character_preview_view(user)
 		ui = new(user, src, "SecurityRecords")
 		ui.set_autoupdate(FALSE)
 		ui.open()
@@ -222,6 +221,7 @@
 		var/datum/crime/new_crime = new(name = input_name, details = input_details, author = usr)
 		target.crimes += new_crime
 		investigate_log("New Crime: <strong>[input_name]</strong> | Added to [target.name] by [key_name(user)]. Their previous status was [target.wanted_status]", INVESTIGATE_RECORDS)
+		SSblackbox.ReportCitation(REF(new_crime), user.ckey, user.real_name, target.name, input_name, input_details)
 		target.wanted_status = WANTED_ARREST
 
 		update_matching_security_huds(target.name)
@@ -233,7 +233,7 @@
 	target.citations += new_citation
 	new_citation.alert_owner(user, src, target.name, "You have been issued a [params["fine"]]cr citation for [input_name]. Fines are payable at Security.")
 	investigate_log("New Citation: <strong>[input_name]</strong> Fine: [params["fine"]] | Added to [target.name] by [key_name(user)]", INVESTIGATE_RECORDS)
-	SSblackbox.ReportCitation(REF(new_citation), user.ckey, user.real_name, target.name, input_name, params["fine"])
+	SSblackbox.ReportCitation(REF(new_citation), user.ckey, user.real_name, target.name, input_name, input_details, params["fine"])
 
 	return TRUE
 
@@ -251,12 +251,14 @@
 		var/new_name = strip_html_full(params["name"], MAX_CRIME_NAME_LEN)
 		investigate_log("[user] edited crime: \"[editing_crime.name]\" for target: \"[target.name]\", changing the name to: \"[new_name]\".", INVESTIGATE_RECORDS)
 		editing_crime.name = new_name
+		SSblackbox.ReportCitation(REF(editing_crime), message = new_name)
 		return TRUE
 
 	if(params["description"] && length(params["description"]) > 2 && params["name"] != editing_crime.name)
 		var/new_details = strip_html_full(params["description"], MAX_MESSAGE_LEN)
 		investigate_log("[user] edited crime \"[editing_crime.name]\" for target: \"[target.name]\", changing the details to: \"[new_details]\" from: \"[editing_crime.details]\".", INVESTIGATE_RECORDS)
 		editing_crime.details = new_details
+		SSblackbox.ReportCitation(REF(editing_crime), description = new_details)
 		return TRUE
 
 	return FALSE
@@ -330,12 +332,12 @@
 /// Handles printing records via UI. Takes the params from UI_act.
 /obj/machinery/computer/records/security/proc/print_record(mob/user, datum/record/crew/target, list/params)
 	if(printing)
-		balloon_alert(user, "printer busy")
+		balloon_alert(user, "принтер занят")
 		playsound(src, 'sound/machines/terminal/terminal_error.ogg', 100, TRUE)
 		return FALSE
 
 	printing = TRUE
-	balloon_alert(user, "printing")
+	balloon_alert(user, "распечатывание")
 	playsound(src, 'sound/machines/printer.ogg', 100, TRUE)
 
 	var/obj/item/printable
@@ -353,16 +355,16 @@
 		if("wanted")
 			var/list/crimes = target.crimes
 			if(!length(crimes))
-				balloon_alert(user, "no crimes")
+				balloon_alert(user, "нет преступлений")
 				return FALSE
 
-			input_description += "\n\n<b>WANTED FOR:</b>"
+			input_description += "\n\n<b>РАЗЫСКИВАЕТСЯ:</b>"
 			for(var/datum/crime/incident in crimes)
 				if(!incident.valid)
-					input_description += "<b>--REDACTED--</b>"
+					input_description += "<b>--РЕДАКТИРОВАНО--</b>"
 					continue
-				input_description += "\n<bCrime:</b> [incident.name]\n"
-				input_description += "<b>Details:</b> [incident.details]\n"
+				input_description += "\n<b>Преступление:</b> [incident.name]\n"
+				input_description += "<b>Детали:</b> [incident.details]\n"
 
 			var/obj/item/photo/mugshot = target.get_front_photo()
 			var/obj/item/poster/wanted/wanted_poster = new(null, mugshot.picture.picture_image, input_alias, input_description, input_header)
@@ -372,7 +374,7 @@
 		if("rapsheet")
 			var/list/crimes = target.crimes
 			if(!length(crimes))
-				balloon_alert(user, "no crimes")
+				balloon_alert(user, "нет преступлений")
 				return FALSE
 
 			var/obj/item/paper/rapsheet = target.get_rapsheet(input_alias, input_header, input_description)

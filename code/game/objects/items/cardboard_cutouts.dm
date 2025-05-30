@@ -79,7 +79,7 @@
 	pushed_over = FALSE
 	tacticool = AddComponent(/datum/component/tactical)
 
-/obj/item/cardboard_cutout/attackby(obj/item/I, mob/living/user, params)
+/obj/item/cardboard_cutout/attackby(obj/item/I, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(istype(I, /obj/item/toy/crayon))
 		change_appearance(I, user)
 		return TRUE
@@ -254,7 +254,7 @@
 	outfit = /datum/outfit/traitor_cutout
 
 /datum/cardboard_cutout/traitor/get_name()
-	return pick("Unknown", "Captain")
+	return pick("Unknown", JOB_CAPTAIN_RU)
 
 /datum/cardboard_cutout/nuclear_operative
 	name = "Nuclear Operative"

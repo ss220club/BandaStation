@@ -75,7 +75,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 // If we botch a shot, we have to start over again by inserting gold coins into the gun. Can only be done if it has no charges or gold.
-/obj/item/gun/magic/midas_hand/attackby(obj/item/I, mob/living/user, params)
+/obj/item/gun/magic/midas_hand/attackby(obj/item/I, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(charges || gold_timer)
 		balloon_alert(user, "already loaded")
@@ -140,7 +140,7 @@
 		return
 
 	var/mob/living/carbon/human/victim = user
-	victim.visible_message(span_suicide("[victim] holds the barrel of [src] to [victim.p_their()] head, lighting the fuse. It looks like [user.p_theyre()] trying to commit suicide!"))
+	victim.visible_message(span_suicide("[victim] holds the barrel of [src] to [victim.p_their()] head, lighting the fuse. Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	if(!do_after(victim, 1.5 SECONDS))
 		return
 	playsound(src, 'sound/items/weapons/gun/rifle/shot.ogg', 75, TRUE)

@@ -50,7 +50,7 @@
 	defender.visible_message(
 		span_danger("[attacker] hits [defender] with Plasma Punch!"),
 		span_userdanger("You're hit with a Plasma Punch by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		null,
 		attacker,
 	)
@@ -71,7 +71,7 @@
 	defender.visible_message(
 		span_danger("[attacker] hits [defender] with THE PLASMA FIST TECHNIQUE!"),
 		span_userdanger("You're suddenly hit with THE PLASMA FIST TECHNIQUE by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		null,
 		attacker,
 	)
@@ -103,7 +103,7 @@
 	return TRUE
 
 /datum/martial_art/plasma_fist/proc/Apotheosis(mob/living/user, mob/living/target)
-	user.say("APOTHEOSIS!!", forced="plasma fist")
+	user.say("АПОФЕОЗ!!", forced="plasma fist")
 	if (ishuman(user))
 		var/mob/living/carbon/human/human_attacker = user
 		human_attacker.set_species(/datum/species/plasmaman)
@@ -167,7 +167,7 @@
 	set desc = "Remember the martial techniques of the Plasma Fist."
 	set category = "Plasma Fist"
 
-	var/datum/martial_art/plasma_fist/martial = usr.mind.martial_art
+	var/datum/martial_art/plasma_fist/martial = GET_ACTIVE_MARTIAL_ART(src)
 	to_chat(usr, "<b><i>You clench your fists and have a flashback of knowledge...</i></b>")
 	to_chat(usr, "[span_notice("Tornado Sweep")]: Punch Punch Shove. Repulses opponent and everyone back.")
 	to_chat(usr, "[span_notice("Throwback")]: Shove Punch Shove. Throws the opponent and an item at them.")

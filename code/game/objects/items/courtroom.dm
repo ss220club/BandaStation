@@ -20,7 +20,7 @@
 	AddElement(/datum/element/kneejerk)
 
 /obj/item/gavelhammer/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] has sentenced [user.p_them()]self to death with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] has sentenced [user.p_them()]self to death with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
 	return BRUTELOSS
 
@@ -34,7 +34,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 
-/obj/item/gavelblock/attackby(obj/item/I, mob/user, params)
+/obj/item/gavelblock/attackby(obj/item/I, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(I, /obj/item/gavelhammer))
 		playsound(loc, 'sound/items/gavel.ogg', 100, TRUE)
 		user.visible_message(span_warning("[user] strikes [src] with [I]."))

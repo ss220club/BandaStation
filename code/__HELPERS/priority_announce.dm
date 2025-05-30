@@ -13,7 +13,7 @@
 #define CHAT_ALERT_DEFAULT_SPAN(string) ("<div class='chat_alert_default'>" + string + "</div>")
 #define CHAT_ALERT_COLORED_SPAN(color, string) ("<div class='chat_alert_" + color + "'>" + string + "</div>")
 
-#define ANNOUNCEMENT_COLORS list("default", "green", "blue", "pink", "yellow", "orange", "red", "purple")
+#define ANNOUNCEMENT_COLORS list("default", "green", "blue", "pink", "yellow", "orange", "red", "purple", "white") // BANDASTATION EDIT - add "white"
 
 /**
  * Make a big red text announcement to
@@ -58,14 +58,14 @@
 	var/header
 	switch(type)
 		if(ANNOUNCEMENT_TYPE_PRIORITY)
-			header = MAJOR_ANNOUNCEMENT_TITLE("Priority Announcement")
+			header = MAJOR_ANNOUNCEMENT_TITLE("Приоритетное оповещение")
 			if(length(title) > 0)
 				header += SUBHEADER_ANNOUNCEMENT_TITLE(title)
 		if(ANNOUNCEMENT_TYPE_CAPTAIN)
-			header = MAJOR_ANNOUNCEMENT_TITLE("Captain's Announcement")
-			GLOB.news_network.submit_article(text, "Captain's Announcement", "Station Announcements", null)
+			header = MAJOR_ANNOUNCEMENT_TITLE("Оповещение от капитана")
+			GLOB.news_network.submit_article(text, "Оповещение от капитана", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 		if(ANNOUNCEMENT_TYPE_SYNDICATE)
-			header = MAJOR_ANNOUNCEMENT_TITLE("Syndicate Captain's Announcement")
+			header = MAJOR_ANNOUNCEMENT_TITLE("Оповещение от капитана Синдиката")
 		else
 			header += generate_unique_announcement_header(title, sender_override)
 
@@ -90,18 +90,18 @@
 
 	if(isnull(sender_override) && players == GLOB.player_list)
 		if(length(title) > 0)
-			GLOB.news_network.submit_article(title + "<br><br>" + text, "[command_name()]", "Station Announcements", null)
+			GLOB.news_network.submit_article(title + "<br><br>" + text, "[command_name()]", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 		else
-			GLOB.news_network.submit_article(text, "[command_name()] Update", "Station Announcements", null)
+			GLOB.news_network.submit_article(text, "[command_name()]: Сообщение", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 
 /proc/print_command_report(text = "", title = null, announce=TRUE)
 	if(!title)
-		title = "Classified [command_name()] Update"
+		title = "[command_name()]: Засекреченное сообщение"
 
 	if(announce)
 		priority_announce(
-			text = "A report has been downloaded and printed out at all communications consoles.",
-			title = "Incoming Classified Message",
+			text = "Отчет был загружен и распечатан на всех консолях связи.",
+			title = "Входящее засекреченное сообщение",
 			sound = SSstation.announcer.get_rand_report_sound(),
 			has_important_message = TRUE,
 		)
@@ -126,7 +126,7 @@
  * should_play_sound - Whether the notice sound should be played or not. This can also be a callback, if you only want mobs to hear the sound based off of specific criteria.
  * color_override - optional, use the passed color instead of the default notice color.
  */
-/proc/minor_announce(message, title = "Attention:", alert = FALSE, html_encode = TRUE, list/players, sound_override, should_play_sound = TRUE, color_override, tts_override) // BANDASTATION ADDITION - "tts_override"
+/proc/minor_announce(message, title = "Внимание:", alert = FALSE, html_encode = TRUE, list/players, sound_override, should_play_sound = TRUE, color_override, tts_override) // BANDASTATION ADDITION - "tts_override"
 	if(!message)
 		return
 
@@ -151,7 +151,7 @@
 /// Sends an announcement about the level changing to players. Uses the passed in datum and the subsystem's previous security level to generate the message.
 /proc/level_announce(datum/security_level/selected_level, previous_level_number)
 	var/current_level_number = selected_level.number_level
-	var/current_level_name = selected_level.name
+	var/current_level_name = selected_level.ru_name
 	var/current_level_color = selected_level.announcement_color
 	var/current_level_sound = selected_level.sound
 
@@ -159,10 +159,10 @@
 	var/message
 
 	if(current_level_number > previous_level_number)
-		title = "Attention! Security level elevated to [current_level_name]:"
+		title = "Внимание! Код повышен до: [current_level_name]"
 		message = selected_level.elevating_to_announcement
 	else
-		title = "Attention! Security level lowered to [current_level_name]:"
+		title = "Внимание! Код снижен до: [current_level_name]"
 		message = selected_level.lowering_to_announcement
 
 	var/list/level_announcement_strings = list()
@@ -178,7 +178,7 @@
 /proc/generate_unique_announcement_header(title, sender_override)
 	var/list/returnable_strings = list()
 	if(isnull(sender_override))
-		returnable_strings += MAJOR_ANNOUNCEMENT_TITLE("[command_name()] Update")
+		returnable_strings += MAJOR_ANNOUNCEMENT_TITLE("[command_name()]: Сообщение")
 	else
 		returnable_strings += MAJOR_ANNOUNCEMENT_TITLE(sender_override)
 
@@ -192,11 +192,7 @@
 /proc/dispatch_announcement_to_players(announcement, list/players = GLOB.player_list, sound_override = null, should_play_sound = TRUE, datum/component/tts_component/tts_override = null, tts_message) // BANDASTATION ADDITION: "datum/component/tts_component/tts_override = null" & "tts_message"
 	var/sound_to_play = !isnull(sound_override) ? sound_override : 'sound/announcer/notice/notice2.ogg'
 
-	// note for later: low-hanging fruit to convert to astype() behind an experiment define whenever the 516 beta releases
-	// var/datum/callback/should_play_sound_callback = astype(should_play_sound)
-	var/datum/callback/should_play_sound_callback
-	if(istype(should_play_sound, /datum/callback))
-		should_play_sound_callback = should_play_sound
+	var/datum/callback/should_play_sound_callback = astype(should_play_sound)
 
 	for(var/mob/target in players)
 		if(isnewplayer(target) || !target.can_hear())
@@ -205,10 +201,12 @@
 		to_chat(target, announcement)
 		if(!should_play_sound || (should_play_sound_callback && !should_play_sound_callback.Invoke(target)))
 			continue
-
 		if(target.client?.prefs.read_preference(/datum/preference/toggle/sound_announcements))
-			// SEND_SOUND(target, sound(sound_to_play)) // Bandastion Removal
-			/// SS220 TTS START
+			// BANDASTATION EDIT START - TTS
+			if(!SStts220.is_enabled)
+				SEND_SOUND(target, sound(sound_to_play))
+				return
+
 			var/datum/tts_seed/announcement_tts_seed = tts_override?.tts_seed
 			if(isnull(announcement_tts_seed))
 				var/mob/living/silicon/ai/active_ai = DEFAULTPICK(active_ais(TRUE, null), null)
@@ -224,9 +222,11 @@
 				FALSE, \
 				list(/datum/singleton/sound_effect/announcement), \
 				null, \
-				sound_to_play \
+				sound_to_play, \
+				null, \
+				CHANNEL_TTS_ANNOUNCEMENT, \
 			)
-			/// SS220 TTS END
+			// BANDASTATION EDIT END - TTS
 
 #undef MAJOR_ANNOUNCEMENT_TITLE
 #undef MAJOR_ANNOUNCEMENT_TEXT

@@ -102,7 +102,7 @@
 
 		new /obj/structure/ghost_portal(get_turf(src), candidate_list)
 
-		priority_announce("Anomaly has reached critical mass. Ectoplasmic outburst detected.", "Anomaly Alert")
+		priority_announce("Аномалия достигла критической массы. Обнаружен всплеск эктоплазмы.", "Обнаружена аномалия")
 
 /**
  * Manages updating the sprite for the anomaly based on how many orbiters it has.
@@ -183,7 +183,7 @@
 		var/mob/living/basic/ghost/swarm/new_ghost = new(get_turf(src))
 		ghosts_spawned += new_ghost
 		new_ghost.ghostize(FALSE)
-		new_ghost.key = candidate_ghost.key
+		new_ghost.PossessByPlayer(candidate_ghost.key)
 		var/policy = get_policy(ROLE_ANOMALY_GHOST)
 		if(policy)
 			to_chat(new_ghost, policy)

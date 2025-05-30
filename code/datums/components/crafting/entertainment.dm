@@ -37,6 +37,16 @@
 	)
 	category = CAT_ENTERTAINMENT
 
+/datum/crafting_recipe/monkeyplush
+	name = "Monkey Plushie"
+	result = /obj/item/toy/plush/monkey
+	reqs = list(
+		/obj/item/clothing/mask/gas/monkeymask = 1,
+		/obj/item/clothing/suit/costume/monkeysuit = 1,
+		/obj/item/grown/cotton = 10,
+	)
+	category = CAT_ENTERTAINMENT
+
 /datum/crafting_recipe/mixedbouquet
 	name = "Mixed bouquet"
 	result = /obj/item/bouquet
@@ -248,7 +258,7 @@
 		/obj/item/clothing/gloves/latex = 1,
 		/obj/item/stack/cable_coil = 2,
 	)
-	category = CAT_EQUIPMENT
+	category = CAT_ENTERTAINMENT
 
 /datum/crafting_recipe/violin
 	name = "Violin"

@@ -4,9 +4,18 @@ import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
 import { NTOSData } from '../layouts/NtosWindow';
 
+export enum alert_relevancies {
+  ALERT_RELEVANCY_SAFE,
+  ALERT_RELEVANCY_WARN,
+  ALERT_RELEVANCY_PERTINENT,
+}
+
 export const NtosMain = (props) => {
   const { act, data } = useBackend<NTOSData>();
   const {
+    alert_style,
+    alert_color,
+    alert_name,
     PC_device_theme,
     show_imprint,
     programs = [],
@@ -25,8 +34,8 @@ export const NtosMain = (props) => {
   return (
     <NtosWindow
       title={
-        (PC_device_theme === 'syndicate' && 'Syndix Main Menu') ||
-        'NtOS Main Menu'
+        (PC_device_theme === 'syndicate' && 'Syndix Главное Меню') ||
+        'NtOS Главное Меню'
       }
       width={400}
       height={500}
@@ -52,6 +61,28 @@ export const NtosMain = (props) => {
                   />
                 </Stack.Item>
               ))}
+              <Stack.Item right={0}>
+                <Button
+                  className={
+                    alert_style === alert_relevancies.ALERT_RELEVANCY_PERTINENT
+                      ? 'alertIndicator alertBlink'
+                      : 'alertIndicator'
+                  }
+                  textColor={
+                    alert_style === alert_relevancies.ALERT_RELEVANCY_SAFE
+                      ? alert_color
+                      : '#000000'
+                  }
+                  backgroundColor={
+                    alert_style === alert_relevancies.ALERT_RELEVANCY_SAFE
+                      ? '#0000000'
+                      : alert_color
+                  }
+                  tooltip="The current alert level. Indicator becomes more intense when there is a threat, moreso if your department is responsible for handling it."
+                >
+                  {alert_name}
+                </Button>
+              </Stack.Item>
             </Stack>
             <Stack>
               {removable_media.map((device) => (
@@ -69,7 +100,7 @@ export const NtosMain = (props) => {
           </Section>
         )}
         <Section
-          title="Details"
+          title="Детали"
           buttons={
             <>
               {!!has_light && (
@@ -87,14 +118,14 @@ export const NtosMain = (props) => {
               )}
               <Button
                 icon="eject"
-                content="Eject ID"
+                content="Вытащить ID"
                 disabled={!proposed_login.IDInserted}
                 onClick={() => act('PC_Eject_Disk', { name: 'ID' })}
               />
               {!!show_imprint && (
                 <Button
                   icon="dna"
-                  content="Imprint ID"
+                  content="Привязать ID"
                   disabled={
                     !proposed_login.IDName ||
                     (proposed_login.IDName === login.IDName &&
@@ -108,7 +139,7 @@ export const NtosMain = (props) => {
         >
           <Table>
             <Table.Row>
-              ID Name:{' '}
+              Имя на ID:{' '}
               {show_imprint
                 ? login.IDName +
                   ' ' +
@@ -118,7 +149,7 @@ export const NtosMain = (props) => {
                 : (proposed_login.IDName ?? '')}
             </Table.Row>
             <Table.Row>
-              Assignment:{' '}
+              Назначение:{' '}
               {show_imprint
                 ? login.IDJob +
                   ' ' +
@@ -128,7 +159,7 @@ export const NtosMain = (props) => {
           </Table>
         </Section>
         {!!pai && (
-          <Section title="pAI">
+          <Section title="пИИ">
             <Table>
               <Table.Row>
                 <Table.Cell>
@@ -136,7 +167,7 @@ export const NtosMain = (props) => {
                     fluid
                     icon="eject"
                     color="transparent"
-                    content="Eject pAI"
+                    content="Вытащить пИИ"
                     onClick={() =>
                       act('PC_Pai_Interact', {
                         option: 'eject',
@@ -151,7 +182,7 @@ export const NtosMain = (props) => {
                     fluid
                     icon="cat"
                     color="transparent"
-                    content="Configure pAI"
+                    content="Настроить пИИ"
                     onClick={() =>
                       act('PC_Pai_Interact', {
                         option: 'interact',
@@ -178,7 +209,7 @@ const ProgramsTable = (props) => {
   );
 
   return (
-    <Section title="Programs">
+    <Section title="Программы">
       <Table>
         {filtered_programs.map((program) => (
           <Table.Row key={program.name}>
@@ -200,7 +231,7 @@ const ProgramsTable = (props) => {
                 <Button
                   color="transparent"
                   icon="times"
-                  tooltip="Close program"
+                  tooltip="Закрыть программу"
                   tooltipPosition="left"
                   onClick={() =>
                     act('PC_killprogram', {

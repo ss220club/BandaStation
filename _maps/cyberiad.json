@@ -5,6 +5,7 @@
 	"map_file": "Cyberiad.dmm",
 	"fluff_name": "ИСН Кибериада",
 	"welcome_sound_override": "modular_bandastation/aesthetics_sounds/sound/welcome_sounds/welcome_cyberiad.ogg",
+	"main_floor": 2,
 	"shuttles": {
 		"cargo": "cargo_box",
 		"ferry": "ferry_fancy",
@@ -35,6 +36,9 @@
         },
         "Magistrate": {
             "spawn_positions": 1
+        },
+        "Explorer": {
+            "spawn_positions": 4
         }
 	}
 }

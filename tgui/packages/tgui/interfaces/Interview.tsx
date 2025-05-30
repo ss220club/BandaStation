@@ -7,18 +7,21 @@ import {
   Section,
   TextArea,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 type Data = {
-  connected: boolean;
-  is_admin: boolean;
+  connected: BooleanLike;
+  is_admin: BooleanLike;
   questions: Question[];
   queue_pos: number;
-  read_only: boolean;
+  read_only: BooleanLike;
   status: string;
   welcome_message: string;
+  centcom_connected: BooleanLike;
+  has_permabans: BooleanLike;
 };
 
 type Question = {
@@ -63,6 +66,8 @@ export const Interview = (props) => {
     read_only,
     status,
     welcome_message = '',
+    centcom_connected,
+    has_permabans,
   } = data;
 
   const allAnswered = questions.every((q) => q.response);
@@ -70,18 +75,18 @@ export const Interview = (props) => {
 
   return (
     <Window
-      width={500}
+      width={550}
       height={600}
       canClose={is_admin || status === 'interview_approved'}
     >
       <Window.Content scrollable>
         {(!read_only && (
-          <Section title="Welcome!">
+          <Section title="Приветствуем!">
             <p>{linkifyText(welcome_message)}</p>
           </Section>
         )) || <RenderedStatus status={status} queue_pos={queue_pos} />}
         <Section
-          title="Questionnaire"
+          title="Вопросы"
           buttons={
             <span>
               <Button
@@ -90,7 +95,7 @@ export const Interview = (props) => {
                 icon="envelope"
                 tooltip={
                   !allAnswered &&
-                  `Please answer all questions.
+                  `Пожалуйста, ответьте на все вопросы.
                      ${numAnswered} / ${questions.length}`
                 }
               >
@@ -107,6 +112,19 @@ export const Interview = (props) => {
                   <Button color="bad" onClick={() => act('deny')}>
                     Deny
                   </Button>
+                  {!!centcom_connected && (
+                    <Button
+                      color={has_permabans ? 'bad' : 'average'}
+                      tooltip={
+                        has_permabans
+                          ? 'This user has permabans in their history!'
+                          : ''
+                      }
+                      onClick={() => act('check_centcom')}
+                    >
+                      Check Centcom
+                    </Button>
+                  )}
                 </span>
               )}
             </span>
@@ -115,20 +133,20 @@ export const Interview = (props) => {
           {!read_only && (
             <>
               <Box as="p" color="label">
-                Please answer the following questions.
+                Пожалуйста, ответьте на вопросы ниже.
                 <ul>
                   <li>
-                    You can press enter key or the save button to save an
-                    answer.
+                    Чтобы сохранить ответ, вы можете нажать Enter, или кнопку
+                    Save.
                   </li>
                   <li>
-                    You can edit your answers until you press the submit button.
+                    Вы можете редактировать ответы, пока не нажмете Submit.
                   </li>
-                  <li>Press SUBMIT when you are done.</li>
+                  <li>Нажмите SUBMIT, когда закончите.</li>
                 </ul>
               </Box>
               <NoticeBox info align="center">
-                You will not be able to edit your answers after submitting.
+                Вы не сможете редактировать свои ответы после отправки.
               </NoticeBox>
             </>
           )}
@@ -146,14 +164,13 @@ const RenderedStatus = (props: { status: string; queue_pos: number }) => {
 
   switch (status) {
     case STATUS.Approved:
-      return <NoticeBox success>This interview was approved.</NoticeBox>;
+      return <NoticeBox success>Ваша заявка одобрена.</NoticeBox>;
     case STATUS.Denied:
-      return <NoticeBox danger>This interview was denied.</NoticeBox>;
+      return <NoticeBox danger>Ваша заявка была отклонена.</NoticeBox>;
     default:
       return (
         <NoticeBox info>
-          Your answers have been submitted. You are position {queue_pos} in
-          queue.
+          Ваши ответы отправлены. Ваша позиция в очереди: {queue_pos}.
         </NoticeBox>
       );
   }
@@ -193,14 +210,14 @@ const QuestionArea = (props: Question) => {
       }
     >
       <p>{linkifyText(question)}</p>
-      {((read_only || is_admin) && (
+      {read_only || is_admin ? (
         <BlockQuote>{response || 'No response.'}</BlockQuote>
-      )) || (
+      ) : (
         <TextArea
           fluid
           height={10}
           maxLength={500}
-          onChange={(e, input) => setUserInput(input)}
+          onChange={setUserInput}
           onEnter={saveResponse}
           placeholder="Write your response here, max of 500 characters. Press enter to submit."
           value={response || undefined}

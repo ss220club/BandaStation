@@ -1,12 +1,13 @@
 /datum/antagonist/blob
 	name = "\improper Blob"
-	roundend_category = "blobs"
+	roundend_category = "Блобы"
 	antagpanel_category = ANTAG_GROUP_BIOHAZARDS
 	show_to_ghosts = TRUE
 	show_in_antagpanel = FALSE
 	job_rank = ROLE_BLOB
 	ui_name = "AntagInfoBlob"
 	stinger_sound = 'sound/music/antag/blobalert.ogg'
+	antag_hud_name = "blob"
 	/// Action to release a blob infection
 	var/datum/action/innate/blobpop/pop_action
 	/// Initial points for a human blob

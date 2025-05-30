@@ -5,9 +5,9 @@
 	icon_state = "hotdog-vendor"
 	icon_deny = "hotdog-vendor-deny"
 	panel_type = "panel17"
-	product_slogans = "Meatier than ever!;Now with 20% more MSG!;HOTDOGS!;Now Tirizan-friendly!"
-	product_ads = "Your best and only automatic hotdog dispenser!;Serving you the finest buns since 2469!;Comes in 12 different flavors!"
-	vend_reply = "Have a scrumptious meal!"
+	product_slogans = "Мяснее не бывает!;Теперь на 20% больше глутамата натрия!;ХОТ-ДОГИ!;Теперь подходит для Тиризана!"
+	product_ads = "Ваш лучший и единственный автоматический раздатчик хот-догов!;Подаем вам лучшие булочки с 2469 года!;Доступно 12 разных вкусов!"
+	vend_reply = "Приятного аппетита!"
 	light_mask = "hotdog-vendor-light-mask"
 	default_price = PAYCHECK_LOWER
 	product_categories = list(
@@ -51,6 +51,9 @@
 	icon_state = "refill_snack"
 
 /// Cute little thing that sets it apart from the other food vending mahicnes. I mean, you don't find this every day.
-/obj/machinery/vending/hotdog/on_dispense(obj/item/vended_item)
+/obj/machinery/vending/hotdog/on_dispense(obj/item/vended_item, dispense_returned = FALSE)
+	// Only apply to newly dispensed items
+	if(dispense_returned)
+		return
 	if(istype(vended_item, /obj/item/food))
 		ADD_TRAIT(vended_item, TRAIT_FOOD_CHEF_MADE, VENDING_MACHINE_TRAIT)

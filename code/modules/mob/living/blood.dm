@@ -23,7 +23,7 @@
 			if(satiety > 80)
 				nutrition_ratio *= 1.25
 			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR * seconds_per_tick)
-			blood_volume = min(blood_volume + (BLOOD_REGEN_FACTOR * nutrition_ratio * seconds_per_tick), BLOOD_VOLUME_NORMAL)
+			blood_volume = min(blood_volume + (BLOOD_REGEN_FACTOR * physiology.blood_regen_mod * nutrition_ratio * seconds_per_tick), BLOOD_VOLUME_NORMAL)
 
 	//Bloodloss from wounds
 	var/temp_bleed = 0
@@ -45,30 +45,30 @@
 	// Some effects are halved mid-combat.
 	var/determined_mod = has_status_effect(/datum/status_effect/determined) ? 0.5 : 0
 
-	var/word = pick("dizzy","woozy","faint")
+	var/word = pick("головокружение","дурость","слабость")
 	switch(blood_volume)
 		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
 			if(SPT_PROB(7.5, seconds_per_tick))
-				to_chat(src, span_userdanger("Blood starts to tear your skin apart. You're going to burst!"))
+				to_chat(src, span_userdanger("Кровь начинает разрывать вашу кожу. Вы сейчас лопнете!"))
 				investigate_log("has been gibbed by having too much blood.", INVESTIGATE_DEATHS)
 				inflate_gib()
 		// Way too much blood!
 		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
 			if(SPT_PROB(5, seconds_per_tick))
-				to_chat(src, span_warning("You feel your skin swelling."))
+				to_chat(src, span_warning("Вы чувствуете, как ваша кожа опухает."))
 		// Too much blood
 		if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
 			if(SPT_PROB(5, seconds_per_tick))
-				to_chat(src, span_warning("You feel terribly bloated."))
+				to_chat(src, span_warning("Вы чувствуете, как ужасно вздулись."))
 		// Low blood but not a big deal in the immediate
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			if(SPT_PROB(2.5, seconds_per_tick))
 				set_eye_blur_if_lower(2 SECONDS * determined_mod)
 				if(prob(50))
-					to_chat(src, span_danger("You feel [word]. It's getting a bit hard to breathe."))
+					to_chat(src, span_danger("Вы чувствуете [word]. Становится немного сложнее дышать."))
 					losebreath += 0.5 * determined_mod * seconds_per_tick
 				else if(getStaminaLoss() < 25 * determined_mod)
-					to_chat(src, span_danger("You feel [word]. It's getting a bit hard to focus."))
+					to_chat(src, span_danger("Вы чувствуете [word]. Становится немного сложнее сфокусироваться."))
 					adjustStaminaLoss(10 * determined_mod * REM * seconds_per_tick)
 		// Pretty low blood, getting dangerous!
 		if(BLOOD_VOLUME_RISKY to BLOOD_VOLUME_OKAY)
@@ -76,10 +76,10 @@
 				set_eye_blur_if_lower(2 SECONDS * determined_mod)
 				set_dizzy_if_lower(2 SECONDS * determined_mod)
 				if(prob(50))
-					to_chat(src, span_bolddanger("You feel very [word]. It's getting hard to breathe!"))
+					to_chat(src, span_bolddanger("Вы сильно чувствуете [word]. Становится сложнее дышать!"))
 					losebreath += 1 * determined_mod * seconds_per_tick
 				else if(getStaminaLoss() < 40 * determined_mod)
-					to_chat(src, span_bolddanger("You feel very [word]. It's getting hard to stay awake!"))
+					to_chat(src, span_bolddanger("Вы сильно чувствуете [word]. Становится сложнее оставаться в сознании!"))
 					adjustStaminaLoss(15 * determined_mod * REM * seconds_per_tick)
 		// Very low blood, danger!!
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_RISKY)
@@ -87,16 +87,16 @@
 				set_eye_blur_if_lower(4 SECONDS * determined_mod)
 				set_dizzy_if_lower(4 SECONDS * determined_mod)
 				if(prob(50))
-					to_chat(src, span_userdanger("You feel extremely [word]! It's getting very hard to breathe!"))
+					to_chat(src, span_userdanger("Вы очень сильно чувствуете [word]! Становится гораздо сложнее дышать!"))
 					losebreath += 1.5 * determined_mod * seconds_per_tick
 				else if(getStaminaLoss() < 80 * determined_mod)
-					to_chat(src, span_userdanger("You feel extremely [word]! It's getting very hard to stay awake!"))
+					to_chat(src, span_userdanger("Вы очень сильно чувствуете [word]! Становится гораздо сложнее оставаться в сознании!"))
 					adjustStaminaLoss(20 * determined_mod * REM * seconds_per_tick)
 		// Critically low blood, death is near! Adrenaline won't help you here.
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 			if(SPT_PROB(7.5, seconds_per_tick))
 				Unconscious(rand(1 SECONDS, 2 SECONDS))
-				to_chat(src, span_userdanger("You black out for a moment!"))
+				to_chat(src, span_userdanger("Вы на мгновение вырубаетесь!"))
 		// Instantly die upon this threshold
 		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 			if(!HAS_TRAIT(src, TRAIT_NODEATH))
@@ -174,36 +174,35 @@
 		if(-INFINITY to 0)
 			return
 		if(0 to 1)
-			bleeding_severity = "You feel light trickles of blood across your skin"
+			bleeding_severity = "Вы чувствуете легкие струйки крови на коже"
 			next_cooldown *= 2.5
 		if(1 to 3)
-			bleeding_severity = "You feel a small stream of blood running across your body"
+			bleeding_severity = "Вы чувствуете небольшую струйку крови, текущую через ваше тело"
 			next_cooldown *= 2
 		if(3 to 5)
-			bleeding_severity = "You skin feels clammy from the flow of blood leaving your body"
+			bleeding_severity = "Вы чувствуете, как ваша кожа становится липкой от протекающей крови"
 			next_cooldown *= 1.7
 		if(5 to 7)
-			bleeding_severity = "Your body grows more and more numb as blood streams out"
+			bleeding_severity = "Вы чувствуете, как ваше тело немеет всё больше и больше по мере кровотечения"
 			next_cooldown *= 1.5
 		if(7 to INFINITY)
-			bleeding_severity = "Your heartbeat thrashes wildly trying to keep up with your bloodloss"
+			bleeding_severity = "Ваше сердце бешенно стучит, пытаясь справиться с кровопотерей"
 
-	var/rate_of_change = ", but it's getting better." // if there's no wounds actively getting bloodier or maintaining the same flow, we must be getting better!
+	var/rate_of_change = ", но кровотечение чуть замедляется." // if there's no wounds actively getting bloodier or maintaining the same flow, we must be getting better!
 	if(HAS_TRAIT(src, TRAIT_COAGULATING)) // if we have coagulant, we're getting better quick
-		rate_of_change = ", but it's clotting up quickly!"
+		rate_of_change = ", и кровь быстро сворачивается!"
 	else
 		// flick through our wounds to see if there are any bleeding ones getting worse or holding flow (maybe move this to handle_blood and cache it so we don't need to cycle through the wounds so much)
-		for(var/i in all_wounds)
-			var/datum/wound/iter_wound = i
+		for(var/datum/wound/iter_wound as anything in all_wounds)
 			if(!iter_wound.blood_flow)
 				continue
 			var/iter_wound_roc = iter_wound.get_bleed_rate_of_change()
 			switch(iter_wound_roc)
 				if(BLOOD_FLOW_INCREASING) // assume the worst, if one wound is getting bloodier, we focus on that
-					rate_of_change = ", <b>and it's getting worse!</b>"
+					rate_of_change = ", <b>и всё становится только хуже!</b>"
 					break
 				if(BLOOD_FLOW_STEADY) // our best case now is that our bleeding isn't getting worse
-					rate_of_change = ", and it's holding steady."
+					rate_of_change = ", и скорость кровопотери не изменяется."
 				if(BLOOD_FLOW_DECREASING) // this only matters if none of the wounds fit the above two cases, included here for completeness
 					continue
 
@@ -219,17 +218,16 @@
 
 /mob/living/carbon/restore_blood()
 	blood_volume = BLOOD_VOLUME_NORMAL
-	for(var/i in bodyparts)
-		var/obj/item/bodypart/BP = i
-		BP.setBleedStacks(0)
+	for(var/obj/item/bodypart/bodypart_to_restore as anything in bodyparts)
+		bodypart_to_restore.setBleedStacks(0)
 
 /****************************************************
 				BLOOD TRANSFERS
 ****************************************************/
 
 //Gets blood from mob to a container or other mob, preserving all data in it.
-/mob/living/proc/transfer_blood_to(atom/movable/AM, amount, forced, ignore_incompatibility)
-	if(!blood_volume || !AM.reagents)
+/mob/living/proc/transfer_blood_to(atom/movable/receiver, amount, forced, ignore_incompatibility)
+	if(!blood_volume || !receiver.reagents)
 		return FALSE
 	if(blood_volume < BLOOD_VOLUME_BAD && !forced)
 		return FALSE
@@ -245,24 +243,24 @@
 
 	var/list/blood_data = get_blood_data(blood_id)
 
-	if(iscarbon(AM))
-		var/mob/living/carbon/C = AM
-		if(blood_id == C.get_blood_id())//both mobs have the same blood substance
+	if(iscarbon(receiver))
+		var/mob/living/carbon/carbon_receiver = receiver
+		if(blood_id == carbon_receiver.get_blood_id()) //both mobs have the same blood substance
 			if(blood_id == /datum/reagent/blood) //normal blood
 				if(blood_data["viruses"])
-					for(var/thing in blood_data["viruses"])
-						var/datum/disease/D = thing
-						if((D.spread_flags & DISEASE_SPREAD_SPECIAL) || (D.spread_flags & DISEASE_SPREAD_NON_CONTAGIOUS))
+					for(var/datum/disease/blood_disease as anything in blood_data["viruses"])
+						if((blood_disease.spread_flags & DISEASE_SPREAD_SPECIAL) || (blood_disease.spread_flags & DISEASE_SPREAD_NON_CONTAGIOUS))
 							continue
-						C.ForceContractDisease(D)
-				if(!(blood_data["blood_type"] in get_safe_blood(C.dna.blood_type)) && !(ignore_incompatibility))
-					C.reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
+						carbon_receiver.ForceContractDisease(blood_disease)
+				var/datum/blood_type/blood_type = blood_data["blood_type"]
+				if(!ignore_incompatibility && !(blood_type.type_key() in carbon_receiver.dna.blood_type.compatible_types))
+					carbon_receiver.reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
 					return TRUE
 
-			C.blood_volume = min(C.blood_volume + round(amount, 0.1), BLOOD_VOLUME_MAX_LETHAL)
+			carbon_receiver.blood_volume = min(carbon_receiver.blood_volume + round(amount, 0.1), BLOOD_VOLUME_MAX_LETHAL)
 			return TRUE
 
-	AM.reagents.add_reagent(blood_id, amount, blood_data, bodytemperature)
+	receiver.reagents.add_reagent(blood_id, amount, blood_data, bodytemperature)
 	return TRUE
 
 
@@ -275,16 +273,15 @@
 		//set the blood data
 		blood_data["viruses"] = list()
 
-		for(var/thing in diseases)
-			var/datum/disease/D = thing
-			blood_data["viruses"] += D.Copy()
+		for(var/datum/disease/disease as anything in diseases)
+			blood_data["viruses"] += disease.Copy()
 
 		blood_data["blood_DNA"] = dna.unique_enzymes
 		if(LAZYLEN(disease_resistances))
 			blood_data["resistances"] = disease_resistances.Copy()
 		var/list/temp_chem = list()
-		for(var/datum/reagent/R in reagents.reagent_list)
-			temp_chem[R.type] = R.volume
+		for(var/datum/reagent/blood_reagent in reagents.reagent_list)
+			temp_chem[blood_reagent.type] = blood_reagent.volume
 		blood_data["trace_chem"] = list2params(temp_chem)
 		if(mind)
 			blood_data["mind"] = mind
@@ -303,9 +300,8 @@
 		blood_data["features"] = dna.features
 		blood_data["factions"] = faction
 		blood_data["quirks"] = list()
-		for(var/V in quirks)
-			var/datum/quirk/T = V
-			blood_data["quirks"] += T.type
+		for(var/datum/quirk/quirk as anything in quirks)
+			blood_data["quirks"] += quirk.type
 		return blood_data
 
 //get the id of the substance this mob use as blood.
@@ -327,94 +323,86 @@
 		return
 	return /datum/reagent/blood
 
-// This is has more potential uses, and is probably faster than the old proc.
-/proc/get_safe_blood(bloodtype)
-	. = list()
-	if(!bloodtype)
-		return
+/// Returns the blood_type datum that corresponds to the string id key in GLOB.blood_types
+/proc/get_blood_type(id)
+	return GLOB.blood_types[id]
 
-	var/static/list/bloodtypes_safe = list(
-		"A-" = list("A-", "O-"),
-		"A+" = list("A-", "A+", "O-", "O+"),
-		"B-" = list("B-", "O-"),
-		"B+" = list("B-", "B+", "O-", "O+"),
-		"AB-" = list("A-", "B-", "O-", "AB-"),
-		"AB+" = list("A-", "A+", "B-", "B+", "O-", "O+", "AB-", "AB+"),
-		"O-" = list("O-"),
-		"O+" = list("O-", "O+"),
-		"L" = list("L"),
-		"U" = list("A-", "A+", "B-", "B+", "O-", "O+", "AB-", "AB+", "L", "U")
-	)
-
-	var/safe = bloodtypes_safe[bloodtype]
-	if(safe)
-		. = safe
+/// Returns the hex color string of a given blood_type datum given an assoc list of blood_DNA e.g. ("Unknown Blood Type", "*X")
+/proc/get_blood_dna_color(list/blood_DNA)
+	var/datum/blood_type/blood_type
+	if(length(blood_DNA))
+		var/last_added_bloodtype_key = blood_DNA[length(blood_DNA)]
+		blood_type = blood_DNA[last_added_bloodtype_key]
+	if(!istype(blood_type))
+		blood_type = get_blood_type(blood_type) || random_human_blood_type()
+	return blood_type.get_color()
 
 /**
  * Returns TRUE if src is compatible with donor's blood, otherwise FALSE.
  * * donor: Carbon mob, the one that is donating blood.
  */
 /mob/living/carbon/proc/get_blood_compatibility(mob/living/carbon/donor)
-	var/patient_blood_data = get_blood_data(get_blood_id())
-	var/donor_blood_data = donor.get_blood_data(donor.get_blood_id())
-	return donor_blood_data["blood_type"] in get_safe_blood(patient_blood_data["blood_type"])
+	var/datum/blood_type/patient_blood_data = dna.blood_type
+	var/datum/blood_type/donor_blood_data = donor.dna.blood_type
+	return (donor_blood_data in patient_blood_data.compatible_types)
 
 //to add a splatter of blood or other mob liquid.
-/mob/living/proc/add_splatter_floor(turf/T, small_drip)
-	if(get_blood_id() != /datum/reagent/blood)
+/mob/living/proc/add_splatter_floor(turf/splatter_turf, small_drip, skip_reagents_check = FALSE)
+	if(!skip_reagents_check && !(get_blood_id() in list(/datum/reagent/blood, /datum/reagent/toxin/acid)))
 		return
-	if(!T)
-		T = get_turf(src)
-	if(isclosedturf(T) || (isgroundlessturf(T) && !GET_TURF_BELOW(T)))
+
+	if(!splatter_turf)
+		splatter_turf = get_turf(src)
+	if(isclosedturf(splatter_turf) || (isgroundlessturf(splatter_turf) && !GET_TURF_BELOW(splatter_turf)))
 		return
 
 	var/list/temp_blood_DNA
 	if(small_drip)
 		// Only a certain number of drips (or one large splatter) can be on a given turf.
-		var/obj/effect/decal/cleanable/blood/drip/drop = locate() in T
+		var/obj/effect/decal/cleanable/blood/drip/drop = locate() in splatter_turf
 		if(drop)
 			if(drop.drips < 5)
 				drop.drips++
 				drop.add_overlay(pick(drop.random_icon_states))
-				drop.transfer_mob_blood_dna(src)
+				drop.add_mob_blood(src)
 				return
 			else
 				temp_blood_DNA = GET_ATOM_BLOOD_DNA(drop) //we transfer the dna from the drip to the splatter
 				qdel(drop)//the drip is replaced by a bigger splatter
 		else
-			drop = new(T, get_static_viruses())
-			drop.transfer_mob_blood_dna(src)
+			drop = new(splatter_turf, get_static_viruses())
+			drop.add_mob_blood(src)
 			return
 
 	// Find a blood decal or create a new one.
-	var/obj/effect/decal/cleanable/blood/B = locate() in T
-	if(!B)
-		B = new /obj/effect/decal/cleanable/blood/splatter(T, get_static_viruses())
-	if(QDELETED(B)) //Give it up
+	var/obj/effect/decal/cleanable/blood/blood_spew = locate() in splatter_turf
+	if(!blood_spew)
+		blood_spew = new /obj/effect/decal/cleanable/blood/splatter(splatter_turf, get_static_viruses())
+	if(QDELETED(blood_spew)) //Give it up
 		return
-	B.bloodiness = min((B.bloodiness + BLOOD_AMOUNT_PER_DECAL), BLOOD_POOL_MAX)
-	B.transfer_mob_blood_dna(src) //give blood info to the blood decal.
+	blood_spew.bloodiness = min((blood_spew.bloodiness + BLOOD_AMOUNT_PER_DECAL), BLOOD_POOL_MAX)
+	blood_spew.add_mob_blood(src) //give blood info to the blood decal.
 	if(temp_blood_DNA)
-		B.add_blood_DNA(temp_blood_DNA)
+		blood_spew.add_blood_DNA(temp_blood_DNA, no_visuals = small_drip)
 
-/mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
-	if(!HAS_TRAIT(src, TRAIT_NOBLOOD))
-		..()
+/mob/living/carbon/human/add_splatter_floor(turf/splatter_turf, small_drip, skip_reagents_check = TRUE)
+	if(!HAS_TRAIT(src, TRAIT_NOBLOOD) && !dna?.blood_type.no_bleed_overlays)
+		. = ..()
 
-/mob/living/carbon/alien/add_splatter_floor(turf/T, small_drip)
-	if(!T)
-		T = get_turf(src)
-	var/obj/effect/decal/cleanable/xenoblood/B = locate() in T.contents
-	if(!B)
-		B = new(T)
-	B.add_blood_DNA(list("UNKNOWN DNA" = "X*"))
+/mob/living/carbon/alien/add_splatter_floor(turf/splatter_turf, small_drip, skip_reagents_check)
+	if(!splatter_turf)
+		splatter_turf = get_turf(src)
+	var/obj/effect/decal/cleanable/xenoblood/xeno_blood_splatter = locate() in splatter_turf.contents
+	if(!xeno_blood_splatter)
+		xeno_blood_splatter = new(splatter_turf)
+	xeno_blood_splatter.add_blood_DNA(list("UNKNOWN DNA" = BLOOD_TYPE_XENO))
 
-/mob/living/silicon/robot/add_splatter_floor(turf/T, small_drip)
-	if(!T)
-		T = get_turf(src)
-	var/obj/effect/decal/cleanable/oil/B = locate() in T.contents
-	if(!B)
-		B = new(T)
+/mob/living/silicon/robot/add_splatter_floor(turf/splatter_turf, small_drip, skip_reagents_check)
+	if(!splatter_turf)
+		splatter_turf = get_turf(src)
+	var/obj/effect/decal/cleanable/oil/oil_splatter = locate() in splatter_turf.contents
+	if(!oil_splatter)
+		oil_splatter = new(splatter_turf)
 
 /mob/living/proc/get_blood_alcohol_content()
 	var/blood_alcohol_content = 0

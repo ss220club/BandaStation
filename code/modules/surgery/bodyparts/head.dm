@@ -6,7 +6,7 @@
 	max_damage = LIMB_MAX_HP_CORE
 	body_zone = BODY_ZONE_HEAD
 	body_part = HEAD
-	plaintext_zone = "head"
+	plaintext_zone = "голова"
 	w_class = WEIGHT_CLASS_BULKY //Quite a hefty load
 	slowdown = 1 //Balancing measure
 	throw_range = 2 //No head bowling
@@ -17,7 +17,7 @@
 	scars_covered_by_clothes = FALSE
 	grind_results = null
 	is_dimorphic = TRUE
-	unarmed_attack_verbs = list("bite", "chomp")
+	unarmed_attack_verbs = list("кусает", "грызет")
 	unarmed_attack_effect = ATTACK_EFFECT_BITE
 	unarmed_attack_sound = 'sound/items/weapons/bite.ogg'
 	unarmed_miss_sound = 'sound/items/weapons/bite.ogg'
@@ -43,7 +43,7 @@
 	var/hair_alpha = 255
 	/// Is the hair currently hidden by something?
 	var/hair_hidden = FALSE
-	/// Lazy initialized hashset of all hair masks that should be applied
+	/// Lazy initialized hashset of all hair mask types that should be applied
 	var/list/hair_masks
 
 	///Facial hair style
@@ -170,7 +170,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/bodypart/head/get_limb_icon(dropped)
+/obj/item/bodypart/head/get_limb_icon(dropped, mob/living/carbon/update_on)
 	. = ..()
 
 	. += get_hair_and_lips_icon(dropped)
@@ -236,6 +236,7 @@
 	px_y = 0
 	bodypart_flags = BODYPART_UNREMOVABLE
 	max_damage = LIMB_MAX_HP_ALIEN_CORE
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	bodytype = BODYTYPE_ALIEN | BODYTYPE_ORGANIC
 	bodyshape = BODYSHAPE_HUMANOID
 
@@ -250,4 +251,5 @@
 	px_y = 0
 	bodypart_flags = BODYPART_UNREMOVABLE
 	max_damage = LIMB_MAX_HP_ALIEN_LARVA
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	bodytype = BODYTYPE_LARVA_PLACEHOLDER | BODYTYPE_ORGANIC

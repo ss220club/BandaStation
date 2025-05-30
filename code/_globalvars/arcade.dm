@@ -63,6 +63,7 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 	/obj/item/toy/plush/abductor = 2,
 	/obj/item/toy/plush/abductor/agent = 2,
 	/obj/item/toy/plush/shark = 2,
+	/obj/item/toy/plush/monkey = 2,
 	/obj/item/storage/belt/military/snack/full = 2,
 	/obj/item/toy/brokenradio = 2,
 	/obj/item/toy/braintoy = 2,
@@ -72,4 +73,5 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 	/obj/item/clothing/glasses/trickblindfold = 2,
 	/obj/item/clothing/mask/party_horn = 2,
 	/obj/item/storage/box/party_poppers = 2,
+	/obj/item/toy/plush/pig = 1, /// BANDASTATION ADDITION - Pig toy
 ))

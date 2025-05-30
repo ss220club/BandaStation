@@ -4,7 +4,7 @@
 		)
 	. = ..()
 
-/obj/machinery/vending/chefdrobe/Initialize(mapload)
+/obj/machinery/vending/wardrobe/chef_wardrobe/Initialize(mapload)
 	products += list(
 		/obj/item/clothing/under/rank/civilian/chef/red = 2,
 		/obj/item/clothing/suit/chef/red = 2,

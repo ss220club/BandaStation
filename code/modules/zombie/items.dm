@@ -11,7 +11,7 @@
 	bare_wound_bonus = 15
 	sharpness = SHARP_EDGED
 
-/obj/item/mutant_hand/zombie/afterattack(atom/target, mob/user, click_parameters)
+/obj/item/mutant_hand/zombie/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	if(ishuman(target))
 		try_to_zombie_infect(target, user, user.zone_selected)
 	else if(isliving(target))
@@ -29,7 +29,7 @@
 		return
 
 	// spaceacillin has a 75% chance to block infection
-	if(HAS_TRAIT(target, TRAIT_VIRUS_RESISTANCE) && prob(75))
+	if(HAS_TRAIT(target, TRAIT_VIRUS_RESISTANCE) && !HAS_TRAIT(target, TRAIT_IMMUNODEFICIENCY) && prob(75))
 		return
 
 	var/obj/item/bodypart/actual_limb = target.get_bodypart(def_zone)
@@ -59,7 +59,7 @@
 		to_chat(user, span_alien("You see [target] twitch for a moment as [target.p_their()] head is covered in \a [infection] - [target.p_Theyve()] been infected."))
 
 /obj/item/mutant_hand/zombie/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is ripping [user.p_their()] brains out! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is ripping [user.p_their()] brains out! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	var/obj/item/bodypart/head = user.get_bodypart(BODY_ZONE_HEAD)
 	if(head)
 		head.dismember()

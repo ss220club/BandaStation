@@ -16,7 +16,7 @@
 	announce_when = 10
 
 /datum/round_event/ghost_role/space_dragon/announce(fake)
-	priority_announce("A large organic energy flux has been recorded near [station_name()], please stand by.", "Lifesign Alert")
+	priority_announce("Зафиксирован большой поток органической энергии вблизи станции [station_name()]. Будьте наготове.", "Неопознанные формы жизни")
 
 /datum/round_event/ghost_role/space_dragon/spawn_role()
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(check_jobban = ROLE_SPACE_DRAGON, role = ROLE_SPACE_DRAGON, alert_pic = /mob/living/basic/space_dragon, amount_to_pick = 1)
@@ -26,7 +26,7 @@
 	if(isnull(spawn_location))
 		return MAP_ERROR
 	var/mob/living/basic/space_dragon/dragon = new(spawn_location)
-	dragon.key = chosen_one.key
+	dragon.PossessByPlayer(chosen_one.key)
 	dragon.mind.add_antag_datum(/datum/antagonist/space_dragon)
 	playsound(dragon, 'sound/effects/magic/ethereal_exit.ogg', 50, TRUE, -1)
 	message_admins("[ADMIN_LOOKUPFLW(dragon)] has been made into a Space Dragon by an event.")

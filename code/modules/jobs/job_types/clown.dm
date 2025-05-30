@@ -1,11 +1,11 @@
 /datum/job/clown
 	title = JOB_CLOWN
-	description = "Entertain the crew, make bad jokes, go on a holy quest to find bananium, HONK!"
+	description = "Веселите экипаж, шутите несмешные шутки, выполните священное задание по поиску бананиума, ХОНК!"
 	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = SUPERVISOR_HOP
+	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "CLOWN"
 
@@ -41,6 +41,10 @@
 /datum/job/clown/after_spawn(mob/living/spawned, client/player_client)
 	if (ishuman(spawned))
 		spawned.apply_pref_name(/datum/preference/name/clown, player_client)
+		if(check_holidays(APRIL_FOOLS)) // Clown blood is real
+			var/mob/living/carbon/human/human_clown = spawned
+			human_clown.set_blood_type(get_blood_type(BLOOD_TYPE_CLOWN))
+
 	return ..()
 
 /datum/outfit/job/clown

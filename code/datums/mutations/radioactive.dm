@@ -1,8 +1,8 @@
 /datum/mutation/human/radioactive
 	name = "Radioactivity"
-	desc = "A volatile mutation that causes the host to sent out deadly beta radiation. This affects both the hosts and their surroundings."
+	desc = "Нестабильная мутация, которая заставляет носителя излучать смертельные бета-частицы. Мутация влияет на носителя и его окружение."
 	quality = NEGATIVE
-	text_gain_indication = span_warning("You can feel it in your bones!")
+	text_gain_indication = span_warning("Ты ощущаешь, как что-то проходит через твои клетки и кости!")
 	instability = NEGATIVE_STABILITY_MAJOR
 	difficulty = 8
 	power_coeff = 1
@@ -19,12 +19,15 @@
 
 /datum/mutation/human/radioactive/on_acquiring(mob/living/carbon/human/acquirer)
 	. = ..()
+	if(!.)
+		return
 	var/datum/component/radioactive_emitter/radioactivity_source = make_radioactive(acquirer)
 	radioactivity_source_ref = WEAKREF(radioactivity_source)
 
-/datum/mutation/human/radioactive/modify()
+/datum/mutation/human/radioactive/setup()
 	. = ..()
-	make_radioactive(owner)
+	if(!QDELETED(owner))
+		make_radioactive(owner)
 
 /**
  * Makes the passed mob radioactive, or if they're already radioactive,

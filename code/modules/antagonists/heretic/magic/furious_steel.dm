@@ -16,8 +16,8 @@
 
 	spell_requirements = NONE
 
-	active_msg = "You summon forth three blades of furious silver."
-	deactive_msg = "You conceal the blades of furious silver."
+	active_msg = "Вы вызываете три клинка из яростного серебра."
+	deactive_msg = "Ты скрываешь клинки из яростного серебра."
 	cast_range = 20
 	projectile_type = /obj/projectile/floating_blade
 	projectile_amount = 3
@@ -66,22 +66,27 @@
 	if(blade_effect)
 		stack_trace("[type] had an existing blade effect in on_activation. This might be an exploit, and should be investigated.")
 		UnregisterSignal(blade_effect, COMSIG_QDELETING)
+		UnregisterSignal(blade_effect, COMSIG_BLADE_BARRIER_TRIGGERED)
 		QDEL_NULL(blade_effect)
 
 	var/mob/living/living_user = on_who
 	blade_effect = living_user.apply_status_effect(/datum/status_effect/protective_blades, null, projectile_amount, 25, 0.66 SECONDS, projectile_effect)
 	RegisterSignal(blade_effect, COMSIG_QDELETING, PROC_REF(on_status_effect_deleted))
+	RegisterSignal(blade_effect, COMSIG_BLADE_BARRIER_TRIGGERED, PROC_REF(on_status_effect_triggered))
 
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/on_deactivation(mob/on_who, refund_cooldown = TRUE)
 	. = ..()
-	QDEL_NULL(blade_effect)
+	if(blade_effect)
+		UnregisterSignal(blade_effect, COMSIG_QDELETING)
+		UnregisterSignal(blade_effect, COMSIG_BLADE_BARRIER_TRIGGERED)
+		QDEL_NULL(blade_effect)
 
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/before_cast(atom/cast_on)
-	if(isnull(blade_effect) || !length(blade_effect.blades))
-		unset_click_ability(owner, refund_cooldown = TRUE)
+	if(isnull(blade_effect) || !current_amount)
+		unset_click_ability(owner, refund_cooldown = FALSE)
 		return SPELL_CANCEL_CAST
 
-	return ..()
+	return ..() | SPELL_NO_IMMEDIATE_COOLDOWN // all CD handling will be done by the status effect being deleted
 
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/fire_projectile(mob/living/user, atom/target)
 	. = ..()
@@ -96,7 +101,18 @@
 	SIGNAL_HANDLER
 
 	blade_effect = null
-	on_deactivation()
+	var/blades_remaining = current_amount
+	// Which scales the cooldown according to projectiles remaining
+	unset_click_ability(owner, refund_cooldown = FALSE)
+	// Snowflake because it does not handle cooldown if we used every projectile
+	if(blades_remaining <= 0)
+		StartCooldown()
+
+/// Reduce our projectile amount when our blade status effect is triggered
+/datum/action/cooldown/spell/pointed/projectile/furious_steel/proc/on_status_effect_triggered(datum/status_effect/protective_blades/source, atom/target)
+	SIGNAL_HANDLER
+
+	current_amount--
 
 /obj/projectile/floating_blade
 	name = "blade"
@@ -128,7 +144,7 @@
 				return PROJECTILE_PIERCE_PHASE
 
 		if(victim.can_block_magic(MAGIC_RESISTANCE))
-			visible_message(span_warning("[src] drops to the ground and melts on contact [victim]!"))
+			visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] падает на землю и тает при контакте с [victim.declent_ru(INSTRUMENTAL)]!"))
 			return PROJECTILE_DELETE_WITHOUT_HITTING
 
 	return ..()

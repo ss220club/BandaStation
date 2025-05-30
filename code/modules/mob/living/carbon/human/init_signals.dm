@@ -46,12 +46,12 @@
 		return
 	var/voice_name = GetVoice()
 	if(name != voice_name)
-		voice_name += " (as [get_id_name("Unknown")])"
+		voice_name += " (как [get_id_name("Неизвестный")])"
 	stored_name[NAME_PART_INDEX] = voice_name
 
 /mob/living/carbon/human/proc/on_fat(datum/source)
 	SIGNAL_HANDLER
-	hud_used?.hunger?.update_appearance()
+	hud_used?.hunger?.update_hunger_bar()
 	mob_mood?.update_nutrition_moodlets()
 
 	if(HAS_TRAIT(src, TRAIT_FAT))
@@ -68,7 +68,7 @@
 		overeatduration = 0
 		remove_traits(list(TRAIT_FAT, TRAIT_OFF_BALANCE_TACKLER), OBESITY)
 	else
-		hud_used?.hunger?.update_appearance()
+		hud_used?.hunger?.update_hunger_bar()
 		mob_mood?.update_nutrition_moodlets()
 
 /// Signal proc for [COMSIG_ATOM_CONTENTS_WEIGHT_CLASS_CHANGED] to check if an item is suddenly too heavy for our pockets
@@ -81,8 +81,8 @@
 	if(!dropItemToGround(changed, force = TRUE))
 		return
 	visible_message(
-		span_warning("[changed] falls out of [src]'s pockets!"),
-		span_warning("[changed] falls out of your pockets!"),
+		span_warning("[capitalize(changed.declent_ru(NOMINATIVE))] падает из карманов [declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(changed.declent_ru(NOMINATIVE))] падает из ваших карманов!"),
 		vision_distance = COMBAT_MESSAGE_RANGE,
 	)
 	playsound(src, SFX_RUSTLE, 50, TRUE, -5, frequency = 0.8)

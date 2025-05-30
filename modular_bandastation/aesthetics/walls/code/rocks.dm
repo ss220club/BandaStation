@@ -3,8 +3,8 @@
 #define DEFAULT_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/default_rocks.dmi'
 #define MAPPING_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/mapping_rocks.dmi'
 
-#define rock_color(color) MAP_SWITCH(color,"")
-#define rock_icon_state(state) MAP_SWITCH("smoothrocks-0",state)
+#define rock_color(color) MAP_SWITCH(color, null)
+#define rock_icon_state(state) MAP_SWITCH("smoothrocks-0", state)
 #define ROCK_COLOR "#464646"
 #define ROCK_COLOR_RED "#861313"
 #define ROCK_COLOR_ICE "#cde2e4"
@@ -17,6 +17,13 @@
 	base_icon_state = "smoothrocks"
 	color = rock_color(ROCK_COLOR)
 	transform = null
+
+/turf/closed/mineral/minimap
+	name = "DO NOT USE!!!"
+	icon = DEFAULT_ROCKS
+	icon_state = "smoothrocks-0"
+	base_icon_state = "smoothrocks"
+	color = ROCK_COLOR
 
 /turf/closed/mineral/strong
 	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)

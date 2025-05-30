@@ -12,6 +12,7 @@ import {
   Tabs,
 } from 'tgui-core/components';
 
+import { ReverseJobsRu } from '../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import { JOB2ICON } from '../common/JobToIcon';
 import { isRecordMatch } from '../SecurityRecords/helpers';
 import { MedicalRecord, MedicalRecordData } from './types';
@@ -22,8 +23,8 @@ export const MedicalRecordTabs = (props) => {
   const { records = [], station_z } = data;
 
   const errorMessage = !records.length
-    ? 'No records found.'
-    : 'No match. Refine your search.';
+    ? 'Записи не найдены.'
+    : 'Нет совпадений. Скорректируйте поиск.';
 
   const [search, setSearch] = useState('');
 
@@ -37,8 +38,9 @@ export const MedicalRecordTabs = (props) => {
       <Stack.Item>
         <Input
           fluid
-          onInput={(_, value) => setSearch(value)}
-          placeholder="Name/Job/DNA"
+          onChange={setSearch}
+          placeholder="Имя/Должность/ДНК"
+          expensive
         />
       </Stack.Item>
       <Stack.Item grow>
@@ -60,18 +62,18 @@ export const MedicalRecordTabs = (props) => {
             <Button
               disabled
               icon="plus"
-              tooltip="Add new records by inserting a 1 by 1 meter photo into the terminal. You do not need this screen open."
+              tooltip="Вставьте фотографию метр-на-метр в терминал, чтобы добавить запись. Вам не нужно включать экран."
             >
-              Create
+              Создать
             </Button>
           </Stack.Item>
           <Stack.Item>
             <Button.Confirm
-              content="Purge"
+              content="Очистить"
               icon="trash"
               disabled={!station_z}
               onClick={() => act('purge_records')}
-              tooltip="Wipe all record data."
+              tooltip="Очищает всю базу данных."
             />
           </Stack.Item>
         </Stack>
@@ -96,6 +98,19 @@ const CrewTab = (props: { record: MedicalRecord }) => {
     if (selectedRecord?.crew_ref === crew_ref) {
       setSelectedRecord(undefined);
     } else {
+      // GOD, I REALLY HATE IT!
+      // THIS FUCKING HACK NEEDED CAUSE "WINSET MAP"
+      // MAKING UI DISAPPEAR, AND WE NEED RE-RENDER SHIT
+      // AFTER BYOND DONE MAKING THEIR SHIT
+      // Anyway... that's better than hack before
+      if (selectedRecord === undefined) {
+        setTimeout(() => {
+          act('view_record', {
+            assigned_view: assigned_view,
+            crew_ref: crew_ref,
+          });
+        });
+      }
       setSelectedRecord(record);
       act('view_record', { assigned_view: assigned_view, crew_ref: crew_ref });
     }
@@ -108,7 +123,7 @@ const CrewTab = (props: { record: MedicalRecord }) => {
       selected={selectedRecord?.crew_ref === crew_ref}
     >
       <Box>
-        <Icon name={JOB2ICON[trim] || 'question'} /> {name}
+        <Icon name={JOB2ICON[ReverseJobsRu(trim)] || 'question'} /> {name}
       </Box>
     </Tabs.Tab>
   );

@@ -171,7 +171,7 @@
 		var/obj/item/focused_item = focus
 		apply_focus_overlay()
 		if(interacting_with.Adjacent(focus))
-			. = focused_item.melee_attack_chain(user, interacting_with, list2params(modifiers)) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+			. = focused_item.melee_attack_chain(user, interacting_with, modifiers) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 			if(check_if_focusable(focus))
 				focus.do_attack_animation(interacting_with, null, focus)
 
@@ -255,7 +255,7 @@
 	. += focus_overlay
 
 /obj/item/tk_grab/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is using [user.p_their()] telekinesis to choke [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is using [user.p_their()] telekinesis to choke [user.p_them()]self! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 #undef TK_MAXRANGE

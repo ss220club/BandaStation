@@ -82,7 +82,7 @@
 
 	return discover_after
 
-/obj/item/disk/nuclear/attackby(obj/item/weapon, mob/living/user, params)
+/obj/item/disk/nuclear/attackby(obj/item/weapon, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(istype(weapon, /obj/item/claymore/highlander) && !fake)
 		var/obj/item/claymore/highlander/claymore = weapon
 		if(claymore.nuke_disk)
@@ -102,7 +102,7 @@
 	return ..()
 
 /obj/item/disk/nuclear/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is going delta! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is going delta! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(src, 'sound/announcer/alarm/nuke_alarm.ogg', 50, -1, TRUE)
 	for(var/i in 1 to 100)
 		addtimer(CALLBACK(user, TYPE_PROC_REF(/atom, add_atom_colour), (i % 2)? COLOR_VIBRANT_LIME : COLOR_RED, ADMIN_COLOUR_PRIORITY), i)

@@ -3,7 +3,7 @@
 	filedesc = "Camera"
 	program_open_overlay = "camera"
 	downloader_category = PROGRAM_CATEGORY_EQUIPMENT
-	extended_desc = "This program allows the taking of pictures."
+	extended_desc = "Эта программа позволяет делать фотографии."
 	size = 4
 	can_run_on_flags = PROGRAM_PDA
 	tgui_id = "NtosCamera"
@@ -35,7 +35,7 @@
 		QDEL_NULL(internal_picture)
 	return ..()
 
-/datum/computer_file/program/maintenance/camera/tap(atom/tapped_atom, mob/living/user, params)
+/datum/computer_file/program/maintenance/camera/tap(atom/tapped_atom, mob/living/user, list/modifiers)
 	. = ..()
 	if(internal_picture)
 		QDEL_NULL(internal_picture)

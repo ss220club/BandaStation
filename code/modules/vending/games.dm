@@ -1,7 +1,7 @@
 /obj/machinery/vending/games
 	name = "\improper Good Clean Fun"
 	desc = "Vends things that the Captain and Head of Personnel are probably not going to appreciate you fiddling with instead of your job..."
-	product_ads = "Escape to a fantasy world!;Fuel your gambling addiction!;Ruin your friendships!;Roll for initiative!;Elves and dwarves!;Paranoid computers!;Totally not satanic!;Fun times forever!"
+	product_ads = "Спрячьтесь в фантастическом мире!;Подпитай свою лудоманию!;Лишитесь своих друзей!;Бросайте кубики на инициативу!;Эльфы и гномы!;Параноидальные компьютеры!;Совсем не сатанинское!;Скучно не будет!"
 	icon_state = "games"
 	panel_type = "panel4"
 	product_categories = list(
@@ -55,7 +55,9 @@
 				/obj/item/storage/box/fishing_lures = 2,
 				/obj/item/book/manual/fish_catalog = 5,
 				/obj/item/reagent_containers/cup/fish_feed = 4,
+				/obj/item/storage/box/aquarium_props = 4,
 				/obj/item/fish_analyzer = 2,
+				/obj/item/storage/bag/fishing = 2,
 				/obj/item/fishing_rod/telescopic = 1,
 				/obj/item/fish_tank = 1,
 			),

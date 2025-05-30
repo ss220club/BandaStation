@@ -7,19 +7,23 @@
 	///Has this item been used already.
 	var/used_up = FALSE
 
-#define NICKNAME_CAP (MAX_NAME_LEN/2)
-/obj/item/virgin_mary/attackby(obj/item/potential_lighter, mob/living/user, params)
+/obj/item/virgin_mary/Initialize(mapload)
 	. = ..()
-	if(resistance_flags & ON_FIRE)
-		return
-	if(!istype(user) || !user.mind) //A sentient mob needs to be burning it, ya cheezit.
-		return
+	AddElement(/datum/element/burn_on_item_ignition, bypass_clumsy = TRUE)
+	RegisterSignal(src, COMSIG_ATOM_IGNITED_BY_ITEM, PROC_REF(induct_new_initiate))
 
+#define NICKNAME_CAP (MAX_NAME_LEN/2)
+
+/obj/item/virgin_mary/proc/induct_new_initiate(datum/source, mob/living/user, obj/item/burning_tool)
+	SIGNAL_HANDLER
+
+	INVOKE_ASYNC(src, PROC_REF(induct_new_initiate_async), user, burning_tool)
+
+/obj/item/virgin_mary/proc/induct_new_initiate_async(mob/living/user, obj/item/burning_tool)
+	if(isnull(user.mind))
+		return
 	if(HAS_TRAIT(user, TRAIT_MAFIAINITIATE)) //Only one nickname fuckhead
 		to_chat(user, span_warning("You have already been initiated into the mafioso life."))
-		return
-
-	if(!burn_paper_product_attackby_check(potential_lighter, user, TRUE))
 		return
 	if(used_up)
 		return
@@ -39,16 +43,16 @@
 		new_name = "[user.real_name] \"[nickname]\""
 	user.real_name = new_name
 	used_up = TRUE
-	user.say("My soul will burn like this saint if I betray my family. I enter alive and I will have to get out dead.", forced = /obj/item/virgin_mary)
+	user.say("Как горит этот святой, так будет гореть и моя душа. Я вхожу живым, и мне придётся выйти мертвым.", forced = /obj/item/virgin_mary)
 	to_chat(user, span_userdanger("Being inducted into the mafia does not grant antagonist status."))
 
 #undef NICKNAME_CAP
 
 /obj/item/virgin_mary/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] starts saying their Hail Mary's at a terrifying pace! It looks like [user.p_theyre()] trying to enter the afterlife!"))
-	user.say("Hail Mary, full of grace, the Lord is with thee. Blessed are thou amongst women, and blessed is the fruit of thy womb, Jesus. Holy Mary, mother of God, pray for us sinners, now and at the hour of our death. Amen. ", forced = /obj/item/virgin_mary)
+	user.say("Радуйся, Мария, благодати полная! Господь с Тобою. Благословенна Ты между жёнами, и благословен плод чрева Твоего Иисус. Святая Мария, Матерь Божия, молись о нас, грешных, ныне и в час смерти нашей. Аминь.", forced = /obj/item/virgin_mary)
 	addtimer(CALLBACK(src, PROC_REF(manual_suicide), user), 7.5 SECONDS)
-	addtimer(CALLBACK(user, TYPE_PROC_REF(/atom/movable, say), "O my Mother, preserve me this day from mortal sin..."), 5 SECONDS)
+	addtimer(CALLBACK(user, TYPE_PROC_REF(/atom/movable, say), "О Матерь моя, сохрани меня в этот день от смертного греха..."), 5 SECONDS)
 	return MANUAL_SUICIDE
 
 /obj/item/virgin_mary/proc/manual_suicide(mob/living/user)

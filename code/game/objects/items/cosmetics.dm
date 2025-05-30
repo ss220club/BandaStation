@@ -1,7 +1,3 @@
-#define UPPER_LIP "Upper"
-#define MIDDLE_LIP "Middle"
-#define LOWER_LIP "Lower"
-
 /obj/item/lipstick
 	gender = PLURAL
 	name = "red lipstick"
@@ -200,7 +196,7 @@
 	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/razor/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins shaving [user.p_them()]self without the razor guard! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins shaving [user.p_them()]self without the razor guard! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	shave(user, BODY_ZONE_PRECISE_MOUTH)
 	shave(user, BODY_ZONE_HEAD)//doesn't need to be BODY_ZONE_HEAD specifically, but whatever
 	return BRUTELOSS
@@ -212,7 +208,7 @@
 		skinhead.set_hairstyle("Skinhead", update = TRUE)
 	playsound(loc, 'sound/items/tools/welder2.ogg', 20, TRUE)
 
-/obj/item/razor/attack(mob/target_mob, mob/living/user, params)
+/obj/item/razor/attack(mob/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(!ishuman(target_mob))
 		return ..()
 	var/mob/living/carbon/human/human_target = target_mob
@@ -343,7 +339,3 @@
 
 /obj/item/razor/surgery/get_surgery_tool_overlay(tray_extended)
 	return "razor"
-
-#undef UPPER_LIP
-#undef MIDDLE_LIP
-#undef LOWER_LIP

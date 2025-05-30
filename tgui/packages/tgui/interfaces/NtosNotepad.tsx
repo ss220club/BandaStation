@@ -4,15 +4,8 @@
  * @license MIT
  */
 
-import { Component, createRef, RefObject, useState } from 'react';
-import {
-  Box,
-  Dialog,
-  Divider,
-  MenuBar,
-  Section,
-  TextArea,
-} from 'tgui-core/components';
+import { useRef, useState } from 'react';
+import { Box, Dialog, Divider, MenuBar, Section } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
@@ -138,55 +131,57 @@ const NtosNotepadMenuBar = (props: MenuBarProps) => {
       <MenuBar.Dropdown
         entry="file"
         openWidth="22rem"
-        display={<PartiallyUnderlined str="File" indexStart={0} />}
+        display={<PartiallyUnderlined str="Файл" indexStart={0} />}
         {...itemProps}
       >
-        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('new', 'New')} />
-        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('save', 'Save')} />
+        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('new', 'Новый')} />
+        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('save', 'Сохранить')} />
         <MenuBar.Dropdown.Separator key="firstSep" />
-        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('exit', 'Exit...')} />
+        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('exit', 'Выйти...')} />
       </MenuBar.Dropdown>
       <MenuBar.Dropdown
         entry="edit"
         openWidth="22rem"
-        display={<PartiallyUnderlined str="Edit" indexStart={0} />}
+        display={<PartiallyUnderlined str="Правка" indexStart={0} />}
         {...itemProps}
       >
-        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('cut', 'Cut')} />
-        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('copy', 'Copy')} />
-        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('paste', 'Paste')} />
-        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('delete', 'Delete')} />
+        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('cut', 'Вырезать')} />
+        <MenuBar.Dropdown.MenuItem
+          {...getMenuItemProps('copy', 'Копировать')}
+        />
+        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('paste', 'Вставить')} />
+        <MenuBar.Dropdown.MenuItem {...getMenuItemProps('delete', 'Удалить')} />
       </MenuBar.Dropdown>
       <MenuBar.Dropdown
         entry="format"
         openWidth="15rem"
-        display={<PartiallyUnderlined str="Format" indexStart={1} />}
+        display={<PartiallyUnderlined str="Формат" indexStart={1} />}
         {...itemProps}
       >
         <MenuBar.Dropdown.MenuItemToggle
           checked={wordWrap}
-          {...getMenuItemProps('wordWrap', 'Word Wrap')}
+          {...getMenuItemProps('wordWrap', 'Перенос слов')}
         />
       </MenuBar.Dropdown>
       <MenuBar.Dropdown
         entry="view"
         openWidth="15rem"
-        display={<PartiallyUnderlined str="View" indexStart={0} />}
+        display={<PartiallyUnderlined str="Вид" indexStart={0} />}
         {...itemProps}
       >
         <MenuBar.Dropdown.MenuItemToggle
           checked={showStatusBar}
-          {...getMenuItemProps('statusBar', 'Status Bar')}
+          {...getMenuItemProps('statusBar', 'Строка состояния')}
         />
       </MenuBar.Dropdown>
       <MenuBar.Dropdown
         entry="help"
         openWidth="17rem"
-        display={<PartiallyUnderlined str="Help" indexStart={0} />}
+        display={<PartiallyUnderlined str="Справка" indexStart={0} />}
         {...itemProps}
       >
         <MenuBar.Dropdown.MenuItem
-          {...getMenuItemProps('aboutNotepad', 'About Notepad')}
+          {...getMenuItemProps('aboutNotepad', 'О программе')}
         />
       </MenuBar.Dropdown>
     </MenuBar>
@@ -245,83 +240,41 @@ const TEXTAREA_UPDATE_TRIGGERS = [
 ];
 
 interface NotePadTextAreaProps {
-  maintainFocus: boolean;
   text: string;
   wordWrap: boolean;
   setText: (text: string) => void;
   setStatuses: (statuses: Statuses) => void;
 }
 
-class NotePadTextArea extends Component<NotePadTextAreaProps> {
-  innerRef: RefObject<HTMLTextAreaElement>;
+function NotePadTextArea(props: NotePadTextAreaProps) {
+  const { text, setText, wordWrap, setStatuses } = props;
 
-  constructor(props) {
-    super(props);
-    this.innerRef = createRef();
-  }
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  handleEvent(event: Event) {
+  function handleEvent(event) {
     const area = event.target as HTMLTextAreaElement;
-    this.props.setStatuses(getStatusCounts(area.value, area.selectionStart));
+    setStatuses(getStatusCounts(area.value, area.selectionStart));
   }
 
-  onblur() {
-    if (!this.innerRef.current) {
-      return;
-    }
-
-    if (this.props.maintainFocus) {
-      this.innerRef.current.focus();
-    }
-  }
-
-  // eslint-disable-next-line react/no-deprecated
-  componentDidMount() {
-    const textarea = this.innerRef?.current;
-    if (!textarea) {
-      logger.error(
-        'NotePadTextArea.render(): Textarea RefObject should not be null',
-      );
-      return;
-    }
-
-    // Javascript – execute when textarea caret is moved
-    // https://stackoverflow.com/a/53999418/5613731
-    TEXTAREA_UPDATE_TRIGGERS.forEach((trigger) =>
-      textarea.addEventListener(trigger, this),
-    );
-    // Slight hack: Keep selection when textarea loses focus so menubar actions can be used (i.e. cut, delete)
-    textarea.onblur = this.onblur.bind(this);
-  }
-
-  componentWillUnmount() {
-    const textarea = this.innerRef?.current;
-    if (!textarea) {
-      logger.error(
-        'NotePadTextArea.componentWillUnmount(): Textarea RefObject should not be null',
-      );
-      return;
-    }
-    TEXTAREA_UPDATE_TRIGGERS.forEach((trigger) =>
-      textarea.removeEventListener(trigger, this),
-    );
-  }
-
-  render() {
-    const { text, setText, wordWrap } = this.props;
-
-    return (
-      <TextArea
-        ref={this.innerRef}
-        onInput={(_, value) => setText(value)}
-        className="NtosNotepad__textarea"
-        nowrap={!wordWrap}
-        value={text}
-        scrollbar
-        autoFocus
-      />
-    );
-  }
+  return (
+    <textarea
+      autoFocus
+      className="NtosNotepad__textarea"
+      onClick={handleEvent}
+      onMouseUp={handleEvent}
+      onChange={(event) => {
+        setText(event.currentTarget.value);
+        handleEvent(event);
+      }}
+      ref={textareaRef}
+      spellCheck={false}
+      style={{
+        whiteSpace: wordWrap ? 'normal' : 'nowrap',
+        overflow: wordWrap ? 'hidden auto' : 'scroll hidden',
+      }}
+      value={text}
+    />
+  );
 }
 
 type AboutDialogProps = {
@@ -330,26 +283,27 @@ type AboutDialogProps = {
 
 const AboutDialog = (props: AboutDialogProps) => {
   const { close } = props;
-  const { act, data } = useBackend<NTOSData>();
+  const { data } = useBackend<NTOSData>();
   const { show_imprint, login } = data;
   const paragraphStyle = { padding: '.5rem 1rem 0 2rem' };
+
   return (
-    <Dialog title="About Notepad" onClose={close} width={'500px'}>
+    <Dialog title="О программе" onClose={close} width={'500px'}>
       <div className="Dialog__body">
         <span className="NtosNotepad__AboutDialog__logo">NtOS</span>
         <Divider />
         <Box className="NtosNotepad__AboutDialog__text">
           <span style={paragraphStyle}>Nanotrasen NtOS</span>
           <span style={paragraphStyle}>
-            Version 7815696ecbf1c96e6894b779456d330e
+            Версия 7815696ecbf1c96e6894b779456d330e
           </span>
           <span style={paragraphStyle}>
-            &copy; NT Corporation. All rights reserved.
+            &copy; NT Corporation. Все права защищены.
           </span>
           <span style={{ padding: '3rem 1rem 3rem 2rem' }}>
-            The NtOS operating system and its user interface are protected by
-            trademark and other pending or existing intellectual property rights
-            in the Sol system and other regions.
+            Операционная система NtOS и ее пользовательский интерфейс защищены
+            товарными знаками и другими заявленными или существующими правами на
+            интеллектуальную собственность в системе Sol и других регионах.
           </span>
           <span
             style={{
@@ -357,7 +311,7 @@ const AboutDialog = (props: AboutDialogProps) => {
               maxWidth: '35rem',
             }}
           >
-            This product is licensed under the NT Corporation Terms to:
+            Этот продукт лицензирован в соответствии с условиями корпорации NT:
           </span>
           <span style={{ padding: '0 1rem 0 4rem' }}>
             {show_imprint ? login.IDName : 'Unknown'}
@@ -381,23 +335,23 @@ export const NtosNotepad = (props) => {
   const { note } = data;
   const [documentName, setDocumentName] = useState(DEFAULT_DOCUMENT_NAME);
   const [originalText, setOriginalText] = useState(note);
-  const [text, setText] = useState<string>(note);
+  const [text, setText] = useState(note);
   const [statuses, setStatuses] = useState<Statuses>({
     line: 0,
     column: 0,
   });
-  const [activeDialog, setActiveDialog] = useState<Dialogs>(Dialogs.NONE);
+  const [activeDialog, setActiveDialog] = useState(Dialogs.NONE);
   const [retryAction, setRetryAction] = useState<RetryActionType | null>(null);
-  const [showStatusBar, setShowStatusBar] = useState<boolean>(true);
-  const [wordWrap, setWordWrap] = useState<boolean>(true);
+  const [showStatusBar, setShowStatusBar] = useState(true);
+  const [wordWrap, setWordWrap] = useState(true);
 
   const handleCloseDialog = () => setActiveDialog(Dialogs.NONE);
   const handleSave = (newDocumentName: string = documentName) => {
-    logger.log(`Saving the document as ${newDocumentName}`);
+    logger.log(`Документ сохранен как ${newDocumentName}`);
     act('UpdateNote', { newnote: text });
     setOriginalText(text);
     setDocumentName(newDocumentName);
-    logger.log('Attempting to retry previous action');
+    logger.log('Попытка повторить предыдущее действие');
     setActiveDialog(Dialogs.NONE);
 
     // Retry the previous action now that we've saved. The previous action could be to
@@ -415,7 +369,7 @@ export const NtosNotepad = (props) => {
     // This is a guard function that throws up the "unsaved changes" dialog if the user is
     // attempting to do something that will make them lose data
     if (!retrying && originalText !== text) {
-      logger.log('Unsaved changes. Asking client to save');
+      logger.log('Несохраненные изменения. Запрос клиента на сохранение');
       setRetryAction(() => action);
       setActiveDialog(Dialogs.UNSAVED_CHANGES);
       return true;
@@ -427,7 +381,7 @@ export const NtosNotepad = (props) => {
     if (ensureUnsavedChangesAreHandled(exit, retrying)) {
       return;
     }
-    logger.log('Exiting Notepad');
+    logger.log('Выход из блокнота');
     act('PC_exit');
   };
   const newNote = (retrying = false) => {
@@ -437,13 +391,6 @@ export const NtosNotepad = (props) => {
     setOriginalText('');
     setText('');
     setDocumentName(DEFAULT_DOCUMENT_NAME);
-  };
-  const noSave = () => {
-    logger.log('Discarding unsaved changes');
-    setActiveDialog(Dialogs.NONE);
-    if (retryAction) {
-      retryAction(true);
-    }
   };
 
   // MS Notepad displays an asterisk when there's unsaved changes
@@ -472,10 +419,9 @@ export const NtosNotepad = (props) => {
           />
           <Section fill>
             <NotePadTextArea
-              maintainFocus={activeDialog === Dialogs.NONE}
               text={text}
-              wordWrap={wordWrap}
               setText={setText}
+              wordWrap={wordWrap}
               setStatuses={setStatuses}
             />
           </Section>

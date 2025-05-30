@@ -38,6 +38,12 @@
 /obj/item/stock_parts/power_store/get_cell()
 	return src
 
+/obj/item/stock_parts/power_store/get_save_vars()
+	. = ..()
+	. += NAMEOF(src, charge)
+	. += NAMEOF(src, rigged)
+	return .
+
 /obj/item/stock_parts/power_store/Initialize(mapload, override_maxcharge)
 	. = ..()
 	create_reagents(5, INJECTABLE | DRAINABLE)
@@ -251,7 +257,7 @@
 	return TRUE
 
 /obj/item/stock_parts/power_store/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is licking the electrodes of [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is licking the electrodes of [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	do_sparks(2, TRUE, user)
 	var/eating_success = do_after(user, 5 SECONDS, src)
 	if(QDELETED(user))

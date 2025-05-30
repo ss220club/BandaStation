@@ -22,7 +22,7 @@
 	defender.visible_message(
 		span_danger("[attacker] [atk_verb]ed [defender] with such inhuman strength that it sends [defender.p_them()] flying backwards!"), \
 		span_userdanger("You're [atk_verb]ed by [attacker] with such inhuman strength that it sends you flying backwards!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		null,
 		attacker,
 	)
@@ -47,7 +47,7 @@
 	to_chat(user, span_spiderbroodmother("You devour [src], \
 		and a confluence of skill and power from the mushroom enhances your punches! \
 		You do need a short moment to charge these powerful punches."))
-	var/datum/martial_art/mushpunch/mush = new()
+	var/datum/martial_art/mushpunch/mush = new(user)
 	mush.teach(user)
 	visible_message(
 		span_warning("[user] devours [src]."),

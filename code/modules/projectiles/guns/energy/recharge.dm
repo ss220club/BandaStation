@@ -84,7 +84,7 @@
 	if(!suppressed && recharge_sound)
 		playsound(src.loc, recharge_sound, 60, TRUE)
 	else
-		to_chat(loc, span_warning("[src] silently charges up."))
+		to_chat(loc, span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает тихо заряжаться."))
 	update_appearance()
 
 /obj/item/gun/energy/recharge/update_overlays()
@@ -156,7 +156,7 @@
 	While some would argue that this is a really terrible design choice, others argue that it is very funny to be able to shoot at light sources.<br>\
 	Caveat emptor.")
 
-/obj/item/gun/energy/recharge/fisher/attack(mob/living/target_mob, mob/living/user, params)
+/obj/item/gun/energy/recharge/fisher/attack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return

@@ -15,7 +15,7 @@
 	list_reagents = list(/datum/reagent/toxin/plantbgone/weedkiller = 100)
 
 /obj/item/reagent_containers/spray/weedspray/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is huffing [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is huffing [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return TOXLOSS
 
 /obj/item/reagent_containers/spray/pestspray // -- Skie
@@ -31,7 +31,7 @@
 	list_reagents = list(/datum/reagent/toxin/pestkiller = 100)
 
 /obj/item/reagent_containers/spray/pestspray/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is huffing [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is huffing [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return TOXLOSS
 
 /obj/item/cultivator
@@ -53,7 +53,7 @@
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
 
 /obj/item/cultivator/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is scratching [user.p_their()] back as hard as [user.p_they()] can with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is scratching [user.p_their()] back as hard as [user.p_they()] can with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/cultivator/rake
@@ -128,7 +128,7 @@
 	)
 
 /obj/item/hatchet/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is chopping at [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is chopping at [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(src, 'sound/items/weapons/bladeslice.ogg', 50, TRUE, -1)
 	return BRUTELOSS
 
@@ -179,7 +179,7 @@
 	AddElement(/datum/element/bane, mob_biotypes = MOB_PLANT, damage_multiplier = 0.5, requires_combat_mode = FALSE)
 
 /obj/item/scythe/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is beheading [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is beheading [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		var/obj/item/bodypart/BP = C.get_bodypart(BODY_ZONE_HEAD)
@@ -188,7 +188,7 @@
 			playsound(src, SFX_DESECRATION ,50, TRUE, -1)
 	return BRUTELOSS
 
-/obj/item/scythe/pre_attack(atom/target, mob/living/user, params)
+/obj/item/scythe/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(!istype(target, /obj/structure/alien/resin/flower_bud) && !istype(target, /obj/structure/spacevine))
 		return ..()
 	if(swiping || get_turf(target) == get_turf(user))
@@ -230,11 +230,12 @@
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
 
 ///Catch right clicks so we can stylize!
-/obj/item/secateurs/pre_attack_secondary(atom/target, mob/living/user, params)
+/obj/item/secateurs/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
 	if(user.combat_mode)
-		return ..()
-	restyle(target, user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return NONE
+
+	restyle(interacting_with, user)
+	return ITEM_INTERACT_SUCCESS
 
 ///Send a signal to whatever we clicked and ask them if they wanna be PLANT RESTYLED YEAAAAAAAH
 /obj/item/secateurs/proc/restyle(atom/target, mob/living/user)

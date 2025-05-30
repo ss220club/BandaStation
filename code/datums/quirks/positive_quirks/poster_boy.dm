@@ -1,21 +1,21 @@
 /datum/quirk/item_quirk/poster_boy
 	name = "Poster Boy"
-	desc = "You have some great posters! Hang them up and make everyone have a great time."
+	desc = "У вас есть замечательные плакаты! Повесьте их, и пусть все отлично проводят время."
 	icon = FA_ICON_TAPE
 	value = 4
 	mob_trait = TRAIT_POSTERBOY
-	medical_record_text = "Patient reports a desire to cover walls with homemade objects."
+	medical_record_text = "Пациент сообщает о желании покрыть стены самодельными предметами."
 	mail_goodies = list(/obj/item/poster/random_official)
 
 /datum/quirk/item_quirk/poster_boy/add_unique()
 	var/mob/living/carbon/human/posterboy = quirk_holder
 	var/obj/item/storage/box/posterbox/newbox = new()
 	newbox.add_quirk_posters(posterboy.mind)
-	give_item_to_holder(newbox, list(LOCATION_BACKPACK = ITEM_SLOT_BACKPACK, LOCATION_HANDS = ITEM_SLOT_HANDS))
+	give_item_to_holder(newbox, list(LOCATION_BACKPACK, LOCATION_HANDS))
 
 /obj/item/storage/box/posterbox
 	name = "Box of Posters"
-	desc = "You made them yourself!"
+	desc = "Вы сами их сделали!"
 
 /// fills box of posters based on job, one neutral poster and 2 department posters
 /obj/item/storage/box/posterbox/proc/add_quirk_posters(datum/mind/posterboy)

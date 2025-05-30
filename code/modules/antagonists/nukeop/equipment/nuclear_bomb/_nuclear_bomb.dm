@@ -57,6 +57,7 @@ GLOBAL_VAR(station_nuke_source)
 /obj/machinery/nuclearbomb/Initialize(mapload)
 	. = ..()
 	countdown = new(src)
+	GLOB.nuke_list += src // BANDASTATION EDIT - STORYTELLER
 	core = new /obj/item/nuke_core(src)
 	STOP_PROCESSING(SSobj, core)
 	update_appearance()
@@ -68,6 +69,7 @@ GLOBAL_VAR(station_nuke_source)
 	if(!exploding)
 		// If we're not exploding, set the alert level back to normal
 		toggle_nuke_safety()
+	GLOB.nuke_list -= src // BANDASTATION EDIT - STORYTELLER
 	QDEL_NULL(countdown)
 	QDEL_NULL(core)
 	return ..()
@@ -108,7 +110,7 @@ GLOBAL_VAR(station_nuke_source)
 
 	return TRUE
 
-/obj/machinery/nuclearbomb/attackby(obj/item/weapon, mob/user, params)
+/obj/machinery/nuclearbomb/attackby(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
 	if (istype(weapon, /obj/item/disk/nuclear))
 		if(!disk_check(weapon))
 			return TRUE
@@ -597,7 +599,7 @@ GLOBAL_VAR(station_nuke_source)
 /obj/machinery/nuclearbomb/proc/really_actually_explode(detonation_status)
 	var/cinematic = get_cinematic_type(detonation_status)
 	if(!isnull(cinematic))
-		play_cinematic(cinematic, world, CALLBACK(SSticker, TYPE_PROC_REF(/datum/controller/subsystem/ticker, station_explosion_detonation), src))
+		play_cinematic(cinematic, world)
 
 	var/drop_level = TRUE
 	switch(detonation_status)
@@ -607,9 +609,9 @@ GLOBAL_VAR(station_nuke_source)
 
 		if(DETONATION_HIT_SYNDIE_BASE)
 			priority_announce(
-				"Long Range Scanners indicate that the nuclear device has detonated on a previously unknown base, we assume \
-				the base to be of Syndicate Origin. Good work crew.",
-				"Nuclear Operations Command",
+				"Сканеры дальнего действия показывают, что ядерное устройство взорвалось на ранее неизвестной базе, мы предполагаем,\
+				что база имеет синдикатовское происхождение. Хорошая работа.",
+				"Командование ядерных операций",
 			)
 
 			var/datum/turf_reservation/syndicate_base = SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_NUKIEBASE)
@@ -621,13 +623,14 @@ GLOBAL_VAR(station_nuke_source)
 
 		else
 			priority_announce(
-				"Long Range Scanners indicate that the nuclear device has detonated; however seismic activity on the station \
-				is minimal. We anticipate that the device has not detonated on the station itself.",
-				"Nuclear Operations Command",
+				"Сканеры дальнего действия показывают, что ядерное устройство взорвалось; однако сейсмическая активность на станции \
+				минимальна. Мы предполагаем, что устройство взорвалось не на самой станции.",
+				"Командование ядерных операций",
 			)
 
 	if(drop_level)
 		SSsecurity_level.set_level(SEC_LEVEL_RED)
+	qdel(src)
 	return TRUE
 
 /// Cause nuke effects to the passed z-levels.

@@ -6,6 +6,8 @@ lock_3.ogg
 narsie_risen.ogg
 narsie_summon.ogg
 blood_brothers_intro.ogg
+narsie_end_begin_announcement.ogg
+epsilon_laws.ogg
 
 [This work is licensed under CC 3.0 BY-SA]
 Code-Lyoko0 (Github: https://github.com/Code-Lyoko0) authoring:

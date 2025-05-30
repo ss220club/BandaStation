@@ -28,7 +28,7 @@ export const NoteKeeper = (props) => {
 
   const [writing, setWriting] = useLocalState('note', false);
 
-  const addNote = (event, value: string) => {
+  const addNote = (value: string) => {
     act('add_note', {
       crew_ref: crew_ref,
       content: value,
@@ -46,9 +46,10 @@ export const NoteKeeper = (props) => {
   };
 
   return (
-    <Section buttons={<NoteTabs />} fill scrollable title="Notes">
+    <Section buttons={<NoteTabs />} fill scrollable title="Прим.">
       {writing && (
         <TextArea
+          fluid
           height="100%"
           maxLength={1024}
           onEnter={addNote}
@@ -60,17 +61,17 @@ export const NoteKeeper = (props) => {
         <>
           <LabeledList>
             <LabeledList.Item
-              label="Author"
+              label="Автор"
               buttons={<Button color="bad" icon="trash" onClick={deleteNote} />}
             >
               {selectedNote.author}
             </LabeledList.Item>
-            <LabeledList.Item label="Time">
+            <LabeledList.Item label="Время">
               {selectedNote.time}
             </LabeledList.Item>
           </LabeledList>
           <Box color="label" mb={1} mt={1}>
-            Content:
+            Содержание:
           </Box>
           <BlockQuote>{selectedNote.content}</BlockQuote>
         </>
@@ -117,11 +118,11 @@ const NoteTabs = (props) => {
         </Tabs.Tab>
       ))}
       <Tooltip
-        content={`Add a new note. Press enter or escape to exit view.`}
+        content={`Добавляет новое примечание. Нажмите Enter или Escape, чтобы сохранить.`}
         position="bottom"
       >
         <Tabs.Tab onClick={composeNew} selected={writing}>
-          <Icon name="plus" /> New
+          <Icon name="plus" /> Новое
         </Tabs.Tab>
       </Tooltip>
     </Tabs>

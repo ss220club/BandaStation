@@ -5,7 +5,7 @@
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = SUPERVISOR_HOP
+	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "MIME"
 
@@ -56,7 +56,7 @@
 	belt = /obj/item/modular_computer/pda/mime
 	ears = /obj/item/radio/headset/headset_srv
 	gloves = /obj/item/clothing/gloves/color/white
-	head = /obj/item/clothing/head/frenchberet
+	head = /obj/item/clothing/head/beret/frenchberet
 	mask = /obj/item/clothing/mask/gas/mime
 	shoes = /obj/item/clothing/shoes/laceup
 

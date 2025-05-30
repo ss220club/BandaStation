@@ -30,12 +30,13 @@ type ProfileProps = {
 };
 
 function CharacterProfiles(props: ProfileProps) {
+  const { data } = useBackend<PreferencesMenuData>();
   const { activeSlot, onClick, profiles } = props;
 
   return (
     <Stack justify="center" wrap>
       {profiles.map((profile, slot) => (
-        <Stack.Item key={slot} mb={1}>
+        <Stack.Item key={slot}>
           <Button
             selected={slot === activeSlot}
             onClick={() => {
@@ -43,10 +44,19 @@ function CharacterProfiles(props: ProfileProps) {
             }}
             fluid
           >
-            {profile ?? 'New Character'}
+            {profile ?? 'Новый персонаж'}
           </Button>
         </Stack.Item>
       ))}
+      {!data.content_unlocked && (
+        <Stack.Item>
+          <Button
+            disabled
+            icon="question"
+            tooltip="Купите BYOND премиум, чтобы открыть больше слотов!"
+          />
+        </Stack.Item>
+      )}
     </Stack>
   );
 }
@@ -108,11 +118,6 @@ export function CharacterPreferenceWindow(props) {
           profiles={data.character_profiles}
         />
       </Stack.Item>
-      {!data.content_unlocked && (
-        <Stack.Item align="center">
-          Buy BYOND premium for more slots!
-        </Stack.Item>
-      )}
       <Stack.Divider />
       <Stack.Item>
         <Stack fill>
@@ -123,7 +128,7 @@ export function CharacterPreferenceWindow(props) {
               setPage={setCurrentPage}
               otherActivePages={[Page.Species]}
             >
-              Character
+              Персонаж
             </PageButton>
           </Stack.Item>
 
@@ -133,7 +138,7 @@ export function CharacterPreferenceWindow(props) {
               page={Page.Loadout}
               setPage={setCurrentPage}
             >
-              Loadout
+              Снаряжение
             </PageButton>
           </Stack.Item>
 
@@ -147,7 +152,7 @@ export function CharacterPreferenceWindow(props) {
                     Fun fact: This isn't "Jobs" so that it intentionally
                     catches your eyes, because it's really important!
                   */}
-              Occupations
+              Должности
             </PageButton>
           </Stack.Item>
 
@@ -157,7 +162,7 @@ export function CharacterPreferenceWindow(props) {
               page={Page.Antags}
               setPage={setCurrentPage}
             >
-              Antagonists
+              Антагонисты
             </PageButton>
           </Stack.Item>
 
@@ -167,7 +172,7 @@ export function CharacterPreferenceWindow(props) {
               page={Page.Quirks}
               setPage={setCurrentPage}
             >
-              Quirks
+              Черты
             </PageButton>
           </Stack.Item>
 
@@ -178,14 +183,16 @@ export function CharacterPreferenceWindow(props) {
                 page={Page.Voice}
                 setPage={setCurrentPage}
               >
-                Voice
+                Голос
               </PageButton>
             </Stack.Item>
           )}
         </Stack>
       </Stack.Item>
       <Stack.Divider />
-      <Stack.Item grow>{pageContents}</Stack.Item>
+      <Stack.Item grow position="relative" overflowX="hidden" overflowY="auto">
+        {pageContents}
+      </Stack.Item>
     </Stack>
   );
 }

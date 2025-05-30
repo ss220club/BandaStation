@@ -30,7 +30,7 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/golem_food, golem_food_key = /obj/item/light, extra_validation = CALLBACK(src, PROC_REF(is_intact)))
 
-/obj/item/light/attackby(obj/item/attacking_item, mob/user, params)
+/obj/item/light/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 
 	if(istype(attacking_item, /obj/item/lightreplacer))
@@ -43,7 +43,7 @@
 
 /obj/item/light/suicide_act(mob/living/carbon/user)
 	if (status == LIGHT_BROKEN)
-		user.visible_message(span_suicide("[user] begins to stab [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] begins to stab [user.p_them()]self with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	else
 		user.visible_message(span_suicide("[user] begins to eat \the [src]! It looks like [user.p_theyre()] not very bright!"))
 		shatter()
@@ -127,7 +127,7 @@
 	..()
 	shatter(M)
 
-/obj/item/light/attack_atom(obj/O, mob/living/user, params)
+/obj/item/light/attack_atom(obj/O, mob/living/user, list/modifiers, list/attack_modifiers)
 	..()
 	shatter(O)
 

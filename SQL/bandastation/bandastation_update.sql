@@ -55,3 +55,21 @@ CREATE TABLE `budget` (
     `discord_id` bigint(20) DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;
+
+--
+-- Table structure for table `minesweeper`
+--
+DROP TABLE IF EXISTS `minesweeper`;
+CREATE TABLE `minesweeper` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`date` DATETIME NOT NULL DEFAULT current_timestamp(),
+	`ckey` VARCHAR(32) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`nickname` VARCHAR(32) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`time` INT(10) UNSIGNED NOT NULL,
+	`points` INT(10) UNSIGNED NOT NULL,
+	`points_per_sec` FLOAT(10) UNSIGNED NOT NULL,
+	`width` TINYINT(3) UNSIGNED NOT NULL,
+	`height` TINYINT(3) UNSIGNED NOT NULL,
+	`bombs` TINYINT(3) UNSIGNED NOT NULL,
+	PRIMARY KEY (`id`)
+) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;

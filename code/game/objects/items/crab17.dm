@@ -64,7 +64,7 @@
 			return FALSE
 	return TRUE
 
-/obj/structure/checkoutmachine/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/checkoutmachine/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(!canwalk)
 		balloon_alert(user, "not ready to accept transactions!")
 		return
@@ -128,10 +128,10 @@
 		return
 	playsound(src,'sound/machines/beep/twobeep.ogg',50,FALSE)
 	var/mutable_appearance/hologram = mutable_appearance(icon, "hologram")
-	hologram.pixel_y = 16
+	hologram.pixel_z = 16
 	add_overlay(hologram)
 	var/mutable_appearance/holosign = mutable_appearance(icon, "holosign")
-	holosign.pixel_y = 16
+	holosign.pixel_z = 16
 	add_overlay(holosign)
 	add_overlay("legs_extending")
 	cut_overlay("legs_retracted")
@@ -177,7 +177,7 @@
 /obj/structure/checkoutmachine/Destroy()
 	stop_dumping()
 	STOP_PROCESSING(SSfastprocess, src)
-	priority_announce("The credit deposit machine at [get_area(src)] has been destroyed. Station funds have stopped draining!", sender_override = "CRAB-17 Protocol")
+	priority_announce("Машина для депозитов была уничтожена в [get_area(src)]. Средства станции больше не пропадают!", sender_override = "Протокол CRAB-17")
 	explosion(src, light_impact_range = 1, flame_range = 2)
 	REMOVE_TRAIT(SSeconomy, TRAIT_MARKET_CRASHING, REF(src))
 	return ..()
@@ -245,7 +245,7 @@
 /obj/effect/dumpeet_target/proc/startLaunch()
 	DF = new /obj/effect/dumpeet_fall(drop_location())
 	dump = new /obj/structure/checkoutmachine(null, bogdanoff)
-	priority_announce("The spacecoin bubble has popped! Get to the credit deposit machine at [get_area(src)] and cash out before you lose all of your funds!", sender_override = "CRAB-17 Protocol")
+	priority_announce("Пузырь космофинансовой пирамиды лопнул! Доберитесь до машины для депозитов в [get_area(src)] и получите деньги до того как они будут безвозвратно утеряны!", sender_override = "Протокол CRAB-17")
 	animate(DF, pixel_z = -8, time = 5, , easing = LINEAR_EASING)
 	playsound(src,  'sound/items/weapons/mortar_whistle.ogg', 70, TRUE, 6)
 	addtimer(CALLBACK(src, PROC_REF(endLaunch)), 5, TIMER_CLIENT_TIME) //Go onto the last step after a very short falling animation

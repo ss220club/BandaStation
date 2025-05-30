@@ -63,7 +63,8 @@
 /obj/item/fish/starfish/chrystarfish/set_status(new_status, silent)
 	. = ..()
 	if(new_status == FISH_DEAD)
-		new fillet_type(get_turf(src))
+		if(fillet_type)
+			new fillet_type(get_turf(src))
 		playsound(src, SFX_SHATTER, 50)
 		qdel(src)
 
@@ -126,8 +127,8 @@
 	pickup_sound = SFX_FISH_PICKUP
 	sound_vary = TRUE
 
-	base_pixel_x = -16
-	pixel_x = -16
+	base_pixel_w = -16
+	pixel_w = -16
 	sprite_width = 13
 	sprite_height = 9
 
@@ -191,6 +192,9 @@
 
 /obj/item/fish/dolphish/do_fish_process(seconds_per_tick)
 	. = ..()
+	if(QDELETED(src))
+		return
+
 	var/patience_reduction = 1
 
 	var/turf/onturf = get_turf(loc)
@@ -715,7 +719,10 @@
 /datum/bodypart_overlay/simple/babbearfish
 	icon_state = "babbearfish"
 
-/datum/bodypart_overlay/simple/babbearfish/can_draw_on_bodypart(mob/living/carbon/human/human)
+/datum/bodypart_overlay/simple/babbearfish/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
+	var/mob/living/carbon/human/human = bodypart_owner.owner
+	if(!istype(human))
+		return TRUE
 	if((human.head?.flags_inv & HIDEEARS) || (human.wear_mask?.flags_inv & HIDEEARS))
 		return FALSE
 	return TRUE
@@ -740,7 +747,7 @@
 	. = ..()
 	limb.remove_bodypart_overlay(babbel_overlay)
 
-/obj/item/organ/ears/babbelfish/attack(mob/living/target_mob, mob/living/user, params)
+/obj/item/organ/ears/babbelfish/attack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	var/obj/item/organ/ears/ears = target_mob.get_organ_slot(ORGAN_SLOT_EARS)
 	if(!ears)

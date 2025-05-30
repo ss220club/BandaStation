@@ -87,37 +87,37 @@
 	SIGNAL_HANDLER
 
 	if(isnull(bayonet))
-		examine_list += "It has a <b>bayonet</b> lug on it."
+		examine_list += "Имеется крепление для <b>штыка</b>."
 		return
 
-	examine_list += "It has \a [bayonet] [removable ? "" : "permanently "]affixed to it."
+	examine_list += "[capitalize(bayonet.declent_ru(NOMINATIVE))] установлен[genderize_decode(bayonet, "", "а", "о", "ы")][removable ? "" : ", без возможности снятия,"] на оружии."
 	if(removable)
-		examine_list += span_info("[bayonet] looks like it can be <b>unscrewed</b> from [bayonet].")
+		examine_list += span_info("[capitalize(bayonet.declent_ru(ACCUSATIVE))] можно <b>отвинтить</b> от [source.declent_ru(GENITIVE)].")
 
-/datum/component/bayonet_attachable/proc/on_pre_attack(obj/item/source, atom/target, mob/living/user, params)
+/datum/component/bayonet_attachable/proc/on_pre_attack(obj/item/source, atom/target, mob/living/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	if (isnull(bayonet) || !user.combat_mode)
 		return NONE
 
-	INVOKE_ASYNC(bayonet, TYPE_PROC_REF(/obj/item, melee_attack_chain), user, target, params)
+	INVOKE_ASYNC(bayonet, TYPE_PROC_REF(/obj/item, melee_attack_chain), user, target, modifiers)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
-/datum/component/bayonet_attachable/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/attacker, params)
+/datum/component/bayonet_attachable/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/attacker, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(!is_type_in_typecache(attacking_item, valid_bayonets))
 		return
 
 	if(bayonet)
-		source.balloon_alert(attacker, "already has \a [bayonet]!")
+		source.balloon_alert(attacker, "уже имеется [bayonet.declent_ru(NOMINATIVE)]!")
 		return
 
 	if(!attacker.transferItemToLoc(attacking_item, source))
 		return
 
 	add_bayonet(attacking_item, attacker)
-	source.balloon_alert(attacker, "attached")
+	source.balloon_alert(attacker, "прикрепление")
 	return COMPONENT_NO_AFTERATTACK
 
 /datum/component/bayonet_attachable/proc/add_bayonet(obj/item/new_bayonet, mob/attacher)
@@ -161,7 +161,7 @@
 
 /datum/component/bayonet_attachable/proc/unscrew_bayonet(obj/item/source, mob/user, obj/item/tool)
 	tool?.play_tool_sound(source)
-	source.balloon_alert(user, "unscrewed [bayonet]")
+	source.balloon_alert(user, "отвинчивание [bayonet.declent_ru(GENITIVE)]")
 
 	var/obj/item/to_remove = bayonet
 	to_remove.forceMove(source.drop_location())
@@ -178,8 +178,8 @@
 		return
 
 	var/mutable_appearance/bayonet_appearance = mutable_appearance(bayonet_overlay_icon, bayonet_overlay)
-	bayonet_appearance.pixel_x = offset_x
-	bayonet_appearance.pixel_y = offset_y
+	bayonet_appearance.pixel_w = offset_x
+	bayonet_appearance.pixel_z = offset_y
 	overlays += bayonet_appearance
 
 /datum/component/bayonet_attachable/proc/on_update_icon_state(obj/item/source)
@@ -203,7 +203,7 @@
 
 	if (!bayonet || allow_sawnoff)
 		return
-	source.balloon_alert(user, "bayonet must be removed!")
+	source.balloon_alert(user, "нужно снять штык!")
 	return COMPONENT_CANCEL_SAWING_OFF
 
 /datum/component/bayonet_attachable/proc/on_sawn_off(obj/item/source, mob/user)

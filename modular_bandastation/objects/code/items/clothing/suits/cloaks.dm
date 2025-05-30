@@ -88,3 +88,42 @@
 	icon_state = "ntsc_coat"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
+
+// Skrell Emperor Guard
+/obj/item/clothing/neck/cloak/emperor_guard
+	name = "emperor guards's mantle"
+	desc = "Кроваво-белый плащ Клинков Императора."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "emperor_guard_manlte"
+
+// Grayscale cloak
+/obj/item/clothing/neck/cloak/colorable_cloak
+	name = "cloak"
+	desc = "Обычный тканевый плащ."
+	icon = 'icons/map_icons/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "/obj/item/clothing/neck/cloak/colorable_cloak"
+	post_init_icon_state = "color_cloak"
+	greyscale_colors = COLOR_PRISONER_BLACK
+	greyscale_config = /datum/greyscale_config/colorable_cloak
+	greyscale_config_worn = /datum/greyscale_config/colorable_cloak/worn
+	flags_1 = IS_PLAYER_COLORABLE_1
+
+/datum/greyscale_config/colorable_cloak
+	name = "Cloak"
+	icon_file = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	json_config = 'code/datums/greyscale/json_configs/bandastation/cloak.json'
+
+/datum/greyscale_config/colorable_cloak/worn
+	name = "Cloak (Worn)"
+	icon_file = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+
+// Fancy cloak
+/obj/item/clothing/neck/cloak/fancy_cloak
+	name = "fancy cloak"
+	desc = "Роскошный шелковистый плащ с золотистой вышивкой и застёжкой, украшенной потускневшим драгоценным камнем.\
+	Настоящий антиквариат."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "fancy_cloak"

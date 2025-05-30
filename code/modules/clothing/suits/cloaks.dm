@@ -4,6 +4,7 @@
 	name = "brown cloak"
 	desc = "It's a cape that can be worn around your neck."
 	icon = 'icons/obj/clothing/cloaks.dmi'
+	worn_icon = 'icons/mob/clothing/neck.dmi'
 	icon_state = "qmcloak"
 	inhand_icon_state = null
 	w_class = WEIGHT_CLASS_SMALL
@@ -15,7 +16,7 @@
 	AddComponent(/datum/component/surgery_initiator)
 
 /obj/item/clothing/neck/cloak/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/clothing/neck/cloak/hos
@@ -70,7 +71,7 @@
 
 /obj/item/clothing/neck/cloak/skill_reward/cleaning
 	name = "legendary cleaner's cloak"
-	desc = "Worn by the most skilled custodians, this legendary cloak is only attainable by achieving janitorial enlightenment. This status symbol represents a being not only extensively trained in grime combat, but one who is willing to use an entire aresenal of cleaning supplies to its full extent to wipe grime's miserable ass off the face of the station."
+	desc = "Worn by the most skilled custodians, this legendary cloak is only attainable by achieving janitorial enlightenment. This status symbol represents a being not only extensively trained in grime combat, but one who is willing to use an entire arsenal of cleaning supplies to its full extent to wipe grime's miserable ass off the face of the station."
 	icon_state = "cleanercloak"
 	associated_skill_path = /datum/skill/cleaning
 

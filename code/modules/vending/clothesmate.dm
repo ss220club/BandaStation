@@ -4,8 +4,8 @@
 	icon_state = "clothes"
 	icon_deny = "clothes-deny"
 	panel_type = "panel15"
-	product_slogans = "Dress for success!;Prepare to look swagalicious!;Look at all this swag!;Why leave style up to fate? Use the ClothesMate!"
-	vend_reply = "Thank you for using the ClothesMate!"
+	product_slogans = "Одежда для успеха!;Приготовьтесь выглядеть шикарно!;Только посмотрите на эту красоту!;Зачем оставлять стиль на произвол судьбы? Воспользуйтесь ClothesMate!"
+	vend_reply = "Благодарим за использование ClothesMate!"
 	product_categories = list(
 		list(
 			"name" = "Head",
@@ -32,6 +32,9 @@
 				/obj/item/clothing/head/chaplain/taqiyah/red = 3,
 				/obj/item/clothing/head/hats/tophat = 3,
 				/obj/item/clothing/head/fedora = 3,
+				/obj/item/clothing/head/fedora/white = 3,
+				/obj/item/clothing/head/fedora/beige = 3,
+				/obj/item/clothing/head/fedora/greyscale = 3,
 				/obj/item/clothing/head/hats/bowler = 3,
 				/obj/item/clothing/head/cowboy/white = 3,
 				/obj/item/clothing/head/cowboy/grey = 3,
@@ -58,6 +61,7 @@
 				/obj/item/storage/belt/fannypack = 3,
 				/obj/item/storage/belt/fannypack/blue = 3,
 				/obj/item/storage/belt/fannypack/red = 3,
+				/obj/item/clothing/neck/cloak/colorable_cloak = 3, // BANDASTATION ADD
 			),
 		),
 
@@ -93,6 +97,8 @@
 			"icon" = "vest",
 			"products" = list(
 				/obj/item/clothing/suit/toggle/jacket/sweater = 4,
+				/obj/item/clothing/suit/jacket/blazer = 4,
+				/obj/item/clothing/suit/toggle/jacket/trenchcoat = 4,
 				/obj/item/clothing/suit/jacket/oversized = 4,
 				/obj/item/clothing/suit/jacket/fancy = 4,
 				/obj/item/clothing/suit/toggle/lawyer/greyscale = 4,

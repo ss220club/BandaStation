@@ -158,7 +158,7 @@
 
 /atom/movable/screen/alert/status_effect/fleshmend
 	name = "Fleshmend"
-	desc = "Our wounds are rapidly healing. <i>This effect is prevented if we are on fire.</i>"
+	desc = "Наши раны быстро заживают. <i>Этот эффект приостанавливается, если мы горим.</i>"
 	icon_state = "fleshmend"
 
 /datum/status_effect/exercised
@@ -213,10 +213,10 @@
 		if(new_owner.reagents.has_reagent(workout_reagent))
 			food_boost += supplementary_reagents_bonus[workout_reagent]
 
-	var/skill_level_boost = (new_owner.mind.get_skill_level(/datum/skill/athletics) - 1) * 2 SECONDS
+	var/skill_level_boost = (new_owner.mind?.get_skill_level(/datum/skill/athletics) - 1) * 2 SECONDS
 	bonus_time = (bonus_time + food_boost + skill_level_boost) * modifier
 
-	var/exhaustion_limit = new_owner.mind.get_skill_modifier(/datum/skill/athletics, SKILL_VALUE_MODIFIER) + world.time
+	var/exhaustion_limit = new_owner.mind?.get_skill_modifier(/datum/skill/athletics, SKILL_VALUE_MODIFIER) + world.time
 	if(duration + bonus_time >= exhaustion_limit)
 		duration = exhaustion_limit
 		to_chat(new_owner, span_userdanger("Your muscles are exhausted! Might be a good idea to sleep..."))
@@ -235,8 +235,10 @@
 	new_owner.add_mood_event("exercise", /datum/mood_event/exercise, new_owner.mind.get_skill_level(/datum/skill/athletics))
 
 /datum/status_effect/exercised/on_apply()
+	if(!owner.mind)
+		return FALSE
 	owner.add_mood_event("exercise", /datum/mood_event/exercise, owner.mind.get_skill_level(/datum/skill/athletics))
-	return ..()
+	return TRUE
 
 /datum/status_effect/exercised/on_remove()
 	owner.clear_mood_event("exercise")
@@ -428,7 +430,7 @@
 
 	if(iscarbon(owner))
 		chainsaw = new(get_turf(owner))
-		ADD_TRAIT(chainsaw, TRAIT_NODROP, CHAINSAW_FRENZY_TRAIT)
+		ADD_TRAIT(chainsaw, TRAIT_NODROP, TRAIT_STATUS_EFFECT(id))
 		owner.put_in_hands(chainsaw, forced = TRUE)
 		chainsaw.attack_self(owner)
 		owner.reagents.add_reagent(/datum/reagent/medicine/adminordrazine, 25)
@@ -436,7 +438,7 @@
 	owner.log_message("entered a blood frenzy", LOG_ATTACK)
 	to_chat(owner, span_narsiesmall("KILL, KILL, KILL! YOU HAVE NO ALLIES ANYMORE, NO TEAM MATES OR ALLEGIANCES! KILL THEM ALL!"))
 
-	var/datum/client_colour/colour = owner.add_client_colour(/datum/client_colour/bloodlust)
+	var/datum/client_colour/colour = owner.add_client_colour(/datum/client_colour/bloodlust, REF(src))
 	QDEL_IN(colour, 1.1 SECONDS)
 	return TRUE
 
@@ -542,7 +544,7 @@
 
 /atom/movable/screen/alert/status_effect/blessing_of_insanity
 	name = "Blessing of Insanity"
-	desc = "Your devotion to madness has improved your resilience to all damage and you gain the power to levitate!"
+	desc = "Преданность безумию повысила вашу устойчивость к любым повреждениям, и вы обрели способность левитировать!"
 	//no screen alert - the gravity already throws one
 
 /datum/status_effect/blessing_of_insanity/on_apply()
@@ -559,7 +561,7 @@
 	owner.AddElement(/datum/element/simple_flying)
 	owner.add_stun_absorption(source = id, priority = 4)
 	owner.add_movespeed_mod_immunities(id, /datum/movespeed_modifier/damage_slowdown)
-	ADD_TRAIT(owner, TRAIT_FREE_HYPERSPACE_MOVEMENT, id)
+	ADD_TRAIT(owner, TRAIT_FREE_HYPERSPACE_MOVEMENT, TRAIT_STATUS_EFFECT(id))
 	owner.playsound_local(get_turf(owner), 'sound/effects/chemistry/ahaha.ogg', vol = 100, vary = TRUE, use_reverb = TRUE)
 	return TRUE
 
@@ -577,7 +579,7 @@
 	owner.RemoveElement(/datum/element/simple_flying)
 	owner.remove_stun_absorption(id)
 	owner.remove_movespeed_mod_immunities(id, /datum/movespeed_modifier/damage_slowdown)
-	REMOVE_TRAIT(owner, TRAIT_FREE_HYPERSPACE_MOVEMENT, id)
+	REMOVE_TRAIT(owner, TRAIT_FREE_HYPERSPACE_MOVEMENT, TRAIT_STATUS_EFFECT(id))
 
 /// Gives you a brief period of anti-gravity
 /datum/status_effect/jump_jet
@@ -600,11 +602,11 @@
 	alert_type = null
 
 /datum/status_effect/radiation_immunity/on_apply()
-	ADD_TRAIT(owner, TRAIT_RADIMMUNE, type)
+	ADD_TRAIT(owner, TRAIT_RADIMMUNE, TRAIT_STATUS_EFFECT(id))
 	return TRUE
 
 /datum/status_effect/radiation_immunity/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_RADIMMUNE, type)
+	REMOVE_TRAIT(owner, TRAIT_RADIMMUNE, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/radiation_immunity/radnebula
 	alert_type = /atom/movable/screen/alert/status_effect/radiation_immunity
@@ -614,29 +616,33 @@
 	desc = "You're immune to radiation, get settled quick!"
 	icon_state = "radiation_shield"
 
-/// Heal in darkness and potentially trigger other effects, persists for a short duration after leaving
-/datum/status_effect/shadow_regeneration
-	id = "shadow_regeneration"
+/// Throw an alert we're in darkness!! Nightvision can make it hard to tell so this is useful
+/datum/status_effect/shadow
+	id = "shadow"
 	duration = 2 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 	alert_type = /atom/movable/screen/alert/status_effect/shadow_regeneration
 
-/datum/status_effect/shadow_regeneration/on_apply()
+/// Same as above, but also heal in darkness!! Mostly superseded but some simple mobs use this
+/datum/status_effect/shadow/regeneration
+	id = "shadow_regeneration"
+
+/datum/status_effect/shadow/regeneration/on_apply()
 	. = ..()
 	if (!.)
 		return FALSE
 	heal_owner()
 	return TRUE
 
-/datum/status_effect/shadow_regeneration/refresh(effect)
+/datum/status_effect/shadow/regeneration/refresh(effect)
 	. = ..()
 	heal_owner()
 
 /// Regenerate health whenever this status effect is applied or reapplied
-/datum/status_effect/shadow_regeneration/proc/heal_owner()
+/datum/status_effect/shadow/regeneration/proc/heal_owner()
 	owner.heal_overall_damage(brute = 1, burn = 1, required_bodytype = BODYTYPE_ORGANIC)
 
 /atom/movable/screen/alert/status_effect/shadow_regeneration
 	name = "Shadow Regeneration"
-	desc = "Bathed in soothing darkness, you will slowly heal yourself."
+	desc = "Bathed in soothing darkness, you will slowly heal yourself"
 	icon_state = "lightless"

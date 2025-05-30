@@ -33,9 +33,9 @@
 	/// The base weight for the each quirk's mail goodies list to be selected is 5
 	/// then the item selected is determined by pick(selected_quirk.mail_goodies)
 	var/list/mail_goodies
-	/// The minimum stat where this quirk can process (if it has QUIRK_PROCESSES)
+	/// max stat below which this quirk can process (if it has QUIRK_PROCESSES) and above which it stops.
 	/// If null, then it will process regardless of stat.
-	var/minimum_process_stat = HARD_CRIT
+	var/maximum_process_stat = HARD_CRIT
 	/// A list of additional signals to register with update_process()
 	var/list/process_update_signals
 	/// A list of traits that should stop this quirk from processing.
@@ -66,7 +66,7 @@
  * * new_holder - The mob to add this quirk to.
  * * quirk_transfer - If this is being added to the holder as part of a quirk transfer. Quirks can use this to decide not to spawn new items or apply any other one-time effects.
  */
-/datum/quirk/proc/add_to_holder(mob/living/new_holder, quirk_transfer = FALSE, client/client_source)
+/datum/quirk/proc/add_to_holder(mob/living/new_holder, quirk_transfer = FALSE, client/client_source, unique = TRUE)
 	if(!new_holder)
 		CRASH("Quirk attempted to be added to null mob.")
 
@@ -90,7 +90,7 @@
 	add(client_source)
 
 	if(quirk_flags & QUIRK_PROCESSES)
-		if(!isnull(minimum_process_stat))
+		if(!isnull(maximum_process_stat))
 			RegisterSignal(quirk_holder, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_changed))
 		if(process_update_signals)
 			RegisterSignals(quirk_holder, process_update_signals, PROC_REF(update_process))
@@ -100,7 +100,8 @@
 	if(!quirk_transfer)
 		if(gain_text)
 			to_chat(quirk_holder, gain_text)
-		add_unique(client_source)
+		if (unique)
+			add_unique(client_source)
 
 		if(quirk_holder.client)
 			post_add()
@@ -125,7 +126,7 @@
 	if(!quirk_transfer && lose_text)
 		to_chat(quirk_holder, lose_text)
 
-	if(mob_trait)
+	if(mob_trait && !QDELETED(quirk_holder))
 		REMOVE_TRAIT(quirk_holder, mob_trait, QUIRK_TRAIT)
 
 	if(quirk_flags & QUIRK_PROCESSES)
@@ -175,7 +176,7 @@
 		return FALSE
 	if(!(quirk_flags & QUIRK_PROCESSES))
 		return FALSE
-	if(!isnull(minimum_process_stat) && quirk_holder.stat <= minimum_process_stat)
+	if(!isnull(maximum_process_stat) && quirk_holder.stat >= maximum_process_stat)
 		return FALSE
 	for(var/trait in no_process_traits)
 		if(HAS_TRAIT(quirk_holder, trait))
@@ -196,6 +197,12 @@
 	SIGNAL_HANDLER
 	update_process()
 
+/// If a quirk is able to be selected for the mob's species
+/datum/quirk/proc/is_species_appropriate(datum/species/mob_species)
+	if(mob_trait in GLOB.species_prototypes[mob_species].inherent_traits)
+		return FALSE
+	return TRUE
+
 /// Subtype quirk that has some bonus logic to spawn items for the player.
 /datum/quirk/item_quirk
 	/// Lazylist of strings describing where all the quirk items have been spawned.
@@ -210,12 +217,12 @@
  * If no valid slot is available for an item, the item is left at the mob's feet.
  * Arguments:
  * * quirk_item - The item to give to the quirk holder. If the item is a path, the item will be spawned in first on the player's turf.
- * * valid_slots - Assoc list of descriptive location strings to item slots that is fed into [/mob/living/carbon/proc/equip_in_one_of_slots]. list(LOCATION_BACKPACK = ITEM_SLOT_BACKPACK)
+ * * valid_slots - List of LOCATION_X that is fed into [/mob/living/carbon/proc/equip_in_one_of_slots].
  * * flavour_text - Optional flavour text to append to the where_items_spawned string after the item's location.
  * * default_location - If the item isn't possible to equip in a valid slot, this is a description of where the item was spawned.
  * * notify_player - If TRUE, adds strings to where_items_spawned list to be output to the player in [/datum/quirk/item_quirk/post_add()]
  */
-/datum/quirk/item_quirk/proc/give_item_to_holder(obj/item/quirk_item, list/valid_slots, flavour_text = null, default_location = "at your feet", notify_player = TRUE)
+/datum/quirk/item_quirk/proc/give_item_to_holder(obj/item/quirk_item, list/valid_slots, flavour_text = null, default_location = "у ваших ног", notify_player = TRUE)
 	if(ispath(quirk_item))
 		quirk_item = new quirk_item(get_turf(quirk_holder))
 
@@ -227,7 +234,7 @@
 		open_backpack = TRUE
 
 	if(notify_player)
-		LAZYADD(where_items_spawned, span_boldnotice("You have \a [quirk_item] [where]. [flavour_text]"))
+		LAZYADD(where_items_spawned, span_boldnotice("У вас есть \a [quirk_item] [where]. [flavour_text]"))
 
 /datum/quirk/item_quirk/post_add()
 	if(open_backpack)
@@ -267,7 +274,7 @@
 		dat += medical ? candidate.medical_record_text : candidate.name
 
 	if(!length(dat))
-		return medical ? "No issues have been declared." : "None"
+		return medical ? "Каких-либо проблем не зафиксировано." : "Пусто"
 	return medical ?  dat.Join("<br>") : dat.Join(", ")
 
 /mob/living/proc/cleanse_quirk_datums() //removes all trait datums

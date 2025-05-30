@@ -147,7 +147,7 @@
 	name = flipped ? cardname : "card"
 	return ..()
 
-/obj/item/toy/singlecard/attackby(obj/item/item, mob/living/user, params, flip_card=FALSE)
+/obj/item/toy/singlecard/attackby(obj/item/item, mob/living/user, list/params, list/attack_modifier, flip_card=FALSE)
 	var/obj/item/toy/singlecard/card
 
 	if(istype(item, /obj/item/toy/cards/deck))
@@ -197,7 +197,7 @@
 	if(istype(item, /obj/item/toy/crayon))
 		var/obj/item/toy/crayon/crayon = item
 		can_item_write = TRUE
-		marked_cheating_color = (crayon.crayon_color == "mime" && "invisible") || crayon.crayon_color
+		marked_cheating_color = (crayon.crayon_color == "mime" && "invisible ") || crayon.crayon_color
 
 	if(can_item_write && !blank) // You cheated not only the game, but yourself
 		marked_color = marked_cheating_color
@@ -219,7 +219,7 @@
 		return
 	return ..()
 
-/obj/item/toy/singlecard/attackby_secondary(obj/item/item, mob/living/user, modifiers)
+/obj/item/toy/singlecard/attackby_secondary(obj/item/item, mob/living/user, list/modifiers, list/attack_modifiers)
 	attackby(item, user, modifiers, flip_card=TRUE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 

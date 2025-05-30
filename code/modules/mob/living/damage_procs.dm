@@ -93,7 +93,7 @@
 		if(BRAIN)
 			damage_dealt = -1 * adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_amount)
 
-	SEND_SIGNAL(src, COMSIG_MOB_AFTER_APPLY_DAMAGE, damage_dealt, damagetype, def_zone, blocked, wound_bonus, bare_wound_bonus,sharpness, attack_direction, attacking_item, wound_clothing)
+	SEND_SIGNAL(src, COMSIG_MOB_AFTER_APPLY_DAMAGE, damage_dealt, damagetype, def_zone, blocked, wound_bonus, bare_wound_bonus, sharpness, attack_direction, attacking_item, wound_clothing)
 	return damage_dealt
 
 /**
@@ -245,7 +245,7 @@
 	if(drowsy)
 		adjust_drowsiness(drowsy)
 	if(eyeblur)
-		adjust_eye_blur(eyeblur)
+		adjust_eye_blur_up_to(eyeblur, eyeblur)
 	if(jitter && !check_stun_immunity(CANSTUN))
 		adjust_jitter(jitter)
 	if(slur)

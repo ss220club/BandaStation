@@ -84,7 +84,7 @@
 
 /obj/item/dualsaber/suicide_act(mob/living/carbon/user)
 	if(HAS_TRAIT(src, TRAIT_WIELDED))
-		user.visible_message(span_suicide("[user] begins spinning way too fast! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] begins spinning way too fast! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 
 		var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)//stole from chainsaw code
 		var/obj/item/organ/brain/B = user.get_organ_slot(ORGAN_SLOT_BRAIN)
@@ -206,7 +206,7 @@
 /obj/item/dualsaber/purple
 	possible_colors = list("purple")
 
-/obj/item/dualsaber/attackby(obj/item/W, mob/user, params)
+/obj/item/dualsaber/attackby(obj/item/W, mob/user, list/modifiers, list/attack_modifiers)
 	if(W.tool_behaviour == TOOL_MULTITOOL)
 		if(!hacked)
 			hacked = TRUE

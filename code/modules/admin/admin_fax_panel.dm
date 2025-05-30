@@ -57,7 +57,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 		ui.open()
 
 /datum/fax_panel_interface/ui_state(mob/user)
-	return GLOB.admin_state
+	return ADMIN_STATE(R_ADMIN)
 
 /datum/fax_panel_interface/ui_static_data(mob/user)
 	var/list/data = list()
@@ -117,7 +117,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 					break
 
 			fax_paper.name = "paper — [default_paper_name]"
-			fax_paper.add_raw_text(params["rawText"], advanced_html = TRUE)
+			fax_paper.add_raw_text(replace_text_keys(params["rawText"], ui.user), advanced_html = TRUE)
 
 			if(stamp)
 				fax_paper.add_stamp(stamp_class, params["stampX"], params["stampY"], params["stampAngle"], stamp)

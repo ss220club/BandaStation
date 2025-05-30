@@ -10,7 +10,7 @@
  */
 /mob/living/basic/space_dragon
 	name = "Space Dragon"
-	desc = "A serpentine leviathan whose flight defies all modern understanding of physics. Said to be the ultimate stage in the life cycle of the Space Carp."
+	desc = "Змеевидный левиафан, возможность полета которого противоречит всему, что мы знаем о физике. Говорят, что это высшая форма в цикле жизни космического карпа."
 	icon = 'icons/mob/nonhuman-player/spacedragon.dmi'
 	icon_state = "spacedragon"
 	icon_living = "spacedragon"
@@ -18,6 +18,7 @@
 	health_doll_icon = "spacedragon"
 	faction = list(FACTION_CARP)
 	mob_biotypes = MOB_SPECIAL
+	status_flags = CANPUSH
 	flags_1 = PREVENT_CONTENTS_EXPLOSION_1
 	gender = NEUTER
 	maxHealth = 400
@@ -44,13 +45,17 @@
 	maptext_width = 64
 	mouse_opacity = MOUSE_OPACITY_ICON
 	death_sound = 'sound/mobs/non-humanoids/space_dragon/space_dragon_roar.ogg'
-	death_message = "screeches in agony as it collapses to the floor, its life extinguished."
+	death_message = "вопя в агонии, он рушится на пол, теперь его жизнь угасла."
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
 	initial_language_holder = /datum/language_holder/carp/dragon
 	can_buckle_to = FALSE
 	lighting_cutoff_red = 12
 	lighting_cutoff_green = 15
 	lighting_cutoff_blue = 34
+	max_stamina = 200
+	stamina_crit_threshold = BASIC_MOB_NO_STAMCRIT
+	stamina_recovery = 5
+	max_stamina_slowdown = 12
 
 	/// The colour of the space dragon
 	var/chosen_colour
@@ -75,7 +80,7 @@
 	AddElement(/datum/element/content_barfer)
 	AddElement(/datum/element/wall_tearer, tear_time = 4 SECONDS, reinforced_multiplier = 3, do_after_key = DOAFTER_SOURCE_SPACE_DRAGON_INTERACTION)
 	AddElement(/datum/element/door_pryer, pry_time = 4 SECONDS, interaction_key = DOAFTER_SOURCE_SPACE_DRAGON_INTERACTION)
-	AddComponent(/datum/component/seethrough_mob, keep_color = TRUE)
+	AddComponent(/datum/component/seethrough_mob)
 	AddComponent(/datum/component/profound_fisher, new /obj/item/fishing_rod/mob_fisher/dragon(src))
 	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
 	RegisterSignal(src, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_changed))
@@ -125,24 +130,24 @@
 
 /// Allows the space dragon to pick a funny name
 /mob/living/basic/space_dragon/proc/rename_dragon()
-	var/chosen_name = sanitize_name(reject_bad_text(tgui_input_text(src, "What would you like your name to be?", "Choose Your Name", real_name, MAX_NAME_LEN)))
+	var/chosen_name = sanitize_name(reject_bad_text(tgui_input_text(src, "Какое имя вы хотите задать?", "Выбор имени", real_name, MAX_NAME_LEN)))
 	if(!chosen_name) // Null or empty or rejected
-		to_chat(src, span_warning("Not a valid name, please try again."))
+		to_chat(src, span_warning("Это имя некорректно, попробуйте еще раз."))
 		rename_dragon()
 		return
-	to_chat(src, span_notice("Your name is now [span_name("[chosen_name]")], the feared Space Dragon."))
+	to_chat(src, span_notice("Имя вам - [span_name("[chosen_name]")], устрашающий космический дракон."))
 	fully_replace_character_name(null, chosen_name)
 
 /// Select scale colour with the colour picker
 /mob/living/basic/space_dragon/proc/select_colour()
-	chosen_colour = input(src, "What colour would you like to be?" ,"Colour Selection", COLOR_WHITE) as color|null
+	chosen_colour = input(src, "Какого цвета вы хотите быть?" ,"Выбор цвета", COLOR_WHITE) as color|null
 	if(!chosen_colour) // Redo proc until we get a color
-		to_chat(src, span_warning("Not a valid colour, please try again."))
+		to_chat(src, span_warning("Этот цвет некорректен, попробуйте еще раз."))
 		select_colour()
 		return
 	var/list/skin_hsv = rgb2hsv(chosen_colour)
 	if(skin_hsv[3] < REJECT_DARK_COLOUR_THRESHOLD)
-		to_chat(src, span_danger("Invalid colour. Your colour is not bright enough."))
+		to_chat(src, span_danger("Этот цвет некорректен - он недостаточно светлый."))
 		select_colour()
 		return
 	add_atom_colour(chosen_colour, FIXED_COLOUR_PRIORITY)
@@ -170,8 +175,7 @@
 	else if (HAS_TRAIT(src, TRAIT_WING_BUFFET))
 		overlay_state = "overlay_gust"
 
-	var/mutable_appearance/overlay = mutable_appearance(icon, "[icon_living]_[overlay_state]")
-	overlay.appearance_flags = RESET_COLOR
+	var/mutable_appearance/overlay = mutable_appearance(icon, "[icon_living]_[overlay_state]", appearance_flags = RESET_COLOR|KEEP_APART)
 	. += overlay
 
 /mob/living/basic/space_dragon/melee_attack(obj/vehicle/sealed/mecha/target, list/modifiers, ignore_cooldown)
@@ -186,7 +190,7 @@
 	if (target == src)
 		return COMPONENT_HOSTILE_NO_ATTACK // Easy to misclick yourself, let's not
 	if (DOING_INTERACTION(source, DOAFTER_SOURCE_SPACE_DRAGON_INTERACTION))
-		balloon_alert(source, "busy!")
+		balloon_alert(source, "заняты!")
 		return COMPONENT_HOSTILE_NO_ATTACK
 	if(isfish(target))
 		INVOKE_ASYNC(src, PROC_REF(try_eat), target)
@@ -200,7 +204,7 @@
 
 /// Try putting something inside us
 /mob/living/basic/space_dragon/proc/try_eat(atom/movable/food)
-	balloon_alert(src, "swallowing...")
+	balloon_alert(src, "пожираем...")
 	if (do_after(src, 3 SECONDS, target = food))
 		if(isliving(food))
 			eat(food)
@@ -219,7 +223,7 @@
 	if (QDELETED(food) || food.loc == src)
 		return FALSE
 	playsound(src, 'sound/effects/magic/demon_attack1.ogg', 60, TRUE)
-	visible_message(span_boldwarning("[src] swallows [food] whole!"))
+	visible_message(span_boldwarning("[capitalize(declent_ru(NOMINATIVE))] поглощает [food.declent_ru(ACCUSATIVE)] целиком!"))
 	food.extinguish_mob() // It's wet in there, and our food is likely to be on fire. Let's be decent and not husk them.
 	food.forceMove(src)
 	return TRUE
@@ -278,7 +282,7 @@
 		return
 	new /obj/effect/decal/cleanable/vomit(loc)
 	playsound(src, 'sound/effects/splat.ogg', vol = 50, vary = TRUE)
-	visible_message(span_danger("[src] vomits up [eaten]!"))
+	visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] срыгивает [eaten.declent_ru(ACCUSATIVE)]!"))
 	eaten.forceMove(loc)
 	eaten.Paralyze(5 SECONDS)
 

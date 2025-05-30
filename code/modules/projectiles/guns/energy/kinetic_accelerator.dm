@@ -45,12 +45,12 @@
 
 	AddElement( \
 		/datum/element/contextual_screentip_bare_hands, \
-		rmb_text = "Detach a modkit", \
+		rmb_text = "Снять модуль", \
 	)
 
 	var/static/list/tool_behaviors = list(
 		TOOL_CROWBAR = list(
-			SCREENTIP_CONTEXT_LMB = "Eject all modkits",
+			SCREENTIP_CONTEXT_LMB = "Снять все модули",
 		),
 	)
 	AddElement(/datum/element/contextual_screentip_tools, tool_behaviors)
@@ -69,20 +69,20 @@
 /obj/item/gun/energy/recharge/kinetic_accelerator/examine(mob/user)
 	. = ..()
 	if(max_mod_capacity)
-		. += "<b>[get_remaining_mod_capacity()]%</b> mod capacity remaining."
-		. += span_info("You can use a <b>crowbar</b> to remove all modules or <b>right-click</b> with an empty hand to remove a specific one.")
+		. += "Остал[declension_ru(get_remaining_mod_capacity(), "ся", "ось", "ось")] <b>[get_remaining_mod_capacity()]%</b> вместимости для модулей."
+		. += span_info("Вы можете использовать <b>ломик</b> для снятия всех модулей или <b>ПКМ</b> пустой рукой для снятия определенного.")
 		for(var/obj/item/borg/upgrade/modkit/modkit_upgrade as anything in modkits)
-			. += span_notice("There is \a [modkit_upgrade] installed, using <b>[modkit_upgrade.cost]%</b> capacity.")
+			. += span_notice("Имеет установленный модуль '[modkit_upgrade.declent_ru(NOMINATIVE)]', использующий <b>[modkit_upgrade.cost]%</b> вместимости.")
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/crowbar_act(mob/living/user, obj/item/I)
 	. = TRUE
 	if(modkits.len)
-		to_chat(user, span_notice("You pry all the modifications out."))
+		to_chat(user, span_notice("Вы вытаскиваете все модули."))
 		I.play_tool_sound(src, 100)
 		for(var/obj/item/borg/upgrade/modkit/modkit_upgrade as anything in modkits)
 			modkit_upgrade.forceMove(drop_location()) //uninstallation handled in Exited(), or /mob/living/silicon/robot/remove_from_upgrades() for borgs
 	else
-		to_chat(user, span_notice("There are no modifications currently installed."))
+		to_chat(user, span_notice("Не имеются установленные модули."))
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/try_fire_gun(atom/target, mob/living/user, params)
 	return fire_gun(target, user, user.Adjacent(target) && !isturf(target), params)
@@ -249,7 +249,7 @@
 			modkit_upgrade.projectile_strike(src, target_turf, target, kinetic_gun)
 	if(ismineralturf(target_turf))
 		var/turf/closed/mineral/M = target_turf
-		M.gets_drilled(firer, TRUE)
+		M.gets_drilled(firer, 1)
 		if(iscarbon(firer))
 			var/mob/living/carbon/carbon_firer = firer
 			var/skill_modifier = 1
@@ -263,14 +263,18 @@
 //mecha_kineticgun version of the projectile
 /obj/projectile/kinetic/mech
 	range = 5
-	damage = 80
+	damage = 50
 
 /obj/projectile/kinetic/mech/strike_thing(atom/target)
 	. = ..()
-	new /obj/effect/temp_visual/explosion/fast(target)
-	for(var/turf/closed/mineral/mineral_turf in RANGE_TURFS(1, target) - target)
-		mineral_turf.gets_drilled(firer, TRUE)
-	for(var/mob/living/living_mob in range(1, target) - firer - target)
+	new /obj/effect/temp_visual/explosion/fast(get_turf(target))
+
+	for(var/turf/closed/mineral/mineral_turf in RANGE_TURFS(2, target) - target)
+		mineral_turf.gets_drilled(firer, 0.1)
+
+	for(var/mob/living/living_mob in range(2, target) - firer - target)
+		if(!ismining(living_mob))
+			continue
 		var/armor = living_mob.run_armor_check(def_zone, armor_flag, armour_penetration = armour_penetration)
 		living_mob.apply_damage(damage, damage_type, def_zone, armor)
 		to_chat(living_mob, span_userdanger("You're struck by a [name]!"))
@@ -296,7 +300,7 @@
 
 /obj/item/borg/upgrade/modkit/examine(mob/user)
 	. = ..()
-	. += span_notice("Occupies <b>[cost]%</b> of mod capacity.")
+	. += span_notice("Занимает <b>[cost]%</b> вместимости модулей.")
 
 /obj/item/borg/upgrade/modkit/attackby(obj/item/A, mob/user)
 	if(istype(A, /obj/item/gun/energy/recharge/kinetic_accelerator) && !issilicon(user))
@@ -314,10 +318,10 @@
 	. = TRUE
 	if(minebot_upgrade)
 		if(minebot_exclusive && !istype(KA.loc, /mob/living/basic/mining_drone))
-			to_chat(user, span_notice("The modkit you're trying to install is only rated for minebot use."))
+			to_chat(user, span_notice("Этот модуль поддерживается только дронами."))
 			return FALSE
 	else if(istype(KA.loc, /mob/living/basic/mining_drone))
-		to_chat(user, span_notice("The modkit you're trying to install is not rated for minebot use."))
+		to_chat(user, span_notice("Этот модуль не поддерживается модулями."))
 		return FALSE
 	if(denied_type)
 		var/number_of_denied = 0
@@ -331,13 +335,13 @@
 		if(.)
 			if(transfer_to_loc && !user.transferItemToLoc(src, KA))
 				return
-			to_chat(user, span_notice("You install the modkit."))
+			to_chat(user, span_notice("Вы устанавливаете модуль."))
 			playsound(loc, 'sound/items/tools/screwdriver.ogg', 100, TRUE)
 			KA.modkits |= src
 		else
-			to_chat(user, span_notice("The modkit you're trying to install would conflict with an already installed modkit. Remove existing modkits first."))
+			to_chat(user, span_notice("Этот модуль конфликтует с другим установленным модулем. Сперва, вам нужно снять все установленные модули."))
 	else
-		to_chat(user, span_notice("You don't have room(<b>[KA.get_remaining_mod_capacity()]%</b> remaining, [cost]% needed) to install this modkit. Use a crowbar or right click with an empty hand to remove existing modkits."))
+		to_chat(user, span_notice("Не хватает места(<b>[KA.get_remaining_mod_capacity()]%</b> остал[declension_ru(KA.get_remaining_mod_capacity(), "ся", "ось", "ось")], [cost]% нужно) для установки модуля. Используйте ломик или ПКМ пустой рукой для снятия установленных модулей."))
 		. = FALSE
 
 /obj/item/borg/upgrade/modkit/deactivate(mob/living/silicon/robot/R, user = usr)
@@ -388,10 +392,10 @@
 
 // Recalculate recharge time after adding or removing cooldown mods.
 /obj/item/borg/upgrade/modkit/cooldown/proc/get_recharge_time(obj/item/gun/energy/recharge/kinetic_accelerator/KA)
-	
+
 	var/new_recharge_time = initial(KA.recharge_time)
 	for(var/obj/item/borg/upgrade/modkit/modkit_upgrade as anything in KA.modkits)
-		if(istype(modkit_upgrade, src))	
+		if(istype(modkit_upgrade, src))
 			new_recharge_time -= modifier
 
 	return new_recharge_time
@@ -423,6 +427,8 @@
 //AoE blasts
 /obj/item/borg/upgrade/modkit/aoe
 	modifier = 0
+	cost = 10
+	maximum_of_type = 1
 	var/turf_aoe = FALSE
 	var/stats_stolen = FALSE
 
@@ -447,20 +453,25 @@
 /obj/item/borg/upgrade/modkit/aoe/modify_projectile(obj/projectile/kinetic/K)
 	K.name = "kinetic explosion"
 
-/obj/item/borg/upgrade/modkit/aoe/projectile_strike(obj/projectile/kinetic/K, turf/target_turf, atom/target, obj/item/gun/energy/recharge/kinetic_accelerator/KA)
+/obj/item/borg/upgrade/modkit/aoe/projectile_strike(obj/projectile/kinetic/kinetic_blast, turf/target_turf, atom/target, obj/item/gun/energy/recharge/kinetic_accelerator/KA)
 	if(stats_stolen)
 		return
 	new /obj/effect/temp_visual/explosion/fast(target_turf)
 	if(turf_aoe)
-		for(var/T in RANGE_TURFS(1, target_turf) - target_turf)
+		for(var/T in RANGE_TURFS(2, target_turf) - target_turf)
 			if(ismineralturf(T))
 				var/turf/closed/mineral/M = T
-				M.gets_drilled(K.firer, TRUE)
+				M.gets_drilled(kinetic_blast.firer, 0.1)
+
 	if(modifier)
-		for(var/mob/living/L in range(1, target_turf) - K.firer - target)
-			var/armor = L.run_armor_check(K.def_zone, K.armor_flag, "", "", K.armour_penetration)
-			L.apply_damage(K.damage*modifier, K.damage_type, K.def_zone, armor)
-			to_chat(L, span_userdanger("You're struck by a [K.name]!"))
+		for(var/mob/living/living_mob in range(2, target) - kinetic_blast.firer - target)
+
+			if(!ismining(living_mob))
+				continue
+
+			var/armor = living_mob.run_armor_check(kinetic_blast.def_zone, kinetic_blast.armor_flag, armour_penetration = kinetic_blast.armour_penetration)
+			living_mob.apply_damage(kinetic_blast.damage*modifier, kinetic_blast.damage_type, kinetic_blast.def_zone, armor)
+			to_chat(living_mob, span_userdanger("Вас поражает [kinetic_blast.declent_ru(NOMINATIVE)]!"))
 
 /obj/item/borg/upgrade/modkit/aoe/turfs
 	name = "mining explosion"
@@ -468,16 +479,15 @@
 	denied_type = /obj/item/borg/upgrade/modkit/aoe/turfs
 	turf_aoe = TRUE
 
-/obj/item/borg/upgrade/modkit/aoe/turfs/andmobs
-	name = "offensive mining explosion"
-	desc = "Causes the kinetic accelerator to destroy rock and damage mobs in an AoE."
-	maximum_of_type = 3
-	modifier = 0.25
-
 /obj/item/borg/upgrade/modkit/aoe/mobs
 	name = "offensive explosion"
 	desc = "Causes the kinetic accelerator to damage mobs in an AoE."
-	modifier = 0.2
+	modifier = 1
+
+/obj/item/borg/upgrade/modkit/aoe/mobs/andturfs
+	name = "offensive mining explosion"
+	desc = "Causes the kinetic accelerator to destroy rock and damage mobs in an AoE."
+	turf_aoe = TRUE
 
 //Minebot passthrough
 /obj/item/borg/upgrade/modkit/minebot_passthrough
@@ -686,5 +696,5 @@
 /obj/item/borg/upgrade/modkit/tracer/adjustable/proc/choose_bolt_color(mob/user)
 	set waitfor = FALSE
 
-	var/new_color = input(user,"","Choose Color",bolt_color) as color|null
+	var/new_color = input(user,"","Выбор цвета",bolt_color) as color|null
 	bolt_color = new_color || bolt_color

@@ -51,7 +51,7 @@
 	acid = 30
 
 /obj/item/screwdriver/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is stabbing [src] into [user.p_their()] [pick("temple", "heart")]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is stabbing [src] into [user.p_their()] [pick("temple", "heart")]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/screwdriver/Initialize(mapload)
@@ -66,6 +66,7 @@
 	desc = "An ultrasonic screwdriver."
 	icon = 'icons/obj/antags/abductor.dmi'
 	icon_state = "screwdriver_a"
+	post_init_icon_state = null
 	inhand_icon_state = "screwdriver_nuke"
 	custom_materials = list(/datum/material/iron=HALF_SHEET_MATERIAL_AMOUNT*5, /datum/material/silver=SHEET_MATERIAL_AMOUNT*1.25, /datum/material/plasma =HALF_SHEET_MATERIAL_AMOUNT, /datum/material/titanium =SHEET_MATERIAL_AMOUNT, /datum/material/diamond =SHEET_MATERIAL_AMOUNT)
 	usesound = 'sound/items/pshoom/pshoom.ogg'
@@ -80,6 +81,7 @@
 /obj/item/screwdriver/power
 	name = "hand drill"
 	desc = "A simple powered hand drill."
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "drill"
 	inside_belt_icon_state = null
 	inhand_icon_state = "drill"
@@ -139,9 +141,9 @@
 
 /obj/item/screwdriver/power/suicide_act(mob/living/user)
 	if(tool_behaviour == TOOL_SCREWDRIVER)
-		user.visible_message(span_suicide("[user] is putting [src] to [user.p_their()] temple. It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is putting [src] to [user.p_their()] temple. Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	else
-		user.visible_message(span_suicide("[user] is pressing [src] against [user.p_their()] head! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is pressing [src] against [user.p_their()] head! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(loc, 'sound/items/tools/drill_use.ogg', 50, TRUE, -1)
 	return BRUTELOSS
 

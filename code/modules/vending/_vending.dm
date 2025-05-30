@@ -177,7 +177,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	///fontawesome icon name to use in to display the user's balance in the vendor UI
 	var/displayed_currency_icon = "coins"
 	///String of the used currency to display in the vendor UI
-	var/displayed_currency_name = " cr"
+	var/displayed_currency_name = " кр"
 	///Whether our age check is currently functional
 	var/age_restrictions = TRUE
 	/// How many credits does this vending machine have? 20% of all sales go to this pool, and are given freely when the machine is restocked, or successfully tilted. Lost on deconstruction.
@@ -214,9 +214,6 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 
 	///Name of lighting mask for the vending machine
 	var/light_mask
-
-	/// used for narcing on underages
-	var/obj/item/radio/sec_radio
 
 	//the path of the fish_source datum to use for the fishing_spot component
 	var/fish_source_path = /datum/fish_source/vending
@@ -286,9 +283,18 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 /obj/machinery/vending/Destroy()
 	QDEL_NULL(coin)
 	QDEL_NULL(bill)
-	QDEL_NULL(sec_radio)
 	GLOB.vending_machines_to_restock -= src
 	return ..()
+
+/obj/machinery/vending/vv_edit_var(vname, vval)
+	. = ..()
+	if (vname == NAMEOF(src, all_products_free))
+		if (all_products_free)
+			qdel(GetComponent(/datum/component/payment))
+			GLOB.vending_machines_to_restock -= src
+		else
+			AddComponent(/datum/component/payment, 0, SSeconomy.get_dep_account(payment_department), PAYMENT_VENDING)
+			GLOB.vending_machines_to_restock += src
 
 /obj/machinery/vending/can_speak(allow_mimes)
 	return is_operational && !shut_up && ..()
@@ -373,11 +379,9 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 		found_anything = FALSE
 		for(var/datum/data/vending_product/record as anything in shuffle(product_records))
 			//first dump any of the items that have been returned, in case they contain the nuke disk or something
-			for(var/obj/returned_obj_to_dump in record.returned_products)
-				LAZYREMOVE(record.returned_products, returned_obj_to_dump)
-				returned_obj_to_dump.forceMove(get_turf(src))
+			for(var/i in 1 to LAZYLEN(record.returned_products))
+				var/obj/item/returned_obj_to_dump = dispense(record, get_turf(src), dispense_returned = TRUE)
 				step(returned_obj_to_dump, pick(GLOB.alldirs))
-				record.amount--
 
 			if(record.amount <= 0) //Try to use a record that actually has something to dump.
 				continue
@@ -425,7 +429,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 
 		var/obj/item/temp = typepath
 		var/datum/data/vending_product/new_record = new /datum/data/vending_product()
-		new_record.name = initial(temp.name)
+		new_record.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
 		new_record.product_path = typepath
 		if(!start_empty)
 			new_record.amount = amount
@@ -453,8 +457,8 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 */
 /obj/machinery/vending/proc/build_inventories(start_empty)
 	build_inventory(products, product_records, product_categories, start_empty)
-	build_inventory(contraband, hidden_records, create_categories_from("Contraband", "mask", contraband), start_empty, premium = TRUE)
-	build_inventory(premium, coin_records, create_categories_from("Premium", "coins", premium), start_empty, premium = TRUE)
+	build_inventory(contraband, hidden_records, create_categories_from("Контрабанда", "mask", contraband), start_empty, premium = TRUE)
+	build_inventory(premium, coin_records, create_categories_from("Премиум", "coins", premium), start_empty, premium = TRUE)
 
 /**
  * Returns a list of data about the category
@@ -706,7 +710,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 		to_chat(user, span_warning("You must first secure [src]."))
 	return TRUE
 
-/obj/machinery/vending/attackby(obj/item/attack_item, mob/living/user, params)
+/obj/machinery/vending/attackby(obj/item/attack_item, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(panel_open && is_wire_tool(attack_item))
 		wires.interact(user)
 		return
@@ -782,13 +786,9 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 
 			if(record.amount <= 0) //Try to use a record that actually has something to dump.
 				continue
-			if(record.amount > LAZYLEN(record.returned_products)) //always give out new stuff that costs before free returned stuff, because of the risk getting gibbed involved
-				dispense(record, get_turf(src), silent = TRUE)
-			else
-				var/obj/returned_obj_to_dump = LAZYACCESS(record.returned_products, LAZYLEN(record.returned_products)) //first in, last out
-				LAZYREMOVE(record.returned_products, returned_obj_to_dump)
-				returned_obj_to_dump.forceMove(get_turf(src))
-				record.amount--
+			// Always give out new stuff that costs before free returned stuff, because of the risk getting gibbed involved
+			var/only_returned_left = (record.amount <= LAZYLEN(record.returned_products))
+			dispense(record, get_turf(src), silent = TRUE, dispense_returned = only_returned_left)
 			break
 	deploy_credits()
 
@@ -1050,7 +1050,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 					carbon_target.visible_message(span_danger("[carbon_head] explodes in a shower of gore beneath [src]!"),	span_userdanger("Oh f-"))
 					carbon_head.drop_organs()
 					qdel(carbon_head)
-					new /obj/effect/gibspawner/human/bodypartless(get_turf(carbon_target))
+					new /obj/effect/gibspawner/human/bodypartless(get_turf(carbon_target), carbon_target)
 			return TRUE
 
 	return FALSE
@@ -1068,9 +1068,14 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 			var/mob/living/carbon/carbon_target = atom_target
 			for(var/i in 1 to num_shards)
 				var/obj/item/shard/shard = new /obj/item/shard(get_turf(carbon_target))
-				shard.set_embed(/datum/embedding/glass_candy)
+				var/datum/embedding/embed = shard.get_embed()
+				embed.embed_chance = 100
+				embed.ignore_throwspeed_threshold = TRUE
+				embed.impact_pain_mult = 1
 				carbon_target.hitby(shard, skipcatch = TRUE, hitpush = FALSE)
-				shard.set_embed(initial(shard.embed_type))
+				embed.embed_chance = initial(embed.embed_chance)
+				embed.ignore_throwspeed_threshold = initial(embed.ignore_throwspeed_threshold)
+				embed.impact_pain_mult = initial(embed.impact_pain_mult)
 			return TRUE
 		if (VENDOR_CRUSH_CRIT_PIN) // pin them beneath the machine until someone untilts it
 			if (!isliving(atom_target))
@@ -1201,7 +1206,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 
 /obj/machinery/vending/ui_assets(mob/user)
 	return list(
-		get_asset_datum(/datum/asset/spritesheet/vending),
+		get_asset_datum(/datum/asset/spritesheet_batched/vending),
 	)
 
 /obj/machinery/vending/ui_interact(mob/user, datum/tgui/ui)
@@ -1239,7 +1244,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
  */
 /obj/machinery/vending/proc/collect_records_for_static_data(list/records, list/categories, premium)
 	var/static/list/default_category = list(
-		"name" = "Products",
+		"name" = "Товары",
 		"icon" = "cart-shopping",
 	)
 
@@ -1422,11 +1427,12 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 		if(age_restrictions && item_record.age_restricted && (!card_used.registered_age || card_used.registered_age < AGE_MINOR))
 			speak("You are not of legal age to purchase [item_record.name].")
 			if(!(usr in GLOB.narcd_underages))
-				if (isnull(sec_radio))
-					sec_radio = new (src)
-					sec_radio.set_listening(FALSE)
-				sec_radio.set_frequency(FREQ_SECURITY)
-				sec_radio.talk_into(src, "SECURITY ALERT: Underaged crewmember [usr] recorded attempting to purchase [item_record.name] in [get_area(src)]. Please watch for substance abuse.", FREQ_SECURITY)
+				aas_config_announce(/datum/aas_config_entry/vendomat_age_control, list(
+					"PERSON" = usr.name,
+					"LOCATION" = get_area_name(src),
+					"VENDOR" = name,
+					"PRODUCT" = item_record.name
+				), src, list(RADIO_CHANNEL_SECURITY))
 				GLOB.narcd_underages += usr
 			flick(icon_deny,src)
 			vend_ready = TRUE
@@ -1437,7 +1443,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 			return
 
 	if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)
-		var/vend_response = vend_reply || "Thank you for shopping with [src]!"
+		var/vend_response = vend_reply || "Благодарим за покупку в [declent_ru(INSTRUMENTAL)]!"
 		speak(vend_response)
 		purchase_message_cooldown = world.time + 5 SECONDS
 		//This is not the best practice, but it's safe enough here since the chances of two people using a machine with the same ref in 5 seconds is fuck low
@@ -1445,37 +1451,43 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	use_energy(active_power_usage)
 	if(icon_vend) //Show the vending animation if needed
 		flick(icon_vend,src)
-	var/obj/item/vended_item
-	if(!LAZYLEN(item_record.returned_products)) //always give out free returned stuff first, e.g. to avoid walling a traitor objective in a bag behind paid items
-		vended_item = dispense(item_record, get_turf(src))
-	else
-		playsound(src, 'sound/machines/machine_vend.ogg', 50, TRUE, extrarange = -3)
-		vended_item = LAZYACCESS(item_record.returned_products, LAZYLEN(item_record.returned_products)) //first in, last out
-		LAZYREMOVE(item_record.returned_products, vended_item)
-		vended_item.forceMove(get_turf(src))
+
+	// Always give out free returned stuff first, e.g. to avoid walling a traitor objective in a bag behind paid items
+	var/returned_available = LAZYLEN(item_record.returned_products)
+	var/obj/item/vended_item = dispense(item_record, get_turf(src), dispense_returned = returned_available)
+
 	if(greyscale_colors)
 		vended_item.set_greyscale(colors=greyscale_colors)
 	if(usr.CanReach(src) && usr.put_in_hands(vended_item))
 		to_chat(usr, span_notice("You take [item_record.name] out of the slot."))
+		vended_item.do_pickup_animation(usr, src)
 	else
 		to_chat(usr, span_warning("[capitalize(format_text(item_record.name))] falls onto the floor!"))
 	SSblackbox.record_feedback("nested tally", "vending_machine_usage", 1, list("[type]", "[item_record.product_path]"))
 	vend_ready = TRUE
 
 ///Common proc that dispenses an item. Called when the item is vended, or gotten some other way.
-/obj/machinery/vending/proc/dispense(datum/data/vending_product/item_record, atom/spawn_location, silent = FALSE)
+/obj/machinery/vending/proc/dispense(datum/data/vending_product/item_record, atom/spawn_location, silent = FALSE, dispense_returned = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!silent)
 		playsound(src, 'sound/machines/machine_vend.ogg', 50, TRUE, extrarange = -3)
-	var/obj/item/vended_item = new item_record.product_path (spawn_location)
-	if(vended_item.type in contraband)
-		ADD_TRAIT(vended_item, TRAIT_CONTRABAND, INNATE_TRAIT)
-	on_dispense(vended_item)
+
+	var/obj/item/vended_item
+	if(dispense_returned)
+		vended_item = LAZYACCESS(item_record.returned_products, LAZYLEN(item_record.returned_products)) //first in, last out
+		LAZYREMOVE(item_record.returned_products, vended_item)
+		vended_item.forceMove(spawn_location)
+	else
+		vended_item = new item_record.product_path(spawn_location)
+		if(vended_item.type in contraband)
+			ADD_TRAIT(vended_item, TRAIT_CONTRABAND, INNATE_TRAIT)
+
+	on_dispense(vended_item, dispense_returned)
 	item_record.amount--
 	return vended_item
 
 ///A proc meant to perform custom behavior on newly dispensed items.
-/obj/machinery/vending/proc/on_dispense(obj/item/vended_item)
+/obj/machinery/vending/proc/on_dispense(obj/item/vended_item, dispense_returned = FALSE)
 	return
 
 /**
@@ -1566,32 +1578,28 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
  * This item is then created and tossed out in front of us with a visible message
  */
 /obj/machinery/vending/proc/throw_item()
-	var/obj/throw_item = null
 	var/mob/living/target = locate() in view(7,src)
 	if(!target)
 		return FALSE
 
+	var/obj/thrown_item
 	for(var/datum/data/vending_product/record in shuffle(product_records))
 		if(record.amount <= 0) //Try to use a record that actually has something to dump.
 			continue
 		var/dump_path = record.product_path
 		if(!dump_path)
 			continue
-		if(record.amount > LAZYLEN(record.returned_products)) //always throw new stuff that costs before free returned stuff, because of the hacking effort and time between throws involved
-			throw_item = new dump_path(loc)
-		else
-			throw_item = LAZYACCESS(record.returned_products, LAZYLEN(record.returned_products)) //first in, last out
-			throw_item.forceMove(loc)
-			LAZYREMOVE(record.returned_products, throw_item)
-		record.amount--
+		// Always throw new stuff that costs before free returned stuff, because of the hacking effort and time between throws involved
+		var/only_returned_left = (record.amount <= LAZYLEN(record.returned_products))
+		thrown_item = dispense(record, get_turf(src), silent = TRUE, dispense_returned = only_returned_left)
 		break
-	if(!throw_item)
+	if(isnull(thrown_item))
 		return FALSE
 
-	pre_throw(throw_item)
+	pre_throw(thrown_item)
 
-	throw_item.throw_at(target, 16, 3)
-	visible_message(span_danger("[src] launches [throw_item] at [target]!"))
+	thrown_item.throw_at(target, 16, 3)
+	visible_message(span_danger("[src] launches [thrown_item] at [target]!"))
 	return TRUE
 
 /**
@@ -1783,7 +1791,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 				vend_ready = TRUE
 			return TRUE
 
-/obj/machinery/vending/custom/attackby(obj/item/attack_item, mob/user, params)
+/obj/machinery/vending/custom/attackby(obj/item/attack_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(!linked_account && isliving(user))
 		var/mob/living/living_user = user
 		var/obj/item/card/id/card_used = living_user.get_idcard(TRUE)
@@ -1898,5 +1906,17 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	slogan_list = list("[GLOB.deity] says: It's your divine right to buy!")
 	add_filter("vending_outline", 9, list("type" = "outline", "color" = COLOR_VERY_SOFT_YELLOW))
 	add_filter("vending_rays", 10, list("type" = "rays", "size" = 35, "color" = COLOR_VIVID_YELLOW))
+
+/datum/aas_config_entry/vendomat_age_control
+	name = "Security Alert: Underaged Substance Abuse"
+	announcement_lines_map = list(
+		"Message" = "SECURITY ALERT: Underaged crewmember %PERSON recorded attempting to purchase %PRODUCT in %LOCATION by %VENDOR. Please watch for substance abuse."
+	)
+	vars_and_tooltips_map = list(
+		"PERSON" = "will be replaced with the name of the crewmember",
+		"PRODUCT" = "with the product, he attempted to purchase",
+		"LOCATION" = "with place of purchase",
+		"VENDOR" = "with the vending machine"
+	)
 
 #undef MAX_VENDING_INPUT_AMOUNT

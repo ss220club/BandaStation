@@ -76,7 +76,7 @@ GLOBAL_VAR(command_name)
 	if (GLOB.command_name)
 		return GLOB.command_name
 
-	var/name = "Central Command"
+	var/name = "Центральное Командование"
 
 	GLOB.command_name = name
 	return name
@@ -372,6 +372,8 @@ GLOBAL_DATUM(syndicate_code_response_regex, /regex)
 			return "a blood filter"
 		if(TOOL_ROLLINGPIN)
 			return "a rolling pin"
+		if(TOOL_RUSTSCRAPER)
+			return "a rust scraper"
 		else
 			return "something... but the gods didn't set this up right (Please report this bug)"
 

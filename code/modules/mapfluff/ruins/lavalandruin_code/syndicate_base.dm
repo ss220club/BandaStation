@@ -17,7 +17,7 @@
 	                /obj/item/grenade/chem_grenade/cryo = 5,
 	                /obj/item/grenade/chem_grenade/adv_release = 5,
 					/obj/item/reagent_containers/cup/glass/bottle/holywater = 1)
-	product_slogans = "It's not pyromania if you're getting paid!;You smell that? Plasma, son. Nothing else in the world smells like that.;I love the smell of Plasma in the morning."
+	product_slogans = "Это не пиромания, если тебе платят!;Чувствуешь запах? Это плазма, сынок. Больше ничто в мире не пахнет так.;Я люблю запах плазмы поутру."
 	resistance_flags = FIRE_PROOF
 
 /obj/modular_map_root/syndicatebase
@@ -49,7 +49,7 @@
 	warning_channel = "Syndicate"
 	include_in_cims = FALSE
 
-/obj/machinery/power/supermatter_crystal/shard/syndicate/attackby(obj/item/item, mob/living/user, params)
+/obj/machinery/power/supermatter_crystal/shard/syndicate/attackby(obj/item/item, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(istype(item, /obj/item/scalpel/supermatter)) //You can already yoink the docs as a free objective win, another would be just gross
 		to_chat(user, span_danger("This shard's already in Syndicate custody, taking it again could cause more harm than good."))
 		return

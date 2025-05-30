@@ -47,10 +47,17 @@
 
 /obj/item/antag_spawner/contract/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
-	if(used || polling || !ishuman(usr))
+	if(.)
 		return
-	INVOKE_ASYNC(src, PROC_REF(poll_for_student), usr, params["school"])
-	SStgui.close_uis(src)
+	switch(action)
+		if("buy")
+			if(used || polling || !ishuman(ui.user))
+				return
+			var/selected_school = params["school"]
+			if(!(selected_school in ALL_APPRENTICE_TYPES))
+				return
+			INVOKE_ASYNC(src, PROC_REF(poll_for_student), ui.user, params["school"])
+			SStgui.close_uis(src)
 
 /obj/item/antag_spawner/contract/proc/poll_for_student(mob/living/carbon/human/teacher, apprentice_school)
 	balloon_alert(teacher, "contacting apprentice...")
@@ -69,7 +76,7 @@
 	new /obj/effect/particle_effect/fluid/smoke(T)
 	var/mob/living/carbon/human/M = new/mob/living/carbon/human(T)
 	C.prefs.safe_transfer_prefs_to(M, is_antag = TRUE)
-	M.key = C.key
+	M.PossessByPlayer(C.key)
 	var/datum/mind/app_mind = M.mind
 
 	var/datum/antagonist/wizard/apprentice/app = new()
@@ -240,7 +247,7 @@
 	borg.mmi.brainmob.name = brainopsname
 	borg.real_name = borg.name
 
-	borg.key = C.key
+	borg.PossessByPlayer(C.key)
 
 	borg.mind.add_antag_datum(antag_datum, creator_op ? creator_op.get_team() : null)
 	borg.mind.special_role = special_role_name
@@ -281,9 +288,9 @@
 
 /obj/item/antag_spawner/slaughter_demon/spawn_antag(client/C, turf/T, kind = "", datum/mind/user)
 	var/mob/living/basic/demon/spawned = new demon_type(T)
-	new /obj/effect/dummy/phased_mob(T, spawned)
+	new /obj/effect/dummy/phased_mob/blood(T, spawned)
 
-	spawned.key = C.key
+	spawned.PossessByPlayer(C.key)
 
 /obj/item/antag_spawner/slaughter_demon/laughter
 	name = "vial of tickles"
@@ -323,7 +330,7 @@
 	/// What category to ignore the poll
 	var/poll_ignore_category = POLL_IGNORE_SYNDICATE
 	/// text given when device fails to secure candidates
-	var/fail_text = "Unable to connect to Syndicate command. Please wait and try again later or use the beacon on your uplink to get your points refunded."
+	var/fail_text = "Невозможно соединиться с командованием Синдиката. Пожалуйста, подождите и повторите попытку позже или воспользуйтесь маяком на аплинке, чтобы вернуть свои очки."
 
 /obj/item/antag_spawner/loadout/proc/check_usability(mob/user)
 	if(used)
@@ -342,7 +349,7 @@
 	if(!(check_usability(user)))
 		return
 
-	to_chat(user, span_notice("You activate [src] and wait for confirmation."))
+	to_chat(user, span_notice("Вы активируете [declent_ru(ACCUSATIVE)] и ждёте подтверждения."))
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(
 		check_jobban = poll_role_check,
 		role = poll_role_check,
@@ -396,7 +403,7 @@
 
 /obj/item/antag_spawner/loadout/contractor
 	name = "contractor support beacon"
-	desc = "A beacon sold to the most prestigeous syndicate members, a single-use radio for calling immediate backup."
+	desc = "Маяк, проданный самым престижным членам синдиката, одноразовое радио для немедленного вызова подкрепления."
 	icon = 'icons/obj/devices/voice.dmi'
 	icon_state = "nukietalkie"
 	outfit = /datum/outfit/contractor_partner
@@ -406,8 +413,8 @@
 	role_to_play = ROLE_CONTRACTOR_SUPPORT
 
 /obj/item/antag_spawner/loadout/contractor/do_special_things(mob/living/carbon/human/contractor_support, mob/user)
-	to_chat(contractor_support, "\n[span_alertwarning("[user.real_name] is your superior. Follow any, and all orders given by them. You're here to support their mission only.")]")
-	to_chat(contractor_support, "[span_alertwarning("Should they perish, or be otherwise unavailable, you're to assist other active agents in this mission area to the best of your ability.")]")
+	to_chat(contractor_support, "\n[span_alertwarning("[user.real_name] - ваш начальник. Выполняйте любые их приказы. Вы здесь только для того, чтобы поддержать их миссию.")]")
+	to_chat(contractor_support, "[span_alertwarning("Если они погибнут или станут недоступны по какой-либо причине, вы должны помочь другим активным агентам в этой зоне миссии, насколько это возможно.")]")
 
 /obj/item/antag_spawner/loadout/monkey_man
 	name = "monkey agent beacon"

@@ -91,14 +91,16 @@
 	else
 		to_chat(src, span_notice("Teleporting failed. Ahelp an admin please"))
 		stack_trace("There's no freaking observer landmark available on this map or you're making observers before the map is initialised")
-	observer.key = key
+
+	observer.PossessByPlayer(key)
 	observer.client = client
 	observer.set_ghost_appearance()
 	if(observer.client && observer.client.prefs)
 		observer.real_name = observer.client.prefs.read_preference(/datum/preference/name/real_name)
 		observer.name = observer.real_name
 		observer.client.init_verbs()
-		observer.client.player_details.time_of_death = world.time
+		observer.persistent_client.time_of_death = world.time
+
 	observer.update_appearance()
 	observer.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 	deadchat_broadcast(" has observed.", "<b>[observer.real_name]</b>", follow_target = observer, turf_target = get_turf(observer), message_type = DEADCHAT_DEATHRATTLE)
@@ -109,21 +111,21 @@
 /proc/get_job_unavailable_error_message(retval, jobtitle)
 	switch(retval)
 		if(JOB_AVAILABLE)
-			return "[jobtitle] is available."
+			return "[job_title_ru(jobtitle)] доступна для выбора."
 		if(JOB_UNAVAILABLE_GENERIC)
-			return "[jobtitle] is unavailable."
+			return "[job_title_ru(jobtitle)] недоступна для выбора."
 		if(JOB_UNAVAILABLE_BANNED)
-			return "You are currently banned from [jobtitle]."
+			return "На данный момент вам выдан бан роли на [job_title_ru(jobtitle)]."
 		if(JOB_UNAVAILABLE_PLAYTIME)
-			return "You do not have enough relevant playtime for [jobtitle]."
+			return "У вас не наиграно достаточно часов для игры за [job_title_ru(jobtitle)]."
 		if(JOB_UNAVAILABLE_ACCOUNTAGE)
-			return "Your account is not old enough for [jobtitle]."
+			return "Ваш аккаунт недостаточно стар для игры за [job_title_ru(jobtitle)]."
 		if(JOB_UNAVAILABLE_SLOTFULL)
-			return "[jobtitle] is already filled to capacity."
+			return "Роль [job_title_ru(jobtitle)] уже заполнена до максимума."
 		if(JOB_UNAVAILABLE_ANTAG_INCOMPAT)
-			return "[jobtitle] is not compatible with some antagonist role assigned to you."
+			return "[job_title_ru(jobtitle)] несовместим с некоторыми выбранными вами ролями антагонистов."
 		if(JOB_UNAVAILABLE_AGE)
-			return "Your character is not old enough for [jobtitle]."
+			return "Ваш персонаж недостаточно стар для игры за [job_title_ru(jobtitle)]."
 
 	return GENERIC_JOB_UNAVAILABLE_ERROR
 
@@ -152,8 +154,8 @@
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
 	// Check that they're picking someone new for new character respawning
 	if(CONFIG_GET(flag/allow_respawn) == RESPAWN_FLAG_NEW_CHARACTER)
-		if("[client.prefs.default_slot]" in client.player_details.joined_as_slots)
-			tgui_alert(usr, "You already have played this character in this round!")
+		if("[client.prefs.default_slot]" in persistent_client.joined_as_slots)
+			tgui_alert(usr, "Вы уже играли на данном персонаже в этом раунде!")
 			return FALSE
 
 	var/error = IsJobUnavailable(rank)
@@ -163,7 +165,7 @@
 
 	if(SSshuttle.arrivals)
 		if(SSshuttle.arrivals.damaged && CONFIG_GET(flag/arrivals_shuttle_require_safe_latejoin))
-			tgui_alert(usr,"The arrivals shuttle is currently malfunctioning! You cannot join.")
+			tgui_alert(usr,"В данный момент шаттл прибытия сломан. Вы не сможете присоединится.")
 			return FALSE
 
 		if(CONFIG_GET(flag/arrivals_shuttle_require_undocked))
@@ -176,7 +178,7 @@
 	var/datum/job/job = SSjob.get_job(rank)
 
 	if(!SSjob.assign_role(src, job, TRUE))
-		tgui_alert(usr, "There was an unexpected error putting you into your requested job. If you cannot join with any job, you should contact an admin.")
+		tgui_alert(usr, "Возникла непредвиденная ошибка при выдаче роли, выбранной вами. Если вы не можете зайти, обратитесь к администрации.")
 		return FALSE
 
 	mind.late_joiner = TRUE
@@ -245,7 +247,7 @@
 
 	if(humanc) // Quirks may change manifest datapoints, so inject only after assigning quirks
 		GLOB.manifest.inject(humanc)
-
+		SEND_SIGNAL(humanc, COMSIG_HUMAN_CHARACTER_SETUP_FINISHED)
 	var/area/station/arrivals = GLOB.areas_by_type[/area/station/hallway/secondary/entry]
 	if(humanc && arrivals && !arrivals.power_environ) //arrivals depowered
 		humanc.put_in_hands(new /obj/item/crowbar/large/emergency(get_turf(humanc))) //if hands full then just drops on the floor
@@ -264,8 +266,9 @@
 
 	mind.active = FALSE //we wish to transfer the key manually
 	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
-	if(QDELETED(src) || !client)
+	if(QDELETED(src) || !HAS_CONNECTED_PLAYER(src))
 		return // Disconnected while checking for the appearance ban.
+
 	if(!isAI(spawning_mob)) // Unfortunately there's still snowflake AI code out there.
 		// transfer_to sets mind to null
 		var/datum/mind/preserved_mind = mind
@@ -273,7 +276,7 @@
 		preserved_mind.transfer_to(spawning_mob) //won't transfer key since the mind is not active
 		preserved_mind.set_original_character(spawning_mob)
 
-	LAZYADD(client.player_details.joined_as_slots, "[client.prefs.default_slot]")
+	LAZYADD(persistent_client.joined_as_slots, "[client.prefs.default_slot]")
 	client.init_verbs()
 	. = spawning_mob
 	new_character = .
@@ -284,7 +287,7 @@
 	if(!.)
 		return
 	SStitle.hide_title_screen_from(client) // BANDASTATION ADDITION - HTML Title Screen
-	new_character.key = key //Manually transfer the key to log them in,
+	new_character.PossessByPlayer(key) //Manually transfer the key to log them in,
 	new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 	var/area/joined_area = get_area(new_character.loc)
 	if(joined_area)
@@ -296,10 +299,6 @@
 /mob/dead/new_player/proc/ViewManifest()
 	if(!client)
 		return
-	if(world.time < client.crew_manifest_delay)
-		return
-	client.crew_manifest_delay = world.time + (1 SECONDS)
-
 	GLOB.manifest.ui_interact(src)
 
 /mob/dead/new_player/Move()
@@ -371,5 +370,12 @@
 	create_mob_hud()
 	to_chat(new_player, span_info("Lobby Menu HUD reset. You may reset the HUD again in <b>[DisplayTimeText(RESET_HUD_INTERVAL)]</b>."))
 	hud_used.show_hud(hud_used.hud_version)
+
+///Auto deadmins an admin when they click to toggle the ready button or join game button in the menu
+/mob/dead/new_player/proc/auto_deadmin_on_ready_or_latejoin()
+	if(!client?.holder) //If they aren't an admin we dont care
+		return TRUE
+	if(CONFIG_GET(flag/auto_deadmin_on_ready_or_latejoin) || (client.prefs.read_preference(/datum/preference/toggle/auto_deadmin_on_ready_or_latejoin)) || (client.prefs?.toggles & DEADMIN_ALWAYS))
+		return client.holder.auto_deadmin()
 
 #undef RESET_HUD_INTERVAL

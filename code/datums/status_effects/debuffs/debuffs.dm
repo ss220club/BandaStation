@@ -354,29 +354,26 @@
 	var/boosted = FALSE
 	/// How long before the mark is ready to be detonated. Used for both the visual overlay and to determine when it's ready
 	var/ready_delay = 0.8 SECONDS
-	/// Tracks world.time when the mark was applied
-	var/mark_applied
 
 /datum/status_effect/crusher_mark/on_creation(mob/living/new_owner, was_boosted)
 	. = ..()
 	boosted = was_boosted
-	mark_applied = world.time
 
 /datum/status_effect/crusher_mark/on_apply()
-	if(owner.mob_size >= MOB_SIZE_LARGE)
-		marked_underlay = new()
-		marked_underlay.pixel_x = -owner.pixel_x
-		marked_underlay.pixel_y = -owner.pixel_y
+	if(owner.mob_size < MOB_SIZE_LARGE)
+		return FALSE
 
-		var/list/new_color = list(
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0
-		)
-		owner.vis_contents += marked_underlay
-		animate(marked_underlay, color = new_color, time = ready_delay, loop = 1)
-		return TRUE
-	return FALSE
+	marked_underlay = new()
+	marked_underlay.pixel_w = -owner.pixel_x
+	marked_underlay.pixel_z = -owner.pixel_y
+	marked_underlay.transform *= 0.5
+	owner.vis_contents += marked_underlay
+	animate(marked_underlay, ready_delay, transform = matrix() * 1.2, flags = CIRCULAR_EASING | EASE_IN)
+	addtimer(CALLBACK(src, PROC_REF(scale_back)), ready_delay) // Animate chains do not function with vis_contents
+	return TRUE
+
+/datum/status_effect/crusher_mark/proc/scale_back()
+	animate(marked_underlay, time = 0.1 SECONDS, transform = matrix(), flags = CUBIC_EASING | EASE_OUT)
 
 /datum/status_effect/crusher_mark/Destroy()
 	if(owner)
@@ -389,14 +386,9 @@
 	name = "Crusher mark underlay"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield"
-	appearance_flags = TILE_BOUND|LONG_GLIDE|RESET_COLOR
+	appearance_flags = TILE_BOUND|LONG_GLIDE|RESET_COLOR|PIXEL_SCALE|KEEP_APART
 	vis_flags = VIS_UNDERLAY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	color = list(
-		1, 0, 0,
-		1, 0, 0,
-		1, 0, 0
-	)
 
 /datum/status_effect/stacking/saw_bleed
 	id = "saw_bleed"
@@ -550,13 +542,13 @@
 
 /datum/status_effect/gonbola_pacify/on_apply()
 	. = ..()
-	owner.add_traits(list(TRAIT_PACIFISM, TRAIT_MUTE), CLOTHING_TRAIT)
-	owner.add_mood_event(type, /datum/mood_event/gondola)
+	owner.add_traits(list(TRAIT_PACIFISM, TRAIT_MUTE), REF(src))
+	owner.add_mood_event(REF(src), /datum/mood_event/gondola)
 	to_chat(owner, span_notice("You suddenly feel at peace and feel no need to make any sudden or rash actions..."))
 
 /datum/status_effect/gonbola_pacify/on_remove()
-	owner.remove_traits(list(TRAIT_PACIFISM, TRAIT_MUTE), CLOTHING_TRAIT)
-	owner.clear_mood_event(type)
+	owner.remove_traits(list(TRAIT_PACIFISM, TRAIT_MUTE), REF(src))
+	owner.clear_mood_event(REF(src))
 	return ..()
 
 /datum/status_effect/trance
@@ -581,8 +573,8 @@
 	if(!iscarbon(owner))
 		return FALSE
 	RegisterSignal(owner, COMSIG_MOVABLE_HEAR, PROC_REF(hypnotize))
-	ADD_TRAIT(owner, TRAIT_MUTE, STATUS_EFFECT_TRAIT)
-	owner.add_client_colour(/datum/client_colour/monochrome/trance)
+	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
+	owner.add_client_colour(/datum/client_colour/monochrome, REF(src))
 	owner.visible_message("[stun ? span_warning("[owner] stands still as [owner.p_their()] eyes seem to focus on a distant point.") : ""]", \
 	span_warning(pick("You feel your thoughts slow down...", "You suddenly feel extremely dizzy...", "You feel like you're in the middle of a dream...","You feel incredibly relaxed...")))
 	return TRUE
@@ -594,9 +586,9 @@
 
 /datum/status_effect/trance/on_remove()
 	UnregisterSignal(owner, COMSIG_MOVABLE_HEAR)
-	REMOVE_TRAIT(owner, TRAIT_MUTE, STATUS_EFFECT_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
 	owner.remove_status_effect(/datum/status_effect/dizziness)
-	owner.remove_client_colour(/datum/client_colour/monochrome/trance)
+	owner.remove_client_colour(REF(src))
 	to_chat(owner, span_warning("You snap out of your trance!"))
 
 /datum/status_effect/trance/get_examine_text()
@@ -733,22 +725,36 @@
 	. = ..()
 	direction = pick(NORTH, SOUTH, EAST, WEST)
 	new_owner.setDir(direction)
+	owner.add_traits(list(TRAIT_NO_FLOATING_ANIM, TRAIT_MOVE_FLYING), TRAIT_STATUS_EFFECT(id)) //I believe I can fly!
 
 /datum/status_effect/go_away/tick(seconds_between_ticks)
 	owner.AdjustStun(1, ignore_canstun = TRUE)
-	var/turf/T = get_step(owner, direction)
-	owner.forceMove(T)
+	var/turf/turf = get_step(owner, direction)
+	if(!turf)
+		qdel(src)
+		return
+	owner.forceMove(turf)
 
+/datum/status_effect/go_away/on_remove()
+	. = ..()
+	owner.remove_traits(list(TRAIT_NO_FLOATING_ANIM, TRAIT_MOVE_FLYING), TRAIT_STATUS_EFFECT(id))
+
+///Subtype of the go away effect (phases the mob in one direction) that deletes the owner on z-level change or when the time's up.
 /datum/status_effect/go_away/deletes_mob
 	id = "go_away_deletes_mob"
-	duration = INFINITY
+	duration = 30 SECONDS
 
-/datum/status_effect/go_away/deluxe/on_creation(mob/living/new_owner, set_duration)
+/datum/status_effect/go_away/deletes_mob/on_creation(mob/living/new_owner, set_duration)
 	. = ..()
 	RegisterSignal(new_owner, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(wipe_bozo))
 
-/datum/status_effect/go_away/deluxe/proc/wipe_bozo()
-	qdel(owner)
+/datum/status_effect/go_away/deletes_mob/proc/wipe_bozo()
+	qdel(src)
+
+/datum/status_effect/go_away/deletes_mob/on_remove()
+	. = ..()
+	if(!QDELETED(owner))
+		qdel(owner)
 
 /atom/movable/screen/alert/status_effect/go_away
 	name = "TO THE STARS AND BEYOND!"
@@ -802,7 +808,7 @@
 					if(prob(40))
 						fake_emote = "cough"
 					else
-						owner.sneeze()
+						fake_emote = "sneeze"
 
 	if(fake_emote)
 		owner.emote(fake_emote)
@@ -978,11 +984,11 @@
 	icon_state = "convulsing"
 
 /datum/status_effect/discoordinated/on_apply()
-	ADD_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER, "[type]")
+	ADD_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER, TRAIT_STATUS_EFFECT(id))
 	return ..()
 
 /datum/status_effect/discoordinated/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER, "[type]")
+	REMOVE_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER, TRAIT_STATUS_EFFECT(id))
 	return ..()
 
 ///Maddly teleports the victim around all of space for 10 seconds

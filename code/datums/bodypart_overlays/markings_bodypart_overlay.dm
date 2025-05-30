@@ -5,6 +5,12 @@
 	var/use_gender = FALSE
 	/// Which dna feature key to draw from
 	var/dna_feature_key
+
+	/// BANDASTATION ADDITION START - Species
+	/// Which dna color feature use to color the markings
+	var/dna_color_feature_key
+	/// BANDASTATION ADDITION START - Species
+
 	/// Which bodyparts do we apply ourselves to?
 	var/list/applies_to = list(
 		/obj/item/bodypart/arm/left,
@@ -35,7 +41,7 @@
 	. += use_gender
 	. += draw_color
 
-/datum/bodypart_overlay/simple/body_marking/can_draw_on_bodypart(mob/living/carbon/human/human)
+/datum/bodypart_overlay/simple/body_marking/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
 	return icon_state != SPRITE_ACCESSORY_NONE
 
 /datum/bodypart_overlay/simple/body_marking/get_image(layer, obj/item/bodypart/limb)

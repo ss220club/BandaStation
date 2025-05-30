@@ -96,13 +96,9 @@ export const Jukebox220 = () => {
               <Section fill title="Проигрыватель">
                 <Stack fill vertical>
                   {song_selected && (
-                    <Stack.Item bold maxWidth="240px">
-                      {song_selected.name.length > MAX_NAME_LENGTH ? (
-                        <marquee>{song_selected.name}</marquee>
-                      ) : (
-                        song_selected.name
-                      )}
-                    </Stack.Item>
+                    <Button bold fluid ellipsis color="transparent">
+                      {song_selected.name}
+                    </Button>
                   )}
                   <Stack fill mt={1.5}>
                     <Stack.Item grow basis="0">
@@ -286,7 +282,7 @@ export const Jukebox220 = () => {
                           width="100%"
                           placeholder="Название трека..."
                           value={trackName}
-                          onChange={(e, value) => setTrackName(value)}
+                          onChange={setTrackName}
                         />
                       </LabeledList.Item>
                       <LabeledList.Item label="Продолжительность">

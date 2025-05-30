@@ -35,6 +35,13 @@ export const tgui_lock: FeatureToggle = {
   component: CheckboxInput,
 };
 
+export const ui_scale: FeatureToggle = {
+  name: 'Масштабирование интерфейсов',
+  category: 'ИНТЕРФЕЙС',
+  description: 'Должны ли интерфейсы масштабироваться под масштаб в системе?',
+  component: CheckboxInput,
+};
+
 export const tgui_say_light_mode: FeatureToggle = {
   name: 'Говорить: светлая тема',
   category: 'ИНТЕРФЕЙС',

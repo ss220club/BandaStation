@@ -38,7 +38,7 @@
 	bodypart_traits = list(TRAIT_DISFIGURED, TRAIT_BALD, TRAIT_SHAVED)
 	head_flags = HEAD_DEBRAIN
 
-/obj/item/bodypart/head/psyker/try_attach_limb(mob/living/carbon/new_head_owner, special, abort)
+/obj/item/bodypart/head/psyker/try_attach_limb(mob/living/carbon/new_head_owner, special, lazy)
 	. = ..()
 	if(!.)
 		return
@@ -65,7 +65,7 @@
 		return
 	apply_damage(50, BRUTE, BODY_ZONE_HEAD)
 	to_chat(src, span_userdanger("Your head splits open! Your brain mutates!"))
-	new /obj/effect/gibspawner/generic(drop_location(), src)
+	new /obj/effect/gibspawner/generic(drop_location(), src, get_blood_dna_list())
 	emote("scream")
 
 /// Proc with no side effects that turns someone into a psyker. returns FALSE if it could not psykerize.
@@ -177,7 +177,7 @@
 	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY)
 	AddComponent(/datum/component/effect_remover, \
 		success_feedback = "You disrupt the magic of %THEEFFECT with %THEWEAPON.", \
-		success_forcesay = "BEGONE FOUL MAGIKS!!", \
+		success_forcesay = "ПРОЧЬ ЗЛАЯ СКВЕРНА!!", \
 		tip_text = "Clear rune", \
 		on_clear_callback = CALLBACK(src, PROC_REF(on_cult_rune_removed)), \
 		effects_we_clear = list(/obj/effect/rune, /obj/effect/heretic_rune, /obj/effect/cosmic_rune), \
@@ -204,7 +204,7 @@
 /obj/item/gun/ballistic/revolver/chaplain/attack_self(mob/living/user)
 	pray_refill(user)
 
-/obj/item/gun/ballistic/revolver/chaplain/attackby(obj/item/possibly_ammo, mob/user, params)
+/obj/item/gun/ballistic/revolver/chaplain/attackby(obj/item/possibly_ammo, mob/user, list/modifiers, list/attack_modifiers)
 	if (isammocasing(possibly_ammo) || istype(possibly_ammo, /obj/item/ammo_box))
 		user.balloon_alert(user, "no manual reloads!")
 		return
@@ -222,7 +222,7 @@
 	if(!do_after(user, 5 SECONDS, src))
 		balloon_alert(user, "interrupted!")
 		return
-	user.say("#Oh great [GLOB.deity], give me the ammunition I need!", forced = "ammo prayer")
+	user.say("#О великий [GLOB.deity], дай мне боеприпасы, в которых я нуждаюсь!", forced = "ammo prayer")
 	magazine.top_off()
 	user.playsound_local(get_turf(src), 'sound/effects/magic/magic_block_holy.ogg', 50, TRUE)
 	chamber_round()
@@ -341,7 +341,7 @@
 		times_dry_fired = 0
 	var/turf/target_turf = get_offset_target_turf(get_ranged_target_turf(owner, owner.dir, 7), dx = rand(-1, 1), dy = rand(-1, 1))
 	held_gun.process_fire(target_turf, owner, TRUE, null, pick(GLOB.all_body_zones))
-	held_gun.semicd = FALSE
+	held_gun.fire_cd = FALSE
 
 /datum/action/cooldown/spell/charged/psychic_booster
 	name = "Psychic Booster"

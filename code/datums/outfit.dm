@@ -257,7 +257,7 @@
 				if(!isnum(number))//Default to 1
 					number = 1
 				for(var/i in 1 to number)
-					EQUIP_OUTFIT_ITEM(path, ITEM_SLOT_BACKPACK)
+					user.equip_to_storage(SSwardrobe.provide_type(path, user), ITEM_SLOT_BACK, indirect_action = TRUE, del_on_fail = TRUE)
 
 		if(belt_contents)
 			for(var/path in belt_contents)
@@ -265,7 +265,7 @@
 				if(!isnum(number))//Default to 1
 					number = 1
 				for(var/i in 1 to number)
-					EQUIP_OUTFIT_ITEM(path, ITEM_SLOT_BELTPACK)
+					user.equip_to_storage(SSwardrobe.provide_type(path, user), ITEM_SLOT_BELT, indirect_action = TRUE, del_on_fail = TRUE)
 
 	post_equip(user, visuals_only)
 
@@ -502,10 +502,10 @@
 			backpack_contents[itype] = backpack[item]
 	var/list/beltpack = outfit_data["belt_contents"]
 	belt_contents = list()
-	for(var/item in beltpack)
-		var/itype = text2path(item)
-		if(itype)
-			belt_contents[itype] = belt[item]
+	for(var/itype in beltpack)
+		var/inum = beltpack[itype] || 1
+		for(var/i in 1 to inum)
+			belt_contents += itype
 	box = text2path(outfit_data["box"])
 	var/list/impl = outfit_data["implants"]
 	implants = list()

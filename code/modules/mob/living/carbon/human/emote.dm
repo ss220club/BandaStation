@@ -1,5 +1,22 @@
 /datum/emote/living/carbon/human
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
+	/// BANDASTATION ADDITION START - SPECIES
+	/// Species allowed to use this emote. Null by default which means that all species are allowed
+	var/list/species_type_whitelist_typecache
+	/// BANDASTATION ADDITION END - SPECIES
+
+/// BANDASTATION ADDITION START - SPECIES
+/datum/emote/living/carbon/human/New()
+	..()
+	species_type_whitelist_typecache = typecacheof(species_type_whitelist_typecache)
+
+/datum/emote/living/carbon/human/can_run_emote(mob/user, status_check, intentional, params)
+	var/mob/living/carbon/human/human_user = user
+	if(species_type_whitelist_typecache && !is_type_in_typecache(human_user.dna.species, species_type_whitelist_typecache))
+		return FALSE
+
+	return ..()
+/// BANDASTATION ADDITION END - SPECIES
 
 /datum/emote/living/carbon/human/dap
 	key = "dap"
@@ -131,9 +148,9 @@
 	. = ..()
 	var/obj/item/organ/tail/oranges_accessory = user.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
 	if(oranges_accessory.wag_flags & WAG_WAGGING)
-		. = "stops wagging " + message
+		. = "перестаёт вилять " + message
 	else
-		. = "wags " + message
+		. = "начинает вилять " + message
 
 /datum/emote/living/carbon/human/wag/can_run_emote(mob/user, status_check, intentional, params)
 	var/obj/item/organ/tail/tail = user.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
@@ -186,8 +203,8 @@
 
 /datum/emote/living/carbon/human/blink/run_emote(mob/living/carbon/human/user, params, type_override, intentional)
 	. = ..()
-	// Set to update_body until update_body_parts_head_only is fixed
-	user.update_body() // Refreshing instantly makes the user blink
+	var/obj/item/organ/eyes/eyes = user.get_organ_slot(ORGAN_SLOT_EYES)
+	eyes.blink()
 
 /datum/emote/living/carbon/human/blink_r
 	key = "blink_r"
@@ -204,9 +221,10 @@
 
 /datum/emote/living/carbon/human/blink_r/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
-	// Set to update_body until update_body_parts_head_only is fixed
+	var/obj/item/organ/eyes/eyes = user.get_organ_slot(ORGAN_SLOT_EYES)
 	for (var/i in 1 to 3)
-		addtimer(CALLBACK(user, TYPE_PROC_REF(/mob, update_body)), i * 0.3 SECONDS)
+		addtimer(CALLBACK(eyes, TYPE_PROC_REF(/obj/item/organ/eyes, blink), 0.1 SECONDS, FALSE), i * 0.2 SECONDS)
+	eyes.animate_eyelids(user)
 
 ///Snowflake emotes only for le epic chimp
 /datum/emote/living/carbon/human/monkey

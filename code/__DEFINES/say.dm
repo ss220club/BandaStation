@@ -5,6 +5,8 @@
 #define RADIO_EXTENSION "department specific"
 #define RADIO_KEY "department specific key"
 #define LANGUAGE_EXTENSION "language specific"
+/// Message mod which contains a list of bonus "mutual understanding" to allow arbitrary understanding of any speech
+#define LANGUAGE_MUTUAL_BONUS "language mutual bonus"
 #define SAY_MOD_VERB "say_mod_verb"
 
 //Message modes. Each one defines a radio channel, more or less.
@@ -66,7 +68,12 @@
 #define MODE_CUSTOM_SAY_ERASE_INPUT "erase_input"
 /// Message is being relayed through another object
 #define MODE_RELAY "relayed"
-#define MODE_TTS_FILTERS "tts_filters" // Bandastation Addition
+
+// BANDASTATION ADDITION START - TTS
+#define MODE_TTS_FILTERS "tts_filters"
+#define MODE_TTS_SEED_OVERRIDE "tts_seed_override"
+#define MODE_TTS_MESSAGE_OVERRIDE "tts_message_override"
+// BANDASTATION ADDITION END - TTS
 
 //Spans. Robot speech, italics, etc. Applied in compose_message().
 #define SPAN_ROBOT "robot"
@@ -126,6 +133,10 @@
 /// Meaning that if the message is visual, and sourced from a blind mob, they will not see it.
 /// This flag skips that behavior, and will always show the self message to the mob.
 #define ALWAYS_SHOW_SELF_MESSAGE (1<<1)
+/// Applies emphasis formatting to the message.
+#define WITH_EMPHASIS_MESSAGE (1<<2)
+/// Blocks chat highlighting from being applied to the message sent to the self.
+#define BLOCK_SELF_HIGHLIGHT_MESSAGE (1<<3)
 
 ///Defines for priorities for the bubble_icon_override comp
 #define BUBBLE_ICON_PRIORITY_ACCESSORY 2

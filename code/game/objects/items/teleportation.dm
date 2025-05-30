@@ -317,7 +317,7 @@
 
 /obj/item/hand_tele/suicide_act(mob/living/user)
 	if(iscarbon(user))
-		user.visible_message(span_suicide("[user] is creating a weak portal and sticking [user.p_their()] head through! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is creating a weak portal and sticking [user.p_their()] head through! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		var/mob/living/carbon/itemUser = user
 		var/obj/item/bodypart/head/head = itemUser.get_bodypart(BODY_ZONE_HEAD)
 		if(head)
@@ -570,13 +570,6 @@
 		<br>
 		Final word of caution: the technology involved is experimental in nature. Although many years of research have allowed us to prevent leaving your organs behind, it simply cannot account for all of the liquid in your body.
 		"}
-
-/obj/item/storage/box/syndie_kit/syndicate_teleporter
-	name = "syndicate teleporter kit"
-
-/obj/item/storage/box/syndie_kit/syndicate_teleporter/PopulateContents()
-	new /obj/item/syndicate_teleporter(src)
-	new /obj/item/paper/syndicate_teleporter(src)
 
 /obj/effect/temp_visual/teleport_abductor/syndi_teleporter
 	duration = 5

@@ -47,7 +47,8 @@
 			name = "Natural " + name
 		if(data["boozepwr"])
 			boozepwr = data["boozepwr"]
-	addiction_types = list(/datum/addiction/alcohol = 0.05 * boozepwr)
+	if(boozepwr) // anything other than 0
+		LAZYSET(addiction_types, /datum/addiction/alcohol, 0.05 * boozepwr)
 	return ..()
 
 /datum/reagent/consumable/ethanol/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
@@ -277,8 +278,7 @@
 		drinker.set_jitter_if_lower(700 SECONDS)
 
 	if(SPT_PROB(0.5, seconds_per_tick) && iscarbon(drinker))
-		var/datum/disease/heart_attack = new /datum/disease/heart_failure
-		drinker.ForceContractDisease(heart_attack)
+		drinker.apply_status_effect(/datum/status_effect/heart_attack)
 		to_chat(drinker, span_userdanger("You're pretty sure you just felt your heart stop for a second there.."))
 		drinker.playsound_local(drinker, 'sound/effects/singlebeat.ogg', 100, 0)
 
@@ -1895,7 +1895,7 @@
 
 /datum/reagent/consumable/ethanol/fanciulli
 	name = "Fanciulli"
-	description = "What if the Manhattan cocktail ACTUALLY used a bitter herb liquour? Helps you sober up." //also causes a bit of stamina damage to symbolize the afterdrink lazyness
+	description = "What if the Manhattan cocktail ACTUALLY used a bitter herb liqueur? Helps you sober up." //also causes a bit of stamina damage to symbolize the afterdrink lazyness
 	color = "#CA933F" // rgb: 202, 147, 63
 	boozepwr = -10
 	quality = DRINK_NICE
@@ -1915,7 +1915,7 @@
 
 /datum/reagent/consumable/ethanol/branca_menta
 	name = "Branca Menta"
-	description = "A refreshing mixture of bitter Fernet with mint creme liquour."
+	description = "A refreshing mixture of bitter Fernet with mint creme liqueur."
 	color = "#4B5746" // rgb: 75, 87, 70
 	boozepwr = 35
 	quality = DRINK_GOOD
@@ -2172,7 +2172,7 @@
 	color = "#ffe65b"
 	boozepwr = 60
 	quality = DRINK_GOOD
-	taste_description = "artifical fruityness"
+	taste_description = "artificial fruitiness"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	metabolized_traits = list(TRAIT_SHOCKIMMUNE)
 

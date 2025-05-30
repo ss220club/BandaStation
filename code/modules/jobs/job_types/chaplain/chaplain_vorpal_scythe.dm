@@ -5,13 +5,13 @@ If the scythe isn't empowered when you sheath it, you take a heap of damage and 
 #define SCYTHE_SATED 1
 #define SCYTHE_EMPOWERED 2
 
-/obj/item/organ/cyberimp/arm/shard/scythe
+/obj/item/organ/cyberimp/arm/toolkit/shard/scythe
 	name = "sinister shard"
 	desc = "This shard seems to be directly linked to some sinister entity. It might be your god! It also gives you a really horrible rash when you hold onto it for too long."
 	items_to_create = list(/obj/item/vorpalscythe)
 	organ_traits = list(TRAIT_MORBID)
 
-/obj/item/organ/cyberimp/arm/shard/scythe/Retract()
+/obj/item/organ/cyberimp/arm/toolkit/shard/scythe/Retract()
 	var/obj/item/vorpalscythe/scythe = active_item
 	if(!scythe)
 		return FALSE
@@ -77,7 +77,7 @@ If the scythe isn't empowered when you sheath it, you take a heap of damage and 
 	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY)
 	AddComponent(/datum/component/effect_remover, \
 		success_feedback = "You disrupt the magic of %THEEFFECT with %THEWEAPON.", \
-		success_forcesay = "TO DUST WITH YE!! AWAY!!", \
+		success_forcesay = "В ПЫЛЬ С ТОБОЮ!! ПРОЧЬ!!", \
 		tip_text = "Clear rune", \
 		on_clear_callback = CALLBACK(src, PROC_REF(on_cult_rune_removed)), \
 		effects_we_clear = list(/obj/effect/rune, /obj/effect/heretic_rune) \
@@ -89,7 +89,7 @@ If the scythe isn't empowered when you sheath it, you take a heap of damage and 
 	)
 	AddElement(/datum/element/bane, mob_biotypes = MOB_PLANT, damage_multiplier = 0.5, requires_combat_mode = FALSE) //less good at killing revenants, much better at killing plants
 
-/obj/item/vorpalscythe/attack(mob/living/target, mob/living/user, params)
+/obj/item/vorpalscythe/attack(mob/living/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(ismonkey(target) && !target.mind) //Don't empower from hitting monkeys. Hit a corgi or something, I don't know.
 		return ..()
 

@@ -6,7 +6,7 @@
 	max_damage = LIMB_MAX_HP_CORE
 	body_zone = BODY_ZONE_CHEST
 	body_part = CHEST
-	plaintext_zone = "chest"
+	plaintext_zone = "грудь"
 	is_dimorphic = TRUE
 	px_x = 0
 	px_y = 0
@@ -105,6 +105,7 @@
 	should_draw_greyscale = FALSE
 	bodypart_flags = BODYPART_UNREMOVABLE
 	max_damage = LIMB_MAX_HP_ALIEN_CORE
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	acceptable_bodyshape = BODYSHAPE_HUMANOID
 	wing_types = null
 
@@ -117,6 +118,7 @@
 	should_draw_greyscale = FALSE
 	bodypart_flags = BODYPART_UNREMOVABLE
 	max_damage = LIMB_MAX_HP_ALIEN_LARVA
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	bodytype = BODYTYPE_LARVA_PLACEHOLDER | BODYTYPE_ORGANIC
 	acceptable_bodytype = BODYTYPE_LARVA_PLACEHOLDER
 	wing_types = null
@@ -131,10 +133,11 @@
 	aux_layer = BODYPARTS_HIGH_LAYER
 	body_damage_coeff = LIMB_BODY_DAMAGE_COEFFICIENT_DEFAULT
 	can_be_disabled = TRUE
-	unarmed_attack_verbs = list("punch") /// The classic punch, wonderfully classic and completely random
+	unarmed_attack_verbs = list("бьет") /// The classic punch, wonderfully classic and completely random
 	grappled_attack_verb = "pummel"
 	unarmed_damage_low = 5
 	unarmed_damage_high = 10
+	unarmed_pummeling_bonus = 1.5
 	body_zone = BODY_ZONE_L_ARM
 	/// Datum describing how to offset things worn on the hands of this arm, note that an x offset won't do anything here
 	var/datum/worn_feature_offset/worn_glove_offset
@@ -193,7 +196,7 @@
 	icon_state = "default_human_l_arm"
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
-	plaintext_zone = "left arm"
+	plaintext_zone = "левая рука"
 	aux_zone = BODY_ZONE_PRECISE_L_HAND
 	held_index = 1
 	px_x = -6
@@ -280,6 +283,7 @@
 	bodypart_flags = BODYPART_UNREMOVABLE
 	can_be_disabled = FALSE
 	max_damage = LIMB_MAX_HP_ALIEN_LIMBS
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	should_draw_greyscale = FALSE
 	appendage_noun = "scythe-like hand"
 
@@ -290,7 +294,7 @@
 	body_zone = BODY_ZONE_R_ARM
 	body_part = ARM_RIGHT
 	icon_state = "default_human_r_arm"
-	plaintext_zone = "right arm"
+	plaintext_zone = "правая рука"
 	aux_zone = BODY_ZONE_PRECISE_R_HAND
 	aux_layer = BODYPARTS_HIGH_LAYER
 	held_index = 2
@@ -378,6 +382,7 @@
 	bodypart_flags = BODYPART_UNREMOVABLE
 	can_be_disabled = FALSE
 	max_damage = LIMB_MAX_HP_ALIEN_LIMBS
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	should_draw_greyscale = FALSE
 	appendage_noun = "scythe-like hand"
 
@@ -392,7 +397,7 @@
 	can_be_disabled = TRUE
 	unarmed_attack_effect = ATTACK_EFFECT_KICK
 	body_zone = BODY_ZONE_L_LEG
-	unarmed_attack_verbs = list("kick") // The lovely kick, typically only accessable by attacking a grouded foe. 1.5 times better than the punch.
+	unarmed_attack_verbs = list("пинает") // The lovely kick, typically only accessable by attacking a grouded foe. 1.5 times better than the punch.
 	unarmed_damage_low = 7
 	unarmed_damage_high = 15
 	unarmed_effectiveness = 15
@@ -433,7 +438,7 @@
 	icon_state = "default_human_l_leg"
 	body_zone = BODY_ZONE_L_LEG
 	body_part = LEG_LEFT
-	plaintext_zone = "left leg"
+	plaintext_zone = "левая нога"
 	px_x = -2
 	px_y = 12
 	can_be_disabled = TRUE
@@ -512,6 +517,7 @@
 	bodypart_flags = BODYPART_UNREMOVABLE
 	can_be_disabled = FALSE
 	max_damage = LIMB_MAX_HP_ALIEN_LIMBS
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	should_draw_greyscale = FALSE
 
 /obj/item/bodypart/leg/right
@@ -523,7 +529,7 @@
 	icon_state = "default_human_r_leg"
 	body_zone = BODY_ZONE_R_LEG
 	body_part = LEG_RIGHT
-	plaintext_zone = "right leg"
+	plaintext_zone = "правая нога"
 	px_x = 2
 	px_y = 12
 	bodypart_trait_source = RIGHT_LEG_TRAIT
@@ -602,4 +608,5 @@
 	bodypart_flags = BODYPART_UNREMOVABLE
 	can_be_disabled = FALSE
 	max_damage = LIMB_MAX_HP_ALIEN_LIMBS
+	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	should_draw_greyscale = FALSE

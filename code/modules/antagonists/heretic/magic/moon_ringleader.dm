@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/aoe/moon_ringleader
 	name = "Ringleaders Rise"
-	desc = "Big AoE spell that deals brain damage and causes hallucinations to everyone in the AoE. \
-			The worse their sanity, the stronger this spell becomes. \
-			If their sanity is low enough, they even snap and go insane, and the spell then further halves their sanity."
+	desc = "Заклинание по области, которое наносит больше урона мозгу в зависимости от отсутствующего рассудка у целей, \
+			также вызывает им галлюцинации, больше тем, у кого мало рассудка. \
+			Если их рассудок достаточно слабый, они обезумеют и потеряют половину рассудка."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -12,7 +12,7 @@
 	school = SCHOOL_FORBIDDEN
 	cooldown_time = 1 MINUTES
 	antimagic_flags = MAGIC_RESISTANCE|MAGIC_RESISTANCE_MIND
-	invocation = "R''S 'E"
+	invocation = "R'S 'E!"
 	invocation_type = INVOCATION_SHOUT
 	spell_requirements = NONE
 
@@ -51,7 +51,7 @@
 		victim.apply_status_effect(/datum/status_effect/moon_converted)
 		caster.log_message("made [victim] insane.", LOG_GAME)
 		victim.log_message("was driven insane by [caster]")
-	victim.mob_mood.set_sanity(victim_sanity * 0.5)
+	victim.mob_mood.adjust_sanity(victim_sanity * -0.5)
 
 
 /obj/effect/temp_visual/moon_ringleader

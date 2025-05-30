@@ -25,7 +25,7 @@
 	return ..()
 
 /obj/item/electropack/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] hooks [user.p_them()]self to the electropack and spams the trigger! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] hooks [user.p_them()]self to the electropack and spams the trigger! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return FIRELOSS
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
@@ -37,7 +37,7 @@
 			return
 	return ..()
 
-/obj/item/electropack/attackby(obj/item/W, mob/user, params)
+/obj/item/electropack/attackby(obj/item/W, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(W, /obj/item/clothing/head/helmet))
 		var/obj/item/assembly/shock_kit/A = new /obj/item/assembly/shock_kit(user)
 		A.icon = 'icons/obj/devices/assemblies.dmi'

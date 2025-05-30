@@ -5,17 +5,17 @@ import { RandomSetting } from '../types';
 
 const options = [
   {
-    displayText: 'Do not randomize',
+    displayText: 'Не рандомизировать',
     value: RandomSetting.Disabled,
   },
 
   {
-    displayText: 'Always randomize',
+    displayText: 'Всегда рандомизировать',
     value: RandomSetting.Enabled,
   },
 
   {
-    displayText: 'Randomize when antagonist',
+    displayText: 'Рандомизировать при антагонизме',
     value: RandomSetting.AntagOnly,
   },
 ];
@@ -49,13 +49,11 @@ export function RandomizationButton(props: Props) {
     <Dropdown
       color={color}
       {...dropdownProps}
-      clipSelectedText={false}
       icon="dice-d20"
+      iconOnly
       options={options}
-      noChevron
       onSelected={setValue}
-      menuWidth="120px"
-      width={1.85}
+      menuWidth={20}
       selected="None"
     />
   );

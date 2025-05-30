@@ -109,7 +109,7 @@ function AccessView(props) {
   const [tab, setTab] = useSharedState('tab', 0);
 
   if (!isConnected(data)) {
-    return <NoticeBox danger>No server connected!</NoticeBox>;
+    return <NoticeBox danger>Нет подключеня к серверу!</NoticeBox>;
   }
 
   const {
@@ -135,7 +135,7 @@ function AccessView(props) {
       ? '???'
       : sorted.find(({ id }) => id === generated_domain)?.name;
   } else {
-    selected = 'Nothing loaded';
+    selected = 'Ничего не загружено';
   }
 
   return (
@@ -143,37 +143,43 @@ function AccessView(props) {
       <Stack.Item grow>
         <Section
           buttons={
-            <>
-              <Button.Checkbox
-                checked={broadcasting}
-                disabled={broadcasting_on_cd}
-                onClick={() => act('broadcast')}
-                tooltip="Toggles whether you broadcast your
-                  bitrun to station Entertainment Monitors."
+            <Stack fill>
+              <Tooltip
+                content="Включить/отключить трансляцию вашего битрана
+                  на станционные развлекательные экраны."
               >
-                Broadcast
-              </Button.Checkbox>
-              <Button
-                disabled={
-                  !ready || occupants > 0 || points < 1 || !!generated_domain
-                }
-                icon="random"
-                onClick={() => act('random_domain')}
-                mr={1}
-                tooltip="Get a random domain for more rewards.
-                  Weighted towards your current points. Minimum: 1 point."
+                <Button.Checkbox
+                  checked={broadcasting}
+                  disabled={broadcasting_on_cd}
+                  onClick={() => act('broadcast')}
+                >
+                  Прямой эфир
+                </Button.Checkbox>
+              </Tooltip>
+              <Tooltip
+                content="Получите случайный домен для дополнительных наград.
+                  Взвешено по вашим текущим очкам. Минимум - 1 очко."
               >
-                Randomize
-              </Button>
-              <Tooltip content="Accrued points for purchasing domains.">
+                <Button
+                  disabled={
+                    !ready || occupants > 0 || points < 1 || !!generated_domain
+                  }
+                  icon="random"
+                  onClick={() => act('random_domain')}
+                  mr={1}
+                >
+                  Случайно
+                </Button>
+              </Tooltip>
+              <Tooltip content="Полученные очки для покупки доменов.">
                 <Icon color="pink" name="star" mr={1} />
                 {points}
               </Tooltip>
-            </>
+            </Stack>
           }
           fill
           scrollable
-          title="Virtual Domains"
+          title="Виртуальные домены"
         >
           <Tabs fluid>
             <Tabs.Tab
@@ -183,7 +189,7 @@ function AccessView(props) {
               onClick={() => setTab(0)}
               icon="chevron-down"
             >
-              Peaceful
+              Мирные
             </Tabs.Tab>
             <Tabs.Tab
               backgroundColor={getColor(Difficulty.Low)}
@@ -192,7 +198,7 @@ function AccessView(props) {
               onClick={() => setTab(1)}
               icon="chevron-down"
             >
-              Easy
+              Легкие
             </Tabs.Tab>
             <Tabs.Tab
               backgroundColor={getColor(Difficulty.Medium)}
@@ -201,7 +207,7 @@ function AccessView(props) {
               onClick={() => setTab(2)}
               icon="chevron-down"
             >
-              Medium
+              Средние
             </Tabs.Tab>
             <Tabs.Tab
               backgroundColor={getColor(Difficulty.High)}
@@ -210,7 +216,7 @@ function AccessView(props) {
               onClick={() => setTab(3)}
               icon="chevron-down"
             >
-              Hard <Icon name="skull" ml={1} />{' '}
+              Сложные <Icon name="skull" ml={1} />{' '}
             </Tabs.Tab>
           </Tabs>
           {filtered.map((domain) => (
@@ -228,13 +234,14 @@ function AccessView(props) {
               <NoticeBox info={!!generated_domain}>{selected}</NoticeBox>
             </Stack.Item>
             <Stack.Item>
-              <Button.Confirm
-                disabled={!ready || !generated_domain}
-                onClick={() => act('stop_domain')}
-                tooltip="Begins shutdown. Will notify anyone connected."
-              >
-                Stop Domain
-              </Button.Confirm>
+              <Tooltip content="Начинает отключение. Уведомит всех подключенных.">
+                <Button.Confirm
+                  disabled={!ready || !generated_domain}
+                  onClick={() => act('stop_domain')}
+                >
+                  Остановить домен
+                </Button.Confirm>
+              </Tooltip>
             </Stack.Item>
           </Stack>
         </Section>
@@ -272,10 +279,10 @@ function DomainEntry(props: DomainEntryProps) {
     buttonName = '???';
   } else if (current) {
     buttonIcon = 'download';
-    buttonName = 'Deployed';
+    buttonName = 'Загружен';
   } else {
     buttonIcon = 'coins';
-    buttonName = 'Deploy';
+    buttonName = 'Загрузить';
   }
 
   const canView = name !== '???';
@@ -283,14 +290,15 @@ function DomainEntry(props: DomainEntryProps) {
   return (
     <Collapsible
       buttons={
-        <Button
-          disabled={!!generated_domain || !ready || occupied || points < cost}
-          icon={buttonIcon}
-          onClick={() => act('set_domain', { id })}
-          tooltip={!!generated_domain && 'Stop current domain first.'}
-        >
-          {buttonName}
-        </Button>
+        <Tooltip content={!!generated_domain && 'Остановите текущий домен.'}>
+          <Button
+            disabled={!!generated_domain || !ready || occupied || points < cost}
+            icon={buttonIcon}
+            onClick={() => act('set_domain', { id })}
+          >
+            {buttonName}
+          </Button>
+        </Tooltip>
       }
       color={getColor(difficulty)}
       title={
@@ -305,20 +313,20 @@ function DomainEntry(props: DomainEntryProps) {
       <Stack height={5}>
         <Stack.Item color="label" grow={4}>
           {desc}
-          {!!is_modular && ' (Modular)'}
-          {!!has_secondary_objectives && ' (Secondary Objective Available)'}
-          {!!announce_ghosts && ' (Ghost Interaction)'}
+          {!!is_modular && ' (Модульное)'}
+          {!!has_secondary_objectives && ' (Доступны дополнительные задачи)'}
+          {!!announce_ghosts && ' (Взаимодействие с призраками)'}
         </Stack.Item>
         <Stack.Divider />
         <Stack.Item grow>
           <Table>
             <Table.Row>
-              <Tooltip content="Points cost for deploying domain.">
+              <Tooltip content="Требуемые очки для покупки домена.">
                 <DisplayDetails amount={cost} color="pink" icon="star" />
               </Tooltip>
             </Table.Row>
             <Table.Row>
-              <Tooltip content="Reward for competing domain.">
+              <Tooltip content="Награда за выполнение домена.">
                 <DisplayDetails amount={reward} color="gold" icon="coins" />
               </Tooltip>
             </Table.Row>
@@ -339,12 +347,12 @@ const AvatarDisplay = (props) => {
 
   return (
     <Section
-      title="Connected Clients"
+      title="Подключенные клиенты"
       buttons={
         <Stack align="center">
           {!!generated_domain && (
             <Stack.Item>
-              <Tooltip content="Available bandwidth for new connections.">
+              <Tooltip content="Пропускная способность позволяет создать новое соединение.">
                 <DisplayDetails
                   color="green"
                   icon="broadcast-tower"
@@ -354,13 +362,11 @@ const AvatarDisplay = (props) => {
             </Stack.Item>
           )}
           <Stack.Item>
-            <Button
-              icon="sync"
-              onClick={() => act('refresh')}
-              tooltip="Refresh avatar data."
-            >
-              Refresh
-            </Button>
+            <Tooltip content="Обновить информацию аватаров.">
+              <Button icon="sync" onClick={() => act('refresh')}>
+                Обновить
+              </Button>
+            </Tooltip>
           </Stack.Item>
         </Stack>
       }
@@ -369,7 +375,7 @@ const AvatarDisplay = (props) => {
         {avatars.map(({ health, name, pilot, brute, burn, tox, oxy }) => (
           <Table.Row key={name}>
             <Table.Cell color="label">
-              {pilot} as{' '}
+              {pilot} как{' '}
               <span style={{ color: 'white' }}>&quot;{name}&quot;</span>
             </Table.Cell>
             <Table.Cell collapsing>
@@ -419,7 +425,7 @@ const DisplayDetails = (props: DisplayDetailsProps) => {
   const { amount = 0, color, icon = 'star' } = props;
 
   if (amount === 0) {
-    return <Table.Cell color="label">None</Table.Cell>;
+    return <Table.Cell color="label">Никакие</Table.Cell>;
   }
 
   if (typeof amount === 'string') {

@@ -4,11 +4,11 @@
 	var/damage_taken = hit_by.throwforce
 	if(isitem(hit_by))
 		var/obj/item/as_item = hit_by
-		damage_taken *= as_item.demolition_mod
+		damage_taken *= as_item.get_demolition_modifier(src)
 	take_damage(damage_taken, BRUTE, MELEE, 1, get_dir(src, hit_by))
 
 /obj/ex_act(severity, target)
-	if(resistance_flags & INDESTRUCTIBLE)
+	if(resistance_flags & (INDESTRUCTIBLE|BOMB_PROOF))
 		return FALSE
 
 	. = ..() //contents explosion
@@ -35,7 +35,7 @@
 	var/damage_sustained = 0
 	if(!QDELETED(src)) //Bullet on_hit effect might have already destroyed this object
 		damage_sustained = take_damage(
-			hitting_projectile.damage * hitting_projectile.demolition_mod,
+			hitting_projectile.damage * hitting_projectile.get_demolition_modifier(src),
 			hitting_projectile.damage_type,
 			hitting_projectile.armor_flag,
 			FALSE,
@@ -44,7 +44,7 @@
 		)
 	if(hitting_projectile.suppressed != SUPPRESSED_VERY)
 		visible_message(
-			span_danger("[src] is hit by \a [hitting_projectile][damage_sustained ? "" : ", [no_damage_feedback]"]!"),
+			span_danger("[capitalize(hitting_projectile.declent_ru(NOMINATIVE))] попадает по [declent_ru(DATIVE)][damage_sustained ? "" : ", [no_damage_feedback]"]!"),
 			vision_distance = COMBAT_MESSAGE_RANGE,
 		)
 
@@ -57,7 +57,7 @@
 	else
 		playsound(src, 'sound/effects/bang.ogg', 50, TRUE)
 	var/damage = take_damage(hulk_damage(), BRUTE, MELEE, 0, get_dir(src, user))
-	user.visible_message(span_danger("[user] smashes [src][damage ? "" : ", [no_damage_feedback]"]!"), span_danger("You smash [src][damage ? "" : ", [no_damage_feedback]"]!"), null, COMBAT_MESSAGE_RANGE)
+	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] крушит [declent_ru(ACCUSATIVE)][damage ? "" : ", [no_damage_feedback]"]!"), span_danger("Вы крушите [declent_ru(ACCUSATIVE)][damage ? "" : ", [no_damage_feedback]"]!"), null, COMBAT_MESSAGE_RANGE)
 	return TRUE
 
 /obj/blob_act(obj/structure/blob/B)
@@ -76,7 +76,7 @@
 /obj/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	. = ..()
 	if(!user.melee_damage_upper && !user.obj_damage)
-		user.emote("custom", message = "[user.friendly_verb_continuous] [src].")
+		user.emote("custom", message = "[ru_attack_verb(user.friendly_verb_continuous)] [declent_ru(ACCUSATIVE)].")
 		return FALSE
 	else
 		var/turf/current_turf = get_turf(src) //we want to save the turf to play the sound there, cause being destroyed deletes us!
@@ -133,11 +133,17 @@
 			return
 	if(exposed_temperature && !(resistance_flags & FIRE_PROOF))
 		take_damage(clamp(0.02 * exposed_temperature, 0, 20), BURN, FIRE, 0)
+	if(QDELETED(src)) // take_damage() can send our obj to an early grave, let's stop here if that happens
+		return
 	if(!(resistance_flags & ON_FIRE) && (resistance_flags & FLAMMABLE) && !(resistance_flags & FIRE_PROOF))
-		AddComponent(/datum/component/burning, custom_fire_overlay || GLOB.fire_overlay, burning_particles)
+		AddComponent(/datum/component/burning, custom_fire_overlay() || GLOB.fire_overlay, burning_particles)
 		SEND_SIGNAL(src, COMSIG_ATOM_FIRE_ACT, exposed_temperature, exposed_volume)
 		return TRUE
 	return ..()
+
+/// Returns a custom fire overlay, if any
+/obj/proc/custom_fire_overlay()
+	return custom_fire_overlay
 
 /// Should be called when the atom is destroyed by fire, comparable to acid_melt() proc
 /obj/proc/burn()

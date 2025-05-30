@@ -15,17 +15,17 @@
 	/// Probability of successfully blocking attacks while on throw mode
 	var/block_chance = 75
 
-/datum/martial_art/cqc/on_teach(mob/living/new_holder)
+/datum/martial_art/cqc/activate_style(mob/living/new_holder)
 	. = ..()
 	RegisterSignal(new_holder, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
 	RegisterSignal(new_holder, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(check_block))
 
-/datum/martial_art/cqc/on_remove(mob/living/remove_from)
+/datum/martial_art/cqc/deactivate_style(mob/living/remove_from)
 	UnregisterSignal(remove_from, list(COMSIG_ATOM_ATTACKBY, COMSIG_LIVING_CHECK_BLOCK))
 	return ..()
 
 ///Signal from getting attacked with an item, for a special interaction with touch spells
-/datum/martial_art/cqc/proc/on_attackby(mob/living/cqc_user, obj/item/attack_weapon, mob/attacker, params)
+/datum/martial_art/cqc/proc/on_attackby(mob/living/cqc_user, obj/item/attack_weapon, mob/attacker, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(!istype(attack_weapon, /obj/item/melee/touch_attack))
@@ -56,14 +56,14 @@
 	var/mob/living/attacker = GET_ASSAILANT(hitby)
 	if(istype(attacker) && cqc_user.Adjacent(attacker))
 		cqc_user.visible_message(
-			span_danger("[cqc_user] blocks [attack_text] and twists [attacker]'s arm behind [attacker.p_their()] back!"),
-			span_userdanger("You block [attack_text]!"),
+			span_danger("[capitalize(cqc_user.declent_ru(NOMINATIVE))] блокирует [attack_text] и выкручивает руку [attacker.declent_ru(GENITIVE)] за [attacker.ru_p_them()] спиной!"),
+			span_userdanger("Вы блокируете [attack_text]!"),
 		)
 		attacker.Stun(4 SECONDS)
 	else
 		cqc_user.visible_message(
-			span_danger("[cqc_user] blocks [attack_text]!"),
-			span_userdanger("You block [attack_text]!"),
+			span_danger("[capitalize(cqc_user.declent_ru(NOMINATIVE))] блокирует [attack_text]!"),
+			span_userdanger("Вы блокируете [attack_text]!"),
 		)
 	return SUCCESSFUL_BLOCK
 
@@ -99,7 +99,7 @@
 	defender.visible_message(
 		span_danger("[attacker] slams [defender] into the ground!"),
 		span_userdanger("You're slammed into the ground by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		null,
 		attacker,
 	)
@@ -120,7 +120,7 @@
 		defender.visible_message(
 			span_danger("[attacker] kicks [defender]'s head, knocking [defender.p_them()] out!"),
 			span_userdanger("You're knocked unconscious by [attacker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			null,
 			attacker,
 		)
@@ -136,7 +136,7 @@
 		defender.visible_message(
 			span_danger("[attacker] kicks [defender] back!"),
 			span_userdanger("You're kicked back by [attacker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
@@ -157,7 +157,7 @@
 	defender.visible_message(
 		span_danger("[attacker] punches [defender]'s neck!"),
 		span_userdanger("Your neck is punched by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
@@ -196,7 +196,7 @@
 	defender.visible_message(
 		span_danger("[attacker] strikes [defender]'s abdomen, neck and back consecutively"), \
 		span_userdanger("Your abdomen, neck and back are struck consecutively by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
@@ -212,7 +212,7 @@
 /datum/martial_art/cqc/grab_act(mob/living/attacker, mob/living/defender)
 	if(attacker == defender)
 		return MARTIAL_ATTACK_INVALID
-	if(defender.check_block(attacker, 0, attacker.name, UNARMED_ATTACK))
+	if(defender.check_block(attacker, 0, attacker.declent_ru(ACCUSATIVE), UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
 	add_to_streak("G", defender)
@@ -260,14 +260,14 @@
 				defender.investigate_log("has had [defender.p_their()] neck snapped by [attacker].", INVESTIGATE_DEATHS)
 			return MARTIAL_ATTACK_SUCCESS
 
-	if(defender.check_block(attacker, 10, attacker.name, UNARMED_ATTACK))
+	if(defender.check_block(attacker, 10, attacker.declent_ru(ACCUSATIVE), UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
 	if(attacker.resting && defender.stat != DEAD && defender.body_position == STANDING_UP)
 		defender.visible_message(
 			span_danger("[attacker] leg sweeps [defender]!"),
 			span_userdanger("Your legs are sweeped by [attacker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			null,
 			attacker,
 		)
@@ -296,7 +296,7 @@
 	defender.visible_message(
 		span_danger("[attacker] [picked_hit_type]ed [defender]!"),
 		span_userdanger("You're [picked_hit_type]ed by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
@@ -305,7 +305,7 @@
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/cqc/disarm_act(mob/living/attacker, mob/living/defender)
-	if(defender.check_block(attacker, 0, attacker.name, UNARMED_ATTACK))
+	if(defender.check_block(attacker, 0, attacker.declent_ru(ACCUSATIVE), UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
 	add_to_streak("D", defender)
@@ -339,7 +339,7 @@
 		defender.visible_message(
 			span_danger("[attacker] strikes [defender]'s jaw with their hand[disarmed_item ? ", disarming [defender.p_them()] of [disarmed_item]" : ""]!"),
 			span_userdanger("[attacker] strikes your jaw,[disarmed_item ? " disarming you of [disarmed_item] and" : ""] leaving you disoriented!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
@@ -353,7 +353,7 @@
 	defender.visible_message(
 		span_danger("[attacker] fails to disarm [defender]!"), \
 		span_userdanger("You're nearly disarmed by [attacker]!"),
-		span_hear("You hear a swoosh!"),
+		span_hear("Вы слышите свист!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)

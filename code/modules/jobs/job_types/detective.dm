@@ -1,13 +1,13 @@
 /datum/job/detective
 	title = JOB_DETECTIVE
-	description = "Investigate crimes, gather evidence, perform interrogations, \
-		look badass, smoke cigarettes."
+	description = "Расследуйте преступления, собирайте улики, проводите допросы, \
+		выглядите круто, курите сигареты."
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	department_head = list(JOB_HEAD_OF_SECURITY)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = SUPERVISOR_HOS
+	supervisors = JOB_HEAD_OF_SECURITY_RU
 	minimal_player_age = 7
 	exp_requirements = 300
 	exp_required_type = EXP_TYPE_CREW
@@ -54,7 +54,7 @@
 
 	id_trim = /datum/id_trim/job/detective
 	uniform = /obj/item/clothing/under/rank/security/detective
-	suit = /obj/item/clothing/suit/jacket/det_suit
+	suit = /obj/item/clothing/suit/toggle/jacket/det_trench
 	backpack_contents = list(
 		/obj/item/detective_scanner = 1,
 		/obj/item/melee/baton = 1,

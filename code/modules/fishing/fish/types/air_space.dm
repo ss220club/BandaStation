@@ -51,7 +51,7 @@
 /obj/item/fish/bumpy
 	name = "bump-fish"
 	fish_id = "bumpy"
-	desc = "An misshapen fish-thing all covered in stubby little tendrils"
+	desc = "A misshapen fish-thing all covered in stubby little tendrils."
 	icon_state = "bumpy"
 	sprite_height = 4
 	sprite_width = 5
@@ -110,12 +110,12 @@
 
 /obj/item/fish/starfish/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] swallows [src], and looks upwards..."))
-	user.say("I must go. My people need me.", forced = "starfish suicide")
+	user.say("Я должен идти. Я нужен своему народу.", forced = "starfish suicide")
 	addtimer(CALLBACK(src, PROC_REF(ascension), user), 1 SECONDS)
 	return MANUAL_SUICIDE
 
 /obj/item/fish/starfish/proc/ascension(mob/living/user)
-	user.apply_status_effect(/datum/status_effect/go_away/deluxe)
+	user.apply_status_effect(/datum/status_effect/go_away/deletes_mob)
 	qdel(src)
 
 /obj/item/fish/baby_carp
@@ -200,7 +200,7 @@
 	if(status == FISH_DEAD)
 		eyes.icon_state += "_dead"
 	else
-		eyes.appearance_flags = RESET_COLOR
+		eyes.appearance_flags = RESET_COLOR|KEEP_APART
 	. += eyes
 
 ///Determines the speed at which the carp grows based on how big it's

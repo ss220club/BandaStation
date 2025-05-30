@@ -31,6 +31,10 @@
 	owner.update_icon(UPDATE_OVERLAYS)
 	return ..()
 
+// We WANT to call on_remove when replaced, else effects might not be cleaned up in the case where a mark is applied while a different mark is active.
+/datum/status_effect/eldritch/be_replaced()
+	qdel(src)
+
 /**
  * Signal proc for [COMSIG_ATOM_UPDATE_OVERLAYS].
  *
@@ -162,23 +166,23 @@
 
 	var/mob/thrower = throw_args[4]
 	if(istype(thrower))
-		to_chat(thrower, span_hypnophrase("An otherworldly force prevents you from throwing [source] out of [get_area_name(locked_to)]!"))
+		to_chat(thrower, span_hypnophrase("Потусторонняя сила не позволяет вам выбросить [source.declent_ru(ACCUSATIVE)] из [get_area_name(locked_to)]!"))
 
-	to_chat(source, span_hypnophrase("An otherworldly force prevents you from being thrown out of [get_area_name(locked_to)]!"))
+	to_chat(source, span_hypnophrase("Потусторонняя сила не позволяет вам быть выброшенным из [get_area_name(locked_to)]!"))
 
 	return COMPONENT_CANCEL_THROW
 
-/// Signal proc for [COMSIG_MOVABLE_TELEPORTED] that blocks any teleports from our locked area.
+/// Signal proc for [COMSIG_MOVABLE_TELEPORTING] that blocks any teleports from our locked area.
 /datum/status_effect/eldritch/blade/proc/on_teleport(mob/living/source, atom/destination, channel)
 	SIGNAL_HANDLER
 
 	if(!is_escaping_locked_area(source, destination))
 		return
 
-	to_chat(source, span_hypnophrase("An otherworldly force prevents your escape from [get_area_name(locked_to)]!"))
+	to_chat(source, span_hypnophrase("Потусторонняя сила препятствует вашему побегу из [get_area_name(locked_to)]!"))
 
 	source.Stun(1 SECONDS)
-	return COMPONENT_BLOCK_TELEPORT
+	return TRUE
 
 /// Signal proc for [COMSIG_MOVABLE_MOVED] that blocks any movement out of our locked area
 /datum/status_effect/eldritch/blade/proc/on_move(mob/living/source, turf/old_loc, movement_dir, forced)
@@ -192,7 +196,7 @@
 	if(forced || !is_escaping_locked_area(old_loc, source))
 		return
 
-	to_chat(source, span_hypnophrase("An otherworldly force prevents your escape from [get_area_name(locked_to)]!"))
+	to_chat(source, span_hypnophrase("Потусторонняя сила препятствует вашему побегу из [get_area_name(locked_to)]!"))
 
 	var/turf/further_behind_old_loc = get_edge_target_turf(old_loc, REVERSE_DIR(movement_dir))
 
@@ -256,9 +260,9 @@
 	. = ..()
 	if(owner.can_block_magic(MAGIC_RESISTANCE_MIND))
 		return FALSE
-	ADD_TRAIT(owner, TRAIT_PACIFISM, id)
+	ADD_TRAIT(owner, TRAIT_PACIFISM, TRAIT_STATUS_EFFECT(id))
 	owner.emote(pick("giggle", "laugh"))
-	owner.balloon_alert(owner, "you feel unable to hurt a soul!")
+	owner.balloon_alert(owner, "вы чувствуете, что и мышке не навредите!")
 	RegisterSignal (owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_damaged))
 	return TRUE
 
@@ -276,8 +280,8 @@
 		return
 
 	// Removes the trait in here since we don't wanna destroy the mark before its detonated or allow detonation triggers with other weapons
-	REMOVE_TRAIT(owner, TRAIT_PACIFISM, id)
-	owner.balloon_alert(owner, "you feel able to once again strike!")
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, TRAIT_STATUS_EFFECT(id))
+	owner.balloon_alert(owner, "вы чувствуете, что можете снова драться!")
 
 /datum/status_effect/eldritch/moon/on_effect()
 	owner.adjust_confusion(30 SECONDS)
@@ -291,4 +295,4 @@
 	UnregisterSignal (owner, COMSIG_MOB_APPLY_DAMAGE)
 
 	// In case the trait was not removed earlier
-	REMOVE_TRAIT(owner, TRAIT_PACIFISM, id)
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, TRAIT_STATUS_EFFECT(id))

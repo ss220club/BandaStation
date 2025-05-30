@@ -1,18 +1,24 @@
 /obj/machinery/gibber
 	name = "gibber"
-	desc = "The name isn't descriptive enough?"
+	desc = "Название недостаточно информативное?"
 	icon = 'icons/obj/machines/kitchen.dmi'
 	icon_state = "grinder"
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/gibber
 	anchored_tabletop_offset = 8
 
-	var/operating = FALSE //Is it on?
-	var/dirty = FALSE // Does it need cleaning?
-	var/gibtime = 40 // Time from starting until meat appears
+	//Is it on?
+	var/operating = FALSE
+	/// Does it need cleaning?
+	var/dirty = FALSE
+	/// Time from starting until meat appears
+	var/gibtime = 40
+	/// How much meat we meet when we meat the meat
 	var/meat_produced = 2
+	/// If the gibber should give the 'Subject may not have abiotic items on' message
 	var/ignore_clothing = FALSE
-
+	/// The DNA info of the last gibbed mob
+	var/blood_dna_info
 
 /obj/machinery/gibber/Initialize(mapload)
 	. = ..()
@@ -20,10 +26,10 @@
 	if(prob(5))
 		name = "meat grinder"
 		ru_names_rename(ru_names_toml(name))
-		desc = "Okay, if I... if I chop you up in a meat grinder, and the only thing that comes out, that's left of you, is your eyeball, \
-			you'r- you're PROBABLY DEAD! You're probably going to - not you, I'm just sayin', like, if you- if somebody were to, like, \
-			push you into a meat grinder, and, like, your- one of your finger bones is still intact, they're not gonna pick it up and go, \
-			Well see, yeah it wasn't deadly, it wasn't an instant kill move! You still got, like, this part of your finger left!"
+		desc = "Ладно, если я... если я измельчу тебя в мясорубке, и единственное, что от тебя останется, - это глазное яблоко, \
+		то ты... ты ТОЧНО УМРЕШЬ! Ты, наверное, - не ты, я просто говорю, что если бы ты... если бы кто-то, типа, \
+			если тебя заталкивают в мясорубку, и, к примеру, одна из косточек твоего пальца все еще цела, они не станут ее поднимать и уходить, \
+			видите ли, да, это не было смертельно опасно, это не было мгновенным убийством! У тебя еще осталась часть пальца!"
 		dirty = TRUE
 		update_appearance(UPDATE_OVERLAYS)
 
@@ -41,15 +47,20 @@
 /obj/machinery/gibber/examine(mob/user)
 	. = ..()
 	if(in_range(user, src) || isobserver(user))
-		. += span_notice("The status display reads: Outputting <b>[meat_produced]</b> meat slab(s) after <b>[gibtime*0.1]</b> seconds of processing.")
+		. += span_notice("На дисплее состояния отображается: Вывод <b>[meat_produced]</b> мясных кусков через <b>[gibtime*0.1]</b> секунд работы.")
 		for(var/datum/stock_part/servo/servo in component_parts)
 			if(servo.tier >= 2)
-				. += span_notice("[src] has been upgraded to process inorganic materials.")
+				. += span_notice("Машина была модернизирована для обработки неорганических материалов.")
 
 /obj/machinery/gibber/update_overlays()
 	. = ..()
 	if(dirty)
-		. += "grinder_bloody"
+		var/mutable_appearance/blood_overlay = mutable_appearance(icon, "grinder_bloody", appearance_flags = RESET_COLOR|KEEP_APART)
+		if(blood_dna_info)
+			blood_overlay.color = get_blood_dna_color(blood_dna_info)
+		else
+			blood_overlay.color = BLOOD_COLOR_RED
+		. += blood_overlay
 	if(machine_stat & (NOPOWER|BROKEN) || panel_open)
 		return
 	if(!occupant)
@@ -83,36 +94,36 @@
 	if(machine_stat & (NOPOWER|BROKEN))
 		return
 	if(operating)
-		to_chat(user, span_danger("It's locked and running."))
+		to_chat(user, span_danger("Машина работает, потому доступ заблокирован."))
 		return
 
 	if(!anchored)
-		to_chat(user, span_warning("[src] cannot be used unless bolted to the ground!"))
+		to_chat(user, span_warning("Нельзя использовать [declent_ru(ACCUSATIVE)], пока [ru_p_they()] не прикручена к полу!"))
 		return
 
 	if(user.pulling && isliving(user.pulling))
 		var/mob/living/L = user.pulling
 		if(!iscarbon(L))
-			to_chat(user, span_warning("This item is not suitable for [src]!"))
+			to_chat(user, span_warning("Этот предмет не подходит для [declent_ru(GENITIVE)]!"))
 			return
 		var/mob/living/carbon/C = L
 		if(C.buckled || C.has_buckled_mobs())
-			to_chat(user, span_warning("[C] is attached to something!"))
+			to_chat(user, span_warning("Тело [C.declent_ru(GENITIVE)] к чему-то пристегнуто!"))
 			return
 
 		if(!ignore_clothing)
 			for(var/obj/item/I in C.held_items + C.get_equipped_items())
 				if(!HAS_TRAIT(I, TRAIT_NODROP))
-					to_chat(user, span_warning("Subject may not have abiotic items on!"))
+					to_chat(user, span_warning("На объекте не должно быть абиотических предметов!"))
 					return
 
-		user.visible_message(span_danger("[user] starts to put [C] into [src]!"))
+		user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] начинает запихивать [C.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]!"))
 
 		add_fingerprint(user)
 
 		if(do_after(user, gibtime, target = src))
 			if(C && user.pulling == C && !C.buckled && !C.has_buckled_mobs() && !occupant)
-				user.visible_message(span_danger("[user] stuffs [C] into [src]!"))
+				user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] запихивает [C.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]!"))
 				C.forceMove(src)
 				set_occupant(C)
 				update_appearance()
@@ -124,7 +135,7 @@
 	default_unfasten_wrench(user, tool)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/gibber/attackby(obj/item/P, mob/user, params)
+/obj/machinery/gibber/attackby(obj/item/P, mob/user, list/modifiers, list/attack_modifiers)
 	if(default_deconstruction_screwdriver(user, "grinder_open", "grinder", P))
 		return
 
@@ -156,17 +167,17 @@
 	if(operating)
 		return
 	if(!occupant)
-		audible_message(span_hear("You hear a loud metallic grinding sound."))
+		audible_message(span_hear("Вы слышите громкий металлический скрежет."))
 		return
 	if(occupant.flags_1 & HOLOGRAM_1)
-		audible_message(span_hear("You hear a very short metallic grinding sound."))
+		audible_message(span_hear("Вы слышите очень короткий металлический скрежет."))
 		playsound(loc, 'sound/machines/hiss.ogg', 20, TRUE)
 		qdel(occupant)
 		set_occupant(null)
 		return
 
 	use_energy(active_power_usage)
-	audible_message(span_hear("You hear a loud squelchy grinding sound."))
+	audible_message(span_hear("Вы слышите громкий хлюпающий скрежещущий звук."))
 	playsound(loc, 'sound/machines/juicer.ogg', 50, TRUE)
 	operating = TRUE
 	update_appearance()
@@ -194,16 +205,18 @@
 		else if(gibee.dna && gibee.dna.species)
 			typeofmeat = gibee.dna.species.meat
 			typeofskin = gibee.dna.species.skinned_type
+		blood_dna_info = gibee.get_blood_dna_list()
 
 	else if(iscarbon(occupant))
-		var/mob/living/carbon/C = occupant
-		typeofmeat = C.type_of_meat
-		gibtype = C.gib_type
-		if(isalien(C))
+		var/mob/living/carbon/carbon_occupant = occupant
+		typeofmeat = carbon_occupant.type_of_meat
+		gibtype = carbon_occupant.gib_type
+		if(isalien(carbon_occupant))
 			typeofskin = /obj/item/stack/sheet/animalhide/xeno
+		blood_dna_info = carbon_occupant.get_blood_dna_list()
 
 	for (var/i in 1 to meat_produced)
-		var/obj/item/food/meat/slab/newmeat = new typeofmeat
+		var/obj/item/food/meat/slab/newmeat = new typeofmeat(null, blood_dna_info)
 		newmeat.name = "[sourcename] [newmeat.name]"
 		newmeat.set_custom_materials(list(GET_MATERIAL_REF(/datum/material/meat/mob_meat, occupant) = 4 * SHEET_MATERIAL_AMOUNT))
 		if(!istype(newmeat))
@@ -235,13 +248,15 @@
 	mob_occupant.ghostize()
 	set_occupant(null)
 	qdel(mob_occupant)
-	addtimer(CALLBACK(src, PROC_REF(make_meat), skin, results, meat_produced, gibtype, diseases), gibtime)
+	addtimer(CALLBACK(src, PROC_REF(make_meat), skin, results, meat_produced, gibtype, diseases, blood_dna_info), gibtime)
 
-/obj/machinery/gibber/proc/make_meat(obj/item/stack/sheet/animalhide/skin, list/results, meat_produced, gibtype, list/datum/disease/diseases)
+/obj/machinery/gibber/proc/make_meat(obj/item/stack/sheet/animalhide/skin, list/results, meat_produced, gibtype, list/datum/disease/diseases, blood_dna_info)
 	playsound(src.loc, 'sound/effects/splat.ogg', 50, TRUE)
 	operating = FALSE
 	if (!dirty && prob(50))
 		dirty = TRUE
+	if(blood_dna_info)
+		add_blood_DNA(blood_dna_info)
 	var/turf/T = get_turf(src)
 	var/list/turf/nearby_turfs = RANGE_TURFS(3,T) - T
 	if(skin)
@@ -260,7 +275,8 @@
 				diseases_to_add += disease
 			if(LAZYLEN(diseases_to_add))
 				meatslab.AddComponent(/datum/component/infective, diseases_to_add)
-
+		if(blood_dna_info)
+			meatslab.add_blood_DNA(blood_dna_info)
 		meatslab.forceMove(loc)
 		meatslab.throw_at(pick(nearby_turfs), iteration, 3)
 
@@ -269,8 +285,9 @@
 	for (var/i in 1 to meat_produced**2) //2 slabs: 4 giblets, 3 slabs: 9, etc.
 		var/turf/gibturf = pick(nearby_turfs)
 		if (!gibturf.density && (src in view(gibturf)))
-			new gibtype(gibturf, round(1 + i / meat_produced), diseases)
-
+			var/obj/effect/decal/cleanable/new_gibs = new gibtype(gibturf, round(1 + i / meat_produced), diseases)
+			if(blood_dna_info)
+				new_gibs.add_blood_DNA(blood_dna_info)
 
 	pixel_x = base_pixel_x //return to its spot after shaking
 	operating = FALSE
