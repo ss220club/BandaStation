@@ -230,7 +230,7 @@ function JobRow(props: JobRowProps) {
   } else {
     rightSide = (
       // BANDASTATION EDIT - Start
-      <Stack align="center" height="100%" pr={1}>
+      <Stack align="center" justify="flex-end" height="100%" pr={1}>
         <JobSlotDropdown name={name} />
         <PriorityButtons
           createSetPriority={createSetPriority}
