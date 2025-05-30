@@ -41,7 +41,7 @@ GLOBAL_LIST_EMPTY(heretic_sacrifice_landmarks)
 // A fluff signpost object that doesn't teleport you somewhere when you touch it.
 /obj/structure/no_effect_signpost
 	name = "signpost"
-	desc = "Won't somebody give me a sign?"
+	desc = "Кто-нибудь подаст мне знак?"
 	icon = 'icons/obj/fluff/general.dmi'
 	icon_state = "signpost"
 	anchored = TRUE
@@ -49,7 +49,7 @@ GLOBAL_LIST_EMPTY(heretic_sacrifice_landmarks)
 
 /obj/structure/no_effect_signpost/void
 	name = "signpost at the edge of the universe"
-	desc = "A direction in the directionless void."
+	desc = "Направление в беспорядочной пустоте."
 	density = FALSE
 	/// Brightness of the signpost.
 	var/range = 2

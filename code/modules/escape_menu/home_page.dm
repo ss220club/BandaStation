@@ -4,7 +4,7 @@
 			null,
 			/* hud_owner = */ null,
 			src,
-			"Resume",
+			"Продолжить",
 			/* offset = */ 1,
 			CALLBACK(src, PROC_REF(home_resume)),
 		)
@@ -15,7 +15,7 @@
 			null,
 			/* hud_owner = */ null,
 			src,
-			"Character",
+			"Персонаж",
 			/* offset = */ 2,
 			CALLBACK(src, PROC_REF(home_open_character_settings)),
 		)
@@ -26,7 +26,7 @@
 			null,
 			/* hud_owner = */ null,
 			src,
-			"Settings",
+			"Настройки",
 			/* offset = */ 3,
 			CALLBACK(src, PROC_REF(home_open_game_settings)),
 		)
@@ -37,7 +37,7 @@
 			null,
 			/* hud_owner = */ null,
 			src,
-			"Admin Help",
+			"Админхелп",
 			/* offset = */ 4,
 		)
 	)
@@ -47,7 +47,7 @@
 			null,
 			/* hud_owner = */ null,
 			src,
-			"Leave Body",
+			"Покинуть тело",
 			/* offset = */ 5,
 			CALLBACK(src, PROC_REF(open_leave_body)),
 		)
@@ -389,7 +389,7 @@
 	. = ..()
 
 	if (is_blinking)
-		openToolTip(usr, src, params, content = "An admin is trying to talk to you!")
+		openToolTip(usr, src, params, content = "Администратор пытается связаться с вами!")
 
 /atom/movable/screen/escape_menu/home_button/admin_help/MouseExited(location, control, params)
 	. = ..()
