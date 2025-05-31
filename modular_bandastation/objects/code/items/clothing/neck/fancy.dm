@@ -4,3 +4,10 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
 	icon_state = "crowcloak"
+
+/obj/item/clothing/neck/tsf_fancy_cloak
+	name = "TSF fancy cloak"
+	desc = "Шикарная накидка, выполненная в цветах Федерации и пошитая золотом."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "tsf_cloak"
