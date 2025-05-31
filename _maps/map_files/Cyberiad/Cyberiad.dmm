@@ -56744,6 +56744,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/carpet,
 /area/station/commons/vacant_room/office)
+"nGI" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "nGS" = (
 /obj/machinery/power/solar{
 	id = "foreport";
@@ -61052,7 +61057,7 @@
 	pixel_x = 6;
 	pixel_y = -1
 	},
-/obj/machinery/light/small/dim/directional/north,
+/obj/machinery/light/small/directional/north,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "oIi" = (
@@ -80626,7 +80631,7 @@
 /area/station/commons/locker)
 "tuR" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
-/obj/machinery/light/small/dim/directional/west,
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "tuZ" = (
@@ -83669,7 +83674,7 @@
 /obj/item/food/grown/onion,
 /obj/item/food/grown/onion,
 /obj/structure/closet/crate/freezer/food,
-/obj/machinery/light/small/dim/directional/north,
+/obj/machinery/light/small/directional/north,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "ugS" = (
@@ -90186,11 +90191,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
-"vNq" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/light/small/dim/directional/east,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/station/service/kitchen/coldroom/ghetto)
 "vNs" = (
 /obj/item/kirbyplants/random,
 /obj/effect/turf_decal/tile/red/half/contrasted{
@@ -138539,7 +138539,7 @@ sbY
 mzG
 gyK
 clJ
-vNq
+nGI
 iOB
 wWh
 vbK
