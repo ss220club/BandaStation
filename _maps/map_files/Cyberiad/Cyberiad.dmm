@@ -30206,7 +30206,9 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos/project)
 "hmM" = (
-/obj/machinery/atmospherics/components/unary/thermomachine/freezer/on/coldroom,
+/obj/machinery/atmospherics/components/unary/thermomachine/freezer/on/coldroom{
+	dir = 1
+	},
 /obj/effect/turf_decal/siding/white{
 	dir = 5
 	},
@@ -45984,7 +45986,6 @@
 	pixel_x = 15;
 	pixel_y = 4
 	},
-/obj/structure/sign/poster/random/directional/west,
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple{
 	dir = 6
 	},
@@ -61051,6 +61052,7 @@
 	pixel_x = 6;
 	pixel_y = -1
 	},
+/obj/machinery/light/small/dim/directional/north,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "oIi" = (
@@ -75047,7 +75049,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "sbY" = (
-/obj/machinery/light/small/directional/east,
+/obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "sca" = (
@@ -80624,7 +80626,7 @@
 /area/station/commons/locker)
 "tuR" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
-/obj/machinery/light/small/directional/west,
+/obj/machinery/light/small/dim/directional/west,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "tuZ" = (
@@ -83667,6 +83669,7 @@
 /obj/item/food/grown/onion,
 /obj/item/food/grown/onion,
 /obj/structure/closet/crate/freezer/food,
+/obj/machinery/light/small/dim/directional/north,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "ugS" = (
@@ -90183,6 +90186,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
+"vNq" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/light/small/dim/directional/east,
+/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/area/station/service/kitchen/coldroom/ghetto)
 "vNs" = (
 /obj/item/kirbyplants/random,
 /obj/effect/turf_decal/tile/red/half/contrasted{
@@ -138531,7 +138539,7 @@ sbY
 mzG
 gyK
 clJ
-clJ
+vNq
 iOB
 wWh
 vbK
