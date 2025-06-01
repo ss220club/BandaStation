@@ -65,6 +65,7 @@
 #include "game/_game.dme"
 #include "implants/_implants.dme"
 #include "ssd_indicator/_ssd_indicator.dme"
+#include "emergency_call/_emergency_call.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //

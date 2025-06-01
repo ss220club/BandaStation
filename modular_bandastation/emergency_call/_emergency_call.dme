@@ -1,0 +1,4 @@
+#include "_emergency_call.dm"
+
+#include "code/emergency_call.dm"
+#include "code/emergency_calls/test.dm"
