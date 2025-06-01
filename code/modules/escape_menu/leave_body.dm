@@ -5,7 +5,7 @@
 		new /atom/movable/screen/escape_menu/lobby_button/small(
 			null,
 			/* hud_owner = */ null,
-			"Back",
+			"Назад",
 			/* tooltip_text = */ null,
 			/* pixel_offset = */ list(-260, 190),
 			CALLBACK(src, PROC_REF(open_home_page)),
