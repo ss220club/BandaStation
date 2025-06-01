@@ -31,7 +31,7 @@
 	var/area/bar_area = pick(GLOB.bar_areas)
 	podspawn(list(
 		"target" = pick(bar_area.contents),
-		"path" = /obj/structure/closet/supplypod/centcompod,
+		"path" = /obj/structure/closet/supplypod/teleporter, // BANDASTATION EDIT - Original: "path" = /obj/structure/closet/supplypod/centcompod,
 		"spawn" = list(
 			pizza_type_to_spawn,
 			/obj/item/reagent_containers/cup/glass/bottle/beer = 6
@@ -293,6 +293,12 @@
 		/datum/job/shaft_miner = /obj/item/organ/monster_core/rush_gland,
 		/datum/job/station_engineer = /obj/item/organ/cyberimp/arm/toolkit/toolset,
 		/datum/job/warden = /obj/item/organ/cyberimp/eyes/hud/security,
+		// BANDASTATION ADD - START
+		/datum/job/nanotrasen_representative = /obj/item/organ/cyberimp/arm/toolkit/paperwork,
+		/datum/job/blueshield = /obj/item/organ/cyberimp/arm/toolkit/flash,
+		/datum/job/magistrate = /obj/item/organ/cyberimp/arm/toolkit/paperwork,
+		/datum/job/explorer = /obj/item/organ/cyberimp/arm/toolkit/toolset,
+		// BANDASTATION ADD - END
 	)
 
 /datum/station_trait/cybernetic_revolution/New()

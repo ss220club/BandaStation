@@ -1,12 +1,12 @@
 /datum/job/chaplain
 	title = JOB_CHAPLAIN
-	description = "Hold services and funerals, cremate people, preach your \
-		religion, protect the crew against cults."
+	description = "Проводите похороны и службы в церкви, кремируйте людей, распространяйте свою \
+		веру, защищайте людей от культистов."
 	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = SUPERVISOR_HOP
+	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "CHAPLAIN"
 
