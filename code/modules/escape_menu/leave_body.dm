@@ -1,6 +1,18 @@
 /datum/escape_menu/proc/show_leave_body_page()
 	PRIVATE_PROC(TRUE)
 
+	page_holder.give_screen_object(
+		new /atom/movable/screen/escape_menu/lobby_button/small(
+			null,
+			/* hud_owner = */ null,
+			"Назад",
+			/* tooltip_text = */ null,
+			/* pixel_offset = */ list(-260, 190),
+			CALLBACK(src, PROC_REF(open_home_page)),
+			/* button_overlay = */ "back",
+		)
+	)
+
 	var/static/dead_clown
 	if (isnull(dead_clown))
 		if (MC_RUNNING(SSatoms.init_stage)) // We're about to create a bunch of atoms for a human
@@ -13,7 +25,7 @@
 		/* hud_owner = */ null,
 		"Откиснуть",
 		"Покинуть тело драматичным образом",
-		/* pixel_offset = */ list(-105, -1),
+		/* pixel_offset = */ list(-55, -1),
 		CALLBACK(src, PROC_REF(leave_suicide)),
 		/* button_overlay = */ dead_clown,
 	))
@@ -24,21 +36,9 @@
 			/* hud_owner = */ null,
 			"Призрак",
 			"Тихо выйти из тела в призраки",
-			/* pixel_offset = */ list(0, -1),
+			/* pixel_offset = */ list(55, -1),
 			CALLBACK(src, PROC_REF(leave_ghost)),
 			/* button_overlay = */ "ghost",
-		)
-	)
-
-	page_holder.give_screen_object(
-		new /atom/movable/screen/escape_menu/lobby_button(
-			null,
-			/* hud_owner = */ null,
-			"Назад",
-			/* tooltip_text = */ null,
-			/* pixel_offset = */ list(105, -1),
-			CALLBACK(src, PROC_REF(open_home_page)),
-			/* button_overlay = */ "back",
 		)
 	)
 

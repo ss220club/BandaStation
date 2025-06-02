@@ -70,13 +70,14 @@
 /datum/surgery_step/incise_heart/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(ishuman(target))
 		var/mob/living/carbon/human/target_human = target
-		if (!HAS_TRAIT(target_human, TRAIT_NOBLOOD))
+		if (target_human.can_bleed())
+			var/blood_name = target_human.get_bloodtype()?.get_blood_name() || "Blood"
 			display_results(
 				user,
 				target,
-				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа крови."),
-				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа крови."),
-				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа крови."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
 			)
 			var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 			target_bodypart.adjustBleedStacks(10)
@@ -86,12 +87,13 @@
 /datum/surgery_step/incise_heart/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(ishuman(target))
 		var/mob/living/carbon/human/target_human = target
+		var/blood_name = LOWER_TEXT(target_human.get_bloodtype()?.get_blood_name()) || "blood"
 		display_results(
 			user,
 			target,
 			span_warning("Вы ошибаетесь, совершив слишком глубокий надрез сердца!"),
-			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается кровь!"),
-			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается кровь!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается [blood_name]!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается [blood_name]!"),
 		)
 		var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 		target_bodypart.adjustBleedStacks(10)
