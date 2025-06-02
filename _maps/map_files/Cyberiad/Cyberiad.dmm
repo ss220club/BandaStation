@@ -441,7 +441,7 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
 "agB" = (
-/obj/effect/decal/cleanable/oil/slippery,
+/obj/effect/decal/cleanable/blood/oil/slippery,
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/aft)
 "agC" = (
@@ -659,7 +659,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/port/aft)
 "aiJ" = (
-/obj/effect/decal/cleanable/oil/slippery,
+/obj/effect/decal/cleanable/blood/oil/slippery,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "aiP" = (
@@ -9294,7 +9294,7 @@
 /area/station/command/bridge)
 "ckI" = (
 /obj/effect/turf_decal/delivery,
-/obj/effect/decal/cleanable/oil/slippery,
+/obj/effect/decal/cleanable/blood/oil/slippery,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "ckQ" = (
@@ -42258,7 +42258,7 @@
 /area/station/maintenance/starboard/aft)
 "klr" = (
 /obj/machinery/light/small/directional/north,
-/obj/effect/decal/cleanable/oil/slippery,
+/obj/effect/decal/cleanable/blood/oil/slippery,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "kly" = (
@@ -55218,7 +55218,7 @@
 /area/station/maintenance/starboard/upper)
 "nnV" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/decal/cleanable/oil/slippery,
+/obj/effect/decal/cleanable/blood/oil/slippery,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "nnX" = (
