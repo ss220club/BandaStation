@@ -4,7 +4,7 @@
 /area/template_noop)
 "e" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/oil/slippery,
+/obj/effect/decal/cleanable/blood/oil/slippery,
 /obj/item/wrench,
 /turf/open/floor/plating,
 /area/station/maintenance/department/science)
