@@ -80,7 +80,7 @@
 	if (!target.density)
 		return
 	if (isliving(target))
-		source.visible_message(span_warning("[source] crashes into [target]!"))
+		source.visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] врезается в [target.declent_ru(ACCUSATIVE)]!"))
 		smack_into(source)
 		smack_into(target)
 		qdel(src)
@@ -88,7 +88,7 @@
 	if (lavaland_equipment_pressure_check(get_turf(source)))
 		return
 	smack_into(source)
-	source.visible_message(span_warning("[source] crashes into [target]!"))
+	source.visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] врезается в [target.declent_ru(ACCUSATIVE)]!"))
 	qdel(src)
 
 /datum/status_effect/lobster_rush/proc/smack_into(mob/living/target)

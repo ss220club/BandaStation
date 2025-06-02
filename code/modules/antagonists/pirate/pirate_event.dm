@@ -14,7 +14,7 @@
 	admin_setup = list(/datum/event_admin_setup/listed_options/pirates)
 	map_flags = EVENT_SPACE_ONLY
 
-/datum/round_event_control/pirates/preRunEvent()
+/datum/round_event_control/pirates/preRunEvent(scheduled = FALSE) // BANDASTATION EDIT - STORYTELLER
 	if (SSmapping.is_planetary())
 		return EVENT_CANT_RUN
 	return ..()
@@ -27,6 +27,8 @@
 	send_pirate_threat(gang_list)
 
 /proc/send_pirate_threat(list/pirate_selection)
+	if(!pirate_selection)
+		pirate_selection = GLOB.light_pirate_gangs + GLOB.heavy_pirate_gangs
 	var/datum/pirate_gang/chosen_gang = pick_n_take(pirate_selection)
 	///If there was nothing to pull from our requested list, stop here.
 	if(!chosen_gang)
@@ -39,9 +41,12 @@
 		payoff = max(PAYOFF_MIN, FLOOR(account.account_balance * 0.80, 1000))
 	var/datum/comm_message/threat = chosen_gang.generate_message(payoff)
 	//send message
-	priority_announce("Incoming subspace communication. Secure channel opened at all communication consoles.", "Incoming Message", SSstation.announcer.get_rand_report_sound())
+	priority_announce("Входящий подпространственный вызов. Защищенный канал открыт на всех коммуникационных консолях.", "Входящее сообщение", SSstation.announcer.get_rand_report_sound())
 	threat.answer_callback = CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(pirates_answered), threat, chosen_gang, payoff, world.time)
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(spawn_pirates), threat, chosen_gang), RESPONSE_MAX_TIME)
+	// BANDASTATION EDIT START - STORYTELLER
+	//addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(spawn_pirates), threat, chosen_gang), RESPONSE_MAX_TIME)
+	spawn_pirates(threat, chosen_gang)
+	// BANDASTATION EDIT END - STORYTELLER
 	GLOB.communications_controller.send_message(threat, unique = TRUE)
 
 /proc/pirates_answered(datum/comm_message/threat, datum/pirate_gang/chosen_gang, payoff, initial_send_time)

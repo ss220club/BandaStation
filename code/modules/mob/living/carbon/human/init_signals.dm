@@ -46,7 +46,7 @@
 		return
 	var/voice_name = GetVoice()
 	if(name != voice_name)
-		voice_name += " (as [get_id_name("Unknown")])"
+		voice_name += " (как [get_id_name("Неизвестный")])"
 	stored_name[NAME_PART_INDEX] = voice_name
 
 /mob/living/carbon/human/proc/on_fat(datum/source)
@@ -81,8 +81,8 @@
 	if(!dropItemToGround(changed, force = TRUE))
 		return
 	visible_message(
-		span_warning("[changed] falls out of [src]'s pockets!"),
-		span_warning("[changed] falls out of your pockets!"),
+		span_warning("[capitalize(changed.declent_ru(NOMINATIVE))] падает из карманов [declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(changed.declent_ru(NOMINATIVE))] падает из ваших карманов!"),
 		vision_distance = COMBAT_MESSAGE_RANGE,
 	)
 	playsound(src, SFX_RUSTLE, 50, TRUE, -5, frequency = 0.8)
