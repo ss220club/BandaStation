@@ -1,5 +1,5 @@
 /obj/item/stealth/spy_spider
-	name = "шпионский жучок"
+	name = "spy spider"
 	desc = "Кажется, ты видел такого в фильмах про шпионов."
 	icon = 'modular_bandastation/objects/icons/obj/items/spy_spider.dmi'
 	icon_state = "spy_spider"
@@ -23,8 +23,8 @@
 	return ..()
 
 /obj/item/radio/spider_transmitter
-	name = "шпионский передатчик"
-	desc = "Кажется, ты видел такого в фильмах про шпионов."
+	name = "spy transmitter"
+	desc = "Миниатюрный передатчик, размер которого позволяет устанавливать его в небольших устройствах."
 	icon = 'modular_bandastation/objects/icons/obj/items/spy_spider.dmi'
 	icon_state = "spy_spider"
 	canhear_range = 3
@@ -46,7 +46,7 @@
 /datum/storage/lockbox/detective
 	max_total_storage = 20
 	max_slots = 5
-	
+
 /obj/item/storage/lockbox/spy_kit
 	name = "набор жучков"
 	desc = "Не самый легальный из способов достать информацию, но какая разница, если никто не узнает?"

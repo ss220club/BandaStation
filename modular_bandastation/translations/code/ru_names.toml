@@ -23787,3 +23787,12 @@ accusative = "воронью мантию"
 instrumental = "вороньей мантией"
 prepositional = "вороньей мантии"
 gender = "female"
+
+["spy spider"]
+nominative = "шпионский жучок"
+genitive = "шпионского жучка"
+dative = "шпионскому жучку"
+accusative = "шпионский жучок"
+instrumental = "шпионским жучком"
+prepositional = "шпионском жучке"
+gender = "male"
