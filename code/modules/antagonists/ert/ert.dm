@@ -28,7 +28,6 @@
 	var/ert_job_path = /datum/job/ert_generic
 
 
-
 /datum/antagonist/ert/on_gain()
 	if(random_names)
 		update_name()
