@@ -1,4 +1,3 @@
-
 /obj/item/organ/cyberimp/arm/toolkit/centcom
 	name = "centcom combat implant"
 	desc = "A powerful, military-grade cybernetic implant, designed to provide the user with combat useful devices from its arm."
