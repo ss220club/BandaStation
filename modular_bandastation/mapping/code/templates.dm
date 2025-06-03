@@ -66,25 +66,6 @@
 	suffix = "patrol"
 	name = "Патрульный корабль ТСФ"
 
-/obj/docking_port/mobile/tsf_patrol
-	name = "Патрульный корабль ТСФ"
-	shuttle_id = "tsf_patrol"
-	movement_force = list("KNOCKDOWN" = 2, "THROW" = 2)
-	hidden = TRUE
-	dir = NORTH
-	port_direction = SOUTH
-	preferred_direction = WEST
-
-/obj/docking_port/stationary/tsf_patrol
-	name = "TSF patrol ship Bay"
-	shuttle_id = "SBC_corvette_bay"
-	roundstart_template = /datum/map_template/shuttle/distress/tsf
-	hidden = TRUE
-	width = 14 // check
-	height = 7 // check
-	dwidth = 7 // check
-	dir = NORTH // check
-
 // Distress Signal - Bases
 /datum/lazy_template/tsf_base
 	map_dir = "_maps/templates/lazy_templates/ss220"

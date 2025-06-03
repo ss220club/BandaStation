@@ -74,6 +74,7 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 	var/list/candidates = SSpolling.poll_ghost_candidates(
 														"Do you wish to be considered for a [rename_team]",
 														check_jobban = FALSE,
+														poll_time = 5 SECONDS, // MIRA for tests
 														alert_pic = alert_pic ? alert_pic : create_leader_preview(),
 														role_name_text = rename_team
 														)
@@ -110,24 +111,33 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 	return TRUE
 
 /datum/emergency_call/proc/create_shuttle(shuttle_id)
-	var/datum/map_template/shuttle/shuttle = SSmapping.shuttle_templates[shuttle_id]
+	var/datum/map_template/shuttle/template = SSmapping.shuttle_templates[shuttle_id]
 
-	var/x = rand(TRANSITIONEDGE,world.maxx - TRANSITIONEDGE - shuttle.width)
-	var/y = rand(TRANSITIONEDGE,world.maxy - TRANSITIONEDGE - shuttle.height)
+	var/x = rand(TRANSITIONEDGE,world.maxx - TRANSITIONEDGE - template.width)
+	var/y = rand(TRANSITIONEDGE,world.maxy - TRANSITIONEDGE - template.height)
 	var/z = SSmapping.empty_space.z_value
 	var/turf/located_turf = locate(x,y,z)
 
 	if(!located_turf)
 		CRASH("Failed to locate turf for emergency call shuttle")
 
-	if(!shuttle.load(located_turf))
+	if(!template.load(located_turf))
 		CRASH("Failed to load shuttle for emergency call!")
 
-	// MIRA fix later
-	// var/obj/docking_port/mobile/port = SSshuttle.getShuttle(shuttle_id)
-	// port.enterTransit()
+	var/list/shuttle_turfs = template.get_affected_turfs(located_turf)
 
-	return shuttle.get_affected_turfs(located_turf)
+	// MIRA this is sooooo bad
+	for(var/turf/affected_turf as anything in shuttle_turfs)
+		for(var/obj/machinery/computer/shuttle/shuttle_computer in affected_turf)
+			shuttle_id = shuttle_computer.shuttleId
+			break // should be only one, but in case
+
+	var/obj/docking_port/mobile/port = SSshuttle.getShuttle(shuttle_id)
+	port.destination = null
+	port.mode = SHUTTLE_IGNITING
+	port.setTimer(port.ignitionTime)
+
+	return shuttle_turfs
 
 /datum/emergency_call/proc/find_spawn_turfs(list/shuttle_turfs)
 	var/list/spawn_turfs = list()
