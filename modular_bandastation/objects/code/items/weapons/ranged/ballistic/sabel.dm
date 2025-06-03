@@ -14,7 +14,7 @@
 	load_empty_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_magin.ogg'
 	eject_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_magout.ogg'
 	burst_size = 1
-	accepted_magazine_type = /obj/item/ammo_box/magazine/akm
+	accepted_magazine_type = /obj/item/ammo_box/magazine/amk
 	can_suppress = FALSE
 	actions_types = list()
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
@@ -35,7 +35,6 @@
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
 	icon_state = "akm"
 	inhand_icon_state = "akm"
-	accepted_magazine_type = /obj/item/ammo_box/magazine/akm
 	fire_delay = 0.25 SECONDS
 	worn_icon_state = "akm"
 	recoil = 0.5
