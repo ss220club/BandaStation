@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 	/// If TRUE, we try and pick one of the most experienced players who volunteered to fill the leader slot
 	var/leader_experience = TRUE
 	/// A shuttle map template to spawn the ERT at. Must present
-	var/shuttle_id = "hunter_bounty"
+	var/shuttle_id = "tsf_patrol"
 	/// if null or false - no base
 	var/base_template = "generic_ert_base"
 	/// Used for spawning bodies for your ERT. Unless customized in the Summon-ERT verb settings, will be overridden and should not be defined at the datum level.
@@ -60,9 +60,7 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 	var/hostility = 0
 
 /proc/test_distress()
-	var/datum/emergency_call/emergency_call = pick_weight(GLOB.emergency_call_weighted_list)
-	emergency_call = new emergency_call
-	emergency_call.activate()
+	SSemergency_call.activate()
 
 /datum/emergency_call/New()
 	if(prob(hostility))
@@ -108,6 +106,8 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 			priority_announce(scramble_message_replace_chars(arrival_message, replaceprob = 60), "Перехваченная радиопередача:")
 		else
 			priority_announce(arrival_message, "Перехваченная радиопередача:")
+
+	return TRUE
 
 /datum/emergency_call/proc/create_shuttle(shuttle_id)
 	var/datum/map_template/shuttle/shuttle = SSmapping.shuttle_templates[shuttle_id]
