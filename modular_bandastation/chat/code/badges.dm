@@ -1,4 +1,4 @@
-#define CHAT_BADGES_DMI 'modular_bandastation/chat_badges/icons/chatbadges.dmi'
+#define CHAT_BADGES_DMI 'modular_bandastation/chat/icons/chatbadges.dmi'
 
 GLOBAL_LIST(badge_icons_cache)
 
@@ -18,7 +18,9 @@ GLOBAL_LIST(badge_icons_cache)
 		parts += badge_parts
 
 	if(donator_level && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
-		parts += "<font color='[prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour]'>[key]</font>"
+		var/donor_color = prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour
+		var/donor_shine = donator_level >= 3 && prefs.read_preference(/datum/preference/toggle/donor_chat_shine) ? "class='shine'" : ""
+		parts += "<span [donor_shine] style='[donor_shine ? "--shine-color: [donor_color];" : "color: [donor_color];"]'>[key]</span>"
 	else
 		parts += "[key]"
 
@@ -66,9 +68,3 @@ GLOBAL_LIST(badge_icons_cache)
 	return badge_icon
 
 #undef CHAT_BADGES_DMI
-
-/datum/preference/toggle/donor_public
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
-	default_value = TRUE
-	savefile_key = "donor_public"
-	savefile_identifier = PREFERENCE_PLAYER
