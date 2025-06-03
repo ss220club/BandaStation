@@ -1,4 +1,4 @@
-//  Wespe aka sol pistol
+// MARK:  Wespe aka sol pistol
 /obj/item/ammo_box/magazine/c35sol_pistol
 	name = "Sol pistol magazine"
 	desc = "Магазин стандартного размера для пистолетов ТСФ калибра .35 Sol Short, вмещает 12 патронов."
@@ -93,8 +93,7 @@
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c35sol/ripper
 
-//  AMK(AKM)
-
+// MARK: AMK(AKM)
 /obj/item/ammo_box/magazine/amk
 	name = "AMK magazine"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами»."
@@ -156,8 +155,7 @@
 	ammo_band_color = "#05880c"
 	ammo_type = /obj/item/ammo_casing/a762x39/hunting
 
-//  Fal aka Carwo or Sol_rifles
-
+// MARK: Fal aka Carwo
 /obj/item/ammo_box/magazine/c40sol_rifle
 	name = "Sol rifle short magazine"
 	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 патронов."

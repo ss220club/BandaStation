@@ -3,10 +3,10 @@
 	desc = "Нестареющий дизайн карабина под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой. \
 	Внесенные в оружие для невоенного использования лишили возможности вести автоматический огонь."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic40x32.dmi'
-	icon_state = "akm_civ"
+	icon_state = "amk_civ"
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_lefthand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_righthand.dmi'
-	inhand_icon_state = "akm_civ"
+	inhand_icon_state = "amk_civ"
 	fire_sound = 'modular_bandastation/objects/sounds/weapons/akm_fire.ogg'
 	worn_icon = 'modular_bandastation/objects/icons/mob/back/guns_back.dmi'
 	rack_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_cock.ogg'
@@ -22,7 +22,7 @@
 	weapon_weight = WEAPON_HEAVY
 	fire_delay = 0.75 SECONDS
 	spread = 1.5
-	worn_icon_state = "akm_civ"
+	worn_icon_state = "amk_civ"
 	recoil = 0.2
 	obj_flags = UNIQUE_RENAME
 	SET_BASE_PIXEL(-5, 0)
@@ -33,10 +33,10 @@
 /obj/item/gun/ballistic/automatic/sabel/auto
 	name = "AMK rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
-	icon_state = "akm"
-	inhand_icon_state = "akm"
+	icon_state = "amk"
+	inhand_icon_state = "amk"
 	fire_delay = 0.25 SECONDS
-	worn_icon_state = "akm"
+	worn_icon_state = "amk"
 	recoil = 0.5
 	spread = 6.5
 
@@ -61,9 +61,9 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/upp
 	name = "AMK-462 rifle"
 	desc = "Модернизированный дизайн автомата под патрон 7.62 мм. Стадартный и надежный автомат солдат СССП."
-	icon_state = "akm_new"
-	inhand_icon_state = "akm_new"
-	worn_icon_state = "akm_new"
+	icon_state = "amk_new"
+	inhand_icon_state = "amk_new"
+	worn_icon_state = "amk_new"
 	can_suppress = TRUE
 	fire_delay = 0.20 SECONDS
 	spread = 2.5
@@ -81,9 +81,9 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/modern
 	name = "modern AMK rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
-	icon_state = "akm_modern"
-	inhand_icon_state = "akm_modern"
-	worn_icon_state = "akm_modern"
+	icon_state = "amk_modern"
+	inhand_icon_state = "amk_modern"
+	worn_icon_state = "amk_modern"
 	fire_delay = 0.20 SECONDS
 	spread = 2.5
 	recoil = 0.1
@@ -100,11 +100,11 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss
 	name = "gauss AMK rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
-	icon_state = "akm_gauss"
-	inhand_icon_state = "akm"
+	icon_state = "amk_gauss"
+	inhand_icon_state = "amk"
 	actions_types = list(/datum/action/item_action/toggle_gauss)
-	base_icon_state = "akm_gauss"
-	worn_icon_state = "akm"
+	base_icon_state = "amk_gauss"
+	worn_icon_state = "amk"
 	projectile_speed_multiplier = 1.2
 
 	/// Determines how many shots we can make before the weapon needs to be maintained.
@@ -268,10 +268,10 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical
 	name = "tactical gauss AMK rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
-	icon_state = "akm_gauss_tacticool"
-	inhand_icon_state = "akm_modern"
-	base_icon_state = "akm_gauss_tacticool"
-	worn_icon_state = "akm_modern"
+	icon_state = "amk_gauss_tacticool"
+	inhand_icon_state = "amk_modern"
+	base_icon_state = "amk_gauss_tacticool"
+	worn_icon_state = "amk_modern"
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/examine_more(mob/user)
 	. = ..()

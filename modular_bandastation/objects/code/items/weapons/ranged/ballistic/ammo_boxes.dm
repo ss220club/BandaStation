@@ -1,4 +1,4 @@
-// .35 Sol Short
+// MARK: .35 Sol Short
 /obj/item/ammo_box/c35sol
 	name = "ammo box (.35 Sol Short lethal)"
 	desc = "Коробка с летальными пистолетными патронами калибра .35 Sol Short, вмещает 24 патрона."
@@ -28,8 +28,7 @@
 	icon_state = "35box_ap"
 	ammo_type = /obj/item/ammo_casing/c35sol/ap
 
-// .40 Sol Long
-
+// MARK: .40 Sol Long
 /obj/item/ammo_box/c40sol
 	name = "ammo box (.40 Sol Long lethal)"
 	desc = "Коробка с винтовочными патронами калибра .40 Sol Long, вмещает 30 патронов."
@@ -68,8 +67,7 @@
 
 	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
 
-// 7.62x39mm
-
+// MARK: 7.62x39mm
 /obj/item/ammo_box/a762x39
 	name = "ammo box (7.62x39mm)"
 	desc = "Коробка с винтовочными патронами калибра 7.62x39мм, вмещает 45 патронов."
