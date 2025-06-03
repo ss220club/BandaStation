@@ -1,19 +1,5 @@
 #define ERT_EXPERIENCED_LEADER_CHOOSE_TOP 3
 
-GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call, generate_emergency_call_weighted_list())
-
-/proc/generate_emergency_call_weighted_list()
-	var/list/weighted_list = list()
-
-	for(var/datum/emergency_call/emergency_call_type as anything in typesof(/datum/emergency_call))
-		var/weight = emergency_call_type.weight
-		if(weight <= 0)
-			continue
-
-		LAZYSET(weighted_list, emergency_call_type, weight)
-
-	return weighted_list
-
 /datum/emergency_call
 	// name for admins
 	var/name = "Blame coderbus name"
@@ -52,15 +38,25 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 	var/base_template = "generic_ert_base"
 	/// Used for spawning bodies for your ERT. Unless customized in the Summon-ERT verb settings, will be overridden and should not be defined at the datum level.
 	var/mob_type
-	// chance to roll
+	/// chance to roll
 	var/weight = 0
-	// obj to show in ghost poll, or will show leader dummy if null or false
+	/// obj to show in ghost poll, or will show leader dummy if null or false
 	var/alert_pic = null
-	// chance to be hostile from 0 to 100
+	/// chance to be hostile from 0 to 100
 	var/hostility = 0
+	/// our base
+	var/datum/turf_reservation/base
+	/// our shuttle
+	var/obj/docking_port/mobile/shuttle
 
 /proc/test_distress()
-	SSemergency_call.activate()
+	SSemergency_call.activate_random_emergency_call()
+
+/proc/test_distress_pick()
+	var/pick = tgui_input_list(usr, "Pick distress", "title", SSemergency_call.emergency_calls)
+	if(!pick)
+		return
+	SSemergency_call.activate(pick)
 
 /datum/emergency_call/New()
 	if(prob(hostility))
@@ -87,8 +83,17 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 
 		return FALSE
 
+	// create base
+	if(base_template)
+		base = SSmapping.lazy_load_template(base_template)
+		if(!base)
+			stack_trace("Failed to load lazy template for emergency call base!")
+
 	// create shuttle
 	var/list/shuttle_turfs = create_shuttle(shuttle_id)
+
+	// ensure shuttle can fly to base
+	allow_shuttle_fly_to_base()
 
 	// find spawn turfs in shuttle
 	var/list/spawn_turfs = find_spawn_turfs(shuttle_turfs)
@@ -132,10 +137,10 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 			shuttle_id = shuttle_computer.shuttleId
 			break // should be only one, but in case
 
-	var/obj/docking_port/mobile/port = SSshuttle.getShuttle(shuttle_id)
-	port.destination = null
-	port.mode = SHUTTLE_IGNITING
-	port.setTimer(port.ignitionTime)
+	shuttle = SSshuttle.getShuttle(shuttle_id)
+	shuttle.destination = null
+	shuttle.mode = SHUTTLE_IGNITING
+	shuttle.setTimer(shuttle.ignitionTime)
 
 	return shuttle_turfs
 
@@ -218,6 +223,20 @@ GLOBAL_LIST_INIT_TYPED(emergency_call_weighted_list, /list/datum/emergency_call,
 		//Logging and cleanup
 		ert_operative.log_message("has been selected as \a [ert_antag.name].", LOG_GAME)
 		numagents--
+
+/datum/emergency_call/proc/allow_shuttle_fly_to_base()
+	if(!base || !shuttle)
+		return
+
+	var/list/destinations = list()
+	for(var/turf/turf as anything in base.reserved_turfs)
+		for(var/obj/docking_port/stationary/dock in turf)
+			destinations |= dock.shuttle_id
+
+	var/obj/machinery/computer/shuttle/shuttle_computer = shuttle.get_control_console()
+	var/list/old_dest = params2list(shuttle_computer.possible_destinations)
+	destinations |= old_dest
+	shuttle_computer.possible_destinations = list2params(destinations)
 
 /datum/emergency_call/proc/create_leader_preview()
 	var/datum/antagonist/ert/preview = leader_role
