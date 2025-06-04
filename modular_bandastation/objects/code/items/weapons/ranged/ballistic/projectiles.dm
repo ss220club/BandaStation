@@ -1,10 +1,3 @@
-// MARK: Base light stats for projectiles
-/obj/projectile/bullet
-	light_system = OVERLAY_LIGHT
-	light_range = 0
-	light_power = 0
-	light_color = null
-
 // MARK: .35 Sol
 /obj/projectile/bullet/c35sol
 	name = ".35 Sol Short bullet"
@@ -157,6 +150,7 @@
 	damage = 35
 	wound_bonus = 15
 	armour_penetration = 20
+	light_system = OVERLAY_LIGHT
 	light_range = 2
 	light_power = 1
 	light_color = LIGHT_COLOR_BLUE
@@ -218,6 +212,7 @@
 /obj/projectile/bullet/incendiary/c40sol
 	name = ".40 Sol Long incendiary bullet"
 	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
 	light_range = 2
 	light_power = 1
 	light_color = LIGHT_COLOR_INTENSE_RED
@@ -233,6 +228,7 @@
 	dismemberment = 0
 	catastropic_dismemberment = FALSE
 	icon_state = "gaussstrong"
+	light_system = OVERLAY_LIGHT
 	light_range = 2
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
