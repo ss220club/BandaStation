@@ -20,11 +20,11 @@ export const screen_shake_darken: FeatureToggle = {
 };
 
 export const remove_double_click: FeatureToggle = {
-  name: 'Remove double click',
-  category: 'ACCESSIBILITY',
+  name: 'Убрать двойной клик',
+  category: 'ДОСТУПНОСТЬ',
   description: `
-      When toggled, actions that require a double click will instead offer
-      alternatives, good if you have a not-so-functional mouse.
+      Если включено, действия, требующие двойного клика, будут предлагать
+      альтернативные варианты, что очень удобно, если у вас не очень функциональная мышь.
     `,
   component: CheckboxInput,
 };

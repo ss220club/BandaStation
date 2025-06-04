@@ -125,13 +125,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-plugin-utils@npm:^7.25.9":
-  version: 7.26.5
-  resolution: "@babel/helper-plugin-utils@npm:7.26.5"
-  checksum: 10c0/cdaba71d4b891aa6a8dfbe5bac2f94effb13e5fa4c2c487667fdbaa04eae059b78b28d85a885071f45f7205aeb56d16759e1bed9c118b94b16e4720ef1ab0f65
-  languageName: node
-  linkType: hard
-
 "@babel/helper-string-parser@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/helper-string-parser@npm:7.27.1"
@@ -219,13 +212,13 @@ __metadata:
   linkType: hard
 
 "@babel/plugin-syntax-import-attributes@npm:^7.24.7":
-  version: 7.26.0
-  resolution: "@babel/plugin-syntax-import-attributes@npm:7.26.0"
+  version: 7.27.1
+  resolution: "@babel/plugin-syntax-import-attributes@npm:7.27.1"
   dependencies:
-    "@babel/helper-plugin-utils": "npm:^7.25.9"
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: 10c0/e594c185b12bfe0bbe7ca78dfeebe870e6d569a12128cac86f3164a075fe0ff70e25ddbd97fd0782906b91f65560c9dc6957716b7b4a68aba2516c9b7455e352
+  checksum: 10c0/e66f7a761b8360419bbb93ab67d87c8a97465ef4637a985ff682ce7ba6918b34b29d81190204cf908d0933058ee7b42737423cd8a999546c21b3aabad4affa9a
   languageName: node
   linkType: hard
 
@@ -6596,11 +6589,11 @@ __metadata:
   linkType: hard
 
 "jsesc@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "jsesc@npm:3.0.2"
+  version: 3.1.0
+  resolution: "jsesc@npm:3.1.0"
   bin:
     jsesc: bin/jsesc
-  checksum: 10c0/ef22148f9e793180b14d8a145ee6f9f60f301abf443288117b4b6c53d0ecd58354898dc506ccbb553a5f7827965cd38bc5fb726575aae93c5e8915e2de8290e1
+  checksum: 10c0/531779df5ec94f47e462da26b4cbf05eb88a83d9f08aac2ba04206508fc598527a153d08bd462bae82fc78b3eaa1a908e1a4a79f886e9238641c4cdefaf118b1
   languageName: node
   linkType: hard
 
@@ -9819,20 +9812,20 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     tgui: "workspace:*"
-    tgui-core: "npm:^4.0.1"
+    tgui-core: "npm:^4.0.2"
   languageName: unknown
   linkType: soft
 
-"tgui-core@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "tgui-core@npm:4.0.1"
+"tgui-core@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "tgui-core@npm:4.0.2"
   dependencies:
     "@floating-ui/react": "npm:^0.27.8"
     "@nozbe/microfuzz": "npm:^1.0.0"
   peerDependencies:
     react: ^19.1.0
     react-dom: ^19.1.0
-  checksum: 10c0/dc15e1f615395fb62dc7445a68b5bb5b1a102993f5fbf2efe38c190e2608c13da7e78246e328bd5461059f554471ecd08e72719c7d409e5a79f8e2e96ddb81b3
+  checksum: 10c0/685b933d0083a1bf2349d8a86aa8b16ca8da0d0ac83cd0e287f7450b88c08bb41a53140561c77269ad73de030401742dae3fd011113c38e07fbc3f233ddcb1af
   languageName: node
   linkType: hard
 
@@ -9860,7 +9853,7 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     tgui: "workspace:*"
-    tgui-core: "npm:^4.0.1"
+    tgui-core: "npm:^4.0.2"
     tgui-dev-server: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -9875,7 +9868,7 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     tgui: "workspace:*"
-    tgui-core: "npm:^4.0.1"
+    tgui-core: "npm:^4.0.2"
     vitest: "npm:^3.1.1"
   languageName: unknown
   linkType: soft
@@ -9937,7 +9930,7 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     react-zoom-pan-pinch: "npm:^3.7.0"
-    tgui-core: "npm:^4.0.1"
+    tgui-core: "npm:^4.0.2"
     tgui-dev-server: "workspace:*"
     vitest: "npm:^3.1.1"
   languageName: unknown

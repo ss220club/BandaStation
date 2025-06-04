@@ -21,7 +21,7 @@
 #include "bar_hookahs/_bar_hookahs.dme"
 #include "barsigns/_barsigns.dme"
 #include "changelog/_changelog.dme"
-#include "chat_badges/_chat_badges.dme"
+#include "chat/_chat.dme"
 #include "communication/_communication.dme"
 #include "cryosleep/_cryosleep.dme"
 #include "customization/_customization.dme"
