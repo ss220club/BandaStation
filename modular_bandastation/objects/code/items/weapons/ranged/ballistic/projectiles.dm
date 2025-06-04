@@ -1,10 +1,11 @@
+// MARK: Base light stats for projectiles
 /obj/projectile/bullet
 	light_system = OVERLAY_LIGHT
 	light_range = 0
 	light_power = 0
 	light_color = null
 
-// .35 Sol
+// MARK: .35 Sol
 /obj/projectile/bullet/c35sol
 	name = ".35 Sol Short bullet"
 	damage = 15
@@ -58,8 +59,7 @@
 	bare_wound_bonus = -30
 	armour_penetration = 20
 
-//  7.62x39mm
-
+//  MARK: 7.62x39mm
 /obj/projectile/bullet/a762x39/rubber
 	name = "7.62x39mm rubber bullet"
 	damage = 5
@@ -124,9 +124,9 @@
 	wound_bonus = 10
 	armour_penetration = 0
 	wound_falloff_tile = 3
-		/// Bonus force dealt against certain mobs
+	/// Bonus force dealt against certain mobs
 	var/nemesis_bonus_force = 30
-		/// List (not really a list) of mobs we deal bonus damage to
+	/// List (not really a list) of mobs we deal bonus damage to
 	var/list/nemesis_path = /mob/living/simple_animal
 
 /obj/projectile/bullet/a762x39/blank
@@ -152,7 +152,7 @@
 
 /obj/projectile/bullet/a762x39/gauss
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/projectiles.dmi'
-	icon_state = "gauss_ak"
+	icon_state = "gauss_amk"
 	name = "7.62x39mm gauss bullet"
 	damage = 35
 	wound_bonus = 15
@@ -161,7 +161,7 @@
 	light_power = 1
 	light_color = LIGHT_COLOR_BLUE
 
-// .40 Sol Long
+// MARK: .40 Sol Long
 
 /obj/projectile/bullet/c40sol
 	name = ".40 Sol Long bullet"
@@ -173,16 +173,12 @@
 	name = ".40 Sol Long fragmentation bullet"
 	damage = 5
 	stamina = 25
-
 	weak_against_armour = TRUE
-
 	sharpness = SHARP_EDGED
 	wound_bonus = 0
 	bare_wound_bonus = 10
-
 	shrapnel_type = /obj/item/shrapnel/stingball
 	embed_type = /datum/embedding/c40sol_fragmentation
-
 	embed_falloff_tile = -5
 
 /datum/embedding/c40sol_fragmentation
@@ -241,6 +237,7 @@
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
 
+// MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect
 	light_system = OVERLAY_LIGHT
 	light_range = 2

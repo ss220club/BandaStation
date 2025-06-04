@@ -98,8 +98,8 @@
 	name = "AMK magazine"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами»."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "akm"
-	ammo_band_icon = "+akm_ammo_band"
+	icon_state = "amk"
+	ammo_band_icon = "+amk_ammo_band"
 	ammo_band_color = null
 	ammo_type = /obj/item/ammo_casing/a762x39
 	caliber = CALIBER_762x39mm
@@ -107,7 +107,7 @@
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 
 /obj/item/ammo_box/magazine/amk/starts_empty
-    start_empty = TRUE
+	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/amk/ricochet
 	name = "AMK magazine (MATCH)"
@@ -142,12 +142,12 @@
 /obj/item/ammo_box/magazine/amk/civ
 	name = "Sabel magazine"
 	desc = "Укороченный двухрядный магазин, вмещающий 15 гражданских патронов калибра 7.62х39 мм."
-	icon_state = "akm_civ"
+	icon_state = "amk_civ"
 	max_ammo = 15
 	ammo_type = /obj/item/ammo_casing/a762x39/civilian
 
 /obj/item/ammo_box/magazine/amk/civ/starts_empty
-    start_empty = TRUE
+	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/amk/hunting
 	name = "AMK magazine (HUNT)"
@@ -173,22 +173,22 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/fragmentation
-    name = "Sol rifle rubber-fragmentation short magazine"
-    desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 осколочно-резиновых патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
-    ammo_band_color = COLOR_AMMO_RUBBER
+	name = "Sol rifle rubber-fragmentation short magazine"
+	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 осколочно-резиновых патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
+	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/pierce
-    name = "Sol rifle armor-pierce short magazine"
-    desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 бронебойных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/pierce
-    MAGAZINE_TYPE_ARMORPIERCE
+	name = "Sol rifle armor-pierce short magazine"
+	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 бронебойных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/incendiary
-    name = "Sol rifle incendiary short magazine"
-    desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 зажигательных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/incendiary
-    MAGAZINE_TYPE_INCENDIARY
+	name = "Sol rifle incendiary short magazine"
+	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 зажигательных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
+	MAGAZINE_TYPE_INCENDIARY
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard
 	name = "Sol rifle magazine"
@@ -201,22 +201,22 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/fragmentation
-    name = "Sol rifle rubber-fragmentation magazine"
-    desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 осколочно-резиновых патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
-    ammo_band_color = COLOR_AMMO_RUBBER
+	name = "Sol rifle rubber-fragmentation magazine"
+	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 осколочно-резиновых патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
+	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce
-    name = "Sol rifle armor-pierce magazine"
-    desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 бронебойных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/pierce
-    MAGAZINE_TYPE_ARMORPIERCE
+	name = "Sol rifle armor-pierce magazine"
+	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 бронебойных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/incendiary
-    name = "Sol rifle incendiary magazine"
-    desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 зажигательных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/incendiary
-    MAGAZINE_TYPE_INCENDIARY
+	name = "Sol rifle incendiary magazine"
+	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 зажигательных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
+	MAGAZINE_TYPE_INCENDIARY
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long
 	name = "Sol rifle long magazine"
@@ -229,22 +229,22 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/fragmentation
-    name = "Sol rifle rubber-fragmentation long magazine"
-    desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 осколочно-резиновых патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
-    ammo_band_color = COLOR_AMMO_RUBBER
+	name = "Sol rifle rubber-fragmentation long magazine"
+	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 осколочно-резиновых патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
+	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/pierce
-    name = "Sol rifle armor-pierce long magazine"
-    desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 бронебойных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/pierce
-    MAGAZINE_TYPE_ARMORPIERCE
+	name = "Sol rifle armor-pierce long magazine"
+	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 бронебойных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/incendiary
-    name = "Sol rifle incendiary long magazine"
-    desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 зажигательных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/incendiary
-    MAGAZINE_TYPE_INCENDIARY
+	name = "Sol rifle incendiary long magazine"
+	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 зажигательных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
+	MAGAZINE_TYPE_INCENDIARY
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum
 	name = "Sol rifle drum magazine"
@@ -257,22 +257,22 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/fragmentation
-    name = "Sol rifle rubber-fragmentation drum magazine"
-    desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 осколочно-резиновых патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
-    ammo_band_color = COLOR_AMMO_RUBBER
+	name = "Sol rifle rubber-fragmentation drum magazine"
+	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 осколочно-резиновых патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
+	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/pierce
-    name = "Sol rifle armor-pierce drum magazine"
-    desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 бронебойных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/pierce
-    MAGAZINE_TYPE_ARMORPIERCE
+	name = "Sol rifle armor-pierce drum magazine"
+	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 бронебойных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/incendiary
-    name = "Sol rifle incendiary drum magazine"
-    desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 зажигательных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/incendiary
-    MAGAZINE_TYPE_INCENDIARY
+	name = "Sol rifle incendiary drum magazine"
+	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 зажигательных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
+	MAGAZINE_TYPE_INCENDIARY
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box
 	name = "Sol rifle box magazine"
@@ -285,19 +285,19 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/fragmentation
-    name = "Sol rifle rubber-fragmentation box magazine"
-    desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 осколочно-резиновых патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
-    ammo_band_color = COLOR_AMMO_RUBBER
+	name = "Sol rifle rubber-fragmentation box magazine"
+	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 осколочно-резиновых патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
+	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/pierce
-    name = "Sol rifle armor-pierce box magazine"
-    desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 бронебойных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/pierce
-    MAGAZINE_TYPE_ARMORPIERCE
+	name = "Sol rifle armor-pierce box magazine"
+	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 бронебойных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/incendiary
-    name = "Sol rifle incendiary box magazine"
-    desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 зажигательных патронов."
-    ammo_type = /obj/item/ammo_casing/c40sol/incendiary
-    MAGAZINE_TYPE_INCENDIARY
+	name = "Sol rifle incendiary box magazine"
+	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 зажигательных патронов."
+	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
+	MAGAZINE_TYPE_INCENDIARY

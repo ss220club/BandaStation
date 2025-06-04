@@ -1,3 +1,4 @@
+// MARK: .35 Sol
 /obj/item/ammo_casing/c35sol
 	name = ".35 Sol Short lethal bullet casing"
 	desc = "Стандартный летальный пистолетный патрон ТСФ калибра .35 Sol Short."
@@ -28,8 +29,7 @@
 	icon_state = "sa-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/ap
 
-//  7.62x39mm
-
+// MARK: 7.62x39mm
 /obj/item/ammo_casing/a762x39
 	name = "7.62x39mm bullet casing"
 	desc = "Патрон калибра 7.62x39мм."
@@ -90,7 +90,7 @@
 	projectile_type = /obj/projectile/bullet/a762x39/blank
 	harmful = FALSE
 
-// .40 Sol Long
+// MARK: .40 Sol Long
 /obj/item/ammo_casing/c40sol
 	name = ".40 Sol Long lethal bullet casing"
 	desc = "Стандартный винтовочный патрон ТСФ калибра .40 Sol Long."
@@ -103,11 +103,8 @@
 /obj/item/ammo_casing/c40sol/fragmentation
 	name = ".40 Sol Long rubber-fragmentation bullet casing"
 	desc = "Стандартный осколочно-резиновый винтовочный патрон ТСФ калибра .40 Sol Long. Разрывается при ударе, выбрасывая резиновую шрапнель, которая может вывести цель из строя."
-
 	icon_state = "40sol_disabler"
-
 	projectile_type = /obj/projectile/bullet/c40sol/fragmentation
-
 	harmful = FALSE
 
 // .40 Sol match grade, bounces a lot, and if there's less than 20 bullet armor on wherever these hit, it'll go completely through the target and out the other side
@@ -116,16 +113,12 @@
 	desc = "Стандартный бронебойный винтовочный патрон ТСФ калибра .40 Sol Long. Стреляет под более высоким давлением и, \
 	следовательно, несколько быстрее. По слухам, с ними можно пробивать несколько препятствий или противников насквозь, \
 	хотя официальная рекомендация - стрелять только в цель, а не в стену рядом с ней."
-
 	icon_state = "40sol_pierce"
-
 	projectile_type = /obj/projectile/bullet/c40sol/pierce
 
 // .40 Sol incendiary
 /obj/item/ammo_casing/c40sol/incendiary
 	name = ".40 Sol Long incendiary bullet casing"
 	desc = "Стандартный зажигательный винтовочный патрон ТСФ калибра .40 Sol Long. Не оставляет огненного следа, воспламеняя цель только при попадании."
-
 	icon_state = "40sol_flame"
-
 	projectile_type = /obj/projectile/bullet/incendiary/c40sol

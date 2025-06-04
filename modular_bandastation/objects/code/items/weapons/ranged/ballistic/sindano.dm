@@ -1,5 +1,4 @@
-// Base Sol SMG
-
+// MARK: Base Sol SMG
 /obj/item/gun/ballistic/automatic/sindano
 	name = "Sindano submachine gun"
 	desc = "Небольшой пистолет-пулемет, стреляющий патронами калибра .35 Sol. Часто встречается в руках ЧВК и других неблагонадежных корпораций. Принимает любой стандартный магазин от пистолетов ТСФ."
@@ -46,6 +45,7 @@
 /obj/item/gun/ballistic/automatic/sindano/no_mag
 	spawnwithmagazine = FALSE
 
+// MARK: Compact Sol SMG
 /obj/item/gun/ballistic/automatic/sindano/compact
 	name = "compact Sindano submachine gun"
 	icon_state = "sindano_compact"
@@ -67,6 +67,7 @@
 		Но к сожалению, малая длина ствола и почти что несуществующий приклад не \
 		позволяют стрелять точно на далекие или средние дистанции."
 
+// MARK: Tactical(black) Sol SMG
 /obj/item/gun/ballistic/automatic/sindano/black
 	name = "tactical Sindano submachine gun"
 	icon_state = "sindano_black"

@@ -1,3 +1,4 @@
+// MARK: Civilian AMK(AK) rifle
 /obj/item/gun/ballistic/automatic/sabel
 	name = "Sabel-42 carbine"
 	desc = "Нестареющий дизайн карабина под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой. \
@@ -7,7 +8,7 @@
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_lefthand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_righthand.dmi'
 	inhand_icon_state = "amk_civ"
-	fire_sound = 'modular_bandastation/objects/sounds/weapons/akm_fire.ogg'
+	fire_sound = 'modular_bandastation/objects/sounds/weapons/amk_fire.ogg'
 	worn_icon = 'modular_bandastation/objects/icons/mob/back/guns_back.dmi'
 	rack_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_cock.ogg'
 	load_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_magin.ogg'
@@ -30,6 +31,7 @@
 /obj/item/gun/ballistic/automatic/sabel/no_mag
 	spawnwithmagazine = FALSE
 
+// MARK: Automatic AK
 /obj/item/gun/ballistic/automatic/sabel/auto
 	name = "AMK rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
@@ -97,6 +99,7 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/modern/no_mag
 	spawnwithmagazine = FALSE
 
+// MARK: Gauss AK
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss
 	name = "gauss AMK rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62 мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
@@ -169,7 +172,7 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 
-	if(held_item?.tool_behaviour == TOOL_MULTITOOL) //&& shots_before_degradation < max_shots_before_degradation)
+	if(held_item?.tool_behaviour == TOOL_MULTITOOL)
 		context[SCREENTIP_CONTEXT_LMB] = "Перезагрузить капаситоры"
 		return CONTEXTUAL_SCREENTIP_SET
 
@@ -237,7 +240,7 @@
 		fire_sound = 'modular_bandastation/objects/sounds/weapons/laser1.ogg'
 
 	if(chambered.loaded_projectile && !gauss_mode)
-		fire_sound = 'modular_bandastation/objects/sounds/weapons/akm_fire.ogg'
+		fire_sound = 'modular_bandastation/objects/sounds/weapons/amk_fire.ogg'
 
 	return ..()
 

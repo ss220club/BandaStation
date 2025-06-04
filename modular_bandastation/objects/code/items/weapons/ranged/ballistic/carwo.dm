@@ -49,8 +49,7 @@
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
-// Sol marksman rifle
-
+// MARK: Sol marksman rifle
 /obj/item/gun/ballistic/automatic/carwo/marksman
 	name = "Cawil Marksman Rifle"
 	desc = "Тяжелая марксманская винтовка, стреляющая патронами калибра .40 Sol. Часто встречается в руках военных ТСФ. Принимает любой стандартный магазин винтовок ТСФ."
@@ -66,7 +65,6 @@
 
 /obj/item/gun/ballistic/automatic/carwo/marksman/Initialize(mapload)
 	. = ..()
-
 	AddComponent(/datum/component/scope, range_modifier = 2)
 
 /obj/item/gun/ballistic/automatic/carwo/marksman/examine_more(mob/user)
@@ -80,8 +78,7 @@
 /obj/item/gun/ballistic/automatic/carwo/marksman/no_mag
 	spawnwithmagazine = FALSE
 
-// Machineguns based on the base Sol rifle
-
+// MARK: Machineguns based on the base Sol rifle
 /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed
 	name = "Qarad Light Machinegun"
 	desc = "Увесистый пулемет, стреляющий патронами калибра .40 Sol, часто встречающийся в руках военных ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
@@ -138,8 +135,7 @@
 /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed/no_mag
 	spawnwithmagazine = FALSE
 
-// Evil version of the rifle (nothing different it's just black)
-
+// MARK: Black Sol rifle
 /obj/item/gun/ballistic/automatic/carwo/auto/black
 	desc = "Тяжелая боевая винтовка, стреляющая патронами калибра .40 Sol, окрашенная в тактический черный цвет. Принимает любой стандартный магазин от винтовок ТСФ."
 	icon_state = "infanterie_black"
@@ -149,6 +145,7 @@
 /obj/item/gun/ballistic/automatic/carwo/auto/black/no_mag
 	spawnwithmagazine = FALSE
 
+// MARK: Sol rifles with wooden grips
 /obj/item/gun/ballistic/automatic/carwo/auto/wooden
 	desc = "Тяжелая боевая винтовка, стреляющая патронами калибра .40 Sol. Принимает любой стандартный магазин от винтовок ТСФ. Укороченный вариант с деревянной фурнитурой."
 	icon_state = "infanterie_wooden"

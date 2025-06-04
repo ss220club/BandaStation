@@ -1,5 +1,4 @@
-// SolFed shotgun (this was gonna be in a proprietary shotgun shell type outside of 12ga at some point, wild right?)
-
+// MARK: SolFed shotgun (this was gonna be in a proprietary shotgun shell type outside of 12ga at some point, wild right?)
 /obj/item/gun/ballistic/shotgun/riot/renoster
 	name = "Renoster shotgun"
 	desc = "Тяжелый дробовик двенадцатого калибра, вмещающий шесть патронов. Производится для различных военных подразделений ТСФ и используется ими."
