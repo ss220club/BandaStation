@@ -45,7 +45,6 @@
 	if(sawn_off)
 		suppressor_x_offset = 0
 		SET_BASE_PIXEL(0, 0)
-
 	. = ..()
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/black

@@ -156,7 +156,6 @@
 	light_color = LIGHT_COLOR_BLUE
 
 // MARK: .40 Sol Long
-
 /obj/projectile/bullet/c40sol
 	name = ".40 Sol Long bullet"
 	damage = 35
@@ -198,7 +197,6 @@
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
 	if(isliving(target))
 		var/mob/living/poor_sap = target
-
 		// If the target mob has enough armor to stop the bullet, or the bullet has already gone through two people, stop it on this hit
 		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 20) || (pierces > 2))
 			projectile_piercing = NONE

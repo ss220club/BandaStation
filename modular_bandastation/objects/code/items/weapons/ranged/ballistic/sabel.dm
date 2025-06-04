@@ -153,7 +153,6 @@
 	else
 		gauss_mode = FALSE
 		balloon_alert(user, "режим - обычный")
-
 	playsound(user, 'sound/items/weapons/empty.ogg', 100, TRUE)
 	update_appearance()
 	update_item_action_buttons()
@@ -171,7 +170,6 @@
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-
 	if(held_item?.tool_behaviour == TOOL_MULTITOOL)
 		context[SCREENTIP_CONTEXT_LMB] = "Перезагрузить капаситоры"
 		return CONTEXTUAL_SCREENTIP_SET
@@ -250,7 +248,7 @@
 		degradation_probability += 25
 
 	if(!prob(degradation_probability) && !force_increment || degradation_stage == degradation_stage_max)
-		return //Only update if we actually increment our degradation stage
+		return // Only update if we actually increment our degradation stage
 
 	degradation_stage = clamp(degradation_stage + (obj_flags & EMAGGED ? 2 : 1), 0, degradation_stage_max)
 	projectile_speed_multiplier = clamp(initial(projectile_speed_multiplier) + degradation_stage * 0.1, initial(projectile_speed_multiplier), maximum_speed_malus)
@@ -264,7 +262,7 @@
 	explosion_timer = addtimer(CALLBACK(src, PROC_REF(fucking_explodes_you)), 5 SECONDS, (TIMER_UNIQUE|TIMER_OVERRIDE))
 	playsound(src, 'sound/items/weapons/gun/general/empty_alarm.ogg', 50, FALSE)
 
-/// proc to handle our detonation
+/// Proc to handle our detonation
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/fucking_explodes_you()
 	explosion(src, devastation_range = 1, heavy_impact_range = 3, light_impact_range = 6, explosion_cause = src)
 
