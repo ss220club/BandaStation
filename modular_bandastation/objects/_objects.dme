@@ -21,6 +21,7 @@
 #include "code/items/pen.dm"
 #include "code/items/pig.dm"
 #include "code/items/role_tablet_presets.dm"
+#include "code/items/shields.dm"
 #include "code/items/stamp.dm"
 #include "code/items/wallets.dm"
 #include "code/items/clothing/accessories/accessories.dm"
@@ -82,6 +83,7 @@
 #include "code/items/food_cargo_packs.dm"
 #include "code/items/trash.dm"
 #include "code/items/storage/backpack.dm"
+#include "code/items/storage/belt.dm"
 #include "code/items/storage/death_implant_box.dm"
 #include "code/items/storage/duffelbag.dm"
 #include "code/items/storage/garment.dm"
@@ -105,6 +107,8 @@
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
 #include "code/items/clothing/mod/types/tsf/mod_theme.dm"
 #include "code/items/clothing/mod/types/tsf/mod_types.dm"
+#include "code/items/clothing/mod/types/ussp/mod_theme.dm"
+#include "code/items/clothing/mod/types/ussp/mod_types.dm"
 
 
 #include "code/items/weapons/ranged/ballistic/sabel.dm"

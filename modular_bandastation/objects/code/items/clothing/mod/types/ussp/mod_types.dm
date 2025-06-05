@@ -1,5 +1,5 @@
-/obj/item/mod/control/pre_equipped/tsf_standart
-	theme = /datum/mod_theme/tsf_standart
+/obj/item/mod/control/pre_equipped/ussp_standart
+	theme = /datum/mod_theme/ussp_standart
 	starting_frequency = MODLINK_FREQ_CENTCOM
 	applied_cell = /obj/item/stock_parts/power_store/cell/hyper
 	applied_core = /obj/item/mod/core/infinite
@@ -15,8 +15,8 @@
 		/obj/item/mod/module/jetpack,
 	)
 
-/obj/item/mod/control/pre_equipped/tsf_elite
-	theme = /datum/mod_theme/tsf_elite
+/obj/item/mod/control/pre_equipped/ussp_elite
+	theme = /datum/mod_theme/ussp_elite
 	starting_frequency = MODLINK_FREQ_CENTCOM
 	applied_cell = /obj/item/stock_parts/power_store/cell/bluespace
 	applied_core = /obj/item/mod/core/infinite

@@ -15,10 +15,11 @@
 	..()
 
 /obj/item/card/id/advanced/tsf
-	name = "\improper CentCom ID"
+	name = "\improper TSF ID"
 	desc = "An ID straight from TSF."
-	icon_state = "card_black"
-	assigned_icon_state = "assigned"
+	icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
+	icon_state = "card_tsf"
+	assigned_icon_state = "assigned_faction"
 	trim = /datum/id_trim/tsf
 	wildcard_slots = WILDCARD_LIMIT_CENTCOM
 
@@ -27,11 +28,10 @@
 	access = list(ACCESS_CENT_GENERAL)
 	assignment = "TSF"
 	trim_icon = 'modular_bandastation/jobs/icons/obj/card.dmi'
-	trim_state = "trim_explorer"
 	trim_state = "trim_tsf"
 	sechud_icon_state = SECHUD_TSF
-	department_color = COLOR_UNION_JACK_BLUE
-	subdepartment_color = COLOR_UNION_JACK_BLUE
+	department_color = COLOR_MODERATE_BLUE
+	subdepartment_color = COLOR_MODERATE_BLUE
 	big_pointer = TRUE
 	pointer_color = COLOR_UNION_JACK_BLUE
 
@@ -58,8 +58,8 @@
 	r_pocket = /obj/item/lighter
 
 /datum/id_trim/tsf/commander
-	assignment = "TSF - Commander Officer"
-	trim_state = "trim_tsf_command"
+	assignment = "TSF - Commanding Officer"
+	trim_state = "trim_tsf_rank3"
 
 /datum/id_trim/tsf/commander/New()
 	. = ..()
@@ -104,6 +104,7 @@
 /datum/id_trim/tsf/marine
 	assignment = "TSF - Marine"
 	big_pointer = FALSE
+	trim_state = "trim_tsf_rank1"
 
 /datum/id_trim/tsf/marine/New()
 	. = ..()
@@ -120,7 +121,6 @@
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/fancy/cigarettes/cigpack_robust,
 		/obj/item/lighter/greyscale,
-		/obj/item/binoculars
 	)
 	head = /obj/item/clothing/head/beret/tsf_marine_officer
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
@@ -130,31 +130,7 @@
 
 /datum/id_trim/tsf/marine/officer
 	assignment = "TSF - Marine Officer"
-	trim_state = "trim_tsf_officer"
-
-/obj/item/storage/belt/military/army/tsf
-	name = "army belt"
-	desc = "A belt used by military forces."
-	icon_state = "military"
-	inhand_icon_state = "security"
-	worn_icon_state = "military"
-	storage_type = /datum/storage/military_belt/tsf
-
-/datum/storage/military_belt/tsf
-	max_specific_storage = WEIGHT_CLASS_NORMAL
-	max_slots = 5
-
-/obj/item/storage/belt/military/army/tsf/full/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/knife/combat(src)
-
-/datum/storage/military_belt/tsf
-	max_specific_storage = WEIGHT_CLASS_NORMAL
-	max_slots = 8
+	trim_state = "trim_tsf_rank2"
 
 /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	name = "HUDSunglasses"
@@ -335,7 +311,7 @@
 
 /datum/id_trim/tsf/marsoc/officer
 	assignment = "TSF - MARSOC Officer"
-	trim_state = "trim_tsf_officer"
+	trim_state = "trim_tsf_rank2"
 
 // TSF MARSOC (MOD)
 /datum/outfit/tsf/marsoc
@@ -347,10 +323,10 @@
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/medkit/tactical_lite,
-		/obj/item/clothing/head/beret/tsf_marsoc,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
 		/obj/item/ammo_box/magazine/m223 = 4,
+		/obj/item/clothing/head/beret/tsf_marsoc,
 	)
 	suit_store = /obj/item/gun/ballistic/automatic/m90/unrestricted
 	belt = /obj/item/storage/belt/military/army/tsf/full
@@ -375,7 +351,7 @@
 		/obj/item/grenade/c4 = 2,
 		/obj/item/ammo_box/magazine/m223 = 4,
 		/obj/item/shield/riot/tele,
-		/obj/item/clothing/under/rank/tsf/marsoc_officer,
+		/obj/item/clothing/head/beret/tsf_marsoc_officer
 	)
 	suit_store = /obj/item/gun/ballistic/automatic/ar
 	belt = /obj/item/storage/belt/military/army/tsf/full
@@ -414,14 +390,6 @@
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	r_pocket = /obj/item/knife/combat
 
-/obj/item/storage/belt/military/army/tsf_infiltrator
-	name = "army belt"
-	desc = "A belt used by military forces."
-	icon_state = "military"
-	inhand_icon_state = "security"
-	worn_icon_state = "military"
-	storage_type = /datum/storage/military_belt/tsf
-
 /obj/item/gun/ballistic/automatic/pistol/wespe/suppressed/Initialize(mapload)
 	. = ..()
 	var/obj/item/suppressor/S = new(src)
@@ -433,25 +401,12 @@
 	var/obj/item/suppressor/S = new(src)
 	install_suppressor(S)
 
-/obj/item/storage/belt/military/army/tsf_infiltrator/full/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/wespe/suppressed(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ripper(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
-
 /obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
 	greyscale_colors = COLOR_OLIVE
 
-/datum/storage/military_belt/tsf
-	max_specific_storage = WEIGHT_CLASS_NORMAL
-	max_slots = 8
-
 /datum/id_trim/tsf/infiltrator
 	assignment = "TSF - Infiltrator"
-	trim_state = "trim_tsf_officer"
+	trim_state = "trim_tsf_rank2"
 	sechud_icon_state = SECHUD_TSF
 	big_pointer = FALSE
 
@@ -516,7 +471,7 @@
 
 /datum/id_trim/tsf/diplomat
 	assignment = "Trans-Solar Federation Diplomat"
-	trim_state = "trim_tsf_command"
+	trim_state = "trim_tsf_rank3"
 
 /datum/id_trim/tsf/diplomat/New()
 	. = ..()

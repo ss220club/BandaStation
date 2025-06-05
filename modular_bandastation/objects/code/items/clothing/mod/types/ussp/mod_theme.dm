@@ -1,14 +1,15 @@
-/datum/mod_theme/tsf_standart
-	name = "MARSOC regular"
-	desc = "Боевой МОД КМП ТСФ."
-	extended_desc = "Модульный костюм, который носят морские пехотинцы Командования специальных операций морской пехоты Транс-Солнечной Федерации.\
-		Бронированный, пригодный для выхода в открытый космос и огнеупорный."
-	default_skin = "tsf_standart"
-	armor_type = /datum/armor/mod_theme_tsf_standart
+/datum/mod_theme/ussp_standart
+	name = "SPETSNAZ regular"
+	desc = "МББк спецназа ГРУ СССП."
+	extended_desc = "Модульный боевой бронекостюм (МББк), который носят бойцы спецназа Главного Разведывательного Управления Союза Советских Социалистических Планет.\
+		Простой, дешёвый, возможно надежный."
+	default_skin = "ussp_standart"
+	armor_type = /datum/armor/mod_theme_ussp_standart
 	complexity_max = DEFAULT_MAX_COMPLEXITY
 	siemens_coefficient = 0
 	slowdown_deployed = 0.25
 	activation_step_time = MOD_ACTIVATION_STEP_TIME
+	activation_sound = 'modular_bandastation/objects/sounds/mod_activation/mod_nominal_ru.ogg'
 	allowed_suit_storage = list(
 		/obj/item/ammo_box,
 		/obj/item/ammo_casing,
@@ -19,7 +20,7 @@
 		/obj/item/gun,
 	)
 	variants = list(
-		"tsf_standart" = list(
+		"ussp_standart" = list(
 			MOD_ICON_OVERRIDE = 'modular_bandastation/objects/icons/obj/clothing/modsuit/mod_clothing.dmi',
 			MOD_WORN_ICON_OVERRIDE = 'modular_bandastation/objects/icons/mob/clothing/modsuit/mod_clothing.dmi',
 			/obj/item/clothing/gloves/mod = list(
@@ -56,7 +57,7 @@
 		),
 	)
 
-/datum/armor/mod_theme_tsf_standart
+/datum/armor/mod_theme_ussp_standart
 	melee = 15
 	bullet = 20
 	laser = 45
@@ -67,14 +68,14 @@
 	acid = 90
 	wound = 15
 
-/datum/mod_theme/tsf_elite
-	name = "MARSOC officer"
-	desc = "Офицерский боевой МОД КМП ТСФ."
-	extended_desc = "Модульный костюм, который носят младшие офицеры Командования специальных операций морской пехоты Транс-Солнечной Федерации.\
-		Золотистые полосы указывают на звание владельца. \
-		Бронированный, пригодный для выхода в открытый космос и огнеупорный."
-	default_skin = "tsf_elite"
-	armor_type = /datum/armor/mod_theme_tsf_elite
+/datum/mod_theme/ussp_elite
+	name = "SPETSNAZ officer"
+	desc = "Офицерский МББк спецназа ГРУ СССП."
+	extended_desc = "Модульный боевой бронекостюм (МББк), который носят бойцы спецназа Главного Разведывательного Управления Союза Советских Социалистических Планет.\
+		Красные полосы указывают на звание владельца. \
+		Простой, дешёвый, возможно чуть более надежный."
+	default_skin = "ussp_elite"
+	armor_type = /datum/armor/mod_theme_ussp_elite
 	resistance_flags = FIRE_PROOF|ACID_PROOF
 	atom_flags = PREVENT_CONTENTS_EXPLOSION_1
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
@@ -82,6 +83,7 @@
 	siemens_coefficient = 0
 	slowdown_deployed = 0.25
 	activation_step_time = MOD_ACTIVATION_STEP_TIME
+	activation_sound = 'modular_bandastation/objects/sounds/mod_activation/mod_nominal_ru.ogg'
 	allowed_suit_storage = list(
 		/obj/item/ammo_box,
 		/obj/item/ammo_casing,
@@ -92,7 +94,7 @@
 		/obj/item/gun,
 	)
 	variants = list(
-		"tsf_elite" = list(
+		"ussp_elite" = list(
 			MOD_ICON_OVERRIDE = 'modular_bandastation/objects/icons/obj/clothing/modsuit/mod_clothing.dmi',
 			MOD_WORN_ICON_OVERRIDE = 'modular_bandastation/objects/icons/mob/clothing/modsuit/mod_clothing.dmi',
 			/obj/item/clothing/gloves/mod = list(
@@ -129,7 +131,7 @@
 		),
 	)
 
-/datum/armor/mod_theme_tsf_elite
+/datum/armor/mod_theme_ussp_elite
 	melee = 55
 	bullet = 55
 	laser = 65
