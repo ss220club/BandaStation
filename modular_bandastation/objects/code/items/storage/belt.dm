@@ -19,31 +19,31 @@
 /obj/item/storage/belt/military/army/tsf/full_submachine/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_rifle_short/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle
-	new /obj/item/ammo_box/magazine/c40sol_rifle
-	new /obj/item/ammo_box/magazine/c40sol_rifle
-	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce
-	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce
+	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_rifle_standart/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
 	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_engineer/PopulateContents()
@@ -64,8 +64,8 @@
 
 /obj/item/storage/belt/military/army/tsf/full_infiltrator/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/sindano/compact/suppressed(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
