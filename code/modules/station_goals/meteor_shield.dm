@@ -20,10 +20,10 @@
 
 /datum/station_goal/station_shield/get_report()
 	return list(
-		"<blockquote>The station is located in a zone full of space debris.",
-		"We have a prototype shielding system you must deploy to reduce collision-related accidents.",
-		"",
-		"You can order the satellites and control systems at cargo.</blockquote>",
+		"#### Система противометеорной защиты",
+		"Станция находится в зоне, заполненной космическим мусором.",
+		"У вас есть прототип защитной системы, который необходимо развернуть для снижения количества аварий из-за столкновений.<br>",
+		"Вы можете заказать спутники и системы через отдел снабжения.",
 	).Join("\n")
 
 
