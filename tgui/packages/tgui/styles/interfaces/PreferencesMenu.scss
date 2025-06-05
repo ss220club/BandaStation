@@ -1,17 +1,14 @@
-@use 'sass:color';
 @use 'sass:map';
-@use '../colors.scss';
-@use '../base.scss';
 
 $department_map: (
   'Assistant': var(--color-gray),
   'Captain': hsl(215, 90%, 40%),
-  'Cargo': hsl(35, 40%, 45%),
+  'Cargo': hsl(35, 40%, 40%),
   'Security': hsl(0, 60%, 45%),
-  'Engineering': hsl(40, 100%, 35%),
-  'Medical': hsl(195, 75%, 40%),
+  'Engineering': hsl(40, 100%, 30%),
+  'Medical': hsl(195, 75%, 35%),
   'Science': hsl(275, 90%, 35%),
-  'Service': hsl(140, 70%, 35%),
+  'Service': hsl(140, 70%, 30%),
   'Silicon': hsl(210, 30%, 40%),
   'NTRepresentation': hsl(210, 100%, 25%),
   'Justice': hsl(325, 80%, 40%),
@@ -19,6 +16,8 @@ $department_map: (
 
 .PreferencesMenu {
   &__Department {
+    overflow: hidden;
+
     &.head .job-name {
       font-weight: bold;
     }
@@ -29,7 +28,7 @@ $department_map: (
       text-overflow: ellipsis;
       line-height: 1.1;
       padding: 0.2em 0.33em;
-      text-shadow: 1px 1px 0px hsla(0, 0%, 0%, 0.5);
+      text-shadow: 1px 1px 0px black;
     }
 
     .options {
@@ -55,6 +54,10 @@ $department_map: (
         border: var(--border-thickness-tiny)
           outset
           hsl(from $color-value h s calc(l + 10));
+
+        &.head {
+          background: hsl(from $color-value h s calc(l - 7.5));
+        }
 
         .Button {
           $color: hsl(from $color-value h s calc(l - 7.5));
