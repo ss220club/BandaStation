@@ -1,47 +1,88 @@
 // TSF
-// Marine belt
 /obj/item/storage/belt/military/army/tsf
+	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
+	icon_state = "military_holster"
 	storage_type = /datum/storage/military_belt/tsf
-
-/obj/item/storage/belt/military/army/tsf/full/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/knife/combat(src)
 
 /datum/storage/military_belt/tsf
 	max_specific_storage = WEIGHT_CLASS_NORMAL
-	max_slots = 8
+	max_slots = 10
 
-// Infiltrator belt
-/obj/item/storage/belt/military/army/tsf_infiltrator
-	name = "infiltrator belt"
-	desc = "A belt used by special forces."
-	storage_type = /datum/storage/military_belt/tsf
+/obj/item/storage/belt/military/army/tsf/full/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/knife/combat(src)
 
-/obj/item/storage/belt/military/army/tsf_infiltrator/full/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/wespe/suppressed(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ripper(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
-	new /obj/item/ammo_box/magazine/smgm45/ap(src)
+/obj/item/storage/belt/military/army/tsf/full_submachine/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/tsf/full_rifle_short/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle
+	new /obj/item/ammo_box/magazine/c40sol_rifle
+	new /obj/item/ammo_box/magazine/c40sol_rifle
+	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce
+	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/tsf/full_rifle_standart/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
+	new /obj/item/ammo_box/magazine/m45(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/tsf/full_engineer/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/construction/rcd/loaded(src)
+	new /obj/item/grenade/barrier(src)
+	new /obj/item/grenade/barrier(src)
+	new /obj/item/grenade/barrier(src)
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/tsf/full_machinegun/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
+	new /obj/item/ammo_box/magazine/m45(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/box(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/box/pierce(src)
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/tsf/full_infiltrator/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/sindano/compact/suppressed(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
 
 //USSP
 /obj/item/storage/belt/military/army/ussp
-//	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
-//	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
-//	icon_state = "ussp_belt"
-//	inhand_icon_state = "utility"
-//	worn_icon_state = "ussp_belt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
+	icon_state = "ussp_belt"
+	inhand_icon_state = "utility"
+	worn_icon_state = "ussp_belt"
 	storage_type = /datum/storage/military_belt/ussp
 
 /datum/storage/military_belt/ussp
 	max_specific_storage = WEIGHT_CLASS_NORMAL
-	max_slots = 8
+	max_slots = 10
 
 /obj/item/storage/belt/military/army/ussp/full/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/clandestine(src)
@@ -67,6 +108,14 @@
 	new /obj/item/knife/combat(src)
 	new /obj/item/construction/rcd/loaded(src)
 	new /obj/item/stack/sheet/mineral/sandbags/thirty(src)
+
+/obj/item/storage/belt/military/army/ussp/full_infiltrator/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/suppressed(src)
+	new /obj/item/ammo_box/magazine/m10mm/ap(src)
+	new /obj/item/ammo_box/magazine/m10mm/ap(src)
+	new /obj/item/ammo_box/magazine/m10mm/ap(src)
+	new /obj/item/ammo_box/magazine/m10mm/ap(src)
+	new /obj/item/knife/combat(src)
 
 /obj/item/stack/sheet/mineral/sandbags/thirty
 	amount = 30

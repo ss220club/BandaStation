@@ -170,6 +170,11 @@
 	hoodtype = /obj/item/clothing/head/hooded/stealth_cloak/shinobi
 	accelerate = 0.8
 
+/obj/item/clothing/suit/hooded/stealth_cloak/ussp
+	name = "infiltrator cloak"
+	greyscale_colors = COLOR_ALMOST_BLACK
+	hoodtype = /obj/item/clothing/head/hooded/stealth_cloak/ussp
+
 /obj/item/clothing/head/hooded/stealth_cloak
 	name = "infiltrator cloak's hood"
 	desc = "Капюшон плаща с фотодинамическими пластинами."
@@ -186,6 +191,9 @@
 
 /obj/item/clothing/head/hooded/stealth_cloak/shinobi
 	greyscale_colors = COLOR_OLD_GLORY_BLUE
+
+/obj/item/clothing/head/hooded/stealth_cloak/ussp
+	greyscale_colors = COLOR_ALMOST_BLACK
 
 /obj/item/clothing/suit/hooded/stealth_cloak/Initialize(mapload)
 	. = ..()

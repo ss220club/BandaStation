@@ -142,7 +142,7 @@
 
 // USSP Officer (Unarmed)
 /datum/outfit/ussp/ussp_officer
-	name = "USSP - Officer (Unarmed)"
+	name = "USSP - Red Army Officer (Unarmed)"
 	id = /obj/item/card/id/advanced/ussp
 	id_trim = /datum/id_trim/ussp/soldier/officer
 	uniform = /obj/item/clothing/under/rank/ussp/officer
@@ -163,6 +163,7 @@
 /datum/id_trim/ussp/soldier/officer
 	assignment = "USSP - Red Army Officer"
 	trim_state = "trim_ussp_rank2"
+	big_pointer = TRUE
 
 // USSP Military
 //Rifleman
@@ -305,7 +306,6 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
-	implants = list(/obj/item/implant/cqc)
 
 /datum/id_trim/ussp/spetsnaz
 	assignment = "USSP - SPETSNAZ"
@@ -346,7 +346,6 @@
 	gloves = /obj/item/clothing/gloves/combat
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
-	implants = list(/obj/item/implant/cqc)
 
 // USSP SPETSNAZ Officer (MOD)
 /datum/outfit/ussp/spetsnaz_officer
@@ -371,121 +370,97 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
 	neck = /obj/item/binoculars
-	implants = list(/obj/item/implant/cqc)
 
-/*
-// TSF infiltrator
-/datum/outfit/tsf/infiltrator
-	name = "TSF - Infiltrator"
-	id = /obj/item/card/id/advanced/tsf
-	id_trim = /datum/id_trim/tsf/infiltrator
-	uniform = /obj/item/clothing/under/syndicate/camo
-	suit = /obj/item/clothing/suit/hooded/stealth_cloak
-	suit_store = /obj/item/gun/ballistic/automatic/c20r/unrestricted/suppressed
-	belt = /obj/item/storage/belt/military/army/tsf_infiltrator/full
-	back = /obj/item/storage/backpack/tsf
+// USSP infiltrator
+/datum/outfit/ussp/infiltrator
+	name = "USSP - Infiltrator"
+	id = /obj/item/card/id/advanced/ussp
+	id_trim = /datum/id_trim/ussp/infiltrator
+	uniform = /obj/item/clothing/under/syndicate
+	suit = /obj/item/clothing/suit/hooded/stealth_cloak/ussp
+	suit_store = null
+	belt = /obj/item/storage/belt/military/army/ussp/full_infiltrator
+	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/medkit/emergency,
 		/obj/item/grenade/smokebomb = 2,
 		/obj/item/grenade/c4 = 2,
-		/obj/item/clothing/head/beret/tsf_infiltrator
 	)
 	implants = list(/obj/item/implant/emp, /obj/item/implant/cqc)
 	gloves = /obj/item/clothing/gloves/combat
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/meson/night
-	mask = /obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
-	ears = /obj/item/radio/headset/heads/captain/alt/tsf
+	mask = /obj/item/clothing/mask/balaclava/breath
+	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	neck = /obj/item/binoculars
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
-	r_pocket = /obj/item/knife/combat
 
-/obj/item/gun/ballistic/automatic/pistol/wespe/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-	w_class = WEIGHT_CLASS_SMALL
-
-/obj/item/gun/ballistic/automatic/c20r/unrestricted/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-
-/obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
-	greyscale_colors = COLOR_OLIVE
-
-/datum/id_trim/tsf/infiltrator
-	assignment = "TSF - Infiltrator"
-	trim_state = "trim_tsf_officer"
-	sechud_icon_state = SECHUD_TSF
+/datum/id_trim/ussp/infiltrator
+	assignment = "USSP - Razvedka"
+	trim_state = "trim_ussp_rank2"
 	big_pointer = FALSE
 
-/datum/id_trim/tsf/infiltrator/New()
+/datum/id_trim/ussp/infiltrator/New()
 	. = ..()
 	access = list(ACCESS_CENT_GENERAL) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
 
-// TSF representative
-/datum/outfit/tsf/representative
-	name = "TSF - Representative"
-	id = /obj/item/card/id/advanced/tsf
-	id_trim = /datum/id_trim/tsf/representative
-	uniform = /obj/item/clothing/under/rank/tsf/representative
-	suit = /obj/item/clothing/suit/armor/vest/tsf_overcoat
+// USSP representative
+/datum/outfit/ussp/representative
+	name = "USSP - Representative"
+	id = /obj/item/card/id/advanced/ussp
+	id_trim = /datum/id_trim/ussp/representative
+	uniform = /obj/item/clothing/under/rank/ussp/officer
+	suit = /obj/item/clothing/suit/armor/vest/ussp/officer
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/lighter/greyscale,
-		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
-		/obj/item/stamp/tsf,
-		/obj/item/folder/blue,
+		/obj/item/storage/box/matches,
+		/obj/item/storage/fancy/cigarettes/cigars,
+		/obj/item/stamp/ussp,
+		/obj/item/folder/red,
 		/obj/item/pen/fourcolor,
 	)
-	head = /obj/item/clothing/head/hats/tsf_fedora
-	gloves = /obj/item/clothing/gloves/color/white
-	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	shoes = /obj/item/clothing/shoes/laceup
-	glasses = /obj/item/clothing/glasses/sunglasses
+	head = /obj/item/clothing/head/hats/ussp/officer
+	gloves = /obj/item/clothing/gloves/combat
+	ears = /obj/item/radio/headset/heads/captain/alt/ussp
+	shoes = /obj/item/clothing/shoes/jackboots
+	glasses = /obj/item/clothing/glasses/eyepatch
 	l_pocket = /obj/item/stack/spacecash/c1000
 
-/datum/id_trim/tsf/representative
-	assignment = "Trans-Solar Federation Representative"
+/datum/id_trim/ussp/representative
+	assignment = "Union of Soviet Socialist Planets Representative"
 
-/datum/id_trim/tsf/representative/New()
+/datum/id_trim/ussp/representative/New()
 	. = ..()
 	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_SECURITY - ACCESS_CAPTAIN - ACCESS_AI_UPLOAD)
 
-// TSF diplomat
-/datum/outfit/tsf/diplomat
-	name = "TSF - Diplomat"
-	id = /obj/item/card/id/advanced/tsf
-	id_trim = /datum/id_trim/tsf/diplomat
-	uniform = /obj/item/clothing/under/rank/tsf/formal
-	suit = /obj/item/clothing/suit/tsf_suitjacket
+// USSP diplomat
+/datum/outfit/ussp/diplomat
+	name = "USSP - Diplomat"
+	id = /obj/item/card/id/advanced/ussp
+	id_trim = /datum/id_trim/ussp/diplomat
+	uniform = /obj/item/clothing/under/rank/ussp/official
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/lighter,
-		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
-		/obj/item/stamp/tsf,
-		/obj/item/folder/blue,
+		/obj/item/storage/fancy/cigarettes/cigars,
+		/obj/item/stamp/ussp,
+		/obj/item/folder/red,
 		/obj/item/pen/fourcolor,
 	)
 	gloves = /obj/item/clothing/gloves/color/white
-	head = /obj/item/clothing/head/beret/tsf_diplomat
-	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	shoes = /obj/item/clothing/shoes/laceup
+	head = /obj/item/clothing/head/hats/ussp/officer
+	ears = /obj/item/radio/headset/heads/captain/alt/ussp
+	shoes = /obj/item/clothing/shoes/jackboots
 	l_hand = /obj/item/storage/briefcase
-	neck = /obj/item/clothing/neck/tsf_fancy_cloak
 	l_pocket = /obj/item/stack/spacecash/c1000
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 
-/datum/id_trim/tsf/diplomat
-	assignment = "Trans-Solar Federation Diplomat"
-	trim_state = "trim_tsf_command"
+/datum/id_trim/ussp/diplomat
+	assignment = "Union of Soviet Socialist Planets Diplomat"
+	trim_state = "trim_ussp_rank3"
 
-/datum/id_trim/tsf/diplomat/New()
+/datum/id_trim/ussp/diplomat/New()
 	. = ..()
 	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_SECURITY - ACCESS_CAPTAIN - ACCESS_AI_UPLOAD)
-
-*/

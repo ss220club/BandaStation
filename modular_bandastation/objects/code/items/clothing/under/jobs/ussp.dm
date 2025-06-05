@@ -4,18 +4,17 @@
 /obj/item/clothing/under/rank/ussp
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/ussp.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/ussp.dmi'
+	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/ussp/commander
-	name = "USSP komandir suit"
+	name = "USSP komandir uniform"
 	desc = "Униформа высшего командного состава СССП."
 	icon_state = "ussp_commander"
-	can_adjust = FALSE
 
-/obj/item/clothing/under/rank/ussp/representative
-	name = "USSP formal suit"
+/obj/item/clothing/under/rank/ussp/official
+	name = "USSP official uniform"
 	desc = "Униформа официальных лиц СССП высоких рангов."
-	icon_state = "ussp_representative"
-	can_adjust = FALSE
+	icon_state = "ussp_official"
 
 /obj/item/clothing/under/rank/ussp/soldier
 	name = "USSP ryadovoy uniform"
@@ -39,5 +38,4 @@
 	name = "USSP SPETSNAZ uniform"
 	desc = "Униформа спецназа ГРУ СССП."
 	icon_state = "ussp_spetsnaz"
-	can_adjust = FALSE
 
