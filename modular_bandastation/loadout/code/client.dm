@@ -15,7 +15,7 @@
 
 /client
 	/// Call `proc/get_donator_level()` instead to get a value when possible.
-	VAR_PRIVATE/donator_level = BASIC_DONATOR_LEVEL
+	var/donator_level = BASIC_DONATOR_LEVEL
 
 // For unit-tests
 /datum/client_interface
