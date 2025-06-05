@@ -135,10 +135,9 @@
 	gloves = /obj/item/clothing/gloves/combat
 	back = /obj/item/gun/ballistic/rifle/boltaction
 	r_pocket = /obj/item/radio/off
-	l_pocket = /obj/item/knife/combat
 	backpack_contents = null
 	ears = null
-	belt = /obj/item/storage/belt/military/army/ussp/full_rifle
+	belt = /obj/item/storage/belt/military/army/ussp/full_rifle_small
 
 /datum/id_trim/ussp/soldier/srochnik
 	assignment = "USSP - Red Army Srochnik"
