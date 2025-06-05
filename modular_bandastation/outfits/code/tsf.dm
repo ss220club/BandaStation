@@ -149,8 +149,8 @@
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/medkit/emergency,
 		/obj/item/grenade/smokebomb,
+		/obj/item/shield/riot/tele,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
@@ -173,7 +173,7 @@
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/box/zipties,
-		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/storage/medkit/emergency,
 		/obj/item/grenade/frag = 2,
 		/obj/item/melee/baton/telescopic/silver,
 	)
@@ -233,7 +233,6 @@
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/medkit/emergency,
 		/obj/item/storage/box/teargas,
 		/obj/item/grenade/flashbang = 2,
 		/obj/item/megaphone/sec,
@@ -257,7 +256,6 @@
 /datum/id_trim/tsf/marine/riot
 	assignment = "TSF - Riot Specialist"
 
-// TSF MARSOC - будут допилены иконки модов, оружие будет как зальют стволы Ингакема
 // TSF MARSOC (Unarmed)
 /datum/outfit/tsf/marsoc_unarmed
 	name = "TSF - MARSOC (Unarmed)"

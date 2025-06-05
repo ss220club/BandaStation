@@ -6,11 +6,11 @@
 
 /datum/storage/military_belt/tsf
 	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_total_storage = WEIGHT_CLASS_SMALL * 8
 	max_slots = 10
 
 /obj/item/storage/belt/military/army/tsf/full/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
@@ -23,7 +23,6 @@
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_rifle_short/PopulateContents()
@@ -33,7 +32,6 @@
 	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_rifle_standart/PopulateContents()
@@ -42,7 +40,6 @@
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
 	new /obj/item/knife/combat(src)
 
@@ -69,7 +66,6 @@
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
 
 //USSP
 /obj/item/storage/belt/military/army/ussp
@@ -82,6 +78,7 @@
 
 /datum/storage/military_belt/ussp
 	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_total_storage = WEIGHT_CLASS_SMALL * 8
 	max_slots = 10
 
 /obj/item/storage/belt/military/army/ussp/full/PopulateContents()
@@ -89,7 +86,13 @@
 	new /obj/item/ammo_box/magazine/m10mm(src)
 	new /obj/item/ammo_box/magazine/m10mm(src)
 	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/ussp/full_rifle_small/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol(src)
 	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/ammo_box/strilka310(src)
+	new /obj/item/ammo_box/strilka310(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/ussp/full_rifle/PopulateContents()
@@ -100,11 +103,30 @@
 	new /obj/item/ammo_box/strilka310(src)
 	new /obj/item/ammo_box/strilka310(src)
 	new /obj/item/ammo_box/strilka310(src)
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/ussp/full_autorifle/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/clandestine(src)
+	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/ammo_casing/a762x39(src)
+	new /obj/item/ammo_casing/a762x39(src)
+	new /obj/item/ammo_casing/a762x39(src)
+	new /obj/item/knife/combat(src)
+
+/obj/item/storage/belt/military/army/ussp/full_autorifle_spetsnaz/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/clandestine(src)
+	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/ammo_casing/a762x39(src)
+	new /obj/item/ammo_casing/a762x39(src)
+	new /obj/item/ammo_casing/a762x39/ap(src)
+	new /obj/item/ammo_casing/a762x39/ap(src)
+	new /obj/item/ammo_box/magazine/amk/emp(src)
 
 /obj/item/storage/belt/military/army/ussp/full_engineer/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/clandestine(src)
 	new /obj/item/ammo_box/magazine/m10mm(src)
-	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/ammo_box/strilka310(src)
+	new /obj/item/ammo_box/strilka310(src)
 	new /obj/item/knife/combat(src)
 	new /obj/item/construction/rcd/loaded(src)
 	new /obj/item/stack/sheet/mineral/sandbags/thirty(src)
@@ -113,8 +135,9 @@
 	new /obj/item/gun/ballistic/automatic/pistol/suppressed(src)
 	new /obj/item/ammo_box/magazine/m10mm/ap(src)
 	new /obj/item/ammo_box/magazine/m10mm/ap(src)
-	new /obj/item/ammo_box/magazine/m10mm/ap(src)
-	new /obj/item/ammo_box/magazine/m10mm/ap(src)
+	new /obj/item/ammo_casing/a762x39/ap(src)
+	new /obj/item/ammo_casing/a762x39/ap(src)
+	new /obj/item/ammo_box/magazine/amk/emp(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/stack/sheet/mineral/sandbags/thirty
