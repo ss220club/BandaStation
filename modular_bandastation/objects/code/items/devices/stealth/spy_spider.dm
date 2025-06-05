@@ -22,6 +22,11 @@
 	transmitter.ui_interact(user)
 	return ..()
 
+/obj/item/radio/quiet
+	name = "narrow-focused receiver"
+	desc = "Компактный радиоприёмник, оснащённый направленным микроизлучателем звука, обеспечивающим воспроизведение аудиосигнала в строго ограниченной зоне."
+	canhear_range = 0
+
 /obj/item/radio/spider_transmitter
 	name = "spy transmitter"
 	desc = "Миниатюрный передатчик, размер которого позволяет устанавливать его в небольших устройствах."
@@ -48,12 +53,13 @@
 	max_slots = 5
 
 /obj/item/storage/lockbox/spy_kit
-	name = "набор жучков"
+	name = "spy bug kit"
 	desc = "Не самый легальный из способов достать информацию, но какая разница, если никто не узнает?"
 	req_access = list(ACCESS_DETECTIVE)
 	storage_type = /datum/storage/lockbox/detective
 
 /obj/item/storage/lockbox/spy_kit/PopulateContents()
+	new /obj/item/radio/quiet(src)
 	new /obj/item/stealth/spy_spider(src)
 	new /obj/item/stealth/spy_spider(src)
 	new /obj/item/stealth/spy_spider(src)
