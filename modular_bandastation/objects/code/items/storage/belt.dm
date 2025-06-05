@@ -90,7 +90,7 @@
 
 /obj/item/storage/belt/military/army/ussp/full_rifle_small/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol(src)
-	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/ammo_box/magazine/m9mm(src)
 	new /obj/item/ammo_box/strilka310(src)
 	new /obj/item/ammo_box/strilka310(src)
 	new /obj/item/knife/combat(src)
@@ -133,8 +133,8 @@
 
 /obj/item/storage/belt/military/army/ussp/full_infiltrator/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/suppressed(src)
-	new /obj/item/ammo_box/magazine/m10mm/ap(src)
-	new /obj/item/ammo_box/magazine/m10mm/ap(src)
+	new /obj/item/ammo_box/magazine/m9mm/ap(src)
+	new /obj/item/ammo_box/magazine/m9mm/ap(src)
 	new /obj/item/ammo_box/magazine/amk/ap(src)
 	new /obj/item/ammo_box/magazine/amk/ap(src)
 	new /obj/item/ammo_box/magazine/amk/emp(src)

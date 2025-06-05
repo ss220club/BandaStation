@@ -58,7 +58,7 @@
 
 /datum/armor/mod_theme_tsf_standart
 	melee = 15
-	bullet = 20
+	bullet = 30
 	laser = 45
 	energy = 20
 	bomb = 30
