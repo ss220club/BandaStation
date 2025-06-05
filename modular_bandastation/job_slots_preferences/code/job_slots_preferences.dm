@@ -2,7 +2,6 @@
 #define JOB_SLOT_CURRENT_SLOT 0
 #define JOB_SLOT_RANDOMISED_TEXT "Случайное имя и внешность"
 #define JOB_SLOT_CURRENT_TEXT "Текущий слот"
-#define MAX_CHARACTER_SLOTS 8 // should be max_save_slots, but switch need static variable
 
 /datum/preferences
 	var/list/pref_job_slots = list()
@@ -27,14 +26,15 @@
 /datum/preferences/proc/set_assigned_slot(job_title, is_late_join = FALSE)
 	if(is_late_join ? read_preference(/datum/preference/toggle/late_join_always_current_slot) : read_preference(/datum/preference/toggle/round_start_always_join_current_slot))
 		return
-	var/slot_for_job = pref_job_slots[job_title]
-	switch(slot_for_job)
+	var/slot = pref_job_slots[job_title]
+	switch(slot)
 		if(JOB_SLOT_RANDOMISED_SLOT)
 			return TRUE
 		if(JOB_SLOT_CURRENT_SLOT)
-			return // explicit
-		if(1 to MAX_CHARACTER_SLOTS)
-			switch_to_slot(slot_for_job)
+			return
+
+	if(slot != default_slot)
+		switch_to_slot(slot)
 
 ///Whether joining at roundstart ignores assigned character slot for the job and uses currently selected slot.
 /datum/preference/toggle/round_start_always_join_current_slot
@@ -51,4 +51,3 @@
 
 #undef JOB_SLOT_RANDOMISED_TEXT
 #undef JOB_SLOT_CURRENT_TEXT
-#undef MAX_CHARACTER_SLOTS
