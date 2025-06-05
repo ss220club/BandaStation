@@ -7,7 +7,7 @@
 /datum/preferences
 	var/list/pref_job_slots = list()
 
-/datum/preferences/proc/get_slot_options(mob/user, target_job)
+/datum/preferences/proc/get_slot_options()
 	var/list/slot_options = list(num2text(JOB_SLOT_CURRENT_SLOT) = JOB_SLOT_CURRENT_TEXT)
 	for(var/index in 1 to max_save_slots)
 		var/slot_name = (index == default_slot) \
