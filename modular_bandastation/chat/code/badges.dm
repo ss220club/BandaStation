@@ -40,7 +40,7 @@ GLOBAL_LIST(badge_icons_cache)
 		"Друг Банды" = "Streamer",
 		"Хост" = "Host",
 		"Ведущий Разработчик" = "HeadDeveloper",
-		"Старший Разработчик" = "Developer",
+		"Старший Разработчик" = "HeadDeveloper",
 		"Разработчик" = "Developer",
 		"Начальный Разработчик" = "MiniDeveloper",
 		"Ведущий Маппер" = "HeadMapper",
