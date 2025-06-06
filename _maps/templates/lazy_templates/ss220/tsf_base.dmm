@@ -1,4 +1,36 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ag" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/dark_red/line{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"ax" = (
+/turf/open/floor/iron/stairs/medium{
+	dir = 4
+	},
+/area/space)
+"aM" = (
+/obj/structure/fluff/big_chain{
+	pixel_y = -4
+	},
+/obj/structure/fluff/big_chain{
+	pixel_y = -26
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"aS" = (
+/obj/structure/sign/flag/terragov/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
 "be" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -14,6 +46,11 @@
 	dir = 1
 	},
 /area/space)
+"cc" = (
+/obj/effect/turf_decal/stripes/white/line,
+/obj/effect/turf_decal/trimline/dark_red/line,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
 "cI" = (
 /obj/machinery/door/airlock/silver,
 /turf/open/floor/iron/dark/smooth_large,
@@ -22,11 +59,30 @@
 /obj/structure/light_fake/directional/south,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"dA" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
 "ed" = (
 /obj/structure/sign/warning/docking/directional/north,
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
 	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"et" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 1
+	},
+/obj/structure/minecart_rail/railbreak,
+/obj/effect/turf_decal/tile/dark/full,
+/obj/effect/turf_decal/siding/wideplating/dark,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "ev" = (
@@ -36,12 +92,49 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
-/turf/open/floor/iron/dark/smooth_large,
+/turf/open/floor/iron/smooth,
+/area/space)
+"eS" = (
+/obj/structure/hedge/opaque,
+/obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 10
+	},
+/turf/open/floor/iron/smooth_large,
 /area/space)
 "eY" = (
 /obj/structure/light_fake/directional/south,
 /obj/effect/turf_decal/tile/neutral/half,
 /turf/open/floor/iron/smooth_half,
+/area/space)
+"fg" = (
+/obj/machinery/door/poddoor/shutters/indestructible/preopen,
+/obj/effect/turf_decal/caution/stand_clear,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"fs" = (
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/dark_red/corner{
+	dir = 1
+	},
+/obj/structure/light_fake/floor/emergency,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"fP" = (
+/obj/machinery/door/airlock/silver,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"fW" = (
+/obj/structure/hedge/opaque,
+/obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 6
+	},
+/turf/open/floor/iron/smooth_large,
 /area/space)
 "gv" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
@@ -49,12 +142,22 @@
 /turf/open/floor/iron/smooth_half,
 /area/space)
 "gO" = (
-/turf/open/floor/iron/tgmcemblem{
-	dir = 6
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo3";
+	dir = 8
 	},
+/obj/effect/turf_decal/siding/thinplating_new/corner,
+/turf/open/floor/iron/smooth,
 /area/space)
 "he" = (
 /obj/structure/closet/crate/bin,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"hj" = (
+/obj/machinery/door/airlock/silver,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "ht" = (
@@ -66,14 +169,37 @@
 /obj/effect/spawner/structure/window/reinforced/shuttle,
 /turf/open/floor/plating,
 /area/space)
+"hZ" = (
+/obj/effect/turf_decal/siding/wideplating/dark,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
 "ih" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
-/turf/open/floor/iron/tgmcemblem,
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo6";
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"iU" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 8
+	},
+/area/space)
+"jF" = (
+/obj/structure/shipping_container/deforest,
+/turf/open/floor/iron/dark/smooth_half,
 /area/space)
 "jJ" = (
 /obj/structure/light_fake/directional/north,
 /turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"kc" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
 /area/space)
 "kd" = (
 /obj/structure/sign/warning/no_smoking/directional/north,
@@ -88,12 +214,33 @@
 /turf/open/floor/iron/smooth,
 /area/space)
 "kF" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
 /turf/open/floor/iron/smooth_corner,
 /area/space)
 "kL" = (
+/obj/item/banner/solgov,
 /turf/open/floor/iron/smooth_corner{
 	dir = 4
 	},
+/area/space)
+"kX" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron/smooth,
+/area/space)
+"kZ" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 8
+	},
+/turf/open/floor/plating/reinforced,
 /area/space)
 "ln" = (
 /obj/effect/turf_decal/line/neutral/line/stripes{
@@ -110,6 +257,12 @@
 	},
 /turf/open/floor/iron/smooth_corner,
 /area/space)
+"mt" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/space)
 "my" = (
 /obj/structure/sign/warning/engine_safety/directional/south,
 /obj/structure/light_fake/directional/south,
@@ -119,14 +272,84 @@
 /obj/structure/light_fake/directional/west,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
-"pr" = (
-/turf/open/floor/iron/tgmcemblem{
-	dir = 9
+"nW" = (
+/obj/structure/light_fake/directional/east,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"oa" = (
+/obj/structure/minecart_rail,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating/corner{
+	dir = 4
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"om" = (
+/obj/structure/chair/sofa/bench/left{
+	dir = 1
+	},
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"ot" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
 	},
 /area/space)
-"ri" = (
-/turf/open/floor/iron/stairs{
+"oU" = (
+/obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 1
+	},
+/area/space)
+"pr" = (
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo7";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"pI" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"pW" = (
+/obj/structure/light_fake/directional/west,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"qa" = (
+/obj/structure/sign/flag/terragov/directional/north,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"qt" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"ri" = (
+/obj/effect/turf_decal/siding/thinplating_new/end{
+	dir = 8
+	},
+/turf/open/floor/iron/stairs{
+	dir = 4;
+	color = "#bfbfbf"
 	},
 /area/space)
 "rx" = (
@@ -142,8 +365,19 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "sw" = (
-/obj/item/banner/solgov,
+/obj/structure/hedge/opaque,
 /obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 9
+	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"sx" = (
+/obj/structure/hedge/opaque,
+/obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 5
+	},
 /turf/open/floor/iron/smooth_large,
 /area/space)
 "tr" = (
@@ -153,22 +387,75 @@
 /obj/machinery/cryopod{
 	dir = 4
 	},
-/turf/open/floor/iron/dark/smooth_large,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/structure/light_fake/directional/west,
+/turf/open/floor/iron/large,
+/area/space)
+"tG" = (
+/obj/machinery/microwave,
+/obj/structure/table,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"tS" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"tX" = (
+/obj/effect/turf_decal/siding/wideplating/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"ub" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/large,
 /area/space)
 "uD" = (
 /turf/open/space/basic,
+/area/space)
+"uE" = (
+/obj/effect/turf_decal/siding/thinplating_new,
+/turf/open/floor/iron/smooth_corner{
+	dir = 1
+	},
+/area/space)
+"uJ" = (
+/turf/open/floor/iron/cafeteria,
 /area/space)
 "uK" = (
 /obj/structure/table/reinforced,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "vi" = (
-/obj/structure/chair/sofa/bench/left{
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"vl" = (
+/obj/structure/minecart_rail,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating/corner{
 	dir = 1
 	},
-/turf/open/floor/iron/smooth_corner{
-	dir = 4
+/turf/open/floor/plating/reinforced,
+/area/space)
+"vm" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
 	},
+/turf/open/floor/iron/smooth,
 /area/space)
 "vo" = (
 /obj/machinery/door/poddoor/shutters/indestructible/preopen,
@@ -177,12 +464,32 @@
 "vp" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
-/turf/open/floor/iron/tgmcemblem{
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo8";
 	dir = 8
 	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"vw" = (
+/obj/machinery/door/airlock/silver,
+/turf/open/floor/iron/cafeteria,
 /area/space)
 "vA" = (
 /obj/structure/chair/comfy/beige,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"vY" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 8
+	},
+/area/space)
+"wm" = (
+/obj/effect/turf_decal/stripes/white/corner,
+/obj/effect/turf_decal/trimline/dark_red/corner,
+/obj/structure/light_fake/floor/emergency,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "ww" = (
@@ -192,6 +499,50 @@
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
+/area/space)
+"xb" = (
+/turf/open/floor/iron/stairs{
+	color = "#bfbfbf"
+	},
+/area/space)
+"xd" = (
+/obj/structure/shipping_container/biosustain,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"xh" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"xG" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/structure/light_fake/directional/east,
+/turf/open/floor/iron/large,
+/area/space)
+"xK" = (
+/obj/structure/shipping_container/conarex,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"ys" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"yF" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 4
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"zf" = (
+/obj/structure/light_fake/directional/south,
+/turf/open/floor/iron/smooth,
 /area/space)
 "zy" = (
 /obj/structure/sign/warning/secure_area/directional/east,
@@ -206,10 +557,23 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"zI" = (
+/turf/open/floor/iron/stairs/medium{
+	dir = 8
+	},
+/area/space)
 "zK" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
-/turf/open/floor/iron/tgmcemblem{
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo4";
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"AE" = (
+/obj/structure/minecart_rail/railbreak,
+/turf/open/floor/iron/dark/smooth_half{
 	dir = 1
 	},
 /area/space)
@@ -218,15 +582,57 @@
 /turf/open/indestructible/plating,
 /area/space)
 "AY" = (
-/turf/open/floor/iron/tgmcemblem{
-	dir = 10
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo9";
+	dir = 8
 	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"BX" = (
+/obj/structure/table,
+/obj/effect/spawner/random/entertainment/cigarette_pack,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"Cc" = (
+/obj/structure/fluff/fake_vent,
+/turf/closed/indestructible/riveted/plastinum,
+/area/space)
+"Co" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 9
+	},
+/turf/open/floor/plating/reinforced,
 /area/space)
 "Dn" = (
 /obj/structure/light_fake/directional/east,
 /obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"Ds" = (
+/obj/structure/frame/computer{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"DA" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner,
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -242,6 +648,17 @@
 "EW" = (
 /obj/structure/table,
 /turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Fe" = (
+/obj/effect/turf_decal/tile/neutral/half,
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"FC" = (
+/obj/structure/table,
+/turf/open/floor/iron/cafeteria,
 /area/space)
 "FH" = (
 /turf/open/floor/iron/smooth_half{
@@ -262,6 +679,27 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"GX" = (
+/obj/structure/railing{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 10
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"Hb" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark_red/line{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
 "Jc" = (
 /obj/structure/sign/warning/docking/directional/north,
 /obj/effect/turf_decal/stripes/corner{
@@ -272,9 +710,17 @@
 "JB" = (
 /turf/open/floor/iron/smooth_large,
 /area/space)
-"JO" = (
-/obj/structure/light_fake/floor/emergency,
+"JE" = (
+/obj/structure/light_fake/directional/south,
+/obj/structure/sign/warning/secure_area/directional/south,
 /turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"JI" = (
+/obj/structure/sign/flag/terragov/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"JO" = (
+/turf/open/floor/iron/dark/smooth_half,
 /area/space)
 "JS" = (
 /turf/open/floor/iron/dark/smooth_large,
@@ -284,15 +730,33 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "JW" = (
-/turf/open/floor/iron/tgmcemblem{
-	dir = 5
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo1";
+	dir = 8
 	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"KB" = (
+/obj/structure/railing{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 6
+	},
+/turf/open/floor/plating/reinforced,
 /area/space)
 "KT" = (
 /obj/structure/sign/warning/secure_area/directional/west,
 /obj/structure/light_fake/directional/west,
 /obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
 	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
@@ -305,6 +769,23 @@
 	},
 /turf/open/floor/iron/smooth_large,
 /area/space)
+"Lq" = (
+/obj/effect/turf_decal/tile/dark/full,
+/turf/open/floor/iron/stairs{
+	color = "#bfbfbf"
+	},
+/area/space)
+"LM" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
 "LO" = (
 /obj/effect/turf_decal/line/yellow/line/stripes{
 	dir = 4
@@ -312,6 +793,41 @@
 /turf/open/floor/iron/smooth_corner{
 	dir = 8
 	},
+/area/space)
+"LP" = (
+/obj/structure/frame/computer{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"LQ" = (
+/obj/structure/minecart_rail,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/plating/reinforced,
+/area/space)
+"Mm" = (
+/obj/structure/chair/sofa/bench/right{
+	dir = 1
+	},
+/obj/structure/light_fake/directional/east,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"Mp" = (
+/obj/structure/shipping_container/nthi,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"Ms" = (
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark_red/corner{
+	dir = 4
+	},
+/obj/structure/light_fake/floor/emergency,
+/turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "Mv" = (
 /obj/structure/table/glass,
@@ -326,9 +842,15 @@
 /obj/effect/turf_decal/tile/dark/full,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"Nw" = (
+/obj/structure/minecart_rail,
+/obj/structure/railing,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating,
+/turf/open/floor/plating/reinforced,
+/area/space)
 "NW" = (
-/obj/structure/table,
-/obj/effect/spawner/random/entertainment/cigarette_pack,
+/obj/item/banner/solgov,
 /turf/open/floor/iron/smooth_corner{
 	dir = 1
 	},
@@ -339,11 +861,23 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"Oq" = (
+/obj/machinery/door/poddoor/shutters/indestructible/preopen,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
 "Pl" = (
 /obj/machinery/cryopod{
 	dir = 8
 	},
-/turf/open/floor/iron/dark/smooth_large,
+/turf/open/floor/iron/large,
+/area/space)
+"Pv" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 8
+	},
 /area/space)
 "PQ" = (
 /obj/machinery/door/airlock/silver,
@@ -351,12 +885,32 @@
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"PV" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 4
+	},
+/area/space)
 "PZ" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
-/turf/open/floor/iron/tgmcemblem{
-	dir = 4
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo2";
+	dir = 8
 	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"QJ" = (
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/dark_red/corner{
+	dir = 8
+	},
+/obj/structure/light_fake/floor/emergency,
+/turf/open/floor/iron/dark/smooth_large,
 /area/space)
 "QK" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
@@ -384,6 +938,16 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"SA" = (
+/obj/structure/minecart_rail,
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"SM" = (
+/obj/item/banner/solgov,
+/turf/open/floor/iron/smooth_corner,
+/area/space)
 "SP" = (
 /obj/effect/turf_decal/line/yellow/line/stripes{
 	dir = 4
@@ -396,9 +960,28 @@
 /obj/structure/hedge/opaque,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"Tb" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 8
+	},
+/area/space)
+"Tf" = (
+/turf/open/floor/iron/stairs,
+/area/space)
+"Vg" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 4
+	},
+/area/space)
 "Vq" = (
 /obj/machinery/vending/cigarette,
 /turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Vz" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_corner,
 /area/space)
 "VF" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
@@ -406,26 +989,54 @@
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/floor/plating
 	},
-/turf/open/floor/iron/tgmcemblem/center{
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo5";
 	dir = 8
 	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"VM" = (
+/obj/structure/chair/sofa/bench/right{
+	dir = 1
+	},
+/turf/open/floor/iron/cafeteria,
 /area/space)
 "WB" = (
 /turf/open/floor/iron/smooth_half,
+/area/space)
+"WS" = (
+/obj/effect/turf_decal/siding/thinplating_new,
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 4
+	},
 /area/space)
 "Xk" = (
 /obj/machinery/door/airlock/highsecurity,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
-"YH" = (
-/obj/effect/turf_decal/stripes/corner,
-/turf/open/floor/iron/dark/smooth_large,
-/area/space)
-"Zk" = (
-/obj/structure/chair/sofa/bench/right{
+"Yy" = (
+/obj/effect/turf_decal/stripes/white/line{
 	dir = 1
 	},
-/turf/open/floor/iron/smooth_half,
+/obj/effect/turf_decal/trimline/dark_red/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"YH" = (
+/obj/effect/turf_decal/stripes/corner,
+/turf/open/floor/iron/smooth,
+/area/space)
+"YV" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 4
+	},
+/area/space)
+"Zk" = (
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/space)
 "Zr" = (
 /obj/structure/light_fake/directional/east,
@@ -438,6 +1049,16 @@
 	name = "Assault Gear"
 	},
 /turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"ZD" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 5
+	},
+/turf/open/floor/plating/reinforced,
 /area/space)
 "ZG" = (
 /obj/effect/turf_decal/tile/neutral/half{
@@ -456,6 +1077,12 @@
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
+/area/space)
+"ZZ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/dark/smooth_large,
 /area/space)
 
 (1,1,1) = {"
@@ -486,18 +1113,18 @@ Ee
 lp
 Ee
 Ee
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
 "}
 (2,1,1) = {"
 uD
@@ -523,22 +1150,22 @@ JS
 JS
 JS
 Ee
-kF
+SM
 be
 kL
 Ee
+JS
+mZ
+JS
 Ee
+JS
+mZ
+JS
 Ee
+JS
+mZ
+JS
 Ee
-Ee
-Ee
-Ee
-Ee
-Ee
-uD
-uD
-uD
-uD
 "}
 (3,1,1) = {"
 uD
@@ -569,17 +1196,17 @@ QK
 FJ
 Ee
 JS
-mZ
+JS
 JS
 Ee
 JS
-mZ
+JS
 JS
 Ee
-uD
-uD
-uD
-uD
+JS
+JS
+JS
+Ee
 "}
 (4,1,1) = {"
 uD
@@ -617,10 +1244,10 @@ JS
 JS
 JS
 Ee
-uD
-uD
-uD
-uD
+JS
+JS
+JS
+Ee
 "}
 (5,1,1) = {"
 uD
@@ -644,7 +1271,7 @@ kE
 kE
 kE
 kE
-JS
+JI
 Ee
 QU
 QK
@@ -658,10 +1285,10 @@ Zt
 Zt
 Zt
 Ee
-uD
-uD
-uD
-uD
+Zt
+Zt
+Zt
+Ee
 "}
 (6,1,1) = {"
 uD
@@ -698,11 +1325,11 @@ JS
 JS
 JS
 JS
+JS
+JS
+JS
+JS
 Ee
-uD
-uD
-uD
-uD
 "}
 (7,1,1) = {"
 uD
@@ -738,12 +1365,12 @@ JS
 JS
 JS
 JS
+JS
+JS
+JS
+JS
 dy
 Ee
-uD
-uD
-uD
-uD
 "}
 (8,1,1) = {"
 uD
@@ -781,10 +1408,10 @@ JS
 JS
 uK
 Ee
-uD
-uD
-uD
-uD
+Ee
+Ee
+Ee
+Ee
 "}
 (9,1,1) = {"
 uD
@@ -822,10 +1449,10 @@ JS
 uK
 uK
 Ee
-uD
-uD
-uD
-uD
+tG
+FC
+BX
+Ee
 "}
 (10,1,1) = {"
 uD
@@ -850,11 +1477,11 @@ hX
 hX
 Ee
 Ee
-sw
+fW
 kF
-be
-kL
-sw
+ot
+WS
+sx
 Ee
 Xk
 Xk
@@ -863,10 +1490,10 @@ Ee
 Ee
 Ee
 Ee
-uD
-uD
-uD
-uD
+qa
+uJ
+uJ
+AU
 "}
 (11,1,1) = {"
 uD
@@ -890,24 +1517,24 @@ ww
 ww
 ww
 ww
-ww
-FH
+pI
+Vz
 pr
 vp
 AY
-FH
+PV
 KT
 ww
 ww
 ww
-vi
+kL
+Ee
+uJ
+uJ
+uJ
+uJ
+uJ
 AU
-uD
-uD
-uD
-uD
-uD
-uD
 "}
 (12,1,1) = {"
 uD
@@ -941,14 +1568,14 @@ QK
 QK
 QK
 QK
-Zk
+WB
+vw
+uJ
+FC
+om
+FC
+om
 AU
-uD
-uD
-uD
-uD
-uD
-uD
 "}
 (13,1,1) = {"
 uD
@@ -972,24 +1599,24 @@ bo
 bo
 Dn
 bo
-bo
-FH
+DA
+vY
 JW
 PZ
 gO
-FH
+oU
+LM
 bo
-bo
-bo
+dA
 Dn
 NW
-AU
-uD
-uD
-uD
-uD
-uD
-uD
+Ee
+uJ
+FC
+Mm
+FC
+VM
+Ee
 "}
 (14,1,1) = {"
 uD
@@ -1014,14 +1641,14 @@ Ee
 Ee
 Ee
 Ee
-sw
-WB
+eS
+Pv
 be
-WB
+uE
 sw
 Ee
 cI
-cI
+fP
 Ee
 Ee
 Ee
@@ -1035,67 +1662,67 @@ Ee
 (15,1,1) = {"
 Ee
 Ee
-JO
 JS
+Zk
+Zk
+pW
+Zk
+Zk
+Zk
+pW
+Zk
 JS
-mZ
+Zk
+pW
+Zk
+Zk
+Zk
+pW
+Zk
+Zk
 JS
-JS
-JS
-mZ
-JS
-JS
-JS
-mZ
-JS
-JS
-JS
-mZ
-JS
-JS
-JO
 Ee
 Ee
-QU
+tS
 QK
-FJ
+Fe
 Ee
 Ee
 JS
-JS
-JS
+ys
+EW
 Ee
-JS
+ub
 tu
+ub
+ub
 tu
-tu
-tu
-JS
+ub
 Ee
 "}
 (16,1,1) = {"
 QV
-Go
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
+vm
+wm
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Ms
+kE
 Ee
 ZG
 be
@@ -1103,21 +1730,21 @@ zy
 Ee
 rx
 JS
-JS
-dy
+ys
+JE
 Ee
-jJ
-JS
-JS
-JS
-JS
-dy
-Ee
+iU
+ax
+Tb
+iU
+ax
+Tb
+Cc
 "}
 (17,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1135,8 +1762,8 @@ ev
 ev
 ev
 ev
-JS
-JS
+Yy
+kE
 Ee
 Ee
 PQ
@@ -1144,21 +1771,21 @@ Ee
 Ee
 rx
 JS
-JS
-JS
-cI
-FH
-FH
-FH
-FH
-FH
-FH
+ys
+ys
+hj
+ZZ
+qt
+ZZ
+ZZ
+qt
+aS
 Ee
 "}
 (18,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1176,30 +1803,30 @@ ev
 ev
 ev
 ev
-JS
-dy
+Yy
+zf
 Ee
 JS
 ht
 JS
 Ee
-jJ
-JS
+Ee
+Ee
 JS
 JS
 Ee
-jJ
-JS
-JS
-JS
-JS
-dy
-Ee
+YV
+zI
+Vg
+YV
+zI
+Vg
+Cc
 "}
 (19,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1217,30 +1844,30 @@ ev
 ev
 ev
 ev
-JS
+Yy
 YH
 Ee
 ed
-ht
+xh
 JS
+kc
+Ds
 Ee
-JS
-JS
-JS
-JS
+EW
+EW
 Ee
-JS
+Pl
+xG
 Pl
 Pl
+xG
 Pl
-Pl
-JS
 Ee
 "}
 (20,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1258,14 +1885,14 @@ ev
 ev
 ev
 ev
-JS
-FY
+Yy
+kX
 vo
 Go
-ht
+xh
 JS
-Ee
-Ee
+mt
+LP
 Ee
 Ee
 Ee
@@ -1280,8 +1907,49 @@ Ee
 "}
 (21,1,1) = {"
 QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kX
+vo
 Go
+xh
 JS
+kc
+Ds
+Ee
+JO
+Mp
+JO
+xd
+hZ
+Tf
+Tf
+xb
+Lq
+tr
+"}
+(22,1,1) = {"
+QV
+vm
+cc
 ev
 ev
 ev
@@ -1299,30 +1967,30 @@ ev
 ev
 ev
 ev
-JS
-FY
+Yy
+kX
 vo
 Go
 ht
 JS
+mt
+LP
 Ee
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+JO
+JO
+JO
+JO
+tX
+vi
+vi
+vi
+vi
+Ee
 "}
-(22,1,1) = {"
+(23,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1340,71 +2008,30 @@ ev
 ev
 ev
 ev
-JS
-FY
+Yy
+kX
 vo
 Go
 ht
 my
 Ee
 Ee
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-"}
-(23,1,1) = {"
-QV
-Go
-JS
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-JS
-FY
-vo
-Go
-ht
-JS
-FY
-QV
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+Ee
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+Ee
 "}
 (24,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1422,30 +2049,30 @@ ev
 ev
 ev
 ev
-JS
-FY
+Yy
+kX
 vo
 Go
-ht
+xh
 JS
 FY
-QV
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+Oq
+Zk
+JS
+JS
+JS
+JS
+JS
+Co
+kZ
+kZ
+GX
+Ee
 "}
 (25,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1463,30 +2090,30 @@ ev
 ev
 ev
 ev
-JS
-FY
+Yy
+kX
 vo
 Go
-ht
+xh
 JS
 FY
-QV
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+fg
+et
+SA
+SA
+SA
+SA
+AE
+vl
+LQ
+LQ
+Nw
+Ee
 "}
 (26,1,1) = {"
 QV
-Go
-JS
+vm
+cc
 ev
 ev
 ev
@@ -1504,171 +2131,171 @@ ev
 ev
 ev
 ev
-JS
+Yy
 eD
 Ee
 Jc
-ht
+xh
 JS
 FY
-QV
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+fg
+et
+SA
+SA
+SA
+SA
+AE
+oa
+LQ
+LQ
+Nw
+Ee
 "}
 (27,1,1) = {"
 QV
-Go
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+zf
+Ee
 JS
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
+ht
 JS
-dy
+FY
+Oq
+Zk
+JS
+JS
+JS
+JS
+JS
+ZD
+yF
+yF
+KB
+Ee
+"}
+(28,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kE
 Ee
 JS
 ht
 Na
 Ee
 Ee
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+Ee
+aM
+JO
+xK
+JO
+jF
+JO
+JO
+JO
+JO
+Ee
 "}
-(28,1,1) = {"
+(29,1,1) = {"
 QV
-Go
-JS
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-ev
-JS
-JS
+vm
+QJ
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+fs
+kE
 Ee
 Ee
 tr
 Ee
 Ee
 uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-"}
-(29,1,1) = {"
-QV
-Go
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
-JS
 Ee
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+Ee
 "}
 (30,1,1) = {"
 Ee
 Ee
-JO
 JS
+Zk
+Zk
+nW
+Zk
+Zk
+Zk
+nW
+Zk
 JS
-Zr
+Zk
+nW
+Zk
+Zk
+Zk
+nW
+Zk
+Zk
 JS
-JS
-JS
-Zr
-JS
-JS
-JS
-Zr
-JS
-JS
-JS
-Zr
-JS
-JS
-JO
 Ee
 Ee
 uD
@@ -1676,17 +2303,17 @@ uD
 uD
 uD
 uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+Ee
+aM
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+Ee
 "}
 (31,1,1) = {"
 uD
@@ -1717,15 +2344,15 @@ uD
 uD
 uD
 uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
-uD
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
 "}
