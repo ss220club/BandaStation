@@ -82,7 +82,6 @@ function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
   }
 
   createSetPriorityCache[jobName] = createSetPriority;
-
   return createSetPriority;
 }
 

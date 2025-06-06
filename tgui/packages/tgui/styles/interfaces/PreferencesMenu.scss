@@ -16,6 +16,8 @@ $department_map: (
 
 .PreferencesMenu {
   &__Department {
+    --button-width: 40px;
+    --button-gap: 0.25rem;
     overflow: hidden;
 
     &.head .job-name {
@@ -32,8 +34,20 @@ $department_map: (
     }
 
     .options {
+      display: flex;
+      gap: var(--button-gap);
       padding: 2px;
       text-align: right;
+
+      .Button {
+        display: inline-flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        transition: transform var(--transition-time-medium);
+        transition-delay: var(--transition-time-medium);
+        z-index: 0;
+      }
     }
 
     &:first-child {
@@ -48,44 +62,56 @@ $department_map: (
       border-radius: var(--border-radius-medium);
     }
 
-    @each $department-name, $color-value in $department_map {
+    @each $department-name, $color in $department_map {
       &--#{$department-name} {
-        background: $color-value;
-        border: var(--border-thickness-tiny)
-          outset
-          hsl(from $color-value h s calc(l + 10));
+        background: $color;
+        border: var(--border-thickness-tiny) outset;
+        border-color: hsl(from $color h s calc(l + 10));
 
         &.head {
-          background: hsl(from $color-value h s calc(l - 7.5));
+          background: hsl(from $color h s calc(l - 7.5));
         }
 
         .Button {
-          $color: hsl(from $color-value h s calc(l - 7.5));
-          $color-off: hsl(from $color h s calc(l - 7.5));
-          background-color: $color;
-          box-shadow: 0 0 0 calc(var(--button-gap) - 1px) $color-value;
+          $button-color: hsl(from $color h s calc(l - 7.5));
+          $button-color-off: hsl(from $button-color h s calc(l - 7.5));
 
-          &:hover:not(.selected) {
-            background-color: $color-value;
-            outline: 1px solid $color-off;
+          &:after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: $button-color;
+            border-radius: var(--border-radius-tiny);
+            z-index: -1;
           }
 
-          &.off.selected {
-            background-color: $color-off !important;
+          &:hover:not(.selected):after {
+            background-color: $color;
+            border: 1px solid $button-color-off;
+          }
+
+          &.off.selected:after {
+            background-color: $button-color-off !important;
+          }
+
+          &:before {
+            content: '';
+            position: absolute;
+            inset: calc(-1 * var(--button-gap));
+            background-color: $color;
+            z-index: -2;
           }
         }
       }
     }
 
     &--Captain {
-      border: var(--border-thickness-tiny) outset var(--color-gold);
+      box-shadow: var(--shadow-glow-small) -1px var(--color-gold);
     }
   }
 
   &__Priority {
     position: relative;
-    display: inline-flex;
-    justify-content: flex-end;
 
     &:hover .PreferencesMenu__PriorityButton {
       transform: translateX(
@@ -97,16 +123,7 @@ $department_map: (
     }
 
     &Button {
-      --button-width: 40px;
-      --button-gap: 0.25rem;
-      display: inline-flex;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
       width: var(--button-width);
-      transition: transform var(--transition-time-medium);
-      transition-delay: var(--transition-time-medium);
-      z-index: 0;
 
       &:not(.selected) {
         position: absolute;
@@ -114,19 +131,19 @@ $department_map: (
 
       &.selected {
         cursor: var(--cursor-default);
-        z-index: 1;
+        z-index: 1 !important;
 
-        &.low {
+        &.low:after {
           background-color: var(--color-bad) !important;
         }
 
-        &.mid {
+        &.mid:after {
           background-color: var(--color-average) !important;
         }
 
-        &.high {
+        &.high:after {
           background-color: hsl(
-            from var(--color-good) h s calc(l + 7.5)
+            from var(--color-good) h s calc(l + 5)
           ) !important;
         }
       }
