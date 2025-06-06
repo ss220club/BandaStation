@@ -4,14 +4,14 @@ import { Feature, FeatureSliderInput } from '../base';
 
 export const sound_tts_volume_radio: Feature<number> = {
   name: 'TTS - громкость рации',
-  category: 'ЗВУК',
+  category: 'Звук',
   description: 'Громкость text-to-speech для рации.',
   component: FeatureSliderInput,
 };
 
 export const sound_tts_volume_announcement: Feature<number> = {
   name: 'TTS - громкость оповещений',
-  category: 'ЗВУК',
+  category: 'Звук',
   description: 'Громкость text-to-speech для оповещений.',
   component: FeatureSliderInput,
 };

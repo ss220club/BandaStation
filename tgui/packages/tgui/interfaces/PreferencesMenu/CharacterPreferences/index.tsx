@@ -119,7 +119,7 @@ export function CharacterPreferenceWindow(props) {
 
   return (
     <Stack fill vertical>
-      <Stack.Item fontSize={1.1}>
+      <Stack.Item>
         <Section
           fitted
           title={data.character_profiles[data.active_slot - 1]}

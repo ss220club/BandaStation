@@ -100,7 +100,6 @@ export type FeatureToggle = Feature<BooleanLike, boolean>;
 
 export function CheckboxInput(props: FeatureValueProps<BooleanLike, boolean>) {
   const { handleSetValue, value } = props;
-
   return (
     <Button.Checkbox
       checked={!!value}
@@ -115,7 +114,6 @@ export function CheckboxInputInverse(
   props: FeatureValueProps<BooleanLike, boolean>,
 ) {
   const { handleSetValue, value } = props;
-
   return (
     <Button.Checkbox
       checked={!value}
@@ -133,12 +131,10 @@ export function createDropdownInput<T extends string | number = string>(
 ): FeatureValue<T> {
   return (props: FeatureValueProps<T>) => {
     const { handleSetValue, value } = props;
-
     return (
       <Dropdown
         selected={choices[value] as string}
         onSelected={handleSetValue}
-        width="100%"
         options={sortChoices(Object.entries(choices)).map(
           ([dataValue, label]) => {
             return {
@@ -173,7 +169,6 @@ export function FeatureNumberInput(
   props: FeatureValueProps<number, number, FeatureNumericData>,
 ) {
   const { serverData, handleSetValue, value } = props;
-
   return (
     <NumberInput
       onChange={(value) => handleSetValue(value)}
@@ -190,18 +185,17 @@ export function FeatureSliderInput(
   props: FeatureValueProps<number, number, FeatureNumericData>,
 ) {
   const { serverData, handleSetValue, value } = props;
-
   return (
     <Slider
-      onChange={(e, value) => {
-        handleSetValue(value);
-      }}
+      width="100%"
       disabled={!serverData}
       minValue={serverData?.minimum || 0}
       maxValue={serverData?.maximum || 100}
       step={serverData?.step || 1}
       value={value}
-      stepPixelSize={10}
+      onChange={(e, value) => {
+        handleSetValue(value);
+      }}
     />
   );
 }
@@ -217,7 +211,6 @@ export function FeatureValueInput(props: FeatureValueInputProps) {
   const { act, data } = useBackend<PreferencesMenuData>();
 
   const feature = props.feature;
-
   const [predictedValue, setPredictedValue] = useState(props.value);
 
   function changeValue(newValue: unknown) {
@@ -230,7 +223,6 @@ export function FeatureValueInput(props: FeatureValueInputProps) {
   }, [data.active_slot, props.value]);
 
   const serverData = useServerPrefs();
-
   return createElement(feature.component, {
     featureId: props.featureId,
     serverData: serverData?.[props.featureId] as any,
@@ -248,11 +240,10 @@ export function FeatureShortTextInput(
   props: FeatureValueProps<string, string, FeatureShortTextData>,
 ) {
   const { serverData, value, handleSetValue } = props;
-
   return (
     <Input
-      disabled={!serverData}
       fluid
+      disabled={!serverData}
       value={value}
       maxLength={serverData?.maximum_length}
       onBlur={handleSetValue}

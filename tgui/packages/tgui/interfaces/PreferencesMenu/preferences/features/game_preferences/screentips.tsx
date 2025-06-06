@@ -9,7 +9,7 @@ import { FeatureDropdownInput } from '../dropdowns';
 
 export const screentip_color: Feature<string> = {
   name: 'Подсказки на экране: цвет',
-  category: 'ИНТЕРФЕЙС',
+  category: 'Интерфейс',
   description: `
     Цвет ваших подсказок на экране при наведении на объект.
   `,
@@ -18,7 +18,7 @@ export const screentip_color: Feature<string> = {
 
 export const screentip_images: FeatureToggle = {
   name: 'Подсказки на экране: изображения',
-  category: 'ИНТЕРФЕЙС',
+  category: 'Интерфейс',
   description: `Показывает изображения кнопок мыши при подсказках,
     вместо ЛКМ/ПКМ.`,
   component: CheckboxInput,
@@ -26,7 +26,7 @@ export const screentip_images: FeatureToggle = {
 
 export const screentip_pref: FeatureChoiced = {
   name: 'Подсказки на экране: включить',
-  category: 'ИНТЕРФЕЙС',
+  category: 'Интерфейс',
   description: `
     Включает подсказки на экране, когда вы наводитесь над объектами.
     Если выбрана "Только с подсказками", подсказки будут появляться, только если

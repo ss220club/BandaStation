@@ -16,7 +16,7 @@ import { FeatureDropdownInput } from '../dropdowns';
 
 export const ghost_accs: FeatureChoiced = {
   name: 'Призрак: аксессуары',
-  category: 'ПРИЗРАК',
+  category: 'Призрак',
   description: 'Влияет на то, какие изменения будет иметь ваш призрак.',
   component: FeatureDropdownInput,
 };
@@ -94,21 +94,21 @@ function GhostFormInput(
 
 export const ghost_form: FeatureChoiced = {
   name: 'Призрак: форма',
-  category: 'ПРИЗРАК',
+  category: 'Призрак',
   description: 'Внешний вид вашего призрака. Нужна подписка BYOND.',
   component: GhostFormInput,
 };
 
 export const ghost_hud: FeatureToggle = {
   name: 'Призрак: HUD',
-  category: 'ПРИЗРАК',
+  category: 'Призрак',
   description: 'Переключает наличие кнопок на HUD призрака.',
   component: CheckboxInput,
 };
 
 export const ghost_orbit: FeatureChoiced = {
   name: 'Призрак: орбитирование',
-  category: 'ПРИЗРАК',
+  category: 'Призрак',
   description: `
     Форма, по которой ваш призрак будет орбитировать.
     Необходима подписка BYOND.
@@ -126,7 +126,7 @@ export const ghost_orbit: FeatureChoiced = {
 
 export const ghost_others: FeatureChoiced = {
   name: 'Призрак: окружающие',
-  category: 'ПРИЗРАК',
+  category: 'Призрак',
   description: `
     Должны ли призраки других показываться с их настройками, только с их
     стандартным спрайтом, или только показывать их стандартным белым призраком?
@@ -136,14 +136,14 @@ export const ghost_others: FeatureChoiced = {
 
 export const inquisitive_ghost: FeatureToggle = {
   name: 'Призрак: осмотр',
-  category: 'ПРИЗРАК',
+  category: 'Призрак',
   description: 'Нажатие по чему-то будет вызывать осмотр.',
   component: CheckboxInput,
 };
 
 export const ghost_roles: FeatureToggle = {
   name: 'Получать гост-роли',
-  category: 'ПРИЗРАК',
+  category: 'Призрак',
   description: `
     Если вы отключите это, вы не будете получать оповещения о гост-ролях, вообще!
     Каждое оповещение БУДЕТ заглушено для вас, когда вы являетесь призраком.

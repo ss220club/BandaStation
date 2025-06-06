@@ -1,66 +1,50 @@
-import { ComponentProps, ReactNode, useRef } from 'react';
-import { Button, Flex, Section, Stack } from 'tgui-core/components';
+import { ReactNode, useState } from 'react';
+import { Section, Stack, Tabs } from 'tgui-core/components';
 
-type TabbedMenuProps = {
-  categoryEntries: [string, ReactNode][];
-  contentProps?: ComponentProps<typeof Flex>;
+type PreferencesTabsProps = {
+  buttons?: ReactNode;
+  categories: [string, ReactNode][];
+  fontSize?: number;
 };
 
-export function TabbedMenu(props: TabbedMenuProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
+export function TabbedMenu(props: PreferencesTabsProps) {
+  const { buttons, categories, fontSize } = props;
+
+  const [selectedCategory, setSelectedCategory] = useState(categories[0][0]);
+  const categoryContent = categories.find(
+    ([category]) => category === selectedCategory,
+  )?.[1];
 
   return (
-    <Stack vertical fill>
+    <Stack fill vertical g={0} fontSize={fontSize}>
       <Stack.Item>
-        <Stack fill>
-          {props.categoryEntries.map(([category]) => (
-            <Stack.Item key={category} grow basis="content">
-              <Button
-                align="center"
-                fontSize="1.2em"
-                fluid
-                onClick={() => {
-                  const offsetTop = categoryRefs.current[category]?.offsetTop;
-                  if (offsetTop === undefined) {
-                    return;
-                  }
-
-                  const currentSection = sectionRef.current;
-                  if (!currentSection) {
-                    return;
-                  }
-
-                  currentSection.scrollTop = offsetTop;
-                }}
-              >
-                {category}
-              </Button>
-            </Stack.Item>
-          ))}
-        </Stack>
+        <Section fill fitted title={selectedCategory} buttons={buttons} />
       </Stack.Item>
-
-      <Stack.Item
-        grow
-        ref={sectionRef}
-        position="relative"
-        overflowY="scroll"
-        {...props.contentProps}
-      >
-        <Stack vertical fill>
-          {props.categoryEntries.map(([category, children]) => (
-            <div
-              key={category}
-              ref={(ref) => {
-                categoryRefs.current[category] = ref;
-              }}
-            >
-              <Section fill title={category}>
-                {children}
-              </Section>
-            </div>
-          ))}
+      <Stack.Item grow>
+        <Stack fill g={0}>
+          <Stack.Item>
+            <Section fill mr={'-2px'}>
+              <Tabs vertical>
+                {categories.map(([category]) => (
+                  <Tabs.Tab
+                    key={category}
+                    selected={category === selectedCategory}
+                    onClick={() => setSelectedCategory(category)}
+                  >
+                    {category}
+                  </Tabs.Tab>
+                ))}
+              </Tabs>
+            </Section>
+          </Stack.Item>
+          <Stack.Divider />
+          <Stack.Item grow>
+            <Section fill scrollable>
+              <Stack fill vertical className="PreferencesMenu__GamePreferences">
+                {categoryContent}
+              </Stack>
+            </Section>
+          </Stack.Item>
         </Stack>
       </Stack.Item>
     </Stack>

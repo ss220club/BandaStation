@@ -408,3 +408,30 @@ $department_map: (
     height: 26rem;
   }
 }
+
+// MARK: PreferencesPage
+.PreferencesMenu__GamePreferences {
+  &Preference {
+    --preference-background: var(--color-base);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    padding-right: 0.5rem;
+    background-color: hsl(from var(--preference-background) h s calc(l - 2.5));
+    border-radius: var(--border-radius-medium);
+    border: var(--border-thickness-tiny) outset var(--color-border);
+    transition-property: background-color;
+    transition-duration: var(--transition-time-medium);
+
+    &--desc {
+      font-size: 0.8em;
+      color: var(--color-text-translucent);
+    }
+
+    &--control {
+      flex-basis: 33%;
+      justify-content: flex-end;
+    }
+  }
+}

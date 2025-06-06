@@ -62,6 +62,6 @@ function UIStyleInput(
 
 export const UI_style: FeatureChoiced = {
   name: 'Стиль UI',
-  category: 'ИНТЕРФЕЙС',
+  category: 'Интерфейс',
   component: UIStyleInput,
 };

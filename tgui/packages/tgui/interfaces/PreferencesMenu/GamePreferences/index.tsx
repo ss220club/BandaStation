@@ -31,24 +31,26 @@ export function GamePreferenceWindow(props: Props) {
 
   return (
     <Stack fill vertical>
-      <Tabs fluid textAlign="center">
-        <PageButton
-          icon="cogs"
-          currentPage={currentPage}
-          page={GamePreferencesSelectedPage.Settings}
-          setPage={setCurrentPage}
-        >
-          Настройки
-        </PageButton>
-        <PageButton
-          icon="keyboard"
-          currentPage={currentPage}
-          page={GamePreferencesSelectedPage.Keybindings}
-          setPage={setCurrentPage}
-        >
-          Управление
-        </PageButton>
-      </Tabs>
+      <Stack.Item>
+        <Tabs fluid textAlign="center">
+          <PageButton
+            icon="cogs"
+            currentPage={currentPage}
+            page={GamePreferencesSelectedPage.Settings}
+            setPage={setCurrentPage}
+          >
+            Настройки
+          </PageButton>
+          <PageButton
+            icon="keyboard"
+            currentPage={currentPage}
+            page={GamePreferencesSelectedPage.Keybindings}
+            setPage={setCurrentPage}
+          >
+            Управление
+          </PageButton>
+        </Tabs>
+      </Stack.Item>
       <Stack.Item grow>{pageContents}</Stack.Item>
     </Stack>
   );
