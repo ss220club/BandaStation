@@ -100,12 +100,15 @@ function QuirkDisplay(props: QuirkDisplayProps) {
 
   const className = 'PreferencesMenu__QuirksQuirk';
   const [customizationExpanded, setCustomizationExpanded] = useState(false);
-
   const child = (
     <Stack
       fill
       g={0}
-      className={classes([className, getColorValueClass(quirk)])}
+      className={classes([
+        className,
+        getColorValueClass(quirk),
+        failTooltip && 'Unremovable',
+      ])}
       onClick={(event) => {
         event.stopPropagation();
         if (selected) {
@@ -210,12 +213,9 @@ function QuirkPopper(props: QuirkPopperProps) {
       <Box style={{ float: 'right' }}>
         {selected && (
           <Button
-            selected={customizationExpanded}
             icon="cog"
             tooltip="Настроить"
-            style={{
-              float: 'right',
-            }}
+            selected={customizationExpanded}
           />
         )}
       </Box>
@@ -414,7 +414,7 @@ export function QuirksPage(props) {
           <StatDisplay value={balance}>Баланс черт</StatDisplay>
         )}
       </Stack.Item>
-      <Stack.Item grow className="PreferencesMenu__Quirks">
+      <Stack.Item grow className={classes(['PreferencesMenu__Quirks'])}>
         <Section fill scrollable title="Текущие черты">
           <QuirkList
             selected
