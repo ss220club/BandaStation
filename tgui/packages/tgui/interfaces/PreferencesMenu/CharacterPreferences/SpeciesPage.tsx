@@ -11,6 +11,7 @@ import {
   Stack,
   Tooltip,
 } from 'tgui-core/components';
+import { classes } from 'tgui-core/react';
 
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { LoadingScreen } from '../../common/LoadingScreen';
@@ -166,37 +167,21 @@ function Diet(props: DietProps) {
 }
 
 type SpeciesPerkProps = {
-  className: string;
+  color: string;
   perk: Perk;
 };
 
 function SpeciesPerk(props: SpeciesPerkProps) {
-  const { className, perk } = props;
+  const { color, perk } = props;
 
   return (
     <Tooltip
       position="bottom-end"
-      content={
-        <Box>
-          <Box as="b">{perk.name}</Box>
-          <Divider />
-          <Box>{perk.description}</Box>
-        </Box>
-      }
+      content={<Section title={perk.name}>{perk.description}</Section>}
     >
-      <Box className={className} width="32px" height="32px">
-        <Icon
-          name={perk.ui_icon}
-          size={1.5}
-          ml={0}
-          mt={1}
-          style={{
-            textAlign: 'center',
-            height: '100%',
-            width: '100%',
-          }}
-        />
-      </Box>
+      <Stack className={classes([color, 'PreferencesMenu__Species__Perk'])}>
+        <Icon name={perk.ui_icon} size={1.5} />
+      </Stack>
     </Tooltip>
   );
 }
@@ -216,36 +201,30 @@ function SpeciesPerks(props: SpeciesPerksProps) {
   return (
     <Stack.Item>
       <Section title="Черты">
-        <Stack fill justify="space-between">
-          <Stack.Item>
-            <Stack>
-              {positive.map((perk) => {
-                return (
-                  <Stack.Item key={perk.name}>
-                    <SpeciesPerk className="color-bg-green" perk={perk} />
-                  </Stack.Item>
-                );
-              })}
-            </Stack>
-          </Stack.Item>
-          <Stack>
-            {neutral.map((perk) => {
-              return (
-                <Stack.Item key={perk.name}>
-                  <SpeciesPerk className="color-bg-grey" perk={perk} />
-                </Stack.Item>
-              );
-            })}
-          </Stack>
-          <Stack>
-            {negative.map((perk) => {
-              return (
-                <Stack.Item key={perk.name}>
-                  <SpeciesPerk className="color-bg-red" perk={perk} />
-                </Stack.Item>
-              );
-            })}
-          </Stack>
+        <Stack fill justify="center">
+          {positive.map((perk) => {
+            return (
+              <Stack.Item key={perk.name}>
+                <SpeciesPerk color="green" perk={perk} />
+              </Stack.Item>
+            );
+          })}
+          <Stack.Divider />
+          {neutral.map((perk) => {
+            return (
+              <Stack.Item key={perk.name}>
+                <SpeciesPerk color="grey" perk={perk} />
+              </Stack.Item>
+            );
+          })}
+          {negative.length > 0 && <Stack.Divider />}
+          {negative.map((perk) => {
+            return (
+              <Stack.Item key={perk.name}>
+                <SpeciesPerk color="red" perk={perk} />
+              </Stack.Item>
+            );
+          })}
         </Stack>
       </Section>
     </Stack.Item>
