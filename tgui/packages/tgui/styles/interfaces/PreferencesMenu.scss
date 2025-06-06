@@ -252,3 +252,63 @@ $department_map: (
     }
   }
 }
+
+// MARK: QuirksPage
+.PreferencesMenu__Quirks {
+  &Quirk {
+    &.negative {
+      --quirk-background: hsl(from var(--color-bad) h 50 calc(l - 15));
+      --quirk-border: hsl(from var(--quirk-background) h 50 calc(l + 5) / 0.2);
+    }
+
+    &.positive {
+      --quirk-background: hsl(from var(--color-good) h 50 calc(l - 12.5));
+      --quirk-border: hsl(from var(--quirk-background) h 50 calc(l + 5) / 0.2);
+    }
+
+    &.neutral {
+      --quirk-background: hsl(from var(--color-base) h s calc(l + 5));
+      --quirk-border: hsl(from var(--quirk-background) h s calc(l + 5) / 0.1);
+    }
+
+    cursor: var(--cursor-pointer);
+    overflow: hidden;
+    background-color: var(--quirk-background);
+    border: var(--border-thickness-tiny) solid var(--quirk-border);
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 0 0px hsl(from var(--quirk-border) h s l / 0.5);
+    transition-property: transform, box-shadow;
+    transition-duration: var(--transition-time-medium);
+
+    &:hover {
+      transform: translateY(-0.33rem);
+      box-shadow: 0 0.33rem 0 hsl(from var(--quirk-border) h s l / 0.5);
+    }
+
+    &--Icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5rem;
+      background-color: var(--quirk-background2);
+    }
+
+    &--Name {
+      padding: 0.25rem 0.33rem;
+      background-color: var(--quirk-background2);
+    }
+
+    &--Desc {
+      padding: 0.33rem;
+      padding-left: 0.5rem;
+      background-color: hsl(from var(--quirk-background) h s calc(l - 15));
+      border-style: solid;
+      border-width: var(--border-thickness-tiny) 0 0
+        var(--border-thickness-tiny);
+      border-color: hsl(from var(--quirk-border) h s l / 1);
+      border-top-left-radius: var(--border-radius-medium);
+      box-shadow: inset 3px 3px 2px -1px
+        hsl(from var(--quirk-background) h s l / 0.5);
+    }
+  }
+}
