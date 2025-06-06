@@ -63,11 +63,9 @@ function CharacterProfiles(props: ProfileProps) {
 
 export function CharacterPreferenceWindow(props) {
   const { act, data } = useBackend<PreferencesMenuData>();
-
   const [currentPage, setCurrentPage] = useState(Page.Main);
 
   let pageContents;
-
   switch (currentPage) {
     case Page.Antags:
       pageContents = <AntagsPage />;

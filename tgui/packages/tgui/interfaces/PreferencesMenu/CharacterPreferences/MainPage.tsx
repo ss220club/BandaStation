@@ -12,6 +12,7 @@ import {
 } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
+import { capitalize } from 'tgui-core/string';
 
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { RandomizationButton } from '../components/RandomizationButton';
@@ -115,7 +116,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
 
   return (
     <Box
-      className="ChoicedSelection"
+      className="PreferencesMenu__ChoicedSelection"
       style={{
         height: `${
           CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_MULTIPLIER
@@ -127,7 +128,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
         <Stack.Item>
           <Section
             fill
-            title={`Select ${props.name.toLowerCase()}`}
+            title={`${capitalize(props.name)}`}
             buttons={
               supplementalFeature && (
                 <FeatureValueInput
