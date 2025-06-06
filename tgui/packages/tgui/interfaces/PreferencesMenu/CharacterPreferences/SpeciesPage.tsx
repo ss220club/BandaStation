@@ -1,15 +1,16 @@
+import { useSessionStorage } from '@uidotdev/usehooks';
+import { useEffect, useRef, useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import {
-  BlockQuote,
   Box,
   Button,
   Divider,
   Icon,
+  ImageButton,
   Section,
   Stack,
   Tooltip,
 } from 'tgui-core/components';
-import { classes } from 'tgui-core/react';
 
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { LoadingScreen } from '../../common/LoadingScreen';
@@ -85,7 +86,6 @@ type FoodListProps = {
 
 function FoodList(props: FoodListProps) {
   const { food = [], icon, name, className } = props;
-
   if (food.length === 0) {
     return null;
   }
@@ -108,22 +108,24 @@ function FoodList(props: FoodListProps) {
         </Box>
       }
     >
-      <Stack ml={2}>
-        {food.map((food) => {
-          return (
-            FOOD_ICONS[food] && (
-              <Stack.Item>
-                <Icon
-                  className={className}
-                  size={1.4}
-                  key={food}
-                  name={FOOD_ICONS[food]}
-                />
-              </Stack.Item>
-            )
-          );
-        })}
-      </Stack>
+      <Stack.Item>
+        <Stack>
+          {food.map((food) => {
+            return (
+              FOOD_ICONS[food] && (
+                <Stack.Item>
+                  <Icon
+                    className={className}
+                    size={1.4}
+                    key={food}
+                    name={FOOD_ICONS[food]}
+                  />
+                </Stack.Item>
+              )
+            );
+          })}
+        </Stack>
+      </Stack.Item>
     </Tooltip>
   );
 }
@@ -139,35 +141,26 @@ function Diet(props: DietProps) {
   }
 
   const { liked_food, disliked_food, toxic_food } = diet;
-
   return (
-    <Stack>
-      <Stack.Item>
-        <FoodList
-          food={liked_food}
-          icon="heart"
-          name="Любимая пища"
-          className="color-pink"
-        />
-      </Stack.Item>
-
-      <Stack.Item>
-        <FoodList
-          food={disliked_food.filter(notIn(IGNORE_UNLESS_LIKED))}
-          icon="thumbs-down"
-          name="Нелюбимая пища"
-          className="color-red"
-        />
-      </Stack.Item>
-
-      <Stack.Item>
-        <FoodList
-          food={toxic_food.filter(notIn(IGNORE_UNLESS_LIKED))}
-          icon="biohazard"
-          name="Токсичная пища"
-          className="color-olive"
-        />
-      </Stack.Item>
+    <Stack g={4}>
+      <FoodList
+        food={liked_food}
+        icon="heart"
+        name="Любимая пища"
+        className="color-pink"
+      />
+      <FoodList
+        food={disliked_food.filter(notIn(IGNORE_UNLESS_LIKED))}
+        icon="thumbs-down"
+        name="Нелюбимая пища"
+        className="color-red"
+      />
+      <FoodList
+        food={toxic_food.filter(notIn(IGNORE_UNLESS_LIKED))}
+        icon="biohazard"
+        name="Токсичная пища"
+        className="color-olive"
+      />
     </Stack>
   );
 }
@@ -214,41 +207,48 @@ type SpeciesPerksProps = {
 
 function SpeciesPerks(props: SpeciesPerksProps) {
   const { positive, negative, neutral } = props.perks;
+  const empty =
+    positive.length === 0 && negative.length === 0 && neutral.length === 0;
+  if (empty) {
+    return null;
+  }
 
   return (
-    <Stack fill justify="space-between">
-      <Stack.Item>
-        <Stack>
-          {positive.map((perk) => {
-            return (
-              <Stack.Item key={perk.name}>
-                <SpeciesPerk className="color-bg-green" perk={perk} />
-              </Stack.Item>
-            );
-          })}
+    <Stack.Item>
+      <Section title="Черты">
+        <Stack fill justify="space-between">
+          <Stack.Item>
+            <Stack>
+              {positive.map((perk) => {
+                return (
+                  <Stack.Item key={perk.name}>
+                    <SpeciesPerk className="color-bg-green" perk={perk} />
+                  </Stack.Item>
+                );
+              })}
+            </Stack>
+          </Stack.Item>
+          <Stack>
+            {neutral.map((perk) => {
+              return (
+                <Stack.Item key={perk.name}>
+                  <SpeciesPerk className="color-bg-grey" perk={perk} />
+                </Stack.Item>
+              );
+            })}
+          </Stack>
+          <Stack>
+            {negative.map((perk) => {
+              return (
+                <Stack.Item key={perk.name}>
+                  <SpeciesPerk className="color-bg-red" perk={perk} />
+                </Stack.Item>
+              );
+            })}
+          </Stack>
         </Stack>
-      </Stack.Item>
-
-      <Stack>
-        {neutral.map((perk) => {
-          return (
-            <Stack.Item key={perk.name}>
-              <SpeciesPerk className="color-bg-grey" perk={perk} />
-            </Stack.Item>
-          );
-        })}
-      </Stack>
-
-      <Stack>
-        {negative.map((perk) => {
-          return (
-            <Stack.Item key={perk.name}>
-              <SpeciesPerk className="color-bg-red" perk={perk} />
-            </Stack.Item>
-          );
-        })}
-      </Stack>
-    </Stack>
+      </Section>
+    </Stack.Item>
   );
 }
 
@@ -277,97 +277,144 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
     return speciesKey === data.character_preferences.misc.species;
   })[0][1];
 
-  return (
-    <Stack vertical fill>
-      <Stack.Item>
-        <Button icon="arrow-left" onClick={props.handleClose}>
-          Вернуться
-        </Button>
-      </Stack.Item>
+  function SpeciesInfo(props) {
+    return (
+      <Stack fill vertical>
+        <Stack.Item basis="50%">
+          <Section
+            fill
+            scrollable
+            title={
+              <Stack fill align="center">
+                <Stack.Item>
+                  <Button icon="arrow-left" onClick={props.onHandleClose} />
+                </Stack.Item>
+                <Stack.Item grow>{currentSpecies.name}</Stack.Item>
+                {currentSpecies.diet && (
+                  <Stack.Item>
+                    <Diet diet={currentSpecies.diet} />
+                  </Stack.Item>
+                )}
+              </Stack>
+            }
+          >
+            {currentSpecies.desc}
+          </Section>
+        </Stack.Item>
+        <SpeciesPerks perks={currentSpecies.perks} />
+        <Stack.Item basis="50%">
+          <Section fill scrollable title="История">
+            {currentSpecies.lore.map((text, index) => (
+              <Box key={index} color="label">
+                {text}
+              </Box>
+            ))}
+          </Section>
+        </Stack.Item>
+      </Stack>
+    );
+  }
 
+  function SpeciesSelection(props) {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
+    const [savedScroll, setSavedScroll] = useSessionStorage(
+      'species-scroll',
+      0,
+    );
+
+    function makeScroll(amount: number, fast?: boolean) {
+      const speciesContainer = scrollRef.current;
+      speciesContainer?.scrollBy({
+        left: amount,
+        behavior: fast ? 'instant' : 'smooth',
+      });
+    }
+
+    useEffect(() => {
+      const speciesContainer = scrollRef.current;
+      makeScroll(savedScroll, true);
+      checkScroll();
+
+      function checkScroll() {
+        if (!speciesContainer) {
+          return;
+        }
+
+        setCanScrollLeft(speciesContainer.scrollLeft > 0);
+        setCanScrollRight(
+          speciesContainer.scrollLeft + speciesContainer.clientWidth <
+            speciesContainer.scrollWidth,
+        );
+        setSavedScroll(speciesContainer.scrollLeft || 0);
+      }
+
+      speciesContainer?.addEventListener('scrollend', checkScroll);
+      return () => {
+        speciesContainer?.removeEventListener('scrollend', checkScroll);
+      };
+    }, []);
+
+    const scrollSize = 220;
+    return (
+      <Stack justify="center">
+        {canScrollLeft && (
+          <Stack.Item
+            className="PreferencesMenu__Species__OverflowButton left"
+            onClick={() => makeScroll(-scrollSize)}
+          >
+            <Icon name="angle-left" size={5} />
+          </Stack.Item>
+        )}
+        <div ref={scrollRef} className="PreferencesMenu__Species">
+          {species.map(([speciesKey, species]) => {
+            return (
+              <Stack.Item key={speciesKey}>
+                <ImageButton
+                  tooltip={species.name}
+                  selected={
+                    data.character_preferences.misc.species === speciesKey
+                  }
+                  asset={['species64x64', species.icon]}
+                  assetSize={64}
+                  imageSize={72}
+                  onClick={() => setSpecies(speciesKey)}
+                >
+                  {species.name}
+                </ImageButton>
+              </Stack.Item>
+            );
+          })}
+        </div>
+        {canScrollRight && (
+          <Stack.Item
+            className="PreferencesMenu__Species__OverflowButton right"
+            onClick={() => makeScroll(scrollSize)}
+          >
+            <Icon name="angle-right" size={5} />
+          </Stack.Item>
+        )}
+      </Stack>
+    );
+  }
+
+  return (
+    <Stack fill vertical>
       <Stack.Item grow>
         <Stack fill>
-          <Stack.Item>
-            <Box height="calc(100vh - 170px)" overflowY="auto" pr={3}>
-              {species.map(([speciesKey, species]) => {
-                return (
-                  <Button
-                    key={speciesKey}
-                    onClick={() => setSpecies(speciesKey)}
-                    selected={
-                      data.character_preferences.misc.species === speciesKey
-                    }
-                    tooltip={species.name}
-                    style={{
-                      display: 'block',
-                      height: '64px',
-                      width: '64px',
-                    }}
-                  >
-                    <Box
-                      className={classes(['species64x64', species.icon])}
-                      ml={-1}
-                    />
-                  </Button>
-                );
-              })}
-            </Box>
-          </Stack.Item>
-
           <Stack.Item grow>
-            <Box>
-              <Box>
-                <Stack fill>
-                  <Stack.Item width="70%">
-                    <Section
-                      title={currentSpecies.name}
-                      buttons={
-                        // NOHUNGER species have no diet (diet = null),
-                        // so we have nothing to show
-                        currentSpecies.diet && (
-                          <Diet diet={currentSpecies.diet} />
-                        )
-                      }
-                    >
-                      <Section title="Описание вида">
-                        {currentSpecies.desc}
-                      </Section>
-
-                      <Section title="Черты">
-                        <SpeciesPerks perks={currentSpecies.perks} />
-                      </Section>
-                    </Section>
-                  </Stack.Item>
-
-                  <Stack.Item width="30%">
-                    <CharacterPreview
-                      id={data.character_preview_view}
-                      height="100%"
-                    />
-                  </Stack.Item>
-                </Stack>
-              </Box>
-
-              <Box mt={1}>
-                <Section title="История">
-                  <BlockQuote>
-                    {currentSpecies.lore.map((text, index) => (
-                      <Box key={index} maxWidth="100%">
-                        {text}
-                        {index !== currentSpecies.lore.length - 1 && (
-                          <>
-                            <br />
-                            <br />
-                          </>
-                        )}
-                      </Box>
-                    ))}
-                  </BlockQuote>
-                </Section>
-              </Box>
-            </Box>
+            <SpeciesInfo onHandleClose={props.handleClose} />
+          </Stack.Item>
+          <Stack.Item>
+            <CharacterPreview id={data.character_preview_view} height="100%" />
           </Stack.Item>
         </Stack>
+      </Stack.Item>
+      <Stack.Item>
+        <Section fill overflow="hidden">
+          <SpeciesSelection />
+        </Section>
       </Stack.Item>
     </Stack>
   );

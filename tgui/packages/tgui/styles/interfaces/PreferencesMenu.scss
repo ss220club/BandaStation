@@ -15,136 +15,138 @@ $department_map: (
 );
 
 // MARK: JobPage
-.PreferencesMenu__Department {
-  --button-width: 40px;
-  --button-gap: 0.25rem;
-  overflow: hidden;
-
-  &.head .job-name {
-    font-weight: bold;
-  }
-
-  .job-name {
+.PreferencesMenu {
+  &__Department {
+    --button-width: 40px;
+    --button-gap: 0.25rem;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: 1.1;
-    padding: 0.2em 0.33em;
-    text-shadow: 1px 1px 0px black;
-  }
 
-  .options {
-    display: flex;
-    gap: var(--button-gap);
-    padding: 2px;
-    text-align: right;
-
-    .Button {
-      display: inline-flex;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
-      transition: transform var(--transition-time-medium);
-      transition-delay: var(--transition-time-medium);
-      z-index: 0;
+    &.head .job-name {
+      font-weight: bold;
     }
-  }
 
-  &:first-child {
-    border-radius: var(--border-radius-medium) var(--border-radius-medium) 0 0;
-  }
+    .job-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      line-height: 1.1;
+      padding: 0.2em 0.33em;
+      text-shadow: 1px 1px 0px black;
+    }
 
-  &:last-child {
-    border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
-  }
-
-  &:only-child {
-    border-radius: var(--border-radius-medium);
-  }
-
-  @each $department-name, $color in $department_map {
-    &--#{$department-name} {
-      background: $color;
-      border: var(--border-thickness-tiny) outset;
-      border-color: hsl(from $color h s calc(l + 10));
-
-      &.head {
-        background: hsl(from $color h s calc(l - 7.5));
-      }
+    .options {
+      display: flex;
+      gap: var(--button-gap);
+      padding: 2px;
+      text-align: right;
 
       .Button {
-        $button-color: hsl(from $color h s calc(l - 7.5));
-        $button-color-off: hsl(from $button-color h s calc(l - 7.5));
+        display: inline-flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        transition: transform var(--transition-time-medium);
+        transition-delay: var(--transition-time-medium);
+        z-index: 0;
+      }
+    }
 
-        &:after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-color: $button-color;
-          border-radius: var(--border-radius-tiny);
-          z-index: -1;
+    &:first-child {
+      border-radius: var(--border-radius-medium) var(--border-radius-medium) 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+    }
+
+    &:only-child {
+      border-radius: var(--border-radius-medium);
+    }
+
+    @each $department-name, $color in $department_map {
+      &--#{$department-name} {
+        background: $color;
+        border: var(--border-thickness-tiny) outset;
+        border-color: hsl(from $color h s calc(l + 10));
+
+        &.head {
+          background: hsl(from $color h s calc(l - 7.5));
         }
 
-        &:hover:not(.selected):after {
-          background-color: $color;
-          border: 1px solid $button-color-off;
-        }
+        .Button {
+          $button-color: hsl(from $color h s calc(l - 7.5));
+          $button-color-off: hsl(from $button-color h s calc(l - 7.5));
 
-        &.off.selected:after {
-          background-color: $button-color-off !important;
-        }
+          &:after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: $button-color;
+            border-radius: var(--border-radius-tiny);
+            z-index: -1;
+          }
 
-        &:before {
-          content: '';
-          position: absolute;
-          inset: calc(-1 * var(--button-gap));
-          background-color: $color;
-          z-index: -2;
+          &:hover:not(.selected):after {
+            background-color: $color;
+            border: 1px solid $button-color-off;
+          }
+
+          &.off.selected:after {
+            background-color: $button-color-off !important;
+          }
+
+          &:before {
+            content: '';
+            position: absolute;
+            inset: calc(-1 * var(--button-gap));
+            background-color: $color;
+            z-index: -2;
+          }
         }
       }
     }
+
+    &--Captain {
+      box-shadow: var(--shadow-glow-small) -1px var(--color-gold);
+    }
   }
 
-  &--Captain {
-    box-shadow: var(--shadow-glow-small) -1px var(--color-gold);
-  }
-}
+  &__Priority {
+    position: relative;
 
-&__Priority {
-  position: relative;
-
-  &:hover .PreferencesMenu__PriorityButton {
-    transform: translateX(
-      calc(
-        -1 * (var(--button-width) - var(--button-gap) * -1) *
-          var(--button-position)
-      )
-    );
-  }
-
-  &Button {
-    width: var(--button-width);
-
-    &:not(.selected) {
-      position: absolute;
+    &:hover .PreferencesMenu__PriorityButton {
+      transform: translateX(
+        calc(
+          -1 * (var(--button-width) - var(--button-gap) * -1) *
+            var(--button-position)
+        )
+      );
     }
 
-    &.selected {
-      cursor: var(--cursor-default);
-      z-index: 1 !important;
+    &Button {
+      width: var(--button-width);
 
-      &.low:after {
-        background-color: var(--color-bad) !important;
+      &:not(.selected) {
+        position: absolute;
       }
 
-      &.mid:after {
-        background-color: var(--color-average) !important;
-      }
+      &.selected {
+        cursor: var(--cursor-default);
+        z-index: 1 !important;
 
-      &.high:after {
-        background-color: hsl(
-          from var(--color-good) h s calc(l + 5)
-        ) !important;
+        &.low:after {
+          background-color: var(--color-bad) !important;
+        }
+
+        &.mid:after {
+          background-color: var(--color-average) !important;
+        }
+
+        &.high:after {
+          background-color: hsl(
+            from var(--color-good) h s calc(l + 5)
+          ) !important;
+        }
       }
     }
   }
@@ -311,6 +313,49 @@ $department_map: (
 
     &.Unremovable {
       border-color: var(--color-red);
+    }
+  }
+}
+
+// MARK: SpeciesPage
+.PreferencesMenu__Species {
+  overflow: hidden;
+  display: flex;
+  gap: 0.5rem;
+
+  &__OverflowButton {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    background-color: hsl(from var(--color-base) h s 7.5 / 0.66);
+    box-shadow: var(--shadow-direction) 0 0.66rem hsla(0, 0%, 0%, 0.5);
+    backdrop-filter: var(--blur-medium);
+    z-index: 3;
+
+    &.left {
+      --shadow-direction: 0.5rem;
+      left: 0;
+    }
+
+    &.right {
+      --shadow-direction: -0.5rem;
+      right: 0;
+    }
+
+    i {
+      opacity: 0.5;
+    }
+
+    &:hover {
+      cursor: var(--cursor-pointer);
+
+      i {
+        opacity: 1;
+      }
     }
   }
 }
