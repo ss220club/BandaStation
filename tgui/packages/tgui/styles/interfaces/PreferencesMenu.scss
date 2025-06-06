@@ -14,6 +14,7 @@ $department_map: (
   'Justice': hsl(325, 80%, 40%),
 );
 
+// MARK: JobPage
 .PreferencesMenu {
   &__Department {
     --button-width: 40px;
@@ -146,6 +147,90 @@ $department_map: (
             from var(--color-good) h s calc(l + 5)
           ) !important;
         }
+      }
+    }
+  }
+}
+
+// MARK: AntagsPage
+.PreferencesMenu__AntagsSelection {
+  --cell-size: 9.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--cell-size), 1fr));
+  grid-template-rows: repeat(
+    auto-fill,
+    calc(var(--cell-size) + var(--border-thickness-small) * 10)
+  );
+  align-items: stretch;
+
+  &__Antag {
+    cursor: var(--cursor-pointer);
+    align-items: center;
+    width: 100%;
+
+    &.on {
+      --antag-border: var(--color-good);
+    }
+
+    &.off,
+    &.banned {
+      --antag-border: var(--color-bad);
+    }
+
+    &Name {
+      text-align: center;
+    }
+
+    &Icon {
+      transform-origin: bottom;
+      transition-property: transform, filter;
+      transition-duration: var(--transition-time-medium);
+
+      &--wrapper {
+        overflow: hidden;
+        position: relative;
+        border: var(--border-thickness-small) solid var(--antag-border);
+        border-radius: var(--border-radius-circular);
+        box-shadow: var(--shadow-glow-medium) -1px var(--antag-border);
+        transition-property: border-color, box-shadow, transform;
+        transition-duration: var(--transition-time-medium);
+      }
+    }
+
+    &:not(.banned):hover &Icon {
+      filter: drop-shadow(0 0 0.5rem var(--antag-border));
+      transform: scale(1.1);
+
+      &--wrapper {
+        transform: translateY(-0.25rem);
+      }
+    }
+
+    &Ban {
+      position: absolute;
+      inset: 0;
+      background-color: hsl(from var(--color-bad) h s l / 0.25);
+      z-index: 1;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-self: center;
+        width: 100%;
+        height: var(--border-thickness-medium);
+        background-color: var(--color-bad);
+        box-shadow: var(--shadow-glow-small) var(--color-black);
+      }
+
+      &:before {
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        transform: rotate(-45deg);
       }
     }
   }
