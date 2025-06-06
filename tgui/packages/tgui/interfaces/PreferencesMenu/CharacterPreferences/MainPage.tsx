@@ -84,13 +84,13 @@ function CharacterControls(props: CharacterControlsProps) {
 
       <Stack.Item>
         <Button
-          onClick={props.handleDeleteCharacter}
           fontSize="22px"
           icon="trash"
           color="red"
           tooltip="Удалить персонажа"
           tooltipPosition="top"
           disabled={!props.canDeleteCharacter}
+          onClick={props.handleDeleteCharacter}
         />
       </Stack.Item>
     </Stack>

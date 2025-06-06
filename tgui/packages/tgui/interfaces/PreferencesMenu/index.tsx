@@ -19,11 +19,12 @@ import { RandomToggleState } from './useRandomToggleState';
 import { ServerPrefs } from './useServerPrefs';
 
 export function PreferencesMenu(props) {
+  const [title, setTitle] = useState('');
   return (
-    <Window width={900} height={730}>
+    <Window width={900} height={730} title={title}>
       <Window.Content>
         <Suspense fallback={<LoadingScreen />}>
-          <PrefsWindowInner />
+          <PrefsWindowInner setTitle={setTitle} />
         </Suspense>
       </Window.Content>
     </Window>
@@ -34,6 +35,7 @@ export function PreferencesMenu(props) {
 function PrefsWindowInner(props) {
   const { data } = useBackend<PreferencesMenuData>();
   const { window } = data;
+  const { setTitle } = props;
 
   const [serverData, setServerData] = useState<ServerData>();
   const randomization = useState(false);
@@ -72,6 +74,7 @@ function PrefsWindowInner(props) {
       });
   }, []);
 
+  setTitle(title);
   return (
     <ServerPrefs.Provider value={serverData}>
       <RandomToggleState.Provider value={randomization}>

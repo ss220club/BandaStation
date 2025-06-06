@@ -239,14 +239,14 @@ function Department(props: DepartmentProps) {
       {jobsForDepartment.map(([jobName, job]) => {
         return (
           <JobRow
+            key={jobName}
+            name={jobName}
+            job={job}
             className={classes([
               className,
               `${className}--${name.replace(' ', '')}`,
               jobName === department.head && 'head',
             ])}
-            key={name}
-            job={job}
-            name={jobName}
           />
         );
       })}
