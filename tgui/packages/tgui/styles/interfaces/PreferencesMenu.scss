@@ -358,4 +358,13 @@ $department_map: (
       }
     }
   }
+
+  &__History {
+    color: var(--color-label);
+    margin-bottom: 1lh;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }

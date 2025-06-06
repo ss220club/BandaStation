@@ -305,7 +305,7 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
         <Stack.Item basis="50%">
           <Section fill scrollable title="История">
             {currentSpecies.lore.map((text, index) => (
-              <Box key={index} color="label">
+              <Box key={index} className="PreferencesMenu__Species__History">
                 {text}
               </Box>
             ))}
