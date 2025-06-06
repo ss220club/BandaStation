@@ -265,7 +265,7 @@
 	spawning = TRUE
 
 	mind.active = FALSE //we wish to transfer the key manually
-	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination, mind.late_joiner)  // BANDASTATION EDIT
+	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination, mind.late_joiner)  // BANDASTATION EDIT - Pref Job Slots
 	if(QDELETED(src) || !HAS_CONNECTED_PLAYER(src))
 		return // Disconnected while checking for the appearance ban.
 

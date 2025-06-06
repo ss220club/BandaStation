@@ -13,7 +13,7 @@ import {
   PreferencesMenuData,
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
-import { JobSlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD
+import { JobSlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD - Pref Job Slots
 
 function sortJobs(entries: [string, Job][], head?: string) {
   return sortBy(
@@ -229,7 +229,7 @@ function JobRow(props: JobRowProps) {
     );
   } else {
     rightSide = (
-      // BANDASTATION EDIT - Start
+      // BANDASTATION EDIT - Start - Pref Job Slots
       <Stack align="center" justify="flex-end" height="100%" pr={1}>
         <JobSlotDropdown name={name} />
         <PriorityButtons
@@ -238,7 +238,7 @@ function JobRow(props: JobRowProps) {
           priority={priority}
         />
       </Stack>
-      // BANDASTATION EDIT - End
+      // BANDASTATION EDIT - End - Pref Job Slots
     );
   }
 
