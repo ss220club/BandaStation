@@ -179,6 +179,7 @@ $department_map: (
 
     &Name {
       text-align: center;
+      font-weight: bold;
     }
 
     &Icon {
@@ -209,19 +210,18 @@ $department_map: (
     &Ban {
       position: absolute;
       inset: 0;
-      background-color: hsl(from var(--color-bad) h s l / 0.25);
+      display: flex;
+      align-items: center;
+      background-color: hsl(from var(--antag-border) h s l / 0.25);
       z-index: 1;
 
       &:before,
       &:after {
         content: '';
         position: absolute;
-        inset: 0;
-        display: flex;
-        align-self: center;
         width: 100%;
         height: var(--border-thickness-medium);
-        background-color: var(--color-bad);
+        background-color: var(--antag-border);
         box-shadow: var(--shadow-glow-small) var(--color-black);
       }
 
@@ -231,6 +231,23 @@ $department_map: (
 
       &:after {
         transform: rotate(-45deg);
+      }
+    }
+
+    &DaysLeft {
+      position: absolute;
+      inset: 0;
+      gap: 0.25rem;
+      height: 3.5rem;
+      align-self: center;
+      justify-content: center;
+      text-align: center;
+      background-color: hsl(from var(--antag-border) h s calc(l - 25));
+      box-shadow: var(--shadow-glow-medium) var(--antag-border);
+      z-index: 2;
+
+      div:last-child {
+        font-size: 1.33rem;
       }
     }
   }

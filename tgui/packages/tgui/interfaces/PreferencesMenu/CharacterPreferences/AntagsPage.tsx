@@ -109,7 +109,7 @@ function AntagSelection(props: AntagSelectionProps) {
               position="bottom"
               content={
                 isBanned
-                  ? `You are banned from ${antagonist.name}.`
+                  ? `У вас бан на ${antagonist.name}.`
                   : antagonist.description.map((text, index) => {
                       return (
                         <div key={antagonist.key + index}>
@@ -154,9 +154,14 @@ function AntagSelection(props: AntagSelectionProps) {
                   />
                   {isBanned && <div className={`${className}__AntagBan`} />}
                   {daysLeft > 0 && (
-                    <Stack.Item className={`${className}__AntagDaysLeft`}>
-                      <b>{daysLeft}</b> days left
-                    </Stack.Item>
+                    <Stack
+                      fill
+                      vertical
+                      className={`${className}__AntagDaysLeft`}
+                    >
+                      <Stack.Item>Осталось дней</Stack.Item>
+                      <Stack.Item bold>{daysLeft}</Stack.Item>
+                    </Stack>
                   )}
                 </Stack.Item>
                 <Stack.Item className={`${className}__AntagName`}>
