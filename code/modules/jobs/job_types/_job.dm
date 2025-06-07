@@ -528,7 +528,7 @@
 	if(!player_client)
 		return // Disconnected while checking for the appearance ban.
 
-	var/randomise_job_slot = player_client.prefs.set_assigned_slot(job.title, player_client.mob.mind?.late_joiner)  // BANDASTATION ADD - Pref Job Slots
+	var/randomise_job_slot = player_client.prefs.set_assigned_slot(job.title, player_client.mob?.mind?.late_joiner)  // BANDASTATION ADD - Pref Job Slots
 	var/human_authority_setting = CONFIG_GET(string/human_authority)
 	var/require_human = FALSE
 
