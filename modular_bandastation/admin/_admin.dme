@@ -2,3 +2,5 @@
 
 #include "code/admin_verbs.dm"
 #include "code/admin_hotkeys.dm"
+#include "code/admin_panels.dm"
+#include "code/assets.dm"
