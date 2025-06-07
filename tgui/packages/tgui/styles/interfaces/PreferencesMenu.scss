@@ -41,6 +41,15 @@ $department_map: (
     &.Sidebar .Tabs {
       margin-right: calc(-1 * var(--space-m) - var(--border-thickness-small));
     }
+
+    &Search {
+      font-size: 0.66em;
+      align-self: center;
+
+      .Input {
+        font-size: 1em;
+      }
+    }
   }
 
   &__Content {
@@ -89,7 +98,7 @@ $department_map: (
       height: 1.667em;
       aspect-ratio: 1 / 1;
       border-radius: var(--border-radius-small);
-      outline: 1px solid hsla(0, 0%, 0%, 0.75);
+      border: 2px solid hsla(0, 0%, 0%, 0.5);
       transform: scale(0.75);
     }
 

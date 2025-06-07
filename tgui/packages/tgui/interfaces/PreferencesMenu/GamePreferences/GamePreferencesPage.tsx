@@ -8,7 +8,7 @@ import { FeatureValueInput } from '../preferences/features/base';
 import { PreferencesMenuData } from '../types';
 import { TabbedMenu } from './TabbedMenu';
 
-type PreferenceChild = {
+export type PreferenceChild = {
   name: string;
   children: ReactNode;
 };
@@ -75,11 +75,13 @@ export function GamePreferencesPage(props) {
     );
   }
 
-  const gamePreferenceEntries: [string, ReactNode][] = sortByName(
+  const gamePreferenceEntries: [string, PreferenceChild[]][] = sortByName(
     Object.entries(gamePreferences),
   ).map(([category, preferences]) => {
-    return [category, preferences.map((entry) => entry.children)];
+    return [category, preferences.map((entry) => entry)];
   });
+
+  console.log(gamePreferenceEntries);
 
   return (
     <Stack fill vertical>
