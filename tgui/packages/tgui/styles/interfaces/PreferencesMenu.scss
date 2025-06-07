@@ -25,43 +25,6 @@ $department_map: (
   --comp-size: 1.667em;
   --comp-size-border: calc(var(--comp-size) * 0.1);
 
-  &__Section {
-    --section-separator-thickness: 0;
-    background-color: var(--color-section);
-
-    .Section__title {
-      text-align: right;
-      padding: 0.5rem 1rem;
-      padding-left: 0.75rem;
-
-      &Text {
-        font-size: 2rem;
-        color: hsl(from var(--color-primary) h s calc(l + var(--adjust-color)));
-      }
-    }
-
-    &.Sidebar .Tabs {
-      margin-right: calc(-1 * var(--space-m) - var(--border-thickness-small));
-    }
-
-    &Search {
-      font-size: 0.66em;
-      align-self: center;
-
-      .Input {
-        font-size: 1em;
-      }
-    }
-  }
-
-  &__Content {
-    border: var(--border-thickness-small) solid
-      hsl(from var(--color-primary) h s l / 0.75);
-    box-shadow: inset 0.25rem 0.25rem 0.5rem -0.25rem var(--color-primary);
-    border-bottom: none;
-    border-right: none;
-  }
-
   .Toggle {
     cursor: var(--cursor-pointer);
     align-items: center;
@@ -112,29 +75,56 @@ $department_map: (
     }
   }
 
-  .Dropdown {
-    flex: 1;
+  &__Section {
+    --section-separator-thickness: 0;
+    background-color: var(--color-section);
+
+    .Section__title {
+      text-align: right;
+      padding: 0.5rem 1rem;
+      padding-left: 0.75rem;
+
+      &Text {
+        font-size: 2rem;
+        color: hsl(from var(--color-primary) h s calc(l + var(--adjust-color)));
+      }
+    }
+
+    &.Sidebar .Tabs {
+      padding-top: var(--space-ml);
+      margin-right: calc(-1 * var(--space-m) - var(--border-thickness-small));
+    }
+
+    &Search {
+      font-size: 0.66em;
+      align-self: center;
+
+      .Input {
+        font-size: 1em;
+      }
+    }
+  }
+
+  &__Content {
+    border: var(--border-thickness-small) solid
+      hsl(from var(--color-primary) h s l / 0.75);
+    border-bottom: none;
+    border-right: none;
+    box-shadow: inset 0.25rem 0.25rem 0.5rem -0.25rem var(--color-primary);
   }
 
   &__Preference {
     user-select: none;
-    display: flex;
     align-items: center;
-    padding: 0.5rem 0.75rem;
-    padding-right: 0.5rem;
+    padding: 0.5rem;
     background-color: hsl(from var(--pref-background) h s calc(l - 2.5));
     border-radius: var(--border-radius-medium);
     border: var(--border-thickness-tiny) solid var(--pref-border);
-    transition-property: background-color;
-    transition-duration: var(--transition-time-medium);
+    transition: background-color var(--transition-time-medium);
 
     &--desc {
       font-size: 0.8em;
       color: var(--color-text-translucent);
-    }
-
-    &--control {
-      justify-content: flex-end;
     }
 
     &--Preferences {
@@ -199,8 +189,7 @@ $department_map: (
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      line-height: 1.1;
-      padding: 0.2em 0.33em;
+      padding: var(--space-s) var(--space-m);
       text-shadow: 1px 1px 0px black;
     }
 
@@ -235,12 +224,12 @@ $department_map: (
 
     @each $department-name, $color in $department_map {
       &--#{$department-name} {
-        background: $color;
+        background-color: $color;
         border: var(--border-thickness-tiny) outset;
         border-color: hsl(from $color h s calc(l + 10));
 
         &.head {
-          background: hsl(from $color h s calc(l - 7.5));
+          background-color: hsl(from $color h s calc(l - 7.5));
         }
 
         .Button {
@@ -262,7 +251,7 @@ $department_map: (
           }
 
           &.off.selected:after {
-            background-color: $button-color-off !important;
+            background-color: $button-color-off;
           }
 
           &:before {
@@ -274,10 +263,6 @@ $department_map: (
           }
         }
       }
-    }
-
-    &--Captain {
-      box-shadow: var(--shadow-glow-small) -1px var(--color-gold);
     }
   }
 
@@ -314,7 +299,7 @@ $department_map: (
 
         &.high:after {
           background-color: hsl(
-            from var(--color-good) h s calc(l + 5)
+            from var(--color-good) h s calc(l + var(--adjust-color))
           ) !important;
         }
       }
@@ -326,12 +311,12 @@ $department_map: (
 .PreferencesMenu__AntagsSelection {
   --cell-size: 9.75rem;
   display: grid;
+  align-items: stretch;
   grid-template-columns: repeat(auto-fill, minmax(var(--cell-size), 1fr));
   grid-template-rows: repeat(
     auto-fill,
     calc(var(--cell-size) + var(--border-thickness-small) * 10)
   );
-  align-items: stretch;
 
   &__Antag {
     cursor: var(--cursor-pointer);
@@ -445,7 +430,6 @@ $department_map: (
     background-color: var(--quirk-background);
     border: var(--border-thickness-tiny) solid var(--quirk-border);
     border-radius: var(--border-radius-medium);
-    box-shadow: 0 0 0px hsl(from var(--quirk-border) h s l / 0.5);
     transition-property: transform, box-shadow;
     transition-duration: var(--transition-time-medium);
 
@@ -464,7 +448,7 @@ $department_map: (
     }
 
     &--Name {
-      padding: 0.25rem 0.33rem;
+      padding: 0.25rem 0.5rem;
       background-color: var(--quirk-background2);
     }
 
@@ -473,16 +457,14 @@ $department_map: (
       padding-left: 0.5rem;
       background-color: hsl(from var(--quirk-background) h s calc(l - 15));
       border-style: solid;
-      border-width: var(--border-thickness-tiny) 0 0
-        var(--border-thickness-tiny);
-      border-color: hsl(from var(--quirk-border) h s l / 1);
+      border-width: 1px 0 0 1px;
+      border-color: hsl(from var(--quirk-border) h s calc(l + 7.5) / 1);
       border-top-left-radius: var(--border-radius-medium);
-      box-shadow: inset 3px 3px 2px -1px
-        hsl(from var(--quirk-background) h s l / 0.5);
+      box-shadow: inset 3px 3px 2px -1px hsla(0, 0%, 0%, 0.25);
     }
 
     &.Unremovable {
-      border-color: var(--color-red);
+      --quirk-border: var(--color-red);
     }
   }
 }
@@ -498,9 +480,9 @@ $department_map: (
   }
 
   &__OverflowButton {
+    cursor: var(--cursor-pointer);
     position: absolute;
-    top: 0;
-    bottom: 0;
+    inset: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -524,12 +506,8 @@ $department_map: (
       opacity: 0.5;
     }
 
-    &:hover {
-      cursor: var(--cursor-pointer);
-
-      i {
-        opacity: 1;
-      }
+    &:hover i {
+      opacity: 1;
     }
   }
 

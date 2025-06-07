@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Stack } from 'tgui-core/components';
-import { classes } from 'tgui-core/react';
 
 type PreferenceProps = {
   id: string;
@@ -16,7 +15,7 @@ export function Preference(props: PreferenceProps) {
 
   return (
     <Stack key={id} className={className}>
-      <Stack.Item grow>
+      <Stack.Item grow ml={0.5}>
         <Stack vertical g={0}>
           <Stack.Item className={`${className}--name`}>{name || id}</Stack.Item>
           {description && (
@@ -27,10 +26,8 @@ export function Preference(props: PreferenceProps) {
         </Stack>
       </Stack.Item>
       <Stack
-        className={classes([
-          `${className}--control`,
-          `${className}--${childrenClassName || 'Preferences'}`,
-        ])}
+        justify="end"
+        className={`${className}--${childrenClassName || 'Preferences'}`}
       >
         {children}
       </Stack>
