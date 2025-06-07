@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../base.scss';
 
 $department_map: (
   'Assistant': var(--color-gray),
@@ -398,75 +399,131 @@ $department_map: (
 }
 
 // MARK: MainPage {
-.PreferencesMenu__ChoicedSelection {
-  padding: var(--space-m);
-  background-color: var(--color-base);
-  box-shadow: 0 0.5em 1em hsla(0, 0%, 0%, 0.5);
+.PreferencesMenu {
+  --pref-background: var(--color-base);
+  --pref-border: hsl(from var(--pref-background) h s calc(l + 5));
+  --color-border-dark: var(--pref-border);
+  --progress-bar-background: var(--comp-background);
+  --progress-bar-fill: hsl(
+    from var(--pref-border) h s calc(l + var(--adjust-color))
+  );
+  --comp-background: hsl(from var(--pref-background) h s calc(l - 5));
+  --comp-size: 1.667em;
+  --comp-size-border: calc(var(--comp-size) * 0.1);
 
-  &.Characters {
-    width: 20rem;
-    height: 26rem;
-  }
-}
-
-// MARK: PreferencesPage
-.PreferencesMenu__Preference {
-  --preference-background: var(--color-base);
-  --preference-border: hsl(from var(--preference-background) h s calc(l + 5));
-  user-select: none;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  padding-right: 0.5rem;
-  background-color: hsl(from var(--preference-background) h s calc(l - 2.5));
-  border-radius: var(--border-radius-medium);
-  border: var(--border-thickness-tiny) solid var(--preference-border);
-  transition-property: background-color;
-  transition-duration: var(--transition-time-medium);
-
-  &--desc {
-    font-size: 0.8em;
-    color: var(--color-text-translucent);
+  &__Component {
+    cursor: var(--cursor-pointer);
+    align-items: center;
+    justify-content: center;
+    height: var(--comp-size);
+    background-color: var(--comp-background);
+    color: var(--color-text-translucent-light);
+    border-radius: var(--border-radius-medium);
+    transition: border-color var(--transition-time-medium);
   }
 
-  &--control {
-    width: 17.5rem;
-    justify-content: flex-end;
+  .Toggle {
+    width: calc(var(--comp-size) * 2 + var(--comp-size-border) * 2);
+    border: var(--comp-size-border) solid var(--pref-border);
+
+    &--checked {
+      --switch-transform: 100%;
+      --pref-border: var(--color-primary);
+    }
+
+    &__Switch {
+      width: var(--comp-size);
+      height: var(--comp-size);
+      background-color: var(--pref-border);
+      border-radius: var(--border-radius-tiny);
+      transition-property: transform, background-color;
+      transition-duration: var(--transition-time-medium);
+      transform: scale(0.6) translateX(var(--switch-transform, -100%));
+    }
+
+    &:hover .Toggle__Switch {
+      background-color: hsl(
+        from var(--pref-border) h s calc(l + var(--adjust-hover))
+      );
+    }
+  }
+
+  .ColorInput {
+    &__Color {
+      height: 1.667em;
+      aspect-ratio: 1 / 1;
+      border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
+    }
+
+    &__Text {
+      align-content: center;
+      height: 100%;
+      padding: 0 var(--space-sm);
+      border-right: var(--border-thickness-tiny) solid var(--pref-border);
+    }
+  }
+
+  .Button--color--default {
+    background-color: var(--comp-background);
+    color: var(--color-text-translucent-light);
+    outline: var(--border-thickness-tiny) solid var(--color-border-dark);
+
+    &:not(.Button--disabled) {
+      &:hover {
+        background-color: var(--pref-background);
+      }
+
+      &:active {
+        background-color: hsl(from var(--pref-background) h s calc(l + 5));
+        transition-duration: 0s;
+      }
+    }
   }
 
   .Dropdown {
     flex: 1;
 
     &__control {
-      --color-border-dark: var(--preference-border);
-      background-color: hsl(from var(--preference-background) h s calc(l - 5));
-      color: var(--color-text-translucent);
-      outline: var(--border-thickness-tiny) solid var(--color-border-dark);
-      border-radius: var(--border-radius-tiny);
       transition-property: background-color, color;
       transition-duration: var(--transition-time-medium);
-
-      &:not(.Button--disabled) {
-        &:hover {
-          background-color: var(--preference-background);
-        }
-
-        &:active {
-          background-color: hsl(
-            from var(--preference-background) h s calc(l + 5)
-          );
-          transition-duration: 0s;
-        }
-      }
     }
   }
 
   .ProgressBar {
-    --progress-bar-background: hsl(
-      from var(--preference-background) h s calc(l - 5)
-    );
-    --progress-bar-fill: hsl(
-      from var(--preference-border) h s calc(l + var(--adjust-color))
-    );
+    color: var(--color-text-translucent-light);
+  }
+
+  &__Preference {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    padding-right: 0.5rem;
+    background-color: hsl(from var(--pref-background) h s calc(l - 2.5));
+    border-radius: var(--border-radius-medium);
+    border: var(--border-thickness-tiny) solid var(--pref-border);
+    transition-property: background-color;
+    transition-duration: var(--transition-time-medium);
+
+    &--desc {
+      font-size: 0.8em;
+      color: var(--color-text-translucent);
+    }
+
+    &--control {
+      width: 17.5rem;
+      justify-content: flex-end;
+    }
+  }
+
+  &__ChoicedSelection {
+    padding: var(--space-m);
+    background-color: var(--color-base);
+    box-shadow: 0 0.5em 1em hsla(0, 0%, 0%, 0.5);
+
+    &.Characters {
+      width: 20rem;
+      height: 26rem;
+    }
   }
 }

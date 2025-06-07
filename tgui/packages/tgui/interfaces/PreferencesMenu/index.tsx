@@ -18,8 +18,10 @@ import {
 import { RandomToggleState } from './useRandomToggleState';
 import { ServerPrefs } from './useServerPrefs';
 
-export function PreferencesMenu(props) {
-  const [title, setTitle] = useState('');
+export function PreferencesMenu() {
+  const [title, setTitle] = useState('Настройки');
+  document.body.classList.add('PreferencesMenu');
+
   return (
     <Window width={900} height={730} title={title}>
       <Window.Content>
@@ -35,7 +37,6 @@ export function PreferencesMenu(props) {
 function PrefsWindowInner(props) {
   const { data } = useBackend<PreferencesMenuData>();
   const { window } = data;
-  const { setTitle } = props;
 
   const [serverData, setServerData] = useState<ServerData>();
   const randomization = useState(false);
@@ -44,12 +45,12 @@ function PrefsWindowInner(props) {
   let title;
   switch (window) {
     case PrefsWindow.Character:
-      content = <CharacterPreferenceWindow />;
       title = 'Настройки персонажа';
+      content = <CharacterPreferenceWindow />;
       break;
     case PrefsWindow.Game:
-      content = <GamePreferenceWindow />;
       title = 'Настройки игры';
+      content = <GamePreferenceWindow />;
       break;
     case PrefsWindow.Keybindings:
       content = (
@@ -57,7 +58,6 @@ function PrefsWindowInner(props) {
           startingPage={GamePreferencesSelectedPage.Keybindings}
         />
       );
-      title = 'Горячие клавиши';
       break;
     default:
       exhaustiveCheck(window);
@@ -74,7 +74,10 @@ function PrefsWindowInner(props) {
       });
   }, []);
 
-  setTitle(title);
+  useEffect(() => {
+    props.setTitle(title);
+  }, [window]);
+
   return (
     <ServerPrefs.Provider value={serverData}>
       <RandomToggleState.Provider value={randomization}>

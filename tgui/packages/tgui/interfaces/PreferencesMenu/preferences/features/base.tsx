@@ -16,7 +16,7 @@ import {
   Stack,
   TextArea,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import { BooleanLike, classes } from 'tgui-core/react';
 
 import { createSetPreference, PreferencesMenuData } from '../../types';
 import { useServerPrefs } from '../../useServerPrefs';
@@ -91,32 +91,39 @@ export function FeatureValueInput(props: FeatureValueInputProps) {
   });
 }
 
+type ToggleProps = {
+  checked: boolean;
+  onClick: () => void;
+};
+
+function Toggle(props: ToggleProps) {
+  const { checked, onClick } = props;
+  return (
+    <Stack
+      className={classes([
+        'PreferencesMenu__Component',
+        'Toggle',
+        checked && 'Toggle--checked',
+      ])}
+      onClick={onClick}
+    >
+      <div className="Toggle__Switch" />
+    </Stack>
+  );
+}
+
 export type FeatureToggle = Feature<BooleanLike, boolean>;
 
 export function CheckboxInput(props: FeatureValueProps<BooleanLike, boolean>) {
   const { value, handleSetValue } = props;
-  return (
-    <Button.Checkbox
-      checked={!!value}
-      onClick={() => {
-        handleSetValue(!value);
-      }}
-    />
-  );
+  return <Toggle checked={!!value} onClick={() => handleSetValue(!value)} />;
 }
 
 export function CheckboxInputInverse(
   props: FeatureValueProps<BooleanLike, boolean>,
 ) {
   const { value, handleSetValue } = props;
-  return (
-    <Button.Checkbox
-      checked={!value}
-      onClick={() => {
-        handleSetValue(!value);
-      }}
-    />
-  );
+  return <Toggle checked={!value} onClick={() => handleSetValue(!value)} />;
 }
 
 export function FeatureColorInput(props: FeatureValueProps<string>) {
@@ -124,28 +131,20 @@ export function FeatureColorInput(props: FeatureValueProps<string>) {
   const { value, featureId, shrink } = props;
   return (
     <Button
+      p={0}
+      className="ColorInput"
       onClick={() => {
         act('set_color_preference', {
           preference: featureId,
         });
       }}
     >
-      <Stack align="center" fill>
-        <Stack.Item
-          style={{
-            background: value.startsWith('#') ? value : `#${value}`,
-            border: '2px solid white',
-            boxSizing: 'content-box',
-            height: '11px',
-            width: '11px',
-            ...(shrink
-              ? {
-                  margin: '1px',
-                }
-              : {}),
-          }}
+      <Stack fill g={0}>
+        {!shrink && <div className="ColorInput__Text">Изменить</div>}
+        <div
+          className="ColorInput__Color"
+          style={{ background: value.startsWith('#') ? value : `#${value}` }}
         />
-        {!shrink && <Stack.Item>Change</Stack.Item>}
       </Stack>
     </Button>
   );
