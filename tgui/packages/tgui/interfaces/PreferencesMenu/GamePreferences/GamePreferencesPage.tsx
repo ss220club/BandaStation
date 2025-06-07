@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Stack } from 'tgui-core/components';
 
+import { Preference } from '../components/Preference';
 import { features } from '../preferences/features';
 import { FeatureValueInput } from '../preferences/features/base';
 import { PreferencesMenuData } from '../types';
@@ -26,7 +27,6 @@ function sortByName(array: [string, PreferenceChild[]][]) {
 
 export function GamePreferencesPage(props) {
   const { data } = useBackend<PreferencesMenuData>();
-  const className = 'PreferencesMenu__Preference';
 
   const gamePreferences: Record<string, PreferenceChild[]> = {};
   for (const [featureId, value] of Object.entries(
@@ -34,33 +34,23 @@ export function GamePreferencesPage(props) {
   )) {
     const feature = features[featureId];
     const child = (
-      <Stack key={featureId} className={className}>
-        <Stack.Item grow>
-          <Stack vertical g={0}>
-            <Stack.Item className={`${className}--name`}>
-              {feature.name || featureId}
-            </Stack.Item>
-            {feature.description && (
-              <Stack.Item className={`${className}--desc`}>
-                {feature.description}
-              </Stack.Item>
-            )}
-          </Stack>
-        </Stack.Item>
-        <Stack className={`${className}--control`}>
-          {feature ? (
-            <FeatureValueInput
-              feature={feature}
-              featureId={featureId}
-              value={value}
-            />
-          ) : (
-            <Stack.Item grow bold color="red">
-              ...is not filled out properly!!!
-            </Stack.Item>
-          )}
-        </Stack>
-      </Stack>
+      <Preference
+        key={featureId}
+        name={feature.name}
+        description={feature.description}
+      >
+        {feature ? (
+          <FeatureValueInput
+            feature={feature}
+            featureId={featureId}
+            value={value}
+          />
+        ) : (
+          <Stack.Item grow bold color="red">
+            ...is not filled out properly!!!
+          </Stack.Item>
+        )}
+      </Preference>
     );
 
     const entry = {
@@ -85,7 +75,7 @@ export function GamePreferencesPage(props) {
 
   return (
     <Stack fill vertical>
-      <TabbedMenu categories={gamePreferenceEntries} fontSize={1.25} />
+      <TabbedMenu categories={gamePreferenceEntries} />
     </Stack>
   );
 }

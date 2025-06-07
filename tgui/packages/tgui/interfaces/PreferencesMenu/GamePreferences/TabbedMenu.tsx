@@ -7,11 +7,10 @@ import { PreferenceChild } from './GamePreferencesPage';
 type PreferencesTabsProps = {
   buttons?: ReactNode;
   categories: [string, PreferenceChild[]][];
-  fontSize?: number;
 };
 
 export function TabbedMenu(props: PreferencesTabsProps) {
-  const { buttons, categories, fontSize } = props;
+  const { buttons, categories } = props;
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0][0]);
   const categoryContent = categories.find(
@@ -28,7 +27,7 @@ export function TabbedMenu(props: PreferencesTabsProps) {
   });
 
   return (
-    <Stack fill vertical g={0} fontSize={fontSize}>
+    <Stack fill vertical g={0} fontSize={1.25}>
       <Stack.Item className="PreferencesMenu__Section">
         <Section
           fill

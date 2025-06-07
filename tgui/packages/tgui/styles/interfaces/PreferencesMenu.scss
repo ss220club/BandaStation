@@ -31,10 +31,12 @@ $department_map: (
 
     .Section__title {
       text-align: right;
-      padding: 0.5rem 0.75rem;
+      padding: 0.5rem 1rem;
+      padding-left: 0.75rem;
 
       &Text {
         font-size: 2rem;
+        color: hsl(from var(--color-primary) h s calc(l + var(--adjust-color)));
       }
     }
 
@@ -55,6 +57,7 @@ $department_map: (
   &__Content {
     border: var(--border-thickness-small) solid
       hsl(from var(--color-primary) h s l / 0.75);
+    box-shadow: inset 0.25rem 0.25rem 0.5rem -0.25rem var(--color-primary);
     border-bottom: none;
     border-right: none;
   }
@@ -131,8 +134,37 @@ $department_map: (
     }
 
     &--control {
-      width: 17.5rem;
       justify-content: flex-end;
+    }
+
+    &--Keybindings {
+      width: 50%;
+
+      .Button {
+        align-content: center;
+        line-height: 1px;
+        height: var(--comp-size);
+        background-color: var(--comp-background) !important;
+        color: var(--color-text-translucent);
+        border: var(--comp-size-border) solid var(--pref-border);
+        border-radius: var(--border-radius-small);
+        transition: border-color var(--transition-time-medium);
+
+        &:hover {
+          border-color: hsl(
+            from var(--pref-border) h s calc(l + var(--adjust-hover))
+          );
+        }
+
+        &__content {
+          font-size: 0.8em;
+        }
+
+        &--selected {
+          --pref-border: var(--color-good);
+          color: var(--color-text);
+        }
+      }
     }
   }
 

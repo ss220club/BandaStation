@@ -16,6 +16,7 @@ import { fetchRetry } from 'tgui-core/http';
 import { isEscape, KEY } from 'tgui-core/keys';
 
 import { LoadingScreen } from '../../common/LoadingScreen';
+import { Preference } from '../components/Preference';
 import { PreferencesMenuData } from '../types';
 import { TabbedMenu } from './TabbedMenu';
 
@@ -139,13 +140,13 @@ class KeybindingButton extends Component<{
         fluid
         textAlign="center"
         captureKeys={typingHotkey === undefined}
+        selected={typingHotkey !== undefined}
         onClick={(event) => {
           event.stopPropagation();
           onClick?.();
         }}
-        selected={typingHotkey !== undefined}
       >
-        {typingHotkey || currentHotkey || 'Unbound'}
+        {typingHotkey || currentHotkey || 'Пусто'}
       </Button>
     );
 
@@ -160,29 +161,6 @@ class KeybindingButton extends Component<{
       return child;
     }
   }
-}
-
-type KeybindingNameProps = {
-  keybinding: Keybinding;
-};
-
-function KeybindingName(props: KeybindingNameProps) {
-  const { keybinding } = props;
-
-  return keybinding.description ? (
-    <Tooltip content={keybinding.description} position="bottom">
-      <Box
-        as="span"
-        style={{
-          borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
-        }}
-      >
-        {keybinding.name}
-      </Box>
-    </Tooltip>
-  ) : (
-    <span>{keybinding.name}</span>
-  );
 }
 
 type ResetToDefaultButtonProps = {
@@ -202,7 +180,7 @@ function ResetToDefaultButton(props: ResetToDefaultButtonProps) {
         });
       }}
     >
-      Reset to Defaults
+      Сбросить
     </Button>
   );
 }
@@ -415,7 +393,11 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
         <Stack fill vertical>
           <TabbedMenu
             buttons={
-              <Button.Confirm onClick={() => act('reset_all_keybinds')}>
+              <Button.Confirm
+                fluid
+                textAlign="center"
+                onClick={() => act('reset_all_keybinds')}
+              >
                 Сбросить хоткеи
               </Button.Confirm>
             }
@@ -429,12 +411,14 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
                     ] || []) as string[];
 
                     const children = (
-                      <Stack fill key={keybindingId}>
-                        <Stack.Item basis="25%">
-                          <KeybindingName keybinding={keybinding} />
-                        </Stack.Item>
+                      <Preference
+                        key={keybindingId}
+                        name={keybinding.name}
+                        description={keybinding.description}
+                        childrenClassName="Keybindings"
+                      >
                         {range(0, 3).map((key) => (
-                          <Stack.Item key={key} grow basis="10%">
+                          <Stack.Item key={key} grow>
                             <KeybindingButton
                               currentHotkey={keys[key]}
                               typingHotkey={this.getTypingHotkey?.(
@@ -448,10 +432,10 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
                             />
                           </Stack.Item>
                         ))}
-                        <Stack.Item shrink>
+                        <Stack.Item>
                           <ResetToDefaultButton keybindingId={keybindingId} />
                         </Stack.Item>
-                      </Stack>
+                      </Preference>
                     );
                     return {
                       name: keybinding.name,
