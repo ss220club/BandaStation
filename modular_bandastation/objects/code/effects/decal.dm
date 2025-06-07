@@ -21,3 +21,22 @@
 	icon = 'modular_bandastation/objects/icons/obj/effects/logos.dmi'
 	icon_state = "sol_logo1"
 	layer = MID_TURF_LAYER // Above other decals
+
+//ТМ НА ОДИН РАУНД, НЕ ХОЧУ КОНФЛИКТОВ В OBJECTS.DME
+/atom/movable/screen/planet
+	name = "Ламэра"
+	desc = "Разрушенный планетоид. Старый, как сама система."
+	icon = 'modular_bandastation/objects/icons/obj/effects/planet.dmi'
+	icon_state = "planet"
+	plane = RENDER_PLANE_TRANSPARENT
+
+/atom/movable/screen/ship
+	name = "FSS Луизиана"
+	desc = "Небольшой корабль. Опознавательных знаков нет."
+	icon = 'modular_bandastation/objects/icons/obj/effects/ship.dmi'
+	icon_state = "ship"
+	plane = RENDER_PLANE_TRANSPARENT
+
+/atom/movable/screen/ship/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	animate(src, pixel_x = 999, time = 300 SECONDS, easing = LINEAR_EASING)

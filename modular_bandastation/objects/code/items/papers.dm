@@ -29,3 +29,76 @@
 	<i>Компания NanoTrasen,<u>28.12.2567</u></i><hr>
 	<center><h5><i>КОНФИДЕНЦИАЛЬНАЯ ИНФОРМАЦИЯ. СОБСТВЕННИК NANOTRASEN INC. РАСПРОСТРАНЕНИЕ ТРЕТЬИМИ ЛИЦАМИ <b>ЗАПРЕЩЕНО</b>.</i></h5></center>
 	"}
+
+
+// TM НА ОДИН РАУНД
+
+/obj/item/passport
+	name = "passport"
+	icon =  'modular_bandastation/objects/icons/obj/items/passport.dmi'
+	icon_state = "passport"
+	w_class = WEIGHT_CLASS_TINY
+	throw_range = 1
+	throw_speed = 1
+	pressure_resistance = 0
+	resistance_flags = FLAMMABLE
+	max_integrity = 50
+	drop_sound = 'sound/items/handling/paper_drop.ogg'
+	pickup_sound = 'sound/items/handling/paper_pickup.ogg'
+	desc = "Неизвестный паспорт."
+
+/obj/item/passport/tsf
+	name = "TSF passport"
+	icon_state = "passport_tsf2"
+	desc = "Паспорт гражданина Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/earth
+	name = "Earth passport"
+	desc = "Паспорт с Земли, находящейся в пределах родной системы Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/venus
+	name = "Venusian passport"
+	desc = "Паспорт с Венеры, находящейся в пределах родной системы Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/luna
+	name = "Luna passport"
+	desc = "Паспорт с Луны, находящейся в пределах родной системы Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/mars
+	name = "Mars passport"
+	desc = "Паспорт с Марса, находящегося в пределах родной системы Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/titan
+	name = "Titan passport"
+	desc = "Паспорт с Титана, находящегося в пределах родной системы Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/pluto
+	name = "Pluto passport"
+	desc = "Паспорт с Плутона, находящегося в пределах родной системы Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/lalande
+	name = "Lombardy passport"
+	desc = "Паспорт из системы Лаланд, находящейся в пределах пространства Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/alpha_centauri
+	name = "Alpha Centauri passport"
+	desc = "Паспорт из системы Альфа Центавра, находящейся в пределах пространства Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/ceti_epsilon
+	name = "Ceti Epsilon passport"
+	desc = "Паспорт из системы Тау Кита, находящейся в пределах пространства Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/sirius
+	name = "Sirius passport"
+	icon_state = "passport_scg2"
+	desc = "Паспорт из системы Сириус, находящейся в пределах пространства Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/procyon
+	name = "Procyon passport"
+	icon_state = "passport_scg2"
+	desc = "Паспорт из системы Процинон, находящейся в пределах пространства Транс-Солнечной Федерации."
+
+/obj/item/passport/tsf/bernard
+	name = "Bernard passport"
+	icon_state = "passport_scg2"
+	desc = "Паспорт из системы Бернарда, находящейся в пределах пространства Транс-Солнечной Федерации."
