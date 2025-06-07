@@ -44,10 +44,9 @@ function UIStyleInput(
 
   return (
     <Dropdown
+      menuWidth="auto"
       selected={value}
-      clipSelectedText={false}
       onSelected={props.handleSetValue}
-      width="100%"
       options={sortChoices(Object.entries(choices)).map(
         ([dataValue, label]) => {
           return {

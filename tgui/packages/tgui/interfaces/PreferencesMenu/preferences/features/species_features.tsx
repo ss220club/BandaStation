@@ -254,7 +254,6 @@ export const tajaran_tail_markings_color: Feature<string> = {
 };
 
 // MARK: Skrell features
-
 export const skrell_head_tentacle_color: Feature<string> = {
   name: 'Щупальца на голове: цвет',
   component: FeatureColorInput,

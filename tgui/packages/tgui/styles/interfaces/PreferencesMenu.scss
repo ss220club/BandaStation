@@ -410,28 +410,63 @@ $department_map: (
 }
 
 // MARK: PreferencesPage
-.PreferencesMenu__GamePreferences {
-  &Preference {
-    --preference-background: var(--color-base);
-    user-select: none;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0.75rem;
-    padding-right: 0.5rem;
-    background-color: hsl(from var(--preference-background) h s calc(l - 2.5));
-    border-radius: var(--border-radius-medium);
-    border: var(--border-thickness-tiny) outset var(--color-border);
-    transition-property: background-color;
-    transition-duration: var(--transition-time-medium);
+.PreferencesMenu__Preference {
+  --preference-background: var(--color-base);
+  --preference-border: hsl(from var(--preference-background) h s calc(l + 5));
+  user-select: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  padding-right: 0.5rem;
+  background-color: hsl(from var(--preference-background) h s calc(l - 2.5));
+  border-radius: var(--border-radius-medium);
+  border: var(--border-thickness-tiny) solid var(--preference-border);
+  transition-property: background-color;
+  transition-duration: var(--transition-time-medium);
 
-    &--desc {
-      font-size: 0.8em;
+  &--desc {
+    font-size: 0.8em;
+    color: var(--color-text-translucent);
+  }
+
+  &--control {
+    width: 17.5rem;
+    justify-content: flex-end;
+  }
+
+  .Dropdown {
+    flex: 1;
+
+    &__control {
+      --color-border-dark: var(--preference-border);
+      background-color: hsl(from var(--preference-background) h s calc(l - 5));
       color: var(--color-text-translucent);
-    }
+      outline: var(--border-thickness-tiny) solid var(--color-border-dark);
+      border-radius: var(--border-radius-tiny);
+      transition-property: background-color, color;
+      transition-duration: var(--transition-time-medium);
 
-    &--control {
-      flex-basis: 33%;
-      justify-content: flex-end;
+      &:not(.Button--disabled) {
+        &:hover {
+          background-color: var(--preference-background);
+        }
+
+        &:active {
+          background-color: hsl(
+            from var(--preference-background) h s calc(l + 5)
+          );
+          transition-duration: 0s;
+        }
+      }
     }
+  }
+
+  .ProgressBar {
+    --progress-bar-background: hsl(
+      from var(--preference-background) h s calc(l - 5)
+    );
+    --progress-bar-fill: hsl(
+      from var(--preference-border) h s calc(l + var(--adjust-color))
+    );
   }
 }
