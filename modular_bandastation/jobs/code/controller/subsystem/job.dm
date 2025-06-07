@@ -36,6 +36,7 @@
 		job_debug("GRJ: Player eligible but assign_role failed, Player: [player], Job: [job]")
 		
 	return FALSE
+
 /datum/controller/subsystem/job/proc/shuffle_and_sort_jobs_by_staffing_priority(list/jobs)
 	if(!length(jobs))
 		return list()
