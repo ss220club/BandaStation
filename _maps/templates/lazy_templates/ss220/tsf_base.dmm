@@ -1,0 +1,2358 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ag" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/dark_red/line{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"ax" = (
+/turf/open/floor/iron/stairs/medium{
+	dir = 4
+	},
+/area/space)
+"aM" = (
+/obj/structure/fluff/big_chain{
+	pixel_y = -4
+	},
+/obj/structure/fluff/big_chain{
+	pixel_y = -26
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"aS" = (
+/obj/structure/sign/flag/terragov/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"be" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"bo" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"cc" = (
+/obj/effect/turf_decal/stripes/white/line,
+/obj/effect/turf_decal/trimline/dark_red/line,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"cI" = (
+/obj/machinery/door/airlock/silver,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"dy" = (
+/obj/structure/light_fake/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"dA" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"ed" = (
+/obj/structure/sign/warning/docking/directional/north,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"et" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 1
+	},
+/obj/structure/minecart_rail/railbreak,
+/obj/effect/turf_decal/tile/dark/full,
+/obj/effect/turf_decal/siding/wideplating/dark,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"ev" = (
+/turf/open/floor/plating,
+/area/space)
+"eD" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"eS" = (
+/obj/structure/hedge/opaque,
+/obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 10
+	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"eY" = (
+/obj/structure/light_fake/directional/south,
+/obj/effect/turf_decal/tile/neutral/half,
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"fg" = (
+/obj/machinery/door/poddoor/shutters/indestructible/preopen,
+/obj/effect/turf_decal/caution/stand_clear,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"fs" = (
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/dark_red/corner{
+	dir = 1
+	},
+/obj/structure/light_fake/floor/emergency,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"fP" = (
+/obj/machinery/door/airlock/silver,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"fW" = (
+/obj/structure/hedge/opaque,
+/obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 6
+	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"gv" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"gO" = (
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo3";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner,
+/turf/open/floor/iron/smooth,
+/area/space)
+"he" = (
+/obj/structure/closet/crate/bin,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"hj" = (
+/obj/machinery/door/airlock/silver,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"ht" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"hX" = (
+/obj/effect/spawner/structure/window/reinforced/shuttle,
+/turf/open/floor/plating,
+/area/space)
+"hZ" = (
+/obj/effect/turf_decal/siding/wideplating/dark,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"ih" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo6";
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"iU" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 8
+	},
+/area/space)
+"jF" = (
+/obj/structure/shipping_container/deforest,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"jJ" = (
+/obj/structure/light_fake/directional/north,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"kc" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"kd" = (
+/obj/structure/sign/warning/no_smoking/directional/north,
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 8
+	},
+/area/space)
+"kE" = (
+/turf/open/floor/iron/smooth,
+/area/space)
+"kF" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_corner,
+/area/space)
+"kL" = (
+/obj/item/banner/solgov,
+/turf/open/floor/iron/smooth_corner{
+	dir = 4
+	},
+/area/space)
+"kX" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron/smooth,
+/area/space)
+"kZ" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 8
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"ln" = (
+/obj/effect/turf_decal/line/neutral/line/stripes{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"lp" = (
+/turf/closed/indestructible/fakedoor,
+/area/space)
+"lF" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_corner,
+/area/space)
+"mt" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"my" = (
+/obj/structure/sign/warning/engine_safety/directional/south,
+/obj/structure/light_fake/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"mZ" = (
+/obj/structure/light_fake/directional/west,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"nW" = (
+/obj/structure/light_fake/directional/east,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"oa" = (
+/obj/structure/minecart_rail,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating/corner{
+	dir = 4
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"om" = (
+/obj/structure/chair/sofa/bench/left{
+	dir = 1
+	},
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"ot" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"oU" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 1
+	},
+/area/space)
+"pr" = (
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo7";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"pI" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"pW" = (
+/obj/structure/light_fake/directional/west,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"qa" = (
+/obj/structure/sign/flag/terragov/directional/north,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"qt" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"ri" = (
+/obj/effect/turf_decal/siding/thinplating_new/end{
+	dir = 8
+	},
+/turf/open/floor/iron/stairs{
+	dir = 4;
+	color = "#bfbfbf"
+	},
+/area/space)
+"rx" = (
+/obj/machinery/recharge_station,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"rY" = (
+/obj/item/banner/solgov,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"sv" = (
+/obj/item/kirbyplants,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"sw" = (
+/obj/structure/hedge/opaque,
+/obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 9
+	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"sx" = (
+/obj/structure/hedge/opaque,
+/obj/structure/light_fake/floor,
+/obj/structure/railing{
+	dir = 5
+	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"tr" = (
+/turf/closed/indestructible/fakedoor/maintenance,
+/area/space)
+"tu" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/structure/light_fake/directional/west,
+/turf/open/floor/iron/large,
+/area/space)
+"tG" = (
+/obj/machinery/microwave,
+/obj/structure/table,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"tS" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"tX" = (
+/obj/effect/turf_decal/siding/wideplating/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"ub" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/large,
+/area/space)
+"uD" = (
+/turf/open/space/basic,
+/area/space)
+"uE" = (
+/obj/effect/turf_decal/siding/thinplating_new,
+/turf/open/floor/iron/smooth_corner{
+	dir = 1
+	},
+/area/space)
+"uJ" = (
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"uK" = (
+/obj/structure/table/reinforced,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"vi" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"vl" = (
+/obj/structure/minecart_rail,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating/corner{
+	dir = 1
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"vm" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"vo" = (
+/obj/machinery/door/poddoor/shutters/indestructible/preopen,
+/turf/open/floor/plating,
+/area/space)
+"vp" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo8";
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"vw" = (
+/obj/machinery/door/airlock/silver,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"vA" = (
+/obj/structure/chair/comfy/beige,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"vY" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 8
+	},
+/area/space)
+"wm" = (
+/obj/effect/turf_decal/stripes/white/corner,
+/obj/effect/turf_decal/trimline/dark_red/corner,
+/obj/structure/light_fake/floor/emergency,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"ww" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"xb" = (
+/turf/open/floor/iron/stairs{
+	color = "#bfbfbf"
+	},
+/area/space)
+"xd" = (
+/obj/structure/shipping_container/biosustain,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"xh" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"xG" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/structure/light_fake/directional/east,
+/turf/open/floor/iron/large,
+/area/space)
+"xK" = (
+/obj/structure/shipping_container/conarex,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"ys" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"yF" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 4
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"zf" = (
+/obj/structure/light_fake/directional/south,
+/turf/open/floor/iron/smooth,
+/area/space)
+"zy" = (
+/obj/structure/sign/warning/secure_area/directional/east,
+/obj/effect/turf_decal/tile/neutral/half,
+/turf/open/floor/iron/smooth_corner{
+	dir = 1
+	},
+/area/space)
+"zC" = (
+/obj/structure/chair/office{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"zI" = (
+/turf/open/floor/iron/stairs/medium{
+	dir = 8
+	},
+/area/space)
+"zK" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo4";
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"AE" = (
+/obj/structure/minecart_rail/railbreak,
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"AU" = (
+/obj/effect/spawner/structure/window/reinforced/shuttle/indestructible,
+/turf/open/indestructible/plating,
+/area/space)
+"AY" = (
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo9";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"BX" = (
+/obj/structure/table,
+/obj/effect/spawner/random/entertainment/cigarette_pack,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"Cc" = (
+/obj/structure/fluff/fake_vent,
+/turf/closed/indestructible/riveted/plastinum,
+/area/space)
+"Co" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 9
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"Dn" = (
+/obj/structure/light_fake/directional/east,
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"Ds" = (
+/obj/structure/frame/computer{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"DA" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner,
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"DN" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/closed/indestructible/riveted/plastinum,
+/area/space)
+"Ee" = (
+/turf/closed/indestructible/riveted/plastinum,
+/area/space)
+"EW" = (
+/obj/structure/table,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Fe" = (
+/obj/effect/turf_decal/tile/neutral/half,
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"FC" = (
+/obj/structure/table,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"FH" = (
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"FJ" = (
+/obj/effect/turf_decal/tile/neutral/half,
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"FY" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Go" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"GX" = (
+/obj/structure/railing{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 10
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"Hb" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark_red/line{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"Jc" = (
+/obj/structure/sign/warning/docking/directional/north,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"JB" = (
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"JE" = (
+/obj/structure/light_fake/directional/south,
+/obj/structure/sign/warning/secure_area/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"JI" = (
+/obj/structure/sign/flag/terragov/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"JO" = (
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"JS" = (
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"JU" = (
+/obj/machinery/vending/cola/blue,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"JW" = (
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo1";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"KB" = (
+/obj/structure/railing{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 6
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"KT" = (
+/obj/structure/sign/warning/secure_area/directional/west,
+/obj/structure/light_fake/directional/west,
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"Le" = (
+/obj/machinery/shuttle_manipulator{
+	pixel_x = -16;
+	pixel_y = 1
+	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"Lq" = (
+/obj/effect/turf_decal/tile/dark/full,
+/turf/open/floor/iron/stairs{
+	color = "#bfbfbf"
+	},
+/area/space)
+"LM" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"LO" = (
+/obj/effect/turf_decal/line/yellow/line/stripes{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 8
+	},
+/area/space)
+"LP" = (
+/obj/structure/frame/computer{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"LQ" = (
+/obj/structure/minecart_rail,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/plating/reinforced,
+/area/space)
+"Mm" = (
+/obj/structure/chair/sofa/bench/right{
+	dir = 1
+	},
+/obj/structure/light_fake/directional/east,
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"Mp" = (
+/obj/structure/shipping_container/nthi,
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"Ms" = (
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark_red/corner{
+	dir = 4
+	},
+/obj/structure/light_fake/floor/emergency,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Mv" = (
+/obj/structure/table/glass,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Na" = (
+/obj/structure/sign/warning/no_smoking/directional/east,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Np" = (
+/obj/machinery/scanner_gate/preset_guns,
+/obj/effect/turf_decal/tile/dark/full,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Nw" = (
+/obj/structure/minecart_rail,
+/obj/structure/railing,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating,
+/turf/open/floor/plating/reinforced,
+/area/space)
+"NW" = (
+/obj/item/banner/solgov,
+/turf/open/floor/iron/smooth_corner{
+	dir = 1
+	},
+/area/space)
+"Ok" = (
+/obj/structure/chair/office{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Oq" = (
+/obj/machinery/door/poddoor/shutters/indestructible/preopen,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"Pl" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/turf/open/floor/iron/large,
+/area/space)
+"Pv" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 8
+	},
+/area/space)
+"PQ" = (
+/obj/machinery/door/airlock/silver,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"PV" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 4
+	},
+/area/space)
+"PZ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo2";
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"QJ" = (
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/dark_red/corner{
+	dir = 8
+	},
+/obj/structure/light_fake/floor/emergency,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"QK" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_smooth,
+/area/space)
+"QU" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"QV" = (
+/obj/machinery/door/poddoor/shutters/indestructible,
+/turf/open/floor/plating,
+/area/space)
+"Sc" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"Sd" = (
+/obj/structure/chair/comfy/beige{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"SA" = (
+/obj/structure/minecart_rail,
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"SM" = (
+/obj/item/banner/solgov,
+/turf/open/floor/iron/smooth_corner,
+/area/space)
+"SP" = (
+/obj/effect/turf_decal/line/yellow/line/stripes{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 1
+	},
+/area/space)
+"SS" = (
+/obj/structure/hedge/opaque,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Tb" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 8
+	},
+/area/space)
+"Tf" = (
+/turf/open/floor/iron/stairs,
+/area/space)
+"Vg" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 4
+	},
+/area/space)
+"Vq" = (
+/obj/machinery/vending/cigarette,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Vz" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_corner,
+/area/space)
+"VF" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/baseturf_helper{
+	baseturf = /turf/open/floor/plating
+	},
+/obj/effect/decal/solgov_logo{
+	icon_state = "solalt_logo5";
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_large,
+/area/space)
+"VM" = (
+/obj/structure/chair/sofa/bench/right{
+	dir = 1
+	},
+/turf/open/floor/iron/cafeteria,
+/area/space)
+"WB" = (
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"WS" = (
+/obj/effect/turf_decal/siding/thinplating_new,
+/obj/effect/turf_decal/siding/thinplating_new/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 4
+	},
+/area/space)
+"Xk" = (
+/obj/machinery/door/airlock/highsecurity,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Yy" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/dark_red/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/space)
+"YH" = (
+/obj/effect/turf_decal/stripes/corner,
+/turf/open/floor/iron/smooth,
+/area/space)
+"YV" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 4
+	},
+/area/space)
+"Zk" = (
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"Zr" = (
+/obj/structure/light_fake/directional/east,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"Zt" = (
+/obj/machinery/door/poddoor/shutters/indestructible{
+	dir = 4;
+	id = "CC_Assault_1";
+	name = "Assault Gear"
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"ZD" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 5
+	},
+/turf/open/floor/plating/reinforced,
+/area/space)
+"ZG" = (
+/obj/effect/turf_decal/tile/neutral/half{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_corner{
+	dir = 8
+	},
+/area/space)
+"ZX" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/line/yellow/line/stripes{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/space)
+"ZZ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+
+(1,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+lp
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+"}
+(2,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+Ee
+JS
+JS
+JS
+JS
+JS
+JS
+mZ
+JS
+JS
+JS
+JS
+JS
+JS
+Ee
+SM
+be
+kL
+Ee
+JS
+mZ
+JS
+Ee
+JS
+mZ
+JS
+Ee
+JS
+mZ
+JS
+Ee
+"}
+(3,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+Ee
+jJ
+zC
+zC
+zC
+Mv
+Mv
+JS
+Mv
+Mv
+zC
+zC
+zC
+dy
+Ee
+QU
+QK
+FJ
+Ee
+JS
+JS
+JS
+Ee
+JS
+JS
+JS
+Ee
+JS
+JS
+JS
+Ee
+"}
+(4,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+AU
+JS
+Mv
+Mv
+Mv
+Mv
+JB
+JB
+JB
+Mv
+Mv
+Mv
+Mv
+JS
+Ee
+QU
+QK
+eY
+Ee
+JS
+JS
+JS
+Ee
+JS
+JS
+JS
+Ee
+JS
+JS
+JS
+Ee
+"}
+(5,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+AU
+JS
+kE
+kE
+kE
+kE
+JB
+Le
+JB
+kE
+kE
+kE
+kE
+JI
+Ee
+QU
+QK
+FJ
+Ee
+Zt
+Zt
+Zt
+Ee
+Zt
+Zt
+Zt
+Ee
+Zt
+Zt
+Zt
+Ee
+"}
+(6,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+AU
+JS
+Mv
+Mv
+Mv
+Mv
+JB
+JB
+JB
+Mv
+Mv
+Mv
+Mv
+JS
+Ee
+LO
+ZX
+SP
+Ee
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+Ee
+"}
+(7,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+Ee
+jJ
+Ok
+Ok
+Ok
+Mv
+Mv
+JS
+Mv
+Mv
+Ok
+Ok
+Ok
+dy
+Ee
+Np
+DN
+Np
+Ee
+jJ
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+JS
+dy
+Ee
+"}
+(8,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+uD
+Ee
+JS
+JS
+JS
+JS
+JS
+JS
+Zr
+JS
+JS
+JS
+JS
+JS
+JS
+Ee
+ln
+DN
+ln
+Ee
+JS
+JS
+JS
+JS
+JS
+JS
+uK
+Ee
+Ee
+Ee
+Ee
+Ee
+"}
+(9,1,1) = {"
+uD
+uD
+uD
+uD
+uD
+uD
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+hX
+cI
+hX
+Ee
+SS
+he
+Vq
+JU
+SS
+Ee
+Ee
+ri
+DN
+ri
+Ee
+Ee
+JS
+JS
+uK
+JS
+uK
+uK
+Ee
+tG
+FC
+BX
+Ee
+"}
+(10,1,1) = {"
+uD
+uD
+uD
+Ee
+Ee
+Ee
+Ee
+vA
+EW
+Sd
+sv
+Ee
+rY
+JS
+rY
+Ee
+Ee
+hX
+hX
+hX
+Ee
+Ee
+fW
+kF
+ot
+WS
+sx
+Ee
+Xk
+Xk
+Ee
+Ee
+Ee
+Ee
+Ee
+qa
+uJ
+uJ
+AU
+"}
+(11,1,1) = {"
+uD
+uD
+uD
+Ee
+lF
+ww
+ww
+ww
+ww
+ww
+ww
+ww
+FH
+FH
+FH
+ww
+ww
+ww
+ww
+ww
+ww
+pI
+Vz
+pr
+vp
+AY
+PV
+KT
+ww
+ww
+ww
+kL
+Ee
+uJ
+uJ
+uJ
+uJ
+uJ
+AU
+"}
+(12,1,1) = {"
+uD
+uD
+uD
+tr
+gv
+QK
+QK
+QK
+QK
+Sc
+Sc
+Sc
+Sc
+Sc
+Sc
+Sc
+Sc
+Sc
+QK
+QK
+QK
+QK
+gv
+zK
+VF
+ih
+gv
+QK
+QK
+QK
+QK
+WB
+vw
+uJ
+FC
+om
+FC
+om
+AU
+"}
+(13,1,1) = {"
+uD
+uD
+uD
+Ee
+kd
+bo
+bo
+Dn
+bo
+bo
+bo
+bo
+bo
+Dn
+bo
+bo
+bo
+bo
+bo
+Dn
+bo
+DA
+vY
+JW
+PZ
+gO
+oU
+LM
+bo
+dA
+Dn
+NW
+Ee
+uJ
+FC
+Mm
+FC
+VM
+Ee
+"}
+(14,1,1) = {"
+uD
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+eS
+Pv
+be
+uE
+sw
+Ee
+cI
+fP
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+"}
+(15,1,1) = {"
+Ee
+Ee
+JS
+Zk
+Zk
+pW
+Zk
+Zk
+Zk
+pW
+Zk
+JS
+Zk
+pW
+Zk
+Zk
+Zk
+pW
+Zk
+Zk
+JS
+Ee
+Ee
+tS
+QK
+Fe
+Ee
+Ee
+JS
+ys
+EW
+Ee
+ub
+tu
+ub
+ub
+tu
+ub
+Ee
+"}
+(16,1,1) = {"
+QV
+vm
+wm
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+Ms
+kE
+Ee
+ZG
+be
+zy
+Ee
+rx
+JS
+ys
+JE
+Ee
+iU
+ax
+Tb
+iU
+ax
+Tb
+Cc
+"}
+(17,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kE
+Ee
+Ee
+PQ
+Ee
+Ee
+rx
+JS
+ys
+ys
+hj
+ZZ
+qt
+ZZ
+ZZ
+qt
+aS
+Ee
+"}
+(18,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+zf
+Ee
+JS
+ht
+JS
+Ee
+Ee
+Ee
+JS
+JS
+Ee
+YV
+zI
+Vg
+YV
+zI
+Vg
+Cc
+"}
+(19,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+YH
+Ee
+ed
+xh
+JS
+kc
+Ds
+Ee
+EW
+EW
+Ee
+Pl
+xG
+Pl
+Pl
+xG
+Pl
+Ee
+"}
+(20,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kX
+vo
+Go
+xh
+JS
+mt
+LP
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+"}
+(21,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kX
+vo
+Go
+xh
+JS
+kc
+Ds
+Ee
+JO
+Mp
+JO
+xd
+hZ
+Tf
+Tf
+xb
+Lq
+tr
+"}
+(22,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kX
+vo
+Go
+ht
+JS
+mt
+LP
+Ee
+JO
+JO
+JO
+JO
+tX
+vi
+vi
+vi
+vi
+Ee
+"}
+(23,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kX
+vo
+Go
+ht
+my
+Ee
+Ee
+Ee
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+Ee
+"}
+(24,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kX
+vo
+Go
+xh
+JS
+FY
+Oq
+Zk
+JS
+JS
+JS
+JS
+JS
+Co
+kZ
+kZ
+GX
+Ee
+"}
+(25,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kX
+vo
+Go
+xh
+JS
+FY
+fg
+et
+SA
+SA
+SA
+SA
+AE
+vl
+LQ
+LQ
+Nw
+Ee
+"}
+(26,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+eD
+Ee
+Jc
+xh
+JS
+FY
+fg
+et
+SA
+SA
+SA
+SA
+AE
+oa
+LQ
+LQ
+Nw
+Ee
+"}
+(27,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+zf
+Ee
+JS
+ht
+JS
+FY
+Oq
+Zk
+JS
+JS
+JS
+JS
+JS
+ZD
+yF
+yF
+KB
+Ee
+"}
+(28,1,1) = {"
+QV
+vm
+cc
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+ev
+Yy
+kE
+Ee
+JS
+ht
+Na
+Ee
+Ee
+Ee
+aM
+JO
+xK
+JO
+jF
+JO
+JO
+JO
+JO
+Ee
+"}
+(29,1,1) = {"
+QV
+vm
+QJ
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+fs
+kE
+Ee
+Ee
+tr
+Ee
+Ee
+uD
+Ee
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+Ee
+"}
+(30,1,1) = {"
+Ee
+Ee
+JS
+Zk
+Zk
+nW
+Zk
+Zk
+Zk
+nW
+Zk
+JS
+Zk
+nW
+Zk
+Zk
+Zk
+nW
+Zk
+Zk
+JS
+Ee
+Ee
+uD
+uD
+uD
+uD
+uD
+Ee
+aM
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+Ee
+"}
+(31,1,1) = {"
+uD
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+uD
+uD
+uD
+uD
+uD
+uD
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+Ee
+"}
