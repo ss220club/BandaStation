@@ -185,5 +185,65 @@
 
 // Multi-tile airlocks
 /obj/structure/door_assembly/multi_tile
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/glass_large.dmi'
-	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/overlays.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	airlock_type = /obj/machinery/door/airlock/multi_tile/public
+	opacity = TRUE
+	glass = FALSE
+
+/obj/structure/door_assembly/multi_tile/Initialize(mapload)
+	. = ..()
+	update_appearance()
+
+/obj/structure/door_assembly/multi_tile/door_assembly_public
+	airlock_type = /obj/machinery/door/airlock/multi_tile/public
+	glass_type = /obj/machinery/door/airlock/multi_tile/public/glass
+
+/obj/structure/door_assembly/multi_tile/command
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/command_large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	base_name = "large command airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/command
+	glass_type = /obj/machinery/door/airlock/multi_tile/command/glass
+
+/obj/structure/door_assembly/multi_tile/security
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/security_large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	base_name = "large security airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/security
+	glass_type = /obj/machinery/door/airlock/multi_tile/security/glass
+
+/obj/structure/door_assembly/multi_tile/atmospheric
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/atmospheric_large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	base_name = "large atmospheric airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/atmospheric
+	glass_type = /obj/machinery/door/airlock/multi_tile/atmospheric/glass
+
+/obj/structure/door_assembly/multi_tile/engineering
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/engineering_large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	base_name = "large engineering airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/engineering
+	glass_type = /obj/machinery/door/airlock/multi_tile/engineering/glass
+
+/obj/structure/door_assembly/multi_tile/supply
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/supply_large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	base_name = "large supply airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/supply
+	glass_type = /obj/machinery/door/airlock/multi_tile/supply/glass
+
+/obj/structure/door_assembly/multi_tile/medical
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/medical_large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	base_name = "large medical airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/medical
+	glass_type = /obj/machinery/door/airlock/multi_tile/medical/glass
+
+/obj/structure/door_assembly/multi_tile/research
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/research_large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	base_name = "large research airlock"
+	airlock_type = /obj/machinery/door/airlock/multi_tile/research
+	glass_type = /obj/machinery/door/airlock/multi_tile/research/glass
