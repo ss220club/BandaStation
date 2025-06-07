@@ -415,7 +415,7 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	requirements = list(90,90,90,80,60,40,30,20,10,10)
 	flags = HIGH_IMPACT_RULESET
 	antag_cap = list("denominator" = 18, "offset" = 1)
-	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE)
+	//ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE) // BANDASTATION EDIT - STORYTELLER
 	var/required_role = ROLE_NUCLEAR_OPERATIVE
 	var/datum/team/nuclear/nuke_team
 	///The job type to dress up our nuclear operative as.

@@ -144,14 +144,14 @@
 			text = "Fatal error occurred in emergency shuttle uplink during transit. Unable to reestablish connection.",
 			title = "Shuttle Failure",
 			sound =  'sound/announcer/announcement/announce_dig.ogg',
-			sender_override = "Emergency Shuttle Uplink Alert",
+			sender_override = "Система оповещения эвакуационного шаттла",
 			color_override = "grey",
 		)
 	else
 	// except if you are on it already, then you are safe c:
-		minor_announce("ERROR: Corruption detected in navigation protocols. Connection with Transponder #XCC-P5831-ES13 lost. \
-				Backup exit route protocol decrypted. Calibrating route...",
-			"Emergency Shuttle", TRUE) // wait out until the rift on the station gets destroyed and the final message plays
+		minor_announce("ОШИБКА: обнаружено повреждение навигационных протоколов. Связь с транспондером #XCC-P5831-ES13 потеряна. \
+				Расшифрован протокол резервного маршрута. Маршрут калибруется...",
+			"Эвакуационный шаттл", TRUE) // wait out until the rift on the station gets destroyed and the final message plays
 		var/list/mobs = mobs_in_area_type(list(/area/shuttle/escape))
 		for(var/mob/living/mob as anything in mobs) // emulate mob/living/lateShuttleMove() behaviour
 			if(mob.buckled)
@@ -207,12 +207,12 @@
 
 	if(SSshuttle.emergency.mode == SHUTTLE_ESCAPE)
 		// special message for hijacks
-		var/shuttle_msg = "Navigation protocol set to [SSshuttle.emergency.is_hijacked() ? "\[ERROR\]" : "backup route"]. \
-			Reorienting bluespace vessel to exit vector. ETA 15 seconds."
+		var/shuttle_msg = "Навигационный протокол изменён на [SSshuttle.emergency.is_hijacked() ? "\[ОШИБКА\]" : "запасной маршрут"]. \
+			Переориентация блюспейс судна на вектор выхода. Время ожидания: 15 секунд."
 		// garble the special message
 		if(SSshuttle.emergency.is_hijacked())
 			shuttle_msg = Gibberish(shuttle_msg, TRUE, 15)
-		minor_announce(shuttle_msg, "Emergency Shuttle", TRUE)
+		minor_announce(shuttle_msg, "Эвакуационный шаттл", TRUE)
 		SSshuttle.emergency.setTimer(15 SECONDS)
 		return
 
