@@ -31,7 +31,7 @@
 	staffing_priority = STAFFING_PRIORITY_IMPORTANT
 
 /datum/job/warden
-	staffing_priority = STAFFING_PRIORITY_MINOR
+	staffing_priority = STAFFING_PRIORITY_MODERATE
 
 /datum/job/detective
 	staffing_priority = STAFFING_PRIORITY_MINOR
@@ -60,7 +60,7 @@
 	staffing_priority = STAFFING_PRIORITY_MODERATE
 
 /datum/job/chemist
-	staffing_priority = STAFFING_PRIORITY_MINOR
+	staffing_priority = STAFFING_PRIORITY_MODERATE
 
 /datum/job/paramedic
 	staffing_priority = STAFFING_PRIORITY_MINOR

@@ -8,10 +8,9 @@
 
 /datum/controller/subsystem/job/proc/give_priority_job(mob/dead/new_player/player)
 	job_debug("GRJ: Giving random priority job, Player: [player]")
-	. = FALSE
 	if(QDELETED(player))
 		job_debug("GRJ: Player is deleted, aborting")
-		return .
+		return FALSE
 
 	for(var/datum/job/job as anything in shuffle_and_sort_jobs_by_staffing_priority(joinable_occupations))
 		if((job.current_positions >= job.spawn_positions) && job.spawn_positions != -1)
@@ -35,8 +34,9 @@
 			return TRUE
 
 		job_debug("GRJ: Player eligible but assign_role failed, Player: [player], Job: [job]")
-
-/datum/controller/subsystem/job/proc/shuffle_and_sort_jobs_by_staffing_priority(list/jobs) as /list
+		
+	return FALSE
+/datum/controller/subsystem/job/proc/shuffle_and_sort_jobs_by_staffing_priority(list/jobs)
 	if(!length(jobs))
 		return list()
 
