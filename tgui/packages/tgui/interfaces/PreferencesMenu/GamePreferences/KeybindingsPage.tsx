@@ -417,7 +417,7 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
             <TabbedMenu
               buttons={
                 <Button.Confirm onClick={() => act('reset_all_keybinds')}>
-                  Reset all keybindings
+                  Сбросить хоткеи
                 </Button.Confirm>
               }
               categories={keybindingEntries.map(([category, keybindings]) => {

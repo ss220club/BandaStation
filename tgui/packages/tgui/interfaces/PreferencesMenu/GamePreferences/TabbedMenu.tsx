@@ -17,32 +17,34 @@ export function TabbedMenu(props: PreferencesTabsProps) {
 
   return (
     <Stack fill vertical g={0} fontSize={fontSize}>
-      <Stack.Item>
-        <Section fill fitted title={selectedCategory} buttons={buttons} />
+      <Stack.Item className="PreferencesMenu__Section">
+        <Section fill fitted title={selectedCategory} />
       </Stack.Item>
       <Stack.Item grow>
         <Stack fill g={0}>
-          <Stack.Item>
-            <Section fill mr={'-2px'}>
-              <Tabs vertical>
-                {categories.map(([category]) => (
-                  <Tabs.Tab
-                    key={category}
-                    selected={category === selectedCategory}
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category}
-                  </Tabs.Tab>
-                ))}
-              </Tabs>
+          <Stack.Item basis={13} className="PreferencesMenu__Section Sidebar">
+            <Section fill fontSize={1.2}>
+              <Stack fill vertical>
+                <Stack.Item grow>
+                  <Tabs vertical>
+                    {categories.map(([category]) => (
+                      <Tabs.Tab
+                        key={category}
+                        selected={category === selectedCategory}
+                        onClick={() => setSelectedCategory(category)}
+                      >
+                        {category}
+                      </Tabs.Tab>
+                    ))}
+                  </Tabs>
+                </Stack.Item>
+                <Stack.Item>{buttons}</Stack.Item>
+              </Stack>
             </Section>
           </Stack.Item>
-          <Stack.Divider />
-          <Stack.Item grow>
+          <Stack.Item grow className="PreferencesMenu__Content">
             <Section fill scrollable>
-              <Stack fill vertical className="PreferencesMenu__GamePreferences">
-                {categoryContent}
-              </Stack>
+              <Stack vertical>{categoryContent}</Stack>
             </Section>
           </Stack.Item>
         </Stack>

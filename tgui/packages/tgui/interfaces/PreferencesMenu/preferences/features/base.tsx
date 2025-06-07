@@ -100,11 +100,7 @@ function Toggle(props: ToggleProps) {
   const { checked, onClick } = props;
   return (
     <Stack
-      className={classes([
-        'PreferencesMenu__Component',
-        'Toggle',
-        checked && 'Toggle--checked',
-      ])}
+      className={classes(['Toggle', checked && 'Toggle--checked'])}
       onClick={onClick}
     >
       <div className="Toggle__Switch" />

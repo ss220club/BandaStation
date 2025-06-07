@@ -20,11 +20,10 @@ import { ServerPrefs } from './useServerPrefs';
 
 export function PreferencesMenu() {
   const [title, setTitle] = useState('Настройки');
-  document.body.classList.add('PreferencesMenu');
 
   return (
     <Window width={900} height={730} title={title}>
-      <Window.Content>
+      <Window.Content className="PreferencesMenu">
         <Suspense fallback={<LoadingScreen />}>
           <PrefsWindowInner setTitle={setTitle} />
         </Suspense>
