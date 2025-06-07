@@ -912,19 +912,7 @@
 			SSdynamic.unfavorable_situation()
 
 		if(HACK_SLEEPER) // Trigger one or multiple sleeper agents with the crew (or for latejoining crew)
-			// BANDASTATION EDIT START - inject storyteller events instead of dynamic rulesets
-			var/event_to_spawn = pick_weight(list(
-				/datum/round_event_control/antagonist/solo/traitor/midround = 75,
-				// hmmm, let's rarely spawn some non-traitor antags just to spice things up a bit
-				/datum/round_event_control/antagonist/solo/heretic/midround = 15,
-				/datum/round_event_control/antagonist/solo/from_ghosts/wizard = 1
-			))
-			force_event_after(event_to_spawn, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
-			priority_announce(
-				"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
-				"[command_name()] High-Priority Update",
-			)
-			/* var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
+			var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
 			var/max_number_of_sleepers = clamp(round(length(GLOB.alive_player_list) / 20), 1, 3)
 			var/num_agents_created = 0
 			for(var/num_agents in 1 to rand(1, max_number_of_sleepers))
@@ -942,7 +930,6 @@
 					"Внимание экипажу, похоже, зафиксирован взлом системы телекоммуникаций с последующей передачей неизвестного сигнала.",
 					"[command_name()]: Высокоприоритетное оповещение",
 				)
-			*/ // BANDASTATION EDIT END
 
 #undef HACK_PIRATE
 #undef HACK_FUGITIVES

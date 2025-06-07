@@ -59,7 +59,6 @@
 		if(NOT_ENOUGH_PLAYERS)
 			message_admins("[role_name] cannot be spawned due to lack of players signing up.")
 			deadchat_broadcast(" did not get enough candidates ([minimum_required]) to spawn.", "<b>[role_name]</b>", message_type=DEADCHAT_ANNOUNCEMENT)
-			SSgamemode.refill_roleset() // BANDASTATION ADDITION - STORYTELLER
 			kill()
 			return
 		if(SUCCESSFUL_SPAWN)

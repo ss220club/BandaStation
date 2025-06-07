@@ -133,10 +133,6 @@ SUBSYSTEM_DEF(vote)
 		return
 	if(CONFIG_GET(flag/no_dead_vote) && voter.stat == DEAD && !voter.client?.holder)
 		return
-	// BANDASTATION EDIT START - STORYTELLER
-	if(!current_vote.can_vote(voter))
-		return
-	// BANDASTATION EDIT END - STORYTELLER
 
 	// If user has already voted, remove their specific vote
 	if(voter.ckey in current_vote.choices_by_ckey)
@@ -159,10 +155,6 @@ SUBSYSTEM_DEF(vote)
 		return
 	if(!voter?.ckey)
 		return
-	// BANDASTATION EDIT START - STORYTELLER
-	if(!current_vote.can_vote(voter))
-		return
-	// BANDASTATION EDIT END - STORYTELLER
 	if(CONFIG_GET(flag/no_dead_vote) && voter.stat == DEAD && !voter.client?.holder)
 		return
 
@@ -336,11 +328,6 @@ SUBSYSTEM_DEF(vote)
 			"message" = can_vote == VOTE_AVAILABLE ? vote.default_message : can_vote,
 		)
 
-		// BANDASTATION EDIT START - STORYTELLER
-		if(vote.has_desc)
-			vote_data += list("desc" = vote.return_desc(vote_name))
-		// BANDASTATION EDIT END - STORYTELLER
-
 		if(vote == current_vote)
 			var/list/choices = list()
 			for(var/key in current_vote.choices)
@@ -357,7 +344,6 @@ SUBSYSTEM_DEF(vote)
 				"displayStatistics" = current_vote.display_statistics,
 				"choices" = choices,
 				"vote" = vote_data,
-				"canVote" = current_vote.can_vote(user), // BANDASTATION EDIT - STORYTELLER
 			)
 
 		all_vote_data += list(vote_data)

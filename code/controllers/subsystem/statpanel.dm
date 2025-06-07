@@ -36,7 +36,6 @@ SUBSYSTEM_DEF(statpanels)
 			global_data += "Next Map: [cached.map_name]"
 
 		global_data += list(
-			"Storyteller: [!SSgamemode.secret_storyteller && SSgamemode.current_storyteller ? SSgamemode.current_storyteller.name : "Secret"]", // BANDASTATION ADDITION - STORYTELLER
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 			"Players Connected: [LAZYLEN(GLOB.clients)]", // BANDASTATION ADD
 			"Players in Lobby: [LAZYLEN(GLOB.new_player_list)]", // BANDASTATION ADD

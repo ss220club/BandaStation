@@ -44,13 +44,6 @@ GLOBAL_LIST_EMPTY(antagonist_teams)
 		new_objective.find_target(dupe_search_range = list(src))
 	new_objective.update_explanation_text()
 	objectives += new_objective
-	// BANDASTATION EDIT START - STORYTELLER. Я удивлен, почему это в Сторителлере, но Окэээй.
-	for(var/datum/mind/member as anything in members)
-		for(var/datum/antagonist/antag in member.antag_datums)
-			if(antag.get_team() == src)
-				antag.objectives |= new_objective
-				antag.update_static_data_for_all_viewers()
-	// BANDASTATION EDIT END - STORYTELLER
 
 //Display members/victory/failure/objectives for the team
 /datum/team/proc/roundend_report()

@@ -22,7 +22,7 @@
 		if (required_living_minutes >= living_minutes)
 			client.interviewee = TRUE
 
-	check_whitelist_or_make_interviewee() // BANDASTATION Add
+	check_whitelist_or_make_interviewee() /// BANDASTATION ADD
 	. = ..()
 	if(!. || !client)
 		return FALSE

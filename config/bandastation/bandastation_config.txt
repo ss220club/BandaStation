@@ -28,50 +28,6 @@
 ROUNDSTART_RACES vulpkanin
 ROUNDSTART_RACES tajaran
 
-#MIN_THREAT_TO_ROUNDSTART_PERCENT 30
-#MAX_THREAT_TO_ROUNDSTART_PERCENT 60
-#MIN_THREAT_LEVEL 20
-
-## Gamemode configurations
-
-## Multipliers for points gained over time for event tracks.
-MUNDANE_POINT_GAIN_MULTIPLIER 0.5
-MODERATE_POINT_GAIN_MULTIPLIER 0.5
-MAJOR_POINT_GAIN_MULTIPLIER 0.5
-ROLESET_POINT_GAIN_MULTIPLIER 0.5
-OBJECTIVES_POINT_GAIN_MULTIPLIER 0.5
-
-## Minimum population caps for event tracks to run their events.
-MUNDANE_MIN_POP 0
-MODERATE_MIN_POP 0
-MAJOR_MIN_POP 20
-ROLESET_MIN_POP 0
-OBJECTIVES_MIN_POP 0
-
-## Point thresholds for tracks to run events. The lesser the more frequent events will be.
-MUNDANE_POINT_THRESHOLD 500
-MODERATE_POINT_THRESHOLD 750
-MAJOR_POINT_THRESHOLD 2300
-ROLESET_POINT_THRESHOLD 1650
-OBJECTIVES_POINT_THRESHOLD 8000
-
-## Allows the storyteller to scale event frequencies based on population
-ALLOW_STORYTELLER_POP_SCALING
-
-## Thresholds that population frequency scalling penalize up to.
-MUNDANE_POP_SCALE_THRESHOLD 10
-MODERATE_POP_SCALE_THRESHOLD 15
-MAJOR_POP_SCALE_THRESHOLD 40
-ROLESET_POP_SCALE_THRESHOLD 45
-OBJECTIVES_POP_SCALE_THRESHOLD 40
-
-## The maximum penalties population scalling will apply to the tracks for having less pop than POP_SCALE_THRESHOLD. This is treated as percentages
-MUNDANE_POP_SCALE_PENALTY 30
-MODERATE_POP_SCALE_PENALTY 30
-MAJOR_POP_SCALE_PENALTY 30
-ROLESET_POP_SCALE_PENALTY 30
-OBJECTIVES_POP_SCALE_PENALTY 30
-
 ## Automatic crew transfer
 
 ## Time after the roundstart the automatic crew transfer will run. 1.5 hours by default

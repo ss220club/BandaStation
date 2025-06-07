@@ -101,6 +101,3 @@ LOG_WORLD_TOPIC
 
 ## log manual target zone switching
 LOG_ZONE_SWITCH
-
-## log storyteller
-# LOG_STORYTELLER

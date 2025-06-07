@@ -80,10 +80,6 @@
  */
 /datum/vote/proc/can_be_initiated(forced = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	// BANDASTATION EDIT START - STORYTELLER
-	if(!player_startable && !forced)
-		return FALSE
-	// BANDASTATION EDIT END - STORYTELLER
 
 	if(!forced && !is_config_enabled())
 		return "This vote is currently disabled by the server configuration."
@@ -100,8 +96,6 @@
 
 	for(var/key in default_choices)
 		choices[key] = 0
-
-	list_clear_nulls(choices) // monke edit: ensure no nulls end up in a vote
 
 	return TRUE
 

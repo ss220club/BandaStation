@@ -16,7 +16,6 @@
 
 /datum/round_event/spider_infestation/setup()
 	announce_when = rand(announce_when, announce_when + 50)
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/spider_infestation/announce(fake)
 	priority_announce("Обнаружены неопознанные формы жизни на борту [station_name()]. Обезопасьте все наружные входы и выходы, включая вентиляцию и вытяжки.", "Неопознанные формы жизни", ANNOUNCER_ALIENS)

@@ -244,10 +244,6 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 	//Set news report and mode result
 	SSdynamic.set_round_result()
-	// BANDASTATION EDIT START - STORYTELLER
-	SSgamemode.round_end_report()
-	SSgamemode.store_roundend_data() // store data on roundend for next round
-	// BANDASTATION EDIT END - STORYTELLER
 
 	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>The round has ended."))))
 	log_game("The round has ended.")
@@ -313,9 +309,6 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/build_roundend_report()
 	var/list/parts = list()
 
-	//might want to make this a full section
-	parts += SSgamemode.create_roundend_score() // BANDASTATION EDIT - STORYTELLER
-
 	//AI laws
 	parts += law_report()
 
@@ -366,8 +359,6 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			else
 				parts += "[FOURSPACES]<i>Nobody died this shift!</i>"
 
-	// BANDASTATION EDIT START - STORYTELLER
-	/*
 	parts += "[FOURSPACES]Threat level: [SSdynamic.threat_level]"
 	parts += "[FOURSPACES]Threat left: [SSdynamic.mid_round_budget]"
 
@@ -378,8 +369,6 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	parts += "[FOURSPACES]Executed rules:"
 	for(var/datum/dynamic_ruleset/rule in SSdynamic.executed_rules)
 		parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -[rule.cost + rule.scaled_times * rule.scaling_cost] threat"
-	*/
-	// BANDASTATION EDIT END - STORYTELLER
 	return parts.Join("<br>")
 
 /client/proc/roundend_report_file()

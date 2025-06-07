@@ -162,13 +162,11 @@ SUBSYSTEM_DEF(ticker)
 			for(var/channel_tag in CONFIG_GET(str_list/channel_announce_new_game))
 				send2chat(new /datum/tgs_message_content("New round starting on [SSmapping.current_map.map_name]!"), channel_tag)
 			current_state = GAME_STATE_PREGAME
-			//SSvote.initiate_vote(/datum/vote/storyteller, "Storyteller Vote", forced = TRUE) // BANDASTATION EDIT - STORYTELLER
 			SEND_SIGNAL(src, COMSIG_TICKER_ENTER_PREGAME)
 
 			fire()
 		if(GAME_STATE_PREGAME)
 				//lobby stats for statpanels
-			SSgamemode.init_storyteller() // BANDASTATION EDIT - STORYTELLER
 			if(isnull(timeLeft))
 				timeLeft = max(0,start_at - world.time)
 			totalPlayers = LAZYLEN(GLOB.new_player_list)
@@ -233,14 +231,10 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, span_boldannounce("Starting game..."))
 	var/init_start = world.timeofday
-	// BANDASTATION EDIT START - STORYTELLER
 	CHECK_TICK
 	//Configure mode and assign player to antagonists
 	var/can_continue = FALSE
-
-	CHECK_TICK
-	can_continue = SSgamemode.pre_setup()
-	// BANDASTATION EDIT END - STORYTELLER
+	can_continue = SSdynamic.pre_setup() //Choose antagonists
 	CHECK_TICK
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PRE_JOBS_ASSIGNED, src)
 	can_continue = can_continue && SSjob.divide_occupations() //Distribute jobs
@@ -306,8 +300,7 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/PostSetup()
 	set waitfor = FALSE
-	//SSdynamic.post_setup() // BANDASTATION EDIT - STORYTELLER
-	SSgamemode.post_setup() // BANDASTATION EDIT - STORYTELLER
+	SSdynamic.post_setup()
 	GLOB.start_state = new /datum/station_state()
 	GLOB.start_state.count()
 
