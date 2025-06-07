@@ -1,0 +1,3 @@
+https://github.com/fulpstation/fulpstation - git fulps, original idia
+
+https://github.com/Huz2e/massmeta - git massmeta, module taken
