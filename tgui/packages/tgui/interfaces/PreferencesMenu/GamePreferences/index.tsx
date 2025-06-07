@@ -17,7 +17,6 @@ export function GamePreferenceWindow(props: Props) {
   );
 
   let pageContents;
-
   switch (currentPage) {
     case GamePreferencesSelectedPage.Keybindings:
       pageContents = <KeybindingsPage />;

@@ -3,7 +3,7 @@ import { Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 type PreferenceProps = {
-  key: string;
+  id: string;
   name?: string;
   description?: string;
   childrenClassName?: string;
@@ -11,16 +11,14 @@ type PreferenceProps = {
 };
 
 export function Preference(props: PreferenceProps) {
-  const { key, name, description, childrenClassName, children } = props;
+  const { id, name, description, childrenClassName, children } = props;
   const className = 'PreferencesMenu__Preference';
 
   return (
-    <Stack key={key} className={className}>
+    <Stack key={id} className={className}>
       <Stack.Item grow>
         <Stack vertical g={0}>
-          <Stack.Item className={`${className}--name`}>
-            {name || key}
-          </Stack.Item>
+          <Stack.Item className={`${className}--name`}>{name || id}</Stack.Item>
           {description && (
             <Stack.Item className={`${className}--desc`}>
               {description}
@@ -31,7 +29,7 @@ export function Preference(props: PreferenceProps) {
       <Stack
         className={classes([
           `${className}--control`,
-          `${className}--${childrenClassName}`,
+          `${className}--${childrenClassName || 'Preferences'}`,
         ])}
       >
         {children}

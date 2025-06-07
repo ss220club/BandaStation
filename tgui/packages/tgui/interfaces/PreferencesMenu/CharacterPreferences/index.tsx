@@ -122,7 +122,9 @@ export function CharacterPreferenceWindow(props) {
       <Stack.Item>
         <Section
           fitted
-          title={data.character_profiles[data.active_slot - 1]}
+          title={
+            data.character_profiles[data.active_slot - 1] || 'Новый персонаж'
+          }
           buttons={<CharacterSelection />}
         >
           <Tabs fluid textAlign="center">

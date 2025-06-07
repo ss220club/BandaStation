@@ -1,4 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
+import { Button } from 'tgui-core/components';
 import { exhaustiveCheck } from 'tgui-core/exhaustive';
 import { fetchRetry } from 'tgui-core/http';
 
@@ -19,10 +20,24 @@ import { RandomToggleState } from './useRandomToggleState';
 import { ServerPrefs } from './useServerPrefs';
 
 export function PreferencesMenu() {
+  const { act, data } = useBackend<PreferencesMenuData>();
+  const { window } = data;
+
   const [title, setTitle] = useState('Настройки');
+  const isCharacterWindow = window === PrefsWindow.Character;
 
   return (
-    <Window width={900} height={730} title={title}>
+    <Window
+      width={900}
+      height={730}
+      title={title}
+      buttons={
+        <Button
+          icon={isCharacterWindow ? 'cog' : 'user'}
+          onClick={() => act('change_preferences_window')}
+        />
+      }
+    >
       <Window.Content className="PreferencesMenu">
         <Suspense fallback={<LoadingScreen />}>
           <PrefsWindowInner setTitle={setTitle} />

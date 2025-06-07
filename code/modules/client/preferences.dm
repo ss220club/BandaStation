@@ -264,6 +264,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				return FALSE
 
 			return TRUE
+		// BANDASTATION ADDITION - START
+		if("change_preferences_window")
+			if(current_window == PREFERENCE_TAB_CHARACTER_PREFERENCES)
+				current_window = PREFERENCE_TAB_GAME_PREFERENCES
+			else
+				current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES
+			update_static_data(usr)
+			ui_interact(usr)
+		// BANDASTATION ADDITION - END
 
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
 		var/delegation = preference_middleware.action_delegations[action]

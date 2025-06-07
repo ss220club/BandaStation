@@ -35,7 +35,7 @@ export function GamePreferencesPage(props) {
     const feature = features[featureId];
     const child = (
       <Preference
-        key={featureId}
+        id={featureId}
         name={feature.name}
         description={feature.description}
       >
@@ -70,8 +70,6 @@ export function GamePreferencesPage(props) {
   ).map(([category, preferences]) => {
     return [category, preferences.map((entry) => entry)];
   });
-
-  console.log(gamePreferenceEntries);
 
   return (
     <Stack fill vertical>
