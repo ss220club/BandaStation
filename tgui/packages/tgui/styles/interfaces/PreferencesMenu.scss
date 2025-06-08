@@ -15,7 +15,7 @@ $department_map: (
   'Justice': hsl(325, 80%, 40%),
 );
 
-// MARK: CommonStyles
+// MARK: PreferencesPage
 .PreferencesMenu {
   --pref-background: var(--color-base);
   --pref-border: hsl(from var(--pref-background) h s calc(l + 5));
@@ -129,6 +129,10 @@ $department_map: (
       color: var(--color-label);
     }
 
+    &--Character {
+      width: 50%;
+    }
+
     &--Preferences {
       width: 17.5rem;
     }
@@ -163,8 +167,13 @@ $department_map: (
       }
     }
   }
+}
 
+// MARK: CharacterPage
+.PreferencesMenu {
   &__ChoicedSelection {
+    width: 19rem;
+    height: 23em;
     padding: var(--space-m);
     background-color: var(--color-base);
     box-shadow: 0 0.5em 1em hsla(0, 0%, 0%, 0.5);
@@ -172,6 +181,51 @@ $department_map: (
     &.Characters {
       width: 20rem;
       height: 26rem;
+    }
+  }
+
+  &__CharacterControls {
+    justify-content: space-between;
+
+    &.Gender {
+      padding: var(--space-s);
+      background-color: var(--color-base);
+      box-shadow: 0 0.5em 1em hsla(0, 0%, 0%, 0.5);
+    }
+
+    .Button {
+      margin: 0;
+
+      &__content {
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        line-height: 1px;
+      }
+
+      i {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__Name {
+    text-align: center;
+  }
+
+  &__AltName {
+    gap: var(--space-s);
+    padding: var(--space-sm);
+    border: var(--border-thickness-tiny) solid var(--color-border);
+    border-radius: var(--border-radius-small);
+
+    &--explanation {
+      color: var(--color-label);
+    }
+
+    &Section {
     }
   }
 }
@@ -446,12 +500,10 @@ $department_map: (
       align-items: center;
       justify-content: center;
       width: 5rem;
-      background-color: var(--quirk-background2);
     }
 
     &--Name {
       padding: 0.25rem 0.5rem;
-      background-color: var(--quirk-background2);
     }
 
     &--Desc {

@@ -252,7 +252,7 @@ export const FeatureTextInput = (
     <TextArea
       fluid
       expensive
-      height="3.2lh"
+      height="2.25lh"
       value={props.value}
       maxLength={props.serverData.maximum_length}
       onChange={(value) => props.handleSetValue(value)}
