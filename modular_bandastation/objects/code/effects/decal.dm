@@ -35,13 +35,14 @@
 /atom/movable/screen/ship/arno
 	name = "FSS Арно"
 	desc = "Авианесущий крейсер с опознавательными знаками ТСФ."
+	icon_state = "ship_2"
 	scale = matrix(0.8, 0, 0, 0, 0.8, 0)
-	patch = 190
+	patch = 187
 
 /atom/movable/screen/ship/dyuwo
 	name = "FSS Дюво"
-	scale = matrix(0.8, 0, 0, 0, 0.8, 0)
-	patch = 187
+	scale = matrix(0.6, 0, 0, 0, 0.6, 0)
+	patch = 180
 
 /atom/movable/screen/ship/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
@@ -53,7 +54,7 @@
 	pixel_x = 0
 	var/matrix/final_scale = scale || matrix()
 
-	animate(src, transform = final_scale, pixel_x = 180, time = 0.5 SECONDS, easing = CUBIC_EASING | EASE_OUT)
+	animate(src, transform = final_scale, pixel_x = 175, time = 1 SECONDS, easing = CUBIC_EASING | EASE_OUT)
 	sleep (0.1 SECONDS)
 	playsound(src,'modular_bandastation/objects/sounds/hyperspace.ogg', 75, extrarange = 20, pressure_affected = FALSE, ignore_walls = TRUE )
-	animate(src, pixel_x = patch, time = 20 SECONDS, easing = LINEAR_EASING)
+	animate(src, pixel_x = patch, time = 5 SECONDS, easing = LINEAR_EASING)
