@@ -31,7 +31,6 @@
 #include "railings/code/railings.dm"
 #include "smes/code/smes.dm"
 #include "smoothing/code/smoothing.dm"
-#include "soap/code/soap.dm"
 #include "supply_pods/code/supply_pods.dm"
 #include "vending/code/vending.dm"
 #include "walls/code/rocks.dm"
