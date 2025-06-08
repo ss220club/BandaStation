@@ -8,5 +8,9 @@ Modified:
 
 Out-of-module:
 
-- code/\_\_DEFINES/bandastation/ru_jobs.dm
+<!-- prettier-ignore-start -->
+
+- code/__DEFINES/bandastation/ru_jobs.dm
 - tgui/packages/tgui/bandastation/ru_jobs.tsx
+
+<!-- prettier-ignore-end -->

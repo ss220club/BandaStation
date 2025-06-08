@@ -24,12 +24,15 @@ This PR adds adds on to the current dynamic system by having events be guided by
 
 ### Master file additions
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+
 - code\modules\events\_event.dm
 - code\modules\admin\topic.dm
 - code\controllers\subsystem\ticker.dm
 - code\controllers\subsystem\statpanel.dm
 - all event files
+
+<!-- prettier-ignore-end -->
 
 <!-- Any master file changes you've made to existing master files or if you've added a new master file. Please mark either as #NEW or #CHANGE -->
 
