@@ -5346,163 +5346,19 @@
 	name = "Bandit1"
 	value = "bandit1"
 	category = TTS_CATEGORY_STALKER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_ava
-	name = "B_Ava"
-	value = "b_ava"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_FEMALE
-
-/datum/tts_seed/silero/b_bashkir
-	name = "B_Bashkir"
-	value = "b_bashkir"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_bulb
-	name = "B_Bulb"
-	value = "b_bulb"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_bulc
-	name = "B_Bulc"
-	value = "b_bulc"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_che
-	name = "B_Che"
-	value = "b_che"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_cv
-	name = "B_Cv"
-	value = "b_cv"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_kalmyk
-	name = "B_Kalmyk"
-	value = "b_kalmyk"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_kjh
-	name = "B_Kjh"
-	value = "b_kjh"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_kpv
-	name = "B_Kpv"
-	value = "b_kpv"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_krc
-	name = "B_Krc"
-	value = "b_krc"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_lez
-	name = "B_Lez"
-	value = "b_lez"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_mhr
-	name = "B_Mhr"
-	value = "b_mhr"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_mrj
-	name = "B_Mrj"
-	value = "b_mrj"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_myv
-	name = "B_Myv"
-	value = "b_myv"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_nog
-	name = "B_Nog"
-	value = "b_nog"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_oss
-	name = "B_Oss"
-	value = "b_oss"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/brightwing
-	name = "Brightwing"
-	value = "brightwing"
-	category = TTS_CATEGORY_HEROESOFTHESTORM
-	gender = TTS_GENDER_FEMALE
-
-/datum/tts_seed/silero/b_ru
-	name = "B_Ru"
-	value = "b_ru"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_sah
-	name = "B_Sah"
-	value = "b_sah"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_tat
-	name = "B_Tat"
-	value = "b_tat"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_tyv
-	name = "B_Tyv"
-	value = "b_tyv"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_udm
-	name = "B_Udm"
-	value = "b_udm"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
-
-/datum/tts_seed/silero/b_uzb
-	name = "B_Uzb"
-	value = "b_uzb"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_ANY
+	gender = TTS_GENDER_MALE
 
 /datum/tts_seed/silero/cannibal1
 	name = "Cannibal1"
 	value = "cannibal1"
 	category = TTS_CATEGORY_METRO
-	gender = TTS_GENDER_ANY
+	gender = TTS_GENDER_MALE
 
 /datum/tts_seed/silero/cho
 	name = "Cho"
 	value = "cho"
 	category = TTS_CATEGORY_HEROESOFTHESTORM
 	gender = TTS_GENDER_MALE
-
-/datum/tts_seed/silero/cv_ekaterina
-	name = "Cv_Ekaterina"
-	value = "cv_ekaterina"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_FEMALE
 
 /datum/tts_seed/silero/deathwing
 	name = "Deathwing"
@@ -5576,12 +5432,6 @@
 	category = TTS_CATEGORY_WOW
 	gender = TTS_GENDER_MALE
 
-/datum/tts_seed/silero/ilia
-	name = "Ilia"
-	value = "ilia"
-	category = TTS_CATEGORY_UNKNOWN
-	gender = TTS_GENDER_FEMALE
-
 /datum/tts_seed/silero/imperius
 	name = "Imperius"
 	value = "imperius"
@@ -5593,12 +5443,6 @@
 	value = "irelia"
 	category = TTS_CATEGORY_LOL
 	gender = TTS_GENDER_FEMALE
-
-/datum/tts_seed/silero/japyrak
-	name = "Japyrak"
-	value = "japyrak"
-	category = TTS_CATEGORY_UNKNOWN
-	gender = TTS_GENDER_ANY
 
 /datum/tts_seed/silero/jhin
 	name = "Jhin"
@@ -5622,36 +5466,6 @@
 	name = "Karthus"
 	value = "karthus"
 	category = TTS_CATEGORY_LOL
-	gender = TTS_GENDER_MALE
-
-/datum/tts_seed/silero/kz_F1
-	name = "Kz_F1"
-	value = "kz_F1"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_FEMALE
-
-/datum/tts_seed/silero/kz_F2
-	name = "Kz_F2"
-	value = "kz_F2"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_FEMALE
-
-/datum/tts_seed/silero/kz_F3
-	name = "Kz_F3"
-	value = "kz_F3"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_FEMALE
-
-/datum/tts_seed/silero/kz_M1
-	name = "Kz_M1"
-	value = "kz_M1"
-	category = TTS_CATEGORY_OTHER
-	gender = TTS_GENDER_MALE
-
-/datum/tts_seed/silero/kz_M2
-	name = "Kz_M2"
-	value = "kz_M2"
-	category = TTS_CATEGORY_OTHER
 	gender = TTS_GENDER_MALE
 
 /datum/tts_seed/silero/leoric
@@ -5682,12 +5496,6 @@
 	name = "Malganis"
 	value = "malganis"
 	category = TTS_CATEGORY_WARCRAFT3
-	gender = TTS_GENDER_MALE
-
-/datum/tts_seed/silero/marat_tt
-	name = "Marat_Tt"
-	value = "marat_tt"
-	category = TTS_CATEGORY_BOYS_WORD
 	gender = TTS_GENDER_MALE
 
 /datum/tts_seed/silero/mei
@@ -5731,12 +5539,6 @@
 	value = "petr"
 	category = TTS_CATEGORY_OTHER
 	gender = TTS_GENDER_MALE
-
-/datum/tts_seed/silero/random
-	name = "Random"
-	value = "random"
-	category = TTS_CATEGORY_UNKNOWN
-	gender = TTS_GENDER_ANY
 
 /datum/tts_seed/silero/reinhardt
 	name = "Reinhardt"
