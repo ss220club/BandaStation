@@ -50,8 +50,8 @@
 	var/obj/docking_port/mobile/shuttle
 
 /datum/emergency_call/Destroy()
-	QDEL_NULL(base)
-	QDEL_NULL(shuttle)
+	base = null
+	shuttle = null
 	. = ..()
 
 /proc/test_distress()
@@ -246,6 +246,6 @@
 
 /datum/emergency_call/proc/create_leader_preview()
     var/datum/antagonist/ert/preview = leader_role
-    return image(get_dynamic_human_appearance(preview.outfit))
+    return image(get_dynamic_human_appearance(preview.outfit, r_hand = NO_REPLACE, l_hand = NO_REPLACE))
 
 #undef ERT_EXPERIENCED_LEADER_CHOOSE_TOP
