@@ -35,6 +35,7 @@ export function GamePreferencesPage(props) {
     const feature = features[featureId];
     const child = (
       <Preference
+        key={featureId}
         id={featureId}
         name={feature.name}
         description={feature.description}

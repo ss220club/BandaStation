@@ -1,14 +1,11 @@
-/* eslint-disable unused-imports/no-unused-imports */
 import { range, sortBy } from 'common/collections';
 import { Component } from 'react';
 import { resolveAsset } from 'tgui/assets';
 import { useBackend } from 'tgui/backend';
 import {
-  Box,
   Button,
   KeyListener,
   Stack,
-  Tooltip,
   TrackOutsideClicks,
 } from 'tgui-core/components';
 import { KeyEvent } from 'tgui-core/events';
@@ -59,8 +56,8 @@ const KEY_CODE_TO_BYOND: Record<string, string> = {
   PAGEDOWN: 'Southeast',
   PAGEUP: 'Northeast',
   RIGHT: 'East',
-  ' ': 'Space',
   UP: 'North',
+  ' ': 'Space',
 };
 
 /**
@@ -69,17 +66,10 @@ const KEY_CODE_TO_BYOND: Record<string, string> = {
  * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/location
  */
 const DOM_KEY_LOCATION_NUMPAD = 3;
-
 function sortKeybindings(array: [string, Keybinding][]) {
   return sortBy(array, ([_, keybinding]) => {
     return keybinding.name;
   });
-}
-
-function sortKeybindingsByCategory(
-  array: [string, Record<string, Keybinding>][],
-) {
-  return sortBy(array, ([category, _]) => category);
 }
 
 function formatKeyboardEvent(event: KeyboardEvent): string {
@@ -109,17 +99,6 @@ function formatKeyboardEvent(event: KeyboardEvent): string {
   return text;
 }
 
-function moveToBottom(entries: [string, unknown][], findCategory: string) {
-  entries.push(
-    entries.splice(
-      entries.findIndex(([category, _]) => {
-        return category === findCategory;
-      }),
-      1,
-    )[0],
-  );
-}
-
 class KeybindingButton extends Component<{
   currentHotkey?: string;
   onClick?: () => void;
@@ -134,7 +113,6 @@ class KeybindingButton extends Component<{
 
   render() {
     const { currentHotkey, onClick, typingHotkey } = this.props;
-
     const child = (
       <Button
         fluid
@@ -169,7 +147,6 @@ type ResetToDefaultButtonProps = {
 
 function ResetToDefaultButton(props: ResetToDefaultButtonProps) {
   const { act } = useBackend<PreferencesMenuData>();
-
   return (
     <Button
       fluid
@@ -199,7 +176,6 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
 
   constructor(props) {
     super(props);
-
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
   }
@@ -211,7 +187,6 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
 
   componentDidUpdate() {
     const { data } = useBackend<PreferencesMenuData>();
-
     // keybindings is static data, so it'll pass `===` checks.
     // This'll change when resetting to defaults.
     if (data.keybindings !== this.lastKeybinds) {
@@ -221,7 +196,6 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
 
   setRebindingHotkey(value?: string) {
     const { act } = useBackend<PreferencesMenuData>();
-
     this.setState((state) => {
       let selectedKeybindings = state.selectedKeybindings;
       if (!selectedKeybindings) {
@@ -272,7 +246,6 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
     }
 
     event.preventDefault();
-
     this.cancelNextKeyUp = keyEvent.code;
 
     if (isStandardKey(event)) {
@@ -295,7 +268,6 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
     }
 
     const { lastKeyboardEvent, rebindingHotkey } = this.state;
-
     if (rebindingHotkey && lastKeyboardEvent) {
       this.setRebindingHotkey(formatKeyboardEvent(lastKeyboardEvent));
     }
@@ -358,11 +330,10 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
     const { data } = useBackend<PreferencesMenuData>();
 
     this.lastKeybinds = data.keybindings;
-
     this.setState({
       selectedKeybindings: Object.fromEntries(
         Object.entries(data.keybindings).map(([keybind, hotkeys]) => {
-          return [keybind, hotkeys.filter((value) => value !== 'Unbound')];
+          return [keybind, hotkeys.filter((value) => value !== 'Пусто')];
         }),
       ),
     });
@@ -376,13 +347,7 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
       return <LoadingScreen />;
     }
 
-    const keybindingEntries = sortKeybindingsByCategory(
-      Object.entries(keybindings),
-    );
-
-    moveToBottom(keybindingEntries, 'EMOTE');
-    moveToBottom(keybindingEntries, 'ADMIN');
-
+    const keybindingEntries = Object.entries(keybindings);
     return (
       <>
         <KeyListener

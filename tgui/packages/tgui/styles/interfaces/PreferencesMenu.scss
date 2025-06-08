@@ -91,6 +91,7 @@ $department_map: (
     }
 
     &.Sidebar .Tabs {
+      gap: var(--space-s);
       padding-top: var(--space-ml);
       margin-right: calc(-1 * var(--space-m) - var(--border-thickness-small));
     }
@@ -100,7 +101,8 @@ $department_map: (
       align-self: center;
 
       .Input {
-        font-size: 1em;
+        font-size: 0.95em;
+        height: 1.667em;
       }
     }
   }
@@ -124,7 +126,7 @@ $department_map: (
 
     &--desc {
       font-size: 0.8em;
-      color: var(--color-text-translucent);
+      color: var(--color-label);
     }
 
     &--Preferences {
