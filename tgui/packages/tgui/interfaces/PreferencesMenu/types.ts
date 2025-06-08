@@ -211,7 +211,6 @@ export type TtsData = {
   seeds: Array<Seed>;
   phrases: string[];
 };
-
 // BANDASTATION ADDITION END
 
 export type ServerData = {
