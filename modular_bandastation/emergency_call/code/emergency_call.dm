@@ -1,62 +1,53 @@
+/// Number of top experienced candidates to consider for ERT leadership selection
 #define ERT_EXPERIENCED_LEADER_CHOOSE_TOP 3
 
 /datum/emergency_call
-	// name for admins
-	var/name = "Blame coderbus name"
-	// antag datum
+	/// Name for admin
+	var/name = "Blame coderbus"
+	/// Team datum type for the ERT
 	var/team = /datum/team/ert
-	///Alternate antag datum given to the leader of the squad.
+	/// Antag role for the team leader
 	var/leader_role = /datum/antagonist/ert/commander
-	///A list of roles distributed to the selected candidates that are not the leader.
+	/// List of non-leader antag roles
 	var/roles = list(/datum/antagonist/ert/security, /datum/antagonist/ert/medic, /datum/antagonist/ert/engineer)
-	///The custom name assigned to this team, for their antag datum/roundend reporting.
+	/// Custom team name for antag/roundend reporting
 	var/rename_team = "Blame coderbus"
-	///The "would you like to play as XXX" message used when polling for players.
+	/// Ghost poll description text
 	var/polldesc = "Blame coderbus"
-	///The mission given to this ERT type in their flavor text.
-	var/mission = "Assist the station."
-	///The mission given to this ERT type if they are hostile.
-	///
-	var/hostile_mission = "Wreak chaos."
-	///
+	/// Team mission objective (friendly mode)
+	var/mission = "Окажите помощь станции."
+	/// Team mission objective (hostile mode)
+	var/hostile_mission = "Сейте хаос."
+	/// Initial dispatch announcement message
 	var/dispatch_message = "С ближайшего судна получен зашифрованный сигнал. Ожидайте."
-	///
+	/// Arrival announcement message
 	var/arrival_message = ""
-	///
+	/// Chance for arrival message to be scrambled (0-100)
 	var/chance_hidden = 20
-	///The max number of players
+	/// Maximum number of team members
 	var/mob_max = 5
-	// min candidates to activate
-	var/mob_min = 0
-	/// If TRUE, gives the team members "[role] [random last name]" style names
+	/// Minimum candidates required to activate
+	var/mob_min = 1
+	/// Whether to generate random last names for team members
 	var/random_names = TRUE
-	/// If TRUE, we try and pick one of the most experienced players who volunteered to fill the leader slot
+	/// Prioritize experienced players for leader role
 	var/leader_experience = TRUE
-	/// A shuttle map template to spawn the ERT at. Must present
+	/// Shuttle template ID for deployment
 	var/shuttle_id = "tsf_patrol"
-	/// ID of lazy template to load, if null or false - no base
+	/// Lazy template ID for ERT base (null for no base)
 	var/base_template = null
-	/// Used for spawning bodies for your ERT. Unless customized in the Summon-ERT verb settings, will be overridden and should not be defined at the datum level.
+	/// Mob type for team members (default - human)
 	var/mob_type
-	/// chance to roll
+	/// Activation weight relative to other ERT types
 	var/weight = 0
-	/// obj to show in ghost poll, or will show leader dummy if null or false
+	/// Custom ghost poll image (uses leader preview if null)
 	var/alert_pic = null
-	/// chance to be hostile from 0 to 100
+	/// Hostility chance percentage (0-100)
 	var/hostility = 0
-	/// our base
+	/// Reserved turf area for ERT base
 	var/datum/turf_reservation/base
-	/// our shuttle
+	/// Shuttle docking port reference
 	var/obj/docking_port/mobile/shuttle
-
-/datum/emergency_call/New()
-	if(prob(hostility))
-		hostility = TRUE
-
-/datum/emergency_call/Destroy()
-	base = null
-	shuttle = null
-	. = ..()
 
 /proc/test_distress()
 	SSemergency_call.activate_random_emergency_call()
@@ -67,6 +58,24 @@
 		return
 	SSemergency_call.activate(pick)
 
+/datum/emergency_call/New()
+	if(prob(hostility))
+		hostility = TRUE
+
+/datum/emergency_call/Destroy()
+	base = null
+	shuttle = null
+	. = ..()
+
+/**
+ * Activate emergency call
+ *
+ * Main proc for starting ERT deployment
+ * Arguments:
+ * * announce_launch - Whether to send station launch announcement
+ * * announce_incoming - Whether to send arrival announcement
+ * Returns: TRUE on success, FALSE on failure
+ */
 /datum/emergency_call/proc/activate(announce_launch = TRUE, announce_incoming = TRUE)
 	if(announce_launch)
 		priority_announce("С борта [station_name()] был запущен маяк бедствия.", "Приоритетное оповещение")
@@ -120,6 +129,14 @@
 
 	return TRUE
 
+/**
+ * Create ERT shuttle
+ *
+ * Loads and positions the shuttle template
+ * Arguments:
+ * * shuttle_id - Template ID from SSmapping.shuttle_templates
+ * Returns: List of affected turfs in shuttle
+ */
 /datum/emergency_call/proc/create_shuttle(shuttle_id)
 	var/datum/map_template/shuttle/template = SSmapping.shuttle_templates[shuttle_id]
 
@@ -149,6 +166,13 @@
 
 	return shuttle_turfs
 
+/**
+ * Find valid spawn locations in shuttle
+ *
+ * Arguments:
+ * * shuttle_turfs - List of turfs in the spawned shuttle
+ * Returns: List of safe spawn locations
+ */
 /datum/emergency_call/proc/find_spawn_turfs(list/shuttle_turfs)
 	var/list/spawn_turfs = list()
 	for(var/turf/affected_turf as anything in shuttle_turfs)
@@ -165,6 +189,12 @@
 
 	return spawn_turfs
 
+/**
+ * Create antagonist team datum
+ *
+ * Generates team objectives based on hostility status
+ * Returns: New /datum/team/ert
+ */
 /datum/emergency_call/proc/create_antag_team()
 	var/datum/team/ert/ert_team = new team()
 	if(rename_team)
@@ -180,6 +210,15 @@
 
 	return ert_team
 
+/**
+ * Select and spawn candidates
+ *
+ * Handles player selection and mob creation
+ * Arguments:
+ * * candidates - List of ghost candidates
+ * * spawn_turfs - List of valid spawn locations
+ * * ert_team - Team datum for antag assignment
+ */
 /datum/emergency_call/proc/pick_and_spawn_candidates(list/candidates, list/spawn_turfs, datum/team/ert/ert_team)
 	var/numagents = min(mob_max, length(candidates))
 
@@ -229,6 +268,11 @@
 		ert_operative.log_message("has been selected as \a [ert_antag.name].", LOG_GAME)
 		numagents--
 
+/**
+ * Configure shuttle navigation
+ *
+ * Adds ERT base destination to shuttle computer
+ */
 /datum/emergency_call/proc/allow_shuttle_fly_to_base()
 	if(!base || !shuttle)
 		return
@@ -243,8 +287,14 @@
 	current_destinations |= destinations
 	shuttle_computer.possible_destinations = current_destinations.Join(";")
 
+/**
+ * Generate leader preview image
+ *
+ * Creates appearance for ghost poll
+ * Returns: /image of leader outfit
+ */
 /datum/emergency_call/proc/create_leader_preview()
-    var/datum/antagonist/ert/preview = leader_role
-    return image(get_dynamic_human_appearance(preview.outfit, r_hand = NO_REPLACE, l_hand = NO_REPLACE))
+	var/datum/antagonist/ert/preview = leader_role
+	return image(get_dynamic_human_appearance(preview.outfit, r_hand = NO_REPLACE, l_hand = NO_REPLACE))
 
 #undef ERT_EXPERIENCED_LEADER_CHOOSE_TOP
