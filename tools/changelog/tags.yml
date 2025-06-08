@@ -1,47 +1,47 @@
 tags:
-  rscadd: 'rscadd'
-  add: 'rscadd'
-  adds: 'rscadd'
-  bugfix: 'bugfix'
-  fix: 'bugfix'
-  fixes: 'bugfix'
-  rscdel: 'rscdel'
-  del: 'rscdel'
-  dels: 'rscdel'
-  qol: 'qol'
-  sound: 'sound'
-  image: 'image'
-  map: 'map'
-  spellcheck: 'spellcheck'
-  typo: 'spellcheck'
-  balance: 'balance'
-  code_imp: 'code_imp'
-  code: 'code_imp'
-  refactor: 'refactor'
-  config: 'config'
-  admin: 'admin'
-  server: 'server'
+  rscadd: "rscadd"
+  add: "rscadd"
+  adds: "rscadd"
+  bugfix: "bugfix"
+  fix: "bugfix"
+  fixes: "bugfix"
+  rscdel: "rscdel"
+  del: "rscdel"
+  dels: "rscdel"
+  qol: "qol"
+  sound: "sound"
+  image: "image"
+  map: "map"
+  spellcheck: "spellcheck"
+  typo: "spellcheck"
+  balance: "balance"
+  code_imp: "code_imp"
+  code: "code_imp"
+  refactor: "refactor"
+  config: "config"
+  admin: "admin"
+  server: "server"
 
 defaults:
-  rscadd: 'Изменил геймплей или добавил новую механику'
-  add: 'Изменил геймплей или добавил новую механику'
-  adds: 'Изменил геймплей или добавил новую механику'
-  bugfix: 'Что-то починил'
-  fix: 'Что-то починил'
-  fixes: 'Что-то починил'
-  rscdel: 'Что-то удалил'
-  del: 'Что-то удалил'
-  dels: 'Что-то удалил'
-  qol: 'Сделал что-то удобнее'
-  sound: 'Добавил, изменил или удалил звук'
-  image: 'Добавил, изменил или удалил картинку'
-  map: 'Добавил, изменил или удалил что-то на карте'
-  spellcheck: 'Исправил опечатку'
-  typo: 'Исправил опечатку'
-  code_imp: 'Незначительно улучшил качество кода'
-  code: 'Незначительно улучшил качество кода'
-  balance: 'Сделал правки в балансе'
-  refactor: 'Значительно улучшил качество кода'
-  config: 'Изменил что-то в конфиге'
-  admin: 'Поменял кнопки админам'
-  server: 'Изменил что-то серверное, о чем должен знать хост'
+  rscadd: "Изменил геймплей или добавил новую механику"
+  add: "Изменил геймплей или добавил новую механику"
+  adds: "Изменил геймплей или добавил новую механику"
+  bugfix: "Что-то починил"
+  fix: "Что-то починил"
+  fixes: "Что-то починил"
+  rscdel: "Что-то удалил"
+  del: "Что-то удалил"
+  dels: "Что-то удалил"
+  qol: "Сделал что-то удобнее"
+  sound: "Добавил, изменил или удалил звук"
+  image: "Добавил, изменил или удалил картинку"
+  map: "Добавил, изменил или удалил что-то на карте"
+  spellcheck: "Исправил опечатку"
+  typo: "Исправил опечатку"
+  code_imp: "Незначительно улучшил качество кода"
+  code: "Незначительно улучшил качество кода"
+  balance: "Сделал правки в балансе"
+  refactor: "Значительно улучшил качество кода"
+  config: "Изменил что-то в конфиге"
+  admin: "Поменял кнопки админам"
+  server: "Изменил что-то серверное, о чем должен знать хост"

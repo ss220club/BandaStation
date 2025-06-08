@@ -40,7 +40,7 @@ function parseChangelogBody(lines, openTag) {
       const [_, type, rawDescription] = match;
 
       const entry = CHANGELOG_KEYS_TO_ENTRY[type];
-      const description = rawDescription?.replaceAll(/<!--.*?-->/g, "")?.trim()
+      const description = rawDescription?.replaceAll(/<!--.*?-->/g, "")?.trim();
 
       if (!entry || entry.placeholders.includes(description)) {
         continue;
