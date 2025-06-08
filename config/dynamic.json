@@ -25,56 +25,41 @@
 			"weight": 0
 		},
 
-		"Changelings": {
-		},
+		"Changelings": {},
 
 		"Heretics": {
 			"weight": 0
 		},
 
-		"Wizard": {
-		},
+		"Wizard": {},
 
-		"Blood Cult": {
-		},
+		"Blood Cult": {},
 
-		"Nuclear Emergency": {
-		},
+		"Nuclear Emergency": {},
 
-		"Clown Operatives": {
-		},
+		"Clown Operatives": {},
 
-		"Revolution": {
-		},
+		"Revolution": {},
 
-		"Malfunctioning AI": {
-		},
+		"Malfunctioning AI": {},
 
-		"Spies": {
-		}
+		"Spies": {}
 	},
 
 	"Midround": {
-		"Syndicate Sleeper Agent": {
-		},
+		"Syndicate Sleeper Agent": {},
 
-		"Malfunctioning AI": {
-		},
+		"Malfunctioning AI": {},
 
-		"Wizard": {
-		},
+		"Wizard": {},
 
-		"Nuclear Assault": {
-		},
+		"Nuclear Assault": {},
 
-		"Blob": {
-		},
+		"Blob": {},
 
-		"Blob Infection": {
-		},
+		"Blob Infection": {},
 
-		"Alien Infestation": {
-		},
+		"Alien Infestation": {},
 
 		"Nightmare": {
 			"weight": 0
@@ -84,17 +69,13 @@
 			"weight": 0
 		},
 
-		"Abductors": {
-		},
+		"Abductors": {},
 
-		"Space Ninja": {
-		},
+		"Space Ninja": {},
 
-		"Spiders": {
-		},
+		"Spiders": {},
 
-		"Revenant": {
-		},
+		"Revenant": {},
 
 		"Space Pirates": {
 			"weight": 0
@@ -108,8 +89,7 @@
 			"weight": 0
 		},
 
-		"Space Changeling": {
-		},
+		"Space Changeling": {},
 
 		"Paradox Clone": {
 			"weight": 0
@@ -117,18 +97,15 @@
 	},
 
 	"Latejoin": {
-		"Syndicate Infiltrator": {
-		},
+		"Syndicate Infiltrator": {},
 
-		"Provocateur": {
-		},
+		"Provocateur": {},
 
 		"Heretic Smuggler": {
 			"weight": 0
 		},
 
-		"Stowaway Changeling": {
-		}
+		"Stowaway Changeling": {}
 	},
 
 	"Station": {
