@@ -5,7 +5,7 @@
 /obj/structure/light_fake
 	name = "light fixture"
 	desc = "A lighting fixture."
-	icon = 'modular_bandastation/objects/icons/obj/structure/light.dmi'
+	icon = 'modular_bandastation/objects/icons/obj/structures/light.dmi'
 	icon_state = "tube"
 	anchored = TRUE
 	layer = WALL_OBJ_LAYER
