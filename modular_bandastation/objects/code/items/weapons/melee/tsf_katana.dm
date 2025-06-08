@@ -19,10 +19,10 @@
 	throwforce = 30
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-	hitsound = 'modular_bandastation/objects/sound/weapons/tsf_katana_hit.ogg'
-	pickup_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_unsheath.ogg'
-	drop_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_sheath.ogg'
-	block_sound = 'modular_bandastation/objects/sound/weapons/tsf_katana_block.ogg'
+	hitsound = 'modular_bandastation/objects/sounds/weapons/tsf_katana_hit.ogg'
+	pickup_sound = 'modular_bandastation/objects/sounds/weapons/tsf_katana_unsheath.ogg'
+	drop_sound = 'modular_bandastation/objects/sounds/weapons/tsf_katana_sheath.ogg'
+	block_sound = 'modular_bandastation/objects/sounds/weapons/tsf_katana_block.ogg'
 	attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
 	sharpness = SHARP_EDGED

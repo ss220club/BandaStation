@@ -2,13 +2,13 @@
 	name = "Void Adaption"
 	desc = "Мы готовим наши клетки к противостоянию враждебной среде за пределами станции. Мы можем свободно перемещаться, куда пожелаем."
 	helptext = "Эта способность пассивна и автоматически защищает вас в условиях сильного холода или вакуума, \
-		а также лишает вас необходимости дышать. В то время как она активно защищает вас от температуры или давления, \
-		она снижает скорость химической регенерации."
+		а также избавляет вас от необходимости дышать кислородом, хотя вы все равно будете подвергаться воздействию опасных газов. \
+		В то время как он активно защищает вас от температуры или давления, он снижает скорость химической регенерации."
 	owner_has_control = FALSE
 	dna_cost = 2
 
 	/// Traits we apply to become immune to the environment
-	var/static/list/gain_traits = list(TRAIT_NOBREATH, TRAIT_RESISTCOLD, TRAIT_RESISTLOWPRESSURE, TRAIT_SNOWSTORM_IMMUNE)
+	var/static/list/gain_traits = list(TRAIT_SPACEBREATHING, TRAIT_RESISTCOLD, TRAIT_RESISTLOWPRESSURE, TRAIT_SNOWSTORM_IMMUNE)
 	/// How much we slow chemical regeneration while active, in chems per second
 	var/recharge_slowdown = 0.25
 	/// Are we currently protecting our user?
