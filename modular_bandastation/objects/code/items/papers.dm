@@ -90,15 +90,12 @@
 
 /obj/item/passport/tsf/sirius
 	name = "Sirius passport"
-	icon_state = "passport_scg2"
 	desc = "Паспорт из системы Сириус, находящейся в пределах пространства Транс-Солнечной Федерации."
 
 /obj/item/passport/tsf/procyon
 	name = "Procyon passport"
-	icon_state = "passport_scg2"
 	desc = "Паспорт из системы Процинон, находящейся в пределах пространства Транс-Солнечной Федерации."
 
 /obj/item/passport/tsf/bernard
 	name = "Bernard passport"
-	icon_state = "passport_scg2"
 	desc = "Паспорт из системы Бернарда, находящейся в пределах пространства Транс-Солнечной Федерации."
