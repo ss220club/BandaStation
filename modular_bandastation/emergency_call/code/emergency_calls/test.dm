@@ -15,7 +15,7 @@
 	random_names = TRUE
 	leader_experience = TRUE
 	shuttle_id = "hunter_bounty"
-	base_template = "generic_ert_base"
+	base_template = LAZY_TEMPLATE_KEY_TSF_BASE
 	weight = 10
 	alert_pic = null
 	hostility = 0

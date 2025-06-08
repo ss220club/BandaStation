@@ -49,6 +49,10 @@
 	/// our shuttle
 	var/obj/docking_port/mobile/shuttle
 
+/datum/emergency_call/New()
+	if(prob(hostility))
+		hostility = TRUE
+
 /datum/emergency_call/Destroy()
 	base = null
 	shuttle = null
@@ -62,10 +66,6 @@
 	if(!pick)
 		return
 	SSemergency_call.activate(pick)
-
-/datum/emergency_call/New()
-	if(prob(hostility))
-		hostility = TRUE
 
 /datum/emergency_call/proc/activate(announce_launch = TRUE, announce_incoming = TRUE)
 	if(announce_launch)
@@ -98,8 +98,7 @@
 	var/list/shuttle_turfs = create_shuttle(shuttle_id)
 
 	// ensure shuttle can fly to base
-	if(base && shuttle)
-		allow_shuttle_fly_to_base()
+	allow_shuttle_fly_to_base()
 
 	// find spawn turfs in shuttle
 	var/list/spawn_turfs = find_spawn_turfs(shuttle_turfs)
@@ -240,9 +239,9 @@
 			destinations |= dock.shuttle_id
 
 	var/obj/machinery/computer/shuttle/shuttle_computer = shuttle.get_control_console()
-	var/list/old_dest = params2list(shuttle_computer.possible_destinations)
-	destinations |= old_dest
-	shuttle_computer.possible_destinations = list2params(destinations)
+	var/list/current_destinations = splittext(shuttle_computer.possible_destinations, ";")
+	current_destinations |= destinations
+	shuttle_computer.possible_destinations = current_destinations.Join(";")
 
 /datum/emergency_call/proc/create_leader_preview()
     var/datum/antagonist/ert/preview = leader_role
