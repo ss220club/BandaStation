@@ -23,20 +23,37 @@
 	layer = MID_TURF_LAYER // Above other decals
 
 //ТМ НА ОДИН РАУНД, НЕ ХОЧУ КОНФЛИКТОВ В OBJECTS.DME
-/atom/movable/screen/planet
-	name = "Ламэра"
-	desc = "Разрушенный планетоид. Старый, как сама система."
-	icon = 'modular_bandastation/objects/icons/obj/effects/planet.dmi'
-	icon_state = "planet"
-	plane = RENDER_PLANE_TRANSPARENT
-
 /atom/movable/screen/ship
-	name = "FSS Луизиана"
-	desc = "Небольшой корабль. Опознавательных знаков нет."
+	name = "FSS Флёр"
+	desc = "Крейсер с опознавательными знаками ТСФ."
 	icon = 'modular_bandastation/objects/icons/obj/effects/ship.dmi'
 	icon_state = "ship"
 	plane = RENDER_PLANE_TRANSPARENT
+	var/matrix/scale = null
+	var/patch = 192
+
+/atom/movable/screen/ship/arno
+	name = "FSS Арно"
+	desc = "Авианесущий крейсер с опознавательными знаками ТСФ."
+	scale = matrix(0.8, 0, 0, 0, 0.8, 0)
+	patch = 190
+
+/atom/movable/screen/ship/dyuwo
+	name = "FSS Дюво"
+	scale = matrix(0.8, 0, 0, 0, 0.8, 0)
+	patch = 187
 
 /atom/movable/screen/ship/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
-	animate(src, pixel_x = 999, time = 300 SECONDS, easing = LINEAR_EASING)
+	spawn()
+		spawn_ship_animation()
+
+/atom/movable/screen/ship/proc/spawn_ship_animation()
+	transform = matrix(0.1, 0, 0, 0, 0.1, 0)
+	pixel_x = 0
+	var/matrix/final_scale = scale || matrix()
+
+	animate(src, transform = final_scale, pixel_x = 180, time = 0.5 SECONDS, easing = CUBIC_EASING | EASE_OUT)
+	sleep (0.1 SECONDS)
+	playsound(src,'modular_bandastation/objects/sounds/hyperspace.ogg', 75, extrarange = 20, pressure_affected = FALSE, ignore_walls = TRUE )
+	animate(src, pixel_x = patch, time = 20 SECONDS, easing = LINEAR_EASING)
