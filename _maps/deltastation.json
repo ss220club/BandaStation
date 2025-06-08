@@ -14,16 +14,16 @@
 			"additional_cqc_areas": ["/area/station/service/cafeteria"]
 		},
 		"Nanotrasen Representative": {
-            "spawn_positions": 1
-        },
-        "Blueshield": {
-            "spawn_positions": 1
-        },
-        "Magistrate": {
-            "spawn_positions": 1
-        },
-        "Explorer": {
-            "spawn_positions": 4
-        }
+			"spawn_positions": 1
+		},
+		"Blueshield": {
+			"spawn_positions": 1
+		},
+		"Magistrate": {
+			"spawn_positions": 1
+		},
+		"Explorer": {
+			"spawn_positions": 4
+		}
 	}
 }
