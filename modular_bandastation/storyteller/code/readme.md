@@ -24,7 +24,8 @@ This PR adds adds on to the current dynamic system by having events be guided by
 
 ### Master file additions
 
-- code\modules\events_event.dm
+<!-- prettier-ignore -->
+- code\modules\events\_event.dm
 - code\modules\admin\topic.dm
 - code\controllers\subsystem\ticker.dm
 - code\controllers\subsystem\statpanel.dm
