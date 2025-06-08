@@ -34,8 +34,8 @@
 	var/leader_experience = TRUE
 	/// A shuttle map template to spawn the ERT at. Must present
 	var/shuttle_id = "tsf_patrol"
-	/// if null or false - no base
-	var/base_template = "generic_ert_base"
+	/// ID of lazy template to load, if null or false - no base
+	var/base_template = null
 	/// Used for spawning bodies for your ERT. Unless customized in the Summon-ERT verb settings, will be overridden and should not be defined at the datum level.
 	var/mob_type
 	/// chance to roll
@@ -48,6 +48,11 @@
 	var/datum/turf_reservation/base
 	/// our shuttle
 	var/obj/docking_port/mobile/shuttle
+
+/datum/emergency_call/Destroy()
+	QDEL_NULL(base)
+	QDEL_NULL(shuttle)
+	. = ..()
 
 /proc/test_distress()
 	SSemergency_call.activate_random_emergency_call()
@@ -93,7 +98,8 @@
 	var/list/shuttle_turfs = create_shuttle(shuttle_id)
 
 	// ensure shuttle can fly to base
-	allow_shuttle_fly_to_base()
+	if(base && shuttle)
+		allow_shuttle_fly_to_base()
 
 	// find spawn turfs in shuttle
 	var/list/spawn_turfs = find_spawn_turfs(shuttle_turfs)
@@ -239,12 +245,7 @@
 	shuttle_computer.possible_destinations = list2params(destinations)
 
 /datum/emergency_call/proc/create_leader_preview()
-	var/datum/antagonist/ert/preview = leader_role
-	var/mob/living/carbon/human/dummy = new /mob/living/carbon/human/dummy/consistent
-	dummy.equipOutfit(preview.outfit, visuals_only = TRUE)
-	dummy.wear_suit?.update_greyscale()
-	alert_pic = dummy
-	QDEL_IN(dummy, 1 SECONDS)
-	return dummy
+    var/datum/antagonist/ert/preview = leader_role
+    return image(get_dynamic_human_appearance(preview.outfit))
 
 #undef ERT_EXPERIENCED_LEADER_CHOOSE_TOP
