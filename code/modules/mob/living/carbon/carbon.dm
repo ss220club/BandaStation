@@ -904,7 +904,7 @@
 		return DEFIB_FAIL_NO_INTELLIGENCE
 		*/ // BANDASTATION EDIT END - PERMA-DEATH
 
-	if(key && key[1] == "@") // Adminghosts
+	if(IS_FAKE_KEY(key))
 		return DEFIB_NOGRAB_AGHOST
 
 	return DEFIB_POSSIBLE

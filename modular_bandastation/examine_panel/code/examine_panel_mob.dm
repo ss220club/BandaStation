@@ -3,11 +3,11 @@
 	. = ..()
 	AddComponent(/datum/component/examine_panel)
 
-/datum/dna/transfer_identity(mob/living/carbon/destination, transfer_SE, transfer_species)
-	if(!istype(destination))
-		return
+/datum/dna/copy_dna(datum/dna/new_dna, transfer_flags = COPY_DNA_SE|COPY_DNA_SPECIES)
 	. = ..()
-	destination.AddComponent(/datum/component/examine_panel)
+	if(!iscarbon(new_dna.holder))
+		return
+	new_dna.holder.AddComponent(/datum/component/examine_panel)
 
 /mob/living/silicon
 	var/flavor_text

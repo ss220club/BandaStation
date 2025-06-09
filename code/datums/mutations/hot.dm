@@ -1,4 +1,4 @@
-/datum/mutation/human/cindikinesis
+/datum/mutation/cindikinesis
 	name = "Cindikinesis"
 	desc = "Позволяет обладателю мутации сконцентрировать рядом находящееся тепло в кучу пепла. Вау. Очень интересно."
 	quality = POSITIVE
@@ -21,7 +21,7 @@
 	delete_old = FALSE
 	delete_on_failure = FALSE
 
-/datum/mutation/human/pyrokinesis
+/datum/mutation/pyrokinesis
 	name = "Pyrokinesis"
 	desc = "Притягивает положительную энергию окружения для повышения температуры вокруг субъекта."
 	quality = POSITIVE
