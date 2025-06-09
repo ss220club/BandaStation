@@ -1,7 +1,7 @@
 import { sortBy } from 'common/collections';
 import { CSSProperties, PropsWithChildren, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Button, Dropdown, Stack, Tooltip } from 'tgui-core/components';
+import { Button, Section, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
@@ -258,75 +258,81 @@ function Department(props: DepartmentProps) {
   );
 }
 
-function JoblessRoleDropdown(props) {
+function JoblessRoleDropdown() {
   const { act, data } = useBackend<PreferencesMenuData>();
   const selected = data.character_preferences.misc.joblessrole;
-
   const options = [
     {
-      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] || data.overflow_role} если не удалось войти`,
+      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] || data.overflow_role}`,
       value: JoblessRole.BeOverflow,
     },
     {
-      displayText: `Выбрать случайную должность, если не удалось войти`,
+      displayText: `Выбрать случайную должность`,
       value: JoblessRole.BeRandomJob,
     },
     {
-      displayText: `Вернуться в лобби, если не удалось войти`,
+      displayText: `Вернуться в лобби`,
       value: JoblessRole.ReturnToLobby,
     },
   ];
 
-  const selection = options?.find(
-    (option) => option.value === selected,
-  )!.displayText;
-
+  const setPreference = createSetPreference(act, 'joblessrole');
   return (
-    <Stack justify="end">
-      <Dropdown
-        width="100%"
-        selected={selection}
-        onSelected={createSetPreference(act, 'joblessrole')}
-        options={options}
-      />
-    </Stack>
+    <Section title="Что делать если не удалось войти?">
+      <Stack fill textAlign="center">
+        {options.map((option) => (
+          <Stack.Item grow key={option.value}>
+            <Button
+              fluid
+              color="transparent"
+              selected={selected === option.value}
+              onClick={() => setPreference(option.value)}
+            >
+              {option.displayText}
+            </Button>
+          </Stack.Item>
+        ))}
+      </Stack>
+    </Section>
   );
 }
 
 export function JobsPage() {
   const captainMargin = 5.25;
   return (
-    <Stack fill vertical>
+    <Stack fill vertical g={0}>
       <Stack.Item>
         <JoblessRoleDropdown />
       </Stack.Item>
       <Stack.Divider />
       <Stack.Item grow>
-        <Stack fill g={1} className="PreferencesMenu__Jobs">
-          <Stack.Item grow minWidth={0} mt={captainMargin}>
-            <Stack vertical>
-              <Department department="Engineering" />
-              <Department department="Science" />
-              <Department department="Silicon" />
-              <Department department="Assistant" />
-            </Stack>
-          </Stack.Item>
-          <Stack.Item grow minWidth={0}>
-            <Stack vertical>
-              <Department department="Captain" />
-              <Department department="NT Representation" />
-              <Department department="Service" />
-              <Department department="Cargo" />
-            </Stack>
-          </Stack.Item>
-          <Stack.Item grow minWidth={0} mt={captainMargin}>
-            <Stack vertical>
-              <Department department="Security" />
-              <Department department="Justice" />
-              <Department department="Medical" />
-            </Stack>
-          </Stack.Item>
-        </Stack>
+        <Section fill>
+          <Stack fill g={1} className="PreferencesMenu__Jobs">
+            <Stack.Item grow minWidth={0} mt={captainMargin}>
+              <Stack vertical>
+                <Department department="Engineering" />
+                <Department department="Science" />
+                <Department department="Silicon" />
+                <Department department="Assistant" />
+              </Stack>
+            </Stack.Item>
+            <Stack.Item grow minWidth={0}>
+              <Stack vertical>
+                <Department department="Captain" />
+                <Department department="NT Representation" />
+                <Department department="Service" />
+                <Department department="Cargo" />
+              </Stack>
+            </Stack.Item>
+            <Stack.Item grow minWidth={0} mt={captainMargin}>
+              <Stack vertical>
+                <Department department="Security" />
+                <Department department="Justice" />
+                <Department department="Medical" />
+              </Stack>
+            </Stack.Item>
+          </Stack>
+        </Section>
       </Stack.Item>
     </Stack>
   );
