@@ -253,6 +253,7 @@ function MainFeature(props: MainFeatureProps) {
       }
     >
       <ImageButton
+        className="PreferencesMenu__MainFeature"
         asset={['preferences32x32', catalog.icons![currentValue]]}
         imageSize={48}
         buttons={
