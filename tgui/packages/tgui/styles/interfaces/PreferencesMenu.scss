@@ -301,7 +301,6 @@ $department_map: (
         justify-content: center;
         margin: 0;
         padding: 0;
-        line-height: 1.4lh;
         transition: transform var(--transition-time-medium);
         transition-delay: var(--transition-time-medium);
         z-index: 0;
@@ -331,6 +330,12 @@ $department_map: (
 
         &:hover:active:not(.selected):after {
           outline-style: inset;
+        }
+
+        /* Special for dropdown */
+        &.Dropdown__control {
+          width: 1.667em !important; // Override inline style
+          height: 1.667em;
         }
       }
     }
