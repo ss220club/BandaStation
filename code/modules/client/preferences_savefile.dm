@@ -197,9 +197,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	chat_toggles = savefile.get_entry("chat_toggles", chat_toggles)
 	toggles = savefile.get_entry("toggles", toggles)
 	ignoring = savefile.get_entry("ignoring", ignoring)
-	// BANDASTATION ADDITION - START
-	pref_job_slots = savefile.get_entry("pref_job_slots", pref_job_slots) 
-	job_preferences = savefile.get_entry("job_preferences", job_preferences)Slots
+	// BANDASTATION ADDITION - START - Pref Job Slots
+	pref_job_slots = savefile.get_entry("pref_job_slots", pref_job_slots)
+	job_preferences = savefile.get_entry("job_preferences", job_preferences)
 	// BANDASTATION ADDITION - END
 
 	// OOC commendations
@@ -237,17 +237,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	be_special = sanitize_be_special(SANITIZE_LIST(be_special))
 	key_bindings = sanitize_keybindings(key_bindings)
 	favorite_outfits = SANITIZE_LIST(favorite_outfits)
-	// BANDASTATION ADDITION - START
+	// BANDASTATION ADDITION - START - Pref Job Slots
 	pref_job_slots = SANITIZE_LIST(pref_job_slots)
 	job_preferences = SANITIZE_LIST(job_preferences)
 	// BANDASTATION ADDITION - END
 
-	// BANDASTATION ADD - Start - Pref Job Slots
+	// BANDASTATION ADDITION - START - Pref Job Slots
 	//Validate job prefs
 	for(var/j in job_preferences)
 		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
 			job_preferences -= j
-	// BANDASTATION ADD - End - Pref Job Slots
+	// BANDASTATION ADDITION - END
 
 	if(needs_update >= 0) //save the updated version
 		var/old_default_slot = default_slot
@@ -347,11 +347,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	all_quirks = SANITIZE_LIST(all_quirks)
 
 	//Validate job prefs
-	// BANDASTATION MOVED - Start - Pref Job Slots
+	// BANDASTATION MOVED - START - Pref Job Slots
 	// for(var/j in job_preferences)
 	// 	if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
 	// 		job_preferences -= j
-	// BANDASTATION MOVED - End - Pref Job Slots
+	// BANDASTATION MOVED - END
 
 	all_quirks = SSquirks.filter_invalid_quirks(SANITIZE_LIST(all_quirks))
 	validate_quirks()
