@@ -12,5 +12,7 @@
 	custom_price = PAYCHECK_CREW * 5
 	custom_premium_price = PAYCHECK_CREW * 6
 
+/** BANDASTATION REMOVAL - Crew Monitor NanoMap
 /obj/item/sensor_device/attack_self(mob/user)
 	GLOB.crewmonitor.show(user,src) //Proc already exists, just had to call it
+*/

@@ -1,10 +1,10 @@
 /datum/quirk/prosthetic_organ
 	name = "Prosthetic Organ"
-	desc = "An accident caused you to lose one of your organs. Because of this, you now have a surplus prosthetic!"
+	desc = "В результате несчастного случая вы лишились одного из органов. Из-за этого у вас установлен дешевый протез!"
 	icon = FA_ICON_LUNGS
 	value = -3
-	medical_record_text = "During physical examination, patient was found to have a low-budget prosthetic organ. \
-		<b>Removal of these organs is known to be dangerous to the patient as well as the practitioner.</b>"
+	medical_record_text = "При физическом осмотре у пациента был обнаружен бюджетный протез органа. \
+		<b>Известно, что удаление этих органов опасно как для пациента, так и для врача.</b>"
 	hardcore_value = 3
 	mail_goodies = list(/obj/item/storage/organbox)
 	/// The slot to replace, in string form
@@ -47,26 +47,26 @@
 	switch(organ_slot)
 		if(ORGAN_SLOT_HEART)
 			prosthetic = new /obj/item/organ/heart/cybernetic/surplus
-			slot_string = "heart"
+			slot_string = "сердце"
 		if(ORGAN_SLOT_LUNGS)
 			prosthetic = new /obj/item/organ/lungs/cybernetic/surplus
-			slot_string = "lungs"
+			slot_string = "лёгкие"
 		if(ORGAN_SLOT_LIVER)
 			prosthetic = new /obj/item/organ/liver/cybernetic/surplus
-			slot_string = "liver"
+			slot_string = "печень"
 		if(ORGAN_SLOT_STOMACH)
 			prosthetic = new /obj/item/organ/stomach/cybernetic/surplus
-			slot_string = "stomach"
-	medical_record_text = "During physical examination, patient was found to have a low-budget prosthetic [slot_string]. \
-		Removal of these organs is known to be dangerous to the patient as well as the practitioner."
+			slot_string = "желудок"
+	medical_record_text = "При физическом осмотре было обнаружено, что орган пациента, [slot_string], заменен бюджетным протезом. \
+		Известно, что удаление этих органов опасно как для пациента, так и для врача."
 	old_organ = human_holder.get_organ_slot(organ_slot)
 	prosthetic.Insert(human_holder, special = TRUE)
 	old_organ.moveToNullspace()
 	STOP_PROCESSING(SSobj, old_organ)
 
 /datum/quirk/prosthetic_organ/post_add()
-	to_chat(quirk_holder, span_bolddanger("Your [slot_string] has been replaced with a surplus organ. It is weak and highly unstable. \
-	Additionally, any EMP will make it stop working entirely."))
+	to_chat(quirk_holder, span_bolddanger("Ваш орган, [slot_string], был замен дешевым протезом. Он слаб и крайне нестабилен. \
+	Кроме того, любое ЭМИ воздействие заставит его полностью прекратить работу."))
 
 /datum/quirk/prosthetic_organ/remove()
 	if(old_organ)

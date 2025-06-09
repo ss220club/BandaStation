@@ -6,6 +6,7 @@
 	"space_ruin_levels": 0,
 	"space_empty_levels": 0,
 	"planetary": 1,
+	"main_floor": 3,
 	"give_players_hooks": 1,
 	"shuttles": {
 		"cargo": "cargo_box",
@@ -48,6 +49,18 @@
 		},
 		"Cook": {
 			"additional_cqc_areas": ["/area/station/service/bar/atrium"]
+		},
+		"Nanotrasen Representative": {
+			"spawn_positions": 1
+		},
+		"Blueshield": {
+			"spawn_positions": 1
+		},
+		"Magistrate": {
+			"spawn_positions": 1
+		},
+		"Explorer": {
+			"spawn_positions": 4
 		}
 	}
 }

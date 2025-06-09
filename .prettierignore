@@ -4,6 +4,9 @@ data
 font-awesome
 jquery
 juke
+# BANDASTATION ADD - Start
+**/blanks/markdown
+# BANDASTATION ADD - End
 
 ## Tgui
 node_modules
