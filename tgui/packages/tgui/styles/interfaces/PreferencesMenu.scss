@@ -25,6 +25,14 @@ $department_map: (
   --comp-size: 1.667em;
   --comp-size-border: calc(var(--comp-size) * 0.1);
 
+  &:root {
+    --color-primary: hsl(200, 33%, 33%);
+  }
+
+  .Section__content {
+    scrollbar-width: thin;
+  }
+
   .Toggle {
     cursor: var(--cursor-pointer);
     align-items: center;

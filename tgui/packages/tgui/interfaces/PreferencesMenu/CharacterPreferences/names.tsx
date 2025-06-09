@@ -48,9 +48,11 @@ export function NameInput(props: NameInputProps) {
           onClick={() => setLastNameBeforeEdit(name)}
         >
           <Stack fill>
-            <Stack.Item className="PreferencesMenu__Name--icon">
-              <Icon name="edit" />
-            </Stack.Item>
+            {large && (
+              <Stack.Item className="PreferencesMenu__Name--icon">
+                <Icon name="edit" />
+              </Stack.Item>
+            )}
             <Stack.Item grow className="PreferencesMenu__Name--name">
               {editing ? (
                 <Input
@@ -63,7 +65,7 @@ export function NameInput(props: NameInputProps) {
                 />
               ) : (
                 <FitText maxFontSize={large ? 16 : 13} maxWidth={130}>
-                  {name}
+                  {name || '(нет имени)'}
                 </FitText>
               )}
             </Stack.Item>

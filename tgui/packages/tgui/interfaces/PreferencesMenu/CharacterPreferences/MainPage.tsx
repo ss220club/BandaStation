@@ -5,13 +5,13 @@ import {
   Box,
   Button,
   Floating,
+  Icon,
   ImageButton,
   Input,
   Section,
   Stack,
 } from 'tgui-core/components';
-import { createSearch } from 'tgui-core/string';
-import { capitalize } from 'tgui-core/string';
+import { capitalize, createSearch } from 'tgui-core/string';
 
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { Preference } from '../components/Preference';
@@ -294,43 +294,55 @@ export function PreferenceList(props: PreferenceListProps) {
 
   return (
     <Section fill scrollable>
-      <Stack vertical>
-        {sortPreferences(Object.entries(preferences)).map(
-          ([featureId, value]) => {
-            const feature = features[featureId];
-            const randomSetting = randomizations[featureId];
-            if (feature === undefined) {
-              return (
-                <Stack.Item key={featureId} bold>
-                  Компонент {featureId} не распознан.
-                </Stack.Item>
-              );
-            }
+      {Object.entries(preferences).length > 0 ? (
+        <Stack vertical>
+          {sortPreferences(Object.entries(preferences)).map(
+            ([featureId, value]) => {
+              const feature = features[featureId];
+              const randomSetting = randomizations[featureId];
+              if (feature === undefined) {
+                return (
+                  <Stack.Item key={featureId} bold>
+                    Компонент {featureId} не распознан.
+                  </Stack.Item>
+                );
+              }
 
-            return (
-              <Preference
-                key={featureId}
-                id={featureId}
-                name={feature.name}
-                description={feature.description}
-                childrenClassName="Character"
-              >
-                <FeatureValueInput
-                  feature={feature}
-                  featureId={featureId}
-                  value={value}
-                />
-                {randomSetting && (
-                  <RandomizationButton
-                    setValue={createSetRandomization(act, featureId)}
-                    value={randomSetting}
+              return (
+                <Preference
+                  key={featureId}
+                  id={featureId}
+                  name={feature.name}
+                  description={feature.description}
+                  childrenClassName="Character"
+                >
+                  <FeatureValueInput
+                    feature={feature}
+                    featureId={featureId}
+                    value={value}
                   />
-                )}
-              </Preference>
-            );
-          },
-        )}
-      </Stack>
+                  {randomSetting && (
+                    <RandomizationButton
+                      setValue={createSetRandomization(act, featureId)}
+                      value={randomSetting}
+                    />
+                  )}
+                </Preference>
+              );
+            },
+          )}
+        </Stack>
+      ) : (
+        <Stack fill vertical align="center" justify="center" my="auto" g={3}>
+          <Stack.Item>
+            <Icon name="face-sad-cry" size={7.5} color="blue" />
+          </Stack.Item>
+          <Stack.Item bold fontSize={1.25} color="label" textAlign="center">
+            К сожалению, выбранная раса не имеет дополнительных параметров
+            внешности.
+          </Stack.Item>
+        </Stack>
+      )}
     </Section>
   );
 }
@@ -408,6 +420,70 @@ export function MainPage(props: MainPageProps) {
     delete nonContextualPreferences['random_name'];
   }
 
+  const Character = (
+    <Section fill className="PreferencesMenu__Character">
+      <Stack fill vertical>
+        <Stack.Item>
+          <CharacterControls
+            gender={data.character_preferences.misc.gender}
+            handleOpenSpecies={props.openSpecies}
+            handleRotate={() => {
+              act('rotate');
+            }}
+            setGender={createSetPreference(act, 'gender')}
+            showGender={currentSpeciesData ? !!currentSpeciesData.sexes : true}
+            canDeleteCharacter={
+              Object.values(data.character_profiles).filter((name) => !!name)
+                .length > 1
+            }
+            handleDeleteCharacter={() => setDeleteCharacterPopupOpen(true)}
+          />
+        </Stack.Item>
+        <Stack.Item grow>
+          <CharacterPreview height="100%" id={data.character_preview_view} />
+        </Stack.Item>
+        <Stack.Item>
+          <NameInput
+            large
+            canRandomize
+            name={data.character_preferences.names[data.name_to_use]}
+            nameType={data.name_to_use}
+          />
+        </Stack.Item>
+      </Stack>
+    </Section>
+  );
+
+  const MainFeatures = (
+    <Section fill scrollable pl={0.7} width={6.5} ml={-1}>
+      <Stack vertical direction="column-reverse">
+        {mainFeatures.map(([clothingKey, clothing]) => {
+          const catalog = serverData?.[
+            clothingKey
+          ] as FeatureChoicedServerData & {
+            name: string;
+          };
+
+          return (
+            <Stack.Item key={clothingKey}>
+              {!catalog ? (
+                <ImageButton imageSize={48} />
+              ) : (
+                <MainFeature
+                  catalog={catalog}
+                  currentValue={clothing}
+                  handleSelect={createSetPreference(act, clothingKey)}
+                  randomization={randomizationOfMainFeatures[clothingKey]}
+                  setRandomization={createSetRandomization(act, clothingKey)}
+                />
+              )}
+            </Stack.Item>
+          );
+        })}
+      </Stack>
+    </Section>
+  );
+
   return (
     <Stack fill>
       {deleteCharacterPopupOpen && (
@@ -417,87 +493,16 @@ export function MainPage(props: MainPageProps) {
       )}
       <Stack.Item>
         <Stack fill vertical>
-          <Stack.Item basis="50%">
-            <Section fill className="PreferencesMenu__Character">
-              <Stack fill vertical>
-                <Stack.Item>
-                  <CharacterControls
-                    gender={data.character_preferences.misc.gender}
-                    handleOpenSpecies={props.openSpecies}
-                    handleRotate={() => {
-                      act('rotate');
-                    }}
-                    setGender={createSetPreference(act, 'gender')}
-                    showGender={
-                      currentSpeciesData ? !!currentSpeciesData.sexes : true
-                    }
-                    canDeleteCharacter={
-                      Object.values(data.character_profiles).filter(
-                        (name) => !!name,
-                      ).length > 1
-                    }
-                    handleDeleteCharacter={() =>
-                      setDeleteCharacterPopupOpen(true)
-                    }
-                  />
-                </Stack.Item>
-                <Stack.Item grow>
-                  <CharacterPreview
-                    height="100%"
-                    id={data.character_preview_view}
-                  />
-                </Stack.Item>
-                <Stack.Item>
-                  <NameInput
-                    large
-                    canRandomize
-                    name={data.character_preferences.names[data.name_to_use]}
-                    nameType={data.name_to_use}
-                  />
-                </Stack.Item>
-              </Stack>
-            </Section>
-          </Stack.Item>
+          <Stack.Item basis="50%">{Character}</Stack.Item>
           <Stack.Item grow mr={1}>
             <AlternativeNames names={data.character_preferences.names} />
           </Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item>
-        <Section fill ml={-1}>
-          <Stack vertical direction="column-reverse">
-            {mainFeatures.map(([clothingKey, clothing]) => {
-              const catalog = serverData?.[
-                clothingKey
-              ] as FeatureChoicedServerData & {
-                name: string;
-              };
-
-              return (
-                <Stack.Item key={clothingKey}>
-                  {!catalog ? (
-                    <ImageButton imageSize={48} />
-                  ) : (
-                    <MainFeature
-                      catalog={catalog}
-                      currentValue={clothing}
-                      handleSelect={createSetPreference(act, clothingKey)}
-                      randomization={randomizationOfMainFeatures[clothingKey]}
-                      setRandomization={createSetRandomization(
-                        act,
-                        clothingKey,
-                      )}
-                    />
-                  )}
-                </Stack.Item>
-              );
-            })}
-          </Stack>
-        </Section>
-      </Stack.Item>
+      <Stack.Item>{MainFeatures}</Stack.Item>
       <Stack.Item grow>
         <Stack fill vertical>
-          <Stack.Item basis="40%">
+          <Stack.Item basis="34%">
             <PreferenceList
               preferences={contextualPreferences}
               randomizations={getRandomization(
