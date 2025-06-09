@@ -197,8 +197,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	chat_toggles = savefile.get_entry("chat_toggles", chat_toggles)
 	toggles = savefile.get_entry("toggles", toggles)
 	ignoring = savefile.get_entry("ignoring", ignoring)
-	pref_job_slots = savefile.get_entry("pref_job_slots", pref_job_slots) // BANDASTATION ADD - Pref Job Slots
-	job_preferences = savefile.get_entry("job_preferences", job_preferences) // BANDASTATION ADD - Pref Job Slots
+	// BANDASTATION ADDITION - START
+	pref_job_slots = savefile.get_entry("pref_job_slots", pref_job_slots) 
+	job_preferences = savefile.get_entry("job_preferences", job_preferences)Slots
+	// BANDASTATION ADDITION - END
 
 	// OOC commendations
 	hearted_until = savefile.get_entry("hearted_until", hearted_until)
@@ -235,8 +237,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	be_special = sanitize_be_special(SANITIZE_LIST(be_special))
 	key_bindings = sanitize_keybindings(key_bindings)
 	favorite_outfits = SANITIZE_LIST(favorite_outfits)
-	pref_job_slots = SANITIZE_LIST(pref_job_slots) // BANDASTATION ADD - Pref Job Slots
-	job_preferences = SANITIZE_LIST(job_preferences) // BANDASTATION ADD - Pref Job Slots
+	// BANDASTATION ADDITION - START
+	pref_job_slots = SANITIZE_LIST(pref_job_slots)
+	job_preferences = SANITIZE_LIST(job_preferences)
+	// BANDASTATION ADDITION - END
 
 	// BANDASTATION ADD - Start - Pref Job Slots
 	//Validate job prefs
@@ -292,8 +296,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	savefile.set_entry("key_bindings", key_bindings)
 	savefile.set_entry("hearted_until", (hearted_until > world.realtime ? hearted_until : null))
 	savefile.set_entry("favorite_outfits", favorite_outfits)
-	savefile.set_entry("pref_job_slots", pref_job_slots) // BANDASTATION ADD - Pref Job Slots
-	savefile.set_entry("job_preferences", job_preferences) // BANDASTATION ADD - Pref Job Slots
+	// BANDASTATION ADDITION - START
+	savefile.set_entry("pref_job_slots", pref_job_slots)
+	savefile.set_entry("job_preferences", job_preferences)
+	// BANDASTATION ADDITION - END
 	savefile.save()
 	return TRUE
 

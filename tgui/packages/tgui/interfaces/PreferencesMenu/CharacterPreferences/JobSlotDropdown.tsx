@@ -36,19 +36,19 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
     <Tooltip content={currentSlotName} position="right">
       <div>
         <Dropdown
+          noChevron
+          iconOnly
+          icon={SLOT_ICONS[currentSlotNumber]}
           width="100%"
+          menuWidth="auto"
           selected={currentSlotName}
+          options={slotOptions}
           onSelected={(value: number) => {
             act('set_job_slot', {
               job: name,
               slot: Number(value),
             });
           }}
-          options={slotOptions}
-          menuWidth="auto"
-          noChevron
-          iconOnly
-          icon={SLOT_ICONS[currentSlotNumber]}
         />
       </div>
     </Tooltip>
