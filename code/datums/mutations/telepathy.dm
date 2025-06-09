@@ -1,4 +1,4 @@
-/datum/mutation/human/telepathy
+/datum/mutation/telepathy
 	name = "Telepathy"
 	desc = "Редкая мутация, позволяющая её обладателю телепатически общаться с другими."
 	quality = POSITIVE

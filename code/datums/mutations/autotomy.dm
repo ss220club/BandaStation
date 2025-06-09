@@ -1,4 +1,4 @@
-/datum/mutation/human/self_amputation
+/datum/mutation/self_amputation
 	name = "Autotomy"
 	desc = "Позволяет существу добровольно отказаться от случайной конечности."
 	quality = POSITIVE

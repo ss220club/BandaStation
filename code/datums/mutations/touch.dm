@@ -1,4 +1,4 @@
-/datum/mutation/human/shock
+/datum/mutation/shock
 	name = "Shock Touch"
 	desc = "Подверженные данной мутации могут направить избыточное электричество через свои руки, позволяя им ударить током других. В основном безвредно! В основном..."
 	quality = POSITIVE
@@ -11,7 +11,7 @@
 	energy_coeff = 1
 	power_coeff = 1
 
-/datum/mutation/human/shock/setup()
+/datum/mutation/shock/setup()
 	. = ..()
 	var/datum/action/cooldown/spell/touch/shock/to_modify =.
 
@@ -82,7 +82,7 @@
 	icon_state = "zapper"
 	inhand_icon_state = "zapper"
 
-/datum/mutation/human/lay_on_hands
+/datum/mutation/lay_on_hands
 	name = "Mending Touch"
 	desc = "Подверженные данной мутации могут приложить свои руки на других людей, чтобы забрать себе часть их ранений."
 	quality = POSITIVE
@@ -96,7 +96,7 @@
 	power_coeff = 1
 	synchronizer_coeff = 1
 
-/datum/mutation/human/lay_on_hands/setup()
+/datum/mutation/lay_on_hands/setup()
 	. = ..()
 	var/datum/action/cooldown/spell/touch/lay_on_hands/to_modify =.
 
