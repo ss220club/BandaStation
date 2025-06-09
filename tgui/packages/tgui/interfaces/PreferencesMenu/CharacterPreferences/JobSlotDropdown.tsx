@@ -39,6 +39,7 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
           noChevron
           iconOnly
           icon={SLOT_ICONS[currentSlotNumber]}
+          width="auto"
           menuWidth="auto"
           selected={currentSlotName}
           options={slotOptions}

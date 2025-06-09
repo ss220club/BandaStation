@@ -262,12 +262,22 @@ $department_map: (
 // MARK: JobPage
 .PreferencesMenu {
   &__Department {
+    --head-color: hsl(from var(--background-color) h s calc(l - 7.5));
+    --border-color: hsl(from var(--background-color) h s calc(l + 10));
     --button-width: 40px;
-    --button-gap: 0.25rem;
-    overflow: hidden;
+    --button-gap: 0.33rem;
 
-    &.head .job-name {
-      font-weight: bold;
+    user-select: none;
+    overflow: hidden;
+    background-color: var(--background-color);
+    border: var(--border-thickness-tiny) outset var(--border-color);
+
+    &.head {
+      background-color: var(--head-color);
+
+      .job-name {
+        font-weight: bold;
+      }
     }
 
     .job-name {
@@ -295,6 +305,33 @@ $department_map: (
         transition: transform var(--transition-time-medium);
         transition-delay: var(--transition-time-medium);
         z-index: 0;
+
+        &:before {
+          content: '';
+          position: absolute;
+          background-color: var(--background-color);
+          inset: calc(-1 * var(--button-gap) + 1px);
+          z-index: -2;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-color: var(--head-color);
+          outline: 1px inset var(--border-color);
+          border-radius: var(--border-radius-small);
+          z-index: -1;
+        }
+
+        &:hover:not(.selected):after {
+          background-color: transparent;
+          outline-style: outset;
+        }
+
+        &:hover:active:not(.selected):after {
+          outline-style: inset;
+        }
       }
     }
 
@@ -312,44 +349,7 @@ $department_map: (
 
     @each $department-name, $color in $department_map {
       &--#{$department-name} {
-        background-color: $color;
-        border: var(--border-thickness-tiny) outset;
-        border-color: hsl(from $color h s calc(l + 10));
-
-        &.head {
-          background-color: hsl(from $color h s calc(l - 7.5));
-        }
-
-        .Button--color--default {
-          $button-color: hsl(from $color h s calc(l - 7.5));
-          $button-color-off: hsl(from $button-color h s calc(l - 7.5));
-
-          &:after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-color: $button-color;
-            border-radius: var(--border-radius-tiny);
-            z-index: -1;
-          }
-
-          &:hover:not(.selected):after {
-            background-color: $color;
-            border: 1px solid $button-color-off;
-          }
-
-          &.off.selected:after {
-            background-color: $button-color-off;
-          }
-
-          &:before {
-            content: '';
-            position: absolute;
-            inset: calc(-1 * var(--button-gap));
-            background-color: $color;
-            z-index: -2;
-          }
-        }
+        --background-color: #{$color};
       }
     }
   }
@@ -364,6 +364,11 @@ $department_map: (
             var(--button-position)
         )
       );
+
+      &.off.selected:after {
+        background-color: hsla(0, 0%, 0%, 0.5);
+        transition-delay: var(--transition-time-medium);
+      }
     }
 
     &Button {
