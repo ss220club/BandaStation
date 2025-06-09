@@ -2,9 +2,9 @@
 	var/datum/tts_seed/tts_seed_dna
 
 /datum/dna/copy_dna(datum/dna/new_dna, transfer_flags = COPY_DNA_SE|COPY_DNA_SPECIES)
+	. = ..()
 	if(!istype(new_dna.holder))
 		return
-	. = ..()
 	new_dna.tts_seed_dna = tts_seed_dna
 	new_dna.holder.AddComponent(/datum/component/tts_component, tts_seed_dna)
 
