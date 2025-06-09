@@ -40,29 +40,31 @@ export function NameInput(props: NameInputProps) {
 
   return (
     <Stack fill fontSize={large && 1.33}>
-      <Stack.Item grow>
+      <Stack.Item grow className="PreferencesMenu__Name">
         <Button
           fluid
           captureKeys={!editing}
-          className="PreferencesMenu__Name"
           onClick={() => setLastNameBeforeEdit(name)}
         >
           <Stack fill>
-            {large && (
-              <Stack.Item className="PreferencesMenu__Name--icon">
+            {large && !editing && (
+              <Stack.Item>
                 <Icon name="edit" />
               </Stack.Item>
             )}
-            <Stack.Item grow className="PreferencesMenu__Name--name">
+            <Stack.Item grow>
               {editing ? (
-                <Input
-                  autoSelect
-                  value={name}
-                  onBlur={updateName}
-                  onEscape={() => {
-                    setLastNameBeforeEdit(null);
-                  }}
-                />
+                <>
+                  <Input
+                    autoSelect
+                    value={name}
+                    onBlur={updateName}
+                    onEscape={() => {
+                      setLastNameBeforeEdit(null);
+                    }}
+                  />
+                  <Icon name="question" /> {/* Save layout on edit */}
+                </>
               ) : (
                 <FitText maxFontSize={large ? 16 : 13} maxWidth={130}>
                   {name || '(нет имени)'}
@@ -72,7 +74,7 @@ export function NameInput(props: NameInputProps) {
           </Stack>
         </Button>
       </Stack.Item>
-      {!!canRandomize && (
+      {!!canRandomize && !editing && (
         <Stack.Item>
           <Button
             icon="dice"

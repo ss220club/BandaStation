@@ -1,0 +1,36 @@
+.theme-ss220:root {
+  --pref-background: hsl(from var(--color-base) h s calc(l - 2.5));
+
+  // Department colors
+  --color-security: hsl(0, 60%, 45%);
+  --color-justice: hsl(325, 80%, 40%);
+  --color-science: hsl(275, 90%, 35%);
+  --color-command: hsl(215, 90%, 40%);
+  --color-centcom: hsl(210, 100%, 25%);
+  --color-silicon: hsl(210, 30%, 40%);
+  --color-medical: hsl(195, 75%, 35%);
+  --color-service: hsl(140, 70%, 30%);
+  --color-engineering: hsl(40, 100%, 30%);
+  --color-cargo: hsl(35, 40%, 40%);
+
+  // Base
+  --primary-hue: 200;
+  --primary-saturation: 50%;
+  --primary-lightness: 42.5%;
+
+  // Components
+  .Section {
+    &__content {
+      scrollbar-width: thin;
+    }
+
+    &--scrollable .Section__content {
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+    }
+  }
+
+  &::selection {
+    background-color: var(--color-primary);
+  }
+}

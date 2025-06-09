@@ -44,7 +44,6 @@ function UIStyleInput(
 
   return (
     <Dropdown
-      menuWidth="auto"
       selected={value}
       onSelected={props.handleSetValue}
       options={sortChoices(Object.entries(choices)).map(

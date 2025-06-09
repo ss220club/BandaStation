@@ -29,8 +29,9 @@ export function PreferencesMenu() {
   return (
     <Window
       width={900}
-      height={730}
+      height={741}
       title={title}
+      theme="ss220"
       buttons={
         <Button
           icon={isCharacterWindow ? 'cog' : 'user'}

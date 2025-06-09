@@ -46,8 +46,9 @@ export function RandomizationButton(props: Props) {
       iconOnly
       icon="dice"
       color={color}
-      menuWidth={'auto'}
-      selected={'NONE'}
+      width="auto"
+      menuWidth="auto"
+      selected="NONE"
       options={options}
       onSelected={setValue}
     />

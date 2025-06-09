@@ -439,7 +439,7 @@ export function MainPage(props: MainPageProps) {
             handleDeleteCharacter={() => setDeleteCharacterPopupOpen(true)}
           />
         </Stack.Item>
-        <Stack.Item grow>
+        <Stack.Item grow style={{ alignSelf: 'center' }}>
           <CharacterPreview height="100%" id={data.character_preview_view} />
         </Stack.Item>
         <Stack.Item>
@@ -502,7 +502,7 @@ export function MainPage(props: MainPageProps) {
       <Stack.Item>{MainFeatures}</Stack.Item>
       <Stack.Item grow>
         <Stack fill vertical>
-          <Stack.Item basis="34%">
+          <Stack.Item basis="38.5%">
             <PreferenceList
               preferences={contextualPreferences}
               randomizations={getRandomization(

@@ -39,6 +39,7 @@ function CharacterProfiles(props: ProfileProps) {
             <Stack.Item key={slot}>
               <Button
                 fluid
+                ellipsis
                 selected={slot === activeSlot}
                 onClick={() => {
                   onClick(slot);

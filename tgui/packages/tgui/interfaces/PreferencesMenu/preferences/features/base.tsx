@@ -194,10 +194,10 @@ export function FeatureNumberInput(
   return (
     <NumberInput
       disabled={!serverData}
+      value={value}
       minValue={serverData?.minimum || 0}
       maxValue={serverData?.maximum || 100}
       step={serverData?.step || 1}
-      value={value}
       onChange={(value) => handleSetValue(value)}
     />
   );
