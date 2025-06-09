@@ -1,7 +1,7 @@
 /datum/dna
 	var/datum/tts_seed/tts_seed_dna
 
-/datum/dna/transfer_identity(mob/living/carbon/destination, transfer_SE, transfer_species)
+/datum/dna/copy_dna(mob/living/carbon/destination, transfer_SE, transfer_species)
 	if(!istype(destination))
 		return
 	. = ..()

@@ -3,7 +3,7 @@
 	. = ..()
 	AddComponent(/datum/component/examine_panel)
 
-/datum/dna/transfer_identity(mob/living/carbon/destination, transfer_SE, transfer_species)
+/datum/dna/copy_dna(mob/living/carbon/destination, transfer_SE, transfer_species)
 	if(!istype(destination))
 		return
 	. = ..()
