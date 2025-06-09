@@ -118,7 +118,7 @@ $department_map: (
   &__Preference {
     user-select: none;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.4em;
     background-color: hsl(from var(--pref-background) h s calc(l - 2.5));
     border-radius: var(--border-radius-medium);
     border: var(--border-thickness-tiny) solid var(--pref-border);
@@ -130,6 +130,7 @@ $department_map: (
     }
 
     &--Character {
+      align-items: center;
       width: 50%;
     }
 
@@ -166,6 +167,10 @@ $department_map: (
         }
       }
     }
+  }
+
+  .ImageButton__image {
+    padding: var(--space-s) 0;
   }
 }
 
@@ -223,9 +228,6 @@ $department_map: (
 
     &--explanation {
       color: var(--color-label);
-    }
-
-    &Section {
     }
   }
 }

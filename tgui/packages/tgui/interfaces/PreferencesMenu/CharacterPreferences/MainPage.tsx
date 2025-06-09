@@ -254,7 +254,7 @@ function MainFeature(props: MainFeatureProps) {
     >
       <ImageButton
         asset={['preferences32x32', catalog.icons![currentValue]]}
-        imageSize={32}
+        imageSize={48}
         buttons={
           randomization && (
             <RandomizationButton
@@ -294,7 +294,7 @@ export function PreferenceList(props: PreferenceListProps) {
 
   return (
     <Section fill scrollable>
-      <Stack fill vertical>
+      <Stack vertical>
         {sortPreferences(Object.entries(preferences)).map(
           ([featureId, value]) => {
             const feature = features[featureId];
@@ -315,23 +315,17 @@ export function PreferenceList(props: PreferenceListProps) {
                 description={feature.description}
                 childrenClassName="Character"
               >
-                <Stack fill align="center">
-                  <Stack.Item grow>
-                    <FeatureValueInput
-                      feature={feature}
-                      featureId={featureId}
-                      value={value}
-                    />
-                  </Stack.Item>
-                  {randomSetting && (
-                    <Stack.Item>
-                      <RandomizationButton
-                        setValue={createSetRandomization(act, featureId)}
-                        value={randomSetting}
-                      />
-                    </Stack.Item>
-                  )}
-                </Stack>
+                <FeatureValueInput
+                  feature={feature}
+                  featureId={featureId}
+                  value={value}
+                />
+                {randomSetting && (
+                  <RandomizationButton
+                    setValue={createSetRandomization(act, featureId)}
+                    value={randomSetting}
+                  />
+                )}
               </Preference>
             );
           },
@@ -424,7 +418,7 @@ export function MainPage(props: MainPageProps) {
       <Stack.Item>
         <Stack fill vertical>
           <Stack.Item basis="50%">
-            <Section fill>
+            <Section fill className="PreferencesMenu__Character">
               <Stack fill vertical>
                 <Stack.Item>
                   <CharacterControls
@@ -469,9 +463,9 @@ export function MainPage(props: MainPageProps) {
           </Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item ml={-1}>
-        <Section fill>
-          <Stack vertical wrap>
+      <Stack.Item>
+        <Section fill ml={-1}>
+          <Stack vertical direction="column-reverse">
             {mainFeatures.map(([clothingKey, clothing]) => {
               const catalog = serverData?.[
                 clothingKey
@@ -482,7 +476,7 @@ export function MainPage(props: MainPageProps) {
               return (
                 <Stack.Item key={clothingKey}>
                   {!catalog ? (
-                    <ImageButton imageSize={32} />
+                    <ImageButton imageSize={48} />
                   ) : (
                     <MainFeature
                       catalog={catalog}
@@ -503,7 +497,7 @@ export function MainPage(props: MainPageProps) {
       </Stack.Item>
       <Stack.Item grow>
         <Stack fill vertical>
-          <Stack.Item basis="33%">
+          <Stack.Item basis="40%">
             <PreferenceList
               preferences={contextualPreferences}
               randomizations={getRandomization(
