@@ -17,6 +17,7 @@ $department_map: (
 
 // MARK: PreferencesPage
 .PreferencesMenu {
+  --pref-background: hsl(from var(--color-base) h s calc(l - 2.5));
   --comp-background: hsl(from var(--pref-background) h s calc(l - 2.5));
   --comp-border: hsl(from var(--pref-background) h s calc(l + 7.5));
 
@@ -125,6 +126,28 @@ $department_map: (
     background-color: var(--pref-background);
     border-radius: var(--border-radius-medium);
     outline: var(--border-thickness-tiny) outset var(--color-border);
+
+    &--controls {
+      position: relative;
+
+      &:has(.TextArea) {
+        height: 2.25lh;
+      }
+
+      .TextArea {
+        position: absolute;
+        bottom: 0;
+        height: 100%;
+        transition: height var(--transition-time-medium);
+        z-index: 1;
+
+        &:focus {
+          height: 7.25lh;
+          box-shadow: 0 0.25em 0.5em hsla(0, 0%, 0%, 0.66);
+          z-index: 2;
+        }
+      }
+    }
 
     &--desc {
       font-size: 0.8em;

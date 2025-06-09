@@ -27,7 +27,7 @@ export function Preference(props: PreferenceProps) {
       </Stack.Item>
       <Stack
         justify="end"
-        className={`${className}--${childrenClassName || 'Preferences'}`}
+        className={`${className}--controls ${className}--${childrenClassName || 'Preferences'}`}
       >
         {children}
       </Stack>

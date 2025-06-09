@@ -1,5 +1,6 @@
 .theme-ss220:root {
-  --pref-background: hsl(from var(--color-base) h s calc(l - 2.5));
+  // Allow size animations
+  interpolate-size: allow-keywords;
 
   // Department colors
   --color-security: hsl(0, 60%, 45%);
@@ -14,11 +15,18 @@
   --color-cargo: hsl(35, 40%, 40%);
 
   // Base
-  --primary-hue: 200;
-  --primary-saturation: 50%;
-  --primary-lightness: 42.5%;
+  --color-base: hsl(var(--primary-hue), 30%, 15%);
+  --primary-hue: 202;
+  --primary-saturation: 45%;
+  --primary-lightness: 43.75%;
+  --secondary-saturation: 42.5;
+  --color-text: hsl(var(--primary-hue), 7.5%, 95%);
 
   // Components
+  --button-background-default: hsl(
+    from var(--color-primary) h calc(s - 5) calc(l - 2.5)
+  );
+
   .Section {
     &__content {
       scrollbar-width: thin;
@@ -28,6 +36,11 @@
       overflow-y: auto;
       scrollbar-gutter: stable;
     }
+  }
+
+  .TextArea {
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
   }
 
   &::selection {
