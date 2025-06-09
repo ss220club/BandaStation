@@ -19,9 +19,10 @@
  */
 /datum/preferences/proc/get_slot_options()
 	var/list/slot_options = list(num2text(JOB_SLOT_CURRENT_SLOT) = JOB_SLOT_CURRENT_TEXT)
+	var/real_name = read_preference(/datum/preference/name/real_name)
 	for(var/index in 1 to max_save_slots)
 		var/slot_name = (index == default_slot) \
-			? read_preference(/datum/preference/name/real_name) \
+			? real_name \
 			: savefile.get_entry("character[index]")?["real_name"]
 
 		if(slot_name)
