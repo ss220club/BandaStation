@@ -33,13 +33,12 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   }));
 
   return (
-    <Tooltip content={currentSlotName} position="right">
+    <Tooltip content={currentSlotName} position="top-end">
       <div>
         <Dropdown
           noChevron
           iconOnly
           icon={SLOT_ICONS[currentSlotNumber]}
-          width="100%"
           menuWidth="auto"
           selected={currentSlotName}
           options={slotOptions}

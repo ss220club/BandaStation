@@ -184,16 +184,14 @@ function JobRow(props: JobRowProps) {
     const createSetPriority = createCreateSetPriorityFromName(name);
 
     rightSide = (
-      // BANDASTATION EDIT - START - Pref Job Slots
-      <Stack align="center" justify="flex-end" height="100%" pr={1}>
-        <JobSlotDropdown name={name} />
+      <>
         <PriorityButtons
           createSetPriority={createSetPriority}
           isOverflow={isOverflow}
           priority={priority}
         />
-      </Stack>
-      // BANDASTATION EDIT - END
+        <JobSlotDropdown name={name} />
+      </>
     );
   }
 

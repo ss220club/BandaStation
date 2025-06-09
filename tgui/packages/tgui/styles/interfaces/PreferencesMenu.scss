@@ -284,11 +284,14 @@ $department_map: (
       padding: 2px;
       text-align: right;
 
-      .Button {
+      .Button--color--default {
+        overflow: visible;
+        position: relative;
         display: inline-flex;
         justify-content: center;
         margin: 0;
         padding: 0;
+        line-height: 1.4lh;
         transition: transform var(--transition-time-medium);
         transition-delay: var(--transition-time-medium);
         z-index: 0;
@@ -317,7 +320,7 @@ $department_map: (
           background-color: hsl(from $color h s calc(l - 7.5));
         }
 
-        .Button {
+        .Button--color--default {
           $button-color: hsl(from $color h s calc(l - 7.5));
           $button-color-off: hsl(from $button-color h s calc(l - 7.5));
 
@@ -367,7 +370,7 @@ $department_map: (
       width: var(--button-width);
 
       &:not(.selected) {
-        position: absolute;
+        position: absolute !important;
       }
 
       &.selected {
