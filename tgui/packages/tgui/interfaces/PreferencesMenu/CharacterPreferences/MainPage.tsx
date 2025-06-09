@@ -502,7 +502,7 @@ export function MainPage(props: MainPageProps) {
       <Stack.Item>{MainFeatures}</Stack.Item>
       <Stack.Item grow>
         <Stack fill vertical>
-          <Stack.Item basis="38.5%">
+          <Stack.Item basis="37.5%">
             <PreferenceList
               preferences={contextualPreferences}
               randomizations={getRandomization(
