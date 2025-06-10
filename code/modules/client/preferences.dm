@@ -272,6 +272,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES
 			update_static_data(usr)
 			ui_interact(usr)
+			return TRUE
 		// BANDASTATION ADDITION - END
 
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)

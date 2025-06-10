@@ -15,6 +15,20 @@ $department_map: (
   'Justice': var(--color-justice),
 );
 
+.ColorInput {
+  &__Text {
+    padding: 0 var(--space-s) 0 var(--space-m);
+  }
+
+  &__Color {
+    height: 1lh;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--border-radius-small);
+    border: 2px solid hsl(from var(--color-primary) h s calc(l + 5));
+    transform: scale(0.75);
+  }
+}
+
 // MARK: PreferencesPage
 .PreferencesMenu {
   --pref-background: hsl(from var(--color-base) h s calc(l - 2.5));
@@ -63,20 +77,6 @@ $department_map: (
       background-color: hsl(
         from var(--comp-border) h s calc(l + var(--adjust-hover))
       );
-    }
-  }
-
-  .ColorInput {
-    &__Text {
-      padding: 0 var(--space-s) 0 var(--space-m);
-    }
-
-    &__Color {
-      height: 1lh;
-      aspect-ratio: 1 / 1;
-      border-radius: var(--border-radius-small);
-      border: 2px solid hsl(from var(--color-primary) h s calc(l + 5));
-      transform: scale(0.75);
     }
   }
 

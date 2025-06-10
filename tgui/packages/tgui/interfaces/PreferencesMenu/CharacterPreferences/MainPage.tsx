@@ -318,9 +318,9 @@ export function PreferenceList(props: PreferenceListProps) {
                   childrenClassName="Character"
                 >
                   <FeatureValueInput
+                    value={value}
                     feature={feature}
                     featureId={featureId}
-                    value={value}
                   />
                   {randomSetting && (
                     <RandomizationButton
