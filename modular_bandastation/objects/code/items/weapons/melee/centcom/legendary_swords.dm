@@ -125,9 +125,9 @@
 	refusal_text = "Сироте ты не хозяин."
 	light_color = COLOR_AMMO_INCENDIARY
 	saber_name = "lex"
-	wieldsound = 'modular_bandastation/objects/sound/weapons/lex_saberon.ogg'
-	unwieldsound = 'modular_bandastation/objects/sound/weapons/lex_saberoff.ogg'
-	hit_wield = 'modular_bandastation/objects/sound/weapons/lex_saberhit.ogg'
+	wieldsound = 'modular_bandastation/objects/sounds/weapons/lex_saberon.ogg'
+	unwieldsound = 'modular_bandastation/objects/sounds/weapons/lex_saberoff.ogg'
+	hit_wield = 'modular_bandastation/objects/sounds/weapons/lex_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/pre_attack(atom/A, mob/living/user, params)
 	var/charged = FALSE
