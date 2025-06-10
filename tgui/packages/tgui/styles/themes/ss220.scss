@@ -14,18 +14,30 @@
   --color-engineering: hsl(40, 100%, 30%);
   --color-cargo: hsl(35, 40%, 40%);
 
-  // Base
+  // Background colors
   --color-base: hsl(var(--primary-hue), 30%, 15%);
-  --primary-hue: 202;
-  --primary-saturation: 45%;
-  --primary-lightness: 43.75%;
-  --secondary-saturation: 42.5;
+  --secondary-saturation: calc(s + 7.5);
+  --base-gradient-spread: 1;
+
+  // Base
+  --primary-hue: 202.5;
+  --primary-saturation: 47.5%;
+  --primary-lightness: 37.5%;
   --color-text: hsl(var(--primary-hue), 7.5%, 95%);
+  --color-border-primary: var(--color-primary);
+  --color-border-secondary: hsl(
+    from var(--color-border-primary) h calc(s + 15) calc(l + 17.5)
+  );
 
   // Components
   --button-background-default: hsl(
     from var(--color-primary) h calc(s - 5) calc(l - 2.5)
   );
+  --dimmer-background: hsl(from var(--color-base) h s calc(l - 5) / 0.75);
+  --progress-bar-background: var(--input-background);
+  --input-background-lightness: 9;
+  --tooltip-background-lightness: 12.5;
+  --imagebutton-transparecy: 0.3;
 
   .Section {
     &__content {
@@ -38,12 +50,27 @@
     }
   }
 
+  .Input,
   .TextArea {
     scrollbar-width: thin;
     scrollbar-gutter: stable;
+    transition-property: border-color, height;
+    transition-duration: var(--transition-time-medium);
+
+    &:hover:not(:focus) {
+      border-color: hsl(from var(--color-border-primary) h s calc(l + 7.5));
+    }
+  }
+
+  .Dimmer {
+    backdrop-filter: var(--blur-medium);
   }
 
   &::selection {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    text-shadow:
+      1px 1px 0px hsla(0, 0%, 0%, 0.5),
+      2px 2px 4px hsla(0, 0%, 0%, 1) !important;
   }
 }

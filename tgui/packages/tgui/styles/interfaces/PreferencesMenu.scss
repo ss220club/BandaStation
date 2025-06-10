@@ -138,12 +138,11 @@ $department_map: (
         position: absolute;
         bottom: 0;
         height: 100%;
-        transition: height var(--transition-time-medium);
         z-index: 1;
 
         &:focus {
           height: 7.25lh;
-          box-shadow: 0 0.25em 0.5em hsla(0, 0%, 0%, 0.66);
+          box-shadow: 0 -0.25em 0.5em 2px hsla(0, 0%, 0%, 0.33);
           z-index: 2;
         }
       }
