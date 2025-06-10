@@ -179,33 +179,27 @@ function QuirkPopper(props: QuirkPopperProps) {
       onOpenChange={setCustomizationExpanded}
       content={
         hasExpandableCustomization && (
-          <Box
+          <Stack.Item
+            className="PreferencesMenu__QuirkQuirk--Customization"
             onClick={(e) => {
               e.stopPropagation();
             }}
-            style={{
-              boxShadow: '0px 4px 8px 3px rgba(0, 0, 0, 0.7)',
-            }}
           >
-            <Stack maxWidth="300px" backgroundColor="black" px="5px" py="3px">
-              <Stack.Item>
-                <PreferenceList
-                  preferences={getCorrespondingPreferences(
-                    customization_options,
-                    character_preferences.manually_rendered_features,
-                  )}
-                  randomizations={getRandomization(
-                    getCorrespondingPreferences(
-                      customization_options,
-                      character_preferences.manually_rendered_features,
-                    ),
-                    serverData,
-                    randomBodyEnabled,
-                  )}
-                />
-              </Stack.Item>
-            </Stack>
-          </Box>
+            <PreferenceList
+              preferences={getCorrespondingPreferences(
+                customization_options,
+                character_preferences.manually_rendered_features,
+              )}
+              randomizations={getRandomization(
+                getCorrespondingPreferences(
+                  customization_options,
+                  character_preferences.manually_rendered_features,
+                ),
+                serverData,
+                randomBodyEnabled,
+              )}
+            />
+          </Stack.Item>
         )
       }
     >

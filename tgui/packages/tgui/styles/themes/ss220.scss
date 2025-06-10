@@ -2,6 +2,11 @@
   // Allow size animations
   interpolate-size: allow-keywords;
 
+  // Preferences colors
+  --pref-background: hsl(from var(--color-base) h s calc(l - 2.5));
+  --comp-background: hsl(from var(--pref-background) h s calc(l - 2.5));
+  --comp-border: hsl(from var(--pref-background) h s calc(l + 7.5));
+
   // Department colors
   --color-security: hsl(0, 60%, 45%);
   --color-justice: hsl(325, 80%, 40%);

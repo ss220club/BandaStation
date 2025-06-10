@@ -293,58 +293,54 @@ export function PreferenceList(props: PreferenceListProps) {
   const { act } = useBackend<PreferencesMenuData>();
   const { preferences, randomizations } = props;
 
-  return (
-    <Section fill scrollable>
-      {Object.entries(preferences).length > 0 ? (
-        <Stack vertical>
-          {sortPreferences(Object.entries(preferences)).map(
-            ([featureId, value]) => {
-              const feature = features[featureId];
-              const randomSetting = randomizations[featureId];
-              if (feature === undefined) {
-                return (
-                  <Stack.Item key={featureId} bold>
-                    Компонент {featureId} не распознан.
-                  </Stack.Item>
-                );
-              }
+  return Object.entries(preferences).length > 0 ? (
+    <Stack vertical>
+      {sortPreferences(Object.entries(preferences)).map(
+        ([featureId, value]) => {
+          const feature = features[featureId];
+          const randomSetting = randomizations[featureId];
+          if (feature === undefined) {
+            return (
+              <Stack.Item key={featureId} bold>
+                Компонент {featureId} не распознан.
+              </Stack.Item>
+            );
+          }
 
-              return (
-                <Preference
-                  key={featureId}
-                  id={featureId}
-                  name={feature.name}
-                  description={feature.description}
-                  childrenClassName="Character"
-                >
-                  <FeatureValueInput
-                    value={value}
-                    feature={feature}
-                    featureId={featureId}
-                  />
-                  {randomSetting && (
-                    <RandomizationButton
-                      setValue={createSetRandomization(act, featureId)}
-                      value={randomSetting}
-                    />
-                  )}
-                </Preference>
-              );
-            },
-          )}
-        </Stack>
-      ) : (
-        <Stack fill vertical align="center" justify="center" my="auto" g={3}>
-          <Stack.Item>
-            <Icon name="face-sad-cry" size={7.5} color="blue" />
-          </Stack.Item>
-          <Stack.Item bold fontSize={1.25} color="label" textAlign="center">
-            К сожалению, выбранная раса не имеет дополнительных параметров
-            внешности.
-          </Stack.Item>
-        </Stack>
+          return (
+            <Preference
+              key={featureId}
+              id={featureId}
+              name={feature.name}
+              description={feature.description}
+              childrenClassName="Character"
+            >
+              <FeatureValueInput
+                value={value}
+                feature={feature}
+                featureId={featureId}
+              />
+              {randomSetting && (
+                <RandomizationButton
+                  setValue={createSetRandomization(act, featureId)}
+                  value={randomSetting}
+                />
+              )}
+            </Preference>
+          );
+        },
       )}
-    </Section>
+    </Stack>
+  ) : (
+    <Stack fill vertical align="center" justify="center" my="auto" g={3}>
+      <Stack.Item>
+        <Icon name="face-sad-cry" size={7.5} color="blue" />
+      </Stack.Item>
+      <Stack.Item bold fontSize={1.25} color="label" textAlign="center">
+        К сожалению, выбранная раса не имеет дополнительных параметров
+        внешности.
+      </Stack.Item>
+    </Stack>
   );
 }
 
@@ -504,24 +500,28 @@ export function MainPage(props: MainPageProps) {
       <Stack.Item grow>
         <Stack fill vertical>
           <Stack.Item basis="37.5%">
-            <PreferenceList
-              preferences={contextualPreferences}
-              randomizations={getRandomization(
-                contextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-            />
+            <Section fill scrollable>
+              <PreferenceList
+                preferences={contextualPreferences}
+                randomizations={getRandomization(
+                  contextualPreferences,
+                  serverData,
+                  randomBodyEnabled,
+                )}
+              />
+            </Section>
           </Stack.Item>
           <Stack.Item grow>
-            <PreferenceList
-              preferences={nonContextualPreferences}
-              randomizations={getRandomization(
-                nonContextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-            />
+            <Section fill scrollable>
+              <PreferenceList
+                preferences={nonContextualPreferences}
+                randomizations={getRandomization(
+                  nonContextualPreferences,
+                  serverData,
+                  randomBodyEnabled,
+                )}
+              />
+            </Section>
           </Stack.Item>
         </Stack>
       </Stack.Item>

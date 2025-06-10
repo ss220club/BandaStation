@@ -31,10 +31,6 @@ $department_map: (
 
 // MARK: PreferencesPage
 .PreferencesMenu {
-  --pref-background: hsl(from var(--color-base) h s calc(l - 2.5));
-  --comp-background: hsl(from var(--pref-background) h s calc(l - 2.5));
-  --comp-border: hsl(from var(--pref-background) h s calc(l + 7.5));
-
   .Dropdown {
     justify-content: end;
 
@@ -569,18 +565,26 @@ $department_map: (
 // MARK: QuirksPage
 .PreferencesMenu__Quirks {
   &Quirk {
+    --lightness-multiplier: 0;
+
     &.negative {
-      --quirk-background: hsl(from var(--color-bad) h 50 calc(l - 15));
+      --quirk-background: hsl(
+        from var(--color-bad) h 50 calc(l - 15 + var(--lightness-multiplier))
+      );
       --quirk-border: hsl(from var(--quirk-background) h 50 calc(l + 5) / 0.2);
     }
 
     &.positive {
-      --quirk-background: hsl(from var(--color-good) h 50 calc(l - 12.5));
+      --quirk-background: hsl(
+        from var(--color-good) h 50 calc(l - 12.5 + var(--lightness-multiplier))
+      );
       --quirk-border: hsl(from var(--quirk-background) h 50 calc(l + 5) / 0.2);
     }
 
     &.neutral {
-      --quirk-background: hsl(from var(--color-base) h s calc(l + 5));
+      --quirk-background: hsl(
+        from var(--color-base) h s calc(l + 5 + var(--lightness-multiplier))
+      );
       --quirk-border: hsl(from var(--quirk-background) h s calc(l + 5) / 0.1);
     }
 
@@ -588,13 +592,12 @@ $department_map: (
     background-color: var(--quirk-background);
     border: var(--border-thickness-tiny) solid var(--quirk-border);
     border-radius: var(--border-radius-medium);
-    transition-property: transform, box-shadow;
+    transition-property: background-color, border-color;
     transition-duration: var(--transition-time-medium);
 
     &:not(.Unremovable):hover {
       cursor: var(--cursor-pointer);
-      transform: translateY(-0.33rem);
-      box-shadow: 0 0.33rem 0 hsl(from var(--quirk-border) h s l / 0.5);
+      --lightness-multiplier: var(--adjust-hover);
     }
 
     &--Icon {
@@ -612,11 +615,21 @@ $department_map: (
       padding: 0.33rem;
       padding-left: 0.5rem;
       background-color: hsl(from var(--quirk-background) h s calc(l - 15));
-      border-style: solid;
       border-width: 1px 0 0 1px;
+      border-style: solid;
       border-color: hsl(from var(--quirk-border) h s calc(l + 7.5) / 1);
       border-top-left-radius: var(--border-radius-medium);
       box-shadow: inset 3px 3px 2px -1px hsla(0, 0%, 0%, 0.25);
+      transition-property: background-color, border-color;
+      transition-duration: var(--transition-time-medium);
+    }
+
+    &--Customization {
+      min-width: 410px;
+      padding: var(--space-m);
+      background-color: var(--color-base);
+      border-radius: var(--border-radius-large);
+      box-shadow: 0 0.5rem 1rem hsl(0, 0%, 0%, 0.5);
     }
 
     &.Unremovable {
