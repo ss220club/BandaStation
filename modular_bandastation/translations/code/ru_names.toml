@@ -992,6 +992,70 @@ accusative = "мантию гвардии Императора"
 instrumental = "мантией гвардии Императора"
 prepositional = "мантии гвардии Императора"
 
+["flag of the IT Division"]
+nominative = "флаг IT-подразделения"
+genitive = "флага IT-подразделения"
+dative = "флагу IT-подразделения"
+accusative = "флаг IT-подразделения"
+instrumental = "флагом IT-подразделения"
+prepositional = "флаге IT-подразделения"
+
+["flag of Nanotrasen"]
+nominative = "флаг Нанотрейзен"
+genitive = "флага Нанотрейзен"
+dative = "флагу Нанотрейзен"
+accusative = "флаг Нанотрейзен"
+instrumental = "флагом Нанотрейзен"
+prepositional = "флаге Нанотрейзен"
+
+["flag of the Spinward Stellar Coalition"]
+nominative = "флаг Спинвардской Звездной Коалиции"
+genitive = "флага Спинвардской Звездной Коалиции"
+dative = "флагу Спинвардской Звездной Коалиции"
+accusative = "флаг Спинвардской Звездной Коалиции"
+instrumental = "флагом Спинвардской Звездной Коалиции"
+prepositional = "флаге Спинвардской Звездной Коалиции"
+
+["flag of Trans-Solar Federation"]
+nominative = "флаг Транс-Солнечной Федерации"
+genitive = "флага Транс-Солнечной Федерации"
+dative = "флагу Транс-Солнечной Федерации"
+accusative = "флаг Транс-Солнечной Федерации"
+instrumental = "флагом Транс-Солнечной Федерации"
+prepositional = "флаге Транс-Солнечной Федерации"
+
+["flag of the Tiziran Empire"]
+nominative = "флаг Тизиранской Империи"
+genitive = "флага Тизиранской Империи"
+dative = "флагу Тизиранской Империи"
+accusative = "флаг Тизиранской Империи"
+instrumental = "флагом Тизиранской Империи"
+prepositional = "флаге Тизиранской Империи"
+
+["flag of the Grand Nomad Fleet"]
+nominative = "флаг Гранд-Номадского Флота"
+genitive = "флага Гранд-Номадского Флота"
+dative = "флагу Гранд-Номадского Флота"
+accusative = "флаг Гранд-Номадского Флота"
+instrumental = "флагом Гранд-Номадского Флота"
+prepositional = "флаге Гранд-Номадского Флота"
+
+["flag of the Martian Republic"]
+nominative = "флаг Марсианской Республики"
+genitive = "флага Марсианской Республики"
+dative = "флагу Марсианской Республики"
+accusative = "флаг Марсианской Республики"
+instrumental = "флагом Марсианской Республики"
+prepositional = "флаге Марсианской Республики"
+
+["flag of the Syndicate"]
+nominative = "флаг Синдиката"
+genitive = "флага Синдиката"
+dative = "флагу Синдиката"
+accusative = "флаг Синдиката"
+instrumental = "флагом Синдиката"
+prepositional = "флаге Синдиката"
+
 # MARK: Human AI
 ["ai's uniform"]
 nominative = "униформа ИИ"

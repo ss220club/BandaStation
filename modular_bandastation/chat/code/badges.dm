@@ -19,7 +19,7 @@ GLOBAL_LIST(badge_icons_cache)
 
 	if(donator_level && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
 		var/donor_color = prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour
-		var/donor_shine = donator_level >= 3 && prefs.read_preference(/datum/preference/toggle/donor_chat_shine) ? "class='shine'" : ""
+		var/donor_shine = get_donator_level() >= 3 && prefs.read_preference(/datum/preference/toggle/donor_chat_shine) ? "class='shine'" : ""
 		parts += "<span [donor_shine] style='[donor_shine ? "--shine-color: [donor_color];" : "color: [donor_color];"]'>[key]</span>"
 	else
 		parts += "[key]"
