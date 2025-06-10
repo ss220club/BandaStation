@@ -553,7 +553,8 @@
 
 	src.job = job.title
 
-	if(fully_randomize)
+	var/randomise_job_slot = player_client.prefs.set_assigned_slot(job.title, player_client.mob?.mind?.late_joiner) // BANDASTATION ADDITION - Pref Job Slots
+	if(fully_randomize || randomise_job_slot)  // BANDASTATION EDIT - Pref Job Slots - OLD: if(fully_randomize)
 		player_client.prefs.apply_prefs_to(src)
 
 		if(require_human)
