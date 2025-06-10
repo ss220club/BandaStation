@@ -25,7 +25,7 @@
 //ТМ НА ОДИН РАУНД, НЕ ХОЧУ КОНФЛИКТОВ В OBJECTS.DME
 /atom/movable/screen/ship
 	name = "NBS Воля Трейзена"
-	desc = "Флагманский корабль группировки \"Кулак Трейзена\"."
+	desc = "Личный корабль Генриха Трейзена III."
 	icon = 'modular_bandastation/objects/icons/obj/effects/ship.dmi'
 	icon_state = "ship"
 	plane = RENDER_PLANE_TRANSPARENT
@@ -44,9 +44,9 @@
 	fly_time = 15 SECONDS
 	patch = -120
 
-/atom/movable/screen/ship/principatus
-	name = "NBS Принципат"
-	desc = "Боевой крейсер с опознавательными знаками Нанотрейзен."
+/atom/movable/screen/ship/skull
+	name = "NBS Череп"
+	desc = "Флагманский корабль группировки \"Кулак Трейзена\"."
 	scale = matrix(0.6, 0, 0, 0, 0.6, 0)
 	fly_time = 5 SECONDS
 	patch = -125
