@@ -298,7 +298,7 @@ function JoblessRoleDropdown() {
 }
 
 export function JobsPage() {
-  const captainMargin = 5.25;
+  const captainMargin = 5.75;
   return (
     <Stack fill vertical g={0}>
       <Stack.Item>

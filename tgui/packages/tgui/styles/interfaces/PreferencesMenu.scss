@@ -308,7 +308,7 @@ $department_map: (
       white-space: nowrap;
       text-overflow: ellipsis;
       padding: var(--space-s) var(--space-m);
-      text-shadow: 1px 1px 0px black;
+      text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.75);
     }
 
     .options {
@@ -378,6 +378,43 @@ $department_map: (
     @each $department-name, $color in $department_map {
       &--#{$department-name} {
         --background-color: #{$color};
+      }
+    }
+
+    &--Captain {
+      @keyframes captain {
+        0%,
+        66% {
+          background-position-x: 50%;
+        }
+
+        100% {
+          background-position-x: -50%;
+        }
+      }
+
+      position: relative;
+      border: 2px solid transparent;
+      background: linear-gradient(
+        45deg,
+        var(--color-gold) 15%,
+        hsl(from var(--color-gold) h s calc(l + 33)) 20%,
+        var(--color-gold) 25%
+      );
+      background-size: 250%;
+      animation: captain 5s infinite cubic-bezier(0.9, 0.05, 1, 1);
+
+      &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: var(--background-color);
+        z-index: 0;
+      }
+
+      .job-name {
+        position: relative;
+        font-size: 1.2em;
       }
     }
   }
