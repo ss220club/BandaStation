@@ -382,24 +382,14 @@ $department_map: (
     }
 
     &--Captain {
-      @keyframes captain {
-        0%,
-        66% {
-          background-position-x: 50%;
-        }
-
-        100% {
-          background-position-x: -50%;
-        }
-      }
-
       position: relative;
-      border: 2px solid transparent;
+      border-color: hsla(0, 0%, 100%, 0.15) hsla(0, 0%, 0%, 0.2)
+        hsla(0, 0%, 0%, 0.2) hsla(0, 0%, 100%, 0.15);
       background: linear-gradient(
         45deg,
-        var(--color-gold) 15%,
-        hsl(from var(--color-gold) h s calc(l + 33)) 20%,
-        var(--color-gold) 25%
+        var(--background-color) 15%,
+        hsl(from var(--background-color) h s calc(l + 33)) 20%,
+        var(--background-color) 25%
       );
       background-size: 250%;
       animation: captain 5s infinite ease-in-out;
@@ -414,7 +404,18 @@ $department_map: (
 
       .job-name {
         position: relative;
-        font-size: 1.2em;
+        font-size: 1.15em;
+      }
+
+      @keyframes captain {
+        0%,
+        66% {
+          background-position-x: 50%;
+        }
+
+        100% {
+          background-position-x: -50%;
+        }
       }
     }
   }

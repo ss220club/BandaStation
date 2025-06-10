@@ -298,7 +298,6 @@ function JoblessRoleDropdown() {
 }
 
 export function JobsPage() {
-  const captainMargin = 5.75;
   return (
     <Stack fill vertical g={0}>
       <Stack.Item>
@@ -307,8 +306,8 @@ export function JobsPage() {
       <Stack.Divider />
       <Stack.Item grow>
         <Section fill>
-          <Stack fill g={1} className="PreferencesMenu__Jobs">
-            <Stack.Item grow minWidth={0} mt={captainMargin}>
+          <Stack fill g={1} align="center" className="PreferencesMenu__Jobs">
+            <Stack.Item grow minWidth={0}>
               <Stack vertical>
                 <Department department="Engineering" />
                 <Department department="Science" />
@@ -324,7 +323,7 @@ export function JobsPage() {
                 <Department department="Cargo" />
               </Stack>
             </Stack.Item>
-            <Stack.Item grow minWidth={0} mt={captainMargin}>
+            <Stack.Item grow minWidth={0}>
               <Stack vertical>
                 <Department department="Security" />
                 <Department department="Justice" />
