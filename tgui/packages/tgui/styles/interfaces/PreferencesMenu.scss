@@ -402,7 +402,7 @@ $department_map: (
         var(--color-gold) 25%
       );
       background-size: 250%;
-      animation: captain 5s infinite cubic-bezier(0.9, 0.05, 1, 1);
+      animation: captain 5s infinite ease-in-out;
 
       &:before {
         content: '';
