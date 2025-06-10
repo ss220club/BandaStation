@@ -3,48 +3,48 @@ import { CheckboxInput, FeatureToggle } from '../base';
 export const tgui_fancy: FeatureToggle = {
   name: 'Включить красивый TGUI',
   category: 'Интерфейс',
-  description: 'Окна TGUI будут выглядишь лучше ценой совместимости.',
+  description: 'Окна TGUI будут выглядеть лучше, ценой совместимости.',
   component: CheckboxInput,
 };
 
 export const tgui_input: FeatureToggle = {
-  name: 'Ввод: включить TGUI',
+  name: 'Ввод - Включить TGUI',
   category: 'Интерфейс',
-  description: 'Окна ввода будут иметь TGUI.',
+  description: 'Заменяет стандартный ввод, такой как выбор из списка.',
   component: CheckboxInput,
 };
 
 export const tgui_input_large: FeatureToggle = {
-  name: 'Ввод: большие кнопки',
+  name: 'Ввод - Большие кнопки',
   category: 'Интерфейс',
-  description: 'Менее традиционные, но более функциональные кнопки TGUI.',
+  description: 'Делает кнопки в окнах ввода TGUI большими.',
   component: CheckboxInput,
 };
 
 export const tgui_input_swapped: FeatureToggle = {
-  name: 'Ввод: инвентировать ввод/отмена',
+  name: 'Ввод - Поменять местами кнопки',
   category: 'Интерфейс',
-  description: 'Менее традиционные, но более функциональные кнопки TGUI.',
+  description: 'Менее традиционные кнопки в окнах ввода TGUI.',
   component: CheckboxInput,
 };
 
 export const tgui_lock: FeatureToggle = {
-  name: 'TGUI только на главном дисплее',
+  name: 'TGUI - Только на главном дисплее',
   category: 'Интерфейс',
   description: 'Блокирует местоположение TGUI на главном дисплее.',
   component: CheckboxInput,
 };
 
 export const ui_scale: FeatureToggle = {
-  name: 'Масштабирование интерфейсов',
+  name: 'TGUI - Масштабирование интерфейсов',
   category: 'Интерфейс',
   description: 'Должны ли интерфейсы масштабироваться под масштаб в системе?',
   component: CheckboxInput,
 };
 
 export const tgui_say_light_mode: FeatureToggle = {
-  name: 'Говорить: светлая тема',
+  name: 'Окно общения - Светлый режим',
   category: 'Интерфейс',
-  description: 'TGUI поле ввода для разговора будет в светлой теме.',
+  description: 'Если включено, поле ввода для разговора будет в светлой теме.',
   component: CheckboxInput,
 };

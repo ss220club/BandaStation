@@ -80,6 +80,20 @@ export const sound_tts_volume: Feature<number> = {
   component: FeatureSliderInput,
 };
 
+export const sound_tts_volume_radio: Feature<number> = {
+  name: 'TTS - громкость рации',
+  category: 'Звук',
+  description: 'Громкость text-to-speech для рации.',
+  component: FeatureSliderInput,
+};
+
+export const sound_tts_volume_announcement: Feature<number> = {
+  name: 'TTS - громкость оповещений',
+  category: 'Звук',
+  description: 'Громкость text-to-speech для оповещений.',
+  component: FeatureSliderInput,
+};
+
 export const sound_lobby_volume: Feature<number> = {
   name: 'Громкость музыки в лобби',
   category: 'Звук',
