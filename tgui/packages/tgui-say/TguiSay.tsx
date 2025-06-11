@@ -279,7 +279,9 @@ export function TguiSay() {
     TRANSLATE_ITTERATOR[channelIterator.current.current()] ||
     channelIterator.current.current();
 
-  setButtonContent(TRANSLATE_ITTERATOR[buttonContent] || buttonContent);
+  useEffect(() => {
+    setButtonContent(TRANSLATE_ITTERATOR[buttonContent] || buttonContent);
+  }, [buttonContent]);
 
   return (
     <div
