@@ -32,7 +32,7 @@
 
   &-light {
     --background-color: oklch(from var(--channel-color) 1 0.025 h);
-    --color: oklch(from var(--channel-color) 0.5 0.15 h);
+    --color: oklch(from var(--channel-color) 0.45 0.15 h);
   }
 
   &::selection {
