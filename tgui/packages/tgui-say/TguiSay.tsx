@@ -168,7 +168,7 @@ export function TguiSay() {
       setButtonContent(RADIO_PREFIXES[newPrefix]);
       setCurrentPrefix(newPrefix);
       newValue = newValue.slice(3);
-      iterator.set('Говор');
+      iterator.set('Say');
 
       if (newPrefix === ':b ') {
         Byond.sendMessage('thinking', { visible: false });
@@ -266,8 +266,17 @@ export function TguiSay() {
     }
   }, [value]);
 
-  const theme =
+  const TRANSLATE_THEME: Record<string, string> = {
+    Say: 'Говор',
+    Whis: 'Шёпот',
+    Radio: 'Радио',
+    Me: 'Эмоц',
+    Admin: 'Админ',
+  };
+
+  let theme =
     (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
+    TRANSLATE_THEME[channelIterator.current.current()] ||
     channelIterator.current.current();
 
   return (
