@@ -1,16 +1,11 @@
 export type Channel =
   | 'Me'
-  | 'Эмоц'
   | 'Say'
-  | 'Говор'
   | 'Whis'
-  | 'Шёпот'
   | 'Radio'
-  | 'Радио'
   | 'OOC'
   | 'LOOC'
-  | 'Admin'
-  | 'Админ';
+  | 'Admin';
 
 /**
  * ### ChannelIterator
