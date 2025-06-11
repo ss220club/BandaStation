@@ -274,7 +274,7 @@ export function TguiSay() {
     Admin: 'Админ',
   };
 
-  let theme =
+  const theme =
     (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
     TRANSLATE_ITTERATOR[channelIterator.current.current()] ||
     channelIterator.current.current();
