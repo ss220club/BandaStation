@@ -266,7 +266,7 @@ export function TguiSay() {
     }
   }, [value]);
 
-  const TRANSLATE_THEME: Record<string, string> = {
+  const TRANSLATE_ITTERATOR: Record<string, string> = {
     Say: 'Говор',
     Whis: 'Шёпот',
     Radio: 'Радио',
@@ -276,8 +276,10 @@ export function TguiSay() {
 
   let theme =
     (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
-    TRANSLATE_THEME[channelIterator.current.current()] ||
+    TRANSLATE_ITTERATOR[channelIterator.current.current()] ||
     channelIterator.current.current();
+
+  setButtonContent(TRANSLATE_ITTERATOR[buttonContent] || buttonContent);
 
   return (
     <div
