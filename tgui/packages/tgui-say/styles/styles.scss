@@ -14,7 +14,8 @@
 .window {
   --font-size: 15px;
   --font-family: 'Consolas', monospace;
-  --background-color: oklch(from var(--channel-color) 0.125 0.075 h);
+  --channel-color: gray;
+  --background-color: oklch(from var(--channel-color) 0.125 calc(c / 2) h);
   --color: var(--channel-color);
 
   position: absolute;
