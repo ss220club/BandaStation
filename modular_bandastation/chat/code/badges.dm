@@ -17,7 +17,7 @@ GLOBAL_LIST(badge_icons_cache)
 	if(length(badge_parts))
 		parts += badge_parts
 
-	if(donator_level && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
+	if(get_donator_level() && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
 		var/donor_color = prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour
 		var/donor_shine = get_donator_level() >= 3 && prefs.read_preference(/datum/preference/toggle/donor_chat_shine) ? "class='shine'" : ""
 		parts += "<span [donor_shine] style='[donor_shine ? "--shine-color: [donor_color];" : "color: [donor_color];"]'>[key]</span>"
@@ -30,8 +30,9 @@ GLOBAL_LIST(badge_icons_cache)
 	if(prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
 		return "ByondMember"
 
-	if(donator_level && prefs.read_preference(/datum/preference/toggle/donor_public))
-		return "Tier_[min(donator_level, 5)]"
+	var/donor_tier = get_donator_level()
+	if(donor_tier && prefs.read_preference(/datum/preference/toggle/donor_public))
+		return "Tier_[min(donor_tier, 5)]"
 
 /client/proc/get_worker_badge()
 	var/static/list/rank_badge_map = list(
