@@ -1,13 +1,11 @@
 export type Channel =
-  | 'Say'
-  | 'Radio'
-  | 'Me'
-  // BANDASTATION EDIT START
-  | 'Whis'
-  | 'LOOC'
-  // BANDASTATION EDIT END
+  | 'Эмоц'
+  | 'Говор'
+  | 'Шёпот'
+  | 'Радио'
   | 'OOC'
-  | 'Admin';
+  | 'LOOC'
+  | 'Админ';
 
 /**
  * ### ChannelIterator
@@ -18,18 +16,16 @@ export type Channel =
 export class ChannelIterator {
   private index: number = 0;
   private readonly channels: Channel[] = [
-    'Say',
-    'Radio',
-    'Me',
-    // BANDASTATION EDIT START
-    'Whis',
-    'LOOC',
-    // BANDASTATION EDIT END
+    'Эмоц',
+    'Говор',
+    'Шёпот',
+    'Радио',
     'OOC',
-    'Admin',
+    'LOOC',
+    'Админ',
   ];
-  private readonly blacklist: Channel[] = ['Admin'];
-  private readonly quiet: Channel[] = ['OOC', 'LOOC', 'Admin']; // BANDASTATION EDIT
+  private readonly blacklist: Channel[] = ['Админ'];
+  private readonly quiet: Channel[] = ['OOC', 'LOOC', 'Админ'];
 
   public next(): Channel {
     if (this.blacklist.includes(this.channels[this.index])) {
@@ -56,7 +52,7 @@ export class ChannelIterator {
   }
 
   public isSay(): boolean {
-    return this.channels[this.index] === 'Say';
+    return this.channels[this.index] === 'Говор';
   }
 
   public isVisible(): boolean {

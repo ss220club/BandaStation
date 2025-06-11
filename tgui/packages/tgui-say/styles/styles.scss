@@ -13,8 +13,8 @@
 
 .window {
   --font-size: 15px;
-  --font-family: 'Consolas';
-  --background-color: hsl(from var(--channel-color) h s 5);
+  --font-family: 'Consolas', monospace;
+  --background-color: oklch(from var(--channel-color) 0.125 0.075 h);
   --color: var(--channel-color);
 
   position: absolute;
@@ -23,15 +23,15 @@
   background: linear-gradient(
     130deg,
     var(--color) 15%,
-    hsl(from var(--color) h s calc(l + 33)) 20%,
+    oklch(from var(--color) 1 calc(c - 0.05) h) 20%,
     var(--color) 25%
   );
   background-size: 250%;
   animation: shine 10s infinite ease-in-out;
 
   &-light {
-    --background-color: hsl(from var(--channel-color) h s 97.5);
-    --color: hsl(from var(--channel-color) h s 33);
+    --background-color: oklch(from var(--channel-color) 1 0.025 h);
+    --color: oklch(from var(--channel-color) 0.5 0.15 h);
   }
 
   &::selection {
@@ -57,20 +57,22 @@
   cursor: pointer;
   text-align: center;
   font-weight: 600;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
   padding: 0 0.25rem;
   color: var(--color);
   box-shadow: inset 0 0 2px 1px var(--shadow-color);
   border-radius: 3px;
 
   &:hover {
-    --shadow-color: hsl(from var(--color) h s calc(l + 25));
+    --shadow-color: oklch(from var(--color) calc(l + 0.25) calc(c - 0.033) h);
   }
 }
 
 .textarea {
   scrollbar-width: thin;
   scrollbar-gutter: stable;
-  scrollbar-color: hsl(from var(--color) h s l / 0.5) transparent;
+  scrollbar-color: oklch(from var(--color) l c h / 0.5) transparent;
   resize: none;
   overflow-y: auto;
   padding: 2px 4px 2px 6px;
