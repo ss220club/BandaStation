@@ -1,12 +1,5 @@
 @use 'sass:map';
 
-$background: hsl(0, 0%, 7.5%);
-$button: hsl(0, 0%, 12.2%);
-$lightMode: hsl(0, 0%, 100%);
-$lightBorder: hsl(0, 0%, 73.3%);
-$lightHover: hsl(0, 0%, 91.8%);
-$scrollbar-color-multiplier: 1 !default;
-
 // prettier-ignore
 $_channel_map: (
   'Admin': hsl(300, 100%, 86.7%),
@@ -52,9 +45,8 @@ $_channel_map: (
   // BANDASTATION EDIT END
 );
 
-$channel_keys: map.keys($_channel_map) !default;
-
 $channel-map: ();
+$channel_keys: map.keys($_channel_map) !default;
 
 @each $channel in $channel_keys {
   $channel-map: map.merge(

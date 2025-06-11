@@ -267,26 +267,23 @@ export function TguiSay() {
   }, [value]);
 
   const theme =
-    (lightMode && 'lightMode') ||
     (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
     channelIterator.current.current();
 
   return (
-    <>
-      <div
-        className={`window window-${theme} window-${size}`}
-        onMouseDown={dragStartHandler}
-      >
-        {!lightMode && <div className={`shine shine-${theme}`} />}
-      </div>
-      <div
-        className={classes(['content', lightMode && 'content-lightMode'])}
-        style={{
-          zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
-        }}
-      >
+    <div
+      className={classes([
+        'window',
+        `window-${theme}`,
+        lightMode && 'window-light',
+      ])}
+      style={{
+        zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
+      }}
+    >
+      <div className="content">
         <button
-          className={`button button-${theme}`}
+          className="button"
           onMouseDown={handleButtonClick}
           onMouseUp={handleButtonRelease}
           type="button"
@@ -295,11 +292,7 @@ export function TguiSay() {
         </button>
         <textarea
           autoCorrect="off"
-          className={classes([
-            'textarea',
-            `textarea-${theme}`,
-            value.length > LineLength.Large && 'textarea-large',
-          ])}
+          className="textarea"
           maxLength={maxLength}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
@@ -308,6 +301,6 @@ export function TguiSay() {
           value={value}
         />
       </div>
-    </>
+    </div>
   );
 }
