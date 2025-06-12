@@ -1,5 +1,6 @@
 {
 	"version": 1,
+	"exclude_from_ci": true,
 	"map_name": "Birdshot Station",
 	"map_path": "map_files/Birdshot",
 	"map_file": "birdshot.dmm",

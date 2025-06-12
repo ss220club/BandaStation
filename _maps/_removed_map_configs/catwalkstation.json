@@ -1,5 +1,6 @@
 {
 	"version": 1,
+	"exclude_from_ci": true,
 	"map_name": "Catwalk Station",
 	"map_path": "map_files/CatwalkStation",
 	"map_file": "CatwalkStation_2023.dmm",

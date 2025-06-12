@@ -1,5 +1,6 @@
 {
 	"version": 1,
+	"exclude_from_ci": true,
 	"map_name": "Runtime Station",
 	"map_path": "map_files/debug",
 	"map_file": "runtimestation.dmm",
