@@ -1,5 +1,6 @@
 {
 	"version": 1,
+	"exclude_from_ci": true,
 	"map_name": "Ice Box Station",
 	"map_path": "map_files/IceBoxStation",
 	"map_file": "IceBoxStation.dmm",
