@@ -176,7 +176,7 @@ function SpeciesPerk(props: SpeciesPerkProps) {
 
   return (
     <Tooltip
-      position="bottom-end"
+      position="right-start"
       content={<Section title={perk.name}>{perk.description}</Section>}
     >
       <Stack className={classes([color, 'PreferencesMenu__Species__Perk'])}>
@@ -200,30 +200,18 @@ function SpeciesPerks(props: SpeciesPerksProps) {
 
   return (
     <Stack.Item>
-      <Section title="Черты">
-        <Stack fill justify="center">
+      <Section fill scrollable className="PreferencesMenu__Species__Perks">
+        <Stack fill vertical justify="center">
           {positive.map((perk) => {
-            return (
-              <Stack.Item key={perk.name}>
-                <SpeciesPerk color="green" perk={perk} />
-              </Stack.Item>
-            );
+            return <SpeciesPerk key={perk.name} perk={perk} color="green" />;
           })}
           <Stack.Divider />
           {neutral.map((perk) => {
-            return (
-              <Stack.Item key={perk.name}>
-                <SpeciesPerk color="grey" perk={perk} />
-              </Stack.Item>
-            );
+            return <SpeciesPerk key={perk.name} perk={perk} color="grey" />;
           })}
           {negative.length > 0 && <Stack.Divider />}
           {negative.map((perk) => {
-            return (
-              <Stack.Item key={perk.name}>
-                <SpeciesPerk color="red" perk={perk} />
-              </Stack.Item>
-            );
+            return <SpeciesPerk key={perk.name} perk={perk} color="red" />;
           })}
         </Stack>
       </Section>
@@ -258,38 +246,45 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
 
   function SpeciesInfo(props) {
     return (
-      <Stack fill vertical>
-        <Stack.Item basis="50%">
-          <Section
-            fill
-            scrollable
-            title={
-              <Stack fill align="center">
-                <Stack.Item>
-                  <Button icon="arrow-left" onClick={props.onHandleClose} />
-                </Stack.Item>
-                <Stack.Item grow>{currentSpecies.name}</Stack.Item>
-                {currentSpecies.diet && (
-                  <Stack.Item>
-                    <Diet diet={currentSpecies.diet} />
-                  </Stack.Item>
-                )}
-              </Stack>
-            }
-          >
-            {currentSpecies.desc}
-          </Section>
+      <Stack fill>
+        <Stack.Item grow>
+          <Stack fill vertical>
+            <Stack.Item basis="33%">
+              <Section
+                fill
+                scrollable
+                title={
+                  <Stack fill align="center">
+                    <Stack.Item>
+                      <Button icon="arrow-left" onClick={props.onHandleClose} />
+                    </Stack.Item>
+                    <Stack.Item grow>{currentSpecies.name}</Stack.Item>
+                    {currentSpecies.diet && (
+                      <Stack.Item>
+                        <Diet diet={currentSpecies.diet} />
+                      </Stack.Item>
+                    )}
+                  </Stack>
+                }
+              >
+                {currentSpecies.desc}
+              </Section>
+            </Stack.Item>
+            <Stack.Item grow>
+              <Section fill scrollable title="История">
+                {currentSpecies.lore.map((text, index) => (
+                  <Box
+                    key={index}
+                    className="PreferencesMenu__Species__History"
+                  >
+                    {text}
+                  </Box>
+                ))}
+              </Section>
+            </Stack.Item>
+          </Stack>
         </Stack.Item>
         <SpeciesPerks perks={currentSpecies.perks} />
-        <Stack.Item basis="50%">
-          <Section fill scrollable title="История">
-            {currentSpecies.lore.map((text, index) => (
-              <Box key={index} className="PreferencesMenu__Species__History">
-                {text}
-              </Box>
-            ))}
-          </Section>
-        </Stack.Item>
       </Stack>
     );
   }

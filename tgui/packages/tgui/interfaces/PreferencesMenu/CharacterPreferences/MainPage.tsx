@@ -49,32 +49,37 @@ function CharacterControls(props: CharacterControlsProps) {
 
   return (
     <Stack className="PreferencesMenu__CharacterControls">
-      <Button
-        icon="undo"
-        tooltip="Повернуть"
-        tooltipPosition="top"
-        onClick={props.handleRotate}
-      />
-      <Button
-        icon="paw"
-        tooltip="Вид"
-        tooltipPosition="top"
-        onClick={props.handleOpenSpecies}
-      />
-      {props.showGender && (
-        <GenderButton gender={props.gender} handleSetGender={props.setGender} />
-      )}
-      <Button
-        icon="dice"
-        tooltip="Рандомизировать"
-        tooltipPosition="top"
-        selected={randomToggle}
-        onClick={() => {
-          act('randomize_character');
+      <Stack>
+        <Button
+          icon="undo"
+          tooltip="Повернуть"
+          tooltipPosition="top"
+          onClick={props.handleRotate}
+        />
+        <Button
+          icon="paw"
+          tooltip="Вид"
+          tooltipPosition="top"
+          onClick={props.handleOpenSpecies}
+        />
+        {props.showGender && (
+          <GenderButton
+            gender={props.gender}
+            handleSetGender={props.setGender}
+          />
+        )}
+        <Button
+          icon="dice"
+          tooltip="Рандомизировать"
+          tooltipPosition="top"
+          selected={randomToggle}
+          onClick={() => {
+            act('randomize_character');
 
-          setRandomToggle(!randomToggle);
-        }}
-      />
+            setRandomToggle(!randomToggle);
+          }}
+        />
+      </Stack>
       <Button
         color="red"
         icon="trash"

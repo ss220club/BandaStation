@@ -702,6 +702,14 @@ $department_map: (
     &.red {
       --perk-background: var(--color-bad);
     }
+
+    &s {
+      width: 3.6rem;
+
+      .Section__content {
+        scrollbar-gutter: auto !important;
+      }
+    }
   }
 
   &__History {
