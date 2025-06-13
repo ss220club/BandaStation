@@ -41,6 +41,7 @@
 	id = /obj/item/card/id/advanced/ussp
 	id_trim = /datum/id_trim/ussp/commander
 	uniform = /obj/item/clothing/under/rank/ussp/commander
+	suit = /obj/item/clothing/suit/armor/centcom_formal/ussp_commander
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
 		/obj/item/storage/box/survival/security,
