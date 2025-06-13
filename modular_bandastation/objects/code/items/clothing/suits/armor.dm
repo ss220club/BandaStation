@@ -66,7 +66,7 @@
 
 // TSF
 /obj/item/clothing/suit/armor/centcom_formal/tsf_commander
-	name = "TSF commander greatcoat"
+	name = "federate commander greatcoat"
 	desc = "Мундир командующего офицера КМП ТСФ."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
@@ -74,7 +74,7 @@
 	inhand_icon_state = null
 
 /obj/item/clothing/suit/armor/vest/tsf_overcoat
-	name = "TSF overcoat"
+	name = "federate overcoat"
 	desc = "Стильное пальто с отличительными знаками ТСФ.\
 	Неофициально считается деловой одеждой представителей Федерации."
 	icon_state = "tsf_overcoat"
@@ -94,8 +94,17 @@
 	wound = 0
 
 // USSP
+
+/obj/item/clothing/suit/armor/centcom_formal/ussp_commander
+	name = "soviet general greatcoat"
+	desc = "Парадная шинель генерала КА СССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "ussp_command"
+	inhand_icon_state = null
+
 /obj/item/clothing/suit/armor/vest/ussp
-	name = "USSP overcoat"
+	name = "soviet overcoat"
 	desc = "Стандартная шинель производства Союза."
 	icon_state = "ussp_overcoat"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
@@ -103,7 +112,7 @@
 	dog_fashion = null
 
 /obj/item/clothing/suit/armor/vest/ussp/officer
-	name = "USSP officer overcoat"
+	name = "soviet officer overcoat"
 	desc = "Офицерская шинель производства Союза."
 	icon_state = "ussp_overcoat_officer"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
@@ -130,7 +139,7 @@
 	icon_state = "ussp_medic"
 
 /obj/item/clothing/suit/armor/riot/ussp_riot
-	name = "OMON suit"
+	name = "OMON armor"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 	icon_state = "ussp_riot"

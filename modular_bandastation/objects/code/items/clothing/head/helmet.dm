@@ -40,7 +40,7 @@
 // USSP
 
 /obj/item/clothing/head/helmet/marine/ussp_officer_kaska
-	name = "komandir's kaska"
+	name = "komandir kaska"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "ussp_command"

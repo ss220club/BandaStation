@@ -81,7 +81,7 @@
 
 //TSF
 /obj/item/clothing/suit/tsf_suitjacket
-	name = "TSF suit-jacket"
+	name = "federate suit-jacket"
 	desc = "Дорогая куртка прямиком из Центральных Миров. Имеет отличительные знаки ТСФ."
 	icon_state = "tsf_suit_jacket"
 	worn_icon_state = "tsf_suit_jacket"
