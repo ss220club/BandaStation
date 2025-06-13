@@ -1467,7 +1467,7 @@
 /obj/machinery/defibrillator_mount/directional/west,
 /obj/effect/turf_decal/tile/blue/full,
 /obj/item/surgical_drapes,
-/obj/item/clothing/mask/muzzle/breath,
+/obj/item/clothing/mask/breath/muzzle,
 /turf/open/floor/iron/white/smooth_large,
 /area/centcom/central_command_areas/hospital)
 "agn" = (
