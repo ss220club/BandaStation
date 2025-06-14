@@ -11,6 +11,10 @@
 			qdel(recipe)
 			break
 
+	GLOB.autodrobe_supernatural_items += list(
+		/obj/item/clothing/neck/crow = 1,
+	)
+
 	GLOB.autodrobe_fancy_items += list(
 		/obj/item/clothing/under/carnival/formal = 2,
 		/obj/item/clothing/under/carnival/jacket = 2,
