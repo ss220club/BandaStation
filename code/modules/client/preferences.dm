@@ -270,8 +270,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				current_window = PREFERENCE_TAB_GAME_PREFERENCES
 			else
 				current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES
-			update_static_data(usr)
-			ui_interact(usr)
+			update_static_data(ui.user)
+			ui_interact(ui.user)
 			return TRUE
 		// BANDASTATION ADDITION - END
 
