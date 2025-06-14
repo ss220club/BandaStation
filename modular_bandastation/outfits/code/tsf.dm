@@ -342,8 +342,8 @@
 	name = "TSF - Infiltrator"
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/infiltrator
-	uniform = /obj/item/clothing/under/syndicate/camo
-	suit = /obj/item/clothing/suit/hooded/stealth_cloak
+	uniform = /obj/item/clothing/under/syndicate
+	suit = /obj/item/clothing/suit/hooded/stealth_cloak/black
 	suit_store = /obj/item/gun/ballistic/automatic/carwo/marksman/suppressed
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(

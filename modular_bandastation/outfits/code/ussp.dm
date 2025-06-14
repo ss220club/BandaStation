@@ -363,8 +363,8 @@
 	name = "USSP - Infiltrator"
 	id = /obj/item/card/id/advanced/ussp
 	id_trim = /datum/id_trim/ussp/infiltrator
-	uniform = /obj/item/clothing/under/syndicate
-	suit = /obj/item/clothing/suit/hooded/stealth_cloak/ussp
+	uniform = /obj/item/clothing/under/syndicate/camo
+	suit = /obj/item/clothing/suit/hooded/stealth_cloak
 	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/upp/suppressed
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
