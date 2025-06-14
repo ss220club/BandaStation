@@ -42,7 +42,12 @@ endmap
 
 map cyberiad
 	maxplayers 100
+  votable
+endmap
+  
+map HotMeta
 	votable
+	minplayers 25
 endmap
 
 # Debug-only maps.
