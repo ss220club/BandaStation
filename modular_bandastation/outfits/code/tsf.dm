@@ -168,7 +168,7 @@
 	id_trim = /datum/id_trim/tsf/marine/officer
 	uniform = /obj/item/clothing/under/rank/tsf/marine_officer
 	suit = /obj/item/clothing/suit/armor/vest/marine
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/no_mag
+	suit_store = /obj/item/gun/ballistic/automatic/carwo
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
@@ -187,7 +187,7 @@
 	name = "TSF - Marine Corpsman"
 	id_trim = /datum/id_trim/tsf/marine/corpsman
 	suit = /obj/item/clothing/suit/armor/vest/marine/medic
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/wooden/no_mag
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/wooden
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
@@ -362,6 +362,15 @@
 	belt = /obj/item/storage/belt/military/army/tsf/full_infiltrator
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	r_pocket = /obj/item/knife/combat
+
+/obj/item/gun/ballistic/automatic/sindano/compact/suppressed
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+
+/obj/item/gun/ballistic/automatic/sindano/compact/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/gun/ballistic/automatic/carwo/marksman/suppressed/Initialize(mapload)
 	. = ..()
