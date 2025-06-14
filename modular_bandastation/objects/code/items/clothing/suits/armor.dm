@@ -63,3 +63,83 @@
 	icon_state = "seccaftan"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+// TSF
+/obj/item/clothing/suit/armor/centcom_formal/tsf_commander
+	name = "federate commander greatcoat"
+	desc = "Мундир командующего офицера КМП ТСФ."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "tsf_command"
+	inhand_icon_state = null
+
+/obj/item/clothing/suit/armor/vest/tsf_overcoat
+	name = "federate overcoat"
+	desc = "Стильное пальто с отличительными знаками ТСФ.\
+	Неофициально считается деловой одеждой представителей Федерации."
+	icon_state = "tsf_overcoat"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	armor_type = /datum/armor/tsf_overcoat
+	dog_fashion = null
+
+/datum/armor/tsf_overcoat
+	melee = 5
+	bullet = 0
+	laser = 10
+	energy = 0
+	bomb = 0
+	fire = 5
+	acid = 0
+	wound = 0
+
+// USSP
+
+/obj/item/clothing/suit/armor/centcom_formal/ussp_commander
+	name = "soviet general greatcoat"
+	desc = "Парадная шинель генерала КА СССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "ussp_command"
+	inhand_icon_state = null
+
+/obj/item/clothing/suit/armor/vest/ussp
+	name = "soviet overcoat"
+	desc = "Стандартная шинель производства Союза."
+	icon_state = "ussp_overcoat"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	dog_fashion = null
+
+/obj/item/clothing/suit/armor/vest/ussp/officer
+	name = "soviet officer overcoat"
+	desc = "Офицерская шинель производства Союза."
+	icon_state = "ussp_overcoat_officer"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+/obj/item/clothing/suit/armor/vest/marine/ussp_officer
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_command"
+
+/obj/item/clothing/suit/armor/vest/marine/security/ussp_security
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_security"
+
+/obj/item/clothing/suit/armor/vest/marine/engineer/ussp_engineer
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_engineer"
+
+/obj/item/clothing/suit/armor/vest/marine/medic/ussp_medic
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_medic"
+
+/obj/item/clothing/suit/armor/riot/ussp_riot
+	name = "OMON armor"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/amor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "ussp_riot"
