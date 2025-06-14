@@ -1,0 +1,307 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"af" = (
+/obj/machinery/light/small/directional/west,
+/turf/open/floor/plating,
+/area/space)
+"ax" = (
+/obj/machinery/power/shuttle_engine/heater,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/north,
+/turf/open/floor/plating/airless,
+/area/space)
+"aG" = (
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"aJ" = (
+/turf/open/floor/iron/smooth,
+/area/space)
+"aK" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth,
+/area/space)
+"aN" = (
+/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
+/turf/open/floor/plating,
+/area/space)
+"bs" = (
+/obj/machinery/power/shuttle_engine/large,
+/turf/open/floor/plating/airless,
+/area/space)
+"bQ" = (
+/obj/structure/fake_stairs/directional/north,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"cp" = (
+/turf/open/floor/plating,
+/area/space)
+"cA" = (
+/turf/open/space/basic,
+/area/space)
+"cT" = (
+/turf/closed/wall/r_wall/syndicate,
+/area/space)
+"lJ" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"nN" = (
+/obj/machinery/power/shuttle_engine/propulsion/left,
+/turf/open/floor/plating/airless,
+/area/space)
+"pQ" = (
+/obj/structure/closet/emcloset/anchored,
+/turf/open/floor/iron/dark/smooth_large,
+/area/space)
+"zu" = (
+/obj/machinery/power/shuttle_engine/propulsion/right,
+/turf/open/floor/plating/airless,
+/area/space)
+"Ow" = (
+/obj/structure/fans/tiny,
+/turf/open/floor/pod/dark,
+/area/space)
+"Pj" = (
+/obj/machinery/door/airlock/centcom,
+/turf/open/floor/pod/dark,
+/area/space)
+"Ro" = (
+/turf/open/floor/plating/airless,
+/area/space)
+
+(1,1,1) = {"
+cA
+cA
+cA
+cA
+cA
+cA
+cA
+cA
+cT
+cT
+cA
+cA
+cA
+cT
+cA
+cA
+cA
+"}
+(2,1,1) = {"
+cA
+cA
+cA
+cA
+cA
+cA
+cA
+cT
+cT
+ax
+nN
+cA
+cT
+cT
+cT
+cA
+cA
+"}
+(3,1,1) = {"
+cA
+cA
+cA
+cA
+cA
+cA
+cT
+cT
+cT
+ax
+zu
+cA
+cT
+ax
+Ro
+bs
+cA
+"}
+(4,1,1) = {"
+cA
+cA
+cA
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+ax
+Ro
+Ro
+cA
+"}
+(5,1,1) = {"
+cA
+cT
+cT
+cT
+pQ
+cT
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+cT
+cT
+cT
+cT
+cT
+"}
+(6,1,1) = {"
+aN
+aN
+aJ
+aK
+aG
+bQ
+aG
+aJ
+aJ
+aJ
+aJ
+aG
+aG
+aG
+Pj
+af
+Ow
+"}
+(7,1,1) = {"
+aN
+aN
+aJ
+aK
+aG
+bQ
+aG
+aJ
+aJ
+aJ
+aJ
+aG
+aG
+aG
+Pj
+cp
+Ow
+"}
+(8,1,1) = {"
+cA
+cT
+cT
+cT
+pQ
+cT
+aa
+aa
+aa
+aa
+aa
+aa
+cT
+cT
+cT
+cT
+cT
+"}
+(9,1,1) = {"
+cA
+cA
+cA
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+ax
+Ro
+bs
+cA
+"}
+(10,1,1) = {"
+cA
+cA
+cA
+cA
+cA
+cA
+cT
+cT
+cT
+ax
+nN
+cA
+cT
+ax
+Ro
+Ro
+cA
+"}
+(11,1,1) = {"
+cA
+cA
+cA
+cA
+cA
+cA
+cA
+cT
+cT
+ax
+zu
+cA
+cT
+cT
+cT
+cA
+cA
+"}
+(12,1,1) = {"
+cA
+cA
+cA
+cA
+cA
+cA
+cA
+cA
+cT
+cT
+cA
+cA
+cA
+cT
+cA
+cA
+cA
+"}
