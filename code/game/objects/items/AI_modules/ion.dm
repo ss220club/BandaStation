@@ -5,7 +5,7 @@ CONTAINS:
 */
 
 /obj/item/ai_module/core/full/damaged
-		name = "damaged Core AI Module"
+		name = "Поврежденная плата основных законов ИИ"
 		desc = "An AI Module for programming laws to an AI. It looks slightly damaged."
 
 /obj/item/ai_module/core/full/damaged/install(datum/ai_laws/law_datum, mob/user)
