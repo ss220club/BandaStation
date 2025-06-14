@@ -363,12 +363,6 @@
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	r_pocket = /obj/item/knife/combat
 
-/obj/item/gun/ballistic/automatic/sindano/compact/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-	w_class = WEIGHT_CLASS_SMALL
-
 /obj/item/gun/ballistic/automatic/carwo/marksman/suppressed/Initialize(mapload)
 	. = ..()
 	var/obj/item/suppressor/S = new(src)
