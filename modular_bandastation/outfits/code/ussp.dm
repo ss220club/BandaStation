@@ -221,14 +221,15 @@
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/reagent_containers/hypospray/combat = 1,
 		/obj/item/storage/medkit/regular = 1,
 		/obj/item/storage/medkit/advanced = 1,
 		/obj/item/storage/medkit/tactical = 1,
+		/obj/item/defibrillator/compact/loaded
 	)
+	head = /obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
 	glasses = /obj/item/clothing/glasses/hud/health
 	belt = /obj/item/storage/belt/military/army/ussp/full_rifle
-	l_pocket = /obj/item/healthanalyzer
+	l_pocket = /obj/item/healthanalyzer/advanced
 
 	skillchips = list(/obj/item/skillchip/entrails_reader)
 
@@ -354,7 +355,6 @@
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
-		/obj/item/ammo_box/magazine/m223 = 4,
 	)
 	neck = /obj/item/binoculars
 

@@ -47,7 +47,8 @@
 		/obj/item/storage/box/survival/security,
 		/obj/item/reagent_containers/hypospray/combat/nanites,
 		/obj/item/storage/fancy/cigarettes/cigars/havana,
-		/obj/item/stamp/tsf,
+		/obj/item/reagent_containers/cup/glass/bottle/whiskey,
+		/obj/item/stamp/tsf
 	)
 	belt = /obj/item/storage/belt/holster/detective/full/ert/tsf_commander
 	gloves = /obj/item/clothing/gloves/combat
@@ -191,15 +192,15 @@
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/reagent_containers/hypospray/combat = 1,
 		/obj/item/storage/medkit/regular = 1,
 		/obj/item/storage/medkit/advanced = 1,
 		/obj/item/storage/medkit/tactical = 1,
+		/obj/item/defibrillator/compact/loaded
 	)
 	belt = /obj/item/storage/belt/military/army/tsf/full_rifle_short
 	head = /obj/item/clothing/head/helmet/marine/medic
 	glasses = /obj/item/clothing/glasses/hud/health/sunglasses
-	l_pocket = /obj/item/healthanalyzer
+	l_pocket = /obj/item/healthanalyzer/advanced
 
 	skillchips = list(/obj/item/skillchip/entrails_reader)
 
@@ -216,7 +217,7 @@
 	backpack_contents = null
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	head = /obj/item/clothing/head/helmet/marine/engineer
-	belt = /obj/item/storage/belt/military/army/tsf/full
+	belt = /obj/item/storage/belt/military/army/tsf/full_engineer
 	l_pocket = /obj/item/wrench
 
 /datum/id_trim/tsf/marine/engineer
@@ -407,7 +408,6 @@
 		/obj/item/pen/fourcolor,
 	)
 	head = /obj/item/clothing/head/hats/tsf_fedora
-	gloves = /obj/item/clothing/gloves/color/white
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/laceup
 	glasses = /obj/item/clothing/glasses/sunglasses

@@ -74,6 +74,10 @@
 	icon_state = "ussp_security"
 	base_icon_state = "ussp_security"
 
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
+	icon_state = "ussp_medic"
+	base_icon_state = "ussp_medic"
+
 /obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
 	name = "OMON helmet"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
