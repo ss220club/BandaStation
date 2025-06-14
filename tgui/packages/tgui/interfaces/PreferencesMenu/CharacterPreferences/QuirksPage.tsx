@@ -180,7 +180,7 @@ function QuirkPopper(props: QuirkPopperProps) {
       content={
         hasExpandableCustomization && (
           <Stack.Item
-            className="PreferencesMenu__QuirkQuirk--Customization"
+            className="PreferencesMenu__QuirksQuirk--Customization"
             onClick={(e) => {
               e.stopPropagation();
             }}

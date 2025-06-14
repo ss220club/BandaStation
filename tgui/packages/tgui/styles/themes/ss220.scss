@@ -78,4 +78,40 @@
       1px 1px 0px hsla(0, 0%, 0%, 0.5),
       2px 2px 4px hsla(0, 0%, 0%, 1) !important;
   }
+
+  // Preferences toggle
+  .Toggle {
+    --toggle-size: 1.667em;
+    --toggle-size-border: calc(var(--toggle-size) * 0.1);
+    cursor: var(--cursor-pointer);
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--toggle-size) * 2 + var(--toggle-size-border) * 2);
+    height: var(--toggle-size);
+    background-color: var(--comp-background);
+    border: var(--toggle-size-border) solid var(--comp-border);
+    border-radius: var(--border-radius-medium);
+    transition: border-color var(--transition-time-medium);
+
+    &--checked {
+      --switch-transform: 100%;
+      --comp-border: var(--color-primary);
+    }
+
+    &__Switch {
+      aspect-ratio: 1 / 1;
+      width: var(--toggle-size);
+      background-color: var(--comp-border);
+      border-radius: var(--border-radius-tiny);
+      transition-property: transform, background-color;
+      transition-duration: var(--transition-time-medium);
+      transform: scale(0.6) translateX(var(--switch-transform, -100%));
+    }
+
+    &:hover .Toggle__Switch {
+      background-color: hsl(
+        from var(--comp-border) h s calc(l + var(--adjust-hover))
+      );
+    }
+  }
 }
