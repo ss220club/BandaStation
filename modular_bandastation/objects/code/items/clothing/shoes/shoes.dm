@@ -23,3 +23,10 @@
 /obj/item/clothing/shoes/shark/light
 	name = "light shark shoes"
 	icon_state = "shark_light"
+
+/obj/item/clothing/shoes/sailor
+	name = "sailor shoes"
+	desc = "Обладают силой луны."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/shoes.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/shoes.dmi'
+	icon_state = "sailor"

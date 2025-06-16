@@ -65,6 +65,21 @@
 	item_path = /obj/item/clothing/suit/soundhand_brown_jacket/tag
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/suits/joker_jacket
+	name = "Лиловая куртка"
+	item_path = /obj/item/clothing/suit/joker_jacket
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/suits/tailer_jacket
+	name = "Красная кожаная куртка"
+	item_path = /obj/item/clothing/suit/tailer_jacket
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/suits/bubba_apron
+	name = "Кровавый фартук"
+	item_path = /obj/item/clothing/suit/bubba_apron
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/suits/shark_suit
 	name = "Костюм акулы"
@@ -90,6 +105,11 @@
 /datum/loadout_item/suits/v_jacket
 	name = "Куртка Вай"
 	item_path = /obj/item/clothing/suit/hooded/vi_arcane
+	donator_level = DONATOR_TIER_3
+
+/datum/loadout_item/suits/driver_jacket
+	name = "Куртка водителя"
+	item_path = /obj/item/clothing/suit/driver_jacket
 	donator_level = DONATOR_TIER_3
 
 // MARK: Tier 4

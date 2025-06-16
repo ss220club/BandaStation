@@ -117,3 +117,35 @@
 	icon_state = "secbeanie"
 	worn_icon_state = "secbeanie"
 	armor_type = /datum/armor/cosmetic_sec
+
+//Fancy
+/obj/item/clothing/head/sailor_hat
+	name = "sailor hat"
+	desc = "Полосатая тельняшечная шапка с лихим помпоном."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "sailor_hat"
+	worn_icon_state = "sailor_hat"
+
+/obj/item/clothing/head/drunkard_hat
+	name = "drunkard hat"
+	desc = "Простая вязаная шапка, будто только что снята с головы деревенского философа."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "drunkard_hat"
+	worn_icon_state = "drunkard_hat"
+
+/obj/item/clothing/head/baba_hat
+	name = "baba hat"
+	desc = "Пахнет сушёными грибами и старой малиновой настойкой."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "baba_hat"
+	worn_icon_state = "baba_hat"
+
+/obj/item/clothing/head/bubba_hat
+	name = "'human' skin mask"
+	desc = "Маска сделаная по подобию человеческого лица."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "bubba_hat"

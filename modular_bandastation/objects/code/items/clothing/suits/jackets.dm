@@ -141,3 +141,35 @@
 	worn_icon_state = "soundhand_brown_jacket"
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
+
+/obj/item/clothing/suit/driver_jacket
+	name = "driver jacket"
+	desc = "Водительская куртка с скорпионом на спине."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "driver_jacket"
+	worn_icon_state = "driver_jacket"
+
+/obj/item/clothing/suit/joker_jacket
+	name = "joker jacket"
+	desc = "Тёмно-лиловая куртка с налётом театрального безумия. Стиль, который говорит за вас."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "joker_jacket"
+	worn_icon_state = "joker_jacket"
+
+/obj/item/clothing/suit/tailer_jacket
+	name = "red leather jacket"
+	desc = "Красная кожаная куртка с потертостями — грубая, бунтарская, с историей. Для тех, кто не боится выглядеть так, будто уже дрался в подворотне и вышел победителем."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "tailer_jacket"
+	worn_icon_state = "tailer_jacket"
+
+/obj/item/clothing/suit/bubba_apron
+	name = "bloody yellow apron"
+	desc = "Промышленный желтый фартук. Теперь с пятнами крови."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "bubba_apron"
+	worn_icon_state = "bubba_apron"

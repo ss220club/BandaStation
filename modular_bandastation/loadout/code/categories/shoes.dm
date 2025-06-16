@@ -45,6 +45,11 @@
 	item_path = /obj/item/clothing/shoes/ducky_shoes
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/shoes/sailor
+	name = "Лунные ботинки"
+	item_path = /obj/item/clothing/shoes/sailor
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/shoes/shark_shoes
 	name = "Акульи тапочки"

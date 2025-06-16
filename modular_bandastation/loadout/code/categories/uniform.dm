@@ -124,6 +124,47 @@
 	name = "Костюм (Бордовый)"
 	item_path = /obj/item/clothing/under/suit/burgundy
 
+// MARK: Tier 1
+/datum/loadout_item/uniforms/bubba_suit
+	name = "Костюм маньяка"
+	item_path = /obj/item/clothing/under/bubba_suit
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/tyler_suit
+	name = "Особая гавайская рубашка"
+	item_path = /obj/item/clothing/under/tyler_suit
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/joker_suit
+	name = "Футболка с жилетом"
+	item_path = /obj/item/clothing/under/joker_suit
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/sailor_dress
+	name = "Лунная юбка"
+	item_path = /obj/item/clothing/under/sailor_dress
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/jinx_suit
+	name = "Костюм преступника"
+	item_path = /obj/item/clothing/under/jinx_suit
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/drunkard_suit
+	name = "Костюм пьяницы"
+	item_path = /obj/item/clothing/under/drunkard_suit
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/sailor_suit
+	name = "Костюм моряка"
+	item_path = /obj/item/clothing/under/sailor_suit
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/baba_suit
+	name = "Халат"
+	item_path = /obj/item/clothing/under/baba_suit
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 3
 /datum/loadout_item/uniforms/maid_costume
 	name = "Костюм горничной"

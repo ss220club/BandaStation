@@ -32,6 +32,16 @@
 	item_path = /obj/item/clothing/mask/animal/small/raven
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/masks/drunkard_mask
+	name = "Маска мужика"
+	item_path = /obj/item/clothing/mask/breath/drunkard_mask
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/masks/sailor_mask
+	name = "Маска алкоголика"
+	item_path = /obj/item/clothing/mask/breath/sailor_mask
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/masks/red_gas
 	name = "ПРС-1"

@@ -4,6 +4,11 @@
 	item_path = /obj/item/clothing/neck/cloak/colorable_cloak
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/neck/drunkard_scarf
+	name = "Шарф алкоголика"
+	item_path = /obj/item/clothing/neck/drunkard_scarf
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/neck/fancy_cloak
 	name = "Fancy Cloak"

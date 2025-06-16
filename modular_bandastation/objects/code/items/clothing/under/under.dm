@@ -205,3 +205,59 @@
 	name = "short terry towel"
 	desc = "Полотенце, сотканное из синтетической ткани, на взгляд шершавое и маленькое. Можно обмотать вокруг тела."
 	icon_state = "towel_short_alt"
+
+/obj/item/clothing/under/bubba_suit
+	name = "bloody business suit"
+	desc = "Деловой костюм. Теперь окрававленый."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "bubba_suit"
+
+/obj/item/clothing/under/tyler_suit
+	name = "blue hawaiian shirt"
+	desc = "Голубая гавайская рубашка с черными штанами в комплете."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "tyler_suit"
+
+/obj/item/clothing/under/joker_suit
+	name = "shirt with green vest"
+	desc = "Светло голубая рубашка с зеленым жилетом."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "joker_suit"
+
+/obj/item/clothing/under/sailor_dress
+	name = "moon skirt"
+	desc = "Юбка дающая силы лунной призмы."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "sailor_dress"
+
+/obj/item/clothing/under/jinx_suit
+	name = "underground  outlaw costume"
+	desc = "В этом прикиде хочется совершать преступления."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "jinx_suit"
+
+/obj/item/clothing/under/drunkard_suit
+	name = "drunkard suit"
+	desc = "Мешковатые штаны, рваный пиджак и вечная растерянность в складках."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "drunkard_suit"
+
+/obj/item/clothing/under/sailor_suit
+	name = "sailor suit"
+	desc = "Полосатая тельняшка, пропитанная дешёвым ромом, и штаны, которые видели больше драк, чем морей."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "sailor_suit"
+
+/obj/item/clothing/under/baba_suit
+	name = "baba suit"
+	desc = "Лоскутный халат, криво завязанный платок и юбка, собранная из всего, что валялось в избе."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "baba_suit"
