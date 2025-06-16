@@ -690,3 +690,52 @@ $department_map: (
     }
   }
 }
+
+// MARK: VoicePage
+.PreferencesMenu__Voice {
+  align-items: center;
+  transition: background-color var(--transition-time-fast);
+
+  &:hover {
+    cursor: var(--cursor-pointer);
+    background-color: var(--color-hover);
+    transition-duration: 0s;
+  }
+
+  &.selected {
+    cursor: var(--cursor-default);
+    background-color: var(--color-green);
+
+    &.header {
+      position: sticky;
+      top: calc(-1 * var(--space-ml));
+      z-index: 1;
+    }
+  }
+
+  &--Category {
+    text-align: right;
+  }
+
+  &--Tier {
+    opacity: 0.66;
+    text-align: right;
+    width: 5.5em;
+    margin-right: 0.25rem;
+  }
+
+  &--GenderIcon {
+    opacity: 0.66;
+    text-align: center;
+    width: 1.5rem;
+    margin-right: 0.5rem;
+  }
+
+  &--Category,
+  &--Tier,
+  &--GenderIcon {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
