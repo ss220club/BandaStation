@@ -231,6 +231,48 @@
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
 
+// MARK: 9x25mm NT
+/obj/projectile/bullet/c9x25mm
+	name = "9x25mm NT bullet"
+	damage = 15
+	wound_bonus = -5
+	bare_wound_bonus = 5
+	embed_falloff_tile = -4
+
+/obj/projectile/bullet/c9x25mm/rubber
+	name = "9x25mm NT rubber bullet"
+	damage = 5
+	stamina = 20
+	wound_bonus = -40
+	bare_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
+/obj/projectile/bullet/c9x25mm/hp
+	name = "9x25mm NT hollow-point bullet"
+	damage = 13
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+	ricochets_max = 0
+	wound_bonus = 20
+	bare_wound_bonus = 20
+	embed_type = /datum/embedding/bullet/c35sol/ripper
+	embed_falloff_tile = -15
+
+/obj/projectile/bullet/c9x25mm/ap
+	name = "9x25mm NT armor piercing bullet"
+	damage = 13
+	bare_wound_bonus = -30
+	armour_penetration = 20
+
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect
 	light_system = OVERLAY_LIGHT
