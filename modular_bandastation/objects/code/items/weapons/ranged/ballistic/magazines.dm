@@ -304,7 +304,7 @@
 
 // MARK: NT Glock aka GP-9
 /obj/item/ammo_box/magazine/c9x25mm_pistol
-	name = "pistol magazine (9x25mm)"
+	name = "pistol magazine (9x25mm NT)"
 	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 патронов."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "pistol_9x25_standart"
