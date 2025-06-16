@@ -110,19 +110,19 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/amk/ricochet
-	name = "AMK magazine (7.62x39mm MATCH)"
+	name = "AMK magazine (7.62x39mm match)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы с высокой рикошетностью."
 	ammo_band_color = COLOR_AMMO_MATCH
 	ammo_type = /obj/item/ammo_casing/a762x39/ricochet
 
 /obj/item/ammo_box/magazine/amk/fire
-	name = "AMK magazine (7.62x39mm INCENDIARY)"
+	name = "AMK magazine (7.62x39mm incendiary)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит зажигательные боеприпасы."
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/a762x39/fire
 
 /obj/item/ammo_box/magazine/amk/ap
-	name = "AMK magazine (7.62x39mm ARMOR PIERCING)"
+	name = "AMK magazine (7.62x39mm AP)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит бронебойные боеприпасы."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/a762x39/ap
@@ -134,7 +134,7 @@
 	ammo_type = /obj/item/ammo_casing/a762x39/emp
 
 /obj/item/ammo_box/magazine/amk/rubber
-	name = "AMK magazine (7.62x39mm RUBBER)"
+	name = "AMK magazine (7.62x39mm rubber)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит нелетальные резиновые боеприпасы."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/a762x39/rubber
@@ -150,7 +150,7 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/amk/hunting
-	name = "AMK magazine (7.62x39mm HUNTING)"
+	name = "AMK magazine (7.62x39mm hunting)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы для охоты."
 	ammo_band_color = "#05880c"
 	ammo_type = /obj/item/ammo_casing/a762x39/hunting

@@ -16,8 +16,10 @@
 		"sec_dart",
 		"sec_Islug",
 		"sec_rshot",
-		"c9x25mm_rubber_sec", // BANDASTATION ADDITION - GP-9 NT Pistol
-		"c9x25mm_sec",  // BANDASTATION ADDITION - GP-9 NT Pistol
+		// BANDASTATION ADDITION - START - GP-9 NT Pistol
+		"c9x25mm_rubber_sec",
+		"c9x25mm_sec",
+		// BANDASTATION ADDITION - END - GP-9 NT Pistol
 	)
 
 /datum/techweb_node/sec_equip
