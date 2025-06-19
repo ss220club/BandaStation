@@ -129,9 +129,9 @@ Always compile, always use that verb, and always make sure that it works for wha
 ///Z level traits for CentCom
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE, ZTRAIT_NOPHASE = TRUE)
 ///Z level traits for Space Station 13
-#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
+#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = UNAFFECTED, ZTRAIT_STATION = TRUE)
 ///Z level traits for Deep Space
-#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
+#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = UNAFFECTED, ZTRAIT_SPACE_RUINS = TRUE)
 ///Z level traits for Lavaland
 #define ZTRAITS_LAVALAND list(\
 	ZTRAIT_MINING = TRUE, \
@@ -144,6 +144,10 @@ Always compile, always use that verb, and always make sure that it works for wha
 #define ZTRAITS_AWAY list(ZTRAIT_AWAY = TRUE)
 ///Z level traits for Secret Away Missions
 #define ZTRAITS_AWAY_SECRET list(ZTRAIT_AWAY = TRUE, ZTRAIT_SECRET = TRUE, ZTRAIT_NOPHASE = TRUE)
+
+#define ZTRAITS_JUNGLE_PLANET list(\
+	ZTRAIT_MINING = TRUE, \
+	ZTRAIT_BASETURF = /turf/open/misc/dirt/jungle/wasteland)
 
 #define DL_NAME "name"
 #define DL_TRAITS "traits"
