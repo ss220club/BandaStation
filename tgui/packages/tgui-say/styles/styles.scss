@@ -24,7 +24,7 @@
   background: linear-gradient(
     130deg,
     var(--color) 15%,
-    oklch(from var(--color) calc(l * 1.25) calc(c - 0.05) h) 20%,
+    oklch(from var(--color) calc(l * 1.33) calc(c - 0.05) h) 20%,
     var(--color) 25%
   );
   background-size: 250%;
