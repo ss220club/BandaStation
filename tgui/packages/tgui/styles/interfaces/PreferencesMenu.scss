@@ -249,8 +249,8 @@ $department_map: (
 // MARK: JobPage
 .PreferencesMenu {
   &__Department {
-    --head-color: hsl(from var(--background-color) h s calc(l - 7.5));
-    --border-color: hsl(from var(--background-color) h s calc(l + 10));
+    --head-color: oklch(from var(--background-color) calc(l * 0.85) c h);
+    --border-color: oklch(from var(--background-color) calc(l * 1.15) c h);
     --button-width: 40px;
     --button-gap: 0.33rem;
 
@@ -271,6 +271,7 @@ $department_map: (
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      line-height: 1.2em;
       padding: var(--space-s) var(--space-m);
       text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.75);
     }
@@ -356,7 +357,7 @@ $department_map: (
         var(--background-color) 25%
       );
       background-size: 250%;
-      animation: captain 5s infinite ease-in-out;
+      animation: captain 4s infinite ease-in-out;
 
       &:before {
         content: '';
@@ -373,7 +374,7 @@ $department_map: (
 
       @keyframes captain {
         0%,
-        66% {
+        50% {
           background-position-x: 50%;
         }
 
