@@ -8,11 +8,11 @@
   --comp-border: hsl(from var(--pref-background) h s calc(l + 7.5));
 
   // Department colors
-  --color-security: oklch(0.533 0.175 25);
+  --color-security: oklch(0.533 0.155 25);
   --color-justice: oklch(0.525 0.175 352.5);
   --color-science: oklch(0.525 0.175 300);
-  --color-command: oklch(0.525 0.2 255);
-  --color-centcom: oklch(0.425 0.15 262.5);
+  --color-command: oklch(0.5 0.2 255);
+  --color-centcom: oklch(0.425 0.15 265);
   --color-silicon: oklch(0.5 0.065 250);
   --color-medical: oklch(0.55 0.1 225);
   --color-service: oklch(0.55 0.135 150);

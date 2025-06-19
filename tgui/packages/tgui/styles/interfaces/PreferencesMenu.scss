@@ -250,14 +250,17 @@ $department_map: (
 .PreferencesMenu {
   &__Department {
     --head-color: oklch(from var(--background-color) calc(l * 0.85) c h);
-    --border-color: oklch(from var(--background-color) calc(l * 1.15) c h);
+    --border-color: oklch(from var(--background-color) calc(l * 1.1) c h);
+    --border-color-darker: oklch(from var(--border-color) calc(l * 0.8) c h);
     --button-width: 40px;
     --button-gap: 0.33rem;
 
     user-select: none;
     overflow: hidden;
     background-color: var(--background-color);
-    border: var(--border-thickness-tiny) outset var(--border-color);
+    border: var(--border-thickness-tiny) solid;
+    border-color: var(--border-color) var(--border-color-darker)
+      var(--border-color-darker) var(--border-color);
 
     &.head {
       background-color: var(--head-color);
@@ -351,9 +354,9 @@ $department_map: (
       border-color: hsla(0, 0%, 100%, 0.15) hsla(0, 0%, 0%, 0.2)
         hsla(0, 0%, 0%, 0.2) hsla(0, 0%, 100%, 0.15);
       background: linear-gradient(
-        45deg,
+        in oklch 45deg,
         var(--background-color) 15%,
-        hsl(from var(--background-color) h s calc(l + 33)) 20%,
+        oklch(from var(--background-color) calc(l * 1.5) c h) 20%,
         var(--background-color) 25%
       );
       background-size: 250%;
