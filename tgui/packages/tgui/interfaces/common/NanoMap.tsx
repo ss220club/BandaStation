@@ -119,7 +119,8 @@ export function NanoMap(props: Props) {
       wheel={{ step: defaultScale }}
       doubleClick={{ disabled: true }}
       panning={{ velocityDisabled: true }}
-      onTransformed={handleTransformed}
+      onWheel={handleTransformed}
+      onPanningStop={handleTransformed}
     >
       <Stack
         fill
