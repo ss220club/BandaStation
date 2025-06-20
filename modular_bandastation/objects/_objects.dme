@@ -94,14 +94,16 @@
 #include "code/items/weapons/ranged/ballistic/magazines.dm"
 #include "code/items/weapons/ranged/ballistic/projectiles.dm"
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
-#include "code/items/weapons/ranged/ballistic/gp9.dm"
-#include "code/items/weapons/ranged/ballistic/weapon_designs.dm"
+
+
 #include "code/items/weapons/ranged/ballistic/sabel.dm"
 #include "code/items/weapons/ranged/ballistic/carwo.dm"
 #include "code/items/weapons/ranged/ballistic/renoster.dm"
 #include "code/items/weapons/ranged/ballistic/sindano.dm"
 #include "code/items/weapons/ranged/ballistic/mounted_machine_gun.dm"
 #include "code/items/weapons/ranged/ballistic/supply_packs.dm"
+#include "code/items/weapons/ranged/ballistic/gp9.dm"
+#include "code/items/weapons/ranged/ballistic/weapon_designs.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
