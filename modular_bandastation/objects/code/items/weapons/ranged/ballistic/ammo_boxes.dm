@@ -23,7 +23,7 @@
 	ammo_type = /obj/item/ammo_casing/c35sol/ripper
 
 /obj/item/ammo_box/c35sol/ap
-	name = "ammo box (.35 Sol Short armor piercing)"
+	name = "ammo box (.35 Sol Short armor-piercing)"
 	desc = "Коробка с бронебойными пистолетными патронами калибра .35 Sol Short, вмещает 24 патрона. Серебрянная полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "35box_ap"
 	ammo_type = /obj/item/ammo_casing/c35sol/ap
@@ -52,7 +52,7 @@
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 
 /obj/item/ammo_box/c40sol/pierce
-	name = "ammo box (.40 Sol Long pierce)"
+	name = "ammo box (.40 Sol Long armor-piercing)"
 	desc = "Коробка с винтовочными патронами калибра .40 Sol Long, вмещает 30 патронов. Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 
 	icon_state = "40box_pierce"
@@ -95,7 +95,7 @@
 	ammo_type = /obj/item/ammo_casing/a762x39/fire
 
 /obj/item/ammo_box/a762x39/ap
-	name = "ammo box (7.62x39mm armor-pierce)"
+	name = "ammo box (7.62x39mm armor-piercing)"
 	desc = "Коробка с винтовочными патронами калибра 7.62x39мм, вмещает 45 патронов. Серая марка указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "762x39box_ap"
 	ammo_type = /obj/item/ammo_casing/a762x39/ap
@@ -156,7 +156,7 @@
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
 
 /obj/item/ammo_box/c9x25mm/ap
-	name = "ammo box (9x25mm NT armor piercing)"
+	name = "ammo box (9x25mm NT armor-piercing)"
 	desc = "Коробка с бронебойными пистолетными патронами калибра 9x25мм НТ, вмещает 24 патрона. Серебрянная полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "35box_ap"
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
