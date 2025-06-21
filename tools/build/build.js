@@ -209,6 +209,7 @@ export const DmTarget = new Juke.Target({
     "html/**",
     "icons/**",
     "interface/**",
+    "modular_bandastation/**", // BANDASTATION EDIT ADDITION - Making the CBT work
     "sound/**",
     "tgui/public/tgui.html",
     `${DME_NAME}.dme`,

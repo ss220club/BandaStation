@@ -18,53 +18,55 @@ export const AntagInfoVoidwalker = (props) => {
           <Stack.Item width="46.2%">
             <Section fill>
               <Stack vertical fill>
-                <Stack.Item fontSize="25px">You are a Voidwalker.</Stack.Item>
+                <Stack.Item fontSize="25px">Вы - Войдволкер.</Stack.Item>
                 <Stack.Item>
                   <BlockQuote>
-                    You are a creature from the void between stars. You were
-                    attracted to the radio signals being broadcasted by this
-                    station.
+                    Вы - существо из пустоты между звездами. Вас привлекли
+                    радиосигналы, передаваемые этой станцией.
                   </BlockQuote>
                 </Stack.Item>
                 <Stack.Divider />
                 <Stack.Item textColor="label">
-                  <span style={tipstyle}>Survive:&ensp;</span>
-                  You have unrivaled freedom. Remain in space and no one can
-                  stop you. You can move through windows, so stay near them to
-                  always have a way out.
+                  <span style={tipstyle}>Выживайте:&ensp;</span>
+                  Вы безудержно свободны. Оставаясь в космосе - никто не сможет
+                  вас остановить. Вы можете перемещаться через окна, поэтому
+                  держитесь возле них, чтобы чтобы всегда иметь путь к спасению.
                   <br />
-                  <span style={tipstyle}>Hunt:&ensp;</span>
-                  Pick unfair fights. Look for inattentive targets and strike at
-                  them when they don&apos;t expect you.
+                  <span style={tipstyle}>Охотьтесь:&ensp;</span>
+                  Выбирайте нечестные бои. Ищите невнимательных жертв и наносите
+                  удары когда они вас не ожидают.
                   <br />
                   <span style={tipstyle}>Abduct:&ensp;</span>
-                  Your Unsettle ability stuns and drains your targets. Finish
-                  them with your void window and use it to pop a window, drag
-                  them into space and use an empty hand to kidnap them.
+                  Ваша способность Unsettle оглушает и истощает цели. Прикончите
+                  их с помощью своего острия пустоты и используйте его, чтобы
+                  открыть окно, перетащите их в космос и используйте пустую
+                  руку, чтобы похитить их.
                 </Stack.Item>
               </Stack>
             </Section>
           </Stack.Item>
           <Stack.Item width="53%">
-            <Section fill title="Powers">
+            <Section fill title="Ваши способности">
               <LabeledList>
                 <LabeledList.Item label="Space Dive">
-                  You can move under the station from space, use this to hunt
-                  and get to isolated sections of space.
+                  Вы можете перемещаться под станцией по космосу, используйте
+                  это для охоты и проникновения в изолированные участки космоса.
                 </LabeledList.Item>
                 <LabeledList.Item label="Void Eater">
-                  Your divine appendage; it allows you to incapacitate the loud
-                  ones and instantly break windows, or convert soft walls into
-                  windows for you to pass through.
+                  Ваш божественный отросток, он позволяет обездвиживать слишком
+                  шумных и мгновенно разбивать окна. Позволяет превращать слабые
+                  стены в окна, через которые вы сможете проходить.
                 </LabeledList.Item>
                 <LabeledList.Item label="Cosmic Physiology">
-                  Your natural camouflage makes you nearly invisible in space,
-                  as well as mending any wounds your body might have sustained.
-                  You can move through glass freely, but are slowed in gravity.
+                  Ваш природный камуфляж делает вас почти невидимым в космосе, а
+                  также залечивает любые раны, полученные вашим телом. Вы можете
+                  свободно проникать сквозь стекло, но замедляетесь под
+                  действием гравитации.
                 </LabeledList.Item>
                 <LabeledList.Item label="Unsettle">
-                  Target a victim while remaining only partially in their view
-                  to stun and weaken them, but also announce them your presence.
+                  Нацельтесь на жертву, частично оставаясь в поле ее зрения,
+                  чтобы оглушить и ослабить их, но при этом объявить им о своем
+                  присутствии.
                 </LabeledList.Item>
               </LabeledList>
             </Section>

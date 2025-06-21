@@ -116,6 +116,7 @@
 
 /obj/machinery/firealarm/update_name(updates)
 	. = ..()
+	ru_names_rename(ru_names_toml(src::name, suffix = " ([get_area_name(my_area)]) [id_tag]", override_base = "[get_area_name(my_area)] [initial(name)] [id_tag]"))
 	name = "[get_area_name(my_area)] [initial(name)] [id_tag]"
 
 /obj/machinery/firealarm/on_exit_area(datum/source, area/area_to_unregister)
@@ -485,7 +486,7 @@
 		balloon_alert(user, "thermal sensors [my_area.fire_detect ? "enabled" : "disabled"]")
 		user.log_message("[ my_area.fire_detect ? "enabled" : "disabled" ] firelock sensors using [src].", LOG_GAME)
 
-MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/firealarm, 26)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/firealarm, 24) // BANDASTATION EDIT - ASTHETICS - ORIGINAL: 26
 
 /*
  * Return of Party button

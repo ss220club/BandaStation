@@ -20,6 +20,7 @@
 	announce_when = rand(50, 60)
 	end_when = rand(20, 30)
 	severity = rand(1,3)
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 	var/list/potential_areas = list(/area/station/command,
 		/area/station/engineering,
@@ -35,7 +36,7 @@
 /datum/round_event/grey_tide/announce(fake)
 	if(fake)
 		severity = rand(1,3)
-	priority_announce("Gr3y.T1d3 virus detected in [station_name()] secure locking encryption subroutines. Severity level of [severity]. Recommend station AI involvement.", "Security Alert")
+	priority_announce("Вирус Gr3y.T1d3 обнаружен в подпрограммах шифрования системы безопасной блокировки [station_name()]. Уровень угрозы [severity]. Рекомендуется участие ИИ станции.", "Оповещение безопасности")
 
 /datum/round_event/grey_tide/start()
 	if(!length(grey_tide_areas))

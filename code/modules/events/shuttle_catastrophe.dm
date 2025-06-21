@@ -7,7 +7,7 @@
 	description = "Replaces the emergency shuttle with a random one."
 	admin_setup = list(/datum/event_admin_setup/warn_admin/shuttle_catastrophe, /datum/event_admin_setup/listed_options/shuttle_catastrophe)
 
-/datum/round_event_control/shuttle_catastrophe/can_spawn_event(players, allow_magic = FALSE)
+/datum/round_event_control/shuttle_catastrophe/can_spawn_event(players, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
 	. = ..()
 	if(!.)
 		return .
@@ -24,18 +24,18 @@
 	var/datum/map_template/shuttle/new_shuttle
 
 /datum/round_event/shuttle_catastrophe/announce(fake)
-	var/cause = pick("was attacked by [syndicate_name()] Operatives", "mysteriously teleported away", "had its refuelling crew mutiny",
-		"was found with its engines stolen", "\[REDACTED\]", "flew into the sunset, and melted", "learned something from a very wise cow, and left on its own",
-		"had cloning devices on it", "had its shuttle inspector put the shuttle in reverse instead of park, causing the shuttle to crash into the hangar")
-	var/message = "Your emergency shuttle [cause]. "
+	var/cause = pick("был атакован оперативниками [syndicate_name()]", "странным образом телепортировался в неизвестность", "лишился обслуживающего персонала из-за забастовки",
+		"лишился двигателей", "\[ДАННЫЕ УДАЛЕНЫ\]", "сбился с курса и сгорел вблизи звезды",
+		"был оборудовон устройством клонирования", "разбился об ангар при посадке")
+	var/message = "Ваш эвакуационный шаттл [cause]. "
 
 	if(SSshuttle.shuttle_insurance)
-		message += "Luckily, your shuttle insurance has covered the costs of repair!"
+		message += "К счастью, страховка вашего шаттла покрыла расходы на ремонт!"
 		if(SSeconomy.get_dep_account(ACCOUNT_CAR))
-			message += " You have been awarded a bonus from [command_name()] for smart spending."
+			message += " Вы получили премию от [command_name()] за умение распоряжаться финансами."
 	else
-		message += "Your replacement shuttle will be the [new_shuttle.name] until further notice."
-	priority_announce(message, "[command_name()] Spacecraft Engineering")
+		message += "На замену будет выслан [new_shuttle.name] до новых указаний."
+	priority_announce(message, "[command_name()]: Отдел проектирования космических кораблей")
 
 /datum/round_event/shuttle_catastrophe/setup()
 	if(SSshuttle.shuttle_insurance || !isnull(new_shuttle)) //If an admin has overridden it don't re-roll it
@@ -46,6 +46,7 @@
 		if(!isnull(template.who_can_purchase) && template.credit_cost < INFINITY) //if we could get it from the communications console, it's cool for us to get it here
 			valid_shuttle_templates += template
 	new_shuttle = pick(valid_shuttle_templates)
+	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/shuttle_catastrophe/start()
 	if(SSshuttle.shuttle_insurance)

@@ -41,7 +41,7 @@
 				victim.grab_ghost(force = TRUE)
 				to_chat(victim, span_notice("You rise with a start, you're undead!!!"))
 			else if(victim.stat != DEAD)
-				to_chat(victim, span_notice("You feel great!"))
+				to_chat(victim, span_notice("Вы чувствуете себя прекрасно!"))
 			return
 		victim.investigate_log("has been killed by a bolt of death.", INVESTIGATE_DEATHS)
 		victim.death()
@@ -71,7 +71,7 @@
 		if(victim.revive(ADMIN_HEAL_ALL & ~HEAL_REFRESH_ORGANS , force_grab_ghost = TRUE)) // This heals suicides
 			to_chat(victim, span_notice("You rise with a start, you're alive!!!"))
 		else if(victim.stat != DEAD)
-			to_chat(victim, span_notice("You feel great!"))
+			to_chat(victim, span_notice("Вы чувствуете себя прекрасно!"))
 
 	if(istype(target, /obj/machinery/hydroponics))
 		var/obj/machinery/hydroponics/plant_tray = target
@@ -369,7 +369,7 @@
 	var/datum/brain_trauma/special/imaginary_friend/trapped_owner/trauma = target.gain_trauma(/datum/brain_trauma/special/imaginary_friend/trapped_owner)
 	var/poll_message = "Do you want to play as [span_danger(target.real_name)]?"
 	if(target.mind)
-		poll_message = "[poll_message] Job:[span_notice(target.mind.assigned_role.title)]."
+		poll_message = "[poll_message] Job:[span_notice(job_title_ru(target.mind.assigned_role.title))]."
 	if(target.mind && target.mind.special_role)
 		poll_message = "[poll_message] Status:[span_boldnotice(target.mind.special_role)]."
 	else if(target.mind)

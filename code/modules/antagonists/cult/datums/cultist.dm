@@ -1,6 +1,6 @@
 /datum/antagonist/cult
 	name = "Cultist"
-	roundend_category = "cultists"
+	roundend_category = "Культисты"
 	antagpanel_category = "Cult"
 	antag_moodlet = /datum/mood_event/cult
 	suicide_cry = "FOR NAR'SIE!!"

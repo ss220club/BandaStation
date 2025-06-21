@@ -583,7 +583,7 @@
 		for(var/heading in list(NORTH,SOUTH,EAST,WEST))
 			if(!(unres_sides & heading))
 				continue
-			var/mutable_appearance/floorlight = mutable_appearance('icons/obj/doors/airlocks/station/overlays.dmi', "unres_[heading]", FLOAT_LAYER, src, ABOVE_LIGHTING_PLANE)
+			var/mutable_appearance/floorlight = mutable_appearance('modular_bandastation/aesthetics/airlocks/icons/station/overlays.dmi', "unres_[heading]", FLOAT_LAYER, src, ABOVE_LIGHTING_PLANE) // BANDASTATION EDIT - AESTHETICS - ORIGINAL: icons/obj/doors/airlocks/station/overlays.dmi
 			switch (heading)
 				if (NORTH)
 					floorlight.pixel_w = 0

@@ -10,7 +10,7 @@
 	announce_when = 1
 
 /datum/round_event/bureaucratic_error/announce(fake)
-	priority_announce("A recent bureaucratic error in the Organic Resources Department may result in personnel shortages in some departments and redundant staffing in others.", "Paperwork Mishap Alert")
+	priority_announce("Недавняя бюрократическая ошибка в отделе органических ресурсов может привести к нехватке кадров в одних отделах и избытку в других.", "Предупреждение о бюрократической ошибке.")
 
 /datum/round_event/bureaucratic_error/start()
 	var/list/jobs = SSjob.get_valid_overflow_jobs()
@@ -20,8 +20,11 @@
 		overflow.total_positions = -1 // Ensures infinite slots as this role. Assistant will still be open for those that cant play it.
 		for(var/job in jobs)
 			var/datum/job/current = job
-			current.total_positions = 0
+			// BANDASTATION EDIT START - STORYTELLER
+			//current.total_positions = 0
+			current.total_positions = max(current.total_positions + rand(-2,4), 1)
+			// BANDASTATION EDIT END - STORYTELLER
 		return
 	// Adds/removes a random amount of job slots from all jobs.
 	for(var/datum/job/current as anything in jobs)
-		current.total_positions = max(current.total_positions + rand(-2,4), 0)
+		current.total_positions = max(current.total_positions + rand(-2,4), 1) // BANDASTATION EDIT - STORYTELLER

@@ -63,7 +63,7 @@
 			playsound(src, 'sound/machines/terminal/terminal_on.ogg', 25, FALSE)
 			use_energy(active_power_usage)
 		// Open UI
-		ui = new(user, src, "CameraConsole", name)
+		ui = new(user, src, "CameraConsole220", name) // BANDASTATION EDIT: UI changed from CameraConsole to CameraConsole220
 		ui.open()
 		// Register map objects
 		cam_screen.display_to(user, ui.window)

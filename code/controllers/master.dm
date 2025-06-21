@@ -471,6 +471,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	if(sleep_offline_after_initializations && CONFIG_GET(flag/resume_after_initializations))
 		world.sleep_offline = FALSE
 	initializations_finished_with_no_players_logged_in = initialized_tod < REALTIMEOFDAY - 10
+	SSgamemode.handle_picking_storyteller() // BANDASTATION EDIT - STORYTELLER
 
 /**
  * Initialize a given subsystem and handle the results.

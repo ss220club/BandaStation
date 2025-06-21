@@ -250,7 +250,7 @@
 	if(tool.GetID())
 		if(!allowed(user))
 			if(mecha_flags & ID_LOCK_ON)
-				balloon_alert(user, "access denied!")
+				balloon_alert(user, "в доступе отказано!")
 			else
 				balloon_alert(user, "unable to set id lock!")
 			return ITEM_INTERACT_BLOCKING
@@ -274,7 +274,7 @@
 /// Try to insert a stock part into the mech
 /obj/vehicle/sealed/mecha/proc/try_insert_part(obj/item/stock_parts/tool, mob/living/user)
 	if(!(mecha_flags & PANEL_OPEN))
-		balloon_alert(user, "open the panel first!")
+		balloon_alert(user, "нужно открыть панель!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(istype(tool, /obj/item/stock_parts/power_store/cell))
@@ -392,7 +392,7 @@
 		remover.empty_mech(src, user)
 		return
 	if(!(mecha_flags & PANEL_OPEN))
-		balloon_alert(user, "open the panel first!")
+		balloon_alert(user, "нужно открыть панель!")
 		return
 	if(dna_lock && user.has_dna())
 		var/mob/living/carbon/user_carbon = user
@@ -400,7 +400,7 @@
 			balloon_alert(user, "access with this DNA denied!")
 			return
 	if((mecha_flags & ID_LOCK_ON) && !allowed(user))
-		balloon_alert(user, "access denied!")
+		balloon_alert(user, "в доступе отказано!")
 		return
 
 	var/list/stock_parts = list()

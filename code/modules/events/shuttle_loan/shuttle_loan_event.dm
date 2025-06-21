@@ -11,7 +11,7 @@
 	///A list of normally unavailable (or already run) situations datums
 	var/list/unavailable_situations = list(/datum/shuttle_loan_situation/mail_strike)
 
-/datum/round_event_control/shuttle_loan/can_spawn_event(players_amt, allow_magic = FALSE)
+/datum/round_event_control/shuttle_loan/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
 	. = ..()
 	for(var/datum/round_event/running_event in SSevents.running)
 		if(istype(running_event, /datum/round_event/shuttle_loan)) //Make sure two of these don't happen at once.
@@ -45,13 +45,13 @@
 		situation = new fake_situation
 	else
 		SSshuttle.shuttle_loan = src
-	priority_announce("Cargo: [situation.announcement_text]", situation.sender)
+	priority_announce("Отдел снабжения: [situation.announcement_text]", situation.sender)
 	if(fake)
 		qdel(situation)
 
 
 /datum/round_event/shuttle_loan/proc/loan_shuttle()
-	priority_announce(situation.thanks_msg, "Cargo shuttle commandeered by [command_name()].")
+	priority_announce(situation.thanks_msg, "Грузовой шаттл под командованием [command_name()].")
 
 	dispatched = TRUE
 	var/datum/bank_account/dep_account = SSeconomy.get_dep_account(ACCOUNT_CAR)

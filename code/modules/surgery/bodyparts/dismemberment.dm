@@ -243,6 +243,7 @@
 		if(pill)
 			pill.forceMove(src)
 
+	ru_names_rename(ru_names_toml("head", suffix = " [owner.real_name]", override_base = "[owner.real_name]'s head"))
 	name = "[owner.real_name]'s head"
 	return ..()
 

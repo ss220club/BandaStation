@@ -325,7 +325,7 @@ Versioning
 	if(!did_they_suicide && !first_death.len)
 		first_death["name"] = "[(L.real_name == L.name) ? L.real_name : "[L.real_name] as [L.name]"]"
 		first_death["role"] = null
-		first_death["role"] = L.mind.assigned_role.title
+		first_death["role"] = job_title_ru(L.mind.assigned_role.title)
 		first_death["area"] = "[AREACOORD(L)]"
 		first_death["damage"] = "<font color='#FF5555'>[L.getBruteLoss()]</font>/<font color='orange'>[L.getFireLoss()]</font>/<font color='lightgreen'>[L.getToxLoss()]</font>/<font color='lightblue'>[L.getOxyLoss()]</font>"
 		first_death["last_words"] = L.last_words
@@ -339,7 +339,7 @@ Versioning
 	"}, list(
 		"name" = L.real_name,
 		"key" = L.ckey,
-		"job" = L.mind.assigned_role.title,
+		"job" = job_title_ru(L.mind.assigned_role.title),
 		"special" = L.mind.special_role,
 		"pod" = get_area_name(L, TRUE),
 		"laname" = L.lastattacker,

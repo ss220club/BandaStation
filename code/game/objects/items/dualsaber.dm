@@ -87,7 +87,7 @@
 
 /obj/item/dualsaber/suicide_act(mob/living/carbon/user)
 	if(HAS_TRAIT(src, TRAIT_WIELDED))
-		user.visible_message(span_suicide("[user] begins spinning way too fast! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] begins spinning way too fast! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 
 		var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)//stole from chainsaw code
 		var/obj/item/organ/brain/B = user.get_organ_slot(ORGAN_SLOT_BRAIN)

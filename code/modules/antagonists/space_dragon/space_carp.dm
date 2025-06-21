@@ -5,6 +5,7 @@
 	show_in_antagpanel = FALSE
 	show_name_in_check_antagonists = TRUE
 	show_to_ghosts = TRUE
+	antag_flags = FLAG_ANTAG_CAP_IGNORE // BANDASTATION EDIT - STORYTELLER
 	/// The rift to protect
 	var/datum/weakref/rift
 
@@ -21,7 +22,7 @@
 	owner.announce_objectives()
 
 /datum/objective/space_carp
-	explanation_text = "Protect the rift to summon more carps."
+	explanation_text = "Защищайте разлом призыва карпов."
 	var/datum/weakref/rift
 
 /datum/objective/space_carp/check_completion()
