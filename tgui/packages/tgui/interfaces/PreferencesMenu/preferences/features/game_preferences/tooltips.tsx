@@ -7,7 +7,7 @@ import {
 
 export const enable_tips: FeatureToggle = {
   name: 'Подсказки при наведении: включить',
-  category: 'ПОДСКАЗКИ',
+  category: 'Подсказки',
   description: `
     Показывать подсказки при наведении на объект.
   `,
@@ -16,7 +16,7 @@ export const enable_tips: FeatureToggle = {
 
 export const tip_delay: Feature<number> = {
   name: 'Подсказки при наведении: задержка (в мс)',
-  category: 'ПОДСКАЗКИ',
+  category: 'Подсказки',
   description: `
     Задержка перед тем, как показать подсказку при наведении на объект?
   `,

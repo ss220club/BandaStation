@@ -49,7 +49,7 @@
 /datum/preferences/proc/set_assigned_slot(job_title, is_late_join = FALSE)
 	if(is_late_join ? read_preference(/datum/preference/toggle/late_join_always_current_slot) : read_preference(/datum/preference/toggle/round_start_always_join_current_slot))
 		return
-	var/slot = pref_job_slots[job_title]
+	var/slot = pref_job_slots[job_title] || JOB_SLOT_CURRENT_SLOT
 	switch(slot)
 		if(JOB_SLOT_RANDOMISED_SLOT)
 			return TRUE

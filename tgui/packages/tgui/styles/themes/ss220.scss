@@ -1,0 +1,117 @@
+.theme-ss220:root {
+  // Allow size animations
+  interpolate-size: allow-keywords;
+
+  // Preferences colors
+  --pref-background: hsl(from var(--color-base) h s calc(l - 2.5));
+  --comp-background: hsl(from var(--pref-background) h s calc(l - 2.5));
+  --comp-border: hsl(from var(--pref-background) h s calc(l + 7.5));
+
+  // Department colors
+  --color-security: hsl(0, 60%, 45%);
+  --color-justice: hsl(325, 80%, 40%);
+  --color-science: hsl(275, 90%, 35%);
+  --color-command: hsl(215, 90%, 40%);
+  --color-centcom: hsl(210, 100%, 25%);
+  --color-silicon: hsl(210, 30%, 40%);
+  --color-medical: hsl(195, 75%, 35%);
+  --color-service: hsl(140, 70%, 30%);
+  --color-engineering: hsl(40, 100%, 30%);
+  --color-cargo: hsl(35, 40%, 40%);
+
+  // Background colors
+  --color-base: hsl(var(--primary-hue), 30%, 15%);
+  --secondary-saturation: calc(s + 7.5);
+  --base-gradient-spread: 1;
+
+  // Base
+  --primary-hue: 202.5;
+  --primary-saturation: 47.5%;
+  --primary-lightness: 37.5%;
+  --color-text: hsl(var(--primary-hue), 7.5%, 95%);
+  --color-border-primary: var(--color-primary);
+  --color-border-secondary: hsl(
+    from var(--color-border-primary) h calc(s + 15) calc(l + 17.5)
+  );
+
+  // Components
+  --button-background-default: hsl(
+    from var(--color-primary) h calc(s - 5) calc(l - 2.5)
+  );
+  --dimmer-background: hsl(from var(--color-base) h s calc(l - 5) / 0.75);
+  --progress-bar-background: var(--input-background);
+  --input-background-lightness: 9;
+  --tooltip-background-lightness: 12.5;
+  --imagebutton-transparecy: 0.3;
+
+  .Section {
+    &__content {
+      scrollbar-width: thin;
+    }
+
+    &--scrollable .Section__content {
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+    }
+  }
+
+  .Input,
+  .TextArea {
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    transition-property: border-color, height;
+    transition-duration: var(--transition-time-medium);
+
+    &:hover:not(:focus) {
+      border-color: hsl(from var(--color-border-primary) h s calc(l + 7.5));
+    }
+  }
+
+  .Dimmer {
+    backdrop-filter: var(--blur-medium);
+  }
+
+  &::selection {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    text-shadow:
+      1px 1px 0px hsla(0, 0%, 0%, 0.5),
+      2px 2px 4px hsla(0, 0%, 0%, 1) !important;
+  }
+
+  // Preferences toggle
+  .Toggle {
+    --toggle-size: 1.667em;
+    --toggle-size-border: calc(var(--toggle-size) * 0.1);
+    cursor: var(--cursor-pointer);
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--toggle-size) * 2 + var(--toggle-size-border) * 2);
+    height: var(--toggle-size);
+    background-color: var(--comp-background);
+    border: var(--toggle-size-border) solid var(--comp-border);
+    border-radius: var(--border-radius-medium);
+    transition: border-color var(--transition-time-medium);
+
+    &--checked {
+      --switch-transform: 100%;
+      --comp-border: var(--color-primary);
+    }
+
+    &__Switch {
+      aspect-ratio: 1 / 1;
+      width: var(--toggle-size);
+      background-color: var(--comp-border);
+      border-radius: var(--border-radius-tiny);
+      transition-property: transform, background-color;
+      transition-duration: var(--transition-time-medium);
+      transform: scale(0.6) translateX(var(--switch-transform, -100%));
+    }
+
+    &:hover .Toggle__Switch {
+      background-color: hsl(
+        from var(--comp-border) h s calc(l + var(--adjust-hover))
+      );
+    }
+  }
+}

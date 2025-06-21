@@ -219,7 +219,8 @@
 	return ..()
 
 /datum/antagonist/changeling/farewell()
-	to_chat(owner.current, span_userdanger("Вы становитесь слабым и теряете свои силы! Вы больше не генокрад и застряли в своей нынешней форме!"))
+	if(owner.current)
+		to_chat(owner.current, span_userdanger("Вы становитесь слабым и теряете свои силы! Вы больше не генокрад и застряли в своей нынешней форме!"))
 
 /*
  * Instantiate the cellular emporium for the changeling.
