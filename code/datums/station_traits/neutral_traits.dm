@@ -35,7 +35,7 @@
 	name = "Unique AI"
 	trait_type = STATION_TRAIT_NEUTRAL
 	trait_flags = parent_type::trait_flags | STATION_TRAIT_REQUIRES_AI
-	weight = 5
+	weight = 15 /// BANDASTION EDIT - AI laws overhaul
 	show_in_report = TRUE
 	report_message = "For experimental purposes, this station AI might show divergence from default lawset. Do not meddle with this experiment, we've removed \
 		access to your set of alternative upload modules because we know you're already thinking about meddling with this experiment."
