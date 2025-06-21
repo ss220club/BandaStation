@@ -50,6 +50,8 @@
 	/// Boolean - if TRUE, the "Up" and "Down" traits are automatically distributed to the map's z-levels. If FALSE; they're set via JSON.
 	var/height_autosetup = TRUE
 
+	var/overmap_object_type = /datum/overmap_object/shuttle/station
+
 	/// Boolean - if TRUE, players spawn with grappling hooks in their bags
 	var/give_players_hooks = FALSE
 
@@ -71,6 +73,8 @@
 	/// Welcome sound that will play on round start instead of the announcer's one.
 	var/sound/welcome_sound_override = null
 	// BANDASTATION ADDITION END - Station Fluff
+
+
 
 /**
  * Proc that simply loads the default map config, which should always be functional.
@@ -254,6 +258,9 @@
 
 	if ("height_autosetup" in json)
 		height_autosetup = json["height_autosetup"]
+
+	if(json["overmap_object_type"])
+		overmap_object_type = text2path(json["overmap_object_type"])
 
 #ifdef UNIT_TESTS
 	// Check for unit tests to skip, no reason to check these if we're not running tests

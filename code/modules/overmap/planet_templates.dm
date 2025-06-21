@@ -30,7 +30,7 @@
 	map_file = "Lavaland.dmm"
 	default_traits_input = ZTRAITS_LAVALAND
 
-	overmap_type = /datum/overmap_object/lavaland
+	overmap_type = /datum/overmap_object/shuttle/planet/lavaland
 
 
 /datum/planet_template/lavaland/SeedRuins(list/z_levels)
@@ -51,4 +51,4 @@
 	map_file = "JunglePlanet.dmm"
 	default_traits_input = ZTRAITS_JUNGLE_PLANET
 
-	overmap_type = /datum/overmap_object/jungle_planet
+	overmap_type = /datum/overmap_object/shuttle/planet/jungle_planet

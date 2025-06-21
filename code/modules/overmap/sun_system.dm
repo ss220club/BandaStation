@@ -19,6 +19,11 @@
 		if(OO.x <= _x + rad && OO.x >= _x - rad && OO.y <= _y + rad && OO.y >= _y - rad)
 			. += OO
 
+/datum/overmap_sun_system/proc/ObjectsAdjacent(datum/overmap_object/object_one, datum/overmap_object/object_two)
+	if(object_one.x <= object_two.x + 1 && object_one.x >= object_two.x - 1 && object_one.y <= object_two.y + 1 && object_one.y >= object_two.y - 1)
+		return TRUE
+	return FALSE
+
 /datum/overmap_sun_system/New()
 	SSmapping.add_new_zlevel("Sun system [name]", list(ZTRAIT_LINKAGE = UNAFFECTED))
 	z_level = world.maxz

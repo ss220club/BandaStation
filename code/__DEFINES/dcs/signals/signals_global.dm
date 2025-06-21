@@ -107,3 +107,7 @@
 
 /// Global signal whenever a camera network broadcast is started/stopped/updated: (camera_net, is_show_active, announcement)
 #define COMSIG_GLOB_NETWORK_BROADCAST_UPDATED "!network_broadcast_updated"
+
+///from base of mob/clickon(): (atom/A, params)
+#define COMSIG_CLICKON "any_clickon"
+	#define COMSIG_CANCEL_CLICKON 1

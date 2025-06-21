@@ -34,6 +34,11 @@
 	///are we registered in SSshuttles?
 	var/registered = FALSE
 
+	var/datum/overmap_object/shuttle/my_overmap_object
+	var/possible_destinations
+	var/obj/docking_port/stationary/freeform_port
+
+
 ///register to SSshuttles
 /obj/docking_port/proc/register()
 	if(registered)

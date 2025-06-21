@@ -61,6 +61,34 @@
 	///How many turfs this shuttle has. Used to check against max shuttle size when expanding expandable shuttles.
 	var/turf_count = 0
 
+
+	var/list/all_extensions = list()
+	var/list/engine_extensions = list()
+
+/obj/docking_port/mobile/proc/DrawDockingThrust()
+	var/drawn_power = 0
+	for(var/i in engine_extensions)
+		var/datum/shuttle_extension/engine/ext = i
+		if(!ext.turned_on)
+			continue
+		drawn_power += ext.DrawThrust(5)
+
+	if(drawn_power > 1)
+		return TRUE
+	else
+		return FALSE
+
+/obj/docking_port/mobile/proc/TurnEnginesOn()
+	for(var/i in engine_extensions)
+		var/datum/shuttle_extension/engine/ext = i
+		ext.turned_on = TRUE
+
+/obj/docking_port/mobile/proc/TurnEnginesOff()
+	for(var/i in engine_extensions)
+		var/datum/shuttle_extension/engine/ext = i
+		ext.turned_on = FALSE
+
+
 /obj/docking_port/mobile/Initialize(mapload, list/areas)
 	. = ..()
 
@@ -93,15 +121,19 @@
 #endif
 
 /obj/docking_port/mobile/Destroy(force)
-	unregister()
-	destination = null
-	previous = null
-	if(!QDELETED(assigned_transit))
-		qdel(assigned_transit, force = TRUE)
-		assigned_transit = null
-	shuttle_areas = null
-	remove_ripples()
-	return ..()
+	if(force)
+		unregister()
+		for(var/i in all_extensions)
+			var/datum/shuttle_extension/extension = i
+			extension.RemoveFromShuttle()
+		engine_extensions = null
+		all_extensions = null
+		destination = null
+		previous = null
+		QDEL_NULL(assigned_transit) //don't need it where we're goin'!
+		shuttle_areas = null
+		remove_ripples()
+	. = ..()
 
 #define WORLDMAXX_CUTOFF (world.maxx + 1)
 #define WORLDMAXY_CUTOFF (world.maxx + 1)
@@ -333,7 +365,39 @@
 		mode = SHUTTLE_IDLE
 		return
 	previous = null
-	if(!destination)
+	if(destination == "overmap")
+		destination = null
+		timer = INFINITY
+		var/datum/space_level/S = SSmapping.get_level(z)
+		var/datum/overmap_object/current_overmap_object = S.related_overmap_object
+		var/spawn_x_coord
+		var/spawn_y_coord
+		var/datum/overmap_sun_system/system_to_spawn_in
+		if(!current_overmap_object)
+			WARNING("NO CURRENT OVERMAP OBJECT WHEN ATTEMPT TO GO TO OVERMAP.")
+			//Fallback to not ruin gameplay
+			spawn_x_coord = 1
+			spawn_y_coord = 1
+			system_to_spawn_in = SSovermap.main_system
+		else
+			spawn_x_coord = current_overmap_object.x
+			spawn_y_coord = current_overmap_object.y
+			system_to_spawn_in = current_overmap_object.current_system
+
+		var/datum/overmap_object/shuttle/spawned_shuttle = new /datum/overmap_object/shuttle(system_to_spawn_in, spawn_x_coord, spawn_y_coord)
+		spawned_shuttle.RegisterToShuttle(src)
+		if(my_overmap_object.shuttle_controller)
+			my_overmap_object.shuttle_controller.busy = FALSE
+		if(freeform_port)
+			if(freeform_port?.get_docked())
+				freeform_port.delete_after = TRUE
+				freeform_port.shuttle_id = null
+				freeform_port.name = "Old [freeform_port.name]"
+				freeform_port = null
+			else
+				QDEL_NULL(freeform_port)
+
+	else if(!destination)
 		// sent to transit with no destination -> unlimited timer
 		timer = INFINITY
 	var/obj/docking_port/stationary/S0 = get_docked()

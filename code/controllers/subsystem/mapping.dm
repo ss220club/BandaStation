@@ -439,7 +439,7 @@ Used by the AI doomsday and the self-destruct nuke.
 	// load the station
 	station_start = world.maxz + 1
 	INIT_ANNOUNCE("Loading [current_map.map_name]...")
-	LoadGroup(FailedZs, "Station", current_map.map_path, current_map.map_file, current_map.traits, ZTRAITS_STATION, height_autosetup = current_map.height_autosetup, ov_obj = new /datum/overmap_object/station(SSovermap.main_system, rand(5,20), rand(5,20)))
+	LoadGroup(FailedZs, "Station", current_map.map_path, current_map.map_file, current_map.traits, ZTRAITS_STATION, height_autosetup = current_map.height_autosetup, ov_obj = new SSmapping.current_map.overmap_object_type(SSovermap.main_system, rand(5,20), rand(5,20)))
 
 	if(SSdbcore.Connect())
 		var/datum/db_query/query_round_map_name = SSdbcore.NewQuery({"
@@ -453,8 +453,12 @@ Used by the AI doomsday and the self-destruct nuke.
 	add_new_zlevel("Ruins Area [space_levels_so_far]", ZTRAITS_SPACE, overmap_obj = new /datum/overmap_object/ruins(SSovermap.main_system, rand(5,20), rand(5,20)))
 
 	//Load planets
-	var/datum/planet_template/lavaland_template = planet_templates[/datum/planet_template/lavaland]
-	lavaland_template.LoadTemplate(SSovermap.main_system, rand(5,20), rand(5,20))
+	if(current_map.minetype == "lavaland")
+		var/datum/planet_template/lavaland_template = planet_templates[/datum/planet_template/lavaland]
+		lavaland_template.LoadTemplate(SSovermap.main_system, rand(5,20), rand(5,20))
+	else if (!isnull(current_map.minetype) && current_map.minetype != "none")
+		INIT_ANNOUNCE("WARNING: An unknown minetype '[current_map.minetype]' was set! This is being ignored! Update the maploader code!")
+
 #endif
 
 	if(LAZYLEN(FailedZs)) //but seriously, unless the server's filesystem is messed up this will never happen
