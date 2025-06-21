@@ -41,6 +41,9 @@
 	if(flags_1 & INITIALIZED_1)
 		SEND_SIGNAL(src, COMSIG_CLICK, location, control, params, usr)
 
+		if(SEND_SIGNAL(usr, COMSIG_CLICKON, src, params) & COMSIG_CANCEL_CLICKON)
+			return
+
 		usr.ClickOn(src, params)
 
 /atom/DblClick(location,control,params)

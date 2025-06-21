@@ -73,7 +73,7 @@
 
 /obj/docking_port/stationary/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
-	if(area_type) // We already have one
+	if(area_type) // We already have onef
 		return
 	var/area/newarea = get_area(src)
 	area_type = newarea?.type

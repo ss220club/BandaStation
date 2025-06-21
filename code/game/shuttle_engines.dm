@@ -22,6 +22,8 @@
 	var/engine_power = 1
 	///Construction state of the Engine.
 	var/engine_state = ENGINE_WELDED //welding shmelding //i love welding
+	var/extension_type = /datum/shuttle_extension/engine/burst
+	var/datum/shuttle_extension/engine/extension
 
 	///The mobile ship we are connected to.
 	var/datum/weakref/connected_ship_ref
@@ -64,7 +66,10 @@
 /obj/machinery/power/shuttle_engine/Destroy()
 	if(engine_state == ENGINE_WELDED)
 		alter_engine_power(-engine_power)
+		RemoveExtension()
 	unsync_ship()
+	if(extension)
+		qdel(extension)
 	return ..()
 
 /obj/machinery/power/shuttle_engine/examine(mob/user)
@@ -98,6 +103,35 @@
 		port.current_engine_power -= initial(engine_power)
 	connected_ship_ref = null
 	RemoveElement(/datum/element/connect_loc, connections)
+
+
+/obj/machinery/power/shuttle_engine/Initialize()
+	. = ..()
+	if(extension_type)
+		//Late initialize does not seem to work for this (doesnt get caled at all), so a timer
+		addtimer(CALLBACK(src, .proc/CreateExtension))
+
+/obj/machinery/power/shuttle_engine/proc/CreateExtension()
+	extension = new extension_type()
+	if(engine_state == ENGINE_WELDED)
+		ApplyExtension()
+
+/obj/machinery/power/shuttle_engine/proc/ApplyExtension()
+	if(!extension)
+		return
+	if(SSshuttle.is_in_shuttle_bounds(src))
+		var/obj/docking_port/mobile/M = SSshuttle.get_containing_shuttle(src)
+		if(M)
+			extension.AddToShuttle(M)
+	else
+		var/datum/space_level/level = SSmapping.z_list[z]
+		if(level && level.related_overmap_object && level.is_overmap_controllable)
+			extension.AddToZLevel(level)
+
+/obj/machinery/power/shuttle_engine/proc/RemoveExtension()
+	if(!extension)
+		return
+	extension.RemoveExtension()
 
 //Ugh this is a lot of copypasta from emitters, welding need some boilerplate reduction
 /obj/machinery/power/shuttle_engine/can_be_unfasten_wrench(mob/user, silent)
@@ -145,6 +179,7 @@
 				engine_state = ENGINE_WELDED
 				to_chat(user, span_notice("You weld \the [src] to the floor."))
 				alter_engine_power(engine_power)
+				ApplyExtension()
 
 		if(ENGINE_WELDED)
 			if(!tool.tool_start_check(user, amount=round(ENGINE_WELDTIME / 5), heat_required = HIGH_TEMPERATURE_REQUIRED))
@@ -158,6 +193,7 @@
 				engine_state = ENGINE_WRENCHED
 				to_chat(user, span_notice("You cut \the [src] free from the floor."))
 				alter_engine_power(-engine_power)
+				RemoveExtension()
 	return TRUE
 
 //Propagates the change to the shuttle.
@@ -174,6 +210,7 @@
 	icon_state = "heater"
 	circuit = /obj/item/circuitboard/machine/engine/heater
 	engine_power = 0 // todo make these into 2x1 parts
+	extension_type = null
 
 /obj/machinery/power/shuttle_engine/propulsion
 	name = "propulsion engine"
