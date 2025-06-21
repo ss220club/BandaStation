@@ -62,7 +62,7 @@
 			to_chat(
 				preferences.parent,
 				span_boldnotice(\
-					"Ваш донат уровень ([donator_level]) недостаточен для [loadout_item.name] \
+					"Ваш уровень подписки ([donator_level]) недостаточен для [loadout_item.name] \
 						с уровнем [loadout_item.donator_level]. Предмет убран из снаряжения." \
 				)
 			)
