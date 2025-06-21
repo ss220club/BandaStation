@@ -11,7 +11,7 @@ export function PaperSheet(props) {
   return (
     <Window
       title={paper_name}
-      theme="paper"
+      theme="paper220"
       width={600}
       height={500 + TEXTAREA_INPUT_HEIGHT}
     >

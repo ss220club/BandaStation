@@ -3,7 +3,7 @@
 	name = ".35 Sol Short bullet"
 	damage = 15
 	wound_bonus = -5 // Normal bullets are 20
-	bare_wound_bonus = 5
+	exposed_wound_bonus = 5
 	embed_falloff_tile = -4
 
 /obj/projectile/bullet/c35sol/rubber
@@ -11,7 +11,7 @@
 	damage = 5
 	stamina = 20
 	wound_bonus = -40
-	bare_wound_bonus = -20
+	exposed_wound_bonus = -20
 	weak_against_armour = TRUE
 	// The stats of the ricochet are a nerfed version of detective revolver rubber ammo
 	// This is due to the fact that there's a lot more rounds fired quickly from weapons that use this, over a revolver
@@ -32,7 +32,7 @@
 	sharpness = SHARP_EDGED
 	ricochets_max = 0
 	wound_bonus = 20
-	bare_wound_bonus = 20
+	exposed_wound_bonus = 20
 	embed_type = /datum/embedding/bullet/c35sol/ripper
 	embed_falloff_tile = -15
 
@@ -49,7 +49,7 @@
 /obj/projectile/bullet/c35sol/ap
 	name = ".35 Sol Short armor piercing bullet"
 	damage = 13
-	bare_wound_bonus = -30
+	exposed_wound_bonus = -30
 	armour_penetration = 20
 
 //  MARK: 7.62x39mm
@@ -160,7 +160,7 @@
 	name = ".40 Sol Long bullet"
 	damage = 35
 	wound_bonus = 10
-	bare_wound_bonus = 20
+	exposed_wound_bonus = 20
 
 /obj/projectile/bullet/c40sol/fragmentation
 	name = ".40 Sol Long fragmentation bullet"
@@ -169,7 +169,7 @@
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
 	wound_bonus = 0
-	bare_wound_bonus = 10
+	exposed_wound_bonus = 10
 	shrapnel_type = /obj/item/shrapnel/stingball
 	embed_type = /datum/embedding/c40sol_fragmentation
 	embed_falloff_tile = -5
@@ -191,7 +191,7 @@
 	damage = 30
 	armour_penetration = 30
 	wound_bonus = -30
-	bare_wound_bonus = -10
+	exposed_wound_bonus = -10
 	projectile_piercing = PASSMOB | PASSTABLE | PASSGRILLE | PASSMACHINE | PASSDOORS
 
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
