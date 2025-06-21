@@ -5,7 +5,7 @@ on:
 
 jobs:
   notify:
-    runs-on: [self-hosted, linux]
+    runs-on: [self-hosted, linux, x64]
     steps:
       - name: "Check for DISCORD_WEBHOOK"
         id: secrets_set
