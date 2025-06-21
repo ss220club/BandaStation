@@ -273,6 +273,7 @@
 	inhand_icon_state = "amk_modern"
 	base_icon_state = "amk_gauss_tacticool"
 	worn_icon_state = "amk_modern"
+	recoil = 0.2
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/examine_more(mob/user)
 	. = ..()
