@@ -107,7 +107,7 @@
 			return
 
 		if(SSticker.current_state > GAME_STATE_PREGAME)
-			return tgui_alert(usr, "Too late... The game has already started!")
+			return tgui_alert(usr, "Слишком поздно... Игра уже началась!", "О нет...")
 
 		var/static/time = 1.5 MINUTES
 		if(time == 1.5 MINUTES)
