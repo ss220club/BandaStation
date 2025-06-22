@@ -11,7 +11,7 @@ on:
 
 jobs:
   CheckCL:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     if: github.base_ref == 'master' && github.event.pull_request.draft == false
 
     steps:
@@ -32,7 +32,7 @@ jobs:
       - name: Installing Python
         uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Installing deps
         run: |
