@@ -194,8 +194,6 @@
 			apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, MELEE))
 		return TRUE
 
-//BANDASTATION EDIT REMOVAL BEGIN XENO_REWORK - Moved to: modular_bandastation\xeno_rework\code\larva.dm
-/*
 /mob/living/carbon/human/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
 	. = ..()
 	if(!.)
@@ -247,14 +245,6 @@
 		if(!dismembering_strike(user, user.zone_selected)) //Dismemberment successful
 			return TRUE
 		apply_damage(damage, BRUTE, affecting, armor_block)
-*/
-
-
-
-
-
-
-//BANDASTATION EDIT REMOVAL END
 
 /mob/living/carbon/human/attack_larva(mob/living/carbon/alien/larva/worm, list/modifiers)
 	. = ..()
