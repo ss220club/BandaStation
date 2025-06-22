@@ -61,7 +61,6 @@
 #include "turfs/_turfs.dme"
 #include "metaserver/_metaserver.dme"
 #include "world_topics/_world_topics.dme"
-#include "xeno_rework/_xeno_rework.dme"
 #include "storyteller/_storyteller.dme"
 #include "game/_game.dme"
 #include "implants/_implants.dme"
