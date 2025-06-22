@@ -248,6 +248,12 @@
 			return TRUE
 		apply_damage(damage, BRUTE, affecting, armor_block)
 */
+
+
+
+
+
+
 //BANDASTATION EDIT REMOVAL END
 
 /mob/living/carbon/human/attack_larva(mob/living/carbon/alien/larva/worm, list/modifiers)
