@@ -33,3 +33,6 @@
 
 /obj/item/trash/can/food/chap
 	icon = 'modular_bandastation/aesthetics/packaged/icons/canned.dmi'
+
+/obj/item/food/canned/squid_ink
+	icon = 'modular_bandastation/aesthetics/packaged/icons/canned.dmi'
