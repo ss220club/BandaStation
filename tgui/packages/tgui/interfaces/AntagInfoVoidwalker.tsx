@@ -12,7 +12,7 @@ const noticestyle = {
 
 export const AntagInfoVoidwalker = (props) => {
   return (
-    <Window width={620} height={410}>
+    <Window width={620} height={470}>
       <Window.Content backgroundColor="#0d0d0d">
         <Stack fill>
           <Stack.Item width="46.2%">
@@ -54,7 +54,8 @@ export const AntagInfoVoidwalker = (props) => {
                 </LabeledList.Item>
                 <LabeledList.Item label="Void Eater">
                   Ваш божественный отросток, он позволяет обездвиживать слишком
-                  шумных и мгновенно разбивать окна.
+                  шумных и мгновенно разбивать окна. Позволяет превращать слабые
+                  стены в окна, через которые вы сможете проходить.
                 </LabeledList.Item>
                 <LabeledList.Item label="Cosmic Physiology">
                   Ваш природный камуфляж делает вас почти невидимым в космосе, а

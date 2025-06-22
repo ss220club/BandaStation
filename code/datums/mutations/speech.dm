@@ -3,18 +3,18 @@
 // no they arent bro
 
 
-/datum/mutation/human/nervousness
+/datum/mutation/nervousness
 	name = "Nervousness"
 	desc = "Обладатель данного генома заикается."
 	instability = NEGATIVE_STABILITY_MINI
 	quality = MINOR_NEGATIVE
 	text_gain_indication = span_danger("Ты нервничаешь.")
 
-/datum/mutation/human/nervousness/on_life(seconds_per_tick, times_fired)
+/datum/mutation/nervousness/on_life(seconds_per_tick, times_fired)
 	if(SPT_PROB(5, seconds_per_tick))
 		owner.set_stutter_if_lower(20 SECONDS)
 
-/datum/mutation/human/wacky
+/datum/mutation/wacky
 	name = "Wacky"
 	desc = "Ты не клоун. Ты целый цирк."
 	instability = NEGATIVE_STABILITY_MINI
@@ -22,22 +22,23 @@
 	text_gain_indication = span_sans(span_notice("Ты чувствуешь странности в своих голосовых связках."))
 	text_lose_indication = span_notice("Странное ощущение проходит.")
 
-/datum/mutation/human/wacky/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+/datum/mutation/wacky/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
-/datum/mutation/human/wacky/on_losing(mob/living/carbon/human/owner)
+/datum/mutation/wacky/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
 	UnregisterSignal(owner, COMSIG_MOB_SAY)
 
-/datum/mutation/human/wacky/proc/handle_speech(datum/source, list/speech_args)
+/datum/mutation/wacky/proc/handle_speech(datum/source, list/speech_args)
 	SIGNAL_HANDLER
 
 	speech_args[SPEECH_SPANS] |= SPAN_SANS
 
-/datum/mutation/human/heckacious
+/datum/mutation/heckacious
 	name = "heckacious larincks"
 	desc = "чел что ЖЕЛАЮТ твои слова чувак..........."
 	quality = MINOR_NEGATIVE
@@ -45,22 +46,23 @@
 	text_lose_indication = span_notice("Демоническое существо, овладевшее твоей гортанью, наконец-то ослабило свою хватку.")
 	locked = TRUE
 
-/datum/mutation/human/heckacious/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+/datum/mutation/heckacious/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_LIVING_TREAT_MESSAGE, PROC_REF(handle_caps))
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
-/datum/mutation/human/heckacious/on_losing(mob/living/carbon/human/owner)
+/datum/mutation/heckacious/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
 	UnregisterSignal(owner, list(COMSIG_LIVING_TREAT_MESSAGE, COMSIG_MOB_SAY))
 
-/datum/mutation/human/heckacious/proc/handle_caps(atom/movable/source, list/message_args)
+/datum/mutation/heckacious/proc/handle_caps(atom/movable/source, list/message_args)
 	SIGNAL_HANDLER
 	message_args[TREAT_CAPITALIZE_MESSAGE] = FALSE
 
-/datum/mutation/human/heckacious/proc/handle_speech(datum/source, list/speech_args)
+/datum/mutation/heckacious/proc/handle_speech(datum/source, list/speech_args)
 
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(!message)
@@ -131,7 +133,7 @@
 
 	speech_args[SPEECH_MESSAGE] = message
 
-/datum/mutation/human/mute
+/datum/mutation/mute
 	name = "Mute"
 	desc = "Геном полностью подавляет отдел головного мозга, отвечающий за речевой аппарат."
 	instability = NEGATIVE_STABILITY_MAJOR
@@ -139,17 +141,18 @@
 	text_gain_indication = span_danger("Ты чувствуешь себя неспособным выражать свои мысли.")
 	text_lose_indication = span_danger("Ты чувствуешь, что снова можешь говорить.")
 
-/datum/mutation/human/mute/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+/datum/mutation/mute/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
 		return
 	ADD_TRAIT(owner, TRAIT_MUTE, GENETIC_MUTATION)
 
-/datum/mutation/human/mute/on_losing(mob/living/carbon/human/owner)
+/datum/mutation/mute/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
 	REMOVE_TRAIT(owner, TRAIT_MUTE, GENETIC_MUTATION)
 
-/datum/mutation/human/unintelligible
+/datum/mutation/unintelligible
 	name = "Unintelligible"
 	desc = "Геном частично подавляет отдел головного мозга, отвечающий за речевой аппарат, сильно искажая речь."
 	instability = NEGATIVE_STABILITY_MODERATE
@@ -157,17 +160,18 @@
 	text_gain_indication = span_danger("Ты чувствуешь себя неспособным сформировать предложение!")
 	text_lose_indication = span_danger("Твой ум, кажется более ясным.")
 
-/datum/mutation/human/unintelligible/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+/datum/mutation/unintelligible/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
 		return
 	ADD_TRAIT(owner, TRAIT_UNINTELLIGIBLE_SPEECH, GENETIC_MUTATION)
 
-/datum/mutation/human/unintelligible/on_losing(mob/living/carbon/human/owner)
+/datum/mutation/unintelligible/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
 	REMOVE_TRAIT(owner, TRAIT_UNINTELLIGIBLE_SPEECH, GENETIC_MUTATION)
 
-/datum/mutation/human/swedish
+/datum/mutation/swedish
 	name = "Swedish"
 	desc = "Ужасающая мутация, котороя происходит из далёкого прошлого. Считается, что она была полностью искоренена после 2037."
 	instability = NEGATIVE_STABILITY_MINI
@@ -176,11 +180,11 @@
 	text_lose_indication = span_notice("Ты перестаешь ощущать себя шведом.")
 	var/static/list/language_mutilation = list("w" = "v", "j" = "y", "bo" = "bjo", "a" = list("å","ä","æ","a"), "o" = list("ö","ø","o"))
 
-/datum/mutation/human/swedish/New(class, timer, datum/mutation/human/copymut)
+/datum/mutation/swedish/New(datum/mutation/copymut)
 	. = ..()
 	AddComponent(/datum/component/speechmod, replacements = language_mutilation, end_string = list("",", bork",", bork, bork"), end_string_chance = 30)
 
-/datum/mutation/human/chav
+/datum/mutation/chav
 	name = "Chav"
 	desc = "Неизвестно."
 	instability = NEGATIVE_STABILITY_MINI
@@ -188,11 +192,11 @@
 	text_gain_indication = span_notice("Ты ощущаешь себя мудаком, не так ли?")
 	text_lose_indication = span_notice("Ты перестаешь ощущать себя грубым и нахальным.")
 
-/datum/mutation/human/chav/New(class, timer, datum/mutation/human/copymut)
+/datum/mutation/chav/New(datum/mutation/copymut)
 	. = ..()
 	AddComponent(/datum/component/speechmod, replacements = strings("chav_replacement.json", "chav"), end_string = ", mate", end_string_chance = 30)
 
-/datum/mutation/human/elvis
+/datum/mutation/elvis
 	name = "Elvis"
 	desc = "Ужасающая мутация, названная в честь нулевого пациента."
 	instability = NEGATIVE_STABILITY_MINI
@@ -204,11 +208,11 @@
 	. = ..()
 	AddComponent(/datum/component/speechmod, replacements = strings("elvis_replacement.json", "elvis"))
 
-/datum/mutation/human/chav/New(class, timer, datum/mutation/human/copymut)
+/datum/mutation/chav/New(datum/mutation/copymut)
 	. = ..()
 	AddComponent(/datum/component/speechmod, replacements = strings("elvis_replacement.json", "elvis"))
 
-/datum/mutation/human/elvis/on_life(seconds_per_tick, times_fired)
+/datum/mutation/elvis/on_life(seconds_per_tick, times_fired)
 	switch(pick(1,2))
 		if(1)
 			if(SPT_PROB(7.5, seconds_per_tick))
@@ -219,24 +223,26 @@
 			if(SPT_PROB(7.5, seconds_per_tick))
 				owner.visible_message("<b>[owner]</b> [pick("jiggles their hips", "rotates their hips", "gyrates their hips", "taps their foot", "dances to an imaginary song", "jiggles their legs", "snaps their fingers")]!")
 
-/datum/mutation/human/stoner
+/datum/mutation/stoner
 	name = "Stoner"
 	desc = "Обычная мутация, которая сильно понижает интеллект."
 	quality = NEGATIVE
 	text_gain_indication = span_notice("Ты чувствуешь себя...максимально расслабленным, чувак!")
 	text_lose_indication = span_notice("Ты чувствуешь, что твоё восприятие времени стало лучше.")
 
-/datum/mutation/human/stoner/on_acquiring(mob/living/carbon/human/owner)
-	..()
+/datum/mutation/stoner/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
+		return
 	owner.grant_language(/datum/language/beachbum, source = LANGUAGE_STONER)
 	owner.add_blocked_language(subtypesof(/datum/language) - /datum/language/beachbum, LANGUAGE_STONER)
 
-/datum/mutation/human/stoner/on_losing(mob/living/carbon/human/owner)
+/datum/mutation/stoner/on_losing(mob/living/carbon/human/owner)
 	..()
 	owner.remove_language(/datum/language/beachbum, source = LANGUAGE_STONER)
 	owner.remove_blocked_language(subtypesof(/datum/language) - /datum/language/beachbum, LANGUAGE_STONER)
 
-/datum/mutation/human/medieval
+/datum/mutation/medieval
 	name = "Medieval"
 	desc = "Ужасная мутация, происходящая из далёкого прошлого, считается, что была распространённым геномом во всей старой Европе."
 	instability = NEGATIVE_STABILITY_MINI
@@ -244,17 +250,18 @@
 	text_gain_indication = span_notice("Ты чувствуешь себя стремящимся к Святому Граали!")
 	text_lose_indication = span_notice("Ты больше не стремишься к чему-либо.")
 
-/datum/mutation/human/medieval/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+/datum/mutation/medieval/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
-/datum/mutation/human/medieval/on_losing(mob/living/carbon/human/owner)
+/datum/mutation/medieval/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
 	UnregisterSignal(owner, COMSIG_MOB_SAY)
 
-/datum/mutation/human/medieval/proc/handle_speech(datum/source, list/speech_args)
+/datum/mutation/medieval/proc/handle_speech(datum/source, list/speech_args)
 	SIGNAL_HANDLER
 
 	var/message = speech_args[SPEECH_MESSAGE]
@@ -277,7 +284,7 @@
 
 		speech_args[SPEECH_MESSAGE] = message
 
-/datum/mutation/human/piglatin
+/datum/mutation/piglatin
 	name = "Pig Latin"
 	desc = "Историки говорят, что в 2020 году человечество полностью говорило на этом мистическом языке."
 	instability = NEGATIVE_STABILITY_MINI
@@ -285,17 +292,18 @@
 	text_gain_indication = span_notice("Ты ощущаешь себя мамонтом.")
 	text_lose_indication = span_notice("Кажется, это прошло.")
 
-/datum/mutation/human/piglatin/on_acquiring(mob/living/carbon/human/owner)
-	if(..())
+/datum/mutation/piglatin/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
 		return
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
-/datum/mutation/human/piglatin/on_losing(mob/living/carbon/human/owner)
+/datum/mutation/piglatin/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
 	UnregisterSignal(owner, COMSIG_MOB_SAY)
 
-/datum/mutation/human/piglatin/proc/handle_speech(datum/source, list/speech_args)
+/datum/mutation/piglatin/proc/handle_speech(datum/source, list/speech_args)
 	SIGNAL_HANDLER
 
 	var/spoken_message = speech_args[SPEECH_MESSAGE]

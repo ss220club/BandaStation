@@ -1,13 +1,13 @@
 name: "Label"
 
 on:
-- pull_request_target
+  - pull_request_target
 
 jobs:
   labeler:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     steps:
-    - uses: actions/labeler@v5
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        sync-labels: true
+      - uses: actions/labeler@v5
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          sync-labels: true

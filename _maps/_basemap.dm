@@ -18,9 +18,8 @@
 		// BANDASTATION - ADDITION STAT
 		#include "map_files\Cyberiad\Cyberiad.dmm"
 		// BANDASTATION - ADDITION END
-
-		#ifdef CIBUILDING
-			#include "templates.dm"
-		#endif
+	#endif
+	#ifdef ALL_TEMPLATES
+		#include "templates.dm"
 	#endif
 #endif

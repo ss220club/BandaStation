@@ -3,7 +3,9 @@
 	plural_form = "Скреллы"
 	id = SPECIES_SKRELL
 	inherent_traits = list(
-		TRAIT_MUTANT_COLORS
+		TRAIT_MUTANT_COLORS,
+		TRAIT_NODROWN,
+		TRAIT_SWIMMER,
 	)
 	inherent_biotypes = MOB_ORGANIC | MOB_HUMANOID
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
@@ -19,6 +21,7 @@
 	mutant_organs = list(
 		/obj/item/organ/head_tentacle = /datum/sprite_accessory/skrell_head_tentacle/short::name
 	)
+	exotic_bloodtype = BLOOD_TYPE_SKRELL
 
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/skrell,
@@ -33,7 +36,6 @@
 /datum/species/skrell/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.dna.features["mcolor"] = COLOR_TRUE_BLUE
 	human.dna.features["skrell_head_tentacle"] = /datum/sprite_accessory/skrell_head_tentacle/short::name
-	human.dna.features["skrell_head_tentacle_color"] = COLOR_COMMAND_BLUE
 	human.update_body(is_creating = TRUE)
 
 /datum/species/skrell/create_pref_unique_perks()
@@ -45,6 +47,18 @@
 			SPECIES_PERK_ICON = "box-open",
 			SPECIES_PERK_NAME = "Головной карман",
 			SPECIES_PERK_DESC = "Имеют орган головного кармана, вмещающий маленький предмет",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "fish-fins",
+			SPECIES_PERK_NAME = "Подводное дыхание",
+			SPECIES_PERK_DESC = "Скреллы являются амфибиями и могут дышать под водой",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "person-swimming",
+			SPECIES_PERK_NAME = "Прекрасные пловцы",
+			SPECIES_PERK_DESC = "Миры скреллов почти полностью покрыты водой, что не могло не повлиять на их адаптацию",
 		),
 	)
 	return to_add

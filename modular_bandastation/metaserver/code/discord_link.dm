@@ -16,7 +16,7 @@
 		to_chat(src, span_warning("Привязка Discord сейчас недоступна."))
 		return
 
-	if(SScentral.is_player_discord_linked(src))
+	if(SScentral.is_player_discord_linked(ckey))
 		to_chat(src, span_warning("Вы уже привязали свою учетную запись Discord."))
 		return
 

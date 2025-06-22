@@ -47,7 +47,7 @@
 	///Typecast of an inserted, scanned ID card inside the console, as bounties are held within the ID card.
 	var/obj/item/card/id/inserted_scan_id
 
-/obj/machinery/computer/piratepad_control/civilian/attackby(obj/item/I, mob/living/user, list/modifiers)
+/obj/machinery/computer/piratepad_control/civilian/attackby(obj/item/I, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(isidcard(I))
 		if(id_insert(user, I, inserted_scan_id))
 			inserted_scan_id = I
@@ -286,14 +286,12 @@
 	return TRUE
 
 ///Removes A stored ID card.
-/obj/machinery/computer/piratepad_control/civilian/proc/id_eject(mob/user, obj/target)
+/obj/machinery/computer/piratepad_control/civilian/proc/id_eject(mob/user, obj/item/target)
 	if(!target)
 		to_chat(user, span_warning("Этот слот пуст!"))
 		return FALSE
 	else
-		target.forceMove(drop_location())
-		if(!issilicon(user) && Adjacent(user))
-			user.put_in_hands(target)
+		try_put_in_hand(target, user)
 		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] получает [target.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."), \
 							span_notice("Вы получаете [target.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."))
 		playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)

@@ -34,10 +34,10 @@
 	give_item_to_holder(
 		new_heirloom,
 		list(
-			LOCATION_LPOCKET = ITEM_SLOT_LPOCKET,
-			LOCATION_RPOCKET = ITEM_SLOT_RPOCKET,
-			LOCATION_BACKPACK = ITEM_SLOT_BACKPACK,
-			LOCATION_HANDS = ITEM_SLOT_HANDS,
+			LOCATION_LPOCKET,
+			LOCATION_RPOCKET,
+			LOCATION_BACKPACK,
+			LOCATION_HANDS,
 		),
 		flavour_text = "Это драгоценная семейная реликвия, передаваемая из поколения в поколение. Берегите ее!",
 	)

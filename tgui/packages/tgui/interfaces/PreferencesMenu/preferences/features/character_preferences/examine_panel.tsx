@@ -1,5 +1,4 @@
-import { Feature } from '../base';
-import { FeatureTextInput } from '../base_bandastation';
+import { Feature, FeatureTextInput } from '../base';
 
 export const flavor_text: Feature<string> = {
   name: 'Описание внешности',

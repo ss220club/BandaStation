@@ -1,4 +1,4 @@
-/datum/mutation/human/adrenaline_rush
+/datum/mutation/adrenaline_rush
 	name = "Adrenaline Rush"
 	desc = "Позволяет обладателю данной мутации при желании наполнить своё тело адреналином."
 	quality = POSITIVE
@@ -10,7 +10,7 @@
 	synchronizer_coeff = 1
 	power_coeff = 1
 
-/datum/mutation/human/adrenaline_rush/modify()
+/datum/mutation/adrenaline_rush/setup()
 	. = ..()
 	var/datum/action/cooldown/adrenaline/to_modify = .
 	if(!istype(to_modify)) // null or invalid

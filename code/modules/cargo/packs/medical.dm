@@ -17,6 +17,10 @@
 		/obj/item/reagent_containers/blood/o_minus,
 		/obj/item/reagent_containers/blood/lizard,
 		/obj/item/reagent_containers/blood/ethereal,
+		/// BANDASTATION ADDITION START - Species
+		/obj/item/reagent_containers/blood/skrell,
+		/obj/item/reagent_containers/blood/moth,
+		/// BANDASTATION ADDITION END - Species
 		/obj/item/paper/fluff/jobs/medical/blood_types,
 	)
 	crate_name = "blood freezer"
@@ -199,7 +203,7 @@
 	name = "Paperwork Implant Set"
 	desc = "A crate containing two implants, which can be surgically implanted to effectivize crewmembers at paperwork. Warranty void if exposed to electromagnetic pulses."
 	cost = CARGO_CRATE_VALUE * 3
-	contains = list(/obj/item/organ/cyberimp/arm/paperwork = 2)
+	contains = list(/obj/item/organ/cyberimp/arm/toolkit/paperwork = 2)
 	crate_name = "Paperwork implant crate"
 	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
 

@@ -49,6 +49,7 @@ export const NoteKeeper = (props) => {
     <Section buttons={<NoteTabs />} fill scrollable title="Прим.">
       {writing && (
         <TextArea
+          fluid
           height="100%"
           maxLength={1024}
           onEnter={addNote}

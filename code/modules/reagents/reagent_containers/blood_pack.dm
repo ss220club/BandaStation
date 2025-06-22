@@ -44,7 +44,7 @@
 
 /obj/item/reagent_containers/blood/random/Initialize(mapload, vol)
 	icon_state = "bloodpack"
-	blood_type = pick(BLOOD_TYPE_A_PLUS, BLOOD_TYPE_A_MINUS, BLOOD_TYPE_B_PLUS, BLOOD_TYPE_B_MINUS, BLOOD_TYPE_O_PLUS, BLOOD_TYPE_O_MINUS, BLOOD_TYPE_LIZARD)
+	blood_type = pick(BLOOD_TYPE_A_PLUS, BLOOD_TYPE_A_MINUS, BLOOD_TYPE_B_PLUS, BLOOD_TYPE_B_MINUS, BLOOD_TYPE_O_PLUS, BLOOD_TYPE_O_MINUS, BLOOD_TYPE_LIZARD, BLOOD_TYPE_SKRELL, BLOOD_TYPE_MOTH) /// BANDASTATION EDIT - Species
 	return ..()
 
 /obj/item/reagent_containers/blood/a_plus
@@ -100,7 +100,7 @@
 /obj/item/reagent_containers/blood/universal
 	blood_type = BLOOD_TYPE_UNIVERSAL
 
-/obj/item/reagent_containers/blood/attackby(obj/item/tool, mob/user, list/modifiers)
+/obj/item/reagent_containers/blood/attackby(obj/item/tool, mob/user, list/modifiers, list/attack_modifiers)
 	if (IS_WRITING_UTENSIL(tool))
 		if(!user.can_write(tool))
 			return
