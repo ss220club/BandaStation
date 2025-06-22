@@ -10,10 +10,10 @@
 	inhand_icon_state = "mid_dualsaber0"
 	saber_color = "midnight"
 	light_color = LIGHT_COLOR_INTENSE_RED
-	var/wieldsound = 'modular_bandastation/objects/sound/weapons/mid_saberon.ogg'
-	var/unwieldsound = 'modular_bandastation/objects/sound/weapons/mid_saberoff.ogg'
+	var/wieldsound = 'modular_bandastation/objects/sounds/weapons/mid_saberon.ogg'
+	var/unwieldsound = 'modular_bandastation/objects/sounds/weapons/mid_saberoff.ogg'
 	var/saber_name = "mid"
-	var/hit_wield = 'modular_bandastation/objects/sound/weapons/mid_saberhit.ogg'
+	var/hit_wield = 'modular_bandastation/objects/sounds/weapons/mid_saberhit.ogg'
 	var/hit_unwield = "swing_hit"
 	var/ranged = FALSE
 	var/power = 1
@@ -53,9 +53,9 @@
 	refusal_text = "Ну, заплачь."
 	light_color = LIGHT_COLOR_LIGHT_CYAN
 	saber_name = "gr"
-	wieldsound = 'modular_bandastation/objects/sound/weapons/gr_saberon.ogg'
-	unwieldsound = 'modular_bandastation/objects/sound/weapons/gr_saberoff.ogg'
-	hit_wield = 'modular_bandastation/objects/sound/weapons/gr_saberhit.ogg'
+	wieldsound = 'modular_bandastation/objects/sounds/weapons/gr_saberon.ogg'
+	unwieldsound = 'modular_bandastation/objects/sounds/weapons/gr_saberoff.ogg'
+	hit_wield = 'modular_bandastation/objects/sounds/weapons/gr_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/flame
 	name = "Пламя"
@@ -66,9 +66,9 @@
 	refusal_text = "Кровь и свет принадлежат лишь одному."
 	light_color = LIGHT_COLOR_LAVENDER
 	saber_name = "sh"
-	wieldsound = 'modular_bandastation/objects/sound/weapons/sh_saberon.ogg'
-	unwieldsound = 'modular_bandastation/objects/sound/weapons/sh_saberoff.ogg'
-	hit_wield = 'modular_bandastation/objects/sound/weapons/sh_saberhit.ogg'
+	wieldsound = 'modular_bandastation/objects/sounds/weapons/sh_saberon.ogg'
+	unwieldsound = 'modular_bandastation/objects/sounds/weapons/sh_saberoff.ogg'
+	hit_wield = 'modular_bandastation/objects/sounds/weapons/sh_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/devotion
 	name = "Верность клятве"
@@ -79,9 +79,9 @@
 	refusal_text = "Только достойный узрит свет."
 	light_color = LIGHT_COLOR_VIVID_GREEN
 	saber_name = "kir"
-	wieldsound = 'modular_bandastation/objects/sound/weapons/kir_saberon.ogg'
-	unwieldsound = 'modular_bandastation/objects/sound/weapons/kir_saberoff.ogg'
-	hit_wield = 'modular_bandastation/objects/sound/weapons/kir_saberhit.ogg'
+	wieldsound = 'modular_bandastation/objects/sounds/weapons/kir_saberon.ogg'
+	unwieldsound = 'modular_bandastation/objects/sounds/weapons/kir_saberoff.ogg'
+	hit_wield = 'modular_bandastation/objects/sounds/weapons/kir_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/sister
 	name = "Сестра"
@@ -92,9 +92,9 @@
 	refusal_text = "Ты не принадлежишь сестре, верни её законному владельцу."
 	light_color = LIGHT_COLOR_HOLY_MAGIC
 	saber_name = "norm"
-	wieldsound = 'modular_bandastation/objects/sound/weapons/norm_saberon.ogg'
-	unwieldsound = 'modular_bandastation/objects/sound/weapons/norm_saberoff.ogg'
-	hit_wield = 'modular_bandastation/objects/sound/weapons/norm_saberhit.ogg'
+	wieldsound = 'modular_bandastation/objects/sounds/weapons/norm_saberon.ogg'
+	unwieldsound = 'modular_bandastation/objects/sounds/weapons/norm_saberoff.ogg'
+	hit_wield = 'modular_bandastation/objects/sounds/weapons/norm_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/flee_catcher
 	name = "Ловец Бегущих"
@@ -105,9 +105,9 @@
 	refusal_text = "Ловец бегущих не слушается тебя, кажется он хочет вернуться к хозяину."
 	light_color = LIGHT_COLOR_HOLY_MAGIC
 	saber_name = "kel"
-	wieldsound = 'modular_bandastation/objects/sound/weapons/kel_saberon.ogg'
-	unwieldsound = 'modular_bandastation/objects/sound/weapons/kel_saberoff.ogg'
-	hit_wield = 'modular_bandastation/objects/sound/weapons/kel_saberhit.ogg'
+	wieldsound = 'modular_bandastation/objects/sounds/weapons/kel_saberon.ogg'
+	unwieldsound = 'modular_bandastation/objects/sounds/weapons/kel_saberoff.ogg'
+	hit_wield = 'modular_bandastation/objects/sounds/weapons/kel_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/pre_attack(atom/A, mob/living/user, params)
 	var/charged = FALSE

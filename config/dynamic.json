@@ -6,18 +6,7 @@
 			"scaling_cost": 9,
 			"required_candidates": 1,
 			"minimum_required_age": 0,
-			"requirements": [
-				10,
-				10,
-				10,
-				10,
-				10,
-				10,
-				10,
-				10,
-				10,
-				10
-			],
+			"requirements": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
 			"antag_cap": {
 				"denominator": 24
 			},
@@ -29,65 +18,48 @@
 				"Head of Security",
 				"Captain"
 			],
-			"restricted_roles": [
-				"Cyborg"
-			]
+			"restricted_roles": ["Cyborg"]
 		},
 
 		"Blood Brothers": {
 			"weight": 0
 		},
 
-		"Changelings": {
-		},
+		"Changelings": {},
 
 		"Heretics": {
 			"weight": 0
 		},
 
-		"Wizard": {
-		},
+		"Wizard": {},
 
-		"Blood Cult": {
-		},
+		"Blood Cult": {},
 
-		"Nuclear Emergency": {
-		},
+		"Nuclear Emergency": {},
 
-		"Clown Operatives": {
-		},
+		"Clown Operatives": {},
 
-		"Revolution": {
-		},
+		"Revolution": {},
 
-		"Malfunctioning AI": {
-		},
+		"Malfunctioning AI": {},
 
-		"Spies": {
-		}
+		"Spies": {}
 	},
 
 	"Midround": {
-		"Syndicate Sleeper Agent": {
-		},
+		"Syndicate Sleeper Agent": {},
 
-		"Malfunctioning AI": {
-		},
+		"Malfunctioning AI": {},
 
-		"Wizard": {
-		},
+		"Wizard": {},
 
-		"Nuclear Assault": {
-		},
+		"Nuclear Assault": {},
 
-		"Blob": {
-		},
+		"Blob": {},
 
-		"Blob Infection": {
-		},
+		"Blob Infection": {},
 
-		"Alien Infestation": {
-		},
+		"Alien Infestation": {},
 
 		"Nightmare": {
 			"weight": 0
@@ -97,17 +69,13 @@
 			"weight": 0
 		},
 
-		"Abductors": {
-		},
+		"Abductors": {},
 
-		"Space Ninja": {
-		},
+		"Space Ninja": {},
 
-		"Spiders": {
-		},
+		"Spiders": {},
 
-		"Revenant": {
-		},
+		"Revenant": {},
 
 		"Space Pirates": {
 			"weight": 0
@@ -121,8 +89,7 @@
 			"weight": 0
 		},
 
-		"Space Changeling": {
-		},
+		"Space Changeling": {},
 
 		"Paradox Clone": {
 			"weight": 0
@@ -130,24 +97,19 @@
 	},
 
 	"Latejoin": {
-		"Syndicate Infiltrator": {
-		},
+		"Syndicate Infiltrator": {},
 
-		"Provocateur": {
-		},
+		"Provocateur": {},
 
 		"Heretic Smuggler": {
 			"weight": 0
 		},
 
-		"Stowaway Changeling": {
-		}
+		"Stowaway Changeling": {}
 	},
 
 	"Station": {
-		"Radioactive Nebula": {
-		},
-		"Background Checks": {
-		}
+		"Radioactive Nebula": {},
+		"Background Checks": {}
 	}
 }

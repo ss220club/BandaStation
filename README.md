@@ -7,14 +7,14 @@
 
 [![resentment](.github/images/badges/built-with-resentment.svg)](.github/images/comics/131-bug-free.png) [![technical debt](.github/images/badges/contains-technical-debt.svg)](.github/images/comics/106-tech-debt-modified.png) [![forinfinityandbyond](.github/images/badges/made-in-byond.gif)](https://www.reddit.com/r/SS13/comments/5oplxp/what_is_the_main_problem_with_byond_as_an_engine/dclbu1a)
 
-| Website                   | Link                                           |
-|---------------------------|------------------------------------------------|
-| Website                   | [https://ss220.club](https://ss220.club)          |
-| Code                      | [https://github.com/ss220club/BandaStation](https://github.com/ss220club/BandaStation)    |
-| Wiki                      | [https://tg.ss220.club](https://tg.ss220.club)   |
-| Codedocs                  | [https://ss220club.github.io/BandaStation/](https://ss220club.github.io/BandaStation/)       |
-| SS220 Discord             | [https://discord.gg/ss220](https://discord.gg/ss220) |
-| Coderbus Discord          | [https://discord.gg/Vh8TJp9](https://discord.gg/Vh8TJp9)               |
+| Website          | Link                                                                                   |
+| ---------------- | -------------------------------------------------------------------------------------- |
+| Website          | [https://ss220.club](https://ss220.club)                                               |
+| Code             | [https://github.com/ss220club/BandaStation](https://github.com/ss220club/BandaStation) |
+| Wiki             | [https://bs.ss220.club](https://tg.ss220.club)                                         |
+| Codedocs         | [https://ss220club.github.io/BandaStation/](https://ss220club.github.io/BandaStation/) |
+| SS220 Discord    | [https://discord.gg/ss220](https://discord.gg/ss220)                                   |
+| Coderbus Discord | [https://discord.gg/Vh8TJp9](https://discord.gg/Vh8TJp9)                               |
 
 ## Загрузка
 
@@ -53,6 +53,6 @@ See LICENSE and GPLv3.txt for more details.
 
 The TGS DMAPI is licensed as a subproject under the MIT license.
 
-See the footer of [code/__DEFINES/tgs.dm](./code/__DEFINES/tgs.dm) and [code/modules/tgs/LICENSE](./code/modules/tgs/LICENSE) for the MIT license.
+See the footer of [code/\_\_DEFINES/tgs.dm](./code/__DEFINES/tgs.dm) and [code/modules/tgs/LICENSE](./code/modules/tgs/LICENSE) for the MIT license.
 
 All assets including icons and sound are under a [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated.

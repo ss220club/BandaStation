@@ -5,7 +5,7 @@ on:
 
 jobs:
   merge-upstream:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - id: create_token
@@ -35,13 +35,13 @@ jobs:
       - name: Run the script
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }}
-          TARGET_REPO: 'ss220club/BandaStation'
-          TARGET_BRANCH: 'master'
-          UPSTREAM_REPO: 'tgstation/tgstation'
-          UPSTREAM_BRANCH: 'master'
-          MERGE_BRANCH: 'merge-upstream'
-          CHANGELOG_AUTHOR: 'tgstation'
-          TRANSLATE_CHANGES: 'true'
+          TARGET_REPO: "ss220club/BandaStation"
+          TARGET_BRANCH: "master"
+          UPSTREAM_REPO: "tgstation/tgstation"
+          UPSTREAM_BRANCH: "master"
+          MERGE_BRANCH: "merge-upstream"
+          CHANGELOG_AUTHOR: "tgstation"
+          TRANSLATE_CHANGES: "true"
           OPENAI_API_KEY: ${{ secrets.ORG_EMPTY_TOKEN }}
           LOG_LEVEL: ${{ runner.debug && 'DEBUG' || 'INFO' }}
         run: |

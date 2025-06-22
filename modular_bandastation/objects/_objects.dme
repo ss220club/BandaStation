@@ -91,10 +91,16 @@
 #include "code/items/weapons/ranged/energy/pulse.dm"
 #include "code/items/weapons/ranged/ballistic/wespe.dm"
 #include "code/items/weapons/ranged/ballistic/ammo_casings.dm"
-#include "code/items/weapons/ranged/ballistic/supply_packs.dm"
 #include "code/items/weapons/ranged/ballistic/magazines.dm"
 #include "code/items/weapons/ranged/ballistic/projectiles.dm"
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
+
+
+#include "code/items/weapons/ranged/ballistic/sabel.dm"
+#include "code/items/weapons/ranged/ballistic/carwo.dm"
+#include "code/items/weapons/ranged/ballistic/renoster.dm"
+#include "code/items/weapons/ranged/ballistic/sindano.dm"
+#include "code/items/weapons/ranged/ballistic/mounted_machine_gun.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
@@ -104,10 +110,11 @@
 
 #include "code/structures/chairs.dm"
 #include "code/structures/displaycase.dm"
+#include "code/structures/fake_light.dm"
+#include "code/structures/flags.dm"
 #include "code/structures/platform.dm"
 #include "code/structures/posters.dm"
 #include "code/structures/statues.dm"
-#include "code/structures/fake_light.dm"
 #include "code/structures/crates_lockers/closets/secure/blueshield.dm"
 #include "code/structures/crates_lockers/closets/secure/lawyer.dm"
 #include "code/structures/crates_lockers/closets/secure/magistrate.dm"

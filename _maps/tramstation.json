@@ -28,8 +28,8 @@
 		"Captain": {
 			"special_charter": "asteroid"
 		},
-        "Explorer": {
-            "spawn_positions": 4
-        }
+		"Explorer": {
+			"spawn_positions": 4
+		}
 	}
 }
