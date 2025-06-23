@@ -40,7 +40,7 @@
 		<div class="lobby_element lobby-name">
 			<label class="lobby_element lobby-collapse" for="hide_menu"></label>
 			<span id="character_name">[player.client.prefs.read_preference(/datum/preference/name/real_name)]</span>
-			<div id="logo" data-loaded="[round(loading_percentage)]">
+			<div id="logo" data-loaded="[round(loading_percentage)]%">
 				<img src="[SSassets.transport.get_asset_url(asset_name = "ss220_logo.png")]">
 			</div>
 		</div>"}

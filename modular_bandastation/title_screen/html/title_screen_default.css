@@ -190,7 +190,7 @@ html.loading {
   img {
     height: 80px;
     transition: transform var(--transition-time);
-    transition-delay: calc(var(--transition-time) * 2);
+    transition-delay: calc(var(--transition-time) * 2) !important;
   }
 
   &:after {
