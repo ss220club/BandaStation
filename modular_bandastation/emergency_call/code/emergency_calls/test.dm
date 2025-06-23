@@ -4,7 +4,6 @@
 	leader_role = /datum/antagonist/ert/commander
 	roles = list(/datum/antagonist/ert/security, /datum/antagonist/ert/medic, /datum/antagonist/ert/engineer)
 	rename_team = "Soviet Naval Infantry"
-	polldesc = "Soviet Naval Infantry"
 	mission = "Оказывайте помощь силам NT, не вступайте в бой с силами NT. Слушайте своих старших офицеров."
 	hostile_mission = ""
 	dispatch_message = "С ближайшего судна получен зашифрованный сигнал. Ожидайте."
@@ -13,7 +12,6 @@
 	mob_max = 5
 	mob_min = 1
 	random_names = TRUE
-	leader_experience = TRUE
 	shuttle_id = "hunter_bounty"
 	base_template = LAZY_TEMPLATE_KEY_TSF_BASE
 	weight = 10
