@@ -12,6 +12,8 @@
 	var/roles = list(/datum/antagonist/ert/security, /datum/antagonist/ert/medic, /datum/antagonist/ert/engineer)
 	/// Custom team name for antag/roundend reporting
 	var/rename_team = "Blame coderbus"
+	/// Ghost poll description text
+	var/polldesc = "Blame coderbus"
 	/// Team mission objective (friendly mode)
 	var/mission = "Окажите помощь станции."
 	/// Team mission objective (hostile mode)
@@ -28,16 +30,18 @@
 	var/mob_min = 1
 	/// Whether to generate random last names for team members
 	var/random_names = TRUE
+	/// Prioritize experienced players for leader role
+	var/leader_experience = TRUE
 	/// Shuttle template ID for deployment
 	var/shuttle_id = "tsf_patrol"
 	/// Lazy template ID for ERT base (null for no base)
-	var/base_template
+	var/base_template = null
 	/// Mob type for team members (default - human)
 	var/mob_type
 	/// Activation weight relative to other ERT types
 	var/weight = 0
 	/// Custom ghost poll image (uses leader preview if null)
-	var/alert_pic
+	var/alert_pic = null
 	/// Hostility chance percentage (0-100)
 	var/hostility = 0
 	/// Reserved turf area for ERT base
