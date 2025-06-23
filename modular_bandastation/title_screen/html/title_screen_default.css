@@ -1,5 +1,6 @@
 :root {
-  --color-base: hsla(0, 0%, 7.5%, 0.85);
+  --color-base: hsl(0, 0%, 17.5%);
+  --color-section: hsla(0, 0%, 7.5%, 0.85);
   --color-border: hsla(0, 0%, 100%, 0.1);
 
   --color-action: hsl(0, 0%, 50%);
@@ -142,14 +143,25 @@ html.loading {
   }
 
   #logo {
+    transition: --loading-percentage var(--transition-time) ease-in-out;
+
     &:before {
+      content: '';
+      position: absolute;
+      inset: var(--padding);
       background-color: var(--color-base);
+      border-radius: 99999px;
+      z-index: 0;
+    }
+
+    &:after {
+      background-color: var(--color-section);
       color: var(--color-text);
       border-color: var(--color-primary);
     }
 
     img {
-      padding: 8px;
+      transform: scale(0.75);
     }
   }
 
@@ -159,11 +171,13 @@ html.loading {
 }
 
 #logo {
+  --padding: 4px;
   overflow: hidden;
   display: inline-flex;
   position: absolute;
   top: 0;
-  right: 1rem;
+  right: 0.75rem;
+  padding: var(--padding);
   background: conic-gradient(
     from 0deg,
     var(--color-primary) var(--loading-percentage),
@@ -172,21 +186,19 @@ html.loading {
   border-radius: 99999px;
   transform: translateY(-75%);
   box-shadow: var(--shadow);
-  transition: --loading-percentage var(--transition-time) ease-in-out;
 
   img {
-    height: 96px;
-    padding: 4px;
-    background-color: var(--color-hover);
-    transition: padding var(--transition-time);
-    transition-delay: var(--transition-time);
+    height: 80px;
+    transition: transform var(--transition-time);
+    transition-delay: calc(var(--transition-time) * 2);
   }
 
-  &:before {
+  &:after {
     content: attr(data-loaded);
     position: absolute;
-    inset: 4px;
-    font-size: 2.33rem;
+    inset: var(--padding);
+    line-height: 1px;
+    font-size: 2.2rem;
     font-family: "Pix Cyrillic";
     text-align: center;
     align-content: center;
@@ -213,7 +225,7 @@ html.loading {
 
 .lobby_container,
 .lobby_buttons-end {
-  background-color: var(--color-base);
+  background-color: var(--color-section);
   border-radius: var(--border-radius-large);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow);
@@ -279,7 +291,7 @@ html.loading {
     font-size: 1.5rem;
     margin: -0.5rem -0.75rem 0;
     padding: 0.33rem 0.5rem 0.25rem;
-    background-color: var(--color-hover);
+    background-color: var(--color-base);
     border-bottom: 2px solid var(--color-primary);
   }
 
@@ -307,15 +319,22 @@ html.loading {
   font-size: 1.15rem;
   font-family: "Pix Cyrillic";
   padding: 0.5rem 0.75rem;
-  background-color: var(--color-base);
+  background-color: var(--color-section);
   color: var(--color-text-accent);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-large);
   box-shadow: var(--shadow);
   backdrop-filter: var(--blur);
+  transition-property: transform, opacity;
+  transition-duration: var(--transition-time);
 
   &:empty {
     display: none;
+  }
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-100%);
   }
 }
 
@@ -424,7 +443,7 @@ a.lobby_element:hover .lobby-tooltip {
   text-align: right;
   width: 100%;
   padding: 0.33em 0.75em;
-  background-color: var(--color-hover);
+  background-color: var(--color-base);
   color: var(--color-text-accent);
   border-bottom: 1px solid var(--color-border);
   border-radius: calc(var(--border-radius-large) - 0.05rem)
@@ -457,7 +476,7 @@ a.lobby_element:hover .lobby-tooltip {
   left: 0;
   height: 3.5rem;
   width: 3.5rem;
-  background-color: var(--color-base);
+  background-color: var(--color-section);
   color: var(--color-text-translucent);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-large);
@@ -498,7 +517,7 @@ a.lobby_element:hover .lobby-tooltip {
   margin: 0.5rem;
   padding: 0.5em 0.5em 0.4em;
   width: calc(100vw - var(--menu-width) - 1.5rem);
-  background-color: var(--color-base);
+  background-color: var(--color-section);
   color: var(--color-text-bad);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-large);
