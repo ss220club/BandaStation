@@ -198,7 +198,7 @@ html.loading {
     position: absolute;
     inset: var(--padding);
     line-height: 1px;
-    font-size: 2.2rem;
+    font-size: 1.65rem;
     font-family: "Pix Cyrillic";
     text-align: center;
     align-content: center;
@@ -290,7 +290,7 @@ html.loading {
   .lobby-info-title {
     font-size: 1.5rem;
     margin: -0.5rem -0.75rem 0;
-    padding: 0.33rem 0.5rem 0.25rem;
+    padding: 0.33rem 0.5rem 0.1rem;
     background-color: var(--color-base);
     border-bottom: 2px solid var(--color-primary);
   }
