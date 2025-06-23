@@ -50,6 +50,9 @@
 
 	var/speed_divisor_from_mass = 1
 
+	//Turf to which you need access range to access in order to do topics (this is done in this way so I dont need to keep track of consoles being in use)
+	var/turf/control_turf
+
 
 /datum/overmap_object/shuttle/proc/GetSensorTargets()
 	var/list/targets = list()
@@ -76,7 +79,10 @@
 		draw_thrust += ext.DrawThrust(impulse_power)
 	return draw_thrust / speed_divisor_from_mass
 
-/datum/overmap_object/shuttle/proc/DisplayUI(mob/user)
+/datum/overmap_object/shuttle/proc/DisplayUI(mob/user, turf/usage_turf)
+	if(usage_turf)
+		control_turf = usage_turf
+
 	var/list/dat = list()
 
 	dat += "<center><a href='?src=[REF(src)];task=tab;tab=0' [shuttle_ui_tab == 0 ? "class='linkOn'" : ""]>General</a>"
@@ -299,6 +305,13 @@
 		lock = new(src, ov_obj)
 
 /datum/overmap_object/shuttle/Topic(href, href_list)
+	if(!control_turf)
+		return
+	var/mob/user = usr
+
+	if(!isliving(user) || !user.can_perform_action(control_turf, NEED_DEXTERITY))
+		return
+
 	if(href_list["pad_topic"])
 		if(!(shuttle_capability & SHUTTLE_CAN_USE_ENGINES))
 			return
@@ -376,7 +389,7 @@
 				if("normal_dock")
 					if(shuttle_controller.busy)
 						return
-					var/dock_id = href_list["dock_id"]
+					var/dock_id  = href_list["dock_id"]
 					var/obj/docking_port/stationary/target_dock = SSshuttle.getDock(dock_id)
 					if(!target_dock)
 						return
@@ -500,6 +513,7 @@
 		extension.AddToOvermapObject(src)
 
 /datum/overmap_object/shuttle/Destroy()
+	control_turf = null
 	QDEL_NULL(shuttle_controller)
 	if(my_shuttle)
 		for(var/i in my_shuttle.all_extensions)
@@ -667,12 +681,16 @@
 		var/datum/space_level/S = i
 		S.parallax_direction_override = established_direction
 
-/datum/overmap_object/shuttle/proc/GrantOvermapView(mob/user)
+/datum/overmap_object/shuttle/proc/GrantOvermapView(mob/user, turf/passed_turf)
 	//Camera control
 	if(!shuttle_controller)
 		return
 	if(user.client && !shuttle_controller.busy)
 		shuttle_controller.SetController(user)
+
+		if(passed_turf)
+			shuttle_controller.control_turf = passed_turf
+
 		return TRUE
 
 /datum/overmap_object/shuttle/proc/CommandMove(dest_x, dest_y)

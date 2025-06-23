@@ -9,6 +9,7 @@
 	var/busy = FALSE
 
 	var/datum/shuttle_freeform_docker/freeform_docker
+	var/turf/control_turf
 
 /datum/overmap_shuttle_controller/proc/ShuttleMovedOnOvermap()
 	if(mob_controller)
@@ -109,4 +110,4 @@
 
 /datum/action/innate/open_shuttle_control/Trigger(trigger_flags)
 	var/datum/overmap_shuttle_controller/OSC = target
-	OSC.overmap_obj.DisplayUI(OSC.mob_controller)
+	OSC.overmap_obj.DisplayUI(OSC.mob_controller, OSC.control_turf)
