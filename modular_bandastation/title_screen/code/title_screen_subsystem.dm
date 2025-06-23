@@ -2,9 +2,15 @@
 	init_stage = INITSTAGE_FIRST
 	flags = SS_BACKGROUND
 	wait = 1 SECONDS
-	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP
-	/// The current notice text, or null.
+	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	/// The current notice text, or null
 	var/notice
+	/// Last loaded subsystem name. null if all subsystems loaded
+	var/static/subsystem_loading
+	/// Number of loaded subsystems
+	var/static/subsystems_loaded = 0
+	/// Number of sybsystems that need to be loaded
+	var/static/subsystems_total = 0
 	/// Currently set title screen
 	var/datum/title_screen/current_title_screen
 	/// The list of image files available to be picked for title screen
@@ -27,7 +33,7 @@
 	if(!current_title_screen)
 		return
 
-	if(!MC_RUNNING())
+	if(!SSticker)
 		title_output_to_all("<div class='loading'>Загрузка...</div>", "update_info")
 		return
 
@@ -36,21 +42,34 @@
 		time_remaining = "<span class='bad'>ВЕЧНОСТЬ!!!</span>"
 	else if(time_remaining > 0)
 		time_remaining = "[round(time_remaining / 10)] сек."
-	else
+	else if(SSticker.current_state == GAME_STATE_SETTING_UP)
 		time_remaining = "<span class='good'>Раунд начинается...</span>"
+	else
+		time_remaining = "<span class='good'>Раунд идёт</span>"
+
+	var/game_playing = SSticker.current_state == GAME_STATE_PLAYING || SSticker.current_state == GAME_STATE_FINISHED
 
 	for(var/mob/dead/new_player/viewer as anything in GLOB.new_player_list)
 		var/info
+		var/players
+		if(!game_playing)
+			players = {"
+				<tr><td>Игроков готово:</td><td>[SSticker.totalPlayersReady] / [LAZYLEN(GLOB.clients)]</td></tr>
+				[viewer.client.holder ? "<tr class='admin'><td>Админов готово:</td><td>[SSticker.total_admins_ready] / [length(GLOB.admins)]</td></tr>" : ""]
+			"}
+		else
+			players = {"
+				<tr><td>Всего игроков:</td><td>[LAZYLEN(GLOB.clients)]</td></tr>
+				<tr><td>Игроков в лобби:</td><td>[LAZYLEN(GLOB.new_player_list)]</td></tr>
+			"}
+
 		info = {"
-			<div class="start-time">
-				<div class="text">До начала раунда</div>
-				<div class="time-left">[time_remaining]</div>
+			<div class="lobby-info">
+				<div class="lobby-info-title">До начала раунда</div>
+				<div class="lobby-info-content">[time_remaining]</div>
 			</div>
 			<hr>
-			<div class="ready-count">
-				<div class="players-ready">Игроков готово: [SSticker.totalPlayersReady] / [LAZYLEN(GLOB.clients)]</div>
-				[viewer.client.holder ? "<div class='admins-ready admin'>Админов готово: [SSticker.total_admins_ready] / [length(GLOB.admins)]</div>" : ""]
-			</div>
+			<table class="lobby-info-table">[players]</table>
 		"}
 
 		title_output(viewer.client, info, "update_info")

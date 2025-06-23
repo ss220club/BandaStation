@@ -36,6 +36,12 @@
   src: url("PixCyrillic.ttf");
 }
 
+@property --loading-percentage {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
 /* Common */
 body,
 html {
@@ -97,6 +103,8 @@ input,
   width: 100vw;
   height: 100vh;
   filter: drop-shadow(0 0 1em hsla(0, 0%, 0%, 0.33));
+  transition-property: transform;
+  transition-duration: var(--transition-time);
   z-index: 0;
 }
 
@@ -119,23 +127,75 @@ input,
   color: var(--color-text-gold);
 }
 
-/* Layout */
-.logo {
+/**
+ * MARK: Layout
+ */
+html.loading {
+  body:before {
+    content: '';
+    opacity: calc(100% - var(--loading-percentage));
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    transition: opacity var(--transition-time);
+    z-index: 1;
+  }
+
+  #logo {
+    &:before {
+      background-color: var(--color-base);
+      color: var(--color-text);
+      border-color: var(--color-primary);
+    }
+
+    img {
+      padding: 8px;
+    }
+  }
+
+  #screen_image {
+    transform: scale(max(75%, var(--loading-percentage)));
+  }
+}
+
+#logo {
   overflow: hidden;
   display: inline-flex;
   position: absolute;
   top: 0;
   right: 1rem;
-  background-color: var(--color-base);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-primary) var(--loading-percentage),
+    var(--color-base) var(--loading-percentage)
+  );
   border-radius: 99999px;
   transform: translateY(-75%);
-  backdrop-filter: var(--blur);
   box-shadow: var(--shadow);
+  transition: --loading-percentage var(--transition-time) ease-in-out;
 
-  & img {
+  img {
     height: 96px;
-    padding: 0.5rem;
+    padding: 4px;
     background-color: var(--color-hover);
+    transition: padding var(--transition-time);
+    transition-delay: var(--transition-time);
+  }
+
+  &:before {
+    content: attr(data-loaded);
+    position: absolute;
+    inset: 4px;
+    font-size: 2.33rem;
+    font-family: "Pix Cyrillic";
+    text-align: center;
+    align-content: center;
+    color: transparent;
+    border: 1px solid transparent;
+    border-radius: 99999px;
+    transition-property: background-color, color;
+    transition-duration: var(--transition-time);
+    z-index: 1;
   }
 }
 
@@ -175,7 +235,7 @@ input,
   justify-content: space-between;
   margin-top: 0.5rem;
 
-  & a.lobby_element {
+  a.lobby_element {
     flex: 1;
     text-align: center;
     font-size: 1.5rem;
@@ -183,25 +243,69 @@ input,
     margin: 0.33rem;
     border-radius: calc(var(--border-radius-large) - 0.05rem);
 
-    & .lobby-text {
+    .lobby-text {
       vertical-align: middle;
     }
 
-    & .lobby-tooltip {
+    .lobby-tooltip {
       width: max-content;
     }
   }
 }
 
-/* Lobby Info */
-#lobby_info:not(:empty) {
-  overflow: hidden;
-  display: inline-block;
+/**
+ * MARK: Lobby Info
+ */
+#lobby_info {
+  display: inline-flex;
+  flex-direction: column;
   position: fixed;
   top: 0.5rem;
   right: 0.5rem;
-  font-family: "Pix Cyrillic";
+  gap: 0.5rem;
+  width: 15rem;
+  transition: transform var(--transition-time);
+  z-index: 2;
+
+  .loading {
+    color: var(--color-text-bad);
+  }
+
+  .lobby-info {
+    text-align: center;
+  }
+
+  .lobby-info-title {
+    font-size: 1.5rem;
+    margin: -0.5rem -0.75rem 0;
+    padding: 0.33rem 0.5rem 0.25rem;
+    background-color: var(--color-hover);
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  .lobby-info-content {
+    margin: 0.75rem 0 -0.25rem;
+    font-size: 1.75rem;
+  }
+
+  .lobby-info-table {
+    width: 100%;
+
+    td {
+      padding: 0;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}
+
+#loading,
+#round_info {
+  overflow: hidden;
   font-size: 1.15rem;
+  font-family: "Pix Cyrillic";
   padding: 0.5rem 0.75rem;
   background-color: var(--color-base);
   color: var(--color-text-accent);
@@ -209,31 +313,23 @@ input,
   border-radius: var(--border-radius-large);
   box-shadow: var(--shadow);
   backdrop-filter: var(--blur);
-  transition: transform var(--transition-time);
-  z-index: 2;
 
-  & .loading {
-    color: var(--color-text-bad);
-  }
-
-  & .start-time {
-    text-align: center;
-
-    & .text {
-      margin: -0.5rem -0.75rem 0;
-      padding: 0.33rem 0.5rem 0.25rem;
-      background-color: var(--color-hover);
-      border-bottom: 2px solid var(--color-primary);
-    }
-
-    & .time-left {
-      margin: 0.75rem 0 -0.25rem;
-      font-size: 1.75rem;
-    }
+  &:empty {
+    display: none;
   }
 }
 
-/* Buttons */
+#loading-name {
+  margin-top: 0.5rem !important;
+
+  &:before {
+    content: attr(data-name);
+  }
+}
+
+/**
+ * MARK: Buttons
+ */
 a.lobby_element {
   display: block;
   font-size: 1.35rem;
@@ -255,7 +351,7 @@ a.lobby_element {
     transition-duration: 0s;
   }
 
-  & .lobby-text {
+  .lobby-text {
     display: block;
     overflow: hidden;
     white-space: nowrap;
@@ -263,7 +359,9 @@ a.lobby_element {
   }
 }
 
-/* Tooltips */
+/**
+ * MARK: Tooltips
+ */
 .lobby-tooltip {
   opacity: 0;
   visibility: hidden;
@@ -274,7 +372,7 @@ a.lobby_element {
   transition-property: opacity, visibility;
   transition-duration: var(--transition-time);
 
-  & .lobby-tooltip-content {
+  .lobby-tooltip-content {
     display: inline-block;
     font-size: 1.15rem;
     padding: 0.33em 0.66em;
@@ -315,7 +413,9 @@ a.lobby_element:hover .lobby-tooltip {
   visibility: visible;
 }
 
-/* Character info */
+/**
+ * MARK: Character info
+ */
 .lobby-name {
   display: flex;
   flex-direction: column;
@@ -344,7 +444,9 @@ a.lobby_element:hover .lobby-tooltip {
   margin-top: 0.25em;
 }
 
-/*  Collapse button */
+/**
+ * MARK: Collapse button
+ */
 .lobby-collapse {
   cursor: pointer;
   display: flex;
@@ -383,7 +485,9 @@ a.lobby_element:hover .lobby-tooltip {
   }
 }
 
-/* Notice */
+/**
+ * MARK: Notice
+ */
 #container_notice {
   position: absolute;
   bottom: 0;
@@ -404,7 +508,9 @@ a.lobby_element:hover .lobby-tooltip {
   z-index: 2;
 }
 
-/* Font Awesome */
+/**
+ * MARK: Font Awesome
+ */
 .lobby-text:before {
   display: inline-block;
   width: 22px;
@@ -477,7 +583,9 @@ a.lobby_element:hover .lobby-tooltip {
   content: "\f14a";
 }
 
-/* Checkbox handling */
+/**
+ * MARK: Checkbox handling
+ */
 #hide_menu:checked ~ .lobby_wrapper {
   box-shadow: none;
   transform: translateX(calc(-100% - 1rem));

@@ -5,10 +5,11 @@
 	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
 	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 	var/mob/dead/new_player/player = user
+	var/loading_percentage = CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100
 	var/list/html = list()
 	html += {"
 		<!DOCTYPE html>
-		<html>
+		<html [!MC_RUNNING() ? "class='loading' style='--loading-percentage: [loading_percentage]%;'" : ""]>
 		<head>
 			<meta charset="UTF-8">
 			<title>Title Screen</title>
@@ -39,7 +40,7 @@
 		<div class="lobby_element lobby-name">
 			<label class="lobby_element lobby-collapse" for="hide_menu"></label>
 			<span id="character_name">[player.client.prefs.read_preference(/datum/preference/name/real_name)]</span>
-			<div class="logo">
+			<div id="logo" data-loaded="[round(loading_percentage)]">
 				<img src="[SSassets.transport.get_asset_url(asset_name = "ss220_logo.png")]">
 			</div>
 		</div>"}
@@ -104,9 +105,17 @@
 
 	html += {"</div>"}
 	html += {"<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>"}
-	html += {"<div id="lobby_info"></div>"}
-	html += {"</body>"}
+	html += {"<div id="lobby_info"><div id="round_info"></div>"}
+	if(!MC_RUNNING())
+		html += {"
+			<div id="loading" class="lobby-info">
+				<div class="lobby-info-title">Загружаем</div>
+				<div id="loading-name" class="lobby-info-content" data-name="[SStitle.subsystem_loading]"></div>
+			</div>
+		"}
+	html += {"</div>"}
 
+	html += {"</body>"}
 	html += {"
 		<script language="JavaScript">
 			function call_byond(href, value) {
@@ -214,9 +223,27 @@
 				}
 			}
 
-			const info_placement = document.getElementById("lobby_info");
+			const info_placement = document.getElementById("round_info");
 			function update_info(info) {
 				info_placement.innerHTML = info;
+			}
+
+			const loading_name = document.getElementById("loading-name");
+			function update_loading_name(name) {
+				loading_name.setAttribute("data-name", name);
+			}
+
+			const logo = document.getElementById("logo");
+			function update_loaded_count(count) {
+				logo.setAttribute("data-loaded", `${Math.round(count)}%`);
+				document.documentElement.style.setProperty("--loading-percentage", `${count}%`);
+			}
+
+			const loading_element = document.getElementById("loading");
+			function finish_loading() {
+				loading_element.remove();
+				document.documentElement.style = "";
+				document.documentElement.className = "";
 			}
 
 			/* Return focus to Byond after click */
