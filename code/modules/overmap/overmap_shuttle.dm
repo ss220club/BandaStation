@@ -631,19 +631,21 @@
 			partial_x += add_partial_x
 			partial_y += add_partial_y
 			var/did_move = FALSE
-			if(partial_y > 16)
+			var/new_x
+			var/new_y
+			while(partial_y > 16)
 				did_move = TRUE
 				partial_y -= 32
-				y = min(y+1,world.maxy)
-			else if(partial_y < -16)
+				new_y = min(y+1,world.maxy)
+			while(partial_y < -16)
 				did_move = TRUE
 				partial_y += 32
-				y = max(y-1,1)
-			if(partial_x > 16)
+				new_y = max(y-1,1)
+			while(partial_x > 16)
 				did_move = TRUE
 				partial_x -= 32
-				x = min(x+1,world.maxx)
-			else if(partial_x < -16)
+				new_x = min(x+1,world.maxx)
+			while(partial_x < -16)
 				did_move = TRUE
 				partial_x += 32
 				x = max(x-1,1)
