@@ -171,6 +171,14 @@ html.loading {
   #screen_image {
     transform: scale(max(75%, var(--loading-percentage)));
   }
+
+  .lobby-name:before {
+    content: "Загружаем...";
+  }
+
+  #character_name:before {
+    content: attr(data-loading);
+  }
 }
 
 #logo {
@@ -325,7 +333,6 @@ html.loading {
   }
 }
 
-#loading,
 #round_info {
   overflow: hidden;
   font-size: 1.15rem;
@@ -347,14 +354,6 @@ html.loading {
   @starting-style {
     opacity: 0;
     transform: translateY(-100%);
-  }
-}
-
-#loading-name {
-  margin-top: 0.5rem !important;
-
-  &:before {
-    content: attr(data-name);
   }
 }
 
@@ -474,6 +473,10 @@ a.lobby_element:hover .lobby-tooltip {
 
 #character_name {
   margin-top: 0.25em;
+
+  &:before {
+    content: attr(data-name);
+  }
 }
 
 /**

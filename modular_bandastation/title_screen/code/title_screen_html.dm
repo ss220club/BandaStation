@@ -39,7 +39,7 @@
 	html += {"
 		<div class="lobby_element lobby-name">
 			<label class="lobby_element lobby-collapse" for="hide_menu"></label>
-			<span id="character_name">[player.client.prefs.read_preference(/datum/preference/name/real_name)]</span>
+			<span id="character_name" data-loading="[SStitle.subsystem_loading]" data-name="[player.client.prefs.read_preference(/datum/preference/name/real_name)]"></span>
 			<div id="logo" data-loaded="[round(loading_percentage)]%">
 				<img src="[SSassets.transport.get_asset_url(asset_name = "ss220_logo.png")]">
 			</div>
@@ -108,13 +108,6 @@
 	html += {"</div>"}
 	html += {"<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>"}
 	html += {"<div id="lobby_info"><div id="round_info"></div>"}
-	if(!MC_RUNNING())
-		html += {"
-			<div id="loading" class="lobby-info">
-				<div class="lobby-info-title">Загружаем</div>
-				<div id="loading-name" class="lobby-info-content" data-name="[SStitle.subsystem_loading]"></div>
-			</div>
-		"}
 	html += {"</div>"}
 
 	html += {"</body>"}
@@ -191,7 +184,7 @@
 
 			const character_name_slot = document.getElementById("character_name");
 			function update_character_name(name) {
-				character_name_slot.textContent = name;
+				character_name_slot.setAttribute("data-name", name);
 			}
 
 			let image_src;
@@ -230,9 +223,9 @@
 				info_placement.innerHTML = info;
 			}
 
-			const loading_name = document.getElementById("loading-name");
+			const loading_name = document.getElementById("character_name");
 			function update_loading_name(name) {
-				loading_name.setAttribute("data-name", name);
+				loading_name.setAttribute("data-loading", name);
 			}
 
 			const logo = document.getElementById("logo");
@@ -241,9 +234,7 @@
 				document.documentElement.style.setProperty("--loading-percentage", `${count}%`);
 			}
 
-			const loading_element = document.getElementById("loading");
 			function finish_loading() {
-				loading_element.remove();
 				document.documentElement.style = "";
 				document.documentElement.className = "";
 			}
