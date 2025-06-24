@@ -5,7 +5,7 @@
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	/// The current notice text, or null
 	var/notice
-	/// Last loaded subsystem name
+	/// Currently loading subsystem name
 	var/static/subsystem_loading
 	/// Number of loaded subsystems
 	var/static/subsystems_loaded = 0
