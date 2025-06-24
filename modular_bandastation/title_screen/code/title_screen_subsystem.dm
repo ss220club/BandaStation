@@ -5,7 +5,7 @@
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	/// The current notice text, or null
 	var/notice
-	/// Last loaded subsystem name. null if all subsystems loaded
+	/// Last loaded subsystem name
 	var/static/subsystem_loading
 	/// Number of loaded subsystems
 	var/static/subsystems_loaded = 0
@@ -42,13 +42,16 @@
 		time_remaining = "<span class='bad'>ВЕЧНОСТЬ!!!</span>"
 	else if(time_remaining > 0)
 		time_remaining = "[round(time_remaining / 10)] сек."
-	else if(SSticker.current_state == GAME_STATE_SETTING_UP)
-		time_remaining = "<span class='good'>Раунд начинается...</span>"
-	else
-		time_remaining = "<span class='good'>Раунд идёт</span>"
+
+	switch(SSticker.current_state)
+		if(GAME_STATE_SETTING_UP)
+			time_remaining = "<span class='good'>Раунд начинается...</span>"
+		if(GAME_STATE_PLAYING)
+			time_remaining = "<span class='good'>Раунд идёт</span>"
+		if(GAME_STATE_FINISHED)
+			time_remaining = "<span class='bad'>Раунд закончился</span>"
 
 	var/game_playing = SSticker.current_state == GAME_STATE_PLAYING || SSticker.current_state == GAME_STATE_FINISHED
-
 	for(var/mob/dead/new_player/viewer as anything in GLOB.new_player_list)
 		var/info
 		var/players

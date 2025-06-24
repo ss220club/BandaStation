@@ -134,6 +134,16 @@ input,
 /**
  * MARK: Layout
  */
+@keyframes loading-shine {
+  from {
+    background-position-x: 50%;
+  }
+
+  to {
+    background-position-x: -55%;
+  }
+}
+
 html.loading {
   body:before {
     content: "";
@@ -146,7 +156,7 @@ html.loading {
   }
 
   #logo {
-    transition: --loading-percentage var(--transition-time) ease-in-out;
+    transition-duration: var(--transition-time);
 
     &:before {
       content: "";
@@ -173,7 +183,17 @@ html.loading {
   }
 
   .lobby-name:before {
-    content: "Загружаем...";
+    content: "Происходит загруз-очка...";
+    background: linear-gradient(
+      90deg,
+      var(--color-text-translucent) 2.5em,
+      var(--color-text-accent) 5em,
+      var(--color-text-translucent) 7.5em
+    );
+    background-size: 200%;
+    background-clip: text;
+    color: transparent;
+    animation: loading-shine 5s infinite linear;
   }
 
   #character_name:before {
@@ -197,6 +217,7 @@ html.loading {
   border-radius: 99999px;
   transform: translateY(-75%);
   box-shadow: var(--shadow);
+  transition: --loading-percentage 0s ease-in-out;
 
   img {
     height: 80px;
@@ -458,8 +479,8 @@ a.lobby_element:hover .lobby-tooltip {
   background-color: var(--color-base);
   color: var(--color-text-accent);
   border-bottom: 1px solid var(--color-border);
-  border-radius: calc(var(--border-radius-large) - 0.05rem)
-    calc(var(--border-radius-large) - 0.05rem) 0 0;
+  border-radius: calc(var(--border-radius-large) - 2px)
+    calc(var(--border-radius-large) - 2px) 0 0;
   box-shadow: 0 0.25em 1em hsla(0, 0%, 0%, 0.5);
 
   &:before {
