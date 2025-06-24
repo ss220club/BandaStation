@@ -6,11 +6,11 @@
 	/// The current notice text, or null
 	var/notice
 	/// Currently loading subsystem name
-	var/static/subsystem_loading
+	var/subsystem_loading
 	/// Number of loaded subsystems
-	var/static/subsystems_loaded = 0
+	var/subsystems_loaded = 0
 	/// Number of sybsystems that need to be loaded
-	var/static/subsystems_total = 0
+	var/subsystems_total = 0
 	/// Currently set title screen
 	var/datum/title_screen/current_title_screen
 	/// The list of image files available to be picked for title screen
