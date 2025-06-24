@@ -1,7 +1,7 @@
 import { sortBy } from 'common/collections';
-import { PropsWithChildren, ReactNode } from 'react';
+import { CSSProperties, PropsWithChildren, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Box, Button, Dropdown, Stack, Tooltip } from 'tgui-core/components';
+import { Button, Section, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
@@ -23,35 +23,32 @@ function sortJobs(entries: [string, Job][], head?: string) {
   );
 }
 
-const PRIORITY_BUTTON_SIZE = '18px';
-
 type PriorityButtonProps = {
   name: string;
-  color: string;
+  position: number;
   modifier?: string;
-  enabled: boolean;
+  selected: boolean;
   onClick: () => void;
 };
 
 function PriorityButton(props: PriorityButtonProps) {
-  const className = `PreferencesMenu__Jobs__departments__priority`;
+  const className = `PreferencesMenu__PriorityButton`;
+  const positionVariable = {
+    '--button-position': props.position,
+  } as CSSProperties;
 
   return (
-    <Stack.Item height={PRIORITY_BUTTON_SIZE}>
-      <Button
-        className={classes([
-          className,
-          props.modifier && `${className}--${props.modifier}`,
-        ])}
-        color={props.enabled ? props.color : 'white'}
-        circular
-        onClick={props.onClick}
-        tooltip={props.name}
-        tooltipPosition="bottom"
-        height={PRIORITY_BUTTON_SIZE}
-        width={PRIORITY_BUTTON_SIZE}
-      />
-    </Stack.Item>
+    <Button
+      className={classes([
+        className,
+        props.modifier,
+        props.selected && 'selected',
+      ])}
+      style={positionVariable}
+      onClick={props.onClick}
+    >
+      {props.name}
+    </Button>
   );
 }
 
@@ -86,26 +83,7 @@ function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
   }
 
   createSetPriorityCache[jobName] = createSetPriority;
-
   return createSetPriority;
-}
-
-function PriorityHeaders() {
-  const className = 'PreferencesMenu__Jobs__PriorityHeader';
-
-  return (
-    <Stack>
-      <Stack.Item grow />
-
-      <Stack.Item className={className}>Откл.</Stack.Item>
-
-      <Stack.Item className={className}>Низк.</Stack.Item>
-
-      <Stack.Item className={className}>Средн.</Stack.Item>
-
-      <Stack.Item className={className}>Высок.</Stack.Item>
-    </Stack>
-  );
 }
 
 type PriorityButtonsProps = {
@@ -118,59 +96,56 @@ function PriorityButtons(props: PriorityButtonsProps) {
   const { createSetPriority, isOverflow, priority } = props;
 
   return (
-    <Stack
-      style={{
-        alignItems: 'center',
-        height: '100%',
-        justifyContent: 'flex-end',
-        paddingLeft: '0.3em',
-      }}
-    >
+    <Stack className="PreferencesMenu__Priority">
       {isOverflow ? (
         <>
           <PriorityButton
-            name="Отключить"
+            name="Откл."
             modifier="off"
-            color="light-grey"
-            enabled={!priority}
+            position={1}
+            selected={!priority}
             onClick={createSetPriority(null)}
           />
 
           <PriorityButton
-            name="On"
-            color="green"
-            enabled={!!priority}
+            name="Вкл."
+            modifier="high"
+            position={0}
+            selected={!!priority}
             onClick={createSetPriority(JobPriority.High)}
           />
         </>
       ) : (
         <>
           <PriorityButton
-            name="Отключить"
+            name="Откл."
             modifier="off"
-            color="light-grey"
-            enabled={!priority}
+            position={3}
+            selected={!priority}
             onClick={createSetPriority(null)}
           />
 
           <PriorityButton
-            name="Низкий"
-            color="red"
-            enabled={priority === JobPriority.Low}
+            name="Низк."
+            modifier="low"
+            position={2}
+            selected={priority === JobPriority.Low}
             onClick={createSetPriority(JobPriority.Low)}
           />
 
           <PriorityButton
-            name="Средний"
-            color="yellow"
-            enabled={priority === JobPriority.Medium}
+            name="Сред."
+            modifier="mid"
+            position={1}
+            selected={priority === JobPriority.Medium}
             onClick={createSetPriority(JobPriority.Medium)}
           />
 
           <PriorityButton
-            name="Высокий"
-            color="green"
-            enabled={priority === JobPriority.High}
+            name="Выс."
+            modifier="high"
+            position={0}
+            selected={priority === JobPriority.High}
             onClick={createSetPriority(JobPriority.High)}
           />
         </>
@@ -181,85 +156,54 @@ function PriorityButtons(props: PriorityButtonsProps) {
 
 type JobRowProps = {
   className?: string;
-  job: Job;
   name: string;
+  job: Job;
 };
 
 function JobRow(props: JobRowProps) {
   const { data } = useBackend<PreferencesMenuData>();
   const { className, job, name } = props;
 
-  const isOverflow = data.overflow_role === name;
-  const priority = data.job_preferences[name];
-
-  const createSetPriority = createCreateSetPriorityFromName(name);
-
+  let rightSide: ReactNode;
   const experienceNeeded =
     data.job_required_experience && data.job_required_experience[name];
   const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
-
-  let rightSide: ReactNode;
 
   if (experienceNeeded) {
     const { experience_type, required_playtime } = experienceNeeded;
     const hoursNeeded = Math.ceil(required_playtime / 60);
 
-    rightSide = (
-      <Stack align="center" height="100%" pr={1}>
-        <Stack.Item grow textAlign="right">
-          <b>{hoursNeeded}h</b> как {experience_type}
-        </Stack.Item>
-      </Stack>
-    );
+    rightSide = `${(<b>{hoursNeeded}ч.</b>)} как ${experience_type}`;
   } else if (daysLeft > 0) {
-    rightSide = (
-      <Stack align="center" height="100%" pr={1}>
-        <Stack.Item grow textAlign="right">
-          Нужно ещё дней: <b>{daysLeft}</b>
-        </Stack.Item>
-      </Stack>
-    );
+    rightSide = `Нужно ещё дней: ${(<b>{daysLeft}</b>)}`;
   } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
-    rightSide = (
-      <Stack align="center" height="100%" pr={1}>
-        <Stack.Item grow textAlign="right">
-          <b>Забанен</b>
-        </Stack.Item>
-      </Stack>
-    );
+    rightSide = <b>Забанен</b>;
   } else {
+    const priority = data.job_preferences[name];
+    const isOverflow = data.overflow_role === name;
+    const createSetPriority = createCreateSetPriorityFromName(name);
+
     rightSide = (
-      // BANDASTATION EDIT - START - Pref Job Slots
-      <Stack align="center" justify="flex-end" height="100%" pr={1}>
-        <JobSlotDropdown name={name} />
+      <>
         <PriorityButtons
           createSetPriority={createSetPriority}
           isOverflow={isOverflow}
           priority={priority}
         />
-      </Stack>
-      // BANDASTATION EDIT - END
+        <JobSlotDropdown name={name} />
+      </>
     );
   }
 
   return (
-    <Stack.Item className={className} height="100%" mt={0}>
+    <Stack.Item className={className}>
       <Stack fill align="center">
         <Tooltip content={job.description} position="bottom-start">
-          <Stack.Item
-            className="job-name"
-            width="50%"
-            style={{
-              paddingLeft: '0.3em',
-            }}
-          >
+          <Stack.Item grow className="job-name">
             {JOBS_RU[name] || name}
           </Stack.Item>
         </Tooltip>
-
-        <Stack.Item grow className="options">
-          {rightSide}
-        </Stack.Item>
+        <Stack.Item className="options">{rightSide}</Stack.Item>
       </Stack>
     </Stack.Item>
   );
@@ -270,11 +214,13 @@ type DepartmentProps = {
 } & PropsWithChildren;
 
 function Department(props: DepartmentProps) {
-  const { children, department: name } = props;
-  const className = `PreferencesMenu__Jobs__departments--${name.replace(' ', '')}`;
+  const { department: name } = props;
+  const className = `PreferencesMenu__Department`;
 
   const data = useServerPrefs();
-  if (!data) return;
+  if (!data) {
+    return;
+  }
 
   const { departments, jobs } = data.jobs;
   const department = departments[name];
@@ -293,99 +239,100 @@ function Department(props: DepartmentProps) {
   );
 
   return (
-    <Box>
-      <Stack fill vertical g={0}>
-        {jobsForDepartment.map(([name, job]) => {
-          return (
-            <JobRow
-              className={classes([
-                className,
-                name === department.head && 'head',
-              ])}
-              key={name}
-              job={job}
-              name={name}
-            />
-          );
-        })}
-      </Stack>
-
-      {children}
-    </Box>
+    <Stack fill vertical g={0}>
+      {jobsForDepartment.map(([jobName, job]) => {
+        return (
+          <JobRow
+            key={jobName}
+            name={jobName}
+            job={job}
+            className={classes([
+              className,
+              `${className}--${name.replace(' ', '')}`,
+              jobName === department.head && 'head',
+            ])}
+          />
+        );
+      })}
+    </Stack>
   );
 }
 
-function JoblessRoleDropdown(props) {
+function JoblessRoleDropdown() {
   const { act, data } = useBackend<PreferencesMenuData>();
   const selected = data.character_preferences.misc.joblessrole;
-
   const options = [
     {
-      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] || data.overflow_role} если не удалось войти`,
+      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] || data.overflow_role}`,
       value: JoblessRole.BeOverflow,
     },
     {
-      displayText: `Выбрать случайную должность, если не удалось войти`,
+      displayText: `Выбрать случайную должность`,
       value: JoblessRole.BeRandomJob,
     },
     {
-      displayText: `Вернуться в лобби, если не удалось войти`,
+      displayText: `Вернуться в лобби`,
       value: JoblessRole.ReturnToLobby,
     },
   ];
 
-  const selection = options?.find(
-    (option) => option.value === selected,
-  )!.displayText;
-
+  const setPreference = createSetPreference(act, 'joblessrole');
   return (
-    <Box position="absolute" right={0} width="30%">
-      <Dropdown
-        width="100%"
-        selected={selection}
-        onSelected={createSetPreference(act, 'joblessrole')}
-        options={options}
-      />
-    </Box>
+    <Section title="Что делать если не удалось войти?">
+      <Stack fill textAlign="center">
+        {options.map((option) => (
+          <Stack.Item grow key={option.value}>
+            <Button
+              fluid
+              color="transparent"
+              selected={selected === option.value}
+              onClick={() => setPreference(option.value)}
+            >
+              {option.displayText}
+            </Button>
+          </Stack.Item>
+        ))}
+      </Stack>
+    </Section>
   );
 }
 
 export function JobsPage() {
   return (
-    <>
-      <JoblessRoleDropdown />
-      <Stack vertical fill>
-        <Stack.Item mt={15}>
-          <Stack fill g={1} className="PreferencesMenu__Jobs">
-            <Stack.Item>
+    <Stack fill vertical g={0}>
+      <Stack.Item>
+        <JoblessRoleDropdown />
+      </Stack.Item>
+      <Stack.Divider />
+      <Stack.Item grow>
+        <Section fill>
+          <Stack fill g={1} align="center" className="PreferencesMenu__Jobs">
+            <Stack.Item grow minWidth={0}>
               <Stack vertical>
-                <PriorityHeaders />
                 <Department department="Engineering" />
                 <Department department="Science" />
                 <Department department="Silicon" />
                 <Department department="Assistant" />
               </Stack>
             </Stack.Item>
-            <Stack.Item mt={-5.9}>
+            <Stack.Item grow minWidth={0}>
               <Stack vertical>
-                <PriorityHeaders />
                 <Department department="Captain" />
                 <Department department="NT Representation" />
                 <Department department="Service" />
                 <Department department="Cargo" />
               </Stack>
             </Stack.Item>
-            <Stack.Item>
+            <Stack.Item grow minWidth={0}>
               <Stack vertical>
-                <PriorityHeaders />
                 <Department department="Security" />
                 <Department department="Justice" />
                 <Department department="Medical" />
               </Stack>
             </Stack.Item>
           </Stack>
-        </Stack.Item>
-      </Stack>
-    </>
+        </Section>
+      </Stack.Item>
+    </Stack>
   );
 }
