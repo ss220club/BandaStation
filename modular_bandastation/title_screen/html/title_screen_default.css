@@ -25,6 +25,7 @@
   --color-hyperlink: hsl(220, 100%, 70%);
 
   --menu-width: 20rem;
+  --indent-default: 0.33rem;
   --border-radius-small: 0.25rem;
   --border-radius-large: 0.75rem;
   --transition-time: 0.2s;
@@ -72,7 +73,9 @@ a {
 
 hr {
   width: 100%;
+  margin: var(--indent-default) 0;
   border-color: var(--color-border);
+  transform: scaleX(0.95);
 }
 
 img {
@@ -133,7 +136,7 @@ input,
  */
 html.loading {
   body:before {
-    content: '';
+    content: "";
     opacity: calc(100% - var(--loading-percentage));
     position: absolute;
     inset: 0;
@@ -146,7 +149,7 @@ html.loading {
     transition: --loading-percentage var(--transition-time) ease-in-out;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       inset: var(--padding);
       background-color: var(--color-base);
@@ -236,27 +239,36 @@ html.loading {
 .lobby_buttons {
   display: flex;
   flex-direction: column;
+  gap: 3px;
 }
 
 .lobby_buttons {
-  margin: 0.5em;
+  margin: var(--indent-default);
 }
 
 .lobby_buttons-end {
   display: flex;
-  justify-content: space-between;
+  gap: var(--indent-default);
   margin-top: 0.5rem;
+  padding: var(--indent-default);
 
   a.lobby_element {
     flex: 1;
-    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
-    padding: 0.5rem 0;
-    margin: 0.33rem;
-    border-radius: calc(var(--border-radius-large) - 0.05rem);
+    height: 2em;
+    border-radius: calc(var(--border-radius-large) - var(--indent-default));
 
     .lobby-text {
-      vertical-align: middle;
+      overflow: visible;
+      line-height: 1px;
+
+      &:before {
+        width: 32px;
+        margin: 0;
+      }
     }
 
     .lobby-tooltip {
@@ -355,7 +367,7 @@ a.lobby_element {
   padding: 0.33em 0.33em 0.25em;
   color: var(--color-text-translucent);
   border: 1px solid transparent;
-  border-radius: var(--border-radius-small);
+  border-radius: calc(var(--border-radius-large) - var(--indent-default));
   transition-property: background-color, color, border-color;
   transition-duration: var(--transition-time);
 
@@ -414,6 +426,7 @@ a.lobby_element {
   }
 
   &[data-position="top-start"] {
+    left: 0;
     right: unset;
     transform: translate(0, -100%);
   }
@@ -584,6 +597,15 @@ a.lobby_element:hover .lobby-tooltip {
 .lobby-discord .lobby-text:before {
   content: "\f392";
   font-family: "Font Awesome 6 Brands";
+}
+
+.lobby-github .lobby-text:before {
+  content: "\f09b";
+  font-family: "Font Awesome 6 Brands";
+}
+
+.lobby-bug .lobby-text:before {
+  content: "\f188";
 }
 
 .lobby-changelog .lobby-text:before {

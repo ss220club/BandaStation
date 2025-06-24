@@ -59,14 +59,16 @@
 		client?.changelog()
 
 	else if(href_list["wiki"])
-		if(tgui_alert(usr, "Хотите открыть нашу вики?", "Вики", list("Да", "Нет")) != "Да")
-			return
-		client << link("https://bs.ss220.club")
+		client?.wiki()
 
 	else if(href_list["discord"])
-		if(tgui_alert(usr, "Хотите перейти в наш дискорд сервер?", "Дискорд", list("Да", "Нет")) != "Да")
-			return
-		client << link("https://discord.gg/ss220")
+		client?.discord()
+
+	else if(href_list["github"])
+		client?.github()
+
+	else if(href_list["bug"])
+		client?.reportissue()
 
 	else if(href_list["trait_signup"])
 		var/datum/station_trait/clicked_trait

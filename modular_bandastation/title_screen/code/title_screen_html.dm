@@ -98,7 +98,9 @@
 	html += {"
 		<div class="lobby_buttons-end">
 			[create_button(player, "wiki", tooltip = "Перейти на вики", tooltip_position = "top-start")]
-			[create_button(player, "discord", tooltip = "Открыть наш дискорд", tooltip_position = "top")]
+			[create_button(player, "discord", tooltip = "Открыть наш дискорд", tooltip_position = "top-start")]
+			[create_button(player, "github", tooltip = "Перейти в наш репозиторий", tooltip_position = "top")]
+			[create_button(player, "bug", tooltip = "Сообщить о баге", tooltip_position = "top")]
 			[create_button(player, "changelog", tooltip = "Открыть чейнджлог", tooltip_position = "top-end")]
 		</div>
 	"}
