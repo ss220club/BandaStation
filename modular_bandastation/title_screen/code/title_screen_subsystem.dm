@@ -6,11 +6,11 @@
 	/// The current notice text, or null
 	var/notice
 	/// Currently loading subsystem name
-	var/subsystem_loading
+	var/static/subsystem_loading
 	/// Number of loaded subsystems
-	var/subsystems_loaded = 0
+	var/static/subsystems_loaded = 0
 	/// Number of sybsystems that need to be loaded
-	var/subsystems_total = 0
+	var/static/subsystems_total = 0
 	/// Currently set title screen
 	var/datum/title_screen/current_title_screen
 	/// The list of image files available to be picked for title screen
@@ -25,10 +25,6 @@
 /datum/controller/subsystem/title/Recover()
 	current_title_screen = SStitle.current_title_screen
 	title_images_pool = SStitle.title_images_pool
-
-	subsystem_loading = SStitle.subsystem_loading
-	subsystems_loaded = SStitle.subsystems_loaded
-	subsystems_total = SStitle.subsystems_total
 
 /datum/controller/subsystem/title/fire(resumed = FALSE)
 	update_info()
