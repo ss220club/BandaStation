@@ -1,6 +1,6 @@
 :root {
   --color-base: hsl(0, 0%, 17.5%);
-  --color-section: hsla(0, 0%, 7.5%, 0.85);
+  --color-section: hsla(0, 0%, 7.5%, 0.75);
   --color-border: hsla(0, 0%, 100%, 0.1);
 
   --color-action: hsl(0, 0%, 50%);
@@ -36,6 +36,11 @@
 @font-face {
   font-family: "Pix Cyrillic";
   src: url("PixCyrillic.ttf");
+}
+
+@font-face {
+  font-family: "Grand9K Pixel";
+  src: url("Grand9K_Pixel_Rus.ttf");
 }
 
 @property --loading-percentage {
@@ -231,7 +236,7 @@ html.loading {
     inset: var(--padding);
     line-height: 1px;
     font-size: 1.65rem;
-    font-family: "Pix Cyrillic";
+    font-family: "Grand9K Pixel";
     text-align: center;
     align-content: center;
     color: transparent;
@@ -337,7 +342,8 @@ html.loading {
   }
 
   .lobby-info-content {
-    margin: 0.75rem 0 -0.25rem;
+    line-height: 1em;
+    margin: 0.75rem 0 -0.1rem;
     font-size: 1.75rem;
   }
 
