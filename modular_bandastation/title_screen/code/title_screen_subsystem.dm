@@ -6,11 +6,11 @@
 	/// The current notice text, or null
 	var/notice
 	/// Currently loading subsystem name
-	var/static/subsystem_loading
+	var/subsystem_loading
 	/// Number of loaded subsystems
-	var/static/subsystems_loaded = 0
+	var/subsystems_loaded = 0
 	/// Number of sybsystems that need to be loaded
-	var/static/subsystems_total = 0
+	var/subsystems_total = 0
 	/// Currently set title screen
 	var/datum/title_screen/current_title_screen
 	/// The list of image files available to be picked for title screen
@@ -25,6 +25,10 @@
 /datum/controller/subsystem/title/Recover()
 	current_title_screen = SStitle.current_title_screen
 	title_images_pool = SStitle.title_images_pool
+
+	subsystem_loading = SStitle.subsystem_loading
+	subsystems_loaded = SStitle.subsystems_loaded
+	subsystems_total = SStitle.subsystems_total
 
 /datum/controller/subsystem/title/fire(resumed = FALSE)
 	update_info()
@@ -76,6 +80,27 @@
 		"}
 
 		title_output(viewer.client, info, "update_info")
+
+
+/datum/controller/subsystem/title/proc/count_initable_subsystems(list/subsystems)
+	for(var/datum/controller/subsystem/subsystem as anything in subsystems)
+		if ((subsystem.flags & SS_NO_INIT) || subsystem.initialized)
+			continue
+		SStitle.subsystems_total++
+
+/**
+ * Sets the currently loading subsystem name.
+ */
+/datum/controller/subsystem/title/proc/set_loading_subsystem(name)
+	SStitle.subsystem_loading = name
+	SStitle.title_output_to_all(SStitle.subsystem_loading, "update_loading_name")
+
+/**
+ * Increases the number of loaded subsystems.
+ */
+/datum/controller/subsystem/title/proc/increase_loaded_subsystems_amount()
+	SStitle.subsystems_loaded++
+	SStitle.title_output_to_all(CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100, "update_loaded_count")
 
 /**
  * Iterates over all files in `TITLE_SCREENS_LOCATION` and loads all valid title screens to `title_screens` var.

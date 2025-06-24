@@ -428,13 +428,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_display))
 	var/start_timeofday = REALTIMEOFDAY
 
-	// BANDASTATION ADDITION - START: Collect needed to initialize sybsystems
-	for(var/datum/controller/subsystem/subsystem as anything in subsystems)
-		if ((subsystem.flags & SS_NO_INIT) || subsystem.initialized)
-			continue
-		SStitle.subsystems_total++
-	// BANDASTATION ADDITION - END
-
+	SStitle.count_initable_subsystems(subsystems) // BANDASTATION ADDITION
 	for (var/current_init_stage in 1 to INITSTAGE_MAX)
 
 		// Initialize subsystems.
@@ -504,15 +498,9 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	current_initializing_subsystem = subsystem
 	rustg_time_reset(SS_INIT_TIMER_KEY)
 
-	// BANDASTATION ADDITION - START
-	SStitle.subsystem_loading = subsystem.name
-	SStitle.title_output_to_all(SStitle.subsystem_loading, "update_loading_name")
-	// BANDASTATION ADDITION - END
+	SStitle.set_loading_subsystem(subsystem.name) // BANDASTATION ADDITION
 	var/result = subsystem.Initialize()
-	// BANDASTATION ADDITION - START
-	SStitle.subsystems_loaded++
-	SStitle.title_output_to_all(CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100, "update_loaded_count")
-	// BANDASTATION ADDITION - END
+	SStitle.increase_loaded_subsystems_amount() // BANDASTATION ADDITION
 
 	// Capture end time
 	var/time = rustg_time_milliseconds(SS_INIT_TIMER_KEY)
