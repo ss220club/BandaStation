@@ -5,18 +5,18 @@
 	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
 	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 	var/mob/dead/new_player/player = user
+	var/loading_percentage = CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100
 	var/list/html = list()
 	html += {"
 		<!DOCTYPE html>
-		<html>
+		<html [!MC_RUNNING() ? "class='loading' style='--loading-percentage: [loading_percentage]%;'" : ""]>
 		<head>
+			<meta charset="UTF-8">
 			<title>Title Screen</title>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "font-awesome.css")]'>
-			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "brands.min.css")]'>
+			<link rel='stylesheet' href='[SSassets.transport.get_asset_url(asset_name = "font-awesome.css")]'>
+			<link rel='stylesheet' href='[SSassets.transport.get_asset_url(asset_name = "brands.min.css")]'>
 			[sheet.css_tag()]
-			<style type='text/css'>
+			<style>
 				[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
 				[styles ? file2text(styles) : ""]
 			</style>
@@ -39,8 +39,8 @@
 	html += {"
 		<div class="lobby_element lobby-name">
 			<label class="lobby_element lobby-collapse" for="hide_menu"></label>
-			<span id="character_name">[player.client.prefs.read_preference(/datum/preference/name/real_name)]</span>
-			<div class="logo">
+			<span id="character_name" data-loading="[SStitle.subsystem_loading]" data-name="[player.client.prefs.read_preference(/datum/preference/name/real_name)]"></span>
+			<div id="logo" data-loaded="[round(loading_percentage)]%">
 				<img src="[SSassets.transport.get_asset_url(asset_name = "ss220_logo.png")]">
 			</div>
 		</div>"}
@@ -98,16 +98,19 @@
 	html += {"
 		<div class="lobby_buttons-end">
 			[create_button(player, "wiki", tooltip = "Перейти на вики", tooltip_position = "top-start")]
-			[create_button(player, "discord", tooltip = "Открыть наш дискорд", tooltip_position = "top")]
+			[create_button(player, "discord", tooltip = "Открыть наш дискорд", tooltip_position = "top-start")]
+			[create_button(player, "github", tooltip = "Перейти в наш репозиторий", tooltip_position = "top")]
+			[create_button(player, "bug", tooltip = "Сообщить о баге", tooltip_position = "top")]
 			[create_button(player, "changelog", tooltip = "Открыть чейнджлог", tooltip_position = "top-end")]
 		</div>
 	"}
 
 	html += {"</div>"}
 	html += {"<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>"}
-	html += {"<div id="lobby_info"></div>"}
-	html += {"</body>"}
+	html += {"<div id="lobby_info"><div id="round_info"></div>"}
+	html += {"</div>"}
 
+	html += {"</body>"}
 	html += {"
 		<script language="JavaScript">
 			function call_byond(href, value) {
@@ -181,7 +184,7 @@
 
 			const character_name_slot = document.getElementById("character_name");
 			function update_character_name(name) {
-				character_name_slot.textContent = name;
+				character_name_slot.setAttribute("data-name", name);
 			}
 
 			let image_src;
@@ -215,9 +218,25 @@
 				}
 			}
 
-			const info_placement = document.getElementById("lobby_info");
+			const info_placement = document.getElementById("round_info");
 			function update_info(info) {
 				info_placement.innerHTML = info;
+			}
+
+			const loading_name = document.getElementById("character_name");
+			function update_loading_name(name) {
+				loading_name.setAttribute("data-loading", name);
+			}
+
+			const logo = document.getElementById("logo");
+			function update_loaded_count(count) {
+				logo.setAttribute("data-loaded", `${Math.round(count)}%`);
+				document.documentElement.style.setProperty("--loading-percentage", `${count}%`);
+			}
+
+			function finish_loading() {
+				document.documentElement.style = "";
+				document.documentElement.className = "";
 			}
 
 			/* Return focus to Byond after click */
