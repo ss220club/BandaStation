@@ -79,6 +79,7 @@
 
 
 /datum/controller/subsystem/title/proc/count_initable_subsystems(list/subsystems)
+	subsystems_total = 0
 	for(var/datum/controller/subsystem/subsystem as anything in subsystems)
 		if ((subsystem.flags & SS_NO_INIT) || subsystem.initialized)
 			continue
