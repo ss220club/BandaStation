@@ -550,7 +550,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	var/chat_message = chat_warning ? span_boldwarning(message) : span_boldannounce(message)
 
 	if(result != SS_INIT_NO_MESSAGE)
-		to_chat(world, chat_message, MESSAGE_TYPE_DEBUG)
+		to_chat(GLOB.admins, chat_message, MESSAGE_TYPE_DEBUG) // BANDASTATION EDIT: world -> GLOB.admins
 	log_world(message)
 
 /datum/controller/master/proc/SetRunLevel(new_runlevel)
