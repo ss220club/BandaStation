@@ -34,7 +34,7 @@
 		return
 
 	if(!SSticker)
-		title_output_to_all("<div class='loading'>Загрузка...</div>", "update_info")
+		title_output_to_all("<div class='loading'>Загрузка...</div>", "updateInfo")
 		return
 
 	var/time_remaining = SSticker.GetTimeLeft()
@@ -75,7 +75,7 @@
 			<table class="lobby-info-table">[players]</table>
 		"}
 
-		title_output(viewer.client, info, "update_info")
+		title_output(viewer.client, info, "updateInfo")
 
 
 /datum/controller/subsystem/title/proc/count_initable_subsystems(list/subsystems)
@@ -90,14 +90,14 @@
  */
 /datum/controller/subsystem/title/proc/set_loading_subsystem(name)
 	subsystem_loading = name
-	title_output_to_all(SStitle.subsystem_loading, "update_loading_name")
+	title_output_to_all(SStitle.subsystem_loading, "updateLoadingName")
 
 /**
  * Increases the number of loaded subsystems.
  */
 /datum/controller/subsystem/title/proc/increase_loaded_subsystems_amount()
 	subsystems_loaded++
-	title_output_to_all(CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100, "update_loaded_count")
+	title_output_to_all(CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100, "updateLoadedCount")
 
 /**
  * Iterates over all files in `TITLE_SCREENS_LOCATION` and loads all valid title screens to `title_screens` var.
@@ -177,7 +177,7 @@
  */
 /datum/controller/subsystem/title/proc/set_notice(new_notice)
 	notice = emoji_parse(sanitize_text(new_notice)) || null
-	title_output_to_all(notice, "update_notice")
+	title_output_to_all(notice, "updateNotice")
 
 /**
  * Change or reset title screen css
@@ -243,7 +243,7 @@
 
 	SSassets.transport.send_assets(update_for, current_title_screen.screen_image.name)
 	update_for.browse_queue_flush()
-	title_output(update_for, SSassets.transport.get_asset_url(asset_cache_item = current_title_screen.screen_image), "update_image")
+	title_output(update_for, SSassets.transport.get_asset_url(asset_cache_item = current_title_screen.screen_image), "updateImage")
 
 /**
  * Update a user's character setup name.
@@ -252,7 +252,7 @@
 	if(!(istype(user)))
 		return
 
-	title_output(user.client, name, "update_character_name")
+	title_output(user.client, name, "updateCharacterName")
 
 /**
  * Picks title image from `title_images_pool` list. If the list is empty, `DEFAULT_TITLE_SCREEN_IMAGE_PATH` is returned

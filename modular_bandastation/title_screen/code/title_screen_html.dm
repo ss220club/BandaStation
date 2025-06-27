@@ -13,9 +13,10 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>Title Screen</title>
-			<link rel='stylesheet' href='[SSassets.transport.get_asset_url(asset_name = "font-awesome.css")]'>
-			<link rel='stylesheet' href='[SSassets.transport.get_asset_url(asset_name = "brands.min.css")]'>
-			[sheet.css_tag()]
+			<script defer src='[SSassets.transport.get_asset_url("title_screen.js")]' ></script>
+			<link rel='stylesheet' href='[SSassets.transport.get_asset_url("font-awesome.css")]'>
+			<link rel='stylesheet' href='[SSassets.transport.get_asset_url("brands.min.css")]'>
+			[sheet.css_tag() /* Emoji support */]
 			<style>
 				[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
 				[styles ? file2text(styles) : ""]
@@ -26,8 +27,8 @@
 
 	if(screen_image_url)
 		html += {"
-			<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">
-			<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">
+			<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
+			<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
 		"}
 
 	html += {"<input type="checkbox" id="hide_menu">"}
@@ -111,147 +112,6 @@
 	html += {"</div>"}
 
 	html += {"</body>"}
-	html += {"
-		<script language="JavaScript">
-			function call_byond(href, value) {
-				window.location = `byond://?src=[REF(player)];${href}=${value}`
-			}
-
-			let ready_int = 0;
-			const readyID = document.querySelector(".lobby-toggle_ready");
-			const ready_class = \[ "bad", "good" \];
-			function toggle_ready(setReady) {
-				if(setReady) {
-					ready_int = setReady;
-					readyID.classList.add(ready_class\[ready_int\]);
-					readyID.classList.remove(ready_class\[1 - ready_int\]);
-				} else {
-					ready_int++;
-					if(ready_int === ready_class.length)
-						ready_int = 0;
-					readyID.classList.add("good");
-					readyID.classList.remove("bad");
-				}
-			}
-
-			function job_sign(assign, id) {
-				let traitID;
-				let trait_link;
-
-				if(!id) {
-					return
-				}
-
-				if (id === "1") {
-					traitID = "lobby-trait-1";
-				} else if (id === "2") {
-					traitID = "lobby-trait-2";
-				} else if (id === "3"){
-					traitID = "lobby-trait-3";
-				} else {
-					return
-				}
-
-				trait_link = document.getElementById(traitID);
-				if(assign === "true") {
-					trait_link.classList.add("good");
-					trait_link.classList.remove("bad");
-				} else {
-					trait_link.classList.remove("good");
-					trait_link.classList.add("bad");
-				}
-			}
-
-			const admin_buttons = document.getElementById("lobby_admin")
-			function admin_buttons_visibility(visible) {
-				if(visible === "true") {
-					admin_buttons.classList.remove("hidden")
-				} else {
-					admin_buttons.classList.add("hidden")
-				}
-			}
-
-			const notice_container = document.getElementById("container_notice");
-			function update_notice(notice) {
-				if(notice === undefined) {
-					notice_container.classList.add("hidden");
-					notice_container.innerHTML = "";
-				} else {
-					notice_container.classList.remove("hidden");
-					notice_container.innerHTML = notice;
-				}
-			}
-
-			const character_name_slot = document.getElementById("character_name");
-			function update_character_name(name) {
-				character_name_slot.setAttribute("data-name", name);
-			}
-
-			let image_src;
-			const image_container = document.getElementById("screen_image");
-			const image_blur_container = document.getElementById("screen_blur");
-			function update_image(image) {
-				image_src = image;
-				image_container.src = image_src;
-				image_blur_container.src = image_src;
-			}
-
-			let attempts = 0;
-			const maxAttempts = 10;
-			function fix_image() {
-				const img = new Image();
-				img.src = image_src;
-				if(img.naturalWidth === 0 || img.naturalHeight === 0) {
-					if(attempts === maxAttempts) {
-						attempts = 0;
-						return;
-					}
-
-					attempts++;
-					setTimeout(function() {
-						fix_image();
-					}, 1000);
-				} else {
-					attempts = 0;
-					image_container.src = image_src;
-					return;
-				}
-			}
-
-			const info_placement = document.getElementById("round_info");
-			function update_info(info) {
-				info_placement.innerHTML = info;
-			}
-
-			const loading_name = document.getElementById("character_name");
-			function update_loading_name(name) {
-				loading_name.setAttribute("data-loading", name);
-			}
-
-			const logo = document.getElementById("logo");
-			function update_loaded_count(count) {
-				logo.setAttribute("data-loaded", `${Math.round(count)}%`);
-				document.documentElement.style.setProperty("--loading-percentage", `${count}%`);
-			}
-
-			function finish_loading() {
-				document.documentElement.style = "";
-				document.documentElement.className = "";
-			}
-
-			/* Return focus to Byond after click */
-			function reFocus() {
-				call_byond("focus", true);
-			}
-
-			document.addEventListener('keyup', reFocus);
-			document.addEventListener('mouseup', reFocus);
-
-			/* Tell Byond that the title screen is ready */
-			call_byond("title_ready", true);
-		</script>
-	"}
-
 	html += "</html>"
 
 	return html.Join()

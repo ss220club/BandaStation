@@ -13,7 +13,7 @@
 	if(!client)
 		return
 
-	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"]))
+	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggleReady"] || href_list["late_join"] || href_list["observe"]))
 		if(!SScentral.can_run())
 			to_chat(usr, "Система привязок дискорда не активна, но включен режим проверки привязки. Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.")
 			stack_trace("Discord verification is enabled, but SS Central is not active.")
@@ -28,7 +28,7 @@
 
 	if(href_list["toggle_ready"])
 		ready = !ready
-		SStitle.title_output(client, ready, "toggle_ready")
+		SStitle.title_output(client, ready, "toggleReady")
 
 	else if(href_list["late_join"])
 		GLOB.latejoin_menu.ui_interact(usr)
@@ -124,9 +124,9 @@
 		log_admin("[key_name(usr)] set the pre-game delay to [DisplayTimeText(time)].")
 		BLACKBOX_LOG_ADMIN_VERB("Delay Game Start")
 
-	else if(href_list["title_ready"])
+	else if(href_list["titleReady"])
 		if(check_rights_for(client, R_ADMIN|R_DEBUG))
-			SStitle.title_output(client, "true", "admin_buttons_visibility")
+			SStitle.title_output(client, "true", "toggleAdmin")
 
 	else if(href_list["focus"])
 		winset(client, "map", "focus=true")
