@@ -1,16 +1,10 @@
-/mob/dead/new_player
-	var/title_collapsed = FALSE
-
 /mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, mob/target_ai)
 	. = ..()
 	if(isnewplayer(target_ai))
 		SStitle.hide_title_screen_from(client)
 
 /mob/dead/new_player/Topic(href, href_list[])
-	if(src != usr)
-		return
-
-	if(!client)
+	if(src != usr || !client)
 		return
 
 	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggleReady"] || href_list["late_join"] || href_list["observe"]))
@@ -26,51 +20,54 @@
 	if(client.interviewee)
 		return
 
+	if(href_list["focus"])
+		winset(client, "map", "focus=true")
+
 	if(href_list["toggle_ready"])
 		ready = !ready
 		SStitle.title_output(client, ready, "toggleReady")
 
-	else if(href_list["late_join"])
+	if(href_list["late_join"])
 		GLOB.latejoin_menu.ui_interact(usr)
 
-	else if(href_list["observe"])
+	if(href_list["observe"])
 		if(!SSticker || SSticker.current_state <= GAME_STATE_STARTUP)
 			to_chat(usr, span_warning("Сервер ещё не загрузился!"))
 			return
 
 		make_me_an_observer()
 
-	else if(href_list["character_setup"])
+	if(href_list["character_setup"])
 		var/datum/preferences/preferences = client.prefs
 		preferences.current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES
 		preferences.update_static_data(src)
 		preferences.ui_interact(src)
 
-	else if(href_list["settings"])
+	if(href_list["settings"])
 		var/datum/preferences/preferences = client.prefs
 		preferences.current_window = PREFERENCE_TAB_GAME_PREFERENCES
 		preferences.update_static_data(usr)
 		preferences.ui_interact(usr)
 
-	else if(href_list["manifest"])
+	if(href_list["manifest"])
 		ViewManifest()
 
-	else if(href_list["changelog"])
+	if(href_list["changelog"])
 		client?.changelog()
 
-	else if(href_list["wiki"])
+	if(href_list["wiki"])
 		client?.wiki()
 
-	else if(href_list["discord"])
+	if(href_list["discord"])
 		client?.discord()
 
-	else if(href_list["github"])
+	if(href_list["github"])
 		client?.github()
 
-	else if(href_list["bug"])
+	if(href_list["bug"])
 		client?.reportissue()
 
-	else if(href_list["trait_signup"])
+	if(href_list["trait_signup"])
 		var/datum/station_trait/clicked_trait
 		for(var/datum/station_trait/trait as anything in GLOB.lobby_station_traits)
 			if(trait.name == href_list["trait_signup"])
@@ -78,38 +75,24 @@
 
 		clicked_trait.on_lobby_button_click(usr, href_list["id"])
 
-	else if(href_list["picture"])
-		if(!check_rights(R_FUN))
-			log_admin("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			message_admins("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			return
+	if((href_list["picture"] || href_list["notice"] || href_list["start_now"] || href_list["delay"]) && !check_rights(R_SERVER))
+		to_chat(client, span_warning("ТЫ пытаешься использовать АДМИНСКИЕ кнопки! У тебя ничего не выйдет, но мы оповестили администрацию."))
+		log_admin("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
+		message_admins("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
+		return
 
+	if(href_list["picture"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/change_title_screen)
 
-	else if(href_list["notice"])
-		if(!check_rights(R_FUN))
-			log_admin("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			message_admins("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			return
-
+	if(href_list["notice"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/change_title_screen_notice)
 
-	else if(href_list["start_now"])
-		if(!check_rights(R_SERVER))
-			log_admin("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			message_admins("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			return
-
+	if(href_list["start_now"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/start_now)
 
-	else if(href_list["delay"])
-		if(!check_rights(R_SERVER))
-			log_admin("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			message_admins("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-			return
-
+	if(href_list["delay"])
 		if(SSticker.current_state > GAME_STATE_PREGAME)
-			return tgui_alert(usr, "Слишком поздно... Игра уже началась!", "О нет...")
+			return tgui_alert(usr, "Слишком поздно... Игра уже началась!", "О нет...", timeout = 10 SECONDS)
 
 		var/static/time = 1.5 MINUTES
 		if(time == 1.5 MINUTES)
@@ -124,9 +107,5 @@
 		log_admin("[key_name(usr)] set the pre-game delay to [DisplayTimeText(time)].")
 		BLACKBOX_LOG_ADMIN_VERB("Delay Game Start")
 
-	else if(href_list["titleReady"])
-		if(check_rights_for(client, R_ADMIN|R_DEBUG))
-			SStitle.title_output(client, "true", "toggleAdmin")
-
-	else if(href_list["focus"])
-		winset(client, "map", "focus=true")
+	if(href_list["titleReady"] && check_rights_for(client, R_ADMIN|R_DEBUG))
+		SStitle.title_output(client, "true", "toggleAdmin")
