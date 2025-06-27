@@ -45,14 +45,3 @@ GLOBAL_LIST_INIT(available_lobby_styles, list(
 	if(viewer?.mob)
 		winset(viewer, "title_browser", "is-disabled=true;is-visible=false")
 		winset(viewer, "status_bar", "is-visible=true;focus=true")
-
-/datum/title_screen/proc/create_button(user, href, text, tooltip, tooltip_position = "right", advanced_classes, enabled = TRUE)
-	return {"
-		<a class="lobby_element lobby-[href] [!enabled ? "disabled" : ""] [advanced_classes]" href='byond://?src=[REF(user)];[href]=1'>
-			<span class="lobby-text">[text]</span>
-			[tooltip ? {"
-			<div class="lobby-tooltip" data-position="[tooltip_position]">
-				<span class="lobby-tooltip-content">[tooltip]</span>
-			</div> "} : ""]
-		</a>
-	"}
