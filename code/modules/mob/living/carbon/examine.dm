@@ -49,12 +49,10 @@
 	if(get_bodypart(BODY_ZONE_HEAD) && !get_organ_by_type(/obj/item/organ/brain))
 		. += span_deadsay("Кажется, [t_his] мозг отсутствует...")
 
-	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/list/disabled = list()
 	for(var/obj/item/bodypart/body_part as anything in bodyparts)
 		if(body_part.bodypart_disabled)
 			disabled += body_part
-		missing -= body_part.body_zone
 		for(var/obj/item/embedded as anything in body_part.embedded_objects)
 			if(embedded.get_embed().stealthy_embed)
 				continue
@@ -85,16 +83,16 @@
 	//stores missing limbs
 	var/l_limbs_missing = 0
 	var/r_limbs_missing = 0
-	for(var/gone in missing)
-		if(gone == BODY_ZONE_HEAD)
-			. += span_deadsay("<B>[t_His] [ru_parse_zone(gone, declent = NOMINATIVE)] отсутствует!</B>")
+	for(var/missing_limb in get_missing_limbs())
+		if(missing_limb == BODY_ZONE_HEAD)
+			. += span_deadsay("<B>[t_His] [ru_parse_zone(missing_limb, declent = NOMINATIVE)] отсутствует!</B>")
 			continue
-		if(gone == BODY_ZONE_L_ARM || gone == BODY_ZONE_L_LEG)
+		if(missing_limb == BODY_ZONE_L_ARM || missing_limb == BODY_ZONE_L_LEG)
 			l_limbs_missing++
-		else if(gone == BODY_ZONE_R_ARM || gone == BODY_ZONE_R_LEG)
+		else if(missing_limb == BODY_ZONE_R_ARM || missing_limb == BODY_ZONE_R_LEG)
 			r_limbs_missing++
 
-		. += span_boldwarning("[t_His] [ru_parse_zone(gone, declent = NOMINATIVE)] отсутствует!")
+		. += span_boldwarning("[t_His] [ru_parse_zone(missing_limb, declent = NOMINATIVE)] отсутствует!")
 
 	if(l_limbs_missing >= 2 && r_limbs_missing == 0)
 		. += span_tinydanger("[t_He] полностью прав[genderize_ru(gender, "", "а", "о", "ы")]...")
