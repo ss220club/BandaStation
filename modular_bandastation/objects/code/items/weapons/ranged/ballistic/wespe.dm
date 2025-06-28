@@ -9,7 +9,6 @@
 	special_mags = TRUE
 	suppressor_x_offset = 7
 	suppressor_y_offset = 0
-	fire_delay = 0.3 SECONDS
 	obj_flags = UNIQUE_RENAME
 	unique_reskin = list(
 		"Default" = "wespe",

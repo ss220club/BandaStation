@@ -9,7 +9,6 @@
 	lock_back_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'
 	bolt_drop_sound = 'sound/items/weapons/gun/pistol/slide_drop.ogg'
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol
-	fire_delay = 0.3 SECONDS
 	special_mags = TRUE
 	suppressor_x_offset = 4
 	suppressor_y_offset = -1
