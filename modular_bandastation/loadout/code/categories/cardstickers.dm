@@ -6,6 +6,13 @@
 /datum/loadout_item/id_sticker
 	abstract_type = /datum/loadout_item/id_sticker
 
+/datum/loadout_item/id_sticker/on_equip_item(obj/item/equipped_item, datum/preferences/preference_source, list/preference_list, mob/living/carbon/human/equipper, visuals_only)
+	. = ..()
+	var/obj/item/card/id/advanced/card = locate() in equipper
+	if(!card || card?.applied_sticker)
+		return
+	card.apply_sticker(equipper, equipped_item)
+
 // MARK: Tier 0
 /datum/loadout_item/id_sticker/id_decal_colored
 	name = "Голографическая"
