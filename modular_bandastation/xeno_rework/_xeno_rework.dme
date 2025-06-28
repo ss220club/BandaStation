@@ -1,0 +1,17 @@
+#include "_xeno_rework.dm"
+
+#include "code/defines/traits.dm"
+#include "code/base_xeno.dm"
+#include "code/human_defense.dm"
+#include "code/larva.dm"
+
+#include "code/xeno_types/defender.dm"
+#include "code/xeno_types/drone.dm"
+#include "code/xeno_types/praetorian.dm"
+#include "code/xeno_types/queen.dm"
+#include "code/xeno_types/ravager.dm"
+#include "code/xeno_types/rouny.dm"
+#include "code/xeno_types/sentinel.dm"
+#include "code/xeno_types/spitter.dm"
+#include "code/xeno_types/warrior.dm"
+
