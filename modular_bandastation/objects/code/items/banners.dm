@@ -255,3 +255,20 @@
 	icon = 'icons/obj/banner.dmi'
 	lefthand_file = 'icons/mob/inhands/equipment/banners_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/banners_righthand.dmi'
+
+// Mark: Flags
+/obj/structure/sign/flag/tsf
+	name = "flag of the Trans-Solar Federation"
+	desc = "Официальный государственный флаг Транс-Солнечной Федерации."
+	icon = 'modular_bandastation/objects/icons/obj/items/flags.dmi'
+	icon_state = "flag_tsf"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/tsf, 32)
+
+/obj/structure/sign/flag/ussp
+	name = "flag of the Union of Soviet Socialist Planets"
+	desc = "Официальный государственный флаг Союза Советский Социалистических Планет."
+	icon = 'modular_bandastation/objects/icons/obj/items/flags.dmi'
+	icon_state = "flag_ussp"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/ussp, 32)
