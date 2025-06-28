@@ -200,6 +200,10 @@
 		"name" = RADIO_CHANNEL_SECURITY,
 		"color" = RADIO_COLOR_SECURITY
 	)
+	frequency_infos["[FREQ_JUSTICE]"] = list(
+		"name" = RADIO_CHANNEL_JUSTICE,
+		"color" = RADIO_COLOR_JUSTICE
+	)
 
 /obj/machinery/telecomms/server/presets/common/birdstation/Initialize(mapload)
 	. = ..()
