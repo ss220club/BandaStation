@@ -384,6 +384,11 @@
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
 		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
+	for(var/obj/item/bodypart/arm/part in bodyparts)
+		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
+			continue
+		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
+		. += "[t_He] a [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
 	//gloves
 	if(gloves && !(obscured & ITEM_SLOT_GLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
@@ -482,6 +487,11 @@
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
 		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
+	for(var/obj/item/bodypart/arm/part in bodyparts)
+		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
+			continue
+		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
+		. += "[t_He] [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
 	//gloves
 	if(gloves && !(obscured & ITEM_SLOT_GLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
