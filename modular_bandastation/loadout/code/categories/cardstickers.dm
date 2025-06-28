@@ -8,6 +8,8 @@
 
 /datum/loadout_item/id_sticker/on_equip_item(obj/item/equipped_item, datum/preferences/preference_source, list/preference_list, mob/living/carbon/human/equipper, visuals_only)
 	. = ..()
+	if(visuals_only)
+		return
 	var/obj/item/card/id/advanced/card = equipper.get_item_by_slot(ITEM_SLOT_ID) // Should be there, wallet moves the card into itself later
 	if(!istype(card) || card.applied_sticker)
 		return
