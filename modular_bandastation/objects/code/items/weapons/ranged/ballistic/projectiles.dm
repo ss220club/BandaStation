@@ -27,7 +27,7 @@
 
 /obj/projectile/bullet/c35sol/ripper
 	name = ".35 Sol ripper bullet"
-	damage = 12
+	damage = 15
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
 	ricochets_max = 0
@@ -47,8 +47,8 @@
 	rip_time = 1 SECONDS
 
 /obj/projectile/bullet/c35sol/ap
-	name = ".35 Sol Short armor piercing bullet"
-	damage = 13
+	name = ".35 Sol Short armor-piercing bullet"
+	damage = 15
 	bare_wound_bonus = -30
 	armour_penetration = 20
 
@@ -258,18 +258,28 @@
 
 /obj/projectile/bullet/c9x25mm/hp
 	name = "9x25mm NT hollow-point bullet"
-	damage = 13
+	damage = 15
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
 	ricochets_max = 0
 	wound_bonus = 20
 	bare_wound_bonus = 20
-	embed_type = /datum/embedding/bullet/c35sol/ripper
+	embed_type = /datum/embedding/bullet/c9x25mm/hp
 	embed_falloff_tile = -15
+
+/datum/embedding/bullet/c9x25mm/hp
+	embed_chance = 75
+	fall_chance = 3
+	jostle_chance = 4
+	ignore_throwspeed_threshold = TRUE
+	pain_stam_pct = 0.4
+	pain_mult = 5
+	jostle_pain_mult = 6
+	rip_time = 1 SECONDS
 
 /obj/projectile/bullet/c9x25mm/ap
 	name = "9x25mm NT armor piercing bullet"
-	damage = 13
+	damage = 15
 	bare_wound_bonus = -30
 	armour_penetration = 20
 

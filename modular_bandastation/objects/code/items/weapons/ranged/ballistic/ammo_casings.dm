@@ -23,7 +23,7 @@
 
 // .35 sol armor piercing are the AP rounds for this weapon
 /obj/item/ammo_casing/c35sol/ap
-	name = ".35 Sol Short armor piercing bullet casing"
+	name = ".35 Sol Short armor-piercing bullet casing"
 	desc = "Стандартный бронебойный пистолетный патрон ТСФ калибра .35 Sol Short. Пробивает броню, но довольно слаб против небронированных целей."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "sa-casing"
@@ -146,7 +146,7 @@
 	projectile_type = /obj/projectile/bullet/c9x25mm/hp
 
 /obj/item/ammo_casing/c9x25mm/ap
-	name = "9x25mm NT armor piercing bullet casing"
+	name = "9x25mm NT armor-piercing bullet casing"
 	desc = "Стандартный бронебойный пистолетный патрон НТ калибра 9x25мм. Пробивает броню, но довольно слаб против небронированных целей."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "sa-casing"
