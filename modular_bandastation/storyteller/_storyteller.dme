@@ -1,4 +1,0 @@
-#include "_storyteller.dm"
-
-#include "code\_defines\storyteller_defines.dm"
-#include "code\gamemode.dm"

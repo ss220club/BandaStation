@@ -137,10 +137,10 @@ SUBSYSTEM_DEF(dynamic)
 	var/random_event_hijack_maximum = 18 MINUTES
 
 	/// What is the lower bound of when the roundstart announcement is sent out?
-	var/waittime_l = 600
+	var/waittime_l = 1 SECONDS /// BANDASTATION EDIT
 
 	/// What is the higher bound of when the roundstart announcement is sent out?
-	var/waittime_h = 1800
+	var/waittime_h = 5 SECONDS /// BANDASTATION EDIT
 
 	/// A number between 0 and 100. The maximum amount of threat allowed to generate.
 	var/max_threat_level = 100
@@ -312,64 +312,84 @@ SUBSYSTEM_DEF(dynamic)
 	if(EMERGENCY_ESCAPED_OR_ENDGAMED && !SSticker.news_report)
 		SSticker.news_report = SSshuttle.emergency?.is_hijacked() ? SHUTTLE_HIJACK : STATION_EVACUATED
 
+/// BANDASTATION EDIT START - UPDATED INTERCEPT TEMPLATE
+#define STATION_REPORT_TEMPLATE_PATH "modular_bandastation/paperwork/templates/station_report.md"
+
 /datum/controller/subsystem/dynamic/proc/send_intercept()
-	if(GLOB.communications_controller.block_command_report) //If we don't want the report to be printed just yet, we put it off until it's ready
+	if(GLOB.communications_controller.block_command_report)
 		addtimer(CALLBACK(src, PROC_REF(send_intercept)), 10 SECONDS)
 		return
 
-	. = "<b><i>Информационное сообщение Департамента разведки Нанотрейзен, Сектор Спинвард, Дата [time2text(world.realtime, "DDD, MMM DD", NO_TIMEZONE)], [CURRENT_STATION_YEAR]:</i></b><hr>"
-	. += generate_advisory_level()
+	if(!fexists(STATION_REPORT_TEMPLATE_PATH))
+		stack_trace("station report template doesn't exist at path: [STATION_REPORT_TEMPLATE_PATH]")
+		return
 
-	var/min_threat = 100
-	for(var/datum/dynamic_ruleset/ruleset as anything in init_rulesets(/datum/dynamic_ruleset))
-		if(ruleset.weight <= 0 || ruleset.cost <= 0)
-			continue
-		min_threat = min(ruleset.cost, min_threat)
+	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
+	if(!station_report_template)
+		stack_trace("station report template doesn't is empty at path: [STATION_REPORT_TEMPLATE_PATH]")
+		return
 
-	var/greenshift = GLOB.dynamic_forced_extended || (threat_level < min_threat) //if threat is below any ruleset, its extended time
-	SSstation.generate_station_goals(greenshift ? INFINITY : CONFIG_GET(number/station_goal_budget))
+	SSstation.generate_station_goals(CONFIG_GET(number/station_goal_budget))
 
 	var/list/datum/station_goal/goals = SSstation.get_station_goals()
+	var/station_goals_section = ""
 	if(length(goals))
-		var/list/texts = list("<hr><b>Специальные цели для [station_name()]:</b><br>")
+		var/list/station_goal_reports = list()
 		for(var/datum/station_goal/station_goal as anything in goals)
 			station_goal.on_report()
-			texts += station_goal.get_report()
-		. += texts.Join("<hr>")
+			station_goal_reports += station_goal.get_report()
 
-	var/list/trait_list_strings = list()
+		station_goals_section = list(
+			"# === Цели на смену ===\n",
+			station_goal_reports.Join("\n\n---\n\n"),
+		).Join()
+
+	station_report_template = replacetext(station_report_template, "%STATION_GOALS", station_goals_section);
+
+	var/list/trait_reports = list()
 	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
 		if(!station_trait.show_in_report)
 			continue
-		trait_list_strings += "[station_trait.get_report()]<BR>"
-	if(trait_list_strings.len > 0)
-		. += "<hr><b>Выявленные отклонения в смене:</b><BR>" + trait_list_strings.Join()
 
+		trait_reports += "- [station_trait.get_report()]"
+
+	var/trait_reports_sections = ""
+	if(length(trait_reports))
+		trait_reports_sections = list(
+			"\n\n---\n\n",
+			"# === Обнаруженные отклонения ===\n",
+			trait_reports.Join("\n")
+		).Join()
+
+	station_report_template = replacetext(station_report_template, "%TRAIT_REPORTS", trait_reports_sections);
+
+	var/footnote_section = ""
 	if(length(GLOB.communications_controller.command_report_footnotes))
-		var/footnote_pile = ""
-
+		var/list/footnotes = list()
 		for(var/datum/command_footnote/footnote in GLOB.communications_controller.command_report_footnotes)
-			footnote_pile += "[footnote.message]<BR>"
-			footnote_pile += "<i>[footnote.signature]</i><BR>"
-			footnote_pile += "<BR>"
+			footnotes += "[footnote.message]<BR>"
+			footnotes += "<i>[footnote.signature]</i><BR>"
+			footnotes += "<BR>"
 
-		. += "<hr><b>Дополнительные примечания: </b><BR><BR>" + footnote_pile
+		footnote_section = list(
+			"\n\n---\n\n",
+			"# === Дополнительная информация ===\n",
+			footnotes.Join()
+		).Join()
+
+	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section);
+	station_report_template = replacetext(station_report_template, "%SIGNING_OFFICER", "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]");
+
+	station_report_template = replace_text_keys(station_report_template)
 
 #ifndef MAP_TEST
-	print_command_report(., "[command_name()] Status Summary", announce=FALSE)
-	if(greenshift)
-		priority_announce("Благодаря невероятным усилиям наших отделов безопасности и разведки, в настоящее время нет никаких реальных угроз для [station_name()]. Все проекты на смену уже утверждены. Удачной смены!", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound(), color_override = "green")
-	else
-		/* BANDASTATION EDIT START - No Blue roundstart
-		if(SSsecurity_level.get_current_level_as_number() < SEC_LEVEL_BLUE)
-			SSsecurity_level.set_level(SEC_LEVEL_BLUE, announce = FALSE)
-		priority_announce("[SSsecurity_level.current_security_level.elevating_to_announcement]\n\nA summary has been copied and printed to all communications consoles.", "Security level elevated.", ANNOUNCER_INTERCEPT, color_override = SSsecurity_level.current_security_level.announcement_color)
-		*/
-		priority_announce("Отчет был скопирован и распечатан на всех консолях связи.", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound())
-		// BANDASTATION EDIT END - No Blue roundstart
+	print_command_report(station_report_template, "[command_name()] Status Summary", announce=FALSE)
+	priority_announce("Отчет был скопирован и распечатан на всех консолях связи.", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound())
 #endif
 
-	return .
+#undef STATION_REPORT_TEMPLATE_PATH
+
+/// BANDASTATION EDIT END - UPDATED INTERCEPT TEMPLATE
 
 /// Generate the advisory level depending on the shown threat level.
 /datum/controller/subsystem/dynamic/proc/generate_advisory_level()
@@ -1045,6 +1065,5 @@ SUBSYSTEM_DEF(dynamic)
 			"}
 
 			print_command_report(suicide_command_report, "Central Command Personnel Update")
-
 
 #undef MAXIMUM_DYN_DISTANCE
