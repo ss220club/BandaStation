@@ -5,17 +5,18 @@
   }
 
   75% {
-    transform: scale(2.5);
+    transform: scale(3);
     opacity: 1;
   }
 
   100% {
-    transform: scale(3);
+    transform: scale(3.5);
     opacity: 0;
   }
 }
 
 @mixin nanoButton() {
+  opacity: 1 !important;
   pointer-events: all;
   background-color: var(--nanomap-background);
   color: hsla(0, 0%, 100%, 0.66);
@@ -42,11 +43,15 @@
   &--disabled {
     cursor: var(--cursor-default);
     background-color: hsl(
-      from var(--nanomap-background) h s l / 0.33
+      from var(--nanomap-background) h s l / 0.75
     ) !important;
     color: hsl(
       from var(--color-red) h s calc(l + var(--adjust-color))
     ) !important;
+  }
+
+  i {
+    vertical-align: middle;
   }
 }
 
@@ -56,6 +61,8 @@
   --nanomap-background: hsl(
     from var(--color-base) h s calc(l - var(--adjust-color)) / 0.85
   );
+  padding: var(--space-m);
+  background-color: var(--color-section);
 
   &__Controls {
     display: flex;
@@ -99,14 +106,13 @@
     backdrop-filter: var(--nanomap-blur);
 
     .rzpp-preview {
-      border: var(--border-thickness-tine) solid
+      border: var(--border-thickness-tiny) solid
         hsl(from var(--color-border) h s l / 0.33) !important;
-      box-shadow: hsla(0, 0%, 0%, 0.2) 0px 0px 0px 9999px !important;
+      box-shadow: hsla(0, 0%, 0%, 0.33) 0px 0px 0px 9999px !important;
     }
   }
 
-  &__Object,
-  &__Marker {
+  &__Object {
     cursor: var(--cursor-pointer);
     font-size: 6px;
     line-height: 0;
@@ -115,6 +121,13 @@
     width: 2em;
     border: 2px solid hsl(from var(--color-border-dark) h s l / 0.66);
     border-radius: var(--border-radius-small);
+    transform: scale(1.25);
+    transition-property: background-color, border-color, transform;
+    transition-duration: var(--transition-time-medium);
+
+    &--circular {
+      border-radius: var(--border-radius-circular);
+    }
 
     &--wrapper {
       position: absolute;
@@ -126,36 +139,30 @@
       }
     }
 
-    &--hidden {
-      display: none;
-    }
-  }
-
-  &__Marker {
-    border-radius: var(--border-radius-circular);
-    transform: scale(1.25);
-    transition: transform var(--transition-time-medium);
-
-    &--container {
+    &--inner {
       position: relative;
       display: inline-flex;
+    }
+
+    &--highlighted {
+      position: absolute;
+      inset: 0;
+      border: var(--border-thickness-tiny) solid var(--color-good);
+      border-radius: var(--border-radius-circular);
+      filter: drop-shadow(0 0 1px hsla(0, 0%, 0%, 0.5));
+      animation: 1.5s highlighted infinite;
     }
 
     &--selected {
       transform: scale(1.5);
     }
 
-    &--highlighted {
-      position: absolute;
-      inset: 0;
-      border: var(--border-thickness-tiny) solid var(--color-green);
-      border-radius: var(--border-radius-circular);
-      animation: 1.5s highlighted infinite;
+    &--hidden {
+      display: none;
     }
 
     .Icon {
-      margin: 0;
-      transform: translate(-0.25px, 1.25px);
+      transform: translate(-0.25em, 0.2em);
     }
   }
 }
@@ -171,8 +178,8 @@
   }
 
   &__Minimap--container {
-    top: var(--space-s);
-    left: var(--space-s);
+    top: var(--space-l);
+    left: var(--space-l);
     z-index: 3;
   }
 
@@ -191,7 +198,7 @@
   &--top-right,
   &--bottom-right {
     .NanoMap__Minimap--container {
-      right: var(--space-s);
+      right: var(--space-l);
       left: unset;
     }
   }
@@ -200,7 +207,7 @@
   &--bottom-right {
     .NanoMap__Minimap--container {
       top: unset;
-      bottom: var(--space-s);
+      bottom: var(--space-l);
     }
   }
 
@@ -225,19 +232,18 @@
     pointer-events: none;
     inset: 0 !important;
     display: flex;
-    margin: var(--space-s);
+    margin: var(--space-l);
     align-items: flex-start;
     justify-content: space-between;
 
     .NanoMap__Controls,
     .NanoMap__Buttons {
       position: relative;
-      pointer-events: all;
       inset: unset;
       padding: 0;
 
-      * {
-        flex-basis: unset !important;
+      .Button {
+        pointer-events: all;
       }
     }
 

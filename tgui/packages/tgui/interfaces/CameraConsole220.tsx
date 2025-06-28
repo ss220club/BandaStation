@@ -140,7 +140,7 @@ export const CameraContent = (props) => {
               </Tabs.Tab>
             </Tabs>
           </Stack.Item>
-          <Stack.Item grow={3}>{decideTab(tab)}</Stack.Item>
+          <Stack.Item grow>{decideTab(tab)}</Stack.Item>
         </Stack>
       </Stack.Item>
       <Stack.Item grow={tab === 'Map' ? 1.5 : 3}>
@@ -207,18 +207,14 @@ export const CameraMapSelector = (props) => {
   const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
 
   return (
-    <NanoMap
-      mapData={mapData}
-      uiName="camera-console"
-      onLevelChange={setSelectedLevel}
-    >
+    <NanoMap mapData={mapData} onLevelChange={setSelectedLevel}>
       {cameras.map((camera) => (
         <NanoMap.Button
           key={camera.ref}
           posX={camera.x}
           posY={camera.y}
           tooltip={camera.name}
-          color={!camera.status && 'red'}
+          color={!camera.status && 'bad'}
           selected={activeCamera?.ref === camera.ref}
           hidden={camera.z !== selectedLevel}
           onClick={() =>
