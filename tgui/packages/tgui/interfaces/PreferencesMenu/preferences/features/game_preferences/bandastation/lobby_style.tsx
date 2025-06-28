@@ -3,6 +3,6 @@ import { FeatureDropdownInput } from '../../dropdowns';
 
 export const lobby_style: Feature<string> = {
   name: 'Стиль лобби',
-  category: 'ИНТЕРФЕЙС',
+  category: 'Интерфейс',
   component: FeatureDropdownInput,
 };

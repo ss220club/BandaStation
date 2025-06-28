@@ -45,19 +45,16 @@
   box-shadow: 0 0.25em 1em hsla(0, 0%, 0%, 0.5) !important;
 }
 
-.logo {
-  pointer-events: none;
+#logo {
   overflow: visible;
-  display: block;
-  top: calc(-128px - 2rem);
-  left: 0;
-  right: 0;
+  align-self: center;
+  top: calc(-128px - 2.33rem);
+  right: unset;
   text-align: center;
   background-color: transparent;
-  transform: scale(1.33);
-  backdrop-filter: none;
+  transform: scale(1.25);
 
-  & img {
+  img {
     height: 128px;
     background-color: transparent;
   }
