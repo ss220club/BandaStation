@@ -24,6 +24,7 @@
 #include "chat/_chat.dme"
 #include "communication/_communication.dme"
 #include "cryosleep/_cryosleep.dme"
+#include "cult_overhaul/_cult_overhaul.dme"
 #include "customization/_customization.dme"
 #include "cyrillic_fixes/_cyrillic_fixes.dme"
 #include "database220/_database220.dme"
