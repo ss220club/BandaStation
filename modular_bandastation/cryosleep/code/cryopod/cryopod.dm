@@ -348,7 +348,7 @@ GLOBAL_LIST_EMPTY(objectives)
 		message_admins("[key_name_admin(user)] tries to move [key_name_admin(target)] with important job [target.mind.assigned_role.title] to the cryopod")
 		log_admin("[key_name(user)] tries to move [key_name(target)] with important job [target.mind.assigned_role.title] to the cryopod")
 
-	var/list/target_special_roles = target.mind.get_special_roles()
+	var/list/target_special_roles = target.mind?.get_special_roles()
 	if(length(target_special_roles))
 		var/special_roles_text = english_list(target_special_roles)
 		message_admins("[key_name_admin(user)] tries to move to the cryopod [key_name_admin(target)] with special roles: [special_roles_text]")
@@ -369,7 +369,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(answer != "Да")
 		return
 
-	if(target.mind.assigned_role.req_admin_notify)
+	if(target.mind?.assigned_role.req_admin_notify)
 		answer = tgui_alert(
 			target,
 			"Вы ТОЧНО уверены что хотите погрузиться в криогенный стазис? Вы заманиете важную для раунда профессию.",
@@ -382,7 +382,7 @@ GLOBAL_LIST_EMPTY(objectives)
 		message_admins("[key_name_admin(target)] tries to enter cryopod with important job [target.mind.assigned_role.title]")
 		log_admin("[key_name(target)] tries to enter cryopod with important job [target.mind.assigned_role.title]")
 
-	var/list/target_special_roles = target.mind.get_special_roles()
+	var/list/target_special_roles = target.mind?.get_special_roles()
 	if(length(target_special_roles))
 		answer = tgui_alert(
 			target,

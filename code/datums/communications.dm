@@ -82,7 +82,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 
 	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
 	if(!station_report_template)
-		stack_trace("station report template doesn't is empty at path: [STATION_REPORT_TEMPLATE_PATH]")
+		stack_trace("station report template is empty at path: [STATION_REPORT_TEMPLATE_PATH]")
 		return
 
 	var/list/datum/station_goal/goals = SSstation.get_station_goals()
