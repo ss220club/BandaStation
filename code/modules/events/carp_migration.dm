@@ -35,7 +35,6 @@
 
 /datum/round_event/carp_migration/setup()
 	start_when = rand(40, 60)
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/carp_migration/announce(fake)
 	priority_announce("[fluff_signal] были обнаружены вблизи [station_name()], будьте наготове.", "Неопознанные формы жизни")

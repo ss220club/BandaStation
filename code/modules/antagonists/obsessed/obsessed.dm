@@ -23,8 +23,6 @@
 	var/objectives_to_generate = 3
 	/// Brain trauma that causes the obsession
 	var/datum/brain_trauma/special/obsessed/trauma
-	antag_flags = FLAG_FAKE_ANTAG // BANDASTATION EDIT - STORYTELLER
-
 
 /// Dummy antag datum that will show the cured obsessed to admins
 /datum/antagonist/former_obsessed
@@ -36,7 +34,7 @@
 	count_against_dynamic_roll_chance = FALSE
 	silent = TRUE
 	can_elimination_hijack = ELIMINATION_PREVENT
-	antag_flags = FLAG_FAKE_ANTAG | FLAG_ANTAG_CAP_IGNORE  // BANDASTATION EDIT - STORYTELLER
+	antag_flags = FLAG_FAKE_ANTAG
 
 /datum/antagonist/obsessed/admin_add(datum/mind/new_owner,mob/admin)
 	var/mob/living/carbon/C = new_owner.current

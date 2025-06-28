@@ -1,7 +1,7 @@
 /datum/round_event_control/obsessed
 	name = "Obsession Awakening"
 	typepath = /datum/round_event/obsessed
-	max_occurrences = 2 //BANDASTATION EDIT - STORYTELLER
+	max_occurrences = 1
 	min_players = 20
 	category = EVENT_CATEGORY_HEALTH
 	description = "A random crewmember becomes obsessed with another."
@@ -16,8 +16,6 @@
 		if(H.stat == DEAD)
 			continue
 		if(!(H.mind.assigned_role.job_flags & JOB_CREW_MEMBER)) //only station jobs sans nonhuman roles, prevents ashwalkers trying to stalk with crewmembers they never met
-			continue
-		if((H.mind.assigned_role in protected_roles)) //BANDASTATION EDIT - STORYTELLER
 			continue
 		if(H.mind.has_antag_datum(/datum/antagonist/obsessed))
 			continue
