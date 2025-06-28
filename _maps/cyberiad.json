@@ -23,22 +23,26 @@
 	],
 	"job_changes": {
 		"Cook": {
-			"additional_cqc_areas": ["/area/station/service/bar", "/area/station/commons/lounge", "/area/station/service/kitchen"]
+			"additional_cqc_areas": [
+				"/area/station/service/bar",
+				"/area/station/commons/lounge",
+				"/area/station/service/kitchen"
+			]
 		},
 		"Captain": {
 			"no_charter": 1
 		},
 		"Nanotrasen Representative": {
-            "spawn_positions": 1
-        },
-        "Blueshield": {
-            "spawn_positions": 1
-        },
-        "Magistrate": {
-            "spawn_positions": 1
-        },
-        "Explorer": {
-            "spawn_positions": 4
-        }
+			"spawn_positions": 1
+		},
+		"Blueshield": {
+			"spawn_positions": 1
+		},
+		"Magistrate": {
+			"spawn_positions": 1
+		},
+		"Explorer": {
+			"spawn_positions": 4
+		}
 	}
 }

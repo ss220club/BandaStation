@@ -1,16 +1,12 @@
 /datum/dna
 	var/datum/tts_seed/tts_seed_dna
 
-/datum/dna/transfer_identity(mob/living/carbon/destination, transfer_SE, transfer_species)
-	if(!istype(destination))
+/datum/dna/copy_dna(datum/dna/new_dna, transfer_flags = COPY_DNA_SE|COPY_DNA_SPECIES)
+	. = ..()
+	if(!istype(new_dna.holder))
 		return
-	. = ..()
-	destination.dna.tts_seed_dna = tts_seed_dna
-	destination.AddComponent(/datum/component/tts_component, tts_seed_dna)
-
-/datum/dna/copy_dna(datum/dna/new_dna)
-	. = ..()
 	new_dna.tts_seed_dna = tts_seed_dna
+	new_dna.holder.AddComponent(/datum/component/tts_component, tts_seed_dna)
 
 /atom/proc/add_tts_component()
 	return

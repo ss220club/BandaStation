@@ -321,8 +321,13 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	if(can_be_reskinned)
 		displayed_text[FA_ICON_SWATCHBOOK] = "Смена стиля"
 
+	// BANDASTATION ADDITION - START
+	if(can_be_named)
+		displayed_text[FA_ICON_SIGNATURE] = "Смена имени"
+
 	if(animated)
-		displayed_text[FA_ICON_PERSON_RUNNING] = "Анимированно"  // BANDASTATION ADDITION
+		displayed_text[FA_ICON_PERSON_RUNNING] = "Анимированно"
+	// BANDASTATION ADDITION - END
 
 	return displayed_text
 

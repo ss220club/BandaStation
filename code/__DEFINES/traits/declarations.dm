@@ -432,6 +432,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SILENT_FOOTSTEPS "silent_footsteps"
 /// hnnnnnnnggggg..... you're pretty good....
 #define TRAIT_NICE_SHOT "nice_shot"
+/// trait added if mob is killed with an anti pest reagent
+#define TRAIT_BUGKILLER_DEATH "bugkiller_death"
 /// prevents the damage done by a brain tumor
 #define TRAIT_TUMOR_SUPPRESSED "brain_tumor_suppressed"
 /// Prevents hallucinations from the hallucination brain trauma (RDS)
@@ -1315,7 +1317,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Trait determines if this mob has examined an eldritch painting
 #define TRAIT_ELDRITCH_PAINTING_EXAMINE "eldritch_painting_examine"
 
-/// Trait used by the /datum/brain_trauma/severe/flesh_desire trauma to change their preferences of what they eat
+/// Trait used by the /obj/item/wallframe/painting/eldritch/desire status effect to change their preferences of what they eat
 #define TRAIT_FLESH_DESIRE "flesh_desire"
 
 ///Trait granted by janitor skillchip, allows communication with cleanbots
@@ -1505,5 +1507,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Trait given to colorblind mobs
 #define TRAIT_COLORBLIND "colorblind"
+
+/// Trait that signals to objects on this turf that its open (has UNDERFLOOR_INTERACTIBLE) but still covers them
+#define TRAIT_UNCOVERED_TURF "uncovered_turf"
 
 // END TRAIT DEFINES

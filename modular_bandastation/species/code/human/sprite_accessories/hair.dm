@@ -280,6 +280,7 @@
 /datum/sprite_accessory/hair/tajaran/inari
 	name = "Tajaran Inari"
 	icon_state = "inari"
+	hair_appendages_inner = list("inari_a1" = HAIR_APPENDAGE_HANGING_REAR)
 
 /datum/sprite_accessory/hair/tajaran/frontbraids
 	name = "Tajaran Frontbraids"
