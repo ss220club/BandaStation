@@ -387,7 +387,7 @@
 	cost = 7
 	minimum_round_time = 70 MINUTES
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
-	//ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE) // BANDASTATION EDIT - STORYTELLER
+	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE)
 	flags = HIGH_IMPACT_RULESET
 	signup_item_path = /obj/machinery/nuclearbomb
 
