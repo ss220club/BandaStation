@@ -49,7 +49,7 @@
 /obj/projectile/bullet/c35sol/ap
 	name = ".35 Sol Short armor-piercing bullet"
 	damage = 15
-	bare_wound_bonus = -30
+	exposed_wound_bonus = -30
 	armour_penetration = 20
 
 //  MARK: 7.62x39mm
@@ -236,7 +236,7 @@
 	name = "9x25mm NT bullet"
 	damage = 15
 	wound_bonus = -5
-	bare_wound_bonus = 5
+	exposed_wound_bonus = 5
 	embed_falloff_tile = -4
 
 /obj/projectile/bullet/c9x25mm/rubber
@@ -244,7 +244,7 @@
 	damage = 5
 	stamina = 20
 	wound_bonus = -40
-	bare_wound_bonus = -20
+	exposed_wound_bonus = -20
 	weak_against_armour = TRUE
 	ricochet_auto_aim_angle = 30
 	ricochet_auto_aim_range = 5
@@ -263,7 +263,7 @@
 	sharpness = SHARP_EDGED
 	ricochets_max = 0
 	wound_bonus = 20
-	bare_wound_bonus = 20
+	exposed_wound_bonus = 20
 	embed_type = /datum/embedding/bullet/c9x25mm/hp
 	embed_falloff_tile = -15
 
@@ -278,9 +278,9 @@
 	rip_time = 1 SECONDS
 
 /obj/projectile/bullet/c9x25mm/ap
-	name = "9x25mm NT armor piercing bullet"
+	name = "9x25mm NT armor-piercing bullet"
 	damage = 15
-	bare_wound_bonus = -30
+	exposed_wound_bonus = -30
 	armour_penetration = 20
 
 // MARK: Visual effect after firing (muzzle flash)
