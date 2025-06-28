@@ -15,9 +15,9 @@
 	if(get_malf_status(malf) != APC_AI_NO_HACK)
 		return
 	if(malf.malfhacking)
-		to_chat(malf, span_warning("You are already hacking an APC!"))
+		to_chat(malf, span_warning("Вы уже взламываете ЛКП!"))
 		return
-	to_chat(malf, span_notice("Beginning override of APC systems. This takes some time, and you cannot perform other actions during the process."))
+	to_chat(malf, span_notice("Запуск взлома систем ЛКП. Это займет некоторое время, в течении которого вы не сможете выполнять другие действия."))
 	malf.malfhack = src
 	malf.malfhacking = addtimer(CALLBACK(malf, TYPE_PROC_REF(/mob/living/silicon/ai/, malfhacked), src), 600, TIMER_STOPPABLE)
 

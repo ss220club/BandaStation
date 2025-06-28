@@ -231,7 +231,6 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, span_boldannounce("Starting game..."))
 	var/init_start = world.timeofday
-
 	CHECK_TICK
 	//Configure mode and assign player to antagonists
 	var/can_continue = FALSE
@@ -284,7 +283,7 @@ SUBSYSTEM_DEF(ticker)
 	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore,SetRoundStart))
 
 	to_chat(world, span_notice(span_bold("Welcome to [station_name()], enjoy your stay!")))
-	SEND_SOUND(world, sound(SSstation.announcer.get_rand_welcome_sound()))
+	SEND_SOUND(world, sound(SSmapping.current_map?.welcome_sound_override || SSstation.announcer.get_rand_welcome_sound()))
 
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
@@ -466,6 +465,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/create_characters()
 	for(var/i in GLOB.new_player_list)
 		var/mob/dead/new_player/player = i
+		SStitle.show_title_screen_to(player.client) // BANDASTATION ADDITION - HTML Title Screen
 		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
 			GLOB.joined_player_list += player.ckey
 			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()

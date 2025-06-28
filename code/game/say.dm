@@ -10,6 +10,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	"[FREQ_SUPPLY]" = "suppradio",
 	"[FREQ_SERVICE]" = "servradio",
 	"[FREQ_SECURITY]" = "secradio",
+	"[FREQ_JUSTICE]" = "justiceradio", // BANDASTAION ADD - Jobs Module
 	"[FREQ_COMMAND]" = "comradio",
 	"[FREQ_AI_PRIVATE]" = "aiprivradio",
 	"[FREQ_ENTERTAINMENT]" = "enteradio",
@@ -162,7 +163,6 @@ GLOBAL_LIST_INIT(freqtospan, list(
 		SEND_SIGNAL(speaker, COMSIG_MOVABLE_MESSAGE_GET_NAME_PART, stored_name, visible_name)
 
 	namepart = stored_name[NAME_PART_INDEX] || "[speaker.GetVoice()]"
-
 	//End name span.
 	var/endspanpart = "</span>"
 
@@ -180,7 +180,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 
 	messagepart = " <span class='message'>[messagepart]</span></span>"
 
-	return "[spanpart1][spanpart2][freqpart][languageicon][compose_track_href(speaker, namepart)][namepart][compose_job(speaker, message_language, raw_message, radio_freq)][endspanpart][messagepart]"
+	return "[spanpart1][spanpart2][freqpart][languageicon][compose_track_href(speaker, namepart)]["<span style='color: [speaker.chat_color]'>[namepart]</span>"][compose_job(speaker, message_language, raw_message, radio_freq)][endspanpart][messagepart]" // BANDASTATION Addition: span with color
 
 /atom/movable/proc/compose_track_href(atom/movable/speaker, message_langs, raw_message, radio_freq)
 	return ""
@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
  * like human_say.dm's tongue-based verb_say changes.
  */
 /atom/movable/proc/get_default_say_verb()
-	return verb_say
+	return ru_say_verb(verb_say)
 
 /**
  * This prock is used to generate a message for chat
@@ -323,7 +323,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return "0"
 
 /atom/proc/GetVoice()
-	return "[src]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
+	return "[capitalize(declent_ru(NOMINATIVE))]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
 
 //HACKY VIRTUALSPEAKER STUFF BEYOND THIS POINT
 //these exist mostly to deal with the AIs hrefs and job stuff.

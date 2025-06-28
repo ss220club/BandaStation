@@ -197,6 +197,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	chat_toggles = savefile.get_entry("chat_toggles", chat_toggles)
 	toggles = savefile.get_entry("toggles", toggles)
 	ignoring = savefile.get_entry("ignoring", ignoring)
+	// BANDASTATION ADDITION - START - Pref Job Slots
+	pref_job_slots = savefile.get_entry("pref_job_slots", pref_job_slots)
+	job_preferences = savefile.get_entry("job_preferences", job_preferences)
+	// BANDASTATION ADDITION - END
 
 	// OOC commendations
 	hearted_until = savefile.get_entry("hearted_until", hearted_until)
@@ -233,6 +237,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	be_special = sanitize_be_special(SANITIZE_LIST(be_special))
 	key_bindings = sanitize_keybindings(key_bindings)
 	favorite_outfits = SANITIZE_LIST(favorite_outfits)
+	// BANDASTATION ADDITION - START - Pref Job Slots
+	pref_job_slots = SANITIZE_LIST(pref_job_slots)
+	job_preferences = SANITIZE_LIST(job_preferences)
+	// BANDASTATION ADDITION - END
+
+	// BANDASTATION ADDITION - START - Pref Job Slots
+	//Validate job prefs
+	for(var/j in job_preferences)
+		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
+			job_preferences -= j
+	// BANDASTATION ADDITION - END
 
 	if(needs_update >= 0) //save the updated version
 		var/old_default_slot = default_slot
@@ -281,6 +296,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	savefile.set_entry("key_bindings", key_bindings)
 	savefile.set_entry("hearted_until", (hearted_until > world.realtime ? hearted_until : null))
 	savefile.set_entry("favorite_outfits", favorite_outfits)
+	// BANDASTATION ADDITION - START
+	savefile.set_entry("pref_job_slots", pref_job_slots)
+	savefile.set_entry("job_preferences", job_preferences)
+	// BANDASTATION ADDITION - END
 	savefile.save()
 	return TRUE
 
@@ -312,7 +331,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	randomise = save_data?["randomise"]
 
 	//Load prefs
-	job_preferences = save_data?["job_preferences"]
+	// job_preferences = save_data?["job_preferences"] // BANDASTATION MOVED - Pref Job Slots
 
 	//Quirks
 	all_quirks = save_data?["all_quirks"]
@@ -324,13 +343,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Sanitize
 	randomise = SANITIZE_LIST(randomise)
-	job_preferences = SANITIZE_LIST(job_preferences)
+	// job_preferences = SANITIZE_LIST(job_preferences) // BANDASTATION MOVED - Pref Job Slots
 	all_quirks = SANITIZE_LIST(all_quirks)
 
 	//Validate job prefs
-	for(var/j in job_preferences)
-		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
-			job_preferences -= j
+	// BANDASTATION MOVED - START - Pref Job Slots
+	// for(var/j in job_preferences)
+	// 	if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
+	// 		job_preferences -= j
+	// BANDASTATION MOVED - END
 
 	all_quirks = SSquirks.filter_invalid_quirks(SANITIZE_LIST(all_quirks))
 	validate_quirks()
@@ -370,7 +391,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	save_data["randomise"] = randomise
 
 	//Write prefs
-	save_data["job_preferences"] = job_preferences
+	// save_data["job_preferences"] = job_preferences // BANDASTATION MOVED - Pref Job Slots
 
 	//Quirks
 	save_data["all_quirks"] = all_quirks
@@ -387,7 +408,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
 		preference_middleware.on_new_character(usr)
 
-	character_preview_view.update_body()
+	character_preview_view?.update_body() // BANDASTATION EDIT - Pref Job Slots
 
 /datum/preferences/proc/remove_current_slot()
 	PRIVATE_PROC(TRUE)

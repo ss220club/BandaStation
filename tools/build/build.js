@@ -209,6 +209,7 @@ export const DmTarget = new Juke.Target({
     "html/**",
     "icons/**",
     "interface/**",
+    "modular_bandastation/**", // BANDASTATION EDIT ADDITION - Making the CBT work
     "sound/**",
     "tgui/public/tgui.html",
     `${DME_NAME}.dme`,
@@ -321,7 +322,7 @@ export const BunTarget = new Juke.Target({
   parameters: [CiParameter],
   inputs: ["tgui/**/package.json"],
   executes: () => {
-    return bun("install", "--frozen-lockfile", "--ignore-scripts");
+    return bun("install", "--ignore-scripts"); // BANDASTATION EDIT - remove --frozen-lockfile
   },
 });
 

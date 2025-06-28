@@ -12,7 +12,7 @@
 	show_to_ghosts = TRUE
 	antag_hud_name = "obsessed"
 	show_name_in_check_antagonists = TRUE
-	roundend_category = "obsessed"
+	roundend_category = "Одержимые"
 	antag_flags = ANTAG_SKIP_GLOBAL_LIST
 	silent = TRUE //not actually silent, because greet will be called by the trauma anyway.
 	suicide_cry = "FOR MY LOVE!!"
@@ -189,7 +189,7 @@
 /datum/objective/assassinate/obsessed/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Murder [target.name], the [!target_role_type ? target.assigned_role.title : english_list(target.get_special_roles())]."
+		explanation_text = "Убейте [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())]."
 	else
 		message_admins("WARNING! [ADMIN_LOOKUPFLW(owner)] obsessed objectives forged without an obsession!")
 		explanation_text = "Free Objective"
@@ -201,7 +201,7 @@
 	..()
 	old = find_coworker(target)
 	if(target?.current && old)
-		explanation_text = "Murder [target.name], [old]'s coworker."
+		explanation_text = "Убейте [target.name], коллегу [old]."
 	else
 		explanation_text = "Free Objective"
 
@@ -239,7 +239,7 @@
 	var/datum/antagonist/obsessed/creeper = owner.has_antag_datum(/datum/antagonist/obsessed)
 	if(target?.current && creeper)
 		creeper.trauma.attachedobsessedobj = src
-		explanation_text = "Spend [DisplayTimeText(timer)] around [target.name] while they're alive."
+		explanation_text = "Проведите [DisplayTimeText(timer)] возле [target.name], пока они живы."
 	else
 		explanation_text = "Free Objective"
 
@@ -257,7 +257,7 @@
 		hugs_needed = rand(4,6)
 	var/datum/antagonist/obsessed/creeper = owner.has_antag_datum(/datum/antagonist/obsessed)
 	if(target?.current && creeper)
-		explanation_text = "Hug [target.name] [hugs_needed] times while they're alive."
+		explanation_text = "Обнимите [target.name] [hugs_needed] раз, пока они живы."
 	else
 		explanation_text = "Free Objective"
 
@@ -273,7 +273,7 @@
 /datum/objective/polaroid/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Take a photo of [target.name] while they're alive, and keep it in your bag."
+		explanation_text = "Сделайте фото [target.name], пока они живы, и храните фотографию у себя."
 	else
 		explanation_text = "Free Objective"
 
@@ -297,7 +297,7 @@
 /datum/objective/steal/heirloom_thief/update_explanation_text()
 	..()
 	if(steal_target)
-		explanation_text = "Steal [target.name]'s family heirloom, [steal_target] they cherish."
+		explanation_text = "Украдите семейную реликвию, [steal_target.declent_ru(NOMINATIVE)], которая чтится у [target.name]."
 	else
 		explanation_text = "Free Objective"
 

@@ -191,8 +191,8 @@
 
 /obj/machinery/telecomms/server/presets/security
 	id = "Security Server"
-	freq_listening = list(FREQ_SECURITY)
-	autolinkers = list("security")
+	freq_listening = list(FREQ_SECURITY, FREQ_JUSTICE)
+	autolinkers = list("security", "justice") // BANDASTATION ADD - Jobs Module
 
 /obj/machinery/telecomms/server/presets/security/New()
 	. = ..()

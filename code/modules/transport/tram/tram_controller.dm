@@ -625,7 +625,7 @@
 	log_transport("TC: [specific_transport_id] ending Tram Malfunction event.")
 
 /datum/transport_controller/linear/tram/proc/announce_malf_event()
-	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please stand by, engineering has been dispatched to the tram to perform a reset.", "[command_name()] Engineering Division")
+	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please stand by, engineering has been dispatched to the tram to perform a reset.", "[command_name()] Инженерный отдел")
 
 /datum/transport_controller/linear/tram/proc/register_collision(points = 1)
 	tram_registration.collisions += points
@@ -865,7 +865,7 @@
 	if(cover_locked)
 		var/obj/item/card/id/id_card = user.get_idcard(TRUE)
 		if(isnull(id_card))
-			balloon_alert(user, "access denied!")
+			balloon_alert(user, "в доступе отказано!")
 			return
 
 		try_toggle_lock(user, id_card)
@@ -881,7 +881,7 @@
 	if(!cover_open)
 		var/obj/item/card/id/id_card = user.get_idcard(TRUE)
 		if(isnull(id_card))
-			balloon_alert(user, "access denied!")
+			balloon_alert(user, "в доступе отказано!")
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 		try_toggle_lock(user, id_card)
@@ -911,7 +911,7 @@
 		update_appearance()
 		return TRUE
 
-	balloon_alert(user, "access denied!")
+	balloon_alert(user, "в доступе отказано!")
 	return FALSE
 
 /obj/machinery/transport/tram_controller/wrench_act_secondary(mob/living/user, obj/item/tool)
