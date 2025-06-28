@@ -71,7 +71,7 @@ ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Opens Game Panel (TGUI).", ADMIN_
 		return
 	switch(action)
 		if("game-mode-panel")
-			SSgamemode.admin_panel(usr)
+			SSdynamic.admin_panel()
 		if("selected-object-changed")
 			selected_object = params?["newObj"]
 			return TRUE
