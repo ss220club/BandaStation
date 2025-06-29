@@ -1,6 +1,6 @@
 // MARK: .35 Sol
 /obj/item/ammo_casing/c35sol
-	name = ".35 Sol Short lethal bullet casing"
+	name = ".35 Sol Short bullet casing"
 	desc = "Стандартный летальный пистолетный патрон ТСФ калибра .35 Sol Short."
 	caliber = CALIBER_SOL35SHORT
 	projectile_type = /obj/projectile/bullet/c35sol
@@ -23,7 +23,7 @@
 
 // .35 sol armor piercing are the AP rounds for this weapon
 /obj/item/ammo_casing/c35sol/ap
-	name = ".35 Sol Short armor piercing bullet casing"
+	name = ".35 Sol Short armor-piercing bullet casing"
 	desc = "Стандартный бронебойный пистолетный патрон ТСФ калибра .35 Sol Short. Пробивает броню, но довольно слаб против небронированных целей."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "sa-casing"
@@ -92,7 +92,7 @@
 
 // MARK: .40 Sol Long
 /obj/item/ammo_casing/c40sol
-	name = ".40 Sol Long lethal bullet casing"
+	name = ".40 Sol Long bullet casing"
 	desc = "Стандартный винтовочный патрон ТСФ калибра .40 Sol Long."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "40sol"
@@ -122,3 +122,32 @@
 	desc = "Стандартный зажигательный винтовочный патрон ТСФ калибра .40 Sol Long. Не оставляет огненного следа, воспламеняя цель только при попадании."
 	icon_state = "40sol_flame"
 	projectile_type = /obj/projectile/bullet/incendiary/c40sol
+
+// MARK: 9x25mm NT
+/obj/item/ammo_casing/c9x25mm
+	name = "9x25mm NT bullet casing"
+	desc = "Стандартный летальный пистолетный патрон НТ калибра 9x25мм."
+	caliber = CALIBER_9x25NT
+	projectile_type = /obj/projectile/bullet/c9x25mm
+
+/obj/item/ammo_casing/c9x25mm/rubber
+	name = "9x25mm NT rubber bullet casing"
+	desc = "Стандартный нелетальный резиновый пистолетный патрон НТ калибра 9x25мм. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "sr-casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/rubber
+	harmful = FALSE
+
+/obj/item/ammo_casing/c9x25mm/hp
+	name = "9x25mm NT hollow-point bullet casing"
+	desc = "Стандартный экспансивный пистолетный патрон НТ калибра 9x25мм. Наносит целям режущие раны, но слаб против брони."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "sl-casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/hp
+
+/obj/item/ammo_casing/c9x25mm/ap
+	name = "9x25mm NT armor-piercing bullet casing"
+	desc = "Стандартный бронебойный пистолетный патрон НТ калибра 9x25мм. Пробивает броню, но довольно слаб против небронированных целей."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "sa-casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/ap
