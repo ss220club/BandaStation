@@ -372,7 +372,7 @@
 	var/area/summon_location = get_area(cultist)
 	priority_announce(
 		text = "Зафиксирован призыв древнего божества культистом [cultist.real_name] в [summon_location.get_original_area_name()]. Прервите ритуал любой ценой!",
-		sound = 'modular_bandastation/aesthetics_sounds/sound/announcements/cult_summon.ogg',
+		sound = 'modular_bandastation/cult_overhaul/sound/announcements/cult_summon.ogg', // BANDASTATION EDIT - Cult Overhaul
 		sender_override = "[command_name()]: Отдел паранормальных явлений",
 		has_important_message = TRUE,
 	)

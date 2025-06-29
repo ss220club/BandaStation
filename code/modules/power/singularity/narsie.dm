@@ -68,7 +68,7 @@
 	))
 
 	send_to_playing_players(span_narsie("NAR'SIE HAS RISEN"))
-	sound_to_playing_players('modular_bandastation/aesthetics_sounds/sound/narsie/narsie_risen.ogg') // BANDASTATION EDIT
+	sound_to_playing_players('modular_bandastation/cult_overhaul/sound/narsie/narsie_risen.ogg') // BANDASTATION EDIT - Cult Overhaul
 
 	var/area/area = get_area(src)
 	if(area)
@@ -248,7 +248,7 @@
  *  * [/proc/cult_ending_helper()]
  */
 /proc/begin_the_end()
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_end_begin_check)), 5 SECONDS)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_end_begin_check)), 15 SECONDS) // BANDASTATION EDIT - Cult Overhaul (5 -> 15 seconds timer before announce to evade ear rape during cult rise)
 
 ///First crew last second win check and flufftext for [/proc/begin_the_end()]
 /proc/narsie_end_begin_check()
@@ -258,14 +258,14 @@
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(cult_ending_helper), CULT_FAILURE_NARSIE_KILLED), 2 SECONDS)
 		return
 	priority_announce(
-		/// BANDASTATION EDIT START - Cult
+		// BANDASTATION EDIT START - Cult Overhaul (text tweak)
 		text = "Внимание, это приоритетное оповещение. \
 			Сектор Эпсилон Эридани был подвергнут вторжению древней богоподобной враждебной сущности, \
 			у нас есть подтвержденная информация о массовых порабощениях по всему сектору. Положению присвоен сценарий \
 			\"ПОЛНОЕ ИСТРЕБЛЕНИЕ\". Приказ на принятие мер получен и авторизован. Ожидаемое время готовности: 60 секунд.",
-		/// BANDASTATION EDIT END - Cult
+		// BANDASTATION EDIT END - Cult Overhaul
 		title = "[command_name()]: Отдел паранормальных явлений",
-		sound = 'modular_bandastation/aesthetics_sounds/sound/announcements/narsie_end_begin_announcement.ogg', /// BANDASTATION EDIT - Cult
+		sound = 'modular_bandastation/cult_overhaul/sound/announcements/cult_rise_announcement.ogg', // BANDASTATION EDIT - Cult Overhaul (sound replacement)
 	)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_end_second_check)), 50 SECONDS)
 
@@ -276,12 +276,12 @@
 		GLOB.cult_narsie = null
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(cult_ending_helper), CULT_FAILURE_NARSIE_KILLED), 2 SECONDS)
 		return
-	priority_announce("Моделирование беспричинного изменения пространства завершено. Обрабатываем решение для развертывания. Время до развертывания: ОДНА МИНУТА.","[command_name()]: Отдел паранормальных явлений")
+	priority_announce("Моделирование беспричинного изменения пространства завершено. Начинаем развертывание.","[command_name()]: Отдел паранормальных явлений")
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_start_destroy_station)), 5 SECONDS)
 
 ///security level and shuttle lockdowns for [/proc/begin_the_end()]
 /proc/narsie_start_destroy_station()
-	SSsecurity_level.set_level(SEC_LEVEL_DELTA)
+	// SSsecurity_level.set_level(SEC_LEVEL_DELTA) // BANDASTATION REMOVAL - Cult Overhaul
 	SSshuttle.registerHostileEnvironment(GLOB.cult_narsie)
 	SSshuttle.lockdown = TRUE
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_apocalypse)), 1 MINUTES)
@@ -295,6 +295,7 @@
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(narsie_last_second_win)), 2 SECONDS)
 		return
 	if(GLOB.cult_narsie.resolved == FALSE)
+		priority_announce("Тревога! Обнаружен запуск орбитального эммитера. Протоколы безопасности станции обнулены, возобновление нево@#$%^-...", "Оповещение безопасности", 'sound/announcer/notice/notice1.ogg', color_override = "red") // BANDASTATION ADDITION - Cult Overhaul
 		GLOB.cult_narsie.resolved = TRUE
 		sound_to_playing_players('sound/announcer/alarm/nuke_alarm.ogg', 70)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(cult_ending_helper)), 12 SECONDS)
