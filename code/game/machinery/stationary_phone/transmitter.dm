@@ -14,6 +14,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define PHONE_DND_FORBIDDEN -1
 
 #define SINGLE_CALL_PRICE 5
+#define RING_TIMEOUT 4
 
 /obj/structure/transmitter
 	name = "rotary telephone"
@@ -24,22 +25,26 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	layer = OBJ_LAYER + 0.01
 	pass_flags = PASSTABLE
 
-	var/phone_category = PHONE_NET_PUBLIC
+
 	var/phone_color = "white"
+	/// The unique ID of this transmitter
 	var/phone_id = "Telephone"
+	var/total_ids = 1
+	/// The name of this transmitter as seen on the other devices
 	var/display_name
 	var/phone_icon
 	var/obj/item/telephone/attached_to
 	// var/atom/tether_holder
+	/// The phone calling you or the phone you're calling
+	var/obj/structure/transmitter/active_call
 	var/obj/structure/transmitter/outbound_call
 	var/obj/structure/transmitter/inbound_call
-	var/next_ring = 0
 	var/phone_type = /obj/item/telephone
 	var/range = 3
 	var/enabled = TRUE
 	/// Whether or not the phone will emit sound when receiving a call.
 	var/do_not_disturb = PHONE_DND_OFF
-	/// If this phone is advanced enough to display th caller and the call history
+	/// If this phone is advanced enough to display the caller and the call history
 	var/is_advanced = TRUE
 	/// Who is calling this phone?
 	var/current_caller
@@ -48,9 +53,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/default_icon_state
 	var/timeout_timer_id
 	var/timeout_duration = 30 SECONDS
-	/// THEY can call you from there (and above)
+	/// What network does this phone belong to?
+	var/phone_category = PHONE_NET_PUBLIC
+	/// Which networks can call this phone?
 	var/list/networks_receive = list(PHONE_NET_PUBLIC)
-	/// YOU can call there
+	/// Which networks this phone can call?
 	var/list/networks_transmit = list(PHONE_NET_PUBLIC)
 	var/datum/looping_sound/telephone/busy/busy_loop
 	var/datum/looping_sound/telephone/hangup/hangup_loop
@@ -61,7 +68,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	// If the next call has been paid for
 	var/is_paid = FALSE
 
-/obj/structure/transmitter/Initialize(mapload, ...)
+/obj/structure/transmitter/Initialize(mapload, new_phone_id, new_display_name)
 	. = ..()
 	default_icon_state = icon_state
 	attached_to = new phone_type(src)
@@ -76,9 +83,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	GLOB.transmitters += src
 
+	phone_id = new_phone_id ? new_phone_id : num2text(total_ids++)
+	display_name = new_display_name || "[get_area_name(src, TRUE)] [initial(name)]"
+
 	if(name == initial(name))
-		name = "[get_area_name(src,)] [initial(name)]"
-		phone_id = "[get_area_name(src, TRUE)]"
+		name = "[get_area_name(src, TRUE)] [initial(name)]"
 
 /obj/structure/transmitter/Destroy()
 	if(attached_to)
@@ -195,8 +204,8 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	var/datum/bank_account/service_account = SSeconomy.get_dep_account(ACCOUNT_SRV)
 	to_chat(user, span_notice("You swipe the card..."))
+	is_paid = TRUE
 	service_account.transfer_money(used_card.registered_account, SINGLE_CALL_PRICE, "Telephone: [phone_id]")
-
 
 /obj/structure/transmitter/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(tool == attached_to)
@@ -241,7 +250,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/mob/living/carbon/human/user = usr
 	switch(action)
 		if("call_phone")
-			call_phone(user, params["phone_id"])
+			process_outbound_call(user, params["phone_id"])
 			. = TRUE
 			SStgui.close_uis(src)
 		if("toggle_dnd")
@@ -300,51 +309,63 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			num_id++
 		target_phone.phone_id = id
 		phone_list[id] = target_phone
-	return phone_list
+	return phone_list - phone_id
 
-/obj/structure/transmitter/proc/call_phone(mob/living/carbon/human/user, calling_phone_id)
-	var/list/transmitters = get_transmitters()
-	transmitters -= phone_id
+/obj/structure/transmitter/proc/process_outbound_call(mob/living/carbon/human/user, calling_phone_id)
+	if(!is_free && !is_paid)
+		to_chat(user, span_notice("[icon2html(src, user)] Please deposit $5."))
+		return
+
+	var/static/list/transmitters = get_transmitters()
+
 	if(!length(transmitters) || !(calling_phone_id in transmitters))
-		to_chat(user, span_purple("[icon2html(src, user)] No transmitters could be located to call!"))
+		to_chat(user, span_notice("[icon2html(src, user)] No transmitters could be located to call!"))
 		return
-	var/obj/structure/transmitter/T = transmitters[calling_phone_id]
-	if(!istype(T) || QDELETED(T))
-		transmitters -= T
-		CRASH("Qdelled/improper atom inside transmitters list! (istype returned: [istype(T)], QDELETED returned: [QDELETED(T)])")
-	if(TRANSMITTER_UNAVAILABLE(T))
+
+	var/obj/structure/transmitter/target = transmitters[calling_phone_id]
+	if(!istype(target) || QDELETED(target))
+		transmitters -= target
+		CRASH("Qdelled/improper atom inside transmitters list! (istype returned: [istype(target)], QDELETED returned: [QDELETED(target)])")
+
+	if(TRANSMITTER_UNAVAILABLE(target))
 		return
+
 	user.put_in_hands(attached_to)
-	to_chat(user, span_purple("[icon2html(src, user)] Dialing [calling_phone_id].."))
-	playsound(get_turf(user), pick('sound/machines/telephone/rtb_handset_1.ogg',
-									'sound/machines/telephone/rtb_handset_2.ogg',
-									'sound/machines/telephone/rtb_handset_3.ogg',
-									'sound/machines/telephone/rtb_handset_4.ogg',
-									'sound/machines/telephone/rtb_handset_5.ogg'), 100)
-	if(T.get_calling_phone() || T.attached_to.loc != T)
-		to_chat(user, span_purple("[icon2html(src, user)] Your call to [T.phone_id] has reached voicemail, the line is busy."))
+	to_chat(user, span_notice("[icon2html(src, user)] Dialing [calling_phone_id]..."))
+	playsound(get_turf(user), pick(
+		'sound/machines/telephone/rtb_handset_1.ogg',
+		'sound/machines/telephone/rtb_handset_2.ogg',
+		'sound/machines/telephone/rtb_handset_3.ogg',
+		'sound/machines/telephone/rtb_handset_4.ogg',
+		'sound/machines/telephone/rtb_handset_5.ogg'), 100)
+
+	if(target.get_calling_phone() || target.attached_to.loc != target)
+		to_chat(user, span_purple("[icon2html(src, user)] Your call to [target.phone_id] has reached voicemail, the line is busy."))
 		busy_loop.start()
 		return
-	outbound_call = T
-	outbound_call.inbound_call = src
-	T.current_caller = src.phone_id
-	T.callers_list += "[src.phone_id] - [STATION_TIME_PASSED("hh:mm:ss", world.time)]"
-	if(T.callers_list.len > 5)
-		T.callers_list.Remove(T.callers_list[1])
-	T.update_icon()
+
+	outbound_call = target
+
+	target.inbound_call = src
+	target.process_inbound_call(phone_id)
+
+	is_paid = FALSE
+
+	target.callers_list += "[src.phone_id] - [STATION_TIME_PASSED("hh:mm:ss", world.time)]"
+	if(target.callers_list.len > 5)
+		target.callers_list.Remove(target.callers_list[1])
+	target.update_icon()
 	timeout_timer_id = addtimer(CALLBACK(src, PROC_REF(reset_call), TRUE), timeout_duration, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_STOPPABLE)
 	outring_loop.start()
 	START_PROCESSING(SSobj, src)
-	START_PROCESSING(SSobj, T)
+	START_PROCESSING(SSobj, target)
 
 /obj/structure/transmitter/proc/toggle_dnd(mob/living/carbon/human/user)
 	switch(do_not_disturb)
 		if(PHONE_DND_ON)
 			do_not_disturb = PHONE_DND_OFF
-			to_chat(user, span_notice("Do Not Disturb has been disabled. You can now receive calls."))
 		if(PHONE_DND_OFF)
 			do_not_disturb = PHONE_DND_ON
-			to_chat(user, span_warning("Do Not Disturb has been enabled. No calls will be received."))
 		else
 			return FALSE
 	return TRUE
@@ -389,6 +410,23 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		attached_to?.reset_tether()
 	STOP_PROCESSING(SSobj, src)
 
+/obj/structure/transmitter/proc/try_ring()
+	if(!inbound_call || !attached_to.loc == src)
+		return
+
+	playsound(loc, 'sound/machines/telephone/telephone_ring.ogg', 75, FALSE)
+	visible_message(span_warning("[src] rings vigorously!"))
+	if(is_advanced)
+		say("Inconming call: [current_caller]")
+	else
+		balloon_alert_to_viewers("ring, ring!")
+
+	addtimer(CALLBACK(src, PROC_REF(try_ring)), RING_TIMEOUT)
+
+/obj/structure/transmitter/proc/process_inbound_call(obj/structure/transmitter/the_one_who_calls)
+	inbound_call = the_one_who_calls
+	try_ring()
+
 /obj/structure/transmitter/process()
 	if(attached_to)
 		if(attached_to.loc != src)
@@ -400,24 +438,18 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(!attached_to)
 			STOP_PROCESSING(SSobj, src)
 			return
-		if(attached_to.loc == src)
-			if(next_ring < world.time)
-				// balloon_alert_to_viewers("Inconming call: [last_caller]")
-				say("Inconming call: [current_caller]")
-				playsound(loc, 'sound/machines/telephone/telephone_ring.ogg', 75, FALSE)
-				visible_message(span_warning("[src] rings vigorously!"))
-				next_ring = world.time + 3 SECONDS
+
 	else if(outbound_call)
 		var/obj/structure/transmitter/T = get_calling_phone()
 		if(!T)
 			STOP_PROCESSING(SSobj, src)
 			return
 		var/obj/item/telephone/P = T.attached_to
-		// I'm pretty sure code below is never executed. But it is an original CMSS13 code. So I leave it as it is.
-		if(P && attached_to.loc == src && P.loc == T && next_ring < world.time)
-			playsound(get_turf(attached_to), 'sound/machines/telephone/telephone_ring.ogg', 20, FALSE, 14)
-			visible_message(span_warning("[src] rings vigorously!"))
-			next_ring = world.time + 3 SECONDS
+		// // I'm pretty sure code below is never executed. But it is an original CMSS13 code. So I leave it as it is.
+		// if(P && attached_to.loc == src && P.loc == T && next_ring < world.time)
+		// 	playsound(get_turf(attached_to), 'sound/machines/telephone/telephone_ring.ogg', 20, FALSE, 14)
+		// 	visible_message(span_warning("[src] rings vigorously!"))
+		// 	next_ring = world.time + 3 SECONDS
 	else
 		STOP_PROCESSING(SSobj, src)
 		return
