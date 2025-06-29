@@ -95,6 +95,10 @@
 		"c38_true_strike_mag",
 		"techshotshell",
 		"flechetteshell",
+		// BANDASTATION ADDITION - START - GP-9 NT Pistol
+		"c9x25mm_hp",
+		"c9x25mm_ap",
+		// BANDASTATION ADDITION - END - GP-9 NT Pistol
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_4_POINTS)
 	discount_experiments = list(/datum/experiment/ordnance/explosive/highyieldbomb = TECHWEB_TIER_4_POINTS)

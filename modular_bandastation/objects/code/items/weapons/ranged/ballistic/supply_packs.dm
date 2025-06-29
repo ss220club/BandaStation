@@ -40,7 +40,7 @@
 /datum/supply_pack/security/gp9_mags_extended
 	name = "9x25mm NT Extended Magazines Crate"
 	desc = "В этом ящике находятся два увеличенных магазина калибра 9x25мм НТ."
-	cost = CARGO_CRATE_VALUE * 4
+	cost = CARGO_CRATE_VALUE * 6
 	access_view = ACCESS_SECURITY
 	contains = list(
 		/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo = 1,
