@@ -1,7 +1,7 @@
 // MARK: .35 Sol
 /obj/projectile/bullet/c35sol
 	name = ".35 Sol Short bullet"
-	damage = 15
+	damage = 17
 	wound_bonus = -5 // Normal bullets are 20
 	exposed_wound_bonus = 5
 	embed_falloff_tile = -4
@@ -234,7 +234,7 @@
 // MARK: 9x25mm NT
 /obj/projectile/bullet/c9x25mm
 	name = "9x25mm NT bullet"
-	damage = 15
+	damage = 17
 	wound_bonus = -5
 	exposed_wound_bonus = 5
 	embed_falloff_tile = -4
