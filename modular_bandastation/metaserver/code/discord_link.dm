@@ -40,8 +40,6 @@
 		"window=authwindow;parent=mapwindow.map;titlebar=0;can_resize=0;size=0x0;background-color=black;"
 	)
 	SStitle.title_output(player, login_endpoint, "updateAuthBrowser")
-	get_player_discord_async(player.ckey)
-	addtimer(CALLBACK(SScentral, TYPE_PROC_REF(/datum/controller/subsystem/central, get_player_discord_async), player.ckey), 30 SECONDS)
 
 /datum/config_entry/flag/force_discord_verification
 	default = FALSE
