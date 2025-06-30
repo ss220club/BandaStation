@@ -416,6 +416,10 @@ export function MainPage(props: MainPageProps) {
   if (randomBodyEnabled) {
     nonContextualPreferences['random_species'] =
       data.character_preferences.randomization['species'];
+    // BANDASTATION ADDITION START - TTS
+    nonContextualPreferences['random_tts_seed'] =
+      data.character_preferences.randomization['tts_seed'];
+    // BANDASTATION ADDITION END - TTS
   } else {
     // We can't use random_name/is_accessible because the
     // server doesn't know whether the random toggle is on.
