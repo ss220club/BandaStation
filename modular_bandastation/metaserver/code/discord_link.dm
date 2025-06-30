@@ -30,7 +30,7 @@
 	var/list/data = json_decode(response.body)
 	var/login_endpoint = "[CONFIG_GET(string/ss_central_url)]/oauth/login?token=[data]"
 
-	to_chat(player, boxed_message("<a href='[login_endpoint]'>Привязать дискорд</a>."))
+	to_chat(player, boxed_message("<a href='[login_endpoint]'>Привязать дискорд</a>"))
 	player << browse(
 		"<!DOCTYPE html><html><head><meta charset=UTF-8'><script>location.href='[login_endpoint]'</script></head><body'></body></html>",
 		"window=authwindow;parent=mapwindow.map;titlebar=0;can_resize=0;size=0x0;background-color=black;"
