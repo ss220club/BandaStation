@@ -85,7 +85,7 @@ STATION_GOAL_BUDGET 1
 ## GAME MODES ###
 
 ## Uncomment to not send a roundstart intercept report. Gamemodes may override this.
-## NO_INTERCEPT_REPORT
+NO_INTERCEPT_REPORT
 
 ## Percent weight reductions for three of the most recent modes
 
@@ -379,6 +379,7 @@ ROUNDSTART_RACES ethereal
 #ROUNDSTART_RACES skeleton
 #ROUNDSTART_RACES zombie
 #ROUNDSTART_RACES pod
+#ROUNDSTART_RACES ghost
 
 ## Races that are radical departures to what a species is, so while they technically can be roundstart - it's probably not wise
 #ROUNDSTART_RACES android
