@@ -62,6 +62,7 @@ html {
   height: 100vh;
   margin: 0;
   background-color: black;
+  color: var(--color-text);
 }
 
 a {
@@ -88,6 +89,13 @@ img {
   border-style: none;
 }
 
+small {
+  vertical-align: top;
+  line-height: 1.5em;
+  font-size: 0.75rem;
+  color: var(--color-text-translucent);
+}
+
 input,
 .hidden {
   display: none !important;
@@ -111,7 +119,7 @@ input,
   inset: 0;
   width: 100vw;
   height: 100vh;
-  filter: drop-shadow(0 0 1em hsla(0, 0%, 0%, 0.33));
+  filter: drop-shadow(0 0 1em hsla(0, 0%, 0%, 0.5));
   transition-property: transform;
   transition-duration: var(--transition-time);
   z-index: 0;
@@ -286,7 +294,7 @@ html.loading {
   margin-top: 0.5rem;
   padding: var(--indent-default);
 
-  a.lobby_element {
+  .lobby_element {
     flex: 1;
     display: inline-flex;
     justify-content: center;
@@ -387,10 +395,13 @@ html.loading {
 /**
  * MARK: Buttons
  */
-a.lobby_element {
+.lobby_element {
+  cursor: pointer;
   display: block;
+  text-align: left;
   font-size: 1.35rem;
   padding: 0.33em 0.33em 0.25em;
+  background-color: transparent;
   color: var(--color-text-translucent);
   border: 1px solid transparent;
   border-radius: calc(var(--border-radius-large) - var(--indent-default));
@@ -466,7 +477,7 @@ a.lobby_element {
   }
 }
 
-a.lobby_element:hover .lobby-tooltip {
+.lobby_element:hover .lobby-tooltip {
   opacity: 1;
   visibility: visible;
 }
@@ -510,24 +521,23 @@ a.lobby_element:hover .lobby-tooltip {
  * MARK: Collapse button
  */
 .lobby-collapse {
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 0;
   left: 0;
-  height: 3.5rem;
   width: 3.5rem;
-  background-color: var(--color-section);
+  height: 3.5rem;
+  font-size: 1.2rem;
+  background-color: hsl(from var(--color-base) h s calc(l - 10)) !important;
   color: var(--color-text-translucent);
-  border: 1px solid var(--color-border);
+  border-color: var(--color-border);
   border-radius: var(--border-radius-large);
   transform: translateY(calc(-100% - 0.5rem));
   transition-property: color, transform;
   transition-duration: var(--transition-time);
   box-shadow: var(--shadow);
-  backdrop-filter: var(--blur);
 
   &:hover {
     color: var(--color-text-accent);
@@ -544,6 +554,85 @@ a.lobby_element:hover .lobby-tooltip {
 
   &.outside {
     margin: 0.5rem;
+  }
+
+  &.auth {
+    left: unset;
+    right: 0;
+    transform: translateY(calc(-100% - 0.5rem));
+    z-index: 1000;
+
+    &:before {
+      content: "\f00d";
+    }
+  }
+}
+
+/**
+ * MARK: Authentication
+ */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-section);
+  backdrop-filter: var(--blur);
+  transition-property: opacity, visibility;
+  transition-duration: var(--transition-time);
+  z-index: 999;
+}
+
+#external_auth {
+  width: 0px;
+  height: 0px;
+  transition-property: height, width;
+  transition-duration: var(--transition-time);
+}
+
+#external_auth.open {
+  width: 835px;
+  height: 465px;
+}
+
+.lobby_auth {
+  background-color: var(--color-section);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius-large);
+}
+
+.lobby_auth_title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem 0.75rem 0.33rem;
+  background-color: var(--color-base);
+  border-bottom: 2px solid var(--color-primary);
+  border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+}
+
+.lobby_auth_content {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.lobby_auth_text {
+  font-size: 1.25rem;
+  line-height: 1.25em;
+  padding: 0.25em 0.5em 0;
+  color: var(--color-text-accent);
+}
+
+.lobby_auth_controls {
+  & button {
+    width: 100%;
+    text-align: center;
+  }
+
+  & .lobby-text:before {
+    margin-right: 0.75rem;
   }
 }
 
@@ -581,6 +670,10 @@ a.lobby_element:hover .lobby-tooltip {
   font-weight: 900;
   text-align: center;
   margin-right: 0.33em;
+}
+
+.lobby-auth .lobby-text:before {
+  content: "\f2f6";
 }
 
 .lobby-late_join .lobby-text:before {
@@ -624,7 +717,8 @@ a.lobby_element:hover .lobby-tooltip {
   font-family: "Font Awesome 6 Brands";
 }
 
-.lobby-discord .lobby-text:before {
+.lobby-discord .lobby-text:before,
+.lobby-auth-discord .lobby-text:before {
   content: "\f392";
   font-family: "Font Awesome 6 Brands";
 }
@@ -687,4 +781,9 @@ a.lobby_element:hover .lobby-tooltip {
 
 #hide_menu:checked ~ #lobby_info {
   transform: translateX(calc(100% + 1rem));
+}
+
+#hide_auth:checked ~ .modal {
+  opacity: 0;
+  visibility: hidden;
 }

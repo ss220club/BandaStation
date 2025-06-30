@@ -64,12 +64,12 @@ SUBSYSTEM_DEF(central)
 		GLOB.whitelist = list()
 	GLOB.whitelist |= ckeys
 
-/datum/controller/subsystem/central/proc/get_player_discord_async(ckey)
+/datum/controller/subsystem/central/proc/get_player_discord_async(ckey, client/client)
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[ckey]"
 
-	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(get_player_discord_callback), ckey))
+	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(get_player_discord_callback), ckey, client))
 
-/datum/controller/subsystem/central/proc/get_player_discord_callback(ckey, datum/http_response/response)
+/datum/controller/subsystem/central/proc/get_player_discord_callback(ckey, client/client, datum/http_response/response)
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
 		stack_trace("Failed to get player discord: HTTP status code [response.status_code] - [response.error] - [response.body]")
 		return
@@ -82,6 +82,7 @@ SUBSYSTEM_DEF(central)
 	discord_links[ckey] = discord_id
 
 	GLOB.persistent_clients_by_ckey[ckey].discord_id = discord_id
+	SStitle.show_title_screen_to(client)
 
 /datum/controller/subsystem/central/proc/is_player_discord_linked(ckey)
 	var/datum/persistent_client/pclient = GLOB.persistent_clients_by_ckey[ckey]

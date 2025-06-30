@@ -7,67 +7,68 @@
 	if(src != usr || !client)
 		return
 
-	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggleReady"] || href_list["late_join"] || href_list["observe"]))
-		if(!SScentral.can_run())
-			to_chat(usr, "Система привязок дискорда не активна, но включен режим проверки привязки. Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.")
-			stack_trace("Discord verification is enabled, but SS Central is not active.")
-			return
+	if(href_list["focus"])
+		winset(client, "map", "focus=true")
 
-		if(!SScentral.is_player_discord_linked(ckey))
-			to_chat(usr, PLAYER_REQUIRES_LINKED_DISCORD_CHAT_MESSAGE)
-			return FALSE
+	if(href_list["discord_oauth"])
+		client?.verify_in_discord_central()
+
+	if(href_list["discord_oauth_close"])
+		client << browse("", "window=authwindow;")
+		SScentral.get_player_discord_async(client.ckey, client)
+
+	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"] || href_list["getOauthLink"]))
+		if(!SScentral.can_run() || !SScentral.is_player_discord_linked(ckey))
+			return
 
 	if(client.interviewee)
 		return
-
-	if(href_list["focus"])
-		winset(client, "map", "focus=true")
 
 	if(href_list["toggle_ready"])
 		ready = !ready
 		SStitle.title_output(client, ready, "toggleReady")
 
-	if(href_list["late_join"])
+	else if(href_list["late_join"])
 		GLOB.latejoin_menu.ui_interact(usr)
 
-	if(href_list["observe"])
+	else if(href_list["observe"])
 		if(!SSticker || SSticker.current_state <= GAME_STATE_STARTUP)
 			to_chat(usr, span_warning("Сервер ещё не загрузился!"))
 			return
 
 		make_me_an_observer()
 
-	if(href_list["character_setup"])
+	else if(href_list["character_setup"])
 		var/datum/preferences/preferences = client.prefs
 		preferences.current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES
 		preferences.update_static_data(src)
 		preferences.ui_interact(src)
 
-	if(href_list["settings"])
+	else if(href_list["settings"])
 		var/datum/preferences/preferences = client.prefs
 		preferences.current_window = PREFERENCE_TAB_GAME_PREFERENCES
 		preferences.update_static_data(usr)
 		preferences.ui_interact(usr)
 
-	if(href_list["manifest"])
+	else if(href_list["manifest"])
 		ViewManifest()
 
-	if(href_list["changelog"])
+	else if(href_list["changelog"])
 		client?.changelog()
 
-	if(href_list["wiki"])
+	else if(href_list["wiki"])
 		client?.wiki()
 
-	if(href_list["discord"])
+	else if(href_list["discord"])
 		client?.discord()
 
-	if(href_list["github"])
+	else if(href_list["github"])
 		client?.github()
 
-	if(href_list["bug"])
+	else if(href_list["bug"])
 		client?.reportissue()
 
-	if(href_list["trait_signup"])
+	else if(href_list["trait_signup"])
 		var/datum/station_trait/clicked_trait
 		for(var/datum/station_trait/trait as anything in GLOB.lobby_station_traits)
 			if(trait.name == href_list["trait_signup"])
@@ -75,22 +76,21 @@
 
 		clicked_trait.on_lobby_button_click(usr, href_list["id"])
 
-	if((href_list["picture"] || href_list["notice"] || href_list["start_now"] || href_list["delay"]) && !check_rights(R_SERVER))
-		to_chat(client, span_warning("ТЫ пытаешься использовать АДМИНСКИЕ кнопки! У тебя ничего не выйдет, но мы оповестили администрацию."))
+	else if((href_list["picture"] || href_list["notice"] || href_list["start_now"] || href_list["delay"]) && !check_rights(R_SERVER))
+		to_chat(client, span_warning("ТЫ пытаешься использовать <b>АДМИНСКИЕ</b> кнопки! У тебя ничего не выйдет, но мы оповестили администрацию."))
 		log_admin("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
 		message_admins("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
-		return
 
-	if(href_list["picture"])
+	else if(href_list["picture"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/change_title_screen)
 
-	if(href_list["notice"])
+	else if(href_list["notice"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/change_title_screen_notice)
 
-	if(href_list["start_now"])
+	else if(href_list["start_now"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/start_now)
 
-	if(href_list["delay"])
+	else if(href_list["delay"])
 		if(SSticker.current_state > GAME_STATE_PREGAME)
 			return tgui_alert(usr, "Слишком поздно... Игра уже началась!", "О нет...", timeout = 10 SECONDS)
 
@@ -107,5 +107,5 @@
 		log_admin("[key_name(usr)] set the pre-game delay to [DisplayTimeText(time)].")
 		BLACKBOX_LOG_ADMIN_VERB("Delay Game Start")
 
-	if(href_list["titleReady"] && check_rights_for(client, R_ADMIN|R_DEBUG))
+	else if(href_list["titleReady"] && check_rights_for(client, R_ADMIN|R_DEBUG))
 		SStitle.title_output(client, "true", "toggleAdmin")

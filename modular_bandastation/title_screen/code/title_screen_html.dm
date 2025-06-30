@@ -5,6 +5,7 @@
 	var/mob/dead/new_player/player = user
 	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 
+	var/discord_linked = SStitle.central_enabled && SScentral.is_player_discord_linked(player.ckey)
 	var/player_name = player.client.prefs.read_preference(/datum/preference/name/real_name)
 	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
 	var/loading_percentage = CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100
@@ -23,6 +24,11 @@
 					[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
 					[styles ? file2text(styles) : ""]
 				</style>
+				<script>
+					function call_byond(href, value) {
+						window.location = `byond://?src=[REF(player)];${href}=${value}`;
+					}
+				</script>
 			</head>
 			<body>
 				<input type="checkbox" id="hide_menu">
@@ -30,7 +36,7 @@
 				<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
 				<div class="lobby_wrapper">
 					<div class="lobby_container">
-						<div class="lobby_element lobby-name">
+						<div class="lobby-name">
 							<label class="lobby_element lobby-collapse" for="hide_menu"></label>
 							<span id="character_name" data-loading="[SStitle.subsystem_loading]" data-name="[player_name]"></span>
 							<div id="logo" data-loaded="[round(loading_percentage)]%">
@@ -38,8 +44,8 @@
 							</div>
 						</div>
 						<div class="lobby_buttons">
-							[create_default_buttons(player)]
-							[create_trait_buttons(player)]
+							[create_default_buttons(player, discord_linked)]
+							[discord_linked ? create_trait_buttons(player) : ""]
 							<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
 								<hr>
 								[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
@@ -62,6 +68,7 @@
 				</div>
 				<div id="container_notice" class="[SStitle.notice ? "" : "hidden"]">[SStitle.notice]</div>
 				<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>
+				[create_auth_modal(player, discord_linked)]
 			</body>
 		</html>
 	"}
@@ -77,15 +84,18 @@
 		</a>
 	"}
 
-/datum/title_screen/proc/create_default_buttons(mob/dead/new_player/player)
+/datum/title_screen/proc/create_default_buttons(mob/dead/new_player/player, discord_linked)
 	var/list/html = list()
-	if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
-		html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
+	if(discord_linked)
+		if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
+			html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
+		else
+			html += create_button(player, "late_join", "Присоединиться")
+		html += create_button(player, "observe", "Наблюдать")
 	else
-		html += create_button(player, "late_join", "Присоединиться")
+		html += "<button class='lobby_element lobby-auth' onclick='toggleAuthModal()'><span class='lobby-text'>Авторизация</span></button>"
 
 	html += {"
-		[create_button(player, "observe", "Наблюдать")]
 		[create_button(player, "manifest", "Манифест персонала")]
 		<hr>
 		[create_button(player, "character_setup", "Настройка персонажа")]
@@ -120,3 +130,36 @@
 			</a>
 		"}
 	return html.Join()
+
+/datum/title_screen/proc/create_auth_modal(mob/dead/new_player/player, discord_linked)
+	if(discord_linked)
+		return
+
+	return {"
+		<input type="checkbox" id="hide_auth" class="hidden">
+		<div class="modal">
+			<div class="lobby_auth">
+				<button class='lobby_element lobby-collapse auth' onclick='toggleAuthModal()'></button>
+				<div class="lobby_auth_title">Авторизация</div>
+				<div class="lobby_auth_content">
+					<div class="lobby_auth_text">
+						[!SStitle.central_enabled ? {"
+							Включена система привязок Space Station Central, однако на данный момент она недоступна<br>
+							<span class="bad"><b>Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.</b></span>
+						"} : {"
+							Вход в игру требует привязать аккаунт<br>
+							Для этого воспользуйтесь авторизацией через Discord<br>
+							После авторизации, просто <b>закройте это окно</b><br>
+							<small>Ссылка продублирована в чат, если вы хотите авторизоваться через свой браузер
+						"}]
+					</div>
+					<div id="external_auth"></div>
+					<div class="lobby_auth_controls">
+						<button id="open_auth" class="lobby_element lobby-auth-discord" onclick="call_byond('discord_oauth', true)">
+							<span class="lobby-text">Привязать Discord</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	"}

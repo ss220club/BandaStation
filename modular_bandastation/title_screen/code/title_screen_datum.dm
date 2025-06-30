@@ -27,6 +27,7 @@ GLOBAL_LIST_INIT(available_lobby_styles, list(
 	if(!viewer)
 		return
 
+	viewer << browse("", "window=authwindow;")
 	winset(viewer, "title_browser", "is-disabled=false;is-visible=true")
 	winset(viewer, "status_bar", "is-visible=false")
 
