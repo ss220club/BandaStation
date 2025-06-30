@@ -3,10 +3,6 @@
 		return FALSE
 	return ..()
 
-/mob/dead/new_player/register_for_interview()
-	. = ..()
-	add_verb(client, /client/verb/verify_in_discord_central)
-
 /client/proc/verify_in_discord_central()
 	if(!SScentral.can_run())
 		to_chat(src, span_warning("Привязка Discord сейчас недоступна."))
