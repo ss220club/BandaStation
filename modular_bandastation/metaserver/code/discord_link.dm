@@ -33,7 +33,7 @@
 	to_chat(player, boxed_message("<a href='[login_endpoint]'>Привязать дискорд</a>"))
 	player << browse(
 		"<!DOCTYPE html><html><head><meta charset=UTF-8'><script>location.href='[login_endpoint]'</script></head><body'></body></html>",
-		"window=authwindow;parent=mapwindow.map;titlebar=0;can_resize=0;size=835x465;pos=-9999,-9999;background-color=black;"
+		"window=authwindow;parent=mapwindow.map;titlebar=0;can_resize=0;size=0x0;pos=0,0;background-color=black;"
 	)
 	SStitle.title_output(player, login_endpoint, "updateAuthBrowser")
 
