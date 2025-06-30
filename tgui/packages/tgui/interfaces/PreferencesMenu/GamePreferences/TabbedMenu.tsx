@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
-import { Input, Section, Stack, Tabs } from 'tgui-core/components';
-import { useFuzzySearch } from 'tgui-core/fuzzysearch';
+import { Section, Stack, Tabs } from 'tgui-core/components';
 
+// import { useFuzzySearch } from 'tgui-core/fuzzysearch';
 import { PreferenceChild } from './GamePreferencesPage';
 
 type PreferencesTabsProps = {
@@ -20,11 +20,13 @@ export function TabbedMenu(props: PreferencesTabsProps) {
   const allPrefsNames = categories.flatMap(([_, children]) =>
     children.map((child) => child.name),
   );
+  /*
   const { query, setQuery, results } = useFuzzySearch({
     searchArray: allPrefsNames,
     matchStrategy: 'smart',
     getSearchString: (name) => name,
   });
+  */
 
   return (
     <Stack fill vertical g={0} fontSize={1.25}>
@@ -34,6 +36,7 @@ export function TabbedMenu(props: PreferencesTabsProps) {
           fitted
           title={
             <Stack fill>
+              {/*
               <Stack.Item className="PreferencesMenu__SectionSearch">
                 <Input
                   expensive
@@ -43,10 +46,13 @@ export function TabbedMenu(props: PreferencesTabsProps) {
                   onChange={setQuery}
                 />
               </Stack.Item>
+              */}
               <Stack.Item grow>
-                {query
+                {
+                  /* query
                   ? `Результаты поиска: ${results.length}`
-                  : selectedCategory}
+                  : */ selectedCategory
+                }
               </Stack.Item>
             </Stack>
           }
@@ -62,7 +68,7 @@ export function TabbedMenu(props: PreferencesTabsProps) {
                     {categories.map(([category]) => (
                       <Tabs.Tab
                         key={category}
-                        selected={!query && category === selectedCategory}
+                        selected={/* !query && */ category === selectedCategory}
                         onClick={() => setSelectedCategory(category)}
                       >
                         {category}
@@ -77,13 +83,13 @@ export function TabbedMenu(props: PreferencesTabsProps) {
           <Stack.Item grow className="PreferencesMenu__Content">
             <Section fill scrollable>
               <Stack vertical>
-                {query
+                {/* query
                   ? categories.flatMap(([category, children]) =>
                       children
                         .filter((child) => results.includes(child.name))
                         .map((child) => child.children),
                     )
-                  : categoryContent?.map((child) => child.children)}
+                  : */ categoryContent?.map((child) => child.children)}
               </Stack>
             </Section>
           </Stack.Item>
