@@ -17,7 +17,7 @@
 		client << browse("", "window=authwindow;")
 		SScentral.get_player_discord_async(client.ckey, client)
 
-	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"])
+	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"]))
 		if(!SScentral.can_run() || !SScentral.is_player_discord_linked(ckey))
 			return
 
