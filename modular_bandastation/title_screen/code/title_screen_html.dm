@@ -41,7 +41,9 @@
 						</div>
 						<div class="lobby_buttons">
 							[create_default_buttons(viewer, player, discord_linked)]
-							[discord_linked ? create_trait_buttons(player) : ""]
+							<div id="traits">
+								[discord_linked ? create_trait_buttons(player) : ""]
+							</div>
 							<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
 								<hr>
 								[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]

@@ -31,16 +31,6 @@ function updateInfo(info) {
   info_placement.innerHTML = info;
 }
 
-function traitSignup(assign, id) {
-  if (!id) {
-    return;
-  }
-
-  const traitID = `lobby-trait-${Number(id)}`;
-  const trait_link = document.getElementById(traitID);
-  toggleGoodBadClass(trait_link, assign === "true");
-}
-
 const adminButtons = document.getElementById("lobby_admin");
 function toggleAdmin(visible) {
   adminButtons.classList.toggle("hidden", visible !== "true");
@@ -74,6 +64,45 @@ function fixImage() {
 
   attempts++;
   setTimeout(fixImage, 1000);
+}
+
+// MARK: Traits
+function traitSignup(assign, id) {
+  if (!id) {
+    return;
+  }
+
+  const traitID = `lobby-trait-${Number(id)}`;
+  const trait_link = document.getElementById(traitID);
+  toggleGoodBadClass(trait_link, assign === "true");
+}
+
+let traitsCount = 0;
+const traitsContainer = document.getElementById("traits");
+function createTraitButton(name, desc) {
+  traitsCount++;
+
+  const button = document.createElement("a");
+  button.id = `lobby-trait-${traitsCount}`;
+  button.className = "lobby_element checkbox bad";
+  button.href = `byond://?src=${globalThis.playerRef};trait_signup=${name};id=${traitsCount}`;
+
+  const buttonText = document.createElement("span");
+  buttonText.className = "lobby-text";
+  buttonText.innerHTML = name;
+
+  const buttonTooltipWrapper = document.createElement("div");
+  buttonTooltipWrapper.className = "lobby-tooltip";
+  buttonTooltipWrapper.setAttribute("data-position", "right");
+
+  const buttonTooltip = document.createElement("span");
+  buttonTooltip.className = "lobby-tooltip-content";
+  buttonTooltip.innerHTML = desc;
+
+  buttonTooltipWrapper.appendChild(buttonTooltip);
+  button.appendChild(buttonText);
+  button.appendChild(buttonTooltipWrapper);
+  traitsContainer.appendChild(button);
 }
 
 // MARK: Loading

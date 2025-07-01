@@ -48,6 +48,8 @@
 		time_remaining = "<span class='bad'>ВЕЧНОСТЬ!!!</span>"
 	else if(time_remaining > 0)
 		time_remaining = "[round(time_remaining / 10)] сек."
+	else
+		time_remaining = "-"
 
 	switch(SSticker.current_state)
 		if(GAME_STATE_SETTING_UP)
