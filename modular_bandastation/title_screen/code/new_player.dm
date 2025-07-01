@@ -78,10 +78,11 @@
 
 		clicked_trait.on_lobby_button_click(usr, href_list["id"])
 
-	else if((href_list["picture"] || href_list["notice"] || href_list["start_now"] || href_list["delay"]) && !check_rights(R_SERVER))
+	if((href_list["picture"] || href_list["notice"] || href_list["start_now"] || href_list["delay"]) && !check_rights_for(client, R_ADMIN|R_DEBUG))
 		to_chat(client, span_warning("ТЫ пытаешься использовать <b>АДМИНСКИЕ</b> кнопки! У тебя ничего не выйдет, но мы оповестили администрацию."))
 		log_admin("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
 		message_admins("Title Screen: Possible href exploit attempt by [key_name(usr)]!")
+		return
 
 	else if(href_list["picture"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/change_title_screen)
