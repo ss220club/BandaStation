@@ -7,7 +7,7 @@
 		stack_trace("Using whitelists and interviews without SS Central is not supported")
 		return
 
-	if(SScentral.is_player_whitelisted(ckey))
+	if(SScentral.is_player_whitelisted(ckey) || client.holder)
 		client.interviewee = FALSE
 		return
 
