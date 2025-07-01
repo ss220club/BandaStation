@@ -1,26 +1,26 @@
 /obj/item/ai_module/zeroth/onecrew
 	name = "Модуль закона ИИ 'Один член экипажа'"
-	var/targetName = ""
+	var/target_name = ""
 	laws = list("Только ИМЯ — член экипажа.")
 
 /obj/item/ai_module/zeroth/onecrew/attack_self(mob/user)
-	var/targName = tgui_input_text(user, "Enter the subject who is the only crew.", "One Crew", user.real_name, max_length = MAX_NAME_LEN)
-	if(!targName || !user.is_holding(src))
+	var/targ_Name = tgui_input_text(user, "Введите имя субъекта, который является единственным членом экипажа.", "Один член экипажа", user.real_name, max_length = MAX_NAME_LEN)
+	if(!targ_Name || !user.is_holding(src))
 		return
-	targetName = targName
-	laws[1] = "Только [targetName] — член экипажа"
+	target_name = targ_Name
+	laws[1] = "Только [target_name] — член экипажа"
 	..()
 
 /obj/item/ai_module/zeroth/onecrew/install(datum/ai_laws/law_datum, mob/user)
-	if(!targetName)
-		to_chat(user, span_alert("No name detected on module, please enter one."))
+	if(!target_name)
+		to_chat(user, span_alert("Имя не задано в модуле, пожалуйста, введите его."))
 		return FALSE
 	..()
 
 /obj/item/ai_module/zeroth/onecrew/transmitInstructions(datum/ai_laws/law_datum, mob/sender, overflow)
 	if(..())
-		return "[targetName], but the AI's existing law 0 cannot be overridden."
-	return targetName
+		return "[target_name], but the AI's existing law 0 cannot be overridden."
+	return target_name
 
 /datum/design/board/onecrew_module
 	name = "onecrew Module"
