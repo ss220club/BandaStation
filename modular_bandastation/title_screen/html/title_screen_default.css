@@ -530,7 +530,7 @@ html.loading {
   width: 3.5rem;
   height: 3.5rem;
   font-size: 1.2rem;
-  background-color: hsl(from var(--color-base) h s calc(l - 10)) !important;
+  background-color: var(--color-section) !important;
   color: var(--color-text-translucent);
   border-color: var(--color-border);
   border-radius: var(--border-radius-large);
@@ -644,10 +644,13 @@ html.loading {
   bottom: 0;
   right: 0;
   text-align: center;
+  align-content: end;
   font-family: "Pix Cyrillic";
   font-size: 26px;
+  line-height: 1em;
   margin: 0.5rem;
-  padding: 0.5em 0.5em 0.4em;
+  padding: 0.5em;
+  min-height: calc(2em + var(--indent-default));
   width: calc(100vw - var(--menu-width) - 1.5rem);
   background-color: var(--color-section);
   color: var(--color-text-bad);

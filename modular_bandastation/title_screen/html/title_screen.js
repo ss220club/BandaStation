@@ -135,7 +135,7 @@ function finishLoading() {
 }
 
 // MARK: Authentication
-const parent = document.getElementById("external_auth");
+const authBrowser = document.getElementById("external_auth");
 const authCheckbox = document.getElementById("hide_auth");
 const authButton = document.getElementById("open_auth");
 function toggleAuthModal() {
@@ -146,22 +146,26 @@ function toggleAuthModal() {
     call_byond("discord_oauth_close", true);
     setTimeout(() => {
       authButton.style.display = "";
-      parent.className = "";
+      authBrowser.className = "";
     }, 200);
   }
 }
 
 function updateAuthBrowser() {
-  parent.className = "open";
+  authBrowser.className = "open";
   authButton.style.display = "none";
   setTimeout(() => updateExternalWindowPos(), 1000);
 }
 
 function updateExternalWindowPos() {
+  if(!authBrowser) {
+    return;
+  }
+
   const titleBarHeight = 43; // I hate Byond sometimes
   const pixelRatio = window.devicePixelRatio ?? 1;
-  const rect = parent.getBoundingClientRect();
-  const parentSize = {
+  const rect = authBrowser.getBoundingClientRect();
+  const placeholderSize = {
     pos: [rect.left * pixelRatio, rect.top + titleBarHeight * pixelRatio],
     size: [
       (rect.right - rect.left) * pixelRatio,
@@ -170,8 +174,8 @@ function updateExternalWindowPos() {
   };
 
   BYOND.winset("authwindow", {
-    pos: `${parentSize.pos[0]},${parentSize.pos[1]}`,
-    size: `${parentSize.size[0]},${parentSize.size[1]}`,
+    pos: `${placeholderSize.pos[0]},${placeholderSize.pos[1]}`,
+    size: `${placeholderSize.size[0]},${placeholderSize.size[1]}`,
   });
 }
 
