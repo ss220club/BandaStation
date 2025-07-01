@@ -38,7 +38,7 @@
 		return ..()
 	if(!isnull(owner.persistent_client.discord_id))
 		return ..()
-	SScentral.get_player_discord_async(owner.ckey)
+	SScentral.update_player_discord_async(owner.ckey)
 	return TRUE
 
 /datum/interview/proc/serialize_embed()

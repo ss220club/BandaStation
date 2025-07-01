@@ -15,7 +15,7 @@
 
 	else if(href_list["discord_oauth_close"])
 		client << browse("", "window=authwindow;")
-		SScentral.get_player_discord_async(client.ckey, client)
+		SScentral.update_player_discord_async(client.ckey, client)
 
 	else if(href_list["changelog"])
 		client?.changelog()

@@ -64,12 +64,17 @@ SUBSYSTEM_DEF(central)
 		GLOB.whitelist = list()
 	GLOB.whitelist |= ckeys
 
-/datum/controller/subsystem/central/proc/get_player_discord_async(ckey, client/client)
+/datum/controller/subsystem/central/proc/update_player_discord_async(ckey, client/client)
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[ckey]"
 
-	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(get_player_discord_callback), ckey, client))
+	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(handle_discord_get_response), ckey, client))
 
-/datum/controller/subsystem/central/proc/get_player_discord_callback(ckey, client/client, datum/http_response/response)
+/datum/controller/subsystem/central/proc/update_player_discord_sync(ckey, client/client)
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[ckey]"
+
+	handle_discord_get_response(ckey, client, SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list()))
+
+/datum/controller/subsystem/central/proc/handle_discord_get_response(ckey, client/client, datum/http_response/response)
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
 		stack_trace("Failed to get player discord: HTTP status code [response.status_code] - [response.error] - [response.body]")
 		return
@@ -97,11 +102,11 @@ SUBSYSTEM_DEF(central)
 	if(!pclient)
 		return FALSE
 
+	// Update the info just in case
+	update_player_discord_sync(ckey)
+
 	if(pclient.discord_id)
 		return TRUE
-
-	// Update the info just in case
-	get_player_discord_async(ckey)
 
 	return FALSE
 

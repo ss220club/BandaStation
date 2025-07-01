@@ -3,6 +3,9 @@
 	flags = SS_BACKGROUND
 	wait = 1 SECONDS
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	dependencies = list(
+		/datum/controller/subsystem/central
+	)
 	/// Is discord verification possible
 	var/discord_verification_possible
 	/// The current notice text, or null
