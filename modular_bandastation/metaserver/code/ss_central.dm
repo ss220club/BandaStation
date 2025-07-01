@@ -102,13 +102,10 @@ SUBSYSTEM_DEF(central)
 	if(!pclient)
 		return FALSE
 
-	// Update the info just in case
-	update_player_discord_sync(ckey)
+	if(isnull(pclient.discord_id))
+		update_player_discord_sync(ckey)
 
-	if(pclient.discord_id)
-		return TRUE
-
-	return FALSE
+	return !isnull(pclient.discord_id)
 
 /// WARNING: only semi async - UNTIL based
 /datum/controller/subsystem/central/proc/is_player_whitelisted(ckey)
