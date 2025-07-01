@@ -78,9 +78,13 @@ function traitSignup(assign, id) {
 }
 
 let traitsCount = 0;
-const traitsContainer = document.getElementById("traits");
+const traitsContainer = document.getElementById("lobby_traits");
 function createTraitButton(name, desc) {
   traitsCount++;
+  if (traitsCount === 1) {
+    const hr = document.createElement("hr");
+    traitsContainer.appendChild(hr);
+  }
 
   const button = document.createElement("a");
   button.id = `lobby-trait-${traitsCount}`;
@@ -103,6 +107,7 @@ function createTraitButton(name, desc) {
   button.appendChild(buttonText);
   button.appendChild(buttonTooltipWrapper);
   traitsContainer.appendChild(button);
+  traitsContainer.classList.remove("hidden");
 }
 
 // MARK: Loading

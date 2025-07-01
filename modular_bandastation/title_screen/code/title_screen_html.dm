@@ -41,7 +41,7 @@
 						</div>
 						<div class="lobby_buttons">
 							[create_default_buttons(viewer, player, discord_linked)]
-							<div id="traits">
+							<div id="lobby_traits" class="[!length(GLOB.lobby_station_traits) ? "hidden" : ""]">
 								[discord_linked ? create_trait_buttons(player) : ""]
 							</div>
 							<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
