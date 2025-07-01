@@ -86,7 +86,7 @@
 
 /datum/title_screen/proc/create_default_buttons(client/viewer, mob/dead/new_player/player, discord_linked)
 	var/list/html = list()
-	if(discord_linked)
+	if(discord_linked && !player.client.interviewee)
 		if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
 			html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
 		else
