@@ -80,6 +80,10 @@ function traitSignup(assign, id) {
 let traitsCount = 0;
 const traitsContainer = document.getElementById("lobby_traits");
 function createTraitButton(name, desc) {
+  if (!traitsContainer) {
+    return;
+  }
+
   traitsCount++;
   if (traitsCount === 1) {
     const hr = document.createElement("hr");

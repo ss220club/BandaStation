@@ -13,9 +13,24 @@
 	if(href_list["discord_oauth"])
 		client?.verify_in_discord_central()
 
-	if(href_list["discord_oauth_close"])
+	else if(href_list["discord_oauth_close"])
 		client << browse("", "window=authwindow;")
 		SScentral.get_player_discord_async(client.ckey, client)
+
+	else if(href_list["changelog"])
+		client?.changelog()
+
+	else if(href_list["wiki"])
+		client?.wiki()
+
+	else if(href_list["discord"])
+		client?.discord()
+
+	else if(href_list["github"])
+		client?.github()
+
+	else if(href_list["bug"])
+		client?.reportissue()
 
 	if(CONFIG_GET(flag/force_discord_verification) && (href_list["toggle_ready"] || href_list["late_join"] || href_list["observe"]))
 		if(!SScentral.can_run() || !SScentral.is_player_discord_linked(ckey))
@@ -54,21 +69,6 @@
 
 	else if(href_list["manifest"])
 		ViewManifest()
-
-	else if(href_list["changelog"])
-		client?.changelog()
-
-	else if(href_list["wiki"])
-		client?.wiki()
-
-	else if(href_list["discord"])
-		client?.discord()
-
-	else if(href_list["github"])
-		client?.github()
-
-	else if(href_list["bug"])
-		client?.reportissue()
 
 	else if(href_list["trait_signup"])
 		var/datum/station_trait/clicked_trait

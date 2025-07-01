@@ -41,9 +41,11 @@
 						</div>
 						<div class="lobby_buttons">
 							[create_default_buttons(viewer, player, discord_linked)]
-							<div id="lobby_traits" class="[!length(GLOB.lobby_station_traits) ? "hidden" : ""]">
-								[discord_linked ? create_trait_buttons(player) : ""]
-							</div>
+							[!discord_linked || player.client.interviewee ? "" : {"
+								<div id="lobby_traits" class="[!length(GLOB.lobby_station_traits) ? "hidden" : ""]">
+									[discord_linked ? create_trait_buttons(player) : ""]
+								</div>
+							"}]
 							<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
 								<hr>
 								[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
@@ -89,19 +91,20 @@
 			html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
 		else
 			html += create_button(player, "late_join", "Присоединиться")
-		html += create_button(player, "observe", "Наблюдать")
-	else if(!discord_linked && player.client.interviewee)
-		html += create_button(player, "interview", "Пройти интервью")
-	else
-		html += "<button class='lobby_element lobby-auth' onclick='toggleAuthModal()'><span class='lobby-text'>Авторизация</span></button>"
 
-	html += {"
-		[create_button(player, "manifest", "Манифест персонала")]
-		<hr>
-		[create_button(player, "character_setup", "Настройка персонажа")]
-		[create_button(player, "settings", "Настройки игры")]
-	"}
-	return html.Join()
+		html += create_button(player, "observe", "Наблюдать")
+		html += {"
+			[create_button(player, "manifest", "Манифест персонала")]
+			<hr>
+			[create_button(player, "character_setup", "Настройка персонажа")]
+			[create_button(player, "settings", "Настройки игры")]
+		"}
+		return html.Join()
+
+	if(discord_linked && player.client.interviewee)
+		return create_button(player, "interview", "Пройти интервью")
+
+	return "<button class='lobby_element lobby-auth' onclick='toggleAuthModal()'><span class='lobby-text'>Авторизация</span></button>"
 
 /datum/title_screen/proc/create_trait_buttons(mob/dead/new_player/player)
 	if(!length(GLOB.lobby_station_traits))
