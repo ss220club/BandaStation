@@ -676,6 +676,10 @@ html.loading {
   content: "\f2f6";
 }
 
+.lobby-interview .lobby-text:before {
+  content: "\e4e3";
+}
+
 .lobby-late_join .lobby-text:before {
   content: "\f11b";
 }

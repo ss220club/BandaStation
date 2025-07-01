@@ -84,6 +84,13 @@ SUBSYSTEM_DEF(central)
 	GLOB.persistent_clients_by_ckey[ckey].discord_id = discord_id
 	SStitle.show_title_screen_to(client)
 
+	// Open interview after discord linking
+	if(client.interviewee)
+		var/datum/interview/interview = GLOB.interviews.interview_for_client(client)
+		var/mob/dead/new_player/player = client.mob
+		if(player && interview)
+			interview.ui_interact(player)
+
 /datum/controller/subsystem/central/proc/is_player_discord_linked(ckey)
 	var/datum/persistent_client/pclient = GLOB.persistent_clients_by_ckey[ckey]
 

@@ -3,7 +3,7 @@
 	if(isnewplayer(target_ai))
 		SStitle.hide_title_screen_from(client)
 
-/mob/dead/new_player/Topic(href, href_list[])
+/mob/dead/new_player/Topic(href, href_list)
 	if(src != usr || !client)
 		return
 
@@ -22,6 +22,8 @@
 			return
 
 	if(client.interviewee)
+		if(href_list["interview"])
+			open_interview()
 		return
 
 	if(href_list["toggle_ready"])

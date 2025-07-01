@@ -71,3 +71,4 @@
 
 /datum/interview/proc/add_owner_to_whitelist(client/added_by)
 	SScentral.add_to_whitelist(owner_ckey, added_by.ckey, 365)
+	SStitle.show_title_screen_to(owner)

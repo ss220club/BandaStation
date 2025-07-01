@@ -346,13 +346,15 @@
 		var/procpath/verb_path = v
 		remove_verb(src, verb_path)
 
+	/* BANDASTATION REMOVAL
 	// Then we create the interview form and show it to the client
 	var/datum/interview/I = GLOB.interviews.interview_for_client(client)
 	if (I)
 		I.ui_interact(src)
+	*/
 
 	// Add verb for re-opening the interview panel, fixing chat and re-init the verbs for the stat panel
-	add_verb(src, /mob/dead/new_player/proc/open_interview)
+	// add_verb(src, /mob/dead/new_player/proc/open_interview) // BANDASTATION REMOVAL
 	add_verb(client, /client/verb/fix_tgui_panel)
 
 ///Resets the Lobby Menu HUD, recreating and reassigning it to the new player

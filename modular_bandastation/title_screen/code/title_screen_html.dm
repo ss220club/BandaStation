@@ -16,6 +16,7 @@
 			<head>
 				<meta charset="UTF-8">
 				<title>Title Screen</title>
+				<script>globalThis.playerRef = '[REF(player)]';</script>
 				<script defer src='[SSassets.transport.get_asset_url("title_screen.js")]'></script>
 				<link rel='stylesheet' href='[SSassets.transport.get_asset_url("font-awesome.css")]'>
 				<link rel='stylesheet' href='[SSassets.transport.get_asset_url("brands.min.css")]'>
@@ -24,11 +25,6 @@
 					[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
 					[styles ? file2text(styles) : ""]
 				</style>
-				<script>
-					function call_byond(href, value) {
-						window.location = `byond://?src=[REF(player)];${href}=${value}`;
-					}
-				</script>
 			</head>
 			<body>
 				<input type="checkbox" id="hide_menu">
@@ -44,7 +40,7 @@
 							</div>
 						</div>
 						<div class="lobby_buttons">
-							[create_default_buttons(player, discord_linked)]
+							[create_default_buttons(viewer, player, discord_linked)]
 							[discord_linked ? create_trait_buttons(player) : ""]
 							<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
 								<hr>
@@ -84,7 +80,7 @@
 		</a>
 	"}
 
-/datum/title_screen/proc/create_default_buttons(mob/dead/new_player/player, discord_linked)
+/datum/title_screen/proc/create_default_buttons(client/viewer, mob/dead/new_player/player, discord_linked)
 	var/list/html = list()
 	if(discord_linked)
 		if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
@@ -92,6 +88,8 @@
 		else
 			html += create_button(player, "late_join", "Присоединиться")
 		html += create_button(player, "observe", "Наблюдать")
+	else if(!discord_linked && player.client.interviewee)
+		html += create_button(player, "interview", "Пройти интервью")
 	else
 		html += "<button class='lobby_element lobby-auth' onclick='toggleAuthModal()'><span class='lobby-text'>Авторизация</span></button>"
 

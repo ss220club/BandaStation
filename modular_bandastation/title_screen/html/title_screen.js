@@ -1,3 +1,7 @@
+function call_byond(href, value) {
+  window.location = `byond://?src=${globalThis.playerRef};${href}=${value}`;
+}
+
 // MARK: State/Info updates
 function toggleGoodBadClass(element, condition) {
   element.classList.add(condition ? "good" : "bad");
