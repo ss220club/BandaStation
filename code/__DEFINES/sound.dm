@@ -268,6 +268,8 @@ GLOBAL_LIST_INIT(announcer_keys, list(
 #define SFX_REGEN_MESH_END "regen_mesh_end"
 #define SFX_REGEN_MESH_PICKUP "regen_mesh_pickup"
 #define SFX_REGEN_MESH_DROP "regen_mesh_drop"
+#define SFX_TELEPHONE_HANDSET "telephone_handset"
+#define SFX_TELEPHONE_SPEAKING "telephone_speaking"
 
 // Standard is 44.1khz
 #define MIN_EMOTE_PITCH 40000

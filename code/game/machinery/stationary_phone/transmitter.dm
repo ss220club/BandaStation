@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define PHONE_DND_FORBIDDEN -1
 
 #define SINGLE_CALL_PRICE 5
-#define RING_TIMEOUT 4
+#define RING_TIMEOUT 4 SECONDS
 
 /obj/structure/transmitter
 	name = "rotary telephone"
@@ -84,7 +84,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	GLOB.transmitters += src
 
 	phone_id = new_phone_id ? new_phone_id : num2text(total_ids++)
-	display_name = new_display_name || "[get_area_name(src, TRUE)] [initial(name)]"
+	display_name = new_display_name || "[get_area_name(src, TRUE)]"
 
 	if(name == initial(name))
 		name = "[get_area_name(src, TRUE)] [initial(name)]"
@@ -181,12 +181,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			deltimer(T.timeout_timer_id)
 			T.timeout_timer_id = null
 	to_chat(user, span_purple("[icon2html(src, user)] Picked up a call from [T.phone_id]."))
-	playsound(get_turf(user), pick(
-		'sound/machines/telephone/rtb_handset_1.ogg',
-		'sound/machines/telephone/rtb_handset_2.ogg',
-		'sound/machines/telephone/rtb_handset_3.ogg',
-		'sound/machines/telephone/rtb_handset_4.ogg',
-		'sound/machines/telephone/rtb_handset_5.ogg'))
+	playsound(get_turf(user), SFX_TELEPHONE_HANDSET)
 	T.outring_loop.stop()
 	user.put_in_active_hand(attached_to)
 	update_icon()
@@ -262,7 +257,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, "PhoneMenu", phone_id)
+		ui = new(user, src, "PhoneMenu", "[display_name] Telephone")
 		ui.open()
 
 /obj/structure/transmitter/ui_data(mob/user)
@@ -273,56 +268,75 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/ui_static_data(mob/user)
 	. = list()
-	.["available_transmitters"] = get_transmitters() - list(phone_id)
 	var/list/transmitters = list()
-	for(var/i in GLOB.transmitters)
-		var/obj/structure/transmitter/T = i
+	var/list/received_transmitters = get_transmitters()
+	var/list/available_transmitters = list()
+	for(var/id in received_transmitters)
+		var/data = received_transmitters[id]
+		var/obj/structure/transmitter/received_transmitter = data["phone"]
 		transmitters += list(list(
-			"phone_category" = T.phone_category,
-			"phone_color" = T.phone_color,
-			"phone_id" = T.phone_id,
-			"phone_icon" = T.phone_icon
+			"phone_id" = data["phone_id"],
+			"display_name" = data["display_name"],
+			"phone_category" = received_transmitter.phone_category,
+			"phone_color" = received_transmitter.phone_color,
+			"phone_icon" = received_transmitter.phone_icon
 		))
+		available_transmitters += data["phone_id"]
 	.["transmitters"] = transmitters
+	.["available_transmitters"] = available_transmitters
 
 /obj/structure/transmitter/proc/get_transmitters()
 	var/list/phone_list = list()
-	for(var/possible_phone in GLOB.transmitters)
-		var/obj/structure/transmitter/target_phone = possible_phone
-		var/current_dnd = FALSE
-		switch(target_phone.do_not_disturb)
-			if(PHONE_DND_ON, PHONE_DND_FORCED)
-				current_dnd = TRUE
-		if(TRANSMITTER_UNAVAILABLE(target_phone) || current_dnd) // Phone not available
+	for(var/obj/structure/transmitter/target_phone in GLOB.transmitters)
+		if(!istype(target_phone))
+			GLOB.transmitters.Remove(target_phone)
 			continue
+
+		if(TRANSMITTER_UNAVAILABLE(target_phone) || target_phone.do_not_disturb == PHONE_DND_ON || target_phone.do_not_disturb == PHONE_DND_FORCED)
+			continue
+
+		if(target_phone == src)
+			continue
+
 		var/net_link = FALSE
 		for(var/network in networks_transmit)
 			if(network in target_phone.networks_receive)
 				net_link = TRUE
 				continue
+
 		if(!net_link)
 			continue
+
 		var/id = target_phone.phone_id
-		var/num_id = 1
-		while(id in phone_list)
-			id = "[target_phone.phone_id] [num_id]"
+		var/display = target_phone.display_name
+		var/num_id = 2
+		var/original_display = display
+
+		while(display in phone_list)
+			display = "[original_display] #[num_id]"
 			num_id++
-		target_phone.phone_id = id
-		phone_list[id] = target_phone
-	return phone_list - phone_id
+
+		phone_list[display] = list(
+			"phone" = target_phone,
+			"phone_id" = id,
+			"display_name" = display
+		)
+	return phone_list
+
 
 /obj/structure/transmitter/proc/process_outbound_call(mob/living/carbon/human/user, calling_phone_id)
 	if(!is_free && !is_paid)
-		to_chat(user, span_notice("[icon2html(src, user)] Please deposit $5."))
+		to_chat(user, span_notice("[icon2html(src, user)] Please deposit $[SINGLE_CALL_PRICE]."))
 		return
 
-	var/static/list/transmitters = get_transmitters()
-
+	var/list/transmitters = get_transmitters()
 	if(!length(transmitters) || !(calling_phone_id in transmitters))
 		to_chat(user, span_notice("[icon2html(src, user)] No transmitters could be located to call!"))
 		return
 
-	var/obj/structure/transmitter/target = transmitters[calling_phone_id]
+	var/obj/structure/transmitter/target = transmitters[calling_phone_id]["phone"]
+	var/display = transmitters[calling_phone_id]["display_name"]
+
 	if(!istype(target) || QDELETED(target))
 		transmitters -= target
 		CRASH("Qdelled/improper atom inside transmitters list! (istype returned: [istype(target)], QDELETED returned: [QDELETED(target)])")
@@ -331,16 +345,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		return
 
 	user.put_in_hands(attached_to)
-	to_chat(user, span_notice("[icon2html(src, user)] Dialing [calling_phone_id]..."))
-	playsound(get_turf(user), pick(
-		'sound/machines/telephone/rtb_handset_1.ogg',
-		'sound/machines/telephone/rtb_handset_2.ogg',
-		'sound/machines/telephone/rtb_handset_3.ogg',
-		'sound/machines/telephone/rtb_handset_4.ogg',
-		'sound/machines/telephone/rtb_handset_5.ogg'), 100)
+	to_chat(user, span_notice("[icon2html(src, user)] Dialing [display]..."))
+	playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 100)
 
 	if(target.get_calling_phone() || target.attached_to.loc != target)
-		to_chat(user, span_purple("[icon2html(src, user)] Your call to [target.phone_id] has reached voicemail, the line is busy."))
+		to_chat(user, span_purple("[icon2html(src, user)] Your call to [display] has reached voicemail, the line is busy."))
 		busy_loop.start()
 		return
 
@@ -444,12 +453,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(!T)
 			STOP_PROCESSING(SSobj, src)
 			return
-		var/obj/item/telephone/P = T.attached_to
-		// // I'm pretty sure code below is never executed. But it is an original CMSS13 code. So I leave it as it is.
-		// if(P && attached_to.loc == src && P.loc == T && next_ring < world.time)
-		// 	playsound(get_turf(attached_to), 'sound/machines/telephone/telephone_ring.ogg', 20, FALSE, 14)
-		// 	visible_message(span_warning("[src] rings vigorously!"))
-		// 	next_ring = world.time + 3 SECONDS
 	else
 		STOP_PROCESSING(SSobj, src)
 		return
@@ -458,11 +461,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(ismob(attached_to.loc))
 		var/mob/M = attached_to.loc
 		M.dropItemToGround(attached_to)
-	playsound(loc, pick('sound/machines/telephone/rtb_handset_1.ogg',
-								'sound/machines/telephone/rtb_handset_2.ogg',
-								'sound/machines/telephone/rtb_handset_3.ogg',
-								'sound/machines/telephone/rtb_handset_4.ogg',
-								'sound/machines/telephone/rtb_handset_5.ogg'), 100, FALSE, 7)
+	playsound(loc, SFX_TELEPHONE_HANDSET, 100, FALSE, 7)
 	attached_to.forceMove(src)
 	reset_call()
 	busy_loop.stop()
@@ -487,13 +486,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		return
 	P.handle_hear(speaking, speech_args)
 	// attached_to.handle_hear(message, L, speaking)
-	playsound(P, pick('sound/machines/telephone/talk_phone1.ogg',
-						'sound/machines/telephone/talk_phone2.ogg',
-						'sound/machines/telephone/talk_phone3.ogg',
-						'sound/machines/telephone/talk_phone4.ogg',
-						'sound/machines/telephone/talk_phone5.ogg',
-						'sound/machines/telephone/talk_phone6.ogg',
-						'sound/machines/telephone/talk_phone7.ogg'), 10)
+	playsound(P, SFX_TELEPHONE_SPEAKING, 10)
 	if(attached_to.raised)
 		log_say("TELEPHONE: [key_name(speaking)] on Phone '[phone_id]' to '[T.phone_id]' said '[message]'")
 

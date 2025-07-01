@@ -867,4 +867,22 @@
 			)
 		if(SFX_REGEN_MESH_DROP)
 			soundin = 'sound/items/regenerative_mesh/regen_mesh_drop1.ogg'
+		if(SFX_TELEPHONE_HANDSET)
+			soundin = pick(
+				'sound/machines/telephone/rtb_handset_1.ogg',
+				'sound/machines/telephone/rtb_handset_2.ogg',
+				'sound/machines/telephone/rtb_handset_3.ogg',
+				'sound/machines/telephone/rtb_handset_4.ogg',
+				'sound/machines/telephone/rtb_handset_5.ogg',
+			)
+		if(SFX_TELEPHONE_SPEAKING)
+			soundin = pick(
+				'sound/machines/telephone/talk_phone1.ogg',
+				'sound/machines/telephone/talk_phone2.ogg',
+				'sound/machines/telephone/talk_phone3.ogg',
+				'sound/machines/telephone/talk_phone4.ogg',
+				'sound/machines/telephone/talk_phone5.ogg',
+				'sound/machines/telephone/talk_phone6.ogg',
+				'sound/machines/telephone/talk_phone7.ogg',
+			)
 	return soundin

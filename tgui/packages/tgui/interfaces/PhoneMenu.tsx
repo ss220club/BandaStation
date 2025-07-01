@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Box, Button, Input, Section, Stack, Tabs } from 'tgui-core/components'
 import { Window } from 'tgui/layouts';
@@ -12,13 +12,14 @@ type Data = {
 		phone_color: string;
 		phone_id: string;
 		phone_icon: string;
+		display_name: string;
 	}[];
 };
 
 export const PhoneMenu = (props) => {
 	const { act, data } = useBackend();
 	return (
-		<Window width={500} height={400}>
+		<Window title='Telephone' width={500} height={400}>
 			<Window.Content>
 				<GeneralPanel />
 			</Window.Content>
@@ -29,21 +30,37 @@ export const PhoneMenu = (props) => {
 const GeneralPanel = (props) => {
 	const { act, data } = useBackend<Data>();
 	const { availability, last_caller } = data;
-	const available_transmitters = Object.keys(data.available_transmitters);
-	const transmitters = data.transmitters.filter((val1) =>
-		available_transmitters.includes(val1.phone_id),
+	const available_transmitters = data.available_transmitters || [];
+
+	const transmitters = (data.transmitters || []).filter(val1 =>
+		available_transmitters.includes(val1.phone_id)
 	);
 
+	console.log('transmitters:', transmitters);
+	transmitters.forEach((t, i) => {
+		if (typeof t.phone_category !== 'string') {
+			console.warn(`Bad phone_category at index ${i}:`, t.phone_category, t);
+		}
+	});
+
+
 	const categories: string[] = [];
-	for (let i = 0; i < transmitters.length; i++) {
-		let data = transmitters[i];
-		if (categories.includes(data.phone_category)) continue;
-		categories.push(data.phone_category);
-	}
+	transmitters.forEach(t => {
+		const category = typeof t.phone_category === 'string' ? t.phone_category.trim() : null;
+		if (category && category.length > 0 && !categories.includes(category)) {
+			categories.push(category);
+		}
+	});
 
 	const [currentSearch, setSearch] = useState<string>('');
 	const [selectedPhone, setSelectedPhone] = useState<string | null>(null);
-	const [currentCategory, setCategory] = useState<string>(categories[0] || '');
+	const [currentCategory, setCategory] = useState(categories[0] || '');
+
+	useEffect(() => {
+		if (categories.length && !categories.includes(currentCategory)) {
+			setCategory(categories[0]);
+		}
+	}, [categories, currentCategory]);
 
 	let dnd_tooltip = 'Do Not Disturb is DISABLED';
 	let dnd_locked = 'No';
@@ -90,7 +107,7 @@ const GeneralPanel = (props) => {
 					</Stack>
 				</Stack.Item>
 				<Stack.Item grow>
-					<Section fill>
+					<Section fill title="">
 						<Stack vertical fill>
 							<Stack.Item>
 								<Tabs>
@@ -115,36 +132,23 @@ const GeneralPanel = (props) => {
 							</Stack.Item>
 							<Stack.Item grow>
 								<Section fill scrollable>
-									<Tabs vertical>
-										{transmitters.map((val) => {
-											if (
-												val.phone_category !== currentCategory ||
-												!val.phone_id.toLowerCase().match(currentSearch)
-											) {
-												return;
-											}
-											return (
-												<Tabs.Tab
-													selected={selectedPhone === val.phone_id}
-													onClick={() => {
-														if (selectedPhone === val.phone_id) {
-															act('call_phone', { phone_id: selectedPhone });
-														} else {
-															setSelectedPhone(val.phone_id);
-														}
-													}}
-													key={val.phone_id}
-													color={val.phone_color}
-													icon={val.phone_icon}
-												>
-													<div onFocus={() => (document.activeElement as HTMLElement)?.blur()}>
-														{val.phone_id}
-													</div>
-												</Tabs.Tab>
-											);
-										})}
-									</Tabs>
+									{transmitters
+										.filter(val => val.phone_category === currentCategory && val.phone_id.toLowerCase().match(currentSearch))
+										.map(val => (
+											<Button
+												key={val.phone_id}
+												color={val.phone_color}
+												icon={val.phone_icon}
+												fluid
+												selected={selectedPhone === val.phone_id}
+												onClick={() => setSelectedPhone(val.phone_id)}
+												style={{ marginBottom: '0.5em', textAlign: 'left' }}
+											>
+												{val.display_name} phone
+											</Button>
+										))}
 								</Section>
+
 							</Stack.Item>
 							{!!selectedPhone && (
 								<Stack.Item>
