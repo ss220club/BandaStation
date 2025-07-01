@@ -5,7 +5,7 @@
 	var/mob/dead/new_player/player = user
 	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 
-	var/discord_linked = SStitle.discord_verification_possible && SScentral.is_player_discord_linked(player.ckey)
+	var/discord_linked = !CONFIG_GET(flag/force_discord_verification) || (SStitle.discord_verification_possible && SScentral.is_player_discord_linked(player.ckey))
 	var/player_name = player.client.prefs.read_preference(/datum/preference/name/real_name)
 	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
 	var/loading_percentage = CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100
