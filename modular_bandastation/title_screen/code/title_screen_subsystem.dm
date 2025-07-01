@@ -3,8 +3,8 @@
 	flags = SS_BACKGROUND
 	wait = 1 SECONDS
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
-	/// Whether SS Central is enabled
-	var/central_enabled
+	/// Is discord verification possible
+	var/discord_verification_possible
 	/// The current notice text, or null
 	var/notice
 	/// Currently loading subsystem name
@@ -19,8 +19,8 @@
 	var/list/title_images_pool = list()
 
 /datum/controller/subsystem/title/Initialize()
-	central_enabled = CONFIG_GET(flag/force_discord_verification) && SScentral.can_run()
-	if(CONFIG_GET(flag/force_discord_verification) && !central_enabled)
+	discord_verification_possible = CONFIG_GET(flag/force_discord_verification) && SScentral.can_run()
+	if(CONFIG_GET(flag/force_discord_verification) && !discord_verification_possible)
 		stack_trace("Discord verification is enabled, but SS Central is not active.")
 
 	fill_title_images_pool()

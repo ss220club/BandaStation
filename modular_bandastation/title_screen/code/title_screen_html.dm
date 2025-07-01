@@ -5,7 +5,7 @@
 	var/mob/dead/new_player/player = user
 	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 
-	var/discord_linked = SStitle.central_enabled && SScentral.is_player_discord_linked(player.ckey)
+	var/discord_linked = SStitle.discord_verification_possible && SScentral.is_player_discord_linked(player.ckey)
 	var/player_name = player.client.prefs.read_preference(/datum/preference/name/real_name)
 	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
 	var/loading_percentage = CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100
@@ -146,22 +146,24 @@
 				<div class="lobby_auth_title">Авторизация</div>
 				<div class="lobby_auth_content">
 					<div class="lobby_auth_text">
-						[!SStitle.central_enabled ? {"
-							Включена система привязок Space Station Central, однако на данный момент она недоступна<br>
-							<span class="bad"><b>Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.</b></span>
-						"} : {"
+						[SStitle.discord_verification_possible ? {"
 							Вход в игру требует привязать аккаунт<br>
 							Для этого воспользуйтесь авторизацией через Discord<br>
 							После авторизации, просто <b>закройте это окно</b><br>
 							<small>Ссылка продублирована в чат, если вы хотите авторизоваться через свой браузер
+						"} : {"
+							Включена система привязок Space Station Central, однако на данный момент она недоступна<br>
+							<span class="bad"><b>Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.</b></span>
 						"}]
 					</div>
 					<div id="external_auth"></div>
-					<div class="lobby_auth_controls">
-						<button id="open_auth" class="lobby_element lobby-auth-discord" onclick="call_byond('discord_oauth', true)">
-							<span class="lobby-text">Привязать Discord</span>
-						</button>
-					</div>
+					[SStitle.discord_verification_possible ? {"
+						<div class="lobby_auth_controls">
+							<button id="open_auth" class="lobby_element lobby-auth-discord" onclick="call_byond('discord_oauth', true)">
+								<span class="lobby-text">Привязать Discord</span>
+							</button>
+						</div>
+					"} : ""]
 				</div>
 			</div>
 		</div>
