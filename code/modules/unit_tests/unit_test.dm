@@ -279,7 +279,7 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 		// BANDASTATION ADD - Shouldn't exist without a parent hookah
 		/obj/item/hookah_mouthpiece,
 		///Single use case holder atom requiring a user
-		/atom/movable/looking_holder
+		/atom/movable/looking_holder,
 	)
 
 	// Everything that follows is a typesof() check.
@@ -358,6 +358,7 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	// Can't spawn openspace above nothing, it'll get pissy at me
 	returnable_list += typesof(/turf/open/space/openspace)
 	returnable_list += typesof(/turf/open/openspace)
+	returnable_list += typesof(/obj/item/robot_model) // These should never be spawned outside of a robot.
 
 	return returnable_list
 

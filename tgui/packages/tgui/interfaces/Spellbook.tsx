@@ -783,7 +783,6 @@ export const Spellbook = (props) => {
                     width={15}
                     placeholder="Поиск заклинания..."
                     onChange={setSpellSearch}
-                    expensive
                   />
                 </Stack.Item>
               </Stack>

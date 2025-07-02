@@ -3,7 +3,7 @@
 /datum/quirk/all_nighter
 	name = "All Nighter"
 	desc = "Вы заметно не выспались прошлой ночью! У вас постоянно будет плохое настроение, а спать будете дольше. Стимуляторы или сон могут помочь."
-	icon = FA_ICON_BED
+	icon = FA_ICON_MOON
 	value = -4
 	mob_trait = TRAIT_HEAVY_SLEEPER
 	gain_text = span_danger("Вы чувствуете себя уставшим.")

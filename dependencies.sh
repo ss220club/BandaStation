@@ -11,8 +11,11 @@ export BYOND_MINOR=1659
 export RUST_G_VERSION=3.9.0
 export RUST_UTILS_VERSION=0.2.0
 
-#node version
+# node version
 export NODE_VERSION_LTS=22.11.0
+
+# Bun version
+export BUN_VERSION=1.2.16
 
 # SpacemanDMM git tag
 export SPACEMAN_DMM_VERSION=suite-1.10
@@ -31,3 +34,4 @@ export CUTTER_REPO=spacestation13/hypnagogic
 
 #hypnagogic git tag
 export CUTTER_VERSION=v4.0.0
+

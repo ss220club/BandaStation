@@ -1,4 +1,4 @@
-#define RANDOM_EVENT_ADMIN_INTERVENTION_TIME (60 SECONDS) // BANDASTATION EDIT CHANGE - STORYTELLER. Original: 10 SECONDS
+#define RANDOM_EVENT_ADMIN_INTERVENTION_TIME (10 SECONDS)
 
 //this singleton datum is used by the events controller to dictate how it selects events
 /datum/round_event_control
@@ -32,9 +32,6 @@
 
 	var/triggering //admin cancellation
 
-	/// Whether or not dynamic should hijack this event
-	var/dynamic_should_hijack = FALSE
-
 	/// Datum that will handle admin options for forcing the event.
 	/// If there are no options, just leave it as an empty list.
 	var/list/datum/event_admin_setup/admin_setup = list()
@@ -67,21 +64,11 @@
 
 // Checks if the event can be spawned. Used by event controller and "false alarm" event.
 // Admin-created events override this.
-/datum/round_event_control/proc/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/proc/can_spawn_event(players_amt, allow_magic = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	// BANDASTATION EDIT START - STORYTELLER
-	if(SSgamemode.current_storyteller?.disable_distribution || SSgamemode.halted_storyteller)
-		return FALSE
-	if(event_group && !GLOB.event_groups[event_group].can_run())
-		return FALSE
-	if(roundstart && (!SSgamemode.can_run_roundstart || (SSgamemode.ran_roundstart && !fake_check && !SSgamemode.current_storyteller?.ignores_roundstart)))
-		return FALSE
-	if(!roundstart && (SSgamemode.can_run_roundstart))
-		return FALSE
-	// BANDASTATION EDIT END - STORYTELLER
 	if(occurrences >= max_occurrences)
 		return FALSE
-	if(earliest_start >= (world.time - SSticker.round_start_time))
+	if(earliest_start >= world.time-SSticker.round_start_time)
 		return FALSE
 	if(!allow_magic && wizardevent != SSevents.wizardmode)
 		return FALSE
@@ -93,27 +80,10 @@
 		return FALSE
 	if(ispath(typepath, /datum/round_event/ghost_role) && !(GLOB.ghost_role_flags & GHOSTROLE_MIDROUND_EVENT))
 		return FALSE
-	// BANDASTATION EDIT START - STORYTELLER
-	if(checks_antag_cap && !SSgamemode.can_inject_antags())
-		return FALSE
-	if(!weight)
-		return FALSE
-	if(!check_enemies())
-		return FALSE
-	if(allowed_storytellers && ((islist(allowed_storytellers) && !is_type_in_list(SSgamemode.current_storyteller, allowed_storytellers)) || SSgamemode.current_storyteller.type != allowed_storytellers))
-		return FALSE
-	if(allowed_storytellers && SSgamemode.current_storyteller && ((islist(allowed_storytellers) && !is_type_in_list(SSgamemode.current_storyteller, allowed_storytellers)) || SSgamemode.current_storyteller.type != allowed_storytellers))
-		return FALSE
-	if(!SSgamemode.check_event_power(src))
-		return FALSE
-	if(type in SSgamemode.current_storyteller.exclude_events)
-		return FALSE
-	// BANDASTATION EDIT END - STORYTELLER
-	if (dynamic_should_hijack && SSdynamic.random_event_hijacked != HIJACKED_NOTHING)
-		return FALSE
+
 	return TRUE
 
-/datum/round_event_control/proc/preRunEvent(forced = FALSE, scheduled = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/proc/preRunEvent()
 	if(!ispath(typepath, /datum/round_event))
 		return EVENT_CANT_RUN
 
@@ -122,28 +92,17 @@
 
 	triggering = TRUE
 
-	// BANDASTATION EDIT START - STORYTELLER
-	if(!roundstart && !scheduled)
-		// We sleep HERE, in pre-event setup (because there's no sense doing it in run_event() since the event is already running!) for the given amount of time to make an admin has enough time to cancel an event un-fitting of the present round or at least reroll it.
-		message_admins("Random Event triggering in [DisplayTimeText(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)]: [name]. (<a href='byond://?src=[REF(src)];cancel=1'>CANCEL</a>) (<a href='byond://?src=[REF(src)];different_event=1'>SOMETHING ELSE</a>)")
-		sleep(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)
-	// BANDASTATION EDIT END - STORYTELLER
+	// We sleep HERE, in pre-event setup (because there's no sense doing it in run_event() since the event is already running!) for the given amount of time to make an admin has enough time to cancel an event un-fitting of the present round or at least reroll it.
+	message_admins("Random Event triggering in [DisplayTimeText(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)]: [name]. (<a href='byond://?src=[REF(src)];cancel=1'>CANCEL</a>) (<a href='byond://?src=[REF(src)];different_event=1'>SOMETHING ELSE</a>)")
+	sleep(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)
 	var/players_amt = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
-	if(!can_spawn_event(players_amt, fake_check = TRUE) && !forced && !roundstart) /// BANDSTATION EDIT - STORYTELLER
+	if(!can_spawn_event(players_amt))
 		message_admins("Second pre-condition check for [name] failed, rerolling...")
-		message_admins("REASON: [return_failure_string(players_amt)]")/// BANDSTATION EDIT - STORYTELLER
 		SSevents.spawnEvent(excluded_event = src)
 		return EVENT_INTERRUPTED
 
-	// BANDASTATION EDIT START - STORYTELLER
-	if(!can_spawn_event(players_amt, fake_check = TRUE) && forced)
-		message_admins("Second pre-condition check for [name] failed, but event forced, running event regardless this may have issues...")
-		message_admins("REASON: [return_failure_string(players_amt)]")
-	// BANDASTATION EDIT END - STORYTELLER
-
 	if(!triggering)
 		return EVENT_CANCELLED //admin cancelled
-
 	triggering = FALSE
 	return EVENT_READY
 
@@ -161,12 +120,11 @@
 		if(!triggering)
 			to_chat(usr, span_admin("Too late to change events now!"))
 			return
-		SSevents.spawnEvent(excluded_event = src)
 		triggering = FALSE
 		message_admins("[key_name_admin(usr)] chose to have event [name] rolled into a different event.")
 		log_admin_private("[key_name(usr)] rerolled event [name].")
 		SSblackbox.record_feedback("tally", "event_admin_rerolled", 1, typepath)
-
+		SSevents.spawnEvent(excluded_event = src)
 
 /*
 Runs the event
@@ -188,7 +146,6 @@ Runs the event
 		for(var/datum/event_admin_setup/admin_setup_datum in admin_setup)
 			admin_setup_datum.apply_to_event(round_event)
 	SEND_SIGNAL(src, COMSIG_CREATED_ROUND_EVENT, round_event)
-	round_event.forced = admin_forced
 	round_event.setup()
 	round_event.current_players = get_active_player_count(alive_check = 1, afk_check = 1, human_check = 1)
 	occurrences++
@@ -206,11 +163,6 @@ Runs the event
 
 	triggering = FALSE
 	log_game("[random ? "Random" : "Forced"] Event triggering: [name] ([typepath]).")
-
-	// BANDASTATION EDIT START - STORYTELLER: event groups
-	if(event_group)
-		GLOB.event_groups[event_group].on_run(src)
-	// BANDASTATION EDIT END
 
 	if(alert_observers)
 		round_event.announce_deadchat(random, event_cause)
@@ -257,7 +209,6 @@ Runs the event
 //This is really only for setting defaults which can be overridden later when New() finishes.
 /datum/round_event/proc/setup()
 	SHOULD_CALL_PARENT(FALSE)
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 	return
 
 ///Announces the event name to deadchat, override this if what an event should show to deadchat is different to its event name.
@@ -311,10 +262,6 @@ Runs the event
 //This proc will handle the calls to the appropriate procs.
 /datum/round_event/process()
 	SHOULD_NOT_OVERRIDE(TRUE)
-	// BANDASTATION EDIT START - STORYTELLER
-	if(!setup)
-		return
-	// BANDASTATION EDIT END - STORYTELLER
 	if(!processing)
 		return
 
@@ -346,7 +293,6 @@ Runs the event
 	// Everything is done, let's clean up.
 	if(activeFor >= end_when && activeFor >= announce_when && activeFor >= start_when)
 		processing = FALSE
-		SSgamemode.runned_events += control.name // BANDASTATION EDIT - STORYTELLER
 		kill()
 
 	activeFor++

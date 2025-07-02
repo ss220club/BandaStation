@@ -1,5 +1,7 @@
 #include "_jobs.dm"
 
+#include "code/controller/subsystem/job.dm"
+
 // NT Representation department
 #include "code/departments/nt_representation.dm"
 
@@ -55,3 +57,5 @@
 #include "code/job_types/explorer/landmarks.dm"
 #include "code/job_types/explorer/pda.dm"
 #include "code/job_types/explorer/trim.dm"
+
+#include "code/job_types/job_staffing_priority.dm"

@@ -1,19 +1,20 @@
 import { filter, map, sortBy } from 'common/collections';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { sendAct, useBackend } from 'tgui/backend';
 import {
   Box,
   Button,
   Floating,
+  Icon,
+  ImageButton,
   Input,
-  LabeledList,
   Section,
   Stack,
 } from 'tgui-core/components';
-import { classes } from 'tgui-core/react';
-import { createSearch } from 'tgui-core/string';
+import { capitalize, createSearch } from 'tgui-core/string';
 
 import { CharacterPreview } from '../../common/CharacterPreview';
+import { Preference } from '../components/Preference';
 import { RandomizationButton } from '../components/RandomizationButton';
 import { features } from '../preferences/features';
 import {
@@ -30,14 +31,7 @@ import {
 import { useRandomToggleState } from '../useRandomToggleState';
 import { useServerPrefs } from '../useServerPrefs';
 import { DeleteCharacterPopup } from './DeleteCharacterPopup';
-import { MultiNameInput, NameInput } from './names';
-
-const CLOTHING_CELL_SIZE = 48;
-const CLOTHING_SIDEBAR_ROWS = 9;
-
-const CLOTHING_SELECTION_CELL_SIZE = 48;
-const CLOTHING_SELECTION_WIDTH = 5.4;
-const CLOTHING_SELECTION_MULTIPLIER = 5.2;
+import { AlternativeNames, NameInput } from './names';
 
 type CharacterControlsProps = {
   handleRotate: () => void;
@@ -50,49 +44,92 @@ type CharacterControlsProps = {
 };
 
 function CharacterControls(props: CharacterControlsProps) {
+  const { act } = useBackend<PreferencesMenuData>();
+  const [randomToggle, setRandomToggle] = useRandomToggleState();
+
   return (
-    <Stack>
-      <Stack.Item>
+    <Stack className="PreferencesMenu__CharacterControls">
+      <Stack>
         <Button
-          onClick={props.handleRotate}
-          fontSize="22px"
           icon="undo"
           tooltip="Повернуть"
           tooltipPosition="top"
+          onClick={props.handleRotate}
         />
-      </Stack.Item>
-
-      <Stack.Item>
         <Button
-          onClick={props.handleOpenSpecies}
-          fontSize="22px"
           icon="paw"
           tooltip="Вид"
           tooltipPosition="top"
+          onClick={props.handleOpenSpecies}
         />
-      </Stack.Item>
-
-      {props.showGender && (
-        <Stack.Item>
+        {props.showGender && (
           <GenderButton
             gender={props.gender}
             handleSetGender={props.setGender}
           />
-        </Stack.Item>
-      )}
-
-      <Stack.Item>
+        )}
         <Button
-          onClick={props.handleDeleteCharacter}
-          fontSize="22px"
-          icon="trash"
-          color="red"
-          tooltip="Удалить персонажа"
+          icon="dice"
+          tooltip="Рандомизировать"
           tooltipPosition="top"
-          disabled={!props.canDeleteCharacter}
+          selected={randomToggle}
+          onClick={() => {
+            act('randomize_character');
+
+            setRandomToggle(!randomToggle);
+          }}
         />
-      </Stack.Item>
+      </Stack>
+      <Button
+        color="red"
+        icon="trash"
+        tooltip="Удалить персонажа"
+        tooltipPosition="top"
+        disabled={!props.canDeleteCharacter}
+        onClick={props.handleDeleteCharacter}
+      />
     </Stack>
+  );
+}
+
+type GenderButtonProps = {
+  handleSetGender: (gender: Gender) => void;
+  gender: Gender;
+};
+
+function GenderButton(props: GenderButtonProps) {
+  return (
+    <Floating
+      placement="top"
+      content={
+        <Stack className="PreferencesMenu__CharacterControls Gender">
+          <Section>
+            {Object.values(Gender).map((gender) => {
+              return (
+                <Button
+                  key={gender}
+                  selected={gender === props.gender}
+                  icon={GENDERS[gender].icon}
+                  tooltip={GENDERS[gender].text}
+                  tooltipPosition="top"
+                  onClick={() => {
+                    props.handleSetGender(gender);
+                  }}
+                />
+              );
+            })}
+          </Section>
+        </Stack>
+      }
+    >
+      <div>
+        <Button
+          icon={GENDERS[props.gender].icon}
+          tooltip="Пол"
+          tooltipPosition="top"
+        />
+      </div>
+    </Floating>
   );
 }
 
@@ -114,79 +151,54 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
   }
 
   return (
-    <Box
-      className="ChoicedSelection"
-      style={{
-        height: `${
-          CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_MULTIPLIER
-        }px`,
-        width: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH}px`,
-      }}
-    >
-      <Stack fill vertical g={0}>
-        <Stack.Item>
-          <Section
-            fill
-            title={`Select ${props.name.toLowerCase()}`}
-            buttons={
-              supplementalFeature && (
-                <FeatureValueInput
-                  shrink
-                  feature={features[supplementalFeature]}
-                  featureId={supplementalFeature}
-                  value={supplementalValue}
-                />
-              )
-            }
-          >
-            <Input
-              autoFocus
-              fluid
-              placeholder="Поиск..."
-              onChange={setSearchText}
-              expensive
-            />
-          </Section>
-        </Stack.Item>
-        <Stack.Item grow>
-          <Section fill scrollable noTopPadding>
-            <Stack wrap>
-              {searchInCatalog(searchText, catalog.icons).map(
-                ([name, image], index) => {
-                  return (
-                    <Button
-                      key={index}
-                      onClick={() => {
-                        props.onSelect(name);
-                      }}
-                      selected={name === props.selected}
-                      tooltip={name}
-                      tooltipPosition="right"
-                      style={{
-                        height: `${CLOTHING_SELECTION_CELL_SIZE}px`,
-                        width: `${CLOTHING_SELECTION_CELL_SIZE}px`,
-                      }}
-                    >
-                      <Box
-                        className={classes([
-                          'preferences32x32',
-                          image,
-                          'centered-image',
-                        ])}
-                        style={{
-                          transform:
-                            'translateX(-50%) translateY(-50%) scale(0.8)',
-                        }}
-                      />
-                    </Button>
-                  );
-                },
-              )}
-            </Stack>
-          </Section>
-        </Stack.Item>
-      </Stack>
-    </Box>
+    <Stack fill vertical g={0} className="PreferencesMenu__ChoicedSelection">
+      <Stack.Item>
+        <Section
+          fill
+          title={`${capitalize(props.name)}`}
+          buttons={
+            supplementalFeature && (
+              <FeatureValueInput
+                shrink
+                feature={features[supplementalFeature]}
+                featureId={supplementalFeature}
+                value={supplementalValue}
+              />
+            )
+          }
+        >
+          <Input
+            autoFocus
+            fluid
+            placeholder="Поиск..."
+            onChange={setSearchText}
+          />
+        </Section>
+      </Stack.Item>
+      <Stack.Item grow>
+        <Section fill scrollable noTopPadding>
+          <Stack wrap>
+            {searchInCatalog(searchText, catalog.icons).map(
+              ([name, image], index) => {
+                return (
+                  <ImageButton
+                    key={index}
+                    asset={['preferences32x32', image]}
+                    imageSize={32}
+                    selected={name === props.selected}
+                    tooltip={name}
+                    tooltipPosition="right"
+                    onClick={() => {
+                      props.onSelect(name);
+                    }}
+                  />
+                );
+              },
+            )}
+          </Stack>
+        </Section>
+      </Stack.Item>
+    </Stack>
   );
 }
 
@@ -199,48 +211,6 @@ function searchInCatalog(searchText = '', catalog: Record<string, string>) {
     );
   }
   return items;
-}
-
-type GenderButtonProps = {
-  handleSetGender: (gender: Gender) => void;
-  gender: Gender;
-};
-
-function GenderButton(props: GenderButtonProps) {
-  return (
-    <Floating
-      placement="right"
-      content={
-        <Stack backgroundColor="white" p={0.3}>
-          {Object.values(Gender).map((gender) => {
-            return (
-              <Stack.Item key={gender}>
-                <Button
-                  selected={gender === props.gender}
-                  onClick={() => {
-                    props.handleSetGender(gender);
-                  }}
-                  fontSize="22px"
-                  icon={GENDERS[gender].icon}
-                  tooltip={GENDERS[gender].text}
-                  tooltipPosition="top"
-                />
-              </Stack.Item>
-            );
-          })}
-        </Stack>
-      }
-    >
-      <div>
-        <Button
-          fontSize="22px"
-          icon={GENDERS[props.gender].icon}
-          tooltip="Пол"
-          tooltipPosition="top"
-        />
-      </div>
-    </Floating>
-  );
 }
 
 type CatalogItem = {
@@ -267,7 +237,6 @@ function MainFeature(props: MainFeatureProps) {
   } = props;
 
   const supplementalFeature = catalog.supplemental_feature;
-
   return (
     <Floating
       stopChildPropagation
@@ -288,48 +257,19 @@ function MainFeature(props: MainFeatureProps) {
         />
       }
     >
-      <Button
-        style={{
-          height: `${CLOTHING_CELL_SIZE}px`,
-          width: `${CLOTHING_CELL_SIZE}px`,
-        }}
-        position="relative"
-      >
-        <Box
-          className={classes([
-            'preferences32x32',
-            catalog.icons![currentValue],
-            'centered-image',
-          ])}
-          style={{
-            transform: randomization
-              ? 'translateX(-70%) translateY(-70%) scale(1.1)'
-              : 'translateX(-50%) translateY(-50%) scale(1.3)',
-          }}
-        />
-
-        {randomization && (
-          <RandomizationButton
-            dropdownProps={{
-              dropdownStyle: {
-                bottom: 0,
-                position: 'absolute',
-                right: '1px',
-              },
-
-              onOpen: (event) => {
-                // We're a button inside a button.
-                // Did you know that's against the W3C standard? :)
-                // FIXME: Button unclickable!
-                event.cancelBubble = true;
-                event.stopPropagation();
-              },
-            }}
-            value={randomization}
-            setValue={setRandomization}
-          />
-        )}
-      </Button>
+      <ImageButton
+        className="PreferencesMenu__MainFeature"
+        asset={['preferences32x32', catalog.icons![currentValue]]}
+        imageSize={48}
+        buttons={
+          randomization && (
+            <RandomizationButton
+              value={randomization}
+              setValue={setRandomization}
+            />
+          )
+        }
+      />
     </Floating>
   );
 }
@@ -352,73 +292,60 @@ function sortPreferences(array: [string, unknown][]) {
 type PreferenceListProps = {
   preferences: Record<string, unknown>;
   randomizations: Record<string, RandomSetting>;
-  maxHeight: string;
-  children?: ReactNode;
 };
 
 export function PreferenceList(props: PreferenceListProps) {
   const { act } = useBackend<PreferencesMenuData>();
-  const { preferences, randomizations, maxHeight, children } = props;
+  const { preferences, randomizations } = props;
 
-  return (
-    <Stack.Item
-      basis="50%"
-      grow
-      style={{
-        background: 'rgba(0, 0, 0, 0.5)',
-        padding: '4px',
-      }}
-      overflowX="hidden"
-      overflowY="auto"
-      maxHeight={maxHeight}
-    >
-      <LabeledList>
-        {sortPreferences(Object.entries(preferences)).map(
-          ([featureId, value]) => {
-            const feature = features[featureId];
-            const randomSetting = randomizations[featureId];
-
-            if (feature === undefined) {
-              return (
-                <Stack.Item key={featureId}>
-                  <b>Компонент {featureId} не распознан.</b>
-                </Stack.Item>
-              );
-            }
-
+  return Object.entries(preferences).length > 0 ? (
+    <Stack vertical>
+      {sortPreferences(Object.entries(preferences)).map(
+        ([featureId, value]) => {
+          const feature = features[featureId];
+          const randomSetting = randomizations[featureId];
+          if (feature === undefined) {
             return (
-              <LabeledList.Item
-                key={featureId}
-                label={feature.name}
-                tooltip={feature.description}
-                verticalAlign="middle"
-              >
-                <Stack fill>
-                  {randomSetting && (
-                    <Stack.Item>
-                      <RandomizationButton
-                        setValue={createSetRandomization(act, featureId)}
-                        value={randomSetting}
-                      />
-                    </Stack.Item>
-                  )}
-
-                  <Stack.Item grow>
-                    <FeatureValueInput
-                      feature={feature}
-                      featureId={featureId}
-                      value={value}
-                    />
-                  </Stack.Item>
-                </Stack>
-              </LabeledList.Item>
+              <Stack.Item key={featureId} bold>
+                Компонент {featureId} не распознан.
+              </Stack.Item>
             );
-          },
-        )}
-      </LabeledList>
+          }
 
-      {children}
-    </Stack.Item>
+          return (
+            <Preference
+              key={featureId}
+              id={featureId}
+              name={feature.name}
+              description={feature.description}
+              childrenClassName="Character"
+            >
+              <FeatureValueInput
+                value={value}
+                feature={feature}
+                featureId={featureId}
+              />
+              {randomSetting && (
+                <RandomizationButton
+                  setValue={createSetRandomization(act, featureId)}
+                  value={randomSetting}
+                />
+              )}
+            </Preference>
+          );
+        },
+      )}
+    </Stack>
+  ) : (
+    <Stack fill vertical align="center" justify="center" my="auto" g={3}>
+      <Stack.Item>
+        <Icon name="face-sad-cry" size={7.5} color="blue" />
+      </Stack.Item>
+      <Stack.Item bold fontSize={1.25} color="label" textAlign="center">
+        К сожалению, выбранная раса не имеет дополнительных параметров
+        внешности.
+      </Stack.Item>
+    </Stack>
   );
 }
 
@@ -432,7 +359,6 @@ export function getRandomization(
   }
 
   const { data } = useBackend<PreferencesMenuData>();
-
   if (!randomBodyEnabled) {
     return {};
   }
@@ -458,7 +384,6 @@ export function MainPage(props: MainPageProps) {
   const { act, data } = useBackend<PreferencesMenuData>();
   const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
     useState(false);
-  const [multiNameInputOpen, setMultiNameInputOpen] = useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
 
   const serverData = useServerPrefs();
@@ -491,136 +416,124 @@ export function MainPage(props: MainPageProps) {
   if (randomBodyEnabled) {
     nonContextualPreferences['random_species'] =
       data.character_preferences.randomization['species'];
+    // BANDASTATION ADDITION START - TTS
+    nonContextualPreferences['random_tts_seed'] =
+      data.character_preferences.randomization['tts_seed'];
+    // BANDASTATION ADDITION END - TTS
   } else {
     // We can't use random_name/is_accessible because the
     // server doesn't know whether the random toggle is on.
     delete nonContextualPreferences['random_name'];
   }
 
-  return (
-    <>
-      {multiNameInputOpen && (
-        <MultiNameInput
-          handleClose={() => setMultiNameInputOpen(false)}
-          handleRandomizeName={(preference) =>
-            act('randomize_name', {
-              preference,
-            })
-          }
-          handleUpdateName={(nameType, value) =>
-            act('set_preference', {
-              preference: nameType,
-              value,
-            })
-          }
-          names={data.character_preferences.names}
-        />
-      )}
+  const Character = (
+    <Section fill className="PreferencesMenu__Character">
+      <Stack fill vertical>
+        <Stack.Item>
+          <CharacterControls
+            gender={data.character_preferences.misc.gender}
+            handleOpenSpecies={props.openSpecies}
+            handleRotate={() => {
+              act('rotate');
+            }}
+            setGender={createSetPreference(act, 'gender')}
+            showGender={currentSpeciesData ? !!currentSpeciesData.sexes : true}
+            canDeleteCharacter={
+              Object.values(data.character_profiles).filter((name) => !!name)
+                .length > 1
+            }
+            handleDeleteCharacter={() => setDeleteCharacterPopupOpen(true)}
+          />
+        </Stack.Item>
+        <Stack.Item grow style={{ alignSelf: 'center' }}>
+          <CharacterPreview height="100%" id={data.character_preview_view} />
+        </Stack.Item>
+        <Stack.Item>
+          <NameInput
+            large
+            canRandomize
+            name={data.character_preferences.names[data.name_to_use]}
+            nameType={data.name_to_use}
+          />
+        </Stack.Item>
+      </Stack>
+    </Section>
+  );
 
+  const MainFeatures = (
+    <Section fill scrollable pl={0.7} width={6.5} ml={-1}>
+      <Stack vertical direction="column-reverse">
+        {mainFeatures.map(([clothingKey, clothing]) => {
+          const catalog = serverData?.[
+            clothingKey
+          ] as FeatureChoicedServerData & {
+            name: string;
+          };
+
+          return (
+            <Stack.Item key={clothingKey}>
+              {!catalog ? (
+                <ImageButton imageSize={48} />
+              ) : (
+                <MainFeature
+                  catalog={catalog}
+                  currentValue={clothing}
+                  handleSelect={createSetPreference(act, clothingKey)}
+                  randomization={randomizationOfMainFeatures[clothingKey]}
+                  setRandomization={createSetRandomization(act, clothingKey)}
+                />
+              )}
+            </Stack.Item>
+          );
+        })}
+      </Stack>
+    </Section>
+  );
+
+  return (
+    <Stack fill>
       {deleteCharacterPopupOpen && (
         <DeleteCharacterPopup
           close={() => setDeleteCharacterPopupOpen(false)}
         />
       )}
-
-      <Stack height={`${CLOTHING_SIDEBAR_ROWS * CLOTHING_CELL_SIZE}px`}>
-        <Stack.Item>
-          <Stack vertical fill>
-            <Stack.Item>
-              <CharacterControls
-                gender={data.character_preferences.misc.gender}
-                handleOpenSpecies={props.openSpecies}
-                handleRotate={() => {
-                  act('rotate');
-                }}
-                setGender={createSetPreference(act, 'gender')}
-                showGender={
-                  currentSpeciesData ? !!currentSpeciesData.sexes : true
-                }
-                canDeleteCharacter={
-                  Object.values(data.character_profiles).filter(
-                    (name) => !!name,
-                  ).length > 1
-                }
-                handleDeleteCharacter={() => setDeleteCharacterPopupOpen(true)}
+      <Stack.Item>
+        <Stack fill vertical>
+          <Stack.Item basis="50%">{Character}</Stack.Item>
+          <Stack.Item grow mr={1}>
+            <AlternativeNames names={data.character_preferences.names} />
+          </Stack.Item>
+        </Stack>
+      </Stack.Item>
+      <Stack.Item>{MainFeatures}</Stack.Item>
+      <Stack.Item grow>
+        <Stack fill vertical>
+          <Stack.Item basis="37.5%">
+            <Section fill scrollable>
+              <PreferenceList
+                preferences={contextualPreferences}
+                randomizations={getRandomization(
+                  contextualPreferences,
+                  serverData,
+                  randomBodyEnabled,
+                )}
               />
-            </Stack.Item>
-
-            <Stack.Item grow>
-              <CharacterPreview
-                height="100%"
-                id={data.character_preview_view}
+            </Section>
+          </Stack.Item>
+          <Stack.Item grow>
+            <Section fill scrollable>
+              <PreferenceList
+                preferences={nonContextualPreferences}
+                randomizations={getRandomization(
+                  nonContextualPreferences,
+                  serverData,
+                  randomBodyEnabled,
+                )}
               />
-            </Stack.Item>
-
-            <Stack.Item position="relative">
-              <NameInput
-                name={data.character_preferences.names[data.name_to_use]}
-                handleUpdateName={createSetPreference(act, data.name_to_use)}
-                openMultiNameInput={() => {
-                  setMultiNameInputOpen(true);
-                }}
-              />
-            </Stack.Item>
-          </Stack>
-        </Stack.Item>
-
-        <Stack.Item>
-          <Stack fill vertical wrap>
-            {mainFeatures.map(([clothingKey, clothing]) => {
-              const catalog = serverData?.[
-                clothingKey
-              ] as FeatureChoicedServerData & {
-                name: string;
-              };
-
-              return (
-                <Stack.Item key={clothingKey}>
-                  {!catalog ? (
-                    // Skeleton button
-                    <Button height={4} width={4} disabled />
-                  ) : (
-                    <MainFeature
-                      catalog={catalog}
-                      currentValue={clothing}
-                      handleSelect={createSetPreference(act, clothingKey)}
-                      randomization={randomizationOfMainFeatures[clothingKey]}
-                      setRandomization={createSetRandomization(
-                        act,
-                        clothingKey,
-                      )}
-                    />
-                  )}
-                </Stack.Item>
-              );
-            })}
-          </Stack>
-        </Stack.Item>
-
-        <Stack.Item grow basis={0}>
-          <Stack vertical fill>
-            <PreferenceList
-              randomizations={getRandomization(
-                contextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-              preferences={contextualPreferences}
-              maxHeight="auto"
-            />
-
-            <PreferenceList
-              randomizations={getRandomization(
-                nonContextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-              preferences={nonContextualPreferences}
-              maxHeight="auto"
-            />
-          </Stack>
-        </Stack.Item>
-      </Stack>
-    </>
+            </Section>
+          </Stack.Item>
+        </Stack>
+      </Stack.Item>
+    </Stack>
   );
 }

@@ -85,7 +85,7 @@ STATION_GOAL_BUDGET 1
 ## GAME MODES ###
 
 ## Uncomment to not send a roundstart intercept report. Gamemodes may override this.
-## NO_INTERCEPT_REPORT
+NO_INTERCEPT_REPORT
 
 ## Percent weight reductions for three of the most recent modes
 
@@ -213,7 +213,7 @@ SECURITY_HAS_MAINT_ACCESS
 #EVERYONE_HAS_MAINT_ACCESS
 
 ## Comment this out this to make security officers spawn in departmental security posts
-SEC_START_BRIG
+#SEC_START_BRIG
 
 ## This variable is how you may configure "Scaling Access" for Departmental Security Officers.
 ## Set to 0/commented out for "off", Departmental Security Officers will never get additional room-specific access (beyond general departmental doors).
@@ -388,6 +388,7 @@ ROUNDSTART_RACES ethereal
 #ROUNDSTART_RACES skeleton
 #ROUNDSTART_RACES zombie
 #ROUNDSTART_RACES pod
+#ROUNDSTART_RACES ghost
 
 ## Races that are radical departures to what a species is, so while they technically can be roundstart - it's probably not wise
 #ROUNDSTART_RACES android

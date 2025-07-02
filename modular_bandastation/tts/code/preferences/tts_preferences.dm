@@ -11,6 +11,9 @@
 	target.dna.tts_seed_dna = seed
 	GLOB.human_to_tts["[target.real_name]"] = seed
 
+/datum/preference/text/tts_seed/create_informed_default_value(datum/preferences/preferences)
+	return SStts220.pick_tts_seed_by_gender(preferences.read_preference(/datum/preference/choiced/gender))
+
 /datum/preference/numeric/volume/sound_tts_volume_radio
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
 	savefile_key = "sound_tts_volume_radio"
@@ -38,8 +41,3 @@
 
 /datum/preference/numeric/volume/sound_tts_volume_announcement/create_default_value()
 	return maximum / 2
-
-/mob/living/carbon/human/randomize_human_appearance(randomize_flags)
-	. = ..()
-	var/datum/component/tts_component/tts_component = GetComponent(/datum/component/tts_component)
-	tts_component.tts_seed = tts_component.get_random_tts_seed_by_gender()
