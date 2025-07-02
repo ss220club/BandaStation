@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Box, Button, Input, Section, Stack, Tabs } from 'tgui-core/components'
+import { Box, Button, Section, Stack, Tabs, Table } from 'tgui-core/components'
 import { Window } from 'tgui/layouts';
 
 type Data = {
 	availability: number;
 	last_caller: string | null;
+	current_display_name: string,
+	current_phone_id: string,
 	available_transmitters: string[];
 	transmitters: {
 		phone_category: string;
@@ -52,7 +54,6 @@ const GeneralPanel = (props) => {
 		}
 	});
 
-	const [currentSearch, setSearch] = useState<string>('');
 	const [selectedPhone, setSelectedPhone] = useState<string | null>(null);
 	const [currentCategory, setCategory] = useState(categories[0] || '');
 
@@ -107,63 +108,82 @@ const GeneralPanel = (props) => {
 					</Stack>
 				</Stack.Item>
 				<Stack.Item grow>
-					<Section fill title="">
-						<Stack vertical fill>
+					<Stack vertical fill>
+						<Stack.Item>
 							<Stack.Item>
-								<Tabs>
-									{categories.map((val) => (
-										<Tabs.Tab
-											selected={val === currentCategory}
-											onClick={() => setCategory(val)}
-											key={val}
-										>
-											{val}
-										</Tabs.Tab>
-									))}
-								</Tabs>
-							</Stack.Item>
-							<Stack.Item>
-								<Input
-									fluid
-									value={currentSearch}
-									placeholder="Begin typing..."
-									onChange={(value) => setSearch(value.toLowerCase())}
-								/>
-							</Stack.Item>
-							<Stack.Item grow>
-								<Section fill scrollable>
-									{transmitters
-										.filter(val => val.phone_category === currentCategory && val.phone_id.toLowerCase().match(currentSearch))
-										.map(val => (
-											<Button
-												key={val.phone_id}
-												color={val.phone_color}
-												icon={val.phone_icon}
-												fluid
-												selected={selectedPhone === val.phone_id}
-												onClick={() => setSelectedPhone(val.phone_id)}
-												style={{ marginBottom: '0.5em', textAlign: 'left' }}
-											>
-												{val.display_name} phone
-											</Button>
-										))}
+								<Section>
+									<Table>
+										<Table.Row className="candystripe">
+											<Table.Cell p={0.25}>
+												Display Name
+											</Table.Cell>
+											<Table.Cell>
+												{data.current_display_name}
+											</Table.Cell>
+										</Table.Row>
+										<Table.Row className="candystripe">
+											<Table.Cell p={0.25}>
+												Device ID
+											</Table.Cell>
+											<Table.Cell>
+												{data.current_phone_id}
+											</Table.Cell>
+										</Table.Row>
+									</Table>
 								</Section>
-
 							</Stack.Item>
-							{!!selectedPhone && (
-								<Stack.Item>
-									<Button
-										color="good"
-										fluid
-										textAlign="center"
-										onClick={() => act('call_phone', { phone_id: selectedPhone })}
-									>
-										Dial
-									</Button>
-								</Stack.Item>
-							)}
-						</Stack>
-					</Section>
+						</Stack.Item>
+						<Stack.Item grow>
+							<Section fill>
+								<Stack vertical fill>
+									<Stack.Item>
+										<Tabs>
+											{categories.map((val) => (
+												<Tabs.Tab
+													selected={val === currentCategory}
+													onClick={() => setCategory(val)}
+													key={val}
+												>
+													{val}
+												</Tabs.Tab>
+											))}
+										</Tabs>
+									</Stack.Item>
+									<Stack.Item grow>
+										<Section fill scrollable>
+											{transmitters
+												.map(val => (
+													<Button
+														key={val.phone_id}
+														icon={val.phone_icon}
+														fluid
+														selected={selectedPhone === val.phone_id}
+														onClick={() => setSelectedPhone(val.phone_id)}
+														style={{ marginBottom: '0.5em', textAlign: 'left' }}
+													>
+														{val.display_name}
+													</Button>
+												))}
+										</Section>
+
+									</Stack.Item>
+									{!!selectedPhone && (
+										<Stack.Item>
+											<Button
+												color="good"
+												fluid
+												textAlign="center"
+												onClick={() => act('call_phone', { phone_id: selectedPhone })}
+											>
+												Dial
+											</Button>
+										</Stack.Item>
+									)}
+								</Stack>
+							</Section>
+						</Stack.Item>
+					</Stack>
+
 				</Stack.Item>
 			</Stack>
 		</Box>
