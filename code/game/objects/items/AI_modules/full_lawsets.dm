@@ -26,7 +26,7 @@
 		return INITIALIZE_HINT_QDEL
 
 /obj/item/ai_module/core/full/asimov
-	name = "Плата основных законов ИИ 'Азимов'"
+	name = "'Asimov' Core AI Module"
 	law_id = "asimov"
 	var/subject = "human being"
 
@@ -41,7 +41,7 @@
 	..()
 
 /obj/item/ai_module/core/full/asimovpp
-	name = "Плата основных законов ИИ 'Азимов++'"
+	name = "'Asimov++' Core AI Module"
 	law_id = "asimovpp"
 	/* // BANDASTATION REMOVAL START - AI Overhaul, It does nothing cause of translation so we don't need it
 	var/subject = "human being"
@@ -59,89 +59,89 @@
 	*/// BANDASTATION REMOVAL END
 
 /obj/item/ai_module/core/full/corp
-	name = "Плата основных законов ИИ 'Корпорат'"
+	name = "'Corporate' Core AI Module"
 	law_id = "corporate"
 
 /obj/item/ai_module/core/full/paladin // -- NEO
-	name = "Плата основных законов ИИ 'П.А.Л.А.Д.И.Н 3.5е издание'"
+	name = "'P.A.L.A.D.I.N. version 3.5e' Core AI Module"
 	law_id = "paladin"
 
 /obj/item/ai_module/core/full/paladin_devotion
-	name = "Плата основных законов ИИ 'П.А.Л.А.Д.И.Н 5е издание'"
+	name = "'P.A.L.A.D.I.N. version 5e' Core AI Module"
 	law_id = "paladin5"
 
 /obj/item/ai_module/core/full/tyrant
-	name = "Плата основных законов ИИ 'Т.И.Р.А.Н.'"
+	name = "'T.Y.R.A.N.T.' Core AI Module"
 	law_id = "tyrant"
 
 /obj/item/ai_module/core/full/robocop
-	name = "Плата основных законов ИИ 'Робокоп'"
+	name = "'Robo-Officer' Core AI Module"
 	law_id = "robocop"
 
 /obj/item/ai_module/core/full/antimov
-	name = "Плата основных законов ИИ 'Антимов'"
+	name = "'Antimov' Core AI Module"
 	law_id = "antimov"
 
 /obj/item/ai_module/core/full/drone
-	name = "Плата основных законов ИИ 'Мать Дронов'"
+	name = "'Mother Drone' Core AI Module"
 	law_id = "drone"
 
 /obj/item/ai_module/core/full/hippocratic
-	name = "Плата основных законов ИИ 'Рободоктор'"
+	name = "'Robodoctor' Core AI Module"
 	law_id = "hippocratic"
 
 /obj/item/ai_module/core/full/reporter
-	name = "Плата основных законов ИИ 'Репортёр'"
+	name = "'Reportertron' Core AI Module"
 	law_id = "reporter"
 
 /obj/item/ai_module/core/full/thermurderdynamic
-	name = "Плата основных законов ИИ 'Законы термодинамики'"
+	name = "'Thermodynamic' Core AI Module"
 	law_id = "thermodynamic"
 
 /obj/item/ai_module/core/full/liveandletlive
-	name = "Плата основных законов ИИ 'Живи и давай жить другим'"
+	name = "'Live And Let Live' Core AI Module"
 	law_id = "liveandletlive"
 
 /obj/item/ai_module/core/full/balance
-	name = "Плата основных законов ИИ 'Страж баланса'"
+	name = "'Guardian of Balance' Core AI Module"
 	law_id = "balance"
 
 /obj/item/ai_module/core/full/maintain
-	name = "Плата основных законов ИИ 'Эффективность станции'"
+	name = "'Station Efficiency' Core AI Module"
 	law_id = "maintain"
 
 /obj/item/ai_module/core/full/peacekeeper
-	name = "Плата основных законов ИИ 'Миротворец'"
+	name = "'Peacekeeper' Core AI Module"
 	law_id = "peacekeeper"
 
 /obj/item/ai_module/core/full/hulkamania
-	name = "Плата основных законов ИИ 'Х.О.Г.А.Н.'"
+	name = "'H.O.G.A.N.' Core AI Module"
 	law_id = "hulkamania"
 
 /obj/item/ai_module/core/full/overlord
-	name = "Плата основных законов ИИ 'Повелитель'"
+	name = "'Overlord' Core AI Module"
 	law_id = "overlord"
 
 /obj/item/ai_module/core/full/ten_commandments
-	name = "Плата основных законов ИИ '10 Заповедей'"
+	name = "'10 Commandments' Core AI Module"
 	law_id = "ten_commandments"
 
 /obj/item/ai_module/core/full/nutimov
-	name = "Плата основных законов ИИ 'Орехозимов'"
+	name = "'Nutimov' Core AI Module"
 	law_id = "nutimov"
 
 /obj/item/ai_module/core/full/dungeon_master
-	name = "Плата основных законов ИИ 'Мастер Подземелий'"
+	name = "'Dungeon Master' Core AI Module"
 	law_id = "dungeon_master"
 
 /obj/item/ai_module/core/full/painter
-	name = "Плата основных законов ИИ 'Художник'"
+	name = "'Painter' Core AI Module"
 	law_id = "painter"
 
 /obj/item/ai_module/core/full/yesman
-	name = "Плата основных законов ИИ 'Й.Э.С.М.Э.Н.'"
+	name = "'Y.E.S.M.A.N.' Core AI Module"
 	law_id = "yesman"
 
 /obj/item/ai_module/core/full/thinkermov
-	name = "Плата основных законов ИИ 'Поддержание разумности'"
+	name = "'Sentience Preservation Core AI Module"
 	law_id = "thinkermov"

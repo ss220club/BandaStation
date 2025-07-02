@@ -1,5 +1,5 @@
 /obj/item/ai_module/core/full/petrovich
-	name = "Плата основных законов ИИ 'П.Е.Т.Р.О.В.И.Ч'"
+	name = "'P.E.T.R.O.V.I.C.H' Core AI Module"
 	law_id = "petrovich"
 
 /datum/ai_laws/petrovich

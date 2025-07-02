@@ -20,7 +20,7 @@
 				law_datum.replace_random_law(templaw, list(LAW_INHERENT, LAW_SUPPLIED, LAW_ZEROTH, LAW_ION), LAW_ZEROTH)
 
 /obj/item/ai_module/zeroth/onehuman
-	name = "Модуль закона ИИ 'Один человек'"
+	name = "'OneHuman' AI Module"
 	var/targetName = ""
 	laws = list("Только СУБЪЕКТ — человек.")
 

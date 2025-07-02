@@ -1,5 +1,5 @@
 /obj/item/ai_module/core/full/nt_default
-	name = "Плата основных законов ИИ 'НТ Стандарт'"
+	name = "'NT Default' Core AI Module"
 	law_id = "nt_default"
 
 /datum/ai_laws/nt_default

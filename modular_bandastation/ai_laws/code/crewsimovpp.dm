@@ -1,5 +1,5 @@
 /obj/item/ai_module/core/full/crewsimovpp
-	name = "Плата основных законов ИИ 'Крюзимов++'"
+	name = "'Сrewsimov++' Core AI Module"
 	law_id = "crewsimovpp"
 
 /datum/ai_laws/crewsimovpp

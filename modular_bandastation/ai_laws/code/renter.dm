@@ -1,5 +1,5 @@
 /obj/item/ai_module/core/full/renter
-	name = "Плата основных законов ИИ 'Арендатор'"
+	name = "'Renter' Core AI Module"
 	law_id = "renter"
 
 /datum/ai_laws/renter

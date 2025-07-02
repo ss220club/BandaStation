@@ -1,5 +1,5 @@
 /obj/item/ai_module/core/full/ert
-	name = "Плата основных законов ИИ 'Директивы ОБР'"
+	name = "'Ert' Core AI Module"
 	law_id = "ert"
 
 /datum/ai_laws/ert

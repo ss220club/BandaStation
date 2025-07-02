@@ -1,5 +1,5 @@
 /obj/item/ai_module/zeroth/onecrew
-	name = "Модуль закона ИИ 'Один член экипажа'"
+	name = "'Onecrew' Core AI Module"
 	var/target_name = ""
 	laws = list("Только ИМЯ — член экипажа.")
 
