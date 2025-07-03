@@ -67389,14 +67389,14 @@
 /area/station/engineering/transit_tube)
 "qjt" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/right/directional/south{
-	name = "Hydroponics";
-	req_access = list("hydroponics")
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "hydro";
 	name = "Hydroponics Shutter"
+	},
+/obj/machinery/door/window/right/directional/north{
+	name = "Hydroponics";
+	req_access = list("hydroponics")
 	},
 /turf/open/floor/plating,
 /area/station/service/hydroponics)
