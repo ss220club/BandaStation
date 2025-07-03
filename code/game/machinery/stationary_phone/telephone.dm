@@ -146,7 +146,6 @@
 		icon_state = "rpb_phone_ear"
 
 /obj/item/telephone/proc/do_zlevel_check()
-	. = TRUE
 	if(!attached_to || !loc.z || !attached_to.z)
 		return FALSE
 	if(loc.z != attached_to.z)
@@ -161,7 +160,7 @@
 		return TRUE
 	if(attached_to && loc.z != attached_to.z)
 		return TRUE
-	return FALSE
+	return TRUE
 
 /obj/item/telephone/interact(mob/user)
 	if(attached_to && get_dist(user, attached_to) > MAX_RANGE)
@@ -173,8 +172,6 @@
 	if(.)
 		if(attached_to)
 			update_beam()
-			if(!do_zlevel_check())
-				attached_to.recall_phone()
 			if(attached_to && !ismob(old_loc))
 				if(get_dist(attached_to, src) > MAX_RANGE)
 					if(ismob(loc))

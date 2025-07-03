@@ -426,7 +426,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		return
 
 	current_call = target
-	target.process_inbound_call(phone_id)
+	target.process_inbound_call(target)
 
 	is_paid = FALSE
 
@@ -504,6 +504,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/proc/process_inbound_call(obj/structure/transmitter/the_one_who_calls)
 	current_call = the_one_who_calls
+	status = STATUS_INBOUND
 	try_ring()
 
 /obj/structure/transmitter/process()
@@ -524,7 +525,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(ismob(attached_to.loc))
 		var/mob/M = attached_to.loc
 		M.dropItemToGround(attached_to)
-	playsound(loc, SFX_TELEPHONE_HANDSET, 100, FALSE, 7)
+	playsound(loc, SFX_TELEPHONE_HANDSET, 20, FALSE, 7)
 	attached_to.forceMove(src)
 	end_call()
 	busy_loop.stop()
