@@ -1,4 +1,5 @@
-import { range, sortBy } from 'common/collections';
+import { range } from 'es-toolkit';
+import { sortBy } from 'es-toolkit';
 import { Component } from 'react';
 import { resolveAsset } from 'tgui/assets';
 import { useBackend } from 'tgui/backend';
@@ -67,9 +68,7 @@ const KEY_CODE_TO_BYOND: Record<string, string> = {
  */
 const DOM_KEY_LOCATION_NUMPAD = 3;
 function sortKeybindings(array: [string, Keybinding][]) {
-  return sortBy(array, ([_, keybinding]) => {
-    return keybinding.name;
-  });
+  return sortBy(array, [([, keybinding]) => keybinding.name]);
 }
 
 function formatKeyboardEvent(event: KeyboardEvent): string {
