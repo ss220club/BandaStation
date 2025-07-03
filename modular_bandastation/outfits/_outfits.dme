@@ -9,3 +9,5 @@
 #include "code/explorer.dm"
 #include "code/outfit_organs.dm"
 #include "code/outfit_export.dm"
+#include "code/tsf.dm"
+#include "code/ussp.dm"
