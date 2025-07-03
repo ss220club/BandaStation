@@ -202,4 +202,11 @@
 	mid_length = 5 SECONDS
 	volume = 50
 
+/datum/looping_sound/telephone/dialtone
+	start_sound = 'sound/machines/telephone/rtb_handset_1.ogg'
+	start_length = 0.6 SECONDS
+	mid_sounds = 'sound/machines/telephone/dialtone.ogg'
+	mid_length = 5 SECONDS
+	volume = 50
+
 #undef MAX_RANGE

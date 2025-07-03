@@ -21,9 +21,42 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define STATUS_OUTGOING "Outgoing call"
 #define STATUS_IDLE "Idle"
 
+#define COMMSIG_OFFHOOK             "CS_OF"
+#define COMMSIG_DIALTONE            "CS_DT"
+#define COMMSIG_DIAL                "CS_DL"
+#define COMMSIG_RINGING             "CS_RG"
+#define COMMSIG_RINGBACK            "CS_RB"
+#define COMMSIG_BUSY                "CS_BS"
+#define COMMSIG_NUMBER_NOT_FOUND    "CS_NF"
+#define COMMSIG_ANSWER              "CS_AN"
+#define COMMSIG_TALK                "CS_TK"
+#define COMMSIG_HANGUP              "CS_HU"
+#define COMMSIG_TIMEOUT             "CS_TO"
+
 #define MAX_RANGE 3
 
 /obj/structure/transmitter/proc/process_commsig(commsig, data)
+	stop_loops()
+	switch(commsig)
+		if(COMMSIG_DIALTONE)
+			status = STATUS_IDLE
+			dialtone_loop.start()
+
+		if(COMMSIG_RINGING)
+			status = STATUS_INBOUND
+			process_inbound_call(GLOB.transmitters[data])
+
+		if(COMMSIG_BUSY)
+			status = STATUS_IDLE
+			playsound(src, 'sound/machines/telephone/busy.ogg', 50)
+			end_call(forced = TRUE)
+
+/obj/structure/transmitter/proc/stop_loops()
+	busy_loop.stop()
+	hangup_loop.stop()
+	outring_loop.stop()
+	dialtone_loop.stop()
+
 
 /obj/structure/transmitter
 	name = "rotary telephone"
@@ -62,6 +95,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/datum/looping_sound/telephone/busy/busy_loop
 	var/datum/looping_sound/telephone/hangup/hangup_loop
 	var/datum/looping_sound/telephone/ring/outring_loop
+	var/datum/looping_sound/telephone/dialtone/dialtone_loop
 	/// If this phone is advanced enough to display the caller and the call history
 	var/is_advanced = TRUE
 	/// Last 5 call origins
@@ -82,6 +116,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	outring_loop = new(attached_to)
 	busy_loop = new(attached_to)
 	hangup_loop = new(attached_to)
+	dialtone_loop = new(attached_to)
 
 	if(!get_turf(src))
 		return
