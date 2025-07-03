@@ -2302,6 +2302,7 @@
 #include "code\game\machinery\porta_turret\portable_turret_cover.dm"
 #include "code\game\machinery\satellite\satellite.dm"
 #include "code\game\machinery\satellite\satellite_control.dm"
+#include "code\game\machinery\stationary_phone\cte.dm"
 #include "code\game\machinery\stationary_phone\phone_presets.dm"
 #include "code\game\machinery\stationary_phone\telephone.dm"
 #include "code\game\machinery\stationary_phone\transmitter.dm"

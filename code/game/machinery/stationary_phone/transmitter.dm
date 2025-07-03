@@ -23,6 +23,8 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 #define MAX_RANGE 3
 
+/obj/structure/transmitter/proc/process_commsig(commsig, data)
+
 /obj/structure/transmitter
 	name = "rotary telephone"
 	icon = 'icons/obj/machines/phone.dmi'
