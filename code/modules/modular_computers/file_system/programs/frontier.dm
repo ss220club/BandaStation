@@ -2,7 +2,7 @@
 	filename = "ntfrontier"
 	filedesc = "NT Frontier"
 	downloader_category = PROGRAM_CATEGORY_SCIENCE
-	extended_desc = "Scientific paper publication and navigation software."
+	extended_desc = "Программное обеспечение для публикации и навигации по научным статьям."
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
 	size = 12
 	program_open_overlay = "research"
