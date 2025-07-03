@@ -25,20 +25,17 @@ export function MapView(props) {
   const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
 
   return (
-    <NanoMap
-      mapData={mapData}
-      uiName="crew-console"
-      onLevelChange={setSelectedLevel}
-    >
+    <NanoMap mapData={mapData} onLevelChange={setSelectedLevel}>
       {sensors.map(
         (sensor) =>
           sensor.position?.area !== '~' &&
           sensor.position?.area !== undefined && (
-            <NanoMap.Marker
+            <NanoMap.Button
+              circular
               key={sensor.ref}
               posX={sensor.position?.x}
               posY={sensor.position?.y}
-              color={healthToAttribute(sensor, HEALTH_COLOR_BY_LEVEL)}
+              backgroundColor={healthToAttribute(sensor, HEALTH_COLOR_BY_LEVEL)}
               icon={sensor.life_status === STAT_DEAD && 'skull'}
               tooltip={<CrewMapTooltip sensor_data={sensor} />}
               hidden={

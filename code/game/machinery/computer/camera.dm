@@ -65,6 +65,7 @@
 		// Open UI
 		ui = new(user, src, "CameraConsole220", name) // BANDASTATION EDIT: UI changed from CameraConsole to CameraConsole220
 		ui.open()
+		ui.set_autoupdate(FALSE) // BANDASTATION ADDITION
 		// Register map objects
 		cam_screen.display_to(user, ui.window)
 
