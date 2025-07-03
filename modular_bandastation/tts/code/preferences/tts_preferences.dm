@@ -1,6 +1,7 @@
 /datum/preference/text/tts_seed
 	savefile_key = "tts_seed"
 	savefile_identifier = PREFERENCE_CHARACTER
+	priority = PREFERENCE_PRIORITY_BODY_TYPE
 
 /datum/preference/text/tts_seed/apply_to_human(mob/living/carbon/human/target, value)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[value]
