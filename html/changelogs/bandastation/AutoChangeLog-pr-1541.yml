@@ -1,0 +1,4 @@
+author: "AyIong"
+delete-after: True
+changes:
+  - bugfix: "WHO больше не должен выдавать БЛЯТЬ когда вы чекаете битраннера в битране."

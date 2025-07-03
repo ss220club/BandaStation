@@ -265,6 +265,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		persistent_client = new(ckey)
 	persistent_client.set_client(src)
 
+	if(SScentral.can_run())
+		SScentral.get_player_discord_async(ckey)
+		SScentral.update_player_donate_tier_blocking(src)
+
 	if(byond_version >= 516)
 		winset(src, null, list("browser-options" = "find,refresh,byondstorage"))
 

@@ -1,6 +1,6 @@
 /datum/mafia_role/mafia
-	name = "Changeling"
-	desc = "You're a member of the changeling hive. You may speak with your fellow Changelings at night."
+	name = "Генокрад"
+	desc = "Вы - член улья генокрадов. Вы можете разговаривать с своими товарищами-генокрадами ночью."
 	team = MAFIA_TEAM_MAFIA
 	role_type = MAFIA_REGULAR
 	role_flags = ROLE_CAN_KILL
@@ -10,7 +10,7 @@
 
 	revealed_outfit = /datum/outfit/mafia/changeling
 	special_ui_theme = "syndicate"
-	win_condition = "become majority over the town and no solo killing role can stop them."
+	win_condition = "становятся главным в городе, и никакой одиночка не сможет его остановить."
 
 	role_unique_actions = list(/datum/mafia_ability/changeling_kill)
 
@@ -21,11 +21,11 @@
 /datum/mafia_role/mafia/proc/mafia_text(datum/mafia_controller/source)
 	SIGNAL_HANDLER
 
-	to_chat(body, "<b>Vote for who to kill tonight. The killer will be chosen randomly from voters.</b>")
+	to_chat(body, "<b>Проголосуйте за того, кто будет убит сегодня ночью. Убийца будет выбран случайным образом из числа проголосовавших.</b>")
 
 /datum/mafia_role/mafia/thoughtfeeder
-	name = "Thoughtfeeder"
-	desc = "You're a changeling variant that feeds on the memories of others. Use ':j' talk prefix to talk to your fellow lings, and visit people at night to learn their role."
+	name = "Кормилец мыслей"
+	desc = "Вы - разновидность генокрадов, питающаяся воспоминаниями других людей. Используйте приставку ':j', чтобы разговаривать со своими собратьями и посещайте людей по ночам, чтобы узнать их роль."
 	role_type = MAFIA_SPECIAL
 	hud_icon = "hudthoughtfeeder"
 	revealed_icon = "thoughtfeeder"
