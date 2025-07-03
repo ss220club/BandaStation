@@ -1,29 +1,34 @@
-#define STATUS_IDLE "Idle"
-#define STATUS_DIALING "Dialing"
-#define TIMEOUT_DURATION 30 SECONDS
+#define STATUS_IDLE                 "Idle"
+#define STATUS_DIALING              "Dialing"
+#define STATUS_ENDED                "Ended"
+#define TIMEOUT_DURATION            30 SECONDS
 
-#define COMMSIG_OFFHOOK           "CS_OF"
-#define COMMSIG_DIALTONE          "CS_DT"
-#define COMMSIG_DIAL              "CS_DL"
-#define COMMSIG_RINGING           "CS_RG"
-#define COMMSIG_RINGBACK          "CS_RB"
-#define COMMSIG_BUSY              "CS_BS"
-#define COMMSIG_NUMBER_NOT_FOUND  "CS_NF"
-#define COMMSIG_ANSWER            "CS_AN"
-#define COMMSIG_TALK              "CS_TK"
-#define COMMSIG_HANGUP            "CS_HU"
-#define COMMSIG_TIMEOUT						"CS_TO"
+#define COMMSIG_OFFHOOK             "CS_OF"
+#define COMMSIG_DIALTONE            "CS_DT"
+#define COMMSIG_DIAL                "CS_DL"
+#define COMMSIG_RINGING             "CS_RG"
+#define COMMSIG_RINGBACK            "CS_RB"
+#define COMMSIG_BUSY                "CS_BS"
+#define COMMSIG_NUMBER_NOT_FOUND    "CS_NF"
+#define COMMSIG_ANSWER              "CS_AN"
+#define COMMSIG_TALK                "CS_TK"
+#define COMMSIG_HANGUP              "CS_HU"
+#define COMMSIG_TIMEOUT             "CS_TO"
 
 /datum/exchange_session
 	var/obj/structure/transmitter/source
 	var/obj/structure/transmitter/target
 	var/status
+	var/starttime
+	var/endtime
+	var/list/history = list()
 
 /datum/exchange_session/New(obj/structure/transmitter/source_call, obj/structure/transmitter/target_call)
 	. = ..()
 	source = source_call
 	target = target_call
 	status = STATUS_IDLE
+	starttime = time2text(world.time)
 
 	addtimer(CALLBACK(src, PROC_REF(timeout)), TIMEOUT_DURATION)
 
