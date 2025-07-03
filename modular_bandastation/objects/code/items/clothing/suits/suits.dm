@@ -1,11 +1,3 @@
-/obj/item/clothing/suit
-	var/buttonable = FALSE
-
-/obj/item/clothing/suit/Initialize(mapload)
-	. = ..()
-	if(buttonable)
-		AddComponent(/datum/component/toggle_icon)
-
 /obj/item/clothing/suit/hooded/shark_costume
 	name = "shark costume"
 	desc = "Костюм из 'синтетической' кожи акулы, пахнет."

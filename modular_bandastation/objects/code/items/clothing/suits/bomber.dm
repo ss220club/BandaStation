@@ -8,7 +8,10 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/bomber.dmi'
 	icon_state = "bombersci"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/bomber.dmi'
-	buttonable = TRUE
+
+/obj/item/clothing/suit/jacket/bomber/science/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/toggle_icon)
 
 // Roboticist
 /obj/item/clothing/suit/jacket/bomber/roboticist
@@ -17,4 +20,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/bomber.dmi'
 	icon_state = "bomberrobo"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/bomber.dmi'
-	buttonable = TRUE
+
+/obj/item/clothing/suit/jacket/bomber/roboticist/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/toggle_icon)
