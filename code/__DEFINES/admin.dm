@@ -45,6 +45,10 @@
 
 #define R_EVERYTHING (1<<15)-1 //the sum of all other rank permissions, used for +EVERYTHING
 
+//SS220 ADD START
+#define R_MENTOR (1<<16)
+//SS220 ADD END
+
 #define ADMIN_QUE(user) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminmoreinfo=[REF(user)]'>?</a>)"
 #define ADMIN_FLW(user) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminplayerobservefollow=[REF(user)]'>FLW</a>)"
 #define ADMIN_PP(user) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminplayeropts=[REF(user)]'>PP</a>)"

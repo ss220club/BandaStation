@@ -29,6 +29,7 @@ GLOBAL_LIST_INIT(bitfields, generate_bitfields())
 
 DEFINE_BITFIELD(admin_flags, list(
 	"ADMIN" = R_ADMIN,
+	"MENTOR" = R_MENTOR,
 	"AUTOLOGIN" = R_AUTOADMIN,
 	"BAN" = R_BAN,
 	"BUILDMODE" = R_BUILD,

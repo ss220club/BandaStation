@@ -1,6 +1,9 @@
 #define CATEGORY_CLIENT "Клиент"
 #define CATEGORY_EMOTE "Эмоции"
 #define CATEGORY_ADMIN "Админ"
+//SS220 ADD START
+#define CATEGORY_MENTOR "Ментор"
+//SS220 ADD END
 #define CATEGORY_XENO "Ксено"
 #define CATEGORY_CARBON "Гуманоиды"
 #define CATEGORY_HUMAN "Люди"

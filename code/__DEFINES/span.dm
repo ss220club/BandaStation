@@ -87,6 +87,7 @@
 #define span_major_announcement_title(str) ("<span class='major_announcement_title'>" + str + "</span>")
 #define span_medal(str) ("<span class='medal'>" + str + "</span>")
 #define span_medradio(str) ("<span class='medradio'>" + str + "</span>")
+#define span_mentorsay(str) ("<span class='mentorsay'>" + str + "</span>")
 #define span_memo(str) ("<span class='memo'>" + str + "</span>")
 #define span_memoedit(str) ("<span class='memoedit'>" + str + "</span>")
 #define span_message(str) ("<span class='message'>" + str + "</span>")

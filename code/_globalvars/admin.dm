@@ -99,6 +99,7 @@ GLOBAL_LIST_INIT(spanname_to_formatting, list(
 	"Looc" = "looc",
 	"Medal" = "medal",
 	"Medradio" = "medradio",
+	"Mentor" = "mentor",
 	"Message" = "message",
 	"Mind Control" = "mind_control",
 	"Monkey" = "monkey",

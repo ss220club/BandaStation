@@ -44,6 +44,9 @@
 		if(OOC_CHANNEL)
 			client.ooc(entry)
 			return TRUE
+		if(MENTOR_CHANNEL)
+			client.mentor(entry)
+			return TRUE
 		if(ADMIN_CHANNEL)
 			SSadmin_verbs.dynamic_invoke_verb(client, /datum/admin_verb/cmd_admin_say, entry)
 			return TRUE
