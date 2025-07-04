@@ -17,7 +17,7 @@
 /obj/projectile/beam/laser/awaymission_aeg
 	name = "weak laser"
 	wound_bonus = -100
-	bare_wound_bonus = -100
+	exposed_wound_bonus = -100
 	damage = 15
 
 /obj/item/ammo_casing/energy/lasergun/awaymission_aeg

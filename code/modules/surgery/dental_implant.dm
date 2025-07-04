@@ -21,11 +21,11 @@
 		count++
 
 	if(teeth_receptangle.teeth_count == 0)
-		to_chat(user, span_notice("[capitalize(user.declent_ru(NOMINATIVE))] не имеет зубов, дурашка!"))
+		to_chat(user, span_notice("[capitalize(target.declent_ru(NOMINATIVE))] не имеет зубов, дурашка!"))
 		return SURGERY_STEP_FAIL
 
 	if(count >= teeth_receptangle.teeth_count)
-		to_chat(user, span_notice("Все зубы [user.declent_ru(GENITIVE)] уже заменены на таблетки!"))
+		to_chat(user, span_notice("Все зубы [target.declent_ru(GENITIVE)] уже заменены на таблетки!"))
 		return SURGERY_STEP_FAIL
 
 /datum/surgery_step/insert_pill

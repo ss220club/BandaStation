@@ -1,4 +1,0 @@
-author: "AyIong"
-delete-after: True
-changes:
-  - qol: "Сообщения типа `Initialized Mapping subsystem within 2.85 seconds!` теперь не отправляются обычным игрокам."
