@@ -7,7 +7,7 @@
 		stack_trace("Using whitelists and interviews without SS Central is not supported")
 		return
 
-	if(SScentral.is_player_whitelisted(ckey) || client.holder)
+	if(SScentral.is_player_whitelisted(ckey))
 		client.interviewee = FALSE
 		return
 
@@ -71,4 +71,3 @@
 
 /datum/interview/proc/add_owner_to_whitelist(client/added_by)
 	SScentral.add_to_whitelist(owner_ckey, added_by.ckey, 365)
-	SStitle.show_title_screen_to(owner)
