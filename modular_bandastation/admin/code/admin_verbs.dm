@@ -32,7 +32,7 @@ ADMIN_VERB_ONLY_CONTEXT_MENU(download_flaticon, R_ADMIN, "(Special) Download Ico
 // Set Security Level - Gamma Shuttle
 /datum/admin_verb/change_sec_level/__avd_do_verb(client/user)
 	. = ..()
-	if(SSsecurity_level.get_current_level_as_number() == SEC_LEVEL_GAMMA && SSshuttle.getDock("gamma_home"))
+	if(SSsecurity_level.get_current_level_as_number() == SEC_LEVEL_GAMMA && !isnull(SSshuttle.gamma) && SSshuttle.getDock("gamma_home"))
 		if(tgui_alert(user, "Желаете направить оружейный шаттл Гамма? Если не уверены, его можно будет направить позже в меню Secrets (Helpful -> Move Gamma Shuttle).", "Гамма шаттл", list("Да", "Нет")) == "Да")
 			SSshuttle.moveShuttle("gamma", "gamma_home", FALSE)
 			priority_announce("К вам направлен оружейный шаттл «ГАММА».","[command_name()]: Департамент защиты активов")
