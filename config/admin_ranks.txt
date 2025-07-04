@@ -40,7 +40,7 @@ Exclude = AUTOADMIN
 Edit =
 
 Name = Mentor
-Include = 
+Include = MENTOR
 Exclude = EVERYTHING
 Edit =
 

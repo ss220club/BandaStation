@@ -19,7 +19,7 @@
 ADMIN_VERB(mentor_message, R_MENTOR, "Mentor chat", "Allows mentors and admins to communicate with eachother.", ADMIN_CATEGORY_MAIN)
 
 /client/verb/mentor(msg as text)
-	set name = "Mentor chat" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
+	set name = "Mentor chat"
 	set category = "Admin"
 
 	mentor_message(msg)
