@@ -351,11 +351,8 @@
 	if(I && SScentral.is_player_discord_linked(src.ckey)) // BANDASTATION EDIT - if(I) => if(I && SScentral.is_player_discord_linked(owner.ckey))
 		I.ui_interact(src)
 
-	/* BANDASTATION REMOVAL
 	// Add verb for re-opening the interview panel, fixing chat and re-init the verbs for the stat panel
 	add_verb(src, /mob/dead/new_player/proc/open_interview)
-	*/
-
 	add_verb(client, /client/verb/fix_tgui_panel)
 
 ///Resets the Lobby Menu HUD, recreating and reassigning it to the new player
