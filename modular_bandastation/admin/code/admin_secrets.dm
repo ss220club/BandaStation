@@ -4,11 +4,12 @@
 		return
 	switch(action)
 		if("move_gamma_shuttle")
-			if(!SSshuttle.getDock("gamma_home"))
-				var/mob/living/user = ui.user
-				to_chat(user, span_warning("There is no shuttle docks for the Gamma shuttle on [SSmapping.current_map.map_name]."))
+			if(isnull(SSshuttle.gamma))
+				to_chat(ui.user, span_warning("Шаттл «ГАММА» не найден (не заспавнен, удалён, или ошибка)."))
 				return
-			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Send Gamma Shuttle"))
+			if(!SSshuttle.getDock("gamma_home"))
+				to_chat(ui.user, span_warning("На карте \"[SSmapping.current_map.map_name]\" нет порта стыковки для оружейного шаттла «ГАММА»."))
+				return
 			if(SSshuttle.gamma.getDockedId() == "gamma_away")
 				SSshuttle.moveShuttle("gamma", "gamma_home", FALSE)
 				priority_announce("К вам направлен оружейный шаттл «ГАММА».","[command_name()]: Департамент защиты активов")

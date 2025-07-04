@@ -10158,8 +10158,9 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/prison/cells)
 "aSc" = (
+/obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/caution/stand_clear{
-	dir = 8
+	dir = 4
 	},
 /turf/open/floor/pod,
 /area/centcom/central_command_areas/supply)
@@ -21239,8 +21240,10 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "vBf" = (
-/obj/structure/light_fake/spot/directional/south,
-/turf/open/floor/plating,
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 4
+	},
+/turf/open/floor/pod,
 /area/centcom/central_command_areas/supply)
 "vBs" = (
 /obj/structure/window/reinforced/spawner/directional/south,
@@ -67979,7 +67982,7 @@ acM
 acM
 acM
 acM
-acM
+aiF
 aiF
 aDe
 aye
@@ -68236,7 +68239,7 @@ acM
 acM
 acM
 acM
-acM
+aiF
 aiF
 aji
 aCm
@@ -68493,7 +68496,7 @@ acM
 acM
 acM
 acM
-vBf
+aiF
 aiF
 aDe
 aye
@@ -68750,7 +68753,7 @@ acM
 acM
 acM
 acM
-acM
+aiF
 aiF
 aji
 aCm
@@ -69007,7 +69010,7 @@ acM
 acM
 acM
 acM
-acM
+aiF
 aiF
 aiF
 awi
@@ -69264,7 +69267,7 @@ acM
 acM
 acM
 acM
-acM
+aiF
 aiF
 aiF
 aiF
@@ -70292,7 +70295,7 @@ auu
 aGQ
 auu
 azB
-aiF
+aDQ
 axQ
 alf
 axQ
@@ -70550,10 +70553,10 @@ awZ
 aIL
 azB
 aDQ
-aSc
+azB
 aMg
 azB
-aSc
+azB
 aiF
 aKe
 aTA
@@ -70808,8 +70811,8 @@ aUQ
 azB
 aDQ
 azB
-aMg
-azB
+aSc
+vBf
 aMg
 aYn
 aYn
