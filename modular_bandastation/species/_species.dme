@@ -34,6 +34,7 @@
 #include "code/language/canilunzt.dm"
 #include "code/language/qurvolious.dm"
 #include "code/language/siiktajr.dm"
+#include "code/language/spinwarder.dm"
 
 #include "code/preferences/species_features/skrell/skrell_head_tentacle.dm"
 
