@@ -101,9 +101,10 @@
 /obj/item/clothing/neck/cloak/colorable_cloak
 	name = "cloak"
 	desc = "Обычный тканевый плащ."
-	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	icon = 'icons/map_icons/clothing/neck.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
-	icon_state = "color_cloak"
+	icon_state = "/obj/item/clothing/neck/cloak/colorable_cloak"
+	post_init_icon_state = "color_cloak"
 	greyscale_colors = COLOR_PRISONER_BLACK
 	greyscale_config = /datum/greyscale_config/colorable_cloak
 	greyscale_config_worn = /datum/greyscale_config/colorable_cloak/worn

@@ -96,7 +96,7 @@
 	priority_announce(
 		text = "Зафиксирован призыв древнего божества в [fake_summon_area], культист-призыватель - [totally_real_cult_leader.real_name]. Прервите ритуал любой ценой!",
 		title = "[command_name()]: Отдел паранормальных явлений",
-		sound = 'modular_bandastation/aesthetics_sounds/sound/announcements/cult_summon.ogg',
+		sound = 'modular_bandastation/cult_overhaul/sound/announcements/cult_summon.ogg', // BANDASTATION EDIT - Cult Overhaul (sound replace)
 		has_important_message = TRUE,
 		players = list(hallucinator),
 	)
