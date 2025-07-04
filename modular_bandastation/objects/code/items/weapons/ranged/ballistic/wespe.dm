@@ -9,7 +9,6 @@
 	special_mags = TRUE
 	suppressor_x_offset = 7
 	suppressor_y_offset = 0
-	fire_delay = 0.3 SECONDS
 	obj_flags = UNIQUE_RENAME
 	unique_reskin = list(
 		"Default" = "wespe",
@@ -28,15 +27,12 @@
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/examine_more(mob/user)
 	. = ..()
-
 	. += "'Оса' - пистолет, созданный исключительно для военных целей. \
 		Он должен был использовать стандартные патроны, стандартные магазины и быть способным \
 		функционировать во всех условиях, в которых обычно работает ТСФ. \
 		Так получилось, что эти качества сделали это оружие популярным \
 		в пограничном пространстве, и, скорее всего, именно поэтому вы сейчас смотрите на \
 		этот пистолет."
-
-	return .
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/no_mag
 	spawnwithmagazine = FALSE

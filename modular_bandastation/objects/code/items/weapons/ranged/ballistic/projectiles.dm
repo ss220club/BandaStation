@@ -1,9 +1,9 @@
 // MARK: .35 Sol
 /obj/projectile/bullet/c35sol
 	name = ".35 Sol Short bullet"
-	damage = 15
+	damage = 17
 	wound_bonus = -5 // Normal bullets are 20
-	bare_wound_bonus = 5
+	exposed_wound_bonus = 5
 	embed_falloff_tile = -4
 
 /obj/projectile/bullet/c35sol/rubber
@@ -11,7 +11,7 @@
 	damage = 5
 	stamina = 20
 	wound_bonus = -40
-	bare_wound_bonus = -20
+	exposed_wound_bonus = -20
 	weak_against_armour = TRUE
 	// The stats of the ricochet are a nerfed version of detective revolver rubber ammo
 	// This is due to the fact that there's a lot more rounds fired quickly from weapons that use this, over a revolver
@@ -27,12 +27,12 @@
 
 /obj/projectile/bullet/c35sol/ripper
 	name = ".35 Sol ripper bullet"
-	damage = 12
+	damage = 15
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
 	ricochets_max = 0
 	wound_bonus = 20
-	bare_wound_bonus = 20
+	exposed_wound_bonus = 20
 	embed_type = /datum/embedding/bullet/c35sol/ripper
 	embed_falloff_tile = -15
 
@@ -47,9 +47,9 @@
 	rip_time = 1 SECONDS
 
 /obj/projectile/bullet/c35sol/ap
-	name = ".35 Sol Short armor piercing bullet"
-	damage = 13
-	bare_wound_bonus = -30
+	name = ".35 Sol Short armor-piercing bullet"
+	damage = 15
+	exposed_wound_bonus = -30
 	armour_penetration = 20
 
 //  MARK: 7.62x39mm
@@ -160,7 +160,7 @@
 	name = ".40 Sol Long bullet"
 	damage = 35
 	wound_bonus = 10
-	bare_wound_bonus = 20
+	exposed_wound_bonus = 20
 
 /obj/projectile/bullet/c40sol/fragmentation
 	name = ".40 Sol Long fragmentation bullet"
@@ -169,7 +169,7 @@
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
 	wound_bonus = 0
-	bare_wound_bonus = 10
+	exposed_wound_bonus = 10
 	shrapnel_type = /obj/item/shrapnel/stingball
 	embed_type = /datum/embedding/c40sol_fragmentation
 	embed_falloff_tile = -5
@@ -191,7 +191,7 @@
 	damage = 30
 	armour_penetration = 30
 	wound_bonus = -30
-	bare_wound_bonus = -10
+	exposed_wound_bonus = -10
 	projectile_piercing = PASSMOB | PASSTABLE | PASSGRILLE | PASSMACHINE | PASSDOORS
 
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
@@ -230,6 +230,58 @@
 	light_range = 2
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
+
+// MARK: 9x25mm NT
+/obj/projectile/bullet/c9x25mm
+	name = "9x25mm NT bullet"
+	damage = 17
+	wound_bonus = -5
+	exposed_wound_bonus = 5
+	embed_falloff_tile = -4
+
+/obj/projectile/bullet/c9x25mm/rubber
+	name = "9x25mm NT rubber bullet"
+	damage = 5
+	stamina = 20
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
+/obj/projectile/bullet/c9x25mm/hp
+	name = "9x25mm NT hollow-point bullet"
+	damage = 15
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+	ricochets_max = 0
+	wound_bonus = 20
+	exposed_wound_bonus = 20
+	embed_type = /datum/embedding/bullet/c9x25mm/hp
+	embed_falloff_tile = -15
+
+/datum/embedding/bullet/c9x25mm/hp
+	embed_chance = 75
+	fall_chance = 3
+	jostle_chance = 4
+	ignore_throwspeed_threshold = TRUE
+	pain_stam_pct = 0.4
+	pain_mult = 5
+	jostle_pain_mult = 6
+	rip_time = 1 SECONDS
+
+/obj/projectile/bullet/c9x25mm/ap
+	name = "9x25mm NT armor-piercing bullet"
+	damage = 15
+	exposed_wound_bonus = -30
+	armour_penetration = 20
 
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect

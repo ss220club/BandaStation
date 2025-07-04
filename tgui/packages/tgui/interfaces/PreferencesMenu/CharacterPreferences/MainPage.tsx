@@ -1,4 +1,5 @@
-import { filter, map, sortBy } from 'common/collections';
+import { sortBy } from 'es-toolkit';
+import { filter, map } from 'es-toolkit/compat';
 import { useState } from 'react';
 import { sendAct, useBackend } from 'tgui/backend';
 import {
@@ -283,10 +284,7 @@ const createSetRandomization =
   };
 
 function sortPreferences(array: [string, unknown][]) {
-  return sortBy(array, ([featureId, _]) => {
-    const feature = features[featureId];
-    return feature?.name;
-  });
+  return sortBy(array, [([featureId]) => features[featureId]?.name]);
 }
 
 type PreferenceListProps = {
@@ -416,6 +414,10 @@ export function MainPage(props: MainPageProps) {
   if (randomBodyEnabled) {
     nonContextualPreferences['random_species'] =
       data.character_preferences.randomization['species'];
+    // BANDASTATION ADDITION START - TTS
+    nonContextualPreferences['random_tts_seed'] =
+      data.character_preferences.randomization['tts_seed'];
+    // BANDASTATION ADDITION END - TTS
   } else {
     // We can't use random_name/is_accessible because the
     // server doesn't know whether the random toggle is on.
