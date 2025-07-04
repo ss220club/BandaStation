@@ -21,17 +21,17 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define STATUS_OUTGOING "Outgoing call"
 #define STATUS_IDLE "Idle"
 
-#define COMMSIG_OFFHOOK             "CS_OF"
-#define COMMSIG_DIALTONE            "CS_DT"
-#define COMMSIG_DIAL                "CS_DL"
-#define COMMSIG_RINGING             "CS_RG"
-#define COMMSIG_RINGBACK            "CS_RB"
-#define COMMSIG_BUSY                "CS_BS"
-#define COMMSIG_NUMBER_NOT_FOUND    "CS_NF"
-#define COMMSIG_ANSWER              "CS_AN"
-#define COMMSIG_TALK                "CS_TK"
-#define COMMSIG_HANGUP              "CS_HU"
-#define COMMSIG_TIMEOUT             "CS_TO"
+#define COMMSIG_OFFHOOK             "CS_OF" // The telephone is removed from the hook
+#define COMMSIG_DIALTONE            "CS_DT" // The phone should play the dialtone sound, indicating it's ready for dialing
+#define COMMSIG_DIAL                "CS_DL"	// The phone sends a request to the CTE, attempting to call a `phone_id`
+#define COMMSIG_RINGING             "CS_RG" // The phone rings, being ready to pick up
+#define COMMSIG_RINGBACK            "CS_RB"	// The caller hears the ringback sounds, waiting for the other side to pick up
+#define COMMSIG_BUSY                "CS_BS"	// The target phone is busy
+#define COMMSIG_NUMBER_NOT_FOUND    "CS_NF"	// The CTE couldn't find the device with such `phone_id`
+#define COMMSIG_ANSWER              "CS_AN"	// The phone should initialize the call
+#define COMMSIG_TALK                "CS_TK"	// The signal sent with the voice message itself
+#define COMMSIG_HANGUP              "CS_HU"	// The other side has hanged up
+#define COMMSIG_TIMEOUT             "CS_TO" // The line has been inactive for over 30 seconds
 
 #define MAX_RANGE 3
 
@@ -41,15 +41,63 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(COMMSIG_DIALTONE)
 			status = STATUS_IDLE
 			dialtone_loop.start()
+			update_icon()
 
 		if(COMMSIG_RINGING)
 			status = STATUS_INBOUND
-			process_inbound_call(GLOB.transmitters[data])
+			var/obj/structure/transmitter/caller = GLOB.transmitters[data]
+			if(caller)
+				current_call = caller
+				try_ring()
+			update_icon()
+
+		if(COMMSIG_RINGBACK)
+			status = STATUS_OUTGOING
+			outring_loop.start()
+			update_icon()
 
 		if(COMMSIG_BUSY)
 			status = STATUS_IDLE
 			playsound(src, 'sound/machines/telephone/busy.ogg', 50)
 			end_call(forced = TRUE)
+			update_icon()
+
+		if(COMMSIG_NUMBER_NOT_FOUND)
+			status = STATUS_IDLE
+			playsound(src, 'sound/machines/telephone/notfound.ogg', 50)
+			end_call(forced = TRUE)
+			update_icon()
+
+		if(COMMSIG_ANSWER)
+			status = STATUS_ONGOING
+			outring_loop.stop()
+			if(ismob(attached_to.loc))
+				var/mob/M = attached_to.loc
+				to_chat(M, span_notice("[icon2html(src, M)] Call answered."))
+			update_icon()
+
+		if(COMMSIG_TALK)
+			if(attached_to.loc && ismob(attached_to.loc))
+				var/mob/M = attached_to.loc
+				M.playsound_local(get_turf(M), 'sound/machines/telephone/voice.ogg', 50)
+				to_chat(M, span_notice("[icon2html(src, M)] [data]"))
+
+		if(COMMSIG_HANGUP)
+			end_call(forced = TRUE)
+			update_icon()
+
+		if(COMMSIG_TIMEOUT)
+			status = STATUS_IDLE
+			playsound(src, 'sound/machines/telephone/timeout.ogg', 50)
+			end_call(forced = TRUE, timeout = TRUE)
+			update_icon()
+
+/obj/structure/transmitter/proc/send_commsig(commsig, data)
+	if(!GLOB.central_telephone_exchange)
+		return
+
+	var/obj/structure/central_telephone_exchange/cte = GLOB.central_telephone_exchange
+	cte.process_commsig(phone_id, commsig, data)
 
 /obj/structure/transmitter/proc/stop_loops()
 	busy_loop.stop()
@@ -571,15 +619,15 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	current_call = null
 	update_icon()
 
+
 /obj/structure/transmitter/proc/handle_speak(mob/speaking, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
-	var/obj/item/telephone/phone = current_call.attached_to
-	if(!phone || !attached_to)
-		return
-	phone.handle_hear(speaking, speech_args)
-	playsound(phone, SFX_TELEPHONE_SPEAKING, 10)
-	if(attached_to.raised)
-		log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
+	if(current_call && status == STATUS_ONGOING)
+		send_commsig(COMMSIG_TALK, message)
+		if(attached_to.raised && ismob(attached_to.loc))
+			var/mob/holder = attached_to.loc
+			holder.playsound_local(get_turf(holder), 'sound/machines/telephone/voice.ogg', 50)
+			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
 
 #undef PHONE_NET_PUBLIC
 #undef PHONE_NET_COMMAND

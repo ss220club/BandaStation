@@ -1,3 +1,5 @@
+GLOBAL_VAR_INIT(central_telephone_exchange, null)
+
 #define STATUS_IDLE                 "Idle"
 #define STATUS_DIALING              "Dialing"
 #define STATUS_ENDED                "Ended"
@@ -40,6 +42,13 @@
 	name = "Central Telephone Exchange unit"
 	desc = "A central switching unit responsible for connecting telephone calls within the station sectors."
 	var/list/active_sessions = list()
+
+/obj/structure/central_telephone_exchange/Initialize(mapload)
+	. = ..()
+	if(GLOB.central_telephone_exchange)
+		return INITIALIZE_HINT_QDEL // there should only exist one of those
+
+	GLOB.central_telephone_exchange = src
 
 /obj/structure/central_telephone_exchange/proc/process_commsig(device_id, commsig, data)
 	var/obj/structure/transmitter/device = GLOB.transmitters[device_id]
