@@ -7,6 +7,11 @@
 ///Signal sent when a keybind is deactivated
 #define DEACTIVATE_KEYBIND(A) "[A]_DEACTIVATED"
 
+//SS220 ADD START
+//Mentor
+#define COMSIG_KB_MENTOR_MSAY_DOWN "keybinding_mentor_msay_down"
+//SS220 ADD END
+
 //Admin
 #define COMSIG_KB_ADMIN_ASAY_DOWN "keybinding_admin_asay_down"
 #define COMSIG_KB_ADMIN_DSAY_DOWN "keybinding_admin_dsay_down"
