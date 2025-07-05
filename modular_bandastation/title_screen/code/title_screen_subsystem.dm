@@ -3,6 +3,11 @@
 	flags = SS_BACKGROUND
 	wait = 1 SECONDS
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	dependencies = list(
+		/datum/controller/subsystem/central
+	)
+	/// Is discord verification possible
+	var/discord_verification_possible
 	/// The current notice text, or null
 	var/notice
 	/// Currently loading subsystem name
@@ -17,6 +22,10 @@
 	var/list/title_images_pool = list()
 
 /datum/controller/subsystem/title/Initialize()
+	discord_verification_possible = CONFIG_GET(flag/force_discord_verification) && SScentral.can_run()
+	if(CONFIG_GET(flag/force_discord_verification) && !discord_verification_possible)
+		stack_trace("Discord verification is enabled, but SS Central is not active.")
+
 	fill_title_images_pool()
 	current_title_screen = new(screen_image_file = pick_title_image())
 	show_title_screen_to_all_new_players()
@@ -34,7 +43,7 @@
 		return
 
 	if(!SSticker)
-		title_output_to_all("<div class='loading'>Загрузка...</div>", "update_info")
+		title_output_to_all("<div class='loading'>Загрузка...</div>", "updateInfo")
 		return
 
 	var/time_remaining = SSticker.GetTimeLeft()
@@ -42,6 +51,8 @@
 		time_remaining = "<span class='bad'>ВЕЧНОСТЬ!!!</span>"
 	else if(time_remaining > 0)
 		time_remaining = "[round(time_remaining / 10)] сек."
+	else
+		time_remaining = "-"
 
 	switch(SSticker.current_state)
 		if(GAME_STATE_SETTING_UP)
@@ -75,7 +86,7 @@
 			<table class="lobby-info-table">[players]</table>
 		"}
 
-		title_output(viewer.client, info, "update_info")
+		title_output(viewer.client, info, "updateInfo")
 
 
 /datum/controller/subsystem/title/proc/count_initable_subsystems(list/subsystems)
@@ -90,14 +101,14 @@
  */
 /datum/controller/subsystem/title/proc/set_loading_subsystem(name)
 	subsystem_loading = name
-	title_output_to_all(SStitle.subsystem_loading, "update_loading_name")
+	title_output_to_all(SStitle.subsystem_loading, "updateLoadingName")
 
 /**
  * Increases the number of loaded subsystems.
  */
 /datum/controller/subsystem/title/proc/increase_loaded_subsystems_amount()
 	subsystems_loaded++
-	title_output_to_all(CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100, "update_loaded_count")
+	title_output_to_all(CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100, "updateLoadedCount")
 
 /**
  * Iterates over all files in `TITLE_SCREENS_LOCATION` and loads all valid title screens to `title_screens` var.
@@ -177,7 +188,7 @@
  */
 /datum/controller/subsystem/title/proc/set_notice(new_notice)
 	notice = emoji_parse(sanitize_text(new_notice)) || null
-	title_output_to_all(notice, "update_notice")
+	title_output_to_all(notice, "updateNotice")
 
 /**
  * Change or reset title screen css
@@ -243,7 +254,7 @@
 
 	SSassets.transport.send_assets(update_for, current_title_screen.screen_image.name)
 	update_for.browse_queue_flush()
-	title_output(update_for, SSassets.transport.get_asset_url(asset_cache_item = current_title_screen.screen_image), "update_image")
+	title_output(update_for, SSassets.transport.get_asset_url(asset_cache_item = current_title_screen.screen_image), "updateImage")
 
 /**
  * Update a user's character setup name.
@@ -252,7 +263,7 @@
 	if(!(istype(user)))
 		return
 
-	title_output(user.client, name, "update_character_name")
+	title_output(user.client, name, "updateCharacterName")
 
 /**
  * Picks title image from `title_images_pool` list. If the list is empty, `DEFAULT_TITLE_SCREEN_IMAGE_PATH` is returned
