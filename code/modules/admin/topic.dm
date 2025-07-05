@@ -1054,7 +1054,7 @@
 		var/obj_dir = text2num(href_list["object_dir"])
 		if(obj_dir && !(obj_dir in list(1,2,4,8,5,6,9,10)))
 			obj_dir = null
-		var/obj_name = sanitize(href_list["object_name"], apply_ic_filter = TRUE)
+		var/obj_name = sanitize(href_list["object_name"], apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
 
 		var/atom/target //Where the object will be spawned

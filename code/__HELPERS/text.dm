@@ -30,7 +30,7 @@
 	if(!result)
 		tgui_alert(usr, "Invalid name.")
 		return ""
-	return sanitize(result, apply_ic_filter = TRUE)
+	return sanitize(result, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
 // BANDASTATION EDIT START - Sanitize emotes
 /**
@@ -51,7 +51,7 @@
 	return sanitize(STRIP_HTML_SIMPLE(text, limit))
 
 
-/// Runs STRIP_HTML_FULL and sanitize
+/// Runs STRIP_HTML_FULL and sanitize.
 /proc/strip_html_full(text, limit = MAX_MESSAGE_LEN)
 	return sanitize(STRIP_HTML_FULL(text, limit))
 

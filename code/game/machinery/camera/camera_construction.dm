@@ -208,7 +208,7 @@
 				last_shown_paper = paper.copy(paper.type, null)
 
 				// Then sanitise the name because we're putting it directly in chat later.
-				var/item_name = sanitize(last_shown_paper.name, apply_ic_filter = TRUE)
+				var/item_name = sanitize(last_shown_paper.name, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
 				// Start the process of holding it up to the camera.
 				to_chat(user, span_notice("You hold \the [item_name] up to the camera..."))

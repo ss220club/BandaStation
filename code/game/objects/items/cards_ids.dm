@@ -2092,7 +2092,7 @@
 			if(!after_input_check(user, item, input_assignment, scribbled_assignment))
 				return
 			playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
-			scribbled_assignment = sanitize(input_assignment, apply_ic_filter = TRUE)
+			scribbled_assignment = sanitize(input_assignment, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 			var/list/details = item.get_writing_implement_details()
 			details_colors[INDEX_ASSIGNMENT_COLOR] = details["color"] || COLOR_BLACK
 		if("Trim")
