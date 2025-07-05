@@ -19,9 +19,7 @@
 #define MESSAGE_TYPE_ADMINPM "adminpm"
 #define MESSAGE_TYPE_COMBAT "combat"
 #define MESSAGE_TYPE_ADMINCHAT "adminchat"
-//SS220 ADD START
-#define MESSAGE_TYPE_MENTORCHAT "mentorchat"
-//SS220 ADD END
+#define MESSAGE_TYPE_MENTORCHAT "mentorchat" // BANDASTATION ADDITION
 #define MESSAGE_TYPE_PRAYER "prayer"
 #define MESSAGE_TYPE_MODCHAT "modchat"
 #define MESSAGE_TYPE_EVENTCHAT "eventchat"
