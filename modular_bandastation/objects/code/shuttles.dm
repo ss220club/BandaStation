@@ -1,3 +1,8 @@
+// Register certain shuttles in subsystem
+/datum/controller/subsystem/shuttle
+	/// The current gamma shuttle's mobile docking port.
+	var/obj/docking_port/mobile/gamma/gamma
+
 // Shuttle Dockers
 /obj/machinery/computer/camera_advanced/shuttle_docker/syndicate/sit
 	name = "syndicate infiltrator navigation computer"
@@ -129,6 +134,19 @@
 	port_direction = NORTH
 	preferred_direction = NORTH
 
+/obj/docking_port/mobile/gamma
+	name = "gamma armory shuttle"
+	shuttle_id = "gamma"
+	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0)
+	hidden = TRUE
+	dir = EAST
+	port_direction = WEST
+	preferred_direction = NORTH
+
+/obj/docking_port/mobile/gamma/register()
+	. = ..()
+	SSshuttle.gamma = src
+
 // Shuttle Areas
 /area/shuttle/syndicate_sit
 	name = "Syndicate SIT Shuttle"
@@ -141,6 +159,9 @@
 
 /area/shuttle/specops
 	name = "Specops Shuttle"
+
+/area/shuttle/gamma
+	name = "Gamma Armory Shuttle"
 
 // Shuttle Circuitboard
 /obj/item/circuitboard/computer/argos

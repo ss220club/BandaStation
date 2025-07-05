@@ -1558,6 +1558,14 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/primary/fore)
+"auo" = (
+/obj/machinery/door/poddoor/shuttledock{
+	checkdir = 8
+	},
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
+/turf/open/floor/plating,
+/area/station/ai_monitored/security/armory)
 "aut" = (
 /obj/structure/grille,
 /turf/open/floor/engine/hull/reinforced,
@@ -75102,6 +75110,17 @@
 /obj/item/clothing/suit/apron/chef,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
+"scK" = (
+/obj/docking_port/stationary{
+	dir = 8;
+	dwidth = 4;
+	height = 5;
+	name = "SS13: Gamma Armory";
+	shuttle_id = "gamma_home";
+	width = 9
+	},
+/turf/open/space/openspace,
+/area/space)
 "scS" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -82155,6 +82174,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 6
 	},
+/obj/structure/sign/warning/docking/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "tOz" = (
@@ -192180,15 +192200,15 @@ tYD
 tYD
 tYD
 tYD
-dmc
-job
-kJd
-job
-hUE
-hUE
-kJd
-kJd
-dmc
+tYD
+tYD
+tYD
+tYD
+tYD
+tYD
+tYD
+tYD
+tYD
 nRB
 lLY
 lMo
@@ -192435,17 +192455,17 @@ tYD
 tYD
 tYD
 tYD
-tYD
+job
+dmc
+kJd
 job
 kJd
-tYD
-tYD
-tYD
-tYD
-tYD
-tYD
-tYD
-tYD
+job
+hUE
+hUE
+kJd
+kJd
+dmc
 nRB
 mQB
 kDK
@@ -192693,8 +192713,8 @@ tYD
 tYD
 job
 job
-job
 kJd
+tYD
 tYD
 tYD
 tYD
@@ -192950,8 +192970,8 @@ tYD
 tYD
 job
 job
-job
 kJd
+tYD
 tYD
 tYD
 tYD
@@ -193207,8 +193227,8 @@ tYD
 job
 wiJ
 wiJ
-tYD
 diG
+tYD
 tYD
 tYD
 tYD
@@ -193464,8 +193484,8 @@ tYD
 wiJ
 wiJ
 wiJ
-wiJ
 dFP
+tYD
 tYD
 tYD
 tYD
@@ -193721,12 +193741,12 @@ wiJ
 wiJ
 wiJ
 job
-wiJ
 dFP
 tYD
 tYD
 tYD
 tYD
+scK
 tYD
 tYD
 tYD
@@ -193983,7 +194003,7 @@ kJd
 dFP
 xcz
 xcz
-xcz
+auo
 xcz
 xcz
 xcz
