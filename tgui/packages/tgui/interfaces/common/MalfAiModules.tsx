@@ -32,7 +32,7 @@ export function MalfAiModules(props) {
       const item = category.items[itemIndex];
       items.push({
         category: category.name,
-        cost: `${item.cost} PT`,
+        cost: `${item.cost} ВО`,
         desc:
           item.desc +
           (item.minimum_apcs
@@ -54,7 +54,7 @@ export function MalfAiModules(props) {
     <GenericUplink
       categories={categoriesList}
       items={items}
-      currency={`${processingTime} PT`}
+      currency={`${processingTime} ВО`}
       handleBuy={(item) => act('buy', { name: item.name })}
     />
   );

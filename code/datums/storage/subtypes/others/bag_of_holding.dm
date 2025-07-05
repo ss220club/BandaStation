@@ -15,6 +15,12 @@
 
 	return ..()
 
+	/// BANDASTATION ADDITION START - Flatpack fix
+/datum/storage/bag_of_holding/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(cant_hold_list = /obj/item/flatpack)
+	/// BANDASTATION ADDITION END - Flatpack fix
+
 /datum/storage/bag_of_holding/proc/recursive_insertion(obj/item/to_insert, mob/living/user)
 	var/area/bag_area = get_area(user)
 	var/safety = tgui_alert(user, "Doing this will have extremely dire consequences for the station and its crew. Be sure you know what you're doing.", "Put in [to_insert.name]?", list("Proceed", "Abort"))

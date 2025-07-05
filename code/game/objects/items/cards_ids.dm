@@ -36,7 +36,7 @@
 	var/honorific_title
 
 /obj/item/card/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins to swipe [user.p_their()] neck with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins to swipe [user.p_their()] neck with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/card/update_overlays()
@@ -1228,7 +1228,7 @@
 /obj/item/card/id/advanced/update_overlays()
 	. = ..()
 
-	if(registered_name && registered_name != "Captain")
+	if(registered_name && registered_name != JOB_CAPTAIN_RU)
 		. += mutable_appearance(icon, assigned_icon_state)
 
 	var/trim_icon_file = trim_icon_override ? trim_icon_override : trim?.trim_icon
@@ -1324,13 +1324,13 @@
 /obj/item/card/id/advanced/gold/captains_spare
 	name = "captain's spare ID"
 	desc = "The spare ID of the High Lord himself."
-	registered_name = "Captain"
+	registered_name = JOB_CAPTAIN_RU
 	trim = /datum/id_trim/job/captain
 	registered_age = null
 
 /obj/item/card/id/advanced/gold/captains_spare/update_label() //so it doesn't change to Captain's ID card (Captain) on a sneeze
-	if(registered_name == "Captain")
-		name = "[initial(name)][(!assignment || assignment == "Captain") ? "" : " ([assignment])"]"
+	if(registered_name == JOB_CAPTAIN_RU)
+		name = "[initial(name)][(!assignment || assignment == JOB_CAPTAIN_RU) ? "" : " ([assignment])"]"
 		update_appearance(UPDATE_ICON)
 	else
 		..()
@@ -1507,7 +1507,7 @@
 /obj/item/card/id/advanced/prisoner/proc/set_sentence_time(mob/living/user, obj/item/card/id/our_card)
 	var/list/id_access = our_card.GetAccess()
 	if(!(ACCESS_BRIG in id_access))
-		balloon_alert(user, "access denied!")
+		balloon_alert(user, "в доступе отказано!")
 		return ITEM_INTERACT_BLOCKING
 	if(!user.is_holding(src))
 		to_chat(user, span_warning("You must be holding the ID to continue!"))
