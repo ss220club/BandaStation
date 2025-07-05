@@ -1,4 +1,4 @@
-import { sortBy } from 'common/collections';
+import { sortBy } from 'es-toolkit';
 import React, { useState } from 'react';
 import {
   Box,
@@ -56,7 +56,7 @@ export const Jukebox220 = () => {
   } = data;
 
   const MAX_NAME_LENGTH = 35;
-  const songs_sorted: Song[] = sortBy(songs, (song: Song) => song.name);
+  const songs_sorted: Song[] = sortBy(songs, [(song: Song) => song.name]);
   const song_selected: Song | undefined = songs.find(
     (song) => song.name === track_selected,
   );

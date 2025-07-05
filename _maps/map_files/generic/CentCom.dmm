@@ -6668,7 +6668,7 @@
 /obj/effect/mapping_helpers/requests_console/assistance,
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/information,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aFr" = (
@@ -11773,7 +11773,7 @@
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "aYH" = (
@@ -14045,7 +14045,7 @@
 /obj/effect/turf_decal/tile/dark_blue/anticorner{
 	dir = 4
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "ewN" = (
@@ -14781,7 +14781,7 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/admin)
 "glS" = (
@@ -14904,7 +14904,7 @@
 /turf/closed/indestructible/wood,
 /area/centcom/central_command_areas/planetary_port/club)
 "gwU" = (
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/admin)
 "gxd" = (
@@ -15030,7 +15030,7 @@
 /area/centcom/central_command_areas/conference_room)
 "gHP" = (
 /obj/effect/turf_decal/tile/dark_blue/anticorner,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "gHY" = (
@@ -15225,7 +15225,7 @@
 /obj/effect/mapping_helpers/requests_console/supplies,
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/ore_update,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/cabin/captain)
 "gZF" = (
@@ -16337,7 +16337,7 @@
 /obj/effect/mapping_helpers/requests_console/assistance,
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/information,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/pod/dark,
 /area/centcom/central_command_areas/cabin)
 "jEf" = (
@@ -17430,7 +17430,7 @@
 /obj/effect/turf_decal/siding/wood/end{
 	dir = 4
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "miO" = (
@@ -17650,7 +17650,7 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
 "mFY" = (
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/courtroom)
 "mHT" = (
@@ -18089,7 +18089,7 @@
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/conference_room)
 "nVq" = (
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/conference_room)
 "nWo" = (
@@ -21292,7 +21292,7 @@
 	dir = 10
 	},
 /obj/effect/turf_decal/tile/dark_blue/full,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
 "vFY" = (
