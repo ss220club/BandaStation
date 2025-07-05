@@ -734,7 +734,7 @@
 	return .|WITH_EMPHASIS_MESSAGE
 
 /datum/emote/living/custom/proc/get_custom_emote_from_user()
-	return copytext(sanitize(input("Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
+	return copytext(sanitize(input("Choose an emote to display.") as text|null, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 
 /datum/emote/living/custom/proc/get_custom_emote_type_from_user()
 	var/type = input("Is this a visible or hearable emote?") as null|anything in list("Visible", "Hearable", "Both")

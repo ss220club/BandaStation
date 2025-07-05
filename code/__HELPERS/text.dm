@@ -30,14 +30,21 @@
 	if(!result)
 		tgui_alert(usr, "Invalid name.")
 		return ""
-	return sanitize(result)
+	return sanitize(result, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
+// BANDASTATION EDIT START - Sanitize emotes
+/**
+ * Runs byond's html encoding sanitization proc, after replacing new-lines and tabs for the # character.
+ * Arguments:
+ * * apply_ic_filter - sanitizes all symbols except `a-zA-Za-åa-ö-w-я 0-9/@%\"!#?¨'.,:*+`
+*/
+/proc/sanitize(text, apply_ic_filter = FALSE)
+	text = rustutils_regex_replace(text, "\[\n\t\]", "i", "#")
+	if(apply_ic_filter)
+		text = rustutils_regex_replace(text, "\[^a-zA-Za-åa-ö-w-я 0-9/@%\"!#?¨'.,:;*+\]", "i", "")
 
-/// Runs byond's html encoding sanitization proc, after replacing new-lines and tabs for the # character.
-/proc/sanitize(text)
-	var/static/regex/regex = regex(@"[\n\t]", "g")
-	return html_encode(regex.Replace(text, "#"))
-
+	return html_encode(text)
+// BANDASTATION EDIT END - Sanitize emotes
 
 /// Runs STRIP_HTML_SIMPLE and sanitize.
 /proc/strip_html(text, limit = MAX_MESSAGE_LEN)
