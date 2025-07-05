@@ -36,7 +36,7 @@ export function MalfAiModules(props) {
         desc:
           item.desc +
           (item.minimum_apcs
-            ? ` Requires at least ${item.minimum_apcs} APCs hacked.`
+            ? ` Требуется взломать не менее ${item.minimum_apcs} ЛКП.`
             : ''),
         disabled: processingTime < item.cost || apcsHacked < item.minimum_apcs,
         icon_state: item.icon_state,
