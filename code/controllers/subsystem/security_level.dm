@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(security_level)
  * Arguments:
  * * new_level - The new security level that will become our current level
  * * announce - Play the announcement, set FALSE if you're doing your own custom announcement to prevent duplicates
- * * mob/user - Gets users mob // BANDASTATION ADDITION - Gamma Shuttle
+ * * mob/user - Mob which set the security level. Optional // BANDASTATION ADDITION - Gamma Shuttle
  */
 /datum/controller/subsystem/security_level/proc/set_level(new_level, announce = TRUE, mob/user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 	new_level = istext(new_level) ? new_level : number_level_to_text(new_level)
@@ -62,15 +62,15 @@ SUBSYSTEM_DEF(security_level)
 		deltimer(set_timer_id)
 		set_timer_id = null
 
-	selected_level.pre_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
+	selected_level.pre_set_security_level(user)
 	if(selected_level.set_delay > 0)
-		set_timer_id = addtimer(CALLBACK(src, PROC_REF(set_level_instantly), selected_level, announce, user), selected_level.set_delay) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
+		set_timer_id = addtimer(CALLBACK(src, PROC_REF(set_level_instantly), selected_level, announce, user), selected_level.set_delay)
 	else
-		set_level_instantly(selected_level, announce, user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
+		set_level_instantly(selected_level, announce, user)
 	// BANDASTATION EDIT - END
 
 // BANDASTATION ADDITION - START
-/datum/controller/subsystem/security_level/proc/set_level_instantly(datum/security_level/selected_level, announce = TRUE, mob/user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
+/datum/controller/subsystem/security_level/proc/set_level_instantly(datum/security_level/selected_level, announce = TRUE, mob/user)
 	PRIVATE_PROC(TRUE)
 
 	if(SSnightshift.can_fire && (selected_level.number_level >= SEC_LEVEL_RED || current_security_level.number_level >= SEC_LEVEL_RED))

@@ -9,11 +9,11 @@
 	var/set_delay = 0
 
 /// Called before setting or planning to set the security level
-/datum/security_level/proc/pre_set_security_level(mob/user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
+/datum/security_level/proc/pre_set_security_level(mob/user)
 	return
 
 /// Called after setting security level, just before sending `COMSIG_SECURITY_LEVEL_CHANGED`
-/datum/security_level/proc/post_set_security_level(mob/user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
+/datum/security_level/proc/post_set_security_level(mob/user)
 	return
 
 /**
@@ -36,7 +36,7 @@
 /datum/security_level/gamma/post_set_security_level(user)
 	if(isnull(user))
 		return
-	if(SSsecurity_level.get_current_level_as_number() != SEC_LEVEL_GAMMA || isnull(SSshuttle.gamma) || !SSshuttle.getDock("gamma_home"))
+	if(isnull(SSshuttle.gamma) || !SSshuttle.getDock("gamma_home"))
 		return
 	if(tgui_alert(user, "Желаете направить оружейный шаттл Гамма? Если не уверены, его можно будет направить позже в меню Secrets (Helpful -> Move Gamma Shuttle).", "Гамма шаттл", list("Да", "Нет")) != "Да")
 		return
