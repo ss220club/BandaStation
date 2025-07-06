@@ -1,5 +1,5 @@
 /datum/config_entry/number/automatic_crew_transfer_vote_delay
-	default = 54000
+	default = 72000
 	min_val = 18000
 
 /datum/config_entry/number/automatic_crew_transfer_vote_interval
