@@ -121,6 +121,8 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	var/category = "generic category"
 	var/description = "generic description"
 	var/cost = 5
+	/// Minimum amount of APCs that has to be under the AI's control to purchase this module.
+	var/minimum_apcs = 0
 	/// If this module can only be purchased once. This always applies to upgrades, even if the variable is set to false.
 	var/one_purchase = FALSE
 	/// If the module gives an active ability, use this. Mutually exclusive with upgrade.
@@ -156,6 +158,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 		Получение контроля над оружием будет легче, если ЛКП в кабинетах глав отделов находятся под вашим контролем."
 	cost = 130
 	one_purchase = TRUE
+	minimum_apcs = 15 // So you cant speedrun delta
 	power_type = /datum/action/innate/ai/nuke_station
 	unlock_text = span_notice("Вы медленно и осторожно устанавливаете соединение с устройством самоуничтожения станции. Вы можете активировать его в любое время.")
 	///List of areas that grant discounts. "heads_quarters" will match any head of staff office.
@@ -637,6 +640,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	name = "Robotic Factory (Removes Shunting)"
 	description = "Строит машину где угодно из дорогих наномашин, превращающую живое существо в лояльного раба-киборга."
 	cost = 100
+	minimum_apcs = 10 // So you can't speedrun this
 	power_type = /datum/action/innate/ai/place_transformer
 	unlock_text = span_notice("Вы связались с космическим Амазоном и заказали фабрику роботов доставкой.")
 	unlock_sound = 'sound/machines/ping.ogg'
@@ -919,7 +923,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 /datum/ai_module/malf/upgrade/voice_changer
 	name = "Voice Changer"
 	description = "Позволяет изменить голос ИИ. Улучшение происходит сразу после покупки."
-	cost = 40
+	cost = 20
 	one_purchase = TRUE
 	power_type = /datum/action/innate/ai/voice_changer
 	unlock_text = span_notice("Распространения прошивки через OTA завершено! Изменитель голоса активен.")

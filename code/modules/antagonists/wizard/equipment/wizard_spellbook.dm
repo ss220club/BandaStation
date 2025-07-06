@@ -66,7 +66,7 @@
 		return
 
 	if(user.mind != owner)
-		if(user.mind?.special_role == ROLE_WIZARD_APPRENTICE)
+		if(IS_WIZARD_APPRENTICE(user))
 			to_chat(user, span_warning("Если бы вас поймают за подглядыванием в книгу заклинаний вашего учителя, то, скорее всего, вас отчислять из Академии волшебников. Лучше не стоит."))
 		else
 			to_chat(user, span_warning("Вы не признаетесь владельцем [declent_ru(GENITIVE)], и не собирается открываться!"))
@@ -74,7 +74,7 @@
 
 	return ..()
 
-/obj/item/spellbook/attackby(obj/item/O, mob/user, list/modifiers)
+/obj/item/spellbook/attackby(obj/item/O, mob/user, list/modifiers, list/attack_modifiers)
 	// This can be generalized in the future, but for now it stays
 	if(istype(O, /obj/item/antag_spawner/contract))
 		var/datum/spellbook_entry/item/contract/contract_entry = locate() in entries

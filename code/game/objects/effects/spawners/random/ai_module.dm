@@ -22,6 +22,7 @@
 		/obj/item/ai_module/core/full/ten_commandments,
 		/obj/item/ai_module/core/full/nutimov,
 		/obj/item/ai_module/core/full/drone,
+		/obj/item/ai_module/core/full/crewsimov, /// BANDASTATION ADDITION - AI laws overhaul
 		/obj/item/ai_module/core/full/custom, // uses lawsets from config/silicon_laws.txt (defaults to asmiov if no lawsets)
 	)
 
@@ -40,6 +41,10 @@
 		/obj/item/ai_module/supplied/quarantine,
 		/obj/item/ai_module/core/full/yesman,
 		/obj/item/ai_module/remove,
+		/// BANDASTATION ADDITION START - AI laws overhaul
+		/obj/item/ai_module/core/full/petrovich,
+		/obj/item/ai_module/core/full/renter
+		/// BANDASTATION ADDITION END - AI laws overhaul
 	)
 
 /obj/effect/spawner/random/aimodule/harmful

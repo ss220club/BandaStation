@@ -113,11 +113,7 @@ SUBSYSTEM_DEF(ambience)
 		return
 
 	var/area/my_area = get_area(src)
-	// BANDASTATION EDIT START - STORYTELLERS
-	var/sound_to_use
-	if(my_area)
-		sound_to_use= my_area.ambient_buzz
-	// BANDASTATION EDIT END - STORYTELLERS
+	var/sound_to_use = my_area.ambient_buzz
 	var/volume_modifier = client.prefs.read_preference(/datum/preference/numeric/volume/sound_ship_ambience_volume)
 
 	if(!sound_to_use || !(client.prefs.read_preference(/datum/preference/numeric/volume/sound_ship_ambience_volume)))

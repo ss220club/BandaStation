@@ -23,7 +23,7 @@
 /area/shuttle/argos)
 "cP" = (
 /obj/structure/table/reinforced/rglass,
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_x = 3;
 	pixel_y = 16
 	},
@@ -435,7 +435,7 @@
 	},
 /obj/item/clothing/gloves/latex/nitrile,
 /obj/item/surgical_drapes,
-/obj/item/clothing/mask/muzzle/breath,
+/obj/item/clothing/mask/breath/muzzle,
 /obj/effect/turf_decal/siding/blue,
 /turf/open/floor/iron/white/diagonal,
 /area/shuttle/argos)

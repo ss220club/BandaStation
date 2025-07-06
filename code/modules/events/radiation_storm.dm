@@ -14,7 +14,6 @@
 	start_when = 3
 	end_when = start_when + 1
 	announce_when = 1
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/radiation_storm/announce(fake)
 	priority_announce("Вблизи станции обнаружено радиационное поле высокой интенсивности. Всему персоналу надлежит проследовать в технические тоннели.", "Обнаружена аномалия", ANNOUNCER_RADIATION)

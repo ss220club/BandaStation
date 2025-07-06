@@ -32,7 +32,7 @@ GLOBAL_LIST_INIT(petsplosion_candidates, typecacheof(list(
 	/// Number of mobs we're going to duplicate
 	var/mobs_to_dupe = 0
 
-/datum/round_event_control/wizard/petsplosion/preRunEvent(scheduled = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/wizard/petsplosion/preRunEvent()
 	for(var/mob/living/basic/dupe_animal in GLOB.alive_mob_list)
 		count_mob(dupe_animal)
 	for(var/mob/living/simple_animal/dupe_animal in GLOB.alive_mob_list)

@@ -1,4 +1,4 @@
-/datum/mutation/human/adaptation
+/datum/mutation/adaptation
 	name = "Adaptation"
 	desc = "Странная мутация, которая адаптирует иммунную систему организма к экстремальным температурам. Не защищает от вакуума."
 	quality = POSITIVE
@@ -6,21 +6,21 @@
 	text_gain_indication = span_notice("Твоё тело окутывает тепло!")
 	instability = NEGATIVE_STABILITY_MAJOR
 	locked = TRUE // fake parent
-	conflicts = list(/datum/mutation/human/adaptation)
+	conflicts = list(/datum/mutation/adaptation)
 	mutation_traits = list(TRAIT_WADDLING)
 	/// Icon used for the adaptation overlay
 	var/adapt_icon = "meow"
 
-/datum/mutation/human/adaptation/New(class_ = MUT_OTHER, timer, datum/mutation/human/copymut)
+/datum/mutation/adaptation/New(datum/mutation/copymut)
 	..()
-	conflicts = typesof(/datum/mutation/human/adaptation)
+	conflicts = typesof(/datum/mutation/adaptation)
 	if(!(type in visual_indicators))
 		visual_indicators[type] = list(mutable_appearance('icons/mob/effects/genetics.dmi', adapt_icon, -MUTATIONS_LAYER))
 
-/datum/mutation/human/adaptation/get_visual_indicator()
+/datum/mutation/adaptation/get_visual_indicator()
 	return visual_indicators[type][1]
 
-/datum/mutation/human/adaptation/cold
+/datum/mutation/adaptation/cold
 	name = "Cold Adaptation"
 	desc = "Странная мутация, которая адаптирует иммунную систему организма к низким температурам. Она также предотвращает подсклазьзование на льду."
 	text_gain_indication = span_notice("Твое тело наполняет освежающий холод.")
@@ -29,7 +29,7 @@
 	adapt_icon = "cold"
 	locked = FALSE
 
-/datum/mutation/human/adaptation/heat
+/datum/mutation/adaptation/heat
 	name = "Heat Adaptation"
 	desc = "Странная мутация, которая адаптирует иммунную систему организма к высоким температурам, а также предотвращает возгорание её обладателя, хотя пламя всё ещё сжигает одежду. Также делает носителя невосприимчивым к пепельным штормам."
 	text_gain_indication = span_notice("Твоё тело наполняет лёгкое тепло.")
@@ -38,7 +38,7 @@
 	adapt_icon = "fire"
 	locked = FALSE
 
-/datum/mutation/human/adaptation/thermal
+/datum/mutation/adaptation/thermal
 	name = "Thermal Adaptation"
 	desc = "Странная мутация, которая даёт невосприимчивость к урону от высокой и низкой температур. Не защищает от высокого и низкого давления."
 	difficulty = 32
@@ -48,7 +48,7 @@
 	adapt_icon = "thermal"
 	locked = TRUE // recipe
 
-/datum/mutation/human/adaptation/pressure
+/datum/mutation/adaptation/pressure
 	name = "Pressure Adaptation"
 	desc = "Странная мутация, которая адаптирует иммунную систему организма к низкому и высокому давлению. Не защищает от температуры и холодного космоса в том числе."
 	text_gain_indication = span_notice("Ваше тело испытывает сильное давление.")

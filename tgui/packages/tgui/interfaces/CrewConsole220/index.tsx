@@ -92,7 +92,7 @@ function CrewContent() {
   }
 
   return (
-    <Stack fill vertical>
+    <Stack fill vertical g={0}>
       <Stack.Item>
         <Section
           fill
@@ -113,9 +113,7 @@ function CrewContent() {
           }
         />
       </Stack.Item>
-      <Stack.Item grow mt={0}>
-        {decideTab(tab)}
-      </Stack.Item>
+      <Stack.Item grow>{decideTab(tab)}</Stack.Item>
     </Stack>
   );
 }
