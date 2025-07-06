@@ -133,7 +133,7 @@
 	clog_vent()
 
 	announce_to_ghosts(vent)
-	priority_announce("Lifesign readings have moved to a new location in the ventilation network. New Location: [prob(50) ? "Unknown.":"[get_area_name(vent)]."]", "Lifesign Notification")
+	priority_announce("Показатели биосигнатур переместились в новый сегмент вентиляционной сети. Текущее положение: [prob(50) ? "Неизвестно." : "[get_area_name(vent)]."]", "Неопознанные формы жизни")
 
 /**
  * Handles the production of our mob and adds it to our living_mobs list
