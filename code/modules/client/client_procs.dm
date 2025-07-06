@@ -270,7 +270,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		SScentral.update_player_donate_tier_blocking(src)
 
 	if(byond_version >= 516)
-		winset(src, null, list("browser-options" = "find,refresh,byondstorage"))
+		winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION EDIT - Removed 'refresh'
 
 	// Instantiate stat panel
 	stat_panel = new(src, "statbrowser")
