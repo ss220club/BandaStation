@@ -529,7 +529,7 @@
 	addtimer(CALLBACK(src, PROC_REF(announce_space_dragon)), rand(5, 10) SECONDS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon/proc/announce_space_dragon()
-	priority_announce("Вблизи [station_name()] зафиксирован большой поток органической энергии, ожидайте дальнейших указаний", "Неопознанная форма жизни")
+	priority_announce("Вблизи [station_name()] зафиксирован большой поток органической энергии, ожидайте дальнейших указаний.", "Неопознанная форма жизни")
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon/false_alarm()
 	announce_space_dragon()

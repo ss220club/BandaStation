@@ -105,7 +105,7 @@
 	sm_gas.powerloss_inhibition = initial(sm_gas.powerloss_inhibition)
 	sm_gas.heat_power_generation = initial(sm_gas.heat_power_generation)
 	sm_gas.heat_modifier = initial(sm_gas.heat_modifier)
-	priority_announce("Всплеск суперматерии рассеялся, выходные показания кристалла нормализовались.", "Аномалия устранена")
+	priority_announce("Всплеск суперматерии рассеялся, выходные показатели кристалла нормализовались.", "Аномалия устранена")
 	engine = null
 	sm_gas = null
 

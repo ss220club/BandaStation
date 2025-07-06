@@ -101,7 +101,7 @@ GLOBAL_DATUM(revolution_handler, /datum/revolution_handler)
 			add_memory_in_range(head_of_staff, 5, /datum/memory/revolution_heads_victory, protagonist = head_of_staff)
 
 	priority_announce("Похоже, мятеж подавлен. Пожалуйста, верните себя и своих недееспособных коллег к работе. \
-		Мы дистанционно внесли глав революции в черный список в ваших медицинских записях, чтобы предотвратить случайное оживление.", null, null, null, "Отдел мониторинга лояльности [command_name()]")
+		Мы дистанционно внесли глав революции в черный список в ваших медицинских записях, чтобы предотвратить нежелательную реанимацию.", null, null, null, "[command_name()]: Отдел мониторинга лояльности")
 
 	result = STATION_VICTORY
 
