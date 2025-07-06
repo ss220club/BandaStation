@@ -3,10 +3,10 @@
 	weight = WEIGHT_ADMIN
 
 /datum/keybinding/mentor/mentor_say
-	hotkey_keys = list("N")
-	name = SAY_CHANNEL
-	full_name = "Mentor say"
-	description = "Talk with other mentors."
+	hotkey_keys = list("ShiftF5")
+	name = MENTOR_CHANNEL
+	full_name = "Msay"
+	description = "Разговаривайте с другими менторами."
 	keybind_signal = COMSIG_KB_MENTOR_MSAY_DOWN
 
 /datum/keybinding/mentor/mentor_say/down(client/user)
@@ -16,35 +16,23 @@
 	winset(user, null, "command=[user.tgui_say_create_open_command(MENTOR_CHANNEL)]")
 	return TRUE
 
-ADMIN_VERB(mentor_message, R_MENTOR, "Mentor chat", "Allows mentors and admins to communicate with eachother.", ADMIN_CATEGORY_MAIN)
-
-/client/verb/mentor(msg as text)
-	set name = "Mentor chat"
-	set category = "Admin"
-
-	mentor_message(msg)
-
-	if(GLOB.say_disabled) //This is here to try to identify lag problems
-		to_chat(usr, span_danger("Speech is currently admin-disabled."))
+ADMIN_VERB(mentor_message, R_MENTOR | R_ADMIN, "Mentor chat", "Позволяет менторам общяться между собой.", ADMIN_CATEGORY_MENTOR, msg as text)
+	msg = emoji_parse(copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN))
+	if(!msg)
 		return
+	// Сюда добавь проверку на то, ментор ли чел, и если нет то ретурн
 
-	var/client_initalized = VALIDATE_CLIENT_INITIALIZATION(src)
-	if(isnull(mob) || !client_initalized)
-		if(!client_initalized)
-			unvalidated_client_error() // we only want to throw this warning message when it's directly related to client failure.
-
-		to_chat(usr, span_warning("Failed to send your OOC message. You attempted to send the following message:\n[span_big(msg)]"))
-		return
+	msg = "[span_mentorsay("[span_prefix("MENTOR:")] <EM>[key_name_admin(user)]</EM> [ADMIN_FLW(user.mob)]: <span class='message linkify'>[msg]")]</span>"
+	to_chat(GLOB.admins + GLOB.mentors,
+		type = MESSAGE_TYPE_MENTORCHAT,
+		html = msg,
+		confidential = TRUE)
+	user.mob.log_talk(msg,LOG_OOC, tag="MSAY")
 
 /client/proc/mentor_message(msg, wall_pierce)
-	for(var/client/receiver as anything in GLOB.admins + GLOB.mentors)
-		var/keyname = get_ooc_badged_name()
-		var/avoid_highlight = receiver == src
-		if(GLOB.say_disabled)
-			to_chat(usr, span_danger("Speech is currently admin-disabled."))
-			return
 
+	if(!msg)
+		return
 
-		msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
-		mob.log_talk(msg,LOG_OOC, tag="MSAY")
-		to_chat(receiver, span_mentorsay(span_prefix("MOOC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]")), avoid_highlighting = avoid_highlight)
+    // Сюда добавь проверку на то, ментор ли чел, и если нет то ретурн
+

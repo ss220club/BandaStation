@@ -41,7 +41,7 @@ Edit =
 
 Name = Mentor
 Include = MENTOR
-Exclude = EVERYTHING
+Exclude =
 Edit =
 
 Name = Moderator

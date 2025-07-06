@@ -45,7 +45,7 @@
 			client.ooc(entry)
 			return TRUE
 		if(MENTOR_CHANNEL)
-			client.mentor(entry)
+			SSadmin_verbs.dynamic_invoke_verb(client, /datum/admin_verb/mentor_message, entry)
 			return TRUE
 		if(ADMIN_CHANNEL)
 			SSadmin_verbs.dynamic_invoke_verb(client, /datum/admin_verb/cmd_admin_say, entry)
