@@ -116,6 +116,7 @@
 #include "code/structures/posters.dm"
 #include "code/structures/statues.dm"
 #include "code/structures/crates_lockers/closets/secure/blueshield.dm"
+#include "code/structures/crates_lockers/closets/secure/gamma.dm"
 #include "code/structures/crates_lockers/closets/secure/lawyer.dm"
 #include "code/structures/crates_lockers/closets/secure/magistrate.dm"
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
