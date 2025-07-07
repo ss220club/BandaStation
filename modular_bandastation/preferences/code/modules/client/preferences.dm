@@ -14,7 +14,7 @@
 	var/donator_level = parent.get_donator_level()
 	max_save_slots = clamp(BASE_SAVE_SLOTS + donator_level * SAVE_SLOTS_PER_DONATOR_LEVEL, BASE_SAVE_SLOTS, MAX_SAVE_SLOTS)
 
-	if(donator_level > DONATOR_TIER_2)
+	if(donator_level >= DONATOR_TIER_2)
 		unlock_content = TRUE
 
 	is_byond_member = !!parent.IsByondMember() // BANDASTATION ADD
