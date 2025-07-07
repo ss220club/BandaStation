@@ -3,10 +3,10 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define COMSIG_TRANSMITTER_UPDATE_ICON "transmitter_update_icon"
 #define TRANSMITTER_UNAVAILABLE(T) (!T.attached_to || !T.enabled)
 
-#define PHONE_NET_PUBLIC    "Public"
-#define PHONE_NET_COMMAND   "Command"
-#define PHONE_NET_CENTCOMM  "CentComm"
-#define PHONE_NET_SYNDIE    "Syndicate"
+#define PHONE_NET_PUBLIC             "Public"
+#define PHONE_NET_COMMAND            "Command"
+#define PHONE_NET_CENTCOMM           "CentComm"
+#define PHONE_NET_SYNDIE             "Syndicate"
 
 #define PHONE_DND_FORCED 2
 #define PHONE_DND_ON 1
@@ -16,26 +16,28 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define SINGLE_CALL_PRICE 5
 #define RING_TIMEOUT 4 SECONDS
 
-#define STATUS_INBOUND "Inbound call"
-#define STATUS_ONGOING "Ongoing call"
-#define STATUS_OUTGOING "Outgoing call"
-#define STATUS_IDLE "Idle"
+#define STATUS_INBOUND              "Inbound call"
+#define STATUS_ONGOING              "Ongoing call"
+#define STATUS_OUTGOING             "Outgoing call"
+#define STATUS_IDLE                 "Idle"
 
-#define COMMSIG_OFFHOOK             "CS_OF" // The telephone is removed from the hook
-#define COMMSIG_DIALTONE            "CS_DT" // The phone should play the dialtone sound, indicating it's ready for dialing
-#define COMMSIG_DIAL                "CS_DL"	// The phone sends a request to the CTE, attempting to call a `phone_id`
-#define COMMSIG_RINGING             "CS_RG" // The phone rings, being ready to pick up
-#define COMMSIG_RINGBACK            "CS_RB"	// The caller hears the ringback sounds, waiting for the other side to pick up
-#define COMMSIG_BUSY                "CS_BS"	// The target phone is busy
-#define COMMSIG_NUMBER_NOT_FOUND    "CS_NF"	// The CTE couldn't find the device with such `phone_id`
-#define COMMSIG_ANSWER              "CS_AN"	// The phone should initialize the call
-#define COMMSIG_TALK                "CS_TK"	// The signal sent with the voice message itself
-#define COMMSIG_HANGUP              "CS_HU"	// The other side has hanged up
-#define COMMSIG_TIMEOUT             "CS_TO" // The line has been inactive for over 30 seconds
+#define COMMSIG_OFFHOOK             "Communication Signal - Offhook" // The telephone is removed from the hook
+#define COMMSIG_DIALTONE            "Communication Signal - Dialtone" // The phone should play the dialtone sound, indicating it's ready for dialing
+#define COMMSIG_DIAL                "Communication Signal - Dial"	// The phone sends a request to the CTE, attempting to call a `phone_id`
+#define COMMSIG_RINGING             "Communication Signal - Ringing" // The phone rings, being ready to pick up
+#define COMMSIG_RINGBACK            "Communication Signal - Ringback"	// The caller hears the ringback sounds, waiting for the other side to pick up
+#define COMMSIG_BUSY                "Communication Signal - Busy"	// The target phone is busy
+#define COMMSIG_NUMBER_NOT_FOUND    "Communication Signal - Number Not Found"	// The CTE couldn't find the device with such `phone_id`
+#define COMMSIG_ANSWER              "Communication Signal - Answer"	// The phone should initialize the call
+#define COMMSIG_TALK                "Communication Signal - Talk"	// The signal sent with the voice message itself
+#define COMMSIG_HANGUP              "Communication Signal - Hangup"	// The other side has hanged up
+#define COMMSIG_TIMEOUT             "Communication Signal - Timeout" // The line has been inactive for over 30 seconds
 
 #define MAX_RANGE 3
 
+/// Processes incoming communication signals. Arguments: `commsig`: string, `data`: object
 /obj/structure/transmitter/proc/process_commsig(commsig, data)
+	to_chat(world, "DEBUG: transmitter [display_name] with ID [phone_id] received [commsig] with data ([data])")
 	stop_loops()
 	switch(commsig)
 		if(COMMSIG_DIALTONE)
@@ -45,9 +47,10 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 		if(COMMSIG_RINGING)
 			status = STATUS_INBOUND
-			var/obj/structure/transmitter/caller = GLOB.transmitters[data]
-			if(caller)
-				current_call = caller
+			START_PROCESSING(SSobj, src)
+			var/obj/structure/transmitter/new_caller = GLOB.transmitters[data]
+			if(new_caller)
+				current_call = new_caller
 				try_ring()
 			update_icon()
 
@@ -58,13 +61,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 		if(COMMSIG_BUSY)
 			status = STATUS_IDLE
-			playsound(src, 'sound/machines/telephone/busy.ogg', 50)
+			// playsound(src, 'sound/machines/telephone/busy.ogg', 50)
 			end_call(forced = TRUE)
 			update_icon()
 
 		if(COMMSIG_NUMBER_NOT_FOUND)
 			status = STATUS_IDLE
-			playsound(src, 'sound/machines/telephone/notfound.ogg', 50)
+			// playsound(src, 'sound/machines/telephone/notfound.ogg', 50)
 			end_call(forced = TRUE)
 			update_icon()
 
@@ -79,7 +82,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(COMMSIG_TALK)
 			if(attached_to.loc && ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
-				M.playsound_local(get_turf(M), 'sound/machines/telephone/voice.ogg', 50)
+				// M.playsound_local(get_turf(M), 'sound/machines/telephone/voice.ogg', 50)
 				to_chat(M, span_notice("[icon2html(src, M)] [data]"))
 
 		if(COMMSIG_HANGUP)
@@ -88,7 +91,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 		if(COMMSIG_TIMEOUT)
 			status = STATUS_IDLE
-			playsound(src, 'sound/machines/telephone/timeout.ogg', 50)
+			// playsound(src, 'sound/machines/telephone/timeout.ogg', 50)
 			end_call(forced = TRUE, timeout = TRUE)
 			update_icon()
 
@@ -178,19 +181,14 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(name == initial(name))
 		name = "[get_area_name(src, TRUE)] [initial(name)]"
 
-/**
- * Generates a unique 8-character alphanumeric phone ID
- */
+/// Generates a unique 8-character alphanumeric phone ID
 /obj/structure/transmitter/proc/generate_unique_phone_id()
 	var/static/list/valid_chars = list()
 	if(!length(valid_chars))
-		// Numbers 0-9
 		for(var/i in 0 to 9)
 			valid_chars += num2text(i)
-		// Uppercase A-Z
 		for(var/i in 65 to 90)
 			valid_chars += ascii2text(i)
-		// Lowercase a-z
 		for(var/i in 97 to 122)
 			valid_chars += ascii2text(i)
 
@@ -202,16 +200,17 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		unique_id = ""
 		for(var/i in 1 to 8)
 			unique_id += pick(valid_chars)
-
 		attempts++
+
 		if(attempts > max_attempts)
 			CRASH("Failed to generate unique phone ID after [max_attempts] attempts")
 
 	return unique_id
 
+/// Checks if a phone ID already exists in the global pool
 /obj/structure/transmitter/proc/phone_id_exists(id_to_check)
-	for(var/obj/structure/transmitter/T in GLOB.transmitters)
-		if(T.phone_id == id_to_check && T != src)
+	for(var/obj/structure/transmitter/each_transmitter in GLOB.transmitters)
+		if(each_transmitter.phone_id == id_to_check && each_transmitter != src)
 			return TRUE
 	return FALSE
 
@@ -241,10 +240,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	if(is_advanced && (current_call))
 		. += span_notice("Now calling: [current_call.display_name]")
-
-		// . += span_notice("Last 5 calls:")
-		// for(var/i in callers_list)
-		// 	. += span_notice(i)
 
 /obj/structure/transmitter/click_ctrl_shift(mob/user)
 	. = ..()
@@ -281,8 +276,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/attack_hand(mob/user)
 	. = ..()
-	if(!attached_to || attached_to.loc != src)
-		return
 
 	if(!ishuman(user))
 		return
@@ -290,29 +283,21 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(!enabled)
 		return
 
-	if(status != STATUS_INBOUND && status != STATUS_OUTGOING)
-		if(!is_free && !is_paid)
-			to_chat(user, span_notice("[icon2html(src, user)] Please deposit $[SINGLE_CALL_PRICE]."))
-			return
+	if(!attached_to)
+		CRASH("A transmitter with ID [phone_id] has no telephone!")
 
+	if(attached_to.loc == src)
+		to_chat(user, span_notice("[icon2html(src, user)] You pick up the [attached_to]."))
+		playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
+		user.put_in_active_hand(attached_to)
+		var/obj/structure/central_telephone_exchange/cte = GLOB.central_telephone_exchange
+		if(current_call && status == STATUS_INBOUND)
+			cte.process_commsig(phone_id, COMMSIG_ANSWER)
+		else
+			cte.process_commsig(phone_id, COMMSIG_OFFHOOK)
+		update_icon()
+	else if(attached_to.loc == user)
 		ui_interact(user)
-		return
-
-	if(current_call.attached_to)
-		if(ismob(current_call.attached_to.loc))
-			var/mob/attached_to_mob = current_call.attached_to.loc
-			to_chat(attached_to_mob, span_notice("[icon2html(src, attached_to_mob)] on the other side, someone has picked up."))
-		playsound(current_call.attached_to.loc, 'sound/machines/telephone/remote_pickup.ogg', 20)
-
-		if(current_call.timeout_timer_id)
-			deltimer(current_call.timeout_timer_id)
-			current_call.timeout_timer_id = null
-
-	to_chat(user, span_notice("[icon2html(src, user)] You pick up the [attached_to]."))
-	playsound(get_turf(user), SFX_TELEPHONE_HANDSET)
-	current_call.outring_loop.stop()
-	user.put_in_active_hand(attached_to)
-	update_icon()
 
 /obj/structure/transmitter/proc/process_payment(mob/living/user, obj/item/card/id/used_card)
 	if(!used_card.registered_account)
@@ -392,7 +377,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if("call_phone")
 			process_outbound_call(user, params["phone_id"])
 			. = TRUE
-			SStgui.close_uis(src)
 		if("toggle_dnd")
 			toggle_dnd(user)
 	update_icon()
@@ -505,24 +489,18 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	to_chat(user, span_notice("[icon2html(src, user)] Dialing [display] ([calling_phone_id])..."))
 	playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 100)
 
-	if(target.current_call || target.attached_to.loc != target)
-		to_chat(user, span_purple("[icon2html(src, user)] Your call to [display] ([calling_phone_id]) has reached voicemail, the line is busy."))
-		busy_loop.start()
-		return
+	// if(target.current_call || target.attached_to.loc != target)
+	// 	to_chat(user, span_purple("[icon2html(src, user)] Your call to [display] ([calling_phone_id]) has reached voicemail, the line is busy."))
+	// 	busy_loop.start()
+	// 	return
 
 	current_call = target
-	target.process_inbound_call(target)
+	send_commsig(COMMSIG_DIAL, target.phone_id)
 
 	is_paid = FALSE
-
-	target.callers_list += "[src.phone_id] - [STATION_TIME_PASSED("hh:mm:ss", world.time)]"
-	if(target.callers_list.len > 5)
-		target.callers_list.Remove(target.callers_list[1])
-	target.update_icon()
 	timeout_timer_id = addtimer(CALLBACK(src, PROC_REF(end_call), FALSE, TRUE), timeout_duration, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_STOPPABLE)
-	outring_loop.start()
 	START_PROCESSING(SSobj, src)
-	START_PROCESSING(SSobj, target)
+	SStgui.close_uis(src)
 
 /obj/structure/transmitter/proc/toggle_dnd(mob/living/carbon/human/user)
 	switch(do_not_disturb)
@@ -608,14 +586,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/proc/recall_phone()
 	if(ismob(attached_to.loc))
-		var/mob/M = attached_to.loc
-		M.dropItemToGround(attached_to)
+		var/mob/user_mob = attached_to.loc
+		user_mob.dropItemToGround(attached_to)
 	playsound(loc, SFX_TELEPHONE_HANDSET, 20, FALSE, 7)
 	attached_to.forceMove(src)
+	send_commsig(COMMSIG_HANGUP)
 	end_call()
-	busy_loop.stop()
-	hangup_loop.stop()
-	outring_loop.stop()
+	stop_loops()
 	current_call = null
 	update_icon()
 
@@ -626,7 +603,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		send_commsig(COMMSIG_TALK, message)
 		if(attached_to.raised && ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
-			holder.playsound_local(get_turf(holder), 'sound/machines/telephone/voice.ogg', 50)
+			// holder.playsound_local(get_turf(holder), 'sound/machines/telephone/voice.ogg', 50)
 			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
 
 #undef PHONE_NET_PUBLIC

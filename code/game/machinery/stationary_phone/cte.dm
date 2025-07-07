@@ -5,17 +5,17 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 #define STATUS_ENDED                "Ended"
 #define TIMEOUT_DURATION            30 SECONDS
 
-#define COMMSIG_OFFHOOK             "CS_OF"
-#define COMMSIG_DIALTONE            "CS_DT"
-#define COMMSIG_DIAL                "CS_DL"
-#define COMMSIG_RINGING             "CS_RG"
-#define COMMSIG_RINGBACK            "CS_RB"
-#define COMMSIG_BUSY                "CS_BS"
-#define COMMSIG_NUMBER_NOT_FOUND    "CS_NF"
-#define COMMSIG_ANSWER              "CS_AN"
-#define COMMSIG_TALK                "CS_TK"
-#define COMMSIG_HANGUP              "CS_HU"
-#define COMMSIG_TIMEOUT             "CS_TO"
+#define COMMSIG_OFFHOOK             "Communication Signal - Offhook" // The telephone is removed from the hook
+#define COMMSIG_DIALTONE            "Communication Signal - Dialtone" // The phone should play the dialtone sound, indicating it's ready for dialing
+#define COMMSIG_DIAL                "Communication Signal - Dial"	// The phone sends a request to the CTE, attempting to call a `phone_id`
+#define COMMSIG_RINGING             "Communication Signal - Ringing" // The phone rings, being ready to pick up
+#define COMMSIG_RINGBACK            "Communication Signal - Ringback"	// The caller hears the ringback sounds, waiting for the other side to pick up
+#define COMMSIG_BUSY                "Communication Signal - Busy"	// The target phone is busy
+#define COMMSIG_NUMBER_NOT_FOUND    "Communication Signal - Number Not Found"	// The CTE couldn't find the device with such `phone_id`
+#define COMMSIG_ANSWER              "Communication Signal - Answer"	// The phone should initialize the call
+#define COMMSIG_TALK                "Communication Signal - Talk"	// The signal sent with the voice message itself
+#define COMMSIG_HANGUP              "Communication Signal - Hangup"	// The other side has hanged up
+#define COMMSIG_TIMEOUT             "Communication Signal - Timeout" // The line has been inactive for over 30 seconds
 
 /datum/exchange_session
 	var/obj/structure/transmitter/source
@@ -49,16 +49,26 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 		return INITIALIZE_HINT_QDEL // there should only exist one of those
 
 	GLOB.central_telephone_exchange = src
+	to_chat(world, "DEBUG: New master CTE initialized at [get_area_name(src, TRUE)]")
+
+/obj/structure/central_telephone_exchange/proc/find_device(device_id)
+	for(var/obj/structure/transmitter/each_transmitter in GLOB.transmitters)
+		if(each_transmitter.phone_id == device_id)
+			return each_transmitter
+	return null
 
 /obj/structure/central_telephone_exchange/proc/process_commsig(device_id, commsig, data)
-	var/obj/structure/transmitter/device = GLOB.transmitters[device_id]
+	to_chat(world, "DEBUG: the master CTE received [commsig] from [device_id] with data ([data])")
+	var/obj/structure/transmitter/device = find_device(device_id)
+	if(!device)
+		CRASH("A transmitter insists it's ID is [device_id], but was not found in the list for the given ID.")
 
 	switch(commsig)
 		if(COMMSIG_OFFHOOK)
 			device.process_commsig(COMMSIG_DIALTONE)
 
 		if(COMMSIG_DIAL)
-			var/obj/structure/transmitter/target = GLOB.transmitters[data]
+			var/obj/structure/transmitter/target = find_device(data)
 			if(!target)
 				device.process_commsig(COMMSIG_NUMBER_NOT_FOUND)
 				return
@@ -78,11 +88,11 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 				target.process_commsig(COMMSIG_BUSY)
 
 		if(COMMSIG_ANSWER)
-			var/obj/structure/transmitter/caller = GLOB.transmitters[data]
-			var/datum/exchange_session/session = find_session_by_source(caller)
+			var/obj/structure/transmitter/new_caller = GLOB.transmitters[data]
+			var/datum/exchange_session/session = find_session_by_source(new_caller)
 			if(session && session.target == device)
-				device.process_commsig(COMMSIG_TALK, caller.phone_id)
-				caller.process_commsig(COMMSIG_TALK, device.phone_id)
+				device.process_commsig(COMMSIG_TALK, new_caller.phone_id)
+				new_caller.process_commsig(COMMSIG_TALK, device.phone_id)
 
 		if(COMMSIG_HANGUP)
 			var/datum/exchange_session/session = find_session_by_source(device)
@@ -93,7 +103,7 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 				device.process_commsig(COMMSIG_HANGUP)
 				if(other)
 					other.process_commsig(COMMSIG_HANGUP)
-				active_sessions -= session // Удаляем сессию
+				active_sessions -= session
 
 		if(COMMSIG_NUMBER_NOT_FOUND)
 			device.process_commsig(COMMSIG_NUMBER_NOT_FOUND)

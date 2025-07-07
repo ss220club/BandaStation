@@ -143,7 +143,6 @@
 		icon_state = "rpb_phone"
 	else
 		raised = TRUE
-		icon_state = "rpb_phone_ear"
 
 /obj/item/telephone/proc/do_zlevel_check()
 	if(!attached_to || !loc.z || !attached_to.z)
