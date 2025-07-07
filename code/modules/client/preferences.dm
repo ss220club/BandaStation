@@ -573,8 +573,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(isnull(byond_member))
 		to_chat(parent, span_warning("There's been a connection failure while trying to check the status of your BYOND membership. Reconnecting may fix the issue, or BYOND could be experiencing downtime."))
 
-	is_byond_member = !!byond_member // BANDASTATION ADD
-
 	unlock_content = !!byond_member
 	if(unlock_content)
 		max_save_slots = 8

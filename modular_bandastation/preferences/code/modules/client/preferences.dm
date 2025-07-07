@@ -17,6 +17,8 @@
 	if(donator_level > DONATOR_TIER_2)
 		unlock_content = TRUE
 
+	is_byond_member = !!parent.IsByondMember() // BANDASTATION ADD
+
 /datum/preferences/proc/get_loadout_max_points()
 	return BASE_LOADOUT_POINTS + parent.get_donator_level() * LOADOUT_POINTS_PER_DONATION_LEVEL
 
