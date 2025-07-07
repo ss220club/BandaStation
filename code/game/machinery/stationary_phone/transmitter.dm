@@ -3,37 +3,109 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define COMSIG_TRANSMITTER_UPDATE_ICON "transmitter_update_icon"
 #define TRANSMITTER_UNAVAILABLE(T) (!T.attached_to || !T.enabled)
 
-#define PHONE_NET_PUBLIC             "Public"
-#define PHONE_NET_COMMAND            "Command"
-#define PHONE_NET_CENTCOMM           "CentComm"
-#define PHONE_NET_SYNDIE             "Syndicate"
+#define PHONE_NET_PUBLIC            "Public"
+#define PHONE_NET_COMMAND           "Command"
+#define PHONE_NET_CENTCOMM          "CentComm"
+#define PHONE_NET_SYNDIE            "Syndicate"
 
-#define PHONE_DND_FORCED 2
-#define PHONE_DND_ON 1
-#define PHONE_DND_OFF 0
-#define PHONE_DND_FORBIDDEN -1
+#define PHONE_DND_FORCED            "Forced"
+#define PHONE_DND_ON                "On"
+#define PHONE_DND_OFF               "Off"
+#define PHONE_DND_FORBIDDEN         "Forbidden"
 
-#define SINGLE_CALL_PRICE 5
-#define RING_TIMEOUT 4 SECONDS
+#define SINGLE_CALL_PRICE           5
+#define MAX_RANGE                   3
+#define TIMEOUT_DURATION            30 SECONDS
+#define RING_TIMEOUT                4 SECONDS
 
 #define STATUS_INBOUND              "Inbound call"
 #define STATUS_ONGOING              "Ongoing call"
 #define STATUS_OUTGOING             "Outgoing call"
 #define STATUS_IDLE                 "Idle"
 
-#define COMMSIG_OFFHOOK             "Communication Signal - Offhook" // The telephone is removed from the hook
-#define COMMSIG_DIALTONE            "Communication Signal - Dialtone" // The phone should play the dialtone sound, indicating it's ready for dialing
-#define COMMSIG_DIAL                "Communication Signal - Dial"	// The phone sends a request to the CTE, attempting to call a `phone_id`
-#define COMMSIG_RINGING             "Communication Signal - Ringing" // The phone rings, being ready to pick up
-#define COMMSIG_RINGBACK            "Communication Signal - Ringback"	// The caller hears the ringback sounds, waiting for the other side to pick up
-#define COMMSIG_BUSY                "Communication Signal - Busy"	// The target phone is busy
-#define COMMSIG_NUMBER_NOT_FOUND    "Communication Signal - Number Not Found"	// The CTE couldn't find the device with such `phone_id`
-#define COMMSIG_ANSWER              "Communication Signal - Answer"	// The phone should initialize the call
-#define COMMSIG_TALK                "Communication Signal - Talk"	// The signal sent with the voice message itself
-#define COMMSIG_HANGUP              "Communication Signal - Hangup"	// The other side has hanged up
-#define COMMSIG_TIMEOUT             "Communication Signal - Timeout" // The line has been inactive for over 30 seconds
+#define COMMSIG_OFFHOOK             "Communication Signal - Offhook"           // The telephone is removed from the hook
+#define COMMSIG_DIALTONE            "Communication Signal - Dialtone"          // The phone should play the dialtone sound, indicating it's ready for dialing
+#define COMMSIG_DIAL                "Communication Signal - Dial"	             // The phone sends a request to the CTE, attempting to call a `phone_id`
+#define COMMSIG_RINGING             "Communication Signal - Ringing"           // The phone rings, being ready to pick up
+#define COMMSIG_RINGBACK            "Communication Signal - Ringback"	         // The caller hears the ringback sounds, waiting for the other side to pick up
+#define COMMSIG_BUSY                "Communication Signal - Busy"	             // The target phone is busy
+#define COMMSIG_NUMBER_NOT_FOUND    "Communication Signal - Number Not Found"	 // The CTE couldn't find the device with such `phone_id`
+#define COMMSIG_ANSWER              "Communication Signal - Answer"	           // The phone should initialize the call
+#define COMMSIG_TALK                "Communication Signal - Talk"	             // The signal sent with the voice message itself
+#define COMMSIG_HANGUP              "Communication Signal - Hangup"	           // The other side has hanged up
+#define COMMSIG_TIMEOUT             "Communication Signal - Timeout"	         // The line has been inactive for over 30 seconds
 
-#define MAX_RANGE 3
+// holy shit now that's a lot of defines
+
+/obj/structure/transmitter
+	name = "rotary telephone"
+	icon = 'icons/obj/machines/phone.dmi'
+	icon_state = "rotary_phone"
+	desc = "The most generic phone you have ever seen. You struggle to imagine something even more devoid of personality and miserably fail."
+	anchored = TRUE
+	layer = OBJ_LAYER + 0.01
+	pass_flags = PASSTABLE
+
+	/// The tape inserted
+	var/obj/item/tape/inserted_tape
+	/// The unique 8-character alphanumeric ID of this transmitter
+	var/phone_id = "0x000000"
+	/// The name of this transmitter as visible on the other devices
+	var/display_name
+	var/phone_icon
+	var/obj/item/telephone/attached_to
+	/// Currently active call
+	var/obj/structure/transmitter/current_call
+	/// Call status
+	var/status = STATUS_IDLE
+	var/phone_type = /obj/item/telephone
+	var/enabled = TRUE
+	/// Whether or not the phone will emit sound when receiving a call.
+	var/do_not_disturb = PHONE_DND_OFF
+	var/default_icon_state
+	var/timeout_timer_id
+	/// What network does this phone belong to?
+	var/phone_category = PHONE_NET_PUBLIC
+	/// Which networks can call this phone?
+	var/list/networks_receive = list(PHONE_NET_PUBLIC)
+	/// Which networks this phone can call?
+	var/list/networks_transmit = list(PHONE_NET_PUBLIC)
+	var/datum/looping_sound/telephone/busy/busy_loop
+	var/datum/looping_sound/telephone/hangup/hangup_loop
+	var/datum/looping_sound/telephone/ring/outring_loop
+	var/datum/looping_sound/telephone/dialtone/dialtone_loop
+	/// If this phone is advanced enough to display the caller and the call history
+	var/is_advanced = TRUE
+	/// Last 5 call origins
+	var/list/callers_list = list()
+	/// If this phone's `display_name` can be changed
+	var/can_rename = FALSE
+	// If calling this phone is free of charge
+	var/is_free = TRUE
+	// If the next call has been paid for
+	var/is_paid = FALSE
+
+/obj/structure/transmitter/Initialize(mapload, new_phone_id, new_display_name)
+	. = ..()
+	default_icon_state = icon_state
+	attached_to = new phone_type(src)
+	RegisterSignal(attached_to, COMSIG_QDELETING, PROC_REF(override_delete))
+	update_icon()
+	outring_loop = new(attached_to)
+	busy_loop = new(attached_to)
+	hangup_loop = new(attached_to)
+	dialtone_loop = new(attached_to)
+
+	if(!get_turf(src))
+		return
+
+	GLOB.transmitters += src
+
+	phone_id = new_phone_id ? new_phone_id : generate_unique_phone_id()
+	display_name = new_display_name || "[get_area_name(src, TRUE)]"
+
+	if(name == initial(name))
+		name = "[get_area_name(src, TRUE)] [initial(name)]"
 
 /obj/structure/transmitter/proc/find_device(device_id)
 	for(var/obj/structure/transmitter/each_transmitter in GLOB.transmitters)
@@ -113,77 +185,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	outring_loop.stop()
 	dialtone_loop.stop()
 
-/obj/structure/transmitter
-	name = "rotary telephone"
-	icon = 'icons/obj/machines/phone.dmi'
-	icon_state = "rotary_phone"
-	desc = "The most generic phone you have ever seen. You struggle to imagine something even more devoid of personality and miserably fail."
-	anchored = TRUE
-	layer = OBJ_LAYER + 0.01
-	pass_flags = PASSTABLE
 
-	/// The tape inserted
-	var/obj/item/tape/inserted_tape
-	/// The unique 8-character alphanumeric ID of this transmitter
-	var/phone_id = "0x000000"
-	/// The name of this transmitter as visible on the other devices
-	var/display_name
-	var/phone_icon
-	var/obj/item/telephone/attached_to
-	/// Currently active call
-	var/obj/structure/transmitter/current_call
-	/// Call status
-	var/status = STATUS_IDLE
-	var/phone_type = /obj/item/telephone
-	var/enabled = TRUE
-	/// Whether or not the phone will emit sound when receiving a call.
-	var/do_not_disturb = PHONE_DND_OFF
-	var/default_icon_state
-	var/timeout_timer_id
-	var/timeout_duration = 30 SECONDS
-	/// What network does this phone belong to?
-	var/phone_category = PHONE_NET_PUBLIC
-	/// Which networks can call this phone?
-	var/list/networks_receive = list(PHONE_NET_PUBLIC)
-	/// Which networks this phone can call?
-	var/list/networks_transmit = list(PHONE_NET_PUBLIC)
-	var/datum/looping_sound/telephone/busy/busy_loop
-	var/datum/looping_sound/telephone/hangup/hangup_loop
-	var/datum/looping_sound/telephone/ring/outring_loop
-	var/datum/looping_sound/telephone/dialtone/dialtone_loop
-	/// If this phone is advanced enough to display the caller and the call history
-	var/is_advanced = TRUE
-	/// Last 5 call origins
-	var/list/callers_list = list()
-	/// If this phone's `display_name` can be changed
-	var/can_rename = FALSE
-	// If calling this phone is free of charge
-	var/is_free = TRUE
-	// If the next call has been paid for
-	var/is_paid = FALSE
-
-/obj/structure/transmitter/Initialize(mapload, new_phone_id, new_display_name)
-	. = ..()
-	default_icon_state = icon_state
-	attached_to = new phone_type(src)
-	RegisterSignal(attached_to, COMSIG_QDELETING, PROC_REF(override_delete))
-	update_icon()
-	outring_loop = new(attached_to)
-	busy_loop = new(attached_to)
-	hangup_loop = new(attached_to)
-	dialtone_loop = new(attached_to)
-
-	if(!get_turf(src))
-		return
-
-	GLOB.transmitters += src
-
-	// Generate or use provided phone ID
-	phone_id = new_phone_id ? new_phone_id : generate_unique_phone_id()
-	display_name = new_display_name || "[get_area_name(src, TRUE)]"
-
-	if(name == initial(name))
-		name = "[get_area_name(src, TRUE)] [initial(name)]"
 
 /// Generates a unique 8-character alphanumeric phone ID
 /obj/structure/transmitter/proc/generate_unique_phone_id()
@@ -511,7 +513,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	send_commsig(COMMSIG_DIAL, target.phone_id)
 
 	is_paid = FALSE
-	timeout_timer_id = addtimer(CALLBACK(src, PROC_REF(end_call), FALSE, TRUE), timeout_duration, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_STOPPABLE)
+	timeout_timer_id = addtimer(CALLBACK(src, PROC_REF(end_call), FALSE, TRUE), TIMEOUT_DURATION, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_STOPPABLE)
 	START_PROCESSING(SSobj, src)
 	SStgui.close_uis(src)
 
@@ -619,8 +621,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		send_commsig(COMMSIG_TALK, data)
 		if(attached_to.raised && ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
-			// holder.playsound_local(get_turf(holder), 'sound/machines/telephone/voice.ogg', 50)
+			holder.playsound_local(get_turf(holder), SFX_TELEPHONE_SPEAKING, 20)
 			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
+
+#undef MAX_RANGE
+
+#undef COMSIG_TRANSMITTER_UPDATE_ICON
+#undef TRANSMITTER_UNAVAILABLE
 
 #undef PHONE_NET_PUBLIC
 #undef PHONE_NET_COMMAND
@@ -632,5 +639,22 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #undef PHONE_DND_OFF
 #undef PHONE_DND_FORBIDDEN
 
-#undef TRANSMITTER_UNAVAILABLE
-#undef MAX_RANGE
+#undef SINGLE_CALL_PRICE
+#undef RING_TIMEOUT
+
+#undef STATUS_INBOUND
+#undef STATUS_ONGOING
+#undef STATUS_OUTGOING
+#undef STATUS_IDLE
+
+#undef COMMSIG_OFFHOOK
+#undef COMMSIG_DIALTONE
+#undef COMMSIG_DIAL
+#undef COMMSIG_RINGING
+#undef COMMSIG_RINGBACK
+#undef COMMSIG_BUSY
+#undef COMMSIG_NUMBER_NOT_FOUND
+#undef COMMSIG_ANSWER
+#undef COMMSIG_TALK
+#undef COMMSIG_HANGUP
+#undef COMMSIG_TIMEOUT

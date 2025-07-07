@@ -91,8 +91,7 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 			var/obj/structure/transmitter/new_caller = find_device(data)
 			var/datum/exchange_session/session = find_session_by_source(new_caller)
 			if(session && session.target == device)
-				device.process_commsig(COMMSIG_TALK, new_caller.phone_id)
-				new_caller.process_commsig(COMMSIG_TALK, device.phone_id)
+				device.process_commsig(COMMSIG_ANSWER, new_caller.phone_id)
 
 		if(COMMSIG_HANGUP)
 			var/datum/exchange_session/session = find_session_by_source(device)
@@ -149,3 +148,9 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 #undef COMMSIG_ANSWER
 #undef COMMSIG_TALK
 #undef COMMSIG_HANGUP
+#undef COMMSIG_TIMEOUT
+
+#undef STATUS_IDLE
+#undef STATUS_DIALING
+#undef STATUS_RINGING
+#undef STATUS_ENDED
