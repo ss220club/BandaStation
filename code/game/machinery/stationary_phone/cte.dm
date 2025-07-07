@@ -83,12 +83,12 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 			init_session(device, target)
 
 		if(COMMSIG_BUSY)
-			var/obj/structure/transmitter/target = GLOB.transmitters[data]
+			var/obj/structure/transmitter/target = find_device(data)
 			if(target)
 				target.process_commsig(COMMSIG_BUSY)
 
 		if(COMMSIG_ANSWER)
-			var/obj/structure/transmitter/new_caller = GLOB.transmitters[data]
+			var/obj/structure/transmitter/new_caller = find_device(data)
 			var/datum/exchange_session/session = find_session_by_source(new_caller)
 			if(session && session.target == device)
 				device.process_commsig(COMMSIG_TALK, new_caller.phone_id)
@@ -115,10 +115,12 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 			device.process_commsig(COMMSIG_RINGING, data)
 
 		if(COMMSIG_TALK)
-			var/obj/structure/transmitter/target = GLOB.transmitters[data]
+			var/target_id = data["target_id"]
+			var/message = data["message"]
+			var/obj/structure/transmitter/target = find_device(target_id)
 			if(target)
-				device.process_commsig(COMMSIG_TALK, data)
-				target.process_commsig(COMMSIG_TALK, device_id)
+				// device.process_commsig(COMMSIG_TALK, data)
+				target.process_commsig(COMMSIG_TALK, message)
 
 /obj/structure/central_telephone_exchange/proc/init_session(obj/structure/transmitter/source, obj/structure/transmitter/target)
 	var/datum/exchange_session/session = new(source, target)

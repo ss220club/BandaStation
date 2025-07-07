@@ -35,6 +35,12 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 #define MAX_RANGE 3
 
+/obj/structure/transmitter/proc/find_device(device_id)
+	for(var/obj/structure/transmitter/each_transmitter in GLOB.transmitters)
+		if(each_transmitter.phone_id == device_id)
+			return each_transmitter
+	return null
+
 /// Processes incoming communication signals. Arguments: `commsig`: string, `data`: object
 /obj/structure/transmitter/proc/process_commsig(commsig, data)
 	to_chat(world, "DEBUG: transmitter [display_name] with ID [phone_id] received [commsig] with data ([data])")
@@ -48,7 +54,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(COMMSIG_RINGING)
 			status = STATUS_INBOUND
 			START_PROCESSING(SSobj, src)
-			var/obj/structure/transmitter/new_caller = GLOB.transmitters[data]
+			var/obj/structure/transmitter/new_caller = find_device(data)
 			if(new_caller)
 				current_call = new_caller
 				try_ring()
@@ -73,17 +79,16 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 		if(COMMSIG_ANSWER)
 			status = STATUS_ONGOING
-			outring_loop.stop()
 			if(ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
-				to_chat(M, span_notice("[icon2html(src, M)] Call answered."))
+				to_chat(M, span_notice("[icon2html(src, M)] Someone on the other side picks up the phone."))
 			update_icon()
 
 		if(COMMSIG_TALK)
 			if(attached_to.loc && ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
 				// M.playsound_local(get_turf(M), 'sound/machines/telephone/voice.ogg', 50)
-				to_chat(M, span_notice("[icon2html(src, M)] [data]"))
+				to_chat(M, span_notice("[icon2html(src, M)] [src] says, \"[data]\""))
 
 		if(COMMSIG_HANGUP)
 			end_call(forced = TRUE)
@@ -107,7 +112,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	hangup_loop.stop()
 	outring_loop.stop()
 	dialtone_loop.stop()
-
 
 /obj/structure/transmitter
 	name = "rotary telephone"
@@ -328,6 +332,15 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 /obj/structure/transmitter/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(tool == attached_to)
 		recall_phone()
+		if(user.combat_mode)
+			to_chat(attached_to, span_warning("[icon2html(src, attached_to)] You slammed the [attached_to] on the cradle!"))
+			visible_message("[user] slams the [attached_to] on the [src]!")
+			playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 60)
+			playsound(loc, 'sound/machines/telephone/bell.ogg', 75, FALSE)
+		else
+			to_chat(attached_to, span_notice("[icon2html(src, attached_to)] You set the [attached_to] in the cradle."))
+			playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
+
 		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/tape))
@@ -553,13 +566,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	outring_loop.stop()
 
 /obj/structure/transmitter/proc/try_ring()
-	if(!current_call || attached_to.loc != src || !status != STATUS_INBOUND)
+	if(!current_call || attached_to.loc != src || status != STATUS_INBOUND)
 		return
 
 	playsound(loc, 'sound/machines/telephone/telephone_ring.ogg', 75, FALSE)
 	visible_message(span_warning("[src] rings vigorously!"))
 	if(is_advanced)
-		say("Incoming call: [current_call]")
+		say("Incoming call: [current_call.display_name]!")
 	else
 		balloon_alert_to_viewers("ring, ring!")
 
@@ -596,11 +609,14 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	current_call = null
 	update_icon()
 
-
 /obj/structure/transmitter/proc/handle_speak(mob/speaking, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
-	if(current_call && status == STATUS_ONGOING)
-		send_commsig(COMMSIG_TALK, message)
+	if(current_call && status == STATUS_OUTGOING)
+		var/list/data = list(
+			"target_id" = current_call.phone_id,
+			"message" = message
+		)
+		send_commsig(COMMSIG_TALK, data)
 		if(attached_to.raised && ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
 			// holder.playsound_local(get_turf(holder), 'sound/machines/telephone/voice.ogg', 50)
