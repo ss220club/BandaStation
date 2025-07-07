@@ -7,6 +7,7 @@
 /datum/preferences
 	max_save_slots = BASE_SAVE_SLOTS
 	var/loadout_points_spent = 0
+	var/is_byond_member = FALSE
 
 /datum/preferences/New(client/parent)
 	. = ..()

@@ -18,7 +18,7 @@ GLOBAL_LIST(badge_icons_cache)
 	if(length(badge_parts))
 		parts += badge_parts
 
-	if(donor_tier && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
+	if(donor_tier && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.is_byond_member && (prefs.toggles & MEMBER_PUBLIC))
 		var/donor_color = prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour
 		var/donor_shine = donor_tier >= 3 && prefs.read_preference(/datum/preference/toggle/donor_chat_shine) ? "class='shine'" : ""
 		parts += "<span [donor_shine] style='[donor_shine ? "--shine-color: [donor_color];" : "color: [donor_color];"]'>[key]</span>"
@@ -28,7 +28,7 @@ GLOBAL_LIST(badge_icons_cache)
 	return jointext(parts, "<div style='display: inline-block; width: 3px;'></div>")
 
 /client/proc/get_donator_badge(donor_tier)
-	if(prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC))
+	if(prefs.is_byond_member && (prefs.toggles & MEMBER_PUBLIC))
 		return "ByondMember"
 
 	if(donor_tier && prefs.read_preference(/datum/preference/toggle/donor_public))
