@@ -147,8 +147,8 @@
 	name = "federate long jacket"
 	desc = "Свободная накидка из легкой ткани, выполненная в официальных цветах Сола."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/jacket.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
 	icon_state = "tsf_jacket"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
 
 

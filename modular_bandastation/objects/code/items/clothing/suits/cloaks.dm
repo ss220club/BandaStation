@@ -152,7 +152,6 @@
 		/obj/item/tank/internals/emergency_oxygen/double,
 		/obj/item/gun,
 	)
-	var/datum/component/toggle_attached_clothing/hood_component
 	var/accelerate = 0
 
 /obj/item/clothing/suit/hooded/stealth_cloak/on_hood_down(obj/item/clothing/head/hooded/hood)
@@ -187,7 +186,6 @@
 	greyscale_colors = COLOR_OLIVE
 	greyscale_config = /datum/greyscale_config/stealth_cloak_hood
 	greyscale_config_worn = /datum/greyscale_config/stealth_cloak_hood/worn
-	flags_1 = null
 
 /obj/item/clothing/head/hooded/stealth_cloak/shinobi
 	greyscale_colors = COLOR_OLD_GLORY_BLUE
@@ -197,7 +195,6 @@
 
 /obj/item/clothing/suit/hooded/stealth_cloak/Initialize(mapload)
 	. = ..()
-	hood_component = GetComponent(/datum/component/toggle_attached_clothing)
 
 /datum/greyscale_config/stealth_cloak
 	name = "Stealth Cloak"
@@ -236,9 +233,10 @@
 
 /datum/action/item_action/stealth_mode/cloack/stealth_on()
 	var/obj/item/clothing/suit/hooded/stealth_cloak/cloak = target
-	if(!cloak.hood_component)
+	var/datum/component/toggle_attached_clothing/hood_component = cloak.GetComponent(/datum/component/toggle_attached_clothing)
+	if(!hood_component)
 		return
-	if(!cloak.hood_component.currently_deployed)
+	if(!hood_component.currently_deployed)
 		owner.balloon_alert(owner, "нужно надеть капюшон")
 		return
 	owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/stealth, multiplicative_slowdown = -cloak.accelerate)
