@@ -22,12 +22,15 @@ ADMIN_VERB(mentor_message, R_MENTOR | R_ADMIN, "Mentor chat", "Позволяе�
 		return
 	// Сюда добавь проверку на то, ментор ли чел, и если нет то ретурн
 
-	msg = "[span_mentorsay("[span_prefix("MENTOR:")] <EM>[key_name_admin(user)]</EM> [ADMIN_FLW(user.mob)]: <span class='message linkify'>[msg]")]</span>"
-	to_chat(GLOB.admins + GLOB.mentors,
-		type = MESSAGE_TYPE_MENTORCHAT,
-		html = msg,
-		confidential = TRUE)
-	user.mob.log_talk(msg,LOG_OOC, tag="MSAY")
+	if(!check_rights(R_ADMIN | R_MENTOR))
+		return
+
+		msg = "[span_mentorsay("[span_prefix("MENTOR:")] <EM>[key_name_admin(user)]</EM> [ADMIN_FLW(user.mob)]: <span class='message linkify'>[msg]")]</span>"
+		to_chat(GLOB.admins + GLOB.mentors,
+			type = MESSAGE_TYPE_MENTORCHAT,
+			html = msg,
+			confidential = TRUE)
+		user.mob.log_talk(msg,LOG_OOC, tag="MSAY")
 
 /client/proc/mentor_message(msg, wall_pierce)
 
