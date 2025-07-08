@@ -131,7 +131,19 @@
 
 
 	fail_prob = get_failure_probability(user, target, target_zone, tool, modded_time) //BANDASTATION EDIT - было: if modded_time > time * modifier, then fail_prob = modded_time - time*modifier. starts at 0, caps at 99 // BANDASTATION EDIT
-	modded_time = min(modded_time, time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)//also if that, then cap modded_time at time*modifier
+
+	var/list/user_modifiers = list(0, 1)
+	SEND_SIGNAL(user, COMSIG_LIVING_INITIATE_SURGERY_STEP, user, target, target_zone, tool, surgery, src, user_modifiers)
+	fail_prob += user_modifiers[FAIL_PROB_INDEX]
+	modded_time *= user_modifiers[SPEED_MOD_INDEX]
+
+	var/list/target_modifiers = list(0, 1)
+	SEND_SIGNAL(target, COMSIG_LIVING_SURGERY_STEP_INITIATED_ON, user, target, target_zone, tool, surgery, src, target_modifiers)
+	fail_prob += target_modifiers[FAIL_PROB_INDEX]
+	modded_time *= target_modifiers[SPEED_MOD_INDEX]
+
+	fail_prob = min(max(0, fail_prob),99) // clamp fail_prob between 0 and 99
+	modded_time = min(modded_time, time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)// cap modded_time at time*modifier
 
 	if(iscyborg(user))//any immunities to surgery slowdown should go in this check.
 		modded_time = time * tool.toolspeed
