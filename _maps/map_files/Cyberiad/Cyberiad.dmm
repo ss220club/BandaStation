@@ -15138,6 +15138,15 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
+"dvS" = (
+/obj/machinery/door/airlock/external/glass,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard/aft)
 "dwb" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/trimline/tram/warning{
@@ -51023,6 +51032,14 @@
 /obj/item/melee/flyswatter,
 /turf/open/floor/stone,
 /area/station/service/hydroponics/ghetto)
+"lXV" = (
+/obj/machinery/door/airlock/external/glass,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard/aft)
 "lYb" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
@@ -152483,7 +152500,7 @@ iYR
 iYR
 tNt
 iYR
-doz
+iYR
 doz
 doz
 doz
@@ -152739,10 +152756,10 @@ kpd
 weo
 fuc
 tNt
-iYR
-doz
-doz
-doz
+lFh
+hzG
+hzG
+hzG
 doz
 doz
 doz
@@ -152996,10 +153013,10 @@ fKk
 ifu
 ifu
 dlw
-iYR
-doz
-doz
-doz
+pvs
+lXV
+chS
+dvS
 doz
 doz
 doz
@@ -153253,10 +153270,10 @@ tNt
 tNt
 hOA
 tNt
-iYR
-doz
-doz
-doz
+vSA
+hzG
+hzG
+hzG
 doz
 doz
 doz
@@ -153511,7 +153528,7 @@ iYR
 iYR
 iYR
 iYR
-doz
+iYR
 doz
 doz
 doz
