@@ -87,11 +87,10 @@ SUBSYSTEM_DEF(central)
 	discord_links[ckey] = discord_id
 
 	GLOB.persistent_clients_by_ckey[ckey].discord_id = discord_id
-	SStitle.show_title_screen_to(client)
-
 	if(isnull(client))
 		return
 
+	SStitle.show_title_screen_to(client)
 	if(!client.interviewee)
 		return
 
