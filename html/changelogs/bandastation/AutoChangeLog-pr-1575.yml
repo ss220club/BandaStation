@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - bugfix: "Призрак снова видит сообщения с модификатором крика (!!) в рацию"
