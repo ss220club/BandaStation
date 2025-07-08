@@ -36,7 +36,6 @@ SUBSYSTEM_DEF(statpanels)
 			global_data += "Next Map: [cached.map_name]"
 
 		global_data += list(
-			"Storyteller: [!SSgamemode.secret_storyteller && SSgamemode.current_storyteller ? SSgamemode.current_storyteller.name : "Secret"]", // BANDASTATION ADDITION - STORYTELLER
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
 			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [ROUND_TIME()]", // BANDASTATION ADD

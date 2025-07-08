@@ -13,7 +13,7 @@
 	max_wizard_trigger_potency = 3
 
 //Check if there's a tram we can cause to malfunction.
-/datum/round_event_control/tram_malfunction/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/tram_malfunction/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
 	if (!.)
 		return FALSE
@@ -33,7 +33,6 @@
 
 /datum/round_event/tram_malfunction/setup()
 	end_when = rand(TRAM_MALFUNCTION_TIME_LOWER, TRAM_MALFUNCTION_TIME_UPPER)
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/tram_malfunction/start()
 	for(var/datum/transport_controller/linear/tram/malfunctioning_controller as anything in SStransport.transports_by_type[TRANSPORT_TYPE_TRAM])

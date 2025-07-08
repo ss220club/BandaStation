@@ -60,3 +60,31 @@
     }
   }
 }
+
+@property --spoiler-mask {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: true;
+}
+
+.Who_Spoiler {
+  cursor: var(--cursor-pointer);
+  user-select: none;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-secondary);
+    mask-image: radial-gradient(
+      transparent calc(var(--spoiler-mask) - 25%),
+      black var(--spoiler-mask)
+    );
+    transition: --spoiler-mask var(--transition-time-slow);
+  }
+
+  &--visible {
+    --spoiler-mask: 125%;
+  }
+}

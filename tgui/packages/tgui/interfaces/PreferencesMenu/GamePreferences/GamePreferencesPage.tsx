@@ -1,4 +1,5 @@
-import { binaryInsertWith, sortBy } from 'common/collections';
+import { binaryInsertWith } from 'common/collections';
+import { sortBy } from 'es-toolkit';
 import { ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Stack } from 'tgui-core/components';
@@ -22,7 +23,7 @@ function binaryInsertPreference(
 }
 
 function sortByName(array: [string, PreferenceChild[]][]) {
-  return sortBy(array, ([name]) => name);
+  return sortBy(array, [([name]) => name]);
 }
 
 export function GamePreferencesPage(props) {

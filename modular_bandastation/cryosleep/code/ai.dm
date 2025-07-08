@@ -15,5 +15,5 @@
 	if(mind?.assigned_role.title == JOB_AI)
 		SSjob.free_job_position(JOB_AI)
 
-	mind.special_role = null
+	mind.special_roles = null
 	qdel(src)

@@ -1,8 +1,0 @@
-#include "_game.dm"
-
-#include "code\_defines.dm"
-#include "code\_game_options.dm"
-#include "code\_procs.dm"
-#include "code\log_categories.dm"
-
-#include "code\votes\_vote_datum.dm"

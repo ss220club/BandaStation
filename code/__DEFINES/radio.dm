@@ -4,47 +4,58 @@
 
 #define RADIO_CHANNEL_COMMON "Общий"
 #define RADIO_KEY_COMMON ";"
+#define RADIO_COLOR_COMMON "#1ecc43"
 
 #define RADIO_CHANNEL_SECURITY "Безопасность"
 #define RADIO_KEY_SECURITY "s"
 #define RADIO_TOKEN_SECURITY ":s"
+#define RADIO_COLOR_SECURITY "#dd3535"
 
 #define RADIO_CHANNEL_ENGINEERING "Инженерия"
 #define RADIO_KEY_ENGINEERING "e"
 #define RADIO_TOKEN_ENGINEERING ":e"
+#define RADIO_COLOR_ENGINEERING "#f37746"
 
 #define RADIO_CHANNEL_COMMAND "Командование"
 #define RADIO_KEY_COMMAND "c"
 #define RADIO_TOKEN_COMMAND ":c"
+#define RADIO_COLOR_COMMAND "#fcdf03"
 
 #define RADIO_CHANNEL_SCIENCE "Исследование"
 #define RADIO_KEY_SCIENCE "n"
 #define RADIO_TOKEN_SCIENCE ":n"
+#define RADIO_COLOR_SCIENCE "#c68cfa"
 
 #define RADIO_CHANNEL_MEDICAL "Медицина"
 #define RADIO_KEY_MEDICAL "m"
 #define RADIO_TOKEN_MEDICAL ":m"
+#define RADIO_COLOR_MEDICAL "#57b8f0"
 
 #define RADIO_CHANNEL_SUPPLY "Снабжение"
 #define RADIO_KEY_SUPPLY "u"
 #define RADIO_TOKEN_SUPPLY ":u"
+#define RADIO_COLOR_SUPPLY "#b88646"
 
 #define RADIO_CHANNEL_SERVICE "Обслуживание"
 #define RADIO_KEY_SERVICE "v"
 #define RADIO_TOKEN_SERVICE ":v"
+#define RADIO_COLOR_SERVICE "#6ca729"
 
 #define RADIO_CHANNEL_AI_PRIVATE "ИИ (личный)"
 #define RADIO_KEY_AI_PRIVATE "o"
 #define RADIO_TOKEN_AI_PRIVATE ":o"
+#define RADIO_COLOR_AI_PRIVATE "#d65d95"
 
 #define RADIO_CHANNEL_ENTERTAINMENT "Развлечение"
 #define RADIO_KEY_ENTERTAINMENT "p"
 #define RADIO_TOKEN_ENTERTAINMENT ":p"
+#define RADIO_COLOR_ENTERTAIMENT "#79c5a8"
 
 // BANDASTATION ADDITION START
 #define RADIO_CHANNEL_JUSTICE "Justice"
 #define RADIO_KEY_JUSTICE "l"
 #define RADIO_TOKEN_JUSTICE ":l"
+#define RADIO_COLOR_JUSTICE "#df3e71"
 // BANDASTATION ADDITION END
 
 #define STATUS_DISPLAY_RELAY "Captain-Cast"
@@ -52,19 +63,26 @@
 #define RADIO_CHANNEL_SYNDICATE "Синдикат"
 #define RADIO_KEY_SYNDICATE "t"
 #define RADIO_TOKEN_SYNDICATE ":t"
+#define RADIO_COLOR_SYNDICATE "#8f4a4b"
 
 #define RADIO_CHANNEL_CENTCOM "ЦК"
 #define RADIO_KEY_CENTCOM "y"
 #define RADIO_TOKEN_CENTCOM ":y"
+#define RADIO_COLOR_CENTCOM "#2681a5"
 
 #define RADIO_CHANNEL_UPLINK "Аплинк"
 #define RADIO_KEY_UPLINK "z"
 #define RADIO_TOKEN_UPLINK ":z"
+#define RADIO_COLOR_UPLINK "#8f4a4b"
 
 #define RADIO_CHANNEL_CTF_RED "Красные"
+#define RADIO_COLOR_CTF_RED "#ff0000"
 #define RADIO_CHANNEL_CTF_BLUE "Синие"
+#define RADIO_COLOR_CTF_BLUE "#0000ff"
 #define RADIO_CHANNEL_CTF_GREEN "Зеленые"
+#define RADIO_COLOR_GREEN "#00ff00"
 #define RADIO_CHANNEL_CTF_YELLOW "Желтые"
+#define RADIO_COLOR_YELLOW "#d1ba22"
 
 
 #define MIN_FREE_FREQ 1201 // -------------------------------------------------

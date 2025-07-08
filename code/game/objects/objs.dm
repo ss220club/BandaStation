@@ -22,7 +22,7 @@
 	/// How good a given object is at causing wounds on carbons. Higher values equal better shots at creating serious wounds.
 	var/wound_bonus = 0
 	/// If this attacks a human with no wound armor on the affected body part, add this to the wound mod. Some attacks may be significantly worse at wounding if there's even a slight layer of armor to absorb some of it vs bare flesh
-	var/bare_wound_bonus = 0
+	var/exposed_wound_bonus = 0
 
 	/// A multiplier to an object's force when used against a structure, vehicle, machine, or robot.
 	/// Use [/obj/proc/get_demolition_modifier] to get the value.
@@ -100,8 +100,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 				message_verb_continuous = "pulverises"
 
 		if(demo_mod < 1)
-			message_verb_simple = "безуспешно " + ru_attack_verb(message_verb_simple)
-			message_verb_continuous = "безуспешно " + ru_attack_verb(message_verb_continuous)
+			message_verb_simple = "слабо " + ru_attack_verb(message_verb_simple)
+			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
 
 		user.visible_message(
 			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),

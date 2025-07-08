@@ -28,7 +28,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	wound_bonus = -5
-	bare_wound_bonus = 10
+	exposed_wound_bonus = 10
 	sharpness = SHARP_EDGED
 	attack_verb_continuous = "кусает"
 	attack_verb_simple = "кусаете"
@@ -41,6 +41,12 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/crocodile
 
+	var/static/list/food_types = list(
+		/obj/item/food/meat,
+		/obj/item/food/deadmouse,
+		/mob/living/basic/mouse
+	)
+
 /mob/living/basic/crocodile/gena
 	name = "Gena"
 	desc = "Крокодил Гена."
@@ -51,8 +57,9 @@
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/nerfed_pulling, GLOB.typecache_general_bad_things_to_easily_move)
-	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = string_list(list(/obj/item/food/meat)))
+	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = food_types)
 	AddComponent(/datum/component/health_scaling_effects, min_health_slowdown = 1.5)
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
 
 /mob/living/basic/crocodile/Login()
 	. = ..()

@@ -68,9 +68,3 @@
 	name = "Радужные перчатки"
 	item_path = /obj/item/clothing/gloves/color/rainbow
 	donator_level = DONATOR_TIER_2
-
-// MARK: Tier 3
-/datum/loadout_item/gloves/gloves_maid
-	name = "Перчатки горничной"
-	item_path = /obj/item/clothing/gloves/maid
-	donator_level = DONATOR_TIER_3

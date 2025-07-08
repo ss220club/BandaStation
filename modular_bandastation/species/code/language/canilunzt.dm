@@ -8,22 +8,12 @@
 		"ист","йеин","ентч","звич","тут","мирr","во","бис","эс","вор","ник","гро","эл","энем","зантх","тзч","ноч", \
 		"хел","исчт","фар","ва","барам","йеренг","теч","лач","сам","мак","лич","ген","ор","аг","ект","гек","стаг","онн", \
 		"бин","кет","ярл","вульф","эйнеч","кресвз","азунейн","гхчв")
+	always_use_default_namelist = TRUE
 	icon = 'icons/bandastation/mob/species/vulpkanin/lang.dmi'
 	icon_state = "vulptail"
 	default_priority = 90
 
-/datum/language/canilunzt/get_random_name(
-	gender = NEUTER,
-	name_count = default_name_count,
-	syllable_min = default_name_syllable_min,
-	syllable_max = default_name_syllable_max,
-	force_use_syllables = FALSE,
-)
-	if(force_use_syllables)
-		return ..()
-	if(gender != MALE)
-		gender = pick(MALE, FEMALE)
-
+/datum/language/canilunzt/default_name(gender)
 	if(gender == MALE)
 		return "[pick(GLOB.first_names_male_vulp)][random_name_spacer][pick(GLOB.last_names_vulp)]"
 	return "[pick(GLOB.first_names_female_vulp)][random_name_spacer][pick(GLOB.last_names_vulp)]"

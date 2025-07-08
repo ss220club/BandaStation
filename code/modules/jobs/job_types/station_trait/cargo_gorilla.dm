@@ -16,7 +16,7 @@
 	)
 	rpg_title = "Beast of Burden"
 	allow_bureaucratic_error = FALSE
-	job_flags = STATION_TRAIT_JOB_FLAGS | JOB_ANNOUNCE_ARRIVAL | JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK
+	job_flags = STATION_TRAIT_JOB_FLAGS | JOB_ANNOUNCE_ARRIVAL | JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK |JOB_ANTAG_BLACKLISTED
 
 /datum/job/cargo_gorilla/get_roundstart_spawn_point()
 	if (length(GLOB.gorilla_start))
@@ -47,4 +47,4 @@
 
 	to_chat(spawned, span_boldnotice("Вы Каргорила, дружелюбный член станции и грузоперевозчик."))
 	to_chat(spawned, span_notice("Вы можете поднимать ящики, кликая на них, и класть их на пол, кликая по нему."))
-	spawned.mind.special_role = "Cargorilla"
+	LAZYADD(spawned.mind.special_roles, "Cargorilla")

@@ -811,7 +811,6 @@
 #define HACK_PIRATE "Pirates"
 #define HACK_FUGITIVES "Fugitives"
 #define HACK_SLEEPER "Sleeper Agents"
-#define HACK_THREAT "Threat Boost"
 
 /// The minimum number of ghosts / observers to have the chance of spawning pirates.
 #define MIN_GHOSTS_FOR_PIRATES 4
@@ -855,7 +854,7 @@
  */
 /obj/machinery/computer/communications/proc/hack_console(mob/living/hacker)
 	// All hack results we'll choose from.
-	var/list/hack_options = list(HACK_THREAT)
+	var/list/hack_options = list(HACK_SLEEPER)
 
 	// If we have a certain amount of ghosts, we'll add some more !!fun!! options to the list
 	var/num_ghosts = length(GLOB.current_observers_list) + length(GLOB.dead_player_list)
@@ -870,11 +869,6 @@
 		if(num_ghosts >= MIN_GHOSTS_FOR_FUGITIVES)
 			hack_options += HACK_FUGITIVES
 
-	if (!EMERGENCY_PAST_POINT_OF_NO_RETURN)
-		// If less than a certain percent of the population is ghosts, consider sleeper agents
-		if(num_ghosts < (length(GLOB.clients) * MAX_PERCENT_GHOSTS_FOR_SLEEPER))
-			hack_options += HACK_SLEEPER
-
 	var/picked_option = pick(hack_options)
 	message_admins("[ADMIN_LOOKUPFLW(hacker)] hacked a [name] located at [ADMIN_VERBOSEJMP(src)], resulting in: [picked_option]!")
 	hacker.log_message("hacked a communications console, resulting in: [picked_option].", LOG_GAME, log_globally = TRUE)
@@ -882,72 +876,29 @@
 		if(HACK_PIRATE) // Triggers pirates, which the crew may be able to pay off to prevent
 			var/list/pirate_rulesets = list(
 				/datum/dynamic_ruleset/midround/pirates,
-				/datum/dynamic_ruleset/midround/dangerous_pirates,
+				/datum/dynamic_ruleset/midround/pirates/heavy,
 			)
-			priority_announce(
-				"Внимание экипажу, система секторного мониторинга сообщает о массивном прыжковом следе вражеского космического судна, направляющегося в вашу систему. Приготовьтесь к неминуемому контакту с врагом.",
-				"[command_name()]: Высокоприоритетное оповещение",
-			)
-			SSdynamic.picking_specific_rule(pick(pirate_rulesets), forced = TRUE, ignore_cost = TRUE)
+			SSdynamic.force_run_midround(pick(pirate_rulesets))
 
 		if(HACK_FUGITIVES) // Triggers fugitives, which can cause confusion / chaos as the crew decides which side help
 			priority_announce(
 				"Внимание экипажу, система секторного мониторинга сообщает о массивном прыжковом следе неизвестного космического судна, направляющегося в вашу систему. Приготовьтесь к возможному контакту.",
 				"[command_name()]: Высокоприоритетное оповещение",
 			)
-
-			force_event_after(/datum/round_event_control/fugitives, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
-
-		if(HACK_THREAT) // Force an unfavorable situation on the crew
-			priority_announce(
-				"Внимание экипажу, департамент разведки Нанотрейзен получил сведения, свидетельствующие о повышении вражеской активности в вашем секторе.",
-				"[command_name()]: Высокоприоритетное оповещение",
-			)
-
-			for(var/mob/crew_member as anything in GLOB.player_list)
-				if(!is_station_level(crew_member.z))
-					continue
-				shake_camera(crew_member, 15, 1)
-
-			SSdynamic.unfavorable_situation()
+			SSdynamic.force_run_midround(/datum/dynamic_ruleset/midround/from_ghosts/fugitives)
 
 		if(HACK_SLEEPER) // Trigger one or multiple sleeper agents with the crew (or for latejoining crew)
-			// BANDASTATION EDIT START - inject storyteller events instead of dynamic rulesets
-			var/event_to_spawn = pick_weight(list(
-				/datum/round_event_control/antagonist/solo/traitor/midround = 75,
-				// hmmm, let's rarely spawn some non-traitor antags just to spice things up a bit
-				/datum/round_event_control/antagonist/solo/heretic/midround = 15,
-				/datum/round_event_control/antagonist/solo/from_ghosts/wizard = 1
-			))
-			force_event_after(event_to_spawn, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
 			priority_announce(
-				"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
-				"[command_name()] High-Priority Update",
+				"Внимание экипажу, похоже, зафиксирован взлом системы телекоммуникаций с последующей передачей неизвестного сигнала.",
+				"[command_name()]: Высокоприоритетное оповещение",
 			)
-			/* var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
-			var/max_number_of_sleepers = clamp(round(length(GLOB.alive_player_list) / 20), 1, 3)
-			var/num_agents_created = 0
-			for(var/num_agents in 1 to rand(1, max_number_of_sleepers))
-				if(!SSdynamic.picking_specific_rule(sleeper_agent_type, forced = TRUE, ignore_cost = TRUE))
-					break
-				num_agents_created++
-
-			if(num_agents_created <= 0)
-				// We failed to run any midround sleeper agents, so let's be patient and run latejoin traitor
-				SSdynamic.picking_specific_rule(/datum/dynamic_ruleset/latejoin/infiltrator, forced = TRUE, ignore_cost = TRUE)
-
-			else
-				// We spawned some sleeper agents, nice - give them a report to kickstart the paranoia
-				priority_announce(
-					"Внимание экипажу, похоже, зафиксирован взлом системы телекоммуникаций с последующей передачей неизвестного сигнала.",
-					"[command_name()]: Высокоприоритетное оповещение",
-				)
-			*/ // BANDASTATION EDIT END
+			var/max_number_of_sleepers = clamp(round(length(GLOB.alive_player_list) / 40), 1, 3)
+			if(!SSdynamic.force_run_midround(/datum/dynamic_ruleset/midround/from_living/traitor, forced_max_cap = max_number_of_sleepers))
+				SSdynamic.queue_ruleset(/datum/dynamic_ruleset/latejoin/traitor)
 
 #undef HACK_PIRATE
 #undef HACK_FUGITIVES
 #undef HACK_SLEEPER
-#undef HACK_THREAT
 
 #undef MIN_GHOSTS_FOR_PIRATES
 #undef MIN_GHOSTS_FOR_FUGITIVES

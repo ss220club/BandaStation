@@ -40,6 +40,7 @@
 			LOCATION_HANDS,
 		),
 		flavour_text = "Это драгоценная семейная реликвия, передаваемая из поколения в поколение. Берегите ее!",
+		notify_player = TRUE,
 	)
 
 /datum/quirk/item_quirk/family_heirloom/post_add()

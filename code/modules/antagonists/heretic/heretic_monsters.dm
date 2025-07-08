@@ -4,7 +4,7 @@
 	roundend_category = "Еретики"
 	antagpanel_category = ANTAG_GROUP_HORRORS
 	antag_moodlet = /datum/mood_event/heretics
-	job_rank = ROLE_HERETIC
+	pref_flag = ROLE_HERETIC
 	antag_hud_name = "heretic_beast"
 	suicide_cry = "МОЙ ХОЗЯИН УЛЫБАЕТСЯ МНЕ!!"
 	show_in_antagpanel = FALSE

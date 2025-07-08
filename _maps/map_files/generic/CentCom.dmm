@@ -184,12 +184,6 @@
 	dir = 8
 	},
 /area/centcom/central_command_areas/prison)
-"aaV" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 10
-	},
-/turf/open/floor/plating,
-/area/centcom/central_command_areas/supply)
 "aaX" = (
 /obj/structure/flora/tree/palm,
 /turf/open/floor/grass,
@@ -397,6 +391,9 @@
 	dir = 10
 	},
 /obj/effect/spawner/random/structure/shipping_container/station_appropriate,
+/obj/structure/railing{
+	dir = 8
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/supply)
 "acf" = (
@@ -588,18 +585,6 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"adg" = (
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/brown{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/centcom/central_command_areas/supply)
 "adk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /obj/structure/cable/layer1,
@@ -981,6 +966,9 @@
 "ael" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
+	},
+/obj/structure/railing{
+	dir = 8
 	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/supply)
@@ -2915,6 +2903,7 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 1
 	},
+/obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "anv" = (
@@ -6401,11 +6390,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/green/visible/layer4,
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
-"aEF" = (
-/obj/structure/lattice,
-/obj/structure/sign/poster/official/nanotrasen_logo/directional/east,
-/turf/open/space/basic,
-/area/space/nearstation)
 "aEG" = (
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
@@ -6495,9 +6479,11 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/supply)
 "aEU" = (
-/obj/structure/closet/cardboard,
-/obj/item/sticker/psnake,
-/turf/open/floor/pod,
+/obj/effect/turf_decal/tile/brown/fourcorners,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "aEV" = (
 /obj/structure/table/wood,
@@ -6668,13 +6654,13 @@
 /obj/effect/mapping_helpers/requests_console/assistance,
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/information,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aFr" = (
-/obj/structure/light_fake/spot/directional/south,
-/obj/structure/closet/cardboard,
-/turf/open/floor/pod,
+/obj/effect/turf_decal/tile/brown/fourcorners,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "aFs" = (
 /obj/structure/table/reinforced,
@@ -7655,6 +7641,9 @@
 /area/centcom/central_command_areas/supply)
 "aIH" = (
 /obj/structure/light_fake/spot/directional/south,
+/obj/structure/railing{
+	dir = 8
+	},
 /turf/open/floor/pod,
 /area/centcom/central_command_areas/supply)
 "aII" = (
@@ -10169,8 +10158,9 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/prison/cells)
 "aSc" = (
+/obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/caution/stand_clear{
-	dir = 8
+	dir = 4
 	},
 /turf/open/floor/pod,
 /area/centcom/central_command_areas/supply)
@@ -11773,7 +11763,7 @@
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "aYH" = (
@@ -14045,7 +14035,7 @@
 /obj/effect/turf_decal/tile/dark_blue/anticorner{
 	dir = 4
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "ewN" = (
@@ -14781,7 +14771,7 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/admin)
 "glS" = (
@@ -14904,7 +14894,7 @@
 /turf/closed/indestructible/wood,
 /area/centcom/central_command_areas/planetary_port/club)
 "gwU" = (
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/admin)
 "gxd" = (
@@ -15030,7 +15020,7 @@
 /area/centcom/central_command_areas/conference_room)
 "gHP" = (
 /obj/effect/turf_decal/tile/dark_blue/anticorner,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "gHY" = (
@@ -15225,7 +15215,7 @@
 /obj/effect/mapping_helpers/requests_console/supplies,
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/ore_update,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/cabin/captain)
 "gZF" = (
@@ -16337,7 +16327,7 @@
 /obj/effect/mapping_helpers/requests_console/assistance,
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/information,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/pod/dark,
 /area/centcom/central_command_areas/cabin)
 "jEf" = (
@@ -17430,7 +17420,7 @@
 /obj/effect/turf_decal/siding/wood/end{
 	dir = 4
 	},
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "miO" = (
@@ -17650,7 +17640,7 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
 "mFY" = (
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/courtroom)
 "mHT" = (
@@ -18070,6 +18060,18 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
+"nQJ" = (
+/obj/docking_port/stationary{
+	dir = 2;
+	name = "CentCom Gamma Armory Dock";
+	shuttle_id = "gamma_away";
+	roundstart_template = /datum/map_template/shuttle/gamma/basic;
+	width = 9;
+	height = 5;
+	dwidth = 4
+	},
+/turf/open/floor/plating,
+/area/centcom/central_command_areas/supply)
 "nQQ" = (
 /obj/effect/turf_decal/line/dark_blue/anticorner{
 	dir = 1
@@ -18089,7 +18091,7 @@
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/conference_room)
 "nVq" = (
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/conference_room)
 "nWo" = (
@@ -21237,6 +21239,12 @@
 /obj/effect/turf_decal/tile/dark_blue/full,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
+"vBf" = (
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 4
+	},
+/turf/open/floor/pod,
+/area/centcom/central_command_areas/supply)
 "vBs" = (
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/item/kirbyplants/organic/plant21{
@@ -21292,7 +21300,7 @@
 	dir = 10
 	},
 /obj/effect/turf_decal/tile/dark_blue/full,
-/obj/machinery/photocopier/prebuilt/free,
+/obj/machinery/photocopier/gratis/prebuilt,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
 "vFY" = (
@@ -66679,17 +66687,17 @@ aiI
 aid
 aCR
 aCR
+aCR
 aid
 apn
 aCR
 aCR
+aiI
+aid
 aCR
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aid
+apn
+aCR
 aaa
 aaa
 aaa
@@ -66940,13 +66948,13 @@ aid
 aid
 aid
 aWI
-aCR
-aCR
-aCR
-aaa
-aaa
-aCR
-aEF
+all
+aid
+aid
+aid
+aid
+aid
+aWI
 aCR
 aaa
 aaa
@@ -67198,11 +67206,11 @@ acQ
 acQ
 aiF
 aiF
-aid
-aCR
-aCR
-aCR
-aid
+acQ
+acQ
+acQ
+acQ
+acQ
 aiF
 awi
 aaa
@@ -67455,11 +67463,11 @@ acM
 acM
 aiF
 aiF
-aid
-aid
-aid
-aid
-aid
+acM
+acM
+acM
+acM
+acM
 aiF
 aiF
 awi
@@ -67712,11 +67720,11 @@ acM
 acM
 aiF
 aiF
-aiF
-aiF
-aiF
-aiF
-aiF
+acM
+acM
+acM
+acM
+acM
 aiF
 aiF
 awi
@@ -67968,13 +67976,13 @@ acM
 acM
 acM
 aNB
-anI
-ael
-ace
-ael
-aaV
-ael
-ace
+aFr
+acM
+acM
+acM
+acM
+acM
+aiF
 aiF
 aDe
 aye
@@ -68226,12 +68234,12 @@ acM
 acM
 aeG
 anu
-aGQ
-auu
-aGQ
-auu
-aGQ
-auu
+acM
+acM
+acM
+acM
+acM
+aiF
 aiF
 aji
 aCm
@@ -68482,13 +68490,13 @@ acM
 acM
 acM
 aOv
-anI
-awZ
-aIL
-awZ
-aIL
-awZ
-aIL
+aFr
+acM
+acM
+acM
+acM
+acM
+aiF
 aiF
 aDe
 aye
@@ -68739,13 +68747,13 @@ acM
 acM
 acM
 aOv
-anI
-aUQ
-azB
-aUQ
-aUQ
-azB
-aUQ
+aFr
+nQJ
+acM
+acM
+acM
+acM
+aiF
 aiF
 aji
 aCm
@@ -68996,13 +69004,13 @@ acM
 acM
 aqa
 aOv
-anI
-ael
-ace
-ael
-ace
-azB
 aFr
+acM
+acM
+acM
+acM
+acM
+aiF
 aiF
 aiF
 awi
@@ -69253,13 +69261,13 @@ acM
 acM
 acM
 aOv
-anI
-aGQ
-auu
-aGQ
-auu
-azB
-aEU
+aFr
+acM
+acM
+acM
+acM
+acM
+aiF
 aiF
 aiF
 aiF
@@ -69511,11 +69519,11 @@ acM
 acM
 aeG
 anu
-awZ
-aIL
-awZ
-aIL
-azB
+acM
+acM
+acM
+acM
+acM
 aiF
 aiF
 aiF
@@ -69767,12 +69775,12 @@ acM
 acM
 acM
 aOv
-anI
-aUQ
-azB
-aUQ
-aUQ
-azB
+aFr
+acM
+acM
+acM
+acM
+acM
 aiF
 aGt
 aWW
@@ -70024,9 +70032,9 @@ acM
 acM
 acM
 aOv
-anI
+aFr
 ael
-aaV
+ace
 ael
 ace
 aIH
@@ -70281,13 +70289,13 @@ acM
 acM
 acM
 aOv
-anI
+aFr
 aGQ
 auu
 aGQ
 auu
 azB
-aiF
+aDQ
 axQ
 alf
 axQ
@@ -70538,17 +70546,17 @@ acM
 acM
 acM
 aOv
-anI
+aFr
 awZ
 aIL
 awZ
 aIL
 azB
 aDQ
-aSc
+azB
 aMg
 azB
-aSc
+azB
 aiF
 aKe
 aTA
@@ -70803,8 +70811,8 @@ aUQ
 azB
 aDQ
 azB
-aMg
-azB
+aSc
+vBf
 aMg
 aYn
 aYn
@@ -71052,12 +71060,12 @@ awV
 awV
 ayU
 aNV
-anI
+aEU
 aXN
 awV
 awV
 aKX
-adg
+ayU
 aXX
 ard
 aaO

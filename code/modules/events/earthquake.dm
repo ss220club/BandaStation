@@ -15,7 +15,7 @@
 	max_wizard_trigger_potency = 7
 	map_flags = EVENT_PLANETARY_ONLY
 
-/datum/round_event_control/earthquake/can_spawn_event(players_amt, allow_magic, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/earthquake/can_spawn_event(players_amt, allow_magic)
 	. = ..()
 	if(!.)
 		return .

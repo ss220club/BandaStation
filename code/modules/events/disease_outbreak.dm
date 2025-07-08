@@ -37,7 +37,7 @@
 	///Disease recipient candidates
 	var/list/disease_candidates = list()
 
-/datum/round_event_control/disease_outbreak/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/disease_outbreak/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
 	if(!.)
 		return .

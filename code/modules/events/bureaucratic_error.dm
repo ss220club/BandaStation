@@ -20,11 +20,8 @@
 		overflow.total_positions = -1 // Ensures infinite slots as this role. Assistant will still be open for those that cant play it.
 		for(var/job in jobs)
 			var/datum/job/current = job
-			// BANDASTATION EDIT START - STORYTELLER
-			//current.total_positions = 0
-			current.total_positions = max(current.total_positions + rand(-2,4), 1)
-			// BANDASTATION EDIT END - STORYTELLER
+			current.total_positions = 0
 		return
 	// Adds/removes a random amount of job slots from all jobs.
 	for(var/datum/job/current as anything in jobs)
-		current.total_positions = max(current.total_positions + rand(-2,4), 1) // BANDASTATION EDIT - STORYTELLER
+		current.total_positions = max(current.total_positions + rand(-2,4), 0)

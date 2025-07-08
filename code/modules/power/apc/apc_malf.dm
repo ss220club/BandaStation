@@ -19,7 +19,7 @@
 		return
 	to_chat(malf, span_notice("Запуск взлома систем ЛКП. Это займет некоторое время, в течении которого вы не сможете выполнять другие действия."))
 	malf.malfhack = src
-	malf.malfhacking = addtimer(CALLBACK(malf, TYPE_PROC_REF(/mob/living/silicon/ai/, malfhacked), src), 600, TIMER_STOPPABLE)
+	malf.malfhacking = addtimer(CALLBACK(malf, TYPE_PROC_REF(/mob/living/silicon/ai/, malfhacked), src), 30 SECONDS + 10*malf.hacked_apcs.len SECONDS, TIMER_STOPPABLE)
 
 	var/atom/movable/screen/alert/hackingapc/hacking_apc
 	hacking_apc = malf.throw_alert(ALERT_HACKING_APC, /atom/movable/screen/alert/hackingapc)

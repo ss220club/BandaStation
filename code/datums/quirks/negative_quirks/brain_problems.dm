@@ -26,6 +26,7 @@
 			LOCATION_HANDS,
 		),
 		flavour_text = "Они помогут вам выжить, пока вы не получите запас лекарств. Не полагайтесь на них слишком сильно!",
+		notify_player = TRUE,
 	)
 
 /datum/quirk/item_quirk/brainproblems/process(seconds_per_tick)

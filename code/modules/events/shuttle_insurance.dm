@@ -7,7 +7,7 @@
 	category = EVENT_CATEGORY_BUREAUCRATIC
 	description = "A sketchy but legit insurance offer."
 
-/datum/round_event_control/shuttle_insurance/can_spawn_event(players, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/shuttle_insurance/can_spawn_event(players, allow_magic = FALSE)
 	. = ..()
 	if(!.)
 		return .
@@ -39,7 +39,6 @@
 			break
 	if(!insurance_evaluation)
 		insurance_evaluation = 5000 //gee i dunno
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/shuttle_insurance/start()
 	insurance_message = new("Страховка шаттла", "Привет, приятель, говорит капитан судна [ship_name]. Не могу не заметить, что у тебя там дикий и сумасшедший шаттл БЕЗ СТРАХОВКИ! Безумие! А что, если с ним что-нибудь случится?! Мы провели быструю оценку тарифов в этом секторе и возьмем всего [insurance_evaluation] за страховку вашего шаттла в случае любой катастрофы.", list("Приобрести страховку.","Отклонить предложение."))

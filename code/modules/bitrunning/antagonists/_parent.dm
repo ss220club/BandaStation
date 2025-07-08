@@ -4,7 +4,7 @@
 /datum/antagonist/bitrunning_glitch
 	name = "Generic Bitrunning Glitch"
 	antagpanel_category = ANTAG_GROUP_GLITCH
-	job_rank = ROLE_GLITCH
+	pref_flag = ROLE_GLITCH
 	preview_outfit = /datum/outfit/cyber_police
 	show_in_roundend = FALSE
 	show_in_antagpanel = FALSE
@@ -12,7 +12,6 @@
 	show_to_ghosts = TRUE
 	suicide_cry = "ALT F4!"
 	ui_name = "AntagInfoGlitch"
-	antag_flags = FLAG_FAKE_ANTAG // BANDASTATION EDIT - STORYTELLER
 	/// Minimum Qserver threat required to spawn this mob. This is subtracted (x/2) from the server thereafter.
 	var/threat = 0
 

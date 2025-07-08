@@ -86,3 +86,6 @@
 
 /datum/job/ai/get_radio_information()
 	return "<b>Для коммуникации с киборгами и другими ИИ используйте префикс :b.</b>"
+
+/datum/job/ai/on_respawn(mob/new_character)
+	new_character.AIize()

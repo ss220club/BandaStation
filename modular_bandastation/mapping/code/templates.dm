@@ -1,10 +1,10 @@
-// General
+// MARK: General
 /datum/lazy_template/nukie_base
 	map_dir = "_maps/templates/lazy_templates/ss220"
 	map_name = "syndie_cc"
 	key = LAZY_TEMPLATE_KEY_NUKIEBASE
 
-// Shuttles
+// MARK: Shuttles
 /datum/map_template/shuttle/sit
 	port_id = "sit"
 	who_can_purchase = null
@@ -45,11 +45,33 @@
 	name = "basic specops shuttle"
 	description = "Base Specops shuttle."
 
-// Shuttles Overrides
+// Gamma
+/datum/map_template/shuttle/gamma
+	port_id = "gamma"
+	who_can_purchase = null
+	prefix = "_maps/shuttles/ss220/"
+
+/datum/map_template/shuttle/gamma/basic
+	suffix = "basic"
+	name = "Standard Gamma Armory Shuttle"
+
+/datum/map_template/shuttle/gamma/clown
+	suffix = "clown"
+	name = "Clown Gamma Armory Shuttle"
+
+/datum/map_template/shuttle/gamma/destroyed
+	suffix = "destroyed"
+	name = "Destroyed Gamma Armory Shuttle"
+
+/datum/map_template/shuttle/gamma/empty
+	suffix = "empty"
+	name = "Empty Gamma Armory Shuttle"
+
+// MARK: Shuttles Overrides
 /datum/map_template/shuttle/infiltrator/basic
 	prefix = "_maps/shuttles/ss220/"
 
-// Deathmatch
+// MARK: Deathmatch
 /datum/lazy_template/deathmatch/underground_thunderdome
 	name = "Underground Thunderdome"
 	map_dir = "_maps/deathmatch/ss220"

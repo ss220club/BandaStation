@@ -1,8 +1,7 @@
 /datum/antagonist/domain_ghost_actor
 	name = "Virtual Domain Actor"
 	antagpanel_category = ANTAG_GROUP_GLITCH
-	antag_flags = FLAG_FAKE_ANTAG |FLAG_ANTAG_CAP_IGNORE // BANDASTATION EDIT - STORYTELLER
-	job_rank = ROLE_GLITCH
+	pref_flag = ROLE_GLITCH
 	show_to_ghosts = TRUE
 	suicide_cry = "FATAL ERROR"
 	ui_name = "AntagInfoGlitch"
