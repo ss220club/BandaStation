@@ -1793,10 +1793,8 @@
 	},
 /area/station/service/kitchen/abandoned)
 "ayj" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
 /obj/machinery/light/small/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "ayp" = (
@@ -3765,15 +3763,6 @@
 	},
 /area/station/security/checkpoint/customs)
 "aUv" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
@@ -9098,21 +9087,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
-"chT" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/airlock/access/any/command/eva,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "chV" = (
 /obj/item/kirbyplants/random/dead,
 /obj/effect/turf_decal/delivery,
@@ -10175,17 +10149,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
 "ctM" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/airalarm/directional/west,
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/stripes/end,
 /obj/machinery/atmospherics/components/tank/air/layer4,
 /turf/open/floor/iron/dark/small,
@@ -12014,14 +11977,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/meter,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/ghetto/central)
@@ -14483,6 +14438,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/machinery/light/small/directional/east,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "dpE" = (
@@ -15775,6 +15731,7 @@
 /obj/structure/cable,
 /obj/machinery/airalarm/directional/west,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/catwalk_floor/iron_smooth,
 /area/station/maintenance/ghetto/central)
 "dEN" = (
@@ -16476,17 +16433,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/station/medical/chemistry/ghetto)
-"dMP" = (
-/obj/machinery/atmospherics/components/unary/airlock_pump,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "dMR" = (
 /turf/closed/wall,
 /area/station/cargo/storage)
@@ -16946,21 +16892,6 @@
 /obj/structure/destructible/cult/item_dispenser/archives/library,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
-"dTh" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "dTr" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/bot,
@@ -18826,24 +18757,6 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
-"eqp" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/airlock/access/any/command/eva,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 1
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "eqE" = (
 /turf/closed/wall,
 /area/station/maintenance/department/electrical)
@@ -23362,15 +23275,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "fxm" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/trimline/yellow/filled/corner{
 	dir = 4
 	},
@@ -29990,6 +29894,7 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/unres,
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "gYA" = (
@@ -30527,16 +30432,10 @@
 /area/station/maintenance/ghetto/garden)
 "hgr" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/space)
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/medical/chemistry/ghetto)
 "hgs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
@@ -30931,24 +30830,6 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
-"hkA" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/airlock/access/any/command/eva,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 1
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/space)
 "hkB" = (
 /obj/structure/bookcase/random/religion,
 /turf/open/floor/wood,
@@ -33064,10 +32945,6 @@
 /obj/machinery/light_switch/directional/north,
 /turf/open/floor/iron/white,
 /area/station/medical/cryo)
-"hIJ" = (
-/obj/machinery/atmospherics/components/unary/airlock_pump,
-/turf/open/space/basic,
-/area/space)
 "hIO" = (
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /turf/open/floor/iron,
@@ -35481,16 +35358,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/fore)
 "ioF" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
 /obj/structure/sign/warning/vacuum/directional/north,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/tile/yellow,
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry/ghetto)
@@ -36165,19 +36033,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
 /area/station/maintenance/aft)
-"ixh" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/effect/mapping_helpers/airlock/access/any/command/eva,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/space)
 "ixk" = (
 /obj/effect/turf_decal/bot,
 /obj/item/radio/intercom/directional/west,
@@ -37198,12 +37053,6 @@
 /obj/machinery/status_display/ai/directional/west,
 /turf/open/floor/iron,
 /area/station/security/range)
-"iKG" = (
-/obj/machinery/atmospherics/components/unary/airlock_pump{
-	dir = 1
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "iKI" = (
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/dark,
@@ -39310,25 +39159,6 @@
 /obj/effect/landmark/navigate_destination/dockaux,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/dock)
-"jjr" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/door/airlock/maintenance,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/obj/effect/mapping_helpers/airlock/unres{
-	dir = 4
-	},
-/obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "jjv" = (
 /obj/structure/chair/stool{
 	dir = 1
@@ -44242,9 +44072,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/science/xenobiology)
-"kuj" = (
-/turf/open/floor/iron/smooth,
-/area/station/maintenance/ghetto/central)
 "kup" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
@@ -46616,25 +46443,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/fore)
-"kWg" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/effect/mapping_helpers/airlock/access/any/command/eva,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/trimline/yellow/filled/line{
-	dir = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "kWi" = (
 /obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible{
 	dir = 4
@@ -46997,15 +46805,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "lar" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry/ghetto)
@@ -49788,16 +49587,6 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "lIK" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/structure/sign/warning/vacuum/directional/south,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
 	},
@@ -51615,6 +51404,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "mdx" = (
@@ -55968,21 +55758,12 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "nfj" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/random/trash/mess,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/dim/directional/east,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/spawner/random/trash/mess,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "nfl" = (
@@ -57157,20 +56938,6 @@
 /obj/structure/flora/bush/lavendergrass,
 /turf/open/misc/grass,
 /area/station/hallway/secondary/exit/departure_lounge)
-"ntd" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/effect/mapping_helpers/airlock/access/any/command/eva,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "ntf" = (
 /obj/machinery/button/door/directional/north{
 	id = "mech_bay";
@@ -64045,15 +63812,6 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "oYL" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 8
 	},
@@ -64171,18 +63929,6 @@
 /obj/structure/extinguisher_cabinet/directional/north,
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
-"oZX" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "pab" = (
 /obj/structure/railing{
 	dir = 4
@@ -65421,19 +65167,10 @@
 /area/station/maintenance/department/prison)
 "pnA" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/spawner/random/trash/mess,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "pnB" = (
@@ -65621,20 +65358,6 @@
 /obj/effect/spawner/random/structure/girder,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/starboard)
-"pqi" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/structure/sign/warning/vacuum/directional/north,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
-/area/space/nearstation)
 "pqj" = (
 /obj/machinery/camera/directional/north{
 	c_tag = "Engineering - Foyer West";
@@ -67997,6 +67720,7 @@
 /area/station/hallway/secondary/service)
 "pRW" = (
 /obj/structure/sign/warning/vacuum/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "pRX" = (
@@ -69954,15 +69678,6 @@
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/cmo)
 "qsS" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
 	},
@@ -72900,15 +72615,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "rdA" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /turf/closed/wall/r_wall,
 /area/station/medical/chemistry/ghetto)
 "rdN" = (
@@ -73959,20 +73666,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
-"rqb" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/door/airlock/maintenance,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/obj/effect/mapping_helpers/airlock/unres{
-	dir = 1
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/door/firedoor,
-/turf/open/floor/iron/smooth,
-/area/station/maintenance/ghetto/central)
 "rqm" = (
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/access/all/security/entrance,
@@ -75526,15 +75219,6 @@
 /turf/open/floor/plating,
 /area/station/science/xenobiology)
 "rKK" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 8
 	},
@@ -78485,16 +78169,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "stV" = (
@@ -80388,21 +80067,6 @@
 "sTZ" = (
 /turf/closed/wall,
 /area/station/service/kitchen/kitchen_backroom)
-"sUg" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/central)
 "sUh" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -81441,15 +81105,6 @@
 /turf/open/floor/iron/dark,
 /area/station/security/warden)
 "tkc" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 5
 	},
@@ -84010,15 +83665,6 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "tOy" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -91184,19 +90830,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/auxiliary)
-"vBc" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
-/area/space/nearstation)
 "vBg" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/trimline/yellow/warning{
@@ -91419,15 +91052,6 @@
 /turf/open/floor/iron/dark,
 /area/station/service/hydroponics/garden)
 "vDG" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/effect/spawner/random/trash/mess,
@@ -94257,19 +93881,6 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/red,
 /area/station/commons/dorms/apartment1)
-"woW" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/spawner/random/trash/mess,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/central)
 "woY" = (
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 4
@@ -96841,23 +96452,8 @@
 /turf/closed/wall,
 /area/station/medical/virology)
 "wUK" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/door/airlock/maintenance,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/obj/effect/mapping_helpers/airlock/unres{
-	dir = 1
-	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /turf/closed/wall,
 /area/station/maintenance/ghetto/central)
 "wUL" = (
@@ -100466,22 +100062,7 @@
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
 "xMX" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/machinery/door/airlock/maintenance,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/unres{
-	dir = 8
-	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /turf/closed/wall,
 /area/station/maintenance/ghetto/starboard)
 "xNa" = (
@@ -134765,13 +134346,13 @@ gaF
 rAc
 dhS
 dMf
-bBe
+aJR
 dEJ
-bBe
-bBe
-rqb
+aJR
+aJR
+dhS
 mdv
-dlM
+vIM
 mOI
 ceC
 vbK
@@ -135027,7 +134608,7 @@ ctM
 vDG
 oYL
 wUK
-woW
+qXM
 vIM
 mOI
 doz
@@ -135279,13 +134860,13 @@ doz
 doz
 guN
 mOI
-kuj
-kuj
+mOI
+mOI
 mOI
 mOI
 mOI
 hzl
-sUg
+vIM
 mOI
 doz
 mOI
@@ -135804,8 +135385,8 @@ stM
 vIM
 vIM
 vIM
-vIM
-vIM
+dlM
+dlM
 dlM
 dlM
 nWv
@@ -136576,7 +136157,7 @@ lBE
 mqm
 sux
 sux
-jjr
+sux
 sux
 sux
 sux
@@ -136832,8 +136413,8 @@ vab
 jTf
 yfD
 oiF
+hgr
 oBP
-dTh
 gXK
 gXK
 gXK
@@ -137347,7 +136928,7 @@ tcO
 dAA
 pEn
 sux
-oZX
+sux
 sux
 sux
 sux
@@ -137604,7 +137185,7 @@ fds
 yfD
 tLk
 sux
-oZX
+sux
 sux
 eni
 sux
@@ -137858,10 +137439,10 @@ doz
 doz
 vzJ
 sqY
-kWg
-dMP
-eqp
-oZX
+mqm
+tLk
+sux
+sux
 sux
 sux
 sux
@@ -138889,7 +138470,7 @@ hrB
 pKc
 tLk
 sux
-oZX
+sux
 sux
 sux
 sux
@@ -139146,7 +138727,7 @@ soO
 pKc
 oiF
 sux
-oZX
+sux
 sux
 eni
 sux
@@ -139404,9 +138985,9 @@ tSq
 fQk
 hFR
 fxm
-ntd
-iKG
-chT
+sux
+sux
+sux
 sux
 sux
 sux
@@ -140431,7 +140012,7 @@ doz
 doz
 doz
 doz
-hgr
+doz
 vbK
 ceC
 vbK
@@ -140688,7 +140269,7 @@ doz
 doz
 doz
 doz
-hgr
+doz
 vbK
 ceC
 ceC
@@ -140945,7 +140526,7 @@ vbK
 vbK
 vbK
 vbK
-vBc
+vbK
 vbK
 ceC
 ceC
@@ -141199,10 +140780,10 @@ doz
 doz
 doz
 doz
-ixh
-hIJ
-hkA
-hgr
+doz
+doz
+doz
+doz
 vbK
 ceC
 ceC
@@ -141459,7 +141040,7 @@ vbK
 vbK
 vbK
 vbK
-pqi
+vbK
 vbK
 ceC
 vbK
@@ -141716,7 +141297,7 @@ doz
 doz
 doz
 doz
-hgr
+doz
 vbK
 ceC
 vbK
@@ -141973,7 +141554,7 @@ vbK
 vbK
 vbK
 vbK
-vBc
+vbK
 vbK
 ceC
 vbK
@@ -142230,7 +141811,7 @@ siJ
 siJ
 siJ
 siJ
-hgr
+doz
 vbK
 ceC
 vbK
@@ -142487,7 +142068,7 @@ cBQ
 huF
 mDR
 siJ
-hgr
+doz
 vbK
 ceC
 vbK
@@ -142744,7 +142325,7 @@ meC
 meC
 gEj
 tlu
-hgr
+doz
 vbK
 ceC
 cfT
@@ -143001,7 +142582,7 @@ gbZ
 meC
 cKE
 siJ
-hgr
+doz
 vbK
 ceC
 vbK
@@ -143258,7 +142839,7 @@ rwC
 xXW
 hnY
 siJ
-hgr
+doz
 vbK
 ceC
 vbK
@@ -143515,7 +143096,7 @@ meC
 meC
 syU
 siJ
-hgr
+doz
 vbK
 ceC
 vbK
@@ -143772,7 +143353,7 @@ meC
 meC
 sEm
 siJ
-hgr
+doz
 vbK
 ceC
 ipz
@@ -144276,13 +143857,13 @@ ipz
 vIX
 dmA
 wBP
-cwi
-cwi
-cwi
-cwi
-cwi
-ayj
-cwi
+hnt
+hnt
+hnt
+hnt
+hnt
+cUT
+hnt
 qTP
 ipz
 qTP
@@ -144526,24 +144107,24 @@ fsL
 sag
 dUd
 fsL
-qTP
+dUd
 pRW
-wBP
-qTP
-jrb
-qTP
-qTP
-cwi
+ayj
+dUd
+sag
+dUd
+dUd
+hnt
 kEb
 ipz
 ipz
 ipz
 ipz
-cwi
-cwi
+hnt
+hnt
 gYx
 dpz
-cwi
+hnt
 qTP
 ipz
 ipz
