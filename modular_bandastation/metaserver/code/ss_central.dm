@@ -89,6 +89,9 @@ SUBSYSTEM_DEF(central)
 	GLOB.persistent_clients_by_ckey[ckey].discord_id = discord_id
 	SStitle.show_title_screen_to(client)
 
+	if(isnull(client))
+		return
+
 	// Open interview after discord linking
 	if(client.interviewee)
 		var/datum/interview/interview = GLOB.interviews.interview_for_client(client)
