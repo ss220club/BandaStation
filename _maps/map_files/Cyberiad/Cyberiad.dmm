@@ -1792,11 +1792,6 @@
 	dir = 4
 	},
 /area/station/service/kitchen/abandoned)
-"ayj" = (
-/obj/machinery/light/small/directional/west,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/starboard)
 "ayp" = (
 /obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
@@ -9087,6 +9082,11 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
+"chT" = (
+/obj/machinery/light/small/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
 "chV" = (
 /obj/item/kirbyplants/random/dead,
 /obj/effect/turf_decal/delivery,
@@ -30430,12 +30430,6 @@
 /obj/machinery/light/floor,
 /turf/open/floor/asphalt,
 /area/station/maintenance/ghetto/garden)
-"hgr" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry/ghetto)
 "hgs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
@@ -35358,7 +35352,6 @@
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/fore)
 "ioF" = (
-/obj/structure/sign/warning/vacuum/directional/north,
 /obj/effect/turf_decal/tile/yellow,
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry/ghetto)
@@ -46443,6 +46436,12 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/fore)
+"kWg" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/medical/chemistry/ghetto)
 "kWi" = (
 /obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible{
 	dir = 4
@@ -78170,9 +78169,6 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
@@ -96452,7 +96448,6 @@
 /turf/closed/wall,
 /area/station/medical/virology)
 "wUK" = (
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall,
 /area/station/maintenance/ghetto/central)
@@ -135643,7 +135638,7 @@ vzJ
 vzJ
 vzJ
 vzJ
-rdA
+vzJ
 vzJ
 vzJ
 vzJ
@@ -136413,7 +136408,7 @@ vab
 jTf
 yfD
 oiF
-hgr
+kWg
 oBP
 gXK
 gXK
@@ -144109,7 +144104,7 @@ dUd
 fsL
 dUd
 pRW
-ayj
+chT
 dUd
 sag
 dUd
