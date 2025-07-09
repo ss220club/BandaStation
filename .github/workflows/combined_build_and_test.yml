@@ -129,7 +129,7 @@ jobs:
           max-required-client-version: ${{ inputs.max_required_byond_client }}
 
   combined_alternate_build_and_test:
-    name: Alt Build & Test (BYOND ${{ matrix.byond_major }}.${{ matrix.byond_minor }})
+    name: Alt Build & Test (${{ matrix.map }}; BYOND ${{ matrix.major }}.${{ matrix.minor }})
     if: inputs.alternate_tests != '[]'
     runs-on: [self-hosted]
     timeout-minutes: 20
