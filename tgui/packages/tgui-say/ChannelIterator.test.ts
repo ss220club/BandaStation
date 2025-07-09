@@ -11,6 +11,7 @@ describe('ChannelIterator', () => {
 
   it('should cycle through channels properly', () => {
     // BANDASTATION EDIT START
+    console.log('Available channels:', channelIterator.channels);
     expect(channelIterator.current()).toBe('Говор');
     expect(channelIterator.next()).toBe('Радио');
     expect(channelIterator.next()).toBe('Эмоц');

@@ -17,13 +17,13 @@ export type Channel =
  */
 export class ChannelIterator {
   private index: number = 0;
-  private readonly channels: Channel[] = [
-    // BANDASTATION EDIT START
+  // BANDASTATION EDIT START
+  readonly channels: Channel[] = [
     'Эмоц',
     'Говор',
     'Шёпот',
     'Радио',
-    // BANDASTATION EDIT END
+  // BANDASTATION EDIT END
     'OOC',
     'LOOC',
     'Admin',
