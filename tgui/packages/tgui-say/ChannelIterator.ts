@@ -19,10 +19,10 @@ export class ChannelIterator {
   private index: number = 0;
   // BANDASTATION EDIT START
   readonly channels: Channel[] = [
-    'Эмоц',
     'Говор',
-    'Шёпот',
     'Радио',
+    'Эмоц',
+    'Шёпот',
   // BANDASTATION EDIT END
     'OOC',
     'LOOC',
