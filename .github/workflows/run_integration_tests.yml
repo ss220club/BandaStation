@@ -49,7 +49,7 @@ jobs:
         env:
           MYSQL_CONFIG_FILE: tools/ci/mysql_config.cnf
         run: |
-          sudo systemctl start mysql
+          sudo service mysql start
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} -e 'CREATE DATABASE tg_ci;'
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} tg_ci < SQL/tgstation_schema.sql
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} -e 'CREATE DATABASE tg_ci_prefixed;'
