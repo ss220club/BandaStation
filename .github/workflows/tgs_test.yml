@@ -60,6 +60,8 @@ jobs:
     steps:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
+        env:
+          DOTNET_INSTALL_DIR: "./_work/.dotnet"
         with:
           dotnet-version: 8.0.x
 
