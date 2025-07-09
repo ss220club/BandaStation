@@ -10,15 +10,15 @@ describe('ChannelIterator', () => {
   });
 
   it('should cycle through channels properly', () => {
-    expect(channelIterator.current()).toBe('Say');
-    expect(channelIterator.next()).toBe('Radio');
-    expect(channelIterator.next()).toBe('Me');
     // BANDASTATION EDIT ADDITION START
-    expect(channelIterator.next()).toBe('Whis');
-    expect(channelIterator.next()).toBe('LOOC');
-    // BANDASTATION EDIT ADDITION END
+    expect(channelIterator.current()).toBe('Говор');
+    expect(channelIterator.next()).toBe('Радио');
+    expect(channelIterator.next()).toBe('Эмоц');
+    expect(channelIterator.next()).toBe('Шёпот');
     expect(channelIterator.next()).toBe('OOC');
-    expect(channelIterator.next()).toBe('Say'); // Admin is blacklisted so it should be skipped
+    expect(channelIterator.next()).toBe('LOOC');
+    expect(channelIterator.next()).toBe('Говор'); // Admin is blacklisted so it should be skipped
+    // BANDASTATION EDIT ADDITION END
   });
 
   it('should set a channel properly', () => {
@@ -27,17 +27,17 @@ describe('ChannelIterator', () => {
   });
 
   it('should return true when current channel is "Say"', () => {
-    channelIterator.set('Say');
+    channelIterator.set('Говор'); // BANDASTATION EDIT
     expect(channelIterator.isSay()).toBe(true);
   });
 
   it('should return false when current channel is not "Say"', () => {
-    channelIterator.set('Radio');
+    channelIterator.set('Радио'); // BANDASTATION EDIT
     expect(channelIterator.isSay()).toBe(false);
   });
 
   it('should return true when current channel is visible', () => {
-    channelIterator.set('Say');
+    channelIterator.set('Говор'); // BANDASTATION EDIT
     expect(channelIterator.isVisible()).toBe(true);
   });
 
