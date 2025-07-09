@@ -89,13 +89,15 @@ jobs:
           source $HOME/BYOND/byond/bin/byondsetup
           bash tools/ci/run_server.sh ${{ matrix.map }}
 
-      - name: Upload screenshot tests
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test_artifacts_${{ matrix.map }}_${{ matrix.version.major }}_${{ matrix.version.minor }}
-          path: data/screenshots_new/
-          retention-days: 1
+      # NOTE: Can't upload - artifacts storage is not available
+      # Screenshot uploads removed as part of the artifact optimization
+      # - name: Upload screenshot tests
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: test_artifacts_${{ matrix.map }}_${{ matrix.version.major }}_${{ matrix.version.minor }}
+      #     path: data/screenshots_new/
+      #     retention-days: 1
 
       - name: On test fail, write a step summary
         if: always() && steps.run_tests.outcome == 'failure'
@@ -199,13 +201,15 @@ jobs:
           source $HOME/BYOND/byond/bin/byondsetup
           bash tools/ci/run_server.sh ${{ matrix.map }}
 
-      - name: Upload screenshot tests
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test_artifacts_${{ matrix.map }}_${{ matrix.major }}_${{ matrix.minor }}
-          path: data/screenshots_new/
-          retention-days: 1
+      # NOTE: Can't upload - artifacts storage is not available
+      # Screenshot uploads removed as part of the artifact optimization
+      # - name: Upload screenshot tests
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: test_artifacts_${{ matrix.map }}_${{ matrix.major }}_${{ matrix.minor }}
+      #     path: data/screenshots_new/
+      #     retention-days: 1
 
       - name: On test fail, write a step summary
         if: always() && steps.run_tests.outcome == 'failure'
