@@ -10,7 +10,7 @@ describe('ChannelIterator', () => {
   });
 
   it('should cycle through channels properly', () => {
-    // BANDASTATION EDIT ADDITION START
+    // BANDASTATION EDIT START
     expect(channelIterator.current()).toBe('Говор');
     expect(channelIterator.next()).toBe('Радио');
     expect(channelIterator.next()).toBe('Эмоц');
@@ -18,7 +18,7 @@ describe('ChannelIterator', () => {
     expect(channelIterator.next()).toBe('OOC');
     expect(channelIterator.next()).toBe('LOOC');
     expect(channelIterator.next()).toBe('Говор'); // Admin is blacklisted so it should be skipped
-    // BANDASTATION EDIT ADDITION END
+    // BANDASTATION EDIT END
   });
 
   it('should set a channel properly', () => {

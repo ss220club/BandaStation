@@ -1,8 +1,10 @@
 export type Channel =
-  | 'Me'
-  | 'Say'
-  | 'Whis'
-  | 'Radio'
+  // BANDASTATION EDIT START
+  | 'Эмоц'
+  | 'Говор'
+  | 'Шёпот'
+  | 'Радио'
+  // BANDASTATION EDIT END
   | 'OOC'
   | 'LOOC'
   | 'Admin';
@@ -16,10 +18,12 @@ export type Channel =
 export class ChannelIterator {
   private index: number = 0;
   private readonly channels: Channel[] = [
-    'Me',
-    'Say',
-    'Whis',
-    'Radio',
+    // BANDASTATION EDIT START
+    'Эмоц',
+    'Говор',
+    'Шёпот',
+    'Радио',
+    // BANDASTATION EDIT END
     'OOC',
     'LOOC',
     'Admin',
@@ -52,7 +56,7 @@ export class ChannelIterator {
   }
 
   public isSay(): boolean {
-    return this.channels[this.index] === 'Say';
+    return this.channels[this.index] === 'Говор'; // BANDASTATION EDIT
   }
 
   public isVisible(): boolean {
