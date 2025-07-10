@@ -24,6 +24,8 @@
 		/obj/item/clothing/mask/carnival/half = 2,
 		/obj/item/clothing/mask/carnival/triangles = 2,
 		/obj/item/clothing/mask/carnival/colored = 2,
+		/obj/item/clothing/under/napaleonic/british = 1,
+		/obj/item/clothing/head/costume/british = 1,
 	)
 
 	GLOB.autodrobe_other_items += list(
