@@ -8,7 +8,7 @@
 	category = EVENT_CATEGORY_JANITORIAL
 	description = "Harmless mobs climb out of a vent."
 
-/datum/round_event_control/vent_clog/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/vent_clog/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
 	if(!.)
 		return
@@ -77,6 +77,7 @@
 	var/static/list/mob_list = list(
 		/mob/living/basic/butterfly,
 		/mob/living/basic/cockroach,
+		/mob/living/basic/cockroach/bloodroach,
 		/mob/living/basic/spider/maintenance,
 		/mob/living/basic/mouse,
 		/mob/living/basic/snail,

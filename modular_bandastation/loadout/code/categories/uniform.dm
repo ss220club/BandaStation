@@ -20,21 +20,9 @@
 	name = "Бойцовский ги"
 	item_path = /obj/item/clothing/under/costume/gi
 
-/datum/loadout_item/uniforms/blue_schoolgirl_uniform
-	name = "Школьница (синяя)"
-	item_path = /obj/item/clothing/under/costume/schoolgirl
-
-/datum/loadout_item/uniforms/red_schoolgirl_uniform
-	name = "Школьница (красная)"
-	item_path = /obj/item/clothing/under/costume/schoolgirl/red
-
-/datum/loadout_item/uniforms/green_schoolgirl_uniform
-	name = "Школьница (зелёная)"
-	item_path = /obj/item/clothing/under/costume/schoolgirl/green
-
-/datum/loadout_item/uniforms/orange_schoolgirl_uniform
-	name = "Школьница (оранжевая)"
-	item_path = /obj/item/clothing/under/costume/schoolgirl/orange
+/datum/loadout_item/uniforms/seifuku
+	name = "Школьница"
+	item_path = /obj/item/clothing/under/costume/seifuku
 
 /datum/loadout_item/uniforms/soviet_uniform
 	name = "Советская"

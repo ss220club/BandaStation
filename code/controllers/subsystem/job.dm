@@ -35,8 +35,10 @@ SUBSYSTEM_DEF(job)
 
 	var/list/level_order = list(JP_HIGH, JP_MEDIUM, JP_LOW)
 
-	/// Lazylist of mob:occupation_string pairs.
-	var/list/dynamic_forced_occupations
+	/// Lazylist of mob:occupation_string pairs. Forces mobs into certain occupations with highest priority.
+	var/list/forced_occupations
+	/// Lazylist of mob:list(occupation_string) pairs. Prevents mobs from taking certain occupations at all.
+	var/list/prevented_occupations
 
 	/**
 	 * Keys should be assigned job roles. Values should be >= 1.
@@ -86,10 +88,6 @@ SUBSYSTEM_DEF(job)
 	## The game will not read any line that is commented out with a '#', as to allow you to defer to codebase defaults.\n## If you want to override the codebase values, add the value and then uncomment that line by removing the # from the job key's name.\n\
 	## Ensure that the key is flush, do not introduce any whitespaces when you uncomment a key. For example:\n## \"# Total Positions\" should always be changed to \"Total Positions\", no additional spacing.\n\
 	## Best of luck editing!\n"
-	// BANDASTATIONE EDIT START - STORYTELLER
-	/// Assoc list of new players keyed to the type of job they will currently get
-	var/list/assigned_players_by_job = list()
-	// BANDASTATIONE EDIT END - STORYTELLER
 
 /datum/controller/subsystem/job/Initialize()
 	setup_job_lists()
@@ -320,7 +318,6 @@ SUBSYSTEM_DEF(job)
 		if(!player?.mind)
 			continue
 		player.mind.set_assigned_role(get_job_type(/datum/job/unassigned))
-		player.mind.special_role = null
 	setup_occupations()
 	unassigned = list()
 	if(CONFIG_GET(flag/load_jobs_from_txt))
@@ -413,9 +410,8 @@ SUBSYSTEM_DEF(job)
 	SEND_SIGNAL(src, COMSIG_OCCUPATIONS_DIVIDED, pure, allow_all)
 
 	//Get the players who are ready
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
-		if(player.ready == PLAYER_READY_TO_PLAY && player.check_preferences() && player.mind && is_unassigned_job(player.mind.assigned_role))
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
+		if(player.ready == PLAYER_READY_TO_PLAY && player.check_job_preferences(!pure) && player.mind && is_unassigned_job(player.mind.assigned_role))
 			unassigned += player
 
 	initial_players_to_assign = length(unassigned)
@@ -458,36 +454,24 @@ SUBSYSTEM_DEF(job)
 	// From assign_all_overflow_positions()
 	// 4. Anyone with the overflow role enabled has been given the overflow role.
 
-	// Copy the joinable occupation list and filter out ineligible occupations due to above job assignments.
-	var/list/available_occupations = joinable_occupations.Copy()
-	var/datum/job_department/command_department = get_department_type(/datum/job_department/command)
-
-	for(var/datum/job/job in available_occupations)
-		// Make sure the job isn't filled. If it is, remove it from the list so it doesn't get checked.
+	/// BANDASTATION EDIT START - Job Priority Staffing
+	var/list/available_occupations = list()
+	for(var/datum/job/job as anything in joinable_occupations)
+		// Make sure the job isn't filled
 		if((job.current_positions >= job.spawn_positions) && job.spawn_positions != -1)
 			job_debug("DO: Job is now filled, Job: [job], Current: [job.current_positions], Limit: [job.spawn_positions]")
-			available_occupations -= job
 			continue
 
-		// Command jobs are handled via fill_all_head_positions_at_priority(...)
-		// Remove these jobs from the list of available occupations to prevent multiple players being assigned to the same
-		// limited role without constantly having to iterate over the available_occupations list and re-check them.
-		if(job in command_department?.department_jobs)
-			available_occupations -= job
+		available_occupations += job
 
 	job_debug("DO: Running standard job assignment")
 
 	for(var/level in level_order)
-		job_debug("JOBS: Filling in head roles, Level: [job_priority_level_to_string(level)]")
-		// Fill the head jobs first each level
-		fill_all_head_positions_at_priority(level)
-
 		// Loop through all unassigned players
-		for(var/mob/dead/new_player/player in unassigned)
-			if(!allow_all)
-				if(popcap_reached())
-					job_debug("JOBS: Popcap reached, trying to reject player: [player]")
-					try_reject_player(player)
+		for(var/mob/dead/new_player/player as anything in unassigned)
+			if(!allow_all && popcap_reached())
+				job_debug("JOBS: Popcap reached, trying to reject player: [player]")
+				try_reject_player(player)
 
 			job_debug("JOBS: Finding a job for player: [player], at job priority pref: [job_priority_level_to_string(level)]")
 
@@ -513,14 +497,16 @@ SUBSYSTEM_DEF(job)
 				job_debug("JOBS: Player not eligible for any available jobs at this priority level: [player]")
 				continue
 
-			// Otherwise, pick one of those jobs at random.
-			var/datum/job/picked_job = pick(possible_jobs)
+			// Otherwise, pick highest priority job.
+			var/datum/job/picked_job = pick_highest_priority_job(possible_jobs)
 
 			job_debug("JOBS: Now assigning role to player: [player], Job:[picked_job.title]")
 			assign_role(player, picked_job, do_eligibility_checks = FALSE)
 			if((picked_job.current_positions >= picked_job.spawn_positions) && picked_job.spawn_positions != -1)
 				job_debug("JOBS: Job is now full, Job: [picked_job], Positions: [picked_job.current_positions], Limit: [picked_job.spawn_positions]")
 				available_occupations -= picked_job
+
+	/// BANDASTATION EDIT END - Job Priority Staffing
 
 	job_debug("DO: Ending standard job assignment")
 
@@ -533,7 +519,7 @@ SUBSYSTEM_DEF(job)
 	job_debug("DO: Handle unrejectable unassigned")
 	//Mop up people who can't leave.
 	for(var/mob/dead/new_player/player in unassigned) //Players that wanted to back out but couldn't because they're antags (can you feel the edge case?)
-		if(!give_random_job(player))
+		if(!give_priority_job(player)) /// BANDASTATION EDIT - Job Priority Staffing
 			if(!assign_role(player, get_job_type(overflow_role))) //If everything is already filled, make them an assistant
 				job_debug("DO: Forced antagonist could not be assigned any random job or the overflow role. divide_occupations failed.")
 				job_debug("---------------------------------------------------")
@@ -575,7 +561,7 @@ SUBSYSTEM_DEF(job)
 				try_reject_player(player)
 				return
 		if (BERANDOMJOB)
-			if(!give_random_job(player))
+			if(!give_priority_job(player)) /// BANDASTATION EDIT - Job Priority Staffing
 				job_debug("HU: Player cannot be given a random job, trying to reject: [player]")
 				try_reject_player(player)
 				return
@@ -702,9 +688,10 @@ SUBSYSTEM_DEF(job)
 	return 0
 
 /datum/controller/subsystem/job/proc/try_reject_player(mob/dead/new_player/player)
-	if(player.mind && player.mind.special_role)
-		job_debug("RJCT: Player unable to be rejected due to special_role, Player: [player], SpecialRole: [player.mind.special_role]")
-		return FALSE
+	for(var/datum/dynamic_ruleset/roundstart/ruleset in SSdynamic.queued_rulesets)
+		if(player.mind in ruleset.selected_minds)
+			job_debug("RJCT: Player unable to be rejected due to being selected by dynamic, Player: [player], Ruleset: [ruleset]")
+			return FALSE
 
 	job_debug("RJCT: Player rejected, Player: [player]")
 	unassigned -= player
@@ -875,24 +862,27 @@ SUBSYSTEM_DEF(job)
 /// Assigns roles that are considered high priority, either due to dynamic needing to force a specific role for a specific ruleset
 /// or making sure roles critical to round progression exist where possible every shift.
 /datum/controller/subsystem/job/proc/assign_priority_positions()
-	job_debug("APP: Assigning Dynamic ruleset forced occupations: [length(dynamic_forced_occupations)]")
-	for(var/mob/new_player in dynamic_forced_occupations)
+	job_debug("APP: Assigning Dynamic ruleset forced occupations: [LAZYLEN(forced_occupations)]")
+	for(var/datum/mind/mind as anything in forced_occupations)
+		var/mob/dead/new_player = mind.current
 		// Eligibility checks already carried out as part of the dynamic ruleset trim_candidates proc.
 		// However no guarantee of game state between then and now, so don't skip eligibility checks on assign_role.
-		assign_role(new_player, get_job(dynamic_forced_occupations[new_player]))
+		assign_role(new_player, get_job_type(LAZYACCESS(forced_occupations, mind)))
 
-	// Get JP_HIGH department Heads of Staff in place. Indirectly useful for the Revolution ruleset to have as many Heads as possible.
-	job_debug("APP: Assigning all JP_HIGH head of staff roles.")
-	var/head_count = fill_all_head_positions_at_priority(JP_HIGH)
+	/// BANDASTATION REMOVAL START - Job Priority Staffing
+	// // Get JP_HIGH department Heads of Staff in place. Indirectly useful for the Revolution ruleset to have as many Heads as possible.
+	// job_debug("APP: Assigning all JP_HIGH head of staff roles.")
+	// var/head_count = fill_all_head_positions_at_priority(JP_HIGH)
 
-	// If nobody has JP_HIGH on a Head role, try to force at least one Head of Staff so every shift has the best chance
-	// of having at least one leadership role.
-	if(head_count == 0)
-		force_one_head_assignment()
+	// // If nobody has JP_HIGH on a Head role, try to force at least one Head of Staff so every shift has the best chance
+	// // of having at least one leadership role.
+	// if(head_count == 0)
+	// 	force_one_head_assignment()
 
-	// Fill out all AI positions.
-	job_debug("APP: Filling all AI positions")
-	fill_ai_positions()
+	// // Fill out all AI positions.
+	// job_debug("APP: Filling all AI positions")
+	// fill_ai_positions()
+	/// BANDASTATION REMOVAL END - Job Priority Staffing
 
 /datum/controller/subsystem/job/proc/assign_all_overflow_positions()
 	job_debug("OVRFLW: Assigning all overflow roles.")
@@ -944,7 +934,7 @@ SUBSYSTEM_DEF(job)
 		job_debug("[debug_prefix]: Player has no mind, Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_GENERIC
 
-	if(possible_job.title in player.mind.restricted_roles)
+	if(possible_job.title in LAZYACCESS(prevented_occupations, player.mind))
 		job_debug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ANTAG_INCOMPAT, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_ANTAG_INCOMPAT
 
@@ -963,7 +953,8 @@ SUBSYSTEM_DEF(job)
 		return JOB_UNAVAILABLE_BANNED
 
 	// Check for character age
-	if(possible_job.required_character_age > player.client.prefs.read_preference(/datum/preference/numeric/age) && possible_job.required_character_age != null)
+	var/client/player_client = GET_CLIENT(player)
+	if(isnum(possible_job.required_character_age) && possible_job.required_character_age > player_client.prefs.read_preference(/datum/preference/numeric/age))
 		job_debug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_AGE)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_AGE
 
@@ -996,98 +987,3 @@ SUBSYSTEM_DEF(job)
 		return TRUE
 
 	return FALSE
-
-// BANDASTATION EDIT START - STORYTELLER
-/datum/controller/subsystem/job/proc/FreeRole(rank)
-	if(!rank)
-		return
-	job_debug("Freeing role: [rank]")
-	var/datum/job/job = get_job(rank)
-	if(!job)
-		return FALSE
-	job.current_positions = max(0, job.current_positions - 1)
-
-/datum/controller/subsystem/job/proc/SetupOccupations()
-	name_occupations = list()
-	type_occupations = list()
-
-	var/list/all_jobs = subtypesof(/datum/job)
-	if(!length(all_jobs))
-		all_occupations = list()
-		joinable_occupations = list()
-		joinable_departments = list()
-		joinable_departments_by_type = list()
-		experience_jobs_map = list()
-		to_chat(world, span_boldannounce("Error setting up jobs, no job datums found"))
-		return FALSE
-
-	var/list/new_all_occupations = list()
-	var/list/new_joinable_occupations = list()
-	var/list/new_joinable_departments = list()
-	var/list/new_joinable_departments_by_type = list()
-	var/list/new_experience_jobs_map = list()
-
-	for(var/job_type in all_jobs)
-		var/datum/job/job = new job_type()
-		if(!job.config_check())
-			continue
-		if(!job.map_check()) //Even though we initialize before mapping, this is fine because the config is loaded at new
-			log_job_debug("Removed [job.title] due to map config")
-			continue
-		new_all_occupations += job
-		name_occupations[job.title] = job
-		type_occupations[job_type] = job
-		if(job.job_flags & JOB_NEW_PLAYER_JOINABLE)
-			new_joinable_occupations += job
-			if(!LAZYLEN(job.departments_list))
-				var/datum/job_department/department = new_joinable_departments_by_type[/datum/job_department/undefined]
-				if(!department)
-					department = new /datum/job_department/undefined()
-					new_joinable_departments_by_type[/datum/job_department/undefined] = department
-				department.add_job(job)
-				continue
-			for(var/department_type in job.departments_list)
-				var/datum/job_department/department = new_joinable_departments_by_type[department_type]
-				if(!department)
-					department = new department_type()
-					new_joinable_departments_by_type[department_type] = department
-				department.add_job(job)
-
-	sortTim(new_all_occupations, GLOBAL_PROC_REF(cmp_job_display_asc))
-	for(var/datum/job/job as anything in new_all_occupations)
-		if(!job.exp_granted_type)
-			continue
-		new_experience_jobs_map[job.exp_granted_type] += list(job)
-
-	sortTim(new_joinable_departments_by_type, GLOBAL_PROC_REF(cmp_department_display_asc), associative = TRUE)
-	for(var/department_type in new_joinable_departments_by_type)
-		var/datum/job_department/department = new_joinable_departments_by_type[department_type]
-		sortTim(department.department_jobs, GLOBAL_PROC_REF(cmp_job_display_asc))
-		new_joinable_departments += department
-		if(department.department_experience_type)
-			new_experience_jobs_map[department.department_experience_type] = department.department_jobs.Copy()
-
-	all_occupations = new_all_occupations
-	joinable_occupations = sortTim(new_joinable_occupations, GLOBAL_PROC_REF(cmp_job_display_asc))
-	joinable_departments = new_joinable_departments
-	joinable_departments_by_type = new_joinable_departments_by_type
-	experience_jobs_map = new_experience_jobs_map
-
-	return TRUE
-
-/datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, buckle = TRUE)
-	var/atom/destination
-
-	if(M.mind && !is_unassigned_job(M.mind.assigned_role) && length(GLOB.jobspawn_overrides[M.mind.assigned_role.title])) //We're doing something special today.
-		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role.title])
-		destination.JoinPlayerHere(M, FALSE)
-		return TRUE
-
-	if(latejoin_trackers.len)
-		destination = pick(latejoin_trackers)
-		destination.JoinPlayerHere(M, buckle)
-		return TRUE
-
-	destination = get_last_resort_spawn_points()
-	destination.JoinPlayerHere(M, buckle)
-// BANDASTATION EDIT END - STORYTELLER

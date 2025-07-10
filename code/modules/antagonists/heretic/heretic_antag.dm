@@ -20,7 +20,7 @@
 	antagpanel_category = "Heretic"
 	ui_name = "AntagInfoHeretic"
 	antag_moodlet = /datum/mood_event/heretics
-	job_rank = ROLE_HERETIC
+	pref_flag = ROLE_HERETIC
 	antag_hud_name = "heretic"
 	hijack_speed = 0.5
 	suicide_cry = "МАНСУС УЛЫБАЕТСЯ МНЕ!!"
@@ -261,7 +261,7 @@
 	return finish_preview_icon(icon)
 
 /datum/antagonist/heretic/farewell()
-	if(!silent)
+	if(!silent && owner.current)
 		to_chat(owner.current, span_userdanger("Ваш разум начинает разгораться, когда потусторонние знания ускользают от вас!"))
 	return ..()
 
@@ -276,14 +276,17 @@
 		gain_knowledge(starting_knowledge)
 
 
+	ADD_TRAIT(owner, TRAIT_SEE_BLESSED_TILES, REF(src))
 	addtimer(CALLBACK(src, PROC_REF(passive_influence_gain)), passive_gain_timer) // Gain +1 knowledge every 20 minutes.
 	return ..()
 
 /datum/antagonist/heretic/on_removal()
-	for(var/knowledge_index in researched_knowledge)
-		var/datum/heretic_knowledge/knowledge = researched_knowledge[knowledge_index]
-		knowledge.on_lose(owner.current, src)
+	if(owner.current)
+		for(var/knowledge_index in researched_knowledge)
+			var/datum/heretic_knowledge/knowledge = researched_knowledge[knowledge_index]
+			knowledge.on_lose(owner.current, src)
 
+	REMOVE_TRAIT(owner, TRAIT_SEE_BLESSED_TILES, REF(src))
 	QDEL_LIST_ASSOC_VAL(researched_knowledge)
 	return ..()
 

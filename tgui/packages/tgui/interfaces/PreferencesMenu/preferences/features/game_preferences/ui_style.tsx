@@ -45,9 +45,7 @@ function UIStyleInput(
   return (
     <Dropdown
       selected={value}
-      clipSelectedText={false}
       onSelected={props.handleSetValue}
-      width="100%"
       options={sortChoices(Object.entries(choices)).map(
         ([dataValue, label]) => {
           return {
@@ -62,6 +60,6 @@ function UIStyleInput(
 
 export const UI_style: FeatureChoiced = {
   name: 'Стиль UI',
-  category: 'ИНТЕРФЕЙС',
+  category: 'Интерфейс',
   component: UIStyleInput,
 };

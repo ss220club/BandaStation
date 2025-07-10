@@ -1,4 +1,5 @@
-import { filter, sortBy } from 'common/collections';
+import { sortBy } from 'es-toolkit';
+import { filter } from 'es-toolkit/compat';
 import { useState } from 'react';
 import { useBackend, useLocalState } from 'tgui/backend';
 import {
@@ -31,7 +32,7 @@ export const SecurityRecordTabs = (props) => {
 
   const sorted = sortBy(
     filter(records, (record) => isRecordMatch(record, search)),
-    (record) => record.name,
+    [(record) => record.name],
   );
 
   return (
