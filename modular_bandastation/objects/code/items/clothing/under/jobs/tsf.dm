@@ -1,6 +1,4 @@
-// MARK: Under //
-
-// TSF Marine
+// MARK: TSF
 /obj/item/clothing/under/rank/tsf
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/tsf.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/tsf.dmi'

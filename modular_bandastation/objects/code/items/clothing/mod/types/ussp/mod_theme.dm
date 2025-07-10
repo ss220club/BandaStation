@@ -5,10 +5,8 @@
 		Простой, дешёвый, возможно надежный."
 	default_skin = "ussp_standart"
 	armor_type = /datum/armor/mod_theme_ussp_standart
-	complexity_max = DEFAULT_MAX_COMPLEXITY
 	siemens_coefficient = 0
 	slowdown_deployed = 0.25
-	activation_step_time = MOD_ACTIVATION_STEP_TIME
 	activation_sound = 'modular_bandastation/objects/sounds/mod_activation/mod_nominal_ru.ogg'
 	allowed_suit_storage = list(
 		/obj/item/ammo_box,
@@ -77,12 +75,10 @@
 	default_skin = "ussp_elite"
 	armor_type = /datum/armor/mod_theme_ussp_elite
 	resistance_flags = FIRE_PROOF|ACID_PROOF
-	atom_flags = PREVENT_CONTENTS_EXPLOSION_1
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	complexity_max = DEFAULT_MAX_COMPLEXITY + 10
 	siemens_coefficient = 0
 	slowdown_deployed = 0.25
-	activation_step_time = MOD_ACTIVATION_STEP_TIME
 	activation_sound = 'modular_bandastation/objects/sounds/mod_activation/mod_nominal_ru.ogg'
 	allowed_suit_storage = list(
 		/obj/item/ammo_box,

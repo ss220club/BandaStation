@@ -407,7 +407,7 @@
 		/obj/item/folder/blue,
 		/obj/item/pen/fourcolor,
 	)
-	head = /obj/item/clothing/head/hats/tsf_fedora
+	head = /obj/item/clothing/head/hats/fedora/tsf
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/laceup
 	glasses = /obj/item/clothing/glasses/sunglasses

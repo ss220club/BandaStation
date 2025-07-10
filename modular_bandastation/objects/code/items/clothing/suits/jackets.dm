@@ -150,5 +150,3 @@
 	icon_state = "tsf_jacket"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
-
-

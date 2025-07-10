@@ -52,7 +52,7 @@
 	)
 	gloves = /obj/item/clothing/gloves/combat
 	shoes = /obj/item/clothing/shoes/jackboots
-	head = /obj/item/clothing/head/hats/ussp/command
+	head = /obj/item/clothing/head/hats/ussp_command
 	mask = /obj/item/cigarette/pipe
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
@@ -157,7 +157,7 @@
 		/obj/item/lighter/greyscale,
 		/obj/item/binoculars
 	)
-	head = /obj/item/clothing/head/hats/ussp/officer
+	head = /obj/item/clothing/head/hats/ussp_officer
 	gloves = /obj/item/clothing/gloves/combat
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
@@ -414,7 +414,7 @@
 		/obj/item/folder/red,
 		/obj/item/pen/fourcolor,
 	)
-	head = /obj/item/clothing/head/hats/ussp/officer
+	head = /obj/item/clothing/head/hats/ussp_officer
 	gloves = /obj/item/clothing/gloves/combat
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
@@ -444,7 +444,7 @@
 		/obj/item/pen/fourcolor,
 	)
 	gloves = /obj/item/clothing/gloves/color/white
-	head = /obj/item/clothing/head/hats/ussp/officer
+	head = /obj/item/clothing/head/hats/ussp_officer
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
 	l_hand = /obj/item/storage/briefcase

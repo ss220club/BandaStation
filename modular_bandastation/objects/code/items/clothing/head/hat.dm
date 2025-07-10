@@ -122,7 +122,7 @@
 	worn_icon_state = "secbeanie"
 	armor_type = /datum/armor/cosmetic_sec
 
-// TSF
+// MARK: TSF
 /obj/item/clothing/head/beret/tsf_commander
 	name = "TSF commander beret"
 	desc = "Берет командующего офицера КМП ТСФ."
@@ -200,36 +200,39 @@
 	dog_fashion = null
 	flags_1 = NONE
 
-/obj/item/clothing/head/hats/tsf_fedora
+/obj/item/clothing/head/hats/fedora/tsf
 	name = "TSF fedora"
-	desc = "Темно-синяя федора.\
-	Feel like a Solar gangsta."
-	icon_state = "tsf_fedora"
+	desc = "Темно-синяя федора."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "tsf_fedora"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
 /obj/item/clothing/head/hats/tsf_cap
 	name = "TSF cap"
 	desc = "Мягкая кепка с опозновательными знаками ТСФ"
-	icon_state = "tsf_cap"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "tsf_cap"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
-// USSP
+// MARK: USSP
 /obj/item/clothing/head/hats/ussp
 	name = "soviet pilotka"
 	desc = "Пилотка бойцов КА СССП."
-	icon_state = "ussp_pilotka"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "ussp_pilotka"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
-/obj/item/clothing/head/hats/ussp/officer
+/obj/item/clothing/head/hats/ussp_officer
 	name = "soviet officer hat"
 	desc = "Фуражка офицера КА СССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
 	icon_state = "ussp_hat_officer"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
-/obj/item/clothing/head/hats/ussp/command
+/obj/item/clothing/head/hats/ussp_command
 	name = "soviet general hat"
 	desc = "Фуражка высшего командного состава КА СССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
 	icon_state = "ussp_hat_komandir"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
