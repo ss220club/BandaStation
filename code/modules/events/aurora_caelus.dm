@@ -68,7 +68,7 @@
 	fade_kitchen()
 	priority_announce("Событие aurora caelus подходит к концу. Условия звездного света постепенно вернутся в норму. Когда все закончится, пожалуйста, вернитесь на свое рабочее место и продолжайте работать в обычном режиме. Приятной смены, [station_name()] и спасибо, что смотрите с нами.",
 	sound = 'sound/announcer/notice/notice2.ogg',
-	sender_override = "Отдел метеорологии Нанотрейзен")
+	sender_override = "Отдел Метеорологии Нанотрейзен")
 
 /datum/round_event/aurora_caelus/proc/fade_space(fade_in = FALSE)
 	set waitfor = FALSE
