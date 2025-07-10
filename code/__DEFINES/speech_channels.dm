@@ -4,6 +4,4 @@
 #define ME_CHANNEL "Me"
 #define OOC_CHANNEL "OOC"
 #define ADMIN_CHANNEL "Admin"
-//SS220 ADD START
-#define MENTOR_CHANNEL "Ment"
-//SS220 ADD END
+#define MENTOR_CHANNEL "Ментр" // BANDASTATION EDIT

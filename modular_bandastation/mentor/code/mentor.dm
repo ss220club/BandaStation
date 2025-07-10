@@ -20,11 +20,10 @@ ADMIN_VERB(mentor_message, R_MENTOR | R_ADMIN, "Mentor chat", "Позволяе�
 	msg = emoji_parse(copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN))
 	if(!msg)
 		return
-	// Сюда добавь проверку на то, ментор ли чел, и если нет то ретурн
 
 	if(!check_rights(R_ADMIN | R_MENTOR))
 		return
-
+	else
 		msg = "[span_mentorsay("[span_prefix("MENTOR:")] <EM>[key_name_admin(user)]</EM> [ADMIN_FLW(user.mob)]: <span class='message linkify'>[msg]")]</span>"
 		to_chat(GLOB.admins + GLOB.mentors,
 			type = MESSAGE_TYPE_MENTORCHAT,
@@ -37,5 +36,4 @@ ADMIN_VERB(mentor_message, R_MENTOR | R_ADMIN, "Mentor chat", "Позволяе�
 	if(!msg)
 		return
 
-    // Сюда добавь проверку на то, ментор ли чел, и если нет то ретурн
 

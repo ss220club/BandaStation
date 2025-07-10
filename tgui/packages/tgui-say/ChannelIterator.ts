@@ -5,7 +5,7 @@ export type Channel =
   | 'Radio'
   | 'OOC'
   | 'LOOC'
-  | 'Ment'
+  | 'Ментр'
   | 'Admin';
 
 /**
@@ -23,7 +23,7 @@ export class ChannelIterator {
     'Radio',
     'OOC',
     'LOOC',
-    'Ment',
+    'Ментр',
     'Admin',
   ];
   private readonly blacklist: Channel[] = ['Admin'];
