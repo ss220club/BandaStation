@@ -1,0 +1,4 @@
+author: "AyIong"
+delete-after: True
+changes:
+  - rscadd: "Бейджикам в чате добавлены тултипы при наведении"
