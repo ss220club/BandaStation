@@ -2,6 +2,8 @@
 	category = CATEGORY_MENTOR
 	weight = WEIGHT_ADMIN
 
+GLOBAL_LIST_EMPTY(mentors)
+
 /datum/keybinding/mentor/mentor_say
 	hotkey_keys = list("ShiftF5")
 	name = MENTOR_CHANNEL
