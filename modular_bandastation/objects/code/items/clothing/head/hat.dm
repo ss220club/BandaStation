@@ -121,3 +121,10 @@
 	icon_state = "secbeanie"
 	worn_icon_state = "secbeanie"
 	armor_type = /datum/armor/cosmetic_sec
+
+/obj/item/clothing/head/costume/british
+	name = "british hat"
+	desc = "У тебя есть враги? Хорошо. Значит, в своей жизни ты что-то когда-то отстаивал."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "britishhat"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'

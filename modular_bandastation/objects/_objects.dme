@@ -54,6 +54,7 @@
 #include "code/items/clothing/suits/ntci_armor.dm"
 #include "code/items/clothing/belt/belt.dm"
 #include "code/items/clothing/under/under.dm"
+#include "code/items/clothing/under/napaleonic.dm"
 #include "code/items/clothing/under/carnival.dm"
 #include "code/items/clothing/under/jobs/blueshield.dm"
 #include "code/items/clothing/under/jobs/centcom.dm"
