@@ -127,7 +127,7 @@
 /atom/movable/screen/alert/MouseEntered(location,control,params)
 	. = ..()
 	if(!QDELETED(src))
-		openToolTip(usr,src,params,title = name,content = desc,theme = alerttooltipstyle)
+		openToolTip(usr,src,params,title = declent_ru(NOMINATIVE),content = desc,theme = alerttooltipstyle)
 
 
 /atom/movable/screen/alert/MouseExited()
@@ -863,7 +863,7 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 	ghost_owner.observer_view(target)
 
 /atom/movable/screen/alert/poll_alert
-	name = "Looking for candidates"
+	name = "Выбор кандидатов"
 	icon_state = "template"
 	timeout = 30 SECONDS
 	ghost_screentips = TRUE
@@ -912,17 +912,17 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 	var/left_click_text
 	if(poll)
 		if(owner in poll.signed_up)
-			left_click_text = "Leave"
+			left_click_text = "Отказаться"
 		else
-			left_click_text = "Enter"
-		context[SCREENTIP_CONTEXT_LMB] = "[left_click_text] Poll"
+			left_click_text = "Принять"
+		context[SCREENTIP_CONTEXT_LMB] = "[left_click_text]"
 		if(poll.ignoring_category)
 			var/selected_never = FALSE
 			if(owner.ckey in GLOB.poll_ignore[poll.ignoring_category])
 				selected_never = TRUE
-			context[SCREENTIP_CONTEXT_ALT_LMB] = "[selected_never ? "Cancel " : ""]Never For This Round"
+			context[SCREENTIP_CONTEXT_ALT_LMB] = "[selected_never ? "Начать " : "Не "]приглашать в этом раунде"
 		if(poll.jump_to_me && isobserver(owner))
-			context[SCREENTIP_CONTEXT_CTRL_LMB] = "Jump To"
+			context[SCREENTIP_CONTEXT_CTRL_LMB] = "Прыгнуть"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /atom/movable/screen/alert/poll_alert/process()
@@ -1014,8 +1014,8 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 //OBJECT-BASED
 
 /atom/movable/screen/alert/buckled
-	name = "Buckled"
-	desc = "You've been buckled to something. Click the alert to unbuckle unless you're handcuffed."
+	name = "Пристегнуты"
+	desc = "Вы были к чему-то пристегнуты. Нажмите на это уведомление, чтобы отстегнуться, если вы не в наручниках."
 	icon_state = ALERT_BUCKLED
 	clickable_glow = TRUE
 

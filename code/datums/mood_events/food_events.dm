@@ -1,25 +1,25 @@
 /datum/mood_event/favorite_food
-	description = "I really enjoyed eating that."
+	description = "Мне очень понравилась эта еда."
 	mood_change = 5
 	timeout = 4 MINUTES
 
 /datum/mood_event/gross_food
-	description = "I really didn't like that food."
+	description = "Мне очень не понравилась эта еда."
 	mood_change = -2
 	timeout = 4 MINUTES
 
 /datum/mood_event/disgusting_food
-	description = "That food was disgusting!"
+	description = "Эта еда была отвратительна!"
 	mood_change = -6
 	timeout = 4 MINUTES
 
 /datum/mood_event/allergic_food
-	description = "My throat itches."
+	description = "Моё горло зудит."
 	mood_change = -2
 	timeout = 4 MINUTES
 
 /datum/mood_event/breakfast
-	description = "Nothing like a hearty breakfast to start the shift."
+	description = "Нет ничего лучше сытного завтрака, чтобы начать смену."
 	mood_change = 2
 	timeout = 10 MINUTES
 
@@ -30,7 +30,7 @@
 /datum/mood_event/food/New(mob/M, ...)
 	. = ..()
 	mood_change = 2 + 2 * quality
-	description = "That food was [GLOB.food_quality_description[quality]]."
+	description = "Эта была [GLOB.food_quality_description[quality]] пища."
 
 /datum/mood_event/food/nice
 	quality = FOOD_QUALITY_NICE
