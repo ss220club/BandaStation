@@ -54,7 +54,7 @@
 
 ///Returns a copy of the book_info datum
 /datum/book_info/proc/return_copy()
-	var/datum/book_info/copycat = new(title, author, content)
+	var/datum/book_info/copycat = new(title, author, get_full_content()) /// BANDASTATION EDIT - многостраничность книг
 	return copycat
 
 ///Modify an existing book_info datum to match your data
