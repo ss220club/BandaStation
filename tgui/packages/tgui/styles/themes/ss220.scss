@@ -8,16 +8,16 @@
   --comp-border: hsl(from var(--pref-background) h s calc(l + 7.5));
 
   // Department colors
-  --color-security: hsl(0, 60%, 45%);
-  --color-justice: hsl(325, 80%, 40%);
-  --color-science: hsl(275, 90%, 35%);
-  --color-command: hsl(215, 90%, 40%);
-  --color-centcom: hsl(210, 100%, 25%);
-  --color-silicon: hsl(210, 30%, 40%);
-  --color-medical: hsl(195, 75%, 35%);
-  --color-service: hsl(140, 70%, 30%);
-  --color-engineering: hsl(40, 100%, 30%);
-  --color-cargo: hsl(35, 40%, 40%);
+  --color-security: oklch(0.533 0.155 25);
+  --color-justice: oklch(0.525 0.175 352.5);
+  --color-science: oklch(0.525 0.175 300);
+  --color-command: oklch(0.5 0.2 255);
+  --color-centcom: oklch(0.425 0.15 265);
+  --color-silicon: oklch(0.5 0.065 250);
+  --color-medical: oklch(0.55 0.1 225);
+  --color-service: oklch(0.55 0.135 150);
+  --color-engineering: oklch(0.6 0.125 75);
+  --color-cargo: oklch(0.6 0.085 75);
 
   // Background colors
   --color-base: hsl(var(--primary-hue), 30%, 15%);
@@ -26,8 +26,8 @@
 
   // Base
   --primary-hue: 202.5;
-  --primary-saturation: 47.5%;
-  --primary-lightness: 37.5%;
+  --primary-saturation: 55%;
+  --primary-lightness: 40%;
   --color-text: hsl(var(--primary-hue), 7.5%, 95%);
   --color-border-primary: var(--color-primary);
   --color-border-secondary: hsl(

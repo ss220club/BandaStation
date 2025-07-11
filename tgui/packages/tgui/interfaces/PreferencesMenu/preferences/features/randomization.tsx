@@ -1,8 +1,8 @@
 import { useBackend } from 'tgui/backend';
 
 import { RandomizationButton } from '../../components/RandomizationButton';
-import { PreferencesMenuData, RandomSetting } from '../../types';
-import { CheckboxInput, Feature, FeatureToggle } from './base';
+import { type PreferencesMenuData, RandomSetting } from '../../types';
+import { CheckboxInput, type Feature, type FeatureToggle } from './base';
 
 export const random_hardcore: FeatureToggle = {
   name: 'Тотальный рандом',
@@ -52,3 +52,25 @@ export const random_species: Feature<RandomSetting> = {
     );
   },
 };
+
+// BANDASTATION ADDITION START - TTS
+export const random_tts_seed: Feature<RandomSetting> = {
+  name: 'Случайный голос',
+  component: (props) => {
+    const { act, data } = useBackend<PreferencesMenuData>();
+    const tts_seed = data.character_preferences.randomization['tts_seed'];
+
+    return (
+      <RandomizationButton
+        setValue={(newValue) =>
+          act('set_random_preference', {
+            preference: 'tts_seed',
+            value: newValue,
+          })
+        }
+        value={tts_seed || RandomSetting.Disabled}
+      />
+    );
+  },
+};
+// BANDASTATION ADDITION END - TTS

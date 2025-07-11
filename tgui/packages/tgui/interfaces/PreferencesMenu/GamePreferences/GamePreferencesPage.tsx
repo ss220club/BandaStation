@@ -1,12 +1,13 @@
-import { binaryInsertWith, sortBy } from 'common/collections';
-import { ReactNode } from 'react';
+import { binaryInsertWith } from 'common/collections';
+import { sortBy } from 'es-toolkit';
+import type { ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Stack } from 'tgui-core/components';
 
 import { Preference } from '../components/Preference';
 import { features } from '../preferences/features';
 import { FeatureValueInput } from '../preferences/features/base';
-import { PreferencesMenuData } from '../types';
+import type { PreferencesMenuData } from '../types';
 import { TabbedMenu } from './TabbedMenu';
 
 export type PreferenceChild = {
@@ -22,7 +23,7 @@ function binaryInsertPreference(
 }
 
 function sortByName(array: [string, PreferenceChild[]][]) {
-  return sortBy(array, ([name]) => name);
+  return sortBy(array, [([name]) => name]);
 }
 
 export function GamePreferencesPage(props) {
