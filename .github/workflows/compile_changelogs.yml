@@ -8,7 +8,7 @@ on:
 jobs:
   compile:
     name: "Compile changelogs"
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted]
     permissions:
       contents: write
     steps:
@@ -32,7 +32,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install pyyaml
-          sudo apt-get install  dos2unix
 
       - name: "Checkout"
         if: steps.value_holder.outputs.ACTIONS_ENABLED

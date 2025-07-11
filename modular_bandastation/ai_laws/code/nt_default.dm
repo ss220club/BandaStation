@@ -1,5 +1,5 @@
 /obj/item/ai_module/core/full/nt_default
-	name = "'НТ Стандарт' Core AI Module"
+	name = "'NT Default' Core AI Module"
 	law_id = "nt_default"
 
 /datum/ai_laws/nt_default
