@@ -51,6 +51,7 @@
 	open_sound = 'sound/effects/spray.ogg'
 	close_sound = 'sound/effects/spray.ogg'
 	foldedbag_path = /obj/item/bodybag/stasis
+	var/list/occupants = list()
 
 //Добавить механизм добавления оверлея на предмет
 /obj/structure/closet/body_bag/stasis/closet_update_overlays(list/new_overlays)
@@ -81,12 +82,31 @@
 		mob.apply_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		ADD_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 		mob.extinguish_mob()
+		occupants += mob
+	START_PROCESSING(SSobj, src)
 
 /obj/structure/closet/body_bag/stasis/open(mob/living/user, force = FALSE, special_effects = TRUE)
 	for(var/mob/living/mob in contents)
 		mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		REMOVE_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
+	occupants = list()
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
+
+/obj/structure/closet/body_bag/stasis/Destroy()
+	for(var/mob/living/L in occupants)
+		L.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
+		REMOVE_TRAIT(L, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
+	occupants = list()
+	return ..()
+
+/obj/structure/closet/body_bag/stasis/process(seconds_per_tick)
+	for(var/mob/living/L in occupants)
+		if(!contents.Find(L))
+			L.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
+			REMOVE_TRAIT(L, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
+			occupants -= L
+
 
 /obj/item/reagent_containers/hypospray/medipen
 	list_reagents = list(/datum/reagent/medicine/epinephrine = 10, /datum/reagent/medicine/coagulant = 2)
