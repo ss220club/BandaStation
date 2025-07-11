@@ -9,13 +9,13 @@ import {
   Stack,
   TrackOutsideClicks,
 } from 'tgui-core/components';
-import { KeyEvent } from 'tgui-core/events';
+import type { KeyEvent } from 'tgui-core/events';
 import { fetchRetry } from 'tgui-core/http';
 import { isEscape, KEY } from 'tgui-core/keys';
 
 import { LoadingScreen } from '../../common/LoadingScreen';
 import { Preference } from '../components/Preference';
-import { PreferencesMenuData } from '../types';
+import type { PreferencesMenuData } from '../types';
 import { TabbedMenu } from './TabbedMenu';
 
 type Keybinding = {
