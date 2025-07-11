@@ -20,7 +20,7 @@
 #include "balance/_balance.dme"
 #include "bar_hookahs/_bar_hookahs.dme"
 #include "barsigns/_barsigns.dme"
-#include "burocracy/_burocracy.dme"
+#include "bureaucracy/_bureaucracy.dme"
 #include "changelog/_changelog.dme"
 #include "chat/_chat.dme"
 #include "communication/_communication.dme"

@@ -1,3 +1,4 @@
+/// UI actions for book
 /obj/item/book/ui_act(action, params)
 	var/datum/tgui/ui = SStgui.get_open_ui(usr, src)
 	switch(action)
@@ -20,15 +21,16 @@
 
 	return ..()
 
+/// Tears out a page from the book
 /obj/item/book/proc/tear_out_page(mob/living/user)
-	if (!book_data)
+	if(!book_data)
 		return FALSE
 
 	book_data.ensure_pages()
 
 	var/page_index = book_data.current_page_index
 	var/text = book_data.content
-	if (!istext(text))
+	if(!istext(text))
 		to_chat(user, span_warning("This page can't be ripped out."))
 		return FALSE
 
@@ -40,7 +42,3 @@
 
 	to_chat(user, span_notice("You tear out a page from [src]."))
 	return TRUE
-
-
-
-
