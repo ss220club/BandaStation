@@ -292,7 +292,7 @@
 	ricochets_max = 4 //Originally 6
 	ricochet_incidence_leeway = 40
 	ricochet_chance = 75
-	ricochet_decay_damage = 0.75 // 70/10 -> ~53/~8 -> ~39/~6 -> ~30/~4 -> ~22/~3
+	ricochet_decay_damage = 0.75 // 50 -> ~37 -> ~27 -> ~20 -> ~15
 	shrapnel_type = /obj/item/shrapnel/bullet/railgun
 	hitsound = 'modular_bandastation/objects/sounds/weapons/rail.ogg'
 
