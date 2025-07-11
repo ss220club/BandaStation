@@ -367,3 +367,20 @@
 	desc = "Увеличенный магазин для пистолетов НТ калибра 9x25мм, вмещающий 22 экспансивных патронов."
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
+
+// MARK: Railgun
+/obj/item/ammo_box/magazine/railgun
+	name = "railgun magazine (30mm NT)"
+	desc = "Коробчатый магазин-аккумулятор для ручного электромагнитного ускорителя масс калибра 30мм, вмещающий 5 снарядов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "railgun_mag"
+	ammo_type = /obj/item/ammo_casing/railgun
+	caliber = CALIBER_30mmRail
+	max_ammo = 5
+	multiple_sprites = AMMO_BOX_PER_BULLET
+	w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/ammo_box/magazine/railgun/taser
+	name = "railgun magazine (30mm NT less-lethal)"
+	desc = "Коробчатый магазин-аккумулятор для ручного электромагнитного ускорителя масс калибра 30мм, вмещающий 5 нелетальных снарядов."
+	ammo_type = /obj/item/ammo_casing/railgun/taser

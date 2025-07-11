@@ -104,6 +104,7 @@
 #include "code/items/weapons/ranged/ballistic/supply_packs.dm"
 #include "code/items/weapons/ranged/ballistic/gp9.dm"
 #include "code/items/weapons/ranged/ballistic/weapon_designs.dm"
+#include "code/items/weapons/ranged/ballistic/railgun.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
