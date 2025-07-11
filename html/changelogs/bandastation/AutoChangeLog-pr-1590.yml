@@ -1,0 +1,4 @@
+author: "dj-34"
+delete-after: True
+changes:
+  - bugfix: "Исправлен кривой перевод в ритуале Еретика (Перо -> Ручка)."
