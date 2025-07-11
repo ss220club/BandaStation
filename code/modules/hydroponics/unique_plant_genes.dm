@@ -15,9 +15,9 @@
 	if(!.)
 		return
 	var/obj/item/seeds/our_seed = our_plant.get_plant_seed()
-	shield_uses = round(our_seed.potency / 95) // BANDASTATION EDIT - Original:  / 20)
+	shield_uses = round(our_seed.potency / 50) // BANDASTATION EDIT - Original:  / 20)
 	//deliver us from evil o melon god
-	if(shield_uses >= 1) // BANDASTATION Addition - No more shield if potency less than 95
+	if(shield_uses >= 1) // BANDASTATION Addition - No more shield if potency less than 50
 		our_plant.AddComponent(/datum/component/anti_magic, \
 			antimagic_flags = MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY, \
 			inventory_flags = ITEM_SLOT_HANDS, \
