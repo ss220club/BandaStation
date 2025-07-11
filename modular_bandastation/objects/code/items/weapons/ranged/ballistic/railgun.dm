@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/railgun
 	name = "HEMC-62"
-	desc = "Ручной Электромагнитный Ускоритель Масс изделие номер 62 или же простыми словами 'Рельсотрон'. Большая и увесистая пушка для ост самым сильным противникам НТ."
+	desc = "Ручной Электромагнитный Ускоритель Масс изделие номер 62 или же простыми словами 'Рельсотрон'. Большая и увесистая пушка для уничтожения самых сильных противников Нанотрейзен."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic40x32.dmi'
 	icon_state = "railgun"
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/railgun_lefthand40x32.dmi'

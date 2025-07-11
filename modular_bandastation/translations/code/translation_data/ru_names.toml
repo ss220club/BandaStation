@@ -3884,6 +3884,10 @@ gender = "male"
 nominative = "РЭМУМ-62"
 gender = "male"
 
+["HEMC-60"]
+nominative = "РЭМУМ-60"
+gender = "male"
+
 ["vibroblade"]
 nominative = "виброклинок"
 genitive = "виброклинка"
