@@ -23,7 +23,6 @@
 	trim = /datum/id_trim/tsf
 	wildcard_slots = WILDCARD_LIMIT_CENTCOM
 
-
 /datum/id_trim/tsf
 	access = list(ACCESS_CENT_GENERAL)
 	assignment = "TSF"
@@ -65,25 +64,6 @@
 /datum/id_trim/tsf/commander/New()
 	. = ..()
 	access = list(ACCESS_CENT_GENERAL) | (SSid_access.get_region_access_list(list(REGION_GENERAL)) + ACCESS_COMMAND)
-
-/obj/item/storage/belt/holster/detective/full/ert/tsf_commander
-	name = "TSF commander's holster"
-	desc = "Wearing this makes you feel badass."
-
-/obj/item/storage/belt/holster/detective/full/ert/tsf_commander/PopulateContents()
-	generate_items_inside(list(
-		/obj/item/ammo_box/magazine/r10mm = 2,
-		/obj/item/gun/ballistic/automatic/pistol/deagle/regal = 1,
-	),src)
-
-/obj/item/radio/headset/heads/captain/alt/tsf
-	name = "\proper TSF's bowman headset"
-	keyslot = /obj/item/encryptionkey/headset_cent
-	keyslot2 = /obj/item/encryptionkey/heads/captain
-
-/obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
-	clothing_traits = list(TRAIT_SECURITY_HUD)
-	vision_flags = SEE_TURFS|SEE_MOBS|SEE_OBJS
 
 // TSF Marine (Unarmed)
 /datum/outfit/tsf/marine_unarmed
@@ -134,11 +114,7 @@
 	trim_state = "trim_tsf_rank2"
 	big_pointer = TRUE
 
-/obj/item/clothing/glasses/hud/security/sunglasses/tsf
-	name = "HUDSunglasses"
-	icon_state = "sunhudmed"
-
-// TSF Marine - это новые /datum/outfit/centcom/ert/marine, а те будут переделаны под СРТ.
+// TSF Marine
 //Rifleman
 /datum/outfit/tsf/marine
 	name = "TSF - Marine Rifleman"
@@ -161,7 +137,6 @@
 	head = /obj/item/clothing/head/helmet/marine/security
 	belt = /obj/item/storage/belt/military/army/tsf/full_submachine
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
-
 
 //Officer
 /datum/outfit/tsf/marine/officer
@@ -363,24 +338,6 @@
 	belt = /obj/item/storage/belt/military/army/tsf/full_infiltrator
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	r_pocket = /obj/item/knife/combat
-
-/obj/item/gun/ballistic/automatic/sindano/compact/suppressed
-	spawnwithmagazine = /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
-
-/obj/item/gun/ballistic/automatic/sindano/compact/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-	w_class = WEIGHT_CLASS_SMALL
-
-/obj/item/gun/ballistic/automatic/carwo/marksman/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-	w_class = WEIGHT_CLASS_BULKY
-
-/obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
-	greyscale_colors = COLOR_OLIVE
 
 /datum/id_trim/tsf/infiltrator
 	assignment = "TSF - Infiltrator"

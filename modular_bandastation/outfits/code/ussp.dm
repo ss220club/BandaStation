@@ -23,7 +23,6 @@
 	trim = /datum/id_trim/ussp
 	wildcard_slots = WILDCARD_LIMIT_CENTCOM
 
-
 /datum/id_trim/ussp
 	access = list(ACCESS_CENT_GENERAL)
 	assignment = "USSP"
@@ -66,36 +65,6 @@
 /datum/id_trim/ussp/commander/New()
 	. = ..()
 	access = list(ACCESS_CENT_GENERAL) | (SSid_access.get_region_access_list(list(REGION_GENERAL)) + ACCESS_COMMAND)
-
-/obj/item/storage/belt/holster/detective/full/ert/ussp_commander
-	name = "USSP commander's holster"
-	desc = "Wearing this makes you feel comrade."
-	icon_state = "holster"
-
-/obj/item/storage/belt/holster/detective/full/ert/ussp_commander/PopulateContents()
-	generate_items_inside(list(
-		/obj/item/ammo_box/n762_cylinder = 2,
-		/obj/item/gun/ballistic/revolver/nagant = 1,
-	),src)
-
-/obj/item/ammo_box/n762_cylinder
-	name = "speed loader (7.62x38mmR)"
-	desc = "Designed to quickly reload revolvers. Made in USSP."
-	icon_state = "357"
-	ammo_type = /obj/item/ammo_casing/n762
-	max_ammo = 7
-	caliber = CALIBER_N762
-	multiple_sprites = AMMO_BOX_PER_BULLET
-	item_flags = NO_MAT_REDEMPTION
-	ammo_band_icon = "+357_ammo_band"
-	ammo_band_color = null
-
-/obj/item/radio/headset/heads/captain/alt/ussp
-	name = "\proper USSP's bowman headset"
-	icon_state = "ussp_headset"
-	worn_icon_state = "ussp_headset"
-	keyslot = /obj/item/encryptionkey/headset_cent
-	keyslot2 = /obj/item/encryptionkey/heads/captain
 
 // USSP Soldier (Unarmed)
 /datum/outfit/ussp/soldier_unarmed
@@ -278,14 +247,6 @@
 	l_pocket = /obj/item/assembly/flash
 	r_pocket = /obj/item/grenade/flashbang
 
-/obj/item/clothing/mask/balaclava/breath
-	name = "breathclava"
-	clothing_flags = MASKINTERNALS
-	visor_flags = MASKINTERNALS
-	flags_cover = MASKCOVERSMOUTH
-	visor_flags_cover = MASKCOVERSMOUTH|HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
-	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT|HIDEEARS
-
 /datum/id_trim/ussp/soldier/riot
 	assignment = "USSP - OMON"
 
@@ -382,12 +343,6 @@
 	neck = /obj/item/binoculars
 	belt = /obj/item/storage/belt/military/army/ussp/full_infiltrator
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
-
-/obj/item/gun/ballistic/automatic/sabel/auto/upp/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-	w_class = WEIGHT_CLASS_BULKY
 
 /datum/id_trim/ussp/infiltrator
 	assignment = "USSP - Razvedka"

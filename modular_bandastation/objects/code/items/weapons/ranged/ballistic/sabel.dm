@@ -80,6 +80,12 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/upp/no_mag
 	spawnwithmagazine = FALSE
 
+/obj/item/gun/ballistic/automatic/sabel/auto/upp/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	w_class = WEIGHT_CLASS_BULKY
+
 /obj/item/gun/ballistic/automatic/sabel/auto/modern
 	name = "modern AMK rifle"
 	desc = "Нестареющий дизайн автомата под патрон 7.62 мм. Оружие настолько простое и надежное что им сможет пользоватся любой."

@@ -36,7 +36,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/tsf, 32)
 
 /obj/structure/sign/flag/ussp
 	name = "flag of the Union of Soviet Socialist Planets"
-	desc = "Официальный государственный флаг Союза Советский Социалистических Планет."
+	desc = "Официальный государственный флаг Союза Советских Социалистических Планет."
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
 	icon_state = "flag_ussp"
 

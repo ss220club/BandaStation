@@ -142,7 +142,7 @@
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
 
-//TSF
+// MARK: TSF
 /obj/item/clothing/suit/toggle/tsf_jacket
 	name = "federate long jacket"
 	desc = "Свободная накидка из легкой ткани, выполненная в официальных цветах Сола."

@@ -209,7 +209,7 @@
 
 /obj/item/clothing/head/hats/tsf_cap
 	name = "TSF cap"
-	desc = "Мягкая кепка с опозновательными знаками ТСФ"
+	desc = "Мягкая кепка с опознавательными знаками ТСФ."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
 	icon_state = "tsf_cap"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'

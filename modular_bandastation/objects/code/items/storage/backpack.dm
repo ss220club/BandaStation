@@ -28,10 +28,10 @@
 	icon_state = "duffel_blueshield"
 	inhand_icon_state = "duffel_blueshield"
 
-//TSF
+// MARK: TSF
 /obj/item/storage/backpack/tsf
-	name = "TSFMC backpack"
-	desc = "A robust backpack issued to TSF's finest."
+	name = "TSF backpack"
+	desc = "Специальный тактический рюкзак, разработанный и прозводящийся для вооруженных сил ТСФ."
 	icon = 'modular_bandastation/objects/icons/obj/storage/backpack.dmi'
 	icon_state = "backpack_tsf"
 	inhand_icon_state = "backpack_tsf"
@@ -44,10 +44,10 @@
 	max_total_storage = 26
 	max_slots = 26
 
-//USSP
+// MARK: USSP
 /obj/item/storage/backpack/ussp
-	name = "Red Army backpack"
-	desc = "A robust backpack issued to USSP's finest."
+	name = "USSP backpack"
+	desc = "Вместительная полевая сумка."
 	icon = 'modular_bandastation/objects/icons/obj/storage/backpack.dmi'
 	icon_state = "backpack_ussp"
 	inhand_icon_state = "backpack_ussp"

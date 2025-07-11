@@ -130,3 +130,16 @@
 	desc = "Коробка с винтовочными патронами калибра 7.62x39мм, вмещает 45 патронов. Белая марка указывает на то, что в ней должны храниться холостые боеприпасы."
 	icon_state = "762x39box_blank"
 	ammo_type = /obj/item/ammo_casing/a762x39/blank
+
+// MARK: USSP
+/obj/item/ammo_box/n762_cylinder
+	name = "speed loader (7.62x38mmR)"
+	desc = "Designed to quickly reload revolvers. Made in USSP."
+	icon_state = "357"
+	ammo_type = /obj/item/ammo_casing/n762
+	max_ammo = 7
+	caliber = CALIBER_N762
+	multiple_sprites = AMMO_BOX_PER_BULLET
+	item_flags = NO_MAT_REDEMPTION
+	ammo_band_icon = "+357_ammo_band"
+	ammo_band_color = null

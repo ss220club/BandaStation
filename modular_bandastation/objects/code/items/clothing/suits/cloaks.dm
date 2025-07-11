@@ -128,7 +128,7 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
 	icon_state = "fancy_cloak"
 
-//Stealth cloak
+// Stealth cloak
 /obj/item/clothing/suit/hooded/stealth_cloak
 	name = "infiltrator cloak"
 	desc = "Плащ, покрытый фотодинамическими пластинами, позволяет носителю максимально эффективно слиться с окружающей средой.\
