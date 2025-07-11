@@ -114,7 +114,7 @@
 		/obj/item/gun/ballistic/automatic/railgun/nomag = 1,
 		/obj/item/ammo_box/magazine/railgun/taser = 2,
 	)
-	crate_name = "HEMC-15 railgun crate"
+	crate_name = "HEMC-62 railgun crate"
 
 /datum/supply_pack/security/armory/railgun_magazines
 	name = "HEMC-62 Railgun Ammo Crate"
@@ -124,4 +124,4 @@
 	contains = list(
 		/obj/item/ammo_box/magazine/railgun/taser = 2,
 	)
-	crate_name = "HEMC-15 railgun ammo crate"
+	crate_name = "HEMC-62 railgun ammo crate"

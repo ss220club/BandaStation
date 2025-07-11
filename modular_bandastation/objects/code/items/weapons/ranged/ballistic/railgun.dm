@@ -25,7 +25,6 @@
 	lock_back_sound = 'modular_bandastation/objects/sounds/weapons/railgun_open.ogg'
 	bolt_drop_sound = 'modular_bandastation/objects/sounds/weapons/railgun_cock.ogg'
 	load_sound = 'modular_bandastation/objects/sounds/weapons/railgun_magin.ogg'
-	load_empty_sound = 'modular_bandastation/objects/sounds/weapons/railgun_magin.ogg'
 	eject_sound = 'modular_bandastation/objects/sounds/weapons/railgun_magout.ogg'
 	load_empty_sound = 'modular_bandastation/objects/sounds/weapons/railgun_magout.ogg'
 	fire_delay = 7 SECONDS
