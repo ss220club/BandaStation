@@ -91,13 +91,13 @@
 	current_page_index = clamp(current_page_index - 1, 1, length(pages))
 	rebuild_content_from_pages()
 
-/// get content of current page
+/// Get content of current page
 /datum/book_info/get_content(default="N/A")
 	ensure_pages()
 	rebuild_content_from_pages()
 	return html_decode(content) || "N/A"
 
-/// get content of all book
+/// Get content of all book
 /datum/book_info/proc/get_full_content()
 	ensure_pages()
 
