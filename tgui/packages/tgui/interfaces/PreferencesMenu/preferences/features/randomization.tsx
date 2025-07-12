@@ -1,8 +1,8 @@
 import { useBackend } from 'tgui/backend';
 
 import { RandomizationButton } from '../../components/RandomizationButton';
-import { PreferencesMenuData, RandomSetting } from '../../types';
-import { CheckboxInput, Feature, FeatureToggle } from './base';
+import { type PreferencesMenuData, RandomSetting } from '../../types';
+import { CheckboxInput, type Feature, type FeatureToggle } from './base';
 
 export const random_hardcore: FeatureToggle = {
   name: 'Тотальный рандом',
