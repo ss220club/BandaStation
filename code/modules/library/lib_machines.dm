@@ -388,7 +388,7 @@ GLOBAL_VAR_INIT(library_table_modified, 0)
 			if(scan?.cache)
 				data["cache_title"] = scan.cache.get_title()
 				data["cache_author"] = scan.cache.get_author()
-				data["cache_content"] = scan.cache.get_content()
+				data["cache_content"] = scan.cache.get_full_content() // BANDASTATION EDIT - мультистраничность книг
 
 		if(LIBRARY_PRINT)
 			data["deity"] = GLOB.deity || DEFAULT_DEITY
@@ -608,6 +608,7 @@ GLOBAL_VAR_INIT(library_table_modified, 0)
 	if(!book.content)
 		say("No content detected. Aborting")
 		return
+	book.regenerate_content() // BANDASTATION ADD - мультистраничность книг
 	var/msg = "has uploaded the book titled [book.title], [length(book.content)] signs"
 	var/datum/db_query/query_library_upload = SSdbcore.NewQuery({"
 		INSERT INTO [format_table_name("library")] (author, title, content, category, ckey, datetime, round_id_created)
@@ -754,6 +755,7 @@ GLOBAL_VAR_INIT(library_table_modified, 0)
 				say("This book is already in my internal cache")
 				return
 			cache = held_book.book_data.return_copy()
+			cache.regenerate_content() // BANDASTATION ADD - мультистраничность книг
 			flick("bigscanner1", src)
 			playsound(src, 'sound/machines/scanner/scanner.ogg', vol = 50, vary = TRUE)
 			return TRUE
