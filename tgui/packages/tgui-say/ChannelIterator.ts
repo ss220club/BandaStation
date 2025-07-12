@@ -5,8 +5,8 @@ export type Channel =
   | 'OOC'
   | 'LOOC'
   | 'Me'
-  | 'Admin';
-  | 'Ментр'
+  | 'Admin'
+  | 'Ментр';
 
 /**
  * ### ChannelIterator
