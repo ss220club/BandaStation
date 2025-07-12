@@ -19,6 +19,7 @@
 #define MESSAGE_TYPE_ADMINPM "adminpm"
 #define MESSAGE_TYPE_COMBAT "combat"
 #define MESSAGE_TYPE_ADMINCHAT "adminchat"
+#define MESSAGE_TYPE_MENTORCHAT "mentorchat" // BANDASTATION ADDITION
 #define MESSAGE_TYPE_PRAYER "prayer"
 #define MESSAGE_TYPE_MODCHAT "modchat"
 #define MESSAGE_TYPE_EVENTCHAT "eventchat"

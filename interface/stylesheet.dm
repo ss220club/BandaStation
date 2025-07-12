@@ -32,6 +32,7 @@ em						{font-style: normal;	font-weight: bold;}
 
 .adminsay				{color:	#FF4500;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
+.mentor					{color:	#60b8ff;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 

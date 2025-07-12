@@ -42,6 +42,7 @@
 #include "loadout/_loadout.dme"
 #include "mapping/_mapping.dme"
 #include "medical/_medical.dme"
+#include "mentor/_mentor.dme"
 #include "metaserver/_metaserver.dme"
 #include "minesweeper/_minesweeper.dme"
 #include "mobs/_mobs.dme"
@@ -74,3 +75,12 @@
 #ifndef DISABLE_PRIME_MODPACKS
 #include "prime_only/_prime_only.dme"
 #endif
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE
