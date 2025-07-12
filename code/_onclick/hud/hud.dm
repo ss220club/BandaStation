@@ -328,8 +328,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	if(display_hud_version > HUD_VERSIONS) //If the requested version number is greater than the available versions, reset back to the first version
 		display_hud_version = 1
 
-	// BANDASTATION INFOSCREEN FIX: Remove null entries from infodisplay to prevent rendering errors.
-	infodisplay -= null
+	infodisplay -= null // BANDASTATION INFOSCREEN FIX: Remove null entries from infodisplay to prevent rendering errors.
 
 	switch(display_hud_version)
 		if(HUD_STYLE_STANDARD) //Default HUD
