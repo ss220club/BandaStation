@@ -110,8 +110,8 @@ function GenderButton(props: GenderButtonProps) {
                 <Button
                   key={gender}
                   selected={gender === props.gender}
-                  icon={GENDERS[gender].icon}
-                  tooltip={GENDERS[gender].text}
+                  icon={GENDERS[gender].icon || 'question'}
+                  tooltip={GENDERS[gender].text || 'Кто ты, воин?'}
                   tooltipPosition="top"
                   onClick={() => {
                     props.handleSetGender(gender);
@@ -125,7 +125,7 @@ function GenderButton(props: GenderButtonProps) {
     >
       <div>
         <Button
-          icon={GENDERS[props.gender].icon}
+          icon={GENDERS[props.gender].icon || 'question'}
           tooltip="Пол"
           tooltipPosition="top"
         />
