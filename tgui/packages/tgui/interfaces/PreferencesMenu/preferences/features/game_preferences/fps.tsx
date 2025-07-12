@@ -1,6 +1,6 @@
 import { Button, Dropdown, NumberInput } from 'tgui-core/components';
 
-import { Feature, FeatureNumericData, FeatureValueProps } from '../base';
+import type { Feature, FeatureNumericData, FeatureValueProps } from '../base';
 
 type FpsServerData = FeatureNumericData & {
   recommended_fps: number;
