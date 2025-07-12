@@ -1,8 +1,8 @@
 /**
  * Enables an admin to upload a new titlescreen image.
  */
-ADMIN_VERB(change_title_screen, R_FUN, "Title Screen: Change", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_EVENTS)
-	if(!check_rights(R_FUN))
+ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить изображение", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_EVENTS)
+	if(!check_rights(R_ADMIN))
 		return
 
 	switch(tgui_alert(usr, "Что делаем с изображением в лобби?", "Лобби", list("Меняем", "Сбрасываем", "Ничего")))
@@ -17,8 +17,8 @@ ADMIN_VERB(change_title_screen, R_FUN, "Title Screen: Change", ADMIN_VERB_NO_DES
 /**
  * Sets a titlescreen notice, a big red text on the main screen.
  */
-ADMIN_VERB(change_title_screen_notice, R_FUN, "Title Screen: Set Notice", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_EVENTS)
-	if(!check_rights(R_FUN))
+ADMIN_VERB(change_title_screen_notice, R_ADMIN, "Лобби: Изменить уведомление", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_EVENTS)
+	if(!check_rights(R_ADMIN))
 		return
 
 	var/new_notice = tgui_input_text(usr, "Введи то что должно отображаться в лобби:", "Уведомление в лобби", max_length = 2048)

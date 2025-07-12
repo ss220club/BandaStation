@@ -3,15 +3,7 @@
 		return FALSE
 	return ..()
 
-/mob/dead/new_player/register_for_interview()
-	. = ..()
-	add_verb(client, /client/verb/verify_in_discord_central)
-
-/client/verb/verify_in_discord_central()
-	set category = "OOC"
-	set name = "Привязать Discord"
-	set desc = "Привязка аккаунта Discord к BYOND"
-
+/client/proc/verify_in_discord_central()
 	if(!SScentral.can_run())
 		to_chat(src, span_warning("Привязка Discord сейчас недоступна."))
 		return
@@ -38,10 +30,12 @@
 	var/list/data = json_decode(response.body)
 	var/login_endpoint = "[CONFIG_GET(string/ss_central_url)]/oauth/login?token=[data]"
 
-	to_chat(player, boxed_message("Авторизуйтесь в открывшемся окне и ожидайте 30 секунд.<br/>Если окно не открывается, можете открыть ссылку в браузере самостоятельно:<br/><a href='[login_endpoint]'>Привязать дискорд</a>."))
-	player << link(login_endpoint)
-	get_player_discord_async(player.ckey)
-	addtimer(CALLBACK(SScentral, TYPE_PROC_REF(/datum/controller/subsystem/central, get_player_discord_async), player.ckey), 30 SECONDS)
+	to_chat(player, boxed_message("<a href='[login_endpoint]'>Привязать дискорд</a>"))
+	player << browse(
+		"<!DOCTYPE html><html><head><meta charset=UTF-8'><script>location.href='[login_endpoint]'</script></head><body'></body></html>",
+		"window=authwindow;parent=mapwindow.map;titlebar=0;can_resize=0;size=0x0;pos=0,0;background-color=black;"
+	)
+	SStitle.title_output(player, login_endpoint, "updateAuthBrowser")
 
 /datum/config_entry/flag/force_discord_verification
 	default = FALSE
