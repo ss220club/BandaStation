@@ -59,6 +59,13 @@
 /obj/item/gun/ballistic/automatic/sindano/compact/no_mag
 	spawnwithmagazine = FALSE
 
+/obj/item/gun/ballistic/automatic/sindano/compact/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	w_class = WEIGHT_CLASS_SMALL
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+
 /obj/item/gun/ballistic/automatic/sindano/compact/examine_more(mob/user)
 	. = ..()
 	. += "Этот вариант Синдано является укороченной, компактной модификацией. \

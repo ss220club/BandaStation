@@ -121,3 +121,118 @@
 	icon_state = "secbeanie"
 	worn_icon_state = "secbeanie"
 	armor_type = /datum/armor/cosmetic_sec
+
+// MARK: TSF
+/obj/item/clothing/head/beret/tsf_commander
+	name = "TSF commander beret"
+	desc = "Берет командующего офицера КМП ТСФ."
+	icon_state = "/obj/item/clothing/head/beret/tsf_commander"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#212121#cc9900"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marine
+	name = "TSF marine beret"
+	desc = "Берет бойца КМП ТСФ."
+	icon_state = "/obj/item/clothing/head/beret/tsf_marine"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#526382#eeeeee"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marine_officer
+	name = "TSF marine officer beret"
+	desc = "Берет бойца КМП ТСФ."
+	icon_state = "/obj/item/clothing/head/beret/tsf_marine_officer"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#526382#cc9900"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marsoc
+	name = "TSF MARSOC beret"
+	desc = "Берет бойца КСОМП ТСФ."
+	icon_state = "/obj/item/clothing/head/beret/tsf_marsoc"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#212121#eeeeee"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_marsoc_officer
+	name = "TSF MARSOC officer beret"
+	desc = "Берет офицера КСОМП ТСФ."
+	icon_state = "/obj/item/clothing/head/beret/tsf_marsoc_officer"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#212121#cc9900"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_infiltrator
+	name = "TSF infiltrator operative beret"
+	desc = "Берет бойца-диверсанта ТСФ."
+	icon_state = "/obj/item/clothing/head/beret/tsf_infiltrator"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#43523d#a2abb0"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/tsf_diplomat
+	name = "TSF official's beret"
+	desc = "Берет официальных лиц ТСФ."
+	icon_state = "/obj/item/clothing/head/beret/tsf_diplomat"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#102036#eeeeee"
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/hats/fedora/tsf
+	name = "TSF fedora"
+	desc = "Темно-синяя федора."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "tsf_fedora"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+
+/obj/item/clothing/head/hats/tsf_cap
+	name = "TSF cap"
+	desc = "Мягкая кепка с опознавательными знаками ТСФ."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "tsf_cap"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+
+// MARK: USSP
+/obj/item/clothing/head/hats/ussp
+	name = "soviet pilotka"
+	desc = "Пилотка бойцов КА СССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "ussp_pilotka"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+
+/obj/item/clothing/head/hats/ussp_officer
+	name = "soviet officer hat"
+	desc = "Фуражка офицера КА СССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "ussp_hat_officer"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+
+/obj/item/clothing/head/hats/ussp_command
+	name = "soviet general hat"
+	desc = "Фуражка высшего командного состава КА СССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "ussp_hat_komandir"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+

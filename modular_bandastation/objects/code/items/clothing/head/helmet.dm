@@ -58,3 +58,28 @@
 /obj/item/clothing/head/helmet/ntci_helmet/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/seclite_attachable, light_icon_state = "flight")
+
+// MARK: USSP
+/obj/item/clothing/head/helmet/marine/ussp_officer_kaska
+	name = "komandir kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_command"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	base_icon_state = "ussp_command"
+
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska
+	name = "heavy kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_security"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	base_icon_state = "ussp_security"
+
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
+	icon_state = "ussp_medic"
+	base_icon_state = "ussp_medic"
+
+/obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
+	name = "OMON helmet"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_riot"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'

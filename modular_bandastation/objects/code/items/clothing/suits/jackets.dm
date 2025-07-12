@@ -141,3 +141,12 @@
 	worn_icon_state = "soundhand_brown_jacket"
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
+
+// MARK: TSF
+/obj/item/clothing/suit/toggle/tsf_jacket
+	name = "federate long jacket"
+	desc = "Свободная накидка из легкой ткани, выполненная в официальных цветах Сола."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/jacket.dmi'
+	icon_state = "tsf_jacket"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS
