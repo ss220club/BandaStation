@@ -20,7 +20,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/ssc, 32)
 
 /obj/structure/sign/flag/terragov
 	name = "flag of Trans-Solar Federation" // BANDASTATION EDIT - Terragov -> Trans-Solar Federation
-	desc = "Флаг Солнечной Федерации. Это символ человечества, какие бы направления они не брали и как бы им ни хотелось, чтобы это было не так."
+	desc = "Флаг Транс-Солнечной Федерации. Это символ человечества, какие бы направления они не брали и как бы им ни хотелось, чтобы это было не так."
 	icon_state = "flag_terragov"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/terragov, 32)
