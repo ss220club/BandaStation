@@ -40805,7 +40805,6 @@
 "jTS" = (
 /obj/structure/cable,
 /obj/machinery/power/smes{
-	capacity = 9e+006;
 	charge = 10000
 	},
 /turf/open/floor/iron,
