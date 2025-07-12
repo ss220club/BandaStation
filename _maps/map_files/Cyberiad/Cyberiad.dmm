@@ -5762,12 +5762,6 @@
 /obj/machinery/light/broken/directional/north,
 /turf/open/floor/iron/small,
 /area/station/maintenance/ghetto/central)
-"bsS" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/spawner/random/medical/patient_stretcher,
-/obj/effect/spawner/random/maintenance/four,
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/upper)
 "bsT" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -9005,10 +8999,11 @@
 	},
 /area/station/service/hydroponics)
 "chY" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space/nearstation)
+/obj/structure/closet/crate/bin,
+/obj/item/reagent_containers/cup/glass/bottle/vodka,
+/obj/item/storage/medkit/ancient,
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "cic" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -23580,9 +23575,8 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "fGO" = (
-/obj/structure/closet/crate/bin,
-/obj/item/reagent_containers/cup/glass/bottle/vodka,
-/obj/item/storage/medkit/ancient,
+/obj/effect/mapping_helpers/burnt_floor,
+/obj/effect/spawner/random/trash/garbage,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "fGS" = (
@@ -54251,7 +54245,6 @@
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/machinery/duct,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/duct,
 /obj/machinery/holopad,
 /turf/open/floor/iron/white,
 /area/station/medical/morgue)
@@ -57434,15 +57427,14 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "nOm" = (
-/obj/machinery/door/window/right/directional/north{
-	name = "Body Disposal";
-	dir = 8
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 8
 	},
 /obj/effect/turf_decal/loading_area{
 	dir = 8
+	},
+/obj/machinery/door/window/right/directional/west{
+	name = "Body Disposal"
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
@@ -62546,8 +62538,7 @@
 /area/station/commons/lounge)
 "oZf" = (
 /obj/effect/mapping_helpers/burnt_floor,
-/obj/effect/spawner/random/trash/garbage,
-/turf/open/floor/plating,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "oZm" = (
 /obj/structure/rack,
@@ -69223,7 +69214,7 @@
 /turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "qFE" = (
-/obj/effect/mapping_helpers/burnt_floor,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "qFH" = (
@@ -85753,8 +85744,10 @@
 /turf/closed/wall/r_wall,
 /area/station/security/interrogation/ghetto)
 "uHT" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/material,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/spawner/random/medical/patient_stretcher,
+/obj/effect/spawner/random/maintenance/four,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "uHW" = (
 /obj/machinery/camera/autoname/directional/north{
@@ -137819,7 +137812,7 @@ ceC
 ceC
 ceC
 ceC
-chY
+ceC
 doz
 doz
 doz
@@ -138847,7 +138840,7 @@ vbK
 ceC
 ceC
 ceC
-chY
+ceC
 ceC
 ceC
 sZN
@@ -208495,12 +208488,12 @@ sKd
 nnU
 qJp
 dIf
-uHT
 qFE
-pjb
-uHT
-uHT
 oZf
+pjb
+qFE
+qFE
+fGO
 tWi
 lrj
 htm
@@ -208755,9 +208748,9 @@ kYb
 mtX
 gbq
 crq
-fGO
-bsS
+chY
 uHT
+qFE
 lMr
 dIC
 htm
