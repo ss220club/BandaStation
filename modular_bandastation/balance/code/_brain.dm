@@ -52,7 +52,6 @@
 	close_sound = 'sound/effects/spray.ogg'
 	foldedbag_path = /obj/item/bodybag/stasis
 
-//Добавить механизм добавления оверлея на предмет
 /obj/structure/closet/body_bag/stasis/closet_update_overlays(list/new_overlays)
 	. = ..()
 	. = new_overlays
@@ -87,6 +86,20 @@
 		mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		REMOVE_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 	. = ..()
+
+/obj/structure/closet/body_bag/stasis/Destroy()
+	for(var/mob/living/L in contents)
+		if(L)
+			L.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
+			REMOVE_TRAIT(L, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
+	return ..()
+
+/obj/structure/closet/body_bag/stasis/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(istype(gone, /mob/living))
+		var/mob/living/leaver = gone
+		leaver.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
+		REMOVE_TRAIT(leaver, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 
 /obj/item/reagent_containers/hypospray/medipen
 	list_reagents = list(/datum/reagent/medicine/epinephrine = 10, /datum/reagent/medicine/coagulant = 2)
