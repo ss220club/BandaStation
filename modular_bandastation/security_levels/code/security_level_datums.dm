@@ -9,11 +9,11 @@
 	var/set_delay = 0
 
 /// Called before setting or planning to set the security level
-/datum/security_level/proc/pre_set_security_level()
+/datum/security_level/proc/pre_set_security_level(mob/user)
 	return
 
 /// Called after setting security level, just before sending `COMSIG_SECURITY_LEVEL_CHANGED`
-/datum/security_level/proc/post_set_security_level()
+/datum/security_level/proc/post_set_security_level(mob/user)
 	return
 
 /**
@@ -32,6 +32,18 @@
 	lowering_to_configuration_key = /datum/config_entry/string/alert_gamma
 	elevating_to_configuration_key = /datum/config_entry/string/alert_gamma
 	shuttle_call_time_mod = ALERT_COEFF_RED
+
+/datum/security_level/gamma/post_set_security_level(user)
+	if(isnull(user))
+		return
+	if(isnull(SSshuttle.gamma) || !SSshuttle.getDock("gamma_home"))
+		return
+	if(tgui_alert(user, "Желаете направить оружейный шаттл Гамма? Если не уверены, его можно будет направить позже в меню Secrets (Helpful -> Move Gamma Shuttle).", "Гамма шаттл", list("Да", "Нет")) != "Да")
+		return
+	SSshuttle.moveShuttle("gamma", "gamma_home", FALSE)
+	priority_announce("К вам направлен оружейный шаттл «ГАММА».","[command_name()]: Департамент защиты активов")
+	message_admins("[key_name_admin(user)] moved gamma shuttle")
+	log_admin("[key_name(user)] moved the gamma shuttle")
 
 /**
  * Epsilon
