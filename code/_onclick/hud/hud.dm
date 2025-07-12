@@ -327,7 +327,11 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 		display_hud_version = hud_version + 1
 	if(display_hud_version > HUD_VERSIONS) //If the requested version number is greater than the available versions, reset back to the first version
 		display_hud_version = 1
-
+	// BANDASTATION INFOSCREEN FIX START
+	for(var/display in infodisplay)
+		if(!display)
+			infodisplay.Remove(display)
+	// BANDASTATION INFOSCREEN FIX END
 	switch(display_hud_version)
 		if(HUD_STYLE_STANDARD) //Default HUD
 			hud_shown = TRUE //Governs behavior of other procs
