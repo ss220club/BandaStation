@@ -7,10 +7,17 @@
 /datum/preferences
 	max_save_slots = BASE_SAVE_SLOTS
 	var/loadout_points_spent = 0
+	var/is_byond_member = FALSE
 
 /datum/preferences/New(client/parent)
 	. = ..()
-	max_save_slots = clamp(BASE_SAVE_SLOTS + parent.get_donator_level() * SAVE_SLOTS_PER_DONATOR_LEVEL, BASE_SAVE_SLOTS, MAX_SAVE_SLOTS)
+	var/donator_level = parent.get_donator_level()
+	max_save_slots = clamp(BASE_SAVE_SLOTS + donator_level * SAVE_SLOTS_PER_DONATOR_LEVEL, BASE_SAVE_SLOTS, MAX_SAVE_SLOTS)
+
+	if(donator_level >= DONATOR_TIER_2)
+		unlock_content = TRUE
+
+	is_byond_member = !!parent.IsByondMember()
 
 /datum/preferences/proc/get_loadout_max_points()
 	return BASE_LOADOUT_POINTS + parent.get_donator_level() * LOADOUT_POINTS_PER_DONATION_LEVEL
