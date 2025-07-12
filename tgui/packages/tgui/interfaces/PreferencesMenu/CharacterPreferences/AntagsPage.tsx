@@ -100,8 +100,8 @@ function AntagSelection(props: AntagSelectionProps) {
         {props.antagonists.map((antagonist) => {
           const isBanned =
             data.antag_bans && data.antag_bans.indexOf(antagonist.key) !== -1;
-          const daysLeft =
-            (data.antag_days_left && data.antag_days_left[antagonist.key]) || 0;
+
+          const daysLeft = data.antag_days_left?.[antagonist.key] || 0;
 
           return (
             <Tooltip
