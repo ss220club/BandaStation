@@ -5,6 +5,9 @@
 
 // MARK: Windows
 /obj/structure/window
+	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
+	icon_state = "window"
+	color = WINDOW_COLOR
 	layer = ABOVE_WINDOW_LAYER + 0.05
 	/// Used to define what file the edging sprite is contained within
 	var/edge_overlay_file
@@ -21,6 +24,58 @@
 	edge_overlay = mutable_appearance(edge_overlay_file, "edge-[smoothing_junction]", layer + 0.01, appearance_flags = RESET_COLOR|KEEP_APART)
 	edge_overlay.color = edge_overlay_color
 	. += edge_overlay
+
+/obj/structure/window/reinforced
+	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
+	icon_state = "r_window"
+	color = WINDOW_COLOR
+
+/obj/structure/window/reinforced/tinted
+	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
+	icon_state = "r_window"
+	color = TINTED_WINDOW_COLOR
+
+/obj/structure/window/reinforced/tinted/Initialize(mapload,direct)
+	. = ..()
+	flags_1 |= UNPAINTABLE_1
+
+/obj/structure/window/reinforced/tinted/frosted
+	icon_state = "r_window"
+	color = TINTED_WINDOW_COLOR
+
+/obj/structure/window/plasma
+	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
+	icon_state = "window"
+	color = PLASMA_WINDOW_COLOR
+
+/obj/structure/window/plasma/Initialize(mapload,direct)
+	. = ..()
+	flags_1 |= UNPAINTABLE_1
+
+/obj/structure/window/reinforced/plasma
+	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
+	icon_state = "r_window"
+	color = PLASMA_WINDOW_COLOR
+
+/obj/structure/window/reinforced/plasma/Initialize(mapload,direct)
+	. = ..()
+	flags_1 |= UNPAINTABLE_1
+
+// Delete colors
+/obj/structure/window/bronze
+	color = null
+
+/obj/structure/window/paperframe
+	color = null
+
+/obj/structure/window/reinforced/shuttle
+	color = null
+
+/obj/structure/window/reinforced/survival_pod
+	color = null
+
+/obj/structure/window/reinforced/plasma/plastitanium
+	color = null
 
 /**
  * Рамки окон но как отдельный объект.
