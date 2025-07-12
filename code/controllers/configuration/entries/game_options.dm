@@ -178,6 +178,9 @@
 /datum/config_entry/string/alert_delta
 	default = "Механизм самоуничтожения станции задействован. Все члены экипажа обязаны подчиняться всем указаниям, данными главами отделов. Любые нарушения этих приказов наказуемы уничтожением на месте. Это не учебная тревога."
 
+/datum/config_entry/flag/roundstart_blue_alert
+	default = TRUE
+
 /datum/config_entry/flag/revival_pod_plants
 
 /datum/config_entry/number/revival_brain_life
