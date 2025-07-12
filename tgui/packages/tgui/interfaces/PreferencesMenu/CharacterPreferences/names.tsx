@@ -13,7 +13,7 @@ import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../../../backend';
 import { LoadingScreen } from '../../common/LoadingScreen';
-import { Name } from '../types';
+import type { Name } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
 
 type NameInputProps = {
