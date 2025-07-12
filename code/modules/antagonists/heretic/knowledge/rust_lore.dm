@@ -19,10 +19,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_rust
 	name = "Blacksmith's Tale"
-	desc = "Opens up the Path of Rust to you. \
-		Allows you to transmute a knife with any trash item into a Rusty Blade. \
-		You can only create two at a time."
-	gain_text = "\"Let me tell you a story\", said the Blacksmith, as he gazed deep into his rusty blade."
+	desc = "Открывает перед вами Путь ржавчины. \
+		Позволяет трансмутировать нож с любым мусором в Ржавый клинок. \
+		Одновременно можно создать только два."
+	gain_text = "\"Позвольте мне рассказать вам историю\", сказал Кузнец, вглядываясь в глубину своего ржавого клинка."
 	required_atoms = list(
 		/obj/item/knife = 1,
 		/obj/item/trash = 1,
@@ -33,10 +33,10 @@
 
 /datum/heretic_knowledge/rust_fist
 	name = "Grasp of Rust"
-	desc = "Your Mansus Grasp will deal 500 damage to non-living matter and rust any surface it touches. \
-		Already rusted surfaces are destroyed. Surfaces and structures can only be rusted by using Right-Click. \
-		Allows you to rust basic iron walls and floors."
-	gain_text = "On the ceiling of the Mansus, rust grows as moss does on a stone."
+	desc = "Ваша Хватка Мансуса наносит 500 единиц урона неживой материи и ржавеет любая поверхность, которой она коснется. \
+		Уже заржавевшие поверхности разрушаются. Поверхности и структуры можно заставить ржаветь с помощью ПКМ. \
+		Позволяет заставить ржаветь обычные железные стены и пол."
+	gain_text = "На потолке Мансуса ржавчина растет, как мох на камне."
 	cost = 1
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "grasp_rust"
@@ -71,8 +71,8 @@
 
 /datum/heretic_knowledge/rust_regen
 	name = "Leeching Walk"
-	desc = "Grants you passive healing and resistance to batons while standing over rust."
-	gain_text = "The speed was unparalleled, the strength unnatural. The Blacksmith was smiling."
+	desc = "Дает вам пассивное исцеление и устойчивость к батонам, когда вы стоите над ржавчиной."
+	gain_text = "Скорость была беспрецедентной, сила - неестественной. Кузнец улыбался."
 	cost = 1
 	research_tree_icon_path = 'icons/effects/eldritch.dmi'
 	research_tree_icon_state = "cloud_swirl"
@@ -86,10 +86,10 @@
 
 /datum/heretic_knowledge/mark/rust_mark
 	name = "Mark of Rust"
-	desc = "Your Mansus Grasp now applies the Mark of Rust. The mark is triggered from an attack with your Rusty Blade. \
-		When triggered, your victim will suffer heavy disgust and confusion. \
-		Allows you to rust reinforced walls and floors as well as plasteel."
-	gain_text = "The Blacksmith looks away. To a place lost long ago. \"Rusted Hills help those in dire need... at a cost.\""
+	desc = "Ваша Хватка Мансуса теперь накладывает Метку ржавчины. Метка срабатывает при атаке вашим Ржавым клинком. \
+		При срабатывании, жертва получит сильное отвращение и будет контужена. \
+		Позволяет заставить ржаветь укрепленные стены и пол, а также пласталь."
+	gain_text = "Кузнец смотрит вдаль. В давно потерянное место. \"Ржавые холмы помогают остро нуждающимся... за определенную плату.\""
 	mark_type = /datum/status_effect/eldritch/rust
 
 /datum/heretic_knowledge/mark/rust_mark/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
@@ -100,18 +100,18 @@
 
 /datum/heretic_knowledge/spell/rust_construction
 	name = "Rust Construction"
-	desc = "Grants you Rust Construction, a spell that allows you to raise a wall out of a rusted floor. \
-		Anyone overtop the wall will be throw aside (or upwards) and sustain damage."
-	gain_text = "Images of foreign and ominous structures began to dance in my mind. Covered head to toe in thick rust, \
-		they no longer looked man made. Or perhaps they never were in the first place."
+	desc = "Дает вам Rust Construction - заклинание, позволяющее возвести стену из ржавого пола. \
+		Любой человек, находящийся над стеной, будет отброшен в сторону (или вверх) и получит урон."
+	gain_text = "В моем сознании начали плясать образы иноземных и зловещих сооружений. Покрытые с ног до головы толстым слоем ржавчины, \
+		они больше не выглядели рукотворными. А может быть, они вообще никогда и не существовали."
 	action_to_add = /datum/action/cooldown/spell/pointed/rust_construction
 	cost = 1
 
 /datum/heretic_knowledge/spell/area_conversion
 	name = "Aggressive Spread"
-	desc = "Grants you Aggressive Spread, a spell that spreads rust to nearby surfaces. \
-		Already rusted surfaces are destroyed \ Also improves the rusting abilities of non rust-heretics."
-	gain_text = "All wise men know well not to visit the Rusted Hills... Yet the Blacksmith's tale was inspiring."
+	desc = "Дает вам заклинание Aggressive Spread, которое распространяет ржавчину на близлежащие поверхности. \
+		Уже заржавевшие поверхности разрушаются. \ Также улучшает способности ржавчины еретиков не Пути ржавчины."
+	gain_text = "Мудрецы знают, что не стоит посещать Ржавые холмы... Но рассказ Кузнеца был вдохновляющим."
 	action_to_add = /datum/action/cooldown/spell/aoe/rust_conversion
 	cost = 1
 	research_tree_icon_frame = 5
@@ -122,9 +122,9 @@
 
 /datum/heretic_knowledge/blade_upgrade/rust
 	name = "Toxic Blade"
-	desc = "Your Rusty Blade now disgusts enemies on attack \ Allows you to rust Titanium and Plastitanium.."
-	gain_text = "The Blacksmith hands you their blade. \"The Blade will guide you through the flesh, should you let it.\" \
-		The heavy rust weights it down. You stare deeply into it. The Rusted Hills call for you, now."
+	desc = "Ваш Ржавый клинок теперь отвращает врагов при атаке. \ Позволяет заставить ржаветь титаниум и пластитаниум."
+	gain_text = "Кузнец протягивает вам свой клинок. \"Клинок проведет тебя через плоть, если ты позволишь ему.\" \
+		Тяжелая ржавчина утяжеляет клинок. Вы пристально вглядываетесь в него. Ржавые холмы зовут тебя."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_rust"
 
@@ -141,11 +141,11 @@
 	. = ..()
 /datum/heretic_knowledge/spell/entropic_plume
 	name = "Entropic Plume"
-	desc = "Grants you Entropic Plume, a spell that releases a vexing wave of Rust. \
-		Blinds, poisons, and inflicts Amok on any heathen it hits, causing them to strike \
-		at friend or foe wildly. Also rusts and destroys and surfaces it hits and improves the rusting abilities of non-rust heretics."
-	gain_text = "The corrosion was unstoppable. The rust was unpleasable. \
-		The Blacksmith was gone, and you hold their blade. Champions of hope, the Rustbringer is nigh!"
+	desc = "Дарует вам Entropic Plume, заклинание, выпускающее досаждающую волну ржавчины. \
+		Ослепляет, отравляет и накладывает Amok на всех попавших язычников, заставляя их дико нападать \
+		на друзей или врагов. Также ржавеет и разрушает поверхности, на которые попадает. Улучшает способности ржавчины еретиков не Пути ржавчины."
+	gain_text = "Коррозия была неостановима. Ржавчина была неприятной. \
+		Кузнец ушел, ты держишь его клинок. Чемпионы надежды, Повелитель ржавчины близок!"
 
 	action_to_add = /datum/action/cooldown/spell/cone/staggered/entropic_plume
 	cost = 1
@@ -159,16 +159,16 @@
 
 /datum/heretic_knowledge/ultimate/rust_final
 	name = "Rustbringer's Oath"
-	desc = "The ascension ritual of the Path of Rust. \
-		Bring 3 corpses to a transmutation rune on the bridge of the station to complete the ritual. \
-		When completed, the ritual site will endlessly spread rust onto any surface, stopping for nothing. \
-		Additionally, you will become extremely resilient on rust, healing at triple the rate \
-		and becoming immune to many effects and dangers \ You will be able to rust almost anything upon ascending."
-	gain_text = "Champion of rust. Corruptor of steel. Fear the dark, for the RUSTBRINGER has come! \
-		The Blacksmith forges ahead! Rusted Hills, CALL MY NAME! WITNESS MY ASCENSION!"
+	desc = "Ритуал вознесения Пути ржавчины. \
+		Принесите 3 трупа к руне трансмутации на мостик станции, чтобы завершить ритуал. \
+		После завершения, ритуальное место будет бесконечно распространять ржавчину на любую поверхность, не останавливаясь ни перед чем. \
+		Кроме того, вы станете чрезвычайно стойкими на ржавчине, исцеляясь втрое быстрее \
+		и приобретая иммунитет ко многим эффектам и опасностям. Вы сможете заставлять ржаветь почти всё."
+	gain_text = "Чемпион ржавчины. Разлагатель стали. Бойся темноты, ибо пришел ПОВЕЛИТЕЛЬ РЖАВЧИНЫ! \
+		Работа Кузнеца продолжается! Ржавые холмы, УСЛЫШЬТЕ МОЕ ИМЯ! УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ!"
 
 	ascension_achievement = /datum/award/achievement/misc/rust_ascension
-	announcement_text = "%SPOOKY% Fear the decay, for the Rustbringer, %NAME% has ascended! None shall escape the corrosion! %SPOOKY%"
+	announcement_text = "%SPOOKY% Бойтесь разложения, ибо Предводитель Ржавчины, %NAME%, вознесся! Никто не уйдет от коррозии! %SPOOKY%"
 	announcement_sound = 'sound/music/antag/heretic/ascend_rust.ogg'
 	/// If TRUE, then immunities are currently active.
 	var/immunities_active = FALSE
@@ -203,7 +203,7 @@
 	if(ritual_location)
 		var/area/our_area = get_area(loc)
 		if(!istype(our_area, ritual_location))
-			loc.balloon_alert(user, "ritual failed, must be in [initial(ritual_location.name)]!") // "must be in bridge"
+			loc.balloon_alert(user, "ритуал провален, должны быть в [initial(ritual_location.name)]!") // "must be in bridge"
 			return FALSE
 
 	return ..()

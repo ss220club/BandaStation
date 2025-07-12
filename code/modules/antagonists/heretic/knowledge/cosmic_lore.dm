@@ -19,10 +19,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_cosmic
 	name = "Eternal Gate"
-	desc = "Opens up the Path of Cosmos to you. \
-		Allows you to transmute a sheet of plasma and a knife into an Cosmic Blade. \
-		You can only create two at a time."
-	gain_text = "A nebula appeared in the sky, its infernal birth shone upon me. This was the start of a great transcendence."
+	desc = "Открывает перед вами Путь космоса. \
+		озволяет трансмутировать лист плазмы и нож в Космический клинок. \
+		Одновременно можно иметь только два."
+	gain_text = "Туманность появилась в небе, ее пламенное рождение озарило меня. Это было начало великой трансценденции"
 	required_atoms = list(
 		/obj/item/knife = 1,
 		/obj/item/stack/sheet/mineral/plasma = 1,
@@ -33,10 +33,10 @@
 
 /datum/heretic_knowledge/cosmic_grasp
 	name = "Grasp of Cosmos"
-	desc = "Your Mansus Grasp will give people a star mark (cosmic ring) and create a cosmic field where you stand. \
-		People with a star mark can not pass cosmic fields."
-	gain_text = "Some stars dimmed, others' magnitude increased. \
-		With newfound strength I could channel the nebula's power into myself."
+	desc = "Ваша Хватка Мансуса теперь накладывает Метку звезды (космическое кольцо) и создаст космическое поле там, где вы стоите. \
+		Люди с Меткой звезды не могут проходить через космические поля."
+	gain_text = "Некоторые звезды меркли, другие увеличивались. \
+		С новообретенной силой я смог направить силу туманности в себя."
 	cost = 1
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "grasp_cosmos"
@@ -51,61 +51,61 @@
 /datum/heretic_knowledge/cosmic_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
 	SIGNAL_HANDLER
 
-	to_chat(target, span_danger("A cosmic ring appeared above your head!"))
+	to_chat(target, span_danger("Над вашей головой появилось космическое кольцо!"))
 	target.apply_status_effect(/datum/status_effect/star_mark, source)
 	new /obj/effect/forcefield/cosmic_field(get_turf(source))
 
 /datum/heretic_knowledge/spell/cosmic_runes
 	name = "Cosmic Runes"
-	desc = "Grants you Cosmic Runes, a spell that creates two runes linked with each other for easy teleportation. \
-		Only the entity activating the rune will get transported, and it can be used by anyone without a star mark. \
-		However, people with a star mark will get transported along with another person using the rune."
-	gain_text = "The distant stars crept into my dreams, roaring and screaming without reason. \
-		I spoke, and heard my own words echoed back."
+	desc = "Дает вам Cosmic Runes, заклинание, которое создает две руны, связанные друг с другом для легкой телепортации. \
+		Перемещаться будет только тот, кто активирует руну, а использовать ее может любой человек без Метки звезды. \
+		Однако люди с Меткой звезды будут переноситься вместе с тем, кто использует руну."
+	gain_text = "Далекие звезды закрались в мои сны, беспричинно ревя и крича. \
+		Я заговорил и услышал, как мои же слова отозвались эхом."
 	action_to_add = /datum/action/cooldown/spell/cosmic_rune
 	cost = 1
 
 
 /datum/heretic_knowledge/mark/cosmic_mark
 	name = "Mark of Cosmos"
-	desc = "Your Mansus Grasp now applies the Mark of Cosmos. The mark is triggered from an attack with your Cosmic Blade. \
-		When triggered, the victim is returned to the location where the mark was originally applied to them, \
-		leaving a cosmic field in their place. \
-		They will then be paralyzed for 2 seconds."
-	gain_text = "The Beast now whispered to me occasionally, only small tidbits of their circumstances. \
-		I can help them, I have to help them."
+	desc = "Ваша Хватка Мансуса теперь накладывает Метку космоса. Метка срабатывает при атаке вашим Космическим клинком. \
+		При срабатывании жертва возвращается в то место, где на нее первоначально была нанесена метка, \
+		оставляя в прошлом месте космическое поле. \
+		Затем они будут парализованы на 2 секунды."
+	gain_text = "Теперь Зверь изредка шептал мне, рассказывая лишь немного о своих обстоятельствах. \
+		Я могу им помочь, я должен им помочь."
 	mark_type = /datum/status_effect/eldritch/cosmic
 
 /datum/heretic_knowledge/knowledge_ritual/cosmic
 
 /datum/heretic_knowledge/spell/star_touch
 	name = "Star Touch"
-	desc = "Grants you Star Touch, a spell which places a star mark upon your target \
-		and creates a cosmic field at your feet and to the turfs next to you. Targets which already have a star mark \
-		will be forced to sleep for 4 seconds. When the victim is hit it also creates a beam that burns them. \
-		The beam lasts a minute, until the beam is obstructed or until a new target has been found."
-	gain_text = "After waking in a cold sweat I felt a palm on my scalp, a sigil burned onto me. \
-		My veins now emitted a strange purple glow, the Beast knows I will surpass its expectations."
+	desc = "Дарует вам Star Touch, заклинание, которое помещает Метку звезды на вашу цель \
+		и создает космическое поле у ваших ног и на тайлах рядом с вами. Цели, которые уже имеют Метку звезды \
+		будут усыплены на 4 секунды. Когда жертва получает удар, она также создает обжигающий луч. \
+		Луч действует в течение минуты, пока луч не будет прегражден или пока не будет найдена новая цель."
+	gain_text = "Проснувшись в холодном поту, я почувствовал ладонь на своем скальпе, сигил был выжжен на мне. \
+		Теперь мои вены изучали странное фиолетовое сияние: Зверь знает, что я превзойду их ожидания."
 	action_to_add = /datum/action/cooldown/spell/touch/star_touch
 	cost = 1
 
 /datum/heretic_knowledge/spell/star_blast
 	name = "Star Blast"
-	desc = "Fires a projectile that moves very slowly, raising a short-lived wall of cosmic fields where it goes. \
-		Anyone hit by the projectile will receive burn damage, a knockdown, and give people in a three tile range a star mark."
-	gain_text = "The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me."
+	desc = "Выпускает снаряд, который движется очень медленно и создает стену космического поля на своем пути на короткое время. \
+		Каждый, в кого попадет снаряд, получит урон от ожога, будет сбит с ног и даст людям в радиусе трех тайлов Метку звезды."
+	gain_text = "Зверь теперь всегда следовал за мной, и при каждом жертвоприношении в меня вливались слова одобрения."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/star_blast
 	cost = 1
 
 /datum/heretic_knowledge/blade_upgrade/cosmic
 	name = "Cosmic Blade"
-	desc = "Your blade now deals damage to people's organs through cosmic radiation. \
-		Your attacks will chain bonus damage to up to two previous victims. \
-		The combo is reset after two seconds without making an attack, \
-		or if you attack someone already marked. If you combo more than four attacks you will receive, \
-		a cosmic trail and increase your combo timer up to ten seconds."
-	gain_text = "The Beast took my blades in their hand, I kneeled and felt a sharp pain. \
-		The blades now glistened with fragmented power. I fell to the ground and wept at the beast's feet."
+	desc = "Теперь ваш клинок наносит урон органам людей с помощью космической радиации. \
+		Ваши атаки также наносят бонусный урон к двум предыдущим жертвам.\
+		Комбо сбрасывается после двух секунд без атаки, \
+		или если вы атакуете кого-то уже отмеченного. При комбинировании более четырех атак вы получите \
+		космический след и увеличите таймер вашего комбо до 10 секунд."
+	gain_text = "Когда Зверь взял мои клинки в свою руку, я упал на колени и почувствовал острую боль \
+		Клинки теперь сверкали раздробленной силой. Я упал на землю и зарыдал у ног Зверя."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_cosmos"
 	/// Storage for the second target.
@@ -196,30 +196,30 @@
 
 /datum/heretic_knowledge/spell/cosmic_expansion
 	name = "Cosmic Expansion"
-	desc = "Grants you Cosmic Expansion, a spell that creates a 3x3 area of cosmic fields around you. \
-		Nearby beings will also receive a star mark."
-	gain_text = "The ground now shook beneath me. The Beast inhabited me, and their voice was intoxicating."
+	desc = "Дарует вам Cosmic Expansion, заклинание, создающее вокруг вас область космических полей размером 3x3. \
+		Близлежащие существа также будут отмечены Меткой звезды."
+	gain_text = "Теперь земля содрогалась подо мной. Зверь вселился в меня, и его голос был пьянящим."
 	action_to_add = /datum/action/cooldown/spell/conjure/cosmic_expansion
 	cost = 1
 
 /datum/heretic_knowledge/ultimate/cosmic_final
 	name = "Creators's Gift"
-	desc = "The ascension ritual of the Path of Cosmos. \
-		Bring 3 corpses with bluespace dust in their body to a transmutation rune to complete the ritual. \
-		When completed, you become the owner of a Star Gazer. \
-		You will be able to command the Star Gazer with Alt+click. \
-		You can also give it commands through speech. \
-		The Star Gazer is a strong ally who can even break down reinforced walls. \
-		The Star Gazer has an aura that will heal you and damage opponents. \
-		Star Touch can now teleport you to the Star Gazer when activated in your hand. \
-		Your cosmic expansion spell and your blades also become greatly empowered."
-	gain_text = "The Beast held out its hand, I grabbed hold and they pulled me to them. Their body was towering, but it seemed so small and feeble after all their tales compiled in my head. \
-		I clung on to them, they would protect me, and I would protect it. \
-		I closed my eyes with my head laid against their form. I was safe. \
-		WITNESS MY ASCENSION!"
+	desc = "Ритуал вознесения Пути Космоса. \
+		Для завершения ритуала принесите 3 трупа с блуспейс пылью в теле к руне трансмутации. \
+		После завершения вы станете обладателем Звездочета. \
+		Вы сможете управлять Звездочет с помощью Альт-Клик. \
+		Вы также можете отдавать ему команды с помощью речи. \
+		Звездочет - сильный союзник, который может даже разрушить укрепленные стены. \
+		Звездочет обладает аурой, которая исцеляет вас и наносит урон противникам. \
+		Star Touch теперь может телепортировать вас к Звездочету, когда активируется в вашей руке. \
+		Заклинание Cosmic Expansion и ваши клинки также значительно усилены."
+	gain_text = "Зверь протянул руку, я ухватился за нее, и он притянул меня к себе. Их тело возвышалось надо моим, но также казалось настолько крохотными и слабым после всех их историй в моей голове. \
+		Я прижался к ним, они защитят меня, и я защищаю их. \
+		Я закрыл глаза, прижавшись головой к их телу. Я был в безопасности. \
+		УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ!"
 
 	ascension_achievement = /datum/award/achievement/misc/cosmic_ascension
-	announcement_text = "%SPOOKY% A Star Gazer has arrived into the station, %NAME% has ascended! This station is the domain of the Cosmos! %SPOOKY%"
+	announcement_text = "%SPOOKY% Звездочет прибыл на станцию, %NAME% вознесся! Эта станция - владения Космоса! %SPOOKY%"
 	announcement_sound = 'sound/music/antag/heretic/ascend_cosmic.ogg'
 	/// A static list of command we can use with our mob.
 	var/static/list/star_gazer_commands = list(

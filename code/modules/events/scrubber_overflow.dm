@@ -32,8 +32,8 @@
 		/datum/reagent/consumable/condensedcapsaicin,
 		/datum/reagent/drug/mushroomhallucinogen,
 		/datum/reagent/lube,
-		/datum/reagent/glitter/blue,
-		/datum/reagent/glitter/pink,
+		// /datum/reagent/glitter/blue, // BANDASTATION REMOVAL - No Glitters
+		// /datum/reagent/glitter/pink, // BANDASTATION REMOVAL - No Glitters
 		/datum/reagent/cryptobiolin,
 		/datum/reagent/blood,
 		/datum/reagent/medicine/c2/multiver,
@@ -53,7 +53,7 @@
 		/datum/reagent/consumable/ethanol/beer,
 		/datum/reagent/hair_dye,
 		/datum/reagent/consumable/sugar,
-		/datum/reagent/glitter/white,
+		// /datum/reagent/glitter/white, // BANDASTATION REMOVAL - No Glitters
 		/datum/reagent/gravitum,
 		/datum/reagent/growthserum,
 		/datum/reagent/yuck,
@@ -67,7 +67,7 @@
 	deadchat_broadcast(" has just been[random ? " randomly" : ""] triggered[cause ? " by [cause]" : ""]!", "<b>Scrubber Overflow: [initial(forced_reagent_type.name)]</b>", message_type=DEADCHAT_ANNOUNCEMENT)
 
 /datum/round_event/scrubber_overflow/announce(fake)
-	priority_announce("The scrubbers network is experiencing a backpressure surge. Some ejection of contents may occur.", "[command_name()] Engineering Division")
+	priority_announce("Зафиксирован скачок обратного давления в системе вытяжных труб. Возможен выброс содержимого.", "[command_name()]: Инженерный отдел")
 
 /datum/round_event/scrubber_overflow/setup()
 	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/temp_vent as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/atmospherics/components/unary/vent_scrubber))
