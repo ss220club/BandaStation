@@ -12,7 +12,7 @@ jobs:
     permissions:
       issues: write # for actions/stale to close stale issues
       pull-requests: write # for actions/stale to close stale PRs
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted]
 
     steps:
       - uses: actions/stale@v9

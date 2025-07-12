@@ -1,5 +1,5 @@
 import { sortBy } from 'es-toolkit';
-import { CSSProperties, PropsWithChildren, ReactNode } from 'react';
+import type { CSSProperties, PropsWithChildren, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Button, Section, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
@@ -7,10 +7,10 @@ import { classes } from 'tgui-core/react';
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import {
   createSetPreference,
-  Job,
+  type Job,
   JoblessRole,
   JobPriority,
-  PreferencesMenuData,
+  type PreferencesMenuData,
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
 import { JobSlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD - Pref Job Slots
@@ -164,8 +164,7 @@ function JobRow(props: JobRowProps) {
   const { className, job, name } = props;
 
   let rightSide: ReactNode;
-  const experienceNeeded =
-    data.job_required_experience && data.job_required_experience[name];
+  const experienceNeeded = data.job_required_experience?.[name];
   const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
 
   if (experienceNeeded) {

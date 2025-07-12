@@ -7,7 +7,7 @@ on:
 
 jobs:
   assign-users:
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted]
     timeout-minutes: 5
 
     steps:

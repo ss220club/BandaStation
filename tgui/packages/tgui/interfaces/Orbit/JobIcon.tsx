@@ -2,7 +2,7 @@ import { DmIcon, Icon } from 'tgui-core/components';
 
 import { ReverseJobsRu } from '../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import { JOB2ICON } from '../common/JobToIcon';
-import { Antagonist, Observable } from './types';
+import type { Antagonist, Observable } from './types';
 
 type Props = {
   item: Observable | Antagonist;

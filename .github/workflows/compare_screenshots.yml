@@ -6,7 +6,7 @@ on:
 jobs:
   compare_screenshots:
     timeout-minutes: 15
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
       - name: Setup directory

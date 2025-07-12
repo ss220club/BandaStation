@@ -4696,7 +4696,7 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/supply)
 "axa" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/smooth_edge{
@@ -5849,7 +5849,7 @@
 /area/centcom/central_command_areas/maintance)
 "aCu" = (
 /obj/effect/turf_decal/line/dark_blue/line,
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 4
 	},
 /turf/open/floor/iron/smooth_half,
@@ -7251,7 +7251,7 @@
 /area/centcom/central_command_areas/engine)
 "aHr" = (
 /obj/effect/turf_decal/line/dark_red/line,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/smooth_half,
@@ -7296,7 +7296,7 @@
 "aHB" = (
 /obj/effect/turf_decal/line/dark_red/line,
 /obj/structure/light_fake/spot/directional/west,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/smooth_half,
@@ -9334,7 +9334,7 @@
 /area/centcom/central_command_areas/admin)
 "aOo" = (
 /obj/effect/turf_decal/line/dark_blue/line,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/smooth_half,
@@ -12944,7 +12944,7 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "coR" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
@@ -13970,7 +13970,7 @@
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port)
 "ers" = (
-/obj/structure/platform,
+/obj/structure/railing/platform,
 /obj/effect/turf_decal/tile/dark/fourcorners{
 	alpha = 50
 	},
@@ -14080,7 +14080,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/conference_room)
 "eFJ" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 4
 	},
 /turf/open/floor/carpet/red,
@@ -14316,7 +14316,7 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "fhy" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /obj/structure/railing{
@@ -15175,7 +15175,7 @@
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "gVm" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -15185,7 +15185,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
 "gWf" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -15432,7 +15432,7 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "hxF" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/dark/full{
@@ -15500,7 +15500,7 @@
 	},
 /obj/effect/turf_decal/tile/dark_blue/full,
 /obj/structure/hedge,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 10
 	},
 /turf/open/floor/iron/dark/smooth_large,
@@ -16007,7 +16007,7 @@
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/club)
 "iPd" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 9
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -16596,7 +16596,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/centcom/central_command_areas/planetary_port/club)
 "klv" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -17050,7 +17050,7 @@
 /obj/machinery/door/window/brigdoor/right/directional/north{
 	req_access = list("cent_general")
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /obj/structure/window/reinforced/spawner/directional/east,
@@ -17239,7 +17239,7 @@
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/club)
 "lRm" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 5
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -17275,7 +17275,7 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "lWN" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /obj/structure/chair/comfy/red,
@@ -17290,7 +17290,7 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/srt/brief_srt)
 "lXC" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /turf/open/floor/iron/stairs/right{
@@ -17313,7 +17313,7 @@
 /turf/open/water/beach,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "lYw" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/carpet/blue,
@@ -17424,7 +17424,7 @@
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "miO" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 9
 	},
 /obj/item/kirbyplants/organic/plant10,
@@ -17498,13 +17498,13 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/fore)
 "msi" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/courtroom)
 "msO" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 5
 	},
 /obj/item/kirbyplants/organic/plant10,
@@ -17540,7 +17540,7 @@
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/planetary_port/club)
 "mxf" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -17630,7 +17630,7 @@
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "mFO" = (
-/obj/structure/platform,
+/obj/structure/railing/platform,
 /obj/effect/turf_decal/tile/dark/full{
 	alpha = 50
 	},
@@ -17816,7 +17816,7 @@
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "nif" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /obj/structure/chair/comfy/shuttle/tactical,
@@ -18316,7 +18316,7 @@
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "orV" = (
-/obj/structure/platform/corner,
+/obj/structure/railing/platform/corner,
 /obj/effect/turf_decal/tile/dark/fourcorners{
 	alpha = 50
 	},
@@ -18526,7 +18526,7 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/fore)
 "oUv" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
@@ -18848,14 +18848,14 @@
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/planetary_port/library)
 "pCg" = (
-/obj/structure/platform/corner,
+/obj/structure/railing/platform/corner,
 /obj/effect/turf_decal/tile/dark/full{
 	alpha = 50
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
 "pEb" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -19077,7 +19077,7 @@
 /turf/open/water/beach,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "qiD" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 4
 	},
 /turf/open/floor/iron/dark,
@@ -19105,7 +19105,7 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "qlK" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /turf/open/floor/carpet/blue,
@@ -19238,7 +19238,7 @@
 	},
 /obj/effect/turf_decal/tile/dark_blue/full,
 /obj/structure/hedge,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 6
 	},
 /turf/open/floor/iron/dark/smooth_large,
@@ -19831,7 +19831,7 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/control)
 "swg" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -19972,7 +19972,7 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "sHp" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /turf/open/floor/iron/stairs/left{
@@ -20722,7 +20722,7 @@
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "uvt" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/dark/full{
@@ -20979,7 +20979,7 @@
 	pixel_x = -16;
 	pixel_y = 1
 	},
-/obj/structure/platform,
+/obj/structure/railing/platform,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
 "vaY" = (
@@ -21418,7 +21418,7 @@
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/planetary_port/club)
 "vXK" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /obj/structure/chair/comfy/blue,
@@ -21553,7 +21553,7 @@
 /turf/open/indestructible/stone,
 /area/centcom/central_command_areas/arboretum)
 "wfa" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -21622,7 +21622,7 @@
 	alpha = 50
 	},
 /obj/effect/turf_decal/line/dark_blue/anticorner/stripes,
-/obj/structure/platform,
+/obj/structure/railing/platform,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
 "wnH" = (
@@ -21916,7 +21916,7 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "wOF" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/dark/full{

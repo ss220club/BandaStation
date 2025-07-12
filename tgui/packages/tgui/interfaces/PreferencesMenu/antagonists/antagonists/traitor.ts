@@ -1,4 +1,4 @@
-import { Antagonist, Category } from '../base';
+import { type Antagonist, Category } from '../base';
 
 export const TRAITOR_MECHANICAL_DESCRIPTION = `
       Начните с аплинком, чтобы приобрести снаряжение и приступить к

@@ -1,6 +1,6 @@
 import { Marked } from 'marked';
 import { markedSmartypants } from 'marked-smartypants';
-import { RefObject, SetStateAction, useEffect, useMemo } from 'react';
+import { type RefObject, SetStateAction, useEffect, useMemo } from 'react';
 import { Box, Section } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
@@ -14,7 +14,7 @@ import {
   walkTokens,
 } from './helpers';
 import { StampView } from './StampView';
-import { PaperContext, PaperInput, PaperReplacement } from './types';
+import { type PaperContext, PaperInput, PaperReplacement } from './types';
 
 interface CustomToken {
   token: string;

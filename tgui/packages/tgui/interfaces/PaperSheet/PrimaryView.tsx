@@ -1,4 +1,4 @@
-import { KeyboardEvent, useRef, useState } from 'react';
+import { type KeyboardEvent, useRef, useState } from 'react';
 import { Button, Stack } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 
@@ -12,7 +12,7 @@ import { PreviewView } from './Preview';
 import { ReplacementHint } from './ReplacementHint';
 import { PaperSheetStamper } from './Stamper';
 import { TextAreaSection } from './TextAreaSection';
-import { PaperContext, PaperReplacement } from './types';
+import type { PaperContext, PaperReplacement } from './types';
 
 // Overarching component that holds the primary view for papercode.
 export function PrimaryView() {

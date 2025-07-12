@@ -1,8 +1,8 @@
 import {
   InteractionType,
-  PaperReplacement,
-  WriteButtonLocation,
-  WritingImplement,
+  type PaperReplacement,
+  type WriteButtonLocation,
+  type WritingImplement,
 } from './types';
 
 const replacementRegex: RegExp = /\[(\w+)\]/gi;

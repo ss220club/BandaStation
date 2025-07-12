@@ -9,10 +9,10 @@ GLOBAL_LIST(badge_icons_cache)
 
 	var/list/badge_parts = list()
 	if(donator_badge_icon)
-		badge_parts += icon2base64html(donator_badge_icon)
+		badge_parts += span_tooltip_img("Уровень подписки: [donor_tier]", icon2base64html(donator_badge_icon))
 
 	if(worker_badge_icon)
-		badge_parts += icon2base64html(worker_badge_icon)
+		badge_parts += span_tooltip_img("[holder?.ranks[1]]", icon2base64html(worker_badge_icon))
 
 	var/list/parts = list()
 	if(length(badge_parts))

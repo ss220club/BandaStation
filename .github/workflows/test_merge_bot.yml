@@ -11,7 +11,7 @@ on:
 jobs:
   test_merge_bot:
     name: Test Merge Detector
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted]
     steps:
       - name: Check for GET_TEST_MERGES_URL
         id: secrets_set
