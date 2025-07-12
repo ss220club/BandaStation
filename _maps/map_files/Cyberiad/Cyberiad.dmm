@@ -5263,10 +5263,13 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "bnm" = (
-/obj/structure/table/bronze,
-/obj/item/clothing/under/costume/jabroni,
-/obj/item/clothing/head/costume/bronze,
-/turf/open/floor/bronze,
+/obj/structure/showcase/machinery/cloning_pod{
+	desc = "An old decommissioned scanner, permanently scuttled.";
+	icon_state = "scanner";
+	name = "decommissioned cloning scanner"
+	},
+/obj/effect/decal/cleanable/greenglow,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "bnr" = (
 /obj/machinery/door/poddoor/preopen{
@@ -5340,7 +5343,7 @@
 /area/station/hallway/secondary/exit/departure_lounge)
 "boK" = (
 /obj/effect/mapping_helpers/broken_floor,
-/obj/item/stack/sheet/bronze/thirty,
+/obj/effect/spawner/random/trash/garbage,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "boM" = (
@@ -5760,8 +5763,10 @@
 /turf/open/floor/iron/small,
 /area/station/maintenance/ghetto/central)
 "bsS" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/bronze,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/spawner/random/medical/patient_stretcher,
+/obj/effect/spawner/random/maintenance/four,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "bsT" = (
 /obj/effect/turf_decal/siding/wood{
@@ -9830,10 +9835,13 @@
 /turf/open/floor/carpet,
 /area/station/service/library/ghetto)
 "crq" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/broken/directional/east,
 /obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/bronze,
+/obj/item/tank/internals/anesthetic/pure,
+/obj/structure/closet/crate/medical,
+/obj/item/clothing/mask/breath/medical,
+/obj/item/reagent_containers/blood/random,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "crv" = (
 /obj/structure/chair/office{
@@ -15705,9 +15713,8 @@
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/ghetto/port)
 "dIf" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/bronze,
+/obj/machinery/iv_drip,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "dIk" = (
 /obj/structure/sign/departments/medbay/alt,
@@ -15729,14 +15736,13 @@
 /turf/open/floor/iron/white/herringbone,
 /area/station/maintenance/ghetto/starboard/aft)
 "dIC" = (
-/obj/structure/table/bronze,
-/obj/item/food/grown/rose{
-	pixel_x = -3
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/showcase/machinery/oldpod{
+	desc = "An old NT branded sleeper, decommissioned after the lead acetate incident. None of the functional machinery remains inside.";
+	name = "decommissioned sleeper"
 	},
-/obj/item/reagent_containers/cup/glass/trophy/bronze_cup{
-	pixel_x = 5
-	},
-/turf/open/floor/bronze,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "dIJ" = (
 /obj/effect/turf_decal/tile/red/fourcorners,
@@ -22931,11 +22937,9 @@
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain)
 "fzv" = (
-/obj/structure/table/bronze,
-/obj/effect/spawner/random/medical/memeorgans{
-	spawn_loot_count = 1
-	},
-/turf/open/floor/bronze,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "fzC" = (
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
@@ -23576,12 +23580,10 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "fGO" = (
-/obj/effect/mapping_helpers/broken_floor,
-/obj/structure/table/bronze,
-/obj/effect/spawner/random/medical/memeorgans{
-	spawn_loot_count = 1
-	},
-/turf/open/floor/bronze,
+/obj/structure/closet/crate/bin,
+/obj/item/reagent_containers/cup/glass/bottle/vodka,
+/obj/item/storage/medkit/ancient,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "fGS" = (
 /obj/structure/chair/office,
@@ -24293,8 +24295,12 @@
 /area/station/cargo/sorting)
 "fOH" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/bronze,
+/obj/effect/spawner/random/structure/table_or_rack,
+/obj/item/storage/box/beakers,
+/obj/item/storage/box/pillbottles,
+/obj/item/storage/box/syringes,
+/obj/item/storage/fancy/candle_box,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "fOS" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -25240,8 +25246,18 @@
 /area/station/commons/lounge)
 "gbq" = (
 /obj/effect/mapping_helpers/broken_floor,
-/obj/item/kirbyplants/organic/plant20,
-/turf/open/floor/plating,
+/obj/structure/closet/crate/medical,
+/obj/item/retractor,
+/obj/item/circular_saw,
+/obj/item/scalpel{
+	pixel_y = 12
+	},
+/obj/item/hemostat,
+/obj/item/cautery{
+	pixel_x = 4
+	},
+/obj/item/surgical_drapes,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "gbs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -26491,11 +26507,10 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "gqS" = (
-/obj/item/flashlight/flare/candle,
-/obj/effect/decal/cleanable/crayon/rune4{
-	color = "red"
-	},
-/turf/open/floor/bronze,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/box,
+/obj/effect/spawner/random/clothing/gloves,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "gqT" = (
 /obj/structure/cable,
@@ -45667,14 +45682,15 @@
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "kYb" = (
-/obj/item/food/grown/poppy/geranium{
-	pixel_x = -5
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table_frame,
+/obj/item/shard,
+/obj/effect/decal/cleanable/glass,
+/obj/effect/spawner/random/medical/memeorgans{
+	spawn_loot_count = 1
 	},
-/obj/structure/table/bronze,
-/obj/item/food/grown/poppy/geranium{
-	pixel_x = 5
-	},
-/turf/open/floor/wood/ebonite,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "kYf" = (
 /turf/open/floor/iron/stairs/right,
@@ -47238,8 +47254,13 @@
 /area/station/maintenance/port/aft)
 "lrj" = (
 /obj/machinery/light/broken/directional/south,
-/obj/structure/statue/drake,
-/turf/open/floor/plating,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/showcase/machinery/cloning_pod{
+	desc = "An old prototype cloning pod, permanently decommissioned following the incident.";
+	name = "decommissioned cloner"
+	},
+/obj/effect/decal/cleanable/greenglow,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "lrk" = (
 /obj/structure/cable,
@@ -51596,14 +51617,11 @@
 /area/station/maintenance/starboard/fore)
 "mtX" = (
 /obj/effect/mapping_helpers/burnt_floor,
-/obj/structure/table/bronze,
-/obj/item/food/grown/poppy/lily{
-	pixel_x = 5
+/obj/structure/table/glass,
+/obj/effect/spawner/random/medical/memeorgans{
+	spawn_loot_count = 1
 	},
-/obj/item/food/grown/poppy/lily{
-	pixel_x = -5
-	},
-/turf/open/floor/plating,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "mtY" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -52682,10 +52700,6 @@
 	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain)
-"mGN" = (
-/obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/bronze,
-/area/station/maintenance/starboard/upper)
 "mGR" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/plating,
@@ -62532,6 +62546,7 @@
 /area/station/commons/lounge)
 "oZf" = (
 /obj/effect/mapping_helpers/burnt_floor,
+/obj/effect/spawner/random/trash/garbage,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "oZm" = (
@@ -63327,11 +63342,8 @@
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "pjb" = (
-/obj/item/flashlight/flare/candle,
-/obj/effect/decal/cleanable/crayon/rune2{
-	color = "red"
-	},
-/turf/open/floor/bronze,
+/obj/effect/spawner/random/trash/graffiti,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "pjd" = (
 /obj/effect/turf_decal/stripes/line{
@@ -69211,12 +69223,8 @@
 /turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "qFE" = (
-/obj/effect/mapping_helpers/broken_floor,
-/obj/item/flashlight/flare/candle,
-/obj/effect/decal/cleanable/crayon/rune2{
-	color = "red"
-	},
-/turf/open/floor/plating,
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "qFH" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -69522,12 +69530,11 @@
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/magistrate)
 "qJp" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
-/obj/structure/chair/bronze{
-	dir = 8
-	},
-/turf/open/floor/bronze,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/computer/old,
+/obj/effect/mapping_helpers/broken_machine,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "qJs" = (
 /obj/effect/turf_decal/stripes/red/line{
@@ -73737,7 +73744,8 @@
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 4
 	},
-/turf/open/floor/bronze,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "rKx" = (
 /obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible{
@@ -81434,8 +81442,11 @@
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
 "tCN" = (
-/obj/effect/spawner/random/structure/musician/piano/random_piano,
-/turf/open/floor/bronze,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/optable,
+/obj/item/clothing/suit/apron/surgical,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "tCP" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -82962,10 +82973,8 @@
 /turf/open/floor/iron/herringbone,
 /area/station/maintenance/aft)
 "tWi" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/random/maintenance/four,
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/bronze,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "tWj" = (
 /obj/structure/table/wood,
@@ -85745,9 +85754,7 @@
 /area/station/security/interrogation/ghetto)
 "uHT" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood/xeno,
-/obj/item/toy/plush/ratplush,
-/turf/open/floor/bronze,
+/turf/open/floor/material,
 /area/station/maintenance/starboard/upper)
 "uHW" = (
 /obj/machinery/camera/autoname/directional/north{
@@ -86997,7 +87004,9 @@
 /area/station/maintenance/starboard/fore)
 "uYE" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/bronze,
+/obj/effect/spawner/random/medical/patient_stretcher,
+/obj/effect/spawner/random/medical/minor_healing,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "uYI" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -208486,11 +208495,11 @@ sKd
 nnU
 qJp
 dIf
-mGN
-oZf
-pjb
 uHT
 qFE
+pjb
+uHT
+uHT
 oZf
 tWi
 lrj
@@ -208746,10 +208755,10 @@ kYb
 mtX
 gbq
 crq
-gqS
-uYE
-bsS
 fGO
+bsS
+uHT
+lMr
 dIC
 htm
 oAw
