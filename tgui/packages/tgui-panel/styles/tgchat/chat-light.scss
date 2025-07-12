@@ -342,6 +342,42 @@ em {
   color: hsl(120, 100%, 76.7%);
 }
 
+.radio {
+  color: hsl(120, 100%, 25.1%);
+}
+
+.sciradio {
+  color: hsl(300, 50%, 40%);
+}
+
+.comradio {
+  color: hsl(57.9, 97.3%, 29.4%);
+}
+
+.secradio {
+  color: hsl(0, 100%, 32%);
+}
+
+.medradio {
+  color: hsl(201.8, 49.3%, 39.4%);
+}
+
+.engradio {
+  color: hsl(17.3, 96.7%, 52.9%);
+}
+
+.suppradio {
+  color: hsl(34.6, 59.2%, 41.4%);
+}
+
+.servradio {
+  color: hsl(88.6, 58.9%, 42%);
+}
+
+.enteradio {
+  color: hsl(176.1, 20%, 45.1%);
+}
+
 .syndradio {
   color: hsl(358.7, 26.7%, 33.7%);
 }
@@ -1046,6 +1082,8 @@ $alert-stripe-colors: (
   'red': hsl(0, 100%, 85.1%),
   'purple': hsl(295.1, 100%, 88%),
   'grey': hsl(0, 0%, 89%),
+  // BANDASTATION ADDITION
+  'white': hsl(0, 0%, 85.1%),
 );
 
 $alert-stripe-alternate-colors: (
@@ -1058,6 +1096,8 @@ $alert-stripe-alternate-colors: (
   'red': hsl(0, 100%, 88%),
   'purple': hsl(294.8, 100%, 91%),
   'grey': hsl(0, 0%, 92.2%),
+  // BANDASTATION ADDITION
+  'white': hsl(0, 0%, 88%),
 );
 
 $alert-major-header-colors: (
@@ -1070,6 +1110,8 @@ $alert-major-header-colors: (
   'red': hsl(340.8, 100%, 25.1%),
   'purple': hsl(266.5, 83%, 30%),
   'grey': hsl(336.1, 100%, 25.1%),
+  // BANDASTATION ADDITION
+  'white': hsl(0, 0%, 39%),
 );
 
 $alert-subheader-header-colors: (
@@ -1082,6 +1124,8 @@ $alert-subheader-header-colors: (
   'red': hsl(220.2, 100%, 26.1%),
   'purple': hsl(220.2, 100%, 26.1%),
   'grey': hsl(220.2, 100%, 26.1%),
+  // BANDASTATION ADDITION
+  'white': hsl(220.2, 100%, 26.1%),
 );
 
 $border-width: 4;
@@ -1213,4 +1257,9 @@ $border-width-px: $border-width * 1px;
       $space: hsl
     );
   }
+}
+
+// BANDASTATION ADDITION START
+.looc {
+  color: #6699cc;
 }

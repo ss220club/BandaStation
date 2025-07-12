@@ -41,12 +41,15 @@
 	AddElement(/datum/element/ridable, /datum/component/riding/vehicle/wheelchair/motorized)
 
 /obj/vehicle/ridden/wheelchair/motorized/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
-	// This wheelchair was crafted, so clean out default parts
-	qdel(power_cell)
-	component_parts = list()
+	. = ..()
 
+	// This wheelchair was crafted, so clean out default parts
+	QDEL_NULL(power_cell)
+
+	component_parts = list()
 	for(var/obj/item/stock_parts/part in contents)
-		if(istype(part, /obj/item/stock_parts/power_store/cell)) // power cell, physically moves into the wheelchair
+		// power cell, physically moves into the wheelchair
+		if(istype(part, /obj/item/stock_parts/power_store/cell))
 			power_cell = part
 			continue
 
@@ -55,9 +58,8 @@
 		if(isnull(newstockpart))
 			CRASH("No corresponding datum/stock_part for [part.type]")
 		component_parts += newstockpart
+		qdel(part)
 	refresh_parts()
-
-	return ..()
 
 /obj/vehicle/ridden/wheelchair/motorized/proc/refresh_parts()
 	speed = 1 // Should never be under 1
@@ -163,7 +165,7 @@
 		return
 	. += "Speed: [speed]"
 	. += "Energy efficiency: [power_efficiency]"
-	. += "Power: [power_cell.charge] out of [power_cell.maxcharge]"
+	. += "Power: [display_energy(power_cell.charge)] out of [display_energy(power_cell.maxcharge)]"
 
 /obj/vehicle/ridden/wheelchair/motorized/Move(newloc, direct)
 	. = ..()
@@ -202,9 +204,9 @@
 			ramtarget.throw_at(throw_target, 2, 3)
 			ramtarget.Knockdown(8 SECONDS)
 			ramtarget.adjustStaminaLoss(35)
-			visible_message(span_danger("[src] crashes into [ramtarget], sending [disabled] and [ramtarget] flying!"))
+			visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] врезается в [ramtarget.declent_ru(ACCUSATIVE)], отправляя [disabled.declent_ru(ACCUSATIVE)] и [ramtarget.declent_ru(ACCUSATIVE)] в полёт!"))
 		else
-			visible_message(span_danger("[src] crashes into [bumped_atom], sending [disabled] flying!"))
+			visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] врезается в [bumped_atom.declent_ru(ACCUSATIVE)], отправляя [disabled.declent_ru(ACCUSATIVE)] в полёт!"))
 		playsound(src, 'sound/effects/bang.ogg', 50, 1)
 
 /obj/vehicle/ridden/wheelchair/motorized/emag_act(mob/user, obj/item/card/emag/emag_card)

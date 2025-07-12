@@ -1,13 +1,13 @@
-import { Antagonist, Category } from '../base';
+import { type Antagonist, Category } from '../base';
 import { OPERATIVE_MECHANICAL_DESCRIPTION } from './operative';
 
 const LoneOperative: Antagonist = {
   key: 'loneoperative',
-  name: 'Lone Operative',
+  name: 'Оперативник-одиночка',
   description: [
     `
-      A solo nuclear operative that has a higher chance of spawning the longer
-      the nuclear authentication disk stays in one place.
+      Шанс появления ядерного оперативника-одиночки повышается в зависимости от того,
+      насколько долго диск ядерной аутентификации находится на одном месте.
     `,
 
     OPERATIVE_MECHANICAL_DESCRIPTION,

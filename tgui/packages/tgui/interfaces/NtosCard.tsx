@@ -7,11 +7,11 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
-import { NTOSData } from '../layouts/NtosWindow';
+import type { NTOSData } from '../layouts/NtosWindow';
 import { AccessList } from './common/AccessList';
 
 type Data = {
@@ -144,18 +144,18 @@ const IdCardPage = (props) => {
 
   return (
     <Section
-      title={authenticatedUser ? 'Modify ID' : 'Login'}
+      title={authenticatedUser ? 'Изменить ID' : 'Логин'}
       buttons={
         <>
           <Button
             icon="print"
-            content="Print"
+            content="Распечатать"
             disabled={!has_id}
             onClick={() => act('PRG_print')}
           />
           <Button
             icon={authenticatedUser ? 'sign-out-alt' : 'sign-in-alt'}
-            content={authenticatedUser ? 'Log Out' : 'Log In'}
+            content={authenticatedUser ? 'Выйти' : 'Войти'}
             color={authenticatedUser ? 'bad' : 'good'}
             onClick={() => {
               act(authenticatedUser ? 'PRG_logout' : 'PRG_authenticate');
@@ -176,13 +176,13 @@ const IdCardPage = (props) => {
           </Button>
         </Stack.Item>
         <Stack.Item width="100%" mt={1} ml={0}>
-          Login: {authenticatedUser || '-----'}
+          Логин: {authenticatedUser || '-----'}
         </Stack.Item>
       </Stack>
       {!!(has_id && authenticatedUser) && (
         <>
           <Stack mt={1}>
-            <Stack.Item align="center">Details:</Stack.Item>
+            <Stack.Item align="center">Детали:</Stack.Item>
             <Stack.Item grow={1} mr={1} ml={1}>
               <Input
                 width="100%"
@@ -210,7 +210,7 @@ const IdCardPage = (props) => {
             </Stack.Item>
           </Stack>
           <Stack>
-            <Stack.Item align="center">Assignment:</Stack.Item>
+            <Stack.Item align="center">Назначение:</Stack.Item>
             <Stack.Item grow={1} ml={1}>
               <Input
                 fluid
@@ -245,7 +245,7 @@ const TemplateDropdown = (props) => {
       <Stack.Item grow>
         <Dropdown
           width="100%"
-          placeholder="Select a template..."
+          placeholder="Выбрать шаблон..."
           options={templateKeys.map((path) => {
             return templates[path];
           })}

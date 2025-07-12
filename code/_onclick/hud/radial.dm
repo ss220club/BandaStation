@@ -36,7 +36,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	else
 		icon_state = "[parent.radial_slice_icon]_focus"
 	if(tooltips)
-		openToolTip(usr, src, params, title = name)
+		openToolTip(usr, src, params, title = declent_ru(NOMINATIVE))
 	if (click_on_hover && !isnull(usr) && !isnull(parent))
 		Click(location, control, params)
 

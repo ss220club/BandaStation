@@ -1,11 +1,11 @@
-import { Antagonist, Category } from '../base';
+import { type Antagonist, Category } from '../base';
 import { WIZARD_MECHANICAL_DESCRIPTION } from './wizard';
 
 const WizardMidround: Antagonist = {
   key: 'wizardmidround',
-  name: 'Wizard (Midround)',
+  name: 'Волшебник (Мидраунд)',
   description: [
-    'A form of wizard that is offered to ghosts in the middle of the shift.',
+    'Вариант волшебника, который могут получить призраки в любой момент во время смены.',
     WIZARD_MECHANICAL_DESCRIPTION,
   ],
   category: Category.Midround,

@@ -1,5 +1,5 @@
 /datum/surgery/gastrectomy
-	name = "Gastrectomy"
+	name = "Гастрэктомия"
 	surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
 	organ_to_manipulate = ORGAN_SLOT_STOMACH
 	possible_locs = list(BODY_ZONE_CHEST)
@@ -15,7 +15,7 @@
 	)
 
 /datum/surgery/gastrectomy/mechanic
-	name = "Nutrient Processing System Diagnostic"
+	name = "Диагностика системы усвоения нутриментов"
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -35,7 +35,7 @@
 ////Gastrectomy, because we truly needed a way to repair stomachs.
 //95% chance of success to be consistent with most organ-repairing surgeries.
 /datum/surgery_step/gastrectomy
-	name = "remove lower duodenum (scalpel)"
+	name = "удалите часть желудочной стенки (скальпель)"
 	implements = list(
 		TOOL_SCALPEL = 95,
 		/obj/item/melee/energy/sword = 65,
@@ -48,7 +48,7 @@
 	surgery_effects_mood = TRUE
 
 /datum/surgery_step/gastrectomy/mechanic
-	name = "perform maintenance (scalpel or wrench)"
+	name = "проведите обслуживание (скальпель или ключ)"
 	implements = list(
 		TOOL_SCALPEL = 95,
 		TOOL_WRENCH = 95,
@@ -62,11 +62,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to cut out a damaged piece of [target]'s stomach..."),
-		span_notice("[user] begins to make an incision in [target]."),
-		span_notice("[user] begins to make an incision in [target]."),
+		span_notice("Вы начинаете вырезать поврежденную часть желудка у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a horrible stab in your gut!")
+	display_pain(target, "Вы чувствуете колющую боль в животе!")
 
 /datum/surgery_step/gastrectomy/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/mob/living/carbon/human/target_human = target
@@ -79,11 +79,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You successfully remove the damaged part of [target]'s stomach."),
-		span_notice("[user] successfully removes the damaged part of [target]'s stomach."),
-		span_notice("[user] successfully removes the damaged part of [target]'s stomach."),
+		span_notice("Вы успешно удаляете поврежденную часть желудка у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно удаляет поврежденную часть желудка у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно удаляет поврежденную часть желудка у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "The pain in your gut ebbs and fades somewhat.")
+	display_pain(target, "Боль в вашем животе утихает и проходит.")
 	return ..()
 
 /datum/surgery_step/gastrectomy/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery)
@@ -92,8 +92,8 @@
 	display_results(
 		user,
 		target,
-		span_warning("You cut the wrong part of [target]'s stomach!"),
-		span_warning("[user] cuts the wrong part of [target]'s stomach!"),
-		span_warning("[user] cuts the wrong part of [target]'s stomach!"),
+		span_warning("Вы удаляете не ту часть желудка у [target.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] удаляет не ту часть желудка у [target.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] удаляет не ту часть желудка у [target.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(target, "Your stomach throbs with pain; it's not getting any better!")
+	display_pain(target, "У вас болит живот, и от этого не становится легче!")

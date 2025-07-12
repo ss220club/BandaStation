@@ -1,4 +1,4 @@
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 /**
  * A map of keyed materials to a quantity.
@@ -39,6 +39,13 @@ export type Design = {
    * The name of the design.
    */
   name: string;
+
+  // BANDASTATION EDIT START - Design Translate
+  /**
+   * The original name of the design.
+   */
+  original_name: string;
+  // BANDASTATION EDIT END
 
   /**
    * A human-readable description of the design.

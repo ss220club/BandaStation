@@ -224,11 +224,18 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 			return TRUE
 
 		if("view_variables")
+			if(!check_rights_for(ui.user.client, R_DEBUG))
+				message_admins(
+					"[key_name(ui.user)] tried to view master controller variables while having improper rights, \
+					this is potentially a malicious exploit and worth noting."
+				)
+
 			var/datum/controller/subsystem/subsystem = locate(params["ref"]) in subsystems
 			if(isnull(subsystem))
 				to_chat(ui.user, span_warning("Failed to locate subsystem."))
 				return
-			SSadmin_verbs.dynamic_invoke_verb(ui.user, /datum/admin_verb/debug_variables, subsystem)
+
+			ui.user.client.debug_variables(subsystem)
 			return TRUE
 
 /datum/controller/master/proc/check_and_perform_fast_update()
@@ -427,6 +434,8 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	var/evaluated_order = 1
 	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_display))
 	var/start_timeofday = REALTIMEOFDAY
+
+	SStitle.count_initable_subsystems(subsystems) // BANDASTATION ADDITION
 	for (var/current_init_stage in 1 to INITSTAGE_MAX)
 
 		// Initialize subsystems.
@@ -452,6 +461,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	var/msg = "Initializations complete within [time] second[time == 1 ? "" : "s"]!"
 	to_chat(world, span_boldannounce("[msg]"), MESSAGE_TYPE_DEBUG)
 	log_world(msg)
+	SStitle.title_output_to_all(null, "finish_loading") // BANDASTATION ADDITION
 
 
 	if(world.system_type == MS_WINDOWS && CONFIG_GET(flag/toast_notification_on_init) && !length(GLOB.clients))
@@ -494,7 +504,9 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	current_initializing_subsystem = subsystem
 	rustg_time_reset(SS_INIT_TIMER_KEY)
 
+	SStitle.set_loading_subsystem(subsystem.name) // BANDASTATION ADDITION
 	var/result = subsystem.Initialize()
+	SStitle.increase_loaded_subsystems_amount() // BANDASTATION ADDITION
 
 	// Capture end time
 	var/time = rustg_time_milliseconds(SS_INIT_TIMER_KEY)
@@ -544,7 +556,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	var/chat_message = chat_warning ? span_boldwarning(message) : span_boldannounce(message)
 
 	if(result != SS_INIT_NO_MESSAGE)
-		to_chat(world, chat_message, MESSAGE_TYPE_DEBUG)
+		to_chat(GLOB.admins, chat_message, MESSAGE_TYPE_DEBUG) // BANDASTATION EDIT: world -> GLOB.admins
 	log_world(message)
 
 /datum/controller/master/proc/SetRunLevel(new_runlevel)

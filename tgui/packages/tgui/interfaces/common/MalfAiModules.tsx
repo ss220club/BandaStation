@@ -1,23 +1,28 @@
 import { useBackend } from '../../backend';
-import { GenericUplink, Item } from '../Uplink/GenericUplink';
+import { GenericUplink, type Item } from '../Uplink/GenericUplink';
 
 type Category = {
   name: string;
-  items: Item[];
+  items: MalfItem[];
+};
+/* This is shitcode, but someone used normal uplink so i feel justified */
+type MalfItem = Item & {
+  minimum_apcs: number;
 };
 
 type Data = {
   processingTime: string;
+  hackedAPCs: number;
   categories: Category[];
 };
 
 /** Common ui for selecting malf ai modules */
 export function MalfAiModules(props) {
   const { act, data } = useBackend<Data>();
-  const { processingTime, categories = [] } = data;
+  const { processingTime, hackedAPCs, categories = [] } = data;
 
   const categoriesList: string[] = [];
-  const items: Item[] = [];
+  const items: MalfItem[] = [];
 
   for (let idx = 0; idx < categories.length; idx++) {
     const category = categories[idx];
@@ -27,15 +32,20 @@ export function MalfAiModules(props) {
       const item = category.items[itemIndex];
       items.push({
         category: category.name,
-        cost: `${item.cost} PT`,
-        desc: item.desc,
-        disabled: processingTime < item.cost,
+        cost: `${item.cost} ВО`,
+        desc:
+          item.desc +
+          (item.minimum_apcs > 0
+            ? ` Требуется взломать не менее ${item.minimum_apcs} ЛКП.`
+            : ''),
+        disabled: processingTime < item.cost || hackedAPCs < item.minimum_apcs,
         icon_state: item.icon_state,
         icon: item.icon,
         id: item.name,
         name: item.name,
         population_tooltip: '',
         insufficient_population: false,
+        minimum_apcs: item.minimum_apcs || 0, // Handle the case where minimum_apcs is not defined
       });
     }
   }
@@ -44,7 +54,7 @@ export function MalfAiModules(props) {
     <GenericUplink
       categories={categoriesList}
       items={items}
-      currency={`${processingTime} PT`}
+      currency={`${processingTime} ВО`}
       handleBuy={(item) => act('buy', { name: item.name })}
     />
   );

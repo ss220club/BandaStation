@@ -47,7 +47,7 @@
 /obj/item/clothing/head/utility/chefhat/proc/get_mouse(atom/possible_mouse)
 	if (!ispickedupmob(possible_mouse))
 		return
-	var/obj/item/clothing/head/mob_holder/mousey_holder = possible_mouse
+	var/obj/item/mob_holder/mousey_holder = possible_mouse
 	return locate(/mob/living/basic) in mousey_holder.contents
 
 /// Relays emotes emoted by your boss to the hat wearer for full immersion
@@ -86,10 +86,10 @@
 
 /obj/item/clothing/head/utility/chefhat/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] is donning [src]! It looks like [user.p_theyre()] trying to become a chef."))
-	user.say("Bork Bork Bork!", forced = "chef hat suicide")
+	user.say("Борк Борк Борк!", forced = "chef hat suicide")
 	sleep(2 SECONDS)
 	user.visible_message(span_suicide("[user] climbs into an imaginary oven!"))
-	user.say("BOOORK!", forced = "chef hat suicide")
+	user.say("БОООРК!", forced = "chef hat suicide")
 	playsound(user, 'sound/machines/ding.ogg', 50, TRUE)
 	return FIRELOSS
 

@@ -9,7 +9,6 @@
 	equip_sound = 'sound/items/equip/sneakers_equip1.ogg'
 	sound_vary = TRUE
 	gender = PLURAL //Carn: for grammarically correct text-parsing
-	clothing_flags = CLOTHING_MOD_OVERSLOTTING
 	body_parts_covered = FEET
 	slot_flags = ITEM_SLOT_FEET
 	armor_type = /datum/armor/clothing_shoes
@@ -35,7 +34,7 @@
 
 /obj/item/clothing/shoes/suicide_act(mob/living/carbon/user)
 	if(prob(50))
-		user.visible_message(span_suicide("[user] begins fastening \the [src] up waaay too tightly! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] begins fastening \the [src] up waaay too tightly! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		var/obj/item/bodypart/leg/left = user.get_bodypart(BODY_ZONE_L_LEG)
 		var/obj/item/bodypart/leg/right = user.get_bodypart(BODY_ZONE_R_LEG)
 		if(left)

@@ -217,17 +217,9 @@
 		return FALSE
 
 	var/mob/living/basic/blob_minion/blobbernaut/minion/blobber = new(get_turf(factory))
-	assume_direct_control(blobber)
+	blobber.AddComponent(/datum/component/blob_minion, new_overmind = src, new_death_cloud_size = blobber.death_cloud_size)
 	factory.assign_blobbernaut(blobber)
 	blobber.assign_key(ghost.key, blobstrain)
-	RegisterSignal(blobber, COMSIG_HOSTILE_POST_ATTACKINGTARGET, PROC_REF(on_blobbernaut_attacked))
-
-/// When one of our boys attacked something, we sometimes want to perform extra effects
-/mob/eye/blob/proc/on_blobbernaut_attacked(mob/living/basic/blobbynaut, atom/target, success)
-	SIGNAL_HANDLER
-	if (!success)
-		return
-	blobstrain.blobbernaut_attack(target, blobbynaut)
 
 /** Moves the core */
 /mob/eye/blob/proc/relocate_core()
@@ -295,7 +287,7 @@
 		to_chat(src, span_warning("There is no blob adjacent to the target tile!"))
 		return FALSE
 
-	if(!can_buy(BLOB_EXPAND_COST))
+	if(!can_buy(expand_cost)) // BANDASTATION EDIT - Underfloor Blobs
 		return FALSE
 
 	var/attack_success
@@ -316,7 +308,7 @@
 			add_points(BLOB_ATTACK_REFUND)
 		else
 			to_chat(src, span_warning("There is a blob there!"))
-			add_points(BLOB_EXPAND_COST) //otherwise, refund all of the cost
+			add_points(expand_cost) //otherwise, refund all of the cost // BANDASTATION EDIT - Underfloor Blobs
 	else
 		directional_attack(tile, possible_blobs, attack_success)
 
@@ -349,7 +341,7 @@
 			playsound(attacker, 'sound/effects/splat.ogg', 50, TRUE)
 			add_points(BLOB_ATTACK_REFUND)
 		else
-			add_points(BLOB_EXPAND_COST) //if we're attacking diagonally and didn't hit anything, refund
+			add_points(expand_cost) //if we're attacking diagonally and didn't hit anything, refund // BANDASTATION EDIT - Underfloor Blobs
 	return TRUE
 
 /** Rally spores to a location */

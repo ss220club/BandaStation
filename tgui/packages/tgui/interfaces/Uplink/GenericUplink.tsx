@@ -11,7 +11,7 @@ import {
   Stack,
   Tabs,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
 
@@ -33,7 +33,7 @@ export const GenericUplink = (props: GenericUplinkProps) => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [compactMode, setCompactMode] = useState(false);
-  let items = props.items.filter((value) => {
+  const items = props.items.filter((value) => {
     if (searchText.length === 0) {
       return value.category === selectedCategory;
     }
@@ -68,7 +68,7 @@ export const GenericUplink = (props: GenericUplinkProps) => {
                   lineHeight={2}
                   textAlign="center"
                   icon={compactMode ? 'maximize' : 'minimize'}
-                  tooltip={compactMode ? 'Detailed view' : 'Compact view'}
+                  tooltip={compactMode ? 'Подробный' : 'Компактный'}
                   onClick={() => setCompactMode(!compactMode)}
                 />
               </Stack.Item>
@@ -109,8 +109,8 @@ export const GenericUplink = (props: GenericUplinkProps) => {
           {items.length === 0 ? (
             <NoticeBox>
               {searchText.length === 0
-                ? 'No items in this category.'
-                : 'No results found.'}
+                ? 'В этой категории пусто.'
+                : 'Нет результатов поиска.'}
             </NoticeBox>
           ) : (
             <ItemList

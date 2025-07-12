@@ -1,12 +1,12 @@
 /datum/job/coroner
 	title = JOB_CORONER
-	description = "Perform Autopsies whenever needed, \
-		Update medical records accordingly, apply formaldehyde."
+	description = "Проводите вскрытия при необходимости, \
+		обновляйте медицинскую историю, применяйте формальдегид."
 	department_head = list(JOB_CHIEF_MEDICAL_OFFICER)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Head of Personnel and the Chief Medical Officer"
+	supervisors = "Главой Персонала, Главным Врачом"
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "CORONER"
 
@@ -33,7 +33,7 @@
 		/obj/item/healthanalyzer = 10,
 		/obj/item/shovel/serrated/dull = 5,
 		/obj/effect/spawner/random/medical/organs = 5,
-		/obj/item/reagent_containers/cup/organ_jar/brain_in_a_jar = 5,
+		/obj/item/reagent_containers/cup/beaker/organ_jar/brain_in_a_jar = 5,
 		/obj/effect/spawner/random/medical/memeorgans = 1,
 		/obj/item/scythe = 1,
 	)

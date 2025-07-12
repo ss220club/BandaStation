@@ -1,7 +1,7 @@
-import { FeatureChoiced } from '../base';
+import type { FeatureChoiced } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const phobia: FeatureChoiced = {
-  name: 'Phobia',
+  name: 'Фобия',
   component: FeatureDropdownInput,
 };

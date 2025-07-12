@@ -8,7 +8,7 @@ on:
 jobs:
   compile:
     name: "Compile changelogs"
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted]
     permissions:
       contents: write
     steps:
@@ -32,7 +32,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install pyyaml
-          sudo apt-get install  dos2unix
 
       - name: "Checkout"
         if: steps.value_holder.outputs.ACTIONS_ENABLED
@@ -44,7 +43,7 @@ jobs:
       - name: "Compile"
         if: steps.value_holder.outputs.ACTIONS_ENABLED
         run: |
-          python tools/ss13_genchangelog.py html/changelogs
+          python tools/ss13_genchangelog.py html/changelogs/bandastation
 
       - name: Commit
         if: steps.value_holder.outputs.ACTIONS_ENABLED
@@ -52,7 +51,7 @@ jobs:
           git config --local user.name "tgstation-ci[bot]"
           git config --local user.email "179393467+tgstation-ci[bot]@users.noreply.github.com"
           git pull origin master
-          git add html/changelogs
+          git add html/changelogs/bandastation
           git commit -m "Automatic changelog compile [ci skip]" -a || true
 
       - name: Generate App Token

@@ -1,4 +1,5 @@
-import { filter, sortBy } from 'common/collections';
+import { sortBy } from 'es-toolkit';
+import { filter } from 'es-toolkit/compat';
 import { useState } from 'react';
 import { useBackend, useLocalState } from 'tgui/backend';
 import {
@@ -12,9 +13,10 @@ import {
   Tabs,
 } from 'tgui-core/components';
 
+import { ReverseJobsRu } from '../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import { JOB2ICON } from '../common/JobToIcon';
 import { isRecordMatch } from '../SecurityRecords/helpers';
-import { MedicalRecord, MedicalRecordData } from './types';
+import type { MedicalRecord, MedicalRecordData } from './types';
 
 /** Displays all found records. */
 export const MedicalRecordTabs = (props) => {
@@ -22,14 +24,14 @@ export const MedicalRecordTabs = (props) => {
   const { records = [], station_z } = data;
 
   const errorMessage = !records.length
-    ? 'No records found.'
-    : 'No match. Refine your search.';
+    ? 'Записи не найдены.'
+    : 'Нет совпадений. Скорректируйте поиск.';
 
   const [search, setSearch] = useState('');
 
   const sorted: MedicalRecord[] = sortBy(
     filter(records, (record) => isRecordMatch(record, search)),
-    (record) => record.name?.toLowerCase(),
+    [(record) => record.name?.toLowerCase()],
   );
 
   return (
@@ -38,7 +40,7 @@ export const MedicalRecordTabs = (props) => {
         <Input
           fluid
           onChange={setSearch}
-          placeholder="Name/Job/DNA"
+          placeholder="Имя/Должность/ДНК"
           expensive
         />
       </Stack.Item>
@@ -61,18 +63,18 @@ export const MedicalRecordTabs = (props) => {
             <Button
               disabled
               icon="plus"
-              tooltip="Add new records by inserting a 1 by 1 meter photo into the terminal. You do not need this screen open."
+              tooltip="Вставьте фотографию метр-на-метр в терминал, чтобы добавить запись. Вам не нужно включать экран."
             >
-              Create
+              Создать
             </Button>
           </Stack.Item>
           <Stack.Item>
             <Button.Confirm
-              content="Purge"
+              content="Очистить"
               icon="trash"
               disabled={!station_z}
               onClick={() => act('purge_records')}
-              tooltip="Wipe all record data."
+              tooltip="Очищает всю базу данных."
             />
           </Stack.Item>
         </Stack>
@@ -122,7 +124,7 @@ const CrewTab = (props: { record: MedicalRecord }) => {
       selected={selectedRecord?.crew_ref === crew_ref}
     >
       <Box>
-        <Icon name={JOB2ICON[trim] || 'question'} /> {name}
+        <Icon name={JOB2ICON[ReverseJobsRu(trim)] || 'question'} /> {name}
       </Box>
     </Tabs.Tab>
   );

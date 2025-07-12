@@ -283,6 +283,7 @@
 
 	var/static/list/syndie_typecache = typecacheof(list(
 		/area/centcom/syndicate_mothership, // syndicate base itself
+		/area/centcom/syndicate_base, // SS220 EDIT - ADDITION
 		/area/shuttle/assault_pod, // steel rain
 		/area/shuttle/syndicate, // infiltrator
 	))
@@ -477,7 +478,7 @@
 		return
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 25
-		balloon_alert(user, "can't move while buckled!")
+		balloon_alert(user, "вы пристегнуты - нельзя двигаться!")
 	return
 
 /**
@@ -658,6 +659,7 @@
 		var/amount_to_create = chosen_option[TOOL_PROCESSING_AMOUNT]
 		for(var/i = 1 to amount_to_create)
 			var/atom/created_atom = new atom_to_create(drop_location())
+			created_atom.OnCreatedFromProcessing(user, process_item, chosen_option, src)
 			if(custom_materials)
 				created_atom.set_custom_materials(custom_materials, 1 / amount_to_create)
 			created_atom.pixel_x = pixel_x
@@ -665,7 +667,6 @@
 			if(i > 1)
 				created_atom.pixel_x += rand(-8,8)
 				created_atom.pixel_y += rand(-8,8)
-			created_atom.OnCreatedFromProcessing(user, process_item, chosen_option, src)
 			created_atoms.Add(created_atom)
 		to_chat(user, span_notice("You manage to create [amount_to_create] [initial(atom_to_create.gender) == PLURAL ? "[initial(atom_to_create.name)]" : "[initial(atom_to_create.name)][plural_s(initial(atom_to_create.name))]"] from [src]."))
 		SEND_SIGNAL(src, COMSIG_ATOM_PROCESSED, user, process_item, created_atoms)
@@ -860,7 +861,7 @@
 	var/shift_lmb_ctrl_shift_lmb_line = ""
 	var/extra_lines = 0
 	var/extra_context = ""
-	var/used_name = name
+	var/used_name = declent_ru(NOMINATIVE)
 
 	if(isliving(user) || isovermind(user) || iscameramob(user) || (ghost_screentips && isobserver(user)))
 		var/obj/item/held_item = user.get_active_held_item()

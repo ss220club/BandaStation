@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import {
   Box,
   Button,
@@ -11,18 +11,18 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 
 enum SpellCategory {
-  Offensive = 'Offensive',
-  Defensive = 'Defensive',
-  Mobility = 'Mobility',
-  Assistance = 'Assistance',
-  Rituals = 'Rituals',
-  Perks = 'Perks',
+  Offensive = 'Наступление',
+  Defensive = 'Защита',
+  Mobility = 'Мобильность',
+  Assistance = 'Поддержка',
+  Rituals = 'Ритуалы',
+  Perks = 'Перки',
 }
 
 type byondRef = string;
@@ -68,65 +68,65 @@ type TabType = {
 
 const TAB2NAME: TabType[] = [
   {
-    title: 'Enscribed Name',
+    title: 'Вписанное имя',
     blurb:
-      "This book answers only to its owner, and of course, must have one. The permanence of the pact between a spellbook and its owner ensures such a powerful artifact cannot fall into enemy hands, or be used in ways that break the Federation's rules such as bartering spells.",
+      'Эта книга подчиняется только своему владельцу и, конечно, обязана иметь его. Постоянство договора между книгой заклинаний и ее владельцем гарантирует, что такой могущественный артефакт не может попасть в руки врага или быть использован в нарушение правил Федерации, например, для обмена заклинаний.',
     component: () => <EnscribedName />,
   },
   {
-    title: 'Table of Contents',
+    title: 'Содержание',
     component: () => <TableOfContents />,
   },
   {
-    title: 'Offensive',
-    blurb: 'Spells and items geared towards debilitating and destroying.',
+    title: 'Наступление',
+    blurb: 'Заклинания и предметы, направленные на ослабление и разрушение.',
     scrollable: true,
   },
   {
-    title: 'Defensive',
+    title: 'Защита',
     blurb:
-      "Spells and items geared towards improving your survivability or reducing foes' ability to attack.",
+      'Заклинания и предметы, направленные на повышение вашей живучести или снижение способности противников к атаке.',
     scrollable: true,
   },
   {
-    title: 'Mobility',
+    title: 'Мобильность',
     blurb:
-      'Spells and items geared towards improving your ability to move. It is a good idea to take at least one.',
+      'Заклинания и предметы, направленные на улучшение способности к передвижению. Хорошо бы взять хотя бы одно.',
     scrollable: true,
   },
   {
-    title: 'Assistance',
+    title: 'Поддержка',
     blurb:
-      'Spells and items geared towards bringing in outside forces to aid you or improving upon your other items and abilities.',
+      'Заклинания и предметы, направленные на привлечение внешних сил для помощи вам или улучшение других предметов и способностей.',
     scrollable: true,
   },
   {
-    title: 'Challenges',
+    title: 'Испытания',
     blurb:
-      'The Wizard Federation is looking for shows of power. Arming the station against you will increase the danger, but will grant you more charges for your spellbook.',
+      'Федерация волшебников ищет демонстрации силы. Вооружая станцию против вас, вы увеличиваете опасность, но получаете больше зарядов для книги заклинаний.',
     locked: true,
     scrollable: true,
   },
   {
-    title: 'Rituals',
+    title: 'Ритуалы',
     blurb:
-      'These powerful spells change the very fabric of reality. Not always in your favour.',
+      'Эти мощные заклинания изменяют саму ткань реальности. Не всегда в вашу пользу.',
     scrollable: true,
   },
   {
-    title: 'Loadouts',
+    title: 'Наборы',
     blurb:
-      'The Wizard Federation accepts that sometimes, choosing is hard. You can choose from some approved wizard loadouts here.',
+      'Федерация волшебников признает, что иногда выбор бывает нелегким. Здесь вы можете выбрать один из одобренных вариантов снаряжения волшебника.',
     component: () => <Loadouts />,
   },
   {
-    title: 'Randomize',
+    title: 'Случайный выбор',
     blurb:
-      "If you didn't like the loadouts offered, you can embrace chaos. Not recommended for newer wizards.",
+      'Если вам не понравились предложенные варианты снаряжения, вы можете принять хаос. Не рекомендуется для начинающих волшебников.',
     component: () => <Randomize />,
   },
   {
-    title: 'Perks',
+    title: 'Перки',
     blurb:
       'Perks are useful (and not so useful) improvements to the soul and body collected from all corners of the universe.',
     scrollable: true,
@@ -138,9 +138,9 @@ const TAB2NAME: TabType[] = [
 ];
 
 enum Buywords {
-  Learn = 'Learn',
-  Summon = 'Summon',
-  Cast = 'Cast',
+  Learn = 'Выучить',
+  Summon = 'Призвать',
+  Cast = 'Провести',
 }
 
 const BUYWORD2ICON = {
@@ -180,28 +180,28 @@ const TableOfContents = (props) => {
         fluid
         icon="pen"
         disabled
-        content="Name Enscription"
+        content="Именная пропись"
       />
       <Button
         lineHeight={lineHeightToc}
         fluid
         icon="clipboard"
         disabled
-        content="Table of Contents"
+        content="Содержание"
       />
       <Divider />
       <Button
         lineHeight={lineHeightToc}
         fluid
         icon="fire"
-        content="Deadly Evocations"
+        content="Смертоносные заклинания"
         onClick={() => setTabIndex(3)}
       />
       <Button
         lineHeight={lineHeightToc}
         fluid
         icon="shield-alt"
-        content="Defensive Evocations"
+        content="Защитные заклинания"
         onClick={() => setTabIndex(3)}
       />
       <Divider />
@@ -209,14 +209,14 @@ const TableOfContents = (props) => {
         lineHeight={lineHeightToc}
         fluid
         icon="globe-americas"
-        content="Magical Transportation"
+        content="Магическое перемещение"
         onClick={() => setTabIndex(5)}
       />
       <Button
         lineHeight={lineHeightToc}
         fluid
         icon="users"
-        content="Assistance and Summoning"
+        content="Поддержка и призывы"
         onClick={() => setTabIndex(5)}
       />
       <Divider />
@@ -224,14 +224,14 @@ const TableOfContents = (props) => {
         lineHeight={lineHeightToc}
         fluid
         icon="crown"
-        content="Challenges"
+        content="Испытания"
         onClick={() => setTabIndex(7)}
       />
       <Button
         lineHeight={lineHeightToc}
         fluid
         icon="magic"
-        content="Rituals"
+        content="Ритуалы"
         onClick={() => setTabIndex(7)}
       />
       <Divider />
@@ -239,14 +239,14 @@ const TableOfContents = (props) => {
         lineHeight={lineHeightToc}
         fluid
         icon="thumbs-up"
-        content="Wizard Approved Loadouts"
+        content="Наборы снаряжения, одобренные волшебниками"
         onClick={() => setTabIndex(9)}
       />
       <Button
         lineHeight={lineHeightToc}
         fluid
         icon="dice"
-        content="Arcane Randomizer"
+        content="Магический рандомайзер"
         onClick={() => setTabIndex(9)}
       />
       <Divider />
@@ -254,7 +254,7 @@ const TableOfContents = (props) => {
         lineHeight={lineHeightToc}
         fluid
         icon="cog"
-        content="Perks"
+        content="Перки"
         onClick={() => setTabIndex(11)}
       />
     </Box>
@@ -271,7 +271,7 @@ const LockedPage = (props) => {
           <Icon color="purple" name="lock" size={10} />
         </Stack.Item>
         <Stack.Item fontSize="18px" color="purple">
-          The Wizard Federation has locked this page.
+          Федерация волшебников закрыла эту страницу.
         </Stack.Item>
       </Stack>
     </Dimmer>
@@ -296,8 +296,8 @@ const PointLocked = (props) => {
             }}
           />
         </Stack.Item>
-        <Stack.Item fontSize="18px" color="purple">
-          You do not have enough points to use this page.
+        <Stack.Item fontSize="14px" color="purple">
+          У вас недостаточно очков для использования этой страницы.
         </Stack.Item>
       </Stack>
     </Dimmer>
@@ -317,17 +317,17 @@ const SingleLoadout = (props: WizardLoadout) => {
   const { act } = useBackend<WizardLoadout>();
   const { author, name, blurb, icon, loadoutId, loadoutColor } = props;
   return (
-    <Stack.Item grow>
+    <Stack.Item fontSize="10px" grow>
       <Section width={LoadoutWidth} title={name}>
         {blurb}
         <Divider />
         <Button.Confirm
-          confirmContent="Confirm Purchase?"
+          confirmContent="Подтвердить покупку?"
           confirmIcon="dollar-sign"
           confirmColor="good"
           fluid
           icon={icon}
-          content="Purchase Loadout"
+          content="Приобрести набор"
           onClick={() =>
             act('purchase_loadout', {
               id: loadoutId,
@@ -335,7 +335,7 @@ const SingleLoadout = (props: WizardLoadout) => {
           }
         />
         <Divider />
-        <Box color={loadoutColor}>Added by {author}.</Box>
+        <Box color={loadoutColor}>Добавлен {author}.</Box>
       </Section>
     </Stack.Item>
   );
@@ -355,27 +355,27 @@ const Loadouts = (props) => {
           <SingleLoadout
             loadoutId="loadout_classic"
             loadoutColor="purple"
-            name="The Classic Wizard"
+            name="Классический маг"
             icon="fire"
-            author="Archchancellor Gray"
+            author="Архиканцлер Грей"
             blurb={`
-                This is the classic wizard, crazy popular in
-                the 2550's. Comes with Fireball, Magic Missile,
-                Ei Nath, and Ethereal Jaunt. The key here is that
-                every part of this kit is very easy to pick up and use.
+                Это классический маг, был безумно популярным в
+                2550-е годы. Поставляется с Fireball, Magic Missile,
+                Ei Nath, и Ethereal Jaunt. Ключевой момент тут в том, что
+                каждый элемент этого набора очень легко освоить и использовать.
               `}
           />
           <SingleLoadout
-            name="Mjolnir's Power"
+            name="Сила Мьёльнира"
             icon="hammer"
             loadoutId="loadout_hammer"
             loadoutColor="green"
-            author="Jegudiel Worldshaker"
+            author="Джегудиэль Ворлдшейкер"
             blurb={`
-                The power of the mighty Mjolnir! Best not to lose it.
-                This loadout has Summon Item, Mutate, Blink, Force Wall,
-                Tesla Blast, and Mjolnir. Mutate is your utility in this case:
-                Use it for limited ranged fire and getting out of bad blinks.
+                Сила могучего Мьёльнира! Лучше не терять его.
+                Этот набор содержит Summon Item, Mutate, Blink, Force Wall,
+                Tesla Blast, и Мьёлнир. Mutate это ваша поддержка в данном случае:
+                Используйте его для стрельбы с ограниченным радиусом действия и выхода из плохих блинков.
               `}
           />
         </Stack>
@@ -383,28 +383,28 @@ const Loadouts = (props) => {
       <Stack.Item>
         <Stack fill>
           <SingleLoadout
-            name="Fantastical Army"
+            name="Фантастическая армия"
             icon="pastafarianism"
             loadoutId="loadout_army"
             loadoutColor="yellow"
-            author="Prospero Spellstone"
+            author="Просперо Спеллстоун"
             blurb={`
-                Why kill when others will gladly do it for you?
-                Embrace chaos with your kit: Soulshards, Staff of Change,
-                Necro Stone, Teleport, and Jaunt! Remember, no offense spells!
+                Зачем убивать, если другие с радостью сделают это за вас?
+                Устройте хаос с помощью своего набора: Soulshards, Staff of Change,
+                Necro Stone, Teleport, and Jaunt! Помните, у вас нет атакующих заклинаний!
               `}
           />
           <SingleLoadout
-            name="Soul Tapper"
+            name="Ловец душ"
             icon="skull"
             loadoutId="loadout_tap"
             loadoutColor="white"
-            author="Tom the Empty"
+            author="Том Пустотный"
             blurb={`
-                Embrace the dark, and tap into your soul.
-                You can recharge very long recharge spells
-                like Ei Nath by jumping into new bodies with
-                Mind Swap and starting Soul Tap anew.
+                Примите темноту и откройте свою душу.
+                Вы можете перезаряжать очень длинные заклинания
+                как Ei Nath перемещаясь в новые тела с помощью
+                Mind Swap и начинать ловить души заного.
               `}
           />
         </Stack>
@@ -413,7 +413,7 @@ const Loadouts = (props) => {
   );
 };
 
-const lineHeightRandomize = 6;
+const lineHeightRandomize = 3;
 
 const Randomize = (props) => {
   const { act, data } = useBackend<Data>();
@@ -422,35 +422,36 @@ const Randomize = (props) => {
     <Stack fill vertical>
       {points < 10 && <PointLocked />}
       <Stack.Item>
-        Semi-Randomize will ensure you at least get some mobility and lethality.
-        Guaranteed to have {semi_random_bonus} points worth of spells.
+        С полурандомизацией вы гарантированно получите хотя бы некоторую
+        мобильность и смертоносность. Гарантированно имеет заклинания стоймостью{' '}
+        {semi_random_bonus} очков.
       </Stack.Item>
       <Stack.Item>
         <Button.Confirm
-          confirmContent="Cowabunga it is?"
+          confirmContent="Ковабунга?"
           confirmIcon="dice-three"
           lineHeight={lineHeightRandomize}
           fluid
           icon="dice-three"
-          content="Semi-Randomize!"
+          content="Полу-рандомизация!"
           onClick={() => act('semirandomize')}
         />
         <Divider />
       </Stack.Item>
       <Stack.Item>
-        Full Random will give you anything. There&apos;s no going back, either!
-        Guaranteed to have {full_random_bonus} points worth of spells.
+        Полный рандом даст вам все, что угодно. Тут также нет пути назад!
+        Гарантированно имеет заклинания стоймостью {full_random_bonus} очков.
       </Stack.Item>
       <Stack.Item>
         <NoticeBox danger>
           <Button.Confirm
-            confirmContent="Cowabunga it is?"
+            confirmContent="Ковабунга?"
             confirmIcon="dice"
             lineHeight={lineHeightRandomize}
             fluid
             color="black"
             icon="dice"
-            content="Full Random!"
+            content="Полный рандом!"
             onClick={() => act('randomize')}
           />
         </NoticeBox>
@@ -490,12 +491,12 @@ const SearchSpells = (props) => {
     return (
       <Stack width="100%" vertical>
         <Stack.Item>
-          <NoticeBox>{`No spells found!`}</NoticeBox>
+          <NoticeBox>{`Заклинаний не найдено!`}</NoticeBox>
         </Stack.Item>
         <Stack.Item>
           <Box italic align="center" color="lightgrey">
-            {`Search tip: Searching "Robeless" will only show you
-            spells that don't require wizard garb!`}
+            {`Совет по поиску: При поиске «Robeless» вы увидите только
+            заклинания, не требующие облачения волшебника!`}
           </Box>
         </Stack.Item>
       </Stack>
@@ -522,13 +523,13 @@ const SpellTabDisplay = (props: {
   const getTimeOrCat = (entry: SpellEntry) => {
     if (entry.cat === SpellCategory.Rituals) {
       if (entry.times) {
-        return `Cast ${entry.times} times.`;
+        return `Проведено ${entry.times} раз.`;
       } else {
-        return 'Not cast yet.';
+        return 'Еще не проведено.';
       }
     } else {
       if (entry.cooldown) {
-        return `${entry.cooldown}s Cooldown`;
+        return `Перезарядка: ${entry.cooldown} сек.`;
       } else {
         return '';
       }
@@ -541,11 +542,11 @@ const SpellTabDisplay = (props: {
         <Stack.Item key={entry.name}>
           <Divider />
           <Stack mt={1.3} width="100%" position="absolute" textAlign="left">
-            <Stack.Item width="120px" ml={CooldownOffset}>
+            <Stack.Item width="150px" ml={CooldownOffset}>
               {getTimeOrCat(entry)}
             </Stack.Item>
             <Stack.Item width="60px" ml={PointOffset}>
-              {entry.cost} points
+              {entry.cost} очков
             </Stack.Item>
             {entry.buyword === Buywords.Learn && (
               <Stack.Item>
@@ -556,8 +557,8 @@ const SpellTabDisplay = (props: {
                   tooltipPosition="bottom-start"
                   tooltip={
                     entry.requires_wizard_garb
-                      ? 'Requires wizard garb.'
-                      : 'Can be cast without wizard garb.'
+                      ? 'Требуется одежда волшебника.'
+                      : 'Может применяться без одежды волшебника.'
                   }
                 />
               </Stack.Item>
@@ -585,12 +586,14 @@ const SpellTabDisplay = (props: {
                   }
                 />
                 <br />
-                {(!entry.refundable && <NoticeBox>No refunds.</NoticeBox>) || (
+                {(!entry.refundable && (
+                  <NoticeBox>Без возврата.</NoticeBox>
+                )) || (
                   <Button
                     textAlign="center"
                     width={7}
                     icon="arrow-left"
-                    content="Refund"
+                    content="Возврат"
                     onClick={() =>
                       act('refund', {
                         spellref: entry.ref,
@@ -620,13 +623,13 @@ const CategoryDisplay = (props: { ActiveCat: TabType }) => {
       <Stack vertical>
         {ActiveCat.blurb && (
           <Stack.Item>
-            <Box textAlign="center" bold height="30px">
+            <Box textAlign="center" bold height="50px">
               {ActiveCat.blurb}
             </Box>
           </Stack.Item>
         )}
         <Stack.Item>
-          {(ActiveCat.component && ActiveCat.component()) || (
+          {ActiveCat.component?.() || (
             <SpellTabDisplay TabSpells={TabSpells} PointOffset={38} />
           )}
         </Stack.Item>
@@ -648,45 +651,45 @@ export const Spellbook = (props) => {
 
   // Has a chance of selecting a random funny verb instead of "Searching"
   const SelectSearchVerb = () => {
-    let found = Math.random();
+    const found = Math.random();
     if (found <= 0.03) {
-      return 'Seeking';
+      return 'Просматривание';
     }
     if (found <= 0.06) {
-      return 'Contemplating';
+      return 'Размышление';
     }
     if (found <= 0.09) {
-      return 'Divining';
+      return 'Гадание';
     }
     if (found <= 0.12) {
-      return 'Scrying';
+      return 'Прорицание';
     }
     if (found <= 0.15) {
-      return 'Peeking';
+      return 'Подсматривание';
     }
     if (found <= 0.18) {
-      return 'Pondering';
+      return 'Обдумывание';
     }
     if (found <= 0.21) {
-      return 'Divining';
+      return 'Разгадывание';
     }
     if (found <= 0.24) {
-      return 'Gazing';
+      return 'Вглядывание';
     }
     if (found <= 0.27) {
-      return 'Studying';
+      return 'Изучение';
     }
     if (found <= 0.3) {
-      return 'Reviewing';
+      return 'Рассмотрение';
     }
 
-    return 'Searching';
+    return 'Поиск';
   };
 
   const SelectedVerb = SelectSearchVerb();
 
   return (
-    <Window title="Spellbook" theme="wizard" width={950} height={540}>
+    <Window title="Книга заклинаний" theme="wizard" width={950} height={540}>
       <Window.Content>
         <Stack vertical fill>
           <Stack.Item>
@@ -700,7 +703,7 @@ export const Spellbook = (props) => {
                     fill
                     buttons={
                       <Button
-                        content={`Stop ${SelectedVerb}`}
+                        content={`Отмена ${SelectedVerb}`}
                         icon="arrow-rotate-left"
                         onClick={() => setSpellSearch('')}
                       />
@@ -722,10 +725,10 @@ export const Spellbook = (props) => {
                       buttons={
                         <>
                           <Button
-                            mr={57}
+                            mr={48.55}
                             disabled={tabIndex === 1}
                             icon="arrow-left"
-                            content="Previous Page"
+                            content="Предыдущая страница"
                             onClick={() => setTabIndex(tabIndex - 2)}
                           />
                           <Box textAlign="right" bold mt={-3.3} mr={1}>
@@ -751,7 +754,7 @@ export const Spellbook = (props) => {
                             mr={0}
                             icon="arrow-right"
                             disabled={tabIndex === 11}
-                            content="Next Page"
+                            content="Далее"
                             onClick={() => setTabIndex(tabIndex + 2)}
                           />
                           <Box textAlign="left" bold mt={-3.3} ml={-59.8}>
@@ -772,13 +775,13 @@ export const Spellbook = (props) => {
               <Stack>
                 <Stack.Item grow>
                   <ProgressBar value={points / 10}>
-                    {points + ' points left to spend.'}
+                    {points + ' оставшихся очков.'}
                   </ProgressBar>
                 </Stack.Item>
                 <Stack.Item>
                   <Input
                     width={15}
-                    placeholder="Search for a spell..."
+                    placeholder="Поиск заклинания..."
                     onChange={setSpellSearch}
                   />
                 </Stack.Item>

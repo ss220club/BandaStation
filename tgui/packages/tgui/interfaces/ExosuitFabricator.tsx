@@ -1,13 +1,13 @@
 import { Box, Button, Icon, Section, Stack } from 'tgui-core/components';
 import { Tooltip } from 'tgui-core/components';
-import { BooleanLike, classes } from 'tgui-core/react';
+import { type BooleanLike, classes } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import { DesignBrowser } from './Fabrication/DesignBrowser';
 import { MaterialAccessBar } from './Fabrication/MaterialAccessBar';
 import { MaterialCostSequence } from './Fabrication/MaterialCostSequence';
-import { Design, FabricatorData, MaterialMap } from './Fabrication/Types';
+import type { Design, FabricatorData, MaterialMap } from './Fabrication/Types';
 
 type ExosuitDesign = Design & {
   constructionTime: number;
@@ -29,7 +29,7 @@ export const ExosuitFabricator = (props) => {
   }
 
   return (
-    <Window title="Exosuit Fabricator" width={1100} height={600}>
+    <Window title="Фабрикатор экзокостюмов" width={1100} height={600}>
       <Window.Content>
         <Stack fill>
           <Stack.Item grow>
@@ -54,7 +54,7 @@ export const ExosuitFabricator = (props) => {
                         });
                       }}
                     >
-                      Queue All
+                      Всё в очередь
                     </Button>
                   )}
                 />
@@ -207,27 +207,27 @@ const Queue = (props: QueueProps) => {
         <Stack.Item>
           <Section
             fill
-            title="Queue"
+            title="Очередь"
             buttons={
               <>
                 <Button.Confirm
                   disabled={!queue.length}
                   color="bad"
                   icon="minus-circle"
-                  content="Clear Queue"
+                  content="Очистить очередь"
                   onClick={() => act('clear_queue')}
                 />
                 {(!!processing && (
                   <Button
                     disabled={!queue.length}
-                    content="Stop"
+                    content="Остановить"
                     icon="stop"
                     onClick={() => act('stop_queue')}
                   />
                 )) || (
                   <Button
                     disabled={!queue.length}
-                    content="Build Queue"
+                    content="Начать сборку"
                     icon="play"
                     onClick={() => act('build_queue')}
                   />
@@ -330,14 +330,11 @@ const QueueList = (props: QueueListProps) => {
                   <Box
                     width={'32px'}
                     height={'32px'}
-                    className={classes([
-                      'design32x32',
-                      entry.design && entry.design.icon,
-                    ])}
+                    className={classes(['design32x32', entry.design?.icon])}
                   />
                 </div>
                 <div className="FabricatorRecipe__Label">
-                  {entry.design && entry.design.name}
+                  {entry.design?.name}
                 </div>
               </div>
             </Tooltip>

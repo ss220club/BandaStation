@@ -48,6 +48,7 @@
 			handle_mutations(seconds_per_tick, times_fired)
 			//Breathing, if applicable
 			handle_breathing(seconds_per_tick, times_fired)
+			handle_ssd(seconds_per_tick, times_fired) // BANDASTATION ADD - SSD INDICATOR
 
 		handle_diseases(seconds_per_tick, times_fired)// DEAD check is in the proc itself; we want it to spread even if the mob is dead, but to handle its disease-y properties only if you're not.
 
@@ -122,7 +123,7 @@
  * * needs_metabolizing (bool) takes into consideration if the chemical is matabolizing when it's checked.
  */
 /mob/living/proc/has_reagent(reagent, amount = -1, needs_metabolizing = FALSE)
-	return reagents.has_reagent(reagent, amount, needs_metabolizing)
+	return reagents?.has_reagent(reagent, amount, needs_metabolizing)
 
 /mob/living/proc/update_damage_hud()
 	return

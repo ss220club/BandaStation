@@ -1,4 +1,4 @@
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 export enum ShuttleState {
   BUYING_SHUTTLE = 'buying_shuttle',
@@ -66,6 +66,7 @@ export type CommsConsoleData = {
   shuttleLastCalled: BooleanLike;
   shuttleRecallable: BooleanLike;
   syndicate: BooleanLike;
+  canRequestERT: BooleanLike; // BANDASTATION ADDITION
 
   // static_data
   callShuttleReasonMinLength: number;

@@ -1,11 +1,11 @@
-import { Antagonist, Category } from '../base';
+import { type Antagonist, Category } from '../base';
 import { TRAITOR_MECHANICAL_DESCRIPTION } from './traitor';
 
 const SyndicateInfiltrator: Antagonist = {
   key: 'syndicateinfiltrator',
-  name: 'Syndicate Infiltrator',
+  name: 'Диверсант Синдиката',
   description: [
-    'A form of traitor that can activate when joining an ongoing shift.',
+    'Вариант предателя, который можно получить при прибытии на смену.',
     TRAITOR_MECHANICAL_DESCRIPTION,
   ],
   category: Category.Latejoin,

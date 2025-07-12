@@ -49,19 +49,28 @@
 		cmd_show_exp_panel(M.client)
 
 	else if(href_list["editrightsbrowser"])
-		edit_admin_permissions(0)
+		edit_admin_permissions(PERMISSIONS_PAGE_PERMISSIONS)
 
-	else if(href_list["editrightsbrowserlog"])
-		edit_admin_permissions(1, href_list["editrightstarget"], href_list["editrightsoperation"], href_list["editrightspage"])
+	else if(href_list["editrightsbrowserranks"])
+		if(href_list["editrightsaddrank"])
+			add_rank()
+		else if(href_list["editrightsremoverank"])
+			remove_rank(href_list["editrightsremoverank"])
+		else if(href_list["editrightseditrank"])
+			change_rank(href_list["editrightseditrank"])
+		edit_admin_permissions(PERMISSIONS_PAGE_RANKS)
 
-	if(href_list["editrightsbrowsermanage"])
+	else if(href_list["editrightsbrowserlogging"])
+		edit_admin_permissions(PERMISSIONS_PAGE_LOGGING, href_list["editrightslogtarget"], href_list["editrightslogactor"], href_list["editrightslogoperation"], href_list["editrightslogpage"])
+
+	if(href_list["editrightsbrowserhousekeep"])
 		if(href_list["editrightschange"])
 			change_admin_rank(ckey(href_list["editrightschange"]), href_list["editrightschange"], TRUE)
 		else if(href_list["editrightsremove"])
 			remove_admin(ckey(href_list["editrightsremove"]), href_list["editrightsremove"], TRUE)
 		else if(href_list["editrightsremoverank"])
 			remove_rank(href_list["editrightsremoverank"])
-		edit_admin_permissions(2)
+		edit_admin_permissions(PERMISSIONS_PAGE_HOUSEKEEPING)
 
 	else if(href_list["editrights"])
 		edit_rights_topic(href_list)
@@ -106,7 +115,7 @@
 			return
 		SSshuttle.emergency.setTimer(timer SECONDS)
 		log_admin("[key_name(usr)] edited the Emergency Shuttle's timeleft to [timer] seconds.")
-		minor_announce("The emergency shuttle will reach its destination in [DisplayTimeText(timer SECONDS)].")
+		minor_announce("Эвакуационный шаттл достигнет места назначения через [DisplayTimeText(timer SECONDS)].")
 		message_admins(span_adminnotice("[key_name_admin(usr)] edited the Emergency Shuttle's timeleft to [timer] seconds."))
 	else if(href_list["trigger_centcom_recall"])
 		if(!check_rights(R_ADMIN))
@@ -674,7 +683,7 @@
 
 		//Job + antagonist
 		if(subject.mind)
-			special_role_description = "Role: <b>[subject.mind.assigned_role.title]</b>; Antagonist: <font color='red'><b>"
+			special_role_description = "Role: <b>[job_title_ru(subject.mind.assigned_role.title)]</b>; Antagonist: <font color='red'><b>"
 
 			if(subject.mind.antag_datums)
 				var/iterable = 0
@@ -1163,6 +1172,15 @@
 		message_admins("[key_name_admin(usr)] has set the self-destruct \
 			code to \"[code]\".")
 
+	// BANDASTATION ADDITION - START
+	else if(href_list["ert_respond"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/ert_manager/tgui = new(usr)
+		tgui.ui_interact(usr)
+		message_admins("[key_name_admin(usr)] answered an ERT request.")
+	// BANDASTATION ADDITION - END
+
 	else if(href_list["add_station_goal"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1556,8 +1574,10 @@
 		for(var/obj/machinery/fax/admin/FAX as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/fax/admin))
 			if(FAX.fax_id != href_list["destination"])
 				continue
-			FAX.receive(locate(href_list["print_fax"]), href_list["sender_name"])
-			return
+			// BANDASTATION EDIT START
+			var/obj/item/paper/doc = locate(href_list["print_fax"])
+			FAX.receive(doc.copy(), href_list["sender_name"])
+			// BANDASTATION EDIT END
 
 	else if(href_list["play_internet"])
 		if(!check_rights(R_SOUND))

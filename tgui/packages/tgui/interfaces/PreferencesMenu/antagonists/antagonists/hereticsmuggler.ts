@@ -1,11 +1,11 @@
-import { Antagonist, Category } from '../base';
+import { type Antagonist, Category } from '../base';
 import { HERETIC_MECHANICAL_DESCRIPTION } from './heretic';
 
 const HereticSmuggler: Antagonist = {
   key: 'hereticsmuggler',
-  name: 'Heretic Smuggler',
+  name: 'Еретик-контрабандист',
   description: [
-    'A form of heretic that can activate when joining an ongoing shift.',
+    'Вариант еретика, который можно получить при прибытии на смену.',
     HERETIC_MECHANICAL_DESCRIPTION,
   ],
   category: Category.Latejoin,

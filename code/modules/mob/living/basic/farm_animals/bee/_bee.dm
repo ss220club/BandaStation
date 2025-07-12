@@ -75,7 +75,7 @@
 /mob/living/basic/bee/mob_pickup(mob/living/picker)
 	if(flags_1 & HOLOGRAM_1)
 		return
-	var/obj/item/clothing/head/mob_holder/destructible/holder = new(get_turf(src), src, held_state, head_icon, held_lh, held_rh, worn_slot_flags)
+	var/obj/item/mob_holder/destructible/holder = new(get_turf(src), src, held_state, head_icon, held_lh, held_rh, worn_slot_flags)
 	var/list/reee = list(/datum/reagent/consumable/nutriment/vitamin = 5)
 	if(beegent)
 		reee[beegent.type] = 5
@@ -290,8 +290,8 @@
 	name = queen.name
 
 /obj/item/queen_bee/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] eats [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
-	user.say("IT'S HIP TO EAT BEES!")
+	user.visible_message(span_suicide("[user] eats [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
+	user.say("ЕСТЬ ПЧЁЛ - ЭТО МОДНО!")
 	qdel(src)
 	return TOXLOSS
 

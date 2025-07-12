@@ -177,7 +177,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	///fontawesome icon name to use in to display the user's balance in the vendor UI
 	var/displayed_currency_icon = "coins"
 	///String of the used currency to display in the vendor UI
-	var/displayed_currency_name = " cr"
+	var/displayed_currency_name = " кр"
 	///Whether our age check is currently functional
 	var/age_restrictions = TRUE
 	/// How many credits does this vending machine have? 20% of all sales go to this pool, and are given freely when the machine is restocked, or successfully tilted. Lost on deconstruction.
@@ -323,19 +323,6 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	for(var/obj/item/vending_refill/installed_refill in component_parts)
 		restock(installed_refill)
 
-/obj/machinery/vending/on_construction(mob/user, from_flatpack = FALSE)
-	if (!from_flatpack)
-		return
-	// When built from a flatpack, empty our canister upon construction
-	for(var/obj/item/vending_refill/installed_refill in component_parts)
-		for (var/item_sold in installed_refill.products)
-			installed_refill.products[item_sold] = 0
-		for (var/item_sold in installed_refill.contraband)
-			installed_refill.contraband[item_sold] = 0
-		for (var/item_sold in installed_refill.premium)
-			installed_refill.premium[item_sold] = 0
-	RefreshParts()
-
 /obj/machinery/vending/on_deconstruction(disassembled)
 	if(refill_canister)
 		return ..()
@@ -442,7 +429,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 
 		var/obj/item/temp = typepath
 		var/datum/data/vending_product/new_record = new /datum/data/vending_product()
-		new_record.name = initial(temp.name)
+		new_record.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
 		new_record.product_path = typepath
 		if(!start_empty)
 			new_record.amount = amount
@@ -470,8 +457,8 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 */
 /obj/machinery/vending/proc/build_inventories(start_empty)
 	build_inventory(products, product_records, product_categories, start_empty)
-	build_inventory(contraband, hidden_records, create_categories_from("Contraband", "mask", contraband), start_empty, premium = TRUE)
-	build_inventory(premium, coin_records, create_categories_from("Premium", "coins", premium), start_empty, premium = TRUE)
+	build_inventory(contraband, hidden_records, create_categories_from("Контрабанда", "mask", contraband), start_empty, premium = TRUE)
+	build_inventory(premium, coin_records, create_categories_from("Премиум", "coins", premium), start_empty, premium = TRUE)
 
 /**
  * Returns a list of data about the category
@@ -1257,7 +1244,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
  */
 /obj/machinery/vending/proc/collect_records_for_static_data(list/records, list/categories, premium)
 	var/static/list/default_category = list(
-		"name" = "Products",
+		"name" = "Товары",
 		"icon" = "cart-shopping",
 	)
 
@@ -1456,7 +1443,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 			return
 
 	if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)
-		var/vend_response = vend_reply || "Thank you for shopping with [src]!"
+		var/vend_response = vend_reply || "Благодарим за покупку в [declent_ru(INSTRUMENTAL)]!"
 		speak(vend_response)
 		purchase_message_cooldown = world.time + 5 SECONDS
 		//This is not the best practice, but it's safe enough here since the chances of two people using a machine with the same ref in 5 seconds is fuck low

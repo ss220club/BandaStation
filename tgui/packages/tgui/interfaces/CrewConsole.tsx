@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, Icon, Input, Section, Table } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
@@ -21,12 +21,13 @@ const SORT_NAMES = {
   name: 'Name',
   area: 'Position',
   health: 'Vitals',
+  head: 'Head',
 };
 
 const STAT_LIVING = 0;
 const STAT_DEAD = 4;
 
-const SORT_OPTIONS = ['health', 'ijob', 'name', 'area'];
+const SORT_OPTIONS = ['health', 'ijob', 'name', 'area', 'head'];
 
 const jobIsHead = (jobId: number) => jobId % 10 === 0;
 
@@ -82,6 +83,12 @@ const areaSort = (a: CrewSensor, b: CrewSensor) => {
   if (a.area < b.area) return -1;
   if (a.area > b.area) return 1;
   return 0;
+};
+
+const headSort = (a: CrewSensor, b: CrewSensor) => {
+  if (a.ijob % 10 === 0 && b.ijob % 10 !== 0) return -1;
+  else if (a.ijob % 10 !== 0 && b.ijob % 10 === 0) return 1;
+  else return a.ijob - b.ijob;
 };
 
 const healthToAttribute = (
@@ -168,6 +175,8 @@ const CrewTable = () => {
         return sortAsc ? healthSort(a, b) : healthSort(b, a);
       case 'area':
         return sortAsc ? areaSort(a, b) : areaSort(b, a);
+      case 'head':
+        return sortAsc ? headSort(a, b) : headSort(b, a);
       default:
         return 0;
     }

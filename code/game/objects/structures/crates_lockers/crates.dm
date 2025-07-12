@@ -41,6 +41,7 @@
 /obj/structure/closet/crate/Initialize(mapload)
 	AddElement(/datum/element/climbable, climb_time = crate_climb_time, climb_stun = 0) //add element in closed state before parent init opens it(if it does)
 	if(elevation)
+		AddComponent(/datum/component/climb_walkable)
 		AddElement(/datum/element/elevation, pixel_shift = elevation)
 	. = ..()
 
@@ -283,6 +284,10 @@
 	new /obj/item/reagent_containers/blood/o_plus(src)
 	new /obj/item/reagent_containers/blood/lizard(src)
 	new /obj/item/reagent_containers/blood/ethereal(src)
+	/// BANDASTATION ADDITION START - Species
+	new /obj/item/reagent_containers/blood/skrell(src)
+	new /obj/item/reagent_containers/blood/moth(src)
+	/// BANDASTATION ADDITION END - Species
 	for(var/i in 1 to 3)
 		new /obj/item/reagent_containers/blood/random(src)
 	new /obj/item/paper/fluff/jobs/medical/blood_types(src)

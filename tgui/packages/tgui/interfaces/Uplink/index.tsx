@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from 'tgui-core/components';
 import { fetchRetry } from 'tgui-core/http';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
@@ -20,7 +20,7 @@ import {
   calculateProgression,
   dangerLevelsTooltip,
 } from './calculateDangerLevel';
-import { GenericUplink, Item } from './GenericUplink';
+import { GenericUplink, type Item } from './GenericUplink';
 import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
 
 type UplinkItem = {
@@ -93,7 +93,7 @@ type ItemExtraData = Item & {
 // Cache response so it's only sent once
 let fetchServerData: Promise<ServerData> | undefined;
 
-export class Uplink extends Component<{}, UplinkState> {
+export class Uplink extends Component<any, UplinkState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -223,9 +223,9 @@ export class Uplink extends Component<{}, UplinkState> {
             <Box>{item.desc}</Box>
             {(item.lock_other_purchases && (
               <NoticeBox mt={1}>
-                Taking this item will lock you from further purchasing from the
-                marketplace. Additionally, if you have already purchased an
-                item, you will not be able to purchase this.
+                Покупка этого предмета навсегда заблокирует возможность
+                дальнейших покупок. К тому же, если вы купили любой другой
+                предмет, то вы не сможете купить этот.
               </NoticeBox>
             )) ||
               null}
@@ -277,17 +277,18 @@ export class Uplink extends Component<{}, UplinkState> {
                         content={
                           <Box>
                             <Box>
-                              <Box>Your current level of threat.</Box> Threat
-                              determines what items you can purchase.&nbsp;
+                              <Box>Ваше текущее значение угрозы.</Box> Угроза
+                              определяет, какие предметы вы можете
+                              приобрести.&nbsp;
                               <Box mt={0.5}>
                                 {/* A minute in deciseconds */}
-                                Threat passively increases by{' '}
+                                Угроза пассивно увеличивается на{' '}
                                 <Box color="green" as="span">
                                   {calculateProgression(
                                     current_progression_scaling,
                                   )}
                                 </Box>
-                                &nbsp;every minute
+                                &nbsp;каждую минуту
                               </Box>
                               {dangerLevelsTooltip}
                             </Box>
@@ -312,7 +313,7 @@ export class Uplink extends Component<{}, UplinkState> {
                             selected={currentTab === 0}
                             onClick={() => this.setState({ currentTab: 0 })}
                           >
-                            Primary Objectives
+                            Основные задачи
                           </Tabs.Tab>
                         )}
                         <Tabs.Tab
@@ -325,7 +326,7 @@ export class Uplink extends Component<{}, UplinkState> {
                           selected={currentTab === 2}
                           onClick={() => this.setState({ currentTab: 2 })}
                         >
-                          Market
+                          Рынок
                         </Tabs.Tab>
                       </Tabs>
                     </Stack.Item>
@@ -341,7 +342,7 @@ export class Uplink extends Component<{}, UplinkState> {
                         px={2}
                         onClick={() => act('lock')}
                       >
-                        Lock
+                        Закрыть
                       </Button>
                     </Stack.Item>
                   )}
@@ -377,7 +378,7 @@ export class Uplink extends Component<{}, UplinkState> {
                         align={'top'}
                         as="span"
                       >
-                        SHOP LOCKED
+                        РЫНОК ЗАБЛОКИРОВАН
                       </Box>
                     </Dimmer>
                   )) ||
