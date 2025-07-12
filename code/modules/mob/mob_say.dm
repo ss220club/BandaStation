@@ -48,7 +48,11 @@
 		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
 		return
 
-	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+	// BANDASTATION EDIT START - Sanitize emotes
+	message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN))
+	if(!message)
+		return
+	// BANDASTATION EDIT END - Sanitize emotes
 
 	QUEUE_OR_CALL_VERB_FOR(VERB_CALLBACK(src, TYPE_PROC_REF(/mob, emote), "me", EMOTE_VISIBLE|EMOTE_AUDIBLE, message, TRUE), SSspeech_controller)
 

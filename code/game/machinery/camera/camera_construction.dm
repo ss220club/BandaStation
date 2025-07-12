@@ -173,8 +173,8 @@
 					return
 
 				itemname = computer.name
-				itemname = sanitize(itemname)
-				info = sanitize(info)
+				itemname = sanitize(itemname, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
+				info = sanitize(info, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 				to_chat(user, span_notice("You hold \the [itemname] up to the camera..."))
 				user.log_talk(itemname, LOG_GAME, log_globally=TRUE, tag="Pressed to camera")
 				user.changeNext_move(CLICK_CD_MELEE)
@@ -208,7 +208,7 @@
 				last_shown_paper = paper.copy(paper.type, null)
 
 				// Then sanitise the name because we're putting it directly in chat later.
-				var/item_name = sanitize(last_shown_paper.name)
+				var/item_name = sanitize(last_shown_paper.name, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
 				// Start the process of holding it up to the camera.
 				to_chat(user, span_notice("You hold \the [item_name] up to the camera..."))

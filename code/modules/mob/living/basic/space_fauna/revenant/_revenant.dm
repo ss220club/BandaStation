@@ -195,7 +195,7 @@
 			return
 
 	if(sanitize)
-		message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+		message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN)) // BANDASTATION EDIT - Sanitize emotes
 
 	log_talk(message, LOG_SAY)
 	var/rendered = span_deadsay("<b>UNDEAD: [src]</b> says, \"[message]\"")
