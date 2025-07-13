@@ -1,6 +1,11 @@
+///amount of reagent to inject per time
+#define REAGENT_AMOUNT "reagent_amount"
+///amount of reagent to inject before the implant stops injecting
+#define REAGENT_THRESHOLD "reagent_threshold"
+
 /obj/item/organ/cyberimp/chest/pump
 	name = "pump"
-	desc = "A small pump, used to inject reagints into the bloodstream."
+	desc = "Маленькая помпа, используемая для инъекции реагентов в кровоток."
 	icon_state = "nutriment_implant"
 	aug_overlay = "nutripump"
 	slot = ORGAN_SLOT_STOMACH_AID
@@ -11,21 +16,16 @@
 	 * * REAGENT_THRESHOLD - amount of reagent to inject before the implant stops injecting
 	 */
 	var/list/reagent_data = list()
-	/// is implant on synthesizing cooldown
-	var/synthesizing = FALSE
 	/// time between injections
 	var/cooldown_time = 5 SECONDS
-
 
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
 	if(!TIMER_COOLDOWN_FINISHED(src, COOLDOWN_PUMP))
 		return
-	synthesizing = FALSE
 	for(var/reagent_type in reagent_data)
 		var/list/data = reagent_data[reagent_type]
 		if(is_reagent_threshhold && !owner.reagents.has_reagent(target_reagent = reagent_type, amount = data[REAGENT_THRESHOLD]))
 			owner.reagents.add_reagent(reagent_type, data[REAGENT_AMOUNT])
-			synthesizing = TRUE
 	if(custom_check(seconds_per_tick, times_fired))
 		custom_effect(seconds_per_tick, times_fired)
 	TIMER_COOLDOWN_START(src, COOLDOWN_PUMP, cooldown_time)
@@ -42,12 +42,11 @@
  * to apply the specific effect of the implant.
 */
 /obj/item/organ/cyberimp/chest/pump/proc/custom_effect(seconds_per_tick, times_fired)
-	synthesizing = TRUE
 	return
 
 /obj/item/organ/cyberimp/chest/pump/centcom
     name = "combat medicine pump"
-    desc = "A small pump, used to inject extremely effective drugs into the bloodstream."
+	desc = "Маленькая помпа, используемая для инъекции крайне эффективных препаратов в кровоток."
     reagent_data = list(
         /datum/reagent/medicine/syndicate_nanites = list(
             REAGENT_AMOUNT = 5,
@@ -80,7 +79,7 @@
 	owner.adjust_nutrition(25 * seconds_per_tick)
 
 /obj/item/organ/cyberimp/chest/pump/sansufentanyl
-	name = "сансуфентаниловая помпа"
+	name = "sansufentanyl pump"
 	desc = "Помпа, используемая для инъекции синтетического опиоида в фент-реактор. Жизненно важный механизм для функционирования фент-дроидов"
 	reagent_data = list(
 		/datum/reagent/medicine/sansufentanyl = list(
@@ -88,3 +87,6 @@
 			REAGENT_THRESHOLD = 4
 		)
 	)
+
+#undef REAGENT_AMOUNT
+#undef REAGENT_THRESHOLD
