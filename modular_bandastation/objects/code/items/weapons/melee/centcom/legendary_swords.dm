@@ -37,8 +37,11 @@
 	icon_state = inhand_icon_state = HAS_TRAIT(src, TRAIT_WIELDED) ? "[saber_name]_dualsaber[saber_color][HAS_TRAIT(src, TRAIT_WIELDED)]" : "[saber_name]_dualsaber0"
 
 /obj/item/dualsaber/legendary_saber/on_wield(obj/item/source, mob/living/carbon/user)
-	. = ..()
+	update_weight_class(w_class_on)
 	hitsound = hit_wield
+	START_PROCESSING(SSobj, src)
+	set_light_on(TRUE)
+	return .
 
 /obj/item/dualsaber/legendary_saber/on_unwield()
 	. = ..()

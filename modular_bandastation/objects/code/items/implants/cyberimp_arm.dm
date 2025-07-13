@@ -1,6 +1,6 @@
 /obj/item/organ/cyberimp/arm/toolkit/centcom
 	name = "centcom combat implant"
-	desc = "A powerful, military-grade cybernetic implant, designed to provide the user with combat useful devices from its arm."
+	desc = "Мощный кибернетический имплантат военного класса, предназначенный для обеспечения пользователя полезными для боя устройствами из его руки."
 	items_to_create = list(
 		/obj/item/melee/energy/blade/hardlight,
 		/obj/item/gun/medbeam,
@@ -15,7 +15,7 @@
 
 /obj/item/organ/cyberimp/arm/toolkit/custom
 	name = "custom arm implant"
-	desc = "A custom arm implant, designed to be filled with whatever the user wants."
+	desc = "Настраиваемый имплант руки, спроектированный чтобы хранить предмет по желанию пользователя."
 	aug_overlay = "toolkit"
 	items_to_create = list()
 	var/max_w_class = WEIGHT_CLASS_NORMAL
@@ -26,18 +26,18 @@
 		active_item = ref.resolve()
 	if(active_item)
 		if(I.tool_behaviour != TOOL_SCREWDRIVER)
-			to_chat(user, span_warning("There's already an item stored in [src]!"))
+			user.balloon_alert(user, "Уже хранит предмет: [active_item].")
 			return
 		items_list -= WEAKREF(active_item)
 		user.put_in_hands(active_item)
 		REMOVE_TRAIT(active_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
-		to_chat(user, span_notice("You carefully remove [active_item] from [src] with [I]."))
+		user.balloon_alert(user, "Извлечено: [src].")
 		playsound(get_turf(src), 'sound/items/tools/screwdriver.ogg', 50, TRUE)
 		active_item = null
 		return
 
 	if(I.w_class > max_w_class)
-		to_chat(user, span_warning("[I] is too big to fit in [src]!"))
+		user.balloon_alert(user, "Не помещается!")
 		return
 
 	if(!user.transferItemToLoc(I, src))
@@ -45,7 +45,7 @@
 
 	items_list += WEAKREF(I)
 	active_item = I
-	to_chat(user, span_notice("You insert [I] into [src]."))
+	user.balloon_alert(user, "Установлено: [I].")
 	playsound(get_turf(src), 'sound/machines/click.ogg', 50, TRUE)
 
 /obj/item/organ/cyberimp/arm/toolkit/custom/on_mob_remove(mob/living/carbon/arm_owner)

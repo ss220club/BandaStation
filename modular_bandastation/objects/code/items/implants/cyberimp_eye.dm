@@ -1,6 +1,6 @@
 /obj/item/organ/cyberimp/eyes/hud/security/shielded
 	name = "shielded security HUD implant"
-	desc = "These cybernetic eye implants will display a security HUD over everything you see. It is shielded from flashbangs."
+	desc = "Кибернетический глазной имлант, который отображает HUD охраны поверх всего, что вы видите. Так же защищает от ослепляющих вспышек."
 
 /obj/item/organ/cyberimp/eyes/hud/security/shielded/toggle_hud(mob/living/carbon/human/eye_owner)
 	. = ..()
