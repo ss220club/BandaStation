@@ -45,21 +45,21 @@
 	return
 
 /obj/item/organ/cyberimp/chest/pump/centcom
-    name = "combat medicine pump"
+	name = "combat medicine pump"
 	desc = "Маленькая помпа, используемая для инъекции крайне эффективных препаратов в кровоток."
-    reagent_data = list(
-        /datum/reagent/medicine/syndicate_nanites = list(
-            REAGENT_AMOUNT = 5,
-            REAGENT_THRESHOLD = 20
-        ),
+	reagent_data = list(
+		/datum/reagent/medicine/syndicate_nanites = list(
+			REAGENT_AMOUNT = 5,
+			REAGENT_THRESHOLD = 20
+		),
 		/datum/reagent/medicine/leporazine = list(
 			REAGENT_AMOUNT = 2,
 			REAGENT_THRESHOLD = 8
 		),
-        /datum/reagent/medicine/synaptizine = list(
-            REAGENT_AMOUNT = 2,
-            REAGENT_THRESHOLD = 4
-        ),
+		/datum/reagent/medicine/synaptizine = list(
+			REAGENT_AMOUNT = 2,
+			REAGENT_THRESHOLD = 4
+		),
 		/datum/reagent/medicine/coagulant = list(
 			REAGENT_AMOUNT = 4,
 			REAGENT_THRESHOLD = 16
@@ -68,7 +68,7 @@
 			REAGENT_AMOUNT = 10,
 			REAGENT_THRESHOLD = 50
 		)
-    )
+	)
 
 /obj/item/organ/cyberimp/chest/pump/centcom/custom_check(seconds_per_tick, times_fired)
 	return owner.nutrition <= NUTRITION_LEVEL_HUNGRY
