@@ -12,7 +12,7 @@
 
 /obj/structure/sign/flag/mouse_drop_dragged(atom/over, mob/user, src_location, over_location, params)
 	if(over == user && Adjacent(user))
-		if(!item_flag || src.obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION)
+		if(!item_flag || obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION)
 			return
 		if(!user.can_perform_action(src, NEED_DEXTERITY))
 			return
