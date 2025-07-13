@@ -20,44 +20,31 @@
 	. = ..()
 	if(!edge_overlay_file)
 		return
-
-	edge_overlay = mutable_appearance(edge_overlay_file, "edge-[smoothing_junction]", layer + 0.01, appearance_flags = RESET_COLOR|KEEP_APART)
+	edge_overlay = mutable_appearance(edge_overlay_file, "edge-[smoothing_junction]", layer + 0.01, appearance_flags = RESET_COLOR | KEEP_APART)
 	edge_overlay.color = edge_overlay_color
 	. += edge_overlay
 
 /obj/structure/window/reinforced
-	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
 	icon_state = "r_window"
-	color = WINDOW_COLOR
 
 /obj/structure/window/reinforced/tinted
-	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
-	icon_state = "r_window"
 	color = TINTED_WINDOW_COLOR
 
-/obj/structure/window/reinforced/tinted/Initialize(mapload,direct)
+/obj/structure/window/reinforced/tinted/Initialize(mapload, direct)
 	. = ..()
 	flags_1 |= UNPAINTABLE_1
 
-/obj/structure/window/reinforced/tinted/frosted
-	icon_state = "r_window"
-	color = TINTED_WINDOW_COLOR
-
 /obj/structure/window/plasma
-	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
-	icon_state = "window"
 	color = PLASMA_WINDOW_COLOR
 
-/obj/structure/window/plasma/Initialize(mapload,direct)
+/obj/structure/window/plasma/Initialize(mapload, direct)
 	. = ..()
 	flags_1 |= UNPAINTABLE_1
 
 /obj/structure/window/reinforced/plasma
-	icon = 'modular_bandastation/aesthetics/windows/icons/directional.dmi'
-	icon_state = "r_window"
 	color = PLASMA_WINDOW_COLOR
 
-/obj/structure/window/reinforced/plasma/Initialize(mapload,direct)
+/obj/structure/window/reinforced/plasma/Initialize(mapload, direct)
 	. = ..()
 	flags_1 |= UNPAINTABLE_1
 
@@ -203,8 +190,7 @@
 	. = ..()
 	if(!edge_overlay_file)
 		return
-
-	edge_overlay = mutable_appearance(edge_overlay_file, "edge-[smoothing_junction]", layer + 0.1, appearance_flags = RESET_COLOR|KEEP_APART)
+	edge_overlay = mutable_appearance(edge_overlay_file, "edge-[smoothing_junction]", layer + 0.1, appearance_flags = RESET_COLOR | KEEP_APART)
 	. += edge_overlay
 
 /turf/closed/indestructible/fakeglass/plasma
