@@ -181,7 +181,7 @@
 		span_warning("[cultist] strikes [cult_girder] with [parent]!"),
 		span_notice("You demolish [cult_girder].")
 		)
-	new /obj/item/stack/sheet/runed_metal(cult_girder.drop_location(), 1)
+	new /obj/item/stack/sheet/runed_metal(cult_girder.drop_location())
 	qdel(cult_girder)
 
 /*
@@ -370,12 +370,14 @@
 	if(!check_if_in_ritual_site(cultist, cult_team))
 		return FALSE
 	var/area/summon_location = get_area(cultist)
+	var/static/cult_music_played = FALSE
 	priority_announce(
 		text = "Зафиксирован призыв древнего божества культистом [cultist.real_name] в [summon_location.get_original_area_name()]. Прервите ритуал любой ценой!",
-		sound = 'modular_bandastation/aesthetics_sounds/sound/announcements/cult_summon.ogg',
+		sound = cult_music_played ? 'sound/announcer/notice/notice3.ogg' : 'modular_bandastation/cult_overhaul/sound/announcements/cult_summon.ogg', // BANDASTATION EDIT - Cult Overhaul
 		sender_override = "[command_name()]: Отдел паранормальных явлений",
 		has_important_message = TRUE,
 	)
+	cult_music_played = TRUE
 	for(var/shielded_turf in spiral_range_turfs(1, cultist, 1))
 		LAZYADD(shields, new /obj/structure/emergency_shield/cult/narsie(shielded_turf))
 

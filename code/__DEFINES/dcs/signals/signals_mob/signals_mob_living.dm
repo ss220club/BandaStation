@@ -327,5 +327,10 @@
 /// From /obj/item/book/bible/attack() : (mob/living/user, obj/item/book/bible/bible, bless_result)
 #define COMSIG_LIVING_BLESSED "living_blessed"
 
-/// From /mob/living/set_blood_type : (mob/living/user, datum/blood_type, update_cached_blood_dna_info)
-#define COMSIG_LIVING_CHANGED_BLOOD_TYPE "living_set_blood_type"
+/// From /datum/surgery_step/initiate() : (mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, datum/surgery_step/step, list/modifiers)
+#define COMSIG_LIVING_INITIATE_SURGERY_STEP "living_initiate_surgery_step"
+#define COMSIG_LIVING_SURGERY_STEP_INITIATED_ON "living_surgery_step_initiated_on"
+	/// Index in modifiers containing the modifier to failure chance
+	#define FAIL_PROB_INDEX 1
+	/// Index in modifiers containing the modifer to surgery speed
+	#define SPEED_MOD_INDEX 2

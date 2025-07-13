@@ -8,7 +8,7 @@
 	category = EVENT_CATEGORY_JANITORIAL
 	description = "Harmless mobs climb out of a vent."
 
-/datum/round_event_control/vent_clog/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/vent_clog/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
 	if(!.)
 		return
@@ -50,7 +50,7 @@
 	filth_spawn_types = list(
 		/obj/effect/decal/cleanable/vomit,
 		/obj/effect/decal/cleanable/insectguts,
-		/obj/effect/decal/cleanable/oil,
+		/obj/effect/decal/cleanable/blood/oil,
 	)
 
 /datum/round_event/vent_clog/start()
@@ -77,6 +77,7 @@
 	var/static/list/mob_list = list(
 		/mob/living/basic/butterfly,
 		/mob/living/basic/cockroach,
+		/mob/living/basic/cockroach/bloodroach,
 		/mob/living/basic/spider/maintenance,
 		/mob/living/basic/mouse,
 		/mob/living/basic/snail,
@@ -132,7 +133,7 @@
 	clog_vent()
 
 	announce_to_ghosts(vent)
-	priority_announce("Lifesign readings have moved to a new location in the ventilation network. New Location: [prob(50) ? "Unknown.":"[get_area_name(vent)]."]", "Lifesign Notification")
+	priority_announce("Показатели биосигнатур переместились в новый сегмент вентиляционной сети. Текущее положение: [prob(50) ? "Неизвестно.":"[get_area_name(vent)]."]", "Неопознанные формы жизни")
 
 /**
  * Handles the production of our mob and adds it to our living_mobs list
@@ -219,7 +220,7 @@
 		/obj/effect/decal/cleanable/blood,
 		/obj/effect/decal/cleanable/insectguts,
 		/obj/effect/decal/cleanable/fuel_pool,
-		/obj/effect/decal/cleanable/oil,
+		/obj/effect/decal/cleanable/blood/oil,
 	)
 
 /datum/round_event/vent_clog/major/get_mob()
@@ -282,7 +283,7 @@
 	spawn_delay = rand(6, 25)
 	maximum_spawns = rand(MOB_SPAWN_MINIMUM, 10)
 	filth_spawn_types = list(
-		/obj/effect/decal/cleanable/xenoblood,
+		/obj/effect/decal/cleanable/blood/xeno,
 		/obj/effect/decal/cleanable/fuel_pool,
 		/obj/effect/decal/cleanable/greenglow,
 		/obj/effect/decal/cleanable/vomit,

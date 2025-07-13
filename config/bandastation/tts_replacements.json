@@ -1,5 +1,5 @@
 {
-    "tts_acronym_replacements": {
+	"tts_acronym_replacements": {
 		"нт": "Эн Тэ",
 		"смо": "Эс Мэ О",
 		"гп": "Гэ Пэ",
@@ -69,9 +69,9 @@
 		"гбс": "Гэ Бэ Эс",
 		"цпсс": "Цэ Пэ Эс Эс",
 		"гкк": "Гэ Кэ Ка"
-    },
-    "tts_job_replacements": {
-        "nanotrasen navy field officer": "Полевой офицер флота Нанотрэйзен",
+	},
+	"tts_job_replacements": {
+		"nanotrasen navy field officer": "Полевой офицер флота Нанотрэйзен",
 		"nanotrasen navy officer": "Офицер флота nanotrasen",
 		"supreme commander": "Верховный главнокомандующий",
 		"solar federation general": "Генерал Солнечной Федерации",
@@ -176,5 +176,5 @@
 		"chaplain": "Священник",
 		"syndicate officer": "Офицер синдиката",
 		"visitor": "посетитель"
-    }
+	}
 }
