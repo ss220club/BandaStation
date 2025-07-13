@@ -1,4 +1,4 @@
-import { Antagonist, Category } from '../base';
+import { type Antagonist, Category } from '../base';
 
 export const HERETIC_MECHANICAL_DESCRIPTION = `
       Найдите скрытые влияния и принесите в жертву членов экипажа,

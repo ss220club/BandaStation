@@ -7,6 +7,15 @@
 
 /proc/cmp_job_staffing_priority(datum/job/A, datum/job/B)
 	if(A.staffing_priority == B.staffing_priority)
+		if(A.spawn_positions <= 0 && B.spawn_positions <= 0)
+			return 0
+
+		if(A.spawn_positions <= 0)
+			return 1
+
+		if(B.spawn_positions <= 0)
+			return -1
+
 		return cmp_numeric_asc(A.current_positions / A.spawn_positions, B.current_positions / B.spawn_positions)
 
 	return cmp_numeric_asc(A.staffing_priority, B.staffing_priority)

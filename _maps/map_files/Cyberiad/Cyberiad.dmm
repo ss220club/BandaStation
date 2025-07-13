@@ -1288,7 +1288,7 @@
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
 "aqF" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /obj/structure/railing{
@@ -2686,7 +2686,7 @@
 /obj/effect/turf_decal/siding/thinplating_new/corner{
 	dir = 8
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/half,
@@ -6723,7 +6723,7 @@
 "bEz" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 4
 	},
 /turf/open/floor/carpet/black,
@@ -14325,7 +14325,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "dry" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /obj/item/kirbyplants/random{
@@ -21196,7 +21196,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "feX" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /turf/open/openspace,
@@ -23083,7 +23083,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/aft)
 "fBH" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/dark/smooth_edge,
@@ -26524,7 +26524,7 @@
 /turf/closed/wall/r_wall,
 /area/station/science/ordnance/bomb)
 "grv" = (
-/obj/structure/platform/corner,
+/obj/structure/railing/platform/corner,
 /turf/open/floor/wood,
 /area/station/service/library/ghetto)
 "gry" = (
@@ -26716,7 +26716,7 @@
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 4
 	},
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment{
@@ -27529,7 +27529,7 @@
 /turf/open/misc/grass,
 /area/station/hallway/secondary/exit/departure_lounge)
 "gGl" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	color = "#AAAAB1"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -28196,7 +28196,7 @@
 /turf/open/floor/iron/chapel,
 /area/station/service/chapel)
 "gNa" = (
-/obj/structure/platform,
+/obj/structure/railing/platform,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -28579,7 +28579,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "gQd" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /turf/open/floor/wood/parquet,
@@ -29280,7 +29280,7 @@
 /turf/open/floor/wood,
 /area/station/service/cafeteria)
 "gZk" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 5
 	},
 /turf/open/floor/wood/parquet,
@@ -39244,7 +39244,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/ghetto/morgue)
 "jxh" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 8
 	},
 /turf/open/floor/wood,
@@ -46290,7 +46290,7 @@
 "lgl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 1
 	},
 /turf/open/floor/carpet/black,
@@ -51992,7 +51992,7 @@
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 8
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /turf/open/floor/iron/half{
@@ -52560,7 +52560,7 @@
 /turf/open/floor/plating/reinforced,
 /area/station/cargo/storage)
 "mFx" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	color = "#AAAAB1"
 	},
 /turf/open/openspace,
@@ -53257,7 +53257,7 @@
 /turf/open/floor/iron,
 /area/station/security/prison/ghetto)
 "mNs" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4;
 	color = "#AAAAB1"
 	},
@@ -55220,7 +55220,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "nmO" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4;
 	color = "#AAAAB1"
 	},
@@ -57754,7 +57754,7 @@
 "nSz" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	color = "#AAAAB1"
 	},
 /obj/structure/railing{
@@ -61724,7 +61724,7 @@
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 4
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /turf/open/floor/iron/half{
@@ -62515,7 +62515,7 @@
 "oYP" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /obj/structure/railing{
@@ -63806,7 +63806,7 @@
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 8
 	},
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 4
 	},
 /turf/open/floor/iron/half{
@@ -65881,7 +65881,7 @@
 /obj/structure/chair/pew/left{
 	dir = 8
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /turf/open/floor/wood/parquet,
@@ -68796,7 +68796,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "qzI" = (
-/obj/structure/platform/corner{
+/obj/structure/railing/platform/corner{
 	dir = 1;
 	color = "#AAAAB1"
 	},
@@ -69804,7 +69804,7 @@
 /turf/open/floor/iron/white,
 /area/station/science/lower)
 "qMX" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 6;
 	color = "#AAAAB1"
 	},
@@ -70269,7 +70269,7 @@
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 8
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /turf/open/floor/iron/half{
@@ -71276,7 +71276,7 @@
 /obj/structure/chair/pew/right{
 	dir = 8
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /turf/open/floor/wood/parquet,
@@ -71415,7 +71415,7 @@
 	dir = 4
 	},
 /obj/structure/mop_bucket,
-/obj/structure/platform,
+/obj/structure/railing/platform,
 /obj/item/clothing/gloves/color/green,
 /obj/item/mop,
 /obj/machinery/light/small/blacklight/directional/east,
@@ -74047,7 +74047,7 @@
 "rNp" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 8
 	},
 /obj/structure/railing{
@@ -77264,7 +77264,7 @@
 /turf/open/floor/circuit/telecomms/mainframe,
 /area/station/tcommsat/server)
 "sAk" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 9
 	},
 /turf/open/floor/iron/dark/smooth_edge,
@@ -79846,7 +79846,7 @@
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 4
 	},
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /turf/open/floor/iron/half{
@@ -83853,7 +83853,7 @@
 /turf/open/floor/iron/dark,
 /area/station/security/warden)
 "ugf" = (
-/obj/structure/platform/corner,
+/obj/structure/railing/platform/corner,
 /obj/structure/railing{
 	dir = 4
 	},
@@ -84059,7 +84059,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
-/obj/structure/platform/corner,
+/obj/structure/railing/platform/corner,
 /obj/effect/turf_decal/trimline/tram/warning,
 /obj/effect/turf_decal/trimline/tram/mid_joiner,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -91289,7 +91289,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "vZV" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /obj/item/kirbyplants/random,
@@ -96050,7 +96050,7 @@
 /turf/open/floor/wood/parquet,
 /area/station/security/courtroom)
 "xgM" = (
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 4
 	},
 /obj/item/radio/intercom/directional/north,
@@ -97370,7 +97370,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/thinplating_new,
-/obj/structure/platform{
+/obj/structure/railing/platform{
 	dir = 1
 	},
 /turf/open/floor/iron/half,
@@ -99315,7 +99315,7 @@
 /area/station/maintenance/ghetto/starboard/aft)
 "xXO" = (
 /obj/effect/turf_decal/siding/wood,
-/obj/structure/platform,
+/obj/structure/railing/platform,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
