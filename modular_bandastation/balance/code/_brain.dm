@@ -89,7 +89,7 @@
 
 /obj/structure/closet/body_bag/stasis/Exited(atom/movable/gone, direction)
 	. = ..()
-	if(!isliving(gone))
+	if(isliving(gone))
 		var/mob/living/leaver = gone
 		leaver.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		REMOVE_TRAIT(leaver, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
