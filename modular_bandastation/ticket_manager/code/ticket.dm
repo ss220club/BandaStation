@@ -43,7 +43,7 @@
 
 	timeout_verb()
 	notify_stuff(creator, message, ticket_type)
-	GLOB.ticket_manager.all_tickets += src
+	GLOB.ticket_manager.all_tickets[id] = src
 
 // Removes the help verb and returns it after 2 minutes
 /datum/help_ticket/proc/timeout_verb()

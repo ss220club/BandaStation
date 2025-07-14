@@ -10,7 +10,7 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
  */
 /datum/ticket_manager
 	/// The set of all  tickets
-	var/list/all_tickets = list()
+	var/alist/all_tickets = alist()
 
 /datum/ticket_manager/Destroy()
 	QDEL_LIST(all_tickets)
@@ -58,9 +58,10 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 
 /datum/ticket_manager/proc/get_tickets_data(client/user)
 	var/list/tickets = list()
-	for(var/datum/help_ticket/ticket in all_tickets)
+	for(var/ticket_key, ticket_datum in all_tickets)
+		var/datum/help_ticket/ticket = ticket_datum
 		tickets += list(list(
-			"number" = ticket.id,
+			"number" = ticket_key,
 			"state" = ticket.state,
 			"type" = ticket.ticket_type,
 			"initiator" = ticket.initiator,
@@ -76,12 +77,7 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 	if(!ticket_id || !sender || !message)
 		CRASH("Invalid parameters passed to ticket_manager add_message()")
 
-	var/datum/help_ticket/needed_ticket
-	for(var/datum/help_ticket/ticket as anything in all_tickets)
-		if(ticket.id == ticket_id)
-			needed_ticket = ticket
-			break
-
+	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
 	if(!needed_ticket)
 		CRASH("Ticket with id [ticket_id] not found in all tickets")
 
