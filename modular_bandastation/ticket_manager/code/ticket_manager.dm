@@ -9,15 +9,11 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
  * Admin/Mentor help ticket manager
  */
 /datum/ticket_manager
-	var/used_by = list()
-	/// The set of all active tickets
-	var/list/active_tickets = list()
-	/// The set of all closed tickets
-	var/list/closed_tickets = list()
+	/// The set of all  tickets
+	var/list/all_tickets = list()
 
 /datum/ticket_manager/Destroy()
-	QDEL_LIST(active_tickets)
-	QDEL_LIST(closed_tickets)
+	QDEL_LIST(all_tickets)
 	return ..()
 
 /datum/ticket_manager/ui_state()
@@ -32,13 +28,8 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 
 /datum/ticket_manager/ui_data(mob/user)
 	var/list/data = list()
-	data["userName"] = key_name(user)
-	data["activeTickets"] = get_active_tickets_data(user.client)
-	return data
-
-/datum/ticket_manager/ui_static_data(mob/user)
-	var/list/data = list()
-	data["closedTickets"] = get_closed_tickets_data(user.client)
+	data["userCkey"] = user.client.ckey
+	data["allTickets"] = get_tickets_data(user.client)
 	return data
 
 /datum/ticket_manager/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -65,11 +56,12 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 	if(!check_rights(R_ADMIN))
 		return FALSE
 
-/datum/ticket_manager/proc/get_active_tickets_data(client/user)
+/datum/ticket_manager/proc/get_tickets_data(client/user)
 	var/list/tickets = list()
-	for(var/datum/help_ticket/ticket in active_tickets)
+	for(var/datum/help_ticket/ticket in all_tickets)
 		tickets += list(list(
 			"number" = ticket.id,
+			"state" = ticket.state,
 			"type" = ticket.ticket_type,
 			"initiator" = ticket.initiator,
 			"initiatorCkey" = ticket.initiator_ckey,
@@ -80,33 +72,18 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 		))
 	return tickets
 
-/datum/ticket_manager/proc/get_closed_tickets_data(client/user)
-	var/list/tickets = list()
-	for(var/datum/help_ticket/ticket as anything in closed_tickets)
-		tickets += list(
-			"number" = ticket.id,
-			"type" = ticket.ticket_type,
-			"initiator" = ticket.initiator,
-			"initiatorCkey" = ticket.initiator_ckey,
-			"openedTime" = ticket.opened_at,
-			"closedTime" = ticket.closed_at,
-			"state" = ticket.state,
-			"messages" = ticket.messages,
-		)
-	return tickets
-
 /datum/ticket_manager/proc/add_message(ticket_id, sender, message)
 	if(!ticket_id || !sender || !message)
 		CRASH("Invalid parameters passed to ticket_manager add_message()")
 
 	var/datum/help_ticket/needed_ticket
-	for(var/datum/help_ticket/ticket as anything in active_tickets)
+	for(var/datum/help_ticket/ticket as anything in all_tickets)
 		if(ticket.id == ticket_id)
 			needed_ticket = ticket
 			break
 
 	if(!needed_ticket)
-		CRASH("Ticket with id [ticket_id] not found in active_tickets")
+		CRASH("Ticket with id [ticket_id] not found in all tickets")
 
 	needed_ticket.messages += list(list(
 		"sender" = sender,

@@ -60,7 +60,8 @@
 .TicketMessage {
   min-width: 15%;
   max-width: 75%;
-  padding: 0.33rem 1rem 0.33rem 0.5rem;
+  padding: 0.5rem;
+  padding-right: 1rem;
   background-color: hsl(from var(--pref-background) h s calc(l + 3.33));
   border-radius: var(--border-radius-large);
 
@@ -69,17 +70,51 @@
   }
 
   &__Content {
-    margin-bottom: 0.25rem;
+    display: flex;
+
+    .ticket-time {
+      flex: 1;
+      display: inline-flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      font-size: 0.8em;
+      margin-left: 0.5em;
+      color: var(--color-text-translucent);
+      transform: translateX(0.5rem);
+    }
   }
 
-  &__Time {
-    font-size: 0.8em;
-    text-align: right;
-    color: var(--color-text-translucent);
-    transform: translateX(0.5rem);
-  }
-
-  &--reply {
+  &--sendedMessage {
     background-color: hsl(from var(--pref-background) h 50 calc(l + 10));
+  }
+}
+
+.TicketPanel {
+  &--scrollable {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    padding: 0.5rem;
+  }
+
+  &__ScrollButton {
+    opacity: 0;
+    position: absolute;
+    bottom: 0.5rem;
+    width: 100%;
+    text-align: center;
+    transform: translateY(calc(100% + 1rem));
+    transition-property: transform, opacity;
+    transition-duration: var(--transition-time-medium);
+    z-index: 1;
+
+    &--active {
+      opacity: 1;
+      transform: translateY(0);
+
+      .Button {
+        box-shadow: var(--shadow-glow-medium) 0 hsl(0, 0%, 0%, 0.5);
+      }
+    }
   }
 }

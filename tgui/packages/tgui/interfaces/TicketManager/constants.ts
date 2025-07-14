@@ -12,15 +12,9 @@ export const availableTabs = [
     state: TICKET_STATE.Open,
   },
   {
-    name: 'Решённые',
-    icon: 'circle-check',
-    color: 'good',
-    state: TICKET_STATE.Resolved,
-  },
-  {
     name: 'Закрытые',
     icon: 'trash-can',
-    color: 'bad',
-    state: TICKET_STATE.Closed,
+    color: 'good',
+    state: TICKET_STATE.Closed | TICKET_STATE.Resolved,
   },
 ];

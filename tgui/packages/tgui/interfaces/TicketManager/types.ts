@@ -1,34 +1,30 @@
-import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react';
 import { BooleanLike } from 'tgui-core/react';
 
 export type ManagerData = {
-  activeTickets: ActiveTicket[];
-  closedTickets: ClosedTicket[];
+  userCkey: string;
+  allTickets: TicketProps[];
 };
 
-export type ActiveTicket = {
+export type TicketProps = {
   number: number;
+  state: number;
   initiator: string;
   initiatorCkey: string;
   type: string;
   openedTime: string;
   closedTime: string;
-  messages: Message[];
+  messages: MessageProps[];
   replied: BooleanLike;
 };
 
-export type ClosedTicket = ActiveTicket & {
-  state: number;
-};
-
-export type Message = {
+export type MessageProps = {
   sender: string;
   message: string;
   time: string;
 };
 
-export type TicketProps = {
-  ticket: ActiveTicket;
-  setSelectedTicket: Dispatch<SetStateAction<number>>;
+export type TicketsMainPageProps = {
+  allTickets: TicketProps[];
+  setSelectedTicket: Dispatch<number>;
 };
