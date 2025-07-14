@@ -11,9 +11,10 @@
 	return
 
 /obj/structure/sign/flag/add_context(atom/source, list/context, obj/item/held_item, mob/user)
-	. = ..()
-	context[SCREENTIP_CONTEXT_RMB] = "Сложить"
-	return CONTEXTUAL_SCREENTIP_SET
+	if(foldable_type)
+		context[SCREENTIP_CONTEXT_RMB] = "Сложить"
+		return CONTEXTUAL_SCREENTIP_SET
+	return NONE
 
 /obj/structure/sign/flag/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
