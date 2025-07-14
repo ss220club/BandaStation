@@ -62,7 +62,7 @@
   max-width: 75%;
   padding: 0.5rem;
   padding-right: 1rem;
-  background-color: hsl(from var(--pref-background) h s calc(l + 3.33));
+  background-color: hsl(from var(--pref-background) h s l);
   border-radius: var(--border-radius-large);
 
   &__Sender {
@@ -90,6 +90,11 @@
 }
 
 .TicketPanel {
+  --section-separator-color: hsl(from var(--ticket-type-color) h 33 l);
+  --pref-background: hsl(from var(--ticket-type-color) h 33 25);
+  --input-border-color: hsl(from var(--ticket-type-color) h 33 l);
+  --input-border-color-focus: hsl(from var(--ticket-type-color) h 50 66);
+
   &--scrollable {
     overflow-y: auto;
     scrollbar-width: thin;

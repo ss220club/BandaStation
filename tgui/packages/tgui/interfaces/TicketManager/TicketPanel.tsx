@@ -3,7 +3,9 @@ import { Button, Input, Section, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
+import { TICKET_STATE } from './constants';
 import { toLocalTime } from './helpers';
+import { TicketInteractions } from './Ticket';
 import { ManagerData } from './types';
 
 export function TicketPanel(props) {
@@ -13,7 +15,8 @@ export function TicketPanel(props) {
   const selectedTicket = allTickets.find(
     (ticket) => ticket.number === ticketNumber,
   );
-  const { number, initiator, initiatorCkey, messages } = selectedTicket;
+  const { number, initiator, initiatorCkey, messages, state, type } =
+    selectedTicket;
 
   const [showScrollButton, setShowScrollButton] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -61,7 +64,12 @@ export function TicketPanel(props) {
   }, [messages]);
 
   return (
-    <Stack fill vertical g={0}>
+    <Stack
+      fill
+      vertical
+      g={0}
+      className={classes(['TicketPanel', `Ticket--${type}`])}
+    >
       <Stack.Item grow position="relative">
         <Stack.Item
           className={classes([
@@ -99,15 +107,27 @@ export function TicketPanel(props) {
       </Stack.Item>
       <Stack.Item style={{ zIndex: 1 }}>
         <Section>
-          <Input
-            fluid
-            autoFocus
-            selfClear
-            placeholder="Введите сообщение..."
-            onEnter={(value) =>
-              act('reply', { ticketNumber: number, message: value })
-            }
-          />
+          <Stack fill>
+            <Stack.Item grow>
+              <Input
+                fluid
+                autoFocus
+                selfClear
+                disabled={state !== TICKET_STATE.Open}
+                placeholder={
+                  state === TICKET_STATE.Open
+                    ? 'Введите сообщение...'
+                    : 'Тикет закрыт!'
+                }
+                onEnter={(value) =>
+                  act('reply', { ticketNumber: number, message: value })
+                }
+              />
+            </Stack.Item>
+            <Stack.Item>
+              <TicketInteractions ticketId={number} ticketState={state} />
+            </Stack.Item>
+          </Stack>
         </Section>
       </Stack.Item>
     </Stack>
