@@ -164,12 +164,7 @@ export const MafiaPanel = (props) => {
   const { act, data } = useBackend<MafiaData>();
   const { roleinfo } = data;
   return (
-    <Window
-      title="Мафия"
-      theme={roleinfo && roleinfo.role_theme}
-      width={900}
-      height={600}
-    >
+    <Window title="Мафия" theme={roleinfo?.role_theme} width={900} height={600}>
       <Window.Content>
         <MafiaPanelData />
       </Window.Content>
