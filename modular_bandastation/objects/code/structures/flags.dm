@@ -2,7 +2,7 @@
 /obj/structure/sign/flag
 	buildable_sign = FALSE
 	custom_materials = null
-	var/item_flag = /obj/item/sign/flag
+	var/foldable_type = /obj/item/sign/flag
 
 /obj/structure/sign/flag/wrench_act(mob/living/user, obj/item/wrench/I)
 	return
@@ -10,42 +10,53 @@
 /obj/structure/sign/flag/welder_act(mob/living/user, obj/item/I)
 	return
 
-/obj/structure/sign/flag/mouse_drop_dragged(atom/over, mob/user, src_location, over_location, params)
-	if(over == user && Adjacent(user))
-		if(!item_flag || obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION)
-			return
-		if(!user.can_perform_action(src, NEED_DEXTERITY))
-			return
-		user.visible_message(span_notice("[user] складывает [declent_ru(NOMINATIVE)]."), span_notice("Вы складываете [declent_ru(NOMINATIVE)]."))
-		var/obj/item/flag_item = new item_flag(loc)
-		TransferComponents(flag_item)
-		user.put_in_hands(flag_item)
-		qdel(src)
+/obj/structure/sign/flag/add_context(atom/source, list/context, obj/item/held_item, mob/user)
+	. = ..()
+	context[SCREENTIP_CONTEXT_RMB] = "Сложить"
+	return CONTEXTUAL_SCREENTIP_SET
+
+/obj/structure/sign/flag/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	return fold(user) ? SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN : .
+
+/obj/structure/sign/flag/proc/fold(mob/user)
+	if(!foldable_type)
+		return FALSE
+	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH | NEED_HANDS | NEED_DEXTERITY))
+		return FALSE
+	user.visible_message(span_notice("[user] складывает [declent_ru(NOMINATIVE)]."), span_notice("Вы складываете [declent_ru(NOMINATIVE)]."))
+	var/obj/item/flag_item = new foldable_type(loc)
+	TransferComponents(flag_item)
+	user.put_in_hands(flag_item)
+	qdel(src)
+	return TRUE
 
 // MARK: The old ones with new sprites
 /obj/structure/sign/flag/nanotrasen
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
-	item_flag = /obj/item/sign/flag/nanotrasen
+	foldable_type = /obj/item/sign/flag/nanotrasen
 
 /obj/structure/sign/flag/ssc
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
-	item_flag = /obj/item/sign/flag/ssc
+	foldable_type = /obj/item/sign/flag/ssc
 
 /obj/structure/sign/flag/terragov
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
-	item_flag = /obj/item/sign/flag/terragov
+	foldable_type = /obj/item/sign/flag/terragov
 
 /obj/structure/sign/flag/tizira
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
-	item_flag = /obj/item/sign/flag/tizira
+	foldable_type = /obj/item/sign/flag/tizira
 
 /obj/structure/sign/flag/mothic
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
-	item_flag = /obj/item/sign/flag/mothic
+	foldable_type = /obj/item/sign/flag/mothic
 
 /obj/structure/sign/flag/mars
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
-	item_flag = /obj/item/sign/flag/mars
+	foldable_type = /obj/item/sign/flag/mars
 
 // MARK: New flags
 /obj/structure/sign/flag/syndicate
@@ -53,7 +64,7 @@
 	desc = "Флаг Синдиката. Ранее использовался как способ заявить о противостоянии Нанотрейзен, а теперь стал межгалактическим символом с той же, но гораздо более искаженной целью, поскольку все больше заинтересованных групп перешли на сторону повстанцев ради собственной выгоды."
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
 	icon_state = "flag_syndi"
-	item_flag = /obj/item/sign/flag/syndicate
+	foldable_type = /obj/item/sign/flag/syndicate
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/syndicate, 32)
 
@@ -70,9 +81,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/syndicate, 32)
 /// And thus, it gets removed to make them aesthetically pleasing once again.
 /obj/item/sign/flag/Initialize(mapload)
 	. = ..()
-	var/matrix/rotation_reset = matrix()
-	rotation_reset.Turn(0)
-	transform = rotation_reset
+	transform = matrix()
 
 /obj/item/sign/flag/welder_act(mob/living/user, obj/item/I)
 	return
