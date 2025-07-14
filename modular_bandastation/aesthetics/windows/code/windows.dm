@@ -31,6 +31,9 @@
 	icon_state = "r_window"
 	color = TINTED_WINDOW_COLOR
 
+/obj/structure/window/reinforced/tinted/frosted
+	icon_state = "r_window"
+
 /obj/structure/window/reinforced/tinted/Initialize(mapload, direct)
 	. = ..()
 	flags_1 |= UNPAINTABLE_1
