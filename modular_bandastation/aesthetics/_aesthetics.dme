@@ -36,5 +36,4 @@
 #include "walls/code/rocks.dm"
 #include "walls/code/walls.dm"
 #include "windoors/code/windoors.dm"
-#include "windows/code/directional_windows.dm"
-#include "windows/code/full_tile_windows.dm"
+#include "windows/code/windows.dm"
