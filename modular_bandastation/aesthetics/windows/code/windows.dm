@@ -28,6 +28,7 @@
 	icon_state = "r_window"
 
 /obj/structure/window/reinforced/tinted
+	icon_state = "r_window"
 	color = TINTED_WINDOW_COLOR
 
 /obj/structure/window/reinforced/tinted/Initialize(mapload, direct)
@@ -35,6 +36,7 @@
 	flags_1 |= UNPAINTABLE_1
 
 /obj/structure/window/plasma
+	icon_state = "window"
 	color = PLASMA_WINDOW_COLOR
 
 /obj/structure/window/plasma/Initialize(mapload, direct)
@@ -42,6 +44,7 @@
 	flags_1 |= UNPAINTABLE_1
 
 /obj/structure/window/reinforced/plasma
+	icon_state = "r_window"
 	color = PLASMA_WINDOW_COLOR
 
 /obj/structure/window/reinforced/plasma/Initialize(mapload, direct)
