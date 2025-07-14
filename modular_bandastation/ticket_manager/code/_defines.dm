@@ -1,0 +1,6 @@
+#define TICKET_OPEN 0
+#define TICKET_CLOSED 1
+#define TICKET_RESOLVED 2
+
+#define TICKET_TYPE_ADMIN "Admin"
+#define TICKET_TYPE_MENTOR "Mentor"

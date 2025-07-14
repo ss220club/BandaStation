@@ -44,6 +44,10 @@
   --tooltip-background-lightness: 12.5;
   --imagebutton-transparecy: 0.3;
 
+  .Modal {
+    padding: var(--space-m);
+  }
+
   .Section {
     &__content {
       scrollbar-width: thin;

@@ -1,0 +1,85 @@
+.Ticket {
+  --type-shadow-thickness: var(--border-thickness-small);
+  user-select: none;
+  cursor: var(--cursor-pointer);
+  padding: var(--space-m);
+  padding-left: var(--space-xl);
+  background-color: var(--pref-background);
+  outline: var(--border-thickness-tiny) outset var(--color-border);
+  box-shadow: inset var(--type-shadow-thickness) 0px 0 var(--ticket-type-color);
+  border-radius: var(--border-radius-small);
+  transition-property: box-shadow, background-color;
+  transition-duration: var(--transition-time-medium);
+
+  &:is(:hover, :active) {
+    --type-shadow-thickness: var(--border-thickness-large);
+    background-color: hsl(from var(--pref-background) h s calc(l + 2.5));
+  }
+
+  &:active {
+    transition-duration: 0s;
+    background-color: hsl(from var(--pref-background) h s calc(l - 2.5));
+  }
+
+  &--Admin {
+    --ticket-type-color: var(--color-red);
+  }
+
+  &--Mentor {
+    --ticket-type-color: var(--color-blue);
+  }
+
+  &__Id,
+  &__Initiator {
+    align-self: center;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  &__Id {
+    font-size: 1.5em;
+    font-family: monospace;
+    color: var(--ticket-type-color);
+  }
+
+  &__TimeStamp {
+    font-size: 0.8em;
+    color: var(--color-text-translucent);
+  }
+
+  &__FirstMessage {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    color: var(--color-label);
+  }
+}
+
+.TicketMessage {
+  min-width: 15%;
+  max-width: 75%;
+  padding: 0.33rem 1rem 0.33rem 0.5rem;
+  background-color: hsl(from var(--pref-background) h s calc(l + 3.33));
+  border-radius: var(--border-radius-large);
+
+  &__Sender {
+    font-weight: bold;
+  }
+
+  &__Content {
+    margin-bottom: 0.25rem;
+  }
+
+  &__Time {
+    font-size: 0.8em;
+    text-align: right;
+    color: var(--color-text-translucent);
+    transform: translateX(0.5rem);
+  }
+
+  &--reply {
+    background-color: hsl(from var(--pref-background) h 50 calc(l + 10));
+  }
+}
