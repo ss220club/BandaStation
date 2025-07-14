@@ -81,22 +81,15 @@
 		ADD_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 		mob.extinguish_mob()
 
-/obj/structure/closet/body_bag/stasis/open(mob/living/user, force = FALSE, special_effects = TRUE)
+/obj/structure/closet/body_bag/stasis/Destroy()
 	for(var/mob/living/mob in contents)
 		mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		REMOVE_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
-	. = ..()
-
-/obj/structure/closet/body_bag/stasis/Destroy()
-	for(var/mob/living/L in contents)
-		if(L)
-			L.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
-			REMOVE_TRAIT(L, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 	return ..()
 
 /obj/structure/closet/body_bag/stasis/Exited(atom/movable/gone, direction)
 	. = ..()
-	if(istype(gone, /mob/living))
+	if(!isliving(gone))
 		var/mob/living/leaver = gone
 		leaver.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		REMOVE_TRAIT(leaver, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
