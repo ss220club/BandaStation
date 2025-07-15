@@ -13857,7 +13857,6 @@
 /obj/effect/turf_decal/siding/purple{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/button/door/directional/east{
 	id = "rdgene";
 	name = "Primary Genetics Shutters Control";
@@ -13870,6 +13869,7 @@
 	pixel_y = -6;
 	req_access = list("science")
 	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/science/genetics)
 "eOs" = (
@@ -52253,13 +52253,13 @@
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "rMT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/cable,
+/obj/machinery/light/directional/north,
 /obj/machinery/power/smes{
 	capacity = 1.8e+008;
 	charge = 2e+005
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
-/obj/machinery/light/directional/north,
 /turf/open/floor/iron,
 /area/station/maintenance/disposal/incinerator)
 "rMZ" = (
@@ -56849,8 +56849,7 @@
 /area/station/ai_monitored/turret_protected/aisat/foyer)
 "trl" = (
 /obj/structure/ore_vent/starter_resources{
-	icon_state = "ore_vent_active";
-	mineral_breakdown = list(/datum/material/iron = 50, /datum/material/glass = 50,  /datum/material/silver = 50,  /datum/material/plasma = 50,  /datum/material/gold = 50,  /datum/material/uranium = 50, /datum/material/diamond = 50, /datum/material/bluespace = 50)
+	icon_state = "ore_vent_active"
 	},
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
