@@ -14,11 +14,17 @@ type TicketType = {
   type: string;
 };
 
+/**
+ * TODO:
+ * Так как менторов всё ещё нет, этот интерфейс кастрирован.
+ * После имплементации менторов, надо удалить Admin из selectedType,
+ * а так же раскомментить кнопку выбора типа тикета
+ */
 export const TicketCreation = (props) => {
   const { act, data } = useBackend<HelpData>();
   const { adminCount, ticketTypes } = data;
   const [helpMessage, setHelpMessage] = useState('');
-  const [selectedType, setSelectedType] = useState('');
+  const [selectedType, setSelectedType] = useState('Admin');
   const [selectTypeModal, setSelectTypeModal] = useState(false);
 
   return (
@@ -53,9 +59,11 @@ export const TicketCreation = (props) => {
           fill
           title={`Админов в сети: ${adminCount}`}
           buttons={
+            /*
             <Button onClick={() => setSelectTypeModal(true)}>
               Выбрать тип тикета
             </Button>
+          */ ''
           }
         >
           <Stack vertical fill>
@@ -70,6 +78,12 @@ export const TicketCreation = (props) => {
                     : 'С чем вам нужна помощь?'
                 }
                 onChange={setHelpMessage}
+                onEnter={() => {
+                  act('create_ticket', {
+                    message: helpMessage,
+                    ticketType: selectedType,
+                  });
+                }}
               />
             </Stack.Item>
             <Stack.Item>

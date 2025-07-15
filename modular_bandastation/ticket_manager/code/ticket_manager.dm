@@ -24,8 +24,11 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 
 /datum/ticket_manager/ui_data(mob/user)
 	var/list/data = list()
-	data["userCkey"] = user.client.ckey
-	data["allTickets"] = get_tickets_data(user.client)
+	var/client/ui_user = user.client
+	data["userCkey"] = ui_user.ckey
+	data["isAdmin"] = check_rights_for(ui_user, R_ADMIN)
+	data["isMentor"] = null // NEEDED MENTOR SYSTEM
+	data["allTickets"] = get_tickets_data(ui_user)
 	return data
 
 /datum/ticket_manager/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -48,7 +51,7 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 			SStgui.update_uis(src)
 			return TRUE
 
-	if(!check_rights(R_ADMIN))
+	if(!check_rights(R_ADMIN)) // Check for mentor rights after implementing mentors
 		return FALSE
 
 	// Admin/Mentor only
@@ -65,26 +68,38 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 			switch_ticket_state(ticket_number, TICKET_RESOLVED)
 			return TRUE
 
+		/* NEEDED MENTOR SYSTEM
 		if("convert")
 			convert_ticket(ticket_number)
 			return TRUE
+		*/
+
+	return FALSE
 
 /datum/ticket_manager/proc/get_tickets_data(client/user)
 	var/list/tickets = list()
-	if(check_rights(R_ADMIN))
-		for(var/ticket_key, ticket_datum in all_tickets)
-			var/datum/help_ticket/ticket = ticket_datum
-			tickets += list(list(
-				"number" = ticket_key,
-				"state" = ticket.state,
-				"type" = ticket.ticket_type,
-				"initiator" = ticket.initiator,
-				"initiatorCkey" = ticket.initiator_ckey,
-				"openedTime" = ticket.opened_at,
-				"closedTime" = ticket.closed_at,
-				"replied" = ticket.player_replied,
-				"messages" = ticket.messages,
-			))
+	for(var/ticket_key, ticket_datum in all_tickets)
+		var/datum/help_ticket/ticket = ticket_datum
+		if(!check_rights_for(user, R_ADMIN))
+			/*
+			if(check_rights_for(user, R_MENTOR) && ticket.ticket_type != TICKET_TYPE_MENTOR)
+				continue // Skip non-mentor tickets for mentors
+			*/
+			if(ticket.initiator_ckey != user.ckey)
+				continue // Skip any tickets not initiated by the user
+
+		tickets += list(list(
+			"number" = ticket_key,
+			"state" = ticket.state,
+			"type" = ticket.ticket_type,
+			"initiator" = ticket.initiator,
+			"initiatorCkey" = ticket.initiator_ckey,
+			"openedTime" = ticket.opened_at,
+			"closedTime" = ticket.closed_at,
+			"replied" = ticket.player_replied,
+			"messages" = ticket.messages,
+		))
+
 	return tickets
 
 /datum/ticket_manager/proc/add_ticket_message(ticket_id, sender, message)
@@ -114,6 +129,7 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 	needed_ticket.state = new_state
 	SStgui.update_uis(src)
 
+/* NEEDED MENTOR SYSTEM
 /datum/ticket_manager/proc/convert_ticket(ticket_id)
 	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
 	if(!needed_ticket)
@@ -126,3 +142,4 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 			needed_ticket.ticket_type = TICKET_TYPE_ADMIN
 
 	SStgui.update_uis(src)
+*/

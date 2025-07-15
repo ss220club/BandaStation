@@ -11,11 +11,17 @@ import { ManagerData, TicketProps, TicketsMainPageProps } from './types';
 
 export function TicketManager() {
   const { data } = useBackend<ManagerData>();
-  const { allTickets } = data;
+  const { allTickets, isAdmin, isMentor } = data;
   const [selectedTicket, setSelectedTicket] = useState<number | null>();
+  const userUsing = isAdmin ? 'Админ' : isMentor ? 'Ментор' : 'Игрок';
 
   return (
-    <Window title="Ticket Manager" theme="ss220" width={550} height={650}>
+    <Window
+      title={`Менеджер тикетов - ${userUsing}`}
+      theme="ss220"
+      width={550}
+      height={650}
+    >
       <Window.Content>
         {selectedTicket ? (
           <TicketPanel

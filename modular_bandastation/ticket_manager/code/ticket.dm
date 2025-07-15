@@ -3,7 +3,7 @@
 	var/id
 	/// The current state of the ticket
 	var/state = TICKET_OPEN
-	/// Ticket type. Used for sorting Admin/Mentor tickets in the UI
+	/// Ticket type. Used for sorting Admin/Mentor tickets
 	var/ticket_type
 	/// The time at which the ticket was opened
 	var/opened_at
@@ -52,31 +52,24 @@
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
 /datum/help_ticket/proc/notify_stuff(client/creator, message, ticket_type)
+	var/title = "Тикет #[id]"
+	var/body = "[span_bold(initiator)]<br>[message]"
 	var/chat_message
+	var/needed_stuff = GLOB.admins
 	switch(ticket_type)
 		if(TICKET_TYPE_ADMIN)
-			chat_message = fieldset_block(
-				span_adminhelp("Тикет #[id]"),
-				"<b>[initiator]</b><br>[message]",
-				"boxed_message red_box")
-
+			chat_message = fieldset_block(span_adminhelp(title), body, "boxed_message red_box")
+		/* NEEDED MENTOR SYSTEM
 		if(TICKET_TYPE_MENTOR)
-			// TODO: Replace adminhelp span to mentorhelp
-			chat_message = fieldset_block(
-				span_adminhelp("Тикет #[id]"),
-				"<b>[initiator]</b><br>[message]",
-				"boxed_message blue_box")
+			chat_message = fieldset_block(span_mentorhelp(title), body, "boxed_message blue_box")
+			needed_stuff += GLOB.mentors
+		*/
 
-	to_chat(
-		creator,
-		custom_boxed_message("green_box", "Тикет #[id] был создан! Ожидайте ответ."),
-		MESSAGE_TYPE_ADMINPM,
-		confidential = TRUE
-	)
+	to_chat(creator, custom_boxed_message("green_box", "[title] был создан! Ожидайте ответ."), MESSAGE_TYPE_ADMINPM)
 
-	for(var/client/admin in GLOB.admins)
-		window_flash(admin, ignorepref = TRUE)
-		if(admin.prefs.toggles & SOUND_ADMINHELP)
-			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
+	for(var/client/stuff_member in needed_stuff)
+		window_flash(stuff_member, ignorepref = TRUE)
+		if(stuff_member.prefs.toggles & SOUND_ADMINHELP)
+			SEND_SOUND(stuff_member, sound('sound/effects/adminhelp.ogg'))
 
-		to_chat(admin, chat_message, MESSAGE_TYPE_ADMINPM, confidential = TRUE)
+		to_chat(stuff_member, chat_message, MESSAGE_TYPE_ADMINPM)

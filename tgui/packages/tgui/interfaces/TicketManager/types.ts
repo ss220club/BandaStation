@@ -3,6 +3,8 @@ import { BooleanLike } from 'tgui-core/react';
 
 export type ManagerData = {
   userCkey: string;
+  isAdmin: BooleanLike;
+  isMentor: BooleanLike;
   allTickets: TicketProps[];
 };
 

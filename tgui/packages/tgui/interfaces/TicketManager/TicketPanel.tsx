@@ -9,7 +9,8 @@ import { TicketInteractions } from './Ticket';
 import { ManagerData } from './types';
 
 export function TicketPanel(props) {
-  const { act } = useBackend();
+  const { act, data } = useBackend<ManagerData>();
+  const { isAdmin, isMentor } = data;
   const { allTickets, ticketNumber, setSelectedTicket } = props;
 
   const selectedTicket = allTickets.find(
@@ -124,9 +125,11 @@ export function TicketPanel(props) {
                 }
               />
             </Stack.Item>
-            <Stack.Item>
-              <TicketInteractions ticketId={number} ticketState={state} />
-            </Stack.Item>
+            {(isAdmin || isMentor) && (
+              <Stack.Item>
+                <TicketInteractions ticketId={number} ticketState={state} />
+              </Stack.Item>
+            )}
           </Stack>
         </Section>
       </Stack.Item>
