@@ -18,6 +18,9 @@
 /atom/proc/cast_tts(mob/listener, message, atom/location, is_local = TRUE, is_radio = FALSE, list/effects, traits = TTS_TRAIT_RATE_FASTER, preSFX, postSFX, tts_seed_override, channel_override)
 	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override)
 
+/atom/movable/virtualspeaker/cast_tts(mob/listener, message, atom/location, is_local, is_radio, list/effects, traits, preSFX, postSFX, tts_seed_override, channel_override)
+	SEND_SIGNAL(source, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override)
+
 // TODO: Do it better?
 /atom/proc/get_tts_seed()
 	var/datum/component/tts_component/tts_component = GetComponent(/datum/component/tts_component)

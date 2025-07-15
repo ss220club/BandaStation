@@ -100,8 +100,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 				message_verb_continuous = "pulverises"
 
 		if(demo_mod < 1)
-			message_verb_simple = "безуспешно " + ru_attack_verb(message_verb_simple)
-			message_verb_continuous = "безуспешно " + ru_attack_verb(message_verb_continuous)
+			message_verb_simple = "слабо " + ru_attack_verb(message_verb_simple)
+			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
 
 		user.visible_message(
 			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),

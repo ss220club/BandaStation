@@ -1283,6 +1283,14 @@ $border-width-px: $border-width * 1px;
   color: #6699cc;
 }
 
+.tooltip-img > span {
+  vertical-align: middle;
+}
+
+.tooltip-img .icon {
+  vertical-align: unset;
+}
+
 @keyframes donor_shine {
   0%,
   33% {
