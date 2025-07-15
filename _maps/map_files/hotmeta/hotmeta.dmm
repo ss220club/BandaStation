@@ -19204,6 +19204,7 @@
 	},
 /obj/effect/spawner/random/armory/shotgun,
 /obj/machinery/light/directional/east,
+/obj/effect/spawner/random/armory/dragnet,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "gHE" = (
@@ -29867,6 +29868,7 @@
 "kgz" = (
 /obj/machinery/firealarm/directional/south,
 /obj/structure/frame/machine/secured,
+/obj/item/circuitboard/machine/smartfridge,
 /turf/open/floor/plating,
 /area/station/medical/virology)
 "kgC" = (
@@ -32058,6 +32060,7 @@
 	pixel_x = 4
 	},
 /obj/item/shard,
+/obj/item/circuitboard/computer/pandemic,
 /turf/open/floor/plating,
 /area/station/medical/virology)
 "kVq" = (
@@ -33146,6 +33149,9 @@
 	dir = 4
 	},
 /obj/machinery/light/small/directional/west,
+/obj/item/gun/ballistic/automatic/battle_rifle{
+	pixel_y = 3
+	},
 /obj/item/clothing/suit/hooded/ablative,
 /obj/item/gun/energy/ionrifle,
 /turf/open/floor/iron/dark,
@@ -46013,10 +46019,6 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance/testlab)
-"pIU" = (
-/obj/item/circuitboard/machine/smartfridge,
-/turf/open/floor/plating,
-/area/station/medical/virology)
 "pJf" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
@@ -62709,15 +62711,6 @@
 /obj/item/bedsheet,
 /turf/open/floor/iron,
 /area/station/security/brig)
-"vol" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
-	dir = 4
-	},
-/obj/item/circuitboard/computer/pandemic,
-/turf/open/floor/plating,
-/area/station/medical/virology)
 "vow" = (
 /obj/machinery/door/window/right/directional/west{
 	name = "Corpse Arrivals";
@@ -71271,6 +71264,7 @@
 /obj/item/clothing/gloves/combat,
 /obj/item/gun/energy/e_gun/hos,
 /obj/item/storage/belt/security/full,
+/obj/item/door_remote/head_of_security,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "yfa" = (
@@ -85954,14 +85948,14 @@ gda
 nWF
 nWF
 xjH
-pIU
+lDj
 dno
 uKy
 oPY
 iOt
 xjH
 nzQ
-vol
+nta
 iPy
 nta
 mFu
