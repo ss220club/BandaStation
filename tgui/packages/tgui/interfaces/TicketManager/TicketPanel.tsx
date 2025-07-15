@@ -140,7 +140,7 @@ export function TicketPanel(props) {
 function TicketMessage(props) {
   const { data } = useBackend<ManagerData>();
   const { sender, message, time } = props.message;
-  const messageSender = data.userCkey === sender;
+  const messageSender = data.userKey === sender;
 
   return (
     <Stack fill reverse={messageSender} className="TicketMessage__Wrapper">

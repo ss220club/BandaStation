@@ -9,10 +9,10 @@
 	var/opened_at
 	/// The time at which the ticket was closed
 	var/closed_at
-	/// Initiator ckey and key name
+	/// Initiator key name
 	var/initiator
-	/// Initiator ckey. More stable
-	var/initiator_ckey
+	/// Initiator key. More stable
+	var/initiator_key
 	/// Semi-misnomer, it's the person who ahelped/was bwoinked
 	var/client/initiator_client
 	/// Collection of all ticket messages
@@ -22,8 +22,7 @@
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
 
-/datum/help_ticket/New(client/creator, raw_message, new_type)
-	var/message = sanitize(copytext_char(raw_message, 1, MAX_MESSAGE_LEN))
+/datum/help_ticket/New(client/creator, message, new_type)
 	if(!message || !creator || !creator.mob)
 		qdel(src)
 		return
@@ -32,44 +31,32 @@
 	opened_at = time_stamp(NONE) // Reset format to Byond default
 	initiator_client = creator
 	initiator = key_name(initiator_client)
-	initiator_ckey = initiator_client.ckey
-	initiator_client.current_ticket = src
+	initiator_key = initiator_client.key
 	ticket_type = new_type
 	messages = list(list(
-		"sender" = initiator_ckey,
+		"sender" = initiator_key,
 		"message" = message,
 		"time" = opened_at,
 	))
 
-	timeout_verb()
-	notify_stuff(creator, message, ticket_type)
-	GLOB.ticket_manager.all_tickets[id] = src
+	if(initiator_client.current_help_ticket) //This is a bug
+		stack_trace("Multiple help tickets opened by a single player!")
+		GLOB.ticket_manager.switch_ticket_state(initiator_client.current_help_ticket.id, TICKET_CLOSED)
 
-// Removes the help verb and returns it after 2 minutes
-/datum/help_ticket/proc/timeout_verb()
-	remove_verb(initiator_client, /client/verb/adminhelp)
-	initiator_client.help_timer_id = addtimer(CALLBACK(initiator_client, TYPE_PROC_REF(/client, giveadminhelpverb)), 2 MINUTES, TIMER_STOPPABLE)
+	initiator_client.current_help_ticket = src
+	GLOB.ticket_manager.all_tickets[id] = src
+	notify_admins(creator, message, ticket_type)
+	SStgui.update_uis(GLOB.ticket_manager)
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
-/datum/help_ticket/proc/notify_stuff(client/creator, message, ticket_type)
-	var/title = "Тикет <a href='byond://?src=[GLOB.ticket_manager_ref];open_ticket=[id]'>#[id]</a>"
-	var/body = "[span_bold(initiator)]<br>[message]"
-	var/chat_message
-	var/needed_stuff = GLOB.admins
-	switch(ticket_type)
-		if(TICKET_TYPE_ADMIN)
-			chat_message = fieldset_block(span_adminhelp(title), body, "boxed_message red_box")
-		/* NEEDED MENTOR SYSTEM
-		if(TICKET_TYPE_MENTOR)
-			chat_message = fieldset_block(span_mentorhelp(title), body, "boxed_message blue_box")
-			needed_stuff += GLOB.mentors
-		*/
+/datum/help_ticket/proc/notify_admins(client/creator, message, ticket_type)
+	var/title = "Тикет <a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];open_ticket=1'>#[id]</a>"
+	var/body = "<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];response=1'>[span_bold(initiator)]</a>\n[message]"
+	for(var/client/admin in GLOB.admins)
+		if(admin.prefs.toggles & SOUND_ADMINHELP)
+			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
+
+		window_flash(admin, ignorepref = TRUE)
+		to_chat(admin, fieldset_block(span_adminhelp(title), "[body]\n\n[ADMIN_FULLMONTY_NONAME(creator.mob)]", "boxed_message red_box"), MESSAGE_TYPE_ADMINPM)
 
 	to_chat(creator, custom_boxed_message("green_box", "[title] был создан! Ожидайте ответ."), MESSAGE_TYPE_ADMINPM)
-
-	for(var/client/stuff_member in needed_stuff)
-		window_flash(stuff_member, ignorepref = TRUE)
-		if(stuff_member.prefs.toggles & SOUND_ADMINHELP)
-			SEND_SOUND(stuff_member, sound('sound/effects/adminhelp.ogg'))
-
-		to_chat(stuff_member, chat_message, MESSAGE_TYPE_ADMINPM)

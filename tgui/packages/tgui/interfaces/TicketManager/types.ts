@@ -3,7 +3,7 @@ import { BooleanLike } from 'tgui-core/react';
 
 export type ManagerData = {
   ticketToOpen: number;
-  userCkey: string;
+  userKey: string;
   isAdmin: BooleanLike;
   isMentor: BooleanLike;
   allTickets: TicketProps[];
