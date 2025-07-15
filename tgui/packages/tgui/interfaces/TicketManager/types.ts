@@ -2,6 +2,7 @@ import { Dispatch } from 'react';
 import { BooleanLike } from 'tgui-core/react';
 
 export type ManagerData = {
+  ticketToOpen: number;
   userCkey: string;
   isAdmin: BooleanLike;
   isMentor: BooleanLike;

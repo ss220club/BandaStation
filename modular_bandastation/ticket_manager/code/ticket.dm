@@ -52,7 +52,7 @@
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
 /datum/help_ticket/proc/notify_stuff(client/creator, message, ticket_type)
-	var/title = "Тикет #[id]"
+	var/title = "Тикет <a href='byond://?src=[GLOB.ticket_manager_ref];open_ticket=[id]'>#[id]</a>"
 	var/body = "[span_bold(initiator)]<br>[message]"
 	var/chat_message
 	var/needed_stuff = GLOB.admins

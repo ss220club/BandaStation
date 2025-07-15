@@ -1,7 +1,10 @@
 GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
+GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 /// Client var used for returning the ahelp verb
 /client/var/help_timer_id = 0
+/// What ticket will be opened after opening ui
+/client/var/ticket_to_open
 /// Client var used for tracking the ticket the (usually) not-admin client is dealing with
 /client/var/datum/help_ticket/current_help_ticket
 
@@ -24,11 +27,12 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 
 /datum/ticket_manager/ui_data(mob/user)
 	var/list/data = list()
-	var/client/ui_user = user.client
-	data["userCkey"] = ui_user.ckey
-	data["isAdmin"] = check_rights_for(ui_user, R_ADMIN)
+	var/client/C = user.client
+	data["userCkey"] = C.ckey
+	data["isAdmin"] = check_rights_for(C, R_ADMIN)
 	data["isMentor"] = null // NEEDED MENTOR SYSTEM
-	data["allTickets"] = get_tickets_data(ui_user)
+	data["ticketToOpen"] = C.ticket_to_open
+	data["allTickets"] = get_tickets_data(C)
 	return data
 
 /datum/ticket_manager/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -75,6 +79,24 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 		*/
 
 	return FALSE
+
+/datum/ticket_manager/ui_close(mob/user)
+	. = ..()
+	user.client.ticket_to_open = null
+
+/datum/ticket_manager/Topic(href, href_list)
+	. = ..()
+
+	var/client/user = usr.client
+	if(href_list["open_ticket"])
+		if(!check_rights(R_ADMIN) && user.current_help_ticket.id != href_list["open_ticket"])
+			to_chat(user, "Вы не можете открыть этот тикет!")
+			log_admin("[key_name(user)] попытался открыть тикет #[href_list["open_ticket"]]. Возможен href эксплоит!")
+			CRASH("Possible HREF exploit attempt by [key_name(user)]! Tried to open ticket #[href_list["open_ticket"]].")
+
+		user.ticket_to_open = text2num(href_list["open_ticket"])
+		ui_interact(user.mob)
+		return
 
 /datum/ticket_manager/proc/get_tickets_data(client/user)
 	var/list/tickets = list()

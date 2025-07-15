@@ -11,8 +11,10 @@ import { ManagerData, TicketProps, TicketsMainPageProps } from './types';
 
 export function TicketManager() {
   const { data } = useBackend<ManagerData>();
-  const { allTickets, isAdmin, isMentor } = data;
-  const [selectedTicket, setSelectedTicket] = useState<number | null>();
+  const { allTickets, isAdmin, isMentor, ticketToOpen } = data;
+  const [selectedTicket, setSelectedTicket] = useState<number | null>(
+    ticketToOpen,
+  );
   const userUsing = isAdmin ? 'Админ' : isMentor ? 'Ментор' : 'Игрок';
 
   return (
