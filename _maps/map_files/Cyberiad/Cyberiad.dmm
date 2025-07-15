@@ -43594,13 +43594,11 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/fore)
 "kfy" = (
-/obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 1
-	},
+/obj/machinery/door/airlock/external/glass,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "kfF" = (
@@ -125942,7 +125940,7 @@ doz
 tWQ
 tWQ
 dSX
-dfu
+cPu
 kfy
 kNs
 aoJ
