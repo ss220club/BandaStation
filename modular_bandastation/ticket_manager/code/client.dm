@@ -22,3 +22,28 @@
 		return
 
 	GLOB.help_ui_handler.ui_interact(mob)
+
+/client/cmd_admin_pm(client/whom, message)
+	if(prefs.muted & MUTE_ADMINHELP)
+		to_chat(src, span_danger("Ошибка: Вы не можете использовать ЛС (мут)."), MESSAGE_TYPE_ADMINPM)
+		return
+
+	if(!holder)
+		to_chat(src, span_danger("ТЫ НЕДОСТОИН!"), MESSAGE_TYPE_ADMINPM)
+		log_admin("[key_name(src)] попытался написать в ЛС не имея админки!")
+		stack_trace("[key_name(src)] tried to send an admin PM without a holder.")
+		return
+
+	if(whom.persistent_client.current_help_ticket)
+		var/ticket_id = whom.persistent_client.current_help_ticket.id
+		to_chat(src, span_danger(
+			"У него уже есть открытый тикет. Вы можете написать ему \
+			<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[ticket_id];open_ticket=1'>тут</a>."),
+			MESSAGE_TYPE_ADMINPM)
+		return
+
+	var/message_to_send = tgui_input_text(src, "Введите сообщения для [whom.ckey]", "Личное сообщение", multiline = TRUE, encode = FALSE, ui_state = ADMIN_STATE(R_ADMIN))
+	if(!message_to_send)
+		return
+
+	new /datum/help_ticket(whom, src, message_to_send, TICKET_TYPE_ADMIN)

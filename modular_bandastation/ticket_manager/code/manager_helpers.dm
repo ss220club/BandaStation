@@ -61,3 +61,15 @@
 
 	SStgui.update_uis(src)
 */
+
+/// Notifies the player about new admin pm ticket.
+/datum/ticket_manager/proc/notify_player_pm(client/receiver, client/admin, message, ticket_type)
+	var/ticket_id = receiver.persistent_client.current_help_ticket.id
+	var/ready_message = fieldset_block(
+		span_adminhelp("Приватное сообщение от администратора"),
+		"[TICKET_REPLY_LINK(ticket_id, span_bold(admin.key))]\n[message]\n\n\
+		[span_adminhelp("Нажмите на имя администратора, чтобы ответить. Либо [TICKET_REPLY_LINK(ticket_id, "откройте чат")].")]",
+		"boxed_message red_box")
+	window_flash(receiver, ignorepref = TRUE)
+	SEND_SOUND(receiver, sound('sound/effects/adminhelp.ogg'))
+	to_chat(receiver, ready_message, MESSAGE_TYPE_ADMINPM)

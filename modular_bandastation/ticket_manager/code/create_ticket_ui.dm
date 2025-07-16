@@ -39,16 +39,16 @@ GLOBAL_DATUM_INIT(help_ui_handler, /datum/help_ui_handler, new)
 		return
 
 	var/client/user = usr.client
-	var/message = sanitize_text(params["message"])
-	if(!message)
+	var/ticket_message = sanitize_text(params["message"])
+	if(!ticket_message)
 		return
 
-	if(user.handle_spam_prevention(message, MUTE_ADMINHELP))
+	if(user.handle_spam_prevention(ticket_message, MUTE_ADMINHELP))
 		return
 
 	var/ticket_type = params["ticketType"]
 	if(ticket_type != TICKET_TYPE_ADMIN && ticket_type != TICKET_TYPE_MENTOR)
 		CRASH("Invalid ticket type created by [user]. Ticket type: [ticket_type]")
 
-	new /datum/help_ticket(user, message, ticket_type)
+	new /datum/help_ticket(user, message = ticket_message, new_type = ticket_type)
 	ui.close()

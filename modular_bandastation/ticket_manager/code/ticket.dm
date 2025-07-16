@@ -22,7 +22,7 @@
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
 
-/datum/help_ticket/New(client/creator, message, new_type)
+/datum/help_ticket/New(client/creator, client/admin, message, new_type)
 	if(!message || !creator || !creator.mob)
 		qdel(src)
 		return
@@ -45,13 +45,17 @@
 
 	initiator_client.current_help_ticket = src
 	GLOB.ticket_manager.all_tickets[id] = src
-	notify_admins(creator, message, ticket_type)
 	SStgui.update_uis(GLOB.ticket_manager)
+
+	if(admin)
+		GLOB.ticket_manager.notify_player_pm(creator, admin, message, ticket_type)
+	else
+		notify_admins(creator, message, ticket_type)
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
 /datum/help_ticket/proc/notify_admins(client/creator, message, ticket_type)
-	var/title = "Тикет <a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];open_ticket=1'>#[id]</a>"
-	var/body = "<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];response=1'>[span_bold(initiator)]</a>\n[message]"
+	var/title = "Тикет [TICKET_OPEN_LINK(id, "#[id]")]"
+	var/body = "[TICKET_REPLY_LINK(id, span_bold(initiator))]\n[message]"
 	for(var/client/admin in GLOB.admins)
 		if(admin.prefs.toggles & SOUND_ADMINHELP)
 			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
