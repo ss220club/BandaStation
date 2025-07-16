@@ -9,10 +9,7 @@
 	mob_biotypes = MOB_SPIRIT | MOB_UNDEAD
 	maxHealth = 40
 	health = 40
-	// BANDASTATION CHANGES START
-	pass_flags = PASSMOB | PASSTABLE
-	mobility_flags = MOBILITY_FLAGS_DEFAULT - MOBILITY_PULL
-	// BANDASTATION CHANGES END
+	status_flags = CANPUSH
 	speak_emote = list("hisses")
 	response_help_continuous = "puts their hand through"
 	response_help_simple = "put your hand through"
