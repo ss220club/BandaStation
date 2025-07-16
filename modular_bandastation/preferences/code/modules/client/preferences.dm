@@ -22,6 +22,9 @@
 /datum/preferences/proc/get_loadout_max_points()
 	return BASE_LOADOUT_POINTS + parent.get_donator_level() * LOADOUT_POINTS_PER_DONATION_LEVEL
 
+/datum/preference/choiced/ghost_orbit/create_default_value()
+	return GHOST_ORBIT_CIRCLE
+
 #undef BASE_LOADOUT_POINTS
 #undef LOADOUT_POINTS_PER_DONATION_LEVEL
 #undef BASE_SAVE_SLOTS
