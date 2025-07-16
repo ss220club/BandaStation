@@ -1,7 +1,7 @@
 /datum/ticket_manager/Topic(href, href_list)
 	. = ..()
 	var/client/user = usr.client
-	var/datum/help_ticket/user_ticket = user.current_help_ticket
+	var/datum/help_ticket/user_ticket = user.persistent_client.current_help_ticket
 	if(!check_rights(R_ADMIN) && (!user_ticket || user_ticket.id != href_list["ticket_id"]))
 		to_chat(user, "Вы не можете взаимодействовать с чужим тикетом!")
 		log_admin("[key_name(user)] попытался взаимодействовать с тикетом #[href_list["open_ticket"]], который не является его. Возможен href эксплоит!")

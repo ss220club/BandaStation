@@ -14,7 +14,7 @@
 	/// Initiator key. More stable
 	var/initiator_key
 	/// Semi-misnomer, it's the person who ahelped/was bwoinked
-	var/client/initiator_client
+	var/datum/persistent_client/initiator_client
 	/// Collection of all ticket messages
 	var/list/messages
 	/// Has the player replied to this ticket yet?
@@ -29,9 +29,9 @@
 
 	id = ++ticket_counter
 	opened_at = time_stamp(NONE) // Reset format to Byond default
-	initiator_client = creator
-	initiator = key_name(initiator_client)
-	initiator_key = initiator_client.key
+	initiator_client = creator.persistent_client
+	initiator = key_name(creator)
+	initiator_key = creator.key
 	ticket_type = new_type
 	messages = list(list(
 		"sender" = initiator_key,
@@ -41,7 +41,7 @@
 
 	if(initiator_client.current_help_ticket) //This is a bug
 		stack_trace("Multiple help tickets opened by a single player!")
-		GLOB.ticket_manager.switch_ticket_state(initiator_client.current_help_ticket.id, TICKET_CLOSED)
+		GLOB.ticket_manager.set_ticket_state(initiator_client.current_help_ticket.id, TICKET_CLOSED)
 
 	initiator_client.current_help_ticket = src
 	GLOB.ticket_manager.all_tickets[id] = src

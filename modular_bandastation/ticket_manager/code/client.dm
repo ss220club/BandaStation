@@ -1,9 +1,9 @@
+/// Client var used for tracking the ticket the (usually) not-admin client is dealing with
+/datum/persistent_client/var/datum/help_ticket/current_help_ticket
 
 /client
 	/// What ticket will be opened after opening ui
 	var/ticket_to_open
-	/// Client var used for tracking the ticket the (usually) not-admin client is dealing with
-	var/datum/help_ticket/current_help_ticket
 
 /client/verb/ticket_manager()
 	set name = "Ticket Manager"
@@ -16,8 +16,8 @@
 	set name = "Ask Help"
 	set category = "Admin"
 
-	if(current_help_ticket)
-		ticket_to_open = current_help_ticket.id
+	if(persistent_client.current_help_ticket)
+		ticket_to_open = persistent_client.current_help_ticket.id
 		GLOB.ticket_manager.ui_interact(mob)
 		return
 

@@ -30,7 +30,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	if(.)
 		return
 
-	var/mob/user = ui.user
+	var/client/user = ui.user.client
 	var/ticket_number = params["ticketNumber"]
 	if(!ticket_number)
 		CRASH("Called ticket_manager ui_act() without a ticket number!")
@@ -41,7 +41,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			if(!params["message"])
 				return FALSE
 
-			add_ticket_message(ticket_number, user.client.key, params["message"])
+			add_ticket_message(ticket_number, user.key, params["message"])
 			return TRUE
 
 	if(!check_rights(R_ADMIN)) // Check for mentor rights after implementing mentors
@@ -50,15 +50,15 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	// Admin/Mentor only
 	switch(action)
 		if("reopen")
-			switch_ticket_state(ticket_number, TICKET_OPEN)
+			set_ticket_state(user, ticket_number, TICKET_OPEN)
 			return TRUE
 
 		if("close")
-			switch_ticket_state(ticket_number, TICKET_CLOSED)
+			set_ticket_state(user, ticket_number, TICKET_CLOSED)
 			return TRUE
 
 		if("resolve")
-			switch_ticket_state(ticket_number, TICKET_RESOLVED)
+			set_ticket_state(user, ticket_number, TICKET_RESOLVED)
 			return TRUE
 
 		/* NEEDED MENTOR SYSTEM
