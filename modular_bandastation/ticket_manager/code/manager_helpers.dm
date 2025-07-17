@@ -96,6 +96,30 @@
 	SStgui.update_uis(src)
 */
 
+/datum/ticket_manager/proc/client_logout(client/user)
+	var/datum/help_ticket/needed_ticket = user.persistent_client.current_help_ticket
+	if(!needed_ticket)
+		return
+
+	needed_ticket.messages += list(list(
+		"sender" = "CLIENT_DISCONNECTED",
+		"message" = "[user.key] отключился",
+		"time" = time_stamp(NONE),
+	))
+	SStgui.update_uis(src)
+
+/datum/ticket_manager/proc/client_login(client/user)
+	var/datum/help_ticket/needed_ticket = user.persistent_client.current_help_ticket
+	if(!needed_ticket)
+		return
+
+	needed_ticket.messages += list(list(
+		"sender" = "CLIENT_CONNECTED",
+		"message" = "[user.key] подключился",
+		"time" = time_stamp(NONE),
+	))
+	SStgui.update_uis(src)
+
 /// Send admin ticket reply to player, if he's online
 /datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, message)
 	var/id = needed_ticket.id

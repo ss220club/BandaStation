@@ -87,6 +87,35 @@
   &--sendedMessage {
     background-color: hsl(from var(--pref-background) h 50 calc(l + 10));
   }
+
+  &__Connection {
+    position: relative;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.75em;
+    color: hsl(from var(--color-bad) h s calc(l + 7.5));
+
+    &--connected {
+      color: hsl(from var(--color-good) h s calc(l + 7.5));
+    }
+
+    .ticket-time {
+      opacity: 0.75;
+      position: absolute;
+      right: 0.5em;
+      font-size: 0.75em;
+      transform: translateY(75%);
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      flex: 1;
+      min-width: 3.25em;
+      height: var(--border-thickness-tiny);
+      background-color: currentColor;
+    }
+  }
 }
 
 .TicketPanel {

@@ -4,8 +4,8 @@ import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
 import { TICKET_STATE } from './constants';
-import { toLocalTime } from './helpers';
 import { TicketAdminInteractions, TicketInteractions } from './Ticket';
+import { TicketMessage } from './TicketMessage';
 import { ManagerData } from './types';
 
 export function TicketPanel(props) {
@@ -141,30 +141,6 @@ export function TicketPanel(props) {
           </Stack>
         </Section>
       </Stack.Item>
-    </Stack>
-  );
-}
-
-function TicketMessage(props) {
-  const { data } = useBackend<ManagerData>();
-  const { sender, message, time } = props.message;
-  const messageSender = data.userKey === sender;
-
-  return (
-    <Stack fill reverse={messageSender} className="TicketMessage__Wrapper">
-      <Stack.Item
-        className={classes([
-          'TicketMessage',
-          messageSender && 'TicketMessage--sendedMessage',
-        ])}
-      >
-        <div className="TicketMessage__Sender">{sender}</div>
-        <div className="TicketMessage__Content">
-          <div className="ticket-message">{message}</div>
-          <div className="ticket-time">{toLocalTime(time)}</div>
-        </div>
-      </Stack.Item>
-      <Stack.Item grow />
     </Stack>
   );
 }

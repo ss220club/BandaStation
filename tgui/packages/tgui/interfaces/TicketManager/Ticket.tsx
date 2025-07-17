@@ -84,7 +84,6 @@ export function TicketInteractions(props: {
               Закрыть
             </Button>
           </Stack.Item>
-          {/* NEEDED MENTOR SYSTEM
           <Stack.Item>
             <Button
               icon="exchange"
@@ -92,7 +91,6 @@ export function TicketInteractions(props: {
               onClick={() => act('convert', { ticketID: ticketID })}
             />
           </Stack.Item>
-           */}
         </>
       )}
     </Stack>

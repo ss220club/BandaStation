@@ -285,7 +285,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	set_right_click_menu_mode(TRUE)
 
-	GLOB.ahelp_tickets.ClientLogin(src)
+	GLOB.ticket_manager.client_login(src) // BANDASTATION REPLACEMENT - Original: GLOB.ahelp_tickets.ClientLogin(src)
 	GLOB.interviews.client_login(src)
 	GLOB.requests.client_login(src)
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
@@ -600,10 +600,11 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	GLOB.clients -= src
 	GLOB.directory -= ckey
+	GLOB.ticket_manager.client_logout(src) // BANDASTATION ADDITION
 	persistent_client.set_client(null)
 
 	log_access("Logout: [key_name(src)]")
-	GLOB.ahelp_tickets.ClientLogout(src)
+	// GLOB.ahelp_tickets.ClientLogout(src) // BANDASTATION REMOVAL
 	GLOB.interviews.client_logout(src)
 	GLOB.requests.client_logout(src)
 	SSserver_maint.UpdateHubStatus()
