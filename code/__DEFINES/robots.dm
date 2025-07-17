@@ -123,25 +123,25 @@ DEFINE_BITFIELD(bot_cover_flags, list(
 
 //Bot types
 /// Secutritrons (Beepsky)
-#define SEC_BOT "Секьюритрон"
+#define SEC_BOT "Securitron"
 /// ED-209s
 #define ADVANCED_SEC_BOT "ED-209"
 /// MULEbots
-#define MULE_BOT "МУЛбот"
+#define MULE_BOT "MULEbot"
 /// Cleanbots
-#define CLEAN_BOT "Клинбот"
+#define CLEAN_BOT "Cleanbot"
 /// Medibots
-#define MED_BOT "Медибот"
+#define MED_BOT "Medibot"
 /// Honkbots & ED-Honks
-#define HONK_BOT "Хонкбот"
+#define HONK_BOT "Honkbot"
 /// Firebots
-#define FIRE_BOT "Огнебот"
+#define FIRE_BOT "Firebot"
 /// Hygienebots
-#define HYGIENE_BOT "Гигиенобот"
+#define HYGIENE_BOT "Hygienebot"
 /// Vibe bots
-#define VIBE_BOT "Вайб-бот"
+#define VIBE_BOT "Vibebot"
 /// Repairbots
-#define REPAIR_BOT "Чинебот"
+#define REPAIR_BOT "Repairbot"
 
 // General Bot modes //
 /// Idle
