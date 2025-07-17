@@ -102,6 +102,12 @@
     padding: 0.5rem;
   }
 
+  &__Title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   &__ScrollButton {
     opacity: 0;
     position: absolute;

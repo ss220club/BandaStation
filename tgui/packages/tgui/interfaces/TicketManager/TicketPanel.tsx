@@ -5,7 +5,7 @@ import { classes } from 'tgui-core/react';
 import { useBackend } from '../../backend';
 import { TICKET_STATE } from './constants';
 import { toLocalTime } from './helpers';
-import { TicketInteractions } from './Ticket';
+import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { ManagerData } from './types';
 
 export function TicketPanel(props) {
@@ -71,6 +71,26 @@ export function TicketPanel(props) {
       g={0}
       className={classes(['TicketPanel', `Ticket--${type}`])}
     >
+      <Stack.Item>
+        <Section
+          title={
+            <Stack fill align="center">
+              <Stack.Item fontSize={1}>
+                <Button
+                  icon="arrow-left"
+                  onClick={() => setSelectedTicket(false)}
+                />
+              </Stack.Item>
+              <Stack.Item grow className="TicketPanel__Title">
+                Тикет #{number} - {initiator}
+              </Stack.Item>
+            </Stack>
+          }
+        >
+          {isAdmin && <TicketAdminInteractions ticketID={number} />}
+        </Section>
+      </Stack.Item>
+      {isAdmin && <Stack.Divider />}
       <Stack.Item grow position="relative">
         <Stack.Item
           className={classes([
@@ -82,19 +102,7 @@ export function TicketPanel(props) {
             К последним сообщениям
           </Button>
         </Stack.Item>
-        <Section
-          ref={sectionRef}
-          fill
-          scrollable
-          title={`Тикет #${number} - ${initiator}`}
-          buttons={
-            <Button
-              color="red"
-              icon="times"
-              onClick={() => setSelectedTicket(false)}
-            />
-          }
-        >
+        <Section ref={sectionRef} fill scrollable>
           <Stack vertical>
             {messages.map((message) => (
               <TicketMessage
@@ -121,13 +129,13 @@ export function TicketPanel(props) {
                     : 'Тикет закрыт!'
                 }
                 onEnter={(value) =>
-                  act('reply', { ticketNumber: number, message: value })
+                  act('reply', { ticketID: number, message: value })
                 }
               />
             </Stack.Item>
             {(isAdmin || isMentor) && (
               <Stack.Item>
-                <TicketInteractions ticketId={number} ticketState={state} />
+                <TicketInteractions ticketID={number} ticketState={state} />
               </Stack.Item>
             )}
           </Stack>

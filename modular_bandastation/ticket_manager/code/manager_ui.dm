@@ -31,7 +31,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 		return
 
 	var/client/user = ui.user.client
-	var/ticket_id = params["ticketNumber"]
+	var/ticket_id = params["ticketID"]
 	if(!ticket_id)
 		CRASH("Called ticket_manager ui_act() without a ticket number!")
 
@@ -57,6 +57,10 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 	// Admin/Mentor only
 	switch(action)
+		if("take")
+			link_admin_to_ticket(user, needed_ticket, TRUE)
+			return TRUE
+
 		if("reopen")
 			set_ticket_state(user, needed_ticket, TICKET_OPEN)
 			return TRUE
@@ -75,6 +79,47 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			return TRUE
 		*/
 
+	// Admin only
+	var/client/ticket_holder = needed_ticket.initiator_client.client
+	if(!ticket_holder)
+		to_chat(user, span_danger("Владелец тикета оффлайн!"))
+		return FALSE
+
+	switch(action)
+		if("follow")
+			if(!isobserver(user.mob))
+				return
+
+			user.admin_follow(ticket_holder.mob)
+			return TRUE
+
+		if("logs")
+			show_individual_logging_panel(ticket_holder.mob)
+			return TRUE
+
+		if("smite")
+			SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/admin_smite, ticket_holder.mob)
+			return TRUE
+
+		if("subtlepm")
+			SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/cmd_admin_subtle_message, ticket_holder.mob)
+			return TRUE
+
+		if("view_variables")
+			user.debug_variables(ticket_holder.mob)
+			return TRUE
+
+		if("traitor_panel")
+			if(!SSticker.HasRoundStarted())
+				tgui_alert(user, "Игра ещё не началась!")
+				return FALSE
+
+			SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/show_traitor_panel, ticket_holder.mob)
+			return TRUE
+
+		if("player_panel")
+			SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/show_player_panel, ticket_holder.mob)
+			return TRUE
 	return FALSE
 
 /datum/ticket_manager/ui_close(mob/user)

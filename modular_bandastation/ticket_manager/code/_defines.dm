@@ -13,4 +13,4 @@
 #define TICKET_RESOLVE_LINK(id) ("<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];resolve_ticket=1'>Закрыть</a>")
 #define TICKET_CLOSE_LINK(id) ("<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];close_ticket=1'>Решить</a>")
 
-#define TICKET_FULLMONTY(user, id) "[ADMIN_FULLMONTY_NONAME(user)] [TICKET_TAKE_LINK(id)] [TICKET_RESOLVE_LINK(id)] [TICKET_CLOSE_LINK(id)] [TICKET_OPEN_LINK(id, 'Открыть чат')]"
+#define TICKET_FULLMONTY(user, id) "[ADMIN_FULLMONTY_NONAME(user)] [TICKET_TAKE_LINK(id)] [TICKET_RESOLVE_LINK(id)] [TICKET_CLOSE_LINK(id)] [TICKET_OPEN_LINK(id, "Открыть чат")]"
