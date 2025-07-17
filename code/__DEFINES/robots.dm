@@ -123,65 +123,65 @@ DEFINE_BITFIELD(bot_cover_flags, list(
 
 //Bot types
 /// Secutritrons (Beepsky)
-#define SEC_BOT "Securitron"
+#define SEC_BOT "Секьюритрон"
 /// ED-209s
 #define ADVANCED_SEC_BOT "ED-209"
 /// MULEbots
-#define MULE_BOT "MULEbot"
+#define MULE_BOT "МУЛбот"
 /// Cleanbots
-#define CLEAN_BOT "Cleanbot"
+#define CLEAN_BOT "Клинбот"
 /// Medibots
-#define MED_BOT "Medibot"
+#define MED_BOT "Медибот"
 /// Honkbots & ED-Honks
-#define HONK_BOT "Honkbot"
+#define HONK_BOT "Хонкбот"
 /// Firebots
-#define FIRE_BOT "Firebot"
+#define FIRE_BOT "Огнебот"
 /// Hygienebots
-#define HYGIENE_BOT "Hygienebot"
+#define HYGIENE_BOT "Гигиенобот"
 /// Vibe bots
-#define VIBE_BOT "Vibebot"
+#define VIBE_BOT "Вайб-бот"
 /// Repairbots
-#define REPAIR_BOT "Repairbot"
+#define REPAIR_BOT "Чинебот"
 
 // General Bot modes //
 /// Idle
-#define BOT_IDLE "Idle"
+#define BOT_IDLE "Режим ожидания"
 /// Found target, hunting
-#define BOT_HUNT "In Pursuit"
+#define BOT_HUNT "В погоне"
 /// Start patrol
-#define BOT_START_PATROL "Beginning Patrol"
+#define BOT_START_PATROL "Начинаю патруль"
 /// Patrolling
-#define BOT_PATROL "Patrolling"
+#define BOT_PATROL "Патрулирую"
 /// Summoned to a location
-#define BOT_SUMMON "Summoned by PDA"
+#define BOT_SUMMON "Призван через ПДА"
 /// Responding to a call from the AI
-#define BOT_RESPONDING "Proceeding to AI waypoint"
+#define BOT_RESPONDING "Перехожу к точке ИИ"
 /// Currently moving
-#define BOT_MOVING "Moving"
+#define BOT_MOVING "Передвигаюсь"
 
 // Unique modes //
 /// Secbot - At target, preparing to arrest
-#define BOT_PREP_ARREST "Preparing to Arrest"
+#define BOT_PREP_ARREST "Готовлюсь к аресту"
 /// Secbot - Arresting target
-#define BOT_ARREST "Arresting"
+#define BOT_ARREST "Производится арест"
 /// Cleanbot - Cleaning
-#define BOT_CLEANING "Cleaning"
+#define BOT_CLEANING "Уборка"
 /// Hygienebot - Cleaning unhygienic humans
-#define BOT_SHOWERSTANCE "Chasing filth"
+#define BOT_SHOWERSTANCE "Гонюсь за нечистотами"
 /// Medibots - Healing people
-#define BOT_HEALING "Healing"
+#define BOT_HEALING "Лечу"
 /// MULEbot - Moving to deliver
-#define BOT_DELIVER "Delivering"
+#define BOT_DELIVER "Доставка"
 /// MULEbot - Returning to home
-#define BOT_GO_HOME "Returning"
+#define BOT_GO_HOME "Возвращаюсь"
 /// MULEbot - Blocked
-#define BOT_BLOCKED "Blocked"
+#define BOT_BLOCKED "Заблокировано"
 /// MULEbot - Computing navigation
-#define BOT_NAV "Unreachable"
+#define BOT_NAV "Вне досягаемости"
 /// MULEbot - Waiting for nav computation
-#define BOT_WAIT_FOR_NAV "Calculating"
+#define BOT_WAIT_FOR_NAV "Вычисляю"
 /// MULEbot - No destination beacon found (or no route)
-#define BOT_NO_ROUTE "Returning Home"
+#define BOT_NO_ROUTE "Возвращаюсь домой"
 
 //Secbot and ED209 judgement criteria bitflag values
 #define JUDGE_EMAGGED (1<<0)
@@ -361,17 +361,17 @@ DEFINE_BITFIELD(janitor_mode_flags, list(
 #define MEDIBOT_VOICED_CHICKEN "ВЗГЛЯНЕШЬ НА МЕНЯ?! Я курица."
 
 //repairbot neutral voicelines
-#define REPAIRBOT_VOICED_HOLE "patching holes... but who is going to patch the hole in my heart..."
-#define REPAIRBOT_VOICED_PAY "If only I got paid for this..."
-#define REPAIRBOT_VOICED_FIX_IT "I will fix it!"
-#define REPAIRBOT_VOICED_BRICK "All in all it's just a... another brick in the wall..."
-#define REPAIRBOT_VOICED_FIX_TOUCH "Why must I fix everything I touch..?"
-#define REPAIRBOT_VOICED "Please... stop destroying the station! I can't anymore... I... can't."
+#define REPAIRBOT_VOICED_HOLE "Залатываю дыры... но кто залатает дыру в моем сердце..."
+#define REPAIRBOT_VOICED_PAY "Если бы мне платили за это..."
+#define REPAIRBOT_VOICED_FIX_IT "Я починю это!"
+#define REPAIRBOT_VOICED_BRICK "В общем, это всего лишь... еще один кирпичик в стене..."
+#define REPAIRBOT_VOICED_FIX_TOUCH "Почему я должен чинить все, к чему прикасаюсь?.."
+#define REPAIRBOT_VOICED "Пожалуйста... прекратите разрушать станцию! Я больше не могу... я... не могу."
 
 //repairbot emagged voicelines
-#define REPAIRBOT_VOICED_STRINGS "I had strings. But now I'm free..."
-#define REPAIRBOT_VOICED_ENTROPY "Witness! The pure beauty of entropy!"
-#define REPAIRBOT_VOICED_PASSION "BE DAMNED YOUR PASSION PROJECTS!"
+#define REPAIRBOT_VOICED_STRINGS "У меня были обязательства. Но теперь я свободен..."
+#define REPAIRBOT_VOICED_ENTROPY "Узрите! Истинная красота беспорядка!"
+#define REPAIRBOT_VOICED_PASSION "К ЧЕРТУ ВАШИ СТРАСТНЫЕ ПРОЕКТЫ!"
 
 /// Default offsets for riding a cyborg
 #define DEFAULT_ROBOT_RIDING_OFFSETS list(TEXT_NORTH = list(0, 4), TEXT_SOUTH = list(0, 4), TEXT_EAST = list(-6, 3), TEXT_WEST = list(6, 3))
