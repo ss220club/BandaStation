@@ -248,7 +248,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>Раунд закончился."))))
 	log_game("Раунд закончился.")
 	for(var/channel_tag in CONFIG_GET(str_list/channel_announce_end_game))
-		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Раунд [GLOB.round_id]" : "Раунд имел"] закончился."), channel_tag)
+		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Раунд [GLOB.round_id]" : "Раунд только что"] закончился."), channel_tag)
 	send2adminchat("Сервер", "Раунд закончился.")
 
 	if(length(CONFIG_GET(keyed_list/cross_server)))
