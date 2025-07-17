@@ -1,4 +1,4 @@
-import { Antagonist, Category } from '../base';
+import { type Antagonist, Category } from '../base';
 
 export const WIZARD_MECHANICAL_DESCRIPTION = `
       Выбирайте из множества мощных заклинаний, чтобы вызвать хаос

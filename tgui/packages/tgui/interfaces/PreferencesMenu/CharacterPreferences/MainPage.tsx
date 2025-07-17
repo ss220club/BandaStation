@@ -19,15 +19,15 @@ import { Preference } from '../components/Preference';
 import { RandomizationButton } from '../components/RandomizationButton';
 import { features } from '../preferences/features';
 import {
-  FeatureChoicedServerData,
+  type FeatureChoicedServerData,
   FeatureValueInput,
 } from '../preferences/features/base';
 import { Gender, GENDERS } from '../preferences/gender';
 import {
   createSetPreference,
-  PreferencesMenuData,
+  type PreferencesMenuData,
   RandomSetting,
-  ServerData,
+  type ServerData,
 } from '../types';
 import { useRandomToggleState } from '../useRandomToggleState';
 import { useServerPrefs } from '../useServerPrefs';
@@ -110,8 +110,8 @@ function GenderButton(props: GenderButtonProps) {
                 <Button
                   key={gender}
                   selected={gender === props.gender}
-                  icon={GENDERS[gender].icon}
-                  tooltip={GENDERS[gender].text}
+                  icon={GENDERS[gender]?.icon || 'question'}
+                  tooltip={GENDERS[gender]?.text || 'Кто ты, воин?'}
                   tooltipPosition="top"
                   onClick={() => {
                     props.handleSetGender(gender);
@@ -125,7 +125,7 @@ function GenderButton(props: GenderButtonProps) {
     >
       <div>
         <Button
-          icon={GENDERS[props.gender].icon}
+          icon={GENDERS[props.gender]?.icon || 'question'}
           tooltip="Пол"
           tooltipPosition="top"
         />
@@ -387,7 +387,7 @@ export function MainPage(props: MainPageProps) {
   const serverData = useServerPrefs();
 
   const currentSpeciesData =
-    serverData && serverData.species[data.character_preferences.misc.species];
+    serverData?.species[data.character_preferences.misc.species];
 
   const contextualPreferences =
     data.character_preferences.secondary_features || [];
@@ -421,7 +421,7 @@ export function MainPage(props: MainPageProps) {
   } else {
     // We can't use random_name/is_accessible because the
     // server doesn't know whether the random toggle is on.
-    delete nonContextualPreferences['random_name'];
+    delete nonContextualPreferences.random_name;
   }
 
   const Character = (
