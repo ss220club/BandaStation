@@ -136,3 +136,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/ussp, 32)
 	desc = "Сложенный флаг Синдиката."
 	icon_state = "folded_syndi"
 	sign_path = /obj/structure/sign/flag/syndicate
+
+/obj/item/sign/flag/ussp
+	name = "folded flag of the USSP"
+	desc = "Сложенный флаг Союза Советских Социалистических Планет."
+	icon_state = "folded_ussp"
+	sign_path = /obj/structure/sign/flag/ussp

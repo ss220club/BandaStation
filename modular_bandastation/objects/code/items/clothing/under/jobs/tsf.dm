@@ -46,6 +46,6 @@
 
 /obj/item/clothing/under/rank/tsf/formal_w_skirt
 	name = "federate formal white skirt"
-	desc = "Ослепительно белая деловая юбка официальных лиц Транс-Солнечной Федерации. "
+	desc = "Ослепительно белая деловая юбка официальных лиц Транс-Солнечной Федерации."
 	icon_state = "tsf_formal_wskirt"
 
