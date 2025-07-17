@@ -24653,12 +24653,12 @@ prepositional = "мёртвой мыши"
 gender = "female"
 
 ["Tom"]
-nominative = "том"
-genitive = "тома"
-dative = "тому"
-accusative = "тома"
-instrumental = "томом"
-prepositional = "томе"
+nominative = "Том"
+genitive = "Тома"
+dative = "Тому"
+accusative = "Тома"
+instrumental = "Томом"
+prepositional = "Томе"
 gender = "male"
 
 ["feral regal rat"]
