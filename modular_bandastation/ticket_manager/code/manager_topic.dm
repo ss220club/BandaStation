@@ -36,6 +36,14 @@
 	if(!check_rights_for(user, R_ADMIN))
 		return
 
+	if(href_list["take_ticket"])
+		link_admin_to_ticket(user, needed_ticket, TRUE)
+		return
+
+	if(needed_ticket.state != TICKET_OPEN)
+		to_chat(user, span_danger("Тикет уже закрыт или решён!"))
+		return
+
 	if(href_list["resolve_ticket"])
 		set_ticket_state(user, needed_ticket, TICKET_RESOLVED)
 		return

@@ -12,22 +12,34 @@
 		return FALSE
 	return TRUE
 
-/datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket)
+/datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket, update_ui = FALSE)
 	if(!admin || !needed_ticket)
 		CRASH("Tryed to link admin to ticket with invalid arguments!")
 
+	// A LADDER
 	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN))
 		needed_ticket.linked_admin = admin.persistent_client
+
+		if(update_ui)
+			to_chat(needed_ticket.initiator_client.client,
+				custom_boxed_message("green_box", span_adminhelp("[admin.key] взял ваш тикет на рассмотрение.")),
+				MESSAGE_TYPE_ADMINPM)
+			SStgui.update_uis(src)
 
 /datum/ticket_manager/proc/add_ticket_message(client/sender, datum/help_ticket/needed_ticket, message)
 	if(!sender || !message || !needed_ticket)
 		CRASH("Invalid parameters passed to ticket_manager add_ticket_message()!")
 
-	var/client/admin = needed_ticket.linked_admin.client
-	if(admin.key == sender.key && !needed_ticket.admin_replied)
+	var/client/initiator = needed_ticket.initiator_client.client
+	var/client/linked_admin = needed_ticket.linked_admin.client
+	if(sender.key != initiator.key && !needed_ticket.admin_replied)
 		needed_ticket.admin_replied = TRUE
 
-	send_chat_message(admin, needed_ticket, message)
+	if(sender == initiator || sender != linked_admin)
+		send_chat_message_to_admin(initiator, needed_ticket, message)
+	else
+		send_chat_message_to_player(sender, needed_ticket, message)
+
 	needed_ticket.messages += list(list(
 		"sender" = sender.key,
 		"message" = message,
@@ -84,36 +96,39 @@
 	SStgui.update_uis(src)
 */
 
-/datum/ticket_manager/proc/send_chat_message(client/admin, datum/help_ticket/needed_ticket, message)
+/// Send admin ticket reply to player, if he's online
+/datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, message)
 	var/id = needed_ticket.id
-	var/client/initiator = needed_ticket.initiator_client.client
-	if(initiator)
-		window_flash(initiator, ignorepref = TRUE)
-		SEND_SOUND(initiator, sound('sound/effects/adminhelp.ogg'))
-		to_chat(initiator, fieldset_block(
-			span_adminhelp("Ответ на тикет [TICKET_OPEN_LINK(id, "#[id]")]"),
-			"[TICKET_REPLY_LINK(id, span_bold(admin.key))]\n\n\
+	var/title = span_adminhelp("Ответ на тикет #[id]")
+	if(needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM)
+		title = span_adminhelp("Личное сообщение от администратора")
+
+	var/client/player = needed_ticket.initiator_client.client
+	if(player)
+		SEND_SOUND(player, sound('sound/effects/adminhelp.ogg'))
+		window_flash(player, ignorepref = TRUE)
+		to_chat(player, fieldset_block(
+			title, "[TICKET_REPLY_LINK(id, span_bold(admin.key))]\n\n\
 			[message]\n\n\
-			[span_adminhelp("Нажмите на ник, чтобы ответить. Либо [TICKET_REPLY_LINK(id, "откройте чат")].")]",
+			[span_adminhelp("Нажмите на ник, чтобы ответить. Либо [TICKET_OPEN_LINK(id, "откройте чат")].")]",
 			"boxed_message red_box"),
 			MESSAGE_TYPE_ADMINPM)
 
-	to_chat(admin, fieldset_block(
-			span_adminhelp("Ответ на тикет [TICKET_OPEN_LINK(id, "#[id]")]"),
-			"[TICKET_REPLY_LINK(id, span_bold(admin.key))]\n\n\
+/// Send player ticket reply to admin, if he's online
+/datum/ticket_manager/proc/send_chat_message_to_admin(client/player, datum/help_ticket/needed_ticket, message)
+	var/id = needed_ticket.id
+	var/title = span_adminhelp("Ответ на тикет #[id]")
+	if(needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM)
+		title = span_adminhelp("Ответ на личное сообщение")
+
+	var/client/admin = needed_ticket.linked_admin.client
+	if(admin)
+		if(admin.prefs.toggles & SOUND_ADMINHELP)
+			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
+		window_flash(admin, ignorepref = TRUE)
+		to_chat(admin, fieldset_block(
+			title, "[TICKET_REPLY_LINK(id, span_bold(player.key))]\n\n\
 			[message]\n\n\
-			[TICKET_FULLMONTY(initiator.mob, id)]",
+			[TICKET_FULLMONTY(player.mob, id)]",
 			"boxed_message red_box"),
 			MESSAGE_TYPE_ADMINPM)
-
-/// Notifies the player about new admin pm ticket.
-/datum/ticket_manager/proc/send_message_pm(client/receiver, client/admin, message, ticket_type)
-	var/ticket_id = receiver.persistent_client.current_help_ticket.id
-	var/ready_message = fieldset_block(
-		span_adminhelp("Приватное сообщение от администратора"),
-		"[TICKET_REPLY_LINK(ticket_id, span_bold(admin.key))]\n[message]\n\n\
-		[span_adminhelp("Нажмите на ник, чтобы ответить. Либо [TICKET_REPLY_LINK(ticket_id, "откройте чат")].")]",
-		"boxed_message red_box")
-	window_flash(receiver, ignorepref = TRUE)
-	SEND_SOUND(receiver, sound('sound/effects/adminhelp.ogg'))
-	to_chat(receiver, ready_message, MESSAGE_TYPE_ADMINPM)

@@ -5,6 +5,8 @@
 	var/state = TICKET_OPEN
 	/// Ticket type. Used for sorting Admin/Mentor tickets
 	var/ticket_type
+	/// Hidden type. Used for chat messages
+	var/ticket_type_hidden = TICKET_TYPE_HIDDEN_TICKET
 	/// The time at which the ticket was opened
 	var/opened_at
 	/// The time at which the ticket was closed
@@ -19,10 +21,10 @@
 	var/datum/persistent_client/linked_admin
 	/// Collection of all ticket messages
 	var/list/messages
-	/// Has the player replied to this ticket yet?
-	var/player_replied = FALSE
 	/// Has the admin replied to this ticket yet?
 	var/admin_replied = FALSE
+	/// Has the player replied to this ticket yet?
+	var/initiator_replied = FALSE
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
 
@@ -38,7 +40,7 @@
 	initiator_key = creator.key
 	ticket_type = new_type
 	messages = list(list(
-		"sender" = initiator_key,
+		"sender" = admin ? admin.key : initiator_key,
 		"message" = message,
 		"time" = opened_at,
 	))
@@ -52,14 +54,17 @@
 	SStgui.update_uis(GLOB.ticket_manager)
 
 	if(admin)
-		GLOB.ticket_manager.send_message_pm(creator, admin, message, ticket_type)
+		admin_replied = TRUE
+		linked_admin = admin.persistent_client
+		ticket_type_hidden = TICKET_TYPE_HIDDEN_PM
+		GLOB.ticket_manager.send_chat_message_to_player(admin, src, message)
 	else
 		send_creation_message(creator, message, ticket_type)
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
 /datum/help_ticket/proc/send_creation_message(client/creator, message, ticket_type)
-	var/title = "Тикет [TICKET_OPEN_LINK(id, "#[id]")]"
-	var/body = "[TICKET_REPLY_LINK(id, span_bold(initiator))]\n[message]"
+	var/title = "Тикет #[id]"
+	var/body = "[TICKET_REPLY_LINK(id, span_bold(initiator))]\n\n[message]"
 	for(var/client/admin in GLOB.admins)
 		if(admin.prefs.toggles & SOUND_ADMINHELP)
 			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))

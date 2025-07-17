@@ -101,7 +101,8 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			"initiatorKey" = ticket.initiator_key,
 			"openedTime" = ticket.opened_at,
 			"closedTime" = ticket.closed_at,
-			"replied" = ticket.player_replied,
+			"adminReplied" = ticket.admin_replied,
+			"initiatorReplied" = ticket.initiator_replied,
 			"messages" = ticket.messages,
 		))
 
