@@ -13,12 +13,16 @@
 	var/initiator
 	/// Initiator key. More stable
 	var/initiator_key
-	/// Semi-misnomer, it's the person who ahelped/was bwoinked
+	/// It's the person who ahelped/was bwoinked
 	var/datum/persistent_client/initiator_client
+	/// It's admin who linked to current ticket
+	var/datum/persistent_client/linked_admin
 	/// Collection of all ticket messages
 	var/list/messages
 	/// Has the player replied to this ticket yet?
 	var/player_replied = FALSE
+	/// Has the admin replied to this ticket yet?
+	var/admin_replied = FALSE
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
 
@@ -48,12 +52,12 @@
 	SStgui.update_uis(GLOB.ticket_manager)
 
 	if(admin)
-		GLOB.ticket_manager.notify_player_pm(creator, admin, message, ticket_type)
+		GLOB.ticket_manager.send_message_pm(creator, admin, message, ticket_type)
 	else
-		notify_admins(creator, message, ticket_type)
+		send_creation_message(creator, message, ticket_type)
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
-/datum/help_ticket/proc/notify_admins(client/creator, message, ticket_type)
+/datum/help_ticket/proc/send_creation_message(client/creator, message, ticket_type)
 	var/title = "Тикет [TICKET_OPEN_LINK(id, "#[id]")]"
 	var/body = "[TICKET_REPLY_LINK(id, span_bold(initiator))]\n[message]"
 	for(var/client/admin in GLOB.admins)
@@ -61,6 +65,6 @@
 			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
 
 		window_flash(admin, ignorepref = TRUE)
-		to_chat(admin, fieldset_block(span_adminhelp(title), "[body]\n\n[ADMIN_FULLMONTY_NONAME(creator.mob)]", "boxed_message red_box"), MESSAGE_TYPE_ADMINPM)
+		to_chat(admin, fieldset_block(span_adminhelp(title), "[body]\n\n[TICKET_FULLMONTY(creator.mob, id)]", "boxed_message red_box"), MESSAGE_TYPE_ADMINPM)
 
 	to_chat(creator, custom_boxed_message("green_box", "[title] был создан! Ожидайте ответ."), MESSAGE_TYPE_ADMINPM)

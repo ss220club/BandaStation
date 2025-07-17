@@ -1,25 +1,47 @@
-/datum/ticket_manager/proc/add_ticket_message(ticket_id, sender, message)
-	if(!sender || !message)
+/datum/ticket_manager/proc/can_send_message(client/user, datum/help_ticket/user_ticket, datum/help_ticket/needed_ticket)
+	if(user_ticket && (user_ticket.id != needed_ticket.id))
+		to_chat(user, span_danger("Создатель этого тикета, уже имеет другой тикет, ответ в выбранный тикет невозможен!"))
+		return FALSE
+
+	if(needed_ticket.state != TICKET_OPEN)
+		to_chat(user, span_danger("Этот тикет уже закрыт! Создайте новый при необходимости."))
+		return FALSE
+
+	if((!needed_ticket.admin_replied || !needed_ticket.linked_admin) && !check_rights_for(user, R_ADMIN))
+		to_chat(user, span_danger("На ваш тикет ещё не ответил ни один администратор! Ожидайте ответа."))
+		return FALSE
+	return TRUE
+
+/datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket)
+	if(!admin || !needed_ticket)
+		CRASH("Tryed to link admin to ticket with invalid arguments!")
+
+	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN))
+		needed_ticket.linked_admin = admin.persistent_client
+
+/datum/ticket_manager/proc/add_ticket_message(client/sender, datum/help_ticket/needed_ticket, message)
+	if(!sender || !message || !needed_ticket)
 		CRASH("Invalid parameters passed to ticket_manager add_ticket_message()!")
 
-	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
-	if(!needed_ticket)
-		CRASH("Ticket with id [ticket_id] not found in all tickets!")
+	var/client/admin = needed_ticket.linked_admin.client
+	if(admin.key == sender.key && !needed_ticket.admin_replied)
+		needed_ticket.admin_replied = TRUE
 
+	send_chat_message(admin, needed_ticket, message)
 	needed_ticket.messages += list(list(
-		"sender" = sender,
+		"sender" = sender.key,
 		"message" = message,
 		"time" = time_stamp(NONE),
 	))
 	SStgui.update_uis(src)
 
-/datum/ticket_manager/proc/set_ticket_state(var/client/admin, ticket_id, new_state)
-	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
-	if(!needed_ticket)
-		CRASH("Ticket with id [ticket_id] not found in all tickets!")
+/datum/ticket_manager/proc/set_ticket_state(client/admin, datum/help_ticket/needed_ticket, new_state)
+	if(!admin || !needed_ticket || isnull(new_state))
+		CRASH("Invalid parameters passed to ticket_manager set_ticket_state()!")
 
 	var/user_message
 	var/admin_message
+	var/ticket_id = needed_ticket.id
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
 	if(new_state != TICKET_OPEN)
 		if(initiator.current_help_ticket != needed_ticket)
@@ -62,13 +84,35 @@
 	SStgui.update_uis(src)
 */
 
+/datum/ticket_manager/proc/send_chat_message(client/admin, datum/help_ticket/needed_ticket, message)
+	var/id = needed_ticket.id
+	var/client/initiator = needed_ticket.initiator_client.client
+	if(initiator)
+		window_flash(initiator, ignorepref = TRUE)
+		SEND_SOUND(initiator, sound('sound/effects/adminhelp.ogg'))
+		to_chat(initiator, fieldset_block(
+			span_adminhelp("Ответ на тикет [TICKET_OPEN_LINK(id, "#[id]")]"),
+			"[TICKET_REPLY_LINK(id, span_bold(admin.key))]\n\n\
+			[message]\n\n\
+			[span_adminhelp("Нажмите на ник, чтобы ответить. Либо [TICKET_REPLY_LINK(id, "откройте чат")].")]",
+			"boxed_message red_box"),
+			MESSAGE_TYPE_ADMINPM)
+
+	to_chat(admin, fieldset_block(
+			span_adminhelp("Ответ на тикет [TICKET_OPEN_LINK(id, "#[id]")]"),
+			"[TICKET_REPLY_LINK(id, span_bold(admin.key))]\n\n\
+			[message]\n\n\
+			[TICKET_FULLMONTY(initiator.mob, id)]",
+			"boxed_message red_box"),
+			MESSAGE_TYPE_ADMINPM)
+
 /// Notifies the player about new admin pm ticket.
-/datum/ticket_manager/proc/notify_player_pm(client/receiver, client/admin, message, ticket_type)
+/datum/ticket_manager/proc/send_message_pm(client/receiver, client/admin, message, ticket_type)
 	var/ticket_id = receiver.persistent_client.current_help_ticket.id
 	var/ready_message = fieldset_block(
 		span_adminhelp("Приватное сообщение от администратора"),
 		"[TICKET_REPLY_LINK(ticket_id, span_bold(admin.key))]\n[message]\n\n\
-		[span_adminhelp("Нажмите на имя администратора, чтобы ответить. Либо [TICKET_REPLY_LINK(ticket_id, "откройте чат")].")]",
+		[span_adminhelp("Нажмите на ник, чтобы ответить. Либо [TICKET_REPLY_LINK(ticket_id, "откройте чат")].")]",
 		"boxed_message red_box")
 	window_flash(receiver, ignorepref = TRUE)
 	SEND_SOUND(receiver, sound('sound/effects/adminhelp.ogg'))

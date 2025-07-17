@@ -31,17 +31,25 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 		return
 
 	var/client/user = ui.user.client
-	var/ticket_number = params["ticketNumber"]
-	if(!ticket_number)
+	var/ticket_id = params["ticketNumber"]
+	if(!ticket_id)
 		CRASH("Called ticket_manager ui_act() without a ticket number!")
+
+	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
+	if(!needed_ticket)
+		CRASH("Requested ticket not found in all tickets list!")
 
 	// Can be used by anyone
 	switch(action)
 		if("reply")
+			if(!can_send_message(user, user.persistent_client.current_help_ticket, needed_ticket))
+				return FALSE
+
 			if(!params["message"])
 				return FALSE
 
-			add_ticket_message(ticket_number, user.key, params["message"])
+			link_admin_to_ticket(user, needed_ticket)
+			add_ticket_message(user, needed_ticket, params["message"])
 			return TRUE
 
 	if(!check_rights(R_ADMIN)) // Check for mentor rights after implementing mentors
@@ -50,15 +58,15 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	// Admin/Mentor only
 	switch(action)
 		if("reopen")
-			set_ticket_state(user, ticket_number, TICKET_OPEN)
+			set_ticket_state(user, needed_ticket, TICKET_OPEN)
 			return TRUE
 
 		if("close")
-			set_ticket_state(user, ticket_number, TICKET_CLOSED)
+			set_ticket_state(user, needed_ticket, TICKET_CLOSED)
 			return TRUE
 
 		if("resolve")
-			set_ticket_state(user, ticket_number, TICKET_RESOLVED)
+			set_ticket_state(user, needed_ticket, TICKET_RESOLVED)
 			return TRUE
 
 		/* NEEDED MENTOR SYSTEM
