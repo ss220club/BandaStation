@@ -73,6 +73,7 @@ export function TicketPanel(props) {
     >
       <Stack.Item>
         <Section
+          fitted={!isAdmin}
           title={
             <Stack fill align="center">
               <Stack.Item fontSize={1}>
@@ -87,10 +88,10 @@ export function TicketPanel(props) {
             </Stack>
           }
         >
-          {isAdmin && <TicketAdminInteractions ticketID={number} />}
+          {!!isAdmin && <TicketAdminInteractions ticketID={number} />}
         </Section>
       </Stack.Item>
-      {isAdmin && <Stack.Divider />}
+      {!!isAdmin && <Stack.Divider />}
       <Stack.Item grow position="relative">
         <Stack.Item
           className={classes([

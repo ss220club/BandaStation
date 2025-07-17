@@ -22,6 +22,7 @@ export function Ticket(
 
   return (
     <Stack
+      g={0.5}
       vertical
       className={classes(['Ticket', type && `Ticket--${type}`])}
       onClick={() => setSelectedTicket(number)}
@@ -84,6 +85,7 @@ export function TicketInteractions(props: {
               Закрыть
             </Button>
           </Stack.Item>
+          {/*
           <Stack.Item>
             <Button
               icon="exchange"
@@ -91,6 +93,7 @@ export function TicketInteractions(props: {
               onClick={() => act('convert', { ticketID: ticketID })}
             />
           </Stack.Item>
+          */}
         </>
       )}
     </Stack>

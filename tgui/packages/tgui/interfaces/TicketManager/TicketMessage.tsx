@@ -36,7 +36,7 @@ export function TicketMessage(props) {
       >
         <div className="TicketMessage__Sender">{sender}</div>
         <div className="TicketMessage__Content">
-          <div className="ticket-message">{message}</div>
+          {message}
           <div className="ticket-time">{toLocalTime(time)}</div>
         </div>
       </Stack.Item>

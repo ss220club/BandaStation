@@ -29,6 +29,10 @@
     --ticket-type-color: var(--color-blue);
   }
 
+  &__Header {
+    line-height: 1.25rem;
+  }
+
   &__Id,
   &__Initiator {
     align-self: center;
@@ -42,9 +46,16 @@
     color: var(--ticket-type-color);
   }
 
+  &__Initiator {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   &__TimeStamp {
     font-size: 0.8em;
     color: var(--color-text-translucent);
+    transform: translateY(-0.33em);
   }
 
   &__FirstMessage {
@@ -58,6 +69,7 @@
 }
 
 .TicketMessage {
+  position: relative;
   min-width: 15%;
   max-width: 75%;
   padding: 0.5rem;
@@ -69,19 +81,12 @@
     font-weight: bold;
   }
 
-  &__Content {
-    display: flex;
-
-    .ticket-time {
-      flex: 1;
-      display: inline-flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      font-size: 0.8em;
-      margin-left: 0.5em;
-      color: var(--color-text-translucent);
-      transform: translateX(0.5rem);
-    }
+  .ticket-time {
+    float: right;
+    font-size: 0.8em;
+    margin: 0.33em 0 0 0.5em;
+    color: var(--color-text-translucent);
+    transform: translateX(0.33rem);
   }
 
   &--sendedMessage {
@@ -93,18 +98,10 @@
     align-items: center;
     text-align: center;
     margin-bottom: 0.75em;
-    color: hsl(from var(--color-bad) h s calc(l + 7.5));
+    color: var(--color-bad);
 
     &--connected {
-      color: hsl(from var(--color-good) h s calc(l + 7.5));
-    }
-
-    .ticket-time {
-      opacity: 0.75;
-      position: absolute;
-      right: 0.5em;
-      font-size: 0.75em;
-      transform: translateY(75%);
+      color: hsl(from var(--color-good) h s calc(l + 5));
     }
 
     &:before,
@@ -114,6 +111,14 @@
       min-width: 3.25em;
       height: var(--border-thickness-tiny);
       background-color: currentColor;
+    }
+
+    .ticket-time {
+      opacity: 0.75;
+      position: absolute;
+      right: 0.5em;
+      font-size: 0.75em;
+      transform: translateY(75%);
     }
   }
 }
