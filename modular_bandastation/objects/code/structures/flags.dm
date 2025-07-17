@@ -74,8 +74,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/syndicate, 32)
 	desc = "Официальный государственный флаг Союза Советских Социалистических Планет."
 	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
 	icon_state = "flag_ussp"
+	foldable_type = /obj/item/sign/flag/ussp
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/ussp, 32)
+
 // MARK: Items
 /obj/item/sign/flag
 	name = "folded flag of the IT Division"
