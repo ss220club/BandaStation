@@ -69,6 +69,15 @@
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/syndicate, 32)
 
+/obj/structure/sign/flag/ussp
+	name = "flag of the Union of Soviet Socialist Planets"
+	desc = "Официальный государственный флаг Союза Советских Социалистических Планет."
+	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
+	icon_state = "flag_ussp"
+	foldable_type = /obj/item/sign/flag/ussp
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/ussp, 32)
+
 // MARK: Items
 /obj/item/sign/flag
 	name = "folded flag of the IT Division"
@@ -129,3 +138,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/syndicate, 32)
 	desc = "Сложенный флаг Синдиката."
 	icon_state = "folded_syndi"
 	sign_path = /obj/structure/sign/flag/syndicate
+
+/obj/item/sign/flag/ussp
+	name = "folded flag of the USSP"
+	desc = "Сложенный флаг Союза Советских Социалистических Планет."
+	icon_state = "folded_ussp"
+	sign_path = /obj/structure/sign/flag/ussp
