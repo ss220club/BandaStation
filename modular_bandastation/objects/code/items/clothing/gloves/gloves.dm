@@ -40,6 +40,6 @@
 /obj/item/clothing/gloves/etamin_gloves
 	name = "Gold On Black gloves"
 	desc = "Качественные перчатки с золотой вставкой 999 пробы."
-	icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/obj/clothing/gloves/gloves.dmi'
-	worn_icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/mob/clothing/gloves/gloves.dmi'
+	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/gloves.dmi'
 	icon_state = "ei_gloves"

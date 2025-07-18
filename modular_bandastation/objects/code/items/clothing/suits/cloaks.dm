@@ -265,7 +265,7 @@
 
 /obj/item/clothing/head/hooded/etamin_cloak
 	name = "Gold On Black cloak's hood"
-	desc = "Капюшон плаща от Etamin ind."
+	desc = "Капюшон плаща от Etamin Industry."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
 	icon_state = "ei_cloak"
