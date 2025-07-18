@@ -72,4 +72,4 @@
 		window_flash(admin, ignorepref = TRUE)
 		to_chat(admin, fieldset_block(span_adminhelp(title), "[body]\n\n[TICKET_FULLMONTY(creator.mob, id)]", "boxed_message red_box"), MESSAGE_TYPE_ADMINPM)
 
-	to_chat(creator, custom_boxed_message("green_box", "[title] был создан! Ожидайте ответ."), MESSAGE_TYPE_ADMINPM)
+	to_chat(creator, custom_boxed_message("green_box", "[title] был создан! Ожидайте ответ. Вы можете открыть тикет нажав F1"), MESSAGE_TYPE_ADMINPM)

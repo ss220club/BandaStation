@@ -120,7 +120,7 @@
 	if(initiator.client)
 		to_chat(initiator.client, custom_boxed_message("green_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
 	message_admins(span_admin(admin_message))
-	log_admin_private(span_admin(admin_message))
+	log_admin_private(admin_message)
 
 /* NEEDED MENTOR SYSTEM
 /datum/ticket_manager/proc/convert_ticket(ticket_id)
@@ -165,37 +165,81 @@
 /// Send admin ticket reply to player, if he's online
 /datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, message)
 	var/id = needed_ticket.id
+	var/is_pm = needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM
 	var/title = span_adminhelp("Ответ на тикет #[id]")
-	if(needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM)
+	if(is_pm)
 		title = span_adminhelp("Личное сообщение от администратора")
 
 	var/client/player = needed_ticket.initiator_client.client
+	var/admin_key = key_name(admin, TRUE, FALSE)
+	var/player_key = needed_ticket.initiator_client.ckey
 	if(player)
+		player_key = key_name(player, TRUE, FALSE)
 		SEND_SOUND(player, sound('sound/effects/adminhelp.ogg'))
 		window_flash(player, ignorepref = TRUE)
 		to_chat(player, fieldset_block(
-			title, "[TICKET_REPLY_LINK(id, span_adminsay(admin.key))]\n\n\
+			title, "[TICKET_REPLY_LINK(id, admin.key)]\n\n\
 			[span_adminsay(message)]\n\n\
 			[span_adminsay("Нажмите на ник, чтобы ответить. Либо [TICKET_OPEN_LINK(id, "откройте чат")].")]",
 			"boxed_message red_box"),
 			MESSAGE_TYPE_ADMINPM)
 
+	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [admin_key] → [player_key]:"
+	var/log_message = "[sanitize_text(trim(message))]"
+	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
+	log_admin_private("[log_prefix] [log_message]")
+
 /// Send player ticket reply to admin, if he's online
 /datum/ticket_manager/proc/send_chat_message_to_admin(client/player, datum/help_ticket/needed_ticket, message)
 	var/id = needed_ticket.id
+	var/is_pm = needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM
 	var/title = span_adminhelp("Ответ на тикет #[id]")
-	if(needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM)
+	if(is_pm)
 		title = span_adminhelp("Ответ на личное сообщение")
 
-	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
 	var/client/admin = needed_ticket.linked_admin.client
+	var/admin_key = needed_ticket.linked_admin.ckey
+	var/player_key = key_name(player, TRUE, FALSE)
 	if(admin)
+		admin_key = key_name(admin, TRUE, FALSE)
 		if(admin.prefs.toggles & SOUND_ADMINHELP)
 			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
 		window_flash(admin, ignorepref = TRUE)
 		to_chat(admin, fieldset_block(
-			title, "[TICKET_REPLY_LINK(id, span_adminsay(player.key))]\n\n\
+			title, "[TICKET_REPLY_LINK(id, player.key)]\n\n\
 			[span_adminsay(message)]\n\n\
 			[TICKET_FULLMONTY(player.mob, id)]",
 			"boxed_message red_box"),
 			MESSAGE_TYPE_ADMINPM)
+
+	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [player_key] → [admin_key]:"
+	var/log_message = "[sanitize_text(trim(message))]"
+	for(var/client/A in GLOB.admins)
+		if(A.key == admin.key)
+			continue
+		to_chat(A, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
+
+	log_admin_private("[log_prefix] [log_message]")
+	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
+
+/proc/admin_ticket_log(thing, message, player_message, log_in_blackbox)
+	var/client/user_client
+	var/mob/user = thing
+	if(istype(user))
+		user_client = user.client
+	else
+		user_client = thing
+
+	var/datum/help_ticket/user_ticket = user_client.persistent_client.current_help_ticket
+	if(istype(user_client) && user_ticket)
+		user_ticket.messages += list(list(
+			"sender" = "ADMIN_TICKET_LOG",
+			"message" = message,
+			"time" = time_stamp(NONE),
+		))
+
+	if(isnull(player_message))
+		return
+
+	var/client/admin = user_ticket.linked_admin.client
+	GLOB.ticket_manager.send_chat_message_to_player(admin || "", user_ticket, player_message)

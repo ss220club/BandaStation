@@ -23,7 +23,7 @@
 
 	GLOB.help_ui_handler.ui_interact(mob)
 
-/client/cmd_admin_pm(client/whom, message)
+/client/cmd_admin_pm(whom, message)
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src, span_danger("Ошибка: Вы не можете использовать ЛС (мут)."), MESSAGE_TYPE_ADMINPM)
 		return
@@ -34,25 +34,32 @@
 		stack_trace("[key_name(src)] tried to send an admin PM without a holder.")
 		return
 
-	if(!whom)
+	var/client/subject
+	if(istype(whom, /client))
+		subject = whom
+	else
+		subject = disambiguate_client(whom)
+
+	if(!subject || !istype(subject, /client))
 		to_chat(src, span_danger("Клиент отключился пока вы писали сообщение..."), MESSAGE_TYPE_ADMINPM)
 		return
 
-	if(whom.persistent_client.current_help_ticket)
-		var/ticket_id = whom.persistent_client.current_help_ticket.id
-		to_chat(src, span_danger(
-			"У него уже есть открытый тикет. Вы можете написать ему \
-			<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[ticket_id];open_ticket=1'>тут</a>."),
-			MESSAGE_TYPE_ADMINPM)
+	var/datum/help_ticket/subject_ticket = subject.persistent_client.current_help_ticket
+	if(subject_ticket)
+		ticket_to_open = subject_ticket.id
+		GLOB.ticket_manager.ui_interact(mob)
 		return
 
-	var/message_to_send = tgui_input_text(src, "Введите сообщения для [whom.ckey]", "Личное сообщение", multiline = TRUE, encode = FALSE, ui_state = ADMIN_STATE(R_ADMIN))
+	var/message_to_send = tgui_input_text(src, "Введите сообщения для [subject.ckey]", "Личное сообщение", multiline = TRUE, encode = FALSE, ui_state = ADMIN_STATE(R_ADMIN))
 	if(!message_to_send)
 		return
 
-	new /datum/help_ticket(whom, src, message_to_send, TICKET_TYPE_ADMIN)
+	if(subject_ticket)
+		to_chat(src, span_danger("Тикет уже открыт!"), MESSAGE_TYPE_ADMINPM)
+		return
 
-	var/datum/help_ticket/ticket_id = whom.persistent_client.current_help_ticket.id
+	new /datum/help_ticket(subject, src, message_to_send, TICKET_TYPE_ADMIN)
+	subject_ticket = subject.persistent_client.current_help_ticket // update
 	var/log_body = "[key_name(src)] написал личное сообщение [key_name_admin(whom)]."
-	message_admins("[log_body] Создан тикет [TICKET_OPEN_LINK(ticket_id, "#[ticket_id]")].")
+	message_admins("[log_body] Создан тикет [TICKET_OPEN_LINK(subject_ticket.id, "#[subject_ticket.id]")].")
 	log_admin(log_body)

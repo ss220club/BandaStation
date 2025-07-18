@@ -63,7 +63,7 @@
 	plane = ABOVE_HUD_PLANE
 	layer = ADMIN_POPUP_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	screen_loc = "TOP-5,LEFT"
+	screen_loc = "TOP,LEFT" // BANDASTATION EDIT: Original - TOP-5,LEFT
 	maptext_height = 480
 	maptext_width = 480
 	maptext = ""
@@ -105,7 +105,7 @@
 	last_color_index = (last_color_index % colors.len) + 1
 
 	var/message = "<span style='color: [colors[last_color_index]]; text-align: center; font-size: 24pt'>"
-	message += "<br><br>АЛЛО!<br>Администратор хочет поговорить с тобой!<br>Проверь свой чат,<br>и ответь на сообщение!"
+	message += "АЛЛО!<br>Администратор хочет поговорить с тобой!<br>Проверь свой чат,<br>и ответь на сообщение!"
 	message += "</span>"
 
 	maptext = MAPTEXT(message)
