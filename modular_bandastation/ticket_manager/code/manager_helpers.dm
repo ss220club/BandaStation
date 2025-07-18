@@ -234,7 +234,7 @@
 	if(istype(user_client) && user_ticket)
 		user_ticket.messages += list(list(
 			"sender" = "ADMIN_TICKET_LOG",
-			"message" = message,
+			"message" = strip_html_full(message),
 			"time" = time_stamp(NONE),
 		))
 

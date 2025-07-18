@@ -2,14 +2,15 @@ import { Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
-import { CONNECTED, DISCONNECTED } from './constants';
+import { CONNECTED, DISCONNECTED, TICKET_LOG } from './constants';
 import { toLocalTime } from './helpers';
 import { ManagerData } from './types';
 
 export function TicketMessage(props) {
   const { data } = useBackend<ManagerData>();
+  const { isAdmin, userKey } = data;
   const { sender, message, time } = props.message;
-  const messageSender = data.userKey === sender;
+  const messageSender = userKey === sender;
 
   if (sender === DISCONNECTED || sender === CONNECTED) {
     return (
@@ -23,6 +24,17 @@ export function TicketMessage(props) {
         <div className="ticket-message">{message}</div>
         <div className="ticket-time">{toLocalTime(time)}</div>
       </Stack>
+    );
+  }
+
+  if (sender === TICKET_LOG) {
+    return (
+      !!isAdmin && (
+        <Stack fill className="TicketMessage TicketMessage__Log">
+          <div className="ticket-message">{message}</div>
+          <div className="ticket-time">{toLocalTime(time)}</div>
+        </Stack>
+      )
     );
   }
 

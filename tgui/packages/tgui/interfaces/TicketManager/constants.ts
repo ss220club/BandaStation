@@ -1,5 +1,6 @@
 export const CONNECTED = 'CLIENT_CONNECTED';
 export const DISCONNECTED = 'CLIENT_DISCONNECTED';
+export const TICKET_LOG = 'ADMIN_TICKET_LOG';
 
 export const TYPING_TIMEOUT = 5000;
 

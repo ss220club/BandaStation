@@ -74,7 +74,7 @@
   max-width: 75%;
   padding: 0.5rem;
   padding-right: 1rem;
-  background-color: hsl(from var(--pref-background) h s l);
+  background-color: var(--pref-background);
   border-radius: var(--border-radius-large);
 
   &__Sender {
@@ -119,6 +119,28 @@
       right: 0.5em;
       font-size: 0.75em;
       transform: translateY(75%);
+    }
+  }
+
+  &__Log {
+    opacity: 0.66;
+    text-align: center;
+    margin: 0 auto;
+    border: var(--border-thickness-tiny) solid var(--color-border);
+
+    &:hover .ticket-time {
+      opacity: 1;
+    }
+
+    .ticket-time {
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 0.25em 0.5em;
+      background-color: var(--pref-background);
+      border-radius: var(--border-radius-large) 0 var(--border-radius-large) 0;
+      transform: none;
     }
   }
 }
