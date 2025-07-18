@@ -65,6 +65,11 @@
 	item_path = /obj/item/clothing/suit/soundhand_brown_jacket/tag
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/suits/etamin_jacket
+	name = "Кожаная куртка Etamin Industries"
+	item_path = /obj/item/clothing/suit/toggle/etamin_jacket
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/suits/shark_suit
 	name = "Костюм акулы"
@@ -92,6 +97,11 @@
 	item_path = /obj/item/clothing/suit/hooded/vi_arcane
 	donator_level = DONATOR_TIER_3
 
+/datum/loadout_item/suits/etamin_cloak
+	name = "Плащ Etamin Industries"
+	item_path = /obj/item/clothing/suit/hooded/etamin_cloak
+	donator_level = DONATOR_TIER_3
+
 // MARK: Tier 4
 /datum/loadout_item/suits/katarina_jacket
 	name = "Куртка Катарины"
@@ -107,5 +117,10 @@
 /datum/loadout_item/suits/soundhand_white_jacket
 	name = "Серебристая куртка Арии"
 	item_path = /obj/item/clothing/suit/soundhand_white_jacket/tag
+	donator_level = DONATOR_TIER_5
+
+/datum/loadout_item/suits/etamin_coat
+	name = "Офицерский плащ Etamin Industries"
+	item_path = /obj/item/clothing/suit/etamin_coat
 	donator_level = DONATOR_TIER_5
 
