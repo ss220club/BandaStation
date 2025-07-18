@@ -25,8 +25,6 @@
 	var/list/messages
 	/// Has the admin replied to this ticket yet?
 	var/admin_replied = FALSE
-	/// Has the player replied to this ticket yet?
-	var/initiator_replied = FALSE
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
 

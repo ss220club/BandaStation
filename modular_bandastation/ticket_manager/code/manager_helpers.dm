@@ -103,6 +103,7 @@
 		initiator.current_help_ticket = null
 		admin_message = "[key_name_admin(admin)] [new_state == TICKET_CLOSED ? "закрыл" : "решил"] тикет #[ticket_id]!"
 		user_message = "Ваш тикет #[ticket_id] был [new_state == TICKET_CLOSED ? "закрыт" : "решён"]!"
+		SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_MADE_INACTIVE)
 	else
 		if(initiator.current_help_ticket)
 			to_chat(admin, span_danger("[key_name(initiator.ckey)] уже имеет открытый тикет!"), MESSAGE_TYPE_ADMINPM)
@@ -186,6 +187,7 @@
 	if(needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM)
 		title = span_adminhelp("Ответ на личное сообщение")
 
+	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
 	var/client/admin = needed_ticket.linked_admin.client
 	if(admin)
 		if(admin.prefs.toggles & SOUND_ADMINHELP)

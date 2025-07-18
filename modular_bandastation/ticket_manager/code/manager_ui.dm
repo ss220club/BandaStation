@@ -130,6 +130,18 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 		if("player_panel")
 			SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/show_player_panel, ticket_holder.mob)
 			return TRUE
+
+		if("popup")
+			var/message = tgui_input_text(user, "Игроку на экран выведется надпись, а так же будет отправлено сообщение в его тикет. Какое сообщение должно быть?", "Popup", multiline = TRUE)
+			if(!message)
+				return
+
+			if(!needed_ticket.initiator_client.client)
+				to_chat(user, span_notice("Кажется игрок покинул сервер..."))
+				return
+
+			give_admin_popup(needed_ticket.initiator_client.client, user, message)
+
 	return FALSE
 
 /datum/ticket_manager/ui_close(mob/user)
@@ -161,7 +173,6 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			"closedTime" = ticket.closed_at,
 			"linkedAdmin" = ticket.linked_admin,
 			"adminReplied" = ticket.admin_replied,
-			"initiatorReplied" = ticket.initiator_replied,
 			"writers" = ticket.writers,
 			"messages" = ticket.messages,
 		))

@@ -137,6 +137,14 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
       </Stack.Item>
       <Stack.Item>
         <Button
+          color="pink"
+          icon="exclamation"
+          tooltip="Вывести вообщение на экран владельца тикета"
+          onClick={() => act('popup', { ticketID: ticketID })}
+        />
+      </Stack.Item>
+      <Stack.Item>
+        <Button
           color="purple"
           icon="phone"
           tooltip="Голос в голове"
