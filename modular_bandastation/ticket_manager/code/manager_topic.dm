@@ -8,7 +8,7 @@
 	var/datum/help_ticket/user_ticket = user.persistent_client.current_help_ticket
 	if(!check_rights_for(user, R_ADMIN) && (!user_ticket || user_ticket.id != ticket_id))
 		to_chat(user, "Вы не можете взаимодействовать с этим тикетом!")
-		log_admin("[key_name(user)] попытался взаимодействовать с тикетом #[href_list["open_ticket"]], который не является его. Возможен href эксплоит!")
+		message_admins("[key_name(user)] попытался взаимодействовать с тикетом #[href_list["open_ticket"]], который не является его. Возможен href эксплоит!")
 		CRASH("Possible HREF exploit attempt by [key_name(user)]! Tried to interact with ticket #[href_list["open_ticket"]].")
 
 	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
@@ -33,16 +33,11 @@
 			remove_from_ticket_writers(user, needed_ticket)
 			return
 
-		link_admin_to_ticket(user, needed_ticket)
 		add_ticket_message(user, needed_ticket, message)
 		return
 
 	// Admin/Mentor only
 	if(!check_rights_for(user, R_ADMIN))
-		return
-
-	if(href_list["take_ticket"])
-		link_admin_to_ticket(user, needed_ticket, TRUE)
 		return
 
 	if(needed_ticket.state != TICKET_OPEN)

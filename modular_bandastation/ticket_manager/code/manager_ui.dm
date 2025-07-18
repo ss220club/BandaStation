@@ -42,6 +42,9 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	// Can be used by anyone
 	switch(action)
 		if("start_writing")
+			if(!can_send_message(user, user.persistent_client.current_help_ticket, needed_ticket))
+				return FALSE
+
 			add_to_ticket_writers(user, needed_ticket)
 			return TRUE
 
@@ -56,7 +59,6 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			if(!params["message"])
 				return FALSE
 
-			link_admin_to_ticket(user, needed_ticket)
 			add_ticket_message(user, needed_ticket, params["message"])
 			return TRUE
 
@@ -65,10 +67,6 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 	// Admin/Mentor only
 	switch(action)
-		if("take")
-			link_admin_to_ticket(user, needed_ticket, TRUE)
-			return TRUE
-
 		if("reopen")
 			set_ticket_state(user, needed_ticket, TICKET_OPEN)
 			return TRUE
@@ -79,6 +77,10 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 		if("resolve")
 			set_ticket_state(user, needed_ticket, TICKET_RESOLVED)
+			return TRUE
+
+		if("unlink")
+			unlink_admin_from_ticket(user, needed_ticket)
 			return TRUE
 
 		/* NEEDED MENTOR SYSTEM
@@ -132,6 +134,9 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 /datum/ticket_manager/ui_close(mob/user)
 	. = ..()
+	if(!user)
+		return
+
 	user.client.ticket_to_open = null
 
 /datum/ticket_manager/proc/get_tickets_data(client/user)
@@ -154,6 +159,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			"initiatorKey" = ticket.initiator_key,
 			"openedTime" = ticket.opened_at,
 			"closedTime" = ticket.closed_at,
+			"linkedAdmin" = ticket.linked_admin,
 			"adminReplied" = ticket.admin_replied,
 			"initiatorReplied" = ticket.initiator_replied,
 			"writers" = ticket.writers,

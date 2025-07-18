@@ -45,11 +45,12 @@ export function Ticket(
 }
 
 export function TicketInteractions(props: {
+  linkedAdmin: string;
   ticketID: number;
   ticketState: TICKET_STATE;
 }) {
   const { act } = useBackend();
-  const { ticketID, ticketState } = props;
+  const { linkedAdmin, ticketID, ticketState } = props;
 
   return (
     <Stack fontSize={1}>
@@ -79,6 +80,16 @@ export function TicketInteractions(props: {
               onClick={() => act('close', { ticketID: ticketID })}
             />
           </Stack.Item>
+          {!!linkedAdmin && (
+            <Stack.Item>
+              <Button.Confirm
+                icon="link-slash"
+                color="gray"
+                tooltip="Отказаться от тикета"
+                onClick={() => act('unlink', { ticketID: ticketID })}
+              />
+            </Stack.Item>
+          )}
           {/*
           <Stack.Item>
             <Button

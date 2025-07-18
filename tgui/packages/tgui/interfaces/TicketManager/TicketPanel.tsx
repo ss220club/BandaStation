@@ -16,8 +16,16 @@ export function TicketPanel(props) {
   const selectedTicket = allTickets.find(
     (ticket) => ticket.number === ticketNumber,
   );
-  const { number, initiator, initiatorCkey, messages, state, type, writers } =
-    selectedTicket;
+  const {
+    number,
+    initiator,
+    initiatorCkey,
+    messages,
+    state,
+    type,
+    linkedAdmin,
+    writers,
+  } = selectedTicket;
 
   const [showScrollButton, setShowScrollButton] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -106,7 +114,11 @@ export function TicketPanel(props) {
               </Stack.Item>
               {(isAdmin || isMentor) && (
                 <Stack.Item>
-                  <TicketInteractions ticketID={number} ticketState={state} />
+                  <TicketInteractions
+                    linkedAdmin={linkedAdmin}
+                    ticketID={number}
+                    ticketState={state}
+                  />
                 </Stack.Item>
               )}
             </Stack>
@@ -146,7 +158,7 @@ export function TicketPanel(props) {
             fluid
             autoFocus
             selfClear
-            disabled={state !== TICKET_STATE.Open}
+            disabled={state !== TICKET_STATE.Open || (!isAdmin && !linkedAdmin)}
             placeholder={
               state === TICKET_STATE.Open
                 ? 'Введите сообщение...'

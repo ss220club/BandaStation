@@ -1,34 +1,51 @@
 /datum/ticket_manager/proc/can_send_message(client/user, datum/help_ticket/user_ticket, datum/help_ticket/needed_ticket)
 	if(user_ticket && (user_ticket.id != needed_ticket.id))
-		to_chat(user, span_danger("Создатель этого тикета, уже имеет другой тикет, ответ в выбранный тикет невозможен!"))
+		to_chat(user, span_danger("Создатель этого тикета, уже имеет другой тикет, ответ в выбранный тикет невозможен!"), MESSAGE_TYPE_ADMINPM)
 		return FALSE
 
 	if(needed_ticket.state != TICKET_OPEN)
-		to_chat(user, span_danger("Этот тикет уже закрыт! Создайте новый при необходимости."))
+		to_chat(user, span_danger("Этот тикет уже закрыт! Создайте новый при необходимости."), MESSAGE_TYPE_ADMINPM)
 		return FALSE
 
-	if((!needed_ticket.admin_replied || !needed_ticket.linked_admin) && !check_rights_for(user, R_ADMIN))
-		to_chat(user, span_danger("На ваш тикет ещё не ответил ни один администратор! Ожидайте ответа."))
+	if(!needed_ticket.admin_replied && !check_rights_for(user, R_ADMIN))
+		to_chat(user, span_danger("На ваш тикет ещё не ответил ни один администратор! Ожидайте ответа."), MESSAGE_TYPE_ADMINPM)
+		return FALSE
+
+	if(!needed_ticket.linked_admin && !check_rights_for(user, R_ADMIN))
+		to_chat(user, span_danger("У вашего тикета нет привязанного администратора! Ожидайте пока кто-то вам ответит."), MESSAGE_TYPE_ADMINPM)
 		return FALSE
 	return TRUE
 
-/datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket, update_ui = FALSE)
+/datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket)
 	if(!admin || !needed_ticket)
 		CRASH("Tryed to link admin to ticket with invalid arguments!")
 
-	// A LADDER
 	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN))
 		needed_ticket.linked_admin = admin.persistent_client
+		message_admins("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
+		log_admin("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 
-		if(update_ui)
-			to_chat(needed_ticket.initiator_client.client,
-				custom_boxed_message("green_box", span_adminhelp("[admin.key] взял ваш тикет на рассмотрение.")),
-				MESSAGE_TYPE_ADMINPM)
-			SStgui.update_uis(src)
+/datum/ticket_manager/proc/unlink_admin_from_ticket(client/admin, datum/help_ticket/needed_ticket)
+	if(!admin || !needed_ticket)
+		CRASH("Tryed to unlink admin from ticket with invalid arguments!")
+
+	if(needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN))
+		needed_ticket.linked_admin = null
+		message_admins("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
+		log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
+
+		to_chat(needed_ticket.initiator_client.client,
+			custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора.")),
+			MESSAGE_TYPE_ADMINPM)
+		SStgui.update_uis(src)
 
 /datum/ticket_manager/proc/add_to_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
 	if(!writer || !needed_ticket)
 		CRASH("Tryed to add writer to ticket with invalid arguments!")
+
+	if(writer.holder && !needed_ticket.linked_admin)
+		message_admins("[key_name_admin(writer)] начал отвечать на тикет #[needed_ticket.id].")
+		log_admin("[key_name_admin(writer)] начал отвечать на тикет #[needed_ticket.id].")
 
 	needed_ticket.writers |= writer.key
 	if(update_ui)
@@ -38,6 +55,10 @@
 	if(!writer || !needed_ticket)
 		CRASH("Tryed to remove writer to ticket with invalid arguments!")
 
+	if(writer.holder && !needed_ticket.linked_admin)
+		message_admins("[key_name_admin(writer)] перестал отвечать на тикет #[needed_ticket.id].")
+		log_admin("[key_name_admin(writer)] перестал отвечать на тикет #[needed_ticket.id].")
+
 	needed_ticket.writers -= writer.key
 	if(update_ui)
 		SStgui.update_uis(src)
@@ -45,6 +66,8 @@
 /datum/ticket_manager/proc/add_ticket_message(client/sender, datum/help_ticket/needed_ticket, message)
 	if(!sender || !message || !needed_ticket)
 		CRASH("Invalid parameters passed to ticket_manager add_ticket_message()!")
+
+	link_admin_to_ticket(sender, needed_ticket)
 
 	var/client/initiator = needed_ticket.initiator_client.client
 	var/client/linked_admin = needed_ticket.linked_admin.client
