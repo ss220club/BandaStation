@@ -34,5 +34,5 @@
 
 /datum/chemical_reaction/slime/slimemoth
 	results = list(/datum/reagent/mutationtoxin/moth = 1)
-	required_reagents = list(/datum/reagent/consumable/honey= 1)
+	required_reagents = list(/datum/reagent/consumable/honey = 1)
 	required_container = /obj/item/slime_extract/green
