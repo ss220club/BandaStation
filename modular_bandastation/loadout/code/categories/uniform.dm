@@ -145,6 +145,11 @@
 	item_path = /obj/item/clothing/under/rank/etamin_ind/formal
 	donator_level = DONATOR_TIER_3
 
+/datum/loadout_item/uniforms/etamin_combat
+	name = "Тактический костюм Etamin Industries"
+	item_path = /obj/item/clothing/under/rank/etamin_ind/combat
+	donator_level = DONATOR_TIER_3
+
 // MARK: Tier 4
 /datum/loadout_item/uniforms/katarina_cybersuit
 	name = "Кибер-костюм Катарины"
