@@ -178,7 +178,7 @@
 		SEND_SOUND(player, sound('sound/effects/adminhelp.ogg'))
 		window_flash(player, ignorepref = TRUE)
 		to_chat(player, fieldset_block(
-			title, "[TICKET_REPLY_LINK(id, admin.key)]\n\n\
+			title, "[TICKET_REPLY_LINK(id, span_adminsay(admin.key))]\n\n\
 			[span_adminsay(message)]\n\n\
 			[span_adminsay("Нажмите на ник, чтобы ответить. Либо [TICKET_OPEN_LINK(id, "откройте чат")].")]",
 			"boxed_message red_box"),
@@ -206,7 +206,7 @@
 			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
 		window_flash(admin, ignorepref = TRUE)
 		to_chat(admin, fieldset_block(
-			title, "[TICKET_REPLY_LINK(id, player.key)]\n\n\
+			title, "[TICKET_REPLY_LINK(id, span_adminsay(player.key))]\n\n\
 			[span_adminsay(message)]\n\n\
 			[TICKET_FULLMONTY(player.mob, id)]",
 			"boxed_message red_box"),

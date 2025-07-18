@@ -63,7 +63,7 @@
 	plane = ABOVE_HUD_PLANE
 	layer = ADMIN_POPUP_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	screen_loc = "TOP,LEFT" // BANDASTATION EDIT: Original - TOP-5,LEFT
+	screen_loc = "TOP-6,LEFT" // BANDASTATION EDIT: Original - TOP-5,LEFT
 	maptext_height = 480
 	maptext_width = 480
 	maptext = ""
@@ -121,5 +121,5 @@
 		to_chat(admin, span_warning("[key_name(target)] had no active ahelp, aborting."))
 		return
 
-	GLOB.ticket_manager.send_chat_message_to_player(admin, current_ticket, message)  // BANDASTATION EDIT: Original - admin.cmd_admin_pm(target, message)
+	GLOB.ticket_manager.add_ticket_message(admin, current_ticket, message)  // BANDASTATION EDIT: Original - admin.cmd_admin_pm(target, message)
 	target.AddComponent(/datum/component/admin_popup, current_ticket)

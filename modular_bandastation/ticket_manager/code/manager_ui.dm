@@ -132,15 +132,21 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			return TRUE
 
 		if("popup")
+			if(user.key in needed_ticket.writers)
+				return // Already typing
+
+			add_to_ticket_writers(user, needed_ticket)
 			var/message = tgui_input_text(user, "Игроку на экран выведется надпись, а так же будет отправлено сообщение в его тикет. Какое сообщение должно быть?", "Popup", multiline = TRUE)
 			if(!message)
-				return
+				remove_from_ticket_writers(user, needed_ticket)
+				return FALSE
 
 			if(!needed_ticket.initiator_client.client)
 				to_chat(user, span_notice("Кажется игрок покинул сервер..."))
-				return
+				return FALSE
 
 			give_admin_popup(needed_ticket.initiator_client.client, user, message)
+			return TRUE
 
 	return FALSE
 
