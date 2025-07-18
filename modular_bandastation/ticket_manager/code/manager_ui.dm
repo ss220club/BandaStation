@@ -41,6 +41,14 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 	// Can be used by anyone
 	switch(action)
+		if("start_writing")
+			add_to_ticket_writers(user, needed_ticket)
+			return TRUE
+
+		if("stop_writing")
+			remove_from_ticket_writers(user, needed_ticket)
+			return TRUE
+
 		if("reply")
 			if(!can_send_message(user, user.persistent_client.current_help_ticket, needed_ticket))
 				return FALSE
@@ -148,6 +156,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			"closedTime" = ticket.closed_at,
 			"adminReplied" = ticket.admin_replied,
 			"initiatorReplied" = ticket.initiator_replied,
+			"writers" = ticket.writers,
 			"messages" = ticket.messages,
 		))
 

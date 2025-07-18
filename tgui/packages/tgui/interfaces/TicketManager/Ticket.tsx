@@ -52,16 +52,14 @@ export function TicketInteractions(props: {
   const { ticketID, ticketState } = props;
 
   return (
-    <Stack>
+    <Stack fontSize={1}>
       {ticketState !== TICKET_STATE.Open ? (
         <Stack.Item>
           <Button
             icon="eye"
             tooltip="Открыть закрытый/решённый ранее тикет"
             onClick={() => act('reopen', { ticketID: ticketID })}
-          >
-            Открыть
-          </Button>
+          />
         </Stack.Item>
       ) : (
         <>
@@ -71,9 +69,7 @@ export function TicketInteractions(props: {
               color="good"
               tooltip="Пометить тикет как решённый"
               onClick={() => act('resolve', { ticketID: ticketID })}
-            >
-              Решить
-            </Button>
+            />
           </Stack.Item>
           <Stack.Item>
             <Button
@@ -81,9 +77,7 @@ export function TicketInteractions(props: {
               color="bad"
               tooltip="Закрыть тикет"
               onClick={() => act('close', { ticketID: ticketID })}
-            >
-              Закрыть
-            </Button>
+            />
           </Stack.Item>
           {/*
           <Stack.Item>

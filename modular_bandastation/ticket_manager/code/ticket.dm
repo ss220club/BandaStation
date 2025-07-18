@@ -19,6 +19,8 @@
 	var/datum/persistent_client/initiator_client
 	/// It's admin who linked to current ticket
 	var/datum/persistent_client/linked_admin
+	/// List of all client keys who currently write to this ticket
+	var/list/writers = list()
 	/// Collection of all ticket messages
 	var/list/messages
 	/// Has the admin replied to this ticket yet?

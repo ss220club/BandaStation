@@ -26,6 +26,22 @@
 				MESSAGE_TYPE_ADMINPM)
 			SStgui.update_uis(src)
 
+/datum/ticket_manager/proc/add_to_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
+	if(!writer || !needed_ticket)
+		CRASH("Tryed to add writer to ticket with invalid arguments!")
+
+	needed_ticket.writers |= writer.key
+	if(update_ui)
+		SStgui.update_uis(src)
+
+/datum/ticket_manager/proc/remove_from_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
+	if(!writer || !needed_ticket)
+		CRASH("Tryed to remove writer to ticket with invalid arguments!")
+
+	needed_ticket.writers -= writer.key
+	if(update_ui)
+		SStgui.update_uis(src)
+
 /datum/ticket_manager/proc/add_ticket_message(client/sender, datum/help_ticket/needed_ticket, message)
 	if(!sender || !message || !needed_ticket)
 		CRASH("Invalid parameters passed to ticket_manager add_ticket_message()!")
@@ -40,6 +56,7 @@
 	else
 		send_chat_message_to_player(sender, needed_ticket, message)
 
+	remove_from_ticket_writers(sender, needed_ticket, FALSE)
 	needed_ticket.messages += list(list(
 		"sender" = sender.key,
 		"message" = message,
@@ -101,6 +118,7 @@
 	if(!needed_ticket)
 		return
 
+	remove_from_ticket_writers(user, needed_ticket, FALSE)
 	needed_ticket.messages += list(list(
 		"sender" = "CLIENT_DISCONNECTED",
 		"message" = "[user.key] отключился",

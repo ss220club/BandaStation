@@ -17,6 +17,7 @@ export type TicketProps = {
   type: string;
   openedTime: string;
   closedTime: string;
+  writers: string[];
   adminReplied: BooleanLike;
   initiatorReplied: BooleanLike;
   messages: MessageProps[];

@@ -3,26 +3,45 @@ import { Button, Input, Section, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
-import { TICKET_STATE } from './constants';
+import { TICKET_STATE, TYPING_TIMEOUT } from './constants';
 import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { TicketMessage } from './TicketMessage';
 import { ManagerData } from './types';
 
 export function TicketPanel(props) {
   const { act, data } = useBackend<ManagerData>();
-  const { isAdmin, isMentor } = data;
+  const { userKey, isAdmin, isMentor } = data;
   const { allTickets, ticketNumber, setSelectedTicket } = props;
 
   const selectedTicket = allTickets.find(
     (ticket) => ticket.number === ticketNumber,
   );
-  const { number, initiator, initiatorCkey, messages, state, type } =
+  const { number, initiator, initiatorCkey, messages, state, type, writers } =
     selectedTicket;
 
   const [showScrollButton, setShowScrollButton] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const shouldScrollRef = useRef(true);
   const firstRender = useRef(true);
+
+  const typingTimeoutRef = useRef<NodeJS.Timeout>(null);
+  const isWritingRef = useRef(false);
+
+  function handleTyping() {
+    if (!isWritingRef.current) {
+      act('start_writing', { ticketID: number });
+      isWritingRef.current = true;
+    }
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      act('stop_writing', { ticketID: number });
+      isWritingRef.current = false;
+    }, TYPING_TIMEOUT);
+  }
 
   function scrollToBottom(ignoreBottom?: boolean, nonSmooth?: boolean) {
     const section = sectionRef.current;
@@ -85,6 +104,11 @@ export function TicketPanel(props) {
               <Stack.Item grow className="TicketPanel__Title">
                 Тикет #{number} - {initiator}
               </Stack.Item>
+              {(isAdmin || isMentor) && (
+                <Stack.Item>
+                  <TicketInteractions ticketID={number} ticketState={state} />
+                </Stack.Item>
+              )}
             </Stack>
           }
         >
@@ -103,8 +127,9 @@ export function TicketPanel(props) {
             К последним сообщениям
           </Button>
         </Stack.Item>
+        <TypingIndicator writers={writers} userKey={userKey} />
         <Section ref={sectionRef} fill scrollable>
-          <Stack vertical>
+          <Stack vertical pb={3}>
             {messages.map((message) => (
               <TicketMessage
                 key={message.time}
@@ -117,31 +142,55 @@ export function TicketPanel(props) {
       </Stack.Item>
       <Stack.Item style={{ zIndex: 1 }}>
         <Section>
-          <Stack fill>
-            <Stack.Item grow>
-              <Input
-                fluid
-                autoFocus
-                selfClear
-                disabled={state !== TICKET_STATE.Open}
-                placeholder={
-                  state === TICKET_STATE.Open
-                    ? 'Введите сообщение...'
-                    : 'Тикет закрыт!'
-                }
-                onEnter={(value) =>
-                  act('reply', { ticketID: number, message: value })
-                }
-              />
-            </Stack.Item>
-            {(isAdmin || isMentor) && (
-              <Stack.Item>
-                <TicketInteractions ticketID={number} ticketState={state} />
-              </Stack.Item>
-            )}
-          </Stack>
+          <Input
+            fluid
+            autoFocus
+            selfClear
+            disabled={state !== TICKET_STATE.Open}
+            placeholder={
+              state === TICKET_STATE.Open
+                ? 'Введите сообщение...'
+                : 'Тикет закрыт!'
+            }
+            onChange={handleTyping}
+            onEnter={(value) => {
+              if (isWritingRef.current) {
+                isWritingRef.current = false;
+              }
+
+              if (typingTimeoutRef.current) {
+                clearTimeout(typingTimeoutRef.current);
+              }
+
+              act('reply', { ticketID: number, message: value });
+            }}
+          />
         </Section>
       </Stack.Item>
     </Stack>
+  );
+}
+
+function TypingIndicator(props) {
+  const { writers, userKey } = props;
+  const others = writers.filter((writer) => writer !== userKey);
+
+  let writersText;
+  if (others.length === 1) {
+    writersText = `${others[0]} печатает...`;
+  }
+
+  if (others.length === 2) {
+    writersText = `${others[0]} и ${others[1]} печатают...`;
+  }
+
+  if (others.length > 2) {
+    writersText = 'Несколько человек печатают...';
+  }
+
+  return (
+    others.length > 0 && (
+      <Stack className="TicketPanel__Writers">{writersText}</Stack>
+    )
   );
 }

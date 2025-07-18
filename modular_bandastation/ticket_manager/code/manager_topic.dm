@@ -24,8 +24,13 @@
 		if(!can_send_message(user, user_ticket, needed_ticket))
 			return
 
+		if(user.key in needed_ticket.writers)
+			return // Already typing
+
+		add_to_ticket_writers(user, needed_ticket)
 		var/message = tgui_input_text(user, null, "Ответ на тикет #[ticket_id]", multiline = TRUE, encode = FALSE)
 		if(!message)
+			remove_from_ticket_writers(user, needed_ticket)
 			return
 
 		link_admin_to_ticket(user, needed_ticket)
