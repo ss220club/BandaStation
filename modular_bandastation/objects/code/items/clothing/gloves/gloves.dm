@@ -37,7 +37,7 @@
 	icon_state = "bike_gloves"
 
 // MARK: Etamin ind.
-/obj/item/clothing/gloves/color/etamin_gloves
+/obj/item/clothing/gloves/etamin_gloves
 	name = "Gold On Black gloves"
 	desc = "Качественные перчатки с золотой вставкой 999 пробы."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'

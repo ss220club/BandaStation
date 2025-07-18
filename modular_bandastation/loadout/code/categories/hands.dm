@@ -65,7 +65,7 @@
 
 /datum/loadout_item/gloves/etamin_gloves
 	name = "Перчатки Etamin Industries"
-	item_path = /obj/item/clothing/gloves/color/etamin_gloves
+	item_path = /obj/item/clothing/gloves/etamin_gloves
 	donator_level = DONATOR_TIER_1
 
 // MARK: Tier 2
