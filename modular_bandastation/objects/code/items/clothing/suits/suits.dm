@@ -40,6 +40,8 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "jacket_syndie"
+	flags_inv = HIDEGLOVES | HIDEJUMPSUIT
+	slowdown = 0
 
 /obj/item/clothing/suit/space/deathsquad/officer/field
 	name = "field fleet officer's jacket"
@@ -76,3 +78,13 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "hardsuit-sec-old"
+
+// MARK: TSF
+/obj/item/clothing/suit/tsf_suitjacket
+	name = "federate suit-jacket"
+	desc = "Дорогая куртка прямиком из Центральных Миров. Имеет отличительные знаки ТСФ."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	icon_state = "tsf_suit_jacket"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	worn_icon_state = "tsf_suit_jacket"
+	body_parts_covered = CHEST|GROIN|ARMS
