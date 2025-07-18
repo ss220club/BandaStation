@@ -34,6 +34,10 @@
 		stack_trace("[key_name(src)] tried to send an admin PM without a holder.")
 		return
 
+	if(!whom)
+		to_chat(src, span_danger("Клиент отключился пока вы писали сообщение..."), MESSAGE_TYPE_ADMINPM)
+		return
+
 	if(whom.persistent_client.current_help_ticket)
 		var/ticket_id = whom.persistent_client.current_help_ticket.id
 		to_chat(src, span_danger(
@@ -47,3 +51,8 @@
 		return
 
 	new /datum/help_ticket(whom, src, message_to_send, TICKET_TYPE_ADMIN)
+
+	var/datum/help_ticket/ticket_id = whom.persistent_client.current_help_ticket.id
+	var/log_body = "[key_name(src)] написал личное сообщение [key_name_admin(whom)]."
+	message_admins("[log_body] Создан тикет [TICKET_OPEN_LINK(ticket_id, "#[ticket_id]")].")
+	log_admin(log_body)
