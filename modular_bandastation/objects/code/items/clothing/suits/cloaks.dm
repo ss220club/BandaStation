@@ -253,7 +253,7 @@
 // MARK: Etamin ind.
 /obj/item/clothing/suit/hooded/etamin_cloak
 	name = "Gold On Black hooded cloak"
-	desc = "Корпоративный плащ, выполненный в угольных тонах все с тем же золотым покрытием и специальным логотипом от Etamin Industry – золотой звездой."
+	desc = "Корпоративный плащ, выполненный в угольных тонах все с тем же золотым покрытием и специальным логотипом от Etamin Industries – Золотой Звездой."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
 	icon_state = "ei_cloak"

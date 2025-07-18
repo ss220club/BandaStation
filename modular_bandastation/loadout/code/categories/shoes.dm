@@ -46,7 +46,7 @@
 	donator_level = DONATOR_TIER_1
 
 /datum/loadout_item/shoes/etamin_shoes
-	name = "Ботинки Etamin Ind."
+	name = "Ботинки Etamin Industries"
 	item_path = /obj/item/clothing/shoes/etamin_shoes
 	donator_level = DONATOR_TIER_1
 

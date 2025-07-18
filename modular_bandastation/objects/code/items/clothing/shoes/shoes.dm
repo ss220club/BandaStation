@@ -28,7 +28,7 @@
 // MARK: Etamin ind.
 /obj/item/clothing/shoes/etamin_shoes
 	name = "Gold On Black shoes"
-	desc = "Черный ботинки в классическом стиле с легким золотым напылением от корпорации Etamin Industry."
+	desc = "Черный ботинки в классическом стиле с легким золотым напылением от корпорации Etamin Industries."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/shoes.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/shoes.dmi'
 	icon_state = "ei_shoes"

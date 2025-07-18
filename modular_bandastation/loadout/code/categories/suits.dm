@@ -66,7 +66,7 @@
 	donator_level = DONATOR_TIER_1
 
 /datum/loadout_item/suits/etamin_jacket
-	name = "Кожаная куртка Etamin Ind."
+	name = "Кожаная куртка Etamin Industries"
 	item_path = /obj/item/clothing/suit/toggle/etamin_jacket
 	donator_level = DONATOR_TIER_1
 
@@ -98,7 +98,7 @@
 	donator_level = DONATOR_TIER_3
 
 /datum/loadout_item/suits/etamin_cloak
-	name = "Плащ Etamin Ind."
+	name = "Плащ Etamin Industries"
 	item_path = /obj/item/clothing/suit/hooded/etamin_cloak
 	donator_level = DONATOR_TIER_3
 
@@ -120,7 +120,7 @@
 	donator_level = DONATOR_TIER_5
 
 /datum/loadout_item/suits/etamin_coat
-	name = "Офицерский плащ Etamin Ind."
+	name = "Офицерский плащ Etamin Industries"
 	item_path = /obj/item/clothing/suit/etamin_coat
 	donator_level = DONATOR_TIER_5
 

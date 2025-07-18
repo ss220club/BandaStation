@@ -114,18 +114,18 @@
 
 // MARK: Tier 1
 /datum/loadout_item/uniforms/etamin_suit
-	name = "Костюм Etamin Ind."
+	name = "Костюм Etamin Industries"
 	item_path = /obj/item/clothing/under/rank/etamin_ind/suit
 	donator_level = DONATOR_TIER_1
 
 /datum/loadout_item/uniforms/etamin_skirt
-	name = "Юбка Etamin Ind."
+	name = "Юбка Etamin Industries"
 	item_path = /obj/item/clothing/under/rank/etamin_ind/skirt
 	donator_level = DONATOR_TIER_1
 
 // MARK: Tier 2
 /datum/loadout_item/uniforms/etamin_skirt_alt
-	name = "Юбка \"Солнце\" Etamin Ind."
+	name = "Юбка \"Солнце\" Etamin Industries"
 	item_path = /obj/item/clothing/under/rank/etamin_ind/skirt_alt
 	donator_level = DONATOR_TIER_2
 
@@ -141,7 +141,7 @@
 	donator_level = DONATOR_TIER_3
 
 /datum/loadout_item/uniforms/etamin_formal
-	name = "Деловой костюм Etamin Ind."
+	name = "Деловой костюм Etamin Industries"
 	item_path = /obj/item/clothing/under/rank/etamin_ind/formal
 	donator_level = DONATOR_TIER_3
 

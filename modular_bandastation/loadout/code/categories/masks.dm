@@ -39,6 +39,6 @@
 	donator_level = DONATOR_TIER_2
 
 /datum/loadout_item/masks/etamin_mask
-	name = "Респиратор Etamin Ind."
+	name = "Респиратор Etamin Industries"
 	item_path = /obj/item/clothing/mask/breath/etamin_mask
 	donator_level = DONATOR_TIER_2
