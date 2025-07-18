@@ -59,3 +59,14 @@
 /datum/storage/backpack/ussp
 	max_total_storage = 26
 	max_slots = 26
+
+// MARK: Etamin ind.
+/obj/item/storage/backpack/etamin_ind
+	name = "Gold on Black backpack"
+	desc = "Вместительный рюкзак от Etamin Ind. На ткани угольного цвета красуется логотип корпорации - Золотое Солнце."
+	icon = 'modular_bandastation/objects/icons/obj/storage/backpack.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/back.dmi'
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_righthand.dmi'
+	icon_state = "backpack_ei"
+	inhand_icon_state = "backpack_ei"

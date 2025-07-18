@@ -147,6 +147,15 @@
 	name = "federate long jacket"
 	desc = "Свободная накидка из легкой ткани, выполненная в официальных цветах Сола."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/jacket.dmi'
-	icon_state = "tsf_jacket"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
+	icon_state = "tsf_jacket"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
+
+// MARK: Etamin ind.
+/obj/item/clothing/suit/toggle/etamin_jacket
+	name = "Gold on Black leather jacket"
+	desc = "Сочетание настоящего рокерского духа и современного стиля. При взгляде на вас, у каждого возникнет лишь одна мысль: «Это настоящий рок спирит!»."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/jacket.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
+	icon_state = "ei_jacket"
+	body_parts_covered = CHEST|GROIN|ARMS

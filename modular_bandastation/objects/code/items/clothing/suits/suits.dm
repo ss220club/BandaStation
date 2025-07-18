@@ -88,3 +88,12 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	worn_icon_state = "tsf_suit_jacket"
 	body_parts_covered = CHEST|GROIN|ARMS
+
+// MARK: Etamin ind.
+/obj/item/clothing/suit/etamin_coat
+	name = "Etamin Ind. officer coat"
+	desc = "Этот плащ был создан специально для офицеров корпорации Etamin Industry. Если вы видите его на ком-то, то либо перед вами офицер корпорации, либо тот, кто отдал бешеные бабки за этот плащ."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "ei_coat"
+	body_parts_covered = CHEST|GROIN|ARMS

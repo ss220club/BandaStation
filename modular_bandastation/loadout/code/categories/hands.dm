@@ -63,6 +63,11 @@
 	item_path = /obj/item/clothing/gloves/fingerless/biker_gloves
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/gloves/etamin_gloves
+	name = "Перчатки Etamin Ind."
+	item_path = /obj/item/clothing/gloves/etamin_gloves
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/gloves/gloves_rainbow
 	name = "Радужные перчатки"

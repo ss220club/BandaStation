@@ -1,3 +1,4 @@
+// MARK: Misc mask
 /obj/item/clothing/mask/breath/red_gas
 	name = "prs-1"
 	desc = "Стильная дыхательная маска в виде противогаза, не скрывает лицо."
@@ -38,3 +39,12 @@
 	flags_cover = MASKCOVERSMOUTH
 	visor_flags_cover = MASKCOVERSMOUTH|HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT|HIDEEARS
+
+// MARK: Etamin ind.
+/obj/item/clothing/mask/breath/etamin_mask
+	name = "Etamin Ind. mask"
+	desc = "Качество, надежность и безопасность - основной залог успеха продукции от Etamin Industry."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/masks.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/masks.dmi'
+	icon_state = "ei_mask"
+	inhand_icon_state = "gas_atmos"
