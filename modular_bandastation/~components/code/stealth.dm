@@ -5,13 +5,11 @@
 	var/list/spotted_by = list()
 	var/atom/target
 
-/datum/component/stealth_device/Initialize(install_delay = 3 SECONDS, is_silent = TRUE)
-	if(!istype(parent, /obj/item))
+/datum/component/stealth_device/Initialize(install_delay = 3 SECONDS, is_silent_install = TRUE)
+	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
-	if(install_delay)
-		src.install_delay = install_delay
-	if(is_silent)
-		src.is_silent_install = is_silent
+	src.install_delay = install_delay
+	src.is_silent_install = is_silent_install
 
 /datum/component/stealth_device/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(on_interact_with_atom))
@@ -41,20 +39,19 @@
 		return FALSE
 	target = installation_target
 	device.forceMove(target)
-	device.loc = target
 	RegisterSignal(target, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY, PROC_REF(on_target_attackby_secondary))
 	RegisterSignal(target, COMSIG_DETECTIVE_SCANNED, PROC_REF(on_scan))
 	return TRUE
 
 /datum/component/stealth_device/proc/on_scan(datum/source, mob/user, list/extra_data)
 	SIGNAL_HANDLER
-	LAZYOR(spotted_by, user)
+	spotted_by[user] = TRUE
 	LAZYADD(extra_data[DETSCAN_CATEGORY_ILLEGAL], "Обнаружен скрытый объект: [parent].")
 	to_chat(user, span_alert("Обнаружен скрытый объект: [parent]"))
 
 /datum/component/stealth_device/proc/on_target_attackby_secondary(atom/source, mob/user, obj/item/tool)
 	SIGNAL_HANDLER
-	if(istype(tool, /obj/item/detective_scanner) && LAZYFIND(spotted_by, user))
+	if(istype(tool, /obj/item/detective_scanner) && spotted_by[user])
 		INVOKE_ASYNC(src, PROC_REF(remove_stealth_device), user)
 		return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
@@ -64,8 +61,6 @@
 	if(do_after(user, 5 SECONDS, target))
 		if(user.put_in_hands(parent))
 			user.balloon_alert(user, "Извлечено: [parent]")
-			to_chat(user, span_warning("Скрытный объект был извлечён: [parent]"))
-			target.contents -= parent
 			unregister_target_signals()
 			target = null
 		else
