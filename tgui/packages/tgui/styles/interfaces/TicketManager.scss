@@ -143,6 +143,20 @@
       transform: none;
     }
   }
+
+  &__Embed {
+    display: flex;
+    margin: 0.5rem -0.5rem 0.5rem 0rem;
+
+    img,
+    video,
+    audio,
+    iframe {
+      object-fit: contain;
+      width: 100%;
+      border-radius: var(--border-radius-large);
+    }
+  }
 }
 
 .TicketPanel {

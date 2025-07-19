@@ -22,7 +22,7 @@ export function TicketManager() {
       title={`Менеджер тикетов - ${userUsing}`}
       theme="ss220"
       width={550}
-      height={700}
+      height={750}
     >
       <Window.Content>
         {selectedTicket ? (
