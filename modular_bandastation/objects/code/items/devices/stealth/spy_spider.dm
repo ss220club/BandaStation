@@ -8,6 +8,7 @@
 
 /obj/item/stealth/spy_spider/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/stealth_device)
 	transmitter = new /obj/item/radio/spider_transmitter(src)
 
 /obj/item/stealth/spy_spider/Destroy()
