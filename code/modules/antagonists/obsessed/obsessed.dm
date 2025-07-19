@@ -53,7 +53,7 @@
 			continue
 		admin_pool += player
 
-	var/picked = tgui_input_list(admin, "Select a target to be obssesed with", "Obssesion Target Selection", admin_pool)
+	var/picked = tgui_input_list(admin, "Select a target to be obsessed with", "Obsession Target Selection", admin_pool)
 	if(!picked)
 		return
 	// BANDASTATION ADD - End
