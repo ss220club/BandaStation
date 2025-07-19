@@ -35,7 +35,7 @@
 	silent = TRUE
 	can_elimination_hijack = ELIMINATION_PREVENT
 
-#define RANDOM_TARGET "Random" // BANDASTATION ADD
+#define RANDOM_TARGET "Рандом" // BANDASTATION ADD
 
 /datum/antagonist/obsessed/admin_add(datum/mind/new_owner,mob/admin)
 	var/mob/living/carbon/C = new_owner.current
@@ -53,7 +53,7 @@
 			continue
 		admin_pool += player
 
-	var/picked = tgui_input_list(admin, "Select a target to be obsessed with", "Obsession Target Selection", admin_pool)
+	var/picked = tgui_input_list(admin, "Выберите цель одержимости", "Выбор цели одержимости", admin_pool)
 	if(!picked)
 		return
 	// BANDASTATION ADD - End
