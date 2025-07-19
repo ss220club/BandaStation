@@ -65,7 +65,7 @@
 	if(picked == RANDOM_TARGET)
 		C.gain_trauma(/datum/brain_trauma/special/obsessed)//ZAP
 	else
-		C.gain_trauma(/datum/brain_trauma/special/obsessed, , picked)//ZAP
+		C.gain_trauma(/datum/brain_trauma/special/obsessed, null, picked)//ZAP
 	// BANDASTATION ADD - END
 
 #undef RANDOM_TARGET // BANDASTATION ADD
