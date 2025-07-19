@@ -84,6 +84,7 @@
 #include "code/items/storage/tape_box.dm"
 #include "code/items/weapons/melee/centcom/baseball_bat.dm"
 #include "code/items/weapons/melee/centcom/rapier.dm"
+#include "code/items/weapons/melee/mining.dm"
 #include "code/items/weapons/melee/tsf_katana.dm"
 #include "code/items/weapons/melee/vibroblade.dm"
 #include "code/items/weapons/melee/centcom/enchantment.dm"
