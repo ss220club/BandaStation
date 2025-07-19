@@ -10,8 +10,12 @@
 	if(LAZYFIND(lobby_candidates, user))
 		LAZYREMOVE(lobby_candidates, user)
 		to_chat(user, span_redtext("Вы были убраны из списка кандидатов на роль [name]."))
-		SStitle.title_output(user.client, list2params(list("false", button_id)), "job_sign")
+		SStitle.title_output(user.client, list2params(list("false", button_id)), "traitSignup")
 	else
 		LAZYADD(lobby_candidates, user)
 		to_chat(user, span_greentext("Вы были добавлены в список кандидатов на роль [name]."))
-		SStitle.title_output(user.client, list2params(list("true", button_id)), "job_sign")
+		SStitle.title_output(user.client, list2params(list("true", button_id)), "traitSignup")
+
+/datum/station_trait/job/New()
+	. = ..()
+	SStitle.title_output_to_all(list2params(list(src.name, src.button_desc)), "createTraitButton")
