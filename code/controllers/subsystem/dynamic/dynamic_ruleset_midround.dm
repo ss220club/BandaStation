@@ -687,7 +687,7 @@
 	return // handled by assign_role() entirely
 
 // BANDASTATION ADD - START
-#define RANDOM_CLONE "Random"
+#define RANDOM_CLONE "Рандом"
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/configure_ruleset(mob/admin)
 	var/list/admin_pool = list("[RULESET_CONFIG_CANCEL]" = TRUE, "[RANDOM_CLONE]" = TRUE)
@@ -696,7 +696,7 @@
 			continue
 		admin_pool += player
 
-	var/picked = tgui_input_list(admin, "Select a player to clone", "Paradox Clone Selection", admin_pool)
+	var/picked = tgui_input_list(admin, "Выберите игрока для клонирования", "Выбор игрока для клонирования", admin_pool)
 	switch(picked)
 		if(RANDOM_CLONE)
 			return
