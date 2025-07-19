@@ -710,7 +710,7 @@
 // BANDASTATION ADD - END
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/assign_role(datum/mind/candidate)
-	var/mob/living/carbon/human/good_version = original.resolve() || find_clone() // BANDASTATION EDIT
+	var/mob/living/carbon/human/good_version = original?.resolve() || find_clone() // BANDASTATION EDIT
 	var/mob/living/carbon/human/bad_version = good_version.make_full_human_copy(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 	candidate.transfer_to(bad_version, force_key_move = TRUE)
 
