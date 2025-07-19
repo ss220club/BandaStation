@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	if(!try_speak(message, ignore_spam, forced, filterproof))
 		return
 	if(sanitize)
-		message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+		message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN)) // BANDASTATION EDIT - Sanitize emotes
 	if(!message || message == "")
 		return
 	spans |= speech_span

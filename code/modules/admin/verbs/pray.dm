@@ -6,7 +6,7 @@
 		to_chat(usr, span_danger("Общение было заблокировано администрацией."), confidential = TRUE)
 		return
 
-	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	if(!msg)
 		return
 	log_prayer("[src.key]/([src.name]): [msg]")
@@ -52,7 +52,7 @@
 
 /// Used by communications consoles to message CentCom
 /proc/message_centcom(text, mob/sender)
-	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
+	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.message_centcom(sender.client, msg)
 	msg = span_adminnotice("<b><font color=orange>CENTCOM:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_CENTCOM_REPLY(sender)]:</b> [msg]")
 	for(var/client/staff as anything in GLOB.admins)
@@ -64,7 +64,7 @@
 
 /// Used by communications consoles to message the Syndicate
 /proc/message_syndicate(text, mob/sender)
-	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
+	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.message_syndicate(sender.client, msg)
 	msg = span_adminnotice("<b><font color=crimson>SYNDICATE:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_SYNDICATE_REPLY(sender)]:</b> [msg]")
 	for(var/client/staff as anything in GLOB.admins)
@@ -76,7 +76,7 @@
 
 /// Used by communications consoles to request the nuclear launch codes
 /proc/nuke_request(text, mob/sender)
-	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
+	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.nuke_request(sender.client, msg)
 	msg = span_adminnotice("<b><font color=orange>NUKE CODE REQUEST:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_CENTCOM_REPLY(sender)] [ADMIN_SET_SD_CODE]:</b> [msg]")
 	for(var/client/staff as anything in GLOB.admins)
@@ -87,7 +87,7 @@
 
 // BANDASTATION ADDITION - START
 /proc/ert_request(text, mob/sender)
-	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
+	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.ert_request(sender.client, msg)
 	msg = span_adminnotice("<b><font color=orange>ERT REQUEST:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_CENTCOM_REPLY(sender)] [ADMIN_ERT_RESPOND]:</b> [msg]")
 	for(var/client/staff as anything in GLOB.admins)
