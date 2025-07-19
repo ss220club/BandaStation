@@ -12,8 +12,14 @@
 	// If main_floor is not specified in the JSON, assume the target is ON the main floor
 	if(isnull(current_map.main_floor))
 		return TRUE
-		
+
 	// Get Z-levels associated with the station
 	var/list/station_levels = levels_by_trait(ZTRAIT_STATION)
-	
+
 	return target.z == station_levels[current_map.main_floor]
+
+/datum/reagents/proc/set_reacting(react = TRUE)
+	if(react)
+		flags &= ~(NO_REACT)
+	else
+		flags |= NO_REACT
