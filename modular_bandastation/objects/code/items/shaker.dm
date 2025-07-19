@@ -27,11 +27,11 @@
 
 	if(!reagents.total_volume)
 		to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] пуст!"))
-		return
+		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, shaking_cooldown))
 		to_chat(user, span_warning("Я только что тряс [capitalize(declent_ru(ACCUSATIVE))]! Нужно дать руке немного отдохнуть."))
-		return
+		return FALSE
 
 	var/adjective = pick("яростно", "страстно", "энергично", "решительно", "как дьявол", "с заботой и любовью", "как будто завтра не наступит")
 	user.visible_message(span_notice("[user] [adjective] трясет [declent_ru(ACCUSATIVE)]!"), span_notice("Вы [adjective] трясете [declent_ru(ACCUSATIVE)]!"))
@@ -45,6 +45,8 @@
 
 	icon_state = initial(icon_state)
 	reagents.set_reacting(FALSE)
+
+	return TRUE
 
 /obj/item/reagent_containers/cup/glass/shaker/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
