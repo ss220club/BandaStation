@@ -715,9 +715,10 @@
 	var/mob/living/carbon/human/good_version
 	if(original)
 		good_version = original.resolve()
-	else
+	if(!good_version)
 		good_version = find_clone()
 	// BANDASTATION EDIT - END
+
 	var/mob/living/carbon/human/bad_version = good_version.make_full_human_copy(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 	candidate.transfer_to(bad_version, force_key_move = TRUE)
 
