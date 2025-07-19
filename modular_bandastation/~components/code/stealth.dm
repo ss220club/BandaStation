@@ -2,19 +2,16 @@
 	var/aim_dir = NORTH
 	var/install_delay = 3 SECONDS
 	var/is_silent_install = TRUE
-	var/is_visible_after_install = FALSE
 	var/list/spotted_by = list()
 	var/atom/target
 
-/datum/component/stealth_device/Initialize(install_delay = 3 SECONDS, is_silent = TRUE, is_visible = FALSE)
+/datum/component/stealth_device/Initialize(install_delay = 3 SECONDS, is_silent = TRUE)
 	if(!istype(parent, /obj/item))
 		return COMPONENT_INCOMPATIBLE
 	if(install_delay)
 		src.install_delay = install_delay
 	if(is_silent)
 		src.is_silent_install = is_silent
-	if(is_visible)
-		src.is_visible_after_install = is_visible
 
 /datum/component/stealth_device/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(on_interact_with_atom))
@@ -47,9 +44,6 @@
 	device.loc = target
 	RegisterSignal(target, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY, PROC_REF(on_target_attackby_secondary))
 	RegisterSignal(target, COMSIG_DETECTIVE_SCANNED, PROC_REF(on_scan))
-	on_plant(target, user)
-	if(is_visible_after_install)
-		mutate_overlay(target, user)
 	return TRUE
 
 /datum/component/stealth_device/proc/on_scan(datum/source, mob/user, list/extra_data)
@@ -78,8 +72,3 @@
 		else
 			to_chat(user, span_warning("Не удалось извлечь скрытый объект: [parent]"))
 
-/datum/component/stealth_device/proc/on_plant(atom/installation_target, mob/living/user)
-	return
-
-/datum/component/stealth_device/proc/mutate_overlay(atom/installation_target, mob/living/user)
-	return
