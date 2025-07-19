@@ -1,9 +1,7 @@
 /// Client var used for tracking the ticket the (usually) not-admin client is dealing with
 /datum/persistent_client/var/datum/help_ticket/current_help_ticket
-
-/client
-	/// What ticket will be opened after opening ui
-	var/ticket_to_open
+/// What ticket will be opened after opening ui
+/client/var/ticket_to_open
 
 /client/verb/ticket_manager()
 	set name = "Ticket Manager"

@@ -22,7 +22,7 @@
 	if(!admin || !needed_ticket)
 		CRASH("Tryed to link admin to ticket with invalid arguments!")
 
-	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN) && !needed_ticket.initiator_client.client != admin)
+	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN) && needed_ticket.initiator_client?.client != admin)
 		needed_ticket.linked_admin = admin.persistent_client
 		message_admins("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 		log_admin("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
@@ -36,10 +36,13 @@
 		message_admins("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
 		log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
 
-		to_chat(needed_ticket.initiator_client.client,
-			custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора.")),
-			MESSAGE_TYPE_ADMINPM)
-		SStgui.update_uis(src)
+	SStgui.update_uis(src)
+	if(!needed_ticket.initiator_client.client)
+		return
+
+	to_chat(needed_ticket.initiator_client.client,
+		custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора.")),
+		MESSAGE_TYPE_ADMINPM)
 
 /// Adds user to ticket writers when he starts typing. Used for type indicator in ticket chat UI
 /datum/ticket_manager/proc/add_to_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
