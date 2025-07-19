@@ -60,7 +60,6 @@
 	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
 /datum/component/stealth_device/proc/remove_stealth_device(mob/user)
-	var/obj/item/device = parent
 	to_chat(user, span_warning("Вы начинаете извлечение скрытого объекта из [target]..."))
 	if(do_after(user, 5 SECONDS, target))
 		if(user.put_in_hands(parent))
