@@ -1,4 +1,4 @@
-.ExtendableInput {
+.ChatInput {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -15,8 +15,8 @@
     cursor: not-allowed;
     background-color: hsl(from var(--color-base) h calc(s - 20) calc(l + 5));
 
-    .ExtendableInput__Text,
-    .ExtendableInput__Buttons {
+    .ChatInput__Text,
+    .ChatInput__Buttons {
       cursor: not-allowed;
       pointer-events: none;
     }

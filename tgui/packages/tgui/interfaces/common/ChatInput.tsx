@@ -1,10 +1,10 @@
-import '../../styles/interfaces/ExtendableInput.scss';
+import '../../styles/interfaces/ChatInput.scss';
 
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { KEY } from 'tgui-core/keys';
 import { classes } from 'tgui-core/react';
 
-type ExtendableInputProps = {
+type ChatInputProps = {
   /** Custom css classes */
   className?: string;
   /** The placeholder text when everything is cleared */
@@ -23,7 +23,7 @@ type ExtendableInputProps = {
   onEnter: (value: string) => void;
 };
 
-export function ExtendableInput(props: ExtendableInputProps) {
+export function ChatInput(props: ChatInputProps) {
   const {
     className,
     value,
@@ -90,7 +90,7 @@ export function ExtendableInput(props: ExtendableInputProps) {
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>): void {
     event.stopPropagation();
-    if (event.key === KEY.Enter) {
+    if (event.key === KEY.Enter && !disabled) {
       event.preventDefault();
       onEnter?.(textRef.current?.innerText || '');
     }
@@ -100,8 +100,8 @@ export function ExtendableInput(props: ExtendableInputProps) {
   return (
     <div
       className={classes([
-        'ExtendableInput',
-        disabled && 'ExtendableInput--disabled',
+        'ChatInput',
+        disabled && 'ChatInput--disabled',
         editing && 'editing',
       ])}
     >
@@ -110,8 +110,8 @@ export function ExtendableInput(props: ExtendableInputProps) {
         contentEditable={!disabled}
         data-placeholder={placeholder}
         className={classes([
-          'ExtendableInput__Text',
-          !value && 'ExtendableInput__Text--placeholder',
+          'ChatInput__Text',
+          !value && 'ChatInput__Text--placeholder',
           className,
         ])}
         autoCorrect="off"
@@ -123,11 +123,11 @@ export function ExtendableInput(props: ExtendableInputProps) {
         onPaste={handlePaste}
       />
       {maxLength && (
-        <div className="ExtendableInput__LeftCharacters">
+        <div className="ChatInput__LeftCharacters">
           {maxLength - value.length}
         </div>
       )}
-      {buttons && <div className="ExtendableInput__Buttons">{buttons}</div>}
+      {buttons && <div className="ChatInput__Buttons">{buttons}</div>}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { Button, Section, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
-import { ExtendableInput } from '../common/ExtendableInput';
+import { ChatInput } from '../common/ChatInput';
 import { TICKET_STATE, TYPING_TIMEOUT } from './constants';
 import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { TicketMessage } from './TicketMessage';
@@ -173,7 +173,7 @@ export function TicketPanel(props) {
       </Stack.Item>
       <Stack.Item style={{ zIndex: 1 }}>
         <Section>
-          <ExtendableInput
+          <ChatInput
             value={inputMessage}
             placeholder={ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'}
             maxLength={maxMessageLength}
