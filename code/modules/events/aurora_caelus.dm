@@ -7,7 +7,7 @@
 	category = EVENT_CATEGORY_FRIENDLY
 	description = "A colourful display can be seen through select windows. And the kitchen."
 
-/datum/round_event_control/aurora_caelus/can_spawn_event(players, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/aurora_caelus/can_spawn_event(players, allow_magic = FALSE)
 	if(!SSmapping.empty_space)
 		return FALSE
 	return ..()
@@ -20,7 +20,7 @@
 /datum/round_event/aurora_caelus/announce(fake)
 	priority_announce("[station_name()]: безобидное облако ионов приближается к вашей станции и истощает свою энергию, ударяя по корпусу. Компания Нанотрейзен одобрила небольшой перерыв для всех сотрудников, чтобы они могли расслабиться и понаблюдать за этим очень редким событием. В это время звездный свет будет ярким, но нежным, меняющимся между спокойными зелеными и синими цветами. Любой персонал, желающий увидеть эти огни самостоятельно, может пройти в ближайшую к ним зону со смотровыми иллюминаторами на космос. Мы надеемся, что вам понравится это явление.",
 	sound = 'sound/announcer/notice/notice2.ogg',
-	sender_override = "Nanotrasen Meteorology Division")
+	sender_override = "Отдел Метеорологии Нанотрейзен")
 	if (fake)
 		return
 	for(var/V in GLOB.player_list)
@@ -68,7 +68,7 @@
 	fade_kitchen()
 	priority_announce("Событие aurora caelus подходит к концу. Условия звездного света постепенно вернутся в норму. Когда все закончится, пожалуйста, вернитесь на свое рабочее место и продолжайте работать в обычном режиме. Приятной смены, [station_name()] и спасибо, что смотрите с нами.",
 	sound = 'sound/announcer/notice/notice2.ogg',
-	sender_override = "Отдел метеорологии Нанотрейзен")
+	sender_override = "Отдел Метеорологии Нанотрейзен")
 
 /datum/round_event/aurora_caelus/proc/fade_space(fade_in = FALSE)
 	set waitfor = FALSE

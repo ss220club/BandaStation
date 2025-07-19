@@ -22,7 +22,7 @@
 	description = "Summons a wave of cute rabbits."
 
 /datum/round_event/rabbitrelease/announce(fake)
-	priority_announce("Unidentified furry objects detected coming aboard [station_name()]. Beware of Adorable-ness.", "Fluffy Alert", ANNOUNCER_ALIENS)
+	priority_announce("На борту [station_name()] обнаружены неопознанные пушистые объекты. Остерегайтесь очаровашек.", "Пушистая тревога", ANNOUNCER_ALIENS)
 
 
 /datum/round_event/rabbitrelease/start()
@@ -160,6 +160,7 @@
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "scotchegg"
 	bite_consumption = 3
+	custom_materials = list(/datum/material/meat = MEATDISH_MATERIAL_AMOUNT)
 	food_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/nutriment/vitamin = 2)
 	crafting_complexity = FOOD_COMPLEXITY_2
 	foodtypes = MEAT

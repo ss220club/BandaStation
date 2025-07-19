@@ -47,6 +47,7 @@
 	name = "Inari"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_inari"
+	hair_appendages_inner = list("hair_inari_a1" = HAIR_APPENDAGE_HANGING_REAR)
 
 /datum/sprite_accessory/hair/kisaragi
 	name = "Kisaragi"

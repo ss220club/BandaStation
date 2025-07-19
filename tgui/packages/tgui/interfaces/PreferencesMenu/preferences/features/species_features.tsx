@@ -1,24 +1,24 @@
 import {
-  Feature,
-  FeatureChoiced,
-  FeatureChoicedServerData,
+  type Feature,
+  type FeatureChoiced,
+  type FeatureChoicedServerData,
   FeatureColorInput,
-  FeatureValueProps,
+  type FeatureValueProps,
 } from './base';
 import { FeatureDropdownInput } from './dropdowns';
 
 export const eye_color: Feature<string> = {
-  name: 'Глаза: цвет',
+  name: 'Глаза - цвет',
   component: FeatureColorInput,
 };
 
 export const facial_hair_color: Feature<string> = {
-  name: 'Лицевая растительность: цвет',
+  name: 'Лицевая растительность - цвет',
   component: FeatureColorInput,
 };
 
 export const facial_hair_gradient: FeatureChoiced = {
-  name: 'Лицевая растительность: градиент',
+  name: 'Лицевая растительность - градиент',
   component: (
     props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
@@ -27,17 +27,17 @@ export const facial_hair_gradient: FeatureChoiced = {
 };
 
 export const facial_hair_gradient_color: Feature<string> = {
-  name: 'Лицевая растительность: цвет градиента',
+  name: 'Лицевая растительность - цвет градиента',
   component: FeatureColorInput,
 };
 
 export const hair_color: Feature<string> = {
-  name: 'Волосы: цвет',
+  name: 'Волосы - цвет',
   component: FeatureColorInput,
 };
 
 export const hair_gradient: FeatureChoiced = {
-  name: 'Волосы: градиент',
+  name: 'Волосы - градиент',
   component: (
     props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
@@ -46,7 +46,7 @@ export const hair_gradient: FeatureChoiced = {
 };
 
 export const hair_gradient_color: Feature<string> = {
-  name: 'Волосы: цвет градиента',
+  name: 'Волосы - цвет градиента',
   component: FeatureColorInput,
 };
 
@@ -69,7 +69,7 @@ export const feature_human_tail: FeatureChoiced = {
 };
 
 export const feature_monkey_tail: FeatureChoiced = {
-  name: 'Tail',
+  name: 'Хвост',
   component: (
     props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
@@ -110,7 +110,7 @@ export const feature_mcolor: Feature<string> = {
 };
 
 export const underwear_color: Feature<string> = {
-  name: 'Нижнее белье: цвет',
+  name: 'Нижнее белье - цвет',
   component: FeatureColorInput,
 };
 
@@ -120,7 +120,7 @@ export const feature_vampire_status: Feature<string> = {
 };
 
 export const heterochromatic: Feature<string> = {
-  name: 'Глаза: цвет гетерохромии (правый глаз)',
+  name: 'Глаза - цвет гетерохромии (правый глаз)',
   component: FeatureColorInput,
 };
 
@@ -254,7 +254,6 @@ export const tajaran_tail_markings_color: Feature<string> = {
 };
 
 // MARK: Skrell features
-
 export const skrell_head_tentacle_color: Feature<string> = {
   name: 'Щупальца на голове: цвет',
   component: FeatureColorInput,

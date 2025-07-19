@@ -3,9 +3,9 @@ import './styles/main.scss';
 import { useEffect, useRef, useState } from 'react';
 import { dragStartHandler } from 'tgui/drag';
 import { isEscape, KEY } from 'tgui-core/keys';
-import { BooleanLike, classes } from 'tgui-core/react';
+import { type BooleanLike, classes } from 'tgui-core/react';
 
-import { Channel, ChannelIterator } from './ChannelIterator';
+import { type Channel, ChannelIterator } from './ChannelIterator';
 import { ChatHistory } from './ChatHistory';
 import { LineLength, RADIO_PREFIXES, WindowSize } from './constants';
 import { getPrefix, windowClose, windowOpen, windowSet } from './helpers';
@@ -162,7 +162,7 @@ export function TguiSay() {
     const iterator = channelIterator.current;
     let newValue = event.currentTarget.value;
 
-    let newPrefix = getPrefix(newValue) || currentPrefix;
+    const newPrefix = getPrefix(newValue) || currentPrefix;
     // Handles switching prefixes
     if (newPrefix && newPrefix !== currentPrefix) {
       setButtonContent(RADIO_PREFIXES[newPrefix]);
@@ -266,27 +266,37 @@ export function TguiSay() {
     }
   }, [value]);
 
+  const TRANSLATE_ITTERATOR: Record<string, string> = {
+    Say: 'Говор',
+    Whis: 'Шёпот',
+    Radio: 'Радио',
+    Me: 'Эмоц',
+    Admin: 'Админ',
+  };
+
   const theme =
-    (lightMode && 'lightMode') ||
     (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
+    TRANSLATE_ITTERATOR[channelIterator.current.current()] ||
     channelIterator.current.current();
 
+  useEffect(() => {
+    setButtonContent(TRANSLATE_ITTERATOR[buttonContent] || buttonContent);
+  }, [buttonContent]);
+
   return (
-    <>
-      <div
-        className={`window window-${theme} window-${size}`}
-        onMouseDown={dragStartHandler}
-      >
-        {!lightMode && <div className={`shine shine-${theme}`} />}
-      </div>
-      <div
-        className={classes(['content', lightMode && 'content-lightMode'])}
-        style={{
-          zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
-        }}
-      >
+    <div
+      className={classes([
+        'window',
+        `window-${theme}`,
+        lightMode && 'window-light',
+      ])}
+      style={{
+        zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
+      }}
+    >
+      <div className="content">
         <button
-          className={`button button-${theme}`}
+          className="button"
           onMouseDown={handleButtonClick}
           onMouseUp={handleButtonRelease}
           type="button"
@@ -295,11 +305,7 @@ export function TguiSay() {
         </button>
         <textarea
           autoCorrect="off"
-          className={classes([
-            'textarea',
-            `textarea-${theme}`,
-            value.length > LineLength.Large && 'textarea-large',
-          ])}
+          className="textarea"
           maxLength={maxLength}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
@@ -308,6 +314,6 @@ export function TguiSay() {
           value={value}
         />
       </div>
-    </>
+    </div>
   );
 }

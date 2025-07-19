@@ -16,6 +16,10 @@
 		"sec_dart",
 		"sec_Islug",
 		"sec_rshot",
+		// BANDASTATION ADDITION - START - GP-9 NT Pistol
+		"c9x25mm_rubber_sec",
+		"c9x25mm_sec",
+		// BANDASTATION ADDITION - END - GP-9 NT Pistol
 	)
 
 /datum/techweb_node/sec_equip
@@ -91,6 +95,10 @@
 		"c38_true_strike_mag",
 		"techshotshell",
 		"flechetteshell",
+		// BANDASTATION ADDITION - START - GP-9 NT Pistol
+		"c9x25mm_hp",
+		"c9x25mm_ap",
+		// BANDASTATION ADDITION - END - GP-9 NT Pistol
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_4_POINTS)
 	discount_experiments = list(/datum/experiment/ordnance/explosive/highyieldbomb = TECHWEB_TIER_4_POINTS)
@@ -118,6 +126,8 @@
 	design_ids = list(
 		"xray_laser",
 		"nuclear_gun",
+		"c38_flare",
+		"c38_flare_mag",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_4_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SECURITY)

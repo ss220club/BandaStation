@@ -53,13 +53,11 @@
 /datum/round_event/valentines/proc/forge_valentines_objective(mob/living/lover, mob/living/date)
 	var/datum/antagonist/valentine/valentine = new()
 	valentine.date = date.mind
-	lover.mind.special_role = "valentine"
 	lover.mind.add_antag_datum(valentine) //These really should be teams but i can't be assed to incorporate third wheels right now
 
 /datum/round_event/valentines/proc/forge_third_wheel(mob/living/sad_one, mob/living/date_one, mob/living/date_two)
 	var/datum/antagonist/valentine/third_wheel/third_wheel = new()
 	third_wheel.date = pick(date_one.mind, date_two.mind)
-	sad_one.mind.special_role = "valentine"
 	sad_one.mind.add_antag_datum(third_wheel)
 
 /datum/round_event/valentines/start()
@@ -122,7 +120,7 @@
 		candidates_pruned[1].mind.add_antag_datum(/datum/antagonist/heartbreaker)
 
 /datum/round_event/valentines/announce(fake)
-	priority_announce("It's Valentine's Day! Give a valentine to that special someone!")
+	priority_announce("Сегодня День святого Валентина! Подарите валентинку кому-нибудь особенному!")
 
 /obj/item/paper/valentine
 	name = "valentine"

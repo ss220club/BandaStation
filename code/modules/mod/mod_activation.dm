@@ -85,12 +85,10 @@
 		playsound(src, 'sound/machines/scanner/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
 	if(part_datum.can_overslot)
 		var/obj/item/overslot = wearer.get_item_by_slot(part.slot_flags)
-		if(overslot && istype(overslot, /obj/item/clothing))
-			var/obj/item/clothing/clothing = overslot
-			if(clothing.clothing_flags & CLOTHING_MOD_OVERSLOTTING)
-				part_datum.overslotting = overslot
-				wearer.transferItemToLoc(overslot, part, force = TRUE)
-				RegisterSignal(part, COMSIG_ATOM_EXITED, PROC_REF(on_overslot_exit))
+		if(istype(overslot, /obj/item/clothing))
+			part_datum.overslotting = overslot
+			wearer.transferItemToLoc(overslot, part, force = TRUE)
+			RegisterSignal(part, COMSIG_ATOM_EXITED, PROC_REF(on_overslot_exit))
 	if(wearer.equip_to_slot_if_possible(part, part.slot_flags, qdel_on_fail = FALSE, disable_warning = TRUE))
 		ADD_TRAIT(part, TRAIT_NODROP, MOD_TRAIT)
 		wearer.update_clothing(slot_flags|part.slot_flags)
@@ -220,7 +218,9 @@
 		if(delayed_activation())
 			playsound(src, 'sound/machines/synth/synth_yes.ogg', 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, frequency = 6000)
 			if(!malfunctioning)
-				wearer.playsound_local(get_turf(src), 'sound/vehicles/mecha/nominal.ogg', 50)
+			// BANDASTATION EDIT START - MOD ACTIVATION SOUND
+				wearer.playsound_local(get_turf(src), theme.activation_sound, 50)
+			// BANDASTATION EDIT START - MOD ACTIVATION SOUND
 		else
 			activating = FALSE
 			for(var/obj/item/sealed_part as anything in sealed_parts)

@@ -1,11 +1,11 @@
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
-import { sendAct } from '../../backend';
-import {
+import type { sendAct } from '../../backend';
+import type {
   LoadoutCategory,
   LoadoutList,
 } from './CharacterPreferences/loadout/base';
-import { Gender } from './preferences/gender';
+import type { Gender } from './preferences/gender';
 
 export enum Food {
   Alcohol = 'ALCOHOL',
@@ -188,6 +188,8 @@ export type PreferencesMenuData = {
   donator_level: number;
   tts_seed: string;
   tts_enabled: BooleanLike;
+  profile_index: Record<string, string>;
+  pref_job_slots: Record<string, number>;
   // BANDASTATION ADDITION END
 };
 
@@ -211,7 +213,6 @@ export type TtsData = {
   seeds: Array<Seed>;
   phrases: string[];
 };
-
 // BANDASTATION ADDITION END
 
 export type ServerData = {

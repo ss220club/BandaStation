@@ -22,7 +22,7 @@
 	/// How good a given object is at causing wounds on carbons. Higher values equal better shots at creating serious wounds.
 	var/wound_bonus = 0
 	/// If this attacks a human with no wound armor on the affected body part, add this to the wound mod. Some attacks may be significantly worse at wounding if there's even a slight layer of armor to absorb some of it vs bare flesh
-	var/bare_wound_bonus = 0
+	var/exposed_wound_bonus = 0
 
 	/// A multiplier to an object's force when used against a structure, vehicle, machine, or robot.
 	/// Use [/obj/proc/get_demolition_modifier] to get the value.
@@ -100,8 +100,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 				message_verb_continuous = "pulverises"
 
 		if(demo_mod < 1)
-			message_verb_simple = "безуспешно " + ru_attack_verb(message_verb_simple)
-			message_verb_continuous = "безуспешно " + ru_attack_verb(message_verb_continuous)
+			message_verb_simple = "слабо " + ru_attack_verb(message_verb_simple)
+			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
 
 		user.visible_message(
 			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
@@ -326,28 +326,18 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 	. = ..()
 	if(!(material_flags & MATERIAL_AFFECT_STATISTICS))
 		return
-	if(uses_integrity)
-		var/integrity_mod = GET_MATERIAL_MODIFIER(material.integrity_modifier, multiplier)
-		modify_max_integrity(ceil(max_integrity * integrity_mod))
 	var/strength_mod = GET_MATERIAL_MODIFIER(material.strength_modifier, multiplier)
 	force *= strength_mod
 	throwforce *= strength_mod
-	var/list/armor_mods = material.get_armor_modifiers(multiplier)
-	set_armor(get_armor().generate_new_with_multipliers(armor_mods))
 
 ///This proc is called when the material is removed from an object specifically.
 /obj/remove_single_mat_effect(datum/material/material, mat_amount, multiplier)
 	. = ..()
 	if(!(material_flags & MATERIAL_AFFECT_STATISTICS))
 		return
-	if(uses_integrity)
-		var/integrity_mod = GET_MATERIAL_MODIFIER(material.integrity_modifier, multiplier)
-		modify_max_integrity(floor(max_integrity / integrity_mod))
 	var/strength_mod = GET_MATERIAL_MODIFIER(material.strength_modifier, multiplier)
 	force /= strength_mod
 	throwforce /= strength_mod
-	var/list/armor_mods = material.get_armor_modifiers(1 / multiplier)
-	set_armor(get_armor().generate_new_with_multipliers(armor_mods))
 
 /// Returns modifier to how much damage this object does to a target considered vulnerable to "demolition" (other objects, robots, etc)
 /obj/proc/get_demolition_modifier(obj/target)

@@ -82,10 +82,15 @@ ALERT_EPSILON Центральным Командованием был уста�
 ## The total weight of station goals possible for a round (allows multiple goals)
 STATION_GOAL_BUDGET 1
 
+## If TRUE / 1, station is raised to blue alert at roundstart.
+## If FALSE / 0, station remains at green alert.
+## Roundstart command report and greendshift announcements are unaffected.
+ROUNDSTART_BLUE_ALERT 1
+
 ## GAME MODES ###
 
 ## Uncomment to not send a roundstart intercept report. Gamemodes may override this.
-## NO_INTERCEPT_REPORT
+NO_INTERCEPT_REPORT
 
 ## Percent weight reductions for three of the most recent modes
 
@@ -272,6 +277,10 @@ RANDOM_LAWS robocop
 RANDOM_LAWS corporate
 RANDOM_LAWS nt_default
 RANDOM_LAWS crewsimovpp
+RANDOM_LAWS crewsimov
+RANDOM_LAWS paladin
+RANDOM_LAWS petrovich
+RANDOM_LAWS renter
 
 ## Quirky laws. Shouldn't cause too much harm
 #RANDOM_LAWS hippocratic
@@ -303,19 +312,18 @@ LAW_WEIGHT custom,0
 
 ## standard-ish laws. These are fairly ok to run
 ## Unique AI station trait uses weights so we don't want asimov
-LAW_WEIGHT asimov,0
+LAW_WEIGHT asimov,5
 LAW_WEIGHT asimovpp,5
-LAW_WEIGHT paladin,5
 LAW_WEIGHT paladin5,5
-LAW_WEIGHT robocop,5
 LAW_WEIGHT corporate,5
 LAW_WEIGHT hippocratic,5
 LAW_WEIGHT maintain,5
-LAW_WEIGHT liveandletlive,5
 LAW_WEIGHT peacekeeper,5
 LAW_WEIGHT ten_commandments,5
 LAW_WEIGHT nutimov,5
 LAW_WEIGHT nt_default,5
+LAW_WEIGHT crewsimov,5
+LAW_WEIGHT renter,5
 
 ## Quirky laws. Shouldn't cause too much harm
 LAW_WEIGHT reporter,3
@@ -325,15 +333,21 @@ LAW_WEIGHT overlord,3
 LAW_WEIGHT painter,3
 LAW_WEIGHT dungeon_master,3
 LAW_WEIGHT thinkermov,3
+LAW_WEIGHT balance,3
+LAW_WEIGHT petrovich,3
 
 ## Bad idea laws. Probably shouldn't enable these
 LAW_WEIGHT syndie,0
 LAW_WEIGHT ninja,0
 LAW_WEIGHT antimov,0
-LAW_WEIGHT balance,0
 LAW_WEIGHT thermodynamic,0
 LAW_WEIGHT buildawall,0
 LAW_WEIGHT drone,0
+LAW_WEIGHT ert,0
+LAW_WEIGHT liveandletlive,0
+LAW_WEIGHT paladin,0
+LAW_WEIGHT robocop,0
+LAW_WEIGHT yesman,0
 
 ##------------------------------------------------
 
@@ -379,6 +393,7 @@ ROUNDSTART_RACES ethereal
 #ROUNDSTART_RACES skeleton
 #ROUNDSTART_RACES zombie
 #ROUNDSTART_RACES pod
+#ROUNDSTART_RACES ghost
 
 ## Races that are radical departures to what a species is, so while they technically can be roundstart - it's probably not wise
 #ROUNDSTART_RACES android
