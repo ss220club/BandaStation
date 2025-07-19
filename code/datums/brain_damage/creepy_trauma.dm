@@ -115,7 +115,7 @@
 			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), "cough")
 			owner.adjust_dizzy(20 SECONDS)
 			owner.adjust_disgust(5)
-			to_chat(owner, span_userdanger("Ты давишься и проглатываешь немного желчи..."))
+			to_chat(owner, span_userdanger("Вы давитесь и проглатываете немного желчи..."))
 
 // if the creep examines first, then the obsession examines them, have a 50% chance to possibly blow their cover. wearing a mask avoids this risk
 /datum/brain_trauma/special/obsessed/proc/stare(datum/source, mob/living/examining_mob, triggering_examiner)
