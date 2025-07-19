@@ -1,9 +1,9 @@
 /datum/brain_trauma/special/obsessed
-	name = "Psychotic Schizophrenia"
-	desc = "Patient has a subtype of delusional disorder, becoming irrationally attached to someone."
-	scan_desc = "psychotic schizophrenic delusions"
+	name = "Психотическая шизофрения"
+	desc = "У пациента есть подтип бредового расстройства, он становится иррационально привязанным к кому-то."
+	scan_desc = "психотический шизофренический бред"
 	gain_text = "If you see this message, make a github issue report. The trauma initialized wrong."
-	lose_text = span_warning("The voices in your head fall silent.")
+	lose_text = span_warning("Голоса в вашей голове замолкают..")
 	can_gain = TRUE
 	random_gain = FALSE
 	resilience = TRAUMA_RESILIENCE_LOBOTOMY
