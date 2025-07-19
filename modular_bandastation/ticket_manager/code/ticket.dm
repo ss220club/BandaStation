@@ -1,4 +1,6 @@
 /datum/help_ticket
+	/// Name used for stat panel
+	var/stat_name
 	/// Unique ID of the ticket
 	var/id
 	/// The current state of the ticket
@@ -32,6 +34,10 @@
 	if(!message || !creator || !creator.mob)
 		qdel(src)
 		return
+
+	stat_name = sanitize(trim(message, 100))
+	if(length(message) > 100)
+		stat_name += "..."
 
 	id = ++ticket_counter
 	opened_at = time_stamp(NONE) // Reset format to Byond default

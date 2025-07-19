@@ -1,10 +1,14 @@
 /datum/ticket_manager/Topic(href, href_list)
 	. = ..()
+	var/client/user = usr.client
+	if(href_list["open_ticket_manager"])
+		ui_interact(user.mob)
+		return
+
 	var/ticket_id = text2num(href_list["ticket_id"])
 	if(!ticket_id)
 		return
 
-	var/client/user = usr.client
 	var/datum/help_ticket/user_ticket = user.persistent_client.current_help_ticket
 	if(!check_rights_for(user, R_ADMIN) && (!user_ticket || user_ticket.id != ticket_id))
 		to_chat(user, "Вы не можете взаимодействовать с этим тикетом!")
@@ -51,3 +55,24 @@
 	if(href_list["close_ticket"])
 		set_ticket_state(user, needed_ticket, TICKET_CLOSED)
 		return
+
+/datum/ticket_manager/proc/stat_entry()
+	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
+	var/list/stat_info = list()
+	var/list/active_tickets = list()
+	var/list/other_tickets = list()
+	for(var/ticket_id, ticket_datum in all_tickets)
+		var/datum/help_ticket/ticket = ticket_datum
+		if(ticket.state == TICKET_OPEN)
+			active_tickets += ticket
+		else
+			other_tickets += ticket
+
+	stat_info[++stat_info.len] = list("Активные тикеты:", "[length(active_tickets)]", null, "[GLOB.ticket_manager_ref];open_ticket_manager=1")
+	for(var/datum/help_ticket/ticket as anything in active_tickets)
+		stat_info[++stat_info.len] = list("Тикет #[ticket.id]:", "[ticket.stat_name]", null, "[GLOB.ticket_manager_ref];ticket_id=[ticket.id];open_ticket=[ticket.id]")
+
+	stat_info[++stat_info.len] = list("Закрытые тикеты:", "[length(other_tickets)]", null, "[GLOB.ticket_manager_ref];open_ticket_manager=1")
+	return stat_info
+
