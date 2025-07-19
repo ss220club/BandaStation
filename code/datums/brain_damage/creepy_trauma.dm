@@ -17,10 +17,10 @@
 	var/obsession_hug_count = 0
 
 // BANDATATION ADD - Start
-/datum/brain_trauma/special/obsessed/New(mob/living/obsession_target)
+/datum/brain_trauma/special/obsessed/New(mob/living/obsession)
 	. = ..()
 	if(istype(obsession_target))
-		obsession = obsession_target
+		src.obsession = obsession
 // BANDATATION ADD - End
 
 /datum/brain_trauma/special/obsessed/on_gain()
