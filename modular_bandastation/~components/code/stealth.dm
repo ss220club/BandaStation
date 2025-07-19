@@ -26,23 +26,25 @@
 /datum/component/stealth_device/proc/unregister_target_signals()
 	if(target)
 		UnregisterSignal(target, list(COMSIG_DETECTIVE_SCANNED, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY))
-		target = null
 
 /datum/component/stealth_device/proc/on_interact_with_atom(obj/item/source, mob/living/user, atom/interacting_with, list/modifiers)
 	SIGNAL_HANDLER
 	if(isdead(interacting_with))
 		return NONE
 	aim_dir = get_dir(user, interacting_with)
-	return plant_stealth_device(interacting_with, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+	INVOKE_ASYNC(src, PROC_REF(plant_stealth_device), interacting_with, user)
+	return ITEM_INTERACT_SUCCESS
 
 /datum/component/stealth_device/proc/plant_stealth_device(atom/installation_target, mob/living/user)
+	var/obj/item/device = parent
 	to_chat(user, span_notice("Вы начинаете устанавливать [parent]..."))
 	if(!do_after(user, install_delay, target = installation_target, hidden = is_silent_install))
 		return FALSE
 	if(!user.temporarilyRemoveItemFromInventory(parent))
 		return FALSE
 	target = installation_target
-	target.contents += parent
+	device.forceMove(target)
+	device.loc = target
 	RegisterSignal(target, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY, PROC_REF(on_target_attackby_secondary))
 	RegisterSignal(target, COMSIG_DETECTIVE_SCANNED, PROC_REF(on_scan))
 	on_plant(target, user)
@@ -64,6 +66,7 @@
 	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
 /datum/component/stealth_device/proc/remove_stealth_device(mob/user)
+	var/obj/item/device = parent
 	to_chat(user, span_warning("Вы начинаете извлечение скрытого объекта из [target]..."))
 	if(do_after(user, 5 SECONDS, target))
 		if(user.put_in_hands(parent))
@@ -71,6 +74,7 @@
 			to_chat(user, span_warning("Скрытный объект был извлечён: [parent]"))
 			target.contents -= parent
 			unregister_target_signals()
+			target = null
 		else
 			to_chat(user, span_warning("Не удалось извлечь скрытый объект: [parent]"))
 
