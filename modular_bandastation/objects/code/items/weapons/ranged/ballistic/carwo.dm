@@ -78,6 +78,12 @@
 /obj/item/gun/ballistic/automatic/carwo/marksman/no_mag
 	spawnwithmagazine = FALSE
 
+/obj/item/gun/ballistic/automatic/carwo/marksman/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	w_class = WEIGHT_CLASS_BULKY
+
 // MARK: Machineguns based on the base Sol rifle
 /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed
 	name = "Qarad Light Machinegun"

@@ -1,4 +1,4 @@
-// TSF
+// MARK: TSF
 /obj/item/storage/belt/military/army/tsf
 	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
 	icon_state = "military_holster"
@@ -67,7 +67,17 @@
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
 
-//USSP
+/obj/item/storage/belt/holster/detective/full/ert/tsf_commander
+	name = "TSF commander's holster"
+	desc = "Wearing this makes you feel badass."
+
+/obj/item/storage/belt/holster/detective/full/ert/tsf_commander/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/ammo_box/magazine/r10mm = 2,
+		/obj/item/gun/ballistic/automatic/pistol/deagle/regal = 1,
+	),src)
+
+// MARK: USSP
 /obj/item/storage/belt/military/army/ussp
 	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
@@ -142,3 +152,14 @@
 
 /obj/item/stack/sheet/mineral/sandbags/thirty
 	amount = 30
+
+/obj/item/storage/belt/holster/detective/full/ert/ussp_commander
+	name = "USSP commander's holster"
+	desc = "Wearing this makes you feel comrade."
+	icon_state = "holster"
+
+/obj/item/storage/belt/holster/detective/full/ert/ussp_commander/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/ammo_box/n762_cylinder = 2,
+		/obj/item/gun/ballistic/revolver/nagant = 1,
+	),src)

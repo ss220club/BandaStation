@@ -2,13 +2,11 @@
 	name = "MARSOC regular"
 	desc = "Боевой МОД КМП ТСФ."
 	extended_desc = "Модульный костюм, который носят морские пехотинцы Командования специальных операций морской пехоты Транс-Солнечной Федерации.\
-		Бронированный, пригодный для выхода в открытый космос и огнеупорный."
+		Бронированный, огнеупорный и пригодный для выхода в открытый космос."
 	default_skin = "tsf_standart"
 	armor_type = /datum/armor/mod_theme_tsf_standart
-	complexity_max = DEFAULT_MAX_COMPLEXITY
 	siemens_coefficient = 0
 	slowdown_deployed = 0.25
-	activation_step_time = MOD_ACTIVATION_STEP_TIME
 	allowed_suit_storage = list(
 		/obj/item/ammo_box,
 		/obj/item/ammo_casing,
@@ -72,16 +70,14 @@
 	desc = "Офицерский боевой МОД КМП ТСФ."
 	extended_desc = "Модульный костюм, который носят младшие офицеры Командования специальных операций морской пехоты Транс-Солнечной Федерации.\
 		Золотистые полосы указывают на звание владельца. \
-		Бронированный, пригодный для выхода в открытый космос и огнеупорный."
+		Бронированный, огнеупорный и пригодный для выхода в открытый космос."
 	default_skin = "tsf_elite"
 	armor_type = /datum/armor/mod_theme_tsf_elite
 	resistance_flags = FIRE_PROOF|ACID_PROOF
-	atom_flags = PREVENT_CONTENTS_EXPLOSION_1
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	complexity_max = DEFAULT_MAX_COMPLEXITY + 10
 	siemens_coefficient = 0
 	slowdown_deployed = 0.25
-	activation_step_time = MOD_ACTIVATION_STEP_TIME
 	allowed_suit_storage = list(
 		/obj/item/ammo_box,
 		/obj/item/ammo_casing,

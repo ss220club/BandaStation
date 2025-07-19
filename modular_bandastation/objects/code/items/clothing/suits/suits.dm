@@ -40,7 +40,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "jacket_syndie"
-	flags_inv = HIDEGLOVES|HIDEJUMPSUIT
+	flags_inv = HIDEGLOVES | HIDEJUMPSUIT
 	slowdown = 0
 
 /obj/item/clothing/suit/space/deathsquad/officer/field
@@ -79,12 +79,21 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "hardsuit-sec-old"
 
-//TSF
+// MARK: TSF
 /obj/item/clothing/suit/tsf_suitjacket
 	name = "federate suit-jacket"
 	desc = "Дорогая куртка прямиком из Центральных Миров. Имеет отличительные знаки ТСФ."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	icon_state = "tsf_suit_jacket"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	worn_icon_state = "tsf_suit_jacket"
+	body_parts_covered = CHEST | GROIN | ARMS
+
+// MARK: Etamin ind.
+/obj/item/clothing/suit/etamin_coat
+	name = "Etamin Ind. officer coat"
+	desc = "Этот плащ был создан специально для офицеров корпорации Etamin Industries. Если вы видите его на ком-то, то либо перед вами офицер корпорации, либо тот, кто отдал бешеные бабки за этот плащ."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
-	body_parts_covered = CHEST|GROIN|ARMS
+	icon_state = "ei_coat"
+	body_parts_covered = CHEST | GROIN | ARMS

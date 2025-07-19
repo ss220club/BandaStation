@@ -23,7 +23,6 @@
 	trim = /datum/id_trim/ussp
 	wildcard_slots = WILDCARD_LIMIT_CENTCOM
 
-
 /datum/id_trim/ussp
 	access = list(ACCESS_CENT_GENERAL)
 	assignment = "USSP"
@@ -52,7 +51,7 @@
 	)
 	gloves = /obj/item/clothing/gloves/combat
 	shoes = /obj/item/clothing/shoes/jackboots
-	head = /obj/item/clothing/head/hats/ussp/command
+	head = /obj/item/clothing/head/hats/ussp_command
 	mask = /obj/item/cigarette/pipe
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
@@ -66,36 +65,6 @@
 /datum/id_trim/ussp/commander/New()
 	. = ..()
 	access = list(ACCESS_CENT_GENERAL) | (SSid_access.get_region_access_list(list(REGION_GENERAL)) + ACCESS_COMMAND)
-
-/obj/item/storage/belt/holster/detective/full/ert/ussp_commander
-	name = "USSP commander's holster"
-	desc = "Wearing this makes you feel comrade."
-	icon_state = "holster"
-
-/obj/item/storage/belt/holster/detective/full/ert/ussp_commander/PopulateContents()
-	generate_items_inside(list(
-		/obj/item/ammo_box/n762_cylinder = 2,
-		/obj/item/gun/ballistic/revolver/nagant = 1,
-	),src)
-
-/obj/item/ammo_box/n762_cylinder
-	name = "speed loader (7.62x38mmR)"
-	desc = "Designed to quickly reload revolvers. Made in USSP."
-	icon_state = "357"
-	ammo_type = /obj/item/ammo_casing/n762
-	max_ammo = 7
-	caliber = CALIBER_N762
-	multiple_sprites = AMMO_BOX_PER_BULLET
-	item_flags = NO_MAT_REDEMPTION
-	ammo_band_icon = "+357_ammo_band"
-	ammo_band_color = null
-
-/obj/item/radio/headset/heads/captain/alt/ussp
-	name = "\proper USSP's bowman headset"
-	icon_state = "ussp_headset"
-	worn_icon_state = "ussp_headset"
-	keyslot = /obj/item/encryptionkey/headset_cent
-	keyslot2 = /obj/item/encryptionkey/heads/captain
 
 // USSP Soldier (Unarmed)
 /datum/outfit/ussp/soldier_unarmed
@@ -157,7 +126,7 @@
 		/obj/item/lighter/greyscale,
 		/obj/item/binoculars
 	)
-	head = /obj/item/clothing/head/hats/ussp/officer
+	head = /obj/item/clothing/head/hats/ussp_officer
 	gloves = /obj/item/clothing/gloves/combat
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
@@ -221,14 +190,15 @@
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/reagent_containers/hypospray/combat = 1,
 		/obj/item/storage/medkit/regular = 1,
 		/obj/item/storage/medkit/advanced = 1,
 		/obj/item/storage/medkit/tactical = 1,
+		/obj/item/defibrillator/compact/loaded
 	)
+	head = /obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
 	glasses = /obj/item/clothing/glasses/hud/health
 	belt = /obj/item/storage/belt/military/army/ussp/full_rifle
-	l_pocket = /obj/item/healthanalyzer
+	l_pocket = /obj/item/healthanalyzer/advanced
 
 	skillchips = list(/obj/item/skillchip/entrails_reader)
 
@@ -276,14 +246,6 @@
 	r_hand = /obj/item/shield/riot/flash/ussp
 	l_pocket = /obj/item/assembly/flash
 	r_pocket = /obj/item/grenade/flashbang
-
-/obj/item/clothing/mask/balaclava/breath
-	name = "breathclava"
-	clothing_flags = MASKINTERNALS
-	visor_flags = MASKINTERNALS
-	flags_cover = MASKCOVERSMOUTH
-	visor_flags_cover = MASKCOVERSMOUTH|HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
-	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT|HIDEEARS
 
 /datum/id_trim/ussp/soldier/riot
 	assignment = "USSP - OMON"
@@ -354,7 +316,6 @@
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
-		/obj/item/ammo_box/magazine/m223 = 4,
 	)
 	neck = /obj/item/binoculars
 
@@ -363,8 +324,8 @@
 	name = "USSP - Infiltrator"
 	id = /obj/item/card/id/advanced/ussp
 	id_trim = /datum/id_trim/ussp/infiltrator
-	uniform = /obj/item/clothing/under/syndicate
-	suit = /obj/item/clothing/suit/hooded/stealth_cloak/ussp
+	uniform = /obj/item/clothing/under/syndicate/camo
+	suit = /obj/item/clothing/suit/hooded/stealth_cloak
 	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/upp/suppressed
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
@@ -382,12 +343,6 @@
 	neck = /obj/item/binoculars
 	belt = /obj/item/storage/belt/military/army/ussp/full_infiltrator
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
-
-/obj/item/gun/ballistic/automatic/sabel/auto/upp/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-	w_class = WEIGHT_CLASS_BULKY
 
 /datum/id_trim/ussp/infiltrator
 	assignment = "USSP - Razvedka"
@@ -414,7 +369,7 @@
 		/obj/item/folder/red,
 		/obj/item/pen/fourcolor,
 	)
-	head = /obj/item/clothing/head/hats/ussp/officer
+	head = /obj/item/clothing/head/hats/ussp_officer
 	gloves = /obj/item/clothing/gloves/combat
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
@@ -444,7 +399,7 @@
 		/obj/item/pen/fourcolor,
 	)
 	gloves = /obj/item/clothing/gloves/color/white
-	head = /obj/item/clothing/head/hats/ussp/officer
+	head = /obj/item/clothing/head/hats/ussp_officer
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	shoes = /obj/item/clothing/shoes/jackboots
 	l_hand = /obj/item/storage/briefcase

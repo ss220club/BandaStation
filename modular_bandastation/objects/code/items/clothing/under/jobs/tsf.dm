@@ -1,6 +1,4 @@
-// MARK: Under //
-
-// TSF Marine
+// MARK: TSF
 /obj/item/clothing/under/rank/tsf
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/tsf.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/tsf.dmi'
@@ -41,13 +39,13 @@
 	desc = "Стандартный деловой костюм официальных лиц Транс-Солнечной Федерации."
 	icon_state = "tsf_formal_suit"
 
-/obj/item/clothing/under/rank/tsf/formal/skirt
+/obj/item/clothing/under/rank/tsf/formal_skirt
 	name = "federate formal skirt"
 	desc = "Стандартная деловая юбка официальных лиц Транс-Солнечной Федерации."
 	icon_state = "tsf_formal_skirt"
 
-/obj/item/clothing/under/rank/tsf/formal/w_skirt
+/obj/item/clothing/under/rank/tsf/formal_w_skirt
 	name = "federate formal white skirt"
-	desc = "Ослепительно белая деловая юбка официальных лиц Транс-Солнечной Федерации. "
+	desc = "Ослепительно белая деловая юбка официальных лиц Транс-Солнечной Федерации."
 	icon_state = "tsf_formal_wskirt"
 
