@@ -15,6 +15,11 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 		ui.set_autoupdate(FALSE)
 		ui.open()
 
+/datum/ticket_manager/ui_assets(mob/user)
+	return list(
+		get_asset_datum(/datum/asset/spritesheet_batched/chat),
+	)
+
 /datum/ticket_manager/ui_data(mob/user)
 	var/list/data = list()
 	var/client/C = user.client
@@ -177,7 +182,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			"initiatorKey" = ticket.initiator_key,
 			"openedTime" = ticket.opened_at,
 			"closedTime" = ticket.closed_at,
-			"linkedAdmin" = ticket.linked_admin,
+			"linkedAdmin" = !!ticket.linked_admin,
 			"adminReplied" = ticket.admin_replied,
 			"writers" = ticket.writers,
 			"messages" = ticket.messages,

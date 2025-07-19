@@ -82,7 +82,7 @@
 	remove_from_ticket_writers(sender, needed_ticket, FALSE)
 	needed_ticket.messages += list(list(
 		"sender" = sender.key,
-		"message" = message,
+		"message" = emoji_parse(message),
 		"time" = time_stamp(NONE),
 	))
 	SStgui.update_uis(src)
@@ -163,7 +163,8 @@
 	SStgui.update_uis(src)
 
 /// Send admin ticket reply to player, if he's online
-/datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, message)
+/datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, raw_message)
+	var/message = emoji_parse(raw_message)
 	var/id = needed_ticket.id
 	var/is_pm = needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM
 	var/title = span_adminhelp("Ответ на тикет #[id]")
@@ -185,12 +186,16 @@
 			MESSAGE_TYPE_ADMINPM)
 
 	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [admin_key] → [player_key]:"
-	var/log_message = "[sanitize_text(trim(message))]"
+	var/log_message = "[message]"
 	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
 	log_admin_private("[log_prefix] [log_message]")
 
 /// Send player ticket reply to admin, if he's online
-/datum/ticket_manager/proc/send_chat_message_to_admin(client/player, datum/help_ticket/needed_ticket, message)
+/datum/ticket_manager/proc/send_chat_message_to_admin(client/player, datum/help_ticket/needed_ticket, raw_message)
+	var/message = emoji_parse(sanitize(trim(raw_message)))
+	if(!message)
+		return
+
 	var/id = needed_ticket.id
 	var/is_pm = needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM
 	var/title = span_adminhelp("Ответ на тикет #[id]")
@@ -213,7 +218,7 @@
 			MESSAGE_TYPE_ADMINPM)
 
 	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [player_key] → [admin_key]:"
-	var/log_message = "[sanitize_text(trim(message))]"
+	var/log_message = "[message]"
 	for(var/client/A in GLOB.admins)
 		if(A.key == admin.key)
 			continue
@@ -231,6 +236,9 @@
 		user_client = thing
 
 	var/datum/help_ticket/user_ticket = user_client.persistent_client.current_help_ticket
+	if(!user_ticket)
+		return
+
 	if(istype(user_client) && user_ticket)
 		user_ticket.messages += list(list(
 			"sender" = "ADMIN_TICKET_LOG",
@@ -243,3 +251,4 @@
 
 	var/client/admin = user_ticket.linked_admin.client
 	GLOB.ticket_manager.send_chat_message_to_player(admin || "", user_ticket, player_message)
+	SStgui.update_uis(GLOB.ticket_manager)
