@@ -6,6 +6,7 @@ import { Window } from '../layouts';
 
 type HelpData = {
   adminCount: number;
+  maxMessageLength: number;
   ticketTypes: TicketType[];
 };
 
@@ -22,7 +23,7 @@ type TicketType = {
  */
 export const TicketCreation = (props) => {
   const { act, data } = useBackend<HelpData>();
-  const { adminCount, ticketTypes } = data;
+  const { adminCount, ticketTypes, maxMessageLength } = data;
   const [helpMessage, setHelpMessage] = useState('');
   const [selectedType, setSelectedType] = useState('Admin');
   const [selectTypeModal, setSelectTypeModal] = useState(false);
@@ -72,6 +73,7 @@ export const TicketCreation = (props) => {
                 autoFocus
                 fluid
                 height="100%"
+                maxLength={maxMessageLength}
                 placeholder={
                   selectedType === 'Admin'
                     ? 'Опишите вашу проблему...'
