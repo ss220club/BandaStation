@@ -20,7 +20,10 @@
 /datum/brain_trauma/special/obsessed/New(target)
 	. = ..()
 	if(target)
-		obsession = target
+/datum/brain_trauma/special/obsessed/New(mob/living/obsession)
+	. = ..()
+	if(istype(obsession))
+		src.obsession = obsession
 // BANDATATION ADD - End
 
 /datum/brain_trauma/special/obsessed/on_gain()

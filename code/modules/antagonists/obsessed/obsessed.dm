@@ -49,7 +49,7 @@
 	// BANDASTATION ADD - Start
 	var/list/admin_pool = list("[RANDOM_TARGET]" = TRUE)
 	for(var/mob/living/carbon/human/player in GLOB.player_list)
-		if(!player.client || !player.mind || player.stat != CONSCIOUS || player == C)
+		if(!player.client || !player.mind || player == C)
 			continue
 		admin_pool += player
 
