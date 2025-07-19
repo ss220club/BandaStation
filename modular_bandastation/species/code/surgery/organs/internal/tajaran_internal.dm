@@ -10,6 +10,8 @@
 	disliked_foodtypes = NUTS | GROSS | ORANGES
 	toxic_foodtypes = SUGAR
 	organ_traits = list(TRAIT_WOUND_LICKER)
+	actions_types = list(/datum/action/item_action/organ_action/go_feral_tajaran)
+	var/feral_mode = FALSE
 	var/static/list/speech_replacements = list(
 		new /regex("r+", "g") = "rr",
 		new /regex("R+", "g") = "RR",
@@ -24,6 +26,13 @@
 		replacements = speech_replacements,\
 		should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech))\
 	)
+
+/obj/item/organ/tongue/tajaran/proc/toggle_feral()
+	feral_mode = !feral_mode
+	if(feral_mode)
+		add_organ_trait(TRAIT_FERAL_BITER)
+	else
+		remove_organ_trait(TRAIT_FERAL_BITER)
 
 /obj/item/organ/tongue/get_possible_languages()
 	return ..() + /datum/language/siiktajr
@@ -79,6 +88,13 @@
 
 /obj/item/organ/brain/tajaran
 	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
+
+/obj/item/organ/brain/tajaran/get_attacking_limb(mob/living/carbon/human/target)
+	var/starving_cat_bonus = owner.nutrition <= NUTRITION_LEVEL_HUNGRY ? 1 : 10
+	var/crazy_feral_cat = clamp((starving_cat_bonus * owner.mob_mood?.sanity_level), 0, 100)
+	if(prob(crazy_feral_cat) || HAS_TRAIT(owner, TRAIT_FERAL_BITER))
+		return owner.get_bodypart(BODY_ZONE_HEAD) || ..()
+	return ..()
 
 /obj/item/organ/lungs/tajaran
 	name = "tajaran lungs"

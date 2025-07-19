@@ -140,3 +140,42 @@
 
 #undef GET_ATOM_SHIFF_FINGERPRINTS
 #undef GET_ATOM_SHIFF_BLOOD_DNA
+
+/datum/action/item_action/organ_action/go_feral_vulpkanin
+	name = "Кусаться"
+	button_icon = 'icons/mob/actions/actions_items.dmi'
+	button_icon_state = "feral_mode_off"
+
+/datum/action/item_action/organ_action/go_feral_vulpkanin/do_effect(trigger_flags)
+	var/obj/item/organ/tongue/vulpkanin/vulpkanin_tongue = target
+	vulpkanin_tongue.toggle_feral()
+	if(!vulpkanin_tongue.feral_mode)
+		background_icon_state = "bg_default"
+		button_icon_state = "feral_mode_off"
+		to_chat(vulpkanin_tongue.owner, span_notice("Вы не будете кусаться при атаке без оружия."))
+	else
+		background_icon_state = "bg_default_on"
+		button_icon_state = "feral_mode_on"
+		to_chat(vulpkanin_tongue.owner, span_notice("Вы будете кусаться при атаке без оружия."))
+	build_all_button_icons()
+	return TRUE
+
+// MARK: Tajaran skills
+/datum/action/item_action/organ_action/go_feral_tajaran
+	name = "Кусаться"
+	button_icon = 'icons/mob/actions/actions_items.dmi'
+	button_icon_state = "feral_mode_off"
+
+/datum/action/item_action/organ_action/go_feral_tajaran/do_effect(trigger_flags)
+	var/obj/item/organ/tongue/tajaran/tajaran_tongue = target
+	tajaran_tongue.toggle_feral()
+	if(!tajaran_tongue.feral_mode)
+		background_icon_state = "bg_default"
+		button_icon_state = "feral_mode_off"
+		to_chat(tajaran_tongue.owner, span_notice("Вы не будете кусаться при атаке без оружия."))
+	else
+		background_icon_state = "bg_default_on"
+		button_icon_state = "feral_mode_on"
+		to_chat(tajaran_tongue.owner, span_notice("Вы будете кусаться при атаке без оружия."))
+	build_all_button_icons()
+	return TRUE
