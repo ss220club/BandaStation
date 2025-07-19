@@ -24624,3 +24624,66 @@ accusative = "воронью мантию"
 instrumental = "вороньей мантией"
 prepositional = "вороньей мантии"
 gender = "female"
+
+[" centcom combat implant"]
+nominative = "боевой имплант центрального командования"
+genitive = "боевого импланта центрального командования"
+dative = "боевому импланту центрального командования"
+accusative = "боевой имплант центрального командования"
+instrumental = "боевым имплантом центрального командования"
+prepositional = "боевом импланте центрального командования"
+gender = "male"
+
+["custom arm implant"]
+nominative = "настраиваемый имплант руки"
+genitive = "настраиваемого импланта руки"
+dative = "настраиваемому импланту руки"
+accusative = "настраиваемый имплант руки"
+instrumental = "настраиваемым имплантом руки"
+prepositional = "настраиваемом импланте руки"
+gender = "male"
+
+["shielded security HUD implant"]
+nominative = "защищенный имплант охранного HUD"
+genitive = "защищенного импланта охранного HUD"
+dative = "защищенному импланту охранного HUD"
+accusative = "защищенный имплант охранного HUD"
+instrumental = "защищенным имплантом охранного HUD"
+prepositional = "защищенном импланте охранного HUD"
+gender = "male"
+
+["EMP absorber"]
+nominative = "поглотитель ЭМИ"
+genitive = "поглотителя ЭМИ"
+dative = "поглотителю ЭМИ"
+accusative = "поглотитель ЭМИ"
+instrumental = "поглотителем ЭМИ"
+prepositional = "поглотителе ЭМИ"
+gender = "male"
+
+["EMP absorber implant case"]
+nominative = "кейс для поглотителя ЭМИ"
+genitive = "кейса для поглотителя ЭМИ"
+dative = "кейсу для поглотителя ЭМИ"
+accusative = "кейс для поглотителя ЭМИ"
+instrumental = "кейсом для поглотителя ЭМИ"
+prepositional = "кейсе для поглотителя ЭМИ"
+gender = "male"
+
+["pump "]
+nominative = "помпа"
+genitive = "помпы"
+dative = "помпе"
+accusative = "помпу"
+instrumental = "помпой"
+prepositional = "помпе"
+gender = "female"
+
+["combat medicine pump"]
+nominative = "боевая помпа для лекарств"
+genitive = "боевой помпы для лекарств"
+dative = "боевой помпе для лекарств"
+accusative = "боевую помпу для лекарств"
+instrumental = "боевой помпой для лекарств"
+prepositional = "боевой помпе для лекарств"
+gender = "female"
