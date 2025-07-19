@@ -246,3 +246,11 @@ directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [9, 114, 2]
 trait_name = "Station"
+
+# Mining
+[templates.Lavaland_turrets]
+map_files = ["Lavaland_turrets.dmm"]
+directory = "_maps/bandastation/automapper/templates/Mining/"
+required_map = "Lavaland.dmm"
+coordinates = [86, 24, 1]
+trait_name = "Mining"
