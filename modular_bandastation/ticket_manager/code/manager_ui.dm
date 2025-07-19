@@ -38,6 +38,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	data["isAdmin"] = check_rights_for(C, R_ADMIN)
 	data["isMentor"] = null // NEEDED MENTOR SYSTEM
 	data["ticketToOpen"] = C.ticket_to_open
+	data["maxMessageLength"] = MAX_MESSAGE_LEN
 	return data
 
 /datum/ticket_manager/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -74,7 +75,11 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			if(!params["message"])
 				return FALSE
 
-			add_ticket_message(user, needed_ticket, params["message"])
+			var/trimmed_message = trim(params["message"], MAX_MESSAGE_LEN)
+			if(!trimmed_message)
+				return
+
+			add_ticket_message(user, needed_ticket, trimmed_message)
 			return TRUE
 
 	if(!check_rights(R_ADMIN)) // Check for mentor rights after implementing mentors
@@ -151,7 +156,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 				return // Already typing
 
 			add_to_ticket_writers(user, needed_ticket)
-			var/message = tgui_input_text(user, "Игроку на экран выведется надпись, а так же будет отправлено сообщение в его тикет. Какое сообщение должно быть?", "Popup", multiline = TRUE)
+			var/message = tgui_input_text(user, "Игроку на экран выведется надпись, а так же будет отправлено сообщение в его тикет. Какое сообщение должно быть?", "Popup", max_length = MAX_MESSAGE_LEN, multiline = TRUE, encode = FALSE)
 			if(!message)
 				remove_from_ticket_writers(user, needed_ticket)
 				return FALSE

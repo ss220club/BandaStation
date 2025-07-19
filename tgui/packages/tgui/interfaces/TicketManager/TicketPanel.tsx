@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Input, Section, Stack } from 'tgui-core/components';
+import { Button, Section, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
+import { ExtendableInput } from '../common/ExtendableInput';
 import { TICKET_STATE, TYPING_TIMEOUT } from './constants';
 import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { TicketMessage } from './TicketMessage';
@@ -11,7 +12,7 @@ import { ManagerData } from './types';
 
 export function TicketPanel(props) {
   const { act, data } = useBackend<ManagerData>();
-  const { userKey, isAdmin, isMentor } = data;
+  const { userKey, isAdmin, isMentor, maxMessageLength } = data;
   const { allTickets, ticketNumber, setSelectedTicket } = props;
 
   const selectedTicket = allTickets.find(
@@ -28,8 +29,11 @@ export function TicketPanel(props) {
     writers,
   } = selectedTicket;
 
+  const ticketOpen = state === TICKET_STATE.Open;
+
   const [inputMessage, setInputMessage] = useState('');
   const [showScrollButton, setShowScrollButton] = useState(false);
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const shouldScrollRef = useRef(true);
   const firstRender = useRef(true);
@@ -51,6 +55,19 @@ export function TicketPanel(props) {
       act('stop_writing', { ticketID: number });
       isWritingRef.current = false;
     }, TYPING_TIMEOUT);
+  }
+
+  function handleEnter(value: string) {
+    if (isWritingRef.current) {
+      isWritingRef.current = false;
+    }
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    act('reply', { ticketID: number, message: value });
+    setInputMessage('');
   }
 
   function scrollToBottom(ignoreBottom?: boolean, nonSmooth?: boolean) {
@@ -156,47 +173,24 @@ export function TicketPanel(props) {
       </Stack.Item>
       <Stack.Item style={{ zIndex: 1 }}>
         <Section>
-          <Stack fill>
-            <Stack.Item grow>
-              <Input
-                fluid
-                autoFocus
-                selfClear
-                value={inputMessage}
-                disabled={
-                  state !== TICKET_STATE.Open || (!isAdmin && !linkedAdmin)
-                }
-                placeholder={
-                  state === TICKET_STATE.Open
-                    ? 'Введите сообщение...'
-                    : 'Тикет закрыт!'
-                }
-                onChange={(value) => {
-                  setInputMessage(value);
-                  handleTyping();
-                }}
-                onEnter={(value) => {
-                  if (isWritingRef.current) {
-                    isWritingRef.current = false;
-                  }
-
-                  if (typingTimeoutRef.current) {
-                    clearTimeout(typingTimeoutRef.current);
-                  }
-
-                  act('reply', { ticketID: number, message: value });
-                  setInputMessage('');
-                }}
-              />
-            </Stack.Item>
-            <Stack.Item>
+          <ExtendableInput
+            value={inputMessage}
+            placeholder={ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'}
+            maxLength={maxMessageLength}
+            disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
+            onChange={(value) => {
+              setInputMessage(value);
+              handleTyping();
+            }}
+            onEnter={handleEnter}
+            buttons={
               <TicketPanelEmoji
                 insertEmoji={(emoji) => {
                   setInputMessage((prev) => prev + emoji);
                 }}
               />
-            </Stack.Item>
-          </Stack>
+            }
+          />
         </Section>
       </Stack.Item>
     </Stack>

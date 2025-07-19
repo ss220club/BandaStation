@@ -5,6 +5,7 @@ export type ManagerData = {
   emojis: Record<string, null>; // That's FUCKING CURSED SHIT
   userKey: string;
   ticketToOpen: number;
+  maxMessageLength: number;
   isAdmin: BooleanLike;
   isMentor: BooleanLike;
   allTickets: TicketProps[];

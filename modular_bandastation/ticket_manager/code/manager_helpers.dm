@@ -72,7 +72,7 @@
 /// and message to player if replies someone from admins
 /datum/ticket_manager/proc/add_ticket_message(client/sender, datum/help_ticket/needed_ticket, message)
 	if(!sender || !message || !needed_ticket)
-		CRASH("Invalid parameters passed to ticket_manager add_ticket_message()!")
+		CRASH("Invalid arguments passed to ticket_manager add_ticket_message()!")
 
 	link_admin_to_ticket(sender, needed_ticket)
 

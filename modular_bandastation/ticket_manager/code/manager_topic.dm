@@ -28,7 +28,7 @@
 			return // Already typing
 
 		add_to_ticket_writers(user, needed_ticket)
-		var/message = tgui_input_text(user, null, "Ответ на тикет #[ticket_id]", multiline = TRUE, encode = FALSE)
+		var/message = tgui_input_text(user, null, "Ответ на тикет #[ticket_id]", max_length = MAX_MESSAGE_LEN, multiline = TRUE, encode = FALSE)
 		if(!message)
 			remove_from_ticket_writers(user, needed_ticket)
 			return
