@@ -21,6 +21,7 @@
 #include "code/items/pen.dm"
 #include "code/items/pig.dm"
 #include "code/items/role_tablet_presets.dm"
+#include "code/items/shaker.dm"
 #include "code/items/shields.dm"
 #include "code/items/stamp.dm"
 #include "code/items/wallets.dm"
