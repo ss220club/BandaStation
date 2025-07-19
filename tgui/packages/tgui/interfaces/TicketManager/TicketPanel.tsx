@@ -158,9 +158,8 @@ export function TicketPanel(props) {
             К последним сообщениям
           </Button>
         </Stack.Item>
-        <TypingIndicator writers={writers} userKey={userKey} />
         <Section ref={sectionRef} fill scrollable>
-          <Stack vertical pb={3}>
+          <Stack vertical>
             {messages.map((message) => (
               <TicketMessage
                 key={message.time}
@@ -173,24 +172,29 @@ export function TicketPanel(props) {
       </Stack.Item>
       <Stack.Item style={{ zIndex: 1 }}>
         <Section>
-          <ChatInput
-            value={inputMessage}
-            placeholder={ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'}
-            maxLength={maxMessageLength}
-            disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
-            onChange={(value) => {
-              setInputMessage(value);
-              handleTyping();
-            }}
-            onEnter={handleEnter}
-            buttons={
-              <TicketPanelEmoji
-                insertEmoji={(emoji) => {
-                  setInputMessage((prev) => prev + emoji);
-                }}
-              />
-            }
-          />
+          <Stack vertical>
+            <TypingIndicator writers={writers} userKey={userKey} />
+            <ChatInput
+              value={inputMessage}
+              placeholder={
+                ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'
+              }
+              maxLength={maxMessageLength}
+              disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
+              onChange={(value) => {
+                setInputMessage(value);
+                handleTyping();
+              }}
+              onEnter={handleEnter}
+              buttons={
+                <TicketPanelEmoji
+                  insertEmoji={(emoji) => {
+                    setInputMessage((prev) => prev + emoji);
+                  }}
+                />
+              }
+            />
+          </Stack>
         </Section>
       </Stack.Item>
     </Stack>

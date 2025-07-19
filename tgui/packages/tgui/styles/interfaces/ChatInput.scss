@@ -6,6 +6,7 @@
   background-color: var(--color-base);
   border-radius: var(--border-radius-medium);
   transition: box-shadow var(--transition-time-medium);
+  z-index: 1;
 
   &.editing {
     box-shadow: inset 0 0 2px var(--color-primary);
