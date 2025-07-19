@@ -6,6 +6,7 @@ import { useBackend } from '../../backend';
 import { TICKET_STATE, TYPING_TIMEOUT } from './constants';
 import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { TicketMessage } from './TicketMessage';
+import { TicketPanelEmoji } from './TicketPanelEmoji';
 import { ManagerData } from './types';
 
 export function TicketPanel(props) {
@@ -27,6 +28,7 @@ export function TicketPanel(props) {
     writers,
   } = selectedTicket;
 
+  const [inputMessage, setInputMessage] = useState('');
   const [showScrollButton, setShowScrollButton] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const shouldScrollRef = useRef(true);
@@ -154,29 +156,47 @@ export function TicketPanel(props) {
       </Stack.Item>
       <Stack.Item style={{ zIndex: 1 }}>
         <Section>
-          <Input
-            fluid
-            autoFocus
-            selfClear
-            disabled={state !== TICKET_STATE.Open || (!isAdmin && !linkedAdmin)}
-            placeholder={
-              state === TICKET_STATE.Open
-                ? 'Введите сообщение...'
-                : 'Тикет закрыт!'
-            }
-            onChange={handleTyping}
-            onEnter={(value) => {
-              if (isWritingRef.current) {
-                isWritingRef.current = false;
-              }
+          <Stack fill>
+            <Stack.Item grow>
+              <Input
+                fluid
+                autoFocus
+                selfClear
+                value={inputMessage}
+                disabled={
+                  state !== TICKET_STATE.Open || (!isAdmin && !linkedAdmin)
+                }
+                placeholder={
+                  state === TICKET_STATE.Open
+                    ? 'Введите сообщение...'
+                    : 'Тикет закрыт!'
+                }
+                onChange={(value) => {
+                  setInputMessage(value);
+                  handleTyping();
+                }}
+                onEnter={(value) => {
+                  if (isWritingRef.current) {
+                    isWritingRef.current = false;
+                  }
 
-              if (typingTimeoutRef.current) {
-                clearTimeout(typingTimeoutRef.current);
-              }
+                  if (typingTimeoutRef.current) {
+                    clearTimeout(typingTimeoutRef.current);
+                  }
 
-              act('reply', { ticketID: number, message: value });
-            }}
-          />
+                  act('reply', { ticketID: number, message: value });
+                  setInputMessage('');
+                }}
+              />
+            </Stack.Item>
+            <Stack.Item>
+              <TicketPanelEmoji
+                insertEmoji={(emoji) => {
+                  setInputMessage((prev) => prev + emoji);
+                }}
+              />
+            </Stack.Item>
+          </Stack>
         </Section>
       </Stack.Item>
     </Stack>

@@ -41,7 +41,7 @@
 	ticket_type = new_type
 	messages = list(list(
 		"sender" = admin ? admin.key : initiator_key,
-		"message" = message,
+		"message" = emoji_parse(message),
 		"time" = opened_at,
 	))
 

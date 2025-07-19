@@ -2,8 +2,9 @@ import { Dispatch } from 'react';
 import { BooleanLike } from 'tgui-core/react';
 
 export type ManagerData = {
-  ticketToOpen: number;
+  emojis: Record<string, null>; // That's FUCKING CURSED SHIT
   userKey: string;
+  ticketToOpen: number;
   isAdmin: BooleanLike;
   isMentor: BooleanLike;
   allTickets: TicketProps[];

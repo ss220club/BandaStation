@@ -2,8 +2,13 @@ GLOBAL_DATUM_INIT(ticket_manager, /datum/ticket_manager, new)
 GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 /datum/ticket_manager
+	/// The set of all available emojis
+	var/list/emojis
 	/// The set of all  tickets
 	var/alist/all_tickets = alist()
+
+/datum/ticket_manager/New()
+	emojis = icon_states(EMOJI_SET)
 
 /datum/ticket_manager/ui_state()
 	return GLOB.always_state
@@ -22,12 +27,17 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 /datum/ticket_manager/ui_data(mob/user)
 	var/list/data = list()
+	data["allTickets"] = get_tickets_data(user.client)
+	return data
+
+/datum/ticket_manager/ui_static_data(mob/user)
+	var/list/data = list()
 	var/client/C = user.client
+	data["emojis"] = emojis
 	data["userKey"] = C.key
 	data["isAdmin"] = check_rights_for(C, R_ADMIN)
 	data["isMentor"] = null // NEEDED MENTOR SYSTEM
 	data["ticketToOpen"] = C.ticket_to_open
-	data["allTickets"] = get_tickets_data(C)
 	return data
 
 /datum/ticket_manager/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

@@ -81,6 +81,10 @@
     font-weight: bold;
   }
 
+  &__Content span {
+    vertical-align: middle;
+  }
+
   .ticket-time {
     float: right;
     font-size: 0.8em;
@@ -219,5 +223,13 @@
       opacity: 0;
       transform: translateY(100%);
     }
+  }
+
+  &__Emojis {
+    width: calc(100vw - 2rem);
+    height: 15rem;
+    padding: 0.5rem;
+    background-color: var(--color-base);
+    box-shadow: var(--shadow-glow-medium) hsl(0, 0%, 0%, 0.33);
   }
 }
