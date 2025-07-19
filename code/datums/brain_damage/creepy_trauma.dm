@@ -87,7 +87,6 @@
 			addtimer(CALLBACK(src, PROC_REF(on_failed_social_interaction)), rand(1 SECONDS, 3 SECONDS))
 		else if(!owner.has_status_effect(/datum/status_effect/speech/stutter))
 			to_chat(owner, span_warning("Нахождение рядом с [obsession] заставляет вас нервничать, и вы начинаете заикаться..."))
-
 		owner.set_stutter_if_lower(6 SECONDS)
 
 /// Singal proc for [COMSIG_CARBON_HELPED], when our obsessed helps (hugs) our obsession, increases hug count

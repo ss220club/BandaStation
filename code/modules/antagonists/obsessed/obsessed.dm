@@ -70,7 +70,6 @@
 
 #undef RANDOM_TARGET // BANDASTATION ADD
 
-
 /datum/antagonist/obsessed/greet()
 	play_stinger()
 	owner.announce_objectives()
