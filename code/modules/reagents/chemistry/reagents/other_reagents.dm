@@ -721,7 +721,7 @@
 	description = "A glowing toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/moth
-	taste_description = "clothing"
+	taste_description = "ткани"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
 
 /datum/reagent/mutationtoxin/pod
