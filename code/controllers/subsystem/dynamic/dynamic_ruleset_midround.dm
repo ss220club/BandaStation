@@ -694,8 +694,6 @@
 	for(var/mob/living/carbon/human/player in GLOB.player_list)
 		if(!player.client || !player.mind || !(player.mind.assigned_role.job_flags & JOB_CREW_MEMBER))
 			continue
-		if(!(player.mind.assigned_role.job_flags & JOB_CREW_MEMBER))
-			continue
 		admin_pool += player
 
 	var/picked = tgui_input_list(admin, "Select a player to clone", "Paradox Clone Selection", admin_pool)
@@ -703,8 +701,8 @@
 		if(RANDOM_CLONE)
 			return
 		if(RULESET_CONFIG_CANCEL, null)
-		 	return RULESET_CONFIG_CANCEL
-		 else
+			return RULESET_CONFIG_CANCEL
+		else
 			message_admins("[key_name_admin(admin)] picked [picked] to be cloned as Paradox Clone.")
 			original = WEAKREF(picked)
 
@@ -712,10 +710,7 @@
 // BANDASTATION ADD - END
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/assign_role(datum/mind/candidate)
-	// BANDASTATION EDIT - START
-	var/mob/living/carbon/human/good_version = original.resolve() || find_clone()
-	// BANDASTATION EDIT - END
-
+	var/mob/living/carbon/human/good_version = original.resolve() || find_clone() // BANDASTATION EDIT
 	var/mob/living/carbon/human/bad_version = good_version.make_full_human_copy(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 	candidate.transfer_to(bad_version, force_key_move = TRUE)
 
