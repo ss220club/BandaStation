@@ -1,3 +1,4 @@
+/// Checks if user can send message to ticket.
 /datum/ticket_manager/proc/can_send_message(client/user, datum/help_ticket/user_ticket, datum/help_ticket/needed_ticket)
 	if(user_ticket && (user_ticket.id != needed_ticket.id))
 		to_chat(user, span_danger("Создатель этого тикета, уже имеет другой тикет, ответ в выбранный тикет невозможен!"), MESSAGE_TYPE_ADMINPM)
@@ -40,6 +41,7 @@
 			MESSAGE_TYPE_ADMINPM)
 		SStgui.update_uis(src)
 
+/// Adds user to ticket writers when he starts typing. Used for type indicator in ticket chat UI
 /datum/ticket_manager/proc/add_to_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
 	if(!writer || !needed_ticket)
 		CRASH("Tryed to add writer to ticket with invalid arguments!")
@@ -52,6 +54,7 @@
 	if(update_ui)
 		SStgui.update_uis(src)
 
+/// Removes user from ticket writers when he stops typing or sends message. Used for type indicator in ticket chat UI
 /datum/ticket_manager/proc/remove_from_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
 	if(!writer || !needed_ticket)
 		CRASH("Tryed to remove writer to ticket with invalid arguments!")
@@ -64,6 +67,9 @@
 	if(update_ui)
 		SStgui.update_uis(src)
 
+/// Adds message to ticket. Allows HTML tags from both sides and parses emoji
+/// Will send chat message about new ticket message to admin, if reply from ticket initiator
+/// and message to player if replies someone from admins
 /datum/ticket_manager/proc/add_ticket_message(client/sender, datum/help_ticket/needed_ticket, message)
 	if(!sender || !message || !needed_ticket)
 		CRASH("Invalid parameters passed to ticket_manager add_ticket_message()!")
@@ -88,6 +94,7 @@
 	))
 	SStgui.update_uis(src)
 
+/// Changes ticket state. Allowed new states: TICKET_OPEN, TICKET_CLOSED, TICKET_RESOLVED
 /datum/ticket_manager/proc/set_ticket_state(client/admin, datum/help_ticket/needed_ticket, new_state)
 	if(!admin || !needed_ticket || isnull(new_state))
 		CRASH("Invalid parameters passed to ticket_manager set_ticket_state()!")
@@ -138,6 +145,7 @@
 	SStgui.update_uis(src)
 */
 
+/// Adds little notification to ticket chat about player disconnect
 /datum/ticket_manager/proc/client_logout(client/user)
 	var/datum/help_ticket/needed_ticket = user.persistent_client.current_help_ticket
 	if(!needed_ticket)
@@ -151,6 +159,7 @@
 	))
 	SStgui.update_uis(src)
 
+/// Adds little notification to ticket chat about player reconnect
 /datum/ticket_manager/proc/client_login(client/user)
 	var/datum/help_ticket/needed_ticket = user.persistent_client.current_help_ticket
 	if(!needed_ticket)
@@ -163,7 +172,7 @@
 	))
 	SStgui.update_uis(src)
 
-/// Send admin ticket reply to player, if he's online
+/// Send admin ticket reply to player, if he's online. And make some logs for other admins
 /datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, raw_message)
 	var/message = emoji_parse(raw_message)
 	var/id = needed_ticket.id
@@ -191,7 +200,7 @@
 	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
 	log_admin_private("[log_prefix] [log_message]")
 
-/// Send player ticket reply to admin, if he's online
+/// Send player ticket reply to admin, if he's online. And make some logs for other admins
 /datum/ticket_manager/proc/send_chat_message_to_admin(client/player, datum/help_ticket/needed_ticket, raw_message)
 	var/message = emoji_parse(sanitize(trim(raw_message)))
 	if(!message)
@@ -228,6 +237,8 @@
 	log_admin_private("[log_prefix] [log_message]")
 	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
 
+/// Logging any actions on ticket initiator mob/client, and sending it to ticket chat
+/// Stripped all html tags, so we got only text
 /proc/admin_ticket_log(thing, message, player_message, log_in_blackbox)
 	var/client/user_client
 	var/mob/user = thing
