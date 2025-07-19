@@ -16,11 +16,12 @@
 		return FALSE
 	return TRUE
 
+/// Link admin to ticket. But if ticket created by admin, prevents linking himself to he's ticket
 /datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket)
 	if(!admin || !needed_ticket)
 		CRASH("Tryed to link admin to ticket with invalid arguments!")
 
-	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN))
+	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN) && !needed_ticket.initiator_client.client != admin)
 		needed_ticket.linked_admin = admin.persistent_client
 		message_admins("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 		log_admin("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
@@ -75,7 +76,7 @@
 		needed_ticket.admin_replied = TRUE
 
 	if(sender == initiator || sender != linked_admin)
-		send_chat_message_to_admin(initiator, needed_ticket, message)
+		send_chat_message_to_admin(sender, needed_ticket, message)
 	else
 		send_chat_message_to_player(sender, needed_ticket, message)
 

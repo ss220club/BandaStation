@@ -167,7 +167,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 /datum/ticket_manager/ui_close(mob/user)
 	. = ..()
-	if(!user)
+	if(!user || !user.client)
 		return
 
 	user.client.ticket_to_open = null
