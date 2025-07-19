@@ -110,7 +110,7 @@
 			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), "pale")
 			shake_camera(owner, 15, 1)
 			owner.adjustStaminaLoss(70)
-			to_chat(owner, span_userdanger("Ты чувствуешь, как твое сердце бешено колотится в груди..."))
+			to_chat(owner, span_userdanger("Вы чувствуете, как ваше сердце бешено колотится в груди..."))
 		if(81 to 100)
 			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), "cough")
 			owner.adjust_dizzy(20 SECONDS)
