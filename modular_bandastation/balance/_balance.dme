@@ -24,6 +24,7 @@
 #include "code/speed/movespeed_modifier.dm"
 #include "code/station_traits.dm"
 #include "code/supply_packs.dm"
+#include "code/vehicle/paddy.dm"
 #include "code/weapons/baton.dm"
 #include "code/wounds/cranial_fissure.dm"
 
