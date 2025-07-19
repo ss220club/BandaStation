@@ -673,11 +673,12 @@
 	preview_antag_datum = /datum/antagonist/paradox_clone
 	midround_type = LIGHT_MIDROUND
 	pref_flag = ROLE_PARADOX_CLONE
-	ruleset_flags = RULESET_INVADER
+	ruleset_flags = RULESET_INVADER|RULESET_ADMIN_CONFIGURABLE // BANDASTATION EDIT
 	weight = 5
 	min_pop = 10
 	max_antag_cap = 1
 	signup_atom_appearance = /obj/effect/bluespace_stream
+	var/datum/weakref/original // BANDASTATION ADD
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/can_be_selected()
 	return ..() && !isnull(find_clone()) && !isnull(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
@@ -685,8 +686,38 @@
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/create_ruleset_body()
 	return // handled by assign_role() entirely
 
+// BANDASTATION ADD - START
+#define RANDOM_CLONE "Random"
+
+/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/configure_ruleset(mob/admin)
+	var/list/admin_pool = list("[RULESET_CONFIG_CANCEL]" = TRUE, "[RANDOM_CLONE]" = TRUE)
+	for(var/mob/living/carbon/human/player in GLOB.player_list)
+		if(!player.client || !player.mind || player.stat != CONSCIOUS)
+			continue
+		if(!(player.mind.assigned_role.job_flags & JOB_CREW_MEMBER))
+			continue
+		admin_pool += player
+
+	var/picked = tgui_input_list(admin, "Select a player to clone", "Paradox Clone Selection", admin_pool)
+	if(!picked || picked == RULESET_CONFIG_CANCEL)
+		return RULESET_CONFIG_CANCEL
+	if(picked == RANDOM_CLONE)
+		return
+
+	message_admins("[key_name_admin(admin)] picked [picked] to be cloned as Paradox Clone.")
+	original = WEAKREF(picked)
+
+#undef RANDOM_CLONE
+// BANDASTATION ADD - END
+
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/assign_role(datum/mind/candidate)
-	var/mob/living/carbon/human/good_version = find_clone()
+	// BANDASTATION EDIT - START
+	var/mob/living/carbon/human/good_version
+	if(original)
+		good_version = original.resolve()
+	else
+		good_version = find_clone()
+	// BANDASTATION EDIT - END
 	var/mob/living/carbon/human/bad_version = good_version.make_full_human_copy(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 	candidate.transfer_to(bad_version, force_key_move = TRUE)
 
