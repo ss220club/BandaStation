@@ -19,7 +19,7 @@
 // BANDATATION ADD - Start
 /datum/brain_trauma/special/obsessed/New(mob/living/obsession)
 	. = ..()
-	if(istype(obsession_target))
+	if(istype(obsession))
 		src.obsession = obsession
 // BANDATATION ADD - End
 
