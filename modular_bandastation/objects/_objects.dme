@@ -33,6 +33,7 @@
 #include "code/items/clothing/head/mask.dm"
 #include "code/items/clothing/head/soft_caps.dm"
 #include "code/items/clothing/masks/carnival.dm"
+#include "code/items/clothing/masks/masks_patches.dm"
 #include "code/items/clothing/mod/modules/monitor_module.dm"
 #include "code/items/clothing/mod/types/praetorian/mod_theme.dm"
 #include "code/items/clothing/mod/types/praetorian/mod_types.dm"
