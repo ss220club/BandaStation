@@ -62,7 +62,7 @@
 	return final_icon
 
 /datum/preference/choiced/vulpkanin_chest_markings/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["vulpkanin_chest_markings"] = value
+	target.dna.features[FEATURE_VULPKANIN_CHEST_MARKINGS] = value
 
 /datum/preference/choiced/vulpkanin_chest_markings/compile_constant_data()
 	var/list/data = ..()
