@@ -57,7 +57,7 @@
 /// MARK: Bodypart overlay
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_facial_hair
 	dna_feature_key = FEATURE_VULPKANIN_FACIAL_HAIR
-	dna_color_feature_key = FEATURE_VULPKANIN_BODY_MARKINGS_COLOR
+	dna_color_feature_key = FEATURE_VULPKANIN_FACIAL_HAIR_COLOR
 	applies_to = list(
 		/obj/item/bodypart/head,
 	)
