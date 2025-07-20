@@ -47,23 +47,23 @@
 
 /datum/species/tajaran/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.set_hairstyle(SPRITE_ACCESSORY_NONE, update = TRUE)
-	human.dna.features["tajaran_facial_hair"] = SPRITE_ACCESSORY_NONE
-	human.dna.features["mcolor"] = "#e5b380"
-	human.dna.features["tajaran_head_markings"] = "Muzzle and Inner ears"
+	human.dna.features[FEATURE_TAJARAN_FACIAL_HAIR] = SPRITE_ACCESSORY_NONE
+	human.dna.features[FEATURE_MUTANT_COLOR] = "#e5b380"
+	human.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS] = "Muzzle and Inner ears"
 	human.update_body(is_creating = TRUE)
 
 /datum/species/tajaran/randomize_features()
 	var/list/features = ..()
-	features["tajaran_chest_markings"] = prob(50) ? pick(SSaccessories.tajaran_chest_markings_list) : SPRITE_ACCESSORY_NONE
-	features["tajaran_head_markings"] = prob(50) ? pick(SSaccessories.tajaran_head_markings_list) : SPRITE_ACCESSORY_NONE
-	features["tajaran_tail_markings"] = prob(50) ? pick(SSaccessories.tajaran_tail_markings_list) : SPRITE_ACCESSORY_NONE
-	features["tajaran_facial_hair"] = prob(50) ? pick(SSaccessories.tajaran_facial_hair_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_CHEST_MARKINGS] = prob(50) ? pick(SSaccessories.tajaran_chest_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_HEAD_MARKINGS] = prob(50) ? pick(SSaccessories.tajaran_head_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_TAIL_MARKINGS] = prob(50) ? pick(SSaccessories.tajaran_tail_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_FACIAL_HAIR] = prob(50) ? pick(SSaccessories.tajaran_facial_hair_list) : SPRITE_ACCESSORY_NONE
 
 	var/furcolor = "#[random_color()]"
-	features["tajaran_body_markings_color"] = furcolor
-	features["tajaran_head_markings_color"] = furcolor
-	features["tajaran_tail_markings_color"] = furcolor
-	features["tajaran_facial_hair_color"] = furcolor
+	features[FEATURE_TAJARAN_BODY_MARKINGS_COLOR] = furcolor
+	features[FEATURE_TAJARAN_HEAD_MARKINGS_COLOR] = furcolor
+	features[FEATURE_TAJARAN_TAIL_MARKINGS_COLOR] = furcolor
+	features[FEATURE_TAJARAN_FACIAL_HAIR_COLOR] = furcolor
 	return features
 
 /datum/species/tajaran/get_physical_attributes()
