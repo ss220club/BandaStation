@@ -250,6 +250,9 @@
 	else
 		user_client = thing
 
+	if(!user_client)
+		return
+
 	var/datum/help_ticket/user_ticket = user_client.persistent_client.current_help_ticket
 	if(!user_ticket)
 		return
