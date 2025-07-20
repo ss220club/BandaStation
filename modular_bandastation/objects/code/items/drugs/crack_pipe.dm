@@ -1,5 +1,5 @@
-/obj/item/cigarette/crackcigarette
-	name = "Crack cigarette"
+/obj/item/cigarette/crackrollie
+	name = "Crack rollie"
 	desc = "Ручная махорка, имеет спецефичный запах."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "spliffoff"
