@@ -290,8 +290,7 @@
 /obj/machinery/power/apc/update_name(updates)
 	. = ..()
 	if(auto_name)
-		ru_names_rename(ru_names_toml("area power controller", suffix = " ([get_area_name(area, TRUE)])", override_base = "\improper [get_area_name(area, TRUE)] APC"))
-		name = "\improper [get_area_name(area, TRUE)] APC"
+		name = "[declent_ru(NOMINATIVE)] ([area.declent_ru(NOMINATIVE)])"
 
 /obj/machinery/power/apc/proc/assign_to_area(area/target_area = get_area(src))
 	if(area == target_area)
