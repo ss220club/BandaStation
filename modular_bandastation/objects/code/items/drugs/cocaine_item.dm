@@ -32,7 +32,7 @@
 
 /obj/item/reagent_containers/cocaine
 	name = "cocaine"
-	desc = "Любимая пища богачей"
+	desc = "Всеми печально известный белый порошок"
 	icon = 'modular_bandastation/objects/icons/obj/items/drugs.dmi'
 	icon_state = "cocaine"
 	volume = 5
