@@ -41,7 +41,7 @@ function splitMessage(message: string) {
   wrapper.innerHTML = clean;
 
   const textParts: string[] = [];
-  const blockElements: ReactNode[] = [];
+  let blockElement: ReactNode | null;
   for (const node of Array.from(wrapper.childNodes)) {
     if (node.nodeType === Node.TEXT_NODE) {
       textParts.push(node.textContent || '');
@@ -51,12 +51,14 @@ function splitMessage(message: string) {
     ) {
       textParts.push((node as HTMLElement).outerHTML);
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      const element = node as HTMLElement;
-      const props: Record<string, any> = {};
-      for (const attribute of Array.from(element.attributes)) {
-        props[attribute.name] = attribute.value;
+      if (!blockElement) {
+        const element = node as HTMLElement;
+        const props: Record<string, any> = {};
+        for (const attribute of Array.from(element.attributes)) {
+          props[attribute.name] = attribute.value;
+        }
+        blockElement = createElement(element.tagName.toLowerCase(), props);
       }
-      blockElements.push(createElement(element.tagName.toLowerCase(), props));
     }
   }
 
@@ -64,7 +66,7 @@ function splitMessage(message: string) {
     textElements: textParts.length > 0 && (
       <Box as="span" dangerouslySetInnerHTML={{ __html: textParts.join('') }} />
     ),
-    blockElements: blockElements,
+    blockElement: blockElement,
   };
 }
 
@@ -116,7 +118,7 @@ export function TicketMessage(props) {
     );
   }
 
-  const { textElements, blockElements } = splitMessage(message);
+  const { textElements, blockElement } = splitMessage(message);
   return (
     <Stack fill reverse={messageSender} className="TicketMessage__Wrapper">
       <Stack.Item
@@ -127,8 +129,8 @@ export function TicketMessage(props) {
       >
         <div className="TicketMessage__Sender">{sender}</div>
         <div className="TicketMessage__Content">
-          {blockElements.length > 0 && (
-            <div className="TicketMessage__Embed">{blockElements}</div>
+          {blockElement && (
+            <div className="TicketMessage__Embed">{blockElement}</div>
           )}
           {textElements}
           <div className="ticket-time">{toLocalTime(time)}</div>

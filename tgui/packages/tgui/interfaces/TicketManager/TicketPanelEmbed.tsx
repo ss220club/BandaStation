@@ -17,7 +17,7 @@ export function TicketPanelEmbed(props) {
         insertEmbed(`<img src='${value}'>`);
         break;
       case 'audio':
-        insertEmbed(`<audio controls='true' src='${value}'>`);
+        insertEmbed(`<audio controls={true} src='${value}'>`);
         break;
       case 'link':
         insertEmbed(`<a href='${value}'>${value}</a>`);

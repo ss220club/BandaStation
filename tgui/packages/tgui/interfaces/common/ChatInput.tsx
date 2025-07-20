@@ -38,7 +38,6 @@ export function ChatInput(props: ChatInputProps) {
 
   const [editing, setEditing] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
-  const symbolsLeft = maxLength && maxLength - value.length;
 
   useEffect(() => {
     const text = textRef.current;
@@ -128,9 +127,9 @@ export function ChatInput(props: ChatInputProps) {
       <Stack.Item p={0.66}>
         <Stack fill vertical>
           <Stack.Item grow>{buttons || ''}</Stack.Item>
-          {symbolsLeft && symbolsLeft <= 300 && (
+          {maxLength && maxLength - value.length <= 300 && (
             <Stack.Item className="ChatInput__LeftCharacters">
-              {symbolsLeft}
+              {maxLength - value.length}
             </Stack.Item>
           )}
         </Stack>
