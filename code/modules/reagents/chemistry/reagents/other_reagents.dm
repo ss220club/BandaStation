@@ -717,7 +717,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
 
 /datum/reagent/mutationtoxin/moth
-	name = "Токсин мутации для превращения в моль"
+	name = "Moth Mutation Toxin"
 	description = "Светящийся токсин."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/moth
