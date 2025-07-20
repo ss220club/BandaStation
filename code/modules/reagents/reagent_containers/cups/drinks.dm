@@ -478,7 +478,7 @@
 		. += span_notice("Напитки из этого шейкера будут иметь следующее название: [custom_drink_name]")
 		. += span_notice("Напитки из этого шейкера будут иметь следующее описание: [custom_drink_desc]")
 
-/obj/item/reagent_containers/cup/glass/shaker/click_alt_secondary(mob/user) // SS220 EDIT alt+RMB instead of alt+LMB
+/obj/item/reagent_containers/cup/glass/shaker/click_alt(mob/user)
 	. = ..()
 	if(using_custom_drinks)
 		using_custom_drinks = FALSE
