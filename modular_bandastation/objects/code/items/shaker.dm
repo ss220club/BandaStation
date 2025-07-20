@@ -26,7 +26,7 @@
 		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, shaking_cooldown))
-		to_chat(user, span_warning("Я только что тряс [capitalize(declent_ru(ACCUSATIVE))]! Нужно дать руке немного отдохнуть."))
+		to_chat(user, span_warning("Я только что тряс [declent_ru(ACCUSATIVE)]! Нужно дать руке немного отдохнуть."))
 		return FALSE
 
 	var/adjective = pick("яростно", "страстно", "энергично", "решительно", "как дьявол", "с заботой и любовью", "как будто завтра не наступит")

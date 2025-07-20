@@ -468,12 +468,12 @@
 
 /obj/item/reagent_containers/cup/glass/shaker/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_ALT_RMB] = "[using_custom_drinks ? "Выключить" : "Включить"] прозвольное наименование напитков"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "[using_custom_drinks ? "Выключить" : "Включить"] прозвольное наименование напитков"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/reagent_containers/cup/glass/shaker/examine(mob/user)
 	. = ..()
-	. += span_notice("Альт+ПКМ, чтобы [using_custom_drinks ? "выключить" : "включить"] прозвольное наименование напитков")
+	. += span_notice("Альт клик, чтобы [using_custom_drinks ? "выключить" : "включить"] прозвольное наименование напитков")
 	if(using_custom_drinks)
 		. += span_notice("Напитки из этого шейкера будут иметь следующее название: [custom_drink_name]")
 		. += span_notice("Напитки из этого шейкера будут иметь следующее описание: [custom_drink_desc]")
