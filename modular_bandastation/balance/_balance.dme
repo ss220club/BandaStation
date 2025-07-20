@@ -18,11 +18,13 @@
 #include "code/human_stripping.dm"
 #include "code/laser.dm"
 #include "code/materials_market.dm"
+#include "code/mobs/shade.dm"
 #include "code/religion.dm"
 #include "code/speed/base_speed.dm"
 #include "code/speed/movespeed_modifier.dm"
 #include "code/station_traits.dm"
 #include "code/supply_packs.dm"
+#include "code/vehicle/paddy.dm"
 #include "code/weapons/baton.dm"
 #include "code/wounds/cranial_fissure.dm"
 

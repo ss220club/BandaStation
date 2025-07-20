@@ -1,0 +1,4 @@
+author: "MiraHell"
+delete-after: True
+changes:
+  - admin: "Возможность выбрать, кого клонировать при форсе парадокс клона"
