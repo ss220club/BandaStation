@@ -1,7 +1,10 @@
+#define COCAINE_POWDER_FREEZE_TEMP 250
+#define CRACK_SYNTHESIS_TEMP 480
+
 /datum/chemical_reaction/powder_cocaine
 	is_cold_recipe = TRUE
 	required_reagents = list(/datum/reagent/drug/cocaine = 10)
-	required_temp = 250
+	required_temp = COCAINE_POWDER_FREEZE_TEMP
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL
 	mix_message = "The solution freezes into a powder!"
 
@@ -11,8 +14,8 @@
 		new /obj/item/reagent_containers/cocaine(location)
 
 /datum/chemical_reaction/freebase_cocaine
-	required_reagents = list(/datum/reagent/drug/cocaine = 10, /datum/reagent/water = 5, /datum/reagent/ash = 10) //mix 20 cocaine, 10 water, 20 ash
-	required_temp = 480 //heat it up
+	required_reagents = list(/datum/reagent/drug/cocaine = 10, /datum/reagent/water = 5, /datum/reagent/ash = 10)
+	required_temp = CRACK_SYNTHESIS_TEMP
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL
 
 /datum/chemical_reaction/freebase_cocaine/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
@@ -42,7 +45,7 @@
 
 /datum/reagent/drug/cocaine/on_mob_life(mob/living/carbon/carbon_mob, seconds_per_tick, times_fired)
 	if(SPT_PROB(2.5, seconds_per_tick))
-		var/high_message = pick("You feel jittery.", "You feel like you gotta go fast.", "You feel like you need to step it up.")
+		var/high_message = pick("Ты чувствуешь себя нервозным.", "Ты чувствуешь, что должен действовать быстро.", "Ты чувствуешь, что нужно сделать шаг вперед.")
 		to_chat(carbon_mob, span_notice("[high_message]"))
 	carbon_mob.add_mood_event("zoinked", /datum/mood_event/stimulant_heavy, name)
 	carbon_mob.AdjustStun(-15 * REM * seconds_per_tick)
@@ -57,7 +60,7 @@
 	return TRUE
 
 /datum/reagent/drug/cocaine/overdose_start(mob/living/carbon/carbon_mob)
-	to_chat(carbon_mob, span_userdanger("Your heart is beating too fast, it hurts!"))
+	to_chat(carbon_mob, span_userdanger("Ваше сердце бьется слишком быстро, это причиняет вам боль!"))
 
 /datum/reagent/drug/cocaine/overdose_process(mob/living/carbon/carbon_mob, seconds_per_tick, times_fired)
 	carbon_mob.adjustToxLoss(1 * REM * seconds_per_tick * unhealthy_multiplier, 0)
@@ -68,7 +71,7 @@
 
 	if(!HAS_TRAIT(carbon_mob, TRAIT_FLOORED))
 		if(SPT_PROB(1.5, seconds_per_tick))
-			carbon_mob.visible_message(span_danger("[carbon_mob] collapses onto the floor!"))
+			carbon_mob.visible_message(span_danger("[carbon_mob] падает на пол!"))
 			carbon_mob.Paralyze(13.5 SECONDS * unhealthy_multiplier, TRUE)
 			carbon_mob.drop_all_held_items()
 	..()
