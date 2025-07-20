@@ -13,7 +13,7 @@ GLOBAL_LIST_EMPTY(ru_names)
 
 /proc/ru_names_toml(name, prefix, suffix, override_base)
 	. = list()
-	var/formatted_name = format_text(name)
+	var/formatted_name = trimtext(format_text(name))
 	if(!length(GLOB.ru_names))
 		var/toml_path = "[PATH_TO_TRANSLATE_DATA]/ru_names.toml"
 		if(!fexists(file(toml_path)))
@@ -37,12 +37,12 @@ GLOBAL_LIST_EMPTY(ru_names)
 			"[prefix][prepositional_form][suffix]",
 			gender = "[GLOB.ru_names[formatted_name]["gender"] || null]",)
 
-/atom/Initialize(mapload, ...)
+/atom/New(mapload, ...)
 	. = ..()
 	article = null
 	ru_names_rename(ru_names_toml(name))
 
-/turf/Initialize(mapload)
+/turf/New(mapload)
 	. = ..()
 	article = null
 	ru_names_rename(ru_names_toml(name))
