@@ -1,8 +1,15 @@
+#define MULTIBOOK_MAX_PAGES 20
+
 /datum/book_info
 	var/list/pages
-	var/current_page_index
+	var/current_page_index = 1
 	var/page_regex = "\\(page\\)\\d+\\(/page\\)"
-	var/max_pages = 20
+	var/max_pages = MULTIBOOK_MAX_PAGES
+	var/regex/page_splitter
+
+/datum/book_info/New()
+	. = ..()
+	page_splitter = new(page_regex)
 
 /// Guarantee that pages are initialized
 /datum/book_info/proc/ensure_pages()
@@ -18,7 +25,6 @@
 		return
 
 	pages = list()
-	var/regex/page_splitter = new(page_regex)
 	var/start_index = 1
 	var/match_count = 0
 	var/pageText = ""
@@ -59,7 +65,6 @@
 
 /// Clear pages from separator tags
 /datum/book_info/proc/remove_page_tags(text)
-	var/regex/page_splitter = new(page_regex)
 	while (page_splitter.Find(text))
 		text = page_splitter.Replace(text, "")
 	return text
@@ -129,16 +134,3 @@
 /datum/book_info/set_content_using_paper(obj/item/paper/P)
 	. = ..()
 	init_pages()
-
-/// Recreate content to contain full book data
-/datum/book_info/proc/regenerate_content()
-	ensure_pages()
-
-	var/list/new_content = list()
-	var/page_num = 1
-
-	for(var/page in pages)
-		new_content += "(page)[page_num](/page)\n[trim(page)]"
-		page_num++
-
-	content = jointext(new_content, "\n\n")

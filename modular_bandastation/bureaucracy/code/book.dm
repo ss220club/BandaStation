@@ -5,7 +5,7 @@
 		if("next_page")
 			book_data.next_page()
 			if(ui)
-				ui.update_static_data(usr)
+				ui.send_update(usr)
 			return TRUE
 
 		if("prev_page")

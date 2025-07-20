@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-import { Box, Button, Flex, Section } from 'tgui-core/components'; // добавлено для кнопок
+import { Box, Button, Flex, Section } from 'tgui-core/components'; // BANDASTATION - Multipages
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
