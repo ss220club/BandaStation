@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import { createElement, ReactNode } from 'react';
 import { Box, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
@@ -8,8 +9,36 @@ import { toLocalTime } from './helpers';
 import { ManagerData } from './types';
 
 function splitMessage(message: string) {
+  const clean = DOMPurify.sanitize(message, {
+    ALLOWED_TAGS: [
+      'b',
+      'i',
+      'u',
+      'span',
+      'a',
+      'strong',
+      'em',
+      'small',
+      'abbr',
+      'code',
+      'br',
+      'audio',
+      'img',
+    ],
+    ALLOWED_ATTR: [
+      'href',
+      'src',
+      'alt',
+      'title',
+      'controls',
+      'type',
+      'rel',
+      'target',
+    ],
+  });
+
   const wrapper = document.createElement('div');
-  wrapper.innerHTML = message;
+  wrapper.innerHTML = clean;
 
   const textParts: string[] = [];
   const blockElements: ReactNode[] = [];

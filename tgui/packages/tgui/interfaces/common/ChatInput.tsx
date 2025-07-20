@@ -1,6 +1,7 @@
 import '../../styles/interfaces/ChatInput.scss';
 
 import { ReactNode, useEffect, useRef, useState } from 'react';
+import { Stack } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 import { classes } from 'tgui-core/react';
 
@@ -37,6 +38,7 @@ export function ChatInput(props: ChatInputProps) {
 
   const [editing, setEditing] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
+  const symbolsLeft = maxLength && maxLength - value.length;
 
   useEffect(() => {
     const text = textRef.current;
@@ -98,7 +100,8 @@ export function ChatInput(props: ChatInputProps) {
   }
 
   return (
-    <div
+    <Stack
+      fill
       className={classes([
         'ChatInput',
         disabled && 'ChatInput--disabled',
@@ -122,12 +125,16 @@ export function ChatInput(props: ChatInputProps) {
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
       />
-      {maxLength && (
-        <div className="ChatInput__LeftCharacters">
-          {maxLength - value.length}
-        </div>
-      )}
-      {buttons && <div className="ChatInput__Buttons">{buttons}</div>}
-    </div>
+      <Stack.Item p={0.66}>
+        <Stack fill vertical>
+          <Stack.Item grow>{buttons || ''}</Stack.Item>
+          {symbolsLeft && symbolsLeft <= 300 && (
+            <Stack.Item className="ChatInput__LeftCharacters">
+              {symbolsLeft}
+            </Stack.Item>
+          )}
+        </Stack>
+      </Stack.Item>
+    </Stack>
   );
 }

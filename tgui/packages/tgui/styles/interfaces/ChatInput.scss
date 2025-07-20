@@ -1,7 +1,4 @@
 .ChatInput {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   line-height: 16px;
   background-color: var(--color-base);
   border-radius: var(--border-radius-medium);
@@ -44,14 +41,9 @@
   &__LeftCharacters {
     user-select: none;
     align-self: end;
+    line-height: 1;
     font-size: 0.9em;
-    margin-bottom: 0.66em;
     color: var(--color-label);
     opacity: 0.66;
-  }
-
-  &__Buttons {
-    align-self: baseline;
-    margin: 0.33em;
   }
 }

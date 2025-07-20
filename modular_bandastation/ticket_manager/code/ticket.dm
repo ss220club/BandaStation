@@ -70,7 +70,7 @@
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
 /datum/help_ticket/proc/send_creation_message(client/creator, message, ticket_type)
 	var/title = "Тикет #[id]"
-	var/body = "[TICKET_REPLY_LINK(id, span_adminsay(initiator))]\n\n[span_adminsay(sanitize(trim(message)))]"
+	var/body = "[TICKET_REPLY_LINK(id, initiator)]\n\n[span_adminsay(sanitize(trim(message)))]"
 	for(var/client/admin in GLOB.admins)
 		if(admin.prefs.toggles & SOUND_ADMINHELP)
 			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))

@@ -152,13 +152,16 @@
     display: flex;
     margin: 0.5rem -0.5rem 0.5rem 0rem;
 
-    img,
-    video,
-    audio,
-    iframe {
+    img {
       object-fit: contain;
       width: 100%;
+      max-height: 50vh;
       border-radius: var(--border-radius-large);
+    }
+
+    audio {
+      height: 3rem;
+      width: 100vw;
     }
   }
 }
@@ -225,6 +228,13 @@
   &__Emojis {
     width: 26.25rem;
     height: 30rem;
+    padding: 0.5rem;
+    background-color: var(--color-base);
+    box-shadow: var(--shadow-glow-medium) hsl(0, 0%, 0%, 0.33);
+    border-radius: var(--border-radius-medium);
+  }
+
+  &__Embed {
     padding: 0.5rem;
     background-color: var(--color-base);
     box-shadow: var(--shadow-glow-medium) hsl(0, 0%, 0%, 0.33);

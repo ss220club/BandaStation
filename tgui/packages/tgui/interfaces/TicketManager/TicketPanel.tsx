@@ -7,6 +7,7 @@ import { ChatInput } from '../common/ChatInput';
 import { TICKET_STATE, TYPING_TIMEOUT } from './constants';
 import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { TicketMessage } from './TicketMessage';
+import { TicketPanelEmbed } from './TicketPanelEmbed';
 import { TicketPanelEmoji } from './TicketPanelEmoji';
 import { ManagerData } from './types';
 
@@ -172,29 +173,32 @@ export function TicketPanel(props) {
       </Stack.Item>
       <Stack.Item style={{ zIndex: 1 }}>
         <Section>
-          <Stack vertical>
-            <TypingIndicator writers={writers} userKey={userKey} />
-            <ChatInput
-              value={inputMessage}
-              placeholder={
-                ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'
-              }
-              maxLength={maxMessageLength}
-              disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
-              onChange={(value) => {
-                setInputMessage(value);
-                handleTyping();
-              }}
-              onEnter={handleEnter}
-              buttons={
+          <TypingIndicator writers={writers} userKey={userKey} />
+          <ChatInput
+            value={inputMessage}
+            placeholder={ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'}
+            maxLength={maxMessageLength}
+            disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
+            onChange={(value) => {
+              setInputMessage(value);
+              handleTyping();
+            }}
+            onEnter={handleEnter}
+            buttons={
+              <>
+                <TicketPanelEmbed
+                  insertEmbed={(embed) => {
+                    setInputMessage((prev) => prev + embed);
+                  }}
+                />
                 <TicketPanelEmoji
                   insertEmoji={(emoji) => {
                     setInputMessage((prev) => prev + emoji);
                   }}
                 />
-              }
-            />
-          </Stack>
+              </>
+            }
+          />
         </Section>
       </Stack.Item>
     </Stack>
