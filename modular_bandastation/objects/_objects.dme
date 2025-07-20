@@ -60,6 +60,7 @@
 #include "code/items/clothing/under/jobs/centcom.dm"
 #include "code/items/clothing/under/jobs/tsf.dm"
 #include "code/items/clothing/under/jobs/ussp.dm"
+#include "code/items/clothing/under/jobs/etamin_ind.dm"
 #include "code/items/clothing/under/jobs/magistrate.dm"
 #include "code/items/clothing/under/jobs/nanotrasen_representative.dm"
 #include "code/items/clothing/under/jobs/research.dm"

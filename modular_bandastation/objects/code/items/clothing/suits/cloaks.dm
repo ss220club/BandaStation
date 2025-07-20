@@ -249,3 +249,27 @@
 
 /datum/movespeed_modifier/stealth
 	variable = TRUE
+
+// MARK: Etamin ind.
+/obj/item/clothing/suit/hooded/etamin_cloak
+	name = "Gold On Black hooded cloak"
+	desc = "Корпоративный плащ, выполненный в угольных тонах все с тем же золотым покрытием и специальным логотипом от Etamin Industries – Золотой Звездой."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "ei_cloak"
+	hood_up_affix = ""
+	body_parts_covered = CHEST|GROIN|ARMS
+	cold_protection = CHEST|GROIN|ARMS
+	hoodtype = /obj/item/clothing/head/hooded/etamin_cloak
+	allowed = list(/obj/item/tank/internals/emergency_oxygen/double)
+
+/obj/item/clothing/head/hooded/etamin_cloak
+	name = "Gold On Black cloak's hood"
+	desc = "Капюшон плаща от Etamin Industry."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
+	icon_state = "ei_cloak"
+	body_parts_covered = HEAD
+	cold_protection = HEAD
+	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
+	flags_inv = HIDEEARS | HIDEHAIR

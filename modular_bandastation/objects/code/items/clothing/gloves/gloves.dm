@@ -1,4 +1,4 @@
-// CentCom
+// MARK: CentCom
 /obj/item/clothing/gloves/combat/centcom
 	name = "fleet officer's gloves"
 	desc = "Солидные перчатки офицеров Центрального Командования Нанотрейзен."
@@ -13,7 +13,7 @@
 	desc = "Изящные и солидные перчатки офицеров Центрального Командования Нанотрейзен."
 	icon_state = "centcom_diplomat"
 
-// Detective (forensics) gloves
+// MARK: Detective (forensics) gloves
 /obj/item/clothing/gloves/color/black/forensics
 	name = "forensics gloves"
 	desc = "Эти высокотехнологичные перчатки не оставляют никаких следов на предметах, к которым прикасаются. Идеально подходят для того, чтобы оставить место преступления нетронутым... как до, так и после преступления."
@@ -35,3 +35,11 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/gloves.dmi'
 	icon_state = "bike_gloves"
+
+// MARK: Etamin ind.
+/obj/item/clothing/gloves/etamin_gloves
+	name = "Gold On Black gloves"
+	desc = "Качественные перчатки с золотой вставкой 999 пробы."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/gloves.dmi'
+	icon_state = "ei_gloves"
