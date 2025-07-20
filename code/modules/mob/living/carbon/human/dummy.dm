@@ -125,29 +125,29 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 
 	// BANDA STATION EDIT START
 	// vulpkanin
-	target.dna.features["vulpkanin_chest_markings"] = get_consistent_feature_entry(SSaccessories.vulpkanin_chest_markings_list)
-	target.dna.features["vulpkanin_head_markings"] = get_consistent_feature_entry(SSaccessories.vulpkanin_head_markings_list)
-	target.dna.features["tail_vulpkanin"] = get_consistent_feature_entry(SSaccessories.tails_list_vulpkanin)
-	target.dna.features["tail_markings"] = get_consistent_feature_entry(SSaccessories.vulpkanin_tail_markings_list)
-	target.dna.features["vulpkanin_facial_hair"] = get_consistent_feature_entry(SSaccessories.vulpkanin_facial_hair_list)
-	target.dna.features["vulpkanin_body_markings_color"] = COLOR_WHITE
-	target.dna.features["vulpkanin_tail_markings_color"] = COLOR_WHITE
-	target.dna.features["vulpkanin_head_markings_color"] = COLOR_WHITE
-	target.dna.features["vulpkanin_facial_hair_color"] = COLOR_WHITE
+	target.dna.features[FEATURE_VULPKANIN_CHEST_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_chest_markings_list)
+	target.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_head_markings_list)
+	target.dna.features[FEATURE_VULPKANIN_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_vulpkanin)
+	target.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_tail_markings_list)
+	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR] = get_consistent_feature_entry(SSaccessories.vulpkanin_facial_hair_list)
+	target.dna.features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = COLOR_WHITE
+	target.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR] = COLOR_WHITE
+	target.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR] = COLOR_WHITE
+	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = COLOR_WHITE
 
 	// tajaran
-	target.dna.features["tajaran_chest_markings"] = get_consistent_feature_entry(SSaccessories.tajaran_chest_markings_list)
-	target.dna.features["tajaran_head_markings"] = get_consistent_feature_entry(SSaccessories.tajaran_head_markings_list)
-	target.dna.features["tail_tajaran"] = get_consistent_feature_entry(SSaccessories.tails_list_tajaran)
-	target.dna.features["tajaran_tail_markings"] = get_consistent_feature_entry(SSaccessories.tajaran_tail_markings_list)
-	target.dna.features["tajaran_facial_hair"] = get_consistent_feature_entry(SSaccessories.tajaran_facial_hair_list)
-	target.dna.features["tajaran_body_markings_color"] = COLOR_WHITE
-	target.dna.features["tajaran_head_markings_color"] = COLOR_WHITE
-	target.dna.features["tajaran_tail_markings_color"] = COLOR_WHITE
-	target.dna.features["tajaran_facial_hair_color"] = COLOR_WHITE
+	target.dna.features[FEATURE_TAJARAN_CHEST_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_chest_markings_list)
+	target.dna.features[FEATURE_TAJARAN_HEAD_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_head_markings_list)
+	target.dna.features[FEATURE_TAJARAN_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_tajaran)
+	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_tail_markings_list)
+	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR] = get_consistent_feature_entry(SSaccessories.tajaran_facial_hair_list)
+	target.dna.features[FEATURE_TAJARAN_BODY_MARKINGS_COLOR] = COLOR_WHITE
+	target.dna.features[FEATURE_TAJARAN_HEAD_MARKINGS_COLOR] = COLOR_WHITE
+	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS_COLOR] = COLOR_WHITE
+	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR_COLOR] = COLOR_WHITE
 
 	// skrell
-	target.dna.features["skrell_head_tentacle"] = get_consistent_feature_entry(SSaccessories.skrell_head_tentacles_list)
+	target.dna.features[FEATURE_SKRELL_HEAD_TENTACLE] = get_consistent_feature_entry(SSaccessories.skrell_head_tentacles_list)
 	// BANDA STATION EDIT STOP
 
 	target.dna.initialize_dna(newblood_type = get_blood_type(BLOOD_TYPE_O_MINUS), create_mutation_blocks = FALSE, randomize_features = FALSE)
