@@ -90,7 +90,7 @@
 	// 	else if(possible_transfer_amounts.len)
 	// 		. += span_notice("Left-click or right-click in-hand to view its transfer amount.")
 	if(has_variable_transfer_amount && length(possible_transfer_amounts))
-		. += span_notice("На ПКМ можно изменить количество переномещаемого реагента.")
+		. += span_notice("На ПКМ можно изменить количество перемещаемогомого реагента.")
 	// BANDASTATION EDIT END
 	if(isliving(user) && HAS_TRAIT(user, TRAIT_REMOTE_TASTING))
 		var/mob/living/living_user = user
