@@ -78,6 +78,59 @@
 #define FEATURE_TAILSPINES "tailspines" // Different from regular spines, these appear on tails
 #define FEATURE_LEGS "legs"
 
+// BANDASTATION ADDITION START - Species Features
+#define FEATURE_VULPKANIN_HEAD_MARKINGS "vulpkanin_head_markings"
+#define FEATURE_VULPKANIN_CHEST_MARKINGS "vulpkanin_chest_markings"
+#define FEATURE_VULPKANIN_LIMB_MARKINGS "vulpkanin_limb_markings"
+#define FEATURE_VULPKANIN_TAIL "vulpkanin_tail"
+#define FEATURE_VULPKANIN_TAIL_MARKINGS "vulpkanin_tail_markings"
+#define FEATURE_VULPKANIN_FACIAL_HAIR "vulpkanin_facial_hair"
+#define FEATURE_VULPKANIN_BODY_MARKINGS_COLOR "vulpkanin_body_markings_color"
+#define FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR "vulpkanin_tail_markings_color"
+#define FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR "vulpkanin_head_markings_color"
+#define FEATURE_VULPKANIN_FACIAL_HAIR_COLOR "vulpkanin_facial_hair_color"
+
+#define FEATURE_TAJARAN_HEAD_MARKINGS "tajaran_head_markings"
+#define FEATURE_TAJARAN_CHEST_MARKINGS "tajaran_chest_markings"
+#define FEATURE_TAJARAN_LIMB_MARKINGS "tajaran_limb_markings"
+#define FEATURE_TAJARAN_TAIL "tajaran_tail"
+#define FEATURE_TAJARAN_TAIL_MARKINGS "tajaran_tail_markings"
+#define FEATURE_TAJARAN_FACIAL_HAIR "tajaran_facial_hair"
+#define FEATURE_TAJARAN_BODY_MARKINGS_COLOR "tajaran_body_markings_color"
+#define FEATURE_TAJARAN_HEAD_MARKINGS_COLOR "tajaran_head_markings_color"
+#define FEATURE_TAJARAN_TAIL_MARKINGS_COLOR "tajaran_tail_markings_color"
+#define FEATURE_TAJARAN_FACIAL_HAIR_COLOR "tajaran_facial_hair_color"
+
+#define FEATURE_SKRELL_HEAD_TENTACLE "skrell_head_tentacle"
+// BANDASTATION ADDITION END - Species Features
+
+// BANDASTATION ADDITION START - Species
+#define DNA_VULPKANIN_HEAD_MARKINGS_BLOCK 17
+#define DNA_VULPKANIN_CHEST_MARKINGS_BLOCK 18
+#define DNA_VULPKANIN_LIMB_MARKINGS_BLOCK 19
+#define DNA_VULPKANIN_TAIL_BLOCK 20
+#define DNA_VULPKANIN_TAIL_MARKINGS_BLOCK 21
+#define DNA_VULPKANIN_FACIAL_HAIR_BLOCK 22
+#define DNA_VULPKANIN_BODY_MARKINGS_COLOR_BLOCK 23
+#define DNA_VULPKANIN_TAIL_MARKINGS_COLOR_BLOCK 24
+#define DNA_VULPKANIN_HEAD_MARKINGS_COLOR_BLOCK 25
+#define DNA_VULPKANIN_FACIAL_HAIR_COLOR_BLOCK 26
+
+#define DNA_TAJARAN_HEAD_MARKINGS_BLOCK 27
+#define DNA_TAJARAN_CHEST_MARKINGS_BLOCK 28
+#define DNA_TAJARAN_LIMB_MARKINGS_BLOCK 29
+
+#define DNA_TAJARAN_TAIL_BLOCK 30
+#define DNA_TAJARAN_TAIL_MARKINGS_BLOCK 31
+#define DNA_TAJARAN_FACIAL_HAIR_BLOCK 32
+#define DNA_TAJARAN_BODY_MARKINGS_COLOR_BLOCK 33
+#define DNA_TAJARAN_HEAD_MARKINGS_COLOR_BLOCK 34
+#define DNA_TAJARAN_TAIL_MARKINGS_COLOR_BLOCK 35
+#define DNA_TAJARAN_FACIAL_HAIR_COLOR_BLOCK 36
+
+#define DNA_SKRELL_HEAD_TENTACLE_BLOCK 37
+// BANDASTATION ADDITION END - Species
+
 ///flag for the transfer_flag argument from dna/proc/copy_dna(). This one makes it so the SE is copied too.
 #define COPY_DNA_SE (1<<0)
 ///flag for the transfer_flag argument from dna/proc/copy_dna(). This one copies the species.
@@ -123,6 +176,9 @@
 #define ORGAN_SLOT_EXTERNAL_WINGS "wings"
 #define ORGAN_SLOT_EXTERNAL_ANTENNAE "antennae"
 #define ORGAN_SLOT_EXTERNAL_POD_HAIR "pod_hair"
+/// BADNASTATION ADDITION START - Species
+#define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE "head_tentacles"
+/// BADNASTATION ADDITION END - Species
 
 /// Xenomorph organ slots
 #define ORGAN_SLOT_XENO_ACIDGLAND "acid_gland"
