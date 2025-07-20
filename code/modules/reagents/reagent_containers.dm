@@ -83,11 +83,13 @@
 
 /obj/item/reagent_containers/examine(mob/user)
 	. = ..()
-	if(has_variable_transfer_amount)
-		if(possible_transfer_amounts.len > 1)
-			. += span_notice("Left-click or right-click in-hand to increase or decrease its transfer amount. It is currently set to [amount_per_transfer_from_this] units.")
-		else if(possible_transfer_amounts.len)
-			. += span_notice("Left-click or right-click in-hand to view its transfer amount.")
+	// if(has_variable_transfer_amount)
+	// 	if(possible_transfer_amounts.len > 1)
+	// 		. += span_notice("Left-click or right-click in-hand to increase or decrease its transfer amount. It is currently set to [amount_per_transfer_from_this] units.")
+	// 	else if(possible_transfer_amounts.len)
+	// 		. += span_notice("Left-click or right-click in-hand to view its transfer amount.")
+	if(has_variable_transfer_amount && length(possible_transfer_amounts))
+		. += span_notice("Альт-кликом можно изменить количество переномещаемого реагента.")
 	if(isliving(user) && HAS_TRAIT(user, TRAIT_REMOTE_TASTING))
 		var/mob/living/living_user = user
 		living_user.taste_container(reagents)
@@ -105,13 +107,27 @@
 	if(list_reagents)
 		reagents.add_reagent_list(list_reagents, added_purity = list_reagents_purity)
 
-/obj/item/reagent_containers/attack_self(mob/user)
-	if(has_variable_transfer_amount)
-		change_transfer_amount(user, FORWARD)
+// BANDASTATION EDIT START
+// /obj/item/reagent_containers/attack_self(mob/user)
+// 	if(has_variable_transfer_amount)
+// 		change_transfer_amount(user, FORWARD)
 
-/obj/item/reagent_containers/attack_self_secondary(mob/user)
-	if(has_variable_transfer_amount)
-		change_transfer_amount(user, BACKWARD)
+// /obj/item/reagent_containers/attack_self_secondary(mob/user)
+// 	if(has_variable_transfer_amount)
+// 		change_transfer_amount(user, BACKWARD)
+
+/obj/item/reagent_containers/click_alt(mob/user)
+	. = ..()
+	if(!has_variable_transfer_amount)
+		return
+	select_transfer_amount(user)
+
+/obj/item/reagent_containers/proc/select_transfer_amount(mob/user)
+	amount_per_transfer_from_this = tgui_input_list(user, "Transfer Amount", "Select transfer amount", possible_transfer_amounts, amount_per_transfer_from_this) || amount_per_transfer_from_this
+	balloon_alert(user, "transferring [amount_per_transfer_from_this]u")
+	mode_change_message(user)
+
+// BANDASTATION EDIT END
 
 /obj/item/reagent_containers/proc/mode_change_message(mob/user)
 	return

@@ -459,24 +459,27 @@
 /obj/item/reagent_containers/cup/glass/shaker/Initialize(mapload)
 	. = ..()
 	register_context()
-	if(prob(10))
-		name = "\improper Nanotrasen 20th Anniversary Shaker"
-		desc += " It has an emblazoned Nanotrasen logo on it."
-		icon_state = "shaker_n"
+	// BANDASTATION REMOVAL START
+	// if(prob(10))
+	// 	name = "\improper Nanotrasen 20th Anniversary Shaker"
+	// 	desc += " It has an emblazoned Nanotrasen logo on it."
+	// 	icon_state = "shaker_n"
+	// BANDASTATION REMOVAL END
 
 /obj/item/reagent_containers/cup/glass/shaker/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "[using_custom_drinks ? "Disable" : "Enable"] custom drinks"
+	context[SCREENTIP_CONTEXT_ALT_RMB] = "[using_custom_drinks ? "Выключить" : "Включить"] прозвольное наименование напитков"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/reagent_containers/cup/glass/shaker/examine(mob/user)
 	. = ..()
-	. += span_notice("Alt-click to [using_custom_drinks ? "disable" : "enable"] custom drink naming")
+	. += span_notice("Альт+ПКМ, чтобы [using_custom_drinks ? "выключить" : "включить"] прозвольное наименование напитков")
 	if(using_custom_drinks)
-		. += span_notice("Drinks poured from this shaker will have the following name: [custom_drink_name]")
-		. += span_notice("Drinks poured from this shaker will have the following description: [custom_drink_desc]")
+		. += span_notice("Напитки из этого шейкера будут иметь следующее название: [custom_drink_name]")
+		. += span_notice("Напитки из этого шейкера будут иметь следующее описание: [custom_drink_desc]")
 
-/obj/item/reagent_containers/cup/glass/shaker/click_alt(mob/user)
+/obj/item/reagent_containers/cup/glass/shaker/click_alt_secondary(mob/user) // SS220 EDIT alt+RMB instead of alt+LMB
+	. = ..()
 	if(using_custom_drinks)
 		using_custom_drinks = FALSE
 		disable_custom_drinks()

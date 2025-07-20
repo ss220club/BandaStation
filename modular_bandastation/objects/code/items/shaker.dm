@@ -12,19 +12,15 @@
 /obj/item/reagent_containers/cup/glass/shaker/examine(mob/user)
 	. = ..()
 	. += span_notice("Реагенты внутри не смешиваются, пока [declent_ru(NOMINATIVE)] не потрясут.")
-	. += span_notice("ПКМ в неактивной руке - трясти.")
+	. += span_notice("Использовать в руке - трясти.")
 
 /obj/item/reagent_containers/cup/glass/shaker/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(user.get_inactive_held_item() == src)
-		context[SCREENTIP_CONTEXT_RMB] = "Трясти"
+		context[SCREENTIP_CONTEXT_LMB] = "Трясти"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/reagent_containers/cup/glass/shaker/proc/try_shake(mob/user)
-	if(user.get_inactive_held_item() != src)
-		to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] нужно держать в неактивной руке!"))
-		return FALSE
-
 	if(!reagents.total_volume)
 		to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] пуст!"))
 		return FALSE
@@ -48,9 +44,6 @@
 
 	return TRUE
 
-/obj/item/reagent_containers/cup/glass/shaker/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/reagent_containers/cup/glass/shaker/attack_self(mob/user)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
 	try_shake(user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
