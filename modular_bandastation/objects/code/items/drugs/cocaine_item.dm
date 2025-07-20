@@ -13,7 +13,6 @@
 	icon_state = "crackbrick"
 	volume = 40
 	list_reagents = list(/datum/reagent/drug/cocaine/freebase_cocaine = 40)
-	possible_transfer_amounts = list()
 
 /obj/item/reagent_containers/crackbrick/attackby(obj/item/W, mob/user, params)
 	if(W.get_sharpness())
@@ -83,8 +82,6 @@
 	icon_state = "cocainebrick"
 	volume = 25
 	list_reagents = list(/datum/reagent/drug/cocaine = 25)
-	possible_transfer_amounts = list()
-
 
 /obj/item/reagent_containers/cocainebrick/attack_self(mob/user)
 	user.visible_message(span_notice("[user] начинает ломать [src]."), span_notice("Ты начинаешь ломать [src]..."))
