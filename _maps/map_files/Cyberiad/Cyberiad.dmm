@@ -2896,6 +2896,11 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/grass,
 /area/station/maintenance/ghetto/garden)
+"aKA" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/port/greater)
 "aKG" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/reagent_dispensers/fueltank,
@@ -21246,11 +21251,11 @@
 /area/station/engineering/atmos)
 "eYc" = (
 /obj/machinery/atmospherics/components/binary/passive_gate{
+	dir = 8;
 	target_pressure = 2400;
 	on = 1;
 	name = "Airlock Valve";
-	hide = 1;
-	dir = 8
+	hide = 1
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
@@ -30894,10 +30899,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "hlx" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/light/small/directional/east,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "hly" = (
@@ -32739,6 +32741,11 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/blueshield)
+"hGE" = (
+/obj/effect/spawner/random/trash/grille_or_waste,
+/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard/aft)
 "hGH" = (
 /obj/machinery/conveyor/inverted{
 	dir = 6;
@@ -33463,9 +33470,7 @@
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "hQF" = (
@@ -35484,7 +35489,7 @@
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/lab)
 "iqv" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
+/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "iqM" = (
@@ -42519,11 +42524,11 @@
 /area/station/ai_monitored/turret_protected/ai)
 "kbh" = (
 /obj/machinery/atmospherics/components/binary/passive_gate{
-	dir = 1;
 	target_pressure = 2400;
 	on = 1;
 	name = "Airlock Valve";
-	hide = 1
+	hide = 1;
+	dir = 1
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
@@ -43255,11 +43260,8 @@
 /turf/open/floor/wood/large,
 /area/station/service/bar/atrium/ghetto)
 "kkH" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/grille/broken,
 /obj/item/stack/rods,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "kkK" = (
@@ -46619,6 +46621,9 @@
 /area/station/cargo/storage/ghetto)
 "kYk" = (
 /obj/machinery/light/small/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "kYl" = (
@@ -51128,9 +51133,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 1
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "maD" = (
@@ -51975,16 +51978,16 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "mkU" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
 /obj/effect/mapping_helpers/airlock/access/any/command/eva,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /turf/open/floor/plating,
-/area/station/maintenance/ghetto/starboard/aft)
+/area/station/maintenance/ghetto/central/fore)
 "mkW" = (
 /obj/machinery/holopad,
 /turf/open/floor/wood/large,
@@ -55574,9 +55577,7 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port/aft)
 "ncV" = (
@@ -57240,9 +57241,11 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "nxa" = (
-/obj/effect/spawner/structure/window/reinforced,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
-/turf/open/floor/plating,
+/turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "nxe" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -57292,17 +57295,15 @@
 /area/station/medical/psychology)
 "nxI" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/components/binary/passive_gate,
+/obj/machinery/atmospherics/components/binary/passive_gate{
+	target_pressure = 2400;
+	on = 1;
+	name = "Airlock Valve";
+	hide = 1
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/ghetto)
 "nxO" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/any/command/eva,
-/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
 	dir = 8
 	},
@@ -61156,11 +61157,11 @@
 /obj/effect/turf_decal/stripes/corner,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/atmospherics/components/binary/passive_gate{
-	dir = 1;
 	target_pressure = 2400;
 	on = 1;
 	name = "Airlock Valve";
-	hide = 1
+	hide = 1;
+	dir = 1
 	},
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/fore)
@@ -64533,7 +64534,9 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "phl" = (
@@ -66488,6 +66491,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
 /area/station/engineering/transit_tube)
+"pCS" = (
+/obj/effect/spawner/random/maintenance,
+/obj/machinery/atmospherics/components/unary/airlock_pump,
+/turf/open/floor/plating,
+/area/station/maintenance/port/greater)
 "pCT" = (
 /obj/structure/flora/bush/jungle/b/style_random,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -68888,6 +68896,12 @@
 /obj/structure/bookcase/random/reference,
 /turf/open/floor/wood,
 /area/station/service/library)
+"qhv" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/department/engine/atmos)
 "qhE" = (
 /obj/machinery/portable_atmospherics/canister,
 /turf/open/floor/catwalk_floor/iron_dark,
@@ -71208,15 +71222,11 @@
 /turf/open/misc/beach/sand,
 /area/station/hallway/secondary/exit/departure_lounge)
 "qNn" = (
+/obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
-/obj/machinery/atmospherics/components/binary/passive_gate{
-	dir = 1;
-	target_pressure = 2400;
-	on = 1;
-	name = "Airlock Valve";
-	hide = 1
-	},
-/turf/open/floor/plating,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron,
 /area/station/maintenance/port/greater)
 "qNp" = (
 /obj/structure/chair/comfy/brown{
@@ -71851,6 +71861,13 @@
 /obj/machinery/atmospherics/pipe/smart/simple/orange/visible,
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
+"qVc" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/station/maintenance/port/greater)
 "qVj" = (
 /turf/closed/wall,
 /area/station/maintenance/ghetto/kitchen)
@@ -74901,7 +74918,6 @@
 "rHh" = (
 /obj/effect/spawner/random/trash/grille_or_waste,
 /obj/structure/sign/warning/vacuum/directional/north,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard/aft)
 "rHk" = (
@@ -75335,16 +75351,16 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/storage)
 "rLL" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/structure/cable,
+/obj/machinery/atmospherics/components/binary/passive_gate{
+	target_pressure = 2400;
+	on = 1;
+	name = "Airlock Valve";
+	hide = 1;
+	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 8
-	},
-/turf/open/floor/iron/dark/textured_large,
-/area/station/hallway/secondary/entry)
+/turf/open/floor/plating,
+/area/station/maintenance/port/greater)
 "rMg" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -75957,9 +75973,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/any/command/eva,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/general,
-/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
-	dir = 1
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "rTY" = (
@@ -94939,6 +94953,13 @@
 	},
 /turf/open/floor/wood,
 /area/station/maintenance/starboard/aft)
+"wCu" = (
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/port/greater)
 "wCv" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -95748,6 +95769,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
 /area/station/maintenance/aft)
+"wLK" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden,
+/turf/open/floor/plating,
+/area/station/maintenance/port/greater)
 "wLM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/chair/office,
@@ -96449,9 +96475,12 @@
 /turf/closed/wall,
 /area/station/medical/virology)
 "wUK" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/closed/wall,
-/area/station/maintenance/ghetto/central)
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/layer_manifold/cyan/hidden{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/solars/port/aft)
 "wUL" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -127137,7 +127166,7 @@ hLM
 guN
 doz
 guN
-pOy
+mkU
 guN
 vbK
 vbK
@@ -127394,7 +127423,7 @@ guN
 guN
 doz
 guN
-mKB
+pOy
 guN
 vbK
 doz
@@ -127650,9 +127679,9 @@ pjZ
 guN
 doz
 doz
-vbK
-jEk
-vbK
+guN
+mKB
+guN
 vbK
 doz
 doz
@@ -127907,10 +127936,10 @@ pjZ
 guN
 doz
 doz
-ceC
-doz
-doz
-ceC
+vbK
+jEk
+vbK
+vbK
 doz
 doz
 doz
@@ -134603,7 +134632,7 @@ tOy
 ctM
 vDG
 oYL
-wUK
+mOI
 qXM
 vIM
 mOI
@@ -150298,9 +150327,9 @@ vbK
 jEk
 mUM
 xAM
-mkU
-iwS
-fKk
+gnS
+hGE
+rpq
 uYJ
 xQO
 gAu
@@ -176992,7 +177021,7 @@ tYD
 tYD
 hbD
 hbD
-nxa
+hbD
 fTV
 yeT
 pop
@@ -177250,7 +177279,7 @@ tYD
 bqy
 nXu
 vbT
-hRr
+nxa
 kKf
 pop
 tYD
@@ -179825,13 +179854,13 @@ pPZ
 pop
 oYm
 hbD
-rLL
+tTf
 hbD
 mKD
 pop
 aYB
 hbD
-rLL
+tTf
 hbD
 mKD
 pop
@@ -185449,12 +185478,12 @@ tYD
 tYD
 tYD
 gsK
-hmC
-jXu
-may
-qNn
-gbN
 wNd
+wNd
+wxx
+hCE
+gbN
+aKA
 chM
 dlB
 qgy
@@ -185706,15 +185735,15 @@ tYD
 tYD
 tYD
 gsK
-eyH
-wNd
-wxx
-hCE
-gbN
-llS
-llS
-llS
-wuv
+pCS
+jXu
+may
+wLK
+rLL
+qNn
+qNn
+qNn
+qVc
 kYk
 oBy
 llP
@@ -185966,13 +185995,13 @@ oBy
 oBy
 oBy
 oBy
-hCE
+wNd
 hlx
-bMf
+wNd
 kkH
-bHG
-bHG
-qGF
+llS
+llS
+wCu
 oBy
 mBw
 tLm
@@ -187839,7 +187868,7 @@ kAy
 tuI
 coz
 nhg
-nfv
+wUK
 noP
 bSc
 kJd
@@ -190953,7 +190982,7 @@ rLg
 bAZ
 rgH
 jTT
-ubD
+qhv
 rTQ
 rgH
 cZJ
