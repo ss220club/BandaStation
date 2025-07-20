@@ -17,10 +17,14 @@
 
 /obj/item/stealth/spy_spider/examine(mob/user)
 	. = ..()
+	if(!transmitter)
+		. += span_info("Передатчик отсутствует.")
+		return
 	. += span_info("Сейчас он [transmitter.get_broadcasting() ? "включён" : "выключен"].")
 
 /obj/item/stealth/spy_spider/attack_self(mob/user, modifiers)
-	transmitter.ui_interact(user)
+	if(transmitter)
+		transmitter.ui_interact(user)
 	return ..()
 
 /obj/item/radio/quiet

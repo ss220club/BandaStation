@@ -35,6 +35,8 @@
 	to_chat(user, span_notice("Вы начинаете устанавливать [parent]..."))
 	if(!do_after(user, install_delay, target = installation_target, hidden = is_silent_install))
 		return FALSE
+	if(QDELETED(parent))
+		return FALSE
 	if(!user.temporarilyRemoveItemFromInventory(parent))
 		return FALSE
 	target = installation_target
@@ -53,12 +55,13 @@
 	SIGNAL_HANDLER
 	if(istype(tool, /obj/item/detective_scanner) && spotted_by[user])
 		INVOKE_ASYNC(src, PROC_REF(remove_stealth_device), user)
-		return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
 /datum/component/stealth_device/proc/remove_stealth_device(mob/user)
 	to_chat(user, span_warning("Вы начинаете извлечение скрытого объекта из [target]..."))
 	if(do_after(user, 5 SECONDS, target))
+		if(QDELETED(parent))
+			return
 		if(user.put_in_hands(parent))
 			user.balloon_alert(user, "Извлечено: [parent]")
 			unregister_target_signals()
