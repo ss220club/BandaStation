@@ -452,13 +452,13 @@
     var/mob/living/rube = owner
     var/mob/living/offerer = offer?.owner
     if(!QDELETED(rube) && !QDELETED(offerer))
-        offerer.visible_message(span_danger("[offerer] убирает руку от шлепка [rube] в последнюю секунду, полностью уклоняясь от пятюни!"), span_nicegreen("[rube] не удается коснуться вашей руки, выставляя [rube.p_them()] на посмешище!"), span_hear("Вы слышите разочаровывающий звук того, как плоть не соприкасается с плотью!"), ignored_mobs=rube)
-        to_chat(rube, span_userdanger("[uppertext("НЕТ! [offerer] ОТДЕРГИВАЕТ [offerer.p_their()] РУКУ! ТЫ СЛИШКОМ МЕДЛЕННЫЙ!")]"))
-        playsound(offerer, 'sound/items/weapons/thudswoosh.ogg', 100, TRUE, 1)
-        rube.Knockdown(1 SECONDS)
-        offerer.add_mood_event("high_five", /datum/mood_event/down_low)
-        rube.add_mood_event("high_five", /datum/mood_event/too_slow)
-        offerer.remove_status_effect(/datum/status_effect/offering/no_item_received/high_five)
+    offerer.visible_message(span_danger("[offerer] убирает руку от шлепка [rube] в последнюю секунду, полностью уклоняясь от пятюни!"), span_nicegreen("[rube] не удается коснуться вашей руки, выставляя [rube.p_them()] на посмешище!"), span_hear("Вы слышите разочаровывающий звук того, как плоть не соприкасается с плотью!"), ignored_mobs=rube)
+    to_chat(rube, span_userdanger("[uppertext("НЕТ! [offerer] ОТДЕРГИВАЕТ [offerer.p_their()] РУКУ! ТЫ СЛИШКОМ МЕДЛЕННЫЙ!")]"))
+    playsound(offerer, 'sound/items/weapons/thudswoosh.ogg', 100, TRUE, 1)
+    rube.Knockdown(1 SECONDS)
+    offerer.add_mood_event("high_five", /datum/mood_event/down_low)
+    rube.add_mood_event("high_five", /datum/mood_event/too_slow)
+    offerer.remove_status_effect(/datum/status_effect/offering/no_item_received/high_five)
 
 	qdel(src)
 
