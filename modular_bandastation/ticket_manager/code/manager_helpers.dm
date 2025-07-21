@@ -105,6 +105,8 @@
 	var/user_message
 	var/admin_message
 	var/ticket_id = needed_ticket.id
+	var/ticket_closed = new_state == TICKET_CLOSED
+	var/ticket_open = new_state == TICKET_OPEN
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
 	if(new_state != TICKET_OPEN)
 		if(initiator.current_help_ticket != needed_ticket)
@@ -112,8 +114,8 @@
 
 		needed_ticket.closed_at = time_stamp(NONE)
 		initiator.current_help_ticket = null
-		admin_message = "[key_name_admin(admin)] [new_state == TICKET_CLOSED ? "закрыл" : "решил"] тикет #[ticket_id]!"
-		user_message = "Ваш тикет #[ticket_id] был [new_state == TICKET_CLOSED ? "закрыт" : "решён"]!"
+		admin_message = "[key_name_admin(admin)] [ticket_closed ? "закрыл" : "решил"] тикет #[ticket_id]!"
+		user_message = "Ваш тикет #[ticket_id] был [ticket_closed ? "закрыт" : "решён"]!"
 		SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_MADE_INACTIVE)
 	else
 		if(initiator.current_help_ticket)
@@ -130,6 +132,7 @@
 
 	if(initiator.client)
 		to_chat(initiator.client, custom_boxed_message("green_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
+		admin_ticket_log(initiator.client, "[admin.key] [ticket_open ? "открыл" : ticket_closed ? "закрыл" : "решил"] этот тикет.")
 	message_admins(span_admin(admin_message))
 	log_admin_private(admin_message)
 
@@ -257,16 +260,10 @@
 	if(!user_ticket)
 		return
 
-	if(istype(user_client) && user_ticket)
-		user_ticket.messages += list(list(
-			"sender" = "ADMIN_TICKET_LOG",
-			"message" = strip_html_full(message),
-			"time" = time_stamp(NONE),
-		))
+	user_ticket.messages += list(list(
+		"sender" = "ADMIN_TICKET_LOG",
+		"message" = strip_html_full(message),
+		"time" = time_stamp(NONE),
+	))
 
-	if(isnull(player_message))
-		return
-
-	var/client/admin = user_ticket.linked_admin.client
-	GLOB.ticket_manager.send_chat_message_to_player(admin || "", user_ticket, player_message)
 	SStgui.update_uis(GLOB.ticket_manager)
