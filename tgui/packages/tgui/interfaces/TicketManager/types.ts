@@ -6,6 +6,7 @@ export type ManagerData = {
   userKey: string;
   ticketToOpen: number;
   maxMessageLength: number;
+  replyCooldown: number;
   isAdmin: BooleanLike;
   isMentor: BooleanLike;
   allTickets: TicketProps[];

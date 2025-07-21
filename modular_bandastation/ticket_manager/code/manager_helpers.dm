@@ -15,6 +15,10 @@
 	if(!needed_ticket.linked_admin && !check_rights_for(user, R_ADMIN))
 		to_chat(user, span_danger("У вашего тикета нет привязанного администратора! Ожидайте пока кто-то вам ответит."), MESSAGE_TYPE_ADMINPM)
 		return FALSE
+
+	if(!user.holder && !COOLDOWN_FINISHED(user, ticket_response))
+		to_chat(user, span_danger("Слишком быстро! Разрешено писать 1 сообщение в [TICKET_REPLY_COOLDOWN / 10] секунд."), MESSAGE_TYPE_ADMINPM)
+		return FALSE
 	return TRUE
 
 /// Link admin to ticket.
@@ -22,7 +26,7 @@
 	if(!admin || !needed_ticket)
 		CRASH("Tryed to link admin to ticket with invalid arguments!")
 
-	if(!needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN))
+	if(!needed_ticket.linked_admin)
 		needed_ticket.linked_admin = admin.persistent_client
 		message_admins("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 		log_admin("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
@@ -35,7 +39,7 @@
 		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], к которому не привязан администратор.")
 		CRASH("Tryed to unlink admin from ticket without linked admin!")
 
-	if(!check_rights_for(admin, R_ADMIN))
+	if(!admin.holder)
 		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], не имея прав администратора!")
 		CRASH("Tryed to unlink admin from ticket without a required rights!")
 
@@ -85,7 +89,10 @@
 	if(!sender || !message || !needed_ticket)
 		CRASH("Invalid arguments passed to ticket_manager add_ticket_message()!")
 
-	link_admin_to_ticket(sender, needed_ticket)
+	if(sender.holder)
+		link_admin_to_ticket(sender, needed_ticket)
+	else
+		COOLDOWN_START(sender, ticket_response, TICKET_REPLY_COOLDOWN)
 
 	var/client/initiator = needed_ticket.initiator_client.client
 	var/client/linked_admin = needed_ticket.linked_admin.client

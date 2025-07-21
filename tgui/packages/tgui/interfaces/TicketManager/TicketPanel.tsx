@@ -13,7 +13,7 @@ import { ManagerData } from './types';
 
 export function TicketPanel(props) {
   const { act, data } = useBackend<ManagerData>();
-  const { userKey, isAdmin, isMentor, maxMessageLength } = data;
+  const { userKey, isAdmin, isMentor, maxMessageLength, replyCooldown } = data;
   const { allTickets, ticketNumber, setSelectedTicket } = props;
 
   const selectedTicket = allTickets.find(
@@ -178,6 +178,7 @@ export function TicketPanel(props) {
             value={inputMessage}
             placeholder={ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'}
             maxLength={maxMessageLength}
+            cooldown={replyCooldown}
             disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
             onChange={(value) => {
               setInputMessage(value);

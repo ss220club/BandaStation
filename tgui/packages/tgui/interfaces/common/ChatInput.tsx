@@ -1,6 +1,6 @@
 import '../../styles/interfaces/ChatInput.scss';
 
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 import { Stack } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 import { classes } from 'tgui-core/react';
@@ -14,6 +14,8 @@ type ChatInputProps = {
   value: string;
   /** Disables the input. Outlined in gray */
   disabled?: boolean;
+  /** Disables input until cooldown is over. Also prevents any actions */
+  cooldown?: number | false;
   /** The maximum length of the input value */
   maxLength?: number;
   /** Buttons right of the input */
@@ -30,6 +32,7 @@ export function ChatInput(props: ChatInputProps) {
     value,
     placeholder = 'Начинайте писать...',
     disabled,
+    cooldown,
     buttons,
     maxLength,
     onChange,
@@ -37,6 +40,8 @@ export function ChatInput(props: ChatInputProps) {
   } = props;
 
   const [editing, setEditing] = useState(false);
+  const [cooldownLeft, setCooldownLeft] = useState<number | null>(null);
+  const [cooldownFinished, setCooldownFinished] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,6 +50,27 @@ export function ChatInput(props: ChatInputProps) {
       text.innerText = value;
     }
   }, [value]);
+
+  function startCooldown(deciseconds: number) {
+    const duration = deciseconds * 100;
+    const start = performance.now();
+
+    function frame(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      setCooldownLeft(progress * 100);
+
+      if (progress === 1) {
+        setCooldownLeft(null);
+        setCooldownFinished(true);
+        return;
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  }
 
   function handleInput() {
     const text = textRef.current;
@@ -91,9 +117,23 @@ export function ChatInput(props: ChatInputProps) {
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>): void {
     event.stopPropagation();
+    const text = textRef.current;
+    if (!text) {
+      return;
+    }
+
     if (event.key === KEY.Enter && !disabled) {
       event.preventDefault();
-      onEnter?.(textRef.current?.innerText || '');
+      if (cooldown && cooldownLeft) {
+        return;
+      }
+
+      onEnter?.(text?.innerText || '');
+      if (cooldown) {
+        text.blur();
+        setCooldownFinished(false);
+        startCooldown(cooldown);
+      }
     }
     return;
   }
@@ -104,8 +144,15 @@ export function ChatInput(props: ChatInputProps) {
       className={classes([
         'ChatInput',
         disabled && 'ChatInput--disabled',
+        cooldownLeft && 'ChatInput--cooldown',
+        cooldownFinished && 'ChatInput--flash',
         editing && 'editing',
       ])}
+      style={
+        cooldownLeft
+          ? ({ '--cooldown': `${cooldownLeft}%` } as CSSProperties)
+          : undefined
+      }
     >
       <div
         ref={textRef}

@@ -39,6 +39,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	data["isMentor"] = null // NEEDED MENTOR SYSTEM
 	data["ticketToOpen"] = C.ticket_to_open
 	data["maxMessageLength"] = MAX_MESSAGE_LEN
+	data["replyCooldown"] = TICKET_REPLY_COOLDOWN
 	return data
 
 /datum/ticket_manager/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -176,6 +177,10 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 		return
 
 	user.client.ticket_to_open = null
+
+	var/datum/help_ticket/current_ticket = user.client.persistent_client.current_help_ticket
+	if(current_ticket)
+		remove_from_ticket_writers(user.client, current_ticket)
 
 /datum/ticket_manager/proc/get_tickets_data(client/user)
 	var/list/tickets = list()
