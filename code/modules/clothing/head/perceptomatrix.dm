@@ -117,7 +117,7 @@
 /obj/item/clothing/head/helmet/perceptomatrix/examine(mob/user)
 	. = ..()
 	if (!core_installed)
-		. += span_warning("Оно требует галлюцинаторное ядро для функциональности.")
+		. += span_warning("Для работы требуется галлюцинаторное ядро.")
 
 /obj/item/clothing/head/helmet/perceptomatrix/update_icon_state()
 	icon_state = base_icon_state + (core_installed ? "" : "_inactive")
@@ -142,7 +142,7 @@
 
 /datum/action/cooldown/spell/pointed/percept_hallucination
 	name = "Направить галлюцинации"
-	desc = "Перенаправьте энергию ядра на цель, чтобы ошеломить его."
+	desc = "Перенаправьте энергию ядра на цель, чтобы вызвать ошеломление."
 	button_icon_state = "blind"
 	ranged_mousepointer = 'icons/effects/mouse_pointers/blind_target.dmi'
 

@@ -29,7 +29,7 @@
 		var/mob/living/will_become = stored_mob_type
 		. += span_notice("Содержит оцифрованное ДНК [initial(will_become.name)].")
 	if (!active)
-		. += span_warning("Оно требует биоскремблер ядро для функциональности.")
+		. += span_warning("Для работы требуется ядро биоскрэмблер.")
 
 /obj/item/polymorph_belt/update_icon_state()
 	icon_state = base_icon_state + (active ? "" : "_inactive")
@@ -108,7 +108,7 @@
 
 /// Ability provided by the polymorph belt
 /datum/action/cooldown/spell/shapeshift/polymorph_belt
-	name = "Инвертировать инвертор поля"
+	name = "Инвертировать полиморфное поле"
 	cooldown_time = 30 SECONDS
 	school = SCHOOL_UNSET
 	invocation_type = INVOCATION_NONE
