@@ -290,7 +290,7 @@
 /obj/machinery/power/apc/update_name(updates)
 	. = ..()
 	if(auto_name)
-		name = "[declent_ru(NOMINATIVE)] ([area.declent_ru(NOMINATIVE)])"
+		name = "[declent_ru(NOMINATIVE)] ([area.declent_ru(GENITIVE)])"
 
 /obj/machinery/power/apc/proc/assign_to_area(area/target_area = get_area(src))
 	if(area == target_area)
