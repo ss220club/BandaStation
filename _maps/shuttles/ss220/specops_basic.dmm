@@ -20,7 +20,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/specops)
 "j" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/specops)
 "k" = (
 /obj/machinery/computer/camera_advanced/shuttle_docker/specops{
