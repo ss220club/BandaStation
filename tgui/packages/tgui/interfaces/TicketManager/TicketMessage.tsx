@@ -34,6 +34,7 @@ function splitMessage(message: string) {
       'type',
       'rel',
       'target',
+      'class',
     ],
   });
 
