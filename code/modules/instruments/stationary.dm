@@ -32,6 +32,7 @@
 /obj/structure/musician/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
 	default_unfasten_wrench(user, tool, time = 4 SECONDS)
+	update_icon(UPDATE_ICON_STATE) // BANDASTATION ADDITION
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/musician/piano

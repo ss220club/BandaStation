@@ -178,7 +178,7 @@
 			return ..()
 		if(!newname)
 			return
-		name = "bookcase ([sanitize(newname)])"
+		name = "bookcase ([sanitize(newname, apply_ic_filter = TRUE)])" // BANDASTATION EDIT - Sanitize emotes
 		return
 
 	if(attacking_item.tool_behaviour == TOOL_CROWBAR)
