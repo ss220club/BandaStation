@@ -31,16 +31,24 @@
 	if(!admin || !needed_ticket)
 		CRASH("Tryed to unlink admin from ticket with invalid arguments!")
 
-	if(needed_ticket.linked_admin && check_rights_for(admin, R_ADMIN))
-		needed_ticket.linked_admin = null
-		message_admins("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
-		log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
+	if(!needed_ticket.linked_admin)
+		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], к которому не привязан администратор.")
+		CRASH("Tryed to unlink admin from ticket without linked admin!")
 
+	if(!check_rights_for(admin, R_ADMIN))
+		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], не имея прав администратора!")
+		CRASH("Tryed to unlink admin from ticket without a required rights!")
+
+	needed_ticket.linked_admin = null
+	to_chat(GLOB.admins, span_admin("[key_name_admin(admin)] отказался от тикета [TICKET_OPEN_LINK(needed_ticket.id, "#[needed_ticket.id]")]."), MESSAGE_TYPE_ADMINPM)
+	log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
 	SStgui.update_uis(src)
-	if(!needed_ticket.initiator_client.client)
+
+	var/client/initiator = needed_ticket.initiator_client.client
+	if(!initiator)
 		return
 
-	to_chat(needed_ticket.initiator_client.client,
+	to_chat(initiator,
 		custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора.")),
 		MESSAGE_TYPE_ADMINPM)
 
