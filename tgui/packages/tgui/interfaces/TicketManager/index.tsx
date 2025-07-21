@@ -84,7 +84,7 @@ function TicketsMainPage(props: TicketsMainPageProps) {
       </Stack.Item>
       <Stack.Item grow>
         <Section fill scrollable>
-          <Stack vertical>
+          <Stack vertical reverse>
             {selectedTickets.map((ticket: TicketProps) => (
               <Ticket
                 key={ticket.number}
