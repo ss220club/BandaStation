@@ -14,7 +14,7 @@
 	. = ..()
 	if(.)
 		return
-	user.ask_help() // BANDASTATION EDIT: adminhelp -> ask_help
+	user.adminhelp()
 	return TRUE
 
 

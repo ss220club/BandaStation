@@ -14,17 +14,6 @@
 
 	GLOB.ticket_manager.ui_interact(mob)
 
-/client/verb/ask_help()
-	set name = "Ask Help"
-	set category = "Admin"
-
-	if(persistent_client.current_help_ticket)
-		ticket_to_open = persistent_client.current_help_ticket.id
-		GLOB.ticket_manager.ui_interact(mob)
-		return
-
-	GLOB.help_ui_handler.ui_interact(mob)
-
 /client/cmd_admin_pm(whom, message)
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src, span_danger("Ошибка: Вы не можете использовать ЛС (мут)."), MESSAGE_TYPE_ADMINPM)

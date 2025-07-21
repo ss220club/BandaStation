@@ -806,8 +806,18 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 /client/verb/adminhelp()
 	set category = "Admin"
 	set name = "Adminhelp"
+	/* BANDASTATION REMOVAL
 	GLOB.admin_help_ui_handler.ui_interact(mob)
 	to_chat(src, span_boldnotice("Adminhelp failing to open or work? <a href='byond://?src=[REF(src)];tguiless_adminhelp=1'>Click here</a>"))
+	*/
+	// BANDASTATION ADDITION - START
+	if(persistent_client.current_help_ticket)
+		ticket_to_open = persistent_client.current_help_ticket.id
+		GLOB.ticket_manager.ui_interact(mob)
+		return
+
+	GLOB.help_ui_handler.ui_interact(mob)
+	// BANDASTATION ADDITION - END
 
 /client/verb/view_latest_ticket()
 	set category = "Admin"
