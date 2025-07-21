@@ -164,7 +164,7 @@
 
 			// Sanitize the name first. We're not using the full sanitize_name proc as ID cards can have a wider variety of things on them that
 			// would not pass as a formal character name, but would still be valid on an ID card created by a player.
-			var/new_name = sanitize(params["name"])
+			var/new_name = sanitize(params["name"], apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
 			if(!new_name)
 				inserted_auth_card.registered_name = null
@@ -206,7 +206,7 @@
 		if("PRG_assign")
 			if(!computer || !authenticated_card || !inserted_auth_card)
 				return TRUE
-			var/new_asignment = trim(sanitize(params["assignment"]), MAX_NAME_LEN)
+			var/new_asignment = trim(sanitize(params["assignment"], apply_ic_filter = TRUE), MAX_NAME_LEN) // BANDASTATION EDIT - Sanitize emotes
 			inserted_auth_card.assignment = new_asignment
 			playsound(computer, SFX_TERMINAL_TYPE, 50, FALSE)
 			inserted_auth_card.update_label()
