@@ -449,16 +449,16 @@
 
 /// Part two of the ultimate prank
 /atom/movable/screen/alert/give/highfive/proc/too_slow_p2()
-	var/mob/living/rube = owner
-	var/mob/living/offerer = offer?.owner
-	if(!QDELETED(rube) && !QDELETED(offerer))
-		offerer.visible_message(span_danger("[offerer] pulls away from [rube]'s slap at the last second, dodging the high-five entirely!"), span_nicegreen("[rube] fails to make contact with your hand, making an utter fool of [rube.p_them()]self!"), span_hear("You hear a disappointing sound of flesh not hitting flesh!"), ignored_mobs=rube)
-		to_chat(rube, span_userdanger("[uppertext("NO! [offerer] PULLS [offerer.p_their()] HAND AWAY FROM YOURS! YOU'RE TOO SLOW!")]"))
-		playsound(offerer, 'sound/items/weapons/thudswoosh.ogg', 100, TRUE, 1)
-		rube.Knockdown(1 SECONDS)
-		offerer.add_mood_event("high_five", /datum/mood_event/down_low)
-		rube.add_mood_event("high_five", /datum/mood_event/too_slow)
-		offerer.remove_status_effect(/datum/status_effect/offering/no_item_received/high_five)
+    var/mob/living/rube = owner
+    var/mob/living/offerer = offer?.owner
+    if(!QDELETED(rube) && !QDELETED(offerer))
+        offerer.visible_message(span_danger("[offerer] убирает руку от шлепка [rube] в последнюю секунду, полностью уклоняясь от пятюни!"), span_nicegreen("[rube] не удается коснуться вашей руки, выставляя [rube.p_them()] на посмешище!"), span_hear("Вы слышите разочаровывающий звук того, как плоть не соприкасается с плотью!"), ignored_mobs=rube)
+        to_chat(rube, span_userdanger("[uppertext("НЕТ! [offerer] ОТДЕРГИВАЕТ [offerer.p_their()] РУКУ! ТЫ СЛИШКОМ МЕДЛЕННЫЙ!")]"))
+        playsound(offerer, 'sound/items/weapons/thudswoosh.ogg', 100, TRUE, 1)
+        rube.Knockdown(1 SECONDS)
+        offerer.add_mood_event("high_five", /datum/mood_event/down_low)
+        rube.add_mood_event("high_five", /datum/mood_event/too_slow)
+        offerer.remove_status_effect(/datum/status_effect/offering/no_item_received/high_five)
 
 	qdel(src)
 
@@ -467,7 +467,7 @@
 	SIGNAL_HANDLER
 
 	if(QDELETED(offer.offered_item))
-		examine_list += span_warning("рука [source] кажется напряженной, как будто [source.p_they()] планирует внезапно отдернуть ее...")
+		examine_list += span_warning("рука [source] кажется напряженной, кажется, что [source] вот-вот отдернет руку...")
 
 /atom/movable/screen/alert/give/hand
 	screentip_override_text = "Взять руку"
@@ -511,7 +511,7 @@
 	var/title = pick(death_titles)
 
 	//Succumbing with a message
-	var/last_whisper = tgui_input_text(usr, "У вас есть последние слова?", title, max_length = CHAT_MESSAGE_MAX_LENGTH, encode = FALSE) // saycode already handles sanitization
+	var/last_whisper = tgui_input_text(usr, "Что вы хотите сказать напоследок?", title, max_length = CHAT_MESSAGE_MAX_LENGTH, encode = FALSE) // saycode already handles sanitization
 	if(isnull(last_whisper))
 		return
 	if(length(last_whisper))
@@ -529,7 +529,7 @@
 /atom/movable/screen/alert/alien_fire
 // This alert is temporarily gonna be thrown for all hot air but one day it will be used for literally being on fire
 	name = "Слишком горячо"
-	desc = "Здесь слишком горячо! Выбегайте в космос или уходите от огня. Если стоять на траве, то она будет Вас лечить."
+	desc = "Здесь слишком горячо! Выбегайте в космос или уходите от огня. Стоя на траве, Вы будете исцеляться."
 	icon_state = ALERT_XENO_FIRE
 	alerttooltipstyle = "alien"
 
@@ -551,7 +551,7 @@
 
 /atom/movable/screen/alert/bloodsense
 	name = "Чувство Крови"
-	desc = "Позволяет вам чувствовать кровь, которой манипулирует темная магия."
+	desc = "Позволяет Вам чувствовать кровь, которой манипулирует темная магия."
 	icon_state = "cult_sense"
 	alerttooltipstyle = "cult"
 	var/static/image/narnar
@@ -582,7 +582,7 @@
 	// construct track
 	if(construct_owner?.seeking && construct_owner.construct_master)
 		blood_target = construct_owner.construct_master
-		desc = "Ваше Чувство Крови ведёт к [construct_owner.construct_master]"
+		desc = "Ваше Чувство Крови указывает на [construct_owner.construct_master]"
 
 	// cult track
 	var/datum/antagonist/cult/antag = owner.mind.has_antag_datum(/datum/antagonist/cult,TRUE)
@@ -629,9 +629,9 @@
 		return
 	if(isliving(blood_target))
 		var/mob/living/real_target = blood_target
-		desc = "В данный момент отслеживается [real_target.real_name] в [get_area_name(blood_target)]."
+		desc = "Отслеживается [real_target.real_name] в [get_area_name(blood_target)]"
 	else
-		desc = "В данный момент отслеживается [blood_target] в [get_area_name(blood_target)]."
+		desc = "Отслеживается [blood_target] в [get_area_name(blood_target)]."
 
 	var/target_angle = get_angle(Q, P)
 	var/target_dist = get_dist(P, Q)
