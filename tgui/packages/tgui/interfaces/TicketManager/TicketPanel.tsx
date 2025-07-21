@@ -178,7 +178,7 @@ export function TicketPanel(props) {
             value={inputMessage}
             placeholder={ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'}
             maxLength={maxMessageLength}
-            cooldown={replyCooldown}
+            cooldown={!isAdmin && !isMentor && replyCooldown}
             disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
             onChange={(value) => {
               setInputMessage(value);
