@@ -11101,6 +11101,10 @@
 	},
 /turf/open/water/alternative/muddy/no_fishing,
 /area/station/service/kitchen/abandoned)
+"cCl" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/central)
 "cCm" = (
 /obj/machinery/button/door/directional/west{
 	id = "QMLoaddoor";
@@ -135761,9 +135765,9 @@ mOI
 mOI
 mOI
 ceC
-doz
-doz
-ceC
+vbK
+jEk
+vbK
 ceC
 ceC
 mOI
@@ -136018,9 +136022,9 @@ mdv
 vIM
 mOI
 ceC
-vbK
-jEk
-vbK
+mOI
+sgN
+mOI
 ceC
 vbK
 mOI
@@ -136276,7 +136280,7 @@ vIM
 mOI
 doz
 mOI
-sgN
+pRG
 mOI
 doz
 vbK
@@ -136533,7 +136537,7 @@ lgf
 mOI
 doz
 mOI
-pRG
+cCl
 mOI
 doz
 vbK
