@@ -20,8 +20,8 @@
 
 // MARK: bodypart_overlay
 /datum/bodypart_overlay/simple/body_marking/tajaran_limb
-	dna_feature_key = "tajaran_limb_markings"
-	dna_color_feature_key = "tajaran_body_markings_color"
+	dna_feature_key = FEATURE_TAJARAN_LIMB_MARKINGS
+	dna_color_feature_key = FEATURE_TAJARAN_BODY_MARKINGS_COLOR
 	applies_to = list(
 		/obj/item/bodypart/arm/left,
 		/obj/item/bodypart/arm/right,
