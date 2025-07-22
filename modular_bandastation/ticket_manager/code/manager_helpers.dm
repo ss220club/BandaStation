@@ -125,8 +125,6 @@
 	var/ticket_closed = new_state == TICKET_CLOSED
 	var/ticket_open = new_state == TICKET_OPEN
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
-	if(initiator.client)
-		admin_ticket_log(initiator.client, "[admin.key] [ticket_open ? "открыл" : ticket_closed ? "закрыл" : "решил"] этот тикет.")
 
 	if(new_state != TICKET_OPEN)
 		if(initiator.current_help_ticket != needed_ticket)
@@ -154,6 +152,7 @@
 		to_chat(initiator.client, custom_boxed_message("green_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
 	message_admins(span_admin(admin_message))
 	log_admin_private(admin_message)
+	internal_admin_ticket_log(needed_ticket, admin_message)
 
 /datum/ticket_manager/proc/autoclose_ticket(datum/help_ticket/needed_ticket)
 	if(!needed_ticket)
@@ -163,7 +162,6 @@
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
 	if(initiator.client)
 		to_chat(initiator.client, custom_boxed_message("red_box", "Ваш тикет был автоматически закрыт! Вы можете создать новый если вам всё ещё нужна помощь."), MESSAGE_TYPE_ADMINPM)
-		admin_ticket_log(initiator.client, message)
 
 	initiator.current_help_ticket = null
 	needed_ticket.state = TICKET_CLOSED
@@ -172,6 +170,7 @@
 	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_MADE_INACTIVE)
 	message_admins(span_admin(message))
 	log_admin_private(message)
+	internal_admin_ticket_log(needed_ticket, message)
 
 /* NEEDED MENTOR SYSTEM
 /datum/ticket_manager/proc/convert_ticket(ticket_id)
@@ -308,6 +307,19 @@
 	user_ticket.messages += list(list(
 		"sender" = "ADMIN_TICKET_LOG",
 		"message" = strip_html_full(message),
+		"time" = time_stamp(NONE),
+	))
+
+	SStgui.update_uis(GLOB.ticket_manager)
+
+/// Logging internal ticket actions
+/proc/internal_admin_ticket_log(datum/help_ticket/ticket, message)
+	if(!ticket || !message)
+		return
+
+	ticket.messages += list(list(
+		"sender" = "ADMIN_TICKET_LOG",
+		"message" = message,
 		"time" = time_stamp(NONE),
 	))
 
