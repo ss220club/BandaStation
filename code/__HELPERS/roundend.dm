@@ -249,7 +249,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	log_game("Раунд закончился.")
 	for(var/channel_tag in CONFIG_GET(str_list/channel_announce_end_game))
 		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Раунд [GLOB.round_id]" : "Раунд только что"] закончился."), channel_tag)
-	send2adminchat("Сервер", "Раунд закончился.")
+	send2adminchat("Server", "Round just ended.")
 
 	if(length(CONFIG_GET(keyed_list/cross_server)))
 		send_news_report()
@@ -275,7 +275,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	CHECK_TICK
 
 	//Now print them all into the log!
-	log_game("Антагонистами раунда были...")
+	log_game("Antagonists at round end were...")
 	for(var/antag_name in total_antagonists)
 		var/list/L = total_antagonists[antag_name]
 		log_game("[antag_name]s :[L.Join(", ")].")
@@ -299,9 +299,9 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/standard_reboot()
 	if(ready_for_reboot)
 		if(GLOB.station_was_nuked)
-			Reboot("Станция уничтожена ядерным устройством.", "nuke")
+			Reboot("Станция уничтожена ядерной боеголовкой.", "nuke")
 		else
-			Reboot("Раунд закончился.", "должное завершение")
+			Reboot("Раунд закончился.", "proper_completion")
 	else
 		CRASH("Attempted standard reboot without ticker roundend completion")
 
@@ -343,7 +343,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += "[FOURSPACES]ID раунда: <b>[info]</b>"
 	parts += "[FOURSPACES]Карта: [SSmapping.current_map?.return_map_name()]"
 	parts += "[FOURSPACES]Длительность смены: <B>[DisplayTimeText(world.time - SSticker.round_start_time)]</B>"
-	parts += "[FOURSPACES]Целостность станции: <B>[GLOB.station_was_nuked ? span_redtext("уничтожен") : "[popcount["station_integrity"]]%"]</B>"
+	parts += "[FOURSPACES]Целостность станции: <B>[GLOB.station_was_nuked ? span_redtext("уничтожена") : "[popcount["station_integrity"]]%"]</B>"
 	var/total_players = GLOB.joined_player_list.len
 	if(total_players)
 		parts+= "[FOURSPACES]Общая численность экипажа: <B>[total_players]</B>"
@@ -466,7 +466,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 		if (aiPlayer.connected_robots.len)
 			var/borg_num = aiPlayer.connected_robots.len
-			parts += "Слугами <br><b>[aiPlayer.real_name]</b> были:"
+			parts += "<br>Слугами <b>[aiPlayer.real_name]</b> были:"
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				borg_num--
 				if(robo.mind)
@@ -537,7 +537,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			parts += "[span_greentext("Центком доволен работой обслуживания за эту смену.")]<br>"
 			award_service(/datum/award/achievement/jobs/service_okay)
 		else
-			parts += "<span class='reallybig greentext'>Центком впечатлены сегодняшним отделом обслуживания! Вот это команда!</span><br>"
+			parts += "<span class='reallybig greentext'>Центком впечатлён сегодняшним отделом обслуживания! Вот это команда!</span><br>"
 			award_service(/datum/award/achievement/jobs/service_good)
 
 	parts += "<b>Общая статистика:</b><br>"
