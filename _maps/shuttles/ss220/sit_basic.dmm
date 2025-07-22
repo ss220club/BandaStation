@@ -77,7 +77,7 @@
 /turf/open/floor/plating,
 /area/shuttle/syndicate_sit)
 "cT" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate_sit)
 "lJ" = (
 /obj/machinery/door/window/survival_pod/left/directional/south,

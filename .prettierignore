@@ -4,19 +4,14 @@ data
 font-awesome
 jquery
 juke
+**/build
+**/dist
+**/node_modules
 # BANDASTATION ADD - Start
 **/blanks/markdown
 # BANDASTATION ADD - End
 
-## Tgui
-node_modules
-.yarn
-# Avoid running on any bundles.
-tgui/public
-# Running it on tgui.html is fine, however.
-!/tgui/public/tgui.html
-# Specific files
-package-lock.json
 # File names / types
 *.min.*
 *.pnp.*
+*.bundle.*
