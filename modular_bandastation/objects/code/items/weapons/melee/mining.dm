@@ -126,6 +126,7 @@
 	detonation_damage = 90
 	backstab_bonus = 0
 	requires_wielding = TRUE
+
 /obj/item/kinetic_crusher/hammer/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, force_unwielded=0, force_wielded=20)
