@@ -5,7 +5,7 @@
 
 /obj/item/kinetic_crusher
 	/// This var is used to imitate being weilded if its one handed
-	var/acts_as_if_wielded
+	var/requires_wielding
 
 /obj/item/kinetic_crusher/machete
 	icon = 'modular_bandastation/objects/icons/obj/weapons/mining.dmi'
@@ -37,7 +37,7 @@
 	charge_time = 10
 	detonation_damage = 35
 	backstab_bonus = 20
-	acts_as_if_wielded = TRUE
+	requires_wielding = FALSE
 
 /obj/item/kinetic_crusher/machete/Initialize(mapload)
 	. = ..()
@@ -80,6 +80,7 @@
 	detonation_damage = 35
 	backstab_bonus = 20
 	reach = 2
+	requires_wielding = TRUE
 
 /obj/item/kinetic_crusher/spear/Initialize(mapload)
 	. = ..()
@@ -124,8 +125,7 @@
 	charge_time = 20
 	detonation_damage = 90
 	backstab_bonus = 0
-	acts_as_if_wielded = FALSE
-
+	requires_wielding = TRUE
 /obj/item/kinetic_crusher/hammer/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, force_unwielded=0, force_wielded=20)
@@ -171,7 +171,7 @@
 	charge_time = 10
 	detonation_damage = 30
 	backstab_bonus = 120
-	acts_as_if_wielded = TRUE
+	requires_wielding = FALSE
 
 /obj/item/kinetic_crusher/claw/Initialize(mapload)
 	. = ..()
@@ -179,3 +179,7 @@
 		speed = 5 SECONDS, \
 		effectiveness = 100, \
 	)
+
+/obj/item/kinetic_crusher/claw/update_icon_state()
+	. = ..()
+	inhand_icon_state = "PKClaw0"
