@@ -27,6 +27,8 @@
 	var/list/messages
 	/// Has the admin replied to this ticket yet?
 	var/admin_replied = FALSE
+	/// ID for the autoclose timer
+	var/ticket_autoclose
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
 
@@ -66,6 +68,8 @@
 		GLOB.ticket_manager.send_chat_message_to_player(admin, src, message)
 	else
 		send_creation_message(creator, message, ticket_type)
+
+	ticket_autoclose = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
 /datum/help_ticket/proc/send_creation_message(client/creator, message, ticket_type)

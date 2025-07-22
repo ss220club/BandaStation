@@ -28,6 +28,7 @@
 
 	if(!needed_ticket.linked_admin)
 		needed_ticket.linked_admin = admin.persistent_client
+		deltimer(needed_ticket.ticket_autoclose)
 		message_admins("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 		log_admin("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 
@@ -44,6 +45,7 @@
 		CRASH("Tryed to unlink admin from ticket without a required rights!")
 
 	needed_ticket.linked_admin = null
+	needed_ticket.ticket_autoclose = addtimer(CALLBACK(src, PROC_REF(autoclose_ticket), needed_ticket), TICKET_AUTOCLOSE_TIMER / 2, TIMER_STOPPABLE)
 	to_chat(GLOB.admins, span_admin("[key_name_admin(admin)] отказался от тикета [TICKET_OPEN_LINK(needed_ticket.id, "#[needed_ticket.id]")]."), MESSAGE_TYPE_ADMINPM)
 	log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
 	SStgui.update_uis(src)
@@ -53,7 +55,7 @@
 		return
 
 	to_chat(initiator,
-		custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора.")),
+		custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора. Если никто не ответит на ваш тикет, он автоматически закроется через [TICKET_AUTOCLOSE_TIMER / 2 / 10] секунд.")),
 		MESSAGE_TYPE_ADMINPM)
 
 /// Adds user to ticket writers when he starts typing. Used for type indicator in ticket chat UI
@@ -152,6 +154,24 @@
 		to_chat(initiator.client, custom_boxed_message("green_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
 	message_admins(span_admin(admin_message))
 	log_admin_private(admin_message)
+
+/datum/ticket_manager/proc/autoclose_ticket(datum/help_ticket/needed_ticket)
+	if(!needed_ticket)
+		CRASH("Tryed to autoclose null ticket!")
+
+	var/message = "Тикет #[needed_ticket.id] был автоматически закрыт!"
+	var/datum/persistent_client/initiator = needed_ticket.initiator_client
+	if(initiator.client)
+		to_chat(initiator.client, custom_boxed_message("red_box", "Ваш тикет был автоматически закрыт! Вы можете создать новый если вам всё ещё нужна помощь."), MESSAGE_TYPE_ADMINPM)
+		admin_ticket_log(initiator.client, message)
+
+	initiator.current_help_ticket = null
+	needed_ticket.state = TICKET_CLOSED
+	needed_ticket.closed_at = time_stamp(NONE)
+	SStgui.update_uis(src)
+	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_MADE_INACTIVE)
+	message_admins(span_admin(message))
+	log_admin_private(message)
 
 /* NEEDED MENTOR SYSTEM
 /datum/ticket_manager/proc/convert_ticket(ticket_id)
