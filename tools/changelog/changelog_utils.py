@@ -17,7 +17,7 @@ DISCORD_TAG_EMOJI = {
     "image": ":frame_photo:",
     "map": ":map:",
     "spellcheck": ":pencil:",
-    "translation": ":globe_with_meridians:",
+    "translation": ":nerd:",
     "balance": ":scales:",
     "code_imp": ":hammer:",
     "refactor": ":tools:",
