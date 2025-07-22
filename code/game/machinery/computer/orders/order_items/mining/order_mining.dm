@@ -34,9 +34,11 @@
 	purchase_path = /obj/item/kinetic_crusher
 	cost_per_order = 650
 
-/*/datum/orderable_item/mining/crusher_retool_kit // BANDA STATION REMOVAL: добавлены новые виды крашеров
-	purchase_path = /obj/item/crusher_trophy/retool_kit
-	cost_per_order = 150*/
+// BANDASTATION REMOVAL START - New crasher types
+//datum/orderable_item/mining/crusher_retool_kit
+//	purchase_path = /obj/item/crusher_trophy/retool_kit
+//	cost_per_order = 150
+// BANDASTATION REMOVAL END - New crasher types
 
 /datum/orderable_item/mining/resonator
 	purchase_path = /obj/item/resonator
