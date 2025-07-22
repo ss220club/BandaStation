@@ -123,6 +123,9 @@
 	var/ticket_closed = new_state == TICKET_CLOSED
 	var/ticket_open = new_state == TICKET_OPEN
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
+	if(initiator.client)
+		admin_ticket_log(initiator.client, "[admin.key] [ticket_open ? "открыл" : ticket_closed ? "закрыл" : "решил"] этот тикет.")
+
 	if(new_state != TICKET_OPEN)
 		if(initiator.current_help_ticket != needed_ticket)
 			CRASH("Ticket with id [ticket_id] is not the current help ticket for [initiator.ckey]!")
@@ -147,7 +150,6 @@
 
 	if(initiator.client)
 		to_chat(initiator.client, custom_boxed_message("green_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
-		admin_ticket_log(initiator.client, "[admin.key] [ticket_open ? "открыл" : ticket_closed ? "закрыл" : "решил"] этот тикет.")
 	message_admins(span_admin(admin_message))
 	log_admin_private(admin_message)
 
@@ -167,9 +169,13 @@
 */
 
 /// Adds little notification to ticket chat about player disconnect
-/datum/ticket_manager/proc/client_logout(client/user)
-	var/datum/help_ticket/needed_ticket = user.persistent_client.current_help_ticket
+/datum/ticket_manager/proc/client_logout(datum/persistent_client/p_client)
+	var/datum/help_ticket/needed_ticket = p_client.current_help_ticket
 	if(!needed_ticket)
+		return
+
+	var/client/user = p_client.client
+	if(!user)
 		return
 
 	remove_from_ticket_writers(user, needed_ticket, FALSE)
@@ -181,9 +187,13 @@
 	SStgui.update_uis(src)
 
 /// Adds little notification to ticket chat about player reconnect
-/datum/ticket_manager/proc/client_login(client/user)
-	var/datum/help_ticket/needed_ticket = user.persistent_client.current_help_ticket
+/datum/ticket_manager/proc/client_login(datum/persistent_client/p_client)
+	var/datum/help_ticket/needed_ticket = p_client.current_help_ticket
 	if(!needed_ticket)
+		return
+
+	var/client/user = p_client.client
+	if(!user)
 		return
 
 	needed_ticket.messages += list(list(
