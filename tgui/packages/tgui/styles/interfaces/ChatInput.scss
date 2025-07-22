@@ -1,14 +1,4 @@
 .ChatInput {
-  @keyframes flash {
-    0%,
-    100% {
-      filter: none;
-    }
-    50% {
-      filter: drop-shadow(0 0 0.2em var(--color-primary));
-    }
-  }
-
   line-height: 16px;
   background-color: var(--color-base);
   border-radius: var(--border-radius-medium);
@@ -68,5 +58,15 @@
     font-size: 0.9em;
     color: var(--color-label);
     opacity: 0.66;
+  }
+
+  @keyframes flash {
+    0%,
+    100% {
+      filter: none;
+    }
+    50% {
+      filter: drop-shadow(0 0 0.2em var(--color-primary));
+    }
   }
 }
