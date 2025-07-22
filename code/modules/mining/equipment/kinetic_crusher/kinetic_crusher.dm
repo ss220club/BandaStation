@@ -162,7 +162,7 @@
 	. = ..()
 	if(.)
 		return TRUE
-	if(!HAS_TRAIT(src, TRAIT_WIELDED) && !acts_as_if_wielded) // BANDA STATION EDIT
+	if(requires_wielding && !HAS_TRAIT(src, TRAIT_WIELDED)) // BANDASTATION EDIT
 		user.balloon_alert(user, "must be wielded!")
 		return TRUE
 	return .
