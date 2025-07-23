@@ -647,7 +647,6 @@
 	. = ..()
 	// BANDASTATION ADDITION START - PERMA-DEATH ORGAN DAMAGE
 	if(CONFIG_GET(flag/brain_permanent_death) && (organ_flags & ORGAN_FAILING))
-		damage = maxHealth
 		return -(maxHealth)
 	// BANDASTATION ADDITION END - PERMA-DEATH ORGAN DAMAGE
 	if(!owner)
