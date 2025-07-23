@@ -155,6 +155,7 @@
 				/obj/item/gun/energy/ionrifle/carbine = 4,
 				/obj/item/gun/ballistic/automatic/proto/unrestricted = 3,
 				/obj/item/gun/ballistic/automatic/wt550 = 3,
+				/obj/item/gun/grenadelauncher = 1,
 			),
 		),
 
@@ -195,7 +196,8 @@
 			"name" = "Equipment",
 			"icon" = "hand-fist",
 			"products" = list(
-				/obj/item/melee/baton/security/loaded/hos = 5,
+				/obj/item/melee/curator_whip = 2,
+				/obj/item/melee/baton/security/loaded/hos = 10,
 				/obj/item/clothing/head/helmet/marine = 8,
 				/obj/item/clothing/suit/armor/vest/marine = 8,
 				/obj/item/clothing/head/helmet/marine/pmc = 8,
