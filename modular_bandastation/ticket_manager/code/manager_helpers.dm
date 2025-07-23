@@ -312,14 +312,14 @@
 
 	SStgui.update_uis(GLOB.ticket_manager)
 
-/// Logging internal ticket actions
+/// Logging internal ticket actions. Requires only ticket datum and message
 /proc/internal_admin_ticket_log(datum/help_ticket/ticket, message)
 	if(!ticket || !message)
 		return
 
 	ticket.messages += list(list(
 		"sender" = "ADMIN_TICKET_LOG",
-		"message" = message,
+		"message" = strip_html_full(message),
 		"time" = time_stamp(NONE),
 	))
 
