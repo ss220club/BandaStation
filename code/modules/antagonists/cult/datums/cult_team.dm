@@ -1,5 +1,5 @@
 /datum/team/cult
-	name = "Культ"
+	name = "\improper Cult"
 
 	///The blood mark target
 	var/atom/blood_target
