@@ -123,7 +123,6 @@
 	var/admin_message
 	var/ticket_id = needed_ticket.id
 	var/ticket_closed = new_state == TICKET_CLOSED
-	var/ticket_open = new_state == TICKET_OPEN
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
 
 	if(new_state != TICKET_OPEN)
@@ -139,6 +138,9 @@
 		if(initiator.current_help_ticket)
 			to_chat(admin, span_danger("[key_name(initiator.ckey)] уже имеет открытый тикет!"), MESSAGE_TYPE_ADMINPM)
 			return
+
+		if(needed_ticket.ticket_autoclose)
+			deltimer(needed_ticket.ticket_autoclose)
 
 		initiator.current_help_ticket = needed_ticket
 		needed_ticket.closed_at = null

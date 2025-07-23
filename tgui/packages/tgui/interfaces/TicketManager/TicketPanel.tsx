@@ -225,7 +225,14 @@ function TypingIndicator(props) {
 
   return (
     others.length > 0 && (
-      <Stack className="TicketPanel__Writers">{writersText}</Stack>
+      <Stack className="TicketPanel__Writers">
+        <Stack className="TicketPanel__Writers--indicator" g={0.5}>
+          <div />
+          <div />
+          <div />
+        </Stack>
+        <Stack.Item grow> {writersText} </Stack.Item>
+      </Stack>
     )
   );
 }

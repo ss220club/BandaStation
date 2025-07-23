@@ -176,11 +176,11 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	if(!user || !user.client)
 		return
 
-	user.client.ticket_to_open = null
-
 	var/datum/help_ticket/current_ticket = user.client.persistent_client.current_help_ticket
 	if(current_ticket)
 		remove_from_ticket_writers(user.client, current_ticket)
+
+	user.client.ticket_to_open = null
 
 /datum/ticket_manager/proc/get_tickets_data(client/user)
 	var/list/tickets = list()

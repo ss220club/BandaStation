@@ -207,6 +207,7 @@
   }
 
   &__Writers {
+    align-items: center;
     margin-top: -0.75rem;
     padding: 0.25em 0.5em;
     background-color: hsl(from var(--color-base) h s calc(l - 5.5));
@@ -222,6 +223,40 @@
     @starting-style {
       opacity: 0;
       transform: translateY(100%);
+    }
+
+    &--indicator {
+      div {
+        display: inline-block;
+        width: 0.5em;
+        height: 0.5em;
+        background-color: var(--color-label);
+        border-radius: var(--border-radius-circular);
+        animation: typing-indicator 1.5s infinite linear;
+        animation-delay: 0.3s;
+
+        &:first-child {
+          animation-delay: 0s;
+        }
+
+        &:last-child {
+          animation-delay: 0.6s;
+        }
+      }
+
+      @keyframes typing-indicator {
+        0%,
+        50%,
+        100% {
+          opacity: 0.5;
+          transform: translateY(0);
+        }
+
+        75% {
+          opacity: 1;
+          transform: translateY(-33%);
+        }
+      }
     }
   }
 
