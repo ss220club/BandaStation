@@ -57,6 +57,7 @@
 	to_chat(user, span_notice("Ты закончил внюхивать [src]."))
 	if(reagents.total_volume)
 		reagents.trans_to(user, reagents.total_volume, transferred_by = user, methods = INGEST)
+	playsound(src,'modular_bandastation/objects/code/items/drugs/sound/drugs_sniff.ogg',50,TRUE)
 	qdel(src)
 
 /obj/item/reagent_containers/cocaine/attack(mob/target, mob/user)
