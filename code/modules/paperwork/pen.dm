@@ -153,7 +153,7 @@
 	name = "fountain pen"
 	desc = "It's a common fountain pen, with a faux wood body. Rumored to work in zero gravity situations."
 	icon_state = "pen-fountain"
-	font = FOUNTAIN_PEN_FONT
+	font = PEN_FONT // BANDASTATION EDIT - Readble fountain pen font
 	requires_gravity = FALSE // fancy spess pens
 	dart_insert_casing_icon_state = "overlay_fountainpen"
 	dart_insert_projectile_icon_state = "overlay_fountainpen_proj"
