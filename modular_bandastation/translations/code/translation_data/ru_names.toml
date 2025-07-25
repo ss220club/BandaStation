@@ -24683,12 +24683,12 @@ prepositional = "верхнем складе"
 gender = "male"
 
 ["Cargo Office"]
-nominative = "офис карго"
-genitive = "офиса карго"
-dative = "офису карго"
-accusative = "офис карго"
-instrumental = "фисом карго"
-prepositional = "офисе карго"
+nominative = "офис отдела снабжения"
+genitive = "офиса отдела снабжения"
+dative = "офису отдела снабжения"
+accusative = "офис отдела снабжения"
+instrumental = "офисом отдела снабжения"
+prepositional = "офисе отдела снабжения"
 gender = "male"
 
 ["Lower Cargo Bay"]
