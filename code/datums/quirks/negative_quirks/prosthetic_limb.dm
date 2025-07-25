@@ -1,4 +1,4 @@
-/datum/quirk/prosthetic_limb
+/*/datum/quirk/prosthetic_limb
 	name = "Prosthetic Limb"
 	desc = "В результате несчастного случая вы потеряли одну из своих конечностей. Из-за этого у вас установлен дешевый протез!"
 	icon = "tg-prosthetic-leg"
@@ -36,3 +36,4 @@
 /datum/quirk/prosthetic_limb/remove()
 	var/mob/living/carbon/human/human_holder = quirk_holder
 	human_holder.reset_to_original_bodypart(limb_zone)
+*/

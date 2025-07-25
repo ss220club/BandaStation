@@ -15,11 +15,11 @@ GLOBAL_LIST_INIT_TYPED(quirk_blacklist, /list/datum/quirk, list(
 	list(/datum/quirk/item_quirk/clown_enjoyer, /datum/quirk/item_quirk/mime_fan),
 	list(/datum/quirk/bad_touch, /datum/quirk/friendly),
 	list(/datum/quirk/extrovert, /datum/quirk/introvert),
-	list(/datum/quirk/prosthetic_limb, /datum/quirk/quadruple_amputee, /datum/quirk/body_purist),
+	//list(/datum/quirk/prosthetic_limb, /datum/quirk/quadruple_amputee, /datum/quirk/body_purist),
 	list(/datum/quirk/transhumanist, /datum/quirk/body_purist),
-	list(/datum/quirk/prosthetic_organ, /datum/quirk/tin_man, /datum/quirk/body_purist),
-	list(/datum/quirk/quadruple_amputee, /datum/quirk/paraplegic, /datum/quirk/hemiplegic),
-	list(/datum/quirk/quadruple_amputee, /datum/quirk/frail),
+	//list(/datum/quirk/prosthetic_organ, /datum/quirk/tin_man, /datum/quirk/body_purist),
+	//list(/datum/quirk/quadruple_amputee, /datum/quirk/paraplegic, /datum/quirk/hemiplegic),
+	//list(/datum/quirk/quadruple_amputee, /datum/quirk/frail),
 	list(/datum/quirk/social_anxiety, /datum/quirk/mute),
 	list(/datum/quirk/mute, /datum/quirk/softspoken),
 	list(/datum/quirk/poor_aim, /datum/quirk/bighands),
@@ -73,11 +73,13 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	// Sort by Positive, Negative, Neutral; and then by name
 	var/list/quirk_list = sort_list(subtypesof(/datum/quirk), GLOBAL_PROC_REF(cmp_quirk_asc))
 
+	/*
 	var/list/banned_quirks = list(
 		/datum/quirk/prosthetic_limb,
 		/datum/quirk/quadruple_amputee,
 		/datum/quirk/prosthetic_organ,
 	)
+	*/
 
 	for(var/type in quirk_list)
 		var/datum/quirk/quirk_type = type
@@ -85,6 +87,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		if(initial(quirk_type.abstract_parent_type) == type)
 			continue
 
+		/*
 		var/skip = FALSE
 		for (var/banned in banned_quirks)
 			if (ispath(type, banned))
@@ -92,6 +95,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 				break
 		if (skip)
 			continue
+		*/
 
 		quirk_prototypes[type] = new type
 		quirks[initial(quirk_type.name)] = quirk_type
@@ -199,12 +203,13 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 
 	var/list/all_quirks = get_quirks()
 
+	/*
 	var/list/banned_quirks = list(
 		/datum/quirk/prosthetic_limb,
 		/datum/quirk/quadruple_amputee,
 		/datum/quirk/prosthetic_organ,
 	)
-
+	*/
 
 	for (var/quirk_name in quirks)
 		var/datum/quirk/quirk = all_quirks[quirk_name]
@@ -214,6 +219,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		if ((initial(quirk.quirk_flags) & QUIRK_MOODLET_BASED) && CONFIG_GET(flag/disable_human_mood))
 			continue
 
+		/*
 		var/skip = FALSE
 		for (var/banned in banned_quirks)
 			if (ispath(quirk, banned))
@@ -221,7 +227,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 				break
 		if (skip)
 			continue
-
+		*/
 		var/blacklisted = FALSE
 
 		for (var/list/blacklist as anything in GLOB.quirk_blacklist)

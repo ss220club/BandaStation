@@ -1,4 +1,4 @@
-/datum/quirk/quadruple_amputee
+/*/datum/quirk/quadruple_amputee
 	name = "Quadruple Amputee"
 	desc = "Ой! Всё в протезах! В результате поистине жестокого космического наказания все ваши конечности были заменены на дешевые протезы."
 	icon = "tg-prosthetic-full"
@@ -28,3 +28,4 @@
 	human_holder.reset_to_original_bodypart(BODY_ZONE_R_ARM)
 	human_holder.reset_to_original_bodypart(BODY_ZONE_L_LEG)
 	human_holder.reset_to_original_bodypart(BODY_ZONE_R_LEG)
+*/
