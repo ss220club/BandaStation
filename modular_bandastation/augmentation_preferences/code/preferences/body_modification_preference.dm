@@ -31,16 +31,14 @@
 		if (!mod_proto)
 			continue
 
-		// Создаём временную копию, чтобы не изменять глобальный прототип
 		var/datum/body_modification/mod = new mod_proto.type
-
 		if (istype(mod, /datum/body_modification/bodypart_prosthesis))
 			var/datum/body_modification/bodypart_prosthesis/prosthesis = mod
 			if (islist(body_modifications[key]) && body_modifications[key]["selected_manufacturer"])
 				prosthesis.selected_manufacturer = body_modifications[key]["selected_manufacturer"]
 
 		mod.apply_to_human(target)
-		qdel(mod) // Очищаем временный объект
+		qdel(mod)
 
 /datum/preference/body_modifications/deserialize(input, datum/preferences/preferences)
 	if (!islist(input))
