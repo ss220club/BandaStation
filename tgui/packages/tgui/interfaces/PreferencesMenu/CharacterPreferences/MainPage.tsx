@@ -77,17 +77,6 @@ function CharacterControls(props: CharacterControlsProps) {
           tooltipPosition="top"
           onClick={() => props.handleOpenAugmentations()}
         />
-        <Button
-          icon="dice"
-          tooltip="Рандомизировать"
-          tooltipPosition="top"
-          selected={randomToggle}
-          onClick={() => {
-            act('randomize_character');
-
-            setRandomToggle(!randomToggle);
-          }}
-        />
       </Stack>
       <Button
         color="red"
