@@ -98,7 +98,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate_sst)
 "Ro" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate_sst)
 
 (1,1,1) = {"
