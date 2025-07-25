@@ -1,4 +1,9 @@
-// MARK: Misc mask
+// Fix surgery mask error icon to remove missing surgery maskicon issue
+/obj/item/clothing/mask/breath/muzzle/update_icon_state()
+	. = ..()
+	icon_state = initial(icon_state)
+
+// // MARK: Misc mask
 /obj/item/clothing/mask/breath/red_gas
 	name = "prs-1"
 	desc = "Стильная дыхательная маска в виде противогаза, не скрывает лицо."
@@ -48,8 +53,3 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/masks.dmi'
 	icon_state = "ei_mask"
 	inhand_icon_state = "gas_atmos"
-
-// Fix surgery mask error icon to remove missing surgery maskicon issue
-/obj/item/clothing/mask/breath/muzzle/update_icon_state()
-	. = ..()
-	icon_state = initial(icon_state)
