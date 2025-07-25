@@ -35,14 +35,11 @@
 		playsound(get_turf(src), 'sound/items/tools/screwdriver.ogg', 50, TRUE)
 		active_item = null
 		return
-
 	if(I.w_class > max_w_class)
 		user.balloon_alert(user, "Не помещается!")
 		return
-
 	if(!user.transferItemToLoc(I, src))
 		return
-
 	items_list += WEAKREF(I)
 	active_item = I
 	user.balloon_alert(user, "Установлено: [I].")
