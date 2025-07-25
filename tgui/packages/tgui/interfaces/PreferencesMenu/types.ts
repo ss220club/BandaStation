@@ -192,7 +192,7 @@ export type PreferencesMenuData = {
 
   incompatible_body_modifications: string[];
   applied_body_modifications: string[];
-  manufacturers: Record<string, Record<string, string>>;
+  manufacturers: Record<string, string>;
   selected_manufacturer: Record<string, string>;
   // BANDASTATION ADD END
 };

@@ -1,11 +1,11 @@
-/datum/supply_pack/augementations
+/datum/supply_pack/augmentations
 	access = NONE
 	group = "Imports"
 	goody = TRUE
 	crate_type = null
 	discountable = SUPPLY_PACK_STD_DISCOUNTABLE
 
-/datum/supply_pack/augementations/bishop
+/datum/supply_pack/augmentations/bishop
 	name = "контейнер аугментаций бишоп"
 	desc = "Контейнер содержит полный набор аугментация корпорации Бишоп"
 	cost = CARGO_CRATE_VALUE * 10
@@ -18,7 +18,7 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augementations/etaminindustry
+/datum/supply_pack/augmentations/etaminindustry
 	name = "контейнер аугментаций этамин индастри"
 	desc = "Контейнер содержит полный набор аугментация корпорации Этамин Индастри"
 	cost = CARGO_CRATE_VALUE * 10
@@ -31,7 +31,7 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augementations/hephaestus
+/datum/supply_pack/augmentations/hephaestus
 	name = "контейнер аугментаций гефест"
 	desc = "Контейнер содержит полный набор аугментация корпорации Гефест"
 	cost = CARGO_CRATE_VALUE * 10
@@ -44,7 +44,7 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augementations/morpheus
+/datum/supply_pack/augmentations/morpheus
 	name = "контейнер аугментаций морфей"
 	desc = "Контейнер содержит полный набор аугментация корпорации Морфей"
 	cost = CARGO_CRATE_VALUE * 10
@@ -57,7 +57,7 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augementations/shellguard
+/datum/supply_pack/augmentations/shellguard
 	name = "контейнер аугментаций шелгард"
 	desc = "Контейнер содержит полный набор аугментация корпорации Шелгард"
 	cost = CARGO_CRATE_VALUE * 10
@@ -70,7 +70,7 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augementations/wardtakahashi
+/datum/supply_pack/augmentations/wardtakahashi
 	name = "контейнер аугментаций вардтакахаси"
 	desc = "Контейнер содержит полный набор аугментация корпорации Вардтакахаси"
 	cost = CARGO_CRATE_VALUE * 10
@@ -83,7 +83,7 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augementations/xion
+/datum/supply_pack/augmentations/xion
 	name = "контейнер аугментаций сион"
 	desc = "Контейнер содержит полный набор аугментация корпорации Сион"
 	cost = CARGO_CRATE_VALUE * 10
@@ -96,7 +96,7 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augementations/zenghu
+/datum/supply_pack/augmentations/zenghu
 	name = "контейнер аугментаций шен-ху"
 	desc = "Контейнер содержит полный набор аугментация корпорации Шен-Ху"
 	cost = CARGO_CRATE_VALUE * 10

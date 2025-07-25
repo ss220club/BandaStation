@@ -33,30 +33,29 @@
 	return path || replacement_bodypart_type
 
 /datum/body_modification/bodypart_prosthesis/apply_to_human(mob/living/carbon/target)
-    . = ..()
-    if (!.)
-        return
+	. = ..()
+	if (!.)
+		return
 
-    var/type_to_spawn = get_replacement_type()
-    if (!ispath(type_to_spawn))
-        return
+	var/type_to_spawn = get_replacement_type()
+	if (!ispath(type_to_spawn))
+		return
 
-    var/obj/item/bodypart/replacement_bodypart = new type_to_spawn()
-    var/obj/item/bodypart/limb_to_remove = target.get_bodypart(replacement_bodypart.body_zone)
+	var/obj/item/bodypart/replacement_bodypart = new type_to_spawn()
+	var/obj/item/bodypart/limb_to_remove = target.get_bodypart(replacement_bodypart.body_zone)
 
-    replacement_bodypart.replace_limb(target, TRUE)
-    qdel(limb_to_remove)
+	replacement_bodypart.replace_limb(target, TRUE)
+	qdel(limb_to_remove)
 
-    if (istype(target))
-        target.update_body()
+	target.update_body()
 
-    return TRUE
+	return TRUE
 
 /datum/body_modification/bodypart_prosthesis/arm
 	abstract_type = /datum/body_modification/bodypart_prosthesis/arm
 
 /datum/body_modification/bodypart_prosthesis/arm/left
-	key = "left_arm_prosthetic"
+	key = "left_arm_prosthesis"
 	name = "Протез левой руки"
 	replacement_bodypart_type = /obj/item/bodypart/arm/left/robot
 	incompatible_body_modifications = list("left_arm_amputation")

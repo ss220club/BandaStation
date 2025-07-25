@@ -27,9 +27,12 @@
 	target.regenerate_limbs()
 
 	for (var/key in body_modifications)
-		var/datum/body_modification/mod = GLOB.body_modifications[key]
-		if (!mod)
+		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
+		if (!mod_proto)
 			continue
+
+		// Создаём временную копию, чтобы не изменять глобальный прототип
+		var/datum/body_modification/mod = new mod_proto.type
 
 		if (istype(mod, /datum/body_modification/bodypart_prosthesis))
 			var/datum/body_modification/bodypart_prosthesis/prosthesis = mod
@@ -37,6 +40,7 @@
 				prosthesis.selected_manufacturer = body_modifications[key]["selected_manufacturer"]
 
 		mod.apply_to_human(target)
+		qdel(mod) // Очищаем временный объект
 
 /datum/preference/body_modifications/deserialize(input, datum/preferences/preferences)
 	if (!islist(input))

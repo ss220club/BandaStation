@@ -38,7 +38,7 @@ import { AlternativeNames, NameInput } from './names';
 type CharacterControlsProps = {
   handleRotate: () => void;
   handleOpenSpecies: () => void;
-  handleOpenAugmentations: () => void; // <--- добавляем
+  handleOpenAugmentations: () => void; // BANDASTATION ADD: Augmentations
   gender: Gender;
   setGender: (gender: Gender) => void;
   showGender: boolean;

@@ -234,7 +234,7 @@ const BodyModificationsPageInner = (props: {
 
 const BodyModificationRow = (props: {
   bodyModification: BodyModification;
-  added: Boolean;
+  added: boolean;
   usedKeys?: string[];
   index: number;
 }) => {

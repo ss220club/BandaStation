@@ -23,7 +23,7 @@
 	key = "left_arm_amputation"
 	name = "Ампутация левой руки"
 	limb_body_zone = BODY_ZONE_L_ARM
-	incompatible_body_modifications = list("left_arm_prosthetic")
+	incompatible_body_modifications = list("left_arm_prosthesis")
 	category = "Левая рука"
 
 /datum/body_modification/limb_amputation/arm/right

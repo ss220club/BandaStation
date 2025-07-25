@@ -9,9 +9,9 @@
 /datum/preference_middleware/body_modifications/get_ui_data(mob/user)
 	var/list/data = list()
 	data["applied_body_modifications"] = get_applied_body_modifications()
-	data["incomptable_body_modifications"] = get_incomptable_body_modifications(user)
-	data["manufacturers"] = get_protesis_manifacturers()
-	data["selected_manufacturer"] = get_current_manifacturers(user)
+	data["incompatible_body_modifications"] = get_incompatible_body_modifications(user)
+	data["manufacturers"] = get_prosthesis_manufacturers()
+	data["selected_manufacturer"] = get_current_manufacturers(user)
 	return data
 
 /// Append all of these into ui_static_data
@@ -41,7 +41,7 @@
 
 	return modifications
 
-/datum/preference_middleware/body_modifications/proc/get_incomptable_body_modifications(mob/user)
+/datum/preference_middleware/body_modifications/proc/get_incompatible_body_modifications(mob/user)
 	PRIVATE_PROC(TRUE)
 
 	var/list/incompatible_body_modifications = list()
@@ -53,7 +53,7 @@
 
 	return incompatible_body_modifications
 
-/datum/preference_middleware/body_modifications/proc/get_protesis_manifacturers()
+/datum/preference_middleware/body_modifications/proc/get_prosthesis_manufacturers()
 	PRIVATE_PROC(TRUE)
 
 	var/list/manufacturers_map = list()
@@ -68,7 +68,7 @@
 
 	return manufacturers_map
 
-/datum/preference_middleware/body_modifications/proc/get_current_manifacturers(mob/user)
+/datum/preference_middleware/body_modifications/proc/get_current_manufacturers(mob/user)
 	PRIVATE_PROC(TRUE)
 
 	var/list/current_brands = list()

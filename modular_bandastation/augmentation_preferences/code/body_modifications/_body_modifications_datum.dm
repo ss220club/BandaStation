@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 
 /// Returns the list of body modifications incompatible with this body modification
 /datum/body_modification/proc/get_conflicting_body_modifications(mob/living/carbon/target)
-	return incompatible_body_modifications && target.client?.prefs?.read_preference(/datum/preference/body_modifications)
+	return incompatible_body_modifications & target.client?.prefs?.read_preference(/datum/preference/body_modifications)
 
 /datum/body_modification/proc/get_description()
 	return "No description yet"
