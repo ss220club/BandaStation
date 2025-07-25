@@ -17,6 +17,7 @@ import { capitalize, createSearch } from 'tgui-core/string';
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { Preference } from '../components/Preference';
 import { RandomizationButton } from '../components/RandomizationButton';
+import { BodyModificationsPage } from '../preferences/BodyModificationsPage';
 import { features } from '../preferences/features';
 import {
   type FeatureChoicedServerData,
@@ -37,6 +38,7 @@ import { AlternativeNames, NameInput } from './names';
 type CharacterControlsProps = {
   handleRotate: () => void;
   handleOpenSpecies: () => void;
+  handleOpenAugmentations: () => void; // <--- добавляем
   gender: Gender;
   setGender: (gender: Gender) => void;
   showGender: boolean;
@@ -69,6 +71,12 @@ function CharacterControls(props: CharacterControlsProps) {
             handleSetGender={props.setGender}
           />
         )}
+        <Button
+          icon="robot"
+          tooltip="Модификации тела"
+          tooltipPosition="top"
+          onClick={() => props.handleOpenAugmentations()}
+        />
         <Button
           icon="dice"
           tooltip="Рандомизировать"
@@ -383,6 +391,7 @@ export function MainPage(props: MainPageProps) {
   const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
     useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
+  const [augmentationInputOpen, setAugmentationInputOpen] = useState(false);
 
   const serverData = useServerPrefs();
 
@@ -431,6 +440,7 @@ export function MainPage(props: MainPageProps) {
           <CharacterControls
             gender={data.character_preferences.misc.gender}
             handleOpenSpecies={props.openSpecies}
+            handleOpenAugmentations={() => setAugmentationInputOpen(true)} // <--- тут
             handleRotate={() => {
               act('rotate');
             }}
@@ -490,6 +500,12 @@ export function MainPage(props: MainPageProps) {
 
   return (
     <Stack fill>
+      {augmentationInputOpen && (
+        <BodyModificationsPage
+          handleClose={() => setAugmentationInputOpen(false)}
+        />
+      )}
+
       {deleteCharacterPopupOpen && (
         <DeleteCharacterPopup
           close={() => setDeleteCharacterPopupOpen(false)}

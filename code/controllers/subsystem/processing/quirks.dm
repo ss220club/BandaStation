@@ -73,10 +73,24 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	// Sort by Positive, Negative, Neutral; and then by name
 	var/list/quirk_list = sort_list(subtypesof(/datum/quirk), GLOBAL_PROC_REF(cmp_quirk_asc))
 
+	var/list/banned_quirks = list(
+		/datum/quirk/prosthetic_limb,
+		/datum/quirk/quadruple_amputee,
+		/datum/quirk/prosthetic_organ,
+	)
+
 	for(var/type in quirk_list)
 		var/datum/quirk/quirk_type = type
 
 		if(initial(quirk_type.abstract_parent_type) == type)
+			continue
+
+		var/skip = FALSE
+		for (var/banned in banned_quirks)
+			if (ispath(type, banned))
+				skip = TRUE
+				break
+		if (skip)
 			continue
 
 		quirk_prototypes[type] = new type
@@ -185,12 +199,27 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 
 	var/list/all_quirks = get_quirks()
 
+	var/list/banned_quirks = list(
+		/datum/quirk/prosthetic_limb,
+		/datum/quirk/quadruple_amputee,
+		/datum/quirk/prosthetic_organ,
+	)
+
+
 	for (var/quirk_name in quirks)
 		var/datum/quirk/quirk = all_quirks[quirk_name]
 		if (isnull(quirk))
 			continue
 
 		if ((initial(quirk.quirk_flags) & QUIRK_MOODLET_BASED) && CONFIG_GET(flag/disable_human_mood))
+			continue
+
+		var/skip = FALSE
+		for (var/banned in banned_quirks)
+			if (ispath(quirk, banned))
+				skip = TRUE
+				break
+		if (skip)
 			continue
 
 		var/blacklisted = FALSE
