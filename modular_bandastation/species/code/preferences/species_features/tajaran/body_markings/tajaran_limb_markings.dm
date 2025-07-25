@@ -60,7 +60,7 @@
 	return final_icon
 
 /datum/preference/choiced/tajaran_limb_markings/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["tajaran_limb_markings"] = value
+	target.dna.features[FEATURE_TAJARAN_LIMB_MARKINGS] = value
 
 /datum/preference/choiced/tajaran_limb_markings/compile_constant_data()
 	var/list/data = ..()

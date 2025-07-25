@@ -7,10 +7,10 @@
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 9
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/bridge)
 "ac" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/bridge)
 "ad" = (
 /obj/structure/chair/comfy/shuttle/tactical{
@@ -29,7 +29,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "af" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/hallway)
 "ah" = (
 /obj/effect/turf_decal/stripes/line{
@@ -96,7 +96,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/hallway)
 "aB" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/airlock)
 "aD" = (
 /obj/effect/decal/syndie_logo{
@@ -108,16 +108,16 @@
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 5
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/engineering)
 "aG" = (
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 9
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/medical)
 "aJ" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/medical)
 "aK" = (
 /obj/machinery/power/shuttle_engine/heater,
@@ -177,7 +177,7 @@
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 10
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/airlock)
 "be" = (
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
@@ -225,7 +225,7 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/syndicate/engineering)
 "bn" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/engineering)
 "bq" = (
 /obj/structure/railing{
@@ -439,7 +439,7 @@
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 5
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/hallway)
 "cA" = (
 /obj/machinery/power/shuttle_engine/huge,
@@ -610,7 +610,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/hallway)
 "nb" = (
-/turf/closed/wall/r_wall/syndicate/nodiagonal,
+/turf/closed/wall/r_wall/plastitanium/syndicate/nodiagonal,
 /area/shuttle/syndicate/hallway)
 "nN" = (
 /obj/machinery/mech_bay_recharge_port{
@@ -625,13 +625,13 @@
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 6
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/airlock)
 "pd" = (
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 5
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/bridge)
 "pQ" = (
 /turf/open/floor/plating/airless,
@@ -750,7 +750,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/bridge)
 "Gu" = (
-/turf/closed/wall/r_wall/syndicate/nodiagonal,
+/turf/closed/wall/r_wall/plastitanium/syndicate/nodiagonal,
 /area/shuttle/syndicate/airlock)
 "Hl" = (
 /obj/structure/lattice,
@@ -768,7 +768,7 @@
 /obj/machinery/porta_turret/syndicate/shuttle{
 	dir = 9
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/syndicate/hallway)
 "JQ" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -870,7 +870,7 @@
 /turf/template_noop,
 /area/shuttle/syndicate/engineering)
 "QI" = (
-/turf/closed/wall/r_wall/syndicate/nodiagonal,
+/turf/closed/wall/r_wall/plastitanium/syndicate/nodiagonal,
 /area/shuttle/syndicate/bridge)
 "QQ" = (
 /obj/effect/turf_decal/stripes/corner{
