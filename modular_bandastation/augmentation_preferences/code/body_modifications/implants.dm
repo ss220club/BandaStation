@@ -4,9 +4,8 @@
 	var/replacement_organ = null
 
 /datum/body_modification/implants/robotic
-	name = "Implants"
+	name = "Robotic implants"
 	abstract_type = /datum/body_modification/implants/robotic
-	var/replacement_organ = null
 
 /datum/body_modification/implants/apply_to_human(mob/living/carbon/target)
 	. = ..()
