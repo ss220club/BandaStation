@@ -4,21 +4,25 @@
 
 /obj/item/bodypart/arm/left/robot/surplus/xion
 	icon_state = "l_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/arm/right/robot/surplus/xion
 	icon_state = "r_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/leg/left/robot/surplus/xion
 	icon_state = "l_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/leg/right/robot/surplus/xion
 	icon_state = "r_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
@@ -29,21 +33,25 @@
 
 /obj/item/bodypart/arm/left/robot/xion
 	icon_state = "l_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/arm/right/robot/xion
 	icon_state = "r_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/leg/left/robot/xion
 	icon_state = "l_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/leg/right/robot/xion
 	icon_state = "r_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
@@ -54,20 +62,24 @@
 
 /obj/item/bodypart/arm/left/robot/advanced/xion
 	icon_state = "l_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/arm/right/robot/advanced/xion
 	icon_state = "r_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/leg/left/robot/advanced/xion
 	icon_state = "l_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 
 /obj/item/bodypart/leg/right/robot/advanced/xion
 	icon_state = "r_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/xion_augments.dmi'

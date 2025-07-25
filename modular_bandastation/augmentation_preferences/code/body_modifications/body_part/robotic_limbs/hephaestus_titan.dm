@@ -54,20 +54,24 @@
 
 /obj/item/bodypart/arm/left/robot/advanced/hephaestustitan
 	icon_state = "l_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
 
 /obj/item/bodypart/arm/right/robot/advanced/hephaestustitan
 	icon_state = "r_arm"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
 
 /obj/item/bodypart/leg/left/robot/advanced/hephaestustitan
 	icon_state = "l_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
 
 /obj/item/bodypart/leg/right/robot/advanced/hephaestustitan
 	icon_state = "r_leg"
+	is_emissive = FALSE
 	icon_static = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
 	icon = 'modular_bandastation/augmentation_preferences/icons/hephaestustitan_augments.dmi'
