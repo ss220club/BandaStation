@@ -18,53 +18,53 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augmentations/bishopmk2
+/datum/supply_pack/augmentations/bishop_mk2
 	name = "контейнер аугментаций бишоп мк2"
 	desc = "Контейнер содержит полный набор аугментация корпорации Бишоп МК2"
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/bodypart/arm/left/robot/bishopmk2,
-					/obj/item/bodypart/arm/right/robot/bishopmk2,
-					/obj/item/bodypart/leg/left/robot/bishopmk2,
-					/obj/item/bodypart/leg/right/robot/bishopmk2
+	contains = list(/obj/item/bodypart/arm/left/robot/bishop_mk2,
+					/obj/item/bodypart/arm/right/robot/bishop_mk2,
+					/obj/item/bodypart/leg/left/robot/bishop_mk2,
+					/obj/item/bodypart/leg/right/robot/bishop_mk2
 					)
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augmentations/bishopnano
+/datum/supply_pack/augmentations/bishop_nano
 	name = "контейнер аугментаций бишоп нано"
 	desc = "Контейнер содержит полный набор аугментация корпорации Бишоп Нано"
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/bodypart/arm/left/robot/bishopnano,
-					/obj/item/bodypart/arm/right/robot/bishopnano,
-					/obj/item/bodypart/leg/left/robot/bishopnano,
-					/obj/item/bodypart/leg/right/robot/bishopnano
+	contains = list(/obj/item/bodypart/arm/left/robot/bishop_nano,
+					/obj/item/bodypart/arm/right/robot/bishop_nano,
+					/obj/item/bodypart/leg/left/robot/bishop_nano,
+					/obj/item/bodypart/leg/right/robot/bishop_nano
 					)
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augmentations/etaminindustry
+/datum/supply_pack/augmentations/etamin_industry
 	name = "контейнер аугментаций этамин индастри"
 	desc = "Контейнер содержит полный набор аугментация корпорации Этамин Индастри"
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/bodypart/arm/left/robot/etaminindustry,
-					/obj/item/bodypart/arm/right/robot/etaminindustry,
-					/obj/item/bodypart/leg/left/robot/etaminindustry,
-					/obj/item/bodypart/leg/right/robot/etaminindustry
+	contains = list(/obj/item/bodypart/arm/left/robot/etamin_industry,
+					/obj/item/bodypart/arm/right/robot/etamin_industry,
+					/obj/item/bodypart/leg/left/robot/etamin_industry,
+					/obj/item/bodypart/leg/right/robot/etamin_industry
 					)
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augmentations/etaminindustrylumineux
+/datum/supply_pack/augmentations/etamin_industry_lumineux
 	name = "контейнер аугментаций этамин индастри люминекс"
 	desc = "Контейнер содержит полный набор аугментация корпорации Этамин Индастри Люминекс"
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/bodypart/arm/left/robot/etaminindustrylumineux,
-					/obj/item/bodypart/arm/right/robot/etaminindustrylumineux,
-					/obj/item/bodypart/leg/left/robot/etaminindustrylumineux,
-					/obj/item/bodypart/leg/right/robot/etaminindustrylumineux
+	contains = list(/obj/item/bodypart/arm/left/robot/etamin_industry_lumineux,
+					/obj/item/bodypart/arm/right/robot/etamin_industry_lumineux,
+					/obj/item/bodypart/leg/left/robot/etamin_industry_lumineux,
+					/obj/item/bodypart/leg/right/robot/etamin_industry_lumineux
 					)
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical
@@ -96,14 +96,14 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augmentations/hephaestus
+/datum/supply_pack/augmentations/hephaestus_titan
 	name = "контейнер аугментаций гефест титан"
 	desc = "Контейнер содержит полный набор аугментация корпорации Гефест Титан"
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/bodypart/arm/left/robot/hephaestustitan,
-					/obj/item/bodypart/arm/right/robot/hephaestustitan,
-					/obj/item/bodypart/leg/left/robot/hephaestustitan,
-					/obj/item/bodypart/leg/right/robot/hephaestustitan
+	contains = list(/obj/item/bodypart/arm/left/robot/hephaestus_titan,
+					/obj/item/bodypart/arm/right/robot/hephaestus_titan,
+					/obj/item/bodypart/leg/left/robot/hephaestus_titan,
+					/obj/item/bodypart/leg/right/robot/hephaestus_titan
 					)
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical
@@ -161,14 +161,14 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augmentations/wardtakahashipro
+/datum/supply_pack/augmentations/wardtakahashi_pro
 	name = "контейнер аугментаций вардтакахаси про"
 	desc = "Контейнер содержит полный набор аугментация корпорации Вардтакахаси Про"
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/bodypart/arm/left/robot/wardtakahashipro,
-					/obj/item/bodypart/arm/right/robot/wardtakahashipro,
-					/obj/item/bodypart/leg/left/robot/wardtakahashipro,
-					/obj/item/bodypart/leg/right/robot/wardtakahashipro
+	contains = list(/obj/item/bodypart/arm/left/robot/wardtakahashi_pro,
+					/obj/item/bodypart/arm/right/robot/wardtakahashi_pro,
+					/obj/item/bodypart/leg/left/robot/wardtakahashi_pro,
+					/obj/item/bodypart/leg/right/robot/wardtakahashi_pro
 					)
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical
@@ -187,14 +187,14 @@
 	crate_type = /obj/structure/closet/crate/medical
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
 
-/datum/supply_pack/augmentations/xionlight
+/datum/supply_pack/augmentations/xion_light
 	name = "контейнер аугментаций сион лайт"
 	desc = "Контейнер содержит полный набор аугментация корпорации Сион Лайт"
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/bodypart/arm/left/robot/xionlight,
-					/obj/item/bodypart/arm/right/robot/xionlight,
-					/obj/item/bodypart/leg/left/robot/xionlight,
-					/obj/item/bodypart/leg/right/robot/xionlight
+	contains = list(/obj/item/bodypart/arm/left/robot/xion_light,
+					/obj/item/bodypart/arm/right/robot/xion_light,
+					/obj/item/bodypart/leg/left/robot/xion_light,
+					/obj/item/bodypart/leg/right/robot/xion_light
 					)
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical

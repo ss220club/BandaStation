@@ -2,84 +2,76 @@
 // Wardtakahashi Pro Surplus (хламовый уровень)
 // =============================
 
-/obj/item/bodypart/arm/left/robot/surplus/wardtakahashipro
+/obj/item/bodypart/arm/left/robot/surplus/wardtakahashi_pro
 	icon_state = "l_arm"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/arm/right/robot/surplus/wardtakahashipro
+/obj/item/bodypart/arm/right/robot/surplus/wardtakahashi_pro
 	icon_state = "r_arm"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/leg/left/robot/surplus/wardtakahashipro
+/obj/item/bodypart/leg/left/robot/surplus/wardtakahashi_pro
 	icon_state = "l_leg"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/leg/right/robot/surplus/wardtakahashipro
+/obj/item/bodypart/leg/right/robot/surplus/wardtakahashi_pro
 	icon_state = "r_leg"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
 
 // =============================
 // Wardtakahashi Pro Normal (стандартный уровень, cyborg)
 // =============================
 
-/obj/item/bodypart/arm/left/robot/wardtakahashipro
+/obj/item/bodypart/arm/left/robot/wardtakahashi_pro
 	icon_state = "l_arm"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/arm/right/robot/wardtakahashipro
+/obj/item/bodypart/arm/right/robot/wardtakahashi_pro
 	icon_state = "r_arm"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/leg/left/robot/wardtakahashipro
+/obj/item/bodypart/leg/left/robot/wardtakahashi_pro
 	icon_state = "l_leg"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/leg/right/robot/wardtakahashipro
+/obj/item/bodypart/leg/right/robot/wardtakahashi_pro
 	icon_state = "r_leg"
-	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
 
 // =============================
 // Wardtakahashi Pro Advanced (продвинутый уровень)
 // =============================
 
-/obj/item/bodypart/arm/left/robot/advanced/wardtakahashipro
+/obj/item/bodypart/arm/left/robot/advanced/wardtakahashi_pro
 	icon_state = "l_arm"
 	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/arm/right/robot/advanced/wardtakahashipro
+/obj/item/bodypart/arm/right/robot/advanced/wardtakahashi_pro
 	icon_state = "r_arm"
 	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/leg/left/robot/advanced/wardtakahashipro
+/obj/item/bodypart/leg/left/robot/advanced/wardtakahashi_pro
 	icon_state = "l_leg"
 	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
 
-/obj/item/bodypart/leg/right/robot/advanced/wardtakahashipro
+/obj/item/bodypart/leg/right/robot/advanced/wardtakahashi_pro
 	icon_state = "r_leg"
 	is_emissive = FALSE
-	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
-	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashipro_augments.dmi'
+	icon_static = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'
+	icon = 'modular_bandastation/augmentation_preferences/icons/wardtakahashi_pro_augments.dmi'

@@ -29,6 +29,7 @@ export const ServerPrefs = createContext<ServerData | undefined>({
     seeds: [],
     phrases: [],
   },
+  body_modifications: [],
   // BANDASTATION ADDITION END - TTS
 });
 

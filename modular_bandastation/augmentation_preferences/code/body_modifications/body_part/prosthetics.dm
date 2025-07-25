@@ -29,7 +29,7 @@
 
 	var/base_type_str = "[replacement_bodypart_type]"
 	var/brand = lowertext(selected_manufacturer)
-	brand = replacetext(brand, " ", "")
+	brand = replacetext(brand, " ", "_")
 	brand = replacetext(brand, "-", "")
 
 	if (!findtext(base_type_str, "/"))
