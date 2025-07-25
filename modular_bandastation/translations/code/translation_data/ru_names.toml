@@ -24625,7 +24625,7 @@ instrumental = "вороньей мантией"
 prepositional = "вороньей мантии"
 gender = "female"
 
-[" centcom combat implant"]
+["centcom combat implant"]
 nominative = "боевой имплант центрального командования"
 genitive = "боевого импланта центрального командования"
 dative = "боевому импланту центрального командования"

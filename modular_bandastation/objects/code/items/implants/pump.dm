@@ -2,6 +2,8 @@
 #define REAGENT_AMOUNT "reagent_amount"
 ///amount of reagent to inject before the implant stops injecting
 #define REAGENT_THRESHOLD "reagent_threshold"
+///cooldown for reagent synthesis
+#define COOLDOWN_PUMP "pump"
 
 /obj/item/organ/cyberimp/chest/pump
 	name = "pump"
@@ -90,3 +92,4 @@
 
 #undef REAGENT_AMOUNT
 #undef REAGENT_THRESHOLD
+#undef COOLDOWN_PUMP
