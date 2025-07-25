@@ -75,7 +75,7 @@
 	var/list/data = list()
 	data["author"] = book_data.get_author()
 	data["title"] = book_data.get_title()
-	/// BANDASTATION EDIT START - мультистраничность книг
+	// BANDASTATION EDIT START - Bureaucracy part 1: Multi paging for books.
 	// data["content"] = book_data.get_content()
 	return data
 
@@ -86,7 +86,7 @@
 	data["total_pages"] = book_data.get_page_count()
 
 	return data
-	/// BANDASTATION EDIT END - мультистраничность книг
+	// BANDASTATION EDIT END - Bureaucracy part 1: Multi paging for books.
 
 /obj/item/book/ui_interact(mob/living/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
