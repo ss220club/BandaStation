@@ -5,12 +5,20 @@
 	var/manufacturers = list(
 		"General",
 		"Bishop",
+		"Bishop MK2",
+		"Bishop Nano",
 		"Etamin Industry",
+		"Etamin Industry Lumineux",
+		"Gromtech",
 		"Hephaestus",
+		"Hephaestus Titan",
+		"Interdyne",
 		"Morpheus",
 		"Shellguard",
 		"Wardtakahashi",
+		"Wardtakahashi Pro",
 		"Xion",
+		"Xion Light",
 		"Zeng-Hu",
 	)
 	var/selected_manufacturer = "General"
