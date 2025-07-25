@@ -229,13 +229,13 @@
 /area/shuttle/argos)
 "th" = (
 /obj/structure/sign/departments/medbay/alt,
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/argos)
 "tI" = (
 /turf/template_noop,
 /area/template_noop)
 "tU" = (
-/turf/closed/wall/r_wall/syndicate/nodiagonal,
+/turf/closed/wall/r_wall/plastitanium/syndicate/nodiagonal,
 /area/shuttle/argos)
 "uA" = (
 /obj/effect/turf_decal/tile/blue/full,
@@ -279,7 +279,7 @@
 /area/shuttle/argos)
 "vu" = (
 /obj/structure/sign/poster/official/nanotrasen_logo,
-/turf/closed/wall/r_wall/syndicate/nodiagonal,
+/turf/closed/wall/r_wall/plastitanium/syndicate/nodiagonal,
 /area/shuttle/argos)
 "vH" = (
 /obj/machinery/light/directional/south,
@@ -342,7 +342,7 @@
 /area/shuttle/argos)
 "yx" = (
 /obj/structure/sign/poster/official/nanotrasen_logo,
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/argos)
 "yB" = (
 /obj/effect/turf_decal/tile/blue{
@@ -617,7 +617,7 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/shuttle/argos)
 "TK" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall/plastitanium/syndicate,
 /area/shuttle/argos)
 "Ua" = (
 /turf/open/floor/iron/dark/smooth_edge{
