@@ -21,24 +21,41 @@
 
 	var/list/body_modifications = value
 
-	for (var/obj/item/bodypart/limb in target.bodyparts)
-		limb.drop_limb(special = TRUE)
-		qdel(limb)
-	target.regenerate_limbs()
-
+	// Сначала ампутации (убираем конечности)
 	for (var/key in body_modifications)
 		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if (!mod_proto)
+		if (!mod_proto || !istype(mod_proto, /datum/body_modification/limb_amputation))
 			continue
 
-		var/datum/body_modification/mod = new mod_proto.type
-		if (istype(mod, /datum/body_modification/bodypart_prosthesis))
-			var/datum/body_modification/bodypart_prosthesis/prosthesis = mod
-			if (islist(body_modifications[key]) && body_modifications[key]["selected_manufacturer"])
-				prosthesis.selected_manufacturer = body_modifications[key]["selected_manufacturer"]
+		var/datum/body_modification/limb_amputation/amputation = new mod_proto.type
+		amputation.apply_to_human(target)
+		qdel(amputation)
 
-		mod.apply_to_human(target)
-		qdel(mod)
+	// Потом протезы (ставим новые конечности)
+	for (var/key in body_modifications)
+		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
+		if (!mod_proto || !istype(mod_proto, /datum/body_modification/bodypart_prosthesis))
+			continue
+
+		var/datum/body_modification/bodypart_prosthesis/prosthesis = new mod_proto.type
+		if (islist(body_modifications[key]) && body_modifications[key]["selected_manufacturer"])
+			prosthesis.selected_manufacturer = body_modifications[key]["selected_manufacturer"]
+
+		prosthesis.apply_to_human(target)
+		qdel(prosthesis)
+
+	// Потом импланты (органы)
+	for (var/key in body_modifications)
+		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
+		if (!mod_proto || !istype(mod_proto, /datum/body_modification/implants))
+			continue
+
+		var/datum/body_modification/implants/implant = new mod_proto.type
+		implant.apply_to_human(target)
+		qdel(implant)
+
+	// Обновляем тело один раз в конце
+	target.update_body()
 
 /datum/preference/body_modifications/deserialize(input, datum/preferences/preferences)
 	if (!islist(input))
