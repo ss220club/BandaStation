@@ -29,6 +29,8 @@ export const ServerPrefs = createContext<ServerData | undefined>({
     seeds: [],
     phrases: [],
   },
+  pref_job_slots: {},
+  profile_index: 0,
   body_modifications: [],
   // BANDASTATION ADDITION END - TTS
 });

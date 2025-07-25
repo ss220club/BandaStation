@@ -185,6 +185,8 @@ export type PreferencesMenuData = {
   window: PrefsWindow;
 
   // BANDASTATION ADDITION START
+  pref_job_slots?: Record<string, unknown>;
+  profile_index?: number;
   donator_level: number;
   tts_seed: string;
   tts_enabled: BooleanLike;
