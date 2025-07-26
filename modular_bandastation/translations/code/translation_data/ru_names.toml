@@ -24624,3 +24624,34 @@ accusative = "воронью мантию"
 instrumental = "вороньей мантией"
 prepositional = "вороньей мантии"
 gender = "female"
+
+["spy spider"]
+nominative = "шпионский жучок"
+genitive = "шпионского жучка"
+dative = "шпионскому жучку"
+accusative = "шпионский жучок"
+instrumental = "шпионским жучком"
+prepositional = "шпионском жучке"
+gender = "male"
+
+["narrow-focused receiver"]
+nominative = "узконаправленный приёмник"
+genitive = "узконаправленного приёмника"
+dative = "узконаправленному приёмнику"
+accusative = "узконаправленный приёмник"
+instrumental = "узконаправленным приёмником"
+prepositional = "узконаправленном приёмнике"
+gender = "male"
+
+["spy bug kit"]
+nominative = "набор жучков"
+genitive = "набора жучков"
+dative = "набору жучков"
+accusative = "набор жучков"
+instrumental = "набором жучков"
+prepositional = "наборе жучков"
+gender = "male"
+
+["spy transmitter"]
+nominative = "шпионский передатчик"
+gender = "male"
