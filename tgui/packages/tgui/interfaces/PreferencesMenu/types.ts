@@ -1,11 +1,11 @@
-import type { BooleanLike } from 'tgui-core/react';
+import { BooleanLike } from 'tgui-core/react';
 
-import type { sendAct } from '../../backend';
-import type {
+import { sendAct } from '../../backend';
+import {
   LoadoutCategory,
   LoadoutList,
 } from './CharacterPreferences/loadout/base';
-import type { Gender } from './preferences/gender';
+import { Gender } from './preferences/gender';
 
 export enum Food {
   Alcohol = 'ALCOHOL',
@@ -185,12 +185,18 @@ export type PreferencesMenuData = {
   window: PrefsWindow;
 
   // BANDASTATION ADDITION START
+  pref_job_slots?: Record<string, number>;
+  profile_index?: Record<string, string>;
   donator_level: number;
   tts_seed: string;
   tts_enabled: BooleanLike;
-  profile_index: Record<string, string>;
-  pref_job_slots: Record<string, number>;
   // BANDASTATION ADDITION END
+
+  incompatible_body_modifications: string[];
+  applied_body_modifications: string[];
+  manufacturers: Record<string, string[]>;
+  selected_manufacturer: Record<string, string>;
+  // BANDASTATION ADD END
 };
 
 // BANDASTATION ADDITION START
@@ -213,10 +219,23 @@ export type TtsData = {
   seeds: Array<Seed>;
   phrases: string[];
 };
+
+export type BodyModification = {
+  key: string;
+  name: string;
+  category: string;
+  description: string;
+  cost: number;
+  manufacturers?: Record<string, string>;
+  selectedManufacturer?: string;
+};
 // BANDASTATION ADDITION END
 
 export type ServerData = {
-  text_to_speech: TtsData; // BANDASTATION ADD
+  // BANDASTATION ADD START
+  text_to_speech: TtsData;
+  body_modifications: BodyModification[];
+  // BANDASTATION ADD END
   jobs: {
     departments: Record<string, Department>;
     jobs: Record<string, Job>;

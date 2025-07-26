@@ -1,3 +1,5 @@
+// BANDASTATION EDIT START - Feat: Augmentations
+/*
 /datum/quirk/prosthetic_organ
 	name = "Prosthetic Organ"
 	desc = "В результате несчастного случая вы лишились одного из органов. Из-за этого у вас установлен дешевый протез!"
@@ -72,3 +74,5 @@
 	if(old_organ)
 		old_organ.Insert(quirk_holder, special = TRUE)
 	old_organ = null
+*/
+// BANDASTATION EDIT END - Feat: Augmentations

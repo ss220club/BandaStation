@@ -1,3 +1,5 @@
+// BANDASTATION EDIT START - Feat: Augmentations
+/*
 /datum/preference/choiced/prosthetic_organ
 	category = PREFERENCE_CATEGORY_MANUALLY_RENDERED
 	savefile_key = "prosthetic_organ"
@@ -18,3 +20,5 @@
 
 /datum/preference/choiced/prosthetic_organ/apply_to_human(mob/living/carbon/human/target, value)
 	return
+*/
+// BANDASTATION EDIT END - Feat: Augmentations
