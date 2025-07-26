@@ -1,4 +1,9 @@
-// MARK: Misc mask
+// Fix surgery mask error icon to remove missing surgery maskicon issue
+/obj/item/clothing/mask/breath/muzzle/update_icon_state()
+	. = ..()
+	icon_state = initial(icon_state)
+
+// // MARK: Misc mask
 /obj/item/clothing/mask/breath/red_gas
 	name = "prs-1"
 	desc = "Стильная дыхательная маска в виде противогаза, не скрывает лицо."
