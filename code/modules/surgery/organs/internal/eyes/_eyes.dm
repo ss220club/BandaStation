@@ -661,8 +661,6 @@
 	desc = "A pair of basic cybernetic eyes that restore vision, but at some vulnerability to light."
 	icon_state = "eyes_cyber_basic"
 	iris_overlay = "eyes_cyber_glow_iris"
-	eye_color_left = "#7e9bd4"
-	eye_color_right = "#7e9bd4"
 	eye_icon_state = "eyes_glow_gs"
 	overlay_ignore_lighting = TRUE
 	flash_protect = FLASH_PROTECTION_SENSITIVE
@@ -1045,8 +1043,6 @@
 	icon_state = "eyes_moth_cyber"
 	eye_icon_state = "motheyes_cyber"
 	iris_overlay = "eyes_cyber_glow_iris"
-	eye_color_left = "#7e9bd4"
-	eye_color_right = "#7e9bd4"
 	overlay_ignore_lighting = TRUE
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	pupils_name = "aperture clusters"
