@@ -24,9 +24,7 @@
     return content;
   };
 
-  // BYOND API object
-  // ------------------------------------------------------
-
+  // MARK: BYOND API object
   var Byond = (window.Byond = {});
 
   // Expose inlined metadata
@@ -47,14 +45,9 @@
     (Byond.BLINK !== null || window.cef_to_byond) &&
     location.hostname === '127.0.0.1' &&
     location.search !== '?external';
-  //As of BYOND 515 the path doesn't seem to include tmp dir anymore if you're trying to open tgui in external browser and looking why it doesn't work
-  //&& location.pathname.indexOf('/tmp') === 0
 
   // Version constants
   Byond.IS_BYOND = isByond;
-
-  // Strict mode flag
-  Byond.strictMode = Boolean(Number(parseMetaTag('tgui:strictMode')));
 
   // Callbacks for asynchronous calls
   Byond.__callbacks__ = [];
@@ -214,9 +207,7 @@
     window.update.listeners.push(_listener);
   };
 
-  // Asset loaders
-  // ------------------------------------------------------
-
+  // MARK: Asset loaders
   var RETRY_ATTEMPTS = 5;
   var RETRY_WAIT_INITIAL = 500;
   var RETRY_WAIT_INCREMENT = 500;
@@ -378,91 +369,110 @@
   Byond.iconRefMap = {};
 })();
 
-// Error handling
-// ------------------------------------------------------
+// MARK: Error handling
+const ERROR_THRESHOLD = 10;
+const ERROR_TIMEOUT = 30000;
 
+let errorTimeout;
+let errorsCount = 0;
 window.onerror = function (msg, url, line, col, error) {
-  window.onerror.errorCount = (window.onerror.errorCount || 0) + 1;
   // Proper stacktrace
-  var stack = error && error.stack;
-  // Ghetto stacktrace
-  if (!stack) {
-    stack = msg + '\n   at ' + url + ':' + line;
-    if (col) {
-      stack += ':' + col;
-    }
-  }
+  let stack = error && error.stack;
   // Augment the stack
   stack = window.__augmentStack__(stack, error);
-  // Print error to the page
-  if (Byond.strictMode) {
-    var errorRoot = document.getElementById('FatalError');
-    var errorStack = document.getElementById('FatalError__stack');
-    if (errorRoot) {
-      errorRoot.className = 'FatalError FatalError--visible';
-      if (window.onerror.__stack__) {
-        window.onerror.__stack__ += '\n\n' + stack;
-      } else {
-        window.onerror.__stack__ = stack;
-      }
-      var textProp = 'textContent';
-      errorStack[textProp] = window.onerror.__stack__;
+
+  // Let user try to use UI if there is not much errors
+  // But notify coders/admins by throwing runtime
+  errorsCount++;
+  if (errorsCount <= ERROR_THRESHOLD) {
+    // Prevent runtime spam
+    if (errorsCount === 1) {
+      Byond.sendMessage({ type: 'log', error: true, message: stack });
     }
-    // Set window geometry
-    var setFatalErrorGeometry = function () {
-      Byond.winset(Byond.windowId, {
-        titlebar: true,
-        'is-visible': true,
-        'can-resize': true,
+
+    clearTimeout(errorTimeout);
+    errorTimeout = setTimeout(() => {
+      errorsCount = 0;
+    }, ERROR_TIMEOUT);
+
+    const errorRoot = document.getElementById('Error');
+    const errorStack = document.getElementById('Error__stack');
+    const closeErrorButton = document.getElementById('Error__close');
+    const copyErrorButton = document.getElementById('Error__copy');
+    if (closeErrorButton) {
+      closeErrorButton.addEventListener('click', () => {
+        errorRoot.className = '';
       });
-    };
-    setFatalErrorGeometry();
-    setInterval(setFatalErrorGeometry, 1000);
+    }
+
+    if (copyErrorButton) {
+      copyErrorButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(stack);
+        copyErrorButton.classList.add('copied');
+        copyErrorButton.textContent = 'Copied!';
+
+        setTimeout(() => {
+          copyErrorButton.classList.remove('copied');
+          copyErrorButton.textContent = 'Copy';
+        }, 2000);
+      });
+    }
+
+    if (errorRoot) {
+      errorRoot.className = 'Error--visible';
+      errorStack.textContent = stack;
+    }
+    return;
   }
+
+  // Clean UI
+  const deadUIRoot = document.getElementById('react-root');
+  if (deadUIRoot) {
+    deadUIRoot.remove();
+  }
+
+  // Print error to the page
+  const fatalErrorRoot = document.getElementById('FatalError');
+  const fatalErrorStack = document.getElementById('FatalError__stack');
+  if (fatalErrorRoot) {
+    fatalErrorRoot.className = 'FatalError FatalError--visible';
+    fatalErrorStack.textContent = stack;
+  }
+
+  // Set window geometry
+  const pixelRatio = window.devicePixelRatio ?? 1;
+  const size = 500 * pixelRatio;
+  Byond.winset(Byond.windowId, {
+    size: `${size}x${size}`,
+    titlebar: true,
+    'is-visible': true,
+    'can-resize': true,
+  });
+
   // Send logs to the game server
-  if (Byond.strictMode) {
-    Byond.sendMessage({
-      type: 'log',
-      fatal: 1,
-      message: stack,
-    });
-  } else if (window.onerror.errorCount <= 1) {
-    stack += '\nWindow is in non-strict mode, future errors are suppressed.';
-    Byond.sendMessage({
-      type: 'log',
-      message: stack,
-    });
-  }
-  // Short-circuit further updates
-  if (Byond.strictMode) {
-    window.update = function () {};
-    window.update.queue = [];
-  }
+  Byond.sendMessage({ type: 'log', fatal: true, message: stack });
+
+  // Prevent any updates by killing store
+  delete window.__store__;
+
   // Prevent default action
   return true;
 };
 
 // Catch unhandled promise rejections
 window.onunhandledrejection = function (e) {
-  var msg = 'UnhandledRejection';
-  if (e.reason) {
-    msg += ': ' + (e.reason.message || e.reason.description || e.reason);
-    if (e.reason.stack) {
-      e.reason.stack = 'UnhandledRejection: ' + e.reason.stack;
+  const reason = e.reason;
+  let msg = 'UnhandledRejection';
+  if (reason) {
+    msg += `: ${reason.message || reason.description || reason}`;
+    if (reason.stack) {
+      reason.stack = `UnhandledRejection: ${reason.stack}`;
     }
   }
-  window.onerror(msg, null, null, null, e.reason);
+  window.onerror(msg, null, null, null, reason);
 };
 
-// Helper for augmenting stack traces on fatal errors
-window.__augmentStack__ = function (stack, error) {
-  return stack + '\nUser Agent: ' + navigator.userAgent;
-};
-
-// Incoming message handling
-// ------------------------------------------------------
-
-// Message handler
+// MARK: Message handler
 window.update = function (rawMessage) {
   // Push onto the queue (active during initialization)
   if (window.update.queueActive) {
