@@ -1,3 +1,5 @@
+import './PreferencesMenu.scss';
+
 import { useState } from 'react';
 import {
   Box,
@@ -26,18 +28,7 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
   }
 
   return (
-    <Modal
-      style={{
-        position: 'absolute',
-        left: '35%',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: '500px',
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        maxHeight: 'none',
-      }}
-    >
+    <Modal className="PreferencesMenu__Augs">
       <Section
         buttons={
           <Button
@@ -45,62 +36,21 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
             color="transparent"
             tooltip="Закрыть"
             tooltipPosition="left"
-            style={{
-              color: 'white',
-              fontSize: '1.5rem',
-            }}
+            className="PreferencesMenu__Augs-Close"
             onClick={props.handleClose}
           />
         }
         title={
-          <Box
-            inline
-            style={{
-              marginLeft: '10px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '1rem',
-              padding: '0.5rem 0',
-            }}
-          >
-            <Icon
-              name="robot"
-              style={{
-                color: '#ffffff',
-                fontSize: '1.4rem',
-              }}
-            />
-            <Box
-              as="span"
-              style={{
-                fontSize: '1.3rem',
-                fontWeight: 'bold',
-                color: '#ffffff',
-                textShadow: '0 0 3px rgba(235, 235, 235, 0.5)',
-                letterSpacing: '0.05em',
-              }}
-            >
+          <Box inline className="PreferencesMenu__Augs-Header">
+            <Icon name="robot" />
+            <Box as="span" className="PreferencesMenu__Augs-Title">
               Модификации тела
             </Box>
           </Box>
         }
-        style={{
-          backgroundColor: 'rgba(33, 33, 33)',
-          borderRadius: '8px',
-          padding: '0',
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          maxHeight: '70vh',
-        }}
+        className="PreferencesMenu__Augs-Section"
       >
-        <Box
-          style={{
-            flex: 1,
-            overflowY: 'auto',
-            overflowX: 'hidden',
-          }}
-        >
+        <Box className="PreferencesMenu__Augs-Content">
           <BodyModificationsPageInner
             bodyModification={serverData.body_modifications}
           />
@@ -122,13 +72,11 @@ const BodyModificationsPageInner = (props: {
     Record<string, boolean>
   >({});
 
-  const appliedModifications = props.bodyModification.filter(
-    (bodyModification) =>
-      applied_body_modifications.includes(bodyModification.key),
+  const appliedModifications = props.bodyModification.filter((mod) =>
+    applied_body_modifications.includes(mod.key),
   );
 
   const modificationsByCategory: Record<string, BodyModification[]> = {};
-
   props.bodyModification.forEach((mod) => {
     const category = mod.category;
     if (category) {
@@ -147,18 +95,12 @@ const BodyModificationsPageInner = (props: {
   };
 
   return (
-    <Box style={{ maxHeight: '70vh', overflowY: 'auto' }}>
-      <Table
-        style={{
-          width: '100%',
-          margin: '0',
-          borderCollapse: 'collapse',
-        }}
-      >
-        {appliedModifications.map((bodyModification, index) => (
+    <Box className="PreferencesMenu__Augs-TableWrapper">
+      <Table className="PreferencesMenu__Augs-Table">
+        {appliedModifications.map((mod, index) => (
           <BodyModificationRow
-            key={bodyModification.key}
-            bodyModification={bodyModification}
+            key={mod.key}
+            bodyModification={mod}
             added
             index={index}
           />
@@ -176,22 +118,11 @@ const BodyModificationsPageInner = (props: {
           <>
             <Table.Row
               key={`category-${category}`}
-              style={{
-                backgroundColor: '#40668C',
-                borderBottom: collapsedCategories[category]
-                  ? '1px solid rgba(255, 255, 255, 0.1)'
-                  : 'none',
-              }}
+              className="PreferencesMenu__Augs-CategoryRow"
+              data-collapsed={collapsedCategories[category] || false}
               onClick={() => toggleCategory(category)}
             >
-              <Table.Cell
-                colSpan={2}
-                style={{
-                  padding: '4px 12px',
-                  cursor: 'pointer',
-                  fontWeight: 'bold',
-                }}
-              >
+              <Table.Cell colSpan={2}>
                 <Box inline>
                   <Icon
                     name={
@@ -199,11 +130,6 @@ const BodyModificationsPageInner = (props: {
                         ? 'chevron-right'
                         : 'chevron-down'
                     }
-                    style={{
-                      marginRight: '0.5rem',
-                      padding: '0px 6px',
-                      fontWeight: 'bold',
-                    }}
                   />
                   {category}
                 </Box>
@@ -211,11 +137,10 @@ const BodyModificationsPageInner = (props: {
             </Table.Row>
 
             {!collapsedCategories[category] &&
-              category !== null &&
-              mods.map((bodyModification, index) => (
+              mods.map((mod, index) => (
                 <BodyModificationRow
-                  key={bodyModification.key}
-                  bodyModification={bodyModification}
+                  key={mod.key}
+                  bodyModification={mod}
                   added={false}
                   usedKeys={[
                     ...applied_body_modifications,
@@ -240,44 +165,26 @@ const BodyModificationRow = (props: {
   const { act, data } = useBackend<PreferencesMenuData>();
   const isUsed = props.usedKeys?.includes(props.bodyModification.key) || false;
 
-  // Берём список брендов и текущий выбранный из data (которое приходит из get_ui_data)
   const manufacturers =
     data.manufacturers?.[props.bodyModification.key] || null;
   const selectedBrand =
     data.selected_manufacturer?.[props.bodyModification.key] ||
-    (manufacturers ? Object.keys(manufacturers)[0] : null);
+    (manufacturers ? manufacturers[0] : null);
 
   return (
     <Table.Row
       key={props.bodyModification.key}
-      style={{
-        paddingTop: '4px',
-        paddingBottom: '4px',
-        backgroundColor:
-          props.index % 2 === 0
-            ? 'rgba(255, 255, 255, 0.05)'
-            : 'rgba(0, 0, 0, 0.1)',
-      }}
+      className={`PreferencesMenu__Augs-Row ${
+        props.index % 2 === 0 ? 'even' : 'odd'
+      }`}
     >
-      <Table.Cell
-        style={{
-          verticalAlign: 'middle',
-          padding: '0px 12px',
-          fontWeight: 'bold',
-          whiteSpace: 'nowrap',
-        }}
-      >
+      <Table.Cell className="PreferencesMenu__Augs-Name">
         {props.bodyModification.name}
       </Table.Cell>
-      <Table.Cell
-        style={{
-          textAlign: 'center',
-          padding: '4px 12px',
-          whiteSpace: 'nowrap',
-        }}
-      >
+      <Table.Cell className="PreferencesMenu__Augs-Actions">
         {Array.isArray(manufacturers) && props.added && (
           <Dropdown
+            className="PreferencesMenu__Augs-Dropdown"
             selected={selectedBrand ?? ''}
             options={manufacturers.map((brand: string) => ({
               value: brand,
@@ -289,19 +196,13 @@ const BodyModificationRow = (props: {
                 manufacturer: brand,
               })
             }
-            style={{
-              minWidth: '140px',
-            }}
           />
         )}
         {props.added ? (
           <Button
+            className="PreferencesMenu__Augs-Button"
             icon="times"
             color="red"
-            style={{
-              minWidth: 'fit-content',
-              margin: '2px 0',
-            }}
             onClick={() =>
               act('remove_body_modification', {
                 body_modification_key: props.bodyModification.key,
@@ -313,13 +214,10 @@ const BodyModificationRow = (props: {
           </Button>
         ) : (
           <Button
+            className="PreferencesMenu__Augs-Button"
             icon="plus"
             color={isUsed ? 'grey' : 'green'}
             disabled={isUsed}
-            style={{
-              minWidth: 'fit-content',
-              margin: '2px 0',
-            }}
             onClick={() =>
               act('apply_body_modification', {
                 body_modification_key: props.bodyModification.key,
