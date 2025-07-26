@@ -53,7 +53,8 @@
 	var/obj/item/bodypart/limb_to_remove = target.get_bodypart(replacement_bodypart.body_zone)
 
 	replacement_bodypart.replace_limb(target, TRUE)
-	qdel(limb_to_remove)
+	if(limb_to_remove)
+		qdel(limb_to_remove)
 
 	target.update_body()
 

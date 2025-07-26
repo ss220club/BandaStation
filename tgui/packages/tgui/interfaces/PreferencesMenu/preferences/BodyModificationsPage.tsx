@@ -33,7 +33,6 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
         top: '50%',
         transform: 'translateY(-50%)',
         width: '500px',
-        maxWidth: '50vw',
         backgroundColor: 'transparent',
         overflow: 'hidden',
         maxHeight: 'none',

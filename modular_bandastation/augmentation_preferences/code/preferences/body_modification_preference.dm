@@ -90,7 +90,7 @@
 		if (islist(value))
 			result[body_modification_key] = value
 		else
-			result |= body_modification_key
+			result[body_modification_key] = TRUE
 
 	return result
 
