@@ -114,7 +114,8 @@
 
 /obj/machinery/firealarm/update_name(updates)
 	. = ..()
-	name = "[declent_ru(NOMINATIVE)] [my_area.declent_ru(GENITIVE)] [id_tag]"
+	ru_names_rename(ru_names_toml(src::name, suffix = " ([get_area_name(my_area)]) [id_tag]", override_base = "[get_area_name(my_area)] [initial(name)] [id_tag]"))
+	name = "[get_area_name(my_area)] [initial(name)] [id_tag]"
 
 /obj/machinery/firealarm/on_exit_area(datum/source, area/area_to_unregister)
 	//we cannot unregister from an area we never registered to in the first place
