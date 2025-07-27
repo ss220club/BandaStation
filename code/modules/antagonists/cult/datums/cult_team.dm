@@ -205,7 +205,7 @@
 			continue
 
 		if(QDELETED(blood_target))
-			to_chat(cultist.current, span_bold(span_cult_large("Кровавая метка цели потеряна!")))
+			to_chat(cultist.current, span_bold(span_cult_large("Цель кровавой метки потеряна!")))
 		else
 			to_chat(cultist.current, span_bold(span_cult_large("Кровавая метка закончилась!")))
 		cultist.current.client.images -= blood_target_image
