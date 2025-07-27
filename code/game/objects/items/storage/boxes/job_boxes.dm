@@ -196,7 +196,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/storage/box/clown/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] opens [src] and gets consumed by [p_them()]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] opens [src] and gets consumed by [p_them()]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(user, 'sound/misc/scary_horn.ogg', 70, vary = TRUE)
 	forceMove(user.drop_location())
 	var/obj/item/mob_holder/consumed = new(src, user)

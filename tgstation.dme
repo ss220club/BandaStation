@@ -297,6 +297,10 @@
 #include "code\__DEFINES\atmospherics\atmos_mapping_helpers.dm"
 #include "code\__DEFINES\atmospherics\atmos_mob_interaction.dm"
 #include "code\__DEFINES\atmospherics\atmos_piping.dm"
+#include "code\__DEFINES\bandastation\defines.dm"
+#include "code\__DEFINES\bandastation\pronouns.dm"
+#include "code\__DEFINES\bandastation\ru_jobs.dm"
+#include "code\__DEFINES\bandastation\rust_utils.dm"
 #include "code\__DEFINES\construction\actions.dm"
 #include "code\__DEFINES\construction\material.dm"
 #include "code\__DEFINES\construction\rcd.dm"
@@ -6673,3 +6677,6 @@
 #include "interface\fonts\tiny_unicode.dm"
 #include "interface\fonts\vcr_osd_mono.dm"
 // END_INCLUDE
+
+// BANDASTATION
+#include "modular_bandastation\modular_bandastation.dme"

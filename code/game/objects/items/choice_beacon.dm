@@ -64,7 +64,7 @@
 /obj/item/choice_beacon/proc/spawn_option(obj/choice_path, mob/living/user)
 	podspawn(list(
 		"target" = get_turf(src),
-		"style" = /datum/pod_style/advanced,
+		"path" = /obj/structure/closet/supplypod/teleporter, // BANDASTATION EDIT - Original: "style" = /datum/pod_style/advanced,
 		"spawn" = choice_path,
 	))
 

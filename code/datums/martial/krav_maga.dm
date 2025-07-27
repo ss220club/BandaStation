@@ -113,7 +113,7 @@
 	defender.visible_message(
 		span_warning("[attacker] leg sweeps [defender]!"),
 		span_userdanger("Your legs are sweeped by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		null,
 		attacker,
 	)
@@ -129,7 +129,7 @@
 	defender.visible_message(
 		span_warning("[attacker] pounds [defender] on the chest!"),
 		span_userdanger("Your chest is slammed by [attacker]! You can't breathe!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
@@ -148,7 +148,7 @@
 	defender.visible_message(
 		span_warning("[attacker] karate chops [defender]'s neck!"),
 		span_userdanger("Your neck is karate chopped by [attacker], rendering you unable to speak!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
@@ -160,13 +160,13 @@
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/krav_maga/harm_act(mob/living/attacker, mob/living/defender)
-	var/picked_hit_type = pick("punch", "kick")
+	var/picked_hit_type = pick("удар", "пинок")
 	var/bonus_damage = 0
 	if(defender.body_position == LYING_DOWN)
 		bonus_damage += 5
-		picked_hit_type = "stomp"
+		picked_hit_type = "растоптывание"
 
-	if(defender.check_block(attacker, 10 + bonus_damage, "[attacker]'s [picked_hit_type]", UNARMED_ATTACK))
+	if(defender.check_block(attacker, 10 + bonus_damage, "[picked_hit_type] [attacker.declent_ru(GENITIVE)]", UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
@@ -174,20 +174,20 @@
 	log_combat(attacker, defender, "[picked_hit_type]ed")
 	var/obj/item/bodypart/affecting = defender.get_bodypart(defender.get_random_valid_zone(attacker.zone_selected))
 	defender.apply_damage(10 + bonus_damage, attacker.get_attack_type(), affecting)
-	if(picked_hit_type == "kick" || picked_hit_type == "stomp")
+	if(picked_hit_type == "пинок" || picked_hit_type == "топтание")
 		attacker.do_attack_animation(defender, ATTACK_EFFECT_KICK)
 		playsound(defender, 'sound/effects/hit_kick.ogg', 50, TRUE, -1)
 	else
 		attacker.do_attack_animation(defender, ATTACK_EFFECT_PUNCH)
 		playsound(defender, 'sound/effects/hit_punch.ogg', 50, TRUE, -1)
 	defender.visible_message(
-		span_danger("[attacker] [picked_hit_type]s [defender]!"),
-		span_userdanger("You're [picked_hit_type]ed by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] наносит [picked_hit_type] по [defender.declent_ru(GENITIVE)]!"),
+		span_userdanger("Вы получаете [picked_hit_type] от [attacker.declent_ru(GENITIVE)]!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
-	to_chat(attacker, span_danger("You [picked_hit_type] [defender]!"))
+	to_chat(attacker, span_danger("Вы наносите [picked_hit_type] по [defender.declent_ru(DATIVE)]!"))
 	log_combat(attacker, defender, "[picked_hit_type] with [name]")
 	return MARTIAL_ATTACK_SUCCESS
 
@@ -202,7 +202,7 @@
 		defender.visible_message(
 			span_danger("[attacker] disarms [defender]!"),
 			span_userdanger("You're disarmed by [attacker]!"),
-			span_hear("You hear aggressive shuffling!"),
+			span_hear("Вы слышите агрессивное шарканье!"),
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
