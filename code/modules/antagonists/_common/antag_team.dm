@@ -63,7 +63,7 @@ GLOBAL_LIST_EMPTY(antagonist_teams)
 			report += "<B>Цель #[objective_count]</B>: [objective.explanation_text] [objective.get_roundend_success_suffix()]"
 			objective_count++
 		if(win)
-			report += span_greentext("[name] был успешен!")
+			report += span_greentext("[name] выполнил свои задачи!")
 		else
 			report += span_redtext("[name] провалился!")
 
