@@ -1572,6 +1572,7 @@
 /area/station/hallway/secondary/exit/departure_lounge)
 "auf" = (
 /obj/effect/spawner/random/structure/chair_maintenance,
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "aum" = (
@@ -6603,7 +6604,6 @@
 /obj/structure/railing,
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/turf_decal/siding/wideplating_new,
-/obj/machinery/firealarm/directional/north,
 /turf/open/floor/iron,
 /area/station/security/prison/ghetto)
 "bCK" = (
@@ -56022,6 +56022,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/iron,
 /area/station/security/prison/ghetto)
 "nvt" = (
