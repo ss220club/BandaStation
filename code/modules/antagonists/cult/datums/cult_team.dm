@@ -66,7 +66,7 @@
 				to_chat(mind.current, span_cult_large(span_warning("Покров слабеет с ростом культа - ваши глаза начинают светиться...")))
 				mind.current.AddElement(/datum/element/cult_eyes)
 		cult_risen = TRUE
-		log_game("Культ крови возник с [cultplayers] игроками.")
+		log_game("The blood cult has risen with [cultplayers] players.")
 
 	if(ratio >= cult_ascended_threshold && !cult_ascendent) /// BANDASTATION EDIT - Cult thresholds rebalance
 		for(var/datum/mind/mind as anything in members)
