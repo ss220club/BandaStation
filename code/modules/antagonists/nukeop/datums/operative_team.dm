@@ -36,7 +36,7 @@
 			parts += "<B>Оперативники [syndicate_name] уничтожили [station_name()], но не смогли покинуть станцию вовремя и попали под взрыв.</B> В следующий раз - не теряйте диск!"
 		if(NUKE_RESULT_WRONG_STATION)
 			parts += "<span class='redtext big'>Незначительная победа экипажа!</span>"
-			parts += "<B>Оперативники [syndicate_name] оперативники сохранили диск аутентификации, но взорвали то, что не являлось [station_name()].</B> В следующий раз - не делайте так!"
+			parts += "<B>Оперативники [syndicate_name] сохранили диск аутентификации, но взорвали то, что не являлось [station_name()].</B> В следующий раз - не делайте так!"
 		if(NUKE_RESULT_WRONG_STATION_DEAD)
 			parts += "<span class='redtext big'>Оперативники [syndicate_name] получили премию Дарвина!</span>"
 			parts += "<B>Оперативники [syndicate_name] взорвали то, что не являлось [station_name()] и попали под взрыв.</B> В следующий раз - не делайте так!"
