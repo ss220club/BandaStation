@@ -68,8 +68,9 @@
 	var/pupils_name = "pupils"
 	/// do these eyes have pupils (or equivalent) that react to light when penlighted.
 	var/light_reactive = TRUE
-
+	/// variable to hold the eye icon state path for different eye types
 	var/icon_eyes_path = 'icons/mob/human/human_face.dmi' // BANDASTATION EDIT - Feat: Augmentation
+
 /obj/item/organ/eyes/Initialize(mapload)
 	. = ..()
 	if (blink_animation)

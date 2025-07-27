@@ -3,7 +3,6 @@
 	group = "Imports"
 	goody = TRUE
 	crate_type = null
-	discountable = SUPPLY_PACK_STD_DISCOUNTABLE
 	cost = CARGO_CRATE_VALUE * 10
 	crate_name = "контейнер аугментаций"
 	crate_type = /obj/structure/closet/crate/medical
