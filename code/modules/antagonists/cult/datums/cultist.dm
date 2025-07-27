@@ -45,7 +45,7 @@
 	if(!silent)
 		owner.current.visible_message(span_deconversion_message("Старая вера вернулась к [owner.current]!"), ignored_mobs = owner.current)
 		to_chat(owner.current, span_userdanger("Незнакомый белый свет вспыхивает в твоем сознании, очищая от скверны Геометра и всех твоих воспоминаний о том, что ты был её слугой."))
-		owner.current.log_message("отрёкся от культа Нар'Си!", LOG_ATTACK, color=COLOR_CULT_RED)
+		owner.current.log_message("has renounced the cult of Nar'Sie!", LOG_ATTACK, color=COLOR_CULT_RED)
 
 	for(var/datum/action/innate/cult/cult_buttons in owner.current.actions)
 		qdel(cult_buttons)
