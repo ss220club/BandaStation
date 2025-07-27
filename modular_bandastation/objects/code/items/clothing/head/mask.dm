@@ -3,7 +3,7 @@
 	. = ..()
 	icon_state = initial(icon_state)
 
-// // MARK: Misc mask
+// MARK: Misc mask
 /obj/item/clothing/mask/breath/red_gas
 	name = "prs-1"
 	desc = "Стильная дыхательная маска в виде противогаза, не скрывает лицо."
