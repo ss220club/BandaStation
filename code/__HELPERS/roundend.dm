@@ -301,7 +301,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		if(GLOB.station_was_nuked)
 			Reboot("Станция уничтожена ядерным устройством.", "nuke")
 		else
-			Reboot("Раунд закончился.", "proper_completion")
+			Reboot("Раунд окончен.", "proper_completion")
 	else
 		CRASH("Attempted standard reboot without ticker roundend completion")
 
