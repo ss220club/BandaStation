@@ -63,16 +63,29 @@
       flex-direction: column;
       align-items: stretch;
       gap: 4px;
+      width: 160px !important;
+      min-width: 160px !important;
+      max-width: 160px !important;
+      position: relative; /* Чтобы Dropdown мог ориентироваться */
 
       .PreferencesMenu__Augs-Dropdown {
-        width: 160px !important;
-        min-width: 160px !important;
-        max-width: 160px !important;
         text-align: center;
+        flex: 1;
+        width: 100% !important;
+        box-sizing: border-box;
+
+        /* Выровнять выпадающий список под родитель */
+        .Dropdown__Menu {
+          width: 100% !important;
+          left: 0 !important;
+          right: 0 !important;
+          position: absolute;
+          top: 100%; /* Чтобы он появлялся прямо под селектором */
+        }
       }
 
       .PreferencesMenu__Augs-Button {
-        width: 160px;
+        width: 100%;
         text-align: center;
       }
     }
