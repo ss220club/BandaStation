@@ -476,7 +476,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 	for (var/mob/living/silicon/robot/robo in GLOB.silicon_mobs)
 		if (!robo.connected_ai && robo.mind)
-			parts += "[borg_spacer?"<br>":""]<b>[robo.name]</b> (сыграл: <b>[robo.mind.key]</b>) [(robo.stat != DEAD)? "[span_greentext("выжил")] и был юнитом без мастера-ИИ!" : "[span_redtext("Не пережил")] будучи киборгом без ИИ."] Его законами были:"
+			parts += "[borg_spacer?"<br>":""]<b>[robo.name]</b> (сыграл: <b>[robo.mind.key]</b>) [(robo.stat != DEAD)? "[span_greentext("выжил")] и был юнитом без мастера-ИИ!" : "[span_redtext("Не пережил")] смену будучи киборгом без ИИ."] Его законами были:"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				parts += robo.laws.get_law_list(include_zeroth=TRUE)
