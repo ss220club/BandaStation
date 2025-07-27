@@ -132,7 +132,7 @@
 	if(victory == CULT_NARSIE_KILLED) // Epic failure, you summoned your god and then someone killed it.
 		parts += "<span class='redtext big'>Нар'Си был убит! Культ больше не угрожает вселенной!</span>"
 	else if(victory)
-		parts += "<span class='greentext big'>Культ был успешен! Нар'Си погасил ещё один факел в этой пустоте!</span>"
+		parts += "<span class='greentext big'>Культ смог призвать своего бога! Нар'Си погасил ещё один факел в этой пустоте!</span>"
 	else
 		parts += "<span class='redtext big'>Экипаж смог остановить культ! Тёмные речи и ересь не идут ни в какое сравнение с лучшими из Нанотрейзен!</span>"
 
