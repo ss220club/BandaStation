@@ -60,7 +60,7 @@ GLOBAL_LIST_EMPTY(antagonist_teams)
 		for(var/datum/objective/objective as anything in objectives)
 			if(!objective.check_completion())
 				win = FALSE
-			report += "<B>Цель: #[objective_count]</B>: [objective.explanation_text] [objective.get_roundend_success_suffix()]"
+			report += "<B>Цель #[objective_count]</B>: [objective.explanation_text] [objective.get_roundend_success_suffix()]"
 			objective_count++
 		if(win)
 			report += span_greentext("[name] был успешен!")
