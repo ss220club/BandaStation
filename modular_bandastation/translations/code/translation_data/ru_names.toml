@@ -24627,4 +24627,9 @@ gender = "female"
 
 ["Nar'Sie"]
 nominative = "Нар'Си"
+genitive = "Нар'Си"
+dative = "Нар'Си"
+accusative = "Нар'Си"
+instrumental = "Нар'Си"
+prepositional = "Нар'Си"
 gender = "male"
