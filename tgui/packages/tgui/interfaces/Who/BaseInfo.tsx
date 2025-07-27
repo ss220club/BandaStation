@@ -13,7 +13,7 @@ import { NEW_ACCOUNT_AGE, NEW_ACCOUNT_NOTICE, sortTypes } from './constants';
 import { Filters } from './Filters';
 import { getConditionColor, getPingColor, numberToDays } from './helpers';
 import { ShowPing } from './Ping';
-import { WhoData } from './types';
+import type { WhoData } from './types';
 
 export function UserInfo(props) {
   const { act, data } = useBackend<WhoData>();

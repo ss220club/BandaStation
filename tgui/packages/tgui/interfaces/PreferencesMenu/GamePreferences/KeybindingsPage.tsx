@@ -375,6 +375,7 @@ export class KeybindingsPage extends Component<any, KeybindingsPageState> {
 
                     const children = (
                       <Preference
+                        key={keybindingId}
                         id={keybindingId}
                         name={keybinding.name}
                         description={keybinding.description}

@@ -9,7 +9,7 @@ import {
   Tabs,
   TextArea,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 import { decodeHtmlEntities, toTitleCase } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
@@ -166,21 +166,17 @@ const SendERT = (props) => {
       <Section
         fill
         title="Send ERT"
-        buttons={
-          <>
-            {Object.entries(ERTTYPE).map(([typeName, typeColor]) => (
-              <Button
-                key={ERTTYPE[typeName]}
-                width={5}
-                textAlign="center"
-                color={ertType === typeName && typeColor}
-                onClick={() => act('ertType', { ertType: typeName })}
-              >
-                {typeName}
-              </Button>
-            ))}
-          </>
-        }
+        buttons={Object.entries(ERTTYPE).map(([typeName, typeColor]) => (
+          <Button
+            key={ERTTYPE[typeName]}
+            width={5}
+            textAlign="center"
+            color={ertType === typeName && typeColor}
+            onClick={() => act('ertType', { ertType: typeName })}
+          >
+            {typeName}
+          </Button>
+        ))}
       >
         <Stack fill vertical>
           <Stack.Item grow>
@@ -266,7 +262,7 @@ const ReadERTRequests = (props) => {
   return (
     <Stack.Item grow>
       <Section fill>
-        {ertRequestMessages && ertRequestMessages.length ? (
+        {ertRequestMessages?.length ? (
           ertRequestMessages.map((request) => (
             <Section
               key={decodeHtmlEntities(request.time)}

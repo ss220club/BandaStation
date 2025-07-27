@@ -1,4 +1,4 @@
-import { CheckboxInput, FeatureToggle } from '../../base';
+import { CheckboxInput, type FeatureToggle } from '../../base';
 
 export const looc_admin_pref: FeatureToggle = {
   name: 'Слышать LOOC чат',

@@ -1,7 +1,7 @@
 import { sortBy } from 'es-toolkit';
 import { filter, map } from 'es-toolkit/compat';
 import { useState } from 'react';
-import { sendAct, useBackend } from 'tgui/backend';
+import { type sendAct, useBackend } from 'tgui/backend';
 import {
   Box,
   Button,
@@ -23,7 +23,7 @@ import {
   type FeatureChoicedServerData,
   FeatureValueInput,
 } from '../preferences/features/base';
-import { Gender, GENDERS } from '../preferences/gender';
+import { GENDERS, Gender } from '../preferences/gender';
 import {
   createSetPreference,
   type PreferencesMenuData,
@@ -410,11 +410,11 @@ export function MainPage(props: MainPageProps) {
   };
 
   if (randomBodyEnabled) {
-    nonContextualPreferences['random_species'] =
-      data.character_preferences.randomization['species'];
+    nonContextualPreferences.random_species =
+      data.character_preferences.randomization.species;
     // BANDASTATION ADDITION START - TTS
-    nonContextualPreferences['random_tts_seed'] =
-      data.character_preferences.randomization['tts_seed'];
+    nonContextualPreferences.random_tts_seed =
+      data.character_preferences.randomization.tts_seed;
     // BANDASTATION ADDITION END - TTS
   } else {
     // We can't use random_name/is_accessible because the
