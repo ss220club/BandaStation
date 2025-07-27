@@ -184,7 +184,7 @@
 		if(cultist.current.stat == DEAD || !cultist.current.client)
 			continue
 
-		to_chat(cultist.current, span_bold(span_cult_large("[marker] был помечен [blood_target] в [target_area] как главный приоритет культа. Доберитесь туда немедленно!")))
+		to_chat(cultist.current, span_bold(span_cult_large("[marker] отмечает [blood_target] в [target_area] как главный приоритет культа. Доберитесь туда немедленно!")))
 		SEND_SOUND(cultist.current, sound(SFX_HALLUCINATION_OVER_HERE, 0, 1, 75))
 		cultist.current.client.images += blood_target_image
 		if (cultist.current.hud_used)
