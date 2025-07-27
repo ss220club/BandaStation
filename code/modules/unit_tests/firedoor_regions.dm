@@ -16,10 +16,6 @@
 	for(var/obj/machinery/door/firedoor/firedoor as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/door/firedoor))
 		if(!is_station_level(firedoor.z))
 			continue
-		// BANDASTATION ADDITION START - Firedoors Regions (We don't want to check underfloor firedoors)
-		if(!SSmapping.is_main_station_floor(firedoor) && SSmapping.current_map.skip_non_main_floor_firedoors_checks)
-			continue
-		// BANDASTATION ADDITION END - Firedoors Regions
 		any_fail = check_fire_area(firedoor, room_cb, detected_turfs) || any_fail
 
 	if(!any_fail)
