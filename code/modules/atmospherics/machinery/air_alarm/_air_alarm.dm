@@ -101,7 +101,8 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		set_panel_open(TRUE)
 
 	if(name == initial(name))
-		name = "[declent_ru(NOMINATIVE)]"
+		ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(src)])", override_base = "[get_area_name(src)] Air Alarm"))
+		name = "[get_area_name(src)] Air Alarm"
 
 	tlv_collection = list()
 	tlv_collection["pressure"] = new /datum/tlv/pressure
