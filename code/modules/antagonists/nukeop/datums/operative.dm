@@ -34,7 +34,7 @@
 
 /datum/antagonist/nukeop/greet()
 	play_stinger()
-	to_chat(owner, span_big("Вы - [nuke_team ? nuke_team.syndicate_name : "агент"] Синдиката!"))
+	to_chat(owner, span_big("Вы - агент [nuke_team ? nuke_team.syndicate_name : "Синдиката"]!"))
 	owner.announce_objectives()
 
 /datum/antagonist/nukeop/on_gain()
