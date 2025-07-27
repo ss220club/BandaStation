@@ -88,8 +88,6 @@
 			current_brands[key] = prosthesis_mod.selected_manufacturer
 	return current_brands
 
-
-
 /datum/preference_middleware/body_modifications/proc/apply_body_modification(list/params, mob/user)
 	var/key = params["body_modification_key"]
 	if (!key)

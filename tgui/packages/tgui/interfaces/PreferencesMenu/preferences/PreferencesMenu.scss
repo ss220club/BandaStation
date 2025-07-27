@@ -1,93 +1,91 @@
 .PreferencesMenu__Augs {
   position: absolute;
-  left: 35%;
+  left: 35%; /* сдвинули чуть левее */
   top: 50%;
   transform: translateY(-50%);
   width: 500px;
-  background: transparent;
-  overflow: hidden;
-  max-height: none;
-}
-
-.PreferencesMenu__Augs-Section {
-  background-color: rgba(33, 33, 33, 0.95);
+  max-width: 50vw;
+  background: rgba(33, 33, 33, 0.95);
   border-radius: 8px;
-  padding: 0;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
-  max-height: 70vh;
-}
+  overflow: hidden;
 
-.PreferencesMenu__Augs-Header {
-  margin-left: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 0;
-}
-
-.PreferencesMenu__Augs-Title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 0 0 3px rgba(235, 235, 235, 0.5);
-  letter-spacing: 0.05em;
-}
-
-.PreferencesMenu__Augs-Close {
-  color: white;
-  font-size: 1.5rem;
-}
-
-.PreferencesMenu__Augs-Content {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.PreferencesMenu__Augs-TableWrapper {
-  max-height: 70vh;
-  overflow-y: auto;
-}
-
-.PreferencesMenu__Augs-Table {
-  width: 100%;
-  margin: 0;
-  border-collapse: collapse;
-}
-
-.PreferencesMenu__Augs-CategoryRow {
-  background-color: #40668c;
-  cursor: pointer;
-  font-weight: bold;
-
-  &[data-collapsed='true'] {
+  .PreferencesMenu__Augs-Header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .Icon {
+      font-size: 1.4rem;
+      margin-right: 0.5rem;
+    }
   }
-}
 
-.PreferencesMenu__Augs-Row.even {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-.PreferencesMenu__Augs-Row.odd {
-  background-color: rgba(0, 0, 0, 0.1);
-}
+  .PreferencesMenu__Augs-Content {
+    flex: 1;
+    height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px; /* чтобы скролл не наезжал */
+  }
 
-.PreferencesMenu__Augs-Name {
-  vertical-align: middle;
-  padding: 0 12px;
-  font-weight: bold;
-  white-space: nowrap;
-}
+  .PreferencesMenu__Augs-Row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
 
-.PreferencesMenu__Augs-Actions {
-  text-align: center;
-  padding: 4px 12px;
-  white-space: nowrap;
+    &.even {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    &.odd {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
 
-  .PreferencesMenu__Augs-Dropdown,
-  .PreferencesMenu__Augs-Button {
-    min-width: 140px;
-    margin: 2px 0;
+    .PreferencesMenu__Augs-Name {
+      flex: 1;
+      padding-right: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #fff;
+      line-height: 1.5rem;
+    }
+
+    .PreferencesMenu__Augs-Actions {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+
+      .PreferencesMenu__Augs-Dropdown {
+        width: 160px !important;
+        min-width: 160px !important;
+        max-width: 160px !important;
+        text-align: center;
+      }
+
+      .PreferencesMenu__Augs-Button {
+        width: 160px;
+        text-align: center;
+      }
+    }
+  }
+
+  .PreferencesMenu__Augs-CategoryRow {
+    background-color: #40668c;
+    cursor: pointer;
+
+    td {
+      padding: 4px 12px;
+      font-weight: bold;
+      color: #fff;
+    }
   }
 }

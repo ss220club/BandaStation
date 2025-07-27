@@ -164,7 +164,6 @@ const BodyModificationRow = (props: {
 }) => {
   const { act, data } = useBackend<PreferencesMenuData>();
   const isUsed = props.usedKeys?.includes(props.bodyModification.key) || false;
-
   const manufacturers =
     data.manufacturers?.[props.bodyModification.key] || null;
   const selectedBrand =

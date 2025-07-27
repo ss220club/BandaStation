@@ -429,7 +429,7 @@ export function MainPage(props: MainPageProps) {
           <CharacterControls
             gender={data.character_preferences.misc.gender}
             handleOpenSpecies={props.openSpecies}
-            handleOpenAugmentations={() => setAugmentationInputOpen(true)} // <--- тут
+            handleOpenAugmentations={() => setAugmentationInputOpen(true)} // BANDASTATION ADDITION - Feat: Augmentations
             handleRotate={() => {
               act('rotate');
             }}

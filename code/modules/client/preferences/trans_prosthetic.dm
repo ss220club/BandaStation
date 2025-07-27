@@ -1,3 +1,4 @@
+/*
 /datum/preference/choiced/trans_prosthetic
 	category = PREFERENCE_CATEGORY_MANUALLY_RENDERED
 	savefile_key = "trans_prosthetic"
@@ -18,3 +19,4 @@
 
 /datum/preference/choiced/trans_prosthetic/apply_to_human(mob/living/carbon/human/target, value)
 	return
+*/

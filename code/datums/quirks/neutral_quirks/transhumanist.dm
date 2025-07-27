@@ -1,3 +1,5 @@
+
+/*
 #define MOOD_CATEGORY_TRANSHUMANIST_PEOPLE "transhumanist_people"
 #define MOOD_CATEGORY_TRANSHUMANIST_BODYPART "transhumanist_bodypart"
 // The number of silicons minus the number of organics determines the level
@@ -11,7 +13,6 @@
 #define BODYPART_SCORE_SILICON 2
 #define BODYPART_SCORE_OTHER_BODYTYPES 3
 #define BODYPART_SCORE_OVERALL 4
-
 
 /datum/quirk/transhumanist
 	name = "Transhumanist"
@@ -222,3 +223,4 @@
 #undef BODYPART_SCORE_SILICON
 #undef BODYPART_SCORE_OTHER_BODYTYPES
 #undef BODYPART_SCORE_OVERALL
+*/
