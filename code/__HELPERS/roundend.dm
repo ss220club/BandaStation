@@ -343,7 +343,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += "[FOURSPACES]ID раунда: <b>[info]</b>"
 	parts += "[FOURSPACES]Карта: [SSmapping.current_map?.return_map_name()]"
 	parts += "[FOURSPACES]Длительность смены: <B>[DisplayTimeText(world.time - SSticker.round_start_time)]</B>"
-	parts += "[FOURSPACES]Целостность станции: <B>[GLOB.station_was_nuked ? span_redtext("уничтожена") : "[popcount["station_integrity"]]%"]</B>"
+	parts += "[FOURSPACES]Целостность станции: <B>[GLOB.station_was_nuked ? span_redtext("Уничтожена") : "[popcount["station_integrity"]]%"]</B>"
 	var/total_players = GLOB.joined_player_list.len
 	if(total_players)
 		parts+= "[FOURSPACES]Общая численность экипажа: <B>[total_players]</B>"
