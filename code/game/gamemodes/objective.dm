@@ -100,7 +100,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/proc/get_roundend_success_suffix()
 	if(no_failure)
 		return "" // Just print the objective with no success/fail evaluation, as it has no mechanical backing
-	return check_completion() ? span_greentext("Успех!") : span_redtext("Провал.")
+	return check_completion() ? span_greentext("Успех!") : span_redtext("Неудача.")
 
 /datum/objective/proc/is_unique_objective(possible_target, dupe_search_range)
 	if(!islist(dupe_search_range))
