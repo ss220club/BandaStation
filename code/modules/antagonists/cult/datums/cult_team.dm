@@ -87,7 +87,7 @@
 			has_important_message = TRUE,
 		)
 		/// BANDASTATION ADDITION END - Cult rebalance
-		log_game("Культ крови возвысился с [cultplayers] игроками.")
+		log_game("The blood cult has ascended with [cultplayers] players.")
 #endif
 
 /datum/team/cult/add_member(datum/mind/new_member)
