@@ -101,7 +101,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		set_panel_open(TRUE)
 
 	if(name == initial(name))
-		name = "[declent_ru(NOMINATIVE)] [my_area.declent_ru(GENITIVE)]"
+		name = "[declent_ru(NOMINATIVE)]"
 
 	tlv_collection = list()
 	tlv_collection["pressure"] = new /datum/tlv/pressure
