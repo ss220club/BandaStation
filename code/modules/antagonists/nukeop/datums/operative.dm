@@ -170,7 +170,7 @@
 /datum/antagonist/nukeop/proc/memorize_code()
 	antag_memory += "<B>[nuke_team.tracked_nuke] Code</B>: [nuke_team.memorized_code]<br>"
 	owner.add_memory(/datum/memory/key/nuke_code, nuclear_code = nuke_team.memorized_code)
-	to_chat(owner, "Код ядерной авторизации: <B>[nuke_team.memorized_code]</B>")
+	to_chat(owner, "Код ядерной аутентификации: <B>[nuke_team.memorized_code]</B>")
 
 /// Actually moves our nukie to where they should be
 /datum/antagonist/nukeop/proc/move_to_spawnpoint()
