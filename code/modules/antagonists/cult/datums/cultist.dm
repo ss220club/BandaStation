@@ -142,7 +142,7 @@
 	. += cult_give_item(/obj/item/melee/cultblade/dagger, H)
 	if(metal)
 		. += cult_give_item(/obj/item/stack/sheet/runed_metal/ten, H)
-	to_chat(owner, "Это поможет вам начать культ на станции. Используй их с пользой, и запомни - вы не одни.</span>")
+	to_chat(owner, span_notice("Это поможет вам организовать культ на станции. Используйте их с пользой, и запомните - вы не одни."))
 
 ///Attempts to make a new item and put it in a potential inventory slot in the provided mob.
 /datum/antagonist/cult/proc/cult_give_item(obj/item/item_path, mob/living/carbon/human/mob)
