@@ -423,7 +423,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			if(EMERGENCY_ESCAPED_OR_ENDGAMED)
 				if(!M.onCentCom() && !M.onSyndieBase())
 					parts += "<div class='panel stationborder'>"
-					parts += "<span class='marooned'>Вам удалось выжить, но были брошены на [station_name()]...</span>"
+					parts += "<span class='marooned'>Вам удалось выжить, но вы были брошены на [station_name()]...</span>"
 				else
 					parts += "<div class='panel greenborder'>"
 					parts += span_greentext("Вам удалось пережить события на [station_name()] как [M.real_name].")
