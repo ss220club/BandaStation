@@ -27,7 +27,7 @@
 	switch(get_result())
 		if(NUKE_RESULT_FLUKE)
 			parts += "<span class='redtext big'>Унизительное поражение Синдиката!</span>"
-			parts += "<B>Экипаж станции [station_name()] вернули бомбу [syndicate_name] обратно на их базу! База Синдиката была уничтожена!</B> В следующий раз - не потеряйте ядерную бомбу!"
+			parts += "<B>Экипаж станции [station_name()] вернули оперативникам [syndicate_name] бомбу обратно на их базу! База Синдиката была уничтожена!</B> В следующий раз - не теряйте ядерную бомбу!"
 		if(NUKE_RESULT_NUKE_WIN)
 			parts += "<span class='greentext big'>Разгромная победа Синдиката!</span>"
 			parts += "<B>Оперативники [syndicate_name] уничтожили [station_name()]!</B>"
