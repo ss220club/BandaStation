@@ -152,7 +152,7 @@
 			break
 	if (code)
 		antag_memory += "<B>Коды от ядерной боеголовки Синдиката</B>: [code]<br>"
-		to_chat(owner.current, "Код ядерной авторизации: <B>[code]</B>")
+		to_chat(owner.current, "Код ядерной аутентификации: <B>[code]</B>")
 	else
 		to_chat(admin, span_danger("No valid nuke found!"))
 
