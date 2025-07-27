@@ -1,7 +1,7 @@
-import { KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 import { Box, Button, Stack } from 'tgui-core/components';
 
-import { PaperReplacement } from './types';
+import type { PaperReplacement } from './types';
 
 type ReplacementHintProps = {
   paperReplacementHint: PaperReplacement[];

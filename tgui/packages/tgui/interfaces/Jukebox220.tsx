@@ -1,5 +1,5 @@
 import { sortBy } from 'es-toolkit';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -13,7 +13,7 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -71,7 +71,7 @@ export const Jukebox220 = () => {
     const seconds = Math.floor(deciseconds / 10);
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    const formattedTime = `${minutes}:${remainingSeconds > 9 ? remainingSeconds : '0' + remainingSeconds}`;
+    const formattedTime = `${minutes}:${remainingSeconds > 9 ? remainingSeconds : `0${remainingSeconds}`}`;
     return formattedTime;
   };
 

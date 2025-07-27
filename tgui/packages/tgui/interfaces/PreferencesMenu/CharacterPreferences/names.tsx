@@ -9,7 +9,7 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../../../backend';
 import { LoadingScreen } from '../../common/LoadingScreen';
@@ -30,7 +30,7 @@ export function NameInput(props: NameInputProps) {
     null,
   );
 
-  let editing = lastNameBeforeEdit === name;
+  const editing = lastNameBeforeEdit === name;
   function updateName(value) {
     setLastNameBeforeEdit(null);
     act('set_preference', {
