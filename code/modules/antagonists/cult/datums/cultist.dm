@@ -153,7 +153,7 @@
 		to_chat(mob, span_userdanger("К сожалению, вы не смогли получить [item]. Это очень плохо и вам стоит написать админхелп (нажмите F1)."))
 		return FALSE
 
-	to_chat(mob, span_danger("У вас есть [item] в вашем [where]."))
+	to_chat(mob, span_danger("[item] был помещен в ваш [where]."))
 	if(where == "backpack")
 		mob.back.atom_storage?.show_contents(mob)
 	return TRUE
