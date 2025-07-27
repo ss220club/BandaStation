@@ -57,7 +57,7 @@
 			parts += "<B>Экипаж не смог сохранить диск, но смогли уничтожить большую часть оперативников [syndicate_name]!</B>"
 		if(NUKE_RESULT_DISK_STOLEN)
 			parts += "<span class='greentext big'>Незначительная победа Синдиката!</span>"
-			parts += "<B>Оперативники [syndicate_name] пережили нападение, но не смогли уничтожить [station_name()].</B> В следующий раз - не теряйте диск!"
+			parts += "<B>Оперативники [syndicate_name] пережили задание, но не смогли уничтожить [station_name()].</B> В следующий раз - не теряйте диск!"
 		else
 			parts += "<span class='neutraltext big'>Победа</span>"
 			parts += "<B>Миссия прервана!</B>"
