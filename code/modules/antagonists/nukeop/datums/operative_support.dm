@@ -7,7 +7,7 @@
 /datum/antagonist/nukeop/support/greet()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/machines/printer.ogg', 100, 0, use_reverb = FALSE)
 	to_chat(owner, span_big("Вы - [name]! Вы были временно назначены для обеспечения разведданными с камер наблюдения и управления коммуникациями для оперативной группы!"))
-	to_chat(owner, span_red("Используйте свои инструменты, чтобы настроить свое оборудование так, как вам нравится, но не пытайтесь покинуть свой аванпост."))
+	to_chat(owner, span_red("Используйте свои инструменты, чтобы настроить свое оборудование так, как вам нравится, но не пытайтесь покинуть свою рабочую зону."))
 	owner.announce_objectives()
 
 /datum/antagonist/nukeop/support/on_gain()
