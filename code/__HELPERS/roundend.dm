@@ -299,7 +299,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/standard_reboot()
 	if(ready_for_reboot)
 		if(GLOB.station_was_nuked)
-			Reboot("Станция уничтожена ядерной боеголовкой.", "nuke")
+			Reboot("Станция уничтожена ядерным устройством.", "nuke")
 		else
 			Reboot("Раунд закончился.", "proper_completion")
 	else
