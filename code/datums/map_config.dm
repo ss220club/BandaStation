@@ -59,10 +59,12 @@
 	/// Boolean that tells SSmapping to load all away missions in the codebase.
 	var/load_all_away_missions = FALSE
 
-	// BANDASTATION ADDITION START - Underfloor Blobs
-	/// Main floor of the map. Null as default, if not specified in json
+	// BANDASTATION ADDITION START - Underfloor Blobs & Firedoor Regions
+	/// Main floor of the map. Null as default, if not specified in json.
 	var/main_floor = null
-	// BANDASTATION ADDITION END - Underfloor Blobs
+	/// Boolean that tells firedoor_regions unit test to check firedoors sanity on the non main floors.
+	var/skip_non_main_floor_firedoors_checks = FALSE
+	// BANDASTATION ADDITION END - Underfloor Blobs & Firedoor Regions
 
 	// BANDASTATION ADDITION START - Station Fluff
 	/// This name will override all other station names, like holiday or randomly generated.
@@ -217,10 +219,13 @@
 	if ("give_players_hooks" in json)
 		give_players_hooks = json["give_players_hooks"]
 
-	// BANDASTATION ADDITION START - Underfloor Blobs
+	// BANDASTATION ADDITION START - Underfloor Blobs & Firedoor Regions
 	if ("main_floor" in json)
 		main_floor = json["main_floor"]
-	// BANDASTATION ADDITION END - Underfloor Blobs
+
+	if ("skip_non_main_floor_firedoors_checks" in json)
+		skip_non_main_floor_firedoors_checks = json["skip_non_main_floor_firedoors_checks"]
+	// BANDASTATION ADDITION END - Underfloor Blobs & Firedoor Regions
 
 	// BANDASTATION ADDITION START - Station Fluff
 	if ("fluff_name" in json)
