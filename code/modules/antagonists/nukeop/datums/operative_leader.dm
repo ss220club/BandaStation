@@ -15,7 +15,7 @@
 	owner.current.put_in_hands(nuke_code_paper)
 
 /datum/antagonist/nukeop/leader/give_alias()
-	title ||= pick("Царь", "Босс", "Командир", "Глава", "Главарь", "Директор", "Повелитель")
+	title ||= pick("Царь", "Босс", "Командир", "Шеф", "Главарь", "Директор", "Повелитель")
 	. = ..()
 	if(ishuman(owner.current))
 		owner.current.fully_replace_character_name(owner.current.real_name, "[title] [owner.current.real_name]")
