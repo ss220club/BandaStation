@@ -36,7 +36,7 @@
 		var/datum/action/innate/cult/blood_magic/magic = new(owner)
 		magic.Grant(current)
 
-	current.log_message("был обращён в культ Нар'Си!", LOG_ATTACK, color=COLOR_CULT_RED)
+	current.log_message("has been converted to the cult of Nar'Sie!", LOG_ATTACK, color=COLOR_CULT_RED)
 
 /datum/antagonist/cult/on_removal()
 	if (!owner.current)
