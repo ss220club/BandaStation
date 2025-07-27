@@ -531,20 +531,20 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		if(0)
 			parts += "[span_redtext("Обслуживание не заработало кредитов...")]<br>"
 		if(1 to 2000)
-			parts += "[span_redtext("Центком недоволен. Обслуживание, вы сможете лучше, чем в эту смену.")]<br>"
+			parts += "[span_redtext("Центральное командование недовольно. Отдел обслуживания, вы однозначно можете работать лучше, чем в эту смену.")]<br>"
 			award_service(/datum/award/achievement/jobs/service_bad)
 		if(2001 to 4999)
-			parts += "[span_greentext("Центком доволен работой обслуживания за эту смену.")]<br>"
+			parts += "[span_greentext("Центральное командование довольно проделаной работой отделом обслуживания за эту смену.")]<br>"
 			award_service(/datum/award/achievement/jobs/service_okay)
 		else
-			parts += "<span class='reallybig greentext'>Центком впечатлён сегодняшним отделом обслуживания! Вот это команда!</span><br>"
+			parts += "<span class='reallybig greentext'>Центральное командование впечатлено проделанной работой отделом обслуживания! Вот это команда!</span><br>"
 			award_service(/datum/award/achievement/jobs/service_good)
 
 	parts += "<b>Общая статистика:</b><br>"
 	parts += "В эту смену экипаж собрал [station_vault] кредитов.<br>"
 	if(total_players > 0)
 		parts += "В среднем было собрано [station_vault/total_players] кредитов.<br>"
-		log_econ("Общее количество кредитов в конце раунда: [station_vault] кредитов. Кредиты в среднем: [station_vault/total_players]")
+		log_econ("Roundend credit total: [station_vault] credits. Average Credits: [station_vault/total_players]")
 	if(mr_moneybags)
 		parts += "Самым богатым членом экипажа в конце смены был <b>[mr_moneybags.account_holder] с [mr_moneybags.account_balance]</b> кредитов!</div>"
 	else
@@ -570,7 +570,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/medal_report()
 	if(GLOB.commendations.len)
 		var/list/parts = list()
-		parts += span_header("Заслужили медали:")
+		parts += span_header("Награждение медалями:")
 		for (var/com in GLOB.commendations)
 			parts += com
 		return "<div class='panel stationborder'>[parts.Join("<br>")]</div>"
@@ -591,7 +591,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		hardcores += human_player
 	if(!length(hardcores))
 		return
-	. += "<div class='panel stationborder'><span class='header'>Следующие люди стали случайными хардкорными персонажами:</span>"
+	. += "<div class='panel stationborder'><span class='header'>Следующие игроки стали случайными хардкорными персонажами:</span>"
 	. += "<ul class='playerlist'>"
 	for(var/mob/living/carbon/human/human_player in hardcores)
 		. += "<li>[printplayer(human_player.mind)] с хардкорным случайным счетом в [round(human_player.hardcore_survival_score)]</li>"
@@ -725,11 +725,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/cheevo_report()
 	var/list/parts = list()
 	if(length(GLOB.achievements_unlocked))
-		parts += "<span class='header'>Достижения получены!</span><BR>"
+		parts += "<span class='header'>Получены достижения!</span><BR>"
 		parts += "<span class='infoplain'>Общее количество заработанных достижений: <B>[length(GLOB.achievements_unlocked)]!</B></span><BR>"
 		parts += "<ul class='playerlist'>"
 		for(var/datum/achievement_report/cheevo_report in GLOB.achievements_unlocked)
-			parts += "<BR>[cheevo_report.winner_key] был <b>[cheevo_report.winner]</b>, кто заработал [span_greentext("'[cheevo_report.cheevo]'")] достижение в [cheevo_report.award_location]!<BR>"
+			parts += "<BR>[cheevo_report.winner_key] был <b>[cheevo_report.winner]</b> и заработал достижение [span_greentext("'[cheevo_report.cheevo]'")] в [cheevo_report.award_location]!<BR>"
 		parts += "</ul>"
 		return "<div class='panel greenborder'><ul>[parts.Join()]</ul></div>"
 
