@@ -182,8 +182,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 /obj/machinery/airalarm/update_name(updates)
 	. = ..()
-	ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(my_area)])", override_base = "[get_area_name(my_area)] Air Alarm"))
-	name = "[get_area_name(my_area)] Air Alarm"
+	name = "[declent_ru(NOMINATIVE)]"
 
 /obj/machinery/airalarm/on_exit_area(datum/source, area/area_to_unregister)
 	//we cannot unregister from an area we never registered to in the first place
