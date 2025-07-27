@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Stack } from 'tgui-core/components';
 
 type PreferenceProps = {

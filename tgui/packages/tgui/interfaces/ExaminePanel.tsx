@@ -1,5 +1,5 @@
 import { Section, Stack } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -32,7 +32,7 @@ export const ExaminePanel = (props) => {
                 <Section
                   scrollable
                   fill
-                  title={character_name + ', описание:'}
+                  title={`${character_name}, описание:`}
                   preserveWhitespace
                 >
                   {flavor_text}

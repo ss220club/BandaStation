@@ -1,7 +1,7 @@
 import { useBackend } from 'tgui/backend';
 import { Dropdown, Tooltip } from 'tgui-core/components';
 
-import { PreferencesMenuData } from '../types';
+import type { PreferencesMenuData } from '../types';
 
 const SLOT_ICONS = {
   '-1': 'fa-random',
