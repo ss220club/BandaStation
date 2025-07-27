@@ -264,9 +264,10 @@
 
 	if(isnull(eye_icon_state))
 		return list()
-
-	var/mutable_appearance/eye_left = mutable_appearance(icon_eyes_path, "[eye_icon_state]_l", -BODY_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
-	var/mutable_appearance/eye_right = mutable_appearance(icon_eyes_path, "[eye_icon_state]_r", -BODY_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
+	// BANDASTATION EDIT START - Feat: Augmentation
+	var/mutable_appearance/eye_left = mutable_appearance(icon_eyes_path, "[eye_icon_state]_l", -EYES_LAYER, parent)
+	var/mutable_appearance/eye_right = mutable_appearance(icon_eyes_path, "[eye_icon_state]_r", -EYES_LAYER, parent)
+	// BANDASTATION EDIT END - Feat: Augmentation
 	var/list/overlays = list(eye_left, eye_right)
 
 	var/obscured = parent.check_obscured_slots()
@@ -287,12 +288,12 @@
 			overlays += eyelids
 
 	if (scarring & RIGHT_EYE_SCAR)
-		var/mutable_appearance/right_scar = mutable_appearance(icon_eyes_path, "eye_scar_right", -BODY_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
+		var/mutable_appearance/right_scar = mutable_appearance(icon_eyes_path, "eye_scar_right", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
 		right_scar.color = my_head.draw_color
 		overlays += right_scar
 
 	if (scarring & LEFT_EYE_SCAR)
-		var/mutable_appearance/left_scar = mutable_appearance(icon_eyes_path, "eye_scar_left", -BODY_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
+		var/mutable_appearance/left_scar = mutable_appearance(icon_eyes_path, "eye_scar_left", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
 		left_scar.color = my_head.draw_color
 		overlays += left_scar
 
