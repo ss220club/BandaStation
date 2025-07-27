@@ -25,7 +25,7 @@
 			emp_proof = FALSE, \
 		)
 		our_teammate.playsound_local(get_turf(owner.current), 'sound/items/weapons/egloves.ogg', 100, 0)
-		to_chat(our_teammate, span_notice("К команде присоединился агент разведки наблюдения. Улыбнитесь камере!"))
+		to_chat(our_teammate, span_notice("К команде присоединился агент разведки. Улыбнитесь камере!"))
 
 	RegisterSignal(nuke_team, COMSIG_NUKE_TEAM_ADDITION, PROC_REF(late_bodycam))
 
