@@ -221,11 +221,66 @@
 
 // Multi-tile airlocks
 /obj/machinery/door/airlock/multi_tile
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/glass_large.dmi'
-	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/overlays.dmi'
-	note_overlay_file = 'modular_bandastation/aesthetics/airlocks/icons/glass_large/overlays.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/large.dmi'
+	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	note_overlay_file = 'modular_bandastation/aesthetics/airlocks/icons/large/overlays.dmi'
+	opacity = TRUE
+	glass = FALSE
+
+/obj/machinery/door/airlock/multi_tile/public
+	opacity = TRUE
+	glass = FALSE
 
 /obj/machinery/door/airlock/multi_tile/public/glass
+	opacity = FALSE
+	glass = TRUE
+
+/obj/machinery/door/airlock/multi_tile/command
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/command_large.dmi'
+
+/obj/machinery/door/airlock/multi_tile/command/glass
+	opacity = FALSE
+	glass = TRUE
+
+/obj/machinery/door/airlock/multi_tile/security
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/security_large.dmi'
+
+/obj/machinery/door/airlock/multi_tile/security/glass
+	opacity = FALSE
+	glass = TRUE
+
+/obj/machinery/door/airlock/multi_tile/atmospheric
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/atmospheric_large.dmi'
+
+/obj/machinery/door/airlock/multi_tile/atmospheric/glass
+	opacity = FALSE
+	glass = TRUE
+
+/obj/machinery/door/airlock/multi_tile/engineering
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/engineering_large.dmi'
+
+/obj/machinery/door/airlock/multi_tile/engineering/glass
+	opacity = FALSE
+	glass = TRUE
+
+/obj/machinery/door/airlock/multi_tile/supply
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/supply_large.dmi'
+
+/obj/machinery/door/airlock/multi_tile/supply/glass
+	opacity = FALSE
+	glass = TRUE
+
+/obj/machinery/door/airlock/multi_tile/medical
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/medical_large.dmi'
+
+/obj/machinery/door/airlock/multi_tile/medical/glass
+	opacity = FALSE
+	glass = TRUE
+
+/obj/machinery/door/airlock/multi_tile/research
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/large/research_large.dmi'
+
+/obj/machinery/door/airlock/multi_tile/research/glass
 	opacity = FALSE
 	glass = TRUE
 

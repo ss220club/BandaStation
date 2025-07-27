@@ -1,6 +1,6 @@
 import { filter } from 'es-toolkit/compat';
 import { useState } from 'react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import {
   Box,

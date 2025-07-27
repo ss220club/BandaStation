@@ -106,51 +106,49 @@ export const MafiaPanelData = (props) => {
           {phase !== 'No Game' && (
             <Stack.Item>
               <Stack fill>
-                <>
-                  <Stack.Item grow>
-                    <MafiaPlayers />
-                  </Stack.Item>
-                  <Stack.Item grow>
-                    <Stack.Item>
-                      <Tabs fluid>
-                        <Tabs.Tab
-                          align="center"
-                          selected={mafia_tab === 'Role list'}
-                          onClick={() => setMafiaMode('Role list')}
-                        >
-                          Role list
-                          <Button
-                            color="transparent"
-                            icon="address-book"
-                            tooltipPosition="bottom-start"
-                            tooltip={`
+                <Stack.Item grow>
+                  <MafiaPlayers />
+                </Stack.Item>
+                <Stack.Item grow>
+                  <Stack.Item>
+                    <Tabs fluid>
+                      <Tabs.Tab
+                        align="center"
+                        selected={mafia_tab === 'Role list'}
+                        onClick={() => setMafiaMode('Role list')}
+                      >
+                        Role list
+                        <Button
+                          color="transparent"
+                          icon="address-book"
+                          tooltipPosition="bottom-start"
+                          tooltip={`
                             Это список ролей в игре.
                             Вы можетенажать на знак вопроса,
                             чтобы получить краткую информациюо самой роли.`}
-                          />
-                        </Tabs.Tab>
-                        <Tabs.Tab
-                          align="center"
-                          selected={mafia_tab === 'Notes'}
-                          onClick={() => setMafiaMode('Notes')}
-                        >
-                          Notes
-                          <Button
-                            color="transparent"
-                            icon="pencil"
-                            tooltipPosition="bottom-start"
-                            tooltip={`
+                        />
+                      </Tabs.Tab>
+                      <Tabs.Tab
+                        align="center"
+                        selected={mafia_tab === 'Notes'}
+                        onClick={() => setMafiaMode('Notes')}
+                      >
+                        Notes
+                        <Button
+                          color="transparent"
+                          icon="pencil"
+                          tooltipPosition="bottom-start"
+                          tooltip={`
                             Это ваши заметки, все, что вы хотите написать
                             можно сохранить для дальнейшего использования. Вы можете
                             также отправить их в чат с помощью кнопки.`}
-                          />
-                        </Tabs.Tab>
-                      </Tabs>
-                    </Stack.Item>
-                    {mafia_tab === 'Role list' && <MafiaListOfRoles />}
-                    {mafia_tab === 'Notes' && <MafiaNotesTab />}
+                        />
+                      </Tabs.Tab>
+                    </Tabs>
                   </Stack.Item>
-                </>
+                  {mafia_tab === 'Role list' && <MafiaListOfRoles />}
+                  {mafia_tab === 'Notes' && <MafiaNotesTab />}
+                </Stack.Item>
               </Stack>
             </Stack.Item>
           )}
@@ -438,7 +436,7 @@ const MafiaPlayers = (props) => {
               >
                 {player.name}
                 {(!!player.is_you && ' (YOU)') ||
-                  (!!player.role_revealed && ' - ' + player.role_revealed)}
+                  (!!player.role_revealed && ` - ${player.role_revealed}`)}
               </Stack.Item>
               <Stack.Item>
                 {player.votes !== undefined &&

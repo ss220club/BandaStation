@@ -15,7 +15,7 @@ import { classes } from 'tgui-core/react';
 
 import { LoadingScreen } from '../../common/LoadingScreen';
 import { SearchBar } from '../../common/SearchBar';
-import { PreferencesMenuData, Seed, TtsData } from '../types';
+import type { PreferencesMenuData, Seed, TtsData } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
 
 const donatorTiers = {
@@ -111,29 +111,29 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
   const [searchtext, setSearchtext] = useState('');
   const [selectedSeed, setSelectedSeed] = useState<Seed>();
 
-  let providerCheckboxes = getCheckboxGroup(
+  const providerCheckboxes = getCheckboxGroup(
     providers,
     selectedProviders,
     setSelectedProviders,
     'name',
   );
-  let genderesCheckboxes = getCheckboxGroup(
+  const genderesCheckboxes = getCheckboxGroup(
     genders,
     selectedGenders,
     setSelectedGenders,
   );
-  let categoriesCheckboxes = getCheckboxGroup(
+  const categoriesCheckboxes = getCheckboxGroup(
     categories,
     selectedCategories,
     setSelectedCategories,
   );
-  let donatorLevelsCheckboxes = getCheckboxGroup(
+  const donatorLevelsCheckboxes = getCheckboxGroup(
     donatorLevels,
     selectedDonatorLevels,
     setSelectedDonatorLevels,
   );
 
-  let phrasesSelect = (
+  const phrasesSelect = (
     <Dropdown
       options={phrases}
       selected={selectedPhrase.replace(/(.{60})..+/, '$1...')}
@@ -141,7 +141,7 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
     />
   );
 
-  let searchBar = (
+  const searchBar = (
     <SearchBar
       placeholder="Название..."
       query={searchtext}

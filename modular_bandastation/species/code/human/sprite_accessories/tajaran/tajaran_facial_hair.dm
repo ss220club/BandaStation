@@ -32,8 +32,8 @@
 
 /// MARK: Bodypart overlay
 /datum/bodypart_overlay/simple/body_marking/tajaran_facial_hair
-	dna_feature_key = "tajaran_facial_hair"
-	dna_color_feature_key = "tajaran_facial_hair_color"
+	dna_feature_key = FEATURE_TAJARAN_FACIAL_HAIR
+	dna_color_feature_key = FEATURE_TAJARAN_FACIAL_HAIR_COLOR
 	applies_to = list(
 		/obj/item/bodypart/head,
 	)

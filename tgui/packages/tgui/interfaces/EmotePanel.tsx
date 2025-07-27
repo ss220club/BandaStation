@@ -187,7 +187,7 @@ export const EmotePanelContent = (props) => {
                     {showNames
                       ? capitalizeFirst(
                           (emote.name.length > 12
-                            ? emote.name.slice(0, 10) + '...'
+                            ? `${emote.name.slice(0, 10)}...`
                             : emote.name
                           ).toLowerCase(),
                         )

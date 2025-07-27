@@ -10,13 +10,13 @@ export function HealthStat(props) {
     <Stack fill textAlign="center">
       {oxydam !== undefined ? (
         <>
-          <Stack.Item color={COLORS.damageType['oxy']}>{oxydam}</Stack.Item>
+          <Stack.Item color={COLORS.damageType.oxy}>{oxydam}</Stack.Item>
           <Stack.Divider />
-          <Stack.Item color={COLORS.damageType['toxin']}>{toxdam}</Stack.Item>
+          <Stack.Item color={COLORS.damageType.toxin}>{toxdam}</Stack.Item>
           <Stack.Divider />
-          <Stack.Item color={COLORS.damageType['burn']}>{burndam}</Stack.Item>
+          <Stack.Item color={COLORS.damageType.burn}>{burndam}</Stack.Item>
           <Stack.Divider />
-          <Stack.Item color={COLORS.damageType['brute']}>{brutedam}</Stack.Item>
+          <Stack.Item color={COLORS.damageType.brute}>{brutedam}</Stack.Item>
         </>
       ) : life_status !== STAT_DEAD ? (
         <Stack.Item grow>Живой</Stack.Item>

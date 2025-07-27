@@ -9,4 +9,4 @@
 	return COLOR_WHITE
 
 /datum/preference/color/vulpkanin_body_markings_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["vulpkanin_body_markings_color"] = value
+	target.dna.features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = value
