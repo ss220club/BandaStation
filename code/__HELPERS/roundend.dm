@@ -534,7 +534,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			parts += "[span_redtext("Центральное командование недовольно. Отдел обслуживания, вы однозначно можете работать лучше, чем в эту смену.")]<br>"
 			award_service(/datum/award/achievement/jobs/service_bad)
 		if(2001 to 4999)
-			parts += "[span_greentext("Центральное командование довольно проделаной работой отделом обслуживания за эту смену.")]<br>"
+			parts += "[span_greentext("Центральное командование довольно работой отдела обслуживания за эту смену.")]<br>"
 			award_service(/datum/award/achievement/jobs/service_okay)
 		else
 			parts += "<span class='reallybig greentext'>Центральное командование впечатлено проделанной работой отделом обслуживания! Вот это команда!</span><br>"
