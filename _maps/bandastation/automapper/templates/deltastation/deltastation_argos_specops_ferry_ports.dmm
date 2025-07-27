@@ -495,6 +495,14 @@
 /obj/structure/marker_beacon/olive,
 /turf/open/space/basic,
 /area/space/nearstation)
+"EK" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/firealarm/directional/east,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/entry)
 "EM" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -591,8 +599,11 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "NX" = (
-/obj/structure/sign/nanotrasen,
-/turf/closed/wall,
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/firealarm/directional/south,
+/turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "OD" = (
 /obj/effect/turf_decal/stripes/line,
@@ -870,7 +881,7 @@ gP
 gP
 gP
 gP
-ht
+EK
 oH
 om
 ht
@@ -1075,8 +1086,8 @@ rJ
 AO
 Ff
 wR
-gW
 NX
+lK
 FP
 xm
 Ec
