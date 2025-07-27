@@ -1,5 +1,5 @@
 import { Box, Button, Icon, Section, Stack, Table } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend, useSharedState } from '../backend';
 import { NtosWindow } from '../layouts';

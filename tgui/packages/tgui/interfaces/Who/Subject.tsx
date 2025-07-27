@@ -14,7 +14,7 @@ import { toTitleCase } from 'tgui-core/string';
 import { useBackend } from '../../backend';
 import { getConditionColor, numberToDays } from './helpers';
 import { ShowPing } from './Ping';
-import { WhoData } from './types';
+import type { WhoData } from './types';
 
 export function Subject(props) {
   const { act, data } = useBackend<WhoData>();
