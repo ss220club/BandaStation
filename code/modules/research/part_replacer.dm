@@ -75,8 +75,7 @@
 		to_chat(user, span_notice("Цель слишком далеко!"))
 		message_admins("\[EXPLOIT] [key_name_admin(user)] attempted to upgrade machinery with a BRPED from a restricted range (possible camera console exploit).")
 		return ITEM_INTERACT_FAILURE
-	else
-		return interact_with_atom(interacting_with, user, modifiers)
+	return interact_with_atom(interacting_with, user, modifiers)
 	// BANDASTATION EDIT END
 
 /obj/item/storage/part_replacer/bluespace/play_rped_sound()
