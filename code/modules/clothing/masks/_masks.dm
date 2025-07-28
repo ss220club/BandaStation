@@ -19,6 +19,13 @@
 	var/use_radio_beeps_tts = FALSE
 	/// The unique sound effect of dying while wearing this
 	var/unique_death
+	/// Define posibiliaty of mask to be adjusted
+	var/can_be_adjusted = TRUE // BANDASTATION EDIT - Surgery mask fix
+
+/obj/item/clothing/mask/Initialize(mapload)
+	. = ..()
+	if(!can_be_adjusted)
+		actions_types -= list(/datum/action/item_action/toggle)
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if((clothing_flags & VOICEBOX_TOGGLABLE))
@@ -49,6 +56,9 @@
 
 //Proc that moves gas/breath masks out of the way, disabling them and allowing pill/food consumption
 /obj/item/clothing/mask/visor_toggling(mob/living/user)
+	if(!can_be_adjusted)
+		return
+
 	. = ..()
 	if(up)
 		if(adjusted_flags)

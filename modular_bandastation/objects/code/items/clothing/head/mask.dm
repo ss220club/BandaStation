@@ -1,11 +1,3 @@
-// Fix surgery mask error icon to remove missing surgery maskicon issue
-/obj/item/clothing/mask
-	var/can_be_adjusted = TRUE
-
-/obj/item/clothing/mask/visor_toggling()
-	if(can_be_adjusted)
-		. = ..()
-
 /obj/item/clothing/mask/breath/muzzle
 	can_be_adjusted = FALSE
 
