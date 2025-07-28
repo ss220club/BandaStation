@@ -114,7 +114,8 @@
 
 /obj/machinery/firealarm/update_name(updates)
 	. = ..()
-	name = "[my_area.declent_ru(NOMINATIVE)] [initial(name)] [id_tag]"
+	var/area/current_area = get_area(src)
+	name = "[current_area.declent_ru(NOMINATIVE)] [initial(name)] [id_tag]"
 
 /obj/machinery/firealarm/on_exit_area(datum/source, area/area_to_unregister)
 	//we cannot unregister from an area we never registered to in the first place
