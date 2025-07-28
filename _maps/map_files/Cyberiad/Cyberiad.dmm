@@ -2357,6 +2357,7 @@
 /obj/machinery/atmospherics/components/unary/airlock_pump{
 	dir = 4
 	},
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "aDM" = (
@@ -17008,6 +17009,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "dSW" = (
@@ -85145,14 +85147,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/lobby)
-"tXS" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/machinery/firealarm/directional/north,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/fore/starboard)
 "tYc" = (
 /turf/open/floor/wood/tile,
 /area/station/service/library/artgallery)
@@ -99424,14 +99418,6 @@
 /obj/effect/spawner/random/maintenance,
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
-"xvm" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
-/obj/machinery/firealarm/directional/south,
-/turf/open/floor/plating,
-/area/station/maintenance/department/security/ghetto/aft)
 "xvo" = (
 /obj/machinery/conveyor_switch{
 	id = "warehouse_out"
@@ -137105,7 +137091,7 @@ doz
 doz
 ceC
 aLe
-miY
+jIP
 jIP
 aLe
 vbK
@@ -137619,7 +137605,7 @@ doz
 doz
 ceC
 aLe
-jIP
+miY
 aLe
 ceC
 vbK
@@ -138133,7 +138119,7 @@ doz
 doz
 ceC
 aLe
-xvm
+jIP
 aLe
 ceC
 vbK
@@ -142245,7 +142231,7 @@ doz
 ceC
 ceC
 aLe
-xvm
+jIP
 aLe
 ceC
 vbK
@@ -143273,7 +143259,7 @@ doz
 doz
 ceC
 pNZ
-tXS
+vBR
 fQF
 fQF
 cuW
@@ -190675,7 +190661,7 @@ ffR
 rLg
 tYD
 kJd
-iMe
+rgH
 pfq
 iMe
 trM
@@ -190932,7 +190918,7 @@ hnQ
 rLg
 kJd
 kJd
-iMe
+rgH
 aDI
 iMe
 trM
@@ -191188,8 +191174,8 @@ wKf
 ime
 rLg
 xRt
-iMe
-iMe
+rgH
+rgH
 sFA
 iMe
 iMe
