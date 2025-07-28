@@ -64,8 +64,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/default_icon_state
 	/// What network does this phone belong to?
 	var/phone_category = PHONE_NET_PUBLIC
-	/// Which networks can call this phone?
-	var/list/networks_receive = list(PHONE_NET_PUBLIC)
 	/// Which networks this phone can call?
 	var/list/networks_transmit = list(PHONE_NET_PUBLIC)
 	var/datum/looping_sound/telephone/busy/busy_loop
@@ -441,13 +439,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(target_phone == src)
 			continue
 
-		var/net_link = FALSE
-		for(var/network in networks_transmit)
-			if(network in target_phone.networks_receive)
-				net_link = TRUE
-				continue
-
-		if(!net_link)
+		if(!(target_phone.phone_category in networks_transmit))
 			continue
 
 		var/id = target_phone.phone_id

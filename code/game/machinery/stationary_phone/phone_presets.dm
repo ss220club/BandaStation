@@ -1,7 +1,8 @@
-#define PHONE_NET_PUBLIC	"Public"
-#define PHONE_NET_COMMAND	"Command"
-#define PHONE_NET_CENTCOMM	"CentComm"
-#define PHONE_NET_SYNDIE "Syndicate"
+#define PHONE_NET_PUBLIC	     "Public"
+#define PHONE_NET_COMMAND	     "Command"
+#define PHONE_NET_CENTCOMM	   "CentComm"
+#define PHONE_NET_BRIDGE	     "Bridge"
+#define PHONE_NET_SYNDIE	     "Syndicate"
 
 #define PHONE_DND_FORCED 2
 #define PHONE_DND_ON 1
@@ -33,20 +34,24 @@
 /obj/structure/transmitter/mounted/hidden
 	do_not_disturb = PHONE_DND_FORCED
 
-	/// FACTIONS AND SPECIAL LINES///
 
 //Personal command line for private offices.
 /obj/structure/transmitter/command
 	phone_category = PHONE_NET_COMMAND
-	networks_receive = list(PHONE_NET_COMMAND)
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND)
 
-///admins can call anywhere anytime.
+// THE "Red Phone". Can call the station networks AND the CentCom, if they feel like it.
+/obj/structure/transmitter/bridge
+	phone_category = PHONE_NET_BRIDGE
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND)
+
+// The CentCom line. Call anyone anytime.
 /obj/structure/transmitter/centcom
 	phone_category = PHONE_NET_CENTCOMM
-	networks_receive = list(PHONE_NET_CENTCOMM)
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND, PHONE_NET_SYNDIE, PHONE_NET_CENTCOMM)
 	can_rename = TRUE
+
+
 
 /obj/structure/transmitter/centcom/click_alt(mob/user)
 	var/input_name = stripped_input(user, "Rename this phone?", "Rename this phone", name, MAX_NAME_LEN)
@@ -58,6 +63,7 @@
 #undef PHONE_NET_COMMAND
 #undef PHONE_NET_CENTCOMM
 #undef PHONE_NET_SYNDIE
+#undef PHONE_NET_BRIDGE
 
 #undef PHONE_DND_FORCED
 #undef PHONE_DND_ON
