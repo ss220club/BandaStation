@@ -24692,21 +24692,21 @@ prepositional = "офисе отдела снабжения"
 gender = "male"
 
 ["Lower Cargo Bay"]
-nominative = "нижний отсек карго"
-genitive = "нижнего отсека карго"
-dative = "нижнему отсеку карго"
-accusative = "нижний отсек карго"
-instrumental = "нижним отсеком карго"
-prepositional = "нижнем отсеке карго"
+nominative = "нижний отсек отдела снабжения"
+genitive = "нижнего отсека отдела снабжения"
+dative = "нижнему отсеку отдела снабжения"
+accusative = "нижний отсек отдела снабжения"
+instrumental = "нижним отсеком отдела снабжения"
+prepositional = "нижнем отсеке отдела снабжения"
 gender = "male"
 
 ["Cargo Break Room"]
-nominative = "комната отдыха карго"
-genitive = "комнаты отдыха карго"
-dative = "комнате отдыха карго"
-accusative = "комнату отдыха карго"
-instrumental = "комнатой отдыха карго"
-prepositional = "комнате отдыха карго"
+nominative = "комната отдыха отдела снабжения"
+genitive = "комнаты отдыха отдела снабжения"
+dative = "комнате отдыха отдела снабжения"
+accusative = "комнату отдыха отдела снабжения"
+instrumental = "комнатой отдыха отдела снабжения"
+prepositional = "комнате отдыха отдела снабжения"
 gender = "female"
 
 ["Cargo Bay"]
@@ -24719,12 +24719,12 @@ prepositional = "грузовом отсеке"
 gender = "male"
 
 ["Cargo Lobby"]
-nominative = "лобби карго"
-genitive = "лобби карго"
-dative = "лобби карго"
-accusative = "лобби карго"
-instrumental = "лобби карго"
-prepositional = "лобби карго"
+nominative = "лобби отдела снабжения"
+genitive = "лобби отдела снабжения"
+dative = "лобби отдела снабжения"
+accusative = "лобби отдела снабжения"
+instrumental = "лобби отдела снабжения"
+prepositional = "лобби отдела снабжения"
 
 ["Mining Dock"]
 nominative = "шахтерский док"
@@ -24789,12 +24789,12 @@ prepositional = "нижнем этаже грузового отсека"
 gender = "male"
 
 ["Cargo Bay Depot Lower Floor"]
-nominative = "нижний этаж склада карго"
-genitive = "нижнего этажа склада карго"
-dative = "нижнему этажу склада карго"
-accusative = "нижний этаж склада карго"
-instrumental = "нижним этажом склада карго"
-prepositional = "нижнем этаже склада карго"
+nominative = "нижний этаж склада отдела снабжения"
+genitive = "нижнего этажа склада отдела снабжения"
+dative = "нижнему этажу склада отдела снабжения"
+accusative = "нижний этаж склада отдела снабжения"
+instrumental = "нижним этажом склада отдела снабжения"
+prepositional = "нижнем этаже склада отдела снабжения"
 gender = "male"
 
 ["Quartermaster's Office"]
