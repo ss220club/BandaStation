@@ -33120,13 +33120,6 @@
 /obj/item/radio/intercom/directional/east,
 /turf/open/floor/iron,
 /area/station/commons/dorms)
-"hRT" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/west,
-/turf/open/floor/catwalk_floor/iron_smooth,
-/area/station/maintenance/ghetto/central)
 "hSa" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment,
@@ -43652,6 +43645,13 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/commons/locker)
+"kvw" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/west,
+/turf/open/floor/catwalk_floor/iron_smooth,
+/area/station/maintenance/ghetto/central)
 "kvz" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/south,
@@ -54703,10 +54703,10 @@
 "naU" = (
 /obj/machinery/light/directional/south,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/components/tank/air/layer4{
+/obj/effect/turf_decal/stripes/full,
+/obj/machinery/atmospherics/components/tank/air{
 	dir = 1
 	},
-/obj/effect/turf_decal/stripes/full,
 /turf/open/floor/iron/dark/small,
 /area/station/maintenance/ghetto/central)
 "nbf" = (
@@ -132925,7 +132925,7 @@ liU
 skB
 rqb
 bCC
-hRT
+kvw
 dEJ
 kwU
 bBe
