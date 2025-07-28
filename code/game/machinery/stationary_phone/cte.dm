@@ -5,17 +5,17 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 #define STATUS_ENDED                "Ended"
 #define TIMEOUT_DURATION            30 SECONDS
 
-#define COMMSIG_OFFHOOK             "Communication Signal - Offhook" // The telephone is removed from the hook
-#define COMMSIG_DIALTONE            "Communication Signal - Dialtone" // The phone should play the dialtone sound, indicating it's ready for dialing
-#define COMMSIG_DIAL                "Communication Signal - Dial"	// The phone sends a request to the CTE, attempting to call a `phone_id`
-#define COMMSIG_RINGING             "Communication Signal - Ringing" // The phone rings, being ready to pick up
-#define COMMSIG_RINGBACK            "Communication Signal - Ringback"	// The caller hears the ringback sounds, waiting for the other side to pick up
-#define COMMSIG_BUSY                "Communication Signal - Busy"	// The target phone is busy
-#define COMMSIG_NUMBER_NOT_FOUND    "Communication Signal - Number Not Found"	// The CTE couldn't find the device with such `phone_id`
-#define COMMSIG_ANSWER              "Communication Signal - Answer"	// The phone should initialize the call
-#define COMMSIG_TALK                "Communication Signal - Talk"	// The signal sent with the voice message itself
-#define COMMSIG_HANGUP              "Communication Signal - Hangup"	// The other side has hanged up
-#define COMMSIG_TIMEOUT             "Communication Signal - Timeout" // The line has been inactive for over 30 seconds
+#define COMMSIG_OFFHOOK             "Communication Signal - Offhook"           // The telephone is removed from the hook
+#define COMMSIG_DIALTONE            "Communication Signal - Dialtone"          // The phone should play the dialtone sound, indicating it's ready for dialing
+#define COMMSIG_DIAL                "Communication Signal - Dial"	             // The phone sends a request to the CTE, attempting to call a `phone_id`
+#define COMMSIG_RINGING             "Communication Signal - Ringing"           // The phone rings, being ready to pick up
+#define COMMSIG_RINGBACK            "Communication Signal - Ringback"	         // The caller hears the ringback sounds, waiting for the other side to pick up
+#define COMMSIG_BUSY                "Communication Signal - Busy"	             // The target phone is busy
+#define COMMSIG_NUMBER_NOT_FOUND    "Communication Signal - Number Not Found"	 // The CTE couldn't find the device with such `phone_id`
+#define COMMSIG_ANSWER              "Communication Signal - Answer"	           // The phone should initialize the call
+#define COMMSIG_TALK                "Communication Signal - Talk"	             // The signal sent with the voice message itself
+#define COMMSIG_HANGUP              "Communication Signal - Hangup"	           // The other side has hanged up
+#define COMMSIG_TIMEOUT             "Communication Signal - Timeout"	         // The line has been inactive for over 30 seconds
 
 /datum/exchange_session
 	var/obj/structure/transmitter/source
@@ -152,5 +152,4 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 
 #undef STATUS_IDLE
 #undef STATUS_DIALING
-#undef STATUS_RINGING
 #undef STATUS_ENDED

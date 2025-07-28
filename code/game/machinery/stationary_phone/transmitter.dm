@@ -15,7 +15,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 #define SINGLE_CALL_PRICE           5
 #define MAX_RANGE                   3
-#define TIMEOUT_DURATION            30 SECONDS
 #define RING_TIMEOUT                4 SECONDS
 
 #define STATUS_INBOUND              "Inbound call"
@@ -49,7 +48,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	/// The tape inserted
 	var/obj/item/tape/inserted_tape
 	/// The unique 8-character alphanumeric ID of this transmitter
-	var/phone_id = "0x000000"
+	var/phone_id = "0x00000b"
 	/// The name of this transmitter as visible on the other devices
 	var/display_name
 	var/phone_icon
@@ -63,7 +62,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	/// Whether or not the phone will emit sound when receiving a call.
 	var/do_not_disturb = PHONE_DND_OFF
 	var/default_icon_state
-	var/timeout_timer_id
 	/// What network does this phone belong to?
 	var/phone_category = PHONE_NET_PUBLIC
 	/// Which networks can call this phone?
@@ -513,7 +511,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	send_commsig(COMMSIG_DIAL, target.phone_id)
 
 	is_paid = FALSE
-	timeout_timer_id = addtimer(CALLBACK(src, PROC_REF(end_call), FALSE, TRUE), TIMEOUT_DURATION, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_STOPPABLE)
 	START_PROCESSING(SSobj, src)
 	SStgui.close_uis(src)
 
@@ -557,9 +554,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	current_call = null
 	status = STATUS_IDLE
-	if(timeout_timer_id)
-		deltimer(timeout_timer_id)
-		timeout_timer_id = null
 	STOP_PROCESSING(SSobj, src)
 	update_icon()
 
