@@ -70,7 +70,14 @@
 		user.Beam(attacked_object, icon_state = "rped_upgrade", time = 0.5 SECONDS)
 
 /obj/item/storage/part_replacer/bluespace/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	return interact_with_atom(interacting_with, user, modifiers)
+	// BANDASTATION EDIT START - Restrict uprade range to 19x19
+	if(get_dist(src, interacting_with) > 9)
+		to_chat(user, span_notice("Цель слишком далеко!"))
+		message_admins("\[EXPLOIT] [key_name_admin(user)] attempted to upgrade machinery with a BRPED from a restricted range (possible camera console exploit).")
+		return ITEM_INTERACT_FAILURE
+	else
+		return interact_with_atom(interacting_with, user, modifiers)
+	// BANDASTATION EDIT END
 
 /obj/item/storage/part_replacer/bluespace/play_rped_sound()
 	if(prob(1))
