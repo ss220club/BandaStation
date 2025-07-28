@@ -25,7 +25,10 @@
 /obj/item/clothing/mask/Initialize(mapload)
 	. = ..()
 	if(!can_be_adjusted)
-		actions_types -= list(/datum/action/item_action/toggle)
+		if(islist(actions_types))
+			actions_types -= list(/datum/action/item_action/toggle)
+		else
+			actions_types = list()
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if((clothing_flags & VOICEBOX_TOGGLABLE))
