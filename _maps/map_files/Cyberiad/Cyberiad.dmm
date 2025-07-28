@@ -31697,14 +31697,10 @@
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
 "hsk" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 8
-	},
 /obj/machinery/light/directional/south,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 8
 	},
-/obj/machinery/light/directional/south,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/ghetto/central)
 "hsn" = (
