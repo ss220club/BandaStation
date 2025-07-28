@@ -1,7 +1,13 @@
 // Fix surgery mask error icon to remove missing surgery maskicon issue
-/obj/item/clothing/mask/breath/muzzle/update_icon_state()
-	. = ..()
-	icon_state = initial(icon_state)
+/obj/item/clothing/mask
+	var/can_be_adjusted = TRUE
+
+/obj/item/clothing/mask/visor_toggling()
+	if(can_be_adjusted)
+		. = ..()
+
+/obj/item/clothing/mask/breath/muzzle
+	can_be_adjusted = FALSE
 
 // MARK: Misc mask
 /obj/item/clothing/mask/breath/red_gas
