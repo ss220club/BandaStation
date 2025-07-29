@@ -110,9 +110,9 @@
 	// If the traitor theft objective is still present, this will destroy it...
 	if(!source_code_hdd)
 		return ..()
-	to_chat(ninja, span_notice("Hacking \the [src]..."))
+	to_chat(ninja, span_notice("Взламываем [src.name]..."))
 	AI_notify_hack()
-	to_chat(ninja, span_notice("Encrypted source code detected. Overloading storage device..."))
+	to_chat(ninja, span_notice("Обнаружен зашифрованный исходный код. Перегрузка устройства хранения данных..."))
 	INVOKE_ASYNC(src, PROC_REF(ninjadrain_charge), ninja, hacking_module)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -120,7 +120,7 @@
 	if(!do_after(ninja, 30 SECONDS, target = src, hidden = TRUE))
 		return
 	overload_source_code_hdd()
-	to_chat(ninja, span_notice("Sabotage complete. Storage device overloaded."))
+	to_chat(ninja, span_notice("Саботаж завершен. Устройство хранения перегружено."))
 	var/datum/antagonist/ninja/ninja_antag = ninja.mind.has_antag_datum(/datum/antagonist/ninja)
 	if(!ninja_antag)
 		return
@@ -131,7 +131,7 @@
 /obj/machinery/rnd/server/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	if(!ninja || !hacking_module)
 		return NONE
-	to_chat(ninja, span_notice("Research notes detected. Corrupting data..."))
+	to_chat(ninja, span_notice("Обнаружены исследовательские материалы. Повреждаем данные..."))
 	INVOKE_ASYNC(src, PROC_REF(ninjadrain_charge), ninja, hacking_module)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -139,7 +139,7 @@
 	if(!do_after(ninja, 30 SECONDS, target = src, hidden = TRUE))
 		return
 	stored_research.modify_points_all(0)
-	to_chat(ninja, span_notice("Sabotage complete. Research notes corrupted."))
+	to_chat(ninja, span_notice("Саботаж завершен. Исследовательские материалы повреждены."))
 	var/datum/antagonist/ninja/ninja_antag = ninja.mind.has_antag_datum(/datum/antagonist/ninja)
 	if(!ninja_antag)
 		return
@@ -175,12 +175,12 @@
 /obj/machinery/computer/records/security/proc/can_hack(mob/living/hacker, feedback = FALSE)
 	if(machine_stat & (NOPOWER|BROKEN))
 		if(feedback && hacker)
-			balloon_alert(hacker, "can't hack!")
+			balloon_alert(hacker, "невозможно взломать!")
 		return FALSE
 	var/area/console_area = get_area(src)
 	if(!console_area || !(console_area.area_flags & VALID_TERRITORY))
 		if(feedback && hacker)
-			balloon_alert(hacker, "signal too weak!")
+			balloon_alert(hacker, "слишком слабый сигнал!")
 		return FALSE
 	return TRUE
 
@@ -261,7 +261,7 @@
 /obj/vehicle/sealed/mecha/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	if(!ninja || !hacking_module)
 		return NONE
-	to_chat(occupants, "[icon2html(src, occupants)][span_danger("Warning: Unauthorized access through sub-route 4, block H, detected.")]")
+	to_chat(occupants, "[icon2html(src, occupants)][span_danger("Внимание: обнаружен несанкционированный доступ через подмаршрут 4 блока H.")]")
 	INVOKE_ASYNC(src, PROC_REF(ninjadrain_charge), ninja, hacking_module)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -292,7 +292,7 @@
 	if(!ninja || !hacking_module || (ROLE_NINJA in faction))
 		return NONE
 
-	to_chat(src, span_danger("Warni-***BZZZZZZZZZRT*** UPLOADING SPYDERPATCHER VERSION 9.5.2..."))
+	to_chat(src, span_danger("Внима-***БЗЗЗЗЗЗЗЗРРТ*** ЗАГРУЗКА SPYDERPATCHER ВЕРСИИ 9.5.2..."))
 	INVOKE_ASYNC(src, PROC_REF(ninjadrain_charge), ninja, hacking_module)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -301,7 +301,7 @@
 		return
 	spark_system.start()
 	playsound(loc, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-	to_chat(src, span_danger("UPLOAD COMPLETE. NEW CYBORG MODEL DETECTED.  INSTALLING..."))
+	to_chat(src, span_danger("ЗАГРУЗКА ЗАВЕРШЕНА. ОБНАРУЖЕНА НОВАЯ МОДЕЛЬ КИБОРГА.  УСТАНОВКА..."))
 	faction = list(ROLE_NINJA)
 	bubble_icon = "syndibot"
 	UnlinkSelf()
@@ -326,7 +326,7 @@
 		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 		spark_system.set_up(5, 0, loc)
 		spark_system.start()
-		visible_message(span_danger("[ninja] electrocutes [src] with [ninja.p_their()] touch!"), span_userdanger("[ninja] electrocutes you with [ninja.p_their()] touch!"))
+		visible_message(span_danger("[capitalize(ninja.declent_ru(NOMINATIVE))] касанием бьет током [declent_ru(ACCUSATIVE)]!"), span_userdanger("[capitalize(ninja.declent_ru(NOMINATIVE))] касанием бьет вас током!"))
 		addtimer(CALLBACK(src, PROC_REF(ninja_knockdown)), 0.3 SECONDS)
 	return NONE
 
@@ -337,7 +337,7 @@
 //CAMERAS//
 /obj/machinery/camera/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	if(isEmpProof(TRUE))
-		balloon_alert(ninja, "camera is shielded!")
+		balloon_alert(ninja, "камера экранирована!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(!hacking_module.mod.subtract_charge(DEFAULT_CHARGE_DRAIN * 5))
@@ -348,7 +348,7 @@
 
 //BOTS//
 /mob/living/simple_animal/bot/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
-	to_chat(src, span_boldwarning("Your circutry suddenly begins heating up!"))
+	to_chat(src, span_boldwarning("Ваши микросхемы внезапно начинают нагреваться!"))
 	if(!do_after(ninja, 1.5 SECONDS, target = src, hidden = TRUE))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -357,7 +357,7 @@
 
 	do_sparks(number = 3, cardinal_only = FALSE, source = src)
 	playsound(get_turf(src), 'sound/machines/warning-buzzer.ogg', 35, TRUE)
-	balloon_alert(ninja, "stand back!")
+	balloon_alert(ninja, "отойдите!")
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), src, 0, 1, 2, 3), 2.5 SECONDS)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -372,7 +372,7 @@
 //ENERGY WEAPONS//
 /obj/item/gun/energy/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	if(cell.charge == 0)
-		balloon_alert(ninja, "no energy!")
+		balloon_alert(ninja, "нет энергии!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(!do_after(ninja, 1.5 SECONDS, target = src, hidden = TRUE))
@@ -382,14 +382,14 @@
 	hacking_module.charge_message(src, cell.charge)
 	cell.charge = 0
 	update_appearance()
-	visible_message(span_warning("[ninja] drains the energy from the [src]!"))
+	visible_message(span_warning("[capitalize(ninja.declent_ru(NOMINATIVE))] вытягивает энергию из [declent_ru(GENITIVE)]!"))
 	do_sparks(number = 3, cardinal_only = FALSE, source = src)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 //VENDING MACHINES//
 /obj/machinery/vending/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	if(shoot_inventory)
-		balloon_alert(ninja, "already hacked!")
+		balloon_alert(ninja, "уже взломано!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(!do_after(ninja, 2 SECONDS, target = src, hidden = TRUE))
@@ -399,14 +399,14 @@
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	do_sparks(number = 3, cardinal_only = FALSE, source = src)
-	balloon_alert(ninja, "system overloaded!")
+	balloon_alert(ninja, "система перегружена!")
 	wires.on_pulse(WIRE_THROW)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 //RECYCLER//
 /obj/machinery/recycler/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	if(obj_flags & EMAGGED)
-		balloon_alert(ninja, "already hacked!")
+		balloon_alert(ninja, "уже взломано!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	AI_notify_hack()
@@ -421,7 +421,7 @@
 //ELEVATOR CONTROLS//
 /obj/machinery/elevator_control_panel/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	if(obj_flags & EMAGGED)
-		balloon_alert(ninja, "already hacked!")
+		balloon_alert(ninja, "уже взломано!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(!do_after(ninja, 2 SECONDS, target = src, hidden = TRUE))
@@ -436,11 +436,11 @@
 /obj/machinery/computer/tram_controls/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	var/datum/round_event/tram_malfunction/malfunction_event = locate(/datum/round_event/tram_malfunction) in SSevents.running
 	if(malfunction_event)
-		balloon_alert(ninja, "tram is already malfunctioning!")
+		balloon_alert(ninja, "трамвай уже неисправен!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(specific_transport_id != TRAMSTATION_LINE_1)
-		balloon_alert(ninja, "cannot hack this tram!")
+		balloon_alert(ninja, "невозможно взломать этот трамвай!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	AI_notify_hack()
