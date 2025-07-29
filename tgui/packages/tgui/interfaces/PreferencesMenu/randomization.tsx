@@ -4,10 +4,10 @@ import { Button, Stack } from 'tgui-core/components';
 import { RandomizationButton } from './components/RandomizationButton';
 import {
   CheckboxInput,
-  Feature,
-  FeatureToggle,
+  type Feature,
+  type FeatureToggle,
 } from './preferences/features/base';
-import { PreferencesMenuData, RandomSetting } from './types';
+import { type PreferencesMenuData, RandomSetting } from './types';
 import { useRandomToggleState } from './useRandomToggleState';
 
 export const augmentation_body: Feature<RandomSetting> = {

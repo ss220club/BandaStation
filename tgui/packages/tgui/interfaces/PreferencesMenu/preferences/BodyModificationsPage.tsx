@@ -1,15 +1,11 @@
-import { useState } from 'react';
 import {
-  Box,
   Button,
   Collapsible,
-  Divider,
   Dropdown,
   Icon,
   Modal,
   Section,
   Stack,
-  Table,
 } from 'tgui-core/components';
 
 import { useBackend } from '../../../backend';
