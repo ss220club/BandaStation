@@ -50,8 +50,8 @@
 
 /datum/emote/mouse/squeak
 	key = "squeak"
-	key_third_person = "пишит!"
-	message = "пишит"
+	key_third_person = "пищит!"
+	message = "пищит"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	vary = TRUE
 	sound = 'sound/mobs/non-humanoids/mouse/mousesqueek.ogg'
@@ -227,7 +227,7 @@
 /mob/living/basic/mouse/proc/evolve_into_regal_rat()
 	var/mob/living/basic/regal_rat/controlled/regalrat = new(loc)
 	mind?.transfer_to(regalrat)
-	INVOKE_ASYNC(regalrat, TYPE_PROC_REF(/atom/movable, say), "ВОССТАНЬТЕ, МОИ ПОДАННЫЕ! СКРИИИИИ!")
+	INVOKE_ASYNC(regalrat, TYPE_PROC_REF(/atom/movable, say), "ВОССТАНЬТЕ, МОИ ПОДДАННЫЕ! СКРИИИИИ!")
 	qdel(src)
 
 /// Creates a new mouse based on this mouse's subtype.
@@ -300,7 +300,7 @@
 
 /mob/living/basic/mouse/rat
 	name = "rat"
-	desc = "Это мерзкие, уродливые, злобные и пораженные болезнями грызуны с проблемами гнева."
+	desc = "Это мерзкие, уродливые, злобные, гневные и пораженные болезнями грызуны."
 
 	gold_core_spawnable = HOSTILE_SPAWN
 	melee_damage_lower = 3
@@ -349,7 +349,7 @@
 /obj/item/food/deadmouse/examine(mob/user)
 	. = ..()
 	if (reagents?.has_reagent(/datum/reagent/yuck) || reagents?.has_reagent(/datum/reagent/fuel))
-		. += span_warning("С него капает топливо и исходит ужасный запах.")
+		. += span_warning("С [ru_p_theirs()] капает топливо и исходит ужасный запах.")
 
 ///Spawn a new mouse from this dead mouse item when hit by a lazarus injector and conditions are met.
 /obj/item/food/deadmouse/proc/use_lazarus(datum/source, obj/item/lazarus_injector/injector, mob/user)

@@ -108,7 +108,7 @@
 /// Triggers an alert to all ghosts that the rat has become player controlled.
 /mob/living/basic/regal_rat/proc/became_player_controlled()
 	notify_ghosts(
-		"Все встанут перед [name], восходящего на трон \ в [get_area(src)].",
+		"Все встанут перед [name], восходящего на трон в [get_area(src)].",
 		source = src,
 		header = "Появилась разумная крыса",
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
@@ -149,7 +149,7 @@
 
 	// The descriptor of our character.
 	var/static/list/descriptors = list(
-		"Большой сыр",
+		"Большесырый",
 		"Жестокий",
 		"Чемпион заблудших существ",
 		"Омерзительный",
