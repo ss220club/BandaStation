@@ -288,7 +288,7 @@
 
 /atom/movable/screen/alert/veryhighgravity
 	name = "Сокрушительная гравитация"
-	desc = "Вас давит высокая гравитация, из-за чего сбор предметов и передвижение замедлятся. Также Вы будете получать урон!"
+	desc = "Вас давит высокая гравитация, из-за чего сбор предметов и передвижение замедлятся. Так же вы чувствуете как ваши кости начинают трещать!"
 	icon_state = "paralysis"
 
 /atom/movable/screen/alert/fire
@@ -453,7 +453,7 @@
 	var/mob/living/offerer = offer?.owner
 	if(!QDELETED(rube) && !QDELETED(offerer))
 		offerer.visible_message(span_danger("[offerer] убирает руку от шлепка [rube] в последнюю секунду, полностью уклоняясь от пятюни!"), span_nicegreen("[rube] не удается коснуться вашей руки, выставляя [rube.p_them()] на посмешище!"), span_hear("Вы слышите разочаровывающий звук того, как плоть не соприкасается с плотью!"), ignored_mobs=rube)
-		to_chat(rube, span_userdanger("[uppertext("НЕТ! [offerer] ОТДЕРГИВАЕТ [offerer.p_their()] РУКУ! ТЫ СЛИШКОМ МЕДЛЕННЫЙ!")]"))
+		to_chat(rube, span_userdanger("[uppertext("НЕТ! [offerer] ОТДЕРГИВАЕТ СВОЮ РУКУ! ТЫ СЛИШКОМ МЕДЛЕННЫЙ!")]"))
 		playsound(offerer, 'sound/items/weapons/thudswoosh.ogg', 100, TRUE, 1)
 		rube.Knockdown(1 SECONDS)
 		offerer.add_mood_event("high_five", /datum/mood_event/down_low)
@@ -836,7 +836,7 @@
 
 /atom/movable/screen/alert/notify_action
 	name = "Происходит что-то интересное!"
-	desc = "На нее можно нажать, чтобы посмотреть происходящее."
+	desc = "Сюда можно нажать, чтобы посмотреть на происходящее."
 	icon_state = "template"
 	timeout = 30 SECONDS
 	clickable_glow = TRUE
