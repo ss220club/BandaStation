@@ -1,20 +1,20 @@
-import './PreferencesMenu.scss';
-
 import { useState } from 'react';
 import {
   Box,
   Button,
+  Collapsible,
   Divider,
   Dropdown,
   Icon,
   Modal,
   Section,
+  Stack,
   Table,
 } from 'tgui-core/components';
 
 import { useBackend } from '../../../backend';
 import { LoadingScreen } from '../../common/LoadingScreen';
-import { BodyModification, PreferencesMenuData } from '../types';
+import type { BodyModification, PreferencesMenuData } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
 
 type BodyModificationsProps = {
@@ -28,33 +28,32 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
   }
 
   return (
-    <Modal className="PreferencesMenu__Augs">
+    <Modal className="PreferencesMenu__Augmentations">
       <Section
-        buttons={
-          <Button
-            icon="times"
-            color="transparent"
-            tooltip="Закрыть"
-            tooltipPosition="left"
-            className="PreferencesMenu__Augs-Close"
-            onClick={props.handleClose}
-          />
-        }
+        fill
+        scrollable
         title={
-          <Box inline className="PreferencesMenu__Augs-Header">
-            <Icon name="robot" />
-            <Box as="span" className="PreferencesMenu__Augs-Title">
-              Модификации тела
-            </Box>
-          </Box>
+          <Stack fill className="PreferencesMenu__AugmentationsTitle">
+            <Stack.Item>
+              <Icon name="robot" />
+            </Stack.Item>
+            <Stack.Item grow>Модификации тела</Stack.Item>
+            <Stack.Item>
+              <Button
+                fontSize={1.1}
+                icon="times"
+                color="red"
+                tooltip="Закрыть"
+                tooltipPosition="top"
+                onClick={props.handleClose}
+              />
+            </Stack.Item>
+          </Stack>
         }
-        className="PreferencesMenu__Augs-Section"
       >
-        <Box className="PreferencesMenu__Augs-Content">
-          <BodyModificationsPageInner
-            bodyModification={serverData.body_modifications}
-          />
-        </Box>
+        <BodyModificationsPageInner
+          bodyModification={serverData.body_modifications}
+        />
       </Section>
     </Modal>
   );
@@ -68,9 +67,6 @@ const BodyModificationsPageInner = (props: {
     applied_body_modifications = [],
     incompatible_body_modifications = [],
   } = data;
-  const [collapsedCategories, setCollapsedCategories] = useState<
-    Record<string, boolean>
-  >({});
 
   const appliedModifications = props.bodyModification.filter((mod) =>
     applied_body_modifications.includes(mod.key),
@@ -87,78 +83,46 @@ const BodyModificationsPageInner = (props: {
     }
   });
 
-  const toggleCategory = (category: string) => {
-    setCollapsedCategories((prev) => ({
-      ...prev,
-      [category]: !prev[category],
-    }));
-  };
-
   return (
-    <Box className="PreferencesMenu__Augs-TableWrapper">
-      <Table className="PreferencesMenu__Augs-Table">
-        {appliedModifications.map((mod, index) => (
-          <BodyModificationRow
-            key={mod.key}
-            bodyModification={mod}
-            added
-            index={index}
-          />
-        ))}
-
-        {appliedModifications.length > 0 && (
-          <Table.Row>
-            <Table.Cell colSpan={2}>
-              <Divider />
-            </Table.Cell>
-          </Table.Row>
-        )}
-
-        {Object.entries(modificationsByCategory).map(([category, mods]) => (
-          <>
-            <Table.Row
-              key={`category-${category}`}
-              className="PreferencesMenu__Augs-CategoryRow"
-              data-collapsed={collapsedCategories[category] || false}
-              onClick={() => toggleCategory(category)}
-            >
-              <Table.Cell colSpan={2}>
-                <Box inline>
-                  <Icon
-                    name={
-                      collapsedCategories[category]
-                        ? 'chevron-right'
-                        : 'chevron-down'
-                    }
-                  />
-                  {category}
-                </Box>
-              </Table.Cell>
-            </Table.Row>
-
-            {!collapsedCategories[category] &&
-              mods.map((mod, index) => (
-                <BodyModificationRow
-                  key={mod.key}
-                  bodyModification={mod}
-                  added={false}
-                  usedKeys={[
-                    ...applied_body_modifications,
-                    ...incompatible_body_modifications,
-                  ]}
-                  index={index}
-                />
-              ))}
-          </>
-        ))}
-      </Table>
-    </Box>
+    <>
+      {appliedModifications.length > 0 && (
+        <Collapsible open title="Применённые модификации" color="blue">
+          <Stack vertical>
+            {appliedModifications.map((mod, index) => (
+              <BodyModificationRow
+                key={mod.key}
+                added
+                index={index}
+                bodyModification={mod}
+              />
+            ))}
+          </Stack>
+        </Collapsible>
+      )}
+      {Object.entries(modificationsByCategory).map(([category, mods]) => (
+        <Collapsible key={category} title={category} open>
+          <Stack vertical>
+            {mods.map((mod, index) => (
+              <BodyModificationRow
+                key={mod.key}
+                index={index}
+                bodyModification={mod}
+                usedKeys={[
+                  ...applied_body_modifications,
+                  ...incompatible_body_modifications,
+                ]}
+              />
+            ))}
+          </Stack>
+        </Collapsible>
+      ))}
+    </>
   );
 };
 
 const BodyModificationRow = (props: {
   bodyModification: BodyModification;
-  added: boolean;
+  added?: boolean;
   usedKeys?: string[];
   index: number;
 }) => {
@@ -171,19 +135,15 @@ const BodyModificationRow = (props: {
     (manufacturers ? manufacturers[0] : null);
 
   return (
-    <Table.Row
-      key={props.bodyModification.key}
-      className={`PreferencesMenu__Augs-Row ${
-        props.index % 2 === 0 ? 'even' : 'odd'
-      }`}
-    >
-      <Table.Cell className="PreferencesMenu__Augs-Name">
+    <Stack fill className="PreferencesMenu__AugmentationsRow">
+      <Stack.Item className="PreferencesMenu__AugmentationsRow--name">
         {props.bodyModification.name}
-      </Table.Cell>
-      <Table.Cell className="PreferencesMenu__Augs-Actions">
+      </Stack.Item>
+      <Stack className="PreferencesMenu__AugmentationsRow--actions">
         {Array.isArray(manufacturers) && props.added && (
           <Dropdown
-            className="PreferencesMenu__Augs-Dropdown"
+            width={7.5}
+            menuWidth={17.5}
             selected={selectedBrand ?? ''}
             options={manufacturers.map((brand: string) => ({
               value: brand,
@@ -199,7 +159,7 @@ const BodyModificationRow = (props: {
         )}
         {props.added ? (
           <Button
-            className="PreferencesMenu__Augs-Button"
+            fluid
             icon="times"
             color="red"
             onClick={() =>
@@ -207,13 +167,12 @@ const BodyModificationRow = (props: {
                 body_modification_key: props.bodyModification.key,
               })
             }
-            fluid
           >
             Удалить
           </Button>
         ) : (
           <Button
-            className="PreferencesMenu__Augs-Button"
+            fluid
             icon="plus"
             color={isUsed ? 'grey' : 'green'}
             disabled={isUsed}
@@ -222,12 +181,11 @@ const BodyModificationRow = (props: {
                 body_modification_key: props.bodyModification.key,
               })
             }
-            fluid
           >
             Добавить
           </Button>
         )}
-      </Table.Cell>
-    </Table.Row>
+      </Stack>
+    </Stack>
   );
 };

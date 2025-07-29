@@ -4,7 +4,6 @@ import { Button, Floating, Section, Stack, Tabs } from 'tgui-core/components';
 import { exhaustiveCheck } from 'tgui-core/exhaustive';
 
 import { PageButton } from '../components/PageButton';
-import { BodyModificationsPage } from '../preferences/BodyModificationsPage';
 import type { PreferencesMenuData } from '../types';
 import { AntagsPage } from './AntagsPage';
 import { JobsPage } from './JobsPage';
@@ -19,7 +18,6 @@ enum Page {
   Main,
   Jobs,
   Species,
-  BodyModifications,
   Quirks,
   Loadout,
   Voice,
@@ -93,12 +91,6 @@ export function CharacterPreferenceWindow(props) {
 
     case Page.Voice:
       pageContents = <VoicePage />;
-      break;
-
-    case Page.BodyModifications:
-      pageContents = (
-        <BodyModificationsPage handleClose={() => setCurrentPage(Page.Main)} />
-      );
       break;
 
     default:

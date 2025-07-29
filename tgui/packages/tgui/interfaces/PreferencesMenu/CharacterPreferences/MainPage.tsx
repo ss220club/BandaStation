@@ -47,37 +47,29 @@ type CharacterControlsProps = {
 };
 
 function CharacterControls(props: CharacterControlsProps) {
-  const { act } = useBackend<PreferencesMenuData>();
-  const [randomToggle, setRandomToggle] = useRandomToggleState();
-
   return (
     <Stack className="PreferencesMenu__CharacterControls">
-      <Stack>
-        <Button
-          icon="undo"
-          tooltip="Повернуть"
-          tooltipPosition="top"
-          onClick={props.handleRotate}
-        />
-        <Button
-          icon="paw"
-          tooltip="Вид"
-          tooltipPosition="top"
-          onClick={props.handleOpenSpecies}
-        />
-        {props.showGender && (
-          <GenderButton
-            gender={props.gender}
-            handleSetGender={props.setGender}
-          />
-        )}
-        <Button
-          icon="robot"
-          tooltip="Модификации тела"
-          tooltipPosition="top"
-          onClick={() => props.handleOpenAugmentations()}
-        />
-      </Stack>
+      <Button
+        icon="undo"
+        tooltip="Повернуть"
+        tooltipPosition="top"
+        onClick={props.handleRotate}
+      />
+      <Button
+        icon="paw"
+        tooltip="Вид"
+        tooltipPosition="top"
+        onClick={props.handleOpenSpecies}
+      />
+      {props.showGender && (
+        <GenderButton gender={props.gender} handleSetGender={props.setGender} />
+      )}
+      <Button
+        icon="robot"
+        tooltip="Модификации тела"
+        tooltipPosition="top"
+        onClick={() => props.handleOpenAugmentations()}
+      />
       <Button
         color="red"
         icon="trash"
