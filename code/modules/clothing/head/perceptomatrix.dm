@@ -5,7 +5,7 @@
 /// Helmet which can turn you into a BEAST!! once an anomaly core is inserted
 /obj/item/clothing/head/helmet/perceptomatrix
 	name = "perceptomatrix helm"
-	desc = "Данный шлем использует мощь галлюцинаторного ядра для защиты мозга носителя, так и для направления галлюцинаций на других."
+	desc = "Данный шлем использует мощь галлюцинаторной аномалии, как для защиты мозга носителя, так и для направления галлюцинаций на других."
 	icon_state = "perceptomatrix_helmet_inactive"
 	worn_icon_state = "perceptomatrix_helmet_inactive"
 	base_icon_state = "perceptomatrix_helmet"
@@ -197,7 +197,7 @@
 			continue
 		// if cooked by chef, or if EITHER 5% chance OR its april fools. a || (b || c)
 		if(HAS_TRAIT_FROM(pancakes, TRAIT_FOOD_CHEF_MADE, REF(chef.mind)) || (prob(5) || check_holidays(APRIL_FOOLS)))
-			chef.say("Мои панкэйки!")
+			chef.say("Мои блинчики!")
 
 	playsound(pancakes, 'sound/effects/fuse.ogg', 80)
 	animate(pancakes, time = 1, pixel_z = 12, easing = ELASTIC_EASING)

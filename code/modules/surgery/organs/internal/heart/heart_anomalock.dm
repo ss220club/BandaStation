@@ -5,7 +5,7 @@
 
 /obj/item/organ/heart/cybernetic/anomalock
 	name = "voltaic combat cyberheart"
-	desc = "Кибернетическое сердце, что обогнало своё время. Активное сердце даёт пользователю защиту от ЭМП и удерживает тело в вертикальном положении в самых тяжёлых условиях. Для работы требует флюкс ядро."
+	desc = "Кибернетическое сердце, что обогнало своё время. Активное сердце даёт пользователю защиту от ЭМП и удерживает тело в вертикальном положении в самых тяжёлых условиях. Для работы требует Flux ядро."
 	icon_state = "anomalock_heart"
 	beat_noise = "an astonishing <b>BZZZ</b> of immense electrical power"
 	bleed_prevention = TRUE
@@ -59,7 +59,7 @@
 	if(DOING_INTERACTION(user, DOAFTER_IMPLANTING_HEART))
 		return
 	user.balloon_alert(user, "это будет больно...")
-	to_chat(user, span_userdanger("Чёрные кибервены разрывают вашу плоть, затягивая сердце в рёбра. Это не очень хорошая идея..."))
+	to_chat(user, span_userdanger("Чёрные кибервены разрывают вашу плоть, затягивая сердце в рёбра. Это не очень хорошо..."))
 	if(!do_after(user, 5 SECONDS, interaction_key = DOAFTER_IMPLANTING_HEART))
 		return ..()
 	playsound(target_mob, 'sound/items/weapons/slice.ogg', 100, TRUE)
