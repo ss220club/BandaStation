@@ -11,7 +11,6 @@
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "sr-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/rubber
-	harmful = FALSE
 
 // .35 Sol ripper, similar to the detective revolver's dumdum rounds, causes slash wounds and is weak to armor
 /obj/item/ammo_casing/c35sol/ripper
@@ -72,7 +71,6 @@
 	name = "7.62x39mm rubber bullet casing"
 	desc = "Патрон с резиновой пулей калибра 7.62x39мм гражданского назначения."
 	projectile_type = /obj/projectile/bullet/a762x39/rubber
-	harmful = FALSE
 
 /obj/item/ammo_casing/a762x39/hunting
 	name = "7.62x39mm hunting bullet casing"
@@ -105,7 +103,6 @@
 	desc = "Стандартный осколочно-резиновый винтовочный патрон ТСФ калибра .40 Sol Long. Разрывается при ударе, выбрасывая резиновую шрапнель, которая может вывести цель из строя."
 	icon_state = "40sol_disabler"
 	projectile_type = /obj/projectile/bullet/c40sol/fragmentation
-	harmful = FALSE
 
 // .40 Sol match grade, bounces a lot, and if there's less than 20 bullet armor on wherever these hit, it'll go completely through the target and out the other side
 /obj/item/ammo_casing/c40sol/pierce
@@ -136,7 +133,6 @@
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "sr-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/rubber
-	harmful = FALSE
 
 /obj/item/ammo_casing/c9x25mm/hp
 	name = "9x25mm NT hollow-point bullet casing"
