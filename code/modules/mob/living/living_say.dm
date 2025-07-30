@@ -112,7 +112,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	list/message_mods = list(),
 )
 	if(sanitize)
-		message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+		message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN)) // BANDASTATION EDIT - Sanitize emotes
 	if(!message || message == "")
 		return
 

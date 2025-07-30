@@ -10,7 +10,7 @@
 
 	preference = "feature_skrell_head_tentacle"
 
-	dna_block = DNA_SKRELL_HEAD_TENTACLE_BLOCK
+	dna_block = /datum/dna_block/feature/skrell_head_tentacle
 	restyle_flags = EXTERNAL_RESTYLE_FLESH
 
 	bodypart_overlay = /datum/bodypart_overlay/mutant/head_tentacle
