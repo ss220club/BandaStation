@@ -16,43 +16,40 @@
 	return TRUE
 
 /datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, value)
-	if (!islist(value))
+	if(!islist(value))
 		return
 
 	var/list/body_modifications = value
-	for (var/obj/item/bodypart/L in target.bodyparts)
-		if (L.body_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+	for(var/obj/item/bodypart/L in target.bodyparts)
+		if(	L.body_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
 			qdel(L)
 
 	target.regenerate_limbs()
 
-	// Сначала ампутации (убираем конечности)
-	for (var/key in body_modifications)
+	for(var/key in body_modifications)
 		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if (!mod_proto || !istype(mod_proto, /datum/body_modification/limb_amputation))
+		if(!mod_proto || !istype(mod_proto, /datum/body_modification/limb_amputation))
 			continue
 
 		var/datum/body_modification/limb_amputation/amputation = new mod_proto.type
 		amputation.apply_to_human(target)
 		qdel(amputation)
 
-	// Потом протезы (ставим новые конечности)
-	for (var/key in body_modifications)
+	for(var/key in body_modifications)
 		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if (!mod_proto || !istype(mod_proto, /datum/body_modification/bodypart_prosthesis))
+		if(!mod_proto || !istype(mod_proto, /datum/body_modification/bodypart_prosthesis))
 			continue
 
 		var/datum/body_modification/bodypart_prosthesis/prosthesis = new mod_proto.type
-		if (islist(body_modifications[key]) && body_modifications[key]["selected_manufacturer"])
+		if(islist(body_modifications[key]) && body_modifications[key]["selected_manufacturer"])
 			prosthesis.selected_manufacturer = body_modifications[key]["selected_manufacturer"]
 
 		prosthesis.apply_to_human(target)
 		qdel(prosthesis)
 
-	// Потом импланты (органы)
-	for (var/key in body_modifications)
+	for(var/key in body_modifications)
 		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if (!mod_proto || !istype(mod_proto, /datum/body_modification/implants))
+		if(!mod_proto || !istype(mod_proto, /datum/body_modification/implants))
 			continue
 
 		var/datum/body_modification/implants/implant = new mod_proto.type
@@ -63,18 +60,18 @@
 	target.update_body()
 
 /datum/preference/body_modifications/deserialize(input, datum/preferences/preferences)
-	if (!islist(input))
+	if(!islist(input))
 		return list()
 
 	var/list/result = list()
 
 	for (var/body_modification_key in input)
-		if (!GLOB.body_modifications[body_modification_key])
+		if(!GLOB.body_modifications[body_modification_key])
 			continue
 
 		var/value = input[body_modification_key]
 
-		if (islist(value))
+		if(islist(value))
 			result[body_modification_key] = value
 		else
 			result[body_modification_key] = TRUE
@@ -82,17 +79,17 @@
 	return result
 
 /datum/preference/body_modifications/serialize(input)
-	if (!islist(input))
+	if(!islist(input))
 		return list()
 
 	var/list/result = list()
 
 	for (var/body_modification_key in input)
-		if (!GLOB.body_modifications[body_modification_key])
+		if(!GLOB.body_modifications[body_modification_key])
 			continue
 
 		var/value = input[body_modification_key]
-		if (islist(value))
+		if(islist(value))
 			result[body_modification_key] = value
 		else
 			result[body_modification_key] = TRUE

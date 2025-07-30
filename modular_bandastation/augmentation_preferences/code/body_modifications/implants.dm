@@ -63,9 +63,3 @@
 	name = "Кибернетическое сердце"
 	category = "Органы"
 	replacement_organ = /obj/item/organ/heart/cybernetic
-
-// /datum/body_modification/limb_amputation/appendix
-// 	key = "appendix_amputation"
-// 	name = "Ампутация аппендицита"
-// 	limb_body_zone = ORGAN_SLOT_APPENDIX
-// 	category = "Органы"

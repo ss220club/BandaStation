@@ -25,18 +25,15 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   const { data, act } = useBackend<PreferencesMenuData>();
   const { name } = props;
 
-  // Безопасно получаем поля (чтобы TS не ругался на undefined)
   const prefJobSlots = data.pref_job_slots ?? {};
   const profileIndex = data.profile_index ?? {};
 
-  // Текущий выбранный слот
   const currentSlotNumber = prefJobSlots[name] ?? 0;
   const currentSlotName = profileIndex[currentSlotNumber] ?? '';
 
-  // Строим список опций для выпадающего меню
   const slotOptions = Object.entries(profileIndex).map(([key, slotName]) => ({
     value: key,
-    displayText: String(slotName) as React.ReactNode, // Приведение типов
+    displayText: String(slotName) as React.ReactNode,
   }));
 
   return (

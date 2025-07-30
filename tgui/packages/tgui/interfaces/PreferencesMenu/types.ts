@@ -190,13 +190,12 @@ export type PreferencesMenuData = {
   donator_level: number;
   tts_seed: string;
   tts_enabled: BooleanLike;
-  // BANDASTATION ADDITION END
 
   incompatible_body_modifications: string[];
   applied_body_modifications: string[];
   manufacturers: Record<string, string[]>;
   selected_manufacturer: Record<string, string>;
-  // BANDASTATION ADD END
+  // BANDASTATION ADDITION END
 };
 
 // BANDASTATION ADDITION START
@@ -232,10 +231,10 @@ export type BodyModification = {
 // BANDASTATION ADDITION END
 
 export type ServerData = {
-  // BANDASTATION ADD START
+  // BANDASTATION ADDITION START
   text_to_speech: TtsData;
   body_modifications: BodyModification[];
-  // BANDASTATION ADD END
+  // BANDASTATION ADDITION END
   jobs: {
     departments: Record<string, Department>;
     jobs: Record<string, Job>;
