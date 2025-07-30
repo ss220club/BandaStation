@@ -27,6 +27,28 @@
 /obj/effect/turf_decal/siding/royal/end
 	icon_state = "royal_end"
 
+// Wood Sidings
+#define DEFINE_WOOD_SIDING(wood_name, wood_color) \
+	/obj/effect/turf_decal/siding/wood/##wood_name { \
+		color = wood_color; \
+	} \
+	/obj/effect/turf_decal/siding/wood/##wood_name/corner { \
+		icon_state = "siding_wood_corner"; \
+	} \
+	/obj/effect/turf_decal/siding/wood/##wood_name/end { \
+		icon_state = "siding_wood_end"; \
+	}
+
+DEFINE_WOOD_SIDING(oak, "#644526")
+DEFINE_WOOD_SIDING(birch, "#FFECB3")
+DEFINE_WOOD_SIDING(cherry, "#643412")
+DEFINE_WOOD_SIDING(amaranth, "#6B2E3E")
+DEFINE_WOOD_SIDING(ebonite, "#363649")
+DEFINE_WOOD_SIDING(ivory, "#D78575")
+DEFINE_WOOD_SIDING(guaiacum, "#5C6250")
+
+#undef DEFINE_WOOD_SIDING
+
 // MARK: Lines
 /obj/effect/turf_decal/line
 	name = "line decal"
@@ -152,25 +174,3 @@ LINE_DECAL_SUBTYPE_HELPER(/obj/effect/turf_decal/line/neutral)
 LINE_DECAL_SUBTYPE_HELPER(/obj/effect/turf_decal/line/dark)
 
 #undef LINE_DECAL_SUBTYPE_HELPER
-
-// MARK: Wood Sidings
-#define DEFINE_WOOD_SIDING(wood_name, wood_color) \
-	/obj/effect/turf_decal/siding/wood/##wood_name { \
-		color = wood_color; \
-	} \
-	/obj/effect/turf_decal/siding/wood/##wood_name/corner { \
-		icon_state = "siding_wood_corner"; \
-	} \
-	/obj/effect/turf_decal/siding/wood/##wood_name/end { \
-		icon_state = "siding_wood_end"; \
-	}
-
-DEFINE_WOOD_SIDING(oak, "#644526")
-DEFINE_WOOD_SIDING(birch, "#FFECB3")
-DEFINE_WOOD_SIDING(cherry, "#643412")
-DEFINE_WOOD_SIDING(amaranth, "#6B2E3E")
-DEFINE_WOOD_SIDING(ebonite, "#363649")
-DEFINE_WOOD_SIDING(ivory, "#D78575")
-DEFINE_WOOD_SIDING(guaiacum, "#5C6250")
-
-#undef DEFINE_WOOD_SIDING
