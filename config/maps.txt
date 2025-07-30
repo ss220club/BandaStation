@@ -45,6 +45,12 @@ map cyberiad
 	votable
 endmap
 
+map robustia
+endmap
+
+map torvtech
+endmap
+
 # Debug-only maps.
 
 map gateway_test
