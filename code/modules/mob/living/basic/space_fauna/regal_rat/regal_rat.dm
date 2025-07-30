@@ -59,9 +59,9 @@
 	AddComponent(\
 		/datum/component/ghost_direct_control,\
 		poll_candidates = poll_ghosts,\
-		role_name = "Королевская Крыса, сыр Его Величеству!",\
+		role_name = "Королевская Крыса! Пусть корона тлится сыром Его Величеству!",\
 		poll_ignore_key = POLL_IGNORE_REGAL_RAT,\
-		assumed_control_message = "Вы - независимая, дикая сила на станции! Собирайте монеты, мусор, сыр и тому подобное в безопасном темном месте!",\
+		assumed_control_message = "Вы - независимая, дикая сила на станции! Собирайте монеты, мусор, сыр и прочее, укрываясь в темноте!",\
 		after_assumed_control = CALLBACK(src, PROC_REF(became_player_controlled)),\
 		poll_chat_border_icon = /obj/item/food/cheese/wedge,\
 	)
@@ -90,7 +90,7 @@
 
 	if(ismouse(user))
 		if(user.faction_check_atom(src, exact_match = TRUE))
-			. += span_notice("Это Ваш король. Живите долго, Ваше величество!")
+			. += span_notice("Это Ваш король. Да здравствует Его Величество!")
 		else
 			. += span_warning("Это не Ваш король! Сокрушите его!")
 		return
@@ -108,7 +108,7 @@
 /// Triggers an alert to all ghosts that the rat has become player controlled.
 /mob/living/basic/regal_rat/proc/became_player_controlled()
 	notify_ghosts(
-		"Все встанут перед [name], восходящего на трон в [get_area(src)].",
+		"Всем встать! [name] восходит на трон в [get_area(src)].",
 		source = src,
 		header = "Появилась разумная крыса",
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
@@ -166,7 +166,7 @@
 	var/selected_kingdom = pick(kingdoms)
 
 	name = "[selected_title] [selected_kingdom], [pick(descriptors)]" // ex "Tsar Maintenance, the Brute"
-	special_moniker = "Крыса [selected_kingdom]. [selected_title]... Как он стал им?"
+	special_moniker = "Крыса [selected_kingdom]. [selected_title]... Да кто вообще дал ему титул этой дыры?"
 
 /// Checks if we are able to attack this object, as well as send out the signal to see if we get any special regal rat interactions.
 /mob/living/basic/regal_rat/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)

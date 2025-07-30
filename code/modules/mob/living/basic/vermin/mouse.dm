@@ -50,8 +50,8 @@
 
 /datum/emote/mouse/squeak
 	key = "squeak"
-	key_third_person = "пищит!"
-	message = "пищит"
+	key_third_person = "squeaks"
+	message = "пищит!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	vary = TRUE
 	sound = 'sound/mobs/non-humanoids/mouse/mousesqueek.ogg'
@@ -191,8 +191,8 @@
 	// Royal cheese will evolve us into a regal rat
 	if(istype(cheese, /obj/item/food/cheese/royal))
 		visible_message(
-			span_warning("[src] поглощает [cheese]! Он превращается во что-то... великое!"),
-			span_notice("Вы поглощаете [cheese], и начинаете превращаться во что-то... великое!"),
+			span_warning("[capitalize(declent_ru(NOMINATIVE))] поглощает [cheese.declent_ru(ACCUSATIVE)]! Он превращается во что-то... великое!"),
+			span_notice("Вы поглощаете [cheese.declent_ru(ACCUSATIVE)], и начинаете превращаться во что-то... великое!"),
 		)
 		evolve_into_regal_rat()
 		qdel(cheese)
@@ -202,8 +202,8 @@
 	// Normal cheese will either heal us
 	if(prob(90) || health < maxHealth)
 		visible_message(
-			span_notice("[src] надкусывает [cheese]."),
-			span_notice("Вы надкусываете [cheese][health < maxHealth ? ", восстанавливая своё здоровье!" : ""].")
+			span_notice("[capitalize(declent_ru(NOMINATIVE))] надкусывает [cheese.declent_ru(NOMINATIVE)]."),
+			span_notice("Вы надкусываете [cheese.declent_ru(NOMINATIVE)][health < maxHealth ? ", восстанавливая своё здоровье!" : ""].")
 		)
 		adjust_health(-maxHealth)
 
@@ -211,13 +211,13 @@
 	// ...if the rat cap allows us, that is
 	else if(length(SSmobs.cheeserats) >= cap)
 		visible_message(
-			span_warning("[src] осторожно ест [cheese], пряча его от [cap] других грызунов!"),
-			span_notice("Вы осторожно надкусываете [cheese], пряча его от [cap] других грызунов на станции.")
+			span_warning("[capitalize(declent_ru(NOMINATIVE))] осторожно ест [cheese.declent_ru(NOMINATIVE)], пряча его от [cap] других грызунов!"),
+			span_notice("Вы осторожно надкусываете [cheese.declent_ru(NOMINATIVE)], пряча его от [cap] других грызунов на станции.")
 		)
 	else
 		visible_message(
-			span_notice("[src] прогрызает [cheese], привлекая другого грызуна!"),
-			span_notice("Вы прогрызаете [cheese], привлекая другого грызуна!")
+			span_notice("[capitalize(declent_ru(NOMINATIVE))] прогрызает [cheese.declent_ru(NOMINATIVE)], привлекая другого грызуна!"),
+			span_notice("Вы прогрызаете [cheese.declent_ru(NOMINATIVE)], привлекая другого грызуна!")
 		)
 		create_a_new_rat()
 
@@ -238,8 +238,8 @@
 /mob/living/basic/mouse/proc/try_bite_cable(obj/structure/cable/cable)
 	if(cable.avail() && !HAS_TRAIT(src, TRAIT_SHOCKIMMUNE) && prob(cable_zap_prob))
 		visible_message(
-			span_warning("[src] прогрызает провод и поджаривается!"),
-			span_userdanger("Как только Вы полностью прогрызаете провод до вас доходит - это была плохая идея."),
+			span_warning("[capitalize(declent_ru(NOMINATIVE))] прогрызает провод и поджаривается!"),
+			span_userdanger("Как только Вы полностью прогрызаете [cable.declent_ru(NOMINATIVE)], до Вас внезапно доходит мысль, что это была плохая идея..."),
 			span_hear("Вы слышите электрический треск."),
 		)
 		// Finely toasted
@@ -251,8 +251,8 @@
 
 	else
 		visible_message(
-			span_warning("[src] прогрызает провод."),
-			span_notice("Вы прогрызаете провод."),
+			span_warning("[capitalize(declent_ru(NOMINATIVE))] прогрызает [cable.declent_ru(NOMINATIVE)]."),
+			span_notice("Вы прогрызаете [cable.declent_ru(NOMINATIVE)]."),
 		)
 
 	playsound(cable, 'sound/effects/sparks/sparks2.ogg', 100, TRUE)
@@ -391,7 +391,7 @@
 	var/datum/reagents/target_reagents = interacting_with.reagents
 	var/trans_amount = reagents.maximum_volume - reagents.total_volume * (4 / 3)
 	if(target_reagents.has_reagent(/datum/reagent/fuel) && target_reagents.trans_to(src, trans_amount))
-		to_chat(user, span_notice("Вы погружаете [src] в [interacting_with]."))
+		to_chat(user, span_notice("Вы погружаете [declent_ru(ACCUSATIVE)] в [interacting_with]."))
 		return ITEM_INTERACT_SUCCESS
 
 /obj/item/food/deadmouse/moldy
