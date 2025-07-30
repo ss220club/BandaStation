@@ -9,7 +9,7 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
@@ -104,7 +104,7 @@ function SyndicateContractorContent(props) {
     'Ожидание ответа...',
     'Ожидание ответа...',
     'Ответ получен, аккаунт 4851234...',
-    'ПОДТВЕРДИТЬ АККАУНТ ' + Math.round(Math.random() * 20000),
+    `ПОДТВЕРДИТЬ АККАУНТ ${Math.round(Math.random() * 20000)}`,
     'Настройка личных аккаунтов...',
     'АККАУНТ КОНТРАКТНИКА СОЗДАН',
     'Поиск доступных контрактов...',
@@ -282,7 +282,7 @@ function ContractsTab(props) {
                     disabled={!!contract.extraction_enroute}
                     color={active && 'bad'}
                     onClick={() =>
-                      act('PRG_contract' + (active ? '_abort' : '-accept'), {
+                      act(`PRG_contract${active ? '_abort' : '-accept'}`, {
                         contract_id: contract.id,
                       })
                     }

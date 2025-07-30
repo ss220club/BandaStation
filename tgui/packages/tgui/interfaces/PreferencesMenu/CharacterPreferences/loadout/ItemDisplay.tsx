@@ -83,7 +83,7 @@ export function ItemDisplay(props: DisplayProps) {
   );
 
   function tooltipInfo() {
-    let disabledInfo: string[] = [];
+    const disabledInfo: string[] = [];
     if (!active && loadout_leftpoints === 0) {
       disabledInfo.push('Недостаточно очков.');
     }

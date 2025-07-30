@@ -1,8 +1,8 @@
 import {
   InteractionType,
-  PaperReplacement,
-  WriteButtonLocation,
-  WritingImplement,
+  type PaperReplacement,
+  type WriteButtonLocation,
+  type WritingImplement,
 } from './types';
 
 const replacementRegex: RegExp = /\[(\w+)\]/gi;
@@ -53,7 +53,7 @@ export function walkTokens(token) {
 
 // Extracts the write button location from a full ID.
 export function getWriteButtonLocation(id: string): WriteButtonLocation {
-  let ids: string[] = id.replace('paperfield_', '').split('_');
+  const ids: string[] = id.replace('paperfield_', '').split('_');
   return { paperInputRef: `[${ids[0]}]`, fieldId: Number(ids[1]) };
 }
 
