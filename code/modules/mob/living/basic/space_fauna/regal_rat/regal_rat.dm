@@ -166,7 +166,7 @@
 	var/selected_kingdom = pick(kingdoms)
 
 	name = "[selected_title] [selected_kingdom], [pick(descriptors)]" // ex "Tsar Maintenance, the Brute"
-	special_moniker = "Крыса [selected_kingdom]. [selected_title]... Да кто вообще дал ему титул этой дыры?"
+	special_moniker = "Крыса [selected_kingdom]. [selected_title]... Да кто вообще дал ему такой титул этой дыры?"
 
 /// Checks if we are able to attack this object, as well as send out the signal to see if we get any special regal rat interactions.
 /mob/living/basic/regal_rat/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)

@@ -391,7 +391,7 @@
 	var/datum/reagents/target_reagents = interacting_with.reagents
 	var/trans_amount = reagents.maximum_volume - reagents.total_volume * (4 / 3)
 	if(target_reagents.has_reagent(/datum/reagent/fuel) && target_reagents.trans_to(src, trans_amount))
-		to_chat(user, span_notice("Вы погружаете [declent_ru(ACCUSATIVE)] в [interacting_with]."))
+		to_chat(user, span_notice("Вы погружаете [declent_ru(ACCUSATIVE)] в [interacting_with.declent_ru(ACCUSATIVE)]."))
 		return ITEM_INTERACT_SUCCESS
 
 /obj/item/food/deadmouse/moldy
