@@ -4,9 +4,10 @@
 	desc = "Маска, созданная из страданий существования. Заглянув в ее глаза, вы замечаете, как что-то смотрит на вас в ответ."
 	icon_state = "mad_mask"
 	inhand_icon_state = null
+	clothing_flags = BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS | GAS_FILTERING
+	flags_cover = MASKCOVERSEYES | MASKCOVERSMOUTH | PEPPERPROOF
+	resistance_flags = LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	w_class = WEIGHT_CLASS_SMALL
-	flags_cover = MASKCOVERSEYES
-	resistance_flags = FLAMMABLE
 	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
 	///Who is wearing this
 	var/mob/living/carbon/human/local_user

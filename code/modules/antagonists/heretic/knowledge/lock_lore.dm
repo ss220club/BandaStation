@@ -1,20 +1,47 @@
-
-/datum/heretic_knowledge_tree_column/main/lock
-	neighbour_type_left = /datum/heretic_knowledge_tree_column/moon_to_lock
-	neighbour_type_right = /datum/heretic_knowledge_tree_column/lock_to_flesh
-
+/datum/heretic_knowledge_tree_column/lock
 	route = PATH_LOCK
 	ui_bgr = "node_lock"
+	complexity = "Medium"
+	complexity_color = COLOR_YELLOW
+	icon = list(
+		"icon" = 'icons/obj/weapons/khopesh.dmi',
+		"state" = "key_blade",
+		"frame" = 1,
+		"dir" = SOUTH,
+		"moving" = FALSE,
+	)
+	description = list(
+		"The Path of Lock revolves around access, area denial, theft and gadgets.",
+		"Pick this path if you want a less confrontational playstyle and more interested in being a slippery rat.",
+	)
+	pros = list(
+		"Your mansus grasp can open any lock, unlock every terminal and bypass any access restriction.",
+		"lock heretics get a discount from the knowledge shop, making it the perfect path if you want to experiment with the various trinkets the shop has to offer.",
+	)
+	cons = list(
+		"The weakest heretic path in direct combat, period.",
+		"Very limited direct combat benefits.",
+		"You have no defensive benefits or immunities.",
+		"no mobility or direct additional teleportation",
+		"Highly reliant on sourcing power from other departments, players and the game world.",
+	)
+	tips = list(
+		"Your mansus grasp allows you to access everything, from airlocks, consoles and even exosuits, but it has no additional effects on players. It will however leave a mark that when triggered will make your victim unable to leave the room you are in.",
+		"Your blade also functions as a crowbar! You can store it in utility belts And, in a pitch, use it to force open an airlock.",
+		"Your Eldritch ID can create a portal between 2 different airlocks. Useful if you want to enstablish a secret base.",
+		"Use your labyrinth book to shake off pursuers. It creates impassible walls to anyone but you.",
+	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_knock
-	grasp = /datum/heretic_knowledge/lock_grasp
-	tier1 = /datum/heretic_knowledge/key_ring
-	mark = /datum/heretic_knowledge/mark/lock_mark
-	ritual_of_knowledge = /datum/heretic_knowledge/knowledge_ritual/lock
-	unique_ability = /datum/heretic_knowledge/limited_amount/concierge_rite
-	tier2 = /datum/heretic_knowledge/spell/burglar_finesse
+	knowledge_tier1 = /datum/heretic_knowledge/key_ring
+	guaranteed_side_tier1 = /datum/heretic_knowledge/painting
+	knowledge_tier2 = /datum/heretic_knowledge/limited_amount/concierge_rite
+	guaranteed_side_tier2 = /datum/heretic_knowledge/spell/opening_blast
+	robes = /datum/heretic_knowledge/armor/lock
+	knowledge_tier3 = /datum/heretic_knowledge/spell/burglar_finesse
+	guaranteed_side_tier3 = /datum/heretic_knowledge/summon/fire_shark
 	blade = /datum/heretic_knowledge/blade_upgrade/flesh/lock
-	tier3 =	/datum/heretic_knowledge/spell/caretaker_refuge
+	knowledge_tier4 = /datum/heretic_knowledge/spell/caretaker_refuge
 	ascension = /datum/heretic_knowledge/ultimate/lock_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_knock
@@ -32,33 +59,29 @@
 	limit = 2
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
 	research_tree_icon_state = "key_blade"
+	mark_type = /datum/status_effect/eldritch/lock
+	eldritch_passive = /datum/status_effect/heretic_passive/lock
 
-/datum/heretic_knowledge/lock_grasp
-	name = "Grasp of Lock"
-	desc = "Ваша Хватка Мансуса позволяет получить доступ ко всему! ПКМ на шлюзу или шкафу отопрет их. \
-		ДНК замки мехов будут очищены, а пилот извлечен. Также работает на консолях. \
-		Издает характерный звук стучка при использовании."
-	gain_text = "Ничто не останется закрытым от моего прикосновения."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_lock"
-
-/datum/heretic_knowledge/lock_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
+/datum/heretic_knowledge/limited_amount/starting/base_knock/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
 	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK_SECONDARY, PROC_REF(on_secondary_mansus_grasp))
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
+	var/datum/action/cooldown/spell/touch/mansus_grasp/grasp_spell = locate() in user.actions
+	grasp_spell?.invocation_type = INVOCATION_NONE
+	grasp_spell?.sound = null
 
-/datum/heretic_knowledge/lock_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
+/datum/heretic_knowledge/limited_amount/starting/base_knock/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
 	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK_SECONDARY)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
 
-/datum/heretic_knowledge/lock_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
+/datum/heretic_knowledge/limited_amount/starting/base_knock/on_mansus_grasp(mob/living/source, mob/living/target)
+	. = ..()
+
 	var/obj/item/clothing/under/suit = target.get_item_by_slot(ITEM_SLOT_ICLOTHING)
 	if(istype(suit) && suit.adjusted == NORMAL_STYLE)
 		suit.toggle_jumpsuit_adjust()
 		suit.update_appearance()
 
-/datum/heretic_knowledge/lock_grasp/proc/on_secondary_mansus_grasp(mob/living/source, atom/target)
+/datum/heretic_knowledge/limited_amount/starting/base_knock/proc/on_secondary_mansus_grasp(mob/living/source, atom/target)
 	SIGNAL_HANDLER
 
 	if(ismecha(target))
@@ -80,7 +103,10 @@
 
 	var/turf/target_turf = get_turf(target)
 	SEND_SIGNAL(target_turf, COMSIG_ATOM_MAGICALLY_UNLOCKED, src, source)
-	playsound(target, 'sound/effects/magic/hereticknock.ogg', 100, TRUE, -1)
+	SEND_SOUND(source, 'sound/effects/magic/hereticknock.ogg')
+
+	if(HAS_TRAIT(source, TRAIT_LOCK_GRASP_UPGRADED))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return COMPONENT_USE_HAND
 
@@ -100,7 +126,7 @@
 		/obj/item/card/id/advanced = 1,
 	)
 	result_atoms = list(/obj/item/card/id/advanced/heretic)
-	cost = 1
+	cost = 2
 	research_tree_icon_path = 'icons/obj/card.dmi'
 	research_tree_icon_state = "card_gold"
 
@@ -116,30 +142,36 @@
 	result_item.shapeshift(id)
 	return TRUE
 
-/datum/heretic_knowledge/mark/lock_mark
-	name = "Mark of Lock"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку замка. \
-		Активация метки закроет доступ ко всем проходам на время действие метки. \
-		У них не будет доступа к чему-либо, даже публичные шлюзы будут отклонять их."
-	gain_text = "Привратница была коррумпированным Управляющим. Она мешала своим собратьям ради собственного извращенного развлечения."
-	mark_type = /datum/status_effect/eldritch/lock
-
-/datum/heretic_knowledge/knowledge_ritual/lock
-
-/datum/heretic_knowledge/limited_amount/concierge_rite // item that creates 3 max at a time heretic only barriers, probably should limit to 1 only, holy people can also pass
+/datum/heretic_knowledge/limited_amount/concierge_rite
 	name = "Concierge's Rite"
-	desc = "Позволяет трансмутировать мелок, деревянную доску и мультитул, чтобы создать Справочник лабиринта. \
-		Оно может материализовать на расстоянии баррикаду, через которую могут пройти только вы и люди с сопротивлением против магии. 3 использования."
-	gain_text = "Консьерж записал мое имя в Справочник. \"Добро пожаловать в ваш новый дом, коллега Управляющий.\""
+	desc = "Allows you to transmute a crayon, a wooden plank, and a multitool to create a Labyrinth Handbook. \
+		It can materialize a barricade at range that only you and people resistant to magic can pass. 5 charges which regerate over time."
+	gain_text = "The Concierge scribbled my name into the Handbook. \"Welcome to your new home, fellow Steward.\""
 	required_atoms = list(
 		/obj/item/toy/crayon = 1,
 		/obj/item/stack/sheet/mineral/wood = 1,
 		/obj/item/multitool = 1,
 	)
 	result_atoms = list(/obj/item/heretic_labyrinth_handbook)
-	cost = 1
+	cost = 2
 	research_tree_icon_path = 'icons/obj/service/library.dmi'
 	research_tree_icon_state = "heretichandbook"
+	drafting_tier = 5
+
+/datum/heretic_knowledge/armor/lock
+	desc = "Allows you to transmute a table (or a suit), a mask and a crowbar to create a shifting guise. \
+		It grants you camoflage from cameras, hides your identity, voice and muffles your footsteps. \
+		Acts as a focus while hooded."
+	gain_text = "While stewards are known to the Concierge, \
+				they still consort between one another and with outsiders under shaded cloaks and drawn hoods. \
+				Familiarity is treachery, even to oneself."
+	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/lock)
+	research_tree_icon_state = "lock_armor"
+	required_atoms = list(
+		list(/obj/structure/table, /obj/item/clothing/suit) = 1,
+		/obj/item/clothing/mask = 1,
+		/obj/item/crowbar = 1,
+	)
 
 /datum/heretic_knowledge/spell/burglar_finesse
 	name = "Burglar's Finesse"
@@ -148,9 +180,9 @@
 	gain_text = "Общение с духами Взломщиками не одобряется, но Управляющий всегда хочет узнавать о новых дверях."
 
 	action_to_add = /datum/action/cooldown/spell/pointed/burglar_finesse
-	cost = 1
+	cost = 2
 
-/datum/heretic_knowledge/blade_upgrade/flesh/lock //basically a chance-based weeping avulsion version of the former
+/datum/heretic_knowledge/blade_upgrade/flesh/lock
 	name = "Opening Blade"
 	desc = "Ваш клинок теперь может накладывать сильное кровотечение при атаке."
 	gain_text = "Пилигрим-Хирург не был Управляющим. Тем не менее, его клинки и швы оказались достойны их ключей."
@@ -170,7 +202,8 @@
 		Вы неуязвимы, но также не можете ничему вредить. При попадании анти-магией, эффект прерывается."
 	gain_text = "Страж и Гончая охотились за мной из ревности. Но я раскрыл свою форму, став лишь неприкосаемой дымкой."
 	action_to_add = /datum/action/cooldown/spell/caretaker
-	cost = 1
+	cost = 2
+	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/lock_final
 	name = "Unlock the Labyrinth"
