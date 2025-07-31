@@ -23,6 +23,7 @@ type RoleInfo = {
   desc: string;
   hud_icon: string;
   revealed_icon: string;
+  role_dead: string;
 };
 
 type PlayerInfo = {
@@ -286,7 +287,7 @@ const MafiaRole = (props) => {
     <Section
       fill
       title={phase + turn}
-      minHeight="100px"
+      minHeight="110px"
       maxHeight="50px"
       buttons={
         <Box
@@ -299,10 +300,16 @@ const MafiaRole = (props) => {
         </Box>
       }
     >
-      <Stack align="center">
+      <Stack>
         <Stack.Item grow>
-          <Box bold>Вы {roleinfo.role}</Box>
-          <Box italic>{roleinfo.desc}</Box>
+          <Box fontSize="16px">Вы {roleinfo.role}</Box>
+          {!!roleinfo.role_dead && (
+            <Box bold>
+              Вы уже мертвы. Вы можете поговорить с Священником ночью, если он
+              есть.
+            </Box>
+          )}
+          {!roleinfo.role_dead && <Box italic>{roleinfo.desc}</Box>}
         </Stack.Item>
         <Stack.Item>
           <Box
