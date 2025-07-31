@@ -81,7 +81,7 @@ function Recipe(props: RecipeProps) {
     !costs.some(([material, amount]) => {
       const have = available[material];
 
-      return !have || amount > have;
+      return !have || amount > have || (design.print_error ? true : false);
     });
 
   return (
@@ -97,6 +97,32 @@ function Recipe(props: RecipeProps) {
           <Icon name="question-circle" />
         </div>
       </Tooltip>
+      {!!design.print_error && (
+        <Tooltip content={design.print_error} position="right">
+          <div
+            className={classes([
+              'FabricatorRecipe__Button',
+              'FabricatorRecipe__Button--icon',
+            ])}
+          >
+            <Icon name="circle-exclamation" />
+          </div>
+        </Tooltip>
+      )}
+      {design.can_delete && (
+        <div
+          onClick={() =>
+            design.can_delete && act('delete', { designId: design.id })
+          }
+          className={classes([
+            'FabricatorRecipe__Button',
+            'FabricatorRecipe__Button--icon',
+          ])}
+        >
+          <Icon name="circle-xmark" />
+        </div>
+      )}
+
       <Tooltip
         content={
           <MaterialCostSequence

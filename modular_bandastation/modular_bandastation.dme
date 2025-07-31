@@ -22,6 +22,7 @@
 #include "barsigns/_barsigns.dme"
 #include "changelog/_changelog.dme"
 #include "chat/_chat.dme"
+#include "Circuit_persistence/_Circuit_persistence.dme"
 #include "communication/_communication.dme"
 #include "cryosleep/_cryosleep.dme"
 #include "cult_overhaul/_cult_overhaul.dme"

@@ -338,8 +338,16 @@
 
 	///The internal material bus
 	var/datum/component/remote_materials/materials
-	///List of designs scanned and saved
+
+	/// BANDASTATION EDIT START ///
+	///List of designs scanned and saved this round
 	var/list/scanned_designs = list()
+	/// The current unlocked circuit component designs. Used by integrated circuits to print off circuit components remotely.
+	var/list/current_unlocked_designs = list()
+	/// The techweb the duplicastor will get researched designs from
+	var/datum/techweb/techweb
+	/// BANDASTATION EDIT END ///
+
 	///Constant material cost per component
 	var/cost_per_component = SHEET_MATERIAL_AMOUNT / 10
 	///Cost efficiency of this machine
@@ -385,6 +393,8 @@
 
 	update_static_data_for_all_viewers()
 
+// BANDASTATION EDIT START. Moved to modular_bandastation
+/*
 /obj/machinery/module_duplicator/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if (.)
@@ -417,6 +427,8 @@
 			materials.eject_sheets(material, amount, user_data = ID_DATA(usr))
 
 	return TRUE
+*/
+// BANDASTATION EDIT END
 
 /obj/machinery/module_duplicator/proc/print_module(list/design)
 	flick("module-fab-print", src)
@@ -453,6 +465,7 @@
 		data["name"] = module.display_name
 		data["desc"] = "A module that has been loaded in by [user]."
 		data["materials"] = list(GET_MATERIAL_REF(/datum/material/glass) = module.circuit_size * cost_per_component)
+		data["author_ckey"] = user.client?.ckey // BANDASTATION EDIT
 	else if(istype(weapon, /obj/item/integrated_circuit))
 		var/obj/item/integrated_circuit/integrated_circuit = weapon
 		if(HAS_TRAIT(integrated_circuit, TRAIT_CIRCUIT_UNDUPABLE))
@@ -470,6 +483,7 @@
 
 		data["materials"] = materials
 		data["integrated_circuit"] = TRUE
+		data["author_ckey"] = user.client?.ckey // BANDASTATION EDIT
 
 	if(!length(data))
 		return ..()
@@ -478,7 +492,17 @@
 		balloon_alert(user, "it needs a name!")
 		return ..()
 
-	for(var/list/component_data as anything in scanned_designs)
+	// BANDASTATION EDIT START
+	var/list/all_designs = scanned_designs
+	if (!isnull(user.client?.ckey))
+		if (isnull(SSpersistence.circuit_designs[user.client?.ckey]))
+			SSpersistence.load_circuits_by_ckey(user.client?.ckey)
+		all_designs = scanned_designs | SSpersistence.circuit_designs[user.client?.ckey]
+
+	for(var/list/component_data as anything in all_designs)
+		if (component_data["author_ckey"] != user.client?.ckey && !(component_data in scanned_designs))
+			continue
+	// BANDASTATION EDIT END
 		if(component_data["name"] == data["name"])
 			balloon_alert(user, "name already exists!")
 			return ..()
@@ -488,7 +512,10 @@
 
 /obj/machinery/module_duplicator/proc/finish_module_scan(mob/user, data)
 	scanned_designs += list(data)
-
+	if (!isnull(user.client?.ckey))
+		if (isnull(SSpersistence.circuit_designs[user.client?.ckey]))
+			SSpersistence.load_circuits_by_ckey(user.client?.ckey)
+		SSpersistence.circuit_designs[user.client?.ckey] += list(data)
 	balloon_alert(user, "module has been saved.")
 	playsound(src, 'sound/machines/ping.ogg', 50)
 
@@ -503,9 +530,16 @@
 	var/list/data = materials.mat_container.ui_static_data()
 
 	var/list/designs = list()
+	// BANDASTATION EDIT START
+	var/list/all_designs = scanned_designs
+	if (!isnull(user.client?.ckey))
+		if (isnull(SSpersistence.circuit_designs[user.client?.ckey]))
+			SSpersistence.load_circuits_by_ckey(user.client?.ckey)
+		all_designs = scanned_designs | SSpersistence.circuit_designs[user.client?.ckey]
+	// BANDASTATION EDIT END
 
 	var/index = 1
-	for (var/list/design as anything in scanned_designs)
+	for (var/list/design as anything in all_designs) // BANDASTATION EDIT
 
 		var/list/cost = list()
 		var/list/materials = design["materials"]
@@ -519,7 +553,33 @@
 			"id" = "[index]",
 			"icon" = "integrated_circuit",
 			"categories" = list("/Saved Circuits"),
+			"can_delete" = (design["author_ckey"] == user.client?.ckey), // BANDASTATION EDIT
+			"print_error" = null, // BANDASTATION EDIT
 		)
+		// BANDASTATION EDIT START
+		var/list/invalid_list = list()
+		var/list/unresearched_list = list()
+		var/list/design_data = json_decode(design["dupe_data"])
+
+		if(!design_data)
+			index++
+			continue
+
+		var/list/circuit_data = design_data["components"]
+		for(var/identifier in circuit_data)
+			var/list/component_data = circuit_data[identifier]
+			var/comp_type = text2path(component_data["type"])
+			if (!ispath(comp_type, /obj/item/circuit_component))
+				invalid_list |= component_data["name"]
+			else if (isnull(current_unlocked_designs[comp_type]))
+				unresearched_list |= component_data["name"]
+
+		if (invalid_list.len)
+			designs["[index]"]["print_error"] = "Following components have been recalled: [invalid_list.Join(", ")]"
+		if (unresearched_list.len)
+			designs["[index]"]["print_error"] = (designs["[index]"]["print_error"] || "") + "[designs["[index]"]["print_error"] ? "; " : ""]Following components are yet to be researched: [unresearched_list.Join(", ")]"
+		// BANDASTATION EDIT END
+
 		index++
 
 	data["designs"] = designs

@@ -24,6 +24,9 @@ SUBSYSTEM_DEF(persistence)
 	var/list/saved_trophies = list()
 	var/list/picture_logging_information = list()
 
+	///Associated list of all saved circuits, ckey -> list of designs. BANDASTATION EDIT
+	var/list/circuit_designs = list() // BANDASTATION EDIT
+
 	/// A json_database linking to data/photo_frames.json.
 	/// Schema is persistence_id => array of photo names.
 	var/datum/json_database/photo_frames_database
@@ -89,6 +92,7 @@ SUBSYSTEM_DEF(persistence)
 	save_scars()
 	save_custom_outfits()
 	save_delamination_counter()
+	save_circuits() // BANDASTATION EDIT
 	save_queued_message_bottles()
 	if(SStransport.can_fire)
 		for(var/datum/transport_controller/linear/tram/transport as anything in SStransport.transports_by_type[TRANSPORT_TYPE_TRAM])
