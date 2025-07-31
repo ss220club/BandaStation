@@ -182,7 +182,8 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 /obj/machinery/airalarm/update_name(updates)
 	. = ..()
-	name = "[declent_ru(NOMINATIVE)]"
+	var/area/current_area = get_area(src)
+	name = "[declent_ru(NOMINATIVE)] [current_area.declent_ru(GENITIVE)]"
 
 /obj/machinery/airalarm/on_exit_area(datum/source, area/area_to_unregister)
 	//we cannot unregister from an area we never registered to in the first place
