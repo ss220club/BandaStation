@@ -11,6 +11,7 @@ import {
 import { capitalizeAll, createSearch } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
+import { JOBS_RU } from '../bandastation/ru_jobs';
 import { Window } from '../layouts';
 import { getLayoutState, LAYOUT, LayoutToggle } from './common/LayoutToggle';
 
@@ -176,8 +177,8 @@ export const UserDetails = (props) => {
         </Stack.Item>
         <Stack.Item>
           {user
-            ? `${user.name || 'Unknown'} | ${user.job}`
-            : 'No ID detected! Contact the Head of Personnel.'}
+            ? `${user.name || 'Unknown'} | ${JOBS_RU[user.job] || user.job || 'Без работы'}`
+            : 'ID-карта не обнаружена! Обратитесь к главе персонала.'}
         </Stack.Item>
       </Stack>
     </NoticeBox>
@@ -208,7 +209,7 @@ const ProductDisplay = (props: {
     <Section
       fill
       scrollable
-      title="Products"
+      title="Товары"
       buttons={
         <Stack>
           {!all_products_free && user && (
@@ -222,7 +223,7 @@ const ProductDisplay = (props: {
             <Input
               onChange={setStockSearch}
               expensive
-              placeholder="Search..."
+              placeholder="Поиск..."
               value={stockSearch}
             />
           </Stack.Item>
@@ -348,7 +349,7 @@ const ProductList = (props) => {
           fontSize={0.8}
           color={'rgba(255, 255, 255, 0.5)'}
         >
-          {remaining} left
+          {remaining} ост.
         </Stack.Item>
         <Stack.Item
           width={3.5}
@@ -386,10 +387,10 @@ const ProductPrice = (props) => {
   const { act, data } = useBackend<VendingData>();
   const { access, displayed_currency_name } = data;
   const { custom, discount, free, product, redPrice } = props;
-  const customPrice = access ? 'Free' : product.price;
+  const customPrice = access ? 'Бесплатно' : product.price;
   let standardPrice = product.price;
   if (free) {
-    standardPrice = 'Free';
+    standardPrice = 'Бесплатно';
   } else if (discount) {
     standardPrice = redPrice;
   }
@@ -411,8 +412,8 @@ const ProductPrice = (props) => {
 };
 
 const CATEGORY_COLORS = {
-  Contraband: 'red',
-  Premium: 'yellow',
+  Контрабанда: 'red',
+  Премиум: 'yellow',
 };
 
 const CategorySelector = (props: {

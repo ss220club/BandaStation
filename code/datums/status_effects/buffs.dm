@@ -158,7 +158,7 @@
 
 /atom/movable/screen/alert/status_effect/fleshmend
 	name = "Fleshmend"
-	desc = "Our wounds are rapidly healing. <i>This effect is prevented if we are on fire.</i>"
+	desc = "Наши раны быстро заживают. <i>Этот эффект приостанавливается, если мы горим.</i>"
 	icon_state = "fleshmend"
 
 /datum/status_effect/exercised
@@ -544,7 +544,7 @@
 
 /atom/movable/screen/alert/status_effect/blessing_of_insanity
 	name = "Blessing of Insanity"
-	desc = "Your devotion to madness has improved your resilience to all damage and you gain the power to levitate!"
+	desc = "Преданность безумию повысила вашу устойчивость к любым повреждениям, и вы обрели способность левитировать!"
 	//no screen alert - the gravity already throws one
 
 /datum/status_effect/blessing_of_insanity/on_apply()
