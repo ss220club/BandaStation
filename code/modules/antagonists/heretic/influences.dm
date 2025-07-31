@@ -239,20 +239,14 @@
 		draining_overlay.pixel_y = 16
 		user.add_overlay(draining_overlay)
 
-	// Only gives you the dripping eye effect if you have faster drain speed than default
-	var/mutable_appearance/draining_overlay = mutable_appearance('icons/mob/effects/heretic_aura.dmi', "heretic_eye_dripping")
-	if(drain_speed < HERETIC_RIFT_DEFAULT_DRAIN_SPEED)
-		draining_overlay.pixel_y = 16
-		user.add_overlay(draining_overlay)
-
 	if(!do_after(user, drain_speed, src, hidden = TRUE))
 		being_drained = FALSE
-		loc.balloon_alert(user, "прервано!")
+		loc.balloon_alert(user, "interrupted!")
 		user.cut_overlay(draining_overlay)
 		return
 
 	// We don't need to set being_drained back since we delete after anyways
-	loc.balloon_alert(user, "влияние добыто")
+	loc.balloon_alert(user, "influence drained")
 	user.cut_overlay(draining_overlay)
 
 	var/datum/antagonist/heretic/heretic_datum = GET_HERETIC(user)
