@@ -204,11 +204,8 @@
 		// is_afk() returns an int of inactivity, we can use this to determine AFK for how long
 		// This info will not be shown in public channels
 		this_entry["afk"] = C.is_afk()
-		this_entry["stealth"] = "NONE"
-		this_entry["skey"] = "NONE"
-		if(C.holder.fakekey)
-			this_entry["stealth"] = "STEALTH"
-			this_entry["skey"] = C.holder.fakekey
+		this_entry["stealth"] = C.holder.fakekey ? "STEALTH" : "NONE"
+		this_entry["skey"] = C.holder.fakekey ? C.holder.fakekey : "NONE"
 
 		out_data += list(this_entry)
 	return out_data
