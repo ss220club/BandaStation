@@ -27,6 +27,28 @@
 /obj/effect/turf_decal/siding/royal/end
 	icon_state = "royal_end"
 
+// Wood Sidings
+#define DEFINE_WOOD_SIDING(wood_name, wood_color) \
+	/obj/effect/turf_decal/siding/wood/##wood_name { \
+		color = wood_color; \
+	} \
+	/obj/effect/turf_decal/siding/wood/##wood_name/corner { \
+		icon_state = "siding_wood_corner"; \
+	} \
+	/obj/effect/turf_decal/siding/wood/##wood_name/end { \
+		icon_state = "siding_wood_end"; \
+	}
+
+DEFINE_WOOD_SIDING(oak, COLOR_OAK)
+DEFINE_WOOD_SIDING(birch, COLOR_BIRCH)
+DEFINE_WOOD_SIDING(cherry, COLOR_CHERRY)
+DEFINE_WOOD_SIDING(amaranth, COLOR_AMARANTH)
+DEFINE_WOOD_SIDING(ebonite, COLOR_EBONITE)
+DEFINE_WOOD_SIDING(ivory, COLOR_PINK_IVORY)
+DEFINE_WOOD_SIDING(guaiacum, COLOR_GUAIACUM)
+
+#undef DEFINE_WOOD_SIDING
+
 // MARK: Lines
 /obj/effect/turf_decal/line
 	name = "line decal"
