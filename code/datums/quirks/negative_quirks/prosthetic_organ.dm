@@ -1,4 +1,4 @@
-// BANDASTATION EDIT START - Feat: Augmentations
+// // BANDASTATION REMOVAL START - Feat: Augmentations
 /*
 /datum/quirk/prosthetic_organ
 	name = "Prosthetic Organ"
@@ -75,4 +75,4 @@
 		old_organ.Insert(quirk_holder, special = TRUE)
 	old_organ = null
 */
-// BANDASTATION EDIT END - Feat: Augmentations
+// // BANDASTATION REMOVAL END - Feat: Augmentations

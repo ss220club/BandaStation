@@ -1050,10 +1050,10 @@
 	desc = "Your vision is augmented. Much like actual moth eyes, very sensitive to bright lights."
 	icon_state = "eyes_moth_cyber"
 	eye_icon_state = "motheyes_cyber"
-	// BANDASTATION ADDITION START - Feat: Augmentation
+	// BANDASTATION EDIT START - Feat: Augmentation
 	iris_overlay = "eyes_cyber_glow_iris"
 	overlay_ignore_lighting = TRUE
-	// BANDASTATION ADDITION END - Feat: Augmentation
+	// BANDASTATION EDIT END - Feat: Augmentation
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	pupils_name = "aperture clusters"
 	penlight_message = "are metal hemispheres, resembling insect eyes"

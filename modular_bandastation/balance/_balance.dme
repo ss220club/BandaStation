@@ -6,7 +6,6 @@
 #include "code/bodyparts/head.dm"
 #include "code/cargo/exports/materials.dm"
 #include "code/cargo/packs/goodies.dm"
-#include "code/cargo/packs/imports.dm"
 #include "code/cargo/packs/livestock.dm"
 #include "code/cargo/packs/science.dm"
 #include "code/cargo/packs/security.dm"

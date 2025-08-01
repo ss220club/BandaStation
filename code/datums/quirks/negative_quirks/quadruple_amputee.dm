@@ -1,4 +1,4 @@
-// BANDASTATION EDIT START - Feat: Augmentations
+// // BANDASTATION REMOVAL START - Feat: Augmentations
 /*/datum/quirk/quadruple_amputee
 	name = "Quadruple Amputee"
 	desc = "Ой! Всё в протезах! В результате поистине жестокого космического наказания все ваши конечности были заменены на дешевые протезы."
@@ -30,4 +30,4 @@
 	human_holder.reset_to_original_bodypart(BODY_ZONE_L_LEG)
 	human_holder.reset_to_original_bodypart(BODY_ZONE_R_LEG)
 */
-// BANDASTATION EDIT END - Feat: Augmentations
+// // BANDASTATION REMOVAL END - Feat: Augmentations
