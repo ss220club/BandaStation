@@ -79,7 +79,7 @@
 		flashed.mind_initialize()
 #else
 	if (isnull(flashed.mind) || !GET_CLIENT(flashed))
-		flashed.balloon_alert(source, "сознание [flashed] пустое!")
+		flashed.balloon_alert(source, "у [flashed] нет сознания!")
 		return
 #endif
 
@@ -249,7 +249,7 @@
 		if (brother_mind == new_brother.mind)
 			continue
 
-		to_chat(brother_mind, span_notice("[span_bold("[new_brother.real_name]")] был обращен, чтобы помогать тебе как твой кровный брат!"))
+		to_chat(brother_mind, span_notice("[span_bold("[new_brother.real_name]")] был обращен, чтобы помогать вам как твой кровный брат!"))
 		if (brothers_left == 0)
 			to_chat(brother_mind, span_notice("Вы больше не можете набирать кровных братьев."))
 
@@ -311,7 +311,7 @@
 
 /datum/objective/convert_brother
 	name = "convert brother"
-	explanation_text = "Обратите цель без защиты разума, используя вашу вспышку непосредственно на нём. Любая портативная вспышка сработает, если вы потеряете или сломаете стартовую вспышку."
+	explanation_text = "Обратите цель без защиты разума, используя вашу вспышку непосредственно на цели. Любая портативная вспышка сработает, если вы потеряете или сломаете стартовую вспышку."
 	admin_grantable = FALSE
 	martyr_compatible = TRUE
 

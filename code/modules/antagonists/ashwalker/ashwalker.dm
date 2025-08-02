@@ -64,7 +64,7 @@
 
 		if(necropolis_objective)
 			objectives -= necropolis_objective //So we don't count it in the check for other objectives.
-			report += "<b>Племени Пеплоходов было поручено защищать Некрополь:</b>"
+			report += "<b>Племени Пеплоходцев было поручено защищать Некрополь:</b>"
 			if(necropolis_objective.check_completion())
 				report += span_greentext(span_header("Гнездо уцелело! Слава Некрополю!<br>"))
 			else
@@ -74,7 +74,7 @@
 			report += span_header("Другие цели племени были:")
 			printobjectives(objectives)
 
-		report += "[name] сумели принести [sacrifices_made] жертв Некрополю. Взамен Некрополь породил [eggs_created] яиц Пеплоходцев.."
+		report += "[name] сумело принести [sacrifices_made] жертв Некрополю. Взамен Некрополь породил [eggs_created] яиц Пеплоходцев.."
 
 	else
 		report += "<b>Но ни одно из яиц не вылупилось!</b>"

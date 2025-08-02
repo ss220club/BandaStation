@@ -57,9 +57,9 @@
 /datum/antagonist/ert/official/greet()
 	. = ..()
 	if (ert_team)
-		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с такими задачами: [ert_team.mission.explanation_text]</span>")
+		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с такими задачей: [ert_team.mission.explanation_text]</span>")
 	else
-		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с такими задачами: [mission.explanation_text]</span>")
+		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с такими задачей: [mission.explanation_text]</span>")
 
 /datum/antagonist/ert/official/forge_objectives()
 	if (ert_team)
@@ -254,7 +254,7 @@
 	if(leader) //If Squad Leader
 		missiondesc += " Возглавьте свой отряд, чтобы обеспечить выполнение миссии. Садитесь на шаттл, когда ваша команда будет готова."
 	else
-		missiondesc += " Следуйте приказам, отданные вашим лидером отряда."
+		missiondesc += " Следуйте приказам, отданным вашим лидером отряда."
 	if(!rip_and_tear)
 		missiondesc += " Избегайте жертв среди гражданских, если это возможно."
 
