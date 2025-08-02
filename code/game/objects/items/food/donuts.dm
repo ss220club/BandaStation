@@ -2,7 +2,7 @@
 
 /obj/item/food/donut
 	name = "donut"
-	desc = "Goes great with robust coffee."
+	desc = "Отлично сочетается с крепким кофе."
 	icon = 'icons/obj/food/donuts.dmi'
 	inhand_icon_state = "donut1"
 	bite_consumption = 5
@@ -63,7 +63,7 @@
 
 /obj/item/food/donut/chaos
 	name = "chaos donut"
-	desc = "Like life, it never quite tastes the same."
+	desc = "Как и жизнь, на вкус всегда разный."
 	icon_state = "donut_chaos"
 	bite_consumption = 10
 	tastes = list("donut" = 3, "chaos" = 1)
@@ -89,7 +89,7 @@
 
 /obj/item/food/donut/meat
 	name = "meat donut"
-	desc = "Tastes as gross as it looks."
+	desc = "На вкус такой же отвратительный, как и выглядит."
 	icon_state = "donut_meat"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -104,7 +104,7 @@
 
 /obj/item/food/donut/berry
 	name = "pink donut"
-	desc = "Goes great with a soy latte."
+	desc = "Отлично сочетается с соевым латте."
 	icon_state = "donut_pink"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -117,7 +117,7 @@
 
 /obj/item/food/donut/trumpet
 	name = "spaceman's donut"
-	desc = "Goes great with a cold beaker of malk."
+	desc = "Отлично сочетается с холодным стаканом молка. Да, это то самое растительное молоко. Ужасно."
 	icon_state = "donut_purple"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -130,7 +130,7 @@
 
 /obj/item/food/donut/apple
 	name = "apple donut"
-	desc = "Goes great with a shot of cinnamon schnapps."
+	desc = "Отлично сочетается с рюмкой коричного шнапса."
 	icon_state = "donut_green"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -144,7 +144,7 @@
 
 /obj/item/food/donut/caramel
 	name = "caramel donut"
-	desc = "Goes great with a mug of hot coco."
+	desc = "Отлично сочетается с кружкой горячего какао."
 	icon_state = "donut_beige"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -157,7 +157,7 @@
 
 /obj/item/food/donut/choco
 	name = "chocolate donut"
-	desc = "Goes great with a glass of warm milk."
+	desc = "Отлично сочетается со стаканом тёплого молока."
 	icon_state = "donut_choc"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -171,7 +171,7 @@
 
 /obj/item/food/donut/blumpkin
 	name = "blumpkin donut"
-	desc = "Goes great with a mug of soothing drunken blumpkin."
+	desc = "Отлично сочетается с кружкой успокаивающего блампкина по пьяни (пожалуйста, не гуглите, что это такое)."
 	icon_state = "donut_blue"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -186,7 +186,7 @@
 
 /obj/item/food/donut/bungo
 	name = "bungo donut"
-	desc = "Goes great with a mason jar of hippie's delight."
+	desc = "Отлично сочетается с банкой хиппи-удовольствия."
 	icon_state = "donut_yellow"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -199,7 +199,7 @@
 
 /obj/item/food/donut/matcha
 	name = "matcha donut"
-	desc = "Goes great with a cup of tea."
+	desc = "Отлично сочетается с чашкой чая."
 	icon_state = "donut_olive"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -212,7 +212,7 @@
 
 /obj/item/food/donut/laugh
 	name = "sweet pea donut"
-	desc = "Goes great with a bottle of Bastion Bourbon!"
+	desc = "Отлично сочетается с бутылкой бурбона «Бастион»!"
 	icon_state = "donut_laugh"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -227,7 +227,7 @@
 
 /obj/item/food/donut/jelly
 	name = "jelly donut"
-	desc = "You jelly?"
+	desc = "Желевидуешь?"
 	icon_state = "jelly"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -253,14 +253,14 @@
 
 /obj/item/food/donut/jelly/berry
 	name = "pink jelly donut"
-	desc = "Goes great with a soy latte."
+	desc = "Отлично сочетается с соевым латте."
 	icon_state = "jelly_pink"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/sugar = 3, /datum/reagent/consumable/berryjuice = 3, /datum/reagent/consumable/sprinkles = 1, /datum/reagent/consumable/nutriment/vitamin = 1) //Extra sprinkles to reward frosting.
 	decorated_icon = "jelly_homer"
 
 /obj/item/food/donut/jelly/trumpet
 	name = "spaceman's jelly donut"
-	desc = "Goes great with a cold beaker of malk."
+	desc = "Отлично сочетается с холодным стаканом молка. Да, это то самое растительное молоко. Ужасно."
 	icon_state = "jelly_purple"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -274,7 +274,7 @@
 
 /obj/item/food/donut/jelly/apple
 	name = "apple jelly donut"
-	desc = "Goes great with a shot of cinnamon schnapps."
+	desc = "Отлично сочетается с рюмкой коричного шнапса."
 	icon_state = "jelly_green"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -288,7 +288,7 @@
 
 /obj/item/food/donut/jelly/caramel
 	name = "caramel jelly donut"
-	desc = "Goes great with a mug of hot coco."
+	desc = "Отлично сочетается с кружкой горячего какао."
 	icon_state = "jelly_beige"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -302,7 +302,7 @@
 
 /obj/item/food/donut/jelly/choco
 	name = "chocolate jelly donut"
-	desc = "Goes great with a glass of warm milk."
+	desc = "Отлично сочетается со стаканом тёплого молока."
 	icon_state = "jelly_choc"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -317,7 +317,7 @@
 
 /obj/item/food/donut/jelly/blumpkin
 	name = "blumpkin jelly donut"
-	desc = "Goes great with a mug of soothing drunken blumpkin."
+	desc = "Отлично сочетается с кружкой успокаивающего блампкина по пьяни (пожалуйста, не гуглите, что это такое)."
 	icon_state = "jelly_blue"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -333,7 +333,7 @@
 
 /obj/item/food/donut/jelly/bungo
 	name = "bungo jelly donut"
-	desc = "Goes great with a mason jar of hippie's delight."
+	desc = "Отлично сочетается с банкой хиппи-удовольствия."
 	icon_state = "jelly_yellow"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -347,7 +347,7 @@
 
 /obj/item/food/donut/jelly/matcha
 	name = "matcha jelly donut"
-	desc = "Goes great with a cup of tea."
+	desc = "Отлично сочетается с чашкой чая."
 	icon_state = "jelly_olive"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -361,7 +361,7 @@
 
 /obj/item/food/donut/jelly/laugh
 	name = "sweet pea jelly donut"
-	desc = "Goes great with a bottle of Bastion Bourbon!"
+	desc = "Отлично сочетается с бутылкой бурбона «Бастион»!"
 	icon_state = "jelly_laugh"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -376,7 +376,7 @@
 
 /obj/item/food/donut/jelly/slimejelly
 	name = "jelly donut"
-	desc = "You jelly?"
+	desc = "Желевидуешь?"
 	extra_reagent = /datum/reagent/toxin/slimejelly
 	foodtypes = GRAIN|DAIRY|JUNKFOOD|SUGAR|FRIED|BREAKFAST|TOXIC
 
@@ -385,7 +385,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/berry
 	name = "pink jelly donut"
-	desc = "Goes great with a soy latte."
+	desc = "Отлично сочетается с соевым латте."
 	icon_state = "jelly_pink"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -398,7 +398,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/trumpet
 	name = "spaceman's jelly donut"
-	desc = "Goes great with a cold beaker of malk."
+	desc = "Отлично сочетается с холодным стаканом молка. Да, это то самое растительное молоко. Ужасно."
 	icon_state = "jelly_purple"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -412,7 +412,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/apple
 	name = "apple jelly donut"
-	desc = "Goes great with a shot of cinnamon schnapps."
+	desc = "Отлично сочетается с рюмкой коричного шнапса."
 	icon_state = "jelly_green"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -427,7 +427,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/caramel
 	name = "caramel jelly donut"
-	desc = "Goes great with a mug of hot coco."
+	desc = "Отлично сочетается с кружкой горячего какао."
 	icon_state = "jelly_beige"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -441,7 +441,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/choco
 	name = "chocolate jelly donut"
-	desc = "Goes great with a glass of warm milk."
+	desc = "Отлично сочетается со стаканом тёплого молока."
 	icon_state = "jelly_choc"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -456,7 +456,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/blumpkin
 	name = "blumpkin jelly donut"
-	desc = "Goes great with a mug of soothing drunken blumpkin."
+	desc = "Отлично сочетается с кружкой успокаивающего блампкина по пьяни (пожалуйста, не гуглите, что это такое)."
 	icon_state = "jelly_blue"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -472,7 +472,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/bungo
 	name = "bungo jelly donut"
-	desc = "Goes great with a mason jar of hippie's delight."
+	desc = "Отлично сочетается с банкой хиппи-удовольствия."
 	icon_state = "jelly_yellow"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -486,7 +486,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/matcha
 	name = "matcha jelly donut"
-	desc = "Goes great with a cup of tea."
+	desc = "Отлично сочетается с чашкой чая."
 	icon_state = "jelly_olive"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -500,7 +500,7 @@
 
 /obj/item/food/donut/jelly/slimejelly/laugh
 	name = "sweet pea jelly donut"
-	desc = "Goes great with a bottle of Bastion Bourbon!"
+	desc = "Отлично сочетается с бутылкой бурбона «Бастион»!"
 	icon_state = "jelly_laugh"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
