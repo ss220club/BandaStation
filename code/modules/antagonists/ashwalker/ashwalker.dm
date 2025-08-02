@@ -46,7 +46,7 @@
 
 /datum/team/ashwalkers
 	name = "Племя Пеплоходцев"
-	member_name = "Пеплоходцами"
+	member_name = "Пеплоходцы"
 	///A list of "worthy" (meat-bearing) sacrifices made to the Necropolis
 	var/sacrifices_made = 0
 	///A list of how many eggs were created by the Necropolis
@@ -55,7 +55,7 @@
 /datum/team/ashwalkers/roundend_report()
 	var/list/report = list()
 
-	report += span_header("Племя Пеплоходцев когда-то населяло пустоши...</span><br>")
+	report += span_header("Племя Пеплоходцев населяло пустоши...</span><br>")
 	if(length(members)) //The team is generated alongside the tendril, and it's entirely possible that nobody takes the role.
 		report += "[member_name] были:"
 		report += printplayerlist(members)
