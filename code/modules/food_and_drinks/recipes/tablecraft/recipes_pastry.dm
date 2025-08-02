@@ -331,7 +331,7 @@
 
 /datum/crafting_recipe/food/donkpocket
 	time = 15
-	name = "Donk-pocket"
+	name = "Донк-покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/meatball = 1
@@ -341,7 +341,7 @@
 
 /datum/crafting_recipe/food/dankpocket
 	time = 15
-	name = "Dank-pocket"
+	name = "Данк-покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/grown/cannabis = 1
@@ -351,7 +351,7 @@
 
 /datum/crafting_recipe/food/donkpocket/spicy
 	time = 15
-	name = "Spicy-pocket"
+	name = "Спайси-покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/meatball = 1,
@@ -362,7 +362,7 @@
 
 /datum/crafting_recipe/food/donkpocket/teriyaki
 	time = 15
-	name = "Teriyaki-pocket"
+	name = "Терияки-покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/meatball = 1,
@@ -373,7 +373,7 @@
 
 /datum/crafting_recipe/food/donkpocket/pizza
 	time = 15
-	name = "Pizza-pocket"
+	name = "Пицца-покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/cheese/wedge = 1,
@@ -384,7 +384,7 @@
 
 /datum/crafting_recipe/food/donkpocket/honk
 	time = 15
-	name = "Honk-Pocket"
+	name = "Хонк-покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/grown/banana = 1,
@@ -396,7 +396,7 @@
 
 /datum/crafting_recipe/food/donkpocket/berry
 	time = 15
-	name = "Berry-pocket"
+	name = "Ягодный покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/grown/berries = 1
@@ -407,7 +407,7 @@
 
 /datum/crafting_recipe/food/donkpocket/gondola
 	time = 15
-	name = "Gondola-pocket"
+	name = "Гондола-покет"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/meatball = 1,
@@ -418,7 +418,7 @@
 
 /datum/crafting_recipe/food/donkpocket/deluxe
 	time = 15
-	name = "Deluxe Donk-pocket"
+	name = "Донк-покет Делюкс"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/obj/item/food/meatball = 1,
