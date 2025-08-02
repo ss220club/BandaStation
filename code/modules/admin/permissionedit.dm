@@ -489,7 +489,7 @@ GLOBAL_LIST_INIT(permission_action_types, list(
 		return
 	//if an admin exists without a datum they won't be caught by the above
 	var/datum/db_query/query_admin_in_db = SSdbcore.NewQuery(
-		"SELECT 1 FROM [format_table_name(CONFIG_GET(string/admin_table))] WHERE ckey = :ckey", // BANDASTATION EDIT - Prime Admins // BANDASTATION EDIT - Prime Admins
+		"SELECT 1 FROM [format_table_name(CONFIG_GET(string/admin_table))] WHERE ckey = :ckey", // BANDASTATION EDIT - Prime Admins
 		list("ckey" = .)
 	)
 	if(!query_admin_in_db.warn_execute())
