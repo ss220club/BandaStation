@@ -112,7 +112,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	list/message_mods = list(),
 )
 	if(sanitize)
-		message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+		message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN)) // BANDASTATION EDIT - Sanitize emotes
 	if(!message || message == "")
 		return
 
@@ -154,7 +154,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			if(!message_mods[WHISPER_MODE])
 				return
 		if(DEAD)
-			say_dead(original_message)
+			say_dead(original_message, message_mods[MANNEQUIN_CONTROLLED])
 			return
 
 	if(HAS_TRAIT(src, TRAIT_SOFTSPOKEN) && !HAS_TRAIT(src, TRAIT_SIGN_LANG)) // softspoken trait only applies to spoken languages
