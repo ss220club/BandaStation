@@ -436,10 +436,9 @@
 
 // BANDASTATION ADD START - Russian Crayons
 /obj/item/toy/crayon/proc/get_unicode_letter(letter)
-	letter = LOWER_TEXT(letter)
 	var/char_code = text2ascii(letter)
 	if((char_code >= 1072 && char_code <= 1103) || char_code == 1105)
-		return letter = "u[char_code]"
+		return "u[char_code]"
 // BANDASTATION ADD END - Russian Crayons
 
 /// Attempts to color the target.
