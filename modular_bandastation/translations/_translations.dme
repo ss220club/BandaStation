@@ -10,6 +10,7 @@
 #include "code/translate_security_level.dm"
 #include "code/translate_suggest_ru_names.dm"
 #include "code/translate_verbs.dm"
+#include "code/translate_tastes.dm"
 #include "code/ru_names/ru_name_base.dm"
 #include "code/ru_names/ru_name_design.dm"
 #include "code/ru_names/ru_name_materials.dm"

@@ -11,6 +11,19 @@ GLOBAL_LIST_EMPTY(ru_reagent_descs)
 	author = "Vallat, Larentoun, dj-34"
 
 /datum/modpack/translations/post_initialize()
+	// Tastes
+	var/toml_path = "[PATH_TO_TRANSLATE_DATA]/ru_tastes.toml"
+	if(fexists(file(toml_path)))
+		var/list/tastes_toml_list = rustg_read_toml_file(toml_path)
+
+		var/list/tastes_food = tastes_toml_list["food"]
+		for(var/taste_food_key in tastes_food)
+			GLOB.ru_tastes += list("[taste_food_key]" = tastes_food[taste_food_key])
+
+		var/list/tastes_other = tastes_toml_list["other"]
+		for(var/taste_other_key in tastes_other)
+			GLOB.ru_tastes += list("[taste_other_key]" = tastes_other[taste_other_key])
+
 	// Verbs
 	var/toml_path = "[PATH_TO_TRANSLATE_DATA]/ru_verbs.toml"
 	if(fexists(file(toml_path)))

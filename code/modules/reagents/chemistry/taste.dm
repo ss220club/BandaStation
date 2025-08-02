@@ -40,7 +40,7 @@
 
 	// If we have exactly one taste, don't bother with relative strengths
 	if(length(tastes) == 1)
-		return "вкус [tastes[1]]"
+		return "вкус [ru_taste(tastes[1])]"
 
 	// Sort tastes descending by strength, so strong flavours come first
 	sortTim(tastes, cmp = GLOBAL_PROC_REF(cmp_numeric_dsc), associative = TRUE)
@@ -56,11 +56,11 @@
 			continue
 
 		if(percent <= minimum_percent * 2)
-			LAZYADD(hint, taste_desc)
+			LAZYADD(hint, ru_taste(taste_desc))
 		else if(percent > minimum_percent * 4)
-			LAZYADD(strong, taste_desc)
+			LAZYADD(strong, ru_taste(taste_desc))
 		else
-			LAZYADD(mild, taste_desc)
+			LAZYADD(mild, ru_taste(taste_desc))
 
 	var/list/out = list()
 
