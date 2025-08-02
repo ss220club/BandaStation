@@ -272,7 +272,13 @@ GLOBAL_PROTECT(protected_ranks)
 		new /datum/admins(ranks_from_rank_name(admin_rank), ckey(admin_key), force_active = FALSE, protected = TRUE)
 
 	if(!CONFIG_GET(flag/admin_legacy_system) && !dbfail)
-		var/datum/db_query/query_load_admins = SSdbcore.NewQuery("SELECT ckey, `rank`, feedback FROM [format_table_name("admin")] ORDER BY `rank`")
+		// BANDASTATION ADD - Prime Admins
+		var/table_name = "admin"
+		if(CONFIG_GET(string/server_type) == "prime")
+			table_name = "admin_prime"
+		// BANDASTATION ADD - Prime Admins
+
+		var/datum/db_query/query_load_admins = SSdbcore.NewQuery("SELECT ckey, `rank`, feedback FROM [format_table_name(table_name)] ORDER BY `rank`") // BANDASTATION EDIT - Prime Admins
 		if(!query_load_admins.Execute())
 			message_admins("Error loading admins from database. Loading from backup.")
 			log_sql("Error loading admins from database. Loading from backup.")
