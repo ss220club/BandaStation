@@ -434,6 +434,14 @@
 		return FALSE
 	return TRUE
 
+// BANDASTATION ADD - Start
+/obj/item/toy/crayon/proc/get_unicode_letter(letter)
+	letter = lowertext(letter)
+	var/char_code = text2ascii(letter)
+	if((char_code >= 1072 && char_code <= 1103) || char_code == 1105)
+		return letter = "u[char_code]"
+// BANDASTATION ADD - End
+
 /// Attempts to color the target.
 /obj/item/toy/crayon/proc/use_on(atom/target, mob/user, list/modifiers)
 	var/static/list/punctuation = list("!","?",".",",","/","+","-","=","%","#","&")
@@ -536,6 +544,10 @@
 
 	if(length(text_buffer))
 		drawing = text_buffer[1]
+		// BANDASTATION ADD - Start
+		if(length(drawing) != length_char(drawing))
+			drawing = get_unicode_letter(drawing)
+		// BANDASTATION ADD - End
 
 
 	var/list/turf/affected_turfs = list(target)
