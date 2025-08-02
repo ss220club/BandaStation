@@ -74,7 +74,7 @@
 			report += span_header("Другие цели племени были:")
 			printobjectives(objectives)
 
-		report += "[name] сумело принести [sacrifices_made] жертв Некрополю. Взамен Некрополь породил [eggs_created] яиц Пеплоходцев.."
+		report += "[name] сумело принести [sacrifices_made] жертв Некрополю. Взамен Некрополь породил [eggs_created] яиц Пеплоходцев."
 
 	else
 		report += "<b>Но ни одно из яиц не вылупилось!</b>"

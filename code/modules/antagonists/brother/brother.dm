@@ -40,7 +40,7 @@
 
 	var/is_first_brother = team.members.len == 1
 	if (!is_first_brother)
-		to_chat(carbon_owner, span_boldwarning("Синдикат возлагает на вас большие надежды, чем на других. Они предоставили вам дополнительную возможность обратить еще одного человека."))
+		to_chat(carbon_owner, span_boldwarning("Синдикат возлагает на вас большие надежды, чем на других. Они предоставили вам вспышку, чтобы вы могли пробудить еще одного агента."))
 
 	return ..()
 
@@ -90,11 +90,11 @@
 			return
 
 	if (flashed.mind.has_antag_datum(/datum/antagonist/brother))
-		flashed.balloon_alert(source, "[flashed] предан кому-то другому!")
+		flashed.balloon_alert(source, "[flashed.ru_p_they()] предан кому-то другому!")
 		return
 
 	if (HAS_TRAIT(flashed, TRAIT_UNCONVERTABLE))
-		flashed.balloon_alert(source, "[flashed] сопротивляется!")
+		flashed.balloon_alert(source, "[flashed.ru_p_they()] сопротивляется!")
 		return
 
 	if (!team.add_brother(flashed, key_name(source))) // Shouldn't happen given the former, more specific checks but just in case
@@ -203,7 +203,7 @@
 
 /datum/team/brother_team
 	name = "Кровные братья"
-	member_name = "Кровными братьями"
+	member_name = "Кровные братья"
 	var/brothers_left = 2
 
 /datum/team/brother_team/New(starting_members)
@@ -249,9 +249,9 @@
 		if (brother_mind == new_brother.mind)
 			continue
 
-		to_chat(brother_mind, span_notice("[span_bold("[new_brother.real_name]")] был обращен, чтобы помогать вам как твой кровный брат!"))
+		to_chat(brother_mind, span_notice("[span_bold("[new_brother.real_name]")] пробужден(new_brother.gender, "", "а", "о", "ы")], чтобы помогать вам как ваш кровный брат!"))
 		if (brothers_left == 0)
-			to_chat(brother_mind, span_notice("Вы больше не можете набирать кровных братьев."))
+			to_chat(brother_mind, span_notice("Вы больше не можете пробуждать кровных братьев."))
 
 	new_brother.mind.add_antag_datum(/datum/antagonist/brother, src)
 
@@ -311,7 +311,7 @@
 
 /datum/objective/convert_brother
 	name = "convert brother"
-	explanation_text = "Обратите цель без защиты разума, используя вашу вспышку непосредственно на цели. Любая портативная вспышка сработает, если вы потеряете или сломаете стартовую вспышку."
+	explanation_text = "Пробудите цель без защиты разума, используя вашу вспышку непосредственно на цели. Любая портативная вспышка сработает, если вы потеряете или сломаете стартовую."
 	admin_grantable = FALSE
 	martyr_compatible = TRUE
 

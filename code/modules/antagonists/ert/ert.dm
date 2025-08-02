@@ -57,9 +57,9 @@
 /datum/antagonist/ert/official/greet()
 	. = ..()
 	if (ert_team)
-		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с такими задачей: [ert_team.mission.explanation_text]</span>")
+		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с следующей задачей: [ert_team.mission.explanation_text]</span>")
 	else
-		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с такими задачей: [mission.explanation_text]</span>")
+		to_chat(owner, "<span class='warningplain'>Центральное командование отправляет вас на [station_name()] с следующей задачей: [mission.explanation_text]</span>")
 
 /datum/antagonist/ert/official/forge_objectives()
 	if (ert_team)
@@ -68,7 +68,7 @@
 		return
 	var/datum/objective/missionobj = new ()
 	missionobj.owner = owner
-	missionobj.explanation_text = "Проведите обычную проверку работоспособности [station_name()] и её капитана."
+	missionobj.explanation_text = "Проведите проверку работоспособности [station_name()] и её Капитана."
 	missionobj.completed = TRUE
 	mission = missionobj
 	objectives |= mission
@@ -86,7 +86,7 @@
 	outfit = /datum/outfit/centcom/ert/engineer/alert
 
 /datum/antagonist/ert/medic
-	role = "Военврач"
+	role = "Медик"
 	outfit = /datum/outfit/centcom/ert/medic
 
 /datum/antagonist/ert/medic/red
@@ -250,9 +250,9 @@
 
 	to_chat(owner, "<span class='warningplain'><B><font size=3 color=red>Вы - [name].</font></B></span>")
 
-	var/missiondesc = "Ваш отряд был отправлен с миссией на [station_name()] отделом безопасности Нанотрейзен."
+	var/missiondesc = "Ваш отряд был отправлен с миссией на [station_name()] департаментом защиты активов Нанотрейзен."
 	if(leader) //If Squad Leader
-		missiondesc += " Возглавьте свой отряд, чтобы обеспечить выполнение миссии. Садитесь на шаттл, когда ваша команда будет готова."
+		missiondesc += " Возглавьте свой отряд, чтобы обеспечить выполнение миссии. Отправляйтесь на шаттл, когда ваша команда будет готова."
 	else
 		missiondesc += " Следуйте приказам, отданным вашим лидером отряда."
 	if(!rip_and_tear)
