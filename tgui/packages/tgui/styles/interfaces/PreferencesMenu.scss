@@ -743,3 +743,31 @@ $department_map: (
     white-space: nowrap;
   }
 }
+
+// MARK: AugmentationsPage
+.PreferencesMenu__Augmentations {
+  position: absolute;
+  top: 1rem;
+  right: 20vw;
+  width: 50vw;
+  height: calc(100% - 2rem);
+
+  &Title {
+    align-items: center;
+    font-size: 1.33rem;
+  }
+
+  &Row {
+    line-height: 1;
+    align-items: center;
+
+    &--name {
+      flex: 1 1 66%;
+      font-weight: bold;
+    }
+  }
+
+  .Dropdown {
+    margin: 0;
+  }
+}
