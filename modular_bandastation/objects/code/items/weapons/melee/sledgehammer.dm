@@ -58,7 +58,7 @@
 
 /obj/item/sledgehammer/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
-	if(istype(target, /turf/closed/wall) && !HAS_TRAIT(src, TRAIT_WIELDED) )
+	if(istype(target, /turf/closed/wall) && !HAS_TRAIT(src, TRAIT_WIELDED))
 		to_chat(user, span_warning("Вам нужно взять [src] в обе руки чтобы разрушить стену!"))
 		return .
 
