@@ -100,30 +100,6 @@
 	parts = list(/obj/item/reagent_containers/cocaine = 5)
 	time = 2 SECONDS
 	category = CAT_CHEMISTRY
-//экспорт кокаина
-/datum/export/crack
-	cost = CARGO_CRATE_VALUE * 0.5
-	unit_name = "crack"
-	export_types = list(/obj/item/reagent_containers/crack)
-	include_subtypes = FALSE
-
-/datum/export/crack/crackbrick
-	cost = CARGO_CRATE_VALUE * 2.5
-	unit_name = "crack brick"
-	export_types = list(/obj/item/reagent_containers/crackbrick)
-	include_subtypes = FALSE
-
-/datum/export/cocaine
-	cost = CARGO_CRATE_VALUE * 0.4
-	unit_name = "cocaine"
-	export_types = list(/obj/item/reagent_containers/cocaine)
-	include_subtypes = FALSE
-
-/datum/export/cocainebrick
-	cost = CARGO_CRATE_VALUE * 2
-	unit_name = "cocaine brick"
-	export_types = list(/obj/item/reagent_containers/cocainebrick)
-	include_subtypes = FALSE
 
 /obj/item/seeds/cocaleaf
 	name = "pack of coca leaf seeds"
