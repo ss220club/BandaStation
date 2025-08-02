@@ -86,6 +86,7 @@
 #include "code/items/weapons/melee/centcom/rapier.dm"
 #include "code/items/weapons/melee/tsf_katana.dm"
 #include "code/items/weapons/melee/vibroblade.dm"
+#include "code/items/weapons/melee/sledgehammer.dm"
 #include "code/items/weapons/melee/centcom/enchantment.dm"
 #include "code/items/weapons/melee/centcom/legendary_swords.dm"
 #include "code/items/weapons/ranged/energy/awaymission_gun.dm"
