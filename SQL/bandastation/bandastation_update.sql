@@ -75,7 +75,7 @@ CREATE TABLE `minesweeper` (
 ) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;
 
 --
--- Table structure for table `admin`
+-- Table structure for table `admin_prime`
 --
 DROP TABLE IF EXISTS `admin_prime`;
 CREATE TABLE `admin_prime` (
