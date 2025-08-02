@@ -1,7 +1,7 @@
 
 /datum/antagonist/fugitive
 	name = "\improper Fugitive"
-	roundend_category = "Fugitive"
+	roundend_category = "Беглецы"
 	pref_flag = ROLE_FUGITIVE
 	show_in_antagpanel = FALSE
 	show_to_ghosts = TRUE
