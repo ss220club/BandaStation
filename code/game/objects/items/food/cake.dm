@@ -35,7 +35,7 @@
 
 /obj/item/food/cake/plain
 	name = "plain cake"
-	desc = "A plain cake, not a lie."
+	desc = "Обычный торт, точно не ложь."
 	icon_state = "plaincake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 30,
@@ -51,21 +51,21 @@
 
 /obj/item/food/cakeslice/plain
 	name = "plain cake slice"
-	desc = "Just a slice of cake, it is enough for everyone."
+	desc = "Просто кусочек торта, этого хватит на всех."
 	icon_state = "plaincake_slice"
 	tastes = list("sweetness" = 2, "cake" = 5)
 	foodtypes = GRAIN | DAIRY | SUGAR
 
 /obj/item/food/cake/empty
 	name = "cake"
-	desc = "A custom cake made by an insane chef."
+	desc = "Особый торт, сделанный безумным поваром."
 	icon_state = "cake_custom"
 	foodtypes = GRAIN | DAIRY | SUGAR
 	slice_type = /obj/item/food/cakeslice/empty
 
 /obj/item/food/cakeslice/empty
 	name = "cake slice"
-	desc = "A slice of custom cake, made by an insane chef."
+	desc = "Кусочек особого торта, сделанного безумным поваром."
 	icon_state = "cake_custom_slice"
 	foodtypes = GRAIN | DAIRY | SUGAR
 
@@ -75,7 +75,7 @@
 
 /obj/item/food/cake/carrot
 	name = "carrot cake"
-	desc = "A favorite desert of a certain wascally wabbit. Not a lie."
+	desc = "Любимый десерт одного хитрого кролика. Тоже не ложь."
 	icon_state = "carrotcake"
 	tastes = list("cake" = 5, "sweetness" = 2, "carrot" = 1)
 	foodtypes = GRAIN | DAIRY | VEGETABLES | SUGAR
@@ -85,7 +85,7 @@
 
 /obj/item/food/cakeslice/carrot
 	name = "carrot cake slice"
-	desc = "Carrotty slice of Carrot Cake, carrots are good for your eyes! Also not a lie."
+	desc = "Морковный кусочек морковного торта, морковь полезна для глаз! Тоже не ложь."
 	icon_state = "carrotcake_slice"
 	tastes = list("cake" = 5, "sweetness" = 2, "carrot" = 1)
 	foodtypes = GRAIN | DAIRY | VEGETABLES | SUGAR
@@ -93,7 +93,7 @@
 
 /obj/item/food/cake/brain
 	name = "brain cake"
-	desc = "A squishy cake-thing."
+	desc = "Какая-то мягкая штука, похожая на торт."
 	icon_state = "braincake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 15,
@@ -108,7 +108,7 @@
 
 /obj/item/food/cakeslice/brain
 	name = "brain cake slice"
-	desc = "Lemme tell you something about prions. THEY'RE DELICIOUS."
+	desc = "Позвольте рассказать вам кое-что о прионах. ОНИ ВКУСНЫЕ."
 	icon_state = "braincakeslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -122,7 +122,7 @@
 
 /obj/item/food/cake/cheese
 	name = "cheese cake"
-	desc = "DANGEROUSLY cheesy."
+	desc = "ОПАСНО сырный."
 	icon_state = "cheesecake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -137,7 +137,7 @@
 
 /obj/item/food/cakeslice/cheese
 	name = "cheese cake slice"
-	desc = "Slice of pure cheestisfaction."
+	desc = "Кусочек чистого сырного удовольствия."
 	icon_state = "cheesecake_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -150,7 +150,7 @@
 
 /obj/item/food/cake/orange
 	name = "orange cake"
-	desc = "A cake with added orange."
+	desc = "Торт с добавлением апельсина."
 	icon_state = "orangecake"
 	tastes = list("cake" = 5, "sweetness" = 2, "oranges" = 2)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR | ORANGES
@@ -160,7 +160,7 @@
 
 /obj/item/food/cakeslice/orange
 	name = "orange cake slice"
-	desc = "Just a slice of cake, it is enough for everyone."
+	desc = "Просто кусочек торта, этого хватит на всех."
 	icon_state = "orangecake_slice"
 	tastes = list("cake" = 5, "sweetness" = 2, "oranges" = 2)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR | ORANGES
@@ -168,7 +168,7 @@
 
 /obj/item/food/cake/lime
 	name = "lime cake"
-	desc = "A cake with added lime."
+	desc = "Торт с добавлением лайма."
 	icon_state = "limecake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -182,7 +182,7 @@
 
 /obj/item/food/cakeslice/lime
 	name = "lime cake slice"
-	desc = "Just a slice of cake, it is enough for everyone."
+	desc = "Просто кусочек торта, этого хватит на всех."
 	icon_state = "limecake_slice"
 	tastes = list("cake" = 5, "sweetness" = 2, "unbearable sourness" = 2)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
@@ -190,7 +190,7 @@
 
 /obj/item/food/cake/lemon
 	name = "lemon cake"
-	desc = "A cake with added lemon."
+	desc = "Торт с добавлением лимона."
 	icon_state = "lemoncake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -204,7 +204,7 @@
 
 /obj/item/food/cakeslice/lemon
 	name = "lemon cake slice"
-	desc = "Just a slice of cake, it is enough for everyone."
+	desc = "Просто кусочек торта, этого хватит на всех."
 	icon_state = "lemoncake_slice"
 	tastes = list("cake" = 5, "sweetness" = 2, "sourness" = 2)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
@@ -212,7 +212,7 @@
 
 /obj/item/food/cake/chocolate
 	name = "chocolate cake"
-	desc = "A cake with added chocolate."
+	desc = "Торт с добавлением шоколада."
 	icon_state = "chocolatecake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -226,7 +226,7 @@
 
 /obj/item/food/cakeslice/chocolate
 	name = "chocolate cake slice"
-	desc = "Just a slice of cake, it is enough for everyone."
+	desc = "Просто кусочек торта, этого хватит на всех."
 	icon_state = "chocolatecake_slice"
 	tastes = list("cake" = 5, "sweetness" = 1, "chocolate" = 4)
 	foodtypes = GRAIN | DAIRY | JUNKFOOD | SUGAR
@@ -234,7 +234,7 @@
 
 /obj/item/food/cake/birthday
 	name = "birthday cake"
-	desc = "Happy Birthday little clown..."
+	desc = "С днём рождения, маленький клоун..."
 	icon_state = "birthdaycake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -283,7 +283,7 @@
 	AddElement(/datum/element/microwavable, /obj/item/clothing/head/utility/hardhat/cakehat/energycake)
 
 /obj/item/food/cake/birthday/energy/proc/energy_bite(mob/living/user)
-	to_chat(user, "<font color='red' size='5'>As you eat the cake, you accidentally hurt yourself on the embedded energy sword!</font>")
+	to_chat(user, "<font color='red' size='5'>Вы продолжаете есть торт, и случайно раните себя встроенным энергетическим мечом!</font>")
 	user.apply_damage(30, BRUTE, BODY_ZONE_HEAD)
 	playsound(user, 'sound/items/weapons/blade1.ogg', 5, TRUE)
 
@@ -295,7 +295,7 @@
 
 /obj/item/food/cakeslice/birthday/energy
 	name = "energy cake slice"
-	desc = "For the traitor on the go."
+	desc = "Для предателя на задании."
 	icon_state = "energycakeslice"
 	force = 2
 	hitsound = 'sound/items/weapons/blade1.ogg'
@@ -315,21 +315,21 @@
 
 /obj/item/food/cakeslice/birthday/energy/attack(mob/living/target_mob, mob/living/user)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM) && target_mob != user) //Prevents pacifists from attacking others directly
-		balloon_alert(user, "that's dangerous!")
+		balloon_alert(user, "это опасно!")
 		return FALSE
 	return ..()
 
 /obj/item/food/cakeslice/birthday/energy/proc/bite_taken(datum/source, mob/living/eater, mob/living/feeder)
 	SIGNAL_HANDLER
-	to_chat(eater, "<font color='red' size='5'>As you eat the cake slice, you accidentally hurt yourself on the embedded energy dagger!</font>")
+	to_chat(eater, "<font color='red' size='5'>Вы продолжаете есть торт, и случайно раните себя встроенным энергетическим кинжалом!</font>")
 	if(eater != feeder)
-		log_combat(feeder, eater, "fed an energy cake to", src)
+		log_combat(feeder, eater, "кормит энергетическим тортом", src)
 	eater.apply_damage(18, BRUTE, BODY_ZONE_HEAD)
 	playsound(eater, 'sound/items/weapons/blade1.ogg', 5, TRUE)
 
 /obj/item/food/cake/apple
 	name = "apple cake"
-	desc = "A cake centred with Apple."
+	desc = "Торт с яблоком в центре."
 	icon_state = "applecake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -343,7 +343,7 @@
 
 /obj/item/food/cakeslice/apple
 	name = "apple cake slice"
-	desc = "A slice of heavenly cake."
+	desc = "Кусочек божественного торта."
 	icon_state = "applecakeslice"
 	tastes = list("cake" = 5, "sweetness" = 1, "apple" = 1)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
@@ -351,7 +351,7 @@
 
 /obj/item/food/cake/slimecake
 	name = "Slime cake"
-	desc = "A cake made of slimes. Probably not electrified."
+	desc = "Торт из слаймов. Наверное, не наэлектризован."
 	icon_state = "slimecake"
 	tastes = list("cake" = 5, "sweetness" = 1, "slime" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
@@ -360,7 +360,7 @@
 
 /obj/item/food/cakeslice/slimecake
 	name = "slime cake slice"
-	desc = "A slice of slime cake."
+	desc = "Кусочек слаймового торта."
 	icon_state = "slimecake_slice"
 	tastes = list("cake" = 5, "sweetness" = 1, "slime" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
@@ -368,7 +368,7 @@
 
 /obj/item/food/cake/pumpkinspice
 	name = "pumpkin spice cake"
-	desc = "A hollow cake with real pumpkin."
+	desc = "Полый торт с настоящей тыквой."
 	icon_state = "pumpkinspicecake"
 	tastes = list("cake" = 5, "sweetness" = 1, "pumpkin" = 1)
 	foodtypes = GRAIN|DAIRY|SUGAR|VEGETABLES
@@ -378,7 +378,7 @@
 
 /obj/item/food/cakeslice/pumpkinspice
 	name = "pumpkin spice cake slice"
-	desc = "A spicy slice of pumpkin goodness."
+	desc = "Пряный кусочек тыквенного великолепия."
 	icon_state = "pumpkinspicecakeslice"
 	tastes = list("cake" = 5, "sweetness" = 1, "pumpkin" = 1)
 	foodtypes = GRAIN|DAIRY|SUGAR|VEGETABLES
@@ -386,7 +386,7 @@
 
 /obj/item/food/cake/berry_vanilla_cake // blackberry strawberries vanilla cake
 	name = "blackberry and strawberry vanilla cake"
-	desc = "A plain cake, filled with assortment of blackberries and strawberries!"
+	desc = "Обычный торт, наполненный ассорти из черники и клубники!"
 	icon_state = "blackbarry_strawberries_cake_vanilla_cake"
 	tastes = list("blackberry" = 2, "strawberries" = 2, "vanilla" = 2, "sweetness" = 2, "cake" = 3)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
@@ -395,7 +395,7 @@
 
 /obj/item/food/cakeslice/berry_vanilla_cake
 	name = "blackberry and strawberry vanilla cake slice"
-	desc = "Just a slice of cake  filled with assortment of blackberries and strawberries!"
+	desc = "Просто кусочек торта, наполненного ассорти из черники и клубники!"
 	icon_state = "blackbarry_strawberries_cake_vanilla_slice"
 	tastes = list("blackberry" = 2, "strawberries" = 2, "vanilla" = 2, "sweetness" = 2, "cake" = 3)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
@@ -403,7 +403,7 @@
 
 /obj/item/food/cake/berry_chocolate_cake // blackbarry strawberries chocolate cake <- this is a relic from before resprite
 	name = "strawberry chocolate cake"
-	desc = "A chocolate cake with five strawberries on top. For some reason, this configuration of cake is particularly aesthetically pleasing to AIs in SELF."
+	desc = "Шоколадный торт с пятью клубничками сверху. По каким-то причинам такая конфигурация торта особенно эстетично приятна для ИИ в режиме САМООСОЗНАНИЯ."
 	icon_state = "liars_cake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -417,8 +417,8 @@
 
 /obj/item/food/cakeslice/berry_chocolate_cake
 	name = "strawberry chocolate cake slice"
-	desc = "Just a slice of cake with five strawberries on top. \
-		For some reason, this configuration of cake is particularly aesthetically pleasing to AIs in SELF."
+	desc = "Просто кусочек торта с пятью клубничками сверху. \
+		По каким-то причинам такая конфигурация торта особенно эстетично приятна для ИИ в режиме САМООСОЗНАНИЯ."
 	icon_state = "liars_slice"
 	tastes = list("strawberries" = 2, "chocolate" = 2, "sweetness" = 2, "cake" = 3)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
@@ -426,7 +426,7 @@
 
 /obj/item/food/cake/holy_cake
 	name = "angel food cake"
-	desc = "A cake made for angels and chaplains alike! Contains holy water."
+	desc = "Торт, сделанный для ангелов и священников! Содержит святую воду."
 	icon_state = "holy_cake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 1,
@@ -439,14 +439,14 @@
 
 /obj/item/food/cakeslice/holy_cake_slice
 	name = "angel food cake slice"
-	desc = "A slice of heavenly cake."
+	desc = "Кусочек божественного торта."
 	icon_state = "holy_cake_slice"
 	tastes = list("cake" = 5, "sweetness" = 1, "clouds" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
 
 /obj/item/food/cake/pound_cake
 	name = "pound cake"
-	desc = "A condensed cake made for filling people up quickly."
+	desc = "Плотный торт, созданный для быстрого насыщения."
 	icon_state = "pound_cake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 60,
@@ -461,7 +461,7 @@
 
 /obj/item/food/cakeslice/pound_cake_slice
 	name = "pound cake slice"
-	desc = "A slice of condensed cake made for filling people up quickly."
+	desc = "Кусочек плотного торта, созданного для быстрого насыщения."
 	icon_state = "pound_cake_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 9,
@@ -473,7 +473,7 @@
 
 /obj/item/food/cake/hardware_cake
 	name = "hardware cake"
-	desc = "A \"cake\" that is made with electronic boards and leaks acid..."
+	desc = "\"Торт\", который сделан из электронных плат и протекает кислотой..."
 	icon_state = "hardware_cake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -489,7 +489,7 @@
 
 /obj/item/food/cakeslice/hardware_cake_slice
 	name = "hardware cake slice"
-	desc = "A slice of electronic boards and some acid."
+	desc = "Кусочек электронных плат с кислотой."
 	icon_state = "hardware_cake_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -504,7 +504,7 @@
 
 /obj/item/food/cake/vanilla_cake
 	name = "vanilla cake"
-	desc = "A vanilla frosted cake."
+	desc = "Торт с ванильной глазурью."
 	icon_state = "vanillacake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -519,7 +519,7 @@
 
 /obj/item/food/cakeslice/vanilla_slice
 	name = "vanilla cake slice"
-	desc = "A slice of vanilla frosted cake."
+	desc = "Кусочек торта с ванильной глазурью."
 	icon_state = "vanillacake_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -533,7 +533,7 @@
 
 /obj/item/food/cake/clown_cake
 	name = "clown cake"
-	desc = "A funny cake with a clown face on it."
+	desc = "Забавный торт с клоунской мордочкой."
 	icon_state = "clowncake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -548,7 +548,7 @@
 
 /obj/item/food/cakeslice/clown_slice
 	name = "clown cake slice"
-	desc = "A slice of bad jokes, and silly props."
+	desc = "Кусочек плохих шуток и глупых реквизитов."
 	icon_state = "clowncake_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -562,7 +562,7 @@
 
 /obj/item/food/cake/trumpet
 	name = "spaceman's cake"
-	desc = "A spaceman's trumpet frosted cake."
+	desc = "Торт космонавта с глазурью."
 	icon_state = "trumpetcake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -578,7 +578,7 @@
 
 /obj/item/food/cakeslice/trumpet
 	name = "spaceman's cake slice"
-	desc = "A spaceman's trumpet frosted cake."
+	desc = "Кусочек торта космонавта с глазурью."
 	icon_state = "trumpetcakeslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -593,7 +593,7 @@
 
 /obj/item/food/cake/brioche
 	name = "brioche cake"
-	desc = "A ring of sweet, glazed buns."
+	desc = "Кольцо из сладких глазированных булочек."
 	icon_state = "briochecake"
 	tastes = list("cake" = 4, "butter" = 2, "cream" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
@@ -603,7 +603,7 @@
 
 /obj/item/food/cakeslice/brioche
 	name = "brioche cake slice"
-	desc = "Delicious sweet-bread. Who needs anything else?"
+	desc = "Восхитительный сладкий хлеб. Кому нужно что либо другое?"
 	icon_state = "briochecake_slice"
 	tastes = list("cake" = 4, "butter" = 2, "cream" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
@@ -611,7 +611,7 @@
 
 /obj/item/food/cake/pavlova
 	name = "pavlova"
-	desc = "A sweet berry pavlova. Invented in New Zealand, but named after a Russian ballerina... And scientifically proven to be the best at dinner parties!"
+	desc = "Сладкая ягодная павлова. Изобретена в Новой Зеландии, но названа в честь русской балерины... И научно доказано, что она лучшая на званых ужинах!"
 	icon_state = "pavlova"
 	tastes = list("meringue" = 5, "creaminess" = 1, "berries" = 1)
 	foodtypes = DAIRY | FRUIT | SUGAR
@@ -625,8 +625,8 @@
 
 /obj/item/food/cakeslice/pavlova
 	name = "pavlova slice"
-	desc = "A cracked slice of pavlova stacked with berries. \
-		You even got it sliced in such a way that more berries ended up on your slice, how delightfully devilish."
+	desc = "Потрескавшийся кусочек павловы, украшенный ягодами. \
+		Вы даже нарезали её так, что больше ягод досталось именно на ваш кусочек, как восхитительно хитро."
 	icon_state = "pavlova_slice"
 	tastes = list("meringue" = 5, "creaminess" = 1, "berries" = 1)
 	foodtypes = DAIRY | FRUIT | SUGAR
@@ -637,7 +637,7 @@
 
 /obj/item/food/cake/fruit
 	name = "english fruitcake"
-	desc = "A proper good cake, innit?"
+	desc = "Хороший торт, согласитесь?"
 	icon_state = "fruitcake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 15,
@@ -653,7 +653,7 @@
 
 /obj/item/food/cakeslice/fruit
 	name = "english fruitcake slice"
-	desc = "A proper good slice, innit?"
+	desc = "Хороший кусочек, согласитесь?"
 	icon_state = "fruitcake_slice1"
 	base_icon_state = "fruitcake_slice"
 	tastes = list("dried fruit" = 5, "treacle" = 2, "christmas" = 2)
@@ -668,7 +668,7 @@
 
 /obj/item/food/cake/plum
 	name = "plum cake"
-	desc = "A cake centred with Plums."
+	desc = "Торт со сливами в центре."
 	icon_state = "plumcake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -683,7 +683,7 @@
 
 /obj/item/food/cakeslice/plum
 	name = "plum cake slice"
-	desc = "A slice of plum cake."
+	desc = "Кусочек сливового торта."
 	icon_state = "plumcakeslice"
 	tastes = list("cake" = 5, "sweetness" = 1, "plum" = 2)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
@@ -691,7 +691,7 @@
 
 /obj/item/food/cake/wedding
 	name = "wedding cake"
-	desc = "An expensive, multi-tiered cake."
+	desc = "Дорогой многоярусный торт."
 	icon_state = "weddingcake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 40,
@@ -705,14 +705,14 @@
 
 /obj/item/food/cakeslice/wedding
 	name = "wedding cake slice"
-	desc = "Traditionally, those getting married feed each other a slice of cake."
+	desc = "По традиции молодожёны кормят друг друга кусочком торта."
 	icon_state = "weddingcake_slice"
 	tastes = list("cake" = 3, "frosting" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
 
 /obj/item/food/cake/pineapple_cream_cake
 	name = "pineapple cream cake"
-	desc = "A vibrant cake with a layer of thick cream and pineapple on top."
+	desc = "Яркий торт со слоем густого крема и ананасом сверху."
 	icon_state = "pineapple_cream_cake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 30,
@@ -726,7 +726,7 @@
 
 /obj/item/food/cakeslice/pineapple_cream_cake
 	name = "pineapple cream cake slice"
-	desc = "A vibrant cake with a layer of thick cream and pineapple on top."
+	desc = "Кусочек яркого торта со слоем густого крема и ананасом сверху."
 	icon_state = "pineapple_cream_cake_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,

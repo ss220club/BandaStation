@@ -5,7 +5,7 @@ We need to translate the BYOND game called "Space Station 13" which is multiplay
 
 In order to translate user requested file `<file>.dm` (and only one user requested file), do next steps:
 
-1) Scan through the file for objects defined like "/obj/***" which contain "name" attribute. Read a string from name attribute of an object according to next rules:
+1) Scan through the file for objects defined like `/obj/item/***` which contain `name` attribute. Read a string from `name` attribute of an object according to next rules:
 	- name = "object name" => translate "object name"
 	- name = "\improper object name" => translate "object name"
 	- name = "[pick("option1","option2",...)] object name" => permutate all options from "pick" command, concatenate with remaining part of the string ("object name" in this case, or can be empty) translate all resulted string variants.
@@ -17,7 +17,7 @@ Important: use whole object name to search for translation, like of the object c
 If found, do nothing (translation already exists).
 If not found, add the object name to translation file with in a similar format like other translations:
 ```
-[<object name>>]
+[<object name>]
 nominative = "<object name in nominative case>"
 genitive = "<object name in genitive case>"
 dative = "<object name in dative case>"
