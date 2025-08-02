@@ -73,7 +73,7 @@
  */
 /proc/htmlrendertext(t)
 	// Trim "whitespace" by lazily capturing word characters in the middle
-	var/static/regex/matchMiddle = new(@"^\s*([\W\w]*?)\s*$")
+	var/static/regex/matchMiddle = new(@"^\s*([\W\wа-яА-ЯёЁ]*?)\s*$", "i") // BANDASTATION EDIT: Allow cyrillic symbols
 	if(matchMiddle.Find(t) == 0)
 		return t
 	t = matchMiddle.group[1]
