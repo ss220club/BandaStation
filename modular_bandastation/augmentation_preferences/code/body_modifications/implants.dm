@@ -34,6 +34,15 @@
 	category = "Органы"
 	replacement_organ = /obj/item/organ/brain/cybernetic
 
+/obj/item/organ/brain/cybernetic/emp_act(severity)
+	. = ..()
+	switch(severity) // Hard cap on brain damage from EMP
+		if (EMP_HEAVY)
+			owner.Paralyze(0.25 SECONDS * damage)
+			owner.adjust_staggered_up_to(0.5 SECONDS * damage, 20 SECONDS)
+		if (EMP_LIGHT)
+			owner.adjust_staggered_up_to(0.2 SECONDS * damage, 20 SECONDS)
+
 /datum/body_modification/implants/robotic/ears
 	key = "cybernetic_ears"
 	name = "Кибернетические уши"
