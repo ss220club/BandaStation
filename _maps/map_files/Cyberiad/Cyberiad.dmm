@@ -33297,14 +33297,10 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway/west)
 "hWd" = (
-/obj/machinery/door/airlock/research{
-	name = "Mech Bay"
-	},
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/science/robotics,
-/obj/machinery/door/firedoor,
-/turf/open/floor/iron,
-/area/station/science/robotics/mechbay)
+/obj/structure/closet/emcloset,
+/obj/machinery/light/small/directional/south,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
 "hWn" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/mechanical{
@@ -57552,9 +57548,14 @@
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "nPk" = (
-/obj/structure/closet/firecloset,
-/turf/open/floor/iron/dark,
-/area/station/hallway/primary/starboard)
+/obj/machinery/door/airlock/research{
+	name = "Mech Bay"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/science/robotics,
+/obj/machinery/door/firedoor,
+/turf/open/floor/iron,
+/area/station/science/robotics/mechbay)
 "nPl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -60693,11 +60694,6 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/port/greater)
-"oBv" = (
-/obj/structure/closet/emcloset,
-/obj/machinery/light/small/directional/south,
-/turf/open/floor/iron/dark,
-/area/station/hallway/primary/starboard)
 "oBx" = (
 /obj/structure/closet/emcloset,
 /obj/effect/landmark/start/hangover/closet,
@@ -95554,6 +95550,10 @@
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/wood/parquet,
 /area/station/maintenance/department/security/ghetto)
+"xba" = (
+/obj/structure/closet/firecloset,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
 "xbb" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
@@ -205549,7 +205549,7 @@ nrH
 fHn
 nke
 ckR
-nPk
+xba
 lCk
 uYN
 lCk
@@ -205806,7 +205806,7 @@ nrH
 nYw
 nke
 ckR
-oBv
+hWd
 lCk
 uYN
 lCk
@@ -208891,7 +208891,7 @@ sKd
 kkl
 bMM
 nnU
-nPZ
+dIf
 kYb
 uta
 hFm
@@ -209919,7 +209919,7 @@ sKd
 kkl
 sKd
 niF
-hWd
+nPk
 iKc
 ruJ
 tZp
