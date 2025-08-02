@@ -7560,24 +7560,6 @@ instrumental = "вихревым леденцом"
 prepositional = "вихревом леденце"
 gender = "male"
 
-["plain burger"]
-nominative = "обычный бургер"
-genitive = "обычного бургера"
-dative = "обычному бургеру"
-accusative = "обычный бургер"
-instrumental = "обычным бургером"
-prepositional = "обычном бургере"
-gender = "male"
-
-["home run baseball burger"]
-nominative = "бургер «Хоум Ран»"
-genitive = "бургера «Хоум Ран»"
-dative = "бургеру «Хоум Ран»"
-accusative = "бургер «Хоум Ран»"
-instrumental = "бургером «Хоум Ран»"
-prepositional = "бургере «Хоум Ран»"
-gender = "male"
-
 ["space fries"]
 nominative = "космическая картошка фри"
 genitive = "космической картошки фри"
@@ -7591,15 +7573,6 @@ gender = "female"
 nominative = "Карп Лайт"
 gender = "male"
 
-["super bite burger"]
-nominative = "бургер «Суперкусь»"
-genitive = "бургера «Суперкусь»"
-dative = "бургеру «Суперкусь»"
-accusative = "бургер «Суперкусь»"
-instrumental = "бургером «Суперкусь»"
-prepositional = "бургере «Суперкусь»"
-gender = "male"
-
 ["cheesy fries"]
 nominative = "сырные картошки фри"
 genitive = "сырных картошек фри"
@@ -7608,15 +7581,6 @@ accusative = "сырные картошки фри"
 instrumental = "сырными картошками фри"
 prepositional = "сырных картошках фри"
 gender = "plural"
-
-["bacon burger"]
-nominative = "бургер с беконом"
-genitive = "бургера с беконом"
-dative = "бургеру с беконом"
-accusative = "бургер с беконом"
-instrumental = "бургером с беконом"
-prepositional = "бургере с беконом"
-gender = "male"
 
 ["USCM Prepared Meal (chicken)"]
 nominative = "готовое блюдо ККМП (курица)"

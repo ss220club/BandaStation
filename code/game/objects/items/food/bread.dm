@@ -1,3 +1,4 @@
+// Translated - ru_bread.toml, status - all (almost?)
 
 /// Abstract parent object for bread items. Should not be made obtainable in game.
 /obj/item/food/bread
@@ -389,8 +390,8 @@
 		span_notice("Вы начинаете махать [src.declent_ru(INSTRUMENTAL)] как мечом, крепко держа за основание как за воображаемую рукоятку.")
 	)
 	ADD_TRAIT(src, TRAIT_CUSTOM_TAP_SOUND, SWORDPLAY_TRAIT)
-	attack_verb_continuous = list("рубит", "режет")
-	attack_verb_simple = list("рубите", "режете")
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
 	hitsound = 'sound/items/weapons/rapierhit.ogg'
 	fake_swordplay = TRUE
 
@@ -408,7 +409,7 @@
 
 	if(user)
 		visible_message(
-			span_notice("[user] больше не держит [src] как меч!"),
+			span_notice("[user] больше не держит [src.declent_ru(ACCUSATIVE)] как меч!"),
 			span_notice("Вы снова держите [src.declent_ru(ACCUSATIVE)] нормально.")
 		)
 

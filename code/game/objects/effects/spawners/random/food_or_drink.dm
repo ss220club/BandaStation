@@ -102,7 +102,7 @@
 		/obj/item/food/stewedsoymeat,
 		/obj/item/food/burger/bigbite,
 		/obj/item/food/burger/superbite,
-		/obj/item/food/burger/fivealarm,
+		/obj/item/food/burger/firealarm,
 	)
 
 /obj/effect/spawner/random/food_or_drink/three_course_meal
