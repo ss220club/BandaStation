@@ -23,13 +23,15 @@
 	register_context()
 
 /obj/machinery/papershredder/add_context(atom/source, list/context, obj/item/held_item, mob/user)
-	. = ..()
+	if(!held_item)
+		return NONE
 	if(held_item.tool_behaviour == TOOL_WRENCH)
 		context[SCREENTIP_CONTEXT_LMB] = anchored ? "Unanchor" : "Anchor"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(held_item.type in shred_amounts)
 		context[SCREENTIP_CONTEXT_LMB] = "Shred item"
 		return CONTEXTUAL_SCREENTIP_SET
+
 	return NONE
 
 /obj/machinery/papershredder/attack_hand_secondary(mob/user, list/modifiers)
@@ -100,7 +102,4 @@
 	if(prob(65))
 		color = pick("#8b8b8b","#e7e4e4", "#c9c9c9")
 
-/obj/item/shredded_paper/attackby(obj/item/attacking_item, mob/user, params)
-	if(burn_paper_product_attackby_check(attacking_item, user))
-		return
-	. = ..()
+	AddElement(/datum/element/burn_on_item_ignition)

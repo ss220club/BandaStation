@@ -1,6 +1,7 @@
 /datum/hallucination/station_message
 	abstract_hallucination_parent = /datum/hallucination/station_message
 	random_hallucination_weight = 1
+	hallucination_tier = HALLUCINATION_TIER_RARE
 
 /datum/hallucination/station_message/start()
 	qdel(src) // To be implemented by subtypes, call parent for easy cleanup
@@ -95,7 +96,7 @@
 	priority_announce(
 		text = "Зафиксирован призыв древнего божества в [fake_summon_area], культист-призыватель - [totally_real_cult_leader.real_name]. Прервите ритуал любой ценой!",
 		title = "[command_name()]: Отдел паранормальных явлений",
-		sound = 'sound/music/antag/bloodcult/bloodcult_scribe.ogg',
+		sound = 'modular_bandastation/cult_overhaul/sound/announcements/cult_summon.ogg', // BANDASTATION EDIT - Cult Overhaul (sound replace)
 		has_important_message = TRUE,
 		players = list(hallucinator),
 	)

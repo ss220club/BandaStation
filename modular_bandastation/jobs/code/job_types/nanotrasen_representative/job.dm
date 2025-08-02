@@ -41,4 +41,4 @@
 	exclusive_mail_goodies = TRUE
 
 	rpg_title = "Diplomat"
-	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS
+	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS | JOB_ANTAG_PROTECTED

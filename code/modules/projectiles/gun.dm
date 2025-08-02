@@ -53,6 +53,9 @@
 	var/dual_wield_spread = 24 //additional spread when dual wielding
 	///Can we hold up our target with this? Default to yes
 	var/can_hold_up = TRUE
+	/// If TRUE, and we aim at ourselves, it will initiate a do after to fire at ourselves.
+	/// If FALSE it will just try to fire at ourselves straight up.
+	var/doafter_self_shoot = TRUE
 
 	/// Just 'slightly' snowflakey way to modify projectile damage for projectiles fired from this gun.
 	var/projectile_damage_multiplier = 1
@@ -61,7 +64,7 @@
 	var/projectile_wound_bonus = 0
 
 	/// The most reasonable way to modify projectile speed values for projectile fired from this gun. Honest.
-	/// Lower values are better, higher values are worse.
+	/// Lower values are worse, higher values are better.
 	var/projectile_speed_multiplier = 1
 
 	var/spread = 0 //Spread induced by the gun itself.
@@ -209,27 +212,41 @@
 		return FALSE
 	if(tk_firing(user))
 		visible_message(
-				span_danger("[capitalize(declent_ru(NOMINATIVE))] стреляет [ru_p_themselves()] по себе [pointblank ? " в упор по [pbtarget.declent_ru(DATIVE)]!" : "!"]"),
-				blind_message = span_hear("Вы слышите выстрел!"),
-				vision_distance = COMBAT_MESSAGE_RANGE
+			span_danger("[capitalize(declent_ru(NOMINATIVE))] стреляет [user.ru_p_themselves()] по себе [pointblank ? " в упор по [pbtarget.declent_ru(DATIVE)]!" : "!"]"),
+			blind_message = span_hear("Вы слышите выстрел!"),
+			vision_distance = COMBAT_MESSAGE_RANGE
 		)
 	else if(pointblank)
-		user.visible_message(
+		if(user == pbtarget)
+			user.visible_message(
+				span_danger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет [declent_ru(GENITIVE)] в упор [user.ru_p_themselves()] по себе!"),
+				span_userdanger("Вы стреляете из [declent_ru(GENITIVE)] в упор по себе!"),
+				span_hear("Вы слышите выстрел!"),
+				vision_distance = COMBAT_MESSAGE_RANGE,
+				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
+			)
+		else
+			user.visible_message(
 				span_danger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет из [declent_ru(GENITIVE)] в упор по [pbtarget.declent_ru(DATIVE)]!"),
 				span_danger("Вы стреляете из [declent_ru(GENITIVE)] в упор по [pbtarget.declent_ru(DATIVE)]!"),
-				span_hear("Вы слышите выстрел!"), COMBAT_MESSAGE_RANGE, pbtarget
-		)
-		to_chat(pbtarget, span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет из [declent_ru(GENITIVE)] в упор по вам!"))
+				span_hear("Вы слышите выстрел!"),
+				vision_distance = COMBAT_MESSAGE_RANGE,
+				ignored_mobs = pbtarget,
+				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
+			)
+			to_chat(pbtarget, span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет из [declent_ru(GENITIVE)] в упор по вам!"))
 		if(pb_knockback > 0 && ismob(pbtarget))
 			var/mob/PBT = pbtarget
 			var/atom/throw_target = get_edge_target_turf(PBT, user.dir)
 			PBT.throw_at(throw_target, pb_knockback, 2)
 	else if(!tk_firing(user))
 		user.visible_message(
-				span_danger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет из [declent_ru(GENITIVE)]!"),
-				blind_message = span_hear("Вы слышите выстрел!"),
-				vision_distance = COMBAT_MESSAGE_RANGE,
-				ignored_mobs = user
+			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] стреляет из [declent_ru(GENITIVE)]!"),
+			span_userdanger("Вы стреляете из [declent_ru(GENITIVE)]!"),
+			span_hear("Вы слышите выстрел!"),
+			vision_distance = COMBAT_MESSAGE_RANGE,
+			ignored_mobs = user,
+			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 
 	if(chambered?.integrity_damage)
@@ -286,13 +303,14 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/gun/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(user.combat_mode && isliving(interacting_with))
-		return ITEM_INTERACT_SKIP_TO_ATTACK // Gun bash / bayonet attack
 	if(try_fire_gun(interacting_with, user, list2params(modifiers)))
 		return ITEM_INTERACT_SUCCESS
 	return NONE
 
 /obj/item/gun/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.combat_mode && isliving(interacting_with))
+		return ITEM_INTERACT_SKIP_TO_ATTACK // Gun bash / bayonet attack
+
 	if(!can_hold_up || !isliving(interacting_with))
 		return interact_with_atom(interacting_with, user, modifiers)
 
@@ -335,9 +353,9 @@
 	if(flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
 			return
-		if(!ismob(target) || user.combat_mode) //melee attack
+		if(!ismob(target)) //melee attack
 			return
-		if(target == user && user.zone_selected != BODY_ZONE_PRECISE_MOUTH) //so we can't shoot ourselves (unless mouth selected)
+		if(target == user && (user.zone_selected != BODY_ZONE_PRECISE_MOUTH && doafter_self_shoot)) //so we can't shoot ourselves (unless mouth selected)
 			return
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
@@ -351,10 +369,9 @@
 		if(!can_trigger_gun(L))
 			return
 
-	if(flag)
-		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-			handle_suicide(user, target, params)
-			return
+	if(flag && doafter_self_shoot && user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
+		handle_suicide(user, target, params)
+		return
 
 	if(!can_shoot()) //Just because you can pull the trigger doesn't mean it can shoot.
 		shoot_with_empty_chamber(user)

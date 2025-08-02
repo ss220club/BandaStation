@@ -6,7 +6,7 @@
 	forced = FALSE,
 	spread_damage = FALSE,
 	wound_bonus = 0,
-	bare_wound_bonus = 0,
+	exposed_wound_bonus = 0,
 	sharpness = NONE,
 	attack_direction = null,
 	attacking_item,
@@ -43,7 +43,7 @@
 	forced = FALSE,
 	spread_damage = FALSE,
 	wound_bonus = 0,
-	bare_wound_bonus = 0,
+	exposed_wound_bonus = 0,
 	sharpness = NONE,
 	attack_direction = null,
 	attacking_item,
@@ -84,17 +84,15 @@
 //These procs fetch a cumulative total damage from all bodyparts
 /mob/living/carbon/getBruteLoss()
 	var/amount = 0
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		amount += BP.brute_dam
-	return amount
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		amount += bodypart.brute_dam
+	return round(amount, DAMAGE_PRECISION)
 
 /mob/living/carbon/getFireLoss()
 	var/amount = 0
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		amount += BP.burn_dam
-	return amount
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		amount += bodypart.burn_dam
+	return round(amount, DAMAGE_PRECISION)
 
 /mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
 	if(!can_adjust_brute_loss(amount, forced, required_bodytype))
@@ -267,7 +265,7 @@
  *
  * It automatically updates health status
  */
-/mob/living/carbon/take_bodypart_damage(brute = 0, burn = 0, updating_health = TRUE, required_bodytype, check_armor = FALSE, wound_bonus = 0, bare_wound_bonus = 0, sharpness = NONE)
+/mob/living/carbon/take_bodypart_damage(brute = 0, burn = 0, updating_health = TRUE, required_bodytype, check_armor = FALSE, wound_bonus = 0, exposed_wound_bonus = 0, sharpness = NONE)
 	. = FALSE
 	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
@@ -277,7 +275,7 @@
 
 	var/obj/item/bodypart/picked = pick(parts)
 	var/damage_calculator = picked.get_damage()
-	if(picked.receive_damage(abs(brute), abs(burn), check_armor ? run_armor_check(picked, (brute ? MELEE : burn ? FIRE : null)) : FALSE, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness))
+	if(picked.receive_damage(abs(brute), abs(burn), check_armor ? run_armor_check(picked, (brute ? MELEE : burn ? FIRE : null)) : FALSE, wound_bonus = wound_bonus, exposed_wound_bonus = exposed_wound_bonus, sharpness = sharpness))
 		update_damage_overlays()
 	return (damage_calculator - picked.get_damage())
 

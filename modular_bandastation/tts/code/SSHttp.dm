@@ -1,6 +1,7 @@
 SUBSYSTEM_DEF(http)
 	name = "HTTP"
 	flags = SS_TICKER | SS_BACKGROUND | SS_NO_INIT // Measure in ticks, but also only run if we have the spare CPU.
+	init_stage = INITSTAGE_FIRST
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY // All the time
 	// Assuming for the worst, since only discord is hooked into this for now, but that may change
@@ -32,18 +33,13 @@ SUBSYSTEM_DEF(http)
 				req.cb.InvokeAsync(res)
 
 			// And log the result
-			if(logging_enabled)
-				var/list/log_data = list()
-				log_data += "BEGIN ASYNC RESPONSE (ID: [req.id])"
-				if(res.errored)
-					log_data += "\t ----- RESPONSE ERRROR -----"
-					log_data += "\t [res.error]"
-				else
-					log_data += "\tResponse status code: [res.status_code]"
-					log_data += "\tResponse body: [res.body]"
-					log_data += "\tResponse headers: [json_encode(res.headers)]"
-				log_data += "END ASYNC RESPONSE (ID: [req.id])"
-				logger.Log(LOG_CATEGORY_DEBUG, log_data.Join("\n"))
+			log_response(res, req.id)
+
+/datum/controller/subsystem/http/vv_edit_var(var_name, var_value)
+	if(var_name == "logging_enabled" && !check_rights(R_EVERYTHING))
+		return FALSE
+
+	. = ..()
 
 /**
  * Async request creator
@@ -62,28 +58,54 @@ SUBSYSTEM_DEF(http)
 	active_async_requests += req
 	total_requests++
 
-	if(logging_enabled)
-		// Create a log holder
-		var/list/log_data = list()
-		log_data += "BEGIN ASYNC REQUEST (ID: [req.id])"
-		log_data += "\t[uppertext(req.method)] [req.url]"
-		log_data += "\tRequest body: [req.body]"
-		log_data += "\tRequest headers: [req.headers]"
-		log_data += "END ASYNC REQUEST (ID: [req.id])"
-
-		// Write the log data
-
-		logger.Log(LOG_CATEGORY_DEBUG, log_data.Join("\n"))
+	log_request(req)
 
 /**
  * Blocking request creator
  *
  * Generates a blocking request, executes it, logs the info then cleanly returns the response
- * Exists as a proof of concept, and should never be used
+ * Uses UNTIL, so is VERY dangerous to use.
  */
-/datum/controller/subsystem/http/proc/make_blocking_request(method, url, body = "", list/headers)
-	CRASH("Attempted use of a blocking HTTP request")
+/datum/controller/subsystem/http/proc/make_sync_request(method, url, body = "", list/headers)
+	var/datum/http_request/req = new()
+	req.prepare(method, url, body, headers)
+	req.begin_async()
+	active_async_requests += req
+	total_requests++
+	log_request(req)
+
+	UNTIL(req.is_complete())
+	active_async_requests -= req
+	var/datum/http_response/res = req.into_response()
+	log_response(res, req.id)
+	return res
 
 /datum/http_request
 	/// Callback for executing after async requests. Will be called with an argument of [/datum/http_response] as first argument
 	var/datum/callback/cb
+
+/datum/controller/subsystem/http/proc/log_request(datum/http_request/req, type = "ASYNC")
+	if(!logging_enabled)
+		return
+
+	var/list/log_data = list()
+	log_data += "REQUEST (ID: [req.id]) ([type])"
+	log_data += "\t[uppertext(req.method)] [req.url]"
+	log_data += "\tRequest body: [req.body]"
+	log_data += "\tRequest headers: [req.headers]"
+	logger.Log(LOG_CATEGORY_DEBUG, log_data.Join("\n"))
+
+/datum/controller/subsystem/http/proc/log_response(datum/http_response/res, id)
+	if(!logging_enabled)
+		return
+
+	var/list/log_data = list()
+	log_data += "RESPONSE (ID: [id])"
+	if(res.errored)
+		log_data += "\t ----- RESPONSE ERROR -----"
+		log_data += "\t [res.error]"
+	else
+		log_data += "\tResponse status code: [res.status_code]"
+		log_data += "\tResponse body: [res.body]"
+		log_data += "\tResponse headers: [json_encode(res.headers)]"
+	logger.Log(LOG_CATEGORY_DEBUG, log_data.Join("\n"))

@@ -43,11 +43,13 @@
 /// the order departments show up in for the id scan (its sorted by red to blue on the color wheel)
 #define DETSCAN_ACCESS_ORDER(...) list(\
 	REGION_SECURITY, \
+	REGION_JUSTICE, \
 	REGION_ENGINEERING, \
 	REGION_SUPPLY, \
 	REGION_GENERAL, \
 	REGION_MEDBAY, \
 	REGION_COMMAND, \
+	REGION_NT_REPRESENTATION, \
 	REGION_RESEARCH, \
 	REGION_CENTCOM, \
 )

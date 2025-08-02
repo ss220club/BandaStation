@@ -1,4 +1,5 @@
-import { filter, sort } from 'common/collections';
+import { sortBy } from 'es-toolkit';
+import { filter } from 'es-toolkit/compat';
 import { useState } from 'react';
 import {
   Button,
@@ -9,9 +10,8 @@ import {
   Stack,
   Tabs,
 } from 'tgui-core/components';
-import { BooleanLike, classes } from 'tgui-core/react';
+import { type BooleanLike, classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
-import { useLocalStorage } from 'usehooks-ts';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -83,7 +83,7 @@ const selectCameras = (cameras: Camera[], searchText = ''): Camera[] => {
     );
     queriedCameras = filter(queriedCameras, testSearch);
   }
-  queriedCameras = sort(queriedCameras);
+  queriedCameras = sortBy(queriedCameras, [(c) => c.name]);
 
   return queriedCameras;
 };
@@ -118,9 +118,9 @@ export const CameraContent = (props) => {
   };
 
   return (
-    <Stack fill>
-      <Stack.Item grow>
-        <Stack fill vertical>
+    <Stack fill g={0}>
+      <Stack.Item grow minWidth={0}>
+        <Stack fill vertical g={0}>
           <Stack.Item textAlign="center">
             <Tabs fluid>
               <Tabs.Tab
@@ -141,12 +141,10 @@ export const CameraContent = (props) => {
               </Tabs.Tab>
             </Tabs>
           </Stack.Item>
-          <Stack.Item grow={3} mt={tab === 'Map' && 0}>
-            {decideTab(tab)}
-          </Stack.Item>
+          <Stack.Item grow>{decideTab(tab)}</Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item grow={tab === 'Map' ? 1.5 : 3} ml={tab === 'Map' && 0}>
+      <Stack.Item grow={tab === 'Map' ? 1.5 : 3}>
         <CameraControls searchText={searchText} />
       </Stack.Item>
     </Stack>
@@ -161,14 +159,13 @@ const CameraListSelector = (props) => {
 
   return (
     <Stack fill vertical>
-      <Stack.Item>
+      <Stack.Item mt={1}>
         <Input
           autoFocus
           expensive
           fluid
-          mt={1}
           placeholder="Search for a camera"
-          onInput={(e, value) => setSearchText(value)}
+          onChange={setSearchText}
           value={searchText}
         />
       </Stack.Item>
@@ -208,45 +205,19 @@ export const CameraMapSelector = (props) => {
   const { act, data } = useBackend<Data>();
   const { activeCamera, mapData } = data;
   const cameras = selectCameras(data.cameras, '');
-
-  const [zoom, setZoom] = useState<number>();
   const [selectedLevel, setSelectedLevel] = useState<number>(mapData.mainFloor);
-  const [tracking, setTracking] = useLocalStorage(
-    'camera-console-tracking',
-    false,
-  );
+
   return (
-    <NanoMap
-      mapData={mapData}
-      uiName="camera-console"
-      selectedTarget={!!activeCamera?.ref}
-      onZoomChange={setZoom}
-      onLevelChange={setSelectedLevel}
-      buttons={
-        <Button
-          icon="wheelchair-move"
-          selected={tracking}
-          tooltip={
-            tracking
-              ? 'Не перемещать к выбранной камере'
-              : 'Перемещать к выбранной камере'
-          }
-          tooltipPosition="right"
-          onClick={() => setTracking(!tracking)}
-        />
-      }
-    >
+    <NanoMap mapData={mapData} onLevelChange={setSelectedLevel}>
       {cameras.map((camera) => (
         <NanoMap.Button
           key={camera.ref}
           posX={camera.x}
           posY={camera.y}
           tooltip={camera.name}
-          color={!camera.status && 'red'}
+          color={!camera.status && 'bad'}
           selected={activeCamera?.ref === camera.ref}
           hidden={camera.z !== selectedLevel}
-          tracking={tracking}
-          zoom={zoom}
           onClick={() =>
             act('switch_camera', {
               camera: camera.ref,

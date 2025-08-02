@@ -32,6 +32,9 @@
 				/obj/item/clothing/head/chaplain/taqiyah/red = 3,
 				/obj/item/clothing/head/hats/tophat = 3,
 				/obj/item/clothing/head/fedora = 3,
+				/obj/item/clothing/head/fedora/white = 3,
+				/obj/item/clothing/head/fedora/beige = 3,
+				/obj/item/clothing/head/fedora/greyscale = 3,
 				/obj/item/clothing/head/hats/bowler = 3,
 				/obj/item/clothing/head/cowboy/white = 3,
 				/obj/item/clothing/head/cowboy/grey = 3,
@@ -58,6 +61,7 @@
 				/obj/item/storage/belt/fannypack = 3,
 				/obj/item/storage/belt/fannypack/blue = 3,
 				/obj/item/storage/belt/fannypack/red = 3,
+				/obj/item/clothing/neck/cloak/colorable_cloak = 3, // BANDASTATION ADD
 			),
 		),
 
@@ -93,6 +97,8 @@
 			"icon" = "vest",
 			"products" = list(
 				/obj/item/clothing/suit/toggle/jacket/sweater = 4,
+				/obj/item/clothing/suit/jacket/blazer = 4,
+				/obj/item/clothing/suit/toggle/jacket/trenchcoat = 4,
 				/obj/item/clothing/suit/jacket/oversized = 4,
 				/obj/item/clothing/suit/jacket/fancy = 4,
 				/obj/item/clothing/suit/toggle/lawyer/greyscale = 4,
@@ -227,6 +233,7 @@
 	payment_department = NO_FREEBIES
 	light_mask = "wardrobe-light-mask"
 	light_color = LIGHT_COLOR_ELECTRIC_GREEN
+	allow_custom = TRUE
 
 /obj/item/vending_refill/clothing
 	machine_name = "ClothesMate"

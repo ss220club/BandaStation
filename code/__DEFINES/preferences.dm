@@ -52,11 +52,11 @@
 #define PARALLAX_DELAY_MED 1
 #define PARALLAX_DELAY_LOW 2
 
-#define SEC_DEPT_NONE "None"
-#define SEC_DEPT_ENGINEERING "Engineering"
-#define SEC_DEPT_MEDICAL "Medical"
-#define SEC_DEPT_SCIENCE "Science"
-#define SEC_DEPT_SUPPLY "Supply"
+#define SEC_DEPT_NONE "Нет"
+#define SEC_DEPT_ENGINEERING "Инженерный"
+#define SEC_DEPT_MEDICAL "Медицинский"
+#define SEC_DEPT_SCIENCE "Исследовательский"
+#define SEC_DEPT_SUPPLY "Снабжения"
 
 // Playtime tracking system, see jobs_exp.dm
 #define EXP_TYPE_LIVING "Living"
@@ -80,8 +80,6 @@
 #define DEFAULT_CYBORG_NAME "Default Cyborg Name"
 
 // Choose grid or list TGUI layouts for UI's, when possible.
-/// Default layout will be used. It can be either a grid or a list
-#define TGUI_LAYOUT_DEFAULT "default"
 /// Force grid layout, even if default is a list.
 #define TGUI_LAYOUT_GRID "grid"
 /// Force list layout, even if default is a grid.

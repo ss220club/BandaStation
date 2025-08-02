@@ -19,3 +19,5 @@
 #include "code/signals_mob/signals_mob_main.dm"
 #include "code/signals_mob/signals_mob_silicon.dm"
 #include "code/signals_mob/signals_mob_simple.dm"
+#include "code/defines/calibers.dm"
+#include "code/defines/colors.dm"

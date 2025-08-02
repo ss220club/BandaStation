@@ -233,8 +233,8 @@
 			MICROWAVE_INGREDIENT_OVERLAY_SIZE / icon_dimensions["height"],
 		)
 
-		ingredient_overlay.pixel_x = ingredient_shifts_x[(ingredient_count % ingredient_shifts_x.len) + 1]
-		ingredient_overlay.pixel_y = ingredient_shifts_y[(ingredient_count % ingredient_shifts_y.len) + 1]
+		ingredient_overlay.pixel_w = ingredient_shifts_x[(ingredient_count % ingredient_shifts_x.len) + 1]
+		ingredient_overlay.pixel_z = ingredient_shifts_y[(ingredient_count % ingredient_shifts_y.len) + 1]
 		ingredient_overlay.layer = FLOAT_LAYER
 		ingredient_overlay.plane = FLOAT_PLANE
 		ingredient_overlay.blend_mode = BLEND_INSET_OVERLAY
@@ -552,7 +552,7 @@
 
 	dirty = 0
 	update_appearance()
-	return . || TRUE
+	. |= COMPONENT_CLEANED|COMPONENT_CLEANED_GAIN_XP
 
 /obj/machinery/microwave/proc/eject()
 	var/atom/drop_loc = drop_location()

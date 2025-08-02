@@ -1,4 +1,4 @@
-/datum/mutation/human/geladikinesis
+/datum/mutation/geladikinesis
 	name = "Geladikinesis"
 	desc = "Позволяет обладателю генома сконцентрировать влагу и холод в снег."
 	quality = POSITIVE
@@ -20,7 +20,7 @@
 	delete_old = FALSE
 	delete_on_failure = FALSE
 
-/datum/mutation/human/cryokinesis
+/datum/mutation/cryokinesis
 	name = "Cryokinesis"
 	desc = "Даёт возможность в любой момент притянуть негативную энергию из морозной пустоты, чтобы заморозить окружение вокруг субъекта."
 	quality = POSITIVE //upsides and downsides

@@ -92,6 +92,7 @@
 	random_shots = null
 	shotgun_blast = null
 	dir_shots = null
+	colossus_final = null
 	return ..()
 
 /mob/living/simple_animal/hostile/megafauna/colossus/OpenFire()
@@ -156,7 +157,7 @@
 	if(isgolem(victim) && victim.has_status_effect(/datum/status_effect/golem/gold))
 		return TRUE
 
-	return istype(victim.mind?.martial_art, /datum/martial_art/the_sleeping_carp)
+	return istype(GET_ACTIVE_MARTIAL_ART(victim), /datum/martial_art/the_sleeping_carp)
 
 /obj/effect/temp_visual/at_shield
 	name = "anti-toolbox field"

@@ -6,20 +6,24 @@
 	say_mod = "мяучит"
 	modifies_speech = TRUE
 	languages_native = list(/datum/language/siiktajr)
+	liked_foodtypes = MEAT | SEAFOOD | DAIRY
+	disliked_foodtypes = NUTS | GROSS | ORANGES
+	toxic_foodtypes = SUGAR
+	organ_traits = list(TRAIT_WOUND_LICKER)
 	var/static/list/speech_replacements = list(
 		new /regex("r+", "g") = "rr",
 		new /regex("R+", "g") = "RR",
 		new /regex("р+", "g") = "рр",
 		new /regex("Р+", "g") = "РР",
 	)
-	liked_foodtypes = MEAT | SEAFOOD | DAIRY
-	disliked_foodtypes = NUTS | GROSS | ORANGES
-	toxic_foodtypes = SUGAR
-	organ_traits = list(TRAIT_WOUND_LICKER)
 
-/obj/item/organ/tongue/tajaran/New(class, timer, datum/mutation/human/copymut)
+/obj/item/organ/tongue/tajaran/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/speechmod, replacements = speech_replacements, should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech)))
+	AddComponent(\
+		/datum/component/speechmod,\
+		replacements = speech_replacements,\
+		should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech))\
+	)
 
 /obj/item/organ/tongue/get_possible_languages()
 	return ..() + /datum/language/siiktajr
@@ -78,8 +82,4 @@
 
 /obj/item/organ/lungs/tajaran
 	name = "tajaran lungs"
-	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
-
-/obj/item/organ/kidneys/tajaran
-	name = "tajaran kidneys"
 	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'

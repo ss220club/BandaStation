@@ -140,6 +140,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/cargo)
+"app" = (
+/obj/structure/sign/poster/contraband/random/directional/west,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
 "aqq" = (
 /obj/structure/fans/tiny/invisible,
 /obj/effect/turf_decal/stripes/line,
@@ -695,11 +699,12 @@
 /area/centcom/syndicate_base/elite_squad)
 "bLA" = (
 /obj/structure/table,
-/obj/item/gun/energy/ionrifle/carbine,
+/obj/item/gun/energy/ionrifle,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "bMd" = (
 /obj/machinery/light/small/directional/west,
+/obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "bNg" = (
@@ -1146,11 +1151,13 @@
 /area/centcom/syndicate_base)
 "cHl" = (
 /obj/item/reagent_containers/cup/glass/bottle/rum{
-	pixel_x = 6;
-	pixel_y = 2
+	pixel_x = -16;
+	pixel_y = 11
 	},
 /obj/structure/table/wood/poker,
-/obj/item/toy/cards/deck/syndicate,
+/obj/item/toy/cards/deck/syndicate{
+	pixel_y = 4
+	},
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "cLo" = (
@@ -1380,6 +1387,10 @@
 /obj/structure/closet/syndicate/personal,
 /obj/machinery/light/small/directional/south,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "dlt" = (
@@ -1713,6 +1724,11 @@
 /obj/machinery/power/shuttle_engine/propulsion,
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/cargo)
+"dUG" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/cardboard,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "dWh" = (
 /obj/structure/fans/tiny/invisible,
 /obj/effect/turf_decal/stripes/line,
@@ -1764,6 +1780,16 @@
 /obj/structure/table/wood,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/elite_squad)
+"emh" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/machinery/door/window/survival_pod/left/directional/south{
+	req_access = list("syndicate")
+	},
+/obj/item/assembly/flash/handheld{
+	pixel_y = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "emB" = (
 /obj/structure/sign/poster/contraband/random/directional/north,
 /turf/open/floor/carpet/black,
@@ -1808,6 +1834,10 @@
 /obj/item/reagent_containers/cup/bowl/soup/white_beet,
 /turf/open/floor/carpet/red,
 /area/centcom/syndicate_base/control)
+"ero" = (
+/obj/structure/closet/cardboard/metal,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "erT" = (
 /obj/machinery/button/door/indestructible{
 	id = "Aspid_deck";
@@ -2063,14 +2093,14 @@
 /obj/structure/rack,
 /obj/effect/turf_decal/box/white,
 /obj/structure/sign/poster/contraband/revolver/directional/north,
-/obj/item/organ/cyberimp/arm/baton,
-/obj/item/organ/cyberimp/arm/combat,
-/obj/item/organ/cyberimp/arm/esword,
-/obj/item/organ/cyberimp/arm/flash,
-/obj/item/organ/cyberimp/arm/gun,
-/obj/item/organ/cyberimp/arm/medibeam,
-/obj/item/organ/cyberimp/arm/surgery,
-/obj/item/organ/cyberimp/arm/toolset,
+/obj/item/organ/cyberimp/arm/toolkit/baton,
+/obj/item/organ/cyberimp/arm/toolkit/combat,
+/obj/item/organ/cyberimp/arm/toolkit/esword,
+/obj/item/organ/cyberimp/arm/toolkit/flash,
+/obj/item/organ/cyberimp/arm/toolkit/gun/laser,
+/obj/item/organ/cyberimp/arm/toolkit/medibeam,
+/obj/item/organ/cyberimp/arm/toolkit/surgery,
+/obj/item/organ/cyberimp/arm/toolkit/toolset,
 /obj/item/organ/cyberimp/brain/anti_drop,
 /obj/item/organ/cyberimp/brain/anti_stun,
 /obj/item/organ/cyberimp/brain/connector,
@@ -3102,9 +3132,13 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/jail)
 "hse" = (
-/obj/structure/table,
+/obj/structure/table/reinforced/plastitaniumglass,
 /obj/machinery/door/window/survival_pod/left/directional/south{
 	req_access = list("syndicate")
+	},
+/obj/machinery/recharger{
+	pixel_x = -4;
+	pixel_y = 4
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
@@ -3601,6 +3635,10 @@
 "iDh" = (
 /obj/structure/closet/syndicate/personal,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "iGF" = (
@@ -3802,6 +3840,7 @@
 "jkN" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "jmk" = (
@@ -3874,7 +3913,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/obj/structure/ore_box,
+/obj/structure/closet/crate/cardboard/mothic,
 /obj/effect/turf_decal/delivery/white,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
@@ -4416,6 +4455,10 @@
 /obj/machinery/light/directional/east,
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
+"kVN" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
 "kWj" = (
 /obj/effect/turf_decal/delivery,
 /obj/effect/turf_decal/stripes/line{
@@ -4662,6 +4705,9 @@
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 9
+	},
+/obj/item/rag{
+	pixel_y = -6
 	},
 /turf/open/floor/iron,
 /area/centcom/syndicate_base)
@@ -5272,6 +5318,11 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/syndicate_base/jail)
+"mBE" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sign/poster/contraband/random/directional/west,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
 "mEk" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
@@ -5396,6 +5447,10 @@
 /obj/item/target,
 /obj/item/target,
 /obj/item/target,
+/obj/item/katana/cursed{
+	desc = "A gift from your benefactors.";
+	force = 20
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "mZw" = (
@@ -5494,6 +5549,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/cargo)
+"ngQ" = (
+/obj/structure/extinguisher_cabinet/directional/south,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "ngT" = (
 /obj/structure/table,
 /obj/item/assembly/signaler{
@@ -5704,6 +5763,13 @@
 /obj/structure/fence,
 /turf/open/floor/grass,
 /area/centcom/syndicate_base/outside)
+"nFd" = (
+/obj/structure/closet/syndicate/personal,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "nFN" = (
 /obj/structure/mirror/directional/west,
 /obj/structure/sink/directional/east,
@@ -5805,6 +5871,12 @@
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
+"nQs" = (
+/obj/machinery/door/poddoor/ert{
+	id = "nukeop_outside"
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
 "nRk" = (
 /obj/machinery/oven/range,
 /turf/open/floor/plating,
@@ -5935,9 +6007,9 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base/infteam)
 "oiT" = (
-/obj/item/reagent_containers/cup/glass/bottle/vodka{
-	pixel_x = -8;
-	pixel_y = 4
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	pixel_x = -6;
+	pixel_y = 8
 	},
 /obj/item/syndicatedetonator{
 	pixel_x = 4
@@ -6002,6 +6074,11 @@
 	color = "#adadad"
 	},
 /area/centcom/syndicate_base/elite_squad)
+"orc" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
 "orV" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -6192,6 +6269,7 @@
 /obj/structure/curtain/bounty/start_closed{
 	pixel_y = -32
 	},
+/obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "oRq" = (
@@ -6364,6 +6442,7 @@
 /area/centcom/syndicate_base/cargo)
 "piT" = (
 /obj/item/kirbyplants/random,
+/obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "pkq" = (
@@ -6644,7 +6723,7 @@
 	},
 /obj/structure/sign/poster/contraband/random/directional/south,
 /obj/item/pizzabox/margherita,
-/obj/item/knife,
+/obj/item/knife/kitchen,
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 10
@@ -6833,7 +6912,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "qqR" = (
-/obj/structure/ore_box,
+/obj/structure/closet/crate/cardboard,
 /obj/effect/turf_decal/delivery/red,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
@@ -7080,6 +7159,10 @@
 /obj/structure/flora/bush/lavendergrass/style_random,
 /turf/open/floor/grass,
 /area/centcom/syndicate_base/outside)
+"qSo" = (
+/obj/structure/extinguisher_cabinet/directional/south,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
 "qSK" = (
 /obj/machinery/light/small/directional/east,
 /obj/machinery/button/door/indestructible{
@@ -7863,6 +7946,9 @@
 "sLM" = (
 /turf/closed/indestructible/rock,
 /area/centcom/syndicate_base/outside)
+"sNe" = (
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
 "sNA" = (
 /obj/structure/flora/tree/pine{
 	color = "#336633";
@@ -7907,6 +7993,10 @@
 	},
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
+"sUc" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
 "sUT" = (
 /obj/effect/turf_decal/siding/brown{
 	dir = 4
@@ -7933,6 +8023,8 @@
 "sZm" = (
 /obj/structure/closet/syndicate/personal,
 /obj/machinery/light/small/directional/north,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "taY" = (
@@ -8228,6 +8320,7 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/delivery/white,
 /obj/effect/decal/cleanable/dirt,
+/obj/item/stack/sheet/mineral/sandbags,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "tFj" = (
@@ -8422,6 +8515,7 @@
 /area/centcom/syndicate_base/elite_squad)
 "tWa" = (
 /obj/machinery/light/small/directional/south,
+/obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "tWq" = (
@@ -8493,6 +8587,14 @@
 "ulL" = (
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/jail)
+"umq" = (
+/obj/structure/closet/syndicate/personal,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/spacecash/c20,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "uns" = (
 /obj/structure/mirror/directional/west,
 /obj/machinery/light/small/directional/west,
@@ -9707,6 +9809,7 @@
 /area/centcom/syndicate_base/infteam)
 "wXs" = (
 /obj/structure/sign/poster/contraband/c20r/directional/north,
+/obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "wXx" = (
@@ -10127,6 +10230,13 @@
 /obj/structure/statue/snow/snowman,
 /turf/open/floor/grass,
 /area/centcom/syndicate_base/outside)
+"xND" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/extinguisher_cabinet/directional/east,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
 "xOF" = (
 /turf/open/floor/plating,
 /area/centcom/syndicate_base/elite_squad)
@@ -14016,7 +14126,7 @@ uxH
 rXN
 rXN
 rRY
-srn
+kVN
 vru
 fnU
 tJz
@@ -14129,8 +14239,8 @@ gOQ
 fnU
 cFP
 gHP
-srn
-srn
+kVN
+kVN
 vru
 vru
 srn
@@ -14355,7 +14465,7 @@ fnU
 gOQ
 tCJ
 bcl
-jsg
+ero
 ivS
 ala
 qsk
@@ -14610,7 +14720,7 @@ iJD
 onr
 tsj
 qKJ
-srn
+qSo
 fnU
 tJz
 tJz
@@ -14851,7 +14961,7 @@ srn
 srn
 bMd
 bgj
-dfR
+nQs
 bnr
 bnr
 fnU
@@ -14967,10 +15077,10 @@ xCo
 rYA
 mcR
 srn
-srn
-srn
+kVN
+kVN
 ciG
-dfR
+nQs
 bnr
 ujq
 fnU
@@ -15324,8 +15434,8 @@ hOo
 hOo
 fnU
 srn
-vru
-vru
+orc
+orc
 uln
 fnU
 bnr
@@ -15444,7 +15554,7 @@ ePf
 ios
 vru
 vru
-vru
+orc
 mwf
 fnU
 afz
@@ -15916,7 +16026,7 @@ wMN
 plv
 oiT
 iAT
-srn
+kVN
 fnU
 bjf
 mEk
@@ -16512,7 +16622,7 @@ nbn
 nbn
 bRD
 hiV
-nbn
+xND
 vYw
 nbn
 hSN
@@ -16627,7 +16737,7 @@ pUk
 pUk
 fnU
 wgp
-srn
+kVN
 srn
 tdd
 jLT
@@ -16746,7 +16856,7 @@ rnW
 rnW
 fnU
 tYt
-srn
+kVN
 srn
 mEk
 suT
@@ -17098,7 +17208,7 @@ viA
 viA
 aqq
 sFZ
-hXC
+dUG
 tEM
 hxf
 fnU
@@ -17342,13 +17452,13 @@ hxf
 fnU
 piT
 srn
-srn
+kVN
 mEk
 jmk
 fnU
-iDh
-ovP
-hXC
+umq
+app
+mBE
 iDh
 fnU
 bDj
@@ -17460,14 +17570,14 @@ sUZ
 gOQ
 fnU
 sfM
-srn
+kVN
 srn
 mEk
 jLT
 fnU
-iDh
-ovP
-hXC
+nFd
+sNe
+sUc
 iDh
 fnU
 afz
@@ -17580,13 +17690,13 @@ rrb
 fnU
 lZQ
 iiw
-srn
+kVN
 mEk
 jLT
 fnU
 sZm
-hXC
-ovP
+sUc
+sNe
 dlo
 fnU
 bnr
@@ -17703,9 +17813,9 @@ srn
 mEk
 jLT
 fnU
-iDh
-ovP
-hXC
+nFd
+sNe
+sUc
 iDh
 fnU
 bnr
@@ -17945,7 +18055,7 @@ hXC
 ovP
 ovP
 bgj
-dfR
+nQs
 bnr
 ujq
 fnU
@@ -18064,7 +18174,7 @@ hXC
 hXC
 dgl
 ciG
-dfR
+nQs
 bnr
 bnr
 fnU
@@ -18418,7 +18528,7 @@ hXC
 lGp
 hXC
 ovP
-ovP
+ngQ
 fnU
 fnU
 fnU
@@ -18772,7 +18882,7 @@ aDf
 qAX
 hXC
 ovP
-hse
+emh
 ovP
 ovP
 hXC

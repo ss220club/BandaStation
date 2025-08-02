@@ -181,7 +181,7 @@
 		span_warning("[cultist] strikes [cult_girder] with [parent]!"),
 		span_notice("You demolish [cult_girder].")
 		)
-	new /obj/item/stack/sheet/runed_metal(cult_girder.drop_location(), 1)
+	new /obj/item/stack/sheet/runed_metal(cult_girder.drop_location())
 	qdel(cult_girder)
 
 /*
@@ -298,6 +298,7 @@
 	if(ispath(rune_to_scribe, /obj/effect/rune/narsie))
 		if(!scribe_narsie_rune(cultist, user_team))
 			return
+		our_turf = get_turf(cultist) //we may have moved. adjust as needed...
 
 	cultist.visible_message(
 		span_warning("[cultist] [cultist.blood_volume ? "cuts open [cultist.p_their()] arm and begins writing in [cultist.p_their()] own blood":"begins sketching out a strange design"]!"),
@@ -369,17 +370,19 @@
 	if(!check_if_in_ritual_site(cultist, cult_team))
 		return FALSE
 	var/area/summon_location = get_area(cultist)
+	var/static/cult_music_played = FALSE
 	priority_announce(
 		text = "Зафиксирован призыв древнего божества культистом [cultist.real_name] в [summon_location.get_original_area_name()]. Прервите ритуал любой ценой!",
-		sound = 'sound/music/antag/bloodcult/bloodcult_scribe.ogg',
+		sound = cult_music_played ? 'sound/announcer/notice/notice3.ogg' : 'modular_bandastation/cult_overhaul/sound/announcements/cult_summon.ogg', // BANDASTATION EDIT - Cult Overhaul
 		sender_override = "[command_name()]: Отдел паранормальных явлений",
 		has_important_message = TRUE,
 	)
+	cult_music_played = TRUE
 	for(var/shielded_turf in spiral_range_turfs(1, cultist, 1))
 		LAZYADD(shields, new /obj/structure/emergency_shield/cult/narsie(shielded_turf))
 
 	notify_ghosts(
-		"[cultist] начал рисовать руну Нар'Си!",
+		"[cultist.real_name] начал рисовать руну Нар'Си!",
 		source = cultist,
 		header = "Maranax Infirmux!",
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,

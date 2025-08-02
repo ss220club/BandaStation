@@ -157,24 +157,28 @@
 	// How much damage does this item do to the targets sanity?
 	var/sanity_damage = 20
 
-/obj/item/clothing/neck/heretic_focus/moon_amulet/attack(mob/living/target, mob/living/user, params)
+/obj/item/clothing/neck/heretic_focus/moon_amulet/attack(mob/living/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	var/mob/living/carbon/human/hit = target
 	if(!IS_HERETIC_OR_MONSTER(user))
 		user.balloon_alert(user, "вы чувствуете, как за вами наблюдают")
 		user.add_mood_event("Moon Amulet Insanity", /datum/mood_event/amulet_insanity)
-		user.mob_mood.set_sanity(user.mob_mood.sanity - 50)
+		user.mob_mood.adjust_sanity(-50)
 		return
+
 	if(hit.can_block_magic(MAGIC_RESISTANCE|MAGIC_RESISTANCE_MIND))
 		return
+
 	if(!hit.mob_mood)
 		return
+
 	if(hit.mob_mood.sanity_level > SANITY_LEVEL_UNSTABLE)
 		user.balloon_alert(user, "их разум слишком крепок!")
 		hit.add_mood_event("Moon Amulet Insanity", /datum/mood_event/amulet_insanity)
-		hit.mob_mood.set_sanity(hit.mob_mood.sanity - sanity_damage)
-	else
-		user.balloon_alert(user, "их разум поддается и открывается правде!")
-		hit.apply_status_effect(/datum/status_effect/moon_converted)
-		user.log_message("made [target] insane.", LOG_GAME)
-		hit.log_message("was driven insane by [user]")
+		hit.mob_mood.adjust_sanity(-sanity_damage)
+		return ..()
+
+	user.balloon_alert(user, "их разум поддается и открывается правде!")
+	hit.apply_status_effect(/datum/status_effect/moon_converted)
+	user.log_message("made [target] insane.", LOG_GAME)
+	hit.log_message("was driven insane by [user]")
 	. = ..()

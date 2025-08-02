@@ -1,12 +1,13 @@
 SUBSYSTEM_DEF(security_level)
 	name = "Security Level"
 	can_fire = FALSE // We will control when we fire in this subsystem
-	init_order = INIT_ORDER_SECURITY_LEVEL
 	var/set_timer_id = null // BANDASTATION ADDITION
 	/// Currently set security level
 	var/datum/security_level/current_security_level
 	/// A list of initialised security level datums.
 	var/list/available_levels = list()
+	/// A list of alert icon states for use in [/obj/machinery/status_display/evac] (to differentiate them from other display images)
+	var/list/alert_level_icons = list()
 
 // BANDASTATION ADDITION - START
 /proc/cmp_security_levels(datum/security_level/a, datum/security_level/b)
@@ -23,6 +24,7 @@ SUBSYSTEM_DEF(security_level)
 
 	for(var/datum/security_level/level as anything in levels)
 		available_levels[level.name] = level
+		alert_level_icons += level.status_display_icon_state
 	// BANDASTATION EDIT - END
 
 	current_security_level = available_levels[number_level_to_text(SEC_LEVEL_GREEN)]
@@ -43,8 +45,9 @@ SUBSYSTEM_DEF(security_level)
  * Arguments:
  * * new_level - The new security level that will become our current level
  * * announce - Play the announcement, set FALSE if you're doing your own custom announcement to prevent duplicates
+ * * mob/user - Mob which set the security level. Optional // BANDASTATION ADDITION - Gamma Shuttle
  */
-/datum/controller/subsystem/security_level/proc/set_level(new_level, announce = TRUE)
+/datum/controller/subsystem/security_level/proc/set_level(new_level, announce = TRUE, mob/user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 	new_level = istext(new_level) ? new_level : number_level_to_text(new_level)
 	if(new_level == current_security_level.name) // If we are already at the desired level, do nothing
 		return
@@ -59,15 +62,15 @@ SUBSYSTEM_DEF(security_level)
 		deltimer(set_timer_id)
 		set_timer_id = null
 
-	selected_level.pre_set_security_level()
+	selected_level.pre_set_security_level(user)
 	if(selected_level.set_delay > 0)
-		set_timer_id = addtimer(CALLBACK(src, PROC_REF(set_level_instantly), selected_level, announce), selected_level.set_delay)
+		set_timer_id = addtimer(CALLBACK(src, PROC_REF(set_level_instantly), selected_level, announce, user), selected_level.set_delay)
 	else
-		set_level_instantly(selected_level, announce)
+		set_level_instantly(selected_level, announce, user)
 	// BANDASTATION EDIT - END
 
 // BANDASTATION ADDITION - START
-/datum/controller/subsystem/security_level/proc/set_level_instantly(datum/security_level/selected_level, announce = TRUE)
+/datum/controller/subsystem/security_level/proc/set_level_instantly(datum/security_level/selected_level, announce = TRUE, mob/user)
 	PRIVATE_PROC(TRUE)
 
 	if(SSnightshift.can_fire && (selected_level.number_level >= SEC_LEVEL_RED || current_security_level.number_level >= SEC_LEVEL_RED))
@@ -87,7 +90,7 @@ SUBSYSTEM_DEF(security_level)
 	if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL) // By god this is absolutely shit
 		SSshuttle.emergency.alert_coeff_change(selected_level.shuttle_call_time_mod)
 
-	selected_level.post_set_security_level()
+	selected_level.post_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 
 	SEND_SIGNAL(src, COMSIG_SECURITY_LEVEL_CHANGED, selected_level.number_level)
 	SSblackbox.record_feedback("tally", "security_level_changes", 1, selected_level.name)

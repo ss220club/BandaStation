@@ -1,0 +1,39 @@
+@use 'sass:map';
+
+// prettier-ignore
+$_channel_map: (
+  'Админ': oklch(0.875 0.115 325),
+  'ИИ': oklch(0.645 0.163 352.5),
+  'ЦК': oklch(0.565 0.1 230),
+  'Генка': oklch(0.5 0.115 130),
+  'Ком': oklch(0.9 0.185 100),
+  'Инж': oklch(0.70 0.16 40),
+  'Рой': oklch(0.525 0.075 325),
+  'Бин': oklch(0.65 0.19 252.5),
+  'Эмоц': oklch(0.60 0.15 270),
+  'Мед': oklch(0.75 0.12 235),
+  'OOC': oklch(0.725 0.15 90),
+  'LOOC': oklch(0.8 0.125 65),
+  'Развл': oklch(0.6 0.05 190),
+  'Радио': oklch(0.725 0.225 145),
+  'Говор': oklch(0.775 0.05 255),
+  'Шёпот': oklch(0.625 0.13 280),
+  'Иссл': oklch(0.725 0.15 305),
+  'Безоп': oklch(0.6 0.20 25),
+  'Юр': oklch(0.625 0.25 0),
+  'Снаб': oklch(0.65 0.10 70),
+  'Обсл': oklch(0.65 0.15 130),
+  'Синд': oklch(0.5 0.1 20),
+);
+
+$channel-map: ();
+$channel_keys: map.keys($_channel_map) !default;
+
+@each $channel in $channel_keys {
+  $channel-map: map.merge(
+    $channel-map,
+    (
+      $channel: map.get($_channel_map, $channel),
+    )
+  );
+}

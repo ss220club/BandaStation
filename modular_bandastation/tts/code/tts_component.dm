@@ -149,7 +149,8 @@
 	traits = TTS_TRAIT_RATE_FASTER,
 	preSFX,
 	postSFX,
-	tts_seed_override
+	tts_seed_override,
+	tts_channel_override,
 )
 
 	SIGNAL_HANDLER
@@ -183,6 +184,7 @@
 	tts_args[TTS_CAST_POST_SFX] = postSFX
 	tts_args[TTS_CAST_SEED] = tts_seed_override || tts_seed
 	tts_args[TTS_PRIORITY] = TTS_PRIORITY_VOICE
+	tts_args[TTS_CHANNEL_OVERRIDE] = tts_channel_override
 	finalize_tts(tts_args)
 
 /datum/component/tts_component/proc/finalize_tts(list/tts_args)
@@ -203,7 +205,8 @@
 		.[TTS_CAST_EFFECTS],\
 		.[TTS_CAST_TRAITS],\
 		.[TTS_CAST_PRE_SFX],\
-		.[TTS_CAST_POST_SFX]\
+		.[TTS_CAST_POST_SFX],\
+		.[TTS_CHANNEL_OVERRIDE]\
 	)
 
 /datum/component/tts_component/proc/tts_effects_add(atom/user, list/new_sound_effects)

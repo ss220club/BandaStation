@@ -180,7 +180,7 @@
  */
 /turf/closed/wall/proc/hulk_recoil(obj/item/bodypart/arm, mob/living/carbon/human/hulkman, damage = 20)
 	hulkman.apply_damage(damage, BRUTE, arm, wound_bonus = CANT_WOUND)
-	var/datum/mutation/human/hulk/smasher = locate(/datum/mutation/human/hulk) in hulkman.dna.mutations
+	var/datum/mutation/hulk/smasher = locate(/datum/mutation/hulk) in hulkman.dna.mutations
 	if(!smasher || !damage) //sanity check but also snow and wood walls deal no recoil damage, so no arm breaky
 		return
 	smasher.break_an_arm(arm)
@@ -307,8 +307,8 @@
 		if(WALL_DENT_HIT)
 			decal.icon_state = "impact[rand(1, 3)]"
 
-	decal.pixel_x = x
-	decal.pixel_y = y
+	decal.pixel_w = x
+	decal.pixel_z = y
 
 	if(LAZYLEN(dent_decals))
 		cut_overlay(dent_decals)

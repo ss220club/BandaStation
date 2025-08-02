@@ -1,8 +1,8 @@
-import { CheckboxInput, FeatureToggle } from '../base';
+import { CheckboxInput, type FeatureToggle } from '../base';
 
 export const itemoutline_pref: FeatureToggle = {
   name: 'Контуры предметов',
-  category: 'ГЕЙМПЛЕЙ',
+  category: 'Геймплей',
   description: 'Показывать контур предметов при наведении на них.',
   component: CheckboxInput,
 };

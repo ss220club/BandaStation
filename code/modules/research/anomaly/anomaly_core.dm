@@ -7,6 +7,7 @@
 	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
 	resistance_flags = FIRE_PROOF
+	custom_materials = null
 	var/anomaly_type = /obj/effect/anomaly
 
 /obj/item/assembly/signaler/anomaly/receive_signal(datum/signal/signal)
@@ -29,7 +30,7 @@
 /obj/item/assembly/signaler/anomaly/attack_self()
 	return
 
-/obj/item/assembly/signaler/anomaly/attackby(obj/item/I, mob/user, params)
+/obj/item/assembly/signaler/anomaly/attackby(obj/item/I, mob/user, list/modifiers, list/attack_modifiers)
 	if(I.tool_behaviour == TOOL_ANALYZER)
 		to_chat(user, span_notice("Analyzing... [src]'s stabilized field is fluctuating along frequency [format_frequency(frequency)], code [code]."))
 	return ..()

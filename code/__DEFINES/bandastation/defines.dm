@@ -11,6 +11,22 @@
 	#define TTS_CAST_POST_SFX "tts_postSFX"
 	#define TTS_CAST_SEED "tts_seed"
 	#define TTS_PRIORITY "tts_priority"
+	#define TTS_CHANNEL_OVERRIDE "tts_channel_override"
 	#define TTS_PRIORITY_VOICE 0
 	#define TTS_PRIORITY_MIMIC 1
 	#define TTS_PRIORITY_MASK 2
+
+/// 220 RUB | 2.85 USD
+#define DONATOR_TIER_1 1
+/// 440 RUB | 5.7 USD
+#define DONATOR_TIER_2 2
+/// 1000 RUB | 13 USD
+#define DONATOR_TIER_3 3
+/// 2200 RUB | 28.8 USD
+#define DONATOR_TIER_4 4
+/// 10000 RUB | 130 USD
+#define DONATOR_TIER_5 5
+
+#define BASIC_DONATOR_LEVEL 0
+#define ADMIN_DONATOR_LEVEL DONATOR_TIER_3
+#define MAX_DONATOR_LEVEL DONATOR_TIER_5

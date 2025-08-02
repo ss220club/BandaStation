@@ -1,11 +1,16 @@
-/mob/living/silicon/ai/compose_track_href(atom/movable/speaker, namepart)
+//the following 2 procs are staying here because its for AI and its shells (also AI controlled)
+/mob/living/silicon/compose_track_href(atom/movable/speaker, namepart)
+	if(!HAS_TRAIT(src, TRAIT_CAN_GET_AI_TRACKING_MESSAGE))
+		return ""
 	var/mob/M = speaker.GetSource()
 	if(M)
 		return "<a href='byond://?src=[REF(src)];track=[html_encode(namepart)]'>"
 	return ""
 
-/mob/living/silicon/ai/compose_job(atom/movable/speaker, message_langs, raw_message, radio_freq)
+/mob/living/silicon/compose_job(atom/movable/speaker, message_langs, raw_message, radio_freq)
 	//Also includes the </a> for AI hrefs, for convenience.
+	if(!HAS_TRAIT(src, TRAIT_CAN_GET_AI_TRACKING_MESSAGE))
+		return ""
 	return "[radio_freq ? " (" + speaker.GetJob() + ")" : ""]" + "[speaker.GetSource() ? "</a>" : ""]"
 
 /mob/living/silicon/ai/try_speak(message, ignore_spam = FALSE, forced = null, filterproof = FALSE)
@@ -30,7 +35,7 @@
 		if(radio)
 			radio.talk_into(src, message, , spans, language, message_mods)
 		return NOPASS
-	else if(message_mods[RADIO_EXTENSION] in GLOB.radiochannels)
+	else if(message_mods[RADIO_EXTENSION] in GLOB.default_radio_channels)
 		if(radio)
 			radio.talk_into(src, message, message_mods[RADIO_EXTENSION], spans, language, message_mods)
 			return NOPASS
@@ -148,7 +153,7 @@
 		var/turf/player_turf = get_turf(player_mob)
 		if(is_valid_z_level(ai_turf, player_turf))
 			players += player_mob
-	minor_announce(capitalize(message), "[name] announces:", players = players, should_play_sound = CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(does_target_have_vox_off)))
+	minor_announce(capitalize(message), "[name] объявляет", players = players, should_play_sound = CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(does_target_have_vox_off)))
 
 	for(var/word in words)
 		play_vox_word(word, ai_turf, null)

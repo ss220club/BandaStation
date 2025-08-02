@@ -8,9 +8,6 @@
 
 	SStitle.update_character_name(user, preferences.read_preference(/datum/preference/name/real_name))
 
-/datum/preference_middleware/proc/post_set_preference(mob/user, preference, value)
-	return FALSE
-
 /datum/preference_middleware/titlescreen/post_set_preference(mob/user, preference, value)
 	// User changed the current slot's name.
 	if(!istype(user, /mob/dead/new_player) || preference != "real_name")

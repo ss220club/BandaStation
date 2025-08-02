@@ -22,6 +22,7 @@
 	mob_biotypes = MOB_ORGANIC | MOB_BEAST | MOB_AQUATIC
 	health = 25
 	maxHealth = 25
+	max_stamina = 120
 	pressure_resistance = 200
 	combat_mode = TRUE
 	obj_damage = 50
@@ -60,7 +61,7 @@
 		/datum/pet_command/idle,
 		/datum/pet_command/free,
 		/datum/pet_command/follow,
-		/datum/pet_command/attack
+		/datum/pet_command/attack,
 	)
 	/// Carp want to eat raw meat
 	var/static/list/desired_food = list(/obj/item/food/meat/slab, /obj/item/food/meat/rawcutlet)
@@ -113,7 +114,7 @@
 		tamed(tamer, feedback = FALSE)
 		befriend(tamer)
 	else
-		var/static/list/food_types = list(/obj/item/food/meat)
+		var/list/food_types = string_list(list(/obj/item/food/meat)) /// BANDASTATION EDIT - CROCODILE
 		AddComponent(/datum/component/tameable, food_types = food_types, tame_chance = 10, bonus_tame_chance = 5)
 
 	teleport = new(src)
@@ -178,13 +179,17 @@
  * Holographic carp from the holodeck
  */
 /mob/living/basic/carp/holographic
-	icon_state = "holocarp"
+	icon_state = "base_friend"
 	icon_living = "holocarp"
 	gold_core_spawnable = NO_SPAWN
 	greyscale_config = NONE
 	basic_mob_flags = DEL_ON_DEATH
 	cell_line = NONE
 	regenerate_colour = "#ffffff"
+
+/mob/living/basic/carp/holographic/Initialize(mapload, mob/tamer)
+	. = ..()
+	AddComponent(/datum/component/holographic_nature)
 
 /// Holocarp don't eat food
 /mob/living/basic/carp/holographic/setup_eating()
@@ -216,10 +221,10 @@
 	faction = list(FACTION_NEUTRAL)
 	maxHealth = 200
 	health = 200
+	icon_state = "magicarp"
 	icon_dead = "magicarp_dead"
 	icon_gib = "magicarp_gib"
 	icon_living = "magicarp"
-	icon_state = "magicarp"
 	greyscale_config = NONE
 
 /// Boosted chance for Cayenne to be silver
@@ -290,7 +295,6 @@
 /mob/living/basic/carp/passive
 	name = "false carp"
 	desc = "Беззубый близкий родственник космического карпа. Питается путем воровства остатков из добычи своего кузена."
-
 	icon_state = "base_friend"
 	icon_living = "base_friend"
 	icon_dead = "base_friend_dead"

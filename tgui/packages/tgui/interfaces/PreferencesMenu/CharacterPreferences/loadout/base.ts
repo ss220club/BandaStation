@@ -1,7 +1,7 @@
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
-import { PreferencesMenuData } from '../../types';
-import { LoadoutButton } from './ModifyPanel';
+import type { PreferencesMenuData } from '../../types';
+import type { LoadoutButton } from './ModifyPanel';
 
 // Generic types
 export type DmIconFile = string;
@@ -23,16 +23,23 @@ export type ReskinOption = {
   skin_icon_state: DmIconState; // The icon is the same as the item icon
 };
 
+export type LoadoutTooltip = {
+  icon: string;
+  tooltip: string;
+};
+
 // Actual item passed in from the loadout
 export type LoadoutItem = {
   name: string;
+  group: string;
   path: typePath;
   icon: DmIconFile | null;
   icon_state: DmIconState | null;
   buttons: LoadoutButton[];
   reskins: ReskinOption[] | null;
-  information: string[];
+  information: LoadoutTooltip[];
   cost: number;
+  tier: number;
 };
 
 // Category of items in the loadout
@@ -45,5 +52,6 @@ export type LoadoutCategory = {
 
 export type LoadoutManagerData = PreferencesMenuData & {
   job_clothes: BooleanLike;
-  loadout_leftpoints: string;
+  loadout_leftpoints: number;
+  loadout_maxpoints: number;
 };

@@ -114,7 +114,7 @@
 	. = ..()
 	. += "Вы можете использовать [EXAMINE_HINT("ложку")] или [EXAMINE_HINT("половник")] для разлива содержимого."
 
-/obj/machinery/icecream_vat/attackby(obj/item/weapon, mob/user, params)
+/obj/machinery/icecream_vat/attackby(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return
@@ -140,7 +140,7 @@
 	balloon_alert(user, "мензурка вставлена")
 	custom_ice_cream_beaker = beaker
 
-/obj/machinery/icecream_vat/attackby_secondary(obj/item/reagent_containers/beaker, mob/user, params)
+/obj/machinery/icecream_vat/attackby_secondary(obj/item/reagent_containers/beaker, mob/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

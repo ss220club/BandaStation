@@ -13,7 +13,7 @@
 #define CHAT_ALERT_DEFAULT_SPAN(string) ("<div class='chat_alert_default'>" + string + "</div>")
 #define CHAT_ALERT_COLORED_SPAN(color, string) ("<div class='chat_alert_" + color + "'>" + string + "</div>")
 
-#define ANNOUNCEMENT_COLORS list("default", "green", "blue", "pink", "yellow", "orange", "red", "purple")
+#define ANNOUNCEMENT_COLORS list("default", "green", "blue", "pink", "yellow", "orange", "red", "purple", "white") // BANDASTATION EDIT - add "white"
 
 /**
  * Make a big red text announcement to
@@ -63,7 +63,7 @@
 				header += SUBHEADER_ANNOUNCEMENT_TITLE(title)
 		if(ANNOUNCEMENT_TYPE_CAPTAIN)
 			header = MAJOR_ANNOUNCEMENT_TITLE("Оповещение от капитана")
-			GLOB.news_network.submit_article(text, "Оповещение от капитана", "Станционные оповещения", null)
+			GLOB.news_network.submit_article(text, "Оповещение от капитана", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 		if(ANNOUNCEMENT_TYPE_SYNDICATE)
 			header = MAJOR_ANNOUNCEMENT_TITLE("Оповещение от капитана Синдиката")
 		else
@@ -90,9 +90,9 @@
 
 	if(isnull(sender_override) && players == GLOB.player_list)
 		if(length(title) > 0)
-			GLOB.news_network.submit_article(title + "<br><br>" + text, "[command_name()]", "Станционные оповещения", null)
+			GLOB.news_network.submit_article(title + "<br><br>" + text, "[command_name()]", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 		else
-			GLOB.news_network.submit_article(text, "[command_name()]: Сообщение", "Станционные оповещения", null)
+			GLOB.news_network.submit_article(text, "[command_name()]: Сообщение", NEWSCASTER_STATION_ANNOUNCEMENTS, null)
 
 /proc/print_command_report(text = "", title = null, announce=TRUE)
 	if(!title)
@@ -192,11 +192,7 @@
 /proc/dispatch_announcement_to_players(announcement, list/players = GLOB.player_list, sound_override = null, should_play_sound = TRUE, datum/component/tts_component/tts_override = null, tts_message) // BANDASTATION ADDITION: "datum/component/tts_component/tts_override = null" & "tts_message"
 	var/sound_to_play = !isnull(sound_override) ? sound_override : 'sound/announcer/notice/notice2.ogg'
 
-	// note for later: low-hanging fruit to convert to astype() behind an experiment define whenever the 516 beta releases
-	// var/datum/callback/should_play_sound_callback = astype(should_play_sound)
-	var/datum/callback/should_play_sound_callback
-	if(istype(should_play_sound, /datum/callback))
-		should_play_sound_callback = should_play_sound
+	var/datum/callback/should_play_sound_callback = astype(should_play_sound)
 
 	for(var/mob/target in players)
 		if(isnewplayer(target) || !target.can_hear())
@@ -226,7 +222,9 @@
 				FALSE, \
 				list(/datum/singleton/sound_effect/announcement), \
 				null, \
-				sound_to_play \
+				sound_to_play, \
+				null, \
+				CHANNEL_TTS_ANNOUNCEMENT, \
 			)
 			// BANDASTATION EDIT END - TTS
 

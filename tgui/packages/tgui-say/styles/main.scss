@@ -1,0 +1,12 @@
+@use 'sass:meta';
+@use 'sass:color';
+@use './colors.scss';
+
+@include meta.load-css('~tgui/styles/reset');
+@include meta.load-css('./styles.scss');
+
+@each $channel, $color in colors.$channel-map {
+  .window-#{$channel} {
+    --channel-color: #{$color};
+  }
+}

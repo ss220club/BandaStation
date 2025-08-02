@@ -67,29 +67,29 @@
 	passthroughable = NONE
 	switch(direct)
 		if(NORTH)
-			if(owner.pixel_y <= maximum_pixel_shift + owner.base_pixel_y)
-				owner.pixel_y++
+			if(owner.pixel_z <= maximum_pixel_shift + owner.base_pixel_z)
+				owner.pixel_z++
 				is_shifted = TRUE
 		if(EAST)
-			if(owner.pixel_x <= maximum_pixel_shift + owner.base_pixel_x)
-				owner.pixel_x++
+			if(owner.pixel_w <= maximum_pixel_shift + owner.base_pixel_w)
+				owner.pixel_w++
 				is_shifted = TRUE
 		if(SOUTH)
-			if(owner.pixel_y >= -maximum_pixel_shift + owner.base_pixel_y)
-				owner.pixel_y--
+			if(owner.pixel_z >= -maximum_pixel_shift + owner.base_pixel_z)
+				owner.pixel_z--
 				is_shifted = TRUE
 		if(WEST)
-			if(owner.pixel_x >= -maximum_pixel_shift + owner.base_pixel_x)
-				owner.pixel_x--
+			if(owner.pixel_w >= -maximum_pixel_shift + owner.base_pixel_w)
+				owner.pixel_w--
 				is_shifted = TRUE
 
 	// Yes, I know this sets it to true for everything if more than one is matched.
 	// Movement doesn't check diagonals, and instead just checks EAST or WEST, depending on where you are for those.
-	if(owner.pixel_y > passable_shift_threshold)
+	if(owner.pixel_z > passable_shift_threshold)
 		passthroughable |= EAST | SOUTH | WEST
-	else if(owner.pixel_y < -passable_shift_threshold)
+	else if(owner.pixel_z < -passable_shift_threshold)
 		passthroughable |= NORTH | EAST | WEST
-	if(owner.pixel_x > passable_shift_threshold)
+	if(owner.pixel_w > passable_shift_threshold)
 		passthroughable |= NORTH | SOUTH | WEST
-	else if(owner.pixel_x < -passable_shift_threshold)
+	else if(owner.pixel_w < -passable_shift_threshold)
 		passthroughable |= NORTH | EAST | SOUTH

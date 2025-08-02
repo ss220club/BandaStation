@@ -9,7 +9,7 @@ import {
   Tabs,
   TextArea,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 import { decodeHtmlEntities, toTitleCase } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
@@ -30,6 +30,7 @@ type Data = {
   totalSlots: number;
   ertSpawnpoints: number;
   ertRequestMessages: MessageType[];
+  shouldBeAnnounced: BooleanLike;
 };
 
 type MessageType = {
@@ -136,8 +137,14 @@ const ERTOverview = (props) => {
 
 const SendERT = (props) => {
   const { act, data } = useBackend<Data>();
-  const { ertType, adminSlots, commanderSlots, totalSlots, ertSpawnpoints } =
-    data;
+  const {
+    ertType,
+    adminSlots,
+    commanderSlots,
+    totalSlots,
+    ertSpawnpoints,
+    shouldBeAnnounced,
+  } = data;
 
   const ertNum = [0, 1, 2, 3, 4, 5];
   enum ERTJOB {
@@ -159,21 +166,17 @@ const SendERT = (props) => {
       <Section
         fill
         title="Send ERT"
-        buttons={
-          <>
-            {Object.entries(ERTTYPE).map(([typeName, typeColor]) => (
-              <Button
-                key={ERTTYPE[typeName]}
-                width={5}
-                textAlign="center"
-                color={ertType === typeName && typeColor}
-                onClick={() => act('ertType', { ertType: typeName })}
-              >
-                {typeName}
-              </Button>
-            ))}
-          </>
-        }
+        buttons={Object.entries(ERTTYPE).map(([typeName, typeColor]) => (
+          <Button
+            key={ERTTYPE[typeName]}
+            width={5}
+            textAlign="center"
+            color={ertType === typeName && typeColor}
+            onClick={() => act('ertType', { ertType: typeName })}
+          >
+            {typeName}
+          </Button>
+        ))}
       >
         <Stack fill vertical>
           <Stack.Item grow>
@@ -188,11 +191,21 @@ const SendERT = (props) => {
                   {adminSlots ? 'Yes' : 'No'}
                 </Button>
               </LabeledList.Item>
+              <LabeledList.Item label="Should be announced?">
+                <Button
+                  icon={shouldBeAnnounced ? 'toggle-on' : 'toggle-off'}
+                  selected={shouldBeAnnounced}
+                  tooltip="Последует ли оповещение после отказа/одобрения запроса?"
+                  onClick={() => act('toggleAnnounce')}
+                >
+                  {shouldBeAnnounced ? 'Yes' : 'No'}
+                </Button>
+              </LabeledList.Item>
               <LabeledList.Item label="Commander">
                 <Button
                   icon={commanderSlots ? 'toggle-on' : 'toggle-off'}
                   selected={commanderSlots}
-                  tooltip="Лидер должен быть"
+                  tooltip="Будет лидер при создании отряда или нет?"
                   onClick={() => act('toggleCom')}
                 >
                   {commanderSlots ? 'Yes' : 'No'}
@@ -249,7 +262,7 @@ const ReadERTRequests = (props) => {
   return (
     <Stack.Item grow>
       <Section fill>
-        {ertRequestMessages && ertRequestMessages.length ? (
+        {ertRequestMessages?.length ? (
           ertRequestMessages.map((request) => (
             <Section
               key={decodeHtmlEntities(request.time)}
@@ -304,7 +317,7 @@ const DenyERT = (props) => {
               height={'100%'}
               placeholder="Enter ERT denial reason here. Multiline input is accepted."
               value={text}
-              onChange={(e, value) => setText(value)}
+              onChange={setText}
             />
           </Stack.Item>
           <Stack.Item>

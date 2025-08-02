@@ -31,6 +31,8 @@
 			if(!R.connected_ai)
 				R.TryConnectToAI()
 	var/mob/living/silicon/ai/ai_spawn = spawned
+	if(player_client)
+		ai_spawn.set_gender(player_client)
 	ai_spawn.log_current_laws()
 
 
@@ -84,3 +86,6 @@
 
 /datum/job/ai/get_radio_information()
 	return "<b>Для коммуникации с киборгами и другими ИИ используйте префикс :b.</b>"
+
+/datum/job/ai/on_respawn(mob/new_character)
+	new_character.AIize()

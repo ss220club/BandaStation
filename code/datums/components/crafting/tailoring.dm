@@ -119,7 +119,7 @@
 
 /datum/crafting_recipe/grass_sheath
 	name = "Grass Sabre Sheath"
-	result = /obj/item/storage/belt/grass_sabre
+	result = /obj/item/storage/belt/sheath/grass_sabre
 	reqs = list(/obj/item/food/grown/grass = 4,
 				/obj/item/food/grown/grass/fairy = 2)
 	time = 4 SECONDS
@@ -580,9 +580,7 @@
 	category = CAT_CLOTHING
 
 /datum/crafting_recipe/balloon_helmet/check_requirements(mob/user, list/collected_requirements)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_BALLOON_SUTRA))
-		return TRUE
+	return HAS_TRAIT(user, TRAIT_BALLOON_SUTRA)
 
 /datum/crafting_recipe/balloon_tophat
 	result = /obj/item/clothing/head/hats/tophat/balloon
@@ -593,9 +591,7 @@
 	category = CAT_CLOTHING
 
 /datum/crafting_recipe/balloon_tophat/check_requirements(mob/user, list/collected_requirements)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_BALLOON_SUTRA))
-		return TRUE
+	return HAS_TRAIT(user, TRAIT_BALLOON_SUTRA)
 
 /datum/crafting_recipe/balloon_vest
 	result = /obj/item/clothing/suit/armor/balloon_vest
@@ -606,9 +602,7 @@
 	category = CAT_CLOTHING
 
 /datum/crafting_recipe/balloon_vest/check_requirements(mob/user, list/collected_requirements)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_BALLOON_SUTRA))
-		return TRUE
+	return HAS_TRAIT(user, TRAIT_BALLOON_SUTRA)
 
 /datum/crafting_recipe/press_armor
 	name = "press armor vest"

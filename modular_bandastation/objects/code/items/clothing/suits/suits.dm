@@ -28,15 +28,11 @@
 /obj/item/clothing/suit/hooded/shark_costume/light
 	name = "light shark costume"
 	icon_state = "shark_casual_light"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
-	hoodtype = /obj/item/clothing/head/hooded/shark_hood/light_par
+	hoodtype = /obj/item/clothing/head/hooded/shark_hood_par/light_par
 
-/obj/item/clothing/head/hooded/shark_hood/light_par
+/obj/item/clothing/head/hooded/shark_hood_par/light_par
 	name = "light shark hood"
 	icon_state = "shark_casual_light"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
 
 /obj/item/clothing/suit/space/deathsquad/officer/syndie
 	name = "syndicate officer jacket"
@@ -44,6 +40,8 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "jacket_syndie"
+	flags_inv = HIDEGLOVES | HIDEJUMPSUIT
+	slowdown = 0
 
 /obj/item/clothing/suit/space/deathsquad/officer/field
 	name = "field fleet officer's jacket"
@@ -80,3 +78,22 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "hardsuit-sec-old"
+
+// MARK: TSF
+/obj/item/clothing/suit/tsf_suitjacket
+	name = "federate suit-jacket"
+	desc = "Дорогая куртка прямиком из Центральных Миров. Имеет отличительные знаки ТСФ."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	icon_state = "tsf_suit_jacket"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	worn_icon_state = "tsf_suit_jacket"
+	body_parts_covered = CHEST | GROIN | ARMS
+
+// MARK: Etamin ind.
+/obj/item/clothing/suit/etamin_coat
+	name = "Etamin Ind. officer coat"
+	desc = "Этот плащ был создан специально для офицеров корпорации Etamin Industries. Если вы видите его на ком-то, то либо перед вами офицер корпорации, либо тот, кто отдал бешеные бабки за этот плащ."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "ei_coat"
+	body_parts_covered = CHEST | GROIN | ARMS

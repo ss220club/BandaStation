@@ -7,13 +7,15 @@ The latest database version is 1.3; The query to update the schema revision tabl
 ```sql
 INSERT INTO `schema_revision_220` (`major`, `minor`) VALUES (1, 3);
 ```
+
 or
 
 ```sql
 INSERT INTO `SS13_schema_revision_220` (`major`, `minor`) VALUES (1, 3);
 ```
 
------------------------------------------------------
+---
+
 Version 1.3, 29 January 2024, by ROdenFL
 Created the table: minesweeper
 
@@ -32,7 +34,9 @@ CREATE TABLE `minesweeper` (
     PRIMARY KEY (`id`)
 ) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;
 ```
------------------------------------------------------
+
+---
+
 Version 1.2, 22 July 2024, by larentoun
 Created the table: budget
 
@@ -50,7 +54,9 @@ CREATE TABLE `budget` (
     PRIMARY KEY (`id`) USING BTREE
 ) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;
 ```
------------------------------------------------------
+
+---
+
 Version 1.1, 17 April 2024, by larentoun
 Created the tables: schema_revision220, ckey_whitelist, admin_wl
 
@@ -88,4 +94,5 @@ CREATE TABLE `admin_wl` (
 	KEY `ckey` (`ckey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
------------------------------------------------------
+
+---

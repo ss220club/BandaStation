@@ -119,7 +119,7 @@
 /obj/item/mod/control/proc/delete_link_visual()
 	return delete_link_visual_generic(mod_link)
 
-/obj/item/mod/control/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods, message_range)
+/obj/item/mod/control/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, list/spans, list/message_mods, message_range)
 	. = ..()
 	if(speaker != wearer && speaker != ai_assistant)
 		return
@@ -207,7 +207,7 @@
 		return
 	cell.use(0.02 * STANDARD_CELL_RATE * seconds_per_tick, force = TRUE)
 
-/obj/item/clothing/neck/link_scryer/attackby(obj/item/attacked_by, mob/user, params)
+/obj/item/clothing/neck/link_scryer/attackby(obj/item/attacked_by, mob/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(cell || !istype(attacked_by, /obj/item/stock_parts/power_store/cell))
 		return
@@ -270,6 +270,10 @@
 /obj/item/clothing/neck/link_scryer/ui_action_click(mob/user)
 	if(mod_link.link_call)
 		mod_link.end_call()
+	else if(QDELETED(cell))
+		user.balloon_alert(user, "no cell installed!")
+	else if(!cell.charge)
+		user.balloon_alert(user, "no charge!")
 	else
 		call_link(user, mod_link)
 
@@ -295,7 +299,7 @@
 		user.update_worn_neck()
 	return delete_link_visual_generic(mod_link)
 
-/obj/item/clothing/neck/link_scryer/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods, message_range)
+/obj/item/clothing/neck/link_scryer/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, list/spans, list/message_mods, message_range)
 	. = ..()
 	if(speaker != loc)
 		return

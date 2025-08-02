@@ -23,6 +23,10 @@
 	GLOB.zombie_infection_list -= src
 	. = ..()
 
+/obj/item/organ/zombie_infection/feel_for_damage(self_aware)
+	// keep stealthy for now, revisit later
+	return ""
+
 /obj/item/organ/zombie_infection/on_mob_insert(mob/living/carbon/new_owner, special = FALSE, movement_flags)
 	. = ..()
 	RegisterSignal(new_owner, COMSIG_LIVING_DEATH, PROC_REF(organ_owner_died))
@@ -32,7 +36,9 @@
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 	if(iszombie(new_owner) && old_species && !special)
-		new_owner.set_species(old_species)
+		// There isn't a clean way to change species during organ or bodypart removals. In lieau of a beter solution, this will do
+		spawn(0)
+			new_owner.set_species(old_species)
 	if(timer_id)
 		deltimer(timer_id)
 	UnregisterSignal(new_owner, COMSIG_LIVING_DEATH)

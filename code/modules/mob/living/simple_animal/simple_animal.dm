@@ -147,7 +147,7 @@
 	///How much wounding power it has
 	var/wound_bonus = CANT_WOUND
 	///How much bare wounding power it has
-	var/bare_wound_bonus = 0
+	var/exposed_wound_bonus = 0
 	///If the attacks from this are sharp
 	var/sharpness = NONE
 	///Generic flags
@@ -361,9 +361,11 @@
 	. += "Combat Mode: [combat_mode ? "On" : "Off"]"
 
 /mob/living/simple_animal/proc/drop_loot()
-	if(loot.len)
-		for(var/i in loot)
-			new i(loc)
+	if (!length(loot))
+		return
+	for(var/i in loot)
+		new i(drop_location())
+	loot.Cut()
 
 /mob/living/simple_animal/death(gibbed)
 	drop_loot()

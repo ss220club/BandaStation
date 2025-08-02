@@ -49,13 +49,13 @@
 	if(get_bodypart(BODY_ZONE_HEAD) && !get_organ_by_type(/obj/item/organ/brain))
 		. += span_deadsay("Кажется, [t_his] мозг отсутствует...")
 
-	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/list/disabled = list()
 	for(var/obj/item/bodypart/body_part as anything in bodyparts)
 		if(body_part.bodypart_disabled)
 			disabled += body_part
-		missing -= body_part.body_zone
 		for(var/obj/item/embedded as anything in body_part.embedded_objects)
+			if(embedded.get_embed().stealthy_embed)
+				continue
 			var/harmless = embedded.get_embed().is_harmless()
 			var/stuck_wordage = harmless ? "застревает" : "впивается"
 			var/embed_line = "[capitalize(embedded.declent_ru(ACCUSATIVE))]"
@@ -78,21 +78,21 @@
 			damage_text = "обмякла и безжизненна"
 		else
 			damage_text = (body_part.brute_dam >= body_part.burn_dam) ? body_part.heavy_brute_msg : body_part.heavy_burn_msg
-		. += span_boldwarning("[t_His] [body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] [damage_text]!")
+		. += span_boldwarning("[body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] [capitalize(t_His)] выглядит [damage_text]!")
 
 	//stores missing limbs
 	var/l_limbs_missing = 0
 	var/r_limbs_missing = 0
-	for(var/gone in missing)
-		if(gone == BODY_ZONE_HEAD)
-			. += span_deadsay("<B>[t_His] [ru_parse_zone(gone, declent = NOMINATIVE)] отсутствует!</B>")
+	for(var/missing_limb in get_missing_limbs())
+		if(missing_limb == BODY_ZONE_HEAD)
+			. += span_deadsay("<B>[t_His] [ru_parse_zone(missing_limb, declent = NOMINATIVE)] отсутствует!</B>")
 			continue
-		if(gone == BODY_ZONE_L_ARM || gone == BODY_ZONE_L_LEG)
+		if(missing_limb == BODY_ZONE_L_ARM || missing_limb == BODY_ZONE_L_LEG)
 			l_limbs_missing++
-		else if(gone == BODY_ZONE_R_ARM || gone == BODY_ZONE_R_LEG)
+		else if(missing_limb == BODY_ZONE_R_ARM || missing_limb == BODY_ZONE_R_LEG)
 			r_limbs_missing++
 
-		. += span_boldwarning("[t_His] [ru_parse_zone(gone, declent = NOMINATIVE)] отсутствует!")
+		. += span_boldwarning("[t_His] [ru_parse_zone(missing_limb, declent = NOMINATIVE)] отсутствует!")
 
 	if(l_limbs_missing >= 2 && r_limbs_missing == 0)
 		. += span_tinydanger("[t_He] полностью прав[genderize_ru(gender, "", "а", "о", "ы")]...")
@@ -382,12 +382,21 @@
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
 		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
+	for(var/obj/item/bodypart/arm/part in bodyparts)
+		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
+			continue
+		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
+		. += "[t_He] a [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
 	//gloves
 	if(gloves && !(obscured & ITEM_SLOT_GLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
-	else if(GET_ATOM_BLOOD_DNA_LENGTH(src))
-		if(num_hands)
-			. += span_warning("У [ru_p_theirs()] окровавленн[num_hands > 1 ? "ые" : "ую"] рук[num_hands > 1 ? "и" : "у"]!")
+	else if(GET_ATOM_BLOOD_DECAL_LENGTH(src) && num_hands)
+		var/list/blood_stains = GET_ATOM_BLOOD_DECALS(src)
+		var/datum/blood_type/blood_type = blood_stains[blood_stains[length(blood_stains)]]
+		var/blood_descriptior = "кровью"
+		if(istype(blood_type))
+			blood_descriptior = LOWER_TEXT(blood_type.get_blood_name())
+		. += span_warning("[t_His] рук[num_hands > 1 ? "а" : "и"] запятнан[num_hands > 1 ? "а" : "ы"] [blood_descriptior]!")
 	//handcuffed?
 	if(handcuffed)
 		var/cables_or_cuffs = istype(handcuffed, /obj/item/restraints/handcuffs/cable) ? "в связках" : "в наручниках"
@@ -476,10 +485,15 @@
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
 		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
+	for(var/obj/item/bodypart/arm/part in bodyparts)
+		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
+			continue
+		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
+		. += "[t_He] [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
 	//gloves
 	if(gloves && !(obscured & ITEM_SLOT_GLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
-	else if(GET_ATOM_BLOOD_DNA_LENGTH(src) || blood_in_hands)
+	else if(GET_ATOM_BLOOD_DECAL_LENGTH(src) || blood_in_hands)
 		if(num_hands)
 			. += span_warning("У [ru_p_theirs()] окровавленн[num_hands > 1 ? "ые" : "ую"] рук[num_hands > 1 ? "и" : "у"]!")
 	//handcuffed?
@@ -578,7 +592,37 @@
 	if(HAS_TRAIT(src, TRAIT_UNKNOWN) || HAS_TRAIT(src, TRAIT_INVISIBLE_MAN))
 		return
 
-	if((wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE)))
+	var/limbs_text = get_mismatched_limb_text()
+	if(LAZYLEN(limbs_text))
+		. += limbs_text
+
+	var/agetext = get_age_text()
+	if(agetext)
+		. += agetext
+
+/// Reports all body parts which are mismatched with the user's species
+/mob/living/carbon/human/proc/get_mismatched_limb_text()
+	var/list/covered = get_covered_body_zones()
+	var/list/texts = list()
+	for(var/obj/item/bodypart/part as anything in bodyparts)
+		var/part_id = part.limb_id
+		var/obj/item/bodypart/expected_part = dna?.species?.bodypart_overrides[part.body_zone]
+		var/expected_id = initial(expected_part?.limb_id)
+		// only report abnormal bodyparts
+		if(part_id == expected_id)
+			continue
+		// same shape bodyparts are concealed by clothing
+		// this means you can see ex. digitigrade legs through clothes
+		// but you can't see ex. cybernetic legs through clothes
+		if(part.bodyshape == initial(expected_part?.bodyshape) && (part.body_zone in covered))
+			continue
+		texts += span_notice("[p_They()] [p_have()] \a [part].")
+
+	return texts
+
+/// Reports how old the mob appears to be
+/mob/living/carbon/human/proc/get_age_text()
+	if((wear_mask?.flags_inv & HIDEFACE) || (head?.flags_inv & HIDEFACE))
 		return
 
 	var/age_text
@@ -595,7 +639,8 @@
 			age_text = "очень старо"
 		if(101 to INFINITY)
 			age_text = "увядающе"
-	. += list(span_notice("[ru_p_they(TRUE)] выглядит [age_text]."))
+
+	return span_notice("[ru_p_they(TRUE)] выглядит [age_text].")
 
 #undef ADD_NEWLINE_IF_NECESSARY
 #undef CARBON_EXAMINE_EMBEDDING_MAX_DIST

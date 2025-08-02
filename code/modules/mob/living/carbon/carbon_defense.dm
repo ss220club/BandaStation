@@ -289,6 +289,23 @@
 	else
 		Knockdown(stun_duration)
 
+/// When another mob touches us, they may messy us up.
+/mob/living/carbon/proc/share_blood_on_touch(mob/living/carbon/human/who_touched_us)
+	return
+
+/mob/living/carbon/human/share_blood_on_touch(mob/living/carbon/human/who_touched_us, messy_slots = ITEM_SLOT_ICLOTHING|ITEM_SLOT_OCLOTHING)
+	if(!istype(who_touched_us) || !messy_slots)
+		return
+
+	for(var/obj/item/thing as anything in who_touched_us.get_equipped_items())
+		if((thing.body_parts_covered & HANDS) && prob(GET_ATOM_BLOOD_DNA_LENGTH(thing) * 25))
+			add_blood_DNA_to_items(GET_ATOM_BLOOD_DNA(thing), messy_slots)
+			return
+
+	if(prob(blood_in_hands * GET_ATOM_BLOOD_DNA_LENGTH(who_touched_us) * 10))
+		add_blood_DNA_to_items(GET_ATOM_BLOOD_DNA(who_touched_us), messy_slots)
+		who_touched_us.blood_in_hands -= 1
+
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/helper, force_friendly)
 	if(on_fire)
 		to_chat(helper, span_warning("Вы не можете потушить [ru_p_them()] просто вашими голыми руками!"))
@@ -315,6 +332,7 @@
 		to_chat(helper, span_notice("Вы гладите [declent_ru(ACCUSATIVE)] по голове, чтобы поднять [ru_p_them()] настроение!"))
 		to_chat(src, span_notice("[capitalize(helper.declent_ru(NOMINATIVE))] гладит вас по голове, чтобы поднять ваше настроение!"))
 
+		share_blood_on_touch(helper, ITEM_SLOT_HEAD|ITEM_SLOT_MASK)
 		if(HAS_TRAIT(src, TRAIT_BADTOUCH))
 			to_chat(helper, span_warning("[capitalize(declent_ru(NOMINATIVE))] выглядит заметно расстроенно, когда вы гладите [ru_p_them()] по голове."))
 
@@ -351,6 +369,7 @@
 			to_chat(helper, span_notice("Вы обнимаете [declent_ru(ACCUSATIVE)], чтобы поднять [ru_p_them()] настроение!"))
 			to_chat(src, span_notice("[capitalize(helper.declent_ru(NOMINATIVE))] обнимает вас, чтобы поднять ваше настроение!"))
 
+		share_blood_on_touch(helper, ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_GLOVES)
 		// Warm them up with hugs
 		share_bodytemperature(helper)
 
@@ -433,6 +452,9 @@
 	return embeds
 
 /mob/living/carbon/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /atom/movable/screen/fullscreen/flash, length = 25)
+	if(SEND_SIGNAL(src, COMSIG_MOB_FLASH_OVERRIDE_CHECK, src) & FLASH_OVERRIDDEN) //Check for behavior overrides before doing the act itself. If we have a behavior override, we handle everything there and skip the rest
+		return FLASH_COMPLETED
+
 	var/obj/item/organ/eyes/eyes = get_organ_slot(ORGAN_SLOT_EYES)
 	if(!eyes) //can't flash what can't see!
 		return
@@ -676,6 +698,7 @@
 		changed_something = TRUE
 		new_organ = new new_organ()
 		new_organ.replace_into(src)
+		new_organ.organ_flags |= ORGAN_MUTANT
 
 	var/obj/item/bodypart/new_part = pick(GLOB.bioscrambler_valid_parts)
 	var/obj/item/bodypart/picked_user_part = get_bodypart(initial(new_part.body_zone))

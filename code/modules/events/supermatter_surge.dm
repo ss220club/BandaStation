@@ -37,7 +37,7 @@
 		/datum/event_admin_setup/input_number/surge_spiciness,
 	)
 
-/datum/round_event_control/supermatter_surge/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/supermatter_surge/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
 
 	if(!SSjob.has_minimum_jobs(crew_threshold = 3, jobs = JOB_GROUP_ENGINEERS, head_jobs = list(JOB_CHIEF_ENGINEER)))
@@ -105,7 +105,7 @@
 	sm_gas.powerloss_inhibition = initial(sm_gas.powerloss_inhibition)
 	sm_gas.heat_power_generation = initial(sm_gas.heat_power_generation)
 	sm_gas.heat_modifier = initial(sm_gas.heat_modifier)
-	priority_announce("The supermatter surge has dissipated, crystal output readings have normalized.", "Anomaly Cleared")
+	priority_announce("Всплеск суперматерии рассеялся, выходные показатели кристалла нормализовались.", "Аномалия устранена")
 	engine = null
 	sm_gas = null
 

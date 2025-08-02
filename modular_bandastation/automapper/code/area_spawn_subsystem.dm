@@ -1,5 +1,8 @@
 SUBSYSTEM_DEF(area_spawn)
 	name = "Area Spawn"
+	dependencies = list(
+		/datum/controller/subsystem/atoms
+	)
 	flags = SS_NO_FIRE
 
 	// Can't be on tile or a neighbor.

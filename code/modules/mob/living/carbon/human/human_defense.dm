@@ -241,10 +241,10 @@
 		visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] режет [declent_ru(ACCUSATIVE)]!"), \
 						span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] режет вас!"), span_hear("Вы слышите противный звук разрезания!"), null, user)
 		to_chat(user, span_danger("Вы режете [declent_ru(ACCUSATIVE)]!"))
+		if(dismembering_strike(user, user.zone_selected)) //Dismemberment successful
+			apply_damage(damage, BRUTE, affecting, armor_block)
 		log_combat(user, src, "attacked")
-		if(!dismembering_strike(user, user.zone_selected)) //Dismemberment successful
-			return TRUE
-		apply_damage(damage, BRUTE, affecting, armor_block)
+		return TRUE
 
 /mob/living/carbon/human/attack_larva(mob/living/carbon/alien/larva/worm, list/modifiers)
 	. = ..()
@@ -562,119 +562,45 @@
 
 	combined_msg += span_notice("<b>Вы осматриваете себя на предмет ранений.</b>")
 
-	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+	var/list/missing = get_all_limbs()
 
 	for(var/obj/item/bodypart/body_part as anything in bodyparts)
 		missing -= body_part.body_zone
 		if(body_part.bodypart_flags & BODYPART_PSEUDOPART) //don't show injury text for fake bodyparts; ie chainsaw arms or synthetic armblades
 			continue
 
-		body_part.check_for_injuries(src, combined_msg)
+		var/bodypart_report = body_part.check_for_injuries(src)
+		if(bodypart_report)
+			combined_msg += "[span_notice("&rdsh;")] [bodypart_report]"
 
 	for(var/t in missing)
-		combined_msg += span_bolddanger("У вас отсутствует [parse_zone(t)]!")
+		combined_msg += span_boldannounce("&rdsh; У вас отсутствует [parse_zone(t)]!")
 
-	if(is_bleeding())
-		var/list/obj/item/bodypart/bleeding_limbs = list()
-		for(var/obj/item/bodypart/part as anything in bodyparts)
-			if(part.get_modified_bleed_rate())
-				bleeding_limbs += part
+	var/tox = getToxLoss() + (disgust / 5) + (HAS_TRAIT(src, TRAIT_SELF_AWARE) ? 0 : (rand(-3, 0) * 5))
+	switch(tox)
+		if(10 to 20)
+			combined_msg += span_danger("Вы чувствуете недомогание.")
+		if(20 to 40)
+			combined_msg += span_danger("Вас тошнит.")
+		if(40 to INFINITY)
+			combined_msg += span_danger("Вы чувствуете себя очень плохо!")
 
-		var/num_bleeds = LAZYLEN(bleeding_limbs)
-		var/bleed_text = "<span class='danger'>Вы истекаете кровью из:"
-		switch(num_bleeds)
-			if(1 to 2)
-				bleed_text += " [bleeding_limbs[1].declent_ru(GENITIVE)][num_bleeds == 2 ? " и [bleeding_limbs[2].declent_ru(GENITIVE)]" : ""]"
-			if(3 to INFINITY)
-				for(var/i in 1 to (num_bleeds - 1))
-					var/obj/item/bodypart/BP = bleeding_limbs[i]
-					bleed_text += " [BP.declent_ru(GENITIVE)],"
-				bleed_text += " и [bleeding_limbs[num_bleeds].declent_ru(GENITIVE)]"
-		bleed_text += "!</span>"
-		combined_msg += bleed_text
+	var/oxy = getOxyLoss() + (losebreath * 4) + (blood_volume < BLOOD_VOLUME_NORMAL ? ((BLOOD_VOLUME_NORMAL - blood_volume) * 0.1) : 0) + (HAS_TRAIT(src, TRAIT_SELF_AWARE) ? 0 : (rand(-3, 0) * 5))
+	switch(oxy)
+		if(10 to 20)
+			combined_msg += span_danger("У вас кружится голова.")
+		if(20 to 40)
+			combined_msg += losebreath ? span_danger("Вы задыхаетесь!") : span_danger("Ваши мысли затуманены и находятся где-то далеко.")
+		if(40 to INFINITY)
+			combined_msg += span_danger("Вам кажется, что вы вот-вот потеряете сознание!")
 
 	if(getStaminaLoss())
 		if(getStaminaLoss() > 30)
 			combined_msg += span_info("Вы абсолютно обессилены.")
 		else
-			combined_msg += span_info("Вы чувствуете усталость.")
-	if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
-		if(toxloss)
-			if(toxloss > 10)
-				combined_msg += span_danger("Вы чувствуете недомогание.")
-			else if(toxloss > 20)
-				combined_msg += span_danger("Вас тошнит.")
-			else if(toxloss > 40)
-				combined_msg += span_danger("Вы чувствуете себя очень плохо!")
-		if(oxyloss)
-			if(oxyloss > 10)
-				combined_msg += span_danger("У вас кружится голова.")
-			else if(oxyloss > 20)
-				combined_msg += span_danger("Ваши мысли затуманены и находятся где-то далеко.")
-			else if(oxyloss > 30)
-				combined_msg += span_danger("Вы задыхаетесь!")
+			combined_msg += span_info("Вы чувствуете усталость")
 
-	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
-		switch(nutrition)
-			if(NUTRITION_LEVEL_FULL to INFINITY)
-				combined_msg += span_info("Вы наелись до отказа!")
-			if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-				combined_msg += span_info("Вы наелись!")
-			if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-				combined_msg += span_info("Вы не голодны.")
-			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-				combined_msg += span_info("Вам не помешает перекусить.")
-			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-				combined_msg += span_info("Вы чувствуете сильный голод.")
-			if(0 to NUTRITION_LEVEL_STARVING)
-				combined_msg += span_danger("Вы умираете с голоду!")
-
-	//Compiles then shows the list of damaged organs and broken organs
-	var/list/broken = list()
-	var/list/damaged = list()
-	var/broken_message
-	var/damaged_message
-	var/broken_plural
-	var/damaged_plural
-	//Sets organs into their proper list
-	for(var/obj/item/organ/organ as anything in organs)
-		if(organ.organ_flags & ORGAN_FAILING)
-			if(broken.len)
-				broken += ", "
-			broken += organ.name
-		else if(organ.damage > organ.low_threshold)
-			if(damaged.len)
-				damaged += ", "
-			damaged += organ.name
-	//Checks to enforce proper grammar, inserts words as necessary into the list
-	if(broken.len)
-		if(broken.len > 1)
-			broken.Insert(broken.len, "и ")
-			broken_plural = TRUE
-		else
-			var/holder = broken[1] //our one and only element
-			if(holder[length(holder)] == "s")
-				broken_plural = TRUE
-		//Put the items in that list into a string of text
-		for(var/B in broken)
-			broken_message += B
-		combined_msg += span_warning("У вас не функционируют: [broken_plural ? broken_message : broken_message]")
-	if(damaged.len)
-		if(damaged.len > 1)
-			damaged.Insert(damaged.len, "и ")
-			damaged_plural = TRUE
-		else
-			var/holder = damaged[1]
-			if(holder[length(holder)] == "s")
-				damaged_plural = TRUE
-		for(var/D in damaged)
-			damaged_message += D
-		combined_msg += span_info("У вас болят: [damaged_plural ? damaged_message : damaged_message].")
-
-	if(quirks.len)
-		combined_msg += span_notice("У вас имеются следующий черты: [get_quirk_string(FALSE, CAT_QUIRK_ALL)].")
-
-	to_chat(src, boxed_message(combined_msg.Join("\n")))
+	to_chat(src, boxed_message(combined_msg.Join("<br>")))
 
 /mob/living/carbon/human/damage_clothes(damage_amount, damage_type = BRUTE, damage_flag = 0, def_zone)
 	if(damage_type != BRUTE && damage_type != BURN)
@@ -747,29 +673,29 @@
 
 /mob/living/carbon/human/proc/burn_clothing(seconds_per_tick, stacks)
 	var/list/burning_items = list()
-	var/obscured = check_obscured_slots(TRUE)
+	var/covered = check_covered_slots()
 	//HEAD//
 
-	if(glasses && !(obscured & ITEM_SLOT_EYES))
+	if(glasses && !(covered & ITEM_SLOT_EYES))
 		burning_items += glasses
-	if(wear_mask && !(obscured & ITEM_SLOT_MASK))
+	if(wear_mask && !(covered & ITEM_SLOT_MASK))
 		burning_items += wear_mask
-	if(wear_neck && !(obscured & ITEM_SLOT_NECK))
+	if(wear_neck && !(covered & ITEM_SLOT_NECK))
 		burning_items += wear_neck
-	if(ears && !(obscured & ITEM_SLOT_EARS))
+	if(ears && !(covered & ITEM_SLOT_EARS))
 		burning_items += ears
 	if(head)
 		burning_items += head
 
 	//CHEST//
-	if(w_uniform && !(obscured & ITEM_SLOT_ICLOTHING))
+	if(w_uniform && !(covered & ITEM_SLOT_ICLOTHING))
 		burning_items += w_uniform
 	if(wear_suit)
 		burning_items += wear_suit
 
 	//ARMS & HANDS//
 	var/obj/item/clothing/arm_clothes = null
-	if(gloves && !(obscured & ITEM_SLOT_GLOVES))
+	if(gloves && !(covered & ITEM_SLOT_GLOVES))
 		arm_clothes = gloves
 	else if(wear_suit && ((wear_suit.body_parts_covered & HANDS) || (wear_suit.body_parts_covered & ARMS)))
 		arm_clothes = wear_suit
@@ -780,7 +706,7 @@
 
 	//LEGS & FEET//
 	var/obj/item/clothing/leg_clothes = null
-	if(shoes && !(obscured & ITEM_SLOT_FEET))
+	if(shoes && !(covered & ITEM_SLOT_FEET))
 		leg_clothes = shoes
 	else if(wear_suit && ((wear_suit.body_parts_covered & FEET) || (wear_suit.body_parts_covered & LEGS)))
 		leg_clothes = wear_suit

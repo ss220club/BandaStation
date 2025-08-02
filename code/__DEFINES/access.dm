@@ -192,13 +192,13 @@
 #define ACCESS_CENT_CAPTAIN "cent_captain"
 #define ACCESS_CENT_BAR "cent_bar"
 /// Special Ops. Captain's display case, Marauder and Seraph mechs.
-#define ACCESS_CENT_SPECOPS 188 ///Remind me to separate to captain, centcom, and syndicate mech access later -SonofSpace
+#define ACCESS_CENT_SPECOPS "cent_specops"
 
 /// - - - ANTAGONIST - - -
 /// SYNDICATE
 #define ACCESS_SYNDICATE "syndicate"
 #define ACCESS_SYNDICATE_LEADER "syndicate_leader"
-#define ACCESS_SYNDICATE_COMMAND "syndicate_command" // BANDASTATION EDIT ADDITION
+#define ACCESS_SYNDICATE_COMMAND "syndicate_command" // BANDASTATION EDIT ADDITION - Jobs Module
 /// BLOODCULT
 	//Special, for anything that's basically internal
 #define ACCESS_BLOODCULT "bloodcult"
@@ -313,6 +313,7 @@
 	ACCESS_ENGINEERING, \
 	ACCESS_EVA, \
 	ACCESS_EXTERNAL_AIRLOCKS, \
+	ACCESS_EXPLORER, \
 	ACCESS_GATEWAY, \
 	ACCESS_GENETICS, \
 	ACCESS_HYDROPONICS, \
@@ -444,7 +445,6 @@
 	ACCESS_HYDROPONICS, \
 	ACCESS_JANITOR, \
 	ACCESS_KITCHEN, \
-	ACCESS_LAWYER, \
 	ACCESS_LIBRARY, \
 	ACCESS_SERVICE, \
 	ACCESS_THEATRE, \
@@ -525,6 +525,7 @@
 	ACCESS_QM, \
 	ACCESS_SHIPPING, \
 	ACCESS_VAULT, \
+	ACCESS_EXPLORER, \
 )
 /// Name for the Command region.
 #define REGION_COMMAND "Command"
@@ -543,6 +544,27 @@
 	ACCESS_TELEPORTER, \
 	ACCESS_VAULT, \
 )
+
+/// BANDASTATION ADDITION START - Jobs Module
+/// Name for the Justice region.
+#define REGION_JUSTICE "Justice"
+/// Used to seed the accesses_by_region list in SSid_access.
+/// A list of all regional accesses that are overseen by the Magistrate.
+#define REGION_ACCESS_JUSTICE list( \
+	ACCESS_LAWYER, \
+	ACCESS_MAGISTRATE, \
+)
+
+/// Name for the NT Representation region.
+#define REGION_NT_REPRESENTATION "NT Representation"
+/// Used to seed the accesses_by_region list in SSid_access.
+/// A list of all regional accesses that are overseen by the Nanotrasen Representative.
+#define REGION_ACCESS_NT_REPRESENTATION list( \
+	ACCESS_BLUESHIELD, \
+	ACCESS_NANOTRASEN_REPRESENTATIVE, \
+)
+/// BANDASTATION ADDITION END - Jobs Module
+
 /// Name for the Centcom region.
 #define REGION_CENTCOM "Central Command"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all CENTCOM_ACCESS regional accesses.
@@ -573,11 +595,15 @@
 	/obj/item/modular_computer/pda/heads/ce = list(REGION_COMMAND), \
 	/obj/item/modular_computer/pda/heads/rd = list(REGION_COMMAND), \
 	/obj/item/modular_computer/pda/heads/captain = list(REGION_COMMAND), \
+	/obj/item/modular_computer/pda/heads/nanotrasen_representative = list(REGION_COMMAND), \
+	/obj/item/modular_computer/pda/heads/magistrate = list(REGION_COMMAND), \
+	/obj/item/modular_computer/pda/heads/blueshield = list(REGION_COMMAND, REGION_NT_REPRESENTATION), \
+	/obj/item/modular_computer/pda/lawyer = list(REGION_JUSTICE), \
 	/obj/item/modular_computer/pda/cargo = list(REGION_SUPPLY), \
 	/obj/item/modular_computer/pda/bitrunner = list(REGION_SUPPLY), \
 	/obj/item/modular_computer/pda/shaftminer = list(REGION_SUPPLY), \
+	/obj/item/modular_computer/pda/explorer = list(REGION_SUPPLY), \
 	/obj/item/modular_computer/pda/chaplain = list(REGION_GENERAL), \
-	/obj/item/modular_computer/pda/lawyer = list(REGION_GENERAL), \
 	/obj/item/modular_computer/pda/botanist = list(REGION_GENERAL), \
 	/obj/item/modular_computer/pda/roboticist = list(REGION_RESEARCH), \
 	/obj/item/modular_computer/pda/curator = list(REGION_GENERAL), \
@@ -597,6 +623,8 @@
 	REGION_RESEARCH, \
 	REGION_SECURITY, \
 	REGION_SUPPLY, \
+	REGION_JUSTICE, \
+	REGION_NT_REPRESENTATION, \
 )
 
 /// Used in ID card access adding procs. Will try to add all accesses and utilises free wildcards, skipping over any accesses it can't add.
@@ -607,3 +635,8 @@
 #define FORCE_ADD_ALL 2
 /// Used in ID card access adding procs. Will stack trace on fail.
 #define ERROR_ON_FAIL 3
+
+#define ID_DATA(T) SSid_access.__in_character_record_id_information(T)
+#define SILICON_OVERRIDE "silicon_override"
+#define CHAMELEON_OVERRIDE "chameleon_override"
+#define ID_READ_FAILURE "id_read_failure"

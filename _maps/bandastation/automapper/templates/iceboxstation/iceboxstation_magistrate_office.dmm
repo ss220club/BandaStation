@@ -386,7 +386,7 @@
 /turf/open/floor/plating,
 /area/station/security/courtroom)
 "OD" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/computer/security/telescreen/prison/directional/south,
 /turf/open/floor/wood/parquet,
 /area/station/command/heads_quarters/magistrate)

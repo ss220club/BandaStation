@@ -89,7 +89,7 @@
 	else
 		serial_number = "LT306TG[rand(000000, 999999)]"
 
-	mfg_date = "[CURRENT_STATION_YEAR]-[time2text(world.timeofday, "MM-DD")]"
+	mfg_date = "[CURRENT_STATION_YEAR]-[time2text(world.timeofday, "MM-DD", NO_TIMEZONE)]"
 	install_location = specific_transport_id
 
 /datum/tram_mfg_info/proc/load_from_json(list/json_data)
@@ -625,7 +625,7 @@
 	log_transport("TC: [specific_transport_id] ending Tram Malfunction event.")
 
 /datum/transport_controller/linear/tram/proc/announce_malf_event()
-	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please stand by, engineering has been dispatched to the tram to perform a reset.", "[command_name()] Инженерный отдел")
+	priority_announce("Наша автоматизированная система управления потеряла связь с бортовым компьютером трамвая. Пожалуйста, ожидайте, к трамваю направлены инженеры для сброса настроек.", "[command_name()]: Инженерный отдел")
 
 /datum/transport_controller/linear/tram/proc/register_collision(points = 1)
 	tram_registration.collisions += points
@@ -845,7 +845,7 @@
 		. += span_notice("The cabinet can be opened with a [EXAMINE_HINT("Left-click.")]")
 
 
-/obj/machinery/transport/tram_controller/attackby(obj/item/weapon, mob/living/user, params)
+/obj/machinery/transport/tram_controller/attackby(obj/item/weapon, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(user.combat_mode || cover_open)
 		return ..()
 
@@ -946,7 +946,7 @@
 		new /obj/item/wallframe/tram/controller(drop_location)
 	else
 		new /obj/item/stack/sheet/mineral/titanium(drop_location, 2)
-		new /obj/item/stack/sheet/iron(drop_location, 1)
+		new /obj/item/stack/sheet/iron(drop_location)
 
 /**
  * Update the blinky lights based on the controller status, allowing to quickly check without opening up the cabinet.

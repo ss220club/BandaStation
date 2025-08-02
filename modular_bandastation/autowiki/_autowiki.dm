@@ -5,12 +5,3 @@
 	desc = "Заменяем редакторов вики кодом."
 	/// A string with authors of this modpack.
 	author = "Aylong"
-
-/datum/modpack/autowiki/pre_initialize()
-	. = ..()
-
-/datum/modpack/autowiki/initialize()
-	. = ..()
-
-/datum/modpack/autowiki/post_initialize()
-	. = ..()

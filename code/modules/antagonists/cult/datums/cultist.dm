@@ -1,16 +1,13 @@
 /datum/antagonist/cult
-	name = "Cultist"
+	name = "Культист"
 	roundend_category = "Культисты"
-	antagpanel_category = "Cult"
+	antagpanel_category = "Культ"
 	antag_moodlet = /datum/mood_event/cult
-	suicide_cry = "FOR NAR'SIE!!"
+	suicide_cry = "ЗА НАР'СИ!!"
 	preview_outfit = /datum/outfit/cultist
-	job_rank = ROLE_CULTIST
+	pref_flag = ROLE_CULTIST
 	antag_hud_name = "cult"
 	stinger_sound = 'sound/music/antag/bloodcult/bloodcult_gain.ogg'
-
-	///The vote ability Cultists have to elect someone to be the leader.
-	var/datum/action/innate/cult/mastervote/vote_ability
 
 	///Boolean on whether the starting equipment should be given to their inventory.
 	var/give_equipment = FALSE
@@ -35,9 +32,6 @@
 
 	var/datum/action/innate/cult/comm/communion = new(owner)
 	communion.Grant(current)
-	if(isnull(cult_team.cult_leader_datum))
-		vote_ability = new(owner)
-		vote_ability.Grant(current)
 	if(ishuman(current))
 		var/datum/action/innate/cult/blood_magic/magic = new(owner)
 		magic.Grant(current)
@@ -45,13 +39,14 @@
 	current.log_message("has been converted to the cult of Nar'Sie!", LOG_ATTACK, color=COLOR_CULT_RED)
 
 /datum/antagonist/cult/on_removal()
+	if (!owner.current)
+		return ..()
+
 	if(!silent)
-		owner.current.visible_message(span_deconversion_message("[owner.current] looks like [owner.current.p_theyve()] just reverted to [owner.current.p_their()] old faith!"), ignored_mobs = owner.current)
-		to_chat(owner.current, span_userdanger("An unfamiliar white light flashes through your mind, cleansing the taint of the Geometer and all your memories as her servant."))
+		owner.current.visible_message(span_deconversion_message("Старая вера вернулась к [owner.current]!"), ignored_mobs = owner.current)
+		to_chat(owner.current, span_userdanger("Незнакомый белый свет вспыхивает в твоем сознании, очищая от скверны Геометра и всех твоих воспоминаний о том, что ты был её слугой."))
 		owner.current.log_message("has renounced the cult of Nar'Sie!", LOG_ATTACK, color=COLOR_CULT_RED)
 
-	if(vote_ability)
-		QDEL_NULL(vote_ability)
 	for(var/datum/action/innate/cult/cult_buttons in owner.current.actions)
 		qdel(cult_buttons)
 
@@ -60,7 +55,7 @@
 /datum/antagonist/cult/apply_innate_effects(mob/living/mob_override)
 	. = ..()
 	var/mob/living/current = owner.current || mob_override
-	handle_clown_mutation(current, mob_override ? null : "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself.")
+	handle_clown_mutation(current, mob_override ? null : "Ваши тренировки позволили вам преодолеть свою клоунскую натуру, позволив вам владеть оружием, не нанося себе вреда.")
 	current.faction |= FACTION_CULT
 	current.grant_language(/datum/language/narsie, source = LANGUAGE_CULTIST)
 
@@ -96,7 +91,7 @@
 
 /datum/antagonist/cult/on_mindshield(mob/implanter)
 	if(!silent)
-		to_chat(owner.current, span_warning("You feel something interfering with your mental conditioning, but you resist it!"))
+		to_chat(owner.current, span_warning("Вы чувствуете, что что-то вмешивается в ваше ментальное состояние, но вы сопротивляетесь этому!"))
 	return
 
 /datum/antagonist/cult/admin_add(datum/mind/new_owner,mob/admin)
@@ -147,7 +142,7 @@
 	. += cult_give_item(/obj/item/melee/cultblade/dagger, H)
 	if(metal)
 		. += cult_give_item(/obj/item/stack/sheet/runed_metal/ten, H)
-	to_chat(owner, "These will help you start the cult on this station. Use them well, and remember - you are not the only one.</span>")
+	to_chat(owner, span_notice("Это поможет вам организовать культ на станции. Используйте их с пользой, и запомните - вы не одни."))
 
 ///Attempts to make a new item and put it in a potential inventory slot in the provided mob.
 /datum/antagonist/cult/proc/cult_give_item(obj/item/item_path, mob/living/carbon/human/mob)
@@ -155,21 +150,21 @@
 	ADD_TRAIT(item, TRAIT_CONTRABAND, INNATE_TRAIT)
 	var/where = mob.equip_conspicuous_item(item)
 	if(!where)
-		to_chat(mob, span_userdanger("Unfortunately, you weren't able to get [item]. This is very bad and you should adminhelp immediately (press F1)."))
+		to_chat(mob, span_userdanger("К сожалению, вы не смогли получить [item]. Это очень плохо и вам стоит написать админхелп (нажмите F1)."))
 		return FALSE
-	else
-		to_chat(mob, span_danger("You have [item] in your [where]."))
-		if(where == "backpack")
-			mob.back.atom_storage?.show_contents(mob)
-		return TRUE
+
+	to_chat(mob, span_danger("[item] был помещен в ваш [where]."))
+	if(where == "backpack")
+		mob.back.atom_storage?.show_contents(mob)
+	return TRUE
 
 /datum/antagonist/cult/proc/admin_give_dagger(mob/admin)
 	if(!equip_cultist(metal = FALSE))
-		to_chat(admin, span_danger("Spawning dagger failed!"))
+		to_chat(admin, span_danger("Призыв клинка провалился!"))
 
 /datum/antagonist/cult/proc/admin_give_metal(mob/admin)
 	if (!equip_cultist(metal = TRUE))
-		to_chat(admin, span_danger("Spawning runed metal failed!"))
+		to_chat(admin, span_danger("Призыв рунического металла провалился!"))
 
 /datum/antagonist/cult/proc/admin_take_all(mob/admin)
 	var/mob/living/current = owner.current
@@ -185,8 +180,8 @@
 /datum/antagonist/cult/proc/make_cult_leader()
 	if(cult_team.cult_leader_datum)
 		return FALSE
-	cult_team.cult_leader_datum = src
 
+	cult_team.cult_leader_datum = src
 	antag_hud_name = "cultmaster"
 	add_team_hud(owner.current)
 	RegisterSignal(owner.current, COMSIG_MOB_STATCHANGE, PROC_REF(deathrattle))
@@ -198,24 +193,24 @@
 	var/datum/action/innate/cult/master/pulse/throwing = new
 	bloodmark.Grant(owner.current)
 	throwing.Grant(owner.current)
+	if(!cult_team.leader_passed_on)
+		var/datum/action/innate/cult/master/pass_role/pass_role = new
+		pass_role.Grant(owner.current)
 	owner.current.update_mob_action_buttons()
 
 	for(var/datum/mind/cult_mind as anything in cult_team.members)
-		var/datum/antagonist/cult/cult_datum = cult_mind.has_antag_datum(/datum/antagonist/cult)
-		cult_datum.vote_ability.Remove(cult_mind.current)
-		to_chat(cult_mind.current, span_cult_large("[owner.current] has won the cult's support and is now their master. \
-			Follow [owner.current.p_their()] orders to the best of your ability!"))
+		if (cult_mind != owner)
+			to_chat(cult_mind.current, span_cult_large("[owner.current] ваш Мастер культа! \
+				Выполняйте приказы Мастера насколько это в ваших силах!"))
 
-	to_chat(owner.current, span_cult_large("<span class='warningplain'>You are the cult's Master</span>. \
-		As the cult's Master, you have a unique title and loud voice when communicating, are capable of marking \
-		targets, such as a location or a noncultist, to direct the cult to them, and, finally, you are capable of \
-		summoning the entire living cult to your location <b><i>once</i></b>. Use these abilities to direct the cult \
-		to victory at any cost."))
+	to_chat(owner.current, span_cult_large("<span class='warningplain'>Вы - Мастер культа</span>. \
+		Как Мастер культа у вас громче голос при коммуникации и вы можете помечать цели, такие как локацию и не культиста, \
+		чтобы направить культ туда. Вы можете призывать живых культистов к вашей локации <b><i>единожды</i></b>. \
+		Используйте свои способности для победы любой ценой."))
 
 	return TRUE
 
 ///Admin-only helper to demote someone from Cult leader, taking away their HUD, abilities, and deathrattle
-///And gives all cultists from their team back their ability to vote for a new leader.
 /datum/antagonist/cult/proc/demote_from_leader()
 	if(!cult_team.cult_leader_datum)
 		return FALSE
@@ -234,20 +229,18 @@
 	var/datum/action/innate/cult/master/pulse/throwing = locate() in owner.current.actions
 	if(throwing)
 		throwing.Remove(owner.current)
+	var/datum/action/innate/cult/master/pass_role/pass_role = locate() in owner.current.actions
+	if(pass_role)
+		pass_role.Remove(owner.current)
 	owner.current.update_mob_action_buttons()
-	for(var/datum/mind/cult_mind as anything in cult_team.members)
-		var/datum/antagonist/cult/cult_datum = cult_mind.has_antag_datum(/datum/antagonist/cult)
-		cult_datum.vote_ability.Grant(cult_mind.current)
-
-	to_chat(owner.current, span_cult_large("You have been demoted from being the cult's Master, you are now an acolyte once more!"))
-
+	to_chat(owner.current, span_cult_large("Вы были понижены с Мастера культа. Теперь вы послушник!"))
 	return TRUE
 
 ///If dead (and Narsie isn't summoned), will alert all Cultists of their death, sending their location out.
 /datum/antagonist/cult/proc/deathrattle(datum/source)
 	SIGNAL_HANDLER
 
-	if(owner.current.stat != DEAD)
+	if(owner.current?.stat != DEAD)
 		return
 	if(!QDELETED(GLOB.cult_narsie))
 		return
@@ -257,7 +250,7 @@
 	var/area/current_area = get_area(owner.current)
 	for(var/datum/mind/cult_mind as anything in cult_team.members)
 		SEND_SOUND(cult_mind, sound('sound/effects/hallucinations/veryfar_noise.ogg'))
-		to_chat(cult_mind, span_cult_large("The Cult's Master, [owner.current.name], has fallen in \the [current_area]!"))
+		to_chat(cult_mind, span_cult_large("Мастер культа, [owner.current.name] пал в [current_area]!"))
 
 /datum/antagonist/cult/get_preview_icon()
 	var/icon/icon = render_preview_outfit(preview_outfit)
@@ -281,4 +274,3 @@
 ///Used to check if the owner is counted as a secondary invoker for runes.
 /datum/antagonist/cult/proc/check_invoke_validity()
 	return TRUE
-

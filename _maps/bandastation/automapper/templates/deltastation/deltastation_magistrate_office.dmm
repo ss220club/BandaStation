@@ -139,7 +139,7 @@
 /turf/open/floor/wood/parquet,
 /area/station/command/heads_quarters/magistrate)
 "z" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/status_display/evac/directional/east,
 /obj/machinery/camera/directional/east{
 	c_tag = "Magistrate's Office"

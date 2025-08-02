@@ -1,50 +1,76 @@
-@use '../colors.scss' as colors;
-@use '../functions.scss' as *;
+@keyframes highlighted {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
 
-$background-color: hsla(0, 0%, 10%, 0.85);
-$border-color: hsla(255, 255%, 255%, 0.1);
-$border-radius: 0.5rem;
-$box-shadow: 0 1px 0.2rem hsla(0, 0%, 0%, 0.75);
-$blur: saturate(150%) blur(12px);
+  75% {
+    transform: scale(3);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
 
 @mixin nanoButton() {
-  cursor: pointer;
+  opacity: 1 !important;
   pointer-events: all;
-  background-color: $background-color;
-  color: hsla(255, 255%, 255%, 0.66);
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  backdrop-filter: $blur;
+  background-color: var(--nanomap-background);
+  color: hsla(0, 0%, 100%, 0.66);
+  border: var(--border-thickness-tiny) solid var(--color-border);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--nanomap-shadow);
+  backdrop-filter: var(--nanomap-blur);
 
   &:hover {
-    background-color: lighten($background-color, 25%);
-    color: hsla(255, 255%, 255%, 1);
+    background-color: hsl(
+      from var(--nanomap-background) h s calc(l + var(--adjust-hover))
+    );
+    color: hsla(0, 0%, 100%, 1);
   }
 
   &--selected {
-    color: colors.$green;
+    color: var(--color-green);
 
     &:hover {
-      color: lighten(colors.$green, 25%);
+      color: hsl(from var(--color-green) h s calc(l + var(--adjust-hover)));
     }
   }
 
   &--disabled {
-    cursor: unset;
-    background-color: lighten($background-color, 25%) !important;
-    color: lighten(colors.$red, 25%) !important;
+    cursor: var(--cursor-default);
+    background-color: hsl(
+      from var(--nanomap-background) h s l / 0.75
+    ) !important;
+    color: hsl(
+      from var(--color-red) h s calc(l + var(--adjust-color))
+    ) !important;
+  }
+
+  i {
+    vertical-align: middle;
   }
 }
 
 .NanoMap {
+  --nanomap-blur: saturate(150%) var(--blur-medium);
+  --nanomap-shadow: 0 1px 0.2rem hsla(0, 0%, 0%, 0.75);
+  --nanomap-background: hsl(
+    from var(--color-base) h s calc(l - var(--adjust-color)) / 0.85
+  );
+  padding: var(--space-m);
+  background-color: var(--color-section);
+
   &__Controls {
     display: flex;
     align-items: baseline;
     justify-content: center;
     text-align: center;
-    gap: 0.25rem;
-    padding: 0 0.5rem;
+    gap: var(--space-s);
+    padding: 0 var(--space-m);
     z-index: 3;
 
     .Button {
@@ -55,15 +81,15 @@ $blur: saturate(150%) blur(12px);
       position: absolute;
       inset: 0;
       height: 100%;
-      background-color: rgba(lighten(colors.$green, 25%), 0.33);
-      border-radius: $border-radius;
-      transition: width 0.2s;
+      background-color: hsl(from var(--color-green) h s calc(l + 10) / 0.33);
+      border-radius: var(--border-radius-large);
+      transition: width var(--transition-time-medium);
       z-index: -1;
     }
   }
 
   &__Buttons {
-    padding: 0.5rem 0;
+    padding: var(--space-m) 0;
     z-index: 3;
 
     .Button {
@@ -73,36 +99,70 @@ $blur: saturate(150%) blur(12px);
 
   &__Minimap {
     user-select: none;
-    background-color: $background-color;
-    border: 1px solid $border-color;
-    border-radius: $border-radius;
-    box-shadow: $box-shadow;
-    backdrop-filter: $blur;
+    background-color: var(--nanomap-background);
+    border: var(--border-thickness-tiny) solid var(--color-border);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--nanomap-shadow);
+    backdrop-filter: var(--nanomap-blur);
 
     .rzpp-preview {
-      border: 1px solid rgba($border-color, 0.33) !important;
-      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 9999px !important;
+      border: var(--border-thickness-tiny) solid
+        hsl(from var(--color-border) h s l / 0.33) !important;
+      box-shadow: hsla(0, 0%, 0%, 0.33) 0px 0px 0px 9999px !important;
     }
   }
 
   &__Object {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     font-size: 6px;
     line-height: 0;
     padding: 0;
     height: 2em;
     width: 2em;
-    border: 2px solid rgba(0, 0, 0, 0.66);
-    border-radius: 0.25rem;
+    border: 2px solid hsl(from var(--color-border-dark) h s l / 0.66);
+    border-radius: var(--border-radius-small);
+    transform: scale(1.25);
+    transition-property: background-color, border-color, transform;
+    transition-duration: var(--transition-time-medium);
+
+    &--circular {
+      border-radius: var(--border-radius-circular);
+    }
 
     &--wrapper {
       position: absolute;
       transform: translate(17.5%, 5%);
       z-index: 2;
+
+      &.highlighted {
+        z-index: 5;
+      }
+    }
+
+    &--inner {
+      position: relative;
+      display: inline-flex;
+    }
+
+    &--highlighted {
+      position: absolute;
+      inset: 0;
+      border: var(--border-thickness-tiny) solid var(--color-good);
+      border-radius: var(--border-radius-circular);
+      filter: drop-shadow(0 0 1px hsla(0, 0%, 0%, 0.5));
+      animation: 1.5s highlighted infinite;
+    }
+
+    &--selected {
+      transform: scale(1.5);
     }
 
     &--hidden {
       display: none;
+    }
+
+    .Icon {
+      transform: translate(-0.25em, 0.2em);
     }
   }
 }
@@ -118,8 +178,8 @@ $blur: saturate(150%) blur(12px);
   }
 
   &__Minimap--container {
-    top: 0.25rem;
-    left: 0.25rem;
+    top: var(--space-l);
+    left: var(--space-l);
     z-index: 3;
   }
 
@@ -138,7 +198,7 @@ $blur: saturate(150%) blur(12px);
   &--top-right,
   &--bottom-right {
     .NanoMap__Minimap--container {
-      right: 0.25rem;
+      right: var(--space-l);
       left: unset;
     }
   }
@@ -147,7 +207,7 @@ $blur: saturate(150%) blur(12px);
   &--bottom-right {
     .NanoMap__Minimap--container {
       top: unset;
-      bottom: 0.25rem;
+      bottom: var(--space-l);
     }
   }
 
@@ -172,19 +232,18 @@ $blur: saturate(150%) blur(12px);
     pointer-events: none;
     inset: 0 !important;
     display: flex;
-    margin: 0.25rem;
+    margin: var(--space-l);
     align-items: flex-start;
     justify-content: space-between;
 
     .NanoMap__Controls,
     .NanoMap__Buttons {
       position: relative;
-      pointer-events: all;
       inset: unset;
       padding: 0;
 
-      * {
-        flex-basis: unset !important;
+      .Button {
+        pointer-events: all;
       }
     }
 

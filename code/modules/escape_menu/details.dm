@@ -34,8 +34,8 @@ GLOBAL_DATUM(escape_menu_details, /atom/movable/screen/escape_menu/details)
 	var/new_maptext = {"
 		<span style='text-align: right; line-height: 0.7'>
 			Round ID: [GLOB.round_id || "Unset"]<br />
-			[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [STATION_TIME_PASSED() > MIDNIGHT_ROLLOVER ? "[round(STATION_TIME_PASSED() / MIDNIGHT_ROLLOVER)]:[gameTimestamp(wtime = STATION_TIME_PASSED(), timezone = 0)]" : gameTimestamp(wtime = STATION_TIME_PASSED(), timezone = 0)]<br />
-			Map: [SSmapping.current_map.map_name || "Loading..."]<br />
+			[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [ROUND_TIME()]<br />
+			Map: [SSmapping.current_map.return_map_name(webmap_included = TRUE) || "Loading..."]<br />
 			Time Dilation: [round(SStime_track.time_dilation_current,1)]%<br />
 		</span>
 	"}

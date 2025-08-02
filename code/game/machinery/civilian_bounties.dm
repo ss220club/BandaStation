@@ -47,7 +47,7 @@
 	///Typecast of an inserted, scanned ID card inside the console, as bounties are held within the ID card.
 	var/obj/item/card/id/inserted_scan_id
 
-/obj/machinery/computer/piratepad_control/civilian/attackby(obj/item/I, mob/living/user, params)
+/obj/machinery/computer/piratepad_control/civilian/attackby(obj/item/I, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(isidcard(I))
 		if(id_insert(user, I, inserted_scan_id))
 			inserted_scan_id = I
@@ -160,11 +160,32 @@
 	if(!id_account.account_job)
 		say("Запрашиваемая ID карта не имеет зарегистрированной должности!")
 		return FALSE
-	var/list/datum/bounty/crumbs = list(random_bounty(id_account.account_job.bounty_types), // We want to offer 2 bounties from their appropriate job catagories
-										random_bounty(id_account.account_job.bounty_types), // and 1 guaranteed assistant bounty if the other 2 suck.
-										random_bounty(CIV_JOB_BASIC))
+
+	var/list/datum/bounty/crumbs = generate_bounty_list(id_account.account_job.bounty_types)
 	COOLDOWN_START(id_account, bounty_timer, (5 MINUTES) - cooldown_reduction)
 	id_account.bounties = crumbs
+
+/**
+ * Generates a list of bounties for use with the civilian bounty pad.
+ * @param bounty_types the define taken from a job for selection of a random_bounty() proc.
+ * @param bounty_rolls the number of bounties to be selected from.
+ * @param assistant_failsafe Do we guarentee one assistant bounty per generated list? Used for non-assistant jobs to give an easier alternative to that job's default bounties.
+ */
+/obj/machinery/computer/piratepad_control/civilian/proc/generate_bounty_list(bounty_types, bounty_rolls = 3, assistant_failsafe = TRUE)
+	var/list/rolling_list = list()
+	if(assistant_failsafe)
+		rolling_list += random_bounty(CIV_JOB_BASIC)
+	while(bounty_rolls > 1)
+		var/datum/bounty/potential_bounty = random_bounty(bounty_types)
+		var/repeats_bool = FALSE
+		for(var/datum/iterator in rolling_list)
+			if(iterator.type == potential_bounty.type)
+				repeats_bool = TRUE
+		if(repeats_bool)
+			continue
+		rolling_list += potential_bounty
+		bounty_rolls -= 1
+	return rolling_list
 
 /**
  * Proc that assigned a civilian bounty to an ID card, from the list of potential bounties that that bank account currently has available.
@@ -265,14 +286,12 @@
 	return TRUE
 
 ///Removes A stored ID card.
-/obj/machinery/computer/piratepad_control/civilian/proc/id_eject(mob/user, obj/target)
+/obj/machinery/computer/piratepad_control/civilian/proc/id_eject(mob/user, obj/item/target)
 	if(!target)
 		to_chat(user, span_warning("Этот слот пуст!"))
 		return FALSE
 	else
-		target.forceMove(drop_location())
-		if(!issilicon(user) && Adjacent(user))
-			user.put_in_hands(target)
+		try_put_in_hand(target, user)
 		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] получает [target.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."), \
 							span_notice("Вы получаете [target.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."))
 		playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
@@ -317,7 +336,7 @@
 /obj/item/bounty_cube/examine()
 	. = ..()
 	if(speed_bonus)
-		. += span_notice("<b>[time2text(next_nag_time - world.time,"mm:ss")]</b> остаётся до потери бонуса за быструю доставку в размере <b>[bounty_value * speed_bonus]</b> кредитов.")
+		. += span_notice("<b>[time2text(next_nag_time - world.time,"mm:ss", NO_TIMEZONE)]</b> остаётся до потери бонуса за быструю доставку в размере <b>[bounty_value * speed_bonus]</b> кредитов.")
 	if(handler_tip && !bounty_handler_account)
 		. += span_notice("Scan this in the cargo shuttle with an export scanner to register your bank account for the <b>[bounty_value * handler_tip]</b> credit handling tip.")
 
@@ -363,7 +382,7 @@
 		"LOCATION" = get_area_name(src),
 		"PERSON" = bounty_holder,
 		"RANK" = bounty_holder_job,
-		"BONUSTIME" = time2text(next_nag_time - world.time,"mm:ss"),
+		"BONUSTIME" = time2text(next_nag_time - world.time,"mm:ss", NO_TIMEZONE),
 		"COST" = bounty_value
 	), src, list(RADIO_CHANNEL_SUPPLY))
 

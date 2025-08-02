@@ -11,7 +11,7 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  color: hsl(0, 0%, 0%);
+  color: var(--color-black);
 }
 
 body {
@@ -45,23 +45,23 @@ img.icon {
 }
 
 a {
-  color: hsl(240, 100%, 50%);
+  color: hsl(from var(--color-hyperlink) h s calc(l - 40));
+
+  &:hover {
+    color: hsl(from var(--color-hyperlink) h s calc(l - 20));
+  }
 }
 
-a.visited {
-  color: hsl(300, 100%, 50%);
-}
-
+a.visited,
 a:visited {
-  color: hsl(300, 100%, 50%);
-}
+  color: hsl(from var(--color-hyperlink-visited) h s calc(l - 40));
 
-a.popt {
-  text-decoration: none;
+  &:hover {
+    color: hsl(from var(--color-hyperlink-visited) h s calc(l - 20));
+  }
 }
 
 /* POPUPS */
-
 .popup {
   position: fixed;
   top: 50%;
@@ -279,7 +279,7 @@ h6 {
 
 h1.alert,
 h2.alert {
-  color: hsl(0, 0%, 0%);
+  color: var(--color-black);
 }
 
 em {
@@ -329,7 +329,7 @@ em {
 
 .binarysay {
   color: hsl(114, 86.5%, 40.8%);
-  background-color: hsl(0, 0%, 0%);
+  background-color: var(--color-black);
   display: block;
 }
 
@@ -358,12 +358,6 @@ em {
   color: hsl(0, 100%, 32%);
 }
 
-// BANDASTATION ADDITION START
-.justiceradio {
-  color: hsl(341, 97%, 62%);
-}
-// BANDASTATION ADDITION END
-
 .medradio {
   color: hsl(201.8, 49.3%, 39.4%);
 }
@@ -380,6 +374,10 @@ em {
   color: hsl(88.6, 58.9%, 42%);
 }
 
+.enteradio {
+  color: hsl(176.1, 20%, 45.1%);
+}
+
 .syndradio {
   color: hsl(358.7, 26.7%, 33.7%);
 }
@@ -394,10 +392,6 @@ em {
 
 .aiprivradio {
   color: hsl(300, 100%, 50%);
-}
-
-.enteradio {
-  color: hsl(176.1, 20%, 45.1%);
 }
 
 .redteamradio {
@@ -430,7 +424,7 @@ em {
 
 h1.alert,
 h2.alert {
-  color: hsl(0, 0%, 0%);
+  color: var(--color-black);
 }
 
 .userdanger {
@@ -491,12 +485,12 @@ h2.alert {
 }
 
 .minoralert {
-  color: hsl(0, 0%, 0%);
+  color: var(--color-black);
   font-size: 125%;
 }
 
 .priorityannounce {
-  color: hsl(0, 0%, 0%);
+  color: var(--color-black);
   font-weight: bold;
   font-size: 225%;
 }
@@ -603,6 +597,11 @@ h2.alert {
 .boldnicegreen {
   color: hsl(132.6, 78.7%, 36.9%);
   font-weight: bold;
+}
+
+.tinynicegreen {
+  color: hsl(132.6, 78.7%, 36.9%);
+  font-size: 85%;
 }
 
 .cult {
@@ -1083,6 +1082,8 @@ $alert-stripe-colors: (
   'red': hsl(0, 100%, 85.1%),
   'purple': hsl(295.1, 100%, 88%),
   'grey': hsl(0, 0%, 89%),
+  // BANDASTATION ADDITION
+  'white': hsl(0, 0%, 85.1%),
 );
 
 $alert-stripe-alternate-colors: (
@@ -1095,6 +1096,8 @@ $alert-stripe-alternate-colors: (
   'red': hsl(0, 100%, 88%),
   'purple': hsl(294.8, 100%, 91%),
   'grey': hsl(0, 0%, 92.2%),
+  // BANDASTATION ADDITION
+  'white': hsl(0, 0%, 88%),
 );
 
 $alert-major-header-colors: (
@@ -1107,6 +1110,8 @@ $alert-major-header-colors: (
   'red': hsl(340.8, 100%, 25.1%),
   'purple': hsl(266.5, 83%, 30%),
   'grey': hsl(336.1, 100%, 25.1%),
+  // BANDASTATION ADDITION
+  'white': hsl(0, 0%, 39%),
 );
 
 $alert-subheader-header-colors: (
@@ -1119,6 +1124,8 @@ $alert-subheader-header-colors: (
   'red': hsl(220.2, 100%, 26.1%),
   'purple': hsl(220.2, 100%, 26.1%),
   'grey': hsl(220.2, 100%, 26.1%),
+  // BANDASTATION ADDITION
+  'white': hsl(220.2, 100%, 26.1%),
 );
 
 $border-width: 4;

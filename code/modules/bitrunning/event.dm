@@ -6,7 +6,6 @@
 	)
 	category = EVENT_CATEGORY_INVASION
 	description = "Causes a short term antagonist to spawn in the virtual domain."
-	dynamic_should_hijack = FALSE
 	min_players = 1
 	max_occurrences = 0
 	typepath = /datum/round_event/ghost_role/bitrunning_glitch
@@ -14,7 +13,7 @@
 	/// List of servers on the station
 	var/list/datum/weakref/active_servers = list()
 
-/datum/round_event_control/bitrunning_glitch/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/bitrunning_glitch/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
 	if(!.)
 		return .
@@ -30,7 +29,7 @@
 /datum/round_event_control/bitrunning_glitch/proc/validate_servers()
 	active_servers.Cut()
 	for(var/obj/machinery/quantum_server/server in SSmachines.get_machines_by_type(/obj/machinery/quantum_server))
-		if(server.validate_mutation_candidates())
+		if(server.validate_mutation_candidates() && server.generated_domain.difficulty != BITRUNNER_DIFFICULTY_NONE)
 			active_servers.Add(WEAKREF(server))
 
 	return length(active_servers) > 0

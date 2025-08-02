@@ -1,5 +1,5 @@
 import { Section, Stack } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -16,10 +16,10 @@ export const ExaminePanel = (props) => {
   const { act, data } = useBackend<Data>();
   const { character_name, obscured, assigned_map, flavor_text } = data;
   return (
-    <Window title="Подробное описание" width={900} height={670} theme="admin">
+    <Window title="Подробное описание" width={600} height={350} theme="ntos">
       <Window.Content>
         <Stack fill>
-          <Stack.Item width="30%">
+          <Stack.Item>
             <Section fill title="Превью персонажа">
               {!obscured && (
                 <CharacterPreview id={assigned_map} height="100%" />
@@ -32,7 +32,7 @@ export const ExaminePanel = (props) => {
                 <Section
                   scrollable
                   fill
-                  title={character_name + ', описание:'}
+                  title={`${character_name}, описание:`}
                   preserveWhitespace
                 >
                   {flavor_text}
