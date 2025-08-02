@@ -1,0 +1,287 @@
+[bread?]
+nominative = "хлеб?"
+genitive = "хлеба?"
+dative = "хлебу?"
+accusative = "хлеб?"
+instrumental = "хлебом?"
+prepositional = "хлебе?"
+gender = "male"
+
+[breadslice?]
+nominative = "ломтик хлеба?"
+genitive = "ломтика хлеба?"
+dative = "ломтику хлеба?"
+accusative = "ломтик хлеба?"
+instrumental = "ломтиком хлеба?"
+prepositional = "ломтике хлеба?"
+gender = "male"
+
+[bread]
+nominative = "хлеб"
+genitive = "хлеба"
+dative = "хлебу"
+accusative = "хлеб"
+instrumental = "хлебом"
+prepositional = "хлебе"
+gender = "male"
+
+[bread slice]
+nominative = "ломтик хлеба"
+genitive = "ломтика хлеба"
+dative = "ломтику хлеба"
+accusative = "ломтик хлеба"
+instrumental = "ломтиком хлеба"
+prepositional = "ломтике хлеба"
+gender = "male"
+
+[moldy 'bread' slice]
+nominative = "заплесневелый ломтик 'хлеба'"
+genitive = "заплесневелого ломтика 'хлеба'"
+dative = "заплесневелому ломтику 'хлеба'"
+accusative = "заплесневелый ломтик 'хлеба'"
+instrumental = "заплесневелым ломтиком 'хлеба'"
+prepositional = "заплесневелом ломтике 'хлеба'"
+gender = "male"
+
+[bacteria-rich moldy 'bread' slice]
+nominative = "богатый бактериями заплесневелый ломтик 'хлеба'"
+genitive = "богатого бактериями заплесневелого ломтика 'хлеба'"
+dative = "богатому бактериями заплесневелому ломтику 'хлеба'"
+accusative = "богатый бактериями заплесневелый ломтик 'хлеба'"
+instrumental = "богатым бактериями заплесневелым ломтиком 'хлеба'"
+prepositional = "богатом бактериями заплесневелом ломтике 'хлеба'"
+gender = "male"
+
+[meatbread loaf]
+nominative = "мясной хлеб"
+genitive = "мясного хлеба"
+dative = "мясному хлебу"
+accusative = "мясной хлеб"
+instrumental = "мясным хлебом"
+prepositional = "мясном хлебе"
+gender = "male"
+
+[meatbread slice]
+nominative = "ломтик мясного хлеба"
+genitive = "ломтика мясного хлеба"
+dative = "ломтику мясного хлеба"
+accusative = "ломтик мясного хлеба"
+instrumental = "ломтиком мясного хлеба"
+prepositional = "ломтике мясного хлеба"
+gender = "male"
+
+[sausagebread loaf]
+nominative = "колбасный хлеб"
+genitive = "колбасного хлеба"
+dative = "колбасному хлебу"
+accusative = "колбасный хлеб"
+instrumental = "колбасным хлебом"
+prepositional = "колбасном хлебе"
+gender = "male"
+
+[sausagebread slice]
+nominative = "ломтик колбасного хлеба"
+genitive = "ломтика колбасного хлеба"
+dative = "ломтику колбасного хлеба"
+accusative = "ломтик колбасного хлеба"
+instrumental = "ломтиком колбасного хлеба"
+prepositional = "ломтике колбасного хлеба"
+gender = "male"
+
+[xenomeatbread loaf]
+nominative = "ксеномясной хлеб"
+genitive = "ксеномясного хлеба"
+dative = "ксеномясному хлебу"
+accusative = "ксеномясной хлеб"
+instrumental = "ксеномясным хлебом"
+prepositional = "ксеномясном хлебе"
+gender = "male"
+
+[xenomeatbread slice]
+nominative = "ломтик ксеномясного хлеба"
+genitive = "ломтика ксеномясного хлеба"
+dative = "ломтику ксеномясного хлеба"
+accusative = "ломтик ксеномясного хлеба"
+instrumental = "ломтиком ксеномясного хлеба"
+prepositional = "ломтике ксеномясного хлеба"
+gender = "male"
+
+[spider meat loaf]
+nominative = "паучий мясной хлеб"
+genitive = "паучьего мясного хлеба"
+dative = "паучьему мясному хлебу"
+accusative = "паучий мясной хлеб"
+instrumental = "паучьим мясным хлебом"
+prepositional = "паучьем мясном хлебе"
+gender = "male"
+
+[spider meat bread slice]
+nominative = "ломтик паучьего мясного хлеба"
+genitive = "ломтика паучьего мясного хлеба"
+dative = "ломтику паучьего мясного хлеба"
+accusative = "ломтик паучьего мясного хлеба"
+instrumental = "ломтиком паучьего мясного хлеба"
+prepositional = "ломтике паучьего мясного хлеба"
+gender = "male"
+
+[banana-nut bread]
+nominative = "банановый хлеб с орехами"
+genitive = "бананового хлеба с орехами"
+dative = "банановому хлебу с орехами"
+accusative = "банановый хлеб с орехами"
+instrumental = "банановым хлебом с орехами"
+prepositional = "банановом хлебе с орехами"
+gender = "male"
+
+[banana-nut bread slice]
+nominative = "ломтик бананового хлеба с орехами"
+genitive = "ломтика бананового хлеба с орехами"
+dative = "ломтику бананового хлеба с орехами"
+accusative = "ломтик бананового хлеба с орехами"
+instrumental = "ломтиком бананового хлеба с орехами"
+prepositional = "ломтике бананового хлеба с орехами"
+gender = "male"
+
+[Tofubread]
+nominative = "тофухлеб"
+genitive = "тофухлеба"
+dative = "тофухлебу"
+accusative = "тофухлеб"
+instrumental = "тофухлебом"
+prepositional = "тофухлебе"
+gender = "male"
+
+[tofubread slice]
+nominative = "ломтик тофухлеба"
+genitive = "ломтика тофухлеба"
+dative = "ломтику тофухлеба"
+accusative = "ломтик тофухлеба"
+instrumental = "ломтиком тофухлеба"
+prepositional = "ломтике тофухлеба"
+gender = "male"
+
+[cream cheese bread]
+nominative = "хлеб с кремовым сыром"
+genitive = "хлеба с кремовым сыром"
+dative = "хлебу с кремовым сыром"
+accusative = "хлеб с кремовым сыром"
+instrumental = "хлебом с кремовым сыром"
+prepositional = "хлебе с кремовым сыром"
+gender = "male"
+
+[cream cheese bread slice]
+nominative = "ломтик хлеба с кремовым сыром"
+genitive = "ломтика хлеба с кремовым сыром"
+dative = "ломтику хлеба с кремовым сыром"
+accusative = "ломтик хлеба с кремовым сыром"
+instrumental = "ломтиком хлеба с кремовым сыром"
+prepositional = "ломтике хлеба с кремовым сыром"
+gender = "male"
+
+[mimana bread]
+nominative = "хлеб из миманы"
+genitive = "хлеба из миманы"
+dative = "хлебу из миманы"
+accusative = "хлеб из миманы"
+instrumental = "хлебом из миманы"
+prepositional = "хлебе из миманы"
+gender = "male"
+
+[mimana bread slice]
+nominative = "ломтик хлеба из миманы"
+genitive = "ломтика хлеба из миманы"
+dative = "ломтику хлеба из миманы"
+accusative = "ломтик хлеба из миманы"
+instrumental = "ломтиком хлеба из миманы"
+prepositional = "ломтике хлеба из миманы"
+gender = "male"
+
+[baguette]
+nominative = "багет"
+genitive = "багета"
+dative = "багету"
+accusative = "багет"
+instrumental = "багетом"
+prepositional = "багете"
+gender = "male"
+
+[garlic bread]
+nominative = "чесночный хлеб"
+genitive = "чесночного хлеба"
+dative = "чесночному хлебу"
+accusative = "чесночный хлеб"
+instrumental = "чесночным хлебом"
+prepositional = "чесночном хлебе"
+gender = "male"
+
+[butter biscuit]
+nominative = "масляный бисквит"
+genitive = "масляного бисквита"
+dative = "масляному бисквиту"
+accusative = "масляный бисквит"
+instrumental = "масляным бисквитом"
+prepositional = "масляном бисквите"
+gender = "male"
+
+[butterdog]
+nominative = "масло-дог"
+genitive = "масла-дога"
+dative = "маслу-догу"
+accusative = "масло-дог"
+instrumental = "маслом-догом"
+prepositional = "масле-доге"
+gender = "male"
+
+[raw french toast]
+nominative = "сырой французский тост"
+genitive = "сырого французского тоста"
+dative = "сырому французскому тосту"
+accusative = "сырой французский тост"
+instrumental = "сырым французским тостом"
+prepositional = "сыром французском тосте"
+gender = "male"
+
+[french toast]
+nominative = "французский тост"
+genitive = "французского тоста"
+dative = "французскому тосту"
+accusative = "французский тост"
+instrumental = "французским тостом"
+prepositional = "французском тосте"
+gender = "plural"
+
+[raw breadstick]
+nominative = "сырая хлебная палочка"
+genitive = "сырой хлебной палочки"
+dative = "сырой хлебной палочке"
+accusative = "сырую хлебную палочку"
+instrumental = "сырой хлебной палочкой"
+prepositional = "сырой хлебной палочке"
+gender = "female"
+
+[breadstick]
+nominative = "хлебная палочка"
+genitive = "хлебной палочки"
+dative = "хлебной палочке"
+accusative = "хлебную палочку"
+instrumental = "хлебной палочкой"
+prepositional = "хлебной палочке"
+gender = "female"
+
+[raw croissant]
+nominative = "сырой круассан"
+genitive = "сырого круассана"
+dative = "сырому круассану"
+accusative = "сырой круассан"
+instrumental = "сырым круассаном"
+prepositional = "сыром круассане"
+gender = "male"
+
+[croissant]
+nominative = "круассан"
+genitive = "круассана"
+dative = "круассану"
+accusative = "круассан"
+instrumental = "круассаном"
+prepositional = "круассане"
+gender = "male"

@@ -7054,15 +7054,6 @@ instrumental = "мокрым тофу"
 prepositional = "мокром тофу"
 gender = "male"
 
-["moldy 'bread' slice"]
-nominative = "плесневый ломтик 'хлеба'"
-genitive = "плесневого ломтика 'хлеба'"
-dative = "плесневому ломтику 'хлеба'"
-accusative = "плесневый ломтик 'хлеба'"
-instrumental = "плесневым ломтиком 'хлеба'"
-prepositional = "плесневом ломтике 'хлеба'"
-gender = "male"
-
 ["dirty ice cup"]
 nominative = "стакан с грязным льдом"
 genitive = "стакана с грязным льдом"
@@ -7115,15 +7106,6 @@ dative = "хот-догу Маленький Гавайи"
 accusative = "хот-дог Маленький Гавайи"
 instrumental = "хот-догом Маленький Гавайи"
 prepositional = "хот-доге Маленький Гавайи"
-gender = "male"
-
-["butterdog"]
-nominative = "масло-дог"
-genitive = "масла-дога"
-dative = "маслу-догу"
-accusative = "масло-дог"
-instrumental = "маслом-догом"
-prepositional = "масле-доге"
 gender = "male"
 
 ["Plasma Dog Supreme"]

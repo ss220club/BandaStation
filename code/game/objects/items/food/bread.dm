@@ -2,7 +2,7 @@
 /// Abstract parent object for bread items. Should not be made obtainable in game.
 /obj/item/food/bread
 	name = "bread?"
-	desc = "You shouldn't see this, call the coders."
+	desc = "Вы не должны этого видеть, вызовите кодеров."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	max_volume = 80
 	tastes = list("bread" = 10)
@@ -27,7 +27,7 @@
 // Abstract parent object for sliced bread items. Should not be made obtainable in game.
 /obj/item/food/breadslice
 	name = "breadslice?"
-	desc = "You shouldn't see this, call the coders."
+	desc = "Вы не должны этого видеть, вызовите кодеров."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	foodtypes = GRAIN
 	food_flags = FOOD_FINGER_FOOD
@@ -41,7 +41,7 @@
 
 /obj/item/food/bread/plain
 	name = "bread"
-	desc = "Some plain old earthen bread."
+	desc = Старый добрый земной хлеб."
 	icon_state = "bread"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 10)
 	tastes = list("bread" = 10)
@@ -56,7 +56,7 @@
 
 /obj/item/food/breadslice/plain
 	name = "bread slice"
-	desc = "A slice of home."
+	desc = "Кусочек дома."
 	icon_state = "breadslice"
 	foodtypes = GRAIN
 	food_reagents = list(/datum/reagent/consumable/nutriment = 2)
@@ -73,7 +73,7 @@
 
 /obj/item/food/breadslice/moldy
 	name = "moldy 'bread' slice"
-	desc = "Entire stations have been ripped apart arguing whether this is still good to eat."
+	desc = "Целые станции разрушались в спорах о том, пригоден ли этот продукт для употребления в пищу."
 	icon_state = "moldybreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -86,8 +86,8 @@
 
 /obj/item/food/breadslice/moldy/bacteria
 	name = "bacteria-rich moldy 'bread' slice"
-	desc = "Something (possibly necroyeast) has caused this bread to rise in a macabre state of unlife. \
-		It lurchs about when unattended. You might want to locate a priest if you see this. Or maybe a flamethrower."
+	desc = "Что-то (возможно, некродрожжи) заставило этот хлеб подняться в мрачном состоянии нежизни. \
+		Он шевелится, когда остается без присмотра. Возможно, вам стоит найти священника, если вы это увидите. Или огнемет."
 
 /obj/item/food/breadslice/moldy/bacteria/Initialize(mapload)
 	. = ..()
@@ -95,7 +95,7 @@
 
 /obj/item/food/bread/meat
 	name = "meatbread loaf"
-	desc = "The culinary base of every self-respecting eloquen/tg/entleman."
+	desc = "Кулинарная основа каждого уважающего себя джентельмена."
 	icon_state = "meatbread"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -111,7 +111,7 @@
 
 /obj/item/food/breadslice/meat
 	name = "meatbread slice"
-	desc = "A slice of delicious meatbread."
+	desc = "Ломтик восхитительного мясного хлеба."
 	icon_state = "meatbreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -125,7 +125,7 @@
 
 /obj/item/food/bread/sausage
 	name = "sausagebread loaf"
-	desc = "Don't think too much about it."
+	desc = "Не думайте об этом слишком много."
 	icon_state = "sausagebread"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -140,7 +140,7 @@
 
 /obj/item/food/breadslice/sausage
 	name = "sausagebread slice"
-	desc = "A slice of delicious sausagebread."
+	desc = "Ломтик восхитительного колбасного хлеба."
 	icon_state = "sausagebreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -154,7 +154,7 @@
 
 /obj/item/food/bread/xenomeat
 	name = "xenomeatbread loaf"
-	desc = "The culinary base of every self-respecting eloquen/tg/entleman. Extra Heretical."
+	desc = "Кулинарная основа каждого уважающего себя джентельмена. Особо еретическая."
 	icon_state = "xenomeatbread"
 	custom_materials = list(/datum/material/meat = MEATSLAB_MATERIAL_AMOUNT)
 	food_reagents = list(
@@ -169,7 +169,7 @@
 
 /obj/item/food/breadslice/xenomeat
 	name = "xenomeatbread slice"
-	desc = "A slice of delicious meatbread. Extra Heretical."
+	desc = "Ломтик восхитительного мясного хлеба. Особо еретический."
 	icon_state = "xenobreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -183,7 +183,7 @@
 
 /obj/item/food/bread/spidermeat
 	name = "spider meat loaf"
-	desc = "Reassuringly green meatloaf made from spider meat."
+	desc = "Успокаивающе зеленый мясной хлеб из паучьего мяса."
 	icon_state = "spidermeatbread"
 	custom_materials = list(/datum/material/meat = MEATSLAB_MATERIAL_AMOUNT)
 	food_reagents = list(
@@ -199,7 +199,7 @@
 
 /obj/item/food/breadslice/spidermeat
 	name = "spider meat bread slice"
-	desc = "A slice of meatloaf made from an animal that most likely still wants you dead."
+	desc = "Ломтик мясного хлеба из животного, которое, скорее всего, до сих пор хочет вашей смерти."
 	icon_state = "spidermeatslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -214,7 +214,7 @@
 
 /obj/item/food/bread/banana
 	name = "banana-nut bread"
-	desc = "A heavenly and filling treat."
+	desc = "Небесное и сытное лакомство."
 	icon_state = "bananabread"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -227,7 +227,7 @@
 
 /obj/item/food/breadslice/banana
 	name = "banana-nut bread slice"
-	desc = "A slice of delicious banana bread."
+	desc = "Ломтик восхитительного бананового хлеба."
 	icon_state = "bananabreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -239,7 +239,7 @@
 
 /obj/item/food/bread/tofu
 	name = "Tofubread"
-	desc = "Like meatbread but for vegetarians. Not guaranteed to give superpowers."
+	desc = "Как мясной хлеб, но для вегетарианцев. Не гарантирует суперсил."
 	icon_state = "tofubread"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -254,7 +254,7 @@
 
 /obj/item/food/breadslice/tofu
 	name = "tofubread slice"
-	desc = "A slice of delicious tofubread."
+	desc = "Ломтик восхитительного тофухлеба."
 	icon_state = "tofubreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -267,7 +267,7 @@
 
 /obj/item/food/bread/creamcheese
 	name = "cream cheese bread"
-	desc = "Yum yum yum!"
+	desc = "Ням ням ням!"
 	icon_state = "creamcheesebread"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -280,7 +280,7 @@
 
 /obj/item/food/breadslice/creamcheese
 	name = "cream cheese bread slice"
-	desc = "A slice of yum!"
+	desc = "Вкуснейший омтик!"
 	icon_state = "creamcheesebreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -292,7 +292,7 @@
 
 /obj/item/food/bread/mimana
 	name = "mimana bread"
-	desc = "Best eaten in silence."
+	desc = "Лучше всего есть в тишине."
 	icon_state = "mimanabread"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 20,
@@ -307,7 +307,7 @@
 
 /obj/item/food/breadslice/mimana
 	name = "mimana bread slice"
-	desc = "A slice of silence!"
+	desc = "Ломтик тишины!"
 	icon_state = "mimanabreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -322,7 +322,7 @@
 /obj/item/food/bread/empty
 	name = "bread"
 	icon_state = "tofubread"
-	desc = "It's bread, customized to your wildest dreams."
+	desc = "Это хлеб, настроенный под ваши самые смелые мечты."
 	slice_type = /obj/item/food/breadslice/empty
 
 // What you get from cutting a custom bread. Different from custom sliced bread.
@@ -330,7 +330,7 @@
 	name = "bread slice"
 	icon_state = "tofubreadslice"
 	foodtypes = GRAIN
-	desc = "It's a slice of bread, customized to your wildest dreams."
+	desc = "Это ломтик хлеба, настроенный под ваши самые смелые мечты."
 
 /obj/item/food/breadslice/empty/Initialize(mapload)
 	. = ..()
@@ -338,7 +338,7 @@
 
 /obj/item/food/baguette
 	name = "baguette"
-	desc = "Bon appetit!"
+	desc = "Приятного аппетита!"
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "baguette"
 	inhand_icon_state = null
@@ -366,13 +366,13 @@
 /obj/item/food/baguette/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(HAS_MIND_TRAIT(user, TRAIT_MIMING) && held_item == src)
-		context[SCREENTIP_CONTEXT_LMB] = "Toggle Swordplay"
+		context[SCREENTIP_CONTEXT_LMB] = "Включить сражение на мечах"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/food/baguette/examine(mob/user)
 	. = ..()
 	if(HAS_MIND_TRAIT(user, TRAIT_MIMING))
-		. += span_notice("You can wield this like a sword by using it in your hand.")
+		. += span_notice("Вы можете взмахивать этим как мечом, используя его в руке.")
 
 /obj/item/food/baguette/attack_self(mob/user, modifiers)
 	. = ..()
@@ -385,12 +385,12 @@
 
 /obj/item/food/baguette/proc/begin_swordplay(mob/user)
 	visible_message(
-		span_notice("[user] begins wielding [src] like a sword!"),
-		span_notice("You begin wielding [src] like a sword, with a firm grip on the bottom as an imaginary handle.")
+		span_notice("[user] начинает махать [src.declent_ru(INSTRUMENTAL)] как мечом!"),
+		span_notice("Вы начинаете махать [src.declent_ru(INSTRUMENTAL)] как мечом, крепко держа за основание как за воображаемую рукоятку.")
 	)
 	ADD_TRAIT(src, TRAIT_CUSTOM_TAP_SOUND, SWORDPLAY_TRAIT)
-	attack_verb_continuous = list("slashes", "cuts")
-	attack_verb_simple = list("slash", "cut")
+	attack_verb_continuous = list("рубит", "режет")
+	attack_verb_simple = list("рубите", "режете")
 	hitsound = 'sound/items/weapons/rapierhit.ogg'
 	fake_swordplay = TRUE
 
@@ -408,8 +408,8 @@
 
 	if(user)
 		visible_message(
-			span_notice("[user] no longer holds [src] like a sword!"),
-			span_notice("You go back to holding [src] normally.")
+			span_notice("[user] больше не держит [src] как меч!"),
+			span_notice("Вы снова держите [src.declent_ru(ACCUSATIVE)] нормально.")
 		)
 
 /obj/item/food/baguette/proc/on_sword_dropped(datum/source, mob/user)
@@ -445,7 +445,7 @@
 
 /obj/item/food/garlicbread
 	name = "garlic bread"
-	desc = "Alas, it is limited."
+	desc = "Увы, количество ограничено."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "garlicbread"
 	inhand_icon_state = null
@@ -462,7 +462,7 @@
 
 /obj/item/food/butterbiscuit
 	name = "butter biscuit"
-	desc = "Well butter my biscuit!"
+	desc = "Как следует смажь мои бисквитики маслом!"
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "butterbiscuit"
 	food_reagents = list(
@@ -477,7 +477,7 @@
 
 /obj/item/food/butterdog
 	name = "butterdog"
-	desc = "Made from exotic butters."
+	desc = "Изготовлено из экзотических масел."
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "butterdog"
 	bite_consumption = 1
@@ -497,7 +497,7 @@
 
 /obj/item/food/raw_frenchtoast
 	name = "raw french toast"
-	desc = "A slice of bread soaked in a beaten egg mixture. Put it on a griddle to start cooking!"
+	desc = "Ломтик хлеба, пропитанный взбитой яичной смесью. Положите его на сковороду, чтобы начать готовить!"
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "raw_frenchtoast"
 	food_reagents = list(
@@ -514,7 +514,7 @@
 
 /obj/item/food/frenchtoast
 	name = "french toast"
-	desc = "A slice of bread soaked in an egg mixture and grilled until golden-brown. Drizzle with syrup!"
+	desc = "Ломтик хлеба, пропитанный яичной смесью и обжаренный до золотисто-коричневого цвета. Полейте сиропом!"
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "frenchtoast"
 	food_reagents = list(
@@ -528,7 +528,7 @@
 
 /obj/item/food/raw_breadstick
 	name = "raw breadstick"
-	desc = "An uncooked strip of dough in the shape of a breadstick."
+	desc = "Неприготовленная полоска теста в форме хлебной палочки."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "raw_breadstick"
 	food_reagents = list(
@@ -545,7 +545,7 @@
 
 /obj/item/food/breadstick
 	name = "breadstick"
-	desc = "A delicious, buttery breadstick. Highly addictive, but oh-so worth it."
+	desc = "Восхитительная, маслянистая хлебная палочка. Вызывает сильное привыкание, но стоит того."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "breadstick"
 	food_reagents = list(
@@ -559,7 +559,7 @@
 
 /obj/item/food/raw_croissant
 	name = "raw croissant"
-	desc = "Folded dough ready to bake into a croissant."
+	desc = "Сложенное тесто, готовое для выпечки круассана."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "raw_croissant"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 2)
@@ -573,7 +573,7 @@
 
 /obj/item/food/croissant
 	name = "croissant"
-	desc = "A delicious, buttery croissant. The perfect start to the day."
+	desc = "Восхитительный, маслянистый круассан. Идеальное начало дня."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "croissant"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 2)
