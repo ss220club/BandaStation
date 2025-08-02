@@ -1,0 +1,82 @@
+# Translation file for cheese.dm
+
+["the concept of cheese"]
+nominative = "концепция сыра"
+genitive = "концепции сыра"
+dative = "концепции сыра"
+accusative = "концепцию сыра"
+instrumental = "концепцией сыра"
+prepositional = "концепции сыра"
+gender = "female"
+
+["cheese wedge"]
+nominative = "кусочек сыра"
+genitive = "кусочка сыра"
+dative = "кусочку сыра"
+accusative = "кусочек сыра"
+instrumental = "кусочком сыра"
+prepositional = "кусочке сыра"
+gender = "male"
+
+["cheese wheel"]
+nominative = "головка сыра"
+genitive = "головки сыра"
+dative = "головке сыра"
+accusative = "головку сыра"
+instrumental = "головкой сыра"
+prepositional = "головке сыра"
+gender = "female"
+
+["royal cheese"]
+nominative = "королевский сыр"
+genitive = "королевского сыра"
+dative = "королевскому сыру"
+accusative = "королевский сыр"
+instrumental = "королевским сыром"
+prepositional = "королевском сыре"
+gender = "male"
+
+["curd cheese"]
+nominative = "творог"
+genitive = "творога"
+dative = "творогу"
+accusative = "творог"
+instrumental = "творогом"
+prepositional = "твороге"
+gender = "male"
+
+["cheese curds"]
+nominative = "сырные кусочки"
+genitive = "сырных кусочков"
+dative = "сырным кусочкам"
+accusative = "сырные кусочки"
+instrumental = "сырными кусочками"
+prepositional = "сырных кусочках"
+gender = "plural"
+
+["firm cheese"]
+nominative = "твёрдый сыр"
+genitive = "твёрдого сыра"
+dative = "твёрдому сыру"
+accusative = "твёрдый сыр"
+instrumental = "твёрдым сыром"
+prepositional = "твёрдом сыре"
+gender = "male"
+
+["firm cheese slice"]
+nominative = "ломтик твёрдого сыра"
+genitive = "ломтика твёрдого сыра"
+dative = "ломтику твёрдого сыра"
+accusative = "ломтик твёрдого сыра"
+instrumental = "ломтиком твёрдого сыра"
+prepositional = "ломтике твёрдого сыра"
+gender = "male"
+
+["mozzarella cheese"]
+nominative = "моцарелла"
+genitive = "моцареллы"
+dative = "моцарелле"
+accusative = "моцареллу"
+instrumental = "моцареллой"
+prepositional = "моцарелле"
+gender = "female"

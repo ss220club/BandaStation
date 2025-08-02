@@ -29,6 +29,8 @@ gender = "<object gender>" (male, female, neuter) or "plural"
 
 4) In order to shorten steps, execute translation step by step, first create empty `[<object name>>]` blocks without translations for all objects found in step 1, then translate them one by one (batching by 10-20) to reduce a chance of hitting the limits of response.
 
-5) Additionally, for all objects found in step 1, translate the "desc" attribute (if exists) right in the file.
+5) Additionally, for all objects found in step 1, translate the `desc` attribute (if exists) right in the file. Don't translate any other text found in object configuration.
+
+6) Additionally, for all object found in step 1, take the list of words in `tastes = list(***)` attribute and verify if all of them exists in `ru_tastes.toml` file. If not, add them in the same format as other tastes in the file in `[food]` section.
 
 
