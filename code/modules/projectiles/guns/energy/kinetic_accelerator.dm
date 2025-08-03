@@ -10,7 +10,7 @@
 	resistance_flags = FIRE_PROOF
 	weapon_weight = WEAPON_LIGHT
 	gun_flags = NOT_A_REAL_GUN
-	var/disablemodification = FALSE // BANDASTATION EDIT: stops removal and addition of mods
+	var/disable_modification = FALSE // BANDASTATION EDIT: stops removal and addition of mods
 	///List of all mobs that projectiles fired from this gun will ignore.
 	var/list/ignored_mob_types
 	///List of all modkits currently in the kinetic accelerator.

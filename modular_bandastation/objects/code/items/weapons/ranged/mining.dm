@@ -1,3 +1,6 @@
+#define BASIC_KA_ENERGY_COST 5000
+#define REPEATER_ENERGY_COST 1500
+
 /obj/item/gun/energy/recharge/kinetic_accelerator/railgun
 	name = "proto-kinetic railgun"
 	desc = "Крайне громоздкая и мощная версия прото-кинетического ускорителя."
@@ -15,7 +18,7 @@
 	max_mod_capacity = 0 //никаких модификаций на ликвидацию снижения урона от давления
 	recoil = 3
 	gun_flags = NOT_A_REAL_GUN
-	disablemodification = TRUE
+	disable_modification = TRUE
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/add_bayonet_point()
 	AddComponent(/datum/component/bayonet_attachable, offset_x = 20, offset_y = 9)
@@ -45,7 +48,7 @@
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/repeater/examine_more(mob/user)
 	. = ..()
-	. += "Во время пицце вечеринки в честь выпуска новых вариаций крашеров, членам команды MR&D разрешили взять только по одному кусочку. Один из участников воскликнул: «Хотелось бы больше чем однин кусочек!»\
+	. += "Во время пицце вечеринки в честь выпуска новых вариаций крашеров, членам команды MR&D разрешили взять только по одному кусочку. Один из участников воскликнул: «Хотелось бы больше чем один кусочек!»\
 	и другой ответил: «Я бы хотел стрелять ускорителем больше одного раза!» И так, прямо на месте появился репитер.\
 	Репитер жертвует мощностью ради возможности сделать три выстрела, прежде чем он уйдёт на перезарядку, при этом он может полностью перезарядиться за один раз. \
 	К сожалению, за этой функции в ускорителе меньше места для модификаций чем в обычном ускорителе."
@@ -68,10 +71,10 @@
 /obj/item/gun/energy/recharge/kinetic_accelerator/shotgun/examine_more(mob/user)
 	. = ..()
 	. += "Во время очередной пицце вечеринки, один работник MR&D принёс с собой игрушечный дробовик с пластиковыми пульками, и в итоге случайно попал в трёх коллег \
-	одним выстрелов. К директору MR&D пришла гениальная идея, создать прото-кенетический дробовик. \
+	одним выстрелом. К директору MR&D пришла гениальная идея, создать прото-кинетический дробовик. \
 	В прото-кинетическом дробовике уменьшено время перезарядки и место для модификаторов в пользу трех \
-    одновременных выстрелов, но с меньшой дальносью и уроном. \
-	но это даёт. В общем урон будет больше чем у обычного КА, но индивидуальные попадания будут слабей."
+    одновременных выстрелов, но с меньшой дальностью и уроном. \
+	В общем урон будет больше чем у обычного КА, но индивидуальные попадания будут слабей."
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/pistol
 	name = "proto-kinetic pistol"
@@ -107,26 +110,26 @@
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/shockwave/examine_more(mob/user)
 	. = ..()
-	. += "Честно говоря, мы абсолютно не представляём, как коммнда MR&D придумала это — всё, что мы знаем, это то, что было много пива. \
+	. += "Честно говоря, мы абсолютно не представляем, как команда MR&D придумала это — всё, что мы знаем, это то, что было много пива. \
 	Эта версия КА бьёт по земле, создавая ударную волну вокруг пользователя, мощностью не уступающую базовому КА.\
 	Единственные минусы — уменьшенная вместимость модификаторов, ограниченная дальность и более долгая перезарядка. Но для горных работ он хорош."
 
 /obj/item/ammo_casing/energy/kinetic/railgun
 	projectile_type = /obj/projectile/kinetic/railgun
 	select_name = "kinetic"
-	e_cost = 5000
+	e_cost = BASIC_KA_ENERGY_COST
 	fire_sound = 'sound/items/weapons/beam_sniper.ogg'
 
 /obj/item/ammo_casing/energy/kinetic/repeater
 	projectile_type = /obj/projectile/kinetic/repeater
 	select_name = "kinetic"
-	e_cost = 1500
+	e_cost = REPEATER_ENERGY_COST
 	fire_sound = 'sound/items/weapons/kinetic_accel.ogg'
 
 /obj/item/ammo_casing/energy/kinetic/shotgun
 	projectile_type = /obj/projectile/kinetic/shotgun
 	select_name = "kinetic"
-	e_cost = 5000
+	e_cost = BASIC_KA_ENERGY_COST
 	pellets = 3
 	variance = 50
 	fire_sound = 'sound/items/weapons/kinetic_accel.ogg'
@@ -134,13 +137,13 @@
 /obj/item/ammo_casing/energy/kinetic/pistol
 	projectile_type = /obj/projectile/kinetic/pistol
 	select_name = "kinetic"
-	e_cost = 5000
+	e_cost = BASIC_KA_ENERGY_COST
 	fire_sound = 'sound/items/weapons/kinetic_accel.ogg'
 
 /obj/item/ammo_casing/energy/kinetic/shockwave
 	projectile_type = /obj/projectile/kinetic/shockwave
 	select_name = "kinetic"
-	e_cost = 5000
+	e_cost = BASIC_KA_ENERGY_COST
 	pellets = 8
 	variance = 360
 	fire_sound = 'sound/items/weapons/gun/general/cannon.ogg'
