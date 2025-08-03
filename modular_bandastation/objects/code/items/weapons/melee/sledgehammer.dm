@@ -41,7 +41,7 @@
 	icon_state = "[base_icon_state]0"
 	return ..()
 
-/obj/item/sledgehammer/proc/sledge_hit(atom/target, mob/living/user, list/modifiers, tear_time = 2 SECONDS, reinforced_multiplier = 2, do_after_key = "sledgehammer_tearing")
+/obj/item/sledgehammer/proc/sledge_hit(atom/target, mob/living/user, list/modifiers, tear_time = 3 SECONDS, reinforced_multiplier = 2, do_after_key = "sledgehammer_tearing")
 	if(istype(target, /turf/closed/wall))
 		var/rip_time = (istype(target, /turf/closed/wall/r_wall) ? tear_time * reinforced_multiplier : tear_time) / 3
 		if(rip_time > 0)
