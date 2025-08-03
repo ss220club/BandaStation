@@ -41,29 +41,33 @@
 	icon_state = "[base_icon_state]0"
 	return ..()
 
-/obj/item/sledgehammer/proc/sledge_hit(atom/target, mob/living/user, list/modifiers, tear_time = 3 SECONDS, reinforced_multiplier = 2, do_after_key = "sledgehammer_tearing")
+/obj/item/sledgehammer/proc/sledge_hit(atom/target, mob/living/user, list/modifiers, tear_time = 3 SECONDS, reinforced_multiplier = 3, do_after_key = "sledgehammer_tearing")
 	if(istype(target, /turf/closed/wall))
 		var/rip_time = (istype(target, /turf/closed/wall/r_wall) ? tear_time * reinforced_multiplier : tear_time) / 3
 		if(rip_time > 0)
-			if (DOING_INTERACTION_WITH_TARGET(user, target) || (!isnull(do_after_key) && DOING_INTERACTION(user, do_after_key)))
+			if(DOING_INTERACTION_WITH_TARGET(user, target) || (!isnull(do_after_key) && DOING_INTERACTION(user, do_after_key)))
 				user.balloon_alert(user, "заняты!")
 				return
-			if(user.getStaminaLoss() >= 80)
+			if(user.getStaminaLoss() >= 90)
 				user.balloon_alert(user, "вы слишком устали!")
 				return
 			user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] начинает выламывать [target.declent_ru(ACCUSATIVE)]!"))
 			target.balloon_alert(user, "выламываем...")
-			if (!do_after(user, delay = rip_time, interaction_key = do_after_key))
+			if(!do_after(user, delay = rip_time, interaction_key = do_after_key))
 				user.balloon_alert(user, "прервано!")
 				return
-		user.adjustStaminaLoss(20)
-		user.do_attack_animation(target)
-		target.AddComponent(/datum/component/torn_wall)
+			user.adjustStaminaLoss(30)
+			user.do_attack_animation(target)
+			target.AddComponent(/datum/component/torn_wall)
 
 /obj/item/sledgehammer/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
-	if(istype(target, /turf/closed/wall) && !HAS_TRAIT(src, TRAIT_WIELDED))
+	if(!istype(target, /turf/closed/wall))
+		return .
+
+	if(!HAS_TRAIT(src, TRAIT_WIELDED))
 		to_chat(user, span_warning("Вам нужно взять [src] в обе руки чтобы разрушить стену!"))
 		return .
 
-	return sledge_hit(target, user, modifiers)
+	sledge_hit(target, user, modifiers)
+	return COMPONENT_CANCEL_ATTACK_CHAIN
