@@ -5,7 +5,7 @@
 
 /obj/item/organ/heart/cybernetic/anomalock
 	name = "voltaic combat cyberheart"
-	desc = "Кибернетическое сердце, что обогнало своё время. Активное сердце даёт пользователю защиту от ЭМП и удерживает тело в вертикальном положении в самых тяжёлых условиях. Для работы требует Flux ядро."
+	desc = "Кибернетическое сердце, что обогнало своё время. Активное сердце даёт пользователю защиту от ЭМИ и удерживает тело в вертикальном положении в самых тяжёлых условиях. Для работы требует Flux ядро."
 	icon_state = "anomalock_heart"
 	beat_noise = "an astonishing <b>BZZZ</b> of immense electrical power"
 	bleed_prevention = TRUE
@@ -59,7 +59,7 @@
 	if(DOING_INTERACTION(user, DOAFTER_IMPLANTING_HEART))
 		return
 	user.balloon_alert(user, "это будет больно...")
-	to_chat(user, span_userdanger("Чёрные кибервены разрывают вашу плоть, затягивая сердце в рёбра. Это не очень хорошо..."))
+	to_chat(user, span_userdanger("Чёрные кибервены разрывают вашу плоть, затягивая сердце в рёбра. Кажется, что это не очень хорошо..."))
 	if(!do_after(user, 5 SECONDS, interaction_key = DOAFTER_IMPLANTING_HEART))
 		return ..()
 	playsound(target_mob, 'sound/items/weapons/slice.ogg', 100, TRUE)
@@ -156,7 +156,7 @@
 	if(!core_removable)
 		balloon_alert(user, "не удаётся достать ядро!")
 		return
-	balloon_alert(user, "вытаскиваем ядро...")
+	balloon_alert(user, "извлечение ядра...")
 	if(!do_after(user, 3 SECONDS, target = src))
 		balloon_alert(user, "прервано!")
 		return
@@ -197,7 +197,7 @@
 	REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 	owner.reagents.add_reagent(/datum/reagent/medicine/coagulant, 5)
 	owner.add_filter("emp_shield", 2, outline_filter(1, "#639BFF"))
-	to_chat(owner, span_revendanger("Вы чувствуете прилив сил! Решай: делай или умри!"))
+	to_chat(owner, span_revendanger("Вы чувствуете прилив сил! Со щитом или на щите!"))
 	owner.add_traits(list(TRAIT_NOSOFTCRIT, TRAIT_NOHARDCRIT, TRAIT_ANALGESIA), REF(src))
 
 /datum/status_effect/voltaic_overdrive/on_remove()
@@ -210,7 +210,7 @@
 /atom/movable/screen/alert/status_effect/anomalock_active
 	name = "Гальваническая перегрузка"
 	icon_state = "anomalock_heart"
-	desc = "Гальваническая энергия течёт в крови, поддерживая ваше тело. У вас 30 секунд, прежде чем эффект закончится!"
+	desc = "Поступление гальванической энергии в кровь, которая будет поддерживать ваше тело на протяжении 30 секунд, прежде чем эффект закончится!"
 
 /obj/item/organ/heart/cybernetic/anomalock/hear_beat_noise(mob/living/hearer)
 	if(prob(1))

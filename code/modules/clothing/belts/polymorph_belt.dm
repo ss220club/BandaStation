@@ -1,7 +1,7 @@
 /// Belt which can turn you into a beast, once an anomaly core is inserted
 /obj/item/polymorph_belt
 	name = "polymorphic field inverter"
-	desc = "Этот девайс может сканировать и хранить ДНК другой формы жизни"
+	desc = "Этот девайс может сканировать и хранить ДНК другой формы жизни."
 	slot_flags = ITEM_SLOT_BELT
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "polybelt_inactive"
@@ -44,7 +44,7 @@
 		balloon_alert(user, "ядро уже установлено!")
 		return ITEM_INTERACT_BLOCKING
 
-	balloon_alert(user, "вставляем...")
+	balloon_alert(user, "вставка...")
 
 	if (!do_after(user, delay = 3 SECONDS, target = src))
 		balloon_alert(user, "прервано!")
@@ -82,11 +82,11 @@
 	if (DOING_INTERACTION_WITH_TARGET(user, target_mob))
 		balloon_alert(user, "занят!")
 		return TRUE
-	balloon_alert(user, "сканирую...")
-	visible_message(span_notice("[user] начинает сканировать [target_mob] через [src]."))
+	balloon_alert(user, "сканирование...")
+	visible_message(span_notice("[user] начинает сканировать [target_mob] через [declent_ru(NOMINATIVE)]."))
 	if (!do_after(user, delay = 5 SECONDS, target = target_mob))
 		return TRUE
-	visible_message(span_notice("[user] просканировал [target_mob] через [src]."))
+	visible_message(span_notice("[user] просканировал [target_mob] через [declent_ru(NOMINATIVE)]."))
 	stored_mob_type = target_mob.type
 	update_transform_action()
 	playsound(src, 'sound/machines/ping.ogg', 50, FALSE)
@@ -108,7 +108,7 @@
 
 /// Ability provided by the polymorph belt
 /datum/action/cooldown/spell/shapeshift/polymorph_belt
-	name = "Инвертировать полиморфное поле"
+	name = "Инверсия полиморфного поля"
 	cooldown_time = 30 SECONDS
 	school = SCHOOL_UNSET
 	invocation_type = INVOCATION_NONE
@@ -149,7 +149,7 @@
 	animate(transform = matrix() * 1.3, time = animate_step, easing = SINE_EASING)
 	animate(transform = matrix() * 0.1, time = animate_step, easing = SINE_EASING)
 
-	cast_on.balloon_alert(cast_on, "трансформируемся...")
+	cast_on.balloon_alert(cast_on, "трансформация...")
 	if (!do_after(cast_on, delay = channel_time, target = cast_on))
 		animate(cast_on, transform = matrix(), time = 0, easing = SINE_EASING)
 		cast_on.transform = old_transform

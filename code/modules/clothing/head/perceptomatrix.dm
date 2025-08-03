@@ -82,7 +82,7 @@
 /obj/item/clothing/head/helmet/perceptomatrix/proc/pre_cast_core_check(mob/caster, datum/action/cooldown/spell/spell)
 	SIGNAL_HANDLER
 	if((!core_installed) && spell.school == SCHOOL_PSYCHIC)
-		to_chat(caster, span_warning("Вы не можете воздействовать на чей-то разум, пока нет ядра!"))
+		to_chat(caster, span_warning("Вы не можете воздействовать на чей-то разум через экранирование [declent_ru(GENITIVE)], пока в нём нет ядра!"))
 		return SPELL_CANCEL_CAST
 
 /obj/item/clothing/head/helmet/perceptomatrix/proc/update_anomaly_state()
@@ -127,7 +127,7 @@
 /obj/item/clothing/head/helmet/perceptomatrix/item_interaction(mob/user, obj/item/weapon, params)
 	if (!istype(weapon, /obj/item/assembly/signaler/anomaly/hallucination))
 		return NONE
-	balloon_alert(user, "вставляем...")
+	balloon_alert(user, "вставка...")
 	if (!do_after(user, delay = 3 SECONDS, target = src))
 		return ITEM_INTERACT_BLOCKING
 	qdel(weapon)
@@ -188,8 +188,8 @@
 /datum/action/cooldown/spell/pointed/percept_hallucination/proc/blows_up_pancakes_with_mind(obj/item/food/pancakes/pancakes)
 
 	owner.visible_message(
-		span_userdanger("[owner] взрывает [pancakes] силой мысли"),
-		span_userdanger("Вы взрываете [pancakes] силой мысли!")
+		span_userdanger("[owner] взрывает [pancakes.declent_ru(ACCUSATIVE)] силой мысли!"),
+		span_userdanger("Вы взрываете [pancakes.declent_ru(ACCUSATIVE)] силой мысли!")
 	)
 
 	for(var/mob/chef in get_hearers_in_view(7, pancakes))
@@ -197,7 +197,7 @@
 			continue
 		// if cooked by chef, or if EITHER 5% chance OR its april fools. a || (b || c)
 		if(HAS_TRAIT_FROM(pancakes, TRAIT_FOOD_CHEF_MADE, REF(chef.mind)) || (prob(5) || check_holidays(APRIL_FOOLS)))
-			chef.say("Мои блинчики!")
+			chef.say("Мои, сука, блинчики!")
 
 	playsound(pancakes, 'sound/effects/fuse.ogg', 80)
 	animate(pancakes, time = 1, pixel_z = 12, easing = ELASTIC_EASING)
