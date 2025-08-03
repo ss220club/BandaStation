@@ -10,6 +10,7 @@
 	resistance_flags = FIRE_PROOF
 	weapon_weight = WEAPON_LIGHT
 	gun_flags = NOT_A_REAL_GUN
+	var/disablemodification = FALSE // BANDASTATION EDIT: stops removal and addition of mods
 	///List of all mobs that projectiles fired from this gun will ignore.
 	var/list/ignored_mob_types
 	///List of all modkits currently in the kinetic accelerator.
@@ -76,7 +77,7 @@
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/crowbar_act(mob/living/user, obj/item/I)
 	. = TRUE
-	if(modkits.len)
+	if(modkits.len && !disablemodification) // BANDASTATION EDIT
 		to_chat(user, span_notice("Вы вытаскиваете все модули."))
 		I.play_tool_sound(src, 100)
 		for(var/obj/item/borg/upgrade/modkit/modkit_upgrade as anything in modkits)
@@ -139,7 +140,7 @@
 		modkits |= arrived
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/borg/upgrade/modkit))
+	if(istype(I, /obj/item/borg/upgrade/modkit) && !disablemodification) // BANDASTATION EDIT
 		var/obj/item/borg/upgrade/modkit/MK = I
 		MK.install(src, user)
 	else

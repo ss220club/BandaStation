@@ -23,3 +23,23 @@
 /datum/orderable_item/mining/crusher/claw
 	purchase_path = /obj/item/kinetic_crusher/claw
 	cost_per_order = 1250
+
+/datum/orderable_item/accelerator/gun/repeater
+	purchase_path = /obj/item/gun/energy/recharge/kinetic_accelerator/repeater
+	cost_per_order = 1250
+
+/datum/orderable_item/accelerator/gun/shotgun
+	purchase_path = /obj/item/gun/energy/recharge/kinetic_accelerator/shotgun
+	cost_per_order = 1250
+
+/datum/orderable_item/accelerator/gun/shockwave
+	purchase_path = /obj/item/gun/energy/recharge/kinetic_accelerator/shockwave
+	cost_per_order = 1250
+
+/datum/orderable_item/accelerator/gun/pistol
+	purchase_path = /obj/item/gun/energy/recharge/kinetic_accelerator/pistol
+	cost_per_order = 1250
+
+/datum/orderable_item/accelerator/gun/railgun
+	purchase_path = /obj/item/gun/energy/recharge/kinetic_accelerator/railgun
+	cost_per_order = 1250

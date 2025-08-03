@@ -97,6 +97,7 @@
 #include "code/items/weapons/ranged/ballistic/magazines.dm"
 #include "code/items/weapons/ranged/ballistic/projectiles.dm"
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
+#include "code/items/weapons/ranged/mining.dm"
 #include "code/items/clothing/mod/types/tsf/mod_theme.dm"
 #include "code/items/clothing/mod/types/tsf/mod_types.dm"
 #include "code/items/clothing/mod/types/ussp/mod_theme.dm"
