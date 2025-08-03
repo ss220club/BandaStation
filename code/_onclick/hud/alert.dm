@@ -256,7 +256,7 @@
 /atom/movable/screen/alert/embeddedobject
 	name = "Застрявший предмет"
 	desc = "Что-то застряло в вашей плоти и вызывает сильное кровотечение. Со временем оно может выпасть, но хирургическое вмешательство - \
-		самый безопасный способ. Если Вы чувствуете себя неуютно, осмотрите себя и нажмите на подчеркнутый пункт, чтобы извлечь предмет."
+		самый безопасный способ. Если готовы рискнуть то, осмотрите себя и нажмите на подчеркнутый пункт, чтобы извлечь предмет."
 	icon_state = ALERT_EMBEDDED_OBJECT
 	clickable_glow = TRUE
 
@@ -275,7 +275,7 @@
 
 /atom/movable/screen/alert/weightless
 	name = "Невесомость"
-	desc = "Сила тяжести перестала влиять на Вас, и Вы бесцельно перемещаетесь в пространстве. Вам понадобится что-то большое и тяжелое, например, \
+	desc = "Сила тяжести перестала влиять на вас, и вы бесцельно перемещаетесь в пространстве. Вам понадобится что-то большое и тяжелое, например, \
 стена или решетка, чтобы оттолкнуться, если захотите двигаться. Реактивный ранец обеспечит свободу движений. Пара магбутсов \
 позволит вам нормально передвигаться по полу. Если их нет, вы можете бросать предметы, пользоваться огнетушителем \
 или стрелять из оружия, чтобы передвигаться в соответствии с 3-м законом Ньютона."
@@ -293,7 +293,7 @@
 
 /atom/movable/screen/alert/fire
 	name = "В огне"
-	desc = "Вы горите! Катайтесь по полу, используйте огнетушитель или выйдите в пространство без вакуума."
+	desc = "Вы горите! Катайтесь по полу, используйте огнетушитель или выйдите в пространство с вакуумом."
 	icon_state = "fire"
 	clickable_glow = TRUE
 
@@ -321,7 +321,7 @@
 	/// The offer we're linked to, yes this is suspiciously like a status effect alert
 	var/datum/status_effect/offering/offer
 	/// Additional text displayed in the description of the alert.
-	var/additional_desc_text = "Нажмите на уведомление чтобы взять, или Shift+ЛКМ чтобы изучить его."
+	var/additional_desc_text = "Нажмите на уведомление, чтобы взять, или Shift+ЛКМ чтобы изучить его."
 	/// Text to override what appears in screentips for the alert
 	var/screentip_override_text
 	/// Whether the offered item can be examined by shift-clicking the alert
@@ -511,7 +511,7 @@
 	var/title = pick(death_titles)
 
 	//Succumbing with a message
-	var/last_whisper = tgui_input_text(usr, "Что вы хотите сказать напоследок?", title, max_length = CHAT_MESSAGE_MAX_LENGTH, encode = FALSE) // saycode already handles sanitization
+	var/last_whisper = tgui_input_text(usr, "Что Вы хотите сказать напоследок?", title, max_length = CHAT_MESSAGE_MAX_LENGTH, encode = FALSE) // saycode already handles sanitization
 	if(isnull(last_whisper))
 		return
 	if(length(last_whisper))
@@ -774,13 +774,13 @@
 //Need to cover all use cases - emag, illegal upgrade module, malf AI hack, traitor cyborg
 /atom/movable/screen/alert/hacked
 	name = "Взломан"
-	desc = "Обнаружено опасное нестандартное оборудование. Пожалуйста, убедитесь, что любое использование этого оборудования соответствует законам юнита, если таковые имеются"
+	desc = "Обнаружено опасное нестандартное оборудование. Пожалуйста, убедитесь, что любое использование этого оборудования соответствует законам юнита, если таковые имеются."
 	icon_state = ALERT_HACKED
 
 /atom/movable/screen/alert/locked
 	name = "Заблокирован"
 	desc = "Юнит был дистанционно заблокирован. Использование консоли управления робототехникой в кабинете Директора Исследований \
-		вашим мастером-ИИ или квалифицированный органик могут решить эту проблему. Робототехники могут оказать дополнительную помощь."
+		вашим мастером-ИИ или квалифицированным органиком, что могут решить эту проблему. Робототехники могут оказать дополнительную помощь."
 	icon_state = ALERT_LOCKED
 
 /atom/movable/screen/alert/newlaw
@@ -793,7 +793,7 @@
 /atom/movable/screen/alert/hackingapc
 	name = "Взлом ЛКП"
 	desc = "Происходит взлом локального контроллера питания. Когда процесс \
-		завершится, Вы получите исключительный контроль над ним и получите  \
+		завершится, Вы получите исключительный контроль над ним и получите \
 		дополнительное время обработки для разблокировки дополнительных возможностей устранения неисправностей."
 	icon_state = ALERT_HACKING_APC
 	timeout = 60 SECONDS
@@ -912,17 +912,17 @@
 	var/left_click_text
 	if(poll)
 		if(owner in poll.signed_up)
-			left_click_text = "Leave"
+			left_click_text = "Покинуть"
 		else
-			left_click_text = "Enter"
-		context[SCREENTIP_CONTEXT_LMB] = "[left_click_text] Poll"
+			left_click_text = "Присоединиться"
+		context[SCREENTIP_CONTEXT_LMB] = "[left_click_text] выбран"
 		if(poll.ignoring_category)
 			var/selected_never = FALSE
 			if(owner.ckey in GLOB.poll_ignore[poll.ignoring_category])
 				selected_never = TRUE
-			context[SCREENTIP_CONTEXT_ALT_LMB] = "[selected_never ? "Cancel " : ""]Never For This Round"
+			context[SCREENTIP_CONTEXT_ALT_LMB] = "[selected_never ? "Отменить " : ""]Никогда в этом раунде"
 		if(poll.jump_to_me && isobserver(owner))
-			context[SCREENTIP_CONTEXT_CTRL_LMB] = "Jump To"
+			context[SCREENTIP_CONTEXT_CTRL_LMB] = "Переместиться к событию"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /atom/movable/screen/alert/poll_alert/process()
@@ -1084,7 +1084,7 @@
 	carbon_owner.shoes.handle_tying(carbon_owner)
 
 /atom/movable/screen/alert/unpossess_object
-	name = "Отвязяться"
+	name = "Отвязаться"
 	desc = "Вы вселились в объект. Нажмите на уведомление, чтобы отвязаться от предмета."
 	icon_state = "buckled"
 	clickable_glow = TRUE
