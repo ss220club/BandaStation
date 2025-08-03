@@ -77,7 +77,7 @@
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/crowbar_act(mob/living/user, obj/item/I)
 	. = TRUE
-	if(modkits.len && !disablemodification) // BANDASTATION EDIT
+	if(modkits.len && !disable_modification) // BANDASTATION EDIT
 		to_chat(user, span_notice("Вы вытаскиваете все модули."))
 		I.play_tool_sound(src, 100)
 		for(var/obj/item/borg/upgrade/modkit/modkit_upgrade as anything in modkits)
@@ -140,7 +140,7 @@
 		modkits |= arrived
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/borg/upgrade/modkit) && !disablemodification) // BANDASTATION EDIT
+	if(istype(I, /obj/item/borg/upgrade/modkit) && !disable_modification) // BANDASTATION EDIT
 		var/obj/item/borg/upgrade/modkit/MK = I
 		MK.install(src, user)
 	else
