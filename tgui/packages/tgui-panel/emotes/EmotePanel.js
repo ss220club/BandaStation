@@ -61,7 +61,7 @@ export const EmotePanel = (props, context) => {
                 tooltip = `\"${emote.message}\"`;
                 break;
               default:
-                tooltip = "ОШИБКА: НЕИЗВЕСТНЫЙ ТИП ЭМОЦИИ'";
+                tooltip = "ОШИБКА: НЕИЗВЕСТНЫЙ ТИП ЭМОЦИИ";
                 break;
             }
             return (
