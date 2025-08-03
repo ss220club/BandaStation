@@ -93,13 +93,7 @@
  *
  */
 /datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, message_override = null)
-	var/msg
-	if(message_override)
-		msg = message_override
-	else
-		msg = select_message_type(user)
-
-	msg = select_message_type(user, message, intentional)
+	var/msg = message_override || select_message_type(user, message, intentional)
 
 	if(params && message_param)
 		msg = select_param(user, params)

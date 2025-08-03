@@ -178,7 +178,7 @@
 				return
 
 			client.prefs.custom_emote_panel[emote_name] = emote
-			client.prefs.save_character() //custom emote panel is attached to the character
+			client.prefs.save_preferences() //custom emote panel is attached to the character
 			emotes_send_list()
 
 			return TRUE
