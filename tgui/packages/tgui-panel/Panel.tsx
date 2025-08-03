@@ -14,8 +14,10 @@ import { Notifications } from './Notifications';
 import { PingIndicator } from './ping';
 import { ReconnectButton } from './reconnect';
 import { SettingsPanel, useSettings } from './settings';
+import { EmotePanel, useEmotes } from './emotes';
 
 export const Panel = (props) => {
+  const emotes = useEmotes();
   const audio = useAudio();
   const settings = useSettings();
   const game = useGame();
@@ -42,6 +44,15 @@ export const Panel = (props) => {
               <Stack.Item>
                 <Button
                   color="grey"
+                  selected={emotes.visible}
+                  icon="asterisk"
+                  tooltip="Emote Panel"
+                  tooltipPosition="bottom-start"
+                  onClick={() => emotes.toggle()} />
+              </Stack.Item>
+              <Stack.Item>
+                <Button
+                  color="grey"
                   selected={audio.visible}
                   icon="music"
                   tooltip="Music player"
@@ -63,6 +74,13 @@ export const Panel = (props) => {
             </Stack>
           </Section>
         </Stack.Item>
+        {emotes.visible && (
+          <Stack.Item>
+            <Section>
+              <EmotePanel />
+            </Section>
+          </Stack.Item>
+        )}
         {audio.visible && (
           <Stack.Item>
             <Section>

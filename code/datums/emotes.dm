@@ -92,8 +92,15 @@
  * * intentional - Bool that says whether the emote was forced (FALSE) or not (TRUE).
  *
  */
-/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE)
-	var/msg = select_message_type(user, message, intentional)
+/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, message_override = null)
+	var/msg
+	if(message_override)
+		msg = message_override
+	else
+		msg = select_message_type(user)
+
+	msg = select_message_type(user, message, intentional)
+
 	if(params && message_param)
 		msg = select_param(user, params)
 
