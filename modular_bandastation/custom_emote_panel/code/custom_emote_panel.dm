@@ -22,7 +22,7 @@
 */
 
 /mob/living
-	var/nextsoundemote
+	var/next_sound_emote
 
 /datum/tgui_panel
 	var/static/list/all_emotes = list()
@@ -81,27 +81,27 @@
 
 				// Чтобы люди не спамили пастами из 128 символов со скоростью света
 				if (TGUI_PANEL_EMOTE_TYPE_CUSTOM)
-					if(living.nextsoundemote >= world.time)
+					if(living.next_sound_emote >= world.time)
 						to_chat(living, span_warning("Не так быстро!"))
 						return TRUE
 					var/emote_key = client.prefs.custom_emote_panel[emote_name]["key"]
 					var/message_override = client.prefs.custom_emote_panel[emote_name]["message_override"]
 					living.emote(emote_key, intentional = TRUE, message_override = message_override)
 					if (length_char(message_override) > SHORT_EMOTE_MAX_LENGTH)
-						living.nextsoundemote = max(living.nextsoundemote, world.time + CUSTOM_EMOTE_COOLDOWN)
+						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_EMOTE_COOLDOWN)
 					else
-						living.nextsoundemote = max(living.nextsoundemote, world.time + CUSTOM_SHORT_EMOTE_COOLDOWN)
+						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_SHORT_EMOTE_COOLDOWN)
 
 				if (TGUI_PANEL_EMOTE_TYPE_ME)
-					if(living.nextsoundemote >= world.time)
+					if(living.next_sound_emote >= world.time)
 						to_chat(living, span_warning("Не так быстро!"))
 						return TRUE
 					var/message = client.prefs.custom_emote_panel[emote_name]["message"]
 					living.emote("me", intentional = TRUE, message = message)
 					if (length_char(message) > SHORT_EMOTE_MAX_LENGTH)
-						living.nextsoundemote = max(living.nextsoundemote, world.time + CUSTOM_EMOTE_COOLDOWN)
+						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_EMOTE_COOLDOWN)
 					else
-						living.nextsoundemote = max(living.nextsoundemote, world.time + CUSTOM_SHORT_EMOTE_COOLDOWN)
+						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_SHORT_EMOTE_COOLDOWN)
 
 			return TRUE
 
@@ -215,19 +215,19 @@
 			switch (action)
 				if ("Удалить")
 					if (emotes_remove(emote_name))
-						client.prefs.save_character(TRUE)
+						client.prefs.save_preferences()
 						emotes_send_list()
 				if ("Переименовать")
 					if (emotes_rename(emote_name))
-						client.prefs.save_character(TRUE)
+						client.prefs.save_preferences()
 						emotes_send_list()
 				if ("Кастомизировать")
 					if (emotes_add_custom_text(emote_name))
-						client.prefs.save_character(TRUE)
+						client.prefs.save_preferences()
 						emotes_send_list()
 				if ("Изменить текст")
 					if (emotes_change_custom_text(emote_name))
-						client.prefs.save_character(TRUE)
+						client.prefs.save_preferences()
 						emotes_send_list()
 
 			return TRUE
@@ -294,7 +294,7 @@
 
 	var/message_override = tgui_input_text(client.mob, "Выберите новый кастомный текст для эмоции [emote_name]:", "Кастомный текст", old_message, TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 	if (!message_override)
-		return TRUE
+		return FALSE
 	if (emote_type == TGUI_PANEL_EMOTE_TYPE_CUSTOM)
 		client.prefs.custom_emote_panel[emote_name]["message_override"] = message_override
 	else
