@@ -134,7 +134,7 @@
 						to_chat(client, span_warning("Эмоция [emote_key] не существует!"))
 						return
 
-					suggested_name = emote_key
+					suggested_name = ru_emote_name(emote_key)
 					emote = list(
 						"type" = TGUI_PANEL_EMOTE_TYPE_DEFAULT,
 						"key" = emote_key,
@@ -150,12 +150,12 @@
 						to_chat(client, span_warning("Эмоция [emote_key] не существует!"))
 						return
 
-					var/message_override = tgui_input_text(client.mob, "Какой кастомный текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", emote_key, TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
+					var/message_override = tgui_input_text(client.mob, "Какой кастомный текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", ru_emote_name(emote_key), TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 					if (!message_override)
 						to_chat(client, span_warning("Текст \"[message_override]\" не подходит!"))
 						return
 
-					suggested_name = emote_key
+					suggested_name = ru_emote_name(emote_key)
 					emote = list(
 						"type" = TGUI_PANEL_EMOTE_TYPE_CUSTOM,
 						"key" = emote_key,
