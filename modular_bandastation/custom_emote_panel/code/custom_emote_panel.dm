@@ -41,7 +41,7 @@
 		if(E.key)
 			all_emotes[E.key] = E
 
-/datum/tgui_panel/New(client/client)
+/datum/tgui_panel/New(client/client, id)
 	. = ..()
 	populate_all_emotes_list()
 
