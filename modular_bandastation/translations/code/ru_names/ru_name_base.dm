@@ -1,3 +1,5 @@
+#define LOG_CATEGORY_RU_NAMES_DUPLICATE "ru_names_duplicate"
+
 GLOBAL_LIST_EMPTY(ru_names)
 
 /atom
@@ -53,12 +55,14 @@ GLOBAL_LIST_EMPTY(ru_names)
 		if(findtext(file_or_dir, "/", length(file_or_dir)))
 			_load_ru_names_from_directory(full_path)
 		// If it's a TOML file, load it
-		else if(findtext(file_or_dir, ".toml"))
+		else if(copytext(file_or_dir, -4) == ".toml")
 			if(fexists(file(full_path)))
 				var/list/toml_data = rustg_read_toml_file(full_path)
 				if(length(toml_data))
 					// Merge the loaded data into GLOB.ru_names
 					for(var/key in toml_data)
+						if(key in GLOB.ru_names)
+							logger.Log(LOG_CATEGORY_RU_NAMES_DUPLICATE, "Duplicate translation key '[key]' found in '[full_path]'. Overwriting previous value.")
 						GLOB.ru_names[key] = toml_data[key]
 
 /atom/Initialize(mapload, ...)

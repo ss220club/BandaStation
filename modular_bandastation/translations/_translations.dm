@@ -18,12 +18,12 @@ GLOBAL_LIST_EMPTY(ru_reagent_descs)
 		var/list/tastes_toml_list = rustg_read_toml_file(food_path)
 
 		var/list/tastes_food = tastes_toml_list["food"]
-		for(var/taste_food_key in tastes_food)
-			GLOB.ru_tastes += list("[taste_food_key]" = tastes_food[taste_food_key])
+		if(tastes_food)
+			GLOB.ru_tastes |= tastes_food
 
 		var/list/tastes_other = tastes_toml_list["other"]
-		for(var/taste_other_key in tastes_other)
-			GLOB.ru_tastes += list("[taste_other_key]" = tastes_other[taste_other_key])
+		if(tastes_other)
+			GLOB.ru_tastes |= tastes_other
 
 	// Verbs
 	var/toml_path = "[PATH_TO_TRANSLATE_DATA]/ru_verbs.toml"
