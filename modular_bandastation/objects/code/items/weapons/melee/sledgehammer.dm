@@ -48,11 +48,15 @@
 			if (DOING_INTERACTION_WITH_TARGET(user, target) || (!isnull(do_after_key) && DOING_INTERACTION(user, do_after_key)))
 				user.balloon_alert(user, "заняты!")
 				return
+			if(user.getStaminaLoss() >= 80)
+				user.balloon_alert(user, "вы слишком устали!")
+				return
 			user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] начинает выламывать [target.declent_ru(ACCUSATIVE)]!"))
 			target.balloon_alert(user, "выламываем...")
-			if (!do_after(user, delay = rip_time, target = target, interaction_key = do_after_key))
+			if (!do_after(user, delay = rip_time, interaction_key = do_after_key))
 				user.balloon_alert(user, "прервано!")
 				return
+		user.adjustStaminaLoss(20)
 		user.do_attack_animation(target)
 		target.AddComponent(/datum/component/torn_wall)
 
