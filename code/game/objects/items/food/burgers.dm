@@ -481,7 +481,7 @@
 	return OXYLOSS
 
 /obj/item/food/burger/firealarm
-	name = "five alarm burger"
+	name = "fire alarm burger"
 	desc = "ГОРЯЧО! ГОРЯЧО!"
 	icon_state = "firealarmburger"
 	food_reagents = list(
