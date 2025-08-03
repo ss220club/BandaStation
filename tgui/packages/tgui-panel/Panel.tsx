@@ -49,7 +49,8 @@ export const Panel = (props) => {
                   icon="asterisk"
                   tooltip="Emote Panel"
                   tooltipPosition="bottom-start"
-                  onClick={() => emotes.toggle()} />
+                  onClick={() => emotes.toggle()}
+                />
               </Stack.Item>
               {/* BANDASTATION ADD END - Emote Panel */}
               <Stack.Item>
