@@ -5,6 +5,11 @@
 #define CUSTOM_SHORT_EMOTE_COOLDOWN 0.4 SECONDS
 #define CUSTOM_EMOTE_COOLDOWN 1 SECONDS
 
+#define DELETE_EMOTE "Удалить"
+#define RENAME_EMOTE "Переименовать"
+#define CUSTOMIZE_EMOTE "Кастомизировать"
+#define CHANGE_EMOTE_TEXT "Изменить текст"
+
 /*
 	Панель эмоутов была переделана, и теперь вместо простого ассоциативного списка `emotes["sigh"] = "вздох"`
 	у нас будет один из вариантов:
@@ -199,33 +204,33 @@
 			var/list/actions = list()
 			switch (emote_type)
 				if (TGUI_PANEL_EMOTE_TYPE_DEFAULT)
-					actions.Add(list("Переименовать", "Кастомизировать", "Удалить"))
+					actions.Add(list(RENAME_EMOTE, CUSTOMIZE_EMOTE, DELETE_EMOTE))
 
 				if (TGUI_PANEL_EMOTE_TYPE_CUSTOM)
-					actions.Add(list("Переименовать", "Изменить текст", "Удалить"))
+					actions.Add(list(RENAME_EMOTE, CHANGE_EMOTE_TEXT, DELETE_EMOTE))
 
 				if (TGUI_PANEL_EMOTE_TYPE_ME)
-					actions.Add(list("Переименовать", "Изменить текст", "Удалить"))
+					actions.Add(list(RENAME_EMOTE, CHANGE_EMOTE_TEXT, DELETE_EMOTE))
 				if (TGUI_PANEL_EMOTE_TYPE_UNKNOWN)
 					to_chat(client, span_warning("Эмоция не имеет типа, поэтому её можно только удалить."))
-					actions.Add(list("Удалить"))
+					actions.Add(list(DELETE_EMOTE))
 
 			var/action = tgui_alert(client.mob, "Что вы хотите сделать с эмоцией \"[emote_name]\"?", "Выбор действия", actions)
 
 			switch (action)
-				if ("Удалить")
+				if (DELETE_EMOTE)
 					if (emotes_remove(emote_name))
 						client.prefs.save_preferences()
 						emotes_send_list()
-				if ("Переименовать")
+				if (RENAME_EMOTE)
 					if (emotes_rename(emote_name))
 						client.prefs.save_preferences()
 						emotes_send_list()
-				if ("Кастомизировать")
+				if (CUSTOMIZE_EMOTE)
 					if (emotes_add_custom_text(emote_name))
 						client.prefs.save_preferences()
 						emotes_send_list()
-				if ("Изменить текст")
+				if (CHANGE_EMOTE_TEXT)
 					if (emotes_change_custom_text(emote_name))
 						client.prefs.save_preferences()
 						emotes_send_list()
@@ -251,8 +256,8 @@
 	return TRUE
 
 /datum/tgui_panel/proc/emotes_remove(emote_name)
-	var/confirmation = tgui_alert(client.mob, "Вы уверены что хотите удалить эмоцию \"[emote_name]\" из панели?", "Подтверждение", list("Удалить", "Отмена"))
-	if (confirmation != "Удалить")
+	var/confirmation = tgui_alert(client.mob, "Вы уверены что хотите удалить эмоцию \"[emote_name]\" из панели?", "Подтверждение", list(DELETE_EMOTE, "Отмена"))
+	if (confirmation != DELETE_EMOTE)
 		return
 
 	client.prefs.custom_emote_panel.Remove(emote_name)
@@ -312,3 +317,8 @@
 #undef SHORT_EMOTE_MAX_LENGTH
 #undef CUSTOM_SHORT_EMOTE_COOLDOWN
 #undef CUSTOM_EMOTE_COOLDOWN
+
+#undef DELETE_EMOTE
+#undef RENAME_EMOTE
+#undef CUSTOMIZE_EMOTE
+#undef CHANGE_EMOTE_TEXT
