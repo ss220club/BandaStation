@@ -29,7 +29,7 @@
 		var/mob/living/will_become = stored_mob_type
 		. += span_notice("Содержит оцифрованное ДНК [initial(will_become.name)].")
 	if (!active)
-		. += span_warning("Для работы требуется Bioscrambler Anomaly Core.")
+		. += span_warning("Для работы требуется аномальное ядро биоскремблер.")
 
 /obj/item/polymorph_belt/update_icon_state()
 	icon_state = base_icon_state + (active ? "" : "_inactive")

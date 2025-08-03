@@ -117,7 +117,7 @@
 /obj/item/clothing/head/helmet/perceptomatrix/examine(mob/user)
 	. = ..()
 	if (!core_installed)
-		. += span_warning("Для работы требуется галлюцинаторное ядро.")
+		. += span_warning("Для работы требуется галлюцинаторное аномальное ядро.")
 
 /obj/item/clothing/head/helmet/perceptomatrix/update_icon_state()
 	icon_state = base_icon_state + (core_installed ? "" : "_inactive")
