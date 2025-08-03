@@ -39,7 +39,7 @@ GLOBAL_LIST_EMPTY(ru_names)
 /// The loaded data is merged into a single GLOB.ru_names list for efficient access
 /proc/load_all_ru_names_toml_files()
 	GLOB.ru_names = list()
-	_load_ru_names_from_directory(PATH_TO_TRANSLATE_DATA)
+	_load_ru_names_from_directory(PATH_TO_TRANSLATE_DATA_FOLDER)
 
 /// Helper proc to recursively load TOML files from a directory and its subdirectories
 /proc/_load_ru_names_from_directory(directory_path)
@@ -49,14 +49,13 @@ GLOBAL_LIST_EMPTY(ru_names)
 
 	for(var/file_or_dir in files)
 		var/full_path = "[directory_path]/[file_or_dir]"
-
 		// If it's a directory (ends with /), recursively scan it
 		if(findtext(file_or_dir, "/", length(file_or_dir)))
 			_load_ru_names_from_directory(full_path)
 		// If it's a TOML file, load it
 		else if(findtext(file_or_dir, ".toml"))
 			if(fexists(file(full_path)))
-				var/list/toml_data = rustlibs_read_toml_file(full_path)
+				var/list/toml_data = rustg_read_toml_file(full_path)
 				if(length(toml_data))
 					// Merge the loaded data into GLOB.ru_names
 					for(var/key in toml_data)

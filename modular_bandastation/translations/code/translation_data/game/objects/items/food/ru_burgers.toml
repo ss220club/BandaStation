@@ -1,4 +1,4 @@
-[plain burger]
+["plain burger"]
 nominative = "обычный бургер"
 genitive = "обычного бургера"
 dative = "обычному бургеру"
@@ -7,7 +7,7 @@ instrumental = "обычным бургером"
 prepositional = "обычном бургере"
 gender = "male"
 
-[human burger]
+["human burger"]
 nominative = "бургер из человечины"
 genitive = "бургера из человечины"
 dative = "бургеру из человечины"
@@ -16,7 +16,7 @@ instrumental = "бургером из человечины"
 prepositional = "бургере из человечины"
 gender = "male"
 
-[corgi burger]
+["corgi burger"]
 nominative = "бургер из корги"
 genitive = "бургера из корги"
 dative = "бургеру из корги"
@@ -25,7 +25,7 @@ instrumental = "бургером из корги"
 prepositional = "бургере из корги"
 gender = "male"
 
-[appendix burger]
+["appendix burger"]
 nominative = "бургер из аппендикса"
 genitive = "бургера из аппендикса"
 dative = "бургеру из аппендикса"
@@ -34,7 +34,7 @@ instrumental = "бургером из аппендикса"
 prepositional = "бургере из аппендикса"
 gender = "male"
 
-[fillet -o- carp sandwich]
+["fillet -o- carp sandwich"]
 nominative = "сэндвич «Филе-о-Карп»"
 genitive = "сэндвича «Филе-о-Карп»"
 dative = "сэндвичу «Филе-о-Карп»"
@@ -43,7 +43,7 @@ instrumental = "сэндвичем «Филе-о-Карп»"
 prepositional = "сэндвиче «Филе-о-Карп»"
 gender = "male"
 
-[tofu burger]
+["tofu burger"]
 nominative = "тофу-бургер"
 genitive = "тофу-бургера"
 dative = "тофу-бургеру"
@@ -52,7 +52,7 @@ instrumental = "тофу-бургером"
 prepositional = "тофу-бургере"
 gender = "male"
 
-[roburger]
+["roburger"]
 nominative = "робургер"
 genitive = "робургера"
 dative = "робургеру"
@@ -61,7 +61,7 @@ instrumental = "робургером"
 prepositional = "робургере"
 gender = "male"
 
-[xenoburger]
+["xenoburger"]
 nominative = "ксенобургер"
 genitive = "ксенобургера"
 dative = "ксенобургеру"
@@ -70,7 +70,7 @@ instrumental = "ксенобургером"
 prepositional = "ксенобургере"
 gender = "male"
 
-[bearger]
+["bearger"]
 nominative = "медвебургер"
 genitive = "медвебургера"
 dative = "медвебургеру"
@@ -79,7 +79,7 @@ instrumental = "медвебургером"
 prepositional = "медвебургере"
 gender = "male"
 
-[clown burger]
+["clown burger"]
 nominative = "клоунский бургер"
 genitive = "клоунского бургера"
 dative = "клоунскому бургеру"
@@ -88,7 +88,7 @@ instrumental = "клоунским бургером"
 prepositional = "клоунском бургере"
 gender = "male"
 
-[mime burger]
+["mime burger"]
 nominative = "мимский бургер"
 genitive = "мимского бургера"
 dative = "мимскому бургеру"
@@ -97,7 +97,7 @@ instrumental = "мимским бургером"
 prepositional = "мимском бургере"
 gender = "male"
 
-[brainburger]
+["brainburger"]
 nominative = "мозгобургер"
 genitive = "мозгобургера"
 dative = "мозгобургеру"
@@ -106,7 +106,7 @@ instrumental = "мозгобургером"
 prepositional = "мозгобургере"
 gender = "male"
 
-[ghost burger]
+["ghost burger"]
 nominative = "призрачный бургер"
 genitive = "призрачного бургера"
 dative = "призрачному бургеру"
@@ -115,7 +115,7 @@ instrumental = "призрачным бургером"
 prepositional = "призрачном бургере"
 gender = "male"
 
-[red burger]
+["red burger"]
 nominative = "красный бургер"
 genitive = "красного бургера"
 dative = "красному бургеру"
@@ -124,7 +124,7 @@ instrumental = "красным бургером"
 prepositional = "красном бургере"
 gender = "male"
 
-[orange burger]
+["orange burger"]
 nominative = "оранжевый бургер"
 genitive = "оранжевого бургера"
 dative = "оранжевому бургеру"
@@ -133,7 +133,7 @@ instrumental = "оранжевым бургером"
 prepositional = "оранжевом бургере"
 gender = "male"
 
-[yellow burger]
+["yellow burger"]
 nominative = "желтый бургер"
 genitive = "желтого бургера"
 dative = "желтому бургеру"
@@ -142,7 +142,7 @@ instrumental = "желтым бургером"
 prepositional = "желтом бургере"
 gender = "male"
 
-[green burger]
+["green burger"]
 nominative = "зеленый бургер"
 genitive = "зеленого бургера"
 dative = "зеленому бургеру"
@@ -151,7 +151,7 @@ instrumental = "зеленым бургером"
 prepositional = "зеленом бургере"
 gender = "male"
 
-[blue burger]
+["blue burger"]
 nominative = "синий бургер"
 genitive = "синего бургера"
 dative = "синему бургеру"
@@ -160,7 +160,7 @@ instrumental = "синим бургером"
 prepositional = "синем бургере"
 gender = "male"
 
-[purple burger]
+["purple burger"]
 nominative = "фиолетовый бургер"
 genitive = "фиолетового бургера"
 dative = "фиолетовому бургеру"
@@ -169,7 +169,7 @@ instrumental = "фиолетовым бургером"
 prepositional = "фиолетовом бургере"
 gender = "male"
 
-[black burger]
+["black burger"]
 nominative = "черный бургер"
 genitive = "черного бургера"
 dative = "черному бургеру"
@@ -178,7 +178,7 @@ instrumental = "черным бургером"
 prepositional = "черном бургере"
 gender = "male"
 
-[white burger]
+["white burger"]
 nominative = "белый бургер"
 genitive = "белого бургера"
 dative = "белому бургеру"
@@ -187,7 +187,7 @@ instrumental = "белым бургером"
 prepositional = "белом бургере"
 gender = "male"
 
-[spell burger]
+["spell burger"]
 nominative = "магический бургер"
 genitive = "магического бургера"
 dative = "магическому бургеру"
@@ -196,7 +196,7 @@ instrumental = "магическим бургером"
 prepositional = "магическом бургере"
 gender = "male"
 
-[big bite burger]
+["big bite burger"]
 nominative = "бургер «мега-кусь»"
 genitive = "бургера «мега-кусь»"
 dative = "бургеру «мега-кусь»"
@@ -205,7 +205,7 @@ instrumental = "бургером «мега-кусь»"
 prepositional = "бургере «мега-кусь»"
 gender = "male"
 
-[jelly burger]
+["jelly burger"]
 nominative = "желейный бургер"
 genitive = "желейного бургера"
 dative = "желейному бургеру"
@@ -214,7 +214,7 @@ instrumental = "желейным бургером"
 prepositional = "желейном бургере"
 gender = "male"
 
-[super bite burger]
+["super bite burger"]
 nominative = "бургер «гига-кусь»"
 genitive = "бургера «гига-кусь»"
 dative = "бургеру «гига-кусь»"
@@ -223,7 +223,7 @@ instrumental = "бургером «гига-кусь»"
 prepositional = "бургере «гига-кусь»"
 gender = "male"
 
-[fire alarm burger]
+["fire alarm burger"]
 nominative = "бургер «пожарная тревога»"
 genitive = "бургера «пожарная тревога»"
 dative = "бургеру «пожарная тревога»"
@@ -232,7 +232,7 @@ instrumental = "бургером «пожарная тревога»"
 prepositional = "бургере «пожарная тревога»"
 gender = "male"
 
-[rat burger]
+["rat burger"]
 nominative = "крысиный бургер"
 genitive = "крысиного бургера"
 dative = "крысиному бургеру"
@@ -241,7 +241,7 @@ instrumental = "крысиным бургером"
 prepositional = "крысином бургере"
 gender = "male"
 
-[home run baseball burger]
+["home run baseball burger"]
 nominative = "бургер «Хоум Ран»"
 genitive = "бургера «Хоум Ран»"
 dative = "бургеру «Хоум Ран»"
@@ -250,7 +250,7 @@ instrumental = "бургером «Хоум Ран»"
 prepositional = "бургере «Хоум Ран»"
 gender = "male"
 
-[bacon burger]
+["bacon burger"]
 nominative = "бургер с беконом"
 genitive = "бургера с беконом"
 dative = "бургеру с беконом"
@@ -259,7 +259,7 @@ instrumental = "бургером с беконом"
 prepositional = "бургере с беконом"
 gender = "male"
 
-[empowered burger]
+["empowered burger"]
 nominative = "заряженный бургер"
 genitive = "заряженного бургера"
 dative = "заряженному бургеру"
@@ -268,7 +268,7 @@ instrumental = "заряженным бургером"
 prepositional = "заряженном бургере"
 gender = "male"
 
-[catburger]
+["catburger"]
 nominative = "котобургер"
 genitive = "котобургера"
 dative = "котобургеру"
@@ -277,7 +277,7 @@ instrumental = "котобургером"
 prepositional = "котобургере"
 gender = "male"
 
-[crab burger]
+["crab burger"]
 nominative = "крабовый бургер"
 genitive = "крабового бургера"
 dative = "крабовому бургеру"
@@ -286,7 +286,7 @@ instrumental = "крабовым бургером"
 prepositional = "крабовом бургере"
 gender = "male"
 
-[soylent burger]
+["soylent burger"]
 nominative = "соилент-бургер"
 genitive = "соилент-бургера"
 dative = "соилент-бургеру"
@@ -295,7 +295,7 @@ instrumental = "соилент-бургером"
 prepositional = "соилент-бургере"
 gender = "male"
 
-[mcrib]
+["mcrib"]
 nominative = "«МакРиб» бургер"
 genitive = "«МакРиб» бургера"
 dative = "«МакРиб» бургеру"
@@ -304,7 +304,7 @@ instrumental = "«МакРиб» бургером"
 prepositional = "«МакРиб» бургере"
 gender = "male"
 
-[mcguffin]
+["mcguffin"]
 nominative = "«МакГаффин» бургер"
 genitive = "«МакГаффин» бургера"
 dative = "«МакГаффин» бургеру"
@@ -313,7 +313,7 @@ instrumental = "«МакГаффин» бургером"
 prepositional = "«МакГаффин» бургере"
 gender = "male"
 
-[chicken sandwich]
+["chicken sandwich"]
 nominative = "куриный сэндвич"
 genitive = "куриного сэндвича"
 dative = "куриному сэндвичу"
@@ -322,7 +322,7 @@ instrumental = "куриным сэндвичем"
 prepositional = "курином сэндвиче"
 gender = "male"
 
-[cheese burger]
+["cheese burger"]
 nominative = "чизбургер"
 genitive = "чизбургера"
 dative = "чизбургеру"
@@ -331,7 +331,7 @@ instrumental = "чизбургером"
 prepositional = "чизбургере"
 gender = "male"
 
-[crazy hamburger]
+["crazy hamburger"]
 nominative = "сумасшедший гамбургер"
 genitive = "сумасшедшего гамбургера"
 dative = "сумасшедшему гамбургеру"
@@ -340,7 +340,7 @@ instrumental = "сумасшедшим гамбургером"
 prepositional = "сумасшедшем гамбургере"
 gender = "male"
 
-[burger]
+["burger"]
 nominative = "бургер"
 genitive = "бургера"
 dative = "бургеру"
@@ -349,7 +349,7 @@ instrumental = "бургером"
 prepositional = "бургере"
 gender = "male"
 
-[sloppy moe]
+["sloppy moe"]
 nominative = "бургер «Неряшливый Мо»"
 genitive = "бургера «Неряшливый Мо»"
 dative = "бургеру «Неряшливый Мо»"

@@ -1,4 +1,4 @@
-[Donk-pocket]
+["Donk-pocket"]
 nominative = "донк-покет"
 genitive = "донк-покета"
 dative = "донк-покету"
@@ -7,7 +7,7 @@ instrumental = "донк-покетом"
 prepositional = "донк-покете"
 gender = "male"
 
-[warm Donk-pocket]
+["warm Donk-pocket"]
 nominative = "тёплый донк-покет"
 genitive = "тёплого донк-покета"
 dative = "тёплому донк-покету"
@@ -16,7 +16,7 @@ instrumental = "тёплым донк-покетом"
 prepositional = "тёплом донк-покете"
 gender = "male"
 
-[Dank-pocket]
+["Dank-pocket"]
 nominative = "данк-покет"
 genitive = "данк-покета"
 dative = "данк-покету"
@@ -25,7 +25,7 @@ instrumental = "данк-покетом"
 prepositional = "данк-покете"
 gender = "male"
 
-[warm Dank-pocket]
+["warm Dank-pocket"]
 nominative = "тёплый данк-покет"
 genitive = "тёплого данк-покета"
 dative = "тёплому данк-покету"
@@ -34,7 +34,7 @@ instrumental = "тёплым данк-покетом"
 prepositional = "тёплом данк-покете"
 gender = "male"
 
-[Spicy-pocket]
+["Spicy-pocket"]
 nominative = "острый покет"
 genitive = "острого покета"
 dative = "острому покету"
@@ -43,7 +43,7 @@ instrumental = "острым покетом"
 prepositional = "остром покете"
 gender = "male"
 
-[warm Spicy-pocket]
+["warm Spicy-pocket"]
 nominative = "тёплый острый покет"
 genitive = "тёплого острого покета"
 dative = "тёплому острому покету"
@@ -52,7 +52,7 @@ instrumental = "тёплым острым покетом"
 prepositional = "тёплом остром покете"
 gender = "male"
 
-[Teriyaki-pocket]
+["Teriyaki-pocket"]
 nominative = "терияки-покет"
 genitive = "терияки-покета"
 dative = "терияки-покету"
@@ -61,7 +61,7 @@ instrumental = "терияки-покетом"
 prepositional = "терияки-покете"
 gender = "male"
 
-[warm Teriyaki-pocket]
+["warm Teriyaki-pocket"]
 nominative = "тёплый терияки-покет"
 genitive = "тёплого терияки-покета"
 dative = "тёплому терияки-покету"
@@ -70,7 +70,7 @@ instrumental = "тёплым терияки-покетом"
 prepositional = "тёплом терияки-покете"
 gender = "male"
 
-[Pizza-pocket]
+["Pizza-pocket"]
 nominative = "пицца-покет"
 genitive = "пицца-покета"
 dative = "пицца-покету"
@@ -79,7 +79,7 @@ instrumental = "пицца-покетом"
 prepositional = "пицца-покете"
 gender = "male"
 
-[warm Pizza-pocket]
+["warm Pizza-pocket"]
 nominative = "тёплый пицца-покет"
 genitive = "тёплого пицца-покета"
 dative = "тёплому пицца-покету"
@@ -88,7 +88,7 @@ instrumental = "тёплым пицца-покетом"
 prepositional = "тёплом пицца-покете"
 gender = "male"
 
-[Honk-pocket]
+["Honk-pocket"]
 nominative = "хонк-покет"
 genitive = "хонк-покета"
 dative = "хонк-покету"
@@ -97,7 +97,7 @@ instrumental = "хонк-покетом"
 prepositional = "хонк-покете"
 gender = "male"
 
-[warm Honk-pocket]
+["warm Honk-pocket"]
 nominative = "тёплый хонк-покет"
 genitive = "тёплого хонк-покета"
 dative = "тёплому хонк-покету"
@@ -106,7 +106,7 @@ instrumental = "тёплым хонк-покетом"
 prepositional = "тёплом хонк-покете"
 gender = "male"
 
-[Berry-pocket]
+["Berry-pocket"]
 nominative = "ягодный покет"
 genitive = "ягодного покета"
 dative = "ягодному покету"
@@ -115,7 +115,7 @@ instrumental = "ягодным покетом"
 prepositional = "ягодном покете"
 gender = "male"
 
-[warm Berry-pocket]
+["warm Berry-pocket"]
 nominative = "тёплый ягодный покет"
 genitive = "тёплого ягодного покета"
 dative = "тёплому ягодному покету"
@@ -124,7 +124,7 @@ instrumental = "тёплым ягодным покетом"
 prepositional = "тёплом ягодном покете"
 gender = "male"
 
-[Gondola-pocket]
+["Gondola-pocket"]
 nominative = "гондола-покет"
 genitive = "гондола-покета"
 dative = "гондола-покету"
@@ -133,7 +133,7 @@ instrumental = "гондола-покетом"
 prepositional = "гондола-покете"
 gender = "male"
 
-[warm Gondola-pocket]
+["warm Gondola-pocket"]
 nominative = "тёплый гондола-покет"
 genitive = "тёплого гондола-покета"
 dative = "тёплому гондола-покету"
@@ -142,7 +142,7 @@ instrumental = "тёплым гондола-покетом"
 prepositional = "тёплом гондола-покете"
 gender = "male"
 
-[Donk-pocket Deluxe]
+["Donk-pocket Deluxe"]
 nominative = "донк-покет Делюкс"
 genitive = "донк-покета Делюкс"
 dative = "донк-покету Делюкс"
@@ -151,7 +151,7 @@ instrumental = "донк-покетом Делюкс"
 prepositional = "донк-покете Делюкс"
 gender = "male"
 
-[warm Donk-pocket Deluxe]
+["warm Donk-pocket Deluxe"]
 nominative = "тёплый донк-покет Делюкс"
 genitive = "тёплого донк-покета Делюкс"
 dative = "тёплому донк-покету Делюкс"
@@ -160,7 +160,7 @@ instrumental = "тёплым донк-покетом Делюкс"
 prepositional = "тёплом донк-покете Делюкс"
 gender = "male"
 
-[Meat-pocket]
+["Meat-pocket"]
 nominative = "мясной покет"
 genitive = "мясного покета"
 dative = "мясному покету"
@@ -169,7 +169,7 @@ instrumental = "мясным покетом"
 prepositional = "мясном покете"
 gender = "male"
 
-[warm Meat-pocket]
+["warm Meat-pocket"]
 nominative = "тёплый мясной покет"
 genitive = "тёплого мясного покета"
 dative = "тёплому мясному покету"
@@ -178,7 +178,7 @@ instrumental = "тёплым мясным покетом"
 prepositional = "тёплом мясном покете"
 gender = "male"
 
-[Donk-roll]
+["Donk-roll"]
 nominative = "донк-ролл"
 genitive = "донк-ролла"
 dative = "донк-роллу"
@@ -187,7 +187,7 @@ instrumental = "донк-роллом"
 prepositional = "донк-ролле"
 gender = "male"
 
-[warm Donk-roll]
+["warm Donk-roll"]
 nominative = "тёплый донк-ролл"
 genitive = "тёплого донк-ролла"
 dative = "тёплому донк-роллу"

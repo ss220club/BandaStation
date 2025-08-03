@@ -1,5 +1,6 @@
 GLOBAL_LIST_EMPTY(ru_attack_verbs)
 GLOBAL_LIST_EMPTY(ru_eat_verbs)
+GLOBAL_LIST_EMPTY(ru_tastes)
 GLOBAL_LIST_EMPTY(ru_say_verbs)
 GLOBAL_LIST_EMPTY(ru_emote_names)
 GLOBAL_LIST_EMPTY(ru_emote_messages)
@@ -12,9 +13,9 @@ GLOBAL_LIST_EMPTY(ru_reagent_descs)
 
 /datum/modpack/translations/post_initialize()
 	// Tastes
-	var/toml_path = "[PATH_TO_TRANSLATE_DATA]/ru_tastes.toml"
-	if(fexists(file(toml_path)))
-		var/list/tastes_toml_list = rustg_read_toml_file(toml_path)
+	var/food_path = "[PATH_TO_TRANSLATE_DATA]/ru_tastes.toml"
+	if(fexists(file(food_path)))
+		var/list/tastes_toml_list = rustg_read_toml_file(food_path)
 
 		var/list/tastes_food = tastes_toml_list["food"]
 		for(var/taste_food_key in tastes_food)

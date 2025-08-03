@@ -42,7 +42,7 @@
 
 /obj/item/food/bread/plain
 	name = "bread"
-	desc = Старый добрый земной хлеб."
+	desc = "Старый добрый земной хлеб."
 	icon_state = "bread"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 10)
 	tastes = list("bread" = 10)
