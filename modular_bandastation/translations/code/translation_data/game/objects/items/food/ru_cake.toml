@@ -5,7 +5,7 @@ dative = "обычному торту"
 accusative = "обычный торт"
 instrumental = "обычным тортом"
 prepositional = "обычном торте"
-gender = "masculine"
+gender = "male"
 
 ["plain cake slice"]
 nominative = "кусочек обычного торта"
@@ -14,7 +14,7 @@ dative = "кусочку обычного торта"
 accusative = "кусочек обычного торта"
 instrumental = "кусочком обычного торта"
 prepositional = "кусочке обычного торта"
-gender = "masculine"
+gender = "male"
 
 ["cake"]
 nominative = "торт"
@@ -23,7 +23,7 @@ dative = "торту"
 accusative = "торт"
 instrumental = "тортом"
 prepositional = "торте"
-gender = "masculine"
+gender = "male"
 
 ["cake slice"]
 nominative = "кусочек торта"
@@ -32,7 +32,7 @@ dative = "кусочку торта"
 accusative = "кусочек торта"
 instrumental = "кусочком торта"
 prepositional = "кусочке торта"
-gender = "masculine"
+gender = "male"
 
 ["carrot cake"]
 nominative = "морковный торт"
@@ -41,7 +41,7 @@ dative = "морковному торту"
 accusative = "морковный торт"
 instrumental = "морковным тортом"
 prepositional = "морковном торте"
-gender = "masculine"
+gender = "male"
 
 ["carrot cake slice"]
 nominative = "кусочек морковного торта"
@@ -50,7 +50,7 @@ dative = "кусочку морковного торта"
 accusative = "кусочек морковного торта"
 instrumental = "кусочком морковного торта"
 prepositional = "кусочке морковного торта"
-gender = "masculine"
+gender = "male"
 
 ["brain cake"]
 nominative = "мозговой торт"
@@ -59,7 +59,7 @@ dative = "мозговому торту"
 accusative = "мозговой торт"
 instrumental = "мозговым тортом"
 prepositional = "мозговом торте"
-gender = "masculine"
+gender = "male"
 
 ["brain cake slice"]
 nominative = "кусочек мозгового торта"
@@ -68,7 +68,7 @@ dative = "кусочку мозгового торта"
 accusative = "кусочек мозгового торта"
 instrumental = "кусочком мозгового торта"
 prepositional = "кусочке мозгового торта"
-gender = "masculine"
+gender = "male"
 
 ["cheese cake"]
 nominative = "чизкейк"
@@ -77,7 +77,7 @@ dative = "чизкейку"
 accusative = "чизкейк"
 instrumental = "чизкейком"
 prepositional = "чизкейке"
-gender = "masculine"
+gender = "male"
 
 ["cheese cake slice"]
 nominative = "кусочек чизкейка"
@@ -86,7 +86,7 @@ dative = "кусочку чизкейка"
 accusative = "кусочек чизкейка"
 instrumental = "кусочком чизкейка"
 prepositional = "кусочке чизкейка"
-gender = "masculine"
+gender = "male"
 
 ["orange cake"]
 nominative = "апельсиновый торт"
@@ -95,7 +95,7 @@ dative = "апельсиновому торту"
 accusative = "апельсиновый торт"
 instrumental = "апельсиновым тортом"
 prepositional = "апельсиновом торте"
-gender = "masculine"
+gender = "male"
 
 ["orange cake slice"]
 nominative = "кусочек апельсинового торта"
@@ -104,7 +104,7 @@ dative = "кусочку апельсинового торта"
 accusative = "кусочек апельсинового торта"
 instrumental = "кусочком апельсинового торта"
 prepositional = "кусочке апельсинового торта"
-gender = "masculine"
+gender = "male"
 
 ["lime cake"]
 nominative = "лаймовый торт"
@@ -113,7 +113,7 @@ dative = "лаймовому торту"
 accusative = "лаймовый торт"
 instrumental = "лаймовым тортом"
 prepositional = "лаймовом торте"
-gender = "masculine"
+gender = "male"
 
 ["lime cake slice"]
 nominative = "кусочек лаймового торта"
@@ -122,7 +122,7 @@ dative = "кусочку лаймового торта"
 accusative = "кусочек лаймового торта"
 instrumental = "кусочком лаймового торта"
 prepositional = "кусочке лаймового торта"
-gender = "masculine"
+gender = "male"
 
 ["lemon cake"]
 nominative = "лимонный торт"
@@ -131,7 +131,7 @@ dative = "лимонному торту"
 accusative = "лимонный торт"
 instrumental = "лимонным тортом"
 prepositional = "лимонном торте"
-gender = "masculine"
+gender = "male"
 
 ["lemon cake slice"]
 nominative = "кусочек лимонного торта"
@@ -140,7 +140,7 @@ dative = "кусочку лимонного торта"
 accusative = "кусочек лимонного торта"
 instrumental = "кусочком лимонного торта"
 prepositional = "кусочке лимонного торта"
-gender = "masculine"
+gender = "male"
 
 ["chocolate cake"]
 nominative = "шоколадный торт"
@@ -149,7 +149,7 @@ dative = "шоколадному торту"
 accusative = "шоколадный торт"
 instrumental = "шоколадным тортом"
 prepositional = "шоколадном торте"
-gender = "masculine"
+gender = "male"
 
 ["chocolate cake slice"]
 nominative = "кусочек шоколадного торта"
@@ -158,7 +158,7 @@ dative = "кусочку шоколадного торта"
 accusative = "кусочек шоколадного торта"
 instrumental = "кусочком шоколадного торта"
 prepositional = "кусочке шоколадного торта"
-gender = "masculine"
+gender = "male"
 
 ["birthday cake"]
 nominative = "торт на день рождения"
@@ -167,7 +167,7 @@ dative = "торту на день рождения"
 accusative = "торт на день рождения"
 instrumental = "тортом на день рождения"
 prepositional = "торте на день рождения"
-gender = "masculine"
+gender = "male"
 
 ["birthday cake slice"]
 nominative = "кусочек торта на день рождения"
@@ -176,7 +176,7 @@ dative = "кусочку торта на день рождения"
 accusative = "кусочек торта на день рождения"
 instrumental = "кусочком торта на день рождения"
 prepositional = "кусочке торта на день рождения"
-gender = "masculine"
+gender = "male"
 
 ["energy cake"]
 nominative = "энергетический торт"
@@ -185,7 +185,7 @@ dative = "энергетическому торту"
 accusative = "энергетический торт"
 instrumental = "энергетическим тортом"
 prepositional = "энергетическом торте"
-gender = "masculine"
+gender = "male"
 
 ["energy cake slice"]
 nominative = "кусочек энергетического торта"
@@ -194,7 +194,7 @@ dative = "кусочку энергетического торта"
 accusative = "кусочек энергетического торта"
 instrumental = "кусочком энергетического торта"
 prepositional = "кусочке энергетического торта"
-gender = "masculine"
+gender = "male"
 
 ["apple cake"]
 nominative = "яблочный торт"
@@ -203,7 +203,7 @@ dative = "яблочному торту"
 accusative = "яблочный торт"
 instrumental = "яблочным тортом"
 prepositional = "яблочном торте"
-gender = "masculine"
+gender = "male"
 
 ["apple cake slice"]
 nominative = "кусочек яблочного торта"
@@ -212,7 +212,7 @@ dative = "кусочку яблочного торта"
 accusative = "кусочек яблочного торта"
 instrumental = "кусочком яблочного торта"
 prepositional = "кусочке яблочного торта"
-gender = "masculine"
+gender = "male"
 
 ["Slime cake"]
 nominative = "слаймовый торт"
@@ -221,7 +221,7 @@ dative = "слаймовому торту"
 accusative = "слаймовый торт"
 instrumental = "слаймовым тортом"
 prepositional = "слаймовом торте"
-gender = "masculine"
+gender = "male"
 
 ["slime cake slice"]
 nominative = "кусочек слаймового торта"
@@ -230,7 +230,7 @@ dative = "кусочку слаймового торта"
 accusative = "кусочек слаймового торта"
 instrumental = "кусочком слаймового торта"
 prepositional = "кусочке слаймового торта"
-gender = "masculine"
+gender = "male"
 
 ["pumpkin spice cake"]
 nominative = "тыквенный торт с пряностями"
@@ -239,7 +239,7 @@ dative = "тыквенному торту с пряностями"
 accusative = "тыквенный торт с пряностями"
 instrumental = "тыквенным тортом с пряностями"
 prepositional = "тыквенном торте с пряностями"
-gender = "masculine"
+gender = "male"
 
 ["pumpkin spice cake slice"]
 nominative = "кусочек тыквенного торта с пряностями"
@@ -248,7 +248,7 @@ dative = "кусочку тыквенного торта с пряностями
 accusative = "кусочек тыквенного торта с пряностями"
 instrumental = "кусочком тыквенного торта с пряностями"
 prepositional = "кусочке тыквенного торта с пряностями"
-gender = "masculine"
+gender = "male"
 
 ["blackberry and strawberry vanilla cake"]
 nominative = "торт с черникой и клубникой"
@@ -257,7 +257,7 @@ dative = "торту с черникой и клубникой"
 accusative = "торт с черникой и клубникой"
 instrumental = "тортом с черникой и клубникой"
 prepositional = "торте с черникой и клубникой"
-gender = "masculine"
+gender = "male"
 
 ["blackberry and strawberry vanilla cake slice"]
 nominative = "кусочек торта с черникой и клубникой"
@@ -266,7 +266,7 @@ dative = "кусочку торта с черникой и клубникой"
 accusative = "кусочек торта с черникой и клубникой"
 instrumental = "кусочком торта с черникой и клубникой"
 prepositional = "кусочке торта с черникой и клубникой"
-gender = "masculine"
+gender = "male"
 
 ["strawberry chocolate cake"]
 nominative = "клубнично-шоколадный торт"
@@ -275,7 +275,7 @@ dative = "клубнично-шоколадному торту"
 accusative = "клубнично-шоколадный торт"
 instrumental = "клубнично-шоколадным тортом"
 prepositional = "клубнично-шоколадном торте"
-gender = "masculine"
+gender = "male"
 
 ["strawberry chocolate cake slice"]
 nominative = "кусочек клубнично-шоколадного торта"
@@ -284,7 +284,7 @@ dative = "кусочку клубнично-шоколадного торта"
 accusative = "кусочек клубнично-шоколадного торта"
 instrumental = "кусочком клубнично-шоколадного торта"
 prepositional = "кусочке клубнично-шоколадного торта"
-gender = "masculine"
+gender = "male"
 
 ["angel food cake"]
 nominative = "ангельский торт"
@@ -293,7 +293,7 @@ dative = "ангельскому торту"
 accusative = "ангельский торт"
 instrumental = "ангельским тортом"
 prepositional = "ангельском торте"
-gender = "masculine"
+gender = "male"
 
 ["angel food cake slice"]
 nominative = "кусочек ангельского торта"
@@ -302,7 +302,7 @@ dative = "кусочку ангельского торта"
 accusative = "кусочек ангельского торта"
 instrumental = "кусочком ангельского торта"
 prepositional = "кусочке ангельского торта"
-gender = "masculine"
+gender = "male"
 
 ["pound cake"]
 nominative = "кекс"
@@ -311,7 +311,7 @@ dative = "кексу"
 accusative = "кекс"
 instrumental = "кексом"
 prepositional = "кексе"
-gender = "masculine"
+gender = "male"
 
 ["pound cake slice"]
 nominative = "кусочек кекса"
@@ -320,7 +320,7 @@ dative = "кусочку кекса"
 accusative = "кусочек кекса"
 instrumental = "кусочком кекса"
 prepositional = "кусочке кекса"
-gender = "masculine"
+gender = "male"
 
 ["hardware cake"]
 nominative = "аппаратный торт"
@@ -329,7 +329,7 @@ dative = "аппаратному торту"
 accusative = "аппаратный торт"
 instrumental = "аппаратным тортом"
 prepositional = "аппаратном торте"
-gender = "masculine"
+gender = "male"
 
 ["hardware cake slice"]
 nominative = "кусочек аппаратного торта"
@@ -338,7 +338,7 @@ dative = "кусочку аппаратного торта"
 accusative = "кусочек аппаратного торта"
 instrumental = "кусочком аппаратного торта"
 prepositional = "кусочке аппаратного торта"
-gender = "masculine"
+gender = "male"
 
 ["vanilla cake"]
 nominative = "ванильный торт"
@@ -347,7 +347,7 @@ dative = "ванильному торту"
 accusative = "ванильный торт"
 instrumental = "ванильным тортом"
 prepositional = "ванильном торте"
-gender = "masculine"
+gender = "male"
 
 ["vanilla cake slice"]
 nominative = "кусочек ванильного торта"
@@ -356,7 +356,7 @@ dative = "кусочку ванильного торта"
 accusative = "кусочек ванильного торта"
 instrumental = "кусочком ванильного торта"
 prepositional = "кусочке ванильного торта"
-gender = "masculine"
+gender = "male"
 
 ["clown cake"]
 nominative = "клоунский торт"
@@ -365,7 +365,7 @@ dative = "клоунскому торту"
 accusative = "клоунский торт"
 instrumental = "клоунским тортом"
 prepositional = "клоунском торте"
-gender = "masculine"
+gender = "male"
 
 ["clown cake slice"]
 nominative = "кусочек клоунского торта"
@@ -374,7 +374,7 @@ dative = "кусочку клоунского торта"
 accusative = "кусочек клоунского торта"
 instrumental = "кусочком клоунского торта"
 prepositional = "кусочке клоунского торта"
-gender = "masculine"
+gender = "male"
 
 ["spaceman's cake"]
 nominative = "торт космонавта"
@@ -383,7 +383,7 @@ dative = "торту космонавта"
 accusative = "торт космонавта"
 instrumental = "тортом космонавта"
 prepositional = "торте космонавта"
-gender = "masculine"
+gender = "male"
 
 ["spaceman's cake slice"]
 nominative = "кусочек торта космонавта"
@@ -392,7 +392,7 @@ dative = "кусочку торта космонавта"
 accusative = "кусочек торта космонавта"
 instrumental = "кусочком торта космонавта"
 prepositional = "кусочке торта космонавта"
-gender = "masculine"
+gender = "male"
 
 ["brioche cake"]
 nominative = "бриошь-торт"
@@ -401,7 +401,7 @@ dative = "бриошь-торту"
 accusative = "бриошь-торт"
 instrumental = "бриошь-тортом"
 prepositional = "бриошь-торте"
-gender = "masculine"
+gender = "male"
 
 ["brioche cake slice"]
 nominative = "кусочек бриошь-торта"
@@ -410,7 +410,7 @@ dative = "кусочку бриошь-торта"
 accusative = "кусочек бриошь-торта"
 instrumental = "кусочком бриошь-торта"
 prepositional = "кусочке бриошь-торта"
-gender = "masculine"
+gender = "male"
 
 ["pavlova"]
 nominative = "павлова"
@@ -419,7 +419,7 @@ dative = "павлове"
 accusative = "павлову"
 instrumental = "павловой"
 prepositional = "павлове"
-gender = "feminine"
+gender = "female"
 
 ["pavlova with nuts"]
 nominative = "павлова с орехами"
@@ -428,7 +428,7 @@ dative = "павлове с орехами"
 accusative = "павлову с орехами"
 instrumental = "павловой с орехами"
 prepositional = "павлове с орехами"
-gender = "feminine"
+gender = "female"
 
 ["pavlova slice"]
 nominative = "кусочек павловы"
@@ -437,7 +437,7 @@ dative = "кусочку павловы"
 accusative = "кусочек павловы"
 instrumental = "кусочком павловы"
 prepositional = "кусочке павловы"
-gender = "masculine"
+gender = "male"
 
 ["english fruitcake"]
 nominative = "английский фруктовый торт"
@@ -446,7 +446,7 @@ dative = "английскому фруктовому торту"
 accusative = "английский фруктовый торт"
 instrumental = "английским фруктовым тортом"
 prepositional = "английском фруктовом торте"
-gender = "masculine"
+gender = "male"
 
 ["english fruitcake slice"]
 nominative = "кусочек английского фруктового торта"
@@ -455,7 +455,7 @@ dative = "кусочку английского фруктового торта"
 accusative = "кусочек английского фруктового торта"
 instrumental = "кусочком английского фруктового торта"
 prepositional = "кусочке английского фруктового торта"
-gender = "masculine"
+gender = "male"
 
 ["plum cake"]
 nominative = "сливовый торт"
@@ -464,7 +464,7 @@ dative = "сливовому торту"
 accusative = "сливовый торт"
 instrumental = "сливовым тортом"
 prepositional = "сливовом торте"
-gender = "masculine"
+gender = "male"
 
 ["plum cake slice"]
 nominative = "кусочек сливового торта"
@@ -473,7 +473,7 @@ dative = "кусочку сливового торта"
 accusative = "кусочек сливового торта"
 instrumental = "кусочком сливового торта"
 prepositional = "кусочке сливового торта"
-gender = "masculine"
+gender = "male"
 
 ["wedding cake"]
 nominative = "свадебный торт"
@@ -482,7 +482,7 @@ dative = "свадебному торту"
 accusative = "свадебный торт"
 instrumental = "свадебным тортом"
 prepositional = "свадебном торте"
-gender = "masculine"
+gender = "male"
 
 ["wedding cake slice"]
 nominative = "кусочек свадебного торта"
@@ -491,7 +491,7 @@ dative = "кусочку свадебного торта"
 accusative = "кусочек свадебного торта"
 instrumental = "кусочком свадебного торта"
 prepositional = "кусочке свадебного торта"
-gender = "masculine"
+gender = "male"
 
 ["pineapple cream cake"]
 nominative = "ананасово-кремовый торт"
@@ -500,7 +500,7 @@ dative = "ананасово-кремовому торту"
 accusative = "ананасово-кремовый торт"
 instrumental = "ананасово-кремовым тортом"
 prepositional = "ананасово-кремовом торте"
-gender = "masculine"
+gender = "male"
 
 ["pineapple cream cake slice"]
 nominative = "кусочек ананасово-кремового торта"
@@ -509,4 +509,4 @@ dative = "кусочку ананасово-кремового торта"
 accusative = "кусочек ананасово-кремового торта"
 instrumental = "кусочком ананасово-кремового торта"
 prepositional = "кусочке ананасово-кремового торта"
-gender = "masculine"
+gender = "male"
