@@ -1,6 +1,6 @@
 /obj/item/sledgehammer
-	name = "D-4 tactical breaching hammer"
-	desc = "Металлопластиковый композитный молот для создания брешей в стенах и уничтожения структур. Выглядит как отличное оружие для перекаченного психа в сварочной маске."
+	name = "sledgehammer"
+	desc = "Стальная кувалда для разрушения стен. Большая и тяжелая, может быть также использована для разрушения горных пород."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/sledgehammer.dmi'
 	icon_state = "sledgehammer0"
 	base_icon_state = "sledgehammer"
@@ -16,18 +16,55 @@
 	attack_verb_continuous = list("whacks", "breaches", "bulldozes", "flings", "thwachs")
 	attack_verb_simple = list("breach", "hammer", "whack", "slap", "thwach", "fling")
 	armor_type = /datum/armor/item_sledgehammer
-	resistance_flags = FIRE_PROOF
+	tool_behaviour = TOOL_MINING
+	demolition_mod = 4
 	var/force_unwielded = 10
 	/// How much damage to do wielded
 	var/force_wielded = 20
+	var/tear_time = 6 SECONDS
+	var/reinforced_multiplier = 3
+	var/stamina_take = 40
+
+/obj/item/sledgehammer/tactical
+	name = "D-4 tactical breaching hammer"
+	desc = "Металлопластиковый композитный молот для создания брешей в стенах или уничтожения структур."
+	icon_state = "sledgehammer_tactical0"
+	base_icon_state = "sledgehammer_tactical"
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/melee_righthand.dmi'
+	worn_icon_state = "sledgehammer_tactical"
+	resistance_flags = FIRE_PROOF
 	demolition_mod = 6
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 1
 	usesound = 'sound/items/tools/crowbar.ogg'
 	throw_range = 3
+	tear_time = 5 SECONDS
+	reinforced_multiplier = 2
+	stamina_take = 30
+
+/obj/item/sledgehammer/syndie
+	name = "D-6 tactical breaching hammer"
+	desc = "Пластитаниевый композитный абордажный молот для создания брешей в корпусах кораблей или уничтожения всего и вся. Выглядит как отличное оружие для перекаченного психа в сварочной маске."
+	icon_state = "sledgehammer_syndie0"
+	base_icon_state = "sledgehammer_syndie"
+	worn_icon_state = "sledgehammer_syndie"
+	force = 10
+	throwforce = 20
+	resistance_flags = FIRE_PROOF | ACID_PROOF | BOMB_PROOF
+	force_unwielded = 15
+	force_wielded = 30
+	demolition_mod = 10
+	tool_behaviour = TOOL_CROWBAR
+	toolspeed = 2
+	usesound = 'sound/items/tools/crowbar.ogg'
+	throw_range = 5
+	tear_time = 3 SECONDS
+	reinforced_multiplier = 2
+	stamina_take = 20
 
 /datum/armor/item_sledgehammer
-	fire = 100
+	fire = 70
 	acid = 50
 
 /obj/item/sledgehammer/Initialize(mapload)
@@ -41,7 +78,7 @@
 	icon_state = "[base_icon_state]0"
 	return ..()
 
-/obj/item/sledgehammer/proc/sledge_hit(atom/target, mob/living/user, list/modifiers, tear_time = 3 SECONDS, reinforced_multiplier = 3, do_after_key = "sledgehammer_tearing")
+/obj/item/sledgehammer/proc/sledge_hit(atom/target, mob/living/user, list/modifiers, do_after_key = "sledgehammer_tearing")
 	if(istype(target, /turf/closed/wall))
 		var/rip_time = (istype(target, /turf/closed/wall/r_wall) ? tear_time * reinforced_multiplier : tear_time) / 3
 		if(rip_time > 0)
@@ -56,7 +93,7 @@
 			if(!do_after(user, delay = rip_time, interaction_key = do_after_key))
 				user.balloon_alert(user, "прервано!")
 				return
-			user.adjustStaminaLoss(30)
+			user.adjustStaminaLoss(stamina_take)
 			user.do_attack_animation(target)
 			target.AddComponent(/datum/component/torn_wall)
 
