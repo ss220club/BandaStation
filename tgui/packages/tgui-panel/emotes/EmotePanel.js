@@ -54,11 +54,11 @@ export const EmotePanel = (props, context) => {
                 break;
               case TGUI_PANEL_EMOTE_TYPE_CUSTOM:
                 color = 'purple';
-                tooltip = `*${emote.key} | "${emote.message_override}\"`;
+                tooltip = `*${emote.key} | "${emote.message_override}"`;
                 break;
               case TGUI_PANEL_EMOTE_TYPE_ME:
                 color = 'orange';
-                tooltip = `\"${emote.message}\"`;
+                tooltip = `"${emote.message}"`;
                 break;
               default:
                 tooltip = 'ОШИБКА: НЕИЗВЕСТНЫЙ ТИП ЭМОЦИИ';

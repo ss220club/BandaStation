@@ -92,10 +92,7 @@
 					var/emote_key = client.prefs.custom_emote_panel[emote_name]["key"]
 					var/message_override = client.prefs.custom_emote_panel[emote_name]["message_override"]
 					living.emote(emote_key, intentional = TRUE, message_override = message_override)
-					if(length_char(message_override) > SHORT_EMOTE_MAX_LENGTH)
-						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_EMOTE_COOLDOWN)
-					else
-						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_SHORT_EMOTE_COOLDOWN)
+					handle_panel_cooldown(living, message_override)
 
 				if(TGUI_PANEL_EMOTE_TYPE_ME)
 					if(living.next_sound_emote >= world.time)
@@ -103,10 +100,7 @@
 						return TRUE
 					var/message = client.prefs.custom_emote_panel[emote_name]["message"]
 					living.emote("me", intentional = TRUE, message = message)
-					if(length_char(message) > SHORT_EMOTE_MAX_LENGTH)
-						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_EMOTE_COOLDOWN)
-					else
-						living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_SHORT_EMOTE_COOLDOWN)
+					handle_panel_cooldown(living, message)
 
 			return TRUE
 
@@ -183,7 +177,7 @@
 				return
 
 			client.prefs.custom_emote_panel[emote_name] = emote
-			client.prefs.save_preferences() //custom emote panel is attached to the character
+			client.prefs.save_preferences()
 			emotes_send_list()
 
 			return TRUE
@@ -237,6 +231,11 @@
 
 			return TRUE
 
+/datum/tgui_panel/proc/handle_panel_cooldown(mob/living/living, message)
+	if(length_char(message) > SHORT_EMOTE_MAX_LENGTH)
+		living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_EMOTE_COOLDOWN)
+	else
+		living.next_sound_emote = max(living.next_sound_emote, world.time + CUSTOM_SHORT_EMOTE_COOLDOWN)
 
 /datum/tgui_panel/proc/emotes_rename(emote_name)
 	var/new_emote_name = tgui_input_text(client.mob, "Выберите новое название эмоции [emote_name]:", "Название эмоции", emote_name, TGUI_PANEL_MAX_EMOTE_NAME_LENGTH, FALSE, TRUE)
