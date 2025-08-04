@@ -31,15 +31,24 @@
 
 /datum/tgui_panel
 	var/static/list/all_emotes = list()
+	var/list/blacklisted_emote_types = list(
+		/datum/emote/help,
+		/datum/emote/living/custom,
+		/datum/emote/imaginary_friend,
+		)
 
-//to include only "key" property into the list
+
+// russian emotes only in GLOB.emote_list
 /datum/tgui_panel/proc/populate_all_emotes_list()
 	if(all_emotes.len)
 		return
-	for(var/path in subtypesof(/datum/emote))
-		var/datum/emote/E = new path()
-		if(E.key)
-			all_emotes[E.key] = E
+	for(var/emote_key as anything in GLOB.emote_list)
+		var/list/emote_list = GLOB.emote_list[emote_key]
+		for(var/datum/emote/emote in emote_list)
+			if(is_type_in_list(emote, blacklisted_emote_types))
+				continue
+			if(emote_key == emote.key)
+				all_emotes += emote
 
 /datum/tgui_panel/New(client/client, id)
 	. = ..()
@@ -119,37 +128,39 @@
 			var/suggested_name = ""
 			switch (emote_type_string)
 				if("Обычная")
-					var/emote_key = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
-					if(!emote_key)
+					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
+					if(!picked_emote)
 						to_chat(client, span_warning("Добавление эмоции отменено."))
 						return
 
-					if(!(emote_key in all_emotes))
+					var/emote_key = picked_emote.key
+					if(!(emote_key in GLOB.emote_list))
 						to_chat(client, span_warning("Эмоция [emote_key] не существует!"))
 						return
 
-					suggested_name = ru_emote_name(emote_key)
+					suggested_name = picked_emote.name
 					emote = list(
 						"type" = TGUI_PANEL_EMOTE_TYPE_DEFAULT,
 						"key" = emote_key,
 					)
 
 				if("С кастомным текстом")
-					var/emote_key = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
-					if(!emote_key)
+					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
+					if(!picked_emote)
 						to_chat(client, span_warning("Добавление эмоции отменено."))
 						return
 
-					if(!(emote_key in all_emotes))
+					var/emote_key = picked_emote.key
+					if(!(emote_key in GLOB.emote_list))
 						to_chat(client, span_warning("Эмоция [emote_key] не существует!"))
 						return
 
-					var/message_override = tgui_input_text(client.mob, "Какой кастомный текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", ru_emote_name(emote_key), TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
+					var/message_override = tgui_input_text(client.mob, "Какой кастомный текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", picked_emote.name, TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 					if(!message_override)
 						to_chat(client, span_warning("Кастомный текст эмоции не подходит!"))
 						return
 
-					suggested_name = ru_emote_name(emote_key)
+					suggested_name = picked_emote.name
 					emote = list(
 						"type" = TGUI_PANEL_EMOTE_TYPE_CUSTOM,
 						"key" = emote_key,
