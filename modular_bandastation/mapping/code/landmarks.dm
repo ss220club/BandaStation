@@ -14,21 +14,29 @@
 	layer = DOOR_ACCESS_HELPER_LAYER
 	icon = 'modular_bandastation/mapping/icons/landmarks/access_helpers.dmi'
 	icon_state = "access_helper"
+	var/list/access = list()
+	return access
 
 /obj/effect/mapping_helpers/windoor/proc/payload(obj/machinery/door/window/window)
 	if(window.dir != dir)
-		return
+		return TRUE
+	return FALSE
+
+/obj/effect/mapping_helpers/windoor/access/proc/get_access()
+	var/list/access = list()
+	return access
 
 /obj/effect/mapping_helpers/windoor/access/Initialize()
 	. = ..()
-	var/obj/machinery/door/window/window = locate() in loc
-	if(!window)
+	var/found_any
+	for(var/obj/machinery/door/window/window in loc)
+		payload(window)
+		found_any = TRUE
+	if(!found_any)
 		log_mapping("[src] at [AREACOORD(src)] couldn't find a windoor at its location!")
-		return
-
-	payload(window)
 
 /obj/effect/mapping_helpers/windoor/access/any/payload(obj/machinery/door/window/window)
+	if(..()) return
 	if(window.req_access != null)
 		log_mapping("[src] at [AREACOORD(src)] tried to set req_one_access, but req_access was already set!")
 	else
@@ -36,15 +44,12 @@
 		window.req_one_access += access_list
 
 /obj/effect/mapping_helpers/windoor/access/all/payload(obj/machinery/door/window/window)
+	if(..()) return
 	if(window.req_one_access != null)
 		log_mapping("[src] at [AREACOORD(src)] tried to set req_one_access, but req_access was already set!")
 	else
 		var/list/access_list = get_access()
 		window.req_access += access_list
-
-/obj/effect/mapping_helpers/windoor/access/proc/get_access()
-	var/list/access = list()
-	return access
 
 // COMMAND
 #define WINDOOR_ACCESS_HELPER_COM(type, access) \
@@ -90,7 +95,7 @@ WINDOOR_ACCESS_HELPER_ENG(external, ACCESS_EXTERNAL_AIRLOCKS)
 WINDOOR_ACCESS_HELPER_ENG(tech_storage, ACCESS_TECH_STORAGE)
 WINDOOR_ACCESS_HELPER_ENG(atmos, ACCESS_ATMOSPHERICS)
 WINDOOR_ACCESS_HELPER_ENG(tcoms, ACCESS_TCOMMS)
-WINDOOR_ACCESS_HELPER_ENG(ce, ACCESS_TCOMMS)
+WINDOOR_ACCESS_HELPER_ENG(ce, ACCESS_CE)
 
 #undef WINDOOR_ACCESS_HELPER_ENG
 
@@ -285,6 +290,6 @@ WINDOOR_ACCESS_HELPER_ADM(living, ACCESS_CENT_LIVING)
 WINDOOR_ACCESS_HELPER_ADM(storage, ACCESS_CENT_STORAGE)
 WINDOOR_ACCESS_HELPER_ADM(teleporter, ACCESS_CENT_TELEPORTER)
 WINDOOR_ACCESS_HELPER_ADM(captain, ACCESS_CENT_CAPTAIN)
-WINDOOR_ACCESS_HELPER_ADM(bar, ACCESS_CENT_THUNDER)
+WINDOOR_ACCESS_HELPER_ADM(bar, ACCESS_CENT_BAR)
 
 #undef WINDOOR_ACCESS_HELPER_ADM
