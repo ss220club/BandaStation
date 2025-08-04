@@ -23,6 +23,9 @@
 
 // Ghetto
 // Department's Lower Floor
+/area/station/commons/locker/ghetto
+	name = "Locker Room Lower Floor"
+
 /area/station/service/library/ghetto
 	name = "Library Lower Floor"
 
@@ -84,10 +87,6 @@
 	name = "Ghetto Abandoned Medbay Morgue"
 	icon_state = "morgue_maint"
 
-/area/station/maintenance/department/medical/ghetto/central
-	name = "Ghetto Abandoned Medbay Entrance"
-	icon_state = "medbay_maint_central"
-
 // Non-Department
 /area/station/maintenance/ghetto/port
 	name = "Ghetto Port Maintenance"
@@ -108,10 +107,6 @@
 /area/station/maintenance/ghetto/starboard
 	name = "Ghetto Starboard Maintenance"
 	icon_state = "starboardmaint"
-
-/area/station/maintenance/ghetto/starboard/aft
-	name = "Ghetto Aft Starboard Maintenance"
-	icon_state = "asmaint"
 
 /area/station/maintenance/ghetto/fore
 	name = "Ghetto Fore Maintenance"
