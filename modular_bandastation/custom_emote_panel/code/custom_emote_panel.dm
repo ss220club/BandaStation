@@ -152,7 +152,7 @@
 
 					var/message_override = tgui_input_text(client.mob, "Какой кастомный текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", ru_emote_name(emote_key), TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 					if(!message_override)
-						to_chat(client, span_warning("Текст \"[message_override]\" не подходит!"))
+						to_chat(client, span_warning("Кастомный текст эмоции не подходит!"))
 						return
 
 					suggested_name = ru_emote_name(emote_key)
