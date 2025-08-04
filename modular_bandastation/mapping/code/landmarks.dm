@@ -9,20 +9,10 @@
 	access_list += list(ACCESS_SYNDICATE_COMMAND)
 	return access_list
 
-// MARK: Accesses
-/obj/effect/mapping_helpers/airlock/access/all/syndicate/command/get_access()
-	var/list/access_list = ..()
-	access_list += ACCESS_SYNDICATE_COMMAND
-	return access_list
-
-/obj/effect/mapping_helpers/airlock/access/any/syndicate/command/get_access()
-	var/list/access_list = ..()
-	access_list += list(ACCESS_SYNDICATE_COMMAND)
-	return access_list
-
 // MARK: Windoor Access Helpers
 /obj/effect/mapping_helpers/windoor/access
 	layer = DOOR_ACCESS_HELPER_LAYER
+	icon = 'modular_bandastation/mapping/icons/landmarks/access_helpers.dmi'
 	icon_state = "access_helper"
 
 /obj/effect/mapping_helpers/windoor/proc/payload(obj/machinery/door/window/window)
@@ -236,9 +226,22 @@ WINDOOR_ACCESS_HELPER_SUP(bit_den, ACCESS_BIT_DEN)
 WINDOOR_ACCESS_HELPER_SYN(general, ACCESS_SYNDICATE)
 WINDOOR_ACCESS_HELPER_SYN(leader, ACCESS_SYNDICATE_LEADER)
 
-#undef WINDOOR_ACCESS_HELPER_SYN
+// BOUNTY HUNTER
+#define WINDOOR_ACCESS_HELPER_HUNT(type, access) \
+	/obj/effect/mapping_helpers/windoor/access/any/hunter/##type { \
+		icon_state = "access_helper_hunt"; \
+		access_list += access; \
+	} \
+	/obj/effect/mapping_helpers/windoor/access/all/hunter/##type { \
+		icon_state = "access_helper_hunt"; \
+		access_list += access; \
+	}
 
-// AWAY ACCESS HELPERS
+WINDOOR_ACCESS_HELPER_HUNT(general, ACCESS_HUNTER)
+
+#undef WINDOOR_ACCESS_HELPER_HUNT
+
+// AWAY
 #define WINDOOR_ACCESS_HELPER_AWAY(type, access) \
 	/obj/effect/mapping_helpers/windoor/access/any/away/##type { \
 		icon_state = "access_helper_awy"; \
