@@ -9,6 +9,7 @@
 #define RENAME_EMOTE "Переименовать"
 #define CUSTOMIZE_EMOTE "Кастомизировать"
 #define CHANGE_EMOTE_TEXT "Изменить текст"
+#define CANCEL_EMOTE_ADDITION "Добавление эмоции отменено."
 
 /*
 	Панель эмоутов была переделана, и теперь вместо простого ассоциативного списка `emotes["sigh"] = "вздох"`
@@ -122,7 +123,7 @@
 
 			var/emote_type_string = tgui_alert(client.mob, "Какую эмоцию добавить в панель?", "Выбор типа эмоции", list("Обычная", "С кастомным текстом", "*me"))
 			if(!emote_type_string)
-				to_chat(client, span_warning("Добавление эмоции отменено."))
+				to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 				return
 
 			var/suggested_name = ""
@@ -130,7 +131,7 @@
 				if("Обычная")
 					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
 					if(!picked_emote)
-						to_chat(client, span_warning("Добавление эмоции отменено."))
+						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
 					var/emote_key = picked_emote.key
@@ -147,7 +148,7 @@
 				if("С кастомным текстом")
 					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
 					if(!picked_emote)
-						to_chat(client, span_warning("Добавление эмоции отменено."))
+						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
 					var/emote_key = picked_emote.key
@@ -157,7 +158,7 @@
 
 					var/message_override = tgui_input_text(client.mob, "Какой кастомный текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", picked_emote.name, TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 					if(!message_override)
-						to_chat(client, span_warning("Кастомный текст эмоции не подходит!"))
+						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
 					suggested_name = picked_emote.name
@@ -170,7 +171,7 @@
 				if("*me")
 					var/message = tgui_input_text(client.mob, "Какой текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", "", TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 					if(!message)
-						to_chat(client, span_warning("Текст \"[message]\" не подходит!"))
+						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
 					suggested_name = copytext_char(message, 1, TGUI_PANEL_MAX_EMOTE_NAME_LENGTH + 1)
@@ -181,7 +182,7 @@
 
 			var/emote_name = tgui_input_text(client.mob, "Какое название эмоции будет в панели?", "Название эмоции", suggested_name, TGUI_PANEL_MAX_EMOTE_NAME_LENGTH, FALSE, TRUE)
 			if(!emote_name)
-				to_chat(client, span_warning("Название \"[emote_name]\" не подходит!"))
+				to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 				return
 			if(emote_name in client.prefs.custom_emote_panel)
 				to_chat(client, span_warning("Эмоция \"[emote_name]\" уже существует!"))
@@ -332,3 +333,4 @@
 #undef RENAME_EMOTE
 #undef CUSTOMIZE_EMOTE
 #undef CHANGE_EMOTE_TEXT
+#undef CANCEL_EMOTE_ADDITION
