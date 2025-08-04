@@ -236,7 +236,7 @@
 
 /atom/movable/screen/alert/hypnosis
 	name = "Гипноз"
-	desc = "Что-то гипнотизирует вас, но на самом деле не уверены в том, что именно."
+	desc = "Что-то гипнотизирует вас, но вы не уверены, что именно."
 	icon_state = ALERT_HYPNOSIS
 	var/phrase
 
@@ -256,7 +256,7 @@
 /atom/movable/screen/alert/embeddedobject
 	name = "Застрявший предмет"
 	desc = "Что-то застряло в вашей плоти и вызывает сильное кровотечение. Со временем оно может выпасть, но хирургическое вмешательство - \
-		самый безопасный способ. Если готовы рискнуть то, осмотрите себя и нажмите на подчеркнутый пункт, чтобы извлечь предмет."
+		самый безопасный способ. Если готовы рискнуть, то осмотрите себя и нажмите на подчеркнутый пункт, чтобы извлечь предмет."
 	icon_state = ALERT_EMBEDDED_OBJECT
 	clickable_glow = TRUE
 
@@ -288,7 +288,7 @@
 
 /atom/movable/screen/alert/veryhighgravity
 	name = "Сокрушительная гравитация"
-	desc = "Вас давит высокая гравитация, из-за чего сбор предметов и передвижение замедлятся. Так же вы чувствуете как ваши кости начинают трещать!"
+	desc = "Вас давит высокая гравитация, из-за чего сбор предметов и передвижение замедлятся. Также вы чувствуете как ваши кости начинают трещать!"
 	icon_state = "paralysis"
 
 /atom/movable/screen/alert/fire
@@ -467,7 +467,7 @@
 	SIGNAL_HANDLER
 
 	if(QDELETED(offer.offered_item))
-		examine_list += span_warning("рука [source] кажется напряженной, кажется, что [source] вот-вот отдернет руку...")
+		examine_list += span_warning("Рука [source] напряжена, и кажется, что [source] вот-вот её отдёрнет...")
 
 /atom/movable/screen/alert/give/hand
 	screentip_override_text = "Взять руку"
@@ -915,12 +915,12 @@
 			left_click_text = "Покинуть"
 		else
 			left_click_text = "Присоединиться"
-		context[SCREENTIP_CONTEXT_LMB] = "[left_click_text] выбран"
+		context[SCREENTIP_CONTEXT_LMB] = "[left_click_text]"
 		if(poll.ignoring_category)
 			var/selected_never = FALSE
 			if(owner.ckey in GLOB.poll_ignore[poll.ignoring_category])
 				selected_never = TRUE
-			context[SCREENTIP_CONTEXT_ALT_LMB] = "[selected_never ? "Отменить " : ""]Никогда в этом раунде"
+			context[SCREENTIP_CONTEXT_ALT_LMB] = selected_never ? "Разрешить приглашения в этом раунде" : "Не приглашать в этом раунде"
 		if(poll.jump_to_me && isobserver(owner))
 			context[SCREENTIP_CONTEXT_CTRL_LMB] = "Переместиться к событию"
 	return CONTEXTUAL_SCREENTIP_SET
