@@ -281,7 +281,7 @@
 
 /obj/item/food/breadslice/creamcheese
 	name = "cream cheese bread slice"
-	desc = "Вкуснейший омтик!"
+	desc = "Вкуснейший ломтик!"
 	icon_state = "creamcheesebreadslice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,

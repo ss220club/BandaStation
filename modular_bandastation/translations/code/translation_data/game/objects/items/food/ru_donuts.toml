@@ -117,6 +117,15 @@ instrumental = "пончиком с желе"
 prepositional = "пончике с желе"
 gender = "male"
 
+["slime jelly donut"]
+nominative = "пончик со слаймовым желе"
+genitive = "пончика со слаймовым желе"
+dative = "пончику со слаймовым желе"
+accusative = "пончик со слаймовым желе"
+instrumental = "пончиком со слаймовым желе"
+prepositional = "пончике со слаймовым желе"
+gender = "male"
+
 ["pink jelly donut"]
 nominative = "розовый пончик с желе"
 genitive = "розового пончика с желе"
@@ -124,6 +133,15 @@ dative = "розовому пончику с желе"
 accusative = "розовый пончик с желе"
 instrumental = "розовым пончиком с желе"
 prepositional = "розовом пончике с желе"
+gender = "male"
+
+["pink slime jelly donut"]
+nominative = "розовый пончик со слаймовым желе"
+genitive = "розового пончика со слаймовым желе"
+dative = "розовому пончику со слаймовым желе"
+accusative = "розовый пончик со слаймовым желе"
+instrumental = "розовым пончиком со слаймовым желе"
+prepositional = "розовом пончике со слаймовым желе"
 gender = "male"
 
 ["spaceman's jelly donut"]
@@ -135,6 +153,15 @@ instrumental = "пончиком космонавта с желе"
 prepositional = "пончике космонавта с желе"
 gender = "male"
 
+["spaceman's slime jelly donut"]
+nominative = "пончик космонавта со слаймовым желе"
+genitive = "пончика космонавта со слаймовым желе"
+dative = "пончику космонавта со слаймовым желе"
+accusative = "пончик космонавта со слаймовым желе"
+instrumental = "пончиком космонавта со слаймовым желе"
+prepositional = "пончике космонавта со слаймовым желе"
+gender = "male"
+
 ["apple jelly donut"]
 nominative = "яблочный пончик с желе"
 genitive = "яблочного пончика с желе"
@@ -142,6 +169,15 @@ dative = "яблочному пончику с желе"
 accusative = "яблочный пончик с желе"
 instrumental = "яблочным пончиком с желе"
 prepositional = "яблочном пончике с желе"
+gender = "male"
+
+["apple slime jelly donut"]
+nominative = "яблочный пончик со слаймовым желе"
+genitive = "яблочного пончика со слаймовым желе"
+dative = "яблочному пончику со слаймовым желе"
+accusative = "яблочный пончик со слаймовым желе"
+instrumental = "яблочным пончиком со слаймовым желе"
+prepositional = "яблочном пончике со слаймовым желе"
 gender = "male"
 
 ["caramel jelly donut"]
@@ -153,6 +189,16 @@ instrumental = "карамельным пончиком с желе"
 prepositional = "карамельном пончике с желе"
 gender = "male"
 
+["caramel slime jelly donut"]
+nominative = "карамельный пончик со слаймовым желе"
+genitive = "карамельного пончика со слаймовым желе"
+dative = "карамельному пончику со слаймовым желе"
+accusative = "карамельный пончик со слаймовым желе"
+instrumental = "карамельным пончиком со слаймовым желе"
+prepositional = "карамельном пончике со слаймовым желе"
+gender = "male"
+
+
 ["chocolate jelly donut"]
 nominative = "шоколадный пончик с желе"
 genitive = "шоколадного пончика с желе"
@@ -160,6 +206,15 @@ dative = "шоколадному пончику с желе"
 accusative = "шоколадный пончик с желе"
 instrumental = "шоколадным пончиком с желе"
 prepositional = "шоколадном пончике с желе"
+gender = "male"
+
+["chocolate slime jelly donut"]
+nominative = "шоколадный пончик со слаймовым желе"
+genitive = "шоколадного пончика со слаймовым желе"
+dative = "шоколадному пончику со слаймовым желе"
+accusative = "шоколадный пончик со слаймовым желе"
+instrumental = "шоколадным пончиком со слаймовым желе"
+prepositional = "шоколадном пончике со слаймовым желе"
 gender = "male"
 
 ["blumpkin jelly donut"]
@@ -171,6 +226,15 @@ instrumental = "блампкин-пончиком с желе"
 prepositional = "блампкин-пончике с желе"
 gender = "male"
 
+["blumpkin slime jelly donut"]
+nominative = "блампкин-пончик со слаймовым желе"
+genitive = "блампкин-пончика со слаймовым желе"
+dative = "блампкин-пончика со слаймовым желе"
+accusative = "блампкин-пончик со слаймовым желе"
+instrumental = "блампкин-пончиком со слаймовым желе"
+prepositional = "блампкин-пончике со слаймовым желе"
+gender = "male"
+
 ["bungo jelly donut"]
 nominative = "бунговый пончик с желе"
 genitive = "бунгового пончика с желе"
@@ -178,6 +242,15 @@ dative = "бунговому пончику с желе"
 accusative = "бунговый пончик с желе"
 instrumental = "бунговым пончиком с желе"
 prepositional = "бунговом пончике с желе"
+gender = "male"
+
+["bungo slime jelly donut"]
+nominative = "бунговый пончик со слаймовым желе"
+genitive = "бунгового пончика со слаймовым желе"
+dative = "бунговому пончику со слаймовым желе"
+accusative = "бунговый пончик со слаймовым желе"
+instrumental = "бунговым пончиком со слаймовым желе"
+prepositional = "бунговом пончике со слаймовым желе"
 gender = "male"
 
 ["matcha jelly donut"]
@@ -189,6 +262,15 @@ instrumental = "пончиком с матчей и желе"
 prepositional = "пончике с матчей и желе"
 gender = "male"
 
+["matcha slime jelly donut"]
+nominative = "пончик с матчей и слаймовым желе"
+genitive = "пончика с матчей и слаймовым желе"
+dative = "пончику с матчей и слаймовым желе"
+accusative = "пончик с матчей и слаймовым желе"
+instrumental = "пончиком с матчей и слаймовым желе"
+prepositional = "пончике с матчей и слаймовым желе"
+gender = "male"
+
 ["sweet pea jelly donut"]
 nominative = "пончик с душистым горошком и желе"
 genitive = "пончика с душистым горошком и желе"
@@ -196,4 +278,13 @@ dative = "пончику с душистым горошком и желе"
 accusative = "пончик с душистым горошком и желе"
 instrumental = "пончиком с душистым горошком и желе"
 prepositional = "пончике с душистым горошком и желе"
+gender = "male"
+
+["sweet pea slime jelly donut"]
+nominative = "пончик с душистым горошком и слаймовым желе"
+genitive = "пончика с душистым горошком и слаймовым желе"
+dative = "пончику с душистым горошком и слаймовым желе"
+accusative = "пончик с душистым горошком и слаймовым желе"
+instrumental = "пончиком с душистым горошком и слаймовым желе"
+prepositional = "пончике с душистым горошком и слаймовым желе"
 gender = "male"

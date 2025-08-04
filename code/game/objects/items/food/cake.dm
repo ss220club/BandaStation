@@ -323,7 +323,7 @@
 	SIGNAL_HANDLER
 	to_chat(eater, "<font color='red' size='5'>Вы продолжаете есть торт, и случайно раните себя встроенным энергетическим кинжалом!</font>")
 	if(eater != feeder)
-		log_combat(feeder, eater, "кормит энергетическим тортом", src)
+		log_combat(feeder, eater, "fed an energy cake to", src)
 	eater.apply_damage(18, BRUTE, BODY_ZONE_HEAD)
 	playsound(eater, 'sound/items/weapons/blade1.ogg', 5, TRUE)
 
@@ -603,7 +603,7 @@
 
 /obj/item/food/cakeslice/brioche
 	name = "brioche cake slice"
-	desc = "Восхитительный сладкий хлеб. Кому нужно что либо другое?"
+	desc = "Восхитительный сладкий хлеб. Кому нужно что-либо другое?"
 	icon_state = "briochecake_slice"
 	tastes = list("cake" = 4, "butter" = 2, "cream" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR

@@ -375,7 +375,7 @@
 //////////////////////////SLIME DONUTS/////////////////////////
 
 /obj/item/food/donut/jelly/slimejelly
-	name = "jelly donut"
+	name = "slime jelly donut"
 	desc = "Желевидуешь?"
 	extra_reagent = /datum/reagent/toxin/slimejelly
 	foodtypes = GRAIN|DAIRY|JUNKFOOD|SUGAR|FRIED|BREAKFAST|TOXIC
@@ -384,7 +384,7 @@
 	icon_state = "jelly"
 
 /obj/item/food/donut/jelly/slimejelly/berry
-	name = "pink jelly donut"
+	name = "pink slime jelly donut"
 	desc = "Отлично сочетается с соевым латте."
 	icon_state = "jelly_pink"
 	food_reagents = list(
@@ -397,7 +397,7 @@
 	foodtypes = parent_type::foodtypes|FRUIT
 
 /obj/item/food/donut/jelly/slimejelly/trumpet
-	name = "spaceman's jelly donut"
+	name = "spaceman's slime jelly donut"
 	desc = "Отлично сочетается с холодным стаканом молка. Да, это то самое растительное молоко. Ужасно."
 	icon_state = "jelly_purple"
 	food_reagents = list(
@@ -411,7 +411,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/donut/jelly/slimejelly/apple
-	name = "apple jelly donut"
+	name = "apple slime jelly donut"
 	desc = "Отлично сочетается с рюмкой коричного шнапса."
 	icon_state = "jelly_green"
 	food_reagents = list(
@@ -426,7 +426,7 @@
 	foodtypes = parent_type::foodtypes|FRUIT
 
 /obj/item/food/donut/jelly/slimejelly/caramel
-	name = "caramel jelly donut"
+	name = "caramel slime jelly donut"
 	desc = "Отлично сочетается с кружкой горячего какао."
 	icon_state = "jelly_beige"
 	food_reagents = list(
@@ -440,7 +440,7 @@
 	is_decorated = TRUE
 
 /obj/item/food/donut/jelly/slimejelly/choco
-	name = "chocolate jelly donut"
+	name = "chocolate slime jelly donut"
 	desc = "Отлично сочетается со стаканом тёплого молока."
 	icon_state = "jelly_choc"
 	food_reagents = list(
@@ -455,7 +455,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/donut/jelly/slimejelly/blumpkin
-	name = "blumpkin jelly donut"
+	name = "blumpkin slime jelly donut"
 	desc = "Отлично сочетается с кружкой успокаивающего блампкина по пьяни (пожалуйста, не гуглите, что это такое)."
 	icon_state = "jelly_blue"
 	food_reagents = list(
@@ -471,7 +471,7 @@
 	foodtypes = parent_type::foodtypes|VEGETABLES
 
 /obj/item/food/donut/jelly/slimejelly/bungo
-	name = "bungo jelly donut"
+	name = "bungo slime jelly donut"
 	desc = "Отлично сочетается с банкой хиппи-удовольствия."
 	icon_state = "jelly_yellow"
 	food_reagents = list(
@@ -485,7 +485,7 @@
 	is_decorated = TRUE
 
 /obj/item/food/donut/jelly/slimejelly/matcha
-	name = "matcha jelly donut"
+	name = "matcha slime jelly donut"
 	desc = "Отлично сочетается с чашкой чая."
 	icon_state = "jelly_olive"
 	food_reagents = list(
@@ -499,7 +499,7 @@
 	is_decorated = TRUE
 
 /obj/item/food/donut/jelly/slimejelly/laugh
-	name = "sweet pea jelly donut"
+	name = "sweet pea slime jelly donut"
 	desc = "Отлично сочетается с бутылкой бурбона «Бастион»!"
 	icon_state = "jelly_laugh"
 	food_reagents = list(
