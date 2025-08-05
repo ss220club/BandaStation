@@ -13,6 +13,7 @@
 	force = 10
 	throwforce = 10
 	w_class = WEIGHT_CLASS_BULKY
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/wood = SHEET_MATERIAL_AMOUNT * 2)
 	attack_verb_continuous = list("whacks", "breaches", "bulldozes", "flings", "thwachs")
 	attack_verb_simple = list("breach", "hammer", "whack", "slap", "thwach", "fling")
 	armor_type = /datum/armor/item_sledgehammer
@@ -37,6 +38,7 @@
 	demolition_mod = 6
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 1
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 2)
 	usesound = 'sound/items/tools/crowbar.ogg'
 	throw_range = 3
 	tear_time = 5 SECONDS
@@ -50,11 +52,13 @@
 	base_icon_state = "sledgehammer_syndie"
 	worn_icon_state = "sledgehammer_syndie"
 	force = 10
-	throwforce = 20
+	throwforce = 30
 	resistance_flags = FIRE_PROOF | ACID_PROOF | BOMB_PROOF
+	custom_materials = list(/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 5, /datum/material/plasma = SHEET_MATERIAL_AMOUNT * 2, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 2)
 	force_unwielded = 15
-	force_wielded = 30
-	demolition_mod = 10
+	force_wielded = 45
+	armour_penetration = 30
+	demolition_mod = 5
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 2
 	usesound = 'sound/items/tools/crowbar.ogg'
@@ -108,3 +112,37 @@
 
 	sledge_hit(target, user, modifiers)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
+
+/datum/uplink_item/role_restricted/syndiesledge
+	name = "Syndicate Breaching Sledgehammer"
+	desc = "Plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders."
+	item = /obj/item/sledgehammer/syndie
+	cost = 13
+	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER, JOB_ATMOSPHERIC_TECHNICIAN)
+
+/datum/uplink_item/weapon_kits/medium_cost/syndiesledge
+	name = "Syndicate Breaching Sledgehammer (Hard)"
+	desc = "Contains a plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders. Comes with a welding helmet for your safety on the workplace!"
+	item = /obj/item/storage/toolbox/guncase/syndiesledge
+	purchasable_from = UPLINK_ALL_SYNDIE_OPS
+	surplus = 0
+
+/obj/item/storage/toolbox/guncase/syndiesledge
+	name = "syndicate sledgehammer case"
+	weapon_to_spawn = /obj/item/sledgehammer/syndie
+	extra_to_spawn = /obj/item/clothing/head/utility/welding
+
+/obj/item/storage/toolbox/guncase/syndiesledge/PopulateContents()
+	new weapon_to_spawn (src)
+	new extra_to_spawn (src)
+
+/datum/crafting_recipe/sledgehammer
+	name = "Sledgehammer"
+	result = /obj/item/sledgehammer
+	reqs = list(
+		/obj/item/stack/sheet/mineral/wood = 10,
+		/obj/item/stack/sheet/plasteel = 25,
+	)
+	tool_behaviors = list(TOOL_WRENCH, TOOL_WELDER)
+	time = 10 SECONDS
+	category = CAT_WEAPON_MELEE
