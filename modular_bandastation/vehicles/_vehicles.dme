@@ -1,7 +1,12 @@
+// Modpack datum
 #include "_vehicles.dm"
 
+// Types categories
 #include "code/armored.dm"
-
+#include "code/multitile.dm"
+#include "code/hitboxes.dm"
 #include "code/interiors/interior.dm"
 #include "code/interiors/armored_interior.dm"
 
+// Vehicle types
+#include "code/apc.dm"

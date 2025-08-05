@@ -64,6 +64,7 @@
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"
 #include "turfs/_turfs.dme"
+#include "vehicles/_vehicles.dme"
 #include "world_topics/_world_topics.dme"
 // --- MODULES END --- //
 

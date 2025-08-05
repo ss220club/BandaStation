@@ -1,3 +1,5 @@
+/*
+
 /obj/vehicle/sealed/armored
 	name = "\improper MT - Shortstreet MK4"
 	desc = "An adorable chunk of metal with an alarming amount of firepower designed to crush, immolate, destroy and maim anything that Nanotrasen wants it to. This model contains advanced Bluespace technology which allows a TARDIS-like amount of room on the inside."
@@ -64,6 +66,9 @@
 	var/list/easy_load_list
 	///Wether we are strafing
 	var/strafe = FALSE
+
+*/
+/*
 
 /obj/vehicle/sealed/armored/Initialize(mapload)
 	easy_load_list = typecacheof(easy_load_list)
@@ -724,4 +729,4 @@
 		return
 	INVOKE_ASYNC(selected, TYPE_PROC_REF(/obj/item/armored_weapon, begin_fire), user, target, modifiers)
 
-
+*/

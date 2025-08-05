@@ -1,3 +1,5 @@
+/*
+
 /datum/interior/armored
 	template = /datum/map_template/interior/medium_tank
 	///main cannon ammo management
@@ -257,3 +259,5 @@
 
 /turf/closed/interior/tank/door/som/get_enter_location()
 	return get_step(src, NORTH)
+
+*/
