@@ -14,6 +14,7 @@
 
 #include "code/items/banners.dm"
 #include "code/items/cards_ids.dm"
+#include "code/items/machine_circuitboards.dm"
 #include "code/items/hampters.dm"
 #include "code/items/id_stickers.dm"
 #include "code/items/instruments.dm"
@@ -118,6 +119,7 @@
 #include "code/machinery/photocopier.dm"
 #include "code/machinery/suit_storage_unit.dm"
 #include "code/machinery/vending/vending.dm"
+#include "code/machinery/teapot.dm"
 
 #include "code/structures/chairs.dm"
 #include "code/structures/displaycase.dm"
