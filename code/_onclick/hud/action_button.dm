@@ -64,7 +64,7 @@
 	var/trigger_flags
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		trigger_flags |= TRIGGER_SECONDARY_ACTION
-	linked_action.Trigger(trigger_flags = trigger_flags)
+	linked_action.Trigger(usr, trigger_flags = trigger_flags)
 	return TRUE
 
 /atom/movable/screen/movable/action_button/proc/begin_creating_bind(mob/user)

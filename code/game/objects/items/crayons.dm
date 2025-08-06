@@ -425,7 +425,7 @@
 
 /obj/item/toy/crayon/proc/crayon_text_strip(text)
 	text = copytext(text, 1, MAX_MESSAGE_LEN)
-	var/static/regex/crayon_regex = new /regex(@"[^\w!?,.=&%#+/\-]", "ig")
+	var/static/regex/crayon_regex = new /regex(@"[^\wА-Яа-яЁё!?,.=&%#+/\-]", "ig") // BANDASTATION EDIT - Russian Crayons
 	return LOWER_TEXT(crayon_regex.Replace(text, ""))
 
 /// Is this a valid object for use_on to run on?
@@ -433,6 +433,13 @@
 	if(!isturf(target) && !istype(target, /obj/effect/decal/cleanable))
 		return FALSE
 	return TRUE
+
+// BANDASTATION ADD START - Russian Crayons
+/obj/item/toy/crayon/proc/get_unicode_letter(letter)
+	var/char_code = text2ascii(letter)
+	if((char_code >= 1072 && char_code <= 1103) || char_code == 1105)
+		return "u[char_code]"
+// BANDASTATION ADD END - Russian Crayons
 
 /// Attempts to color the target.
 /obj/item/toy/crayon/proc/use_on(atom/target, mob/user, list/modifiers)
@@ -536,6 +543,10 @@
 
 	if(length(text_buffer))
 		drawing = text_buffer[1]
+		// BANDASTATION ADD START - Russian Crayons
+		if(length(drawing) != length_char(drawing))
+			drawing = get_unicode_letter(drawing)
+		// BANDASTATION ADD END - Russian Crayons
 
 
 	var/list/turf/affected_turfs = list(target)

@@ -45,7 +45,7 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 	/// BANDASATION REMOVAL START - Remove Fun
 	// /obj/item/grenade/chem_grenade/glitter/pink = 1,
 	// /obj/item/grenade/chem_grenade/glitter/blue = 1,
-	// /obj/item/grenade/chem_grenade/glitter/white = 1,
+	// /obj/item/grenade/chem_grenade/glitter = 1,
 	/// BANDASATION REMOVAL END - Remove Fun
 	/obj/item/toy/eightball = 2,
 	/obj/item/toy/windup_toolbox = 2,
