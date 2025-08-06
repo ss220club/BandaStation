@@ -29865,7 +29865,7 @@
 /obj/effect/spawner/structure/window,
 /obj/structure/barricade/wooden/crude,
 /obj/machinery/door/poddoor/shutters,
-/turf/open/floor/iron/white/textured,
+/turf/open/floor/plating,
 /area/station/security/medical)
 "hhY" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -54184,8 +54184,8 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/service/kitchen/abandoned)
 "nbq" = (
-/obj/structure/ladder,
-/obj/effect/turf_decal/stripes/box,
+/obj/structure/rack,
+/obj/effect/spawner/random/maintenance,
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
@@ -182305,7 +182305,7 @@ jVA
 jVA
 wNd
 oBy
-nbq
+qgy
 oCL
 oBy
 hEU
@@ -182562,7 +182562,7 @@ oBy
 eHS
 fVq
 oBy
-qgy
+nbq
 oCL
 oCL
 hCE
