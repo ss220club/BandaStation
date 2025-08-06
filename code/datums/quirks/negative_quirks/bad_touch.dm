@@ -1,12 +1,12 @@
 /datum/quirk/bad_touch
 	name = "Bad Touch"
-	desc = "You don't like hugs. You'd really prefer if people just left you alone."
+	desc = "Вы не любитель объятий. Вы бы предпочли, чтобы люди не трогали вас вовсе..."
 	icon = "tg-bad-touch"
 	mob_trait = TRAIT_BADTOUCH
 	value = -1
-	gain_text = span_danger("You just want people to leave you alone.")
-	lose_text = span_notice("You could use a big hug.")
-	medical_record_text = "Patient has disdain for being touched. Potentially has undiagnosed haphephobia."
+	gain_text = span_danger("Вы просто хотите, чтобы люди оставили вас в покое.")
+	lose_text = span_notice("Вам бы не помешало немного объятий.")
+	medical_record_text = "Пациент с отвращением относится к прикосновениям. Потенциально имеет недиагностированную гафефобию."
 	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_MOODLET_BASED
 	hardcore_value = 1
 	mail_goodies = list(/obj/item/reagent_containers/spray/pepper) // show me on the doll where the bad man touched you

@@ -1,7 +1,7 @@
 
 //make incision
 /datum/surgery_step/incise
-	name = "make incision (scalpel)"
+	name = "сделайте надрез (скальпель)"
 	implements = list(
 		TOOL_SCALPEL = 100,
 		/obj/item/melee/energy/sword = 75,
@@ -17,11 +17,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to make an incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to make an incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to make an incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете делать надрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a stabbing in your [target.parse_zone_with_bodypart(target_zone)].")
+	display_pain(target, "Вы чувствуете колющую боль в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)].")
 
 /datum/surgery_step/incise/tool_check(mob/user, obj/item/tool)
 	if(implement_type == /obj/item && !tool.get_sharpness())
@@ -37,9 +37,9 @@
 			display_results(
 				user,
 				target,
-				span_notice("[blood_name] pools around the incision in [human_target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-				span_notice("[blood_name] pools around the incision in [human_target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-				span_notice("[blood_name] pools around the incision in [human_target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+				span_notice("Вокруг [target.parse_zone_with_bodypart(target_zone, declent = GENITIVE)] у [human_target.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг [target.parse_zone_with_bodypart(target_zone, declent = GENITIVE)] у [human_target.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг [target.parse_zone_with_bodypart(target_zone, declent = GENITIVE)] у [human_target.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
 			)
 			var/obj/item/bodypart/target_bodypart = target.get_bodypart(target_zone)
 			if(target_bodypart)
@@ -50,15 +50,15 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to <i>carefully</i> make an incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to <i>carefully</i> make an incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to <i>carefully</i> make an incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете <i>осторожно</i> делать надрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает <i>осторожно</i> делать надрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает <i>осторожно</i> делать надрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a <i>careful</i> stabbing in your [target.parse_zone_with_bodypart(target_zone)].")
+	display_pain(target, "Вы чувствуете <i>осторожный</i> колющий удар в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)].")
 
 //clamp bleeders
 /datum/surgery_step/clamp_bleeders
-	name = "clamp bleeders (hemostat)"
+	name = "зажмите кровеносные сосуды (гемостат)"
 	implements = list(
 		TOOL_HEMOSTAT = 100,
 		TOOL_WIRECUTTER = 60,
@@ -71,11 +71,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to clamp bleeders in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to clamp bleeders in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to clamp bleeders in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете зажимать кровеносные сосуды в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает зажимать кровеносные сосуды в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает зажимать кровеносные сосуды в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a pinch as the bleeding in your [target.parse_zone_with_bodypart(target_zone)] is slowed.")
+	display_pain(target, "Вы чувствуете укол, после чего кровотечение в вашей [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] замедляется.")
 
 /datum/surgery_step/clamp_bleeders/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results)
 	if(locate(/datum/surgery_step/saw) in surgery.steps)
@@ -89,7 +89,7 @@
 
 //retract skin
 /datum/surgery_step/retract_skin
-	name = "retract skin (retractor)"
+	name = "раздвиньте кожу (ретрактор)"
 	implements = list(
 		TOOL_RETRACTOR = 100,
 		TOOL_SCREWDRIVER = 45,
@@ -103,15 +103,15 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to retract the skin in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to retract the skin in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to retract the skin in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете раздвигать кожу в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинаете раздвигать кожу в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинаете раздвигать кожу в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a severe stinging pain spreading across your [target.parse_zone_with_bodypart(target_zone)] as the skin is pulled back!")
+	display_pain(target, "Вы чувствуете сильную жгучую боль, распространяющуюся везде по [target.parse_zone_with_bodypart(target_zone, declent = DATIVE)], по мере того, как кожа возвращается в прежнее состояние!")
 
 //close incision
 /datum/surgery_step/close
-	name = "mend incision (cautery)"
+	name = "закройте разрез (каутеризатор)"
 	implements = list(
 		TOOL_CAUTERY = 100,
 		/obj/item/gun/energy/laser = 90,
@@ -125,11 +125,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to mend the incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to mend the incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to mend the incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете обрабатывать разрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает обрабатывать разрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает обрабатывать разрез в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your [target.parse_zone_with_bodypart(target_zone)] is being burned!")
+	display_pain(target, "Ваша [target.parse_zone_with_bodypart(target_zone)] прижигается!")
 
 /datum/surgery_step/close/tool_check(mob/user, obj/item/tool)
 	if(implement_type == TOOL_WELDER || implement_type == /obj/item)
@@ -151,7 +151,7 @@
 
 //saw bone
 /datum/surgery_step/saw
-	name = "saw bone (circular saw)"
+	name = "распилите кость (циркулярная пила)"
 	implements = list(
 		TOOL_SAW = 100,
 		/obj/item/shovel/serrated = 75,
@@ -176,11 +176,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to saw through the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to saw through the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to saw through the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете распиливать кость в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает распиливать кость в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает распиливать кость в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a horrid ache spread through the inside of your [target.parse_zone_with_bodypart(target_zone)]!")
+	display_pain(target, "Вы чувствуете ужасную боль внутри [target.parse_zone_with_bodypart(target_zone, declent = GENITIVE)]!")
 
 /datum/surgery_step/saw/tool_check(mob/user, obj/item/tool)
 	if(implement_type == /obj/item && !(tool.get_sharpness() && (tool.force >= 10)))
@@ -192,16 +192,16 @@
 	display_results(
 		user,
 		target,
-		span_notice("You saw [target]'s [target.parse_zone_with_bodypart(target_zone)] open."),
-		span_notice("[user] saws [target]'s [target.parse_zone_with_bodypart(target_zone)] open!"),
-		span_notice("[user] saws [target]'s [target.parse_zone_with_bodypart(target_zone)] open!"),
+		span_notice("Вы вскрываете [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вскрывает [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вскрывает [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(target, "It feels like something just broke in your [target.parse_zone_with_bodypart(target_zone)]!")
+	display_pain(target, "Такое ощущение, что в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] что-то сломано!")
 	return ..()
 
 //drill bone
 /datum/surgery_step/drill
-	name = "drill bone (surgical drill)"
+	name = "просверлите кость (хирургическая дрель)"
 	implements = list(
 		TOOL_DRILL = 100,
 		/obj/item/screwdriver/power = 80,
@@ -214,18 +214,18 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to drill into the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to drill into the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to drill into the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете сверлить прямо в кости в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает сверлить прямо в кости в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает сверлить прямо в кости в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a horrible piercing pain in your [target.parse_zone_with_bodypart(target_zone)]!")
+	display_pain(target, "Вы чувствуете ужасную пронзительную боль в [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)]!")
 
 /datum/surgery_step/drill/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	display_results(
 		user,
 		target,
-		span_notice("You drill into [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] drills into [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
-		span_notice("[user] drills into [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
+		span_notice("Вы просверлили [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] просверливает [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] просверливает [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"),
 	)
 	return ..()
