@@ -300,7 +300,7 @@
 	name = "railgun taser-round"
 	embed_type = /datum/embedding/railgun
 	damage = 10
-	stamina = 70
+	stamina = 60
 	armour_penetration = 30
 
 /obj/projectile/bullet/railgun/taser/on_hit(atom/target, blocked, pierce_hit)
@@ -319,7 +319,7 @@
 	embed_type = null
 
 /datum/embedding/railgun
-	embed_chance = 65
+	embed_chance = 50
 	fall_chance = 3
 	pain_stam_pct = 5
 	pain_mult = 1
