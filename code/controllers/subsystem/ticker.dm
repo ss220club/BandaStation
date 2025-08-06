@@ -409,7 +409,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/concatenated_message = msg.Join()
 	log_admin(concatenated_message)
-	to_chat(GLOB.admins, concatenated_message)
+	to_chat(get_holders_with_rights(R_ADMIN), concatenated_message) /// BANDASTATION EDIT: Proper permissions
 
 /datum/controller/subsystem/ticker/proc/reopen_roundstart_suicide_roles()
 	var/include_command = CONFIG_GET(flag/reopen_roundstart_suicide_roles_command_positions)
