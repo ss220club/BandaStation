@@ -695,7 +695,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 	update_static_data(user)
 	user.log_message("is about to create a cross-sector newscaster channel with the following name: [channel_name]", LOG_GAME)
 	to_chat(
-		GLOB.admins,
+		get_holders_with_rights(R_ADMIN), /// BANDASTATION EDIT: Proper permissions
 		span_adminnotice( \
 			"<b color='orange'>Cross-sector channel creation (OUTGOING):</b> [ADMIN_LOOKUPFLW(user)] is about to create a cross-sector \
 			newscaster channel \"[channel_name]\" (will autoapprove in [DisplayTimeText(approval_time)]): \
