@@ -43,8 +43,10 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 
 	if(sign_up_button)
 		GLOB.lobby_station_traits += src
+		/* BANDASTATION REMOVAL - HTML Title Screen
 		if(SSstation.initialized)
 			SSstation.display_lobby_traits()
+		*/
 	if(trait_processes)
 		START_PROCESSING(SSstation, src)
 	if(trait_to_give)
@@ -87,6 +89,7 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 /datum/station_trait/proc/can_display_lobby_button(client/player)
 	return sign_up_button && !SSticker.HasRoundStarted()
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /// Apply any additional handling we need to our lobby button
 /datum/station_trait/proc/setup_lobby_button(atom/movable/screen/lobby/button/sign_up/lobby_button)
 	SHOULD_CALL_PARENT(TRUE)
@@ -111,6 +114,7 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 /datum/station_trait/proc/on_lobby_button_destroyed(atom/movable/screen/lobby/button/sign_up/lobby_button)
 	SIGNAL_HANDLER
 	lobby_buttons -= lobby_button
+*/
 
 /// Proc ran when round starts. Use this for roundstart effects. By default we clean up our buttons here.
 /datum/station_trait/proc/on_round_start()
@@ -119,6 +123,7 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 
 /// Remove all of our active lobby buttons
 /datum/station_trait/proc/destroy_lobby_buttons()
+/* BANDASTATION REMOVAL - HTML Title Screen
 	for (var/atom/movable/screen/button as anything in lobby_buttons)
 		var/mob/dead/new_player/hud_owner = button.get_mob()
 		if (QDELETED(hud_owner))
@@ -129,6 +134,7 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 			qdel(button)
 			continue
 		using_hud.remove_station_trait_button(src)
+*/
 
 /// Called when overriding a pulsar star command report message.
 /datum/station_trait/proc/get_pulsar_message()

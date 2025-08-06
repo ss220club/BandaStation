@@ -6,7 +6,7 @@
 
 	base_icon_state = "netpod"
 	circuit = /obj/item/circuitboard/machine/netpod
-	desc = "A link to the netverse. It has an assortment of cables to connect yourself to a virtual domain."
+	desc = "Связущее звено с сетевым миром. Здесь есть множество кабелей для подключения себя к виртуальному домену."
 	icon = 'icons/obj/machines/bitrunning.dmi'
 	icon_state = "netpod"
 	max_integrity = 300
@@ -80,26 +80,26 @@
 			. += span_notice("Its hatch can be [EXAMINE_HINT("pried")] [state_open ? "closed" : "open"]")
 
 	if(isnull(server_ref?.resolve()))
-		. += span_infoplain("It's not connected to anything.")
-		. += span_infoplain("Netpods must be built within 4 tiles of a server.")
+		. += span_infoplain("Оно ни к чему не подключено.")
+		. += span_infoplain("Нетподы должны быть построены на расстоянии 4-х тайлов от сервера.")
 		return
 
 	if(!isobserver(user))
-		. += span_infoplain("Drag yourself into the pod to engage the link.")
-		. += span_infoplain("It has limited resuscitation capabilities. Remaining in the pod can heal some injuries.")
-		. += span_infoplain("It has a security system that will alert the occupant if it is tampered with.")
+		. += span_infoplain("Перетащите себя на под, чтобы начать подключение.")
+		. += span_infoplain("Под имеет ограниченные возможности реанимации. Нахождение в поде может вылечить некоторые ранения.")
+		. += span_infoplain("Имеется система безопасности, оповещающая пользователя, если начнется вмешательство с подом.")
 
 	if(isnull(occupant))
-		. += span_infoplain("It's currently unoccupied.")
+		. += span_infoplain("Сейчас внутри пусто.")
 		return
 
-	. += span_infoplain("It's currently occupied by [occupant].")
+	. += span_infoplain("Сейчас внутри находится - [occupant].")
 
 	if(isobserver(user))
-		. += span_notice("As an observer, you can click this netpod to jump to its avatar.")
+		. += span_notice("Как наблюдатель, вы можете щелкнуть по этому нетподу, чтобы перейти к его аватару.")
 		return
 
-	. += span_notice("It can be pried open with a crowbar, but its safety mechanisms will alert the occupant.")
+	. += span_notice("Оно может быть насильно открыто монтировкой, но системы безопасности оповестят пользователя.")
 
 
 /obj/machinery/netpod/update_icon_state()

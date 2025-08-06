@@ -108,7 +108,7 @@
 		return COMPONENT_DRIVER_BLOCK_MOVE
 	var/mob/living/living_parent = parent
 	step(living_parent, direction)
-	var/modified_move_delay = vehicle_move_delay
+	var/modified_move_delay = modified_move_delay(vehicle_move_delay)
 	if(HAS_TRAIT(user, TRAIT_ROUGHRIDER)) // YEEHAW!
 		switch(HAS_TRAIT(user, TRAIT_PRIMITIVE) ? SANITY_LEVEL_GREAT : user.mob_mood?.sanity_level)
 			if(SANITY_LEVEL_GREAT)

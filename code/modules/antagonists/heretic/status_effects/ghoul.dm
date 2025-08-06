@@ -36,12 +36,12 @@
 	. = ..()
 
 	if(master_mind)
-		linked_alert.desc += " You are an eldritch monster reanimated to serve its master, [master_mind]."
+		linked_alert.desc += " Вы мистический монстр, возрожденный, чтобы служить своему хозяину, [master_mind]."
 	if(isnum(new_max_health))
 		if(new_max_health > initial(new_owner.maxHealth))
-			linked_alert.desc += " You are stronger in this form."
+			linked_alert.desc += " В этой форме вы сильнее."
 		else
-			linked_alert.desc += " You are more fragile in this form."
+			linked_alert.desc += " В этой форме вы более хрупки."
 
 /datum/status_effect/ghoul/on_apply()
 	if(!ishuman(owner))
@@ -102,5 +102,5 @@
 
 /atom/movable/screen/alert/status_effect/ghoul
 	name = "Flesh Servant"
-	desc = "You are a Ghoul!"
+	desc = "Вы гуль!"
 	icon_state = ALERT_MIND_CONTROL
