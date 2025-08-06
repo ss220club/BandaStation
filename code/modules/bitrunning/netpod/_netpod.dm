@@ -52,32 +52,32 @@
 	. = ..()
 
 	if(isnull(held_item))
-		context[SCREENTIP_CONTEXT_LMB] = "Select Outfit"
+		context[SCREENTIP_CONTEXT_LMB] = "Выбрать одежду"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER && !occupant && !state_open)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] Panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_CROWBAR)
 		if(isnull(occupant))
 			if(panel_open)
-				context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+				context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 			else
-				context[SCREENTIP_CONTEXT_LMB] = "[state_open ? "Close" : "Open"] Cover"
+				context[SCREENTIP_CONTEXT_LMB] = "[state_open ? "Закрыть" : "Открыть"] заслонку"
 		else
-			context[SCREENTIP_CONTEXT_LMB] = "Break out"
+			context[SCREENTIP_CONTEXT_LMB] = "Вскрыть"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/netpod/examine(mob/user)
 	. = ..()
 
-	. += span_notice("Its maintainance panel can be [EXAMINE_HINT("screwed")] [panel_open ? "close" : "open"].")
+	. += span_notice("Панель технического обслуживания может быть [panel_open ? "прикручена" : "откручена"] при помощи [EXAMINE_HINT("отвертки")].")
 	if(isnull(occupant))
 		if(panel_open)
-			. += span_notice("It can be [EXAMINE_HINT("pried")] apart.")
+			. += span_notice("Её можно поддеть [EXAMINE_HINT("ломом")].")
 		else
-			. += span_notice("Its hatch can be [EXAMINE_HINT("pried")] [state_open ? "closed" : "open"]")
+			. += span_notice("Её люк можно поддеть [EXAMINE_HINT("ломом")] и [state_open ? "закрыть" : "открыть"].")
 
 	if(isnull(server_ref?.resolve()))
 		. += span_infoplain("Оно ни к чему не подключено.")
