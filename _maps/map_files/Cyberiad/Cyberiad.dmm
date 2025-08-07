@@ -5155,6 +5155,7 @@
 /obj/structure/transport/linear/tram,
 /obj/structure/thermoplastic,
 /obj/structure/sign/tram_plate/directional/south,
+/obj/structure/closet/emcloset,
 /turf/open/indestructible/plating,
 /area/station/maintenance/ghetto/central/fore)
 "bkP" = (
@@ -51937,6 +51938,13 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/wood,
 /area/station/commons/dorms)
+"mzZ" = (
+/obj/structure/fluff/tram_rail/electric,
+/obj/structure/transport/linear/tram,
+/obj/structure/thermoplastic/light,
+/obj/item/radio/intercom/directional/north,
+/turf/open/indestructible/plating,
+/area/station/maintenance/ghetto/central/fore)
 "mAc" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -67597,6 +67605,7 @@
 /obj/structure/fluff/tram_rail/electric,
 /obj/structure/transport/linear/tram,
 /obj/structure/thermoplastic,
+/obj/structure/closet/firecloset/full,
 /turf/open/indestructible/plating,
 /area/station/maintenance/ghetto/central/fore)
 "qnC" = (
@@ -129284,7 +129293,7 @@ iqs
 tSK
 guN
 kdL
-dZt
+mzZ
 roB
 tSU
 xPh
@@ -130826,7 +130835,7 @@ bqY
 bqY
 guN
 kdL
-dZt
+mzZ
 roB
 tSU
 oEX
