@@ -72918,7 +72918,7 @@
 /obj/structure/transport/linear/public,
 /obj/effect/abstract/elevator_music_zone{
 	linked_elevator_id = "cargo_elevator";
-	range = 3
+	range = 2
 	},
 /obj/effect/landmark/transport/transport_id{
 	specific_transport_id = "cargo_elevator"
