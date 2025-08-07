@@ -611,6 +611,7 @@
 /area/station/maintenance/department/electrical/ghetto)
 "ait" = (
 /obj/machinery/space_heater,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "aiv" = (
@@ -7171,7 +7172,6 @@
 "bJR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/dead_body_placer,
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/ghetto/morgue)
 "bJW" = (
@@ -7348,10 +7348,8 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "bMl" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron/dark,
-/area/station/maintenance/department/medical/ghetto/morgue)
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/station/maintenance/department/security/ghetto/aft)
 "bMs" = (
 /obj/structure/transport/linear/tram,
 /obj/structure/tram,
@@ -9016,6 +9014,7 @@
 /area/station/maintenance/fore)
 "chI" = (
 /obj/machinery/firealarm/directional/west,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "chM" = (
@@ -12779,8 +12778,8 @@
 /area/station/maintenance/starboard/fore)
 "cYY" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating,
-/area/station/maintenance/department/security/ghetto/fore)
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/station/maintenance/department/security/ghetto/aft)
 "cYZ" = (
 /obj/structure/easel,
 /obj/item/canvas/nineteen_nineteen,
@@ -14593,6 +14592,12 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
+"dtW" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/structure/table_or_rack,
+/obj/effect/spawner/random/maintenance/two,
+/turf/open/floor/iron/dark,
+/area/station/maintenance/department/security/ghetto/aft)
 "dtX" = (
 /obj/structure/kitchenspike,
 /turf/open/floor/plating,
@@ -15527,6 +15532,11 @@
 "dFK" = (
 /turf/open/openspace,
 /area/station/service/library)
+"dFL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/medical/memeorgans,
+/turf/open/floor/plating,
+/area/station/maintenance/department/security/ghetto/aft)
 "dFP" = (
 /obj/structure/lattice,
 /obj/structure/grille,
@@ -16830,7 +16840,6 @@
 /area/station/maintenance/fore)
 "dXW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
@@ -19671,7 +19680,7 @@
 /obj/effect/spawner/random/engineering/flashlight,
 /obj/item/stock_parts/power_store/cell/empty,
 /obj/effect/spawner/random/maintenance/two,
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "eKq" = (
 /turf/closed/wall/r_wall,
@@ -24398,7 +24407,7 @@
 /area/station/security/prison)
 "fRD" = (
 /obj/machinery/light/small/directional/west,
-/turf/open/floor/plating,
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "fRG" = (
 /obj/structure/table/wood/poker,
@@ -38164,7 +38173,7 @@
 "jhh" = (
 /obj/machinery/firealarm/directional/north,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "jhn" = (
 /obj/structure/table,
@@ -39785,7 +39794,7 @@
 /obj/item/stack/sheet/cardboard{
 	amount = 10
 	},
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "jEt" = (
 /obj/machinery/door/poddoor/shutters/window/preopen{
@@ -54825,7 +54834,8 @@
 /area/station/command/bridge)
 "nkx" = (
 /obj/machinery/light/small/directional/north,
-/turf/open/floor/plating,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "nkz" = (
 /obj/structure/closet/secure_closet/security/sec,
@@ -61576,7 +61586,7 @@
 "oPU" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/oil,
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "oPZ" = (
 /obj/effect/spawner/random/maintenance,
@@ -69911,7 +69921,7 @@
 "qTT" = (
 /obj/effect/spawner/random/structure/closet_empty/crate,
 /obj/effect/spawner/random/maintenance/five,
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "qTY" = (
 /obj/effect/turf_decal/tile/blue{
@@ -70291,6 +70301,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
+"qYN" = (
+/obj/structure/ladder,
+/obj/effect/turf_decal/stripes/box,
+/turf/open/floor/plating,
+/area/station/maintenance/department/security/ghetto/aft)
 "qYP" = (
 /turf/open/floor/iron,
 /area/station/engineering/lobby)
@@ -79480,7 +79495,7 @@
 /area/space/nearstation)
 "tlT" = (
 /obj/effect/spawner/random/structure/girder,
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "tlX" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -80583,7 +80598,9 @@
 /turf/open/floor/iron/smooth,
 /area/station/commons/toilet/restrooms)
 "twJ" = (
-/turf/open/floor/iron/dark,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/mod/maint,
+/turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/aft)
 "twP" = (
 /obj/effect/landmark/start/scientist,
@@ -85820,6 +85837,11 @@
 /obj/effect/spawner/random/trash/hobo_squat,
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/aft)
+"uNg" = (
+/obj/effect/turf_decal/stripes/box,
+/obj/structure/ladder,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "uNh" = (
 /turf/open/floor/iron,
 /area/station/cargo/lobby)
@@ -86518,7 +86540,7 @@
 "uWP" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/sign/poster/random/directional/north,
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "uWT" = (
 /obj/structure/chair/sofa/bench{
@@ -89781,7 +89803,7 @@
 /area/station/science/lobby)
 "vLc" = (
 /obj/effect/decal/cleanable/blood/oil,
-/turf/open/floor/plating,
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "vLh" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -96582,7 +96604,7 @@
 /area/station/medical/chemistry/ghetto)
 "xvE" = (
 /obj/structure/reagent_dispensers/fueltank,
-/turf/open/floor/plating,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
 "xvV" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -96790,7 +96812,6 @@
 /area/station/commons/dorms)
 "xye" = (
 /obj/machinery/light/small/directional/west,
-/obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/department/medical/ghetto/morgue)
@@ -132330,9 +132351,9 @@ trz
 cUx
 eRQ
 cUx
-cUx
-cUx
-cUx
+xmh
+xmh
+xmh
 dKD
 dKD
 xmh
@@ -132587,9 +132608,9 @@ cHg
 glK
 glK
 eLo
-cYY
-cYY
-cYY
+dTi
+dTi
+dTi
 bgA
 eBD
 frZ
@@ -132844,9 +132865,9 @@ gVh
 gVh
 nTL
 glK
-gVh
-gVh
-gVh
+aLe
+aLe
+aLe
 aLe
 mVb
 grk
@@ -132854,7 +132875,7 @@ sRw
 bgA
 uXV
 bJR
-bMl
+nYm
 xye
 nYm
 bup
@@ -133101,9 +133122,9 @@ doz
 gVh
 fnE
 glK
-gVh
-doz
-doz
+aLe
+twJ
+dFL
 aLe
 pKB
 xXW
@@ -133358,9 +133379,9 @@ doz
 gVh
 gVh
 gVh
-gVh
-doz
-doz
+aLe
+aLe
+aLe
 aLe
 pKB
 xXW
@@ -133616,9 +133637,9 @@ doz
 doz
 doz
 doz
-doz
-doz
 aLe
+qYN
+bgA
 eBD
 dGV
 bKA
@@ -133873,13 +133894,13 @@ doz
 doz
 doz
 doz
-ceC
 aLe
-aLe
+dtW
+bgA
 eBD
 iSB
 jHI
-twJ
+bgA
 uXV
 uXV
 uXV
@@ -134130,19 +134151,19 @@ doz
 doz
 doz
 doz
-ceC
+aLe
 aLe
 pKB
 eBD
 tEj
 wNb
-twJ
-twJ
-twJ
+bgA
+bgA
+bgA
 chI
 sRN
-qzS
-qzS
+cYY
+cYY
 fRD
 guN
 xbG
@@ -134399,8 +134420,8 @@ ait
 ait
 aLe
 jhh
-dTi
-dTi
+bgA
+cYY
 guN
 xbG
 mbC
@@ -134657,7 +134678,7 @@ aLe
 aLe
 aLe
 oPU
-dTi
+cYY
 pNZ
 agH
 grQ
@@ -135171,7 +135192,7 @@ doz
 ceC
 aLe
 eKm
-qzS
+bMl
 pNZ
 agH
 grQ
@@ -135428,7 +135449,7 @@ doz
 doz
 aLe
 qTT
-qzS
+cYY
 pNZ
 agH
 grQ
@@ -135685,7 +135706,7 @@ doz
 doz
 aLe
 tlT
-qzS
+cYY
 pNZ
 agH
 grQ
@@ -135942,7 +135963,7 @@ vbK
 vbK
 aLe
 jEs
-qzS
+bMl
 pNZ
 bjm
 iDA
@@ -136199,7 +136220,7 @@ doz
 ceC
 aLe
 uWP
-dTi
+cYY
 bgP
 vej
 hVb
@@ -136456,7 +136477,7 @@ doz
 doz
 aLe
 nkx
-dTi
+cYY
 jYi
 vej
 hVb
@@ -136712,8 +136733,8 @@ vbK
 vbK
 ceC
 aLe
-qzS
-dTi
+bgA
+cYY
 fAS
 vej
 hVb
@@ -137472,9 +137493,9 @@ doz
 doz
 doz
 ceC
-aLe
-ato
-aLe
+pNZ
+vfq
+pNZ
 ceC
 vbK
 ceC
@@ -137729,9 +137750,9 @@ doz
 doz
 doz
 ceC
-adN
-ato
-aLe
+qqz
+vfq
+pNZ
 ceC
 vbK
 doz
@@ -137986,9 +138007,9 @@ doz
 doz
 doz
 ceC
-adN
-ato
-adN
+qqz
+vfq
+qqz
 ceC
 vbK
 doz
@@ -138243,9 +138264,9 @@ doz
 doz
 doz
 ceC
-aLe
-ato
-aLe
+pNZ
+vfq
+pNZ
 ceC
 vbK
 doz
@@ -138500,9 +138521,9 @@ ceC
 doz
 doz
 ceC
-aLe
-ato
-aLe
+pNZ
+vfq
+pNZ
 ceC
 vbK
 vbK
@@ -138757,9 +138778,9 @@ ceC
 ceC
 ceC
 ceC
-adN
-ato
-adN
+qqz
+vfq
+qqz
 jEk
 vbK
 uXq
@@ -139014,9 +139035,9 @@ doz
 doz
 ceC
 ceC
-adN
-ato
-aLe
+qqz
+vfq
+pNZ
 ceC
 vbK
 vbK
@@ -139271,9 +139292,9 @@ doz
 doz
 doz
 ceC
-aLe
-ato
-aLe
+pNZ
+vfq
+pNZ
 ceC
 vbK
 jEk
@@ -199153,9 +199174,9 @@ qsV
 vjP
 qsV
 mZY
-qMx
+uNg
 nWC
-eJY
+qMx
 bdb
 fgy
 ulu
@@ -199672,7 +199693,7 @@ akz
 vOp
 vOp
 pXd
-brR
+eJY
 wcp
 fgy
 lCe
