@@ -14286,7 +14286,7 @@
 /turf/open/floor/iron/dark/telecomms,
 /area/station/tcommsat/server)
 "dpX" = (
-/obj/machinery/door/window/right/directional/west,
+/obj/machinery/door/window/right/directional/east,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/shutters{
 	name = "Vacant Store Shutters";
@@ -56920,7 +56920,7 @@
 	pixel_y = -32;
 	dir = 4
 	},
-/obj/machinery/door/window/right/directional/west,
+/obj/machinery/door/window/left/directional/east,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/shutters{
 	name = "Vacant Store Shutters";
@@ -62637,7 +62637,7 @@
 /turf/open/floor/iron/freezer,
 /area/station/science/robotics/lab)
 "pdp" = (
-/obj/structure/displaycase,
+/obj/structure/displaycase/forsale,
 /obj/effect/turf_decal/tile/neutral/full,
 /turf/open/floor/iron/dark/small,
 /area/station/commons/vacant_room/commissary)
