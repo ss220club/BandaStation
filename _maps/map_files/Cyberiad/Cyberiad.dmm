@@ -4751,6 +4751,9 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 1
 	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
+	},
 /turf/open/indestructible/tram,
 /area/station/maintenance/ghetto/fore/starboard)
 "bgS" = (
@@ -7916,13 +7919,19 @@
 /turf/open/floor/iron,
 /area/station/engineering/lobby)
 "bTl" = (
-/obj/machinery/transport/crossing_signal/southwest,
+/obj/machinery/transport/crossing_signal/northwest,
 /obj/machinery/transport/guideway_sensor{
 	dir = 1;
 	pixel_x = -12;
 	pixel_y = 20
 	},
 /obj/effect/turf_decal/caution/stand_clear,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
 /turf/open/indestructible/tram,
 /area/station/maintenance/ghetto/port/greater)
 "bTH" = (
@@ -22983,6 +22992,9 @@
 	dir = 1
 	},
 /obj/machinery/transport/crossing_signal/northwest,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
 /turf/open/indestructible/tram,
 /area/station/maintenance/ghetto/fore/starboard)
 "fAT" = (
@@ -26925,7 +26937,10 @@
 /area/station/maintenance/aft)
 "gyg" = (
 /obj/effect/turf_decal/caution/stand_clear,
-/obj/machinery/transport/crossing_signal/southwest,
+/obj/machinery/transport/crossing_signal/northwest,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
 /turf/open/indestructible/tram,
 /area/station/maintenance/ghetto/fore/starboard)
 "gyB" = (
@@ -35337,7 +35352,10 @@
 /area/station/service/hydroponics/ghetto)
 "iyn" = (
 /obj/machinery/door/poddoor/massdriver_chapel,
-/obj/structure/fans/tiny,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/obj/machinery/atmos_shield_gen/active,
 /turf/open/floor/plating,
 /area/station/service/chapel/monastery)
 "iyy" = (
@@ -49433,6 +49451,18 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
+"lSq" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/security/processing)
 "lSt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/trash/soap,
@@ -57538,7 +57568,12 @@
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/security/brig,
-/obj/structure/fans/tiny,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
+	},
 /turf/open/floor/plating,
 /area/station/security/processing)
 "nSj" = (
@@ -58382,6 +58417,9 @@
 	pixel_y = 20
 	},
 /obj/effect/turf_decal/caution/stand_clear,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
+	},
 /turf/open/indestructible/tram,
 /area/station/maintenance/ghetto/fore/starboard)
 "oce" = (
@@ -63256,6 +63294,12 @@
 	},
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 1
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
 	},
 /turf/open/indestructible/tram,
 /area/station/maintenance/ghetto/port/greater)
@@ -87486,8 +87530,11 @@
 /turf/open/floor/iron/dark,
 /area/station/security/checkpoint/engineering)
 "vjX" = (
-/obj/structure/fans/tiny,
 /obj/machinery/door/poddoor/massdriver_ordnance,
+/obj/machinery/atmos_shield_gen/active,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
 /turf/open/floor/plating,
 /area/station/science/ordnance/testlab)
 "vkg" = (
@@ -188634,7 +188681,7 @@ tYD
 tYD
 tYD
 fhX
-nSf
+lSq
 idu
 lMG
 lrv
