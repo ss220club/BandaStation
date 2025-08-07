@@ -38,8 +38,6 @@
 #define GHOST_PLANE 4
 #define POINT_PLANE 5
 
-#define RENDER_PLANE_UNLIT_GAME 9
-
 //---------- LIGHTING -------------
 /// Normal 1 per turf dynamic lighting underlays
 #define LIGHTING_PLANE 10
@@ -65,7 +63,12 @@
 #define EMISSIVE_BLOOM_MASK_TARGET "*RENDER_PLANE_EMISSIVE_BLOOM_MASK"
 #define RENDER_PLANE_EMISSIVE_BLOOM 16
 
+
 //-------------------- Lighting ---------------------
+
+/// Main game plane to which everything renders, which then is multiplied by light
+/// Should not be lit directly as it is sourced for emissive bloom
+#define RENDER_PLANE_UNLIT_GAME 19
 
 #define RENDER_PLANE_LIGHTING 20
 
@@ -227,6 +230,7 @@
 #define BELOW_MOB_LAYER 3.7
 #define LOW_MOB_LAYER 3.75
 #define LYING_MOB_LAYER 3.8
+#define ABOVE_LYING_MOB_LAYER 3.85
 #define VEHICLE_LAYER 3.9
 #define MOB_BELOW_PIGGYBACK_LAYER 3.94
 //#define MOB_LAYER 4 //For easy recordkeeping; this is a byond define

@@ -215,12 +215,10 @@
 	for(var/datum/action/cooldown/cd_action in owner.actions)
 		cd_action.disable()
 
-/datum/action/cooldown/Trigger(trigger_flags, atom/target)
+/datum/action/cooldown/Trigger(mob/clicker, trigger_flags, atom/target)
 	// BANDASTATION EDIT START - Allow unsetting abilities on cooldown
-	if(!owner)
-		return FALSE
 	. = ..()
-	var/mob/user = usr || owner
+	var/mob/user = clicker || owner
 	if(!.)
 		if(!unset_after_click)
 			unset_click_ability(user, refund_cooldown = FALSE)
