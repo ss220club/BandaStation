@@ -1,4 +1,4 @@
-[food]
+[tastes]
 "salt" = "соли"
 "vinegar" = "уксуса"
 "meat" = "мяса"
@@ -133,10 +133,6 @@
 "tropical sweetness" = "тропической сладости"
 "matcha" = "матчи"
 "fizzy tutti frutti" = "газированных тутти-фрутти"
-
-
-
-[other]
 "a never before experienced flavour" = "который вы никогда не пробовали"
 "finally sitting down after standing your entire life" = "возможности наконец-то сесть после целой жизни на ногах"
 "drugs" = "наркотиков"

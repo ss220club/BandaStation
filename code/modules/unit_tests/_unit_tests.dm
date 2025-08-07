@@ -308,6 +308,7 @@
 #include "text.dm"
 #include "tgui_create_message.dm"
 #include "timer_sanity.dm"
+#include "translation_duplicates.dm"
 #include "trait_addition_and_removal.dm"
 #include "traitor.dm"
 #include "traitor_mail_content_check.dm"

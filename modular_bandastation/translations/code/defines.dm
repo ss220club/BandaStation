@@ -1,2 +1,2 @@
 #define PATH_TO_TRANSLATE_DATA "modular_bandastation/translations/code/translation_data"
-#define PATH_TO_TRANSLATE_DATA_FOLDER "modular_bandastation/translations/code/translation_data/game/"
+#define PATH_TO_TRANSLATE_DATA_FOLDER "modular_bandastation/translations/code/translation_data/game"

@@ -5,6 +5,7 @@ GLOBAL_LIST_EMPTY(ru_say_verbs)
 GLOBAL_LIST_EMPTY(ru_emote_names)
 GLOBAL_LIST_EMPTY(ru_emote_messages)
 GLOBAL_LIST_EMPTY(ru_reagent_descs)
+GLOBAL_LIST_EMPTY(ru_names)
 
 /datum/modpack/translations
 	name = "Переводы"
@@ -17,13 +18,9 @@ GLOBAL_LIST_EMPTY(ru_reagent_descs)
 	if(fexists(file(food_path)))
 		var/list/tastes_toml_list = rustg_read_toml_file(food_path)
 
-		var/list/tastes_food = tastes_toml_list["food"]
-		if(tastes_food)
-			GLOB.ru_tastes |= tastes_food
-
-		var/list/tastes_other = tastes_toml_list["other"]
-		if(tastes_other)
-			GLOB.ru_tastes |= tastes_other
+		var/list/tastes_list = tastes_toml_list["tastes"]
+		if(tastes_list)
+			GLOB.ru_tastes |= tastes_list
 
 	// Verbs
 	var/toml_path = "[PATH_TO_TRANSLATE_DATA]/ru_verbs.toml"
@@ -77,3 +74,34 @@ GLOBAL_LIST_EMPTY(ru_reagent_descs)
 		for(var/reagent_key as anything in GLOB.chemical_reagents_list)
 			var/datum/reagent/reagent = GLOB.chemical_reagents_list[reagent_key]
 			reagent.update_to_ru()
+
+	load_all_ru_names_toml_files()
+
+/// Recursively loads all *.toml files from the translation_data directory into GLOB.ru_names
+/// This function will scan all subdirectories and load any TOML files containing Russian name declensions
+/// The loaded data is merged into a single GLOB.ru_names list for efficient access
+/proc/load_all_ru_names_toml_files()
+	GLOB.ru_names = list()
+	_load_ru_names_from_directory(PATH_TO_TRANSLATE_DATA_FOLDER)
+
+/// Helper proc to recursively load TOML files from a directory and its subdirectories
+/proc/_load_ru_names_from_directory(directory_path)
+	var/list/files = flist(directory_path)
+	if(!length(files))
+		return
+
+	for(var/file_or_dir in files)
+		var/full_path = "[directory_path]/[file_or_dir]"
+		// If it's a directory (ends with /), recursively scan it
+		if(findtext(file_or_dir, "/", length(file_or_dir)))
+			_load_ru_names_from_directory(full_path)
+		// If it's a TOML file, load it
+		else if(copytext(file_or_dir, -4) == "toml")
+			if(fexists(file(full_path)))
+				var/list/toml_data = rustg_read_toml_file(full_path)
+				if(length(toml_data))
+					// Merge the loaded data into GLOB.ru_names
+					for(var/key in toml_data)
+						if(key in GLOB.ru_names)
+							WARNING("Duplicate translation key '[key]' found in '[full_path]'. Overwriting previous value.")
+						GLOB.ru_names[key] = toml_data[key]
