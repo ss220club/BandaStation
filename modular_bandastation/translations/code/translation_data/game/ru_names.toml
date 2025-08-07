@@ -1321,15 +1321,6 @@ instrumental = "смирительной рубашкой"
 prepositional = "смирительной рубашке"
 gender = "female"
 
-["donut"]
-nominative = "пончик"
-genitive = "пончика"
-dative = "пончику"
-accusative = "пончик"
-instrumental = "пончиком"
-prepositional = "пончике"
-gender = "male"
-
 ["evidence bag"]
 nominative = "пакет для улик"
 genitive = "пакета для улик"
@@ -7189,60 +7180,6 @@ instrumental = "пакетом майонеза"
 prepositional = "пакете майонеза"
 gender = "male"
 
-["Donk-pocket"]
-nominative = "Донк-покет"
-genitive = "Донк-покета"
-dative = "Донк-покету"
-accusative = "Донк-покет"
-instrumental = "Донк-покетом"
-prepositional = "Донк-покете"
-gender = "male"
-
-["Berry-pocket"]
-nominative = "Ягодный-покет"
-genitive = "Ягодного-покета"
-dative = "Ягодному-покету"
-accusative = "Ягодный-покет"
-instrumental = "Ягодным-покетом"
-prepositional = "Ягодном-покете"
-gender = "male"
-
-["Honk-pocket"]
-nominative = "Хонк-покет"
-genitive = "Хонк-покета"
-dative = "Хонк-покету"
-accusative = "Хонк-покет"
-instrumental = "Хонк-покетом"
-prepositional = "Хонк-покете"
-gender = "male"
-
-["Pizza-pocket"]
-nominative = "Пицца-покет"
-genitive = "Пицца-покета"
-dative = "Пицца-покету"
-accusative = "Пицца-покет"
-instrumental = "Пицца-покетом"
-prepositional = "Пицца-покете"
-gender = "male"
-
-["Spicy-pocket"]
-nominative = "Острый-покет"
-genitive = "Острого-покета"
-dative = "Острому-покету"
-accusative = "Острый-покет"
-instrumental = "Острым-покетом"
-prepositional = "Остром-покете"
-gender = "male"
-
-["Teriyaki-pocket"]
-nominative = "Терияки-покет"
-genitive = "Терияки-покета"
-dative = "Терияки-покету"
-accusative = "Терияки-покет"
-instrumental = "Терияки-покетом"
-prepositional = "Терияки-покете"
-gender = "male"
-
 ["tator tot"]
 nominative = "предокартофель"
 genitive = "предокартофеля"
@@ -7260,24 +7197,6 @@ accusative = "вафли"
 instrumental = "вафлями"
 prepositional = "вафлях"
 gender = "plural"
-
-["Dank-pocket"]
-nominative = "Данк-покет"
-genitive = "Данк-покета"
-dative = "Данк-покету"
-accusative = "Данк-покет"
-instrumental = "Данк-покетом"
-prepositional = "Данк-покете"
-gender = "male"
-
-["Gondola-pocket"]
-nominative = "Гондола-покет"
-genitive = "Гондола-покета"
-dative = "Гондола-покету"
-accusative = "Гондола-покет"
-instrumental = "Гондола-покетом"
-prepositional = "Гондола-покете"
-gender = "male"
 
 ["box of donk-pockets"]
 nominative = "коробка донк-покетов"

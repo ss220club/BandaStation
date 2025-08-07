@@ -10,7 +10,7 @@ GLOBAL_LIST_EMPTY(ru_names)
 /datum/modpack/translations
 	name = "Переводы"
 	desc = "Добавляет переводы"
-	author = "Vallat, Larentoun, dj-34"
+	author = "Vallat, Larentoun, dj-34, Lori Hunter"
 
 /datum/modpack/translations/post_initialize()
 	// Tastes
@@ -102,6 +102,4 @@ GLOBAL_LIST_EMPTY(ru_names)
 				if(length(toml_data))
 					// Merge the loaded data into GLOB.ru_names
 					for(var/key in toml_data)
-						if(key in GLOB.ru_names)
-							WARNING("Duplicate translation key '[key]' found in '[full_path]'. Overwriting previous value.")
 						GLOB.ru_names[key] = toml_data[key]
