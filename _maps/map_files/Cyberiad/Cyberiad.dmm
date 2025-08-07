@@ -10352,6 +10352,18 @@
 	},
 /turf/open/floor/iron/smooth_half,
 /area/station/maintenance/ghetto/central/fore)
+"cwE" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/security/processing)
 "cwF" = (
 /obj/structure/chair/comfy/beige,
 /obj/effect/landmark/start/assistant,
@@ -43332,6 +43344,10 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/ai_monitored/turret_protected/aisat/hallway)
+"kvH" = (
+/obj/machinery/firealarm/directional/east,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/central/fore)
 "kvK" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
@@ -44583,6 +44599,7 @@
 /area/station/service/lawoffice)
 "kJJ" = (
 /obj/structure/closet/emcloset,
+/obj/machinery/firealarm/directional/south,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central/fore)
 "kJW" = (
@@ -49451,18 +49468,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
-"lSq" = (
-/obj/machinery/door/airlock/external,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/security/brig,
-/obj/machinery/atmos_shield_gen/active{
-	dir = 4
-	},
-/obj/machinery/atmos_shield_gen/active{
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/station/security/processing)
 "lSt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/trash/soap,
@@ -124983,7 +124988,7 @@ hLM
 hLM
 hLM
 eGx
-hLM
+kvH
 kGW
 hLM
 hLM
@@ -188681,7 +188686,7 @@ tYD
 tYD
 tYD
 fhX
-lSq
+cwE
 idu
 lMG
 lrv
