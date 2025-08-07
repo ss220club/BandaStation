@@ -9,7 +9,7 @@
 
 	school = SCHOOL_FORBIDDEN
 	cooldown_time = 2 SECONDS
-	unset_after_click = FALSE
+	unset_after_click = FALSE // BANDASTATION EDIT - This shit is too annoying
 
 	// Both of these are changed in before_cast
 	invocation = "Кто-то поднимает стену из ржавчины."
