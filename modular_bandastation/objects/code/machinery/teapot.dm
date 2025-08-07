@@ -56,7 +56,7 @@
 			result = CONTEXTUAL_SCREENTIP_SET
 		return result
 
-	if(ispath(held_item,/obj/item/reagent_containers/cup/glass)  && !is_operating)
+	if(istype(held_item,/obj/item/reagent_containers/cup/glass)  && !is_operating)
 		if(QDELETED(glass))
 			context[SCREENTIP_CONTEXT_LMB] = "Insert glass"
 		else
@@ -183,7 +183,7 @@
 	if(user.combat_mode || (tool.item_flags & ABSTRACT) || (tool.flags_1 & HOLOGRAM_1))
 		return ITEM_INTERACT_SKIP_TO_ATTACK
 
-	if (ispath(tool,/obj/item/reagent_containers/cup/glass) && !is_operating)
+	if (istype(tool,/obj/item/reagent_containers/cup/glass) && !is_operating)
 		replace_beaker(user, tool)
 		to_chat(user, span_notice("You add [tool] to [src]."))
 		return ITEM_INTERACT_SUCCESS
