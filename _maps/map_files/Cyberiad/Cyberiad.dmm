@@ -14287,7 +14287,6 @@
 /turf/open/floor/iron/dark/telecomms,
 /area/station/tcommsat/server)
 "dpX" = (
-/obj/machinery/door/window/right/directional/east,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/shutters{
 	name = "Vacant Store Shutters";
@@ -14295,6 +14294,7 @@
 	id = "vacantstore_east"
 	},
 /obj/structure/table/reinforced,
+/obj/machinery/door/window/left/directional/east,
 /turf/open/floor/plating,
 /area/station/commons/vacant_room/commissary)
 "dqn" = (
@@ -47123,8 +47123,10 @@
 /turf/open/floor/iron/white,
 /area/station/science/lower)
 "lpK" = (
-/obj/structure/safe,
-/obj/effect/spawner/random/maintenance/six,
+/obj/structure/closet/secure_closet/personal{
+	anchored = 1
+	},
+/obj/effect/spawner/random/maintenance/two,
 /turf/open/floor/iron,
 /area/station/commons/vacant_room/commissary)
 "lpN" = (
@@ -51938,13 +51940,6 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/wood,
 /area/station/commons/dorms)
-"mzZ" = (
-/obj/structure/fluff/tram_rail/electric,
-/obj/structure/transport/linear/tram,
-/obj/structure/thermoplastic/light,
-/obj/item/radio/intercom/directional/north,
-/turf/open/indestructible/plating,
-/area/station/maintenance/ghetto/central/fore)
 "mAc" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -56928,7 +56923,6 @@
 	pixel_y = -32;
 	dir = 4
 	},
-/obj/machinery/door/window/left/directional/east,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/shutters{
 	name = "Vacant Store Shutters";
@@ -56936,6 +56930,7 @@
 	id = "vacantstore_east"
 	},
 /obj/structure/table/reinforced,
+/obj/machinery/door/window/right/directional/east,
 /turf/open/floor/plating,
 /area/station/commons/vacant_room/commissary)
 "nLw" = (
@@ -65079,6 +65074,13 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
+"pFX" = (
+/obj/structure/fluff/tram_rail/electric,
+/obj/structure/transport/linear/tram,
+/obj/structure/thermoplastic/light,
+/obj/item/radio/intercom/directional/north,
+/turf/open/indestructible/plating,
+/area/station/maintenance/ghetto/central/fore)
 "pGi" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -129293,7 +129295,7 @@ iqs
 tSK
 guN
 kdL
-mzZ
+pFX
 roB
 tSU
 xPh
@@ -130835,7 +130837,7 @@ bqY
 bqY
 guN
 kdL
-mzZ
+pFX
 roB
 tSU
 oEX
