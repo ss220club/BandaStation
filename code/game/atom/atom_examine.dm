@@ -169,7 +169,7 @@
 /// force_real_name will always return real_name and add (as face_name/id_name) if it doesn't match their appearance
 // BANDASTATION EDIT START - Declents
 /atom/proc/get_visible_name(add_id_name, force_real_name, declent = NOMINATIVE)
-	if (name != initial(name))
+	if(name != initial(name))
 		return name
 	return declent_ru(declent)
 // BANDASTATION EDIT END

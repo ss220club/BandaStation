@@ -1,5 +1,5 @@
 /atom/proc/get_tip_name()
-	if (name != initial(name))
+	if(name != initial(name))
 		return name
 	return declent_ru(NOMINATIVE)
 
