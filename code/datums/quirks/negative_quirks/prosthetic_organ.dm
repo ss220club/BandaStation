@@ -4,8 +4,7 @@
 // 	desc = "В результате несчастного случая вы лишились одного из органов. Из-за этого у вас установлен дешевый протез!"
 // 	icon = FA_ICON_LUNGS
 // 	value = -3
-// 	medical_record_text = "При физическом осмотре у пациента был обнаружен бюджетный протез органа. \
-// 		<b>Известно, что удаление этих органов опасно как для пациента, так и для врача.</b>"
+// 	medical_record_text = "При физическом осмотре у пациента был обнаружен бюджетный протез органа. <b>Известно, что удаление этих органов опасно как для пациента, так и для врача.</b>"
 // 	hardcore_value = 3
 // 	mail_goodies = list(/obj/item/storage/organbox)
 // 	/// The slot to replace, in string form
@@ -58,16 +57,14 @@
 // 		if(ORGAN_SLOT_STOMACH)
 // 			prosthetic = new /obj/item/organ/stomach/cybernetic/surplus
 // 			slot_string = "желудок"
-// 	medical_record_text = "При физическом осмотре было обнаружено, что орган пациента, [slot_string], заменен бюджетным протезом. \
-// 		Известно, что удаление этих органов опасно как для пациента, так и для врача."
+// 	medical_record_text = "При физическом осмотре было обнаружено, что орган пациента, [slot_string], заменен бюджетным протезом. Известно, что удаление этих органов опасно как для пациента, так и для врача."
 // 	old_organ = human_holder.get_organ_slot(organ_slot)
 // 	prosthetic.Insert(human_holder, special = TRUE)
 // 	old_organ.moveToNullspace()
 // 	STOP_PROCESSING(SSobj, old_organ)
 
 // /datum/quirk/prosthetic_organ/post_add()
-// 	to_chat(quirk_holder, span_bolddanger("Ваш орган, [slot_string], был замен дешевым протезом. Он слаб и крайне нестабилен. \
-// 	Кроме того, любое ЭМИ воздействие заставит его полностью прекратить работу."))
+// 	to_chat(quirk_holder, span_bolddanger("Ваш орган, [slot_string], был замен дешевым протезом. Он слаб и крайне нестабилен. Кроме того, любое ЭМИ воздействие заставит его полностью прекратить работу."))
 
 // /datum/quirk/prosthetic_organ/remove()
 // 	if(old_organ)
