@@ -1,3 +1,4 @@
+#define DRUMKIT_ANCHORED_LAYER 5
 /datum/instrument/guitar/soundhand_rock
 	name = "Soundhand Rock Guitar"
 	id = "cshrockgt"
@@ -122,17 +123,19 @@
 	update_icon(UPDATE_ICON_STATE)
 
 /obj/structure/musician/drumskit/ui_interact(mob/user)
-	if(!anchored)
+	if(!anchored || broken)
 		return
 	. = ..()
 
 /obj/structure/musician/drumskit/update_icon_state()
-	if(anchored)
-		icon_state = "[base_icon_state][active ? "_active" : null]"
-		layer = 5
-	else if(broken)
+	if(broken)
 		icon_state = "[base_icon_state]_broken"
 		layer = initial(layer)
+		return ..()
+
+	if(anchored)
+		icon_state = "[base_icon_state][active ? "_active" : null]"
+		layer = DRUMKIT_ANCHORED_LAYER
 	else
 		icon_state = "[base_icon_state]_unanchored"
 		layer = initial(layer)

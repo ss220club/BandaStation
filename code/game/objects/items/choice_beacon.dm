@@ -101,12 +101,12 @@
 			/obj/item/instrument/soundhand_rock_guitar,
 			// BANDASTATION ADDITION END - Extention for instruments
 		)
-		for(var/obj/item/instrument/instrument as anything in possible_instruments)
-			instruments[initial(instrument.name)] = instrument
-		// BANDASTATION ADDITION BEGIN - Extention for instruments
-		for(var/obj/structure/musician/instrument as anything in possible_instruments)
-			instruments[initial(instrument.name)] = instrument
-		// BANDASTATION ADDITION END - Extention for instruments
+		// BANDASTATION EDITION BEGIN - Extention for instruments
+		// for(var/obj/item/instrument/instrument as anything in possible_instruments)
+		// 	instruments[initial(instrument.name)] = instrument
+		for(var/atom/instrument_path as anything in possible_instruments)
+			instruments[initial(instrument_path.name)] = instrument_path
+		// BANDASTATION EDITION END - Extention for instruments
 	return instruments
 
 /obj/item/choice_beacon/ingredient
