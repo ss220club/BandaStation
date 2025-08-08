@@ -16,7 +16,7 @@
 	/// The glass to hold the final products
 	var/obj/item/reagent_containers/cup/glass = null
 	/// How fast heating take place
-	var/heater_coefficient = 0.05
+	var/heater_coefficient = 0.5
 	/// How fast operations take place
 	var/speed = 0.25
 	/// Current temperature for reagents
@@ -29,8 +29,6 @@
 
 	register_context()
 	update_appearance(UPDATE_OVERLAYS)
-
-	// RegisterSignal(src,COMSIG_STORAGE_DUMP_CONTENT,PROC_REF(on_storage_dump))
 
 /obj/machinery/teapot/Destroy()
 	QDEL_NULL(glass)
@@ -52,31 +50,31 @@
 	var/result = NONE
 	if(isnull(held_item))
 		if(!QDELETED(glass) && !is_operating)
-			context[SCREENTIP_CONTEXT_RMB] = "Remove glass"
+			context[SCREENTIP_CONTEXT_RMB] = "Убрать сосуд"
 			result = CONTEXTUAL_SCREENTIP_SET
 		return result
 
 	if(istype(held_item,/obj/item/reagent_containers/cup/glass)  && !is_operating)
 		if(QDELETED(glass))
-			context[SCREENTIP_CONTEXT_LMB] = "Insert glass"
+			context[SCREENTIP_CONTEXT_LMB] = "Вставить сосуд"
 		else
-			context[SCREENTIP_CONTEXT_LMB] = "Replace glass"
+			context[SCREENTIP_CONTEXT_LMB] = "Заменить сосуд"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] палень"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_CROWBAR && panel_open)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "Una" : "A"]nchor"
+		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "От" : "При"]крутить"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/teapot/examine(mob/user)
 	. = ..()
 	if(!in_range(user, src) && !issilicon(user) && !isobserver(user))
-		. += span_warning("You're too far away to examine [src]'s contents and display!")
+		. += span_warning("Вы слишком далеко чтобы рассмотреть содержимое и дисплей [src]!")
 		return
 
 	var/total_weight = 0
@@ -149,40 +147,6 @@
 
 	update_appearance(UPDATE_OVERLAYS)
 
-// /obj/machinery/teapot/proc/load_items(mob/user, list/obj/item/to_add)
-// 	PRIVATE_PROC(TRUE)
-
-// 	var/list/obj/item/filtered_list = list()
-// 	for(var/obj/item/ingredient as anything in to_add)
-// 		if((ingredient.item_flags & ABSTRACT) || (ingredient.flags_1 & HOLOGRAM_1))
-// 			continue
-// 		if(!ingredient.blend_requirements(src))
-// 			continue
-
-// 		filtered_list += ingredient
-// 	if(!filtered_list.len)
-// 		return FALSE
-
-// 	var/total_weight
-// 	for(var/obj/item/to_process in src)
-// 		if((to_process in component_parts) || to_process == glass)
-// 			continue
-// 		total_weight += to_process.w_class
-
-// 	var/items_transfered = 0
-// 	for(var/obj/item/weapon as anything in filtered_list)
-// 		if(weapon.w_class + total_weight > maximum_weight)
-// 			to_chat(user, span_warning("[weapon] is too big to fit into [src]."))
-// 			continue
-
-// 		if(!user.transferItemToLoc(weapon, src))
-// 			continue
-
-// 		total_weight += weapon.w_class
-// 		items_transfered += 1
-// 		to_chat(user, span_notice("[weapon] was loaded into [src]."))
-
-// 	return items_transfered
 
 /obj/machinery/teapot/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.combat_mode || (tool.item_flags & ABSTRACT) || (tool.flags_1 & HOLOGRAM_1))
@@ -193,43 +157,6 @@
 		replace_beaker(user, tool)
 		to_chat(user, span_notice("You add [tool] to [src]."))
 		return ITEM_INTERACT_SUCCESS
-	else
-		return ITEM_INTERACT_BLOCKING
-
-	// else if(istype(tool, /obj/item/storage/bag))
-	// 	var/list/obj/item/to_add = list()
-
-	// 	var/static/list/accepted_items = list(
-	// 		/obj/item/grown,
-	// 		/obj/item/food/grown,
-	// 		/obj/item/food/honeycomb,
-	// 	)
-
-	// 	for(var/obj/item/ingredient in tool)
-	// 		if(!is_type_in_list(ingredient, accepted_items))
-	// 			continue
-	// 		to_add += ingredient
-
-	// 	var/items_added = load_items(user, to_add)
-	// 	if(!items_added)
-	// 		to_chat(user, span_warning("No items were added."))
-	// 		return ITEM_INTERACT_BLOCKING
-	// 	to_chat(user, span_notice("[items_added] items were added from [tool] to [src]."))
-	// 	return ITEM_INTERACT_SUCCESS
-
-	// else if(length(tool.grind_results) || tool.reagents?.total_volume)
-	// 	if(tool.atom_storage && length(tool.contents))
-	// 		to_chat(user, span_notice("Drag this item onto [src] to dump its contents, or empty it to grind the container."))
-	// 		return ITEM_INTERACT_BLOCKING
-
-	// 	if(!load_items(user, list(tool)))
-	// 		return ITEM_INTERACT_BLOCKING
-	// 	to_chat(user, span_notice("[tool] was added to [src]."))
-	// 	return ITEM_INTERACT_SUCCESS
-
-	// else if(tool.atom_storage)
-	// 	to_chat(user, span_warning("You must drag & dump contents of [tool] into [src]."))
-	// 	return ITEM_INTERACT_BLOCKING
 
 	return NONE
 
@@ -274,18 +201,6 @@
 	if(default_deconstruction_crowbar(tool))
 		return ITEM_INTERACT_SUCCESS
 
-// /obj/machinery/teapot/proc/on_storage_dump(datum/source,datum/storage/storage, mob/user)
-// 	SIGNAL_HANDLER
-
-// 	var/list/obj/item/contents_to_dump = list()
-// 	for(var/obj/item/to_dump in storage.real_location)
-// 		if(to_dump.atom_storage)
-// 			continue
-// 		contents_to_dump += to_dump
-
-// 	to_chat(user,span_notice("You dumped [load_items(user, contents_to_dump)] items from [storage.parent] into [src]."))
-
-// 	return STORAGE_DUMP_HANDLED
 
 /obj/machinery/teapot/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -300,17 +215,17 @@
 /obj/machinery/teapot/attack_ai_secondary(mob/user, list/modifiers)
 	return attack_hand_secondary(user, modifiers)
 
-/obj/machinery/teapot/proc/heat_reagents(seconds_per_tick)
+/obj/machinery/teapot/proc/heat_reagents()
 	PRIVATE_PROC(TRUE)
 
 	if(!is_operating || !is_operational || QDELETED(glass) || !glass.reagents.total_volume)
 		return FALSE
 	playsound(src, 'sound/machines/hiss.ogg', 40, FALSE)
-	var/energy = (temperature - glass.reagents.chem_temp) * heater_coefficient * seconds_per_tick * glass.reagents.heat_capacity()
-	glass.reagents.adjust_thermal_energy(energy)
-	use_energy(active_power_usage + abs(ROUND_UP(energy) / 120))
-	if(glass.reagents.chem_temp == temperature)
-		is_operating = FALSE
+	while(!(glass.reagents.chem_temp == temperature))
+		var/energy = (temperature - glass.reagents.chem_temp) * heater_coefficient * glass.reagents.heat_capacity()
+		glass.reagents.adjust_thermal_energy(energy)
+		use_energy(active_power_usage + abs(ROUND_UP(energy) / 120))
+	is_operating = FALSE
 	return TRUE
 
 /obj/machinery/teapot/ui_interact(mob/user)
@@ -318,25 +233,23 @@
 	if(!user.can_perform_action(src, ALLOW_SILICON_REACH | FORBID_TELEKINESIS_REACH))
 		return
 
-	var/static/radial_eject = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_eject")
 	var/list/options = list()
 
 	for(var/obj/item/to_process in src)
-		if((to_process in component_parts) || to_process == glass)
-			continue
 
-		if(is_operational && anchored && !QDELETED(glass) && !glass.reagents.holder_full())
+		if(glass.reagents == null)
+			to_chat(user,span_notice("Стакан пуст"))
+			return
+		if(is_operational && anchored && !QDELETED(glass))
 			var/static/radial_up = image(icon = 'modular_bandastation/objects/icons/obj/machines/teapot.dmi', icon_state = "radial_up")
 			options["temp_up"] = radial_up
 
 			var/static/radial_down = image(icon = 'modular_bandastation/objects/icons/obj/machines/teapot.dmi', icon_state = "radial_down")
 			options["temp_down"] = radial_down
 
-		options["eject"] = radial_eject
 		break
 
 	if(!QDELETED(glass))
-		options["on"] = radial_eject
 		if(is_operational && anchored && glass.reagents.total_volume)
 			var/static/radial_on = image(icon = 'modular_bandastation/objects/icons/obj/machines/teapot.dmi', icon_state = "radial_on")
 			options["on"] = radial_on
@@ -350,8 +263,10 @@
 		return
 
 	switch(choice)
-		if("eject")
-			replace_beaker(user)
+
+		if("on")
+			is_operating = TRUE
+			heat_reagents()
 
 		if("temp_up")
 			if(temperature < 333)
@@ -366,9 +281,6 @@
 				balloon_alert(user,"Temperature is [temperature]")
 			else
 				balloon_alert(user,"This is the minimum temperature")
-
-		if("on")
-			is_operating = TRUE
 
 		if("examine")
 			to_chat(user, boxed_message(jointext(examine(user), "\n")))
