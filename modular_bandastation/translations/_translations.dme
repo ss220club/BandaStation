@@ -1,5 +1,6 @@
 #include "code/defines.dm"
 
+// Subsystem for translations is defined here for a proper load BEFORE all atoms
 #include "_translations.dm"
 
 #include "code/bodyparts.dm"

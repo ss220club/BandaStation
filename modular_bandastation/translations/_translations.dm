@@ -7,12 +7,19 @@ GLOBAL_LIST_EMPTY(ru_emote_messages)
 GLOBAL_LIST_EMPTY(ru_reagent_descs)
 GLOBAL_LIST_EMPTY(ru_names)
 
-/datum/modpack/translations
-	name = "Переводы"
-	desc = "Добавляет переводы"
-	author = "Vallat, Larentoun, dj-34, Lori Hunter"
 
-/datum/modpack/translations/post_initialize()
+SUBSYSTEM_DEF(translations)
+	name = "Translations"
+	init_stage = INITSTAGE_FIRST
+	flags = SS_NO_FIRE
+	dependents = list(
+		/datum/controller/subsystem/atoms, // Some Atoms being initialized too early, so we need to load translations before them
+	)
+
+	var/list/ru_tastes = list()
+
+
+/datum/controller/subsystem/translations/Initialize()
 	// Tastes
 	var/food_path = "[PATH_TO_TRANSLATE_DATA]/ru_tastes.toml"
 	if(fexists(file(food_path)))
@@ -77,15 +84,18 @@ GLOBAL_LIST_EMPTY(ru_names)
 
 	load_all_ru_names_toml_files()
 
+	return SS_INIT_SUCCESS
+
+
 /// Recursively loads all *.toml files from the translation_data directory into GLOB.ru_names
 /// This function will scan all subdirectories and load any TOML files containing Russian name declensions
 /// The loaded data is merged into a single GLOB.ru_names list for efficient access
-/proc/load_all_ru_names_toml_files()
+/datum/controller/subsystem/translations/proc/load_all_ru_names_toml_files()
 	GLOB.ru_names = list()
 	_load_ru_names_from_directory(PATH_TO_TRANSLATE_DATA_FOLDER)
 
 /// Helper proc to recursively load TOML files from a directory and its subdirectories
-/proc/_load_ru_names_from_directory(directory_path)
+/datum/controller/subsystem/translations/proc/_load_ru_names_from_directory(directory_path)
 	var/list/files = flist(directory_path)
 	if(!length(files))
 		return
