@@ -2632,15 +2632,17 @@ GLOBAL_LIST_EMPTY(fire_appearances)
  * extra damage, so jokers can't use half a stack of iron rods to make getting hit by the tram immediately lethal.
  */
 /mob/living/proc/tram_slam_land()
-	if(!istype(loc, /turf/open/openspace) && !isplatingturf(loc))
+	if(!istype(loc, /turf/open/openspace)) // BANDASTATION EDIT - Cyberiad: First day of fixes for "Ghetto rework" (Removes plating checks)
 		return
 
-	if(isplatingturf(loc))
-		var/turf/open/floor/smashed_plating = loc
-		visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] с силой отбрасывается в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"),
-				span_userdanger("Вас с силой отбрасывает в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"))
-		apply_damage(rand(5,20), BRUTE, BODY_ZONE_CHEST)
-		smashed_plating.ScrapeAway(1, CHANGETURF_INHERIT_AIR)
+	// // BANDASTATION REMOVAL START - Cyberiad: First day of fixes for "Ghetto rework"
+	// if(isplatingturf(loc))
+	// 	var/turf/open/floor/smashed_plating = loc
+	// 	visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] с силой отбрасывается в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"),
+	// 			span_userdanger("Вас с силой отбрасывает в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"))
+	// 	apply_damage(rand(5,20), BRUTE, BODY_ZONE_CHEST)
+	// 	smashed_plating.ScrapeAway(1, CHANGETURF_INHERIT_AIR)
+	// // BANDASTATION REMOVAL END - Cyberiad: First day of fixes for "Ghetto rework"
 
 	for(var/obj/structure/lattice/lattice in loc)
 		visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] с силой отбрасывается в [lattice.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"),
