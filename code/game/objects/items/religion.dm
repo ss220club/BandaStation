@@ -137,7 +137,7 @@
 
 /obj/item/banner/science
 	name = "sciencia banner"
-	desc = "Баннер Сайенции, смелые тауматурги и исследователи, которые идут по неизведанному пути."
+	desc = "Баннер Наукии, смелые тауматурги и исследователи, которые идут по неизведанному пути."
 	icon_state = "banner_science"
 	inhand_icon_state = "banner_science"
 	warcry = "Наука - наш щит, Знание - наш меч!!"
