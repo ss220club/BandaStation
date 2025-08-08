@@ -101,6 +101,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		set_panel_open(TRUE)
 
 	if(name == initial(name))
+		ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(src)])", override_base = "[get_area_name(src)] Air Alarm"))
 		name = "[get_area_name(src)] Air Alarm"
 
 	tlv_collection = list()
@@ -181,6 +182,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 /obj/machinery/airalarm/update_name(updates)
 	. = ..()
+	ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(my_area)])", override_base = "[get_area_name(my_area)] Air Alarm"))
 	name = "[get_area_name(my_area)] Air Alarm"
 
 /obj/machinery/airalarm/on_exit_area(datum/source, area/area_to_unregister)
@@ -603,28 +605,28 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		var/is_low_temp = tlv_collection["temperature"].hazard_min != TLV_VALUE_IGNORE && temp <= tlv_collection["temperature"].hazard_min
 
 		if(is_low_pressure && is_low_temp)
-			warning_message = "Danger! Low pressure and temperature detected."
+			warning_message = "Тревога! Низкое давление и температура."
 			return
 		if(is_low_pressure && is_high_temp)
-			warning_message = "Danger! Low pressure and high temperature detected."
+			warning_message = "Тревога! Низкое давление и высокая температура."
 			return
 		if(is_high_pressure && is_high_temp)
-			warning_message = "Danger! High pressure and temperature detected."
+			warning_message = "Тревога! Высокое давление и температура."
 			return
 		if(is_high_pressure && is_low_temp)
-			warning_message = "Danger! High pressure and low temperature detected."
+			warning_message = "Тревога! Высокое давление и низкая температура."
 			return
 		if(is_low_pressure)
-			warning_message = "Danger! Low pressure detected."
+			warning_message = "Тревога! Низкое давление."
 			return
 		if(is_high_pressure)
-			warning_message = "Danger! High pressure detected."
+			warning_message = "Тревога! Высокое давление."
 			return
 		if(is_low_temp)
-			warning_message = "Danger! Low temperature detected."
+			warning_message = "Тревога! Низкая температура."
 			return
 		if(is_high_temp)
-			warning_message = "Danger! High temperature detected."
+			warning_message = "Тревога! Высокая температура."
 			return
 		else
 			warning_message = null

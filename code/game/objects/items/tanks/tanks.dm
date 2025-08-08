@@ -188,7 +188,7 @@
 
 /obj/item/tank/suicide_act(mob/living/user)
 	var/mob/living/carbon/human/human_user = user
-	user.visible_message(span_suicide("[user] is putting [src]'s valve to [user.p_their()] lips! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is putting [src]'s valve to [user.p_their()] lips! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(loc, 'sound/effects/spray.ogg', 10, TRUE, -3)
 	if(!QDELETED(human_user) && air_contents && air_contents.return_pressure() >= 1000)
 		ADD_TRAIT(human_user, TRAIT_DISFIGURED, TRAIT_GENERIC)

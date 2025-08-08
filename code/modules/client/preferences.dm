@@ -234,7 +234,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			if (istype(requested_preference, /datum/preference/name))
 				tainted_character_profiles = TRUE
-
 			for(var/datum/preference_middleware/preference_middleware as anything in middleware)
 				preference_middleware.post_set_preference(ui.user, requested_preference_key, value)
 			return TRUE
@@ -265,6 +264,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				return FALSE
 
 			return TRUE
+		// BANDASTATION ADDITION - START
+		if("change_preferences_window")
+			if(current_window == PREFERENCE_TAB_CHARACTER_PREFERENCES)
+				current_window = PREFERENCE_TAB_GAME_PREFERENCES
+			else
+				current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES
+			update_static_data(ui.user)
+			ui_interact(ui.user)
+			return TRUE
+		// BANDASTATION ADDITION - END
 
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
 		var/delegation = preference_middleware.action_delegations[action]
@@ -565,5 +574,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		to_chat(parent, span_warning("There's been a connection failure while trying to check the status of your BYOND membership. Reconnecting may fix the issue, or BYOND could be experiencing downtime."))
 
 	unlock_content = !!byond_member
-	if(unlock_content)
-		max_save_slots = 8
+	// BANDASTATION REMOVE - Start
+	// if(unlock_content)
+	// 	max_save_slots = 8
+	// BANDASTATION REMOVE - End

@@ -40,7 +40,7 @@ export const CellularEmporium = (props) => {
 
   const { can_readapt, genetic_points_count } = data;
   const readaptTracker = (can_readapt: number): string => {
-    const firstPart = 'Readapt(';
+    const firstPart = 'Реадаптироваться(';
     return firstPart.concat(can_readapt.toString(), ')');
   };
   return (
@@ -49,7 +49,7 @@ export const CellularEmporium = (props) => {
         <Section
           fill
           scrollable
-          title={'Genetic Points'}
+          title={'Генетические очки'}
           buttons={
             <Stack>
               <Stack.Item fontSize="16px">
@@ -62,9 +62,9 @@ export const CellularEmporium = (props) => {
                   disabled={!can_readapt}
                   tooltip={
                     can_readapt
-                      ? 'We readapt, un-evolving all evolved abilities \
-                    and refunding our genetic points.'
-                      : 'We cannot readapt until we absorb more DNA.'
+                      ? 'Мы переадаптируемся, избавляясь от всех развитых способностей \
+                    и возвращаем наши генетические очки.'
+                      : 'Мы не сможем реадаптироваться, пока не поглотим больше ДНК.'
                   }
                   onClick={() => act('readapt')}
                 >
@@ -75,7 +75,7 @@ export const CellularEmporium = (props) => {
                 <Input
                   width="200px"
                   onChange={setSearchAbilities}
-                  placeholder="Search Abilities..."
+                  placeholder="Поиск способностей..."
                   value={searchAbilities}
                 />
               </Stack.Item>
@@ -121,9 +121,9 @@ const AbilityList = (props: { searchAbilities: string }) => {
     return (
       <NoticeBox>
         {abilities.length === 0
-          ? 'No abilities available to purchase. \
-        This is in error, contact your local hivemind today.'
-          : 'No abilities found.'}
+          ? 'Нет способностей, доступных для приобретения. \
+        Это ошибка, свяжитесь с вашим местным коллективным разумом сегодня.'
+          : 'Способности не обнаружены.'}
       </NoticeBox>
     );
   }
@@ -148,7 +148,7 @@ const AbilityList = (props: { searchAbilities: string }) => {
               </Stack.Item>
               <Stack.Item>
                 <Button
-                  content={'Evolve'}
+                  content={'Развить'}
                   disabled={
                     owned_abilities.includes(ability.path) ||
                     ability.genetic_point_required > genetic_points_count ||
