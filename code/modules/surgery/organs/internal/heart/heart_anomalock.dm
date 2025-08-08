@@ -5,13 +5,12 @@
 
 /obj/item/organ/heart/cybernetic/anomalock
 	name = "voltaic combat cyberheart"
-	desc = "Кибернетическое сердце, что обогнало своё время. Активное сердце даёт пользователю защиту от ЭМИ и удерживает тело в вертикальном положении в самых тяжёлых условиях."
+	desc = "Кибернетическое сердце, что обогнало своё время. Активное сердце даёт пользователю защиту от ЭМИ и удерживает тело в вертикальном положении в самых тяжёлых условиях. Для работы требуется аномальное ядро флюкс"
 	icon_state = "anomalock_heart"
 	beat_noise = "an astonishing <b>BZZZ</b> of immense electrical power"
 	bleed_prevention = TRUE
 	toxification_probability = 0
 
-	var/core_installed = FALSE
 	COOLDOWN_DECLARE(survival_cooldown)
 	///Cooldown for the activation of the organ
 	var/survival_cooldown_time = 5 MINUTES
@@ -33,11 +32,6 @@
 /obj/item/organ/heart/cybernetic/anomalock/Destroy()
 	QDEL_NULL(core)
 	return ..()
-
-/obj/item/organ/heart/cybernetic/anomalock/examine(mob/user)
-	. = ..()
-	if (!core_installed)
-		. += span_warning("Для работы требуется аномальное ядро флюкс.")
 
 /obj/item/organ/heart/cybernetic/anomalock/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
@@ -148,7 +142,6 @@
 	if(!user.transferItemToLoc(tool, src))
 		return ITEM_INTERACT_BLOCKING
 	core = tool
-	core_installed = TRUE
 	balloon_alert(user, "ядро установлено")
 	playsound(src, 'sound/machines/click.ogg', 30, TRUE)
 	add_organ_trait(TRAIT_SHOCKIMMUNE)
@@ -172,7 +165,6 @@
 	if(Adjacent(user) && !issilicon(user))
 		user.put_in_hands(core)
 	core = null
-	core_installed = FALSE
 	remove_organ_trait(TRAIT_SHOCKIMMUNE)
 	update_icon_state()
 
@@ -183,7 +175,6 @@
 /obj/item/organ/heart/cybernetic/anomalock/prebuilt/Initialize(mapload)
 	. = ..()
 	core = new /obj/item/assembly/signaler/anomaly/flux(src)
-	core_installed = TRUE
 	update_icon_state()
 
 /datum/status_effect/voltaic_overdrive
