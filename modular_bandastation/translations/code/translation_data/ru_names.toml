@@ -24823,3 +24823,67 @@ dative = "пространственному аномальному ядру"
 accusative = "пространственное аномальное ядро"
 instrumental = "пространственным аномальным ядром"
 prepositional = "пространственном аномальном ядре"
+//BANNERS
+
+["banner"]
+nominative = "знамя"
+genitive = "знамени"
+dative = "знамени"
+accusative = "знамя"
+instrumental = "знаменем"
+prepositional = "знамени"
+gender = "neuter"
+
+["securistan banner"]
+nominative = "знамя Секуристана"
+genitive = "знамени Секуристана"
+dative = "знамени Секуристана"
+accusative = "знамя Секуристана"
+instrumental = "знаменем Секуристана"
+prepositional = "знамени Секуристана"
+gender = "neuter"
+
+["meditopia banner"]
+nominative = "знамя Медитопии"
+genitive = "знамени Медитопии"
+dative = "знамени Медитопии"
+accusative = "знамя Медитопии"
+instrumental = "знаменем Медитопии"
+prepositional = "знамени Медитопии"
+gender = "neuter"
+
+["sciencia banner"]
+nominative = "знамя Сайенции"
+genitive = "знамени Сайенции"
+dative = "знамени Сайенции"
+accusative = "знамя Сайенции"
+instrumental = "знаменем Сайенции"
+prepositional = "знамени Сайенции"
+gender = "neuter"
+
+["cargonia banner"]
+nominative = "знамя Каргонии"
+genitive = "знамени Каргонии"
+dative = "знамени Каргонии"
+accusative = "знамя Каргонии"
+instrumental = "знаменем Каргонии"
+prepositional = "знамени Каргонии"
+gender = "neuter"
+
+["engitopia banner"]
+nominative = "знамя Инжетопии"
+genitive = "знамени Инжетопии"
+dative = "знамени Инжетопии"
+accusative = "знамя Инжетопии"
+instrumental = "знаменем Инжетопии"
+prepositional = "знамени Инжетопии"
+gender = "neuter"
+
+["command banner"]
+nominative = "знамя командования"
+genitive = "знамени командования"
+dative = "знамени командования"
+accusative = "знамя командования"
+instrumental = "знаменем командования"
+prepositional = "знамени командования"
+gender = "neuter"
