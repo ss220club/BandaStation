@@ -72,6 +72,10 @@
 	hitsound = 'sound/items/weapons/stringsmash.ogg'
 	allowed_instrument_ids = list("cshmetalgt", "cshrockgt", "csteelgt", "ccleangt")
 
+/obj/item/instrument/soundhand_rock_guitar/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
+
 /obj/structure/musician/drumskit
 	name = "drum kit"
 	desc = "Складная барбанная установка с несколькими томами и тарелками."
@@ -81,7 +85,9 @@
 	layer = 2.5
 	anchored = FALSE
 	buckle_lying = FALSE
-	allowed_instrument_ids = "drums"
+	can_buckle = TRUE
+	buckle_dir = SOUTH
+	allowed_instrument_ids = list("drums")
 	var/active = FALSE
 
 /obj/structure/musician/drumskit/examine()
@@ -91,7 +97,6 @@
 /obj/structure/musician/drumskit/Initialize(mapload)
 	. = ..()
 	song.instrument_range = 15
-	// Для обновления иконки (код взят с кода наушников)
 	RegisterSignal(src, COMSIG_INSTRUMENT_START, PROC_REF(start_playing))
 	RegisterSignal(src, COMSIG_INSTRUMENT_END, PROC_REF(stop_playing))
 
@@ -124,9 +129,12 @@
 /obj/structure/musician/drumskit/update_icon_state()
 	if(anchored)
 		icon_state = "[base_icon_state][active ? "_active" : null]"
+		layer = 5
 	else if(broken)
 		icon_state = "[base_icon_state]_broken"
+		layer = initial(layer)
 	else
 		icon_state = "[base_icon_state]_unanchored"
+		layer = initial(layer)
 
 	return ..()

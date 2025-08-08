@@ -95,9 +95,14 @@
 			/obj/item/instrument/recorder,
 			/obj/item/instrument/harmonica,
 			/obj/item/instrument/piano_synth/headphones,
+			/obj/structure/musician/drumskit, // BANDASTATION ADDITION - Extention for instruments
 		)
 		for(var/obj/item/instrument/instrument as anything in possible_instruments)
 			instruments[initial(instrument.name)] = instrument
+		// BANDASTATION ADDITION BEGIN - Extention for instruments
+		for(var/obj/structure/musician/instrument as anything in possible_instruments)
+			instruments[initial(instrument.name)] = instrument
+		// BANDASTATION ADDITION END - Extention for instruments
 	return instruments
 
 /obj/item/choice_beacon/ingredient
