@@ -27,10 +27,10 @@
 	if(!inspiration_available || flags_1 & HOLOGRAM_1)
 		return
 	if(morale_time > world.time)
-		to_chat(user, span_warning("Вы еще не чувствуете достаточного вдохновения, чтобы снова использовать [declent_ru(NOMINATIVE)]."))
+		to_chat(user, span_warning("Вы еще не чувствуете достаточного вдохновения, чтобы снова использовать [declent_ru(ACCUSATIVE)]."))
 		return
-	user.visible_message("<span class='big notice'>[user] устремляет ввысь [declent_ru(NOMINATIVE)]!</span>", \
-	span_notice("Вы устремляете ввысь [declent_ru(NOMINATIVE)], вдохновляя своих союзников!"))
+	user.visible_message("<span class='big notice'>[user] устремляет ввысь [declent_ru(ACCUSATIVE)]!</span>", \
+	span_notice("Вы устремляете ввысь [declent_ru(ACCUSATIVE)], вдохновляя своих союзников!"))
 	playsound(src, SFX_RUSTLE, 100, FALSE)
 	if(warcry)
 		user.say("[warcry]", forced="banner")
@@ -57,7 +57,7 @@
 	for(var/V in inspired)
 		var/mob/living/carbon/human/H = V
 		if(H != user)
-			to_chat(H, span_notice("Ваша уверенность растет по мере того, как [user] возвышает [declent_ru(NOMINATIVE)]!"))
+			to_chat(H, span_notice("Ваша уверенность растет по мере того, как [user] возвышает [declent_ru(ACCUSATIVE)]!"))
 		inspiration(H)
 		special_inspiration(H)
 
@@ -82,7 +82,7 @@
 
 /obj/item/banner/security
 	name = "securistan banner"
-	desc = "Баннер Секуристана, держащие закон и безопасность станции в железных рукавицах."
+	desc = "Баннер Секуристана, держащий закон и безопасность станции в железных рукавицах."
 	icon_state = "banner_security"
 	inhand_icon_state = "banner_security"
 	warcry = "ВСЕМ ЛЕЧЬ НА ЗЕМЛЮ!!"
@@ -137,7 +137,7 @@
 
 /obj/item/banner/science
 	name = "sciencia banner"
-	desc = "Баннер Наукии, смелые тауматурги и исследователи, которые идут по неизведанному пути."
+	desc = "Баннер Наукии, смелых тауматургов и исследователей, идущих по неизведанному пути."
 	icon_state = "banner_science"
 	inhand_icon_state = "banner_science"
 	warcry = "Наука - наш щит, Знание - наш меч!!"
@@ -162,7 +162,7 @@
 
 /obj/item/banner/cargo
 	name = "cargonia banner"
-	desc = "Баннер вечной Каргонии, обладающее мистической силой материализации любого объекта."
+	desc = "Баннер вечной Каргонии, обладающий мистической силой материализации любого объекта."
 	icon_state = "banner_cargo"
 	inhand_icon_state = "banner_cargo"
 	warcry = "Слава Каргонии!!"
@@ -184,7 +184,7 @@
 
 /obj/item/banner/engineering
 	name = "engitopia banner"
-	desc = "Баннер Инжетопии, обладатели безграничной энергии."
+	desc = "Баннер Инжетопии, обладателей безграничной энергии."
 	icon_state = "banner_engineering"
 	inhand_icon_state = "banner_engineering"
 	warcry = "Славьте лорда Сингуло!!"
@@ -209,7 +209,7 @@
 
 /obj/item/banner/command
 	name = "command banner"
-	desc = "Баннер командования, верная и древняя династия бюрократических королей и королев."
+	desc = "Баннер командования — верной и древней династии бюрократических королей и королев."
 	//No icon state here since the default one is the NT banner
 	warcry = "Слава Нанотрейзен!!"
 
