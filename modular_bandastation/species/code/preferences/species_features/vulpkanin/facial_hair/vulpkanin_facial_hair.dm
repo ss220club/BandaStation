@@ -25,7 +25,7 @@
 	return final_icon
 
 /datum/preference/choiced/vulpkanin_facial_hair/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["vulpkanin_facial_hair"] = value
+	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR] = value
 
 /datum/preference/choiced/vulpkanin_facial_hair/compile_constant_data()
 	var/list/data = ..()

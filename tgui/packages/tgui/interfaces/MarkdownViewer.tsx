@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-
+import { Box } from 'tgui-core/components';
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import { sanitizeText } from '../sanitize';
@@ -34,8 +34,7 @@ export const MarkdownRenderer = (props: MarkdownRendererProps) => {
     content = sanitizeText(content, /* advHtml = */ false);
   }
 
-  // eslint-disable-next-line react/no-danger
-  return <div dangerouslySetInnerHTML={{ __html: content }} />;
+  return <Box dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
 MarkdownRenderer.defaultProps = {

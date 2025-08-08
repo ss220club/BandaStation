@@ -1,12 +1,3 @@
-#define COLOR_WOOD "#864A2D"
-#define COLOR_OAK "#644526"
-#define COLOR_BIRCH "#FFECB3"
-#define COLOR_CHERRY "#643412"
-#define COLOR_AMARANTH "#6B2E3E"
-#define COLOR_EBONITE "#363649"
-#define COLOR_PINK_IVORY "#D78575"
-#define COLOR_GUAIACUM "#5C6250"
-
 /// Automatically generates all subtypes for a wooden floor with tiles.
 #define WOODEN_FLOOR_HELPER(type, floor_name, floor_color)\
 /turf/open/floor/wood/##type {\
@@ -142,14 +133,5 @@ WOODEN_FLOOR_HELPER(amaranth, "amaranth", COLOR_AMARANTH)
 WOODEN_FLOOR_HELPER(ebonite, "ebonite", COLOR_EBONITE)
 WOODEN_FLOOR_HELPER(pink_ivory, "pink ivory", COLOR_PINK_IVORY)
 WOODEN_FLOOR_HELPER(guaiacum, "guaiacum", COLOR_GUAIACUM)
-
-#undef COLOR_WOOD
-#undef COLOR_OAK
-#undef COLOR_BIRCH
-#undef COLOR_CHERRY
-#undef COLOR_AMARANTH
-#undef COLOR_EBONITE
-#undef COLOR_PINK_IVORY
-#undef COLOR_GUAIACUM
 
 #undef WOODEN_FLOOR_HELPER

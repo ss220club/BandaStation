@@ -79,15 +79,17 @@
 		log_game("[key_name(owner)] is no longer obsessed with [key_name(obsession)].")
 		UnregisterSignal(obsession, COMSIG_MOB_EYECONTACT)
 
-/datum/brain_trauma/special/obsessed/handle_speech(datum/source, list/speech_args)
-	if(!viewing)
-		return
-	if(prob(25)) // 25% chances to be nervous and stutter.
-		if(prob(50)) // 12.5% chance (previous check taken into account) of doing something suspicious.
-			addtimer(CALLBACK(src, PROC_REF(on_failed_social_interaction)), rand(1 SECONDS, 3 SECONDS))
-		else if(!owner.has_status_effect(/datum/status_effect/speech/stutter))
-			to_chat(owner, span_warning("Нахождение рядом с [obsession] заставляет вас нервничать, и вы начинаете заикаться..."))
-		owner.set_stutter_if_lower(6 SECONDS)
+// // BANDASTATION REMOVAL START - Remove Obsessed speech debuff
+// /datum/brain_trauma/special/obsessed/handle_speech(datum/source, list/speech_args)
+// 	if(!viewing)
+// 		return
+// 	if(prob(25)) // 25% chances to be nervous and stutter.
+// 		if(prob(50)) // 12.5% chance (previous check taken into account) of doing something suspicious.
+// 			addtimer(CALLBACK(src, PROC_REF(on_failed_social_interaction)), rand(1 SECONDS, 3 SECONDS))
+// 		else if(!owner.has_status_effect(/datum/status_effect/speech/stutter))
+// 			to_chat(owner, span_warning("Нахождение рядом с [obsession] заставляет вас нервничать, и вы начинаете заикаться..."))
+// 		owner.set_stutter_if_lower(6 SECONDS)
+// // BANDASTATION REMOVAL END - Remove Obsessed speech debuff
 
 /// Singal proc for [COMSIG_CARBON_HELPED], when our obsessed helps (hugs) our obsession, increases hug count
 /datum/brain_trauma/special/obsessed/proc/on_hug(datum/source, mob/living/hugged)
