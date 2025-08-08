@@ -5,21 +5,15 @@ GLOBAL_LIST_EMPTY(ru_say_verbs)
 GLOBAL_LIST_EMPTY(ru_emote_names)
 GLOBAL_LIST_EMPTY(ru_emote_messages)
 GLOBAL_LIST_EMPTY(ru_reagent_descs)
-GLOBAL_LIST_EMPTY(ru_names)
 
 
-SUBSYSTEM_DEF(translations)
-	name = "Translations"
-	init_stage = INITSTAGE_FIRST
-	flags = SS_NO_FIRE
-	dependents = list(
-		/datum/controller/subsystem/atoms, // Some Atoms being initialized too early, so we need to load translations before them
-	)
-
-	var/list/ru_tastes = list()
+/datum/modpack/translations
+	name = "Переводы"
+	desc = "Добавляет переводы"
+	author = "Vallat, Larentoun, dj-34, Lori Hunter"
 
 
-/datum/controller/subsystem/translations/Initialize()
+/datum/modpack/translations/post_initialize()
 	// Tastes
 	var/food_path = "[PATH_TO_TRANSLATE_DATA]/ru_tastes.toml"
 	if(fexists(file(food_path)))
@@ -81,35 +75,3 @@ SUBSYSTEM_DEF(translations)
 		for(var/reagent_key as anything in GLOB.chemical_reagents_list)
 			var/datum/reagent/reagent = GLOB.chemical_reagents_list[reagent_key]
 			reagent.update_to_ru()
-
-	load_all_ru_names_toml_files()
-
-	return SS_INIT_SUCCESS
-
-
-/// Recursively loads all *.toml files from the translation_data directory into GLOB.ru_names
-/// This function will scan all subdirectories and load any TOML files containing Russian name declensions
-/// The loaded data is merged into a single GLOB.ru_names list for efficient access
-/datum/controller/subsystem/translations/proc/load_all_ru_names_toml_files()
-	GLOB.ru_names = list()
-	_load_ru_names_from_directory(PATH_TO_TRANSLATE_DATA_FOLDER)
-
-/// Helper proc to recursively load TOML files from a directory and its subdirectories
-/datum/controller/subsystem/translations/proc/_load_ru_names_from_directory(directory_path)
-	var/list/files = flist(directory_path)
-	if(!length(files))
-		return
-
-	for(var/file_or_dir in files)
-		var/full_path = "[directory_path]/[file_or_dir]"
-		// If it's a directory (ends with /), recursively scan it
-		if(findtext(file_or_dir, "/", length(file_or_dir)))
-			_load_ru_names_from_directory(full_path)
-		// If it's a TOML file, load it
-		else if(copytext(file_or_dir, -4) == "toml")
-			if(fexists(file(full_path)))
-				var/list/toml_data = rustg_read_toml_file(full_path)
-				if(length(toml_data))
-					// Merge the loaded data into GLOB.ru_names
-					for(var/key in toml_data)
-						GLOB.ru_names[key] = toml_data[key]
