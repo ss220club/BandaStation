@@ -30,7 +30,7 @@
 	register_context()
 	update_appearance(UPDATE_OVERLAYS)
 
-	RegisterSignal(src,COMSIG_STORAGE_DUMP_CONTENT,PROC_REF(on_storage_dump))
+	// RegisterSignal(src,COMSIG_STORAGE_DUMP_CONTENT,PROC_REF(on_storage_dump))
 
 /obj/machinery/teapot/Destroy()
 	QDEL_NULL(glass)
@@ -97,17 +97,16 @@
 		. += span_notice("Наполнен на <b>[round((total_weight / maximum_weight) * 100)]%</b> вместимости.")
 
 	if(!QDELETED(glass))
-		. += span_notice("Мензурка размером в <b>[glass.reagents.maximum_volume]u</b> [declension_ru(glass.reagents.maximum_volume,"юнит","юнита","юнитов")] вставлена. Содержимое:")
+		. += span_notice("Стакан размером в <b>[glass.reagents.maximum_volume]u</b> [declension_ru(glass.reagents.maximum_volume,"юнит","юнита","юнитов")] вставлена. Содержимое:")
 		if(glass.reagents.total_volume)
 			for(var/datum/reagent/reg as anything in glass.reagents.reagent_list)
 				. += span_notice("[round(reg.volume, CHEMICAL_VOLUME_ROUNDING)] [declension_ru(round(reg.volume, CHEMICAL_VOLUME_ROUNDING),"юнит","юнита","юнитов")] [reg.name]")
 		else
 			. += span_notice("Ничего.")
-		. += span_notice("[EXAMINE_HINT("ПКМ")] пустой рукой для снятия мензурки.")
+		. += span_notice("[EXAMINE_HINT("ПКМ")] пустой рукой для того, чтобы забрать стакан.")
 	else
-		. += span_warning("Нет мензурки.")
+		. += span_warning("Нет стакана.")
 
-	. += span_notice("Вы можете перетащить хранилище на [declent_ru(ACCUSATIVE)], чтобы перемести всё содержимое.")
 	if(anchored)
 		. += span_notice("Машина может быть [EXAMINE_HINT("откручена")].")
 	else
@@ -130,7 +129,13 @@
 	if(gone == glass)
 		glass = null
 		update_appearance(UPDATE_OVERLAYS)
-
+/**
+ * Inserts, removes or replaces the beaker present
+ * Arguments
+ *
+ * * mob/living/user - the player performing the action
+ * * obj/item/reagent_containers/new_beaker - the new beaker to replace the old, null to do nothing
+ */
 /obj/machinery/teapot/proc/replace_beaker(mob/living/user, obj/item/reagent_containers/new_glass)
 	PRIVATE_PROC(TRUE)
 
@@ -144,84 +149,87 @@
 
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/machinery/teapot/proc/load_items(mob/user, list/obj/item/to_add)
-	PRIVATE_PROC(TRUE)
+// /obj/machinery/teapot/proc/load_items(mob/user, list/obj/item/to_add)
+// 	PRIVATE_PROC(TRUE)
 
-	var/list/obj/item/filtered_list = list()
-	for(var/obj/item/ingredient as anything in to_add)
-		if((ingredient.item_flags & ABSTRACT) || (ingredient.flags_1 & HOLOGRAM_1))
-			continue
-		if(!ingredient.blend_requirements(src))
-			continue
+// 	var/list/obj/item/filtered_list = list()
+// 	for(var/obj/item/ingredient as anything in to_add)
+// 		if((ingredient.item_flags & ABSTRACT) || (ingredient.flags_1 & HOLOGRAM_1))
+// 			continue
+// 		if(!ingredient.blend_requirements(src))
+// 			continue
 
-		filtered_list += ingredient
-	if(!filtered_list.len)
-		return FALSE
+// 		filtered_list += ingredient
+// 	if(!filtered_list.len)
+// 		return FALSE
 
-	var/total_weight
-	for(var/obj/item/to_process in src)
-		if((to_process in component_parts) || to_process == glass)
-			continue
-		total_weight += to_process.w_class
+// 	var/total_weight
+// 	for(var/obj/item/to_process in src)
+// 		if((to_process in component_parts) || to_process == glass)
+// 			continue
+// 		total_weight += to_process.w_class
 
-	var/items_transfered = 0
-	for(var/obj/item/weapon as anything in filtered_list)
-		if(weapon.w_class + total_weight > maximum_weight)
-			to_chat(user, span_warning("[weapon] is too big to fit into [src]."))
-			continue
+// 	var/items_transfered = 0
+// 	for(var/obj/item/weapon as anything in filtered_list)
+// 		if(weapon.w_class + total_weight > maximum_weight)
+// 			to_chat(user, span_warning("[weapon] is too big to fit into [src]."))
+// 			continue
 
-		if(!user.transferItemToLoc(weapon, src))
-			continue
+// 		if(!user.transferItemToLoc(weapon, src))
+// 			continue
 
-		total_weight += weapon.w_class
-		items_transfered += 1
-		to_chat(user, span_notice("[weapon] was loaded into [src]."))
+// 		total_weight += weapon.w_class
+// 		items_transfered += 1
+// 		to_chat(user, span_notice("[weapon] was loaded into [src]."))
 
-	return items_transfered
+// 	return items_transfered
 
 /obj/machinery/teapot/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.combat_mode || (tool.item_flags & ABSTRACT) || (tool.flags_1 & HOLOGRAM_1))
 		return ITEM_INTERACT_SKIP_TO_ATTACK
 
-	if (istype(tool,/obj/item/reagent_containers/cup/glass) && !is_operating)
+	//add the glass
+	if (istype(tool,/obj/item/reagent_containers/cup/glass))
 		replace_beaker(user, tool)
 		to_chat(user, span_notice("You add [tool] to [src]."))
 		return ITEM_INTERACT_SUCCESS
-
-	else if(istype(tool, /obj/item/storage/bag))
-		var/list/obj/item/to_add = list()
-
-		var/static/list/accepted_items = list(
-			/obj/item/grown,
-			/obj/item/food/grown,
-			/obj/item/food/honeycomb,
-		)
-
-		for(var/obj/item/ingredient in tool)
-			if(!is_type_in_list(ingredient, accepted_items))
-				continue
-			to_add += ingredient
-
-		var/items_added = load_items(user, to_add)
-		if(!items_added)
-			to_chat(user, span_warning("No items were added."))
-			return ITEM_INTERACT_BLOCKING
-		to_chat(user, span_notice("[items_added] items were added from [tool] to [src]."))
-		return ITEM_INTERACT_SUCCESS
-
-	else if(length(tool.grind_results) || tool.reagents?.total_volume)
-		if(tool.atom_storage && length(tool.contents))
-			to_chat(user, span_notice("Drag this item onto [src] to dump its contents, or empty it to grind the container."))
-			return ITEM_INTERACT_BLOCKING
-
-		if(!load_items(user, list(tool)))
-			return ITEM_INTERACT_BLOCKING
-		to_chat(user, span_notice("[tool] was added to [src]."))
-		return ITEM_INTERACT_SUCCESS
-
-	else if(tool.atom_storage)
-		to_chat(user, span_warning("You must drag & dump contents of [tool] into [src]."))
+	else
 		return ITEM_INTERACT_BLOCKING
+
+	// else if(istype(tool, /obj/item/storage/bag))
+	// 	var/list/obj/item/to_add = list()
+
+	// 	var/static/list/accepted_items = list(
+	// 		/obj/item/grown,
+	// 		/obj/item/food/grown,
+	// 		/obj/item/food/honeycomb,
+	// 	)
+
+	// 	for(var/obj/item/ingredient in tool)
+	// 		if(!is_type_in_list(ingredient, accepted_items))
+	// 			continue
+	// 		to_add += ingredient
+
+	// 	var/items_added = load_items(user, to_add)
+	// 	if(!items_added)
+	// 		to_chat(user, span_warning("No items were added."))
+	// 		return ITEM_INTERACT_BLOCKING
+	// 	to_chat(user, span_notice("[items_added] items were added from [tool] to [src]."))
+	// 	return ITEM_INTERACT_SUCCESS
+
+	// else if(length(tool.grind_results) || tool.reagents?.total_volume)
+	// 	if(tool.atom_storage && length(tool.contents))
+	// 		to_chat(user, span_notice("Drag this item onto [src] to dump its contents, or empty it to grind the container."))
+	// 		return ITEM_INTERACT_BLOCKING
+
+	// 	if(!load_items(user, list(tool)))
+	// 		return ITEM_INTERACT_BLOCKING
+	// 	to_chat(user, span_notice("[tool] was added to [src]."))
+	// 	return ITEM_INTERACT_SUCCESS
+
+	// else if(tool.atom_storage)
+	// 	to_chat(user, span_warning("You must drag & dump contents of [tool] into [src]."))
+	// 	return ITEM_INTERACT_BLOCKING
 
 	return NONE
 
@@ -266,18 +274,18 @@
 	if(default_deconstruction_crowbar(tool))
 		return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/teapot/proc/on_storage_dump(datum/source,datum/storage/storage, mob/user)
-	SIGNAL_HANDLER
+// /obj/machinery/teapot/proc/on_storage_dump(datum/source,datum/storage/storage, mob/user)
+// 	SIGNAL_HANDLER
 
-	var/list/obj/item/contents_to_dump = list()
-	for(var/obj/item/to_dump in storage.real_location)
-		if(to_dump.atom_storage)
-			continue
-		contents_to_dump += to_dump
+// 	var/list/obj/item/contents_to_dump = list()
+// 	for(var/obj/item/to_dump in storage.real_location)
+// 		if(to_dump.atom_storage)
+// 			continue
+// 		contents_to_dump += to_dump
 
-	to_chat(user,span_notice("You dumped [load_items(user, contents_to_dump)] items from [storage.parent] into [src]."))
+// 	to_chat(user,span_notice("You dumped [load_items(user, contents_to_dump)] items from [storage.parent] into [src]."))
 
-	return STORAGE_DUMP_HANDLED
+// 	return STORAGE_DUMP_HANDLED
 
 /obj/machinery/teapot/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
