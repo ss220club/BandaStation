@@ -278,8 +278,10 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 		/obj/item/food/grown,
 		// BANDASTATION ADD - Shouldn't exist without a parent hookah
 		/obj/item/hookah_mouthpiece,
-		///Single use case holder atom requiring a user
+		//Single use case holder atom requiring a user
 		/atom/movable/looking_holder,
+		//Should not exist outside of holders
+		/obj/effect/decal/cleanable/blood/trail,
 	)
 
 	// Everything that follows is a typesof() check.

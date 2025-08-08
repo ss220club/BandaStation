@@ -2,7 +2,7 @@ import { type ReactNode, useState } from 'react';
 import { Input, Section, Stack, Tabs } from 'tgui-core/components';
 import { useFuzzySearch } from 'tgui-core/fuzzysearch';
 
-import { PreferenceChild } from './GamePreferencesPage';
+import type { PreferenceChild } from './GamePreferencesPage';
 
 type PreferencesTabsProps = {
   buttons?: ReactNode;

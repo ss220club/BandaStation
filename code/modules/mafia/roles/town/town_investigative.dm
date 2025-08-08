@@ -5,7 +5,7 @@
 	role_type = TOWN_INVEST
 	winner_award = /datum/award/achievement/mafia/detective
 
-	hud_icon = "huddetective"
+	hud_icon = SECHUD_DETECTIVE
 	revealed_icon = "detective"
 
 	role_unique_actions = list(/datum/mafia_ability/investigate)
@@ -17,18 +17,18 @@
 	role_type = TOWN_INVEST
 	winner_award = /datum/award/achievement/mafia/psychologist
 
-	hud_icon = "hudpsychologist"
+	hud_icon = SECHUD_PSYCHOLOGIST
 	revealed_icon = "psychologist"
 
 	role_unique_actions = list(/datum/mafia_ability/reveal_role)
 
-/datum/mafia_role/chaplain
-	name = "Священник"
-	desc = "Каждую ночь вы можете общаться с духами мертвых, чтобы узнать роли погибших членов экипажа.."
-	revealed_outfit = /datum/outfit/mafia/chaplain
+/datum/mafia_role/coroner
+	name = "Коронер"
+	desc = "Вы можете проводить вскрытия тел умерших каждую ночь, чтобы выяснить их роль."
+	revealed_outfit = /datum/outfit/mafia/coroner
 	role_type = TOWN_INVEST
-	hud_icon = "hudchaplain"
-	revealed_icon = "chaplain"
-	winner_award = /datum/award/achievement/mafia/chaplain
+	hud_icon = SECHUD_CORONER
+	revealed_icon = "coroner"
+	winner_award = /datum/award/achievement/mafia/coroner
 
-	role_unique_actions = list(/datum/mafia_ability/seance)
+	role_unique_actions = list(/datum/mafia_ability/autopsy)

@@ -8,7 +8,7 @@
 	return assoc_to_keys_features(SSaccessories.tajaran_tail_markings_list)
 
 /datum/preference/choiced/tajaran_tail_markings/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["tajaran_tail_markings"] = value
+	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS] = value
 
 /datum/preference/choiced/tajaran_tail_markings/compile_constant_data()
 	var/list/data = ..()
