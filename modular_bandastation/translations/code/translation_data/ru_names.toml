@@ -24688,8 +24688,6 @@ instrumental = "Нар'Си"
 prepositional = "Нар'Си"
 gender = "male"
 
-//BANNERS
-
 ["banner"]
 nominative = "знамя"
 genitive = "знамени"
