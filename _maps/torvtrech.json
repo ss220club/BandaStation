@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"map_name": "Torvtech",
+	"map_path": "map_files/torvtech",
+	"map_file": "torvtech.dmm",
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"minetype": "none"
+}

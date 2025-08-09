@@ -1,0 +1,26 @@
+{
+	"version": 1,
+	"map_name": "Robustia",
+	"map_path": "map_files/Robustia",
+	"map_file": "Robustia.dmm",
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"shuttles": {
+		"cargo": "cargo_box",
+		"emergency": "emergency_meta"
+	},
+	"traits": [
+		{
+			"Mining": true,
+			"Gravity": true,
+			"Baseturf": "/turf/open/misc/dirt/dark/jungle",
+			"No Parallax": true
+		}
+	],
+	"minetype": "none",
+	"job_changes": {
+		"Cook": {
+			"additional_cqc_areas": ["/area/station/service/kitchen"]
+		}
+	}
+}
