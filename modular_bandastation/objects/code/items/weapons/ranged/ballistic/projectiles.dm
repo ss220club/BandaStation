@@ -288,20 +288,41 @@
 	name = "railgun sabot-round"
 	icon_state = "greyscale_bolt"
 	damage = 50
-	armour_penetration = 40
+	armour_penetration = 50
 	ricochets_max = 4 //Originally 6
 	ricochet_incidence_leeway = 40
 	ricochet_chance = 75
 	ricochet_decay_damage = 0.75 // 50 -> ~37 -> ~27 -> ~20 -> ~15
 	shrapnel_type = /obj/item/shrapnel/bullet/railgun
+	embed_type = null
 	hitsound = 'modular_bandastation/objects/sounds/weapons/rail.ogg'
+	range = 80
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_BLUE
+	projectile_piercing = PASSMOB
+
+/obj/projectile/bullet/railgun/on_hit(atom/target, blocked = 0, pierce_hit)
+	if(isliving(target))
+		var/mob/living/poor_sap = target
+		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 40) || (pierces > 2))
+			projectile_piercing = NONE
+			damage -= 20
+			armour_penetration -= 10
+
+	return ..()
 
 /obj/projectile/bullet/railgun/taser
 	name = "railgun taser-round"
 	embed_type = /datum/embedding/railgun
 	damage = 10
 	stamina = 60
-	armour_penetration = 30
+	armour_penetration = 20
+	wound_bonus = -20
+	exposed_wound_bonus = -20
+	sharpness = NONE
+	projectile_piercing = NONE
 
 /obj/projectile/bullet/railgun/taser/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()
@@ -319,12 +340,12 @@
 	embed_type = null
 
 /datum/embedding/railgun
-	embed_chance = 50
+	embed_chance = 75
 	fall_chance = 3
-	pain_stam_pct = 5
-	pain_mult = 1
-	jostle_chance = 0
-	jostle_pain_mult = 0
+	pain_stam_pct = 3
+	pain_mult = 2
+	jostle_chance = 5
+	jostle_pain_mult = 1
 	ignore_throwspeed_threshold = TRUE
 	rip_time = 1 SECONDS
 

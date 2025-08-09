@@ -111,17 +111,18 @@
 	cost = CARGO_CRATE_VALUE * 150
 	access_view = ACCESS_ARMORY
 	contains = list(
-		/obj/item/gun/ballistic/automatic/railgun/nomag = 1,
-		/obj/item/ammo_box/magazine/railgun/taser = 2,
+		/obj/item/gun/ballistic/automatic/railgun = 1,
+		/obj/item/ammo_box/magazine/railgun/taser = 1,
 	)
 	crate_name = "HEMC-62 railgun crate"
 
 /datum/supply_pack/security/armory/railgun_magazines
 	name = "HEMC-62 Railgun Ammo Crate"
-	desc = "В этом ящике находятся два магазина с нелетальными снарядами к РЭМУМ (ручным электромагнитным ускорителям масс) калибра 30мм НТ."
+	desc = "В этом ящике находятся два магазина к РЭМУМ (ручным электромагнитным ускорителям масс) c летальными и нелетальными снарядами калибра 30мм НТ."
 	cost = CARGO_CRATE_VALUE * 50
 	access_view = ACCESS_ARMORY
 	contains = list(
-		/obj/item/ammo_box/magazine/railgun/taser = 2,
+		/obj/item/ammo_box/magazine/railgun/taser = 1,
+		/obj/item/ammo_box/magazine/railgun = 1,
 	)
 	crate_name = "HEMC-62 railgun ammo crate"
