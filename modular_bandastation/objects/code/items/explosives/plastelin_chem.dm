@@ -1,4 +1,4 @@
-//разные температуры чтобы всё варилось как надо(иначе получаем с4 вместо семтекса)
+// Different temperatures to ensure everything is cooked correctly (otherwise we get C4 instead of Semtex).
 #define SEMTEX_SYNTHESIS_TEMP 210
 #define C4_SYNTHESIS_TEMP 280
 
