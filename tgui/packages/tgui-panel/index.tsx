@@ -25,6 +25,7 @@ import { setupPanelFocusHacks } from './panelFocus';
 import { pingMiddleware, pingReducer } from './ping';
 import { settingsMiddleware, settingsReducer } from './settings';
 import { telemetryMiddleware } from './telemetry';
+import { emotesReducer } from './emotes'; // BANDASTATION ADD  - Emote Panel
 
 perf.mark('inception', window.performance?.timeOrigin);
 perf.mark('init');
@@ -33,6 +34,7 @@ const store = configureStore({
   reducer: combineReducers({
     audio: audioReducer,
     chat: chatReducer,
+    emotes: emotesReducer, // BANDASTATION ADD  - Emote Panel
     game: gameReducer,
     ping: pingReducer,
     settings: settingsReducer,
@@ -91,6 +93,7 @@ function setupApp() {
       [
         './audio',
         './chat',
+        './emotes', // BANDASTATION ADD  - Emote Panel
         './game',
         './Notifications',
         './Panel',
