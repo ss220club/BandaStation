@@ -203,6 +203,6 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 /obj/item/nuclear_challenge/literally_just_does_the_message/distribute_tc()
 	return
 
-#undef CHALLENGE_TELECRYSTALS_PER_CREWMAN
+#undef CHALLENGE_TELECRYSTALS_PER_CREWMAN // BandaStation Edit: Challenge balance
 #undef CHALLENGE_TIME_LIMIT
 #undef CHALLENGE_SHUTTLE_DELAY
