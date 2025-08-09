@@ -6,6 +6,9 @@
 /obj/machinery/power/apc/get_tip_name()
 	return declent_ru(NOMINATIVE)
 
+/obj/machinery/airalarm/get_tip_name()
+	return declent_ru(NOMINATIVE)
+
 /obj/machinery/firealarm/get_tip_name()
 	return declent_ru(NOMINATIVE)
 
