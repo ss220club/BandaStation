@@ -10,7 +10,7 @@
 	if(W.get_sharpness())
 		user.show_message(span_notice("Вы разрезали [src] на несколько кусков."), MSG_VISUAL)
 		for(var/i in 1 to 4)
-			new /obj/item/reagent_containers/c4_small(user.loc)
+			new /obj/item/reagent_containers/с4_small(get_turf(user))
 		qdel(src)
 
 /datum/crafting_recipe/c4_big
@@ -23,7 +23,7 @@
 
 /obj/item/reagent_containers/c4_small
 	name = "Piece of C-4"
-	desc = "Кусочек С-4. Выглядит как клубничкая жвачка."
+	desc = "Кусочек С-4. Выглядит как клубничная жвачка."
 	icon = 'modular_bandastation/objects/icons/obj/items/explosives.dmi'
 	icon_state = "C4_piece"
 	volume = 15
@@ -41,7 +41,7 @@
 	if(W.get_sharpness())
 		user.show_message(span_notice("Вы разрезали [src] на несколько кусков."), MSG_VISUAL)
 		for(var/i in 1 to 4)
-			new /obj/item/reagent_containers/semtex_small(user.loc)
+			new /obj/item/reagent_containers/semtex_small(get_turf(user))
 		qdel(src)
 
 /datum/crafting_recipe/semtex_big

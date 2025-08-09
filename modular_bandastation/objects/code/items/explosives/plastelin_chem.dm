@@ -11,6 +11,8 @@
 
 /datum/chemical_reaction/c4/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
+	if(!location)
+		return
 	for(var/i in 1 to created_volume)
 		new /obj/item/reagent_containers/c4_big(location)
 
@@ -23,5 +25,7 @@
 
 /datum/chemical_reaction/semtex/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
+	if(!location)
+		return
 	for(var/i in 1 to created_volume)
 		new /obj/item/reagent_containers/semtex_big(location)

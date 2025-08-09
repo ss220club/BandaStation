@@ -36,10 +36,10 @@
 	boom_sizes = list(0, 2, 5)
 
 /datum/crafting_recipe/semtex
-	name = "Makeshift semtex charge"
+	name = "Semtex charge"
 	result = /obj/item/grenade/c4/semtex
 	reqs = list(
-		/obj/item/reagent_containers/c4_small = 1,
+		/obj/item/reagent_containers/semtex_small = 1,
 		/obj/item/stock_parts/power_store/cell = 1,
 		/obj/item/stack/cable_coil = 15,
 		/obj/item/grenade/chem_grenade = 1,
