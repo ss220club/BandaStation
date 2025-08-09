@@ -5,7 +5,7 @@
 
 /atom/movable/screen/blob/MouseEntered(location,control,params)
 	. = ..()
-	openToolTip(usr,src,params,title = declent_ru(NOMINATIVE),content = desc, theme = "blob")
+	openToolTip(usr, src, params, title = get_tip_name(), content = desc, theme = "blob")
 
 /atom/movable/screen/blob/MouseExited()
 	closeToolTip(usr)
