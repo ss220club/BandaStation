@@ -1,0 +1,25 @@
+#define PLASTID_SYNTHESIS_TEMP 280
+
+/datum/chemical_reaction/c4
+	is_cold_recipe = TRUE
+	required_reagents = list(/datum/reagent/rdx = 8, /datum/reagent/medicine/c2/penthrite = 12, /datum/reagent/fuel/oil = 40)
+	required_temp = PLASTID_SYNTHESIS_TEMP
+	reaction_tags = REACTION_TAG_MODERATE | REACTION_TAG_EXPLOSIVE
+	mix_message = "The solution freezes into a plastid!"
+
+/datum/chemical_reaction/c4/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
+	var/location = get_turf(holder.my_atom)
+	for(var/i in 1 to created_volume)
+		new /obj/item/reagent_containers/c4_big(location)
+
+/datum/chemical_reaction/semtex
+	is_cold_recipe = TRUE
+	required_reagents = list(/datum/reagent/rdx = 20, /datum/reagent/medicine/c2/penthrite = 12, /datum/reagent/fuel/oil = 40, /datum/reagent/tatp = 12)
+	required_temp = PLASTID_SYNTHESIS_TEMP
+	reaction_tags = REACTION_TAG_MODERATE | REACTION_TAG_EXPLOSIVE
+	mix_message = "The solution freezes into a plastid!"
+
+/datum/chemical_reaction/semtex/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
+	var/location = get_turf(holder.my_atom)
+	for(var/i in 1 to created_volume)
+		new /obj/item/reagent_containers/semtex_big(location)
