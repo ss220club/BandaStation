@@ -10,15 +10,12 @@
 	anchored = TRUE
 	resistance_flags = ACID_PROOF
 	anchored_tabletop_offset = 8
-	var/maximum_weight = WEIGHT_CLASS_BULKY
 	/// Is the teapot currently performing work
 	var/is_operating = FALSE
 	/// The glass to hold the final products
 	var/obj/item/reagent_containers/cup/glass = null
 	/// How fast heating take place
-	var/heater_coefficient = 0.5
-	/// How fast operations take place
-	var/speed = 0.25
+	var/heater_coefficient = 0.45
 	/// Current temperature for reagents
 	var/temperature = 273
 
@@ -31,7 +28,9 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/machinery/teapot/Destroy()
-	QDEL_NULL(glass)
+	if(glass)
+		UnregisterSignal(glass.reagents, COMSIG_REAGENTS_REACTION_STEP)
+		QDEL_NULL(glass)
 	return ..()
 
 /obj/machinery/teapot/contents_explosion(severity, target)
@@ -77,25 +76,12 @@
 		. += span_warning("Вы слишком далеко чтобы рассмотреть содержимое и дисплей [src]!")
 		return
 
-	var/total_weight = 0
-	var/list/obj/item/to_process = list()
-	for(var/obj/item/target in src)
-		if((target in component_parts) || target == glass)
-			continue
-		var/amount = 1
-		if (isstack(target))
-			var/obj/item/stack/target_stack = target
-			amount = target_stack.amount
-		to_process["[target.name]"] += amount
-		total_weight += target.w_class
-	if(to_process.len)
-		. += span_notice("Сейчас содержит:")
-		for(var/target_name as anything in to_process)
-			. += span_notice("[to_process[target_name]] [target_name]")
-		. += span_notice("Наполнен на <b>[round((total_weight / maximum_weight) * 100)]%</b> вместимости.")
-
 	if(!QDELETED(glass))
-		. += span_notice("Стакан размером в <b>[glass.reagents.maximum_volume]u</b> [declension_ru(glass.reagents.maximum_volume,"юнит","юнита","юнитов")] вставлена. Содержимое:")
+		. +=span_notice("Целевая температура устройства: [temperature]°К")
+		if(!(glass.reagents.reagent_list.len == 0))
+			. +=span_notice("Температура содержимого стакана: [glass.reagents.chem_temp]°К")
+		if(glass.reagents != null)
+			. += span_notice("Стакан размером в <b>[glass.reagents.maximum_volume]u</b> [declension_ru(glass.reagents.maximum_volume,"юнит","юнита","юнитов")] вставлен. Содержимое:")
 		if(glass.reagents.total_volume)
 			for(var/datum/reagent/reg as anything in glass.reagents.reagent_list)
 				. += span_notice("[round(reg.volume, CHEMICAL_VOLUME_ROUNDING)] [declension_ru(round(reg.volume, CHEMICAL_VOLUME_ROUNDING),"юнит","юнита","юнитов")] [reg.name]")
@@ -125,6 +111,7 @@
 /obj/machinery/teapot/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(gone == glass)
+		UnregisterSignal(glass.reagents, COMSIG_REAGENTS_REACTION_STEP)
 		glass = null
 		update_appearance(UPDATE_OVERLAYS)
 /**
@@ -136,7 +123,9 @@
  */
 /obj/machinery/teapot/proc/replace_beaker(mob/living/user, obj/item/reagent_containers/new_glass)
 	PRIVATE_PROC(TRUE)
-
+	if(!anchored)
+		balloon_alert(user,"Прикрутите устройство")
+		return
 	if(!QDELETED(glass))
 		try_put_in_hand(glass, user)
 
@@ -144,9 +133,43 @@
 		if(!user.transferItemToLoc(new_glass, src))
 			return
 		glass = new_glass
+		RegisterSignal(glass.reagents, COMSIG_REAGENTS_REACTION_STEP, PROC_REF(on_reaction_step))
 
 	update_appearance(UPDATE_OVERLAYS)
 
+/**
+ * Heats the reagents of the currently inserted beaker only if machine is on & beaker has some reagents inside
+ * Arguments
+ * * seconds_per_tick - passed from process() or from reaction_step()
+ */
+/obj/machinery/teapot/proc/heat_reagents(seconds_per_tick)
+	PRIVATE_PROC(TRUE)
+
+	if(!is_operating || !is_operational || QDELETED(glass) || !glass.reagents.total_volume)
+		return FALSE
+
+	var/energy = (temperature - glass.reagents.chem_temp) * heater_coefficient * seconds_per_tick * glass.reagents.heat_capacity()
+	glass.reagents.adjust_thermal_energy(energy)
+	use_energy(active_power_usage + abs(ROUND_UP(energy) / 120))
+	if(temperature == glass.reagents.chem_temp)
+		is_operating = FALSE
+		playsound(src, 'sound/machines/eject.ogg', 40, FALSE)
+	return TRUE
+
+/obj/machinery/teapot/proc/on_reaction_step(datum/reagents/holder, num_reactions, seconds_per_tick)
+	SIGNAL_HANDLER
+
+	//adjust temp
+	heat_reagents(seconds_per_tick)
+
+/obj/machinery/teapot/process(seconds_per_tick)
+	//is_reacting is handled in reaction_step()
+	if(QDELETED(glass) || glass.reagents.is_reacting)
+		return
+
+	if(heat_reagents(seconds_per_tick))
+		//create new reactions after temperature adjust
+		glass.reagents.handle_reactions()
 
 /obj/machinery/teapot/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.combat_mode || (tool.item_flags & ABSTRACT) || (tool.flags_1 & HOLOGRAM_1))
@@ -164,27 +187,24 @@
 	. = NONE
 
 	if(is_operating)
-		balloon_alert(user, "still operating!")
+		balloon_alert(user, "Машина выполняет работу!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(glass)
-		balloon_alert(user, "remove the glass firstly")
+		balloon_alert(user, "Сначала вытащите стакан!")
 		return ITEM_INTERACT_BLOCKING
 	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
-		update_appearance(UPDATE_OVERLAYS)
-		anchored = !anchored
-		icon_state = "teapot_[anchored]"
 		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/teapot/screwdriver_act(mob/living/user, obj/item/tool)
 	. = NONE
 
 	if(is_operating)
-		balloon_alert(user, "still operating!")
+		balloon_alert(user, "Машина выполняет работу!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(glass)
-		balloon_alert(user, "remove the glass firstly!")
+		balloon_alert(user, "Сначала вытащите стакан!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
@@ -215,29 +235,18 @@
 /obj/machinery/teapot/attack_ai_secondary(mob/user, list/modifiers)
 	return attack_hand_secondary(user, modifiers)
 
-/obj/machinery/teapot/proc/heat_reagents()
-	PRIVATE_PROC(TRUE)
-
-	if(!is_operating || !is_operational || QDELETED(glass) || !glass.reagents.total_volume)
-		return FALSE
-	playsound(src, 'sound/machines/hiss.ogg', 40, FALSE)
-	while(!(glass.reagents.chem_temp == temperature))
-		var/energy = (temperature - glass.reagents.chem_temp) * heater_coefficient * glass.reagents.heat_capacity()
-		glass.reagents.adjust_thermal_energy(energy)
-		use_energy(active_power_usage + abs(ROUND_UP(energy) / 120))
-	is_operating = FALSE
-	return TRUE
 
 /obj/machinery/teapot/ui_interact(mob/user)
 
 	if(!user.can_perform_action(src, ALLOW_SILICON_REACH | FORBID_TELEKINESIS_REACH))
 		return
-
+	if(glass == null)
+		return
 	var/list/options = list()
 
 	for(var/obj/item/to_process in src)
 
-		if(glass.reagents == null)
+		if(glass.reagents.reagent_list.len == 0)
 			to_chat(user,span_notice("Стакан пуст"))
 			return
 		if(is_operational && anchored && !QDELETED(glass))
@@ -247,12 +256,10 @@
 			var/static/radial_down = image(icon = 'modular_bandastation/objects/icons/obj/machines/teapot.dmi', icon_state = "radial_down")
 			options["temp_down"] = radial_down
 
-		break
-
-	if(!QDELETED(glass))
-		if(is_operational && anchored && glass.reagents.total_volume)
 			var/static/radial_on = image(icon = 'modular_bandastation/objects/icons/obj/machines/teapot.dmi', icon_state = "radial_on")
 			options["on"] = radial_on
+
+		break
 
 	if(HAS_AI_ACCESS(user))
 		var/static/radial_examine = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_examine")
@@ -265,8 +272,10 @@
 	switch(choice)
 
 		if("on")
+			playsound(src,'sound/machines/hiss.ogg',40,FALSE)
 			is_operating = TRUE
-			heat_reagents()
+			return TRUE
+
 
 		if("temp_up")
 			if(temperature < 333)
