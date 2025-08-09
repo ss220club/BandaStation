@@ -24859,7 +24859,7 @@ dative = "знамени Наукии"
 accusative = "знамя Наукии"
 instrumental = "знаменем Наукии"
 prepositional = "знамени Наукии"
-gender = neuter
+gender = "neuter"
 
 ["cargonia banner"]
 nominative = "знамя Каргонии"
