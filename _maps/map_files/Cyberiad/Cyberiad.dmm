@@ -17326,8 +17326,8 @@
 "edP" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/sign/poster/contraband/random/directional/east,
-/obj/structure/railing/corner{
-	dir = 4
+/obj/structure/railing/corner/end{
+	dir = 1
 	},
 /turf/open/floor/catwalk_floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
@@ -45338,6 +45338,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
+/obj/structure/railing/corner/end,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
 "kSe" = (
@@ -60392,6 +60393,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/maintenance/department/security/ghetto/aft)
+"oyC" = (
+/obj/structure/railing/corner/end/flip,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/fore/starboard)
 "oyJ" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment{
@@ -94884,7 +94889,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/structure/railing/corner{
+/obj/structure/railing/corner/end/flip{
 	dir = 1
 	},
 /turf/open/floor/catwalk_floor/iron,
@@ -142346,7 +142351,7 @@ biy
 wZR
 vpn
 iUi
-wZR
+oyC
 fjE
 edP
 xfW
