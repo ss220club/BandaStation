@@ -22,7 +22,6 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "aav" = (
 /obj/machinery/status_display/ai/directional/north,
-/obj/item/banner/command,
 /obj/effect/turf_decal/siding/royal{
 	dir = 4
 	},
@@ -30,6 +29,7 @@
 /obj/effect/turf_decal/siding/royal{
 	dir = 8
 	},
+/obj/item/banner/command/mundane,
 /turf/open/floor/grass,
 /area/station/command/bridge)
 "aaw" = (
@@ -4367,7 +4367,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical/ghetto)
 "bbB" = (
-/obj/item/banner/command,
 /obj/machinery/firealarm/directional/north,
 /obj/machinery/camera/directional/north{
 	c_tag = "Central Hallway - North"
@@ -4375,6 +4374,7 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 1
 	},
+/obj/item/banner/command/mundane,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "bbO" = (
@@ -6896,7 +6896,7 @@
 "bFM" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
-/obj/item/banner/cargo,
+/obj/item/banner/cargo/mundane,
 /turf/open/floor/iron,
 /area/station/cargo/office)
 "bFN" = (
@@ -14368,7 +14368,7 @@
 	id = "warehouse_shutters";
 	name = "Warehouse Shutters Control"
 	},
-/obj/item/banner/cargo,
+/obj/item/banner/cargo/mundane,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "drv" = (
@@ -25736,7 +25736,6 @@
 /turf/open/floor/wood,
 /area/station/maintenance/starboard/fore)
 "ghM" = (
-/obj/item/banner/command,
 /obj/structure/sign/directions/security/directional/north{
 	pixel_y = 39
 	},
@@ -25751,6 +25750,7 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 1
 	},
+/obj/item/banner/command/mundane,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "ghN" = (
@@ -26024,9 +26024,9 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "glJ" = (
-/obj/item/banner/security,
 /obj/effect/turf_decal/tile/red/fourcorners,
 /obj/machinery/firealarm/directional/south,
+/obj/item/banner/security/mundane,
 /turf/open/floor/iron/dark,
 /area/station/security/lockers)
 "glK" = (
@@ -28420,7 +28420,7 @@
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/machinery/status_display/evac/directional/west,
-/obj/item/banner/command,
+/obj/item/banner/command/mundane,
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
 "gPo" = (
@@ -42529,9 +42529,9 @@
 /turf/open/floor/iron/smooth_large,
 /area/station/maintenance/ghetto/central/aft)
 "klW" = (
-/obj/item/banner/security,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/dim/directional/south,
+/obj/item/banner/security/mundane,
 /turf/open/floor/iron/dark/small,
 /area/station/security/interrogation/ghetto)
 "klX" = (
@@ -46232,8 +46232,8 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway)
 "ldj" = (
-/obj/item/banner/security,
 /obj/effect/turf_decal/tile/red/fourcorners,
+/obj/item/banner/security/mundane,
 /turf/open/floor/iron/dark,
 /area/station/security/lockers)
 "ldx" = (
@@ -46492,8 +46492,8 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "lho" = (
-/obj/item/banner/security,
 /obj/effect/decal/cleanable/dirt,
+/obj/item/banner/security/mundane,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/fore)
 "lhv" = (
@@ -60325,7 +60325,7 @@
 /obj/structure/window/reinforced/spawner/directional/north,
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/machinery/status_display/evac/directional/west,
-/obj/item/banner/command,
+/obj/item/banner/command/mundane,
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
 "oxN" = (
@@ -75322,7 +75322,7 @@
 "sgS" = (
 /obj/machinery/power/apc/worn_out/directional/west,
 /obj/structure/cable,
-/obj/item/banner/command,
+/obj/item/banner/command/mundane,
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "sgT" = (
@@ -77395,8 +77395,8 @@
 /turf/open/openspace,
 /area/station/maintenance/port/fore)
 "sFg" = (
-/obj/item/banner/command,
 /obj/machinery/status_display/ai/directional/east,
+/obj/item/banner/command/mundane,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "sFk" = (
@@ -79429,9 +79429,9 @@
 /area/station/maintenance/starboard/fore)
 "tiW" = (
 /obj/structure/cable,
-/obj/item/banner/command,
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/effect/turf_decal/siding/wood,
+/obj/item/banner/command/mundane,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/hop)
 "tiX" = (
@@ -80957,8 +80957,8 @@
 /turf/open/openspace,
 /area/station/security/prison)
 "tAr" = (
-/obj/item/banner/command,
 /obj/structure/cable,
+/obj/item/banner/command/mundane,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/hos)
 "tAt" = (
@@ -90971,7 +90971,6 @@
 /area/station/commons/dorms)
 "vZx" = (
 /obj/machinery/status_display/ai/directional/north,
-/obj/item/banner/command,
 /obj/effect/turf_decal/siding/royal{
 	dir = 8
 	},
@@ -90980,6 +90979,7 @@
 /obj/effect/turf_decal/siding/royal{
 	dir = 4
 	},
+/obj/item/banner/command/mundane,
 /turf/open/floor/grass,
 /area/station/command/bridge)
 "vZy" = (
