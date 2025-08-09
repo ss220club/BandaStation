@@ -57,3 +57,7 @@
 
 /// From /datum/action/vehicle/ridden/wheelchair/bell/Trigger():
 #define COMSIG_WHEELCHAIR_BELL_RANG "wheelchair_bell_rang"
+
+// BANDASTATION ADD START - SSD INDICATOR
+#define COMSIG_SLIMEMAN_SWAPPED_BODY "slimeman_swapped_body"
+// BANDASTATION ADD END - SSD INDICATOR
