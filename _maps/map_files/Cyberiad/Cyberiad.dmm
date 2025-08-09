@@ -36526,10 +36526,6 @@
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/iron/dark,
 /area/station/security/execution)
-"iNf" = (
-/obj/structure/lattice/catwalk,
-/turf/closed/wall,
-/area/station/maintenance/ghetto/starboard)
 "iNk" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
@@ -141595,7 +141591,7 @@ ceC
 ipz
 ipz
 ipz
-iNf
+ipz
 ipz
 sOP
 jrb
