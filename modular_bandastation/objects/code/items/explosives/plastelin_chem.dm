@@ -1,9 +1,11 @@
-#define PLASTID_SYNTHESIS_TEMP 280
+//разные температуры чтобы всё варилось как надо(иначе получаем с4 вместо семтекса)
+#define SEMTEX_SYNTHESIS_TEMP 210
+#define C4_SYNTHESIS_TEMP 280
 
 /datum/chemical_reaction/c4
 	is_cold_recipe = TRUE
 	required_reagents = list(/datum/reagent/rdx = 8, /datum/reagent/medicine/c2/penthrite = 12, /datum/reagent/fuel/oil = 40)
-	required_temp = PLASTID_SYNTHESIS_TEMP
+	required_temp = C4_SYNTHESIS_TEMP
 	reaction_tags = REACTION_TAG_MODERATE | REACTION_TAG_EXPLOSIVE
 	mix_message = "The solution freezes into a plastid!"
 
@@ -15,7 +17,7 @@
 /datum/chemical_reaction/semtex
 	is_cold_recipe = TRUE
 	required_reagents = list(/datum/reagent/rdx = 20, /datum/reagent/medicine/c2/penthrite = 12, /datum/reagent/fuel/oil = 40, /datum/reagent/tatp = 12)
-	required_temp = PLASTID_SYNTHESIS_TEMP
+	required_temp = SEMTEX_SYNTHESIS_TEMP
 	reaction_tags = REACTION_TAG_MODERATE | REACTION_TAG_EXPLOSIVE
 	mix_message = "The solution freezes into a plastid!"
 
