@@ -24853,13 +24853,13 @@ prepositional = "знамени Медитопии"
 gender = "neuter"
 
 ["sciencia banner"]
-nominative = "знамя Наукия"
-genitive = "знамени Наукия"
-dative = "знамени Наукия"
-accusative = "знамя Наукия"
-instrumental = "знаменем Наукия"
-prepositional = "знамени Наукия"
-gender = "neuter"
+nominative = "знамя Наукии"
+genitive = "знамени Наукии"
+dative = "знамени Наукии"
+accusative = "знамя Наукии"
+instrumental = "знаменем Наукии"
+prepositional = "знамени Наукии"
+gender = neuter
 
 ["cargonia banner"]
 nominative = "знамя Каргонии"
