@@ -1321,15 +1321,6 @@ instrumental = "смирительной рубашкой"
 prepositional = "смирительной рубашке"
 gender = "female"
 
-["donut"]
-nominative = "пончик"
-genitive = "пончика"
-dative = "пончику"
-accusative = "пончик"
-instrumental = "пончиком"
-prepositional = "пончике"
-gender = "male"
-
 ["evidence bag"]
 nominative = "пакет для улик"
 genitive = "пакета для улик"
@@ -7054,15 +7045,6 @@ instrumental = "мокрым тофу"
 prepositional = "мокром тофу"
 gender = "male"
 
-["moldy 'bread' slice"]
-nominative = "плесневый ломтик 'хлеба'"
-genitive = "плесневого ломтика 'хлеба'"
-dative = "плесневому ломтику 'хлеба'"
-accusative = "плесневый ломтик 'хлеба'"
-instrumental = "плесневым ломтиком 'хлеба'"
-prepositional = "плесневом ломтике 'хлеба'"
-gender = "male"
-
 ["dirty ice cup"]
 nominative = "стакан с грязным льдом"
 genitive = "стакана с грязным льдом"
@@ -7115,15 +7097,6 @@ dative = "хот-догу Маленький Гавайи"
 accusative = "хот-дог Маленький Гавайи"
 instrumental = "хот-догом Маленький Гавайи"
 prepositional = "хот-доге Маленький Гавайи"
-gender = "male"
-
-["butterdog"]
-nominative = "масло-дог"
-genitive = "масла-дога"
-dative = "маслу-догу"
-accusative = "масло-дог"
-instrumental = "маслом-догом"
-prepositional = "масле-доге"
 gender = "male"
 
 ["Plasma Dog Supreme"]
@@ -7207,60 +7180,6 @@ instrumental = "пакетом майонеза"
 prepositional = "пакете майонеза"
 gender = "male"
 
-["Donk-pocket"]
-nominative = "Донк-покет"
-genitive = "Донк-покета"
-dative = "Донк-покету"
-accusative = "Донк-покет"
-instrumental = "Донк-покетом"
-prepositional = "Донк-покете"
-gender = "male"
-
-["Berry-pocket"]
-nominative = "Ягодный-покет"
-genitive = "Ягодного-покета"
-dative = "Ягодному-покету"
-accusative = "Ягодный-покет"
-instrumental = "Ягодным-покетом"
-prepositional = "Ягодном-покете"
-gender = "male"
-
-["Honk-pocket"]
-nominative = "Хонк-покет"
-genitive = "Хонк-покета"
-dative = "Хонк-покету"
-accusative = "Хонк-покет"
-instrumental = "Хонк-покетом"
-prepositional = "Хонк-покете"
-gender = "male"
-
-["Pizza-pocket"]
-nominative = "Пицца-покет"
-genitive = "Пицца-покета"
-dative = "Пицца-покету"
-accusative = "Пицца-покет"
-instrumental = "Пицца-покетом"
-prepositional = "Пицца-покете"
-gender = "male"
-
-["Spicy-pocket"]
-nominative = "Острый-покет"
-genitive = "Острого-покета"
-dative = "Острому-покету"
-accusative = "Острый-покет"
-instrumental = "Острым-покетом"
-prepositional = "Остром-покете"
-gender = "male"
-
-["Teriyaki-pocket"]
-nominative = "Терияки-покет"
-genitive = "Терияки-покета"
-dative = "Терияки-покету"
-accusative = "Терияки-покет"
-instrumental = "Терияки-покетом"
-prepositional = "Терияки-покете"
-gender = "male"
-
 ["tator tot"]
 nominative = "предокартофель"
 genitive = "предокартофеля"
@@ -7278,24 +7197,6 @@ accusative = "вафли"
 instrumental = "вафлями"
 prepositional = "вафлях"
 gender = "plural"
-
-["Dank-pocket"]
-nominative = "Данк-покет"
-genitive = "Данк-покета"
-dative = "Данк-покету"
-accusative = "Данк-покет"
-instrumental = "Данк-покетом"
-prepositional = "Данк-покете"
-gender = "male"
-
-["Gondola-pocket"]
-nominative = "Гондола-покет"
-genitive = "Гондола-покета"
-dative = "Гондола-покету"
-accusative = "Гондола-покет"
-instrumental = "Гондола-покетом"
-prepositional = "Гондола-покете"
-gender = "male"
 
 ["box of donk-pockets"]
 nominative = "коробка донк-покетов"
@@ -7578,24 +7479,6 @@ instrumental = "вихревым леденцом"
 prepositional = "вихревом леденце"
 gender = "male"
 
-["plain burger"]
-nominative = "обычный бургер"
-genitive = "обычного бургера"
-dative = "обычному бургеру"
-accusative = "обычный бургер"
-instrumental = "обычным бургером"
-prepositional = "обычном бургере"
-gender = "male"
-
-["home run baseball burger"]
-nominative = "бургер «Хоум Ран»"
-genitive = "бургера «Хоум Ран»"
-dative = "бургеру «Хоум Ран»"
-accusative = "бургер «Хоум Ран»"
-instrumental = "бургером «Хоум Ран»"
-prepositional = "бургере «Хоум Ран»"
-gender = "male"
-
 ["space fries"]
 nominative = "космическая картошка фри"
 genitive = "космической картошки фри"
@@ -7609,15 +7492,6 @@ gender = "female"
 nominative = "Карп Лайт"
 gender = "male"
 
-["super bite burger"]
-nominative = "бургер «Суперкусь»"
-genitive = "бургера «Суперкусь»"
-dative = "бургеру «Суперкусь»"
-accusative = "бургер «Суперкусь»"
-instrumental = "бургером «Суперкусь»"
-prepositional = "бургере «Суперкусь»"
-gender = "male"
-
 ["cheesy fries"]
 nominative = "сырные картошки фри"
 genitive = "сырных картошек фри"
@@ -7626,15 +7500,6 @@ accusative = "сырные картошки фри"
 instrumental = "сырными картошками фри"
 prepositional = "сырных картошках фри"
 gender = "plural"
-
-["bacon burger"]
-nominative = "бургер с беконом"
-genitive = "бургера с беконом"
-dative = "бургеру с беконом"
-accusative = "бургер с беконом"
-instrumental = "бургером с беконом"
-prepositional = "бургере с беконом"
-gender = "male"
 
 ["USCM Prepared Meal (chicken)"]
 nominative = "готовое блюдо ККМП (курица)"
