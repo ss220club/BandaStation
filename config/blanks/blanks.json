@@ -348,5 +348,19 @@
 		"name": "Запрос отчёта статуса снабжения станции",
 		"info": "markdown/centcom/nt_centcom_07.md",
 		"required_access": "cent_general"
+	},
+	{
+		"code": "NT-CENTCOM-08",
+		"category": "Центральное командование",
+		"name": "Официальный меморандум центрального командования",
+		"info": "markdown/centcom/nt_centcom_08.md",
+		"required_access": "cent_general"
+	},
+	{
+		"code": "NT-CENTCOM-09",
+		"category": "Центральное командование",
+		"name": "КОНФИДЕНЦИАЛЬНАЯ ИНФОРМАЦИЯ - НАИВЫСШИЙ ПРИОРИТЕТ",
+		"info": "markdown/centcom/nt_centcom_09.md",
+		"required_access": "cent_general"
 	}
 ]

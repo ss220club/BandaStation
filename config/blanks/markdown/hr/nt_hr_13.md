@@ -5,23 +5,19 @@ station = [station_name];
 category = Отдел кадров
 ]
 
-# === Заявление ===
+# === Приказ ===
 
-Имя заявителя: [input_field autofill_type=name]
--# Полностью и без ошибок
-Номер аккаунта заявителя: [input_field autofill_type=bank_id]
--# Эта информация есть в ваших заметках
-Должность заявителя: [input_field autofill_type=job]
--# Указано на ID карте
-Причина: [input_field]
--# Объясните свои намерения
+Я, [input_field autofill_type=name], в должности - [input_field autofill_type=job], действуя на основании своих полномочий,
+приказываю уволить сотрудника [input_field] (номер аккаунта сотрудника: [input_field]) занимающего должность - [input_field]
+в связи с [input_field].
 
 ---
+
 
 # === Подписи и штампы ===
 
 ! Время: [input_field autofill_type=time]
-! Подпись нициатора: [input_field autofill_type=sign]
+! Подпись инициатора: [input_field autofill_type=sign]
 ! Подпись главы персонала: [input_field autofill_type=sign]
 
 [blank_footer

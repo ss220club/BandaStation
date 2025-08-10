@@ -5,18 +5,10 @@ station = [station_name];
 category = Отдел кадров
 ]
 
-# === Заявление ===
+# === Приказ ===
 
-Имя заявителя: [input_field autofill_type=name]
--# Полностью и без ошибок
-Номер аккаунта заявителя: [input_field autofill_type=bank_id]
--# Эта информация есть в ваших заметках
-Должность заявителя: [input_field autofill_type=job]
--# Указано на ID карте
-Запрашиваемая должность: [input_field]
--# Требует наличия квалификации
-Причина: [input_field]
--# Объясните свои намерения
+Я, [input_field autofill_type=name], в должности - [input_field autofill_type=job], действуя на основании своих полномочий,
+приказываю перевести сотрудника [input_field] (номер аккаунта сотрудника: [input_field]) с должности: [input_field] на должность [input_field] в связи, с [input_field].
 
 ---
 
