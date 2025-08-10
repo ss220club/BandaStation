@@ -3,10 +3,6 @@
 /obj/machinery/door/poddoor/shuttledock,
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
-/obj/machinery/atmos_shield_gen/active,
-/obj/machinery/atmos_shield_gen/active{
-	dir = 1
-	},
 /turf/open/floor/plating,
 /area/station/ai_monitored/security/armory)
 "mg" = (

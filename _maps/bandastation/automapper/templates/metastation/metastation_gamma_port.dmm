@@ -127,10 +127,6 @@
 	},
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
-/obj/machinery/atmos_shield_gen/active{
-	dir = 1
-	},
-/obj/machinery/atmos_shield_gen/active,
 /turf/open/floor/plating,
 /area/station/security/office)
 "A" = (
