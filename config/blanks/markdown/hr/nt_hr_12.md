@@ -8,7 +8,7 @@ category = Отдел кадров
 # === Приказ ===
 
 Я, [input_field autofill_type=name], в должности - [input_field autofill_type=job], действуя на основании своих полномочий,
-приказываю перевести сотрудника [input_field] (номер аккаунта сотрудника: [input_field]) с должности: [input_field] на должность [input_field] в связи, с [input_field].
+приказываю перевести сотрудника [input_field] (номер аккаунта сотрудника: [input_field]) с должности: [input_field] на должность [input_field] в связи с [input_field].
 
 ---
 
