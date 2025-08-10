@@ -7,10 +7,10 @@
 "k" = (
 /obj/docking_port/stationary{
 	dwidth = 4;
-	height = 9;
+	height = 5;
 	name = "SS13: Gamma Armory";
 	shuttle_id = "gamma_home";
-	width = 5
+	width = 9
 	},
 /turf/open/misc/asteroid/airless,
 /area/station/asteroid)
@@ -22,12 +22,6 @@
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/machinery/atmos_shield_gen/active{
-	dir = 4
-	},
-/obj/machinery/atmos_shield_gen/active{
-	dir = 8
-	},
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "t" = (
