@@ -29,7 +29,7 @@
 	load_empty_sound = 'modular_bandastation/objects/sounds/weapons/railgun_magout.ogg'
 	fire_delay = 7 SECONDS
 	recoil = 1
-	projectile_speed_multiplier = 1.2
+	projectile_speed_multiplier = 1.5
 
 	var/shots_before_degradation = 10
 
@@ -87,6 +87,13 @@
 	fire_delay = initial(fire_delay)
 	balloon_alert(user, "капаситоры перезагружены")
 	return ITEM_INTERACT_SUCCESS
+
+/obj/item/gun/ballistic/automatic/railgun/emp_act(severity)
+	. = ..()
+	if (!(. & EMP_PROTECT_SELF) && prob(50 / severity))
+		shots_before_degradation = 0
+		emp_malfunction = TRUE
+		attempt_degradation(TRUE)
 
 /obj/item/gun/ballistic/automatic/railgun/try_fire_gun(atom/target, mob/living/user, params)
 	. = ..()
