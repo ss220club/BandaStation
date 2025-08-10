@@ -583,7 +583,7 @@
 // You bleed faster but regenerate blood faster
 /datum/mutation/bloodier
 	name = "Hypermetabolic Blood"
-	desc = "Кровь субъекта является гипермеметаболической, вызывая ускоренную её выработку."
+	desc = "Кровь субъекта является гиперметаболической, вызывая ускоренную её выработку."
 	quality = POSITIVE
 	instability = POSITIVE_INSTABILITY_MINOR
 	text_gain_indication = span_notice("Ты ощущаешь, как твоё сердцебиение ускоряется.")
@@ -670,7 +670,7 @@
 		Однако, нарушение данных лимитов может привести к серьёзным травмам вашего тела."
 	quality = POSITIVE
 	instability = POSITIVE_INSTABILITY_MODERATE
-	text_gain_indication = span_notice("Ты ощущешь себя неприклонным.")
+	text_gain_indication = span_notice("Ты ощущаешь себя непреклонным.")
 	text_lose_indication = span_notice("Ты внезапно чувствуешь себя как обычный человек.")
 	difficulty = 24
 	synchronizer_coeff = 1
