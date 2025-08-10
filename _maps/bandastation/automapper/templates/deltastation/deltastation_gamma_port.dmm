@@ -26,7 +26,7 @@
 "CQ" = (
 /obj/structure/lattice,
 /obj/structure/grille,
-/turf/open/space/openspace,
+/turf/open/space/basic,
 /area/space/nearstation)
 "FW" = (
 /obj/structure/reagent_dispensers/wall/peppertank/directional/east,
