@@ -2,7 +2,7 @@
 
 /obj/item/storage/box/shipping
 	name = "box of shipping supplies"
-	desc = "Contains several scanners and labelers for shipping things. Wrapping Paper not included."
+	desc = "Содержит несколько сканеров и этикетировщиков для доставки вещей. Оберточная бумага не включена."
 	illustration = "shipping"
 
 /obj/item/storage/box/shipping/PopulateContents()

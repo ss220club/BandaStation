@@ -2,7 +2,7 @@
 
 /obj/item/food/donkpocket
 	name = "\improper Donk-pocket"
-	desc = "The food of choice for the seasoned traitor."
+	desc = "Любимая еда опытного предателя."
 	icon_state = "donkpocket"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -33,7 +33,7 @@
 
 /obj/item/food/donkpocket/warm
 	name = "warm Donk-pocket"
-	desc = "The heated food of choice for the seasoned traitor."
+	desc = "Разогретая любимая еда опытного предателя."
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 2,
@@ -62,7 +62,7 @@
 
 /obj/item/food/donkpocket/dank
 	name = "\improper Dank-pocket"
-	desc = "The food of choice for the seasoned botanist."
+	desc = "Любимая еда опытного ботаника."
 	icon_state = "dankpocket"
 	food_reagents = list(
 		/datum/reagent/toxin/lipolicide = 3,
@@ -77,7 +77,7 @@
 
 /obj/item/food/donkpocket/warm/dank
 	name = "warm Dank-pocket"
-	desc = "The food of choice for the seasoned botanist."
+	desc = "Любимая еда опытного ботаника."
 	icon_state = "dankpocket"
 	food_reagents = list(
 		/datum/reagent/toxin/lipolicide = 3,
@@ -91,7 +91,7 @@
 
 /obj/item/food/donkpocket/spicy
 	name = "\improper Spicy-pocket"
-	desc = "The classic snack food, now with a heat-activated spicy flair."
+	desc = "Классическая закуска, теперь с остротой, активируемой при нагреве."
 	icon_state = "donkpocketspicy"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -105,7 +105,7 @@
 
 /obj/item/food/donkpocket/warm/spicy
 	name = "warm Spicy-pocket"
-	desc = "The classic snack food, now maybe a bit too spicy."
+	desc = "Классическая закуска, возможно, теперь слишком острая."
 	icon_state = "donkpocketspicy"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -129,7 +129,7 @@
 
 /obj/item/food/donkpocket/teriyaki
 	name = "\improper Teriyaki-pocket"
-	desc = "An east-asian take on the classic stationside snack."
+	desc = "Восточно-азиатская интерпретация классической станционной закуски."
 	icon_state = "donkpocketteriyaki"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -143,7 +143,7 @@
 
 /obj/item/food/donkpocket/warm/teriyaki
 	name = "warm Teriyaki-pocket"
-	desc = "An east-asian take on the classic stationside snack, now steamy and warm."
+	desc = "Восточно-азиатская интерпретация классической станционной закуски, теперь горячая и ароматная."
 	icon_state = "donkpocketteriyaki"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -167,7 +167,7 @@
 
 /obj/item/food/donkpocket/pizza
 	name = "\improper Pizza-pocket"
-	desc = "Delicious, cheesy and surprisingly filling."
+	desc = "Вкусная, сырная и удивительно сытная."
 	icon_state = "donkpocketpizza"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -181,7 +181,7 @@
 
 /obj/item/food/donkpocket/warm/pizza
 	name = "warm Pizza-pocket"
-	desc = "Delicious, cheesy, and even better when hot."
+	desc = "Вкусная, сырная, и ещё лучше в горячем виде."
 	icon_state = "donkpocketpizza"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -194,7 +194,7 @@
 
 /obj/item/food/donkpocket/honk
 	name = "\improper Honk-pocket"
-	desc = "The award-winning donk-pocket that won the hearts of clowns and humans alike."
+	desc = "Отмеченный наградами донк-покет, завоевавший сердца клоунов и людей."
 	icon_state = "donkpocketbanana"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -218,7 +218,7 @@
 
 /obj/item/food/donkpocket/warm/honk
 	name = "warm Honk-pocket"
-	desc = "The award-winning donk-pocket, now warm and toasty."
+	desc = "Отмеченный наградами донк-покет, теперь тёплый и поджаристый."
 	icon_state = "donkpocketbanana"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -233,7 +233,7 @@
 
 /obj/item/food/donkpocket/berry
 	name = "\improper Berry-pocket"
-	desc = "A relentlessly sweet donk-pocket first created for use in Operation Dessert Storm."
+	desc = "Безжалостно сладкий донк-покет, впервые созданный для операции «Десертная буря»."
 	icon_state = "donkpocketberry"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -247,7 +247,7 @@
 
 /obj/item/food/donkpocket/warm/berry
 	name = "warm Berry-pocket"
-	desc = "A relentlessly sweet donk-pocket, now warm and delicious."
+	desc = "Безжалостно сладкий донк-покет, теперь тёплый и вкусный."
 	icon_state = "donkpocketberry"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -260,7 +260,7 @@
 
 /obj/item/food/donkpocket/gondola
 	name = "\improper Gondola-pocket"
-	desc = "The choice to use real gondola meat in the recipe is controversial, to say the least." //Only a monster would craft this.
+	desc = "Решение использовать настоящее мясо гондолы в рецепте спорно, мягко говоря." //Only a monster would craft this.
 	icon_state = "donkpocketgondola"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -285,7 +285,7 @@
 
 /obj/item/food/donkpocket/warm/gondola
 	name = "warm Gondola-pocket"
-	desc = "The choice to use real gondola meat in the recipe is controversial, to say the least."
+	desc = "Решение использовать настоящее мясо гондолы в рецепте спорно, мягко говоря."
 	icon_state = "donkpocketgondola"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -299,7 +299,7 @@
 
 /obj/item/food/donkpocket/deluxe
 	name = "\improper Donk-pocket Deluxe"
-	desc = "Donk Co's latest product. Its recipe is a closely guarded secret."
+	desc = "Последний продукт Donk Co. Его рецепт строго охраняется."
 	icon_state = "donkpocketdeluxe"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -325,7 +325,7 @@
 
 /obj/item/food/donkpocket/warm/deluxe
 	name = "warm Donk-pocket Deluxe"
-	desc = "Donk Co's latest product. It's crispy warm and oh-so perfectly toasted. Damn, that's a good looking Donk."
+	desc = "Последний продукт Donk Co. Он хрустяще тёплый и ох как идеально поджарен. Чёрт, это отлично выглядящий Донк."
 	icon_state = "donkpocketdeluxe"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -339,7 +339,7 @@
 
 /obj/item/food/donkpocket/deluxe/nocarb
 	name = "\improper Meat-pocket"
-	desc = "The food of choice for the carnivorous traitor."
+	desc = "Любимая еда хищного предателя."
 	icon_state = "donkpocketdeluxenocarb"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -354,7 +354,7 @@
 
 /obj/item/food/donkpocket/warm/deluxe/nocarb
 	name = "warm Meat-pocket"
-	desc = "The warm food of choice for the carnivorous traitor."
+	desc = "Тёплая любимая еда хищного предателя."
 	icon_state = "donkpocketdeluxenocarb"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -367,7 +367,7 @@
 
 /obj/item/food/donkpocket/deluxe/vegan
 	name = "\improper Donk-roll"
-	desc = "The classic station snack, now with rice! Certified vegan and cruelty free by the Animal Liberation Front."
+	desc = "Классическая станционная закуска, теперь с рисом! Сертифицирована как веганская и не связанная с жестокостью Фронтом освобождения животных."
 	icon_state = "donkpocketdeluxevegan"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -382,7 +382,7 @@
 
 /obj/item/food/donkpocket/warm/deluxe/vegan
 	name = "warm Donk-roll"
-	desc = "The classic station snack, now with rice! It's been fried to perfection."
+	desc = "Классическая станционная закуска, теперь с рисом! Поджарена до совершенства."
 	icon_state = "donkpocketdeluxevegan"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,

@@ -1,16 +1,28 @@
 GLOBAL_LIST_EMPTY(ru_attack_verbs)
 GLOBAL_LIST_EMPTY(ru_eat_verbs)
+GLOBAL_LIST_EMPTY(ru_tastes)
 GLOBAL_LIST_EMPTY(ru_say_verbs)
 GLOBAL_LIST_EMPTY(ru_emote_names)
 GLOBAL_LIST_EMPTY(ru_emote_messages)
 GLOBAL_LIST_EMPTY(ru_reagent_descs)
 
+
 /datum/modpack/translations
 	name = "Переводы"
 	desc = "Добавляет переводы"
-	author = "Vallat, Larentoun, dj-34"
+	author = "Vallat, Larentoun, dj-34, Lori Hunter"
+
 
 /datum/modpack/translations/post_initialize()
+	// Tastes
+	var/food_path = "[PATH_TO_TRANSLATE_DATA]/ru_tastes.toml"
+	if(fexists(file(food_path)))
+		var/list/tastes_toml_list = rustg_read_toml_file(food_path)
+
+		var/list/tastes_list = tastes_toml_list["tastes"]
+		if(tastes_list)
+			GLOB.ru_tastes |= tastes_list
+
 	// Verbs
 	var/toml_path = "[PATH_TO_TRANSLATE_DATA]/ru_verbs.toml"
 	if(fexists(file(toml_path)))

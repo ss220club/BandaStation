@@ -146,7 +146,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/briochecake
-	name = "Brioche cake"
+	name = "Бриошь-торт"
 	reqs = list(
 		/obj/item/food/cake/plain = 1,
 		/datum/reagent/consumable/sugar = 2

@@ -4,7 +4,7 @@
 ////////////////////////////////////////////////BREAD////////////////////////////////////////////////
 
 /datum/crafting_recipe/food/meatbread
-	name = "Meat bread"
+	name = "Мясной хлеб"
 	reqs = list(
 		/obj/item/food/bread/plain = 1,
 		/obj/item/food/meat/cutlet/plain = 3,
@@ -14,7 +14,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/xenomeatbread
-	name = "Xenomeat bread"
+	name = "Ксеномясной хлеб"
 	reqs = list(
 		/obj/item/food/bread/plain = 1,
 		/obj/item/food/meat/cutlet/xeno = 3,
@@ -24,7 +24,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/spidermeatbread
-	name = "Spidermeat bread"
+	name = "Паучий мясной хлеб"
 	reqs = list(
 		/obj/item/food/bread/plain = 1,
 		/obj/item/food/meat/cutlet/spider = 3,
@@ -34,7 +34,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/sausagebread
-	name = "Sausage bread"
+	name = "Колбасный хлеб"
 	reqs = list(
 		/obj/item/food/bread/plain = 1,
 		/obj/item/food/sausage = 2,
@@ -44,7 +44,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/banananutbread
-	name = "Banana nut bread"
+	name = "Банановый хлеб с орехами"
 	reqs = list(
 		/datum/reagent/consumable/milk = 5,
 		/obj/item/food/bread/plain = 1,
@@ -56,7 +56,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/tofubread
-	name = "Tofu bread"
+	name = "Тофухлеб"
 	reqs = list(
 		/obj/item/food/bread/plain = 1,
 		/obj/item/food/tofu = 3,
@@ -66,7 +66,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/creamcheesebread
-	name = "Cream cheese bread"
+	name = "Хлеб с кремовым сыром"
 	reqs = list(
 		/datum/reagent/consumable/milk = 5,
 		/obj/item/food/bread/plain = 1,
@@ -76,7 +76,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/mimanabread
-	name = "Mimana bread"
+	name = "Хлеб из миманы"
 	reqs = list(
 		/datum/reagent/consumable/soymilk = 5,
 		/obj/item/food/bread/plain = 1,
@@ -87,7 +87,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/garlicbread
-	name = "Garlic Bread"
+	name = "Чесночный хлеб"
 	time = 40
 	reqs = list(/obj/item/food/grown/garlic = 1,
 				/obj/item/food/breadslice/plain = 1,
@@ -97,7 +97,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/butterbiscuit
-	name = "Butter Biscuit"
+	name = "Масляный бисквит"
 	reqs = list(
 		/obj/item/food/bun = 1,
 		/obj/item/food/butterslice = 1
@@ -107,7 +107,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/butterdog
-	name = "Butterdog"
+	name = "Масло-дог"
 	reqs = list(
 		/obj/item/food/bun = 1,
 		/obj/item/food/butter = 1,
@@ -116,7 +116,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/baguette
-	name = "Baguette"
+	name = "Багет"
 	time = 40
 	reqs = list(/datum/reagent/consumable/salt = 1,
 		/datum/reagent/consumable/blackpepper = 1,
@@ -126,7 +126,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/raw_breadstick
-	name = "Raw breadstick"
+	name = "Сырая хлебная палочка"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/datum/reagent/consumable/salt = 1,
@@ -136,7 +136,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/raw_croissant
-	name = "Raw croissant"
+	name = "Сырой круассан"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
 		/datum/reagent/consumable/sugar = 1,
@@ -146,7 +146,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/throwing_croissant
-	name = "Throwing croissant"
+	name = "Метательный круассан"
 	reqs = list(
 		/obj/item/food/croissant = 1,
 		/obj/item/stack/rods = 1,
@@ -156,7 +156,7 @@
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
 
 /datum/crafting_recipe/food/breaddog
-	name = "Living dog/bread hybrid"
+	name = "Живой собакохлеб"
 	reqs = list(
 		/obj/item/organ/brain = 1,
 		/obj/item/organ/heart = 1,
@@ -234,7 +234,7 @@
 	category = CAT_BREAD
 
 /datum/crafting_recipe/food/frenchtoast
-	name = "Raw french toast"
+	name = "Сырой французский тост"
 	reqs = list(
 		/obj/item/food/breadslice/plain = 1,
 		/obj/item/food/egg = 2,
