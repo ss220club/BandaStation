@@ -286,7 +286,9 @@
 /turf/open/floor/iron,
 /area/station/security/range)
 "V" = (
-/obj/machinery/door/window/right/directional/south,
+/obj/machinery/door/window/right/directional/south{
+	name = "Firing Range"
+	},
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/cable,
 /turf/open/floor/iron,
