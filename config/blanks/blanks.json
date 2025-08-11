@@ -12,6 +12,12 @@
 		"info": "markdown/nt_e_112.md"
 	},
 	{
+		"code": "NT-POD",
+		"category": "Общие формы",
+		"name": "Квитанция о продаже пода",
+		"info": "markdown/nt_pod_sale.md"
+	},
+	{
 		"code": "NT-COM-ACAP",
 		"category": "Главы станции",
 		"name": "Заявление о повышении главы отдела до и.о. капитана",
@@ -98,26 +104,14 @@
 	{
 		"code": "NT-HR-08",
 		"category": "Отдел кадров",
-		"name": "Запрос о постройке меха",
+		"name": "Приказ на смену должности",
 		"info": "markdown/hr/nt_hr_08.md"
 	},
 	{
 		"code": "NT-HR-09",
 		"category": "Отдел кадров",
-		"name": "Квитанция о продаже пода",
-		"info": "markdown/hr/nt_hr_09.md"
-	},
-	{
-		"code": "NT-HR-12",
-		"category": "Отдел кадров",
-		"name": "Приказ на смену должности",
-		"info": "markdown/hr/nt_hr_12.md"
-	},
-	{
-		"code": "NT-HR-13",
-		"category": "Отдел кадров",
 		"name": "Приказ об увольнении",
-		"info": "markdown/hr/nt_hr_13.md"
+		"info": "markdown/hr/nt_hr_09.md"
 	},
 	{
 		"code": "NT-MD-01",
@@ -280,6 +274,12 @@
 		"category": "Отдел исследований",
 		"name": "Заявление на получение и установку импланта",
 		"info": "markdown/rnd/nt_rnd_03.md"
+	},
+	{
+		"code": "NT-RND-04",
+		"category": "Отдел исследований",
+		"name": "Запрос о постройке меха",
+		"info": "markdown/rnd/nt_rnd_04.md"
 	},
 	{
 		"code": "NT-REQ-01",
