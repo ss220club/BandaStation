@@ -39,10 +39,10 @@
 	flora_spawn_chance = 60
 	weighted_mob_spawn_list = null
 	initial_closed_chance = 0
+	initial_closed_chance = 0
 	birth_limit = 5
 	death_limit = 4
 	smoothing_iterations = 10
-
 	feature_spawn_chance = 0.15
 	weighted_feature_spawn_list = list(
 		/obj/structure/geyser/hollowwater = 10,

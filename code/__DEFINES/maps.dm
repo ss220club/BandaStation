@@ -44,7 +44,7 @@ Always compile, always use that verb, and always make sure that it works for wha
 #define SPACERUIN_MAP_EDGE_PAD 15
 
 /// Distance from edge to move to another z-level
-#define TRANSITIONEDGE 8
+#define TRANSITIONEDGE 7
 
 // Maploader bounds indices
 /// The maploader index for the maps minimum x
@@ -82,6 +82,7 @@ Always compile, always use that verb, and always make sure that it works for wha
 #define ZTRAIT_LAVA_RUINS "Lava Ruins"
 #define ZTRAIT_ICE_RUINS "Ice Ruins"
 #define ZTRAIT_ICE_RUINS_UNDERGROUND "Ice Ruins Underground"
+#define ZTRAIT_OCEAN_RUINS "Ocean Ruins"
 #define ZTRAIT_ISOLATED_RUINS "Isolated Ruins" //Placing ruins on z levels with this trait will use turf reservation instead of usual placement.
 
 // boolean - weather types that occur on the level
@@ -134,12 +135,14 @@ Always compile, always use that verb, and always make sure that it works for wha
 #define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
 ///Z level traits for Deep Space
 #define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
-///Z level traits for
 #define ZTRAITS_WILDS list(\
 	ZTRAIT_LINKAGE = GRIDLINKED, \
 	ZTRAIT_ICE_RUINS = TRUE, \
 	ZTRAIT_SNOWSTORM = FALSE, \
 	ZTRAIT_BASETURF = /turf/open/misc/asteroid/snow/icemoon)
+
+///Z level traits for Deep Ocean
+#define ZTRAITS_OCEAN list(ZTRAIT_LINKAGE = GRIDLINKED, ZTRAIT_OCEAN_RUINS = TRUE, ZTRAIT_NOPARALLAX = TRUE, ZTRAIT_BASETURF = /turf/open/water/no_planet_atmos/deep/rainworld)
 
 ///Z level traits for Lavaland
 #define ZTRAITS_LAVALAND list(\
