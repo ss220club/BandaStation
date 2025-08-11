@@ -141,3 +141,5 @@
 		layer = initial(layer)
 
 	return ..()
+
+#undef DRUMKIT_ANCHORED_LAYER
