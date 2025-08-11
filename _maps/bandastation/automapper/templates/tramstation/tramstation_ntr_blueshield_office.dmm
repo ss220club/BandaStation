@@ -122,6 +122,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
 	},
+/obj/machinery/firealarm/directional/west,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "eA" = (
@@ -527,6 +528,7 @@
 /area/station/command/heads_quarters/nanotrasen_representative)
 "sH" = (
 /obj/structure/reagent_dispensers/plumbed,
+/obj/machinery/status_display/ai/directional/south,
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/captain/private)
 "sR" = (
@@ -1115,6 +1117,7 @@
 "Jv" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "KG" = (
@@ -1161,7 +1164,6 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "LD" = (
-/obj/machinery/status_display/ai/directional/east,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron/white,
@@ -1217,6 +1219,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 1
 	},
+/obj/machinery/firealarm/directional/south,
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/captain/private)
 "NE" = (
@@ -1272,6 +1275,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/captain/private)
 "PN" = (

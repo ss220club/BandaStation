@@ -9,20 +9,21 @@ CL_BODY = re.compile(r"(:cl:|🆑)[ \t]*(?P<author>.+?)?\s*\n(?P<content>(.|\n)*
 CL_SPLIT = re.compile(r"\s*(?:(?P<tag>\w+)\s*:)?\s*(?P<message>.*)")
 
 DISCORD_TAG_EMOJI = {
-    "rscadd": ":sparkles:",
+    "admin": ":magic_wand:",
+    "balance": ":scales:",
     "bugfix": ":adhesive_bandage:",
-    "rscdel": ":wastebasket:",
-    "qol": ":herb:",
-    "sound": ":notes:",
+    "code_imp": ":hammer:",
+    "config": ":gear:",
     "image": ":frame_photo:",
     "map": ":map:",
-    "spellcheck": ":pencil:",
-    "balance": ":scales:",
-    "code_imp": ":hammer:",
+    "qol": ":herb:",
     "refactor": ":tools:",
-    "config": ":gear:",
-    "admin": ":magic_wand:",
-    "server": ":shield:"
+    "rscadd": ":sparkles:",
+    "rscdel": ":wastebasket:",
+    "server": ":shield:",
+    "sound": ":notes:",
+    "spellcheck": ":pencil:",
+    "translation": ":nerd:"
 }
 
 

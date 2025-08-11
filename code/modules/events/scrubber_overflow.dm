@@ -32,8 +32,6 @@
 		/datum/reagent/consumable/condensedcapsaicin,
 		/datum/reagent/drug/mushroomhallucinogen,
 		/datum/reagent/lube,
-		// /datum/reagent/glitter/blue, // BANDASTATION REMOVAL - No Glitters
-		// /datum/reagent/glitter/pink, // BANDASTATION REMOVAL - No Glitters
 		/datum/reagent/cryptobiolin,
 		/datum/reagent/blood,
 		/datum/reagent/medicine/c2/multiver,
@@ -53,7 +51,7 @@
 		/datum/reagent/consumable/ethanol/beer,
 		/datum/reagent/hair_dye,
 		/datum/reagent/consumable/sugar,
-		// /datum/reagent/glitter/white, // BANDASTATION REMOVAL - No Glitters
+		// /datum/reagent/glitter/random, // BANDASTATION REMOVAL - No Glitters
 		/datum/reagent/gravitum,
 		/datum/reagent/growthserum,
 		/datum/reagent/yuck,

@@ -3,7 +3,7 @@ import { Button, Stack } from 'tgui-core/components';
 import { useBackend } from '../../backend';
 import { SearchBar } from '../common/SearchBar';
 import { sortTypes } from './constants';
-import { WhoData } from './types';
+import type { WhoData } from './types';
 
 export function Filters(props) {
   const { act, data } = useBackend<WhoData>();

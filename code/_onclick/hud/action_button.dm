@@ -21,6 +21,8 @@
 	var/datum/weakref/last_hovored_ref
 	/// overlay for keybind maptext
 	var/mutable_appearance/keybind_maptext
+	/// if observers can trigger this action at any time
+	var/allow_observer_click = FALSE
 
 /atom/movable/screen/movable/action_button/Destroy()
 	if(our_hud)
@@ -36,6 +38,8 @@
 /atom/movable/screen/movable/action_button/proc/can_use(mob/user)
 	if(isobserver(user))
 		var/mob/dead/observer/dead_mob = user
+		if(allow_observer_click)
+			return TRUE
 		if(dead_mob.observetarget) // Observers can only click on action buttons if they're not observing something
 			return FALSE
 
@@ -47,12 +51,12 @@
 	return TRUE
 
 /atom/movable/screen/movable/action_button/Click(location,control,params)
-	if (!can_use(usr))
+	if(!can_use(usr))
 		return FALSE
 
 	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, ALT_CLICK))
-		begin_creating_bind(usr)
+		linked_action?.begin_creating_bind(src, usr)
 		return TRUE
 	if(LAZYACCESS(modifiers, SHIFT_CLICK))
 		var/datum/hud/our_hud = usr.hud_used
@@ -64,16 +68,8 @@
 	var/trigger_flags
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		trigger_flags |= TRIGGER_SECONDARY_ACTION
-	linked_action.Trigger(trigger_flags = trigger_flags)
+	linked_action.Trigger(usr, trigger_flags = trigger_flags)
 	return TRUE
-
-/atom/movable/screen/movable/action_button/proc/begin_creating_bind(mob/user)
-	if(!isnull(linked_action.full_key))
-		linked_action.full_key = null
-		linked_action.update_button_status(src)
-		return
-	linked_action.full_key = tgui_input_keycombo(user, "Please bind a key for this action.")
-	linked_action.update_button_status(src)
 
 // Entered and Exited won't fire while you're dragging something, because you're still "holding" it
 // Very much byond logic, but I want nice behavior, so we fake it with drag
@@ -100,7 +96,7 @@
 /atom/movable/screen/movable/action_button/MouseEntered(location, control, params)
 	. = ..()
 	if(!QDELETED(src))
-		openToolTip(usr, src, params, title = declent_ru(NOMINATIVE), content = desc, theme = actiontooltipstyle)
+		openToolTip(usr, src, params, title = get_tip_name(), content = desc, theme = actiontooltipstyle)
 
 /atom/movable/screen/movable/action_button/MouseExited(location, control, params)
 	closeToolTip(usr)
@@ -343,7 +339,7 @@
 	return ..()
 
 /atom/movable/screen/button_palette/proc/show_tooltip(params)
-	openToolTip(usr, src, params, title = declent_ru(NOMINATIVE), content = desc)
+	openToolTip(usr, src, params, title = get_tip_name(), content = desc)
 
 GLOBAL_LIST_INIT(palette_added_matrix, list(0.4,0.5,0.2,0, 0,1.4,0,0, 0,0.4,0.6,0, 0,0,0,1, 0,0,0,0))
 GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,0, 0,0,0,1, 0,0,0,0))
@@ -450,7 +446,7 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 	. = ..()
 	if(QDELETED(src))
 		return
-	openToolTip(usr, src, params, title = declent_ru(NOMINATIVE), content = desc)
+	openToolTip(usr, src, params, title = get_tip_name(), content = desc)
 
 /atom/movable/screen/palette_scroll/MouseExited()
 	closeToolTip(usr)
