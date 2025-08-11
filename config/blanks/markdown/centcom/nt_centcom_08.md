@@ -1,8 +1,8 @@
 <center>[nt_logo]</center>
-Форма NT-COM-00 <b>[КОНФИДЕНЦИАЛЬНО] </b>
+Форма NT-CENTCOM-00 <b>[КОНФИДЕНЦИАЛЬНО] </b>
 <br></small> <small>Время: [time]</small>
 <br><small>Год: 2569 г.</small>
-<br><small>Станция — <b>АКН ‘’Трурль’’</b></small>
+<br><small>Корабль — <b>АКН ‘’Трурль’’</b></small>
 <br><large><b> Официальный Меморандум <b></large>
 <hr><center><h3><b>Приветствуем экипаж и руководство [station_name]</b>!</h3></center>
 <br><br>

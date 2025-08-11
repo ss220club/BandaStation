@@ -1,5 +1,5 @@
 <center> [nt_logo] </center>
-<small> Форма NT-COM-001 <b>[КОНФИДЕНЦИАЛЬНО] </b>
+<small> Форма NT-CENTCOM-001 <b>[КОНФИДЕНЦИАЛЬНО] </b>
 <br></small> <small>Время: █████ </small>
 <br> <small>Год: █████ </small>
 <br><small><b> Отдел Специальных Операций АКН “Трурль” </b></small>
