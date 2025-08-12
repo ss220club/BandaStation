@@ -24686,6 +24686,178 @@ dative = "Нар'Си"
 accusative = "Нар'Си"
 instrumental = "Нар'Си"
 prepositional = "Нар'Си"
+
+# MARK: Areas
+
+## Cargo Areas
+
+["Delivery Office"]
+nominative = "офис доставки"
+genitive = "офиса доставки"
+dative = "офису доставки"
+accusative = "офис доставки"
+instrumental = "офисом доставки"
+prepositional = "офисе доставки"
+gender = "male"
+
+["Warehouse"]
+nominative = "склад"
+genitive = "склада"
+dative = "складу"
+accusative = "склад"
+instrumental = "складом"
+prepositional = "складе"
+gender = "male"
+
+["Drone Bay"]
+nominative = "отсек для дронов"
+genitive = "отсека для дронов"
+dative = "отсеку для дронов"
+accusative = "отсек для дронов"
+instrumental = "отсеком для дронов"
+prepositional = "отсеке для дронов"
+gender = "male"
+
+["Boutique"]
+nominative = "бутик"
+genitive = "бутика"
+dative = "бутику"
+accusative = "бутик"
+instrumental = "бутиком"
+prepositional = "бутике"
+gender = "male"
+
+["Upper Warehouse"]
+nominative = "верхний склад"
+genitive = "верхнего склада"
+dative = "верхнему складу"
+accusative = "верхний склад"
+instrumental = "верхним складом"
+prepositional = "верхнем складе"
+gender = "male"
+
+["Cargo Office"]
+nominative = "офис отдела снабжения"
+genitive = "офиса отдела снабжения"
+dative = "офису отдела снабжения"
+accusative = "офис отдела снабжения"
+instrumental = "офисом отдела снабжения"
+prepositional = "офисе отдела снабжения"
+gender = "male"
+
+["Lower Cargo Bay"]
+nominative = "нижний отсек отдела снабжения"
+genitive = "нижнего отсека отдела снабжения"
+dative = "нижнему отсеку отдела снабжения"
+accusative = "нижний отсек отдела снабжения"
+instrumental = "нижним отсеком отдела снабжения"
+prepositional = "нижнем отсеке отдела снабжения"
+gender = "male"
+
+["Cargo Break Room"]
+nominative = "комната отдыха отдела снабжения"
+genitive = "комнаты отдыха отдела снабжения"
+dative = "комнате отдыха отдела снабжения"
+accusative = "комнату отдыха отдела снабжения"
+instrumental = "комнатой отдыха отдела снабжения"
+prepositional = "комнате отдыха отдела снабжения"
+gender = "female"
+
+["Cargo Bay"]
+nominative = "грузовой отсек"
+genitive = "грузового отсека"
+dative = "грузовому отсеку"
+accusative = "грузовой отсек"
+instrumental = "грузовым отсеком"
+prepositional = "грузовом отсеке"
+gender = "male"
+
+["Cargo Lobby"]
+nominative = "лобби отдела снабжения"
+genitive = "лобби отдела снабжения"
+dative = "лобби отдела снабжения"
+accusative = "лобби отдела снабжения"
+instrumental = "лобби отдела снабжения"
+prepositional = "лобби отдела снабжения"
+
+["Mining Dock"]
+nominative = "шахтерский док"
+genitive = "шахтерского дока"
+dative = "шахтерскому доку"
+accusative = "шахтерский док"
+instrumental = "шахтерским доком"
+prepositional = "шахтерском доке"
+gender = "male"
+
+["Mining Cafeteria"]
+nominative = "шахтерский кафетерий"
+genitive = "шахтерского кафетерия"
+dative = "шахтерскому кафетерию"
+accusative = "шахтерский кафетерий"
+instrumental = "шахтерским кафетерием"
+prepositional = "шахтерском кафетерии"
+gender = "male"
+
+["Mining Ore Silo Storage"]
+nominative = "силосное хранилище шахтерской руды"
+genitive = "силосного хранилища шахтерской руды"
+dative = "силосному хранилищу шахтерской руды"
+accusative = "силосное хранилище шахтерской руды"
+instrumental = "силосним хранилищем шахтерской руды"
+prepositional = "силосном хранилище шахтерской руды"
+
+["Mining Office"]
+nominative = "шахтерский офис"
+genitive = "шахтерского офиса"
+dative = "шахтерскому офису"
+accusative = "шахтерский офис"
+instrumental = "шахтерским офисом"
+prepositional = "шахтерском офисе"
+gender = "male"
+
+["Mining Break Room"]
+nominative = "комната отдыха шахтеров"
+genitive = "комнаты отдыха щахтеров"
+dative = "комнате отдыха щахтерово"
+accusative = "комнату отдыха шахтеров"
+instrumental = "комнатой отдыха шахтеров"
+prepositional = "комнате отдыха шахтеров"
+gender = "male"
+
+["Bitrunning Den"]
+nominative = "битраннерская"
+genitive = "битраннерской"
+dative = "битраннерской"
+accusative = "битраннерскую"
+instrumental = "битраннерской"
+prepositional = "битраннерской"
+gender = "female"
+
+["Cargo Bay Lower Floor"]
+nominative = "нижний этаж грузового отсека"
+genitive = "нижнего этажа грузового отсека"
+dative = "нижнему этажу грузового отсека"
+accusative = "нижний этаж грузового отсека"
+instrumental = "нижним этажом грузового отсека"
+prepositional = "нижнем этаже грузового отсека"
+gender = "male"
+
+["Cargo Bay Depot Lower Floor"]
+nominative = "нижний этаж склада отдела снабжения"
+genitive = "нижнего этажа склада отдела снабжения"
+dative = "нижнему этажу склада отдела снабжения"
+accusative = "нижний этаж склада отдела снабжения"
+instrumental = "нижним этажом склада отдела снабжения"
+prepositional = "нижнем этаже склада отдела снабжения"
+gender = "male"
+
+["Quartermaster's Office"]
+nominative = "кабинет Квартирмейстера"
+genitive = "кабинета Квартирмейстера"
+dative = "кабинету Квартирмейстера"
+accusative = "кабинет Квартирмейстера"
+instrumental = "кабинетом Квартирмейстера"
+prepositional = "кабинете Квартирмейстера"
 gender = "male"
 
 ["raw bluespace core"]
