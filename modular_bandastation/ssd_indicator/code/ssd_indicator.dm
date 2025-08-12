@@ -19,6 +19,8 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 		RegisterSignal(target, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, PROC_REF(on_ai_mind_transfer))
 	if(iscyborg(target))
 		RegisterSignal(target, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_cyborg_update_overlays))
+	if(isslimeperson(target))
+		RegisterSignal(target, COMSIG_SLIMEMAN_SWAPPED_BODY, PROC_REF(on_slimeman_swap_body))
 
 /datum/element/ssd/Detach(datum/source, ...)
 	. = ..()
@@ -33,6 +35,8 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 		UnregisterSignal(source, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF)
 	if(iscyborg(source))
 		UnregisterSignal(source, COMSIG_ATOM_UPDATE_OVERLAYS)
+	if(isslimeperson(source))
+		UnregisterSignal(source, COMSIG_SLIMEMAN_SWAPPED_BODY)
 
 /datum/element/ssd/proc/on_mob_logout(mob/living/source)
 	SIGNAL_HANDLER
@@ -83,6 +87,13 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	if(GLOB.ssd_indicator_overlay in cyborg.overlays)
 		return
 	cyborg.add_overlay(GLOB.ssd_indicator_overlay)
+
+/datum/element/ssd/proc/on_slimeman_swap_body(mob/living/source)
+	SIGNAL_HANDLER
+
+	source.cut_overlay(GLOB.ssd_indicator_overlay)
+	source.player_logged = TRUE
+	Detach(source)
 
 /mob/living/Logout()
 	AddElement(/datum/element/ssd)

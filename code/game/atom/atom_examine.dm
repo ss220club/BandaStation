@@ -129,7 +129,7 @@
 	if(!isnull(override[EXAMINE_POSITION_BEFORE]))
 		override -= null // There is no article, don't try to join it
 		return "[jointext(override, " ")]" // BANDASTATION EDIT - Declents
-	return "[declent_ru(declent)]" // BANDASTATION EDIT - Declents
+	return "[get_visible_name(declent = declent)]" // BANDASTATION EDIT - Declents
 
 /mob/living/get_examine_name(mob/user, declent = NOMINATIVE) // BANDASTATION EDIT - Declents
 	var/visible_name = get_visible_name(declent = declent)   // BANDASTATION EDIT - Declents
@@ -167,5 +167,9 @@
 
 /// Used by mobs to determine the name for someone wearing a mask, or with a disfigured or missing face. By default just returns the atom's name. add_id_name will control whether or not we append "(as [id_name])".
 /// force_real_name will always return real_name and add (as face_name/id_name) if it doesn't match their appearance
-/atom/proc/get_visible_name(add_id_name, force_real_name, declent = NOMINATIVE) // BANDASTATION EDIT - Declents
-	return declent_ru(declent) // BANDASTATION EDIT - Declents
+// BANDASTATION EDIT START - Declents
+/atom/proc/get_visible_name(add_id_name, force_real_name, declent = NOMINATIVE)
+	if(name != initial(name))
+		return name
+	return declent_ru(declent)
+// BANDASTATION EDIT END
