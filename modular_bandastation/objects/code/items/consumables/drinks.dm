@@ -605,3 +605,29 @@
 	)
 	mix_message = "Красный свет из сосуда заполняет всё вокруг."
 
+/datum/reagent/consumable/slimetea
+	name = "Слизнечай"
+	description = "Странная жидкость, слегка студинистая, в которой плавают ягоды, но пахнет вкусно"
+	color = "#22e46c"
+	taste_description = "яблочный джем с черникой и чаем"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/slimetea
+	required_drink_type = /datum/reagent/consumable/slimetea
+	name = "Слаймбаблити"
+	desc = "Стакан с студинистой жидкостью. внутри которой плавают ягоды"
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "slimetea"
+
+/datum/chemical_reaction/drink/slimetea
+	results = list(/datum/reagent/consumable/slimetea = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/teapowder = 2,
+		/datum/reagent/toxin/slimejelly = 1,
+		/datum/reagent/consumable/berryjuice = 2,
+	)
+	required_temp = 333
+	mix_message = "Красный свет из сосуда заполняет всё вокруг."
