@@ -189,7 +189,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	item_owner = list(JOB_CHAPLAIN)
 	exists_on_map = TRUE
 	difficulty = 2
-	steal_hint = "Священный артефакт, ообычно находящийся у священника. Если нет у священника, то можно найти в комнате священника. \
+	steal_hint = "Священный артефакт, обычно находящийся у священника. Если нет у священника, то можно найти в комнате священника. \
 		Если на станции есть священник, то он, скорее всего, превратится в какое-нибудь священное оружие, некоторые из которых... трудно снять с человека."
 
 /obj/item/nullrod/add_stealing_item_objective()
@@ -214,7 +214,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	item_owner = list(JOB_MIME)
 	exists_on_map = TRUE
 	difficulty = 1
-	steal_hint = "Маска мима. Он всегда должен быть на лице мима."
+	steal_hint = "Маска мима. Она всегда должен быть на лице мима."
 
 /obj/item/clothing/mask/gas/mime/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/clothing/mask/gas/mime)
@@ -293,7 +293,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	)
 	exists_on_map = TRUE
 	difficulty = 3
-	steal_hint = "Оружие самообороны, стандартное для всех глав отделов, за исключением начальника службы безопасности."
+	steal_hint = "Оружие самообороны, стандартное для всех глав отделов, за исключением начальника службы безопасности. Редко находится не при владельце."
 
 /datum/objective_item/steal/traitor/telebaton/check_special_completion(obj/item/thing)
 	return thing.type == /obj/item/melee/baton/telescopic
@@ -342,7 +342,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	exists_on_map = TRUE
 	difficulty = 4
 	steal_hint = "Запасная ID-карта самого главного на этой станции. \
-		Если поблизости нет официального капитана, вы можете найти его приколотым к груди исполняющего обязанности капитана - одного из глав отдела. \
+		Если поблизости нет официального капитана, вы можете найти на груди исполняющего обязанности капитана - одного из глав отдела. \
 		В противном случае вам придется вскрыть золотой сейф на мостике кислотой или взрывчаткой, чтобы добраться до него."
 
 /obj/item/card/id/advanced/gold/captains_spare/add_stealing_item_objective()
@@ -377,7 +377,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	return add_item_to_steal(src, /obj/item/gun/energy/e_gun/hos)
 
 /datum/objective_item/steal/compactshotty
-	name = "перональный компактный дробовик смотрителя"
+	name = "персональный компактный дробовик смотрителя"
 	targetitem = /obj/item/gun/ballistic/shotgun/automatic/combat/compact
 	excludefromjob = list(JOB_WARDEN)
 	item_owner = list(JOB_WARDEN)
@@ -414,7 +414,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	return add_item_to_steal(src, /obj/item/tank/jetpack/oxygen/captain)
 
 /datum/objective_item/steal/magboots
-	name = "продвинутые магнитые ботинки главного инженера"
+	name = "продвинутые магнитные ботинки главного инженера"
 	targetitem = /obj/item/clothing/shoes/magboots/advance
 	excludefromjob = list(JOB_CHIEF_ENGINEER)
 	item_owner = list(JOB_CHIEF_ENGINEER)
@@ -447,7 +447,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	exists_on_map = TRUE
 	difficulty = 3
 	steal_hint = "Персональный медицинский инжектор главного врача. \
-		Обычно находящийся у него в медицинских принадлежностях или на поясе. Так же может быть найден в шкафу в его кабинете."
+		Обычно находящийся у него в медицинских принадлежностях или на поясе. Также может быть найден в шкафу в его кабинете."
 
 /obj/item/reagent_containers/hypospray/cmo/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/reagent_containers/hypospray/cmo)
@@ -486,7 +486,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	exists_on_map = TRUE
 	difficulty = 3
 	steal_hint = "Специальная броня, что может быть у директора исследований. \
-		Так же может быть найден в шкафчике."
+		Также может быть найдена в шкафчике."."
 
 /obj/item/clothing/suit/armor/reactive/teleport/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/clothing/suit/armor/reactive/teleport)
@@ -636,7 +636,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	excludefromjob = list(JOB_PSYCHOLOGIST, JOB_PARAMEDIC, JOB_CHEMIST, JOB_MEDICAL_DOCTOR, JOB_CHIEF_MEDICAL_OFFICER, JOB_CORONER)
 	exists_on_map = TRUE
 	difficulty = 1
-	steal_hint = "Плюшевая моль. Так же может быть найден у психолога, что лечит душевные травмы этой молью."
+	steal_hint = "Плюшевая моль. Также может быть найдена у психолога, что лечит душевные травмы этой молью."
 
 /obj/item/toy/plush/moth/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/toy/plush/moth)
@@ -646,7 +646,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	targetitem = /obj/item/toy/plush/lizard_plushie
 	exists_on_map = TRUE
 	difficulty = 1
-	steal_hint = "Плюшевая ящерица. Так же может быть найден в технических тоннелях."
+	steal_hint = "Плюшевая ящерица. Также может быть найдена в технических тоннелях."
 
 /obj/item/toy/plush/lizard_plushie/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/toy/plush/lizard_plushie)
@@ -773,7 +773,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	)
 	exists_on_map = TRUE
 	difficulty = 2
-	steal_hint = "Двухрежимный энергетический карабин, что может быть найден в оружейной. Так же может быть у некоторых глав для их персональной защиты."
+	steal_hint = "Двухрежимный энергетический карабин, что может быть найден в оружейной. Также может быть у некоторых глав для их персональной защиты."
 
 /datum/objective_item/steal/spy/energy_gun/check_special_completion(obj/item/thing)
 	return thing.type == /obj/item/gun/energy/e_gun
@@ -856,7 +856,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	)
 	exists_on_map = TRUE
 	difficulty = 1
-	steal_hint = "Штамп, принадлежащий главе отдела, что может быть найдена в их офисе."
+	steal_hint = "Штамп, принадлежащий главе отдела, что может быть найден в их офисе."
 
 /obj/item/stamp/head/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/stamp/head)
@@ -877,7 +877,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 		JOB_WARDEN,
 	)
 	difficulty = 1
-	steal_hint = "Пара солнцезащитных очков. У юристов обычно есть несколько штук, как и у некоторых глав. Также их можно получить, разобрав HUD-очки"
+	steal_hint = "Пара солнцезащитных очков. У юристов обычно есть несколько штук, как и у некоторых глав. Также их можно получить, разобрав HUD-очки."
 
 /datum/objective_item/steal/spy/ce_modsuit
 	name = "продвинутый МОД-костюм главного инженера"
