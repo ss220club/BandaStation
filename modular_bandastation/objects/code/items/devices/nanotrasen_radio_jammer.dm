@@ -35,7 +35,3 @@
 /obj/item/nt_jammer/Destroy()
 	GLOB.active_jammers -= src
 	return ..()
-
-
-
-
