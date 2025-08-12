@@ -486,7 +486,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	exists_on_map = TRUE
 	difficulty = 3
 	steal_hint = "Специальная броня, что может быть у директора исследований. \
-		Также может быть найдена в шкафчике."."
+		Также может быть найдена в шкафчике в кабинете директора исследований."
 
 /obj/item/clothing/suit/armor/reactive/teleport/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/clothing/suit/armor/reactive/teleport)
