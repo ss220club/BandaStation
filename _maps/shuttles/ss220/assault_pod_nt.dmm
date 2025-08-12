@@ -2,16 +2,16 @@
 "b" = (
 /obj/machinery/porta_turret/centcom_shuttle,
 /turf/closed/wall/mineral/plastitanium,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "c" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 4
 	},
 /turf/open/floor/pod,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "d" = (
 /turf/closed/wall/mineral/plastitanium,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "e" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Assault Pod"
@@ -23,14 +23,14 @@
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
 /turf/open/floor/plating,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "h" = (
 /obj/machinery/computer/shuttle/nanotrasen/drop_pod,
 /turf/closed/wall/mineral/plastitanium,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "p" = (
 /turf/open/floor/pod,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "t" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Assault Pod"
@@ -38,25 +38,25 @@
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
 /turf/open/floor/plating,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "D" = (
 /obj/structure/chair/comfy/shuttle/tactical,
 /obj/machinery/light/directional/north,
 /turf/open/floor/pod,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "H" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 8
 	},
 /turf/open/floor/pod,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "L" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 1
 	},
 /obj/machinery/light/directional/south,
 /turf/open/floor/pod,
-/area/shuttle/assault_pod)
+/area/shuttle/assault_pod/nanotrasen)
 "V" = (
 /turf/template_noop,
 /area/template_noop)

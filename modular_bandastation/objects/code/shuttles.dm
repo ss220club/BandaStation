@@ -179,6 +179,9 @@
 
 /// Initiate the landing zone effect
 /obj/docking_port/mobile/assault_pod/nanotrasen/proc/initiate_effects(obj/docking_port/stationary/S1, animate_time)
+	if(!S1)
+		return
+
 	// Check if we're already in the process of landing to avoid duplicates
 	if(landing_in_progress)
 		return
@@ -192,6 +195,7 @@
 	var/turf/first_turf = all_landing_turfs[1]
 	if(!first_turf)
 		return
+
 	var/min_x = first_turf.x
 	var/max_x = first_turf.x
 	var/min_y = first_turf.y
@@ -210,16 +214,32 @@
 	var/center_y = round((min_y + max_y) / 2)
 	var/center_z = S1.z
 
+	// Calculate the dimensions of the shuttle in tiles
+	var/shuttle_width_tiles = max_x - min_x + 1
+	var/shuttle_height_tiles = max_y - min_y + 1
+
+	// Constants for scale calculation
+	var/TILE_SIZE_PX = 32
+	var/SPRITE_SIZE_PX = 96
+
+	// Calculate the required scale based on shuttle's tile size
+	// We'll use the larger dimension to ensure the effect covers the entire shuttle
+	var/shuttle_size_px = max(shuttle_width_tiles, shuttle_height_tiles) * TILE_SIZE_PX
+	var/shuttle_scale = shuttle_size_px / SPRITE_SIZE_PX
+
 	var/turf/effect_turf = locate(center_x, center_y, center_z)
+	if(!effect_turf)
+		return
 
 	// Create the landing zone effect in center of landing area
 	landing_in_progress = TRUE
 	playsound(effect_turf, 'modular_bandastation/objects/sounds/landing_specops.ogg', vol = 100, vary = FALSE, pressure_affected = FALSE)
 	var/obj/effect/abstract/landing_zone/landing_zone_effect = new /obj/effect/abstract/landing_zone(effect_turf, animate_time)
-	animate(landing_zone_effect, time = animate_time, alpha = 255, transform = matrix().Scale(2.5, 2.5))
+
+	// Apply scale & alpha animation to the effect
+	animate(landing_zone_effect, time = animate_time, alpha = 255, transform = matrix().Scale(shuttle_scale, shuttle_scale))
 	// Deletes the landing zone effect when landing is complete
-	if(!QDELETED(landing_zone_effect))
-		QDEL_IN(landing_zone_effect, animate_time)
+	QDEL_IN(landing_zone_effect, animate_time)
 
 // MARK: Shuttle Areas
 /area/shuttle/syndicate_sit
@@ -237,6 +257,9 @@
 /area/shuttle/gamma
 	name = "Gamma Armory Shuttle"
 
+/area/shuttle/assault_pod/nanotrasen
+	name = "Nanotrasen Assault Pod"
+
 // MARK: Shuttle Items
 // Shuttle Circuitboard
 /obj/item/circuitboard/computer/argos
@@ -252,11 +275,6 @@
 // Assault Pod Control
 /obj/item/assault_pod/nanotrasen
 	shuttle_id = "assault_pod_nt"
-	dwidth = 3
-	dheight = 0
-	width = 7
-	height = 7
-	lz_dir = 1
 	lzname = "assault_pod_nt"
 
 // Assault Pod Landing Effect
@@ -265,9 +283,17 @@
 	desc = "Голографическая проекция, обозначающая зону приземления чего-либо. Вероятно, лучше отойти в сторону."
 	icon = 'modular_bandastation/objects/icons/obj/effects/landing_zone_96x96.dmi'
 	icon_state = "target_largebox"
-	layer = BELOW_MOB_LAYER
+	layer = RIPPLE_LAYER
+	plane = ABOVE_GAME_PLANE
 	pixel_x = -32
 	pixel_y = -32
-	alpha = 100
-	anchored = TRUE
-	density = FALSE
+	alpha = 150
+
+/obj/effect/abstract/landing_zone/Initialize(mapload)
+	. = ..()
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/effect/abstract/landing_zone/update_overlays()
+	. = ..()
+	// Set the emissive appearance to make the glow effect
+	. += emissive_appearance(icon, icon_state, src)
