@@ -34,28 +34,30 @@
 	tint = 1
 
 /obj/item/clothing/glasses/meson/sunglasses/Initialize(mapload)
-    . = ..()
-    var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/sunhudmesonremoval)
+	. = ..()
+	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/sunhudmesonremoval)
 
-    AddElement( \
-        /datum/element/slapcrafting, \
-        slapcraft_recipes = slapcraft_recipe_list \
-    )
+	AddElement( \
+		/datum/element/slapcrafting, \
+		slapcraft_recipes = slapcraft_recipe_list \
+	)
 
 /datum/crafting_recipe/sunhudmeson
-    name = "meson HUDglasses"
-    result = /obj/item/clothing/glasses/meson/sunglasses
-    time = 2 SECONDS
-    tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
-    reqs = list(/obj/item/clothing/glasses/meson = 1,
-                  /obj/item/clothing/glasses/sunglasses = 1,
-                  /obj/item/stack/cable_coil = 5)
-    category = CAT_EQUIPMENT
+	name = "meson HUDglasses"
+	result = /obj/item/clothing/glasses/meson/sunglasses
+	time = 2 SECONDS
+	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
+	reqs = list(
+		/obj/item/clothing/glasses/meson = 1,
+		/obj/item/clothing/glasses/sunglasses = 1,
+		/obj/item/stack/cable_coil = 5
+	)
+	category = CAT_EQUIPMENT
 
 /datum/crafting_recipe/sunhudmesonremoval
-    name = "meson HUDglasses removal"
-    result = /obj/item/clothing/glasses/sunglasses
-    time = 2 SECONDS
-    tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
-    reqs = list(/obj/item/clothing/glasses/meson/sunglasses = 1)
-    category = CAT_EQUIPMENT
+	name = "meson HUDglasses removal"
+	result = /obj/item/clothing/glasses/sunglasses
+	time = 2 SECONDS
+	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
+	reqs = list(/obj/item/clothing/glasses/meson/sunglasses = 1)
+	category = CAT_EQUIPMENT
