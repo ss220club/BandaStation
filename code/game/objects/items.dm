@@ -1173,9 +1173,9 @@
 	if(last_force_string_check != force && !(item_flags & FORCE_STRING_OVERRIDE))
 		set_force_string()
 	if(!(item_flags & FORCE_STRING_OVERRIDE))
-		openToolTip(user,src,params,title = declent_ru(NOMINATIVE),content = "[desc]<br>[force ? "<b>Force:</b> [force_string]" : ""]",theme = "")
+		openToolTip(user, src, params, title = get_tip_name(), content = "[desc]<br>[force ? "<b>Force:</b> [force_string]" : ""]", theme = "")
 	else
-		openToolTip(user,src,params,title = declent_ru(NOMINATIVE),content = "[desc]<br><b>Force:</b> [force_string]",theme = "")
+		openToolTip(user, src, params, title = get_tip_name(), content = "[desc]<br><b>Force:</b> [force_string]", theme = "")
 
 /obj/item/MouseEntered(location, control, params)
 	. = ..()
