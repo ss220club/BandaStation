@@ -109,7 +109,77 @@
 /obj/machinery/computer/shuttle/syndicate/sst/launch_check(mob/user)
 	return allowed(user)
 
-// MARK: Shutte Docking Ports
+// MARK: Shuttle Docking Ports
+/obj/docking_port/mobile
+	/// Object effect that places the landing zone effect in the center of the landing area
+	var/drop_landing_effect = null
+	/// Sound that played before drop landing
+	var/drop_landing_sound = null
+	/// If mobile docking is in progress
+	var/drop_landing_in_progress = FALSE
+
+/// Initiate the landing zone effect
+/obj/docking_port/mobile/proc/initiate_drop_landing_effects(obj/docking_port/stationary/S1, animate_time)
+	if(!S1 || drop_landing_in_progress)
+		return
+
+	// Find the center of the landing area
+	var/list/bounding_corners = return_coords(S1.x, S1.y, S1.dir)
+	var/min_x = bounding_corners[1]
+	var/min_y = bounding_corners[2]
+	var/max_x = bounding_corners[3]
+	var/max_y = bounding_corners[4]
+
+	// Calculate the central point of the landing zone
+	var/center_x = round((min_x + max_x) / 2)
+	var/center_y = round((min_y + max_y) / 2)
+	var/center_z = S1.z
+
+	// Temp effect so we can get its size
+	var/obj/temp_effect = new drop_landing_effect()
+	if(!temp_effect)
+		return
+
+	// Constants for icon size calculation (in pixels)
+	var/list/landing_icon_dimensions = get_icon_dimensions(temp_effect.icon)
+	var/landing_icon_size_px = max(landing_icon_dimensions["width"], landing_icon_dimensions["height"])
+	qdel(temp_effect)
+
+	// Calculate the required scale based on shuttle's tile size
+	// We'll use the larger dimension to ensure the effect covers the entire shuttle
+	var/shuttle_size_px = max(width, height) * ICON_SIZE_ALL
+	var/shuttle_scale = shuttle_size_px / landing_icon_size_px
+
+	var/turf/effect_turf = locate(center_x, center_y, center_z)
+	if(!effect_turf)
+		return
+
+	drop_landing_in_progress = TRUE
+
+	// Create the landing zone effect in center of landing area
+	if(drop_landing_sound)
+		playsound(effect_turf, drop_landing_sound, vol = 100, vary = FALSE, pressure_affected = FALSE)
+
+	if(drop_landing_effect)
+		var/landing_zone_effect = new drop_landing_effect(effect_turf, animate_time)
+		animate(landing_zone_effect, time = animate_time, alpha = 255, transform = matrix().Scale(shuttle_scale, shuttle_scale))
+		QDEL_IN(landing_zone_effect, animate_time)
+
+// Checks for drop landing effects, if non of them present, then call parent proc instead. Reuses logic from our parent
+/obj/docking_port/mobile/check_effects()
+	if(!drop_landing_effect && !drop_landing_sound)
+		return ..()
+
+	if((mode == SHUTTLE_CALL) || (mode == SHUTTLE_RECALL))
+		var/tl = timeLeft(1)
+		if(tl <= SHUTTLE_RIPPLE_TIME)
+			initiate_drop_landing_effects(destination, tl)
+
+/obj/docking_port/mobile/initiate_docking(obj/docking_port/stationary/S1, force = FALSE)
+    . = ..()
+    // Failsafe reset to FALSE, even if it's already FALSE because initiate_drop_landing_effects() isn't called
+    drop_landing_in_progress = FALSE
+
 /obj/docking_port/mobile/syndicate_sit
 	name = "syndicate sit shuttle"
 	shuttle_id = "syndicate_sit"
@@ -162,84 +232,8 @@
 /obj/docking_port/mobile/assault_pod/nanotrasen
 	name = "Nanotrasen assault pod"
 	shuttle_id = "assault_pod_nt"
-	/// If assault pod landing is in progress
-	var/landing_in_progress = FALSE
-
-// Rewritten logic from our parent that uses ripples effect
-/obj/docking_port/mobile/assault_pod/nanotrasen/check_effects()
-	if((mode == SHUTTLE_CALL) || (mode == SHUTTLE_RECALL))
-		var/tl = timeLeft(1)
-		if(tl <= SHUTTLE_RIPPLE_TIME)
-			initiate_effects(destination, tl)
-
-/obj/docking_port/mobile/assault_pod/nanotrasen/initiate_docking(obj/docking_port/stationary/S1, force = FALSE)
-    . = ..()
-    // Reset the flag after landing is complete
-    landing_in_progress = FALSE
-
-/// Initiate the landing zone effect
-/obj/docking_port/mobile/assault_pod/nanotrasen/proc/initiate_effects(obj/docking_port/stationary/S1, animate_time)
-	if(!S1)
-		return
-
-	// Check if we're already in the process of landing to avoid duplicates
-	if(landing_in_progress)
-		return
-
-	// Find the center of the landing area
-	var/list/all_landing_turfs = S1.return_ordered_turfs(S1.x, S1.y, S1.z, S1.dir)
-	if(!all_landing_turfs || !all_landing_turfs.len)
-		return
-
-	// Find the min/max coordinates to determine the boundaries of the landing zone
-	var/turf/first_turf = all_landing_turfs[1]
-	if(!first_turf)
-		return
-
-	var/min_x = first_turf.x
-	var/max_x = first_turf.x
-	var/min_y = first_turf.y
-	var/max_y = first_turf.y
-
-	for(var/turf/T in all_landing_turfs)
-		if(!T)
-			continue
-		min_x = min(T.x, min_x)
-		max_x = max(T.x, max_x)
-		min_y = min(T.y, min_y)
-		max_y = max(T.y, max_y)
-
-	// Calculate the central point of the landing zone
-	var/center_x = round((min_x + max_x) / 2)
-	var/center_y = round((min_y + max_y) / 2)
-	var/center_z = S1.z
-
-	// Calculate the dimensions of the shuttle in tiles
-	var/shuttle_width_tiles = max_x - min_x + 1
-	var/shuttle_height_tiles = max_y - min_y + 1
-
-	// Constants for scale calculation
-	var/TILE_SIZE_PX = 32
-	var/SPRITE_SIZE_PX = 96
-
-	// Calculate the required scale based on shuttle's tile size
-	// We'll use the larger dimension to ensure the effect covers the entire shuttle
-	var/shuttle_size_px = max(shuttle_width_tiles, shuttle_height_tiles) * TILE_SIZE_PX
-	var/shuttle_scale = shuttle_size_px / SPRITE_SIZE_PX
-
-	var/turf/effect_turf = locate(center_x, center_y, center_z)
-	if(!effect_turf)
-		return
-
-	// Create the landing zone effect in center of landing area
-	landing_in_progress = TRUE
-	playsound(effect_turf, 'modular_bandastation/objects/sounds/landing_specops.ogg', vol = 100, vary = FALSE, pressure_affected = FALSE)
-	var/obj/effect/abstract/landing_zone/landing_zone_effect = new /obj/effect/abstract/landing_zone(effect_turf, animate_time)
-
-	// Apply scale & alpha animation to the effect
-	animate(landing_zone_effect, time = animate_time, alpha = 255, transform = matrix().Scale(shuttle_scale, shuttle_scale))
-	// Deletes the landing zone effect when landing is complete
-	QDEL_IN(landing_zone_effect, animate_time)
+	drop_landing_effect = /obj/effect/abstract/landing_zone
+	drop_landing_sound = 'modular_bandastation/objects/sounds/landing_specops.ogg'
 
 // MARK: Shuttle Areas
 /area/shuttle/syndicate_sit
@@ -277,7 +271,7 @@
 	shuttle_id = "assault_pod_nt"
 	lzname = "assault_pod_nt"
 
-// Assault Pod Landing Effect
+// Drop-Landing Zone Effect
 /obj/effect/abstract/landing_zone
 	name = "Landing Zone Indicator"
 	desc = "Голографическая проекция, обозначающая зону приземления чего-либо. Вероятно, лучше отойти в сторону."
