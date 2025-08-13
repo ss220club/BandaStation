@@ -16,7 +16,7 @@
 	eject_sound = 'modular_bandastation/objects/sounds/weapons/ltrifle_magout.ogg'
 	suppressed_sound = 'modular_bandastation/objects/sounds/weapons/heavy_shot_suppressed.ogg'
 	burst_size = 1
-	accepted_magazine_type = /obj/item/ammo_box/magazine/amk
+	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
 	can_suppress = TRUE
 	suppressor_x_offset = 7
 	actions_types = list()
@@ -90,7 +90,6 @@
 
 /obj/item/gun/ballistic/automatic/sabel/auto/modern
 	name = "modern AMK rifle"
-	desc = "Нестареющий дизайн автомата под патрон 7.62мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
 	icon_state = "amk_modern"
 	inhand_icon_state = "amk_modern"
 	worn_icon_state = "amk_modern"
@@ -102,7 +101,7 @@
 	. = ..()
 	. += "Этот вариант является модернизированной версией автомата AMK с использованием более совершенных деталей. \
 	На замену оригинальных деталей были установлены новые, обновленные версии. \
-	Внутренний механизм был смазан и настроен, что повышает боевые способности данного варианта."
+	Внутренний механизм был улучшен и настроен, что повышает боевые способности данного варианта."
 
 /obj/item/gun/ballistic/automatic/sabel/auto/modern/no_mag
 	spawnwithmagazine = FALSE
@@ -110,7 +109,7 @@
 // MARK: Gauss AK
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss
 	name = "gauss AMK rifle"
-	desc = "Эксперементальный дизайн автомата под патрон 7.62мм. Оружие совмещаюшее в себе новые технологии и нестареющую классику."
+	desc = "Эксперементальный дизайн автомата под патрон 7.62мм. Оружие совмещающее в себе новые технологии и нестареющую классику."
 	icon_state = "amk_gauss"
 	inhand_icon_state = "amk"
 	actions_types = list(/datum/action/item_action/toggle_gauss)
