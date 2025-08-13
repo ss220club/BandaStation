@@ -18522,6 +18522,15 @@ instrumental = "плащом синего щита"
 prepositional = "плаще синего щита"
 gender = "male"
 
+["meson HUDglasses"]
+nominative = "мезонные солнцезащитные ИЛС очки"
+genitive = "мезонных солнцезащитных ИЛС очков"
+dative = "мезонным солнцезащитным ИЛС очкам"
+accusative = "мезонные солнцезащитные ИЛС очки"
+instrumental = "мезонными солнцезащитными ИЛС очками"
+prepositional = "мезонных солнцезащитных ИЛС очках"
+gender = "plural"
+
 ["medical HUDSunglasses"]
 nominative = "медицинские солнцезащитные ИЛС очки"
 genitive = "медицинских солнцезащитных ИЛС очков"
