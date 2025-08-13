@@ -3,7 +3,7 @@
 	name = "\improper Evil Clone"
 	stinger_sound = 'sound/music/antag/hypnotized.ogg'
 	pref_flag = ROLE_EVIL_CLONE
-	roundend_category = "evil clones"
+	roundend_category = "Злые клоны"
 	show_in_antagpanel = TRUE
 	antagpanel_category = ANTAG_GROUP_CREW
 	show_name_in_check_antagonists = TRUE
