@@ -82,7 +82,7 @@
 	name = "7.62x39mm match bullet"
 	damage = 25
 	armour_penetration = 5
-	ricochets_max = 2
+	ricochets_max = 5
 	ricochet_chance = 100
 	ricochet_auto_aim_angle = 30
 	ricochet_auto_aim_range = 15
@@ -125,7 +125,7 @@
 	/// Bonus force dealt against certain mobs
 	var/nemesis_bonus_force = 30
 	/// List (not really a list) of mobs we deal bonus damage to
-	var/list/nemesis_path = /mob/living/simple_animal
+	var/list/nemesis_path = /mob/living/basic
 
 /obj/projectile/bullet/a762x39/hunting/prehit_pierce(mob/living/target, mob/living/carbon/human/user)
 	if(istype(target, nemesis_path))
