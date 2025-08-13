@@ -87,6 +87,10 @@
 	name = "Ghetto Abandoned Medbay Morgue"
 	icon_state = "morgue_maint"
 
+/area/station/maintenance/department/medical/ghetto/central
+	name = "Ghetto Abandoned Medbay Entrance"
+	icon_state = "medbay_maint_central"
+
 // Non-Department
 /area/station/maintenance/ghetto/port
 	name = "Ghetto Port Maintenance"
