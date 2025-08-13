@@ -81,7 +81,7 @@
 	desc = "A console that controls the transport Specops shuttle."
 	icon_screen = "teleport"
 	icon_keyboard = "security_key"
-	circuit = /obj/item/circuitboard/computer/argos
+	circuit = /obj/item/circuitboard/computer/specops
 	shuttleId = "specops"
 	possible_destinations = "specops_home;specops_trurl;specops_custom"
 	req_access = list(ACCESS_CENT_GENERAL)
