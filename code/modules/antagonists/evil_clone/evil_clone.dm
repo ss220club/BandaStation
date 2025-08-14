@@ -1,6 +1,6 @@
 /// Antag datum associated with the experimental cloner
 /datum/antagonist/evil_clone
-	name = "\improper Evil Clone"
+	name = "\improper Злой клон"
 	stinger_sound = 'sound/music/antag/hypnotized.ogg'
 	pref_flag = ROLE_EVIL_CLONE
 	roundend_category = "Злые клоны"

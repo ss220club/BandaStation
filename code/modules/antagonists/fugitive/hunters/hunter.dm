@@ -1,6 +1,6 @@
 //The hunters!!
 /datum/antagonist/fugitive_hunter
-	name = "Fugitive Hunter"
+	name = "Охотник за беглецами"
 	roundend_category = "Беглецы"
 	silent = TRUE //greet called by the spawn
 	show_in_antagpanel = FALSE
