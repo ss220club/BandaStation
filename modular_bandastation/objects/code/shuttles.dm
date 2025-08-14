@@ -119,9 +119,11 @@
 	var/drop_landing_in_progress = FALSE
 
 /// Initiate the landing zone effect
-/obj/docking_port/mobile/proc/initiate_drop_landing_effects(obj/docking_port/stationary/S1, animate_time)
-	if(!S1 || drop_landing_in_progress)
+/obj/docking_port/mobile/proc/initiate_drop_landing(obj/docking_port/stationary/S1, animate_time)
+	if(!S1 || drop_landing_in_progress || (!drop_landing_sound && !drop_landing_effect))
 		return
+
+	drop_landing_in_progress = TRUE
 
 	// Find the center of the landing area
 	var/list/bounding_corners = return_coords(S1.x, S1.y, S1.dir)
@@ -135,6 +137,18 @@
 	var/center_y = round((min_y + max_y) / 2)
 	var/center_z = S1.z
 
+	var/turf/effect_turf = locate(center_x, center_y, center_z)
+	if(!effect_turf)
+		return
+
+	if(drop_landing_sound)
+		playsound(effect_turf, drop_landing_sound, vol = 100, vary = FALSE, pressure_affected = FALSE)
+
+	if(drop_landing_effect)
+		create_drop_landing_effect(S1, effect_turf, animate_time)
+
+/// Create the landing zone effect in center of landing area
+/obj/docking_port/mobile/proc/create_drop_landing_effect(obj/docking_port/stationary/S1, turf/effect_turf, animate_time)
 	// Temp effect so we can get its size
 	var/obj/temp_effect = new drop_landing_effect()
 	if(!temp_effect)
@@ -150,20 +164,9 @@
 	var/shuttle_size_px = max(width, height) * ICON_SIZE_ALL
 	var/shuttle_scale = shuttle_size_px / landing_icon_size_px
 
-	var/turf/effect_turf = locate(center_x, center_y, center_z)
-	if(!effect_turf)
-		return
-
-	drop_landing_in_progress = TRUE
-
-	// Create the landing zone effect in center of landing area
-	if(drop_landing_sound)
-		playsound(effect_turf, drop_landing_sound, vol = 100, vary = FALSE, pressure_affected = FALSE)
-
-	if(drop_landing_effect)
-		var/landing_zone_effect = new drop_landing_effect(effect_turf, animate_time)
-		animate(landing_zone_effect, time = animate_time, alpha = 255, transform = matrix().Scale(shuttle_scale, shuttle_scale))
-		QDEL_IN(landing_zone_effect, animate_time)
+	var/landing_zone_effect = new drop_landing_effect(effect_turf, animate_time)
+	animate(landing_zone_effect, time = animate_time, alpha = 255, transform = matrix().Scale(shuttle_scale, shuttle_scale))
+	QDEL_IN(landing_zone_effect, animate_time)
 
 // Checks for drop landing effects, if non of them present, then call parent proc instead. Reuses logic from our parent
 /obj/docking_port/mobile/check_effects()
@@ -173,11 +176,11 @@
 	if((mode == SHUTTLE_CALL) || (mode == SHUTTLE_RECALL))
 		var/tl = timeLeft(1)
 		if(tl <= SHUTTLE_RIPPLE_TIME)
-			initiate_drop_landing_effects(destination, tl)
+			initiate_drop_landing(destination, tl)
 
 /obj/docking_port/mobile/initiate_docking(obj/docking_port/stationary/S1, force = FALSE)
     . = ..()
-    // Failsafe reset to FALSE, even if it's already FALSE because initiate_drop_landing_effects() isn't called
+    // Failsafe reset to FALSE, even if it's already FALSE because initiate_drop_landing() isn't called
     drop_landing_in_progress = FALSE
 
 /obj/docking_port/mobile/syndicate_sit
