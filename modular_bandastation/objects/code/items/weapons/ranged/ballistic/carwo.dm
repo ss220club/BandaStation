@@ -13,7 +13,7 @@
 	bolt_type = BOLT_TYPE_LOCKING
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
-	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_BACK
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c40sol_rifle
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c40sol_rifle/standard
 	fire_sound = 'modular_bandastation/objects/sounds/weapons/rifle_heavy.ogg'
@@ -21,10 +21,9 @@
 	can_suppress = TRUE
 	suppressor_x_offset = 12
 	burst_size = 1
-	fire_delay = 0.35 SECONDS
+	fire_delay = 0.30 SECONDS
 	actions_types = list()
 	spread = 5.5
-	projectile_wound_bonus = -10
 	recoil = 0.4
 	obj_flags = UNIQUE_RENAME
 
