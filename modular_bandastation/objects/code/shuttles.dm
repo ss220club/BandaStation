@@ -149,22 +149,17 @@
 
 /// Create the landing zone effect in center of landing area
 /obj/docking_port/mobile/proc/create_drop_landing_effect(obj/docking_port/stationary/S1, turf/effect_turf, animate_time)
-	// Temp effect so we can get its size
-	var/obj/temp_effect = new drop_landing_effect()
-	if(!temp_effect)
-		return
+	var/obj/landing_zone_effect = new drop_landing_effect(effect_turf, animate_time)
 
 	// Constants for icon size calculation (in pixels)
-	var/list/landing_icon_dimensions = get_icon_dimensions(temp_effect.icon)
+	var/list/landing_icon_dimensions = get_icon_dimensions(landing_zone_effect.icon)
 	var/landing_icon_size_px = max(landing_icon_dimensions["width"], landing_icon_dimensions["height"])
-	qdel(temp_effect)
 
 	// Calculate the required scale based on shuttle's tile size
 	// We'll use the larger dimension to ensure the effect covers the entire shuttle
 	var/shuttle_size_px = max(width, height) * ICON_SIZE_ALL
 	var/shuttle_scale = shuttle_size_px / landing_icon_size_px
 
-	var/landing_zone_effect = new drop_landing_effect(effect_turf, animate_time)
 	animate(landing_zone_effect, time = animate_time, alpha = 255, transform = matrix().Scale(shuttle_scale, shuttle_scale))
 	QDEL_IN(landing_zone_effect, animate_time)
 
@@ -282,6 +277,8 @@
 	icon_state = "target_largebox"
 	layer = RIPPLE_LAYER
 	plane = ABOVE_GAME_PLANE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	anchored = TRUE
 	pixel_x = -32
 	pixel_y = -32
 	alpha = 150
