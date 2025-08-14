@@ -27,5 +27,6 @@
 #include "code/vehicle/paddy.dm"
 #include "code/weapons/baton.dm"
 #include "code/wounds/cranial_fissure.dm"
+#include "code/weapons/rifle.dm"
 
 #include "code/~undefs.dm"
