@@ -34,8 +34,8 @@
 	payday_modifier = 1.5
 
 /datum/species/skrell/prepare_human_for_preview(mob/living/carbon/human/human)
-	human.dna.features["mcolor"] = COLOR_TRUE_BLUE
-	human.dna.features["skrell_head_tentacle"] = /datum/sprite_accessory/skrell_head_tentacle/short::name
+	human.dna.features[FEATURE_MUTANT_COLOR] = COLOR_TRUE_BLUE
+	human.dna.features[FEATURE_SKRELL_HEAD_TENTACLE] = /datum/sprite_accessory/skrell_head_tentacle/short::name
 	human.update_body(is_creating = TRUE)
 
 /datum/species/skrell/create_pref_unique_perks()
