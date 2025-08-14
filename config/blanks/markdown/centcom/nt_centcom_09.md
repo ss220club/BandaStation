@@ -3,7 +3,7 @@
 <br></small> <small>Время: █████ </small>
 <br> <small>Год: █████ </small>
 <br><small><b> Отдел Специальных Операций АКН “Трурль” </b></small>
-<br><large><b>Доступ ограничен – <u> СОВЕРШЕННО СЕКРЕТНО </u><b>
+<br><large><b>Доступ ограничен – <u> СОВЕРШЕННО СЕКРЕТНО </u></b>
 </large><hr><center><h2><b>Внимание <u>руководству</u> [station_name]!</b></h3></center>
 <br><br><b>[input_field]</b><br><h4><i><br><b>Подпись:  </b>[input_field autofill_type=sign]</i>,  <b> в должности:</b> <i>[input_field autofill_type=job].</i></small>
 <br><hr><center><h3><b>СОВЕРШЕННО СЕКРЕТНО – ПОСЛЕ ПРОЧТЕНИЯ УНИЧТОЖИТЬ!</b></h3>
