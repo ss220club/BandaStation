@@ -296,71 +296,71 @@
 	{
 		"code": "NT-CENTCOM-00",
 		"category": "Центральное командование",
-		"name": "Запрос от центрального командования",
+		"name": "Официальный меморандум центрального командования",
 		"info": "markdown/centcom/nt_centcom_00.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-01",
 		"category": "Центральное командование",
-		"name": "Запрос отчёта общего состояния станции",
+		"name": "КОНФИДЕНЦИАЛЬНАЯ ИНФОРМАЦИЯ - НАИВЫСШИЙ ПРИОРИТЕТ",
 		"info": "markdown/centcom/nt_centcom_01.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-02",
 		"category": "Центральное командование",
-		"name": "Запрос отчёта состояния трудовых активов станции",
+		"name": "Запрос от центрального командования",
 		"info": "markdown/centcom/nt_centcom_02.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-03",
 		"category": "Центральное командование",
-		"name": "Запрос отчёта криминального статуса станции",
+		"name": "Запрос отчёта общего состояния станции",
 		"info": "markdown/centcom/nt_centcom_03.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-04",
 		"category": "Центральное командование",
-		"name": "Запрос отчёта здравоохранения станции",
+		"name": "Запрос отчёта состояния трудовых активов станции",
+		"info": "markdown/centcom/nt_centcom_04.md",
+		"required_access": "cent_general"
+	},
+	{
+		"code": "NT-CENTCOM-04",
+		"category": "Центральное командование",
+		"name": "Запрос отчёта криминального статуса станции",
 		"info": "markdown/centcom/nt_centcom_04.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-05",
 		"category": "Центральное командование",
-		"name": "Запрос отчёта научно-технического прогресса станции",
+		"name": "Запрос отчёта здравоохранения станции",
 		"info": "markdown/centcom/nt_centcom_05.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-06",
 		"category": "Центральное командование",
-		"name": "Запрос отчёта инженерного обеспечения станции",
+		"name": "Запрос отчёта научно-технического прогресса станции",
 		"info": "markdown/centcom/nt_centcom_06.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-07",
 		"category": "Центральное командование",
-		"name": "Запрос отчёта статуса снабжения станции",
+		"name": "Запрос отчёта инженерного обеспечения станции",
 		"info": "markdown/centcom/nt_centcom_07.md",
 		"required_access": "cent_general"
 	},
 	{
 		"code": "NT-CENTCOM-08",
 		"category": "Центральное командование",
-		"name": "Официальный меморандум центрального командования",
+		"name": "Запрос отчёта статуса снабжения станции",
 		"info": "markdown/centcom/nt_centcom_08.md",
-		"required_access": "cent_general"
-	},
-	{
-		"code": "NT-CENTCOM-09",
-		"category": "Центральное командование",
-		"name": "КОНФИДЕНЦИАЛЬНАЯ ИНФОРМАЦИЯ - НАИВЫСШИЙ ПРИОРИТЕТ",
-		"info": "markdown/centcom/nt_centcom_09.md",
 		"required_access": "cent_general"
 	}
 ]
