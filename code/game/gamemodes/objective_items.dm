@@ -138,7 +138,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	item_owner = list(JOB_BARTENDER)
 	exists_on_map = TRUE
 	difficulty = 2
-	steal_hint = "Двухствольный дробовик, обычно находящийся у бармена. Если не нашлись у бармена, то можете найти в подсобке бара."
+	steal_hint = "Двухствольный дробовик, обычно находящийся у бармена. Если его нет у бармена, то можете найти в подсобке бара."
 
 /obj/item/gun/ballistic/shotgun/doublebarrel/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/gun/ballistic/shotgun/doublebarrel)
@@ -177,7 +177,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	exists_on_map = TRUE
 	difficulty = 2
 	steal_hint = "Специализированный инструмент, что можно найти в лаборатории робототехников. \
-	    Вы можете использовать мультитул для открытия камеры хранения, или сломать грубой силой."
+		Вы можете использовать мультитул для открытия камеры хранения, или сломать грубой силой."
 
 /obj/item/crowbar/mechremoval/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/crowbar/mechremoval)
@@ -251,7 +251,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	exists_on_map = TRUE
 	difficulty = 3
 	steal_hint = "Револьвер калибра .38 special, что может быть у детектива. \
-		Если не нашлись у детектива, то можете найти в кабинете детектива."
+		Если его нет у детектива, то можете найти в его кабинете."
 
 /obj/item/gun/ballistic/revolver/c38/detective/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/gun/ballistic/revolver/c38/detective)
@@ -309,7 +309,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	item_owner = list(JOB_QUARTERMASTER)
 	exists_on_map = TRUE
 	difficulty = 2
-	steal_hint = "Карточка, дающая доступ к денежным средствам, хранящимся на станции. \
+	steal_hint = "Карточка, дающая доступ к фондам отдела снабжения. \
 		Обычно она хранится в шкафчике квартирмейстера, но особо внимательные могут носить её при себе или в бумажнике."
 
 /obj/item/card/id/departmental_budget/car/add_stealing_item_objective()
@@ -342,8 +342,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	exists_on_map = TRUE
 	difficulty = 4
 	steal_hint = "Запасная ID-карта самого главного на этой станции. \
-		Если поблизости нет официального капитана, вы можете найти на груди исполняющего обязанности капитана - одного из глав отдела. \
-		В противном случае вам придется вскрыть золотой сейф на мостике кислотой или взрывчаткой, чтобы добраться до него."
+			Если поблизости нет официального капитана, вы можете найти её на груди исполняющего обязанности капитана - одного из глав отдела."
 
 /obj/item/card/id/advanced/gold/captains_spare/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/card/id/advanced/gold/captains_spare)
