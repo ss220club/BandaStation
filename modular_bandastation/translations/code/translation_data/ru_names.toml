@@ -24995,3 +24995,291 @@ dative = "пространственному аномальному ядру"
 accusative = "пространственное аномальное ядро"
 instrumental = "пространственным аномальным ядром"
 prepositional = "пространственном аномальном ядре"
+
+["banner"]
+nominative = "знамя"
+genitive = "знамени"
+dative = "знамени"
+accusative = "знамя"
+instrumental = "знаменем"
+prepositional = "знамени"
+gender = "neuter"
+
+["securistan banner"]
+nominative = "знамя Секуристана"
+genitive = "знамени Секуристана"
+dative = "знамени Секуристана"
+accusative = "знамя Секуристана"
+instrumental = "знаменем Секуристана"
+prepositional = "знамени Секуристана"
+gender = "neuter"
+
+["meditopia banner"]
+nominative = "знамя Медитопии"
+genitive = "знамени Медитопии"
+dative = "знамени Медитопии"
+accusative = "знамя Медитопии"
+instrumental = "знаменем Медитопии"
+prepositional = "знамени Медитопии"
+gender = "neuter"
+
+["sciencia banner"]
+nominative = "знамя Наукии"
+genitive = "знамени Наукии"
+dative = "знамени Наукии"
+accusative = "знамя Наукии"
+instrumental = "знаменем Наукии"
+prepositional = "знамени Наукии"
+gender = "neuter"
+
+["cargonia banner"]
+nominative = "знамя Каргонии"
+genitive = "знамени Каргонии"
+dative = "знамени Каргонии"
+accusative = "знамя Каргонии"
+instrumental = "знаменем Каргонии"
+prepositional = "знамени Каргонии"
+gender = "neuter"
+
+["engitopia banner"]
+nominative = "знамя Инжетопии"
+genitive = "знамени Инжетопии"
+dative = "знамени Инжетопии"
+accusative = "знамя Инжетопии"
+instrumental = "знаменем Инжетопии"
+prepositional = "знамени Инжетопии"
+gender = "neuter"
+
+["command banner"]
+nominative = "знамя командования"
+genitive = "знамени командования"
+dative = "знамени командования"
+accusative = "знамя командования"
+instrumental = "знаменем командования"
+prepositional = "знамени командования"
+gender = "neuter"
+
+["atmosia banner"]
+nominative = "знамя Атмосии"
+genitive = "знамени Атмосии"
+dative = "знамени Атмосии"
+accusative = "знамя Атмосии"
+instrumental = "знаменем Атмосии"
+prepositional = "знамени Атмосии"
+gender = "neuter"
+
+["clown banner"]
+nominative = "знамя клоуна"
+genitive = "знамени клоуна"
+dative = "знамени клоуна"
+accusative = "знамя клоуна"
+instrumental = "знаменем клоуна"
+prepositional = "знамени клоуна"
+gender = "neuter"
+
+["mime banner"]
+nominative = "знамя мима"
+genitive = "знамени мима"
+dative = "знамени мима"
+accusative = "знамя мима"
+instrumental = "знаменем мима"
+prepositional = "знамени мима"
+gender = "neuter"
+
+["Ian banner"]
+nominative = "знамя Иана"
+genitive = "знамени Иана"
+dative = "знамени Иана"
+accusative = "знамя Иана"
+instrumental = "знаменем Иана"
+prepositional = "знамени Иана"
+gender = "neuter"
+
+["cult banner"]
+nominative = "знамя культа"
+genitive = "знамени культа"
+dative = "знамени культа"
+accusative = "знамя культа"
+instrumental = "знаменем культа"
+prepositional = "знамени культа"
+gender = "neuter"
+
+["spider clan banner"]
+nominative = "знамя Клана Паука"
+genitive = "знамени Клана Паука"
+dative = "знамени Клана Паука"
+accusative = "знамя Клана Паука"
+instrumental = "знаменем Клана Паука"
+prepositional = "знамени Клана Паука"
+gender = "neuter"
+
+["syndicate banner"]
+nominative = "знамя Синдиката"
+genitive = "знамени Синдиката"
+dative = "знамени Синдиката"
+accusative = "знамя Синдиката"
+instrumental = "знаменем Синдиката"
+prepositional = "знамени Синдиката"
+gender = "neuter"
+
+["solgov banner"]
+nominative = "знамя Транс-Солнечной Федерации"
+genitive = "знамени Транс-Солнечной Федерации"
+dative = "знамени Транс-Солнечной Федерации"
+accusative = "знамя Транс-Солнечной Федерации"
+instrumental = "знаменем Транс-Солнечной Федерации"
+prepositional = "знамени Транс-Солнечной Федерации"
+gender = "neuter"
+
+["ussp banner"]
+nominative = "знамя КСП"
+genitive = "знамени КСП"
+dative = "знамени КСП"
+accusative = "знамя КСП"
+instrumental = "знаменем КСП"
+prepositional = "знамени КСП"
+gender = "neuter"
+
+["wizard banner"]
+nominative = "знамя волшебников"
+genitive = "знамени волшебников"
+dative = "знамени волшебников"
+accusative = "знамя волшебников"
+instrumental = "знаменем волшебников"
+prepositional = "знамени волшебников"
+gender = "neuter"
+
+["vox banner"]
+nominative = "знамя воксов"
+genitive = "знамени воксов"
+dative = "знамени воксов"
+accusative = "знамя воксов"
+instrumental = "знаменем воксов"
+prepositional = "знамени воксов"
+gender = "neuter"
+
+["dionas banner"]
+nominative = "знамя дион"
+genitive = "знамени дион"
+dative = "знамени дион"
+accusative = "знамя дион"
+instrumental = "знаменем дион"
+prepositional = "знамени дион"
+gender = "neuter"
+
+["greytide banner"]
+nominative = "знамя грейтайда"
+genitive = "знамени грейтайда"
+dative = "знамени грейтайда"
+accusative = "знамя грейтайда"
+instrumental = "знаменем грейтайда"
+prepositional = "знамени грейтайда"
+gender = "neuter"
+
+["greys banner"]
+nominative = "знамя греев"
+genitive = "знамени греев"
+dative = "знамени греев"
+accusative = "знамя греев"
+instrumental = "знаменем греев"
+prepositional = "знамени греев"
+gender = "neuter"
+
+["humans banner"]
+nominative = "знамя людей"
+genitive = "знамени людей"
+dative = "знамени людей"
+accusative = "знамя людей"
+instrumental = "знаменем людей"
+prepositional = "знамени людей"
+gender = "neuter"
+
+["vulpkanin banner"]
+nominative = "знамя вульпканинов"
+genitive = "знамени вульпканинов"
+dative = "знамени вульпканинов"
+accusative = "знамя вульпканинов"
+instrumental = "знаменем вульпканинов"
+prepositional = "знамени вульпканинов"
+gender = "neuter"
+
+["drask banner"]
+nominative = "знамя драсков"
+genitive = "знамени драсков"
+dative = "знамени драсков"
+accusative = "знамя драсков"
+instrumental = "знаменем драсков"
+prepositional = "знамени драсков"
+gender = "neuter"
+
+["nian banner"]
+nominative = "знамя ниан"
+genitive = "знамени ниан"
+dative = "знамени ниан"
+accusative = "знамя ниан"
+instrumental = "знаменем ниан"
+prepositional = "знамени ниан"
+gender = "neuter"
+
+["tajaran banner"]
+nominative = "знамя таяран"
+genitive = "знамени таяран"
+dative = "знамени таяран"
+accusative = "знамя таяран"
+instrumental = "знаменем таяран"
+prepositional = "знамени таяран"
+gender = "neuter"
+
+["unathi banner"]
+nominative = "знамя унатхов"
+genitive = "знамени унатхов"
+dative = "знамени унатхов"
+accusative = "знамя унатхов"
+instrumental = "знаменем унатхов"
+prepositional = "знамени унатхов"
+gender = "neuter"
+
+["plasmaman banner"]
+nominative = "знамя плазмаменов"
+genitive = "знамени плазмаменов"
+dative = "знамени плазмаменов"
+accusative = "знамя плазмаменов"
+instrumental = "знаменем плазмаменов"
+prepositional = "знамени плазмаменов"
+gender = "neuter"
+
+["skrell banner"]
+nominative = "знамя скреллов"
+genitive = "знамени скреллов"
+dative = "знамени скреллов"
+accusative = "знамя скреллов"
+instrumental = "знаменем скреллов"
+prepositional = "знамени скреллов"
+gender = "neuter"
+
+["slime banner"]
+nominative = "знамя слаймов"
+genitive = "знамени слаймов"
+dative = "знамени слаймов"
+accusative = "знамя слаймов"
+instrumental = "знаменем слаймов"
+prepositional = "знамени слаймов"
+gender = "neuter"
+
+["kidan banner"]
+nominative = "знамя киданов"
+genitive = "знамени киданов"
+dative = "знамени киданов"
+accusative = "знамя киданов"
+instrumental = "знаменем киданов"
+prepositional = "знамени киданов"
+gender = "neuter"
+
+["machine banner"]
+nominative = "знамя синтетиков"
+genitive = "знамени синтетиков"
+dative = "знамени синтетиков"
+accusative = "знамя синтетиков"
+instrumental = "знаменем синтетиков"
+prepositional = "знамени синтетиков"
+gender = "neuter"
