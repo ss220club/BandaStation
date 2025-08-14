@@ -24888,12 +24888,12 @@ prepositional = "знамени командования"
 gender = "neuter"
 
 ["atmosia banner"]
-nominative = "знамя атмосии"
-genitive = "знамени атмосии"
-dative = "знамени атмосии"
-accusative = "знамя атмосии"
-instrumental = "знаменем атмосии"
-prepositional = "знамени атмосии"
+nominative = "знамя Атмосии"
+genitive = "знамени Атмосии"
+dative = "знамени Атмосии"
+accusative = "знамя Атмосии"
+instrumental = "знаменем Атмосии"
+prepositional = "знамени Атмосии"
 gender = "neuter"
 
 ["clown banner"]
@@ -24951,12 +24951,12 @@ prepositional = "знамени Синдиката"
 gender = "neuter"
 
 ["solgov banner"]
-nominative = "знамя Солгов"
-genitive = "знамени Солгов"
-dative = "знамени Солгов"
-accusative = "знамя Солгов"
-instrumental = "знаменем Солгов"
-prepositional = "знамени Солгов"
+nominative = "знамя Транс-Солнечной Федерации"
+genitive = "знамени Транс-Солнечной Федерации"
+dative = "знамени Транс-Солнечной Федерации"
+accusative = "знамя Транс-Солнечной Федерации"
+instrumental = "знаменем Транс-Солнечной Федерации"
+prepositional = "знамени Транс-Солнечной Федерации"
 gender = "neuter"
 
 ["ussp banner"]
