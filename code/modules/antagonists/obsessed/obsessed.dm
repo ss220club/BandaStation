@@ -35,6 +35,8 @@
 	silent = TRUE
 	can_elimination_hijack = ELIMINATION_PREVENT
 
+#define RANDOM_TARGET "Рандом" // BANDASTATION ADD
+
 /datum/antagonist/obsessed/admin_add(datum/mind/new_owner,mob/admin)
 	var/mob/living/carbon/C = new_owner.current
 	if(!istype(C))
@@ -43,10 +45,30 @@
 	if(!C.get_organ_by_type(/obj/item/organ/brain)) // If only I had a brain
 		to_chat(admin, "[roundend_category] come from a brain trauma, so they need to HAVE A BRAIN.")
 		return
+
+	// BANDASTATION ADD - Start
+	var/list/admin_pool = list("[RANDOM_TARGET]" = TRUE)
+	for(var/mob/living/carbon/human/player in GLOB.player_list)
+		if(!player.client || !player.mind || player == C)
+			continue
+		admin_pool += player
+
+	var/picked = tgui_input_list(admin, "Выберите цель одержимости", "Выбор цели одержимости", admin_pool)
+	if(!picked)
+		return
+	// BANDASTATION ADD - End
+
 	message_admins("[key_name_admin(admin)] made [key_name_admin(new_owner)] into [name].")
 	log_admin("[key_name(admin)] made [key_name(new_owner)] into [name].")
 	//PRESTO FUCKIN MAJESTO
-	C.gain_trauma(/datum/brain_trauma/special/obsessed)//ZAP
+	// BANDASTATION ADD - Start
+	if(picked == RANDOM_TARGET)
+		C.gain_trauma(/datum/brain_trauma/special/obsessed)//ZAP
+	else
+		C.gain_trauma(/datum/brain_trauma/special/obsessed, null, picked)//ZAP
+	// BANDASTATION ADD - END
+
+#undef RANDOM_TARGET // BANDASTATION ADD
 
 /datum/antagonist/obsessed/greet()
 	play_stinger()

@@ -3,6 +3,7 @@
 #include "code/shuttles.dm"
 
 #include "code/effects/decal.dm"
+#include "code/effects/landmark.dm"
 #include "code/effects/spawners.dm"
 #include "code/effects/turf_decal.dm"
 
@@ -21,6 +22,7 @@
 #include "code/items/pen.dm"
 #include "code/items/pig.dm"
 #include "code/items/role_tablet_presets.dm"
+#include "code/items/shields.dm"
 #include "code/items/stamp.dm"
 #include "code/items/wallets.dm"
 #include "code/items/clothing/accessories/accessories.dm"
@@ -57,6 +59,9 @@
 #include "code/items/clothing/under/carnival.dm"
 #include "code/items/clothing/under/jobs/blueshield.dm"
 #include "code/items/clothing/under/jobs/centcom.dm"
+#include "code/items/clothing/under/jobs/tsf.dm"
+#include "code/items/clothing/under/jobs/ussp.dm"
+#include "code/items/clothing/under/jobs/etamin_ind.dm"
 #include "code/items/clothing/under/jobs/magistrate.dm"
 #include "code/items/clothing/under/jobs/nanotrasen_representative.dm"
 #include "code/items/clothing/under/jobs/research.dm"
@@ -70,6 +75,7 @@
 #include "code/items/implants/death_alarm.dm"
 #include "code/items/melee/baton.dm"
 #include "code/items/storage/backpack.dm"
+#include "code/items/storage/belt.dm"
 #include "code/items/storage/death_implant_box.dm"
 #include "code/items/storage/duffelbag.dm"
 #include "code/items/storage/garment.dm"
@@ -91,6 +97,11 @@
 #include "code/items/weapons/ranged/ballistic/magazines.dm"
 #include "code/items/weapons/ranged/ballistic/projectiles.dm"
 #include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
+#include "code/items/clothing/mod/types/tsf/mod_theme.dm"
+#include "code/items/clothing/mod/types/tsf/mod_types.dm"
+#include "code/items/clothing/mod/types/ussp/mod_theme.dm"
+#include "code/items/clothing/mod/types/ussp/mod_types.dm"
+
 
 
 #include "code/items/weapons/ranged/ballistic/sabel.dm"
@@ -114,6 +125,7 @@
 #include "code/structures/flags.dm"
 #include "code/structures/platform.dm"
 #include "code/structures/posters.dm"
+#include "code/structures/signs.dm"
 #include "code/structures/statues.dm"
 #include "code/structures/crates_lockers/closets/secure/blueshield.dm"
 #include "code/structures/crates_lockers/closets/secure/gamma.dm"

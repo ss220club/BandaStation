@@ -1650,10 +1650,9 @@
 
 /obj/item/card/id/advanced/chameleon
 	name = "agent card"
-	desc = "A highly advanced chameleon ID card. Touch this card on another ID card or player to choose which accesses to copy. \
+	desc = "An advanced chameleon ID card. Swipe this card on another ID card, or a person wearing one, to copy access. \
 		Has special magnetic properties which force it to the front of wallets."
 	trim = /datum/id_trim/chameleon
-	wildcard_slots = WILDCARD_LIMIT_GOLD
 	trim_changeable = FALSE
 	actions_types = list(/datum/action/item_action/chameleon/change/id, /datum/action/item_action/chameleon/change/id_trim)
 	action_slots = ALL
@@ -1664,10 +1663,6 @@
 	var/anyone = FALSE
 	/// Weak ref to the ID card we're currently attempting to steal access from.
 	var/datum/weakref/theft_target
-
-/obj/item/card/id/advanced/chameleon/crummy
-	desc = "A surplus version of a chameleon ID card. Can only hold a limited number of access codes."
-	wildcard_slots = WILDCARD_LIMIT_CHAMELEON
 
 /obj/item/card/id/advanced/chameleon/Destroy()
 	theft_target = null
@@ -1926,7 +1921,7 @@
 	if(selected_trim_path)
 		SSid_access.apply_trim_override(src, trim_list[selected_trim_path])
 	if(target_occupation)
-		assignment = sanitize(target_occupation)
+		assignment = sanitize(target_occupation, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 	if(new_age)
 		registered_age = new_age
 	if(wallet_spoofing  == "Yes")
@@ -1970,8 +1965,17 @@
 		return CONTEXTUAL_SCREENTIP_SET
 	return .
 
-/// A special variant of the classic chameleon ID card which is black. Cool!
 /obj/item/card/id/advanced/chameleon/black
+	icon_state = "card_black"
+	assigned_icon_state = "assigned_syndicate"
+
+/// Upgraded variant of agent id, can hold unlimited amount of accesses.
+/obj/item/card/id/advanced/chameleon/elite
+	desc = "A highly advanced chameleon ID card. Swipe this card on another ID card, or a person wearing one, to copy access. \
+		Has special magnetic properties which force it to the front of wallets, and an embedded high-end microchip to hold unlimited access codes."
+	wildcard_slots = WILDCARD_LIMIT_GOLD
+
+/obj/item/card/id/advanced/chameleon/elite/black
 	icon_state = "card_black"
 	assigned_icon_state = "assigned_syndicate"
 
@@ -2092,7 +2096,7 @@
 			if(!after_input_check(user, item, input_assignment, scribbled_assignment))
 				return
 			playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
-			scribbled_assignment = sanitize(input_assignment)
+			scribbled_assignment = sanitize(input_assignment, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 			var/list/details = item.get_writing_implement_details()
 			details_colors[INDEX_ASSIGNMENT_COLOR] = details["color"] || COLOR_BLACK
 		if("Trim")

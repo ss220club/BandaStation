@@ -11,6 +11,7 @@
 #include "code/categories/other.dm"
 #include "code/categories/shoes.dm"
 #include "code/categories/heads.dm"
+#include "code/categories/inhands.dm"
 #include "code/categories/instruments.dm"
 #include "code/categories/suits.dm"
 #include "code/categories/uniform.dm"

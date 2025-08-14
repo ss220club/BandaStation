@@ -112,6 +112,23 @@
 	name = "Костюм (Бордовый)"
 	item_path = /obj/item/clothing/under/suit/burgundy
 
+// MARK: Tier 1
+/datum/loadout_item/uniforms/etamin_suit
+	name = "Костюм Etamin Industries"
+	item_path = /obj/item/clothing/under/rank/etamin_ind/suit
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/uniforms/etamin_skirt
+	name = "Юбка Etamin Industries"
+	item_path = /obj/item/clothing/under/rank/etamin_ind/skirt
+	donator_level = DONATOR_TIER_1
+
+// MARK: Tier 2
+/datum/loadout_item/uniforms/etamin_skirt_alt
+	name = "Юбка \"Солнце\" Etamin Industries"
+	item_path = /obj/item/clothing/under/rank/etamin_ind/skirt_alt
+	donator_level = DONATOR_TIER_2
+
 // MARK: Tier 3
 /datum/loadout_item/uniforms/maid_costume
 	name = "Костюм горничной"
@@ -121,6 +138,16 @@
 /datum/loadout_item/uniforms/katarina_suit
 	name = "Костюм Катарины"
 	item_path = /obj/item/clothing/under/costume/katarina_suit
+	donator_level = DONATOR_TIER_3
+
+/datum/loadout_item/uniforms/etamin_formal
+	name = "Деловой костюм Etamin Industries"
+	item_path = /obj/item/clothing/under/rank/etamin_ind/formal
+	donator_level = DONATOR_TIER_3
+
+/datum/loadout_item/uniforms/etamin_combat
+	name = "Тактический костюм Etamin Industries"
+	item_path = /obj/item/clothing/under/rank/etamin_ind/combat
 	donator_level = DONATOR_TIER_3
 
 // MARK: Tier 4

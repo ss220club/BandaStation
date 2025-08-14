@@ -36,8 +36,8 @@
 
 /// MARK: Bodypart overlay
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_head
-	dna_feature_key = "vulpkanin_head_markings"
-	dna_color_feature_key = "vulpkanin_head_markings_color"
+	dna_feature_key = FEATURE_VULPKANIN_HEAD_MARKINGS
+	dna_color_feature_key = FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR
 	applies_to = list(
 		/obj/item/bodypart/head,
 	)

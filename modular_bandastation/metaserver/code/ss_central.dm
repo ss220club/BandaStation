@@ -64,12 +64,17 @@ SUBSYSTEM_DEF(central)
 		GLOB.whitelist = list()
 	GLOB.whitelist |= ckeys
 
-/datum/controller/subsystem/central/proc/get_player_discord_async(ckey)
+/datum/controller/subsystem/central/proc/update_player_discord_async(ckey, client/client)
 	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[ckey]"
 
-	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(get_player_discord_callback), ckey))
+	SShttp.create_async_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list(), CALLBACK(src, PROC_REF(handle_discord_get_response), ckey, client))
 
-/datum/controller/subsystem/central/proc/get_player_discord_callback(ckey, datum/http_response/response)
+/datum/controller/subsystem/central/proc/update_player_discord_sync(ckey, client/client)
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/ckey/[ckey]"
+
+	handle_discord_get_response(ckey, client, SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list()))
+
+/datum/controller/subsystem/central/proc/handle_discord_get_response(ckey, client/client, datum/http_response/response)
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
 		stack_trace("Failed to get player discord: HTTP status code [response.status_code] - [response.error] - [response.body]")
 		return
@@ -82,6 +87,18 @@ SUBSYSTEM_DEF(central)
 	discord_links[ckey] = discord_id
 
 	GLOB.persistent_clients_by_ckey[ckey].discord_id = discord_id
+	if(isnull(client))
+		return
+
+	SStitle.show_title_screen_to(client)
+	if(!client.interviewee)
+		return
+
+	// Open interview after discord linking
+	var/datum/interview/interview = GLOB.interviews.interview_for_client(client)
+	var/mob/dead/new_player/player = client.mob
+	if(player && interview)
+		interview.ui_interact(player)
 
 /datum/controller/subsystem/central/proc/is_player_discord_linked(ckey)
 	var/datum/persistent_client/pclient = GLOB.persistent_clients_by_ckey[ckey]
@@ -89,13 +106,10 @@ SUBSYSTEM_DEF(central)
 	if(!pclient)
 		return FALSE
 
-	if(pclient.discord_id)
-		return TRUE
+	if(isnull(pclient.discord_id))
+		update_player_discord_sync(ckey)
 
-	// Update the info just in case
-	get_player_discord_async(ckey)
-
-	return FALSE
+	return !isnull(pclient.discord_id)
 
 /// WARNING: only semi async - UNTIL based
 /datum/controller/subsystem/central/proc/is_player_whitelisted(ckey)

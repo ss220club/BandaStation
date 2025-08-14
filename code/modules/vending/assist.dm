@@ -34,6 +34,7 @@
 		/obj/item/universal_scanner = 3,
 		/obj/item/vending_refill/custom = 3,
 	)
+	allow_custom = TRUE
 
 	refill_canister = /obj/item/vending_refill/assist
 	product_ads = "Только самое лучшее!;Приобретите себе инструменты.;Самое робастное снаряжение.;Лучшее снаряжение в космосе!"
