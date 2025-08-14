@@ -3,7 +3,7 @@
 <br></small> <small>Время: [time]</small>
 <br><small>Год: 2569 г.</small>
 <br><small>Корабль — <b>АКН ‘’Трурль’’</b></small>
-<br><large><b> Официальный Меморандум <b></large>
+<br><large><b> Официальный Меморандум </b></large>
 <hr><center><h3><b>Приветствуем экипаж и руководство [station_name]</b>!</h3></center>
 <br><br>
 <b> [input_field] </b>
