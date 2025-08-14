@@ -427,7 +427,8 @@
 	recoil = 2
 	accepted_magazine_type = /obj/item/ammo_box/magazine/sniper_rounds
 	internal_magazine = FALSE
-	w_class = WEIGHT_CLASS_BULKY // BANDASTATION EDIT - Original: WEIGHT_CLASS_NORMAL
+	// BANDASTATION EDIT - Original: WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	mag_display = TRUE
 	tac_reloads = TRUE
