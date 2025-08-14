@@ -30,7 +30,7 @@
 	data["sustain_indefinitely"] = full_sustain_held_note
 	data["playing"] = playing
 	data["repeat"] = repeat
-	data["bpm"] = round(60 SECONDS / tempo)
+	data["bpm"] = bpm // BANDASTATION EDIT - BPM unlock
 	data["lines"] = list()
 	var/linecount
 	for(var/line in lines)
@@ -55,6 +55,10 @@
 	data["note_shift_max"] = note_shift_max
 	data["max_line_chars"] = MUSIC_MAXLINECHARS
 	data["max_lines"] = MUSIC_MAXLINES
+	// BANDASTATION ADDITION START - BPM unlock
+	data["min_bpm"] = min_bpm
+	data["max_bpm"] = get_max_bpm()
+	// BANDASTATION ADDITION END - BPM unlock
 	return data
 
 /datum/song/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -82,13 +86,28 @@
 			return TRUE
 		if("tempo")
 			var/move_direction = params["tempo_change"]
-			var/tempo_diff
+			// BANDASTATION EDIT START - BPM unlock
+			// var/tempo_diff
+			// if(move_direction == "increase_speed")
+			// 	tempo_diff = world.tick_lag
+			// else
+			// 	tempo_diff = -world.tick_lag
+			// tempo = sanitize_tempo(tempo + tempo_diff)
+			// return TRUE
+			// вместо ±tick_lag — ±BPM
+			var/step = clamp(round(text2num(params["bpm_step"]) || 1), 1, 100)
 			if(move_direction == "increase_speed")
-				tempo_diff = world.tick_lag
+				set_bpm(bpm - step)
 			else
-				tempo_diff = -world.tick_lag
-			tempo = sanitize_tempo(tempo + tempo_diff)
+				set_bpm(bpm + step)
 			return TRUE
+
+		if("set_bpm")
+			var/new_bpm = text2num(params["amount"])
+			if(!isnum(new_bpm) || new_bpm <= 0) return FALSE
+			set_bpm(new_bpm)
+			return TRUE
+			// BANDASTATION EDIT END - BPM unlock
 
 		//SONG MAKING
 		if("import_song")
@@ -108,7 +127,10 @@
 		if("start_new_song")
 			name = ""
 			lines = new()
-			tempo = sanitize_tempo(5) // default 120 BPM
+			// BANDASTATION EDIT START - BPM unlock
+			//tempo = sanitize_tempo(5) // default 120 BPM
+			set_bpm(120)
+			// BANDASTATION EDIT END - BPM unlock
 			return TRUE
 		if("add_new_line")
 			var/newline = tgui_input_text(user, "Enter your line", parent.name, max_length = MUSIC_MAXLINECHARS)
@@ -190,12 +212,20 @@
 	lines = islist(new_song) ? new_song : splittext(new_song, "\n")
 	if(lines.len)
 		var/bpm_string = "BPM: "
-		if(findtext(lines[1], bpm_string, 1, length(bpm_string) + 1))
-			var/divisor = text2num(copytext(lines[1], length(bpm_string) + 1)) || 120 // default
-			tempo = sanitize_tempo(BPM_TO_TEMPO_SETTING(divisor))
+		// BANDASTATION EDIT START - BPM unlock
+		// if(findtext(lines[1], bpm_string, 1, length(bpm_string) + 1))
+		// 	var/divisor = text2num(copytext(lines[1], length(bpm_string) + 1)) || 120 // default
+		// 	tempo = sanitize_tempo(BPM_TO_TEMPO_SETTING(divisor))
+		// 	lines.Cut(1, 2)
+		// else
+		// 	tempo = sanitize_tempo(5) // default 120 BPM
+		if(copytext(lines[1], 1, length(bpm_string) + 1) == bpm_string)
+			var/val = text2num(copytext(lines[1], length(bpm_string) + 1)) || 120
+			set_bpm(val)
 			lines.Cut(1, 2)
 		else
-			tempo = sanitize_tempo(5) // default 120 BPM
+			set_bpm(120)
+		// BANDASTATION EDIT END - BPM unlock
 		if(lines.len > MUSIC_MAXLINES)
 			if(user)
 				to_chat(user, "Too many lines!")
