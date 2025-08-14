@@ -19,31 +19,27 @@
 	vision_flags = SEE_TURFS|SEE_MOBS|SEE_OBJS
 
 /obj/item/clothing/glasses/meson/sunglasses
-	name = "meson HUDglasses"
+	name = "meson HUDSunglasses"
 	desc = "Солнцезащитные очки со встроенным мезонным сканером, который может видеть сквозь стены и рельеф."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/glasses.dmi'
-	icon_state = "mesonhud"
+	icon_state = "hudsunmeson"
 	inhand_icon_state = "glasses"
 	worn_icon = 'modular_bandastation/objects/icons/onbody/eyes.dmi'
-	worn_icon_state = "mesonhud"
+	worn_icon_state = "hudsunmeson"
 	flash_protect = FLASH_PROTECTION_FLASH
-	flags_cover = GLASSESCOVERSEYES
-	vision_flags = SEE_TURFS
-	clothing_traits = list(TRAIT_MADNESS_IMMUNE)
-	glass_colour_type = /datum/client_colour/glass_colour/green
 	tint = 1
 
 /obj/item/clothing/glasses/meson/sunglasses/Initialize(mapload)
 	. = ..()
-	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/sunhudmesonremoval)
+	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/hudsunmesonremoval)
 
 	AddElement( \
 		/datum/element/slapcrafting, \
 		slapcraft_recipes = slapcraft_recipe_list \
 	)
 
-/datum/crafting_recipe/sunhudmeson
-	name = "meson HUDglasses"
+/datum/crafting_recipe/hudsunmeson
+	name = "meson HUDSunglasses"
 	result = /obj/item/clothing/glasses/meson/sunglasses
 	time = 2 SECONDS
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
@@ -54,8 +50,8 @@
 	)
 	category = CAT_EQUIPMENT
 
-/datum/crafting_recipe/sunhudmesonremoval
-	name = "meson HUDglasses removal"
+/datum/crafting_recipe/hudsunmesonremoval
+	name = "meson HUDSunglasses removal"
 	result = /obj/item/clothing/glasses/sunglasses
 	time = 2 SECONDS
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)

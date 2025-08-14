@@ -18522,7 +18522,7 @@ instrumental = "плащом синего щита"
 prepositional = "плаще синего щита"
 gender = "male"
 
-["meson HUDglasses"]
+["meson HUDSunglasses"]
 nominative = "мезонные солнцезащитные ИЛС очки"
 genitive = "мезонных солнцезащитных ИЛС очков"
 dative = "мезонным солнцезащитным ИЛС очкам"
