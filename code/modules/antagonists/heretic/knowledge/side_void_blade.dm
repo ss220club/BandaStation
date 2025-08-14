@@ -17,13 +17,13 @@
 
 /datum/heretic_knowledge/limited_amount/risen_corpse
 	name = "Shattered Ritual"
-	desc = "Allows you to transmute a corpse with a soul, a pair of latex or nitrile gloves, and \
-		and any exosuit clothing (such as armor) to create a Shattered Risen. \
-		Shattered Risen are strong ghouls that have 125 health, but cannot hold items, \
-		instead having two brutal weapons for hands. You can only create one at a time."
-	gain_text = "I witnessed a cold, rending force drag this corpse back to near-life. \
-		When it moves, it crunches like broken glass. Its hands are no longer recognizable as human - \
-		each clenched fist contains a brutal nest of sharp bone-shards instead."
+	desc = "Позволяет трансмутировать труп с душой, пару латексных или нитриловых перчаток, \
+		и любой костюм, чтобы создать Разбитого восставшего. \
+		Разбитые восставшие это сильные гули с 125 здоровья, но не могут держать предметы, \
+		вместо этого имеют в руках два жестоких оружия. Вы можете иметь только одного."
+	gain_text = "Я узрел как холодная, раздирающая сила вернула этот труп к полу-жизни. \
+		Движения хрустящие, как сломанное стекло. Руки больше не похожи на человеческие - \
+		в каждом сжатом кулаке жестокие гнезда острых костяных осколков."
 
 	required_atoms = list(
 		/obj/item/clothing/suit = 1,
@@ -45,33 +45,33 @@
 		if(body.stat != DEAD)
 			continue
 		if(!IS_VALID_GHOUL_MOB(body) || HAS_TRAIT(body, TRAIT_HUSK))
-			to_chat(user, span_hierophant_warning("[body] is not in a valid state to be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не в подходящем состоянии для превращения в гуля."))
 			continue
 		if(!body.mind)
-			to_chat(user, span_hierophant_warning("[body] is mindless and cannot be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не имеет разума и не может быть превращен в гуля."))
 			continue
 		if(!body.client && !body.mind.get_ghost(ghosts_with_clients = TRUE))
-			to_chat(user, span_hierophant_warning("[body] is soulless and cannot be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не имеет души и не может быть превращен в гуля."))
 			continue
 
 		// We will only accept valid bodies with a mind, or with a ghost connected that used to control the body
 		selected_atoms += body
 		return TRUE
 
-	loc.balloon_alert(user, "ritual failed, no valid body!")
+	loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 	return FALSE
 
 /datum/heretic_knowledge/limited_amount/risen_corpse/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	var/mob/living/carbon/human/soon_to_be_ghoul = locate() in selected_atoms
 	if(QDELETED(soon_to_be_ghoul)) // No body? No ritual
 		stack_trace("[type] reached on_finished_recipe without a human in selected_atoms to make a ghoul out of.")
-		loc.balloon_alert(user, "ritual failed, no valid body!")
+		loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 		return FALSE
 
 	soon_to_be_ghoul.grab_ghost()
 	if(!soon_to_be_ghoul.mind || !soon_to_be_ghoul.client)
 		stack_trace("[type] reached on_finished_recipe without a minded / cliented human in selected_atoms to make a ghoul out of.")
-		loc.balloon_alert(user, "ritual failed, no valid body!")
+		loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 		return FALSE
 
 	selected_atoms -= soon_to_be_ghoul
@@ -107,7 +107,7 @@
 /// The "hand" "weapon" used by shattered risen
 /obj/item/mutant_hand/shattered_risen
 	name = "bone-shards"
-	desc = "What once appeared to be a normal human fist, now holds a mauled nest of sharp bone-shards."
+	desc = "То, что когда-то казалось обычным человеческим кулаком, теперь превратилось в гнездо острых костяных осколков."
 	color = "#001aff"
 	hitsound = SFX_SHATTER
 	force = 16
@@ -118,11 +118,11 @@
 
 /datum/heretic_knowledge/rune_carver
 	name = "Carving Knife"
-	desc = "Allows you to transmute a knife, a shard of glass, and a piece of paper to create a Carving Knife. \
-		The Carving Knife allows you to etch difficult to see traps that trigger on heathens who walk overhead. \
-		Also makes for a handy throwing weapon."
-	gain_text = "Etched, carved... eternal. There is power hidden in everything. I can unveil it! \
-		I can carve the monolith to reveal the chains!"
+	desc = "Позволяет трансмутировать нож, осколок стекла и лист бумаги, чтобы создать Резьбовой нож. \
+		Резьбовой нож позволяет вырезать трудноразличимые ловушки, которые срабатывают на язычников, проходящих над ними. \
+		Также является удобным метательным оружием."
+	gain_text = "Высеченные, вырезанные... вечные. Сила скрыта во всем. Я могу раскрыть ее! \
+		Я могу вырезать монолит, раскрывающий цепи!"
 
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -138,12 +138,12 @@
 
 /datum/heretic_knowledge/summon/maid_in_mirror
 	name = "Maid in the Mirror"
-	desc = "Allows you to transmute five sheets of titanium, a flash, a suit of armor, and a pair of lungs \
-		to create a Maid in the Mirror. Maid in the Mirrors are decent combatants that can become incorporeal by \
-		phasing in and out of the mirror realm, serving as powerful scouts and ambushers. \
-		However, they are weak to mortal gaze and take damage by being examined."
-	gain_text = "Within each reflection, lies a gateway into an unimaginable world of colors never seen and \
-		people never met. The ascent is glass, and the walls are knives. Each step is blood, if you do not have a guide."
+	desc = "Позволяет трансмутировать пять листов титаниума, флэш, броню и пару легких \
+		чтобы создать Зеркальную служанку. Зеркальные служанки - достойные бойцы, которые могут становиться бесплотными, \
+		переходя в зеркальный мир и обратно, и служат мощными разведчиками и засадчиками. \
+		Но они слабы против взгляда смертных и получают урон при осмотре."
+	gain_text = "Внутри каждого отражения - ворота в невообразимый мир невиданных красок и \
+		незнакомых людей. Подъем - стекло, а стены - ножи. Каждый шаг - это кровь, если у вас нет проводника."
 
 	required_atoms = list(
 		/obj/item/stack/sheet/mineral/titanium = 5,

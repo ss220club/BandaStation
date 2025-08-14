@@ -228,8 +228,8 @@ GLOBAL_LIST_INIT(dreams, populate_dream_list())
 
 /datum/dream/heretic/GenerateDream(mob/living/carbon/dreamer)
 	. = list()
-	. += "You wander through the forest of Mansus"
-	. += "There is a " + pick("pond", "well", "lake", "puddle", "stream", "spring", "brook", "marsh")
+	. += "Вы блуждаете по лесу Мансуса"
+	. += "Вы находите " + pick("пруд", "колодец", "озеро", "лужу", "ручей", "источник", "родник", "болото")
 
 	dreamer.add_mood_event("mansus_dream_fatigue", /datum/mood_event/mansus_dream_fatigue)
 
@@ -244,18 +244,18 @@ GLOBAL_LIST_INIT(dreams, populate_dream_list())
 		var/list/filtered_objects = typecache_filter_list(all_objects, allowed_typecaches_by_root_type[object_type])
 		if(filtered_objects.len)
 			if (!something_found)
-				. += "Its waters reflect"
+				. += "В воде видны отражения"
 				something_found = TRUE
 			var/obj/found_object = pick(filtered_objects)
 			. += initial(found_object.name)
 	if(!something_found)
-		. += pick("It's pitch black", "The reflections are vague", "You stroll aimlessly")
+		. += pick("Вода затуманена", "Отражения непонятны", "Вы гуляете праздно")
 	else
-		. += "The images fade in the ripples"
-	. += "You feel exhausted"
+		. += "Образы растворяются в ряби"
+	. += "Вы чувствуете усталость"
 
 /datum/mood_event/mansus_dream_fatigue
-	description = "I must recover before I can dream of Mansus again."
+	description = "Мне нужно восстановиться для сноведений о Мансусе."
 	mood_change = -2
 	timeout = 5 MINUTES
 

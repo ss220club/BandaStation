@@ -20,10 +20,10 @@
 
 /datum/station_goal/station_shield/get_report()
 	return list(
-		"<blockquote>The station is located in a zone full of space debris.",
-		"We have a prototype shielding system you must deploy to reduce collision-related accidents.",
-		"",
-		"You can order the satellites and control systems at cargo.</blockquote>",
+		"#### Система противометеорной защиты",
+		"Станция находится в зоне, заполненной космическим мусором.",
+		"У вас есть прототип защитной системы, который необходимо развернуть для снижения количества аварий из-за столкновений.<br>",
+		"Вы можете заказать спутники и системы через отдел снабжения.",
 	).Join("\n")
 
 
@@ -177,7 +177,7 @@
 			say("Warning. Risk of dark matter congealment entering existent ranges. Further tampering will be reported.")
 		if(EMAGGED_METEOR_SHIELD_THRESHOLD_THREE)
 			say("Warning. Further tampering has been reported.")
-			priority_announce("Warning. Tampering of meteor satellites puts the station at risk of exotic, deadly meteor collisions. Please intervene by checking your GPS devices for strange signals, and dismantling the tampered meteor shields.", "Strange Meteor Signal Warning")
+			priority_announce("Внимание! Вмешательство в работу метеоритных щитов подвергает станцию ​​риску необычных и смертоносных столкновений с метеоритами. Пожалуйста, проверьте свои GPS-устройства на наличие странных сигналов и демонтируйте взломанные метеоритные щиты.", "Предупреждение о странном метеоритном сигнале")
 		if(EMAGGED_METEOR_SHIELD_THRESHOLD_FOUR)
 			say("Warning. Warning. Dark Matt-eor on course for station.")
 			force_event_async(/datum/round_event_control/dark_matteor, "an array of tampered meteor satellites")

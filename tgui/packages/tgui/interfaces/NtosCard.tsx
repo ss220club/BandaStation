@@ -160,8 +160,8 @@ const LoginPage = () => {
         <Stack.Item grow>
           <NoticeBox info={!!authed_user}>
             {authed_user
-              ? `Login: ${authed_user}`
-              : 'Please log in to continue.'}
+              ? `Логин: ${authed_user}`
+              : 'Пожалуйста, войдите чтобы продолжить.'}
           </NoticeBox>
         </Stack.Item>
         <Stack.Item width="100%">
@@ -178,7 +178,7 @@ const LoginPage = () => {
               >
                 {auth_card
                   ? `${auth_card.id_owner} (${auth_card.id_rank})`
-                  : 'Insert ID'}
+                  : 'Вставить ID'}
               </Button>
             </Flex.Item>
             <Flex.Item>
@@ -189,7 +189,7 @@ const LoginPage = () => {
                   act(authed_user ? 'PRG_logout' : 'PRG_authenticate');
                 }}
               >
-                {authed_user ? 'Log Out' : 'Log In'}
+                {authed_user ? 'Выйти' : 'Войти'}
               </Button>
             </Flex.Item>
           </Flex>
@@ -220,7 +220,7 @@ const IdCardPage = (props) => {
               >
                 {modified_card
                   ? `${modified_card.id_owner} (${modified_card.id_rank})`
-                  : 'Insert ID'}
+                  : 'Вставить ID'}
               </Button>
             </Flex.Item>
             <Flex.Item>
@@ -229,7 +229,7 @@ const IdCardPage = (props) => {
                 disabled={!modified_card || !authed_user}
                 onClick={() => act('PRG_print')}
               >
-                Print Report
+                Распечтать отчет
               </Button>
             </Flex.Item>
           </Flex>
@@ -238,7 +238,7 @@ const IdCardPage = (props) => {
       {!!(modified_card && authed_user) && (
         <>
           <Stack mt={1}>
-            <Stack.Item align="center">Details:</Stack.Item>
+            <Stack.Item align="center">Детали:</Stack.Item>
             <Stack.Item grow={1} mr={1} ml={1}>
               <Input
                 width="100%"
@@ -266,7 +266,7 @@ const IdCardPage = (props) => {
             </Stack.Item>
           </Stack>
           <Stack>
-            <Stack.Item align="center">Assignment:</Stack.Item>
+            <Stack.Item align="center">Назначение:</Stack.Item>
             <Stack.Item grow={1} ml={1}>
               <Input
                 fluid
@@ -299,7 +299,7 @@ const TemplateDropdown = (props) => {
       <Stack.Item grow>
         <Dropdown
           width="100%"
-          placeholder="Select a template..."
+          placeholder="Выбрать шаблон..."
           options={templateKeys.map((path) => {
             return templates[path];
           })}
