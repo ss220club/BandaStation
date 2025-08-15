@@ -639,7 +639,7 @@
 /**
  * Returns the access list for this mob
  */
-/mob/living/proc/get_access()
+/mob/living/proc/get_access() as /list
 	var/list/access_list = list()
 	SEND_SIGNAL(src, COMSIG_MOB_RETRIEVE_SIMPLE_ACCESS, access_list)
 	var/obj/item/card/id/id = get_idcard()
@@ -2632,15 +2632,17 @@ GLOBAL_LIST_EMPTY(fire_appearances)
  * extra damage, so jokers can't use half a stack of iron rods to make getting hit by the tram immediately lethal.
  */
 /mob/living/proc/tram_slam_land()
-	if(!istype(loc, /turf/open/openspace) && !isplatingturf(loc))
+	if(!istype(loc, /turf/open/openspace)) // BANDASTATION EDIT - Cyberiad: First day of fixes for "Ghetto rework" (Removes plating checks)
 		return
 
-	if(isplatingturf(loc))
-		var/turf/open/floor/smashed_plating = loc
-		visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] с силой отбрасывается в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"),
-				span_userdanger("Вас с силой отбрасывает в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"))
-		apply_damage(rand(5,20), BRUTE, BODY_ZONE_CHEST)
-		smashed_plating.ScrapeAway(1, CHANGETURF_INHERIT_AIR)
+	// // BANDASTATION REMOVAL START - Cyberiad: First day of fixes for "Ghetto rework"
+	// if(isplatingturf(loc))
+	// 	var/turf/open/floor/smashed_plating = loc
+	// 	visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] с силой отбрасывается в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"),
+	// 			span_userdanger("Вас с силой отбрасывает в [smashed_plating.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"))
+	// 	apply_damage(rand(5,20), BRUTE, BODY_ZONE_CHEST)
+	// 	smashed_plating.ScrapeAway(1, CHANGETURF_INHERIT_AIR)
+	// // BANDASTATION REMOVAL END - Cyberiad: First day of fixes for "Ghetto rework"
 
 	for(var/obj/structure/lattice/lattice in loc)
 		visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] с силой отбрасывается в [lattice.declent_ru(ACCUSATIVE)], пробиваясь насквозь!"),
@@ -2768,6 +2770,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 /// Proc for giving a mob a new 'friend', generally used for AI control and targeting. Returns false if already friends or null if qdeleted.
 /mob/living/proc/befriend(mob/living/new_friend)
 	SHOULD_CALL_PARENT(TRUE)
+	SEND_SIGNAL(new_friend, COMSIG_LIVING_MADE_NEW_FRIEND, src)
 	if(QDELETED(new_friend))
 		return
 	var/friend_ref = REF(new_friend)
@@ -2956,7 +2959,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	var/our_fitness_level = calculate_fitness()
 	var/their_fitness_level = scouter.calculate_fitness()
 
-	var/comparative_fitness = our_fitness_level / their_fitness_level
+	var/comparative_fitness = their_fitness_level ? our_fitness_level / their_fitness_level : 1
 
 	if (comparative_fitness > 2)
 		scouter.set_jitter_if_lower(comparative_fitness SECONDS)

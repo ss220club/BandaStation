@@ -12,7 +12,7 @@
 	return !(brain.organ_flags & ORGAN_FAILING) || !CONFIG_GET(flag/brain_permanent_death)
 
 /datum/config_entry/flag/brain_permanent_death
-	default = TRUE
+	default = FALSE
 
 /datum/design/stasisbodybag
 	name = "Stasis Body Bag"

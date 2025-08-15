@@ -38,8 +38,7 @@
 		return ..()
 	if(!isnull(owner.persistent_client.discord_id))
 		return ..()
-	to_chat(owner, PLAYER_REQUIRES_LINKED_DISCORD_CHAT_MESSAGE)
-	SScentral.get_player_discord_async(owner.ckey)
+	SScentral.update_player_discord_async(owner.ckey)
 	return TRUE
 
 /datum/interview/proc/serialize_embed()
