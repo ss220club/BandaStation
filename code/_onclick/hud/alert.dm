@@ -453,7 +453,7 @@
 	var/mob/living/offerer = offer?.owner
 	if(!QDELETED(rube) && !QDELETED(offerer))
 		offerer.visible_message(span_danger("[offerer] убирает руку от шлепка [rube] в последнюю секунду, полностью уклоняясь от пятюни!"), span_nicegreen("[rube] не удается коснуться вашей руки, выставляя себя на посмешище!"), span_hear("Вы слышите разочаровывающий звук того, как плоть не соприкасается с плотью!"), ignored_mobs=rube)
-		to_chat(rube, span_userdanger("[uppertext("НЕТ! [offerer] ОТДЕРГИВАЕТ СВОЮ РУКУ! ТЫ СЛИШКОМ МЕДЛЕННЫЙ!")]"))
+		to_chat(rube, span_userdanger("[uppertext("НЕТ! [offerer] ОТДЕРГИВАЕТ СВОЮ РУКУ! ТЫ ДЕЙСТВУЕШЬ СЛИШКОМ МЕДЛЕННО!")]"))
 		playsound(offerer, 'sound/items/weapons/thudswoosh.ogg', 100, TRUE, 1)
 		rube.Knockdown(1 SECONDS)
 		offerer.add_mood_event("high_five", /datum/mood_event/down_low)
@@ -601,7 +601,7 @@
 				angle = 0
 				cut_overlays()
 				icon_state = "runed_sense0"
-				desc = "Нар'Си требует, чтобы [sac_objective.target] был принесён в жертву до начала ритуала призыва."
+				desc = "Нар'Си требует принести в жертву [sac_objective.target] до начала ритуала призыва."
 				add_overlay(sac_objective.sac_image)
 			else
 				var/datum/objective/eldergod/summon_objective = locate() in antag.cult_team.objectives
@@ -691,7 +691,7 @@
 
 /atom/movable/screen/alert/emptycell
 	name = "Без питания"
-	desc = "Ядро юнита разряжено. Модули недоступны, пока ядро не будет заряжено."
+	desc = "Ядро юнита разряжено. Модули недоступны, пока батарея не будет заряжена."
 	icon_state = "empty_cell"
 
 /atom/movable/screen/alert/emptycell/Initialize(mapload, datum/hud/hud_owner)
@@ -793,8 +793,8 @@
 /atom/movable/screen/alert/hackingapc
 	name = "Взлом ЛКП"
 	desc = "Происходит взлом локального контроллера питания. Когда процесс \
-		завершится, Вы получите исключительный контроль над ним и получите \
-		дополнительное время обработки для разблокировки дополнительных возможностей устранения неисправностей."
+		завершится, вы получите исключительный контроль над ним и получите \
+		дополнительное время обработки для разблокировки новых неисправностей."
 	icon_state = ALERT_HACKING_APC
 	timeout = 60 SECONDS
 	clickable_glow = TRUE
@@ -1023,7 +1023,7 @@
 	clickable_glow = TRUE
 
 /atom/movable/screen/alert/restrained/handcuffed
-	name = "Закован"
+	name = "Закованы"
 	desc = "Вы закованы и не можете действовать. Если вас тащат, то не сможете двигаться. Нажмите на уведомление, чтобы освободиться."
 	click_master = FALSE
 
