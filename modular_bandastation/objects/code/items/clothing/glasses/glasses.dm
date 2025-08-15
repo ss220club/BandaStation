@@ -51,7 +51,7 @@
 	category = CAT_EQUIPMENT
 
 /datum/crafting_recipe/hudsunmesonremoval
-	name = "meson HUDSunglasses removal"
+	name = "meson HUD removal"
 	result = /obj/item/clothing/glasses/sunglasses
 	time = 2 SECONDS
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
