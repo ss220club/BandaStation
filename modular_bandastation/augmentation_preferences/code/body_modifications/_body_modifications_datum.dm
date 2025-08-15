@@ -12,6 +12,7 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 	/// The list of body modifications incompatible with this body modification
 	var/list/incompatible_body_modifications = list()
 	var/category = null
+	var/affected_zone = null
 
 /datum/body_modification/New()
 	..()

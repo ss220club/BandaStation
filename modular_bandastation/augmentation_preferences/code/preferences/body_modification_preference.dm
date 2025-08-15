@@ -20,8 +20,14 @@
 		return
 
 	var/list/body_modifications = value
-	for(var/obj/item/bodypart/L in target.bodyparts)
-		if(	L.body_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+	for(var/key in body_modifications)
+		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
+		if (!mod_proto?.affected_zone)
+			continue
+		if (!(mod_proto.affected_zone in GLOB.limb_zones))
+			continue
+		var/obj/item/bodypart/L = target.get_bodypart(mod_proto.affected_zone)
+		if(L)
 			qdel(L)
 
 	target.regenerate_limbs()

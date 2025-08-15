@@ -25,6 +25,7 @@
 	limb_body_zone = BODY_ZONE_L_ARM
 	incompatible_body_modifications = list("left_arm_prosthesis")
 	category = "Левая рука"
+	affected_zone = BODY_ZONE_L_ARM
 
 /datum/body_modification/limb_amputation/arm/right
 	key = "right_arm_amputation"
@@ -32,6 +33,7 @@
 	limb_body_zone = BODY_ZONE_R_ARM
 	incompatible_body_modifications = list("right_arm_prosthesis")
 	category = "Правая рука"
+	affected_zone = BODY_ZONE_R_ARM
 
 /datum/body_modification/limb_amputation/leg
 	abstract_type = /datum/body_modification/limb_amputation/leg
@@ -42,6 +44,7 @@
 	limb_body_zone = BODY_ZONE_L_LEG
 	incompatible_body_modifications = list("left_leg_prosthesis")
 	category = "Левая нога"
+	affected_zone = BODY_ZONE_L_LEG
 
 /datum/body_modification/limb_amputation/leg/right
 	key = "right_leg_amputation"
@@ -49,3 +52,4 @@
 	limb_body_zone = BODY_ZONE_R_LEG
 	incompatible_body_modifications = list("right_leg_prosthesis")
 	category = "Правая нога"
+	affected_zone = BODY_ZONE_R_LEG
