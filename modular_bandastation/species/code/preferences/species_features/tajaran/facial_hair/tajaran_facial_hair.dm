@@ -26,7 +26,7 @@
 	return final_icon
 
 /datum/preference/choiced/tajaran_facial_hair/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["tajaran_facial_hair"] = value
+	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR] = value
 
 /datum/preference/choiced/tajaran_facial_hair/compile_constant_data()
 	var/list/data = ..()

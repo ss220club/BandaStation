@@ -1,4 +1,4 @@
-// MARK: Base Sol SMG
+// MARK: Base TSF SMG
 /obj/item/gun/ballistic/automatic/sindano
 	name = "Sindano submachine gun"
 	desc = "Небольшой пистолет-пулемет, стреляющий патронами калибра .35 Sol. Часто встречается в руках ЧВК и других неблагонадежных корпораций. Принимает любой стандартный магазин от пистолетов ТСФ."
@@ -18,11 +18,11 @@
 	can_suppress = TRUE
 	suppressor_x_offset = 11
 	burst_size = 1
-	spread = 7.5
+	spread = 5
 	fire_delay = 0.2 SECONDS
 	actions_types = list()
 	obj_flags = UNIQUE_RENAME
-	recoil = 0.5
+	recoil = 0.3
 
 /obj/item/gun/ballistic/automatic/sindano/Initialize(mapload)
 	. = ..()
@@ -45,15 +45,15 @@
 /obj/item/gun/ballistic/automatic/sindano/no_mag
 	spawnwithmagazine = FALSE
 
-// MARK: Compact Sol SMG
+// MARK: Compact TSF SMG
 /obj/item/gun/ballistic/automatic/sindano/compact
 	name = "compact Sindano submachine gun"
 	icon_state = "sindano_compact"
 	w_class = WEIGHT_CLASS_NORMAL
 	weapon_weight = WEAPON_LIGHT
 	suppressor_x_offset = 11
-	spread = 9.5
-	recoil = 0.7
+	spread = 7.5
+	recoil = 0.5
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c35sol_pistol
 
 /obj/item/gun/ballistic/automatic/sindano/compact/no_mag
@@ -74,7 +74,7 @@
 		Но к сожалению, малая длина ствола и почти что несуществующий приклад не \
 		позволяют стрелять точно на далекие или средние дистанции."
 
-// MARK: Tactical(black) Sol SMG
+// MARK: Tactical(black) TSF SMG
 /obj/item/gun/ballistic/automatic/sindano/black
 	name = "tactical Sindano submachine gun"
 	icon_state = "sindano_black"
@@ -82,7 +82,7 @@
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c35sol_pistol/drum
 	spread = 5
 	fire_delay = 0.1 SECONDS
-	recoil = 0.3
+	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/sindano/black/examine_more(mob/user)
 	. = ..()

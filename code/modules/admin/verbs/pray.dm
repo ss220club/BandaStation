@@ -41,8 +41,9 @@
 
 	var/msg_tmp = msg
 	GLOB.requests.pray(usr.client, msg, usr.job == JOB_CHAPLAIN)
-	msg = span_adminnotice("[icon2html(cross, GLOB.admins)]<b><font color=[font_color]>[prayer_type][deity ? " (to [deity])" : ""]: </font>[ADMIN_FULLMONTY(src)] [ADMIN_SC(src)]:</b> [span_linkify(msg)]")
-	for(var/client/C in GLOB.admins)
+	var/list/admins = get_holders_with_rights(R_ADMIN) /// BANDASTATION EDIT: Proper permissions
+	msg = span_adminnotice("[icon2html(cross, admins)]<b><font color=[font_color]>[prayer_type][deity ? " (to [deity])" : ""]: </font>[ADMIN_FULLMONTY(src)] [ADMIN_SC(src)]:</b> [span_linkify(msg)]") /// BANDASTATION EDIT: Proper permissions
+	for(var/client/C as anything in admins) /// BANDASTATION EDIT: Proper permissions
 		if(get_chat_toggles(C) & CHAT_PRAYER)
 			to_chat(C, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
 	to_chat(usr, span_info("You pray to the gods: \"[msg_tmp]\""), confidential = TRUE)
@@ -55,10 +56,11 @@
 	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.message_centcom(sender.client, msg)
 	msg = span_adminnotice("<b><font color=orange>CENTCOM:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_CENTCOM_REPLY(sender)]:</b> [msg]")
-	for(var/client/staff as anything in GLOB.admins)
+	var/list/admins = get_holders_with_rights(R_ADMIN) /// BANDASTATION EDIT: Proper permissions
+	for(var/client/staff as anything in admins) /// BANDASTATION EDIT: Proper permissions
 		if(staff?.prefs.read_preference(/datum/preference/toggle/comms_notification))
 			SEND_SOUND(staff, sound('sound/misc/server-ready.ogg'))
-	to_chat(GLOB.admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
+	to_chat(admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE) /// BANDASTATION EDIT: Proper permissions
 	for(var/obj/machinery/computer/communications/console in GLOB.shuttle_caller_list)
 		console.override_cooldown()
 
@@ -67,10 +69,11 @@
 	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.message_syndicate(sender.client, msg)
 	msg = span_adminnotice("<b><font color=crimson>SYNDICATE:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_SYNDICATE_REPLY(sender)]:</b> [msg]")
-	for(var/client/staff as anything in GLOB.admins)
+	var/list/admins = get_holders_with_rights(R_ADMIN)
+	for(var/client/staff as anything in admins)
 		if(staff?.prefs.read_preference(/datum/preference/toggle/comms_notification))
 			SEND_SOUND(staff, sound('sound/misc/server-ready.ogg'))
-	to_chat(GLOB.admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
+	to_chat(admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
 	for(var/obj/machinery/computer/communications/console in GLOB.shuttle_caller_list)
 		console.override_cooldown()
 
@@ -79,9 +82,10 @@
 	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.nuke_request(sender.client, msg)
 	msg = span_adminnotice("<b><font color=orange>NUKE CODE REQUEST:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_CENTCOM_REPLY(sender)] [ADMIN_SET_SD_CODE]:</b> [msg]")
-	for(var/client/staff as anything in GLOB.admins)
+	var/list/admins = get_holders_with_rights(R_ADMIN)
+	for(var/client/staff as anything in admins)
 		SEND_SOUND(staff, sound('sound/misc/server-ready.ogg'))
-	to_chat(GLOB.admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
+	to_chat(admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
 	for(var/obj/machinery/computer/communications/console in GLOB.shuttle_caller_list)
 		console.override_cooldown()
 
@@ -90,9 +94,10 @@
 	var/msg = copytext_char(sanitize(text, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 	GLOB.requests.ert_request(sender.client, msg)
 	msg = span_adminnotice("<b><font color=orange>ERT REQUEST:</font>[ADMIN_FULLMONTY(sender)] [ADMIN_CENTCOM_REPLY(sender)] [ADMIN_ERT_RESPOND]:</b> [msg]")
-	for(var/client/staff as anything in GLOB.admins)
+	var/list/admins = get_holders_with_rights(R_ADMIN)
+	for(var/client/staff as anything in admins)
 		SEND_SOUND(staff, sound('sound/misc/server-ready.ogg'))
-	to_chat(GLOB.admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
+	to_chat(admins, msg, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
 	for(var/obj/machinery/computer/communications/console in GLOB.shuttle_caller_list)
 		console.override_cooldown()
 // BANDASTATION ADDITION - END

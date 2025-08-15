@@ -31,8 +31,8 @@
 	icon_state = "bellycrest"
 
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_chest
-	dna_feature_key = "vulpkanin_chest_markings"
-	dna_color_feature_key = "vulpkanin_body_markings_color"
+	dna_feature_key = FEATURE_VULPKANIN_CHEST_MARKINGS
+	dna_color_feature_key = FEATURE_VULPKANIN_BODY_MARKINGS_COLOR
 	applies_to = list(
 		/obj/item/bodypart/chest,
 	)

@@ -1173,9 +1173,9 @@
 	if(last_force_string_check != force && !(item_flags & FORCE_STRING_OVERRIDE))
 		set_force_string()
 	if(!(item_flags & FORCE_STRING_OVERRIDE))
-		openToolTip(user,src,params,title = declent_ru(NOMINATIVE),content = "[desc]<br>[force ? "<b>Force:</b> [force_string]" : ""]",theme = "")
+		openToolTip(user, src, params, title = get_tip_name(), content = "[desc]<br>[force ? "<b>Force:</b> [force_string]" : ""]", theme = "")
 	else
-		openToolTip(user,src,params,title = declent_ru(NOMINATIVE),content = "[desc]<br><b>Force:</b> [force_string]",theme = "")
+		openToolTip(user, src, params, title = get_tip_name(), content = "[desc]<br><b>Force:</b> [force_string]", theme = "")
 
 /obj/item/MouseEntered(location, control, params)
 	. = ..()
@@ -1852,7 +1852,7 @@
 
 			else if(victim_human.is_blind())
 				to_chat(target, span_userdanger("Вы чувствуете, как кто-то пытается что-то экипировать на вас."))
-	user.do_item_attack_animation(target, used_item = equipping)
+	user.do_item_attack_animation(target, used_item = equipping, animation_type = ATTACK_ANIMATION_BLUNT)
 
 	to_chat(user, span_notice("Вы пытаетесь экипировать [equipping.declent_ru(ACCUSATIVE)] на [target.declent_ru(PREPOSITIONAL)]..."))
 

@@ -9,4 +9,4 @@
 	return COLOR_WHITE
 
 /datum/preference/color/vulpkanin_facial_hair_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["vulpkanin_facial_hair_color"] = value
+	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = value

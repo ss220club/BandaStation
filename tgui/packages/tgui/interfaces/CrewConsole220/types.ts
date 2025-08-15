@@ -1,6 +1,6 @@
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
-import { type MapData } from '../common/NanoMap';
+import type { MapData } from '../common/NanoMap';
 
 export type CrewSensor = {
   name: string;

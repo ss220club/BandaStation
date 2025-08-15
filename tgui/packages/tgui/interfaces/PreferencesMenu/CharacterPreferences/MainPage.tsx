@@ -1,7 +1,7 @@
 import { sortBy } from 'es-toolkit';
 import { filter, map } from 'es-toolkit/compat';
 import { useState } from 'react';
-import { sendAct, useBackend } from 'tgui/backend';
+import { type sendAct, useBackend } from 'tgui/backend';
 import {
   Box,
   Button,
@@ -17,12 +17,13 @@ import { capitalize, createSearch } from 'tgui-core/string';
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { Preference } from '../components/Preference';
 import { RandomizationButton } from '../components/RandomizationButton';
+import { BodyModificationsPage } from '../preferences/BodyModificationsPage';
 import { features } from '../preferences/features';
 import {
   type FeatureChoicedServerData,
   FeatureValueInput,
 } from '../preferences/features/base';
-import { Gender, GENDERS } from '../preferences/gender';
+import { GENDERS, Gender } from '../preferences/gender';
 import {
   createSetPreference,
   type PreferencesMenuData,
@@ -37,6 +38,7 @@ import { AlternativeNames, NameInput } from './names';
 type CharacterControlsProps = {
   handleRotate: () => void;
   handleOpenSpecies: () => void;
+  handleOpenAugmentations: () => void; // BANDASTATION ADD: Augmentations
   gender: Gender;
   setGender: (gender: Gender) => void;
   showGender: boolean;
@@ -45,42 +47,29 @@ type CharacterControlsProps = {
 };
 
 function CharacterControls(props: CharacterControlsProps) {
-  const { act } = useBackend<PreferencesMenuData>();
-  const [randomToggle, setRandomToggle] = useRandomToggleState();
-
   return (
     <Stack className="PreferencesMenu__CharacterControls">
-      <Stack>
-        <Button
-          icon="undo"
-          tooltip="Повернуть"
-          tooltipPosition="top"
-          onClick={props.handleRotate}
-        />
-        <Button
-          icon="paw"
-          tooltip="Вид"
-          tooltipPosition="top"
-          onClick={props.handleOpenSpecies}
-        />
-        {props.showGender && (
-          <GenderButton
-            gender={props.gender}
-            handleSetGender={props.setGender}
-          />
-        )}
-        <Button
-          icon="dice"
-          tooltip="Рандомизировать"
-          tooltipPosition="top"
-          selected={randomToggle}
-          onClick={() => {
-            act('randomize_character');
-
-            setRandomToggle(!randomToggle);
-          }}
-        />
-      </Stack>
+      <Button
+        icon="undo"
+        tooltip="Повернуть"
+        tooltipPosition="top"
+        onClick={props.handleRotate}
+      />
+      <Button
+        icon="paw"
+        tooltip="Вид"
+        tooltipPosition="top"
+        onClick={props.handleOpenSpecies}
+      />
+      {props.showGender && (
+        <GenderButton gender={props.gender} handleSetGender={props.setGender} />
+      )}
+      <Button
+        icon="robot"
+        tooltip="Модификации тела"
+        tooltipPosition="top"
+        onClick={() => props.handleOpenAugmentations()}
+      />
       <Button
         color="red"
         icon="trash"
@@ -383,6 +372,7 @@ export function MainPage(props: MainPageProps) {
   const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
     useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
+  const [augmentationInputOpen, setAugmentationInputOpen] = useState(false);
 
   const serverData = useServerPrefs();
 
@@ -412,11 +402,11 @@ export function MainPage(props: MainPageProps) {
   };
 
   if (randomBodyEnabled) {
-    nonContextualPreferences['random_species'] =
-      data.character_preferences.randomization['species'];
+    nonContextualPreferences.random_species =
+      data.character_preferences.randomization.species;
     // BANDASTATION ADDITION START - TTS
-    nonContextualPreferences['random_tts_seed'] =
-      data.character_preferences.randomization['tts_seed'];
+    nonContextualPreferences.random_tts_seed =
+      data.character_preferences.randomization.tts_seed;
     // BANDASTATION ADDITION END - TTS
   } else {
     // We can't use random_name/is_accessible because the
@@ -431,6 +421,7 @@ export function MainPage(props: MainPageProps) {
           <CharacterControls
             gender={data.character_preferences.misc.gender}
             handleOpenSpecies={props.openSpecies}
+            handleOpenAugmentations={() => setAugmentationInputOpen(true)} // BANDASTATION ADDITION - Feat: Augmentations
             handleRotate={() => {
               act('rotate');
             }}
@@ -490,6 +481,12 @@ export function MainPage(props: MainPageProps) {
 
   return (
     <Stack fill>
+      {augmentationInputOpen && (
+        <BodyModificationsPage
+          handleClose={() => setAugmentationInputOpen(false)}
+        />
+      )}
+
       {deleteCharacterPopupOpen && (
         <DeleteCharacterPopup
           close={() => setDeleteCharacterPopupOpen(false)}

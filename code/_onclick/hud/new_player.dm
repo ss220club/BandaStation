@@ -519,7 +519,7 @@
 	. = ..()
 	if(QDELETED(src) || !desc)
 		return
-	openToolTip(usr, tip_src = src, params = params, title = declent_ru(NOMINATIVE), content = desc,)
+	openToolTip(usr, tip_src = src, params = params, title = get_tip_name(), content = desc)
 
 /atom/movable/screen/lobby/button/sign_up/MouseExited()
 	. = ..()
