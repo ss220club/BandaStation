@@ -264,13 +264,13 @@ const EditingSettings = (props) => {
         Tempo:{' '}
         <Button
           onClick={() =>
-            act('tempo_big_step', { tempo_change: 'increase_speed' })
+            act('tempo_big_step', { tempo_change: 'decrease_speed' })
           }
         >
           --
         </Button>{' '}
         <Button
-          onClick={() => act('tempo', { tempo_change: 'increase_speed' })}
+          onClick={() => act('tempo', { tempo_change: 'decrease_speed' })}
         >
           -
         </Button>{' '}
@@ -286,13 +286,13 @@ const EditingSettings = (props) => {
           }
         />{' '}
         <Button
-          onClick={() => act('tempo', { tempo_change: 'decrease_speed' })}
+          onClick={() => act('tempo', { tempo_change: 'increase_speed' })}
         >
           +
         </Button>{' '}
         <Button
           onClick={() =>
-            act('tempo_big_step', { tempo_change: 'decrease_speed' })
+            act('tempo_big_step', { tempo_change: 'increase_speed' })
           }
         >
           ++

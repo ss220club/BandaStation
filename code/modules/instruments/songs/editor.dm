@@ -97,9 +97,9 @@
 			// вместо ±tick_lag — ±BPM
 			var/step = clamp(round(text2num(params["bpm_step"]) || 1), 1, 100)
 			if(move_direction == "increase_speed")
-				set_bpm(bpm - step)
-			else
 				set_bpm(bpm + step)
+			else
+				set_bpm(bpm - step)
 			return TRUE
 
 		if("set_bpm")
@@ -213,9 +213,9 @@
 			var/move_direction = params["tempo_change"]
 			var/step = 10
 			if(move_direction == "increase_speed")
-				set_bpm(bpm - step)
-			else
 				set_bpm(bpm + step)
+			else
+				set_bpm(bpm - step)
 			return TRUE
 /**
  * Parses a song the user has input into lines and stores them.
