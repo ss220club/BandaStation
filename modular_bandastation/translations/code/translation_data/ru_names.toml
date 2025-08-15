@@ -25203,6 +25203,7 @@ dative = "лобби отдела снабжения"
 accusative = "лобби отдела снабжения"
 instrumental = "лобби отдела снабжения"
 prepositional = "лобби отдела снабжения"
+gender = "neuter"
 
 ["Mining Dock"]
 nominative = "шахтерский док"
@@ -25229,6 +25230,7 @@ dative = "силосному хранилищу шахтерской руды"
 accusative = "силосное хранилище шахтерской руды"
 instrumental = "силосним хранилищем шахтерской руды"
 prepositional = "силосном хранилище шахтерской руды"
+gender = "neuter"
 
 ["Mining Office"]
 nominative = "шахтерский офис"
@@ -25546,6 +25548,7 @@ dative = "лобби научного отдела"
 accusative = "лобби научного отдела"
 instrumental = "лобби научного отдела"
 prepositional = "лобби научного отдела"
+gender = "neuter"
 
 ["Lower Science Division"]
 nominative = "нижний научный отдел"
