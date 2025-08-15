@@ -202,7 +202,21 @@
 					set_linear_falloff_duration(sustain_amount)
 				if(SUSTAIN_EXPONENTIAL)
 					set_exponential_drop_rate(sustain_amount)
+		if("set_bpm_slider")
+			var/new_bpm = text2num(params["amount"])
+			if(!isnum(new_bpm) || new_bpm <= 0)
+				return FALSE
+			set_bpm(clamp(new_bpm, min_bpm, get_max_bpm()))
+			return TRUE
 
+		if("tempo_big_step")
+			var/move_direction = params["tempo_change"]
+			var/step = 10
+			if(move_direction == "increase_speed")
+				set_bpm(bpm - step)
+			else
+				set_bpm(bpm + step)
+			return TRUE
 /**
  * Parses a song the user has input into lines and stores them.
  */
