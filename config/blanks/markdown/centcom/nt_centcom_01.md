@@ -25,7 +25,6 @@ info = Время: █████ Год: █████  Корабль — <
 
 # === Подписи и штампы ===
 
-! Время: [input_field autofill_type=time]
 ! Подпись уполномоченного лица: [input_field autofill_type=sign]
 ! Должность уполномоченного лица: [input_field autofill_type=job]
 
