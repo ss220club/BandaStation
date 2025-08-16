@@ -58,7 +58,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/door/airlock/public/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/landmark/navigate_destination,
 /turf/open/floor/iron/white,
 /area/station/common/cryopods)
 "C" = (
@@ -73,6 +72,7 @@
 /obj/effect/turf_decal/trimline/dark_green/line{
 	dir = 1
 	},
+/obj/effect/landmark/navigate_destination,
 /turf/open/floor/iron/white,
 /area/station/common/cryopods)
 "L" = (
