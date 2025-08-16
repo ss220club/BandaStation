@@ -13,7 +13,7 @@ jobs:
     runs-on: [self-hosted]
     concurrency: gen-docs
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4.3 # bandastation 5 -> 4.3
       - name: Setup cache
         uses: actions/cache@v4
         with:
