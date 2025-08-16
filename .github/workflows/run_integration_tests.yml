@@ -26,10 +26,15 @@ jobs:
     # Otherwise, it will output `Run Tests (map; max)`.
     # For example, `Run Tests (runtimestation; 515)`.
     name: Run Tests (${{ inputs.major && format('{0}.{1}; ', inputs.major, inputs.minor) || '' }}${{ inputs.map }}; ${{ inputs.max_required_byond_client }})
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
+      - name: Install required packages
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install zlib1g-dev:i386
       - name: Restore BYOND from Cache
         uses: ./.github/actions/restore_or_install_byond
         with:
@@ -44,7 +49,7 @@ jobs:
         env:
           MYSQL_CONFIG_FILE: tools/ci/mysql_config.cnf
         run: |
-          sudo systemctl start mysql
+          sudo service mysql start
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} -e 'CREATE DATABASE tg_ci;'
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} tg_ci < SQL/tgstation_schema.sql
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} -e 'CREATE DATABASE tg_ci_prefixed;'
