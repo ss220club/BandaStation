@@ -18,6 +18,7 @@
 	clothing_traits = list(TRAIT_SECURITY_HUD)
 	vision_flags = SEE_TURFS|SEE_MOBS|SEE_OBJS
 
+// MARK: Miscellaneous
 /obj/item/clothing/glasses/meson/sunglasses
 	name = "meson HUDSunglasses"
 	desc = "Солнцезащитные очки со встроенным мезонным сканером, который может видеть сквозь стены и рельеф."
@@ -39,7 +40,7 @@
 	)
 
 /datum/crafting_recipe/hudsunmeson
-	name = "meson HUDSunglasses"
+	name = "Meson HUDSunglasses"
 	result = /obj/item/clothing/glasses/meson/sunglasses
 	time = 2 SECONDS
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
@@ -51,7 +52,7 @@
 	category = CAT_EQUIPMENT
 
 /datum/crafting_recipe/hudsunmesonremoval
-	name = "meson HUD removal"
+	name = "Meson HUD Removal"
 	result = /obj/item/clothing/glasses/sunglasses
 	time = 2 SECONDS
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)

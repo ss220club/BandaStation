@@ -194,7 +194,7 @@
 	message = copytext(message, customsaypos + 1)
 	if (!message)
 		mods[MODE_CUSTOM_SAY_ERASE_INPUT] = TRUE
-		message = "an interesting thing to say"
+		// message = "an interesting thing to say" // BANDASTATION REMOVAL
 	return message
 /**
  * Extracts and cleans message of any extenstions at the begining of the message
