@@ -45,6 +45,9 @@ map cyberiad
 	votable
 endmap
 
+map waterbox
+endmap
+
 # Debug-only maps.
 
 map gateway_test
