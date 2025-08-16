@@ -576,7 +576,7 @@
 	purity = REAGENT_STANDARD_PURITY
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/stimulants = 4) //1.6 per 2 seconds
-	inverse_chem = /datum/reagent/inverse/corazargh
+	inverse_chem = /datum/reagent/inverse // BANDASTATION EDIT - Original: /inverse/corazargh
 	inverse_chem_val = 0.4
 	metabolized_traits = list(TRAIT_BATON_RESISTANCE, TRAIT_STIMULATED)
 
