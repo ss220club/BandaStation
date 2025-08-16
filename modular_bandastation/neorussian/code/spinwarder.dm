@@ -1,5 +1,4 @@
-//Spinwarder - The common tongue of the various lands of the former Third Soviet Union, and the official language of the Spinward Stellar Coalition
-
+//Неорусский, язык миров КССП
 /datum/language/spinwarder
 	name = "Неорусский"
 	desc = "Официальный язык КССП"

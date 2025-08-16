@@ -1,20 +1,5 @@
 #include "_neorussian.dm"
-
 #include "code/neorussian.dm"
 #include "code/spinwarder.dm"
 
 #define FILE_DIR .
-
-#include "_neorussian.dm"
-#include "code\neorussian.dm"
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-#include "_neorussian.dm"
-#include "code\neorussian.dm"
-// END_INCLUDE
