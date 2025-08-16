@@ -24,7 +24,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/glasses.dmi'
 	icon_state = "hudsunmeson"
 	inhand_icon_state = "glasses"
-	worn_icon = 'modular_bandastation/objects/icons/onbody/eyes.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/eyes.dmi'
 	worn_icon_state = "hudsunmeson"
 	flash_protect = FLASH_PROTECTION_FLASH
 	tint = 1
