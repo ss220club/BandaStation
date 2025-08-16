@@ -1,6 +1,7 @@
 [blank_header
 id = NT-CENTCOM-00 (КОНФИДЕНЦИАЛЬНО);
 name = Официальный Меморандум;
+station = [station_name];
 category = Центральное командование;
 info = Год: 2569 г. Корабль — <b>АКН ‘’Трурль’’</b>
 ]
