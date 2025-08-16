@@ -97,8 +97,8 @@
 			/obj/item/instrument/piano_synth/headphones,
 			// BANDASTATION ADDITION BEGIN - Expand instruments
 			/obj/item/instrument/soundhand_bass_guitar,
-            /obj/item/instrument/soundhand_rock_guitar,
-            /obj/structure/musician/drumskit,
+			/obj/item/instrument/soundhand_rock_guitar,
+			/obj/structure/musician/drumskit,
 			// BANDASTATION ADDITION END - Expand  instruments
 		)
 		for(var/obj/instrument_path as anything in possible_instruments) // BANDASTATION EDIT - Expand instruments (Allows any obj instead of instrument)
