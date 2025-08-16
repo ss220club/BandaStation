@@ -53,3 +53,6 @@ ROUNDSTART_RACES tajaran
 
 ## Boolean value to derminate is it posible to die permanently due death of brain or not (value true means it's enabled)
 BRAIN_PERMANENT_DEATH
+
+## SQL table to load admins
+admin_table admin
