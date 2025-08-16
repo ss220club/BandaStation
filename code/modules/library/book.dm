@@ -81,9 +81,18 @@
 
 /obj/item/book/ui_data(mob/user)
 	var/list/data = list()
-	data["content"] = book_data.get_content()
-	data["current_page"] = book_data.current_page_index
-	data["total_pages"] = book_data.get_page_count()
+	book_data.ensure_pages()
+	book_data.normalize_left()
+
+	var/L = book_data.current_page_index
+	var/R = L + 1
+	var/total = book_data.get_page_count()
+
+	data["current_page"] = L
+	data["total_pages"] = total
+	// ВАЖНО: декод здесь
+	data["content"] = book_data.get_page_text(L, TRUE)
+	data["content_right"] = (R <= total) ? book_data.get_page_text(R, TRUE) : ""
 
 	return data
 	// BANDASTATION EDIT END - Bureaucracy part 1: Multi paging for books.

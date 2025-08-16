@@ -54,6 +54,34 @@
 
 	current_page_index = clamp(current_page_index, 1, length(pages))
 
+/// Нормализуем текущую на ЛЕВУЮ (нечётную)
+/datum/book_info/proc/normalize_left()
+	ensure_pages()
+	if(!length(pages))
+		current_page_index = 0
+		return
+	if(current_page_index < 1) current_page_index = 1
+	if(current_page_index % 2 == 0)
+		current_page_index = max(1, current_page_index - 1)
+
+/// Листаем вперёд на разворот (по 2)
+/datum/book_info/proc/next_spread()
+	ensure_pages()
+	if(!length(pages)) return
+	normalize_left()
+	var/total = length(pages)
+	var/last_left = (total % 2 == 0) ? (total - 1) : total
+	current_page_index = min(current_page_index + 2, last_left)
+	rebuild_content_from_pages()
+
+/// Листаем назад на разворот (по 2)
+/datum/book_info/proc/prev_spread()
+	ensure_pages()
+	if(!length(pages)) return
+	normalize_left()
+	current_page_index = max(1, current_page_index - 2)
+	rebuild_content_from_pages()
+
 /// Rebuild content to match current page (для get_content)
 /datum/book_info/proc/rebuild_content_from_pages()
 	if(!length(pages))
@@ -69,6 +97,13 @@
 		text = page_splitter.Replace(text, "")
 	return text
 
+/datum/book_info/proc/get_page_text(index, decode = TRUE)
+	ensure_pages()
+	if(index >= 1 && index <= length(pages))
+		var/t = trim(pages[index])
+		return decode ? html_decode(t) : t
+	return ""
+
 /// Get count of all pages
 /datum/book_info/proc/get_page_count()
 	ensure_pages()
@@ -79,22 +114,17 @@
 	ensure_pages()
 	if(index in 1 to length(pages))
 		pages.Cut(index, index + 1)
+
+		if(length(pages) == 0)
+			current_page_index = 0
+			content = ""
+			return TRUE
+
 		current_page_index = clamp(current_page_index, 1, length(pages))
+		normalize_left()
 		rebuild_content_from_pages()
 		return TRUE
 	return FALSE
-
-/// Switch page to next one until it's last
-/datum/book_info/proc/next_page()
-	ensure_pages()
-	current_page_index = clamp(current_page_index + 1, 1, length(pages))
-	rebuild_content_from_pages()
-
-/// Switch page to previous one until it's first
-/datum/book_info/proc/prev_page()
-	ensure_pages()
-	current_page_index = clamp(current_page_index - 1, 1, length(pages))
-	rebuild_content_from_pages()
 
 /// Get content of current page
 /datum/book_info/get_content(default="N/A")
