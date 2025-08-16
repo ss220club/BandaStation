@@ -29,7 +29,7 @@ jobs:
         map: ${{ fromJSON(inputs.maps).paths }}
 
     steps:
-      - uses: actions/checkout@v4.3 # bandastation 5 -> 4.3
+      - uses: actions/checkout@v4.3.0 # bandastation 5 -> 4.3
 
       - name: Setup Bun
         uses: ./.github/actions/setup_bun
@@ -138,7 +138,7 @@ jobs:
         include: ${{ fromJSON(inputs.alternate_tests) }}
 
     steps:
-      - uses: actions/checkout@v4.3 # bandastation 5 -> 4.3
+      - uses: actions/checkout@v4.3.0 # bandastation 5 -> 4.3
 
       - name: Setup Bun
         uses: ./.github/actions/setup_bun

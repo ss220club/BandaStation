@@ -35,7 +35,7 @@ jobs:
 
       - name: "Checkout"
         if: steps.value_holder.outputs.ACTIONS_ENABLED
-        uses: actions/checkout@v4.3 # bandastation 5 -> 4.3
+        uses: actions/checkout@v4.3.0 # bandastation 5 -> 4.3
         with:
           fetch-depth: 25
           persist-credentials: false

@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 15
     runs-on: [self-hosted]
     steps:
-      - uses: actions/checkout@v4.3 # bandastation 5 -> 4.3
+      - uses: actions/checkout@v4.3.0 # bandastation 5 -> 4.3
       - name: Setup directory
         run: mkdir -p artifacts
       # If we ever add more artifacts, this is going to break, but it'll be obvious.

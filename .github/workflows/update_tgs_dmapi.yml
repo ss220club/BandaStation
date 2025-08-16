@@ -14,7 +14,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Clone
-        uses: actions/checkout@v4.3 # bandastation 5 -> 4.3
+        uses: actions/checkout@v4.3.0 # bandastation 5 -> 4.3
 
       - name: Branch
         run: |
