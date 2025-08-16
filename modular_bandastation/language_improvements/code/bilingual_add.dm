@@ -1,6 +1,5 @@
 /datum/preference/choiced/language/init_possible_values()
 	var/list/values = ..()
-	//добавление нового языка в варианты выбора для черты двуязычности, если он не является основным для раундстартовой расы.
-	if (!(/datum/language/spinwarder::name in values))
-		values += /datum/language/spinwarder::name
+	// Adding a new language to the bilingual trait options if it's not primary language for the roundstart race.
+	values |= /datum/language/spinwarder::name
 	return values

@@ -1,4 +1,4 @@
-//Неорусский, язык миров КССП
+// Neorussian, language of the worlds of the USSP
 /datum/language/spinwarder
 	name = "Неорусский"
 	desc = "Официальный язык КССП"
