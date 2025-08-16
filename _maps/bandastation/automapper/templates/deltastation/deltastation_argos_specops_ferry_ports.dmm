@@ -366,10 +366,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"xm" = (
-/obj/structure/lattice,
-/turf/open/space,
-/area/space/nearstation)
 "xt" = (
 /obj/docking_port/stationary{
 	dwidth = 2;
@@ -518,11 +514,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"FP" = (
-/obj/structure/lattice,
-/obj/structure/grille,
-/turf/open/space,
-/area/space/nearstation)
 "Gy" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -937,8 +928,8 @@ gP
 gP
 gP
 gP
-FP
-xm
+eh
+wG
 lK
 js
 Nx
@@ -966,7 +957,7 @@ gP
 gP
 gP
 gP
-xm
+wG
 lK
 lK
 bR
@@ -995,7 +986,7 @@ gP
 gP
 gP
 gP
-xm
+wG
 Gy
 jN
 fg
@@ -1024,7 +1015,7 @@ gP
 gP
 gP
 gP
-xm
+wG
 Gy
 Mv
 zg
@@ -1088,17 +1079,17 @@ Ff
 wR
 NX
 lK
-FP
-xm
+eh
+wG
 Ec
-xm
-xm
+wG
+wG
 eh
 wG
 wG
 eh
 eh
-xm
+wG
 Ec
 wG
 wG
@@ -1169,7 +1160,7 @@ gP
 gP
 gP
 gP
-xm
+wG
 Gy
 UL
 ZH
@@ -1198,7 +1189,7 @@ gP
 gP
 gP
 gP
-xm
+wG
 lK
 lK
 Qw
@@ -1225,10 +1216,10 @@ gP
 (16,1,1) = {"
 ZT
 ZT
-xm
-FP
-FP
-xm
+wG
+eh
+eh
+wG
 lK
 EM
 xM
@@ -1254,7 +1245,7 @@ gP
 (17,1,1) = {"
 ZT
 ZT
-FP
+eh
 lK
 lK
 lK
@@ -1283,7 +1274,7 @@ gP
 (18,1,1) = {"
 ZT
 ZT
-xm
+wG
 Gy
 Sp
 vr
@@ -1312,7 +1303,7 @@ gP
 (19,1,1) = {"
 ZT
 ZT
-xm
+wG
 Gy
 CY
 Vx
@@ -1341,7 +1332,7 @@ gP
 (20,1,1) = {"
 ZT
 ZT
-xm
+wG
 Gy
 oG
 iw

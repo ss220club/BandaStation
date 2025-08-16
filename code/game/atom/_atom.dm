@@ -415,18 +415,15 @@
  * - [reagents][/list]: The list of reagents the atom is being exposed to.
  * - [source][/datum/reagents]: The reagent holder the reagents are being sourced from.
  * - methods: How the atom is being exposed to the reagents. Bitflags.
- * - volume_modifier: Volume multiplier.
  * - show_message: Whether to display anything to mobs when they are exposed.
  */
-/atom/proc/expose_reagents(list/reagents, datum/reagents/source, methods=TOUCH, volume_modifier=1, show_message=TRUE)
-	. = SEND_SIGNAL(src, COMSIG_ATOM_EXPOSE_REAGENTS, reagents, source, methods, volume_modifier, show_message)
+/atom/proc/expose_reagents(list/reagents, datum/reagents/source, methods=TOUCH, show_message=TRUE)
+	. = SEND_SIGNAL(src, COMSIG_ATOM_EXPOSE_REAGENTS, reagents, source, methods, show_message)
 	if(. & COMPONENT_NO_EXPOSE_REAGENTS)
 		return
 
-	SEND_SIGNAL(source, COMSIG_REAGENTS_EXPOSE_ATOM, src, reagents, methods, volume_modifier, show_message)
 	for(var/datum/reagent/current_reagent as anything in reagents)
 		. |= current_reagent.expose_atom(src, reagents[current_reagent], methods)
-	SEND_SIGNAL(src, COMSIG_ATOM_AFTER_EXPOSE_REAGENTS, reagents, source, methods, volume_modifier, show_message)
 
 /// Are you allowed to drop this atom
 /atom/proc/AllowDrop()
@@ -861,7 +858,7 @@
 	var/shift_lmb_ctrl_shift_lmb_line = ""
 	var/extra_lines = 0
 	var/extra_context = ""
-	var/used_name = declent_ru(NOMINATIVE)
+	var/used_name = get_tip_name()
 
 	if(isliving(user) || isovermind(user) || iscameramob(user) || (ghost_screentips && isobserver(user)))
 		var/obj/item/held_item = user.get_active_held_item()
