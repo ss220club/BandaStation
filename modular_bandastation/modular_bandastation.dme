@@ -39,6 +39,7 @@
 #include "jobs/_jobs.dme"
 #include "jukebox/_jukebox.dme"
 #include "keybinding/_keybinding.dme"
+#include "language_improvements/_language_improvements.dme"
 #include "loadout/_loadout.dme"
 #include "mapping/_mapping.dme"
 #include "medical/_medical.dme"
@@ -46,7 +47,6 @@
 #include "minesweeper/_minesweeper.dme"
 #include "mobs/_mobs.dme"
 #include "nanomap/_nanomap.dme"
-#include "neorussian/_neorussian.dme"
 #include "objects/_objects.dme"
 #include "orderables/_orderables.dme"
 #include "outfits/_outfits.dme"
@@ -75,12 +75,3 @@
 #ifndef DISABLE_PRIME_MODPACKS
 #include "prime_only/_prime_only.dme"
 #endif
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-// END_INCLUDE
