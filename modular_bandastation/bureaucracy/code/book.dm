@@ -47,6 +47,6 @@
 	page.raw_text_inputs = list(new /datum/paper_input(text))
 	page.update_icon_state()
 
-	book_data.remove_page(target_index)
+	book_data.tear_page(target_index)
 	to_chat(user, span_notice("Ты вырываешь страницу из [src]."))
 	return TRUE

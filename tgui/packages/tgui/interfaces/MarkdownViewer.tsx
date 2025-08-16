@@ -14,6 +14,8 @@ type MarkdownViewerData = {
   total_pages?: number;
 };
 
+const PAGE_HEIGHT = 535; // фиксированная высота разворота
+
 export const MarkdownViewer = (_: any) => {
   const { data, act } = useBackend<MarkdownViewerData>();
 
@@ -25,6 +27,11 @@ export const MarkdownViewer = (_: any) => {
   const canPrev = curr > 1;
   const canNext = curr < lastLeft;
 
+  const leftBlank =
+    !data.content || String(data.content).trim().length === 0;
+  const rightBlank =
+    !data.content_right || String(data.content_right).trim().length === 0;
+
   return (
     <Window theme="paper" title={data.title || 'N/A'} width={820} height={580}>
       {/* Колонка на всю высоту окна */}
@@ -32,85 +39,116 @@ export const MarkdownViewer = (_: any) => {
         backgroundColor="#FFFFFF"
         style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
       >
-        {/* Разворот: занимает всё пространство */}
-        <Box style={{ flex: 1, minHeight: 0, paddingTop: 6 }}>
-          <Flex style={{ gap: 12, height: '100%' }} align="stretch">
+        {/* Разворот фиксированной высоты */}
+        <Box style={{ paddingTop: 6 }}>
+          <Flex align="start" justify="stretch" style={{ gap: 12 }}>
             {/* Левая страница */}
             <Flex.Item
               grow
               basis={0}
-              style={{ minWidth: 260, display: 'flex', flexDirection: 'column', minHeight: 535 }}
+              style={{
+                minWidth: 260,
+                display: 'flex',
+                flexDirection: 'column',
+                height: PAGE_HEIGHT,
+              }}
             >
-              <Page dimmed={false} footer={
-                <Flex justify="space-between" align="center">
-                  <Flex.Item>
-                    <Button
-                      onClick={() => act('prev_spread')}
-                      disabled={!canPrev}
-                      icon="arrow-left"
-                      color="good"
-                    >
-                      Назад
-                    </Button>
-                  </Flex.Item>
-                  <Flex.Item>
-                    <Box opacity={0.7}>стр. {curr}</Box>
-                  </Flex.Item>
-                  <Flex.Item>
-                    <Button
-                      onClick={() => act('tear_page', { side: 'left' })}
-                      color="bad"
-                      icon="scissors"
-                    >
-                      Вырвать
-                    </Button>
-                  </Flex.Item>
-                </Flex>
-              }>
-                <MarkdownRenderer content={data.content || ''} advHtml />
+              <Page
+                footer={
+                  <Flex justify="space-between" align="center">
+                    <Flex.Item>
+                      <Button
+                        onClick={() => act('prev_spread')}
+                        disabled={!canPrev}
+                        icon="arrow-left"
+                        color="good"
+                      >
+                        Назад
+                      </Button>
+                    </Flex.Item>
+                    <Flex.Item>
+                      <Box opacity={0.7}>стр. {curr}</Box>
+                    </Flex.Item>
+                    <Flex.Item>
+                      <Button
+                        onClick={() => act('tear_page', { side: 'left' })}
+                        color="bad"
+                        icon="scissors"
+                      >
+                        Вырвать
+                      </Button>
+                    </Flex.Item>
+                  </Flex>
+                }
+              >
+                {leftBlank ? (
+                  <Box italic opacity={0.5} textAlign="center" mt={2}>
+                    — разрыв —
+                  </Box>
+                ) : (
+                  <MarkdownRenderer content={data.content || ''} advHtml />
+                )}
               </Page>
             </Flex.Item>
 
             {/* Корешок */}
-            <Spine />
+            <Spine height={PAGE_HEIGHT} />
 
             {/* Правая страница */}
             <Flex.Item
               grow
               basis={0}
-              style={{ minWidth: 260, display: 'flex', flexDirection: 'column', minHeight: 535 }}
+              style={{
+                minWidth: 260,
+                display: 'flex',
+                flexDirection: 'column',
+                height: PAGE_HEIGHT,
+              }}
             >
-              <Page dimmed={!rightExists} footer={
-                <Flex justify="space-between" align="center">
-                  <Flex.Item>
-                    <Button
-                      onClick={() => act('tear_page', { side: 'right' })}
-                      color="bad"
-                      icon="scissors"
-                      disabled={!rightExists}
-                    >
-                      Вырвать
-                    </Button>
-                  </Flex.Item>
-                  <Flex.Item>
-                    <Box opacity={0.7}>{rightExists ? `стр. ${curr + 1}` : '—'}</Box>
-                  </Flex.Item>
-                  <Flex.Item>
-                    <Button
-                      onClick={() => act('next_spread')}
-                      disabled={!canNext}
-                      icon="arrow-right"
-                      color="good"
-                    >
-                      Далее
-                    </Button>
-                  </Flex.Item>
-                </Flex>
-              }>
+              <Page
+                dimmed={!rightExists}
+                footer={
+                  <Flex justify="space-between" align="center">
+                    <Flex.Item>
+                      <Button
+                        onClick={() => act('tear_page', { side: 'right' })}
+                        color="bad"
+                        icon="scissors"
+                        disabled={!rightExists}
+                      >
+                        Вырвать
+                      </Button>
+                    </Flex.Item>
+                    <Flex.Item>
+                      <Box opacity={0.7}>
+                        {rightExists ? `стр. ${curr + 1}` : '—'}
+                      </Box>
+                    </Flex.Item>
+                    <Flex.Item>
+                      <Button
+                        onClick={() => act('next_spread')}
+                        disabled={!canNext}
+                        icon="arrow-right"
+                        color="good"
+                      >
+                        Далее
+                      </Button>
+                    </Flex.Item>
+                  </Flex>
+                }
+              >
                 {rightExists ? (
-                  <MarkdownRenderer content={data.content_right || ''} advHtml />
+                  rightBlank ? (
+                    <Box italic opacity={0.5} textAlign="center" mt={2}>
+                      — разрыв —
+                    </Box>
+                  ) : (
+                    <MarkdownRenderer content={data.content_right || ''} advHtml />
+                  )
                 ) : (
-                  <Box italic opacity={0.5} textAlign="center" mt={2}>— пусто —</Box>
+                  <Box italic opacity={0.5} textAlign="center" mt={2}>
+                    — пусто —
+                  </Box>
                 )}
               </Page>
             </Flex.Item>
@@ -130,11 +168,12 @@ const Page = ({
 }: {
   children: any;
   dimmed?: boolean;
-  footer?: any; // низовой бар с кнопками
+  footer?: any; // нижний бар с кнопками
 }) => (
   <Box
     style={{
-      flex: 1,            // растягиваемся по высоте колонки
+      // контейнер страницы заполняет родитель (у родителя фикс. высота)
+      flex: 1,
       minWidth: 0,
       minHeight: 0,
       borderRadius: 6,
@@ -150,7 +189,7 @@ const Page = ({
       {children}
     </Box>
 
-    {/* Низовой «хедер» страницы */}
+    {/* Нижний бар */}
     <Box
       style={{
         padding: '8px 10px',
@@ -163,11 +202,11 @@ const Page = ({
   </Box>
 );
 
-const Spine = () => (
+const Spine = ({ height }: { height: number }) => (
   <Box
     style={{
       width: 10,
-      alignSelf: 'stretch',
+      height,
       background: 'linear-gradient(180deg, #ececec 0%, #dcdcdc 100%)',
       borderRadius: 3,
     }}

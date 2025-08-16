@@ -164,3 +164,12 @@
 /datum/book_info/set_content_using_paper(obj/item/paper/P)
 	. = ..()
 	init_pages()
+
+/datum/book_info/proc/tear_page(index)
+    ensure_pages()
+    if(index in 1 to length(pages))
+        pages[index] = "" // пустая строка = разрыв
+        // индекс и общее кол-во страниц не меняем
+        rebuild_content_from_pages()
+        return TRUE
+    return FALSE
