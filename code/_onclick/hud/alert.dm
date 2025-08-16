@@ -824,7 +824,7 @@
 	name = "Возрождение"
 	desc = "Кто-то пытается возродить вас. Вернитесь в тело, если хотите чтобы вас оживили!"
 	icon_state = "template"
-	timeout = 300
+	timeout = 30 SECONDS
 	clickable_glow = TRUE
 
 /atom/movable/screen/alert/revival/Click()
