@@ -69,7 +69,6 @@
 	replacement_bodypart_type = /obj/item/bodypart/arm/left/robot
 	incompatible_body_modifications = list("left_arm_amputation")
 	category = "Левая рука"
-	affected_zone = BODY_ZONE_L_ARM
 
 /datum/body_modification/bodypart_prosthesis/arm/right
 	key = "right_arm_prosthesis"
@@ -77,7 +76,6 @@
 	replacement_bodypart_type = /obj/item/bodypart/arm/right/robot
 	incompatible_body_modifications = list("right_arm_amputation")
 	category = "Правая рука"
-	affected_zone = BODY_ZONE_R_ARM
 
 /datum/body_modification/bodypart_prosthesis/leg
 	abstract_type = /datum/body_modification/bodypart_prosthesis/leg
@@ -88,7 +86,6 @@
 	replacement_bodypart_type = /obj/item/bodypart/leg/left/robot
 	incompatible_body_modifications = list("left_leg_amputation")
 	category = "Левая нога"
-	affected_zone = BODY_ZONE_L_LEG
 
 /datum/body_modification/bodypart_prosthesis/leg/right
 	key = "right_leg_prosthesis"
@@ -96,4 +93,3 @@
 	replacement_bodypart_type = /obj/item/bodypart/leg/right/robot
 	incompatible_body_modifications = list("right_leg_amputation")
 	category = "Правая нога"
-	affected_zone = BODY_ZONE_R_LEG
