@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
       - name: Install required packages
         run: |
           sudo apt-get update
