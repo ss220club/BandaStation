@@ -96,17 +96,13 @@
 			/obj/item/instrument/harmonica,
 			/obj/item/instrument/piano_synth/headphones,
 			// BANDASTATION ADDITION BEGIN - Expand instruments
-			/obj/structure/musician/drumskit,
 			/obj/item/instrument/soundhand_bass_guitar,
-			/obj/item/instrument/soundhand_rock_guitar,
+            /obj/item/instrument/soundhand_rock_guitar,
+            /obj/structure/musician/drumskit,
 			// BANDASTATION ADDITION END - Expand  instruments
 		)
-		// BANDASTATION EDITION BEGIN - Expand  instruments
-		// for(var/obj/item/instrument/instrument as anything in possible_instruments)
-		// 	instruments[initial(instrument.name)] = instrument
-		for(var/atom/instrument_path as anything in possible_instruments)
+		for(var/obj/instrument_path as anything in possible_instruments) // BANDASTATION EDIT - Expand instruments (Allows any obj instead of instrument)
 			instruments[initial(instrument_path.name)] = instrument_path
-		// BANDASTATION EDITION END - Expand  instruments
 	return instruments
 
 /obj/item/choice_beacon/ingredient
