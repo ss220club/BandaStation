@@ -368,7 +368,7 @@
 
 			user.log_message("is about to send the following message to [destination]: [message]", LOG_GAME)
 			to_chat(
-				GLOB.admins,
+				get_holders_with_rights(R_ADMIN), /// BANDASTATION EDIT: Proper permissions
 				span_adminnotice( \
 					"<b color='orange'>CROSS-SECTOR MESSAGE (OUTGOING):</b> [ADMIN_LOOKUPFLW(user)] is about to send \
 					the following message to <b>[destination]</b> (will autoapprove in [GLOB.communications_controller.soft_filtering ? DisplayTimeText(EXTENDED_CROSS_SECTOR_CANCEL_TIME) : DisplayTimeText(CROSS_SECTOR_CANCEL_TIME)]): \

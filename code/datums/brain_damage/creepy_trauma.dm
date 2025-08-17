@@ -12,8 +12,8 @@
 	var/datum/antagonist/obsessed/antagonist
 	var/viewing = FALSE //it's a lot better to store if the owner is watching the obsession than checking it twice between two procs
 
-	var/total_time_creeping = 0 //just for round end fun
-	var/time_spent_away = 0
+	var/total_time_creeping = 0 SECONDS //just for round end fun
+	var/time_spent_away = 0 SECONDS
 	var/obsession_hug_count = 0
 
 // BANDATATION ADD - Start
@@ -57,15 +57,15 @@
 	if(viewing)
 		owner.add_mood_event("creeping", /datum/mood_event/creeping, obsession.name)
 		total_time_creeping += seconds_per_tick SECONDS
-		time_spent_away = 0
+		time_spent_away = 0 SECONDS
 		if(attachedobsessedobj)//if an objective needs to tick down, we can do that since traumas coexist with the antagonist datum
 			attachedobsessedobj.timer -= seconds_per_tick SECONDS //mob subsystem ticks every 2 seconds(?), remove 20 deciseconds from the timer. sure, that makes sense.
 	else
 		out_of_view()
 
 /datum/brain_trauma/special/obsessed/proc/out_of_view()
-	time_spent_away += 20
-	if(time_spent_away > 1800) //3 minutes
+	time_spent_away += 2 SECONDS
+	if(time_spent_away > 3 MINUTES) //3 minutes
 		owner.add_mood_event("creeping", /datum/mood_event/notcreepingsevere, obsession.name)
 	else
 		owner.add_mood_event("creeping", /datum/mood_event/notcreeping, obsession.name)
@@ -79,15 +79,17 @@
 		log_game("[key_name(owner)] is no longer obsessed with [key_name(obsession)].")
 		UnregisterSignal(obsession, COMSIG_MOB_EYECONTACT)
 
-/datum/brain_trauma/special/obsessed/handle_speech(datum/source, list/speech_args)
-	if(!viewing)
-		return
-	if(prob(25)) // 25% chances to be nervous and stutter.
-		if(prob(50)) // 12.5% chance (previous check taken into account) of doing something suspicious.
-			addtimer(CALLBACK(src, PROC_REF(on_failed_social_interaction)), rand(1 SECONDS, 3 SECONDS))
-		else if(!owner.has_status_effect(/datum/status_effect/speech/stutter))
-			to_chat(owner, span_warning("Нахождение рядом с [obsession] заставляет вас нервничать, и вы начинаете заикаться..."))
-		owner.set_stutter_if_lower(6 SECONDS)
+// // BANDASTATION REMOVAL START - Remove Obsessed speech debuff
+// /datum/brain_trauma/special/obsessed/handle_speech(datum/source, list/speech_args)
+// 	if(!viewing)
+// 		return
+// 	if(prob(25)) // 25% chances to be nervous and stutter.
+// 		if(prob(50)) // 12.5% chance (previous check taken into account) of doing something suspicious.
+// 			addtimer(CALLBACK(src, PROC_REF(on_failed_social_interaction)), rand(1 SECONDS, 3 SECONDS))
+// 		else if(!owner.has_status_effect(/datum/status_effect/speech/stutter))
+// 			to_chat(owner, span_warning("Нахождение рядом с [obsession] заставляет вас нервничать, и вы начинаете заикаться..."))
+// 		owner.set_stutter_if_lower(6 SECONDS)
+// // BANDASTATION REMOVAL END - Remove Obsessed speech debuff
 
 /// Singal proc for [COMSIG_CARBON_HELPED], when our obsessed helps (hugs) our obsession, increases hug count
 /datum/brain_trauma/special/obsessed/proc/on_hug(datum/source, mob/living/hugged)

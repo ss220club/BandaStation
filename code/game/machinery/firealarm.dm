@@ -114,8 +114,8 @@
 
 /obj/machinery/firealarm/update_name(updates)
 	. = ..()
-	ru_names_rename(ru_names_toml(src::name, suffix = " ([get_area_name(my_area)]) [id_tag]", override_base = "[get_area_name(my_area)] [initial(name)] [id_tag]"))
-	name = "[get_area_name(my_area)] [initial(name)] [id_tag]"
+	var/area/current_area = get_area(src)
+	name = "[declent_ru(NOMINATIVE)] [id_tag] [current_area.declent_ru(GENITIVE)]"
 
 /obj/machinery/firealarm/on_exit_area(datum/source, area/area_to_unregister)
 	//we cannot unregister from an area we never registered to in the first place
@@ -518,7 +518,7 @@
 // Taking melee damage always triggers the alarm if panel is open
 /obj/machinery/firealarm/attacked_by(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
-	if(!. || !panel_open || buildstage != FIRE_ALARM_BUILD_SECURED)
+	if(. <= 0 || !panel_open || buildstage != FIRE_ALARM_BUILD_SECURED)
 		return
 	alarm()
 

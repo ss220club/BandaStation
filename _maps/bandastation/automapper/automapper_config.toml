@@ -60,6 +60,13 @@ required_map = "DeltaStation2.dmm"
 coordinates = [206, 168, 1]
 trait_name = "Station"
 
+[templates.deltastation_gamma_port]
+map_files = ["deltastation_gamma_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [213, 127, 1]
+trait_name = "Station"
+
 # MetaStation
 [templates.metastation_lawyer_office]
 map_files = ["metastation_lawyer_office.dmm"]
@@ -110,6 +117,13 @@ required_map = "MetaStation.dmm"
 coordinates = [84, 189, 1]
 trait_name = "Station"
 
+[templates.metastation_gamma_port]
+map_files = ["metastation_gamma_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [107, 182, 1]
+trait_name = "Station"
+
 # IceBoxStation
 [templates.iceboxstation_blueshield_office]
 map_files = ["iceboxstation_blueshield_office.dmm"]
@@ -153,18 +167,25 @@ required_map = "IceBoxStation.dmm"
 coordinates = [27, 150, 3]
 trait_name = "Station"
 
-[templates.icebox_cryo]
-map_files = ["icebox_cryo.dmm"]
+[templates.iceboxstation_cryo]
+map_files = ["iceboxstation_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
 coordinates = [117, 142, 3]
 trait_name = "Station"
 
-[templates.icebox_perma_cryo]
-map_files = ["icebox_perma_cryo.dmm"]
+[templates.iceboxstation_perma_cryo]
+map_files = ["iceboxstation_perma_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
 coordinates = [108, 184, 2]
+trait_name = "Station"
+
+[templates.iceboxstation_gamma_port]
+map_files = ["iceboxstation_gamma_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [91, 181, 3]
 trait_name = "Station"
 
 # TramStation
@@ -201,6 +222,13 @@ map_files = ["tramstation_perma_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [70, 155, 1]
+trait_name = "Station"
+
+[templates.tramstation_gamma_port]
+map_files = ["tramstation_gamma_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [65, 170, 2]
 trait_name = "Station"
 
 # Birdshot

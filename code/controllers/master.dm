@@ -195,7 +195,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 			"cost_ms" = subsystem.cost,
 			"tick_usage" = subsystem.tick_usage,
 			"usage_per_tick" = average,
-			"tick_overrun" = subsystem.tick_overrun,
+			"overtime" = subsystem.tick_overrun,
 			"initialized" = subsystem.initialized,
 			"initialization_failure_message" = subsystem.initialization_failure_message,
 		))
@@ -307,7 +307,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 				msg = "The [BadBoy.name] subsystem seems to be destabilizing the MC and will be put offline."
 				BadBoy.flags |= SS_NO_FIRE
 		if(msg)
-			to_chat(GLOB.admins, span_boldannounce("[msg]"))
+			to_chat(get_holders_with_rights(R_ADMIN), span_boldannounce("[msg]")) /// BANDASTATION EDIT: Proper permissions
 			log_world(msg)
 
 	if (istype(Master.subsystems))
@@ -556,7 +556,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	var/chat_message = chat_warning ? span_boldwarning(message) : span_boldannounce(message)
 
 	if(result != SS_INIT_NO_MESSAGE)
-		to_chat(GLOB.admins, chat_message, MESSAGE_TYPE_DEBUG) // BANDASTATION EDIT: world -> GLOB.admins
+		to_chat(get_holders_with_rights(R_ADMIN), chat_message, MESSAGE_TYPE_DEBUG) // BANDASTATION EDIT: world -> get_holders_with_rights(R_ADMIN)
 	log_world(message)
 
 /datum/controller/master/proc/SetRunLevel(new_runlevel)
