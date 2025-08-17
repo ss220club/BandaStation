@@ -316,6 +316,151 @@
 	shrapnel_type = null
 	embed_type = null
 
+// MARK: .223 aka 5.56mm
+
+/obj/projectile/bullet/a223
+	name = "5.56mm bullet"
+	damage = 30
+	armour_penetration = 10
+	wound_bonus = 5
+	exposed_wound_bonus = 5
+	wound_falloff_tile = -3
+
+/obj/projectile/bullet/a223/rubber
+	name = "5.56mm rubber bullet"
+	damage = 5
+	stamina = 25
+	armour_penetration = 0
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+
+/obj/projectile/bullet/a223/hp
+	name = "5.56mm hollow-point bullet"
+	damage = 35
+	armour_penetration = 0
+	wound_bonus = 30
+	exposed_wound_bonus = 30
+	weak_against_armour = TRUE
+
+/obj/projectile/bullet/a223/ap
+	name = "5.56mm armor-piercing bullet"
+	damage = 25
+	armour_penetration = 50
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/incendiary/a223
+	name = "5.56mm incendiary bullet"
+	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	damage = 25
+	fire_stacks = 2
+	leaves_fire_trail = FALSE
+
+// MARK: 7.62x51mm
+
+/obj/projectile/bullet/c762x51mm
+	name = "7.62x51mm bullet"
+	damage = 35
+	armour_penetration = 10
+	wound_bonus = 5
+	exposed_wound_bonus = 5
+	wound_falloff_tile = -3
+
+/obj/projectile/bullet/c762x51mm/rubber
+	name = "7.62x51mm rubber bullet"
+	damage = 5
+	stamina = 30
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = NONE
+
+/obj/projectile/bullet/c762x51mm/hp
+	name = "7.62x51mm hollow-point bullet"
+	damage = 40
+	wound_bonus = 30
+	exposed_wound_bonus = 30
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+
+/obj/projectile/bullet/c762x51mm/ap
+	name = "7.62x51mm armor-piercing bullet"
+	damage = 30
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	armour_penetration = 60
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/incendiary/c762x51mm
+	name = ".7.62x51mm incendiary bullet"
+	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	damage = 30
+	fire_stacks = 3
+	leaves_fire_trail = FALSE
+
+// MARK: .388 aka 8.6x70mm
+
+/obj/projectile/bullet/c338
+	name = ".338 bullet"
+	damage = 55
+	range = 80
+	wound_bonus = 20
+	exposed_wound_bonus = 15
+	armour_penetration = 30
+	wound_falloff_tile = -1
+	speed = 2
+
+/obj/projectile/bullet/c338/ap
+	name = ".338 armor-piercing bullet"
+	damage = 50
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	armour_penetration = 75
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/c338/hp
+	name = ".338 hollow-point bullet"
+	damage = 60
+	wound_bonus = 45
+	exposed_wound_bonus = 45
+	armour_penetration = 10
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+
+/obj/projectile/bullet/incendiary/c338
+	name = ".338 incendiary bullet"
+	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	damage = 50
+	fire_stacks = 4
+	leaves_fire_trail = FALSE
+
+// MARK: .38
+
+/obj/projectile/bullet/c38/ap
+	name = ".38 armor-piercing bullet"
+	damage = 20
+	ricochets_max = 0
+	armour_penetration = 40
+
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect
 	light_system = OVERLAY_LIGHT
