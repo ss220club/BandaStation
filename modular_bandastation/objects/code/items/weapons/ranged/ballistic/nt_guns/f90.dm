@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/f90
 	name = "F90"
-	desc = "Мощная снайперская винтовка в калибре .338, используемая крайне редкими специалистами Нанотрейзен, обладающая впечатляющей дальностью стрельбы и пробивной способностью благодаря."
+	desc = "Мощная снайперская винтовка в калибре .338, используемая крайне редкими специалистами Нанотрейзен, обладающая впечатляющей дальностью стрельбы и пробивной способностью пули."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic48x32.dmi'
 	icon_state = "f90"
 	worn_icon = 'modular_bandastation/objects/icons/mob/back/guns_back.dmi'

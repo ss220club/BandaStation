@@ -402,7 +402,7 @@
 	embed_type = null
 
 /obj/projectile/bullet/incendiary/c762x51mm
-	name = ".7.62x51mm incendiary bullet"
+	name = "7.62x51mm incendiary bullet"
 	icon_state = "redtrac"
 	light_system = OVERLAY_LIGHT
 	light_range = 2

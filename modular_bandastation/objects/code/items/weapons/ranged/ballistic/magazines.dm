@@ -350,7 +350,7 @@
 
 /obj/item/ammo_box/magazine/cm5
 	name = "SMG magazine (9x25mm NT)"
-	desc = "Магазин для пистолетов-пулеметов калибра 9x25мм НТ, вмещающий 30 патрона."
+	desc = "Магазин для пистолетов-пулеметов калибра 9x25мм НТ, вмещающий 30 патронов."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "cm5_mag"
 	base_icon_state = "cm5_mag"
@@ -383,7 +383,7 @@
 
 /obj/item/ammo_box/magazine/c223
 	name = "assault rifle magazine (5.56mm)"
-	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патрона."
+	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "cm82_mag"
 	base_icon_state = "cm82_mag"
@@ -398,7 +398,7 @@
 
 /obj/item/ammo_box/magazine/c223/rubber
 	name = "assault rifle magazine (5.56mm rubber)"
-	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патрона. Cодержит нелетальные травматические патроны с резиновой пулей."
+	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/a223/rubber
 

@@ -149,7 +149,7 @@
 	projectile_type = /obj/projectile/bullet/a223
 
 /obj/item/ammo_casing/a223/rubber
-	name = "5.56mm hollow-point bullet casing"
+	name = "5.56mm rubber bullet casing"
 	desc = "Травматический винтовочный патрон c резиновой пулей калибра 5.56мм."
 	icon_state = "556r-casing"
 	projectile_type = /obj/projectile/bullet/a223/rubber
@@ -189,7 +189,7 @@
 	projectile_type = /obj/projectile/bullet/c762x51mm
 
 /obj/item/ammo_casing/c762x51mm/rubber
-	name = "7.62x51mm hollow-point bullet casing"
+	name = "7.62x51mm rubber bullet casing"
 	desc = "Травматический винтовочный патрон c резиновой пулей калибра 7.62x51мм."
 	icon_state = "762x51r-casing"
 	projectile_type = /obj/projectile/bullet/c762x51mm/rubber
