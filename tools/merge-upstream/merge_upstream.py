@@ -375,7 +375,7 @@ def create_pr(repo: Repository, details: PullDetails):
     try:
         # Create the pull request
         pull: PullRequest = repo.create_pull(
-            title=f"Merge Upstream {datetime.today().strftime('%d.%m.%Y')}",
+            title=f"[IDB IGNORE][MDB IGNORE] Merge Upstream {datetime.today().strftime('%d.%m.%Y')}",
             body=pull_body,
             head=MERGE_BRANCH,
             base=TARGET_BRANCH
