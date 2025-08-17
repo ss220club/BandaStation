@@ -1,8 +1,7 @@
 /datum/species/jelly/get_scream_sound(mob/living/carbon/human/jellypeople)
-	if(jellypeople.physique == MALE)
+	if(jellypeople.physique == FEMALE)
 		return 'modular_bandastation/emote_panel/audio/jelly_scream.ogg'
 	return 'modular_bandastation/emote_panel/audio/jelly_scream.ogg'
-
 
 /datum/species/jelly/get_cough_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
@@ -23,9 +22,7 @@
 
 /datum/species/jelly/get_laugh_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
-		return pick(
-			'sound/mobs/humanoids/human/laugh/womanlaugh.ogg',
-		)
+		return 'sound/mobs/humanoids/human/laugh/womanlaugh.ogg'
 	return pick(
 		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
 		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
@@ -43,8 +40,16 @@
 
 /datum/species/jelly/get_sigh_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
-		return SFX_FEMALE_SIGH
-	return SFX_MALE_SIGH
+		return pick(
+		'sound/mobs/humanoids/human/sigh/female_sigh1.ogg',
+		'sound/mobs/humanoids/human/sigh/female_sigh2.ogg',
+		'sound/mobs/humanoids/human/sigh/female_sigh3.ogg'
+	)
+	return pick(
+		'sound/mobs/humanoids/human/sigh/male_sigh1.ogg',
+		'sound/mobs/humanoids/human/sigh/male_sigh2.ogg',
+		'sound/mobs/humanoids/human/sigh/male_sigh3.ogg'
+	)
 
 /datum/species/jelly/get_snore_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
