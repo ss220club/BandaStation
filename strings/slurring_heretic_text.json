@@ -7,17 +7,23 @@
 				"a": "ah",
 				"c": "th",
 				"i": "ks",
-				"m": "nth"
+				"m": "nth",
+				"о": "у",
+				"т": "ч",
+				"а": "ах",
+				"с": "тч",
+				"и": "кс",
+				"м": "нтх"
 			},
 			"uncommon": {
-				" ": " endless... ",
-				"H": " THE HANDS... ",
-				"h": " BRIGHT ",
-				"s": " LEAK ",
-				"r": " CRACK "
+				" ": " нескончаемый... ",
+				"Р": " РУКИ... ",
+				"р": " ЯРКИЙ ",
+				"с": " УТЕКАЕТ ",
+				"п": " ТРЕЩИНА "
 			}
 		},
-		"string_replacements": ["'", "br", "th", "see", "etch"],
-		"string_additions": ["ah", "wth"]
+		"string_replacements": ["'", "бр", "тх", "увидь", "етч"],
+		"string_additions": ["ах", "утх"]
 	}
 }
