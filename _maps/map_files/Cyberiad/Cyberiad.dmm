@@ -10353,10 +10353,6 @@
 	dir = 8
 	},
 /area/station/engineering/atmos)
-"cyP" = (
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space)
 "czd" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment,
@@ -202736,7 +202732,7 @@ fan
 kDq
 ahB
 oQf
-cyP
+ceC
 kJd
 frM
 frM
@@ -202993,7 +202989,7 @@ jzE
 tna
 aSj
 oQf
-cyP
+ceC
 kJd
 tYD
 tYD
@@ -203250,7 +203246,7 @@ unD
 mpA
 lck
 oQf
-cyP
+ceC
 kJd
 tYD
 tYD
@@ -203507,7 +203503,7 @@ oQf
 oQf
 oQf
 oQf
-cyP
+ceC
 kJd
 tYD
 tYD
