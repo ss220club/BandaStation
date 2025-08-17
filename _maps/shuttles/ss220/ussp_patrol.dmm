@@ -5,48 +5,165 @@
 /turf/open/floor/plating/airless,
 /area/space)
 "aG" = (
-/turf/closed/wall/mineral/titanium/survival,
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/obj/structure/window/reinforced/spawner/directional/east,
+/turf/open/floor/mineral/plastitanium/red,
 /area/space)
 "aJ" = (
-/obj/structure/chair/comfy/shuttle/tactical{
+/obj/machinery/porta_turret/syndicate{
+	faction = list("neutral","silicon","turret");
 	dir = 1
 	},
-/turf/open/floor/mineral/plastitanium,
+/turf/closed/indestructible/syndicate,
 /area/space)
 "aK" = (
 /turf/open/floor/mineral/plastitanium,
 /area/space)
 "aN" = (
-/obj/effect/spawner/structure/window/survival_pod,
-/turf/open/floor/plating,
+/obj/structure/fluff/fake_camera,
+/turf/open/space/basic,
 /area/space)
 "bs" = (
 /obj/machinery/power/shuttle_engine/large,
 /turf/open/floor/plating/airless,
 /area/space)
+"bv" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/space)
 "bQ" = (
-/obj/structure/closet/emcloset/anchored,
-/turf/open/floor/mineral/plastitanium,
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/mineral/plastitanium/red,
 /area/space)
 "cp" = (
+/obj/machinery/door/poddoor/preopen{
+	id = "tsf_arrow_poddor_window"
+	},
+/obj/effect/spawner/structure/window/reinforced/indestructible,
 /turf/open/floor/plating,
 /area/space)
 "cA" = (
 /turf/open/space/basic,
 /area/space)
-"cT" = (
+"cD" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "tsf_arrow"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/turf_decal/stripes{
+	dir = 6
+	},
+/obj/machinery/door/airlock/external,
 /turf/open/floor/pod/dark,
 /area/space)
+"cT" = (
+/obj/structure/extinguisher_cabinet/directional/west,
+/turf/open/floor/mineral/plastitanium,
+/area/space)
+"eB" = (
+/obj/structure/fluff/fake_camera{
+	dir = 5
+	},
+/turf/open/space/basic,
+/area/space)
+"lq" = (
+/obj/machinery/vending/wallmed/directional/south{
+	all_products_free = 1
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/space)
 "lJ" = (
-/turf/open/floor/mineral/plastitanium/red,
+/turf/closed/indestructible/syndicate,
 /area/space)
 "nN" = (
 /obj/machinery/power/shuttle_engine/propulsion/left,
 /turf/open/floor/plating/airless,
 /area/space)
+"oP" = (
+/obj/item/clipboard{
+	pixel_x = 8;
+	pixel_y = 3
+	},
+/obj/item/folder/red{
+	pixel_x = 8;
+	pixel_y = 1
+	},
+/obj/item/paper_bin{
+	pixel_x = -6;
+	pixel_y = 2
+	},
+/obj/item/pen/red{
+	pixel_x = -7;
+	pixel_y = 0
+	},
+/obj/item/stamp/denied{
+	pixel_x = 6;
+	pixel_y = 6
+	},
+/obj/item/stamp{
+	pixel_x = 6;
+	pixel_y = 3
+	},
+/obj/item/stamp/ussp{
+	pixel_x = 6;
+	pixel_y = -1
+	},
+/obj/structure/table/wood,
+/turf/open/floor/mineral/plastitanium/red,
+/area/space)
+"rG" = (
+/obj/machinery/door/airlock/hatch,
+/turf/open/floor/mineral/plastitanium,
+/area/space)
+"wX" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "tsf_arrow"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/turf_decal/stripes{
+	dir = 10
+	},
+/obj/machinery/door/airlock/external,
+/turf/open/floor/pod/dark,
+/area/space)
 "zu" = (
-/obj/machinery/power/shuttle_engine/propulsion/right,
-/turf/open/floor/plating/airless,
+/obj/machinery/computer,
+/turf/open/floor/mineral/plastitanium/red,
+/area/space)
+"AU" = (
+/obj/machinery/computer,
+/turf/open/floor/mineral/plastitanium,
+/area/space)
+"DF" = (
+/obj/structure/extinguisher_cabinet/directional/east,
+/turf/open/floor/mineral/plastitanium,
+/area/space)
+"Jq" = (
+/obj/machinery/bluespace_vendor/directional/north,
+/turf/open/floor/mineral/plastitanium,
+/area/space)
+"ME" = (
+/obj/effect/spawner/structure/window/reinforced/indestructible,
+/obj/machinery/door/poddoor/preopen{
+	id = "tsf_arrow_poddor_window"
+	},
+/turf/open/floor/plating,
+/area/space)
+"QW" = (
+/obj/structure/table/wood,
+/obj/machinery/fax/admin{
+	pixel_x = 0;
+	pixel_y = 3;
+	name = "K-69 Reznov"
+	},
+/turf/open/floor/mineral/plastitanium/red,
 /area/space)
 "Ro" = (
 /turf/open/floor/plating/airless,
@@ -62,202 +179,191 @@ cA
 cA
 cA
 cA
-aG
-aG
-aG
-aG
-aG
-aG
+cA
+aJ
+lJ
+cA
+cA
 cA
 cA
 "}
 (2,1,1) = {"
 cA
 cA
-aG
 cA
-aG
-aG
-aG
-cT
-aG
-aG
+cA
+cA
+cA
+cA
+cA
+cA
+aJ
 lJ
-lJ
-aG
 ax
 nN
+cA
 cA
 cA
 "}
 (3,1,1) = {"
 cA
-aN
-aG
-aG
-aG
-aK
-aG
-cp
-aG
-lJ
-lJ
-lJ
-aG
-ax
-zu
 cA
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
 cA
 "}
 (4,1,1) = {"
 aN
-aN
-aK
-aK
-aK
-aK
-aG
+aJ
+lJ
+bQ
+bQ
+bQ
 cT
-aG
-lJ
-lJ
-lJ
-aG
-aG
-aG
-aG
-cA
-"}
-(5,1,1) = {"
-aN
-aK
-aJ
-aK
-aK
-aK
+rG
 aK
 aK
 aK
 lJ
 lJ
-lJ
-lJ
-aG
-aG
-aG
-cA
-"}
-(6,1,1) = {"
-aN
-aK
-aJ
-aK
-aK
-aK
-aK
-aK
-aK
-aK
-lJ
-lJ
-lJ
-aG
 ax
 Ro
 bs
 "}
-(7,1,1) = {"
-aN
-aK
-aJ
-aK
-aK
-aK
+(5,1,1) = {"
+lJ
+lJ
+lJ
+Jq
 aK
 aK
-aK
+lq
+lJ
+AU
 aK
 lJ
 lJ
 lJ
-aG
 ax
 Ro
 Ro
 "}
-(8,1,1) = {"
-aN
+(6,1,1) = {"
+wX
 aK
-aJ
+wX
 aK
-aK
-aK
-aK
-aK
-aK
+aG
+aG
+aG
+cp
+zu
+bv
+QW
 lJ
-lJ
-lJ
-lJ
-aG
-aG
-aG
-cA
-"}
-(9,1,1) = {"
-aN
-aN
-aK
-aK
-aK
-aK
-aG
-aK
-aG
-lJ
-lJ
-lJ
-aG
-aG
-aG
-aG
-cA
-"}
-(10,1,1) = {"
-cA
-aN
-aG
-aG
-aG
-aK
-aG
-bQ
-aG
-lJ
-lJ
-lJ
-aG
 ax
 nN
 cA
 cA
 "}
+(7,1,1) = {"
+cD
+aK
+cD
+aK
+bQ
+bQ
+bQ
+ME
+zu
+bv
+oP
+lJ
+ax
+nN
+cA
+cA
+"}
+(8,1,1) = {"
+lJ
+lJ
+lJ
+Jq
+aK
+aK
+lq
+lJ
+AU
+aK
+lJ
+lJ
+lJ
+ax
+Ro
+bs
+"}
+(9,1,1) = {"
+eB
+aJ
+lJ
+aG
+aG
+aG
+DF
+rG
+aK
+aK
+aK
+lJ
+lJ
+ax
+Ro
+Ro
+"}
+(10,1,1) = {"
+cA
+cA
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+lJ
+cA
+"}
 (11,1,1) = {"
 cA
 cA
-aG
 cA
-aG
-aG
-aG
-aG
-aG
-aG
+cA
+cA
+cA
+cA
+cA
+cA
+aJ
 lJ
-lJ
-aG
 ax
-zu
+nN
+cA
 cA
 cA
 "}
@@ -271,12 +377,11 @@ cA
 cA
 cA
 cA
-aG
-aG
-aG
-aG
-aG
-aG
+cA
+aJ
+lJ
+cA
+cA
 cA
 cA
 "}
