@@ -3,11 +3,24 @@
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 8
 	},
-/turf/open/floor/iron/dark/smooth_large,
+/obj/effect/turf_decal/trimline/dark_blue/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/dark_blue/half{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
 /area/space)
 "af" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /obj/machinery/light/small/directional/west,
-/turf/open/floor/plating,
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/space)
 "ax" = (
 /obj/machinery/power/shuttle_engine/heater,
@@ -15,66 +28,343 @@
 /turf/open/floor/plating/airless,
 /area/space)
 "aG" = (
-/turf/open/floor/iron/dark/smooth_large,
-/area/space)
-"aJ" = (
-/turf/open/floor/iron/smooth,
-/area/space)
-"aK" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 1
 	},
+/obj/machinery/button/door/indestructible{
+	pixel_x = -32;
+	id = "tsf_arrow_poddor_entery";
+	pixel_y = -5;
+	name = "Entery Blast Doors"
+	},
+/obj/machinery/button/door/indestructible{
+	pixel_x = -32;
+	pixel_y = 5;
+	name = "Windows";
+	id = "tsf_arrow_poddor_window"
+	},
+/obj/effect/turf_decal/tile/dark{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/dark/line{
+	dir = 4
+	},
 /turf/open/floor/iron/smooth,
+/area/space)
+"aJ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"aK" = (
+/obj/machinery/computer,
+/obj/item/radio/intercom/command/directional/west,
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/dark/corner,
+/turf/open/floor/iron/smooth_half,
 /area/space)
 "aN" = (
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
+/obj/machinery/door/poddoor/preopen{
+	id = "tsf_arrow_poddor_window"
+	},
 /turf/open/floor/plating,
+/area/space)
+"aY" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 1
+	},
+/obj/machinery/light/directional/east,
+/obj/effect/turf_decal/tile/dark,
+/obj/effect/turf_decal/tile/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark/line{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth,
 /area/space)
 "bs" = (
 /obj/machinery/power/shuttle_engine/large,
 /turf/open/floor/plating/airless,
 /area/space)
 "bQ" = (
-/obj/structure/fake_stairs/directional/north,
-/turf/open/floor/iron/dark/smooth_large,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/door/airlock/survival_pod/glass,
+/obj/effect/mapping_helpers/airlock/autoname,
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/space)
 "cp" = (
-/turf/open/floor/plating,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/structure/sign/warning/vacuum/directional/east,
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/space)
 "cA" = (
 /turf/open/space/basic,
 /area/space)
 "cT" = (
-/turf/closed/wall/r_wall/syndicate,
+/obj/machinery/porta_turret/syndicate/energy/heavy{
+	faction = list("neutral","silicon","turret");
+	dir = 5;
+	color = "gray"
+	},
+/turf/closed/indestructible/syndicate,
+/area/space)
+"eB" = (
+/obj/structure/fans/tiny,
+/obj/machinery/door/airlock/external,
+/obj/machinery/door/poddoor/preopen{
+	id = "tsf_arrow_poddor_entery"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "tsf_arrow"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/turf_decal/stripes/end{
+	dir = 8
+	},
+/turf/open/floor/pod/dark,
+/area/space)
+"eG" = (
+/obj/machinery/computer,
+/obj/structure/sign/flag/terragov/directional/east,
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark,
+/obj/effect/turf_decal/trimline/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half,
+/area/space)
+"fP" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 4
+	},
+/obj/machinery/light/directional/west,
+/obj/effect/turf_decal/trimline/dark_blue/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/dark_blue/half{
+	dir = 8
+	},
+/obj/structure/extinguisher_cabinet/directional/north,
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"iF" = (
+/obj/machinery/porta_turret/syndicate/energy/heavy{
+	faction = list("neutral","silicon","turret");
+	dir = 8;
+	color = "gray"
+	},
+/turf/closed/indestructible/syndicate,
+/area/space)
+"jD" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/closed/indestructible/syndicate,
 /area/space)
 "lJ" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 4
 	},
-/turf/open/floor/iron/dark/smooth_large,
+/obj/effect/turf_decal/trimline/dark_blue/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/dark_blue/half{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
 /area/space)
 "nN" = (
 /obj/machinery/power/shuttle_engine/propulsion/left,
 /turf/open/floor/plating/airless,
 /area/space)
 "pQ" = (
-/obj/structure/closet/emcloset/anchored,
-/turf/open/floor/iron/dark/smooth_large,
+/turf/closed/indestructible/syndicate,
+/area/space)
+"qo" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"rU" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 8
+	},
+/obj/machinery/light/directional/east,
+/obj/effect/turf_decal/trimline/dark_blue/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/dark_blue/half{
+	dir = 4
+	},
+/obj/structure/extinguisher_cabinet/directional/north,
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
 /area/space)
 "zu" = (
 /obj/machinery/power/shuttle_engine/propulsion/right,
 /turf/open/floor/plating/airless,
 /area/space)
+"Be" = (
+/obj/effect/turf_decal/stripes{
+	dir = 9
+	},
+/obj/machinery/bluespace_vendor/directional/west,
+/turf/open/floor/pod/dark,
+/area/space)
+"BR" = (
+/obj/machinery/porta_turret/syndicate/energy/heavy{
+	faction = list("neutral","silicon","turret");
+	dir = 9;
+	color = "gray"
+	},
+/turf/closed/indestructible/syndicate,
+/area/space)
+"CT" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 4
+	},
+/obj/machinery/light/directional/west,
+/obj/effect/turf_decal/trimline/dark_blue/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/dark_blue/half{
+	dir = 8
+	},
+/obj/machinery/vending/wallmed/directional/south,
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"Hz" = (
+/obj/machinery/porta_turret/syndicate/energy/heavy{
+	faction = list("neutral","silicon","turret");
+	dir = 4;
+	color = "gray"
+	},
+/turf/closed/indestructible/syndicate,
+/area/space)
 "Ow" = (
 /obj/structure/fans/tiny,
+/obj/machinery/door/airlock/external,
+/obj/machinery/door/poddoor/preopen{
+	id = "tsf_arrow_poddor_entery"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "tsf_arrow"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/turf_decal/stripes/end{
+	dir = 4
+	},
+/obj/machinery/button/door/indestructible{
+	pixel_x = 32;
+	id = "tsf_arrow_poddor_entery";
+	name = "Entery Blast Doors"
+	},
 /turf/open/floor/pod/dark,
 /area/space)
 "Pj" = (
-/obj/machinery/door/airlock/centcom,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "tsf_arrow"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/turf_decal/stripes{
+	dir = 10
+	},
+/obj/machinery/door/airlock/external,
 /turf/open/floor/pod/dark,
+/area/space)
+"QG" = (
+/obj/machinery/porta_turret/syndicate/energy/heavy{
+	faction = list("neutral","silicon","turret");
+	dir = 1;
+	color = "gray"
+	},
+/turf/closed/indestructible/syndicate,
 /area/space)
 "Ro" = (
 /turf/open/floor/plating/airless,
+/area/space)
+"Rq" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"Sa" = (
+/obj/structure/chair/comfy/shuttle/tactical{
+	dir = 8
+	},
+/obj/machinery/light/directional/east,
+/obj/effect/turf_decal/trimline/dark_blue/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/dark_blue/half{
+	dir = 4
+	},
+/obj/machinery/vending/wallmed/directional/south,
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/space)
+"UC" = (
+/obj/effect/turf_decal/stripes{
+	dir = 5
+	},
+/obj/machinery/bluespace_vendor/directional/east,
+/turf/open/floor/pod/dark,
+/area/space)
+"Wq" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/door/airlock/survival_pod/glass,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/space)
+"XO" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "tsf_arrow"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/turf_decal/stripes{
+	dir = 6
+	},
+/obj/machinery/door/airlock/external,
+/turf/open/floor/pod/dark,
 /area/space)
 
 (1,1,1) = {"
@@ -85,13 +375,12 @@ cA
 cA
 cA
 cA
-cA
-cT
-cT
-cA
+BR
+pQ
 cA
 cA
-cT
+cA
+iF
 cA
 cA
 cA
@@ -103,15 +392,14 @@ cA
 cA
 cA
 cA
-cA
-cT
-cT
+pQ
+pQ
 ax
 nN
 cA
-cT
-cT
-cT
+pQ
+pQ
+pQ
 cA
 cA
 "}
@@ -121,14 +409,13 @@ cA
 cA
 cA
 cA
-cA
-cT
-cT
-cT
+pQ
+pQ
+pQ
 ax
 zu
 cA
-cT
+pQ
 ax
 Ro
 bs
@@ -138,16 +425,15 @@ cA
 cA
 cA
 cA
-cT
-cT
-cT
-cT
-cT
-cT
-cT
-cT
-cT
-cT
+QG
+pQ
+pQ
+pQ
+pQ
+pQ
+pQ
+pQ
+pQ
 ax
 Ro
 Ro
@@ -155,94 +441,89 @@ cA
 "}
 (5,1,1) = {"
 cA
-cT
-cT
-cT
 pQ
-cT
+pQ
+pQ
+jD
+fP
 lJ
 lJ
 lJ
 lJ
-lJ
-lJ
-cT
-cT
-cT
-cT
-cT
+CT
+jD
+pQ
+pQ
+jD
+pQ
 "}
 (6,1,1) = {"
 aN
 aN
-aJ
 aK
 aG
 bQ
-aG
+qo
 aJ
 aJ
 aJ
 aJ
-aG
-aG
-aG
+qo
+Rq
+Be
 Pj
 af
-Ow
+eB
 "}
 (7,1,1) = {"
 aN
 aN
-aJ
-aK
-aG
-bQ
-aG
-aJ
+eG
+aY
+Wq
+qo
 aJ
 aJ
 aJ
-aG
-aG
-aG
-Pj
+aJ
+qo
+Rq
+UC
+XO
 cp
 Ow
 "}
 (8,1,1) = {"
 cA
-cT
-cT
-cT
 pQ
-cT
+pQ
+pQ
+jD
+rU
 aa
 aa
 aa
 aa
-aa
-aa
-cT
-cT
-cT
-cT
-cT
+Sa
+jD
+pQ
+pQ
+jD
+pQ
 "}
 (9,1,1) = {"
 cA
 cA
 cA
-cT
-cT
-cT
-cT
-cT
-cT
-cT
-cT
-cT
-cT
+QG
+pQ
+pQ
+pQ
+pQ
+pQ
+pQ
+pQ
+pQ
 ax
 Ro
 bs
@@ -254,14 +535,13 @@ cA
 cA
 cA
 cA
-cA
-cT
-cT
-cT
+pQ
+pQ
+pQ
 ax
 nN
 cA
-cT
+pQ
 ax
 Ro
 Ro
@@ -274,15 +554,14 @@ cA
 cA
 cA
 cA
-cA
-cT
-cT
+pQ
+pQ
 ax
 zu
 cA
-cT
-cT
-cT
+pQ
+pQ
+pQ
 cA
 cA
 "}
@@ -294,13 +573,12 @@ cA
 cA
 cA
 cA
-cA
 cT
-cT
+pQ
 cA
 cA
 cA
-cT
+Hz
 cA
 cA
 cA
