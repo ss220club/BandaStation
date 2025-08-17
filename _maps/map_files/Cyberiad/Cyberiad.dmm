@@ -32789,7 +32789,6 @@
 /area/station/engineering/hallway/west)
 "hWd" = (
 /obj/structure/closet/emcloset,
-/obj/machinery/light/small/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/starboard)
 "hWn" = (
@@ -45071,7 +45070,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "kYb" = (
-/obj/structure/closet/emcloset,
+/obj/effect/spawner/random/structure/crate_abandoned,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "kYf" = (
@@ -45332,6 +45331,10 @@
 /obj/machinery/holopad,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
+"lbj" = (
+/obj/effect/spawner/random/structure/crate,
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "lbx" = (
 /obj/structure/closet/secure_closet/brig,
 /obj/item/radio/intercom/directional/east,
@@ -206912,7 +206915,7 @@ sKd
 kkl
 bMM
 nnU
-dIf
+lbj
 kYb
 uta
 hFm
@@ -207939,7 +207942,7 @@ wfV
 sKd
 kkl
 sKd
-niF
+sKd
 nPk
 iKc
 ruJ
