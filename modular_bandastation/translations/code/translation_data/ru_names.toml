@@ -25188,12 +25188,12 @@ prepositional = "комнате отдыха отдела снабжения"
 gender = "female"
 
 ["Cargo Bay"]
-nominative = "грузовой отсек"
-genitive = "грузового отсека"
-dative = "грузовому отсеку"
-accusative = "грузовой отсек"
-instrumental = "грузовым отсеком"
-prepositional = "грузовом отсеке"
+nominative = "отдел снабжения"
+genitive = "отдела снабжения"
+dative = "отделу снабжения"
+accusative = "отдел снабжения"
+instrumental = "отделом снабжения"
+prepositional = "отделе снабжения"
 gender = "male"
 
 ["Cargo Lobby"]
@@ -25260,12 +25260,12 @@ prepositional = "битраннерской"
 gender = "female"
 
 ["Cargo Bay Lower Floor"]
-nominative = "нижний этаж грузового отсека"
-genitive = "нижнего этажа грузового отсека"
-dative = "нижнему этажу грузового отсека"
-accusative = "нижний этаж грузового отсека"
-instrumental = "нижним этажом грузового отсека"
-prepositional = "нижнем этаже грузового отсека"
+nominative = "нижний этаж отдела снабжения"
+genitive = "нижнего этажа отдела снабжения"
+dative = "нижнему этажу отдела снабжения"
+accusative = "нижний этаж отдела снабжения"
+instrumental = "нижним этажом отдела снабжения"
+prepositional = "нижнем этаже отдела снабжения"
 gender = "male"
 
 ["Cargo Bay Depot Lower Floor"]
