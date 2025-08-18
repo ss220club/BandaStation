@@ -97,11 +97,10 @@
 		COOLDOWN_START(sender, ticket_response, TICKET_REPLY_COOLDOWN)
 
 	var/client/initiator = needed_ticket.initiator_client.client
-	var/client/linked_admin = needed_ticket.linked_admin.client
 	if(sender.key != initiator.key && !needed_ticket.admin_replied)
 		needed_ticket.admin_replied = TRUE
 
-	if(sender == initiator || sender != linked_admin)
+	if(sender == initiator)
 		send_chat_message_to_admin(sender, needed_ticket, message)
 	else
 		send_chat_message_to_player(sender, needed_ticket, message)
