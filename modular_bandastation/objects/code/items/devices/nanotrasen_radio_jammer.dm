@@ -2,7 +2,7 @@
 	name = "Nanotrasen radio jammer"
 	desc = "Корпоративный генератор помех Нанотрейзен. Компактное устройство, способное эффективно блокировать широкий спектр радиочастот. На обратной стороне выгравировано: «Собственность корпорации Нанотрейзен. Корпорация не несёт ответственности за использование устройства третьими лицами, а также за любые действия, совершённые с его применением в случае кражи»."
 	icon = 'modular_bandastation/objects/icons/obj/items/nt_radio_jammer.dmi'
-	icon_state = "nt_jammer"
+	icon_state = "nt_jammer_v2"
 	var/active = FALSE
 
 	/// The range of devices to disable while active
