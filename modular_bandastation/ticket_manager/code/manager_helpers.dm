@@ -293,7 +293,7 @@
 /datum/ticket_manager/proc/open_existing_ticket(client/stuff, client/ticket_holder, message)
 	if(!ticket_holder)
 		to_chat(stuff, span_danger("Кажется клиент покинул сервер..."), MESSAGE_TYPE_ADMINPM)
-		return FALSE
+		return TRUE
 
 	var/datum/help_ticket/subject_ticket = ticket_holder.persistent_client.current_help_ticket
 	if(subject_ticket)
@@ -302,7 +302,8 @@
 
 		stuff.ticket_to_open = subject_ticket.id
 		ui_interact(stuff.mob)
-		return FALSE
+		return TRUE
+	return FALSE
 
 /// Logging any actions on ticket initiator mob/client, and sending it to ticket chat
 /// Stripped all html tags, so we got only text
