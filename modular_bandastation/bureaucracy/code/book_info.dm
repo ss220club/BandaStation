@@ -54,7 +54,7 @@
 
 	current_page_index = clamp(current_page_index, 1, length(pages))
 
-/// Нормализуем текущую на ЛЕВУЮ (нечётную)
+/// Normalize current left page index
 /datum/book_info/proc/normalize_left()
 	ensure_pages()
 	if(!length(pages))
@@ -64,7 +64,7 @@
 	if(current_page_index % 2 == 0)
 		current_page_index = max(1, current_page_index - 1)
 
-/// Листаем вперёд на разворот (по 2)
+/// turn forward one spread (skip by 2 pages)
 /datum/book_info/proc/next_spread()
 	ensure_pages()
 	if(!length(pages)) return
@@ -74,7 +74,7 @@
 	current_page_index = min(current_page_index + 2, last_left)
 	rebuild_content_from_pages()
 
-/// Листаем назад на разворот (по 2)
+/// turn backward one spread (skip by 2 pages)
 /datum/book_info/proc/prev_spread()
 	ensure_pages()
 	if(!length(pages)) return
@@ -97,6 +97,7 @@
 		text = page_splitter.Replace(text, "")
 	return text
 
+/// Get selected page text
 /datum/book_info/proc/get_page_text(index, decode = TRUE)
 	ensure_pages()
 	if(index >= 1 && index <= length(pages))
