@@ -289,6 +289,21 @@
 	log_admin_private("[log_prefix] [log_message]")
 	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
 
+/// Checking existing user ticket, and send message to it IF stuff writed something
+/datum/ticket_manager/proc/open_existing_ticket(client/stuff, client/ticket_holder, message)
+	if(!ticket_holder)
+		to_chat(stuff, span_danger("Кажется клиент покинул сервер..."), MESSAGE_TYPE_ADMINPM)
+		return FALSE
+
+	var/datum/help_ticket/subject_ticket = ticket_holder.persistent_client.current_help_ticket
+	if(subject_ticket)
+		if(message)
+			add_ticket_message(stuff, subject_ticket, message)
+
+		stuff.ticket_to_open = subject_ticket.id
+		ui_interact(stuff.mob)
+		return FALSE
+
 /// Logging any actions on ticket initiator mob/client, and sending it to ticket chat
 /// Stripped all html tags, so we got only text
 /proc/admin_ticket_log(thing, message, player_message, log_in_blackbox)
