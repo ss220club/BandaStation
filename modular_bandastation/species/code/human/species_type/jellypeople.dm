@@ -40,16 +40,8 @@
 
 /datum/species/jelly/get_sigh_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
-		return pick(
-		'sound/mobs/humanoids/human/sigh/female_sigh1.ogg',
-		'sound/mobs/humanoids/human/sigh/female_sigh2.ogg',
-		'sound/mobs/humanoids/human/sigh/female_sigh3.ogg'
-	)
-	return pick(
-		'sound/mobs/humanoids/human/sigh/male_sigh1.ogg',
-		'sound/mobs/humanoids/human/sigh/male_sigh2.ogg',
-		'sound/mobs/humanoids/human/sigh/male_sigh3.ogg'
-	)
+		return SFX_FEMALE_SIGH
+	return SFX_MALE_SIGH
 
 /datum/species/jelly/get_snore_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
