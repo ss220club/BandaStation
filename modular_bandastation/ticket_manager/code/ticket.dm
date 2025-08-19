@@ -70,6 +70,7 @@
 		send_creation_message(creator, message, ticket_type)
 
 	ticket_autoclose = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
+	SSblackbox.LogAhelp(id, "Ticket Opened", message, null, initiator_key)
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
 /datum/help_ticket/proc/send_creation_message(client/creator, message, ticket_type)

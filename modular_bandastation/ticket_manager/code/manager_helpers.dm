@@ -115,7 +115,7 @@
 
 /// Changes ticket state. Allowed new states: TICKET_OPEN, TICKET_CLOSED, TICKET_RESOLVED
 /datum/ticket_manager/proc/set_ticket_state(client/admin, datum/help_ticket/needed_ticket, new_state)
-	if(!admin || !needed_ticket || isnull(new_state))
+	if(!needed_ticket || isnull(new_state))
 		CRASH("Invalid parameters passed to ticket_manager set_ticket_state()!")
 
 	var/user_message
@@ -130,12 +130,22 @@
 
 		needed_ticket.closed_at = time_stamp(NONE)
 		initiator.current_help_ticket = null
-		admin_message = "[key_name_admin(admin)] [ticket_closed ? "закрыл" : "решил"] тикет #[ticket_id]!"
-		user_message = "Ваш тикет #[ticket_id] был [ticket_closed ? "закрыт" : "решён"]!"
+
+		var/blackbox_action = ticket_closed ? "Closed" : "Resolved"
+		if(!admin)
+			admin_message = "Тикет #[ticket_id] был автоматически закрыт!"
+			user_message = "Ваш тикет был автоматически закрыт! Вы можете создать новый если вам всё ещё нужна помощь."
+			SSblackbox.LogAhelp(ticket_id, blackbox_action, "[blackbox_action] automatically", null, "TicketManager")
+		else
+			admin_message = "[key_name_admin(admin)] [ticket_closed ? "закрыл" : "решил"] тикет #[ticket_id]!"
+			user_message = "Ваш тикет #[ticket_id] был [ticket_closed ? "закрыт" : "решён"]!"
+			SSblackbox.LogAhelp(ticket_id, blackbox_action, "[blackbox_action] by [admin.key]", null, admin.key)
+
 		SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_MADE_INACTIVE)
 	else
 		if(initiator.current_help_ticket)
-			to_chat(admin, span_danger("[key_name(initiator.ckey)] уже имеет открытый тикет!"), MESSAGE_TYPE_ADMINPM)
+			if(admin)
+				to_chat(admin, span_danger("[key_name(initiator.ckey)] уже имеет открытый тикет!"), MESSAGE_TYPE_ADMINPM)
 			return
 
 		if(needed_ticket.ticket_autoclose)
@@ -143,14 +153,17 @@
 
 		initiator.current_help_ticket = needed_ticket
 		needed_ticket.closed_at = null
-		admin_message = span_admin("[key_name_admin(admin)] открыл тикет #[ticket_id]!")
 		user_message = "Ваш тикет #[ticket_id] был снова открыт! Проверьте Тикет Менеджер нажав F1!"
+
+		if(admin)
+			admin_message = span_admin("[key_name_admin(admin)] открыл тикет #[ticket_id]!")
+			SSblackbox.LogAhelp(ticket_id, "Reopened", "Reopened by [admin.key]", admin.key)
 
 	needed_ticket.state = new_state
 	SStgui.update_uis(src)
 
 	if(initiator.client)
-		to_chat(initiator.client, custom_boxed_message("green_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
+		to_chat(initiator.client, custom_boxed_message("red_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
 	message_admins(span_admin(admin_message))
 	log_admin_private(admin_message)
 	internal_admin_ticket_log(needed_ticket, admin_message)
@@ -159,19 +172,7 @@
 	if(!needed_ticket)
 		CRASH("Tryed to autoclose null ticket!")
 
-	var/message = "Тикет #[needed_ticket.id] был автоматически закрыт!"
-	var/datum/persistent_client/initiator = needed_ticket.initiator_client
-	if(initiator.client)
-		to_chat(initiator.client, custom_boxed_message("red_box", "Ваш тикет был автоматически закрыт! Вы можете создать новый если вам всё ещё нужна помощь."), MESSAGE_TYPE_ADMINPM)
-
-	initiator.current_help_ticket = null
-	needed_ticket.state = TICKET_CLOSED
-	needed_ticket.closed_at = time_stamp(NONE)
-	SStgui.update_uis(src)
-	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_MADE_INACTIVE)
-	message_admins(span_admin(message))
-	log_admin_private(message)
-	internal_admin_ticket_log(needed_ticket, message)
+	set_ticket_state(null, needed_ticket, TICKET_CLOSED)
 
 /* NEEDED MENTOR SYSTEM
 /datum/ticket_manager/proc/convert_ticket(ticket_id)
@@ -205,6 +206,7 @@
 		"time" = time_stamp(NONE),
 	))
 	SStgui.update_uis(src)
+	SSblackbox.LogAhelp(needed_ticket.id, "Disconnected", "Client disconnected", user.key)
 
 /// Adds little notification to ticket chat about player reconnect
 /datum/ticket_manager/proc/client_login(datum/persistent_client/p_client)
@@ -222,6 +224,7 @@
 		"time" = time_stamp(NONE),
 	))
 	SStgui.update_uis(src)
+	SSblackbox.LogAhelp(needed_ticket.id, "Reconnected", "Client reconnected", user.key)
 
 /// Send admin ticket reply to player, if he's online. And make some logs for other admins
 /datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, raw_message)
@@ -250,6 +253,7 @@
 	var/log_message = "[message]"
 	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
 	log_admin_private("[log_prefix] [log_message]")
+	SSblackbox.LogAhelp(id, "Reply", message, player_key, admin_key)
 
 /// Send player ticket reply to admin, if he's online. And make some logs for other admins
 /datum/ticket_manager/proc/send_chat_message_to_admin(client/player, datum/help_ticket/needed_ticket, raw_message)
@@ -287,6 +291,7 @@
 
 	log_admin_private("[log_prefix] [log_message]")
 	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
+	SSblackbox.LogAhelp(id, "Reply", message, admin_key, player_key)
 
 /// Checking existing user ticket, and send message to it IF stuff writed something
 /datum/ticket_manager/proc/open_existing_ticket(client/stuff, client/ticket_holder, message)
