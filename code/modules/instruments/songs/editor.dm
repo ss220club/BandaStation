@@ -1,3 +1,5 @@
+#define INSTRUMENT_STANDART_BPM 120
+
 /datum/song/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if (!ui)
@@ -110,7 +112,8 @@
 
 		if("set_bpm")
 			var/new_bpm = text2num(params["amount"])
-			if(!isnum(new_bpm) || new_bpm <= 0) return FALSE
+			if(!isnum(new_bpm) || new_bpm <= 0)
+				return FALSE
 			set_bpm(new_bpm)
 			return TRUE
 			// BANDASTATION EDIT END - BPM unlock
@@ -135,7 +138,7 @@
 			lines = new()
 			// BANDASTATION EDIT START - BPM unlock
 			//tempo = sanitize_tempo(5) // default 120 BPM
-			set_bpm(120)
+			set_bpm(INSTRUMENT_STANDART_BPM)
 			// BANDASTATION EDIT END - BPM unlock
 			return TRUE
 		if("add_new_line")
@@ -240,11 +243,11 @@
 		// else
 		// 	tempo = sanitize_tempo(5) // default 120 BPM
 		if(copytext(lines[1], 1, length(bpm_string) + 1) == bpm_string)
-			var/val = text2num(copytext(lines[1], length(bpm_string) + 1)) || 120
+			var/val = text2num(copytext(lines[1], length(bpm_string) + 1)) || INSTRUMENT_STANDART_BPM
 			set_bpm(val)
 			lines.Cut(1, 2)
 		else
-			set_bpm(120)
+			set_bpm(INSTRUMENT_STANDART_BPM)
 		// BANDASTATION EDIT END - BPM unlock
 		if(lines.len > MUSIC_MAXLINES)
 			if(user)

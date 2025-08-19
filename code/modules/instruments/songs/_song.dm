@@ -119,12 +119,14 @@
 	/// Do not directly set, use update_sustain()
 	var/cached_exponential_dropoff = 1.045
 	/////////////////////////////////////////////////////////////////////////
-	/// Прямой BPM (целый)
+	// BANDASTATION ADDITION - START
+	/// straight BPM (integer)
 	var/bpm = 120
-	/// Минимальный BPM
+	/// minimal BPM
 	var/min_bpm = 1
-	/// Накопленный дробный остаток тиков для сглаживания
+	/// summaraized delay
 	var/delay_residual = 0.0
+	// BANDASTATION ADDITION - END
 
 /datum/song/New(atom/parent, list/instrument_ids, new_range)
 	SSinstruments.on_song_new(src)
@@ -370,7 +372,8 @@
 /datum/song/proc/set_bpm(new_bpm)
 	// tempo = sanitize_tempo(600 / bpm)
 	new_bpm = clamp(round(new_bpm), min_bpm, get_max_bpm())
-	if(new_bpm == bpm) return
+	if(new_bpm == bpm)
+		return
 	bpm = new_bpm
 	SEND_SIGNAL(parent, COMSIG_INSTRUMENT_TEMPO_CHANGE, src)
 	delay_residual = 0.0
