@@ -53,7 +53,7 @@
 /datum/heretic_knowledge/limited_amount/starting/base_moon
 	name = "Moonlight Troupe"
 	desc = "Открывает перед вами Путь луны. \
-		Позволяет трансмутировать 2 листа железа и нож в Лунный клинок. \
+		Позволяет трансмутировать 2 листа стекла и нож в Лунный клинок. \
 		Одновременно можно иметь только два."
 	gain_text = "Под лунным светом смех отдается эхом."
 	required_atoms = list(
@@ -88,7 +88,7 @@
 
 /datum/heretic_knowledge/spell/mind_gate
 	name = "Mind Gate"
-	desc = "Grants you Mind Gate, a spell which inflicts hallucinations, \
+	desc = "Grants you Mind Gate, a spell which mutes,deafens, blinds, inflicts hallucinations, \
 		confusion, oxygen loss and brain damage to its target over 10 seconds.\
 		The caster takes 20 brain damage per use."
 	gain_text = "My mind swings open like a gate, and its insight will let me perceive the truth."
@@ -101,7 +101,8 @@
 	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Moonlight Amulet. \
 			Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд; \
 			если рассудок не достаточно низок, то уменьшается их настроение. \
-			При ношении амулета, клинки перестанут причинять физический вред, атакуя разум цели."
+			При ношении амулета, клинки перестанут причинять физический вред, атакуя разум цели. \
+			При ношении дает термальное зрение и удваивает регенарацию разума лунного еретика."
 	gain_text = "Во главе парада стоял он, луна сгустилась в единную массу, отражение души."
 
 	required_atoms = list(
@@ -117,7 +118,7 @@
 	research_tree_icon_frame = 9
 
 /datum/heretic_knowledge/armor/moon
-	desc = "Allows you to transmute a table (or a suit), a mask and two sheets of iron to create a Resplendant Regalia, this robe will render the user   fully immune to disabling effects and convert all forms of damage into brain damage, while also pacifying the user and render him unable to use ranged weapons (Moon blade will bypass pacifism). \
+	desc = "Allows you to transmute a table (or a suit), a mask and two sheets of glass to create a Resplendant Regalia, this robe will render the user   fully immune to disabling effects and convert all forms of damage into brain damage, while also pacifying the user and render him unable to use ranged weapons (Moon blade will bypass pacifism). \
 			Acts as a focus while hooded."
 	gain_text = "Trails of light and mirth flowed from every arm of this magnificent attire. \
 				The troupe twirled in irridescent cascades, dazzling onlookers with the truth they sought. \
@@ -141,9 +142,9 @@
 
 /datum/heretic_knowledge/blade_upgrade/moon
 	name = "Moonlight Blade"
-	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации."
-	gain_text = "Его остроумие было острым, как клинок, оно прорезало ложь, чтобы принести нам радость."
-
+	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации. \
+			Наносит больше урона по мозгу если жертва безумна или не в сознании."
+	gain_text = "His wit was sharp as a blade, cutting through the lie to bring us joy."
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_moon"
@@ -155,13 +156,16 @@
 	if(target.can_block_magic(MAGIC_RESISTANCE_MIND))
 		return
 
-	target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10, 100)
 	target.cause_hallucination( \
 			get_random_valid_hallucination_subtype(/datum/hallucination/body), \
 			"upgraded path of moon blades", \
 		)
 	target.emote(pick("giggle", "laugh"))
 	target.mob_mood?.adjust_sanity(-10)
+	if(target.stat == CONSCIOUS && target.mob_mood?.sanity >= SANITY_NEUTRAL)
+		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10)
+		return
+	target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 25)
 
 /datum/heretic_knowledge/spell/moon_ringleader
 	name = "Ringleaders Rise"
@@ -182,7 +186,7 @@
 	desc = "Ритуал вознесения Пути луны. \
 		Принесите 3 трупа с более чем 50 урона мозгу на руну трансмутации, чтобы завершить ритуал \
 		При завершении, вы становитесь предвестником безумия и получаете ауру пассивного снижения рассудка, \
-		увеличения замешательства, и, если их рассудок достаточно низкий, урона мозгу и ослепления. \
+		если рассудок члена экипажа достаточно низкий - он конвертируется в аколита. \
 		Одна пятая экипажа превратится в аколитов и будет следовать вашим приказам, также они получат Moonlight Amulet"
 	gain_text = "Мы нырнули вниз, к толпе, его душа отделилась в поисках более великой авантюры, \
 		туда, откуда Шпрехшталмейстер начал парад, и я продолжу его до самой кончины солнца \
@@ -239,6 +243,9 @@
 	// Mindshielded and anti-magic folks are immune against this effect because this is a magical mind effect
 	if(HAS_MIND_TRAIT(convertee, TRAIT_UNCONVERTABLE) || convertee.can_block_magic(MAGIC_RESISTANCE))
 		to_chat(convertee, span_boldwarning("You feel shielded from something." ))
+		return FALSE
+
+	if(!convertee.mind)
 		return FALSE
 
 	var/datum/antagonist/lunatic/lunatic = convertee.mind.add_antag_datum(/datum/antagonist/lunatic)
