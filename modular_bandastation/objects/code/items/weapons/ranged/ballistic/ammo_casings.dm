@@ -7,7 +7,7 @@
 
 /obj/item/ammo_casing/c35sol/rubber
 	name = ".35 Sol Short rubber bullet casing"
-	desc = "Стандартный резиновый пистолетный патрон ТСФ калибра .35 Sol Short с пониженной летальностью. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
+	desc = "Стандартный травматический пистолетный патрон ТСФ с резиновой пулей калибра .35 Sol Short с пониженной летальностью. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "sr-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/rubber
@@ -50,17 +50,12 @@
 /obj/item/ammo_casing/a762x39/ap
 	name = "7.62x39mm armor-piercing bullet casing"
 	desc = "Патрон с бронебойной пулей калибра 7.62x39мм."
-	projectile_type = /obj/projectile/bullet/a762x39
+	projectile_type = /obj/projectile/bullet/a762x39/ap
 
 /obj/item/ammo_casing/a762x39/emp
 	name = "7.62x39mm ion bullet casing"
 	desc = "Патрон с ионной пулей калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/emp
-
-/obj/projectile/bullet/a762x39/emp/on_hit(atom/target, blocked = FALSE, pierce_hit)
-	..()
-	empulse(target, heavy_emp_radius, light_emp_radius)
-	return BULLET_ACT_HIT
 
 /obj/item/ammo_casing/a762x39/civilian
 	name = "7.62x39mm civilian bullet casing"
@@ -69,18 +64,13 @@
 
 /obj/item/ammo_casing/a762x39/rubber
 	name = "7.62x39mm rubber bullet casing"
-	desc = "Патрон с резиновой пулей калибра 7.62x39мм гражданского назначения."
+	desc = "Патрон с резиновой пулей калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/a762x39/rubber
 
 /obj/item/ammo_casing/a762x39/hunting
 	name = "7.62x39mm hunting bullet casing"
 	desc = "Патрон с оболочечной пулей 7.62x39мм с мягким наконечником."
 	projectile_type = /obj/projectile/bullet/a762x39/hunting
-
-/obj/projectile/bullet/a762x39/hunting/prehit_pierce(mob/living/target, mob/living/carbon/human/user)
-	if(istype(target, nemesis_path))
-		damage += nemesis_bonus_force
-	.=..()
 
 /obj/item/ammo_casing/a762x39/blank
 	name = "7.62x39mm blank bullet casing"
@@ -100,7 +90,7 @@
 // .40 Sol fragmentation rounds, embeds shrapnel in the target almost every time at close to medium range. Teeeechnically less lethals.
 /obj/item/ammo_casing/c40sol/fragmentation
 	name = ".40 Sol Long rubber-fragmentation bullet casing"
-	desc = "Стандартный осколочно-резиновый винтовочный патрон ТСФ калибра .40 Sol Long. Разрывается при ударе, выбрасывая резиновую шрапнель, которая может вывести цель из строя."
+	desc = "Стандартный осколочно-травматический винтовочный патрон ТСФ с резиновой пулей калибра .40 Sol Long. Разрывается при ударе, выбрасывая резиновую шрапнель, которая может вывести цель из строя."
 	icon_state = "40sol_disabler"
 	projectile_type = /obj/projectile/bullet/c40sol/fragmentation
 
@@ -129,7 +119,7 @@
 
 /obj/item/ammo_casing/c9x25mm/rubber
 	name = "9x25mm NT rubber bullet casing"
-	desc = "Стандартный нелетальный резиновый пистолетный патрон НТ калибра 9x25мм. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
+	desc = "Стандартный травматический пистолетный патрон НТ с резиновой пулей калибра 9x25мм. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "sr-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/rubber
