@@ -25773,3 +25773,682 @@ accusative = "кабинет директора исследований"
 instrumental = "кабинетом директора исследований"
 prepositional = "кабинете директора исследований"
 gender = "male"
+
+## Engineering Areas
+
+["Engineering SMES"]
+nominative = "инженерные СМЕСы"
+genitive = "инженерных СМЕСов"
+dative = "инженерным СМЕСам"
+accusative = "инженерные СМЕСы"
+instrumental = "инженерными СМЕСами"
+prepositional = "инженерных СМЕСах"
+gender = "plural"
+
+["Engineering"]
+nominative = "инженерия"
+genitive = "инженерии"
+dative = "инженерии"
+accusative = "инженерию"
+instrumental = "инженерией"
+prepositional = "инженерии"
+gender = "female"
+
+["Engineering Hallway"]
+nominative = "коридор инженерии"
+genitive = "коридора инженерии"
+dative = "коридору инженерии"
+accusative = "коридор инженерии"
+instrumental = "коридором инженерии"
+prepositional = "коридоре инженерии"
+gender = "male"
+
+["Atmospherics"]
+nominative = "атмосферный отдел"
+genitive = "атмосферного отдела"
+dative = "атмосферному отделу"
+accusative = "атмосферный отдел"
+instrumental = "атмосферным отделом"
+prepositional = "атмосферном отделе"
+gender = "male"
+
+["Atmospherics Project Room"]
+nominative = "проектировочная атмосферного отдела"
+genitive = "проектировочной атмосферного отдела"
+dative = "проектировочной атмосферного отдела"
+accusative = "проектировочную атмосферного отдела"
+instrumental = "проектировочной атмосферного отдела"
+prepositional = "проектировочной атмосферного отдела"
+gender = "female"
+
+["Atmospherics Pumping Room"]
+nominative = "компрессорная атмосферного отдела"
+genitive = "компрессорной атмосферного отдела"
+dative = "компрессорной атмосферного отдела"
+accusative = "компрессорную атмосферного отдела"
+instrumental = "компрессорной атмосферного отдела"
+prepositional = "компрессорной атмосферного отдела"
+gender = "female"
+
+["Atmospherics Mixing Room"]
+nominative = "комната смешивания газов"
+genitive = "комнаты смешивания газов"
+dative = "комнате смешивания газов"
+accusative = "комнату смешивания газов"
+instrumental = "комнатой смешивания газов"
+prepositional = "комнате смешивания газов"
+gender = "female"
+
+["Atmospherics Storage Room"]
+nominative = "склад атмосферного отдела"
+genitive = "склада атмосферного отдела"
+dative = "складу атмосферного отдела"
+accusative = "склад атмосферного отдела"
+instrumental = "складом атмосферного отдела"
+prepositional = "складе атмосферного отдела"
+gender = "male"
+
+["Atmospherics Gas Storage"]
+nominative = "газохранилище атмосферного отдела"
+genitive = "газохранилища атмосферного отдела"
+dative = "газохранилищу атмосферного отдела"
+accusative = "газохранилище атмосферного отдела"
+instrumental = "газохранилищем атмосферного отдела"
+prepositional = "газохранилище атмосферного отдела"
+gender = "female"
+
+["Atmospherics HFR Room"]
+nominative = "реакторная атмосферного отдела"
+genitive = "реакторной атмосферного отдела"
+dative = "реакторной атмосферного отдела"
+accusative = "реакторную атмосферного отдела"
+instrumental = "реакторной атмосферного отдела"
+prepositional = "реакторной атмосферного отдела"
+gender = "female"
+
+["Atmospherics Engine"]
+nominative = "двигатель атмосферного отдела"
+genitive = "двигателя атмосферного отдела"
+dative = "двигателю атмосферного отдела"
+accusative = "двигатель атмосферного отдела"
+instrumental = "двигателем атмосферного отдела"
+prepositional = "двигателе атмосферного отдела"
+gender = "male"
+
+["Engineering Lobby"]
+nominative = "лобби инженерного отдела"
+genitive = "лобби инженерного отдела"
+dative = "лобби инженерного отдела"
+accusative = "лобби инженерного отдела"
+instrumental = "лобби инженерного отдела"
+prepositional = "лобби инженерного отдела"
+gender = "neuter"
+
+["Supermatter Engine"]
+nominative = "двигатель Суперматерии"
+genitive = "двигателя Суперматерии"
+dative = "двигателю Суперматерии"
+accusative = "двигатель Суперматерии"
+instrumental = "двигателем Суперматерии"
+prepositional = "двигателе Суперматерии"
+gender = "male"
+
+["Supermatter Engine Room"]
+nominative = "машинное отделение Суперматерии"
+genitive = "машинного отделения Суперматерии"
+dative = "машинному отделению Суперматерии"
+accusative = "машинное отделение Суперматерии"
+instrumental = "машинным отделением Суперматерии"
+prepositional = "машинном отделении Суперматерии"
+gender = "neuter"
+
+["Gravity Generator Room"]
+nominative = "комната генератора гравитации"
+genitive = "комнаты генератора гравитации"
+dative = "комнате генератора гравитации"
+accusative = "комнату генератора гравитации"
+instrumental = "комнатой генератора гравитации"
+prepositional = "комнате генератора гравитации"
+gender = "female"
+
+["Engineering Storage"]
+nominative = "склад инженерного отдела"
+genitive = "склада инженерного отдела"
+dative = "складу инженерного отдела"
+accusative = "склад инженерного отдела"
+instrumental = "складом инженерного отдела"
+prepositional = "складе инженерного отдела"
+gender = "male"
+
+["Shared Engineering Storage"]
+nominative = "общее инженерное хранилище"
+genitive = "общего инженерного хранилища"
+dative = "общему инженерному хранилищу"
+accusative = "общее инженерное хранилище"
+instrumental = "общим инженерным хранилищем"
+prepositional = "общем инженерном хранилище"
+gender = "neuter"
+
+["Transit Tube"]
+nominative = "транзитная труба"
+genitive = "транзитной трубы"
+dative = "транзитной трубе"
+accusative = "транзитную трубу"
+instrumental = "транзитной трубой"
+prepositional = "транзитной трубе"
+gender = "female"
+
+["Technical Storage"]
+nominative = "техническое хранилище"
+genitive = "технического хранилища"
+dative = "техническому хранилищу"
+accusative = "техническое хранилище"
+instrumental = "техническим хранилищем"
+prepositional = "техническом хранилище"
+gender = "neuter"
+
+["Telecomms Storage"]
+nominative = "телекоммуникационное хранилище"
+genitive = "телекоммуникационного хранилища"
+dative = "телекоммуникационному хранилищу"
+accusative = "телекоммуникационное хранилище"
+instrumental = "телекоммуникационным хранилищем"
+prepositional = "телекоммуникационном хранилище"
+gender = "neuter"
+
+["Construction Area"]
+nominative = "зона строительства"
+genitive = "зоны строительства"
+dative = "зоне строительства"
+accusative = "зону строительства"
+instrumental = "зоной строительства"
+prepositional = "зоне строительства"
+gender = "female"
+
+["Auxiliary Base Construction"]
+nominative = "вспомогательная строительная база"
+genitive = "вспомогательной строительной базы"
+dative = "вспомогательной строительной базе"
+accusative = "вспомогательную строительную базу"
+instrumental = "вспомогательной строительной базой"
+prepositional = "вспомогательной строительной базе"
+gender = "female"
+
+["Storage Wing"]
+nominative = "складское крыло"
+genitive = "складского крыла"
+dative = "складскому крылу"
+accusative = "складское крыло"
+instrumental = "складским крылом"
+prepositional = "складском крыле"
+gender = "neuter"
+
+["Drone Fabricator"]
+nominative = "изготовитель дронов"
+genitive = "изготовителя дронов"
+dative = "изготовителю дронов"
+accusative = "изготовителя дронов"
+instrumental = "изготовителем дронов"
+prepositional = "изготовителе дронов"
+gender = "male"
+
+["Engineering Hallway West"]
+nominative = "западный инженерный коридор"
+genitive = "западного инженерного коридора"
+dative = "западному инженерному коридору"
+accusative = "западный инженерный коридор"
+instrumental = "западным инженерным коридором"
+prepositional = "западном инженерном коридоре"
+gender = "male"
+
+["Chief Engineer's Office"]
+nominative = "кабинет главного инженера"
+genitive = "кабинета главного инженера"
+dative = "кабинету главного инженера"
+accusative = "кабинет главного инженера"
+instrumental = "кабинетом главного инженера"
+prepositional = "кабинете главного инженера"
+gender = "male"
+
+## Security Areas
+
+["Security Office"]
+nominative = "офис службы безопасности"
+genitive = "офиса службы безопасности"
+dative = "офису службы безопасности"
+accusative = "офис службы безопасности"
+instrumental = "офисом службы безопасности"
+prepositional = "офисе службы безопасности"
+gender = "male"
+
+["Security Break Room"]
+nominative = "комната отдыха службы безопасности"
+genitive = "комнаты отдыха службы безопасности"
+dative = "комнате отдыха службы безопасности"
+accusative = "комнату отдыха службы безопасности"
+instrumental = "комнатой отдыха службы безопасности"
+prepositional = "комнате отдыха службы безопасности"
+gender = "female"
+
+["Security Locker Room"]
+nominative = "раздевалка службы безопасности"
+genitive = "раздевалки службы безопасности"
+dative = "раздевалке службы безопасности"
+accusative = "раздевалку службы безопасности"
+instrumental = "раздевалкой службы безопасности"
+prepositional = "раздевалке службы безопасности"
+gender = "female"
+
+["Brig"]
+nominative = "бриг"
+genitive = "брига"
+dative = "бригy"
+accusative = "бриг"
+instrumental = "бригoм"
+prepositional = "бригe"
+gender = "male"
+
+["Brig Lower Floor"]
+nominative = "нижний этаж брига"
+genitive = "нижнего этажа брига"
+dative = "нижнему этажу брига"
+accusative = "нижний этаж брига"
+instrumental = "нижним этажом брига"
+prepositional = "нижнем этаже брига"
+gender = "male"
+
+["Holding Cell"]
+nominative = "камера предварительного заключения"
+genitive = "камеры предварительного заключения"
+dative = "камере предварительного заключения"
+accusative = "камеру предварительного заключения"
+instrumental = "камерой предварительного заключения"
+prepositional = "камере предварительного заключения"
+gender = "female"
+
+["Security Medical"]
+nominative = "медицинский отсек службы безопасности"
+genitive = "медицинского отсека службы безопасности"
+dative = "медицинскому отсеку службы безопасности"
+accusative = "медицинский отсек службы безопасности"
+instrumental = "медицинским отсеком службы безопасности"
+prepositional = "медицинском отсеке службы безопасности"
+gender = "male"
+
+["Brig Overlook"]
+nominative = "смотровая площадка брига"
+genitive = "смотровой площадки брига"
+dative = "смотровой площадке брига"
+accusative = "смотровую площадку брига"
+instrumental = "смотровой площадкой брига"
+prepositional = "смотровой площадке брига"
+gender = "female"
+
+["Brig Entrance"]
+nominative = "вход в бриг"
+genitive = "входа в бриг"
+dative = "входу в бриг"
+accusative = "вход в бриг"
+instrumental = "входом в бриг"
+prepositional = "входе в бриг"
+gender = "male"
+
+["Courtroom"]
+nominative = "зал суда"
+genitive = "зала суда"
+dative = "залу суда"
+accusative = "зал суда"
+instrumental = "залом суда"
+prepositional = "зале суда"
+gender = "male"
+
+["Courtroom Prisoner Holding Room"]
+nominative = "комната содержания подсудимых"
+genitive = "комнаты содержания подсудимых"
+dative = "комнате содержания подсудимых"
+accusative = "комнату содержания подсудимых"
+instrumental = "комнатой содержания подсудимых"
+prepositional = "комнате содержания подсудимых"
+gender = "female"
+
+["Labor Shuttle Dock"]
+nominative = "док трудового шаттла"
+genitive = "дока трудового шаттла"
+dative = "доку трудового шаттла"
+accusative = "док трудового шаттла"
+instrumental = "доком трудового шаттла"
+prepositional = "доке трудового шаттла"
+gender = "male"
+
+["Interrogation Room"]
+nominative = "комната для допросов"
+genitive = "комнаты для допросов"
+dative = "комнате для допросов"
+accusative = "комнату для допросов"
+instrumental = "комнатой для допросов"
+prepositional = "комнате для допросов"
+gender = "female"
+
+["In-Depth Interrogation Room Lower Floor"]
+nominative = "комната для углубленных допросов нижнего этажа"
+genitive = "комнаты для углубленных допросов нижнего этажа"
+dative = "комнате для углубленных допросов нижнего этажа"
+accusative = "комнату для углубленных допросов нижнего этажа"
+instrumental = "комнатой для углубленных допросов нижнего этажа"
+prepositional = "комнате для углубленных допросов нижнего этажа"
+gender = "female"
+
+["Brig Control"]
+nominative = "офис смотрителя"
+genitive = "офиса смотрителя"
+dative = "офису смотрителя"
+accusative = "офис смотрителя"
+instrumental = "офисом смотрителя"
+prepositional = "офисе смотрителя"
+gender = "male"
+
+["Evidence Storage"]
+nominative = "комната хранения улик"
+genitive = "комнаты хранения улик"
+dative = "комнате хранения улик"
+accusative = "комнату хранения улик"
+instrumental = "комнатой хранения улик"
+prepositional = "комнате хранения улик"
+gender = "female"
+
+["Detective's Office"]
+nominative = "офис детектива"
+genitive = "офиса детектива"
+dative = "офису детектива"
+accusative = "офис детектива"
+instrumental = "офисом детектива"
+prepositional = "офисе детектива"
+gender = "male"
+
+["Private Investigator's Office"]
+nominative = "офис частного детектива"
+genitive = "офиса частного детектива"
+dative = "офису частного детектива"
+accusative = "офис частного детектива"
+instrumental = "офисом частного детектива"
+prepositional = "офисе частного детектива"
+gender = "male"
+
+["Firing Range"]
+nominative = "стрельбище"
+genitive = "стрельбища"
+dative = "стрельбищу"
+accusative = "стрельбище"
+instrumental = "стрельбищем"
+prepositional = "стрельбище"
+gender = "neuter"
+
+["Transfer Centre"]
+nominative = "трансферный центр"
+genitive = "трансферного центра"
+dative = "трансферному центру"
+accusative = "трансферный центр"
+instrumental = "трансферным центром"
+prepositional = "трансферном центре"
+gender = "male"
+
+["Prisoner Education Chamber"]
+nominative = "камера перевоспитания заключенных"
+genitive = "камеры перевоспитания заключенных"
+dative = "камере перевоспитания заключенных"
+accusative = "камеру перевоспитания заключенных"
+instrumental = "камерой перевоспитания заключенных"
+prepositional = "камере перевоспитания заключенных"
+gender = "female"
+
+["Security Mechbay"]
+nominative = "мехдок службы безопасности"
+genitive = "мехдока службы безопасности"
+dative = "мехдоку службы безопасности"
+accusative = "мехдок службы безопасности"
+instrumental = "мехдоком службы безопасности"
+prepositional = "мехдоке службы безопасности"
+gender = "male"
+
+["Security Maintenance Fore Lower Floor"]
+nominative = "северные тех.тоннели нижнего этажа службы безопасности"
+genitive = "северных тех.тоннелей нижнего этажа службы безопасности"
+dative = "северным тех.тоннелям нижнего этажа службы безопасности"
+accusative = "северные тех.тоннели нижнего этажа службы безопасности"
+instrumental = "северными тех.тоннелями нижнего этажа службы безопасности"
+prepositional = "северных тех.тоннелях нижнего этажа службы безопасности"
+gender = "plural"
+
+["Security Maintenance Aft Lower Floor"]
+nominative = "южные тех.тоннели нижнего этажа службы безопасности"
+genitive = "южных тех.тоннелей нижнего этажа службы безопасности"
+dative = "южным тех.тоннелям нижнего этажа службы безопасности"
+accusative = "южные тех.тоннели нижнего этажа службы безопасности"
+instrumental = "южными тех.тоннелями нижнего этажа службы безопасности"
+prepositional = "южных тех.тоннелях нижнего этажа службы безопасности"
+gender = "plural"
+
+["Departures Security Checkpoint"]
+nominative = "контрольно-пропускной пункт отбытия"
+genitive = "контрольно-пропускного пункта отбытия"
+dative = "контрольно-пропускному пункту отбытия"
+accusative = "контрольно-пропускной пункт отбытия"
+instrumental = "контрольно-пропускным пунктом отбытия"
+prepositional = "контрольно-пропускном пункте отбытия"
+gender = "male"
+
+["Arrivals Security Checkpoint"]
+nominative = "контрольно-пропускной пункт прибытия"
+genitive = "контрольно-пропускного пункта прибытия"
+dative = "контрольно-пропускному пункту прибытия"
+accusative = "контрольно-пропускной пункт прибытия"
+instrumental = "контрольно-пропускным пунктом прибытия"
+prepositional = "контрольно-пропускном пункте прибытия"
+gender = "male"
+
+["Security Post - Cargo Bay"]
+nominative = "пост охраны отдела снабжения"
+genitive = "поста охраны отдела снабжения"
+dative = "посту охраны отдела снабжения"
+accusative = "пост охраны отдела снабжения"
+instrumental = "постом охраны отдела снабжения"
+prepositional = "посту охраны отдела снабжения"
+gender = "male"
+
+["Security Post - Engineering"]
+nominative = "пост охраны инженерного отдела"
+genitive = "поста охраны инженерного отдела"
+dative = "посту охраны инженерного отдела"
+accusative = "пост охраны инженерного отдела"
+instrumental = "постом охраны инженерного отдела"
+prepositional = "посту охраны инженерного отдела"
+gender = "male"
+
+["Security Post - Medbay"]
+nominative = "пост охраны медицинского отдела"
+genitive = "поста охраны медицинского отдела"
+dative = "посту охраны медицинского отдела"
+accusative = "пост охраны медицинского отдела"
+instrumental = "постом охраны медицинского отдела"
+prepositional = "посту охраны медицинского отдела"
+gender = "male"
+
+["Security Post - Medsci"]
+nominative = "пост охраны медицинско-научного отдела"
+genitive = "поста охраны медицинско-научного отдела"
+dative = "посту охраны медицинско-научного отдела"
+accusative = "пост охраны медицинско-научного отдела"
+instrumental = "постом охраны медицинско-научного отдела"
+prepositional = "посту охраны медицинско-научного отдела"
+gender = "male"
+
+["Security Post - Science"]
+nominative = "пост охраны научного отдела"
+genitive = "поста охраны научного отдела"
+dative = "посту охраны научного отдела"
+accusative = "пост охраны научного отдела"
+instrumental = "постом охраны научного отдела"
+prepositional = "посту охраны научного отдела"
+gender = "male"
+
+["Customs"]
+nominative = "таможня"
+genitive = "таможни"
+dative = "таможне"
+accusative = "таможню"
+instrumental = "таможней"
+prepositional = "таможне"
+gender = "female"
+
+["Auxiliary Customs"]
+nominative = "вспомогательная таможня"
+genitive = "вспомогательной таможни"
+dative = "вспомогательной таможне"
+accusative = "вспомогательную таможню"
+instrumental = "вспомогательной таможней"
+prepositional = "вспомогательной таможне"
+gender = "female"
+
+["Fore Customs"]
+nominative = "северная таможня"
+genitive = "северной таможни"
+dative = "северной таможне"
+accusative = "северную таможню"
+instrumental = "северной таможней"
+prepositional = "северной таможне"
+gender = "female"
+
+["Aft Customs"]
+nominative = "южная таможня"
+genitive = "южной таможни"
+dative = "южной таможне"
+accusative = "южную таможню"
+instrumental = "южной таможней"
+prepositional = "южной таможне"
+gender = "female"
+
+["Prison Wing"]
+nominative = "тюремное крыло"
+genitive = "тюремного крыла"
+dative = "тюремному крылу"
+accusative = "тюремное крыло"
+instrumental = "тюремным крылом"
+prepositional = "тюремном крыле"
+gender = "neuter"
+
+["Prison Wing Lower Floor"]
+nominative = "нижний этаж тюремного крыла"
+genitive = "нижнего этажа тюремного крыла"
+dative = "нижнему этажу тюремного крыла"
+accusative = "нижний этаж тюремного крыла"
+instrumental = "нижним этажом тюремного крыла"
+prepositional = "нижнем этаже тюремного крыла"
+gender = "male"
+
+["Prison Toilet"]
+nominative = "тюремный туалет"
+genitive = "тюремного туалета"
+dative = "тюремному туалету"
+accusative = "тюремный туалет"
+instrumental = "тюремным туалетом"
+prepositional = "тюремном туалете"
+gender = "male"
+
+["Prison Wing Cells"]
+nominative = "камеры тюремного крыла"
+genitive = "камер тюремного крыла"
+dative = "камерам тюремного крыла"
+accusative = "камеры тюремного крыла"
+instrumental = "камерами тюремного крыла"
+prepositional = "камерах тюремного крыла"
+gender = "plural"
+
+["Prison Visitation Area"]
+nominative = "комната посещения заключенных"
+genitive = "комнаты посещения заключенных"
+dative = "комнате посещения заключенных"
+accusative = "комнату посещения заключенных"
+instrumental = "комнатой посещения заключенных"
+prepositional = "комнате посещения заключенных"
+gender = "female"
+
+["Prison Rec Room"]
+nominative = "тюремная комната отдыха"
+genitive = "тюремной комнаты отдыха"
+dative = "тюремной комнате отдыха"
+accusative = "тюремную комнату отдыха"
+instrumental = "тюремной комнатой отдыха"
+prepositional = "тюремной комнате отдыха"
+gender = "female"
+
+["Prison Mess Hall"]
+nominative = "тюремная столовая"
+genitive = "тюремной столовой"
+dative = "тюремной столовой"
+accusative = "тюремную столовую"
+instrumental = "тюремной столовой"
+prepositional = "тюремной столовой"
+gender = "female"
+
+["Prison Work Room"]
+nominative = "комната тюремных работ"
+genitive = "комнаты тюремных работ"
+dative = "комнате тюремных работ"
+accusative = "комнату тюремных работ"
+instrumental = "комнатой тюремных работ"
+prepositional = "комнате тюремных работ"
+gender = "female"
+
+["Prison Shower"]
+nominative = "тюремный душ"
+genitive = "тюремного душа"
+dative = "тюремному душу"
+accusative = "тюремный душ"
+instrumental = "тюремным душем"
+prepositional = "тюремном душе"
+gender = "male"
+
+["Prison Gym"]
+nominative = "тюремный спортзал"
+genitive = "тюремного спортзала"
+dative = "тюремному спортзалу"
+accusative = "тюремный спортзал"
+instrumental = "тюремным спортзалом"
+prepositional = "тюремном спортзале"
+gender = "male"
+
+["Prison Garden"]
+nominative = "тюремный сад"
+genitive = "тюремного сада"
+dative = "тюремному саду"
+accusative = "тюремный сад"
+instrumental = "тюремным садом"
+prepositional = "тюремном саду"
+gender = "male"
+
+["Armory"]
+nominative = "оружейная"
+genitive = "оружейной"
+dative = "оружейной"
+accusative = "оружейную"
+instrumental = "оружейной"
+prepositional = "оружейной"
+gender = "female"
+
+["Upper Armory"]
+nominative = "верхняя оружейная"
+genitive = "верхней оружейной"
+dative = "верхней оружейной"
+accusative = "верхнюю оружейную"
+instrumental = "верхней оружейной"
+prepositional = "верхней оружейной"
+gender = "female"
+
+["Head of Security's Office"]
+nominative = "кабинет главы службы безопасности"
+genitive = "кабинета главы службы безопасности"
+dative = "кабинету главы службы безопасности"
+accusative = "кабинет главы службы безопасности"
+instrumental = "кабинетом главы службы безопасности"
+prepositional = "кабинете главы службы безопасности"
+gender = "male"
