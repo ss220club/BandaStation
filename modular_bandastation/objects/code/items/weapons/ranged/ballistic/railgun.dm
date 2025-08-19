@@ -31,22 +31,23 @@
 	recoil = 1
 	projectile_speed_multiplier = 1.5
 
+	/// Determines how many shots we can make before the weapon needs to be maintained.
 	var/shots_before_degradation = 10
-
+	/// The max number of allowed shots this gun can have before degradation.
 	var/max_shots_before_degradation = 10
-
+	/// Determines the degradation stage. The higher the value, the more poorly the weapon performs.
 	var/degradation_stage = 0
-
+	/// Maximum degradation stage.
 	var/degradation_stage_max = 5
-
+	/// The probability of degradation increasing per shot.
 	var/degradation_probability = 15
-
+	/// The maximum speed malus for projectile flight speed. Projectiles probably shouldn't move too slowly or else they will start to cause problems.
 	var/maximum_speed_malus = 0.7
-
+	/// What is our damage multiplier if the gun is emagged?
 	var/emagged_projectile_damage_multiplier = 1.6
-
+	/// Whether or not our gun is suffering an EMP related malfunction.
 	var/emp_malfunction = FALSE
-
+	/// Our timer for when our gun is suffering an extreme malfunction. AKA it is going to explode
 	var/explosion_timer
 
 /obj/item/gun/ballistic/automatic/railgun/Initialize(mapload)
