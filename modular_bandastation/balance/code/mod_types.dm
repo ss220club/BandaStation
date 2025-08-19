@@ -38,6 +38,9 @@
 		/obj/item/mod/module/flashlight,
 	)
 
+/datum/mod_theme/responsory
+	complexity_max = DEFAULT_MAX_COMPLEXITY + 5
+
 /datum/armor/mod_theme_responsory
 	melee = 60
 	bullet = 60
