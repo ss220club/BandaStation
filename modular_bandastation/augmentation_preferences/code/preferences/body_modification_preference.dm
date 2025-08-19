@@ -26,14 +26,14 @@
 
 	target.regenerate_limbs()
 
-	var/datum/preferences/p = usr?.client?.prefs
-	if(p)
+	var/datum/preferences/client_prefs = usr.client?.prefs
+	if(client_prefs)
 		for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
 			if (preference.savefile_identifier != PREFERENCE_CHARACTER)
 				continue
 			if (preference.category != PREFERENCE_CATEGORY_SECONDARY_FEATURES)
 				continue
-			preference.apply_to_human(target, p.read_preference(preference.type))
+			preference.apply_to_human(target, client_prefs.read_preference(preference.type))
 
 	for(var/key in body_modifications)
 		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
