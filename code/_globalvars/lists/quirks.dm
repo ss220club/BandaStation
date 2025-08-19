@@ -42,8 +42,10 @@ GLOBAL_LIST_INIT(possible_junkie_addictions, setup_junkie_addictions(list(
 	/datum/reagent/medicine/morphine,
 	/datum/reagent/drug/happiness,
 	/datum/reagent/drug/methamphetamine,
-	/datum/reagent/drug/cocaine/freebase_cocaine, // BANDASTATION EDIT
-	/datum/reagent/drug/cocaine, // BANDASTATION EDIT
+	// BANDASTATION ADDITION - START
+	/datum/reagent/drug/cocaine/freebase_cocaine,
+	/datum/reagent/drug/cocaine,
+	// BANDASTATION ADDITION - END
 )))
 
 ///Options for the Smoker quirk to choose from

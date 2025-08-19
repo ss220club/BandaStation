@@ -94,7 +94,7 @@
 		/obj/item/seeds/reishi = 2,
 		/obj/item/seeds/cannabis = 3,
 		/obj/item/seeds/starthistle = 2,
-		/obj/item/seeds/cocaleaf = 2, // BANDA STATION ADDITION
+		/obj/item/seeds/cocaleaf = 2, // BANDASTATION ADDITION
 		/obj/item/seeds/random = 2,
 	)
 
