@@ -344,7 +344,7 @@ SUBSYSTEM_DEF(dynamic)
 	message_admins("Midround ([range]): Executing [picked_ruleset.config_tag] \
 		[MIDROUND_CANCEL_HREF()] [MIDROUND_REROLL_HREF(rulesets_weighted)]")
 	// if we have admins online, we have a waiting period before execution to allow them to cancel or reroll
-	if(length(GLOB.admins))
+	if(length(get_holders_with_rights(R_ADMIN))) /// BANDASTATION EDIT: Proper permissions
 		COOLDOWN_START(src, midround_admin_cancel_period, 15 SECONDS)
 		while(!COOLDOWN_FINISHED(src, midround_admin_cancel_period))
 			if(midround_admin_cancel)
