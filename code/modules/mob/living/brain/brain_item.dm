@@ -208,7 +208,7 @@
 
 /obj/item/organ/brain/proc/check_for_repair(obj/item/item, mob/user)
 	if(damage && item.is_drainable() && item.reagents.has_reagent(/datum/reagent/medicine/mannitol) && (organ_flags & ORGAN_ORGANIC)) //attempt to heal the brain
-		if(brainmob?.health <= HEALTH_THRESHOLD_DEAD) //if the brain is fucked anyway, do nothing
+		if(brainmob?.health <= HEALTH_THRESHOLD_DEAD || (CONFIG_GET(flag/brain_permanent_death) && (organ_flags & ORGAN_FAILING))) //if the brain is fucked anyway, do nothing // BANDASTATION EDIT - PERMA-DEATH ORGAN DAMAGE
 			to_chat(user, span_warning("[src] is far too damaged, there's nothing else we can do for it!"))
 			return TRUE
 
@@ -653,6 +653,10 @@
 
 /obj/item/organ/brain/apply_organ_damage(damage_amount, maximum = maxHealth, required_organ_flag = NONE)
 	. = ..()
+	// BANDASTATION ADDITION START - PERMA-DEATH ORGAN DAMAGE
+	if(CONFIG_GET(flag/brain_permanent_death) && (organ_flags & ORGAN_FAILING))
+		return -(maxHealth)
+	// BANDASTATION ADDITION END - PERMA-DEATH ORGAN DAMAGE
 	if(!owner)
 		return FALSE
 	if(damage >= 60)
