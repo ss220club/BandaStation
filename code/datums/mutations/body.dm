@@ -583,11 +583,11 @@
 // You bleed faster but regenerate blood faster
 /datum/mutation/bloodier
 	name = "Hypermetabolic Blood"
-	desc = "The subject's blood is hypermetabolic, causing it to be produced at a much faster rate."
+	desc = "Кровь субъекта является гиперметаболической, вызывая ускоренную её выработку."
 	quality = POSITIVE
 	instability = POSITIVE_INSTABILITY_MINOR
-	text_gain_indication = span_notice("You can feel your heartbeat pick up.")
-	text_lose_indication = span_notice("You heartbeat slows back down.")
+	text_gain_indication = span_notice("Ты ощущаешь, как твоё сердцебиение ускоряется.")
+	text_lose_indication = span_notice("Твое сердцебиение медленно замедляется.")
 	difficulty = 16
 	synchronizer_coeff = 1
 	power_coeff = 1
@@ -635,11 +635,11 @@
 // You eat rocks
 /datum/mutation/rock_eater
 	name = "Rock Eater"
-	desc = "The subject's body is able to digest rocks and minerals."
+	desc = "Тело субъекта становится способным переварить камни и минералы."
 	quality = POSITIVE
 	instability = POSITIVE_INSTABILITY_MINI
-	text_gain_indication = span_notice("You feel a craving for rocks.")
-	text_lose_indication = span_notice("You could go for a normal meal.")
+	text_gain_indication = span_notice("Ты ощущаешь аппетит к камням.")
+	text_lose_indication = span_notice("Ты можешь вернуться к нормальной еде.")
 	difficulty = 12
 	mutation_traits = list(TRAIT_ROCK_EATER)
 	conflicts = list(/datum/mutation/rock_absorber)
@@ -666,12 +666,12 @@
 // Soft crit is disabed
 /datum/mutation/inexorable
 	name = "Inexorable"
-	desc = "Your body can push on beyond the limits of normal human endurance. \
-		However, pushing it too far can cause severe damage to your body."
+	desc = "Ваше тело может выйти за рамки лимитов обычной человеческой выносливости. \
+		Однако, нарушение данных лимитов может привести к серьёзным травмам вашего тела."
 	quality = POSITIVE
 	instability = POSITIVE_INSTABILITY_MODERATE
-	text_gain_indication = span_notice("You feel inexorable.")
-	text_lose_indication = span_notice("You suddenly feel more human.")
+	text_gain_indication = span_notice("Ты ощущаешь себя непреклонным.")
+	text_lose_indication = span_notice("Ты внезапно чувствуешь себя как обычный человек.")
 	difficulty = 24
 	synchronizer_coeff = 1
 	mutation_traits = list(TRAIT_NOSOFTCRIT, TRAIT_ANALGESIA)

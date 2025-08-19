@@ -160,7 +160,7 @@
 		if(name != real_name)
 			alt_name = " (умер как [real_name])"
 
-	var/spanned = say_quote(apply_message_emphasis(message))
+	var/spanned = generate_messagepart(message)
 	var/source = "<span class='game'><span class='prefix'>МЕРТВ:</span> <span class='name'>[name]</span>[alt_name]"
 	var/rendered = " <span class='message'>[emoji_parse(spanned)]</span></span>"
 	log_talk(message, LOG_SAY, tag="DEAD")
@@ -194,7 +194,7 @@
 	message = copytext(message, customsaypos + 1)
 	if (!message)
 		mods[MODE_CUSTOM_SAY_ERASE_INPUT] = TRUE
-		message = "an interesting thing to say"
+		// message = "an interesting thing to say" // BANDASTATION REMOVAL
 	return message
 /**
  * Extracts and cleans message of any extenstions at the begining of the message
