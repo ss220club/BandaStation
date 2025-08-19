@@ -26,7 +26,7 @@
 
 	target.regenerate_limbs()
 
-	var/datum/preferences/client_prefs = usr.client?.prefs
+	var/datum/preferences/client_prefs = usr?.client?.prefs
 	if(client_prefs)
 		for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
 			if (preference.savefile_identifier != PREFERENCE_CHARACTER)
