@@ -307,7 +307,7 @@
 	return TRUE
 
 /atom/movable/screen/drop
-	name = "сбросить"
+	name = "выбросить"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_drop"
 	plane = HUD_PLANE
@@ -365,7 +365,7 @@
 	screen_loc = ui_borg_intents
 
 /atom/movable/screen/floor_changer
-	name = "сменить уровень"
+	name = "сменить этаж"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "floor_change"
 	screen_loc = ui_above_intent
@@ -457,7 +457,7 @@
 		L.resist()
 
 /atom/movable/screen/rest
-	name = "отдых"
+	name = "отдыхать"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_rest"
 	base_icon_state = "act_rest"
@@ -976,7 +976,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 #define HUNGER_STATE_STARVING 0
 
 /atom/movable/screen/hunger
-	name = "шкала голода"
+	name = "голод"
 	icon_state = "hungerbar"
 	screen_loc = ui_hunger
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -1159,7 +1159,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
  * 2- Have their blood level changing every life tick (which is why we don't manually call updates).
  */
 /atom/movable/screen/blood_level
-	name = "Уровень крови"
+	name = "уровень крови"
 	icon_state = "blood_display"
 	screen_loc = ui_blooddisplay
 
