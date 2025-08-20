@@ -602,7 +602,7 @@
 		to_chat(src, span_danger("Вы не можете прижать вашу [grasped_part.declent_ru(ACCUSATIVE)] ею же!"))
 		return
 
-	var/bleed_rate = grasped_part.get_modified_bleed_rate()
+	var/bleed_rate = grasped_part.cached_bleed_rate
 	var/bleeding_text = (bleed_rate ? ", пытаясь остановить кровотечение" : "")
 	to_chat(src, span_warning("Вы пытаетесь прижать [grasped_part.declent_ru(ACCUSATIVE)][bleeding_text]..."))
 	if(!do_after(src, 0.75 SECONDS))
@@ -618,7 +618,7 @@
 
 /// If TRUE, the owner of this bodypart can try grabbing it to slow bleeding, as well as various other effects.
 /obj/item/bodypart/proc/can_be_grasped()
-	if (get_modified_bleed_rate())
+	if (cached_bleed_rate)
 		return TRUE
 
 	for (var/datum/wound/iterated_wound as anything in wounds)
@@ -671,7 +671,7 @@
 	RegisterSignal(user, COMSIG_QDELETING, PROC_REF(qdel_void))
 	RegisterSignals(grasped_part, list(COMSIG_CARBON_REMOVE_LIMB, COMSIG_QDELETING), PROC_REF(qdel_void))
 
-	var/bleed_rate = grasped_part.get_modified_bleed_rate()
+	var/bleed_rate = grasped_part.cached_bleed_rate
 	var/bleeding_text = (bleed_rate ? ", пытаясь остановить кровотечение" : "")
 	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] прижимает [grasped_part.declent_ru(ACCUSATIVE)] у себя[bleeding_text]."), span_notice("Вы крепко прижимаете [grasped_part.declent_ru(ACCUSATIVE)]."), vision_distance=COMBAT_MESSAGE_RANGE)
 	playsound(get_turf(src), 'sound/items/weapons/thudswoosh.ogg', 50, TRUE, -1)
