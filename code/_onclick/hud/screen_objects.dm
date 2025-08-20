@@ -489,7 +489,7 @@
 		return
 	if(usr.client?.prefs.read_preference(/datum/preference/toggle/remove_double_click))
 		var/tgui_answer = tgui_alert(usr, "Вы уверены, что хотите немного поспать?", "Сон", list("Да", "Нет"))
-		if(tgui_answer == "Да" && !HAS_TRAIT(usr, TRAIT_KNOCKEDOUT))
+		if(tgui_answer == "Yes" && !HAS_TRAIT(usr, TRAIT_KNOCKEDOUT))
 			var/mob/living/L = usr
 			L.SetSleeping(400)
 	else
