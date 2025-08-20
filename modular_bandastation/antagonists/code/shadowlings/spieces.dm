@@ -31,6 +31,9 @@
 		TRAIT_RADIMMUNE,
 		TRAIT_SNOWSTORM_IMMUNE, // Shared with plasma river... but I guess if you can survive a plasma river a blizzard isn't a big deal
 		TRAIT_UNHUSKABLE,
+		TRAIT_SILENT_FOOTSTEPS,
+		TRAIT_NOHUNGER,
+		TRAIT_NO_SLIP_ALL
 	)
 
 	no_equip_flags = ITEM_SLOT_MASK | ITEM_SLOT_HEAD | ITEM_SLOT_EYES | ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_ICLOTHING | ITEM_SLOT_SUITSTORE
@@ -45,23 +48,28 @@
 /obj/item/bodypart/head/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/chest/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
 	bodypart_traits = list(TRAIT_NO_JUMPSUIT)
+	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/leg/left/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/leg/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/arm/left/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 	unarmed_attack_verbs = list("slash", "lash")
 	unarmed_attack_verbs_continuous = list("slashes", "lashes")
 	grappled_attack_verb = "lacerate"
@@ -77,6 +85,7 @@
 /obj/item/bodypart/arm/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 	unarmed_attack_verbs = list("pierce", "impale")
 	unarmed_attack_verbs_continuous = list("pierces", "impales")
 	grappled_attack_verb = "pierce"

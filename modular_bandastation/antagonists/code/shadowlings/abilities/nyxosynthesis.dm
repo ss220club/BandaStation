@@ -1,0 +1,61 @@
+// thresholds под себя
+#define SHADOWLING_LIGHT_THRESHOLD 0.75
+#define SHADOWLING_DIM_THRESHOLD   0.40
+
+// множители урона/хила на конечность (× bodypart_coefficient)
+#define SHADOWLING_BRIGHT_BURN_PER_LIMB 2     // было 1 → станет больнее на ярком свете
+#define SHADOWLING_BRIGHT_BRUTE_PER_LIMB 2
+#define SHADOWLING_DARK_HEAL_PER_LIMB_DEEP 4.0 // было 0.5 → быстрее реген в глубокой тьме
+#define SHADOWLING_DARK_HEAL_PER_LIMB_DIM  0.75 // лёгкий бонус в полутьме, можно =0.5
+
+#define GET_BODYPART_COEFFICIENT(X) round(X.len / BODYPARTS_DEFAULT_MAXIMUM , 0.1)
+
+/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling
+	id = "nyxosynthesis_shadowling"
+	tick_interval = 1 SECONDS
+	var/applied_speed = FALSE
+
+/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling/tick(seconds_between_ticks)
+	var/turf/T = owner?.loc
+	if(!isturf(T))
+		return
+
+	var/light = T.get_lumcount()
+	var/coef = GET_BODYPART_COEFFICIENT(bodyparts)
+
+	// ЯРКИЙ СВЕТ — больнее, скорость буста снимаем
+	if(light >= SHADOWLING_LIGHT_THRESHOLD)
+		owner.take_overall_damage(
+			brute = SHADOWLING_BRIGHT_BRUTE_PER_LIMB * coef,
+			burn  = SHADOWLING_BRIGHT_BURN_PER_LIMB  * coef,
+			required_bodytype = BODYTYPE_SHADOW
+		)
+		// убрать буст скорости, если висит
+		if(applied_speed)
+			shadowling_remove_dark_speed(owner)
+			applied_speed = FALSE
+		return
+
+	// ТЬМА/ПОЛУТЬМА — реген бафнут
+	var/heal_per = (light < SHADOWLING_DIM_THRESHOLD) ? SHADOWLING_DARK_HEAL_PER_LIMB_DEEP : SHADOWLING_DARK_HEAL_PER_LIMB_DIM
+
+	owner.heal_overall_damage(
+		brute = heal_per * coef,
+		burn  = heal_per * coef,
+		required_bodytype = BODYTYPE_SHADOW
+	)
+
+	// В тени — включаем алерт и даём скоростной буст
+	if(!owner.has_status_effect(/datum/status_effect/shadow/nightmare))
+		owner.apply_status_effect(/datum/status_effect/shadow)
+
+	if(!applied_speed)
+		shadowling_apply_dark_speed(owner)
+		applied_speed = TRUE
+
+/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling/on_remove()
+	. = ..()
+	if(applied_speed && owner)
+		shadowling_remove_dark_speed(owner)
+
+#undef GET_BODYPART_COEFFICIENT

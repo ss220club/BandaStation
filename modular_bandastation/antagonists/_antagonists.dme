@@ -2,4 +2,6 @@
 
 #include "code/ert.dm"
 #include "code/shadowlings/spieces.dm"
+#include "code/shadowlings/abilities/nyxosynthesis.dm"
+#include "code/shadowlings/abilities/shadow_speed.dm"
 #include "code/shadowlings/abilities/_spell.dm"
