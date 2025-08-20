@@ -261,3 +261,5 @@
 				lines.Remove(l)
 			else
 				linenum++
+
+#undef INSTRUMENT_STANDART_BPM
