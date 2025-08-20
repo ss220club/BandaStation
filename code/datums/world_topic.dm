@@ -189,7 +189,26 @@
 	keyword = "adminwho"
 
 /datum/world_topic/adminwho/Run(list/input)
-	return tgsadminwho()
+	var/list/out_data = list()
+
+	for(var/client/C as anything in GLOB.admins)
+		var/list/this_entry = list()
+		// Send both incase we want special formatting
+		this_entry["ckey"] = C.ckey
+		this_entry["key"] = C.key
+		this_entry["ranks"] = list()
+
+		for(var/datum/admin_rank/rank in C.holder.ranks)
+			this_entry["ranks"] += rank.name
+
+		// is_afk() returns an int of inactivity, we can use this to determine AFK for how long
+		// This info will not be shown in public channels
+		this_entry["afk"] = C.is_afk()
+		this_entry["stealth"] = C.holder.fakekey ? "STEALTH" : "NONE"
+		this_entry["skey"] = C.holder.fakekey ? C.holder.fakekey : "NONE"
+
+		out_data += list(this_entry)
+	return out_data
 
 /datum/world_topic/status
 	keyword = "status"
@@ -304,14 +323,8 @@
 	var/author_key = input["author_ckey"]
 	var/channel_name = input["message"]
 
-	var/found_channel = FALSE
-	for(var/datum/feed_channel/channel as anything in GLOB.news_network.network_channels)
-		if(channel.channel_name == channel_name)
-			found_channel = TRUE
-			break
-
-	// No channel with a matching name, abort
-	if (!found_channel)
+	var/datum/feed_channel/chosen_channel = GLOB.news_network.network_channels_by_name[channel_name]
+	if(isnull(chosen_channel)) // No channel with a matching name, abort
 		return
 
 	message_admins(span_adminnotice("Incoming cross-sector newscaster article by [author_key] in channel [channel_name]."))

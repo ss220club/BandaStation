@@ -63,19 +63,19 @@ SUBSYSTEM_DEF(garbage)
 	var/list/counts = list()
 	for (var/list/L in queues)
 		counts += length(L)
-	msg += "Q:[counts.Join(",")]|D:[delslasttick]|G:[gcedlasttick]|"
+	msg += "\n  Queue:[counts.Join(",")]|Dels:[delslasttick]|GCs:[gcedlasttick]|"
 	msg += "GR:"
 	if (!(delslasttick+gcedlasttick))
 		msg += "n/a|"
 	else
 		msg += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
 
-	msg += "TD:[totaldels]|TG:[totalgcs]|"
+	msg += "\n  TD:[totaldels]|TG:[totalgcs]|"
 	if (!(totaldels+totalgcs))
 		msg += "n/a|"
 	else
 		msg += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
-	msg += " P:[pass_counts.Join(",")]"
+	msg += "\n  P:[pass_counts.Join(",")]"
 	msg += "|F:[fail_counts.Join(",")]"
 	return ..()
 
@@ -228,11 +228,7 @@ SUBSYSTEM_DEF(garbage)
 					LAZYADD(I.extra_details, detail)
 
 				#ifdef TESTING
-				for(var/c in GLOB.admins) //Using testing() here would fill the logs with ADMIN_VV garbage
-					var/client/admin = c
-					if(!check_rights_for(admin, R_ADMIN))
-						continue
-					to_chat(admin, "## TESTING: GC: -- [ADMIN_VV(D)] | [type] was unable to be GC'd --")
+				to_chat(get_holders_with_rights(R_ADMIN), "## TESTING: GC: -- [ADMIN_VV(D)] | [type] was unable to be GC'd --") /// BANDASTATION EDIT: Proper permissions
 				#endif
 				I.failures++
 

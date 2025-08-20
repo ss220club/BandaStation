@@ -9,4 +9,4 @@
 	return COLOR_WHITE
 
 /datum/preference/color/tajaran_facial_hair_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["tajaran_facial_hair_color"] = value
+	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR_COLOR] = value

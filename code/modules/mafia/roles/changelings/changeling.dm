@@ -1,6 +1,6 @@
 /datum/mafia_role/mafia
 	name = "Генокрад"
-	desc = "Вы - член улья генокрадов. Вы можете разговаривать с своими товарищами-генокрадами ночью."
+	desc = "Вы - член улья генокрадов. В течение ночи общайтесь с союзниками-генокрадами, чтобы скоординировать свои действия и убить всех, кто не является генокрадом."
 	team = MAFIA_TEAM_MAFIA
 	role_type = MAFIA_REGULAR
 	role_flags = ROLE_CAN_KILL
@@ -24,11 +24,11 @@
 	to_chat(body, "<b>Проголосуйте за того, кто будет убит сегодня ночью. Убийца будет выбран случайным образом из числа проголосовавших.</b>")
 
 /datum/mafia_role/mafia/thoughtfeeder
-	name = "Кормилец мыслей"
-	desc = "Вы - разновидность генокрадов, питающаяся воспоминаниями других людей. Используйте приставку ':j', чтобы разговаривать со своими собратьями и посещайте людей по ночам, чтобы узнать их роль."
+	name = "Thoughtfeeder"
+	desc = "Вы - разновидность генокрадов, питающийся воспоминаниями других людей. Общайтесь в период ночи, чтобы координировать свои действия с союзниками-генокрадами. \
+		и убейте всех, кто не является генокрадом, используя свою способность узнавать роли других."
 	role_type = MAFIA_SPECIAL
 	hud_icon = "hudthoughtfeeder"
-	revealed_icon = "thoughtfeeder"
 	winner_award = /datum/award/achievement/mafia/thoughtfeeder
 
 	role_unique_actions = list(/datum/mafia_ability/changeling_kill, /datum/mafia_ability/thoughtfeeder)

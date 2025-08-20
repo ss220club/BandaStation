@@ -11,7 +11,7 @@ const commandJobs = [
   JOBS_RU['Chief Engineer'],
   JOBS_RU['Research Director'],
   JOBS_RU['Chief Medical Officer'],
-  JOBS_RU['Quartermaster'],
+  JOBS_RU.Quartermaster,
 ];
 
 export const CrewManifest = (props) => {
@@ -24,7 +24,7 @@ export const CrewManifest = (props) => {
       <Window.Content scrollable>
         {Object.entries(manifest).map(([dept, crew]) => (
           <Section
-            className={'CrewManifest--' + dept}
+            className={`CrewManifest--${dept}`}
             key={dept}
             title={
               (DEPARTMENTS_RU[dept] || dept) +
@@ -58,8 +58,8 @@ export const CrewManifest = (props) => {
                         <Icon className="CrewManifest__Icon" name="infinity" />
                       </Tooltip>
                     )}
-                    {crewMember.trim === JOBS_RU['Captain'] && (
-                      <Tooltip content={JOBS_RU['Captain']} position="bottom">
+                    {crewMember.trim === JOBS_RU.Captain && (
+                      <Tooltip content={JOBS_RU.Captain} position="bottom">
                         <Icon
                           className={classes([
                             'CrewManifest__Icon',
