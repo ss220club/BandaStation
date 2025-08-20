@@ -1,3 +1,5 @@
 #include "_antagonists.dm"
 
 #include "code/ert.dm"
+#include "code/shadowlings/spieces.dm"
+#include "code/shadowlings/abilities/_spell.dm"
