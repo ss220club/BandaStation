@@ -446,7 +446,7 @@
 	job = /datum/job/chief_medical_officer
 	big_pointer = TRUE
 	pointer_color = COLOR_MEDICAL_BLUE
-	honorifics = list(", доктор наук", ", доктор медицин")
+	honorifics = list(", доктор наук", ", доктор медицины")
 	honorific_positions = HONORIFIC_POSITION_LAST_FULL | HONORIFIC_POSITION_NONE
 
 /datum/id_trim/job/clown
@@ -856,7 +856,7 @@
 		ACCESS_CMO,
 		)
 	job = /datum/job/paramedic
-	honorifics = list("СМП")
+	honorifics = list("Парамедик")
 	honorific_positions = HONORIFIC_POSITION_FIRST | HONORIFIC_POSITION_LAST | HONORIFIC_POSITION_FIRST_FULL | HONORIFIC_POSITION_NONE
 
 /datum/id_trim/job/prisoner

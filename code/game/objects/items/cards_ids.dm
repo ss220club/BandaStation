@@ -690,7 +690,7 @@
 		return FALSE
 	registered_account.adjust_money(cash_money, "Система: Вложение")
 	SSblackbox.record_feedback("amount", "credits_inserted", cash_money)
-	log_econ("[cash_money] кредитов вставлено в [declent_ru(ACCUSATIVE)] принадлежащий [src.registered_name]")
+	log_econ("[cash_money] credits were inserted into [src] owned by [src.registered_name]")
 	if(physical_currency)
 		to_chat(user, span_notice("Вы запихиваете [money.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]. Деньги исчезают в клубе блюспейс-дыма, пополняя счёт на [cash_money] кр."))
 	else
