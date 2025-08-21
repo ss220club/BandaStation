@@ -1,5 +1,3 @@
-#define SPECIES_SHADOWLING "shadow"
-
 /datum/species/shadow/shadowling
 	name = "Shadowling"
 	plural_form = "Shadowlings"

@@ -1,4 +1,16 @@
-#define ORGAN_SLOT_BRAIN_THRALL "brain_thrall_tumor"
+// Мозг шадоулинга: при установке/снятии — подключаем/отключаем от улья
+
+/obj/item/organ/brain/shadow/shadowling/Insert(mob/living/carbon/human/H, special = FALSE, drop_if_organ_full = TRUE)
+	. = ..()
+	if(!.) return
+	shadowling_join_hive(H)
+
+/obj/item/organ/brain/shadow/shadowling/Remove(mob/living/carbon/human/H, special = FALSE)
+	. = ..()
+	if(!.) return
+	shadowling_leave_hive(H)
+
+// Опухоль тралла: тоже член улья (получит язык и тралльские кнопки)
 
 /obj/item/organ/brain/shadow/tumor_thrall
 	name = "shadow thrall tumor"
@@ -10,21 +22,11 @@
 /obj/item/organ/brain/shadow/tumor_thrall/Insert(mob/living/carbon/human/H, special = FALSE, drop_if_organ_full = TRUE)
 	. = ..()
 	if(!.) return
-	// Выдать роль тралла/датум/компонент
-	H.AddComponent(/datum/component/shadow_thrall) // или ваш /datum/antagonist/shadowling_thrall
-	// Хайвмайнд :8
-	ADD_LANGUAGE(H, /datum/language_holder/hivemind8)
-	// Подсказка при examine в упор
-	H.AddComponent(/datum/component/close_examine_hint, "Their breath chills the air, and a strange shadow coils in their mouth.")
-	// Уведомить улей: +1 живой тралл
-	SEND_SIGNAL(GLOB.shadow_hive, COMSIG_SHADOW_HIVE_THRALL_STATE, H, TRUE)
+	shadowling_join_hive(H)
+	to_chat(H, span_danger("A frigid whisper coils in your mind... You are a thrall."))
 
 /obj/item/organ/brain/shadow/tumor_thrall/Remove(mob/living/carbon/human/H, special = FALSE)
 	. = ..()
 	if(!.) return
-	// Снять роль/язык/подсказку
-	H.RemoveComponent(/datum/component/shadow_thrall)
-	REMOVE_LANGUAGE(H, /datum/language_holder/hivemind8)
-	H.RemoveComponent(/datum/component/close_examine_hint)
-	// −1 живой тралл
-	SEND_SIGNAL(GLOB.shadow_hive, COMSIG_SHADOW_HIVE_THRALL_STATE, H, FALSE)
+	shadowling_leave_hive(H)
+	to_chat(H, span_notice("The chilling presence leaves your mind."))
