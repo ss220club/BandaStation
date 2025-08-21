@@ -98,11 +98,11 @@
 			// BANDASTATION ADDITION BEGIN - Expand instruments
 			/obj/item/instrument/soundhand_bass_guitar,
 			/obj/item/instrument/soundhand_rock_guitar,
-			/obj/structure/musician/drumskit,
+			/obj/item/instrument/drumskit_folded,
 			// BANDASTATION ADDITION END - Expand  instruments
 		)
-		for(var/obj/instrument_path as anything in possible_instruments) // BANDASTATION EDIT - Expand instruments (Allows any obj instead of instrument)
-			instruments[initial(instrument_path.name)] = instrument_path
+		for(var/obj/item/instrument/instrument as anything in possible_instruments)
+			instruments[initial(instrument.name)] = instrument
 	return instruments
 
 /obj/item/choice_beacon/ingredient
