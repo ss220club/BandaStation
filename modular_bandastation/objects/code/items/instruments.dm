@@ -1,4 +1,5 @@
 #define DRUMKIT_ANCHORED_LAYER 5
+
 /datum/instrument/guitar/soundhand_rock
 	name = "Soundhand Rock Guitar"
 	id = "cshrockgt"
