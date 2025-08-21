@@ -21,10 +21,19 @@
 
 	var/list/body_modifications = value
 	for(var/obj/item/bodypart/L in target.bodyparts)
-		if(	L.body_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+		if(L.body_zone in GLOB.limb_zones)
 			qdel(L)
 
 	target.regenerate_limbs()
+
+	var/datum/preferences/client_prefs = usr?.client?.prefs
+	if(client_prefs)
+		for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
+			if (preference.savefile_identifier != PREFERENCE_CHARACTER)
+				continue
+			if (preference.category != PREFERENCE_CATEGORY_SECONDARY_FEATURES)
+				continue
+			preference.apply_to_human(target, client_prefs.read_preference(preference.type))
 
 	for(var/key in body_modifications)
 		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
