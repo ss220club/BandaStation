@@ -24696,179 +24696,6 @@ accusative = "Нар'Си"
 instrumental = "Нар'Си"
 prepositional = "Нар'Си"
 
-# MARK: Areas
-
-## Cargo Areas
-
-["Delivery Office"]
-nominative = "офис доставки"
-genitive = "офиса доставки"
-dative = "офису доставки"
-accusative = "офис доставки"
-instrumental = "офисом доставки"
-prepositional = "офисе доставки"
-gender = "male"
-
-["Warehouse"]
-nominative = "склад"
-genitive = "склада"
-dative = "складу"
-accusative = "склад"
-instrumental = "складом"
-prepositional = "складе"
-gender = "male"
-
-["Drone Bay"]
-nominative = "отсек для дронов"
-genitive = "отсека для дронов"
-dative = "отсеку для дронов"
-accusative = "отсек для дронов"
-instrumental = "отсеком для дронов"
-prepositional = "отсеке для дронов"
-gender = "male"
-
-["Boutique"]
-nominative = "бутик"
-genitive = "бутика"
-dative = "бутику"
-accusative = "бутик"
-instrumental = "бутиком"
-prepositional = "бутике"
-gender = "male"
-
-["Upper Warehouse"]
-nominative = "верхний склад"
-genitive = "верхнего склада"
-dative = "верхнему складу"
-accusative = "верхний склад"
-instrumental = "верхним складом"
-prepositional = "верхнем складе"
-gender = "male"
-
-["Cargo Office"]
-nominative = "офис отдела снабжения"
-genitive = "офиса отдела снабжения"
-dative = "офису отдела снабжения"
-accusative = "офис отдела снабжения"
-instrumental = "офисом отдела снабжения"
-prepositional = "офисе отдела снабжения"
-gender = "male"
-
-["Lower Cargo Bay"]
-nominative = "нижний отсек отдела снабжения"
-genitive = "нижнего отсека отдела снабжения"
-dative = "нижнему отсеку отдела снабжения"
-accusative = "нижний отсек отдела снабжения"
-instrumental = "нижним отсеком отдела снабжения"
-prepositional = "нижнем отсеке отдела снабжения"
-gender = "male"
-
-["Cargo Break Room"]
-nominative = "комната отдыха отдела снабжения"
-genitive = "комнаты отдыха отдела снабжения"
-dative = "комнате отдыха отдела снабжения"
-accusative = "комнату отдыха отдела снабжения"
-instrumental = "комнатой отдыха отдела снабжения"
-prepositional = "комнате отдыха отдела снабжения"
-gender = "female"
-
-["Cargo Bay"]
-nominative = "грузовой отсек"
-genitive = "грузового отсека"
-dative = "грузовому отсеку"
-accusative = "грузовой отсек"
-instrumental = "грузовым отсеком"
-prepositional = "грузовом отсеке"
-gender = "male"
-
-["Cargo Lobby"]
-nominative = "лобби отдела снабжения"
-genitive = "лобби отдела снабжения"
-dative = "лобби отдела снабжения"
-accusative = "лобби отдела снабжения"
-instrumental = "лобби отдела снабжения"
-prepositional = "лобби отдела снабжения"
-
-["Mining Dock"]
-nominative = "шахтерский док"
-genitive = "шахтерского дока"
-dative = "шахтерскому доку"
-accusative = "шахтерский док"
-instrumental = "шахтерским доком"
-prepositional = "шахтерском доке"
-gender = "male"
-
-["Mining Cafeteria"]
-nominative = "шахтерский кафетерий"
-genitive = "шахтерского кафетерия"
-dative = "шахтерскому кафетерию"
-accusative = "шахтерский кафетерий"
-instrumental = "шахтерским кафетерием"
-prepositional = "шахтерском кафетерии"
-gender = "male"
-
-["Mining Ore Silo Storage"]
-nominative = "силосное хранилище шахтерской руды"
-genitive = "силосного хранилища шахтерской руды"
-dative = "силосному хранилищу шахтерской руды"
-accusative = "силосное хранилище шахтерской руды"
-instrumental = "силосним хранилищем шахтерской руды"
-prepositional = "силосном хранилище шахтерской руды"
-
-["Mining Office"]
-nominative = "шахтерский офис"
-genitive = "шахтерского офиса"
-dative = "шахтерскому офису"
-accusative = "шахтерский офис"
-instrumental = "шахтерским офисом"
-prepositional = "шахтерском офисе"
-gender = "male"
-
-["Mining Break Room"]
-nominative = "комната отдыха шахтеров"
-genitive = "комнаты отдыха щахтеров"
-dative = "комнате отдыха щахтерово"
-accusative = "комнату отдыха шахтеров"
-instrumental = "комнатой отдыха шахтеров"
-prepositional = "комнате отдыха шахтеров"
-gender = "male"
-
-["Bitrunning Den"]
-nominative = "битраннерская"
-genitive = "битраннерской"
-dative = "битраннерской"
-accusative = "битраннерскую"
-instrumental = "битраннерской"
-prepositional = "битраннерской"
-gender = "female"
-
-["Cargo Bay Lower Floor"]
-nominative = "нижний этаж грузового отсека"
-genitive = "нижнего этажа грузового отсека"
-dative = "нижнему этажу грузового отсека"
-accusative = "нижний этаж грузового отсека"
-instrumental = "нижним этажом грузового отсека"
-prepositional = "нижнем этаже грузового отсека"
-gender = "male"
-
-["Cargo Bay Depot Lower Floor"]
-nominative = "нижний этаж склада отдела снабжения"
-genitive = "нижнего этажа склада отдела снабжения"
-dative = "нижнему этажу склада отдела снабжения"
-accusative = "нижний этаж склада отдела снабжения"
-instrumental = "нижним этажом склада отдела снабжения"
-prepositional = "нижнем этаже склада отдела снабжения"
-gender = "male"
-
-["Quartermaster's Office"]
-nominative = "кабинет Квартирмейстера"
-genitive = "кабинета Квартирмейстера"
-dative = "кабинету Квартирмейстера"
-accusative = "кабинет Квартирмейстера"
-instrumental = "кабинетом Квартирмейстера"
-prepositional = "кабинете Квартирмейстера"
-gender = "male"
-
 ["raw bluespace core"]
 nominative = "сырое блюспейс ядро"
 genitive = "сырого блюспейс ядра"
@@ -25336,4 +25163,656 @@ dative = "подозрительному телефону"
 accusative = "подозрительный телефон"
 instrumental = "подозрительным телефоном"
 prepositional = "подозрительном телефоне"
+# MARK: Areas
+
+## Cargo Areas
+
+["Delivery Office"]
+nominative = "офис доставки"
+genitive = "офиса доставки"
+dative = "офису доставки"
+accusative = "офис доставки"
+instrumental = "офисом доставки"
+prepositional = "офисе доставки"
+gender = "male"
+
+["Warehouse"]
+nominative = "склад"
+genitive = "склада"
+dative = "складу"
+accusative = "склад"
+instrumental = "складом"
+prepositional = "складе"
+gender = "male"
+
+["Drone Bay"]
+nominative = "отсек для дронов"
+genitive = "отсека для дронов"
+dative = "отсеку для дронов"
+accusative = "отсек для дронов"
+instrumental = "отсеком для дронов"
+prepositional = "отсеке для дронов"
+gender = "male"
+
+["Boutique"]
+nominative = "бутик"
+genitive = "бутика"
+dative = "бутику"
+accusative = "бутик"
+instrumental = "бутиком"
+prepositional = "бутике"
+gender = "male"
+
+["Upper Warehouse"]
+nominative = "верхний склад"
+genitive = "верхнего склада"
+dative = "верхнему складу"
+accusative = "верхний склад"
+instrumental = "верхним складом"
+prepositional = "верхнем складе"
+gender = "male"
+
+["Cargo Office"]
+nominative = "офис отдела снабжения"
+genitive = "офиса отдела снабжения"
+dative = "офису отдела снабжения"
+accusative = "офис отдела снабжения"
+instrumental = "офисом отдела снабжения"
+prepositional = "офисе отдела снабжения"
+gender = "male"
+
+["Lower Cargo Bay"]
+nominative = "нижний отсек отдела снабжения"
+genitive = "нижнего отсека отдела снабжения"
+dative = "нижнему отсеку отдела снабжения"
+accusative = "нижний отсек отдела снабжения"
+instrumental = "нижним отсеком отдела снабжения"
+prepositional = "нижнем отсеке отдела снабжения"
+gender = "male"
+
+["Cargo Break Room"]
+nominative = "комната отдыха отдела снабжения"
+genitive = "комнаты отдыха отдела снабжения"
+dative = "комнате отдыха отдела снабжения"
+accusative = "комнату отдыха отдела снабжения"
+instrumental = "комнатой отдыха отдела снабжения"
+prepositional = "комнате отдыха отдела снабжения"
+gender = "female"
+
+["Cargo Bay"]
+nominative = "отдел снабжения"
+genitive = "отдела снабжения"
+dative = "отделу снабжения"
+accusative = "отдел снабжения"
+instrumental = "отделом снабжения"
+prepositional = "отделе снабжения"
+gender = "male"
+
+["Cargo Lobby"]
+nominative = "лобби отдела снабжения"
+genitive = "лобби отдела снабжения"
+dative = "лобби отдела снабжения"
+accusative = "лобби отдела снабжения"
+instrumental = "лобби отдела снабжения"
+prepositional = "лобби отдела снабжения"
+gender = "neuter"
+
+["Mining Dock"]
+nominative = "шахтерский док"
+genitive = "шахтерского дока"
+dative = "шахтерскому доку"
+accusative = "шахтерский док"
+instrumental = "шахтерским доком"
+prepositional = "шахтерском доке"
+gender = "male"
+
+["Mining Cafeteria"]
+nominative = "шахтерский кафетерий"
+genitive = "шахтерского кафетерия"
+dative = "шахтерскому кафетерию"
+accusative = "шахтерский кафетерий"
+instrumental = "шахтерским кафетерием"
+prepositional = "шахтерском кафетерии"
+gender = "male"
+
+["Mining Ore Silo Storage"]
+nominative = "силосное хранилище шахтерской руды"
+genitive = "силосного хранилища шахтерской руды"
+dative = "силосному хранилищу шахтерской руды"
+accusative = "силосное хранилище шахтерской руды"
+instrumental = "силосним хранилищем шахтерской руды"
+prepositional = "силосном хранилище шахтерской руды"
+gender = "neuter"
+
+["Mining Office"]
+nominative = "шахтерский офис"
+genitive = "шахтерского офиса"
+dative = "шахтерскому офису"
+accusative = "шахтерский офис"
+instrumental = "шахтерским офисом"
+prepositional = "шахтерском офисе"
+gender = "male"
+
+["Mining Break Room"]
+nominative = "комната отдыха шахтеров"
+genitive = "комнаты отдыха щахтеров"
+dative = "комнате отдыха щахтерово"
+accusative = "комнату отдыха шахтеров"
+instrumental = "комнатой отдыха шахтеров"
+prepositional = "комнате отдыха шахтеров"
+gender = "male"
+
+["Bitrunning Den"]
+nominative = "битраннерская"
+genitive = "битраннерской"
+dative = "битраннерской"
+accusative = "битраннерскую"
+instrumental = "битраннерской"
+prepositional = "битраннерской"
+gender = "female"
+
+["Cargo Bay Lower Floor"]
+nominative = "нижний этаж отдела снабжения"
+genitive = "нижнего этажа отдела снабжения"
+dative = "нижнему этажу отдела снабжения"
+accusative = "нижний этаж отдела снабжения"
+instrumental = "нижним этажом отдела снабжения"
+prepositional = "нижнем этаже отдела снабжения"
+gender = "male"
+
+["Cargo Bay Depot Lower Floor"]
+nominative = "нижний этаж склада отдела снабжения"
+genitive = "нижнего этажа склада отдела снабжения"
+dative = "нижнему этажу склада отдела снабжения"
+accusative = "нижний этаж склада отдела снабжения"
+instrumental = "нижним этажом склада отдела снабжения"
+prepositional = "нижнем этаже склада отдела снабжения"
+gender = "male"
+
+["Quartermaster's Office"]
+nominative = "кабинет Квартирмейстера"
+genitive = "кабинета Квартирмейстера"
+dative = "кабинету Квартирмейстера"
+accusative = "кабинет Квартирмейстера"
+instrumental = "кабинетом Квартирмейстера"
+prepositional = "кабинете Квартирмейстера"
+gender = "male"
+
+## Medical Areas
+
+["Abandoned Medbay"]
+nominative = "заброшенный медицинский отдел"
+genitive = "заброшенного медицинского отдела"
+dative = "заброшенному медицинскому отделу"
+accusative = "заброшенный медицинский отдел"
+instrumental = "заброшенным медицинским отделом"
+prepositional = "заброшенном медицинском отделе"
+gender = "male"
+
+["Medbay Central"]
+nominative = "центральный медицинский отдел"
+genitive = "центрального медицинского отдела"
+dative = "центральному медицинскому отделу"
+accusative = "центральный медицинский отдел"
+instrumental = "центральным медицинским отделом"
+prepositional = "центральном медицинском отделе"
+gender = "male"
+
+["Lower Medbay"]
+nominative = "нижний медицинский отдел"
+genitive = "нижнего медицинского отдела"
+dative = "нижнему медицинскому отделу"
+accusative = "нижний медицинский отдел"
+instrumental = "нижним медицинским отделом"
+prepositional = "нижнем медицинском отделе"
+gender = "male"
+
+["Medbay Lobby"]
+nominative = "лобби медицинского отдела"
+genitive = "лобби медицинского отдела"
+dative = "лобби медицинского отдела"
+accusative = "лобби медицинского отдела"
+instrumental = "лобби медицинского отдела"
+prepositional = "лобби медицинского отдела"
+gender = "neuter"
+
+["Medbay Aft"]
+nominative = "южный медицинский отдел"
+genitive = "южного медицинского отдела"
+dative = "южному медицинскому отделу"
+accusative = "южный медицинский отдел"
+instrumental = "южным медицинским отделом"
+prepositional = "южном медицинском отделе"
+gender = "male"
+
+["Medbay Storage"]
+nominative = "склад медицинского отдела"
+genitive = "склада медицинского отдела"
+dative = "складу медицинского отдела"
+accusative = "склад медицинского отдела"
+instrumental = "складом медицинского отдела"
+prepositional = "складе медицинского отдела"
+gender = "male"
+
+["Paramedic Dispatch"]
+nominative = "диспетчерская парамедика"
+genitive = "диспетчерской парамедика"
+dative = "диспетчерской парамедика"
+accusative = "диспетчерскую парамедика"
+instrumental = "диспетчерской парамедика"
+prepositional = "диспетчерской парамедика"
+gender = "female"
+
+["Medical Office"]
+nominative = "медицинский офис"
+genitive = "медицинского офиса"
+dative = "медицинскому офису"
+accusative = "медицинский офис"
+instrumental = "медицинским офисом"
+prepositional = "медицинском офисе"
+gender = "male"
+
+["Medical Break Room"]
+nominative = "комната отдыха медицинского отдела"
+genitive = "комнаты отдыха медицинского отдела"
+dative = "комнате отдыха медицинского отдела"
+accusative = "комнату отдыха медицинского отдела"
+instrumental = "комнатой отдыха медицинского отдела"
+prepositional = "комнате отдыха медицинского отдела"
+gender = "female"
+
+["Medical Cold Room"]
+nominative = "морозильная камера медицинского отдела"
+genitive = "морозильной камеры медицинского отдела"
+dative = "морозильной камере медицинского отдела"
+accusative = "морозильную камеру медицинского отдела"
+instrumental = "морозильной камерой медицинского отдела"
+prepositional = "морозильной камере медицинского отдела"
+gender = "female"
+
+["Patients' Rooms"]
+nominative = "палаты пациентов"
+genitive = "палат пациентов"
+dative = "палатам пациентов"
+accusative = "палаты ациентов"
+instrumental = "палатами пациентов"
+prepositional = "палатах пациентов"
+
+["Patient Room A"]
+nominative = "первая палата пациента"
+genitive = "первой палаты пациента"
+dative = "первой палате пациента"
+accusative = "первую палату пациента"
+instrumental = "первой палатой пациента"
+prepositional = "первой палате пациента"
+gender = "female"
+
+["Patient Room B"]
+nominative = "вторая палата пациента"
+genitive = "второй палаты пациента"
+dative = "второй палате пациента"
+accusative = "вторую палату пациента"
+instrumental = "второй палатой пациента"
+prepositional = "второй палате пациента"
+gender = "female"
+
+["Virology"]
+nominative = "вирусология"
+genitive = "вирусологии"
+dative = "вирусологии"
+accusative = "вирусологию"
+instrumental = "вирусологией"
+prepositional = "вирусологии"
+gender = "female"
+
+["Morgue"]
+nominative = "морг"
+genitive = "морга"
+dative = "моргу"
+accusative = "морг"
+instrumental = "моргом"
+prepositional = "морге"
+gender = "male"
+
+["Chemistry"]
+nominative = "химическая лаборатория"
+genitive = "химической лаборатории"
+dative = "химической лаборатории"
+accusative = "химическую лабораторию"
+instrumental = "химической лабораторией"
+prepositional = "химической лаборатории"
+gender = "female"
+
+["Chemistry Lower Floor"]
+nominative = "нижний этаж химической лаборатории"
+genitive = "нижнего этажа химической лаборатории"
+dative = "нижнему этажу химической лаборатории"
+accusative = "нижний этаж химической лаборатории"
+instrumental = "нижним этажом химической лаборатории"
+prepositional = "нижнем этаже химической лаборатории"
+gender = "female"
+
+["Pharmacy"]
+nominative = "аптека"
+genitive = "аптеки"
+dative = "аптеке"
+accusative = "аптеку"
+instrumental = "аптекой"
+prepositional = "аптеке"
+gender = "female"
+
+["Chemical Storage"]
+nominative = "склад химикатов"
+genitive = "склада химикатов"
+dative = "складу химикатов"
+accusative = "склад химикатов"
+instrumental = "складом химикатов"
+prepositional = "складе химикатов"
+gender = "male"
+
+["Operating Room"]
+nominative = "операционная"
+genitive = "операционной"
+dative = "операционной"
+accusative = "операционную"
+instrumental = "операционной"
+prepositional = "операционной"
+gender = "female"
+
+["Fore Operating Room"]
+nominative = "северная операционная"
+genitive = "северной операционной"
+dative = "северной операционной"
+accusative = "северную операционную"
+instrumental = "северной операционной"
+prepositional = "северной операционной"
+gender = "female"
+
+["Aft Operating Room"]
+nominative = "южная операционная"
+genitive = "южной операционной"
+dative = "южной операционной"
+accusative = "южную операционную"
+instrumental = "южной операционной"
+prepositional = "южной операционной"
+gender = "female"
+
+["Grand Surgery Theatre"]
+nominative = "главный операционный зал"
+genitive = "главного операционного зала"
+dative = "главному операционному залу"
+accusative = "главный операционный зал"
+instrumental = "главным оперативным залом"
+prepositional = "главном операционном зале"
+gender = "male"
+
+["Cryogenics"]
+nominative = "криогеника"
+genitive = "криогеники"
+dative = "криогенике"
+accusative = "криогенику"
+instrumental = "криогеникой"
+prepositional = "криогенике"
+gender = "female"
+
+["Medbay Treatment Center"]
+nominative = "лечебный центр медицинского отдела"
+genitive = "лечебного центра медицинского отдела"
+dative = "лечебному центру медицинского отдела"
+accusative = "лечебный центр медицинского отдела"
+instrumental = "лечебным центром медицинского отдела"
+prepositional = "лечебном центре медицинского отдела"
+gender = "male"
+
+["Psychology Office"]
+nominative = "кабинет психолога"
+genitive = "кабинета психолога"
+dative = "кабинету психолога"
+accusative = "кабинет психолога"
+instrumental = "кабинетом психолога"
+prepositional = "кабинете психолога"
+gender = "male"
+
+["Chief Medical Officer's Office"]
+nominative = "кабинет главного врача"
+genitive = "кабинета главного врача"
+dative = "кабинету главного врача"
+accusative = "кабинет главного врача"
+instrumental = "кабинетом главного врача"
+prepositional = "кабинете главного врача"
+gender = "male"
+
+## Science Areas
+
+["Science Division"]
+nominative = "научный отдел"
+genitive = "научного отдела"
+dative = "научному отделу"
+accusative = "научный отдел"
+instrumental = "научным отделом"
+prepositional = "научном отделе"
+gender = "male"
+
+["Science Lobby"]
+nominative = "лобби научного отдела"
+genitive = "лобби научного отдела"
+dative = "лобби научного отдела"
+accusative = "лобби научного отдела"
+instrumental = "лобби научного отдела"
+prepositional = "лобби научного отдела"
+gender = "neuter"
+
+["Lower Science Division"]
+nominative = "нижний научный отдел"
+genitive = "нижнего научного отдела"
+dative = "нижнему научному отделу"
+accusative = "нижний научный отдел"
+instrumental = "нижним научным отделом"
+prepositional = "нижнем научном отделе"
+gender = "male"
+
+["Science Break Room"]
+nominative = "комната отдыха научного отдела"
+genitive = "комнаты отдыха научного отдела"
+dative = "комнате отдыха научного отдела"
+accusative = "комнату отдыха научного отдела"
+instrumental = "комнатой отдыха научного отдела"
+prepositional = "комнате отдыха научного отдела"
+gender = "female"
+
+["Research and Development"]
+nominative = "отдел исследования и разработки"
+genitive = "отдела исследования и разработки"
+dative = "отделу исследования и разработки"
+accusative = "отдел исследования и разработки"
+instrumental = "отделом исследования и разработки"
+prepositional = "отделе исследования и разработки"
+gender = "male"
+
+["Xenobiology Lab"]
+nominative = "лаборатория ксенобиологии"
+genitive = "лаборатории ксенобиологии"
+dative = "лаборатории ксенобиологии"
+accusative = "лабораторию ксенобиологии"
+instrumental = "лабораторией ксенобиологии"
+prepositional = "лаборатории ксенобиологии"
+gender = "female"
+
+["Xenobiology Hallway"]
+nominative = "коридор ксенобиологии"
+genitive = "коридора ксенобиологии"
+dative = "коридору ксенобиологии"
+accusative = "коридор ксенобиологии"
+instrumental = "коридором ксенобиологии"
+prepositional = "коридоре ксенобиологии"
+gender = "male"
+
+["Cytology Lab"]
+nominative = "лаборатория цитологии"
+genitive = "лаборатории цитологии"
+dative = "лаборатории цитологии"
+accusative = "лабораторию цитологии"
+instrumental = "лабораторией цитологии"
+prepositional = "лаборатории цитологии"
+gender = "female"
+
+["Genetics Lab"]
+nominative = "лаборатория генетики"
+genitive = "лаборатории генетики"
+dative = "лаборатории генетики"
+accusative = "лабораторию генетики"
+instrumental = "лабораторией генетики"
+prepositional = "лаборатории генетики"
+gender = "female"
+
+["Research Division Server Room"]
+nominative = "серверная комната исследовательского отдела"
+genitive = "серверной комнаты исследовательского отдела"
+dative = "серверной комнате исследовательского отдела"
+accusative = "серверную комнату исследовательского отдела"
+instrumental = "серверной комнатой исследовательского отдела"
+prepositional = "серверной комнате исследовательского отдела"
+gender = "female"
+
+["Circuit Lab"]
+nominative = "лаборатория интегральных схем"
+genitive = "лаборатории интегральных схем"
+dative = "лаборатории интегральных схем"
+accusative = "лабораторию интегральных схем"
+instrumental = "лабораторией интегральных схем"
+prepositional = "лаборатории интегральных схем"
+gender = "female"
+
+["Experimentation Lab"]
+nominative = "лаборатория экспериментов"
+genitive = "лаборатории экспериментов"
+dative = "лаборатории экспериментов"
+accusative = "лабораторию экспериментов"
+instrumental = "лабораторией экспериментов"
+prepositional = "лаборатории экспериментов"
+gender = "female"
+
+["Research Firing Range"]
+nominative = "исследовательский стрелковый полигон"
+genitive = "исследовательского стрелкового полигона"
+dative = "исследовательскому стрелковому полигону"
+accusative = "исследовательский стрелковый полигон"
+instrumental = "исследовательским стрелковым полигоном"
+prepositional = "исследовательском стрелковом полигоне"
+gender = "male"
+
+["Robotics"]
+nominative = "робототехника"
+genitive = "робототехники"
+dative = "робототехнике"
+accusative = "робототехнику"
+instrumental = "робототехникой"
+prepositional = "робототехнике"
+gender = "female"
+
+["Mech Bay"]
+nominative = "мехдок"
+genitive = "мехдока"
+dative = "мехдоку"
+accusative = "мехдок"
+instrumental = "мехдоком"
+prepositional = "мехдоке"
+gender = "male"
+
+["Robotics Lab"]
+nominative = "лаборатория робототехники"
+genitive = "лаборатории робототехники"
+dative = "лаборатории робототехники"
+accusative = "лабораторию робототехники"
+instrumental = "лабораторией робототехники"
+prepositional = "лаборатории робототехники"
+gender = "female"
+
+["Research Division"]
+nominative = "исследовательский отдел"
+genitive = "исследовательского отдела"
+dative = "исследовательскому отделу"
+accusative = "исследовательский отдел"
+instrumental = "исследовательским отделом"
+prepositional = "исследовательском отделе"
+gender = "male"
+
+["Abandoned Research Lab"]
+nominative = "заброшенная исследовательская лаборатория"
+genitive = "заброшенной исследовательской лаборатории"
+dative = "заброшенной исследовательской лаборатории"
+accusative = "заброшенную исследовательскую лабораторию"
+instrumental = "заброшенной исследовательской лабораторией"
+prepositional = "заброшенной исследовательской лаборатории"
+gender = "female"
+
+["Ordnance Lab"]
+nominative = "лаборатория токсинов"
+genitive = "лаборатории токсинов"
+dative = "лаборатории токсинов"
+accusative = "лабораторию токсинов"
+instrumental = "лабораторией токсинов"
+prepositional = "лаборатории токсинов"
+gender = "female"
+
+["Ordnance Office"]
+nominative = "офис токсинов"
+genitive = "офиса токсинов"
+dative = "офису токсинов"
+accusative = "офис токсинов"
+instrumental = "офисом токсинов"
+prepositional = "офисе токсинов"
+gender = "male"
+
+["Ordnance Storage"]
+nominative = "склад токсинов"
+genitive = "склада токсинов"
+dative = "складу токсинов"
+accusative = "склад токсинов"
+instrumental = "складом токсинов"
+prepositional = "складе токсинов"
+gender = "male"
+
+["Ordnance Burn Chamber"]
+nominative = "камера сгорания токсинов"
+genitive = "камеры сгорания токсинов"
+dative = "камере сгорания токсинов"
+accusative = "камеру сгорания токсинов"
+instrumental = "камерой сгорания токсинов"
+prepositional = "камере сгорания токсинов"
+gender = "female"
+
+["Ordnance Freezer Chamber"]
+nominative = "морозильная камера токсинов"
+genitive = "морозильной камеры токсинов"
+dative = "морозильной камере токсинов"
+accusative = "морозильную камеру токсинов"
+instrumental = "морозильной камерой токсинов"
+prepositional = "морозильной камере токсинов"
+gender = "female"
+
+["Ordnance Testing Lab"]
+nominative = "лаборатория по испытанию токсинов"
+genitive = "лаборатории по испытанию токсинов"
+dative = "лаборатории по испытанию токсинов"
+accusative = "лабораторию по испытанию токсинов"
+instrumental = "лабораторией по испытанию токсинов"
+prepositional = "лаборатории по испытанию токсинов"
+gender = "female"
+
+["Ordnance Bomb Site"]
+nominative = "полигон токсинов"
+genitive = "места взрыва токсинов"
+dative = "месту взрыва токсинов"
+accusative = "место взрыва токсинов"
+instrumental = "местом взрыва токсинов"
+prepositional = "месте взрыва токсинов"
+
+["Research Director's Office"]
+nominative = "кабинет директора исследований"
+genitive = "кабинета директора исследований"
+dative = "кабинету директора исследований"
+accusative = "кабинет директора исследований"
+instrumental = "кабинетом директора исследований"
+prepositional = "кабинете директора исследований"
 gender = "male"
