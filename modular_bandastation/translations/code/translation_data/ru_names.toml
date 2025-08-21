@@ -26175,12 +26175,12 @@ prepositional = "офисе частного детектива"
 gender = "male"
 
 ["Firing Range"]
-nominative = "стрельбище"
-genitive = "стрельбища"
-dative = "стрельбищу"
-accusative = "стрельбище"
-instrumental = "стрельбищем"
-prepositional = "стрельбище"
+nominative = "стрельбище брига"
+genitive = "стрельбища брига"
+dative = "стрельбищу брига"
+accusative = "стрельбище брига"
+instrumental = "стрельбищем брига"
+prepositional = "стрельбище брига"
 gender = "neuter"
 
 ["Transfer Centre"]
