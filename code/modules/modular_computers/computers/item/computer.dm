@@ -386,7 +386,7 @@
 
 	if(!silent && !isnull(user))
 		to_chat(user, span_notice("Вы вытаскиваете [lost_id] со слота карты."))
-		balloon_alert(user, "ID извлечён")
+		balloon_alert(user, "извлечён ID")
 	playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
 
 	if(ishuman(loc))
