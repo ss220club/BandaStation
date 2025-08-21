@@ -132,7 +132,7 @@
 		return
 
 	if(!attached_circuit)
-		examine_text += span_notice("There is no integrated circuit attached.")
+		examine_text += span_notice("Нет прикреплённой интегральной платы.")
 		return
 
 	examine_text += span_notice("There is an integrated circuit attached. Use a multitool to access the wiring. Use a screwdriver to remove it from [source].")
