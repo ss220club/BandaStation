@@ -320,7 +320,7 @@ effective or pretty fucking useless.
         if(IN_GIVEN_RANGE(source, jammer, jammer.range))
             //BANDASTATION EDIT: Check for nt jammer
             if(istype(jammer, /obj/item/jammer/nt))
-                return FALSE
+                continue
             return TRUE
     return FALSE
 

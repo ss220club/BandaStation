@@ -1,6 +1,6 @@
 /proc/is_within_nt_radio_jammer_range(atom/source)
-    for (var/obj/item/jammer/nt as anything in GLOB.active_jammers)
-        if (nt.active && IN_GIVEN_RANGE(source, nt, nt.range))
+    for(var/obj/item/jammer/nt/jammer as anything in GLOB.active_jammers)
+        if(IN_GIVEN_RANGE(source, jammer, jammer.range))
             return TRUE
     return FALSE
 
