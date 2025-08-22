@@ -2008,7 +2008,7 @@
 /obj/docking_port/stationary{
 	area_type = /area/centcom/syndicate_base/elite_squad;
 	height = 5;
-	name = "syndicate recon outpost";
+	name = "Syndicate Strike Team Dock";
 	roundstart_template = /datum/map_template/shuttle/sst/basic;
 	shuttle_id = "syndicate_sst";
 	width = 11;
@@ -2524,7 +2524,7 @@
 /obj/docking_port/stationary{
 	area_type = /area/centcom/syndicate_base/infteam;
 	height = 5;
-	name = "syndicate recon outpost";
+	name = "Syndicate Infiltrators Dock";
 	roundstart_template = /datum/map_template/shuttle/sit/basic;
 	shuttle_id = "syndicate_sit";
 	width = 11;
@@ -4645,7 +4645,7 @@
 /obj/docking_port/stationary{
 	area_type = /area/centcom/syndicate_base;
 	height = 22;
-	name = "syndicate recon outpost";
+	name = "Syndicate Mothership Dock";
 	roundstart_template = /datum/map_template/shuttle/infiltrator/basic;
 	shuttle_id = "syndicate_away";
 	width = 18;
@@ -8826,7 +8826,7 @@
 	dir = 2;
 	dwidth = 3;
 	height = 7;
-	name = "escape pod loader";
+	name = "Syndicate Assault Pod Dock";
 	roundstart_template = /datum/map_template/shuttle/assault_pod/default;
 	width = 7
 	},
