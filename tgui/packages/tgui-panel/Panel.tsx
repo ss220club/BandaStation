@@ -46,7 +46,7 @@ export const Panel = (props) => {
                 <Button
                   color="grey"
                   selected={emotes.visible}
-                  icon="asterisk"
+                  icon="face-grin-beam"
                   tooltip="Emote Panel"
                   tooltipPosition="bottom-start"
                   onClick={() => emotes.toggle()}

@@ -32,15 +32,13 @@ export const EmotePanel = (props, context) => {
   }
 
   const emoteCreate = () => Byond.sendMessage('emotes/create');
-
   const emoteExecute = (name) => Byond.sendMessage('emotes/execute', { name });
-
   const emoteContextAction = (name) =>
     Byond.sendMessage('emotes/contextAction', { name });
 
   return (
     <Section>
-      <Flex align="center" style={{ 'flex-wrap': 'wrap' }}>
+      <Stack wrap align="center">
         {emoteList
           .sort((a, b) => {
             return a.name.localeCompare(b.name);
@@ -65,24 +63,25 @@ export const EmotePanel = (props, context) => {
                 break;
             }
             return (
-              <Flex.Item mx={0.5} mt={1} key={emote.name}>
+              <Stack.Item key={emote.name}>
                 <Button
-                  content={emote.name}
+                  color={color}
+                  tooltip={tooltip}
                   onClick={() => emoteExecute(emote.name)}
                   onContextMenu={(e) => {
                     e.preventDefault();
                     emoteContextAction(emote.name);
                   }}
-                  tooltip={tooltip}
-                  color={color}
-                />
-              </Flex.Item>
+               >
+                 {emote.name}
+                </Button>
+              </Stack.Item>
             );
           })}
-        <Flex.Item mx={0.5} mt={1}>
+        <Stack.Item>
           <Button icon="plus" color="green" onClick={() => emoteCreate()} />
-        </Flex.Item>
-      </Flex>
+        </Stack.Item>
+      </Stack>
     </Section>
   );
 };
