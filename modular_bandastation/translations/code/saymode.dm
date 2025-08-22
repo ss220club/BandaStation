@@ -1,14 +1,14 @@
-/datum/saymode/changeling/russian
+/datum/saymode/changeling/handle_message/russian
 	key = "п"
 
-/datum/saymode/xeno/russian
+/datum/saymode/xeno/handle_message/russian
 	key = "ф"
 
-/datum/saymode/vocalcords/russian
+/datum/saymode/vocalcords/handle_message/russian
 	key = "ч"
 
-/datum/saymode/binary/russian
+/datum/saymode/binary/handle_message/russian
 	key = "и"
 
-/datum/saymode/holopad/russian
+/datum/saymode/holopad/handle_message/russian
 	key = "р"
