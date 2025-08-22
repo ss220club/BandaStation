@@ -41,15 +41,18 @@
 
 // russian emotes only in GLOB.emote_list
 /datum/tgui_panel/proc/populate_all_emotes_list()
-	if(all_emotes.len)
+	if(length(all_emotes))
 		return
 	for(var/emote_key as anything in GLOB.emote_list)
 		var/list/emote_list = GLOB.emote_list[emote_key]
 		for(var/datum/emote/emote in emote_list)
 			if(is_type_in_list(emote, blacklisted_emote_types))
 				continue
-			if(emote_key == emote.key)
-				all_emotes += emote
+
+			if(emote_key != emote.key)
+				continue
+				
+			all_emotes += emote
 
 /datum/tgui_panel/New(client/client, id)
 	. = ..()
@@ -68,7 +71,7 @@
 		return
 
 
-	switch (type)
+	switch(type)
 		if("emotes/execute")
 			if(!islist(payload))
 				return
@@ -80,15 +83,16 @@
 			if(isnull(client.prefs.custom_emote_panel[emote_name]))
 				to_chat(client, span_warning("Эмоции [emote_name] нет в вашей панели!"))
 				return FALSE
+				
 			if(isnull(client.prefs.custom_emote_panel[emote_name]["type"]))
 				to_chat(client, span_warning("Эмоция [emote_name] не имеет типа!"))
 				return FALSE
+				
 			var/emote_type = client.prefs.custom_emote_panel[emote_name]["type"]
-
 			if(!isliving(client.mob))
 				return TRUE
+				
 			var/mob/living/living = client.mob
-
 			switch (emote_type)
 				if(TGUI_PANEL_EMOTE_TYPE_DEFAULT)
 					var/emote_key = client.prefs.custom_emote_panel[emote_name]["key"]
@@ -99,6 +103,7 @@
 					if(living.next_sound_emote >= world.time)
 						to_chat(living, span_warning("Не так быстро!"))
 						return TRUE
+						
 					var/emote_key = client.prefs.custom_emote_panel[emote_name]["key"]
 					var/message_override = client.prefs.custom_emote_panel[emote_name]["message_override"]
 					living.emote(emote_key, intentional = TRUE, message_override = message_override)
@@ -108,6 +113,7 @@
 					if(living.next_sound_emote >= world.time)
 						to_chat(living, span_warning("Не так быстро!"))
 						return TRUE
+
 					var/message = client.prefs.custom_emote_panel[emote_name]["message"]
 					living.emote("me", intentional = TRUE, message = message)
 					handle_panel_cooldown(living, message)
@@ -120,7 +126,6 @@
 				return
 
 			var/list/emote = list()
-
 			var/emote_type_string = tgui_alert(client.mob, "Какую эмоцию добавить в панель?", "Выбор типа эмоции", list("Обычная", "С кастомным текстом", "*me"))
 			if(!emote_type_string)
 				to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
@@ -184,6 +189,7 @@
 			if(!emote_name)
 				to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 				return
+
 			if(emote_name in client.prefs.custom_emote_panel)
 				to_chat(client, span_warning("Эмоция \"[emote_name]\" уже существует!"))
 				return
@@ -205,8 +211,8 @@
 			if(isnull(client.prefs.custom_emote_panel[emote_name]))
 				to_chat(client, span_warning("Эмоции [emote_name] нет в вашей панели!"))
 				return FALSE
-			var/emote_type = client.prefs.custom_emote_panel[emote_name]["type"] ? client.prefs.custom_emote_panel[emote_name]["type"] : TGUI_PANEL_EMOTE_TYPE_UNKNOWN
 
+			var/emote_type = client.prefs.custom_emote_panel[emote_name]["type"] ? client.prefs.custom_emote_panel[emote_name]["type"] : TGUI_PANEL_EMOTE_TYPE_UNKNOWN
 			var/list/actions = list()
 			switch (emote_type)
 				if(TGUI_PANEL_EMOTE_TYPE_DEFAULT)
@@ -217,6 +223,7 @@
 
 				if(TGUI_PANEL_EMOTE_TYPE_ME)
 					actions.Add(list(RENAME_EMOTE, CHANGE_EMOTE_TEXT, DELETE_EMOTE))
+
 				if(TGUI_PANEL_EMOTE_TYPE_UNKNOWN)
 					to_chat(client, span_warning("Эмоция не имеет типа, поэтому её можно только удалить."))
 					actions.Add(list(DELETE_EMOTE))
@@ -311,6 +318,7 @@
 	var/message_override = tgui_input_text(client.mob, "Выберите новый кастомный текст для эмоции [emote_name]:", "Кастомный текст", old_message, TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 	if(!message_override)
 		return FALSE
+
 	if(emote_type == TGUI_PANEL_EMOTE_TYPE_CUSTOM)
 		client.prefs.custom_emote_panel[emote_name]["message_override"] = message_override
 	else
