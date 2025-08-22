@@ -817,7 +817,7 @@
 	if(amount_paid)
 		var/message = span_notice("Вы заплатили [amount_to_pay] кредитов из [prev_debt] вашего долга. Осталось выплатить [registered_account.account_debt] кр.")
 		if(!registered_account.account_debt)
-			message = span_nicegreen("Вы заплатили последние [amount_to_pay] кр. из вашего долга, погасив его. Поздравляю!")
+			message = span_nicegreen("Вы заплатили последние [amount_to_pay] кр. из вашего долга, погасив его. Поздравляем!")
 		to_chat(user, message)
 
 /obj/item/card/id/examine(mob/user)
@@ -916,9 +916,9 @@
 	var/name_string
 	if(registered_name)
 		if(trim && (honorific_position & ~HONORIFIC_POSITION_NONE))
-			name_string = "ID-карта \"[update_honorific()]\""
+			name_string = "ID-карта «[update_honorific()]»"
 		else
-			name_string = "ID-карта \"[registered_name]\""
+			name_string = "ID-карта «[registered_name]»"
 	else
 		name_string = initial(name)
 
@@ -1031,17 +1031,17 @@
 
 /obj/item/card/id/away/old/sec
 	name = "Charlie Station Security Officer's ID card"
-	desc = "Выцветшее ID сотрудника станции 'Чарли'. Вы можете разглядеть должность \"Офицер\"."
+	desc = "Выцветшее ID сотрудника станции «Чарли». Вы можете разглядеть должность «Офицер»."
 	trim = /datum/id_trim/away/old/sec
 
 /obj/item/card/id/away/old/sci
 	name = "Charlie Station Scientist's ID card"
-	desc = "Выцветшее ID сотрудника станции 'Чарли'. Вы можете разглядеть должность \"Учёный\"."
+	desc = "Выцветшее ID сотрудника станции «Чарли». Вы можете разглядеть должность «Учёный»."
 	trim = /datum/id_trim/away/old/sci
 
 /obj/item/card/id/away/old/eng
 	name = "Charlie Station Engineer's ID card"
-	desc = "Выцветшее ID сотрудника станции 'Чарли'. Вы можете разглядеть должность \"Станционный инженер\"."
+	desc = "Выцветшее ID сотрудника станции «Чарли». Вы можете разглядеть должность «Станционный инженер»."
 	trim = /datum/id_trim/away/old/eng
 
 /obj/item/card/id/away/old/equipment
@@ -1390,7 +1390,7 @@
 
 /obj/item/card/id/advanced/black
 	name = "black identification card"
-	desc = "Эта карта говорит вам лишь одно. Человек, держащий эту карту - настоящий крутой."
+	desc = "Эта карта говорит вам лишь одно. Человек, держащий эту карту - по-настоящему крутой."
 	icon_state = "card_black"
 	assigned_icon_state = "assigned_syndicate"
 	wildcard_slots = WILDCARD_LIMIT_GOLD
@@ -1542,7 +1542,7 @@
 		if(time_to_assign > 0)
 			. += span_notice("Цифровой таймер на карте установлен на [DisplayTimeText(time_to_assign * 10)]. Таймер запустится, когда заключённый пройдёт через сканеры тюремных ворот.")
 		else if(time_left <= 0)
-			. += span_notice("На цифровом таймере карты осталось ноль секунд. Вы выходите изменённым человеком, но свободным человеком.")
+			. += span_notice("На цифровом таймере карты осталось ноль секунд. Вы выходите другим, но свободным человеком.")
 		else
 			. += span_notice("На цифровом таймере карты осталось [DisplayTimeText(time_left * 10)]. Не совершай преступление, если не можешь отбыть срок.")
 
@@ -1558,7 +1558,7 @@
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/card/id/advanced/prisoner/attack_self(mob/user)
-	to_chat(usr, span_notice("Вы набрали [points] из числа [goal] очков, необходимых вам для обретения свободы."))
+	to_chat(usr, span_notice("Вы набрали [points] из [goal] очков, необходимых вам, для обретения свободы."))
 
 /obj/item/card/id/advanced/prisoner/one
 	name = "Prisoner #13-001"
@@ -1828,17 +1828,17 @@
 				return TRUE
 
 			if(!(access_type in target_card.access))
-				to_chat(usr, span_notice("ошибка ID: ID-карта отклонила вашу попытку изменить доступ."))
+				to_chat(usr, span_notice("Ошибка ID: ID-карта отклонила вашу попытку изменить доступ."))
 				LOG_ID_ACCESS_CHANGE(usr, src, "failed to add [SSid_access.get_access_desc(access_type)][try_wildcard ? " with wildcard [try_wildcard]" : ""]")
 				return TRUE
 
 			if(!can_add_wildcards(list(access_type), try_wildcard))
-				to_chat(usr, span_notice("ошибка ID: ID-карта отклонила вашу попытку изменить доступ."))
+				to_chat(usr, span_notice("Ошибка ID: ID-карта отклонила вашу попытку изменить доступ."))
 				LOG_ID_ACCESS_CHANGE(usr, src, "failed to add [SSid_access.get_access_desc(access_type)][try_wildcard ? " with wildcard [try_wildcard]" : ""]")
 				return TRUE
 
 			if(!add_access(list(access_type), try_wildcard))
-				to_chat(usr, span_notice("ошибка ID: ID-карта отклонила вашу попытку изменить доступ."))
+				to_chat(usr, span_notice("Ошибка ID: ID-карта отклонила вашу попытку изменить доступ."))
 				LOG_ID_ACCESS_CHANGE(usr, src, "failed to add [SSid_access.get_access_desc(access_type)][try_wildcard ? " with wildcard [try_wildcard]" : ""]")
 				return TRUE
 
@@ -1901,7 +1901,7 @@
 			if(trim && trim.trim_state && trim.assignment)
 				var/fake_trim_name = "[trim.assignment] ([trim.trim_state])"
 				trim_list[fake_trim_name] = trim_path
-		selected_trim_path = tgui_input_list(user, "Выберите оформление для применения к вашей карте.\nПримечание: Это не предоставит никаких доступов оформления.", "Подделка оформления", sort_list(trim_list, GLOBAL_PROC_REF(cmp_typepaths_asc)))
+		selected_trim_path = tgui_input_list(user, "Выберите оформление для применения к вашей карте.\nПримечание: Это не предоставит никаких уровней доступа.", "Подделка оформления", sort_list(trim_list, GLOBAL_PROC_REF(cmp_typepaths_asc)))
 		if(!after_input_check(user))
 			return TRUE
 
@@ -2115,7 +2115,7 @@
 					if(trim?.trim_state && trim.assignment)
 						possible_trims |= replacetext(trim.trim_state, "trim_", "")
 				sortTim(possible_trims, GLOBAL_PROC_REF(cmp_typepaths_asc))
-			var/input_trim = tgui_input_list(user, "Выберите оформление для применения к вашей карте.\nПримечание: Это не предоставит никаких доступов оформления.", "Сброс оформления", possible_trims)
+			var/input_trim = tgui_input_list(user, "Выберите оформление для применения к вашей карте.\nПримечание: Это не предоставит никаких уровней доступа.", "Сброс оформления", possible_trims)
 			if(!input_trim || !after_input_check(user, item, input_trim, scribbled_trim))
 				return
 			playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)

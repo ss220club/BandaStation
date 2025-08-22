@@ -29,7 +29,7 @@
 
 /obj/item/holochip/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	if(istype(held_item, /obj/item/holochip))
-		context[SCREENTIP_CONTEXT_LMB] = "Слить в"
+		context[SCREENTIP_CONTEXT_LMB] = "Объединить с..."
 	context[SCREENTIP_CONTEXT_ALT_LMB] = "Разделить кредиты"
 	return CONTEXTUAL_SCREENTIP_SET
 
@@ -108,7 +108,7 @@
 
 	var/obj/item/holochip/merged_holochip = tool
 	credits += merged_holochip.credits
-	balloon_alert(user, "слиты!")
+	balloon_alert(user, "объединено!")
 	update_appearance()
 	qdel(merged_holochip)
 	return ITEM_INTERACT_SUCCESS

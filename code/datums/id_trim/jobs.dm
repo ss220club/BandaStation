@@ -272,7 +272,7 @@
 	job = /datum/job/captain
 	big_pointer = TRUE
 	pointer_color = COLOR_COMMAND_BLUE
-	honorifics = list("Капитан", "Кэп")
+	honorifics = list("Капитан", "К-н")
 	honorific_positions = HONORIFIC_POSITION_FIRST | HONORIFIC_POSITION_LAST | HONORIFIC_POSITION_FIRST_FULL | HONORIFIC_POSITION_NONE
 
 /// Captain gets all station accesses hardcoded in because it's the Captain.
@@ -752,7 +752,7 @@
 		ACCESS_CHANGE_IDS,
 		)
 	job = /datum/job/janitor
-	honorifics = list("Тех.персонал")
+	honorifics = list("Тех. персонал")
 	honorific_positions = HONORIFIC_POSITION_FIRST | HONORIFIC_POSITION_LAST | HONORIFIC_POSITION_FIRST_FULL | HONORIFIC_POSITION_NONE
 
 /datum/id_trim/job/lawyer
