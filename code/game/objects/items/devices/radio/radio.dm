@@ -421,6 +421,10 @@
 	if (input_frequency == FREQ_SYNDICATE && !(special_channels & RADIO_SPECIAL_SYNDIE))
 		return FALSE
 
+	// BANDASTATION EDIT: Add check for NT jammer. For block receive
+	if(is_within_nt_radio_jammer_range(src) && !(special_channels & RADIO_SPECIAL_CENTCOM))
+		return FALSE
+
 	// allow checks: are we listening on that frequency?
 	if (input_frequency == frequency)
 		return TRUE
