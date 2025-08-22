@@ -1,6 +1,8 @@
 /proc/is_within_nt_radio_jammer_range(atom/source)
-    for(var/obj/item/jammer/nt/jammer as anything in GLOB.active_jammers)
+    for(var/obj/item/jammer/jammer as anything in GLOB.active_jammers)
         if(IN_GIVEN_RANGE(source, jammer, jammer.range))
+            if(!istype(jammer, /obj/item/jammer/nt))
+                continue
             return TRUE
     return FALSE
 
@@ -18,7 +20,6 @@
 
 /obj/item/jammer/nt/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	context[SCREENTIP_CONTEXT_RMB] = "Переключить"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Переключить режим"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/jammer/nt/attack_self(mob/user, modifiers)

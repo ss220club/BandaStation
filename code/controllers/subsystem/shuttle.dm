@@ -906,8 +906,7 @@ SUBSYSTEM_DEF(shuttle)
 	. = preview_shuttle
 
 	// Shuttle state involves a mode and a timer based on world.time, so
-	// plugging the existing shuttles old values in works fine.
-	preview_shuttle.timer = timer
+	// plugging the existing shuttles old values in works fine	preview_shuttle.timer = timer
 	preview_shuttle.mode = mode
 
 	preview_shuttle.postregister(replace)

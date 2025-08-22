@@ -335,7 +335,7 @@
 	//BANDASTATION EDIT: add check for NT radio
 	if(is_within_nt_radio_jammer_range(src) && !(special_channels & RADIO_SPECIAL_CENTCOM))
 		return
-		
+
 	// Nearby active jammers prevent the message from transmitting
 	if(is_within_radio_jammer_range(src) && !(special_channels & RADIO_SPECIAL_SYNDIE))
 		return
