@@ -6,10 +6,18 @@
 	var/page_regex = "\\(page\\)\\d+\\(/page\\)"
 	var/max_pages = MULTIBOOK_MAX_PAGES
 	var/regex/page_splitter
+	var/regex/rx_trailing_brs
+	var/regex/rx_br
+	var/regex/rx_p_close
+	var/regex/rx_div_close
 
 /datum/book_info/New()
 	. = ..()
 	page_splitter = new(page_regex)
+	rx_trailing_brs = new("(\\s*<br\\s*/?>)+\\s*$", "i")
+	rx_br = new("<br\\s*/?>", "i")
+	rx_p_close = new("</p>", "i")
+	rx_div_close = new("</div>", "i")
 
 /// Guarantee that pages are initialized
 /datum/book_info/proc/ensure_pages()
@@ -60,14 +68,19 @@
 	if(!length(pages))
 		current_page_index = 0
 		return
-	if(current_page_index < 1) current_page_index = 1
+
+	if(current_page_index < 1)
+		current_page_index = 1
+
 	if(current_page_index % 2 == 0)
 		current_page_index = max(1, current_page_index - 1)
 
 /// turn forward one spread (skip by 2 pages)
 /datum/book_info/proc/next_spread()
 	ensure_pages()
-	if(!length(pages)) return
+	if(!length(pages))
+		return
+
 	normalize_left()
 	var/total = length(pages)
 	var/last_left = (total % 2 == 0) ? (total - 1) : total
@@ -77,7 +90,9 @@
 /// turn backward one spread (skip by 2 pages)
 /datum/book_info/proc/prev_spread()
 	ensure_pages()
-	if(!length(pages)) return
+	if(!length(pages))
+		return
+
 	normalize_left()
 	current_page_index = max(1, current_page_index - 2)
 	rebuild_content_from_pages()
@@ -95,6 +110,7 @@
 /datum/book_info/proc/remove_page_tags(text)
 	while (page_splitter.Find(text))
 		text = page_splitter.Replace(text, "")
+
 	return text
 
 /// Get selected page text
@@ -103,6 +119,7 @@
 	if(index >= 1 && index <= length(pages))
 		var/t = trim(pages[index])
 		return decode ? html_decode(t) : t
+
 	return ""
 
 /// Get count of all pages
@@ -161,10 +178,30 @@
 		init_pages()
 		rebuild_content_from_pages()
 
-/// Set content of book when using bookbinder
+/datum/book_info/proc/html_to_text(txt)
+	if(!istext(txt))
+		return ""
+
+	while (rx_br.Find(txt))
+		txt = rx_br.Replace(txt, "\n")
+	while (rx_p_close.Find(txt))
+		txt = rx_p_close.Replace(txt, "\n\n")
+	while (rx_div_close.Find(txt))
+		txt = rx_div_close.Replace(txt, "\n")
+	while (rx_trailing_brs.Find(txt))
+		txt = rx_trailing_brs.Replace(txt, "")
+
+	return txt
+
 /datum/book_info/set_content_using_paper(obj/item/paper/P)
-	. = ..()
+	var/txt = P?.get_raw_text()
+	if(!istext(txt) || !length(txt))
+		return
+
+	var/txta = html_to_text(txt)
+	set_content(txta, FALSE)
 	init_pages()
+	rebuild_content_from_pages()
 
 /datum/book_info/proc/tear_page(index)
     ensure_pages()
@@ -173,4 +210,5 @@
         // индекс и общее кол-во страниц не меняем
         rebuild_content_from_pages()
         return TRUE
+
     return FALSE

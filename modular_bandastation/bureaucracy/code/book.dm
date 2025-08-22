@@ -4,12 +4,14 @@
 	switch(action)
 		if("next_spread")
 			book_data.next_spread()
-			if(ui) ui.send_update(usr)
+			if(ui)
+				ui.send_update(usr)
 			return TRUE
 
 		if("prev_spread")
 			book_data.prev_spread()
-			if(ui) ui.send_update(usr)
+			if(ui)
+				ui.send_update(usr)
 			return TRUE
 
 		if("tear_page")
@@ -22,7 +24,8 @@
 
 /// Tears out a page from the book
 /obj/item/book/proc/tear_out_page_side(mob/living/user, side)
-	if(!book_data) return FALSE
+	if(!book_data)
+		return FALSE
 
 	book_data.ensure_pages()
 	book_data.normalize_left()
