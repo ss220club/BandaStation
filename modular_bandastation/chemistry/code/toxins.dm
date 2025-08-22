@@ -15,5 +15,8 @@
 		affected_mob.adjust_nutrition(-1.5 * REM * normalise_creation_purity() * seconds_per_tick)
 		affected_mob.overeatduration = 0
 
+		if(affected_mob.overeatduration > 0)
+			affected_mob.overeatduration = max(affected_mob.overeatduration - (4 SECONDS * seconds_per_tick), 0)
+
 	if(prob(0.1))
 		affected_mob.vomit(vomit_flags = VOMIT_CATEGORY_BLOOD, lost_nutrition = 25)
