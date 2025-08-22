@@ -1,4 +1,4 @@
-import { Button, Flex, Section } from 'tgui-core/components';
+import { Button, Flex, Section, Stack } from 'tgui-core/components';
 import { useEmotes } from './hooks';
 
 export const EmotePanel = (props, context) => {
@@ -72,8 +72,8 @@ export const EmotePanel = (props, context) => {
                     e.preventDefault();
                     emoteContextAction(emote.name);
                   }}
-               >
-                 {emote.name}
+                >
+                  {emote.name}
                 </Button>
               </Stack.Item>
             );
