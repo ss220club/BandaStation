@@ -6,7 +6,7 @@
 	metabolization_rate = REAGENTS_METABOLISM * 0.25
 	toxpwr = 0
 	ph = 3
-	inverse_chem = /datum/reagent/toxin/lipolicide
+	inverse_chem = /datum/reagent/impurity/ipecacide
 	chemical_flags = REAGENT_NO_RANDOM_RECIPE
 
 /datum/reagent/toxin/lipolytic/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
