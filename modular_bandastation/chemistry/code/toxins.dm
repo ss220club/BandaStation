@@ -13,7 +13,6 @@
 	. = ..()
 	if(affected_mob.nutrition >= NUTRITION_LEVEL_WELL_FED)
 		affected_mob.adjust_nutrition(-1.5 * REM * normalise_creation_purity() * seconds_per_tick)
-		affected_mob.overeatduration = 0
 
 		if(affected_mob.overeatduration > 0)
 			affected_mob.overeatduration = max(affected_mob.overeatduration - (4 SECONDS * seconds_per_tick), 0)
