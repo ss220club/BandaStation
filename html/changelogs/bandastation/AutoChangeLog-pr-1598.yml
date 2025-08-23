@@ -1,4 +1,0 @@
-author: "Ez-Briz"
-delete-after: True
-changes:
-  - bugfix: "Худ теперь не превращается в чёрно-белую мазню без интерфейса."
