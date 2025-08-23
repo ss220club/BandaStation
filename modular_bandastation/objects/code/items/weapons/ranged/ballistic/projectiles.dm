@@ -249,7 +249,6 @@
 	leaves_fire_trail = FALSE
 
 // MARK: .50 BMG
-
 /obj/projectile/bullet/p50/mmg
 	name =".50 BMG caseless bullet"
 	damage = 40
@@ -317,7 +316,6 @@
 	embed_type = null
 
 // MARK: .223 aka 5.56mm
-
 /obj/projectile/bullet/a223
 	name = "5.56mm bullet"
 	damage = 30
@@ -364,7 +362,6 @@
 	leaves_fire_trail = FALSE
 
 // MARK: 7.62x51mm
-
 /obj/projectile/bullet/c762x51mm
 	name = "7.62x51mm bullet"
 	damage = 35
@@ -413,7 +410,6 @@
 	leaves_fire_trail = FALSE
 
 // MARK: .388 aka 8.6x70mm
-
 /obj/projectile/bullet/c338
 	name = ".338 bullet"
 	damage = 55
@@ -454,7 +450,6 @@
 	leaves_fire_trail = FALSE
 
 // MARK: .38
-
 /obj/projectile/bullet/c38/ap
 	name = ".38 armor-piercing bullet"
 	damage = 20

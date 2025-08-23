@@ -139,7 +139,6 @@
 	projectile_type = /obj/projectile/bullet/c9x25mm/ap
 
 // MARK: .223 aka 5.56mm
-
 /obj/item/ammo_casing/a223
 	name = "5.56mm bullet casing"
 	desc = "Стандартный летальный винтовочный патрон калибра 5.56мм."
@@ -179,7 +178,6 @@
 	projectile_type = /obj/projectile/bullet/incendiary/a223
 
 // MARK: 7.62x51mm
-
 /obj/item/ammo_casing/c762x51mm
 	name = "7.62x51mm bullet casing"
 	desc = "Стандартный летальный винтовочный патрон калибра 7.62x51мм."
@@ -213,7 +211,6 @@
 	projectile_type = /obj/projectile/bullet/incendiary/c762x51mm
 
 // MARK: .338 aka 8.6x70mm
-
 /obj/item/ammo_casing/c338
 	name = ".338 bullet casing"
 	desc = "Крупнокалиберный винтовочный патрон калибра .338."
@@ -241,7 +238,6 @@
 	projectile_type = /obj/projectile/bullet/incendiary/c338
 
 // MARK: .38
-
 /obj/item/ammo_casing/c38/ap
 	name = ".38 armor-piercing bullet casing"
 	desc = "Бронебойный пистолетный патроны калибра .38."

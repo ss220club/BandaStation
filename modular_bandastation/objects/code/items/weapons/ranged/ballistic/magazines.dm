@@ -347,7 +347,6 @@
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
 
 // MARK: CM5 - SMG
-
 /obj/item/ammo_box/magazine/cm5
 	name = "SMG magazine (9x25mm NT)"
 	desc = "Магазин для пистолетов-пулеметов калибра 9x25мм НТ, вмещающий 30 патронов."
@@ -380,7 +379,6 @@
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
 
 // MARK: CM82 - assault rifle
-
 /obj/item/ammo_box/magazine/c223
 	name = "assault rifle magazine (5.56mm)"
 	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов."
@@ -423,7 +421,6 @@
 	ammo_type = /obj/item/ammo_casing/a223/incendiary
 
 // MARK: CM15 - auto shotgun
-
 /obj/item/ammo_box/magazine/cm15
 	name = "CM15 magazine (12ga buckshot)"
 	desc = "Магазин для штурмовых дробовиков CM15 12-го калибра, вмещающий 8 патронов."
@@ -528,7 +525,6 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/flechette
 
 // MARK: F4 - battle rifle
-
 /obj/item/ammo_box/magazine/c762x51mm
 	name = "battle rifle magazine (7.62x51mm)"
 	desc = "Магазин для боевых винтовок калибра 7.62x51мм, вмещающий 20 патронов."
@@ -566,7 +562,6 @@
 	ammo_type = /obj/item/ammo_casing/c762x51mm/incendiary
 
 // MARK: CM40 - LMG
-
 /obj/item/ammo_box/magazine/cm40
 	name = "CM40 box (7.62x51mm)"
 	desc = "Короб для легких пулеметов CM40 калибра 7.62x51мм, вмещающий 80 патронов."
@@ -604,7 +599,6 @@
 	ammo_type = /obj/item/ammo_casing/c762x51mm/incendiary
 
 // MARK: F90 - sniper rifle
-
 /obj/item/ammo_box/magazine/c338
 	name = "sniper rifle magazine (.338)"
 	desc = "Магазин для снайперских винтовок калибра .338, вмещающий 5 патронов."
@@ -661,7 +655,6 @@
 	ammo_type = /obj/item/ammo_casing/c338/incendiary
 
 // MARK: CM23 - .38 cal pistol
-
 /obj/item/ammo_box/magazine/c38
 	name = "pistol magazine (.38)"
 	desc = "Пистолетный магазин калибра .38, вмещающий 12 патронов."
@@ -718,7 +711,6 @@
 	ammo_type = /obj/item/ammo_casing/c38/dumdum
 
 // MARK: CM357 - .357 cal pistol
-
 /obj/item/ammo_box/magazine/c357
 	name = "pistol magazine (.357)"
 	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов."
@@ -749,6 +741,7 @@
 	ammo_band_color = "#a91e1e"
 	ammo_type = /obj/item/ammo_casing/c357/heartseeker
 
+// MARK: CM70 - .45 cal pistol
 /obj/item/ammo_box/magazine/c45
 	name = "pistol magazine (.45)"
 	desc = "Пистолетный магазин калибра .45, вмещающий 10 патронов."
