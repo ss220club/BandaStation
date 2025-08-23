@@ -860,7 +860,7 @@
 	if(!saved_identification && !saved_job)
 		name = initial(name)
 		return
-	name = "КПК \"[saved_identification]\" ([saved_job])"
+	name = "КПК «»[saved_identification]«» ([saved_job])"
 
 /obj/item/modular_computer/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	. = ..()

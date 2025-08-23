@@ -190,7 +190,7 @@
 	var/end_string = ""
 	var/return_string = ""
 	if(carbon_human.name != voice_name)
-		end_string += " (as [registered_name])"
+		end_string += " (как [registered_name])"
 	if(trim && honorific_position != HONORIFIC_POSITION_NONE && (carbon_human.name == voice_name)) //The voice and name are the same, so we display the title.
 		return_string += honorific_title
 	else
@@ -1644,7 +1644,7 @@
 /obj/item/card/id/advanced/plainclothes/update_label()
 	if(!trim_assignment_override)
 		return ..()
-	var/name_string = registered_name ? "ID-карта \"[registered_name]\"" : initial(name)
+	var/name_string = registered_name ? "ID-карта «[registered_name]»" : initial(name)
 	var/datum/id_trim/fake = SSid_access.trim_singletons_by_path[alt_trim]
 	name = "[name_string] ([fake.assignment])"
 
@@ -2149,7 +2149,7 @@
 	if(!scribbled_name)
 		name = initial(name)
 		return
-	name = "ID-карта \"[scribbled_name]\" ([scribbled_assignment])"
+	name = "ID-карта «[scribbled_name]» ([scribbled_assignment])"
 
 /obj/item/card/cardboard/update_overlays()
 	. = ..()
