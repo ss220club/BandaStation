@@ -1,5 +1,5 @@
 /obj/machinery/teapot
-	name = "Teapot machine"
+	name = "Чайник"
 	desc = "Бла бал бла, уничтожить Арасаку"
 	icon = 'modular_bandastation/objects/icons/obj/machines/teapot.dmi'
 	icon_state = "teapot_empty"

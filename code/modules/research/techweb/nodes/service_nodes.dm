@@ -134,6 +134,7 @@
 		"syrup_bottle",
 		"foodtray",
 		"restaurant_portal",
+		"teapot"
 	)
 
 /datum/techweb_node/food_proc

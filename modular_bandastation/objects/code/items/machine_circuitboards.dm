@@ -1,5 +1,5 @@
 /obj/item/circuitboard/machine/teapot
-	name = "Teapot Machine"
+	name = "Чайник"
 	greyscale_colors = CIRCUIT_COLOR_SERVICE
 	build_path = /obj/machinery/teapot
 	req_components = list(

@@ -629,7 +629,7 @@
 		/datum/reagent/toxin/slimejelly = 1,
 		/datum/reagent/consumable/berryjuice = 2,
 	)
-	required_temp = 333
+	required_temp = 303
 
 /datum/reagent/consumable/glace
 	name = "Гляссе"

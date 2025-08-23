@@ -105,6 +105,7 @@
 #include "code/items/clothing/mod/types/tsf/mod_types.dm"
 #include "code/items/clothing/mod/types/ussp/mod_theme.dm"
 #include "code/items/clothing/mod/types/ussp/mod_types.dm"
+#include "code/items/machine_designs.dm"
 
 
 
