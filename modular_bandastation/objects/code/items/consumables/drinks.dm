@@ -635,7 +635,7 @@
 	name = "Гляссе"
 	description = "Кофе с шариком мороженного сверху"
 	color = "#dfa057"
-	taste_description = "Холодный кофе, пломбир и шоколадная крошка"
+	taste_description = "холодный кофе, пломбир и шоколадная крошка"
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_GOOD
@@ -655,4 +655,32 @@
 		/datum/reagent/consumable/vanillashake = 2
 
 	)
+	is_cold_recipe = TRUE
 	required_temp = 213
+
+/datum/reagent/consumable/robbusto
+	name = "Роббусто"
+	description = "Крепкий кофе для рабочей смены"
+	color = "#4e361b"
+	taste_description = "горький кофе с сладким послевкусием"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/robbusto
+	required_drink_type = /datum/reagent/consumable/robbusto
+	name = "Роббусто"
+	desc = "Стакан с крепким кофе"
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "robbusto"
+
+/datum/chemical_reaction/drink/robbusto
+	results = list(/datum/reagent/consumable/robbusto = 4)
+	required_reagents = list(
+		/datum/reagent/toxin/coffeepowder = 2,
+		/datum/reagent/water = 1,
+		/datum/reagent/consumable/sugar = 1
+
+	)
+	required_temp = 333
