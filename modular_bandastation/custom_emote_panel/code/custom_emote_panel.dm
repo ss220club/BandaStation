@@ -51,7 +51,7 @@
 
 			if(emote_key != emote.key)
 				continue
-				
+
 			all_emotes += emote
 
 /datum/tgui_panel/New(client/client, id)
@@ -83,15 +83,15 @@
 			if(isnull(client.prefs.custom_emote_panel[emote_name]))
 				to_chat(client, span_warning("Эмоции [emote_name] нет в вашей панели!"))
 				return FALSE
-				
+
 			if(isnull(client.prefs.custom_emote_panel[emote_name]["type"]))
 				to_chat(client, span_warning("Эмоция [emote_name] не имеет типа!"))
 				return FALSE
-				
+
 			var/emote_type = client.prefs.custom_emote_panel[emote_name]["type"]
 			if(!isliving(client.mob))
 				return TRUE
-				
+
 			var/mob/living/living = client.mob
 			switch (emote_type)
 				if(TGUI_PANEL_EMOTE_TYPE_DEFAULT)
@@ -103,7 +103,7 @@
 					if(living.next_sound_emote >= world.time)
 						to_chat(living, span_warning("Не так быстро!"))
 						return TRUE
-						
+
 					var/emote_key = client.prefs.custom_emote_panel[emote_name]["key"]
 					var/message_override = client.prefs.custom_emote_panel[emote_name]["message_override"]
 					living.emote(emote_key, intentional = TRUE, message_override = message_override)
@@ -276,7 +276,7 @@
 /datum/tgui_panel/proc/emotes_remove(emote_name)
 	var/confirmation = tgui_alert(client.mob, "Вы уверены что хотите удалить эмоцию \"[emote_name]\" из панели?", "Подтверждение", list(DELETE_EMOTE, "Отмена"))
 	if(confirmation != DELETE_EMOTE)
-		return
+		return FALSE
 
 	client.prefs.custom_emote_panel.Remove(emote_name)
 
@@ -295,9 +295,9 @@
 	var/message_override = tgui_input_text(client.mob, "Выберите новый кастомный текст для эмоции [emote_name]:", "Кастомный текст", "", TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
 	if(!message_override)
 		return FALSE
+
 	client.prefs.custom_emote_panel[emote_name]["type"] = TGUI_PANEL_EMOTE_TYPE_CUSTOM
 	client.prefs.custom_emote_panel[emote_name]["message_override"] = message_override
-
 	return TRUE
 
 /datum/tgui_panel/proc/emotes_change_custom_text(emote_name)
