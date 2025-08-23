@@ -631,6 +631,12 @@
 	)
 	required_temp = 303
 
+/datum/reagent/consumable/slimetea/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	if(SPT_PROB(5, seconds_per_tick) && !isjellyperson(affected_mob))
+		affected_mob.bodytemperature = affected_mob.bodytemperature - (2 * seconds_per_tick)
+		to_chat(affected_mob,span_notice(pick("Вы чувствуете себя склизским","Вы прилипаете ко всему","Вы слышите как что-то хлюпает в вашем ботинке")))
+
 /datum/reagent/consumable/glace
 	name = "Гляссе"
 	description = "Кофе с шариком мороженного сверху"
