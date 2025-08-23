@@ -30,37 +30,33 @@
 
 /obj/item/ammo_box/magazine/c35sol_pistol/rubber
 	name = "pistol magazine (.35 Sol Short rubber)"
-	desc = "Магазин стандартного размера для пистолетов ТСФ калибра .35 Sol Short, вмещает 12 резиновых патронов."
+	desc = "Магазин стандартного размера для пистолетов ТСФ калибра .35 Sol Short, вмещает 12 травматических патронов."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c35sol/rubber
 
 /obj/item/ammo_box/magazine/c35sol_pistol/stendo/rubber
 	name = "extended pistol magazine (.35 Sol Short rubber)"
-	desc = "Увеличенный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 16 резиновых патронов."
+	desc = "Увеличенный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 16 травматических патронов."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c35sol/rubber
 
 /obj/item/ammo_box/magazine/c35sol_pistol/ap
 	name = "pistol magazine (.35 Sol Short AP)"
-	desc = "Магазин стандартного размера для пистолетов ТСФ калибра .35 Sol Short, вмещает 12 бронебойных патронов."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c35sol/ap
 
 /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ap
 	name = "extended pistol magazine (.35 Sol Short AP)"
-	desc = "Увеличенный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 16 бронебойных патронов."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c35sol/ap
 
 /obj/item/ammo_box/magazine/c35sol_pistol/ripper
 	name = "pistol magazine (.35 Sol Short HP)"
-	desc = "Магазин стандартного размера для пистолетов ТСФ калибра .35 Sol Short, вмещает 12 экспансивных патронов."
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c35sol/ripper
 
 /obj/item/ammo_box/magazine/c35sol_pistol/stendo/ripper
 	name = "extended pistol magazine (.35 Sol Short HP)"
-	desc = "Увеличенный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещающий 16 экспансивных патронов."
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c35sol/ripper
 
@@ -77,26 +73,24 @@
 
 /obj/item/ammo_box/magazine/c35sol_pistol/drum/rubber
 	name = "drum pistol magazine (.35 Sol Short rubber)"
-	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 35 резиновых патронов."
+	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 35 травматических патронов."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c35sol/rubber
 
 /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
 	name = "drum pistol magazine (.35 Sol Short AP)"
-	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 35 бронебойных патронов."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c35sol/ap
 
 /obj/item/ammo_box/magazine/c35sol_pistol/drum/ripper
 	name = "drum pistol magazine (.35 Sol Short HP)"
-	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещающий 35 экспансивных патронов."
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c35sol/ripper
 
 // MARK: AMK(AKM)
-/obj/item/ammo_box/magazine/amk
+/obj/item/ammo_box/magazine/c762x39mm
 	name = "rifle magazine (7.62x39mm)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами»."
+	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами»."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "amk"
 	ammo_band_icon = "+amk_ammo_band"
@@ -106,52 +100,50 @@
 	max_ammo = 30
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 
-/obj/item/ammo_box/magazine/amk/starts_empty
+/obj/item/ammo_box/magazine/c762x39mm/starts_empty
 	start_empty = TRUE
 
-/obj/item/ammo_box/magazine/amk/ricochet
+/obj/item/ammo_box/magazine/c762x39mm/ricochet
 	name = "rifle magazine (7.62x39mm match)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы с высокой рикошетностью."
+	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит патроны с высокой рикошетностью."
 	ammo_band_color = COLOR_AMMO_MATCH
 	ammo_type = /obj/item/ammo_casing/a762x39/ricochet
 
-/obj/item/ammo_box/magazine/amk/fire
+/obj/item/ammo_box/magazine/c762x39mm/fire
 	name = "rifle magazine (7.62x39mm incendiary)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит зажигательные боеприпасы."
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/a762x39/fire
 
-/obj/item/ammo_box/magazine/amk/ap
+/obj/item/ammo_box/magazine/c762x39mm/ap
 	name = "rifle magazine (7.62x39mm AP)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит бронебойные боеприпасы."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/a762x39/ap
 
-/obj/item/ammo_box/magazine/amk/emp
+/obj/item/ammo_box/magazine/c762x39mm/emp
 	name = "rifle magazine (7.62x39mm EMP)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит ионные боеприпасы, которые хорошо подходят для выведения из строя электроники и разрушения мехов."
+	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит ионные патроны, которые хорошо подходят для выведения из строя электроники и разрушения мехов."
 	ammo_band_color = "#1ea2ee"
 	ammo_type = /obj/item/ammo_casing/a762x39/emp
 
-/obj/item/ammo_box/magazine/amk/rubber
+/obj/item/ammo_box/magazine/c762x39mm/rubber
 	name = "rifle magazine (7.62x39mm rubber)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит нелетальные резиновые боеприпасы."
+	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит нелетальные травматические патроны."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/a762x39/rubber
 
-/obj/item/ammo_box/magazine/amk/civ
+/obj/item/ammo_box/magazine/c762x39mm/civ
 	name = "rifle short magazine (7.62x39mm)"
-	desc = "Укороченный двухрядный магазин, вмещающий 15 гражданских патронов калибра 7.62х39 мм."
+	desc = "Укороченный двухрядный магазин, вмещающий 15 патронов калибра 7.62х39мм."
 	icon_state = "amk_civ"
 	max_ammo = 15
 	ammo_type = /obj/item/ammo_casing/a762x39/civilian
 
-/obj/item/ammo_box/magazine/amk/civ/starts_empty
+/obj/item/ammo_box/magazine/c762x39mm/civ/starts_empty
 	start_empty = TRUE
 
-/obj/item/ammo_box/magazine/amk/hunting
+/obj/item/ammo_box/magazine/c762x39mm/hunting
 	name = "rifle magazine (7.62x39mm hunting)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит боеприпасы для охоты."
+	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит патроны для охоты."
 	ammo_band_color = "#05880c"
 	ammo_type = /obj/item/ammo_casing/a762x39/hunting
 
@@ -174,19 +166,17 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/fragmentation
 	name = "rifle short magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 осколочно-резиновых патронов."
+	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 осколочно-травматических патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/pierce
 	name = "rifle short magazine (.40 Sol Long AP)"
-	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 бронебойных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/pierce
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/incendiary
 	name = "rifle short magazine (.40 Sol Long incendiary)"
-	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 зажигательных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
 	MAGAZINE_TYPE_INCENDIARY
 
@@ -202,19 +192,17 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/fragmentation
 	name = "rifle magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 осколочно-резиновых патронов."
+	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 осколочно-травматических патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce
 	name = "rifle magazine (.40 Sol Long AP)"
-	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 бронебойных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/pierce
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/incendiary
 	name = "rifle magazine (.40 Sol Long incendiary)"
-	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 зажигательных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
 	MAGAZINE_TYPE_INCENDIARY
 
@@ -230,19 +218,17 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/fragmentation
 	name = "rifle long magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 осколочно-резиновых патронов."
+	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 осколочно-травматических патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/pierce
 	name = "rifle long magazine (.40 Sol Long AP)"
-	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 бронебойных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/pierce
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/incendiary
 	name = "rifle long magazine (.40 Sol Long incendiary)"
-	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 зажигательных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
 	MAGAZINE_TYPE_INCENDIARY
 
@@ -258,19 +244,17 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/fragmentation
 	name = "rifle drum magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 осколочно-резиновых патронов."
+	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 осколочно-травматических патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/pierce
 	name = "rifle drum magazine (.40 Sol Long AP)"
-	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 бронебойных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/pierce
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/incendiary
 	name = "rifle drum magazine (.40 Sol Long incendiary)"
-	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 зажигательных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
 	MAGAZINE_TYPE_INCENDIARY
 
@@ -286,19 +270,17 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/fragmentation
 	name = "rifle box magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 осколочно-резиновых патронов."
+	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 осколочно-травматических патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/pierce
 	name = "rifle box magazine (.40 Sol Long AP)"
-	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 бронебойных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/pierce
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/incendiary
 	name = "rifle box magazine (.40 Sol Long incendiary)"
-	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 зажигательных патронов."
 	ammo_type = /obj/item/ammo_casing/c40sol/incendiary
 	MAGAZINE_TYPE_INCENDIARY
 
@@ -334,36 +316,32 @@
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
 	name = "pistol magazine (9x25mm NT rubber)"
-	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 резиновых патронов."
+	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 травматических патронов."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9x25mm/rubber
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/rubber
 	name = "extended pistol magazine (9x25mm NT rubber)"
-	desc = "Увеличенный магазин для пистолетов НТ калибра 9x25мм, вмещает 22 резиновых патронов."
+	desc = "Увеличенный магазин для пистолетов НТ калибра 9x25мм, вмещает 22 травматических патронов."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9x25mm/rubber
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/ap
 	name = "pistol magazine (9x25mm NT AP)"
-	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 бронебойных патронов."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap
 	name = "extended pistol magazine (9x25mm NT AP)"
-	desc = "Увеличенный магазин для пистолетов НТ калибра 9x25мм, вмещает 22 бронебойных патронов."
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/hp
 	name = "pistol magazine (9x25mm NT HP)"
-	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 экспансивных патронов."
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/hp
 	name = "extended pistol magazine (9x25mm NT HP)"
-	desc = "Увеличенный магазин для пистолетов НТ калибра 9x25мм, вмещающий 22 экспансивных патронов."
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp

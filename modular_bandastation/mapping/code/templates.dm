@@ -67,6 +67,11 @@
 	suffix = "empty"
 	name = "Empty Gamma Armory Shuttle"
 
+/datum/map_template/shuttle/assault_pod/nanotrasen
+	suffix = "nt"
+	name = "assault pod (Nanotrasen)"
+	prefix = "_maps/shuttles/ss220/"
+
 // MARK: Shuttles Overrides
 /datum/map_template/shuttle/infiltrator/basic
 	prefix = "_maps/shuttles/ss220/"
