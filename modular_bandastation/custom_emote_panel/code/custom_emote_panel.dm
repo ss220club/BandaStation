@@ -262,10 +262,10 @@
 		return FALSE
 	if(new_emote_name == emote_name)
 		to_chat(client, span_notice("Переименование отменено"))
-		return
+		return FALSE
 	if(new_emote_name in client.prefs.custom_emote_panel)
 		to_chat(client, span_warning("Эмоция \"[new_emote_name]\" уже существует!"))
-		return
+		return FALSE
 
 	var/list/emote = client.prefs.custom_emote_panel[emote_name]
 	client.prefs.custom_emote_panel[new_emote_name] = emote
