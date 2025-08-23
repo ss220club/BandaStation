@@ -617,7 +617,7 @@
 
 /datum/glass_style/drinking_glass/slimetea
 	required_drink_type = /datum/reagent/consumable/slimetea
-	name = "Слаймбаблити"
+	name = "Слизнечай"
 	desc = "Стакан с студинистой жидкостью. внутри которой плавают ягоды"
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "slimetea"
@@ -630,4 +630,29 @@
 		/datum/reagent/consumable/berryjuice = 2,
 	)
 	required_temp = 333
-	mix_message = "Красный свет из сосуда заполняет всё вокруг."
+
+/datum/reagent/consumable/glace
+	name = "Гляссе"
+	description = "Кофе с шариком мороженного сверху"
+	color = "#dfa057"
+	taste_description = "Холодный кофе, пломбир и шоколадная крошка"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/glace
+	required_drink_type = /datum/reagent/consumable/glace
+	name = "Гляссе"
+	desc = "Стакан доверху заполненный мороженным, который плавает на кофе"
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "glace"
+
+/datum/chemical_reaction/drink/glace
+	results = list(/datum/reagent/consumable/glace = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/coffee = 3,
+		/datum/reagent/consumable/vanillashake = 2
+
+	)
+	required_temp = 213
