@@ -678,9 +678,35 @@
 /datum/chemical_reaction/drink/robbusto
 	results = list(/datum/reagent/consumable/robbusto = 4)
 	required_reagents = list(
-		/datum/reagent/toxin/coffeepowder = 2,
-		/datum/reagent/water = 1,
+		/datum/reagent/toxin/coffeepowder = 3,
 		/datum/reagent/consumable/sugar = 1
 
 	)
 	required_temp = 333
+
+/datum/movespeed_modifier/reagent/robbusto
+	multiplicative_slowdown = -0.25
+
+/datum/reagent/consumable/robbusto/on_mob_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.add_movespeed_modifier(/datum/movespeed_modifier/reagent/robbusto)
+
+/datum/reagent/consumable/robbusto/robbusto/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/robbusto)
+
+/datum/reagent/consumable/robbusto/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	var/high_message = pick("Вы чувствуете себя бодрее", "Вы должны быть быстрее!")
+	if(SPT_PROB(2.5, seconds_per_tick))
+		to_chat(affected_mob, span_notice("[high_message]"))
+	affected_mob.add_mood_event("tweaking", /datum/mood_event/stimulant_medium)
+	affected_mob.AdjustAllImmobility(-10 * REM * seconds_per_tick)
+	var/need_mob_update
+	need_mob_update = affected_mob.adjustStaminaLoss(-2 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	affected_mob.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
+	need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_HEART, (rand(1,3) * REM * seconds_per_tick)/5, required_organ_flag = affected_organ_flags)
+	if(need_mob_update)
+		. = UPDATE_MOB_HEALTH
+	if(SPT_PROB(2.5, seconds_per_tick))
+		affected_mob.emote(pick("twitch", "shiver"))
