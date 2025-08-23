@@ -442,11 +442,11 @@
 	var/healthpercent = round((atom_integrity/max_integrity) * 100, 1)
 	switch(healthpercent)
 		if(50 to 99)
-			. += span_info("It looks slightly damaged.")
+			. += span_info("Имеет незначительные повреждения.")
 		if(25 to 50)
-			. += span_info("It appears heavily damaged.")
+			. += span_info("Имеет значительные повреждения.")
 		if(0 to 25)
-			. += span_warning("It's falling apart!")
+			. += span_warning("Разваливается на части!")
 
 	if(long_ranged)
 		. += "It is upgraded with an experimental long-ranged network capabilities, picking up NTNet frequencies while further away."
@@ -1085,6 +1085,12 @@
 				return ALERT_RELEVANCY_WARN
 		if(SEC_LEVEL_GREEN) // no threats, no concerns
 			return ALERT_RELEVANCY_SAFE
+		// BANDASTATION ADD - START
+		if(SEC_LEVEL_EPSILON)
+			return ALERT_RELEVANCY_PERTINENT
+		if(SEC_LEVEL_GAMMA)
+			return ALERT_RELEVANCY_PERTINENT
+		// BANDASTATION ADD - END
 
 	return 0
 
