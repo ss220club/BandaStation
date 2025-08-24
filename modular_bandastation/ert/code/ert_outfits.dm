@@ -482,3 +482,16 @@
 	shoes = /obj/item/clothing/shoes/clown_shoes/banana_shoes/combat
 	l_pocket = /obj/item/food/grown/banana/bunch
 	l_hand = /obj/item/pneumatic_cannon/pie/selfcharge
+
+// MARK: OLD PRESETS
+/datum/outfit/centcom/ert/security/alert
+	name = "(OLD OUTFIT) ERT Security - High Alert"
+
+/datum/outfit/centcom/ert/medic/alert
+	name = "(OLD OUTFIT) ERT Medic - High Alert"
+
+/datum/outfit/centcom/ert/engineer/alert
+	name = "(OLD OUTFIT) ERT Engineer - High Alert"
+
+/datum/outfit/centcom/ert/commander/alert
+	name = "(OLD OUTFIT) ERT Commander - High Alert"
