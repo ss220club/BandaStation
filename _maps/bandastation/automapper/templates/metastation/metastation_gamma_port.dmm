@@ -94,6 +94,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/station/security/range)
+"t" = (
+/turf/closed/wall/r_wall,
+/area/template_noop)
 "u" = (
 /obj/structure/lattice,
 /obj/effect/spawner/random/structure/grille,
@@ -566,7 +569,7 @@ x
 x
 x
 x
-a
+t
 a
 "}
 (16,1,1) = {"
@@ -583,6 +586,6 @@ x
 x
 x
 x
-a
+t
 a
 "}
