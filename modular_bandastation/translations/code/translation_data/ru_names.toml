@@ -26807,12 +26807,3 @@ accusative = "зал заседаний совета"
 instrumental = "залом заседаний совета"
 prepositional = "зале заседаний совета"
 gender = "male"
-
-["Bridge"]
-nominative = "мостик"
-genitive = "мостика"
-dative = "мостику"
-accusative = "мостик"
-instrumental = "мостиком"
-prepositional = "мостике"
-gender = "male"
