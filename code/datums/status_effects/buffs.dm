@@ -407,7 +407,7 @@
 
 /datum/status_effect/mayhem
 	id = "Mayhem"
-	duration = 15 SECONDS// BANDASTATION EDIT - Original: 2 MINUTES
+	duration = 15 SECONDS // BANDASTATION EDIT - Original: 2 MINUTES (BALANCE: nerfing status_effect/mayhem for safer using)
 	alert_type = null
 	/// The chainsaw spawned by the status effect
 	var/obj/item/chainsaw/doomslayer/chainsaw
@@ -433,7 +433,7 @@
 		ADD_TRAIT(chainsaw, TRAIT_NODROP, TRAIT_STATUS_EFFECT(id))
 		owner.put_in_hands(chainsaw, forced = TRUE)
 		chainsaw.attack_self(owner)
-		owner.reagents.add_reagent(/datum/reagent/medicine/adminordrazine, 5)// BANDASTATION EDIT - Original: 25
+		owner.reagents.add_reagent(/datum/reagent/medicine/adminordrazine, 5)// BANDASTATION EDIT - Original: 25 (BALANCE: nerfing status_effect/mayhem for safer using)
 
 	owner.log_message("entered a blood frenzy", LOG_ATTACK)
 	to_chat(owner, span_narsiesmall("KILL, KILL, KILL! YOU HAVE NO ALLIES ANYMORE, NO TEAM MATES OR ALLEGIANCES! KILL THEM ALL!"))
