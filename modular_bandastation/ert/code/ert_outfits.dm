@@ -474,6 +474,7 @@
 		/obj/item/bikehorn/airhorn = 1,
 		/obj/item/stack/sheet/mineral/bananium = 15,
 		/obj/item/inspector/clown/bananium = 1,
+		/obj/item/food/grown/banana/bombanana = 1,
 	)
 	organs = list(
 		/obj/item/organ/cyberimp/brain/anti_stun
