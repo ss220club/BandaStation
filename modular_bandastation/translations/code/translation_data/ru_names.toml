@@ -26457,7 +26457,7 @@ gender = "male"
 
 ["Cafeteria"]
 nominative = "кафетерий"
-genitive = "кафетерий"
+genitive = "кафетерия"
 dative = "кафетерию"
 accusative = "кафетерий"
 instrumental = "кафетерием"
