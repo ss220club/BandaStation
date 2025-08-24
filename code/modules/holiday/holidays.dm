@@ -97,7 +97,7 @@ GLOBAL_LIST_INIT(holiday_mail, list())
 			return holiday_colors[(thing_to_color.x % holiday_colors.len) + 1]
 
 /proc/request_holiday_colors(atom/thing_to_color, pattern)
-	// // BANDASTATION REMOVAL START - Remove tile holidays tile recoloring
+	// // BANDASTATION REMOVAL START - Remove holiday tile recoloring
 	// switch(pattern)
 	// 	if(PATTERN_RANDOM)
 	// 		return "#[random_short_color()]"
@@ -111,8 +111,8 @@ GLOBAL_LIST_INIT(holiday_mail, list())
 	// 	if(!holiday_real.holiday_colors)
 	// 		continue
 	// 	return holiday_real.get_holiday_colors(thing_to_color, pattern || holiday_real.holiday_pattern)
-	// // BANDASTATION REMOVAL END - Remove tile holidays tile recoloring
-	return // BANDASTATION ADDITION - Remove tile holidays tile recoloring
+	// // BANDASTATION REMOVAL END - Remove holiday tile recoloring
+	return // BANDASTATION ADDITION - Remove holiday tile recoloring
 
 // The actual holidays
 
