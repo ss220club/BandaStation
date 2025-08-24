@@ -26546,7 +26546,7 @@ prepositional = "художественной галерее"
 gender = "female"
 
 ["Library Private Study"]
-nominative = частный кабинет библиотеки"
+nominative = "частный кабинет библиотеки"
 genitive = "частного кабинета библиотеки"
 dative = "частному кабинету библиотеки"
 accusative = "частный кабинет библиотеки"
@@ -26571,6 +26571,15 @@ accusative = "церковь"
 instrumental = "церковью"
 prepositional = "церкви"
 gender = "female"
+
+["Chapel Office"]
+nominative = "офис священника"
+genitive = "офиса священника"
+dative = "офису священника"
+accusative = "офис священника"
+instrumental = "офисом священника"
+prepositional = "офисе священника"
+gender = "male"
 
 ["Monastery"]
 nominative = "монастырь"
