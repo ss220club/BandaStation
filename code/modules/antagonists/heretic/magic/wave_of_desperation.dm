@@ -1,14 +1,14 @@
 /datum/action/cooldown/spell/aoe/wave_of_desperation
 	name = "Wave Of Desperation"
 	desc = "Снимает связки, отталкивает и сбивает с ног находящихся рядом людей, а также накладывает на них некоторые эффекты Хватки Мансуса. \
-		Не может быть применено, если вы не скованы, а стресс лишает вас сознания на 12 секунд!"
+		Не может быть применено, если вы не скованы, а стресс лишает вас сознания на 12 секунд! (Можно применить без фокуса)"
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "uncuff"
 	sound = 'sound/effects/magic/swap.ogg'
 
-	school = SCHOOL_FORBIDDEN
+	school = SCHOOL_EVOCATION
 	cooldown_time = 5 MINUTES
 
 	invocation = "F'K 'FF."
