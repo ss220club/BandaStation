@@ -2,13 +2,13 @@
 	/// If non-null, overrides a/an/some in all cases
 	var/article
 	/// Text that appears preceding the name in [/atom/proc/examine_title]
-	var/examine_thats = "That's"
+	var/examine_thats = "Это"
 
 /mob/living/carbon/human
-	examine_thats = "This is"
+	examine_thats = "Это"
 
 /mob/living/silicon/robot
-	examine_thats = "This is"
+	examine_thats = "Это"
 
 /**
  * Called when a mob examines this atom: [/mob/verb/examinate]
@@ -30,9 +30,9 @@
 		for (var/atom_tag in tags_list)
 			tag_string += (isnull(tags_list[atom_tag]) ? atom_tag : span_tooltip(tags_list[atom_tag], atom_tag))
 		// some regex to ensure that we don't add another "and" if the final element's main text (not tooltip) has one
-		tag_string = english_list(tag_string, and_text = (findtext(tag_string[length(tag_string)], regex(@">.*?and .*?<"))) ? " " : " and ")
+		tag_string = english_list(tag_string, and_text = (findtext(tag_string[length(tag_string)], regex(@">.*?и .*?<"))) ? " " : " и ")
 		var/post_descriptor = examine_post_descriptor(user)
-		. += "[p_They()] [p_are()] a [tag_string] [examine_descriptor(user)][length(post_descriptor) ? " [jointext(post_descriptor, " ")]" : ""]."
+		. += "Это [examine_descriptor(user)] [tag_string][length(post_descriptor) ? " [jointext(post_descriptor, " ")]" : ""]."
 
 	if(reagents)
 		var/user_sees_reagents = user.can_see_reagents()
@@ -40,21 +40,21 @@
 		if(!(reagent_sigreturn & STOP_GENERIC_REAGENT_EXAMINE))
 			if(reagents.flags & TRANSPARENT)
 				if(reagents.total_volume)
-					. += "It contains <b>[reagents.total_volume]</b> units of various reagents[user_sees_reagents ? ":" : "."]"
+					. += "Имеется <b>[reagents.total_volume]</b> юнитов различных химикатов[user_sees_reagents ? ":" : "."]"
 					if(user_sees_reagents || (reagent_sigreturn & ALLOW_GENERIC_REAGENT_EXAMINE)) //Show each individual reagent for detailed examination
 						for(var/datum/reagent/current_reagent as anything in reagents.reagent_list)
-							. += "&bull; [round(current_reagent.volume, CHEMICAL_VOLUME_ROUNDING)] units of [current_reagent.name]"
+							. += "&bull; [round(current_reagent.volume, CHEMICAL_VOLUME_ROUNDING)] юнитов [current_reagent.name]"
 						if(reagents.is_reacting)
-							. += span_warning("It is currently reacting!")
-						. += span_notice("The solution's pH is [round(reagents.ph, 0.01)] and has a temperature of [reagents.chem_temp]K.")
+							. += span_warning("Оно сейчас вступает в реакцию!")
+						. += span_notice("pH раствора равен [round(reagents.ph, 0.01)] и имеет температуру в [reagents.chem_temp]K.")
 
 				else
-					. += "It contains:<br>Nothing."
+					. += "Внутри:<br>Ничего."
 			else if(reagents.flags & AMOUNT_VISIBLE)
 				if(reagents.total_volume)
-					. += span_notice("It has [reagents.total_volume] unit\s left.")
+					. += span_notice("Имеется [reagents.total_volume] юнитов.")
 				else
-					. += span_danger("It's empty.")
+					. += span_danger("Пусто.")
 
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
@@ -84,7 +84,7 @@
 
 /// What this atom should be called in examine tags
 /atom/proc/examine_descriptor(mob/user)
-	return "object"
+	return "объект"
 
 /// Returns a list of strings to be displayed after the descriptor
 /atom/proc/examine_post_descriptor(mob/user)
@@ -94,8 +94,8 @@
 	var/mats_list = list()
 	for(var/custom_material in custom_materials)
 		var/datum/material/current_material = GET_MATERIAL_REF(custom_material)
-		mats_list += span_tooltip("It is made out of [current_material.name].", current_material.name)
-	. += "made of [english_list(mats_list)]"
+		mats_list += span_tooltip("Объект сделан из [current_material.declent_ru(GENITIVE)].", current_material.declent_ru(GENITIVE))
+	. += "из: [english_list(mats_list)]"
 
 /**
  * Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_WINDOW (default 1 second)
@@ -119,8 +119,8 @@
  * You can override what is returned from this proc by registering to listen for the
  * [COMSIG_ATOM_GET_EXAMINE_NAME] signal
  */
-/atom/proc/get_examine_name(mob/user)
-	var/list/override = list(article, null, "<em>[get_visible_name()]</em>")
+/atom/proc/get_examine_name(mob/user, declent = NOMINATIVE) // BANDASTATION EDIT - Declents
+	var/list/override = list(article, null, "<em>[get_visible_name(declent = declent)]</em>") // BANDASTATION EDIT - Declents
 	SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override)
 
 	if(!isnull(override[EXAMINE_POSITION_ARTICLE]))
@@ -128,11 +128,11 @@
 		return jointext(override, " ")
 	if(!isnull(override[EXAMINE_POSITION_BEFORE]))
 		override -= null // There is no article, don't try to join it
-		return "\a [jointext(override, " ")]"
-	return "\a [src]"
+		return "[jointext(override, " ")]" // BANDASTATION EDIT - Declents
+	return "[get_visible_name(declent = declent)]" // BANDASTATION EDIT - Declents
 
-/mob/living/get_examine_name(mob/user)
-	var/visible_name = get_visible_name()
+/mob/living/get_examine_name(mob/user, declent = NOMINATIVE) // BANDASTATION EDIT - Declents
+	var/visible_name = get_visible_name(declent = declent)   // BANDASTATION EDIT - Declents
 	var/list/name_override = list(visible_name)
 	if(SEND_SIGNAL(user, COMSIG_LIVING_PERCEIVE_EXAMINE_NAME, src, visible_name, name_override) & COMPONENT_EXAMINE_NAME_OVERRIDEN)
 		return name_override[1]
@@ -148,9 +148,9 @@
  * * user - the mob examining the atom
  * * thats - whether to include "That's", or similar (mobs use "This is") before the name
  */
-/atom/proc/examine_title(mob/user, thats = FALSE)
+/atom/proc/examine_title(mob/user, thats = FALSE, declent = NOMINATIVE) // BANDASTATION EDIT - Declents
 	var/examine_icon = get_examine_icon(user)
-	return "[examine_icon ? "[examine_icon] " : ""][thats ? "[examine_thats] ":""]<em>[get_examine_name(user)]</em>"
+	return "[examine_icon ? "[examine_icon] " : ""][thats ? "[examine_thats] ":""]<em>[get_examine_name(user, declent)]</em>" // BANDASTATION EDIT - Declents
 
 /**
  * Returns an extended list of examine strings for any contained ID cards.
@@ -167,5 +167,9 @@
 
 /// Used by mobs to determine the name for someone wearing a mask, or with a disfigured or missing face. By default just returns the atom's name. add_id_name will control whether or not we append "(as [id_name])".
 /// force_real_name will always return real_name and add (as face_name/id_name) if it doesn't match their appearance
-/atom/proc/get_visible_name(add_id_name, force_real_name)
-	return name
+// BANDASTATION EDIT START - Declents
+/atom/proc/get_visible_name(add_id_name, force_real_name, declent = NOMINATIVE)
+	if(name != initial(name))
+		return name
+	return declent_ru(declent)
+// BANDASTATION EDIT END
