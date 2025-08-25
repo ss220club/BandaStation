@@ -31,11 +31,12 @@
 	/// Boolean that tells us if this is a planetary station. (like IceBoxStation)
 	var/planetary = FALSE
 	/// How many z's to generate around a planetary station
-	var/ocean_levels = 0
-	/// Directory to the wilderness 0rea we can spawn in
+	var/wilderness_levels = 0
+	/// Directory to the wilderness area we can spawn in
 	var/wilderness_directory
 	/// Index of map names (inside wilderness_directory) with the amount to spawn. ("ice_planes" = 1) for one ice spawn
 	var/list/maps_to_spawn = list()
+
 	///The type of mining Z-level that should be loaded.
 	var/minetype = MINETYPE_LAVALAND
 	///If no minetype is set, this will be the blacklist file used
@@ -208,6 +209,13 @@
 		log_world("map_config space_empty_levels is not a number!")
 		return
 
+	temp = json["wilderness_levels"]
+	if (isnum(temp))
+		wilderness_levels = temp
+	else if (!isnull(temp))
+		log_world("map_config wilderness_levels is not a number!")
+		return
+
 	if ("minetype" in json)
 		minetype = json["minetype"]
 
@@ -260,6 +268,29 @@
 
 	if ("height_autosetup" in json)
 		height_autosetup = json["height_autosetup"]
+
+	var/list/wilderness = json["wilderness"]
+	// If we got wilderness levels, fetch them from the config
+	if (islist(wilderness))
+		wilderness_directory = wilderness["directory"]
+		wilderness.Remove("directory")
+
+		// Just pick and take based on weight
+		for(var/i in 1 to wilderness_levels)
+			maps_to_spawn += pick_weight_take(wilderness)
+		shuffle(maps_to_spawn)
+
+	var/list/ocean_wilderness = json["ocean_wilderness"]
+	// If we got wilderness levels, fetch them from the config
+	if (islist(ocean_wilderness))
+		wilderness_directory = ocean_wilderness["directory"]
+		ocean_wilderness.Remove("directory")
+
+		// Just pick and take based on weight
+		for(var/i in 1 to ocean_levels)
+			maps_to_spawn += pick_weight_take(ocean_wilderness)
+			to_chat(world, "map_config maps_to_spawn: [maps_to_spawn]")
+		shuffle(maps_to_spawn)
 
 #ifdef UNIT_TESTS
 	// Check for unit tests to skip, no reason to check these if we're not running tests
