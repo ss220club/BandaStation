@@ -868,7 +868,7 @@
 	if(registered_account)
 		if(registered_account.mining_points)
 			. += "На карточке показывается шахтёрские очки в количестве [registered_account.mining_points]."
-		. += "Привязанный аккаунт к ID принадлежит '[registered_account.account_holder]' и отображает баланс в размере [registered_account.account_balance] кр."
+		. += "Привязанный аккаунт к ID-карте принадлежит '[registered_account.account_holder]' и отображает баланс в размере [registered_account.account_balance] кр."
 		if(registered_account.account_debt)
 			. += span_warning("На данный момент на счёте имеется задолженность в размере [registered_account.account_debt] кр. [100*DEBT_COLLECTION_COEFF]% заработанных средств пойдет на его погашение.")
 		if(registered_account.account_job)
