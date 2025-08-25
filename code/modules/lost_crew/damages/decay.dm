@@ -12,7 +12,10 @@
 	var/decay_ticks = max_decay_time * severity * 0.5
 
 	for(var/obj/item/organ/internal in body.organs)
-		internal.apply_organ_damage(decay_ticks * internal.decay_factor)
+		// BANDASTATION ADDITION START - PERMA-DEATH ORGAN DAMAGE
+		if(!(ispath(internal, /obj/item/organ/brain) && CONFIG_GET(flag/brain_permanent_death)))
+			internal.apply_organ_damage(decay_ticks * internal.decay_factor)
+		// BANDASTATION ADDITION END - PERMA-DEATH ORGAN DAMAGE
 
 	return TRUE
 

@@ -146,10 +146,10 @@
 /datum/bank_account/proc/pay_debt(amount, is_payment = TRUE)
 	var/amount_to_pay = min(amount, account_debt)
 	if(is_payment)
-		if(!adjust_money(-amount, "Other: Debt Payment"))
+		if(!adjust_money(-amount, "Прочее: Оплата долга"))
 			return 0
 	else
-		add_log_to_history(-amount, "Other: Debt Collection")
+		add_log_to_history(-amount, "Прочее: Взыскание долгов")
 	log_econ("[amount_to_pay] credits were removed from [account_holder]'s bank account to pay a debt of [account_debt]")
 	account_debt -= amount_to_pay
 	SEND_SIGNAL(src, COMSIG_BANK_ACCOUNT_DEBT_PAID)
@@ -164,11 +164,11 @@
  */
 /datum/bank_account/proc/transfer_money(datum/bank_account/from, amount, transfer_reason)
 	if(from.has_money(amount))
-		var/reason_to = "Transfer: From [from.account_holder]"
-		var/reason_from = "Transfer: To [account_holder]"
+		var/reason_to = "Перевод: От [from.account_holder]"
+		var/reason_from = "Перевод: [account_holder]"
 
 		if(IS_DEPARTMENTAL_ACCOUNT(from))
-			reason_to = "Nanotrasen: Salary"
+			reason_to = "Нанотрейзен: Зарплата"
 			reason_from = ""
 
 		if(transfer_reason)
@@ -196,7 +196,7 @@
 	if(amount_of_paychecks == 1)
 		money_to_transfer = clamp(money_to_transfer, 0, PAYCHECK_CREW) //We want to limit single, passive paychecks to regular crew income.
 	if(free)
-		adjust_money(money_to_transfer, "Nanotrasen: Shift Payment")
+		adjust_money(money_to_transfer, "Нанотрейзен: Оплата смены")
 		SSblackbox.record_feedback("amount", "free_income", money_to_transfer)
 		SSeconomy.station_target += money_to_transfer
 		log_econ("[money_to_transfer] credits were given to [src.account_holder]'s account from income.")
@@ -205,12 +205,12 @@
 		var/datum/bank_account/department_account = SSeconomy.get_dep_account(account_job.paycheck_department)
 		if(department_account)
 			if(!transfer_money(department_account, money_to_transfer))
-				bank_card_talk("ERROR: Payday aborted, departmental funds insufficient.")
+				bank_card_talk("ОШИБКА: Зарплата не выдана. Средств отдела недостаточно.")
 				return FALSE
 			else
-				bank_card_talk("Payday processed, account now holds [account_balance] cr.")
+				bank_card_talk("Поступила зарплата. На аккаунте теперь [account_balance] кр.")
 				return TRUE
-	bank_card_talk("ERROR: Payday aborted, unable to contact departmental account.")
+	bank_card_talk("ОШИБКА: Зарплата не выдана. Не удалось связаться со счётом отдела.")
 	return FALSE
 
 /**
