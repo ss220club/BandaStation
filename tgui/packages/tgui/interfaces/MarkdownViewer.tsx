@@ -71,9 +71,7 @@ export function MarkdownViewer(_: any) {
               )}
             </Page>
           </Stack.Item>
-
           <Spine />
-
           <Stack.Item grow basis={0} className="Paper__Column">
             <Page
               dimmed={!rightExists}

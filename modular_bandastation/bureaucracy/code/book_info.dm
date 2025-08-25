@@ -182,24 +182,20 @@
 	if(!istext(txt))
 		return ""
 
-	while (rx_br.Find(txt))
-		txt = rx_br.Replace(txt, "\n")
-	while (rx_p_close.Find(txt))
-		txt = rx_p_close.Replace(txt, "\n\n")
-	while (rx_div_close.Find(txt))
-		txt = rx_div_close.Replace(txt, "\n")
-	while (rx_trailing_brs.Find(txt))
-		txt = rx_trailing_brs.Replace(txt, "")
+	txt = rx_br.Replace(txt, "\n")
+	rx_p_close.Replace(txt, "\n\n")
+	rx_div_close.Replace(txt, "\n")
+	rx_trailing_brs.Replace(txt, "")
 
 	return txt
 
-/datum/book_info/set_content_using_paper(obj/item/paper/P)
-	var/txt = P?.get_raw_text()
+/datum/book_info/set_content_using_paper(obj/item/paper/incoming_paper)
+	var/txt = incoming_paper?.get_raw_text()
 	if(!istext(txt) || !length(txt))
 		return
 
-	var/txta = html_to_text(txt)
-	set_content(txta, FALSE)
+	var/html_content = html_to_text(txt)
+	set_content(html_content, FALSE)
 	init_pages()
 	rebuild_content_from_pages()
 
