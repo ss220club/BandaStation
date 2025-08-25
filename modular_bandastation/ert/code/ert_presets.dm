@@ -1,23 +1,31 @@
 /datum/ert/amber
 	leader_role = /datum/antagonist/ert/commander/amber
 	roles = list(/datum/antagonist/ert/security/amber, /datum/antagonist/ert/medic/amber, /datum/antagonist/ert/engineer/amber, /datum/antagonist/ert/chaplain/amber, /datum/antagonist/ert/janitor/amber, /datum/antagonist/ert/clown/amber)
+	polldesc = "Code Amber Emergency Response Team"
 
 /datum/ert/red
 	leader_role = /datum/antagonist/ert/commander/red
 	roles = list(/datum/antagonist/ert/security/red, /datum/antagonist/ert/medic/red, /datum/antagonist/ert/engineer/red, /datum/antagonist/ert/chaplain/red, /datum/antagonist/ert/janitor/red, /datum/antagonist/ert/clown/red)
+	polldesc = "Code Red Emergency Response Team"
 
 /datum/ert/gamma
 	leader_role = /datum/antagonist/ert/commander/gamma
 	roles = list(/datum/antagonist/ert/security/gamma, /datum/antagonist/ert/medic/gamma, /datum/antagonist/ert/engineer/gamma, /datum/antagonist/ert/chaplain/gamma, /datum/antagonist/ert/janitor/gamma, /datum/antagonist/ert/clown/gamma)
 	code = "Gamma"
+	polldesc = "Code Gamma Emergency Response Team"
 
 /datum/ert/janitor
 	leader_role = /datum/antagonist/ert/janitor/gamma
 	roles = list(/datum/antagonist/ert/janitor/red, /datum/antagonist/ert/janitor/amber)
+	polldesc = "Janitor Emergency Response Team"
 
 /datum/ert/clown
 	leader_role = /datum/antagonist/ert/clown/gamma
 	roles = list(/datum/antagonist/ert/clown/red, /datum/antagonist/ert/clown/amber)
+	polldesc = "Clown Emergency Response Team"
+
+/datum/ert/inquisition
+	polldesc = "Inquisition Emergency Response Team"
 
 // MARK: SECURITY
 /datum/antagonist/ert/security/amber

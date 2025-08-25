@@ -228,7 +228,31 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	var/list/spawnpoints = GLOB.emergencyresponseteamspawn
 	var/index = 0
 
-	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for [span_notice(ertemplate.polldesc)]?", check_jobban = "deathsquad", alert_pic = /obj/item/card/id/advanced/centcom/ert, role_name_text = "emergency response team")
+	var/list/slot_list = list(
+		"Commander" = commander_slots,
+		"Security" = security_slots,
+		"Medical" = medical_slots,
+		"Engineer" = engineering_slots,
+		"Janitor" = janitor_slots,
+		"Inquisitor" = chaplain_slots,
+		"Clown" = clown_slots,
+		)
+
+	var/list/active_slots = list()
+	for (var/role in slot_list)
+		if(!slot_list[role])
+			continue
+		active_slots += "[role]: [slot_list[role]]"
+
+	var/slot_text = active_slots.Join(", ")
+
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+	"Do you wish to be considered for [span_notice(ertemplate.polldesc)]? \n[span_smallnotice(slot_text)]",
+	check_jobban = "deathsquad",
+	alert_pic = create_leader_preview(ertemplate) || /obj/item/card/id/advanced/centcom/ert,
+	role_name_text = ertemplate.polldesc
+	)
+
 	var/teamSpawned = FALSE
 
 	// This list will take priority over spawnpoints if not empty
@@ -349,6 +373,10 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			door.open()
 			CHECK_TICK
 	return TRUE
+
+/datum/ert_manager/proc/create_leader_preview(datum/ert/ert_template)
+	var/datum/antagonist/ert/preview = ert_template.leader_role
+	return image(get_dynamic_human_appearance(preview.outfit, r_hand = NO_REPLACE, l_hand = NO_REPLACE))
 
 /obj/effect/landmark/ert_brief_spawn
 	name = "ertbriefspawn"
