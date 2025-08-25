@@ -21,20 +21,3 @@
 #define SHADOWLING_DARK_HEAL_PER_LIMB_DIM  0.75 // лёгкий бонус в полутьме, можно =0.5
 
 #define GET_BODYPART_COEFFICIENT(X) round(X.len / BODYPARTS_DEFAULT_MAXIMUM , 0.1)
-
-// минималка, чтобы всё заработало; дополняй своими спеллами
-var/global/list/SHADOWLING_TIER_ABILITIES = list(
-	TIER_T0 = list(
-		/datum/action/cooldown/shadowling/hive_sync,
-	),
-	TIER_T1 = list(),
-	TIER_T2 = list(),
-	TIER_T3 = list(),
-	TIER_T4 = list(),
-	TIER_T5 = list(),
-)
-
-// что давать траллам (обычно — «Взор» и т.п.). Пока пусто.
-var/global/list/SHADOWLING_THRALL_ABILITIES = list(
-	/datum/action/cooldown/shadowling/hive_sync, // можно и траллам, если хочешь
-)

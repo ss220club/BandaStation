@@ -1,4 +1,4 @@
-/datum/language/hivemind8
+/datum/language/shadow_hive
 	name = "Hive Mind"
 	desc = "A shadow-linked mind channel."
 	key = "8" // говорить: :8 или .8

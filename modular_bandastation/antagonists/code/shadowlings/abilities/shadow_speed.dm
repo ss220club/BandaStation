@@ -1,10 +1,9 @@
 /datum/movespeed_modifier/shadowling/dark
-	multiplicative_slowdown = 0.8 // ~+20% скорости (меньше — быстрее)
-	priority = 10 // чтобы перебить мелкие эффекты
-	movetypes = GROUND // подставь ваш набор, если нужен
+	multiplicative_slowdown = 0.2
+	priority = 10
+	movetypes = GROUND
 
 /proc/shadowling_apply_dark_speed(mob/living/L)
-	// если у вас есть макросы — используйте их (ADD_MOVESPEED_MODIFIER).
 	if(ismob(L))
 		L.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/dark)
 
