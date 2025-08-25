@@ -454,13 +454,13 @@
 
 	if(stored_id)
 		if(Adjacent(user))
-			. += "Внутри имеется [stored_id] в слоте карты.[alt_stored_id ? "" : " [span_info("Alt+ЛКМ чтобы вытащить.")]"]"
+			. += "Внутри имеется [stored_id] в слоте карты.[alt_stored_id ? "" : " [span_info("Alt+ЛКМ, чтобы вытащить.")]"]"
 		else
 			. += "Слот ID-карты занят."
 
 	if(alt_stored_id)
 		if(Adjacent(user))
-			. += "Внутри имеется [alt_stored_id] в дополнительном слоте карты. [span_info("Alt+ЛКМ чтобы вытащить.")]"
+			. += "Внутри имеется [alt_stored_id] в дополнительном слоте карты. [span_info("Alt+ЛКМ, чтобы вытащить.")]"
 		else
 			. += "Дополнительный слот ID-карты занят."
 
@@ -860,7 +860,7 @@
 	if(!saved_identification && !saved_job)
 		name = initial(name)
 		return
-	name = "КПК «»[saved_identification]«» ([saved_job])"
+	name = "КПК «[saved_identification]» ([saved_job])"
 
 /obj/item/modular_computer/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	. = ..()

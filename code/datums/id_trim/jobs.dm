@@ -1190,7 +1190,7 @@
 		ACCESS_SURGERY,
 		ACCESS_VIROLOGY,
 	)
-	honorifics = list("Охранник", "Офицер")
+	honorifics = list("Санитар", "Офицер")
 
 /datum/id_trim/job/security_officer/science
 	assignment = JOB_SECURITY_OFFICER_SCIENCE

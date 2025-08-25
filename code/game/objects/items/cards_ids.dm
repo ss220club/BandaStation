@@ -11,7 +11,6 @@
  * FINGERPRINT CARD HOLDER
  * FINGERPRINT CARD
  */
-//
 
 
 /*
@@ -525,7 +524,7 @@
 /obj/item/card/id/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 
-	context[SCREENTIP_CONTEXT_RMB] = "Проекция стойки оплаты"
+	context[SCREENTIP_CONTEXT_RMB] = "Спроецировать терминал оплаты"
 
 	if(isnull(held_item) || (held_item == src))
 		context[SCREENTIP_CONTEXT_LMB] = "Показать ID"
@@ -688,7 +687,7 @@
 	if(!cash_money)
 		to_chat(user, span_warning("[money.declent_ru(ACCUSATIVE)] кажется, ничего не стоит!"))
 		return FALSE
-	registered_account.adjust_money(cash_money, "Система: Вложение")
+	registered_account.adjust_money(cash_money, "Система: Пополнение")
 	SSblackbox.record_feedback("amount", "credits_inserted", cash_money)
 	log_econ("[cash_money] credits were inserted into [src] owned by [src.registered_name]")
 	if(physical_currency)
@@ -769,7 +768,7 @@
 		var/choice = tgui_alert(user, "Выберите действие", "Аккаунт банка", list("Вывести", "Погасить долг"))
 		if(!choice || QDELETED(user) || QDELETED(src) || !alt_click_can_use_id(user) || loc != user)
 			return CLICK_ACTION_BLOCKING
-		if(choice == "Pay Debt")
+		if(choice == "Погасить долг")
 			pay_debt(user)
 			return CLICK_ACTION_SUCCESS
 	if (registered_account.being_dumped)
@@ -782,7 +781,7 @@
 		var/choice = tgui_alert(user, "Счёт к этой карте не привязан. Хотите привязать банковский счёт?", "Аккаунт банка", list("Привязать аккаунт", "Оставить незаполненным"))
 		if(!choice || QDELETED(user) || QDELETED(src) || !alt_click_can_use_id(user) || loc != user)
 			return CLICK_ACTION_BLOCKING
-		if(choice == "Link Account")
+		if(choice == "Привязать аккаунт")
 			set_new_account(user)
 			return CLICK_ACTION_SUCCESS
 	var/amount_to_remove = tgui_input_number(user, "Сколько вы хотите вывести? (Макс: [registered_account.account_balance] кр.)", "Вывести средства", max_value = registered_account.account_balance)
@@ -799,7 +798,7 @@
 		return CLICK_ACTION_SUCCESS
 	else
 		var/difference = amount_to_remove - registered_account.account_balance
-		registered_account.bank_card_talk(span_warning("ОШИБКА: Для вывода средств с привязанного аккаунта требуется на [difference] больше кр."), TRUE)
+		registered_account.bank_card_talk(span_warning("ОШИБКА: Для вывода средств с привязанного аккаунта требуется на [difference] кр. больше."), TRUE)
 		return CLICK_ACTION_BLOCKING
 
 /obj/item/card/id/click_alt_secondary(mob/user)
@@ -826,10 +825,10 @@
 		return
 
 	if(registered_account && !isnull(registered_account.account_id))
-		. += "Аккаунт привязанный к ID принадлежит '[registered_account.account_holder]' и отображает баланс в размере [registered_account.account_balance] кр."
+		. += "Аккаунт привязанный к ID-карте принадлежит '[registered_account.account_holder]' и отображает баланс в размере [registered_account.account_balance] кр."
 		if(ACCESS_COMMAND in access)
 			var/datum/bank_account/linked_dept = SSeconomy.get_dep_account(registered_account.account_job.paycheck_department)
-			. += "[linked_dept.account_holder] привязанный к ID отображает баланс [linked_dept.account_balance] кр."
+			. += "[linked_dept.account_holder] привязанный к ID-карте отображает баланс [linked_dept.account_balance] кр."
 	else
 		. += span_notice("Alt-ПКМ, чтобы привязать ID-карту к банковскому счёту.")
 
@@ -965,7 +964,7 @@
 		return
 
 	if(!trim)
-		balloon_alert(user, "card has no trim!")
+		balloon_alert(user, "у карты нет оформления!")
 		return
 
 	if(!length(trim.honorifics))
@@ -1167,12 +1166,12 @@
 		return ITEM_INTERACT_BLOCKING
 
 	switch(choice)
-		if("Department")
+		if("Отдел")
 			if(!do_after(user, 2 SECONDS))
 				return ITEM_INTERACT_BLOCKING
 			department_color_override = our_crayon.paint_color
 			balloon_alert(user, "перекрашен")
-		if("Subdepartment")
+		if("Подотдел")
 			if(!do_after(user, 1 SECONDS))
 				return ITEM_INTERACT_BLOCKING
 			subdepartment_color_override = our_crayon.paint_color
@@ -1347,7 +1346,7 @@
 
 /obj/item/card/id/advanced/centcom/ert
 	name = "\improper CentCom ID"
-	desc = "ID-карта бойца ОБР."
+	desc = "ID-карта оперативника ОБР."
 	registered_age = null
 	registered_name = "Emergency Response Intern"
 	trim = /datum/id_trim/centcom/ert
@@ -1631,7 +1630,7 @@
 	var/popup_input = tgui_input_list(user, "Выберите действия", "Двухсторонняя ID", list("Показать", "Перевернуть"))
 	if(!popup_input || !after_input_check(user))
 		return TRUE
-	if(popup_input == "Show")
+	if(popup_input == "Показать")
 		return ..()
 	balloon_alert(user, "перевёрнуто")
 	if(trim_assignment_override)
@@ -1650,8 +1649,8 @@
 
 /obj/item/card/id/advanced/chameleon
 	name = "agent card"
-	desc = "Усовершенствованная ID-карта хамелеон. Проведите этой картой по другой ID-карте или по человеку, который ее носит, чтобы скопировать доступ. \
-		Обладает особыми магнитными свойствами, которые позволяют прикреплять ее к передней части кошелька."
+	desc = "Усовершенствованная ID-карта хамелеон. Проведите этой картой по другой ID-карте или по человеку, который её носит, чтобы скопировать доступ. \
+		Обладает особыми магнитными свойствами, которые позволяют прикреплять её к передней части кошелька."
 	trim = /datum/id_trim/chameleon
 	trim_changeable = FALSE
 	actions_types = list(/datum/action/item_action/chameleon/change/id, /datum/action/item_action/chameleon/change/id_trim)
@@ -1894,7 +1893,7 @@
 		return TRUE
 	var/selected_trim_path
 	var/static/list/trim_list
-	if(change_trim == "Yes")
+	if(change_trim == "Да")
 		trim_list = list()
 		for(var/trim_path in typesof(/datum/id_trim))
 			var/datum/id_trim/trim = SSid_access.trim_singletons_by_path[trim_path]
@@ -1913,7 +1912,7 @@
 	if(!after_input_check(user))
 		return TRUE
 
-	var/wallet_spoofing = tgui_alert(user, "Активировать подмену ID в кошельках, позволяя этой карте принудительно занимать видимый слот ID в кошельках?", "Подмена ID в кошельках", list("Да", "Нет"))
+	var/wallet_spoofing = tgui_alert(user, "Активировать подмену ID-карт в кошельках, позволяя этой карте принудительно занимать видимый слот ID-карты в кошельках?", "Подмена ID-карт в кошельках", list("Да", "Нет"))
 	if(!after_input_check(user))
 		return
 
@@ -1924,7 +1923,7 @@
 		assignment = sanitize(target_occupation, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 	if(new_age)
 		registered_age = new_age
-	if(wallet_spoofing  == "Yes")
+	if(wallet_spoofing  == "Да")
 		ADD_TRAIT(src, TRAIT_MAGNETIC_ID_CARD, CHAMELEON_ITEM_TRAIT)
 
 	update_label()
@@ -2089,7 +2088,7 @@
 	if(!after_input_check(user, item, popup_input))
 		return
 	switch(popup_input)
-		if("Name")
+		if("Имя")
 			var/raw_input = tgui_input_text(user, "Какое имя вы хотели бы написать на этой карте?", "Имя на картонной карте", scribbled_name || (ishuman(user) ? user.real_name : user.name), max_length = MAX_NAME_LEN)
 			var/input_name = sanitize_name(raw_input, allow_numbers = TRUE)
 			if(!after_input_check(user, item, input_name, scribbled_name))
@@ -2098,7 +2097,7 @@
 			scribbled_name = input_name
 			var/list/details = item.get_writing_implement_details()
 			details_colors[INDEX_NAME_COLOR] = details["color"] || COLOR_BLACK
-		if("Assignment")
+		if("Должность")
 			var/input_assignment = tgui_input_text(user, "Какую должность вы хотели бы написать на этой карте?", "Должность на картонной карте", scribbled_assignment || "Ассистент", max_length = MAX_NAME_LEN)
 			if(!after_input_check(user, item, input_assignment, scribbled_assignment))
 				return
@@ -2106,7 +2105,7 @@
 			scribbled_assignment = sanitize(input_assignment, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 			var/list/details = item.get_writing_implement_details()
 			details_colors[INDEX_ASSIGNMENT_COLOR] = details["color"] || COLOR_BLACK
-		if("Trim")
+		if("Оформление")
 			var/static/list/possible_trims
 			if(!possible_trims)
 				possible_trims = list()
@@ -2122,7 +2121,7 @@
 			scribbled_trim = "cardboard_[input_trim]"
 			var/list/details = item.get_writing_implement_details()
 			details_colors[INDEX_TRIM_COLOR] = details["color"] || COLOR_BLACK
-		if("Reset")
+		if("Сброс")
 			scribbled_name = null
 			scribbled_assignment = null
 			scribbled_trim = null
