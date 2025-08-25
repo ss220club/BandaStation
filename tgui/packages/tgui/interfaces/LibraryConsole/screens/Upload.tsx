@@ -45,7 +45,9 @@ export function Upload(props) {
   }
 
   const contentHtml = {
-    __html: sanitizeText(cache_content),
+    __html: sanitizeText(
+      cache_content.replace(/\(page\)(\d+)\(\/page\)/gi, 'Страница $1'),
+    ),
   };
 
   return (
