@@ -31,6 +31,8 @@
 	/// Boolean that tells us if this is a planetary station. (like IceBoxStation)
 	var/planetary = FALSE
 	/// How many z's to generate around a planetary station
+	var/ocean_levels = 0
+	/// How many z's to generate around a planetary station
 	var/wilderness_levels = 0
 	/// Directory to the wilderness area we can spawn in
 	var/wilderness_directory
@@ -214,6 +216,13 @@
 		wilderness_levels = temp
 	else if (!isnull(temp))
 		log_world("map_config wilderness_levels is not a number!")
+		return
+
+	temp = json["ocean_levels"]
+	if (isnum(temp))
+		ocean_levels = temp
+	else if (!isnull(temp))
+		log_world("map_config ocean_levels is not a number!")
 		return
 
 	if ("minetype" in json)
