@@ -55,7 +55,6 @@
 		/mob/living/simple_animal/hostile/megafauna/legion/small,
 		/mob/living/simple_animal/hostile/megafauna/wendigo,
 		/mob/living/simple_animal/hostile/megafauna/wendigo/noportal,
-		/mob/living/simple_animal/hostile/megafauna/serpent
 		/mob/living/simple_animal/hostile/ooze,
 		/mob/living/simple_animal/hostile/ooze/gelatinous,
 		/mob/living/simple_animal/hostile/ooze/grapes,
