@@ -25120,6 +25120,49 @@ instrumental = "знаменем синтетиков"
 prepositional = "знамени синтетиков"
 gender = "neuter"
 
+["captain's spare ID"]
+nominative = "запасная ID-карта капитана"
+genitive = "запасной ID-карты капитана"
+dative = "запасной ID-карте капитана"
+accusative = "запасную ID-карту капитана"
+instrumental = "запасной ID-картой капитана"
+prepositional = "запасной ID-карте капитана"
+gender = "female"
+
+["silver identification card"]
+nominative = "серебряная ID-карта"
+genitive = "серебряной ID-карты"
+dative = "серебряной ID-карте"
+accusative = "серебряную ID-карту"
+instrumental = "серебряной ID-картой"
+prepositional = "серебряной ID-карте"
+gender = "female"
+
+["space cash"]
+nominative = "космоналичка"
+genitive = "космоналички"
+dative = "космоналичке"
+accusative = "космоналичку"
+instrumental = "космоналичкой"
+prepositional = "космоналичке"
+gender = "female"
+
+["Nanotrasen Space-Coin Market"]
+nominative = "Маркет Космокоин Нанотрейзен"
+genitive = "Маркета Космокоин Нанотрейзен"
+dative = "Мартеку Космокоин Нанотрейзен"
+accusative = "Маркет Космокоин Нанотрейзен"
+instrumental = "Маркетом Космокоин Нанотрейзен"
+prepositional = "Маркете Космокоин Нанотрейзен"
+gender = "male"
+
+["suspicious phone"]
+nominative = "подозрительный телефон"
+genitive = "подозрительного телефона"
+dative = "подозрительному телефону"
+accusative = "подозрительный телефон"
+instrumental = "подозрительным телефоном"
+prepositional = "подозрительном телефоне"
 # MARK: Areas
 
 ## Cargo Areas
@@ -26451,6 +26494,370 @@ dative = "кабинету главы службы безопасности"
 accusative = "кабинет главы службы безопасности"
 instrumental = "кабинетом главы службы безопасности"
 prepositional = "кабинете главы службы безопасности"
+gender = "male"
+
+## Service Areas
+
+["Cafeteria"]
+nominative = "кафетерий"
+genitive = "кафетерия"
+dative = "кафетерию"
+accusative = "кафетерий"
+instrumental = "кафетерием"
+prepositional = "кафетерии"
+gender = "male"
+
+["Kitchen"]
+nominative = "кухня"
+genitive = "кухни"
+dative = "кухне"
+accusative = "кухню"
+instrumental = "кухней"
+prepositional = "кухне"
+gender = "female"
+
+["Kitchen Cold Room"]
+nominative = "морозильная камера кухни"
+genitive = "морозильной камеры кухни"
+dative = "морозильной камере кухни"
+accusative = "морозильную камеру кухни"
+instrumental = "морозильной камерой кухни"
+prepositional = "морозильной камере кухни"
+gender = "female"
+
+["Kitchen Backroom"]
+nominative = "подсобное помещение кухни"
+genitive = "подсобного помещения кухни"
+dative = "подсобному помещению кухни"
+accusative = "подсобное помещение кухни"
+instrumental = "подсобным помещением кухни"
+prepositional = "подсобном помещении кухни"
+gender = "neuter"
+
+["Bar"]
+nominative = "бар"
+genitive = "бара"
+dative = "бару"
+accusative = "бар"
+instrumental = "баром"
+prepositional = "баре"
+gender = "male"
+
+["Atrium"]
+nominative = "атриум"
+genitive = "атриума"
+dative = "атриуму"
+accusative = "атриум"
+instrumental = "атриумом"
+prepositional = "атриуме"
+gender = "male"
+
+["Bar Backroom"]
+nominative = "подсобное помещение бара"
+genitive = "подсобного помещения бара"
+dative = "подсобному помещению бара"
+accusative = "подсобное помещение бара"
+instrumental = "подсобным помещением бара"
+prepositional = "подсобном помещении бара"
+gender = "neuter"
+
+["Theater"]
+nominative = "театр"
+genitive = "театра"
+dative = "театру"
+accusative = "театр"
+instrumental = "театром"
+prepositional = "театре"
+gender = "male"
+
+["Library"]
+nominative = "библиотека"
+genitive = "библиотеки"
+dative = "библиотеке"
+accusative = "библиотеку"
+instrumental = "библиотекой"
+prepositional = "библиотеке"
+gender = "female"
+
+["Art Gallery"]
+nominative = "художественная галерея"
+genitive = "художественной галереи"
+dative = "художественной галерее"
+accusative = "художественную галерею"
+instrumental = "художественной галереей"
+prepositional = "художественной галерее"
+gender = "female"
+
+["Library Private Study"]
+nominative = "частный кабинет библиотеки"
+genitive = "частного кабинета библиотеки"
+dative = "частному кабинету библиотеки"
+accusative = "частный кабинет библиотеки"
+instrumental = "частным кабинетом библиотеки"
+prepositional = "частном кабинете библиотеки"
+gender = "male"
+
+["Library Printer Room"]
+nominative = "печатная комната библиотеки"
+genitive = "печатной комнаты библиотеки"
+dative = "печатной комнате библиотеки"
+accusative = "печатную комнату библиотеки"
+instrumental = "печатной комнатой библиотеки"
+prepositional = "печатной комнате библиотеки"
+gender = "female"
+
+["Chapel"]
+nominative = "церковь"
+genitive = "церкви"
+dative = "церкви"
+accusative = "церковь"
+instrumental = "церковью"
+prepositional = "церкви"
+gender = "female"
+
+["Chapel Office"]
+nominative = "офис священника"
+genitive = "офиса священника"
+dative = "офису священника"
+accusative = "офис священника"
+instrumental = "офисом священника"
+prepositional = "офисе священника"
+gender = "male"
+
+["Monastery"]
+nominative = "монастырь"
+genitive = "монастыря"
+dative = "монастырю"
+accusative = "монастырь"
+instrumental = "монастырем"
+prepositional = "монастыре"
+gender = "male"
+
+["Chapel Storage"]
+nominative = "хранилище церкви"
+genitive = "хранилища церкви"
+dative = "хранилищу церкви"
+accusative = "хранилище церкви"
+instrumental = "хранилищем церкви"
+prepositional = "хранилище церкви"
+gender = "neuter"
+
+["Chapel Funeral Room"]
+nominative = "похоронный зал церкви"
+genitive = "похоронного зала церкви"
+dative = "похоронному залу церкви"
+accusative = "похоронный зал церкви"
+instrumental = "похоронным залом церкви"
+prepositional = "похоронном зале церкви"
+gender = "male"
+
+["Hydroponics"]
+nominative = "гидропоника"
+genitive = "гидропоники"
+dative = "гидропонке"
+accusative = "гидропонику"
+instrumental = "гидропоникой"
+prepositional = "гидропонке"
+gender = "female"
+
+["Garden"]
+nominative = "сад"
+genitive = "сада"
+dative = "саду"
+accusative = "сад"
+instrumental = "садом"
+prepositional = "саде"
+gender = "male"
+
+["Law Office"]
+nominative = "юридический офис"
+genitive = "юридического офиса"
+dative = "юридическому офису"
+accusative = "юридический офис"
+instrumental = "юридическим офисом"
+prepositional = "юридическом офисе"
+gender = "male"
+
+["Custodial Closet"]
+nominative = "коморка уборщика"
+genitive = "коморки уборщика"
+dative = "коморке уборщика"
+accusative = "коморку уборщика"
+instrumental = "коморкой уборщика"
+prepositional = "коморке уборщика"
+gender = "female"
+
+["Barber"]
+nominative = "парикмахерская"
+genitive = "парикмахерской"
+dative = "парикмахерской"
+accusative = "парикмахерскую"
+instrumental = "парикмахерской"
+prepositional = "парикмахерской"
+gender = "female"
+
+["Abandoned Garden"]
+nominative = "заброшенный сад"
+genitive = "заброшенного сада"
+dative = "заброшенному саду"
+accusative = "заброшенный сад"
+instrumental = "заброшенным садом"
+prepositional = "заброшенном саде"
+gender = "male"
+
+["Abandoned Kitchen"]
+nominative = "заброшенная кухня"
+genitive = "заброшенной кухни"
+dative = "заброшенной кухне"
+accusative = "заброшенную кухню"
+instrumental = "заброшенной кухней"
+prepositional = "заброшенной кухне"
+gender = "female"
+
+["Abandoned Gambling Den"]
+nominative = "заброшенный игорный дом"
+genitive = "заброшенного игорного дома"
+dative = "заброшенному игорному дому"
+accusative = "заброшенный игорный дом"
+instrumental = "заброшенным игорным домом"
+prepositional = "заброшенном игорном доме"
+gender = "male"
+
+["Abandoned Gaming Den"]
+nominative = "заброшенная игровая комната"
+genitive = "заброшенной игровой комнаты"
+dative = "заброшенной игровой комнате"
+accusative = "заброшенную игровую комнату"
+instrumental = "заброшенной игровой комнатой"
+prepositional = "заброшенной игровой комнате"
+gender = "female"
+
+["Abandoned Theater"]
+nominative = "заброшенный театр"
+genitive = "заброшенного театра"
+dative = "заброшенному театру"
+accusative = "заброшенный театр"
+instrumental = "заброшенным театром"
+prepositional = "заброшенном театре"
+gender = "male"
+
+["Abandoned Library"]
+nominative = "заброшенная библиотека"
+genitive = "заброшенной библиотеки"
+dative = "заброшенной библиотеке"
+accusative = "заброшенную библиотеку"
+instrumental = "заброшенной библиотекой"
+prepositional = "заброшенной библиотеке"
+gender = "female"
+
+["Electronic Marketing Den"]
+nominative = "отдел электронного маркетинга"
+genitive = "отдела электронного маркетинга"
+dative = "отделу электронного маркетинга"
+accusative = "отдел электронного маркетинга"
+instrumental = "отделом электронного маркетинга"
+prepositional = "отделе электронного маркетинга"
+gender = "male"
+
+["Head of Personnel's Office"]
+nominative = "кабинет главы персонала"
+genitive = "кабинета главы персонала"
+dative = "кабинету главы персонала"
+accusative = "кабинет главы персонала"
+instrumental = "кабинетом главы персонала"
+prepositional = "кабинете главы персонала"
+gender = "male"
+
+## Command Areas
+
+["Captain's Office"]
+nominative = "кабинет капитана"
+genitive = "кабинета капитана"
+dative = "кабинету капитана"
+accusative = "кабинет капитана"
+instrumental = "кабинетом капитана"
+prepositional = "кабинете капитана"
+gender = "male"
+
+["Captain's Quarters"]
+nominative = "каюта капитана"
+genitive = "каюты капитана"
+dative = "каюте капитана"
+accusative = "каюту капитана"
+instrumental = "каютой капитана"
+prepositional = "каюте капитана"
+gender = "female"
+
+["Nanotrasen Representative's Office"]
+nominative = "кабинет представителя Нанотрейзен"
+genitive = "кабинета представителя Нанотрейзен"
+dative = "кабинету представителя Нанотрейзен"
+accusative = "кабинет представителя Нанотрейзен"
+instrumental = "кабинетом представителя Нанотрейзен"
+prepositional = "кабинете представителя Нанотрейзен"
+gender = "male"
+
+["Magistrate's Office"]
+nominative = "кабинет магистрата"
+genitive = "кабинета магистрата"
+dative = "кабинету магистрата"
+accusative = "кабинет магистрата"
+instrumental = "кабинетом магистрата"
+prepositional = "кабинете магистрата"
+gender = "male"
+
+["Blueshield's Office"]
+nominative = "кабинет Синего щита"
+genitive = "кабинета Синего щита"
+dative = "кабинету Синего щита"
+accusative = "кабинет Синего щита"
+instrumental = "кабинетом Синего щита"
+prepositional = "кабинете Синего щита"
+gender = "male"
+
+["Teleporter Room"]
+nominative = "телепортерная"
+genitive = "телепортерной"
+dative = "телепортерной"
+accusative = "телепортерной"
+instrumental = "телепортерной"
+prepositional = "телепортерной"
+gender = "female"
+
+["Gateway"]
+nominative = "врата"
+genitive = "врат"
+dative = "вратам"
+accusative = "врата"
+instrumental = "вратами"
+prepositional = "вратах"
+gender = "plural"
+
+["Bridge"]
+nominative = "мостик"
+genitive = "мостика"
+dative = "мостику"
+accusative = "мостик"
+instrumental = "мостиком"
+prepositional = "мостике"
+gender = "male"
+
+["Heads of Staff Meeting Room"]
+nominative = "конференц-зал командования"
+genitive = "конференц-зала командования"
+dative = "конференц-залу командования"
+accusative = "конференц-зал командования"
+instrumental = "конференц-залом командования"
+prepositional = "конференц-зале командования"
+gender = "male"
+
+["Council Chamber"]
+nominative = "зал заседаний совета"
+genitive = "зала заседаний совета"
+dative = "залу заседаний совета"
+accusative = "зал заседаний совета"
+instrumental = "залом заседаний совета"
+prepositional = "зале заседаний совета"
 gender = "male"
 
 ["Nanotrasen radio jammer"]
