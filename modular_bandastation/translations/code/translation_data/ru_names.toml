@@ -26555,12 +26555,12 @@ prepositional = "частном кабинете библиотеки"
 gender = "male"
 
 ["Library Printer Room"]
-nominative = "библиотечная комната для печати"
-genitive = "библиотечной комнаты для печати"
-dative = "библиотечной комнате для печати"
-accusative = "библиотечную комнату для печати"
-instrumental = "библиотечной комнатой для печати"
-prepositional = "библиотечной комнате для печати"
+nominative = "печатная комната библиотеки"
+genitive = "печатной комнаты библиотеки"
+dative = "печатной комнате библиотеки"
+accusative = "печатную комнату библиотеки"
+instrumental = "печатной комнатой библиотеки"
+prepositional = "печатной комнате библиотеки"
 gender = "female"
 
 ["Chapel"]
@@ -26708,12 +26708,12 @@ prepositional = "заброшенной библиотеке"
 gender = "female"
 
 ["Electronic Marketing Den"]
-nominative = "отдел цифрового продвижения"
-genitive = "отдела цифрового продвижения"
-dative = "отделу цифрового продвижения"
-accusative = "отдел цифрового продвижения"
-instrumental = "отделом цифрового продвижения"
-prepositional = "отделе цифрового продвижения"
+nominative = "отдел электронного маркетинга"
+genitive = "отдела электронного маркетинга"
+dative = "отделу электронного маркетинга"
+accusative = "отдел электронного маркетинга"
+instrumental = "отделом электронного маркетинга"
+prepositional = "отделе электронного маркетинга"
 gender = "male"
 
 ["Head of Personnel's Office"]
