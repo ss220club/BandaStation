@@ -318,6 +318,9 @@ effective or pretty fucking useless.
 /proc/is_within_radio_jammer_range(atom/source)
 	for(var/obj/item/jammer/jammer as anything in GLOB.active_jammers)
 		if(IN_GIVEN_RANGE(source, jammer, jammer.range))
+			//BANDASTATION EDIT: Check for nt jammer
+			if(istype(jammer, /obj/item/jammer/nt))
+				continue
 			return TRUE
 	return FALSE
 

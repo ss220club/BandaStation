@@ -26859,3 +26859,11 @@ accusative = "зал заседаний совета"
 instrumental = "залом заседаний совета"
 prepositional = "зале заседаний совета"
 gender = "male"
+
+["Nanotrasen radio jammer"]
+nominative = "генератор помех Нанотрейзен "
+genitive = "генератора помех Нанотрейзен"
+dative = "генератору помеху Нанотрейзен"
+accusative = "генератор помех Нанотрейзен"
+instrumental = "генератором помех Нанотрейзен"
+prepositional = "генераторе помех Нанотрейзен"
