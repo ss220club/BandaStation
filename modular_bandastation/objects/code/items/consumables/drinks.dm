@@ -691,7 +691,7 @@
 	required_temp = 333
 
 /datum/movespeed_modifier/reagent/robbusto
-	multiplicative_slowdown = -0.25
+	multiplicative_slowdown = -0.15
 
 /datum/reagent/consumable/robbusto/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -709,10 +709,43 @@
 	affected_mob.add_mood_event("tweaking", /datum/mood_event/stimulant_medium)
 	affected_mob.AdjustAllImmobility(-10 * REM * seconds_per_tick)
 	var/need_mob_update
-	need_mob_update = affected_mob.adjustStaminaLoss(-2 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	need_mob_update = affected_mob.adjustStaminaLoss(-1 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
 	affected_mob.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
 	need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_HEART, (rand(1,3) * REM * seconds_per_tick)/5, required_organ_flag = affected_organ_flags)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
 	if(SPT_PROB(2.5, seconds_per_tick))
 		affected_mob.emote(pick("twitch", "shiver"))
+
+/datum/reagent/consumable/vortex
+	name = "Вортекс-кофе"
+	description = "Кофе с пылью и магией блюспейса"
+	color = "#45a2e0"
+	taste_description = "кофе"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_HIGH
+
+/datum/glass_style/drinking_glass/vortex
+	required_drink_type = /datum/reagent/consumable/vortex
+	name = "Вортекс-кофе"
+	desc = "Кофе с пылью и магией блюспейса"
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "vortex"
+
+/datum/chemical_reaction/drink/vortex
+	results = list(/datum/reagent/consumable/vortex = 5)
+	required_reagents = list(
+		/datum/reagent/bluespace = 1,
+		/datum/reagent/stable_plasma = 1,
+		/datum/reagent/consumable/coffee = 2,
+		/datum/reagent/consumable/tonic = 1
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/vortex/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	if(SPT_PROB(5, seconds_per_tick))
+		do_teleport(affected_mob, get_turf(affected_mob), pick(2,3), channel = TELEPORT_CHANNEL_BLUESPACE)
