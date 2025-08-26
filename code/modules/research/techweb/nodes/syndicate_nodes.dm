@@ -40,7 +40,7 @@
 /datum/techweb_node/unregulated_bluespace
 	id = TECHWEB_NODE_UNREGULATED_BLUESPACE
 	display_name = "Нерегулируемое блюспейс исследование"
-	description = "Блюспейс технологи, что используют нестабильные и несбалансированные процедуры, способные повредить структуру самого блюспейса. Запрещена Галактической конвенцией."
+	description = "Блюспейс технологии, что используют нестабильные и несбалансированные процедуры, способные повредить структуру самого блюспейса. Запрещена Галактической конвенцией."
 	prereq_ids = list(TECHWEB_NODE_PARTS_BLUESPACE, TECHWEB_NODE_SYNDICATE_BASIC)
 	design_ids = list(
 		"desynchronizer",
