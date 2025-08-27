@@ -346,6 +346,432 @@
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
 
+// MARK: CM5 - SMG
+/obj/item/ammo_box/magazine/cm5
+	name = "SMG magazine (9x25mm NT)"
+	desc = "Магазин для пистолетов-пулеметов калибра 9x25мм НТ, вмещающий 30 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "cm5_mag"
+	base_icon_state = "cm5_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_9x25NT
+	max_ammo = 30
+	ammo_band_icon = "+cm5_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c9x25mm
+
+/obj/item/ammo_box/magazine/cm5/rubber
+	name = "SMG magazine (9x25mm NT rubber)"
+	desc = "Магазин для пистолетов-пулеметов калибра 9x25мм НТ, вмещающий 30 травматических патронов."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c9x25mm/rubber
+
+/obj/item/ammo_box/magazine/cm5/hp
+	name = "SMG magazine (9x25mm NT HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
+
+/obj/item/ammo_box/magazine/cm5/ap
+	name = "SMG magazine (9x25mm NT AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
+
+// MARK: CM82 - assault rifle
+/obj/item/ammo_box/magazine/c223
+	name = "assault rifle magazine (5.56mm)"
+	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "cm82_mag"
+	base_icon_state = "cm82_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_A223
+	max_ammo = 30
+	ammo_band_icon = "+cm82_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/a223
+
+/obj/item/ammo_box/magazine/c223/rubber
+	name = "assault rifle magazine (5.56mm rubber)"
+	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/a223/rubber
+
+/obj/item/ammo_box/magazine/c223/hp
+	name = "assault rifle magazine (5.56mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/a223/hp
+
+/obj/item/ammo_box/magazine/c223/ap
+	name = "assault rifle magazine (5.56mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/a223/ap
+
+/obj/item/ammo_box/magazine/c223/phasic
+	name = "assault rifle magazine (5.56mm phasic)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/a223/phasic
+
+/obj/item/ammo_box/magazine/c223/incendiary
+	name = "assault rifle magazine (5.56mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/a223/incendiary
+
+// MARK: CM15 - auto shotgun
+/obj/item/ammo_box/magazine/cm15
+	name = "CM15 magazine (12ga buckshot)"
+	desc = "Магазин для штурмовых дробовиков CM15 12-го калибра, вмещающий 8 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "cm15_standart"
+	base_icon_state = "cm15_standart"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_SHOTGUN
+	max_ammo = 8
+	ammo_band_icon = "+cm15_standart_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
+
+/obj/item/ammo_box/magazine/cm15/beanbag
+	name = "CM15 magazine (12ga beanbag)"
+	ammo_band_color = COLOR_GREEN
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+
+/obj/item/ammo_box/magazine/cm15/rubbershot
+	name = "CM15 magazine (12ga rubbershot)"
+	ammo_band_color = COLOR_PINK
+	ammo_type = /obj/item/ammo_casing/shotgun/rubbershot
+
+/obj/item/ammo_box/magazine/cm15/executioner
+	name = "CM15 magazine (12ga HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/shotgun/executioner
+
+/obj/item/ammo_box/magazine/cm15/slug
+	name = "CM15 magazine (12ga slugs)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/shotgun/milspec
+
+/obj/item/ammo_box/magazine/cm15/breacher
+	name = "CM15 magazine (12ga breaching)"
+	ammo_band_color = COLOR_BLUE_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/breacher
+
+/obj/item/ammo_box/magazine/cm15/frag12
+	name = "CM15 magazine (12ga FRAG-12)"
+	ammo_band_color = COLOR_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/frag12
+
+/obj/item/ammo_box/magazine/cm15/dragonsbreath
+	name = "CM15 magazine (12ga dragonsbreath)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/shotgun/dragonsbreath
+
+/obj/item/ammo_box/magazine/cm15/flechette
+	name = "CM15 magazine (12ga flechette)"
+	ammo_band_color = COLOR_ALMOST_BLACK
+	ammo_type = /obj/item/ammo_casing/shotgun/flechette
+
+/obj/item/ammo_box/magazine/cm15/drum
+	name = "CM15 drum magazine (12ga buckshot)"
+	desc = "Барабан для штурмовых дробовиков CM15 12-го калибра, вмещающий 16 патронов."
+	icon_state = "cm15_drum"
+	base_icon_state = "cm15_drum"
+	max_ammo = 16
+	ammo_band_icon = "+cm15_drum_ammo_band"
+
+/obj/item/ammo_box/magazine/cm15/drum/beanbag
+	name = "CM15 drum magazine (12ga beanbag)"
+	ammo_band_color = COLOR_GREEN
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+
+/obj/item/ammo_box/magazine/cm15/drum/rubbershot
+	name = "CM15 drum magazine (12ga rubbershot)"
+	ammo_band_color = COLOR_PINK
+	ammo_type = /obj/item/ammo_casing/shotgun/rubbershot
+
+/obj/item/ammo_box/magazine/cm15/drum/executioner
+	name = "CM15 drum magazine (12ga HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/shotgun/executioner
+
+/obj/item/ammo_box/magazine/cm15/drum/slug
+	name = "CM15 drum magazine (12ga slugs)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/shotgun/milspec
+
+/obj/item/ammo_box/magazine/cm15/drum/breacher
+	name = "CM15 drum magazine (12ga breaching)"
+	ammo_band_color = COLOR_BLUE_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/breacher
+
+/obj/item/ammo_box/magazine/cm15/drum/frag12
+	name = "CM15 drum magazine (12ga FRAG-12)"
+	ammo_band_color = COLOR_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/frag12
+
+/obj/item/ammo_box/magazine/cm15/drum/dragonsbreath
+	name = "CM15 drum magazine (12ga dragonsbreath)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/shotgun/dragonsbreath
+
+/obj/item/ammo_box/magazine/cm15/drum/flechette
+	name = "CM15 drum magazine (12ga flechette)"
+	ammo_band_color = COLOR_ALMOST_BLACK
+	ammo_type = /obj/item/ammo_casing/shotgun/flechette
+
+// MARK: F4 - battle rifle
+/obj/item/ammo_box/magazine/c762x51mm
+	name = "battle rifle magazine (7.62x51mm)"
+	desc = "Магазин для боевых винтовок калибра 7.62x51мм, вмещающий 20 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "762x51_mag"
+	base_icon_state = "762x51_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_762x51mm
+	max_ammo = 20
+	ammo_band_icon = "+762x51_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c762x51mm
+
+/obj/item/ammo_box/magazine/c762x51mm/rubber
+	name = "battle rifle magazine (7.62x51mm rubber)"
+	desc = "Магазин для боевых винтовок калибра 7.62x51мм, вмещающий 20 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c762x51mm/rubber
+
+/obj/item/ammo_box/magazine/c762x51mm/hp
+	name = "battle rifle magazine (7.62x51mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c762x51mm/hp
+
+/obj/item/ammo_box/magazine/c762x51mm/ap
+	name = "battle rifle magazine (7.62x51mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c762x51mm/ap
+
+/obj/item/ammo_box/magazine/c762x51mm/incendiary
+	name = "battle rifle magazine (7.62x51mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c762x51mm/incendiary
+
+// MARK: CM40 - LMG
+/obj/item/ammo_box/magazine/cm40
+	name = "CM40 box (7.62x51mm)"
+	desc = "Короб для легких пулеметов CM40 калибра 7.62x51мм, вмещающий 80 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "cm40_mag"
+	base_icon_state = "cm40_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_762x51mm
+	max_ammo = 80
+	ammo_band_icon = "+cm40_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c762x51mm
+
+/obj/item/ammo_box/magazine/cm40/rubber
+	name = "CM40 box (7.62x51mm rubber)"
+	desc = "Короб для легких пулеметов CM40 калибра 7.62x51мм, вмещающий 80 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c762x51mm/rubber
+
+/obj/item/ammo_box/magazine/cm40/hp
+	name = "CM40 box (7.62x51mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c762x51mm/hp
+
+/obj/item/ammo_box/magazine/cm40/ap
+	name = "CM40 box (7.62x51mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c762x51mm/ap
+
+/obj/item/ammo_box/magazine/cm40/incendiary
+	name = "CM40 box (7.62x51mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c762x51mm/incendiary
+
+// MARK: F90 - sniper rifle
+/obj/item/ammo_box/magazine/c338
+	name = "sniper rifle magazine (.338)"
+	desc = "Магазин для снайперских винтовок калибра .338, вмещающий 5 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "338_mag"
+	base_icon_state = "338_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_338
+	max_ammo = 5
+	ammo_band_icon = "+338_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c338
+
+/obj/item/ammo_box/magazine/c338/hp
+	name = "sniper rifle magazine (.338 HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c338/hp
+
+/obj/item/ammo_box/magazine/c338/ap
+	name = "sniper rifle magazine (.338 AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c338/ap
+
+/obj/item/ammo_box/magazine/c338/incendiary
+	name = "sniper rifle magazine (.338 incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c338/incendiary
+
+/obj/item/ammo_box/magazine/c338/extended
+	name = "extended sniper rifle magazine (.338)"
+	desc = "Магазин для снайперских винтовок калибра .338, вмещающий 10 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "338_mag_ext"
+	base_icon_state = "338_mag_ext"
+	ammo_band_icon = "+338_ext_ammo_band"
+	ammo_band_color = null
+	max_ammo = 10
+
+/obj/item/ammo_box/magazine/c338/extended/hp
+	name = "extended sniper rifle magazine (.338 HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c338/hp
+
+/obj/item/ammo_box/magazine/c338/extended/ap
+	name = "extended sniper rifle magazine (.338 AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c338/ap
+
+/obj/item/ammo_box/magazine/c338/extended/incendiary
+	name = "extended sniper rifle magazine (.338 incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c338/incendiary
+
+// MARK: CM23 - .38 cal pistol
+/obj/item/ammo_box/magazine/c38
+	name = "pistol magazine (.38)"
+	desc = "Пистолетный магазин калибра .38, вмещающий 12 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "c38_mag"
+	base_icon_state = "c38_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_38
+	max_ammo = 12
+	ammo_band_icon = "+c38_mag_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_PER_BULLET
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c38
+
+/obj/item/ammo_box/magazine/c38/rubber
+	name = "pistol magazine (.38 Rubber)"
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c38/match/bouncy
+
+/obj/item/ammo_box/magazine/c38/match
+	name = "pistol magazine (.38 Match)"
+	ammo_band_color = COLOR_AMMO_MATCH
+	ammo_type = /obj/item/ammo_casing/c38/match
+
+/obj/item/ammo_box/magazine/c38/true
+	name = "pistol magazine (.38 True Strike)"
+	ammo_band_color = COLOR_AMMO_TRUESTRIKE
+	ammo_type = /obj/item/ammo_casing/c38/match/true
+
+/obj/item/ammo_box/magazine/c38/laser
+	name = "pistol magazine (.38 Flare)"
+	ammo_band_color = COLOR_AMMO_HELLFIRE
+	ammo_type = /obj/item/ammo_casing/c38/flare
+
+/obj/item/ammo_box/magazine/c38/hotshot
+	name = "pistol magazine (.38 Hot Shot)"
+	ammo_band_color = COLOR_AMMO_HOTSHOT
+	ammo_type = /obj/item/ammo_casing/c38/hotshot
+
+/obj/item/ammo_box/magazine/c38/iceblox
+	name = "pistol magazine (.38 Iceblox)"
+	ammo_band_color = COLOR_AMMO_ICEBLOX
+	ammo_type = /obj/item/ammo_casing/c38/iceblox
+
+/obj/item/ammo_box/magazine/c38/ap
+	name = "pistol magazine (.38 AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c38/ap
+
+/obj/item/ammo_box/magazine/c38/hp
+	name = "pistol magazine (.38 DumDum)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c38/dumdum
+
+// MARK: CM357 - .357 cal pistol
+/obj/item/ammo_box/magazine/c357
+	name = "pistol magazine (.357)"
+	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "c357_mag"
+	base_icon_state = "c357_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_357
+	max_ammo = 8
+	ammo_band_icon = "+c357_mag_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c357
+
+/obj/item/ammo_box/magazine/c357/ap
+	name = "pistol magazine (.357 Phasic)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c357/phasic
+
+/obj/item/ammo_box/magazine/c357/match
+	name = "pistol magazine (.357 Match)"
+	ammo_band_color = COLOR_AMMO_MATCH
+	ammo_type = /obj/item/ammo_casing/c357/match
+
+/obj/item/ammo_box/magazine/c357/heartseeker
+	name = "pistol magazine (.357 Heartseeker)"
+	ammo_band_color = "#a91e1e"
+	ammo_type = /obj/item/ammo_casing/c357/heartseeker
+
+// MARK: CM70 - .45 cal pistol
+/obj/item/ammo_box/magazine/c45
+	name = "pistol magazine (.45)"
+	desc = "Пистолетный магазин калибра .45, вмещающий 10 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "c45_mag"
+	base_icon_state = "c45_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_45
+	max_ammo = 10
+	ammo_band_icon = "+c45_mag_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c45
+
+/obj/item/ammo_box/magazine/c45/ap
+	name = "pistol magazine (.45 AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c45/ap
+
+/obj/item/ammo_box/magazine/c45/hp
+	name = "pistol magazine (.45 HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c45/hp
+
+/obj/item/ammo_box/magazine/c45/incendiary
+	name = "pistol magazine (.45 incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c45/inc
+
 // MARK: Railgun
 /obj/item/ammo_box/magazine/railgun
 	name = "railgun magazine (30mm NT)"

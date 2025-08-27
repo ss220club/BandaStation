@@ -138,6 +138,113 @@
 	icon_state = "sa-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/ap
 
+// MARK: .223 aka 5.56mm
+/obj/item/ammo_casing/a223
+	name = "5.56mm bullet casing"
+	desc = "Стандартный летальный винтовочный патрон калибра 5.56мм."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "556-casing"
+	caliber = CALIBER_A223
+	projectile_type = /obj/projectile/bullet/a223
+
+/obj/item/ammo_casing/a223/rubber
+	name = "5.56mm rubber bullet casing"
+	desc = "Травматический винтовочный патрон c резиновой пулей калибра 5.56мм."
+	icon_state = "556r-casing"
+	projectile_type = /obj/projectile/bullet/a223/rubber
+
+/obj/item/ammo_casing/a223/hp
+	name = "5.56mm hollow-point bullet casing"
+	desc = "Экспансивный винтовочный патрон калибра 5.56мм."
+	icon_state = "556hp-casing"
+	projectile_type = /obj/projectile/bullet/a223/hp
+
+/obj/item/ammo_casing/a223/ap
+	name = "5.56mm armor-piercing bullet casing"
+	desc = "Бронебойный винтовочный патрон калибра 5.56мм."
+	icon_state = "556ap-casing"
+	projectile_type = /obj/projectile/bullet/a223/ap
+
+/obj/item/ammo_casing/a223/phasic
+	name = "5.56mm phasic bullet casing"
+	desc = "Бронебойный-фазовый винтовочный патрон калибра 5.56мм."
+	icon_state = "556pen-casing"
+	projectile_type = /obj/projectile/bullet/a223/phasic
+
+/obj/item/ammo_casing/a223/incendiary
+	name = "5.56mm incendiary bullet casing"
+	desc = "Зажигательный винтовочный патрон калибра 5.56мм."
+	icon_state = "556i-casing"
+	projectile_type = /obj/projectile/bullet/incendiary/a223
+
+// MARK: 7.62x51mm
+/obj/item/ammo_casing/c762x51mm
+	name = "7.62x51mm bullet casing"
+	desc = "Стандартный летальный винтовочный патрон калибра 7.62x51мм."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "762x51-casing"
+	caliber = CALIBER_762x51mm
+	projectile_type = /obj/projectile/bullet/c762x51mm
+
+/obj/item/ammo_casing/c762x51mm/rubber
+	name = "7.62x51mm rubber bullet casing"
+	desc = "Травматический винтовочный патрон c резиновой пулей калибра 7.62x51мм."
+	icon_state = "762x51r-casing"
+	projectile_type = /obj/projectile/bullet/c762x51mm/rubber
+
+/obj/item/ammo_casing/c762x51mm/hp
+	name = "7.62x51mm hollow-point bullet casing"
+	desc = "Экспансивный винтовочный патрон калибра 7.62x51мм."
+	icon_state = "762x51hp-casing"
+	projectile_type = /obj/projectile/bullet/c762x51mm/hp
+
+/obj/item/ammo_casing/c762x51mm/ap
+	name = "7.62x51mm armor-piercing bullet casing"
+	icon_state = "762x51ap-casing"
+	desc = "Бронебойный винтовочный патрон калибра 7.62x51мм."
+	projectile_type = /obj/projectile/bullet/c762x51mm/ap
+
+/obj/item/ammo_casing/c762x51mm/incendiary
+	name = "7.62x51mm incendiary bullet casing"
+	icon_state = "762x51i-casing"
+	desc = "Зажигательный винтовочный патрон калибра 7.62x51мм."
+	projectile_type = /obj/projectile/bullet/incendiary/c762x51mm
+
+// MARK: .338 aka 8.6x70mm
+/obj/item/ammo_casing/c338
+	name = ".338 bullet casing"
+	desc = "Крупнокалиберный винтовочный патрон калибра .338."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "338-casing"
+	caliber = CALIBER_338
+	projectile_type = /obj/projectile/bullet/c338
+
+/obj/item/ammo_casing/c338/hp
+	name = ".338 hollow-point bullet casing"
+	desc = "Крупнокалиберный экспансивный винтовочный патрон калибра .338."
+	icon_state = "338hp-casing"
+	projectile_type = /obj/projectile/bullet/c338/hp
+
+/obj/item/ammo_casing/c338/ap
+	name = ".338 armor-piercing bullet casing"
+	desc = "Крупнокалиберный бронебойный винтовочный патрон калибра .338."
+	icon_state = "338ap-casing"
+	projectile_type = /obj/projectile/bullet/c338/ap
+
+/obj/item/ammo_casing/c338/incendiary
+	name = ".338 incendiary bullet casing"
+	icon_state = "338i-casing"
+	desc = "Крупнокалиберный зажигательный винтовочный патрон калибра .338."
+	projectile_type = /obj/projectile/bullet/incendiary/c338
+
+// MARK: .38
+/obj/item/ammo_casing/c38/ap
+	name = ".38 armor-piercing bullet casing"
+	desc = "Бронебойный пистолетный патроны калибра .38."
+	projectile_type = /obj/projectile/bullet/c38/ap
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "sa-casing"
+
 // MARK: Railgun
 /obj/item/ammo_casing/railgun
 	name = "railgun sabot-round"
