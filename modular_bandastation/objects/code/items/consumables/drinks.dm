@@ -607,7 +607,7 @@
 
 /datum/reagent/consumable/slimetea
 	name = "Слизнечай"
-	description = "Странная жидкость, слегка студинистая, в которой плавают ягоды, но пахнет вкусно"
+	description = "Странная жидкость, слегка студинистая, в которой плавают ягоды, но пахнет вкусно."
 	color = "#22e46c"
 	taste_description = "яблочный джем с черникой и чаем"
 	nutriment_factor = 1
@@ -618,7 +618,7 @@
 /datum/glass_style/drinking_glass/slimetea
 	required_drink_type = /datum/reagent/consumable/slimetea
 	name = "Слизнечай"
-	desc = "Стакан с студинистой жидкостью. внутри которой плавают ягоды"
+	desc = "Стакан с студинистой жидкостью. внутри которой плавают ягоды."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "slimetea"
 
@@ -639,7 +639,7 @@
 
 /datum/reagent/consumable/glace
 	name = "Гляссе"
-	description = "Кофе с шариком мороженного сверху"
+	description = "Кофе с шариком мороженного сверху."
 	color = "#dfa057"
 	taste_description = "холодный кофе, пломбир и шоколадная крошка"
 	nutriment_factor = 1
@@ -650,7 +650,7 @@
 /datum/glass_style/drinking_glass/glace
 	required_drink_type = /datum/reagent/consumable/glace
 	name = "Гляссе"
-	desc = "Стакан доверху заполненный мороженным, который плавает на кофе"
+	desc = "Стакан доверху заполненный мороженным, который плавает на кофе."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "glace"
 
@@ -666,7 +666,7 @@
 
 /datum/reagent/consumable/robbusto
 	name = "Роббусто"
-	description = "Крепкий кофе для рабочей смены"
+	description = "Крепкий кофе для рабочей смены."
 	color = "#4e361b"
 	taste_description = "горький кофе с сладким послевкусием"
 	nutriment_factor = 1
@@ -677,7 +677,7 @@
 /datum/glass_style/drinking_glass/robbusto
 	required_drink_type = /datum/reagent/consumable/robbusto
 	name = "Роббусто"
-	desc = "Стакан с крепким кофе"
+	desc = "Стакан с крепким кофе."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "robbusto"
 
@@ -719,9 +719,9 @@
 
 /datum/reagent/consumable/vortex
 	name = "Вортекс-кофе"
-	description = "Кофе с пылью и магией блюспейса"
+	description = "Кофе, тоник и Блюспейс, любимый рецепт рода Дремисов."
 	color = "#45a2e0"
-	taste_description = "кофе"
+	taste_description = "горечь кофе с привкусом стекла"
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_NICE
@@ -730,7 +730,7 @@
 /datum/glass_style/drinking_glass/vortex
 	required_drink_type = /datum/reagent/consumable/vortex
 	name = "Вортекс-кофе"
-	desc = "Кофе с пылью и магией блюспейса"
+	desc = "Кофе, тоник и Блюспейс, любимый рецепт рода Дремисов."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "vortex"
 
@@ -749,3 +749,58 @@
 	. = ..()
 	if(SPT_PROB(5, seconds_per_tick))
 		do_teleport(affected_mob, get_turf(affected_mob), pick(2,3), channel = TELEPORT_CHANNEL_BLUESPACE)
+
+/datum/reagent/consumable/mokko
+	name = "Мокко"
+	description = "Изящный кофе для распития, сидя в капитанском кресле."
+	color = "#57361b"
+	taste_description = "капучинно с взбитыми сливками и шоколадной крошкой"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_HIGH
+
+/datum/glass_style/drinking_glass/mokko
+	required_drink_type = /datum/reagent/consumable/mokko
+	name = "Мокко"
+	desc = "Изящный кофе для распития, сидя в капитанском кресле."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "mokka"
+
+/datum/chemical_reaction/drink/mokko
+	results = list(/datum/reagent/consumable/mokko = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/coco = 1,
+		/datum/reagent/consumable/coffee = 2,
+		/datum/reagent/consumable/cream = 2,
+
+	)
+	required_temp = 303
+
+/datum/reagent/consumable/frappuchino
+	name = "Фраппучино"
+	description = "Холодный кофе со льдом, который вы уже где-то видели..."
+	color = "#bb8960"
+	taste_description = "мороженное с кофе, столь холодный, что зубы сводит"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_HIGH
+
+/datum/glass_style/drinking_glass/frappuchino
+	required_drink_type = /datum/reagent/consumable/frappuchino
+	name = "Фраппучино"
+	desc = "Холодный кофе со льдом, который вы уже где-то видели..."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "frappuchino"
+
+/datum/chemical_reaction/drink/frappuchino
+	results = list(/datum/reagent/consumable/frappuchino = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/ice = 1,
+		/datum/reagent/toxin/coffeepowder = 2,
+		/datum/reagent/consumable/milk = 2,
+
+	)
+	is_cold_recipe = TRUE
+	required_temp = 243
