@@ -685,7 +685,7 @@
 	results = list(/datum/reagent/consumable/robbusto = 4)
 	required_reagents = list(
 		/datum/reagent/toxin/coffeepowder = 3,
-		/datum/reagent/consumable/sugar = 1
+		/datum/reagent/consumable/sugar = 2
 
 	)
 	required_temp = 333
@@ -758,7 +758,7 @@
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_NICE
-	glass_price = DRINK_PRICE_HIGH
+	glass_price = DRINK_PRICE_MEDIUM
 
 /datum/glass_style/drinking_glass/mokko
 	required_drink_type = /datum/reagent/consumable/mokko
@@ -784,8 +784,8 @@
 	taste_description = "мороженное с кофе, столь холодный, что зубы сводит"
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	quality = DRINK_NICE
-	glass_price = DRINK_PRICE_HIGH
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_MEDIUM
 
 /datum/glass_style/drinking_glass/frappuchino
 	required_drink_type = /datum/reagent/consumable/frappuchino
@@ -804,3 +804,55 @@
 	)
 	is_cold_recipe = TRUE
 	required_temp = 243
+
+/datum/reagent/consumable/macchiato
+	name = "Макиато"
+	description = "Младшая сестра мокко. Или латте? Здесь слишком мало молока чтобы понять."
+	color = "#503620"
+	taste_description = "сливочный вкус с густой бархатистой молочной пенкой"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_STOCK
+
+/datum/glass_style/drinking_glass/macchiato
+	required_drink_type = /datum/reagent/consumable/macchiato
+	name = "Макиато"
+	desc = "Младшая сестра мокко. Или латте? Здесь слишком мало молока чтобы понять."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "macchiato"
+
+/datum/chemical_reaction/drink/macchiato
+	results = list(/datum/reagent/consumable/macchiato = 3)
+	required_reagents = list(,
+		/datum/reagent/toxin/coffeepowder = 2,
+		/datum/reagent/consumable/milk = 1,
+
+	)
+	required_temp = 303
+
+/datum/reagent/consumable/espresso
+	name = "Эспрессо"
+	description = "Бессмертная классика кофейных напитков в миниатюрном формате."
+	color = "#503620"
+	taste_description = "кисло-сладкий кофе с легким оттенком горечи"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/espresso
+	required_drink_type = /datum/reagent/consumable/espresso
+	name = "Эспрессо"
+	desc = "Бессмертная классика кофейных напитков в миниатюрном формате."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "espresso"
+
+/datum/chemical_reaction/drink/espresso
+	results = list(/datum/reagent/consumable/espresso = 3)
+	required_reagents = list(,
+		/datum/reagent/toxin/coffeepowder = 4,
+		/datum/reagent/water = 1,
+
+	)
+	required_temp = 333
