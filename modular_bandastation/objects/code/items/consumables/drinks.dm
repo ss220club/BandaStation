@@ -1011,7 +1011,7 @@
 	name = "Лавандовый рафф"
 	description = "Напиток для тех, кто обожает ИИ и разработку."
 	color = "#be30e9"
-	taste_description = "очень крепкий чай, отдающий железом"
+	taste_description = "кофе со сливками и вкусом сушенной лаванды"
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_NICE

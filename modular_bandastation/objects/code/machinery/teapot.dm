@@ -18,6 +18,9 @@
 	var/heater_coefficient = 0.45
 	/// Current temperature for reagents
 	var/temperature = 273
+	var/TEAPOT_MAX_TEMP = 333
+	var/TEAPOT_MIN_TEMP = 213
+	var/TEAPOT_TEMP_STEP = 30
 
 /obj/machinery/teapot/Initialize(mapload)
 	. = ..()
@@ -178,7 +181,7 @@
 	//add the glass
 	if (istype(tool,/obj/item/reagent_containers/cup/glass))
 		replace_beaker(user, tool)
-		to_chat(user, span_notice("You add [tool] to [src]."))
+		to_chat(user, span_notice("Вы добавили [tool] в [src]."))
 		return ITEM_INTERACT_SUCCESS
 
 	return NONE
@@ -215,7 +218,7 @@
 	. = NONE
 
 	if(is_operating)
-		balloon_alert(user, "still operating!")
+		balloon_alert(user, "Машина выполняет работу!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(default_deconstruction_crowbar(tool))
@@ -278,18 +281,18 @@
 
 
 		if("temp_up")
-			if(temperature < 333)
-				temperature += 30
-				balloon_alert(user,"Temperature is [temperature]")
+			if(temperature < TEAPOT_MAX_TEMP)
+				temperature += TEAPOT_TEMP_STEP
+				balloon_alert(user,"Температура: [temperature]")
 			else
-				balloon_alert(user,"This is the maximum temperature")
+				balloon_alert(user,"Это максимальная температура")
 
 		if("temp_down")
-			if(temperature > 213)
-				temperature += -30
-				balloon_alert(user,"Temperature is [temperature]")
+			if(temperature > TEAPOT_MIN_TEMP)
+				temperature += -TEAPOT_TEMP_STEP
+				balloon_alert(user,"Температура: [temperature]")
 			else
-				balloon_alert(user,"This is the minimum temperature")
+				balloon_alert(user,"Это минимальная температура")
 
 		if("examine")
 			to_chat(user, boxed_message(jointext(examine(user), "\n")))

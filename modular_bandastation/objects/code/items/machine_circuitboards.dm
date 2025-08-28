@@ -9,4 +9,3 @@
 		/obj/item/stack/sheet/glass = 5
 		)
 	needs_anchored = FALSE //wew lad
-	var/secure = FALSE
