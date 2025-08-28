@@ -34,7 +34,7 @@
 	return ..()
 
 /obj/machinery/teapot/contents_explosion(severity, target)
-	if(!QDELETED(glass))
+	if(QDELETED(glass))
 		return
 
 	switch(severity)

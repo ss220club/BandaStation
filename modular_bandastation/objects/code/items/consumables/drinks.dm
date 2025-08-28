@@ -697,7 +697,7 @@
 	. = ..()
 	affected_mob.add_movespeed_modifier(/datum/movespeed_modifier/reagent/robbusto)
 
-/datum/reagent/consumable/robbusto/robbusto/on_mob_end_metabolize(mob/living/affected_mob)
+/datum/reagent/consumable/robbusto/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
 	affected_mob.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/robbusto)
 
