@@ -161,7 +161,7 @@ function preCleanup(s: string) {
 }
 
 export function MarkdownRenderer(props: MarkdownRendererProps) {
-  let { content, sanitize = true, advHtml = true } = props;
+  let { content, sanitize = true, advHtml = false } = props;
   content = preCleanup(content);
   content = marked(content, { async: false, gfm: true, breaks: true }) as string;
   if (sanitize) content = sanitizeText(content, advHtml);

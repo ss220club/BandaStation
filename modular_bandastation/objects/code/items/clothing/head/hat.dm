@@ -42,6 +42,43 @@
 	acid = 50
 	wound = 10
 
+/obj/item/clothing/head/beret/ert
+	name = "SRT operative beret"
+	desc = "Берет оперативника ОСР."
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
+	icon_state = "/obj/item/clothing/head/beret/ert"
+	post_init_icon_state = "beret_badge"
+	greyscale_config = /datum/greyscale_config/beret_badge
+	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
+	greyscale_colors = "#43523d#a2abb0"
+	armor_type = /datum/armor/cent_intern
+	dog_fashion = null
+	flags_1 = NONE
+
+/obj/item/clothing/head/beret/ert/amber
+	name = "amber ERT commander beret"
+	desc = "Берет командира отряда быстрого реагирования кода «ЭМБЕР»"
+	icon_state = "/obj/item/clothing/head/beret/ert/amber"
+	greyscale_colors = "#526382#eeeeee"
+
+/obj/item/clothing/head/beret/ert/red
+	name = "red ERT commander beret"
+	desc = "Берет командира отряда быстрого реагирования кода «РЭД»."
+	icon_state = "/obj/item/clothing/head/beret/ert/red"
+	greyscale_colors = "#526382#cc9900"
+
+/obj/item/clothing/head/beret/ert/gamma
+	name = "gamma ERT commander beret"
+	desc = "Берет командира отряда быстрого реагирования кода «ГАММА»."
+	icon_state = "/obj/item/clothing/head/beret/ert/gamma"
+	greyscale_colors = "#212121#cc9900"
+
+/obj/item/clothing/head/beret/ert/janitor
+	name = "janitor ERT operative beret"
+	desc = "Берет оперативника-уборщика отряда быстрого реагирования. Символ неумолимой стойкости перед любыми угрозами для чистоты."
+	icon_state = "/obj/item/clothing/head/beret/ert/janitor"
+	greyscale_colors = "#7e1980#cc9900"
+
 /obj/item/clothing/head/beret/cent_diplomat
 	name = "fleet officer's white beret"
 	desc = "Изящный белый берет. На подкладке вышита надпись: \"НЕ ПОДЛЕЖИТ СТИРКЕ!\""
