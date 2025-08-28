@@ -10,4 +10,5 @@
 #include "code/shadowlings/abilities/shadow_phase.dm"
 #include "code/shadowlings/abilities/shadow_speed.dm"
 #include "code/shadowlings/abilities/spells/_spell.dm"
+#include "code/shadowlings/abilities/spells/enthrall.dm"
 #include "code/shadowlings/abilities/spells/hive_sync.dm"

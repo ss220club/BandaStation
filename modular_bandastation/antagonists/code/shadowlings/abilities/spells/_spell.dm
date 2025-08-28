@@ -10,7 +10,7 @@
 	cooldown_time = 10 SECONDS
 
 	/// Минимальный тир роя для активации
-	var/required_tier = TIER_T0
+	var/required_thralls = 0
 	/// Требуется ли темнота на кастере
 	var/requires_dark_user = FALSE
 	/// Требуется ли темнота на цели (если используется цель)
@@ -23,42 +23,12 @@
 	var/cancel_on_bright = TRUE
 
 /***********************
- * Активатор
- ***********************/
-
-/datum/action/cooldown/shadowling/Trigger(mob/clicker, trigger_flags, atom/target)
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H))
-		return
-
-	if(!CanUse(H))
-		to_chat(H, span_warning("Сейчас нельзя."))
-		return
-
-	if(!ValidateTarget(H, target))
-		to_chat(H, span_warning("Цель недоступна."))
-		return
-
-	if(channel_time > 0)
-		if(!PerformChannel(H, target))
-			return
-
-	if(DoEffect(H, target))
-		StartCooldown()
-
-/***********************
  * Проверки
  ***********************/
 
 /datum/action/cooldown/shadowling/proc/CanUse(mob/living/carbon/human/H)
 	var/datum/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
-		return FALSE
-
-	if(!(H in hive.lings) && !(H in hive.thralls))
-		return FALSE
-
-	if(hive.current_tier <= required_tier)
 		return FALSE
 
 	if(requires_dark_user && !is_dark(H))
@@ -70,16 +40,6 @@
 	return H
 
 /datum/action/cooldown/shadowling/proc/ValidateTarget(mob/living/carbon/human/H, atom/target)
-	if(!target)
-		return FALSE
-
-	if(max_range > 0)
-		if(get_dist(H, target) > max_range)
-			return FALSE
-
-	if(requires_dark_target && !is_dark(target))
-		return FALSE
-
 	return TRUE
 
 /***********************
@@ -115,3 +75,92 @@
 
 /datum/action/cooldown/shadowling/proc/DoEffect(mob/living/carbon/human/H, atom/target)
 	return FALSE
+
+/datum/action/cooldown/shadowling/Trigger(mob/clicker, trigger_flags, atom/target)
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return
+
+	if(!CanUse(H))
+		to_chat(H, span_warning("Сейчас нельзя."))
+		return
+
+	var/list/targets = CollectTargets(H, target)
+	if(!ValidateTargets(H, targets))
+		to_chat(H, span_warning("Нет доступных целей."))
+		return
+
+	if(channel_time > 0)
+		if(!PerformChannel(H, null)) // канал не привязываем к конкретной цели
+			return
+
+	if(DoEffectOnTargets(H, targets))
+		StartCooldown()
+
+/***********************
+ * Таргетинг (НОВОЕ)
+ ***********************/
+
+/// Собрать цели. По умолчанию — одна: explicit или self.
+/datum/action/cooldown/shadowling/proc/CollectTargets(mob/living/carbon/human/H, atom/explicit)
+	if(explicit)
+		return list(explicit)
+	return list(H)
+
+/// Валидировать список целей (дистанция/тьма + пользовательская ValidateTarget)
+/datum/action/cooldown/shadowling/proc/ValidateTargets(mob/living/carbon/human/H, list/targets)
+	if(!islist(targets) || !length(targets))
+		// некоторые сплеши могут работать и без списка (например, чисто self)
+		return TRUE
+
+	for(var/atom/T in targets)
+		if(max_range > 0)
+			if(get_dist(H, T) > max_range)
+				return FALSE
+		if(requires_dark_target && !is_dark(T))
+			return FALSE
+		if(!ValidateTarget(H, T)) // хук для наследников (по умолчанию TRUE)
+			return FALSE
+	return TRUE
+
+/// Применить эффект ко всем целям. По умолчанию — совместимость со старым DoEffect.
+/datum/action/cooldown/shadowling/proc/DoEffectOnTargets(mob/living/carbon/human/H, list/targets)
+	if(!islist(targets) || !length(targets))
+		return DoEffect(H, null)
+	var/success = FALSE
+	// дефолт — работаем по ПЕРВОЙ цели, как раньше
+	success = DoEffect(H, targets[1]) || success
+	return success
+
+/***********************
+ * Утилиты конуса (НОВОЕ)
+ ***********************/
+
+/// В конусе относительно взгляда H? full_angle: 90, 135, 180 (дискретные 8-напр. допуски)
+/datum/action/cooldown/shadowling/proc/in_front_cone(mob/living/carbon/human/H, atom/A, full_angle = 90)
+	if(!H.dir) // нет направления — считаем валидным
+		return TRUE
+	var/tdir = get_dir(H, A)
+	if(!tdir)
+		return FALSE
+
+	var/list/allowed = list(H.dir)
+	if(full_angle >= 90)
+		allowed += list(turn(H.dir, 45), turn(H.dir, -45))
+	if(full_angle >= 135)
+		allowed += list(turn(H.dir, 90), turn(H.dir, -90))
+	if(full_angle >= 180)
+		allowed = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+
+	return (tdir in allowed)
+
+/// Собрать людей в радиусе r в конусе full_angle° по направлению H
+/datum/action/cooldown/shadowling/proc/collect_cone_targets(mob/living/carbon/human/H, r = 2, full_angle = 90)
+	var/list/res = list()
+	for(var/mob/living/carbon/human/T in range(r, H))
+		if(T == H)
+			continue
+		if(!in_front_cone(H, T, full_angle))
+			continue
+		res += T
+	return res
