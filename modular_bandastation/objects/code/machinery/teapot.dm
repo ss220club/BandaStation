@@ -1,6 +1,6 @@
 /obj/machinery/teapot
 	name = "Чайник"
-	desc = "Бла бал бла, уничтожить Арасаку"
+	desc = "Устройство для нагревания и охлаждения напитков. Работает в фиксированном диапозоне температур. Принимает только стаканы."
 	icon = 'modular_bandastation/objects/icons/obj/machines/teapot.dmi'
 	icon_state = "teapot_empty"
 	base_icon_state = "teapot"
