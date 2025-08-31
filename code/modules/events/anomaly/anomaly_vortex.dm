@@ -17,4 +17,4 @@
 /datum/round_event/anomaly/anomaly_vortex/announce(fake)
 	if(isnull(impact_area))
 		impact_area = placer.findValidArea()
-	priority_announce("Вихревая аномалия высокой интенсивности обнаружена на [ANOMALY_ANNOUNCE_DANGEROUS_TEXT] [impact_area.name]", "Обнаружена аномалия")
+	priority_announce("Вихревая аномалия высокой интенсивности обнаружена на [ANOMALY_ANNOUNCE_DANGEROUS_TEXT] [impact_area.declent_ru(NOMINATIVE)]", "Обнаружена аномалия")

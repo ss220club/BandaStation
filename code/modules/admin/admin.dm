@@ -1,14 +1,16 @@
 ////////////////////////////////
 /proc/message_admins(msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
-	to_chat(GLOB.admins,
+	to_chat(
+		get_holders_with_rights(R_ADMIN), /// BANDASTATION EDIT: Proper permissions
 		type = MESSAGE_TYPE_ADMINLOG,
 		html = msg,
 		confidential = TRUE)
 
 /proc/relay_msg_admins(msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">RELAY:</span> <span class=\"message\">[msg]</span></span>"
-	to_chat(GLOB.admins,
+	to_chat(
+		get_holders_with_rights(R_ADMIN), /// BANDASTATION EDIT: Proper permissions
 		type = MESSAGE_TYPE_ADMINLOG,
 		html = msg,
 		confidential = TRUE)

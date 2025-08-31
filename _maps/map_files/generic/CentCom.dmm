@@ -48,7 +48,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
 "aah" = (
-/turf/open/floor/iron/dark/diagonal,
+/turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aai" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1825,13 +1825,17 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "ahC" = (
-/obj/machinery/button/door/indestructible{
+/obj/machinery/door/poddoor/ert{
 	name = "ERT Drop Pod";
-	id = "CC_ERT_Pod_1";
-	req_access = list("cent_general")
+	id = "CC_ERT_Pod_3"
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod)
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery,
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "ahE" = (
 /obj/effect/turf_decal/delivery,
 /obj/effect/light_emitter/podbay,
@@ -2613,10 +2617,16 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "amb" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
+/obj/machinery/button/door/indestructible{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
+	req_access = list("cent_general");
+	pixel_y = 24
 	},
-/turf/open/floor/iron/smooth_large,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "amf" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2907,10 +2917,18 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "anv" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 5
+/obj/effect/bump_teleporter{
+	name = "CC_pods-enter";
+	id = "cc_pods-enter1";
+	id_target = "cc_pods-hangar1"
 	},
-/turf/open/floor/iron/smooth_large,
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/iron/stairs/right{
+	color = "#6d6e73";
+	dir = 8
+	},
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "anw" = (
 /obj/machinery/mech_bay_recharge_port,
@@ -3290,10 +3308,7 @@
 /turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/briefing)
 "apv" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 10
-	},
-/turf/open/floor/iron/smooth_large,
+/turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "apw" = (
 /obj/effect/turf_decal/delivery,
@@ -5770,8 +5785,10 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "aCk" = (
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron/smooth_large,
+/obj/structure/railing/corner/end{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aCl" = (
 /obj/structure/table/wood/fancy/black,
@@ -6078,13 +6095,16 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
 "aDx" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 6
+/obj/effect/bump_teleporter{
+	name = "CC_pods-enter";
+	id = "cc_pods-enter3";
+	id_target = "cc_pods-hangar3"
 	},
-/obj/effect/baseturf_helper{
-	baseturf = /turf/open/floor/plating
+/obj/structure/railing,
+/turf/open/floor/iron/stairs/left{
+	color = "#6d6e73";
+	dir = 8
 	},
-/turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aDy" = (
 /obj/effect/turf_decal/line/dark_blue/line/stripes/contrasted{
@@ -6135,10 +6155,15 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "aDE" = (
-/obj/effect/turf_decal/stripes/line{
+/obj/effect/bump_teleporter{
+	name = "CC_pods-enter";
+	id = "cc_pods-enter2";
+	id_target = "cc_pods-hangar2"
+	},
+/turf/open/floor/iron/stairs/medium{
+	color = "#6d6e73";
 	dir = 4
 	},
-/turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aDK" = (
 /turf/closed/indestructible/riveted,
@@ -7207,8 +7232,10 @@
 /turf/open/water/beach,
 /area/centcom/central_command_areas/bar)
 "aHk" = (
-/obj/effect/light_emitter/podbay,
-/turf/open/floor/iron/dark/diagonal,
+/turf/open/floor/iron/stairs/medium{
+	color = "#6d6e73";
+	dir = 4
+	},
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aHl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
@@ -7384,8 +7411,14 @@
 /area/centcom/central_command_areas/ferry)
 "aHT" = (
 /obj/machinery/door/poddoor/ert{
-	name = "ERT Drop Pod";
-	id = "CC_ERT_Pod_1"
+	name = "ERT Drop Pods Hangar";
+	id = "CC_ERT_Drop_Pods_Hangar"
+	},
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod Hangars";
+	id = "CC_ERT_Drop_Pods_Hangar";
+	req_access = list("cent_captain");
+	pixel_x = 24
 	},
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/supplypod)
@@ -8104,10 +8137,8 @@
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
 "aKa" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/iron/smooth_large,
+/obj/structure/light_fake/spot/directional/north,
+/turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aKb" = (
 /obj/effect/decal/cleanable/dirt,
@@ -11324,11 +11355,8 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "aWT" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/supplypod/loading/ert)
+/turf/open/floor/plating/elevatorshaft,
+/area/centcom/central_command_areas/supplypod)
 "aWV" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -11579,9 +11607,11 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aYd" = (
-/obj/structure/sign/departments/drop,
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod)
+/obj/effect/turf_decal/trimline/dark_red/filled/warning{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "aYf" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -12355,6 +12385,15 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/hotel)
+"bta" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_2"
+	},
+/obj/machinery/atmos_shield_gen/active,
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "bua" = (
 /obj/machinery/door/airlock/centcom,
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
@@ -12527,6 +12566,16 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"bJp" = (
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_1";
+	req_access = list("cent_general");
+	pixel_x = 24
+	},
+/obj/effect/turf_decal/trimline/dark_red/filled/corner,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "bNe" = (
 /obj/item/kirbyplants/random,
 /obj/effect/turf_decal/trimline/yellow/filled/line{
@@ -12652,6 +12701,11 @@
 "bVR" = (
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/courtroom)
+"bWh" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "bWN" = (
 /turf/open/space/basic,
 /area/space/nearstation)
@@ -12728,6 +12782,10 @@
 /obj/item/knife/plastic,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/courtroom)
+"caT" = (
+/obj/effect/light_emitter/podbay,
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/supplypod)
 "ccM" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 5
@@ -13135,6 +13193,13 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"cHA" = (
+/obj/structure/light_fake/spot/directional/south,
+/obj/effect/baseturf_helper{
+	baseturf = /turf/open/floor/plating
+	},
+/turf/open/floor/iron/dark/small,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "cJt" = (
 /obj/machinery/vending/cigarette,
 /turf/open/floor/iron/dark/smooth_large,
@@ -13209,6 +13274,18 @@
 	},
 /turf/open/floor/carpet/neon/simple/blue,
 /area/centcom/central_command_areas/planetary_port/club)
+"cOq" = (
+/obj/structure/railing,
+/obj/effect/bump_teleporter{
+	name = "CC_pods-hangar";
+	id = "cc_pods-hangar3";
+	id_target = "cc_pods-enter3"
+	},
+/turf/open/floor/iron/stairs/left{
+	color = "#6d6e73";
+	dir = 8
+	},
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "cOz" = (
 /obj/structure/cable/layer3,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -13216,6 +13293,17 @@
 /obj/effect/turf_decal/line/dark_blue/line,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
+"cPE" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_4"
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "cQb" = (
 /obj/structure/flora/bush/jungle/a/style_random,
 /turf/open/floor/grass,
@@ -13260,6 +13348,18 @@
 	},
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/planetary_port/library)
+"cTD" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod"
+	},
+/obj/machinery/atmos_shield_gen/active,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "cWi" = (
 /obj/machinery/door/airlock/centcom,
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
@@ -13392,6 +13492,12 @@
 "dor" = (
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/cabin/captain)
+"doS" = (
+/obj/structure/railing/corner/end/flip{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "dpa" = (
 /obj/effect/turf_decal/tile/dark/fourcorners{
 	alpha = 50
@@ -13586,6 +13692,20 @@
 	},
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/conference_room)
+"dDD" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/effect/bump_teleporter{
+	name = "CC_pods-hangar";
+	id = "cc_pods-hangar1";
+	id_target = "cc_pods-enter1"
+	},
+/turf/open/floor/iron/stairs/right{
+	color = "#6d6e73";
+	dir = 8
+	},
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "dDO" = (
 /obj/machinery/computer/cargo/request{
 	dir = 4
@@ -13698,6 +13818,15 @@
 /obj/effect/turf_decal/line/dark_blue,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
+"dLt" = (
+/obj/structure/sign/nanotrasen{
+	pixel_y = 32
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "dMI" = (
 /obj/effect/turf_decal/siding/wideplating/dark/corner,
 /turf/open/floor/grass,
@@ -13755,6 +13884,12 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/arboretum)
+"dUY" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod)
 "dVL" = (
 /obj/machinery/vending/coffee,
 /turf/open/floor/carpet/royalblack,
@@ -13824,6 +13959,12 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/club)
+"ebg" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod)
 "ebR" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -13869,6 +14010,16 @@
 /obj/machinery/fax/admin,
 /turf/open/floor/pod/dark,
 /area/centcom/central_command_areas/cabin)
+"efX" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_3"
+	},
+/obj/machinery/atmos_shield_gen/active,
+/obj/effect/turf_decal/delivery,
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "egI" = (
 /obj/effect/turf_decal/siding/dark/end{
 	dir = 4
@@ -13919,6 +14070,15 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"ejI" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_3"
+	},
+/obj/effect/turf_decal/delivery,
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "ekC" = (
 /turf/open/floor/iron/stairs/left{
 	color = "#6d6e73"
@@ -14043,6 +14203,12 @@
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/south,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
+"exX" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod)
 "eAr" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
@@ -14310,6 +14476,12 @@
 	},
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"fgf" = (
+/obj/structure/fluff/fake_vent{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "fgA" = (
 /obj/structure/flora/tree/jungle/small/style_random,
 /obj/effect/light_emitter/podbay,
@@ -14483,6 +14655,9 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/hallway)
+"fDD" = (
+/turf/closed/indestructible/fakedoor,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "fFG" = (
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 10
@@ -14805,6 +14980,15 @@
 /obj/structure/sign/flag/nanotrasen/directional/north,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"gnT" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_1"
+	},
+/obj/machinery/atmos_shield_gen/active,
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "gnZ" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -14869,6 +15053,13 @@
 "gtx" = (
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/club)
+"gux" = (
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 1
+	},
+/obj/structure/light_fake/floor,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "gve" = (
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 1
@@ -14959,6 +15150,20 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"gyM" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod"
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 8
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 4
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "gyW" = (
 /obj/effect/turf_decal/line/dark_blue/line,
 /turf/open/floor/iron/dark/textured_half,
@@ -15275,6 +15480,10 @@
 	dir = 8
 	},
 /area/centcom/central_command_areas/srt)
+"hkv" = (
+/obj/effect/spawner/structure/window/reinforced/indestructible,
+/turf/open/floor/plating,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "hlm" = (
 /obj/effect/bump_teleporter{
 	id = "cc_centr-bridg1";
@@ -15285,6 +15494,13 @@
 	color = "#6d6e73"
 	},
 /area/centcom/central_command_areas/hallway)
+"hlM" = (
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 4
+	},
+/obj/structure/light_fake/floor,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "hnl" = (
 /obj/structure/light_fake/spot/directional/west,
 /obj/effect/turf_decal/line/dark_blue{
@@ -15494,6 +15710,17 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"hDa" = (
+/obj/effect/bump_teleporter{
+	name = "CC_pods-hangar";
+	id = "cc_pods-hangar2";
+	id_target = "cc_pods-enter2"
+	},
+/turf/open/floor/iron/stairs/medium{
+	color = "#6d6e73";
+	dir = 4
+	},
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "hDp" = (
 /obj/effect/turf_decal/tile/dark/full{
 	alpha = 50
@@ -15604,6 +15831,18 @@
 	},
 /turf/open/floor/carpet/neon/simple/blue,
 /area/centcom/central_command_areas/planetary_port/club)
+"hUp" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/button/door/indestructible{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
+	req_access = list("cent_general");
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "hUU" = (
 /obj/machinery/computer/communications,
 /turf/open/floor/pod/dark,
@@ -15752,6 +15991,18 @@
 	},
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"ivd" = (
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_4";
+	req_access = list("cent_general");
+	pixel_x = -24
+	},
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "ivu" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -16038,6 +16289,13 @@
 "iSM" = (
 /turf/open/floor/carpet/royalblack,
 /area/centcom/central_command_areas/planetary_port/club)
+"iTV" = (
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 8
+	},
+/obj/structure/light_fake/floor,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "iVX" = (
 /obj/effect/turf_decal/tile/dark_blue/anticorner{
 	dir = 1
@@ -16142,6 +16400,18 @@
 /obj/structure/flora/bush/grassy/style_random,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"jkZ" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/button/door/indestructible{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
+	req_access = list("cent_general");
+	pixel_x = -24
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "jlb" = (
 /obj/structure/mirror/magic{
 	pixel_y = 32
@@ -16197,6 +16467,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
+"jqa" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_2"
+	},
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "jqN" = (
 /obj/structure/light_fake/spot/directional/west,
 /turf/open/floor/iron/dark/textured_half{
@@ -16322,6 +16600,15 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/hallway)
+"jBB" = (
+/obj/effect/turf_decal/caution/stand_clear/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "jCW" = (
 /obj/machinery/requests_console/directional/west,
 /obj/effect/mapping_helpers/requests_console/assistance,
@@ -16538,6 +16825,12 @@
 /obj/machinery/status_display/evac/directional/south,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"kdv" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/supplypod)
 "kdR" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 4
@@ -16681,6 +16974,18 @@
 /obj/effect/turf_decal/tile/dark_blue/half,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"ktK" = (
+/obj/docking_port/stationary{
+	area_type = /area/centcom/central_command_areas/ferry;
+	dir = 2;
+	dwidth = 3;
+	height = 7;
+	name = "CentCom Assault Pod Dock";
+	roundstart_template = /datum/map_template/shuttle/assault_pod/nanotrasen;
+	width = 7
+	},
+/turf/open/floor/plating/elevatorshaft,
+/area/centcom/central_command_areas/supplypod)
 "kwE" = (
 /obj/effect/turf_decal/trimline/brown/filled/warning,
 /turf/open/floor/iron,
@@ -17013,12 +17318,26 @@
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
+"lpM" = (
+/obj/structure/railing,
+/turf/open/floor/iron/stairs/left{
+	color = "#6d6e73";
+	dir = 8
+	},
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "lqH" = (
 /obj/effect/turf_decal/trimline/yellow/filled/arrow_ccw{
 	dir = 1
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"lul" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/structure/sign/warning/docking/directional/east,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "lum" = (
 /obj/structure/railing{
 	dir = 8;
@@ -17034,6 +17353,10 @@
 /obj/structure/flora/rock/pile/jungle,
 /turf/open/water/beach,
 /area/centcom/central_command_areas/cabin)
+"lvf" = (
+/obj/item/banner/command/mundane,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "lwZ" = (
 /obj/structure/table/glass,
 /obj/machinery/fax/admin,
@@ -17347,6 +17670,12 @@
 	},
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/conference_room)
+"mbu" = (
+/obj/structure/railing/corner/end/flip{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/small,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "mcp" = (
 /obj/structure/chair/sofa/right/brown,
 /turf/open/floor/wood,
@@ -17396,6 +17725,12 @@
 	},
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/library)
+"mgQ" = (
+/obj/structure/light_fake/spot/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "mhS" = (
 /obj/structure/railing{
 	dir = 4;
@@ -17485,6 +17820,12 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/water/beach,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"mqt" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/structure/light_fake/spot/directional/east,
+/obj/item/assault_pod/nanotrasen,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "mqE" = (
 /obj/effect/decal/nt_logo{
 	color = "#f4cd82"
@@ -17713,6 +18054,12 @@
 /obj/effect/turf_decal/line/dark_blue/line/stripes,
 /turf/open/floor/iron/dark/smooth_edge,
 /area/centcom/central_command_areas/hallway)
+"mNg" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod)
 "mNV" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/floor/plating
@@ -17965,6 +18312,15 @@
 	},
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/srt/brief_srt)
+"nEP" = (
+/obj/effect/turf_decal/caution/stand_clear/red{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "nGu" = (
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 1
@@ -17997,6 +18353,10 @@
 	},
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"nMT" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod)
 "nNr" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
@@ -18012,6 +18372,11 @@
 /obj/item/clipboard,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"nNP" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "nOh" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -18172,6 +18537,9 @@
 /obj/effect/turf_decal/tile/green/full,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"oga" = (
+/turf/closed/indestructible/riveted,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "ogp" = (
 /obj/effect/turf_decal/siding,
 /obj/machinery/shower/directional/east,
@@ -18405,6 +18773,15 @@
 	},
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/control)
+"oEM" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/iron/stairs/right{
+	color = "#6d6e73";
+	dir = 8
+	},
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "oHq" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -18543,6 +18920,12 @@
 /obj/structure/fluff/commsbuoy_processor,
 /turf/open/floor/circuit/green,
 /area/centcom/central_command_areas/control)
+"oWm" = (
+/obj/structure/railing/corner/end{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "oZC" = (
 /obj/structure/railing/corner,
 /obj/structure/chair/comfy/shuttle,
@@ -18957,6 +19340,12 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"pKG" = (
+/obj/structure/fluff/fake_vent{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "pNI" = (
 /obj/effect/decal/nt_logo{
 	dir = 1;
@@ -18996,6 +19385,18 @@
 	color = "#45464a"
 	},
 /area/centcom/central_command_areas/control)
+"pQP" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/button/door/indestructible{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
+	req_access = list("cent_general");
+	pixel_y = -24
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "pSy" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
@@ -19086,6 +19487,12 @@
 /obj/structure/flora/bush/ferny/style_random,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"qjj" = (
+/obj/structure/light_fake/spot/directional/north,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "qkR" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
@@ -19133,6 +19540,18 @@
 /obj/structure/light_fake/floor,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"qse" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod"
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/obj/machinery/atmos_shield_gen/active,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "qtJ" = (
 /obj/structure/flora/tree/jungle/small/style_random{
 	pixel_x = -36;
@@ -19353,6 +19772,12 @@
 /obj/structure/sign/poster/official/moth_delam/directional/west,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"qRG" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "qRR" = (
 /obj/structure/chair/sofa/left/brown{
 	dir = 1
@@ -19405,6 +19830,12 @@
 /obj/structure/chair/sofa/right/brown,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/hotel)
+"rfL" = (
+/obj/structure/light_fake/spot/directional/east,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "rkF" = (
 /obj/structure/closet/secure_closet/tac,
 /obj/effect/turf_decal/stripes/white/line{
@@ -19436,6 +19867,14 @@
 /obj/item/storage/fancy/donut_box,
 /turf/open/floor/pod/dark,
 /area/centcom/central_command_areas/cabin)
+"rrk" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_1"
+	},
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "rsa" = (
 /obj/machinery/door/airlock/centcom,
 /obj/effect/mapping_helpers/airlock/access/all/admin/captain,
@@ -19539,6 +19978,12 @@
 /obj/structure/sign/warning/yes_smoking/circle/directional/north,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"rFL" = (
+/obj/structure/sign/departments/drop/directional/south,
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/ferry)
 "rGx" = (
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 8
@@ -19580,6 +20025,17 @@
 	},
 /turf/open/water/beach,
 /area/centcom/central_command_areas/arboretum)
+"rMA" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_2"
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "rNk" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
 /turf/open/floor/iron/dark,
@@ -20012,6 +20468,13 @@
 "sLj" = (
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/cabin)
+"sLF" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/structure/sign/warning/docking/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "sLM" = (
 /obj/structure/table/wood{
 	color = "#996633"
@@ -20300,6 +20763,18 @@
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/library)
+"trU" = (
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_2";
+	req_access = list("cent_general");
+	pixel_x = 24
+	},
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "ttm" = (
 /obj/structure/light_fake/small/directional/west,
 /obj/effect/turf_decal/siding/wood{
@@ -20419,6 +20894,12 @@
 	dir = 8
 	},
 /area/centcom/central_command_areas/hallway)
+"tLW" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod)
 "tMh" = (
 /obj/structure/flora/bush/ferny/style_random,
 /obj/structure/flora/rock/pile/jungle/large/style_random,
@@ -20643,6 +21124,11 @@
 	},
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/srt/brief_srt)
+"ulL" = (
+/obj/effect/turf_decal/trimline/dark_red/filled/corner,
+/obj/structure/light_fake/floor,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "umk" = (
 /obj/effect/turf_decal/line/dark_blue/line,
 /turf/open/floor/iron/dark/smooth_large,
@@ -20673,6 +21159,13 @@
 /obj/structure/filingcabinet/security,
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/courtroom)
+"uow" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/structure/sign/warning/docking/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "upl" = (
 /obj/structure/table/wood,
 /obj/effect/turf_decal/siding/wood{
@@ -20943,6 +21436,18 @@
 /obj/machinery/holopad/secure,
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/cabin/captain)
+"uXy" = (
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_3";
+	req_access = list("cent_general");
+	pixel_x = -24
+	},
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "uXM" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 8
@@ -20970,6 +21475,13 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/club)
+"vae" = (
+/obj/effect/turf_decal/caution/stand_clear/red,
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "vaP" = (
 /obj/effect/turf_decal/tile/dark/full{
 	alpha = 50
@@ -21026,6 +21538,13 @@
 	},
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/planetary_port/library)
+"vfJ" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/structure/sign/warning/docking/directional/north,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "viC" = (
 /obj/effect/bump_teleporter{
 	name = "CC_centr-eng";
@@ -21287,6 +21806,12 @@
 	},
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/conference_room)
+"vEX" = (
+/obj/structure/light_fake/spot/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "vFo" = (
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 8
@@ -21408,6 +21933,14 @@
 /obj/effect/turf_decal/tile/dark/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
+"vUO" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_4"
+	},
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "vVs" = (
 /obj/structure/light_fake/spot/directional/south,
 /turf/open/floor/iron/dark/smooth_large,
@@ -21715,6 +22248,12 @@
 /obj/item/radio/headset/headset_cent/alt,
 /turf/open/floor/carpet/royalblack,
 /area/centcom/central_command_areas/cabin/captain)
+"wya" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/supplypod)
 "wyp" = (
 /obj/effect/turf_decal/tile/dark_blue/full,
 /turf/open/floor/iron/dark/smooth_large,
@@ -21767,6 +22306,17 @@
 /obj/effect/turf_decal/tile/dark/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
+"wBE" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_1"
+	},
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "wBL" = (
 /turf/open/floor/iron/dark/textured_corner{
 	dir = 1
@@ -21940,6 +22490,15 @@
 /obj/effect/turf_decal/siding/wideplating/dark,
 /turf/open/water/beach,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"wRd" = (
+/obj/machinery/door/poddoor/ert{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_4"
+	},
+/obj/machinery/atmos_shield_gen/active,
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "wSk" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/cigarette/cigar/premium{
@@ -22224,6 +22783,12 @@
 /obj/item/pen/fountain,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/planetary_port)
+"xyB" = (
+/obj/structure/sign/nanotrasen{
+	pixel_y = -32
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "xyW" = (
 /obj/structure/railing{
 	dir = 1;
@@ -22383,6 +22948,12 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"xTk" = (
+/obj/effect/turf_decal/trimline/dark_red/filled/warning{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "xUy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -52322,17 +52893,17 @@ aaa
 aaa
 aaa
 aaa
+oga
+oga
+oga
+oga
+oga
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+oga
+oga
+oga
+oga
+oga
 aaa
 aaa
 aaa
@@ -52342,1074 +52913,6 @@ aaa
 aaa
 "}
 (117,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-"}
-(118,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-"}
-(119,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-"}
-(120,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-"}
-(121,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
 aaa
 aaa
 aaa
@@ -53625,48 +53128,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+mNg
+wya
+exX
+oga
+aaa
+oga
+mNg
+wya
+exX
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(122,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(118,1,1) = {"
 aaa
 aaa
 aaa
@@ -53882,8 +53385,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+dUY
+caT
+nMT
+oga
+aaa
+oga
+dUY
+caT
+nMT
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(123,1,1) = {"
+(119,1,1) = {"
 aaa
 aaa
 aaa
@@ -53970,46 +53513,6 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-agt
 aaa
 aaa
 aaa
@@ -54139,48 +53642,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+tLW
+kdv
+ebg
+oga
+aaa
+oga
+tLW
+kdv
+ebg
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(124,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(120,1,1) = {"
 aaa
 aaa
 aaa
@@ -54396,48 +53899,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+oga
+wRd
+vUO
+cPE
+oga
+oga
+oga
+efX
+ejI
+ahC
+oga
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(125,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(121,1,1) = {"
 aaa
 aaa
 aaa
@@ -54653,48 +54156,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+oga
+iTV
+aYd
+aYd
+aYd
+ivd
+pKG
+uXy
+aYd
+aYd
+aYd
+gux
+oga
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(126,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(122,1,1) = {"
 aaa
 aaa
 aaa
@@ -54910,8 +54413,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(127,1,1) = {"
+(123,1,1) = {"
 aaa
 aaa
 aaa
@@ -55037,47 +54580,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+agt
 aaa
 aaa
 aaa
@@ -55167,48 +54670,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+nNP
+nNP
+nNP
+rfL
+lul
+nEP
+hUp
+rfL
+nNP
+nNP
+nNP
+apv
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(128,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(124,1,1) = {"
 aaa
 aaa
 aaa
@@ -55424,48 +54927,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+nNP
+hkv
+hkv
+oga
+oga
+cTD
+oga
+oga
+hkv
+hkv
+nNP
+apv
+oga
+oga
+oga
+oga
+oga
+aaa
 "}
-(129,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(125,1,1) = {"
 aaa
 aaa
 aaa
@@ -55681,48 +55184,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+nNP
+hkv
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+hkv
+nNP
+apv
+oga
+dDD
+hDa
+cOq
+oga
+aaa
 "}
-(130,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(126,1,1) = {"
 aaa
 aaa
 aaa
@@ -55938,48 +55441,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+oga
+apv
+vEX
+oga
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+oga
+qjj
+apv
+oga
+oEM
+aHk
+lpM
+oga
+aaa
 "}
-(131,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(127,1,1) = {"
 aaa
 aaa
 aaa
@@ -56195,48 +55698,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+qRG
+apv
+pQP
+oga
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+oga
+vfJ
+apv
+apv
+oWm
+apv
+doS
+oga
+aaa
 "}
-(132,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(128,1,1) = {"
 aaa
 aaa
 aaa
@@ -56452,48 +55955,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+fDD
+qRG
+apv
+jBB
+gyM
+ktK
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+gyM
+vae
+bWh
+bWh
+bWh
+nNP
+xyB
+oga
+aaa
 "}
-(133,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(129,1,1) = {"
 aaa
 aaa
 aaa
@@ -56709,48 +56212,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+dLt
+apv
+sLF
+oga
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+oga
+amb
+apv
+apv
+apv
+apv
+apv
+oga
+aaa
 "}
-(134,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(130,1,1) = {"
 aaa
 aaa
 aaa
@@ -56966,48 +56469,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+oga
+apv
+vEX
+oga
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+oga
+qjj
+apv
+oga
+lvf
+mqt
+lvf
+oga
+aaa
 "}
-(135,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(131,1,1) = {"
 aaa
 aaa
 aaa
@@ -57223,48 +56726,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+nNP
+hkv
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+aWT
+hkv
+nNP
+apv
+oga
+oga
+oga
+oga
+oga
+aaa
 "}
-(136,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(132,1,1) = {"
 aaa
 aaa
 aaa
@@ -57480,48 +56983,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+nNP
+hkv
+hkv
+oga
+oga
+qse
+oga
+oga
+hkv
+hkv
+nNP
+apv
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(137,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(133,1,1) = {"
 aaa
 aaa
 aaa
@@ -57737,48 +57240,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+nNP
+nNP
+nNP
+mgQ
+jkZ
+nEP
+uow
+mgQ
+nNP
+nNP
+nNP
+apv
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(138,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(134,1,1) = {"
 aaa
 aaa
 aaa
@@ -57994,48 +57497,48 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+apv
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
 "}
-(139,1,1) = {"
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+(135,1,1) = {"
 aaa
 aaa
 aaa
@@ -58244,6 +57747,1074 @@ aaa
 aaa
 aaa
 aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+oga
+ulL
+xTk
+xTk
+xTk
+trU
+fgf
+bJp
+xTk
+xTk
+xTk
+hlM
+oga
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+"}
+(136,1,1) = {"
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aKH
+aLt
+aLt
+aTe
+aDL
+aCF
+aLt
+aLt
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+oga
+bta
+jqa
+rMA
+oga
+oga
+oga
+gnT
+rrk
+wBE
+oga
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+"}
+(137,1,1) = {"
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aLt
+afQ
+aza
+aMX
+aDL
+aep
+acP
+aMM
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+mNg
+wya
+exX
+oga
+aaa
+oga
+mNg
+wya
+exX
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+"}
+(138,1,1) = {"
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aKH
+aLt
+acT
+aHb
+aOC
+aep
+acP
+aKQ
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+dUY
+caT
+nMT
+oga
+aaa
+oga
+dUY
+caT
+nMT
+oga
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+"}
+(139,1,1) = {"
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aKH
+aLt
+aLt
+aLt
+aLt
+aLt
+aLt
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+oga
+tLW
+kdv
+ebg
+oga
+aaa
+oga
+tLW
+kdv
+ebg
+oga
 aaa
 aaa
 aaa
@@ -58462,14 +59033,6 @@ aaa
 aaa
 aaa
 aaa
-aKH
-aLt
-aLt
-aTe
-aDL
-aCF
-aLt
-aLt
 aaa
 aaa
 aaa
@@ -58498,9 +59061,17 @@ aaa
 aaa
 aaa
 aaa
+oga
+oga
+oga
+oga
+oga
 aaa
-aaa
-aaa
+oga
+oga
+oga
+oga
+oga
 aaa
 aaa
 aaa
@@ -58719,14 +59290,14 @@ aaa
 aaa
 aaa
 aaa
-aLt
-afQ
-aza
-aMX
-aDL
-aep
-acP
-aMM
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -58976,14 +59547,14 @@ aaa
 aaa
 aaa
 aaa
-aKH
-aLt
-acT
-aHb
-aOC
-aep
-acP
-aKQ
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -59234,13 +59805,13 @@ aaa
 aaa
 aaa
 aaa
-aKH
-aLt
-aLt
-aLt
-aLt
-aLt
-aLt
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -79033,11 +79604,11 @@ ash
 ash
 aFS
 ash
-ash
-aYd
-amb
-aWT
-apv
+rFL
+aYn
+aah
+aah
+aah
 aYn
 ajY
 aZr
@@ -79292,9 +79863,9 @@ aSt
 aSt
 aSt
 aHT
-aKa
-aHk
-aCk
+aah
+aah
+aah
 aYn
 aYR
 aVb
@@ -79548,10 +80119,10 @@ aWm
 aCc
 aCc
 aUp
-ahC
-aKa
+aYn
 aah
-aCk
+aah
+aah
 aYn
 aOs
 ail
@@ -79808,7 +80379,7 @@ azg
 aYn
 aKa
 aah
-aCk
+cHA
 aYn
 aCC
 aTA
@@ -80063,7 +80634,7 @@ aFT
 aFT
 aYu
 aYn
-aKa
+mbu
 aah
 aCk
 aYn
@@ -80320,9 +80891,9 @@ aFT
 aFT
 aYu
 aYn
-aKa
+oEM
 aHk
-aCk
+lpM
 aYn
 aWC
 aSM

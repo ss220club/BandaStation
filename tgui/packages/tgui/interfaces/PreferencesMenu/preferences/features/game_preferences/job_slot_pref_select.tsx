@@ -1,4 +1,4 @@
-import { CheckboxInput, FeatureToggle } from '../base';
+import { CheckboxInput, type FeatureToggle } from '../base';
 
 export const round_start_always_join_current_slot: FeatureToggle = {
   name: 'Игнорировать назначенный слот персонажа для работы в начале раунда',

@@ -135,9 +135,9 @@
 		var/repeal = (authorized.len < old_len)
 		var/remaining = max(0, auth_need - authorized.len)
 		if(authorized.len && remaining)
-			minor_announce("[remaining] авторизации необходимо для раннего запуска шаттла", null, alert)
+			minor_announce("[remaining] авторизации необходимо для раннего запуска шаттла.", null, alert)
 		if(repeal)
-			minor_announce("Авторизация на ранний запуск отозвана, [remaining] авторизации необходимо")
+			minor_announce("Авторизация на ранний запуск отозвана, [remaining] авторизации необходимо.")
 
 	acted_recently += user
 	SStgui.update_user_uis(user, src)
@@ -263,20 +263,20 @@
 		if(HIJACK_NOT_BEGUN)
 			return
 		if(HIJACK_STAGE_1)
-			msg = "AUTHENTICATING - FAIL. AUTHENTICATING - FAIL. AUTHENTICATING - FAI###### Welcome, technician JOHN DOE."
+			msg = "ОШИБКА АУТЕНТИФИКАЦИИ. ОШИБКА АУТЕНТИФИКАЦИИ. ОШИБКА АУТЕНТ###### Добро пожаловать, оператор ДЖОН ДОУ."
 		if(HIJACK_STAGE_2)
-			msg = "Warning: Navigational route fails \"IS_AUTHORIZED\". Please try againNN[scramble_message_replace_chars("againagainagainagainagain", 70)]."
+			msg = "Ошибка маршрута: доступ не авторизован \"IS_AUTHORIZED\". Пожалуйста, попробуйте сноваАА[scramble_message_replace_chars("сновасновасновасноваснова", 70)]."
 		if(HIJACK_STAGE_3)
-			msg = "CRC mismatch at ~h~ in calculated route buffer. Full reset initiated of FTL_NAVIGATION_SERVICES. Memory decrypted for automatic repair."
+			msg = "Несовпадение CRC в позиции ~h~ буфера расчётного маршрута. Инициирован полный сброс FTL_NAVIGATION_SERVICES. Память расшифрована для автоматического восстановления."
 		if(HIJACK_STAGE_4)
-			msg = "~ACS_directive module_load(cyberdyne.exploit.nanotrasen.shuttlenav)... NT key mismatch. Confirm load? Y...###Reboot complete. $SET transponder_state = 0; System link initiated with connected engines..."
+			msg = "~ACS_directive module_load(cyberdyne.exploit.nanotrasen.shuttlenav)... Несоответствие ключа НТ. Подтвердить загрузку? ДА...###Перезагрузка завершена. $SET transponder_state = 0; Установлено соединение с двигателями..."
 		if(HIJACK_COMPLETED)
-			msg = "SYSTEM OVERRIDE - Resetting course to \[[scramble_message_replace_chars("###########", 100)]\] \
+			msg = "СИСТЕМА ПЕРЕЗАПИСАНА - Переназначение маршрута на \[[scramble_message_replace_chars("###########", 100)]\] \
 			([scramble_message_replace_chars("#######", 100)]/[scramble_message_replace_chars("#######", 100)]/[scramble_message_replace_chars("#######", 100)]) \
 			{AUTH - ROOT (uid: 0)}.</font>\
-			[SSshuttle.emergency.mode == SHUTTLE_ESCAPE ? "Diverting from existing route - Bluespace exit in \
-			[hijack_completion_flight_time_set >= INFINITY ? "[scramble_message_replace_chars("\[ERROR\]")]" : hijack_completion_flight_time_set/10] seconds." : ""]"
-	minor_announce(scramble_message_replace_chars(msg, replaceprob = 10), "Emergency Shuttle", TRUE)
+			[SSshuttle.emergency.mode == SHUTTLE_ESCAPE ? "Отклонение от текущего маршрута - выход из Блюспейса через... \
+			[hijack_completion_flight_time_set >= INFINITY ? "[scramble_message_replace_chars("\[ОШИБКА\]")]" : hijack_completion_flight_time_set/10] секунд(-ы)." : ""]"
+	minor_announce(scramble_message_replace_chars(msg, replaceprob = 10), "Эвакуационный шаттл", TRUE)
 
 /obj/machinery/computer/emergency_shuttle/emag_act(mob/user, obj/item/card/emag/emag_card)
 	// How did you even get on the shuttle before it go to the station?

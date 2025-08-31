@@ -6,7 +6,7 @@
 	var/area/checked_area = isarea(checked_atom) ? checked_atom : get_area(checked_atom)
 	if(!checked_area)
 		return null
-	return format_text ? format_text(checked_area.name) : checked_area.name
+	return checked_area.declent_ru(NOMINATIVE)
 
 ///Tries to move an atom to an adjacent turf, return TRUE if successful
 /proc/try_move_adjacent(atom/movable/atom_to_move, trydir)

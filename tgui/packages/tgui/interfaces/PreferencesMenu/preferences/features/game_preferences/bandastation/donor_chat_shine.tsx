@@ -1,4 +1,4 @@
-import { CheckboxInput, FeatureToggle } from '../../base';
+import { CheckboxInput, type FeatureToggle } from '../../base';
 
 export const donor_chat_shine: FeatureToggle = {
   name: 'Блеск ника в чате',

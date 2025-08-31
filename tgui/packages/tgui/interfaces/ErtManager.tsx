@@ -9,7 +9,7 @@ import {
   Tabs,
   TextArea,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 import { decodeHtmlEntities, toTitleCase } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
@@ -25,7 +25,8 @@ type Data = {
   securitySlots: number;
   medicalSlots: number;
   engineeringSlots: number;
-  inquisitorSlots: number;
+  chaplainSlots: number;
+  clownSlots: number;
   janitorSlots: number;
   totalSlots: number;
   ertSpawnpoints: number;
@@ -45,7 +46,7 @@ export const ErtManager = (props) => {
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
-    <Window width={360} height={505}>
+    <Window width={400} height={515}>
       <Window.Content>
         <Stack fill vertical>
           <ERTOverview />
@@ -152,35 +153,42 @@ const SendERT = (props) => {
     medical = 'setMed',
     engineering = 'setEng',
     janitor = 'setJan',
-    inquisitor = 'setInq',
+    chaplain = 'setInq',
+    clown = 'setClw',
   }
 
   enum ERTTYPE {
     Amber = 'orange',
     Red = 'red',
     Gamma = 'yellow',
+    Inquisition = 'black',
   }
+
+  const handleErtTypeChange = (typeName: string) => {
+    act('ertType', { ertType: typeName });
+    if (typeName === 'Inquisition') {
+      act('setEng', { setEng: 0 });
+      act('setJan', { setJan: 0 });
+      act('setClw', { setClw: 0 });
+    }
+  };
 
   return (
     <Stack.Item grow>
       <Section
         fill
         title="Send ERT"
-        buttons={
-          <>
-            {Object.entries(ERTTYPE).map(([typeName, typeColor]) => (
-              <Button
-                key={ERTTYPE[typeName]}
-                width={5}
-                textAlign="center"
-                color={ertType === typeName && typeColor}
-                onClick={() => act('ertType', { ertType: typeName })}
-              >
-                {typeName}
-              </Button>
-            ))}
-          </>
-        }
+        buttons={Object.entries(ERTTYPE).map(([typeName, typeColor]) => (
+          <Button
+            key={ERTTYPE[typeName]}
+            width={6}
+            textAlign="center"
+            color={ertType === typeName && typeColor}
+            onClick={() => handleErtTypeChange(typeName)}
+          >
+            {typeName}
+          </Button>
+        ))}
       >
         <Stack fill vertical>
           <Stack.Item grow>
@@ -217,6 +225,12 @@ const SendERT = (props) => {
               </LabeledList.Item>
 
               {Object.entries(ERTJOB).map(([typeName, typeAct]) => {
+                if (
+                  ertType === 'Inquisition' &&
+                  ['engineering', 'janitor', 'clown'].includes(typeName)
+                ) {
+                  return null;
+                }
                 const slotKey = `${typeName}Slots` as const;
                 return (
                   <LabeledList.Item
@@ -266,7 +280,7 @@ const ReadERTRequests = (props) => {
   return (
     <Stack.Item grow>
       <Section fill>
-        {ertRequestMessages && ertRequestMessages.length ? (
+        {ertRequestMessages?.length ? (
           ertRequestMessages.map((request) => (
             <Section
               key={decodeHtmlEntities(request.time)}

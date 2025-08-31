@@ -45,3 +45,12 @@
 	name = "SRT tactical engineering uniform"
 	desc = "Униформа, выполненная в темных цветах с опозновательными знаками инженерных подразделений СРТ."
 	inhand_icon_state = "bl_suit"
+
+/obj/item/clothing/under/rank/centcom/military/ert
+	name = "ERT tactical uniform"
+	desc = "Униформа, выполненная в темных цветах с опозновательными знаками подразделений ОБР."
+
+/obj/item/clothing/under/rank/centcom/military/eng/ert
+	name = "ERT tactical engineering uniform"
+	desc = "Униформа, выполненная в темных цветах с опозновательными знаками инженерных подразделений ОБР."
+	inhand_icon_state = "bl_suit"
