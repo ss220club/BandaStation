@@ -1,6 +1,6 @@
 /datum/surgery/advanced/necrotic_revival
-	name = "Necrotic Revival"
-	desc = "An experimental surgical procedure that stimulates the growth of a Romerol tumor inside the patient's brain. Requires zombie powder or rezadone."
+	name = "Некротическое возрождение"
+	desc = "Экспериментальная хирургическая процедура, стимулирующая рост опухоли ромерола в мозге пациента. Требуется зомби-порошок или резадон."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_HEAD)
 	steps = list(
@@ -19,7 +19,7 @@
 		return FALSE
 
 /datum/surgery_step/bionecrosis
-	name = "start bionecrosis (syringe)"
+	name = "начать бионекроз (шприц)"
 	implements = list(
 		/obj/item/reagent_containers/syringe = 100,
 		/obj/item/pen = 30)
@@ -31,21 +31,21 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to grow a romerol tumor on [target]'s brain..."),
-		span_notice("[user] begins to tinker with [target]'s brain..."),
-		span_notice("[user] begins to perform surgery on [target]'s brain."),
+		span_notice("Вы начинаете выращивать опухоль ромерола в мозге у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает возиться с мозгом у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head pounds with unimaginable pain!") // Same message as other brain surgeries
+	display_pain(target, "Ваша голова раскалывается от невыразимой боли!") // Same message as other brain surgeries
 
 /datum/surgery_step/bionecrosis/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	display_results(
 		user,
 		target,
-		span_notice("You succeed in growing a romerol tumor on [target]'s brain."),
-		span_notice("[user] successfully grows a romerol tumor on [target]'s brain!"),
-		span_notice("[user] completes the surgery on [target]'s brain."),
+		span_notice("Вам удалось вырастить опухоль ромерола в мозге у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно выращивает опухоль ромерола в мозге у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head goes totally numb for a moment, the pain is overwhelming!")
+	display_pain(target, "Голова на мгновение полностью немеет, боль невыносима!")
 	if(!target.get_organ_slot(ORGAN_SLOT_ZOMBIE))
 		var/obj/item/organ/zombie_infection/z_infection = new()
 		z_infection.Insert(target)

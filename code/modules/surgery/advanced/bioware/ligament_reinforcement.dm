@@ -1,7 +1,7 @@
 /datum/surgery/advanced/bioware/ligament_reinforcement
-	name = "Ligament Reinforcement"
-	desc = "A surgical procedure which adds a protective tissue and bone cage around the connections between the torso and limbs, preventing dismemberment. \
-		However, the nerve connections as a result are more easily interrupted, making it easier to disable limbs with damage."
+	name = "Укрепление связок"
+	desc = "Хирургическая процедура, в ходе которой вокруг соединений туловища и конечностей формируется защитная ткань и костный каркас, предотвращая расчленение. \
+		Однако нервные связи в результате этого легче разрываются, что облегчает выведение конечностей из строя при их повреждении."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -17,9 +17,9 @@
 	status_effect_gained = /datum/status_effect/bioware/ligaments/reinforced
 
 /datum/surgery/advanced/bioware/ligament_reinforcement/mechanic
-	name = "Anchor Point Reinforcement"
-	desc = "A surgical procedure which adds reinforced limb anchor points to the patient's chassis, preventing dismemberment. \
-		However, the nerve connections as a result are more easily interrupted, making it easier to disable limbs with damage."
+	name = "Укрепление опорной точки"
+	desc = "Хирургическая процедура, в ходе которой к телу пациента добавляются усиленные точки крепления конечностей, предотвращая расчленение. \
+		Однако нервные связи в результате этого легче разрываются, что облегчает выведение конечностей из строя при их повреждении."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -33,17 +33,17 @@
 	)
 
 /datum/surgery_step/apply_bioware/reinforce_ligaments
-	name = "reinforce ligaments (hand)"
+	name = "укрепить связки (рука)"
 
 /datum/surgery_step/apply_bioware/reinforce_ligaments/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
-		span_notice("You start reinforcing [target]'s ligaments."),
-		span_notice("[user] starts reinforce [target]'s ligaments."),
-		span_notice("[user] starts manipulating [target]'s ligaments."),
+		span_notice("Вы начинаете укреплять связки [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает укреплять связки [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает манипулировать связками [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your limbs burn with severe pain!")
+	display_pain(target, "Ваши конечности горят от сильной боли!")
 
 /datum/surgery_step/apply_bioware/reinforce_ligaments/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	. = ..()
@@ -53,8 +53,8 @@
 	display_results(
 		user,
 		target,
-		span_notice("You reinforce [target]'s ligaments!"),
-		span_notice("[user] reinforces [target]'s ligaments!"),
-		span_notice("[user] finishes manipulating [target]'s ligaments."),
+		span_notice("Вы укрепляете связки [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] укрепляет связки [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает манипулирование связками [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your limbs feel more secure, but also more frail.")
+	display_pain(target, "Ваши конечности чувствуют себя более защищенными, но также более хрупкими.")
