@@ -98,4 +98,4 @@
 	list_reagents = list( /datum/reagent/medicine/epinephrine = 7, /datum/reagent/medicine/c2/aiuri = 7, /datum/reagent/medicine/c2/libital = 7, /datum/reagent/medicine/leporazine = 6, /datum/reagent/toxin/formaldehyde = 3)
 
 /obj/item/reagent_containers/hypospray/medipen/survival/luxury
-	list_reagents = list(/datum/reagent/medicine/salbutamol = 9, /datum/reagent/medicine/c2/penthrite = 9, /datum/reagent/medicine/oxandrolone = 9, /datum/reagent/medicine/sal_acid = 10 ,/datum/reagent/medicine/omnizine = 10 ,/datum/reagent/medicine/leporazine = 10, , /datum/reagent/toxin/formaldehyde = 3)
+	list_reagents = list(/datum/reagent/medicine/salbutamol = 9, /datum/reagent/medicine/c2/penthrite = 9, /datum/reagent/medicine/oxandrolone = 9, /datum/reagent/medicine/sal_acid = 10 ,/datum/reagent/medicine/omnizine = 10 ,/datum/reagent/medicine/leporazine = 10, /datum/reagent/toxin/formaldehyde = 3)
