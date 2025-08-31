@@ -60,7 +60,7 @@
 				hand_name = "левую"
 
 			show_instruction(keybinding_message(
-				/datum/keybinding/mob/swap_hands,
+				hand_keybinding,
 				"Нажмите '%KEY%', чтобы сделать [hand_name] руку активной",
 				"Кликните по '<b>SWAP</b>', чтобы сделать [hand_name] руку активной",
 			))
