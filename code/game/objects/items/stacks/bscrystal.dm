@@ -34,7 +34,7 @@
 
 /obj/item/stack/ore/bluespace_crystal/attack_self(mob/user)
 	// BANDASTATION ADDITION - START
-	if(!do_after(user, BLUESPACE_TELEPORT_DELAY, src))
+	if(!do_after(user, SQUASH_DELAY, src))
 		return
 	// BANDASTATION ADDITION - END
 	user.visible_message(span_warning("[user] crushes [src]!"), span_danger("You crush [src]!"))
