@@ -57,9 +57,9 @@
 	display_results(
 		user,
 		target,
-		span_notice("Вы складываете внешнюю кору головного мозга [target.declent_ru(GENITIVE)] во фрактальный узор!"),
-		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] складывает внешнюю кору головного мозга [target.declent_ru(GENITIVE)] во фрактальный узор!"),
-		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге [target.declent_ru(GENITIVE)]."),
+		span_notice("Вы складываете внешнюю кору головного мозга у [target.declent_ru(GENITIVE)] во фрактальный узор!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] складывает внешнюю кору головного мозга у [target.declent_ru(GENITIVE)] во фрактальный узор!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
 	display_pain(target, "Ваш мозг становится сильнее... более гибким!")
 

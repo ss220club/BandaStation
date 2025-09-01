@@ -1,6 +1,6 @@
 /datum/surgery/advanced/lobotomy
 	name = "Лоботомия"
-	desc = "Инвазивная хирургическая процедура, которая гарантирует удаление почти всех травм мозга, но может взамен привести к другой необратимой травме."
+	desc = "Инвазивная хирургическая процедура, которая гарантирует удаление почти всех травм мозга, но взамен может привести к другой необратимой травме."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_HEAD)
 	steps = list(
@@ -14,7 +14,7 @@
 
 /datum/surgery/advanced/lobotomy/mechanic
 	name = "Деструктивная дефрагментация Wetware OS"
-	desc = "Метод деструктивной роботизированной дефрагментации, гарантирующий удаление практически всех травм мозга, но взамен привести к другой необратимой травме."
+	desc = "Метод деструктивной роботизированной дефрагментации, гарантирующий удаление практически всех травм мозга, но взамен может привести к другой необратимой травме."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -80,7 +80,7 @@
 	display_results(
 		user,
 		target,
-		span_notice("Вам удалось провести лоботомию ."),
+		span_notice("Вам удалось провести лоботомию мозга у [target.declent_ru(GENITIVE)]."),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно проводит лоботомию [target.declent_ru(GENITIVE)]!"),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)

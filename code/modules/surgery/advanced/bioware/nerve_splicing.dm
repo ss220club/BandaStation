@@ -56,4 +56,4 @@
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно сращивает нервную систему [target.declent_ru(GENITIVE)]!"),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает манипулирование нервной системой [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Вы вновь обретаете чувствительность в своем теле; вам кажется, что все происходит вокруг вас в замедление!")
+	display_pain(target, "Вы вновь обретаете чувствительность в своем теле; вам кажется, что все происходит вокруг вас в замедлении!")

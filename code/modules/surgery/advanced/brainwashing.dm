@@ -80,7 +80,7 @@
 
 /datum/surgery_step/brainwash/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(!target.mind)
-		to_chat(user, span_warning("[target.declent_ru(GENITIVE)] не реагирует на промывание мозгов, как будто у [target.p_they()] лишен разума..."))
+		to_chat(user, span_warning("[target.declent_ru(GENITIVE)] не реагирует на промывание мозгов, как будто [target.p_they()] лишен разума..."))
 		return FALSE
 	if(HAS_MIND_TRAIT(target, TRAIT_UNCONVERTABLE))
 		to_chat(user, span_warning("Вы слышите слабое жужжание от устройства внутри мозга [target.declent_ru(GENITIVE)], и результаты промывание мозгов стираются."))

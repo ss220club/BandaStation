@@ -41,7 +41,7 @@
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает обматывать мышцами кровеносную систему [target.declent_ru(GENITIVE)]."),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает манипулировать кровеносной системой [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Все твое тело горит в агонии!")
+	display_pain(target, "Все ваше тело горит в агонии!")
 
 /datum/surgery_step/apply_bioware/muscled_veins/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	. = ..()

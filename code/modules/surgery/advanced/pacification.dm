@@ -58,7 +58,7 @@
 	display_results(
 		user,
 		target,
-		span_notice("Вы начинаете умиротворять [target.declent_ru(GENITIVE)]..."),
+		span_notice("Вы начинаете умиротворять [target.declent_ru(ACCUSATIVE)]..."),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает восстанавливать мозг у [target.declent_ru(GENITIVE)]."),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)

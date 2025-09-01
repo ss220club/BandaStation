@@ -49,7 +49,7 @@
 	display_results(
 		user,
 		target,
-		span_notice("Костный мозг у [target.declent_ru(GENITIVE)] начинает медленно пульсировать. Вирусная связь завершена.."),
+		span_notice("Костный мозг у [target.declent_ru(GENITIVE)] начинает медленно пульсировать. Вирусная связь завершена."),
 		span_notice("Костный мозг у [target.declent_ru(GENITIVE)] начинает медленно пульсировать."),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию."),
 	)

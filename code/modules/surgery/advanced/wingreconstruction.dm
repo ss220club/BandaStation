@@ -35,7 +35,7 @@
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает чинить обугленные мембраны крыльев [target.declent_ru(GENITIVE)]."),
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на обугленных мембранах крыльев [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Твои крылья жжет, как в аду!")
+	display_pain(target, "Ваши крылья жжет, как в аду!")
 
 /datum/surgery_step/wing_reconstruction/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(ishuman(target))
@@ -47,7 +47,7 @@
 			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно восстанавливает крылья [target.declent_ru(GENITIVE)]!"),
 			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на крыльях [target.declent_ru(GENITIVE)]."),
 		)
-		display_pain(target, "Ты снова чувствуешь свои крылья!")
+		display_pain(target, "Вы снова чувствуете свои крылья!")
 		var/obj/item/organ/wings/moth/wings = target.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
 		if(istype(wings, /obj/item/organ/wings/moth)) //make sure we only heal moth wings.
 			wings.heal_wings(user, ALL)
