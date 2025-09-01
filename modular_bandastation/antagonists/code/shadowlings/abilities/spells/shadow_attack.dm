@@ -1,0 +1,94 @@
+/datum/action/cooldown/shadowling/shadow_strike
+	name = "Теневой удар"
+	desc = "Материализуясь из тени рядом с ближайшей целью в 2 тайлах, наносит два быстрых удара."
+	button_icon_state = "shadow_strike"
+	cooldown_time = 0
+
+	requires_dark_user = FALSE
+	requires_dark_target = FALSE
+	max_range = 2
+	channel_time = 0
+
+/datum/action/cooldown/shadowling/shadow_strike/CanUse(mob/living/carbon/human/H)
+	if(!..())
+		return FALSE
+	if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
+		return TRUE
+	if(H.has_status_effect(/datum/status_effect/shadow/phase))
+		return TRUE
+	to_chat(H, span_warning("Вы должны быть в теневой фазе."))
+	return FALSE
+
+/datum/action/cooldown/shadowling/shadow_strike/Trigger(mob/clicker, trigger_flags, atom/target)
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return
+	if(!CanUse(H))
+		return
+
+	var/mob/living/target_mob = find_closest_target(H)
+	if(!target_mob)
+		to_chat(H, span_warning("Рядом нет подходящих целей."))
+		return
+
+	if(DoEffect(H, target_mob))
+		StartCooldown()
+
+/datum/action/cooldown/shadowling/shadow_strike/proc/find_closest_target(mob/living/carbon/human/H)
+	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/turf/center = get_turf(H)
+	if(!center)
+		return null
+
+	var/mob/living/best
+	var/best_dist = 999
+
+	for(var/mob/living/L in range(max_range, center))
+		if(L == H) continue
+		if(L.stat == DEAD) continue
+
+		if(hive)
+			if(L in hive.lings)
+				continue
+			if(L in hive.thralls)
+				continue
+
+		var/d = get_dist(H, L)
+		if(d < best_dist)
+			best = L
+			best_dist = d
+
+	return best
+
+/datum/action/cooldown/shadowling/shadow_strike/DoEffect(mob/living/carbon/human/H, atom/target)
+	var/mob/living/carbon/human/T = find_nearest_target(2)
+	if(!T)
+		to_chat(H, span_warning("Поблизости нет подходящих целей."))
+		return FALSE
+
+	var/obj/effect/dummy/phased_mob/shadowling/P = istype(H.loc, /obj/effect/dummy/phased_mob/shadowling) ? H.loc : null
+	if(P)
+		var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
+		if(nearby)
+			P.forceMove(nearby)
+		P.eject_jaunter(FALSE)
+	else
+		H.remove_status_effect(/datum/status_effect/shadow/phase)
+
+	if(get_dist(H, T) > 1)
+		step_towards(H, T)
+
+	var/hit = FALSE
+	if(QDELETED(H) || QDELETED(T))
+		return FALSE
+	if(get_dist(H, T) > 1)
+		return FALSE
+	T.apply_damage(20, BRUTE, sharpness=SHARP_POINTY)
+	hit = TRUE
+
+	if(!hit)
+		to_chat(H, span_warning("Слишком далеко, чтобы ударить."))
+	else
+		H.do_attack_animation(T)
+
+	return hit

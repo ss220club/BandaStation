@@ -16,10 +16,37 @@
 #define GET_BODYPART_COEFFICIENT(X) round(X.len / BODYPARTS_DEFAULT_MAXIMUM , 0.1)
 
 var/global/list/SHADOWLING_BASE_ABILITIES = list(
-	/datum/action/cooldown/shadowling/hive_sync,
-	/datum/action/cooldown/shadowling/enthrall
+	/datum/action/cooldown/shadowling/enthrall,
+	/datum/action/cooldown/shadowling/glare,
+	/datum/action/cooldown/shadowling/root,
+	/datum/action/cooldown/shadowling/cold_wave,
+	/datum/action/cooldown/shadowling/shadow_phase_in,
+	/datum/action/cooldown/shadowling/shadow_phase_out,
+	/datum/action/cooldown/shadowling/veil,
+	/datum/action/cooldown/shadowling/shreek,
+	/datum/action/cooldown/shadowling/shadow_grab,
+	/datum/action/cooldown/shadowling/shadow_strike,
+	/datum/action/cooldown/shadowling/smoke_cloud,
+	//Лабиринт ,
+	//Рекуперация ,
+	//Голосование ,
+	//Уничтожение двигателей ,
+	//Вознесение
 )
 
 var/global/list/SHADOWLING_THRALL_ABILITIES = list(
-	/datum/action/cooldown/shadowling/hive_sync
+	/datum/action/cooldown/shadowling/hive_sync,
+	/datum/action/cooldown/shadowling/root
+)
+
+var/global/list/SHADOWLING_MINOR_ABILITIES = list(
+	/datum/action/cooldown/shadowling/hive_sync,
+	/datum/action/cooldown/shadowling/root,
+	/datum/action/cooldown/shadowling/cold_wave,
+	/datum/action/cooldown/shadowling/shadow_phase_in,
+	/datum/action/cooldown/shadowling/shadow_phase_out,
+	/datum/action/cooldown/shadowling/veil,
+	/datum/action/cooldown/shadowling/shreek,
+	/datum/action/cooldown/shadowling/shadow_grab,
+	/datum/action/cooldown/shadowling/smoke_cloud
 )

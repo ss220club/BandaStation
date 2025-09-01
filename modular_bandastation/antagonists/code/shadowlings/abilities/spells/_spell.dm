@@ -1,11 +1,11 @@
-// shadowling_action_base.dm
-
 /datum/action/cooldown/shadowling
 	name = "Shadowling Ability"
 	desc = "Innate power of the brood."
 	background_icon_state = "shadow_demon_bg"
-	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon = 'modular_bandastation/antagonists/icons/shadowlings_actions.dmi'
 	button_icon_state = "shadow_generic"
+	overlay_icon_state = "bg_demon_border"
+	background_icon_state = ACTION_BUTTON_DEFAULT_BACKGROUND
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 10 SECONDS
 
@@ -22,16 +22,15 @@
 	/// Прерывать канал, если кастер выходит в яркое место
 	var/cancel_on_bright = TRUE
 
-/***********************
- * Проверки
- ***********************/
-
 /datum/action/cooldown/shadowling/proc/CanUse(mob/living/carbon/human/H)
 	var/datum/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		return FALSE
 
 	if(requires_dark_user && !is_dark(H))
+		return FALSE
+
+	if(!IsAvailable(TRUE))
 		return FALSE
 
 	return TRUE
@@ -41,10 +40,6 @@
 
 /datum/action/cooldown/shadowling/proc/ValidateTarget(mob/living/carbon/human/H, atom/target)
 	return TRUE
-
-/***********************
- * Канал
- ***********************/
 
 /datum/action/cooldown/shadowling/proc/PerformChannel(mob/living/carbon/human/H, atom/target)
 	if(cancel_on_bright && !is_dark(H))
@@ -56,11 +51,10 @@
 	if(cancel_on_bright && !is_dark(H))
 		return FALSE
 
-	return TRUE
+	if(!IsAvailable(TRUE))
+		return FALSE
 
-/***********************
- * Утилиты (локальные)
- ***********************/
+	return TRUE
 
 /datum/action/cooldown/shadowling/proc/is_dark(atom/A)
 	var/turf/T = get_turf(A)
@@ -68,49 +62,40 @@
 		return FALSE
 	return (T.get_lumcount() < L_DIM)
 
-/***********************
- * Реальный эффект
- * (переопределяется наследниками; вернуть TRUE при успехе)
- ***********************/
-
 /datum/action/cooldown/shadowling/proc/DoEffect(mob/living/carbon/human/H, atom/target)
 	return FALSE
 
 /datum/action/cooldown/shadowling/Trigger(mob/clicker, trigger_flags, atom/target)
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H))
+	if(click_to_activate)
+		return ..()
+
+	if(!istype(owner))
 		return
 
-	if(!CanUse(H))
-		to_chat(H, span_warning("Сейчас нельзя."))
+	if(!CanUse(owner))
+		to_chat(owner, span_warning("Сейчас нельзя."))
 		return
 
-	var/list/targets = CollectTargets(H, target)
-	if(!ValidateTargets(H, targets))
-		to_chat(H, span_warning("Нет доступных целей."))
+	var/list/targets = CollectTargets(owner, target)
+	if(!ValidateTargets(owner, targets))
+		to_chat(owner, span_warning("Нет доступных целей."))
 		return
 
 	if(channel_time > 0)
-		if(!PerformChannel(H, null)) // канал не привязываем к конкретной цели
+		if(!PerformChannel(owner, null))
 			return
 
-	if(DoEffectOnTargets(H, targets))
+	disable()
+	if(DoEffectOnTargets(owner, targets))
 		StartCooldown()
 
-/***********************
- * Таргетинг (НОВОЕ)
- ***********************/
-
-/// Собрать цели. По умолчанию — одна: explicit или self.
 /datum/action/cooldown/shadowling/proc/CollectTargets(mob/living/carbon/human/H, atom/explicit)
 	if(explicit)
 		return list(explicit)
 	return list(H)
 
-/// Валидировать список целей (дистанция/тьма + пользовательская ValidateTarget)
 /datum/action/cooldown/shadowling/proc/ValidateTargets(mob/living/carbon/human/H, list/targets)
 	if(!islist(targets) || !length(targets))
-		// некоторые сплеши могут работать и без списка (например, чисто self)
 		return TRUE
 
 	for(var/atom/T in targets)
@@ -119,26 +104,19 @@
 				return FALSE
 		if(requires_dark_target && !is_dark(T))
 			return FALSE
-		if(!ValidateTarget(H, T)) // хук для наследников (по умолчанию TRUE)
+		if(!ValidateTarget(H, T))
 			return FALSE
 	return TRUE
 
-/// Применить эффект ко всем целям. По умолчанию — совместимость со старым DoEffect.
 /datum/action/cooldown/shadowling/proc/DoEffectOnTargets(mob/living/carbon/human/H, list/targets)
 	if(!islist(targets) || !length(targets))
 		return DoEffect(H, null)
 	var/success = FALSE
-	// дефолт — работаем по ПЕРВОЙ цели, как раньше
 	success = DoEffect(H, targets[1]) || success
 	return success
 
-/***********************
- * Утилиты конуса (НОВОЕ)
- ***********************/
-
-/// В конусе относительно взгляда H? full_angle: 90, 135, 180 (дискретные 8-напр. допуски)
 /datum/action/cooldown/shadowling/proc/in_front_cone(mob/living/carbon/human/H, atom/A, full_angle = 90)
-	if(!H.dir) // нет направления — считаем валидным
+	if(!H.dir)
 		return TRUE
 	var/tdir = get_dir(H, A)
 	if(!tdir)
@@ -154,7 +132,6 @@
 
 	return (tdir in allowed)
 
-/// Собрать людей в радиусе r в конусе full_angle° по направлению H
 /datum/action/cooldown/shadowling/proc/collect_cone_targets(mob/living/carbon/human/H, r = 2, full_angle = 90)
 	var/list/res = list()
 	for(var/mob/living/carbon/human/T in range(r, H))
@@ -164,3 +141,34 @@
 			continue
 		res += T
 	return res
+
+
+/datum/action/cooldown/shadowling/proc/find_nearest_target(range)
+	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/min_d = 999
+	var/mob/living/carbon/human/best = null
+	var/list/candidates = range(range, get_turf(owner))
+	for(var/mob/living/carbon/human/candidate in candidates)
+		if(candidate == owner || QDELETED(owner) || candidate.stat == DEAD)
+			continue
+		if(hive && ((candidate in hive.lings) || (candidate in hive.thralls)))
+			continue
+		var/d = get_dist(owner, candidate)
+		if(d < min_d)
+			min_d = d
+			best = candidate
+	return best
+
+/datum/action/cooldown/shadowling/proc/pick_adjacent_open_turf(turf/center)
+	if(!istype(center))
+		return null
+	var/list/cands = list()
+	for(var/turf/T in get_adjacent_open_turfs(center))
+		if(T && !T.density)
+			cands += T
+	return length(cands) ? pick(cands) : null
+
+/datum/action/cooldown/shadowling/process()
+	. = ..()
+	if(!owner || (next_use_time - world.time) <= 0)
+		enable()

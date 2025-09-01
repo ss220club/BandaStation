@@ -1,8 +1,8 @@
 GLOBAL_VAR_INIT(shadowling_hive, null)
 
 /datum/shadow_hive
-	var/list/lings   = list()   // все шадоулинги (мобы)
-	var/list/thralls = list()   // все траллы (мобы)
+	var/list/lings   = list()
+	var/list/thralls = list()
 
 /datum/shadow_hive/proc/join_ling(mob/living/carbon/human/H)
 	if(!H || QDELETED(H))
@@ -14,7 +14,6 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 	var/datum/action/cooldown/shadowling/hive_sync/sync_spell = new
 	sync_spell.Grant(H)
 
-/// Подключение тралла
 /datum/shadow_hive/proc/join_thrall(mob/living/carbon/human/H)
 	if(!H || QDELETED(H))
 		return
@@ -25,7 +24,6 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 	var/datum/action/cooldown/shadowling/hive_sync/sync_spell = new
 	sync_spell.Grant(H)
 
-/// Отключение из улья
 /datum/shadow_hive/proc/leave(mob/living/carbon/human/H)
 	if(!H) return
 	lings -= H
@@ -34,7 +32,6 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 	if(LH)
 		LH.remove_language(/datum/language/shadow_hive)
 
-/// Считаем только живых траллов
 /datum/shadow_hive/proc/count_nt()
 	var/n = 0
 	for(var/mob/living/carbon/human/T in thralls)
@@ -43,7 +40,6 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 		n++
 	return n
 
-/// Выдаём язык улья (фикс: не ранний return, а сразу выдача)
 /datum/shadow_hive/proc/refresh_languages(mob/living/carbon/human/H)
 	if(!H) return
 	var/datum/language_holder/LH = H.get_language_holder()
