@@ -120,7 +120,7 @@
 
 /// Initiate the landing zone effect
 /obj/docking_port/mobile/proc/initiate_drop_landing(obj/docking_port/stationary/S1, animate_time)
-	if(!S1 || drop_landing_in_progress || (!drop_landing_sound && !drop_landing_effect))
+	if(!S1 || S1.roundstart_template || drop_landing_in_progress || (!drop_landing_sound && !drop_landing_effect))
 		return
 
 	drop_landing_in_progress = TRUE
@@ -146,6 +146,9 @@
 
 	if(drop_landing_effect)
 		create_drop_landing_effect(S1, effect_turf, animate_time)
+
+	var/mutable_appearance/alert_overlay = mutable_appearance('icons/mob/telegraphing/telegraph_holographic.dmi', "target_box")
+	notify_ghosts("Зона посадки десантной капсулы!", source = effect_turf, header = "Десант", alert_overlay = alert_overlay)
 
 /// Create the landing zone effect in center of landing area
 /obj/docking_port/mobile/proc/create_drop_landing_effect(obj/docking_port/stationary/S1, turf/effect_turf, animate_time)
@@ -226,6 +229,9 @@
 /obj/docking_port/mobile/gamma/register()
 	. = ..()
 	SSshuttle.gamma = src
+
+/obj/docking_port/mobile/assault_pod
+	drop_landing_sound = 'sound/effects/alert.ogg'
 
 /obj/docking_port/mobile/assault_pod/nanotrasen
 	name = "Nanotrasen assault pod"

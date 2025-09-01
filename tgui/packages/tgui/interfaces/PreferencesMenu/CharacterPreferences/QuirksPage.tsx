@@ -54,7 +54,6 @@ type QuirkListProps = {
 };
 
 type QuirkProps = {
-  // eslint-disable-next-line react/no-unused-prop-types
   onClick: (quirkName: string, quirk: Quirk) => void;
   randomBodyEnabled: boolean;
   selected: boolean;
@@ -90,7 +89,6 @@ function QuirkList(props: QuirkProps & QuirkListProps) {
 type QuirkDisplayProps = {
   quirk: Quirk & { failTooltip?: string };
   // bugged
-  // eslint-disable-next-line react/no-unused-prop-types
   quirkKey: string;
 } & QuirkProps;
 

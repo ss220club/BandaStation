@@ -8,6 +8,9 @@
 	/// Name of the song
 	var/name = "Untitled"
 
+	/// ID for syncing songs together
+	var/id = ""
+
 	/// The atom we're attached to/playing from
 	var/atom/parent
 
@@ -116,11 +119,19 @@
 	/// Do not directly set, use update_sustain()
 	var/cached_exponential_dropoff = 1.045
 	/////////////////////////////////////////////////////////////////////////
+	// BANDASTATION ADDITION - START
+	/// straight BPM (integer)
+	var/bpm = 120
+	/// minimal BPM
+	var/min_bpm = 1
+	/// summaraized delay
+	var/delay_residual = 0.0
+	// BANDASTATION ADDITION - END
 
 /datum/song/New(atom/parent, list/instrument_ids, new_range)
 	SSinstruments.on_song_new(src)
 	lines = list()
-	tempo = sanitize_tempo(tempo, TRUE)
+	// tempo = sanitize_tempo(tempo, TRUE) // BANDASTATION REMOVAL - BPM unlock
 	src.parent = parent
 	if(instrument_ids)
 		allowed_instrument_ids = islist(instrument_ids) ? instrument_ids : list(instrument_ids)
@@ -131,6 +142,7 @@
 	update_sustain()
 	if(new_range)
 		instrument_range = new_range
+	set_bpm(120) // BANDASTATION ADDITION - BPM unlock
 
 /datum/song/Destroy()
 	stop_playing()
@@ -209,9 +221,36 @@
 	SEND_SIGNAL(user, COMSIG_ATOM_STARTING_INSTRUMENT, src)
 	elapsed_delay = 0
 	delay_by = 0
+	delay_residual = 0.0 // BANDASTATION ADDITION - BPM unlock
 	current_chord = 1
 	music_player = user
 	START_PROCESSING(SSinstruments, src)
+	if(id)
+		sync_play()
+
+/**
+ * Attempts to find other instruments with the same ID and syncs them to our song.
+ */
+/datum/song/proc/sync_play()
+	for(var/datum/song/other_instrument as anything in SSinstruments.songs)
+		if(other_instrument == src || other_instrument.id != id)
+			continue
+		if(other_instrument.playing)
+			continue
+		var/atom/other_player = other_instrument.find_sync_player()
+		if(isnull(other_player) || !(other_player in view(parent)))
+			continue
+		// copies the main song info to target songs
+		other_instrument.lines = lines.Copy()
+		other_instrument.max_repeats = max_repeats
+		other_instrument.tempo = tempo
+		other_instrument.start_playing(other_player)
+
+/**
+ * Finds a player which would reasonably be able to play this song.
+ */
+/datum/song/proc/find_sync_player()
+	return null
 
 /**
  * Stops playing, terminating all sounds if in synthesized mode. Clears hearing_mobs.
@@ -264,7 +303,19 @@
 /datum/song/proc/tempodiv_to_delay(tempodiv)
 	if(!tempodiv)
 		tempodiv = 1 // no division by 0. some song converters tend to use 0 for when it wants to have no div, for whatever reason.
-	return max(1, round((tempo/tempodiv) / world.tick_lag, 1))
+	// BANDASTATION EDIT START - BPM unlock
+	var/ds_per_beat = (60 SECONDS) / bpm
+	var/ds_per_div  = ds_per_beat / tempodiv
+	var/exact_ticks = ds_per_div / world.tick_lag
+
+	var/with_res = exact_ticks + delay_residual
+	var/ticks = floor(with_res)
+	if(ticks < 1)
+		ticks = 1
+	delay_residual = with_res - ticks
+
+	return ticks
+	// BANDASTATION EDIT END
 
 /**
  * Compiles chords.
@@ -317,8 +368,20 @@
 /**
  * Sets our tempo from a beats-per-minute, sanitizing it to a valid number first.
  */
-/datum/song/proc/set_bpm(bpm)
-	tempo = sanitize_tempo(600 / bpm)
+// BANDASTATION EDIT START - BPM unlock
+/datum/song/proc/set_bpm(new_bpm)
+	// tempo = sanitize_tempo(600 / bpm)
+	new_bpm = clamp(round(new_bpm), min_bpm, get_max_bpm())
+	if(new_bpm == bpm)
+		return
+	bpm = new_bpm
+	SEND_SIGNAL(parent, COMSIG_INSTRUMENT_TEMPO_CHANGE, src)
+	delay_residual = 0.0
+	// BANDASTATION EDIT END - BPM unlock
+
+/datum/song/proc/get_max_bpm()
+	// сколько тиков в минуте: 60 сек / tick_lag
+	return max(1, round((60 SECONDS) / world.tick_lag))
 
 /datum/song/process(wait)
 	if(!playing)
@@ -388,7 +451,14 @@
 	if(. == STOP_PLAYING || . == IGNORE_INSTRUMENT_CHECKS)
 		return
 	var/obj/item/instrument/I = parent
-	return I.should_stop_playing(player)
+	return I.can_play(player) ? NONE : STOP_PLAYING
+
+/datum/song/handheld/find_sync_player()
+	var/obj/item/instrument/instrument = parent
+	var/mob/living/player = get(parent, /mob/living)
+	if(instrument.can_play(player))
+		return player
+	return null
 
 // subtype for stationary structures, like pianos
 /datum/song/stationary
@@ -398,4 +468,12 @@
 	if(. == STOP_PLAYING || . == IGNORE_INSTRUMENT_CHECKS)
 		return TRUE
 	var/obj/structure/musician/M = parent
-	return M.should_stop_playing(player)
+	return M.can_play(player) ? NONE : STOP_PLAYING
+
+/datum/song/stationary/find_sync_player()
+	var/obj/structure/musician/piano = parent
+	for(var/mob/living/player in view(parent, 1))
+		if(piano.can_play(player))
+			return player
+
+	return null

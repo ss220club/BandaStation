@@ -13881,7 +13881,7 @@
 /turf/open/misc/beach/sand,
 /area/station/hallway/secondary/exit/departure_lounge)
 "dne" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/cargo/office)
 "dny" = (
@@ -24960,7 +24960,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "gcr" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 8
 	},
@@ -26767,7 +26767,7 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 1
 	},
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/port/aft)
 "gBK" = (
@@ -28071,7 +28071,7 @@
 /turf/open/floor/circuit,
 /area/station/ai_monitored/turret_protected/ai_upload)
 "gPR" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
@@ -68920,12 +68920,6 @@
 	dir = 8
 	},
 /area/station/commons/dorms)
-"qTg" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/spawner/random/maintenance/two,
-/obj/structure/rack,
-/turf/open/floor/plating,
-/area/station/security/interrogation/ghetto)
 "qTh" = (
 /obj/machinery/atmospherics/components/binary/pump{
 	name = "Port to Infiltrate/Filter";
@@ -73480,9 +73474,6 @@
 "rYf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/table/wood,
-/obj/item/paper/fluff/ids_for_dummies{
-	pixel_y = 4
-	},
 /obj/item/toy/figure/ian,
 /turf/open/floor/iron/grimy,
 /area/station/command/heads_quarters/hop)
@@ -75306,10 +75297,6 @@
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
-"suj" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/iron/white,
-/area/station/maintenance/department/medical/ghetto/central)
 "suk" = (
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/starboard)
@@ -91946,7 +91933,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/aft)
 "wEj" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
@@ -97938,7 +97925,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/dock)
 "ydo" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "ydt" = (
@@ -98028,10 +98015,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/security/range)
-"yeN" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/iron/white,
-/area/station/maintenance/department/medical/ghetto/central)
 "yeP" = (
 /obj/structure/table/wood,
 /obj/item/camera,
@@ -122846,7 +122829,7 @@ mrw
 uHN
 pfA
 bOB
-qTg
+pfA
 uHN
 nqa
 wYp
@@ -128513,7 +128496,7 @@ nrj
 knh
 hfN
 pZB
-yeN
+dvK
 oad
 guN
 grg
@@ -129794,7 +129777,7 @@ jiq
 eDR
 dEP
 rku
-suj
+dvK
 dvK
 hfN
 pZB
