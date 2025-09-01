@@ -246,7 +246,7 @@
 
 // BANDASTATION ADDITION - START
 /datum/plant_gene/trait/squash/proc/squash_plant_in_hands(obj/item/food/grown/our_plant, atom/target)
-	if(!do_after(target, BLUESPACE_TELEPORT_COOLDOWN, our_plant))
+	if(!do_after(target, PLANT_SQUASH_COOLDOWN, our_plant))
 		return
 
 	squash_plant(our_plant, target)
