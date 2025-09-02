@@ -482,6 +482,7 @@
 
 #define HUNGER_FACTOR 0.05 //factor at which mob nutrition decreases
 #define WASTE_RATIO 0.5 //proportion of nutrition converted to waste
+#define WASTE_TOLERANCE_LEVEL 55 // threshold at which toilet urge begins
 #define WASTE_FACTOR 0.5 //waste generated per hunger tick
 #define WASTE_LEVEL_TOILET 100 //threshold at which toilet is needed
 #define ETHEREAL_DISCHARGE_RATE (1e-3 * STANDARD_ETHEREAL_CHARGE) // Rate at which ethereal stomach charge decreases

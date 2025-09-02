@@ -399,11 +399,28 @@
 /mob/living/carbon/proc/defecate(obj/structure/toilet/target_toilet)
 	if(waste_level <= 0)
 		return FALSE
+
+	var/static/list/waste_denial_phrases = list(
+		"Я сейчас в туалет не хочу.",
+		"Мне пока не надо.",
+		"Пока потерплю.",
+		"Еще не приспичило.",
+		"Не время, не место.",
+		"Мне пока не нужно в туалет."
+	)
+	if(waste_level <= WASTE_TOLERANCE_LEVEL)
+		to_chat(src, span_notice(pick(waste_denial_phrases)))
+		return FALSE
+
 	var/turf/location = get_turf(target_toilet ? target_toilet : src)
-	visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] defecates!"), span_userdanger("Вы справляете нужду."))
+	visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] справляет нужду!"), span_userdanger("Вы справляете нужду."))
 	playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
 	adjust_waste(-waste_level, TRUE)
-	if(location)
+	if(target_toilet)
+		target_toilet.add_waste()
+		if(mob_mood)
+			mob_mood.add_mood_event("relieved_toilet", /datum/mood_event/relieved_toilet)
+	else if(location)
 		new /obj/effect/decal/cleanable/feces(location)
 	return TRUE
 

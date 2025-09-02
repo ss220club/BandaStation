@@ -1292,8 +1292,10 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 	var/current_color
 	var/fullness
 	var/static/list/defecation_gradient = list(
-	0.0 = "#00FF00",
-	1.0 = "#FF0000",
+	0.0,
+	COLOR_GREEN,
+	1.0,
+	COLOR_BROWN,
 	)
 
 /atom/movable/screen/defecation_bar/Initialize(mapload, datum/hud/hud_owner)

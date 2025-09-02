@@ -9,6 +9,8 @@
 
 	///Boolean if whether the toilet is currently flushing.
 	var/flushing = FALSE
+	///Whether the bowl water is dirty (brown) from waste
+	var/has_waste = FALSE
 	///Boolean if the toilet seat is up.
 	var/cover_open = FALSE
 	///Boolean if the cistern is up, allowing items to be put in/out.
@@ -43,6 +45,8 @@
 		context[SCREENTIP_CONTEXT_LMB] = "Insert Fish"
 	else if(cover_open && LAZYLEN(fishes))
 		context[SCREENTIP_CONTEXT_LMB] = "Grab Fish"
+	else if(cover_open && isnull(held_item) && iscarbon(user))
+		context[SCREENTIP_CONTEXT_LMB] = "Use Toilet"
 	else if(cistern_open)
 		if(isnull(held_item))
 			context[SCREENTIP_CONTEXT_LMB] = "Check Cistern"
@@ -141,9 +145,20 @@
 
 	if(iscarbon(user))
 		var/mob/living/carbon/defecator = user
-		if(cover_open && !defecator.get_active_held_item())
-			defecator.defecate(src)
+		if(!cover_open)
+			to_chat(user, span_warning("Откройте крышку унитаза."))
 			return
+		if(defecator.get_active_held_item())
+			to_chat(user, span_warning("Освободите активную руку."))
+			return
+		defecator.visible_message(
+			span_notice("[defecator] садится на унитаз..."),
+			span_notice("Вы садитесь на унитаз...")
+		)
+		if(!do_after(defecator, 3 SECONDS, target = src, timed_action_flags = IGNORE_HELD_ITEM))
+			return
+		defecator.defecate(src)
+		return
 
 	if(!flushing && LAZYLEN(fishes) && cover_open)
 		var/obj/item/random_fish = pick(fishes)
@@ -169,7 +184,7 @@
 	flushing = TRUE
 	playsound(src, 'sound/machines/toilet_flush.ogg', cover_open ? 40 : 20, TRUE)
 	if(cover_open && (dir & SOUTH))
-		update_appearance(UPDATE_OVERLAYS)
+		update_appearance(UPDATE_ICON)
 		flick_overlay_view(mutable_appearance(icon, "[base_icon_state]-water-flick"), 3 SECONDS)
 	for(var/obj/effect/decal/cleanable/feces/F in loc)
 		qdel(F)
@@ -183,7 +198,10 @@
 /obj/structure/toilet/update_overlays()
 	. = ..()
 	if(!flushing && cover_open)
-		. += "[base_icon_state]-water"
+		if(has_waste)
+			. += "[base_icon_state]-water-brown"
+		else
+			. += "[base_icon_state]-water"
 
 /obj/structure/toilet/atom_deconstruct(dissambled = TRUE)
 	for(var/obj/toilet_item in cistern_items)
@@ -258,9 +276,16 @@
 ///Ends the flushing animation and updates overlays if necessary
 /obj/structure/toilet/proc/end_flushing()
 	flushing = FALSE
+	has_waste = FALSE
 	if(cover_open && (dir & SOUTH))
-		update_appearance(UPDATE_OVERLAYS)
+		update_appearance(UPDATE_ICON)
 	QDEL_LAZYLIST(fishes)
+
+///Mark the toilet as dirty after defecation and refresh overlays
+/obj/structure/toilet/proc/add_waste()
+	has_waste = TRUE
+	if(cover_open && (dir & SOUTH))
+		update_appearance(UPDATE_ICON)
 
 /obj/structure/toilet/greyscale
 	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
