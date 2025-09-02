@@ -325,7 +325,7 @@
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 5
 	show_in_report = TRUE
-	report_message = "В связи с хорошими показателями производительности мы снабдили вашу станцию ​​роскошными спасательными капсулами."
+	report_message = "В связи с хорошими показателями производительности мы снабдили вышу станцию роскошными спасательными капсулами."
 	trait_to_give = STATION_TRAIT_BIGGER_PODS
 	blacklist = list(/datum/station_trait/cramped_escape_pods)
 
@@ -402,7 +402,7 @@
 	new_wallet.refreshID()
 
 	if(prob(35))
-		report_message += "Техник сообщает, что в последний раз помнит, что кошелек был рядом с [get_area_name(new_wallet)]."
+		report_message += " Техник сообщает, что в последний раз помнит, что кошелек был рядом с [get_area_name(new_wallet)]."
 
 	message_admins("A missing wallet has been placed in the [locker_to_fill] locker, in the [get_area_name(locker_to_fill)] area.")
 
@@ -421,7 +421,7 @@
 
 /// Spawns assistants with some gear, either gimmicky or functional. Maybe, one day, it will inspire an assistant to do something productive or fun
 /datum/station_trait/assistant_gimmicks
-	name = "Приспособленные помощники пилота"
+	name = "Пилотный проект 'Снаряжённые ассистенты'"
 	report_message = "Отдел по работе с ассистентами Nanotrassen проводит экспериментальную проверку, чтобы выяснить, поможет ли различное ассистентское оборудование повысить производительность!"
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 3
@@ -430,6 +430,6 @@
 	blacklist = list(/datum/station_trait/colored_assistants)
 
 /datum/station_trait/random_event_weight_modifier/assistant_gimmicks/get_pulsar_message()
-	var/advisory_string = "Уровень предупреждения:<b>Серое небо</b></center><BR>"
+	var/advisory_string = "Уровень предупреждения: <b>Серое небо</b></center><BR>"
 	advisory_string += "Уровень предупреждения в вашем секторе — Серое небо. Наши датчики фиксируют аномальную активность среди ассистентов, назначенных на вашу станцию. Рекомендуем вам внимательно следить за хранилищем инструментов, мостиком, техническим хранилищем и бригом на предмет скопления людей или мелкого воровства."
 	return advisory_string

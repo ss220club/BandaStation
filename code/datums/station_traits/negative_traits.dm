@@ -51,7 +51,7 @@
 	blacklist = list(/datum/station_trait/random_spawns, /datum/station_trait/hangover)
 
 /datum/station_trait/random_spawns
-	name = "Посадка по требованию"
+	name = "Высадка на ходу"
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 2
 	show_in_report = TRUE
@@ -353,7 +353,7 @@
 /datum/station_trait/revolutionary_trashing
 	name = "Постреволюционный пыл"
 	show_in_report = TRUE
-	report_message = "Вашу станцию ​​недавно отбили у революционной коммуны. Мы не успели за ними убраться."
+	report_message = "Вашу станцию недавно отбили у революционной коммуны. Мы не успели за ними убраться."
 	trait_type = STATION_TRAIT_NEGATIVE
 	trait_to_give = STATION_TRAIT_REVOLUTIONARY_TRASHING
 	weight = 2
