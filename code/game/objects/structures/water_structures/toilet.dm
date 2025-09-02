@@ -139,9 +139,11 @@
 		w_items -= random_cistern_item.w_class
 		return
 
-	if(cover_open && !user.get_active_held_item() && user.waste_level > 0)
-		user.defecate(src)
-		return
+	if(iscarbon(user))
+		var/mob/living/carbon/defecator = user
+		if(cover_open && !defecator.get_active_held_item())
+			defecator.defecate(src)
+			return
 
 	if(!flushing && LAZYLEN(fishes) && cover_open)
 		var/obj/item/random_fish = pick(fishes)

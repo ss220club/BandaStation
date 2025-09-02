@@ -389,10 +389,11 @@
 		location = get_step(location, starting_dir)
 		if (location?.is_blocked_turf())
 			break
-if(need_mob_update) // so we only have to call updatehealth() once as opposed to n times
-updatehealth()
 
-return TRUE
+	if(need_mob_update) // so we only have to call updatehealth() once as opposed to n times
+		updatehealth()
+
+	return TRUE
 
 ///Expel accumulated waste
 /mob/living/carbon/proc/defecate(obj/structure/toilet/target_toilet)
