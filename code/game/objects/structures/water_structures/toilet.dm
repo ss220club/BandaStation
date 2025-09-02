@@ -160,6 +160,8 @@
 
 /obj/structure/toilet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(flushing)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	flushing = TRUE
@@ -167,9 +169,8 @@
 	if(cover_open && (dir & SOUTH))
 		update_appearance(UPDATE_OVERLAYS)
 		flick_overlay_view(mutable_appearance(icon, "[base_icon_state]-water-flick"), 3 SECONDS)
-	if(cover_open)
-		for(var/obj/effect/decal/cleanable/feces/F in loc)
-			qdel(F)
+	for(var/obj/effect/decal/cleanable/feces/F in loc)
+		qdel(F)
 	addtimer(CALLBACK(src, PROC_REF(end_flushing)), 4 SECONDS)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
