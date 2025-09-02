@@ -66,6 +66,7 @@ export const Vending = () => {
   const { data } = useBackend<VendingData>();
 
   const {
+    all_products_free,
     onstation,
     ad,
     product_records = [],
@@ -112,7 +113,7 @@ export const Vending = () => {
     <Window width={431} height={635}>
       <Window.Content>
         <Stack fill vertical>
-          {!!onstation && (
+          {!!onstation && !all_products_free && (
             <Stack.Item>
               <UserDetails />
             </Stack.Item>
