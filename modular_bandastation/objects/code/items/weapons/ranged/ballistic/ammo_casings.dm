@@ -17,7 +17,7 @@
 	name = ".35 Sol Short ripper bullet casing"
 	desc = "Стандартный экспансивный пистолетный патрон ТСФ калибра .35 Sol Short. Наносит целям режущие раны, но слаб против брони."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "sl-casing"
+	icon_state = "sh-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/ripper
 
 // .35 sol armor piercing are the AP rounds for this weapon
@@ -128,7 +128,7 @@
 	name = "9x25mm NT hollow-point bullet casing"
 	desc = "Стандартный экспансивный пистолетный патрон НТ калибра 9x25мм. Наносит целям режущие раны, но слаб против брони."
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
-	icon_state = "sl-casing"
+	icon_state = "sh-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/hp
 
 /obj/item/ammo_casing/c9x25mm/ap
