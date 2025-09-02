@@ -145,18 +145,39 @@
 
 	if(iscarbon(user))
 		var/mob/living/carbon/defecator = user
+		var/static/list/waste_low_denial_phrases = list(
+			"Вы безразлично смотрите на унитаз.",
+			"Вам сейчас не до туалета.",
+			"Вы не чувствуете никакой нужды.",
+			"Унитаз молчит. Ты тоже.",
+			"Вы понимаете, что зря сюда заглянули.",
+			"Похоже, ещё рано.",
+			"Вы слышите шёпот фарфора. Он вас не зовёт. В вас ещё не проснулся позыв. Сейчас не время.",
+		)
 		if(!cover_open)
-			to_chat(user, span_warning("Откройте крышку унитаза."))
+			balloon_alert(user, "Откройте крышку унитаза.")
 			return
+
 		if(defecator.get_active_held_item())
-			to_chat(user, span_warning("Освободите активную руку."))
+			balloon_alert(user, "Освободите активную руку.")
 			return
+
+		// Must stand on the same turf as the toilet to use it
+		if(get_turf(defecator) != get_turf(src))
+			balloon_alert(defecator, "Вы слишком далеко от унитаза.")
+			return
+
+		if(defecator.waste_level < 25)
+			to_chat(defecator, span_notice(pick(waste_low_denial_phrases)))
+			return
+
 		defecator.visible_message(
 			span_notice("[defecator] садится на унитаз..."),
 			span_notice("Вы садитесь на унитаз...")
 		)
 		if(!do_after(defecator, 3 SECONDS, target = src, timed_action_flags = IGNORE_HELD_ITEM))
 			return
+
 		defecator.defecate(src)
 		return
 

@@ -1262,6 +1262,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 	name = "defecation"
 	icon_state = "hungerbar"
 	screen_loc = ui_defecation
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	var/fullness = 0
 	var/atom/movable/screen/defecation_bar/defecation_bar
 
@@ -1283,33 +1284,64 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 
 /atom/movable/screen/defecation/proc/update_defecation_bar(instant = FALSE)
 	update_defecation_state()
-	defecation_bar.update_fullness(fullness, instant)
+	// Show only when above tolerance
+	var/mob/living/M = get_mob()
+	var/should_show = (M && (M.waste_level > WASTE_TOLERANCE_LEVEL))
+
+	if(should_show && alpha == 0)
+		if(instant)
+			alpha = 255
+		else
+			animate(src, alpha = 255, time = 1 SECONDS)
+	else if(!should_show && alpha == 255)
+		if(instant)
+			alpha = 0
+		else
+			animate(src, alpha = 0, time = 1 SECONDS)
+
+	defecation_bar.update_fullness(fullness, instant || alpha == 0)
 
 /atom/movable/screen/defecation_bar
 	icon_state = "hungerbar_bar"
 	screen_loc = ui_defecation
+	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
 	var/image/bar_mask
 	var/current_color
 	var/fullness
+	/// Offset of the mask
+	var/bar_offset
 	var/static/list/defecation_gradient = list(
 	0.0,
-	COLOR_GREEN,
+	COLOR_BLUE_LIGHT,
+	0.25,
+	COLOR_EMERALD,
+	0.5,
+	COLOR_TANGERINE_YELLOW,
+	0.75,
+	COLOR_ORANGE_BROWN,
 	1.0,
 	COLOR_BROWN,
 	)
 
 /atom/movable/screen/defecation_bar/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
+	var/atom/movable/movable_loc = ismovable(loc) ? loc : null
+	screen_loc = movable_loc?.screen_loc
 	bar_mask ||= icon(icon, "hungerbar_mask")
 
 /atom/movable/screen/defecation_bar/proc/update_fullness(new_fullness, instant)
 	fullness = new_fullness
-	var/bar_offset = round(17 - (fullness * 17))
 	var/new_color = gradient(defecation_gradient, clamp(fullness, 0, 1))
-	if(new_color != current_color)
-		current_color = new_color
-		color = new_color
-		add_filter("defecation_bar_mask", 1, alpha_mask_filter(0, bar_offset, bar_mask))
 	if(instant)
-		return
-	transition_filter("defecation_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
+		color = new_color
+	else if(new_color != current_color)
+		animate(src, color = new_color, 0.5 SECONDS)
+	current_color = new_color
+
+	var/old_bar_offset = bar_offset
+	bar_offset = round(17 - (fullness * 17))
+	if(old_bar_offset != bar_offset)
+		if(instant || isnull(old_bar_offset))
+			add_filter("defecation_bar_mask", 1, alpha_mask_filter(0, bar_offset, bar_mask))
+		else
+			transition_filter("defecation_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
