@@ -1474,35 +1474,35 @@
 ///Adjust the nutrition of a mob
 ///Adjust the nutrition of a mob
 /mob/proc/adjust_nutrition(change, forced = FALSE) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
-if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
-return
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		return
 
-nutrition = max(0, nutrition + change)
-adjust_waste(change * WASTE_RATIO, forced)
+	nutrition = max(0, nutrition + change)
+	adjust_waste(change * WASTE_RATIO, forced)
 
 /mob/living/adjust_nutrition(change, forced)
-. = ..()
-// Queue update if change is small enough (6 is 1% of nutrition softcap)
-if(abs(change) >= 6)
-mob_mood?.update_nutrition_moodlets()
-hud_used?.hunger?.update_hunger_bar()
-else
-living_flags |= QUEUE_NUTRITION_UPDATE
+	. = ..()
+	// Queue update if change is small enough (6 is 1% of nutrition softcap)
+	if(abs(change) >= 6)
+		mob_mood?.update_nutrition_moodlets()
+		hud_used?.hunger?.update_hunger_bar()
+	else
+		living_flags |= QUEUE_NUTRITION_UPDATE
 
 ///Adjust the waste level of a mob
 /mob/proc/adjust_waste(change, forced = FALSE)
-if(change == 0)
-return
-waste_level = max(0, waste_level + change)
+	if(change == 0)
+		return
+	waste_level = max(0, waste_level + change)
 
 /mob/living/adjust_waste(change, forced)
-. = ..()
-hud_used?.defecation?.update_defecation_bar()
-if(mob_mood)
-if(waste_level >= WASTE_LEVEL_TOILET)
-mob_mood.add_mood_event("needs_toilet", /datum/mood_event/needs_toilet)
-else
-mob_mood.clear_mood_event("needs_toilet")
+	. = ..()
+	hud_used?.defecation?.update_defecation_bar()
+	if(mob_mood)
+		if(waste_level >= WASTE_LEVEL_TOILET)
+			mob_mood.add_mood_event("needs_toilet", /datum/mood_event/needs_toilet)
+		else
+			mob_mood.clear_mood_event("needs_toilet")
 
 ///Force set the mob nutrition
 /mob/proc/set_nutrition(set_to, forced = FALSE) //Seriously fuck you oldcoders.

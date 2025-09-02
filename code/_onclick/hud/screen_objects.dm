@@ -1273,7 +1273,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 	/atom/movable/screen/defecation/proc/update_defecation_state()
 	var/mob/living/M = get_mob()
 	if(!M)
-	return
+		return
 	fullness = clamp(M.waste_level / WASTE_LEVEL_TOILET, 0, 1)
 	
 	/atom/movable/screen/defecation/update_appearance(updates)

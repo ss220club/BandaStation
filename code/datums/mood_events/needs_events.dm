@@ -165,9 +165,9 @@
 	mood_change = -4
 
 /datum/mood_event/completely_organic
-description = "Я полностью органик, это ужасно!!"
-mood_change = -8
+	description = "Я полностью органик, это ужасно!!"
+	mood_change = -8
 
 /datum/mood_event/needs_toilet
-description = "Мне срочно нужно в туалет."
-mood_change = -5
+	description = "Мне срочно нужно в туалет."
+	mood_change = -5
