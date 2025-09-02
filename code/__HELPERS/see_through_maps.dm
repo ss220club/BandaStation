@@ -13,6 +13,8 @@
 // BANDASTATION ADDITION - START
 ///A 3x3 area, with the tile directly above hidden
 #define SEE_THROUGH_MAP_STATION_STATUE "station_statue"
+///3 tiles above the atom, for large trees
+#define SEE_THROUGH_MAP_DEFAULT_THREE_TALL "default_three_tall"
 // BANDASTATION ADDITION - END
 ///Two rows of three wide, but offset one tile to the left because thats how shipping containers work
 #define SEE_THROUGH_MAP_SHIPPING_CONTAINER "shipping_container"
@@ -81,6 +83,16 @@ GLOBAL_LIST_INIT(see_through_maps, list(
 		list(-1, 1, 0), list(0, 1, 0), list(1, 1, 0),
 		list(-1, 0, 0), list(0, 0, 0), list(1, 0, 0),
 		list(-1, -1, 0), list(0, -1, 0), list(1, -1, 0)
+	),
+	// X
+	// X
+	// X
+	// A
+	SEE_THROUGH_MAP_DEFAULT_THREE_TALL = list(
+		list(0, 3, 0),
+		list(0, 2, 0),
+		list(0, 1, 0),
+		list(0, 0, 0)
 	),
 	// BANDASTATION ADDITION - END
 	//No
