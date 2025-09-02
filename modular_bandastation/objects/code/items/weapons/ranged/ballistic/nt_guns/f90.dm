@@ -32,4 +32,4 @@
 
 /obj/item/gun/ballistic/automatic/f90/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/scope, range_modifier = 3)
+	AddComponent(/datum/component/scope, range_modifier = 4)
