@@ -762,6 +762,11 @@
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c45/ap
 
+/obj/item/ammo_box/magazine/c45/rubber
+	name = "pistol magazine (.45 rubber)"
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c45/rubber
+
 /obj/item/ammo_box/magazine/c45/hp
 	name = "pistol magazine (.45 HP)"
 	MAGAZINE_TYPE_HOLLOWPOINT
@@ -771,3 +776,144 @@
 	name = "pistol magazine (.45 incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c45/inc
+
+// MARK: FN18 - 9mm SMG
+/obj/item/ammo_box/magazine/fn18
+	name = "SMG magazine (9mm)"
+	desc = "Магазин для пистолетов-пулеметов калибра 9мм, вмещающий 40 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "fn18_mag"
+	base_icon_state = "fn18_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_9x25NT
+	max_ammo = 40
+	ammo_band_icon = "+fn18_mag_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c9mm
+
+/obj/item/ammo_box/magazine/fn18/rubber
+	name = "SMG magazine (9mm rubber)"
+	desc = "Магазин для пистолетов-пулеметов калибра 9мм, вмещающий 40 травматических патронов."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c9mm/rubber
+
+/obj/item/ammo_box/magazine/fn18/hp
+	name = "SMG magazine (9mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c9mm/hp
+
+/obj/item/ammo_box/magazine/fn18/ap
+	name = "SMG magazine (9mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c9mm/ap
+
+/obj/item/ammo_box/magazine/fn18/incendiary
+	name = "SMG magazine (9mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c9mm/fire
+
+// MARK: AS32 - auto shotgun
+/obj/item/ammo_box/magazine/as32
+	name = "AS32 magazine (12ga buckshot)"
+	desc = "Магазин для штурмовых дробовиков AS32 12-го калибра, вмещающий 8 патронов."
+	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon_state = "as32_mag"
+	base_icon_state = "as32_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_SHOTGUN
+	max_ammo = 8
+	ammo_band_icon = "+as32_mag_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
+
+/obj/item/ammo_box/magazine/as32/beanbag
+	name = "AS32 magazine (12ga beanbag)"
+	ammo_band_color = COLOR_GREEN
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+
+/obj/item/ammo_box/magazine/as32/rubbershot
+	name = "AS32 magazine (12ga rubbershot)"
+	ammo_band_color = COLOR_PINK
+	ammo_type = /obj/item/ammo_casing/shotgun/rubbershot
+
+/obj/item/ammo_box/magazine/as32/executioner
+	name = "AS32 magazine (12ga HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/shotgun/executioner
+
+/obj/item/ammo_box/magazine/as32/slug
+	name = "AS32 magazine (12ga slugs)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/shotgun/milspec
+
+/obj/item/ammo_box/magazine/as32/breacher
+	name = "AS32 magazine (12ga breaching)"
+	ammo_band_color = COLOR_BLUE_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/breacher
+
+/obj/item/ammo_box/magazine/as32/frag12
+	name = "AS32 magazine (12ga FRAG-12)"
+	ammo_band_color = COLOR_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/frag12
+
+/obj/item/ammo_box/magazine/as32/dragonsbreath
+	name = "AS32 magazine (12ga dragonsbreath)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/shotgun/dragonsbreath
+
+/obj/item/ammo_box/magazine/as32/flechette
+	name = "AS32 magazine (12ga flechette)"
+	ammo_band_color = COLOR_ALMOST_BLACK
+	ammo_type = /obj/item/ammo_casing/shotgun/flechette
+
+/obj/item/ammo_box/magazine/as32/drum
+	name = "AS32 drum magazine (12ga buckshot)"
+	desc = "Барабан для штурмовых дробовиков AS32 12-го калибра, вмещающий 12 патронов."
+	icon_state = "as32_drum"
+	base_icon_state = "as32_drum"
+	max_ammo = 12
+	ammo_band_icon = "+as32_drum_ammo_band"
+
+/obj/item/ammo_box/magazine/as32/drum/beanbag
+	name = "AS32 drum magazine (12ga beanbag)"
+	ammo_band_color = COLOR_GREEN
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+
+/obj/item/ammo_box/magazine/as32/drum/rubbershot
+	name = "AS32 drum magazine (12ga rubbershot)"
+	ammo_band_color = COLOR_PINK
+	ammo_type = /obj/item/ammo_casing/shotgun/rubbershot
+
+/obj/item/ammo_box/magazine/as32/drum/executioner
+	name = "AS32 drum magazine (12ga HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/shotgun/executioner
+
+/obj/item/ammo_box/magazine/as32/drum/slug
+	name = "AS32 drum magazine (12ga slugs)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/shotgun/milspec
+
+/obj/item/ammo_box/magazine/as32/drum/breacher
+	name = "AS32 drum magazine (12ga breaching)"
+	ammo_band_color = COLOR_BLUE_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/breacher
+
+/obj/item/ammo_box/magazine/as32/drum/frag12
+	name = "AS32 drum magazine (12ga FRAG-12)"
+	ammo_band_color = COLOR_GRAY
+	ammo_type = /obj/item/ammo_casing/shotgun/frag12
+
+/obj/item/ammo_box/magazine/as32/drum/dragonsbreath
+	name = "AS32 drum magazine (12ga dragonsbreath)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/shotgun/dragonsbreath
+
+/obj/item/ammo_box/magazine/as32/drum/flechette
+	name = "AS32 drum magazine (12ga flechette)"
+	ammo_band_color = COLOR_ALMOST_BLACK
+	ammo_type = /obj/item/ammo_casing/shotgun/flechette
