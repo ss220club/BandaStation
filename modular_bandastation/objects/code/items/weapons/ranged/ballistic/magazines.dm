@@ -785,7 +785,7 @@
 	icon_state = "fn18_mag"
 	base_icon_state = "fn18_mag"
 	w_class = WEIGHT_CLASS_NORMAL
-	caliber = CALIBER_9x25NT
+	caliber = CALIBER_9MM
 	max_ammo = 40
 	ammo_band_icon = "+fn18_mag_ammo_band"
 	ammo_band_color = null

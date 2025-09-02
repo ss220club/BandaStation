@@ -27,7 +27,6 @@
 	internal_magazine = FALSE
 	recoil = 1
 	obj_flags = UNIQUE_RENAME
-	rack_sound = 'modular_bandastation/objects/sounds/weapons/smg_rack.ogg'
 	fire_sound_volume = 90
 	load_sound = 'sound/items/weapons/gun/sniper/mag_insert.ogg'
 	rack_sound = 'sound/items/weapons/gun/sniper/rack.ogg'
