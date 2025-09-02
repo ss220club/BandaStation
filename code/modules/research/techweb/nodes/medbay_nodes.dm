@@ -99,6 +99,7 @@
 		"stasis",
 		"cryo_grenade",
 		"splitbeaker",
+		"stasisbodybag", // BANDASTATION ADDITION - PERMA-DEATH
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_4_POINTS)
 	discount_experiments = list(/datum/experiment/scanning/reagent/cryostylane = TECHWEB_TIER_4_POINTS)
