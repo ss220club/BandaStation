@@ -89,8 +89,8 @@
 		swirlie.adjustBruteLoss(5)
 		return
 
-	if(user.pulling && isliving(user.pulling))
-		user.changeNext_move(CLICK_CD_MELEE)
+if(user.pulling && isliving(user.pulling))
+user.changeNext_move(CLICK_CD_MELEE)
 		var/mob/living/grabbed_mob = user.pulling
 		if(user.grab_state < GRAB_AGGRESSIVE)
 			to_chat(user, span_warning("You need a tighter grip!"))
@@ -126,10 +126,10 @@
 			grabbed_mob.adjustBruteLoss(5)
 		return
 
-	if(cistern_open && !cover_open && user.CanReach(src))
-		if(!LAZYLEN(cistern_items))
-			to_chat(user, span_notice("The cistern is empty."))
-			return
+if(cistern_open && !cover_open && user.CanReach(src))
+if(!LAZYLEN(cistern_items))
+to_chat(user, span_notice("The cistern is empty."))
+return
 		var/obj/item/random_cistern_item = pick(cistern_items)
 		if(ishuman(user))
 			user.put_in_hands(random_cistern_item)
@@ -139,7 +139,11 @@
 		w_items -= random_cistern_item.w_class
 		return
 
-	if(!flushing && LAZYLEN(fishes) && cover_open)
+if(cover_open && !user.get_active_held_item() && user.waste_level > 0)
+user.defecate(src)
+return
+
+if(!flushing && LAZYLEN(fishes) && cover_open)
 		var/obj/item/random_fish = pick(fishes)
 		if(ishuman(user))
 			user.put_in_hands(random_fish)
@@ -158,13 +162,16 @@
 	. = ..()
 	if(flushing)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	flushing = TRUE
-	playsound(src, 'sound/machines/toilet_flush.ogg', cover_open ? 40 : 20, TRUE)
-	if(cover_open && (dir & SOUTH))
-		update_appearance(UPDATE_OVERLAYS)
-		flick_overlay_view(mutable_appearance(icon, "[base_icon_state]-water-flick"), 3 SECONDS)
-	addtimer(CALLBACK(src, PROC_REF(end_flushing)), 4 SECONDS)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+flushing = TRUE
+playsound(src, 'sound/machines/toilet_flush.ogg', cover_open ? 40 : 20, TRUE)
+if(cover_open && (dir & SOUTH))
+update_appearance(UPDATE_OVERLAYS)
+flick_overlay_view(mutable_appearance(icon, "[base_icon_state]-water-flick"), 3 SECONDS)
+if(cover_open)
+for(var/obj/effect/decal/cleanable/feces/F in loc)
+qdel(F)
+addtimer(CALLBACK(src, PROC_REF(end_flushing)), 4 SECONDS)
+return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/toilet/update_icon_state()
 	icon_state = "[base_icon_state][cover_open][cistern_open]"

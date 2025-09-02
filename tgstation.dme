@@ -2388,6 +2388,7 @@
 #include "code\game\objects\effects\decals\cleanable\fuel.dm"
 #include "code\game\objects\effects\decals\cleanable\mess.dm"
 #include "code\game\objects\effects\decals\cleanable\robots.dm"
+#include "code\game\objects\effects\decals\cleanable\feces.dm"
 #include "code\game\objects\effects\decals\turfdecal\dirt.dm"
 #include "code\game\objects\effects\decals\turfdecal\markings.dm"
 #include "code\game\objects\effects\decals\turfdecal\tilecoloring.dm"

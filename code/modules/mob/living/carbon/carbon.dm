@@ -389,9 +389,21 @@
 		location = get_step(location, starting_dir)
 		if (location?.is_blocked_turf())
 			break
-	if(need_mob_update) // so we only have to call updatehealth() once as opposed to n times
-		updatehealth()
+if(need_mob_update) // so we only have to call updatehealth() once as opposed to n times
+updatehealth()
 
+return TRUE
+
+///Expel accumulated waste
+/mob/living/carbon/proc/defecate(obj/structure/toilet/target_toilet)
+	if(waste_level <= 0)
+	return FALSE
+	var/turf/location = get_turf(target_toilet ? target_toilet : src)
+	visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] defecates!"), span_userdanger("Вы справляете нужду."))
+	playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
+	adjust_waste(-waste_level, TRUE)
+	if(location)
+	new /obj/effect/decal/cleanable/feces(location)
 	return TRUE
 
 /**

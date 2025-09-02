@@ -112,6 +112,8 @@
 
 	/// Hunger level of the mob
 	var/nutrition = NUTRITION_LEVEL_START_MIN // randomised in Initialize
+	/// Amount of waste currently in the mob
+	var/waste_level = 0
 	/// Satiation level of the mob
 	var/satiety = 0//Carbon
 

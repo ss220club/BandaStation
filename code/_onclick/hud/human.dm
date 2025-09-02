@@ -266,8 +266,10 @@
 	healths = new /atom/movable/screen/healths(null, src)
 	infodisplay += healths
 
-	hunger = new /atom/movable/screen/hunger(null, src)
-	infodisplay += hunger
+hunger = new /atom/movable/screen/hunger(null, src)
+infodisplay += hunger
+defecation = new /atom/movable/screen/defecation(null, src)
+infodisplay += defecation
 
 	healthdoll = new /atom/movable/screen/healthdoll/human(null, src)
 	infodisplay += healthdoll

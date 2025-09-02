@@ -94,8 +94,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/atom/movable/screen/healthdoll/healthdoll
 	var/atom/movable/screen/spacesuit
 	var/atom/movable/screen/hunger/hunger
-
-	/// Subtypes can override this to force a specific UI style
+	var/atom/movable/screen/defecation/defecation
+	// subtypes can override this to force a specific UI style
 	var/ui_style
 
 	/// List of weakrefs to objects that we add to our screen that we don't expect to DO anything
