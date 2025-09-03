@@ -33,7 +33,7 @@
 
 // -------- Interaction and Minigame constants --------
 // Keep these local to this file; unique prefix avoids collisions.
-#define TOILET_MIN_WASTE_LEVEL          25
+#define TOILET_MIN_WASTE_LEVEL          75
 #define TOILET_SITDOWN_DURATION         5 SECONDS
 #define TOILET_FLUSH_DURATION           4 SECONDS
 #define TOILET_WATER_FLICK_DURATION     3 SECONDS
