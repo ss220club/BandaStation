@@ -35,9 +35,7 @@
 	return A.type in check_list
 
 /datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(var/datum/action/cooldown/shadowling/A)
-	if("required_thralls" in A.vars && isnum(A:required_thralls))
-		return A:required_thralls
-	return 0
+	return A.required_thralls
 
 /datum/action/cooldown/shadowling/hive_sync/proc/grant_unlocks_for(mob/living/carbon/human/H, nt)
 	if(!istype(H)) return
