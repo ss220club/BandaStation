@@ -4,7 +4,7 @@
 	icon = 'icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'icons/mob/clothing/head/helmet.dmi'
 	icon_state = "eldritch"
-	desc = "A torn, dust-caked hood. Strange eyes line the inside."
+	desc = "Порванный, покрытый пылью капюшон. Странные глаза расположены внутри."
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 	flash_protect = FLASH_PROTECTION_WELDER
@@ -15,7 +15,7 @@
 
 /obj/item/clothing/suit/hooded/cultrobes/eldritch
 	name = "ominous armor"
-	desc = "A ragged, dusty set of robes. Strange eyes line the inside."
+	desc = "Потрепанный, пыльный халат. Странные глаза расположены внутри."
 	icon_state = "eldritch_armor"
 	inhand_icon_state = null
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
@@ -52,15 +52,15 @@
 		return
 
 	// Our hood gains the heretic_focus element.
-	. += span_notice("Allows you to cast heretic spells while the hood is up.")
+	. += span_notice("Позволяет произносить еретические заклинания, пока капюшон поднят.")
 
 // Void cloak. Turns invisible with the hood up, lets you hide stuff.
 /obj/item/clothing/head/hooded/cult_hoodie/void
 	name = "void hood"
 	icon = 'icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'icons/mob/clothing/head/helmet.dmi'
-	desc = "Black like tar, reflecting no light. Runic symbols line the outside. \
-		With each flash you lose comprehension of what you are seeing."
+	desc = "Черный как смоль, не отражает свет. Рунические символы выстраиваются снаружи, \
+		с каждой вспышкой вы теряете понимание того, что перед вами."
 	icon_state = "void_cloak"
 	flags_inv = NONE
 	flags_cover = NONE
@@ -80,8 +80,8 @@
 
 /obj/item/clothing/suit/hooded/cultrobes/void
 	name = "void cloak"
-	desc = "Black like tar, reflecting no light. Runic symbols line the outside. \
-		With each flash you lose comprehension of what you are seeing."
+	desc = "Черный как смоль, не отражает свет. Рунические символы выстраиваются снаружи, \
+		с каждой вспышкой вы теряете понимание того, что перед вами."
 	icon_state = "void_cloak"
 	inhand_icon_state = null
 	allowed = list(/obj/item/melee/sickly_blade)
@@ -139,7 +139,7 @@
 		return
 
 	// Let examiners know this works as a focus only if the hood is down
-	. += span_notice("Allows you to cast heretic spells while the hood is down.")
+	. += span_notice("Позволяет произносить еретические заклинания, пока капюшон опущен.")
 
 /obj/item/clothing/suit/hooded/cultrobes/void/on_hood_down(obj/item/clothing/head/hooded/hood)
 	make_visible()
@@ -152,7 +152,7 @@
 	if(IS_HERETIC_OR_MONSTER(wearer))
 		return TRUE
 
-	loc.balloon_alert(loc, "can't get the hood up!")
+	loc.balloon_alert(loc, "не удалось поднять капюшон!")
 	return FALSE
 
 /obj/item/clothing/suit/hooded/cultrobes/void/on_hood_created(obj/item/clothing/head/hooded/hood)
@@ -166,8 +166,8 @@
 
 	if(isliving(loc))
 		REMOVE_TRAIT(loc, TRAIT_RESISTLOWPRESSURE, REF(src))
-		loc.balloon_alert(loc, "cloak hidden")
-		loc.visible_message(span_notice("Light shifts around [loc], making the cloak around them invisible!"))
+		loc.balloon_alert(loc, "плащ скрыт")
+		loc.visible_message(span_notice("Свет смещается вокруг [loc.declent_ru(GENITIVE)], делая надетый плащ невидимым!"))
 
 /// Makes our cloak "visible" again.
 /obj/item/clothing/suit/hooded/cultrobes/void/proc/make_visible()
@@ -176,5 +176,5 @@
 
 	if(isliving(loc))
 		ADD_TRAIT(loc, TRAIT_RESISTLOWPRESSURE, REF(src))
-		loc.balloon_alert(loc, "cloak revealed")
-		loc.visible_message(span_notice("A kaleidoscope of colours collapses around [loc], a cloak appearing suddenly around their person!"))
+		loc.balloon_alert(loc, "плащ раскрыт")
+		loc.visible_message(span_notice("Калейдоскоп цветов рассыпается вокруг [loc.declent_ru(GENITIVE)], и внезапно появляется надетый плащ!"))

@@ -221,7 +221,7 @@
 	if(!req_access)
 		req_access = list(ACCESS_ENGINE_EQUIP)
 	if(auto_name)
-		name = "\improper [get_area_name(area, TRUE)] APC"
+		name = "[declent_ru(NOMINATIVE)] [area.declent_ru(GENITIVE)]"
 
 	//Initialize its electronics
 	set_wires(new /datum/wires/apc(src))
@@ -289,7 +289,7 @@
 /obj/machinery/power/apc/update_name(updates)
 	. = ..()
 	if(auto_name)
-		name = "\improper [get_area_name(area, TRUE)] APC"
+		name = "[declent_ru(NOMINATIVE)] [area.declent_ru(GENITIVE)]"
 
 /obj/machinery/power/apc/proc/assign_to_area(area/target_area = get_area(src))
 	if(area == target_area)
@@ -527,10 +527,7 @@
 			if(get_malf_status(user))
 				malfvacate()
 		if("reboot")
-			failure_timer = 0
-			force_update = FALSE
-			update_appearance()
-			update()
+			reboot() // BANDASTATION EDIT START - moved code to reboot proc
 		if("emergency_lighting")
 			emergency_lights = !emergency_lights
 			for(var/obj/machinery/light/area_light as anything in get_lights())
@@ -553,6 +550,14 @@
 			for(var/obj/machinery/light/found_light in area_turf)
 				lights += found_light
 	return lights
+
+// BANDASTATION ADDITION START
+/obj/machinery/power/apc/proc/reboot()
+	failure_timer = 0
+	force_update = FALSE
+	update_appearance()
+	update()
+// BANDASTATION ADDITION END
 
 /**
  * APC early processing. This gets processed after any other machine on the powernet does.

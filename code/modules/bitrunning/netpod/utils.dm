@@ -63,17 +63,17 @@
 /obj/machinery/netpod/proc/enter_matrix()
 	var/mob/living/carbon/human/neo = occupant
 	if(!ishuman(neo) || neo.stat == DEAD || isnull(neo.mind))
-		balloon_alert(neo, "invalid occupant.")
+		balloon_alert(neo, "неверный пользователь.")
 		return
 
 	var/obj/machinery/quantum_server/server = find_server()
 	if(isnull(server))
-		balloon_alert(neo, "no server connected!")
+		balloon_alert(neo, "нет подключения к серверу!")
 		return
 
 	var/datum/lazy_template/virtual_domain/generated_domain = server.generated_domain
 	if(isnull(generated_domain) || !server.is_ready)
-		balloon_alert(neo, "nothing loaded!")
+		balloon_alert(neo, "ничего не загружено!!")
 		return
 
 	balloon_alert(neo, "establishing connection...")
@@ -94,7 +94,7 @@
 	if(isnull(current_avatar) || current_avatar.stat != CONSCIOUS) // We need a viable avatar
 		current_avatar = server.start_new_connection(neo, netsuit)
 		if(isnull(current_avatar))
-			balloon_alert(neo, "out of bandwidth!")
+			balloon_alert(neo, "кончилась пропускная способность!")
 			return
 
 	neo.set_static_vision(2 SECONDS)
