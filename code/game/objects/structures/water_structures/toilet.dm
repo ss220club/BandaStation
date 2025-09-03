@@ -253,6 +253,12 @@
 
 // -------- Mini-game helpers --------
 
+// Minigame constants (scoped to this file via unique names)
+#define TOILET_MINIGAME_TIMEOUT      (2 SECONDS)
+#define TOILET_RADIAL_MENU_SIZE      36
+#define TOILET_RADIAL_MENU_OFFSET    list(0, -24)
+#define TOILET_DEFAULT_TEXT_COLOR    "#ffffff"
+
 /**
  * Lightweight QTE using radial menu. Player has 2 seconds per step
  * to pick the prompted action. Returns number of successful picks (0..3).
@@ -285,34 +291,55 @@
 	for(var/i in 1 to 3)
 		sequence += pick(actions)
 
+	// Prepare choices once
+	var/list/choices = minigame_build_radial_choices(actions, action_icons)
+
 	var/successes = 0
-	for(var/needed in sequence)
-		if(QDELETED(src) || QDELETED(defecator) || !defecator.client)
+	for (var/required_action in sequence)
+		if(!minigame_can_continue(defecator))
 			break
-		// Show prompt with color matching the icon color
-		var/icon_state_needed = action_icons[needed]
-		var/text_color = icon_state_to_color[icon_state_needed]
-		if(isnull(text_color))
-			text_color = "#ffffff"
-		balloon_alert(defecator, "Выберите: <span style='color: [text_color]'>[needed]</span>")
-		// Build choices with icons from radial.dmi
-		var/list/choices = list()
-		for(var/act in actions)
-			var/icon_state = action_icons[act]
-			var/image/I = image('icons/hud/radial.dmi', icon_state = icon_state)
-			choices[act] = I
-		var/end_time = world.time + 2 SECONDS
-		var/answer = show_radial_menu(defecator, src, choices, null, 36, CALLBACK(src, PROC_REF(minigame_custom_check), defecator, end_time), TRUE, radial_menu_offset = list(0, -24))
-		if(!answer)
+
+		// Prompt with color matching icon state
+		minigame_prompt_required(defecator, required_action, action_icons, icon_state_to_color)
+
+		var/end_time = world.time + TOILET_MINIGAME_TIMEOUT
+		var/selected_action = show_radial_menu(defecator, src, choices, null, TOILET_RADIAL_MENU_SIZE, CALLBACK(src, PROC_REF(minigame_custom_check), defecator, end_time), TRUE, radial_menu_offset = TOILET_RADIAL_MENU_OFFSET)
+		if(!selected_action)
 			balloon_alert(defecator, "Вы промедлили.")
 			continue
-		if(answer == needed)
+		if(selected_action == required_action)
 			successes++
 			balloon_alert(defecator, "Отлично.")
 		else
 			balloon_alert(defecator, "Неверно.")
 
 	return successes
+
+/**
+ * Minigame: checks whether we can continue showing prompts.
+ */
+/obj/structure/toilet/proc/minigame_can_continue(mob/living/carbon/M)
+	return !(QDELETED(src) || QDELETED(M) || !M.client)
+
+/**
+ * Minigame: show a colored prompt for the required action.
+ */
+/obj/structure/toilet/proc/minigame_prompt_required(mob/living/carbon/M, required_action, list/action_icons, list/icon_state_to_color)
+	var/icon_state = action_icons[required_action]
+	var/text_color = icon_state_to_color[icon_state]
+	if(isnull(text_color))
+		text_color = TOILET_DEFAULT_TEXT_COLOR
+	balloon_alert(M, "Выберите: <span style='color: [text_color]'>[required_action]</span>")
+
+/**
+ * Minigame: build radial menu choices with images from radial.dmi
+ */
+/obj/structure/toilet/proc/minigame_build_radial_choices(list/actions, list/action_icons)
+	var/list/choices = list()
+	for(var/act in actions)
+		var/icon_state = action_icons[act]
+		choices[act] = image('icons/hud/radial.dmi', icon_state = icon_state)
+	return choices
 
 /**
  * Custom check for the radial mini-game: enforces proximity and a timeout.
