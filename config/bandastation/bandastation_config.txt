@@ -52,4 +52,5 @@ ROUNDSTART_RACES tajaran
 # SPEECH_FILTER_BYPASS ckey
 
 ## Boolean value to derminate is it posible to die permanently due death of brain or not (value true means it's enabled)
-BRAIN_PERMANENT_DEATH
+BRAIN_PERMANENT_TRAUMAS
+BRAIN_DECAY_RATE 2
