@@ -350,3 +350,31 @@
 	added_throw_range = 8
 	strength_bonus = 8
 	core_applied = TRUE
+
+/obj/item/organ/cyberimp/chest/waste_recycler
+	name = "waste recycler implant"
+	desc = "A low-efficiency bio-recycler that slowly converts accumulated bodily waste into nutriment."
+	icon_state = "nutriment_implant"
+	aug_overlay = "nutripump"
+	/// How efficiently waste is converted into nutrition (0.0 - 1.0)
+	var/efficiency = 0.2
+	/// How many waste units to process per second
+	var/recycle_rate = 0.03
+	/// Only operate when above toilet urge threshold
+	var/above_tolerance_only = TRUE
+	slot = ORGAN_SLOT_STOMACH_AID
+
+/obj/item/organ/cyberimp/chest/waste_recycler/on_life(seconds_per_tick, times_fired)
+	var/mob/living/carbon/C = owner
+	if(!C)
+		return
+	// Skip if below threshold (when enabled) or no waste to process
+	if(C.waste_level <= (above_tolerance_only ? WASTE_TOLERANCE_LEVEL : 0))
+		return
+	var/amount = min(recycle_rate * seconds_per_tick, C.waste_level)
+	if(amount <= 0)
+		return
+	// Reduce waste, then grant a fraction back as nutrition
+	C.adjust_waste(-amount, TRUE)
+	if(efficiency > 0)
+		C.adjust_nutrition(amount * efficiency, TRUE)

@@ -160,6 +160,7 @@
 	design_ids = list(
 		"ci-breather",
 		"ci-nutriment",
+		"ci-waste-recycler",
 		"ci-thrusters",
 		"ci-herculean",
 		"ci-connector",
