@@ -1479,7 +1479,7 @@
 
 	nutrition = max(0, nutrition + change)
 	if(change > 0)
-		adjust_waste(change, forced)
+		adjust_waste(change * WASTE_RATIO, forced)
 
 /mob/living/adjust_nutrition(change, forced)
 	. = ..()

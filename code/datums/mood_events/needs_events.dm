@@ -179,9 +179,9 @@
 	timeout = 3 MINUTES
 
 /datum/mood_event/relieved_toilet
-	/// Positive mood when using a toilet successfully
+	/// Neutral mood when using a toilet successfully
 	description = "Хорошо, что рядом оказался туалет."
-	mood_change = 1
+	mood_change = 0
 	timeout = 3 MINUTES
 
 /// Slight negative mood for failing all mini-game steps
