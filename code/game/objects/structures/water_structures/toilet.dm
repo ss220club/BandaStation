@@ -6,6 +6,9 @@
 	base_icon_state = "toilet"
 	density = FALSE
 	anchored = TRUE
+	// Allow buckling to simulate sitting while using the toilet
+	can_buckle = TRUE
+	buckle_lying = 0
 
 	///Boolean if whether the toilet is currently flushing.
 	var/flushing = FALSE
@@ -145,44 +148,17 @@
 
 	if(iscarbon(user))
 		var/mob/living/carbon/defecator = user
-		var/static/list/waste_low_denial_phrases = list(
-			"Вы безразлично смотрите на унитаз.",
-			"Вам сейчас не до туалета.",
-			"Вы не чувствуете никакой нужды.",
-			"Унитаз молчит. Ты тоже.",
-			"Вы понимаете, что зря сюда заглянули.",
-			"Похоже, ещё рано.",
-			"Вы слышите шёпот фарфора. Он вас не зовёт. В вас ещё не проснулся позыв. Сейчас не время.",
-		)
-		if(!cover_open)
-			balloon_alert(user, "Откройте крышку унитаза.")
+		if(!can_defecate(defecator))
 			return
-
-		if(defecator.get_active_held_item())
-			balloon_alert(user, "Освободите активную руку.")
+		if(!begin_defecation_action(defecator))
 			return
-
-		// Must stand on the same turf as the toilet to use it
-		if(get_turf(defecator) != get_turf(src))
-			balloon_alert(defecator, "Вы слишком далеко от унитаза.")
-			return
-
-		if(defecator.waste_level < 25)
-			to_chat(defecator, span_notice(pick(waste_low_denial_phrases)))
-			return
-
-		defecator.visible_message(
-			span_notice("[defecator] садится на унитаз..."),
-			span_notice("Вы садитесь на унитаз...")
-		)
-		if(!do_after(defecator, 3 SECONDS, target = src, timed_action_flags = IGNORE_HELD_ITEM))
-			return
-
 		// Mini-game: quick 3-step radial QTE to influence mood
 		var/steps_success = run_defecation_minigame(defecator)
-
 		// Proceed with the actual action
 		defecator.defecate(src)
+		// Finished; stand up from the toilet
+		if(defecator.buckled == src)
+			unbuckle_mob(defecator)
 		if(defecator?.mob_mood)
 			if(steps_success >= 3)
 				defecator.mob_mood.add_mood_event("relieved_toilet_perfect", /datum/mood_event/relieved_toilet_perfect)
@@ -232,6 +208,48 @@
 			. += "[base_icon_state]-water-brown"
 		else
 			. += "[base_icon_state]-water"
+
+
+
+/// Checks whether the user can use the toilet now. Emits feedback and returns TRUE/FALSE.
+/obj/structure/toilet/proc/can_defecate(mob/living/carbon/defecator)
+	var/static/list/waste_low_denial_phrases = list(
+		"Вы безразлично смотрите на унитаз.",
+		"Вам сейчас не до туалета.",
+		"Вы не чувствуете никакой нужды.",
+		"Унитаз молчит. Ты тоже.",
+		"Вы понимаете, что зря сюда заглянули.",
+		"Похоже, ещё рано.",
+		"Вы слышите шёпот фарфора. Он вас не зовёт. В вас ещё не проснулся позыв. Сейчас не время.",
+	)
+	if(!cover_open)
+		balloon_alert(defecator, "Откройте крышку унитаза.")
+		return FALSE
+	if(defecator.get_active_held_item())
+		balloon_alert(defecator, "Освободите активную руку.")
+		return FALSE
+	// Must stand on the same turf as the toilet to use it
+	if(get_turf(defecator) != get_turf(src))
+		balloon_alert(defecator, "Вы слишком далеко от унитаза.")
+		return FALSE
+	if(defecator.waste_level < 25)
+		balloon_alert(defecator, pick(waste_low_denial_phrases))
+		return FALSE
+	return TRUE
+
+/// Shows sit-down message, buckles, and waits the action; unbuckles if interrupted.
+/obj/structure/toilet/proc/begin_defecation_action(mob/living/carbon/defecator)
+	defecator.visible_message(
+		span_notice("[defecator] садится на унитаз..."),
+		span_notice("Вы садитесь на унитаз...")
+	)
+	if(!defecator.buckled)
+		buckle_mob(defecator, check_loc = TRUE)
+	if(!do_after(defecator, 5 SECONDS, target = src, timed_action_flags = IGNORE_HELD_ITEM))
+		if(defecator.buckled == src)
+			unbuckle_mob(defecator)
+		return FALSE
+	return TRUE
 
 // -------- Mini-game helpers --------
 
