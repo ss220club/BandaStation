@@ -3,9 +3,10 @@
 
 /obj/item/organ/brain/Initialize(mapload)
 	. = ..()
-	decay_factor = STANDARD_ORGAN_DECAY * CONFIG_GET(number/brain_decay_rate)
+	if(CONFIG_GET(flag/brain_death_traumas))
+		decay_factor = STANDARD_ORGAN_DECAY * CONFIG_GET(number/brain_decay_rate)
 
-/datum/config_entry/flag/brain_permanent_traumas
+/datum/config_entry/flag/brain_death_traumas
 	default = FALSE
 
 /datum/config_entry/number/brain_decay_rate
