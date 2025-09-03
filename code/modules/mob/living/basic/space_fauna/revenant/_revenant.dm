@@ -189,7 +189,7 @@
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, span_boldwarning("Вы не можете отправлять IC сообщения (мут))."))
+			to_chat(src, span_boldwarning("Вы не можете отправлять IC сообщения (мут)."))
 			return
 		if (!(ignore_spam || forced) && client.handle_spam_prevention(message, MUTE_IC))
 			return
@@ -327,7 +327,7 @@
 	if(QDELETED(src) || !dormant) // something fucky happened, abort. we MUST be dormant to go inside the ectoplasm.
 		return
 
-	visible_message(span_danger("[src] рассыпается в прах на мелкие кучки голубой пыли."))
+	visible_message(span_danger("[src] рассыпается в мелкую голубую пыль."))
 
 	var/obj/item/ectoplasm/revenant/goop = new(get_turf(src)) // the ectoplasm will handle moving us out of dormancy
 	goop.old_ckey = client.ckey
@@ -372,7 +372,7 @@
 	SIGNAL_HANDLER
 	visible_message(
 		span_warning("[src] резко вздрагивает!"),
-		span_revendanger("Когда [weapon.declent_ru(ACCUSATIVE)] проходит сквозь тебя, ты чувствуешь, как твоя сущность покидает тебя!"),
+		span_revendanger("Когда [weapon.declent_ru(ACCUSATIVE)] проходит сквозь вас, то вы чувствуете, как ваша сущность покидает вас!"),
 	)
 	apply_status_effect(/datum/status_effect/revenant/inhibited, 3 SECONDS)
 

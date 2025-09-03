@@ -69,7 +69,7 @@
 	to_chat(src, span_revennotice("[capitalize(target.ru_p_them())] душа слаба и колеблется. Пришло время поглощать."))
 
 	if(!do_after(src, (rand(15, 20) DECISECONDS), target, timed_action_flags = IGNORE_HELD_ITEM))
-		to_chat(src, span_revennotice("The harvest is abandoned."))
+		to_chat(src, span_revennotice("Поглощение прервано."))
 		return FALSE
 
 	switch(essence_drained)
@@ -87,7 +87,7 @@
 		return FALSE
 
 	if(target.stat == CONSCIOUS)
-		to_chat(src, span_revenwarning("[capitalize(target.ru_p_them())] теперь он достаточно силен, чтобы противостоять вашему поглощению!"))
+		to_chat(src, span_revenwarning("[capitalize(target.ru_p_they())] теперь достаточно силён, чтобы противостоять вашему поглощению!"))
 		to_chat(target, span_bolddanger("Вы чувствуете, как что-то тянется по вашему телу, прежде чем утихнуть.")) //hey, wait a minute...
 		return FALSE
 
@@ -125,7 +125,7 @@
 
 	if(essence_drained <= 90 && target.stat != DEAD && !HAS_TRAIT(target, TRAIT_WEAK_SOUL))
 		max_essence += 5
-		to_chat(src, span_revenboldnotice("Поглощение живой души [target] повысило ваш максимальный уровень эссенции. Ваша новая максимальная эссенции - [max_essence]."))
+		to_chat(src, span_revenboldnotice("Поглощение живой души [target] повысило ваш максимальный уровень эссенции. Ваша новая максимальная эссенция - [max_essence]."))
 
 	if(essence_drained > 90)
 		max_essence += 15

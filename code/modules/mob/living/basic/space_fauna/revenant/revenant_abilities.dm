@@ -244,7 +244,7 @@
 
 //Blight: Infects nearby humans and in general messes living stuff up.
 /datum/action/cooldown/spell/aoe/revenant/blight
-	name = "Отравить"
+	name = "Порча"
 	desc = "Приводит к вымиранию близлежащих живых существ."
 	button_icon_state = "blight"
 	cooldown_time = 20 SECONDS
@@ -272,7 +272,7 @@
 						blight.stage++
 				if(!blightfound)
 					H.ForceContractDisease(new /datum/disease/revblight(), FALSE, TRUE)
-					to_chat(H, span_revenminor("Вы чувствуете[pick(", что внезапно заболели", " приступ тошноты", ", что с вашей кожей <i>что-то не так</i>")]."))
+					to_chat(H, span_revenminor("Вы чувствуете, [pick("что внезапно заболели", "как подступает тошнота", "будто с вашей кожей <i>что-то не так</i>")]"))
 			else
 				if(mob.reagents)
 					mob.reagents.add_reagent(/datum/reagent/toxin/plasma, 5)
@@ -339,7 +339,7 @@
 		haunt_duration = rand(1 MINUTES, 3 MINUTES), \
 		aggro_radius = aoe_radius - 1, \
 		spawn_message = span_revenwarning("[victim.declent_ru(NOMINATIVE)] начинает парить и кружиться в воздухе, светясь ужасным фиолетовым светом!"), \
-		despawn_message = span_revenwarning("[victim.declent_ru(NOMINATIVE)] падает обратно на землю, снова оставаясь неподвижной."), \
+		despawn_message = span_revenwarning("[victim.declent_ru(NOMINATIVE)] падает обратно на землю и снова замирает."), \
 	)
 
 #undef REVENANT_DEFILE_MIN_DAMAGE
