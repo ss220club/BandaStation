@@ -150,3 +150,34 @@
 
 /area/centcom/central_command_areas/srt/brief_srt
 	name = "ЦК - Брифинг ГСН"
+
+// Inka Event
+/area/awaymission/inka
+	name = "Инка"
+	icon_state = "awaycontent1"
+	requires_power = FALSE
+	static_lighting = FALSE
+	base_lighting_alpha = 255
+
+/area/awaymission/inka/outside
+	name = "Лес"
+	icon_state = "awaycontent17"
+
+/area/awaymission/inka/outside/port
+	name = "Порт"
+	icon_state = "awaycontent3"
+
+/area/awaymission/inka/inside
+	name = "Деревня"
+	icon_state = "awaycontent4"
+	requires_power = FALSE
+	static_lighting = TRUE
+	base_lighting_alpha = 0
+
+/area/awaymission/inka/inside/cave
+	name = "Пещера"
+	icon_state = "awaycontent5"
+
+/area/awaymission/inka/inside/base
+	name = "Аванпост \"Воздаяние\""
+	icon_state = "awaycontent6"

@@ -147,6 +147,55 @@
 	can_uproot = FALSE
 	delete_on_harvest = TRUE
 
+// Smoke - на один раунд, не обессудьте
+
+/obj/effect/particle_effect/fluid/smoke/quick/swamp
+	color = COLOR_ASSEMBLY_GREEN
+
+// Inka Planet
+/*
+/atom/movable/screen/inka
+	name = "Инка"
+	desc = "Небольшая болотистая планета."
+	icon = 'modular_bandastation/aesthetics/flora/icons/planet.dmi'
+	icon_state = "inka"
+	plane = RENDER_PLANE_TRANSPARENT
+	var/matrix/scale = matrix(0, 0, 0, 0, 0, 0)
+	var/appearance_time = 1 SECONDS
+
+/atom/movable/screen/inka/proc/planet_animation()
+	var/matrix/mid_scale = matrix(0.5, 0, 0, 0, 0.5, 0)
+
+	animate(src, transform = mid_scale, time = appearance_time, easing = CUBIC_EASING | EASE_OUT, flags = ANIMATION_END_NOW)
+*/
+
+/atom/movable/screen/inka
+	name = "Инка"
+	desc = "Небольшая болотистая планета."
+	icon = 'modular_bandastation/aesthetics/flora/icons/planet.dmi'
+	icon_state = "inka"
+	plane = RENDER_PLANE_TRANSPARENT
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	screen_loc = "CENTER"
+	var/appearance_time = 2 SECONDS
+
+/atom/movable/screen/inka/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	spawn()
+		planet_animation()
+
+/atom/movable/screen/inka/proc/planet_animation()
+	var/matrix/start_matrix = matrix()
+	start_matrix.Scale(0, 0)
+	start_matrix.Translate(-200, -200)
+	transform = start_matrix
+
+	var/matrix/final_matrix = matrix()
+	final_matrix.Scale(0.8, 0.8)
+	final_matrix.Translate(-370, -420)
+
+	playsound(src,'modular_bandastation/aesthetics/flora/audio/hyperspace.ogg', 75, extrarange = 20, pressure_affected = FALSE, ignore_walls = TRUE )
+	animate(src, transform = final_matrix, time = appearance_time, easing = CUBIC_EASING | EASE_OUT, flags = ANIMATION_END_NOW)
 /*
 /obj/structure/flora/tree/stump/snowless_pine
     icon = 'modular_bandastation/aesthetics/flora/icons/pinetrees.dmi'
