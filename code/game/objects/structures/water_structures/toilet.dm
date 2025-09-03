@@ -31,6 +31,18 @@
 	///Lazylist of fish in the toilet, not to be mixed with the items in the cistern. Max of 3
 	var/list/fishes
 
+// -------- Interaction and Minigame constants --------
+// Keep these local to this file; unique prefix avoids collisions.
+#define TOILET_MIN_WASTE_LEVEL          25
+#define TOILET_SITDOWN_DURATION         5 SECONDS
+#define TOILET_FLUSH_DURATION           4 SECONDS
+#define TOILET_WATER_FLICK_DURATION     3 SECONDS
+#define TOILET_FLUSH_VOLUME_OPEN        40
+#define TOILET_FLUSH_VOLUME_CLOSED      20
+
+// Minigame
+#define TOILET_MINIGAME_STEPS           3
+
 /obj/structure/toilet/Initialize(mapload)
 	. = ..()
 	cover_open = round(rand(0, 1))
@@ -160,7 +172,7 @@
 		if(defecator.buckled == src)
 			unbuckle_mob(defecator)
 		if(defecator?.mob_mood)
-			if(steps_success >= 3)
+			if(steps_success >= TOILET_MINIGAME_STEPS)
 				defecator.mob_mood.add_mood_event("relieved_toilet_perfect", /datum/mood_event/relieved_toilet_perfect)
 			else if(steps_success == 0)
 				defecator.mob_mood.add_mood_event("strained_toilet", /datum/mood_event/strained_toilet)
@@ -194,7 +206,7 @@
 		flick_overlay_view(mutable_appearance(icon, "[base_icon_state]-water-flick"), 3 SECONDS)
 	for(var/obj/effect/decal/cleanable/feces/F in loc)
 		qdel(F)
-	addtimer(CALLBACK(src, PROC_REF(end_flushing)), 4 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(end_flushing)), TOILET_FLUSH_DURATION)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/toilet/update_icon_state()
@@ -232,7 +244,7 @@
 	if(get_turf(defecator) != get_turf(src))
 		balloon_alert(defecator, "Вы слишком далеко от унитаза.")
 		return FALSE
-	if(defecator.waste_level < 25)
+	if(defecator.waste_level < TOILET_MIN_WASTE_LEVEL)
 		balloon_alert(defecator, pick(waste_low_denial_phrases))
 		return FALSE
 	return TRUE
@@ -245,7 +257,9 @@
 	)
 	if(!defecator.buckled)
 		buckle_mob(defecator, check_loc = TRUE)
-	if(!do_after(defecator, 5 SECONDS, target = src, timed_action_flags = IGNORE_HELD_ITEM))
+		for(var/mob/living/buckled_mob as anything in buckled_mobs)
+			buckled_mob.pixel_y = 5
+	if(!do_after(defecator, TOILET_SITDOWN_DURATION, target = src, timed_action_flags = IGNORE_HELD_ITEM))
 		if(defecator.buckled == src)
 			unbuckle_mob(defecator)
 		return FALSE
@@ -254,7 +268,7 @@
 // -------- Mini-game helpers --------
 
 // Minigame constants (scoped to this file via unique names)
-#define TOILET_MINIGAME_TIMEOUT      (2 SECONDS)
+#define TOILET_MINIGAME_TIMEOUT      2 SECONDS
 #define TOILET_RADIAL_MENU_SIZE      36
 #define TOILET_RADIAL_MENU_OFFSET    list(0, -24)
 #define TOILET_DEFAULT_TEXT_COLOR    "#ffffff"
@@ -288,7 +302,7 @@
 		"none" = "#6e6e6e",
 	)
 	var/list/sequence = list()
-	for(var/i in 1 to 3)
+	for(var/i in 1 to TOILET_MINIGAME_STEPS)
 		sequence += pick(actions)
 
 	// Prepare choices once
@@ -451,3 +465,17 @@
 		secret.desc += " It's a secret!"
 		w_items += secret.w_class
 		LAZYADD(cistern_items, secret)
+
+
+#undef TOILET_MINIGAME_TIMEOUT
+#undef TOILET_RADIAL_MENU_SIZE
+#undef TOILET_RADIAL_MENU_OFFSET
+#undef TOILET_DEFAULT_TEXT_COLOR
+
+#undef TOILET_MIN_WASTE_LEVEL
+#undef TOILET_SITDOWN_DURATION
+#undef TOILET_FLUSH_DURATION
+#undef TOILET_WATER_FLICK_DURATION
+#undef TOILET_FLUSH_VOLUME_OPEN
+#undef TOILET_FLUSH_VOLUME_CLOSED
+#undef TOILET_MINIGAME_STEPS

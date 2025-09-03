@@ -1301,6 +1301,10 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 
 	defecation_bar.update_fullness(fullness, instant || alpha == 0)
 
+
+
+#define DEFECATION_BAR_MAX_OFFSET 17
+
 /atom/movable/screen/defecation_bar
 	icon_state = "hungerbar_bar"
 	screen_loc = ui_defecation
@@ -1339,9 +1343,11 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 	current_color = new_color
 
 	var/old_bar_offset = bar_offset
-	bar_offset = round(17 - (fullness * 17))
+	bar_offset = round(DEFECATION_BAR_MAX_OFFSET - (fullness * DEFECATION_BAR_MAX_OFFSET))
 	if(old_bar_offset != bar_offset)
 		if(instant || isnull(old_bar_offset))
 			add_filter("defecation_bar_mask", 1, alpha_mask_filter(0, bar_offset, bar_mask))
 		else
 			transition_filter("defecation_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
+
+#undef DEFECATION_BAR_MAX_OFFSET
