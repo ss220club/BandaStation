@@ -663,8 +663,6 @@
 	if(CONFIG_GET(flag/brain_permanent_traumas) && (organ_flags & ORGAN_FAILING) && !death_trauma_applied)
 		death_trauma_applied = TRUE
 		gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_ABSOLUTE)
-	if(CONFIG_GET(flag/brain_permanent_traumas) && !(organ_flags & ORGAN_FAILING) && !damage && death_trauma_applied)
-		death_trauma_applied = FALSE
 	// BANDASTATION EDIT - PERMA-DEATH-TRAUMAS
 	if(!owner)
 		return FALSE
