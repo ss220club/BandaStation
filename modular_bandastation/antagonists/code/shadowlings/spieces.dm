@@ -36,6 +36,8 @@
 
 	no_equip_flags = ITEM_SLOT_MASK | ITEM_SLOT_HEAD | ITEM_SLOT_EYES | ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_ICLOTHING | ITEM_SLOT_SUITSTORE
 	mutantbrain = /obj/item/organ/brain/shadow/shadowling
+	mutanteyes = /obj/item/organ/eyes/shadow/shadowling
+	mutanttongue = /obj/item/organ/tongue/shadow_hive
 
 /datum/species/shadow/shadowling/check_roundstart_eligible()
 	return FALSE
@@ -95,6 +97,20 @@
 	unarmed_sharpness = SHARP_POINTY
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis)
+
+/obj/item/organ/eyes/shadow/shadowling
+	name = "freezing blue eyes"
+	desc = "Even without their shadowy owner, looking at these eyes gives you a sense of dread."
+	icon = 'icons/obj/medical/organs/shadow_organs.dmi'
+	iris_overlay = "eyes_cyber_glow_iris"
+	eye_icon_state = "eyes_glow_gs"
+	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
+	overlay_ignore_lighting = TRUE
+	color_cutoffs = list(20, 10, 40)
+	pepperspray_protect = TRUE
+	flash_protect = FLASH_PROTECTION_SENSITIVE
+	eye_color_left = "#3cb8a5"
+	eye_color_right = "#3cb8a5"
 
 /mob/living/carbon/human
 	var/lower_shadowling = FALSE
