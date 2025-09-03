@@ -2624,6 +2624,8 @@
 	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "amf" = (
@@ -12699,6 +12701,11 @@
 "bVR" = (
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/courtroom)
+"bWh" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "bWN" = (
 /turf/open/space/basic,
 /area/space/nearstation)
@@ -13815,6 +13822,9 @@
 /obj/structure/sign/nanotrasen{
 	pixel_y = 32
 	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "dMI" = (
@@ -14466,6 +14476,12 @@
 	},
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"fgf" = (
+/obj/structure/fluff/fake_vent{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "fgA" = (
 /obj/structure/flora/tree/jungle/small/style_random,
 /obj/effect/light_emitter/podbay,
@@ -15823,6 +15839,8 @@
 	req_access = list("cent_general");
 	pixel_x = 24
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "hUU" = (
@@ -16390,6 +16408,8 @@
 	req_access = list("cent_general");
 	pixel_x = -24
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "jlb" = (
@@ -16585,6 +16605,8 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "jCW" = (
@@ -16958,7 +16980,7 @@
 	dir = 2;
 	dwidth = 3;
 	height = 7;
-	name = "escape pod loader";
+	name = "CentCom Assault Pod Dock";
 	roundstart_template = /datum/map_template/shuttle/assault_pod/nanotrasen;
 	width = 7
 	},
@@ -17312,6 +17334,8 @@
 "lul" = (
 /obj/effect/turf_decal/tile/neutral/full,
 /obj/structure/sign/warning/docking/directional/east,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "lum" = (
@@ -17703,6 +17727,8 @@
 /area/centcom/central_command_areas/planetary_port/library)
 "mgQ" = (
 /obj/structure/light_fake/spot/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "mhS" = (
@@ -18291,6 +18317,8 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "nGu" = (
@@ -18345,6 +18373,8 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "nNP" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "nOh" = (
@@ -19310,6 +19340,12 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"pKG" = (
+/obj/structure/fluff/fake_vent{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "pNI" = (
 /obj/effect/decal/nt_logo{
 	dir = 1;
@@ -19357,6 +19393,8 @@
 	req_access = list("cent_general");
 	pixel_y = -24
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "pSy" = (
@@ -19451,6 +19489,8 @@
 /area/centcom/central_command_areas/planetary_port/plaza)
 "qjj" = (
 /obj/structure/light_fake/spot/directional/north,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "qkR" = (
@@ -19732,6 +19772,12 @@
 /obj/structure/sign/poster/official/moth_delam/directional/west,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"qRG" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "qRR" = (
 /obj/structure/chair/sofa/left/brown{
 	dir = 1
@@ -19786,6 +19832,8 @@
 /area/centcom/central_command_areas/planetary_port/hotel)
 "rfL" = (
 /obj/structure/light_fake/spot/directional/east,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "rkF" = (
@@ -20423,6 +20471,8 @@
 "sLF" = (
 /obj/effect/turf_decal/tile/neutral/full,
 /obj/structure/sign/warning/docking/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "sLM" = (
@@ -21112,6 +21162,8 @@
 "uow" = (
 /obj/effect/turf_decal/tile/neutral/full,
 /obj/structure/sign/warning/docking/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "upl" = (
@@ -21426,6 +21478,8 @@
 "vae" = (
 /obj/effect/turf_decal/caution/stand_clear/red,
 /obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "vaP" = (
@@ -21487,6 +21541,8 @@
 "vfJ" = (
 /obj/effect/turf_decal/tile/neutral/full,
 /obj/structure/sign/warning/docking/directional/north,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "viC" = (
@@ -21752,6 +21808,8 @@
 /area/centcom/central_command_areas/conference_room)
 "vEX" = (
 /obj/structure/light_fake/spot/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "vFo" = (
@@ -54125,7 +54183,7 @@ aYd
 aYd
 aYd
 ivd
-apv
+pKG
 uXy
 aYd
 aYd
@@ -55660,7 +55718,7 @@ aaa
 aaa
 aaa
 oga
-apv
+qRG
 apv
 pQP
 oga
@@ -55917,7 +55975,7 @@ aaa
 aaa
 aaa
 fDD
-apv
+qRG
 apv
 jBB
 gyM
@@ -55930,9 +55988,9 @@ aWT
 aWT
 gyM
 vae
-apv
-apv
-apv
+bWh
+bWh
+bWh
 nNP
 xyB
 oga
@@ -57723,7 +57781,7 @@ xTk
 xTk
 xTk
 trU
-apv
+fgf
 bJp
 xTk
 xTk
