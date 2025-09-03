@@ -61,7 +61,10 @@
 	else if(cover_open && LAZYLEN(fishes))
 		context[SCREENTIP_CONTEXT_LMB] = "Grab Fish"
 	else if(cover_open && isnull(held_item) && iscarbon(user))
-		context[SCREENTIP_CONTEXT_LMB] = "Use Toilet"
+		// Only show when there's a strong urge
+		var/mob/living/carbon/C = user
+		if(C.waste_level > WASTE_TOLERANCE_LEVEL)
+			context[SCREENTIP_CONTEXT_LMB] = "Use Toilet"
 	else if(cistern_open)
 		if(isnull(held_item))
 			context[SCREENTIP_CONTEXT_LMB] = "Check Cistern"
@@ -234,6 +237,10 @@
 		"Похоже, ещё рано.",
 		"Вы слышите шёпот фарфора. Он вас не зовёт. В вас ещё не проснулся позыв. Сейчас не время.",
 	)
+	var/static/list/waste_mid_denial_phrases = list(
+		"Пока что не сильно хочется",
+		"Ещё потерплю.",
+	)
 	if(!cover_open)
 		balloon_alert(defecator, "Откройте крышку унитаза.")
 		return FALSE
@@ -244,8 +251,12 @@
 	if(get_turf(defecator) != get_turf(src))
 		balloon_alert(defecator, "Вы слишком далеко от унитаза.")
 		return FALSE
-	if(defecator.waste_level < TOILET_MIN_WASTE_LEVEL)
-		balloon_alert(defecator, pick(waste_low_denial_phrases))
+	// Two-tier gate: too low vs not urgent enough
+	if(defecator.waste_level <= WASTE_TOLERANCE_LEVEL)
+		if(defecator.waste_level < TOILET_MIN_WASTE_LEVEL)
+			balloon_alert(defecator, pick(waste_low_denial_phrases))
+		else
+			balloon_alert(defecator, pick(waste_mid_denial_phrases))
 		return FALSE
 	return TRUE
 
@@ -257,13 +268,22 @@
 	)
 	if(!defecator.buckled)
 		buckle_mob(defecator, check_loc = TRUE)
-		for(var/mob/living/buckled_mob as anything in buckled_mobs)
-			buckled_mob.pixel_y = 5
 	if(!do_after(defecator, TOILET_SITDOWN_DURATION, target = src, timed_action_flags = IGNORE_HELD_ITEM))
 		if(defecator.buckled == src)
 			unbuckle_mob(defecator)
 		return FALSE
 	return TRUE
+
+
+/obj/structure/toilet/buckle_mob(mob/living/buckled_mob, force = FALSE, check_loc = TRUE)
+	. = ..()
+
+	buckled_mob.pixel_y += 5
+
+/obj/structure/toilet/unbuckle_mob(mob/living/buckled_mob, force = FALSE, can_fall = TRUE)
+	. = ..()
+
+	buckled_mob.pixel_y -= 5
 
 // -------- Mini-game helpers --------
 
