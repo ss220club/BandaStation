@@ -660,11 +660,11 @@
 /obj/item/organ/brain/apply_organ_damage(damage_amount, maximum = maxHealth, required_organ_flag = NONE)
 	. = ..()
 	// BANDASTATION EDIT - PERMA-DEATH-TRAUMAS
-	if(CONFIG_GET(flag/brain_permanent_death) && (organ_flags & ORGAN_FAILING) && !apply_death_trauma)
-		apply_death_trauma = TRUE
+	if(CONFIG_GET(flag/brain_permanent_traumas) && (organ_flags & ORGAN_FAILING) && !death_trauma_applied)
+		death_trauma_applied = TRUE
 		gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_ABSOLUTE)
-	if(CONFIG_GET(flag/brain_permanent_death) && !(organ_flags & ORGAN_FAILING) && apply_death_trauma)
-		apply_death_trauma = FALSE
+	if(CONFIG_GET(flag/brain_permanent_traumas) && !(organ_flags & ORGAN_FAILING) && !damage && death_trauma_applied)
+		death_trauma_applied = FALSE
 	// BANDASTATION EDIT - PERMA-DEATH-TRAUMAS
 	if(!owner)
 		return FALSE
