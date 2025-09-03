@@ -27,6 +27,9 @@ export type MedicalRecord = {
   rank: string;
   species: string;
   trim: string;
+  insurance_current?: string;
+  insurance_desired?: string;
+  insurance_payer_account_id?: number;
 };
 
 export type MedicalNote = {

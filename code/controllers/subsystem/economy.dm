@@ -158,11 +158,56 @@ SUBSYSTEM_DEF(economy)
 		if(bank_account?.account_job && !ispath(bank_account.account_job))
 			temporary_total += (bank_account.account_job.paycheck * STARTING_PAYCHECKS)
 		bank_account.payday(1, skippable = TRUE)
+
+		// Handle optional insurance payment per account per payday
+		handle_insurance(bank_account)
 		station_total += bank_account.account_balance
 		if(MC_TICK_CHECK)
 			cached_processing.Cut(1, i + 1)
 			return FALSE
 	return TRUE
+
+/**
+ * Processes insurance for a player's bank account during payday.
+ * - Attempts to apply the desired tier, or downgrades to an affordable tier.
+ * - Deposits collected premium into the Medical department account.
+ * - Updates the crew record with current/desired tier and payer account id.
+ */
+/datum/controller/subsystem/economy/proc/handle_insurance(datum/bank_account/account)
+	if(!account)
+		return
+
+	var/desired = isnull(account.insurance_desired) ? INSURANCE_NONE : account.insurance_desired
+	var/final_tier = desired
+
+	var/cost = INSURANCE_TIER_TO_COST(final_tier)
+	if(cost > 0 && !account.has_money(cost))
+		if(final_tier == INSURANCE_PREMIUM)
+			if(account.has_money(INSURANCE_COST_STANDARD))
+				final_tier = INSURANCE_STANDARD
+			else
+				final_tier = INSURANCE_NONE
+		else if(final_tier == INSURANCE_STANDARD)
+			final_tier = INSURANCE_NONE
+		cost = INSURANCE_TIER_TO_COST(final_tier)
+
+	// Update crew record if present
+	var/datum/record/crew/rec = find_record(account.account_holder)
+	if(rec)
+		rec.insurance_desired = desired
+		rec.insurance_current = final_tier
+		rec.insurance_payer_account_id = account.account_id || 0
+
+	// Charge and credit department if applicable
+	if(cost > 0)
+		if(account.adjust_money(-cost, "Insurance Premium"))
+			var/datum/bank_account/department/med = get_dep_account(ACCOUNT_MED)
+			if(med)
+				med.adjust_money(cost, "Insurance Premium")
+		else
+			// Failed to charge (race condition on balance). Downgrade to none in record
+			if(rec)
+				rec.insurance_current = INSURANCE_NONE
 
 /**
  * Updates the the inflation_value, effecting newscaster alerts and the mail system.

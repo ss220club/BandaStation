@@ -208,6 +208,13 @@
 		bank_account.replaceable = FALSE
 		add_mob_memory(/datum/memory/key/account, remembered_id = account_id)
 
+		// Seed insurance payer info into crew record
+		var/datum/record/crew/rec = find_record(real_name)
+		if(rec)
+			rec.insurance_payer_account_id = bank_account.account_id
+			rec.insurance_desired = bank_account.insurance_desired
+			rec.insurance_current = INSURANCE_NONE
+
 	dress_up_as_job(
 		equipping = equipping,
 		visual_only = FALSE,

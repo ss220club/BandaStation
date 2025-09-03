@@ -167,6 +167,15 @@
 
 	render_list += "[span_info("Analyzing results for <b>[target]</b> ([station_time_timestamp()]):")]<br><span class='info ml-1'>Overall status: [mob_status]</span><br>"
 
+	// Show current insurance if available (humans only)
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		var/name_for_record = H.get_face_name(H.get_id_name("Unknown"))
+		var/datum/record/crew/rec = find_record(name_for_record)
+		if(rec)
+			var/ins_text = INSURANCE_TIER_TO_TEXT(rec.insurance_current)
+			render_list += "<span class='info ml-1'>Insurance: <b>[ins_text]</b></span><br>"
+
 	if(!advanced && target.has_reagent(/datum/reagent/inverse/technetium))
 		advanced = TRUE
 

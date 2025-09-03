@@ -26,6 +26,9 @@ export type SecurityRecord = {
   trim: string;
   wanted_status: string;
   voice: string;
+  insurance_current?: string;
+  insurance_desired?: string;
+  insurance_payer_account_id?: number;
 };
 
 export type Crime = {
