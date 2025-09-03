@@ -178,7 +178,16 @@
 		if(!do_after(defecator, 3 SECONDS, target = src, timed_action_flags = IGNORE_HELD_ITEM))
 			return
 
+		// Mini-game: quick 3-step radial QTE to influence mood
+		var/steps_success = run_defecation_minigame(defecator)
+
+		// Proceed with the actual action
 		defecator.defecate(src)
+		if(defecator?.mob_mood)
+			if(steps_success >= 3)
+				defecator.mob_mood.add_mood_event("relieved_toilet_perfect", /datum/mood_event/relieved_toilet_perfect)
+			else if(steps_success == 0)
+				defecator.mob_mood.add_mood_event("strained_toilet", /datum/mood_event/strained_toilet)
 		return
 
 	if(!flushing && LAZYLEN(fishes) && cover_open)
@@ -223,6 +232,81 @@
 			. += "[base_icon_state]-water-brown"
 		else
 			. += "[base_icon_state]-water"
+
+// -------- Mini-game helpers --------
+
+/**
+ * Lightweight QTE using radial menu. Player has 2 seconds per step
+ * to pick the prompted action. Returns number of successful picks (0..3).
+ */
+/obj/structure/toilet/proc/run_defecation_minigame(mob/living/carbon/defecator)
+	if(!defecator?.client)
+		return 0
+
+	var/list/actions = list(
+		"Тужиться",
+		"Расслабиться",
+		"Дышать",
+		"Сидеть ровно",
+	)
+	// Icon states from icons/hud/radial.dmi for visual cues
+	var/list/action_icons = list(
+		"Тужиться" = "red",
+		"Расслабиться" = "green",
+		"Дышать" = "yellow",
+		"Сидеть ровно" = "none",
+	)
+	// Map icon state to HTML color used in balloon
+	var/list/icon_state_to_color = list(
+		"red" = "#ff4d4d",
+		"green" = "#2ecc71",
+		"yellow" = "#ffd11a",
+		"none" = "#6e6e6e",
+	)
+	var/list/sequence = list()
+	for(var/i in 1 to 3)
+		sequence += pick(actions)
+
+	var/successes = 0
+	for(var/needed in sequence)
+		if(QDELETED(src) || QDELETED(defecator) || !defecator.client)
+			break
+		// Show prompt with color matching the icon color
+		var/icon_state_needed = action_icons[needed]
+		var/text_color = icon_state_to_color[icon_state_needed]
+		if(isnull(text_color))
+			text_color = "#ffffff"
+		balloon_alert(defecator, "Выберите: <span style='color: [text_color]'>[needed]</span>")
+		// Build choices with icons from radial.dmi
+		var/list/choices = list()
+		for(var/act in actions)
+			var/icon_state = action_icons[act]
+			var/image/I = image('icons/hud/radial.dmi', icon_state = icon_state)
+			choices[act] = I
+		var/end_time = world.time + 2 SECONDS
+		var/answer = show_radial_menu(defecator, src, choices, null, 36, CALLBACK(src, PROC_REF(minigame_custom_check), defecator, end_time), TRUE, radial_menu_offset = list(0, -24))
+		if(!answer)
+			balloon_alert(defecator, "Вы промедлили.")
+			continue
+		if(answer == needed)
+			successes++
+			balloon_alert(defecator, "Отлично.")
+		else
+			balloon_alert(defecator, "Неверно.")
+
+	return successes
+
+/**
+ * Custom check for the radial mini-game: enforces proximity and a timeout.
+ */
+/obj/structure/toilet/proc/minigame_custom_check(mob/living/carbon/user, end_time)
+	if(QDELETED(src) || QDELETED(user))
+		return FALSE
+	if(world.time >= end_time)
+		return FALSE
+	if(!in_range(src, user))
+		return FALSE
+	return TRUE
 
 /obj/structure/toilet/atom_deconstruct(dissambled = TRUE)
 	for(var/obj/toilet_item in cistern_items)
