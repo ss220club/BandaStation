@@ -68,11 +68,13 @@
 /datum/action/cooldown/shadowling/enthrall/DoEffect(mob/living/carbon/human/H, atom/_ignored)
 	var/mob/living/carbon/human/T = find_cone_target(H)
 	if(!T)
-		to_chat(H, span_warning("Перед вами нет подходящих целей."))
+		owner.balloon_alert(owner, "Нет доступных целей")
+		enable()
 		return FALSE
 
 	if(!is_dark(H) || !is_dark(T))
-		to_chat(H, span_warning("Свет рассеивает связь."))
+		owner.balloon_alert(owner, "Свет разрушил связь")
+		StartCooldown()
 		return FALSE
 
 	if(get_dist(H, T) > 2 || !is_valid_target(H, T))
@@ -94,13 +96,13 @@
 
 	var/obj/item/organ/existing = T.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL)
 	if(existing)
-		to_chat(H, span_notice("[T.real_name] уже связан с ульем."))
+		owner.balloon_alert(owner, "Уже связян с ульем")
 		return TRUE
 
 	var/obj/item/organ/brain/shadow/tumor_thrall/O = new
 	if(!O.Insert(T))
 		qdel(O)
-		to_chat(H, span_warning("Связать не удалось."))
+		owner.balloon_alert(owner, "Связать не удалось")
 		return FALSE
 
 	to_chat(H, span_notice("Вы связываете разум [T.real_name] с ульем."))

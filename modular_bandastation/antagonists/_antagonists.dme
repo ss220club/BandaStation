@@ -20,17 +20,14 @@
 #include "code/shadowlings/abilities/spells/shadow_attack.dm"
 #include "code/shadowlings/abilities/spells/roots.dm"
 #include "code/shadowlings/abilities/spells/shreek.dm"
-
 #include "code/shadowlings/abilities/spells/smoke.dm"
-
-#include "code/shadowlings/abilities/spells/shadow_labyrinth.dm"
-
+#include "code/shadowlings/abilities/spells/labyrinth.dm"
+#include "code/shadowlings/abilities/spells/recuperation.dm"
 #include "code/shadowlings/abilities/spells/election.dm"
-
 #include "code/shadowlings/abilities/spells/engine_crush.dm"
+#include "code/shadowlings/abilities/spells/hatch.dm"
 
-//#include "code/shadowlings/abilities/spells/hatch.dm"
+#include "code/shadowlings/abilities/spells/ascension.dm"
 
-//#include "code/shadowlings/abilities/spells/recuperation.dm"
-
-//#include "code/shadowlings/abilities/spells/ascension.dm"
+#include "code/shadowlings/datum.dm"
+#include "code/shadowlings/ruleset.dm"

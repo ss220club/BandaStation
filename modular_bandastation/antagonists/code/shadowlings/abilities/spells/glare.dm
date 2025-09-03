@@ -47,7 +47,7 @@
 
 /datum/action/cooldown/shadowling/glare/DoEffectOnTargets(mob/living/carbon/human/H, list/targets)
 	if(!islist(targets) || !length(targets))
-		to_chat(H, span_warning("Перед вами никого нет."))
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
 	var/hit = FALSE

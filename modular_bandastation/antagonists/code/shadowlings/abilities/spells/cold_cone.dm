@@ -7,7 +7,7 @@
 /datum/action/cooldown/shadowling/cold_wave
 	name = "Волна холода"
 	desc = "Выплеск ледяной тьмы в 90° конусе на 4 тайла, наносящий 30 урона по выносливости и замедляющий врагов на 6 секунд."
-	button_icon_state = "shadow_cold_wave"
+	button_icon_state = "icy_veins"
 	cooldown_time = 20 SECONDS
 
 	requires_dark_user = FALSE
@@ -18,7 +18,7 @@
 /datum/action/cooldown/shadowling/cold_wave/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/list/targets = collect_cone_targets(H)
 	if(!length(targets))
-		to_chat(H, span_warning("Перед вами никого нет."))
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
 	var/hit = FALSE

@@ -1,5 +1,5 @@
-#define SPECIES_SHADOWLING "shadow"
-
+#define ROLE_SHADOWLING "shadowlings"
+#define SPECIES_SHADOWLING "shadow" //Изменить при новых спрайтах тела
 #define ORGAN_SLOT_BRAIN_THRALL "brain_thrall_tumor"
 
 #define L_BRIGHT 0.75
@@ -8,13 +8,14 @@
 #define SHADOWLING_LIGHT_THRESHOLD 0.75
 #define SHADOWLING_DIM_THRESHOLD   0.40
 
-#define SHADOWLING_BRIGHT_BURN_PER_LIMB 2     // было 1 → станет больнее на ярком свете
+#define SHADOWLING_BRIGHT_BURN_PER_LIMB 2     // модификаторы получения урона на свету
 #define SHADOWLING_BRIGHT_BRUTE_PER_LIMB 2
-#define SHADOWLING_DARK_HEAL_PER_LIMB_DEEP 4.0 // было 0.5 → быстрее реген в глубокой тьме
-#define SHADOWLING_DARK_HEAL_PER_LIMB_DIM  0.75 // лёгкий бонус в полутьме, можно =0.5
+#define SHADOWLING_DARK_HEAL_PER_LIMB_DEEP 4.0 // модификатор отхила если темно
+#define SHADOWLING_DARK_HEAL_PER_LIMB_DIM  0.75 // модификатор отхила в полутьме
 
 #define GET_BODYPART_COEFFICIENT(X) round(X.len / BODYPARTS_DEFAULT_MAXIMUM , 0.1)
 
+//Абилки для раундстарт линга
 var/global/list/SHADOWLING_BASE_ABILITIES = list(
 	/datum/action/cooldown/shadowling/enthrall,
 	/datum/action/cooldown/shadowling/glare,
@@ -26,19 +27,20 @@ var/global/list/SHADOWLING_BASE_ABILITIES = list(
 	/datum/action/cooldown/shadowling/shreek,
 	/datum/action/cooldown/shadowling/shadow_grab,
 	/datum/action/cooldown/shadowling/shadow_strike,
-	/datum/action/cooldown/shadowling/smoke_cloud,
-	//Лабиринт ,
-	//Рекуперация ,
-	//Голосование ,
-	//Уничтожение двигателей ,
+	/datum/action/cooldown/shadowling/shadow_smoke,
+	/datum/action/cooldown/shadowling/labyrinth,
+	/datum/action/cooldown/shadowling/recuperation,
+	/datum/action/cooldown/shadowling/election
 	//Вознесение
 )
 
+//Абилки для тралла
 var/global/list/SHADOWLING_THRALL_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
 	/datum/action/cooldown/shadowling/root
 )
 
+//Абилки для тралла-линга
 var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
 	/datum/action/cooldown/shadowling/root,
@@ -48,5 +50,6 @@ var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 	/datum/action/cooldown/shadowling/veil,
 	/datum/action/cooldown/shadowling/shreek,
 	/datum/action/cooldown/shadowling/shadow_grab,
-	/datum/action/cooldown/shadowling/smoke_cloud
+	/datum/action/cooldown/shadowling/shadow_smoke,
+	/datum/action/cooldown/shadowling/labyrinth
 )

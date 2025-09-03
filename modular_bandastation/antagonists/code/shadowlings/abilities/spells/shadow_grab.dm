@@ -1,8 +1,6 @@
 /datum/action/cooldown/shadowling/shadow_grab
 	name = "Теневой захват"
 	desc = "Выйти из тени у ближайшей цели (≤2 тайла) и сразу схватить её сильным захватом."
-	background_icon_state = "shadow_demon_bg"
-	button_icon = 'modular_bandastation/antagonists/icons/shadowlings_actions.dmi'
 	button_icon_state = "shadow_grab"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 0
@@ -21,13 +19,13 @@
 		return TRUE
 	if(H.has_status_effect(/datum/status_effect/shadow/phase))
 		return TRUE
-	to_chat(H, span_warning("Вы должны быть в теневой фазе."))
+	owner.balloon_alert(owner, "Вы должны быть нематериальны")
 	return FALSE
 
 /datum/action/cooldown/shadowling/shadow_grab/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/mob/living/carbon/human/T = find_nearest_target(2)
 	if(!T)
-		to_chat(H, span_warning("Поблизости нет подходящих целей."))
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
 	var/obj/effect/dummy/phased_mob/shadowling/P = istype(H.loc, /obj/effect/dummy/phased_mob/shadowling) ? H.loc : null

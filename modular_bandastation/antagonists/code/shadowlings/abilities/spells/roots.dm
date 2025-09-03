@@ -1,9 +1,7 @@
 /datum/action/cooldown/shadowling/root
 	name = "Путы"
 	desc = "Опутать цель тенями на 15 секунд. Работает только если цель стоит в тени."
-	background_icon_state = "shadow_demon_bg"
-	button_icon = 'modular_bandastation/antagonists/icons/shadowlings_actions.dmi'
-	button_icon_state = "shadow_bind"
+	button_icon_state = "stun_trap"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 25 SECONDS
 
@@ -17,33 +15,31 @@
 
 	var/mob/living/carbon/human/T = target
 	if(!istype(T))
-		to_chat(H, span_warning("Это не подходящая цель."))
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 	if(T == H)
-		to_chat(H, span_warning("На себя — нельзя."))
+		owner.balloon_alert(owner, "Вы не можете быть целью")
 		return FALSE
 
 	var/datum/shadow_hive/hive = get_shadow_hive()
 	if(hive && ((T in hive.lings) || (T in hive.thralls)))
-		to_chat(H, span_warning("Тьма не трогает своих."))
+		owner.balloon_alert(owner, "Союзник не является доступной целью")
 		return FALSE
 
 	var/turf/tturf = get_turf(T)
 	if(!tturf || tturf.get_lumcount() >= L_DIM)
-		to_chat(H, span_warning("Цель не в тени."))
+		owner.balloon_alert(owner, "Цель не в тени")
 		return FALSE
-
-	// Ограничение дистанции
-	// if(get_dist(H, T) > 6) return FALSE
 
 	var/obj/effect/shadow_bind_anchor/A = new /obj/effect/shadow_bind_anchor(tturf, H)
 	if(!A.apply_to(T))
 		qdel(A)
-		to_chat(H, span_warning("Тени не смогли схватить цель."))
+		owner.balloon_alert(owner, "Тени не смогли опутать")
 		return FALSE
 
 	StartCooldown()
 	return TRUE
+
 
 /obj/effect/shadow_bind_anchor
 	name = "writhing shadows"
@@ -60,18 +56,36 @@
 	buckle_requires_restraints = FALSE
 
 	var/grapple_time = 15 SECONDS
-
 	var/mob/living/caster
 
 /obj/effect/shadow_bind_anchor/Initialize(mapload, mob/living/caster_ref)
 	. = ..()
 	caster = caster_ref
+	START_PROCESSING(SSobj, src)
 	addtimer(CALLBACK(src, PROC_REF(_gc_if_empty)), 2 SECONDS)
 
 /obj/effect/shadow_bind_anchor/Destroy()
+	STOP_PROCESSING(SSobj, src)
 	for(var/mob/living/L in buckled_mobs)
 		unbuckle_mob(L, force = TRUE)
 	return ..()
+
+/obj/effect/shadow_bind_anchor/process(seconds_per_tick)
+	if(!isturf(loc))
+		qdel(src)
+		return
+
+	if(!has_buckled_mobs())
+		qdel(src)
+		return
+
+	var/turf/T = get_turf(src)
+	if(T.get_lumcount() >= L_DIM)
+		visible_message(
+			span_warning("Яркий свет рассеивает тени!"),
+			span_userdanger("Свет разрывает путы!")
+		)
+		release()
 
 /obj/effect/shadow_bind_anchor/proc/apply_to(mob/living/victim)
 	if(!istype(victim) || QDELETED(victim) || victim.stat == DEAD)
@@ -95,7 +109,8 @@
 	return TRUE
 
 /obj/effect/shadow_bind_anchor/proc/release()
-	if(QDELETED(src)) return
+	if(QDELETED(src))
+		return
 	if(!has_buckled_mobs())
 		qdel(src)
 		return

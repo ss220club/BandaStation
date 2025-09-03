@@ -23,8 +23,16 @@
 			return TRUE
 	return FALSE
 
-/datum/action/cooldown/shadowling/hive_sync/proc/role_allowed(var/datum/action/cooldown/shadowling/A, is_ling)
-	return is_ling ? (A.type in SHADOWLING_BASE_ABILITIES) : (A.type in SHADOWLING_THRALL_ABILITIES)
+/datum/action/cooldown/shadowling/hive_sync/proc/role_allowed(var/datum/action/cooldown/shadowling/A, ling_role)
+	var/list/check_list = list()
+	switch(ling_role)
+		if(SHADOWLING_ROLE_MAIN)
+			check_list = SHADOWLING_BASE_ABILITIES
+		if(SHADOWLING_ROLE_THRALL)
+			check_list = SHADOWLING_THRALL_ABILITIES
+		if(SHADOWLING_ROLE_LESSER)
+			check_list = SHADOWLING_MINOR_ABILITIES
+	return A.type in check_list
 
 /datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(var/datum/action/cooldown/shadowling/A)
 	if("required_thralls" in A.vars && isnum(A:required_thralls))
@@ -36,7 +44,13 @@
 	var/datum/shadow_hive/hive = get_shadow_hive()
 	if(!hive) return
 
-	var/is_ling = (H in hive.lings)
+	var/ling_class = null
+	if(H in hive.lings)
+		ling_class = SHADOWLING_ROLE_MAIN
+	if(H in hive.thralls)
+		ling_class = SHADOWLING_ROLE_THRALL
+	if((H in hive.lings) && (H in hive.thralls))
+		ling_class = SHADOWLING_ROLE_LESSER
 
 	for(var/path in typesof(/datum/action/cooldown/shadowling))
 		if(path == /datum/action/cooldown/shadowling)
@@ -48,7 +62,7 @@
 
 		var/datum/action/cooldown/shadowling/A = new path()
 
-		if(!role_allowed(A, is_ling))
+		if(!role_allowed(A, ling_class))
 			qdel(A)
 			continue
 

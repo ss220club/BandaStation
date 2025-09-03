@@ -16,7 +16,7 @@
 		return TRUE
 	if(H.has_status_effect(/datum/status_effect/shadow/phase))
 		return TRUE
-	to_chat(H, span_warning("Вы должны быть в теневой фазе."))
+	owner.balloon_alert(owner, "Вы должны быть нематериальны")
 	return FALSE
 
 /datum/action/cooldown/shadowling/shadow_strike/Trigger(mob/clicker, trigger_flags, atom/target)
@@ -28,7 +28,7 @@
 
 	var/mob/living/target_mob = find_closest_target(H)
 	if(!target_mob)
-		to_chat(H, span_warning("Рядом нет подходящих целей."))
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return
 
 	if(DoEffect(H, target_mob))
@@ -63,7 +63,7 @@
 /datum/action/cooldown/shadowling/shadow_strike/DoEffect(mob/living/carbon/human/H, atom/target)
 	var/mob/living/carbon/human/T = find_nearest_target(2)
 	if(!T)
-		to_chat(H, span_warning("Поблизости нет подходящих целей."))
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
 	var/obj/effect/dummy/phased_mob/shadowling/P = istype(H.loc, /obj/effect/dummy/phased_mob/shadowling) ? H.loc : null
@@ -87,7 +87,7 @@
 	hit = TRUE
 
 	if(!hit)
-		to_chat(H, span_warning("Слишком далеко, чтобы ударить."))
+		owner.balloon_alert(owner, "Слишком далеко для удара")
 	else
 		H.do_attack_animation(T)
 

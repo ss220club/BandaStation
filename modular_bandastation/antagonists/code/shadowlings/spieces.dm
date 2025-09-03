@@ -38,7 +38,7 @@
 	mutantbrain = /obj/item/organ/brain/shadow/shadowling
 
 /datum/species/shadow/shadowling/check_roundstart_eligible()
-	return TRUE//FALSE
+	return FALSE
 
 /obj/item/organ/brain/shadow/shadowling
 	name = "shadowling swarm tumor"
@@ -95,3 +95,6 @@
 	unarmed_sharpness = SHARP_POINTY
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis)
+
+/mob/living/carbon/human
+	var/lower_shadowling = FALSE

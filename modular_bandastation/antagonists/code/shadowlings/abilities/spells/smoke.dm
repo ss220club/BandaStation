@@ -1,90 +1,128 @@
-/datum/action/cooldown/shadowling/smoke_cloud
-	name = "Дымное облако"
-	desc = "Заполняет тьмой область 9×9, сужающуюся каждый тик. Тени исцеляются, прочие слепнут и могут быть оглушены."
-	button_icon_state = "shadow_smoke"
-	cooldown_time = 0 SECONDS
+/datum/action/cooldown/shadowling/shadow_smoke
+	name = "Теневой дым"
+	desc = "Заполняет область дымом: лечит союзных теней и их слуг, ослепляет и иногда оглушает остальных."
+	button_icon_state = "blindness_smoke"
+	cooldown_time = 60 SECONDS
 
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	max_range = 0
 	channel_time = 0
 
-/datum/action/cooldown/shadowling/smoke_cloud/DoEffect(mob/living/carbon/human/H, atom/_)
+	var/smoke_radius = 4
+	var/smoke_ticks = 6
+	var/heal_amount = 10
+	var/blind_time = 5 SECONDS
+	var/stun_chance = 25
+	var/stun_time = 2 SECONDS
+
+/datum/action/cooldown/shadowling/shadow_smoke/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/turf/T = get_turf(H)
 	if(!T)
 		return FALSE
-	new /obj/effect/area_emitter/shadowling_smoke(T)
+
+	playsound(T, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+
+	var/datum/effect_system/shadow_smoke/S = new
+	S.set_up(smoke_radius, holder = H, location = T)
+	S.heal_amount = heal_amount
+	S.blind_time = blind_time
+	S.stun_chance = stun_chance
+	S.stun_time = stun_time
+	S.total_ticks = smoke_ticks
+	S.start()
 	return TRUE
 
-/obj/effect/area_emitter/shadowling_smoke
+
+/obj/effect/particle_effect/fluid/smoke/shadow
 	name = "shadow smoke"
-	anchored = TRUE
-	invisibility = INVISIBILITY_ABSTRACT
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	opacity = FALSE
+	lifetime = 10 SECONDS
+	color = "#000000"
+	alpha = 220
 
-	var/current_radius = 4
-	var/steam_puffs = 12
-	var/tick_interval = 1 SECONDS
+	var/heal_amount = 10
+	var/blind_time = 5 SECONDS
+	var/stun_chance = 25
+	var/stun_time = 2 SECONDS
 
-/obj/effect/area_emitter/shadowling_smoke/Initialize(mapload)
-	. = ..()
-	START_PROCESSING(SSobj, src)
+/obj/effect/particle_effect/fluid/smoke/shadow/spread(seconds_per_tick)
+	return
 
-/obj/effect/area_emitter/shadowling_smoke/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	return ..()
-
-/obj/effect/area_emitter/shadowling_smoke/process(seconds_per_tick)
-	if(QDELETED(src))
-		return
-
-	var/turf/center = get_turf(src)
-	if(!center || current_radius < 0)
-		qdel(src)
-		return
-
-	draw_visuals(center, current_radius)
-
-	var/z = center.z
-	var/tx1 = max(1, center.x - current_radius)
-	var/ty1 = max(1, center.y - current_radius)
-	var/tx2 = center.x + current_radius
-	var/ty2 = center.y + current_radius
-	var/list/turfs = block(locate(tx1, ty1, z), locate(tx2, ty2, z))
-	apply_effects(turfs)
-
-	current_radius--
-	if(current_radius < 0)
-		qdel(src)
-
-/obj/effect/area_emitter/shadowling_smoke/proc/draw_visuals(turf/center, r)
-	var/datum/effect_system/steam_spread/steam = new
-	steam.set_up(steam_puffs, FALSE, center)
-	steam.start()
-
-/obj/effect/area_emitter/shadowling_smoke/proc/apply_effects(list/turfs)
+/obj/effect/particle_effect/fluid/smoke/shadow/smoke_mob(mob/living/carbon/smoker, seconds_per_tick)
+	if(!..())
+		return FALSE
 	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/is_ally = FALSE
+	if(hive)
+		is_ally = (smoker in hive.lings) || (smoker in hive.thralls)
+	if(is_ally)
+		smoker.adjustBruteLoss(-heal_amount)
+		smoker.adjustFireLoss(-heal_amount)
+		smoker.adjustToxLoss(-heal_amount)
+		smoker.adjustOxyLoss(-heal_amount)
+		var/mob/living/carbon/C = smoker
+		if(istype(C))
+			C.adjustStaminaLoss(-heal_amount)
+	else
+		var/mob/living/carbon/C2 = smoker
+		if(istype(C2))
+			C2.adjust_temp_blindness(blind_time)
+		if(prob(stun_chance))
+			smoker.Stun(stun_time)
+	return TRUE
 
-	for(var/turf/T in turfs)
-		if(!isturf(T)) continue
 
-		for(var/mob/living/L in T)
-			if(QDELETED(L)) continue
+/datum/effect_system/shadow_smoke
+	var/range = 4
+	var/amount
 
-			if(hive && ((L in hive.lings) || (L in hive.thralls)))
-				heal_shadow_ally(L)
-				continue
 
-			afflict_enemy(L)
+	var/heal_amount = 10
+	var/blind_time = 5 SECONDS
+	var/stun_chance = 25
+	var/stun_time = 2 SECONDS
+	var/total_ticks = 6
 
-/obj/effect/area_emitter/shadowling_smoke/proc/heal_shadow_ally(mob/living/L)
-	L.adjustBruteLoss(-10)
-	L.adjustFireLoss(-10)
-	L.adjustToxLoss(-10)
-	L.adjustStaminaLoss(-10)
+/datum/effect_system/shadow_smoke/set_up(range = 4, amount = 0, atom/holder, atom/location)
+	src.range = range
+	src.amount = amount
+	src.holder = holder
+	src.location = location
 
-/obj/effect/area_emitter/shadowling_smoke/proc/afflict_enemy(mob/living/L)
-	L.adjust_temp_blindness(5)
+/datum/effect_system/shadow_smoke/start(log = FALSE)
+	var/turf/center = location || get_turf(holder)
+	if(!center)
+		return
 
-	if(prob(25))
-		L.Stun(2 SECONDS)
+	var/datum/fluid_group/G = new
+	var/list/visited = list()
+	var/list/queue = list()
+
+	visited[center] = 0
+	queue += center
+
+	while(length(queue))
+		var/turf/current = queue[1]
+		queue.Cut(1, 2)
+
+		var/dist = visited[current]
+		var/life_secs = max(total_ticks - dist, 0)
+		if(life_secs > 0)
+			var/obj/effect/particle_effect/fluid/smoke/shadow/node = new /obj/effect/particle_effect/fluid/smoke/shadow(current, G)
+			node.heal_amount = heal_amount
+			node.blind_time = blind_time
+			node.stun_chance = stun_chance
+			node.stun_time = stun_time
+			node.lifetime = life_secs SECONDS
+
+		if(dist >= range)
+			continue
+
+		for(var/turf/N in current.get_atmos_adjacent_turfs())
+			if(!visited[N])
+				visited[N] = dist + 1
+				queue += N
+
+/proc/chebyshev_distance(turf/A, turf/B)
+	return max(abs(A.x - B.x), abs(A.y - B.y))

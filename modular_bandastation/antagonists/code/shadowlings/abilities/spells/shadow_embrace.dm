@@ -1,7 +1,7 @@
 /datum/action/cooldown/shadowling/shadow_phase_in
 	name = "Теневой вход"
 	desc = "Стать нематериальным и проходить сквозь стены. Яркий свет разрывает фазу (если не набрано достаточно слуг)."
-	button_icon_state = "shadow_phase_in"
+	button_icon_state = "shadowling_crawl"
 	cooldown_time = 30 SECONDS
 
 	/// Сколько живых траллов нужно, чтобы свет перестал выбрасывать из фазы
@@ -40,11 +40,11 @@
 		return FALSE
 
 	if(!CanUse(H))
-		to_chat(H, span_warning("Сейчас нельзя."))
+		owner.balloon_alert(owner, "Сейчас нельзя")
 		return FALSE
 
 	if(!ValidateTarget(H, target))
-		to_chat(H, span_warning("Цель недоступна."))
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
 	if(channel_time > 0)
@@ -67,7 +67,7 @@
 /datum/action/cooldown/shadowling/shadow_phase_out/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
 	if(!istype(P))
-		to_chat(H, span_warning("Вы и так материальны."))
+		owner.balloon_alert(owner, "Вы и так материальны")
 		return FALSE
 
 	P.eject_jaunter(FALSE)

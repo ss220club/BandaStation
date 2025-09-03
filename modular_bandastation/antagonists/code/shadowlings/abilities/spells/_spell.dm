@@ -73,12 +73,14 @@
 		return
 
 	if(!CanUse(owner))
-		to_chat(owner, span_warning("Сейчас нельзя."))
+		enable()
+		owner.balloon_alert(owner, "Сейчас нельзя")
 		return
 
 	var/list/targets = CollectTargets(owner, target)
 	if(!ValidateTargets(owner, targets))
-		to_chat(owner, span_warning("Нет доступных целей."))
+		enable()
+		owner.balloon_alert(owner, "Нет доступных целей")
 		return
 
 	if(channel_time > 0)

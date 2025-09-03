@@ -1,9 +1,7 @@
 /datum/action/cooldown/shadowling/shreek
 	name = "Крик"
 	desc = "Выпускает ударную волну тьмы: рядом оглушает и швыряет, дальше — дезориентирует. Бьёт стёкла."
-	background_icon_state = "shadow_demon_bg"
-	button_icon = 'modular_bandastation/antagonists/icons/shadowlings_actions.dmi'
-	button_icon_state = "shadow_scream"
+	button_icon_state = "screech"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 30 SECONDS
 
