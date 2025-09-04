@@ -477,7 +477,7 @@
 	if(obj_flags & EMAGGED)
 		balloon_alert(user, "интерфейс сломан!")
 	else if(opened)
-		balloon_alert(user, "снала закройте крышку!")
+		balloon_alert(user, "сначала закройте крышку!")
 	else if(panel_open)
 		balloon_alert(user, "сначала закройте панель!")
 	else if(machine_stat & (BROKEN|MAINT))

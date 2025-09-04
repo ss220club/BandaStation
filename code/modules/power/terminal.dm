@@ -26,7 +26,7 @@
 /obj/machinery/power/terminal/examine(mob/user)
 	. = ..()
 	if(!QDELETED(powernet))
-		. += span_notice("Рабоает в [LOWER_TEXT(GLOB.cable_layer_to_name["[cable_layer]"])].")
+		. += span_notice("Работает в [LOWER_TEXT(GLOB.cable_layer_to_name["[cable_layer]"])].")
 	else
 		. += span_warning("Отключён в [LOWER_TEXT(GLOB.cable_layer_to_name["[cable_layer]"])].")
 
