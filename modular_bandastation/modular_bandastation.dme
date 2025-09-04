@@ -12,6 +12,7 @@
 #include "aesthetics_sounds/_aesthetics_sounds.dme"
 #include "ai_laws/_ai_laws.dme"
 #include "announcers/_announcers.dme"
+#include "skillchip_rcd/_skillchip_rcd.dme"
 #include "antagonists/_antagonists.dme"
 #include "augmentation_preferences/_augmentation_preferences.dme"
 #include "autohiss/_autohiss.dme"

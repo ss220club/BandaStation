@@ -147,6 +147,12 @@
 	 *If we are just trying to destroy something then this check is not necessary
 	 *RCD_WALLFRAME is also returned as the rcd_mode when upgrading apc, airalarm, firealarm using simple circuits upgrade
 	 */
+
+	//BANDASTATION ADD START - Engineer Skillchip RCD
+	if(rcd_mode == RCD_DECONSTRUCT && !check_engineer_skillchip(user))
+		return
+	//BANDASTATION ADD END - Engineer Skillchip RCD
+
 	if(rcd_mode != RCD_WALLFRAME && rcd_mode != RCD_DECONSTRUCT)
 		var/turf/target_turf = get_turf(target)
 		//if we are trying to build a window we check for specific edge cases
@@ -254,6 +260,12 @@
 	rcd_results["[RCD_DESIGN_PATH]"] = rcd_design_path
 
 	var/delay = rcd_results["delay"] * delay_mod
+
+	//BANDASTATION ADD START - Engineer Skillchip RCD
+	if(!check_engineer_skillchip(user))
+		delay *= 1.5
+	//BANDASTATION ADD END - Engineer Skillchip RCD
+
 	if (
 		!(construction_upgrades & RCD_UPGRADE_NO_FREQUENT_USE_COOLDOWN) \
 			&& !rcd_results[RCD_RESULT_BYPASS_FREQUENT_USE_COOLDOWN] \
@@ -340,6 +352,8 @@
 
 	data["root_categories"] = list()
 	for(var/category in GLOB.rcd_designs)
+		if(category == "Airlock Access" && !check_engineer_skillchip(user, FALSE))
+			continue
 		data["root_categories"] += category
 	data["selected_root"] = root_category
 
