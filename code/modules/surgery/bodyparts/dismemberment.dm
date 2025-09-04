@@ -245,6 +245,12 @@
 
 	ru_names_rename(ru_names_toml("head", suffix = " [owner.real_name]", override_base = "[owner.real_name]'s head"))
 	name = "[owner.real_name]'s head"
+
+	/// If our owner loses their head, update their name as their face ~cannot be seen~ does not exist anymore
+	if (ishuman(owner))
+		var/mob/living/carbon/human/as_human = owner
+		as_human.update_visible_name()
+
 	return ..()
 
 ///Try to attach this bodypart to a mob, while replacing one if it exists, does nothing if it fails.
@@ -351,6 +357,11 @@
 	if(old_real_name)
 		new_head_owner.real_name = old_real_name
 	real_name = new_head_owner.real_name
+
+	/// Update our owner's name with ours
+	if (ishuman(owner))
+		var/mob/living/carbon/human/as_human = owner
+		as_human.update_visible_name()
 
 	//Handle dental implants
 	for(var/obj/item/reagent_containers/applicator/pill/pill in src)

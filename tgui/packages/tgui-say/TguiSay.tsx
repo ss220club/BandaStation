@@ -170,13 +170,17 @@ export function TguiSay() {
       newValue = newValue.slice(3);
       iterator.set('Say');
 
-      if (newPrefix === ':b ') {
+      if (newPrefix === ':b ' || newPrefix === ':и ') {
         Byond.sendMessage('thinking', { visible: false });
       }
     }
 
     // Handles typing indicators
-    if (channelIterator.current.isVisible() && newPrefix !== ':b ') {
+    if (
+      channelIterator.current.isVisible() &&
+      newPrefix !== ':b ' &&
+      newPrefix !== ':и '
+    ) {
       messages.current.typingMsg();
     }
 
