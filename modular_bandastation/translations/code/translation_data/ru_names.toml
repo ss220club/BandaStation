@@ -16222,6 +16222,24 @@ instrumental = "модулем контроля питания для ЛКП"
 prepositional = "модуле контроля питания для ЛКП"
 gender = "male"
 
+["APC frame"]
+nominative = "панель ЛКП"
+genitive = "панели ЛКП"
+dative = "панели ЛКП"
+accusative = "панель ЛКП"
+instrumental = "панелью ЛКП"
+prepositional = "панели ЛКП"
+gender = "female"
+
+["terminal"]
+nominative = "клемма"
+genitive = "клеммы"
+dative = "клемме"
+accusative = "клемму"
+instrumental = "клеммой"
+prepositional = "клемме"
+gender = "female"
+
 ["airlock electronics"]
 nominative = "электроника шлюза"
 genitive = "электроники шлюза"
