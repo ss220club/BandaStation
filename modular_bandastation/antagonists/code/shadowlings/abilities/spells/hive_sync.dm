@@ -45,9 +45,9 @@
 	var/ling_class = null
 	if(H in hive.lings)
 		ling_class = SHADOWLING_ROLE_MAIN
-	if(H in hive.thralls)
+	else if(H in hive.thralls)
 		ling_class = SHADOWLING_ROLE_THRALL
-	if((H in hive.lings) && (H in hive.thralls))
+	else if((H in hive.lings) && (H in hive.thralls))
 		ling_class = SHADOWLING_ROLE_LESSER
 
 	for(var/path in typesof(/datum/action/cooldown/shadowling))

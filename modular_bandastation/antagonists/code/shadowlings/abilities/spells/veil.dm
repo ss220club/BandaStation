@@ -9,25 +9,30 @@
 	var/dark_square_radius = 5
 	var/shroom_square_radius = 2
 	var/blind_duration = 6 SECONDS
+	var/sfx_emp = 'sound/effects/empulse.ogg'
 
 /datum/action/cooldown/shadowling/veil/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/turf/center = get_turf(H)
 	if(!center)
 		return FALSE
 
-	// Список турфов 11x11
 	var/list/turfs5 = RANGE_TURFS(shroom_square_radius, H)
 	var/list/turfs11 = RANGE_TURFS(dark_square_radius, H)
+
 	replace_glowshrooms(turfs5)
-	break_apcs_in_dark(turfs5) //Сделано для баланса, возможно стоит удалить или изменить
+	break_apcs_in_dark(turfs5)
 	weaken_shaded_mobs(turfs11, blind_duration)
 	disable_lights_in_area(turfs11)
+
+	playsound(center, sfx_emp, 70, TRUE)
+	new /obj/effect/temp_visual/emp/pulse/shadow_veil(center)
 
 	to_chat(H, span_notice("Пелена тьмы накрывает всё вокруг."))
 	return TRUE
 
 /datum/action/cooldown/shadowling/veil/proc/disable_lights_in_area(list/turfs)
-	if(!islist(turfs)) return
+	if(!islist(turfs))
+		return
 	for(var/turf/T in turfs)
 		for(var/obj/O in T)
 			try_disable_light(O)
@@ -77,7 +82,13 @@
 		return
 	var/glow_path = text2path("/obj/structure/glowshroom")
 	for(var/turf/T in turfs)
-		if(!T) continue
+		if(!T)
+			continue
 		for(var/obj/structure/G in T)
 			if(glow_path && istype(G, glow_path))
 				qdel(G)
+
+/obj/effect/temp_visual/emp/pulse/shadow_veil
+	name = "veil pulse"
+	alpha = 200
+	color = "#5a3a7e" // фиолетовая «теневая» волна

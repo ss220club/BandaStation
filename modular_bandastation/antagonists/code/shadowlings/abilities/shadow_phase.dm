@@ -23,13 +23,9 @@
 	. = ..()
 	if(!istype(owner))
 		return
-
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
-
 	REMOVE_TRAIT(owner, TRAIT_UNDENSE, src)
-
-	if(istype(owner))
-		shadow_phase_start_entry_cooldown(owner)
+	shadow_phase_start_entry_cooldown(owner)
 
 /datum/status_effect/shadow/phase/tick(seconds_between_ticks)
 	if(!istype(owner))
@@ -43,7 +39,7 @@
 		return
 
 	var/brightness = T.get_lumcount()
-	if(brightness >= L_BRIGHT)
+	if(brightness >= SHADOWLING_LIGHT_THRESHOLD)
 		owner.Knockdown(1 SECONDS)
 		owner.Paralyze(1 SECONDS)
 		owner.remove_status_effect(type)
@@ -54,7 +50,7 @@
 	phased_mob_icon_state = "purple_laser"
 
 	var/light_immunity = FALSE
-	light_max = L_BRIGHT
+	light_max = SHADOWLING_LIGHT_THRESHOLD
 	movespeed = 1.5
 
 /obj/effect/dummy/phased_mob/shadowling/check_light_level(atom/location_to_check)

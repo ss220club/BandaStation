@@ -19,7 +19,7 @@
 	for(var/mob/living/carbon/human/T in range(2, H))
 		if(T == H)
 			continue
-		if(!in_front_cone_90(H, T))
+		if(!in_front_cone(H, T, 90))
 			continue
 		if(!is_valid_target(H, T))
 			continue
@@ -34,15 +34,6 @@
 			best_rank = rank
 
 	return best
-
-/datum/action/cooldown/shadowling/enthrall/proc/in_front_cone_90(mob/living/carbon/human/H, atom/A)
-	if(!H.dir)
-		return TRUE
-	var/tdir = get_dir(H, A)
-	if(!tdir)
-		return FALSE
-	var/list/allowed = list(H.dir, turn(H.dir, 45), turn(H.dir, -45))
-	return (tdir in allowed)
 
 /datum/action/cooldown/shadowling/enthrall/proc/is_valid_target(mob/living/carbon/human/H, mob/living/carbon/human/T)
 	if(!istype(T))
@@ -59,9 +50,9 @@
 	return TRUE
 
 /datum/action/cooldown/shadowling/enthrall/proc/has_mindshield(mob/living/carbon/human/T)
+	if(!istype(T))
+		return FALSE
 	if(islist(T.implants) && (locate(/obj/item/implant/mindshield) in T.implants))
-		return TRUE
-	for(var/obj/item/implant/mindshield/I in T.contents)
 		return TRUE
 	return FALSE
 

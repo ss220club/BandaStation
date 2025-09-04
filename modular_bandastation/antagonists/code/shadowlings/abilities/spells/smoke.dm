@@ -123,6 +123,3 @@
 			if(!visited[N])
 				visited[N] = dist + 1
 				queue += N
-
-/proc/chebyshev_distance(turf/A, turf/B)
-	return max(abs(A.x - B.x), abs(A.y - B.y))

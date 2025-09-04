@@ -24,10 +24,19 @@
 #include "code/shadowlings/abilities/spells/labyrinth.dm"
 #include "code/shadowlings/abilities/spells/recuperation.dm"
 #include "code/shadowlings/abilities/spells/election.dm"
-#include "code/shadowlings/abilities/spells/engine_crush.dm"
+#include "code/shadowlings/abilities/spells/engine_sabotage.dm"
 #include "code/shadowlings/abilities/spells/hatch.dm"
 
 #include "code/shadowlings/abilities/spells/ascension.dm"
 
 #include "code/shadowlings/datum.dm"
 #include "code/shadowlings/ruleset.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE

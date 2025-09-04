@@ -70,7 +70,7 @@
 		return ..()
 
 	candidates = shuffle(candidates)
-	for(var/i = 1 to need_extra)
+	for(var/i = 1 to min(need_extra, length(candidates)))
 		assign_role(candidates[i])
 
 	return ..()

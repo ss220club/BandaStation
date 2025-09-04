@@ -1,9 +1,6 @@
 #define ROLE_SHADOWLING "shadowlings"
-#define SPECIES_SHADOWLING "shadow" //Изменить при новых спрайтах тела
+#define SPECIES_SHADOWLING "shadowling" //Изменить при новых спрайтах тела
 #define ORGAN_SLOT_BRAIN_THRALL "brain_thrall_tumor"
-
-#define L_BRIGHT 0.75
-#define L_DIM    0.40
 
 #define SHADOWLING_LIGHT_THRESHOLD 0.75
 #define SHADOWLING_DIM_THRESHOLD   0.40
@@ -21,8 +18,7 @@ var/global/list/SHADOWLING_BASE_ABILITIES = list(
 	/datum/action/cooldown/shadowling/glare,
 	/datum/action/cooldown/shadowling/root,
 	/datum/action/cooldown/shadowling/cold_wave,
-	/datum/action/cooldown/shadowling/shadow_phase_in,
-	/datum/action/cooldown/shadowling/shadow_phase_out,
+	/datum/action/cooldown/shadowling/shadow_phase,
 	/datum/action/cooldown/shadowling/veil,
 	/datum/action/cooldown/shadowling/shreek,
 	/datum/action/cooldown/shadowling/shadow_grab,
@@ -45,8 +41,7 @@ var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
 	/datum/action/cooldown/shadowling/root,
 	/datum/action/cooldown/shadowling/cold_wave,
-	/datum/action/cooldown/shadowling/shadow_phase_in,
-	/datum/action/cooldown/shadowling/shadow_phase_out,
+	/datum/action/cooldown/shadowling/shadow_phase,
 	/datum/action/cooldown/shadowling/veil,
 	/datum/action/cooldown/shadowling/shreek,
 	/datum/action/cooldown/shadowling/shadow_grab,

@@ -1,6 +1,6 @@
 /datum/action/cooldown/shadowling/shadow_strike
 	name = "Теневой удар"
-	desc = "Материализуясь из тени рядом с ближайшей целью в 2 тайлах, наносит два быстрых удара."
+	desc = "Материализуясь из тени рядом с ближайшей целью в 2 тайлах, наносит быстрый удар."
 	button_icon_state = "shadow_strike"
 	cooldown_time = 0
 
@@ -61,8 +61,16 @@
 	return best
 
 /datum/action/cooldown/shadowling/shadow_strike/DoEffect(mob/living/carbon/human/H, atom/target)
-	var/mob/living/carbon/human/T = find_nearest_target(2)
-	if(!T)
+	if(!istype(H))
+		return FALSE
+
+	var/mob/living/carbon/human/T = null
+	if(istype(target, /mob/living/carbon/human))
+		T = target
+	else
+		T = find_closest_target(H)
+
+	if(!istype(T))
 		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
@@ -78,17 +86,10 @@
 	if(get_dist(H, T) > 1)
 		step_towards(H, T)
 
-	var/hit = FALSE
-	if(QDELETED(H) || QDELETED(T))
-		return FALSE
-	if(get_dist(H, T) > 1)
-		return FALSE
-	T.apply_damage(20, BRUTE, sharpness=SHARP_POINTY)
-	hit = TRUE
-
-	if(!hit)
+	if(QDELETED(H) || QDELETED(T) || get_dist(H, T) > 1)
 		owner.balloon_alert(owner, "Слишком далеко для удара")
-	else
-		H.do_attack_animation(T)
+		return FALSE
 
-	return hit
+	T.apply_damage(20, BRUTE, null, sharpness = SHARP_POINTY)
+	H.do_attack_animation(T)
+	return TRUE

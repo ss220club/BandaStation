@@ -27,7 +27,7 @@
 		return FALSE
 
 	var/turf/tturf = get_turf(T)
-	if(!tturf || tturf.get_lumcount() >= L_DIM)
+	if(!tturf || tturf.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
 		owner.balloon_alert(owner, "Цель не в тени")
 		return FALSE
 
@@ -80,7 +80,7 @@
 		return
 
 	var/turf/T = get_turf(src)
-	if(T.get_lumcount() >= L_DIM)
+	if(T.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
 		visible_message(
 			span_warning("Яркий свет рассеивает тени!"),
 			span_userdanger("Свет разрывает путы!")

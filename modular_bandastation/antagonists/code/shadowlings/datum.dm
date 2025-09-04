@@ -1,3 +1,8 @@
+/datum/mood_event/shadowling
+	description = "Холодная тьма внутри шепчет о власти."
+	mood_change = 12
+	hidden = TRUE
+
 /datum/antagonist/shadowling
 	name = "Shadowlings"
 	antagpanel_category = "Shadowlings"
@@ -5,6 +10,7 @@
 	preview_outfit = null
 	pref_flag = ROLE_SHADOWLING
 	stinger_sound = 'modular_bandastation/antagonists/sound/shadowlings/shadowling_gain.ogg'
+	antag_moodlet = /datum/mood_event/shadowling
 
 /datum/antagonist/shadowling/greet(mob/user, tell_objectives = TRUE)
 	..()

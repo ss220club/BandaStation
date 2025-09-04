@@ -61,7 +61,7 @@
 	var/turf/T = get_turf(A)
 	if(!T)
 		return FALSE
-	return (T.get_lumcount() < L_DIM)
+	return (T.get_lumcount() < SHADOWLING_DIM_THRESHOLD)
 
 /datum/action/cooldown/shadowling/proc/DoEffect(mob/living/carbon/human/H, atom/target)
 	return FALSE
@@ -89,8 +89,13 @@
 			return
 
 	disable()
-	if(DoEffectOnTargets(owner, targets))
+
+	var/success = DoEffectOnTargets(owner, targets)
+	if(success)
 		StartCooldown()
+	else
+		enable()
+
 
 /datum/action/cooldown/shadowling/proc/CollectTargets(mob/living/carbon/human/H, atom/explicit)
 	if(explicit)
@@ -115,25 +120,36 @@
 	if(!islist(targets) || !length(targets))
 		return DoEffect(H, null)
 	var/success = FALSE
-	success = DoEffect(H, targets[1]) || success
+	for(var/atom/A in targets)
+		success = DoEffect(H, targets[1])
 	return success
 
+/datum/action/cooldown/shadowling/proc/glare_angle_diff(a, b)
+	var/d = abs(a - b) % 360
+	if(d > 180)
+		d = 360 - d
+	return d
+
 /datum/action/cooldown/shadowling/proc/in_front_cone(mob/living/carbon/human/H, atom/A, full_angle = 90)
-	if(!H.dir)
-		return TRUE
-	var/tdir = get_dir(H, A)
-	if(!tdir)
+	if(!istype(H) || !A)
 		return FALSE
 
-	var/list/allowed = list(H.dir)
-	if(full_angle >= 90)
-		allowed += list(turn(H.dir, 45), turn(H.dir, -45))
-	if(full_angle >= 135)
-		allowed += list(turn(H.dir, 90), turn(H.dir, -90))
-	if(full_angle >= 180)
-		allowed = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+	var/turf/from_turf = get_turf(H)
+	var/turf/to_turf = get_turf(A)
+	if(!from_turf || !to_turf)
+		return FALSE
 
-	return (tdir in allowed)
+	if(!H.dir) // без направления — считаем, что попадает
+		return TRUE
+
+	var/ang_forward = dir2angle(H.dir)
+	var/ang_to = get_angle(from_turf, to_turf)
+	var/half = full_angle * 0.5
+
+	if(glare_angle_diff(ang_forward, ang_to) <= half)
+		return TRUE
+
+	return FALSE
 
 /datum/action/cooldown/shadowling/proc/collect_cone_targets(mob/living/carbon/human/H, r = 2, full_angle = 90)
 	var/list/res = list()
@@ -152,7 +168,7 @@
 	var/mob/living/carbon/human/best = null
 	var/list/candidates = range(range, get_turf(owner))
 	for(var/mob/living/carbon/human/candidate in candidates)
-		if(candidate == owner || QDELETED(owner) || candidate.stat == DEAD)
+		if(candidate == owner || QDELETED(candidate) || candidate.stat == DEAD)
 			continue
 		if(hive && ((candidate in hive.lings) || (candidate in hive.thralls)))
 			continue

@@ -13,52 +13,54 @@
 	unset_after_click = TRUE
 
 /datum/action/cooldown/shadowling/recuperation/Trigger(mob/clicker, trigger_flags, atom/target)
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H) || !IsAvailable(TRUE) || !CanUse(H))
-		return FALSE
-	if(target)
-		return InterceptClickOn(H, null, target)
-	return set_click_ability(H)
+	// Используем стандартную логику действия: корректный тоггл click-mode по повторному нажатию
+	return ..()
 
 /datum/action/cooldown/shadowling/recuperation/InterceptClickOn(mob/living/clicker, params, atom/target)
 	if(!IsAvailable(TRUE))
+		// На всякий случай снимаем режим клика при любом клике
+		unset_click_ability(clicker, TRUE)
 		return FALSE
 
 	var/mob/living/carbon/human/T = target
 	if(!istype(T))
 		clicker.balloon_alert(clicker, "нужна гуманоидная цель")
+		unset_click_ability(clicker, TRUE)
 		return FALSE
+
 	if(get_dist(clicker, T) > 1)
 		clicker.balloon_alert(clicker, "слишком далеко")
+		unset_click_ability(clicker, TRUE)
 		return FALSE
 
 	var/datum/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
+		unset_click_ability(clicker, TRUE)
 		return FALSE
 
-	// должна быть траллом (опухоль есть)
 	if(!(T in hive.thralls) || !T.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL))
 		clicker.balloon_alert(clicker, "требуется слуга")
+		unset_click_ability(clicker, TRUE)
 		return FALSE
 
-	// не рекуперируем уже-лингa
 	if(T in hive.lings)
 		clicker.balloon_alert(clicker, "уже в улье как линг")
+		unset_click_ability(clicker, TRUE)
 		return FALSE
 
-	// канал; цель должна стоять на месте
 	var/start_loc = T.loc
 	if(!do_after(clicker, channel_time, T))
+		unset_click_ability(clicker, TRUE)
 		return FALSE
 	if(QDELETED(T) || T.loc != start_loc || get_dist(clicker, T) > 1)
+		unset_click_ability(clicker, TRUE)
 		return FALSE
 
-
+	T.shadowling_strip_quirks()
 	T.set_species(/datum/species/shadow/shadowling)
 	for(var/datum/action/cooldown/ability in T.actions)
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
 			ability.Remove(T)
-	hive.join_ling(T)
 
 	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим шадоулингом."))
 	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим шадоулингом!"))

@@ -48,22 +48,26 @@
 /obj/item/bodypart/head/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/chest/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
 	bodypart_traits = list(TRAIT_NO_JUMPSUIT)
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/leg/left/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/leg/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
 
 /obj/item/bodypart/arm/left/shadow/shadowling
@@ -80,7 +84,7 @@
 	unarmed_effectiveness = 20
 	unarmed_sharpness = SHARP_EDGED
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
-	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis)
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling.dmi'
 
 /obj/item/bodypart/arm/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
@@ -96,7 +100,7 @@
 	unarmed_effectiveness = 20
 	unarmed_sharpness = SHARP_POINTY
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
-	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis)
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling.dmi'
 
 /obj/item/organ/eyes/shadow/shadowling
 	name = "freezing blue eyes"
@@ -114,3 +118,6 @@
 
 /mob/living/carbon/human
 	var/lower_shadowling = FALSE
+
+/mob/living/carbon/human/proc/shadowling_strip_quirks()
+	cleanse_quirk_datums()

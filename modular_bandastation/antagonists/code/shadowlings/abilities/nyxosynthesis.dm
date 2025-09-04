@@ -40,4 +40,4 @@
 /datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling/on_remove()
 	. = ..()
 	if(applied_speed && owner)
-		owner.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/dark)
+		owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/dark)
