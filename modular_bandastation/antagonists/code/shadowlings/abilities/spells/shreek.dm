@@ -8,11 +8,8 @@
 	var/strong_radius = 5
 	var/weak_radius = 10
 
-	var/scream_sound = 'sound/mobs/humanoids/shadow/shadow_wail.ogg'
-
 /datum/action/cooldown/shadowling/shreek/DoEffect(mob/living/carbon/human/H, atom/_)
-	if(scream_sound)
-		playsound(get_turf(H), scream_sound, 70, TRUE)
+	playsound(get_turf(H), 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg', 70, TRUE)
 	H.visible_message(
 		span_boldwarning("[H] издаёт пронзительный нечеловеческий крик!"),
 		span_userdanger("Вы издаёте пронзительный крик, и тьма рвётся наружу!")
