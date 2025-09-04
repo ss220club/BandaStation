@@ -20,7 +20,7 @@
 			context[SCREENTIP_CONTEXT_LMB] = "Открыть панель"
 		else if ((opened == APC_COVER_OPENED && has_electronics == APC_ELECTRONICS_SECURED) && !(machine_stat & BROKEN))
 			context[SCREENTIP_CONTEXT_LMB] = "Закрыть и заблокировать"
-		else if (machine_stat & BROKEN|(machine_stat & EMAGGED| malfhack))
+		else if (malfhack || (machine_stat & (BROKEN|EMAGGED)))
 			context[SCREENTIP_CONTEXT_LMB] = "Извлечь повреждённую плату"
 		else
 			context[SCREENTIP_CONTEXT_LMB] = "Извлечь плату"
