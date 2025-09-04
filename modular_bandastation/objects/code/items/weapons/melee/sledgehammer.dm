@@ -19,11 +19,16 @@
 	armor_type = /datum/armor/item_sledgehammer
 	tool_behaviour = TOOL_MINING
 	demolition_mod = 4
+	throw_range = 3
+	/// How much damage to do unwielded
 	var/force_unwielded = 10
 	/// How much damage to do wielded
 	var/force_wielded = 20
+	/// How much time it takes to use sledgehammer on wall
 	var/tear_time = 6 SECONDS
+	/// By how much we multiply the time of use when wall is reinforced
 	var/reinforced_multiplier = 3
+	/// How much stamina is taken per use of sledgehammer on wall
 	var/stamina_take = 40
 
 /obj/item/sledgehammer/tactical
@@ -40,7 +45,6 @@
 	toolspeed = 1
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 2)
 	usesound = 'sound/items/tools/crowbar.ogg'
-	throw_range = 3
 	tear_time = 5 SECONDS
 	reinforced_multiplier = 2
 	stamina_take = 30
@@ -82,6 +86,18 @@
 	icon_state = "[base_icon_state]0"
 	return ..()
 
+/obj/item/sledgehammer/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
+	. = ..()
+	if(!iswallturf(target))
+		return .
+
+	if(!HAS_TRAIT(src, TRAIT_WIELDED))
+		to_chat(user, span_warning("Вам нужно взять [src] в обе руки чтобы разрушить стену!"))
+		return .
+
+	sledge_hit(target, user, modifiers)
+	return COMPONENT_CANCEL_ATTACK_CHAIN
+
 /obj/item/sledgehammer/proc/sledge_hit(atom/target, mob/living/user, list/modifiers, do_after_key = "sledgehammer_tearing")
 	if(istype(target, /turf/closed/wall))
 		var/rip_time = (istype(target, /turf/closed/wall/r_wall) ? tear_time * reinforced_multiplier : tear_time) / 3
@@ -100,18 +116,6 @@
 			user.adjustStaminaLoss(stamina_take)
 			user.do_attack_animation(target)
 			target.AddComponent(/datum/component/torn_wall)
-
-/obj/item/sledgehammer/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
-	. = ..()
-	if(!istype(target, /turf/closed/wall))
-		return .
-
-	if(!HAS_TRAIT(src, TRAIT_WIELDED))
-		to_chat(user, span_warning("Вам нужно взять [src] в обе руки чтобы разрушить стену!"))
-		return .
-
-	sledge_hit(target, user, modifiers)
-	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /datum/uplink_item/role_restricted/syndiesledge
 	name = "Syndicate Breaching Sledgehammer"
@@ -133,8 +137,8 @@
 	extra_to_spawn = /obj/item/clothing/head/utility/welding
 
 /obj/item/storage/toolbox/guncase/syndiesledge/PopulateContents()
-	new weapon_to_spawn (src)
-	new extra_to_spawn (src)
+	new weapon_to_spawn(src)
+	new extra_to_spawn(src)
 
 /datum/crafting_recipe/sledgehammer
 	name = "Sledgehammer"
