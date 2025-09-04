@@ -104,7 +104,7 @@
 		"rangedanalyzer",
 		"rtd_loaded",
 		"mech_rcd",
-		"rcd_loaded",
+		// "rcd_loaded", // BANDASTATION REMOVE
 		"rcd_ammo",
 		"weldingmask",
 		"magboots",

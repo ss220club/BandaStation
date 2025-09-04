@@ -140,6 +140,11 @@
  * * [mob][user]- the user
  */
 /obj/item/construction/rcd/proc/can_place(atom/target, list/rcd_results, mob/user)
+	//BANDASTATION ADD START - Anomaly core RCD
+	if(!check_anomaly_core(user))
+		return
+	//BANDASTATION ADD END - Anomaly core RCD
+
 	var/rcd_mode = rcd_results["[RCD_DESIGN_MODE]"]
 	var/atom/movable/rcd_structure = rcd_results["[RCD_DESIGN_PATH]"]
 	/**
@@ -236,6 +241,11 @@
  * * [mob][user]- the user building this structure
  */
 /obj/item/construction/rcd/proc/rcd_create(atom/target, mob/user)
+	//BANDASTATION ADD START - Anomaly core RCD
+	if(!check_anomaly_core(user))
+		return
+	//BANDASTATION ADD END - Anomaly core RCD
+
 	if(isopenturf(target))
 		var/turf/open/open = target
 		if(!open.CanBuildHere())
@@ -326,6 +336,11 @@
 	return owner || ..()
 
 /obj/item/construction/rcd/ui_interact(mob/user, datum/tgui/ui)
+	//BANDASTATION ADD START - Anomaly core RCD
+	if(!check_anomaly_core(user))
+		return
+	//BANDASTATION ADD END - Anomaly core RCD
+
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "RapidConstructionDevice", name)
