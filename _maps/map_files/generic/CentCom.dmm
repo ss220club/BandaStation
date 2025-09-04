@@ -1047,7 +1047,7 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/engine)
 "aeC" = (
-/obj/machinery/holopad/secure,
+/obj/structure/statue/gold/galactic_map,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/cabin/soo)
 "aeG" = (
@@ -9355,7 +9355,7 @@
 "aOl" = (
 /obj/structure/table/wood,
 /obj/machinery/fax/admin,
-/obj/structure/sign/painting/eldritch/weeping{
+/obj/structure/sign/painting/library_private{
 	pixel_x = -32
 	},
 /turf/open/floor/wood,
@@ -20263,6 +20263,13 @@
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/planetary_port/club)
+"svc" = (
+/obj/structure/railing/platform{
+	dir = 1
+	},
+/obj/structure/statue/gold/galactic_map,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/courtroom)
 "svB" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
@@ -21184,6 +21191,14 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/srt/brief_srt)
+"upQ" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/machinery/holopad/secure,
+/turf/open/floor/wood/large,
+/area/centcom/central_command_areas/cabin/soo)
 "uru" = (
 /obj/structure/lattice/catwalk/siding{
 	color = "#A1662F"
@@ -75705,7 +75720,7 @@ efi
 jIP
 kCG
 hNV
-coR
+svc
 nrA
 bPN
 wBm
@@ -80605,7 +80620,7 @@ xGt
 kao
 aIU
 alI
-aTi
+upQ
 aeC
 aIU
 aGy

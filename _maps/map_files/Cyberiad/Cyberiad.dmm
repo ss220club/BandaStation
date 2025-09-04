@@ -2652,6 +2652,7 @@
 /obj/structure/railing/platform{
 	dir = 1
 	},
+/obj/structure/statue/gold/galactic_map,
 /turf/open/floor/iron/half,
 /area/station/commons/dorms)
 "aHB" = (
