@@ -4,6 +4,7 @@
 	show_in_antagpanel = TRUE
 	preview_outfit = null
 	pref_flag = ROLE_SHADOWLING
+	stinger_sound = 'modular_bandastation/antagonists/sound/shadowlings/shadowling_gain.ogg'
 
 /datum/antagonist/shadowling/greet(mob/user, tell_objectives = TRUE)
 	..()
