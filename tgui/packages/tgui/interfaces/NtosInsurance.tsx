@@ -46,7 +46,7 @@ const InsuranceContent = () => {
             <LabeledList.Item label="Current">{insurance_current}</LabeledList.Item>
             <LabeledList.Item label="Desired">{insurance_desired}</LabeledList.Item>
             <LabeledList.Item label="Payer Account">
-              {payer_account_id ?? '—'}
+              {payer_account_id && payer_account_id > 0 ? payer_account_id : '—'}
             </LabeledList.Item>
           </LabeledList>
         </Section>
@@ -69,4 +69,3 @@ const InsuranceContent = () => {
     </Stack>
   );
 };
-

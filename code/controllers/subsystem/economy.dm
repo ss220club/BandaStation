@@ -177,37 +177,45 @@ SUBSYSTEM_DEF(economy)
 	if(!account)
 		return
 
+	// Validate desired tier
 	var/desired = isnull(account.insurance_desired) ? INSURANCE_NONE : account.insurance_desired
-	var/final_tier = desired
+	if(desired != INSURANCE_NONE && desired != INSURANCE_STANDARD && desired != INSURANCE_PREMIUM)
+		desired = INSURANCE_NONE
 
-	var/cost = INSURANCE_TIER_TO_COST(final_tier)
-	if(cost > 0 && !account.has_money(cost))
-		if(final_tier == INSURANCE_PREMIUM)
-			if(account.has_money(INSURANCE_COST_STANDARD))
-				final_tier = INSURANCE_STANDARD
+	var/final_tier = INSURANCE_NONE
+	var/success = FALSE
+
+	// Build attempt order: desired, then downgrade to standard if premium fails
+	var/list/tiers_to_try = list()
+	if(desired == INSURANCE_PREMIUM)
+		tiers_to_try += INSURANCE_PREMIUM
+		tiers_to_try += INSURANCE_STANDARD
+	else if(desired == INSURANCE_STANDARD)
+		tiers_to_try += INSURANCE_STANDARD
+	// desired == NONE -> no attempts
+
+	// Attempt to charge for each tier, rolling back on credit failure
+	for(var/tier in tiers_to_try)
+		var/cost = INSURANCE_TIER_TO_COST(tier)
+		if(cost <= 0)
+			continue
+		if(account.adjust_money(-cost, "Insurance Premium"))
+			var/datum/bank_account/department/med = get_dep_account(ACCOUNT_MED)
+			if(med && med.adjust_money(cost, "Insurance Premium"))
+				final_tier = tier
+				success = TRUE
+				break
 			else
-				final_tier = INSURANCE_NONE
-		else if(final_tier == INSURANCE_STANDARD)
-			final_tier = INSURANCE_NONE
-		cost = INSURANCE_TIER_TO_COST(final_tier)
+				// Roll back debit if MED account missing or credit failed
+				account.adjust_money(cost, "Insurance Premium Refund")
+		// If debit failed, loop will try next (downgraded) tier
 
-	// Update crew record if present
+	// Update crew record after final result
 	var/datum/record/crew/rec = find_record(account.account_holder)
 	if(rec)
 		rec.insurance_desired = desired
-		rec.insurance_current = final_tier
-		rec.insurance_payer_account_id = account.account_id || 0
-
-	// Charge and credit department if applicable
-	if(cost > 0)
-		if(account.adjust_money(-cost, "Insurance Premium"))
-			var/datum/bank_account/department/med = get_dep_account(ACCOUNT_MED)
-			if(med)
-				med.adjust_money(cost, "Insurance Premium")
-		else
-			// Failed to charge (race condition on balance). Downgrade to none in record
-			if(rec)
-				rec.insurance_current = INSURANCE_NONE
+		rec.insurance_current = success ? final_tier : INSURANCE_NONE
+		rec.insurance_payer_account_id = isnull(account.account_id) ? 0 : account.account_id
 
 /**
  * Updates the the inflation_value, effecting newscaster alerts and the mail system.

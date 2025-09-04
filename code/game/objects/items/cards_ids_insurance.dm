@@ -33,8 +33,7 @@
 		var/datum/record/crew/rec = find_record(H.real_name)
 		if(rec)
 			rec.insurance_desired = selected_tier
-			rec.insurance_payer_account_id = registered_account.account_id || 0
+			rec.insurance_payer_account_id = isnull(registered_account.account_id) ? 0 : registered_account.account_id
 
 	to_chat(user, span_notice("Insurance set to [INSURANCE_TIER_TO_TEXT(selected_tier)]."))
 	return TRUE
-

@@ -32,28 +32,36 @@
 	data["name"] = current_user.account_holder
 	// pull crew record by account holder name
 	var/datum/record/crew/rec = find_record(current_user.account_holder)
-	data["insurance_current"] = rec ? INSURANCE_TIER_TO_TEXT(rec.insurance_current) : "None"
+	data["insurance_current"] = rec ? INSURANCE_TIER_TO_TEXT(rec.insurance_current) : INSURANCE_TIER_TO_TEXT(INSURANCE_NONE)
 	data["insurance_desired"] = INSURANCE_TIER_TO_TEXT(current_user.insurance_desired)
 	data["payer_account_id"] = current_user.account_id
 	data["is_dept"] = IS_DEPARTMENTAL_ACCOUNT(current_user)
 	return data
+
 
 /datum/computer_file/program/nt_insurance/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
 	if(action == "set_tier")
-		if(IS_DEPARTMENTAL_ACCOUNT(current_user))
+		// Refresh current user from inserted ID and validate
+		var/datum/bank_account/ba = computer.stored_id?.registered_account || null
+		if(!ba)
 			return TRUE
-		var/tier = clamp(text2num(params["tier"]), INSURANCE_NONE, INSURANCE_PREMIUM)
-		if(isnull(tier))
+		if(IS_DEPARTMENTAL_ACCOUNT(ba))
 			return TRUE
+		// Parse, round and clamp tier safely
+		var/raw_tier = text2num(params["tier"]) // may be null
+		if(isnull(raw_tier))
+			return TRUE
+		var/tier = clamp(round(raw_tier), INSURANCE_NONE, INSURANCE_PREMIUM)
+		current_user = ba
 		current_user.insurance_desired = tier
 		// Try to update matching record's desired/payer
 		var/datum/record/crew/rec = find_record(current_user.account_holder)
 		if(rec)
 			rec.insurance_desired = tier
-			rec.insurance_payer_account_id = current_user.account_id || 0
+			rec.insurance_payer_account_id = isnull(current_user.account_id) ? 0 : current_user.account_id
 		SStgui.update_uis(src)
 		return TRUE
 
@@ -71,7 +79,8 @@
 
 /obj/item/circuit_component/mod_program/nt_insurance/input_received(datum/port/port)
 	var/datum/computer_file/program/nt_insurance/program = associated_program
+	if(!program)
+		return
 	if(port == tier_port)
 		program.ui_act("set_tier", list("tier" = round(tier_port.value)))
 		changed.set_output(COMPONENT_SIGNAL)
-
