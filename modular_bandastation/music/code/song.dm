@@ -4,8 +4,8 @@
 /datum/song
 	var/auto_unison_enabled = FALSE
 	var/last_unison_check = 0
-	var/multi_sync_enabled = FALSE
 	var/list/multi_tracks = list()
+	var/multi_sync_enabled = FALSE
 	var/ignore_play_checks = FALSE
 
 /datum/song/proc/ds_per_beat()
@@ -37,9 +37,9 @@
 	if(!istext(target_id) || !length(target_id))
 		return out
 	for(var/datum/song/S as anything in SSinstruments.songs)
-		if(S == src) continue
-		if(S.id != target_id) continue
-		if(require_in_view && !(S.parent in view(parent)))
+		if(S == src)
+			continue
+		if(S.id != target_id)
 			continue
 		out += S
 	return out
@@ -48,7 +48,8 @@
 	if(!multi_sync_enabled)
 		var/list/targets = songs_by_id(id, TRUE)
 		for(var/datum/song/other in targets)
-			if(other.playing) continue
+			if(other.playing)
+				continue
 			transmit_song_to(other)
 			other.force_start_playing()
 		return
@@ -57,12 +58,14 @@
 		return
 	for(var/list/T in multi_tracks)
 		var/target = T["target_id"]
-		if(!istext(target) || !length(target)) continue
+		if(!istext(target) || !length(target))
+			continue
 		var/delay_beats = max(0, round(T["delay_beats"] || 0))
 		var/delay_ds = delay_beats * ds_per_beat()
 		var/list/targets2 = songs_by_id(target, TRUE)
 		for(var/datum/song/other2 in targets2)
-			if(other2.playing) continue
+			if(other2.playing)
+				continue
 			addtimer(CALLBACK(other2, /datum/song/proc/force_start_playing), delay_ds)
 
 /datum/song/proc/try_auto_unison_once()
