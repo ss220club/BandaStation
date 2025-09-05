@@ -170,7 +170,6 @@
 /area/awaymission/inka/inside
 	name = "Деревня"
 	icon_state = "awaycontent4"
-	requires_power = FALSE
 	static_lighting = TRUE
 	base_lighting_alpha = 0
 
@@ -181,3 +180,7 @@
 /area/awaymission/inka/inside/base
 	name = "Аванпост \"Воздаяние\""
 	icon_state = "awaycontent6"
+
+/area/awaymission/inka/inside/shields
+	name = "Аванпост \"Воздаяние\""
+	icon_state = "awaycontent8"

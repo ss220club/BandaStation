@@ -152,23 +152,6 @@
 /obj/effect/particle_effect/fluid/smoke/quick/swamp
 	color = COLOR_ASSEMBLY_GREEN
 
-// Inka Planet
-/*
-/atom/movable/screen/inka
-	name = "Инка"
-	desc = "Небольшая болотистая планета."
-	icon = 'modular_bandastation/aesthetics/flora/icons/planet.dmi'
-	icon_state = "inka"
-	plane = RENDER_PLANE_TRANSPARENT
-	var/matrix/scale = matrix(0, 0, 0, 0, 0, 0)
-	var/appearance_time = 1 SECONDS
-
-/atom/movable/screen/inka/proc/planet_animation()
-	var/matrix/mid_scale = matrix(0.5, 0, 0, 0, 0.5, 0)
-
-	animate(src, transform = mid_scale, time = appearance_time, easing = CUBIC_EASING | EASE_OUT, flags = ANIMATION_END_NOW)
-*/
-
 /atom/movable/screen/inka
 	name = "Инка"
 	desc = "Небольшая болотистая планета."
@@ -178,6 +161,10 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	screen_loc = "CENTER"
 	var/appearance_time = 2 SECONDS
+	var/current_scale = 1.0
+	var/current_tx = 0
+	var/current_ty = 0
+	var/half_size = 512
 
 /atom/movable/screen/inka/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
@@ -185,22 +172,34 @@
 		planet_animation()
 
 /atom/movable/screen/inka/proc/planet_animation()
-	var/matrix/start_matrix = matrix()
-	start_matrix.Scale(0, 0)
-	start_matrix.Translate(-200, -200)
-	transform = start_matrix
+	var/matrix/start = matrix()
+	start.Translate(-half_size, -half_size)
+	start.Scale(0, 0)
+	start.Translate(half_size, half_size)
+	transform = start
 
-	var/matrix/final_matrix = matrix()
-	final_matrix.Scale(0.8, 0.8)
-	final_matrix.Translate(-370, -420)
+	var/matrix/orbit = matrix()
+	orbit.Translate(-half_size, -half_size)
+	orbit.Scale(0.8, 0.8)
+	orbit.Translate(half_size, half_size)
+	orbit.Translate(-370, -420)
 
 	playsound(src,'modular_bandastation/aesthetics/flora/audio/hyperspace.ogg', 75, extrarange = 20, pressure_affected = FALSE, ignore_walls = TRUE )
-	animate(src, transform = final_matrix, time = appearance_time, easing = CUBIC_EASING | EASE_OUT, flags = ANIMATION_END_NOW)
-/*
-/obj/structure/flora/tree/stump/snowless_pine
-    icon = 'modular_bandastation/aesthetics/flora/icons/pinetrees.dmi'
+	animate(src, transform = orbit, time = appearance_time, easing = CUBIC_EASING | EASE_OUT, flags = ANIMATION_END_NOW)
 
-/obj/structure/flora/tree/snowless_pine/harvest(mob/living/user, product_amount_multiplier)
-	. = ..()
-    var/obj/structure/flora/tree/stump/snowless_pine/new_stump = new(my_turf)
-*/
+	current_scale = 0.8
+	current_tx = -370
+	current_ty = -420
+
+/atom/movable/screen/inka/proc/landing_animation(duration = 10 SECONDS, target_scale = 2.5, extra_left = 400, vertical_offset = 0)
+	var/matrix/final = matrix()
+	final.Translate(-half_size, -half_size)
+	final.Scale(target_scale, target_scale)
+	final.Translate(half_size, half_size)
+	final.Translate(-extra_left, vertical_offset)
+
+	animate(src, transform = final, time = duration, easing = CUBIC_EASING | EASE_IN, flags = ANIMATION_END_NOW)
+
+	current_scale = target_scale
+	current_tx = -extra_left
+	current_ty = vertical_offset
