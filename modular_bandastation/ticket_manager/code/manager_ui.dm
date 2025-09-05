@@ -32,12 +32,12 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 /datum/ticket_manager/ui_static_data(mob/user)
 	var/list/data = list()
-	var/client/C = user.client
+	var/client/user_client = user.client
 	data["emojis"] = emojis
-	data["userKey"] = C.key
-	data["isAdmin"] = check_rights_for(C, R_ADMIN)
+	data["userKey"] = user_client.key
+	data["isAdmin"] = check_rights_for(user_client, R_ADMIN)
 	data["isMentor"] = null // NEEDED MENTOR SYSTEM
-	data["ticketToOpen"] = C.ticket_to_open
+	data["ticketToOpen"] = user_client.ticket_to_open
 	data["maxMessageLength"] = MAX_MESSAGE_LEN
 	data["replyCooldown"] = TICKET_REPLY_COOLDOWN
 	return data
@@ -48,7 +48,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 		return
 
 	var/client/user = ui.user.client
-	var/ticket_id = params["ticketID"]
+	var/ticket_id = params["ticketId"]
 	if(!ticket_id)
 		CRASH("Called ticket_manager ui_act() without a ticket number!")
 

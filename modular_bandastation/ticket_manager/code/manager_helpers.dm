@@ -17,35 +17,36 @@
 		return FALSE
 
 	if(!user.holder && !COOLDOWN_FINISHED(user, ticket_response))
-		to_chat(user, span_danger("Слишком быстро! Разрешено писать 1 сообщение в [TICKET_REPLY_COOLDOWN / 10] секунд."), MESSAGE_TYPE_ADMINPM)
+		to_chat(user, span_danger("Слишком быстро! Разрешено писать 1 сообщение в [TICKET_REPLY_COOLDOWN / 1 SECONDS] секунд."), MESSAGE_TYPE_ADMINPM)
 		return FALSE
 	return TRUE
 
 /// Link admin to ticket.
 /datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket)
 	if(!admin || !needed_ticket)
-		CRASH("Tryed to link admin to ticket with invalid arguments!")
+		CRASH("Tried to link admin to ticket with invalid arguments!")
 
 	if(!needed_ticket.linked_admin)
 		needed_ticket.linked_admin = admin.persistent_client
-		deltimer(needed_ticket.ticket_autoclose)
+		deltimer(needed_ticket.ticket_autoclose_timer_id)
 		message_admins("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 		log_admin("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
 
 /datum/ticket_manager/proc/unlink_admin_from_ticket(client/admin, datum/help_ticket/needed_ticket)
 	if(!admin || !needed_ticket)
-		CRASH("Tryed to unlink admin from ticket with invalid arguments!")
+		CRASH("Tried to unlink admin from ticket with invalid arguments!")
 
 	if(!needed_ticket.linked_admin)
 		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], к которому не привязан администратор.")
-		CRASH("Tryed to unlink admin from ticket without linked admin!")
+		CRASH("Tried to unlink admin from ticket without linked admin!")
 
 	if(!admin.holder)
 		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], не имея прав администратора!")
-		CRASH("Tryed to unlink admin from ticket without a required rights!")
+		CRASH("Tried to unlink admin from ticket without a required rights!")
 
+	var/autoclose_delay = TICKET_AUTOCLOSE_TIMER / 2
 	needed_ticket.linked_admin = null
-	needed_ticket.ticket_autoclose = addtimer(CALLBACK(src, PROC_REF(autoclose_ticket), needed_ticket), TICKET_AUTOCLOSE_TIMER / 2, TIMER_STOPPABLE)
+	needed_ticket.ticket_autoclose_timer_id = addtimer(CALLBACK(src, PROC_REF(autoclose_ticket), needed_ticket), autoclose_delay, TIMER_STOPPABLE)
 	to_chat(GLOB.admins, span_admin("[key_name_admin(admin)] отказался от тикета [TICKET_OPEN_LINK(needed_ticket.id, "#[needed_ticket.id]")]."), MESSAGE_TYPE_ADMINPM)
 	log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
 	SStgui.update_uis(src)
@@ -55,13 +56,13 @@
 		return
 
 	to_chat(initiator,
-		custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора. Если никто не ответит на ваш тикет, он автоматически закроется через [TICKET_AUTOCLOSE_TIMER / 2 / 10] секунд.")),
+		custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора. Если никто не ответит на ваш тикет, он автоматически закроется через [autoclose_delay / 1 SECONDS] секунд.")),
 		MESSAGE_TYPE_ADMINPM)
 
 /// Adds user to ticket writers when he starts typing. Used for type indicator in ticket chat UI
 /datum/ticket_manager/proc/add_to_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
 	if(!writer || !needed_ticket)
-		CRASH("Tryed to add writer to ticket with invalid arguments!")
+		CRASH("Tried to add writer to ticket with invalid arguments!")
 
 	if(writer.holder && !needed_ticket.linked_admin)
 		message_admins("[key_name_admin(writer)] начал отвечать на тикет #[needed_ticket.id].")
@@ -74,7 +75,7 @@
 /// Removes user from ticket writers when he stops typing or sends message. Used for type indicator in ticket chat UI
 /datum/ticket_manager/proc/remove_from_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
 	if(!writer || !needed_ticket)
-		CRASH("Tryed to remove writer to ticket with invalid arguments!")
+		CRASH("Tried to remove writer to ticket with invalid arguments!")
 
 	if(writer.holder && !needed_ticket.linked_admin)
 		message_admins("[key_name_admin(writer)] перестал отвечать на тикет #[needed_ticket.id].")
@@ -148,8 +149,8 @@
 				to_chat(admin, span_danger("[key_name(initiator.ckey)] уже имеет открытый тикет!"), MESSAGE_TYPE_ADMINPM)
 			return
 
-		if(needed_ticket.ticket_autoclose)
-			deltimer(needed_ticket.ticket_autoclose)
+		if(needed_ticket.ticket_autoclose_timer_id)
+			deltimer(needed_ticket.ticket_autoclose_timer_id)
 
 		initiator.current_help_ticket = needed_ticket
 		needed_ticket.closed_at = null
@@ -170,7 +171,7 @@
 
 /datum/ticket_manager/proc/autoclose_ticket(datum/help_ticket/needed_ticket)
 	if(!needed_ticket)
-		CRASH("Tryed to autoclose null ticket!")
+		CRASH("Tried to autoclose null ticket!")
 
 	set_ticket_state(null, needed_ticket, TICKET_CLOSED)
 

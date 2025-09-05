@@ -25,13 +25,8 @@
 		stack_trace("[key_name(src)] tried to send an admin PM without a holder.")
 		return
 
-	var/client/subject
-	if(istype(whom, /client))
-		subject = whom
-	else
-		subject = disambiguate_client(whom)
-
-	if(!subject || !istype(subject, /client))
+	var/client/subject = disambiguate_client(whom)
+	if(!istype(subject))
 		return
 
 	if(GLOB.ticket_manager.open_existing_ticket(src, subject))
@@ -45,7 +40,7 @@
 	if(GLOB.ticket_manager.open_existing_ticket(src, subject, message_to_send))
 		return
 
-	var/datum/help_ticket/subject_ticket = new /datum/help_ticket(subject, src, message_to_send, TICKET_TYPE_ADMIN)
+	var/datum/help_ticket/subject_ticket = new(subject, src, message_to_send, TICKET_TYPE_ADMIN)
 	var/log_body = "[key_name(src)] написал личное сообщение [key_name_admin(whom)]."
 	message_admins("[log_body] Создан тикет [TICKET_OPEN_LINK(subject_ticket.id, "#[subject_ticket.id]")].")
 	log_admin(log_body)

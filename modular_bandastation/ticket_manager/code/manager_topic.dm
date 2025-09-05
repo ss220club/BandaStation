@@ -59,7 +59,6 @@
 /datum/ticket_manager/proc/stat_entry()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	var/list/stat_info = list()
 	var/list/active_tickets = list()
 	var/list/other_tickets = list()
 	for(var/ticket_id, ticket_datum in all_tickets)
@@ -69,10 +68,18 @@
 		else
 			other_tickets += ticket
 
-	stat_info[++stat_info.len] = list("Активные тикеты:", "[length(active_tickets)]", null, "[GLOB.ticket_manager_ref];open_ticket_manager=1")
-	for(var/datum/help_ticket/ticket as anything in active_tickets)
-		stat_info[++stat_info.len] = list("Тикет #[ticket.id]:", "[ticket.stat_name]", null, "[GLOB.ticket_manager_ref];ticket_id=[ticket.id];open_ticket=[ticket.id]")
+	var/list/stat_info = list()
+	UNTYPED_LIST_ADD(stat_info, \
+		list("Активные тикеты:", "[length(active_tickets)]", null, "[GLOB.ticket_manager_ref];open_ticket_manager=1") \
+	)
 
-	stat_info[++stat_info.len] = list("Закрытые тикеты:", "[length(other_tickets)]", null, "[GLOB.ticket_manager_ref];open_ticket_manager=1")
+	for(var/datum/help_ticket/ticket as anything in active_tickets)
+		UNTYPED_LIST_ADD(stat_info, \
+			list("Тикет #[ticket.id]:", "[ticket.stat_name]", null, "[GLOB.ticket_manager_ref];ticket_id=[ticket.id];open_ticket=[ticket.id]") \
+		)
+
+	UNTYPED_LIST_ADD(stat_info, \
+		list("Закрытые тикеты:", "[length(other_tickets)]", null, "[GLOB.ticket_manager_ref];open_ticket_manager=1") \
+	)
 	return stat_info
 

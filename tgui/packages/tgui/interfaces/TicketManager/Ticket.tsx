@@ -1,11 +1,11 @@
-import { Dispatch } from 'react';
+import type { Dispatch } from 'react';
 import { Button, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
 import { TICKET_STATE } from './constants';
 import { toLocalTime } from './helpers';
-import { TicketProps } from './types';
+import type { TicketProps } from './types';
 
 export function Ticket(
   props: TicketProps & { setSelectedTicket: Dispatch<number> },
@@ -46,11 +46,11 @@ export function Ticket(
 
 export function TicketInteractions(props: {
   linkedAdmin: string;
-  ticketID: number;
+  ticketId: number;
   ticketState: TICKET_STATE;
 }) {
   const { act } = useBackend();
-  const { linkedAdmin, ticketID, ticketState } = props;
+  const { linkedAdmin, ticketId, ticketState } = props;
 
   return (
     <Stack fontSize={1}>
@@ -59,7 +59,7 @@ export function TicketInteractions(props: {
           <Button
             icon="eye"
             tooltip="Открыть закрытый/решённый ранее тикет"
-            onClick={() => act('reopen', { ticketID: ticketID })}
+            onClick={() => act('reopen', { ticketId: ticketId })}
           />
         </Stack.Item>
       ) : (
@@ -69,7 +69,7 @@ export function TicketInteractions(props: {
               icon="check"
               color="good"
               tooltip="Пометить тикет как решённый"
-              onClick={() => act('resolve', { ticketID: ticketID })}
+              onClick={() => act('resolve', { ticketId: ticketId })}
             />
           </Stack.Item>
           <Stack.Item>
@@ -77,7 +77,7 @@ export function TicketInteractions(props: {
               icon="trash-can"
               color="bad"
               tooltip="Закрыть тикет"
-              onClick={() => act('close', { ticketID: ticketID })}
+              onClick={() => act('close', { ticketId: ticketId })}
             />
           </Stack.Item>
           {!!linkedAdmin && (
@@ -86,7 +86,7 @@ export function TicketInteractions(props: {
                 icon="link-slash"
                 color="gray"
                 tooltip="Отказаться от тикета"
-                onClick={() => act('unlink', { ticketID: ticketID })}
+                onClick={() => act('unlink', { ticketId: ticketId })}
               />
             </Stack.Item>
           )}
@@ -95,7 +95,7 @@ export function TicketInteractions(props: {
             <Button
               icon="exchange"
               tooltip="Перенаправить тикет менторам"
-              onClick={() => act('convert', { ticketID: ticketID })}
+              onClick={() => act('convert', { ticketId: ticketId })}
             />
           </Stack.Item>
           */}
@@ -105,16 +105,16 @@ export function TicketInteractions(props: {
   );
 }
 
-export function TicketAdminInteractions(props: { ticketID: number }) {
+export function TicketAdminInteractions(props: { ticketId: number }) {
   const { act } = useBackend();
-  const { ticketID } = props;
+  const { ticketId } = props;
 
   return (
     <Stack fill wrap textAlign="center">
       <Stack.Item grow>
         <Button
           fluid
-          onClick={() => act('view_variables', { ticketID: ticketID })}
+          onClick={() => act('view_variables', { ticketId: ticketId })}
         >
           View Variables
         </Button>
@@ -122,7 +122,7 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
       <Stack.Item grow>
         <Button
           fluid
-          onClick={() => act('traitor_panel', { ticketID: ticketID })}
+          onClick={() => act('traitor_panel', { ticketId: ticketId })}
         >
           Traitor Panel
         </Button>
@@ -130,7 +130,7 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
       <Stack.Item grow>
         <Button
           fluid
-          onClick={() => act('player_panel', { ticketID: ticketID })}
+          onClick={() => act('player_panel', { ticketId: ticketId })}
         >
           Player Panel
         </Button>
@@ -140,7 +140,7 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
           color="pink"
           icon="exclamation"
           tooltip="Вывести вообщение на экран владельца тикета"
-          onClick={() => act('popup', { ticketID: ticketID })}
+          onClick={() => act('popup', { ticketId: ticketId })}
         />
       </Stack.Item>
       <Stack.Item>
@@ -148,7 +148,7 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
           color="purple"
           icon="phone"
           tooltip="Голос в голове"
-          onClick={() => act('subtlepm', { ticketID: ticketID })}
+          onClick={() => act('subtlepm', { ticketId: ticketId })}
         />
       </Stack.Item>
       <Stack.Item>
@@ -156,7 +156,7 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
           color="red"
           icon="hand-fist"
           tooltip="Наказать"
-          onClick={() => act('smite', { ticketID: ticketID })}
+          onClick={() => act('smite', { ticketId: ticketId })}
         />
       </Stack.Item>
       <Stack.Item>
@@ -164,7 +164,7 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
           color="blue"
           icon="scroll"
           tooltip="Логи"
-          onClick={() => act('logs', { ticketID: ticketID })}
+          onClick={() => act('logs', { ticketId: ticketId })}
         />
       </Stack.Item>
       <Stack.Item>
@@ -172,7 +172,7 @@ export function TicketAdminInteractions(props: { ticketID: number }) {
           color="grey"
           icon="ghost"
           tooltip="Наблюдать"
-          onClick={() => act('follow', { ticketID: ticketID })}
+          onClick={() => act('follow', { ticketId: ticketId })}
         />
       </Stack.Item>
     </Stack>

@@ -17,6 +17,10 @@
 	var/initiator
 	/// Initiator key. More stable
 	var/initiator_key
+	/// Has the admin replied to this ticket yet?
+	var/admin_replied = FALSE
+	/// ID for the autoclose timer
+	var/ticket_autoclose_timer_id
 	/// It's the person who ahelped/was bwoinked
 	var/datum/persistent_client/initiator_client
 	/// It's admin who linked to current ticket
@@ -25,20 +29,16 @@
 	var/list/writers = list()
 	/// Collection of all ticket messages
 	var/list/messages
-	/// Has the admin replied to this ticket yet?
-	var/admin_replied = FALSE
-	/// ID for the autoclose timer
-	var/ticket_autoclose
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
 
 /datum/help_ticket/New(client/creator, client/admin, message, new_type)
 	if(!message || !creator || !creator.mob)
 		qdel(src)
-		return
+		CRASH("Tried to create a ticket with invalid arguments!")
 
-	stat_name = sanitize(trim(message, 100))
-	if(length(message) > 100)
+	stat_name = sanitize(trim(message, TICKET_STAT_PANEL_MESSAGE_MAX_LENGHT))
+	if(length(message) > TICKET_STAT_PANEL_MESSAGE_MAX_LENGHT)
 		stat_name += "..."
 
 	id = ++ticket_counter
@@ -69,7 +69,7 @@
 	else
 		send_creation_message(creator, message, ticket_type)
 
-	ticket_autoclose = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
+	ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 	SSblackbox.LogAhelp(id, "Ticket Opened", message, null, initiator_key)
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator

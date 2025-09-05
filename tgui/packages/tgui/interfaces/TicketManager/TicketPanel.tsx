@@ -9,7 +9,7 @@ import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { TicketMessage } from './TicketMessage';
 import { TicketPanelEmbed } from './TicketPanelEmbed';
 import { TicketPanelEmoji } from './TicketPanelEmoji';
-import { ManagerData } from './types';
+import type { ManagerData } from './types';
 
 export function TicketPanel(props) {
   const { act, data } = useBackend<ManagerData>();
@@ -44,7 +44,7 @@ export function TicketPanel(props) {
 
   function handleTyping() {
     if (!isWritingRef.current) {
-      act('start_writing', { ticketID: number });
+      act('start_writing', { ticketId: number });
       isWritingRef.current = true;
     }
 
@@ -53,7 +53,7 @@ export function TicketPanel(props) {
     }
 
     typingTimeoutRef.current = setTimeout(() => {
-      act('stop_writing', { ticketID: number });
+      act('stop_writing', { ticketId: number });
       isWritingRef.current = false;
     }, TYPING_TIMEOUT);
   }
@@ -67,7 +67,7 @@ export function TicketPanel(props) {
       clearTimeout(typingTimeoutRef.current);
     }
 
-    act('reply', { ticketID: number, message: value });
+    act('reply', { ticketId: number, message: value });
     setInputMessage('');
   }
 
@@ -136,7 +136,7 @@ export function TicketPanel(props) {
                 <Stack.Item>
                   <TicketInteractions
                     linkedAdmin={linkedAdmin}
-                    ticketID={number}
+                    ticketId={number}
                     ticketState={state}
                   />
                 </Stack.Item>
@@ -144,7 +144,7 @@ export function TicketPanel(props) {
             </Stack>
           }
         >
-          {!!isAdmin && <TicketAdminInteractions ticketID={number} />}
+          {!!isAdmin && <TicketAdminInteractions ticketId={number} />}
         </Section>
       </Stack.Item>
       {!!isAdmin && <Stack.Divider />}
