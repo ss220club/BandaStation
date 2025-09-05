@@ -5,7 +5,7 @@
 	var/auto_unison_enabled = FALSE
 	var/last_unison_check = 0
 	var/multi_sync_enabled = FALSE
-	var/list/multi_tracks = list() // list(list("target_id"=text, "delay_beats"=num))
+	var/list/multi_tracks = list()
 	var/ignore_play_checks = FALSE
 
 /datum/song/proc/ds_per_beat()
@@ -44,7 +44,6 @@
 		out += S
 	return out
 
-/// override
 /datum/song/sync_play()
 	if(!multi_sync_enabled)
 		var/list/targets = songs_by_id(id, TRUE)
@@ -66,7 +65,6 @@
 			if(other2.playing) continue
 			addtimer(CALLBACK(other2, /datum/song/proc/force_start_playing), delay_ds)
 
-/// override
 /datum/song/proc/try_auto_unison_once()
 	if(playing) return
 	var/turf/myturf = get_turf(parent); if(!myturf) return
@@ -86,7 +84,6 @@
 	elapsed_delay = 0
 	delay_by = 0
 
-/// override
 /datum/song/handheld/should_stop_playing(atom/player)
 	if(ignore_play_checks)
 		return NONE
@@ -96,7 +93,6 @@
 	var/obj/item/instrument/I = parent
 	return I.can_play(player) ? NONE : STOP_PLAYING
 
-/// override
 /datum/song/stationary/should_stop_playing(atom/player)
 	if(ignore_play_checks)
 		return NONE
@@ -106,14 +102,12 @@
 	var/obj/structure/musician/M = parent
 	return M.can_play(player) ? NONE : STOP_PLAYING
 
-/// override
 /datum/song/stop_playing(finished = FALSE)
 	ignore_play_checks = FALSE
 	..()
 	if(auto_unison_enabled)
 		START_PROCESSING(SSinstruments, src)
 
-/// override
 /datum/song/process(wait)
 	if(playing)
 		return ..()
@@ -124,7 +118,6 @@
 		return
 	return PROCESS_KILL
 
-/// override
 /datum/song/ui_data(mob/user)
 	var/list/data = ..()
 	data["auto_unison_enabled"] = auto_unison_enabled
@@ -136,47 +129,42 @@
 	data["multi_tracks"] = out
 	return data
 
-/// override
 /datum/song/ui_act(action, list/params)
-    // СНАЧАЛА наши экшены
-    switch(action)
-        if("toggle_auto_unison")
-            auto_unison_enabled = !auto_unison_enabled
-            if(auto_unison_enabled)
-                START_PROCESSING(SSinstruments, src)
-            return TRUE
-        if("toggle_multi_sync")
-            multi_sync_enabled = !multi_sync_enabled
-            return TRUE
-        if("ms_add")
-            multi_tracks += list(list("target_id"=null, "delay_beats"=0))
-            return TRUE
-        if("ms_del")
-            var/idx = max(1, round(text2num(params["idx"])))
-            if(idx <= multi_tracks.len)
-                multi_tracks.Cut(idx, idx+1)
-            return TRUE
-        if("ms_set")
-            var/idx2 = max(1, round(text2num(params["idx"])))
-            if(idx2 > multi_tracks.len) return FALSE
-            var/list/T = multi_tracks[idx2]
-            var/field = "[params["field"]]"
-            if(field == "target_id")
-                var/t = isnull(params["value"]) ? "" : "[params["value"]]"
-                T["target_id"] = length(t) ? t : null
-                return TRUE
-            if(field == "delay_beats")
-                T["delay_beats"] = max(0, round(text2num(params["value"])))
-                return TRUE
-            return FALSE
+	switch(action)
+		if("toggle_auto_unison")
+			auto_unison_enabled = !auto_unison_enabled
+			if(auto_unison_enabled)
+				START_PROCESSING(SSinstruments, src)
+			return TRUE
+		if("toggle_multi_sync")
+			multi_sync_enabled = !multi_sync_enabled
+			return TRUE
+		if("ms_add")
+			multi_tracks += list(list("target_id"=null, "delay_beats"=0))
+			return TRUE
+		if("ms_del")
+			var/idx = max(1, round(text2num(params["idx"])))
+			if(idx <= multi_tracks.len)
+				multi_tracks.Cut(idx, idx+1)
+			return TRUE
+		if("ms_set")
+			var/idx2 = max(1, round(text2num(params["idx"])))
+			if(idx2 > multi_tracks.len) return FALSE
+			var/list/T = multi_tracks[idx2]
+			var/field = "[params["field"]]"
+			if(field == "target_id")
+				var/t = isnull(params["value"]) ? "" : "[params["value"]]"
+				T["target_id"] = length(t) ? t : null
+				return TRUE
+			if(field == "delay_beats")
+				T["delay_beats"] = max(0, round(text2num(params["value"])))
+				return TRUE
+			return FALSE
 
-        // ВАЖНО: явно поддерживаем смену ID тут, чтобы не зависеть от родителя
-        if("set_instrument_id")
-            var/new_id = "[params["id"]]"
-            // нормализуем пробелы, чтобы пустая строка не застревала
-            new_id = trim(new_id)
-            id = length(new_id) ? new_id : ""
-            return TRUE
+		if("set_instrument_id")
+			var/new_id = "[params["id"]]"
+			new_id = trim(new_id)
+			id = length(new_id) ? new_id : ""
+			return TRUE
 
-    // Остальное — базовому обработчику
-    return ..()
+	return ..()

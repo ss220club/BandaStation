@@ -62,7 +62,7 @@ type Data = {
   multi_tracks?: TrackRow[];
 };
 
-export const InstrumentEditor = () => {
+export function InstrumentEditor() {
   const [showHelp, setShowHelp] = useState(false);
   return (
     <Window width={500} height={430}>
@@ -77,7 +77,12 @@ export const InstrumentEditor = () => {
   );
 };
 
-const TopBar = (props: { showHelp: boolean; setShowHelp: (v: boolean) => void }) => {
+type TopBarProps = {
+  showHelp: boolean;
+  setShowHelp: (v: boolean) => void;
+};
+
+function TopBar(props: TopBarProps) {
   const { act, data } = useBackend<Data>();
   const { playing, instrument_ready, auto_unison_enabled, repeat, max_repeats, lines } = data;
   const { showHelp, setShowHelp } = props;
