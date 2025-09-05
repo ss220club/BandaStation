@@ -1,39 +1,22 @@
-/obj/structure/shadowling/cocoon
+// MARK: Structures
+/obj/structure/shadowling_cocoon
 	name = "shadow cocoon"
-	desc = "A pulsing cocoon of living shadow."
+	desc = "Пульсирующий кокон живой тени."
+	icon = 'modular_bandastation/antagonists/icons/shadowling_objects.dmi'
+	icon_state = "shadowcocoon"
+	layer = MOB_LAYER + 0.1
 	anchored = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE
-	plane = GAME_PLANE
-	layer = MOB_LAYER+0.1
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "bluespace" // замените на нужный спрайт, если есть
-	alpha = 230
 
-/obj/structure/shadowling/cocoon/Initialize(mapload)
-	. = ..()
-	animate(src, alpha = 255, time = 3)
-	return .
-
-/obj/structure/shadowling/wall
+/obj/structure/alien/resin/wall/shadowling
 	name = "umbral mass"
-	desc = "Slick, oppressive darkness hardened into a barrier."
-	anchored = TRUE
-	density = TRUE
-	opacity = TRUE
+	desc = "Скользкая, гнетущая тьма, затвердевшая в непробиваемый барьер."
+	color = "#5e545a"
+	move_resist = MOVE_FORCE_VERY_STRONG
 	resistance_flags = INDESTRUCTIBLE
-	plane = GAME_PLANE
-	layer = OBJ_LAYER
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "smoke" // замените на спрайт стен, если будет
-	color = "#1a0f1f"
-	alpha = 220
 
-/obj/structure/shadowling/wall/Initialize(mapload)
-	. = ..()
-	animate(src, alpha = 255, time = 3)
-	return .
-
+// MARK: Effects
 /obj/effect/temp_visual/shadowling/hatch_pulse
 	name = "shadow pulse"
 	anchored = TRUE
@@ -51,6 +34,7 @@
 	QDEL_IN(src, 0.6 SECONDS)
 	return .
 
+// MARK: Ability
 /datum/action/cooldown/shadowling/hatch
 	name = "Вылупиться"
 	desc = "Обратить свою оболочку и явить истинную тень."
@@ -62,9 +46,9 @@
 	max_range = 0
 	channel_time = 0
 
-	var/static/sfx_tick = 'sound/effects/nightmare_poof.ogg'
-	var/static/sfx_start = 'sound/effects/nightmare_poof.ogg'
-	var/static/sfx_end = 'sound/effects/nightmare_poof.ogg'
+	var/static/sfx_start = 'sound/effects/splat.ogg'
+	var/static/sfx_end = 'sound/effects/ghost.ogg'
+	var/static/list/sfx_tick = list('sound/items/weapons/slice.ogg', 'sound/items/weapons/slash.ogg', 'sound/items/weapons/slashmiss.ogg')
 
 /datum/action/cooldown/shadowling/hatch/proc/_build_ring_walls(turf/center)
 	var/list/walls = list()
@@ -78,7 +62,7 @@
 			continue
 		if(T.density)
 			continue
-		var/obj/structure/shadowling/wall/W = new(T)
+		var/obj/structure/alien/resin/wall/shadowling/W = new(T)
 		walls += W
 
 	return walls
@@ -95,7 +79,7 @@
 	if(!T)
 		return
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(T)
-	playsound(T, sfx_tick, 35, TRUE, -1)
+	playsound(T, pick(sfx_tick), 35, TRUE, -1)
 
 /datum/action/cooldown/shadowling/hatch/DoEffect(mob/living/carbon/human/H, atom/_)
 	if(!istype(H))
@@ -112,15 +96,15 @@
 		to_chat(H, span_warning("Свет мешает вылуплению."))
 		return FALSE
 
-	var/obj/structure/shadowling/cocoon/cocoon = new(start)
+	var/obj/structure/shadowling_cocoon/cocoon = new(start)
 	var/list/walls = _build_ring_walls(start)
 	var/list/spawned = list(cocoon) + walls
 
 	playsound(start, sfx_start, 60, TRUE)
 	to_chat(H, span_notice("Вы начинаете разрывать оболочку..."))
 
-	var/steps = 6
-	var/step_time = 5 SECONDS
+	var/steps = 3
+	var/step_time = 10 SECONDS
 
 	for(var/i = 1, i <= steps, i++)
 		var/turf/cur = get_turf(H)
