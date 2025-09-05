@@ -42,10 +42,18 @@
 		return
 
 	if(href_list["toggle_ready"])
+		if(SSticker.current_state >= GAME_STATE_SETTING_UP)
+			to_chat(usr, span_warning("Игра уже начинается!"))
+			return
+
 		ready = !ready
 		SStitle.title_output(client, ready, "toggleReady")
 
 	else if(href_list["late_join"])
+		if(SSticker.current_state == GAME_STATE_FINISHED)
+			to_chat(usr, span_warning("Невозможно присоединиться, игра уже окончена!"))
+			return
+
 		GLOB.latejoin_menu.ui_interact(usr)
 
 	else if(href_list["observe"])
