@@ -21582,6 +21582,10 @@
 	},
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/control)
+"vki" = (
+/obj/structure/statue/gold/galactic_map,
+/turf/open/floor/carpet,
+/area/centcom/central_command_areas/planetary_port/library)
 "vkJ" = (
 /obj/structure/table/glass,
 /obj/machinery/fax/admin,
@@ -35124,7 +35128,7 @@ arD
 arD
 orb
 ani
-jrE
+vki
 ani
 orb
 ani
@@ -35381,9 +35385,9 @@ arD
 arD
 orb
 ani
-pzf
+jrE
 ani
-orb
+pzf
 ani
 cTu
 aNA

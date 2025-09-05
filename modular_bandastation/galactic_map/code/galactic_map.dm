@@ -17,6 +17,6 @@
 		ui.open()
 
 /datum/area_spawn/galactic_map
-	target_areas = list(/area/station/commons/dorms)
+	target_areas = list(/area/station/service/library)
 	desired_atom = /obj/structure/statue/gold/galactic_map
-	mode = AREA_SPAWN_MODE_OPEN
+	mode = AREA_SPAWN_MODE_HUG_WALL
