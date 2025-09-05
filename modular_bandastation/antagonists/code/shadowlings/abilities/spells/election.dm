@@ -126,7 +126,7 @@
 	if(GLOB.shadowling_vote == src)
 		GLOB.shadowling_vote = null
 
-/qdel(src)
+	qdel(src)
 
 /datum/shadow_vote/proc/remove_vote_action_from_all()
 	if(!hive)
