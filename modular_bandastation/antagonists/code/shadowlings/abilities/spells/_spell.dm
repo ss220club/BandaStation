@@ -9,31 +9,21 @@
 	overlay_icon_state = "bg_shadowling_border"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 10 SECONDS
-
-	/// Минимальный тир роя для активации
 	var/required_thralls = 0
-	/// Требуется ли темнота на кастере
 	var/requires_dark_user = FALSE
-	/// Требуется ли темнота на цели (если используется цель)
 	var/requires_dark_target = FALSE
-	/// Максимальная дистанция до цели (0 = не проверять)
 	var/max_range = 0
-	/// Время канала (0 = без канала)
 	var/channel_time = 0
-	/// Прерывать канал, если кастер выходит в яркое место
 	var/cancel_on_bright = TRUE
 
 /datum/action/cooldown/shadowling/proc/CanUse(mob/living/carbon/human/H)
-	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		return FALSE
-
 	if(requires_dark_user && !is_dark(H))
 		return FALSE
-
 	if(!IsAvailable(TRUE))
 		return FALSE
-
 	return TRUE
 
 /datum/action/cooldown/shadowling/proc/AcquireTarget(mob/living/carbon/human/H)
@@ -45,16 +35,12 @@
 /datum/action/cooldown/shadowling/proc/PerformChannel(mob/living/carbon/human/H, atom/target)
 	if(cancel_on_bright && !is_dark(H))
 		return FALSE
-
 	if(!do_after(H, channel_time, target))
 		return FALSE
-
 	if(cancel_on_bright && !is_dark(H))
 		return FALSE
-
 	if(!IsAvailable(TRUE))
 		return FALSE
-
 	return TRUE
 
 /datum/action/cooldown/shadowling/proc/is_dark(atom/A)
@@ -69,33 +55,26 @@
 /datum/action/cooldown/shadowling/Trigger(mob/clicker, trigger_flags, atom/target)
 	if(click_to_activate)
 		return ..()
-
 	if(!istype(owner))
 		return
-
 	if(!CanUse(owner))
 		enable()
 		owner.balloon_alert(owner, "Сейчас нельзя")
 		return
-
 	var/list/targets = CollectTargets(owner, target)
 	if(!ValidateTargets(owner, targets))
 		enable()
 		owner.balloon_alert(owner, "Нет доступных целей")
 		return
-
 	if(channel_time > 0)
 		if(!PerformChannel(owner, null))
 			return
-
 	disable()
-
 	var/success = DoEffectOnTargets(owner, targets)
 	if(success)
 		StartCooldown()
 	else
 		enable()
-
 
 /datum/action/cooldown/shadowling/proc/CollectTargets(mob/living/carbon/human/H, atom/explicit)
 	if(explicit)
@@ -105,7 +84,6 @@
 /datum/action/cooldown/shadowling/proc/ValidateTargets(mob/living/carbon/human/H, list/targets)
 	if(!islist(targets) || !length(targets))
 		return TRUE
-
 	for(var/atom/T in targets)
 		if(max_range > 0)
 			if(get_dist(H, T) > max_range)
@@ -121,7 +99,8 @@
 		return DoEffect(H, null)
 	var/success = FALSE
 	for(var/atom/A in targets)
-		success = DoEffect(H, targets[1])
+		if(DoEffect(H, A))
+			success = TRUE
 	return success
 
 /datum/action/cooldown/shadowling/proc/glare_angle_diff(a, b)
@@ -133,22 +112,17 @@
 /datum/action/cooldown/shadowling/proc/in_front_cone(mob/living/carbon/human/H, atom/A, full_angle = 90)
 	if(!istype(H) || !A)
 		return FALSE
-
 	var/turf/from_turf = get_turf(H)
 	var/turf/to_turf = get_turf(A)
 	if(!from_turf || !to_turf)
 		return FALSE
-
-	if(!H.dir) // без направления — считаем, что попадает
+	if(!H.dir)
 		return TRUE
-
 	var/ang_forward = dir2angle(H.dir)
 	var/ang_to = get_angle(from_turf, to_turf)
 	var/half = full_angle * 0.5
-
 	if(glare_angle_diff(ang_forward, ang_to) <= half)
 		return TRUE
-
 	return FALSE
 
 /datum/action/cooldown/shadowling/proc/collect_cone_targets(mob/living/carbon/human/H, r = 2, full_angle = 90)
@@ -161,17 +135,23 @@
 		res += T
 	return res
 
-
 /datum/action/cooldown/shadowling/proc/find_nearest_target(range)
-	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	var/min_d = 999
 	var/mob/living/carbon/human/best = null
 	var/list/candidates = range(range, get_turf(owner))
 	for(var/mob/living/carbon/human/candidate in candidates)
-		if(candidate == owner || QDELETED(candidate) || candidate.stat == DEAD)
+		if(candidate == owner)
 			continue
-		if(hive && ((candidate in hive.lings) || (candidate in hive.thralls)))
+		if(QDELETED(candidate))
 			continue
+		if(candidate.stat == DEAD)
+			continue
+		if(hive)
+			if(candidate in hive.lings)
+				continue
+			if(candidate in hive.thralls)
+				continue
 		var/d = get_dist(owner, candidate)
 		if(d < min_d)
 			min_d = d
@@ -185,9 +165,40 @@
 	for(var/turf/T in get_adjacent_open_turfs(center))
 		if(T && !T.density)
 			cands += T
-	return length(cands) ? pick(cands) : null
+	if(length(cands))
+		return pick(cands)
+	return null
 
 /datum/action/cooldown/shadowling/process()
 	. = ..()
 	if(!owner || (next_use_time - world.time) <= 0)
 		enable()
+
+/datum/action/cooldown/shadowling/proc/get_shadowling_antag_of(mob/living/carbon/human/H)
+	if(!istype(H))
+		return null
+	var/datum/mind/M = H.mind
+	if(!M)
+		return null
+	if(!islist(M.antag_datums))
+		return null
+	for(var/datum/antagonist/A as anything in M.antag_datums)
+		if(!A)
+			continue
+		if(A.type == /datum/antagonist/shadowling)
+			return A
+	return null
+
+/datum/action/cooldown/shadowling/StartCooldown(time_override)
+	var/duration = time_override
+	if(!duration)
+		duration = cooldown_time
+
+	var/mult = 1
+	var/datum/antagonist/shadowling/A = get_shadowling_antag_of(owner)
+	if(A)
+		if(A.is_higher)
+			mult = 0.75
+
+	..(round(duration * mult))
+

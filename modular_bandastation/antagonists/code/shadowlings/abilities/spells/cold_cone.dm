@@ -8,12 +8,10 @@
 	desc = "Выплеск ледяной тьмы в 90° конусе на 4 тайла, наносящий 30 урона по выносливости и замедляющий врагов на 10 секунд."
 	button_icon_state = "icy_veins"
 	cooldown_time = 20 SECONDS
-
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	max_range = 4
 	channel_time = 0
-
 	var/const/fov_degree = 90
 	var/static/sfx_cold = 'sound/effects/magic/voidblink.ogg'
 	var/reagent_type = /datum/reagent/consumable/frostoil
@@ -31,12 +29,16 @@
 		if(QDELETED(T))
 			continue
 
+		var/is_vulp = istype(T?.dna?.species, /datum/species/vulpkanin)
+		var/temp_drop = is_vulp ? -400 : -260
+		var/frostoil_amt = is_vulp ? 20 : 12
+
 		T.adjustStaminaLoss(30)
 		apply_slow(T, 10 SECONDS)
-		T.adjust_bodytemperature(-200)
+		T.adjust_bodytemperature(temp_drop)
 
 		if(T.reagents)
-			T.reagents.add_reagent(reagent_type, 10)
+			T.reagents.add_reagent(reagent_type, frostoil_amt)
 
 		hit = TRUE
 
@@ -44,14 +46,17 @@
 
 /datum/action/cooldown/shadowling/cold_wave/collect_cone_targets(mob/living/carbon/human/H)
 	var/list/out = list()
-	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	for(var/mob/living/carbon/human/T in range(max_range, H))
 		if(T == H)
 			continue
 		if(!in_front_cone(H, T, fov_degree))
 			continue
-		if(hive && ((T in hive.lings) || (T in hive.thralls)))
-			continue
+		if(hive)
+			if(T in hive.lings)
+				continue
+			if(T in hive.thralls)
+				continue
 		out += T
 	return out
 

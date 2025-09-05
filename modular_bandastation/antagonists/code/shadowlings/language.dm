@@ -2,8 +2,6 @@
 	name = "Hive Mind"
 	desc = "A shadow-linked mind channel."
 	key = "8"
-	//icon = 'icons/ui/chat/language.dmi'
-	//icon_state = "shadow"
 
 /obj/item/organ/tongue/shadow_hive
 	name = "umbra nexus"
@@ -26,7 +24,7 @@
 	if(!istype(lang, /datum/language/shadow_hive))
 		return
 
-	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		return
 
@@ -36,14 +34,18 @@
 	to_chat(user, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = TRUE)
 
 	for(var/mob/living/carbon/human/L in hive.lings)
-		if(QDELETED(L) || L == user)
+		if(QDELETED(L))
 			continue
-		to_chat(L, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = (L == user))
+		if(L == user)
+			continue
+		to_chat(L, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
 
 	for(var/mob/living/carbon/human/T in hive.thralls)
-		if(QDELETED(T) || T == user)
+		if(QDELETED(T))
 			continue
-		to_chat(T, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = (T == user))
+		if(T == user)
+			continue
+		to_chat(T, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
 
 	for(var/mob/dead_mob in GLOB.dead_mob_list)
 		var/link = FOLLOW_LINK(dead_mob, user)

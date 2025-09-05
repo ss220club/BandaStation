@@ -7,19 +7,17 @@
 	. = ..()
 	if(!.)
 		return
-	var/datum/language_holder/lang_holder = receiver.get_language_holder()
-	lang_holder.grant_language(/datum/language/shadow_hive, ALL, LANGUAGE_ATOM)
-	var/datum/shadow_hive/hive = get_shadow_hive()
-	hive.join_ling(receiver)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(hive)
+		hive.join_member(receiver, SHADOWLING_ROLE_MAIN)
 
 /obj/item/organ/brain/shadow/shadowling/Remove(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
 	. = ..()
 	if(!.)
 		return
-	var/datum/language_holder/lang_holder = organ_owner.get_language_holder()
-	lang_holder.remove_language(/datum/language/shadow_hive, ALL, LANGUAGE_ATOM)
-	var/datum/shadow_hive/hive = get_shadow_hive()
-	hive.leave(organ_owner)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(hive)
+		hive.leave_member(organ_owner)
 
 /obj/item/organ/brain/shadow/tumor_thrall
 	name = "shadow thrall tumor"
@@ -30,10 +28,9 @@
 	. = ..()
 	if(!.)
 		return
-	var/datum/language_holder/lang_holder = receiver.get_language_holder()
-	lang_holder.grant_language(/datum/language/shadow_hive, ALL, LANGUAGE_ATOM)
-	var/datum/shadow_hive/hive = get_shadow_hive()
-	hive.join_thrall(receiver)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(hive)
+		hive.join_member(receiver, SHADOWLING_ROLE_THRALL)
 	RegisterSignal(receiver, COMSIG_ATOM_EXAMINE, PROC_REF(on_holder_examine))
 	to_chat(receiver, span_danger("A frigid whisper coils in your mind... You are a thrall."))
 
@@ -41,10 +38,9 @@
 	. = ..()
 	if(!.)
 		return
-	var/datum/language_holder/lang_holder = organ_owner.get_language_holder()
-	lang_holder.remove_language(/datum/language/shadow_hive, ALL, LANGUAGE_ATOM)
-	var/datum/shadow_hive/hive = get_shadow_hive()
-	hive.leave(organ_owner)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(hive)
+		hive.leave_member(organ_owner)
 	UnregisterSignal(organ_owner, COMSIG_ATOM_EXAMINE)
 	to_chat(organ_owner, span_notice("The chilling presence leaves your mind."))
 
@@ -59,5 +55,4 @@
 		return
 	if(H.wear_mask)
 		return
-
 	examine_list += span_warning("Его лицо как-то неестественно искажено.")

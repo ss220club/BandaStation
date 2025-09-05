@@ -1,73 +1,93 @@
 /datum/action/cooldown/shadowling/shreek
 	name = "Крик"
-	desc = "Выпускает ударную волну тьмы: рядом оглушает и швыряет, дальше — дезориентирует. Бьёт стёкла."
+	desc = "Ударная волна тьмы: рядом швыряет и оглушает, до 5 тайлов дезориентирует и трясёт. Бьёт стёкла."
 	button_icon_state = "screech"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 30 SECONDS
-
-	var/strong_radius = 5
-	var/weak_radius = 10
+	var/knock_radius = 1
+	var/disorient_radius = 5
+	var/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg'
 
 /datum/action/cooldown/shadowling/shreek/DoEffect(mob/living/carbon/human/H, atom/_)
-	playsound(get_turf(H), 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg', 70, TRUE)
+	playsound(get_turf(H), sfx_activate, 70, TRUE)
+
+	new /obj/effect/temp_visual/circle_wave/shadow_shreek_wave(get_turf(H))
+
 	H.visible_message(
 		span_boldwarning("[H] издаёт пронзительный нечеловеческий крик!"),
 		span_userdanger("Вы издаёте пронзительный крик, и тьма рвётся наружу!")
 	)
 
-	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 
-	for(var/mob/living/L in range(weak_radius, H))
-		if(L == H) continue
-		if(istype(L, /mob/living/carbon/human) && hive && ((L in hive.lings) || (L in hive.thralls)))
+	for(var/mob/living/L in range(disorient_radius, H))
+		if(L == H)
 			continue
+		if(istype(L, /mob/living/carbon/human) && hive)
+			if(L in hive.lings)
+				continue
+			if(L in hive.thralls)
+				continue
 
 		var/dist = get_dist(H, L)
-		var/in_strong = (dist <= strong_radius)
-
-		L.adjustOrganLoss(ORGAN_SLOT_EARS, (in_strong ? 10 : 5))
-		L.adjust_confusion_up_to(in_strong ? (10 SECONDS) : (2 SECONDS), in_strong ? (10 SECONDS) : (2 SECONDS))
-
-		if(dist <= 1)
-			L.adjustOrganLoss(ORGAN_SLOT_EARS, 10)
+		if(dist <= knock_radius)
+			L.adjustOrganLoss(ORGAN_SLOT_EARS, 15)
+			L.Knockdown(0.6 SECONDS)
 			knockback_away_from(H, L, 3)
+		else
+			L.adjustOrganLoss(ORGAN_SLOT_EARS, 8)
+			L.adjust_confusion_up_to(6 SECONDS, 6 SECONDS)
+			L.adjust_dizzy(3)
 
-	for(var/obj/item/I in range(strong_radius, H))
+	for(var/obj/item/I in range(knock_radius, H))
 		if(!isturf(I.loc))
 			continue
 		if(I.anchored)
 			continue
 		throw_away_from(H, I, 3, 2)
 
-	for(var/obj/structure/window/W in range(weak_radius, H))
+	for(var/obj/structure/window/W in range(disorient_radius, H))
 		damage_glass_with_falloff(H, W)
-	empulse(owner, heavy_range = 5, light_range = 10)
+
 	return TRUE
 
+/obj/effect/temp_visual/circle_wave/shadow_shreek_wave
+	color = "#9fd7ff"
+	max_alpha = 220
+	duration = 0.5 SECONDS
+	amount_to_scale = 5
+
 /datum/action/cooldown/shadowling/shreek/proc/damage_glass_with_falloff(mob/living/carbon/human/H, obj/structure/W)
-	if(QDELETED(W)) return
-	var/d = clamp(get_dist(H, W), 1, weak_radius)
-	var/damage = max(10, 110 - 10 * d)
+	if(QDELETED(W))
+		return
+	var/d = clamp(get_dist(H, W), 1, disorient_radius)
+	var/damage = max(10, 110 - 15 * d)
 	W.take_damage(damage, damage_type = BRUTE, damage_flag = MELEE, sound_effect = TRUE)
 
 /datum/action/cooldown/shadowling/shreek/proc/knockback_away_from(mob/living/source, mob/living/target, range)
-	if(!istype(target) || target.anchored) return
+	if(!istype(target) || target.anchored)
+		return
 	var/dir = get_dir(source, target)
-	if(!dir) dir = pick(NORTH, SOUTH, EAST, WEST)
+	if(!dir)
+		dir = pick(NORTH, SOUTH, EAST, WEST)
 	var/turf/end = get_turf(target)
 	for(var/i in 1 to range)
 		var/turf/next = get_step(end, dir)
-		if(!next || next.density) break
+		if(!next || next.density)
+			break
 		end = next
 	target.throw_at(end, range, 2)
 
 /datum/action/cooldown/shadowling/shreek/proc/throw_away_from(mob/living/source, atom/movable/AM, range, speed)
-	if(!istype(AM) || AM.anchored) return
+	if(!istype(AM) || AM.anchored)
+		return
 	var/dir = get_dir(source, AM)
-	if(!dir) dir = pick(NORTH, SOUTH, EAST, WEST)
+	if(!dir)
+		dir = pick(NORTH, SOUTH, EAST, WEST)
 	var/turf/end = get_turf(AM)
 	for(var/i in 1 to range)
 		var/turf/next = get_step(end, dir)
-		if(!next || next.density) break
+		if(!next || next.density)
+			break
 		end = next
 	AM.throw_at(end, range, speed)

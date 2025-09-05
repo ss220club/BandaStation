@@ -3,7 +3,7 @@
 #include "code/ert.dm"
 #include "code/shadowlings/_defines.dm"
 #include "code/shadowlings/spieces.dm"
-#include "code/shadowlings/hive.dm"
+#include "code/shadowlings/team.dm"
 #include "code/shadowlings/language.dm"
 #include "code/shadowlings/thrall_tumor.dm"
 #include "code/shadowlings/abilities/nyxosynthesis.dm"
@@ -31,12 +31,3 @@
 
 #include "code/shadowlings/datum.dm"
 #include "code/shadowlings/ruleset.dm"
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-// END_INCLUDE

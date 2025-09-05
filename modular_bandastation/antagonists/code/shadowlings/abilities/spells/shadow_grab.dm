@@ -40,6 +40,10 @@
 	if(get_dist(H, T) > 1)
 		step_towards(H, T)
 
+	if(QDELETED(H) || QDELETED(T) || get_dist(H, T) > 1)
+		owner.balloon_alert(owner, "Слишком далеко для захвата")
+		return FALSE
+
 	if(!H.grab(T))
 		return FALSE
 
@@ -51,3 +55,6 @@
 
 	return (H.pulling == T)
 
+/datum/action/cooldown/shadowling/shadow_grab/StartCooldown(time_override)
+	..(time_override)
+	enable()

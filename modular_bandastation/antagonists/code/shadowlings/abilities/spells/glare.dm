@@ -3,33 +3,35 @@
 	desc = "Сокрующий взгляд в сторону, куда вы смотрите, позволяющий оглушать и обесиливать ваших врагов."
 	button_icon_state = "glare"
 	cooldown_time = 30 SECONDS
-
 	required_thralls = 0
-	max_range = 10
+	max_range = 4
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	channel_time = 0
-
 	var/const/fov_degree = 90
+	var/const/baton_stamina = 35
+	var/const/knock_delay = 0.6 SECONDS
+	var/const/knock_time = 1 SECONDS
 
 /datum/action/cooldown/shadowling/glare/CollectTargets(mob/living/carbon/human/H, atom/explicit)
 	var/list/targets = list()
-	var/datum/shadow_hive/hive = get_shadow_hive()
-
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	for(var/mob/living/carbon/human/T in range(max_range, H))
 		if(T == H)
 			continue
 		if(!in_front_cone(H, T, fov_degree))
 			continue
-		if(hive && ((T in hive.lings) || (T in hive.thralls)))
-			continue
+		if(hive)
+			if(T in hive.lings)
+				continue
+			if(T in hive.thralls)
+				continue
 		var/turf/tt = get_turf(T)
 		if(!tt)
 			continue
 		if(tt.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
 			continue
 		targets += T
-
 	return targets
 
 /datum/action/cooldown/shadowling/glare/ValidateTarget(mob/living/carbon/human/H, atom/target)
@@ -54,29 +56,35 @@
 	if(!length(targets))
 		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
-
 	play_glare_fx(H)
-
 	var/hit = FALSE
 	for(var/mob/living/carbon/human/T in targets)
 		if(QDELETED(T))
 			continue
+		if(T.stat == DEAD)
+			continue
 		var/d = get_dist(H, T)
-		if(d <= 5)
-			T.Stun(0.6 SECONDS)
-			T.adjustStaminaLoss(30)
-			apply_stamina_dot(T, 10, 15, 1 SECONDS)
-			mute_for(T, 10 SECONDS)
-			force_drop_items(T)
-			apply_slow(T, 10 SECONDS)
-			hit = TRUE
-		else if(d <= 10)
-			T.adjustStaminaLoss(20)
-			stun_for(T, 2 SECONDS)
-			mute_for(T, 5 SECONDS)
-			hit = TRUE
-
+		if(d > max_range)
+			continue
+		apply_glare_primary(T)
+		addtimer(CALLBACK(src, PROC_REF(apply_glare_knock), T), knock_delay)
+		hit = TRUE
 	return hit
+
+/datum/action/cooldown/shadowling/glare/proc/apply_glare_primary(mob/living/carbon/human/T)
+	if(!istype(T))
+		return
+	T.Stun(1 SECONDS)
+	T.adjustStaminaLoss(baton_stamina)
+	apply_slow(T, 2 SECONDS)
+	apply_shake(T, 8, 0.6 SECONDS)
+
+/datum/action/cooldown/shadowling/glare/proc/apply_glare_knock(mob/living/carbon/human/T)
+	if(!istype(T))
+		return
+	if(QDELETED(T))
+		return
+	T.Knockdown(knock_time)
 
 /datum/action/cooldown/shadowling/glare/proc/play_glare_fx(mob/living/carbon/human/H)
 	if(!istype(H))
@@ -91,57 +99,6 @@
 		return
 	H.set_light(0)
 
-/datum/action/cooldown/shadowling/glare/proc/apply_stamina_dot(mob/living/L, amount, ticks, period)
-	if(!istype(L))
-		return
-	if(ticks <= 0)
-		return
-	if(period <= 0)
-		return
-	stamina_tick(L, amount)
-	if(ticks > 1)
-		addtimer(CALLBACK(src, PROC_REF(stamina_dot_continue), L, amount, ticks - 1, period), period)
-
-/datum/action/cooldown/shadowling/glare/proc/stamina_dot_continue(mob/living/L, amount, ticks_left, period)
-	if(!istype(L))
-		return
-	if(ticks_left <= 0)
-		return
-	stamina_tick(L, amount)
-	if(ticks_left > 1)
-		addtimer(CALLBACK(src, PROC_REF(stamina_dot_continue), L, amount, ticks_left - 1, period), period)
-
-/datum/action/cooldown/shadowling/glare/proc/stamina_tick(mob/living/L, amount)
-	if(!istype(L))
-		return
-	if(QDELETED(L))
-		return
-	if(istype(L, /mob/living/carbon))
-		var/mob/living/carbon/C = L
-		C.adjustStaminaLoss(amount)
-	else
-		L.adjustStaminaLoss(amount)
-
-/datum/action/cooldown/shadowling/glare/proc/mute_for(mob/living/L, duration)
-	if(!istype(L))
-		return
-	L.adjust_silence(duration)
-
-/datum/action/cooldown/shadowling/glare/proc/stun_for(mob/living/L, duration)
-	if(!istype(L))
-		return
-	L.Knockdown(duration)
-
-/datum/action/cooldown/shadowling/glare/proc/force_drop_items(mob/living/carbon/C)
-	if(!istype(C))
-		return
-	C.drop_all_held_items()
-
-/datum/movespeed_modifier/shadowling/glare_slow
-	multiplicative_slowdown = 1.35
-	priority = 20
-	movetypes = GROUND
-
 /datum/action/cooldown/shadowling/glare/proc/apply_slow(mob/living/L, duration)
 	if(!istype(L))
 		return
@@ -152,6 +109,16 @@
 	if(!istype(L))
 		return
 	L.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/glare_slow)
+
+/datum/action/cooldown/shadowling/glare/proc/apply_shake(mob/living/L, strength, dur)
+	if(!istype(L))
+		return
+	L.adjust_dizzy(2)
+
+/datum/movespeed_modifier/shadowling/glare_slow
+	multiplicative_slowdown = 1.35
+	priority = 20
+	movetypes = GROUND
 
 /obj/effect/temp_visual/shadowling/glare_cone_tile
 	name = "glare cone"

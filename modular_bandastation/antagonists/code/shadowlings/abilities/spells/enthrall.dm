@@ -3,7 +3,6 @@
 	desc = "Подчиняет ближайшее существо к вам в небольшом конусе служить улью."
 	button_icon_state = "enthrall"
 	cooldown_time = 45 SECONDS
-
 	required_thralls = 0
 	requires_dark_user = TRUE
 	requires_dark_target = TRUE
@@ -15,7 +14,6 @@
 	var/mob/living/carbon/human/best = null
 	var/best_dist = 999
 	var/best_rank = 999
-
 	for(var/mob/living/carbon/human/T in range(2, H))
 		if(T == H)
 			continue
@@ -23,30 +21,26 @@
 			continue
 		if(!is_valid_target(H, T))
 			continue
-
 		var/d = get_dist(H, T)
 		var/tdir = get_dir(H, T)
 		var/rank = (tdir == H.dir) ? 0 : 1
-
 		if(d < best_dist || (d == best_dist && rank < best_rank))
 			best = T
 			best_dist = d
 			best_rank = rank
-
 	return best
 
 /datum/action/cooldown/shadowling/enthrall/proc/is_valid_target(mob/living/carbon/human/H, mob/living/carbon/human/T)
 	if(!istype(T))
 		return FALSE
-
-	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(hive)
-		if(T in hive.lings)   return FALSE
-		if(T in hive.thralls) return FALSE
-
+		if(T in hive.lings)
+			return FALSE
+		if(T in hive.thralls)
+			return FALSE
 	if(has_mindshield(T))
 		return FALSE
-
 	return TRUE
 
 /datum/action/cooldown/shadowling/enthrall/proc/has_mindshield(mob/living/carbon/human/T)
@@ -71,29 +65,34 @@
 	if(get_dist(H, T) > 2 || !is_valid_target(H, T))
 		return FALSE
 
+	to_chat(H, span_notice("Вы начинаете связывать разум [T.real_name] с ульем. Не шевелитесь и оставайтесь в тени..."))
+	to_chat(T, span_danger("Холодная тьма обволакивает ваш разум..."))
+
 	for(var/i = 1 to 3)
 		if(cancel_on_bright && !is_dark(H))
+			to_chat(H, span_warning("Свет разорвал связь."))
 			return FALSE
-
 		if(!do_after(H, channel_time SECONDS, T))
+			to_chat(H, span_warning("Связь прервана."))
 			return FALSE
-
 		if(QDELETED(T) || get_dist(H, T) > 2 || has_mindshield(T) || !is_dark(T))
+			to_chat(H, span_warning("Цель утрачена."))
 			return FALSE
-
 		T.adjustOxyLoss(30)
 
 	T.adjustOxyLoss(-100)
 
 	var/obj/item/organ/existing = T.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL)
 	if(existing)
-		owner.balloon_alert(owner, "Уже связян с ульем")
+		owner.balloon_alert(owner, "Уже связан с ульем")
+		to_chat(H, span_notice("[T.real_name] уже связан с ульем."))
 		return TRUE
 
 	var/obj/item/organ/brain/shadow/tumor_thrall/O = new
 	if(!O.Insert(T))
 		qdel(O)
 		owner.balloon_alert(owner, "Связать не удалось")
+		to_chat(H, span_warning("Не удалось связать [T.real_name] с ульем."))
 		return FALSE
 
 	to_chat(H, span_notice("Вы связываете разум [T.real_name] с ульем."))

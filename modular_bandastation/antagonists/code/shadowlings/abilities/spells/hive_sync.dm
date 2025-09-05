@@ -3,18 +3,22 @@
 	desc = "Показать число живых слуг и получить доступные вам способности по их количеству."
 	button_icon_state = "hive_sync"
 	cooldown_time = 6 SECONDS
+	channel_time = 3 SECONDS
 
 /datum/action/cooldown/shadowling/hive_sync/DoEffect(mob/living/carbon/human/H, atom/target)
-	var/datum/shadow_hive/hive = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		to_chat(H, span_warning("Улей не отвечает."))
 		return FALSE
 
 	var/nt = hive.count_nt()
 
-	grant_unlocks_for(H, nt)
+	var/list/new_unlocks = grant_unlocks_for(H, nt)
+	if(length(new_unlocks))
+		to_chat(H, span_notice("Живых слуг: [nt]. Новые способности: [jointext(new_unlocks, ", ")]."))
+	else
+		to_chat(H, span_notice("Живых слуг: [nt]. Новых способностей нет."))
 
-	to_chat(H, span_notice("Живых слуг: [nt]."))
 	return TRUE
 
 /datum/action/cooldown/shadowling/hive_sync/proc/has_action_of_type(mob/living/carbon/human/H, action_type)
@@ -23,32 +27,39 @@
 			return TRUE
 	return FALSE
 
+/datum/action/cooldown/shadowling/hive_sync/proc/get_ling_class(mob/living/carbon/human/H)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(!hive)
+		return null
+	if(H in hive.thralls)
+		return SHADOWLING_ROLE_THRALL
+	if(H in hive.lings)
+		var/role = hive.get_ling_role(H)
+		return role || SHADOWLING_ROLE_MAIN
+	return null
+
 /datum/action/cooldown/shadowling/hive_sync/proc/role_allowed(var/datum/action/cooldown/shadowling/A, ling_role)
 	var/list/check_list = list()
 	switch(ling_role)
-		if(SHADOWLING_ROLE_MAIN)
-			check_list = SHADOWLING_BASE_ABILITIES
 		if(SHADOWLING_ROLE_THRALL)
 			check_list = SHADOWLING_THRALL_ABILITIES
 		if(SHADOWLING_ROLE_LESSER)
 			check_list = SHADOWLING_MINOR_ABILITIES
+		else
+			check_list = SHADOWLING_BASE_ABILITIES
 	return A.type in check_list
 
 /datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(var/datum/action/cooldown/shadowling/A)
 	return A.required_thralls
 
 /datum/action/cooldown/shadowling/hive_sync/proc/grant_unlocks_for(mob/living/carbon/human/H, nt)
-	if(!istype(H)) return
-	var/datum/shadow_hive/hive = get_shadow_hive()
-	if(!hive) return
+	if(!istype(H))
+		return list()
+	var/ling_class = get_ling_class(H)
+	if(!ling_class)
+		return list()
 
-	var/ling_class = null
-	if(H in hive.lings)
-		ling_class = SHADOWLING_ROLE_MAIN
-	else if(H in hive.thralls)
-		ling_class = SHADOWLING_ROLE_THRALL
-	else if((H in hive.lings) && (H in hive.thralls))
-		ling_class = SHADOWLING_ROLE_LESSER
+	var/list/unlocked_names = list()
 
 	for(var/path in typesof(/datum/action/cooldown/shadowling))
 		if(path == /datum/action/cooldown/shadowling)
@@ -59,7 +70,6 @@
 			continue
 
 		var/datum/action/cooldown/shadowling/A = new path()
-
 		if(!role_allowed(A, ling_class))
 			qdel(A)
 			continue
@@ -70,3 +80,8 @@
 			continue
 
 		A.Grant(H)
+		var/n = initial(A.name)
+		if(n)
+			unlocked_names += "[n]"
+
+	return unlocked_names

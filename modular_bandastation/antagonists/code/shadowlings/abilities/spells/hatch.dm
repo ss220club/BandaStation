@@ -1,4 +1,3 @@
-// MARK: Structures
 /obj/structure/shadowling_cocoon
 	name = "shadow cocoon"
 	desc = "Пульсирующий кокон живой тени."
@@ -9,6 +8,15 @@
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE
 
+/obj/effect/overlay/shadowling_cocoon_cover
+	name = "shadow cocoon cover"
+	icon = 'modular_bandastation/antagonists/icons/shadowling_objects.dmi'
+	icon_state = "shadowcocoon"
+	layer = ABOVE_MOB_LAYER
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	appearance_flags = RESET_TRANSFORM|RESET_COLOR|PIXEL_SCALE
+
 /obj/structure/alien/resin/wall/shadowling
 	name = "umbral mass"
 	desc = "Скользкая, гнетущая тьма, затвердевшая в непробиваемый барьер."
@@ -16,7 +24,6 @@
 	move_resist = MOVE_FORCE_VERY_STRONG
 	resistance_flags = INDESTRUCTIBLE
 
-// MARK: Effects
 /obj/effect/temp_visual/shadowling/hatch_pulse
 	name = "shadow pulse"
 	anchored = TRUE
@@ -34,13 +41,11 @@
 	QDEL_IN(src, 0.6 SECONDS)
 	return .
 
-// MARK: Ability
 /datum/action/cooldown/shadowling/hatch
 	name = "Вылупиться"
 	desc = "Обратить свою оболочку и явить истинную тень."
 	button_icon_state = "shadow_hatch"
 	cooldown_time = 0
-
 	requires_dark_user = TRUE
 	requires_dark_target = FALSE
 	max_range = 0
@@ -50,11 +55,12 @@
 	var/static/sfx_end = 'sound/effects/ghost.ogg'
 	var/static/list/sfx_tick = list('sound/items/weapons/slice.ogg', 'sound/items/weapons/slash.ogg', 'sound/items/weapons/slashmiss.ogg')
 
+	var/obj/effect/overlay/shadowling_cocoon_cover/cover
+
 /datum/action/cooldown/shadowling/hatch/proc/_build_ring_walls(turf/center)
 	var/list/walls = list()
 	if(!istype(center))
 		return walls
-
 	var/list/dirs = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
 	for(var/d in dirs)
 		var/turf/T = get_step(center, d)
@@ -64,7 +70,6 @@
 			continue
 		var/obj/structure/alien/resin/wall/shadowling/W = new(T)
 		walls += W
-
 	return walls
 
 /datum/action/cooldown/shadowling/hatch/proc/_cleanup(list/to_clean)
@@ -80,6 +85,19 @@
 		return
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(T)
 	playsound(T, pick(sfx_tick), 35, TRUE, -1)
+
+/datum/action/cooldown/shadowling/hatch/proc/_attach_cover(mob/living/carbon/human/H)
+	if(cover)
+		return
+	cover = new
+	H.vis_contents += cover
+
+/datum/action/cooldown/shadowling/hatch/proc/_detach_cover(mob/living/carbon/human/H)
+	if(!cover)
+		return
+	H.vis_contents -= cover
+	qdel(cover)
+	cover = null
 
 /datum/action/cooldown/shadowling/hatch/DoEffect(mob/living/carbon/human/H, atom/_)
 	if(!istype(H))
@@ -100,6 +118,8 @@
 	var/list/walls = _build_ring_walls(start)
 	var/list/spawned = list(cocoon) + walls
 
+	_attach_cover(H)
+
 	playsound(start, sfx_start, 60, TRUE)
 	to_chat(H, span_notice("Вы начинаете разрывать оболочку..."))
 
@@ -109,11 +129,13 @@
 	for(var/i = 1, i <= steps, i++)
 		var/turf/cur = get_turf(H)
 		if(!cur)
+			_detach_cover(H)
 			_cleanup(spawned)
 			return FALSE
 
 		if(cur.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
 			to_chat(H, span_warning("Свет разгоняет тьму — вылупление сорвано."))
+			_detach_cover(H)
 			_cleanup(spawned)
 			return FALSE
 
@@ -122,24 +144,28 @@
 		if(i == 1)
 			to_chat(H, span_notice("Тьма собирается внутри вас (0/30 сек)."))
 		else
-			to_chat(H, span_notice("Тьма сгущается ([(i - 1) * 5]/30 сек)."))
+			to_chat(H, span_notice("Тьма сгущается ([ (i - 1) * 10 ]/30 сек)."))
 
 		if(!do_after(H, step_time, H))
 			to_chat(H, span_warning("Вы теряете концентрацию — вылупление прервано."))
+			_detach_cover(H)
 			_cleanup(spawned)
 			return FALSE
 
 	if(QDELETED(H))
+		_detach_cover(H)
 		_cleanup(spawned)
 		return FALSE
+
 	H.shadowling_strip_quirks()
 	H.set_species(/datum/species/shadow/shadowling)
-
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	hive.grant_sync_action(H)
 	playsound(start, sfx_end, 70, TRUE)
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(start)
-
 	to_chat(H, span_boldnotice("Вы разрываете оболочку и становитесь Тенью."))
 
+	_detach_cover(H)
 	_cleanup(spawned)
 	Remove(H)
 	qdel(src)
