@@ -1,48 +1,59 @@
+import { useState } from 'react';
+import { useBackend } from '../backend';
+import { Window } from '../layouts';
+import type { BooleanLike } from 'tgui-core/react';
 import {
   Box,
   Button,
   Collapsible,
-  Divider,
   Dropdown,
+  Icon,
+  Input,
+  Knob,
   NumberInput,
   Section,
   Stack,
-  Input,
-  Tooltip,
   Table,
 } from 'tgui-core/components';
-import type { BooleanLike } from 'tgui-core/react';
-import { useBackend } from '../backend';
-import { Window } from '../layouts';
 
 type TrackRow = { target_id?: string | null; delay_beats?: number };
+type InstrumentData = { name: string; id: string };
+type LineData = { line_count: number; line_text: string };
 
 type Data = {
   id: string;
   using_instrument: string;
+
   note_shift_min: number;
   note_shift_max: number;
   note_shift: number;
   octaves: number;
+
   sustain_modes: string[];
   sustain_mode: string;
   sustain_mode_button: string;
   sustain_mode_duration: number;
-  instrument_ready: BooleanLike;
-  volume: number;
-  volume_dropoff_threshold: number;
-  min_volume: number;
-  max_volume: number;
-  sustain_indefinitely: BooleanLike;
   sustain_mode_min: number;
   sustain_mode_max: number;
+  sustain_indefinitely: BooleanLike;
+
+  instrument_ready: BooleanLike;
+
+  volume: number;
+  min_volume: number;
+  max_volume: number;
+  volume_dropoff_threshold: number;
+
   playing: BooleanLike;
   max_repeats: number;
   repeat: number;
+
   bpm: number;
   lines: LineData[];
+
   can_switch_instrument: BooleanLike;
   possible_instruments: InstrumentData[];
+
   max_line_chars: number;
   max_lines: number;
 
@@ -51,131 +62,296 @@ type Data = {
   multi_tracks?: TrackRow[];
 };
 
-type InstrumentData = { name: string; id: string };
-type LineData = { line_count: number; line_text: string };
-
 export const InstrumentEditor = () => {
+  const [showHelp, setShowHelp] = useState(false);
   return (
-    <Window width={900} height={620}>
+    <Window width={500} height={430}>
       <Window.Content scrollable>
-        <InstrumentSettings />
-        <SyncSettings />
-        <Collapsible open title="Music Editor" icon="pencil">
-          <EditingSettings />
-        </Collapsible>
-        <Collapsible title="Help Section" icon="question">
-          <HelpSection />
-        </Collapsible>
+        <TopBar showHelp={showHelp} setShowHelp={setShowHelp} />
+        {showHelp && <HelpInline />}
+        <MainPanel />
+        <SyncTracks />
+        <MusicEditor />
       </Window.Content>
     </Window>
   );
 };
 
-const InstrumentSettings = () => {
+const TopBar = (props: { showHelp: boolean; setShowHelp: (v: boolean) => void }) => {
+  const { act, data } = useBackend<Data>();
+  const { playing, instrument_ready, auto_unison_enabled, repeat, max_repeats, lines } = data;
+  const { showHelp, setShowHelp } = props;
+
+  return (
+    <Section>
+      <Stack align="center" justify="space-between">
+        <Stack.Item>
+          <Stack align="center">
+            <Stack.Item>
+              <Button
+                icon={playing ? 'stop' : 'play'}
+                color={playing ? 'average' : 'good'}
+                onClick={() => act('play_music')}
+              >
+                {playing ? 'Stop' : 'Start'}
+              </Button>
+            </Stack.Item>
+            <Stack.Item ml={1}>
+              <Icon
+                name={instrument_ready ? 'check-circle' : 'exclamation-triangle'}
+                color={instrument_ready ? 'good' : 'bad'}
+                mr={0.5}
+              />
+              {instrument_ready ? 'Ready' : 'Definition Error'}
+            </Stack.Item>
+          </Stack>
+        </Stack.Item>
+
+        <Stack.Item>
+          <Stack align="center">
+            <Stack.Item>
+              Repeats:
+              <NumberInput
+                ml={0.5}
+                step={1}
+                minValue={0}
+                maxValue={max_repeats}
+                disabled={!!playing}
+                value={repeat}
+                onChange={(v) => act('set_repeat_amount', { amount: v })}
+              />
+            </Stack.Item>
+            <Stack.Item ml={1}>
+              <Button
+                selected={!!auto_unison_enabled}
+                onClick={() => act('toggle_auto_unison')}
+              >
+                Auto-unison
+              </Button>
+            </Stack.Item>
+            <Stack.Item ml={1}>
+              <Button icon="question" onClick={() => setShowHelp(!showHelp)}>
+                Help
+              </Button>
+            </Stack.Item>
+          </Stack>
+        </Stack.Item>
+      </Stack>
+
+      {lines.length === 0 && (
+        <Box mt={1} color="average">
+          Load or type a song below to enable playback.
+        </Box>
+      )}
+    </Section>
+  );
+};
+
+const HelpInline = () => {
+  const { data } = useBackend<Data>();
+  const { max_line_chars, max_lines } = data;
+
+  return (
+    <Section fitted>
+      <Box mt={0.5} mb={0.5}>
+        <b>Help</b>
+      </Box>
+      <Box>
+        Lines are a series of chords separated by commas (,), each chord has notes
+        separated by hyphens (-).<br />
+        Notes default to natural in octave 3; accidentals/octaves persist:
+        <i> C,C4,C,C3</i> → <i>C3,C4,C4,C3</i>.<br />
+        Chords: <i>A-C#,Cn-E,E-G#,Gn-B</i>; pause with empty chord: <i>C,E,,C,G</i>.<br />
+        Change chord length via <i>/x</i>: <i>C,G/2,E/4</i>. Example:
+        <i> E-E4/4,F#/2,G#/8,B/8,E3-E4/4</i>.<br />
+        Max line length: {max_line_chars}. Max lines: {max_lines}.
+      </Box>
+    </Section>
+  );
+};
+
+const MainPanel = () => {
+  return (
+    <Section>
+      <Stack>
+        <Stack.Item grow basis="50%">
+          <LeftColumn />
+        </Stack.Item>
+        <Stack.Item grow basis="50%">
+          <RightKnobs />
+        </Stack.Item>
+      </Stack>
+    </Section>
+  );
+};
+
+const LeftColumn = () => {
   const { act, data } = useBackend<Data>();
   const {
-    id, playing, repeat, max_repeats, can_switch_instrument,
-    possible_instruments = [], instrument_ready, using_instrument,
-    note_shift_min, note_shift_max, note_shift, octaves,
-    sustain_modes, sustain_mode, sustain_mode_button, sustain_mode_duration,
-    sustain_indefinitely, sustain_mode_min, sustain_mode_max,
-    volume, min_volume, max_volume, volume_dropoff_threshold, lines,
+    id,
+    using_instrument,
+    can_switch_instrument,
+    possible_instruments = [],
+    sustain_modes,
+    sustain_mode,
+    sustain_indefinitely,
+    multi_sync_enabled,
   } = data;
 
   const instrument_id_by_name = (name: string) =>
     possible_instruments.find((i) => i.name === name)?.id;
 
   return (
-    <Section title="Settings">
-      {lines.length > 0 && (
-        <Box fontSize="16px" mb={1}>
-          <Button onClick={() => act('play_music')}>
-            {playing ? 'Stop Music' : 'Start Playing'}
-          </Button>
-        </Box>
-      )}
+    <Section title="Instrument">
       <Box>
-        <Box inline style={{ borderBottom: '2px dotted rgba(255,255,255,0.8)' }} mr={1}>
-          <Tooltip content="All nearby instruments with the same ID will start playing the same song when any one starts playing.">
-            ID:
-          </Tooltip>
-        </Box>
-        <Input value={id} maxLength={20} onChange={(v) => act('set_instrument_id', { id: v })} />
-      </Box>
-      <Box>
-        Repeats Left:
-        <NumberInput
-          ml={1} step={1} minValue={0} disabled={!!playing} maxValue={max_repeats} value={repeat}
-          onChange={(v) => act('set_repeat_amount', { amount: v })}
+        Using:
+        <Dropdown
+          ml={1}
+          width="100%"
+          selected={using_instrument}
+          disabled={!can_switch_instrument}
+          options={possible_instruments.map((i) => i.name)}
+          onSelected={(v) =>
+            act('change_instrument', {
+              new_instrument: instrument_id_by_name(v as string),
+            })
+          }
         />
       </Box>
-      <Box>
-        {!!can_switch_instrument && (
-          <Stack fill>
-            <Stack.Item mt={0.5}>Instrument Using</Stack.Item>
-            <Stack.Item grow>
-              <Dropdown
-                width="40%"
-                selected={using_instrument}
-                disabled={!can_switch_instrument}
-                options={possible_instruments.map((i) => i.name)}
-                onSelected={(v) => act('change_instrument', { new_instrument: instrument_id_by_name(v as string) })}
-              />
-            </Stack.Item>
-          </Stack>
-        )}
+
+      <Box mt={1}>Mode:</Box>
+      <Dropdown
+        width="100%"
+        selected={sustain_mode}
+        options={sustain_modes}
+        onSelected={(v) => act('set_sustain_mode', { new_mode: v })}
+      />
+      <Box mt={0.5}>
+        <Button
+          fluid
+          selected={!!sustain_indefinitely}
+          onClick={() => act('toggle_sustain_hold_indefinitely')}
+        >
+          {sustain_indefinitely ? 'Hold last note' : 'No hold'}
+        </Button>
       </Box>
-      <Stack mt={1}>
-        <Stack.Item>
-          Playback Settings:
-          <Box>
-            <NumberInput
-              minValue={note_shift_min} maxValue={note_shift_max} step={1} value={note_shift}
-              onChange={(v) => act('set_note_shift', { amount: v })}
-            />
-            keys / {octaves} octaves
-          </Box>
-          <Stack>
-            <Stack.Item mt={0.5}>Mode:</Stack.Item>
-            <Stack.Item grow>
-              <Dropdown
-                width="100%" selected={sustain_mode} options={sustain_modes}
-                onSelected={(v) => act('set_sustain_mode', { new_mode: v })}
-              />
-            </Stack.Item>
-          </Stack>
-          <Box>
-            {sustain_mode_button}:
-            <NumberInput
-              ml={1} step={1} minValue={sustain_mode_min} maxValue={sustain_mode_max} value={sustain_mode_duration}
-              onChange={(v) => act('edit_sustain_mode', { amount: v })}
-            />
+
+      <Stack align="center" mt={1}>
+        <Stack.Item grow>
+          <Input
+            width="100%"
+            placeholder="Sync ID"
+            value={id}
+            maxLength={20}
+            onChange={(v) => act('set_instrument_id', { id: v })}
+          />
+        </Stack.Item>
+        <Stack.Item ml={1}>
+          <Button
+            selected={!!multi_sync_enabled}
+            onClick={() => act('toggle_multi_sync')}
+          >
+            Detailed Sync
+          </Button>
+        </Stack.Item>
+      </Stack>
+    </Section>
+  );
+};
+
+const RightKnobs = () => {
+  const { act, data } = useBackend<Data>();
+  const {
+    volume, max_volume,
+    volume_dropoff_threshold,
+    note_shift,
+    sustain_mode_duration,
+  } = data;
+
+  const VOL_MAX = 75;
+  const DROP_MIN = 0;
+  const DROP_MAX = 100;
+  const PITCH_MIN = -100;
+  const PITCH_MAX = 100;
+  const SUSTAIN_MIN = 0;
+  const SUSTAIN_MAX = 5;
+
+  const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
+  const r0 = (v: number) => Math.round(v);
+  const r1 = (v: number) => Math.round(v * 10) / 10;
+
+  const volVal = clamp(volume, 0, VOL_MAX);
+  const dropVal = clamp(volume_dropoff_threshold, DROP_MIN, DROP_MAX);
+  const pitchVal = clamp(note_shift, PITCH_MIN, PITCH_MAX);
+  const sustainVal = clamp(sustain_mode_duration, SUSTAIN_MIN, SUSTAIN_MAX);
+
+  const volLabel = `${r0(volVal)}%`;
+  const dropLabel = `${r0(dropVal)}`;
+  const pitchLabel = `${pitchVal > 0 ? '+' : ''}${r0(pitchVal)}`;
+  const sustainLabel = `${r1(sustainVal).toFixed(1)}s`;
+
+  return (
+    <Section title="Amp">
+      <Stack>
+        <Stack.Item grow basis="50%" textAlign="center">
+          <Knob
+            size={1.8}
+            value={volVal}
+            minValue={0}
+            maxValue={VOL_MAX}
+            step={1}
+            stepPixelSize={6}
+            onDrag={(e, v) => act('set_volume', { amount: clamp(r0(v), 0, max_volume) })}
+          />
+          <Box mt={0.3}>
+            Volume <Box as="span" color="label">({volLabel})</Box>
           </Box>
         </Stack.Item>
-        <Divider vertical />
-        <Stack.Item>
-          <Box>
-            Status:
-            {instrument_ready ? <span style={{ color: '#5EFB6E' }}> Ready</span> : <span style={{ color: '#FF0000' }}> Instrument Definition Error!</span>}
+
+        <Stack.Item grow basis="50%" textAlign="center">
+          <Knob
+            size={1.8}
+            value={dropVal}
+            minValue={DROP_MIN}
+            maxValue={DROP_MAX}
+            step={1}
+            stepPixelSize={6}
+            onDrag={(e, v) => act('set_dropoff_volume', { amount: r0(v) })}
+          />
+          <Box mt={0.3}>
+            Dropoff <Box as="span" color="label">({dropLabel})</Box>
           </Box>
-          <Box>
-            Volume:
-            <NumberInput
-              step={1} minValue={min_volume} maxValue={max_volume} value={volume}
-              onChange={(v) => act('set_volume', { amount: v })}
-            />
+        </Stack.Item>
+      </Stack>
+
+      <Stack mt={1}>
+        <Stack.Item grow basis="50%" textAlign="center">
+          <Knob
+            size={1.8}
+            value={pitchVal}
+            minValue={PITCH_MIN}
+            maxValue={PITCH_MAX}
+            step={1}
+            stepPixelSize={6}
+            onDrag={(e, v) => act('set_note_shift', { amount: r0(v) })}
+          />
+          <Box mt={0.3}>
+            Pitch <Box as="span" color="label">({pitchLabel})</Box>
           </Box>
-          <Box>
-            Volume Dropoff Threshold:
-            <NumberInput
-              step={1} minValue={1} maxValue={100} value={volume_dropoff_threshold}
-              onChange={(v) => act('set_dropoff_volume', { amount: v })}
-            />
-          </Box>
-          <Box>
-            <Button onClick={() => act('toggle_sustain_hold_indefinitely')}>
-              {sustain_indefinitely ? 'Sustaining last held note indefinitely' : 'Not sustaining last held note indefinitely'}
-            </Button>
+        </Stack.Item>
+
+        <Stack.Item grow basis="50%" textAlign="center">
+          <Knob
+            size={1.8}
+            value={sustainVal}
+            minValue={SUSTAIN_MIN}
+            maxValue={SUSTAIN_MAX}
+            step={0.1}
+            stepPixelSize={5}
+            onDrag={(e, v) => act('edit_sustain_mode', { amount: r1(v) })}
+          />
+          <Box mt={0.3}>
+            Sustain <Box as="span" color="label">({sustainLabel})</Box>
           </Box>
         </Stack.Item>
       </Stack>
@@ -183,131 +359,116 @@ const InstrumentSettings = () => {
   );
 };
 
-const SyncSettings = () => {
+const SyncTracks = () => {
   const { act, data } = useBackend<Data>();
   const tracks = data.multi_tracks ?? [];
 
   return (
-    <Collapsible open title="Sync" icon="waveform">
+    <Collapsible open={!!data.multi_sync_enabled} title="Detailed Sync Tracks" icon="waveform">
       <Section>
-        <Box mb={1}>
-          <Button selected={!!data.auto_unison_enabled} onClick={() => act('toggle_auto_unison')}>
-            Auto-unison (≤5 tiles)
-          </Button>
-          <Button ml={1} selected={!!data.multi_sync_enabled} onClick={() => act('toggle_multi_sync')}>
-            Multi-sync (tracks)
+        <Table>
+          <Table.Row header>
+            <Table.Cell>#</Table.Cell>
+            <Table.Cell>Target ID</Table.Cell>
+            <Table.Cell>Delay (beats)</Table.Cell>
+            <Table.Cell />
+          </Table.Row>
+          {tracks.map((t, i) => {
+            const idx = i + 1;
+            return (
+              <Table.Row key={idx}>
+                <Table.Cell>{idx}</Table.Cell>
+                <Table.Cell>
+                  <Input
+                    width={16}
+                    value={t?.target_id ?? ''}
+                    placeholder="insert_id"
+                    onChange={(value) => act('ms_set', { idx, field: 'target_id', value })}
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <NumberInput
+                    step={1}
+                    minValue={0}
+                    maxValue={4096}
+                    value={t?.delay_beats ?? 0}
+                    onChange={(value) => act('ms_set', { idx, field: 'delay_beats', value })}
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <Button color="bad" onClick={() => act('ms_del', { idx })}>
+                    Del
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table>
+        <Box mt={1}>
+          <Button icon="plus" onClick={() => act('ms_add')}>
+            Add Track
           </Button>
         </Box>
-
-        <Section title="Multi-sync tracks (ID + Delay)">
-          <Table>
-            <Table.Row header>
-              <Table.Cell>#</Table.Cell>
-              <Table.Cell>Target ID</Table.Cell>
-              <Table.Cell>Delay (beats)</Table.Cell>
-              <Table.Cell />
-            </Table.Row>
-            {tracks.map((t, i) => {
-              const idx = i + 1;
-              return (
-                <Table.Row key={idx}>
-                  <Table.Cell>{idx}</Table.Cell>
-                  <Table.Cell>
-                    <Input
-                      value={t?.target_id ?? ''}
-                      placeholder="band_id_1"
-                      onChange={(value) => act('ms_set', { idx, field: 'target_id', value })}
-                    />
-                  </Table.Cell>
-                  <Table.Cell>
-                    <NumberInput
-                      step={1} minValue={0} maxValue={4096} value={t?.delay_beats ?? 0}
-                      onChange={(value) => act('ms_set', { idx, field: 'delay_beats', value })}
-                    />
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Button color="bad" onClick={() => act('ms_del', { idx })}>Del</Button>
-                  </Table.Cell>
-                </Table.Row>
-              );
-            })}
-          </Table>
-          <Box mt={1}>
-            <Button onClick={() => act('ms_add')}>Add Track</Button>
-          </Box>
-        </Section>
       </Section>
     </Collapsible>
   );
 };
 
-const EditingSettings = () => {
+const MusicEditor = () => {
   const { act, data } = useBackend<Data>();
   const { bpm, lines } = data;
 
   return (
-    <Section>
-      <Box>
-        <Button onClick={() => act('start_new_song')}>Start a New Song</Button>
-        <Button onClick={() => act('import_song')}>Import a Song</Button>
-      </Box>
-      <Box>
-        Tempo:{' '}
-        <Button onClick={() => act('tempo_big_step', { tempo_change: 'decrease_speed' })}>--</Button>{' '}
-        <Button onClick={() => act('tempo', { tempo_change: 'decrease_speed' })}>-</Button>{' '}
-        <NumberInput
-          step={1} minValue={1} maxValue={999} value={bpm}
-          onChange={(v) => act('set_bpm_slider', { amount: v })}
-        />{' '}
-        <Button onClick={() => act('tempo', { tempo_change: 'increase_speed' })}>+</Button>{' '}
-        <Button onClick={() => act('tempo_big_step', { tempo_change: 'increase_speed' })}>++</Button>
-      </Box>
-      <Box>
-        {lines.map((line, index) => (
-          <Box key={index} fontSize="11px">
-            Line {index}:
-            <Button onClick={() => act('modify_line', { line_editing: line.line_count })}>Edit</Button>
-            <Button onClick={() => act('delete_line', { line_deleted: line.line_count })}>X</Button>
-            {line.line_text}
-          </Box>
-        ))}
-      </Box>
-      <Box>
-        <Button onClick={() => act('add_new_line')}>Add Line</Button>
-      </Box>
-    </Section>
-  );
-};
+    <Collapsible open title="Music Editor" icon="pencil">
+      <Section>
+        <Stack align="center">
+          <Stack.Item>
+            <Button onClick={() => act('start_new_song')}>Start a New Song</Button>
+          </Stack.Item>
+          <Stack.Item ml={1}>
+            <Button onClick={() => act('import_song')}>Import a Song</Button>
+          </Stack.Item>
+          <Stack.Item grow />
+          <Stack.Item>
+            Tempo:
+            <Button ml={1} onClick={() => act('tempo_big_step', { tempo_change: 'decrease_speed' })}>--</Button>
+            <Button ml={0.5} onClick={() => act('tempo', { tempo_change: 'decrease_speed' })}>-</Button>
+            <NumberInput
+              ml={0.5}
+              step={1}
+              minValue={1}
+              maxValue={999}
+              value={bpm}
+              onChange={(v) => act('set_bpm_slider', { amount: v })}
+            />
+            <Button ml={0.5} onClick={() => act('tempo', { tempo_change: 'increase_speed' })}>+</Button>
+            <Button ml={0.5} onClick={() => act('tempo_big_step', { tempo_change: 'increase_speed' })}>++</Button>
+          </Stack.Item>
+        </Stack>
 
-const HelpSection = () => {
-  const { data } = useBackend<Data>();
-  const { max_line_chars, max_lines } = data;
+        <Box mt={1}>
+          {lines.map((line, index) => (
+            <Box key={index} fontSize="11px" mb={0.5}>
+              <Stack align="center">
+                <Stack.Item>Line {index}:</Stack.Item>
+                <Stack.Item ml={1}>
+                  <Button onClick={() => act('modify_line', { line_editing: line.line_count })}>Edit</Button>
+                </Stack.Item>
+                <Stack.Item ml={1}>
+                  <Button color="bad" onClick={() => act('delete_line', { line_deleted: line.line_count })}>X</Button>
+                </Stack.Item>
+                <Stack.Item grow ml={1}>
+                  <Box opacity={0.9}>{line.line_text}</Box>
+                </Stack.Item>
+              </Stack>
+            </Box>
+          ))}
+        </Box>
 
-  return (
-    <Section>
-      <Box>
-        Lines are a series of chords, separated by commas (,), each with notes separated by hyphens (-).
-        <br />
-        Every note in a chord will play together, with chord timed by the tempo.
-        <br />
-        Notes are played by the names of the note, and optionally, the accidental, and/or the octave number.
-        <br />
-        By default, every note is natural and in octave 3. Defining otherwise is remembered for each note.
-        <br />
-        Example: <i>C,D,E,F,G,A,B</i> will play a C major scale.
-        <br />
-        After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is <i>C3,C4,C4,C3</i>
-        <br />
-        Chords can be played simply by seperating each note with a hyphon: <i>A-C#,Cn-E,E-G#,Gn-B</i>
-        <br />A pause may be denoted by an empty chord: <i>C,E,,C,G</i>
-        <br />
-        To make a chord be a different time, end it with /x, where the chord length is tempo / x: <i>C,G/2,E/4</i>
-        <br />
-        Combined, an example is: <i>E-E4/4,F#/2,G#/8,B/8,E3-E4/4</i>
-        <br />
-        Lines may be up to {max_line_chars} characters.
-        <br />A song may only contain up to {max_lines} lines.
-      </Box>
-    </Section>
+        <Box mt={1}>
+          <Button icon="plus" onClick={() => act('add_new_line')}>Add Line</Button>
+        </Box>
+      </Section>
+    </Collapsible>
   );
 };
