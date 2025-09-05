@@ -194,11 +194,8 @@
 	if(!duration)
 		duration = cooldown_time
 
-	var/mult = 1
 	var/datum/antagonist/shadowling/A = get_shadowling_antag_of(owner)
-	if(A)
-		if(A.is_higher)
-			mult = 0.75
-
-	..(round(duration * mult))
+	var/mult = A?.is_higher ? 0.5 : 1
+	var/calculated_cd = duration * mult
+	..(override_cooldown_time = calculated_cd)
 

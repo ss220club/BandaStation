@@ -18,9 +18,6 @@
 	var/ling_role = SHADOWLING_ROLE_MAIN
 	var/is_higher = FALSE
 
-/datum/antagonist/shadowling/proc/set_higher(state)
-	is_higher = !!state
-
 /datum/antagonist/shadowling/greet(mob/user, tell_objectives = TRUE)
 	..()
 
@@ -113,6 +110,13 @@
 	var/datum/objective/survive/surv = new
 	surv.owner = owner
 	objectives += surv
+
+/datum/antagonist/shadowling/proc/set_higher(state)
+	is_higher = state
+	var/mob/living/carbon/human/H = owner?.current
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(istype(H))
+		hive.shadowling_set_ascended(H, state)
 
 /datum/objective/shadowling/enslave_fraction
 	name = "subjugate crew"

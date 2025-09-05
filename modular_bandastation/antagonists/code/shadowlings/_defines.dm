@@ -1,5 +1,6 @@
 #define ROLE_SHADOWLING "shadowlings"
-#define SPECIES_SHADOWLING "shadowling" //Изменить при новых спрайтах тела
+#define SPECIES_SHADOWLING "shadowling"
+#define SPECIES_SHADOWLING_ASCENDED "shadowlingascended"
 #define ORGAN_SLOT_BRAIN_THRALL "brain_thrall_tumor"
 
 #define SHADOWLING_LIGHT_THRESHOLD 0.75
@@ -28,8 +29,8 @@ var/global/list/SHADOWLING_BASE_ABILITIES = list(
 	/datum/action/cooldown/shadowling/shadow_smoke,
 	/datum/action/cooldown/shadowling/labyrinth,
 	/datum/action/cooldown/shadowling/recuperation,
-	/datum/action/cooldown/shadowling/election
-	//Вознесение
+	/datum/action/cooldown/shadowling/election,
+	/datum/action/cooldown/shadowling/ascend
 )
 
 //Абилки для тралла

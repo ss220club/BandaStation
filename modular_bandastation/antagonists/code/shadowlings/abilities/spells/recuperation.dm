@@ -14,6 +14,7 @@
 	var/obj/effect/overlay/shadowling_cocoon_cover/cover
 	var/static/sfx_begin = 'sound/effects/magic/teleport_diss.ogg'
 	var/static/sfx_end   = 'sound/effects/ghost.ogg'
+	var/prev_alpha
 
 /datum/action/cooldown/shadowling/recuperation/Trigger(mob/clicker, trigger_flags, atom/target)
 	return ..()
@@ -49,19 +50,23 @@
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
-	_start_beam(clicker, T)
-	_attach_cover(T)
+	start_beam(clicker, T)
+	attach_cover(T)
+	prev_alpha = T.alpha
+	T.alpha = 0
 
 	var/start_loc = T.loc
 	if(!do_after(clicker, channel_time, T))
-		_stop_beam()
-		_detach_cover(T)
+		stop_beam()
+		detach_cover(T)
+		T.alpha = prev_alpha
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
 	if(QDELETED(T) || T.loc != start_loc || get_dist(clicker, T) > 1)
-		_stop_beam()
-		_detach_cover(T)
+		stop_beam()
+		detach_cover(T)
+		T.alpha = prev_alpha
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
@@ -76,13 +81,14 @@
 	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим шадоулингом!"))
 	playsound(get_turf(T), sfx_end, 65, TRUE)
 
-	_stop_beam()
-	_detach_cover(T)
+	stop_beam()
+	detach_cover(T)
+	T.alpha = prev_alpha
 	unset_click_ability(clicker, FALSE)
 	StartCooldown()
 	return TRUE
 
-/datum/action/cooldown/shadowling/recuperation/proc/_start_beam(mob/living/source, mob/living/target)
+/datum/action/cooldown/shadowling/recuperation/proc/start_beam(mob/living/source, mob/living/target)
 	playsound(get_turf(source), sfx_begin, 55, TRUE)
 	active_beam = new /obj/effect/beam(source, target)
 	if(active_beam)
@@ -91,18 +97,18 @@
 		active_beam.layer = EFFECTS_LAYER
 		QDEL_IN(active_beam, channel_time)
 
-/datum/action/cooldown/shadowling/recuperation/proc/_stop_beam()
+/datum/action/cooldown/shadowling/recuperation/proc/stop_beam()
 	if(active_beam && !QDELETED(active_beam))
 		qdel(active_beam)
 	active_beam = null
 
-/datum/action/cooldown/shadowling/recuperation/proc/_attach_cover(mob/living/carbon/human/T)
+/datum/action/cooldown/shadowling/recuperation/proc/attach_cover(mob/living/carbon/human/T)
 	if(cover)
 		return
 	cover = new /obj/effect/overlay/shadowling_cocoon_cover
 	T.vis_contents += cover
 
-/datum/action/cooldown/shadowling/recuperation/proc/_detach_cover(mob/living/carbon/human/T)
+/datum/action/cooldown/shadowling/recuperation/proc/detach_cover(mob/living/carbon/human/T)
 	if(!cover)
 		return
 	if(istype(T))

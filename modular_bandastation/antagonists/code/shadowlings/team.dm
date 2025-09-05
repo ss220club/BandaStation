@@ -155,3 +155,8 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 	var/mins = round(delay_time / (1 MINUTES))
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(priority_announce), "Зафиксирован спад мощности в реакторном контуре. Время прибытия эвакуационного шаттла увеличено на [mins] минут.", "Приоритетное оповещение", 'sound/announcer/announcement/announce_syndi.ogg', null, "Центральное Командование: Транспортный Департамент Нанотрейзен"), rand(2 SECONDS, 6 SECONDS))
 	return TRUE
+
+/datum/team/shadow_hive/proc/shadowling_set_ascended(mob/living/carbon/human/H, ascended = TRUE)
+	if(!istype(H))
+		return
+	H.set_species(/datum/species/shadow/shadowling/ascended)

@@ -39,6 +39,18 @@
 	mutanteyes = /obj/item/organ/eyes/shadow/shadowling
 	mutanttongue = /obj/item/organ/tongue/shadow_hive
 
+/datum/species/shadow/shadowling/ascended
+	name = "Ascended Shadowling"
+	id = SPECIES_SHADOWLING_ASCENDED
+	bodypart_overrides = list(
+		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/shadow/shadowling/ascended,
+		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/shadow/shadowling/ascended,
+		BODY_ZONE_HEAD = /obj/item/bodypart/head/shadow/shadowling/ascended,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/shadow/shadowling/ascended,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/shadow/shadowling/ascended,
+		BODY_ZONE_CHEST = /obj/item/bodypart/chest/shadow/shadowling/ascended,
+	)
+
 /datum/species/shadow/shadowling/check_roundstart_eligible()
 	return FALSE
 
@@ -119,6 +131,30 @@
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	eye_color_left = "#3cb8a5"
 	eye_color_right = "#3cb8a5"
+
+/obj/item/bodypart/head/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling_ascended.dmi'
+
+/obj/item/bodypart/chest/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling_ascended.dmi'
+
+/obj/item/bodypart/leg/left/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling_ascended.dmi'
+
+/obj/item/bodypart/leg/right/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling_ascended.dmi'
+
+/obj/item/bodypart/arm/left/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling_ascended.dmi'
+
+/obj/item/bodypart/arm/right/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling_ascended.dmi'
 
 /mob/living/carbon/human
 	var/lower_shadowling = FALSE
