@@ -49,6 +49,7 @@
 #include "metaserver/_metaserver.dme"
 #include "minesweeper/_minesweeper.dme"
 #include "mobs/_mobs.dme"
+#include "music/_music.dme"
 #include "nanomap/_nanomap.dme"
 #include "objects/_objects.dme"
 #include "orderables/_orderables.dme"
