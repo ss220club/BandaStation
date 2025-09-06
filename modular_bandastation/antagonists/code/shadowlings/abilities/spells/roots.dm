@@ -47,7 +47,7 @@
 /obj/effect/shadow_bind_anchor
 	name = "writhing shadows"
 	desc = "Tendrils of shadow coil here."
-	icon = 'modular_bandastation/antagonists/icons/shadowling_objects.dmi'
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "shadowcocoon"
 	pixel_x = -16
 	pixel_y = -16

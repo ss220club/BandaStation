@@ -1,7 +1,7 @@
 /obj/structure/shadowling_cocoon
 	name = "shadow cocoon"
 	desc = "Пульсирующий кокон живой тени."
-	icon = 'modular_bandastation/antagonists/icons/shadowling_objects.dmi'
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "shadowcocoon"
 	layer = MOB_LAYER + 0.1
 	anchored = TRUE
@@ -10,7 +10,7 @@
 
 /obj/effect/overlay/shadowling_cocoon_cover
 	name = "shadow cocoon cover"
-	icon = 'modular_bandastation/antagonists/icons/shadowling_objects.dmi'
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "shadowcocoon"
 	layer = ABOVE_MOB_LAYER
 	anchored = TRUE

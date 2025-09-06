@@ -12,8 +12,8 @@
 	stinger_sound = 'modular_bandastation/antagonists/sound/shadowlings/shadowling_gain.ogg'
 	antag_moodlet = /datum/mood_event/shadowling
 
-	hud_icon = 'icons/mob/huds/antag_hud.dmi'
-	antag_hud_name = "cult"
+	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
+	antag_hud_name = "shadowling"
 
 	var/ling_role = SHADOWLING_ROLE_MAIN
 	var/is_higher = FALSE

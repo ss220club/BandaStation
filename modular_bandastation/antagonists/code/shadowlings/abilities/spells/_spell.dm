@@ -1,11 +1,11 @@
 /datum/action/cooldown/shadowling
 	name = "Shadowling Ability"
 	desc = "Innate power of the brood."
-	button_icon = 'modular_bandastation/antagonists/icons/shadowling_actions.dmi'
+	button_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
 	button_icon_state = ""
-	background_icon = 'modular_bandastation/antagonists/icons/shadowling_actions.dmi'
+	background_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
 	background_icon_state = "bg_shadowling"
-	overlay_icon = 'modular_bandastation/antagonists/icons/shadowling_actions.dmi'
+	overlay_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
 	overlay_icon_state = "bg_shadowling_border"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 10 SECONDS
