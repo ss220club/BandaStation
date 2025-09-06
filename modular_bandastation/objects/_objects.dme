@@ -84,31 +84,6 @@
 #include "code/items/clothing/mod/types/ussp/mod_theme.dm"
 #include "code/items/clothing/mod/types/ussp/mod_types.dm"
 
-<<<<<<< HEAD
-
-
-#include "code/items/weapons/ranged/ballistic/ussp_guns/sabel.dm"
-#include "code/items/weapons/ranged/ballistic/tsf_guns/carwo.dm"
-#include "code/items/weapons/ranged/ballistic/tsf_guns/renoster.dm"
-#include "code/items/weapons/ranged/ballistic/tsf_guns/sindano.dm"
-#include "code/items/weapons/ranged/ballistic/tsf_guns/wespe.dm"
-#include "code/items/weapons/ranged/ballistic/mounted_machine_gun.dm"
-#include "code/items/weapons/ranged/ballistic/supply_packs.dm"
-#include "code/items/weapons/ranged/ballistic/weapon_designs.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/gp9.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/cm82.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/cm40.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/cm15.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/cm5.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/cm357.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/cm23.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/cm70.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/f4.dm"
-#include "code/items/weapons/ranged/ballistic/nt_guns/f90.dm"
-#include "code/items/weapons/ranged/ballistic/railgun.dm"
-
-=======
->>>>>>> upstream/master
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
 #include "code/machinery/photocopier.dm"
@@ -130,12 +105,3 @@
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
 
 #include "code/mecha/mecha.dm"
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-// END_INCLUDE
