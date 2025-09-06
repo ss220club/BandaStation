@@ -78,8 +78,30 @@
 		say("Hello, esteemed medical staff!")
 		return
 	var/bonus_fee = pandemonium ? rand(10,30) : 0
-	if(attempt_charge(src, paying, bonus_fee) & COMPONENT_OBJ_CANCEL_CHARGE )
+
+	// Apply insurance discount for kiosk usage (based on current tier)
+	var/discount_value = 0
+	if(ishuman(paying))
+		var/mob/living/carbon/human/H = paying
+		var/datum/record/crew/rec = find_record(H.real_name)
+		if(rec)
+			var/tier = rec.insurance_current
+			var/percent = INSURANCE_TIER_TO_MED_KIOSK_DISCOUNT(tier)
+			if(percent > 0)
+				var/base_cost = get_cost()
+				// Calculate and clamp so total never goes below zero
+				discount_value = round((base_cost * percent) / 100)
+				var/max_discount = max(0, base_cost + bonus_fee)
+				discount_value = clamp(discount_value, 0, max_discount)
+
+	var/extra_fees = bonus_fee - discount_value
+	if(attempt_charge(src, paying, extra_fees) & COMPONENT_OBJ_CANCEL_CHARGE )
 		return
+
+	// Inform via machine speech about insurance coverage, if any
+	if(discount_value > 0)
+		say("Ваша страховка покрыла [discount_value] кр.")
+
 	use_energy(active_power_usage)
 	paying_customer = TRUE
 	icon_state = "[base_icon_state]_active"

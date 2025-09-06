@@ -158,11 +158,64 @@ SUBSYSTEM_DEF(economy)
 		if(bank_account?.account_job && !ispath(bank_account.account_job))
 			temporary_total += (bank_account.account_job.paycheck * STARTING_PAYCHECKS)
 		bank_account.payday(1, skippable = TRUE)
+
+		// Handle optional insurance payment per account per payday
+		handle_insurance(bank_account)
 		station_total += bank_account.account_balance
 		if(MC_TICK_CHECK)
 			cached_processing.Cut(1, i + 1)
 			return FALSE
 	return TRUE
+
+/**
+ * Processes insurance for a player's bank account during payday.
+ * - Attempts to apply the desired tier, or downgrades to an affordable tier.
+ * - Deposits collected premium into the Medical department account.
+ * - Updates the crew record with current/desired tier and payer account id.
+ */
+/datum/controller/subsystem/economy/proc/handle_insurance(datum/bank_account/account)
+	if(!account)
+		return
+
+	// Validate desired tier
+	var/desired = isnull(account.insurance_desired) ? INSURANCE_NONE : account.insurance_desired
+	if(desired != INSURANCE_NONE && desired != INSURANCE_STANDARD && desired != INSURANCE_PREMIUM)
+		desired = INSURANCE_NONE
+
+	var/final_tier = INSURANCE_NONE
+	var/success = FALSE
+
+	// Build attempt order: desired, then downgrade to standard if premium fails
+	var/list/tiers_to_try = list()
+	if(desired == INSURANCE_PREMIUM)
+		tiers_to_try += INSURANCE_PREMIUM
+		tiers_to_try += INSURANCE_STANDARD
+	else if(desired == INSURANCE_STANDARD)
+		tiers_to_try += INSURANCE_STANDARD
+	// desired == NONE -> no attempts
+
+	// Attempt to charge for each tier, rolling back on credit failure
+	for(var/tier in tiers_to_try)
+		var/cost = INSURANCE_TIER_TO_COST(tier)
+		if(cost <= 0)
+			continue
+		if(account.adjust_money(-cost, "Insurance Premium"))
+			var/datum/bank_account/department/med = get_dep_account(ACCOUNT_MED)
+			if(med && med.adjust_money(cost, "Insurance Premium"))
+				final_tier = tier
+				success = TRUE
+				break
+			else
+				// Roll back debit if MED account missing or credit failed
+				account.adjust_money(cost, "Insurance Premium Refund")
+		// If debit failed, loop will try next (downgraded) tier
+
+	// Update crew record after final result
+	var/datum/record/crew/rec = find_record(account.account_holder)
+	if(rec)
+		rec.insurance_desired = desired
+		rec.insurance_current = success ? final_tier : INSURANCE_NONE
+		rec.insurance_payer_account_id = isnull(account.account_id) ? 0 : account.account_id
 
 /**
  * Updates the the inflation_value, effecting newscaster alerts and the mail system.

@@ -68,6 +68,9 @@ const RecordInfo = (props) => {
     species,
     wanted_status,
     voice,
+    insurance_current,
+    insurance_desired,
+    insurance_payer_account_id,
   } = foundRecord;
 
   const [isValid, setIsValid] = useState(true);
@@ -165,6 +168,14 @@ const RecordInfo = (props) => {
                 onValidationChange={setIsValid}
                 value={age}
               />
+            </LabeledList.Item>
+            <LabeledList.Item label="Страховка">
+              <Box>
+                Текущая: {insurance_current || 'None'}; Желаемая: {insurance_desired || 'None'}
+              </Box>
+            </LabeledList.Item>
+            <LabeledList.Item label="Счёт страховки">
+              {insurance_payer_account_id ?? '—'}
             </LabeledList.Item>
             <LabeledList.Item label="Вид">
               <EditableText
