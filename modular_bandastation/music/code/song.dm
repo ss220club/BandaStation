@@ -171,3 +171,9 @@
 			return TRUE
 
 	return ..()
+
+/datum/song/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if (!ui)
+		ui = new(user, src, "InstrumentEditor220", parent.name) // BANDASTATION EDIT - New Instrument Synchronisation
+		ui.open()
