@@ -1,4 +1,4 @@
 /datum/modpack/weapon
 	name = "Оружие"
 	desc = "Оружие которое было добавлено/портированно нашими контрибьюторами."
-	author = "Aylong"
+	author = "Ingakem, Fullonibus, konushi, AloeNeverDie, Gaxeer, Ez-Briz"
