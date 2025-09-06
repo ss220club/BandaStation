@@ -28,3 +28,21 @@ ADMIN_VERB_ONLY_CONTEXT_MENU(download_flaticon, R_ADMIN, "(Special) Download Ico
 		image.Scale(image_width, image_height)
 
 	usr << ftp(image, "[thing.name]_[image_width]x[image_height].png")
+
+ADMIN_VERB_AND_CONTEXT_MENU(man_up, R_ADMIN, "Man Up", "Tells mob to man up and deal with it.", ADMIN_CATEGORY_FUN, mob/living/target in world)
+	if(QDELETED(target))
+		return
+	to_chat(target, boxed_message(span_notice("<div align='center'><b><font size=8>Man up.<br>Deal with it.</font></b><br>Move on.</div>")))
+	SEND_SOUND(target, sound('modular_bandastation/admin/sound/manup1.ogg'))
+
+	log_admin("[key_name(user)] told [key_name(target)] to man up and deal with it.")
+	message_admins("[key_name_admin(user)] told [key_name(target)] to man up and deal with it.")
+
+ADMIN_VERB(global_man_up, R_ADMIN, "Global Man Up", "Tells everyone to man up and deal with it.", ADMIN_CATEGORY_FUN)
+	if(tgui_alert(user, "Вы уверены что хотите отправить глобальное сообщение?", "Подтверждение глобального Man Up", list("Да", "Нет")) != "Нет")
+		for(var/sissy in GLOB.player_list)
+			to_chat(sissy, boxed_message(span_notice("<div align='center'><b><font size=8>Man up.<br>Deal with it.</font></b><br>Move on.</div>")))
+			SEND_SOUND(sissy, sound('modular_bandastation/admin/sound/manup1.ogg'))
+
+		log_admin("[key_name(user)] told everyone to man up and deal with it.")
+		message_admins("[key_name_admin(user)] told everyone to man up and deal with it.")
