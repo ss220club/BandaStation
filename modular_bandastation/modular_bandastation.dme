@@ -37,6 +37,7 @@
 #include "food_and_drinks/_food_and_drinks.dme"
 #include "gunhud/_gunhud.dme"
 #include "hydroponics/_hydroponics.dme"
+#include "id_stickers/_id_stickers.dme"
 #include "implants/_implants.dme"
 #include "job_slots_preferences/_job_slots_preferences.dme"
 #include "jobs/_jobs.dme"
