@@ -92,7 +92,7 @@
 	H.set_light(2, 0.6, "#ff2a2a")
 	addtimer(CALLBACK(src, PROC_REF(stop_glare_fx), H), 0.6 SECONDS)
 	show_cone_fx(H)
-	playsound(H, 'sound/effects/nightmare_poof.ogg', 50, TRUE)
+	playsound(H, 'sound/effects/ghost2.ogg', 50, vary = TRUE, ignore_walls = FALSE)
 
 /datum/action/cooldown/shadowling/glare/proc/stop_glare_fx(mob/living/carbon/human/H)
 	if(!istype(H))
