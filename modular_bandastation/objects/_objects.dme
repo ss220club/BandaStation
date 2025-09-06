@@ -1,7 +1,5 @@
 #include "_objects.dm"
 
-#include "code/shuttles.dm"
-
 #include "code/effects/decal.dm"
 #include "code/effects/landmark.dm"
 #include "code/effects/spawners.dm"
@@ -10,12 +8,10 @@
 #include "code/floors/wooden.dm"
 
 #include "code/greyscale/config_types/greyscale_clothes.dm"
-#include "code/greyscale/config_types/greyscale_items.dm"
 
 #include "code/items/banners.dm"
 #include "code/items/cards_ids.dm"
 #include "code/items/hampters.dm"
-#include "code/items/id_stickers.dm"
 #include "code/items/instruments.dm"
 #include "code/items/material_pouch.dm"
 #include "code/items/papers.dm"
@@ -74,7 +70,6 @@
 #include "code/items/drugs/cocaine_item.dm"
 #include "code/items/drugs/crack_pipe.dm"
 #include "code/items/implants/death_alarm.dm"
-#include "code/items/melee/baton.dm"
 #include "code/items/storage/backpack.dm"
 #include "code/items/storage/belt.dm"
 #include "code/items/storage/death_implant_box.dm"
@@ -84,25 +79,12 @@
 #include "code/items/storage/id_stickers_box.dm"
 #include "code/items/storage/paper_spray_box.dm"
 #include "code/items/storage/tape_box.dm"
-#include "code/items/weapons/melee/centcom/baseball_bat.dm"
-#include "code/items/weapons/melee/centcom/rapier.dm"
-#include "code/items/weapons/melee/tsf_katana.dm"
-#include "code/items/weapons/melee/vibroblade.dm"
-#include "code/items/weapons/melee/baton.dm"
-#include "code/items/weapons/melee/centcom/enchantment.dm"
-#include "code/items/weapons/melee/centcom/legendary_swords.dm"
-#include "code/items/weapons/ranged/energy/awaymission_gun.dm"
-#include "code/items/weapons/ranged/energy/eg_14.dm"
-#include "code/items/weapons/ranged/energy/pulse.dm"
-#include "code/items/weapons/ranged/ballistic/ammo_casings.dm"
-#include "code/items/weapons/ranged/ballistic/magazines.dm"
-#include "code/items/weapons/ranged/ballistic/projectiles.dm"
-#include "code/items/weapons/ranged/ballistic/ammo_boxes.dm"
 #include "code/items/clothing/mod/types/tsf/mod_theme.dm"
 #include "code/items/clothing/mod/types/tsf/mod_types.dm"
 #include "code/items/clothing/mod/types/ussp/mod_theme.dm"
 #include "code/items/clothing/mod/types/ussp/mod_types.dm"
 
+<<<<<<< HEAD
 
 
 #include "code/items/weapons/ranged/ballistic/ussp_guns/sabel.dm"
@@ -125,6 +107,8 @@
 #include "code/items/weapons/ranged/ballistic/nt_guns/f90.dm"
 #include "code/items/weapons/ranged/ballistic/railgun.dm"
 
+=======
+>>>>>>> upstream/master
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
 #include "code/machinery/photocopier.dm"
@@ -146,3 +130,12 @@
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
 
 #include "code/mecha/mecha.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE
