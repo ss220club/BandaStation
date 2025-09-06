@@ -1,4 +1,5 @@
-// MARK: Evente Pine
+// MARK: Evente
+// Я уже в процессе понял, что лучше бы просто сделал модуль event
 //Snowless Pine
 /obj/structure/flora/tree/snowless_pine
 	name = "pine tree"
@@ -152,6 +153,7 @@
 /obj/effect/particle_effect/fluid/smoke/quick/swamp
 	color = COLOR_ASSEMBLY_GREEN
 
+// Planet Inka
 /atom/movable/screen/inka
 	name = "Инка"
 	desc = "Небольшая болотистая планета."
@@ -203,3 +205,18 @@
 	current_scale = target_scale
 	current_tx = -extra_left
 	current_ty = vertical_offset
+
+// APC Nanotrasen. Мозги сильно не ебите
+/obj/vehicle/sealed/car/apc
+	name = "БТР Нанотрейзен"
+	desc = "Стандартный многофункциональный бронетранспортер Корпорации Нанотрейзен."
+	icon = 'modular_bandastation/aesthetics/flora/icons/apc.dmi'
+	engine_sound = 'modular_bandastation/aesthetics/flora/audio/apc.ogg'
+	icon_state = "apc"
+	layer = ABOVE_MOB_LAYER
+	max_occupants = 4
+	pixel_y = -48
+	pixel_x = -48
+	enter_delay = 1.5 SECONDS
+	escape_time = 1.5 SECONDS
+	vehicle_move_delay = 5

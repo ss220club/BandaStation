@@ -23,7 +23,10 @@
 	fishing_datum = null // There's no fish in it
 
 /turf/open/water/alternative/muddy/deep
+	name = "болотина"
 	desc = "Болотистая вода. Если быть неосторожным - утянет."
+	icon_state = "water_swamp"
+	base_icon_state = "water_swamp"
 	baseturfs = /turf/open/water/alternative/muddy/deep
 	immerse_overlay_color = "#303c22"
 	is_swimming_tile = TRUE
