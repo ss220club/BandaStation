@@ -19,3 +19,13 @@
 	(T) == INSURANCE_STANDARD ? "Standard" : \
 	"None")
 
+// --- Bandastation: simple insurance benefits ---
+// Medical kiosk discount percent by tier (0-100)
+#define INSURANCE_DISCOUNT_STANDARD 50
+#define INSURANCE_DISCOUNT_PREMIUM 100
+
+// Helper: tier -> kiosk discount percent
+#define INSURANCE_TIER_TO_MED_KIOSK_DISCOUNT(T) \
+	((T) == INSURANCE_PREMIUM ? INSURANCE_DISCOUNT_PREMIUM : \
+	(T) == INSURANCE_STANDARD ? INSURANCE_DISCOUNT_STANDARD : \
+	0)
