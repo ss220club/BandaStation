@@ -1,5 +1,5 @@
 /datum/action/cooldown/shadowling/glare
-	name = "Glare"
+	name = "Взгляд"
 	desc = "Сокрующий взгляд в сторону, куда вы смотрите, позволяющий оглушать и обесиливать ваших врагов."
 	button_icon_state = "glare"
 	cooldown_time = 30 SECONDS

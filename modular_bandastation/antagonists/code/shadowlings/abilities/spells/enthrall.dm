@@ -1,5 +1,5 @@
 /datum/action/cooldown/shadowling/enthrall
-	name = "Enthrall"
+	name = "Порабощение"
 	desc = "Подчиняет ближайшее существо к вам в небольшом конусе служить улью."
 	button_icon_state = "enthrall"
 	cooldown_time = 45 SECONDS

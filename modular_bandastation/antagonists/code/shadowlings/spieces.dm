@@ -42,6 +42,7 @@
 /datum/species/shadow/shadowling/ascended
 	name = "Ascended Shadowling"
 	id = SPECIES_SHADOWLING_ASCENDED
+	no_equip_flags = ITEM_SLOT_MASK | ITEM_SLOT_HEAD | ITEM_SLOT_EYES | ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_ICLOTHING | ITEM_SLOT_SUITSTORE | ITEM_SLOT_LPOCKET | ITEM_SLOT_RPOCKET | ITEM_SLOT_BELT | ITEM_SLOT_EARS | ITEM_SLOT_NECK | ITEM_SLOT_BACK
 	bodypart_overrides = list(
 		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/shadow/shadowling/ascended,
 		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/shadow/shadowling/ascended,
@@ -49,6 +50,30 @@
 		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/shadow/shadowling/ascended,
 		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/shadow/shadowling/ascended,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/shadow/shadowling/ascended,
+	)
+
+	inherent_traits = list(
+		TRAIT_GENELESS,
+		TRAIT_LAVA_IMMUNE,
+		TRAIT_NEVER_WOUNDED,
+		TRAIT_NOBLOOD,
+		TRAIT_NOBREATH,
+		TRAIT_NODISMEMBER,
+		TRAIT_NOFIRE,
+		TRAIT_VIRUSIMMUNE,
+		TRAIT_NO_AUGMENTS,
+		TRAIT_NO_DNA_COPY,
+		TRAIT_NO_PLASMA_TRANSFORM,
+		TRAIT_NO_UNDERWEAR,
+		TRAIT_PIERCEIMMUNE,
+		TRAIT_RADIMMUNE,
+		TRAIT_SNOWSTORM_IMMUNE,
+		TRAIT_UNHUSKABLE,
+		TRAIT_SILENT_FOOTSTEPS,
+		TRAIT_NOHUNGER,
+		TRAIT_NO_SLIP_ALL,
+		TRAIT_FREE_FLOAT_MOVEMENT,
+		TRAIT_MOVE_FLYING
 	)
 
 /datum/species/shadow/shadowling/check_roundstart_eligible()
