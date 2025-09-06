@@ -123,6 +123,11 @@
 #include "code/items/weapons/ranged/ballistic/nt_guns/cm70.dm"
 #include "code/items/weapons/ranged/ballistic/nt_guns/f4.dm"
 #include "code/items/weapons/ranged/ballistic/nt_guns/f90.dm"
+#include "code/items/weapons/ranged/ballistic/elyzium_guns/fn4.dm"
+#include "code/items/weapons/ranged/ballistic/elyzium_guns/fn18.dm"
+#include "code/items/weapons/ranged/ballistic/elyzium_guns/as32.dm"
+#include "code/items/weapons/ranged/ballistic/elyzium_guns/hlrm2.dm"
+#include "code/items/weapons/ranged/ballistic/elyzium_guns/tp14.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"

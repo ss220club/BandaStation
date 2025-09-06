@@ -27,6 +27,13 @@
 	recoil = 0.4
 	obj_flags = UNIQUE_RENAME
 
+/obj/item/gun/ballistic/automatic/carwo/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 28, \
+		overlay_y = 10)
+
 /obj/item/gun/ballistic/automatic/carwo/examine(mob/user)
 	. = ..()
 	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")

@@ -27,6 +27,13 @@
 		"Green" = "renoster_green"
 	)
 
+/obj/item/gun/ballistic/shotgun/riot/renoster/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 32, \
+		overlay_y = 10)
+
 /obj/item/gun/ballistic/shotgun/riot/renoster/examine(mob/user)
 	. = ..()
 	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
