@@ -2,6 +2,8 @@
 	id = "nyxosynthesis_shadowling"
 	tick_interval = 1 SECONDS
 	var/applied_speed = FALSE
+	var/next_burn_sfx_time = 0
+	var/static/sfx_burn = 'sound/weapons/sear.ogg'
 
 /datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling/tick(seconds_between_ticks)
 	var/turf/T = owner?.loc
@@ -12,11 +14,15 @@
 	var/coef = GET_BODYPART_COEFFICIENT(bodyparts)
 
 	if(light >= SHADOWLING_LIGHT_THRESHOLD)
-		owner.take_overall_damage(
-			brute = SHADOWLING_BRIGHT_BRUTE_PER_LIMB * coef,
-			burn  = SHADOWLING_BRIGHT_BURN_PER_LIMB  * coef,
-			required_bodytype = BODYTYPE_SHADOW
-		)
+		if(coef > 0)
+			owner.take_overall_damage(
+				brute = SHADOWLING_BRIGHT_BRUTE_PER_LIMB * coef,
+				burn  = SHADOWLING_BRIGHT_BURN_PER_LIMB  * coef,
+				required_bodytype = BODYTYPE_SHADOW
+			)
+			if(world.time >= next_burn_sfx_time)
+				playsound(T, sfx_burn, 50, TRUE)
+				next_burn_sfx_time = world.time + 1 SECONDS
 		if(applied_speed)
 			owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/dark)
 			applied_speed = FALSE

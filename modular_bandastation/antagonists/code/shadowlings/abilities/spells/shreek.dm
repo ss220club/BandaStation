@@ -1,6 +1,6 @@
 /datum/action/cooldown/shadowling/shreek
 	name = "Крик"
-	desc = "Ударная волна тьмы: рядом швыряет и оглушает, до 5 тайлов дезориентирует и трясёт. Бьёт стёкла."
+	desc = "Ударная волна тьмы вокруг: рядом швыряет и оглушает, до 5 тайлов дезориентирует и трясёт. Бьёт стёкла и лампы."
 	button_icon_state = "screech"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 30 SECONDS
@@ -10,29 +10,24 @@
 
 /datum/action/cooldown/shadowling/shreek/DoEffect(mob/living/carbon/human/H, atom/_)
 	playsound(get_turf(H), sfx_activate, 70, TRUE)
-
 	new /obj/effect/temp_visual/circle_wave/shadow_shreek_wave(get_turf(H))
-
 	H.visible_message(
 		span_boldwarning("[H] издаёт пронзительный нечеловеческий крик!"),
 		span_userdanger("Вы издаёте пронзительный крик, и тьма рвётся наружу!")
 	)
-
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 
 	for(var/mob/living/L in range(disorient_radius, H))
 		if(L == H)
 			continue
 		if(istype(L, /mob/living/carbon/human) && hive)
-			if(L in hive.lings)
+			if((L in hive.lings) || (L in hive.thralls))
 				continue
-			if(L in hive.thralls)
-				continue
-
 		var/dist = get_dist(H, L)
 		if(dist <= knock_radius)
 			L.adjustOrganLoss(ORGAN_SLOT_EARS, 15)
 			L.Knockdown(0.6 SECONDS)
+			L.adjust_dizzy(4)
 			knockback_away_from(H, L, 3)
 		else
 			L.adjustOrganLoss(ORGAN_SLOT_EARS, 8)
@@ -49,6 +44,7 @@
 	for(var/obj/structure/window/W in range(disorient_radius, H))
 		damage_glass_with_falloff(H, W)
 
+	break_wall_lights_with_falloff(H)
 	return TRUE
 
 /obj/effect/temp_visual/circle_wave/shadow_shreek_wave
@@ -91,3 +87,10 @@
 			break
 		end = next
 	AM.throw_at(end, range, speed)
+
+/datum/action/cooldown/shadowling/shreek/proc/break_wall_lights_with_falloff(mob/living/carbon/human/H)
+	for(var/obj/machinery/light/L in range(disorient_radius, H))
+		var/d = clamp(get_dist(H, L), 1, disorient_radius)
+		var/chance = clamp(100 - (15 * d), 20, 100)
+		if(prob(chance))
+			L.break_light_tube()

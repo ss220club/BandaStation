@@ -11,7 +11,6 @@
 
 	required_thralls = 0
 
-	var/prev_alpha
 	var/steps = 3
 	var/step_time = 10 SECONDS
 
@@ -61,8 +60,6 @@
 	playsound(start, sfx_start, 60, TRUE)
 
 	to_chat(H, span_notice("Вы начинаете собирать тьму в себе..."))
-	prev_alpha = H.alpha
-	H.alpha = 0
 
 	for(var/i = 1, i <= steps, i++)
 		var/turf/cur = get_turf(H)
@@ -73,7 +70,6 @@
 		if(cur.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
 			to_chat(H, span_warning("Яркий свет рассеивает тьму — Возвышение сорвано."))
 			cleanup(spawned)
-			H.alpha = prev_alpha
 			return FALSE
 
 		play_tick_fx(H)
@@ -85,12 +81,10 @@
 		if(!do_after(H, step_time, H))
 			to_chat(H, span_warning("Вы теряете концентрацию — Возвышение прервано."))
 			cleanup(spawned)
-			H.alpha = prev_alpha
 			return FALSE
 
 	if(QDELETED(H))
 		cleanup(spawned)
-		H.alpha = prev_alpha
 		return FALSE
 
 	var/old_turf = get_turf(H)
@@ -114,7 +108,6 @@
 	hive.grant_sync_action(H)
 
 	cleanup(spawned)
-	H.alpha = prev_alpha
 	Remove(H)
 	qdel(src)
 	return TRUE

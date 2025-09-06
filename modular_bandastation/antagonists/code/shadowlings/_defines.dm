@@ -65,7 +65,5 @@ var/global/list/SHADOWLING_ASCENDED_ABILITIES = list(
 	/datum/action/cooldown/shadowling/shadow_strike,
 	/datum/action/cooldown/shadowling/shadow_smoke,
 	/datum/action/cooldown/shadowling/labyrinth,
-	/datum/action/cooldown/shadowling/recuperation,
-	/datum/action/cooldown/shadowling/election,
-	/datum/action/cooldown/shadowling/ascend
+	/datum/action/cooldown/shadowling/recuperation
 )

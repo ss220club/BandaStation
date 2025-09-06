@@ -51,6 +51,9 @@
 	max_range = 0
 	channel_time = 0
 
+	var/steps = 6
+	var/step_time = 5 SECONDS
+
 	var/static/sfx_start = 'sound/effects/splat.ogg'
 	var/static/sfx_end = 'sound/effects/ghost.ogg'
 	var/static/list/sfx_tick = list('sound/items/weapons/slice.ogg', 'sound/items/weapons/slash.ogg', 'sound/items/weapons/slashmiss.ogg')
@@ -103,14 +106,12 @@
 /datum/action/cooldown/shadowling/hatch/DoEffect(mob/living/carbon/human/H, atom/_)
 	if(!istype(H))
 		return FALSE
-
 	if(istype(H.dna?.species, /datum/species/shadow/shadowling))
 		return FALSE
 
 	var/turf/start = get_turf(H)
 	if(!start)
 		return FALSE
-
 	if(start.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
 		to_chat(H, span_warning("Свет мешает вылуплению."))
 		return FALSE
@@ -120,18 +121,27 @@
 	var/list/spawned = list(cocoon) + walls
 
 	attach_cover(H)
-
 	playsound(start, sfx_start, 60, TRUE)
 	to_chat(H, span_notice("Вы начинаете разрывать оболочку..."))
 
-	var/steps = 6
-	var/step_time = 5 SECONDS
+	var/total_time = steps * step_time
+	var/turf/anchor_turf = get_turf(H)
+	var/area/anchor_area = get_area(H)
 	prev_alpha = H.alpha
 	H.alpha = 0
+	H.drop_all_held_items()
+	H.Paralyze(total_time)
 
 	for(var/i = 1, i <= steps, i++)
+		if(QDELETED(H) || H.stat == DEAD)
+			detach_cover(H)
+			cleanup(spawned)
+			H.alpha = prev_alpha
+			return FALSE
+
 		var/turf/cur = get_turf(H)
-		if(!cur)
+		if(!cur || cur != anchor_turf || get_area(H) != anchor_area)
+			to_chat(H, span_warning("Вы вырвались из кокона — вылупление прервано."))
 			detach_cover(H)
 			cleanup(spawned)
 			H.alpha = prev_alpha
@@ -146,17 +156,14 @@
 
 		play_tick_fx(H)
 
+		var/total = steps * (step_time / (1 SECONDS))
+		var/passed = (i - 1) * (step_time / (1 SECONDS))
 		if(i == 1)
-			to_chat(H, span_notice("Тьма собирается внутри вас (0/[steps * (step_time / (1 SECONDS))] сек)."))
+			to_chat(H, span_notice("Тьма собирается внутри вас (0/[total] сек)."))
 		else
-			to_chat(H, span_notice("Тьма сгущается ([ (i - 1) * (step_time / (1 SECONDS)) ]/[steps * (step_time / (1 SECONDS))] сек)."))
+			to_chat(H, span_notice("Тьма сгущается ([passed]/[total] сек)."))
 
-		if(!do_after(H, step_time, H))
-			to_chat(H, span_warning("Вы теряете концентрацию — вылупление прервано."))
-			detach_cover(H)
-			cleanup(spawned)
-			H.alpha = prev_alpha
-			return FALSE
+		sleep(step_time)
 
 	if(QDELETED(H))
 		detach_cover(H)

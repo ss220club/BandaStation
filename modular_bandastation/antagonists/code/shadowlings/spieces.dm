@@ -102,7 +102,7 @@ var/ascended_max_health = 220
 	shadowling_remove_ascended_claws(H)
 
 /obj/item/melee/umbral_claw
-	name = "umbral claw"
+	name = "umbral claw (right)"
 	desc = "Слиток зазубренной тени."
 	icon = 'icons/mob/nonhuman-player/alien.dmi'
 	icon_state = "claw"
@@ -129,31 +129,28 @@ var/ascended_max_health = 220
 /obj/item/melee/umbral_claw/afterattack(atom/target, mob/user, proximity, params)
 	. = ..()
 
-/obj/item/melee/umbral_claw/right
-	name = "umbral claw (right)"
-
 /obj/item/melee/umbral_claw/left
 	name = "umbral claw (left)"
-
 
 /proc/shadowling_equip_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
-	for(var/i in 1 to 2)
-		H.swap_hand()
-		var/obj/item/melee/umbral_claw/C = new
-		if(H.get_active_held_item())
-			H.dropItemToGround(H.get_active_held_item(), TRUE)
-		if(!H.put_in_hands(C))
-			H.equip_to_slot_or_del(C, ITEM_SLOT_HANDS)
 
+	var/obj/item/melee/umbral_claw/left/claw_l = new(H)
+	var/obj/item/melee/umbral_claw/claw_r = new(H)
+
+	H.drop_all_held_items()
+
+	if(!H.put_in_l_hand(claw_l))
+		H.dropItemToGround(claw_l, TRUE)
+	if(!H.put_in_r_hand(claw_r))
+		H.dropItemToGround(claw_r, TRUE)
 
 /proc/shadowling_remove_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 	for(var/obj/item/melee/umbral_claw/C in H.get_all_contents())
 		qdel(C)
-
 
 /datum/species/shadow/shadowling/check_roundstart_eligible()
 	return FALSE
