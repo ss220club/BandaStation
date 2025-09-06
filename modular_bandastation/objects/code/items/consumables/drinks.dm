@@ -605,3 +605,437 @@
 	)
 	mix_message = "Красный свет из сосуда заполняет всё вокруг."
 
+/datum/reagent/consumable/slimetea
+	name = "Слизнечай"
+	description = "Странная жидкость, слегка студинистая, в которой плавают ягоды, но пахнет вкусно."
+	color = "#22e46c"
+	taste_description = "яблочный джем с черникой и чаем"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/slimetea
+	required_drink_type = /datum/reagent/consumable/slimetea
+	name = "Слизнечай"
+	desc = "Стакан с студинистой жидкостью. внутри которой плавают ягоды."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "slimetea"
+
+/datum/chemical_reaction/drink/slimetea
+	results = list(/datum/reagent/consumable/slimetea = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/teapowder = 2,
+		/datum/reagent/toxin/slimejelly = 1,
+		/datum/reagent/consumable/berryjuice = 2,
+	)
+	required_temp = 303
+
+/datum/reagent/consumable/slimetea/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	if(SPT_PROB(5, seconds_per_tick) && !isjellyperson(affected_mob))
+		affected_mob.bodytemperature = affected_mob.bodytemperature - (2 * seconds_per_tick)
+		to_chat(affected_mob,span_notice(pick("Вы чувствуете себя склизским","Вы прилипаете ко всему","Вы слышите как что-то хлюпает в вашем ботинке")))
+
+/datum/reagent/consumable/glace
+	name = "Гляссе"
+	description = "Кофе с шариком мороженного сверху."
+	color = "#dfa057"
+	taste_description = "холодный кофе, пломбир и шоколадная крошка"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/glace
+	required_drink_type = /datum/reagent/consumable/glace
+	name = "Гляссе"
+	desc = "Стакан доверху заполненный мороженным, который плавает на кофе."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "glace"
+
+/datum/chemical_reaction/drink/glace
+	results = list(/datum/reagent/consumable/glace = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/coffee = 3,
+		/datum/reagent/consumable/vanillashake = 2
+
+	)
+	is_cold_recipe = TRUE
+	required_temp = 213
+
+/datum/reagent/consumable/robbusto
+	name = "Роббусто"
+	description = "Крепкий кофе для рабочей смены."
+	color = "#4e361b"
+	taste_description = "горький кофе с сладким послевкусием"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/robbusto
+	required_drink_type = /datum/reagent/consumable/robbusto
+	name = "Роббусто"
+	desc = "Стакан с крепким кофе."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "robbusto"
+
+/datum/chemical_reaction/drink/robbusto
+	results = list(/datum/reagent/consumable/robbusto = 4)
+	required_reagents = list(
+		/datum/reagent/toxin/coffeepowder = 3,
+		/datum/reagent/consumable/sugar = 2
+
+	)
+	required_temp = 333
+
+/datum/movespeed_modifier/reagent/robbusto
+	multiplicative_slowdown = -0.15
+
+/datum/reagent/consumable/robbusto/on_mob_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.add_movespeed_modifier(/datum/movespeed_modifier/reagent/robbusto)
+
+/datum/reagent/consumable/robbusto/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/robbusto)
+
+/datum/reagent/consumable/robbusto/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	var/high_message = pick("Вы чувствуете себя бодрее", "Вы должны быть быстрее!")
+	if(SPT_PROB(2.5, seconds_per_tick))
+		to_chat(affected_mob, span_notice("[high_message]"))
+	affected_mob.add_mood_event("tweaking", /datum/mood_event/stimulant_medium)
+	affected_mob.AdjustAllImmobility(-10 * REM * seconds_per_tick)
+	var/need_mob_update
+	need_mob_update = affected_mob.adjustStaminaLoss(-1 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	affected_mob.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
+	need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_HEART, (rand(1,3) * REM * seconds_per_tick)/5, required_organ_flag = affected_organ_flags)
+	if(need_mob_update)
+		. = UPDATE_MOB_HEALTH
+	if(SPT_PROB(2.5, seconds_per_tick))
+		affected_mob.emote(pick("twitch", "shiver"))
+
+/datum/reagent/consumable/vortex
+	name = "Вортекс-кофе"
+	description = "Кофе, тоник и Блюспейс, любимый рецепт рода Дремисов."
+	color = "#45a2e0"
+	taste_description = "горечь кофе с привкусом стекла"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_HIGH
+
+/datum/glass_style/drinking_glass/vortex
+	required_drink_type = /datum/reagent/consumable/vortex
+	name = "Вортекс-кофе"
+	desc = "Кофе, тоник и Блюспейс, любимый рецепт рода Дремисов."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "vortex"
+
+/datum/chemical_reaction/drink/vortex
+	results = list(/datum/reagent/consumable/vortex = 5)
+	required_reagents = list(
+		/datum/reagent/bluespace = 1,
+		/datum/reagent/stable_plasma = 1,
+		/datum/reagent/consumable/coffee = 2,
+		/datum/reagent/consumable/tonic = 1
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/vortex/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	if(SPT_PROB(5, seconds_per_tick))
+		do_teleport(affected_mob, get_turf(affected_mob), pick(2,3), channel = TELEPORT_CHANNEL_BLUESPACE)
+
+/datum/reagent/consumable/mokko
+	name = "Мокко"
+	description = "Изящный кофе для распития, сидя в капитанском кресле."
+	color = "#57361b"
+	taste_description = "капучинно с взбитыми сливками и шоколадной крошкой"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/mokko
+	required_drink_type = /datum/reagent/consumable/mokko
+	name = "Мокко"
+	desc = "Изящный кофе для распития, сидя в капитанском кресле."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "mokka"
+
+/datum/chemical_reaction/drink/mokko
+	results = list(/datum/reagent/consumable/mokko = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/coco = 1,
+		/datum/reagent/consumable/coffee = 2,
+		/datum/reagent/consumable/cream = 2,
+
+	)
+	required_temp = 303
+
+/datum/reagent/consumable/frappuchino
+	name = "Фраппучино"
+	description = "Холодный кофе со льдом, который вы уже где-то видели..."
+	color = "#bb8960"
+	taste_description = "мороженное с кофе, столь холодный, что зубы сводит"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/frappuchino
+	required_drink_type = /datum/reagent/consumable/frappuchino
+	name = "Фраппучино"
+	desc = "Холодный кофе со льдом, который вы уже где-то видели..."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "frappuchino"
+
+/datum/chemical_reaction/drink/frappuchino
+	results = list(/datum/reagent/consumable/frappuchino = 5)
+	required_reagents = list(
+		/datum/reagent/consumable/ice = 1,
+		/datum/reagent/toxin/coffeepowder = 2,
+		/datum/reagent/consumable/milk = 2,
+
+	)
+	is_cold_recipe = TRUE
+	required_temp = 243
+
+/datum/reagent/consumable/macchiato
+	name = "Макиато"
+	description = "Младшая сестра мокко. Или латте? Здесь слишком мало молока чтобы понять."
+	color = "#503620"
+	taste_description = "сливочный вкус с густой бархатистой молочной пенкой"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_STOCK
+
+/datum/glass_style/drinking_glass/macchiato
+	required_drink_type = /datum/reagent/consumable/macchiato
+	name = "Макиато"
+	desc = "Младшая сестра мокко. Или латте? Здесь слишком мало молока чтобы понять."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "macchiato"
+
+/datum/chemical_reaction/drink/macchiato
+	results = list(/datum/reagent/consumable/macchiato = 3)
+	required_reagents = list(
+		/datum/reagent/toxin/coffeepowder = 2,
+		/datum/reagent/consumable/milk = 1,
+
+	)
+	required_temp = 303
+
+/datum/reagent/consumable/espresso
+	name = "Эспрессо"
+	description = "Бессмертная классика кофейных напитков в миниатюрном формате."
+	color = "#503620"
+	taste_description = "кисло-сладкий кофе с легким оттенком горечи"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/espresso
+	required_drink_type = /datum/reagent/consumable/espresso
+	name = "Эспрессо"
+	desc = "Бессмертная классика кофейных напитков в миниатюрном формате."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "espresso"
+
+/datum/chemical_reaction/drink/espresso
+	results = list(/datum/reagent/consumable/espresso = 3)
+	required_reagents = list(
+		/datum/reagent/toxin/coffeepowder = 4,
+		/datum/reagent/consumable/tonic = 1,
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/fruit_tea
+	name = "Фруктовый чай"
+	description = "Зелёный чай с плавающими в нем ягодами."
+	color = "#b9a756"
+	taste_description = "кисло-сладкий чай с ягодным вкусном"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/fruit_tea
+	required_drink_type = /datum/reagent/consumable/fruit_tea
+	name = "Фруктовый чай"
+	desc = "Зелёный чай с плавающими в нем ягодами."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "fruit_tea"
+
+/datum/chemical_reaction/drink/fruit_tea
+	results = list(/datum/reagent/consumable/fruit_tea = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/teapowder = 2,
+		/datum/reagent/consumable/berryjuice = 2,
+		/datum/reagent/consumable/orangejuice = 1,
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/pumpkin_latte
+	name = "Тыквенный латте"
+	description = "Латте с содержанием тыквенного сока."
+	color = "#e48648"
+	taste_description = "сладкий латте с привкусом тыквы"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/pumpkin_latte
+	required_drink_type = /datum/reagent/consumable/pumpkin_latte
+	name = "Тыквенный латте"
+	desc = "Латте с содержанием тыквенного сока."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "pumpkin_latte"
+
+/datum/chemical_reaction/drink/pumpkin_latte
+	results = list(/datum/reagent/consumable/pumpkin_latte = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/coffeepowder = 2,
+		/datum/reagent/consumable/cream = 2,
+		/datum/reagent/consumable/pumpkinjuice = 1,
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/teh_tahlua
+	name = "Тэ-талуа"
+	description = "очень сладкий черный чай с апельсиновым соком"
+	color = "#e7c6b0"
+	taste_description = "кисло-сладкий чай с ягодным вкусном"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/teh_tahlua
+	required_drink_type = /datum/reagent/consumable/teh_tahlua
+	name = "Тэ-талуа"
+	desc = "Зелёный чай с плавающими в нем ягодами."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "teh_tahlua"
+
+/datum/chemical_reaction/drink/teh_tahlua
+	results = list(/datum/reagent/consumable/teh_tahlua = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/teapowder = 2,
+		/datum/reagent/consumable/eggyolk = 1,
+		/datum/reagent/consumable/orangejuice = 1,
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/chifir
+	name = "Чифир"
+	description = "Крайне распространенный в местах не столь отдалённых напиток."
+	color = "#e7c6b0"
+	taste_description = "очень крепкий чай, отдающий железом"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_STOCK
+
+/datum/glass_style/drinking_glass/chifir
+	required_drink_type = /datum/reagent/consumable/chifir
+	name = "Чифир"
+	desc = "Крайне распространенный в местах не столь отдалённых напиток."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "chifir"
+
+/datum/chemical_reaction/drink/chifir
+	results = list(/datum/reagent/consumable/chifir = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/teapowder = 9,
+		/datum/reagent/consumable/tea = 1
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/chifir/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
+	. = ..()
+	drinker.set_drugginess(10 SECONDS * REM * seconds_per_tick)
+	if(SPT_PROB(10, seconds_per_tick))
+		drinker.say(pick("Эх, раз, ещё раз, ещё много-много раз!","Марсианский централ, ветер северный!","Мурка, ты мой мурёночек…","За решёткой мостика не видать..."))
+	var/need_mob_update
+	need_mob_update = drinker.adjustStaminaLoss(2 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	drinker.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
+	if(need_mob_update)
+		. = UPDATE_MOB_HEALTH
+
+/datum/reagent/consumable/lord_of_perma
+	name = "Повелитель Пермабрига"
+	description = "Любимый напиток тех, кто не желает покидать родной пермабриг."
+	color = "#e7c6b0"
+	taste_description = "молочный улун с бананом и ванилью"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_GOOD
+	glass_price = DRINK_PRICE_MEDIUM
+
+/datum/glass_style/drinking_glass/lord_of_perma
+	required_drink_type = /datum/reagent/consumable/lord_of_perma
+	name = "Повелитель Пермабрига"
+	desc = "Любимый напиток тех, кто не желает покидать родной пермабриг."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "lord_of_perma"
+
+/datum/chemical_reaction/drink/lord_of_perma
+	results = list(/datum/reagent/consumable/lord_of_perma = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/teapowder = 3,
+		/datum/reagent/consumable/bananashake = 2
+
+	)
+	required_temp = 303
+
+/datum/reagent/consumable/lord_of_perma/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
+	. = ..()
+	drinker.set_drugginess(20 SECONDS * REM * seconds_per_tick)
+	if(SPT_PROB(10, seconds_per_tick))
+		drinker.say(pick("Мам, у меня всё хорошо, кормят, поят, жильё бесплатное. Только соседи странные — домой не уходят.","Ты кем был на свободе? Музыкантом. А тут кем будешь? Тут тоже: «играю» на нервах охраны.","Мужики, а что у нас сегодня на ужин? Да как обычно: решётка с котлетами!"))
+
+/datum/reagent/consumable/lavender_raf
+	name = "Лавандовый рафф"
+	description = "Напиток для тех, кто обожает ИИ и разработку."
+	color = "#be30e9"
+	taste_description = "кофе со сливками и вкусом сушенной лаванды"
+	nutriment_factor = 1
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	quality = DRINK_NICE
+	glass_price = DRINK_PRICE_STOCK
+
+/datum/glass_style/drinking_glass/lavender_raf
+	required_drink_type = /datum/reagent/consumable/lavender_raf
+	name = "Лавандовый рафф"
+	desc = "Напиток для тех, кто обожает ИИ и разработку."
+	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
+	icon_state = "lavender_raf"
+
+/datum/chemical_reaction/drink/lavender_raf
+	results = list(/datum/reagent/consumable/lavender_raf = 5)
+	required_reagents = list(
+		/datum/reagent/toxin/coffeepowder = 2,
+		/datum/reagent/consumable/nutriment = 1,
+		/datum/reagent/consumable/cream = 2,
+
+	)
+	required_temp = 333
+
+/datum/reagent/consumable/lavender_raf/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
+	. = ..()
+	if(SPT_PROB(10, seconds_per_tick))
+		drinker.say(pick("Не кофе — а вайб в кружке","С этим кофе даже дедлайн выглядит как фича","Для тех, кто уже сделал гит коммит доброе утро","Мой дейли стэнд-ап внутри"))
+
