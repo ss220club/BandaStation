@@ -1,3 +1,4 @@
+// MARK: Ability
 /datum/movespeed_modifier/shadowling/cold_wave
 	multiplicative_slowdown = 1.25
 	priority = 20
@@ -13,7 +14,7 @@
 	max_range = 4
 	channel_time = 0
 	var/const/fov_degree = 90
-	var/static/sfx_cold = 'sound/effects/magic/voidblink.ogg'
+	var/static/sfx_cold = 'modular_bandastation/antagonists/sound/shadowlings/frost.ogg'
 	var/reagent_type = /datum/reagent/consumable/frostoil
 
 /datum/action/cooldown/shadowling/cold_wave/DoEffect(mob/living/carbon/human/H, atom/_)
@@ -60,39 +61,6 @@
 		out += T
 	return out
 
-/datum/action/cooldown/shadowling/cold_wave/proc/apply_slow(mob/living/L, duration)
-	if(!istype(L))
-		return
-	L.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/cold_wave)
-	addtimer(CALLBACK(src, PROC_REF(_remove_slow), L), duration)
-
-/datum/action/cooldown/shadowling/cold_wave/proc/_remove_slow(mob/living/L)
-	if(!istype(L))
-		return
-	L.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/cold_wave)
-
-/datum/action/cooldown/shadowling/cold_wave/proc/play_cold_fx(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-	playsound(get_turf(H), sfx_cold, 70, TRUE)
-	show_cold_cone(H)
-
-/obj/effect/temp_visual/shadowling/cold_cone_tile
-	name = "cold wave"
-	anchored = TRUE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = ABOVE_GAME_PLANE
-	layer = EFFECTS_LAYER
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "sparks"
-	alpha = 180
-	color = "#66ccff"
-
-/obj/effect/temp_visual/shadowling/cold_cone_tile/Initialize(mapload)
-	. = ..()
-	animate(src, alpha = 0, time = 6)
-	QDEL_IN(src, 0.6 SECONDS)
-
 /datum/action/cooldown/shadowling/cold_wave/proc/show_cold_cone(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
@@ -114,3 +82,37 @@
 			continue
 		turfs_in_cone += T
 	return turfs_in_cone
+
+/datum/action/cooldown/shadowling/cold_wave/proc/apply_slow(mob/living/L, duration)
+	if(!istype(L))
+		return
+	L.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/cold_wave)
+	addtimer(CALLBACK(src, PROC_REF(_remove_slow), L), duration)
+
+/datum/action/cooldown/shadowling/cold_wave/proc/_remove_slow(mob/living/L)
+	if(!istype(L))
+		return
+	L.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/cold_wave)
+
+/datum/action/cooldown/shadowling/cold_wave/proc/play_cold_fx(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	playsound(get_turf(H), sfx_cold, 70, TRUE)
+	show_cold_cone(H)
+
+// MARK: Effects
+/obj/effect/temp_visual/shadowling/cold_cone_tile
+	name = "cold wave"
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	plane = ABOVE_GAME_PLANE
+	layer = EFFECTS_LAYER
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "sparks"
+	alpha = 180
+	color = "#66ccff"
+
+/obj/effect/temp_visual/shadowling/cold_cone_tile/Initialize(mapload)
+	. = ..()
+	animate(src, alpha = 0, time = 6)
+	QDEL_IN(src, 0.6 SECONDS)

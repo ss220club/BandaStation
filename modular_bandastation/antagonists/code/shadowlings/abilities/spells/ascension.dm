@@ -15,7 +15,7 @@
 	var/step_time = 10 SECONDS
 
 	var/static/sfx_start = 'sound/effects/splat.ogg'
-	var/static/sfx_end   = 'sound/effects/ghost.ogg'
+	var/static/sfx_end   = 'sound/effects/magic/mutate.ogg'
 	var/static/list/sfx_tick = list('sound/items/weapons/slice.ogg', 'sound/items/weapons/slash.ogg', 'sound/items/weapons/slashmiss.ogg')
 
 /datum/action/cooldown/shadowling/ascend/IsAvailable(feedback = FALSE)

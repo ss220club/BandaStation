@@ -104,8 +104,7 @@ var/ascended_max_health = 220
 /obj/item/melee/umbral_claw
 	name = "umbral claw (right)"
 	desc = "Слиток зазубренной тени."
-	icon = 'icons/mob/nonhuman-player/alien.dmi'
-	icon_state = "claw"
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	w_class = WEIGHT_CLASS_TINY
 	force = 18
 	armour_penetration = 25
@@ -258,7 +257,7 @@ var/ascended_max_health = 220
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
 
 /mob/living/carbon/human
-	var/lower_shadowling = FALSE
+	var/lower_shadowling = FALSE // Это вообще используется???
 
 /mob/living/carbon/human/proc/shadowling_strip_quirks()
 	cleanse_quirk_datums()

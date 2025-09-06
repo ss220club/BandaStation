@@ -1,3 +1,4 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/root
 	name = "Путы"
 	desc = "Опутать цель тенями на 10 секунд. Работает только если цель стоит в тени."
@@ -43,18 +44,15 @@
 	StartCooldown()
 	return TRUE
 
-
+// MARK: Effects
 /obj/effect/shadow_bind_anchor
 	name = "writhing shadows"
 	desc = "Tendrils of shadow coil here."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
-	icon_state = "shadowcocoon"
-	pixel_x = -16
-	pixel_y = -16
+	icon_state = "tendril"
 
 	layer = EFFECTS_LAYER
 	anchored = TRUE
-	density = FALSE
 
 	can_buckle = TRUE
 	max_buckled_mobs = 1
@@ -69,8 +67,6 @@
 	caster = caster_ref
 	START_PROCESSING(SSobj, src)
 	addtimer(CALLBACK(src, PROC_REF(_gc_if_empty)), 2 SECONDS)
-	alpha = 0
-	animate(src, alpha = 255, time = 4)
 
 /obj/effect/shadow_bind_anchor/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -113,6 +109,7 @@
 			span_userdanger("Тени сковывают ваши ноги — вы не можете двигаться!")
 		)
 
+	playsound(victim, 'sound/effects/magic/enter_blood.ogg', 75, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(release)), grapple_time, TIMER_STOPPABLE)
 	return TRUE
 
@@ -124,7 +121,6 @@
 		return
 	for(var/mob/living/L in buckled_mobs)
 		unbuckle_mob(L, force = TRUE)
-	animate(src, alpha = 0, time = 4)
 	QDEL_IN(src, 0.4 SECONDS)
 
 /obj/effect/shadow_bind_anchor/proc/_gc_if_empty()
