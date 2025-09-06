@@ -141,7 +141,7 @@ var/ascended_max_health = 220
 		return
 	for(var/i in 1 to 2)
 		H.swap_hand()
-		var/obj/item/melee/umbral_claw/C = new /obj/item/melee/umbral_claw/left()
+		var/obj/item/melee/umbral_claw/C = new
 		if(H.get_active_held_item())
 			H.dropItemToGround(H.get_active_held_item(), TRUE)
 		if(!H.put_in_hands(C))
