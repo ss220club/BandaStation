@@ -389,9 +389,39 @@
 		location = get_step(location, starting_dir)
 		if (location?.is_blocked_turf())
 			break
+
 	if(need_mob_update) // so we only have to call updatehealth() once as opposed to n times
 		updatehealth()
 
+	return TRUE
+
+///Expel accumulated waste
+/mob/living/carbon/proc/defecate(obj/structure/toilet/target_toilet)
+	if(waste_level <= 0)
+		return FALSE
+
+	var/static/list/waste_denial_phrases = list(
+		"Я сейчас в туалет не хочу.",
+		"Мне пока не надо.",
+		"Пока потерплю.",
+		"Еще не приспичило.",
+		"Не время, не место.",
+		"Мне пока не нужно в туалет."
+	)
+	if(waste_level <= WASTE_TOLERANCE_LEVEL)
+		to_chat(src, span_notice(pick(waste_denial_phrases)))
+		return FALSE
+
+	var/turf/location = get_turf(target_toilet ? target_toilet : src)
+	visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] справляет нужду!"), span_userdanger("Вы справляете нужду."))
+	playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
+	adjust_waste(-waste_level, TRUE)
+	if(target_toilet)
+		target_toilet.add_waste()
+		if(mob_mood)
+			mob_mood.add_mood_event("relieved_toilet", /datum/mood_event/relieved_toilet)
+	else if(location)
+		new /obj/effect/decal/cleanable/feces(location)
 	return TRUE
 
 /**

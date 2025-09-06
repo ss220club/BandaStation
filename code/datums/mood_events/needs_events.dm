@@ -167,3 +167,25 @@
 /datum/mood_event/completely_organic
 	description = "Я полностью органик, это ужасно!!"
 	mood_change = -8
+
+/datum/mood_event/needs_toilet
+	description = "Мне срочно нужно в туалет."
+	mood_change = -5
+
+/// Extra positive mood for a perfect mini-game result
+/datum/mood_event/relieved_toilet_perfect
+	description = "Идеальная посадка на трон."
+	mood_change = 2
+	timeout = 3 MINUTES
+
+/datum/mood_event/relieved_toilet
+	/// Neutral mood when using a toilet successfully
+	description = "Хорошо, что рядом оказался туалет."
+	mood_change = 0
+	timeout = 3 MINUTES
+
+/// Slight negative mood for failing all mini-game steps
+/datum/mood_event/strained_toilet
+	description = "Немного перенапрягся в туалете."
+	mood_change = -2
+	timeout = 2 MINUTES

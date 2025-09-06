@@ -6,9 +6,14 @@
 	base_icon_state = "toilet"
 	density = FALSE
 	anchored = TRUE
+	// Allow buckling to simulate sitting while using the toilet
+	can_buckle = TRUE
+	buckle_lying = 0
 
 	///Boolean if whether the toilet is currently flushing.
 	var/flushing = FALSE
+	///Whether the bowl water is dirty (brown) from waste
+	var/has_waste = FALSE
 	///Boolean if the toilet seat is up.
 	var/cover_open = FALSE
 	///Boolean if the cistern is up, allowing items to be put in/out.
@@ -25,6 +30,18 @@
 	var/list/cistern_items
 	///Lazylist of fish in the toilet, not to be mixed with the items in the cistern. Max of 3
 	var/list/fishes
+
+// -------- Interaction and Minigame constants --------
+// Keep these local to this file; unique prefix avoids collisions.
+#define TOILET_MIN_WASTE_LEVEL          75
+#define TOILET_SITDOWN_DURATION         5 SECONDS
+#define TOILET_FLUSH_DURATION           4 SECONDS
+#define TOILET_WATER_FLICK_DURATION     3 SECONDS
+#define TOILET_FLUSH_VOLUME_OPEN        40
+#define TOILET_FLUSH_VOLUME_CLOSED      20
+
+// Minigame
+#define TOILET_MINIGAME_STEPS           3
 
 /obj/structure/toilet/Initialize(mapload)
 	. = ..()
@@ -43,6 +60,11 @@
 		context[SCREENTIP_CONTEXT_LMB] = "Insert Fish"
 	else if(cover_open && LAZYLEN(fishes))
 		context[SCREENTIP_CONTEXT_LMB] = "Grab Fish"
+	else if(cover_open && isnull(held_item) && iscarbon(user))
+		// Only show when there's a strong urge
+		var/mob/living/carbon/C = user
+		if(C.waste_level > WASTE_TOLERANCE_LEVEL)
+			context[SCREENTIP_CONTEXT_LMB] = "Use Toilet"
 	else if(cistern_open)
 		if(isnull(held_item))
 			context[SCREENTIP_CONTEXT_LMB] = "Check Cistern"
@@ -139,6 +161,26 @@
 		w_items -= random_cistern_item.w_class
 		return
 
+	if(iscarbon(user))
+		var/mob/living/carbon/defecator = user
+		if(!can_defecate(defecator))
+			return
+		if(!begin_defecation_action(defecator))
+			return
+		// Mini-game: quick 3-step radial QTE to influence mood
+		var/steps_success = run_defecation_minigame(defecator)
+		// Proceed with the actual action
+		defecator.defecate(src)
+		// Finished; stand up from the toilet
+		if(defecator.buckled == src)
+			unbuckle_mob(defecator)
+		if(defecator?.mob_mood)
+			if(steps_success >= TOILET_MINIGAME_STEPS)
+				defecator.mob_mood.add_mood_event("relieved_toilet_perfect", /datum/mood_event/relieved_toilet_perfect)
+			else if(steps_success == 0)
+				defecator.mob_mood.add_mood_event("strained_toilet", /datum/mood_event/strained_toilet)
+		return
+
 	if(!flushing && LAZYLEN(fishes) && cover_open)
 		var/obj/item/random_fish = pick(fishes)
 		if(ishuman(user))
@@ -156,14 +198,18 @@
 
 /obj/structure/toilet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(flushing)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	flushing = TRUE
 	playsound(src, 'sound/machines/toilet_flush.ogg', cover_open ? 40 : 20, TRUE)
 	if(cover_open && (dir & SOUTH))
-		update_appearance(UPDATE_OVERLAYS)
+		update_appearance(UPDATE_ICON)
 		flick_overlay_view(mutable_appearance(icon, "[base_icon_state]-water-flick"), 3 SECONDS)
-	addtimer(CALLBACK(src, PROC_REF(end_flushing)), 4 SECONDS)
+	for(var/obj/effect/decal/cleanable/feces/F in loc)
+		qdel(F)
+	addtimer(CALLBACK(src, PROC_REF(end_flushing)), TOILET_FLUSH_DURATION)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/toilet/update_icon_state()
@@ -173,7 +219,173 @@
 /obj/structure/toilet/update_overlays()
 	. = ..()
 	if(!flushing && cover_open)
-		. += "[base_icon_state]-water"
+		if(has_waste)
+			. += "[base_icon_state]-water-brown"
+		else
+			. += "[base_icon_state]-water"
+
+
+
+/// Checks whether the user can use the toilet now. Emits feedback and returns TRUE/FALSE.
+/obj/structure/toilet/proc/can_defecate(mob/living/carbon/defecator)
+	var/static/list/waste_low_denial_phrases = list(
+		"Вы безразлично смотрите на унитаз.",
+		"Вам сейчас не до туалета.",
+		"Вы не чувствуете никакой нужды.",
+		"Унитаз молчит. Ты тоже.",
+		"Вы понимаете, что зря сюда заглянули.",
+		"Похоже, ещё рано.",
+		"Вы слышите шёпот фарфора. Он вас не зовёт. В вас ещё не проснулся позыв. Сейчас не время.",
+	)
+	var/static/list/waste_mid_denial_phrases = list(
+		"Пока что не сильно хочется",
+		"Ещё потерплю.",
+	)
+	if(!cover_open)
+		balloon_alert(defecator, "Откройте крышку унитаза.")
+		return FALSE
+	if(defecator.get_active_held_item())
+		balloon_alert(defecator, "Освободите активную руку.")
+		return FALSE
+	// Must stand on the same turf as the toilet to use it
+	if(get_turf(defecator) != get_turf(src))
+		balloon_alert(defecator, "Вы слишком далеко от унитаза.")
+		return FALSE
+	// Two-tier gate: too low vs not urgent enough
+	if(defecator.waste_level <= WASTE_TOLERANCE_LEVEL)
+		if(defecator.waste_level < TOILET_MIN_WASTE_LEVEL)
+			balloon_alert(defecator, pick(waste_low_denial_phrases))
+		else
+			balloon_alert(defecator, pick(waste_mid_denial_phrases))
+		return FALSE
+	return TRUE
+
+/// Shows sit-down message, buckles, and waits the action; unbuckles if interrupted.
+/obj/structure/toilet/proc/begin_defecation_action(mob/living/carbon/defecator)
+	defecator.visible_message(
+		span_notice("[defecator] садится на унитаз..."),
+		span_notice("Вы садитесь на унитаз...")
+	)
+	if(!defecator.buckled)
+		buckle_mob(defecator, check_loc = TRUE)
+	if(!do_after(defecator, TOILET_SITDOWN_DURATION, target = src, timed_action_flags = IGNORE_HELD_ITEM))
+		if(defecator.buckled == src)
+			unbuckle_mob(defecator)
+		return FALSE
+	return TRUE
+
+
+/obj/structure/toilet/buckle_mob(mob/living/buckled_mob, force = FALSE, check_loc = TRUE)
+	. = ..()
+
+	buckled_mob.pixel_y += 5
+
+/obj/structure/toilet/unbuckle_mob(mob/living/buckled_mob, force = FALSE, can_fall = TRUE)
+	. = ..()
+
+	buckled_mob.pixel_y -= 5
+
+// -------- Mini-game helpers --------
+
+// Minigame constants (scoped to this file via unique names)
+#define TOILET_MINIGAME_TIMEOUT      2 SECONDS
+#define TOILET_RADIAL_MENU_SIZE      36
+#define TOILET_RADIAL_MENU_OFFSET    list(0, -24)
+#define TOILET_DEFAULT_TEXT_COLOR    "#ffffff"
+
+/**
+ * Lightweight QTE using radial menu. Player has 2 seconds per step
+ * to pick the prompted action. Returns number of successful picks (0..3).
+ */
+/obj/structure/toilet/proc/run_defecation_minigame(mob/living/carbon/defecator)
+	if(!defecator?.client)
+		return 0
+
+	var/list/actions = list(
+		"Тужиться",
+		"Расслабиться",
+		"Дышать",
+		"Сидеть ровно",
+	)
+	// Icon states from icons/hud/radial.dmi for visual cues
+	var/list/action_icons = list(
+		"Тужиться" = "red",
+		"Расслабиться" = "green",
+		"Дышать" = "yellow",
+		"Сидеть ровно" = "none",
+	)
+	// Map icon state to HTML color used in balloon
+	var/list/icon_state_to_color = list(
+		"red" = "#ff4d4d",
+		"green" = "#2ecc71",
+		"yellow" = "#ffd11a",
+		"none" = "#6e6e6e",
+	)
+	var/list/sequence = list()
+	for(var/i in 1 to TOILET_MINIGAME_STEPS)
+		sequence += pick(actions)
+
+	// Prepare choices once
+	var/list/choices = minigame_build_radial_choices(actions, action_icons)
+
+	var/successes = 0
+	for (var/required_action in sequence)
+		if(!minigame_can_continue(defecator))
+			break
+
+		// Prompt with color matching icon state
+		minigame_prompt_required(defecator, required_action, action_icons, icon_state_to_color)
+
+		var/end_time = world.time + TOILET_MINIGAME_TIMEOUT
+		var/selected_action = show_radial_menu(defecator, src, choices, null, TOILET_RADIAL_MENU_SIZE, CALLBACK(src, PROC_REF(minigame_custom_check), defecator, end_time), TRUE, radial_menu_offset = TOILET_RADIAL_MENU_OFFSET)
+		if(!selected_action)
+			balloon_alert(defecator, "Вы промедлили.")
+			continue
+		if(selected_action == required_action)
+			successes++
+			balloon_alert(defecator, "Отлично.")
+		else
+			balloon_alert(defecator, "Неверно.")
+
+	return successes
+
+/**
+ * Minigame: checks whether we can continue showing prompts.
+ */
+/obj/structure/toilet/proc/minigame_can_continue(mob/living/carbon/M)
+	return !(QDELETED(src) || QDELETED(M) || !M.client)
+
+/**
+ * Minigame: show a colored prompt for the required action.
+ */
+/obj/structure/toilet/proc/minigame_prompt_required(mob/living/carbon/M, required_action, list/action_icons, list/icon_state_to_color)
+	var/icon_state = action_icons[required_action]
+	var/text_color = icon_state_to_color[icon_state]
+	if(isnull(text_color))
+		text_color = TOILET_DEFAULT_TEXT_COLOR
+	balloon_alert(M, "Выберите: <span style='color: [text_color]'>[required_action]</span>")
+
+/**
+ * Minigame: build radial menu choices with images from radial.dmi
+ */
+/obj/structure/toilet/proc/minigame_build_radial_choices(list/actions, list/action_icons)
+	var/list/choices = list()
+	for(var/act in actions)
+		var/icon_state = action_icons[act]
+		choices[act] = image('icons/hud/radial.dmi', icon_state = icon_state)
+	return choices
+
+/**
+ * Custom check for the radial mini-game: enforces proximity and a timeout.
+ */
+/obj/structure/toilet/proc/minigame_custom_check(mob/living/carbon/user, end_time)
+	if(QDELETED(src) || QDELETED(user))
+		return FALSE
+	if(world.time >= end_time)
+		return FALSE
+	if(!in_range(src, user))
+		return FALSE
+	return TRUE
 
 /obj/structure/toilet/atom_deconstruct(dissambled = TRUE)
 	for(var/obj/toilet_item in cistern_items)
@@ -248,9 +460,16 @@
 ///Ends the flushing animation and updates overlays if necessary
 /obj/structure/toilet/proc/end_flushing()
 	flushing = FALSE
+	has_waste = FALSE
 	if(cover_open && (dir & SOUTH))
-		update_appearance(UPDATE_OVERLAYS)
+		update_appearance(UPDATE_ICON)
 	QDEL_LAZYLIST(fishes)
+
+///Mark the toilet as dirty after defecation and refresh overlays
+/obj/structure/toilet/proc/add_waste()
+	has_waste = TRUE
+	if(cover_open && (dir & SOUTH))
+		update_appearance(UPDATE_ICON)
 
 /obj/structure/toilet/greyscale
 	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
@@ -266,3 +485,17 @@
 		secret.desc += " It's a secret!"
 		w_items += secret.w_class
 		LAZYADD(cistern_items, secret)
+
+
+#undef TOILET_MINIGAME_TIMEOUT
+#undef TOILET_RADIAL_MENU_SIZE
+#undef TOILET_RADIAL_MENU_OFFSET
+#undef TOILET_DEFAULT_TEXT_COLOR
+
+#undef TOILET_MIN_WASTE_LEVEL
+#undef TOILET_SITDOWN_DURATION
+#undef TOILET_FLUSH_DURATION
+#undef TOILET_WATER_FLICK_DURATION
+#undef TOILET_FLUSH_VOLUME_OPEN
+#undef TOILET_FLUSH_VOLUME_CLOSED
+#undef TOILET_MINIGAME_STEPS

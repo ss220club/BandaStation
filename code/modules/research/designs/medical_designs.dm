@@ -673,6 +673,23 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
 
+/datum/design/cyberimp_waste_recycler
+	name = "Waste Recycler Implant"
+	desc = "A low-efficiency implant that slowly converts bodily waste into a small amount of nutriment."
+	id = "ci-waste-recycler"
+	build_type = PROTOLATHE | AWAY_LATHE | MECHFAB
+	construction_time = 5 SECONDS
+	materials = list(
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT*6,
+		/datum/material/glass = SMALL_MATERIAL_AMOUNT*5,
+		/datum/material/gold = SMALL_MATERIAL_AMOUNT*4
+	)
+	build_path = /obj/item/organ/cyberimp/chest/waste_recycler
+	category = list(
+		RND_CATEGORY_CYBERNETICS + RND_SUBCATEGORY_CYBERNETICS_IMPLANTS_HEALTH
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
+
 /datum/design/cyberimp_reviver
 	name = "Reviver Implant"
 	desc = "This implant will attempt to revive you if you lose consciousness. For the faint of heart!"
