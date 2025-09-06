@@ -76,6 +76,85 @@
 		TRAIT_MOVE_FLYING
 	)
 
+var/ascended_max_health = 220
+
+/datum/species/shadow/shadowling/ascended/on_species_gain(mob/living/carbon/human/H)
+	. = ..()
+	if(!istype(H))
+		return
+	if(hascall(H, "setMaxHealth"))
+		call(H, "setMaxHealth")(ascended_max_health)
+	else
+		H.maxHealth = max(H.maxHealth, ascended_max_health)
+	if(hascall(H, "heal_overall_damage"))
+		H.heal_overall_damage(1000, 1000, 1, 1)
+	else
+		H.adjustBruteLoss(-1000)
+		H.adjustFireLoss(-1000)
+		H.adjustToxLoss(-1000)
+		H.adjustOxyLoss(-1000)
+	shadowling_equip_ascended_claws(H)
+
+/datum/species/shadow/shadowling/ascended/on_species_loss(mob/living/carbon/human/H, datum/species/new_species)
+	. = ..()
+	if(!istype(H))
+		return
+	shadowling_remove_ascended_claws(H)
+
+/obj/item/melee/umbral_claw
+	name = "umbral claw"
+	desc = "Слиток зазубренной тени."
+	icon = 'icons/mob/nonhuman-player/alien.dmi'
+	icon_state = "claw"
+	w_class = WEIGHT_CLASS_TINY
+	force = 18
+	armour_penetration = 25
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("rends", "slashes", "tears")
+	attack_verb_simple = list("rend", "slash", "tear")
+	hitsound = 'sound/items/weapons/slash.ogg'
+	resistance_flags = INDESTRUCTIBLE
+	item_flags = ABSTRACT | NOBLUDGEON
+	throwforce = 0
+	throw_speed = 0
+	throw_range = 0
+
+/obj/item/melee/umbral_claw/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
+
+/obj/item/melee/umbral_claw/attack_self(mob/user)
+	return
+
+/obj/item/melee/umbral_claw/afterattack(atom/target, mob/user, proximity, params)
+	. = ..()
+
+/obj/item/melee/umbral_claw/right
+	name = "umbral claw (right)"
+
+/obj/item/melee/umbral_claw/left
+	name = "umbral claw (left)"
+
+
+/proc/shadowling_equip_ascended_claws(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	for(var/i in 1 to 2)
+		H.swap_hand()
+		var/obj/item/melee/umbral_claw/C = new /obj/item/melee/umbral_claw/left()
+		if(H.get_active_held_item())
+			H.dropItemToGround(H.get_active_held_item(), TRUE)
+		if(!H.put_in_hands(C))
+			H.equip_to_slot_or_del(C, ITEM_SLOT_HANDS)
+
+
+/proc/shadowling_remove_ascended_claws(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	for(var/obj/item/melee/umbral_claw/C in H.get_all_contents())
+		qdel(C)
+
+
 /datum/species/shadow/shadowling/check_roundstart_eligible()
 	return FALSE
 
