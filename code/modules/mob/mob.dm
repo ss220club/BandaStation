@@ -230,6 +230,8 @@
 	if(!client)
 		return FALSE
 
+	msg = replacetext_char(msg, "+", null) // BANDASTATION ADDITION - TTS
+
 	msg = copytext_char(msg, 1, MAX_MESSAGE_LEN)
 
 	// Return TRUE if we sent the original msg, otherwise return FALSE
@@ -1502,7 +1504,12 @@
 	else
 		living_flags |= QUEUE_NUTRITION_UPDATE
 
-///Apply a proper movespeed modifier based on items we have equipped
+/// Update mob stats based on equipment we are wearing when an item is equipped/dropped, to be overriden by children
+/// source - Item that caused the update by being equipped/dropped
+/mob/proc/update_equipment(obj/item/source)
+	update_equipment_speed_mods()
+
+/// Apply a proper movespeed modifier based on items we have equipped
 /mob/proc/update_equipment_speed_mods()
 	var/speedies = 0
 	var/immutable_speedies = 0

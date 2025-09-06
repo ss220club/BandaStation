@@ -461,7 +461,7 @@ GLOBAL_VAR_INIT(library_table_modified, 0)
 				return
 			var/datum/borrowbook/loan = new /datum/borrowbook
 
-			var/loan_to = copytext(sanitize(params["loaned_to"]), 1, MAX_NAME_LEN)
+			var/loan_to = copytext(sanitize(params["loaned_to"], apply_ic_filter = TRUE), 1, MAX_NAME_LEN) // BANDASTATION EDIT - Sanitize emotes
 			var/checkoutperiod = max(params["checkout_time"], 1)
 
 			loan.book_data = book_info.return_copy()
@@ -507,12 +507,8 @@ GLOBAL_VAR_INIT(library_table_modified, 0)
 				return
 			if(!GLOB.news_network)
 				say("No news network found on station. Aborting.")
-			var/channelexists = FALSE
-			for(var/datum/feed_channel/feed in GLOB.news_network.network_channels)
-				if(feed.channel_name == LIBRARY_NEWSFEED)
-					channelexists = TRUE
-					break
-			if(!channelexists)
+			var/datum/feed_channel/library_channel = GLOB.news_network.network_channels_by_name[LIBRARY_NEWSFEED]
+			if(isnull(library_channel))
 				GLOB.news_network.create_feed_channel(LIBRARY_NEWSFEED, "Library", "The official station book club!", null)
 
 			var/obj/machinery/libraryscanner/scan = get_scanner()

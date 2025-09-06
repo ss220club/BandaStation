@@ -1,3 +1,4 @@
+// MARK: GP-9 Pistols
 /datum/supply_pack/security/gp9_pistols
 	name = "GP-9 Pistols Crate"
 	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм НТ с двумя магазинами заряженными резиной, а также по одной коробке соответствующих летальных и нелетальных боеприпасов."
@@ -102,3 +103,35 @@
 	contains = list(
 		/obj/item/ammo_box/c9x25mm = 1,
 	)
+
+/datum/supply_pack/security/armory/sledgehammer
+	name = "D4 Tactical Sledgehammer"
+	desc = "В этом ящике находится композитный молот для создания брешей или уничтожения препятствий."
+	cost = CARGO_CRATE_VALUE * 15
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/sledgehammer/tactical = 1,
+	)
+
+// MARK: Railgun
+/datum/supply_pack/security/armory/railgun
+	name = "HEMC-62 Railgun Crate"
+	desc = "В этом ящике находится один РЭМУМ-62 (ручной электромагнитный ускоритель масс, изделие номер 62) калибра 30мм НТ, c одним дополнительным магазином нелетальных снарядов."
+	cost = CARGO_CRATE_VALUE * 150
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/gun/ballistic/automatic/railgun = 1,
+		/obj/item/ammo_box/magazine/railgun/taser = 1,
+	)
+	crate_name = "HEMC-62 railgun crate"
+
+/datum/supply_pack/security/armory/railgun_magazines
+	name = "HEMC-62 Railgun Ammo Crate"
+	desc = "В этом ящике находятся два магазина к РЭМУМ (ручным электромагнитным ускорителям масс) c летальными и нелетальными снарядами калибра 30мм НТ."
+	cost = CARGO_CRATE_VALUE * 50
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/ammo_box/magazine/railgun/taser = 1,
+		/obj/item/ammo_box/magazine/railgun = 1,
+	)
+	crate_name = "HEMC-62 railgun ammo crate"

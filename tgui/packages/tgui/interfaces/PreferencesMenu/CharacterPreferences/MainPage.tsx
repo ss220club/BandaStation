@@ -1,7 +1,7 @@
 import { sortBy } from 'es-toolkit';
 import { filter, map } from 'es-toolkit/compat';
 import { useState } from 'react';
-import { sendAct, useBackend } from 'tgui/backend';
+import { type sendAct, useBackend } from 'tgui/backend';
 import {
   Box,
   Button,
@@ -17,17 +17,18 @@ import { capitalize, createSearch } from 'tgui-core/string';
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { Preference } from '../components/Preference';
 import { RandomizationButton } from '../components/RandomizationButton';
+import { BodyModificationsPage } from '../preferences/BodyModificationsPage';
 import { features } from '../preferences/features';
 import {
-  FeatureChoicedServerData,
+  type FeatureChoicedServerData,
   FeatureValueInput,
 } from '../preferences/features/base';
-import { Gender, GENDERS } from '../preferences/gender';
+import { GENDERS, Gender } from '../preferences/gender';
 import {
   createSetPreference,
-  PreferencesMenuData,
+  type PreferencesMenuData,
   RandomSetting,
-  ServerData,
+  type ServerData,
 } from '../types';
 import { useRandomToggleState } from '../useRandomToggleState';
 import { useServerPrefs } from '../useServerPrefs';
@@ -37,6 +38,7 @@ import { AlternativeNames, NameInput } from './names';
 type CharacterControlsProps = {
   handleRotate: () => void;
   handleOpenSpecies: () => void;
+  handleOpenAugmentations: () => void; // BANDASTATION ADD: Augmentations
   gender: Gender;
   setGender: (gender: Gender) => void;
   showGender: boolean;
@@ -45,42 +47,29 @@ type CharacterControlsProps = {
 };
 
 function CharacterControls(props: CharacterControlsProps) {
-  const { act } = useBackend<PreferencesMenuData>();
-  const [randomToggle, setRandomToggle] = useRandomToggleState();
-
   return (
     <Stack className="PreferencesMenu__CharacterControls">
-      <Stack>
-        <Button
-          icon="undo"
-          tooltip="Повернуть"
-          tooltipPosition="top"
-          onClick={props.handleRotate}
-        />
-        <Button
-          icon="paw"
-          tooltip="Вид"
-          tooltipPosition="top"
-          onClick={props.handleOpenSpecies}
-        />
-        {props.showGender && (
-          <GenderButton
-            gender={props.gender}
-            handleSetGender={props.setGender}
-          />
-        )}
-        <Button
-          icon="dice"
-          tooltip="Рандомизировать"
-          tooltipPosition="top"
-          selected={randomToggle}
-          onClick={() => {
-            act('randomize_character');
-
-            setRandomToggle(!randomToggle);
-          }}
-        />
-      </Stack>
+      <Button
+        icon="undo"
+        tooltip="Повернуть"
+        tooltipPosition="top"
+        onClick={props.handleRotate}
+      />
+      <Button
+        icon="paw"
+        tooltip="Вид"
+        tooltipPosition="top"
+        onClick={props.handleOpenSpecies}
+      />
+      {props.showGender && (
+        <GenderButton gender={props.gender} handleSetGender={props.setGender} />
+      )}
+      <Button
+        icon="robot"
+        tooltip="Модификации тела"
+        tooltipPosition="top"
+        onClick={() => props.handleOpenAugmentations()}
+      />
       <Button
         color="red"
         icon="trash"
@@ -110,8 +99,8 @@ function GenderButton(props: GenderButtonProps) {
                 <Button
                   key={gender}
                   selected={gender === props.gender}
-                  icon={GENDERS[gender].icon}
-                  tooltip={GENDERS[gender].text}
+                  icon={GENDERS[gender]?.icon || 'question'}
+                  tooltip={GENDERS[gender]?.text || 'Кто ты, воин?'}
                   tooltipPosition="top"
                   onClick={() => {
                     props.handleSetGender(gender);
@@ -125,7 +114,7 @@ function GenderButton(props: GenderButtonProps) {
     >
       <div>
         <Button
-          icon={GENDERS[props.gender].icon}
+          icon={GENDERS[props.gender]?.icon || 'question'}
           tooltip="Пол"
           tooltipPosition="top"
         />
@@ -383,11 +372,12 @@ export function MainPage(props: MainPageProps) {
   const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
     useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
+  const [augmentationInputOpen, setAugmentationInputOpen] = useState(false);
 
   const serverData = useServerPrefs();
 
   const currentSpeciesData =
-    serverData && serverData.species[data.character_preferences.misc.species];
+    serverData?.species[data.character_preferences.misc.species];
 
   const contextualPreferences =
     data.character_preferences.secondary_features || [];
@@ -412,16 +402,16 @@ export function MainPage(props: MainPageProps) {
   };
 
   if (randomBodyEnabled) {
-    nonContextualPreferences['random_species'] =
-      data.character_preferences.randomization['species'];
+    nonContextualPreferences.random_species =
+      data.character_preferences.randomization.species;
     // BANDASTATION ADDITION START - TTS
-    nonContextualPreferences['random_tts_seed'] =
-      data.character_preferences.randomization['tts_seed'];
+    nonContextualPreferences.random_tts_seed =
+      data.character_preferences.randomization.tts_seed;
     // BANDASTATION ADDITION END - TTS
   } else {
     // We can't use random_name/is_accessible because the
     // server doesn't know whether the random toggle is on.
-    delete nonContextualPreferences['random_name'];
+    delete nonContextualPreferences.random_name;
   }
 
   const Character = (
@@ -431,6 +421,7 @@ export function MainPage(props: MainPageProps) {
           <CharacterControls
             gender={data.character_preferences.misc.gender}
             handleOpenSpecies={props.openSpecies}
+            handleOpenAugmentations={() => setAugmentationInputOpen(true)} // BANDASTATION ADDITION - Feat: Augmentations
             handleRotate={() => {
               act('rotate');
             }}
@@ -490,6 +481,12 @@ export function MainPage(props: MainPageProps) {
 
   return (
     <Stack fill>
+      {augmentationInputOpen && (
+        <BodyModificationsPage
+          handleClose={() => setAugmentationInputOpen(false)}
+        />
+      )}
+
       {deleteCharacterPopupOpen && (
         <DeleteCharacterPopup
           close={() => setDeleteCharacterPopupOpen(false)}

@@ -3,10 +3,9 @@
 
 /datum/dna/copy_dna(datum/dna/new_dna, transfer_flags = COPY_DNA_SE|COPY_DNA_SPECIES)
 	. = ..()
-	if(!istype(new_dna.holder))
-		return
 	new_dna.tts_seed_dna = tts_seed_dna
-	new_dna.holder.AddComponent(/datum/component/tts_component, tts_seed_dna)
+	if(istype(new_dna.holder))
+		new_dna.holder.AddComponent(/datum/component/tts_component, new_dna.tts_seed_dna)
 
 /atom/proc/add_tts_component()
 	return
@@ -17,6 +16,9 @@
 
 /atom/proc/cast_tts(mob/listener, message, atom/location, is_local = TRUE, is_radio = FALSE, list/effects, traits = TTS_TRAIT_RATE_FASTER, preSFX, postSFX, tts_seed_override, channel_override)
 	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override)
+
+/atom/movable/virtualspeaker/cast_tts(mob/listener, message, atom/location, is_local, is_radio, list/effects, traits, preSFX, postSFX, tts_seed_override, channel_override)
+	SEND_SIGNAL(source, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override)
 
 // TODO: Do it better?
 /atom/proc/get_tts_seed()

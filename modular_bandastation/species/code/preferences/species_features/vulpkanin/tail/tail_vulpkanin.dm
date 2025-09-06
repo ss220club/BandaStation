@@ -8,4 +8,4 @@
 	return assoc_to_keys_features(SSaccessories.tails_list_vulpkanin)
 
 /datum/preference/choiced/tail_vulpkanin/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["tail_vulpkanin"] = value
+	target.dna.features[FEATURE_VULPKANIN_TAIL] = value

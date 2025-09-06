@@ -94,6 +94,7 @@
 		/obj/item/seeds/reishi = 2,
 		/obj/item/seeds/cannabis = 3,
 		/obj/item/seeds/starthistle = 2,
+		/obj/item/seeds/cocaleaf = 2, // BANDASTATION ADDITION
 		/obj/item/seeds/random = 2,
 	)
 
@@ -105,6 +106,7 @@
 	default_price = PAYCHECK_LOWER
 	extra_price = PAYCHECK_CREW
 	payment_department = ACCOUNT_SRV
+	allow_custom = TRUE
 
 /obj/item/vending_refill/hydroseeds
 	machine_name = "MegaSeed Servitor"

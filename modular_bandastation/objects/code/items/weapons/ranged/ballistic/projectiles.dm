@@ -2,7 +2,7 @@
 /obj/projectile/bullet/c35sol
 	name = ".35 Sol Short bullet"
 	damage = 17
-	wound_bonus = -5 // Normal bullets are 20
+	wound_bonus = -5
 	exposed_wound_bonus = 5
 	embed_falloff_tile = -4
 
@@ -30,7 +30,6 @@
 	damage = 15
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
-	ricochets_max = 0
 	wound_bonus = 20
 	exposed_wound_bonus = 20
 	embed_type = /datum/embedding/bullet/c35sol/ripper
@@ -50,36 +49,40 @@
 	name = ".35 Sol Short armor-piercing bullet"
 	damage = 15
 	exposed_wound_bonus = -30
-	armour_penetration = 20
+	armour_penetration = 40
+	shrapnel_type = null
+	embed_type = null
 
 //  MARK: 7.62x39mm
+/obj/projectile/bullet/a762x39
+	name = "7.62x39mm bullet"
+	damage = 30
+	wound_bonus = 5
+	armour_penetration = 10
+	exposed_wound_bonus = 5
+	wound_falloff_tile = -3
+
 /obj/projectile/bullet/a762x39/rubber
 	name = "7.62x39mm rubber bullet"
 	damage = 5
+	stamina = 25
 	armour_penetration = 0
-	stamina = 20
-	ricochets_max = 6
+	ricochets_max = 4
 	ricochet_incidence_leeway = 0
 	ricochet_chance = 130
 	ricochet_decay_damage = 0.7
 	shrapnel_type = null
 	sharpness = NONE
 	embed_type = null
-	wound_bonus = -50
-
-/obj/projectile/bullet/a762x39
-	name = "7.62x39mm bullet"
-	damage = 30
-	wound_bonus = 15
-	armour_penetration = 10
-	wound_falloff_tile = 0
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
 
 /obj/projectile/bullet/a762x39/ricochet
 	name = "7.62x39mm match bullet"
-	damage = 30
-	wound_bonus = 5
+	damage = 25
 	armour_penetration = 5
-	ricochets_max = 2
+	ricochets_max = 5
 	ricochet_chance = 100
 	ricochet_auto_aim_angle = 30
 	ricochet_auto_aim_range = 15
@@ -90,8 +93,6 @@
 /obj/projectile/bullet/incendiary/a762x39
 	name = "7.62x39mm incendiary bullet"
 	damage = 30
-	wound_bonus = 5
-	armour_penetration = 0
 	wound_falloff_tile = -5
 	fire_stacks = 2
 	leaves_fire_trail = FALSE
@@ -99,28 +100,37 @@
 /obj/projectile/bullet/a762x39/emp
 	name = "7.62x39mm ion bullet"
 	damage = 25
-	wound_bonus = 5
+	wound_bonus = 0
 	armour_penetration = 5
 	var/heavy_emp_radius = -1
 	var/light_emp_radius = 0
 
+/obj/projectile/bullet/a762x39/emp/on_hit(atom/target, blocked = FALSE, pierce_hit)
+	..()
+	empulse(target, heavy_emp_radius, light_emp_radius)
+	return BULLET_ACT_HIT
+
 /obj/projectile/bullet/a762x39/civilian
 	name = "7.62x39mm civilian bullet"
 	damage = 25
-	wound_bonus = 5
-	armour_penetration = 5
-	wound_falloff_tile = 3
+	wound_bonus = 0
+	armour_penetration = 0
 
 /obj/projectile/bullet/a762x39/hunting
 	name = "7.62x39mm hunting bullet"
 	damage = 20
 	wound_bonus = 10
 	armour_penetration = 0
-	wound_falloff_tile = 3
+	weak_against_armour = TRUE
 	/// Bonus force dealt against certain mobs
 	var/nemesis_bonus_force = 30
 	/// List (not really a list) of mobs we deal bonus damage to
-	var/list/nemesis_path = /mob/living/simple_animal
+	var/list/nemesis_path = /mob/living/basic
+
+/obj/projectile/bullet/a762x39/hunting/prehit_pierce(mob/living/target, mob/living/carbon/human/user)
+	if(istype(target, nemesis_path))
+		damage += nemesis_bonus_force
+	.=..()
 
 /obj/projectile/bullet/a762x39/blank
 	name = "hot gas"
@@ -130,7 +140,6 @@
 	damage_type = BURN
 	wound_bonus = -100
 	armour_penetration = 0
-	wound_falloff_tile = 15
 	weak_against_armour = TRUE
 	range = 0.01
 	shrapnel_type = null
@@ -139,9 +148,12 @@
 
 /obj/projectile/bullet/a762x39/ap
 	name = "7.62x39mm armor-piercing bullet"
-	damage = 30
-	wound_bonus = 15
-	armour_penetration = 40
+	damage = 25
+	armour_penetration = 50
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	shrapnel_type = null
+	embed_type = null
 
 /obj/projectile/bullet/a762x39/gauss
 	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/projectiles.dmi'
@@ -149,18 +161,35 @@
 	name = "7.62x39mm gauss bullet"
 	damage = 35
 	wound_bonus = 15
-	armour_penetration = 20
+	armour_penetration = 50
+	projectile_piercing = PASSMOB | PASSTABLE | PASSGRILLE | PASSMACHINE | PASSDOORS
 	light_system = OVERLAY_LIGHT
 	light_range = 2
 	light_power = 1
 	light_color = LIGHT_COLOR_BLUE
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/a762x39/gauss/on_hit(atom/target, blocked = 0, pierce_hit)
+	if(isliving(target))
+		var/mob/living/poor_sap = target
+		// If the target mob has enough armor to stop the bullet, or the bullet has already gone through two people, stop it on this hit
+		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 50) || (pierces > 2))
+			projectile_piercing = NONE
+			damage -= 20
+			armour_penetration -= 20
+			wound_bonus -= 10
+
+	return ..()
 
 // MARK: .40 Sol Long
 /obj/projectile/bullet/c40sol
 	name = ".40 Sol Long bullet"
 	damage = 35
-	wound_bonus = 10
-	exposed_wound_bonus = 20
+	armour_penetration = 10
+	wound_bonus = 5
+	exposed_wound_bonus = 5
+	wound_falloff_tile = -3
 
 /obj/projectile/bullet/c40sol/fragmentation
 	name = ".40 Sol Long fragmentation bullet"
@@ -168,8 +197,9 @@
 	stamina = 25
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
-	wound_bonus = 0
+	wound_bonus = -10
 	exposed_wound_bonus = 10
+	armour_penetration = 0
 	shrapnel_type = /obj/item/shrapnel/stingball
 	embed_type = /datum/embedding/c40sol_fragmentation
 	embed_falloff_tile = -5
@@ -187,23 +217,23 @@
 /obj/projectile/bullet/c40sol/pierce
 	name = ".40 Sol pierce bullet"
 	icon_state = "gaussphase"
-	speed = 2
 	damage = 30
-	armour_penetration = 30
-	wound_bonus = -30
-	exposed_wound_bonus = -10
+	armour_penetration = 60
+	speed = 2
+	wound_bonus = 0
+	exposed_wound_bonus = 0
 	projectile_piercing = PASSMOB | PASSTABLE | PASSGRILLE | PASSMACHINE | PASSDOORS
+	shrapnel_type = null
+	embed_type = null
 
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
 	if(isliving(target))
 		var/mob/living/poor_sap = target
 		// If the target mob has enough armor to stop the bullet, or the bullet has already gone through two people, stop it on this hit
-		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 20) || (pierces > 2))
+		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 60) || (pierces > 2))
 			projectile_piercing = NONE
-
-			if(damage > 10) // Lets just be safe with this one
-				damage -= 5
-			armour_penetration -= 10
+			damage -= 15
+			armour_penetration -= 30
 
 	return ..()
 
@@ -218,6 +248,7 @@
 	fire_stacks = 2
 	leaves_fire_trail = FALSE
 
+// MARK: .50 BMG
 /obj/projectile/bullet/p50/mmg
 	name =".50 BMG caseless bullet"
 	damage = 40
@@ -261,7 +292,6 @@
 	damage = 15
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
-	ricochets_max = 0
 	wound_bonus = 20
 	exposed_wound_bonus = 20
 	embed_type = /datum/embedding/bullet/c9x25mm/hp
@@ -281,7 +311,216 @@
 	name = "9x25mm NT armor-piercing bullet"
 	damage = 15
 	exposed_wound_bonus = -30
+	armour_penetration = 40
+	shrapnel_type = null
+	embed_type = null
+
+// MARK: .223 aka 5.56mm
+/obj/projectile/bullet/a223
+	name = "5.56mm bullet"
+	damage = 30
+	armour_penetration = 10
+	wound_bonus = 5
+	exposed_wound_bonus = 5
+	wound_falloff_tile = -3
+
+/obj/projectile/bullet/a223/rubber
+	name = "5.56mm rubber bullet"
+	damage = 5
+	stamina = 25
+	armour_penetration = 0
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+
+/obj/projectile/bullet/a223/hp
+	name = "5.56mm hollow-point bullet"
+	damage = 35
+	armour_penetration = 0
+	wound_bonus = 30
+	exposed_wound_bonus = 30
+	weak_against_armour = TRUE
+
+/obj/projectile/bullet/a223/ap
+	name = "5.56mm armor-piercing bullet"
+	damage = 25
+	armour_penetration = 50
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/incendiary/a223
+	name = "5.56mm incendiary bullet"
+	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	damage = 25
+	fire_stacks = 2
+	leaves_fire_trail = FALSE
+
+// MARK: 7.62x51mm
+/obj/projectile/bullet/c762x51mm
+	name = "7.62x51mm bullet"
+	damage = 35
+	armour_penetration = 10
+	wound_bonus = 5
+	exposed_wound_bonus = 5
+	wound_falloff_tile = -3
+
+/obj/projectile/bullet/c762x51mm/rubber
+	name = "7.62x51mm rubber bullet"
+	damage = 5
+	stamina = 30
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = NONE
+
+/obj/projectile/bullet/c762x51mm/hp
+	name = "7.62x51mm hollow-point bullet"
+	damage = 40
+	wound_bonus = 30
+	exposed_wound_bonus = 30
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+
+/obj/projectile/bullet/c762x51mm/ap
+	name = "7.62x51mm armor-piercing bullet"
+	damage = 30
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	armour_penetration = 60
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/incendiary/c762x51mm
+	name = "7.62x51mm incendiary bullet"
+	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	damage = 30
+	fire_stacks = 3
+	leaves_fire_trail = FALSE
+
+// MARK: .388 aka 8.6x70mm
+/obj/projectile/bullet/c338
+	name = ".338 bullet"
+	damage = 55
+	range = 80
+	wound_bonus = 20
+	exposed_wound_bonus = 15
+	armour_penetration = 30
+	wound_falloff_tile = -1
+	speed = 2
+
+/obj/projectile/bullet/c338/ap
+	name = ".338 armor-piercing bullet"
+	damage = 50
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	armour_penetration = 75
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/c338/hp
+	name = ".338 hollow-point bullet"
+	damage = 60
+	wound_bonus = 45
+	exposed_wound_bonus = 45
+	armour_penetration = 10
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+
+/obj/projectile/bullet/incendiary/c338
+	name = ".338 incendiary bullet"
+	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	damage = 50
+	fire_stacks = 4
+	leaves_fire_trail = FALSE
+
+// MARK: .38
+/obj/projectile/bullet/c38/ap
+	name = ".38 armor-piercing bullet"
+	damage = 20
+	ricochets_max = 0
+	armour_penetration = 40
+
+// MARK: Railgun
+/obj/projectile/bullet/railgun
+	name = "railgun sabot-round"
+	icon_state = "greyscale_bolt"
+	damage = 50
+	armour_penetration = 50
+	ricochets_max = 4 //Originally 6
+	ricochet_incidence_leeway = 40
+	ricochet_chance = 75
+	ricochet_decay_damage = 0.75 // 50 -> ~37 -> ~27 -> ~20 -> ~15
+	shrapnel_type = /obj/item/shrapnel/bullet/railgun
+	embed_type = null
+	hitsound = 'modular_bandastation/objects/sounds/weapons/rail.ogg'
+	range = 80
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_BLUE
+	projectile_piercing = PASSMOB
+
+/obj/projectile/bullet/railgun/on_hit(atom/target, blocked = 0, pierce_hit)
+	if(isliving(target))
+		var/mob/living/poor_sap = target
+		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 40) || (pierces > 2))
+			projectile_piercing = NONE
+			damage -= 20
+			armour_penetration -= 10
+
+	return ..()
+
+/obj/projectile/bullet/railgun/taser
+	name = "railgun taser-round"
+	embed_type = /datum/embedding/railgun
+	damage = 10
+	stamina = 60
 	armour_penetration = 20
+	wound_bonus = -20
+	exposed_wound_bonus = -20
+	sharpness = NONE
+	projectile_piercing = NONE
+
+/obj/projectile/bullet/railgun/taser/on_hit(atom/target, blocked, pierce_hit)
+	. = ..()
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		H.emote("scream")
+		H.add_mood_event("tased", /datum/mood_event/tased)
+		if((H.status_flags & CANKNOCKDOWN) && !HAS_TRAIT(H, TRAIT_STUNIMMUNE))
+			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon, do_jitter_animation), jitter), 5)
+
+/obj/item/shrapnel/bullet/railgun
+	name = "railgun shredder"
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+	icon_state = "gaussphase"
+	embed_type = null
+
+/datum/embedding/railgun
+	embed_chance = 75
+	fall_chance = 3
+	pain_stam_pct = 3
+	pain_mult = 2
+	jostle_chance = 5
+	jostle_pain_mult = 1
+	ignore_throwspeed_threshold = TRUE
+	rip_time = 1 SECONDS
 
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect

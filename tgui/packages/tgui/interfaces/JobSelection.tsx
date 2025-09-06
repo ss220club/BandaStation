@@ -9,7 +9,7 @@ import {
   Stack,
   StyleableSection,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import {
@@ -142,7 +142,7 @@ function DepartmentEntry(props: DepartmentEntryProps) {
                 color: Color.fromHex(department.color).darken(60).toString(),
               }}
             >
-              {'позиций доступно: ' + department.open_slots}
+              {`позиций доступно: ${department.open_slots}`}
             </span>
           </>
         }

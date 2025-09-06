@@ -140,6 +140,8 @@
 	var/no_charge = FALSE
 	/// Used for apc helper called full_charge to make apc's charge at 100% meter.
 	var/full_charge = FALSE
+	///When did the apc generate last malf ai processing time.
+	COOLDOWN_DECLARE(malf_ai_pt_generation)
 	armor_type = /datum/armor/power_apc
 
 /datum/armor/power_apc
@@ -219,8 +221,7 @@
 	if(!req_access)
 		req_access = list(ACCESS_ENGINE_EQUIP)
 	if(auto_name)
-		ru_names_rename(ru_names_toml("area power controller", suffix = " ([get_area_name(area, TRUE)])", override_base = "\improper [get_area_name(area, TRUE)] APC"))
-		name = "\improper [get_area_name(area, TRUE)] APC"
+		name = "[declent_ru(NOMINATIVE)] [area.declent_ru(GENITIVE)]"
 
 	//Initialize its electronics
 	set_wires(new /datum/wires/apc(src))
@@ -264,8 +265,6 @@
 
 /obj/machinery/power/apc/Destroy()
 	if(malfai)
-		if(operating)
-			malfai.malf_picker.processing_time = clamp(malfai.malf_picker.processing_time - 10, 0, 1000)
 		malfai.hacked_apcs -= src
 		malfai = null
 	disconnect_from_area()
@@ -290,8 +289,7 @@
 /obj/machinery/power/apc/update_name(updates)
 	. = ..()
 	if(auto_name)
-		ru_names_rename(ru_names_toml("area power controller", suffix = " ([get_area_name(area, TRUE)])", override_base = "\improper [get_area_name(area, TRUE)] APC"))
-		name = "\improper [get_area_name(area, TRUE)] APC"
+		name = "[declent_ru(NOMINATIVE)] [area.declent_ru(GENITIVE)]"
 
 /obj/machinery/power/apc/proc/assign_to_area(area/target_area = get_area(src))
 	if(area == target_area)
@@ -363,8 +361,6 @@
 /obj/machinery/power/apc/atom_break(damage_flag)
 	. = ..()
 	if(.)
-		if(malfai && operating)
-			malfai.malf_picker.processing_time = clamp(malfai.malf_picker.processing_time - 10, 0, 1000)
 		operating = FALSE
 		if(occupier)
 			malfvacate(TRUE)
@@ -603,6 +599,11 @@
 		hacked_flicker_counter = hacked_flicker_counter - 1
 		if(hacked_flicker_counter <= 0)
 			flicker_hacked_icon()
+		if(COOLDOWN_FINISHED(src, malf_ai_pt_generation) && cell.use(60 KILO JOULES)>0 && malfai.malf_picker.processing_time<MALF_MAX_PP) // Over time generation of malf points for the ai controlling it, costs a bit of power
+			COOLDOWN_START(src, malf_ai_pt_generation, 30 SECONDS)
+			malfai.malf_picker.processing_time += 1
+
+
 
 	//dont use any power from that channel if we shut that power channel off
 	if(operating)

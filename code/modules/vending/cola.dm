@@ -15,6 +15,7 @@
 		/obj/item/reagent_containers/cup/soda_cans/pwr_game = 10,
 		/obj/item/reagent_containers/cup/soda_cans/lemon_lime = 10,
 		/obj/item/reagent_containers/cup/soda_cans/sol_dry = 10,
+		/obj/item/reagent_containers/cup/soda_cans/lipo = 5, // BANDASTATION ADDITION
 		/obj/item/reagent_containers/cup/glass/waterbottle = 10,
 		/obj/item/reagent_containers/cup/glass/bottle/mushi_kombucha = 3,
 		/obj/item/reagent_containers/cup/soda_cans/volt_energy = 3,
@@ -35,6 +36,7 @@
 	default_price = PAYCHECK_CREW * 0.7
 	extra_price = PAYCHECK_CREW
 	payment_department = ACCOUNT_SRV
+	allow_custom = TRUE
 
 	var/static/list/spiking_booze = list(
 		// Your "common" spiking booze
@@ -81,10 +83,12 @@
 	icon_state = "Cola_Machine"
 	light_mask = "cola-light-mask"
 	light_color = COLOR_MODERATE_BLUE
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/black
 	icon_state = "cola_black"
 	light_mask = "cola-light-mask"
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/red
 	icon_state = "red_cola"
@@ -93,6 +97,7 @@
 	product_slogans = "Кола в космосе!"
 	light_mask = "red_cola-light-mask"
 	light_color = COLOR_DARK_RED
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/space_up
 	icon_state = "space_up"
@@ -101,6 +106,7 @@
 	product_slogans = "Спейс-ап! Как пробоина корпуса во рту."
 	light_mask = "space_up-light-mask"
 	light_color = COLOR_DARK_MODERATE_LIME_GREEN
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/starkist
 	icon_state = "starkist"
@@ -110,12 +116,14 @@
 	panel_type = "panel7"
 	light_mask = "starkist-light-mask"
 	light_color = COLOR_LIGHT_ORANGE
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/sodie
 	icon_state = "soda"
 	panel_type = "panel7"
 	light_mask = "soda-light-mask"
 	light_color = COLOR_WHITE
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/pwr_game
 	icon_state = "pwr_game"
@@ -124,6 +132,7 @@
 	product_slogans = "СИЛА, которую жаждут геймеры! ПАВЭР ГЕЙМ!"
 	light_mask = "pwr_game-light-mask"
 	light_color = COLOR_STRONG_VIOLET
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/shamblers
 	name = "\improper Shambler's Vendor"
@@ -145,6 +154,7 @@
 	product_ads = "Освежает!;Жажда ДНК? Утолите свою жажду!;Выпито более триллиона душ!;Сделано с использованием настоящей ДНК!;Коллективный разум требует вашей жажды!;Пей на здоровье!;Поглотите свою жажду."
 	light_mask = "shamblers-light-mask"
 	light_color = COLOR_MOSTLY_PURE_PINK
+	allow_custom = FALSE
 
 /obj/machinery/vending/cola/shamblers/Initialize(mapload)
 	. = ..()

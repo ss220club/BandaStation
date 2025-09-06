@@ -183,7 +183,7 @@
 
 	update_appearance()
 
-/obj/machinery/computer/tram_controls/on_construction(mob/user, from_flatpack = FALSE)
+/obj/machinery/computer/tram_controls/on_construction(mob/user)
 	. = ..()
 	var/obj/item/circuitboard/computer/tram_controls/my_circuit = circuit
 	split_mode = my_circuit.split_mode
@@ -234,7 +234,7 @@
 	SIGNAL_HANDLER
 	switch(response_code)
 		if(REQUEST_SUCCESS)
-			say("The next station is: [response_info]")
+			say("Следующая станция: [response_info].")
 
 		if(REQUEST_FAIL)
 			if(!LAZYFIND(relevant, src))
@@ -242,11 +242,11 @@
 
 			switch(response_info)
 				if(NOT_IN_SERVICE)
-					say("The tram is not in service. Please contact the nearest engineer.")
+					say("Трамвай в данный момент недоступен. Пожалуйста, свяжитесь с техническим специалистом.")
 				if(INVALID_PLATFORM)
-					say("Configuration error. Please contact the nearest engineer.")
+					say("Ошибка конфигурации. Пожалуйста, свяжитесь с техническим специалистом.")
 				if(INTERNAL_ERROR)
-					say("Tram controller error. Please contact the nearest engineer or crew member with telecommunications access to reset the controller.")
+					say("Ошибка контроллера трамвая. Пожалуйста, обратитесь к техническому специалисту или члену экипажа, имеющему доступ к телекоммуникационным системам трамвая, для сброса контроллера.")
 				else
 					return
 

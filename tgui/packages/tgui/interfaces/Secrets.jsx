@@ -262,13 +262,15 @@ const HelpfulTab = (props) => {
             />
           </Stack.Item>
           <Stack.Item>
-            <NoticeBox
-              mb={-0.5}
+            {/* BANDASTATION EDIT START - Gamma Shuttle */}
+            <Button
+              icon="shuttle-space"
+              lineHeight={lineHeightNormal}
               width={buttonWidthNormal}
-              height={lineHeightNormal}
-            >
-              Your admin button here, coder!
-            </NoticeBox>
+              content="Move Gamma Shuttle"
+              onClick={() => act('move_gamma_shuttle')}
+            />
+            {/* BANDASTATION EDIT END - Gamma Shuttle */}
           </Stack.Item>
         </Stack>
       </Stack.Item>
@@ -719,7 +721,7 @@ export const Secrets = (props) => {
                           average: [100 * 0.25, 100 * 0.75],
                           bad: [100 * 0.75, 100],
                         }}
-                        format={(value) => toFixed(value) + '%'}
+                        format={(value) => `${toFixed(value)}%`}
                       />
                     </LabeledControls.Item>
                   </LabeledControls>

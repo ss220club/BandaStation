@@ -5,17 +5,16 @@ on:
 
 jobs:
   linters:
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted]
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
       - name: Install required packages
         run: |
           sudo apt-get update
           sudo apt-get install -y zlib1g
       # Your existing steps
-      - uses: actions/checkout@v4
       - name: Restore SpacemanDMM cache
         uses: actions/cache@v4
         with:
@@ -46,6 +45,8 @@ jobs:
           key: ${{ runner.os }}-cutter-${{ hashFiles('dependencies.sh') }}
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4.2.0
+        env:
+          DOTNET_INSTALL_DIR: "./_work/.dotnet"
         with:
           dotnet-version: 9.x
       - name: Install OpenDream
@@ -64,6 +65,9 @@ jobs:
       - name: Give Linters A Go
         id: linter-setup
         run: ":"
+      - name: Ensure genesis_call.dme is unchanged
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: bash tools/ci/check_genesis.sh
       - name: Run Grep Checks
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: bash tools/ci/check_grep.sh
