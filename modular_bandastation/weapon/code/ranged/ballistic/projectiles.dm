@@ -468,7 +468,7 @@
 	ricochet_decay_damage = 0.75 // 50 -> ~37 -> ~27 -> ~20 -> ~15
 	shrapnel_type = /obj/item/shrapnel/bullet/railgun
 	embed_type = null
-	hitsound = 'modular_bandastation/objects/sounds/weapons/rail.ogg'
+	hitsound = 'modular_bandastation/weapon/sound/ranged/rail.ogg'
 	range = 80
 	light_system = OVERLAY_LIGHT
 	light_range = 2
