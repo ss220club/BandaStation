@@ -1,7 +1,7 @@
 /obj/item/gun/ballistic/automatic/pistol/tp14
 	name = "TP-14"
 	desc = "Стандартный служебный пистолет калибра .45 используемый в армии Республики Элизиум."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "tp14"
 	w_class = WEIGHT_CLASS_NORMAL
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/pistol_light_2.ogg'
