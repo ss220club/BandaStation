@@ -2,6 +2,7 @@
 
 // MARK: Melee
 #include "code/melee/baton.dm"
+#include "code/melee/sledgehammer.dm"
 #include "code/melee/tsf_katana.dm"
 #include "code/melee/vibroblade.dm"
 #include "code/melee/centcom/_enchantment_datum.dm"
