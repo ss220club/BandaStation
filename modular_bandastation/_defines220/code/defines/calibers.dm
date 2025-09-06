@@ -4,3 +4,4 @@
 #define CALIBER_9x25NT "9x25mm NT"
 #define CALIBER_338 ".338"
 #define CALIBER_762x51mm "7.62x51mm"
+#define CALIBER_30mmRail "30mm Railgun NT"
