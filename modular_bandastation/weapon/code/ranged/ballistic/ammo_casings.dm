@@ -249,7 +249,7 @@
 /obj/item/ammo_casing/railgun
 	name = "railgun sabot-round"
 	desc = "Специальный бронебойный снаряд для использования в ручных электромагнитных ускорителях масс калибра 30мм. Создан для пробития и уничтожения самых бронированных целей."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "railgun_casing"
 	caliber = CALIBER_30mmRail
 	projectile_type = /obj/projectile/bullet/railgun
@@ -258,6 +258,5 @@
 /obj/item/ammo_casing/railgun/taser
 	name = "railgun taser-round"
 	desc = "Специальный электрошоковый снаряд для использования в ручных электромагнитных ускорителях масс калибра 30мм. Создан для подавления самых буйных ассистентов."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "railgun_casing_taser"
 	projectile_type = /obj/projectile/bullet/railgun/taser

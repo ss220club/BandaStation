@@ -776,7 +776,7 @@
 /obj/item/ammo_box/magazine/railgun
 	name = "railgun magazine (30mm NT)"
 	desc = "Коробчатый магазин-аккумулятор для ручного электромагнитного ускорителя масс калибра 30мм, вмещающий 5 снарядов."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "railgun_mag"
 	ammo_type = /obj/item/ammo_casing/railgun
 	caliber = CALIBER_30mmRail
