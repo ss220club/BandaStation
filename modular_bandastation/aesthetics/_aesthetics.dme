@@ -21,6 +21,7 @@
 #include "dresser/code/dresser.dm"
 #include "firealarm/code/firealarm.dm"
 #include "floors/code/floors.dm"
+#include "flora/code/flora.dm"
 #include "keycard_auth/code/keycard_auth.dm"
 #include "kitchen/code/microwave.dm"
 #include "lights/code/lights.dm"

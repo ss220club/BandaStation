@@ -21,3 +21,13 @@
 
 /turf/open/water/alternative/muddy/no_fishing
 	fishing_datum = null // There's no fish in it
+
+/turf/open/water/alternative/muddy/deep
+	desc = "Болотистая вода. Если быть неосторожным - утянет."
+	baseturfs = /turf/open/water/alternative/muddy/deep
+	immerse_overlay_color = "#303c22"
+	is_swimming_tile = TRUE
+	stamina_entry_cost = 25
+	ticking_stamina_cost = 15
+	ticking_oxy_damage = 2
+	exhaust_swimmer_prob = 100
