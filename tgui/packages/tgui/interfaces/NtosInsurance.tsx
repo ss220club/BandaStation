@@ -105,11 +105,18 @@ export function NtosInsurance(_: NtosInsuranceProps) {
           <LoadingScreen progress={progress} />
         ) : (
           <FadeIn>
-            {!name ? <NoAccount /> : <InsuranceContent />}
+            {!name ? <NoAccountPrompt /> : <InsuranceContent />}
           </FadeIn>
         )}
       </NtosWindow.Content>
     </NtosWindow>
+  );
+}
+
+// New prompt for absent ID card
+function NoAccountPrompt() {
+  return (
+    <NoticeBox danger>Вставьте ID‑карту, чтобы управлять страховкой.</NoticeBox>
   );
 }
 
