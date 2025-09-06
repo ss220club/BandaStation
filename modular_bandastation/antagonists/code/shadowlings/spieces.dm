@@ -31,7 +31,8 @@
 		TRAIT_UNHUSKABLE,
 		TRAIT_SILENT_FOOTSTEPS,
 		TRAIT_NOHUNGER,
-		TRAIT_NO_SLIP_ALL
+		TRAIT_NO_SLIP_ALL,
+		TRAIT_BRAWLING_KNOCKDOWN_BLOCKED
 	)
 
 	no_equip_flags = ITEM_SLOT_MASK | ITEM_SLOT_HEAD | ITEM_SLOT_EYES | ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_ICLOTHING | ITEM_SLOT_SUITSTORE
@@ -73,7 +74,8 @@
 		TRAIT_NOHUNGER,
 		TRAIT_NO_SLIP_ALL,
 		TRAIT_FREE_FLOAT_MOVEMENT,
-		TRAIT_MOVE_FLYING
+		TRAIT_MOVE_FLYING,
+		TRAIT_BRAWLING_KNOCKDOWN_BLOCKED
 	)
 
 var/ascended_max_health = 220
@@ -226,8 +228,8 @@ var/ascended_max_health = 220
 	eye_icon_state = "eyes_glow_gs"
 	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
 	overlay_ignore_lighting = TRUE
-	color_cutoffs = list(20, 10, 40)
 	pepperspray_protect = TRUE
+	color_cutoffs = null
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	eye_color_left = "#3cb8a5"
 	eye_color_right = "#3cb8a5"

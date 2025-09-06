@@ -100,6 +100,10 @@
 /datum/antagonist/shadow_thrall/on_gain()
 	. = ..()
 	var/mob/living/carbon/human/H = owner?.current
+	for(var/datum/action/cooldown/ability in H.actions)
+		if(ability.type in typesof(/datum/action/cooldown/shadowling))
+			ability.Remove(H)
+
 	if(istype(H))
 		var/datum/team/shadow_hive/hive = get_shadow_hive()
 		if(hive)

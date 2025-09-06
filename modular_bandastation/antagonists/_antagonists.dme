@@ -26,7 +26,9 @@
 #include "code/shadowlings/abilities/spells/election.dm"
 #include "code/shadowlings/abilities/spells/engine_sabotage.dm"
 #include "code/shadowlings/abilities/spells/hatch.dm"
-
+#include "code/shadowlings/abilities/spells/hook.dm"
+#include "code/shadowlings/abilities/spells/stealth.dm"
+#include "code/shadowlings/abilities/spells/night_vision.dm"
 #include "code/shadowlings/abilities/spells/ascension.dm"
 
 #include "code/shadowlings/datum.dm"

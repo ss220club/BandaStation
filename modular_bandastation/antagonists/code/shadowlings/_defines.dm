@@ -18,6 +18,7 @@
 //Абилки для раундстарт линга
 var/global/list/SHADOWLING_BASE_ABILITIES = list(
 	/datum/action/cooldown/shadowling/enthrall,
+	/datum/action/cooldown/shadowling/toggle_night_vision,
 	/datum/action/cooldown/shadowling/glare,
 	/datum/action/cooldown/shadowling/root,
 	/datum/action/cooldown/shadowling/cold_wave,
@@ -30,18 +31,20 @@ var/global/list/SHADOWLING_BASE_ABILITIES = list(
 	/datum/action/cooldown/shadowling/labyrinth,
 	/datum/action/cooldown/shadowling/recuperation,
 	/datum/action/cooldown/shadowling/election,
+	/datum/action/cooldown/shadowling/hook,
 	/datum/action/cooldown/shadowling/ascend
 )
 
 //Абилки для тралла
 var/global/list/SHADOWLING_THRALL_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
-	/datum/action/cooldown/shadowling/root
+	/datum/action/cooldown/shadowling/toggle_night_vision
 )
 
 //Абилки для тралла-линга
 var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
+	/datum/action/cooldown/shadowling/toggle_night_vision,
 	/datum/action/cooldown/shadowling/root,
 	/datum/action/cooldown/shadowling/cold_wave,
 	/datum/action/cooldown/shadowling/shadow_phase,
@@ -55,6 +58,7 @@ var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 //Абилки для возвышенного
 var/global/list/SHADOWLING_ASCENDED_ABILITIES = list(
 	/datum/action/cooldown/shadowling/enthrall,
+	/datum/action/cooldown/shadowling/toggle_night_vision,
 	/datum/action/cooldown/shadowling/glare,
 	/datum/action/cooldown/shadowling/root,
 	/datum/action/cooldown/shadowling/cold_wave,
@@ -65,5 +69,6 @@ var/global/list/SHADOWLING_ASCENDED_ABILITIES = list(
 	/datum/action/cooldown/shadowling/shadow_strike,
 	/datum/action/cooldown/shadowling/shadow_smoke,
 	/datum/action/cooldown/shadowling/labyrinth,
+	/datum/action/cooldown/shadowling/hook,
 	/datum/action/cooldown/shadowling/recuperation
 )

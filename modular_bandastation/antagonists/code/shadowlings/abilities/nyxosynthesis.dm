@@ -3,7 +3,7 @@
 	tick_interval = 1 SECONDS
 	var/applied_speed = FALSE
 	var/next_burn_sfx_time = 0
-	var/static/sfx_burn = 'sound/weapons/sear.ogg'
+	var/static/sfx_burn = 'sound/items/weapons/sear.ogg'
 
 /datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling/tick(seconds_between_ticks)
 	var/turf/T = owner?.loc
