@@ -38,7 +38,8 @@ var/global/list/SHADOWLING_BASE_ABILITIES = list(
 //Абилки для тралла
 var/global/list/SHADOWLING_THRALL_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
-	/datum/action/cooldown/shadowling/toggle_night_vision
+	/datum/action/cooldown/shadowling/toggle_night_vision,
+	/datum/action/cooldown/shadowling/stealth
 )
 
 //Абилки для тралла-линга

@@ -12,7 +12,7 @@
 	if(!owner)
 		return
 
-	owner.alpha = 40
+	owner.alpha = 80
 	owner.invisibility = INVISIBILITY_OBSERVER // или подходящий для билда уровень
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(_break_on_move))
 	RegisterSignal(owner, COMSIG_ATOM_ATTACKBY, PROC_REF(_break_on_damage))
