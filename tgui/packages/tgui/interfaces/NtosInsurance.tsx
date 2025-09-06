@@ -65,6 +65,18 @@ export function NtosInsurance(_: NtosInsuranceProps) {
       pct = Math.min(1, pct + step);
       if (name == null && pct > CAP_WITHOUT_NAME) pct = CAP_WITHOUT_NAME;
       setProgress(pct);
+      // Fallback: if we have no account data, finalize once we reached the cap
+      if (name == null && pct >= CAP_WITHOUT_NAME) {
+        const elapsed = performance.now() - start;
+        const remaining = Math.max(0, MIN_LOADER_MS - elapsed);
+        if (finalizeTimeoutRef.current == null) {
+          finalizeTimeoutRef.current = window.setTimeout(
+            () => setShowLoader(false),
+            FINALIZE_DELAY_MS + remaining,
+          );
+        }
+        return;
+      }
       if (pct >= 1) {
         const elapsed = performance.now() - start;
         const remaining = Math.max(0, MIN_LOADER_MS - elapsed);
