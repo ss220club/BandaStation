@@ -51,3 +51,21 @@ var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 	/datum/action/cooldown/shadowling/shadow_smoke,
 	/datum/action/cooldown/shadowling/labyrinth
 )
+
+//Абилки для возвышенного
+var/global/list/SHADOWLING_ASCENDED_ABILITIES = list(
+	/datum/action/cooldown/shadowling/enthrall,
+	/datum/action/cooldown/shadowling/glare,
+	/datum/action/cooldown/shadowling/root,
+	/datum/action/cooldown/shadowling/cold_wave,
+	/datum/action/cooldown/shadowling/shadow_phase,
+	/datum/action/cooldown/shadowling/veil,
+	/datum/action/cooldown/shadowling/shreek,
+	/datum/action/cooldown/shadowling/shadow_grab,
+	/datum/action/cooldown/shadowling/shadow_strike,
+	/datum/action/cooldown/shadowling/shadow_smoke,
+	/datum/action/cooldown/shadowling/labyrinth,
+	/datum/action/cooldown/shadowling/recuperation,
+	/datum/action/cooldown/shadowling/election,
+	/datum/action/cooldown/shadowling/ascend
+)

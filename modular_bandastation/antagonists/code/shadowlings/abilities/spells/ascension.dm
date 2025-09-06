@@ -106,6 +106,13 @@
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(old_turf)
 	to_chat(H, span_boldnotice("Вы разрываете оболочку и восходите в высшую форму Тени!"))
 
+	for(var/datum/action/cooldown/ability in H.actions)
+		if(ability.type in typesof(/datum/action/cooldown/shadowling))
+			ability.Remove(H)
+
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	hive.grant_sync_action(H)
+
 	cleanup(spawned)
 	H.alpha = prev_alpha
 	Remove(H)

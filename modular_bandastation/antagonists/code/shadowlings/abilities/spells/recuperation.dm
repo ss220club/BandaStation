@@ -77,6 +77,8 @@
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
 			ability.Remove(T)
 
+	hive.grant_sync_action(T)
+
 	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим шадоулингом."))
 	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим шадоулингом!"))
 	playsound(get_turf(T), sfx_end, 65, TRUE)

@@ -46,7 +46,8 @@
 		if(SHADOWLING_ROLE_LESSER)
 			check_list = SHADOWLING_MINOR_ABILITIES
 		else
-			check_list = SHADOWLING_BASE_ABILITIES
+			var/datum/antagonist/shadowling/hive = get_shadowling_antag_of(owner)
+			check_list = hive?.is_higher ? SHADOWLING_ASCENDED_ABILITIES : SHADOWLING_BASE_ABILITIES
 	return A.type in check_list
 
 /datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(var/datum/action/cooldown/shadowling/A)
