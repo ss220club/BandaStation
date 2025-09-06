@@ -77,6 +77,21 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
+/datum/design/breaching_slug
+	name = "Breaching Slug (Non-Lethal/Highly Destructive)"
+	desc = "Designed for breaching airlocks and windows, quickly and efficiently."
+	id = "breaching_slug"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 3,
+		/datum/material/titanium = SMALL_MATERIAL_AMOUNT * 5
+	)
+	build_path = /obj/item/ammo_casing/shotgun/breacher
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
 // MARK: Railgun rounds
 /datum/design/railgun_round
 	name = "railgun sabot-round (30mm NT) (Lethal)"
