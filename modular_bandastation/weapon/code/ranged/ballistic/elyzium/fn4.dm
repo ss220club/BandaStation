@@ -1,12 +1,12 @@
 /obj/item/gun/ballistic/automatic/fn4
 	name = "FN-VI \"Sharp\""
 	desc = "Стандартная боевая винтовка армии Республики Элизиум в калибре 7.62x51мм."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "fn4"
-	worn_icon = 'modular_bandastation/objects/icons/mob/back/guns_back.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "fn4"
-	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_lefthand.dmi'
-	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_righthand.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "fn4"
 	SET_BASE_PIXEL(-8, 0)
 	w_class = WEIGHT_CLASS_BULKY
@@ -14,9 +14,9 @@
 	slot_flags = ITEM_SLOT_BACK
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x51mm
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c762x51mm
-	fire_sound = 'modular_bandastation/objects/sounds/weapons/rifle_heavy_3.ogg'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/rifle_heavy_3.ogg'
 	fire_sound_volume = 80
-	suppressed_sound = 'modular_bandastation/objects/sounds/weapons/suppressed_heavy.ogg'
+	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_heavy.ogg'
 	can_suppress = TRUE
 	suppressor_x_offset = 9
 	burst_size = 1
@@ -25,7 +25,7 @@
 	spread = 2.5
 	recoil = 0.3
 	obj_flags = UNIQUE_RENAME
-	rack_sound = 'modular_bandastation/objects/sounds/weapons/smg_rack.ogg'
+	rack_sound = 'modular_bandastation/weapon/sound/ranged/smg_rack.ogg'
 
 /obj/item/gun/ballistic/automatic/fn4/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \

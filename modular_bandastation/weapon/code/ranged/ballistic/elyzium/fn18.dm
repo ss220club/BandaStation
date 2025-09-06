@@ -1,12 +1,12 @@
 /obj/item/gun/ballistic/automatic/fn18
 	name = "FN-18 SMG"
 	desc = "Стандартный пистолет-пулемёт армии Республики Элизиум в калибре 9мм."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ballistic48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "fn18"
-	worn_icon = 'modular_bandastation/objects/icons/mob/back/guns_back.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "fn18"
-	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_lefthand.dmi'
-	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/guns_righthand.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "fn18"
 	SET_BASE_PIXEL(-8, 0)
 	w_class = WEIGHT_CLASS_BULKY
@@ -14,7 +14,7 @@
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
 	accepted_magazine_type = /obj/item/ammo_box/magazine/fn18
 	spawn_magazine_type = /obj/item/ammo_box/magazine/fn18
-	fire_sound = 'modular_bandastation/objects/sounds/weapons/shot.ogg'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/shot.ogg'
 	can_suppress = TRUE
 	suppressor_x_offset = 4
 	burst_size = 1

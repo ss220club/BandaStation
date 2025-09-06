@@ -781,7 +781,7 @@
 /obj/item/ammo_box/magazine/fn18
 	name = "SMG magazine (9mm)"
 	desc = "Магазин для пистолетов-пулеметов калибра 9мм, вмещающий 40 патронов."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "fn18_mag"
 	base_icon_state = "fn18_mag"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -818,7 +818,7 @@
 /obj/item/ammo_box/magazine/as32
 	name = "AS32 magazine (12ga buckshot)"
 	desc = "Магазин для штурмовых дробовиков AS32 12-го калибра, вмещающий 8 патронов."
-	icon = 'modular_bandastation/objects/icons/obj/weapons/guns/ammo.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "as32_mag"
 	base_icon_state = "as32_mag"
 	w_class = WEIGHT_CLASS_NORMAL
