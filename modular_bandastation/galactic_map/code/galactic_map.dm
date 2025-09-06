@@ -5,10 +5,6 @@
 	icon_state = "galactic_map_statue"
 	anchored = TRUE
 
-/obj/structure/statue/gold/galactic_map/attackby(obj/item/item, mob/living/user, list/modifiers, list/attack_modifiers)
-	. = ..()
-	ui_interact(user)
-
 /obj/structure/statue/gold/galactic_map/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
