@@ -26859,3 +26859,12 @@ accusative = "зал заседаний совета"
 instrumental = "залом заседаний совета"
 prepositional = "зале заседаний совета"
 gender = "male"
+
+["glimmering residue"]
+nominative = "мерцающий осадок"
+genitive = "мерцающего осадка"
+dative = "мерцающему осадку"
+accusative = "мерцающий осадок"
+instrumental = "мерцающим осадком"
+prepositional = "мерцающем осадке"
+gender = "male"
