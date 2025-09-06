@@ -123,6 +123,7 @@
 #include "code/items/weapons/ranged/ballistic/nt_guns/cm70.dm"
 #include "code/items/weapons/ranged/ballistic/nt_guns/f4.dm"
 #include "code/items/weapons/ranged/ballistic/nt_guns/f90.dm"
+#include "code/items/weapons/ranged/ballistic/railgun.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
