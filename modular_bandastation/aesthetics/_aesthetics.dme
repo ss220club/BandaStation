@@ -34,6 +34,7 @@
 #include "soap/code/soap.dm"
 #include "supply_pods/code/supply_pods.dm"
 #include "vending/code/vending.dm"
+#include "vendors_restock/code/vendors_restock.dm"
 #include "walls/code/rocks.dm"
 #include "walls/code/walls.dm"
 #include "windoors/code/windoors.dm"

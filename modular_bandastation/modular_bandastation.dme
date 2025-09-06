@@ -37,6 +37,7 @@
 #include "food_and_drinks/_food_and_drinks.dme"
 #include "gunhud/_gunhud.dme"
 #include "hydroponics/_hydroponics.dme"
+#include "id_stickers/_id_stickers.dme"
 #include "implants/_implants.dme"
 #include "job_slots_preferences/_job_slots_preferences.dme"
 #include "jobs/_jobs.dme"
@@ -59,6 +60,7 @@
 #include "preferences/_preferences.dme"
 #include "ru_jobs/_ru_jobs.dme"
 #include "security_levels/_security_levels.dme"
+#include "shuttles/_shuttles.dme"
 #include "species/_species.dme"
 #include "speech_filter/_speech_filter.dme"
 #include "ssd_indicator/_ssd_indicator.dme"
@@ -68,6 +70,7 @@
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"
 #include "turfs/_turfs.dme"
+#include "weapon/_weapon.dme"
 #include "world_topics/_world_topics.dme"
 // --- MODULES END --- //
 
