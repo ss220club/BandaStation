@@ -1,6 +1,6 @@
 /datum/surgery/advanced/bioware/nerve_grounding
-	name = "Nerve Grounding"
-	desc = "A surgical procedure which makes the patient's nerves act as grounding rods, protecting them from electrical shocks."
+	name = "Заземление нервов"
+	desc = "Хирургическая процедура, в ходе которой нервы пациента действуют как заземляющие стержни, защищая их от поражения электрическим током."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -16,8 +16,8 @@
 	status_effect_gained = /datum/status_effect/bioware/nerves/grounded
 
 /datum/surgery/advanced/bioware/nerve_grounding/mechanic
-	name = "System Shock Dampening"
-	desc = "A robotic upgrade which installs grounding rods into the robotic patient's system, protecting them from electrical shocks."
+	name = "Система гашения ударов"
+	desc = "Роботизированная модернизация, которая устанавливает заземляющие стержни в систему роботизированного пациента, защищая его от поражения электрическим током."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -31,26 +31,26 @@
 	)
 
 /datum/surgery_step/apply_bioware/ground_nerves
-	name = "ground nerves (hand)"
+	name = "заземление нервов (рука)"
 	time = 15.5 SECONDS
 
 /datum/surgery_step/apply_bioware/ground_nerves/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
-		span_notice("You start rerouting [target]'s nerves."),
-		span_notice("[user] starts rerouting [target]'s nerves."),
-		span_notice("[user] starts manipulating [target]'s nervous system."),
+		span_notice("Вы начинаете перенаправлять нервы [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает перенаправлять нервы [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает манипулировать нервной системой [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your entire body goes numb!")
+	display_pain(target, "Все ваше тело немеет!")
 
 /datum/surgery_step/apply_bioware/ground_nerves/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	display_results(
 		user,
 		target,
-		span_notice("You successfully reroute [target]'s nervous system!"),
-		span_notice("[user] successfully reroutes [target]'s nervous system!"),
-		span_notice("[user] finishes manipulating [target]'s nervous system."),
+		span_notice("Вы успешно перенаправляете нервную систему [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно перенаправляет нервную систему [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает манипулирование нервной системой [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You regain feeling in your body! You feel energzed!")
+	display_pain(target, "Вы возвращаете своему телу ощущение свежести! Вы чувствуете прилив сил!")
 	return ..()
