@@ -1,7 +1,5 @@
 #include "_objects.dm"
 
-#include "code/shuttles.dm"
-
 #include "code/effects/decal.dm"
 #include "code/effects/landmark.dm"
 #include "code/effects/spawners.dm"
