@@ -15,9 +15,10 @@
 	ignore_play_checks = TRUE
 	start_playing(parent)
 
-	// вспомогательные
 /datum/song/proc/transmit_song_to(datum/song/other)
-	if(!istype(other)) return
+	if(!istype(other))
+		return
+
 	other.lines = islist(lines) ? lines.Copy() : list()
 	other.tempo = tempo
 	other.bpm = bpm
@@ -25,7 +26,9 @@
 	other.compile_chords()
 
 /datum/song/proc/receive_song_from(datum/song/master)
-	if(!istype(master)) return
+	if(!istype(master))
+		return
+
 	lines = islist(master.lines) ? master.lines.Copy() : list()
 	tempo = master.tempo
 	bpm = master.bpm
@@ -36,6 +39,7 @@
 	var/list/out = list()
 	if(!istext(target_id) || !length(target_id))
 		return out
+
 	for(var/datum/song/S as anything in SSinstruments.songs)
 		if(S == src)
 			continue
@@ -56,6 +60,7 @@
 
 	if(!length(multi_tracks))
 		return
+
 	for(var/list/T in multi_tracks)
 		var/target = T["target_id"]
 		if(!istext(target) || !length(target))
@@ -69,20 +74,39 @@
 			addtimer(CALLBACK(other2, /datum/song/proc/force_start_playing), delay_ds)
 
 /datum/song/proc/try_auto_unison_once()
-	if(playing) return
-	var/turf/myturf = get_turf(parent); if(!myturf) return
+	if(playing)
+		return
+
+	var/turf/src_turf = get_turf(parent)
+	if(!src_turf)
+		return
+
 	var/datum/song/master
+
 	for(var/datum/song/S as anything in SSinstruments.songs)
-		if(S == src) continue
-		if(!S.playing) continue
-		if(S.auto_unison_enabled) continue
-		var/turf/ot = get_turf(S.parent); if(!ot) continue
-		if(get_dist(myturf, ot) > AUTO_UNISON_RADIUS) continue
-		master = S; break
-	if(!master) return
+		if(S == src)
+			continue
+		if(!S.playing)
+			continue
+		if(S.auto_unison_enabled)
+			continue
+		var/turf/obj_turf = get_turf(S.parent)
+			if(!obj_turf)
+				continue
+		if(get_dist(src_turf, obj_turf) > AUTO_UNISON_RADIUS)
+			continue
+		master = S
+			break
+
+	if(!master)
+		return
+
 	receive_song_from(master)
 	force_start_playing()
-	if(!playing) return
+
+	if(!playing)
+		return
+
 	current_chord = clamp(master.current_chord, 1, length(compiled_chords))
 	elapsed_delay = 0
 	delay_by = 0
@@ -90,35 +114,45 @@
 /datum/song/handheld/should_stop_playing(atom/player)
 	if(ignore_play_checks)
 		return NONE
+
 	. = ..()
+
 	if(. == STOP_PLAYING || . == IGNORE_INSTRUMENT_CHECKS)
 		return
+
 	var/obj/item/instrument/I = parent
 	return I.can_play(player) ? NONE : STOP_PLAYING
 
 /datum/song/stationary/should_stop_playing(atom/player)
 	if(ignore_play_checks)
 		return NONE
+
 	. = ..()
+
 	if(. == STOP_PLAYING || . == IGNORE_INSTRUMENT_CHECKS)
 		return TRUE
+
 	var/obj/structure/musician/M = parent
 	return M.can_play(player) ? NONE : STOP_PLAYING
 
 /datum/song/stop_playing(finished = FALSE)
 	ignore_play_checks = FALSE
+
 	..()
+
 	if(auto_unison_enabled)
 		START_PROCESSING(SSinstruments, src)
 
 /datum/song/process(wait)
 	if(playing)
 		return ..()
+
 	if(auto_unison_enabled)
 		if(world.time >= (last_unison_check + AUTO_UNISON_PERIOD_TICKS))
 			last_unison_check = world.time
 			try_auto_unison_once()
 		return
+
 	return PROCESS_KILL
 
 /datum/song/ui_data(mob/user)
@@ -129,6 +163,7 @@
 	for(var/i in 1 to multi_tracks.len)
 		var/list/T = multi_tracks[i]
 		out += list(list("target_id" = T["target_id"], "delay_beats" = T["delay_beats"]))
+
 	data["multi_tracks"] = out
 	return data
 
