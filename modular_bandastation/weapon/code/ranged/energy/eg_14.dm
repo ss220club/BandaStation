@@ -26,3 +26,10 @@
 
 		Цена EG-14 делает его недоступным для значительной части рынка, однако он пользуется большим спросом среди телохранителей и охотников за головами.
 	"}
+
+/obj/item/gun/energy/eg_14/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 19, \
+		overlay_y = 10)
