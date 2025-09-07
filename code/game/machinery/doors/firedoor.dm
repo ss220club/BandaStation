@@ -498,9 +498,28 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 
 	if(!user.combat_mode)
+		/* BandaStation Removal
 		user.visible_message(span_notice("[user] knocks on [src]."), \
 			span_notice("You knock on [src]."))
 		playsound(src, knock_sound, 50, TRUE)
+		*/
+		// BANDASTATION EDIT START
+		if(welded)
+			return
+
+		if(!do_after(user, 5 SECONDS))
+			return
+
+		if(!density)
+			return
+
+		open()
+		user.visible_message(span_notice("[user] opens [src]."), span_notice("You open [src]."))
+		if(!active)
+			return
+
+		addtimer(CALLBACK(src, PROC_REF(correct_state)), 2 SECONDS, TIMER_UNIQUE)
+		// BANDASTATION EDIT STOP
 	else
 		user.visible_message(span_warning("[user] bashes [src]!"), \
 			span_warning("You bash [src]!"))

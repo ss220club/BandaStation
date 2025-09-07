@@ -23,7 +23,7 @@
 
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
-/mob/living/carbon/human/proc/get_authentification_name(if_no_id = "Unknown")
+/mob/living/carbon/human/proc/get_authentification_name(if_no_id = "Неизвестный")
 	var/obj/item/card/id/id = get_idcard(FALSE)
 	if(HAS_TRAIT(src, TRAIT_UNKNOWN))
 		return if_no_id
@@ -40,7 +40,7 @@
 	name = get_visible_name()
 
 /// Combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a separate proc as it'll be useful elsewhere
-/mob/living/carbon/human/get_visible_name(add_id_name = TRUE, force_real_name = FALSE)
+/mob/living/carbon/human/get_visible_name(add_id_name = TRUE, force_real_name = FALSE, declent)
 	var/list/identity = list(null, null, null)
 	SEND_SIGNAL(src, COMSIG_HUMAN_GET_VISIBLE_NAME, identity)
 	var/signal_face = LAZYACCESS(identity, VISIBLE_NAME_FACE)
@@ -60,24 +60,24 @@
 			else
 				fake_name = id_name
 		if (HAS_TRAIT(src, TRAIT_UNKNOWN) || HAS_TRAIT(src, TRAIT_INVISIBLE_MAN) || (!face_name && !id_name))
-			fake_name = "Unknown"
-		return "[real_name][fake_name ? " (as [fake_name])" : ""]"
+			fake_name = "Неизвестный"
+		return "[real_name][fake_name ? " (как [fake_name])" : ""]"
 	if(HAS_TRAIT(src, TRAIT_UNKNOWN) || HAS_TRAIT(src, TRAIT_INVISIBLE_MAN))
-		return "Unknown"
+		return "Неизвестный"
 	if(face_name)
 		if(add_id_name && id_name && (id_name != face_name))
-			return "[face_name] (as [id_name])"
+			return "[face_name] (как [id_name])"
 		return face_name
 	if(id_name)
 		return id_name
-	return "Unknown"
+	return "Неизвестный"
 
 /// Returns "Unknown" if facially disfigured and real_name if not.
 /// Useful for setting name when Fluacided or when updating a human's name variable
-/mob/living/carbon/proc/get_face_name(if_no_face = "Unknown")
+/mob/living/carbon/proc/get_face_name(if_no_face = "Неизвестный")
 	return real_name
 
-/mob/living/carbon/human/get_face_name(if_no_face = "Unknown")
+/mob/living/carbon/human/get_face_name(if_no_face = "Неизвестный")
 	if(HAS_TRAIT(src, TRAIT_UNKNOWN))
 		return if_no_face //We're Unknown, no face information for you
 	if(obscured_slots & HIDEFACE)
@@ -89,10 +89,10 @@
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
 //Useful when player is being seen by other mobs
-/mob/living/carbon/proc/get_id_name(if_no_id = "Unknown")
+/mob/living/carbon/proc/get_id_name(if_no_id = "Неизвестный")
 	return
 
-/mob/living/carbon/human/get_id_name(if_no_id = "Unknown")
+/mob/living/carbon/human/get_id_name(if_no_id = "Неизвестный")
 	if(HAS_TRAIT(src, TRAIT_UNKNOWN))
 		. = if_no_id //You get NOTHING, no id name, good day sir
 		var/list/identity = list(null, null, null)
@@ -118,10 +118,10 @@
 	. = ..()
 	if(G.trigger_guard == TRIGGER_GUARD_NORMAL)
 		if(check_chunky_fingers())
-			balloon_alert(src, "fingers are too big!")
+			balloon_alert(src, "слишком большие пальцы!")
 			return FALSE
 	if(HAS_TRAIT(src, TRAIT_NOGUNS))
-		to_chat(src, span_warning("You can't bring yourself to use a ranged weapon!"))
+		to_chat(src, span_warning("Использовать огнестрельное оружие?! Ну уж нет."))
 		return FALSE
 
 /mob/living/carbon/human/proc/check_chunky_fingers()
@@ -341,7 +341,7 @@
 /mob/living/carbon/human/proc/item_heal(mob/user, brute_heal, burn_heal, heal_message_brute, heal_message_burn, required_bodytype)
 	var/obj/item/bodypart/affecting = src.get_bodypart(check_zone(user.zone_selected))
 	if (!affecting || !(affecting.bodytype & required_bodytype))
-		to_chat(user, span_warning("[affecting] is already in good condition!"))
+		to_chat(user, span_warning("[capitalize(affecting.declent_ru(NOMINATIVE))] уже в хорошем состоянии!"))
 		return FALSE
 
 	var/brute_damaged = affecting.brute_dam > 0
@@ -349,20 +349,20 @@
 
 	var/nothing_to_heal = ((brute_heal <= 0 || !brute_damaged) && (burn_heal <= 0 || !burn_damaged))
 	if (nothing_to_heal)
-		to_chat(user, span_notice("[affecting] is already in good condition!"))
+		to_chat(user, span_notice("[capitalize(affecting.declent_ru(NOMINATIVE))] уже в хорошем состоянии!"))
 		return FALSE
 
 	src.update_damage_overlays()
 	var/message
 	if ((brute_damaged && brute_heal > 0) && (burn_damaged && burn_heal > 0))
-		message = "[heal_message_brute] and [heal_message_burn] on"
+		message = "[heal_message_brute] и [heal_message_burn]"
 	else if (brute_damaged && brute_heal > 0)
-		message = "[heal_message_brute] on"
+		message = "[heal_message_brute]"
 	else
-		message = "[heal_message_burn] on"
+		message = "[heal_message_burn]"
 	affecting.heal_damage(brute_heal, burn_heal, required_bodytype)
-	user.visible_message(span_notice("[user] fixes some of the [message] [src]'s [affecting.name]."), \
-		span_notice("You fix some of the [message] [src == user ? "your" : "[src]'s"] [affecting.name]."))
+	user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] исправляет [message] на [affecting.declent_ru(PREPOSITIONAL)] у [declent_ru(GENITIVE)]."), \
+		span_notice("Вы исправляете [message] на [affecting.name] у [src == user ? "себя" : "[declent_ru(GENITIVE)]"] ."))
 	return TRUE
 
 /// Sets both mob's and eye organ's eye color values

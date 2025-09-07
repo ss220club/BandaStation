@@ -33,15 +33,14 @@
 
 /datum/station_goal/dna_vault/get_report()
 	return list(
-		"<blockquote>Our long term prediction systems indicate a 99% chance of system-wide cataclysm in the near future.",
-		"We need you to construct a DNA Vault aboard your station.",
+		"#### ДНК хранилище",
+		"Наши системы долгосрочного прогнозирования указывают на 99% вероятность катастрофы в масштабах всей системы в ближайшем будущем.",
+		"Вам необходимо построить ДНК хранилище на борту вашей станции. Хранилище должно содержать образцы:",
+		"- [animal_count] уникальных данных о животных",
+		"- [plant_count] уникальных данных о нестандартных растениях",
+		"- [human_count] уникальных данных о разумных гуманоидных существах",
 		"",
-		"The DNA Vault needs to contain samples of:",
-		"* [animal_count] unique animal data",
-		"* [plant_count] unique non-standard plant data",
-		"* [human_count] unique sapient humanoid DNA data",
-		"",
-		"Base vault parts are available for shipping via cargo.</blockquote>",
+		"Базовые модули хранилища доступны для заказа через отдел снабжения.",
 	).Join("\n")
 
 
