@@ -15,12 +15,12 @@
 	item_flags = NONE
 	obj_flags = UNIQUE_RENAME
 	weapon_weight = WEAPON_HEAVY
-	max_mod_capacity = 0 //никаких модификаций на ликвидацию снижения урона от давления
+	max_mod_capacity = 0 //no mods for this gun
 	recoil = 3
 	gun_flags = NOT_A_REAL_GUN
 	disable_modification = TRUE
 
-/obj/item/gun/energy/recharge/kinetic_accelerator/add_bayonet_point()
+/obj/item/gun/energy/recharge/kinetic_accelerator/railgun/add_bayonet_point()
 	AddComponent(/datum/component/bayonet_attachable, offset_x = 20, offset_y = 9)
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/railgun/examine_more(mob/user)

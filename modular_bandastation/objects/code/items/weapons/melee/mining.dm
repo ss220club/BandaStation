@@ -1,3 +1,4 @@
+#define KINETIC_CRUSHER_MATERIALS list(/datum/material/iron=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_IRON_MATERIAL_MODIFIER, /datum/material/glass=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_GLASS_MATERIAL_MODIFIER)
 #define CRUSHER_IRON_MATERIAL_MODIFIER 1.15
 #define CRUSHER_GLASS_MATERIAL_MODIFIER 2
 #define WHACK_SPEED 2
@@ -24,7 +25,7 @@
 	throwforce = 5
 	throw_speed = 4
 	armour_penetration = 10
-	custom_materials = list(/datum/material/iron=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_IRON_MATERIAL_MODIFIER, /datum/material/glass=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_GLASS_MATERIAL_MODIFIER)
+	custom_materials = KINETIC_CRUSHER_MATERIALS
 	attack_verb_continuous = list("slashes", "cuts", "cleaves", "chops", "swipes")
 	attack_verb_simple = list("cleave", "chop", "cut", "swipe", "slash")
 	sharpness = SHARP_EDGED
@@ -66,7 +67,7 @@
 	throwforce = 5
 	throw_speed = 4
 	armour_penetration = 15
-	custom_materials = list(/datum/material/iron=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_IRON_MATERIAL_MODIFIER, /datum/material/glass=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_GLASS_MATERIAL_MODIFIER)
+	custom_materials = KINETIC_CRUSHER_MATERIALS
 	attack_verb_continuous = list("stabs", "impales", "pokes", "jabs")
 	attack_verb_simple = list("impale", "stab", "pierce", "jab", "poke")
 	sharpness = SHARP_EDGED
@@ -111,7 +112,7 @@
 	throwforce = 5
 	throw_speed = 4
 	armour_penetration = 0
-	custom_materials = list(/datum/material/iron=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_IRON_MATERIAL_MODIFIER, /datum/material/glass=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_GLASS_MATERIAL_MODIFIER)
+	custom_materials = KINETIC_CRUSHER_MATERIALS
 	hitsound = 'sound/items/weapons/sonic_jackhammer.ogg'
 	attack_verb_continuous = list("slams", "crushes", "smashes", "flattens", "pounds")
 	attack_verb_simple = list("slam", "crush", "smash", "flatten", "pound")
@@ -158,7 +159,7 @@
 	throwforce = 5
 	throw_speed = 4
 	armour_penetration = 0
-	custom_materials = list(/datum/material/iron=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_IRON_MATERIAL_MODIFIER, /datum/material/glass=HALF_SHEET_MATERIAL_AMOUNT*CRUSHER_GLASS_MATERIAL_MODIFIER)
+	custom_materials = KINETIC_CRUSHER_MATERIALS
 	hitsound = 'sound/items/weapons/pierce.ogg'
 	attack_verb_continuous = list("swipes", "slashes", "cuts", "slaps")
 	attack_verb_simple = list("swipe", "slash", "cut", "slap")
