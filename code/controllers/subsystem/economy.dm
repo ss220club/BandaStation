@@ -53,6 +53,13 @@ SUBSYSTEM_DEF(economy)
 	 */
 	var/list/audit_log = list()
 
+	/// Aggregated sum of insurance premiums credited to MED this shift
+	var/insurance_premium_total = 0
+	/// Aggregated medical kiosk stats: total revenue and total covered by insurance
+	var/list/med_kiosk_report = list("total_revenue" = 0, "total_covered" = 0)
+	/// Aggregated medical vendor stats: total revenue and total covered by insurance
+	var/list/med_vendor_report = list("total_revenue" = 0, "total_covered" = 0)
+
 	/// Number of mail items generated.
 	var/mail_waiting = 0
 	/// Mail Holiday: AKA does mail arrive today? Always blocked on Sundays.
@@ -204,6 +211,7 @@ SUBSYSTEM_DEF(economy)
 			if(med && med.adjust_money(cost, "Insurance Premium"))
 				final_tier = tier
 				success = TRUE
+				record_insurance_premium(cost)
 				break
 			else
 				// Roll back debit if MED account missing or credit failed
@@ -216,6 +224,38 @@ SUBSYSTEM_DEF(economy)
 		rec.insurance_desired = desired
 		rec.insurance_current = success ? final_tier : INSURANCE_NONE
 		rec.insurance_payer_account_id = isnull(account.account_id) ? 0 : account.account_id
+
+/**
+ * Records insurance premium income for reporting.
+ */
+/datum/controller/subsystem/economy/proc/record_insurance_premium(amount)
+	if(!isnum(amount) || amount <= 0)
+		return
+	insurance_premium_total += amount
+
+/**
+ * Records a medical kiosk transaction for reporting.
+ * amount: total paid by user; covered: discount value covered by insurance.
+ */
+/datum/controller/subsystem/economy/proc/report_med_kiosk(amount, covered)
+	if(!isnum(amount) || amount <= 0)
+		return
+	if(!isnum(covered) || covered < 0)
+		covered = 0
+	med_kiosk_report["total_revenue"] = (med_kiosk_report["total_revenue"] || 0) + amount
+	med_kiosk_report["total_covered"] = (med_kiosk_report["total_covered"] || 0) + covered
+
+/**
+ * Records a medical vendor transaction for reporting.
+ * amount: total paid by user; covered: discount value covered by insurance.
+ */
+/datum/controller/subsystem/economy/proc/report_med_vendor(amount, covered)
+	if(!isnum(amount) || amount <= 0)
+		return
+	if(!isnum(covered) || covered < 0)
+		covered = 0
+	med_vendor_report["total_revenue"] = (med_vendor_report["total_revenue"] || 0) + amount
+	med_vendor_report["total_covered"] = (med_vendor_report["total_covered"] || 0) + covered
 
 /**
  * Updates the the inflation_value, effecting newscaster alerts and the mail system.

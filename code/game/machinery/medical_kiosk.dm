@@ -79,8 +79,10 @@
 		return
 	var/bonus_fee = pandemonium ? rand(10,30) : 0
 
-	// Apply insurance discount for kiosk usage (based on current tier)
+	// Calculate insurance discount for kiosk usage (based on current tier)
 	var/discount_value = 0
+	var/base_cost = get_cost()
+	var/gross_total = base_cost + bonus_fee
 	if(ishuman(paying))
 		var/mob/living/carbon/human/H = paying
 		var/datum/record/crew/rec = find_record(H.real_name)
@@ -88,15 +90,41 @@
 			var/tier = rec.insurance_current
 			var/percent = INSURANCE_TIER_TO_MED_KIOSK_DISCOUNT(tier)
 			if(percent > 0)
-				var/base_cost = get_cost()
-				// Calculate and clamp so total never goes below zero
+				// Calculate and clamp so coverage never exceeds gross total
 				discount_value = round((base_cost * percent) / 100)
-				var/max_discount = max(0, base_cost + bonus_fee)
-				discount_value = clamp(discount_value, 0, max_discount)
+				discount_value = clamp(discount_value, 0, gross_total)
 
-	var/extra_fees = bonus_fee - discount_value
-	if(attempt_charge(src, paying, extra_fees) & COMPONENT_OBJ_CANCEL_CHARGE )
+	// 1) Charge full amount to MED (gross_total = base + bonus)
+	// We pass only the bonus as extra_fees, payment component adds base_cost automatically
+	if(attempt_charge(src, paying, bonus_fee) & COMPONENT_OBJ_CANCEL_CHARGE)
 		return
+
+	// 2) Reimburse covered part to the user from MED account, if any
+	if(discount_value > 0)
+		var/datum/bank_account/department/med_acc = SSeconomy.get_dep_account(ACCOUNT_MED)
+		if(med_acc)
+			var/datum/bank_account/user_acc = card?.registered_account
+			var/success_refund = FALSE
+			if(user_acc)
+				// Transfer coverage to the user's bank account
+				success_refund = user_acc.transfer_money(med_acc, discount_value, "Insurance: Medical Kiosk Coverage")
+				if(success_refund)
+					user_acc.bank_card_talk("Страховка возместила [discount_value] кр. за мед.киоск.")
+			if(!success_refund)
+				// If no account or transfer failed, attempt to reimburse in cash if MED can afford it
+				if(med_acc.adjust_money(-discount_value, "Insurance: Medical Kiosk Coverage (cash)"))
+					var/obj/item/holochip/holo = new /obj/item/holochip(paying.loc, discount_value)
+					var/gave = FALSE
+					if(ishuman(paying))
+						var/mob/living/carbon/human/HH = paying
+						ASYNC
+							gave = HH.put_in_hands(holo)
+					if(!gave)
+						paying.pulling = holo
+					to_chat(paying, span_notice("Страховка вернула вам [discount_value] кр."))
+
+	// 3) Report kiosk sale with gross total and covered amount
+	SSeconomy.report_med_kiosk(gross_total, discount_value)
 
 	// Inform via machine speech about insurance coverage, if any
 	if(discount_value > 0)
