@@ -91,8 +91,8 @@
 		if(S.auto_unison_enabled)
 			continue
 		var/turf/obj_turf = get_turf(S.parent)
-			if(!obj_turf)
-				continue
+		if(!obj_turf)
+			continue
 		if(get_dist(src_turf, obj_turf) > AUTO_UNISON_RADIUS)
 			continue
 		master = S
