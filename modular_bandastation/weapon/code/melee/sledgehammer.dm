@@ -66,7 +66,6 @@
 	usesound = 'sound/items/tools/crowbar.ogg'
 	throw_range = 5
 	tear_time = 3 SECONDS
-	block_chance = 40
 	reinforced_multiplier = 2
 	stamina_take = 20
 
@@ -120,7 +119,7 @@
 	name = "Syndicate Breaching Sledgehammer"
 	desc = "Plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders."
 	item = /obj/item/sledgehammer/syndie
-	cost = 13
+	cost = 10
 	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER, JOB_ATMOSPHERIC_TECHNICIAN)
 
 /datum/uplink_item/weapon_kits/medium_cost/syndiesledge
@@ -144,7 +143,7 @@
 	result = /obj/item/sledgehammer
 	reqs = list(
 		/obj/item/stack/sheet/mineral/wood = 10,
-		/obj/item/stack/sheet/plasteel = 30,
+		/obj/item/stack/sheet/plasteel = 50,
 	)
 	tool_behaviors = list(TOOL_WRENCH, TOOL_WELDER)
 	time = 10 SECONDS
