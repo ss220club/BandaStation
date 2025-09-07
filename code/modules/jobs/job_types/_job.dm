@@ -224,8 +224,10 @@
 		var/datum/record/crew/rec = find_record(real_name)
 		if(rec)
 			rec.insurance_payer_account_id = bank_account.account_id
+			// Set current insurance immediately based on character preference
+			rec.insurance_current = bank_account.insurance_desired
+			// Keep desired in sync so payday will attempt to fund it
 			rec.insurance_desired = bank_account.insurance_desired
-			rec.insurance_current = INSURANCE_NONE
 
 	dress_up_as_job(
 		equipping = equipping,
