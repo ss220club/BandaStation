@@ -8,7 +8,7 @@
 /obj/item/construction/rcd/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attacking_item, /obj/item/assembly/signaler/anomaly/bluespace))
 		if(core_inserted)
-			to_chat(user, span_warning("В [declent_ru(NOMINATIVE)] уже вставлено ядро!"))
+			to_chat(user, span_warning("В [declent_ru(ACCUSATIVE)] уже вставлено ядро!"))
 			return
 
 		to_chat(user, span_notice("Вы вставляете [attacking_item.declent_ru(NOMINATIVE)] в [declent_ru(ACCUSATIVE)] и инструмент оживает."))
