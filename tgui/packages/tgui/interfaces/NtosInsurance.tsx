@@ -629,7 +629,7 @@ function CmoLogs() {
         <Section title="Принятые счета">
           <LabeledList>
             {hist.length === 0 && (
-              <Box color="label">Нет данных</Box>
+              <LabeledList.Item label="Нет данных" />
             )}
             {hist.map((h) => (
               <LabeledList.Item
