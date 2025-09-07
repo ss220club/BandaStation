@@ -13881,7 +13881,7 @@
 /turf/open/misc/beach/sand,
 /area/station/hallway/secondary/exit/departure_lounge)
 "dne" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/cargo/office)
 "dny" = (
@@ -24960,7 +24960,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "gcr" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 8
 	},
@@ -26375,6 +26375,7 @@
 	c_tag = "Library - South";
 	dir = 2
 	},
+/obj/structure/statue/gold/galactic_map,
 /turf/open/floor/wood,
 /area/station/service/library)
 "gwp" = (
@@ -26767,7 +26768,7 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 1
 	},
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/port/aft)
 "gBK" = (
@@ -28071,7 +28072,7 @@
 /turf/open/floor/circuit,
 /area/station/ai_monitored/turret_protected/ai_upload)
 "gPR" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
@@ -91933,7 +91934,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/aft)
 "wEj" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
@@ -97925,7 +97926,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/dock)
 "ydo" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "ydt" = (

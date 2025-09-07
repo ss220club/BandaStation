@@ -26,6 +26,9 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/range)
+"h" = (
+/turf/closed/wall,
+/area/station/security/mechbay)
 "i" = (
 /obj/structure/lattice,
 /turf/open/space/basic,
@@ -85,6 +88,9 @@
 	},
 /turf/open/floor/iron,
 /area/station/security/office)
+"r" = (
+/turf/closed/wall/r_wall,
+/area/station/security/mechbay)
 "s" = (
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
@@ -481,7 +487,7 @@ W
 W
 j
 W
-W
+h
 a
 "}
 (11,1,1) = {"
@@ -498,7 +504,7 @@ d
 L
 s
 C
-W
+h
 a
 "}
 (12,1,1) = {"
@@ -515,7 +521,7 @@ V
 y
 m
 M
-W
+h
 a
 "}
 (13,1,1) = {"
@@ -532,7 +538,7 @@ X
 J
 B
 E
-W
+h
 a
 "}
 (14,1,1) = {"
@@ -549,7 +555,7 @@ F
 F
 F
 F
-F
+r
 a
 "}
 (15,1,1) = {"
@@ -566,7 +572,7 @@ x
 x
 x
 x
-x
+r
 a
 "}
 (16,1,1) = {"
@@ -583,6 +589,6 @@ x
 x
 x
 x
-x
+r
 a
 "}

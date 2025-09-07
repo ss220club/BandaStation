@@ -142,3 +142,42 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_riot"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+// MARK: ERT
+/obj/item/clothing/suit/armor/swat/ert
+	name = "MK.II SWAT Suit"
+	desc = "Усовершенствованная версия тактического костюма SWAT. Обеспечивает надежную защиту и помогает пользователю противостоять толчкам в тесном пространстве, не замедляя его движений."
+	slowdown = 0
+
+/obj/item/clothing/suit/chaplainsuit/armor/crusader/ert
+	name = "ERT crusader's armour"
+	desc = "Усовершенствованная броня для крестовых походов против ереси, состоящая из освященного нанометалла и ткани. Обеспечивает очень хорошую защиту от еретиков, не замедляя движения пользователя."
+	slowdown = 0
+	allowed = null
+	resistance_flags = FIRE_PROOF
+
+/obj/item/clothing/suit/chaplainsuit/armor/crusader/ert/Initialize(mapload)
+	. = ..()
+	allowed = GLOB.security_vest_allowed
+
+/obj/item/clothing/suit/apron/ert
+	name = "ERT armoured apron"
+	desc = "Фартук из специального легкого кевлара и ткани созданный для уборщиков ОБР. Обеспечивает надежную защиту от врагов чистоты."
+	armor_type = /datum/armor/armor_swat
+	allowed = null
+	resistance_flags = FIRE_PROOF
+
+/obj/item/clothing/suit/apron/ert/Initialize(mapload)
+	. = ..()
+	allowed = GLOB.security_vest_allowed
+
+/obj/item/clothing/suit/armor/vest/ntci_chestplate
+	name = "chestplate armor"
+	desc = "Бронежилет сочетающий в себе удобство, лёгкость и хорошую бронезащиту груди и спины. Модульность позволяет собрать его под себя и упрощает замену бронеплит."
+	icon_state = "ntci_chestplate_armor"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/ntci_armor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/ntci_armor.dmi'
+	armor_type = /datum/armor/vest_marine
+	clothing_flags = THICKMATERIAL
+	body_parts_covered = CHEST|GROIN
+	resistance_flags = FIRE_PROOF | ACID_PROOF

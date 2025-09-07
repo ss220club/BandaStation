@@ -163,3 +163,138 @@
 		/obj/item/ammo_box/n762_cylinder = 2,
 		/obj/item/gun/ballistic/revolver/nagant = 1,
 	),src)
+
+// MARK: ERT
+/obj/item/storage/belt/security/webbing/ert
+	name = "ERT security webbing"
+	desc = "Тактическая разгрузка для снаряжения СБ, используемая отрядами быстрого реагирования."
+
+/obj/item/storage/belt/security/webbing/ert/full/PopulateContents()
+	new /obj/item/restraints/handcuffs(src)
+	new /obj/item/grenade/chem_grenade/teargas(src)
+	new /obj/item/grenade/flashbang(src)
+	new /obj/item/assembly/flash/handheld(src)
+	new /obj/item/restraints/legcuffs/bola/energy(src)
+	new /obj/item/melee/baton/security/loaded(src)
+
+/obj/item/storage/belt/military/ert
+	name = "ERT assault webbing"
+	desc = "Тактическая штурмовая разгрузка, используемая отрядами быстрого реагирования."
+
+/obj/item/storage/belt/military/ert/full_gamma_security/PopulateContents()
+	new /obj/item/restraints/handcuffs(src)
+	new /obj/item/restraints/legcuffs/bola/energy(src)
+	new /obj/item/restraints/legcuffs/bola/energy(src)
+	new /obj/item/grenade/chem_grenade/teargas(src)
+	new /obj/item/grenade/flashbang(src)
+	new /obj/item/grenade/flashbang(src)
+	new /obj/item/grenade/frag(src)
+
+/obj/item/storage/belt/military/ert/full_gamma_commander/PopulateContents()
+	new /obj/item/ammo_box/magazine/smgm9mm/ap(src)
+	new /obj/item/ammo_box/magazine/smgm9mm/ap(src)
+	new /obj/item/ammo_box/magazine/smgm9mm(src)
+	new /obj/item/ammo_box/magazine/smgm9mm(src)
+	new /obj/item/grenade/chem_grenade/teargas(src)
+	new /obj/item/grenade/flashbang(src)
+	new /obj/item/grenade/frag(src)
+
+/obj/item/storage/belt/military/assault/ert
+	name = "ERT assault belt"
+	desc = "Тактический штурмовой пояс, используемый отрядами быстрого реагирования."
+
+/obj/item/storage/belt/military/assault/ert/full_red_security/PopulateContents()
+	new /obj/item/ammo_box/magazine/recharge(src)
+	new /obj/item/ammo_box/magazine/recharge(src)
+	new /obj/item/ammo_box/magazine/recharge(src)
+	new /obj/item/restraints/legcuffs/bola/energy(src)
+	new /obj/item/grenade/chem_grenade/teargas(src)
+	new /obj/item/grenade/flashbang(src)
+
+/obj/item/storage/belt/military/assault/ert/full_red_commander/PopulateContents()
+	new /obj/item/restraints/legcuffs/bola/energy(src)
+	new /obj/item/restraints/legcuffs/bola/energy(src)
+	new /obj/item/grenade/chem_grenade/teargas(src)
+	new /obj/item/grenade/flashbang(src)
+	new /obj/item/grenade/flashbang(src)
+	new /obj/item/restraints/handcuffs(src)
+
+/obj/item/storage/belt/military/assault/ert/full_red_clown/PopulateContents()
+	new /obj/item/restraints/legcuffs/bola/gonbola(src)
+	new /obj/item/grenade/chem_grenade/teargas/moustache(src)
+	new /obj/item/grenade/chem_grenade/glitter/blue(src)
+	new /obj/item/grenade/chem_grenade/glitter/pink(src)
+	new /obj/item/grenade/chem_grenade/glitter(src)
+	new /obj/item/restraints/handcuffs/fake(src)
+
+/obj/item/storage/belt/military/assault/ert/full_gamma_clown/PopulateContents()
+	new /obj/item/restraints/legcuffs/bola/gonbola(src)
+	new /obj/item/grenade/chem_grenade/teargas/moustache(src)
+	new /obj/item/grenade/chem_grenade/glitter/pink(src)
+	new /obj/item/grenade/clusterbuster/soap(src)
+	new /obj/item/grenade/spawnergrenade/clown(src)
+	new /obj/item/restraints/handcuffs/fake(src)
+
+/obj/item/storage/belt/holster/ert
+	name = "ERT operative holster"
+	desc = "Большая наплечная кобура, в которой можно хранить практически любое небольшое огнестрельное оружие и патроны к нему. Эта кобура предназначена специально для пистолетов."
+	icon_state = "syndicate_holster"
+	inhand_icon_state = "syndicate_holster"
+	worn_icon_state = "syndicate_holster"
+	w_class = WEIGHT_CLASS_BULKY
+	storage_type = /datum/storage/holster/nukie/cowboy
+
+/obj/item/storage/belt/holster/ert/full_gp9r/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap = 1,
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/hp = 1,
+		/obj/item/gun/ballistic/automatic/pistol/gp9/spec = 1,
+	),src)
+
+/obj/item/storage/belt/holster/ert/full_gamma_commander/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/energy/pulse/pistol/taserless/loyal = 1,
+		/obj/item/ammo_box/magazine/smgm9mm = 1,
+		/obj/item/gun/ballistic/automatic/proto/unrestricted = 1,
+	),src)
+
+/obj/item/storage/belt/military/holster
+	name = "army belt with holster"
+	desc = "Тактический штурмовой пояс с кобурой, используемый военными."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
+	icon_state = "military_holster"
+	inhand_icon_state = "security"
+	worn_icon_state = "military"
+	storage_type = /datum/storage/military_belt/holster
+
+/datum/storage/military_belt/holster
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_slots = 7
+
+/datum/storage/military_belt/holster/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(list(
+		/obj/item/ammo_box,
+		/obj/item/ammo_casing/shotgun,
+		/obj/item/assembly/flash/handheld,
+		/obj/item/clothing/glasses,
+		/obj/item/clothing/gloves,
+		/obj/item/flashlight/seclite,
+		/obj/item/grenade,
+		/obj/item/knife/combat,
+		/obj/item/melee/baton,
+		/obj/item/radio,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/restraints/handcuffs,
+		/obj/item/restraints/legcuffs/bola,
+		/obj/item/gun/ballistic/automatic/pistol,
+		/obj/item/gun/ballistic/revolver,
+		/obj/item/gun/energy/e_gun/mini,
+		/obj/item/gun/energy/disabler,
+		/obj/item/gun/energy/dueling,
+		/obj/item/gun/energy/laser/thermal,
+		/obj/item/gun/energy/laser/captain,
+		/obj/item/gun/energy/e_gun/hos,
+		/obj/item/gun/energy/eg_14,
+
+	))
