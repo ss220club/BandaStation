@@ -108,17 +108,17 @@ GLOBAL_DATUM_INIT(medical_billing, /datum/medical_billing_manager, new)
 	return TRUE
 
 /datum/medical_billing_manager/proc/remove_bill(datum/medical_bill/B)
-    if(!B) return
-    var/id = B.id
-    var/patient_id = B.patient_account_id
-    var/issuer_id = B.issuer_account_id
-    pending_by_id -= "[id]"
-    var/key = "[B.patient_account_id]"
-    if(pending_by_patient[key])
-        pending_by_patient[key] -= id
-        ASSOC_UNSETEMPTY(pending_by_patient, key)
-    qdel(B)
-    refresh_insurance_uis_for(patient_id, issuer_id)
+	if(!B) return
+	var/id = B.id
+	var/patient_id = B.patient_account_id
+	var/issuer_id = B.issuer_account_id
+	pending_by_id -= "[id]"
+	var/key = "[B.patient_account_id]"
+	if(pending_by_patient[key])
+		pending_by_patient[key] -= id
+		ASSOC_UNSETEMPTY(pending_by_patient, key)
+	qdel(B)
+	refresh_insurance_uis_for(patient_id, issuer_id)
 
 /// Adds an accepted bill to history
 /datum/medical_billing_manager/proc/add_history_entry(datum/medical_bill/B)
@@ -180,19 +180,19 @@ GLOBAL_DATUM_INIT(medical_billing, /datum/medical_billing_manager, new)
 
 /// Updates NTOS Insurance Manager windows for specific account ids
 /datum/medical_billing_manager/proc/refresh_insurance_uis_for(patient_account_id, issuer_account_id)
-    var/list/targets = list()
-    if(!isnull(patient_account_id))
-        LAZYADD(targets, "[patient_account_id]")
-    if(!isnull(issuer_account_id))
-        LAZYADD(targets, "[issuer_account_id]")
-    if(!length(targets))
-        return
-    for(var/datum/computer_file/program/nt_insurance/P in world)
-        var/datum/bank_account/acc = P?.computer?.stored_id?.registered_account
-        if(!acc)
-            continue
-        if("[acc.account_id]" in targets)
-            SStgui.update_uis(P)
+	var/list/targets = list()
+	if(!isnull(patient_account_id))
+		LAZYADD(targets, "[patient_account_id]")
+	if(!isnull(issuer_account_id))
+		LAZYADD(targets, "[issuer_account_id]")
+	if(!length(targets))
+		return
+	for(var/datum/computer_file/program/nt_insurance/P in world)
+		var/datum/bank_account/acc = P?.computer?.stored_id?.registered_account
+		if(!acc)
+			continue
+		if("[acc.account_id]" in targets)
+			SStgui.update_uis(P)
 
 /// Represents a pending medical bill awaiting patient confirmation
 /datum/medical_bill

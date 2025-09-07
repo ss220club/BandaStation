@@ -212,7 +212,7 @@
 		if(player_client && player_client?.prefs)
 			var/desired_tier = player_client.prefs.read_preference(/datum/preference/choiced/insurance_tier)
 			if(istext(desired_tier))
-				switch(lowertext(desired_tier))
+				switch(LOWER_TEXT(desired_tier))
 					if("premium")
 						bank_account.insurance_desired = INSURANCE_PREMIUM
 					if("standard")
