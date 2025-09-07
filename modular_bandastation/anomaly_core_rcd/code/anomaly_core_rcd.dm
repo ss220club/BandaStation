@@ -5,6 +5,15 @@
 /obj/item/construction/rcd
 	var/core_inserted = TRUE
 
+/obj/item/construction/rcd/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!check_anomaly_core(user))
+		return
+	. = ..()
+
+/obj/item/construction/rcd/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!check_anomaly_core(user))
+		return
+	. = ..()
 
 /obj/item/construction/rcd/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attacking_item, /obj/item/assembly/signaler/anomaly/bluespace))
