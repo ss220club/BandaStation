@@ -1,4 +1,4 @@
-import { Box, Button, LabeledList, NoticeBox, ProgressBar, Section, Stack } from 'tgui-core/components';
+import { Box, Button, Dropdown, Input, LabeledList, NoticeBox, NumberInput, ProgressBar, Section, Stack } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
@@ -29,7 +29,7 @@ const toTierKey = (v: string | null | undefined): TierKey | null => {
 };
 const tierLabelRu = (v: string) => {
   const key = toTierKey(v);
-  return key ? TIER_LABEL_RU[key] : 'Неизвестно';
+  return key ? TIER_LABEL_RU[key] : '—';
 };
 
 type Data = {
@@ -38,6 +38,12 @@ type Data = {
   insurance_desired: string;
   payer_account_id: number;
   is_dept: boolean;
+  is_med_staff?: boolean;
+  bill_last_msg?: string;
+  bill_last_ok?: boolean;
+  crew_names?: string[];
+  pending_bills?: { id: number; amount: number; reason?: string; issuer?: string; created_at?: number; expired?: boolean }[];
+  issued_bills?: { id: number; amount: number; reason?: string; patient?: string; created_at?: number; expired?: boolean }[];
 };
 
 type NtosInsuranceProps = Record<string, never>;
@@ -60,7 +66,6 @@ export function NtosInsurance(_: NtosInsuranceProps) {
     let pct = 0;
     const start = performance.now();
     const tick = () => {
-      // Slightly slower progression for a longer, smoother load
       const step = name != null ? STEP_WITH_NAME : STEP_NO_NAME;
       pct = Math.min(1, pct + step);
       if (name == null && pct > CAP_WITHOUT_NAME) pct = CAP_WITHOUT_NAME;
@@ -80,10 +85,12 @@ export function NtosInsurance(_: NtosInsuranceProps) {
       if (pct >= 1) {
         const elapsed = performance.now() - start;
         const remaining = Math.max(0, MIN_LOADER_MS - elapsed);
-        finalizeTimeoutRef.current = window.setTimeout(
-          () => setShowLoader(false),
-          FINALIZE_DELAY_MS + remaining,
-        );
+        if (finalizeTimeoutRef.current == null) {
+          finalizeTimeoutRef.current = window.setTimeout(
+            () => setShowLoader(false),
+            FINALIZE_DELAY_MS + remaining,
+          );
+        }
         return;
       }
       raf = requestAnimationFrame(tick);
@@ -99,7 +106,7 @@ export function NtosInsurance(_: NtosInsuranceProps) {
   }, [name]);
 
   return (
-    <NtosWindow width={420} height={300} title="Insurance Manager">
+    <NtosWindow width={420} height={300} title="Менеджер страховки">
       <NtosWindow.Content>
         {showLoader ? (
           <LoadingScreen progress={progress} />
@@ -120,17 +127,14 @@ function NoAccountPrompt() {
   );
 }
 
-function NoAccount() {
-  return (
-    <NoticeBox danger>Вставьте ID‑карту с персональным банковским счётом.</NoticeBox>
-  );
-}
-
 function InsuranceContent() {
   const { act, data } = useBackend<Data>();
   const { name, insurance_current, insurance_desired, payer_account_id } = data;
   const [busy, setBusy] = useState(false);
   const busyTimeoutRef = useRef<number | null>(null);
+  const [targetName, setTargetName] = useState('');
+  const [billAmount, setBillAmount] = useState(0);
+  const [billReason, setBillReason] = useState('Medical services');
 
   const desiredKey = toTierKey(insurance_desired);
   const baseDisabled = !name || data.is_dept || payer_account_id <= 0 || busy;
@@ -165,14 +169,71 @@ function InsuranceContent() {
             <LabeledList.Item label="Имя">{name}</LabeledList.Item>
             <LabeledList.Item label="Текущий">{tierLabelRu(insurance_current)}</LabeledList.Item>
             <LabeledList.Item label="Желаемый">{tierLabelRu(insurance_desired)}</LabeledList.Item>
-            <LabeledList.Item label="Платёжный счёт">
+            <LabeledList.Item label="Счёт страховки">
               {payer_account_id > 0 ? payer_account_id : '—'}
             </LabeledList.Item>
           </LabeledList>
         </Section>
       </Stack.Item>
+      {!!data.pending_bills?.length && (
+        <Stack.Item>
+          <Section title="Счета к оплате">
+            {data.bill_last_msg && (
+              data.bill_last_ok ? (
+                <NoticeBox success>{data.bill_last_msg}</NoticeBox>
+              ) : (
+                <NoticeBox danger>{data.bill_last_msg}</NoticeBox>
+              )
+            )}
+            <LabeledList>
+              {[...data.pending_bills].sort((a, b) => (b.created_at || 0) - (a.created_at || 0)).map((b) => (
+                <LabeledList.Item
+                  key={b.id}
+                  label={`От: ${b.issuer || 'Медотдел'}`}
+                  buttons={
+                    <>
+                      <Button
+                        color="good"
+                        disabled={busy || b.expired}
+                        onClick={() => {
+                          if (busy) return;
+                          setBusy(true);
+                          busyTimeoutRef.current = window.setTimeout(() => setBusy(false), BUSY_FALLBACK_MS);
+                          act('accept_bill', { id: b.id });
+                        }}
+                      >
+                        Оплатить
+                      </Button>
+                      <Button
+                        color="bad"
+                        disabled={busy}
+                        onClick={() => {
+                          if (busy) return;
+                          setBusy(true);
+                          busyTimeoutRef.current = window.setTimeout(() => setBusy(false), BUSY_FALLBACK_MS);
+                          act('decline_bill', { id: b.id });
+                        }}
+                        ml={1}
+                      >
+                        Отклонить
+                      </Button>
+                    </>
+                  }
+                >
+                  {`Сумма: ${b.amount} кр. — ${b.reason || 'Медицинские услуги'}`}
+                  {!!b.expired && (
+                    <Box inline ml={1} color="bad">
+                      (истёк срок)
+                    </Box>
+                  )}
+                </LabeledList.Item>
+              ))}
+            </LabeledList>
+          </Section>
+        </Stack.Item>
+      )}
       <Stack.Item>
-        <Section title="Установить желаемый уровень">
+        <Section title="Настройка страховки">
           <Box>
             <Button
               selected={desiredKey === 'none'}
@@ -215,6 +276,89 @@ function InsuranceContent() {
           </Box>
         </Section>
       </Stack.Item>
+      {Boolean(data.is_med_staff) && (
+        <Stack.Item>
+          <Section title="Выставить счёт пациенту">
+            {data.bill_last_msg && (
+              data.bill_last_ok ? (
+                <NoticeBox success>{data.bill_last_msg}</NoticeBox>
+              ) : (
+                <NoticeBox danger>{data.bill_last_msg}</NoticeBox>
+              )
+            )}
+            <LabeledList>
+              <LabeledList.Item label="Имя пациента">
+                <Dropdown
+                  selected={targetName}
+                  displayText={targetName || 'Выберите...'}
+                  placeholder="Выберите..."
+                  options={(data.crew_names || []).map((n) => ({ displayText: n, value: n }))}
+                  width="60%"
+                  onSelected={(value) => setTargetName(String(value))}
+                />
+              </LabeledList.Item>
+              <LabeledList.Item label="Сумма">
+                <NumberInput value={billAmount} minValue={0} maxValue={100000} step={10} onChange={setBillAmount} width="25%" />
+              </LabeledList.Item>
+              <LabeledList.Item label="Основание">
+                <Input value={billReason} onChange={setBillReason} placeholder="Причина" width="60%" />
+              </LabeledList.Item>
+            </LabeledList>
+            <Box mt={1}>
+              <Button
+                color="bad"
+                disabled={busy || !targetName || billAmount <= 0}
+                onClick={() => {
+                  if (busy || !targetName || billAmount <= 0) return;
+                  setBusy(true);
+                  busyTimeoutRef.current = window.setTimeout(() => setBusy(false), BUSY_FALLBACK_MS);
+                  act('bill_patient', { name: targetName, amount: billAmount, reason: billReason });
+                }}
+              >
+                Выставить счёт
+              </Button>
+            </Box>
+          </Section>
+        </Stack.Item>
+      )}
+
+      {Boolean(data.is_med_staff) && Boolean(data.issued_bills?.length) && (
+        <Stack.Item>
+          <Section title="Выставленные счета">
+            <LabeledList>
+              {[...(data.issued_bills || [])]
+                .sort((a, b) => (b.created_at || 0) - (a.created_at || 0))
+                .map((b) => (
+                  <LabeledList.Item
+                    key={b.id}
+                    label={`Пациент: ${b.patient || '—'}`}
+                    buttons={
+                      <Button.Confirm
+                        color="bad"
+                        disabled={busy}
+                        onClick={() => {
+                          if (busy) return;
+                          setBusy(true);
+                          busyTimeoutRef.current = window.setTimeout(() => setBusy(false), BUSY_FALLBACK_MS);
+                          act('cancel_bill', { id: b.id });
+                        }}
+                      >
+                        Удалить
+                      </Button.Confirm>
+                    }
+                  >
+                    {`Сумма: ${b.amount} кр. — ${b.reason || 'Медицинские услуги'}`}
+                    {!!b.expired && (
+                      <Box inline ml={1} color="bad">
+                        (истёк срок)
+                      </Box>
+                    )}
+                  </LabeledList.Item>
+                ))}
+            </LabeledList>
+          </Section>
+        </Stack.Item>
+      )}
     </Stack>
   );
 }
@@ -242,7 +386,7 @@ function LoadingScreen({ progress }: { progress: number }) {
   return (
     <Box position="relative" width="100%" height="100%">
       <Box style={{ position: 'absolute', inset: 0 }} align="center">
-        <Section title="Загрузка приложения">
+        <Section title="Загрузка">
           <ProgressBar value={progress}>
             <span aria-live="polite">{Math.round(progress * 100)}%</span>
           </ProgressBar>

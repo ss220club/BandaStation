@@ -19,6 +19,9 @@
 	(T) == INSURANCE_STANDARD ? "Standard" : \
 	"None")
 
+// Billing: pending medical bill expiry duration
+#define INSURANCE_BILL_EXPIRE (10 MINUTES)
+
 // --- Bandastation: simple insurance benefits ---
 // Medical kiosk discount percent by tier (0-100)
 #define INSURANCE_DISCOUNT_STANDARD 50
