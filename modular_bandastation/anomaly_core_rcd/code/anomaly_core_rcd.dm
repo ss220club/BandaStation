@@ -11,6 +11,8 @@
 	. = ..()
 
 /obj/item/construction/rcd/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/assembly/signaler/anomaly/bluespace))
+		return
 	if(!check_anomaly_core(user))
 		return
 	. = ..()
