@@ -39,17 +39,21 @@
  */
 
 // BANDASTATION ADD - Start
-/proc/get_announce_listeners(coverage)
+/proc/get_announce_listeners()
+	var/list/players = list()
 	var/list/zleves_to_transmit = list()
 	for(var/obj/machinery/telecomms/receiver/receiver in GLOB.telecomm_machines)
-		if(receiver.on)
-			zleves_to_transmit |= receiver.z
+		zleves_to_transmit |= receiver.z
+		for(var/obj/machinery/telecomms/hub/linked_hub in receiver.links)
+			for(var/obj/machinery/telecomms/relay/linked_relay in linked_hub.links)
+				zleves_to_transmit |= linked_relay.z
 	for(var/obj/machinery/telecomms/allinone/all_in_one_receiver in GLOB.telecomm_machines)
-		if(all_in_one_receiver.on)
-			zleves_to_transmit |= all_in_one_receiver.z
+		zleves_to_transmit |= all_in_one_receiver.z
 	for(var/mob/player as anything in GLOB.player_list)
 		if(player.z in zleves_to_transmit || isobserver(player))
-			. += player
+			players += player
+
+	return players
 // BANDASTATION ADD - Start
 
 /proc/priority_announce(text, title = "", sound, type, sender_override, has_important_message = FALSE, list/mob/players = GLOB.player_list, encode_title = TRUE, encode_text = TRUE, color_override, datum/component/tts_component/tts_override = null) // Bandastation Addition: "datum/component/tts_component/tts_override = null"
