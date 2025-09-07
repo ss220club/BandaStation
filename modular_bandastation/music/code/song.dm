@@ -96,7 +96,7 @@
 		if(get_dist(src_turf, obj_turf) > AUTO_UNISON_RADIUS)
 			continue
 		master = S
-			break
+		break
 
 	if(!master)
 		return
