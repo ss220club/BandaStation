@@ -241,11 +241,6 @@
  * * [mob][user]- the user building this structure
  */
 /obj/item/construction/rcd/proc/rcd_create(atom/target, mob/user)
-	//BANDASTATION ADD START - Anomaly core RCD
-	if(!check_anomaly_core(user))
-		return
-	//BANDASTATION ADD END - Anomaly core RCD
-
 	if(isopenturf(target))
 		var/turf/open/open = target
 		if(!open.CanBuildHere())
