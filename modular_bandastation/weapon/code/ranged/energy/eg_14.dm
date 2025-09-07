@@ -33,4 +33,5 @@
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
 		overlay_x = 19, \
-		overlay_y = 10)
+		overlay_y = 10
+	)
