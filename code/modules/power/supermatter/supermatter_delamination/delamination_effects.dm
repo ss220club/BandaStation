@@ -212,7 +212,7 @@
 		// garble the special message
 		if(SSshuttle.emergency.is_hijacked())
 			shuttle_msg = Gibberish(shuttle_msg, TRUE, 15)
-		minor_announce(shuttle_msg, "Эвакуационный шаттл", TRUE)
+		minor_announce(shuttle_msg, "Эвакуационный шаттл", TRUE,  coverage = ANNOUNCE_EVERYWHERE) // BANDASTATION ADD - Coverage
 		SSshuttle.emergency.setTimer(15 SECONDS)
 		return
 

@@ -38,6 +38,7 @@
  * * encode_text - if TRUE, the text will be HTML encoded
  */
 
+// BANDASTATION ADD - Start
 /proc/get_announce_listeners(coverage)
 	switch(coverage)
 		if(ANNOUNCE_STATION_ONLY)
@@ -48,8 +49,9 @@
 			for(var/mob/player in GLOB.player_list)
 				if(SSmapping.level_trait(player.z, ZTRAIT_STATION) || SSmapping.level_trait(player.z, ZTRAIT_MINING))
 					. += player
+// BANDASTATION ADD - Start
 
-/proc/priority_announce(text, title = "", sound, type, sender_override, has_important_message = FALSE, list/mob/players = GLOB.player_list, encode_title = TRUE, encode_text = TRUE, color_override, datum/component/tts_component/tts_override = null, coverage = ANNOUNCE_STATION_AND_MINING) // Bandastation Addition: "datum/component/tts_component/tts_override = null"
+/proc/priority_announce(text, title = "", sound, type, sender_override, has_important_message = FALSE, list/mob/players = GLOB.player_list, encode_title = TRUE, encode_text = TRUE, color_override, datum/component/tts_component/tts_override = null, coverage = ANNOUNCE_STATION_AND_MINING) // Bandastation Addition: "datum/component/tts_component/tts_override = null", coverage
 	if(!text)
 		return
 
@@ -95,7 +97,7 @@
 	else
 		finalized_announcement = CHAT_ALERT_DEFAULT_SPAN(jointext(announcement_strings, ""))
 
-	players = get_announce_listeners(coverage) || players
+	players = get_announce_listeners(coverage) || players // BANDASTATION ADD
 
 	// BANDASTATION EDIT - START - add tts_message
 	var/tts_message = (SSstation.announcer.custom_alert_message && !has_important_message) ? SSstation.announcer.custom_alert_message : text
@@ -140,7 +142,7 @@
  * should_play_sound - Whether the notice sound should be played or not. This can also be a callback, if you only want mobs to hear the sound based off of specific criteria.
  * color_override - optional, use the passed color instead of the default notice color.
  */
-/proc/minor_announce(message, title = "Внимание:", alert = FALSE, html_encode = TRUE, list/players, sound_override, should_play_sound = TRUE, color_override, tts_override, coverage = ANNOUNCE_STATION_AND_MINING) // BANDASTATION ADDITION - "tts_override"
+/proc/minor_announce(message, title = "Внимание:", alert = FALSE, html_encode = TRUE, list/players, sound_override, should_play_sound = TRUE, color_override, tts_override, coverage = ANNOUNCE_STATION_AND_MINING) // BANDASTATION ADDITION - "tts_override", coverage
 	if(!message)
 		return
 
@@ -161,7 +163,7 @@
 
 	var/custom_sound = sound_override || (alert ? 'sound/announcer/notice/notice1.ogg' : 'sound/announcer/notice/notice2.ogg')
 
-	players = get_announce_listeners(coverage) || players
+	players = get_announce_listeners(coverage) || players // BANDASTATION ADD
 
 	dispatch_announcement_to_players(finalized_announcement, players, custom_sound, should_play_sound, tts_override = tts_override, tts_message = message) // BANDASTATION ADDITION - "tts_override" & "tts_message"
 
