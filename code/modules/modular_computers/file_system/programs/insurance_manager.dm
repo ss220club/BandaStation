@@ -40,14 +40,50 @@
 	data["insurance_desired"] = INSURANCE_TIER_TO_TEXT(current_user.insurance_desired)
 	data["payer_account_id"] = current_user.account_id
 	data["is_dept"] = IS_DEPARTMENTAL_ACCOUNT(current_user)
+	// flags for permissions
+	data["is_med_staff"] = (current_user?.account_job?.paycheck_department == ACCOUNT_MED)
+	data["is_cmo"] = (current_user?.account_job?.title == JOB_CHIEF_MEDICAL_OFFICER)
 	// Populate crew manifest names for dropdown selection
 	var/list/crew_names = list()
 	for(var/datum/record/crew/C in GLOB.manifest.general)
 		if(C?.name)
 			crew_names += C.name
 	data["crew_names"] = crew_names
-	// medical staff flag: can issue bills
-	data["is_med_staff"] = (current_user?.account_job?.paycheck_department == ACCOUNT_MED)
+
+	// Provide tariff table (procedure -> price) for med staff billing UI
+	var/list/tariff_list = list()
+	for(var/t_name in GLOB.medical_tariffs)
+		var/price = GLOB.medical_tariffs[t_name]
+		tariff_list += list(list("name" = t_name, "price" = price))
+	if(length(tariff_list))
+		data["tariffs"] = tariff_list
+
+	// Provide list of available surgeries from type tree
+	var/list/surgeries = list()
+	var/surgeries_count = 0
+	var/list/surgery_types = subtypesof(/datum/surgery)
+	data["surgery_types_total"] = length(surgery_types)
+	for(var/type_path in surgery_types)
+		if(type_path == /datum/surgery)
+			continue
+		var/datum/surgery/T = type_path
+		var/s_name = initial(T.name)
+		// Be permissive: if name is missing, use type path string
+		if(!istext(s_name) || !length(s_name) || s_name == "surgery")
+			s_name = "[type_path]"
+		var/is_adv = initial(T.requires_tech)
+		var/s_price = calc_surgery_price(T)
+		surgeries += list(list(
+			"name" = s_name,
+			"advanced" = is_adv,
+			"price" = s_price,
+		))
+		surgeries_count++
+
+	// Always include for UI diagnostics
+	data["surgeries"] = surgeries
+	data["surgeries_count"] = surgeries_count
+	// medical staff info already set above
 	// billing feedback
 	if(billing_last_msg)
 		data["bill_last_msg"] = billing_last_msg
@@ -81,6 +117,30 @@
 			))
 		if(length(issued))
 			data["issued_bills"] = issued
+
+	// CMO log data: accepted bills history, insurance income total, med kiosk report
+	if(data["is_cmo"]) 
+		var/list/hist = list()
+		for(var/list/E as anything in GLOB.medical_billing.list_history(50))
+			var/acc_time = station_time_timestamp("hh:mm", E["accepted_at"])
+			hist += list(list(
+				"id" = E["id"],
+				"issuer" = E["issuer"],
+				"patient" = E["patient"],
+				"amount" = E["amount"],
+				"accepted_at" = acc_time,
+				"refunded" = E["refunded"],
+			))
+		data["cmo_history"] = hist
+		data["cmo_insurance_income_total"] = SSeconomy.insurance_premium_total || 0
+		var/list/rk = SSeconomy.med_kiosk_report || list()
+		var/list/rv = SSeconomy.med_vendor_report || list()
+		var/total = (rk["total_revenue"] || 0) + (rv["total_revenue"] || 0)
+		var/covered = (rk["total_covered"] || 0) + (rv["total_covered"] || 0)
+		data["cmo_kiosk_report"] = list(
+			"total" = total,
+			"covered" = covered,
+		)
 
 	return data
 
@@ -188,6 +248,23 @@
 			billing_last_msg = "Счёт отклонён"
 		else
 			billing_last_msg = "Не удалось отклонить"
+		SStgui.update_uis(src)
+		return TRUE
+
+	if(action == "cmo_refund")
+		var/datum/bank_account/actor = computer.stored_id?.registered_account || null
+		if(!actor || actor?.account_job?.title != JOB_CHIEF_MEDICAL_OFFICER)
+			return TRUE
+		var/id = round(text2num(params["id"]))
+		billing_last_msg = null
+		billing_last_ok = FALSE
+		if(id <= 0)
+			return TRUE
+		if(GLOB.medical_billing.refund_history(id, actor))
+			billing_last_ok = TRUE
+			billing_last_msg = "Возврат по счёту выполнен"
+		else
+			billing_last_msg = "Не удалось выполнить возврат"
 		SStgui.update_uis(src)
 		return TRUE
 
