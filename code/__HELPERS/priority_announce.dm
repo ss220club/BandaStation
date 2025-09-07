@@ -43,11 +43,11 @@
 	switch(coverage)
 		if(ANNOUNCE_STATION_ONLY)
 			for(var/mob/player in GLOB.player_list)
-				if(SSmapping.level_trait(player.z, ZTRAIT_STATION))
+				if(SSmapping.level_trait(player.z, ZTRAIT_STATION) || isobserver(player))
 					. += player
 		if(ANNOUNCE_STATION_AND_MINING)
 			for(var/mob/player in GLOB.player_list)
-				if(SSmapping.level_trait(player.z, ZTRAIT_STATION) || SSmapping.level_trait(player.z, ZTRAIT_MINING))
+				if(SSmapping.level_trait(player.z, ZTRAIT_STATION) || SSmapping.level_trait(player.z, ZTRAIT_MINING) || isobserver(player))
 					. += player
 // BANDASTATION ADD - Start
 
