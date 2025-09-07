@@ -1,4 +1,5 @@
 /datum/design/rcd_loaded
+	name = "Rapid Construction Device (RCD)"
 	build_path = /obj/item/construction/rcd/no_core
 
 /obj/item/construction/rcd
@@ -9,9 +10,11 @@
 	if(istype(attacking_item, /obj/item/assembly/signaler/anomaly/bluespace))
 		if(core_inserted)
 			to_chat(user, span_warning("В [declent_ru(ACCUSATIVE)] уже вставлено ядро!"))
+			balloon_alert(user, "уже есть ядро")
 			return
 
 		to_chat(user, span_notice("Вы вставляете [attacking_item.declent_ru(NOMINATIVE)] в [declent_ru(ACCUSATIVE)] и инструмент оживает."))
+		balloon_alert(user, "ядро вставлено")
 		core_inserted = TRUE
 		playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
 		qdel(attacking_item)
@@ -24,7 +27,6 @@
 
 /obj/item/construction/rcd/proc/check_anomaly_core(mob/user)
 	if(!core_inserted)
-		to_chat(user, span_warning("Нет ядра аномалии!"))
 		balloon_alert(user, "нет ядра аномалии!")
 		return FALSE
 
