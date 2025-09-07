@@ -35,6 +35,7 @@
 #include "ert/_ert.dme"
 #include "examine_panel/_examine_panel.dme"
 #include "food_and_drinks/_food_and_drinks.dme"
+#include "galactic_map/_galactic_map.dme"
 #include "gunhud/_gunhud.dme"
 #include "hydroponics/_hydroponics.dme"
 #include "id_stickers/_id_stickers.dme"
