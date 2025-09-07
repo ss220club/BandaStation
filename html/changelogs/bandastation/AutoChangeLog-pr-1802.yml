@@ -1,0 +1,4 @@
+author: "AyIong"
+delete-after: True
+changes:
+  - rscadd: "Добавлена статуя, нажатие на которую открывает лорную галактическую карту"
