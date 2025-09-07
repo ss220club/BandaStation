@@ -9,6 +9,8 @@ GLOBAL_DATUM_INIT(medical_billing, /datum/medical_billing_manager, new)
 	var/list/pending_by_id = list()
 	/// patient_account_id (string) -> list of bill ids
 	var/list/pending_by_patient = list()
+	/// History of accepted bills for CMO reporting
+	var/list/accepted_history = list()
 
 /datum/medical_billing_manager/proc/create_bill(datum/bank_account/patient, amount, reason, issuer_name, issuer_account_id,patient_name)
 	if(!patient || amount <= 0)
@@ -65,6 +67,8 @@ GLOBAL_DATUM_INIT(medical_billing, /datum/medical_billing_manager, new)
 		return FALSE
 	if(!med.transfer_money(patient, B.amount, B.reason || "Nanotrasen: Medical Bill"))
 		return FALSE
+	// record in history for CMO reporting
+	add_history_entry(B)
 	// remove bill
 	remove_bill(B)
 	return TRUE
@@ -115,6 +119,60 @@ GLOBAL_DATUM_INIT(medical_billing, /datum/medical_billing_manager, new)
         ASSOC_UNSETEMPTY(pending_by_patient, key)
     qdel(B)
     refresh_insurance_uis_for(patient_id, issuer_id)
+
+/// Adds an accepted bill to history
+/datum/medical_billing_manager/proc/add_history_entry(datum/medical_bill/B)
+	if(!B) return
+	var/list/entry = list(
+		"id" = B.id,
+		"amount" = B.amount,
+		"reason" = B.reason,
+		"issuer" = B.issuer,
+		"issuer_account_id" = B.issuer_account_id,
+		"patient" = B.patient_name,
+		"patient_account_id" = B.patient_account_id,
+		"created_at" = B.created_at,
+		"accepted_at" = world.time,
+		"refunded" = FALSE,
+		"refunded_at" = 0,
+	)
+	accepted_history += list(entry)
+
+/// Returns shallow copy of accepted history (last N if provided)
+/datum/medical_billing_manager/proc/list_history(limit = 50)
+	var/list/out = list()
+	var/len = length(accepted_history)
+	if(len <= 0)
+		return out
+	var/start = max(1, len - limit + 1)
+	for(var/i in start to len)
+		out += list(accepted_history[i])
+	return out
+
+/// Refunds an accepted bill by id back to patient from MED, only CMO allowed
+/datum/medical_billing_manager/proc/refund_history(id, datum/bank_account/actor)
+	if(!actor || actor?.account_job?.title != JOB_CHIEF_MEDICAL_OFFICER)
+		return FALSE
+	for(var/i in 1 to length(accepted_history))
+		var/list/E = accepted_history[i]
+		if(E["id"] != id)
+			continue
+		if(E["refunded"]) // already refunded
+			return FALSE
+		var/amt = E["amount"]
+		if(!isnum(amt) || amt <= 0)
+			return FALSE
+		var/patient_id = E["patient_account_id"]
+		var/datum/bank_account/patient = SSeconomy.bank_accounts_by_id["[patient_id]"]
+		var/datum/bank_account/department/med = SSeconomy.get_dep_account(ACCOUNT_MED)
+		if(!patient || !med)
+			return FALSE
+		if(!patient.adjust_money(amt, "Medical Bill Refund") || !med.adjust_money(-amt, "Medical Bill Refund"))
+			return FALSE
+		E["refunded"] = TRUE
+		E["refunded_at"] = world.time
+		return TRUE
+	return FALSE
 
 /datum/medical_billing_manager/proc/is_expired(datum/medical_bill/B)
 	if(!B) return TRUE
