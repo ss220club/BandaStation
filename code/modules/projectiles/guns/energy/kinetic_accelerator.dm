@@ -140,7 +140,7 @@
 		modkits |= arrived
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/attackby(obj/item/I, mob/user)
-		if(istype(I, /obj/item/borg/upgrade/modkit) && !disable_modification) // BANDASTATION EDIT
+	if(istype(I, /obj/item/borg/upgrade/modkit) && !disable_modification) // BANDASTATION EDIT
 		var/obj/item/borg/upgrade/modkit/MK = I
 		MK.install(src, user)
 	else
