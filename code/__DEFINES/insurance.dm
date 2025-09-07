@@ -32,3 +32,14 @@
 	((T) == INSURANCE_PREMIUM ? INSURANCE_DISCOUNT_PREMIUM : \
 	(T) == INSURANCE_STANDARD ? INSURANCE_DISCOUNT_STANDARD : \
 	0)
+
+// --- Surgery pricing (auto) ---
+// Base price and modifiers to estimate operation complexity cost (credits)
+#define SURGERY_PRICE_BASE 80
+#define SURGERY_PRICE_PER_STEP 40
+#define SURGERY_PRICE_ADVANCED_BONUS 150
+#define SURGERY_PRICE_HEAD_BONUS 100
+#define SURGERY_PRICE_CHEST_BONUS 60
+#define SURGERY_PRICE_WOUND_BONUS 40
+#define SURGERY_PRICE_MIN 50
+#define SURGERY_PRICE_MAX 2000
