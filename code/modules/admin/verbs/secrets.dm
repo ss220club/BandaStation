@@ -382,7 +382,6 @@ ADMIN_VERB(secrets, R_DEBUG|R_FUN, "Secrets", "Abuse harder than you ever have b
 					sound =  'sound/announcer/announcement/announce_dig.ogg',
 					sender_override = "Система оповещения эвакуационного шаттла",
 					color_override = "grey",
-					coverage = ANNOUNCE_EVERYWHERE // BANDASTATION ADD - Coverage
 				)
 			SSshuttle.emergency.timer = INFINITY
 			if (new_timer > 0)

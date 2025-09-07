@@ -85,7 +85,6 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 		has_important_message = TRUE,
 		sender_override = "Аванпост ядерных оперативников",
 		color_override = "red",
-		coverage = ANNOUNCE_EVERYWHERE, // BANDASTATION ADD - Coverage
 	)
 	if(user)
 		to_chat(user, "You've attracted the attention of powerful forces within the syndicate. \
@@ -199,7 +198,6 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 		has_important_message = TRUE,
 		sender_override = "Аванпост ядерных оперативников",
 		color_override = "red",
-		coverage = ANNOUNCE_EVERYWHERE, // BANDASTATION ADD - Coverage
 	)
 
 /obj/item/nuclear_challenge/literally_just_does_the_message/distribute_tc()

@@ -231,7 +231,6 @@
 					title = "Произведена отстыковка эвакуационного шаттла",
 					sender_override = "Аварийное оповещение эвакуационного шаттла",
 					color_override = "orange",
-					coverage = ANNOUNCE_EVERYWHERE, // BANDASTATION ADD - Coverage
 				)
 				INVOKE_ASYNC(SSticker, TYPE_PROC_REF(/datum/controller/subsystem/ticker, poll_hearts))
 				INVOKE_ASYNC(SSvote, TYPE_PROC_REF(/datum/controller/subsystem/vote, initiate_vote), /datum/vote/map_vote, vote_initiator_name = "Map Rotation", forced = TRUE)
@@ -298,7 +297,6 @@
 		title = "Экстренный транзит шаттла",
 		sender_override = "Аварийное оповещение эвакуационного шаттла",
 		color_override = "orange",
-		coverage = ANNOUNCE_EVERYWHERE, // BANDASTATION ADD - Coverage
 	)
 
 ///Generate a list of events to run during the departure

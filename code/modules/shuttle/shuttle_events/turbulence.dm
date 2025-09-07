@@ -16,7 +16,7 @@
 	. = ..()
 	minor_announce("Обратите внимание, что мы входим в зону подпрастранственной турбулентности. Для вашей же безопасности, \
 		пожалуйста, пристегните ремни безопасности и оставайтесь на своих местах, пока шаттл полностью не остановится.",
-		title = "Эвакуационный шаттл", alert = TRUE, coverage = ANNOUNCE_EVERYWHERE) // BANDASTATION ADD - Coverage
+		title = "Эвакуационный шаттл", alert = TRUE)
 	COOLDOWN_START(src, turbulence_cooldown, rand(5 SECONDS, 20 SECONDS)) // Reduced interval after the announcement
 
 /datum/shuttle_event/turbulence/event_process()
