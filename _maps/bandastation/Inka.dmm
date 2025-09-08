@@ -160,6 +160,7 @@
 /area/awaymission/inka/outside)
 "aE" = (
 /obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden,
+/obj/machinery/door/airlock/maintenance_hatch,
 /turf/open/floor/plating,
 /area/awaymission/inka/inside/base)
 "aF" = (
@@ -463,7 +464,10 @@
 /obj/effect/turf_decal/tile/dark_red/half{
 	dir = 4
 	},
-/mob/living/carbon/human,
+/mob/living/carbon/human{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/iron/large,
 /area/awaymission/inka/inside/base)
 "bE" = (
@@ -914,7 +918,10 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
 	},
-/mob/living/carbon/human,
+/mob/living/carbon/human{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/carpet/blue,
 /area/awaymission/inka/inside/base)
 "dp" = (
@@ -1682,7 +1689,10 @@
 /obj/structure/chair/office{
 	dir = 1
 	},
-/mob/living/carbon/human,
+/mob/living/carbon/human{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/carpet/black,
 /area/awaymission/inka/inside/base)
 "gq" = (
@@ -2321,6 +2331,16 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/textured_half,
 /area/awaymission/inka/outside)
+"iA" = (
+/obj/structure/chair/office{
+	dir = 4
+	},
+/mob/living/carbon/human{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/mob_buckler,
+/turf/open/floor/carpet/black,
+/area/awaymission/inka/inside/base)
 "iB" = (
 /obj/structure/fluff/fake_camera{
 	dir = 10
@@ -2926,7 +2946,10 @@
 	pixel_x = 0;
 	density = 0
 	},
-/mob/living/carbon/human,
+/mob/living/carbon/human{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/carpet/black,
 /area/awaymission/inka/inside/base)
 "kB" = (
@@ -3484,6 +3507,7 @@
 "mw" = (
 /obj/structure/chair/office,
 /mob/living/carbon/human,
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/carpet/black,
 /area/awaymission/inka/inside/base)
 "mx" = (
@@ -4134,7 +4158,7 @@
 	dir = 6
 	},
 /turf/open/floor/plating,
-/area/awaymission/inka/inside/base)
+/area/awaymission/inka/outside)
 "oS" = (
 /obj/machinery/modular_computer/preset/command{
 	dir = 8
@@ -5496,6 +5520,10 @@
 /obj/structure/closet/crate/secure/cargo/mining,
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
 /turf/open/floor/iron/dark/textured_large,
 /area/awaymission/inka/inside/base)
 "tO" = (
@@ -6741,6 +6769,12 @@
 	},
 /turf/open/floor/asphalt,
 /area/awaymission/inka/outside)
+"yn" = (
+/obj/machinery/button/door/indestructible{
+	id = "inka_cave"
+	},
+/turf/closed/wall/r_wall,
+/area/awaymission/inka/inside/cave)
 "yo" = (
 /obj/structure/flora/tree/large_pine/style_random,
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -7620,7 +7654,7 @@
 /obj/structure{
 	icon = 'icons/obj/machines/telecomms.dmi';
 	icon_state = "blackbox";
-	name = "Blackbox Recorder";
+	name = "приемник";
 	pixel_x = 0;
 	pixel_y = 18
 	},
@@ -8309,6 +8343,16 @@
 	},
 /turf/open/misc/dirt/station,
 /area/awaymission/inka/outside)
+"DM" = (
+/turf/closed/indestructible/riveted/plastinum/nodiagonal,
+/area/awaymission/inka/outside)
+"DN" = (
+/obj/machinery/light/small/directional/north,
+/obj/vehicle/sealed/car/apc{
+	dir = 4
+	},
+/turf/open/floor/asphalt,
+/area/awaymission/inka/inside/cave)
 "DO" = (
 /obj/structure/railing/platform/reinforced/corner{
 	dir = 1
@@ -8419,6 +8463,9 @@
 /obj/structure/closet/crate/secure/cargo/mining,
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
 /turf/open/floor/iron/dark/textured_large,
 /area/awaymission/inka/inside/base)
 "Ej" = (
@@ -8554,6 +8601,9 @@
 	},
 /obj/structure/closet/crate/secure/cargo/mining,
 /obj/effect/turf_decal/delivery,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
 /turf/open/floor/iron/dark/textured_large,
 /area/awaymission/inka/inside/base)
 "EO" = (
@@ -9307,6 +9357,12 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/pod/dark,
 /area/awaymission/inka/inside/base)
+"HM" = (
+/obj/machinery/door/poddoor{
+	id = "inka_cave"
+	},
+/turf/open/floor/asphalt,
+/area/awaymission/inka/inside/cave)
 "HN" = (
 /obj/structure/flora/bush/flowers_yw/style_random,
 /turf/open/misc/grass,
@@ -10182,7 +10238,10 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
 	},
-/mob/living/carbon/human,
+/mob/living/carbon/human{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/carpet/blue,
 /area/awaymission/inka/inside/base)
 "Lk" = (
@@ -10315,7 +10374,7 @@
 	dir = 10
 	},
 /turf/open/floor/plating,
-/area/awaymission/inka/inside/base)
+/area/awaymission/inka/outside)
 "LH" = (
 /obj/structure/fluff/fake_camera{
 	dir = 8
@@ -10773,7 +10832,7 @@
 "NA" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating,
-/area/awaymission/inka/inside/base)
+/area/awaymission/inka/outside)
 "NB" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
@@ -11261,7 +11320,10 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
 	},
-/mob/living/carbon/human,
+/mob/living/carbon/human{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/carpet/blue,
 /area/awaymission/inka/inside/base)
 "Px" = (
@@ -12659,7 +12721,10 @@
 /obj/structure/chair/office{
 	dir = 8
 	},
-/mob/living/carbon/human,
+/mob/living/carbon/human{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/mob_buckler,
 /turf/open/floor/carpet/black,
 /area/awaymission/inka/inside/base)
 "TN" = (
@@ -13418,7 +13483,7 @@
 /obj/machinery/power/shuttle_engine/propulsion/right,
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating,
-/area/awaymission/inka/inside/base)
+/area/awaymission/inka/outside)
 "WG" = (
 /obj/structure/railing{
 	dir = 4
@@ -13677,7 +13742,7 @@
 /obj/machinery/power/shuttle_engine/heater{
 	dir = 8
 	},
-/turf/closed/indestructible/riveted/plastinum,
+/turf/closed/indestructible/riveted/plastinum/nodiagonal,
 /area/awaymission/inka/outside)
 "XA" = (
 /obj/effect/turf_decal/tile/brown/half{
@@ -15041,7 +15106,7 @@ IM
 IM
 IM
 IM
-IW
+yn
 xs
 KP
 PC
@@ -16232,7 +16297,7 @@ IM
 pD
 UH
 IW
-xs
+DN
 KP
 PC
 IW
@@ -16708,9 +16773,9 @@ vy
 IQ
 pD
 IW
-pd
-pd
-pd
+HM
+HM
+HM
 IW
 ok
 IQ
@@ -37123,9 +37188,9 @@ wi
 ue
 Bs
 Xz
-Jv
+DM
 Ht
-Jv
+DM
 Xz
 Ql
 iL
@@ -37360,11 +37425,11 @@ Wq
 Jc
 qb
 qt
-Jv
+DM
 iP
 hl
 eX
-Jv
+DM
 Ic
 zo
 ec
@@ -38520,7 +38585,7 @@ Qu
 Qu
 Um
 Qu
-Qu
+Jv
 Tr
 qr
 Wc
@@ -38788,11 +38853,11 @@ Rz
 hw
 qb
 Eq
-Jv
+DM
 bY
 sV
 kU
-Jv
+DM
 NU
 zo
 ec
@@ -39026,11 +39091,11 @@ NG
 hw
 qb
 Bs
-Jv
-Jv
+DM
+DM
 Le
-Jv
-Jv
+DM
+DM
 Ql
 qb
 Is
@@ -39265,9 +39330,9 @@ hw
 qb
 Bs
 Uo
-Jv
+DM
 Vl
-Jv
+DM
 es
 Ql
 hq
@@ -46172,7 +46237,7 @@ hw
 Me
 Dt
 RK
-uL
+iA
 SE
 uL
 gH

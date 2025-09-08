@@ -30,7 +30,7 @@
 	baseturfs = /turf/open/water/alternative/muddy/deep
 	immerse_overlay_color = "#303c22"
 	is_swimming_tile = TRUE
-	stamina_entry_cost = 25
-	ticking_stamina_cost = 15
-	ticking_oxy_damage = 2
+	stamina_entry_cost = 50
+	ticking_stamina_cost = 20
+	ticking_oxy_damage = 4
 	exhaust_swimmer_prob = 100
