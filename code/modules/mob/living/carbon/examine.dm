@@ -365,14 +365,13 @@
 /// Coolects examine information about the mob's clothing and equipment
 /mob/living/carbon/proc/get_clothing_examine_info(mob/living/user)
 	. = list()
-	var/obscured = check_obscured_slots()
 	var/t_He = ru_p_they(TRUE)
 	var/t_His = ru_p_them(TRUE)
 	// var/t_his = p_their()
 	// var/t_has = p_have()
 	// var/t_is = p_are()
 	//head
-	if(head && !(obscured & ITEM_SLOT_HEAD) && !HAS_TRAIT(head, TRAIT_EXAMINE_SKIP))
+	if(head && !(obscured_slots & HIDEHEADGEAR) && !HAS_TRAIT(head, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [head.examine_title(user, declent = ACCUSATIVE)] на голове."
 	//back
 	if(back && !HAS_TRAIT(back, TRAIT_EXAMINE_SKIP))
@@ -388,7 +387,7 @@
 		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
 		. += "[t_He] a [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
 	//gloves
-	if(gloves && !(obscured & ITEM_SLOT_GLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
+	if(gloves && !(obscured_slots & HIDEGLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
 	else if(GET_ATOM_BLOOD_DECAL_LENGTH(src) && num_hands)
 		var/list/blood_stains = GET_ATOM_BLOOD_DECALS(src)
@@ -402,15 +401,15 @@
 		var/cables_or_cuffs = istype(handcuffed, /obj/item/restraints/handcuffs/cable) ? "в связках" : "в наручниках"
 		. += span_warning("[t_He] [icon2html(handcuffed, user)] [cables_or_cuffs]!")
 	//shoes
-	if(shoes && !(obscured & ITEM_SLOT_FEET)  && !HAS_TRAIT(shoes, TRAIT_EXAMINE_SKIP))
+	if(shoes && !(obscured_slots & HIDESHOES)  && !HAS_TRAIT(shoes, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [shoes.examine_title(user, declent = ACCUSATIVE)] на ногах."
 	//mask
-	if(wear_mask && !(obscured & ITEM_SLOT_MASK)  && !HAS_TRAIT(wear_mask, TRAIT_EXAMINE_SKIP))
+	if(wear_mask && !(obscured_slots & HIDEMASK)  && !HAS_TRAIT(wear_mask, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [wear_mask.examine_title(user, declent = ACCUSATIVE)] на лице."
-	if(wear_neck && !(obscured & ITEM_SLOT_NECK)  && !HAS_TRAIT(wear_neck, TRAIT_EXAMINE_SKIP))
+	if(wear_neck && !(obscured_slots & HIDENECK)  && !HAS_TRAIT(wear_neck, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [wear_neck.examine_title(user, declent = ACCUSATIVE)] вокруг шеи."
 	//eyes
-	if(!(obscured & ITEM_SLOT_EYES) )
+	if(!(obscured_slots & HIDEEYES))
 		if(glasses  && !HAS_TRAIT(glasses, TRAIT_EXAMINE_SKIP))
 			. += "[t_He] носит [glasses.examine_title(user, declent = ACCUSATIVE)] на глазах."
 		else if(HAS_TRAIT(src, TRAIT_UNNATURAL_RED_GLOWY_EYES))
@@ -418,13 +417,12 @@
 		else if(HAS_TRAIT(src, TRAIT_BLOODSHOT_EYES))
 			. += span_warning("<B>[t_His] глаза налиты кровью!</B>")
 	//ears
-	if(ears && !(obscured & ITEM_SLOT_EARS) && !HAS_TRAIT(ears, TRAIT_EXAMINE_SKIP))
+	if(ears && !(obscured_slots & HIDEEARS) && !HAS_TRAIT(ears, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [ears.examine_title(user, declent = ACCUSATIVE)] на ушах."
 
 // Yes there's a lot of copypasta here, we can improve this later when carbons are less dumb in general
 /mob/living/carbon/human/get_clothing_examine_info(mob/living/user)
 	. = list()
-	var/obscured = check_obscured_slots()
 	var/t_He = ru_p_they(TRUE)
 	var/t_His = ru_p_them(TRUE)
 	// var/t_his = ru_p_them()
@@ -432,7 +430,7 @@
 	// var/t_is = p_are()
 
 	//uniform
-	if(w_uniform && !(obscured & ITEM_SLOT_ICLOTHING) && !HAS_TRAIT(w_uniform, TRAIT_EXAMINE_SKIP))
+	if(w_uniform && !(obscured_slots & HIDEJUMPSUIT) && !HAS_TRAIT(w_uniform, TRAIT_EXAMINE_SKIP))
 		//accessory
 		var/accessory_message = ""
 		if(istype(w_uniform, /obj/item/clothing/under))
@@ -443,16 +441,16 @@
 
 		. += "[t_He] носит [w_uniform.examine_title(user, declent = ACCUSATIVE)][accessory_message]."
 	//head
-	if(head && !(obscured & ITEM_SLOT_HEAD) && !HAS_TRAIT(head, TRAIT_EXAMINE_SKIP))
+	if(head && !(obscured_slots & HIDEHEADGEAR) && !HAS_TRAIT(head, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [head.examine_title(user, declent = ACCUSATIVE)] на голове."
 	//mask
-	if(wear_mask && !(obscured & ITEM_SLOT_MASK)  && !HAS_TRAIT(wear_mask, TRAIT_EXAMINE_SKIP))
+	if(wear_mask && !(obscured_slots & HIDEMASK)  && !HAS_TRAIT(wear_mask, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [wear_mask.examine_title(user, declent = ACCUSATIVE)] на лице."
 	//neck
-	if(wear_neck && !(obscured & ITEM_SLOT_NECK)  && !HAS_TRAIT(wear_neck, TRAIT_EXAMINE_SKIP))
+	if(wear_neck && !(obscured_slots & HIDENECK)  && !HAS_TRAIT(wear_neck, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [wear_neck.examine_title(user, declent = ACCUSATIVE)] на шее."
 	//eyes
-	if(!(obscured & ITEM_SLOT_EYES) )
+	if(!(obscured_slots & HIDEEYES))
 		if(glasses  && !HAS_TRAIT(glasses, TRAIT_EXAMINE_SKIP))
 			. += "[t_He] носит [glasses.examine_title(user, declent = ACCUSATIVE)] на глазах."
 		else if(HAS_TRAIT(src, TRAIT_UNNATURAL_RED_GLOWY_EYES))
@@ -460,13 +458,13 @@
 		else if(HAS_TRAIT(src, TRAIT_BLOODSHOT_EYES))
 			. += span_warning("<B>[t_His] глаза налиты кровью!</B>")
 	//ears
-	if(ears && !(obscured & ITEM_SLOT_EARS) && !HAS_TRAIT(ears, TRAIT_EXAMINE_SKIP))
+	if(ears && !(obscured_slots & HIDEEARS) && !HAS_TRAIT(ears, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [ears.examine_title(user, declent = ACCUSATIVE)] на ушах."
 	//suit/armor
 	if(wear_suit && !HAS_TRAIT(wear_suit, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [wear_suit.examine_title(user, declent = ACCUSATIVE)]."
 		//suit/armor storage
-		if(s_store && !(obscured & ITEM_SLOT_SUITSTORE) && !HAS_TRAIT(s_store, TRAIT_EXAMINE_SKIP))
+		if(s_store && !(obscured_slots & HIDESUITSTORAGE) && !HAS_TRAIT(s_store, TRAIT_EXAMINE_SKIP))
 			. += "[t_He] носит [s_store.examine_title(user, declent = ACCUSATIVE)] на [wear_suit.declent_ru(PREPOSITIONAL)]."
 	//back
 	if(back && !HAS_TRAIT(back, TRAIT_EXAMINE_SKIP))
@@ -491,7 +489,7 @@
 		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
 		. += "[t_He] [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
 	//gloves
-	if(gloves && !(obscured & ITEM_SLOT_GLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
+	if(gloves && !(obscured_slots & HIDEGLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
 	else if(GET_ATOM_BLOOD_DECAL_LENGTH(src) || blood_in_hands)
 		if(num_hands)
@@ -501,10 +499,10 @@
 		var/cables_or_cuffs = istype(handcuffed, /obj/item/restraints/handcuffs/cable) ? "в связках" : "в наручниках"
 		. += span_warning("[t_He] [icon2html(handcuffed, user)] [cables_or_cuffs]!")
 	//belt
-	if(belt && !(obscured & ITEM_SLOT_BELT) && !HAS_TRAIT(belt, TRAIT_EXAMINE_SKIP))
+	if(belt && !(obscured_slots & HIDEBELT) && !HAS_TRAIT(belt, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [belt.examine_title(user, declent = ACCUSATIVE)] на поясе."
 	//shoes
-	if(shoes && !(obscured & ITEM_SLOT_FEET)  && !HAS_TRAIT(shoes, TRAIT_EXAMINE_SKIP))
+	if(shoes && !(obscured_slots & HIDESHOES)  && !HAS_TRAIT(shoes, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [shoes.examine_title(user, declent = ACCUSATIVE)] на ногах."
 
 /// Collects info displayed about any HUDs the user has when examining src
@@ -584,7 +582,7 @@
 /mob/living/carbon/human/examine_more(mob/user)
 	. = ..()
 
-	if(istype(w_uniform, /obj/item/clothing/under) && !(check_obscured_slots() & ITEM_SLOT_ICLOTHING) && !HAS_TRAIT(w_uniform, TRAIT_EXAMINE_SKIP))
+	if(istype(w_uniform, /obj/item/clothing/under) && !(obscured_slots & HIDEJUMPSUIT) && !HAS_TRAIT(w_uniform, TRAIT_EXAMINE_SKIP))
 		var/obj/item/clothing/under/undershirt = w_uniform
 		if(undershirt.has_sensor == BROKEN_SENSORS)
 			. += list(span_notice("\The [undershirt]'s medical sensors are sparking."))
@@ -622,7 +620,7 @@
 
 /// Reports how old the mob appears to be
 /mob/living/carbon/human/proc/get_age_text()
-	if((wear_mask?.flags_inv & HIDEFACE) || (head?.flags_inv & HIDEFACE))
+	if(obscured_slots & HIDEFACE)
 		return
 
 	var/age_text
