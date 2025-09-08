@@ -186,7 +186,6 @@
 	orbit.Translate(half_size, half_size)
 	orbit.Translate(-370, -420)
 
-	playsound(src,'modular_bandastation/aesthetics/flora/audio/hyperspace.ogg', 75, extrarange = 20, pressure_affected = FALSE, ignore_walls = TRUE )
 	animate(src, transform = orbit, time = appearance_time, easing = CUBIC_EASING | EASE_OUT, flags = ANIMATION_END_NOW)
 
 	current_scale = 0.8
