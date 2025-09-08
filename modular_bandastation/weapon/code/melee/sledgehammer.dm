@@ -146,5 +146,5 @@
 		/obj/item/stack/sheet/plasteel = 50,
 	)
 	tool_behaviors = list(TOOL_WRENCH, TOOL_WELDER)
-	time = 10 SECONDS
+	time = 50 SECONDS
 	category = CAT_WEAPON_MELEE
