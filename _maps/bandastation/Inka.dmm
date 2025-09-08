@@ -5067,12 +5067,6 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/inka/inside/base)
-"sm" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/closed/wall/r_wall,
-/area/awaymission/inka/inside/base)
 "sn" = (
 /obj/structure/flora/bush/leavy/style_random,
 /obj/structure/flora/ash/stem_shroom,
@@ -10733,11 +10727,6 @@
 "Nn" = (
 /obj/structure/chair/comfy/brown,
 /turf/open/floor/carpet/green,
-/area/awaymission/inka/inside/base)
-"Np" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
-/turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/inka/inside/base)
 "Nr" = (
 /obj/effect/turf_decal/siding/wood/oak{
@@ -38079,7 +38068,7 @@ zo
 XI
 Qi
 Qi
-sm
+XI
 Qi
 Qi
 XI
@@ -46886,7 +46875,7 @@ hw
 jY
 CJ
 hw
-Np
+au
 au
 ZJ
 RZ
