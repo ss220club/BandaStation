@@ -83,7 +83,7 @@
 /obj/item/sledgehammer/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, force_unwielded=force_unwielded, force_wielded=force_wielded, icon_wielded="[base_icon_state]1")
-	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost=5)
+	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost=10)
 
 /obj/item/sledgehammer/syndie/Initialize(mapload)
 	. = ..()
