@@ -172,7 +172,7 @@
 	AddComponent(/datum/component/simple_rotation)
 	AddComponent(/datum/component/plumbing/hydroponics)
 	AddComponent(/datum/component/usb_port, list(/obj/item/circuit_component/hydroponics))
-	AddComponent(/datum/component/fishing_spot, /datum/fish_source/hydro_tray)
+	// AddComponent(/datum/component/fishing_spot, /datum/fish_source/hydro_tray) // BANDASTATION REMOVAL
 
 /obj/machinery/hydroponics/constructable/RefreshParts()
 	. = ..()
@@ -502,8 +502,10 @@
 	. = ..()
 	if(myseed)
 		name = "[initial(name)] ([myseed.plantname])"
+		ru_names_rename(ru_names_toml(initial(name), suffix = " ([myseed.plantname])", override_base = name))
 	else
 		name = initial(name)
+		ru_names_rename(ru_names_toml(name))
 
 /obj/machinery/hydroponics/update_overlays()
 	. = ..()

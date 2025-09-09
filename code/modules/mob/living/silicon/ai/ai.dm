@@ -955,7 +955,7 @@
 	apc.set_hacked_hud()
 	hacked_apcs += apc
 	playsound(get_turf(src), 'sound/machines/ding.ogg', 50, TRUE, ignore_walls = FALSE)
-	to_chat(src, "Hack complete. [apc] is now under your exclusive control.")
+	to_chat(src, "Взлом завершен. Теперь [apc.declent_ru(NOMINATIVE)] под вашим контролем.")
 
 /mob/living/silicon/ai/verb/deploy_to_shell(mob/living/silicon/robot/target)
 	set category = "AI Commands"
