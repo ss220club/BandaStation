@@ -4,12 +4,16 @@
 /datum/outfit/job/atmos
 	skillchips = list(/obj/item/skillchip/job/engineer)
 
+/obj/item/skillchip/job/engineer/Initialize(mapload, is_removable)
+	. = ..()
+	auto_traits |= TRAIT_ADVANCED_RCD_KNOWLEDGE
+
 /obj/item/construction/rcd
 	var/list/categories_requiring_advanced_rcd_knowledge = list("Airlock Access")
 	var/list/modes_requiring_advanced_rcd_knowledge = list(RCD_DECONSTRUCT)
 
 /obj/item/construction/rcd/proc/check_engineer_skillchip(mob/user, alert = TRUE)
-	if(!HAS_TRAIT(user, TRAIT_KNOW_ENGI_WIRES) && !issilicon(user) && !(item_flags & DROPDEL))
+	if(!HAS_TRAIT(user, TRAIT_ADVANCED_RCD_KNOWLEDGE) && !issilicon(user) && !(item_flags & DROPDEL))
 		if(alert)
 			balloon_alert(user, "нет скиллчипа!")
 		return FALSE
