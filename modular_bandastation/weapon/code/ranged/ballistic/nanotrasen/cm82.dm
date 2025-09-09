@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/cm82
 	name = "CM-82"
-	desc = "Стандартная штурмовая винтовка Нанотрейзен в калибре 5.56мм, относительно новое боевое оружие. Точная, надежная и простая в использовании, CM-82 практически в одночасье заменила АРГ \"Пограничник\" в качестве штурмовой винтовки Нанотрейзен и с тех пор пользуется огромной популярностью."
+	desc = "Стандартная штурмовая винтовка Нанотрейзен в калибре 5.56мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "cm82"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -41,6 +41,14 @@
 		light_overlay = "flight", \
 		overlay_x = 33, \
 		overlay_y = 13)
+
+/obj/item/gun/ballistic/automatic/cm82/examine(mob/user)
+	. = ..()
+	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
+
+/obj/item/gun/ballistic/automatic/cm82/examine_more(mob/user)
+	. = ..()
+	. += "Относительно новое боевое оружие. Точная, надежная и простая в использовании, CM-82 практически в одночасье заменила АРГ \"Пограничник\" в качестве штурмовой винтовки Нанотрейзен и с тех пор пользуется огромной популярностью."
 
 /obj/item/gun/ballistic/automatic/cm82/no_mag
 	spawnwithmagazine = FALSE

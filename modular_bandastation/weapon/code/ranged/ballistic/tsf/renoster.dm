@@ -61,6 +61,7 @@
 	inhand_icon_state = "renoster_black"
 	recoil = 1
 	projectile_damage_multiplier = 1.5
+	unique_reskin = list()
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/black/examine_more(mob/user)
 	. = ..()
