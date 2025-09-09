@@ -61,6 +61,7 @@
 #include "preferences/_preferences.dme"
 #include "ru_jobs/_ru_jobs.dme"
 #include "security_levels/_security_levels.dme"
+#include "skillchip_rcd/_skillchip_rcd.dme"
 #include "shuttles/_shuttles.dme"
 #include "species/_species.dme"
 #include "speech_filter/_speech_filter.dme"
