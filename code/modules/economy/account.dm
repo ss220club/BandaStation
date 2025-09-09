@@ -216,12 +216,12 @@
 		return TRUE
 	var/datum/bank_account/department_account = SSeconomy.get_dep_account(account_job.paycheck_department)
 	if(isnull(department_account))
-		bank_card_talk("ОШИБКА: [event] отменена,  не удалось связаться со счётом отдела.")
+		bank_card_talk("ОШИБКА: [event] отменена.  Не удалось связаться со счётом отдела.")
 		return FALSE
 	if(!transfer_money(department_account, money_to_transfer))
-		bank_card_talk("ОШИБКА: [event] отменена, средств отдела недостаточно.")
+		bank_card_talk("ОШИБКА: [event] отменена. Средств отдела недостаточно.")
 		return FALSE
-	bank_card_talk("[event] успешна, на аккаунте теперь [account_balance] кр.")
+	bank_card_talk("[event] успешна. На аккаунте теперь [account_balance] кр.")
 	return TRUE
 
 /**

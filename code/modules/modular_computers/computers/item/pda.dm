@@ -160,7 +160,7 @@
 	if(inserted_item)
 		swap_pen(user, tool)
 	else
-		balloon_alert(user, "вставлен [tool.declent_ru(ACCUSATIVE)]")
+		balloon_alert(user, "вставлена [tool.declent_ru(ACCUSATIVE)]")
 		inserted_item = tool
 		playsound(src, 'sound/machines/pda_button/pda_button1.ogg', 50, TRUE)
 	return ITEM_INTERACT_SUCCESS
@@ -185,7 +185,7 @@
 		return
 
 	if(inserted_item)
-		balloon_alert(user, "извлечён [inserted_item.declent_ru(ACCUSATIVE)]")
+		balloon_alert(user, "извлечена [inserted_item.declent_ru(ACCUSATIVE)]")
 		user.put_in_hands(inserted_item)
 		inserted_item = null
 		update_appearance()
