@@ -1,4 +1,0 @@
-author: "AyIong"
-delete-after: True
-changes:
-  - bugfix: "Готовность больше не должна прожиматься, когда раунд запускается"
