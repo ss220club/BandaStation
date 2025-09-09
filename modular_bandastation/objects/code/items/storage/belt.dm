@@ -255,7 +255,7 @@
 	generate_items_inside(list(
 		/obj/item/gun/energy/pulse/pistol/taserless/loyal = 1,
 		/obj/item/ammo_box/magazine/smgm9mm = 1,
-		/obj/item/gun/ballistic/automatic/proto = 1,
+		/obj/item/gun/ballistic/automatic/proto/unrestricted = 1,
 	),src)
 
 /obj/item/storage/belt/military/holster
