@@ -25,7 +25,14 @@
 /datum/component/stamina_cost_per_hit/proc/on_attack(obj/item/attaking_item, mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	SIGNAL_HANDLER
 
+	var/cost
 	if(HAS_TRAIT(parent, TRAIT_WIELDED))
-		user.adjustStaminaLoss(stamina_cost_wielded)
+		cost = stamina_cost_wielded
 	else
-		user.adjustStaminaLoss(stamina_cost)
+		cost = stamina_cost
+
+	if((user.getStaminaLoss() + cost) > user.maxHealth)
+		user.balloon_alert(user, "нет сил!")
+		return COMPONENT_CANCEL_ATTACK_CHAIN
+
+	user.adjustStaminaLoss(cost)
