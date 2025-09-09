@@ -262,7 +262,7 @@
 	var/delay = rcd_results["delay"] * delay_mod
 
 	//BANDASTATION ADD START - Engineer Skillchip RCD
-	if(!check_engineer_skillchip(user))
+	if(!check_engineer_skillchip(user, FALSE))
 		delay *= RCD_NO_SKILLCHIP_DELAY_MULTIPLIER
 	//BANDASTATION ADD END - Engineer Skillchip RCD
 
