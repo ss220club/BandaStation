@@ -352,8 +352,10 @@
 
 	data["root_categories"] = list()
 	for(var/category in GLOB.rcd_designs)
+		//BANDASTATION ADD START - Engineer Skillchip RCD
 		if(category == "Airlock Access" && !check_engineer_skillchip(user, FALSE))
 			continue
+		//BANDASTATION ADD END - Engineer Skillchip RCD
 		data["root_categories"] += category
 	data["selected_root"] = root_category
 
