@@ -358,3 +358,9 @@
 
 /obj/item/storage/box/methdealer
 	icon = 'icons/obj/storage/box.dmi'
+
+/obj/item/storage/box/opiumdealer
+	icon = 'icons/obj/storage/box.dmi'
+
+/obj/item/storage/box/kronkdealer
+	icon = 'icons/obj/storage/box.dmi'
