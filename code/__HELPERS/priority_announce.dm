@@ -50,7 +50,7 @@
 	for(var/obj/machinery/telecomms/allinone/all_in_one_receiver in GLOB.telecomm_machines)
 		zleves_to_transmit |= all_in_one_receiver.z
 	for(var/mob/player as anything in GLOB.player_list)
-		if(player.z in zleves_to_transmit || isobserver(player))
+		if((player.z in zleves_to_transmit) || isobserver(player))
 			players += player
 
 	return players
