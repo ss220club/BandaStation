@@ -263,7 +263,7 @@
 
 	//BANDASTATION ADD START - Engineer Skillchip RCD
 	if(!check_engineer_skillchip(user))
-		delay *= 1.5
+		delay *= RCD_NO_SKILLCHIP_DELAY_MULTIPLIER
 	//BANDASTATION ADD END - Engineer Skillchip RCD
 
 	if (
