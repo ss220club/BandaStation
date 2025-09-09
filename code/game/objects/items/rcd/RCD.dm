@@ -149,7 +149,7 @@
 	 */
 
 	//BANDASTATION ADD START - Engineer Skillchip RCD
-	if(rcd_mode == RCD_DECONSTRUCT && !check_engineer_skillchip(user))
+	if(rcd_mode in modes_requiring_advanced_rcd_knowledge && !check_engineer_skillchip(user))
 		return
 	//BANDASTATION ADD END - Engineer Skillchip RCD
 
@@ -353,7 +353,7 @@
 	data["root_categories"] = list()
 	for(var/category in GLOB.rcd_designs)
 		//BANDASTATION ADD START - Engineer Skillchip RCD
-		if(category == "Airlock Access" && !check_engineer_skillchip(user, FALSE))
+		if(category in categories_requiring_advanced_rcd_knowledge && !check_engineer_skillchip(user, FALSE))
 			continue
 		//BANDASTATION ADD END - Engineer Skillchip RCD
 		data["root_categories"] += category
