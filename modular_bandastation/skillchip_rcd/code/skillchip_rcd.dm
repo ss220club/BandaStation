@@ -13,11 +13,14 @@
 	var/list/modes_requiring_advanced_rcd_knowledge = list(RCD_DECONSTRUCT)
 
 /obj/item/construction/rcd/proc/check_engineer_skillchip(mob/user, alert = TRUE)
-	if(!HAS_TRAIT(user, TRAIT_ADVANCED_RCD_KNOWLEDGE) && !issilicon(user) && !(item_flags & DROPDEL))
+	if(!HAS_TRAIT(user, TRAIT_ADVANCED_RCD_KNOWLEDGE) && !issilicon(user))
 		if(alert)
 			balloon_alert(user, "нет скиллчипа!")
 		return FALSE
 
+	return TRUE
+
+/obj/item/construction/rcd/exosuit/check_engineer_skillchip(mob/user, alert = TRUE)
 	return TRUE
 
 /obj/item/construction/rcd/examine(mob/user)
