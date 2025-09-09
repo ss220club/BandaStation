@@ -355,3 +355,6 @@
 /obj/structure/votebox
 	icon = 'modular_bandastation/aesthetics/boxes/icons/boxes.dmi'
 	icon_state = "votebox_maint"
+
+/obj/item/storage/box/methdealer
+	icon = 'icons/obj/storage/box.dmi'
