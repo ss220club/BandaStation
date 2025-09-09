@@ -58,7 +58,4 @@
 #include "code/job_types/explorer/pda.dm"
 #include "code/job_types/explorer/trim.dm"
 
-//Chief engineer
-#include "code/job_types/chief_engineer/chief_engineer.dm"
-
 #include "code/job_types/job_staffing_priority.dm"
