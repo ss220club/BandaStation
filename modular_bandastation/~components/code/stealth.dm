@@ -47,8 +47,8 @@
 /datum/component/stealth_device/proc/on_scan(datum/source, mob/user, list/extra_data)
 	SIGNAL_HANDLER
 	spotted_by[user.mind] = TRUE
-	LAZYADD(extra_data[DETSCAN_CATEGORY_ILLEGAL], "Обнаружен скрытый объект: [parent].")
-	to_chat(user, span_alert("Обнаружен скрытый объект: [parent]"))
+	LAZYADD(extra_data[DETSCAN_CATEGORY_ILLEGAL], "Обнаружен скрытый объект: [parent.declent_ru(NOMINATIVE)].")
+	to_chat(user, span_alert("Обнаружен скрытый объект: [parent.declent_ru(NOMINATIVE)]"))
 
 /datum/component/stealth_device/proc/on_target_attackby_secondary(atom/source, mob/user, obj/item/tool)
 	SIGNAL_HANDLER
@@ -60,10 +60,10 @@
 	var/atom/target = target_ref?.resolve()
 	if(!target)
 		return
-	to_chat(user, span_warning("Вы начинаете извлечение скрытого объекта из [target]..."))
+	to_chat(user, span_warning("Вы начинаете извлечение скрытого объекта из [target.declent_ru(GENITIVE)]..."))
 	if(do_after(user, removal_delay, target))
 		if(user.put_in_hands(parent))
-			user.balloon_alert(user, "Извлечено: [parent]")
+			user.balloon_alert(user, "Извлечено: [parent.declent_ru(NOMINATIVE)]")
 			unregister_target_signals()
 		else
-			user.balloon_alert(user, "Не удалось извлечь: [parent]")
+			user.balloon_alert(user, "Не удалось извлечь: [parent.declent_ru(NOMINATIVE)]")
