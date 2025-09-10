@@ -84,7 +84,7 @@
 		if(!ignore_exhaustion && ((user.getStaminaLoss() + get_stamina_cost()) > user.maxHealth))
 			user.balloon_alert(user, "вы слишком устали!")
 			return
-		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] начинает выламывать [target.declent_ru(ACCUSATIVE)]!"))
+		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] начинает выламывать [target.declent_ru(ACCUSATIVE)]! при помощи [parent.declent_ru(GENITIVE)]"))
 		playsound(user, 'sound/machines/airlock/airlock_alien_prying.ogg', vol = 100, vary = TRUE)
 		target.balloon_alert(user, "выламываем...")
 		if(!do_after(user, delay = rip_time, target = target, interaction_key = do_after_key))
