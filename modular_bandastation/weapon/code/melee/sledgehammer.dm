@@ -63,7 +63,7 @@
 	force_unwielded = 15
 	force_wielded = 45
 	armour_penetration = 30
-	demolition_mod = 5
+	demolition_mod = 6
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 2
 	usesound = 'sound/items/tools/crowbar.ogg'
