@@ -77,7 +77,7 @@
 
 /obj/item/organ/cyberimp/chest/pump/centcom/custom_effect(seconds_per_tick, times_fired)
 	. = ..()
-	to_chat(owner, span_notice("You feel less hungry..."))
+	to_chat(owner, span_notice("Вы чувствуете себя менее голодным..."))
 	owner.adjust_nutrition(25 * seconds_per_tick)
 
 /obj/item/organ/cyberimp/chest/pump/sansufentanyl
