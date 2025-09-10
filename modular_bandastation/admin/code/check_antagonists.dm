@@ -32,6 +32,7 @@ ADMIN_VERB(ccheck_antagonists, R_ADMIN, "CCheck Antagonists", "See all antagonis
 	var/drones = 0
 	var/security = 0
 	var/security_dead = 0
+	var/antagonists_info = list()
 
 /datum/check_antagonists_panel/New(user)
 	if(istype(user, /client))
@@ -190,6 +191,7 @@ ADMIN_VERB(ccheck_antagonists, R_ADMIN, "CCheck Antagonists", "See all antagonis
 	data["drones"] = drones
 	data["security"] = security
 	data["security_dead"] = security_dead
+	data["antagonists_info"] = antagonists_info
 	return data;
 
 // /datum/check_antagonists_panel/ui_assets(mob/user)
