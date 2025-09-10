@@ -3,6 +3,8 @@
 	var/stamina_cost_wielded
 	var/ignore_exhaustion = FALSE
 
+	var/attack_cost
+
 /datum/component/stamina_cost_per_hit/Initialize(
 	stamina_cost = 20,
 	stamina_cost_wielded,
@@ -18,6 +20,7 @@
 
 /datum/component/stamina_cost_per_hit/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK, PROC_REF(on_attack))
+	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_afterattack))
 
 /datum/component/stamina_cost_per_hit/UnregisterFromParent()
 	UnregisterSignal(parent, list(
@@ -27,10 +30,13 @@
 /datum/component/stamina_cost_per_hit/proc/on_attack(obj/item/attaking_item, mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	SIGNAL_HANDLER // COMSIG_ITEM_ATTACK
 
-	var/cost = HAS_TRAIT(parent, TRAIT_WIELDED) ? stamina_cost_wielded : stamina_cost
+	attack_cost = HAS_TRAIT(parent, TRAIT_WIELDED) ? stamina_cost_wielded : stamina_cost
 
-	if(!ignore_exhaustion && ((user.getStaminaLoss() + cost) > user.maxHealth))
+	if(!ignore_exhaustion && ((user.getStaminaLoss() + attack_cost) > user.maxHealth))
 		user.balloon_alert(user, "нет сил!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
-	user.adjustStaminaLoss(cost)
+/datum/component/stamina_cost_per_hit/proc/on_afterattack(obj/item/attaking_item, mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
+	SIGNAL_HANDLER // COMSIG_ITEM_AFTERATTACK
+
+	user.adjustStaminaLoss(attack_cost)
