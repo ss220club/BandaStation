@@ -48,7 +48,11 @@
 		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
 		return
 
-	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+	// BANDASTATION EDIT START - Sanitize emotes
+	message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN))
+	if(!message)
+		return
+	// BANDASTATION EDIT END - Sanitize emotes
 
 	QUEUE_OR_CALL_VERB_FOR(VERB_CALLBACK(src, TYPE_PROC_REF(/mob, emote), "me", EMOTE_VISIBLE|EMOTE_AUDIBLE, message, TRUE), SSspeech_controller)
 
@@ -108,8 +112,14 @@
 
 	return ..()
 
-///Speak as a dead person (ghost etc)
-/mob/proc/say_dead(message)
+/**
+ * say_dead
+ * allows you to speak as a dead person
+ * Args:
+ * - message: The message you're sending to chat.
+ * - mannequin_controller: If someone else is forcing you to speak, this is the mob doing it.
+ */
+/mob/proc/say_dead(message, mob/mannequin_controller)
 	var/name = real_name
 	var/alt_name = ""
 
@@ -117,7 +127,7 @@
 		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
 		return
 
-	var/jb = is_banned_from(ckey, "Deadchat")
+	var/jb = is_banned_from(mannequin_controller?.ckey || ckey, "Deadchat")
 	if(QDELETED(src))
 		return
 
@@ -150,7 +160,7 @@
 		if(name != real_name)
 			alt_name = " (умер как [real_name])"
 
-	var/spanned = say_quote(apply_message_emphasis(message))
+	var/spanned = generate_messagepart(message)
 	var/source = "<span class='game'><span class='prefix'>МЕРТВ:</span> <span class='name'>[name]</span>[alt_name]"
 	var/rendered = " <span class='message'>[emoji_parse(spanned)]</span></span>"
 	log_talk(message, LOG_SAY, tag="DEAD")
@@ -184,7 +194,7 @@
 	message = copytext(message, customsaypos + 1)
 	if (!message)
 		mods[MODE_CUSTOM_SAY_ERASE_INPUT] = TRUE
-		message = "an interesting thing to say"
+		// message = "an interesting thing to say" // BANDASTATION REMOVAL
 	return message
 /**
  * Extracts and cleans message of any extenstions at the begining of the message

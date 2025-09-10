@@ -101,8 +101,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		middleware += new middleware_type(src)
 
 	if(IS_CLIENT_OR_MOCK(parent))
-		load_and_save = !is_guest_key(parent.key)
-		load_path(parent.ckey)
+		if(is_guest_key(parent.key))
+			if(parent.is_localhost())
+				path = DEV_PREFS_PATH // guest + locallost = dev instance, load dev preferences if possible
+			else
+				load_and_save = FALSE // guest + not localhost = guest on live, don't save anything
+		else
+			load_path(parent.ckey) // not guest = load their actual savefile
 		if(load_and_save && !fexists(path))
 			try_savefile_type_migration()
 
@@ -574,5 +579,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		to_chat(parent, span_warning("There's been a connection failure while trying to check the status of your BYOND membership. Reconnecting may fix the issue, or BYOND could be experiencing downtime."))
 
 	unlock_content = !!byond_member
-	if(unlock_content)
-		max_save_slots = 8
+	// BANDASTATION REMOVE - Start
+	// if(unlock_content)
+	// 	max_save_slots = 8
+	// BANDASTATION REMOVE - End

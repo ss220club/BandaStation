@@ -406,7 +406,7 @@
 		if(!speech)
 			return
 		M.say(speech, forced = "admin speech")
-		speech = sanitize(speech) // Nah, we don't trust them
+		speech = sanitize(speech, apply_ic_filter = TRUE) // Nah, we don't trust them // BANDASTATION EDIT - Sanitize emotes
 		log_admin("[key_name(usr)] forced [key_name(M)] to say: [speech]")
 		message_admins(span_adminnotice("[key_name_admin(usr)] forced [key_name_admin(M)] to say: [speech]"))
 
@@ -1054,7 +1054,7 @@
 		var/obj_dir = text2num(href_list["object_dir"])
 		if(obj_dir && !(obj_dir in list(1,2,4,8,5,6,9,10)))
 			obj_dir = null
-		var/obj_name = sanitize(href_list["object_name"])
+		var/obj_name = sanitize(href_list["object_name"], apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
 
 		var/atom/target //Where the object will be spawned

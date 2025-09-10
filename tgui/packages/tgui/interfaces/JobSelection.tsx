@@ -142,7 +142,7 @@ function DepartmentEntry(props: DepartmentEntryProps) {
                 color: Color.fromHex(department.color).darken(60).toString(),
               }}
             >
-              {'позиций доступно: ' + department.open_slots}
+              {`позиций доступно: ${department.open_slots}`}
             </span>
           </>
         }
