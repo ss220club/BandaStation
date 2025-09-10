@@ -39,7 +39,7 @@
 	base_icon_state = "sledgehammer_tactical"
 	worn_icon_state = "sledgehammer_tactical"
 	resistance_flags = FIRE_PROOF
-	demolition_mod = 5
+	demolition_mod = 6
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 1
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 2)
@@ -63,7 +63,7 @@
 	force_unwielded = 15
 	force_wielded = 45
 	armour_penetration = 30
-	demolition_mod = 6
+	demolition_mod = 5
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 2
 	usesound = 'sound/items/tools/crowbar.ogg'
