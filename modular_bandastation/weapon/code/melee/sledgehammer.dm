@@ -109,7 +109,3 @@
 /obj/item/storage/toolbox/guncase/syndiesledge/PopulateContents()
 	new weapon_to_spawn(src)
 	new extra_to_spawn(src)
-
-/obj/machinery/vending/security/Initialize(mapload)
-	premium |= list(/obj/item/sledgehammer/tactical = 1)
-	. = ..()

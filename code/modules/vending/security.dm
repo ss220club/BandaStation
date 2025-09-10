@@ -32,6 +32,7 @@
 		/obj/item/grenade/stingbang = 1,
 		/obj/item/watertank/pepperspray = 2,
 		/obj/item/storage/belt/holster/energy = 4,
+		/obj/item/sledgehammer/tactical = 1, // BANDASTATION ADD
 	)
 	refill_canister = /obj/item/vending_refill/security
 	default_price = PAYCHECK_CREW
