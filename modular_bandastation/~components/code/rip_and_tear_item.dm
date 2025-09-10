@@ -69,6 +69,10 @@
 	if(QDELETED(target))
 		return
 
+	var/reinforced = istype(target, /turf/closed/wall/r_wall)
+	if(reinforced && !reinforced_multiplier)
+		return
+
 	var/rip_time = (reinforced ? tear_time * reinforced_multiplier : tear_time) / 3
 	if(rip_time > 0)
 		if(DOING_INTERACTION_WITH_TARGET(user, target) || DOING_INTERACTION(user, do_after_key))
