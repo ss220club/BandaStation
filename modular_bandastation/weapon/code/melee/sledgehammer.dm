@@ -44,6 +44,7 @@
 	toolspeed = 1
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 2)
 	usesound = 'sound/items/tools/crowbar.ogg'
+	force_wielded = 25
 
 /obj/item/sledgehammer/tactical/Initialize(mapload)
 	. = ..()
