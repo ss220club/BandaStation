@@ -33,6 +33,8 @@
 /datum/action/cooldown/shadowling/enthrall/proc/is_valid_target(mob/living/carbon/human/H, mob/living/carbon/human/T)
 	if(!istype(T))
 		return FALSE
+	if(T?.mind)
+		return FALSE
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(hive)
 		if(T in hive.lings)
@@ -65,6 +67,13 @@
 	if(get_dist(H, T) > 2 || !is_valid_target(H, T))
 		return FALSE
 
+
+	var/obj/item/organ/existing = T.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL)
+	if(existing)
+		owner.balloon_alert(owner, "Уже связан с ульем")
+		to_chat(H, span_notice("[T.real_name] уже связан с ульем."))
+		return TRUE
+
 	to_chat(H, span_notice("Вы начинаете связывать разум [T.real_name] с ульем. Не шевелитесь и оставайтесь в тени..."))
 	to_chat(T, span_danger("Холодная тьма обволакивает ваш разум..."))
 
@@ -81,12 +90,6 @@
 		T.adjustOxyLoss(30)
 
 	T.adjustOxyLoss(-100)
-
-	var/obj/item/organ/existing = T.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL)
-	if(existing)
-		owner.balloon_alert(owner, "Уже связан с ульем")
-		to_chat(H, span_notice("[T.real_name] уже связан с ульем."))
-		return TRUE
 
 	var/obj/item/organ/brain/shadow/tumor_thrall/O = new
 	if(!O.Insert(T))

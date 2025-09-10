@@ -3,22 +3,6 @@
 	desc = "A writhing nexus of shadowstuff, binding its owner to the Hive."
 	slot = ORGAN_SLOT_BRAIN
 
-/obj/item/organ/brain/shadow/shadowling/Insert(mob/living/carbon/receiver, special = FALSE, movement_flags)
-	. = ..()
-	if(!.)
-		return
-	var/datum/team/shadow_hive/hive = get_shadow_hive()
-	if(hive)
-		hive.join_member(receiver, SHADOWLING_ROLE_MAIN)
-
-/obj/item/organ/brain/shadow/shadowling/Remove(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
-	. = ..()
-	if(!.)
-		return
-	var/datum/team/shadow_hive/hive = get_shadow_hive()
-	if(hive)
-		hive.leave_member(organ_owner)
-
 /obj/item/organ/brain/shadow/tumor_thrall
 	name = "shadow thrall tumor"
 	desc = "A parasitic node of the Hive, binding the host’s mind."
@@ -28,9 +12,7 @@
 	. = ..()
 	if(!.)
 		return
-	var/datum/team/shadow_hive/hive = get_shadow_hive()
-	if(hive)
-		hive.join_member(receiver, SHADOWLING_ROLE_THRALL)
+	receiver?.mind.add_antag_datum(/datum/antagonist/shadow_thrall)
 	RegisterSignal(receiver, COMSIG_ATOM_EXAMINE, PROC_REF(on_holder_examine))
 	to_chat(receiver, span_danger("A frigid whisper coils in your mind... You are a thrall."))
 
@@ -38,9 +20,7 @@
 	. = ..()
 	if(!.)
 		return
-	var/datum/team/shadow_hive/hive = get_shadow_hive()
-	if(hive)
-		hive.leave_member(organ_owner)
+	organ_owner?.mind.remove_antag_datum(/datum/antagonist/shadow_thrall)
 	UnregisterSignal(organ_owner, COMSIG_ATOM_EXAMINE)
 	to_chat(organ_owner, span_notice("The chilling presence leaves your mind."))
 

@@ -11,7 +11,7 @@
 	unset_after_click = TRUE
 
 	var/obj/effect/beam/active_beam
-	var/obj/effect/overlay/shadowling_cocoon_cover/cover
+	var/obj/structure/shadowling_cocoon/cover
 	var/static/sfx_begin = 'sound/effects/magic/teleport_diss.ogg'
 	var/static/sfx_end   = 'sound/effects/ghost.ogg'
 	var/prev_alpha
@@ -87,6 +87,7 @@
 	detach_cover(T)
 	T.alpha = prev_alpha
 	unset_click_ability(clicker, FALSE)
+	hive.sync_after_event(T)
 	StartCooldown()
 	return TRUE
 
@@ -107,7 +108,7 @@
 /datum/action/cooldown/shadowling/recuperation/proc/attach_cover(mob/living/carbon/human/T)
 	if(cover)
 		return
-	cover = new /obj/effect/overlay/shadowling_cocoon_cover
+	cover = new
 	T.vis_contents += cover
 
 /datum/action/cooldown/shadowling/recuperation/proc/detach_cover(mob/living/carbon/human/T)

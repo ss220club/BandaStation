@@ -209,6 +209,11 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 /datum/team/shadow_hive/proc/get_objectives()
 	return objectives
 
+/datum/team/shadow_hive/proc/sync_after_event(mob/living/carbon/human/actor)
+	for(var/datum/action/cooldown/shadowling/hive_sync/A in actor.actions)
+		if(A)
+			A.DoEffect(actor)
+
 /proc/get_shadow_hive()
 	if(GLOB.shadowling_hive)
 		return GLOB.shadowling_hive

@@ -15,7 +15,9 @@
 	antag_hud_name = "shadowling"
 
 	var/ling_role = SHADOWLING_ROLE_MAIN
+	var/is_thrall = FALSE
 	var/is_higher = FALSE
+
 	var/datum/team/shadow_hive/shadow_team
 	var/added_to_team = FALSE
 
@@ -38,11 +40,20 @@
 
 	var/mob/living/carbon/human/H = owner.current
 	if(istype(H))
-		shadowling_grant_hatch(H)
 		shadow_team.join_member(H, ling_role)
 
+		if(!is_thrall)
+			shadowling_grant_hatch(H)
+
 	objectives |= shadow_team.get_objectives()
+
 	owner.announce_objectives()
+	var/mob/living/current = owner.current
+	if(current)
+		add_team_hud(current)
+
+	if(H)
+		shadow_team.sync_after_event(H)
 
 /datum/antagonist/shadowling/on_removal()
 	var/mob/living/carbon/human/H = owner?.current
@@ -50,6 +61,7 @@
 		for(var/datum/action/cooldown/ability in H.actions)
 			if(ability.type in typesof(/datum/action/cooldown/shadowling))
 				ability.Remove(H)
+
 		var/datum/team/shadow_hive/hive = get_shadow_hive()
 		if(hive)
 			hive.leave_member(H)
@@ -57,6 +69,7 @@
 	if(shadow_team && owner)
 		shadow_team.remove_member(owner)
 	added_to_team = FALSE
+
 	. = ..()
 
 /datum/antagonist/shadowling/apply_innate_effects(mob/living/mob_override)
@@ -64,18 +77,6 @@
 	var/mob/living/current = owner.current || mob_override
 	if(current)
 		add_team_hud(current)
-
-/datum/antagonist/shadowling/remove_innate_effects(mob/living/mob_override)
-	. = ..()
-	var/mob/living/current = owner.current || mob_override
-	if(current)
-		add_team_hud(current)
-
-/datum/antagonist/shadowling/get_team()
-	return shadow_team
-
-/datum/antagonist/shadowling/create_team(datum/team/shadow_hive/new_team)
-	shadow_team = get_shadow_hive()
 
 /datum/antagonist/shadowling/proc/set_lesser()
 	ling_role = SHADOWLING_ROLE_LESSER
@@ -91,38 +92,19 @@
 	parent_type = /datum/antagonist/shadowling
 	name = "Shadow Thrall"
 	antagpanel_category = "Shadowlings"
-	antag_hud_name = "shadow_thrall"
 	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
-	antag_hud_name = "shadowling"
+	antag_hud_name = "shadowling_thrall"
 
-	datum_flags = DF_USE_TAG
+	is_thrall = TRUE
+	ling_role = SHADOWLING_ROLE_THRALL
 
 /datum/antagonist/shadow_thrall/on_gain()
 	. = ..()
+
 	var/mob/living/carbon/human/H = owner?.current
-	for(var/datum/action/cooldown/ability in H.actions)
-		if(ability.type in typesof(/datum/action/cooldown/shadowling))
-			ability.Remove(H)
-
-	if(istype(H))
-		var/datum/team/shadow_hive/hive = get_shadow_hive()
-		if(hive)
-			hive.join_member(H, SHADOWLING_ROLE_THRALL)
-
-	var/datum/team/shadow_hive/tt = get_shadow_hive()
-	if(tt)
-		objectives |= tt.get_objectives()
-
-/datum/antagonist/shadow_thrall/on_removal()
-	. = ..()
-	var/mob/living/carbon/human/H = owner?.current
-	if(istype(H))
-		for(var/datum/action/cooldown/ability in H.actions)
-			if(ability.type in typesof(/datum/action/cooldown/shadowling))
-				ability.Remove(H)
-		var/datum/team/shadow_hive/hive = get_shadow_hive()
-		if(hive)
-			hive.leave_member(H)
+	if(istype(H) && !H.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL))
+		var/obj/item/organ/brain/shadow/tumor_thrall/tumor = new
+		tumor.Insert(H)
 
 /datum/objective/shadowling/enslave_fraction
 	name = "subjugate crew"
@@ -201,6 +183,12 @@
 		report += "<span class='redtext big'>[name] провалился!</span>"
 	return report.Join("<br>")
 
+/datum/antagonist/shadowling/get_team()
+	return shadow_team
+
+/datum/antagonist/shadow_thrall/get_team()
+	return shadow_team
+
 /proc/shadowling_grant_hatch(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
@@ -208,3 +196,4 @@
 		return
 	var/datum/action/cooldown/shadowling/hatch/A = new
 	A.Grant(H)
+

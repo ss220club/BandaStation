@@ -9,7 +9,7 @@
 	name = "Ночное зрение"
 	desc = "Переключить режим ночного зрения (вычисляется на текущих глазах)."
 	button_icon_state = "night_vision"
-	cooldown_time = 1 SECONDS
+	cooldown_time = 0 SECONDS
 
 	/// 0=off, 1/2/3 – уровни
 	var/nv_level = NV_OFF
@@ -43,6 +43,7 @@
 			nv_level = NV_OFF
 
 	H.update_sight()
+	enable()
 	return TRUE
 
 #undef NV_OFF

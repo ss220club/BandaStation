@@ -103,10 +103,11 @@ var/ascended_max_health = 220
 		return
 	shadowling_remove_ascended_claws(H)
 
-/obj/item/melee/umbral_claw
+/obj/item/knife/combat/umbral_claw
 	name = "umbral claw (right)"
 	desc = "Слиток зазубренной тени."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
+	icon_state = "claw_right"
 	w_class = WEIGHT_CLASS_TINY
 	force = 18
 	armour_penetration = 25
@@ -115,30 +116,29 @@ var/ascended_max_health = 220
 	attack_verb_simple = list("rend", "slash", "tear")
 	hitsound = 'sound/items/weapons/slash.ogg'
 	resistance_flags = INDESTRUCTIBLE
-	item_flags = ABSTRACT | NOBLUDGEON
 	throwforce = 0
 	throw_speed = 0
 	throw_range = 0
+	inhand_icon_state = null
+	worn_icon_state = null
 
-/obj/item/melee/umbral_claw/Initialize(mapload)
+/obj/item/knife/combat/umbral_claw/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
 
-/obj/item/melee/umbral_claw/attack_self(mob/user)
-	return
-
-/obj/item/melee/umbral_claw/afterattack(atom/target, mob/user, proximity, params)
-	. = ..()
-
-/obj/item/melee/umbral_claw/left
+/obj/item/knife/combat/umbral_claw/left
 	name = "umbral claw (left)"
+	icon_state = "claw_left"
+	sharpness = SHARP_POINTY
+	attack_verb_continuous = list("pierces", "impales", "shreads")
+	attack_verb_simple = list("pierce", "impale", "shread")
 
 /proc/shadowling_equip_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 
-	var/obj/item/melee/umbral_claw/left/claw_l = new(H)
-	var/obj/item/melee/umbral_claw/claw_r = new(H)
+	var/obj/item/knife/combat/umbral_claw/left/claw_l = new(H)
+	var/obj/item/knife/combat/umbral_claw/claw_r = new(H)
 
 	H.drop_all_held_items()
 
@@ -150,7 +150,7 @@ var/ascended_max_health = 220
 /proc/shadowling_remove_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
-	for(var/obj/item/melee/umbral_claw/C in H.get_all_contents())
+	for(var/obj/item/knife/combat/umbral_claw/C in H.get_all_contents())
 		qdel(C)
 
 /datum/species/shadow/shadowling/check_roundstart_eligible()
@@ -257,9 +257,6 @@ var/ascended_max_health = 220
 /obj/item/bodypart/arm/right/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
-
-/mob/living/carbon/human
-	var/lower_shadowling = FALSE // Это вообще используется???
 
 /mob/living/carbon/human/proc/shadowling_strip_quirks()
 	cleanse_quirk_datums()

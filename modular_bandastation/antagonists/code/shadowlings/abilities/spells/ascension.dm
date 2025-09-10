@@ -1,3 +1,19 @@
+/obj/structure/shadowling_circle
+	name = "shadow cocoon"
+	desc = "Пульсирующий кокон живой тени."
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
+	icon_state = "shadow_acendence_circle"
+	layer = MOB_LAYER - 0.1
+	anchored = TRUE
+	density = TRUE
+	resistance_flags = INDESTRUCTIBLE
+
+/obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark
+	color = "#131a22"
+	max_alpha = 220
+	duration = 0.5 SECONDS
+	amount_to_scale = 5
+
 /datum/action/cooldown/shadowling/ascend
 	name = "Возвышение"
 	desc = "Разрывая оболочку, вы восходите к истинной форме. Требует темноты."
@@ -54,8 +70,7 @@
 		to_chat(H, span_warning("Свет мешает Возвышению."))
 		return FALSE
 
-	// декорации: кокон и «стены»
-	var/obj/structure/shadowling_cocoon/cocoon = new(start)
+	var/obj/structure/shadowling_circle/cocoon = new(start)
 	var/list/spawned = list(cocoon)
 	playsound(start, sfx_start, 60, TRUE)
 
@@ -100,13 +115,16 @@
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(old_turf)
 	to_chat(H, span_boldnotice("Вы разрываете оболочку и восходите в высшую форму Тени!"))
 
+	playsound(old_turf, 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg', 70, TRUE)
+	new /obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark(old_turf)
+
 	for(var/datum/action/cooldown/ability in H.actions)
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
 			ability.Remove(H)
 
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	hive.grant_sync_action(H)
-
+	hive.sync_after_event(H)
 	cleanup(spawned)
 	Remove(H)
 	qdel(src)
