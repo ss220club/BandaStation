@@ -46,13 +46,13 @@
 
 /datum/component/stealth_device/proc/on_scan(datum/source, mob/user, list/extra_data)
 	SIGNAL_HANDLER
-	spotted_by[user] = TRUE
+	spotted_by[user.mind] = TRUE
 	LAZYADD(extra_data[DETSCAN_CATEGORY_ILLEGAL], "Обнаружен скрытый объект: [parent].")
 	to_chat(user, span_alert("Обнаружен скрытый объект: [parent]"))
 
 /datum/component/stealth_device/proc/on_target_attackby_secondary(atom/source, mob/user, obj/item/tool)
 	SIGNAL_HANDLER
-	if(istype(tool, /obj/item/detective_scanner) && spotted_by[user])
+	if(istype(tool, /obj/item/detective_scanner) && spotted_by[user.mind])
 		INVOKE_ASYNC(src, PROC_REF(remove_stealth_device), user)
 	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
