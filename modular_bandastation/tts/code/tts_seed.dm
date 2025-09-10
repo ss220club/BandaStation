@@ -3,10 +3,9 @@
 
 /datum/dna/copy_dna(datum/dna/new_dna, transfer_flags = COPY_DNA_SE|COPY_DNA_SPECIES)
 	. = ..()
-	if(!istype(new_dna.holder))
-		return
 	new_dna.tts_seed_dna = tts_seed_dna
-	new_dna.holder.AddComponent(/datum/component/tts_component, tts_seed_dna)
+	if(istype(new_dna.holder))
+		new_dna.holder.AddComponent(/datum/component/tts_component, new_dna.tts_seed_dna)
 
 /atom/proc/add_tts_component()
 	return

@@ -831,7 +831,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(dest_object.atom_storage)
 		to_chat(user, span_notice("Вы вытряхиваете содержимое [parent.declent_ru(GENITIVE)] в [dest_object.declent_ru(ACCUSATIVE)]."))
 
-		if(do_rustle)
+		if(do_rustle && rustle_sound)
 			playsound(parent, rustle_sound, 50, TRUE, -5)
 
 		for(var/obj/item/to_dump in real_location)

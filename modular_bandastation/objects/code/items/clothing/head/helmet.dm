@@ -37,6 +37,12 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "hardsuit0-sec"
 
+// MARK: ERT
+/obj/item/clothing/head/helmet/plate/crusader/ert
+	name = "ERT crusader's hood"
+	desc = "Усовершенствованный капюшон для крестовых походов против ереси, состоящий из освященного нанометалла и ткани. Обеспечивает очень хорошую защиту от еретиков и нечисти."
+	resistance_flags = FIRE_PROOF
+
 /obj/item/clothing/head/helmet/ntci_helmet
 	name = "tactical helmet"
 	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров."
@@ -58,3 +64,28 @@
 /obj/item/clothing/head/helmet/ntci_helmet/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/seclite_attachable, light_icon_state = "flight")
+
+// MARK: USSP
+/obj/item/clothing/head/helmet/marine/ussp_officer_kaska
+	name = "komandir kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_command"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	base_icon_state = "ussp_command"
+
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska
+	name = "heavy kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_security"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	base_icon_state = "ussp_security"
+
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
+	icon_state = "ussp_medic"
+	base_icon_state = "ussp_medic"
+
+/obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
+	name = "OMON helmet"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_riot"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'

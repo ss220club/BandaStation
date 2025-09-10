@@ -59,14 +59,14 @@ jobs:
           - 5000:5000 #Can't use env here for some reason
     steps:
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         env:
           DOTNET_INSTALL_DIR: "./_work/.dotnet"
         with:
           dotnet-version: 8.0.x
 
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
 
       - name: Test TGS Integration
         run: dotnet run -c Release --project tools/tgs_test ${{ github.repository }} /tgs_instances/tgstation ${{ env.TGS_API_PORT }} ${{ github.event.pull_request.head.sha || github.sha }} ${{ secrets.GITHUB_TOKEN }} ${{ env.PR_NUMBER }}

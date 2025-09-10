@@ -127,3 +127,149 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
 	icon_state = "fancy_cloak"
+
+// Stealth cloak
+/obj/item/clothing/suit/hooded/stealth_cloak
+	name = "infiltrator cloak"
+	desc = "Плащ, покрытый фотодинамическими пластинами, позволяет носителю максимально эффективно слиться с окружающей средой.\
+	Наибольшую эффективность показывает в условиях пониженной освещенности."
+	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
+	icon_state = "/obj/item/clothing/suit/hooded/stealth_cloak"
+	post_init_icon_state = "stealth_cloak"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	inhand_icon_state = null
+	body_parts_covered = CHEST|GROIN|ARMS
+	hoodtype = /obj/item/clothing/head/hooded/stealth_cloak
+	hood_up_affix = ""
+	greyscale_colors = COLOR_OLIVE
+	greyscale_config = /datum/greyscale_config/stealth_cloak
+	greyscale_config_worn = /datum/greyscale_config/stealth_cloak/worn
+	flags_1 = null
+	armor_type = /datum/armor/stealth_cloak
+	actions_types = list(/datum/action/item_action/stealth_mode/cloak)
+	allowed = list(
+		/obj/item/binoculars,
+		/obj/item/tank/internals/emergency_oxygen/double,
+		/obj/item/gun,
+	)
+	var/stealth_enabled_slowdown = 0
+
+/obj/item/clothing/suit/hooded/stealth_cloak/on_hood_down(obj/item/clothing/head/hooded/hood)
+	. = ..()
+	var/datum/action/item_action/stealth_mode/cloak/stealth_action = locate() in actions
+	if(!stealth_action)
+		return
+	if(!stealth_action.stealth_engaged)
+		return
+	stealth_action.stealth_off()
+
+/obj/item/clothing/suit/hooded/stealth_cloak/shinobi
+	name = "shinobi cloak"
+	greyscale_colors = COLOR_OLD_GLORY_BLUE
+	hoodtype = /obj/item/clothing/head/hooded/stealth_cloak/shinobi
+	stealth_enabled_slowdown = -0.8
+
+/obj/item/clothing/suit/hooded/stealth_cloak/black
+	name = "infiltrator cloak"
+	greyscale_colors = COLOR_ALMOST_BLACK
+	hoodtype = /obj/item/clothing/head/hooded/stealth_cloak/black
+
+/obj/item/clothing/head/hooded/stealth_cloak
+	name = "infiltrator cloak's hood"
+	desc = "Капюшон плаща с фотодинамическими пластинами."
+	icon = 'icons/map_icons/clothing/mask.dmi'
+	icon_state = "/obj/item/clothing/head/hooded/stealth_cloak"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
+	post_init_icon_state = "stealth_cloak"
+	body_parts_covered = HEAD
+	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACE
+	greyscale_colors = COLOR_OLIVE
+	greyscale_config = /datum/greyscale_config/stealth_cloak_hood
+	greyscale_config_worn = /datum/greyscale_config/stealth_cloak_hood/worn
+
+/obj/item/clothing/head/hooded/stealth_cloak/shinobi
+	greyscale_colors = COLOR_OLD_GLORY_BLUE
+
+/obj/item/clothing/head/hooded/stealth_cloak/black
+	greyscale_colors = COLOR_ALMOST_BLACK
+
+/datum/greyscale_config/stealth_cloak
+	name = "Stealth Cloak"
+	icon_file = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	json_config = 'code/datums/greyscale/json_configs/bandastation/stealth_cloak.json'
+
+/datum/greyscale_config/stealth_cloak/worn
+	name = "Stealth Cloak (Worn)"
+	icon_file = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+
+/datum/greyscale_config/stealth_cloak_hood
+	name = "Stealth Cloak"
+	icon_file = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
+	json_config = 'code/datums/greyscale/json_configs/bandastation/stealth_cloak.json'
+
+/datum/greyscale_config/stealth_cloak_hood/worn
+	name = "Stealth Cloak (Worn)"
+	icon_file = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
+
+/datum/armor/stealth_cloak
+	melee = 50
+	bullet = 50
+	laser = 30
+	energy = 25
+	bomb = 50
+	bio = 100
+	fire = 40
+	acid = 50
+	wound = 20
+
+/datum/action/item_action/stealth_mode/cloak
+	name = "Замаскироваться"
+	desc = "Производится подача напряжения на фотодинамические пластины и, спустя непродолжительную калибровку, маскировка выходит на максимальную эффективность."
+	charge = 500 SECONDS
+	max_charge = 500 SECONDS
+
+/datum/action/item_action/stealth_mode/cloak/stealth_on()
+	var/obj/item/clothing/suit/hooded/stealth_cloak/cloak = target
+	var/datum/component/toggle_attached_clothing/hood_component = cloak.GetComponent(/datum/component/toggle_attached_clothing)
+	if(isnull(hood_component))
+		return
+	if(!hood_component.currently_deployed)
+		owner.balloon_alert(owner, "нужно надеть капюшон")
+		return
+	owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/stealth, multiplicative_slowdown = cloak.stealth_enabled_slowdown)
+	ADD_TRAIT(owner, TRAIT_PACIFISM, src)
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
+	return ..()
+
+/datum/action/item_action/stealth_mode/cloak/stealth_off()
+	. = ..()
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/stealth)
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, src)
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
+
+/datum/movespeed_modifier/stealth
+	variable = TRUE
+
+// MARK: Etamin ind.
+/obj/item/clothing/suit/hooded/etamin_cloak
+	name = "Gold On Black hooded cloak"
+	desc = "Корпоративный плащ, выполненный в угольных тонах все с тем же золотым покрытием и специальным логотипом от Etamin Industries – Золотой Звездой."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/neck.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/neck.dmi'
+	icon_state = "ei_cloak"
+	hood_up_affix = ""
+	body_parts_covered = CHEST|GROIN|ARMS
+	cold_protection = CHEST|GROIN|ARMS
+	hoodtype = /obj/item/clothing/head/hooded/etamin_cloak
+	allowed = list(/obj/item/tank/internals/emergency_oxygen/double)
+
+/obj/item/clothing/head/hooded/etamin_cloak
+	name = "Gold On Black cloak's hood"
+	desc = "Капюшон плаща от Etamin Industry."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hood.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hood.dmi'
+	icon_state = "ei_cloak"
+	body_parts_covered = HEAD
+	cold_protection = HEAD
+	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
+	flags_inv = HIDEEARS | HIDEHAIR

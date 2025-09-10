@@ -4,7 +4,7 @@
 	preference = "feature_tajaran_tail"
 	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/tajaran
 	wag_flags = WAG_ABLE
-	dna_block = DNA_TAJARAN_TAIL_BLOCK
+	dna_block = /datum/dna_block/feature/tajaran_tail
 	var/datum/bodypart_overlay/mutant/tajaran_tail_markings/tail_markings_overlay
 
 /obj/item/organ/tail/tajaran/on_mob_insert(mob/living/carbon/owner)
@@ -16,7 +16,7 @@
 	remove_verb(owner, /mob/living/carbon/human/proc/emote_wag)
 
 /datum/bodypart_overlay/mutant/tail/tajaran
-	feature_key = "tail_tajaran"
+	feature_key = FEATURE_TAJARAN_TAIL
 
 /datum/bodypart_overlay/mutant/tail/tajaran/get_global_feature_list()
 	return SSaccessories.tails_list_tajaran
@@ -24,7 +24,7 @@
 // MARK: Tajaran tail markings
 /datum/bodypart_overlay/mutant/tajaran_tail_markings
 	layers = EXTERNAL_FRONT|EXTERNAL_BEHIND
-	feature_key = "tailmarkings"
+	feature_key = FEATURE_TAJARAN_TAIL_MARKINGS
 	var/wagging = FALSE
 	var/tail_markings_key = NONE
 	var/tajaran_tail_markings_color = "#FFFFFF"
@@ -70,12 +70,12 @@
 		return
 
 	var/mob/living/carbon/human/owner = bodypart.owner
-	var/feature_name = bodypart.owner.dna.features["tajaran_tail_markings"]
+	var/feature_name = bodypart.owner.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS]
 	if (feature_name && istype(owner, /mob/living/carbon/human))
 		tail_markings_overlay = new
 		tail_markings_overlay.tail_markings_key = tail_markings_key
 		tail_markings_overlay.color_source = ORGAN_COLOR_OVERRIDE
-		tail_markings_overlay.tajaran_tail_markings_color = owner.dna.features["tajaran_tail_markings_color"]
+		tail_markings_overlay.tajaran_tail_markings_color = owner.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS_COLOR]
 		tail_markings_overlay.set_appearance_from_name(feature_name)
 		bodypart.add_bodypart_overlay(tail_markings_overlay)
 

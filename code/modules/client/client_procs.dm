@@ -266,11 +266,11 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	persistent_client.set_client(src)
 
 	if(SScentral.can_run())
-		SScentral.get_player_discord_async(ckey)
+		SScentral.update_player_discord_async(ckey)
 		SScentral.update_player_donate_tier_blocking(src)
 
 	if(byond_version >= 516)
-		winset(src, null, list("browser-options" = "find,refresh,byondstorage"))
+		winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION EDIT - Removed 'refresh'
 
 	// Instantiate stat panel
 	stat_panel = new(src, "statbrowser")
@@ -600,7 +600,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	GLOB.clients -= src
 	GLOB.directory -= ckey
-	persistent_client.set_client(null)
+	if(persistent_client)
+		persistent_client.set_client(null)
+	else
+		stack_trace("A client was Del()'d without a persistent_client! This should not be happening.")
 
 	log_access("Logout: [key_name(src)]")
 	GLOB.ahelp_tickets.ClientLogout(src)

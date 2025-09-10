@@ -2,7 +2,7 @@
 	name = "Tiny Prick"
 	desc = "Stabby stabby"
 
-/datum/action/changeling/sting/Trigger(trigger_flags)
+/datum/action/changeling/sting/Trigger(mob/clicker, trigger_flags)
 	var/mob/user = owner
 	if(!user || !user.mind)
 		return
@@ -193,7 +193,7 @@
 /datum/action/changeling/sting/extract_dna
 	name = "Extract DNA Sting"
 	desc = "Мы незаметно жалим цель и извлекаем ее ДНК. Стоит 25 химикатов."
-	helptext = "Даст вам ДНК вашей цели, позволяя трансформироваться в нее."
+	helptext = "Даст вам ДНК вашей цели, позволяя трансформироваться в нее. Это сделает невозможным полное поглощение их тела в дальнейшем."
 	button_icon_state = "sting_extract"
 	chemical_cost = 25
 	dna_cost = 0

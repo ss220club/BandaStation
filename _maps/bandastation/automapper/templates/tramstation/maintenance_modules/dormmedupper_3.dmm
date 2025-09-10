@@ -267,6 +267,10 @@
 /obj/structure/lattice,
 /turf/open/openspace,
 /area/station/maintenance/department/crew_quarters/dorms)
+"HJ" = (
+/obj/effect/landmark/firealarm_sanity,
+/turf/open/floor/grass,
+/area/station/asteroid)
 "Iz" = (
 /obj/effect/turf_decal/stripes/end{
 	dir = 1
@@ -1082,7 +1086,7 @@ GE
 vg
 ci
 rO
-rO
+HJ
 rO
 rO
 Cp

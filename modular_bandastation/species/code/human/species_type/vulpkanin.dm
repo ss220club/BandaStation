@@ -45,25 +45,25 @@
 /datum/species/vulpkanin/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.set_haircolor("#A26324", update = FALSE) // brown
 	human.set_hairstyle("Jagged", update = TRUE)
-	human.dna.features["mcolor"] = "#D69E67"
-	human.dna.features["vulpkanin_body_markings_color"] = "#bd762f"
-	human.dna.features["vulpkanin_tail_markings_color"] = "#2b2015"
-	human.dna.features["vulpkanin_head_markings_color"] = "#2b2015"
-	human.dna.features["vulpkanin_facial_hair_color"] = "#bd762f"
+	human.dna.features[FEATURE_MUTANT_COLOR] = "#D69E67"
+	human.dna.features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = "#bd762f"
+	human.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR] = "#2b2015"
+	human.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR] = "#2b2015"
+	human.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = "#bd762f"
 	human.update_body(is_creating = TRUE)
 
 /datum/species/vulpkanin/randomize_features()
 	var/list/features = ..()
-	features["vulpkanin_chest_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_chest_markings_list) : SPRITE_ACCESSORY_NONE
-	features["tail_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : SPRITE_ACCESSORY_NONE
-	features["vulpkanin_head_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : SPRITE_ACCESSORY_NONE
-	features["vulpkanin_facial_hair"] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_CHEST_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_chest_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_TAIL_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_HEAD_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_FACIAL_HAIR] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : SPRITE_ACCESSORY_NONE
 
 	var/furcolor = "#[random_color()]"
-	features["vulpkanin_body_markings_color"] = furcolor
-	features["vulpkanin_tail_markings_color"] = furcolor
-	features["vulpkanin_head_markings_color"] = furcolor
-	features["vulpkanin_facial_hair_color"] = furcolor
+	features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = furcolor
+	features[FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR] = furcolor
+	features[FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR] = furcolor
+	features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = furcolor
 	return features
 
 /datum/species/vulpkanin/get_physical_attributes()

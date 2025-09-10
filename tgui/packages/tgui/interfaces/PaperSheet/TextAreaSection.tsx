@@ -1,4 +1,4 @@
-import { KeyboardEvent, RefObject, SetStateAction, useCallback } from 'react';
+import { type KeyboardEvent, type RefObject, type SetStateAction, useCallback } from 'react';
 import { Box, Button, Section, TextArea } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 import { debounce } from 'tgui-core/timer';
@@ -6,7 +6,7 @@ import { debounce } from 'tgui-core/timer';
 import { useBackend } from '../../backend';
 import { REPLACEMENT_TOKEN_START_REGEX } from './constants';
 import { getWriteButtonLocation, parseReplacements } from './helpers';
-import { PaperContext, PaperInput, PaperReplacement } from './types';
+import type { PaperContext, PaperInput, PaperReplacement } from './types';
 
 type TextAreaSectionProps = {
   paperContext: PaperContext;
@@ -194,7 +194,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
           setTextAreaTextForPreviewWithDelayCallback(text);
 
           if (scrollableRef.current) {
-            let thisDistFromBottom =
+            const thisDistFromBottom =
               scrollableRef.current.scrollHeight -
               scrollableRef.current.scrollTop;
             scrollableRef.current.scrollTop +=

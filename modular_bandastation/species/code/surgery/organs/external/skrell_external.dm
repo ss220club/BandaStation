@@ -10,7 +10,7 @@
 
 	preference = "feature_skrell_head_tentacle"
 
-	dna_block = DNA_SKRELL_HEAD_TENTACLE_BLOCK
+	dna_block = /datum/dna_block/feature/skrell_head_tentacle
 	restyle_flags = EXTERNAL_RESTYLE_FLESH
 
 	bodypart_overlay = /datum/bodypart_overlay/mutant/head_tentacle
@@ -46,7 +46,7 @@
 
 /datum/bodypart_overlay/mutant/head_tentacle
 	layers = EXTERNAL_FRONT|EXTERNAL_ADJACENT
-	feature_key = "skrell_head_tentacle"
+	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
 	color_source = ORGAN_COLOR_INHERIT
 
 /datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()

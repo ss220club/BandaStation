@@ -343,7 +343,7 @@
 
 	// Then we create the interview form and show it to the client
 	var/datum/interview/I = GLOB.interviews.interview_for_client(client)
-	if (I)
+	if(I && SScentral.is_player_discord_linked(src.ckey)) // BANDASTATION EDIT - if(I) => if(I && SScentral.is_player_discord_linked(owner.ckey))
 		I.ui_interact(src)
 
 	// Add verb for re-opening the interview panel, fixing chat and re-init the verbs for the stat panel
