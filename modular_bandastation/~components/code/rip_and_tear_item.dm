@@ -9,6 +9,7 @@
 	var/require_wielded = TRUE
 	var/reinforced_multiplier
 	var/tear_time = 5 SECONDS
+	var/ignore_exhaustion = FALSE
 	var/do_after_key = "rip_and_tear"
 
 /datum/component/rip_and_tear/Initialize(
@@ -17,6 +18,7 @@
 	require_wielded = TRUE,
 	reinforced_multiplier,
 	tear_time = 5 SECONDS,
+	ignore_exhaustion = FALSE,
 )
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -28,6 +30,7 @@
 	src.require_wielded = require_wielded
 	src.reinforced_multiplier = reinforced_multiplier
 	src.tear_time = tear_time
+	src.ignore_exhaustion = ignore_exhaustion
 
 /datum/component/rip_and_tear/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_PRE_ATTACK, PROC_REF(on_pre_attack))
@@ -78,7 +81,7 @@
 		if(DOING_INTERACTION_WITH_TARGET(user, target) || DOING_INTERACTION(user, do_after_key))
 			user.balloon_alert(user, "заняты!")
 			return
-		if(user.getStaminaLoss() >= 90)
+		if(!ignore_exhaustion && ((user.getStaminaLoss() + get_stamina_cost()) > user.maxHealth))
 			user.balloon_alert(user, "вы слишком устали!")
 			return
 		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] начинает выламывать [target.declent_ru(ACCUSATIVE)]!"))
