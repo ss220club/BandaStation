@@ -70,15 +70,12 @@
 
 /obj/item/sledgehammer/syndie/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost=0)
 	AddComponent(/datum/component/rip_and_tear, stamina_cost = 20, tear_time = 3 SECONDS, reinforced_multiplier = 2)
 
 /datum/armor/item_sledgehammer
 	fire = 70
 	acid = 50
-
-/obj/item/sledgehammer/syndie/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost=0)
 
 /obj/item/sledgehammer/get_demolition_modifier(obj/target)
 	return HAS_TRAIT(src, TRAIT_WIELDED) ? demolition_mod : 0.8
