@@ -49,10 +49,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/department/security)
-"eW" = (
-/obj/effect/decal/cleanable/cobweb,
-/turf/open/openspace,
-/area/station/maintenance/department/security)
 "fV" = (
 /obj/effect/turf_decal/sand/plating,
 /turf/open/floor/plating,
@@ -412,7 +408,7 @@
 "Vn" = (
 /obj/effect/turf_decal/sand/plating,
 /obj/effect/spawner/random{
-	loot = list(/obj/effect/decal/cleanable/oil/slippery=10,/obj/effect/decal/cleanable/oil=90);
+	loot = list(/obj/effect/decal/cleanable/blood/oil/slippery=10,/obj/effect/decal/cleanable/blood/oil=90);
 	name = "funny slipper :)"
 	},
 /turf/open/floor/plating,
@@ -1440,7 +1436,7 @@ RO
 Sc
 Sc
 RO
-eW
+ZK
 zu
 lj
 Ik

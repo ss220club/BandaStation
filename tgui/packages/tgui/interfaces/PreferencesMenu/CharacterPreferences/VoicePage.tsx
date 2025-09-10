@@ -1,20 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import {
   BlockQuote,
   Button,
   Dropdown,
   Icon,
-  Input,
   LabeledList,
   Section,
   Stack,
-  Table,
+  Tooltip,
   VirtualList,
 } from 'tgui-core/components';
+import { classes } from 'tgui-core/react';
 
 import { LoadingScreen } from '../../common/LoadingScreen';
-import { PreferencesMenuData, Seed, TtsData } from '../types';
+import { SearchBar } from '../../common/SearchBar';
+import type { PreferencesMenuData, Seed, TtsData } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
 
 const donatorTiers = {
@@ -108,30 +109,31 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
     useState(donatorLevels);
   const [selectedPhrase, setSelectedPhrase] = useState(phrases[0]);
   const [searchtext, setSearchtext] = useState('');
+  const [selectedSeed, setSelectedSeed] = useState<Seed>();
 
-  let providerCheckboxes = getCheckboxGroup(
+  const providerCheckboxes = getCheckboxGroup(
     providers,
     selectedProviders,
     setSelectedProviders,
     'name',
   );
-  let genderesCheckboxes = getCheckboxGroup(
+  const genderesCheckboxes = getCheckboxGroup(
     genders,
     selectedGenders,
     setSelectedGenders,
   );
-  let categoriesCheckboxes = getCheckboxGroup(
+  const categoriesCheckboxes = getCheckboxGroup(
     categories,
     selectedCategories,
     setSelectedCategories,
   );
-  let donatorLevelsCheckboxes = getCheckboxGroup(
+  const donatorLevelsCheckboxes = getCheckboxGroup(
     donatorLevels,
     selectedDonatorLevels,
     setSelectedDonatorLevels,
   );
 
-  let phrasesSelect = (
+  const phrasesSelect = (
     <Dropdown
       options={phrases}
       selected={selectedPhrase.replace(/(.{60})..+/, '$1...')}
@@ -139,11 +141,11 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
     />
   );
 
-  let searchBar = (
-    <Input
+  const searchBar = (
+    <SearchBar
       placeholder="Название..."
-      width="100%"
-      onInput={(e, value) => setSearchtext(value)}
+      query={searchtext}
+      onSearch={setSearchtext}
     />
   );
 
@@ -168,6 +170,11 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
         seed.name.toLowerCase().includes(searchtext.toLowerCase()),
     );
 
+  useEffect(() => {
+    const selected = availableSeeds.find((seed) => seed.name === tts_seed);
+    setSelectedSeed(selected);
+  }, [tts_seed]);
+
   return (
     <Stack fill>
       <Stack.Item basis={'40%'}>
@@ -187,7 +194,6 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
                 <LabeledList.Item label="Фраза">
                   {phrasesSelect}
                 </LabeledList.Item>
-                <LabeledList.Item label="Поиск">{searchBar}</LabeledList.Item>
               </LabeledList>
             </Section>
           </Stack.Item>
@@ -197,22 +203,28 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
               scrollable
               title="Категории"
               buttons={
-                <>
-                  <Button
-                    icon="times"
-                    disabled={selectedCategories.length === 0}
-                    onClick={() => setSelectedCategories([])}
-                  >
-                    Убрать всё
-                  </Button>
-                  <Button
-                    icon="check"
-                    disabled={selectedCategories.length === categories.length}
-                    onClick={() => setSelectedCategories(categories)}
-                  >
-                    Выбрать всё
-                  </Button>
-                </>
+                <Stack>
+                  <Stack.Item>
+                    <Button
+                      icon="times"
+                      color="bad"
+                      disabled={selectedCategories.length === 0}
+                      onClick={() => setSelectedCategories([])}
+                    >
+                      Убрать всё
+                    </Button>
+                  </Stack.Item>
+                  <Stack.Item>
+                    <Button
+                      icon="check"
+                      color="good"
+                      disabled={selectedCategories.length === categories.length}
+                      onClick={() => setSelectedCategories(categories)}
+                    >
+                      Выбрать всё
+                    </Button>
+                  </Stack.Item>
+                </Stack>
               }
             >
               {categoriesCheckboxes}
@@ -222,10 +234,12 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
             <Section>
               <BlockQuote>
                 <Stack.Item>
-                  {`Для поддержания и развития сообщества в условиях растущих расходов часть голосов пришлось сделать доступными только за материальную поддержку сообщества.`}
+                  Для поддержания и развития сообщества в условиях растущих
+                  расходов часть голосов пришлось сделать доступными только за
+                  материальную поддержку сообщества.
                 </Stack.Item>
-                <Stack.Item mt={1} italic>
-                  {`Подробнее об этом можно узнать в нашем Discord-сообществе.`}
+                <Stack.Item mt={1} italic fontSize={0.9} opacity={0.75}>
+                  Подробнее об этом можно узнать в нашем Discord-сообществе.
                 </Stack.Item>
               </BlockQuote>
             </Section>
@@ -238,8 +252,18 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
             fill
             scrollable
             title={`Голоса (${availableSeeds.length}/${seeds.length})`}
+            buttons={searchBar}
           >
-            <Table>
+            <Stack vertical>
+              {selectedSeed && (
+                <SeedRow
+                  header
+                  seed={selectedSeed}
+                  selected_seed={tts_seed}
+                  selected_phrase={selectedPhrase}
+                  donator_level={donator_level}
+                />
+              )}
               <VirtualList>
                 {availableSeeds.map((seed) => {
                   return (
@@ -253,7 +277,7 @@ const VoicePageInner = (props: { text_to_speech: TtsData }) => {
                   );
                 })}
               </VirtualList>
-            </Table>
+            </Stack>
           </Section>
         </Stack>
       </Stack.Item>
@@ -266,74 +290,73 @@ const SeedRow = (props: {
   selected_seed: string;
   selected_phrase: string;
   donator_level: number;
+  header?: boolean;
 }) => {
-  const { seed, selected_seed, selected_phrase, donator_level } = props;
+  const { seed, selected_seed, selected_phrase, donator_level, header } = props;
   const { act } = useBackend();
+  const seedSelected = selected_seed === seed.name;
   return (
-    <Table.Row
-      backgroundColor={selected_seed === seed.name ? 'green' : 'transparent'}
+    <Tooltip
+      content={
+        donator_level < seed.donator_level &&
+        'Требуется более высокий уровень подписки'
+      }
     >
-      <Table.Cell collapsing textAlign="center">
-        <Button
-          fluid
-          color={selected_seed === seed.name ? 'green' : 'transparent'}
-          tooltip={
-            donator_level < seed.donator_level &&
-            'Требуется более высокий уровень подписки'
+      <Stack
+        fill
+        className={classes([
+          'PreferencesMenu__Voice',
+          seedSelected && 'selected',
+          header && 'header',
+        ])}
+        onClick={() =>
+          !seedSelected && act('select_voice', { seed: seed.name })
+        }
+      >
+        <Stack.Item>
+          <Button
+            fluid
+            icon="music"
+            color={seedSelected ? 'green' : 'transparent'}
+            tooltip="Прослушать пример"
+            onClick={(e) => {
+              e.stopPropagation();
+              act('listen', { seed: seed.name, phrase: selected_phrase });
+            }}
+          />
+        </Stack.Item>
+        <Stack.Item
+          bold
+          grow
+          textColor={
+            seed.donator_level > 0 && selected_seed !== seed.name
+              ? 'orange'
+              : 'white'
           }
-          onClick={() => act('select_voice', { seed: seed.name })}
         >
-          {selected_seed === seed.name ? 'Выбрано' : 'Выбрать'}
-        </Button>
-      </Table.Cell>
-      <Table.Cell collapsing textAlign="center">
-        <Button
-          fluid
-          icon="music"
-          color={selected_seed === seed.name ? 'green' : 'transparent'}
-          tooltip="Прослушать пример"
-          onClick={() =>
-            act('listen', { seed: seed.name, phrase: selected_phrase })
-          }
-        />
-      </Table.Cell>
-      <Table.Cell
-        bold
-        collapsing
-        textColor={
-          seed.donator_level > 0 && selected_seed !== seed.name
-            ? 'orange'
-            : 'white'
-        }
-      >
-        {seed.name}
-      </Table.Cell>
-      <Table.Cell
-        opacity={selected_seed === seed.name ? 0.5 : 0.25}
-        textAlign="left"
-      >
-        {seed.category}
-      </Table.Cell>
-      <Table.Cell
-        collapsing
-        opacity={0.5}
-        textColor={
-          selected_seed === seed.name
-            ? 'white'
-            : gendersIcons[seed.gender].color
-        }
-        textAlign="left"
-      >
-        <Icon mx={1} size={1.2} name={gendersIcons[seed.gender].icon} />
-      </Table.Cell>
-      <Table.Cell collapsing opacity={0.5} textColor="white" textAlign="right">
-        {seed.donator_level > 0 && (
-          <>
-            {donatorTiers[seed.donator_level]}
-            <Icon ml={1} mr={2} name="coins" />
-          </>
-        )}
-      </Table.Cell>
-    </Table.Row>
+          {seed.name}
+        </Stack.Item>
+        <Stack.Item
+          className="PreferencesMenu__Voice--Category"
+          opacity={seedSelected ? 0.75 : 0.25}
+        >
+          {seed.category}
+        </Stack.Item>
+        <Stack.Item className="PreferencesMenu__Voice--Tier">
+          {seed.donator_level > 0 && (
+            <>
+              {donatorTiers[seed.donator_level]}
+              <Icon ml={1} size={1.2} name="coins" />
+            </>
+          )}
+        </Stack.Item>
+        <Stack.Item
+          className="PreferencesMenu__Voice--GenderIcon"
+          textColor={seedSelected ? 'white' : gendersIcons[seed.gender].color}
+        >
+          <Icon size={1.2} name={gendersIcons[seed.gender].icon} />
+        </Stack.Item>
+      </Stack>
+    </Tooltip>
   );
 };

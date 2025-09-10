@@ -1,7 +1,8 @@
 /obj/item/modular_computer/pda
 	name = "pda"
-	icon = 'icons/obj/devices/modular_pda.dmi'
-	icon_state = "pda"
+	icon = 'icons/map_icons/items/pda.dmi'
+	icon_state = "/obj/item/modular_computer/pda"
+	post_init_icon_state = "pda"
 	worn_icon_state = "nothing"
 	base_icon_state = "tablet"
 	greyscale_config = /datum/greyscale_config/tablet
@@ -10,6 +11,8 @@
 	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
 	inhand_icon_state = "electronic"
+
+	overlays_icon = 'icons/obj/devices/modular_pda.dmi'
 
 	steel_sheet_cost = 2
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT * 3, /datum/material/glass=SMALL_MATERIAL_AMOUNT, /datum/material/plastic=SMALL_MATERIAL_AMOUNT)
@@ -73,12 +76,12 @@
 
 /obj/item/modular_computer/pda/update_overlays()
 	. = ..()
-	if(computer_id_slot)
-		. += mutable_appearance(initial(icon), "id_overlay")
+	if(stored_id)
+		. += mutable_appearance(overlays_icon, "id_overlay")
 	if(light_on)
-		. += mutable_appearance(initial(icon), "light_overlay")
+		. += mutable_appearance(overlays_icon, "light_overlay")
 	if(inserted_pai)
-		. += mutable_appearance(initial(icon), "pai_inserted")
+		. += mutable_appearance(overlays_icon, "pai_inserted")
 
 /obj/item/modular_computer/pda/interact(mob/user)
 	. = ..()
@@ -98,7 +101,7 @@
 
 	return ..()
 
-/obj/item/modular_computer/pda/pre_attack(atom/target, mob/living/user, params)
+/obj/item/modular_computer/pda/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(!inserted_disk || !ismachinery(target))
 		return ..()
 
@@ -110,10 +113,10 @@
 		return ..()
 	var/obj/item/computer_disk/virus/clown/installed_cartridge = inserted_disk
 	if(!installed_cartridge.charges)
-		to_chat(user, span_notice("Out of virus charges."))
+		to_chat(user, span_notice("Закончились заряды вируса."))
 		return ..()
 
-	to_chat(user, span_notice("You upload the virus to [target]!"))
+	to_chat(user, span_notice("Вы загрузили вирус в [target.declent_ru(ACCUSATIVE)]!"))
 	var/sig_list = list(COMSIG_ATOM_ATTACK_HAND)
 	if(istype(target,/obj/machinery/door/airlock))
 		sig_list = list(COMSIG_AIRLOCK_OPEN, COMSIG_AIRLOCK_CLOSE)
@@ -130,10 +133,10 @@
 	. = ..()
 
 	if(inserted_item)
-		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Remove [inserted_item]"
+		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Достать [inserted_item.declent_ru(ACCUSATIVE)]"
 		. = CONTEXTUAL_SCREENTIP_SET
 	else if(istype(held_item) && is_type_in_list(held_item, contained_item))
-		context[SCREENTIP_CONTEXT_LMB] = "Insert [held_item]"
+		context[SCREENTIP_CONTEXT_LMB] = "Вставить [held_item.declent_ru(ACCUSATIVE)]"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	return . || NONE
@@ -150,14 +153,14 @@
 	if(!is_type_in_list(tool, contained_item))
 		return NONE
 	if(tool.w_class >= WEIGHT_CLASS_SMALL) // Anything equal to or larger than small won't work
-		user.balloon_alert(user, "too big!")
+		user.balloon_alert(user, "слишком большой!")
 		return ITEM_INTERACT_BLOCKING
 	if(!user.transferItemToLoc(tool, src))
 		return ITEM_INTERACT_BLOCKING
 	if(inserted_item)
 		swap_pen(user, tool)
 	else
-		balloon_alert(user, "inserted [tool]")
+		balloon_alert(user, "вставлен [tool.declent_ru(ACCUSATIVE)]")
 		inserted_item = tool
 		playsound(src, 'sound/machines/pda_button/pda_button1.ogg', 50, TRUE)
 	return ITEM_INTERACT_SUCCESS
@@ -182,7 +185,7 @@
 		return
 
 	if(inserted_item)
-		balloon_alert(user, "removed [inserted_item]")
+		balloon_alert(user, "извлечён [inserted_item.declent_ru(ACCUSATIVE)]")
 		user.put_in_hands(inserted_item)
 		inserted_item = null
 		update_appearance()
@@ -190,7 +193,7 @@
 
 /obj/item/modular_computer/pda/proc/swap_pen(mob/user, obj/item/tool)
 	if(inserted_item)
-		balloon_alert(user, "swapped pens")
+		balloon_alert(user, "ручки поменяны местами")
 		user.put_in_hands(inserted_item)
 		inserted_item = tool
 		update_appearance()
@@ -202,18 +205,18 @@
 	if(from_message_menu)
 		log_bomber(null, null, target, "'s tablet exploded as [target.p_they()] tried to open their tablet message menu because of a recent tablet bomb.")
 	else
-		log_bomber(bomber, "successfully tablet-bombed", target, "as [target.p_they()] tried to reply to a rigged tablet message [bomber && !is_special_character(bomber) ? "(SENT BY NON-ANTAG)" : ""]")
+		log_bomber(bomber, "successfully tablet-bombed", target, "as [target.p_they()] tried to reply to a rigged tablet message [bomber?.is_antag() ? "" : "(SENT BY NON-ANTAG)"]")
 
 	if (ismob(loc))
 		var/mob/loc_mob = loc
 		loc_mob.show_message(
-			msg = span_userdanger("Your [src] explodes!"),
+			msg = span_userdanger("Ваш [declent_ru(ACCUSATIVE)] взрывается!"),
 			type = MSG_VISUAL,
-			alt_msg = span_warning("You hear a loud *pop*!"),
+			alt_msg = span_warning("Вы слышите громкий хлопок!"),
 			alt_type = MSG_AUDIBLE,
 		)
 	else
-		visible_message(span_danger("[src] explodes!"), span_warning("You hear a loud *pop*!"))
+		visible_message(span_danger("[declent_ru(ACCUSATIVE)] взрывается!"), span_warning("Вы слышите громкий хлопок!"))
 
 	target.client?.give_award(/datum/award/achievement/misc/clickbait, target)
 
@@ -261,6 +264,7 @@
  */
 /obj/item/modular_computer/pda/nukeops
 	name = "nuclear pda"
+	icon_state = "/obj/item/modular_computer/pda/nukeops"
 	device_theme = PDA_THEME_SYNDICATE
 	comp_light_luminosity = 6.3 //matching a flashlight
 	light_color = COLOR_RED
@@ -280,8 +284,9 @@
 
 /obj/item/modular_computer/pda/syndicate_contract_uplink
 	name = "contractor tablet"
-	device_theme = PDA_THEME_SYNDICATE
+	icon_state = "/obj/item/modular_computer/pda/syndicate_contract_uplink"
 	icon_state_menu = "contractor-assign"
+	device_theme = PDA_THEME_SYNDICATE
 	comp_light_luminosity = 6.3
 	has_pda_programs = FALSE
 	greyscale_config = /datum/greyscale_config/tablet/stripe_double
@@ -299,7 +304,9 @@
  */
 /obj/item/modular_computer/pda/silicon
 	name = "modular interface"
+	icon = 'icons/obj/devices/modular_pda.dmi'
 	icon_state = "tablet-silicon"
+	post_init_icon_state = null
 	base_icon_state = "tablet-silicon"
 	greyscale_config = null
 	greyscale_colors = null

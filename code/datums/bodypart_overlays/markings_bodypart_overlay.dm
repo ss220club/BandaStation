@@ -5,6 +5,12 @@
 	var/use_gender = FALSE
 	/// Which dna feature key to draw from
 	var/dna_feature_key
+
+	/// BANDASTATION ADDITION START - Species
+	/// Which dna color feature use to color the markings
+	var/dna_color_feature_key
+	/// BANDASTATION ADDITION START - Species
+
 	/// Which bodyparts do we apply ourselves to?
 	var/list/applies_to = list(
 		/obj/item/bodypart/arm/left,
@@ -43,13 +49,13 @@
 	return mutable_appearance(icon, gender_string + icon_state + "_" + limb.body_zone, layer = layer)
 
 /datum/bodypart_overlay/simple/body_marking/moth
-	dna_feature_key = "moth_markings"
+	dna_feature_key = FEATURE_MOTH_MARKINGS
 
 /datum/bodypart_overlay/simple/body_marking/moth/get_accessory(name)
 	return SSaccessories.moth_markings_list[name]
 
 /datum/bodypart_overlay/simple/body_marking/lizard
-	dna_feature_key = "lizard_markings"
+	dna_feature_key = FEATURE_LIZARD_MARKINGS
 	applies_to = list(/obj/item/bodypart/chest)
 
 /datum/bodypart_overlay/simple/body_marking/lizard/get_accessory(name)

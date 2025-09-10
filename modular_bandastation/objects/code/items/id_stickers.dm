@@ -49,13 +49,12 @@
 	. = ..()
 	if(applied_sticker)
 		var/mutable_appearance/sticker_overlay = mutable_appearance(applied_sticker.icon, applied_sticker.icon_state)
-		sticker_overlay.color = applied_sticker.color
 		. += sticker_overlay
 
 /obj/item/card/id/advanced/update_desc(updates)
 	. = ..()
 	if(applied_sticker?.id_card_desc)
-		desc += "<br>[applied_sticker.id_card_desc]"
+		desc = "[src::desc]<br>[applied_sticker.id_card_desc]"
 	else
 		desc = src::desc
 
@@ -110,12 +109,12 @@
 		"Аквамариновый" = LIGHT_COLOR_BLUEGREEN,
 		"Розовый" = LIGHT_COLOR_PINK
 	)
+	greyscale_config = /datum/greyscale_config/id_sticker
+	flags_1 = IS_PLAYER_COLORABLE_1
+
 /obj/item/id_sticker/colored/Initialize(mapload)
 	. = ..()
-	if(color)
-		return .
-
-	color = color_list[pick(color_list)]
+	set_greyscale(color_list[pick(color_list)])
 
 /obj/item/id_sticker/colored/attack_self(mob/living)
 	var/choice = tgui_input_list(usr, "Какой цвет предпочитаете?", "Выбор цвета", list("Выбрать предустановленный", "Выбрать вручную"))
@@ -128,10 +127,10 @@
 			if(!color_to_set)
 				return
 
-			color = color_to_set
+			set_greyscale(color_to_set)
 
 		if("Выбрать вручную")
-			color = input(usr,"Выберите цвет") as color
+			set_greyscale(input(usr, "Выберите цвет") as color)
 
 /obj/item/id_sticker/donut
 	name = "donut ID sticker"
@@ -145,7 +144,8 @@
 /obj/item/id_sticker/colored/silver
 	name = "silver holographic ID sticker"
 	desc = "Голографическая наклейка на карту, изготовленная из специального материала, похожего на серебро. Вы можете выбрать цвет который она примет."
-	icon_state = "colored_shiny"
+	icon_state = "colored_silver"
+	greyscale_config = /datum/greyscale_config/id_sticker/silver
 
 /obj/item/id_sticker/gold
 	name = "gold ID sticker"
@@ -184,6 +184,7 @@
 	desc = "Какая же она яркая... Ещё и цвета меняет!"
 	icon_state = "colored_neon"
 	id_card_desc = "Кажется будто она светится."
+	greyscale_config = /datum/greyscale_config/id_sticker/neon
 
 /obj/item/id_sticker/missing
 	name = "black-and-pink ID sticker"
@@ -225,6 +226,7 @@
 	desc = "Прекрасная наклейка, которая делает вашу карту похожей на котика. Эта может менять цвет."
 	icon_state = "colored_kitty"
 	id_card_desc = "Так и хочется погладить, жаль это всего-лишь наклейка..."
+	greyscale_config = /datum/greyscale_config/id_sticker/kitty
 
 /obj/item/id_sticker/cursedmiku
 	name = "anime ID sticker"
@@ -237,6 +239,7 @@
 	desc = "Она что-то загружает?"
 	icon_state = "snake"
 	id_card_desc = "Бегает и бегает..."
+	greyscale_config = /datum/greyscale_config/id_sticker/snake
 
 /obj/item/id_sticker/magic
 	name = "magical ID sticker"
@@ -264,7 +267,7 @@
 
 /datum/supply_pack/misc/id_stickers
 	name = "ID stickers"
-	desc = "test"
+	desc = "Хотите выделиться среди всех работников? Тогда покупайте эти замечательные наклейки на вашу ID карту!"
 	crate_type = /obj/structure/closet/crate/wooden
 	cost = CARGO_CRATE_VALUE * 18
 	contains = list(/obj/effect/spawner/random/id_stickers = 5)

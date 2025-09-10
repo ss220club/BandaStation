@@ -5,7 +5,6 @@
 	show_in_antagpanel = FALSE
 	show_name_in_check_antagonists = TRUE
 	show_to_ghosts = TRUE
-	antag_flags = FLAG_ANTAG_CAP_IGNORE // BANDASTATION EDIT - STORYTELLER
 	/// The rift to protect
 	var/datum/weakref/rift
 

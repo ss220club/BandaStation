@@ -8,7 +8,7 @@
 	set hidden = TRUE
 	var/discordurl = CONFIG_GET(string/discordurl)
 	if(discordurl)
-		if(tgui_alert(src, "This will open the discord in your browser. Are you sure?",, list("Yes","No"))!="Yes")
+		if(tgui_alert(src, "Это откроет ссылку в вашем браузере. Вы уверены?", "Переход в наш Discord", list("Да", "Нет")) != "Да")
 			return
 		src << link(discordurl)
 	else

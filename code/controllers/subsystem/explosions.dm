@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(explosions)
 
 
 /datum/controller/subsystem/explosions/stat_entry(msg)
-	msg += "C:{"
+	msg += "\n  Cost:{"
 	msg += "LT:[round(cost_lowturf,1)]|"
 	msg += "MT:[round(cost_medturf,1)]|"
 	msg += "HT:[round(cost_highturf,1)]|"
@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(explosions)
 
 	msg += "} "
 
-	msg += "AMT:{"
+	msg += "\n  Count:{"
 	msg += "LT:[lowturf.len]|"
 	msg += "MT:[medturf.len]|"
 	msg += "HT:[highturf.len]|"
@@ -72,7 +72,7 @@ SUBSYSTEM_DEF(explosions)
 	msg += "TO:[throwturf.len]"
 	msg += "HTO:[held_throwturf.len]"
 
-	msg += "} "
+	msg += "}"
 	return ..()
 
 /datum/controller/subsystem/explosions/proc/is_exploding()
@@ -359,8 +359,8 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 		who_did_it_game_log = key_name(explosion_cause.fingerprintslast)
 
 	if(adminlog)
-		message_admins("Explosion with size (Devast: [devastation_range], Heavy: [heavy_impact_range], Light: [light_impact_range], Flame: [flame_range]) in [ADMIN_VERBOSEJMP(epicenter)]. Possible cause: [explosion_cause]. Last fingerprints: [who_did_it].")
-		log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range], [flame_range]) in [loc_name(epicenter)].  Possible cause: [explosion_cause]. Last fingerprints: [who_did_it_game_log].")
+		message_admins("Explosion with size (Devast: [devastation_range], Heavy: [heavy_impact_range], Light: [light_impact_range], Flame: [flame_range], Flash: [flash_range]) in [ADMIN_VERBOSEJMP(epicenter)]. Possible cause: [explosion_cause]. Last fingerprints: [who_did_it].")
+		log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range], [flame_range], [flash_range]) in [loc_name(epicenter)].  Possible cause: [explosion_cause]. Last fingerprints: [who_did_it_game_log].")
 
 	var/x0 = epicenter.x
 	var/y0 = epicenter.y
@@ -701,10 +701,8 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 		timer = TICK_USAGE_REAL
 		var/list/flame_turf = flameturf
 		flameturf = list()
-		for(var/thing in flame_turf)
-			if(thing)
-				var/turf/T = thing
-				new /obj/effect/hotspot(T) //Mostly for ambience!
+		for(var/turf/T in flame_turf)
+			new /obj/effect/hotspot(T) //Mostly for ambience!
 		cost_flameturf = MC_AVERAGE(cost_flameturf, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
 
 		if (low_turf.len || med_turf.len || high_turf.len)

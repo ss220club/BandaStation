@@ -1,8 +1,8 @@
-import { Feature } from '../base';
+import type { Feature } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const parallax: Feature<string> = {
   name: 'Параллакс (красивый космос)',
-  category: 'ГЕЙМПЛЕЙ',
+  category: 'Геймплей',
   component: FeatureDropdownInput,
 };

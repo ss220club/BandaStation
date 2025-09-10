@@ -38,6 +38,9 @@
 
 #define TOGGLES_DEFAULT_CHAT (CHAT_OOC|CHAT_DEAD|CHAT_PRAYER|CHAT_PULLR|CHAT_GHOSTPDA|CHAT_GHOSTRADIO|CHAT_BANKCARD|CHAT_GHOSTLAWS|CHAT_LOGIN_LOGOUT)
 
+/// File path to the dev preference json file, which is loaded by guests while localhosting.
+#define DEV_PREFS_PATH "config/dev_preferences.json"
+
 #define PARALLAX_INSANE "Безумный"
 #define PARALLAX_HIGH "Высокий"
 #define PARALLAX_MED "Средний"
@@ -52,11 +55,11 @@
 #define PARALLAX_DELAY_MED 1
 #define PARALLAX_DELAY_LOW 2
 
-#define SEC_DEPT_NONE "None"
-#define SEC_DEPT_ENGINEERING "Engineering"
-#define SEC_DEPT_MEDICAL "Medical"
-#define SEC_DEPT_SCIENCE "Science"
-#define SEC_DEPT_SUPPLY "Supply"
+#define SEC_DEPT_NONE "Нет"
+#define SEC_DEPT_ENGINEERING "Инженерный"
+#define SEC_DEPT_MEDICAL "Медицинский"
+#define SEC_DEPT_SCIENCE "Исследовательский"
+#define SEC_DEPT_SUPPLY "Снабжения"
 
 // Playtime tracking system, see jobs_exp.dm
 #define EXP_TYPE_LIVING "Living"

@@ -23,13 +23,13 @@
 	///current shuttle mode
 	var/mode = SHUTTLE_IDLE
 	///time spent in transit (deciseconds). Should not be lower then 10 seconds without editing the animation of the hyperspace ripples.
-	var/callTime = 100
+	var/callTime = 10 SECONDS
 	/// time spent "starting the engines". Also rate limits how often we try to reserve transit space if its ever full of transiting shuttles.
-	var/ignitionTime = 55
+	var/ignitionTime = 5.5 SECONDS
 	/// time spent after arrival before being able to begin ignition
-	var/rechargeTime = 0
+	var/rechargeTime = 0 SECONDS
 	/// time spent after transit 'landing' before actually arriving
-	var/prearrivalTime = 0
+	var/prearrivalTime = 0 SECONDS
 
 	/// The direction the shuttle prefers to travel in, ie what direction the animation will cause it to appear to be traveling in
 	var/preferred_direction = NORTH
@@ -293,6 +293,9 @@
 		return
 
 	if(mode == SHUTTLE_IGNITING && destination == destination_port)
+		return
+
+	if(!canMove())
 		return
 
 	switch(mode)
@@ -703,7 +706,15 @@
 					if(dist_near < closest_dist)
 						source = engines
 						closest_dist = dist_near
-			zlevel_mobs.playsound_local(source, "sound/runtime/hyperspace/[selected_sound].ogg", 100)
+
+			// BANDASTATION ADDITION START - Allow shuttles to override the default sound paths
+			var/custom_sound = get_custom_sound(phase)
+			if(custom_sound)
+				zlevel_mobs.playsound_local(source, custom_sound, 100)
+			else
+				zlevel_mobs.playsound_local(source, "sound/runtime/hyperspace/[selected_sound].ogg", 100)
+			// BANDASTATION ADDITION END - Allow shuttles to override the default sound paths
+
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time

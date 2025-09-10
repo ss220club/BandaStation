@@ -28,6 +28,10 @@
 	var/locked = FALSE
 	/// List of head revs who have already clicked through the warning about not using the console
 	var/static/list/dumb_rev_heads = list()
+	///the remote control device linked
+	var/datum/weakref/remote_ref
+	///may this console be remote controlled?
+	var/may_be_remote_controlled = FALSE
 	/// Authorization request cooldown to prevent request spam to admin staff
 	COOLDOWN_DECLARE(request_cooldown)
 
@@ -99,6 +103,9 @@
 	if(!length(data["locations"]))
 		data["locked"] = TRUE
 		data["status"] = "Locked"
+	if(!mobile_docking_port.canMove())
+		data["locked"] = TRUE
+		data["status"] = "Immobile"
 	return data
 
 /**
@@ -217,7 +224,7 @@
 				return
 			COOLDOWN_START(src, request_cooldown, 1 MINUTES)
 			to_chat(usr, span_notice("Your request has been received by CentCom."))
-			to_chat(GLOB.admins, "<b>SHUTTLE: <font color='#3d5bc3'>[ADMIN_LOOKUPFLW(usr)] (<A href='byond://?_src_=holder;[HrefToken()];move_shuttle=[shuttleId]'>Move Shuttle</a>)(<A href='byond://?_src_=holder;[HrefToken()];unlock_shuttle=[REF(src)]'>Lock/Unlock Shuttle</a>)</b> is requesting to move or unlock the shuttle.</font>")
+			to_chat(get_holders_with_rights(R_ADMIN), "<b>SHUTTLE: <font color='#3d5bc3'>[ADMIN_LOOKUPFLW(usr)] (<A href='byond://?_src_=holder;[HrefToken()];move_shuttle=[shuttleId]'>Move Shuttle</a>)(<A href='byond://?_src_=holder;[HrefToken()];unlock_shuttle=[REF(src)]'>Lock/Unlock Shuttle</a>)</b> is requesting to move or unlock the shuttle.</font>") /// BANDASTATION EDIT: Proper permissions
 			return TRUE
 
 /obj/machinery/computer/shuttle/emag_act(mob/user, obj/item/card/emag/emag_card)

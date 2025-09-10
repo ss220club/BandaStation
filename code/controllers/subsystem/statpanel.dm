@@ -21,17 +21,26 @@ SUBSYSTEM_DEF(statpanels)
 	if (!resumed)
 		num_fires++
 		var/datum/map_config/cached = SSmap_vote.next_map_config
-		global_data = list(
-			"Map: [SSmapping.current_map?.map_name || "Loading..."]",
-			cached ? "Next Map: [cached.map_name]" : null,
-			"Storyteller: [!SSgamemode.secret_storyteller && SSgamemode.current_storyteller ? SSgamemode.current_storyteller.name : "Secret"]", // BANDASTATION ADDITION - STORYTELLER
+
+		if(isnull(SSmapping.current_map))
+			global_data = list("Loading")
+		else if(SSmapping.current_map.feedback_link)
+			global_data = list(list("Map: [SSmapping.current_map.map_name]", " (Feedback)", "action=openLink&link=[SSmapping.current_map.feedback_link]"))
+		else
+			global_data = list("Map: [SSmapping.current_map?.map_name]")
+
+		if(SSmapping.current_map?.mapping_url)
+			global_data += list(list("same_line", " | (View in Browser)", "action=openWebMap"))
+
+		if(cached)
+			global_data += "Next Map: [cached.map_name]"
+
+		global_data += list(
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
-			"Players Connected: [LAZYLEN(GLOB.clients)]", // BANDASTATION ADD
-			"Players in Lobby: [LAZYLEN(GLOB.new_player_list)]", // BANDASTATION ADD
 			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
 			"[SSticker.round_start_time ? "Round Time" : "Lobby Time"]: [ROUND_TIME()]", // BANDASTATION ADD
 			"Station Time: [station_time_timestamp()]",
-			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"
+			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)",
 		)
 
 		if(SSshuttle.emergency)
@@ -101,6 +110,15 @@ SUBSYSTEM_DEF(statpanels)
 		if(MC_TICK_CHECK)
 			return
 
+/*
+ * send_message for the stat panel can be sent 1 of 4 things:
+ * 1- A string entry, to show up as plain text.
+ * 2- An empty string (""), which will translate to a new line, to for a break between lines.
+ * 3- a list, in which the first entry is plain text, the second entry is highlighted text, and the third entry is a link
+ * that clicking the second entry will take you to.
+ * 4- a list with "same_line" as the first entry, which will automatically put it on the line above it,
+ * with the second/third entry matching #3 (text & url), allowing you to have 2 clickable links on one line.
+ */
 /datum/controller/subsystem/statpanels/proc/set_status_tab(client/target)
 	if(!global_data)//statbrowser hasnt fired yet and we were called from immediate_send_stat_data()
 		return
@@ -177,7 +195,7 @@ SUBSYSTEM_DEF(statpanels)
 		list("World Time:", "[world.time]"),
 		list("Globals:", GLOB.stat_entry(), text_ref(GLOB)),
 		list("[config]:", config.stat_entry(), text_ref(config)),
-		list("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%)) (Internal Tick Usage: [round(MAPTICK_LAST_INTERNAL_TICK_USAGE,0.1)]%)"),
+		list("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%))\n  (Internal Tick Usage: [round(MAPTICK_LAST_INTERNAL_TICK_USAGE,0.1)]%)"),
 		list("Master Controller:", Master.stat_entry(), text_ref(Master)),
 		list("Failsafe Controller:", Failsafe.stat_entry(), text_ref(Failsafe)),
 		list("","")

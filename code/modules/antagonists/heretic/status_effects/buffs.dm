@@ -35,7 +35,7 @@
 	button_icon = 'icons/obj/antags/eldritch.dmi'
 	button_icon_state = "crucible_soul"
 
-/datum/action/cancel_crucible_soul/Trigger(trigger_flags)
+/datum/action/cancel_crucible_soul/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return
@@ -215,7 +215,9 @@
 	if(HAS_TRAIT(source, TRAIT_BEING_BLADE_SHIELDED))
 		return
 
+	SEND_SIGNAL(src, COMSIG_BLADE_BARRIER_TRIGGERED)
 	ADD_TRAIT(source, TRAIT_BEING_BLADE_SHIELDED, TRAIT_STATUS_EFFECT(id))
+	addtimer(TRAIT_CALLBACK_REMOVE(source, TRAIT_BEING_BLADE_SHIELDED, TRAIT_STATUS_EFFECT(id)), 0.1 SECONDS)
 
 	var/obj/effect/floating_blade/to_remove = blades[1]
 
@@ -227,8 +229,6 @@
 	)
 
 	qdel(to_remove)
-
-	addtimer(TRAIT_CALLBACK_REMOVE(source, TRAIT_BEING_BLADE_SHIELDED, TRAIT_STATUS_EFFECT(id)), 0.1 SECONDS)
 
 	return SUCCESSFUL_BLOCK
 

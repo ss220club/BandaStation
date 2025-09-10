@@ -2,6 +2,5 @@
 
 #include "code/admin.dm"
 #include "code/discord_link.dm"
-#include "code/donate.dm"
 #include "code/interview.dm"
 #include "code/ss_central.dm"

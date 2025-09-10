@@ -40,7 +40,7 @@
 		/obj/item/melee/energy/sword = 45,
 		/obj/item/knife = 45,
 		/obj/item/shard = 25)
-	time = 16
+	time = 1.6 SECONDS
 	preop_sound = 'sound/items/handling/surgery/scalpel1.ogg'
 	success_sound = 'sound/items/handling/surgery/scalpel2.ogg'
 	failure_sound = 'sound/items/handling/surgery/organ2.ogg'
@@ -70,13 +70,14 @@
 /datum/surgery_step/incise_heart/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(ishuman(target))
 		var/mob/living/carbon/human/target_human = target
-		if (!HAS_TRAIT(target_human, TRAIT_NOBLOOD))
+		if (target_human.can_bleed())
+			var/blood_name = target_human.get_bloodtype()?.get_blood_name() || "Blood"
 			display_results(
 				user,
 				target,
-				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа крови."),
-				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа крови."),
-				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа крови."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
 			)
 			var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 			target_bodypart.adjustBleedStacks(10)
@@ -86,12 +87,13 @@
 /datum/surgery_step/incise_heart/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(ishuman(target))
 		var/mob/living/carbon/human/target_human = target
+		var/blood_name = LOWER_TEXT(target_human.get_bloodtype()?.get_blood_name()) || "blood"
 		display_results(
 			user,
 			target,
 			span_warning("Вы ошибаетесь, совершив слишком глубокий надрез сердца!"),
-			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается кровь!"),
-			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается кровь!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается [blood_name]!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается [blood_name]!"),
 		)
 		var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 		target_bodypart.adjustBleedStacks(10)
@@ -106,7 +108,7 @@
 		TOOL_WIRECUTTER = 35,
 		/obj/item/stack/package_wrap = 15,
 		/obj/item/stack/cable_coil = 5)
-	time = 90
+	time = 9 SECONDS
 	preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
 	success_sound = 'sound/items/handling/surgery/hemostat1.ogg'
 	failure_sound = 'sound/items/handling/surgery/organ2.ogg'

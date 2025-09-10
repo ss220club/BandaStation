@@ -1,6 +1,6 @@
 import { Marked } from 'marked';
 import { markedSmartypants } from 'marked-smartypants';
-import { RefObject, SetStateAction, useEffect, useMemo } from 'react';
+import { type RefObject, type SetStateAction, useEffect, useMemo } from 'react';
 import { Box, Section } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
@@ -14,7 +14,7 @@ import {
   walkTokens,
 } from './helpers';
 import { StampView } from './StampView';
-import { PaperContext, PaperInput, PaperReplacement } from './types';
+import type { PaperContext, PaperInput, PaperReplacement } from './types';
 
 interface CustomToken {
   token: string;
@@ -233,7 +233,7 @@ export function PreviewView(props: PreviewViewProps) {
     const autofillType = button.getAttribute(
       INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE,
     );
-    console.log('Clicked autofillType: ' + autofillType);
+
     if (!autofillType) {
       return;
     }
@@ -241,12 +241,12 @@ export function PreviewView(props: PreviewViewProps) {
     const replacement = usedReplacementsRef.current.find(
       (replacement) => replacement.key === autofillType,
     );
-    console.log('Clicked replacement: ' + replacement);
+
     if (!replacement) {
       return;
     }
-    event.preventDefault();
 
+    event.preventDefault();
     const location = getWriteButtonLocation(button.id);
     act('add_text', {
       text: replacement.value,
@@ -372,7 +372,7 @@ export function PreviewView(props: PreviewViewProps) {
             return marked.parseInline(tokens.text) as string;
           },
           text(tokens) {
-            let result = tokens.text;
+            const result = tokens.text;
             for (const rule of customRules) {
               const match = rule.pattern.exec(result);
               if (match) {
@@ -407,7 +407,6 @@ export function PreviewView(props: PreviewViewProps) {
       const autofillType = button.getAttribute(
         INPUT_FIELD_BUTTON_AUTOFILL_TYPE_ATTRIBUTE,
       );
-      console.log('autofillType: ' + autofillType);
       if (autofillType) {
         button.addEventListener('contextmenu', onAutofillButtonContextMenu);
       }

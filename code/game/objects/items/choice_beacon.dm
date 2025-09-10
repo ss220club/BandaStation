@@ -95,6 +95,11 @@
 			/obj/item/instrument/recorder,
 			/obj/item/instrument/harmonica,
 			/obj/item/instrument/piano_synth/headphones,
+			// BANDASTATION ADDITION BEGIN - Expand instruments
+			/obj/item/instrument/soundhand_bass_guitar,
+			/obj/item/instrument/soundhand_rock_guitar,
+			/obj/item/instrument/drumskit_folded,
+			// BANDASTATION ADDITION END - Expand  instruments
 		)
 		for(var/obj/item/instrument/instrument as anything in possible_instruments)
 			instruments[initial(instrument.name)] = instrument
@@ -148,8 +153,8 @@
 		// cyberimplants range from a nice bonus to fucking broken bullshit so no subtypesof
 		var/list/selectable_types = list(
 			/obj/item/organ/cyberimp/brain/anti_drop,
-			/obj/item/organ/cyberimp/arm/toolset,
-			/obj/item/organ/cyberimp/arm/surgery,
+			/obj/item/organ/cyberimp/arm/toolkit/toolset,
+			/obj/item/organ/cyberimp/arm/toolkit/surgery,
 			/obj/item/organ/cyberimp/chest/thrusters,
 			/obj/item/organ/lungs/cybernetic/tier3,
 			/obj/item/organ/liver/cybernetic/tier3,

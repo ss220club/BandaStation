@@ -324,7 +324,7 @@ DEFINE_BITFIELD(turret_flags, list(
 	balloon_alert(user, "saved to multitool buffer")
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/porta_turret/attackby(obj/item/I, mob/user, params)
+/obj/machinery/porta_turret/attackby(obj/item/I, mob/user, list/modifiers, list/attack_modifiers)
 	if(machine_stat & BROKEN)
 		if(I.tool_behaviour == TOOL_CROWBAR)
 			//If the turret is destroyed, you can remove it with a crowbar to
@@ -681,7 +681,7 @@ DEFINE_BITFIELD(turret_flags, list(
 	button_icon = 'icons/mob/actions/actions_mecha.dmi'
 	button_icon_state = "mech_cycle_equip_off"
 
-/datum/action/turret_toggle/Trigger(trigger_flags)
+/datum/action/turret_toggle/Trigger(mob/clicker, trigger_flags)
 	var/obj/machinery/porta_turret/P = target
 	if(!istype(P))
 		return
@@ -692,7 +692,7 @@ DEFINE_BITFIELD(turret_flags, list(
 	button_icon = 'icons/mob/actions/actions_mecha.dmi'
 	button_icon_state = "mech_eject"
 
-/datum/action/turret_quit/Trigger(trigger_flags)
+/datum/action/turret_quit/Trigger(mob/clicker, trigger_flags)
 	var/obj/machinery/porta_turret/P = target
 	if(!istype(P))
 		return
@@ -996,7 +996,7 @@ DEFINE_BITFIELD(turret_flags, list(
 		to_chat(user, span_notice("You link \the [multi_tool.buffer] with \the [src]."))
 		return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/turretid/attackby(obj/item/attacking_item, mob/user, params)
+/obj/machinery/turretid/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(machine_stat & BROKEN)
 		return
 

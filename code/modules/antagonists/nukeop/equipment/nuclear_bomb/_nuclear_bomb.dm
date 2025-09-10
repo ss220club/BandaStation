@@ -57,7 +57,6 @@ GLOBAL_VAR(station_nuke_source)
 /obj/machinery/nuclearbomb/Initialize(mapload)
 	. = ..()
 	countdown = new(src)
-	GLOB.nuke_list += src // BANDASTATION EDIT - STORYTELLER
 	core = new /obj/item/nuke_core(src)
 	STOP_PROCESSING(SSobj, core)
 	update_appearance()
@@ -69,7 +68,6 @@ GLOBAL_VAR(station_nuke_source)
 	if(!exploding)
 		// If we're not exploding, set the alert level back to normal
 		toggle_nuke_safety()
-	GLOB.nuke_list -= src // BANDASTATION EDIT - STORYTELLER
 	QDEL_NULL(countdown)
 	QDEL_NULL(core)
 	return ..()
@@ -110,7 +108,7 @@ GLOBAL_VAR(station_nuke_source)
 
 	return TRUE
 
-/obj/machinery/nuclearbomb/attackby(obj/item/weapon, mob/user, params)
+/obj/machinery/nuclearbomb/attackby(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
 	if (istype(weapon, /obj/item/disk/nuclear))
 		if(!disk_check(weapon))
 			return TRUE

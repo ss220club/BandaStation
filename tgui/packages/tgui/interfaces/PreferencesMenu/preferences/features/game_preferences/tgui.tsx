@@ -1,50 +1,50 @@
-import { CheckboxInput, FeatureToggle } from '../base';
+import { CheckboxInput, type FeatureToggle } from '../base';
 
 export const tgui_fancy: FeatureToggle = {
   name: 'Включить красивый TGUI',
-  category: 'ИНТЕРФЕЙС',
-  description: 'Окна TGUI будут выглядишь лучше ценой совместимости.',
+  category: 'Интерфейс',
+  description: 'Окна TGUI будут выглядеть лучше, ценой совместимости.',
   component: CheckboxInput,
 };
 
 export const tgui_input: FeatureToggle = {
-  name: 'Ввод: включить TGUI',
-  category: 'ИНТЕРФЕЙС',
-  description: 'Окна ввода будут иметь TGUI.',
+  name: 'Ввод - Включить TGUI',
+  category: 'Интерфейс',
+  description: 'Заменяет стандартный ввод, такой как выбор из списка.',
   component: CheckboxInput,
 };
 
 export const tgui_input_large: FeatureToggle = {
-  name: 'Ввод: большие кнопки',
-  category: 'ИНТЕРФЕЙС',
-  description: 'Менее традиционные, но более функциональные кнопки TGUI.',
+  name: 'Ввод - Большие кнопки',
+  category: 'Интерфейс',
+  description: 'Делает кнопки в окнах ввода TGUI большими.',
   component: CheckboxInput,
 };
 
 export const tgui_input_swapped: FeatureToggle = {
-  name: 'Ввод: инвентировать ввод/отмена',
-  category: 'ИНТЕРФЕЙС',
-  description: 'Менее традиционные, но более функциональные кнопки TGUI.',
+  name: 'Ввод - Поменять местами кнопки',
+  category: 'Интерфейс',
+  description: 'Менее традиционные кнопки в окнах ввода TGUI.',
   component: CheckboxInput,
 };
 
 export const tgui_lock: FeatureToggle = {
-  name: 'TGUI только на главном дисплее',
-  category: 'ИНТЕРФЕЙС',
+  name: 'TGUI - Только на главном дисплее',
+  category: 'Интерфейс',
   description: 'Блокирует местоположение TGUI на главном дисплее.',
   component: CheckboxInput,
 };
 
 export const ui_scale: FeatureToggle = {
-  name: 'Toggle UI scaling',
-  category: 'UI',
-  description: 'If UIs should scale up to match your monitor scaling.',
+  name: 'TGUI - Масштабирование интерфейсов',
+  category: 'Интерфейс',
+  description: 'Должны ли интерфейсы масштабироваться под масштаб в системе?',
   component: CheckboxInput,
 };
 
 export const tgui_say_light_mode: FeatureToggle = {
-  name: 'Говорить: светлая тема',
-  category: 'ИНТЕРФЕЙС',
-  description: 'TGUI поле ввода для разговора будет в светлой теме.',
+  name: 'Окно общения - Светлый режим',
+  category: 'Интерфейс',
+  description: 'Если включено, поле ввода для разговора будет в светлой теме.',
   component: CheckboxInput,
 };

@@ -5,8 +5,8 @@
 	righthand_file = 'icons/mob/inhands/clothing/masks_righthand.dmi'
 	body_parts_covered = HEAD
 	slot_flags = ITEM_SLOT_MASK
-	strip_delay = 40
-	equip_delay_other = 40
+	strip_delay = 4 SECONDS
+	equip_delay_other = 4 SECONDS
 	visor_vars_to_toggle = NONE
 	unique_reskin_changes_base_icon_state = TRUE
 
@@ -19,6 +19,18 @@
 	var/use_radio_beeps_tts = FALSE
 	/// The unique sound effect of dying while wearing this
 	var/unique_death
+	/// Define posibiliaty of mask to be adjusted
+	var/can_be_adjusted = TRUE // BANDASTATION EDIT - Surgery mask fix
+
+// BANDASTATION ADDITION START - Surgery mask fix
+/obj/item/clothing/mask/Initialize(mapload)
+	. = ..()
+	if(!can_be_adjusted)
+		if(islist(actions_types))
+			actions_types -= list(/datum/action/item_action/toggle)
+		else
+			actions_types = list()
+// BANDASTATION ADDITION END - Surgery mask fix
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if((clothing_flags & VOICEBOX_TOGGLABLE))
@@ -35,10 +47,11 @@
 
 /obj/item/clothing/mask/separate_worn_overlays(mutable_appearance/standing, mutable_appearance/draw_target, isinhands, icon_file)
 	. = ..()
-	if(isinhands || !(body_parts_covered & HEAD))
+	if (isinhands || !(body_parts_covered & HEAD))
 		return
-	if(GET_ATOM_BLOOD_DNA_LENGTH(src))
-		. += mutable_appearance('icons/effects/blood.dmi', "maskblood")
+	var/blood_overlay = get_blood_overlay("mask")
+	if (blood_overlay)
+		. += blood_overlay
 
 /obj/item/clothing/mask/update_clothes_damaged_state(damaged_state = CLOTHING_DAMAGED)
 	..()
@@ -48,6 +61,11 @@
 
 //Proc that moves gas/breath masks out of the way, disabling them and allowing pill/food consumption
 /obj/item/clothing/mask/visor_toggling(mob/living/user)
+	// BANDASTATION ADDITION START - Surgery mask fix
+	if(!can_be_adjusted)
+		return
+	// BANDASTATION ADDITION END - Surgery mask fix
+
 	. = ..()
 	if(up)
 		if(adjusted_flags)
@@ -57,7 +75,7 @@
 
 /obj/item/clothing/mask/update_icon_state()
 	. = ..()
-	icon_state = "[base_icon_state || initial(icon_state)][up ? "_up" : ""]"
+	icon_state = "[base_icon_state || initial(post_init_icon_state) || initial(icon_state)][up ? "_up" : ""]"
 
 /**
  * Proc called in lungs.dm to act if wearing a mask with filters, used to reduce the filters durability, return a changed gas mixture depending on the filter status

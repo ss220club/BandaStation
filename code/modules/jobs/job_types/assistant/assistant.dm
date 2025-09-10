@@ -69,6 +69,11 @@ Assistant
 			head = special_hat
 
 /datum/outfit/job/assistant/proc/give_jumpsuit(mob/living/carbon/human/target)
+	/// BANDASTATION EDIT START - Loadout
+	if(uniform)
+		return
+	/// BANDASTATION EDIT END - Loadout
+
 	var/static/jumpsuit_number = 0
 	jumpsuit_number += 1
 

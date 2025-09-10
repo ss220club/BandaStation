@@ -3,6 +3,7 @@
 	"map_name": "Tramstation",
 	"map_path": "map_files/tramstation",
 	"map_file": "tramstation.dmm",
+	"give_players_hooks": 1,
 	"main_floor": 2,
 	"shuttles": {
 		"cargo": "cargo_box",
@@ -27,8 +28,8 @@
 		"Captain": {
 			"special_charter": "asteroid"
 		},
-        "Explorer": {
-            "spawn_positions": 4
-        }
+		"Explorer": {
+			"spawn_positions": 4
+		}
 	}
 }

@@ -15,14 +15,14 @@
 	if(!.)
 		return
 	var/obj/item/seeds/our_seed = our_plant.get_plant_seed()
-	shield_uses = round(our_seed.potency / 95) // BANDASTATION EDIT - Original:  / 20)
+	shield_uses = round(our_seed.potency / 50) // BANDASTATION EDIT - Original:  / 20)
 	//deliver us from evil o melon god
-	if(shield_uses >= 1) // BANDASTATION Addition - No more shield if potency less than 95
+	if(shield_uses >= 1) // BANDASTATION Addition - No more shield if potency less than 50
 		our_plant.AddComponent(/datum/component/anti_magic, \
 			antimagic_flags = MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY, \
 			inventory_flags = ITEM_SLOT_HANDS, \
 			charges = shield_uses, \
-			drain_antimagic = CALLBACK(src, PROC_REF(drain_antimagic)), \
+			block_magic = CALLBACK(src, PROC_REF(drain_antimagic)), \
 			expiration = CALLBACK(src, PROC_REF(expire)), \
 		)
 
@@ -77,7 +77,7 @@
 	return
 
 /// Signal proc for [COMSIG_ITEM_AFTERATTACK] that allows for effects after an attack is done
-/datum/plant_gene/trait/attack/proc/after_plant_attack(obj/item/source, atom/target, mob/user, click_parameters)
+/datum/plant_gene/trait/attack/proc/after_plant_attack(obj/item/source, atom/target, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 	INVOKE_ASYNC(src, PROC_REF(after_attack_effect), source, target, user)
 
@@ -130,7 +130,7 @@
 	name = "Bright Petals"
 	description = "Makes others feel the power on hit."
 
-/datum/plant_gene/trait/attack/sunflower_attack/after_attack_effect(obj/item/our_plant, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/plant_gene/trait/attack/sunflower_attack/after_attack_effect(obj/item/our_plant, atom/target, mob/user, list/modifiers)
 	if(ismob(target))
 		var/mob/target_mob = target
 		user.visible_message("<font color='green'>[user] smacks [target_mob] with [user.p_their()] [our_plant.name]! <font color='orange'><b>FLOWER POWER!</b></font></font>", ignored_mobs = list(target_mob, user))

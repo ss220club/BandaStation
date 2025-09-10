@@ -118,7 +118,7 @@
 			I.forceMove(Tsec)
 	update_appearance()
 
-/obj/structure/bookcase/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/bookcase/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(state == BOOKCASE_UNANCHORED)
 		if(attacking_item.tool_behaviour == TOOL_WRENCH)
 			if(attacking_item.use_tool(src, user, 20, volume=50))
@@ -178,7 +178,7 @@
 			return ..()
 		if(!newname)
 			return
-		name = "bookcase ([sanitize(newname)])"
+		name = "bookcase ([sanitize(newname, apply_ic_filter = TRUE)])" // BANDASTATION EDIT - Sanitize emotes
 		return
 
 	if(attacking_item.tool_behaviour == TOOL_CROWBAR)

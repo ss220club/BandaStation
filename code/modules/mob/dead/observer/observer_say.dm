@@ -58,7 +58,7 @@
 
 	. = say_dead(message)
 
-/mob/dead/observer/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), message_range)
+/mob/dead/observer/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, list/spans, list/message_mods = list(), message_range)
 	. = ..()
 	var/atom/movable/to_follow = speaker
 	if(radio_freq)
@@ -74,8 +74,15 @@
 	if (safe_read_pref(client, /datum/preference/toggle/enable_runechat) && (safe_read_pref(client, /datum/preference/toggle/enable_runechat_non_mobs) || ismob(speaker)))
 		create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose the message, because it's scrambled by default
-	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
+	message = compose_message(speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, spans, message_mods)
 	to_chat(src,
 		html = "[link] [message]",
 		avoid_highlighting = speaker == src)
+
+	// BANDASTATION ADDITION START - TTS
+	if(isnull(message_mods[MODE_CUSTOM_SAY_EMOTE]) && isnull(message_mods[MODE_CUSTOM_SAY_ERASE_INPUT]) && radio_freq != FREQ_ENTERTAINMENT)
+		var/tts_message = message_mods[MODE_TTS_MESSAGE_OVERRIDE] || raw_message
+		speaker.cast_tts(src, tts_message, is_radio = !!radio_freq, tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE), channel_override = radio_freq ? CHANNEL_TTS_RADIO : null)
+	// BANDASTATION ADDITION END - TTS
+
 	return TRUE

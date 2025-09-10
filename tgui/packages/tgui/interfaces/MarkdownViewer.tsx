@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-
+import { Box } from 'tgui-core/components';
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import { sanitizeText } from '../sanitize';
@@ -29,13 +29,13 @@ type MarkdownRendererProps = {
 export const MarkdownRenderer = (props: MarkdownRendererProps) => {
   let { content, sanitize } = props;
 
-  content = marked(content) as string;
+  content = marked(content, { async: false });
   if (sanitize) {
     content = sanitizeText(content, /* advHtml = */ false);
   }
 
-  // eslint-disable-next-line react/no-danger
-  return <div dangerouslySetInnerHTML={{ __html: content }} />;
+  // biome-ignore lint/security/noDangerouslySetInnerHtml: ignore
+  return <Box dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
 MarkdownRenderer.defaultProps = {

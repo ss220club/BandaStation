@@ -43,15 +43,26 @@
 #define CELL_LINE_TABLE_PUG "cell_line_pug_table"
 #define CELL_LINE_TABLE_SLIME "cell_line_slime_table"
 #define CELL_LINE_TABLE_SNAKE "cell_line_snake_table"
+#define CELL_LINE_TABLE_SNAIL "cell_line_snail_table"
 #define CELL_LINE_TABLE_VATBEAST "cell_line_vatbeast_table"
 #define CELL_LINE_TABLE_NETHER "cell_line_nether_table"
 #define CELL_LINE_TABLE_GLUTTON "cell_line_glutton_table"
+#define CELL_LINE_TABLE_CLOWNANA "cell_line_clownana_table"
+#define CELL_LINE_TABLE_LONGFACE "cell_line_longface_table"
 #define CELL_LINE_TABLE_FROG	"cell_line_frog_table"
 #define CELL_LINE_TABLE_AXOLOTL	"cell_line_axolotl_table"
 #define CELL_LINE_TABLE_WALKING_MUSHROOM "cell_line_walking_mushroom_table"
 #define CELL_LINE_TABLE_QUEEN_BEE "cell_line_bee_queen_table"
 #define CELL_LINE_TABLE_BUTTERFLY "cell_line_butterfly_table"
 #define CELL_LINE_TABLE_MEGA_ARACHNID "cell_line_table_mega_arachnid"
+
+//! Biopsy cell line organ types
+#define CELL_LINE_ORGAN_HEART "cell_line_organ_heart"
+#define CELL_LINE_ORGAN_LUNGS "cell_line_organ_lungs"
+#define CELL_LINE_ORGAN_LIVER "cell_line_organ_liver"
+#define CELL_LINE_ORGAN_STOMACH "cell_line_organ_stomach"
+
+#define CELL_LINE_ORGAN_HEART_CURSED "cell_line_organ_heart_cursed"
 
 //! All cell virus types
 #define CELL_VIRUS_TABLE_GENERIC "cell_virus_generic_table"

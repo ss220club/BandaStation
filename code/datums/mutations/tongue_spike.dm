@@ -1,4 +1,4 @@
-/datum/mutation/human/tongue_spike
+/datum/mutation/tongue_spike
 	name = "Tongue Spike"
 	desc = "Позволяет существу добровольно выстрелить своим языком, как смертельным оружием."
 	quality = POSITIVE
@@ -87,7 +87,7 @@
 	if (!QDELETED(tongue_spike)) // This can cause a qdel loop
 		tongue_spike.morph_back()
 
-/datum/mutation/human/tongue_spike/chem
+/datum/mutation/tongue_spike/chem
 	name = "Chem Spike"
 	desc = "Позволяет существу добровольно выстрелить своим языком из биомассы, позволяет передавать химические вещества на большое расстояние."
 	quality = POSITIVE
@@ -159,7 +159,7 @@
 	if(!istype(target, /obj/item/hardened_spike/chem))
 		qdel(src)
 
-/datum/action/send_chems/Trigger(trigger_flags)
+/datum/action/send_chems/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE

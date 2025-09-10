@@ -113,7 +113,7 @@
 	if(prob(25))
 		to_chat(human_user, span_userdanger("Потустороннее присутствие разрывает и распыляет [their_poor_arm.ru_p_yours(ACCUSATIVE)] [their_poor_arm.declent_ru(ACCUSATIVE)], когда вы пытаетесь коснуться дыры в самой ткани реальности!"))
 		their_poor_arm.dismember()
-		forceMove(their_poor_arm, src) // stored for later fishage
+		their_poor_arm.forceMove(src) // stored for later fishage
 	else
 		to_chat(human_user,span_danger("Вы отдёргиваете руку от отверстия, когда мистическая энергия бьется, пытаясь зацепиться за этот мир!"))
 	return TRUE
@@ -141,7 +141,7 @@
 	var/obj/item/bodypart/head/head = locate() in human_user.bodyparts
 	if(head)
 		head.dismember()
-		forceMove(head, src) // stored for later fishage
+		head.forceMove(src) // stored for later fishage
 	else
 		human_user.gib(DROP_ALL_REMAINS)
 	human_user.investigate_log("has died from using telekinesis on a heretic influence.", INVESTIGATE_DEATHS)
@@ -201,7 +201,7 @@
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/effect/heretic_influence/attackby(obj/item/weapon, mob/user, params)
+/obj/effect/heretic_influence/attackby(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return

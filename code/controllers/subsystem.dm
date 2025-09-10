@@ -40,7 +40,7 @@
 	/// Which stage does this subsystem init at. Earlier stages can fire while later stages init.
 	var/init_stage = INITSTAGE_MAIN
 
-	/// This var is set to TRUE after the subsystem has been initialized.
+	/// This var is set to `INITIALIZATION_INNEW_REGULAR` after the subsystem has been initialized.
 	var/initialized = FALSE
 
 	/// Set to 0 to prevent fire() calls, mostly for admin use or subsystems that may be resumed later
@@ -291,7 +291,7 @@
 
 /datum/controller/subsystem/stat_entry(msg)
 	if(can_fire && !(SS_NO_FIRE & flags) && init_stage <= Master.init_stage_completed)
-		msg = "[round(cost,1)]ms|[round(tick_usage,1)]%([round(tick_overrun,1)]%)|[round(ticks,0.1)]\t[msg]"
+		msg = "[round(cost,1)]ms|[round(tick_usage,1)]%([round(tick_overrun,1)]%)|[round(ticks,0.1)] [msg]"
 	else
 		msg = "OFFLINE\t[msg]"
 	return msg

@@ -91,7 +91,7 @@
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/magistrate)
 "x" = (
-/obj/machinery/photocopier,
+/obj/machinery/photocopier/prebuilt,
 /obj/machinery/camera/directional/east{
 	c_tag = "Law Office"
 	},

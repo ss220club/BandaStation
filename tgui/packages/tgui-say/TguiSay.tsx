@@ -1,18 +1,11 @@
 import './styles/main.scss';
 
-import {
-  FormEvent,
-  KeyboardEvent,
-  MouseEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { dragStartHandler } from 'tgui/drag';
 import { isEscape, KEY } from 'tgui-core/keys';
-import { BooleanLike, classes } from 'tgui-core/react';
+import { type BooleanLike, classes } from 'tgui-core/react';
 
-import { Channel, ChannelIterator } from './ChannelIterator';
+import { type Channel, ChannelIterator } from './ChannelIterator';
 import { ChatHistory } from './ChatHistory';
 import { LineLength, RADIO_PREFIXES, WindowSize } from './constants';
 import { getPrefix, windowClose, windowOpen, windowSet } from './helpers';
@@ -28,13 +21,6 @@ type ByondProps = {
   scale: BooleanLike;
 };
 
-const ROWS: Record<keyof typeof WindowSize, number> = {
-  Small: 1,
-  Medium: 2,
-  Large: 3,
-  Width: 1, // not used
-} as const;
-
 export function TguiSay() {
   const innerRef = useRef<HTMLTextAreaElement>(null);
   const channelIterator = useRef(new ChannelIterator());
@@ -48,9 +34,9 @@ export function TguiSay() {
   const [currentPrefix, setCurrentPrefix] = useState<
     keyof typeof RADIO_PREFIXES | null
   >(null);
-  const [size, setSize] = useState(WindowSize.Small);
-  const [maxLength, setMaxLength] = useState(1024);
   const [lightMode, setLightMode] = useState(false);
+  const [maxLength, setMaxLength] = useState(1024);
+  const [size, setSize] = useState(WindowSize.Small);
   const [value, setValue] = useState('');
 
   const position = useRef([window.screenX, window.screenY]);
@@ -100,7 +86,7 @@ export function TguiSay() {
     }
   }
 
-  function handleButtonClick(event: MouseEvent<HTMLButtonElement>): void {
+  function handleButtonClick(event: React.MouseEvent<HTMLButtonElement>): void {
     isDragging.current = true;
 
     setTimeout(() => {
@@ -172,11 +158,11 @@ export function TguiSay() {
     messages.current.channelIncrementMsg(iterator.isVisible());
   }
 
-  function handleInput(event: FormEvent<HTMLTextAreaElement>): void {
+  function handleInput(event: React.FormEvent<HTMLTextAreaElement>): void {
     const iterator = channelIterator.current;
     let newValue = event.currentTarget.value;
 
-    let newPrefix = getPrefix(newValue) || currentPrefix;
+    const newPrefix = getPrefix(newValue) || currentPrefix;
     // Handles switching prefixes
     if (newPrefix && newPrefix !== currentPrefix) {
       setButtonContent(RADIO_PREFIXES[newPrefix]);
@@ -184,20 +170,26 @@ export function TguiSay() {
       newValue = newValue.slice(3);
       iterator.set('Say');
 
-      if (newPrefix === ':b ') {
+      if (newPrefix === ':b ' || newPrefix === ':и ') {
         Byond.sendMessage('thinking', { visible: false });
       }
     }
 
     // Handles typing indicators
-    if (channelIterator.current.isVisible() && newPrefix !== ':b ') {
+    if (
+      channelIterator.current.isVisible() &&
+      newPrefix !== ':b ' &&
+      newPrefix !== ':и '
+    ) {
       messages.current.typingMsg();
     }
 
     setValue(newValue);
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLTextAreaElement>): void {
+  function handleKeyDown(
+    event: React.KeyboardEvent<HTMLTextAreaElement>,
+  ): void {
     if (event.getModifierState('AltGraph')) return;
 
     switch (event.key) {
@@ -230,20 +222,14 @@ export function TguiSay() {
   }
 
   function handleOpen(data: ByondOpen): void {
-    const { channel } = data;
-    const iterator = channelIterator.current;
-    // Catches the case where the modal is already open
-    if (iterator.isSay()) {
-      iterator.set(channel);
-    }
+    channelIterator.current.set(data.channel);
 
-    setButtonContent(iterator.current());
-    windowOpen(iterator.current(), scale.current);
+    setCurrentPrefix(null);
+    setButtonContent(channelIterator.current.current());
 
-    const input = innerRef.current;
-    setTimeout(() => {
-      input?.focus();
-    }, 1);
+    windowOpen(channelIterator.current.current(), scale.current);
+
+    innerRef.current?.focus();
   }
 
   function handleProps(data: ByondProps): void {
@@ -279,32 +265,42 @@ export function TguiSay() {
     }
 
     if (size !== newSize) {
-      setSize(newSize);
       windowSet(newSize, scale.current);
+      setSize(newSize);
     }
   }, [value]);
 
+  const TRANSLATE_ITTERATOR: Record<string, string> = {
+    Say: 'Говор',
+    Whis: 'Шёпот',
+    Radio: 'Радио',
+    Me: 'Эмоц',
+    Admin: 'Админ',
+  };
+
   const theme =
-    (lightMode && 'lightMode') ||
     (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
+    TRANSLATE_ITTERATOR[channelIterator.current.current()] ||
     channelIterator.current.current();
 
+  useEffect(() => {
+    setButtonContent(TRANSLATE_ITTERATOR[buttonContent] || buttonContent);
+  }, [buttonContent]);
+
   return (
-    <>
-      <div
-        className={`window window-${theme} window-${size}`}
-        onMouseDown={dragStartHandler}
-      >
-        {!lightMode && <div className={`shine shine-${theme}`} />}
-      </div>
-      <div
-        className={classes(['content', lightMode && 'content-lightMode'])}
-        style={{
-          zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
-        }}
-      >
+    <div
+      className={classes([
+        'window',
+        `window-${theme}`,
+        lightMode && 'window-light',
+      ])}
+      style={{
+        zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
+      }}
+    >
+      <div className="content">
         <button
-          className={`button button-${theme}`}
+          className="button"
           onMouseDown={handleButtonClick}
           onMouseUp={handleButtonRelease}
           type="button"
@@ -313,16 +309,15 @@ export function TguiSay() {
         </button>
         <textarea
           autoCorrect="off"
-          className={`textarea textarea-${theme}`}
+          className="textarea"
           maxLength={maxLength}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
           ref={innerRef}
           spellCheck={false}
-          rows={ROWS[size] || 1}
           value={value}
         />
       </div>
-    </>
+    </div>
   );
 }

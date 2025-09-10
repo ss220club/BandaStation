@@ -13,7 +13,7 @@ import { NEW_ACCOUNT_AGE, NEW_ACCOUNT_NOTICE, sortTypes } from './constants';
 import { Filters } from './Filters';
 import { getConditionColor, getPingColor, numberToDays } from './helpers';
 import { ShowPing } from './Ping';
-import { WhoData } from './types';
+import type { WhoData } from './types';
 
 export function UserInfo(props) {
   const { act, data } = useBackend<WhoData>();
@@ -195,57 +195,62 @@ function ClientsTable(props) {
 function ClientsCompact(props) {
   const { act, data } = useBackend<WhoData>();
   const { clients, sortType, setSubjectRef } = props;
-  return clients.map((client) => (
-    <Button
-      key={client.key}
-      color={
-        sortType === 'Пинг'
-          ? getPingColor(client.ping.avgPing)
-          : getConditionColor(client.status?.state)
-      }
-      tooltip={
-        (sortType !== 'Пинг' || client.accountAge < NEW_ACCOUNT_AGE) && (
-          <Stack vertical align="center">
-            {client.accountAge < NEW_ACCOUNT_AGE && (
-              <Stack.Item>{NEW_ACCOUNT_NOTICE}</Stack.Item>
-            )}
-            {sortType !== 'Пинг' && (
-              <Stack.Item>
-                <ShowPing user={client} />
-              </Stack.Item>
-            )}
-          </Stack>
-        )
-      }
-      tooltipPosition={'bottom-start'}
-      onClick={() => {
-        if (!data.user.admin) {
-          return;
-        }
-        setSubjectRef(client.mobRef);
-        act('show_more_info', { ref: client.mobRef });
-      }}
-      onContextMenu={(e) => {
-        if (!data.user.admin) {
-          return;
-        }
-        e.preventDefault();
-        act('follow', { ref: client.mobRef });
-      }}
-    >
-      <Stack align="center">
-        {client.accountAge < NEW_ACCOUNT_AGE && <Icon name="baby" />}
-        <Stack.Item>{client.key}</Stack.Item>
-        {sortType === 'Пинг' && (
-          <Stack.Item>{Math.round(client.ping.avgPing)}ms</Stack.Item>
-        )}
-        {sortType === 'Возраст аккаунта' && (
-          <Stack.Item>{numberToDays(client.accountAge)}</Stack.Item>
-        )}
-        {sortType === 'Версия BYOND' && (
-          <Stack.Item>{client.byondVersion}</Stack.Item>
-        )}
-      </Stack>
-    </Button>
-  ));
+  return (
+    <Stack wrap g={0.5}>
+      {clients.map((client) => (
+        <Stack.Item key={client.key}>
+          <Button
+            color={
+              sortType === 'Пинг'
+                ? getPingColor(client.ping.avgPing)
+                : getConditionColor(client.status?.state)
+            }
+            tooltip={
+              (sortType !== 'Пинг' || client.accountAge < NEW_ACCOUNT_AGE) && (
+                <Stack vertical align="center">
+                  {client.accountAge < NEW_ACCOUNT_AGE && (
+                    <Stack.Item>{NEW_ACCOUNT_NOTICE}</Stack.Item>
+                  )}
+                  {sortType !== 'Пинг' && (
+                    <Stack.Item>
+                      <ShowPing user={client} />
+                    </Stack.Item>
+                  )}
+                </Stack>
+              )
+            }
+            tooltipPosition={'bottom-start'}
+            onClick={() => {
+              if (!data.user.admin) {
+                return;
+              }
+              setSubjectRef(client.mobRef);
+              act('show_more_info', { ref: client.mobRef });
+            }}
+            onContextMenu={(e) => {
+              if (!data.user.admin) {
+                return;
+              }
+              e.preventDefault();
+              act('follow', { ref: client.mobRef });
+            }}
+          >
+            <Stack align="center">
+              {client.accountAge < NEW_ACCOUNT_AGE && <Icon name="baby" />}
+              <Stack.Item>{client.key}</Stack.Item>
+              {sortType === 'Пинг' && (
+                <Stack.Item>{Math.round(client.ping.avgPing)}ms</Stack.Item>
+              )}
+              {sortType === 'Возраст аккаунта' && (
+                <Stack.Item>{numberToDays(client.accountAge)}</Stack.Item>
+              )}
+              {sortType === 'Версия BYOND' && (
+                <Stack.Item>{client.byondVersion}</Stack.Item>
+              )}
+            </Stack>
+          </Button>
+        </Stack.Item>
+      ))}
+    </Stack>
+  );
 }

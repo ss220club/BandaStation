@@ -119,7 +119,7 @@
 		return ITEM_INTERACT_SUCCESS
 	return ..()
 
-/obj/machinery/camera/attackby(obj/item/attacking_item, mob/living/user, params)
+/obj/machinery/camera/attackby(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(camera_construction_state != CAMERA_STATE_FINISHED || panel_open)
 		if(attacking_item.tool_behaviour == TOOL_ANALYZER)
 			if(!isXRay(TRUE)) //don't reveal it was already upgraded if was done via MALF AI Upgrade Camera Network ability
@@ -173,8 +173,8 @@
 					return
 
 				itemname = computer.name
-				itemname = sanitize(itemname)
-				info = sanitize(info)
+				itemname = sanitize(itemname, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
+				info = sanitize(info, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 				to_chat(user, span_notice("You hold \the [itemname] up to the camera..."))
 				user.log_talk(itemname, LOG_GAME, log_globally=TRUE, tag="Pressed to camera")
 				user.changeNext_move(CLICK_CD_MELEE)
@@ -189,9 +189,9 @@
 						ai.last_tablet_note_seen = "<HTML><HEAD><TITLE>[itemname]</TITLE></HEAD><BODY><TT>[info]</TT></BODY></HTML>"
 
 						if(user.name == "Unknown")
-							to_chat(ai, "[span_name(user)] holds <a href='byond://?_src_=usr;show_tablet=1;'>\a [itemname]</a> up to one of your cameras ...")
+							to_chat(ai, "[span_name(user)] holds <a href='byond://?_src_=usr;show_tablet_note=1;'>\a [itemname]</a> up to one of your cameras ...")
 						else
-							to_chat(ai, "<b><a href='byond://?src=[REF(ai)];track=[html_encode(user.name)]'>[user]</a></b> holds <a href='byond://?_src_=usr;last_shown_paper=1;'>\a [itemname]</a> up to one of your cameras ...")
+							to_chat(ai, "<b><a href='byond://?src=[REF(ai)];track=[html_encode(user.name)]'>[user]</a></b> holds <a href='byond://?_src_=usr;show_tablet_note=1;'>\a [itemname]</a> up to one of your cameras ...")
 						continue
 
 					if (potential_viewer.client?.eye == src)
@@ -208,7 +208,7 @@
 				last_shown_paper = paper.copy(paper.type, null)
 
 				// Then sanitise the name because we're putting it directly in chat later.
-				var/item_name = sanitize(last_shown_paper.name)
+				var/item_name = sanitize(last_shown_paper.name, apply_ic_filter = TRUE) // BANDASTATION EDIT - Sanitize emotes
 
 				// Start the process of holding it up to the camera.
 				to_chat(user, span_notice("You hold \the [item_name] up to the camera..."))

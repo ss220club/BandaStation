@@ -85,12 +85,12 @@
 /turf/closed/mineral/proc/Change_Ore(ore_type, random = 0)
 	if(random)
 		mineralAmt = rand(1, 5)
-	if(ispath(ore_type, /obj/item/stack/ore)) //If it has a scan_state, switch to it
+	if(ispath(ore_type, /obj/item/stack/ore)) // If it has a scan_state, switch to it
 		var/obj/item/stack/ore/the_ore = ore_type
 		scan_state = initial(the_ore.scan_state) // I SAID. SWITCH. TO. IT.
 		mineralType = ore_type // Everything else assumes that this is typed correctly so don't set it to non-ores thanks.
 	if(ispath(ore_type, /obj/item/boulder))
-		scan_state = "rock_Boulder" //Yes even the lowly boulder has a scan state
+		scan_state = "rock_boulder" // Yes even the lowly boulder has a scan state
 		spawned_boulder = /obj/item/boulder/gulag_expanded
 
 /**
@@ -160,7 +160,7 @@
 	return ..()
 
 
-/turf/closed/mineral/attackby(obj/item/I, mob/user, params)
+/turf/closed/mineral/attackby(obj/item/I, mob/user, list/modifiers)
 	if (!ISADVANCEDTOOLUSER(user))
 		to_chat(usr, span_warning("You don't have the dexterity to do this!"))
 		return
@@ -547,7 +547,7 @@
 
 /turf/closed/mineral/iron
 	mineralType = /obj/item/stack/ore/iron
-	scan_state = "rock_Iron"
+	scan_state = "rock_iron"
 
 /turf/closed/mineral/iron/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -567,7 +567,7 @@
 
 /turf/closed/mineral/uranium
 	mineralType = /obj/item/stack/ore/uranium
-	scan_state = "rock_Uranium"
+	scan_state = "rock_uranium"
 
 /turf/closed/mineral/uranium/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -577,7 +577,7 @@
 
 /turf/closed/mineral/diamond
 	mineralType = /obj/item/stack/ore/diamond
-	scan_state = "rock_Diamond"
+	scan_state = "rock_diamond"
 
 /turf/closed/mineral/diamond/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -597,7 +597,7 @@
 
 /turf/closed/mineral/gold
 	mineralType = /obj/item/stack/ore/gold
-	scan_state = "rock_Gold"
+	scan_state = "rock_gold"
 
 /turf/closed/mineral/gold/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -607,7 +607,7 @@
 
 /turf/closed/mineral/silver
 	mineralType = /obj/item/stack/ore/silver
-	scan_state = "rock_Silver"
+	scan_state = "rock_silver"
 
 /turf/closed/mineral/silver/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -622,7 +622,7 @@
 
 /turf/closed/mineral/titanium
 	mineralType = /obj/item/stack/ore/titanium
-	scan_state = "rock_Titanium"
+	scan_state = "rock_titanium"
 
 /turf/closed/mineral/titanium/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -632,7 +632,7 @@
 
 /turf/closed/mineral/plasma
 	mineralType = /obj/item/stack/ore/plasma
-	scan_state = "rock_Plasma"
+	scan_state = "rock_plasma"
 
 /turf/closed/mineral/plasma/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -653,7 +653,7 @@
 /turf/closed/mineral/bananium
 	mineralType = /obj/item/stack/ore/bananium
 	mineralAmt = 3
-	scan_state = "rock_Bananium"
+	scan_state = "rock_bananium"
 
 /turf/closed/mineral/bananium/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -664,7 +664,7 @@
 /turf/closed/mineral/bscrystal
 	mineralType = /obj/item/stack/ore/bluespace_crystal
 	mineralAmt = 1
-	scan_state = "rock_BScrystal"
+	scan_state = "rock_bscrystal"
 
 /turf/closed/mineral/bscrystal/volcanic
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -676,6 +676,11 @@
 	turf_type = /turf/open/misc/asteroid/basalt
 	baseturfs = /turf/open/misc/asteroid/basalt
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
+/turf/closed/mineral/volcanic/airless
+	turf_type = /turf/open/misc/asteroid/basalt/airless
+	baseturfs = /turf/open/misc/asteroid/basalt/airless
+	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/closed/mineral/volcanic/lava_land_surface
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
@@ -767,7 +772,7 @@
 /turf/closed/mineral/gibtonite
 	mineralAmt = 1
 	MAP_SWITCH(, icon_state = "rock_Gibtonite_inactive")
-	scan_state = "rock_Gibtonite"
+	scan_state = "rock_gibtonite"
 	var/det_time = 8 //Countdown till explosion, but also rewards the player for how close you were to detonation when you defuse it
 	var/stage = GIBTONITE_UNSTRUCK //How far into the lifecycle of gibtonite we are
 	var/activated_ckey = null //These are to track who triggered the gibtonite deposit for logging purposes
@@ -778,7 +783,7 @@
 	det_time = rand(8,10) //So you don't know exactly when the hot potato will explode
 	. = ..()
 
-/turf/closed/mineral/gibtonite/attackby(obj/item/attacking_item, mob/living/user, params)
+/turf/closed/mineral/gibtonite/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
 	var/previous_stage = stage
 	if(istype(attacking_item, /obj/item/goliath_infuser_hammer) && stage == GIBTONITE_ACTIVE)
 		user.visible_message(span_notice("[user] digs [attacking_item] to [src]..."), span_notice("Your tendril hammer instictively digs and wraps around [src] to stop it..."))
@@ -872,6 +877,11 @@
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	defer_change = TRUE
 
+/turf/closed/mineral/gibtonite/volcanic/airless
+	turf_type = /turf/open/misc/asteroid/basalt
+	baseturfs = /turf/open/misc/asteroid/basalt
+	initial_gas_mix = AIRLESS_ATMOS
+
 /turf/closed/mineral/gibtonite/ice
 	MAP_SWITCH(, icon_state = "icerock_Gibtonite_inactive")
 	icon = MAP_SWITCH('icons/turf/walls/icerock_wall.dmi', 'icons/turf/mining.dmi')
@@ -898,7 +908,7 @@
 	base_icon_state = "rock_wall"
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
 
-/turf/closed/mineral/strong/attackby(obj/item/I, mob/user, params)
+/turf/closed/mineral/strong/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!ishuman(user))
 		to_chat(usr, span_warning("Only a more advanced species could break a rock such as this one!"))
 		return FALSE

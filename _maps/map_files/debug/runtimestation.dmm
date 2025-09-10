@@ -4,10 +4,10 @@
 /area/space)
 "ab" = (
 /obj/structure/lattice,
-/turf/open/space,
+/turf/open/space/basic,
 /area/space/nearstation)
 "ac" = (
-/turf/open/space,
+/turf/open/space/basic,
 /area/space/nearstation)
 "ad" = (
 /obj/effect/turf_decal/stripes/line,
@@ -17,7 +17,7 @@
 "ae" = (
 /obj/structure/lattice,
 /obj/structure/grille,
-/turf/open/space,
+/turf/open/space/basic,
 /area/space/nearstation)
 "af" = (
 /obj/effect/turf_decal/stripes/line{
@@ -48,12 +48,12 @@
 /area/station/engineering/atmos)
 "an" = (
 /obj/structure/lattice/catwalk,
-/turf/open/space,
+/turf/open/space/basic,
 /area/space/nearstation)
 "ao" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable,
-/turf/open/space,
+/turf/open/space/basic,
 /area/space/nearstation)
 "ap" = (
 /obj/structure/closet/secure_closet/engineering_electrical{
@@ -269,7 +269,7 @@
 	pixel_x = 6;
 	pixel_y = -6
 	},
-/obj/item/card/id/advanced/chameleon,
+/obj/item/card/id/advanced/chameleon/elite,
 /obj/item/card/id/advanced/gold/captains_spare{
 	pixel_x = -6;
 	pixel_y = 6
@@ -877,9 +877,6 @@
 	},
 /turf/open/space/basic,
 /area/space)
-"fg" = (
-/turf/open/space,
-/area/space)
 "fh" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -1114,10 +1111,6 @@
 /obj/item/paper/guides/jobs/security/labor_camp,
 /turf/open/floor/iron,
 /area/station/security/brig)
-"gW" = (
-/obj/effect/spawner/structure/window/reinforced,
-/turf/closed/wall/r_wall,
-/area/station/engineering/gravity_generator)
 "hm" = (
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/unlocked,
@@ -1885,7 +1878,7 @@
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "DW" = (
-/obj/machinery/computer/scan_consolenew{
+/obj/machinery/computer/dna_console{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/blue{
@@ -2538,7 +2531,7 @@
 /obj/machinery/atmospherics/components/unary/passive_vent/layer2{
 	dir = 8
 	},
-/turf/open/space,
+/turf/open/space/basic,
 /area/space/nearstation)
 "TY" = (
 /obj/machinery/button/door/directional/south{
@@ -6686,7 +6679,7 @@ dZ
 cN
 Tt
 bL
-fg
+aa
 aa
 aa
 aa
@@ -6778,7 +6771,7 @@ dL
 cN
 dd
 bL
-fg
+aa
 aa
 aa
 aa
@@ -6870,7 +6863,7 @@ dL
 cN
 Tt
 bL
-fg
+aa
 aa
 aa
 aa
@@ -6962,7 +6955,7 @@ dL
 cN
 Tt
 Rb
-fg
+aa
 aa
 aa
 aa
@@ -7054,7 +7047,7 @@ dL
 cN
 Tt
 Rb
-fg
+aa
 aa
 aa
 bs
@@ -7146,7 +7139,7 @@ cZ
 cN
 Tt
 Rb
-fg
+aa
 aa
 aa
 aa
@@ -7945,7 +7938,7 @@ aa
 aa
 aa
 ak
-gW
+ak
 Lb
 aX
 Qi
@@ -8770,9 +8763,9 @@ aa
 aa
 aa
 aa
-fg
-fg
-fg
+aa
+aa
+aa
 aI
 af
 aX

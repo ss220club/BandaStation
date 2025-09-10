@@ -36,3 +36,56 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "hardsuit0-sec"
+
+// MARK: ERT
+/obj/item/clothing/head/helmet/plate/crusader/ert
+	name = "ERT crusader's hood"
+	desc = "Усовершенствованный капюшон для крестовых походов против ереси, состоящий из освященного нанометалла и ткани. Обеспечивает очень хорошую защиту от еретиков и нечисти."
+	resistance_flags = FIRE_PROOF
+
+/obj/item/clothing/head/helmet/ntci_helmet
+	name = "tactical helmet"
+	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "ntci_helmet"
+	base_icon_state = "ntci_helmet"
+	armor_type = /datum/armor/pmc
+	clothing_flags = STACKABLE_HELMET_EXEMPT
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	hair_mask = /datum/hair_mask/standard_hat_middle
+	flags_inv = null
+	dog_fashion = null
+	sound_vary = TRUE
+	equip_sound = 'sound/items/handling/helmet/helmet_equip1.ogg'
+	pickup_sound = 'sound/items/handling/helmet/helmet_pickup1.ogg'
+	drop_sound = 'sound/items/handling/helmet/helmet_drop1.ogg'
+
+/obj/item/clothing/head/helmet/ntci_helmet/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/seclite_attachable, light_icon_state = "flight")
+
+// MARK: USSP
+/obj/item/clothing/head/helmet/marine/ussp_officer_kaska
+	name = "komandir kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_command"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	base_icon_state = "ussp_command"
+
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska
+	name = "heavy kaska"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_security"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	base_icon_state = "ussp_security"
+
+/obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
+	icon_state = "ussp_medic"
+	base_icon_state = "ussp_medic"
+
+/obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
+	name = "OMON helmet"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_riot"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'

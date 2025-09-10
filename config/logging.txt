@@ -29,6 +29,9 @@ LOG_ECON
 ## log emotes
 LOG_EMOTE
 
+## log ghost polling
+LOG_GHOST_POLL
+
 ## log game actions (start of round, results, etc.)
 LOG_GAME
 
@@ -101,6 +104,3 @@ LOG_WORLD_TOPIC
 
 ## log manual target zone switching
 LOG_ZONE_SWITCH
-
-## log storyteller
-# LOG_STORYTELLER

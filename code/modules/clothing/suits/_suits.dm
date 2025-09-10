@@ -33,15 +33,16 @@
 		return
 
 	var/obj/item/clothing/accessory/displayed = undershirt.attached_accessories[1]
-	if(displayed.above_suit)
+	if(displayed.above_suit && undershirt.accessory_overlay)
 		. += undershirt.accessory_overlay
 
 /obj/item/clothing/suit/separate_worn_overlays(mutable_appearance/standing, mutable_appearance/draw_target, isinhands = FALSE, icon_file)
 	. = ..()
-	if(isinhands)
+	if (isinhands)
 		return
-	if(GET_ATOM_BLOOD_DNA_LENGTH(src))
-		. += mutable_appearance('icons/effects/blood.dmi', "[blood_overlay_type]blood")
+	var/blood_overlay = get_blood_overlay(blood_overlay_type)
+	if (blood_overlay)
+		. += blood_overlay
 
 /obj/item/clothing/suit/update_clothes_damaged_state(damaged_state = CLOTHING_DAMAGED)
 	..()

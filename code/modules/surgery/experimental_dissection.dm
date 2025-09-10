@@ -117,7 +117,7 @@
 	. = ..()
 	. += span_notice("Это даст [value] очков исследований.")
 
-/obj/item/research_notes/attackby(obj/item/attacking_item, mob/living/user, params)
+/obj/item/research_notes/attackby(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(istype(attacking_item, /obj/item/research_notes))
 		var/obj/item/research_notes/notes = attacking_item
 		value = value + notes.value

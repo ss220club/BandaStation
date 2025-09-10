@@ -2,7 +2,6 @@
 	if(!client)
 		return
 
-	SStitle.show_title_screen_to(client) // BANDASTATION ADDITION - HTML Title Screen
 	if(CONFIG_GET(flag/use_exp_tracking))
 		client?.set_exp_from_db()
 		client?.set_db_player_flags()
@@ -22,7 +21,10 @@
 		if (required_living_minutes >= living_minutes)
 			client.interviewee = TRUE
 
-	check_whitelist_or_make_interviewee() // BANDASTATION Add
+	// BANDASTATION ADDITION - START
+	check_whitelist_or_make_interviewee()
+	SStitle.show_title_screen_to(client)
+	// BANDASTATION ADDITION - END
 	. = ..()
 	if(!. || !client)
 		return FALSE

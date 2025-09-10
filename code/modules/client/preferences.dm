@@ -101,8 +101,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		middleware += new middleware_type(src)
 
 	if(IS_CLIENT_OR_MOCK(parent))
-		load_and_save = !is_guest_key(parent.key)
-		load_path(parent.ckey)
+		if(is_guest_key(parent.key))
+			if(parent.is_localhost())
+				path = DEV_PREFS_PATH // guest + locallost = dev instance, load dev preferences if possible
+			else
+				load_and_save = FALSE // guest + not localhost = guest on live, don't save anything
+		else
+			load_path(parent.ckey) // not guest = load their actual savefile
 		if(load_and_save && !fexists(path))
 			try_savefile_type_migration()
 
@@ -134,6 +139,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// There used to be code here that readded the preview view if you "rejoined"
 	// I'm making the assumption that ui close will be called whenever a user logs out, or loses a window
 	// If this isn't the case, kill me and restore the code, thanks
+
+	// We need IconForge and the assets to be ready before allowing the menu to open
+	if(SSearly_assets.initialized != INITIALIZATION_INNEW_REGULAR)
+		return
 
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -260,6 +269,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				return FALSE
 
 			return TRUE
+		// BANDASTATION ADDITION - START
+		if("change_preferences_window")
+			if(current_window == PREFERENCE_TAB_CHARACTER_PREFERENCES)
+				current_window = PREFERENCE_TAB_GAME_PREFERENCES
+			else
+				current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES
+			update_static_data(ui.user)
+			ui_interact(ui.user)
+			return TRUE
+		// BANDASTATION ADDITION - END
 
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
 		var/delegation = preference_middleware.action_delegations[action]
@@ -560,5 +579,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		to_chat(parent, span_warning("There's been a connection failure while trying to check the status of your BYOND membership. Reconnecting may fix the issue, or BYOND could be experiencing downtime."))
 
 	unlock_content = !!byond_member
-	if(unlock_content)
-		max_save_slots = 8
+	// BANDASTATION REMOVE - Start
+	// if(unlock_content)
+	// 	max_save_slots = 8
+	// BANDASTATION REMOVE - End

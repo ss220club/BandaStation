@@ -17,6 +17,12 @@
     word-wrap: break-word;
   }
 
+  &__TextArea {
+    height: 100%;
+    width: 100%;
+    border: none;
+  }
+
   &__Hints {
     overflow: hidden auto;
     scroll-padding: var(--space-m);

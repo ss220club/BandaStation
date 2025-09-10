@@ -1,3 +1,5 @@
+#define DELAM_MAX_DEVASTATION 17.5
+
 // These are supposed to be discrete effects so we can tell at a glance what does each override
 // of [/datum/sm_delam/proc/delaminate] does.
 // Please keep them discrete and give them proper, descriptive function names.
@@ -25,7 +27,8 @@
 			continue
 
 		//Hilariously enough, running into a closet should make you get hit the hardest.
-		var/hallucination_amount = max(100 SECONDS, min(600 SECONDS, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(victim, sm) + 1))))
+		//duration between min and max, calculated by distance from the supermatter and size of the delam explosion
+		var/hallucination_amount = LERP(DETONATION_HALLUCINATION_MIN, DETONATION_HALLUCINATION_MAX, 1 - get_dist(victim, sm) / 128) * LERP(0.75, 1.25, calculate_explosion(sm) * 0.5 / DELAM_MAX_DEVASTATION)
 		victim.adjust_hallucinations(hallucination_amount)
 
 	for(var/mob/victim as anything in GLOB.player_list)
@@ -75,19 +78,19 @@
 
 /// Explodes
 /datum/sm_delam/proc/effect_explosion(obj/machinery/power/supermatter_crystal/sm)
-	var/explosion_power = sm.explosion_power
-	var/power_scaling = sm.gas_heat_power_generation
 	var/turf/sm_turf = get_turf(sm)
-	//Dear mappers, balance the sm max explosion radius to 17.5, 37, 39, 41
 	explosion(origin = sm_turf,
-		devastation_range = explosion_power * max(power_scaling, 0.205) * 0.5,
-		heavy_impact_range = explosion_power * max(power_scaling, 0.205) + 2,
-		light_impact_range = explosion_power * max(power_scaling, 0.205) + 4,
-		flash_range = explosion_power * max(power_scaling, 0.205) + 6,
+		devastation_range = calculate_explosion(sm) * 0.5, // max 17.5
+		heavy_impact_range = calculate_explosion(sm) + 2, // max 37
+		light_impact_range = calculate_explosion(sm) + 4, // max 39
+		flash_range = calculate_explosion(sm) + 6, //max 41
 		adminlog = TRUE,
 		ignorecap = TRUE
 	)
 	return TRUE
+
+/datum/sm_delam/proc/calculate_explosion(obj/machinery/power/supermatter_crystal/sm)
+	return sm.explosion_power * max(sm.gas_heat_power_generation, 0.205)
 
 /// Spawns a scrung and eat the SM.
 /datum/sm_delam/proc/effect_singulo(obj/machinery/power/supermatter_crystal/sm)
@@ -178,29 +181,29 @@
 /// Spawn an evacuation rift for people to go through.
 /datum/sm_delam/proc/effect_evac_rift_start()
 	var/obj/cascade_portal/rift = new /obj/cascade_portal(get_turf(pick(GLOB.generic_event_spawns)))
-	priority_announce("We have been hit by a sector-wide electromagnetic pulse. All of our systems are heavily damaged, including those \
-		required for shuttle navigation. We can only reasonably conclude that a supermatter cascade is occurring on or near your station.\n\n\
-		Evacuation is no longer possible by conventional means; however, we managed to open a rift near the [get_area_name(rift)]. \
-		All personnel are hereby required to enter the rift by any means available.\n\n\
-		[Gibberish("Retrieval of survivors will be conducted upon recovery of necessary facilities.", FALSE, 5)] \
-		[Gibberish("Good luck--", FALSE, 25)]")
+	priority_announce("Мы пострадали от электромагнитного импульса в масштабах всего сектора. Все наши системы сильно повреждены, включая те, \
+		что необходимы для навигации шаттла. Мы можем лишь сделать обоснованный вывод, что на вашей станции или вблизи нее происходит каскад суперматерии.\n\n\
+		Эвакуация обычными средствами невозможна, однако нам удалось открыть разлом рядом с [get_area_name(rift)] \
+		Всем сотрудникам предписывается войти в разлом любым доступным способом.\n\n\
+		[Gibberish("Извлечение выживших будет проводиться после восстановления необходимых средств.", FALSE, 5)] \
+		[Gibberish("Удачи--", FALSE, 25)]")
 	return rift
 
 /// Announce the destruction of the rift and end the round.
 /datum/sm_delam/proc/effect_evac_rift_end()
-	priority_announce("[Gibberish("The rift has been destroyed, we can no longer help you.", FALSE, 5)]")
+	priority_announce("[Gibberish("Разлом был уничтожен, мы больше не можем вам помочь.", FALSE, 5)]")
 
 	sleep(25 SECONDS)
 
-	priority_announce("Reports indicate formation of crystalline seeds following resonance shift event. \
-		Rapid expansion of crystal mass proportional to rising gravitational force. \
-		Matter collapse due to gravitational pull foreseeable.",
-		"Nanotrasen Star Observation Association")
+	priority_announce("Отчеты указывают на образование кристаллических семян после события резонансного сдвига. \
+		Быстрое расширение кристаллической массы пропорционально растущей гравитационной силе. \
+		Предвидится коллапс материи из-за гравитационного притяжения.",
+		"Ассоциация Обсерваторий Нанотрейзен")
 
 	sleep(25 SECONDS)
 
-	priority_announce("[Gibberish("All attempts at evacuation have now ceased, and all assets have been retrieved from your sector.\n \
-		To the remaining survivors of [station_name()], farewell.", FALSE, 5)]")
+	priority_announce("[Gibberish("Все попытки эвакуации прекращены, все активы вывезены из вашего сектора.\n \
+		Тем, кто остался в живых на [station_name()] - прощайте.", FALSE, 5)]")
 
 	if(SSshuttle.emergency.mode == SHUTTLE_ESCAPE)
 		// special message for hijacks
@@ -228,3 +231,5 @@
 			spawn_location = pick_n_take(possible_spawns)
 		while(get_dist(spawn_location, avoid) < 30)
 		new /obj/crystal_mass(get_turf(spawn_location))
+
+#undef DELAM_MAX_DEVASTATION

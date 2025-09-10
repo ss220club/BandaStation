@@ -105,12 +105,13 @@
 
 /obj/item/clothing/under/separate_worn_overlays(mutable_appearance/standing, mutable_appearance/draw_target, isinhands = FALSE, icon_file)
 	. = ..()
-	if(isinhands)
+	if (isinhands)
 		return
-	if(GET_ATOM_BLOOD_DNA_LENGTH(src))
-		. += mutable_appearance('icons/effects/blood.dmi', "uniformblood")
+	var/blood_overlay = get_blood_overlay("uniform")
+	if (blood_overlay)
+		. += blood_overlay
 
-/obj/item/clothing/under/attackby(obj/item/attacking_item, mob/user, params)
+/obj/item/clothing/under/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(repair_sensors(attacking_item, user))
 		return TRUE
 
@@ -288,14 +289,15 @@
 
 	LAZYADD(attached_accessories, accessory)
 	accessory.forceMove(src)
+
+	if(isnull(accessory_overlay))
+		create_accessory_overlay()
+
 	// Allow for accessories to react to the acccessory list now
 	accessory.successful_attach(src)
 
 	if(user && attach_message)
 		balloon_alert(user, "accessory attached")
-
-	if(isnull(accessory_overlay))
-		create_accessory_overlay()
 
 	update_appearance()
 	return TRUE
@@ -319,10 +321,11 @@
 
 	// Remove it from the list before detaching
 	LAZYREMOVE(attached_accessories, removed)
-	removed.detach(src)
 
 	if(isnull(accessory_overlay) && LAZYLEN(attached_accessories))
 		create_accessory_overlay()
+
+	removed.detach(src)
 
 	update_appearance()
 

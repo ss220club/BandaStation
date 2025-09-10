@@ -1,34 +1,33 @@
 #define BASE_LOADOUT_POINTS 5
-#define ADD_LOADOUT_POINTS 3
+#define LOADOUT_POINTS_PER_DONATION_LEVEL 3
+#define BASE_SAVE_SLOTS 5
+#define MAX_SAVE_SLOTS 9
+#define SAVE_SLOTS_PER_DONATOR_LEVEL 1
 
 /datum/preferences
-	max_save_slots = 5
-	var/loadout_points = 0
+	max_save_slots = BASE_SAVE_SLOTS
+	var/loadout_points_spent = 0
+	var/is_byond_member = FALSE
 
-/datum/preferences/proc/get_loadout_points()
-	var/donation_level = parent.donator_level
-	loadout_points = BASE_LOADOUT_POINTS + donation_level * ADD_LOADOUT_POINTS
-	return loadout_points
+/datum/preferences/New(client/parent)
+	. = ..()
+	max_save_slots = clamp(BASE_SAVE_SLOTS + parent.get_donator_level() * SAVE_SLOTS_PER_DONATOR_LEVEL, BASE_SAVE_SLOTS, MAX_SAVE_SLOTS)
 
-/datum/preferences/load_preferences()
-	. = ..() // Вызов базовой загрузки
+/datum/preferences/refresh_membership()
+	. = ..()
+	is_byond_member = unlock_content
 
-	// Загрузка донаторского уровня из префов
-	var/donation_level = savefile.get_entry("donator_level", BASIC_DONATOR_LEVEL)
-	parent.donator_level = donation_level
-	get_loadout_points()
+	if(parent.get_donator_level() >= DONATOR_TIER_2)
+		unlock_content = TRUE
 
-	return TRUE
+/datum/preferences/proc/get_loadout_max_points()
+	return BASE_LOADOUT_POINTS + parent.get_donator_level() * LOADOUT_POINTS_PER_DONATION_LEVEL
 
-/datum/preferences/save_preferences()
-	. = ..() // Вызов базового сохранения
+/datum/preference/choiced/ghost_orbit/create_default_value()
+	return GHOST_ORBIT_CIRCLE
 
-    // Костыль 2 - проверка что это не первый вызов (ибо первый приходится на проверку кейбиндов)
-	if(!parent.can_save_donator_level)
-		return TRUE
-
-	// Сохранение донаторского уровня в префы
-	var/donation_level = parent.donator_level
-	savefile.set_entry("donator_level", donation_level)
-	savefile.save()
-	return TRUE
+#undef BASE_LOADOUT_POINTS
+#undef LOADOUT_POINTS_PER_DONATION_LEVEL
+#undef BASE_SAVE_SLOTS
+#undef MAX_SAVE_SLOTS
+#undef SAVE_SLOTS_PER_DONATOR_LEVEL

@@ -110,8 +110,9 @@
 
 /obj/item/clothing/suit/hooded/cloak/goliath
 	name = "goliath cloak"
-	icon_state = "goliath_cloak"
 	desc = "A staunch, practical cape made out of numerous monster materials, it is coveted amongst exiles & hermits."
+	icon_state = "goliath_cloak"
+	alternate_worn_layer = NECK_LAYER
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 	cold_protection = CHEST|GROIN|LEGS|ARMS
@@ -204,7 +205,7 @@
 	desc = "An intimidating tribal helmet, it doesn't look very comfortable."
 	icon_state = "skull"
 	inhand_icon_state = null
-	strip_delay = 100
+	strip_delay = 10 SECONDS
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDESNOUT
 	flags_cover = HEADCOVERSEYES
 	cold_protection = HEAD

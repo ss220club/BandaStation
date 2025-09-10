@@ -21,17 +21,17 @@
 		count++
 
 	if(teeth_receptangle.teeth_count == 0)
-		to_chat(user, span_notice("[capitalize(user.declent_ru(NOMINATIVE))] не имеет зубов, дурашка!"))
+		to_chat(user, span_notice("[capitalize(target.declent_ru(NOMINATIVE))] не имеет зубов, дурашка!"))
 		return SURGERY_STEP_FAIL
 
 	if(count >= teeth_receptangle.teeth_count)
-		to_chat(user, span_notice("Все зубы [user.declent_ru(GENITIVE)] уже заменены на таблетки!"))
+		to_chat(user, span_notice("Все зубы [target.declent_ru(GENITIVE)] уже заменены на таблетки!"))
 		return SURGERY_STEP_FAIL
 
 /datum/surgery_step/insert_pill
 	name = "вставьте таблетку"
 	implements = list(/obj/item/reagent_containers/applicator/pill = 100)
-	time = 16
+	time = 1.6 SECONDS
 
 /datum/surgery_step/insert_pill/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 

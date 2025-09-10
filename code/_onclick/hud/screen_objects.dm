@@ -102,7 +102,7 @@
 
 /atom/movable/screen/swap_hand
 	plane = HUD_PLANE
-	name = "swap hand"
+	name = "поменять руку"
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
 /atom/movable/screen/swap_hand/Click()
@@ -120,7 +120,7 @@
 	return 1
 
 /atom/movable/screen/navigate
-	name = "navigate"
+	name = "навигация"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "navigate"
 	screen_loc = ui_navigate_menu
@@ -133,14 +133,14 @@
 	navigator.navigate()
 
 /atom/movable/screen/craft
-	name = "crafting menu"
+	name = "меню создания"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "craft"
 	screen_loc = ui_crafting
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
 /atom/movable/screen/area_creator
-	name = "create new area"
+	name = "создать новую область"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "area_edit"
 	screen_loc = ui_building
@@ -151,12 +151,12 @@
 		return TRUE
 	var/area/A = get_area(usr)
 	if(!A.outdoors)
-		to_chat(usr, span_warning("There is already a defined structure here."))
+		to_chat(usr, span_warning("Здесь уже есть определенная структура."))
 		return TRUE
 	create_area(usr)
 
 /atom/movable/screen/language_menu
-	name = "language menu"
+	name = "меню языков"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "talk_wheel"
 	screen_loc = ui_language_menu
@@ -164,6 +164,9 @@
 
 /atom/movable/screen/language_menu/Click()
 	usr.get_language_holder().open_language_menu(usr)
+
+/atom/movable/screen/language_menu/ghost
+	icon = 'icons/hud/screen_ghost.dmi'
 
 /atom/movable/screen/inventory
 	/// The identifier for the slot. It has nothing to do with ID cards.
@@ -286,7 +289,7 @@
 	return TRUE
 
 /atom/movable/screen/close
-	name = "close"
+	name = "закрыть"
 	plane = ABOVE_HUD_PLANE
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "storage_close"
@@ -304,7 +307,7 @@
 	return TRUE
 
 /atom/movable/screen/drop
-	name = "drop"
+	name = "выбросить"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_drop"
 	plane = HUD_PLANE
@@ -315,7 +318,7 @@
 		usr.dropItemToGround(usr.get_active_held_item())
 
 /atom/movable/screen/combattoggle
-	name = "toggle combat mode"
+	name = "переключить боевой режим"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "combat_off"
 	screen_loc = ui_combat_toggle
@@ -362,7 +365,7 @@
 	screen_loc = ui_borg_intents
 
 /atom/movable/screen/floor_changer
-	name = "change floor"
+	name = "сменить этаж"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "floor_change"
 	screen_loc = ui_above_intent
@@ -390,13 +393,16 @@
 	icon_state = "floor_change_v"
 	vertical = TRUE
 
+/atom/movable/screen/floor_changer/vertical/ghost
+	icon = 'icons/hud/screen_ghost.dmi'
+
 /atom/movable/screen/spacesuit
-	name = "Space suit cell status"
+	name = "состояние заряда скафандра"
 	icon_state = "spacesuit_0"
 	screen_loc = ui_spacesuit
 
 /atom/movable/screen/mov_intent
-	name = "run/walk toggle"
+	name = "переключить бег/ходьбу"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "running"
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -421,7 +427,7 @@
 	user.toggle_move_intent()
 
 /atom/movable/screen/pull
-	name = "stop pulling"
+	name = "перестать тянуть"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "pull"
 	base_icon_state = "pull"
@@ -437,7 +443,7 @@
 	return ..()
 
 /atom/movable/screen/resist
-	name = "resist"
+	name = "сопротивляться"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_resist"
 	base_icon_state = "act_resist"
@@ -451,7 +457,7 @@
 		L.resist()
 
 /atom/movable/screen/rest
-	name = "rest"
+	name = "отдыхать"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_rest"
 	base_icon_state = "act_rest"
@@ -470,8 +476,34 @@
 	icon_state = "[base_icon_state][user.resting ? "_on" : null]"
 	return ..()
 
+/atom/movable/screen/sleep
+	name = "спать"
+	icon = 'icons/hud/screen_midnight.dmi'
+	icon_state = "act_sleep"
+	base_icon_state = "act_sleep"
+	plane = HUD_PLANE
+	mouse_over_pointer = MOUSE_HAND_POINTER
+
+/atom/movable/screen/sleep/Click()
+	if(!isliving(usr) || HAS_TRAIT(usr, TRAIT_KNOCKEDOUT))
+		return
+	if(usr.client?.prefs.read_preference(/datum/preference/toggle/remove_double_click))
+		var/tgui_answer = tgui_alert(usr, "Вы уверены, что хотите немного поспать?", "Сон", list("Да", "Нет"))
+		if(tgui_answer == "Да" && !HAS_TRAIT(usr, TRAIT_KNOCKEDOUT))
+			var/mob/living/L = usr
+			L.SetSleeping(400)
+	else
+		flick("[base_icon_state]_flick", src)
+
+/atom/movable/screen/sleep/DblClick(location, control, params)
+	if(!isliving(usr) || usr.client?.prefs.read_preference(/datum/preference/toggle/remove_double_click))
+		return
+	if(isliving(usr))
+		var/mob/living/L = usr
+		L.SetSleeping(400)
+
 /atom/movable/screen/storage
-	name = "storage"
+	name = "хранилище"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "storage_cell"
 	plane = HUD_PLANE
@@ -530,7 +562,7 @@
 	icon_state = "storage_corner_bottomright"
 
 /atom/movable/screen/storage/rowjoin
-	name = "storage"
+	name = "хранилище"
 	icon_state = "storage_rowjoin_left"
 	alpha = 0
 
@@ -538,18 +570,18 @@
 	icon_state = "storage_rowjoin_right"
 
 /atom/movable/screen/throw_catch
-	name = "throw/catch"
+	name = "бросить/поймать"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_throw"
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
 /atom/movable/screen/throw_catch/Click()
-	if(iscarbon(usr))
-		var/mob/living/carbon/C = usr
-		C.toggle_throw_mode()
+	if(isliving(usr))
+		var/mob/living/user = usr
+		user.toggle_throw_mode()
 
 /atom/movable/screen/zone_sel
-	name = "damage zone"
+	name = "выбор конечности"
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -683,7 +715,7 @@
 /atom/movable/screen/damageoverlay
 	icon = 'icons/hud/screen_full.dmi'
 	icon_state = "oxydamageoverlay0"
-	name = "dmg"
+	name = "урон"
 	blend_mode = BLEND_MULTIPLY
 	screen_loc = "CENTER-7,CENTER-7"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -691,7 +723,7 @@
 	plane = FULLSCREEN_PLANE
 
 /atom/movable/screen/healths
-	name = "health"
+	name = "здоровье"
 	icon_state = "health0"
 	screen_loc = ui_health
 
@@ -704,31 +736,31 @@
 	screen_loc = ui_borg_health
 
 /atom/movable/screen/healths/blob
-	name = "blob health"
+	name = "здоровье блоба"
 	icon_state = "block"
 	screen_loc = ui_internal
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /atom/movable/screen/healths/blob/overmind
-	name = "overmind health"
+	name = "здоровье сверхразума"
 	icon = 'icons/hud/blob.dmi'
 	icon_state = "corehealth"
 	screen_loc = ui_blobbernaut_overmind_health
 
 /atom/movable/screen/healths/guardian
-	name = "summoner health"
+	name = "здоровье призывателя"
 	icon = 'icons/hud/guardian.dmi'
 	icon_state = "base"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /atom/movable/screen/healths/revenant
-	name = "essence"
+	name = "эссенция"
 	icon = 'icons/mob/actions/backgrounds.dmi'
 	icon_state = "bg_revenant"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /atom/movable/screen/healthdoll
-	name = "health doll"
+	name = "здоровье куклы"
 	screen_loc = ui_healthdoll
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
@@ -736,6 +768,9 @@
 	if (iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		C.check_self_for_injuries()
+
+/atom/movable/screen/healthdoll/proc/update_body_zones()
+	return
 
 /atom/movable/screen/healthdoll/living
 	icon_state = "fullhealth0"
@@ -751,15 +786,22 @@
 
 /atom/movable/screen/healthdoll/human/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
+	if(isnull(hud_owner)) //we require a hud owner to work properly, so return out.
+		return
+	update_body_zones()
+	update_appearance()
+
+/atom/movable/screen/healthdoll/human/update_body_zones()
 	limbs = list()
-	for(var/i in GLOB.all_body_zones)
+	vis_contents.Cut()
+	var/mob/living/carbon/human/owner = hud.mymob
+	for(var/body_zone in owner.get_all_limbs())
 		var/atom/movable/screen/healthdoll_limb/limb = new(src, null)
 		// layer chest above other limbs, it's the center after all
-		limb.layer = i == BODY_ZONE_CHEST ? layer + 0.05 : layer
-		limbs[i] = limb
+		limb.layer = body_zone == BODY_ZONE_CHEST ? layer + 0.05 : layer
+		limbs[body_zone] = limb
 		// why viscontents? why not overlays? - because i want to animate filters
 		vis_contents += limb
-	update_appearance()
 
 /atom/movable/screen/healthdoll/human/Destroy()
 	QDEL_LIST_ASSOC_VAL(limbs)
@@ -825,7 +867,7 @@
 	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
 
 /atom/movable/screen/mood
-	name = "mood"
+	name = "настроение"
 	icon_state = "mood5"
 	screen_loc = ui_mood
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -859,10 +901,11 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 
 	holder.screen += src
 
-/atom/movable/screen/splash/proc/Fade(out, qdel_after = TRUE)
+/atom/movable/screen/splash/proc/fade(out, qdel_after = TRUE)
 	if(QDELETED(src))
 		return
 	if(out)
+		mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 		animate(src, alpha = 0, time = 30)
 	else
 		alpha = 0
@@ -921,7 +964,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 	return ..()
 
 /atom/movable/screen/stamina
-	name = "stamina"
+	name = "выносливость"
 	icon_state = "stamina0"
 	screen_loc = ui_stamina
 
@@ -933,7 +976,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 #define HUNGER_STATE_STARVING 0
 
 /atom/movable/screen/hunger
-	name = "hunger"
+	name = "голод"
 	icon_state = "hungerbar"
 	screen_loc = ui_hunger
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -1116,7 +1159,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
  * 2- Have their blood level changing every life tick (which is why we don't manually call updates).
  */
 /atom/movable/screen/blood_level
-	name = "Blood Level"
+	name = "уровень крови"
 	icon_state = "blood_display"
 	screen_loc = ui_blooddisplay
 
@@ -1134,3 +1177,83 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 	maptext = FORMAT_BLOOD_LEVEL_HUD_MAPTEXT(source.blood_volume)
 
 #undef FORMAT_BLOOD_LEVEL_HUD_MAPTEXT
+
+#define FORMAT_XENOBIO_HUD_MAPTEXT(text_to_use) MAPTEXT_SPESSFONT("<span style='color: [COLOR_WHITE]; text-align: center; line-height: 1.9; '>[text_to_use]</span>")
+#define POTION_DROP_SPEED 5 DECISECONDS
+
+/// Used to show how many monkeys & slimes are in the console
+/atom/movable/screen/xenobio_console
+	name = "хранилище обезьян/слаймов"
+	icon_state = "xenobio_console"
+	screen_loc = ui_xenobiodisplay
+	var/atom/movable/screen/xenobio_potion/potion_hud
+	var/atom/movable/screen/xenobio_potion/potion_launcher
+
+/atom/movable/screen/xenobio_console/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	potion_hud = new()
+	potion_hud.layer = layer-1
+	vis_contents += potion_hud
+	potion_launcher = new()
+	potion_launcher.layer = layer-2
+	vis_contents += potion_launcher
+
+/// Called by the console any time we update the monkeys, slimes, or max slimes
+/atom/movable/screen/xenobio_console/proc/on_update_hud(slimes, monkeys, max_slimes)
+	maptext = FORMAT_XENOBIO_HUD_MAPTEXT("[monkeys]\n[slimes]/[max_slimes]")
+	maptext_x = 5
+	maptext_y = 2
+
+/// Called by the console any time we update the potion
+/atom/movable/screen/xenobio_console/proc/update_potion(obj/item/slimepotion/slime/potion)
+	if(isnull(potion))
+		potion_hud.eject_pot()
+		flick("xenobio_potion_launch", potion_launcher)
+	else if(potion_hud.stored_potion)
+		potion_hud.swap_pot(potion)
+	else
+		potion_hud.add_pot(potion)
+
+/atom/movable/screen/xenobio_console/Destroy()
+	vis_contents -= potion_hud
+	QDEL_NULL(potion_hud)
+	vis_contents -= potion_launcher
+	QDEL_NULL(potion_launcher)
+	return ..()
+
+/atom/movable/screen/xenobio_potion
+	name = "хранилище обезьян/слаймов"
+	screen_loc = ui_xenobiodisplay
+	/// If we have a potion stored or not
+	var/stored_potion = FALSE
+
+/// Visually ejects the current potion
+/atom/movable/screen/xenobio_potion/proc/eject_pot(obj/item/slimepotion/slime/potion)
+	animate(src, 2 DECISECONDS, pixel_y = 280)
+	stored_potion = FALSE
+
+/// Visually add the current potion
+/atom/movable/screen/xenobio_potion/proc/add_pot(obj/item/slimepotion/slime/potion)
+	stored_potion = TRUE
+	icon = potion.icon
+	icon_state = potion.icon_state
+	pixel_y = 280
+	pixel_x = -8
+	add_filter("potion_outline", 1, outline_filter(1, "#eeeeee", OUTLINE_SQUARE))
+	add_filter("potion_glow", 2, drop_shadow_filter(0.1, 0.1, 2, 0, "#eeeeee"))
+	transform.Scale(0.8, 0.8)
+	animate(src, POTION_DROP_SPEED, easing = BOUNCE_EASING, pixel_y = 19)
+
+/// Swap out our current potion for a new one
+/atom/movable/screen/xenobio_potion/proc/swap_pot(obj/item/slimepotion/slime/potion)
+	addtimer(CALLBACK(src, PROC_REF(swap_pot_icon), potion), POTION_DROP_SPEED, TIMER_CLIENT_TIME)
+	animate(src, POTION_DROP_SPEED, easing = BACK_EASING, pixel_x = -50)
+
+/// Swaps the potion icon & name. Made for use w/ addtimer() so as to not disrupt the animation chain
+/atom/movable/screen/xenobio_potion/proc/swap_pot_icon(obj/item/pot)
+	name = pot.name
+	icon_state = pot.icon_state
+	animate(src, POTION_DROP_SPEED, easing = BACK_EASING, pixel_x = -8)
+
+#undef FORMAT_XENOBIO_HUD_MAPTEXT
+#undef POTION_DROP_SPEED

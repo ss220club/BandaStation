@@ -1,3 +1,4 @@
+import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { useState } from 'react';
 import {
   Button,
@@ -7,12 +8,13 @@ import {
   Stack,
   Tooltip,
 } from 'tgui-core/components';
+import { classes } from 'tgui-core/react';
 import { toTitleCase } from 'tgui-core/string';
 
 import { useBackend } from '../../backend';
 import { getConditionColor, numberToDays } from './helpers';
 import { ShowPing } from './Ping';
-import { WhoData } from './types';
+import type { WhoData } from './types';
 
 export function Subject(props) {
   const { act, data } = useBackend<WhoData>();
@@ -62,6 +64,8 @@ export function Subject(props) {
 function SubjectInfoList(props) {
   const { subject } = props;
   const [showSpoiler, setShowSpoiler] = useState(false);
+  const [copiedText, copyToClipboard] = useCopyToClipboard();
+  const localHost = '127.0.0.1';
 
   return (
     <Stack vertical>
@@ -149,15 +153,22 @@ function SubjectInfoList(props) {
             label="IP пользователя"
             buttons={
               <Button
-                icon={showSpoiler ? 'eye' : 'eye-slash'}
-                selected={showSpoiler}
-                tooltip={showSpoiler ? 'Скрыть IP' : 'Показать IP'}
-                tooltipPosition={'bottom-end'}
-                onClick={() => setShowSpoiler(!showSpoiler)}
+                icon="copy"
+                tooltip="Скопировать IP"
+                tooltipPosition="top-end"
+                onClick={() => copyToClipboard(subject.accountIp || localHost)}
               />
             }
           >
-            {showSpoiler ? subject.accountIp : 'СКРЫТО'}
+            <span
+              className={classes([
+                'Who_Spoiler',
+                showSpoiler && 'Who_Spoiler--visible',
+              ])}
+              onClick={() => setShowSpoiler(!showSpoiler)}
+            >
+              {subject.accountIp || localHost}
+            </span>
           </LabeledList.Item>
           <LabeledList.Item label="Возраст аккаунта">
             {numberToDays(subject.accountAge)}
@@ -204,7 +215,7 @@ function SubjectInfoActions(props) {
       <Stack.Item>
         <Button
           color="red"
-          icon="skull-crossbones"
+          icon="hand-fist"
           tooltip="Наказать"
           onClick={() => act('smite', { ref: subjectRef })}
         />

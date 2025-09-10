@@ -326,6 +326,10 @@ GLOBAL_LIST_EMPTY(objectives)
 		balloon_alert(user, "слишком недавно в SSD")
 		return
 
+	if(target.buckled || target.has_buckled_mobs())
+		to_chat(user, span_warning("Тело [target] к чему-то пристегнуто."))
+		return
+
 	var/answer = tgui_alert(
 		user,
 		"Вы уверены что хотите переместить [target] в криогенный стазис? Через [DisplayTimeText(time_till_despawn)] персонаж будет удален из игры и больше не сможет вернуться в этом раунде.",
@@ -348,15 +352,21 @@ GLOBAL_LIST_EMPTY(objectives)
 		message_admins("[key_name_admin(user)] tries to move [key_name_admin(target)] with important job [target.mind.assigned_role.title] to the cryopod")
 		log_admin("[key_name(user)] tries to move [key_name(target)] with important job [target.mind.assigned_role.title] to the cryopod")
 
-	if(target.mind?.special_role)
-		message_admins("[key_name_admin(user)] tries to move [key_name_admin(target)] with special role [target.mind.special_role] to the cryopod")
-		log_admin("[key_name(user)] tries to move [key_name(target)] with special role [target.mind.special_role] to the cryopod")
+	var/list/target_special_roles = target.mind?.get_special_roles()
+	if(length(target_special_roles))
+		var/special_roles_text = english_list(target_special_roles)
+		message_admins("[key_name_admin(user)] tries to move to the cryopod [key_name_admin(target)] with special roles: [special_roles_text]")
+		log_admin("[key_name(user)] tries to move to the cryopod [key_name(target)] with special roles: [special_roles_text]")
 
 	place_inside(target, user)
 
 /// Handles putting mob inside the cryopod by target itself
 /obj/machinery/cryopod/proc/put_self_inside(mob/target)
 	PRIVATE_PROC(TRUE)
+
+	if(target.buckled || target.has_buckled_mobs())
+		to_chat(target, span_warning("Вы к чему-то пристегнуты."))
+		return
 
 	var/answer = tgui_alert(
 		target,
@@ -367,11 +377,11 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(answer != "Да")
 		return
 
-	if(target.mind.assigned_role.req_admin_notify)
+	if(target.mind?.assigned_role.req_admin_notify)
 		answer = tgui_alert(
 			target,
-			"Вы ТОЧНО уверены что хотите погрузиться в криогенный стазис? Вы заманиете важную для раунда профессию.",
-			"Погрузиться криогенный стазис?",
+			"Вы ТОЧНО уверены что хотите погрузиться в криогенный стазис? Вы занимаете важную для раунда профессию.",
+			"Погрузиться в криогенный стазис?",
 			list("Да", "Нет")
 		)
 		if(answer != "Да")
@@ -380,7 +390,8 @@ GLOBAL_LIST_EMPTY(objectives)
 		message_admins("[key_name_admin(target)] tries to enter cryopod with important job [target.mind.assigned_role.title]")
 		log_admin("[key_name(target)] tries to enter cryopod with important job [target.mind.assigned_role.title]")
 
-	if(target.mind.special_role)
+	var/list/target_special_roles = target.mind?.get_special_roles()
+	if(length(target_special_roles))
 		answer = tgui_alert(
 			target,
 			"Вы ТОЧНО уверены что хотите погрузиться в криогенный стазис? Вы играете на специальной роли.",
@@ -391,8 +402,9 @@ GLOBAL_LIST_EMPTY(objectives)
 		if(answer != "Да")
 			return
 
-		message_admins("[key_name_admin(target)] tries to enter cryopod with special role [target.mind.special_role]")
-		log_admin("[key_name(target)] tries to enter cryopod with special role [target.mind.special_role]")
+		var/special_roles_text = english_list(target_special_roles)
+		message_admins("[key_name_admin(target)] tries to enter cryopod with special roles: [special_roles_text]")
+		log_admin("[key_name(target)] tries to enter cryopod with special roles: [special_roles_text]")
 
 	place_inside(target, target)
 
