@@ -25,6 +25,7 @@
 /datum/component/stamina_cost_per_hit/UnregisterFromParent()
 	UnregisterSignal(parent, list(
 		COMSIG_ITEM_ATTACK,
+		COMSIG_ITEM_AFTERATTACK,
 	))
 
 /datum/component/stamina_cost_per_hit/proc/on_attack(obj/item/attaking_item, mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
