@@ -1,4 +1,4 @@
-/obj/item/stealth/spy_spider
+/obj/item/spy_spider
 	name = "spy spider"
 	desc = "Кажется, ты видел такого в фильмах про шпионов."
 	icon = 'modular_bandastation/objects/icons/obj/items/spy_spider.dmi'
@@ -6,23 +6,23 @@
 	worn_icon = null
 	var/obj/item/radio/spider_transmitter/transmitter = null
 
-/obj/item/stealth/spy_spider/Initialize(mapload)
+/obj/item/spy_spider/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/stealth_device)
 	transmitter = new /obj/item/radio/spider_transmitter(src)
 
-/obj/item/stealth/spy_spider/Destroy()
+/obj/item/spy_spider/Destroy()
 	QDEL_NULL(transmitter)
 	. = ..()
 
-/obj/item/stealth/spy_spider/examine(mob/user)
+/obj/item/spy_spider/examine(mob/user)
 	. = ..()
 	if(!transmitter)
 		. += span_info("Передатчик отсутствует.")
 		return
 	. += span_info("Сейчас он [transmitter.get_broadcasting() ? "включён" : "выключен"].")
 
-/obj/item/stealth/spy_spider/attack_self(mob/user, modifiers)
+/obj/item/spy_spider/attack_self(mob/user, modifiers)
 	if(transmitter)
 		transmitter.ui_interact(user)
 	return ..()
@@ -51,7 +51,7 @@
 	set_broadcasting(FALSE)
 
 /obj/item/radio/spider_transmitter/ui_state(mob/user)
-	return GLOB.always_state
+	return GLOB.not_incapacitated_state
 
 /datum/storage/lockbox/detective
 	max_total_storage = 20
@@ -65,6 +65,6 @@
 
 /obj/item/storage/lockbox/spy_kit/PopulateContents()
 	new /obj/item/radio/quiet(src)
-	new /obj/item/stealth/spy_spider(src)
-	new /obj/item/stealth/spy_spider(src)
-	new /obj/item/stealth/spy_spider(src)
+	new /obj/item/spy_spider(src)
+	new /obj/item/spy_spider(src)
+	new /obj/item/spy_spider(src)
