@@ -13,8 +13,7 @@
 
 	src.stamina_cost = stamina_cost
 	src.stamina_cost_wielded = stamina_cost
-	if(stamina_cost_wielded)
-		src.stamina_cost_wielded = stamina_cost_wielded
+	src.stamina_cost_wielded = stamina_cost_wielded >= 0 ? stamina_cost_wielded : stamina_cost
 	src.ignore_exhaustion = ignore_exhaustion
 
 /datum/component/stamina_cost_per_hit/RegisterWithParent()
@@ -28,11 +27,7 @@
 /datum/component/stamina_cost_per_hit/proc/on_attack(obj/item/attaking_item, mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	SIGNAL_HANDLER // COMSIG_ITEM_ATTACK
 
-	var/cost
-	if(HAS_TRAIT(parent, TRAIT_WIELDED))
-		cost = stamina_cost_wielded
-	else
-		cost = stamina_cost
+	var/cost = HAS_TRAIT(parent, TRAIT_WIELDED) ? stamina_cost_wielded : stamina_cost
 
 	if(!ignore_exhaustion && ((user.getStaminaLoss() + cost) > user.maxHealth))
 		user.balloon_alert(user, "нет сил!")

@@ -102,10 +102,7 @@
 		rip_and_tear(user, target)
 
 /datum/component/rip_and_tear/proc/get_stamina_cost()
-	if(HAS_TRAIT(parent, TRAIT_WIELDED))
-		return stamina_cost_wielded
-
-	return stamina_cost
+	return HAS_TRAIT(parent, TRAIT_WIELDED) ? stamina_cost_wielded : stamina_cost
 
 #undef WALL_TEAR_ALLOWED
 #undef WALL_TEAR_INVALID
