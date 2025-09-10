@@ -32,4 +32,4 @@
 
 // MARK: TOOLS
 /datum/supply_pack/goody/rapid_lighting_device
-	cost = PAYCHECK_CREW * 7 // Original price: 500 New price: 350
+	cost = PAYCHECK_CREW * 4 // Original price: 500 New price: 200

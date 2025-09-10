@@ -24,6 +24,8 @@
 	)
 	premium = list(
 		/obj/item/storage/belt/utility = 3,
+		/obj/item/construction/rld = 3,	//BANDASTATION ADD - RLD into engi-vend
+		/obj/item/storage/bag/material_pouch = 3, //BANDASTATION ADD - RLD into engi-vend
 		/obj/item/construction/rcd/loaded = 2,
 		/obj/item/storage/box/smart_metal_foam = 1,
 	)
