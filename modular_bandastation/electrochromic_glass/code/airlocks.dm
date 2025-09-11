@@ -47,6 +47,9 @@
 
 /obj/effect/temp_visual/polarized_airlock/Initialize(mapload, image/airlock_overlay, animate_color)
 	. = ..()
+	if(!airlock_overlay)
+		return
+
 	icon = airlock_overlay.icon
 	icon_state = airlock_overlay.icon_state
 	color = airlock_overlay.color
