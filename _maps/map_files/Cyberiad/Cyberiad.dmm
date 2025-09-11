@@ -8199,7 +8199,7 @@
 	id = "bar_atrium"
 	},
 /turf/open/floor/wood/large,
-/area/station/commons/dorms)
+/area/station/commons/lounge)
 "bZn" = (
 /obj/structure/sign/poster/contraband/lusty_xenomorph/directional/east,
 /turf/open/floor/iron/dark/small,
@@ -44344,7 +44344,7 @@
 "kOB" = (
 /obj/machinery/door/firedoor,
 /turf/open/floor/wood/large,
-/area/station/commons/dorms)
+/area/station/commons/lounge)
 "kOF" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/binary/valve/digital{
@@ -197657,7 +197657,7 @@ kok
 piQ
 iGO
 bTJ
-kNp
+vOa
 vOa
 iEr
 vOa
@@ -197914,7 +197914,7 @@ skT
 skT
 xZM
 fmN
-kNp
+vOa
 yam
 wFA
 dfB

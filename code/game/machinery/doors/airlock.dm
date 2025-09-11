@@ -1405,7 +1405,7 @@
 	sleep(opaque_delay)
 	if(dangerous_close)
 		crush()
-	if(visible && !glass)
+	if((visible && !glass) || (glass && electrochromed)) // BANDASTATION REPLACEMENT: OLD - visible && !glass
 		set_opacity(TRUE)
 		if(multi_tile)
 			filler.set_opacity(TRUE)
