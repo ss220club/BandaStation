@@ -34,7 +34,6 @@
 	icon_state = "electrochromic_airlock"
 	var/id = TINT_CONTROL_GROUP_NONE
 
-
 /obj/effect/mapping_helpers/airlock/electrochromic/payload(obj/machinery/door/airlock/door)
 	if(!door.glass)
 		log_world("[src] at [AREACOORD(src)] tried to make a non-glass door electrochromic!")

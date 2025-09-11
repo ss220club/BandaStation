@@ -14,21 +14,25 @@
 		toggle_polarization()
 
 /obj/structure/window/fulltile/unanchored/electrochromic
+	name = "full tile electrochromic window"
 	glass_amount = 4
 	electrochromic = TRUE
 	flags_1 = UNPAINTABLE_1
 
 /obj/structure/window/reinforced/fulltile/unanchored/electrochromic
+	name = "full tile reinforced electrochromic window"
 	glass_amount = 4
 	electrochromic = TRUE
 	flags_1 = UNPAINTABLE_1
 
 /obj/structure/window/fulltile/electrochromic
+	name = "full tile electrochromic window"
 	glass_amount = 4
 	electrochromic = TRUE
 	flags_1 = UNPAINTABLE_1
 
 /obj/structure/window/reinforced/fulltile/electrochromic
+	name = "full tile reinforced electrochromic window"
 	glass_amount = 4
 	electrochromic = TRUE
 	flags_1 = UNPAINTABLE_1
