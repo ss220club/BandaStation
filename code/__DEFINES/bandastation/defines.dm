@@ -32,3 +32,6 @@
 #define MAX_DONATOR_LEVEL DONATOR_TIER_5
 
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
+
+/// How much alpha channel will be multiplied for electrochromic glass.
+#define TINTED_ALPHA 2

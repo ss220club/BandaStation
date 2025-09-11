@@ -366,6 +366,16 @@
 	SIGNAL_HANDLER
 	if(!spraycan.actually_paints)
 		return
+	/* BANDASTATION ADDITION - START */
+	var/area/current_area = get_area(src)
+	if(electrochromic)
+		if(is_dark_color) // No dark colors for electrochromic windows
+			return
+
+		if(current_area.window_tint)
+			color = generate_glass_matrix(src, TINTED_ALPHA)
+			return
+	/* BANDASTATION ADDITION - END */
 	if (is_dark_color && fulltile) //Opaque directional windows restrict vision even in directions they are not placed in, please don't do this
 		set_opacity(255)
 	else
