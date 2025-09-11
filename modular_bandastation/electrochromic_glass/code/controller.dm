@@ -47,10 +47,13 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 	if(active && (machine_stat & NOPOWER))
 		toggle_tint()
 
-/obj/machinery/button/electrochromic/update_overlays()
+/obj/machinery/button/electrochromic/update_icon_state()
 	. = ..()
-	if(!(machine_stat & (NOPOWER|BROKEN)) && !panel_open && active)
-		. += "[base_icon_state]_on"
+	if(!(machine_stat & (NOPOWER|BROKEN)) && !panel_open)
+		if(active)
+			icon_state = "[base_icon_state]_on"
+		else
+			icon_state = "[base_icon_state]_off"
 
 /obj/machinery/button/electrochromic/proc/toggle_tint()
 	if(range == TINT_CONTROL_RANGE_AREA)
@@ -59,10 +62,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 			if(button.range != TINT_CONTROL_RANGE_AREA || (button.id != id && button.id != TINT_CONTROL_GROUP_NONE))
 				continue
 			button.active = button_area.window_tint
-			button.update_icon(UPDATE_OVERLAYS)
+			button.update_icon(UPDATE_ICON)
 	else
 		active = !active
-		update_icon(UPDATE_OVERLAYS)
+		update_icon(UPDATE_ICON)
 	process_controlled_windows(range != TINT_CONTROL_RANGE_AREA ? range(src, range) : button_area)
 
 /obj/machinery/button/electrochromic/proc/process_controlled_windows(control_area)
