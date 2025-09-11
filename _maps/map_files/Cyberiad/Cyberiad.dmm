@@ -8195,6 +8195,9 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/disposalpipe/segment,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "bar_atrium"
+	},
 /turf/open/floor/wood/large,
 /area/station/commons/dorms)
 "bZn" = (
@@ -27986,6 +27989,9 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "bar_atrium"
+	},
 /turf/open/floor/wood/large,
 /area/station/commons/lounge)
 "gPh" = (
