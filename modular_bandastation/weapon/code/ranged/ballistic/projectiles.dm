@@ -499,12 +499,12 @@
 
 /obj/projectile/bullet/railgun/taser/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
-		H.emote("scream")
-		H.add_mood_event("tased", /datum/mood_event/tased)
-		if((H.status_flags & CANKNOCKDOWN) && !HAS_TRAIT(H, TRAIT_STUNIMMUNE))
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon, do_jitter_animation), jitter), 5)
+	if(. == BULLET_ACT_BLOCK)
+		return
+
+	if(isliving(target))
+		var/mob/living/living_target = target
+		living_target.apply_status_effect(/datum/status_effect/tased, 0.5 SECONDS)
 
 /obj/item/shrapnel/bullet/railgun
 	name = "railgun shredder"

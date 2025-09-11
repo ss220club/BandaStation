@@ -119,7 +119,7 @@
 	cost = CARGO_CRATE_VALUE * 150
 	access_view = ACCESS_ARMORY
 	contains = list(
-		/obj/item/gun/ballistic/automatic/railgun = 1,
+		/obj/item/gun/ballistic/railgun = 1,
 		/obj/item/ammo_box/magazine/railgun/taser = 1,
 	)
 	crate_name = "HEMC-62 railgun crate"

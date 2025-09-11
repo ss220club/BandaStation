@@ -94,7 +94,7 @@
 // MARK: Railgun rounds
 /datum/design/railgun_round
 	name = "railgun sabot-round (30mm NT) (Lethal)"
-	desc = "Special anti-armor 30mm round for HEMC railguns. Great for killing anything, but at what cost?"
+	desc = "Специальный бронебойный снаряд калибра 30мм для использования в ручных электромагнитных ускорителей масс. Отлично подходит для уничтожения чего угодно, но какой ценой?"
 	id = "railgun_lethal"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
@@ -109,7 +109,7 @@
 
 /datum/design/railgun_round/taser
 	name = "railgun taser-round (30mm NT) (Less-lethal)"
-	desc = "Special less-lethal 30mm round for HEMC railguns. Less-lethal variant of 30mm round, great for stopping some very bad criminals."
+	desc = "Специальный менее летальный оглушающий снаряд калибра 30мм для использования в ручных электромагнитных ускорителей масс. Отлично подходит для обезвреживания особо опасных преступников."
 	id = "railgun_taser"
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15,
