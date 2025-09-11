@@ -11,6 +11,10 @@
 	if(glass)
 		base_color = generate_glass_matrix(src)
 		electrochromic_color = generate_glass_matrix(src, TINTED_ALPHA)
+
+		var/area/current_area = get_area(src)
+		if(current_area.window_tint)
+			toggle_polarization()
 	. = ..()
 
 /obj/machinery/door/airlock/proc/toggle_polarization()
