@@ -73621,6 +73621,7 @@
 /area/station/maintenance/department/medical/ghetto/central)
 "saE" = (
 /obj/effect/spawner/random/vending/snackvend,
+/obj/machinery/wall_healer/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "saM" = (
@@ -81801,6 +81802,7 @@
 /obj/machinery/camera/directional/east{
 	c_tag = "Arrivals Hallway"
 	},
+/obj/structure/extinguisher_cabinet/directional/east,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "uaM" = (
@@ -92930,7 +92932,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 9
 	},
-/obj/machinery/vending/wallmed/directional/north,
+/obj/machinery/wall_healer/directional/north,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/lobby)
 "wQN" = (
@@ -97093,9 +97095,9 @@
 /turf/open/floor/iron/white,
 /area/station/medical/medbay)
 "xRD" = (
-/obj/structure/extinguisher_cabinet/directional/north,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/wall_healer/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "xRI" = (

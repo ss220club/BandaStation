@@ -33,5 +33,7 @@
 
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 
+#define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
+
 /// How much alpha channel will be multiplied for electrochromic glass.
 #define TINTED_ALPHA 2
