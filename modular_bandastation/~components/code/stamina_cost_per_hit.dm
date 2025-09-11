@@ -18,9 +18,9 @@
 		return COMPONENT_INCOMPATIBLE
 
 	src.stamina_cost = stamina_cost
-	src.stamina_cost_wielded = stamina_cost_wielded >= 0 ? stamina_cost_wielded : stamina_cost
-	src.stamina_cost_on_atom = stamina_cost_on_atom >= 0 ? stamina_cost_on_atom : stamina_cost
-	src.stamina_cost_wielded_on_atom = stamina_cost_wielded_on_atom >= 0 ? stamina_cost_wielded_on_atom : stamina_cost_wielded
+	src.stamina_cost_wielded = stamina_cost_wielded || stamina_cost
+	src.stamina_cost_on_atom = stamina_cost_on_atom || stamina_cost
+	src.stamina_cost_wielded_on_atom = stamina_cost_wielded_on_atom || src.stamina_cost_wielded
 	src.ignore_exhaustion = ignore_exhaustion
 
 /datum/component/stamina_cost_per_hit/RegisterWithParent()
