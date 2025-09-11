@@ -26,7 +26,7 @@
 						sprite_icon = uni_icon('icons/hud/radial.dmi', "windowsize")
 					else if(path == /obj/structure/window/reinforced)
 						sprite_icon = uni_icon('icons/hud/radial.dmi', "windowtype")
-					else if(path == /obj/structure/window/fulltile || path == /obj/structure/window/reinforced/fulltile)
+					else if(path == /obj/structure/window/fulltile || path == /obj/structure/window/reinforced/fulltile || path == /obj/structure/window/fulltile/electrochromic || path == /obj/structure/window/reinforced/fulltile/electrochromic) // BANDASTATION EDIT - Original: path == /obj/structure/window/fulltile || path == /obj/structure/window/reinforced/fulltile
 						sprite_icon = uni_icon(initial(path.icon), initial(path.icon_state))
 						sprite_icon.blend_icon(uni_icon('icons/obj/structures.dmi', "grille"), ICON_UNDERLAY)
 
