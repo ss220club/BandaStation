@@ -45,11 +45,10 @@
 		return
 
 	var/is_valid = validate_target(target, user)
-	if(is_valid == WALL_TEAR_ALLOWED)
-		INVOKE_ASYNC(src, PROC_REF(rip_and_tear), user, target)
-	else if(WALL_TEAR_INVALID)
-		return .
-			
+	if(is_valid != WALL_TEAR_ALLOWED)
+		return is_valid == WALL_TEAR_CANCEL_CHAIN ? COMPONENT_CANCEL_ATTACK_CHAIN : .
+
+	INVOKE_ASYNC(src, PROC_REF(rip_and_tear), user, target)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /datum/component/rip_and_tear/proc/validate_target(atom/target, mob/living/user)
