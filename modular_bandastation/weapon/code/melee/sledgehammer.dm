@@ -79,7 +79,6 @@
 	acid = 50
 
 /obj/item/sledgehammer/get_demolition_modifier(obj/target)
-	if(iswa)
 	return HAS_TRAIT(src, TRAIT_WIELDED) ? demolition_mod : 0.8
 
 /obj/item/sledgehammer/update_icon_state()
