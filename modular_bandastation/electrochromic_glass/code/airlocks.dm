@@ -32,10 +32,14 @@
 		polarized_image.color = electrochromic_color
 		animate_color = base_color
 		set_opacity(FALSE)
+		if(multi_tile)
+			filler.set_opacity(FALSE)
 	else
 		polarized_image.color = base_color
 		animate_color = electrochromic_color
 		set_opacity(TRUE)
+		if(multi_tile)
+			filler.set_opacity(TRUE)
 
 	cut_overlay(polarized_overlay)
 

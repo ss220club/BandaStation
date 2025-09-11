@@ -712,7 +712,9 @@
 /area/station/security/detectives_office)
 "akd" = (
 /obj/effect/mapping_helpers/airlock/access/all/command/general,
-/obj/machinery/door/airlock/command/glass,
+/obj/machinery/door/airlock/command/glass{
+	id_tag = "conference"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/electrochromic{
@@ -5640,7 +5642,9 @@
 /area/station/maintenance/department/medical/ghetto/central)
 "brQ" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/corporate/glass,
+/obj/machinery/door/airlock/corporate/glass{
+	id_tag = "ntr_door"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -16558,7 +16562,9 @@
 /area/station/maintenance/disposal)
 "dXu" = (
 /obj/structure/cable,
-/obj/machinery/door/airlock/command/hos/glass,
+/obj/machinery/door/airlock/command/hos/glass{
+	id_tag = "hos_door"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
@@ -26677,7 +26683,7 @@
 "gAd" = (
 /obj/effect/mapping_helpers/airlock/access/all/medical/psychology,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/psych{
+/obj/machinery/door/airlock/psych/glass{
 	id_tag = "psych_office"
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -37814,7 +37820,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/shutters/preopen{
-	id = "JimNortonBottom"
+	id = "JimNortonKitchenSouth"
 	},
 /obj/machinery/door/window/right/directional/south{
 	name = "Jim Norton's Quebecois Coffee"
@@ -40895,7 +40901,9 @@
 /area/station/maintenance/starboard/fore)
 "jZn" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/corporate/glass,
+/obj/machinery/door/airlock/corporate/glass{
+	id_tag = "blueshield_door"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -58292,6 +58300,12 @@
 /obj/machinery/button/electrochromic/directional/south{
 	id = "cafeteria"
 	},
+/obj/machinery/button/door/directional/south{
+	id = "JimNortonKitchenSouth";
+	name = "Jim Norton's Quebecois Coffee North Shutters Control South";
+	pixel_x = -10;
+	pixel_y = -33
+	},
 /turf/open/floor/wood,
 /area/station/service/cafeteria)
 "olw" = (
@@ -62214,7 +62228,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/access/all/command/general,
-/obj/machinery/door/airlock/command/glass,
+/obj/machinery/door/airlock/command/glass{
+	id_tag = "conference"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
@@ -82040,7 +82056,9 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/door/airlock/command/cmo/glass,
+/obj/machinery/door/airlock/command/cmo/glass{
+	id_tag = "CMO_door"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
 /obj/effect/landmark/navigate_destination,
@@ -88644,7 +88662,9 @@
 "vMr" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/public/glass,
+/obj/machinery/door/airlock/public/glass{
+	id_tag = "JimNortonDoor"
+	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
