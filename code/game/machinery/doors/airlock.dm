@@ -561,7 +561,17 @@
 
 	. += get_airlock_overlay(frame_state, icon, src, em_block = TRUE)
 	if(airlock_material)
-		. += get_airlock_overlay("[airlock_material]_[frame_state]", overlays_file, src, em_block = TRUE)
+		/* BANDASTATION ADDITION - START */
+		var/list/overlays_list = get_airlock_overlay("[airlock_material]_[frame_state]", overlays_file, src, em_block = TRUE)
+		var/image/filling_overlay = overlays_list[1]
+		if(electrochromed)
+			filling_overlay.color = electrochromic_color
+		else
+			filling_overlay.color = base_color
+
+		. += list(filling_overlay, overlays_list[2])
+		/* BANDASTATION ADDITION - END */
+		// . += get_airlock_overlay("[airlock_material]_[frame_state]", overlays_file, src, em_block = TRUE) // BANDASTATION REMOVAL
 	else
 		. += get_airlock_overlay("fill_[frame_state]", icon, src, em_block = TRUE)
 

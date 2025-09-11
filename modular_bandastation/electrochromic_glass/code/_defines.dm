@@ -6,5 +6,3 @@
 #define TINTED_ALPHA 2
 /// How much time it takes for tint to change.
 #define TINT_DURATION 0.5 SECONDS
-/// How much power will use single window in active state.
-#define TINTED_WINDOW_POWER_CONSUMPTION 10 WATTS

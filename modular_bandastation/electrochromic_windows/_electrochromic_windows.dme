@@ -1,6 +1,0 @@
-#include "_electrochromic_windows.dm"
-
-#include "code/_defines.dm"
-#include "code/_helpers.dm"
-#include "code/electrochromic_controller.dm"
-#include "code/electrochromic_windows.dm"

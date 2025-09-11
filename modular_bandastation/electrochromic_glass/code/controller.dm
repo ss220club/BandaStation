@@ -5,7 +5,7 @@
 /obj/machinery/button/electrochromic
 	name = "electrochromic glass controller"
 	desc = "Переключатель для электрохромного стекла."
-	icon = 'modular_bandastation/electrochromic_windows/icons/electrochromic_button.dmi'
+	icon = 'modular_bandastation/electrochromic_glass/icons/button.dmi'
 	icon_state = "polarizer"
 	base_icon_state = "polarizer"
 	can_alter_skin = FALSE
@@ -66,19 +66,12 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 	process_controlled_windows(range != TINT_CONTROL_RANGE_AREA ? range(src, range) : button_area)
 
 /obj/machinery/button/electrochromic/proc/process_controlled_windows(control_area)
-	var/windows = 0
 	for(var/obj/structure/window/window in control_area)
-		if(window.electrochromic && (window.id == id || !window.id))
-			window.toggle_polarization()
-			windows++
-	/*
-	for(var/obj/machinery/door/door in control_area)
-		if(!door.polarized_glass)
+		if(!window.electrochromic && (window.electrochromic_id != id || window.electrochromic_id))
 			continue
-		if(door.id == id || !door.id)
-			door.toggle_polarization()
-	*/
-	if(!button_area.window_tint)
-		windows = 0
+		window.toggle_polarization()
 
-	update_mode_power_usage(IDLE_POWER_USE, initial(idle_power_usage) + TINTED_WINDOW_POWER_CONSUMPTION * windows)
+	for(var/obj/machinery/door/airlock/door in control_area)
+		if(!door.glass && (door.electrochromic_id != id || door.electrochromic_id))
+			continue
+		door.toggle_polarization()

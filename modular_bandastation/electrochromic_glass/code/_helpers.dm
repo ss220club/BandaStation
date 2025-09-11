@@ -1,8 +1,5 @@
 /proc/generate_glass_matrix(atom/target, alpha = 1)
-	var/base_color = color_hex2color_matrix(target.color)
-	if(!base_color)
-		base_color = COLOR_MATRIX_IDENTITY
-
+	var/base_color = color_hex2color_matrix(target.color || WINDOW_COLOR)
 	var/red = base_color[1]
 	var/green = base_color[6]
 	var/blue = base_color[11]
