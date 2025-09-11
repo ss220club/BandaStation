@@ -7,6 +7,12 @@
 	/// Color which will be applied when electrochromic window is enabled
 	var/electrochromic_color
 
+/obj/structure/window/Initialize(mapload)
+	. = ..()
+	var/area/current_area = get_area(src)
+	if(electrochromic && current_area.window_tint)
+		toggle_polarization()
+
 /obj/structure/window/fulltile/unanchored/electrochromic
 	glass_amount = 4
 	electrochromic = TRUE
