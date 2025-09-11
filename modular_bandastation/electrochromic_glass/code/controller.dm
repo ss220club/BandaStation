@@ -31,6 +31,13 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 	if(active)
 		toggle_tint()
 
+/obj/machinery/button/electrochromic/on_deconstruction(disassembled)
+	if(active)
+		toggle_tint()
+
+	var/obj/item/wallframe/button/electrochromic/dropped_frame = new /obj/item/wallframe/button/electrochromic(drop_location())
+	transfer_fingerprints_to(dropped_frame)
+
 /obj/machinery/button/electrochromic/attempt_press(mob/user)
 	if(!COOLDOWN_FINISHED(src, electrochromic_toggle_cooldown))
 		return
@@ -76,3 +83,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 	for(var/obj/machinery/door/airlock/door in control_area)
 		if(door.glass && (door.electrochromic_id == id || !door.electrochromic_id))
 			door.toggle_polarization()
+
+/obj/item/wallframe/button/electrochromic
+	name = "electrochromic controller frame"
+	result_path = /obj/machinery/button/electrochromic
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2)
