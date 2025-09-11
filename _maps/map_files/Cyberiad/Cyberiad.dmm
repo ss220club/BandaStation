@@ -36088,19 +36088,18 @@
 /turf/open/floor/wood/large,
 /area/station/service/bar/atrium/ghetto)
 "iOh" = (
-/obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/east,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/landmark/event_spawn,
-/obj/effect/turf_decal/stripes/red/line{
-	dir = 4
-	},
 /obj/effect/turf_decal/stripes/red/corner{
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/red/corner{
 	dir = 8
 	},
+/obj/effect/turf_decal/stripes/red/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/corner,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "iOj" = (
@@ -72898,19 +72897,12 @@
 /turf/open/space/openspace,
 /area/space/nearstation)
 "rSA" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/camera/directional/east{
-	c_tag = "Brig Secure Armory East"
-	},
-/obj/effect/turf_decal/stripes/red/line{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/red/line{
-	dir = 8
-	},
-/obj/machinery/light_switch/directional/east,
-/turf/open/floor/iron/dark,
+/obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/effect/turf_decal/bot_white,
+/obj/structure/rack,
+/obj/effect/spawner/random/armory/rubbershot,
+/obj/machinery/light/directional/east,
+/turf/open/floor/iron/dark/textured_large,
 /area/station/ai_monitored/security/armory)
 "rSG" = (
 /obj/structure/table_frame,
@@ -78014,8 +78006,13 @@
 /obj/effect/turf_decal/bot_white,
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/structure/rack,
-/obj/effect/spawner/random/armory/rubbershot,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/item/sledgehammer/tactical{
+	pixel_y = 3
+	},
+/obj/item/sledgehammer/tactical{
+	pixel_y = -3
+	},
 /turf/open/floor/iron/dark/textured_large,
 /area/station/ai_monitored/security/armory)
 "thw" = (
@@ -79209,15 +79206,18 @@
 /turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "tuo" = (
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 8
 	},
-/obj/effect/turf_decal/stripes/red/corner,
-/obj/effect/turf_decal/stripes/red/corner{
+/obj/machinery/camera/directional/east{
+	c_tag = "Brig Secure Armory East"
+	},
+/obj/effect/turf_decal/stripes/red/line{
 	dir = 4
 	},
+/obj/machinery/power/apc/auto_name/directional/east,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "tuq" = (
@@ -82344,8 +82344,8 @@
 "uhz" = (
 /obj/effect/turf_decal/bot_white,
 /obj/structure/rack,
-/obj/effect/spawner/random/armory/shotgun,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/effect/spawner/random/armory/shotgun,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/ai_monitored/security/armory)
 "uhA" = (
@@ -85800,7 +85800,6 @@
 /turf/open/floor/iron/dark/airless,
 /area/station/science/ordnance)
 "vdS" = (
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 4
@@ -85808,6 +85807,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "vdY" = (
@@ -89879,6 +89879,7 @@
 /obj/structure/rack,
 /obj/effect/spawner/random/armory/laser_gun,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/machinery/light_switch/directional/east,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/ai_monitored/security/armory)
 "wdz" = (
@@ -194257,7 +194258,7 @@ xMu
 kxo
 iOh
 tuo
-rSA
+vdS
 vdS
 vdS
 kst
@@ -194512,9 +194513,9 @@ tYD
 xcz
 hOh
 ahG
-qRY
 hpU
 qRY
+rSA
 uhz
 wdw
 dSh
