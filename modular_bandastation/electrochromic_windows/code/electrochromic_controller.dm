@@ -26,6 +26,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 	. = ..()
 	button_area = get_area(src)
 
+/obj/machinery/button/electrochromic/Destroy()
+	. = ..()
+	if(active)
+		toggle_tint()
+
 /obj/machinery/button/electrochromic/attempt_press(mob/user)
 	if(!COOLDOWN_FINISHED(src, electrochromic_toggle_cooldown))
 		return
@@ -61,10 +66,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 	process_controlled_windows(range != TINT_CONTROL_RANGE_AREA ? range(src, range) : button_area)
 
 /obj/machinery/button/electrochromic/proc/process_controlled_windows(control_area)
+	var/windows = 0
 	for(var/obj/structure/window/window in control_area)
 		if(window.electrochromic && (window.id == id || !window.id))
 			window.toggle_polarization()
-
+			windows++
 	/*
 	for(var/obj/machinery/door/door in control_area)
 		if(!door.polarized_glass)
@@ -72,4 +78,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 		if(door.id == id || !door.id)
 			door.toggle_polarization()
 	*/
+	if(!button_area.window_tint)
+		windows = 0
 
+	update_mode_power_usage(IDLE_POWER_USE, initial(idle_power_usage) + TINTED_WINDOW_POWER_CONSUMPTION * windows)

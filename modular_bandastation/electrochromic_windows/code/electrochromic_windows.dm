@@ -47,4 +47,4 @@
 		window.flags_1 |= UNPAINTABLE_1 // Painting unsupported. For now.
 		window.base_color = generate_glass_matrix(window)
 		window.electrochromic_color = generate_glass_matrix(window, TINTED_ALPHA)
-		window.desc += "Оно может становиться непрозрачным."
+		window.desc += span_info("\nОно может становиться непрозрачным.")
