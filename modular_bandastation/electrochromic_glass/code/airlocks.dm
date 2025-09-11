@@ -9,6 +9,9 @@
 	if(glass && current_area.window_tint)
 		toggle_polarization()
 
+	if(glass)
+		flags_1 = UNPAINTABLE_1
+
 /obj/machinery/door/airlock/proc/toggle_polarization()
 	electrochromed = !electrochromed
 	if(operating || !density)
