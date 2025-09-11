@@ -712,11 +712,12 @@
 /area/station/security/detectives_office)
 "akd" = (
 /obj/effect/mapping_helpers/airlock/access/all/command/general,
-/obj/machinery/door/airlock/command{
-	id_tag = "conference"
-	},
+/obj/machinery/door/airlock/command/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "heads_meeting_inner"
+	},
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "akg" = (
@@ -1394,9 +1395,12 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/door/airlock/command/hos,
+/obj/machinery/door/airlock/command/hos/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/security/hos,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "HoS save room"
+	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/hos)
 "asE" = (
@@ -2836,14 +2840,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/dock)
-"aKo" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 4;
-	id = "Law office"
-	},
-/turf/open/floor/plating,
-/area/station/service/lawoffice)
 "aKp" = (
 /turf/closed/wall/r_wall,
 /area/station/engineering/supermatter)
@@ -4852,9 +4848,9 @@
 	c_tag = "Chief Medical Officer's Quarters";
 	network = list("ss13","medbay")
 	},
-/obj/machinery/button/door/directional/north{
+/obj/machinery/button/electrochromic/directional/north{
 	id = "CMO_bedroom";
-	name = "CMO Office Shutters";
+	name = "CMO Office Tint";
 	req_access = list("cmo")
 	},
 /turf/open/floor/iron/dark,
@@ -5644,15 +5640,16 @@
 /area/station/maintenance/department/medical/ghetto/central)
 "brQ" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/corporate{
-	id_tag = "ntr_door"
-	},
+/obj/machinery/door/airlock/corporate/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/landmark/navigate_destination,
 /obj/effect/mapping_helpers/airlock/access/any/command/magistrate,
 /obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "ntr_privacy"
+	},
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "brR" = (
@@ -8550,7 +8547,7 @@
 /obj/structure/table/wood,
 /obj/item/melee/chainofcommand,
 /obj/machinery/light_switch/directional/south,
-/obj/machinery/button/door/directional/north{
+/obj/machinery/button/electrochromic/directional/south{
 	id = "HoS save room";
 	name = "Brig Courtroom Shutter Control";
 	req_access = list("brig");
@@ -13133,6 +13130,10 @@
 /obj/structure/railing{
 	dir = 8
 	},
+/obj/machinery/button/electrochromic/directional/west{
+	pixel_y = 9;
+	id = "bar_atrium"
+	},
 /turf/open/openspace,
 /area/station/commons/lounge)
 "dfE" = (
@@ -13251,9 +13252,8 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 8
 	},
-/obj/machinery/button/door/directional/east{
-	id = "interrogation_small";
-	pixel_y = 6
+/obj/machinery/button/electrochromic/directional/east{
+	id = "interrogation"
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/interrogation)
@@ -16558,13 +16558,14 @@
 /area/station/maintenance/disposal)
 "dXu" = (
 /obj/structure/cable,
-/obj/machinery/door/airlock/command/hos{
-	id_tag = "hos_door"
-	},
+/obj/machinery/door/airlock/command/hos/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
 /obj/effect/mapping_helpers/airlock/access/any/security/hos,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "HoS_office"
+	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "dXD" = (
@@ -16820,19 +16821,19 @@
 	color = "yellow"
 	},
 /obj/machinery/button/door{
-	name = "CMO Office Shutters";
-	id = "CMO";
-	req_access = list("cmo");
-	pixel_y = -2;
-	pixel_x = 6
-	},
-/obj/machinery/button/door{
 	name = "CMO Door Control";
 	id = "CMO_door";
 	req_access = list("cmo");
 	pixel_y = 8;
 	pixel_x = 6;
 	normaldoorcontrol = 1
+	},
+/obj/machinery/button/electrochromic{
+	pixel_x = 6;
+	pixel_y = -1;
+	id = "CMO";
+	name = "CMO Office Tint";
+	req_access = list("cmo")
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/cmo)
@@ -17126,9 +17127,12 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/door/airlock/security,
+/obj/machinery/door/airlock/security/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "interrogation"
+	},
 /turf/open/floor/iron/dark,
 /area/station/security/interrogation)
 "eex" = (
@@ -22124,6 +22128,9 @@
 /obj/machinery/door/airlock/lawyer,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "Law office"
+	},
 /turf/open/floor/wood/tile,
 /area/station/service/lawoffice)
 "fuI" = (
@@ -22652,10 +22659,7 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet/locker)
 "fBj" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 4;
-	name = "Privacy Shutters";
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
 	id = "heads_meeting_inner"
 	},
 /turf/open/floor/plating,
@@ -24910,9 +24914,9 @@
 /obj/effect/turf_decal/trimline/dark/warning{
 	dir = 5
 	},
-/obj/machinery/button/door/directional/north{
-	name = "ViP Hall Shutters Control";
-	id = "viphall"
+/obj/machinery/button/electrochromic/directional/north{
+	id = "viphall";
+	name = "ViP Hall Tint Control"
 	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
@@ -25826,9 +25830,7 @@
 /turf/open/floor/engine/air,
 /area/station/engineering/atmos)
 "gnI" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	name = "ViP Hall Shutters";
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
 	id = "viphall"
 	},
 /turf/open/floor/plating,
@@ -26553,14 +26555,6 @@
 	},
 /turf/open/floor/iron/kitchen_coldroom/dark,
 /area/station/service/kitchen/coldroom/ghetto)
-"gyL" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "Magistrate office"
-	},
-/turf/open/floor/plating,
-/area/station/command/heads_quarters/magistrate)
 "gyU" = (
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
@@ -26691,6 +26685,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "psychological_office_tint"
+	},
 /turf/open/floor/wood/large,
 /area/station/medical/psychology)
 "gAg" = (
@@ -27217,12 +27214,6 @@
 	dir = 1
 	},
 /obj/machinery/button/door/directional/south{
-	id = "ntr_privacy";
-	name = "Privacy Shutters Control";
-	pixel_x = -6;
-	req_access = list("nanotrasen_representative")
-	},
-/obj/machinery/button/door/directional/south{
 	id = "ntr_door";
 	name = "Door Control";
 	specialfunctions = 4;
@@ -27231,6 +27222,13 @@
 	pixel_x = 6
 	},
 /obj/effect/landmark/start/nanotrasen_representative,
+/obj/machinery/button/electrochromic/directional/south{
+	id = "ntr_privacy";
+	name = "Privacy Shutters Control";
+	req_access = list("nanotrasen_representative");
+	pixel_y = -24;
+	pixel_x = -6
+	},
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "gHx" = (
@@ -29496,12 +29494,6 @@
 	dir = 1
 	},
 /obj/machinery/button/door/directional/south{
-	id = "blueshield_privacy";
-	name = "Privacy Shutters Control";
-	pixel_x = -6;
-	req_access = list("blueshield")
-	},
-/obj/machinery/button/door/directional/south{
 	id = "blueshield_door";
 	name = "Door Control";
 	specialfunctions = 4;
@@ -29510,6 +29502,13 @@
 	pixel_x = 6
 	},
 /obj/effect/landmark/start/blueshield,
+/obj/machinery/button/electrochromic/directional/south{
+	id = "blueshield_privacy";
+	name = "Privacy Shutters Control";
+	req_access = list("blueshield");
+	pixel_y = -24;
+	pixel_x = -6
+	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
 "hiz" = (
@@ -29853,7 +29852,9 @@
 /turf/open/floor/iron,
 /area/station/service/kitchen/kitchen_backroom/ghetto)
 "hne" = (
-/obj/effect/spawner/structure/window,
+/obj/effect/spawner/structure/window/electrochromic{
+	id = "surgery_2"
+	},
 /turf/open/floor/plating,
 /area/station/medical/surgery/aft)
 "hng" = (
@@ -30405,11 +30406,8 @@
 /turf/open/openspace,
 /area/station/security/prison)
 "hup" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "blueshield_privacy";
-	name = "Privacy Shutters";
-	dir = 8
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "blueshield_privacy"
 	},
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/blueshield)
@@ -32842,9 +32840,12 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/door/airlock/security,
+/obj/machinery/door/airlock/security/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "courtroom"
+	},
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
 "hWR" = (
@@ -33154,14 +33155,13 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet/locker)
 "iaJ" = (
-/obj/effect/spawner/structure/window/reinforced,
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "Law office"
+	},
 /obj/structure/cable,
 /obj/machinery/door/poddoor/preopen{
 	name = "Security Blast Door";
 	id = "Secure Gate"
-	},
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "Law office"
 	},
 /turf/open/floor/plating,
 /area/station/service/lawoffice)
@@ -34654,10 +34654,8 @@
 /turf/open/floor/iron/white,
 /area/station/common/cryopods)
 "ivi" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "ntr_privacy";
-	name = "Privacy Shutters"
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "ntr_privacy"
 	},
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/nanotrasen_representative)
@@ -35244,7 +35242,9 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "iEr" = (
-/obj/effect/spawner/structure/window,
+/obj/effect/spawner/structure/window/electrochromic{
+	id = "bar_atrium"
+	},
 /turf/open/floor/plating,
 /area/station/commons/lounge)
 "iEw" = (
@@ -35586,12 +35586,9 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "iIC" = (
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	name = "Privacy Shutters";
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
 	id = "heads_meeting_outer"
 	},
-/obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/command/meeting_room)
@@ -35695,14 +35692,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cult,
 /area/station/maintenance/starboard/fore)
-"iJT" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 4;
-	id = "Magistrate office"
-	},
-/turf/open/floor/plating,
-/area/station/command/heads_quarters/magistrate)
 "iJW" = (
 /obj/structure/chair/sofa/left/brown{
 	dir = 1
@@ -36632,15 +36621,6 @@
 /obj/structure/tank_dispenser,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
-"iVx" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "ntr_privacy";
-	name = "Privacy Shutters";
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/station/command/heads_quarters/nanotrasen_representative)
 "iVD" = (
 /obj/structure/sign/poster/random/directional/west,
 /obj/effect/decal/cleanable/dirt,
@@ -37009,9 +36989,7 @@
 /turf/open/floor/engine/hull/reinforced,
 /area/space/nearstation)
 "iZA" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	name = "ViP Hall Shutters";
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
 	id = "viphall"
 	},
 /turf/open/floor/plating/airless,
@@ -40371,9 +40349,8 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "jSn" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "psychological_office_shutters"
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "psychological_office_tint"
 	},
 /turf/open/floor/plating,
 /area/station/medical/psychology)
@@ -40918,15 +40895,16 @@
 /area/station/maintenance/starboard/fore)
 "jZn" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/corporate{
-	id_tag = "blueshield_door"
-	},
+/obj/machinery/door/airlock/corporate/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/landmark/navigate_destination,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
 /obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "blueshield_privacy"
+	},
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/blueshield)
 "jZr" = (
@@ -40987,9 +40965,9 @@
 	},
 /obj/machinery/light/directional/north,
 /obj/machinery/light_switch/directional/north,
-/obj/machinery/button/door/directional/north{
+/obj/machinery/button/electrochromic/directional/north{
 	id = "HoS_office";
-	name = "Brig Courtroom Shutter Control";
+	name = "Brig Courtroom TintControl";
 	req_access = list("brig");
 	pixel_x = 10;
 	pixel_y = 26
@@ -42212,7 +42190,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
 	},
-/obj/machinery/door/airlock/medical,
+/obj/machinery/door/airlock/medical/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/medical/surgery,
 /obj/machinery/door/firedoor,
@@ -42222,6 +42200,9 @@
 /obj/structure/cable,
 /obj/machinery/duct,
 /obj/effect/mapping_helpers/airlock/unres,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "surgery_1"
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
 "kpz" = (
@@ -42605,6 +42586,9 @@
 	},
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
+	},
+/obj/machinery/button/electrochromic/directional/west{
+	id = "surgery_2"
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
@@ -43895,7 +43879,9 @@
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "kJB" = (
-/obj/effect/spawner/structure/window/reinforced,
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "courtroom"
+	},
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/security/courtroom/holding)
@@ -44783,12 +44769,6 @@
 /area/station/maintenance/aft)
 "kUk" = (
 /obj/structure/table/wood,
-/obj/machinery/button/door/directional/south{
-	id = "heads_meeting_outer";
-	name = "Privacy Shutters Control";
-	pixel_x = -10;
-	pixel_y = 24
-	},
 /obj/machinery/button/door/directional/north{
 	specialfunctions = 4;
 	normaldoorcontrol = 1;
@@ -44797,11 +44777,15 @@
 /obj/item/radio/intercom/command,
 /obj/machinery/light/directional/north,
 /obj/effect/turf_decal/siding/wood,
-/obj/machinery/button/door/directional/south{
+/obj/machinery/button/electrochromic/directional/north{
+	id = "heads_meeting_outer";
+	name = "Privacy Tint Control";
+	pixel_x = -10
+	},
+/obj/machinery/button/electrochromic/directional/north{
 	id = "heads_meeting_inner";
-	name = "Privacy Shutters Control";
-	pixel_x = 10;
-	pixel_y = 24
+	name = "Privacy Tint Control";
+	pixel_x = 10
 	},
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
@@ -45012,10 +44996,8 @@
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/rd)
 "kXl" = (
-/obj/effect/spawner/structure/window,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "JimNortonBottom";
-	dir = 4
+/obj/effect/spawner/structure/window/electrochromic{
+	id = "cafeteria"
 	},
 /turf/open/floor/plating,
 /area/station/service/cafeteria)
@@ -47034,11 +47016,8 @@
 /turf/open/floor/iron/dark,
 /area/station/science/xenobiology)
 "lvi" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "court_privacy";
-	dir = 4;
-	name = "Privacy Shutters"
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "court_privacy"
 	},
 /turf/open/floor/plating,
 /area/station/security/courtroom)
@@ -48767,14 +48746,6 @@
 /obj/effect/spawner/random/trash/soap,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
-"lSv" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "HoS save room"
-	},
-/turf/open/floor/plating,
-/area/station/command/heads_quarters/hos)
 "lSF" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/south,
@@ -51368,8 +51339,7 @@
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
 "mBo" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
 	id = "Magistrate office"
 	},
 /turf/open/floor/plating,
@@ -52622,13 +52592,16 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/corporate,
+/obj/machinery/door/airlock/corporate/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
 /obj/effect/landmark/navigate_destination,
 /obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
 /obj/effect/mapping_helpers/airlock/access/any/command/magistrate,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "Magistrate office"
+	},
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/magistrate)
 "mQo" = (
@@ -53152,11 +53125,8 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "mXM" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "CMO_bedroom";
-	name = "CMO Office Shutters"
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "CMO_bedroom"
 	},
 /obj/structure/cable,
 /turf/open/floor/plating,
@@ -53482,14 +53452,12 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/electrical)
 "nbI" = (
-/obj/effect/spawner/structure/window/reinforced,
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "Law office"
+	},
 /obj/machinery/door/poddoor/preopen{
 	name = "Security Blast Door";
 	id = "Secure Gate"
-	},
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "Law office";
-	dir = 8
 	},
 /turf/open/floor/plating,
 /area/station/service/lawoffice)
@@ -53622,13 +53590,10 @@
 /turf/open/floor/iron,
 /area/station/commons/locker)
 "ndZ" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	dir = 8;
-	id = "CMO";
-	name = "CMO Office Shutters"
-	},
 /obj/structure/cable,
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "CMO"
+	},
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/cmo)
 "neh" = (
@@ -54553,6 +54518,11 @@
 /obj/machinery/camera/directional/west{
 	c_tag = "Brig Prisoner Processing West"
 	},
+/obj/machinery/button/electrochromic/directional/west{
+	id = "courtroom";
+	name = "Courtroom Tint Control";
+	req_access = list("security")
+	},
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
 "npf" = (
@@ -55058,14 +55028,13 @@
 /area/station/commons/dorms)
 "nvN" = (
 /obj/machinery/vending/wardrobe/law_wardrobe,
-/obj/machinery/button/door/directional/east{
-	id = "Law office";
-	name = "Law Office Shutter Control";
-	req_access = list("lawyer");
-	pixel_x = -24
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
+	},
+/obj/machinery/button/electrochromic/directional/west{
+	id = "Law office";
+	name = "Law Office Shutter Control";
+	req_access = list("lawyer")
 	},
 /turf/open/floor/wood/tile,
 /area/station/service/lawoffice)
@@ -55959,7 +55928,9 @@
 /turf/open/floor/plating,
 /area/station/service/chapel/monastery)
 "nHJ" = (
-/obj/effect/spawner/structure/window,
+/obj/effect/spawner/structure/window/electrochromic{
+	id = "surgery_1"
+	},
 /turf/open/floor/plating,
 /area/station/medical/surgery/fore)
 "nHO" = (
@@ -57654,6 +57625,9 @@
 /obj/machinery/door/airlock/lawyer,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "Law office"
+	},
 /turf/open/floor/plating,
 /area/station/service/lawoffice)
 "ocG" = (
@@ -58304,10 +58278,6 @@
 /obj/structure/table/wood,
 /obj/machinery/coffeemaker/impressa,
 /obj/machinery/button/door/directional/south{
-	name = "Jim Norton's Quebecois Coffee South Shutters Control";
-	id = "JimNortonBottom"
-	},
-/obj/machinery/button/door/directional/south{
 	id = "JimNortonKitchen";
 	name = "Jim Norton's Quebecois Coffee North Shutters Control";
 	pixel_x = -10
@@ -58318,6 +58288,9 @@
 	id = "JimNortonDoor";
 	name = "Jim Norton's Quebecois Coffee Door Lock";
 	pixel_x = 10
+	},
+/obj/machinery/button/electrochromic/directional/south{
+	id = "cafeteria"
 	},
 /turf/open/floor/wood,
 /area/station/service/cafeteria)
@@ -62241,13 +62214,14 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/access/all/command/general,
-/obj/machinery/door/airlock/command{
-	id_tag = "conference"
-	},
+/obj/machinery/door/airlock/command/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "heads_meeting_inner"
 	},
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
@@ -65580,14 +65554,14 @@
 	pixel_x = -4;
 	pixel_y = 5
 	},
-/obj/machinery/button/door/directional/east{
-	id = "Magistrate office";
-	name = "Magistrate Office Shutters Control";
-	req_access = list("magistrate")
-	},
 /obj/item/megaphone{
 	pixel_x = 6;
 	pixel_y = 5
+	},
+/obj/machinery/button/electrochromic/directional/east{
+	name = "Magistrate Office Tint Control";
+	req_access = list("magistrate");
+	id = "Magistrate office"
 	},
 /turf/open/floor/carpet/black,
 /area/station/command/heads_quarters/magistrate)
@@ -66530,12 +66504,10 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "qlc" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "HoS save room";
-	dir = 4
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "HoS save room"
 	},
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/hos)
 "qlf" = (
@@ -66771,12 +66743,12 @@
 	pixel_y = -2;
 	req_access = list("psychology")
 	},
-/obj/machinery/button/door/directional/south{
+/obj/machinery/button/electrochromic{
 	id = "psychological_office_shutters";
 	name = "Psychological Office Shutters Control";
+	req_access = list("psychology");
 	pixel_x = -15;
-	pixel_y = 8;
-	req_access = list("psychology")
+	pixel_y = 8
 	},
 /turf/open/floor/carpet,
 /area/station/medical/psychology)
@@ -67925,6 +67897,13 @@
 /obj/structure/chair/stool/directional/south,
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/starboard)
+"qFG" = (
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "CMO"
+	},
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/station/command/heads_quarters/cmo)
 "qFH" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
@@ -71251,8 +71230,7 @@
 /turf/open/floor/iron/edge,
 /area/station/security/checkpoint/customs)
 "ruP" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
 	id = "Law office"
 	},
 /turf/open/floor/plating,
@@ -72199,12 +72177,10 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage_shared)
 "rJx" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/shutters{
-	name = "Vacant Store Shutters";
-	id = "interrogation_small"
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "interrogation"
 	},
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/security/interrogation)
 "rJy" = (
@@ -76622,12 +76598,15 @@
 /turf/open/floor/carpet/black,
 /area/station/maintenance/ghetto/fore/starboard)
 "sLZ" = (
-/obj/machinery/door/airlock/corporate,
+/obj/machinery/door/airlock/corporate/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/access/any/command/magistrate,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "Magistrate office"
+	},
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/magistrate)
 "sMw" = (
@@ -77337,9 +77316,12 @@
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "sWy" = (
-/obj/machinery/door/airlock/security,
+/obj/machinery/door/airlock/security/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "courtroom"
+	},
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom/holding)
 "sWD" = (
@@ -78227,6 +78209,9 @@
 	},
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
+	},
+/obj/machinery/button/electrochromic/directional/east{
+	id = "surgery_1"
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
@@ -82055,15 +82040,16 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/door/airlock/command/cmo{
-	id_tag = "CMO_door"
-	},
+/obj/machinery/door/airlock/command/cmo/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
 /obj/effect/landmark/navigate_destination,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
 /obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /obj/effect/mapping_helpers/airlock/access/any/medical/cmo,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "CMO"
+	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/cmo)
 "uex" = (
@@ -82780,6 +82766,9 @@
 /obj/machinery/door/airlock/lawyer,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "Law office"
+	},
 /turf/open/floor/wood/tile,
 /area/station/service/lawoffice)
 "unD" = (
@@ -83518,11 +83507,11 @@
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/gavelblock,
 /obj/item/gavelhammer,
-/obj/machinery/button/door{
-	req_access = list("magistrate");
+/obj/machinery/button/electrochromic/directional{
+	pixel_y = 12;
 	id = "court_privacy";
 	name = "Privacy Control";
-	pixel_y = 12
+	req_access = list("magistrate")
 	},
 /turf/open/floor/carpet/black,
 /area/station/security/courtroom)
@@ -87711,13 +87700,16 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/medical,
+/obj/machinery/door/airlock/medical/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/medical/surgery,
 /obj/machinery/door/firedoor,
 /obj/machinery/duct,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/unres,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "surgery_2"
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "vzR" = (
@@ -88652,12 +88644,13 @@
 "vMr" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/public{
-	id_tag = "JimNortonDoor"
-	},
+/obj/machinery/door/airlock/public/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "cafeteria"
+	},
 /turf/open/floor/wood,
 /area/station/service/cafeteria)
 "vMy" = (
@@ -89690,12 +89683,10 @@
 /turf/open/floor/iron,
 /area/station/cargo/drone_bay/ghetto)
 "wba" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "HoS_office";
-	dir = 8
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "HoS_office"
 	},
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/hos)
 "wbi" = (
@@ -90142,13 +90133,16 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/corporate,
+/obj/machinery/door/airlock/corporate/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/any/security/general,
 /obj/effect/mapping_helpers/airlock/access/any/security/court,
 /obj/effect/mapping_helpers/airlock/access/any/command/magistrate,
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/electrochromic{
+	id = "court_privacy"
 	},
 /turf/open/floor/wood/parquet,
 /area/station/security/courtroom)
@@ -90539,14 +90533,6 @@
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/project)
-"wme" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "blueshield_privacy";
-	name = "Privacy Shutters"
-	},
-/turf/open/floor/plating,
-/area/station/command/heads_quarters/blueshield)
 "wmf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -190161,11 +190147,11 @@ wyw
 iaJ
 coZ
 qCY
-aKo
-aKo
+ruP
+ruP
 unz
-aKo
-aKo
+ruP
+ruP
 coZ
 aJf
 ruP
@@ -190416,8 +190402,8 @@ eIk
 cEj
 awr
 acI
-aKo
-aKo
+ruP
+ruP
 acI
 izL
 fru
@@ -190426,7 +190412,7 @@ acI
 acI
 mrf
 mrf
-gyL
+mBo
 sLZ
 mrf
 mrf
@@ -192285,9 +192271,9 @@ reL
 nIQ
 rsT
 reL
-iVx
-iVx
-iVx
+ivi
+ivi
+ivi
 reL
 dkb
 owv
@@ -192481,9 +192467,9 @@ nMb
 gkK
 lyE
 mrf
-iJT
-iJT
-iJT
+mBo
+mBo
+mBo
 mrf
 mrf
 ffP
@@ -194080,7 +194066,7 @@ wsw
 ycB
 hLh
 qoM
-wme
+hup
 dHl
 oFW
 mMg
@@ -194594,7 +194580,7 @@ oBG
 gRK
 rTb
 qoM
-wme
+hup
 vvG
 oFW
 fPJ
@@ -199651,11 +199637,11 @@ tYD
 tYD
 dFP
 tYD
-lSv
+qlc
 mGp
 iZP
 mBL
-lSv
+qlc
 uIx
 jvK
 otN
@@ -199908,7 +199894,7 @@ tYD
 tYD
 dFP
 kJd
-lSv
+qlc
 xFo
 gbz
 gbz
@@ -200165,11 +200151,11 @@ tYD
 tYD
 dFP
 tYD
-lSv
+qlc
 hLA
 dYI
 pED
-lSv
+qlc
 ycW
 jQg
 aPi
@@ -203593,8 +203579,8 @@ rOZ
 htm
 xoo
 ues
-ndZ
-ndZ
+qFG
+qFG
 ndZ
 xoo
 xoo
