@@ -67,11 +67,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 
 /obj/machinery/button/electrochromic/proc/process_controlled_windows(control_area)
 	for(var/obj/structure/window/window in control_area)
-		if(!window.electrochromic && (window.electrochromic_id != id || window.electrochromic_id))
-			continue
-		window.toggle_polarization()
+		if(window.electrochromic && (window.electrochromic_id == id || !window.electrochromic_id))
+			window.toggle_polarization()
 
 	for(var/obj/machinery/door/airlock/door in control_area)
-		if(!door.glass && (door.electrochromic_id != id || door.electrochromic_id))
-			continue
-		door.toggle_polarization()
+		if(door.glass && (door.electrochromic_id == id || !door.electrochromic_id))
+			door.toggle_polarization()
