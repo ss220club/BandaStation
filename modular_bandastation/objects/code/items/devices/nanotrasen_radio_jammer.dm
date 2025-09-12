@@ -1,17 +1,12 @@
-/proc/is_within_nt_radio_jammer_range(atom/source)
-	for(var/obj/item/jammer/jammer as anything in GLOB.active_jammers)
-		if(IN_GIVEN_RANGE(source, jammer, jammer.range))
-			if(!istype(jammer, /obj/item/jammer/nt))
-				continue
-			return TRUE
-	return FALSE
-
 /obj/item/jammer/nt
 	name = "Nanotrasen radio jammer"
 	desc = "Корпоративный генератор помех Нанотрейзен. Компактное устройство, способное эффективно блокировать широкий спектр радиочастот. На обратной стороне выгравировано: «Собственность корпорации Нанотрейзен. Корпорация не несёт ответственности за использование устройства третьими лицами, а также за любые действия, совершённые с его применением в случае кражи»."
 	icon = 'modular_bandastation/objects/icons/obj/items/nt_radio_jammer.dmi'
 	icon_state = "nt_jammer_v2"
 	range = 18
+	whitelist_frequencies = list(
+		"ЦК"
+	)
 	var/centcom_blackout = FALSE
 
 /obj/item/jammer/nt/Initialize(mapload)

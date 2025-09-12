@@ -314,12 +314,13 @@ effective or pretty fucking useless.
 		Lasts indefinitely in darkness, but will not recharge unless inactive."
 	actions_types = list(/datum/action/item_action/stealth_mode/weaker)
 
+//BANDASTATION EDIT: Add channel recive
 /// Checks if a given atom is in range of a radio jammer, returns TRUE if it is.
-/proc/is_within_radio_jammer_range(atom/source)
+/proc/is_within_radio_jammer_range(atom/source, channel)
 	for(var/obj/item/jammer/jammer as anything in GLOB.active_jammers)
 		if(IN_GIVEN_RANGE(source, jammer, jammer.range))
-			//BANDASTATION EDIT: Check for nt jammer
-			if(istype(jammer, /obj/item/jammer/nt))
+			//BANDASTATION EDIT: Check for frequencies
+			if(channel in jammer.whitelist_frequencies)
 				continue
 			return TRUE
 	return FALSE
@@ -340,6 +341,11 @@ effective or pretty fucking useless.
 	/// The delay between using the disruptor wave
 	var/jam_cooldown_duration = 15 SECONDS
 	COOLDOWN_DECLARE(jam_cooldown)
+
+	/// BANDASTATION EDIT ADD: Jammer WL Channel
+	var/list/whitelist_frequencies = list(
+        "Синдикат" // Оффовская частота синдиката
+    )
 
 /obj/item/jammer/Initialize(mapload)
 	. = ..()

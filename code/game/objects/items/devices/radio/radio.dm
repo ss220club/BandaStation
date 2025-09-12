@@ -332,12 +332,9 @@
 		freq = frequency
 		channel = null
 
-	//BANDASTATION EDIT: add check for NT radio
-	if(is_within_nt_radio_jammer_range(src) && !(special_channels & RADIO_SPECIAL_CENTCOM))
-		return
-
+	// BANDASTATION EDIT: Add frequency send to proc
 	// Nearby active jammers prevent the message from transmitting
-	if(is_within_radio_jammer_range(src) && !(special_channels & RADIO_SPECIAL_SYNDIE))
+	if(is_within_radio_jammer_range(src, channel))
 		return
 
 	// Determine the identity information which will be attached to the signal.
@@ -419,10 +416,6 @@
 			return FALSE
 
 	if (input_frequency == FREQ_SYNDICATE && !(special_channels & RADIO_SPECIAL_SYNDIE))
-		return FALSE
-
-	// BANDASTATION EDIT: Add check for NT jammer. For block receive
-	if(is_within_nt_radio_jammer_range(src) && !(special_channels & RADIO_SPECIAL_CENTCOM))
 		return FALSE
 
 	// allow checks: are we listening on that frequency?

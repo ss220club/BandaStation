@@ -591,14 +591,7 @@
 		if(alert_able && !alert_silenced)
 			playsound(computer, 'sound/machines/terminal/terminal_error.ogg', 15, TRUE)
 		return FALSE
-	// BANDASTATION EDIT: add check for NT Jammers
-	if(is_within_nt_radio_jammer_range(computer) && !rigged)
-		// different message so people know it's a NT jammer
-		if(sender)
-			to_chat(sender, span_notice("ERROR: Network unavailable, please try again later."))
-		if(alert_able && !alert_silenced)
-			playsound(computer, 'sound/machines/terminal/terminal_error.ogg', 15, TRUE)
-		return FALSE
+
 	// used for logging
 	var/list/stringified_targets = list()
 
