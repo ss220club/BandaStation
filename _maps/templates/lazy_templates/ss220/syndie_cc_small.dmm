@@ -133,7 +133,8 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "bMd" = (
-/obj/machinery/computer/shuttle/syndicate/sit{
+/obj/machinery/computer/shuttle/syndicate{
+	name = "Nuclear Operatives Shuttle Console";
 	dir = 4
 	},
 /turf/open/floor/carpet/black,
@@ -1085,7 +1086,7 @@
 /area/centcom/syndicate_base)
 "mjQ" = (
 /obj/structure/noticeboard/directional/west,
-/obj/machinery/computer/shuttle/syndicate/sit,
+/obj/item/banner/syndicate,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
 "mkU" = (
@@ -1111,7 +1112,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "mtm" = (
-/obj/machinery/computer/shuttle/syndicate/sst,
+/obj/item/banner/syndicate,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
 "muB" = (
