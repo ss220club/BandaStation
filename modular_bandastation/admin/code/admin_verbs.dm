@@ -63,15 +63,7 @@ ADMIN_VERB(play_zlevel_sound, R_SOUND, "Play Z-level Sound", "Plays a sound only
 		return
 	vol = clamp(vol, 1, 100)
 
-	var/sound/admin_sound = new
-	admin_sound.file = sound
-	admin_sound.priority = 250
-	admin_sound.channel = CHANNEL_ADMIN
-	admin_sound.frequency = 1
-	admin_sound.wait = 1
-	admin_sound.repeat = FALSE
-	admin_sound.status = SOUND_STREAM
-	admin_sound.volume = vol
+	var/sound/admin_sound = prepare_admin_sound(vol, sound)
 
 	var/zlevel = user.mob.z
 	log_admin("[key_name(user)] played a z-level sound [sound] on level [zlevel]")
@@ -94,15 +86,7 @@ ADMIN_VERB(play_sound_in_view, R_SOUND, "Play Sound in View", "Plays a sound to 
 		return
 	vol = clamp(vol, 1, 100)
 
-	var/sound/admin_sound = new
-	admin_sound.file = sound
-	admin_sound.priority = 250
-	admin_sound.channel = CHANNEL_ADMIN
-	admin_sound.frequency = 1
-	admin_sound.wait = 1
-	admin_sound.repeat = FALSE
-	admin_sound.status = SOUND_STREAM
-	admin_sound.volume = vol
+	var/sound/admin_sound = prepare_admin_sound(vol, sound)
 
 	var/list/mob/hearers = list()
 	// If non-default we need additional calculations
