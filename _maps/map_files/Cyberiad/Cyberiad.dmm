@@ -13858,7 +13858,7 @@
 /turf/open/misc/beach/sand,
 /area/station/hallway/secondary/exit/departure_lounge)
 "dne" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/cargo/office)
 "dny" = (
@@ -24945,7 +24945,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port)
 "gcr" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 8
 	},
@@ -26368,6 +26368,7 @@
 	c_tag = "Library - South";
 	dir = 2
 	},
+/obj/structure/statue/gold/galactic_map,
 /turf/open/floor/wood,
 /area/station/service/library)
 "gwp" = (
@@ -26760,7 +26761,7 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 1
 	},
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/port/aft)
 "gBK" = (
@@ -28063,7 +28064,7 @@
 /turf/open/floor/circuit,
 /area/station/ai_monitored/turret_protected/ai_upload)
 "gPR" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
@@ -59215,13 +59216,6 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white/diagonal,
 /area/station/maintenance/ghetto/starboard)
-"ovB" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/holopad,
-/turf/open/floor/iron,
-/area/station/command/bridge)
 "ovC" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -73672,6 +73666,7 @@
 /area/station/maintenance/department/medical/ghetto/central)
 "saE" = (
 /obj/effect/spawner/random/vending/snackvend,
+/obj/machinery/wall_healer/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "saM" = (
@@ -81861,6 +81856,7 @@
 /obj/machinery/camera/directional/east{
 	c_tag = "Arrivals Hallway"
 	},
+/obj/structure/extinguisher_cabinet/directional/east,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "uaM" = (
@@ -92015,7 +92011,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/aft)
 "wEj" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
@@ -92998,7 +92994,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 9
 	},
-/obj/machinery/vending/wallmed/directional/north,
+/obj/machinery/wall_healer/directional/north,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/lobby)
 "wQN" = (
@@ -97192,9 +97188,9 @@
 /turf/open/floor/iron/white,
 /area/station/medical/medbay)
 "xRD" = (
-/obj/structure/extinguisher_cabinet/directional/north,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/wall_healer/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "xRI" = (
@@ -98042,7 +98038,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/dock)
 "ydo" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "ydt" = (
@@ -193161,7 +193157,7 @@ cUG
 uHz
 mky
 aPX
-ovB
+nib
 fZj
 fZj
 wMd

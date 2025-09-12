@@ -46,7 +46,6 @@ type Category = {
 
 type VendingData = {
   all_products_free: boolean;
-  onstation: boolean;
   ad: string;
   department: string;
   jobDiscount: number;
@@ -66,7 +65,7 @@ export const Vending = () => {
   const { data } = useBackend<VendingData>();
 
   const {
-    onstation,
+    all_products_free,
     ad,
     product_records = [],
     coin_records = [],
@@ -112,7 +111,7 @@ export const Vending = () => {
     <Window width={431} height={635}>
       <Window.Content>
         <Stack fill vertical>
-          {!!onstation && (
+          {!all_products_free && (
             <Stack.Item>
               <UserDetails />
             </Stack.Item>
@@ -392,11 +391,11 @@ const ProductPrice = (props: ProductPriceProps) => {
   const { data } = useBackend<VendingData>();
   const { displayed_currency_name } = data;
   const { discount, free, product, redPrice } = props;
-  let standardPrice = product.price + '';
+  let standardPrice = `${product.price}`;
   if (free) {
     standardPrice = 'Бесплатно';
   } else if (discount) {
-    standardPrice = redPrice + '';
+    standardPrice = `${redPrice}`;
   }
   return (
     <Stack.Item fontSize={0.85} color={'gold'}>
