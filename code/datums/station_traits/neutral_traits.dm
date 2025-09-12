@@ -120,7 +120,7 @@
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 1
 	show_in_report = TRUE
-	report_message = "Пожалуйста, будь с ним поласковее."
+	report_message = "Пожалуйста, будьте с ним поласковее."
 	blacklist = list(/datum/station_trait/announcement_medbot, /datum/station_trait/birthday)
 
 /datum/station_trait/announcement_intern/New()
@@ -254,7 +254,7 @@
 			spawned_mob.equip_to_storage(birthday_invite, ITEM_SLOT_BACK, indirect_action = TRUE) //Just incase someone spawns with both hands full.
 
 /obj/item/birthday_invite
-	name = "приглашение на день рождения"
+	name = "birthday invitation"
 	desc = "Открытка с сообщением о том, что у кого-то сегодня день рождения."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_TINY
@@ -266,7 +266,7 @@
 
 /obj/item/clothing/head/costume/party
 	name = "party hat"
-	desc = "Дурацкая бумажная шляпа, которую вы ОБЯЗАНЫ носить."
+	desc = "Дурацкий бумажный колпак, который вы ОБЯЗАНЫ носить."
 	icon_state = "party_hat"
 	greyscale_config =  /datum/greyscale_config/party_hat
 	greyscale_config_worn = /datum/greyscale_config/party_hat/worn
@@ -370,7 +370,7 @@
 	trait_flags = STATION_TRAIT_PLANETARY
 	weight = 10
 	show_in_report = TRUE
-	report_message = "Там, конечно, много деревьев."
+	report_message = "Тут действительно много деревьев."
 
 /datum/station_trait/linked_closets
 	name = "Аномалия в шкафу"

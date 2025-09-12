@@ -46,7 +46,7 @@
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 2
 	show_in_report = TRUE
-	report_message = "Извините за это, мы не ожидали, что столкнемся с этим блюющем гусем, когда везём вас на новую станцию."
+	report_message = "Извините за это, мы не ожидали, что столкнёмся с этим блюющим гусем, когда будем отправлять вас на новую станцию."
 	trait_to_give = STATION_TRAIT_LATE_ARRIVALS
 	blacklist = list(/datum/station_trait/random_spawns, /datum/station_trait/hangover)
 
@@ -55,7 +55,7 @@
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 2
 	show_in_report = TRUE
-	report_message = "Извините, мы пролетели мимо вашей станции на несколько миль, поэтому просто доставили вас к вашей станции на капсулах. Надеемся, вы не против!"
+	report_message = "Извините, мы пролетели мимо вашей станции на несколько миль, поэтому просто доставили вас к станции на капсулах. Надеемся, вы не против!"
 	trait_to_give = STATION_TRAIT_RANDOM_ARRIVALS
 	blacklist = list(/datum/station_trait/late_arrivals, /datum/station_trait/hangover)
 
@@ -64,7 +64,7 @@
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 2
 	show_in_report = TRUE
-	report_message = "Ооо....Чувак....Эта обязательная офисная вечеринка в прошлую смену... Боже, это было потрясающе.. Я проснулся в каком-то туалете в трёх секторах отсюда..."
+	report_message = "Оох... Чувак... Эта обязательная офисная вечеринка в прошлую смену... Боже, это было потрясающе... Я проснулся в каком-то туалете в трёх секторах отсюда..."
 	trait_to_give = STATION_TRAIT_HANGOVER
 	blacklist = list(/datum/station_trait/late_arrivals, /datum/station_trait/random_spawns)
 
@@ -147,7 +147,7 @@
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 5
 	show_in_report = TRUE
-	report_message = "Из-за удаленности нашей станции снабжения время полета грузового шаттла до вашего отдела снабжения будет больше."
+	report_message = "Из-за удаленности нашей станции снабжения, время полета грузового шаттла до вашего отдела снабжения будет больше."
 	blacklist = list(/datum/station_trait/quick_shuttle)
 
 /datum/station_trait/slow_shuttle/on_round_start()
@@ -160,7 +160,7 @@
 	weight = 4
 	cost = STATION_TRAIT_COST_LOW
 	show_in_report = TRUE
-	report_message = "У дружелюбных ботов вашей станции из-за некоего события сгорела языковая матрица, что привело к появлению странных и незнакомых речевых моделей."
+	report_message = "У дружелюбных ботов вашей станции из-за некоего события сгорела языковая матрица, что привело к появлению странных, и незнакомых речевых моделей."
 	trait_to_give = STATION_TRAIT_BOTS_GLITCHED
 
 /datum/station_trait/bot_languages/New()
@@ -310,8 +310,8 @@
 	modified_event.max_occurrences += max_occurrences_modifier
 
 /datum/station_trait/random_event_weight_modifier/ion_storms
-	name = "Ионный штормовой фронт"
-	report_message = "Над системой вашей станции проходит ионный штормовой фронт. Ожидайте повышенную вероятность воздействия ионных бурь на силиконовые модули вашей станции."
+	name = "Ионная буря"
+	report_message = "Над системой вашей станции проходит ионная буря. Ожидайте повышенную вероятность воздействия ионных бурь на силиконовые модули вашей станции."
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 3
 	event_control_path = /datum/round_event_control/ion_storm
@@ -323,8 +323,8 @@
 	return advisory_string
 
 /datum/station_trait/random_event_weight_modifier/rad_storms
-	name = "Радиационный штормовой фронт"
-	report_message = "Через систему вашей станции проходит радиоактивный штормовой фронт. Ожидайте повышенную вероятность прохождения радиационных бурь над вашей станцией, а также возможность возникновения нескольких радиационных бурь во время вашей смены."
+	name = "Радиационная буря"
+	report_message = "Через систему вашей станции проходит радиоактивная буря. Ожидайте повышенную вероятность прохождения радиационных бурь над вашей станцией, а также возможность возникновения нескольких радиационных бурь во время вашей смены."
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 2
 	event_control_path = /datum/round_event_control/radiation_storm
@@ -332,7 +332,7 @@
 	max_occurrences_modifier = 2
 
 /datum/station_trait/random_event_weight_modifier/dust_storms
-	name = "Пыльный штормовой фронт"
+	name = "Пыльная буря"
 	report_message = "Пространство вокруг вашей станции затянуто облаками космической пыли. Ожидайте повышенную вероятность повреждения корпуса станции пылевыми бурями."
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 2
