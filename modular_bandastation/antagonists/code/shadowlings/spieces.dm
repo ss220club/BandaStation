@@ -119,8 +119,10 @@ var/ascended_max_health = 220
 	throwforce = 0
 	throw_speed = 0
 	throw_range = 0
-	inhand_icon_state = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
-	worn_icon_state = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
+	lefthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
+	righthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
+	inhand_icon_state = "claw_right"
+	worn_icon_state = "claw_right"
 
 /obj/item/knife/combat/umbral_claw/Initialize(mapload)
 	. = ..()
@@ -132,6 +134,8 @@ var/ascended_max_health = 220
 	sharpness = SHARP_POINTY
 	attack_verb_continuous = list("pierces", "impales", "shreads")
 	attack_verb_simple = list("pierce", "impale", "shread")
+	inhand_icon_state = "claw_left"
+	worn_icon_state = "claw_left"
 
 /proc/shadowling_equip_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
