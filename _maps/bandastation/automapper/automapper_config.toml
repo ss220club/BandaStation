@@ -252,6 +252,13 @@ required_map = "tramstation.dmm"
 coordinates = [65, 170, 2]
 trait_name = "Station"
 
+[templates.tramstation_teleporter]
+map_files = ["tramstation_teleporter.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [55, 130, 2]
+trait_name = "Station"
+
 [templates.tramstation_armory_hammer]
 map_files = ["tramstation_armory_hammer.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
