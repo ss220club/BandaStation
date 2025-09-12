@@ -1,4 +1,9 @@
 // MARK: General
+/datum/lazy_template/nukie_base
+	map_dir = "_maps/templates/lazy_templates/ss220"
+	map_name = "syndie_cc_small"
+	key = LAZY_TEMPLATE_KEY_NUKIEBASE
+
 /datum/lazy_template/syndie_cc
 	map_dir = "_maps/templates/lazy_templates/ss220"
 	map_name = "syndie_cc"
@@ -73,8 +78,8 @@
 	prefix = "_maps/shuttles/ss220/"
 
 // MARK: Shuttles Overrides
-// /datum/map_template/shuttle/infiltrator/basic
-// 	prefix = "_maps/shuttles/ss220/"
+/datum/map_template/shuttle/infiltrator/basic
+	prefix = "_maps/shuttles/ss220/"
 
 // MARK: Deathmatch
 /datum/lazy_template/deathmatch/underground_thunderdome
