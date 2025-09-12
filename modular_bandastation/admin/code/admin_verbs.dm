@@ -111,9 +111,9 @@ ADMIN_VERB(play_sound_in_view, R_SOUND, "Play Sound in View", "Plays a sound to 
 		// They always have the same value.
 		// So I made this kind of calculation to present them as single number.
 		// I think it's better to put it in different proc, but now I will leave it be like this.
-		hearers = get_hearers_in_view(8 + (user.view_size.width - 1) / 2, user.mob)
+		hearers = get_hearers_in_view(DEFAULT_SIGHT_DISTANCE + (user.view_size.width - 1) / 2, user.mob)
 	else
-		hearers = get_hearers_in_view(8, user.mob)
+		hearers = get_hearers_in_view(DEFAULT_SIGHT_DISTANCE, user.mob)
 
 	log_admin("[key_name(user)] played a view-sound [sound]")
 	message_admins("[key_name_admin(user)] played a view-sound [sound]")
