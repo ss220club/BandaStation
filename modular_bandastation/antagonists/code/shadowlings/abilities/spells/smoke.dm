@@ -44,6 +44,7 @@
 	var/is_ally = FALSE
 	if(hive)
 		is_ally = (smoker in hive.lings) || (smoker in hive.thralls)
+
 	if(is_ally)
 		smoker.adjustBruteLoss(-heal_amount)
 		smoker.adjustFireLoss(-heal_amount)
@@ -56,10 +57,11 @@
 		var/mob/living/carbon/C2 = smoker
 		if(istype(C2))
 			C2.adjust_temp_blindness(blind_time)
+			// добавляем визуальный «обдув» как у plume, но синим
+			C2.apply_status_effect(/datum/status_effect/cloudstruck/shadow, 2 SECONDS)
 		if(prob(stun_chance))
 			smoker.Stun(stun_time)
 	return TRUE
-
 
 /datum/effect_system/shadow_smoke
 	var/range = 4
@@ -116,3 +118,26 @@
 	S.stun_time = stun
 	S.total_ticks = ticks
 	S.start()
+
+/datum/status_effect/cloudstruck/shadow
+	id = "cloudstruck_shadow"
+	var/disable_blind = TRUE
+	var/static/mutable_appearance/mob_overlay_shadow
+
+/datum/status_effect/cloudstruck/shadow/on_creation(mob/living/new_owner, duration = 3 SECONDS)
+	src.duration = duration
+	if(!mob_overlay_shadow)
+		mob_overlay_shadow = mutable_appearance('icons/effects/eldritch.dmi', "cloud_swirl", ABOVE_MOB_LAYER)
+		mob_overlay_shadow.color = "#66ccff"
+	return ..()
+
+/datum/status_effect/cloudstruck/shadow/on_apply()
+	owner.add_overlay(mob_overlay_shadow)
+	if(!disable_blind)
+		owner.become_blind(id)
+	return TRUE
+
+/datum/status_effect/cloudstruck/shadow/on_remove()
+	if(!disable_blind)
+		owner.cure_blind(id)
+	owner.cut_overlay(mob_overlay_shadow)

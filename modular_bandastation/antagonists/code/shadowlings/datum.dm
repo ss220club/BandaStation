@@ -27,7 +27,6 @@
 	return ..()
 
 /datum/antagonist/shadowling/on_gain()
-	. = ..()
 	if(!owner)
 		return
 
@@ -54,6 +53,8 @@
 
 	if(H)
 		shadow_team.sync_after_event(H)
+
+	. = ..()
 
 /datum/antagonist/shadowling/on_removal()
 	var/mob/living/carbon/human/H = owner?.current
@@ -144,7 +145,7 @@
 /datum/objective/shadowling/enslave_fraction/update_explanation_text()
 	var/need = required_thralls()
 	var/have = current_thralls()
-	explanation_text = "Подчините улью не менее [need] членов экипажа ([percent]% от стартового состава). Сейчас: [have]/[need]."
+	explanation_text = "Поработите не менее [need] членов экипажа. Сейчас: [have]/[need]."
 
 /datum/objective/shadowling/enslave_fraction/check_completion()
 	return current_thralls() >= required_thralls()
@@ -154,6 +155,20 @@
 	if(isnum(new_pct))
 		percent = clamp(round(new_pct), 1, 100)
 		update_explanation_text()
+
+/datum/objective/shadowling/ascend
+	name = "ascend"
+	admin_grantable = TRUE
+
+/datum/objective/shadowling/ascend/update_explanation_text()
+	explanation_text = "Возвыситься, приняв высшую форму Тенелинга."
+
+/datum/objective/shadowling/ascend/check_completion()
+	if(!owner || !owner.current)
+		return FALSE
+	var/mob/living/carbon/human/H = owner.current
+	return istype(H.dna?.species, /datum/species/shadow/shadowling/ascended)
+
 
 /datum/antagonist/shadowling/roundend_report()
 	var/list/report = list()

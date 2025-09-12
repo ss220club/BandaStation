@@ -3,8 +3,8 @@
 #define SPECIES_SHADOWLING_ASCENDED "shadowlingascended"
 #define ORGAN_SLOT_BRAIN_THRALL "brain_thrall_tumor"
 
-#define SHADOWLING_LIGHT_THRESHOLD 0.75
-#define SHADOWLING_DIM_THRESHOLD   0.40
+#define SHADOWLING_LIGHT_THRESHOLD 0.55
+#define SHADOWLING_DIM_THRESHOLD   0.20
 
 #define SHADOWLING_BRIGHT_BURN_PER_LIMB 2     // модификаторы получения урона на свету
 #define SHADOWLING_BRIGHT_BRUTE_PER_LIMB 2

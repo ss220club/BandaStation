@@ -47,16 +47,14 @@
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(T)
 	playsound(T, pick(sfx_tick), 35, TRUE, -1)
 
-/datum/action/cooldown/shadowling/hatch/proc/attach_cover(mob/living/carbon/human/H)
+/datum/action/cooldown/shadowling/hatch/proc/attach_cover()
 	if(cover)
 		return
-	cover = new
-	H.vis_contents += cover
+	cover = new /obj/structure/shadowling_cocoon(get_turf(owner))
 
-/datum/action/cooldown/shadowling/hatch/proc/detach_cover(mob/living/carbon/human/H)
+/datum/action/cooldown/shadowling/hatch/proc/detach_cover()
 	if(!cover)
 		return
-	H.vis_contents -= cover
 	qdel(cover)
 	cover = null
 
@@ -75,7 +73,7 @@
 
 	var/list/walls = build_ring_walls(start)
 
-	attach_cover(H)
+	attach_cover()
 	playsound(start, sfx_start, 60, TRUE)
 	to_chat(H, span_notice("Вы начинаете разрывать оболочку..."))
 
@@ -89,7 +87,7 @@
 
 	for(var/i = 1, i <= steps, i++)
 		if(QDELETED(H) || H.stat == DEAD)
-			detach_cover(H)
+			detach_cover()
 			cleanup(walls)
 			H.alpha = prev_alpha
 			return FALSE
@@ -97,14 +95,14 @@
 		var/turf/cur = get_turf(H)
 		if(!cur || cur != anchor_turf || get_area(H) != anchor_area)
 			to_chat(H, span_warning("Вы вырвались из кокона — вылупление прервано."))
-			detach_cover(H)
+			detach_cover()
 			cleanup(walls)
 			H.alpha = prev_alpha
 			return FALSE
 
 		if(cur.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
 			to_chat(H, span_warning("Свет разгоняет тьму — вылупление сорвано."))
-			detach_cover(H)
+			detach_cover()
 			cleanup(walls)
 			H.alpha = prev_alpha
 			return FALSE
@@ -121,7 +119,7 @@
 		sleep(step_time)
 
 	if(QDELETED(H))
-		detach_cover(H)
+		detach_cover()
 		cleanup(walls)
 		H.alpha = prev_alpha
 		return FALSE
@@ -135,7 +133,7 @@
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(start)
 	to_chat(H, span_boldnotice("Вы разрываете оболочку и становитесь Тенью."))
 
-	detach_cover(H)
+	detach_cover()
 	cleanup(walls)
 	H.alpha = prev_alpha
 	Remove(H)
@@ -147,7 +145,7 @@
 	desc = "Пульсирующий кокон живой тени."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "shadowcocoon"
-	layer = MOB_LAYER + 0.1
+	layer = ABOVE_MOB_LAYER
 	anchored = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE

@@ -5,7 +5,7 @@
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 30 SECONDS
 	var/knock_radius = 1
-	var/disorient_radius = 5
+	var/disorient_radius = 10
 	var/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg'
 
 /datum/action/cooldown/shadowling/shreek/DoEffect(mob/living/carbon/human/H, atom/_)

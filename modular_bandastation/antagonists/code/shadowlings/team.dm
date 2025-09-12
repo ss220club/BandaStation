@@ -204,7 +204,7 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 		return
 
 	add_objective(new /datum/objective/shadowling/enslave_fraction)
-	add_objective(new /datum/objective/survive)
+	add_objective(new /datum/objective/shadowling/ascend)
 
 /datum/team/shadow_hive/proc/get_objectives()
 	return objectives

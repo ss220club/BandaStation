@@ -1,12 +1,17 @@
 /obj/structure/shadowling_circle
-	name = "shadow cocoon"
-	desc = "Пульсирующий кокон живой тени."
+	name = "круг"
+	desc = "ЧТО ЭТО?!"
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "shadow_acendence_circle"
 	layer = MOB_LAYER - 0.1
 	anchored = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE
+	alpha = 0
+
+/obj/structure/shadowling_circle/Initialize(mapload)
+	. = ..()
+	animate(src, alpha = 255, time = 0.6 SECONDS)
 
 /obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark
 	color = "#131a22"
@@ -14,17 +19,19 @@
 	duration = 0.5 SECONDS
 	amount_to_scale = 5
 
+/obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark/slow
+	duration = 1.2 SECONDS
+	amount_to_scale = 8
+
 /datum/action/cooldown/shadowling/ascend
 	name = "Возвышение"
 	desc = "Разрывая оболочку, вы восходите к истинной форме. Требует темноты."
 	button_icon_state = "shadow_ascend"
-	cooldown_time = 0
-
+	cooldown_time = 10 SECONDS
 	requires_dark_user = TRUE
 	requires_dark_target = FALSE
 	max_range = 0
 	channel_time = 0
-
 	required_thralls = 0
 
 	var/steps = 3
@@ -34,27 +41,13 @@
 	var/static/sfx_end   = 'sound/effects/magic/mutate.ogg'
 	var/static/list/sfx_tick = list('sound/items/weapons/slice.ogg', 'sound/items/weapons/slash.ogg', 'sound/items/weapons/slashmiss.ogg')
 
-/datum/action/cooldown/shadowling/ascend/IsAvailable(feedback = FALSE)
-	if(!..())
-		return FALSE
-	var/mob/living/carbon/human/H = owner
-	if(istype(H) && istype(H.dna?.species, /datum/species/shadow/shadowling/ascended))
-		if(feedback) to_chat(H, span_warning("Вы уже достигли высшей формы."))
-		return FALSE
-	return TRUE
-
-/datum/action/cooldown/shadowling/ascend/proc/cleanup(list/to_clean)
-	if(!islist(to_clean))
-		return
-	for(var/atom/movable/A as anything in to_clean)
-		if(!QDELETED(A))
-			qdel(A)
-
-/datum/action/cooldown/shadowling/ascend/proc/play_tick_fx(mob/living/carbon/human/H)
-	var/turf/T = get_turf(H)
-	if(!T) return
-	new /obj/effect/temp_visual/shadowling/hatch_pulse(T)
-	playsound(T, pick(sfx_tick), 35, TRUE, -1)
+/datum/action/cooldown/shadowling/ascend/proc/levitate_pop(mob/living/carbon/human/H, total = 1.2 SECONDS)
+	if(!istype(H)) return
+	var/half = total * 0.5
+	animate(H)
+	animate(H, pixel_y = H.pixel_y + 3, time = 0.25 SECONDS, easing = EASE_OUT)
+	animate(time = half - 0.25 SECONDS)
+	animate(H, pixel_y = H.pixel_y, time = 0.45 SECONDS, easing = EASE_IN)
 
 /datum/action/cooldown/shadowling/ascend/DoEffect(mob/living/carbon/human/H, atom/_)
 	if(!istype(H))
@@ -103,6 +96,9 @@
 		return FALSE
 
 	var/old_turf = get_turf(H)
+
+	levitate_pop(H, 1.2 SECONDS)
+
 	H.shadowling_strip_quirks()
 	H.set_species(/datum/species/shadow/shadowling/ascended)
 
@@ -111,12 +107,10 @@
 			AD.set_higher(TRUE)
 			break
 
-	playsound(old_turf, sfx_end, 70, TRUE)
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(old_turf)
-	to_chat(H, span_boldnotice("Вы разрываете оболочку и восходите в высшую форму Тени!"))
+	new /obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark/slow(old_turf)
 
-	playsound(old_turf, 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg', 70, TRUE)
-	new /obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark(old_turf)
+	to_chat(H, span_boldnotice("Вы разрываете оболочку и восходите в высшую форму Тени!"))
 
 	for(var/datum/action/cooldown/ability in H.actions)
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
@@ -125,7 +119,21 @@
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	hive.grant_sync_action(H)
 	hive.sync_after_event(H)
+
 	cleanup(spawned)
-	Remove(H)
-	qdel(src)
+
+	StartCooldown()
 	return TRUE
+
+/datum/action/cooldown/shadowling/ascend/proc/cleanup(list/to_clean)
+	if(!islist(to_clean))
+		return
+	for(var/atom/movable/A as anything in to_clean)
+		if(!QDELETED(A))
+			qdel(A)
+
+/datum/action/cooldown/shadowling/ascend/proc/play_tick_fx(mob/living/carbon/human/H)
+	var/turf/T = get_turf(H)
+	if(!T) return
+	new /obj/effect/temp_visual/shadowling/hatch_pulse(T)
+	playsound(T, pick(sfx_tick), 35, TRUE, -1)

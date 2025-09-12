@@ -81,12 +81,13 @@
 		if(cancel_on_bright && !is_dark(H))
 			to_chat(H, span_warning("Свет разорвал связь."))
 			return FALSE
-		if(!do_after(H, channel_time SECONDS, T))
-			to_chat(H, span_warning("Связь прервана."))
-			return FALSE
 		if(QDELETED(T) || get_dist(H, T) > 2 || has_mindshield(T) || !is_dark(T))
 			to_chat(H, span_warning("Цель утрачена."))
 			return FALSE
+		if(!do_after(H, channel_time SECONDS, T))
+			to_chat(H, span_warning("Связь прервана."))
+			return FALSE
+
 		T.adjustOxyLoss(30)
 
 	T.adjustOxyLoss(-100)

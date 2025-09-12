@@ -1,4 +1,3 @@
-// MARK: Ability
 /datum/movespeed_modifier/shadowling/cold_wave
 	multiplicative_slowdown = 1.25
 	priority = 20
@@ -61,15 +60,6 @@
 		out += T
 	return out
 
-/datum/action/cooldown/shadowling/cold_wave/proc/show_cold_cone(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-	var/list/turfs = collect_cold_cone_turfs(H, max_range, fov_degree)
-	if(!length(turfs))
-		return
-	for(var/turf/T as anything in turfs)
-		new /obj/effect/temp_visual/shadowling/cold_cone_tile(T)
-
 /datum/action/cooldown/shadowling/cold_wave/proc/collect_cold_cone_turfs(mob/living/carbon/human/H, range_tiles, fov_deg)
 	var/list/turfs_in_cone = list()
 	if(!istype(H))
@@ -98,21 +88,28 @@
 	if(!istype(H))
 		return
 	playsound(get_turf(H), sfx_cold, 70, TRUE)
-	show_cold_cone(H)
 
-// MARK: Effects
-/obj/effect/temp_visual/shadowling/cold_cone_tile
-	name = "cold wave"
-	anchored = TRUE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = ABOVE_GAME_PLANE
-	layer = EFFECTS_LAYER
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "sparks"
-	alpha = 180
+	var/turf/anchor = get_step(H, H.dir)
+	if(!anchor) anchor = get_turf(H)
+	new /obj/effect/temp_visual/dir_setting/shadow_plume(anchor, H.dir)
+
+/obj/effect/temp_visual/dir_setting/shadow_plume
+	icon = 'icons/effects/160x160.dmi'
+	icon_state = "entropic_plume"
+	duration = 0.6 SECONDS
 	color = "#66ccff"
+	alpha = 220
 
-/obj/effect/temp_visual/shadowling/cold_cone_tile/Initialize(mapload)
+/obj/effect/temp_visual/dir_setting/shadow_plume/setDir(dir)
 	. = ..()
-	animate(src, alpha = 0, time = 6)
-	QDEL_IN(src, 0.6 SECONDS)
+	switch(dir)
+		if(NORTH)
+			pixel_x = -64
+		if(SOUTH)
+			pixel_x = -64
+			pixel_y = -128
+		if(EAST)
+			pixel_y = -64
+		if(WEST)
+			pixel_y = -64
+			pixel_x = -128
