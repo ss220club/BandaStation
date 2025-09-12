@@ -180,7 +180,6 @@
 /area/centcom/syndicate_base)
 "bZl" = (
 /obj/machinery/light/small/directional/east,
-/obj/effect/decal/cleanable/dirt,
 /turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
 "chA" = (
@@ -429,10 +428,6 @@
 /obj/item/soap/syndie,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
-/area/centcom/syndicate_base)
-"eVk" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
 "eXO" = (
 /obj/effect/decal/cleanable/vomit,
@@ -3914,7 +3909,7 @@ ovP
 ovP
 bgj
 nQs
-pUk
+fnU
 pUk
 fnU
 vef
@@ -3983,7 +3978,7 @@ hXC
 dgl
 ciG
 nQs
-lWm
+fnU
 vVY
 dlt
 gOQ
@@ -4052,7 +4047,7 @@ hXC
 fnU
 fnU
 fnU
-pCf
+fnU
 aDp
 dlt
 gOQ
@@ -4121,7 +4116,7 @@ uXT
 fnU
 sLM
 sLM
-iwO
+fnU
 vfA
 dlt
 gOQ
@@ -4462,7 +4457,7 @@ fnU
 fnU
 fnU
 bZl
-eVk
+fnU
 fnU
 fnU
 fnU
