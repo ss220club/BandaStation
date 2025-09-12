@@ -124,7 +124,7 @@
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 5
 	show_in_report = TRUE
-	report_message = "Цены в этой системе низкие, ПОКУПАЙТЕ, ПОКУПАЙТЕ, ПОКУПАЙТЕ!"
+	report_message = "Цены в этой системе занижены, ПОКУПАЙТЕ-ПОКУПАЙТЕ-ПОКУПАЙТЕ!"
 	blacklist = list(/datum/station_trait/distant_supply_lines)
 
 /datum/station_trait/strong_supply_lines/on_round_start()
