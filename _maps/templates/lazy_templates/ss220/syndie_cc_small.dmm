@@ -17,6 +17,16 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"aAs" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/item/pizzabox/margherita,
+/obj/item/pizzabox/margherita,
+/obj/item/knife/kitchen,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "aDf" = (
 /obj/item/target,
 /obj/effect/decal/cleanable/confetti,
@@ -65,6 +75,19 @@
 /obj/item/toy/cards/deck/syndicate,
 /turf/open/floor/iron/white,
 /area/centcom/syndicate_base)
+"bbA" = (
+/obj/structure/chair/comfy/purp{
+	dir = 8
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo5"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/effect/landmark/start/nukeop_overwatch,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "bcl" = (
 /obj/effect/turf_decal/delivery/red,
 /turf/open/floor/iron/dark,
@@ -78,26 +101,64 @@
 /obj/item/banner/syndicate,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
+"bjU" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base)
 "bnr" = (
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
+"bpw" = (
+/obj/machinery/computer/shuttle/syndicate{
+	name = "Nuclear Operatives Shuttle Console"
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "bxW" = (
 /obj/structure/railing/corner/end{
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"bJW" = (
+/obj/machinery/photocopier/syndicate,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "bLA" = (
 /obj/structure/table,
 /obj/item/gun/energy/ionrifle,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"bMd" = (
+/obj/machinery/computer/shuttle/syndicate/sit{
+	dir = 4
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"bNg" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/machinery/fax/admin/syndicate,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "bRD" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 4
 	},
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
+"bRF" = (
+/obj/machinery/computer/message_monitor{
+	pixel_x = -6;
+	dir = 8
+	},
+/obj/item/paper/monitorkey,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/obj/machinery/light/directional/north,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "bUd" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
@@ -106,6 +167,21 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"bUU" = (
+/obj/structure/window/reinforced/survival_pod/spawner/directional/south,
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"bVX" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"bZl" = (
+/obj/machinery/light/small/directional/east,
+/obj/effect/decal/cleanable/dirt,
+/turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
 "chA" = (
 /obj/structure/fans/tiny/invisible,
@@ -135,11 +211,15 @@
 /obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
-"clO" = (
-/obj/machinery/light/small/directional/east,
-/obj/effect/decal/cleanable/dirt,
-/turf/closed/indestructible/syndicate,
-/area/centcom/syndicate_base)
+"crr" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo9"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "cyn" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fans/tiny/invisible,
@@ -168,6 +248,9 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
+"cNm" = (
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "cSv" = (
 /obj/structure/chair/sofa/right/brown,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -195,12 +278,11 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "cZH" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/iron/dark,
-/area/centcom/syndicate_base)
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo6"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "deV" = (
 /obj/structure/fans/tiny/invisible,
 /obj/structure/marker_beacon/burgundy,
@@ -275,6 +357,11 @@
 /obj/effect/landmark/start/nukeop_leader,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
+"dNj" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/machinery/jukebox,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "dPy" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/wood,
@@ -302,18 +389,36 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
-"eoT" = (
-/turf/open/floor/iron/stairs/medium{
-	color = "gray";
-	dir = 1
-	},
-/area/centcom/syndicate_base)
 "epF" = (
 /obj/structure/ore_box,
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"evm" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"eEu" = (
+/obj/machinery/computer/camera_advanced{
+	pixel_x = -6;
+	dir = 8
+	},
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"eFN" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo4"
+	},
+/obj/effect/turf_decal/siding/dark/inner_corner{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "ePf" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
@@ -324,6 +429,10 @@
 /obj/item/soap/syndie,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"eVk" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
 "eXO" = (
 /obj/effect/decal/cleanable/vomit,
@@ -372,8 +481,8 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "fxM" = (
-/turf/open/space/basic,
-/area/space)
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base/control)
 "fAH" = (
 /obj/structure/ore_box,
 /obj/effect/turf_decal/stripes/line{
@@ -415,6 +524,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"gty" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/item/storage/box/drinkingglasses,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "gOQ" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
@@ -426,6 +543,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"gVQ" = (
+/obj/effect/baseturf_helper{
+	baseturf = /turf/open/misc/asteroid
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "gXs" = (
 /obj/structure/fans/tiny/invisible,
 /obj/effect/turf_decal/caution/stand_clear,
@@ -449,6 +572,10 @@
 /obj/effect/landmark/start/nukeop,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
+"hii" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "hiV" = (
 /obj/effect/turf_decal/siding/wood/corner,
 /turf/open/floor/iron/grimy,
@@ -502,10 +629,6 @@
 /obj/structure/railing,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
-"hHD" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/closed/indestructible/syndicate,
-/area/centcom/syndicate_base)
 "hLd" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fans/tiny/invisible,
@@ -546,6 +669,18 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
+"inv" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 1
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo3"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "ios" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Syndicate Base"
@@ -564,6 +699,12 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"iwO" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 1;
+	color = "gray"
+	},
+/area/centcom/syndicate_base)
 "iAT" = (
 /obj/structure/chair/stool{
 	dir = 1
@@ -572,6 +713,14 @@
 /obj/effect/landmark/start/nukeop,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
+"iBV" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood,
+/obj/machinery/chem_dispenser/drinks/beer/fullupgrade{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "iDh" = (
 /obj/structure/closet/syndicate/personal,
 /obj/effect/decal/cleanable/dirt,
@@ -768,6 +917,13 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/syndicate_base)
+"kqr" = (
+/obj/item/storage/fancy/donut_box,
+/obj/structure/table/wood/fancy/black,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/obj/machinery/light/directional/north,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "kEs" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/kirbyplants/random,
@@ -788,19 +944,6 @@
 "kVN" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
-/area/centcom/syndicate_base)
-"lcH" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/closet/crate,
-/obj/item/target,
-/obj/item/target,
-/obj/item/target,
-/obj/item/katana/cursed{
-	desc = "A gift from your benefactors.";
-	force = 20
-	},
-/turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "ldu" = (
 /obj/machinery/door/airlock/hatch{
@@ -855,6 +998,17 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"lHj" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/paper_bin{
+	pixel_x = -2;
+	pixel_y = 2
+	},
+/obj/item/pen/fountain{
+	pixel_x = 8
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
 "lKs" = (
 /obj/machinery/door/poddoor/ert{
 	id = "nukeop_ready";
@@ -863,6 +1017,22 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"lPt" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/syndicatedetonator{
+	pixel_x = -6;
+	pixel_y = 5
+	},
+/obj/item/stamp/chameleon{
+	pixel_x = 4;
+	pixel_y = 6
+	},
+/obj/item/stamp/syndicate{
+	pixel_x = 6;
+	pixel_y = -4
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
 "lRu" = (
 /obj/structure/table,
 /obj/item/paper/fluff{
@@ -875,11 +1045,11 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
-"lTh" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/iron/dark,
+"lWm" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 1;
+	color = "gray"
+	},
 /area/centcom/syndicate_base)
 "lZQ" = (
 /obj/structure/table,
@@ -899,6 +1069,13 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
+"miA" = (
+/obj/effect/decal/syndie_logo,
+/obj/effect/turf_decal/siding/dark/inner_corner{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "mjL" = (
 /obj/structure/fans/tiny/invisible,
 /obj/structure/marker_beacon/burgundy,
@@ -911,13 +1088,13 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"mjQ" = (
+/obj/structure/noticeboard/directional/west,
+/obj/machinery/computer/shuttle/syndicate/sit,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "mkU" = (
 /obj/item/target,
-/turf/open/floor/iron/dark,
-/area/centcom/syndicate_base)
-"mlS" = (
-/obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "mmT" = (
@@ -929,6 +1106,19 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"mpO" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo13"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"mtm" = (
+/obj/machinery/computer/shuttle/syndicate/sst,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "muB" = (
 /obj/item/kirbyplants/random,
 /obj/structure/railing{
@@ -937,11 +1127,15 @@
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "mvf" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo19"
 	},
-/turf/closed/indestructible/syndicate,
-/area/centcom/syndicate_base)
+/obj/effect/turf_decal/siding/dark/inner_corner,
+/obj/structure/chair/comfy/red{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "mvw" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line{
@@ -993,12 +1187,19 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
-"naF" = (
-/turf/open/floor/iron/stairs/right{
-	dir = 1;
-	color = "gray"
+"mRM" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/syndicatedetonator{
+	pixel_x = -6;
+	pixel_y = -2
 	},
-/area/centcom/syndicate_base)
+/obj/item/stamp/syndicate,
+/obj/item/stamp/chameleon{
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
 "nbn" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -1007,6 +1208,19 @@
 /area/centcom/syndicate_base)
 "ngQ" = (
 /obj/structure/extinguisher_cabinet/directional/south,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"niK" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/crate,
+/obj/item/target,
+/obj/item/target,
+/obj/item/target,
+/obj/item/katana/cursed{
+	desc = "A gift from your benefactors.";
+	force = 20
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "niY" = (
@@ -1027,6 +1241,15 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"npT" = (
+/obj/item/paper_bin{
+	pixel_y = 7
+	},
+/obj/item/pen/fourcolor,
+/obj/structure/table/wood/fancy/black,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "nwV" = (
 /obj/machinery/light/small/directional/east,
 /obj/structure/fans/tiny/invisible,
@@ -1077,12 +1300,39 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"nNU" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/paper_bin{
+	pixel_y = 7
+	},
+/obj/item/pen/fountain,
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"nOK" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base)
 "nQs" = (
 /obj/machinery/door/poddoor/ert{
 	id = "nukeop_outside"
 	},
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
+"nSk" = (
+/obj/structure/chair/comfy/purp{
+	dir = 4
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo8"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/landmark/start/nukeop_overwatch,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "nSN" = (
 /obj/structure/chair/sofa/left/brown,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -1099,6 +1349,25 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/syndicate_base)
+"odA" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo17"
+	},
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"oea" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo11"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"ogO" = (
+/obj/machinery/fax/admin/syndicate,
+/obj/structure/table/wood/fancy/black,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "oiT" = (
 /obj/item/reagent_containers/cup/glass/bottle/beer{
 	pixel_x = -6;
@@ -1166,6 +1435,18 @@
 /obj/structure/ore_box,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"oKL" = (
+/obj/machinery/computer/crew{
+	pixel_x = -6;
+	dir = 8
+	},
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"oOS" = (
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "oPQ" = (
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron/white,
@@ -1177,6 +1458,9 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
+"oTz" = (
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "oTB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/recharge_station,
@@ -1195,6 +1479,18 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"paG" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo16"
+	},
+/obj/effect/turf_decal/siding/dark/inner_corner{
+	dir = 8
+	},
+/obj/structure/chair/comfy/red{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "piT" = (
 /obj/item/kirbyplants/random,
 /obj/effect/mapping_helpers/broken_floor,
@@ -1216,6 +1512,17 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"pwf" = (
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"pxu" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood,
+/obj/machinery/chem_dispenser/drinks/fullupgrade{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "pxW" = (
 /obj/structure/table/wood,
 /obj/machinery/chem_dispenser/drinks/fullupgrade{
@@ -1226,6 +1533,12 @@
 	dir = 4
 	},
 /turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"pCf" = (
+/turf/open/floor/iron/stairs/medium{
+	color = "gray";
+	dir = 1
+	},
 /area/centcom/syndicate_base)
 "pOV" = (
 /obj/structure/table/wood{
@@ -1247,12 +1560,27 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"pSO" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo10"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "pUk" = (
 /turf/closed/indestructible/opsglass,
 /area/centcom/syndicate_base)
 "pUQ" = (
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
+"qbl" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo12"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "qkt" = (
 /obj/machinery/light/directional/north,
 /obj/structure/fans/tiny/invisible,
@@ -1324,6 +1652,12 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"rlk" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo7"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "rnW" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -1374,6 +1708,11 @@
 "rMi" = (
 /obj/machinery/washing_machine,
 /turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"rQg" = (
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "rVx" = (
 /obj/machinery/light/small/directional/north,
@@ -1444,6 +1783,10 @@
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
+"szK" = (
+/obj/machinery/computer/camera_advanced,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "sFl" = (
 /turf/open/floor/iron/stairs/left{
 	dir = 8
@@ -1457,6 +1800,9 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"sLM" = (
+/turf/open/space/basic,
+/area/space)
 "sNe" = (
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/centcom/syndicate_base)
@@ -1535,12 +1881,22 @@
 /obj/item/stack/sheet/mineral/sandbags,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
-"tJz" = (
-/obj/effect/turf_decal/stripes/line{
+"tJr" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo15"
+	},
+/obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
-/turf/closed/indestructible/syndicate,
-/area/centcom/syndicate_base)
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"tJz" = (
+/obj/machinery/computer/shuttle/syndicate{
+	name = "Nuclear Operatives Shuttle Console";
+	dir = 8
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 "tLW" = (
 /obj/machinery/light/directional/south,
 /obj/effect/decal/cleanable/dirt,
@@ -1579,6 +1935,11 @@
 /obj/effect/turf_decal/tile/dark_red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"uns" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/machinery/vending/boozeomat/syndicate,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
 "uwa" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
@@ -1673,6 +2034,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
+"vIe" = (
+/obj/machinery/door/window/survival_pod/left/directional/south{
+	req_access = list("syndicate")
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
 "vPu" = (
 /obj/structure/chair,
 /obj/effect/turf_decal/siding/wood,
@@ -1742,6 +2109,13 @@
 	dir = 1
 	},
 /area/centcom/syndicate_base)
+"wrP" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo18"
+	},
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "wBp" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/iron/dark,
@@ -1753,6 +2127,18 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
+"wOm" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 1
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo2"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "wXs" = (
 /obj/structure/sign/poster/contraband/c20r/directional/north,
 /obj/effect/mapping_helpers/broken_floor,
@@ -1790,12 +2176,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
-"xJF" = (
-/turf/open/floor/iron/stairs/left{
-	dir = 1;
-	color = "gray"
-	},
-/area/centcom/syndicate_base)
 "xND" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -1810,14 +2190,12 @@
 /obj/effect/turf_decal/delivery/white,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
-"xVV" = (
-/obj/machinery/door/poddoor/ert{
-	id = "SST_pod_ready";
-	name = "Shuttle Dock Door"
+"yaB" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo14"
 	},
-/obj/effect/turf_decal/bot,
-/turf/open/floor/iron/dark,
-/area/centcom/syndicate_base)
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
 "yaO" = (
 /obj/machinery/shower/directional/south,
 /obj/machinery/light/small/directional/south,
@@ -1825,51 +2203,63 @@
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/iron/white,
 /area/centcom/syndicate_base)
+"ycx" = (
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/obj/structure/table/wood/fancy/black,
+/obj/item/paper/fluff/overwatch{
+	pixel_y = 8;
+	pixel_x = -2
+	},
+/obj/item/circuitboard/computer/overwatch{
+	pixel_x = -2
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
 
 (1,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
+sLM
+fnU
+fnU
+bjU
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+sLM
+sLM
 fnU
 fnU
 fnU
@@ -1896,351 +2286,6 @@ fnU
 fnU
 "}
 (2,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-gOQ
-njR
-gXS
-jrf
-gXS
-gXS
-gXS
-gXS
-gXS
-jrf
-gXS
-gXS
-jrf
-gXS
-gXS
-gXS
-gXS
-gXS
-jrf
-gXS
-chA
-gOQ
-fnU
-"}
-(3,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-gOQ
-fnU
-"}
-(4,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-vef
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-rrb
-fnU
-"}
-(5,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-gOQ
-fnU
-"}
-(6,1,1) = {"
-fxM
-fnU
-fnU
-tJz
-fnU
-don
-don
-don
-fnU
-don
-don
-don
-fnU
-don
-don
-don
-fnU
-don
-don
-don
-fnU
-don
-don
-don
-don
-fnU
-don
-don
-don
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-gOQ
-fnU
-"}
-(7,1,1) = {"
 fnU
 fnU
 hxf
@@ -2282,34 +2327,34 @@ srn
 srn
 mcR
 fnU
-naF
-vVY
-dlt
+sLM
+sLM
+fnU
 gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
+njR
+gXS
+jrf
+gXS
+gXS
+gXS
+gXS
+gXS
+jrf
+gXS
+gXS
+jrf
+gXS
+gXS
+gXS
+gXS
+gXS
+jrf
+gXS
+chA
 gOQ
 fnU
 "}
-(8,1,1) = {"
+(3,1,1) = {"
 fnU
 qkt
 gXS
@@ -2351,9 +2396,9 @@ orc
 orc
 uln
 fnU
-eoT
-aDp
-dlt
+sLM
+sLM
+fnU
 gOQ
 tou
 viA
@@ -2378,7 +2423,7 @@ aqq
 gOQ
 fnU
 "}
-(9,1,1) = {"
+(4,1,1) = {"
 mRk
 tou
 viA
@@ -2420,10 +2465,10 @@ vru
 orc
 mwf
 fnU
-xJF
-vfA
-dlt
-gOQ
+sLM
+sLM
+fnU
+vef
 tou
 viA
 viA
@@ -2444,10 +2489,10 @@ viA
 viA
 viA
 aqq
-gOQ
+rrb
 fnU
 "}
-(10,1,1) = {"
+(5,1,1) = {"
 mRk
 tou
 viA
@@ -2489,10 +2534,10 @@ vru
 vru
 acA
 fnU
-pUk
-pUk
+sLM
+sLM
 fnU
-vef
+gOQ
 tou
 viA
 viA
@@ -2513,10 +2558,10 @@ viA
 viA
 viA
 aqq
-rrb
+gOQ
 fnU
 "}
-(11,1,1) = {"
+(6,1,1) = {"
 mRk
 cyn
 viA
@@ -2558,9 +2603,9 @@ qwD
 saI
 muB
 fnU
-cSv
-gOQ
-gOQ
+fnU
+fnU
+fnU
 gOQ
 tou
 viA
@@ -2585,7 +2630,7 @@ aqq
 gOQ
 fnU
 "}
-(12,1,1) = {"
+(7,1,1) = {"
 mRk
 cyn
 viA
@@ -2627,6 +2672,351 @@ dfR
 dfR
 fnU
 fnU
+lWm
+vVY
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(8,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+tCJ
+vUB
+gVh
+gOQ
+fnU
+wMN
+plv
+oiT
+iAT
+kVN
+fnU
+bjf
+mEk
+jLT
+bjf
+fnU
+pCf
+aDp
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(9,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+jud
+lnr
+bUd
+rrb
+fnU
+cDl
+plv
+ryx
+gZt
+tWa
+fnU
+qNs
+mEk
+dPy
+maY
+fnU
+iwO
+vfA
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(10,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+nwV
+vVI
+mvw
+mvw
+vVI
+fnU
+wXs
+plv
+cHl
+gZt
+srn
+fnU
+xfp
+mEk
+jLT
+oTB
+fnU
+pUk
+pUk
+fnU
+vef
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(11,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+pUk
+pUk
+pUk
+pUk
+fnU
+srn
+pUQ
+dCB
+pUQ
+srn
+fnU
+kEs
+mEk
+jLT
+qIZ
+fnU
+cSv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(12,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+lrc
+dlt
+ovP
+ovP
+ovP
+ovP
+cji
+rJo
+rJo
+rJo
+rJo
+rJo
+rJo
+rJo
+kFg
+vPu
+wXx
+pUk
 aLl
 gOQ
 gOQ
@@ -2679,23 +3069,23 @@ viA
 viA
 viA
 viA
-aqq
-tCJ
-vUB
-gVh
-gOQ
-fnU
-wMN
-plv
-oiT
-iAT
-kVN
-fnU
-bjf
-mEk
-jLT
-bjf
-fnU
+dlt
+ovP
+ovP
+ovP
+ovP
+cji
+nbn
+nbn
+nbn
+bRD
+hiV
+xND
+vYw
+nbn
+hSN
+oRl
+pUk
 nSN
 gOQ
 gOQ
@@ -2748,22 +3138,22 @@ viA
 viA
 viA
 viA
-aqq
-jud
-lnr
-bUd
-rrb
 fnU
-cDl
-plv
-ryx
-gZt
-tWa
+pUk
+pUk
+pUk
+pUk
 fnU
-qNs
-mEk
-dPy
-maY
+wgp
+kVN
+srn
+tdd
+jLT
+fnU
+dlQ
+wZM
+tls
+dlQ
 fnU
 aHv
 gOQ
@@ -2794,7 +3184,7 @@ fnU
 "}
 (15,1,1) = {"
 mRk
-cyn
+tou
 viA
 viA
 viA
@@ -2817,22 +3207,22 @@ viA
 viA
 viA
 viA
-nwV
-vVI
-mvw
-mvw
-vVI
+fmQ
+psX
+rnW
+rnW
+rnW
 fnU
-wXs
-plv
-cHl
-gZt
+tYt
+kVN
 srn
-fnU
-xfp
 mEk
-jLT
-oTB
+suT
+fnU
+ltU
+soz
+jfZ
+pOV
 fnU
 cSv
 gOQ
@@ -2886,23 +3276,23 @@ viA
 viA
 viA
 viA
+hLd
+kcQ
+gqH
+xyp
+tLW
 fnU
-pUk
-pUk
-pUk
-pUk
-fnU
-srn
-pUQ
-dCB
-pUQ
-srn
-fnU
-kEs
+jpY
+uwa
+jkN
 mEk
 jLT
-qIZ
 fnU
+koA
+mxA
+mxA
+hMQ
+pUk
 nSN
 gOQ
 gOQ
@@ -2932,7 +3322,7 @@ fnU
 "}
 (17,1,1) = {"
 mRk
-tou
+cyn
 viA
 viA
 viA
@@ -2954,23 +3344,23 @@ viA
 viA
 viA
 viA
-lrc
-dlt
-ovP
-ovP
-ovP
-ovP
-cji
-rJo
-rJo
-rJo
-rJo
-rJo
-rJo
-rJo
-kFg
-vPu
-wXx
+viA
+aqq
+fAH
+fTe
+epF
+hxf
+fnU
+lRu
+vru
+iiw
+mEk
+bnr
+ldu
+mxA
+vuE
+vuE
+aSV
 pUk
 oxa
 reD
@@ -3001,7 +3391,7 @@ fnU
 "}
 (18,1,1) = {"
 mRk
-cyn
+tou
 viA
 viA
 viA
@@ -3024,23 +3414,23 @@ viA
 viA
 viA
 viA
-dlt
-ovP
-ovP
-ovP
-ovP
-cji
-nbn
-nbn
-nbn
-bRD
-hiV
-xND
-vYw
-nbn
-hSN
-oRl
-pUk
+aqq
+sFZ
+dUG
+tEM
+hxf
+fnU
+jAn
+srn
+vru
+mEk
+jLT
+fnU
+nUA
+pxW
+fbq
+onL
+fnU
 oxa
 gOQ
 gOQ
@@ -3070,7 +3460,7 @@ fnU
 "}
 (19,1,1) = {"
 mRk
-cyn
+tou
 viA
 viA
 viA
@@ -3093,22 +3483,22 @@ viA
 viA
 viA
 viA
+aqq
+siL
+fTe
+sUZ
+dts
+wkC
+mNS
+mNS
+mNS
+tOi
+jdM
 fnU
-pUk
-pUk
-pUk
-pUk
 fnU
-wgp
-kVN
-srn
-tdd
-jLT
 fnU
-dlQ
-wZM
-tls
-dlQ
+fnU
+fnU
 fnU
 cSv
 gOQ
@@ -3139,7 +3529,7 @@ fnU
 "}
 (20,1,1) = {"
 mRk
-tou
+cyn
 viA
 viA
 viA
@@ -3162,22 +3552,22 @@ viA
 viA
 viA
 viA
-fmQ
-psX
-rnW
-rnW
-rnW
+aqq
+hxU
+ovP
+niY
+hxf
 fnU
-tYt
-kVN
+piT
 srn
+kVN
 mEk
-suT
+jmk
 fnU
-ltU
-soz
-jfZ
-pOV
+umq
+app
+mBE
+iDh
 fnU
 nSN
 gOQ
@@ -3231,23 +3621,23 @@ viA
 viA
 viA
 viA
-hLd
-kcQ
-gqH
-xyp
-tLW
+aqq
+tCJ
+bcl
+sUZ
+gOQ
 fnU
-jpY
-uwa
-jkN
+sfM
+kVN
+srn
 mEk
 jLT
 fnU
-koA
-mxA
-mxA
-hMQ
-pUk
+nFd
+sNe
+sUc
+iDh
+fnU
 aHv
 gOQ
 gOQ
@@ -3276,351 +3666,6 @@ gOQ
 fnU
 "}
 (22,1,1) = {"
-mRk
-cyn
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-fAH
-fTe
-epF
-hxf
-fnU
-lRu
-vru
-iiw
-mEk
-bnr
-ldu
-mxA
-vuE
-vuE
-aSV
-pUk
-cSv
-gOQ
-gOQ
-gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-gOQ
-fnU
-"}
-(23,1,1) = {"
-mRk
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-sFZ
-dUG
-tEM
-hxf
-fnU
-jAn
-srn
-vru
-mEk
-jLT
-fnU
-nUA
-pxW
-fbq
-onL
-fnU
-aLl
-gOQ
-gOQ
-gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-gOQ
-fnU
-"}
-(24,1,1) = {"
-mRk
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-siL
-fTe
-sUZ
-dts
-wkC
-mNS
-mNS
-mNS
-tOi
-jdM
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-nSN
-gOQ
-gOQ
-gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-gOQ
-fnU
-"}
-(25,1,1) = {"
-mRk
-cyn
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-hxU
-ovP
-niY
-hxf
-fnU
-piT
-srn
-kVN
-mEk
-jmk
-fnU
-umq
-app
-mBE
-iDh
-fnU
-pUk
-pUk
-fnU
-vef
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-rrb
-fnU
-"}
-(26,1,1) = {"
-mRk
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-tCJ
-bcl
-sUZ
-gOQ
-fnU
-sfM
-kVN
-srn
-mEk
-jLT
-fnU
-nFd
-sNe
-sUc
-iDh
-fnU
-naF
-vVY
-dlt
-gOQ
-tou
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-aqq
-gOQ
-fnU
-"}
-(27,1,1) = {"
 fnU
 nCM
 uKg
@@ -3662,9 +3707,9 @@ sUc
 sNe
 dlo
 fnU
-eoT
-aDp
-dlt
+cSv
+gOQ
+gOQ
 gOQ
 tou
 viA
@@ -3689,21 +3734,21 @@ aqq
 gOQ
 fnU
 "}
-(28,1,1) = {"
+(23,1,1) = {"
 fnU
 fnU
 klm
 hxf
-lTh
+bVX
 hxf
 hxf
-cZH
+evm
 hxf
 gOQ
-mlS
+rQg
 gOQ
 gOQ
-mlS
+rQg
 gOQ
 gOQ
 vRN
@@ -3731,9 +3776,9 @@ sNe
 sUc
 iDh
 fnU
-xJF
-vfA
-dlt
+aLl
+gOQ
+gOQ
 gOQ
 tou
 viA
@@ -3758,11 +3803,11 @@ aqq
 gOQ
 fnU
 "}
-(29,1,1) = {"
-fxM
+(24,1,1) = {"
+sLM
 fnU
 fnU
-mvf
+nOK
 fnU
 vQE
 vQE
@@ -3798,6 +3843,351 @@ fnU
 fnU
 rVI
 rVI
+fnU
+fnU
+nSN
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(25,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fnU
+fnU
+fnU
+fnU
+jYa
+fnU
+fnU
+fnU
+fnU
+fnU
+qEz
+bLA
+eim
+dCq
+sFl
+mmT
+hXC
+ovP
+ovP
+bgj
+nQs
+pUk
+pUk
+fnU
+vef
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(26,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+fxM
+kqr
+npT
+ogO
+bJW
+bMd
+bNg
+lHj
+mRM
+bUU
+hii
+aAs
+fxM
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+fHu
+hXC
+kEw
+ovP
+ovP
+bxW
+hXC
+hXC
+dgl
+ciG
+nQs
+lWm
+vVY
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(27,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+mjQ
+miA
+bbA
+crr
+mpO
+paG
+oTz
+pwf
+pwf
+vIe
+cNm
+gty
+fxM
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+jsR
+hXC
+hXC
+hXC
+hXC
+lGp
+ovP
+hXC
+fnU
+fnU
+fnU
+pCf
+aDp
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(28,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+szK
+wOm
+cZH
+pSO
+gVQ
+odA
+oTz
+pwf
+pwf
+bUU
+cNm
+dNj
+fxM
+fnU
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+fnU
+fnU
+rVx
+hXC
+ovP
+ovP
+lGp
+hXC
+uXT
+fnU
+sLM
+sLM
+iwO
+vfA
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(29,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+bpw
+inv
+rlk
+oea
+yaB
+wrP
+oTz
+pwf
+pwf
+bUU
+cNm
+pxu
+fxM
+tnT
+uRN
+viA
+viA
+viA
+viA
+viA
+viA
+gXs
+lKs
+ipn
+hXC
+hXC
+hXC
+lGp
+hXC
+ovP
+ngQ
+fnU
 fnU
 fnU
 fnU
@@ -3828,49 +4218,49 @@ gOQ
 fnU
 "}
 (30,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
 fxM
+mtm
+eFN
+nSk
+qbl
+tJr
+mvf
+oTz
+pwf
+pwf
+vIe
+cNm
+iBV
 fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
+fnU
+viA
+viA
+viA
+viA
+viA
+viA
+viA
 fnU
 fnU
 fnU
-fnU
-fnU
-jYa
-fnU
-fnU
-fnU
-fnU
-fnU
-qEz
-bLA
-eim
-dCq
-sFl
-mmT
+pUk
+pUk
+pUk
+pUk
+niK
+ovP
+ovP
 hXC
-ovP
-ovP
-bgj
-nQs
-fxM
-fxM
+pSB
+fnU
+sLM
+sLM
 fnU
 gOQ
 tou
@@ -3897,26 +4287,26 @@ gOQ
 fnU
 "}
 (31,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
 fxM
 fxM
+bRF
+eEu
+oKL
+ycx
+tJz
+bNg
+nNU
+lPt
+bUU
+oOS
+uns
 fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
 viA
 viA
 viA
@@ -3927,19 +4317,19 @@ viA
 viA
 viA
 fnU
-fHu
+mkU
+nHO
+ovP
+wBp
+hse
+ovP
 hXC
-kEw
 ovP
 ovP
-bxW
-hXC
-hXC
-dgl
-ciG
-nQs
-fxM
-fxM
+pSB
+fnU
+sLM
+sLM
 fnU
 vef
 tou
@@ -3966,6 +4356,12 @@ rrb
 fnU
 "}
 (32,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
 fxM
 fxM
 fxM
@@ -3980,12 +4376,6 @@ fxM
 fxM
 fxM
 fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
 viA
 viA
 viA
@@ -3996,19 +4386,19 @@ viA
 viA
 viA
 fnU
-jsR
+aDf
+qAX
 hXC
-hXC
-hXC
-hXC
-lGp
+ovP
+emh
+ovP
 ovP
 hXC
+lGp
+uze
 fnU
-fnU
-fnU
-fxM
-fxM
+sLM
+sLM
 fnU
 gOQ
 deV
@@ -4035,49 +4425,49 @@ gOQ
 fnU
 "}
 (33,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-fnU
-viA
-viA
-viA
-viA
-viA
-viA
-viA
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
 fnU
 fnU
 fnU
-rVx
-hXC
-ovP
-ovP
-lGp
-hXC
-uXT
 fnU
-fxM
-fxM
-fxM
-fxM
+fnU
+ovu
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+bZl
+eVk
+fnU
+fnU
+fnU
+sLM
+sLM
 fnU
 gOQ
 gOQ
@@ -4104,49 +4494,49 @@ gOQ
 fnU
 "}
 (34,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-xVV
-tnT
-uRN
-viA
-viA
-viA
-viA
-viA
-viA
-gXs
-lKs
-ipn
-hXC
-hXC
-hXC
-lGp
-hXC
-ovP
-ngQ
-fnU
-fnU
-fnU
-fxM
-fxM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
 fnU
 fnU
 tDh
@@ -4171,280 +4561,4 @@ tDh
 tDh
 fnU
 fnU
-"}
-(35,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-fnU
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-fnU
-fnU
-fnU
-pUk
-pUk
-pUk
-pUk
-lcH
-ovP
-ovP
-hXC
-pSB
-fnU
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-"}
-(36,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-fnU
-mkU
-nHO
-ovP
-wBp
-hse
-ovP
-hXC
-ovP
-ovP
-pSB
-fnU
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-"}
-(37,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-viA
-fnU
-aDf
-qAX
-hXC
-ovP
-emh
-ovP
-ovP
-hXC
-lGp
-uze
-fnU
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-"}
-(38,1,1) = {"
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fnU
-fnU
-fnU
-fnU
-fnU
-ovu
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-fnU
-clO
-hHD
-fnU
-fnU
-fnU
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
-fxM
 "}
