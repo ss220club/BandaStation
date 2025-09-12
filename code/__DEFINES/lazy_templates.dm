@@ -16,6 +16,6 @@
 	"Heretic Sacrifice Level" = LAZY_TEMPLATE_KEY_HERETIC_SACRIFICE, \
 	"Voidwalker Void" = LAZY_TEMPLATE_KEY_VOIDWALKER_VOID, \
 	/* BANDASTATION ADD - Start */ \
-	"Syndicate Cental Command" = LAZY_TEMPLATE_KEY_SYNDIE_CC, \
+	"Syndicate Central Command" = LAZY_TEMPLATE_KEY_SYNDIE_CC, \
 	/* BANDASTATION ADD - End */ \
 )
