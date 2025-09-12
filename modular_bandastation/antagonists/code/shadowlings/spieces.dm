@@ -121,7 +121,6 @@ var/ascended_max_health = 220
 	throwforce = 0
 	throw_speed = 0
 	throw_range = 0
-	icon_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
 	inhand_icon_state = "claw_right"
 	worn_icon_state = "claw_right"
 
