@@ -408,7 +408,7 @@
 
 /obj/item/card/id/advanced/technician_id
 	name = "Repair Technician ID"
-	desc = "Ремонтный техник? У нас здесь такого нет, одни ленивые инженеры! Видимо, это оставили на промежуточной смене…"
+	desc = "Ремонтный техник? У нас здесь такого нет, одни ленивые инженеры! Видимо, это оставили на промежуточной смене..."
 	registered_name = "Pluoxium LXVII"
 	registered_age = 67
 	trim = /datum/id_trim/technician_id
