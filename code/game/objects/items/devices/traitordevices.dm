@@ -344,8 +344,8 @@ effective or pretty fucking useless.
 
 	/// BANDASTATION EDIT ADD: Jammer WL Channel
 	var/list/whitelist_frequencies = list(
-        "Синдикат" // Оффовская частота синдиката
-    )
+	"Синдикат"
+	)
 
 /obj/item/jammer/Initialize(mapload)
 	. = ..()
