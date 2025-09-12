@@ -11,7 +11,7 @@ on:
 jobs:
   setup_build_artifact:
     name: Setup build artifact (${{ format('{0}.{1}', inputs.major, inputs.minor) }})
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
