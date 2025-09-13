@@ -42,7 +42,7 @@
 	device.forceMove(installation_target)
 	RegisterSignal(installation_target, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(on_secondary_attack_hand))
 	RegisterSignal(installation_target, COMSIG_DETECTIVE_SCANNED, PROC_REF(on_scan))
-	installation_target.AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Извлечь скрытый объект", check_showing_context = CALLBACK(src, PROC_REF(check_showing_context)))
+	installation_target.AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Извлечь скрытый объект", show_requirements_check_callback = CALLBACK(src, PROC_REF(show_requirements_check_callback)))
 	spotted_by[user.mind] = TRUE
 	return TRUE
 
@@ -72,24 +72,5 @@
 		else
 			user.balloon_alert(user, "Не удалось извлечь: [parent.declent_ru(NOMINATIVE)]")
 
-/datum/component/stealth_device/proc/check_showing_context(datum/source, list/context, obj/item/held_item, mob/user)
-	return src.spotted_by[user.mind]
-
-/datum/element/contextual_screentip_bare_hands
-	var/datum/callback/check_showing_context
-
-/datum/element/contextual_screentip_bare_hands/Attach(
-	datum/target, use_named_parameters,
-	lmb_text,
-	rmb_text,
-	lmb_text_combat_mode,
-	rmb_text_combat_mode,
-	datum/callback/check_showing_context)
-	. = ..()
-	src.check_showing_context = check_showing_context
-
-/datum/element/contextual_screentip_bare_hands/on_requesting_context_from_item(datum/source, list/context, obj/item/held_item, mob/user)
-	if(check_showing_context && !check_showing_context.Invoke(source, context, held_item, user))
-		return NONE
-	. = ..()
-
+/datum/component/stealth_device/proc/show_requirements_check_callback(datum/source, list/context, obj/item/held_item, mob/user)
+	return spotted_by[user.mind]

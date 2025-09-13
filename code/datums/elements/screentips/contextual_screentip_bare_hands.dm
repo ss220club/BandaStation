@@ -17,6 +17,9 @@
 	/// If set, the text to show for RMB when in combat mode. Otherwise, defaults to rmb_text.
 	var/rmb_text_combat_mode
 
+	/// If set, a callback to determine if the screentip should be shown.
+	var/datum/callback/show_requirements_check_callback // SS220 EDIT - STEALTH
+
 // If you're curious about `use_named_parameters`, it's because you should use named parameters!
 // AddElement(/datum/element/contextual_screentip_bare_hands, lmb_text = "Do the thing")
 /datum/element/contextual_screentip_bare_hands/Attach(
@@ -26,6 +29,7 @@
 	rmb_text,
 	lmb_text_combat_mode,
 	rmb_text_combat_mode,
+	datum/callback/show_requirements_check_callback
 )
 	. = ..()
 	if (!isatom(target))
@@ -38,6 +42,7 @@
 	src.rmb_text = rmb_text
 	src.lmb_text_combat_mode = lmb_text_combat_mode || lmb_text
 	src.rmb_text_combat_mode = rmb_text_combat_mode || rmb_text
+	src.show_requirements_check_callback = show_requirements_check_callback
 
 	var/atom/atom_target = target
 	atom_target.flags_1 |= HAS_CONTEXTUAL_SCREENTIPS_1
@@ -60,6 +65,9 @@
 	mob/user,
 )
 	SIGNAL_HANDLER
+
+	if(show_requirements_check_callback && !show_requirements_check_callback.Invoke(source, context, held_item, user))
+		return NONE
 
 	if(!isliving(user))
 		return .
