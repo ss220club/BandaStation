@@ -2,3 +2,5 @@
 
 #include "code\modules\client\preferences.dm"
 #include "code\modules\client\preferences\body_type.dm"
+#include "code\modules\client\preferences\height_scaling.dm"
+#include "code\modules\client\preferences\icons.dm"
