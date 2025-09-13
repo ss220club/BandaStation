@@ -105,8 +105,8 @@
 
 /obj/projectile/magic/shadow_hand_sl
 	name = "shadow hand"
-	icon = 'icons/obj/weapons/changeling_items.dmi'
-	icon_state = "tentacle_end"
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
+	icon_state = "shadow_hand"
 	pass_flags = PASSTABLE
 	damage = 0
 	damage_type = BRUTE
