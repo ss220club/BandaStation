@@ -37,6 +37,28 @@
  * * encode_title - if TRUE, the title will be HTML encoded
  * * encode_text - if TRUE, the text will be HTML encoded
  */
+
+// BANDASTATION ADD - Start
+/proc/get_announce_listeners()
+	var/list/players = list()
+	var/list/zleves_to_transmit = list()
+
+	for(var/obj/machinery/telecomms/receiver/receiver in GLOB.telecomm_machines)
+		zleves_to_transmit |= receiver.z
+		for(var/obj/machinery/telecomms/hub/linked_hub in receiver.links)
+			for(var/obj/machinery/telecomms/relay/linked_relay in linked_hub.links)
+				zleves_to_transmit |= linked_relay.z
+
+	for(var/obj/machinery/telecomms/allinone/all_in_one_receiver in GLOB.telecomm_machines)
+		zleves_to_transmit |= all_in_one_receiver.z
+
+	for(var/mob/player as anything in GLOB.player_list)
+		if((player.z in zleves_to_transmit) || isobserver(player))
+			players += player
+
+	return players
+// BANDASTATION ADD - Start
+
 /proc/priority_announce(text, title = "", sound, type, sender_override, has_important_message = FALSE, list/mob/players = GLOB.player_list, encode_title = TRUE, encode_text = TRUE, color_override, datum/component/tts_component/tts_override = null) // Bandastation Addition: "datum/component/tts_component/tts_override = null"
 	if(!text)
 		return
@@ -82,6 +104,8 @@
 		finalized_announcement = CHAT_ALERT_COLORED_SPAN(color_override, jointext(announcement_strings, ""))
 	else
 		finalized_announcement = CHAT_ALERT_DEFAULT_SPAN(jointext(announcement_strings, ""))
+
+	players = get_announce_listeners()// BANDASTATION ADD
 
 	// BANDASTATION EDIT - START - add tts_message
 	var/tts_message = (SSstation.announcer.custom_alert_message && !has_important_message) ? SSstation.announcer.custom_alert_message : text
@@ -146,6 +170,9 @@
 		finalized_announcement = CHAT_ALERT_DEFAULT_SPAN(jointext(minor_announcement_strings, ""))
 
 	var/custom_sound = sound_override || (alert ? 'sound/announcer/notice/notice1.ogg' : 'sound/announcer/notice/notice2.ogg')
+
+	players = get_announce_listeners() // BANDASTATION ADD
+
 	dispatch_announcement_to_players(finalized_announcement, players, custom_sound, should_play_sound, tts_override = tts_override, tts_message = message) // BANDASTATION ADDITION - "tts_override" & "tts_message"
 
 /// Sends an announcement about the level changing to players. Uses the passed in datum and the subsystem's previous security level to generate the message.
@@ -171,7 +198,7 @@
 
 	var/finalized_announcement = CHAT_ALERT_COLORED_SPAN(current_level_color, jointext(level_announcement_strings, ""))
 
-	dispatch_announcement_to_players(finalized_announcement, GLOB.player_list, current_level_sound, tts_message = finalized_announcement) // BANDASTATION ADDITION - "tts_message = finalized_announcement"
+	dispatch_announcement_to_players(finalized_announcement, get_announce_listeners(), current_level_sound, tts_message = finalized_announcement) // BANDASTATION ADDITION - "tts_message = finalized_announcement", get_announce_listeners()
 
 /// Proc that just generates a custom header based on variables fed into `priority_announce()`
 /// Will return a string.
