@@ -332,8 +332,9 @@
 		freq = frequency
 		channel = null
 
+	// BANDASTATION EDIT: Add frequency send to proc
 	// Nearby active jammers prevent the message from transmitting
-	if(is_within_radio_jammer_range(src) && !(special_channels & RADIO_SPECIAL_SYNDIE))
+	if(is_within_radio_jammer_range(src, channel))
 		return
 
 	// Determine the identity information which will be attached to the signal.
