@@ -140,7 +140,6 @@
 
 /datum/martial_art/judo/proc/check_streak(mob/living/attacker, mob/living/defender)
 	if(findtext(streak, ARMBAR_COMBO))
-		reset_streak()
 		return Armbar(attacker, defender)
 	if(findtext(streak, EYEPOKE_COMBO))
 		reset_streak()
