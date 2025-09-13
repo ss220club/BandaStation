@@ -12,7 +12,7 @@
 	. = ..()
 	if(!.)
 		return
-	receiver?.mind.add_antag_datum(/datum/antagonist/shadow_thrall)
+	receiver?.mind?.add_antag_datum(/datum/antagonist/shadow_thrall)
 	RegisterSignal(receiver, COMSIG_ATOM_EXAMINE, PROC_REF(on_holder_examine))
 	to_chat(receiver, span_danger("A frigid whisper coils in your mind... You are a thrall."))
 
@@ -20,7 +20,7 @@
 	. = ..()
 	if(!.)
 		return
-	organ_owner?.mind.remove_antag_datum(/datum/antagonist/shadow_thrall)
+	organ_owner?.mind?.remove_antag_datum(/datum/antagonist/shadow_thrall)
 	UnregisterSignal(organ_owner, COMSIG_ATOM_EXAMINE)
 	to_chat(organ_owner, span_notice("The chilling presence leaves your mind."))
 
