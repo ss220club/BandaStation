@@ -119,7 +119,7 @@
 	name = "Syndicate Breaching Sledgehammer"
 	desc = "Plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders."
 	item = /obj/item/sledgehammer/syndie
-	cost = 10
+	cost = 13
 	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER, JOB_ATMOSPHERIC_TECHNICIAN)
 
 /datum/uplink_item/weapon_kits/medium_cost/syndiesledge
@@ -146,5 +146,5 @@
 		/obj/item/stack/sheet/plasteel = 25,
 	)
 	tool_behaviors = list(TOOL_WRENCH, TOOL_WELDER)
-	time = 50 SECONDS
+	time = 10 SECONDS
 	category = CAT_WEAPON_MELEE
