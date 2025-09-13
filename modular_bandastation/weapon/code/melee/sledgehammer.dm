@@ -1,6 +1,6 @@
 /obj/item/sledgehammer
 	name = "sledgehammer"
-	desc = "Стальная кувалда для разрушения стен. Большая и тяжелая, может быть также использована для разрушения горных пород."
+	desc = "Большая и тяжелая кувалда из пластали для разрушения стен. Может также быть использована для разрушения горных пород."
 	icon = 'modular_bandastation/weapon/icons/melee/sledgehammer.dmi'
 	icon_state = "sledgehammer0"
 	base_icon_state = "sledgehammer"
@@ -27,24 +27,24 @@
 	/// How much time it takes to use sledgehammer on wall
 	var/tear_time = 6 SECONDS
 	/// By how much we multiply the time of use when wall is reinforced
-	var/reinforced_multiplier = 3
+	var/reinforced_multiplier = 4
 	/// How much stamina is taken per use of sledgehammer on wall
 	var/stamina_take = 40
 
 /obj/item/sledgehammer/tactical
 	name = "D-4 tactical breaching hammer"
-	desc = "Металлопластиковый композитный молот для создания брешей в стенах или уничтожения структур."
+	desc = "Металлопластиковый композитный молот для создания брешей в стенах или уничтожения различных структур."
 	icon_state = "sledgehammer_tactical0"
 	base_icon_state = "sledgehammer_tactical"
 	worn_icon_state = "sledgehammer_tactical"
 	resistance_flags = FIRE_PROOF
-	demolition_mod = 6
+	demolition_mod = 5
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 1
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 2)
 	usesound = 'sound/items/tools/crowbar.ogg'
 	tear_time = 5 SECONDS
-	reinforced_multiplier = 2
+	reinforced_multiplier = 3
 	stamina_take = 30
 
 /obj/item/sledgehammer/syndie
@@ -119,7 +119,7 @@
 	name = "Syndicate Breaching Sledgehammer"
 	desc = "Plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders."
 	item = /obj/item/sledgehammer/syndie
-	cost = 13
+	cost = 10
 	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER, JOB_ATMOSPHERIC_TECHNICIAN)
 
 /datum/uplink_item/weapon_kits/medium_cost/syndiesledge
@@ -143,8 +143,8 @@
 	result = /obj/item/sledgehammer
 	reqs = list(
 		/obj/item/stack/sheet/mineral/wood = 10,
-		/obj/item/stack/sheet/plasteel = 25,
+		/obj/item/stack/sheet/plasteel = 50,
 	)
 	tool_behaviors = list(TOOL_WRENCH, TOOL_WELDER)
-	time = 10 SECONDS
+	time = 50 SECONDS
 	category = CAT_WEAPON_MELEE
