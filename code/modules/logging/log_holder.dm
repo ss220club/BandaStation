@@ -230,7 +230,7 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 	if(!human_readable_enabled)
 		return
 
-	file_path = category.get_output_file(null, "log", split_by_category = FALSE) // BANDASTATION EDIT - Logis
+	file_path = category.get_output_file(null, "log", split_by_category = FALSE) // BANDASTATION EDIT - Logis: added `split_by_category = FALSE`
 	if(fexists(file_path))
 		// BANDASTATION REMOVAL START - Logis
 		// rustg_file_append(LOG_CATEGORY_RESET_FILE_MARKER_READABLE, file_path)

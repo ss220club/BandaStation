@@ -54,19 +54,17 @@ GENERAL_PROTECT_DATUM(/datum/log_category)
 
 /// Allows for category specific file splitting. Needs to accept a null entry for the default file.
 /// If master_category it will always return the output of master_category.get_output_file(entry)
-// BANDASTATION EDIT START - Logis
-/datum/log_category/proc/get_output_file(list/entry, extension = "log.json", split_by_category = TRUE)
+/datum/log_category/proc/get_output_file(list/entry, extension = "log.json", split_by_category = TRUE) // BANDASTATION EDIT - Logis: added `split_by_category = TRUE`
 	if(master_category)
-		return master_category.get_output_file(entry, extension, split_by_category)
+		return master_category.get_output_file(entry, extension, split_by_category) // BANDASTATION EDIT - Logis: added `split_by_category`
 	if(secret)
-		return "[GLOB.log_directory]/secret/[split_by_category ? category : LOG_CATEGORY_GAME].[extension]"
-	return "[GLOB.log_directory]/[split_by_category ? category : LOG_CATEGORY_GAME].[extension]"
-// BANDASTATION EDIT END - Logis
+		return "[GLOB.log_directory]/secret/[split_by_category ? category : LOG_CATEGORY_GAME].[extension]" // BANDASTATION EDIT - Logis: added `split_by_category ? category : LOG_CATEGORY_GAME`
+	return "[GLOB.log_directory]/[split_by_category ? category : LOG_CATEGORY_GAME].[extension]" // BANDASTATION EDIT - Logis: added `split_by_category ? category : LOG_CATEGORY_GAME`
 
 /// Writes an entry to the output file(s) for the category
 /datum/log_category/proc/write_entry(datum/log_entry/entry)
 	// config isn't loaded? assume we want human readable logs
 	if(isnull(config) || CONFIG_GET(flag/log_as_human_readable))
-		entry.write_readable_entry_to_file(get_output_file(entry, "log", split_by_category = FALSE), format_internally = internal_formatting) // BANDASTATION EDIT - Logis
+		entry.write_readable_entry_to_file(get_output_file(entry, "log", split_by_category = FALSE), format_internally = internal_formatting) // BANDASTATION EDIT - Logis: added `split_by_category = FALSE`
 
 	entry.write_entry_to_file(get_output_file(entry))
