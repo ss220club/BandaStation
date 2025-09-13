@@ -629,6 +629,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	QDEL_NULL(loot_panel)
 	QDEL_NULL(parallax_rock)
 	QDEL_LIST(parallax_layers_cached)
+	QDEL_NULL(who) // BANDASTATION ADDITION - TGUI Who
 	parallax_layers = null
 	seen_messages = null
 	Master.UpdateTickRate()

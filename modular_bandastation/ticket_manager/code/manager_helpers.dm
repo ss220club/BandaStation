@@ -207,7 +207,8 @@
 		"time" = time_stamp(NONE),
 	))
 	SStgui.update_uis(src)
-	SSblackbox.LogAhelp(needed_ticket.id, "Disconnected", "Client disconnected", user.key)
+	// Gotta async this cause clients only logout on destroy, and sleeping in destroy is disgusting
+	INVOKE_ASYNC(SSblackbox, TYPE_PROC_REF(/datum/controller/subsystem/blackbox, LogAhelp), needed_ticket.id, "Disconnected", "Client disconnected", user.key)
 
 /// Adds little notification to ticket chat about player reconnect
 /datum/ticket_manager/proc/client_login(datum/persistent_client/p_client)
