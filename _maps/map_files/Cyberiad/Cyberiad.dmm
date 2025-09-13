@@ -11266,10 +11266,10 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "cJE" = (
-/obj/machinery/vending/coffee,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
+/obj/machinery/photocopier/prebuilt,
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
 "cJM" = (
@@ -26629,11 +26629,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "gzC" = (
-/obj/item/kirbyplants/random,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 4
 	},
 /obj/machinery/firealarm/directional/south,
+/obj/structure/reagent_dispensers/water_cooler,
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
 "gzE" = (
@@ -27256,10 +27256,10 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
 "gHF" = (
-/obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
+/obj/machinery/vending/coffee,
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
 "gHL" = (
@@ -33135,9 +33135,7 @@
 /turf/open/floor/grass,
 /area/station/service/hydroponics/ghetto)
 "iaC" = (
-/obj/machinery/computer/accounting{
-	dir = 8
-	},
+/obj/machinery/vending/cigarette,
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
 "iaI" = (
@@ -44801,7 +44799,8 @@
 	pixel_x = 10;
 	pixel_y = 24
 	},
-/obj/structure/statue/gold/galactic_map,
+/obj/structure/table/wood,
+/obj/item/radio/intercom/command,
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
 "kUl" = (
@@ -52855,9 +52854,6 @@
 	pixel_y = 8
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/spawner/random/special_lighter{
-	pixel_y = -5
-	},
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "mTv" = (
@@ -67108,11 +67104,11 @@
 /turf/open/floor/iron,
 /area/station/commons/lounge)
 "qtV" = (
-/obj/structure/reagent_dispensers/water_cooler,
 /obj/machinery/light/directional/south,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
+/obj/structure/statue/gold/galactic_map,
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
 "qub" = (
@@ -83158,7 +83154,9 @@
 	},
 /obj/effect/turf_decal/siding/wood,
 /obj/machinery/status_display/ai/directional/north,
-/obj/item/radio/intercom/command,
+/obj/effect/spawner/random/special_lighter{
+	pixel_y = -5
+	},
 /turf/open/floor/wood,
 /area/station/command/meeting_room)
 "uub" = (
@@ -83953,8 +83951,10 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/prison/ghetto)
 "uFl" = (
-/obj/machinery/vending/cigarette,
 /obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/machinery/computer/accounting{
 	dir = 1
 	},
 /turf/open/floor/wood,
