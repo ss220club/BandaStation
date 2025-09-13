@@ -63,6 +63,11 @@
 /// log messages sent in OOC
 /datum/config_entry/flag/log_ooc
 
+/// BANDASTATION ADDITION START - LOOC
+/// log messages sent in LOOC
+/datum/config_entry/flag/log_looc
+/// BANDASTATION ADDITION END - LOOC
+
 /// log login/logout
 /datum/config_entry/flag/log_access
 

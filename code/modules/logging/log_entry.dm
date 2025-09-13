@@ -69,9 +69,9 @@ GENERAL_PROTECT_DATUM(/datum/log_entry)
 /datum/log_entry/proc/to_readable_text(format = TRUE)
 	var/output = ""
 	if(format)
-		output += "\[[timestamp]\] [uppertext(category)]: [message]"
+		output += "\[[timestamp]\] [uppertext(GLOB.local_to_logis_logs_map[category])]: [message]" // BANDASTATION EDIT - Logis
 	else
-		output += "[uppertext(category)]: [message]"
+		output += "[uppertext(GLOB.local_to_logis_logs_map[category])]: [message]" // BANDASTATION EDIT - Logis
 
 	if(flags & ENTRY_USE_DATA_W_READABLE)
 		output += json_encode(data, JSON_PRETTY_PRINT)
