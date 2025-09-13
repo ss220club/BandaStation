@@ -9,3 +9,6 @@
 
 /datum/preference/choiced/tail_tajaran/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tail_tajaran"] = value
+
+/datum/preference/choiced/tail_tajaran/create_default_value()
+	return /datum/sprite_accessory/tails/tajaran/wingertail::name
