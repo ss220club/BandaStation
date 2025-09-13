@@ -169,8 +169,8 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/examine_more(mob/user)
 	. = ..()
 	. += "Этот вариант является эксперементальной переделкой автомата AMK с использованием гаусс-технологий. \
-	На оригинальные детали были установлены капаситоры и катушки, используемые для ускорения пули в стволе. \
-	На прикладе имеется батарея с индикатором загруженности капаситоров. \
+	На оригинальные детали были установлены конденсаторы и катушки, используемые для ускорения пули в стволе. \
+	На прикладе имеется батарея с индикатором загруженности конденсаторов. \
 	Из-за того что модификация сделана 'на коленке', о защите от ЭМИ можно только мечтать."
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/Initialize(mapload)
@@ -180,7 +180,7 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(held_item?.tool_behaviour == TOOL_MULTITOOL)
-		context[SCREENTIP_CONTEXT_LMB] = "Перезагрузить капаситоры"
+		context[SCREENTIP_CONTEXT_LMB] = "Перезагрузить конденсаторы"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/update_overlays()
@@ -204,7 +204,7 @@
 		return FALSE
 	obj_flags |= EMAGGED
 	projectile_damage_multiplier = emagged_projectile_damage_multiplier
-	balloon_alert(user, "капаситоры перегружены")
+	balloon_alert(user, "конденсаторы перегружены")
 	return TRUE
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/multitool_act(mob/living/user, obj/item/tool)
@@ -218,7 +218,7 @@
 	projectile_speed_multiplier = initial(projectile_speed_multiplier)
 	fire_delay = initial(fire_delay)
 	update_appearance()
-	balloon_alert(user, "капаситоры перезагружены")
+	balloon_alert(user, "конденсаторы перезагружены")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/try_fire_gun(atom/target, mob/living/user, params)

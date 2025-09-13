@@ -111,3 +111,26 @@
 	contains = list(
 		/obj/item/sledgehammer/tactical = 1,
 	)
+
+// MARK: Railgun
+/datum/supply_pack/security/armory/railgun
+	name = "HEMC-62 Railgun Crate"
+	desc = "В этом ящике находится один РЭМУМ-62 (ручной электромагнитный ускоритель масс, изделие номер 62) калибра 30мм НТ, c одним дополнительным магазином нелетальных снарядов."
+	cost = CARGO_CRATE_VALUE * 150
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/gun/ballistic/railgun = 1,
+		/obj/item/ammo_box/magazine/railgun/taser = 1,
+	)
+	crate_name = "HEMC-62 railgun crate"
+
+/datum/supply_pack/security/armory/railgun_magazines
+	name = "HEMC-62 Railgun Ammo Crate"
+	desc = "В этом ящике находятся два магазина к РЭМУМ (ручным электромагнитным ускорителям масс) c летальными и нелетальными снарядами калибра 30мм НТ."
+	cost = CARGO_CRATE_VALUE * 50
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/ammo_box/magazine/railgun/taser = 1,
+		/obj/item/ammo_box/magazine/railgun = 1,
+	)
+	crate_name = "HEMC-62 railgun ammo crate"
