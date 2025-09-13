@@ -129,7 +129,7 @@
 	return ..()
 
 // Перехват целей на пути — когда снаряд входит в новый турф
-/obj/projectile/magic/shadow_hand_sl/Moved(atom/oldloc, dir, forced = FALSE)
+/obj/projectile/magic/shadow_hand_sl/Moved(atom/oldloc, dir, forced = FALSE, list/old_locs, momentum_change = FALSE)
 	. = ..()
 	if(hit_committed)
 		return .
@@ -138,14 +138,13 @@
 	if(!istype(cur_turf))
 		return .
 
-	// Сначала живые
 	var/atom/movable/candidate = null
+
 	for(var/mob/living/L in cur_turf)
 		if(_eligible_mob(L))
 			candidate = L
 			break
 
-	// Если живых нет — предмет
 	if(!candidate)
 		for(var/obj/item/I in cur_turf)
 			if(_eligible_item(I))
