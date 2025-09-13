@@ -1,6 +1,6 @@
 #define SERPENT_ENRAGED (health < maxHealth*0.5)
 
-/mob/living/simple_animal/hostile/megafauna/serpent
+/mob/living/simple_animal/hostile/asteroid/elite/serpent
 	name = "sea serpent"
 	desc = "A rather decieving name as it doesn't look much like a serpent."
 	health = 2500
@@ -40,7 +40,7 @@
 	var/datum/action/cooldown/mob_cooldown/fire_breath/ice/electric/serpent/breath = BB_WHELP_STRAIGHTLINE_FIRE
 	var/datum/action/cooldown/mob_cooldown/fire_breath/ice/eruption/electric/serpent/eruption = BB_WHELP_WIDESPREAD_FIRE
 
-/mob/living/simple_animal/hostile/megafauna/serpent/Initialize(mapload)
+/mob/living/simple_animal/hostile/asteroid/elite/serpent/Initialize(mapload)
 	. = ..()
 	thunderstorm = new(src)
 	dash = new(src)
@@ -53,13 +53,13 @@
 	AddElement(/datum/element/change_force_on_death, move_force = MOVE_FORCE_DEFAULT)
 	add_traits(list(TRAIT_NODROWN, TRAIT_SWIMMER), INNATE_TRAIT)
 
-/mob/living/simple_animal/hostile/megafauna/serpent/Destroy()
+/mob/living/simple_animal/hostile/asteroid/elite/serpent/Destroy()
 	thunderstorm = null
 	breath = null
 	eruption = null
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/serpent/OpenFire()
+/mob/living/simple_animal/hostile/asteroid/elite/serpent/OpenFire()
 	if(client)
 		return
 
@@ -79,7 +79,7 @@
 		thunderstorm.Trigger(target = target)
 		return
 
-/mob/living/simple_animal/hostile/megafauna/serpent/ex_act(severity, target)
+/mob/living/simple_animal/hostile/asteroid/elite/serpent/ex_act(severity, target)
 	if(severity <= EXPLODE_LIGHT)
 		return FALSE
 	return ..()
