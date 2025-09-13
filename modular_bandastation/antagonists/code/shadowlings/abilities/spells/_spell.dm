@@ -4,7 +4,7 @@
 	button_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
 	button_icon_state = ""
 	background_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
-	background_icon_state = "bg_shadowling"
+	background_icon_state = "bg_shadowling_n"
 	overlay_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
 	overlay_icon_state = "bg_shadowling_border"
 	check_flags = AB_CHECK_CONSCIOUS

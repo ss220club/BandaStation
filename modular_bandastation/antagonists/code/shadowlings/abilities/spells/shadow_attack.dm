@@ -58,14 +58,17 @@
 /datum/action/cooldown/shadowling/shadow_strike/DoEffect(mob/living/carbon/human/H, atom/target)
 	if(!istype(H))
 		return FALSE
+
 	var/mob/living/carbon/human/T = null
 	if(istype(target, /mob/living/carbon/human))
 		T = target
 	else
 		T = find_closest_target(H)
+
 	if(!istype(T))
 		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
+
 	var/obj/effect/dummy/phased_mob/shadowling/P = istype(H.loc, /obj/effect/dummy/phased_mob/shadowling) ? H.loc : null
 	if(P)
 		var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
@@ -74,17 +77,24 @@
 		P.eject_jaunter(FALSE)
 	else
 		H.remove_status_effect(/datum/status_effect/shadow/phase)
+
 	if(get_dist(H, T) > 1)
 		step_towards(H, T)
+
 	if(QDELETED(H) || QDELETED(T) || get_dist(H, T) > 1)
 		owner.balloon_alert(owner, "Слишком далеко для удара")
 		return FALSE
+
 	H.visible_message(
 		span_boldwarning("[H] вырывается из тени и поражает [T]!"),
 		span_userdanger("Вы вырываетесь из тени и поражаете [T]!"),
 		ignored_mobs = null
 	)
+
 	to_chat(T, span_danger("Тень материализуется рядом — [H] наносит удар!"))
+	for(var/datum/action/cooldown/shadowling/shadow_phase/A in H.actions)
+		A.exit_phase(H, forced_out = FALSE)
+
 	T.apply_damage(20, BRUTE, null, sharpness = SHARP_POINTY)
 	H.do_attack_animation(T)
 	playsound(get_turf(H), sfx_activate, 65, TRUE)

@@ -1,17 +1,40 @@
-/obj/structure/shadowling_circle
-	name = "круг"
-	desc = "ЧТО ЭТО?!"
+/obj/effect/temp_visual/shadowling/ascend_circle
+	name = "umbral circle"
+	desc = "Пульсирующий круг тьмы."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "shadow_acendence_circle"
-	layer = MOB_LAYER - 0.1
-	anchored = TRUE
-	density = TRUE
-	resistance_flags = INDESTRUCTIBLE
-	alpha = 0
 
-/obj/structure/shadowling_circle/Initialize(mapload)
+	// визуал под мобом, но над полом
+	plane = GAME_PLANE
+	layer = MOB_LAYER - 0.2
+
+	anchored = TRUE
+	density = FALSE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
+	/// Сколько жить (включая время на fade-out)
+	var/lifetime = 3 SECONDS
+	/// Время на появление/исчезновение
+	var/fade_in_time  = 0.6 SECONDS
+	var/fade_out_time = 0.6 SECONDS
+
+/obj/effect/temp_visual/shadowling/ascend_circle/Initialize(mapload, custom_lifetime)
 	. = ..()
-	animate(src, alpha = 255, time = 0.6 SECONDS)
+	if(isnum(custom_lifetime))
+		lifetime = max(custom_lifetime, fade_in_time + fade_out_time)
+
+	alpha = 0
+	// плавный вход
+	animate(src, alpha = 255, time = fade_in_time)
+
+	// запланировать плавный выход и удаление
+	var/time_visible = max(lifetime - fade_in_time - fade_out_time, 0)
+	addtimer(CALLBACK(src, PROC_REF(_begin_fade_out)), time_visible)
+	return .
+
+/obj/effect/temp_visual/shadowling/ascend_circle/proc/_begin_fade_out()
+	animate(src, alpha = 0, time = fade_out_time)
+	QDEL_IN(src, fade_out_time)
 
 /obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark
 	color = "#131a22"
@@ -27,7 +50,7 @@
 	name = "Возвышение"
 	desc = "Разрывая оболочку, вы восходите к истинной форме. Требует темноты."
 	button_icon_state = "shadow_ascend"
-	cooldown_time = 10 SECONDS
+	cooldown_time = 30 SECONDS
 	requires_dark_user = TRUE
 	requires_dark_target = FALSE
 	max_range = 0
@@ -63,10 +86,12 @@
 		to_chat(H, span_warning("Свет мешает Возвышению."))
 		return FALSE
 
-	var/obj/structure/shadowling_circle/cocoon = new(start)
-	var/list/spawned = list(cocoon)
-	playsound(start, sfx_start, 60, TRUE)
+	StartCooldown()
+	var/total_time = (steps * step_time) + 1 SECONDS
+	var/obj/effect/temp_visual/shadowling/ascend_circle/circle = new(get_turf(H), total_time)
+	var/list/spawned = list(circle)
 
+	playsound(start, sfx_start, 60, TRUE)
 	to_chat(H, span_notice("Вы начинаете собирать тьму в себе..."))
 
 	for(var/i = 1, i <= steps, i++)

@@ -6,21 +6,20 @@
 /datum/action/cooldown/shadowling/cold_wave
 	name = "Волна холода"
 	desc = "Выплеск ледяной тьмы в 90° конусе на 4 тайла, наносящий 30 урона по выносливости и замедляющий врагов на 10 секунд."
-	button_icon_state = "icy_veins"
+	button_icon_state = "shadow_cold"
 	cooldown_time = 20 SECONDS
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	max_range = 4
 	channel_time = 0
-	var/const/fov_degree = 90
+	var/const/fov_degree = 45
 	var/static/sfx_cold = 'modular_bandastation/antagonists/sound/shadowlings/frost.ogg'
 	var/reagent_type = /datum/reagent/consumable/frostoil
 
 /datum/action/cooldown/shadowling/cold_wave/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/list/targets = collect_cone_targets(H)
 	if(!length(targets))
-		owner.balloon_alert(owner, "Нет доступных целей")
-		return FALSE
+		StartCooldown()
 
 	play_cold_fx(H)
 
@@ -40,6 +39,7 @@
 		if(T.reagents)
 			T.reagents.add_reagent(reagent_type, frostoil_amt)
 
+		T.apply_status_effect(/datum/status_effect/cloudstruck/shadow, 10 SECONDS)
 		hit = TRUE
 
 	return hit
@@ -96,8 +96,8 @@
 /obj/effect/temp_visual/dir_setting/shadow_plume
 	icon = 'icons/effects/160x160.dmi'
 	icon_state = "entropic_plume"
-	duration = 0.6 SECONDS
-	color = "#66ccff"
+	duration = 3 SECONDS
+	color = "#015fff"
 	alpha = 220
 
 /obj/effect/temp_visual/dir_setting/shadow_plume/setDir(dir)
@@ -113,3 +113,20 @@
 		if(WEST)
 			pixel_y = -64
 			pixel_x = -128
+
+/datum/status_effect/cloudstruck/shadow/on_creation(mob/living/new_owner, duration = 2 SECONDS)
+	src.duration = duration
+	if(!mob_overlay_shadow)
+		// база та же, что у еретика, но применяем синий цвет
+		mob_overlay_shadow = mutable_appearance('icons/effects/eldritch.dmi', "cloud_swirl", ABOVE_MOB_LAYER)
+		mob_overlay_shadow.color = "#66ccff"
+	return ..()
+
+/datum/status_effect/cloudstruck/shadow/on_apply()
+	owner.add_overlay(mob_overlay_shadow)
+	owner.become_blind(id)
+	return TRUE
+
+/datum/status_effect/cloudstruck/shadow/on_remove()
+	owner.cure_blind(id)
+	owner.cut_overlay(mob_overlay_shadow)

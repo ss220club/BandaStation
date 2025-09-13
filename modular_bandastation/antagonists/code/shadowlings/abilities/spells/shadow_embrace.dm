@@ -61,7 +61,7 @@
 	layer = EFFECTS_LAYER
 	icon = 'icons/effects/eldritch.dmi'
 	icon_state = "cloud_swirl"
-	color = "#66ccff"
+	color = "#015fff"
 	alpha = 220
 
 /obj/effect/temp_visual/shadow_phase_smoke/Initialize(mapload)
@@ -76,7 +76,6 @@
 	H.alpha = clamp(H.alpha, 0, 255)
 	animate(H, alpha = 0, time = fade_time)
 
-/// быстрый fade-in
 /datum/action/cooldown/shadowling/shadow_phase/proc/fade_in(mob/living/carbon/human/H, fade_time = 0.3 SECONDS)
 	if(!istype(H)) return
 	animate(H, alpha = 255, time = fade_time)

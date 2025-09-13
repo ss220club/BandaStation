@@ -59,7 +59,7 @@
 /datum/action/cooldown/shadowling/stealth
 	name = "Скрытность"
 	desc = "Слиться с тенью. Снимается при движении, уроне или действиях."
-	button_icon_state = "stealth"
+	button_icon_state = "shadow_stealth"
 	cooldown_time = 6 SECONDS
 
 /datum/action/cooldown/shadowling/stealth/DoEffect(mob/living/carbon/human/H, atom/_)

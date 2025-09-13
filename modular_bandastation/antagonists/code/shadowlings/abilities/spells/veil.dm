@@ -1,7 +1,7 @@
 /datum/action/cooldown/shadowling/veil
 	name = "Вуаль"
 	desc = "Ваше присутствие гасит свет и пламя поблизости; противники в тени слабеют, АПЦ обнуляют заряд, светогрибы чахнут."
-	button_icon_state = "veil"
+	button_icon_state = "shadow_veil"
 	cooldown_time = 15 SECONDS
 	required_thralls = 0
 

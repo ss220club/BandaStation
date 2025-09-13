@@ -1,13 +1,13 @@
 /datum/action/cooldown/shadowling/enthrall
 	name = "Порабощение"
 	desc = "Подчиняет ближайшее существо к вам в небольшом конусе служить улью."
-	button_icon_state = "enthrall"
+	button_icon_state = "shadow_enthrall"
 	cooldown_time = 45 SECONDS
 	required_thralls = 0
 	requires_dark_user = TRUE
 	requires_dark_target = TRUE
 	max_range = 2
-	channel_time = 8
+	channel_time = 0
 	cancel_on_bright = TRUE
 
 /datum/action/cooldown/shadowling/enthrall/proc/find_cone_target(mob/living/carbon/human/H)
@@ -33,7 +33,7 @@
 /datum/action/cooldown/shadowling/enthrall/proc/is_valid_target(mob/living/carbon/human/H, mob/living/carbon/human/T)
 	if(!istype(T))
 		return FALSE
-	if(T?.mind)
+	if(!T?.mind)
 		return FALSE
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(hive)

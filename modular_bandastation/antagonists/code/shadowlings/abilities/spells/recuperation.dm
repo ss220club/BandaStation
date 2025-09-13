@@ -108,7 +108,7 @@
 /datum/action/cooldown/shadowling/recuperation/proc/attach_cover(mob/living/carbon/human/T)
 	if(cover)
 		return
-	cover = new
+	cover = new new /obj/structure/shadowling_cocoon(get_turf(T))
 	T.vis_contents += cover
 
 /datum/action/cooldown/shadowling/recuperation/proc/detach_cover(mob/living/carbon/human/T)

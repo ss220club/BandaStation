@@ -2,7 +2,7 @@
 	name = "Вылупиться"
 	desc = "Обратить свою оболочку и явить истинную тень."
 	button_icon_state = "shadow_hatch"
-	cooldown_time = 0
+	cooldown_time = 30 SECONDS
 	requires_dark_user = TRUE
 	requires_dark_target = FALSE
 	max_range = 0
@@ -71,6 +71,7 @@
 		to_chat(H, span_warning("Свет мешает вылуплению."))
 		return FALSE
 
+	StartCooldown()
 	var/list/walls = build_ring_walls(start)
 
 	attach_cover()

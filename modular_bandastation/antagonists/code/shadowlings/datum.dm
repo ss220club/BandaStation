@@ -46,7 +46,6 @@
 
 	objectives |= shadow_team.get_objectives()
 
-	owner.announce_objectives()
 	var/mob/living/current = owner.current
 	if(current)
 		add_team_hud(current)
@@ -55,6 +54,8 @@
 		shadow_team.sync_after_event(H)
 
 	. = ..()
+
+	owner.announce_objectives()
 
 /datum/antagonist/shadowling/on_removal()
 	var/mob/living/carbon/human/H = owner?.current

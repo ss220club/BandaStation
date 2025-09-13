@@ -2,7 +2,7 @@
 /datum/action/cooldown/shadowling/root
 	name = "Путы"
 	desc = "Опутать цель тенями на 10 секунд. Работает только если цель стоит в тени."
-	button_icon_state = "stun_trap"
+	button_icon_state = "shadow_grasp"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 25 SECONDS
 	click_to_activate = TRUE

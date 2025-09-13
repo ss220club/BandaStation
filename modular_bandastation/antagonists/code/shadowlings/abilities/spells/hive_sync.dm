@@ -1,7 +1,7 @@
 /datum/action/cooldown/shadowling/hive_sync
 	name = "Синхронизация улья"
 	desc = "Показать число живых слуг и получить доступные вам способности по их количеству."
-	button_icon_state = "hive_sync"
+	button_icon_state = "shadow_sync"
 	cooldown_time = 6 SECONDS
 	channel_time = 3 SECONDS
 

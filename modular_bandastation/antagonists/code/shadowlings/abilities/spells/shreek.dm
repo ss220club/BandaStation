@@ -1,7 +1,7 @@
 /datum/action/cooldown/shadowling/shreek
 	name = "Крик"
 	desc = "Ударная волна тьмы вокруг: рядом швыряет и оглушает, до 5 тайлов дезориентирует и трясёт. Бьёт стёкла и лампы."
-	button_icon_state = "screech"
+	button_icon_state = "shadow_screech"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 30 SECONDS
 	var/knock_radius = 1

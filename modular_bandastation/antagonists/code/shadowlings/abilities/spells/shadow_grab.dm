@@ -53,6 +53,9 @@
 		if(!T.grippedby(H, TRUE))
 			break
 
+	for(var/datum/action/cooldown/shadowling/shadow_phase/A in H.actions)
+		A.exit_phase(H, forced_out = FALSE)
+
 	return (H.pulling == T)
 
 /datum/action/cooldown/shadowling/shadow_grab/StartCooldown(time_override)

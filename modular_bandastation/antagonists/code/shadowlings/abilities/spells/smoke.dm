@@ -1,7 +1,7 @@
 /datum/action/cooldown/shadowling/shadow_smoke
 	name = "Теневой дым"
 	desc = "Заполняет область дымом: лечит союзных теней и их слуг, ослепляет и иногда оглушает остальных."
-	button_icon_state = "blindness_smoke"
+	button_icon_state = "shadow_smoke"
 	cooldown_time = 60 SECONDS
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
@@ -128,7 +128,7 @@
 	src.duration = duration
 	if(!mob_overlay_shadow)
 		mob_overlay_shadow = mutable_appearance('icons/effects/eldritch.dmi', "cloud_swirl", ABOVE_MOB_LAYER)
-		mob_overlay_shadow.color = "#66ccff"
+		mob_overlay_shadow.color = "#015fff"
 	return ..()
 
 /datum/status_effect/cloudstruck/shadow/on_apply()
