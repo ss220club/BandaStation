@@ -12,11 +12,13 @@
 	modifies_speech = TRUE
 
 /obj/item/organ/tongue/shadow_hive/modify_speech(datum/source, list/speech_args)
-	var/mob/living/carbon/human/user = source
+	var/mob/living/carbon/human/user = owner
 	if(!istype(user))
 		return
 
 	var/message = speech_args[SPEECH_MESSAGE]
+	if(!istext(message))
+		return
 	if(!length(message))
 		return
 
@@ -29,8 +31,8 @@
 		return
 
 	var/rendered = "<span class='shadowradio'><b>[user.real_name]:</b> [message]</span>"
-	user.log_talk(message, LOG_SAY, tag="SHADOW_HIVE")
 
+	user.log_talk(message, LOG_SAY, tag = "SHADOW_HIVE")
 	to_chat(user, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = TRUE)
 
 	for(var/mob/living/carbon/human/L in hive.lings)

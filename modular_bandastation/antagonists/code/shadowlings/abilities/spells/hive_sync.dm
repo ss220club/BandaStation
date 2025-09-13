@@ -39,6 +39,10 @@
 	return null
 
 /datum/action/cooldown/shadowling/hive_sync/proc/role_allowed(var/datum/action/cooldown/shadowling/A, ling_role)
+	if(istype(A, /datum/action/cooldown/shadowling/election))
+		if(GLOB.shadowling_vote_finished)
+			return FALSE
+
 	var/list/check_list = list()
 	switch(ling_role)
 		if(SHADOWLING_ROLE_THRALL)
@@ -48,6 +52,7 @@
 		else
 			var/datum/antagonist/shadowling/hive = get_shadowling_antag_of(owner)
 			check_list = hive?.is_higher ? SHADOWLING_ASCENDED_ABILITIES : SHADOWLING_BASE_ABILITIES
+
 	return A.type in check_list
 
 /datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(var/datum/action/cooldown/shadowling/A)

@@ -1,5 +1,6 @@
 GLOBAL_VAR_INIT(shadowling_hive, null)
 GLOBAL_VAR_INIT(shadowling_vote, null)
+GLOBAL_VAR_INIT(shadowling_vote_finished, FALSE)
 GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 
 #define SHADOWLING_ROLE_MAIN "shadowling_main"

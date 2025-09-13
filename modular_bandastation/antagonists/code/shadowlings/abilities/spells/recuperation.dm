@@ -77,7 +77,9 @@
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
 			ability.Remove(T)
 
-	hive.grant_sync_action(T)
+	// делаем из слуги младшего шадоулинга
+	hive.join_member(T, SHADOWLING_ROLE_LESSER)
+	hive.refresh_languages(T)
 
 	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим шадоулингом."))
 	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим шадоулингом!"))
@@ -108,7 +110,7 @@
 /datum/action/cooldown/shadowling/recuperation/proc/attach_cover(mob/living/carbon/human/T)
 	if(cover)
 		return
-	cover = new new /obj/structure/shadowling_cocoon(get_turf(T))
+	cover = new /obj/structure/shadowling_cocoon(get_turf(T))
 	T.vis_contents += cover
 
 /datum/action/cooldown/shadowling/recuperation/proc/detach_cover(mob/living/carbon/human/T)
