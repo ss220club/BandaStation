@@ -1,4 +1,0 @@
-author: "AyIong"
-delete-after: True
-changes:
-  - bugfix: "Лампочки больше не должны превращаться в \"ERROR\"."
