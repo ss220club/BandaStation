@@ -4,6 +4,9 @@
 #TTS_CACHE_ENABLED
 #TTS_API_URL_SILERO
 
+## log LOOC channel
+LOG_LOOC
+
 ## SS Central
 #SS_CENTRAL_URL http://127.0.0.1:8000/v1
 #SS_CENTRAL_TOKEN 12345678
@@ -55,6 +58,3 @@ ROUNDSTART_RACES tajaran
 BRAIN_PERMANENT_TRAUMAS
 ## Decay rate for a brain organ, default - 0.5 (30 min), works only with BRAIN_PERMANENT_TRAUMAS enabled
 BRAIN_DECAY_RATE 2
-
-## log LOOC channel
-LOG_LOOC
