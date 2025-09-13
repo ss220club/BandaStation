@@ -55,17 +55,19 @@
 /mob/living/proc/judo_help()
 	set name = "Вспомнить основы"
 	set desc = "Вы взываете к техникам корпоратского дзюдо."
-	set category = "Дзюдо"
-	to_chat(usr, span_bolditalic("Вы взываете к техникам корпоратского дзюдо."))
+	set category = "IC"
 
-	to_chat(usr, "[span_notice("Бросок")]: Grab Shove. Возьмите врага в захват и бросьте на пол. Наносит урон стамине.")
-	to_chat(usr, "[span_notice("Большое колесо")]: Grab Shove. Перекиньте противника, захваченного 'рычагом', через себя или прижмите его к полу.")
-	to_chat(usr, "[span_notice("Тычок в глаза")]: Shove Punch. Ударьте противника в глаза, мгновенно ослепляя его.")
-	to_chat(usr, "[span_notice("Рычаг")]: Shove Shove Grab. Возьмите лежащего противника в захват.")
-	to_chat(usr, "[span_notice("Золотой взрыв")]: Help Shove Help Grab Shove Shove Grab Help Shove Shove Grab Help. Используя боевые искусства, вы можете оглушить противника жизненной энергией. Или перегрузив наниты пояса.")
-	to_chat(usr, "[span_notice("Сбить с толку")]: Нанесите противнику удар по уху, ненадолго сбив его с толку.")
+	var/list/message = list()
+	message += span_bolditalic("Вы взываете к техникам корпоратского дзюдо.")
+	message += "[span_notice("Бросок")]: Grab Shove. Возьмите врага в захват и бросьте на пол. Наносит урон стамине."
+	message += "[span_notice("Большое колесо")]: Grab Shove. Перекиньте противника, захваченного 'рычагом', через себя или прижмите его к полу."
+	message += "[span_notice("Тычок в глаза")]: Shove Punch. Ударьте противника в глаза, мгновенно ослепляя его."
+	message += "[span_notice("Рычаг")]: Shove Shove Grab. Возьмите лежащего противника в захват."
+	message += "[span_notice("Золотой взрыв")]: Help Shove Help Grab Shove Shove Grab Help Shove Shove Grab Help. Используя боевые искусства, вы можете оглушить противника жизненной энергией. Или перегрузив наниты пояса."
+	message += "[span_notice("Сбить с толку")]: Нанесите противнику удар по уху, ненадолго сбив его с толку."
+	message += span_bolditalic("Ваши удары кулаками примерно в два раза сильнее, чем у остальных.")
 
-	to_chat(usr, span_bolditalic("Ваши удары кулаками примерно в два раза сильнее, чем у остальных."))
+	to_chat(usr, message.Join("\n"))
 
 /datum/martial_art/judo
 	name = "Corporate Judo"
@@ -86,6 +88,7 @@
 /datum/martial_art/judo/activate_style(mob/living/new_holder)
 	. = ..()
 	to_chat(new_holder, span_userdanger("Наниты, содержащиеся в поясе, наделяют вас мастерством обладателя черного пояса по корпоративному дзюдо!"))
+	to_chat(new_holder, span_notice("Вы можете посмотреть приёмы во вкладке IC."))
 	discombobulate.Grant(new_holder)
 
 /datum/martial_art/judo/deactivate_style(mob/living/remove_from)
@@ -254,3 +257,11 @@
 	defender.adjust_confusion(5 SECONDS)
 	log_combat(attacker, defender, "Melee attacked with martial-art [src] : Discombobulate")
 	return TRUE
+
+#undef ARMBAR_COMBO
+#undef EYEPOKE_COMBO
+#undef GOLDENBLAST_COMBO
+#undef JUDOTHROW_COMBO
+#undef WHEELTHROW_COMBO
+#undef DISCOMBOBULATE_COMBO
+#undef STATUS_EFFECT_ARMBAR
