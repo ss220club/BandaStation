@@ -31,7 +31,6 @@
 	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/ashdrake = 10)
 	initial_language_holder = /datum/language_holder/lizard/hear_common
 	var/player_cooldown = 0
-	gps_name = "Electric Signal"
 	death_message = "collapses into a pile of bones, its flesh sloughing away."
 	death_sound = 'sound/effects/magic/demon_dies.ogg'
 	footstep_type = FOOTSTEP_MOB_HEAVY
