@@ -273,12 +273,59 @@
 	var/datum/bank_account/account = paying_id_card.registered_account
 
 	//deduct money from person
+	var/insurance_covered = 0
+	// Departmental discount (e.g., med staff buying from med vendor)
 	if(!discountless && account.account_job?.paycheck_department == payment_department)
-		price_to_use = max(round(price_to_use * DEPARTMENT_DISCOUNT), 1) //No longer free, but signifigantly cheaper.
+		price_to_use = max(round(price_to_use * DEPARTMENT_DISCOUNT), 1) //No longer free, but significantly cheaper.
+
+	// For medical vendors, compute insurance coverage before charging
+	var/gross_total = price_to_use
+	if(!discountless && payment_department == ACCOUNT_MED && price_to_use > 0)
+		if(ishuman(mob_paying))
+			var/mob/living/carbon/human/H = mob_paying
+			var/datum/record/crew/rec = find_record(H.real_name)
+			if(rec)
+				var/tier = rec.insurance_current
+				var/percent = INSURANCE_TIER_TO_MED_KIOSK_DISCOUNT(tier)
+				if(percent > 0)
+					var/ins_discount = round((price_to_use * percent) / 100)
+					insurance_covered = clamp(ins_discount, 0, price_to_use)
+
+	// Attempt to charge the user the full price (after departmental discount)
 	if(attempt_charge(src, mob_paying, price_to_use) & COMPONENT_OBJ_CANCEL_CHARGE)
 		speak("You do not possess the funds to purchase [product_to_vend.name].")
 		flick(icon_deny,src)
 		return FALSE
+
+	// If paid and medical vendor with insurance coverage, reimburse user from MED
+	if(payment_department == ACCOUNT_MED && insurance_covered > 0)
+		var/datum/bank_account/department/med_acc = SSeconomy.get_dep_account(ACCOUNT_MED)
+		if(med_acc)
+			var/datum/bank_account/user_acc = account
+			var/success_refund = FALSE
+			if(user_acc)
+				success_refund = user_acc.transfer_money(med_acc, insurance_covered, "Insurance: Medical Vendor Coverage")
+				if(success_refund)
+					user_acc.bank_card_talk("Страховка возместила [insurance_covered] кр. за мед.вендомат.")
+			if(!success_refund)
+				if(med_acc.adjust_money(-insurance_covered, "Insurance: Medical Vendor Coverage (cash)"))
+					var/obj/item/holochip/holo = new /obj/item/holochip(mob_paying.loc, insurance_covered)
+					var/gave = FALSE
+					if(ishuman(mob_paying))
+						var/mob/living/carbon/human/HH = mob_paying
+						ASYNC
+							gave = HH.put_in_hands(holo)
+					if(!gave)
+						mob_paying.pulling = holo
+					to_chat(mob_paying, span_notice("Страховка вернула вам [insurance_covered] кр."))
+
+	// Report medical vendor sale and insurance coverage to economy report
+	if(payment_department == ACCOUNT_MED && gross_total > 0)
+		SSeconomy.report_med_vendor(gross_total, insurance_covered)
+
+	// Inform via machine speech about insurance coverage, if any
+	if(insurance_covered > 0)
+		speak("Ваша страховка покрыла [insurance_covered] кр.")
 
 	//transfer money to machine
 	SSblackbox.record_feedback("amount", "vending_spent", price_to_use)
