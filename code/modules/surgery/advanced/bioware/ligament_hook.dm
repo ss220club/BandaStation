@@ -1,7 +1,7 @@
 /datum/surgery/advanced/bioware/ligament_hook
-	name = "Ligament Hook"
-	desc = "A surgical procedure which reshapes the connections between torso and limbs, making it so limbs can be attached manually if severed. \
-		However this weakens the connection, making them easier to detach as well."
+	name = "Крюк для связок"
+	desc = "Хирургическая процедура, которая изменяет форму соединений между туловищем и конечностями, позволяя вручную присоединить конечности в случае их отделения. \
+		Однако это ослабляет связь, и конечности также легко отсоединить."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -17,9 +17,9 @@
 	status_effect_gained = /datum/status_effect/bioware/ligaments/hooked
 
 /datum/surgery/advanced/bioware/ligament_hook/mechanic
-	name = "Anchor Point Snaplocks"
-	desc = "A robotic upgrade which installs rapid detachment anchor points, making it so limbs can be attached manually if detached. \
-		However this weakens the connection, making them easier to detach as well."
+	name = "Защелкивающиеся точки крепления"
+	desc = "Роботизированное усовершенствование, устанавливающее точки быстрого отсоединения, что позволяет вручную прикреплять отсоединенные конечности. \
+		Однако это ослабляет соединение, и конечности также легко отсоединить."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -33,17 +33,17 @@
 	)
 
 /datum/surgery_step/apply_bioware/reshape_ligaments
-	name = "reshape ligaments (hand)"
+	name = "изменение формы связок (рука)"
 
 /datum/surgery_step/apply_bioware/reshape_ligaments/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
-		span_notice("You start reshaping [target]'s ligaments into a hook-like shape."),
-		span_notice("[user] starts reshaping [target]'s ligaments into a hook-like shape."),
-		span_notice("[user] starts manipulating [target]'s ligaments."),
+		span_notice("Вы начинаете придавать связкам [target.declent_ru(GENITIVE)] форму крючка."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает перестраивать связки [target.declent_ru(GENITIVE)], придавая им форму крючка."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает манипулировать связками [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your limbs burn with severe pain!")
+	display_pain(target, "Ваши конечности горят от сильной боли!")
 
 /datum/surgery_step/apply_bioware/reshape_ligaments/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	. = ..()
@@ -53,8 +53,8 @@
 	display_results(
 		user,
 		target,
-		span_notice("You reshape [target]'s ligaments into a connective hook!"),
-		span_notice("[user] reshapes [target]'s ligaments into a connective hook!"),
-		span_notice("[user] finishes manipulating [target]'s ligaments."),
+		span_notice("Вы придаете связкам [target.declent_ru(GENITIVE)] форму крючка!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] придает связкам [target.declent_ru(GENITIVE)] форму крючка!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает манипулирование связками [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your limbs feel... strangely loose.")
+	display_pain(target, "Ваши конечности кажутся... странно свободными.")

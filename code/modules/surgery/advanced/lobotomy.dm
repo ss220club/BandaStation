@@ -1,6 +1,6 @@
 /datum/surgery/advanced/lobotomy
-	name = "Lobotomy"
-	desc = "An invasive surgical procedure which guarantees removal of almost all brain traumas, but might cause another permanent trauma in return."
+	name = "Лоботомия"
+	desc = "Инвазивная хирургическая процедура, которая гарантирует удаление почти всех травм мозга, но взамен может привести к другой необратимой травме."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_HEAD)
 	steps = list(
@@ -13,8 +13,8 @@
 	)
 
 /datum/surgery/advanced/lobotomy/mechanic
-	name = "Wetware OS Destructive Defragmentation"
-	desc = "A destructive robotic defragmentation method which guarantees removal of almost all brain traumas, but might cause another permanent trauma in return."
+	name = "Деструктивная дефрагментация Wetware OS"
+	desc = "Метод деструктивной роботизированной дефрагментации, гарантирующий удаление практически всех травм мозга, но взамен может привести к другой необратимой травме."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -35,7 +35,7 @@
 	return TRUE
 
 /datum/surgery_step/lobotomize
-	name = "perform lobotomy (scalpel)"
+	name = "выполнить лоботомию (скальпель)"
 	implements = list(
 		TOOL_SCALPEL = 85,
 		/obj/item/melee/energy/sword = 55,
@@ -50,7 +50,7 @@
 	surgery_effects_mood = TRUE
 
 /datum/surgery_step/lobotomize/mechanic
-	name = "execute neural defragging (multitool)"
+	name = "выполнить нейронную дефрагментацию (мультитул)"
 	implements = list(
 		TOOL_MULTITOOL = 85,
 		/obj/item/melee/energy/sword = 55,
@@ -70,21 +70,21 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to perform a lobotomy on [target]'s brain..."),
-		span_notice("[user] begins to perform a lobotomy on [target]'s brain."),
-		span_notice("[user] begins to perform surgery on [target]'s brain."),
+		span_notice("Вы начинаете проводить лоботомию мозга у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить лоботомию мозга у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head pounds with unimaginable pain!")
+	display_pain(target, "Ваша голова раскалывается от невыразимой боли!")
 
 /datum/surgery_step/lobotomize/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	display_results(
 		user,
 		target,
-		span_notice("You succeed in lobotomizing [target]."),
-		span_notice("[user] successfully lobotomizes [target]!"),
-		span_notice("[user] completes the surgery on [target]'s brain."),
+		span_notice("Вам удалось провести лоботомию мозга у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно проводит лоботомию [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head goes totally numb for a moment, the pain is overwhelming!")
+	display_pain(target, "Голова на мгновение полностью немеет, боль невыносима!")
 
 	target.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
 	if(target.mind && target.mind.has_antag_datum(/datum/antagonist/brainwashed))
@@ -108,11 +108,11 @@
 		display_results(
 			user,
 			target,
-			span_warning("You remove the wrong part, causing more damage!"),
-			span_notice("[user] successfully lobotomizes [target]!"),
-			span_notice("[user] completes the surgery on [target]'s brain."),
+			span_warning("Вы удаляете не ту часть, что приводит к большему повреждению!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно проводит лоботомию [target.declent_ru(GENITIVE)]!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 		)
-		display_pain(target, "The pain in your head only seems to get worse!")
+		display_pain(target, "Боль в голове только усиливается!")
 		target_brain.apply_organ_damage(80)
 		switch(rand(1,3))
 			if(1)
@@ -125,5 +125,5 @@
 			if(3)
 				target.gain_trauma_type(BRAIN_TRAUMA_SPECIAL, TRAUMA_RESILIENCE_MAGIC)
 	else
-		user.visible_message(span_warning("[user] suddenly notices that the brain [user.p_they()] [user.p_were()] working on is not there anymore."), span_warning("You suddenly notice that the brain you were working on is not there anymore."))
+		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] внезапно замечает, что мозг над которым велась операция, более не здесь."), span_warning("Вы вдруг замечаете, что мозг, над которым вы работали, более не здесь."))
 	return FALSE

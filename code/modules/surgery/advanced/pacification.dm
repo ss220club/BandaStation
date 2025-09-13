@@ -1,6 +1,6 @@
 /datum/surgery/advanced/pacify
-	name = "Pacification"
-	desc = "A surgical procedure which permanently inhibits the aggression center of the brain, making the patient unwilling to cause direct harm."
+	name = "Пацификация"
+	desc = "Хирургическая процедура, которая навсегда подавляет центр агрессии в мозге, лишая пациента желания причинять прямой вред."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_HEAD)
 	steps = list(
@@ -13,8 +13,8 @@
 	)
 
 /datum/surgery/advanced/pacify/mechanic
-	name = "Aggression Suppression Programming"
-	desc = "Malware which permanently inhibits the aggression programming of the patient's neural network, making the patient unwilling to cause direct harm."
+	name = "Программирование подавления агрессии"
+	desc = "Вредоносное ПО, которое навсегда подавляет агрессивное программирование нейронной сети пациента, лишая его желания причинять прямой вред."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -32,7 +32,7 @@
 		return FALSE
 
 /datum/surgery_step/pacify
-	name = "rewire brain (hemostat)"
+	name = "перепрограммирование мозга (гемостат)"
 	implements = list(
 		TOOL_HEMOSTAT = 100,
 		TOOL_SCREWDRIVER = 35,
@@ -44,7 +44,7 @@
 	failure_sound = 'sound/items/handling/surgery/organ2.ogg'
 
 /datum/surgery_step/pacify/mechanic
-	name = "delete aggression programming (multitool)"
+	name = "программирование удаления агрессии (мультитул)"
 	implements = list(
 		TOOL_MULTITOOL = 100,
 		TOOL_HEMOSTAT = 35,
@@ -58,21 +58,21 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to pacify [target]..."),
-		span_notice("[user] begins to fix [target]'s brain."),
-		span_notice("[user] begins to perform surgery on [target]'s brain."),
+		span_notice("Вы начинаете умиротворять [target.declent_ru(ACCUSATIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает восстанавливать мозг у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head pounds with unimaginable pain!")
+	display_pain(target, "Ваша голова раскалывается от невыразимой боли!")
 
 /datum/surgery_step/pacify/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	display_results(
 		user,
 		target,
-		span_notice("You succeed in neurologically pacifying [target]."),
-		span_notice("[user] successfully fixes [target]'s brain!"),
-		span_notice("[user] completes the surgery on [target]'s brain."),
+		span_notice("Вам удается неврологически успокоить [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно восстанавливает функции мозга у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head pounds... the concept of violence flashes in your head, and nearly makes you hurl!")
+	display_pain(target, "Голова раскалывается... мысль о насилии вспыхивает в вашей голове, и вас чуть не стошнило!")
 	target.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_LOBOTOMY)
 	return ..()
 
@@ -80,10 +80,10 @@
 	display_results(
 		user,
 		target,
-		span_notice("You screw up, rewiring [target]'s brain the wrong way around..."),
-		span_warning("[user] screws up, causing brain damage!"),
-		span_notice("[user] completes the surgery on [target]'s brain."),
+		span_notice("Вы ошибаетесь, перепрограммировав мозг у [target.declent_ru(GENITIVE)] неправильно..."),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, нанеся повреждения мозгу!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head pounds, and it feels like it's getting worse!")
+	display_pain(target, "Голова раскалывается, и кажется, что становится все хуже!")
 	target.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 	return FALSE
