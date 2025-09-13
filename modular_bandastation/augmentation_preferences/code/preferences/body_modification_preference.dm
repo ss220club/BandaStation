@@ -15,57 +15,71 @@
 
 	return TRUE
 
-/datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, value)
-	if(!islist(value))
+/datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, _value)
+	if(!istype(target))
 		return
 
-	var/list/body_modifications = value
-	for(var/obj/item/bodypart/L in target.bodyparts)
-		if(L.body_zone in GLOB.limb_zones)
-			qdel(L)
+	if(target.client?.prefs)
+		apply_from_prefs(target, target.client.prefs)
+		return
 
-	target.regenerate_limbs()
+	UnregisterSignal(target, COMSIG_HUMAN_PREFS_APPLIED)
+	RegisterSignal(target, COMSIG_HUMAN_PREFS_APPLIED, PROC_REF(on_prefs_applied_after_core))
 
-	var/datum/preferences/client_prefs = usr?.client?.prefs
-	if(client_prefs)
-		for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
-			if (preference.savefile_identifier != PREFERENCE_CHARACTER)
-				continue
-			if (preference.category != PREFERENCE_CATEGORY_SECONDARY_FEATURES)
-				continue
-			preference.apply_to_human(target, client_prefs.read_preference(preference.type))
+/datum/preference/body_modifications/proc/on_prefs_applied_after_core(mob/living/carbon/human/target)
+	SIGNAL_HANDLER
+	UnregisterSignal(target, COMSIG_HUMAN_PREFS_APPLIED)
 
-	for(var/key in body_modifications)
-		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if(!mod_proto || !istype(mod_proto, /datum/body_modification/limb_amputation))
+	var/ck = target?.mind?.key || target?.ckey
+	var/datum/preferences/prefs = ck ? GLOB.preferences_datums?[ck] : null
+	if(!prefs)
+		return
+
+	apply_from_prefs(target, prefs)
+
+/datum/preference/body_modifications/proc/apply_from_prefs(mob/living/carbon/human/target, datum/preferences/prefs)
+	if(!istype(target) || !prefs) return
+
+	var/list/body_mods = prefs.read_preference(type)
+	if(!islist(body_mods) || !body_mods.len) return
+
+	var/list/amputations = list()
+	var/list/prostheses = list()
+	var/list/implants = list()
+
+	for(var/key in body_mods)
+		var/datum/body_modification/mod_prototype = GLOB.body_modifications[key]
+		if(!mod_prototype)
 			continue
 
-		var/datum/body_modification/limb_amputation/amputation = new mod_proto.type
+		if(istype(mod_prototype, /datum/body_modification/limb_amputation))
+			amputations[key] = mod_prototype
+		else if(istype(mod_prototype, /datum/body_modification/bodypart_prosthesis))
+			prostheses[key] = mod_prototype
+		else if(istype(mod_prototype, /datum/body_modification/implants))
+			implants[key] = mod_prototype
+
+	for(var/key in amputations)
+		var/datum/body_modification/mod_prototype = amputations[key]
+		var/datum/body_modification/limb_amputation/amputation = new mod_prototype.type
 		amputation.apply_to_human(target)
 		qdel(amputation)
 
-	for(var/key in body_modifications)
-		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if(!mod_proto || !istype(mod_proto, /datum/body_modification/bodypart_prosthesis))
-			continue
-
-		var/datum/body_modification/bodypart_prosthesis/prosthesis = new mod_proto.type
-		if(islist(body_modifications[key]) && body_modifications[key]["selected_manufacturer"])
-			prosthesis.selected_manufacturer = body_modifications[key]["selected_manufacturer"]
-
+	for(var/key in prostheses)
+		var/datum/body_modification/mod_prototype = prostheses[key]
+		var/datum/body_modification/bodypart_prosthesis/prosthesis = new mod_prototype.type
+		if(islist(body_mods[key]) && body_mods[key]["selected_manufacturer"])
+			prosthesis.selected_manufacturer = body_mods[key]["selected_manufacturer"]
 		prosthesis.apply_to_human(target)
 		qdel(prosthesis)
 
-	for(var/key in body_modifications)
-		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if(!mod_proto || !istype(mod_proto, /datum/body_modification/implants))
-			continue
-
-		var/datum/body_modification/implants/implant = new mod_proto.type
+	for(var/key in implants)
+		var/datum/body_modification/mod_prototype = implants[key]
+		var/datum/body_modification/implants/implant = new mod_prototype.type
 		implant.apply_to_human(target)
 		qdel(implant)
 
-	// Обновляем тело один раз в конце
+	target.icon_render_keys = list()
 	target.update_body()
 
 /datum/preference/body_modifications/deserialize(input, datum/preferences/preferences)
