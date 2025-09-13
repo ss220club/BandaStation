@@ -27294,4 +27294,33 @@ dative = "коридору отдела обслуживания"
 accusative = "коридор отдела обслуживания"
 instrumental = "коридором отдела обслуживания"
 prepositional = "коридоре отдела обслуживания"
+["spy spider"]
+nominative = "шпионский жучок"
+genitive = "шпионского жучка"
+dative = "шпионскому жучку"
+accusative = "шпионский жучок"
+instrumental = "шпионским жучком"
+prepositional = "шпионском жучке"
+gender = "male"
+
+["narrow-focused receiver"]
+nominative = "узконаправленный приёмник"
+genitive = "узконаправленного приёмника"
+dative = "узконаправленному приёмнику"
+accusative = "узконаправленный приёмник"
+instrumental = "узконаправленным приёмником"
+prepositional = "узконаправленном приёмнике"
+gender = "male"
+
+["spy bug kit"]
+nominative = "набор жучков"
+genitive = "набора жучков"
+dative = "набору жучков"
+accusative = "набор жучков"
+instrumental = "набором жучков"
+prepositional = "наборе жучков"
+gender = "male"
+
+["spy transmitter"]
+nominative = "шпионский передатчик"
 gender = "male"
