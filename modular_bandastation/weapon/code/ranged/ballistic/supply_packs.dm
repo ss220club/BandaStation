@@ -111,4 +111,3 @@
 	contains = list(
 		/obj/item/sledgehammer/tactical = 1,
 	)
-	crate_name = "D4 tactical sledgehammer crate"
