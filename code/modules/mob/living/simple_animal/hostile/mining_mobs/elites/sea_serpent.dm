@@ -1,5 +1,3 @@
-#define SERPENT_ENRAGED (health < maxHealth*0.5)
-
 /mob/living/simple_animal/hostile/asteroid/elite/serpent
 	name = "sea serpent"
 	desc = "A rather decieving name as it doesn't look much like a serpent."
