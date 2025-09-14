@@ -13,7 +13,7 @@
 	max_range = 4
 	channel_time = 0
 	var/const/fov_degree = 45
-	var/static/sfx_cold = 'modular_bandastation/antagonists/sound/shadowlings/frost.ogg'
+	var/static/sfx_cold = 'modular_bandastation/antagonists/sound/shadowlings/abilities/cold_wave.ogg'
 	var/reagent_type = /datum/reagent/consumable/frostoil
 
 /datum/action/cooldown/shadowling/cold_wave/DoEffect(mob/living/carbon/human/H, atom/_)
