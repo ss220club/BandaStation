@@ -181,7 +181,7 @@
 			'sound/mobs/humanoids/human/cough/female_cough6.ogg',
 		)
 	return pick(
-	    'sound/mobs/humanoids/human/cough/male_cough1.ogg',
+		'sound/mobs/humanoids/human/cough/male_cough1.ogg',
 		'sound/mobs/humanoids/human/cough/male_cough2.ogg',
 		'sound/mobs/humanoids/human/cough/male_cough3.ogg',
 		'sound/mobs/humanoids/human/cough/male_cough4.ogg',
