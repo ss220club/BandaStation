@@ -8,6 +8,7 @@
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 
 	species_language_holder = /datum/language_holder/vulpkanin
+	digitigrade_customization = DIGITIGRADE_FORCED
 
 	mutantbrain = /obj/item/organ/brain/vulpkanin
 	mutantheart = /obj/item/organ/heart/vulpkanin
@@ -33,8 +34,8 @@
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/vulpkanin,
 		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/vulpkanin,
 		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/vulpkanin,
-		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/vulpkanin,
-		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/vulpkanin,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/digitigrade/vulpkanin,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/digitigrade/vulpkanin,
 	)
 
 	payday_modifier = 0.8
