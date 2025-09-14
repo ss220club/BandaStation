@@ -48,7 +48,7 @@
 
 /mob/living/carbon/human/examine(mob/user)
 	. = ..()
-	if(HAS_TRAIT(src, TRAIT_UNKNOWN))
+	if(HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE))
 		return
 
 	var/height_pref = client?.prefs?.read_preference(/datum/preference/choiced/height_scaling)
