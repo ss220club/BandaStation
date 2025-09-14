@@ -6,7 +6,7 @@
 	cooldown_time = 30 SECONDS
 	var/knock_radius = 2
 	var/disorient_radius = 10
-	var/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg'
+	var/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/abilities/shreek.ogg'
 
 /datum/action/cooldown/shadowling/shreek/DoEffect(mob/living/carbon/human/H, atom/_)
 	playsound(get_turf(H), sfx_activate, 70, TRUE)
