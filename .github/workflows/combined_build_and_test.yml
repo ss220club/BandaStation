@@ -20,7 +20,7 @@ on:
 jobs:
   combined_build_and_test:
     name: Build & Test (${{ matrix.map }}; BYOND ${{ inputs.max_required_byond_client }})
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 20
 
     strategy:
@@ -129,7 +129,7 @@ jobs:
   combined_alternate_build_and_test:
     name: Alt Build & Test (${{ matrix.map }}; BYOND ${{ matrix.major }}.${{ matrix.minor }})
     if: inputs.alternate_tests != '[]'
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 20
 
     strategy:

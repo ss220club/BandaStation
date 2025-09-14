@@ -6,7 +6,7 @@ on:
     types: [opened]
 jobs:
   remove_guide_comments:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
