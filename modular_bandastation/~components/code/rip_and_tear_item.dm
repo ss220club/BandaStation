@@ -52,7 +52,7 @@
 		return COMPONENT_INCOMPATIBLE
 
 	src.stamina_cost = stamina_cost
-	src.stamina_cost_wielded = (!isnull(stamina_cost_wielded) && (stamina_cost_wielded >= 0)) ? stamina_cost_wielded : stamina_cost
+	src.stamina_cost_wielded = is_more_or_equal_0(stamina_cost_wielded) ? stamina_cost_wielded : stamina_cost
 	src.require_wielded = require_wielded
 	src.reinforced_multiplier = reinforced_multiplier
 	src.tear_time = tear_time
