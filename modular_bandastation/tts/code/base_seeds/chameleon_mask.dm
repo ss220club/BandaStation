@@ -17,7 +17,7 @@
 	SIGNAL_HANDLER
 	if(tts_args[TTS_PRIORITY] >= TTS_PRIORITY_MASK)
 		return
-	if(!ishuman(user) || !voice_change)
+	if(!ishuman(user) || !(TRAIT_VOICE_MATCHES_ID in clothing_traits))
 		return
 	var/mob/living/carbon/human/mimicer = user
 	if(!mimicer.wear_id)
