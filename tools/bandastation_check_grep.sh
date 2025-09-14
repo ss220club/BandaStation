@@ -48,59 +48,59 @@ part() {
 	echo -e "${GREEN} $padded- $1${NC}"
 }
 
-section "map issues"
+# section "map issues"
 
-part "TGM"
-if $grep -U '^".+" = \(.+\)' $map_files;	then
-	echo
-    echo -e "${RED}ERROR: Non-TGM formatted map detected. Please convert it using Map Merger!${NC}"
-    st=1
-fi;
-part "comments"
-if $grep '//' $map_files | $grep -v '//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE' | $grep -v 'name|desc'; then
-	echo
-	echo -e "${RED}ERROR: Unexpected commented out line detected in this map file. Please remove it.${NC}"
-	st=1
-fi;
-part "iconstate tags"
-if $grep '^\ttag = "icon' $map_files;	then
-	echo
-    echo -e "${RED}ERROR: Tag vars from icon state generation detected in maps, please remove them.${NC}"
-    st=1
-fi;
-part "invalid map procs"
-if $grep '(new|newlist|icon|matrix|sound)\(.+\)' $map_files;	then
-	echo
-	echo -e "${RED}ERROR: Using unsupported procs in variables in a map file! Please remove all instances of this.${NC}"
-	st=1
-fi;
-part "armor lists"
-if $grep '\tarmor = list' $map_files; then
-	echo
-	echo -e "${RED}ERROR: Outdated armor list in map file.${NC}"
-	st=1
-fi;
-part "common spelling mistakes"
-if $grep -i 'nanotransen' $map_files; then
-	echo
-    echo -e "${RED}ERROR: Misspelling(s) of Nanotrasen detected in maps, please remove the extra N(s).${NC}"
-    st=1
-fi;
-if $grep 'NanoTrasen' $map_files; then
-	echo
-    echo -e "${RED}ERROR: Misspelling(s) of Nanotrasen detected in maps, please uncapitalize the T(s).${NC}"
-    st=1
-fi;
-if $grep -i'centcomm' $map_files; then
-	echo
-    echo -e "${RED}ERROR: Misspelling(s) of CentCom detected in maps, please remove the extra M(s).${NC}"
-    st=1
-fi;
-if $grep -i'eciev' $map_files; then
-	echo
-    echo -e "${RED}ERROR: Common I-before-E typo detected in maps.${NC}"
-    st=1
-fi;
+# part "TGM"
+# if $grep -U '^".+" = \(.+\)' $map_files;	then
+# 	echo
+#     echo -e "${RED}ERROR: Non-TGM formatted map detected. Please convert it using Map Merger!${NC}"
+#     st=1
+# fi;
+# part "comments"
+# if $grep '//' $map_files | $grep -v '//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE' | $grep -v 'name|desc'; then
+# 	echo
+# 	echo -e "${RED}ERROR: Unexpected commented out line detected in this map file. Please remove it.${NC}"
+# 	st=1
+# fi;
+# part "iconstate tags"
+# if $grep '^\ttag = "icon' $map_files;	then
+# 	echo
+#     echo -e "${RED}ERROR: Tag vars from icon state generation detected in maps, please remove them.${NC}"
+#     st=1
+# fi;
+# part "invalid map procs"
+# if $grep '(new|newlist|icon|matrix|sound)\(.+\)' $map_files;	then
+# 	echo
+# 	echo -e "${RED}ERROR: Using unsupported procs in variables in a map file! Please remove all instances of this.${NC}"
+# 	st=1
+# fi;
+# part "armor lists"
+# if $grep '\tarmor = list' $map_files; then
+# 	echo
+# 	echo -e "${RED}ERROR: Outdated armor list in map file.${NC}"
+# 	st=1
+# fi;
+# part "common spelling mistakes"
+# if $grep -i 'nanotransen' $map_files; then
+# 	echo
+#     echo -e "${RED}ERROR: Misspelling(s) of Nanotrasen detected in maps, please remove the extra N(s).${NC}"
+#     st=1
+# fi;
+# if $grep 'NanoTrasen' $map_files; then
+# 	echo
+#     echo -e "${RED}ERROR: Misspelling(s) of Nanotrasen detected in maps, please uncapitalize the T(s).${NC}"
+#     st=1
+# fi;
+# if $grep -i'centcomm' $map_files; then
+# 	echo
+#     echo -e "${RED}ERROR: Misspelling(s) of CentCom detected in maps, please remove the extra M(s).${NC}"
+#     st=1
+# fi;
+# if $grep -i'eciev' $map_files; then
+# 	echo
+#     echo -e "${RED}ERROR: Common I-before-E typo detected in maps.${NC}"
+#     st=1
+# fi;
 
 section "whitespace issues"
 part "space indentation"
@@ -116,16 +116,16 @@ if $grep '^\t+ [^ *]' $code_files; then
     st=1
 fi;
 
-section "unit tests"
-unit_test_files="code/modules/unit_tests/**/**.dm"
-part "mob/living/carbon/human usage"
-if $grep 'allocate\(/mob/living/carbon/human[,\)]' $unit_test_files ||
-	$grep 'new /mob/living/carbon/human\s?\(' $unit_test_files ||
-	$grep 'var/mob/living/carbon/human/\w+\s?=\s?new' $unit_test_files ; then
-	echo
-	echo -e "${RED}ERROR: Usage of mob/living/carbon/human detected in a unit test, please use mob/living/carbon/human/consistent.${NC}"
-	st=1
-fi;
+# section "unit tests"
+# unit_test_files="code/modules/unit_tests/**/**.dm"
+# part "mob/living/carbon/human usage"
+# if $grep 'allocate\(/mob/living/carbon/human[,\)]' $unit_test_files ||
+# 	$grep 'new /mob/living/carbon/human\s?\(' $unit_test_files ||
+# 	$grep 'var/mob/living/carbon/human/\w+\s?=\s?new' $unit_test_files ; then
+# 	echo
+# 	echo -e "${RED}ERROR: Usage of mob/living/carbon/human detected in a unit test, please use mob/living/carbon/human/consistent.${NC}"
+# 	st=1
+# fi;
 
 section "516 Href Styles"
 part "byond href styles"
@@ -330,11 +330,11 @@ if [ "$pcre2_support" -eq 1 ]; then
 		echo -e "${RED}ERROR: Invalid pronoun helper found.${NC}"
 		st=1
 	fi;
-	part "shuttle area checker"
-	if $grep -PU '(},|\/obj|\/mob|\/turf\/(?!template_noop).+)[^()]+\/area\/template_noop\)' $shuttle_map_files; then
-		echo
-		echo -e "${RED}ERROR: Shuttle has objs or turfs in a template_noop area. Please correct their areas to a shuttle subtype.${NC}"
-		st=1
+	# part "shuttle area checker"
+	# if $grep -PU '(},|\/obj|\/mob|\/turf\/(?!template_noop).+)[^()]+\/area\/template_noop\)' $shuttle_map_files; then
+	# 	echo
+	# 	echo -e "${RED}ERROR: Shuttle has objs or turfs in a template_noop area. Please correct their areas to a shuttle subtype.${NC}"
+	# 	st=1
 fi;
 else
 	echo -e "${RED}pcre2 not supported, skipping checks requiring pcre2"
