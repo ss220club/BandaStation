@@ -69,10 +69,12 @@ jobs:
       - name: Run Grep Checks
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: bash tools/ci/check_grep.sh
+      - name: Run Modular Grep Checks # BANDASTATION ADD - checking modular_bandastation code
+        if: steps.linter-setup.conclusion == 'success' && !cancelled() # BANDASTATION ADD - checking modular_bandastation code
+        run: bash tools/bandastation_check_grep.sh # BANDASTATION ADD - checking modular_bandastation code
       - name: Ticked File Enforcement
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: |
-          bash tools/bandastation_check_grep.sh # BANDASTATION EDIT ADDITION - checking modular_bandastation code
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/tgstation_dme.json
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/unit_tests.json
       - name: Check Define Sanity
