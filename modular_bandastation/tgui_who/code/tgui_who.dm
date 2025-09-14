@@ -242,7 +242,3 @@
 		who = new()
 
 	who.ui_interact(mob)
-
-/client/Destroy()
-	QDEL_NULL(who)
-	. = ..()
