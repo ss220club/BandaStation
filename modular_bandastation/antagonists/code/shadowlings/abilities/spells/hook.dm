@@ -11,7 +11,6 @@
 	click_to_activate = TRUE
 	unset_after_click = TRUE
 
-	var/tiles_per_second = 8
 	var/sfx_fire = 'sound/effects/splat.ogg'
 	var/sfx_hit = 'sound/items/weapons/shove.ogg'
 
@@ -35,36 +34,26 @@
 	var/mob/living/carbon/human/H = clicker
 	var/turf/start_turf = get_turf(H)
 	var/turf/click_turf = get_turf(target)
-
-	if(!istype(start_turf))
-		unset_click_ability(clicker, TRUE)
-		return TRUE
-
-	if(!istype(click_turf))
+	if(!istype(start_turf) || !istype(click_turf))
 		unset_click_ability(clicker, TRUE)
 		return TRUE
 
 	var/turf/end_turf = SHADOW_hook__compute_endpoint(start_turf, click_turf, max_range)
-
 	if(!istype(end_turf))
 		H.balloon_alert(H, "слишком близко")
 		unset_click_ability(clicker, TRUE)
 		return TRUE
 
-	var/obj/projectile/magic/shadow_hand_sl/P = new
+	// ВАЖНО: спавним снаряд в турфе стрелка
+	var/obj/projectile/magic/shadow_hand_sl/P = new(start_turf)
 	P.firer = H
 	P.range = max_range
 	P.hitsound = sfx_hit
 
-	var/tiles_per_tick = tiles_per_second * world.tick_lag
-	if(tiles_per_tick <= 0.1)
-		tiles_per_tick = 0.1
-	P.speed = tiles_per_tick
-
+	// Теперь наводим — loc уже есть, угол посчитается верно
 	P.aim_projectile(end_turf, H)
 
 	playsound(start_turf, sfx_fire, 55, TRUE)
-
 	P.fire()
 
 	StartCooldown()
@@ -101,8 +90,6 @@
 
 	return current
 
-
-
 /obj/projectile/magic/shadow_hand_sl
 	name = "shadow hand"
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
@@ -111,7 +98,7 @@
 	damage = 0
 	damage_type = BRUTE
 	range = 8
-	speed = 1
+	speed = 0.8
 
 	var/hit_committed = FALSE
 	var/obj/effect/beam/chain
@@ -128,7 +115,6 @@
 		)
 	return ..()
 
-// Перехват целей на пути — когда снаряд входит в новый турф
 /obj/projectile/magic/shadow_hand_sl/Moved(atom/oldloc, dir, forced = FALSE, list/old_locs, momentum_change = FALSE)
 	. = ..()
 	if(hit_committed)

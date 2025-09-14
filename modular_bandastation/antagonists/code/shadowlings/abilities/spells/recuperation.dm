@@ -50,6 +50,8 @@
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
+	StartCooldown()
+
 	start_beam(clicker, T)
 	attach_cover(T)
 	prev_alpha = T.alpha
@@ -90,7 +92,6 @@
 	T.alpha = prev_alpha
 	unset_click_ability(clicker, FALSE)
 	hive.sync_after_event(T)
-	StartCooldown()
 	return TRUE
 
 /datum/action/cooldown/shadowling/recuperation/proc/start_beam(mob/living/source, mob/living/target)

@@ -114,6 +114,11 @@
 			pixel_y = -64
 			pixel_x = -128
 
+/datum/status_effect/cloudstruck/shadow
+	id = "cloudstruck_shadow"
+	var/disable_blind = TRUE
+	var/static/mutable_appearance/mob_overlay_shadow
+
 /datum/status_effect/cloudstruck/shadow/on_creation(mob/living/new_owner, duration = 2 SECONDS)
 	src.duration = duration
 	if(!mob_overlay_shadow)

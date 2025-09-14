@@ -34,6 +34,7 @@
 	if(!istype(T))
 		return FALSE
 	if(!T?.mind)
+		owner.balloon_alert(owner, "Цель недостаточно разумна")
 		return FALSE
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(hive)
@@ -55,7 +56,6 @@
 /datum/action/cooldown/shadowling/enthrall/DoEffect(mob/living/carbon/human/H, atom/_ignored)
 	var/mob/living/carbon/human/T = find_cone_target(H)
 	if(!T)
-		owner.balloon_alert(owner, "Нет доступных целей")
 		enable()
 		return FALSE
 

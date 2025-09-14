@@ -75,6 +75,10 @@
 		TRAIT_NO_SLIP_ALL,
 		TRAIT_FREE_FLOAT_MOVEMENT,
 		TRAIT_MOVE_FLYING,
+		TRAIT_RESISTLOWPRESSURE,
+		TRAIT_RESISTHIGHPRESSURE,
+		TRAIT_RESISTCOLD,
+		TRAIT_RESISTHEAT,
 		TRAIT_BRAWLING_KNOCKDOWN_BLOCKED
 	)
 
@@ -107,9 +111,11 @@ var/ascended_max_health = 220
 	name = "umbral claw (right)"
 	desc = "Слиток зазубренной тени."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
+	icon_state = "claw_right"
 	lefthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
 	righthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
-	icon_state = "claw_right"
+	inhand_icon_state = "claw_right"
+	worn_icon = null
 	w_class = WEIGHT_CLASS_TINY
 	force = 18
 	armour_penetration = 25
@@ -121,8 +127,6 @@ var/ascended_max_health = 220
 	throwforce = 0
 	throw_speed = 0
 	throw_range = 0
-	inhand_icon_state = "claw_right"
-	worn_icon_state = "claw_right"
 
 /obj/item/knife/combat/umbral_claw/Initialize(mapload)
 	. = ..()
@@ -131,13 +135,14 @@ var/ascended_max_health = 220
 /obj/item/knife/combat/umbral_claw/left
 	name = "umbral claw (left)"
 	icon_state = "claw_left"
+	inhand_icon_state = "claw_left"
+	worn_icon = null
 	sharpness = SHARP_POINTY
 	attack_verb_continuous = list("pierces", "impales", "shreads")
 	attack_verb_simple = list("pierce", "impale", "shread")
-	inhand_icon_state = "claw_left"
-	worn_icon_state = "claw_left"
 
-/proc/shadowling_equip_ascended_claws(mob/living/carbon/human/H)
+
+/datum/species/shadow/shadowling/ascended/proc/shadowling_equip_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 
@@ -151,7 +156,7 @@ var/ascended_max_health = 220
 	if(!H.put_in_r_hand(claw_r))
 		H.dropItemToGround(claw_r, TRUE)
 
-/proc/shadowling_remove_ascended_claws(mob/living/carbon/human/H)
+/datum/species/shadow/shadowling/ascended/proc/shadowling_remove_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 	for(var/obj/item/knife/combat/umbral_claw/C in H.get_all_contents())

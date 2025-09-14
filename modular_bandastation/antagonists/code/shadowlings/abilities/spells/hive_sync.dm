@@ -6,6 +6,7 @@
 	channel_time = 3 SECONDS
 
 /datum/action/cooldown/shadowling/hive_sync/DoEffect(mob/living/carbon/human/H, atom/target)
+	StartCooldown()
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		to_chat(H, span_warning("Улей не отвечает."))

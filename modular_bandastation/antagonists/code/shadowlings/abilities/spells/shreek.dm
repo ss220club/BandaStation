@@ -4,7 +4,7 @@
 	button_icon_state = "shadow_screech"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 30 SECONDS
-	var/knock_radius = 1
+	var/knock_radius = 2
 	var/disorient_radius = 10
 	var/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/shreek.ogg'
 
@@ -31,7 +31,8 @@
 			knockback_away_from(H, L, 3)
 		else
 			L.adjustOrganLoss(ORGAN_SLOT_EARS, 8)
-			L.adjust_confusion_up_to(6 SECONDS, 6 SECONDS)
+			L.adjust_confusion(6 SECONDS)
+			L.adjust_staggered(6 SECONDS)
 			L.adjust_dizzy(3)
 
 	for(var/obj/item/I in range(knock_radius, H))
