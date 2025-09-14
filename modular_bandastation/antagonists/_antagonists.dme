@@ -4,7 +4,6 @@
 #include "code/shadowlings/_defines.dm"
 #include "code/shadowlings/spieces.dm"
 #include "code/shadowlings/team.dm"
-#include "code/shadowlings/language.dm"
 #include "code/shadowlings/thrall_tumor.dm"
 #include "code/shadowlings/abilities/nyxosynthesis.dm"
 #include "code/shadowlings/abilities/shadow_phase.dm"
@@ -30,6 +29,7 @@
 #include "code/shadowlings/abilities/spells/stealth.dm"
 #include "code/shadowlings/abilities/spells/night_vision.dm"
 #include "code/shadowlings/abilities/spells/ascension.dm"
+#include "code/shadowlings/abilities/spells/commune.dm"
 
 #include "code/shadowlings/datum.dm"
 #include "code/shadowlings/ruleset.dm"

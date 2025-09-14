@@ -68,8 +68,8 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 	if(H.mind && !(H.mind in members))
 		members += H.mind
 	to_chat(H, span_notice("Вы ощущаете голоса улья в своей голове..."))
-	refresh_languages(H)
 	grant_sync_action(H)
+	grant_comm_action(H)
 
 /datum/team/shadow_hive/proc/leave_member(mob/living/carbon/human/H)
 	if(!istype(H))
@@ -80,9 +80,6 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 	UnregisterSignal(H, COMSIG_QDELETING)
 	if(H.mind && (H.mind in members))
 		members -= H.mind
-	var/datum/language_holder/LH = H.get_language_holder()
-	if(LH)
-		LH.remove_language(/datum/language/shadow_hive)
 
 /datum/team/shadow_hive/proc/_on_member_qdel(mob/living/source, force)
 	SIGNAL_HANDLER
@@ -124,14 +121,6 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 		n++
 	return n
 
-/datum/team/shadow_hive/proc/refresh_languages(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-	var/datum/language_holder/LH = H.get_language_holder()
-	if(!LH)
-		return
-	LH.grant_language(/datum/language/shadow_hive, ALL, LANGUAGE_ATOM)
-
 /datum/team/shadow_hive/proc/grant_sync_action(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
@@ -143,6 +132,14 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 	for(var/datum/action/cooldown/shadowling/hive_sync/existing in H.actions)
 		return
 	var/datum/action/cooldown/shadowling/hive_sync/A = new
+	A.Grant(H)
+
+/datum/team/shadow_hive/proc/grant_comm_action(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	for(var/datum/action/cooldown/shadowling/commune/existing in H.actions)
+		return
+	var/datum/action/cooldown/shadowling/commune/A = new
 	A.Grant(H)
 
 /datum/team/shadow_hive/proc/get_ling_role(mob/living/carbon/human/H)

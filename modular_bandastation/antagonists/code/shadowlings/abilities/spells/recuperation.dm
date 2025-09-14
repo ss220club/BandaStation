@@ -81,7 +81,6 @@
 
 	// делаем из слуги младшего шадоулинга
 	hive.join_member(T, SHADOWLING_ROLE_LESSER)
-	hive.refresh_languages(T)
 
 	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим шадоулингом."))
 	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим шадоулингом!"))

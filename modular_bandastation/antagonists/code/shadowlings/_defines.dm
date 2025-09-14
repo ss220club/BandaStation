@@ -17,6 +17,7 @@
 
 //Абилки для раундстарт линга
 var/global/list/SHADOWLING_BASE_ABILITIES = list(
+	/datum/action/cooldown/shadowling/commune,
 	/datum/action/cooldown/shadowling/enthrall,
 	/datum/action/cooldown/shadowling/toggle_night_vision,
 	/datum/action/cooldown/shadowling/glare,
@@ -38,6 +39,7 @@ var/global/list/SHADOWLING_BASE_ABILITIES = list(
 //Абилки для тралла
 var/global/list/SHADOWLING_THRALL_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
+	/datum/action/cooldown/shadowling/commune,
 	/datum/action/cooldown/shadowling/toggle_night_vision,
 	/datum/action/cooldown/shadowling/stealth
 )
@@ -45,6 +47,7 @@ var/global/list/SHADOWLING_THRALL_ABILITIES = list(
 //Абилки для тралла-линга
 var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 	/datum/action/cooldown/shadowling/hive_sync,
+	/datum/action/cooldown/shadowling/commune,
 	/datum/action/cooldown/shadowling/toggle_night_vision,
 	/datum/action/cooldown/shadowling/root,
 	/datum/action/cooldown/shadowling/cold_wave,

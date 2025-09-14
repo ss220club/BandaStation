@@ -38,7 +38,6 @@
 	no_equip_flags = ITEM_SLOT_MASK | ITEM_SLOT_HEAD | ITEM_SLOT_EYES | ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_ICLOTHING | ITEM_SLOT_SUITSTORE
 	mutantbrain = /obj/item/organ/brain/shadow/shadowling
 	mutanteyes = /obj/item/organ/eyes/shadow/shadowling
-	mutanttongue = /obj/item/organ/tongue/shadow_hive
 
 /datum/species/shadow/shadowling/ascended
 	name = "Ascended Shadowling"
