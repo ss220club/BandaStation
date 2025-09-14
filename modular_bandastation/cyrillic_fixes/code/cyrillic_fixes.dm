@@ -5,7 +5,7 @@ GLOBAL_LIST_INIT(ru_key_to_en_key, list(
 ))
 
 /proc/convert_ru_key_to_en_key(_key)
-	var/new_key = lowertext(_key)
+	var/new_key = LOWER_TEXT(_key)
 	new_key = GLOB.ru_key_to_en_key[new_key]
 	if(!new_key)
 		return _key
