@@ -47,15 +47,18 @@
 	return data
 
 /mob/living/carbon/human/examine(mob/user)
-    . = ..()
-    var/height_pref = client?.prefs?.read_preference(/datum/preference/choiced/height_scaling)
-    var/height_text = "неизвестной высоты"
-    if(height_pref)
-        switch(height_pref)
-            if(HUMAN_HEIGHT_SHORT)
-                height_text = "низкого роста"
-            if(HUMAN_HEIGHT_MEDIUM)
-                height_text = "среднего роста"
-            if(HUMAN_HEIGHT_TALL)
-                height_text = "высокого роста"
-    . += "<span class='notice'>[src] [height_text].</span>"
+	. = ..()
+	if(HAS_TRAIT(src, TRAIT_UNKNOWN))
+		return
+
+	var/height_pref = client?.prefs?.read_preference(/datum/preference/choiced/height_scaling)
+	var/static/list/height_examine_strings = list(
+		"[HUMAN_HEIGHT_SHORTEST]" = "очень низкого роста",
+		"[HUMAN_HEIGHT_SHORT]" = "низкого роста",
+		"[HUMAN_HEIGHT_MEDIUM]" = "среднего роста",
+		"[HUMAN_HEIGHT_TALL]" = "высокого роста",
+		"[HUMAN_HEIGHT_TALLER]" = "очень высокого роста",
+		"[HUMAN_HEIGHT_TALLEST]" = "гигантского роста"
+	)
+	var/height_text = height_examine_strings[num2text(height_pref)] || "неизвестной высоты"
+	. += "<span class='notice'>[src] [height_text].</span>"
