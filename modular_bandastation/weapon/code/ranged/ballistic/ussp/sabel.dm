@@ -128,7 +128,7 @@
 	/// Maximum degradation stage.
 	var/degradation_stage_max = 5
 	/// The probability of degradation increasing per shot.
-	var/degradation_probability = 50
+	var/degradation_probability = 15
 	/// The maximum speed malus for projectile flight speed. Projectiles probably shouldn't move too slowly or else they will start to cause problems.
 	var/maximum_speed_malus = 0.7
 	/// What is our damage multiplier if the gun is emagged?
@@ -165,6 +165,13 @@
 	playsound(user, 'sound/items/weapons/empty.ogg', 100, TRUE)
 	update_appearance()
 	update_item_action_buttons()
+
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/examine(mob/user)
+	. = ..()
+	if(shots_before_degradation)
+		. += span_notice("[declent_ru(NOMINATIVE)] может совершить [shots_before_degradation] выстрелов перед риском деградации системы рельсовых накопителей.")
+	else
+		. += span_notice("[declent_ru(NOMINATIVE)] в процессе деградации системы рельсовых накопителей. Стадия [degradation_stage] из [degradation_stage_max]. Используйте мультитул на [declent_ru(NOMINATIVE)] чтобы перезагрузить систему.")
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/examine_more(mob/user)
 	. = ..()
@@ -226,21 +233,20 @@
 	if(!chambered || (chambered && !chambered.loaded_projectile))
 		return
 
-	if(shots_before_degradation)
-		shots_before_degradation --
-		return
-
-	else if ((obj_flags & EMAGGED) && degradation_stage == degradation_stage_max && !explosion_timer)
-		perform_extreme_malfunction(user)
-
-	else
-		attempt_degradation(FALSE)
-
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(chambered.loaded_projectile && prob(75) && (emp_malfunction || degradation_stage == degradation_stage_max))
 		balloon_alert_to_viewers("*шелк*")
 		playsound(src, dry_fire_sound, dry_fire_sound_volume, TRUE)
 		return
+
+	. = ..()
+	if(.)
+		if(shots_before_degradation)
+			shots_before_degradation --
+		else if((obj_flags & EMAGGED) && degradation_stage == degradation_stage_max && !explosion_timer)
+			perform_extreme_malfunction(user)
+		else
+			attempt_degradation(FALSE)
 
 	if(chambered.loaded_projectile && gauss_mode)
 		chambered.loaded_projectile = new /obj/projectile/bullet/a762x39/gauss
@@ -254,7 +260,7 @@
 /// Proc to handle weapon degradation. Called when attempting to fire or immediately after an EMP takes place.
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/attempt_degradation(force_increment = FALSE)
 	if(gauss_mode)
-		degradation_probability += 25
+		degradation_probability += 5
 
 	if(!prob(degradation_probability) && !force_increment || degradation_stage == degradation_stage_max)
 		return // Only update if we actually increment our degradation stage
@@ -282,6 +288,7 @@
 	base_icon_state = "amk_gauss_tacticool"
 	worn_icon_state = "amk_modern"
 	recoil = 0.2
+	degradation_probability = 10
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/examine_more(mob/user)
 	. = ..()

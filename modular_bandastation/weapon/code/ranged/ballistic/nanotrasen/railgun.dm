@@ -39,7 +39,7 @@
 	/// Maximum degradation stage.
 	var/degradation_stage_max = 5
 	/// The probability of degradation increasing per shot.
-	var/degradation_probability = 15
+	var/degradation_probability = 25
 	/// The maximum speed malus for projectile flight speed. Projectiles probably shouldn't move too slowly or else they will start to cause problems.
 	var/maximum_speed_malus = 0.7
 	/// What is our damage multiplier if the gun is emagged?
@@ -100,22 +100,20 @@
 	if(!chambered || (chambered && !chambered.loaded_projectile))
 		return
 
-	if(shots_before_degradation)
-		shots_before_degradation --
-		return
-
-	else if ((obj_flags & EMAGGED) && degradation_stage == degradation_stage_max && !explosion_timer)
-		perform_extreme_malfunction(user)
-
-	else
-		attempt_degradation(FALSE)
-
-
 /obj/item/gun/ballistic/railgun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(chambered.loaded_projectile && prob(75) && (emp_malfunction || degradation_stage == degradation_stage_max))
 		balloon_alert_to_viewers("*шелк*")
 		playsound(src, dry_fire_sound, dry_fire_sound_volume, TRUE)
 		return
+
+	. = ..()
+	if(.)
+		if(shots_before_degradation)
+			shots_before_degradation --
+		else if((obj_flags & EMAGGED) && degradation_stage == degradation_stage_max && !explosion_timer)
+			perform_extreme_malfunction(user)
+		else
+			attempt_degradation(FALSE)
 
 	return ..()
 

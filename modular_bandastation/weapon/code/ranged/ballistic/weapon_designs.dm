@@ -98,8 +98,8 @@
 	id = "railgun_lethal"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
-		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15,
-		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 15
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 10
 	)
 	build_path = /obj/item/ammo_casing/railgun
 	category = list(
@@ -112,7 +112,7 @@
 	desc = "Специальный менее летальный оглушающий снаряд калибра 30мм для использования в ручных электромагнитных ускорителей масс. Отлично подходит для обезвреживания особо опасных преступников."
 	id = "railgun_taser"
 	materials = list(
-		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
 		/datum/material/gold = SHEET_MATERIAL_AMOUNT * 10
 	)
 	build_path = /obj/item/ammo_casing/railgun/taser
