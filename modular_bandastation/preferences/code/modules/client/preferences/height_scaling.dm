@@ -61,4 +61,4 @@
 		"[HUMAN_HEIGHT_TALLEST]" = "гигантского роста"
 	)
 	var/height_text = height_examine_strings[num2text(height_pref)] || "неизвестной высоты"
-	. += "<span class='notice'>[src] [height_text].</span>"
+	. += span_notice("[declent_ru(NOMINATIVE)] [height_text]")
