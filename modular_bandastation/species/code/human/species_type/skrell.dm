@@ -173,7 +173,7 @@
 /datum/species/skrell/get_cough_sound(mob/living/carbon/human/tajaran)
 	if(tajaran.physique == FEMALE)
 		return pick(
-			'sound/mobs/humanoids/human/cough/female_cough1.ogg',
+		    'sound/mobs/humanoids/human/cough/female_cough1.ogg',
 			'sound/mobs/humanoids/human/cough/female_cough2.ogg',
 			'sound/mobs/humanoids/human/cough/female_cough3.ogg',
 			'sound/mobs/humanoids/human/cough/female_cough4.ogg',
