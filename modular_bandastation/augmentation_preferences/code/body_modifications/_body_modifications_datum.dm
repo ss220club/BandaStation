@@ -2,7 +2,7 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 
 /datum/body_modification
 	/// The abstract type of this body modification
-	var/abstract_type = /datum/body_modification
+	abstract_type = /datum/body_modification
 	/// The key used to identify this body modification
 	var/key = null
 	/// The name of this body modification
