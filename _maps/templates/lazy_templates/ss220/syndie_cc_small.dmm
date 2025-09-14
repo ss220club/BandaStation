@@ -107,6 +107,11 @@
 	},
 /turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
+"blJ" = (
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/directional/north,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "bnr" = (
 /turf/open/floor/iron/grimy,
 /area/centcom/syndicate_base)
@@ -178,10 +183,6 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark,
-/area/centcom/syndicate_base)
-"bZl" = (
-/obj/machinery/light/small/directional/east,
-/turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
 "chA" = (
 /obj/structure/fans/tiny/invisible,
@@ -301,11 +302,6 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
 /turf/open/floor/iron/grimy,
-/area/centcom/syndicate_base)
-"dgl" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "dlo" = (
 /obj/structure/closet/syndicate/personal,
@@ -451,6 +447,13 @@
 /obj/structure/toilet,
 /turf/open/floor/iron/white,
 /area/centcom/syndicate_base)
+"flo" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/command,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
 "fmQ" = (
 /obj/machinery/light/small/directional/west,
 /obj/effect/decal/cleanable/dirt,
@@ -493,6 +496,11 @@
 /obj/effect/turf_decal/stripes/box,
 /turf/open/floor/iron/recharge_floor,
 /area/centcom/syndicate_base)
+"fQZ" = (
+/turf/open/floor/iron/stairs/medium{
+	dir = 1
+	},
+/area/centcom/syndicate_base)
 "fTe" = (
 /obj/effect/turf_decal/delivery/red,
 /obj/effect/decal/cleanable/dirt,
@@ -528,6 +536,16 @@
 /obj/item/storage/box/drinkingglasses,
 /turf/open/floor/wood/parquet,
 /area/centcom/syndicate_base/control)
+"gyK" = (
+/obj/machinery/button/door/indestructible{
+	wires = 1;
+	id = "nukeop_ready";
+	name = "Shuttle Dock Door";
+	specialfunctions = 4;
+	req_access = list("syndicate")
+	},
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base)
 "gOQ" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
@@ -1893,6 +1911,10 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
+"tLQ" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
 "tLW" = (
 /obj/machinery/light/directional/south,
 /obj/effect/decal/cleanable/dirt,
@@ -1974,11 +1996,6 @@
 	width = 7
 	},
 /turf/open/floor/plating,
-/area/centcom/syndicate_base)
-"uXT" = (
-/obj/machinery/light/small/directional/south,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "vef" = (
 /obj/machinery/light/directional/north,
@@ -2464,7 +2481,7 @@ fnU
 sLM
 sLM
 fnU
-vef
+gOQ
 tou
 viA
 viA
@@ -2533,7 +2550,7 @@ fnU
 sLM
 sLM
 fnU
-gOQ
+blJ
 tou
 viA
 viA
@@ -2664,13 +2681,13 @@ fnU
 fnU
 fnU
 fnU
-dfR
-dfR
+flo
+flo
 fnU
 fnU
-lWm
-vVY
-dlt
+cSv
+gOQ
+gOQ
 gOQ
 tou
 viA
@@ -2737,9 +2754,9 @@ mEk
 jLT
 bjf
 fnU
-pCf
-aDp
-dlt
+aLl
+gOQ
+gOQ
 gOQ
 tou
 viA
@@ -2806,9 +2823,9 @@ mEk
 dPy
 maY
 fnU
-iwO
-vfA
-dlt
+nSN
+gOQ
+gOQ
 gOQ
 tou
 viA
@@ -2875,10 +2892,10 @@ mEk
 jLT
 oTB
 fnU
-pUk
-pUk
-fnU
-vef
+blJ
+gOQ
+gOQ
+gOQ
 tou
 viA
 viA
@@ -3823,7 +3840,7 @@ fnU
 jtX
 jtX
 jtX
-fnU
+gyK
 lKs
 fnU
 jtX
@@ -3908,8 +3925,8 @@ mmT
 hXC
 ovP
 ovP
-bgj
-nQs
+ovP
+fnU
 fnU
 pUk
 fnU
@@ -3976,10 +3993,10 @@ ovP
 bxW
 hXC
 hXC
-dgl
-ciG
+ovP
+bgj
 nQs
-fnU
+lWm
 vVY
 dlt
 gOQ
@@ -4044,11 +4061,11 @@ hXC
 hXC
 lGp
 ovP
-hXC
-fnU
-fnU
-fnU
-fnU
+ovP
+ovP
+fQZ
+nQs
+pCf
 aDp
 dlt
 gOQ
@@ -4113,11 +4130,11 @@ ovP
 ovP
 lGp
 hXC
-uXT
-fnU
-sLM
-sLM
-fnU
+hXC
+ovP
+ciG
+nQs
+iwO
 vfA
 dlt
 gOQ
@@ -4182,9 +4199,9 @@ hXC
 lGp
 hXC
 ovP
+ovP
+ovP
 ngQ
-fnU
-fnU
 fnU
 fnU
 fnU
@@ -4388,7 +4405,7 @@ hXC
 ovP
 emh
 ovP
-ovP
+tLQ
 hXC
 lGp
 uze
@@ -4457,7 +4474,7 @@ fnU
 fnU
 fnU
 fnU
-bZl
+fnU
 fnU
 fnU
 fnU
