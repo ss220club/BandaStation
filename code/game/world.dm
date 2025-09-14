@@ -365,6 +365,7 @@ GLOBAL_VAR(restart_counter)
 /world/Del()
 	QDEL_NULL(Tracy)
 	QDEL_NULL(Debugger)
+	rustg_close_async_http_client() // BANDSATION ADDITION - Rust Utils
 	. = ..()
 
 /world/proc/update_status()

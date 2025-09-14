@@ -193,6 +193,12 @@ GLOBAL_DATUM_INIT(cameranet, /datum/cameranet, new)
 		available_cameras_data += list(list(
 			name = camera.c_tag,
 			ref = REF(camera),
+			// BANDASTATION ADDITION START - Nanomap
+			x = camera.x,
+			y = camera.y,
+			z = camera.z,
+			status = camera.camera_enabled,
+			// BANDASTATION ADDITION END - Nanomap
 		))
 
 	return available_cameras_data

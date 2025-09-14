@@ -74,6 +74,12 @@
 /// Message is being relayed through another object
 #define MODE_RELAY "relayed"
 
+// BANDASTATION ADDITION START - TTS
+#define MODE_TTS_FILTERS "tts_filters"
+#define MODE_TTS_SEED_OVERRIDE "tts_seed_override"
+#define MODE_TTS_MESSAGE_OVERRIDE "tts_message_override"
+// BANDASTATION ADDITION END - TTS
+
 //Spans. Robot speech, italics, etc. Applied in compose_message().
 #define SPAN_ROBOT "robot"
 #define SPAN_YELL "yell"

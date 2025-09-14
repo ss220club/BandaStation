@@ -29,7 +29,7 @@
 	var/can_hasten = TRUE
 
 /obj/item/melee/chainofcommand/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/melee/chainofcommand/attack_secondary(mob/living/victim, mob/living/user, list/modifiers, list/attack_modifiers)
@@ -162,7 +162,7 @@
 	playsound(container.parent, 'sound/items/sheath.ogg', 25, TRUE)
 
 /obj/item/melee/sabre/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is trying to cut off all [user.p_their()] limbs with [src]! it looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is trying to cut off all [user.p_their()] limbs with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	var/i = 0
 	ADD_TRAIT(src, TRAIT_NODROP, SABRE_SUICIDE_TRAIT)
 	if(iscarbon(user))
@@ -280,7 +280,7 @@
 		carbon_target.reagents.add_reagent(/datum/reagent/toxin, 4)
 
 /obj/item/melee/beesword/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is stabbing [user.p_them()]self in the throat with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is stabbing [user.p_them()]self in the throat with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(get_turf(src), hitsound, 75, TRUE, -1)
 	return TOXLOSS
 
@@ -589,7 +589,7 @@
 
 /obj/item/melee/cleric_mace/get_material_prefixes(list/materials)
 	var/datum/material/material = materials[1]
-	return material.name //It only inherits the name of the main material it's made of. The secondary is in the description.
+	return material.declent_ru(GENITIVE) //It only inherits the name of the main material it's made of. The secondary is in the description. // BANDASTATION EDIT - Material atoms
 
 /obj/item/melee/cleric_mace/finalize_material_effects(list/materials)
 	. = ..()
