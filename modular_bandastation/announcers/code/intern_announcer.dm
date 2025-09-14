@@ -10,7 +10,7 @@
 		)
 
 	alert_sounds = list(
-		'modular_bandastation/announcers/sound/alerts/1.ogg',
+	    'modular_bandastation/announcers/sound/alerts/1.ogg',
 		'modular_bandastation/announcers/sound/alerts/2.ogg',
 		'modular_bandastation/announcers/sound/alerts/3.ogg',
 		'modular_bandastation/announcers/sound/alerts/4.ogg',
