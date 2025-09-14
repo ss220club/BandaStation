@@ -28,7 +28,7 @@
 		return replacement_bodypart_type
 
 	var/base_type_str = "[replacement_bodypart_type]"
-	var/brand = lowertext(selected_manufacturer)
+	var/brand = LOWER_TEXT(selected_manufacturer)
 	brand = replacetext(brand, " ", "_")
 	brand = replacetext(brand, "-", "")
 
