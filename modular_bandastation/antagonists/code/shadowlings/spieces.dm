@@ -83,6 +83,17 @@
 
 var/ascended_max_health = 220
 
+/mob/living/carbon/human/proc/refresh_eye_overlays()
+	remove_overlay(EYES_LAYER)
+
+	var/obj/item/organ/eyes/E = get_organ_slot(ORGAN_SLOT_EYES)
+	if(!E)
+		return
+
+	E.refresh(call_update = FALSE)
+	overlays_standing[EYES_LAYER] = E.generate_body_overlay(src)
+	apply_overlay(EYES_LAYER)
+
 /datum/species/shadow/shadowling/ascended/on_species_gain(mob/living/carbon/human/H)
 	. = ..()
 	if(!istype(H))
@@ -111,8 +122,8 @@ var/ascended_max_health = 220
 	desc = "Слиток зазубренной тени."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "claw_right"
-	lefthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
-	righthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
+	//lefthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
+	//righthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
 	inhand_icon_state = "claw_right"
 	worn_icon = null
 	w_class = WEIGHT_CLASS_TINY
@@ -239,8 +250,33 @@ var/ascended_max_health = 220
 	pepperspray_protect = TRUE
 	color_cutoffs = null
 	flash_protect = FLASH_PROTECTION_SENSITIVE
-	eye_color_left = "#3cb8a5"
-	eye_color_right = "#3cb8a5"
+	eye_color_left = "#ff0000"
+	eye_color_right = "#ff0000"
+
+/obj/item/organ/eyes/shadow/shadowling/generate_body_overlay(mob/living/carbon/human/parent)
+	. = ..()
+	if(!islist(.))
+		return .
+
+	var/list/states_left = list("[eye_icon_state]_l", "[iris_overlay]_l")
+	var/list/states_right = list("[eye_icon_state]_r", "[iris_overlay]_r")
+
+	for(var/mutable_appearance/ov as anything in .)
+		if(!istype(ov))
+			continue
+		if(ov.icon != icon_eyes_path)
+			continue
+
+		if(ov.icon_state in states_left)
+			ov.color = eye_color_left
+			continue
+
+		if(ov.icon_state in states_right)
+			ov.color = eye_color_right
+			continue
+
+	return .
+
 
 /obj/item/bodypart/head/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED

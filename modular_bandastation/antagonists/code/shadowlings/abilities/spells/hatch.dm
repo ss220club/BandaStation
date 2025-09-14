@@ -130,6 +130,7 @@
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	hive.grant_sync_action(H)
 	hive.sync_after_event(H)
+	H.refresh_eye_overlays()
 	playsound(start, sfx_end, 70, TRUE)
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(start)
 	to_chat(H, span_boldnotice("Вы разрываете оболочку и становитесь Тенью."))
