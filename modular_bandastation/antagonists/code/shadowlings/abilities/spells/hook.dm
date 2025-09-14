@@ -1,7 +1,7 @@
 /datum/action/cooldown/shadowling/hook
 	parent_type = /datum/action/cooldown/shadowling
 
-	name = "Теневой захват"
+	name = "Хук"
 	desc = "Выпускает теневую руку. При попадании тянет задетую цель к вам."
 	button_icon_state = "shadow_hook"
 

@@ -8,7 +8,7 @@
 /datum/action/cooldown/shadowling/toggle_night_vision
 	name = "Ночное зрение"
 	desc = "Переключить режим ночного зрения (вычисляется на текущих глазах)."
-	button_icon_state = "night_vision"
+	button_icon_state = "shadow_nightvision"
 	cooldown_time = 0 SECONDS
 
 	/// 0=off, 1/2/3 – уровни
