@@ -7,6 +7,7 @@
 	worn_icon_state = "utility"
 	lefthand_file = 'icons/mob/inhands/equipment/belt_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/belt_righthand.dmi'
+	abstract_type = /obj/item/storage/belt
 	slot_flags = ITEM_SLOT_BELT
 	attack_verb_continuous = list("whips", "lashes", "disciplines")
 	attack_verb_simple = list("whip", "lash", "discipline")
@@ -53,6 +54,7 @@
 /obj/item/storage/belt/utility/chief/full
 	preload = TRUE
 
+// BANDASTATION EDIT - Bring back T2 tools to CE
 /obj/item/storage/belt/utility/chief/full/PopulateContents()
 	SSwardrobe.provide_type(/obj/item/screwdriver/power, src)
 	SSwardrobe.provide_type(/obj/item/crowbar/power, src)
@@ -61,8 +63,8 @@
 	SSwardrobe.provide_type(/obj/item/stack/cable_coil, src)
 	SSwardrobe.provide_type(/obj/item/extinguisher/mini, src)
 	SSwardrobe.provide_type(/obj/item/analyzer, src)
-	//much roomier now that we've managed to remove two tools
 
+// BANDASTATION EDIT - Bring back T2 tools to CE
 /obj/item/storage/belt/utility/chief/full/get_types_to_preload()
 	var/list/to_preload = list() //Yes this is a pain. Yes this is the point
 	to_preload += /obj/item/screwdriver/power

@@ -18156,6 +18156,15 @@ instrumental = "балкой"
 prepositional = "балке"
 gender = "female"
 
+["galactic map"]
+nominative = "галактическая карта"
+genitive = "галактической карты"
+dative = "галактической карте"
+accusative = "галактическую карту"
+instrumental = "галактической картой"
+prepositional = "галактической карте"
+gender = "female"
+
 # MARK: Turfs
 [floor]
 nominative = "плитка"
@@ -24784,7 +24793,7 @@ genitive = "сырого галлюцинаторного ядра"
 dative = "сырому галлюцинаторному ядру"
 accusative = "сырое галлюцинаторное ядро"
 instrumental = "сырым галлюцинаторным ядром"
-prepositional = "сыром галлюцинаторном аядре"
+prepositional = "сыром галлюцинаторном ядре"
 
 ["pyroclastic anomaly core"]
 nominative = "пирокластическое аномальное ядро"
@@ -26876,4 +26885,431 @@ dative = "залу заседаний совета"
 accusative = "зал заседаний совета"
 instrumental = "залом заседаний совета"
 prepositional = "зале заседаний совета"
+gender = "male"
+
+## Common Areas
+
+["Dormitories"]
+nominative = "дормитории"
+genitive = "дормиториев"
+dative = "дормитиориям"
+accusative = "дормитории"
+instrumental = "дормитоиями"
+prepositional = "дормиториях"
+gender = "plural"
+
+["Dorms Room 1"]
+nominative = "первая комната дормиториев"
+genitive = "первой комнаты дормиториев"
+dative = "первой комнате дормиториев"
+accusative = "первую комнату дормиториев"
+instrumental = "первой комнатой дормиториев"
+prepositional = "первой комнате дормиториев"
+gender = "female"
+
+["Dorms Room 2"]
+nominative = "вторая комната дормиториев"
+genitive = "второй комнаты дормиториев"
+dative = "второй комнате дормиториев"
+accusative = "вторую комнату дормиториев"
+instrumental = "второй комнатой дормиториев"
+prepositional = "второй комнате дормиториев"
+gender = "female"
+
+["Dorms Room 3"]
+nominative = "третья комната дормиториев"
+genitive = "третьей комнаты дормиториев"
+dative = "третьей комнате дормиториев"
+accusative = "третью комнату дормиториев"
+instrumental = "третьей комнатой дормиториев"
+prepositional = "третьей комнате дормиториев"
+gender = "female"
+
+["Dorms Room 4"]
+nominative = "четвертая комната дормиториев"
+genitive = "четвертой комнаты дормиториев"
+dative = "четвертой комнате дормиториев"
+accusative = "четвертую комнату дормиториев"
+instrumental = "четвертой комнатой дормиториев"
+prepositional = "четвертой комнате дормиториев"
+gender = "female"
+
+["Dorms Apartment 1"]
+nominative = "первые апартаменты дормиториев"
+genitive = "первых апартаментов дормиториев"
+dative = "первым апартаментам дормиториев"
+accusative = "первые апартаменты дормиториев"
+instrumental = "первыми апартаментами дормиториев"
+prepositional = "первых апартаментах дормиториев"
+gender = "plural"
+
+["Dorms Apartment 2"]
+nominative = "вторые апартаменты дормиториев"
+genitive = "вторых апартаментов дормиториев"
+dative = "вторым апартаментам дормиториев"
+accusative = "вторые апартаменты дормиториев"
+instrumental = "вторыми апартаментами дормиториев"
+prepositional = "вторых апартаментах дормиториев"
+gender = "plural"
+
+["Laundry Room"]
+nominative = "прачечная"
+genitive = "прачечной"
+dative = "прачечной"
+accusative = "прачечную"
+instrumental = "прачечной"
+prepositional = "прачечной"
+gender = "female"
+
+["Dormitory Toilets"]
+nominative = "санузел дормиторий"
+genitive = "санузла дормиторий"
+dative = "санузлу дормиторий"
+accusative = "санузел дормиторий"
+instrumental = "санузлом дормиторий"
+prepositional = "санузле дормиторий"
+gender = "male"
+
+["Auxiliary Restrooms"]
+nominative = "резервный санузел"
+genitive = "резервного санузла"
+dative = "резервному санузлу"
+accusative = "резервный санузел"
+instrumental = "резервным санузлом"
+prepositional = "резервном санузле"
+gender = "male"
+
+["Locker Toilets"]
+nominative = "санузел раздевальной комнаты"
+genitive = "санузла раздевальной комнаты"
+dative = "санузлу раздевальной комнаты"
+accusative = "санузел раздевальной комнаты"
+instrumental = "санузлом раздевальной комнаты"
+prepositional = "санузле раздевальной комнаты"
+gender = "male"
+
+["Restrooms"]
+nominative = "санузел"
+genitive = "санузла"
+dative = "санузлу"
+accusative = "санузел"
+instrumental = "санузлом"
+prepositional = "санузле"
+gender = "male"
+
+["Shower Room"]
+nominative = "душевая"
+genitive = "душевой"
+dative = "душевой"
+accusative = "душевую"
+instrumental = "душевой"
+prepositional = "душевой"
+gender = "female"
+
+["Locker Room"]
+nominative = "раздевальная комната"
+genitive = "раздевальной комнаты"
+dative = "раздевальной комнате"
+accusative = "раздевальную комнату"
+instrumental = "раздевальной комнатой"
+prepositional = "раздевальной комнате"
+gender = "female"
+
+["Bar Lounge"]
+nominative = "лаундж-бар"
+genitive = "лаундж-бара"
+dative = "лаундж-бару"
+accusative = "лаундж-бар"
+instrumental = "лаундж-баром"
+prepositional = "лаундж-баре"
+gender = "male"
+
+["Fitness Room"]
+nominative = "фитнес-зал"
+genitive = "фитнес-зала"
+dative = "фитнес-залу"
+accusative = "фитнес-зал"
+instrumental = "фитнес-залом"
+prepositional = "фитнес-зале"
+gender = "male"
+
+["Recreation Area"]
+nominative = "зона отдыха"
+genitive = "зоны отдыха"
+dative = "зоне отдыха"
+accusative = "зону отдыха"
+instrumental = "зоной отдыха"
+prepositional = "зоне отдыха"
+gender = "female"
+
+["Entertainment Center"]
+nominative = "развлекательный центр"
+genitive = "развлекательного центра"
+dative = "развлекательному центру"
+accusative = "развлекательный центр"
+instrumental = "развлекательным центром"
+prepositional = "развлекательном центре"
+gender = "male"
+
+["Vacant Room"]
+nominative = "свободная комната"
+genitive = "свободной комнаты"
+dative = "свободной комнате"
+accusative = "свободную комнату"
+instrumental = "свободной комнатой"
+prepositional = "свободной комнате"
+gender = "female"
+
+["Vacant Office"]
+nominative = "вакантный офис"
+genitive = "вакантного офиса"
+dative = "вакантному офису"
+accusative = "вакантный офис"
+instrumental = "вакантным офисом"
+prepositional = "вакантном офисе"
+gender = "female"
+
+["Vacant Commissary"]
+nominative = "вакантный магазин"
+genitive = "вакантного магазина"
+dative = "вакантному магазину"
+accusative = "вакантный магазин"
+instrumental = "вакантным магазином"
+prepositional = "вакантном магазине"
+gender = "male"
+
+["Auxiliary Tool Storage"]
+nominative = "вспомогательное хранилище инструментов"
+genitive = "вспомогательного хранилища инструментов"
+dative = "вспомогательному хранилищу инструментов"
+accusative = "вспомогательное хранилище инструментов"
+instrumental = "вспомогательным хранилищем инструментов"
+prepositional = "вспомогательном хранилище инструментов"
+gender = "neuter"
+
+["Primary Tool Storage"]
+nominative = "основное хранилище инструментов"
+genitive = "основного хранилища инструментов"
+dative = "основному хранилищу инструментов"
+accusative = "основное хранилище инструментов"
+instrumental = "основным хранилищем инструментов"
+prepositional = "основном хранилище инструментов"
+gender = "neuter"
+
+["Art Supply Storage"]
+nominative = "хранилище художественных принадлежностей"
+genitive = "хранилища художественных принадлежностей"
+dative = "хранилищу художественных принадлежностей"
+accusative = "хранилище художественных принадлежностей"
+instrumental = "хранилищем художественных принадлежностей"
+prepositional = "хранилище художественных принадлежностей"
+gender = "neuter"
+
+["Commons Storage"]
+nominative = "хранилище общего пользования"
+genitive = "хранилища общего пользования"
+dative = "хранилищу общего пользования"
+accusative = "хранилище общего пользования"
+instrumental = "хранилищем общего пользования"
+prepositional = "хранилище общего пользования"
+gender = "neuter"
+
+["Public Mining Storage"]
+nominative = "общественное шахтерское хранилище"
+genitive = "общественного шахтерского хранилища"
+dative = "общественному шахтерскому хранилищу"
+accusative = "общественное шахтерское хранилище"
+instrumental = "общественным шахтерским хранилищем"
+prepositional = "общественном шахтерском хранилище"
+gender = "neuter"
+
+["Port Emergency Storage"]
+nominative = "западное аварийное хранилище"
+genitive = "западного аварийного хранилища"
+dative = "западному аварийному хранилищу"
+accusative = "западное аварийное хранилище"
+instrumental = "западным аварийным хранилищем"
+prepositional = "западном аварийном хранилище"
+gender = "neuter"
+
+["Cryopods Room"]
+nominative = "криохранилище"
+genitive = "криохранилища"
+dative = "криохранилищу"
+accusative = "криохранилище"
+instrumental = "криохранилищем"
+prepositional = "криохранилище"
+gender = "neuter"
+
+## Hallway Areas
+
+["Primary Hallway"]
+nominative = "основной коридор"
+genitive = "основного коридора"
+dative = "основному коридору"
+accusative = "основной коридор"
+instrumental = "основным коридором"
+prepositional = "основном коридоре"
+gender = "male"
+
+["Aft Primary Hallway"]
+nominative = "южный основной коридор"
+genitive = "южного основного коридора"
+dative = "южному основному коридору"
+accusative = "южный основной коридор"
+instrumental = "южным основным коридором"
+prepositional = "южном основном коридоре"
+gender = "male"
+
+["Fore Primary Hallway"]
+nominative = "северный основной коридор"
+genitive = "северного основного коридора"
+dative = "северному основному коридору"
+accusative = "северный основной коридор"
+instrumental = "северным основным коридором"
+prepositional = "северном основном коридоре"
+gender = "male"
+
+["Starboard Primary Hallway"]
+nominative = "восточный основной коридор"
+genitive = "восточного основного коридора"
+dative = "восточному основному коридору"
+accusative = "восточный основной коридор"
+instrumental = "восточным основным коридором"
+prepositional = "восточном основном коридоре"
+gender = "male"
+
+["Port Primary Hallway"]
+nominative = "западный основной коридор"
+genitive = "западного основного коридора"
+dative = "западному основному коридору"
+accusative = "западный основной коридор"
+instrumental = "западным основным коридором"
+prepositional = "западном основном коридоре"
+gender = "male"
+
+["Central Primary Hallway"]
+nominative = "центральный основной коридор"
+genitive = "центрального основного коридора"
+dative = "центральному основному коридору"
+accusative = "центральный основной коридор"
+instrumental = "центральным основным коридором"
+prepositional = "центральном основном коридоре"
+gender = "male"
+
+["Fore Central Primary Hallway"]
+nominative = "северный центральный основной коридор"
+genitive = "северного центрального основного коридора"
+dative = "северному центральному основному коридору"
+accusative = "северный центральный основной коридор"
+instrumental = "северным центральным основным коридором"
+prepositional = "северном центральном основном коридоре"
+gender = "male"
+
+["Aft Central Primary Hallway"]
+nominative = "южный центральный основной коридор"
+genitive = "южного центрального основного коридора"
+dative = "южному центральному основному коридору"
+accusative = "южный центральный основной коридор"
+instrumental = "южным центральным основным коридором"
+prepositional = "южном центральном основном коридоре"
+gender = "male"
+
+["Starboard Primary Hallway West"]
+nominative = "восточно-западный основной коридор"
+genitive = "восточно-западного основного коридора"
+dative = "восточно-западному основному коридору"
+accusative = "восточно-западный основной коридор"
+instrumental = "восточно-западным основным коридором"
+prepositional = "восточно-западном основном коридоре"
+gender = "male"
+
+["Port Tram Dock"]
+nominative = "западный трамвайный док"
+genitive = "западного трамвайного дока"
+dative = "западному трамвайному доку"
+accusative = "западный трамвайный док"
+instrumental = "западным трамвайным доком"
+prepositional = "западном трамвайном доке"
+gender = "male"
+
+["Central Tram Dock"]
+nominative = "центральный трамвайный док"
+genitive = "центрального трамвайного дока"
+dative = "центральному трамвайному доку"
+accusative = "центральный трамвайный док"
+instrumental = "центральным трамвайным доком"
+prepositional = "центральном трамвайном доке"
+gender = "male"
+
+["Starboard Tram Dock"]
+nominative = "восточный трамвайный док"
+genitive = "восточного трамвайного дока"
+dative = "восточному трамвайному доку"
+accusative = "восточный трамвайный док"
+instrumental = "восточным трамвайным доком"
+prepositional = "восточном трамвайном доке"
+gender = "male"
+
+["Command Hallway"]
+nominative = "командный коридор"
+genitive = "командного коридора"
+dative = "командному коридору"
+accusative = "командный коридор"
+instrumental = "командным коридором"
+prepositional = "командном коридоре"
+gender = "male"
+
+["Escape Shuttle Hallway"]
+nominative = "коридор эвакуационного шаттла"
+genitive = "коридора эвакуационного шаттла"
+dative = "коридору эвакуационного шаттла"
+accusative = "коридор эвакуационного шаттла"
+instrumental = "коридором эвакуационного шаттла"
+prepositional = "коридоре эвакуационного шаттла"
+gender = "male"
+
+["Escape Pod Bay"]
+nominative = "отсек спасательных капсул"
+genitive = "отсека спасательных капсул"
+dative = "отсеку спасательных капсул"
+accusative = "отсек спасательных капсул"
+instrumental = "отсеком спасательных капсул"
+prepositional = "отсеке спасательных капсул"
+gender = "male"
+
+["Departure Lounge"]
+nominative = "зал отбытия"
+genitive = "зала отбытия"
+dative = "залу отбытия"
+accusative = "зал отбытия"
+instrumental = "залом отбытия"
+prepositional = "зале отбытия"
+gender = "male"
+
+["Arrival Shuttle Hallway"]
+nominative = "коридор шаттла прибытия"
+genitive = "коридора шаттла прибытия"
+dative = "коридору шаттла прибытия"
+accusative = "коридор шаттла прибытия"
+instrumental = "коридором шаттла прибытия"
+prepositional = "коридоре шаттла прибытия"
+gender = "male"
+
+["Secondary Station Dock Hallway"]
+nominative = "коридор вторичной док-станции"
+genitive = "коридора вторичной док-станции"
+dative = "коридору вторичной док-станции"
+accusative = "коридор вторичной док-станции"
+instrumental = "коридором вторичной док-станции"
+prepositional = "коридоре вторичной док-станции"
+gender = "male"
+
+["Service Hallway"]
+nominative = "коридор отдела обслуживания"
+genitive = "коридора отдела обслуживания"
+dative = "коридору отдела обслуживания"
+accusative = "коридор отдела обслуживания"
+instrumental = "коридором отдела обслуживания"
+prepositional = "коридоре отдела обслуживания"
 gender = "male"
