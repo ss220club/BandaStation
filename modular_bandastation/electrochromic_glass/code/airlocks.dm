@@ -28,6 +28,7 @@
 		return
 
 	spraycan_color = spraycan.paint_color
+	update_icon(UPDATE_OVERLAYS)
 
 /obj/machinery/door/airlock/proc/toggle_polarization()
 	electrochromed = !electrochromed
