@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - admin: "Логи теперь имеют поддерживаемые в Логисе категории"
