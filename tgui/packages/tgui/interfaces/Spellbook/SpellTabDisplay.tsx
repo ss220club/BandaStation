@@ -23,7 +23,7 @@ type Props = {
 function getTimeOrCat(entry: SpellEntry) {
   if (entry.cat === SpellCategory.Rituals) {
     if (entry.times) {
-      return `Прочитано ${entry.times} раз.`;
+      return `Прочитано раз: ${entry.times}`;
     } else {
       return 'Еще не прочитано.';
     }
@@ -55,7 +55,7 @@ export function SpellTabDisplay(props: Props) {
                 {getTimeOrCat(entry)}
               </Stack.Item>
               <Stack.Item width="60px" ml={pointOffset}>
-                {entry.cost} очков
+                Очки: {entry.cost}
               </Stack.Item>
               {entry.buyword === Buywords.Learn && (
                 <Stack.Item>

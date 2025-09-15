@@ -82,7 +82,7 @@ export function Spellbook(props) {
               <Stack>
                 <Stack.Item grow>
                   <ProgressBar value={points / 10}>
-                    {`${points} очков осталось.`}
+                    {`Осталось очков: ${points}`}
                   </ProgressBar>
                 </Stack.Item>
                 <Stack.Item>
