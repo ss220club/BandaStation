@@ -15,6 +15,10 @@
 
 	RegisterSignal(src, COMSIG_OBJ_PAINTED, PROC_REF(on_painted))
 
+/obj/machinery/door/airlock/Destroy()
+	. = ..()
+	UnregisterSignal(src, COMSIG_OBJ_PAINTED)
+
 // We can't get airlock color after painting in easy way, so we catch it from spraycan
 // Needed for smooth polarization animation, without it, default window color will be used for animation
 // which looks bad...
@@ -34,15 +38,17 @@
 	var/list/polarized_overlay = get_airlock_overlay("[airlock_material]_closed", overlays_file, src, em_block = TRUE)
 	var/image/polarized_image = polarized_overlay[1]
 
+	var/default_color = generate_glass_matrix(src)
+	var/tinted_color = generate_glass_matrix(src, TINTED_ALPHA)
 	if(!electrochromed)
-		polarized_image.color = generate_glass_matrix(src, TINTED_ALPHA)
-		animate_color = generate_glass_matrix(src)
+		polarized_image.color = tinted_color
+		animate_color = default_color
 		set_opacity(FALSE)
 		if(multi_tile)
 			filler.set_opacity(FALSE)
 	else
-		polarized_image.color = generate_glass_matrix(src)
-		animate_color = generate_glass_matrix(src, TINTED_ALPHA)
+		polarized_image.color = default_color
+		animate_color = tinted_color
 		set_opacity(TRUE)
 		if(multi_tile)
 			filler.set_opacity(TRUE)
