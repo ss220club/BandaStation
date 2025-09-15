@@ -151,6 +151,7 @@
 	postSFX,
 	tts_seed_override,
 	tts_channel_override,
+	check_deafness = TRUE
 )
 
 	SIGNAL_HANDLER
@@ -160,7 +161,7 @@
 	var/datum/preferences/prefs = listener?.client?.prefs
 	if(prefs?.read_preference(/datum/preference/choiced/sound_tts) != TTS_SOUND_ENABLED || prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume) == 0)
 		return
-	if(HAS_TRAIT(listener, TRAIT_DEAF))
+	if(check_deafness && HAS_TRAIT(listener, TRAIT_DEAF))
 		return
 	if(!speaker)
 		speaker = parent

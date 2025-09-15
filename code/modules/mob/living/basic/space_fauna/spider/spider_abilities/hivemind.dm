@@ -68,7 +68,8 @@
 			message,
 			is_local = FALSE,
 			effects = list(/datum/singleton/sound_effect/telepathy),
-			channel_override = CHANNEL_TTS_RADIO
+			channel_override = CHANNEL_TTS_RADIO,
+			check_deafness = FALSE
 		)
 		// BANDASTATION ADDITION END
 	for(var/ghost in GLOB.dead_mob_list)
