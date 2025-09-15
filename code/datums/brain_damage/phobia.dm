@@ -1,9 +1,9 @@
 /datum/brain_trauma/mild/phobia
-	name = "Phobia"
-	desc = "Patient is unreasonably afraid of something."
-	scan_desc = "phobia"
-	gain_text = span_warning("You start finding default values very unnerving...")
-	lose_text = span_notice("You no longer feel afraid of default values.")
+	name = "Фобия"
+	desc = "Пациент чего-то необоснованно боится."
+	scan_desc = "фобия"
+	gain_text = span_warning("Вас начинают сильно беспокоить стандартные вещи...")
+	lose_text = span_notice("Вы больше не испытываете страха перед стандартными вещами.")
 	var/phobia_type
 	/// Cooldown for proximity checks so we don't spam a range 7 view every two seconds.
 	COOLDOWN_DECLARE(check_cooldown)
@@ -25,11 +25,11 @@
 		phobia_type = new_phobia_type
 
 	if(!phobia_type)
-		phobia_type = pick(GLOB.phobia_types)
+		phobia_type = pick(GLOB.phobia_types.declent_ru(GENITIVE))
 
-	gain_text = span_warning("You start finding [phobia_type] very unnerving...")
-	lose_text = span_notice("You no longer feel afraid of [phobia_type].")
-	scan_desc += " of [phobia_type]"
+	gain_text = span_warning("Вы начинаете находить [phobia_type] очень нервирующим...")
+	lose_text = span_notice("Вы больше не боитесь [phobia_type].")
+	scan_desc += " [phobia_type]"
 	trigger_regex = GLOB.phobia_regexes[phobia_type]
 	trigger_mobs = GLOB.phobia_mobs[phobia_type]
 	trigger_objs = GLOB.phobia_objs[phobia_type]
@@ -129,17 +129,17 @@
 		speech_args[SPEECH_SPANS] |= SPAN_SMALL_VOICE
 	if (stutter)
 		owner.set_stutter_if_lower(4 SECONDS)
-	to_chat(owner, span_warning("You struggle to say the word \"[span_phobia("[trigger_regex.group[2]]")]\"!"))
+	to_chat(owner, span_warning("Вы с трудом произносите слово \"[span_phobia("[trigger_regex.group[2]]")]\"!"))
 
 /datum/brain_trauma/mild/phobia/proc/freak_out(atom/reason, trigger_word)
 	if(owner.stat == DEAD)
 		return
 
-	var/message = pick("spooks you to the bone", "shakes you up", "terrifies you", "sends you into a panic", "sends chills down your spine")
+	var/message = pick("пугает вас до глубины души", "потрясает вас", "пугает вас", "приводит вас в панику", "у вас бегут мурашки по спине")
 	if(trigger_word)
 		if (owner.has_status_effect(/datum/status_effect/minor_phobia_reaction))
 			return
-		to_chat(owner, span_userdanger("Hearing [span_phobia(trigger_word)] [message]!"))
+		to_chat(owner, span_userdanger("Слышу [span_phobia(trigger_word)] [message]!"))
 		owner.apply_status_effect(/datum/status_effect/minor_phobia_reaction)
 		return
 
@@ -148,9 +148,9 @@
 		owner.add_mood_event("phobia_[phobia_type]", mood_event_type)
 
 	if(reason)
-		to_chat(owner, span_userdanger("Seeing [span_phobia(reason.name)] [message]!"))
+		to_chat(owner, span_userdanger("Вижу [span_phobia(reason.name)] [message]!"))
 	else
-		to_chat(owner, span_userdanger("Something [message]!"))
+		to_chat(owner, span_userdanger("Что-то [message]!"))
 
 	if(reason)
 		owner.face_atom(reason)

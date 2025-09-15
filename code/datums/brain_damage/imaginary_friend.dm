@@ -4,11 +4,11 @@
 #define IMAGINARY_FRIEND_EXTENDED_SPEECH_RANGE 999
 
 /datum/brain_trauma/special/imaginary_friend
-	name = "Imaginary Friend"
-	desc = "Patient can see and hear an imaginary person."
-	scan_desc = "partial schizophrenia"
-	gain_text = span_notice("You feel in good company, for some reason.")
-	lose_text = span_warning("You feel lonely again.")
+	name = "Воображаемый друг"
+	desc = "Пациент может видеть и слышать воображаемого человека."
+	scan_desc = "частичная шизофрения"
+	gain_text = span_notice("По какой-то причине вы чувствуете себя в хорошей компании.")
+	lose_text = span_warning("Вы снова чувствуете себя одиноким.")
 	var/mob/eye/imaginary_friend/friend
 	var/friend_initialized = FALSE
 
@@ -76,10 +76,10 @@
 	message_admins("[ADMIN_LOOKUPFLW(friend)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
 
 /mob/eye/imaginary_friend
-	name = "imaginary friend"
-	real_name = "imaginary friend"
+	name = "воображаемый друг"
+	real_name = "воображаемый друг"
 	move_on_shuttle = TRUE
-	desc = "A wonderful yet fake friend."
+	desc = "Замечательный, но ненастоящий друг."
 	sight = NONE
 	mouse_opacity = MOUSE_OPACITY_ICON
 	see_invisible = SEE_INVISIBLE_LIVING
@@ -104,9 +104,9 @@
 	Show()
 
 /mob/eye/imaginary_friend/proc/greet()
-	to_chat(src, span_notice("<b>You are the imaginary friend of [owner]!</b>"))
-	to_chat(src, span_notice("You are absolutely loyal to your friend, no matter what."))
-	to_chat(src, span_notice("You cannot directly influence the world around you, but you can see what [owner] cannot."))
+	to_chat(src, span_notice("<b>Вы - воображаемый друг [owner]!</b>"))
+	to_chat(src, span_notice("Вы абсолютно преданы своему другу, несмотря ни на что."))
+	to_chat(src, span_notice("Вы не можете напрямую влиять на окружающий вас мир, но вы можете видеть то, чего не может видеть [owner]."))
 
 /**
  * Arguments:
