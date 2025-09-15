@@ -1,3 +1,4 @@
 #include "_martial_arts.dm"
 
+#include "code/_defines.dm"
 #include "code/judo.dm"

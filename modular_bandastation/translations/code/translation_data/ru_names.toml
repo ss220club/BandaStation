@@ -27295,3 +27295,12 @@ accusative = "коридор отдела обслуживания"
 instrumental = "коридором отдела обслуживания"
 prepositional = "коридоре отдела обслуживания"
 gender = "male"
+
+["Corporate Judo Belt"]
+nominative = "пояс корпоративного дзюдо"
+genitive = "пояса корпоративного дзюдо"
+dative = "поясу корпоративного дзюдо"
+accusative = "пояс корпоративного дзюдо"
+instrumental = "поясом корпоративного дзюдо"
+prepositional = "поясе корпоративного дзюдо"
+gender = "male"
