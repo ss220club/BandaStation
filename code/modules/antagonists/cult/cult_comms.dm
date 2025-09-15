@@ -66,6 +66,16 @@
 			var/link = FOLLOW_LINK(listener, user)
 			to_chat(listener, "[link] [my_message]", type = MESSAGE_TYPE_RADIO)
 
+		// BANDASTATION ADDITION START - TTS
+		user.cast_tts(
+			listener,
+			message,
+			is_local = FALSE,
+			effects = list(/datum/singleton/sound_effect/telepathy),
+			channel_override = CHANNEL_TTS_RADIO
+		)
+		// BANDASTATION ADDITION END
+
 	user.log_talk(message, LOG_SAY, tag="cult")
 
 /datum/action/innate/cult/comm/spirit
