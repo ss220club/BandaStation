@@ -326,7 +326,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 	log_sayverb_talk(message, message_mods, tag = "blob hivemind telepathy")
 	var/messagepart = generate_messagepart(adjusted_message, message_mods = message_mods)
 	var/rendered = span_big(span_blob("<b>\[Blob Telepathy\] [name](<font color=\"[blobstrain.color]\">[blobstrain.name]</font>)</b> [messagepart]"))
-	// BANDASTATION ADDITION START - TTS
+	// BANDASTATION EDIT START - TTS
 	relay_to_list_and_observers(
 		rendered,
 		GLOB.blob_telepathy_mobs,
@@ -336,7 +336,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 		tts_seed = get_tts_seed(),
 		tts_effects = list(/datum/singleton/sound_effect/telepathy)
 	)
-	// BANDASTATION ADDITION END
+	// BANDASTATION EDIT END
 
 /mob/eye/blob/blob_act(obj/structure/blob/B)
 	return
