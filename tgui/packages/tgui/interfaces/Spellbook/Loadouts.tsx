@@ -22,7 +22,7 @@ export function Loadouts(props) {
                 Это классический волшебник, безумно популярный в
                 2550-х годах. Включает Fireball, Magic Missile,
                 Ei Nath и Ethereal Jaunt.
-                Каждую часть этого набора очень использовать
+                Каждую часть этого набора легко использовать.
               "
           />
           <SingleLoadout
