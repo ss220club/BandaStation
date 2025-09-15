@@ -159,9 +159,12 @@
 	if(!gauss_mode_selection)
 		gauss_mode = TRUE
 		balloon_alert(user, "режим - гаусс")
+		degradation_probability += 10
 	else
 		gauss_mode = FALSE
 		balloon_alert(user, "режим - обычный")
+		degradation_probability -= 10
+
 	playsound(user, 'sound/items/weapons/empty.ogg', 100, TRUE)
 	update_appearance()
 	update_item_action_buttons()
@@ -259,9 +262,6 @@
 
 /// Proc to handle weapon degradation. Called when attempting to fire or immediately after an EMP takes place.
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/attempt_degradation(force_increment = FALSE)
-	if(gauss_mode)
-		degradation_probability += 5
-
 	if(!prob(degradation_probability) && !force_increment || degradation_stage == degradation_stage_max)
 		return // Only update if we actually increment our degradation stage
 
@@ -289,6 +289,7 @@
 	worn_icon_state = "amk_modern"
 	recoil = 0.2
 	degradation_probability = 10
+	shots_before_degradation = 60
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/examine_more(mob/user)
 	. = ..()

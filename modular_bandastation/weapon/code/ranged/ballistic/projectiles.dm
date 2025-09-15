@@ -171,14 +171,13 @@
 	embed_type = null
 
 /obj/projectile/bullet/a762x39/gauss/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
 	if(isliving(target))
-		var/mob/living/poor_sap = target
-		// If the target mob has enough armor to stop the bullet, or the bullet has already gone through two people, stop it on this hit
-		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 50) || (pierces > 2))
+		if(blocked > 50 || pierces > 2)
 			projectile_piercing = NONE
-			damage -= 20
-			armour_penetration -= 20
-			wound_bonus -= 10
+			damage = max(0, damage - 20)
+			armour_penetration = max(0, armour_penetration - 20)
+			wound_bonus = max(0, wound_bonus - 10)
 
 	return ..()
 
@@ -227,13 +226,12 @@
 	embed_type = null
 
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
 	if(isliving(target))
-		var/mob/living/poor_sap = target
-		// If the target mob has enough armor to stop the bullet, or the bullet has already gone through two people, stop it on this hit
-		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 60) || (pierces > 2))
+		if(blocked > 40 || pierces > 2)
 			projectile_piercing = NONE
-			damage -= 15
-			armour_penetration -= 30
+			damage = max(0, damage - 15)
+			armour_penetration = max(0, armour_penetration - 15)
 
 	return ..()
 
@@ -477,12 +475,12 @@
 	projectile_piercing = PASSMOB
 
 /obj/projectile/bullet/railgun/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
 	if(isliving(target))
-		var/mob/living/poor_sap = target
-		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 40) || (pierces > 2))
+		if(blocked > 50 || pierces > 2)
 			projectile_piercing = NONE
-			damage -= 20
-			armour_penetration -= 10
+			damage = max(0, damage - 20)
+			armour_penetration = max(0, armour_penetration - 10)
 
 	return ..()
 
