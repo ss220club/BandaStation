@@ -148,6 +148,7 @@ Doesn't work on other aliens/AI.*/
 	owner.cast_tts(
 		chosen_recipient,
 		to_whisper,
+		is_local = FALSE,
 		effects = list(/datum/singleton/sound_effect/telepathy),
 		channel_override = CHANNEL_TTS_RADIO
 	)

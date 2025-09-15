@@ -75,6 +75,7 @@
 		user.cast_tts(
 			ling_mob,
 			message,
+			is_local = FALSE,
 			effects = list(/datum/singleton/sound_effect/telepathy),
 			channel_override = CHANNEL_TTS_RADIO
 		)
