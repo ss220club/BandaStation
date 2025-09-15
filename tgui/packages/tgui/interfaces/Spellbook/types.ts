@@ -1,12 +1,12 @@
 import type { BooleanLike } from 'tgui-core/react';
 
 export enum SpellCategory {
-  Offensive = 'Offensive',
-  Defensive = 'Defensive',
-  Mobility = 'Mobility',
-  Assistance = 'Assistance',
-  Rituals = 'Rituals',
-  Perks = 'Perks',
+  Offensive = 'Наступление',
+  Defensive = 'Защита',
+  Mobility = 'Мобильность',
+  Assistance = 'Поддержка',
+  Rituals = 'Ритуалы',
+  Perks = 'Перки',
 }
 
 export type SpellEntry = {
