@@ -213,3 +213,11 @@
 	var/datum/action/cooldown/shadowling/hatch/A = new
 	A.Grant(H)
 
+/proc/shadowling_grant_nightvision(mob/living/carbon/human/H)
+	if(!istype(H))
+		return null
+	for(var/datum/action/cooldown/shadowling/toggle_night_vision/X in H.actions)
+		return null
+	var/datum/action/cooldown/shadowling/toggle_night_vision/A = new
+	A.Grant(H)
+	return A

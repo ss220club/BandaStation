@@ -52,7 +52,14 @@
 	if(!hive)
 		return FALSE
 
-	var/render = "<span class='shadowradio'><b>[sender.real_name]:</b> [html_encode(message)]</span>"
+	var/role_label = shadowling_commune_role_label(sender, hive)
+	var/name_to_show = sender.real_name
+	var/bold_name = shadowling_commune_bold_name(sender, hive)
+
+	var/name_html = bold_name ? "<b>[html_encode(name_to_show)]</b>" : "[html_encode(name_to_show)]"
+	var/body_html = html_encode(message)
+
+	var/render = "<span class='shadowradio'>[role_label] [name_html]: [body_html]</span>"
 
 	to_chat(sender, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = TRUE)
 
@@ -73,5 +80,30 @@
 	for(var/mob/dead/ghost in GLOB.dead_mob_list)
 		var/link = FOLLOW_LINK(ghost, sender)
 		to_chat(ghost, "[link] [render]", type = MESSAGE_TYPE_RADIO)
+
+	return TRUE
+
+
+/datum/action/cooldown/shadowling/commune/proc/shadowling_commune_role_label(mob/living/carbon/human/H, datum/team/shadow_hive/hive)
+	if(H in hive.thralls)
+		return "(Раб Тенеморфа)"
+
+	if(!(H in hive.lings))
+		return ""
+
+	var/role = hive.get_ling_role(H)
+	if(role == SHADOWLING_ROLE_LESSER)
+		return "(Младший Тенеморф)"
+
+	return "(Тенеморф)"
+
+
+/datum/action/cooldown/shadowling/commune/proc/shadowling_commune_bold_name(mob/living/carbon/human/H, datum/team/shadow_hive/hive)
+	if(!(H in hive.lings))
+		return FALSE
+
+	var/role = hive.get_ling_role(H)
+	if(role == SHADOWLING_ROLE_LESSER)
+		return FALSE
 
 	return TRUE

@@ -135,6 +135,9 @@
 	new /obj/effect/temp_visual/shadowling/hatch_pulse(start)
 	to_chat(H, span_boldnotice("Вы разрываете оболочку и становитесь Тенью."))
 
+	var/datum/action/cooldown/shadowling/toggle_night_vision/nightvision = shadowling_grant_nightvision(H)
+	nightvision.DoEffect(H, atom/_)
+
 	detach_cover()
 	cleanup(walls)
 	H.alpha = prev_alpha

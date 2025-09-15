@@ -61,6 +61,7 @@ var/global/list/SHADOWLING_MINOR_ABILITIES = list(
 
 //Абилки для возвышенного
 var/global/list/SHADOWLING_ASCENDED_ABILITIES = list(
+	/datum/action/cooldown/shadowling/commune,
 	/datum/action/cooldown/shadowling/enthrall,
 	/datum/action/cooldown/shadowling/toggle_night_vision,
 	/datum/action/cooldown/shadowling/glare,

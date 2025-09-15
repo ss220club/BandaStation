@@ -161,6 +161,7 @@
 	new /obj/effect/temp_visual/circle_wave/shadow_shreek_wave/dark/slow(old_turf)
 
 	to_chat(H, span_boldnotice("Вы разрываете оболочку и восходите в высшую форму Тени."))
+	playsound(get_turf(H), 'sound/effects/magic/mutate.ogg', 70, TRUE)
 
 	for(var/datum/action/cooldown/ability in H.actions)
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
