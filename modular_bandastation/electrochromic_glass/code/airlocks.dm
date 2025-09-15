@@ -1,3 +1,7 @@
+/atom
+	/// Color which applied by spraycan.
+	var/spraycan_color
+
 /obj/machinery/door/airlock
 	var/electrochromic_id
 	/// Is airlock currently with active electrochrome glass?
@@ -9,8 +13,17 @@
 	if(glass && current_area.window_tint)
 		toggle_polarization()
 
-	if(glass)
-		flags_1 |= UNPAINTABLE_1
+	RegisterSignal(src, COMSIG_OBJ_PAINTED, PROC_REF(on_painted))
+
+// We can't get airlock color after painting in easy way, so we catch it from spraycan
+// Needed for smooth polarization animation, without it, default window color will be used for animation
+// which looks bad...
+/obj/machinery/door/airlock/proc/on_painted(obj/machinery/door/airlock/source, mob/user, obj/item/toy/crayon/spraycan/spraycan, is_dark_color)
+	SIGNAL_HANDLER
+	if(!spraycan.actually_paints)
+		return
+
+	spraycan_color = spraycan.paint_color
 
 /obj/machinery/door/airlock/proc/toggle_polarization()
 	electrochromed = !electrochromed
