@@ -150,7 +150,7 @@ Doesn't work on other aliens/AI.*/
 		to_whisper,
 		is_local = FALSE,
 		effects = list(/datum/singleton/sound_effect/telepathy),
-		channel_override = CHANNEL_TTS_RADIO,
+		channel_override = CHANNEL_TTS_TELEPATHY,
 		check_deafness = FALSE
 	)
 	owner.cast_tts(
@@ -158,7 +158,7 @@ Doesn't work on other aliens/AI.*/
 		to_whisper,
 		is_local = FALSE,
 		effects = list(/datum/singleton/sound_effect/telepathy),
-		channel_override = CHANNEL_TTS_RADIO,
+		channel_override = CHANNEL_TTS_TELEPATHY,
 		check_deafness = FALSE
 	)
 	// BANDASTATION ADDITION END
