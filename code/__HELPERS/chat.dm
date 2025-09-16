@@ -105,19 +105,13 @@ it will be sent to all connected chats.
 		if(!tts_seed)
 			continue
 
-		INVOKE_ASYNC( \
-			SStts220, \
-			TYPE_PROC_REF(/datum/controller/subsystem/tts220, get_tts), \
-			null, \
-			creature, \
-			tts_message || message, \
-			tts_seed, \
-			FALSE, \
-			tts_effects, \
-			null, \
-			null, \
-			null, \
-			CHANNEL_TTS_RADIO, \
+		SStts220.get_tts(
+			listener = creature,
+			message = tts_message,
+			tts_seed = tts_seed,
+			is_local = FALSE,
+			effect_types = tts_effects,
+			channel_override = CHANNEL_TTS_RADIO
 		)
 		// BANDASTATION ADDITION END
 

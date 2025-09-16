@@ -85,27 +85,21 @@
 		effects = new_sound_effects
 
 	if(!silent_target && being_changed != chooser && ismob(being_changed))
-		INVOKE_ASYNC(\
-			SStts220,\
-			TYPE_PROC_REF(/datum/controller/subsystem/tts220, get_tts),\
-			null,\
-			being_changed,\
-			tts_test_str,\
-			new_tts_seed,\
-			FALSE,\
-			get_effects()\
+		SStts220.get_tts(
+			listener = being_changed,
+			message = tts_test_str,
+			tts_seed = new_tts_seed,
+			is_local = FALSE,
+			effect_types = get_effects()
 		)
 
 	if(chooser)
-		INVOKE_ASYNC(\
-			SStts220,\
-			TYPE_PROC_REF(/datum/controller/subsystem/tts220, get_tts),\
-			null,\
-			chooser,\
-			tts_test_str,\
-			new_tts_seed,\
-			FALSE,\
-			get_effects()\
+		SStts220.get_tts(
+			listener = chooser,
+			message = tts_test_str,
+			tts_seed = new_tts_seed,
+			is_local = FALSE,
+			effect_types = get_effects()
 		)
 
 	return new_tts_seed
@@ -195,19 +189,17 @@
 	if(!.[TTS_CAST_SEED])
 		return
 
-	INVOKE_ASYNC(\
-		SStts220,\
-		TYPE_PROC_REF(/datum/controller/subsystem/tts220, get_tts),\
-		.[TTS_CAST_LOCATION],\
-		.[TTS_CAST_LISTENER],\
-		.[TTS_CAST_MESSAGE],\
-		.[TTS_CAST_SEED],\
-		.[TTS_CAST_LOCAL],\
-		.[TTS_CAST_EFFECTS],\
-		.[TTS_CAST_TRAITS],\
-		.[TTS_CAST_PRE_SFX],\
-		.[TTS_CAST_POST_SFX],\
-		.[TTS_CHANNEL_OVERRIDE]\
+	SStts220.get_tts(
+		.[TTS_CAST_LOCATION],
+		.[TTS_CAST_LISTENER],
+		.[TTS_CAST_MESSAGE],
+		.[TTS_CAST_SEED],
+		.[TTS_CAST_LOCAL],
+		.[TTS_CAST_EFFECTS],
+		.[TTS_CAST_TRAITS],
+		.[TTS_CAST_PRE_SFX],
+		.[TTS_CAST_POST_SFX],
+		.[TTS_CHANNEL_OVERRIDE]
 	)
 
 /datum/component/tts_component/proc/tts_effects_add(atom/user, list/new_sound_effects)

@@ -239,6 +239,8 @@ SUBSYSTEM_DEF(tts220)
 	channel_override,
 )
 
+	set waitfor = FALSE
+
 	if(!is_enabled)
 		return
 	if(!message)
