@@ -56,6 +56,15 @@
 					avoid_highlighting = (src == hearing_mob)
 				)
 
+			cast_tts(
+				hearing_mob,
+				message,
+				is_local = FALSE,
+				effects = list(/datum/singleton/sound_effect/robot, /datum/singleton/sound_effect/radio),
+				channel_override = CHANNEL_TTS_RADIO,
+				check_deafness = FALSE
+			)
+
 		if(isobserver(hearing_mob))
 			var/following = src
 
