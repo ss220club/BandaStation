@@ -159,7 +159,7 @@
 		return
 
 	mytape.timestamp += mytape.used_capacity
-	mytape.storedinfo += new /datum/tape_message(time2text(mytape.used_capacity, "mm:ss", NO_TIMEZONE), speaker.GetVoice(), raw_message, speaker.get_tts_seed()) // BANDASTATION ADDITION - TTS
+	mytape.storedinfo += new /datum/tape_message(time2text(mytape.used_capacity, "mm:ss", NO_TIMEZONE), speaker.get_voice(), raw_message, speaker.get_tts_seed()) // BANDASTATION ADDITION - TTS
 
 
 /obj/item/taperecorder/verb/record()
