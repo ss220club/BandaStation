@@ -7,7 +7,7 @@
 	resilience = TRAUMA_RESILIENCE_SURGERY
 
 /datum/brain_trauma/severe/mute
-	name = "Мутизм"
+	name = "Немота"
 	desc = "Пациент полностью лишен возможности говорить."
 	scan_desc = "обширное повреждение речевого центра мозга"
 	gain_text = span_warning("Вы разучились говорить!")
@@ -312,7 +312,7 @@
 	desc = "Пациент склонен к воровству вещей."
 	scan_desc = "клептомания"
 	gain_text = span_warning("Вы чувствуете внезапное желание взять это. Конечно, никто не заметит.")
-	lose_text = span_notice("Вы больше не чувствуете желания брать что-то с собой.")
+	lose_text = span_notice("Вы больше не чувствуете желания брать чужие вещи.")
 	/// Cooldown between allowing steal attempts
 	COOLDOWN_DECLARE(steal_cd)
 

@@ -52,7 +52,7 @@
 	name = "Блюспейс пророчество"
 	desc = "Пациент может ощущать колебания и переплетения блюспейса вокруг себя, показывающего проходы, которые никто другой не может увидеть."
 	scan_desc = "bluespace attunement"
-	gain_text = span_notice("Ты чувствуешь, как блюспейс пульсирует вокруг тебя...")
+	gain_text = span_notice("Вы чувствуете, как блюспейс пульсирует вокруг тебя...")
 	lose_text = span_warning("Слабая пульсация блюспейса сменяется тишиной.")
 	/// Cooldown so we can't teleport literally everywhere on a whim
 	COOLDOWN_DECLARE(portal_cooldown)
@@ -239,7 +239,7 @@
 	name = "Насильственный психоз"
 	desc = "Пациент сражается непредсказуемыми способами, начиная от оказания помощи своей жертве и заканчивая нанесением ей жестоких ударов."
 	scan_desc = "насильственный психоз"
-	gain_text = span_warning("Вы чувствуете себя расстроенным...")
+	gain_text = span_warning("Вы чувствуете себя расстроенными...")
 	lose_text = span_notice("Вы чувствуете себя более уравновешенным.")
 	/// The martial art we teach
 	var/datum/martial_art/psychotic_brawling/psychotic_brawling
@@ -262,7 +262,7 @@
 	desc = "Пациент психологически нечувствителен к боли и травмам и может оставаться на ногах гораздо дольше обычного человека."
 	scan_desc = "травматическая невропатия"
 	gain_text = span_warning("Вы внезапно перестаете чувствовать боль.")
-	lose_text = span_warning("Вы понимаете, что снова можешь чувствовать боль.")
+	lose_text = span_warning("Вы понимаете, что снова можете чувствовать боль.")
 
 /datum/brain_trauma/special/tenacity/on_gain()
 	owner.add_traits(list(TRAIT_NOSOFTCRIT, TRAIT_NOHARDCRIT, TRAIT_ANALGESIA), TRAUMA_TRAIT)
@@ -391,7 +391,7 @@
 
 	if(get_dist(owner, beepsky) <= 1)
 		owner.playsound_local(owner, 'sound/items/weapons/egloves.ogg', 50)
-		owner.visible_message(span_warning("Тело [owner.declent_ru(GENITIVE)] дергается, как будто его ударили током."), span_userdanger("Вы чувствуете силу ЗАКОНА."))
+		owner.visible_message(span_warning("Тело [declent_ru(owner, GENITIVE)] дергается, как будто его ударили током."), span_userdanger("Вы чувствуете силу ЗАКОНА."))
 		owner.adjustStaminaLoss(rand(40, 70))
 		QDEL_NULL(beepsky)
 
@@ -562,7 +562,7 @@
 
 	if(!GLOB.bridge_axe)
 		if(SPT_PROB(0.5, seconds_per_tick))
-			to_chat(owner, span_warning("Я не выполнил свой долг..."))
+			to_chat(owner, span_warning("Мой долг не выполнен..."))
 			owner.set_jitter_if_lower(5 SECONDS)
 			owner.set_stutter_if_lower(5 SECONDS)
 			if(SPT_PROB(20, seconds_per_tick))
@@ -627,7 +627,7 @@
 
 /datum/brain_trauma/special/axedoration/proc/axe_gone(source)
 	SIGNAL_HANDLER
-	to_chat(owner, span_danger("Вы чувствуете сильное возмущение в силе."))
+	to_chat(owner, span_danger("Вы чувствуете сильное возмущение Силы."))
 	owner.add_mood_event("fireaxe", /datum/mood_event/axe_gone)
 	owner.set_jitter_if_lower(15 SECONDS)
 	owner.set_stutter_if_lower(15 SECONDS)
