@@ -29,5 +29,3 @@
 
 /obj/item/jammer/nt/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
     return
-
-
