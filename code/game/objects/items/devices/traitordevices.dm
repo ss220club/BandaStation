@@ -320,6 +320,7 @@ effective or pretty fucking useless.
 		if(IN_GIVEN_RANGE(source, jammer, jammer.range))
 			//BANDASTATION EDIT START - Jammer whitelisted channels
 			if(freq in jammer.whitelisted_frequencies)
+				continue
 			//BANDASTATION EDIT END
 			return TRUE
 	return FALSE
