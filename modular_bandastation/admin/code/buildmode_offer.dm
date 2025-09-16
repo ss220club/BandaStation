@@ -4,7 +4,7 @@
 /datum/buildmode_mode/offer/show_help(client/builder)
 	to_chat(
 		builder,
-		span_purple(boxed_message("[span_bold("Предложить моба призракам")] -> ЛКМ по мобу")
+		span_purple(boxed_message("[span_bold("Предложить моба призракам")] -> ЛКМ по мобу"))
 	)
 
 /datum/buildmode_mode/offer/handle_click(client/user, params, object)
