@@ -344,7 +344,7 @@ effective or pretty fucking useless.
 	COOLDOWN_DECLARE(jam_cooldown)
 
 	/// BANDASTATION EDIT ADD: Jammer WL Channel
-	var/list/whitelist_frequencies = list(
+	var/list/whitelisted_frequencies = list(
 		FREQ_SYNDICATE
 	)
 
