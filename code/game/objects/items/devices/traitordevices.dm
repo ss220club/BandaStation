@@ -314,14 +314,14 @@ effective or pretty fucking useless.
 		Lasts indefinitely in darkness, but will not recharge unless inactive."
 	actions_types = list(/datum/action/item_action/stealth_mode/weaker)
 
-//BANDASTATION EDIT: Add channel recive
 /// Checks if a given atom is in range of a radio jammer, returns TRUE if it is.
-/proc/is_within_radio_jammer_range(atom/source, freq)
+/proc/is_within_radio_jammer_range(atom/source, freq) // BANDASTATION EDIT - Jammer whitelisted channels: added `freq`
 	for(var/obj/item/jammer/jammer as anything in GLOB.active_jammers)
 		if(IN_GIVEN_RANGE(source, jammer, jammer.range))
-			//BANDASTATION EDIT: Check for frequencies
+			//BANDASTATION EDIT START - Jammer whitelisted channels
 			if(freq in jammer.whitelisted_frequencies)
 				continue
+			//BANDASTATION EDIT END
 			return TRUE
 	return FALSE
 

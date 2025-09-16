@@ -10,7 +10,11 @@
 
 /obj/item/jammer/nt/examine_more(mob/user)
 	. = ..()
-	. += span_notice("На обратной стороне выгравировано: «Собственность корпорации Нанотрейзен. Корпорация не несёт ответственности за использование устройства третьими лицами, а также за любые действия, совершённые с его применением в случае кражи».")
+	. += span_notice(
+		"На обратной стороне выгравировано: «Собственность корпорации Нанотрейзен. \
+		Корпорация не несёт ответственности за использование устройства третьими лицами, \
+		а также за любые действия, совершённые с его применением в случае кражи»."
+	)
 
 /obj/item/jammer/nt/Initialize(mapload)
 	. = ..()
@@ -21,9 +25,7 @@
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/jammer/nt/attack_self(mob/user, modifiers)
-    return
+	return
 
 /obj/item/jammer/nt/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-    return
-
-
+	return
