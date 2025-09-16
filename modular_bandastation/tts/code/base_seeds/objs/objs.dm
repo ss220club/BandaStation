@@ -69,7 +69,7 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/tlou_joel)
 
 /obj/machinery/vending/liberationstation/add_tts_component()
-	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/optimus_primed)
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/optimus_prime)
 
 /obj/machinery/vending/magivend/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/sirius_black)
