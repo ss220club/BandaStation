@@ -7,7 +7,6 @@
 	whitelisted_frequencies = list(
 		FREQ_CENTCOM
 	)
-	var/centcom_blackout = FALSE
 
 /obj/item/jammer/nt/Initialize(mapload)
 	. = ..()
