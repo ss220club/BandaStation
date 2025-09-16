@@ -37,6 +37,3 @@
 	update_appearance()
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/jammer/nt/Destroy()
-	GLOB.active_jammers -= src
-	return ..()
