@@ -320,7 +320,8 @@ effective or pretty fucking useless.
 	for(var/obj/item/jammer/jammer as anything in GLOB.active_jammers)
 		if(IN_GIVEN_RANGE(source, jammer, jammer.range))
 			//BANDASTATION EDIT: Check for frequencies
-			if(channel in jammer.whitelist_frequencies)
+			if(freq in jammer.whitelist_frequencies)
+				continue
 				continue
 			return TRUE
 	return FALSE
