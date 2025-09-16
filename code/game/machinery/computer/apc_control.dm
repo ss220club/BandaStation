@@ -30,7 +30,7 @@
 
 /obj/machinery/computer/apc_control/attack_ai(mob/user)
 	if(!isAdminGhostAI(user))
-		to_chat(user,span_warning("[declent_ru(NOMINATIVE)] не поддерживается для контроля ИИ.")) //You already have APC access, cheater!
+		to_chat(user,span_warning("[declent_ru(NOMINATIVE)] не доступен для контроля ИИ.")) //You already have APC access, cheater!
 		return
 	return ..()
 
