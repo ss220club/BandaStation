@@ -11,7 +11,18 @@
 	var/light_immunity_thralls = 7
 	var/static/sfx_enter = 'sound/effects/magic/teleport_app.ogg'
 
+/datum/action/cooldown/shadowling/shadow_phase/is_action_active(atom/movable/screen/movable/action_button/_btn)
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return FALSE
+	if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
+		return TRUE
+	if(H.has_status_effect(/datum/status_effect/shadow/phase))
+		return TRUE
+	return FALSE
+
 /datum/action/cooldown/shadowling/shadow_phase/Trigger(mob/clicker, trigger_flags, atom/target)
+
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE
@@ -106,6 +117,10 @@
 	addtimer(CALLBACK(src, PROC_REF(_auto_exit_if_still_inside), WEAKREF(P)), phase_duration)
 
 	to_chat(H, span_notice("Вы растворяетесь во тени."))
+
+	for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
+		A.apply_button_overlay()
+
 	return TRUE
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/exit_phase(mob/living/carbon/human/H, forced_out = FALSE)
@@ -124,4 +139,8 @@
 		new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
 	fade_in(H, 0.3 SECONDS)
 	to_chat(H, span_notice("Вы возвращаетесь в материальность."))
+
+	for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
+		A.apply_button_overlay()
+
 	return TRUE

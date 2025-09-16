@@ -12,6 +12,9 @@
 	if(!owner)
 		return
 
+	for(var/datum/action/cooldown/shadowling/stealth/A in owner.actions)
+		A.apply_button_overlay()
+
 	owner.alpha = 80
 	owner.invisibility = INVISIBILITY_OBSERVER // или подходящий для билда уровень
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(_break_on_move))
@@ -23,6 +26,10 @@
 	. = ..()
 	if(!owner)
 		return
+
+	for(var/datum/action/cooldown/shadowling/stealth/A in owner.actions)
+		A.apply_button_overlay()
+
 	owner.alpha = initial(owner.alpha)
 	owner.invisibility = initial(owner.invisibility)
 	UnregisterSignal(owner, list(
@@ -62,7 +69,11 @@
 	button_icon_state = "shadow_stealth"
 	cooldown_time = 6 SECONDS
 
+/datum/action/cooldown/shadowling/stealth/is_action_active(atom/movable/screen/movable/action_button/_btn)
+	return owner?.has_status_effect(/datum/status_effect/shadow/stealth) == TRUE
+
 /datum/action/cooldown/shadowling/stealth/DoEffect(mob/living/carbon/human/H, atom/_)
+	apply_button_overlay()
 	if(H.has_status_effect(/datum/status_effect/shadow/stealth))
 		H.remove_status_effect(/datum/status_effect/shadow/stealth)
 		to_chat(H, span_notice("Вы выходите из тени."))

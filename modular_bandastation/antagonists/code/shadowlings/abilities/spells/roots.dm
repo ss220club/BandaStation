@@ -7,6 +7,20 @@
 	cooldown_time = 25 SECONDS
 	click_to_activate = TRUE
 	unset_after_click = TRUE
+	var/targeting = FALSE
+
+/datum/action/cooldown/shadowling/root/is_action_active(atom/movable/screen/movable/action_button/_btn)
+	return targeting
+
+/datum/action/cooldown/shadowling/root/unset_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	targeting = FALSE
+	apply_button_overlay()
+
+/datum/action/cooldown/shadowling/root/set_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	targeting = TRUE
+	apply_button_overlay()
 
 /datum/action/cooldown/shadowling/root/Activate(atom/target)
 	var/mob/living/carbon/human/H = owner

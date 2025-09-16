@@ -13,10 +13,24 @@
 
 	var/sfx_fire = 'sound/effects/splat.ogg'
 	var/sfx_hit = 'sound/items/weapons/shove.ogg'
+	var/targeting = FALSE
 
-/datum/action/cooldown/shadowling/hook/DoEffect(mob/living/carbon/human/H, atom/_)
+/datum/action/cooldown/shadowling/hook/DoEffect(mob/living/carbon/human/H, atom/target)
 	to_chat(H, span_notice("ЛКМ по направлению/цели, чтобы выпустить теневую руку."))
 	return FALSE
+
+/datum/action/cooldown/shadowling/hook/is_action_active(atom/movable/screen/movable/action_button/_btn)
+	return targeting
+
+/datum/action/cooldown/shadowling/hook/unset_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	targeting = FALSE
+	apply_button_overlay()
+
+/datum/action/cooldown/shadowling/hook/set_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	targeting = TRUE
+	apply_button_overlay()
 
 /datum/action/cooldown/shadowling/hook/InterceptClickOn(mob/living/clicker, params, atom/target)
 	if(!istype(clicker))
@@ -59,8 +73,6 @@
 	StartCooldown()
 	unset_click_ability(clicker, FALSE)
 	return TRUE
-
-
 
 /proc/SHADOW_hook__compute_endpoint(turf/start_turf, turf/aim_turf, max_steps)
 	if(!istype(start_turf))

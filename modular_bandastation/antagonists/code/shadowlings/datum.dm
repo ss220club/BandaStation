@@ -217,7 +217,7 @@
 	if(!istype(H))
 		return null
 	for(var/datum/action/cooldown/shadowling/toggle_night_vision/X in H.actions)
-		return null
+		return X
 	var/datum/action/cooldown/shadowling/toggle_night_vision/A = new
 	A.Grant(H)
 	return A

@@ -202,3 +202,27 @@
 	var/calculated_cd = duration * mult
 	..(override_cooldown_time = calculated_cd)
 
+/datum/action/cooldown/shadowling/apply_button_overlay(atom/movable/screen/movable/action_button/current_button, force = FALSE)
+	if(!current_button)
+		build_all_button_icons(UPDATE_BUTTON_OVERLAY, TRUE)
+		return
+
+	SEND_SIGNAL(src, COMSIG_ACTION_OVERLAY_APPLY, current_button, force)
+
+	if(!overlay_icon || !overlay_icon_state)
+		return
+
+	var/use_state = overlay_icon_state
+	if(active_overlay_icon_state && is_action_active(current_button))
+		use_state = active_overlay_icon_state
+
+	if(current_button.active_overlay_icon_state == use_state && !force)
+		return
+
+	current_button.cut_overlay(current_button.button_overlay)
+	current_button.button_overlay = mutable_appearance(icon = overlay_icon, icon_state = use_state)
+	current_button.add_overlay(current_button.button_overlay)
+	current_button.active_overlay_icon_state = use_state
+
+/datum/action/cooldown/shadowling/is_action_active(atom/movable/screen/movable/action_button/_btn)
+	return FALSE

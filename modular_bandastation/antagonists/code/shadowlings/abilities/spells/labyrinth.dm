@@ -13,7 +13,19 @@
 	. = ..()
 	_cancel_selection(remove_from, refund = TRUE)
 
+/datum/action/cooldown/shadowling/labyrinth/is_action_active(atom/movable/screen/movable/action_button/_btn)
+	return stored_target
+
+/datum/action/cooldown/shadowling/root/unset_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	apply_button_overlay()
+
+/datum/action/cooldown/shadowling/root/set_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	apply_button_overlay()
+
 /datum/action/cooldown/shadowling/labyrinth/Trigger(mob/clicker, trigger_flags, atom/target)
+	apply_button_overlay()
 	if(!istype(clicker) || !IsAvailable(TRUE) || !CanUse(clicker))
 		return FALSE
 	if(stored_target && clicker.click_intercept == src)
