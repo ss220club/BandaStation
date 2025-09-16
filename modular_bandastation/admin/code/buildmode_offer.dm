@@ -1,7 +1,6 @@
 /datum/buildmode_mode/offer
 	key = "offer"
 
-
 /datum/buildmode_mode/offer/show_help(client/builder)
 	to_chat(
 		builder,
