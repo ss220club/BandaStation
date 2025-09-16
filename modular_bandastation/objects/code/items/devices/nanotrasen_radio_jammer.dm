@@ -5,7 +5,7 @@
 	icon_state = "nt_jammer_v2"
 	range = 18
 	whitelisted_frequencies = list(
-		"ЦК"
+		FREQ_CENTCOM
 	)
 	var/centcom_blackout = FALSE
 
