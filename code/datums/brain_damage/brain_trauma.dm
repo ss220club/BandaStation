@@ -11,8 +11,8 @@
 	var/scan_desc = "общая травма мозга" //description when detected by a health scanner
 	var/mob/living/carbon/owner //the poor bastard
 	var/obj/item/organ/brain/brain //the poor bastard's brain
-	var/gain_text = span_notice("Вы чувствуете себя травмированным.")
-	var/lose_text = span_notice("Вы больше не чувствуете себя травмированным.")
+	var/gain_text = span_notice("Вы чувствуете себя травмированными.")
+	var/lose_text = span_notice("Вы больше не чувствуете себя травмированными.")
 	var/can_gain = TRUE
 	var/random_gain = TRUE //can this be gained through random traumas?
 	var/resilience = TRAUMA_RESILIENCE_BASIC //how hard is this to cure?

@@ -25,7 +25,7 @@
 		phobia_type = new_phobia_type
 
 	if(!phobia_type)
-		phobia_type = pick(GLOB.phobia_types.declent_ru(GENITIVE))
+		phobia_type = pick(GLOB.phobia_types)
 
 	gain_text = span_warning("Вы начинаете находить [phobia_type] очень нервирующим...")
 	lose_text = span_notice("Вы больше не боитесь [phobia_type].")
@@ -139,7 +139,7 @@
 	if(trigger_word)
 		if (owner.has_status_effect(/datum/status_effect/minor_phobia_reaction))
 			return
-		to_chat(owner, span_userdanger("Слышу [span_phobia(trigger_word)] [message]!"))
+		to_chat(owner, span_userdanger("Услышав [span_phobia(trigger_word)] [message]!"))
 		owner.apply_status_effect(/datum/status_effect/minor_phobia_reaction)
 		return
 
@@ -148,7 +148,7 @@
 		owner.add_mood_event("phobia_[phobia_type]", mood_event_type)
 
 	if(reason)
-		to_chat(owner, span_userdanger("Вижу [span_phobia(reason.name)] [message]!"))
+		to_chat(owner, span_userdanger("Увидев [span_phobia(reason.name)] [message]!"))
 	else
 		to_chat(owner, span_userdanger("Что-то [message]!"))
 
@@ -160,23 +160,23 @@
 // Defined phobia types for badminry, not included in the RNG trauma pool to avoid diluting.
 
 /datum/brain_trauma/mild/phobia/aliens
-	phobia_type = "aliens"
+	phobia_type = "пришельцев"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/anime
-	phobia_type = "anime"
+	phobia_type = "аниме"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/authority
-	phobia_type = "authority"
+	phobia_type = "власти"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/birds
-	phobia_type = "birds"
+	phobia_type = "птиц"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/blood
-	phobia_type = "blood"
+	phobia_type = "крови"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/blood/is_scary_item(obj/checked)
@@ -185,39 +185,39 @@
 	return ..()
 
 /datum/brain_trauma/mild/phobia/clowns
-	phobia_type = "clowns"
+	phobia_type = "клоунов"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/conspiracies
-	phobia_type = "conspiracies"
+	phobia_type = "заговоров"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/doctors
-	phobia_type = "doctors"
+	phobia_type = "врачей"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/falling
-	phobia_type = "falling"
+	phobia_type = "падения"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/fish
-	phobia_type = "fish"
+	phobia_type = "рыбы"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/greytide
-	phobia_type = "greytide"
+	phobia_type = "грейтайда"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/guns
-	phobia_type = "guns"
+	phobia_type = "оружия"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/insects
-	phobia_type = "insects"
+	phobia_type = "насекомых"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/lizards
-	phobia_type = "lizards"
+	phobia_type = "ящериц"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/ocky_icky
@@ -225,34 +225,34 @@
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/robots
-	phobia_type = "robots"
+	phobia_type = "роботов"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/security
-	phobia_type = "security"
+	phobia_type = "службы безопасности"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/skeletons
-	phobia_type = "skeletons"
+	phobia_type = "скелетов"
 	mood_event_type = /datum/mood_event/spooked
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/snakes
-	phobia_type = "snakes"
+	phobia_type = "змей"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/space
-	phobia_type = "space"
+	phobia_type = "пространства"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/spiders
-	phobia_type = "spiders"
+	phobia_type = "пауков"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/strangers
-	phobia_type = "strangers"
+	phobia_type = "незнакомцев"
 	random_gain = FALSE
 
 /datum/brain_trauma/mild/phobia/supernatural
-	phobia_type = "the supernatural"
+	phobia_type = "сверхъестественного"
 	random_gain = FALSE

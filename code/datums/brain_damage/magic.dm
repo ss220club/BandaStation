@@ -58,7 +58,7 @@
 	desc = "Пациент совершенно невосприимчив к магическим силам."
 	scan_desc = "таумическая пустота"
 	gain_text = span_notice("Вы понимаете, что магия не может быть реальной.")
-	lose_text = span_notice("Ты понимаешь, что магия может быть реальной.")
+	lose_text = span_notice("Вы понимаете, что магия может быть реальной.")
 
 /datum/brain_trauma/magic/antimagic/on_gain()
 	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, TRAUMA_TRAIT)
@@ -72,7 +72,7 @@
 	name = "Преследующий призрак"
 	desc = "Пациента преследует призрак, видимый только ему."
 	scan_desc = "экстрасенсорная паранойя"
-	gain_text = span_warning("Вы чувствуешь себя так, словно что-то хочет убить вас...")
+	gain_text = span_warning("Вы чувствуете себя так, словно что-то хочет убить вас...")
 	lose_text = span_notice("Вы больше не чувствуете, что кто-то смотрит вам в спину.")
 	var/obj/effect/client_image_holder/stalker_phantom/stalker
 	var/close_stalker = FALSE //For heartbeat
@@ -105,7 +105,7 @@
 
 	if(get_dist(owner, stalker) <= 1)
 		playsound(owner, 'sound/effects/magic/demon_attack1.ogg', 50)
-		owner.visible_message(span_warning("[owner.declent_ru(GENITIVE)] разорвало на части невидимыми когтями!"), span_userdanger("Призрачные когти разрывают ваше тело на части!"))
+		owner.visible_message(span_warning("[declent_ru(owner, GENITIVE)] разорвало на части невидимыми когтями!"), span_userdanger("Призрачные когти разрывают ваше тело на части!"))
 		owner.take_bodypart_damage(rand(20, 45), wound_bonus=CANT_WOUND)
 	else if(SPT_PROB(30, seconds_per_tick))
 		stalker.forceMove(get_step_towards(stalker, owner))
