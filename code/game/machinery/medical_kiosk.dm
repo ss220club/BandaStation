@@ -117,8 +117,7 @@
 					var/gave = FALSE
 					if(ishuman(paying))
 						var/mob/living/carbon/human/HH = paying
-						ASYNC
-							gave = HH.put_in_hands(holo)
+						gave = HH.put_in_hands(holo)
 					if(!gave)
 						paying.pulling = holo
 					to_chat(paying, span_notice("Страховка вернула вам [discount_value] кр."))

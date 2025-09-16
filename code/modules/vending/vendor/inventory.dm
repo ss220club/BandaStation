@@ -275,7 +275,7 @@
 	//deduct money from person
 	var/insurance_covered = 0
 	// Departmental discount (e.g., med staff buying from med vendor)
-	if(!discountless && account.account_job?.paycheck_department == payment_department)
+	if(!discountless && account?.account_job?.paycheck_department == payment_department)
 		price_to_use = max(round(price_to_use * DEPARTMENT_DISCOUNT), 1) //No longer free, but significantly cheaper.
 
 	// For medical vendors, compute insurance coverage before charging

@@ -17,6 +17,20 @@
 	var/billing_last_msg
 	/// Last billing success flag
 	var/billing_last_ok = FALSE
+	/// Cache of surgery metadata for UI
+	var/static/list/surgery_cache
+	/// Registry of active instances for targeted UI refresh
+	var/static/list/open_instances = list()
+
+/datum/computer_file/program/nt_insurance/New()
+	open_instances += src
+	LAZYADD(GLOB.ntos_insurance_programs, src)
+	. = ..()
+
+/datum/computer_file/program/nt_insurance/Destroy()
+	open_instances -= src
+	LAZYREMOVE(GLOB.ntos_insurance_programs, src)
+	return ..()
 
 /datum/computer_file/program/nt_insurance/ui_interact(mob/user, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
@@ -58,31 +72,27 @@
 	if(length(tariff_list))
 		data["tariffs"] = tariff_list
 
-	// Provide list of available surgeries from type tree
-	var/list/surgeries = list()
-	var/surgeries_count = 0
-	var/list/surgery_types = subtypesof(/datum/surgery)
-	data["surgery_types_total"] = length(surgery_types)
-	for(var/type_path in surgery_types)
-		if(type_path == /datum/surgery)
-			continue
-		var/datum/surgery/T = type_path
-		var/s_name = initial(T.name)
-		// Be permissive: if name is missing, use type path string
-		if(!istext(s_name) || !length(s_name) || s_name == "surgery")
-			s_name = "[type_path]"
-		var/is_adv = initial(T.requires_tech)
-		var/s_price = calc_surgery_price(T)
-		surgeries += list(list(
-			"name" = s_name,
-			"advanced" = is_adv,
-			"price" = s_price,
-		))
-		surgeries_count++
-
-	// Always include for UI diagnostics
-	data["surgeries"] = surgeries
-	data["surgeries_count"] = surgeries_count
+	// Provide list of available surgeries (cached once per round)
+	if(!surgery_cache)
+		var/list/built = list()
+		var/list/surgery_types = subtypesof(/datum/surgery)
+		for(var/type_path in surgery_types)
+			if(type_path == /datum/surgery)
+				continue
+			var/datum/surgery/T = type_path
+			var/s_name = initial(T.name)
+			if(!istext(s_name) || !length(s_name) || s_name == "surgery")
+				s_name = "[type_path]"
+			var/is_adv = initial(T.requires_tech)
+			var/s_price = calc_surgery_price(T)
+			built += list(list(
+				"name" = s_name,
+				"advanced" = is_adv,
+				"price" = s_price,
+			))
+		surgery_cache = built
+	data["surgeries"] = surgery_cache
+	data["surgeries_count"] = length(surgery_cache)
 	// medical staff info already set above
 	// billing feedback
 	if(billing_last_msg)
@@ -135,11 +145,13 @@
 		data["cmo_insurance_income_total"] = SSeconomy.insurance_premium_total || 0
 		var/list/rk = SSeconomy.med_kiosk_report || list()
 		var/list/rv = SSeconomy.med_vendor_report || list()
-		var/total = (rk["total_revenue"] || 0) + (rv["total_revenue"] || 0)
-		var/covered = (rk["total_covered"] || 0) + (rv["total_covered"] || 0)
 		data["cmo_kiosk_report"] = list(
-			"total" = total,
-			"covered" = covered,
+			"total" = (rk["total_revenue"] || 0),
+			"covered" = (rk["total_covered"] || 0),
+		)
+		data["cmo_vendor_report"] = list(
+			"total" = (rv["total_revenue"] || 0),
+			"covered" = (rv["total_covered"] || 0),
 		)
 
 	return data
@@ -177,7 +189,7 @@
 		if(!issuer || issuer?.account_job?.paycheck_department != ACCOUNT_MED)
 			return TRUE
 		var/raw_name = params["name"]
-		var/amount = max(0, round(text2num(params["amount"])))
+		var/amount = clamp(max(0, round(text2num(params["amount"]))), 0, 100000)
 		var/reason = params["reason"]
 		billing_last_msg = null
 		billing_last_ok = FALSE
@@ -189,6 +201,14 @@
 			billing_last_msg = "Сумма должна быть больше 0"
 			SStgui.update_uis(src)
 			return TRUE
+		// Sanitize reason (fallback later if empty)
+		if(istext(reason))
+			var/safe_reason = reject_bad_name(reason, TRUE, MAX_MESSAGE_LEN, TRUE, FALSE)
+			if(safe_reason)
+				reason = safe_reason
+		else
+			reason = null
+
 		var/datum/record/crew/target_rec = find_record(raw_name)
 		if(!target_rec)
 			billing_last_msg = "Запись экипажа не найдена"
@@ -208,6 +228,8 @@
 			SStgui.update_uis(src)
 			return TRUE
 		// Create pending bill, to be accepted by the patient later
+		if(!reason || !length(trim(reason)))
+			reason = "Медицинские услуги"
 		var/id = GLOB.medical_billing.create_bill(patient_acc, amount, reason, issuer.account_holder, issuer.account_id, raw_name)
 		if(id)
 			billing_last_ok = TRUE

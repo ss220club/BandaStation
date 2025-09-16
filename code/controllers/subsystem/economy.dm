@@ -186,7 +186,8 @@ SUBSYSTEM_DEF(economy)
 
 	// Validate desired tier
 	var/desired = isnull(account.insurance_desired) ? INSURANCE_NONE : account.insurance_desired
-	if(desired != INSURANCE_NONE && desired != INSURANCE_STANDARD && desired != INSURANCE_PREMIUM)
+	var/list/ALLOWED_TIERS = list(INSURANCE_NONE, INSURANCE_STANDARD, INSURANCE_PREMIUM)
+	if(!(desired in ALLOWED_TIERS))
 		desired = INSURANCE_NONE
 
 	var/final_tier = INSURANCE_NONE
@@ -208,14 +209,13 @@ SUBSYSTEM_DEF(economy)
 			continue
 		if(account.adjust_money(-cost, "Insurance Premium"))
 			var/datum/bank_account/department/med = get_dep_account(ACCOUNT_MED)
-			if(med && med.adjust_money(cost, "Insurance Premium"))
+			if(med?.adjust_money(cost, "Insurance Premium"))
 				final_tier = tier
 				success = TRUE
 				record_insurance_premium(cost)
 				break
-			else
-				// Roll back debit if MED account missing or credit failed
-				account.adjust_money(cost, "Insurance Premium Refund")
+			// Roll back debit if MED account missing or credit failed
+			account.adjust_money(cost, "Insurance Premium Refund")
 		// If debit failed, loop will try next (downgraded) tier
 
 	// Update crew record after final result

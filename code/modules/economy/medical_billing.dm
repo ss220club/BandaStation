@@ -179,6 +179,7 @@ GLOBAL_DATUM_INIT(medical_billing, /datum/medical_billing_manager, new)
 	return (world.time - B.created_at) >= INSURANCE_BILL_EXPIRE
 
 /// Updates NTOS Insurance Manager windows for specific account ids
+
 /datum/medical_billing_manager/proc/refresh_insurance_uis_for(patient_account_id, issuer_account_id)
 	var/list/targets = list()
 	if(!isnull(patient_account_id))
@@ -187,7 +188,7 @@ GLOBAL_DATUM_INIT(medical_billing, /datum/medical_billing_manager, new)
 		LAZYADD(targets, "[issuer_account_id]")
 	if(!length(targets))
 		return
-	for(var/datum/computer_file/program/nt_insurance/P in world)
+	for(var/datum/computer_file/program/nt_insurance/P in GLOB.ntos_insurance_programs)
 		var/datum/bank_account/acc = P?.computer?.stored_id?.registered_account
 		if(!acc)
 			continue
