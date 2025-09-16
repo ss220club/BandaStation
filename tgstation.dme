@@ -5545,7 +5545,6 @@
 #include "code\modules\mob\living\simple_animal\hostile\mining_mobs\elites\herald.dm"
 #include "code\modules\mob\living\simple_animal\hostile\mining_mobs\elites\legionnaire.dm"
 #include "code\modules\mob\living\simple_animal\hostile\mining_mobs\elites\pandora.dm"
-#include "code\modules\mob\living\simple_animal\hostile\mining_mobs\elites\sea_serpent.dm"
 #include "code\modules\mob_spawn\mob_spawn.dm"
 #include "code\modules\mob_spawn\corpses\job_corpses.dm"
 #include "code\modules\mob_spawn\corpses\mining_corpses.dm"
