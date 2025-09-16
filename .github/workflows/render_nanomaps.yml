@@ -12,7 +12,7 @@ on:
 jobs:
   generate_maps:
     name: "Generate NanoMaps"
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - id: create_token
         uses: actions/create-github-app-token@v1
