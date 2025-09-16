@@ -13,7 +13,7 @@ import {
 
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const DEFAULT_BILL_REASON_RU = 'Медицинские услуги';
 const BILL_MAX_AMOUNT = 100_000;
@@ -28,6 +28,8 @@ type Data = {
   is_med_staff?: boolean;
   is_cmo?: boolean;
   crew_names?: string[];
+  surgeries?: { name: string; advanced: boolean; price: number }[];
+  surgeries_count?: number;
   pending_bills?: {
     id: number;
     amount: number;
@@ -124,17 +126,17 @@ function InsuranceContent() {
           <Tabs.Tab selected={tab === 'tiers'} onClick={() => setTab('tiers')}>
             Тарифы
           </Tabs.Tab>
-          {data.is_cmo && (
+          {Boolean(data.is_cmo) ? (
             <Tabs.Tab selected={tab === 'logs'} onClick={() => setTab('logs')}>
               Логи
             </Tabs.Tab>
-          )}
+          ) : null}
         </Tabs>
       </Stack.Item>
       <Stack.Item grow>
         {tab === 'billing' && <BillingTab />}
         {tab === 'tiers' && <TiersTab />}
-        {tab === 'logs' && data.is_cmo && <CmoLogs />}
+        {tab === 'logs' && Boolean(data.is_cmo) && <CmoLogs />}
       </Stack.Item>
     </Stack>
   );
@@ -145,6 +147,27 @@ function BillingTab() {
   const [patient, setPatient] = useState('');
   const [amount, setAmount] = useState(0);
   const [reason, setReason] = useState(DEFAULT_BILL_REASON_RU);
+  const pendingBills = data.pending_bills ?? [];
+  const issuedBills = data.issued_bills ?? [];
+  const surgeries = data.surgeries ?? [];
+  const [surgeryIdx, setSurgeryIdx] = useState<string>('');
+  const [localPending, setLocalPending] = useState(pendingBills);
+  const [localIssued, setLocalIssued] = useState(issuedBills);
+
+  useEffect(() => setLocalPending(pendingBills), [data.pending_bills]);
+  useEffect(() => setLocalIssued(issuedBills), [data.issued_bills]);
+
+  function handleSelectSurgery(value: string | number) {
+    const idx = Number(value);
+    if (!Number.isNaN(idx) && surgeries[idx]) {
+      const s = surgeries[idx];
+      setSurgeryIdx(String(idx));
+      setAmount(s.price || 0);
+      setReason(s.name || DEFAULT_BILL_REASON_RU);
+    } else {
+      setSurgeryIdx('');
+    }
+  }
 
   function handleSelectPatient(value: string | number) {
     setPatient(String(value));
@@ -171,24 +194,30 @@ function BillingTab() {
         </Section>
       </Stack.Item>
 
-      {data.pending_bills?.length ? (
+      {localPending.length ? (
         <Stack.Item>
           <Section title="Счета к оплате">
             <LabeledList>
-              {data.pending_bills.map((b) => (
+              {localPending.map((b) => (
                 <LabeledList.Item
                   key={b.id}
                   label={`От: ${b.issuer || 'Медотдел'}`}
                   buttons={
                     <>
                       <Button
-                        onClick={() => act('accept_bill', { id: b.id })}
+                        onClick={() => {
+                          setLocalPending((list) => list.filter((x) => x.id !== b.id));
+                          act('accept_bill', { id: b.id });
+                        }}
                         disabled={b.expired}
                       >
                         Оплатить
                       </Button>
                       <Button
-                        onClick={() => act('decline_bill', { id: b.id })}
+                        onClick={() => {
+                          setLocalPending((list) => list.filter((x) => x.id !== b.id));
+                          act('decline_bill', { id: b.id });
+                        }}
                         ml={1}
                       >
                         Отклонить
@@ -197,7 +226,7 @@ function BillingTab() {
                   }
                 >
                   Сумма: {b.amount} кр. — {b.reason || DEFAULT_BILL_REASON_RU}
-                  {b.expired && (
+                  {Boolean(b.expired) && (
                     <Box inline ml={1} color="bad">
                       (истёк срок)
                     </Box>
@@ -209,7 +238,7 @@ function BillingTab() {
         </Stack.Item>
       ) : null}
 
-      {data.is_med_staff && (
+      {Boolean(data.is_med_staff) ? (
         <Stack.Item>
           <Section title="Выставить счёт пациенту">
             <LabeledList>
@@ -224,6 +253,28 @@ function BillingTab() {
                   onSelected={handleSelectPatient}
                   width="60%"
                 />
+              </LabeledList.Item>
+              <LabeledList.Item label="Операция">
+                <Dropdown
+                  selected={surgeryIdx}
+                  displayText={
+                    surgeryIdx !== '' && surgeries[Number(surgeryIdx)]
+                      ? `${surgeries[Number(surgeryIdx)].name} — ${surgeries[Number(surgeryIdx)].price} кр.`
+                      : surgeries.length ? 'Выберите...' : 'Нет данных'
+                  }
+                  options={surgeries.map((s, i) => ({
+                    value: String(i),
+                    displayText: `${s.name} — ${s.price} кр.${s.advanced ? ' • продв.' : ''}`,
+                  }))}
+                  onSelected={handleSelectSurgery}
+                  disabled={surgeries.length === 0}
+                  width="60%"
+                />
+                {surgeryIdx !== '' && (
+                  <Button ml={1} onClick={() => setSurgeryIdx('')}>
+                    Сбросить
+                  </Button>
+                )}
               </LabeledList.Item>
               <LabeledList.Item label="Сумма">
                 <NumberInput
@@ -252,20 +303,23 @@ function BillingTab() {
             </Box>
           </Section>
         </Stack.Item>
-      )}
+      ) : null}
 
-      {data.is_med_staff && data.issued_bills?.length ? (
+      {Boolean(data.is_med_staff) && localIssued.length ? (
         <Stack.Item>
           <Section title="Выставленные счета">
             <LabeledList>
-              {data.issued_bills.map((b) => (
+              {localIssued.map((b) => (
                 <LabeledList.Item
                   key={b.id}
                   label={`Пациент: ${b.patient || '—'}`}
                   buttons={
                     <Button.Confirm
                       color="bad"
-                      onClick={() => act('cancel_bill', { id: b.id })}
+                      onClick={() => {
+                        setLocalIssued((list) => list.filter((x) => x.id !== b.id));
+                        act('cancel_bill', { id: b.id });
+                      }}
                     >
                       Отменить
                     </Button.Confirm>
@@ -314,6 +368,8 @@ function TiersTab() {
 function CmoLogs() {
   const { act, data } = useBackend<Data>();
   const hist = data.cmo_history ?? [];
+  const [localHist, setLocalHist] = useState(hist);
+  useEffect(() => setLocalHist(hist), [data.cmo_history]);
   const kiosk = data.cmo_kiosk_report ?? { total: 0, covered: 0 };
   const totalInsurance = data.cmo_insurance_income_total ?? 0;
 
@@ -322,15 +378,18 @@ function CmoLogs() {
       <Stack.Item>
         <Section title="Принятые счета">
           <LabeledList>
-            {hist.length === 0 && <LabeledList.Item label="Нет данных" />}
-            {hist.map((h) => (
+            {localHist.length === 0 && <LabeledList.Item label="Нет данных" />}
+            {localHist.map((h) => (
               <LabeledList.Item
                 key={h.id}
                 label={`Пациент: ${h.patient}`}
                 buttons={
                   <Button.Confirm
                     color="bad"
-                    onClick={() => act('cmo_refund', { id: h.id })}
+                    onClick={() => {
+                      setLocalHist((list) => list.filter((x) => x.id !== h.id));
+                      act('cmo_refund', { id: h.id });
+                    }}
                   >
                     Вернуть
                   </Button.Confirm>
