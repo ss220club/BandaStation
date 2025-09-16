@@ -15,10 +15,6 @@
 		Корпорация не несёт ответственности за использование устройства третьими лицами, \
 		а также за любые действия, совершённые с его применением в случае кражи».")
 
-/obj/item/jammer/nt/Initialize(mapload)
-	. = ..()
-	register_context()
-
 /obj/item/jammer/nt/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	context[SCREENTIP_CONTEXT_RMB] = "Переключить"
 	return CONTEXTUAL_SCREENTIP_SET
