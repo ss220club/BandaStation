@@ -9,8 +9,6 @@
 		"[span_bold("Offer mob to ghosts")] -> Left Mouse Button on mob"))
 	)
 
-/datum/buildmode_mode/offer/Reset()
-	. = ..()
 
 /datum/buildmode_mode/offer/handle_click(client/user, params, object)
 	if (!check_rights(R_ADMIN))
