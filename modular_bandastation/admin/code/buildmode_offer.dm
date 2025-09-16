@@ -8,7 +8,6 @@
 		span_purple(boxed_message("[span_bold("Предложить моба призракам")] -> ЛКМ по мобу")
 	)
 
-
 /datum/buildmode_mode/offer/handle_click(client/user, params, object)
 	if (!ismob(object))
 		return
