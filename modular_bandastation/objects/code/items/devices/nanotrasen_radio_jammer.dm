@@ -2,7 +2,7 @@
 	name = "Nanotrasen radio jammer"
 	desc = "Корпоративный генератор помех Нанотрейзен. Компактное устройство, способное эффективно блокировать широкий спектр радиочастот."
 	icon = 'modular_bandastation/objects/icons/obj/items/nt_radio_jammer.dmi'
-	icon_state = "nt_jammer_v2"
+	icon_state = "jammer_nt"
 	range = 18
 	whitelisted_frequencies = list(
 		FREQ_CENTCOM
