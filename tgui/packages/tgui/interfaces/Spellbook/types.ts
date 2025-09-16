@@ -50,9 +50,9 @@ export type TabType = {
 }>;
 
 export enum Buywords {
-  Learn = 'Learn',
-  Summon = 'Summon',
-  Cast = 'Cast',
+  Learn = 'Выучить',
+  Summon = 'Призвать',
+  Cast = 'Произнести',
 }
 
 export enum Tab {
