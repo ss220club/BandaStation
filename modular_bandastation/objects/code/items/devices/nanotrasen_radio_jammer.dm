@@ -4,7 +4,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/items/nt_radio_jammer.dmi'
 	icon_state = "nt_jammer_v2"
 	range = 18
-	whitelist_frequencies = list(
+	whitelisted_frequencies = list(
 		"ЦК"
 	)
 	var/centcom_blackout = FALSE
