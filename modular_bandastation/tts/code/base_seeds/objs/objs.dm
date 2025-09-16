@@ -77,9 +77,6 @@
 /obj/machinery/vending/drugs/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/alchemist)
 
-/obj/machinery/vending/drugs/add_tts_component()
-	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/medic)
-
 /obj/machinery/vending/hydroseeds/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/norroa)
 
