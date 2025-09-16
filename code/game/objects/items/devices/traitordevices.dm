@@ -318,7 +318,7 @@ effective or pretty fucking useless.
 /proc/is_within_radio_jammer_range(atom/source, freq) // BANDASTATION EDIT - Jammer whitelisted channels: added `freq`
 	for(var/obj/item/jammer/jammer as anything in GLOB.active_jammers)
 		if(IN_GIVEN_RANGE(source, jammer, jammer.range))
-			//BANDASTATION EDIT: Check for frequencies
+			//BANDASTATION EDIT START - Jammer whitelisted channels
 			if(freq in jammer.whitelisted_frequencies)
 				continue
 			return TRUE
