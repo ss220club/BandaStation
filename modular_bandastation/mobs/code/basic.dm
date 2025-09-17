@@ -16,6 +16,8 @@
 	response_help_continuous = "гладит"
 	response_help_simple = "гладите"
 	response_disarm_continuous = "осторожно отодвигает в сторону"
+	response_disarm_simple = "осторожно отодвигает в сторону"
+	response_disarm_continuous = "осторожно отодвигаете в сторону"
 	response_disarm_simple = "осторожно отодвигаете в сторону"
 
 	maxHealth = 250
