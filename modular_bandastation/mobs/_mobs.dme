@@ -1,5 +1,9 @@
 #include "_mobs.dm"
 
+#include "code/basic.dm"
+#include "code/mobs_resting.dm"
+#include "code/mob_holder.dm"
+#include "code/mob_spawner.dm"
 #include "code/simple_animal/friendly/butterfly.dm"
 #include "code/simple_animal/friendly/crab.dm"
 #include "code/simple_animal/friendly/farm_animals.dm"
@@ -33,6 +37,3 @@
 #include "code/simple_animal/named_animals.dm"
 #include "code/simple_animal/overrides.dm"
 #include "code/supplypacks/livestock_pack_animals.dm"
-#include "code/basic.dm"
-#include "code/mob_holder.dm"
-#include "code/mob_spawner.dm"

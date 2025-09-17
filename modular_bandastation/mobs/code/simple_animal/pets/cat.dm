@@ -15,7 +15,6 @@
 	icon_state = "iriska"
 	icon_living = "iriska"
 	icon_dead = "iriska_dead"
-	icon_resting = "iriska"
 	gender = FEMALE
 	mob_size = MOB_SIZE_LARGE // THICK!!!
 	//canmove = FALSE
@@ -38,7 +37,6 @@
 	icon_state = "penny"
 	icon_living = "penny"
 	icon_dead = "penny_dead"
-	icon_resting = "penny_rest"
 	gender = MALE
 	// holder_type = /obj/item/holder/cak
 
@@ -50,7 +48,6 @@
 	icon_state = "crusher"
 	icon_living = "crusher"
 	icon_dead = "crusher_dead"
-	icon_resting = "crusher_rest"
 	gender = MALE
 	// holder_type = /obj/item/holder/crusher
 
@@ -63,7 +60,6 @@
 	icon_state = "salem"
 	icon_living = "salem"
 	icon_dead = "salem_dead"
-	icon_resting = "salem_rest"
 	gender = MALE
 	// holder_type = /obj/item/holder/cat
 
@@ -73,7 +69,6 @@
 	icon_state = "spacecat"
 	icon_living = "spacecat"
 	icon_dead = "spacecat_dead"
-	icon_resting = "spacecat_rest"
 	unsuitable_atmos_damage = 0
 	minbodytemp = TCMB
 	maxbodytemp = T0C + 40
@@ -87,7 +82,6 @@
 	icon_state = "floppa"
 	icon_living = "floppa"
 	icon_dead = "floppa_dead"
-	icon_resting = "floppa_rest"
 
 /mob/living/basic/pet/cat/fat/iriska
 	name = "Ириска"
