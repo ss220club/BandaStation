@@ -30,47 +30,45 @@
 	if(!owner)
 		return
 
-	shadow_team = get_shadow_hive()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	shadow_team = hive
 	shadow_team.setup_objectives()
 
-	if(!added_to_team && owner)
+	if(!added_to_team)
 		shadow_team.add_member(owner)
 		added_to_team = TRUE
 
 	var/mob/living/carbon/human/H = owner.current
 	if(istype(H))
 		shadow_team.join_member(H, ling_role)
-
 		if(!is_thrall)
-			shadowling_grant_hatch(H)
+			hive.shadowling_grant_hatch(H)
 
 	objectives |= shadow_team.get_objectives()
 
-	var/mob/living/current = owner.current
-	if(current)
-		add_team_hud(current)
-
-	if(H)
-		shadow_team.sync_after_event(H)
-
 	. = ..()
+
+	if(istype(H))
+		add_team_hud(H)
+		shadow_team.sync_after_event(H)
 
 	owner.announce_objectives()
 
 /datum/antagonist/shadowling/on_removal()
 	var/mob/living/carbon/human/H = owner?.current
-	if(istype(H))
-		for(var/datum/action/cooldown/ability in H.actions)
-			if(ability.type in typesof(/datum/action/cooldown/shadowling))
-				ability.Remove(H)
 
-		var/datum/team/shadow_hive/hive = get_shadow_hive()
-		if(hive)
-			hive.leave_member(H)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(istype(H) && hive)
+		hive.leave_member(H)
 
 	if(shadow_team && owner)
 		shadow_team.remove_member(owner)
 	added_to_team = FALSE
+
+	if(istype(H))
+		for(var/datum/action/cooldown/ability in H.actions)
+			if(ability.type in typesof(/datum/action/cooldown/shadowling))
+				ability.Remove(H)
 
 	. = ..()
 
@@ -131,11 +129,7 @@
 		baseline_population = 1
 
 /datum/objective/shadowling/enslave_fraction/proc/required_thralls()
-	var/need_exact = (baseline_population * percent) / 100
-	var/need = round(need_exact)
-	if(need < need_exact)
-		need++
-	return max(1, need)
+	return max(1, floor((baseline_population * percent) / 100))
 
 /datum/objective/shadowling/enslave_fraction/proc/current_thralls()
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
@@ -162,7 +156,7 @@
 	admin_grantable = TRUE
 
 /datum/objective/shadowling/ascend/update_explanation_text()
-	explanation_text = "Возвыситься, приняв высшую форму Тенелинга."
+	explanation_text = "Возвыситься, приняв высшую форму Тенеморфа."
 
 /datum/objective/shadowling/ascend/check_completion()
 	if(!owner || !owner.current)
@@ -192,7 +186,7 @@
 			total_lings++
 			if(!QDELETED(L) && L.stat != DEAD)
 				alive_lings++
-		report += "<span class='notice'>Слуг (живых): [alive_thralls]. Шадоулинги живы: [alive_lings]/[total_lings].</span>"
+		report += "<span class='notice'>Слуг (живых): [alive_thralls]. Тенеморфы живы: [alive_lings]/[total_lings].</span>"
 	if(objectives.len == 0 || objectives_complete)
 		report += "<span class='greentext big'>[name] был успешен!</span>"
 	else
@@ -201,23 +195,3 @@
 
 /datum/antagonist/shadowling/get_team()
 	return shadow_team
-
-/datum/antagonist/shadow_thrall/get_team()
-	return shadow_team
-
-/proc/shadowling_grant_hatch(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-	for(var/datum/action/cooldown/shadowling/hatch/X in H.actions)
-		return
-	var/datum/action/cooldown/shadowling/hatch/A = new
-	A.Grant(H)
-
-/proc/shadowling_grant_nightvision(mob/living/carbon/human/H)
-	if(!istype(H))
-		return null
-	for(var/datum/action/cooldown/shadowling/toggle_night_vision/X in H.actions)
-		return X
-	var/datum/action/cooldown/shadowling/toggle_night_vision/A = new
-	A.Grant(H)
-	return A

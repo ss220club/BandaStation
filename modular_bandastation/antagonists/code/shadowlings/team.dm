@@ -81,7 +81,7 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 	if(H.mind && (H.mind in members))
 		members -= H.mind
 
-/datum/team/shadow_hive/proc/_on_member_qdel(mob/living/source, force)
+/datum/team/shadow_hive/proc/_on_member_qdel(mob/living/source)
 	SIGNAL_HANDLER
 	lings -= source
 	thralls -= source
@@ -223,3 +223,20 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 	_shadowling_dedupe_teams()
 	return T
 
+
+/datum/team/shadow_hive/proc/shadowling_grant_hatch(mob/living/carbon/human/H)
+	if(!istype(H))
+		return null
+	for(var/datum/action/cooldown/shadowling/hatch/X in H.actions)
+		return X
+	var/datum/action/cooldown/shadowling/hatch/A = new
+	A.Grant(H)
+
+/datum/team/shadow_hive/proc/shadowling_grant_nightvision(mob/living/carbon/human/H)
+	if(!istype(H))
+		return null
+	for(var/datum/action/cooldown/shadowling/toggle_night_vision/X in H.actions)
+		return X
+	var/datum/action/cooldown/shadowling/toggle_night_vision/A = new
+	A.Grant(H)
+	return A

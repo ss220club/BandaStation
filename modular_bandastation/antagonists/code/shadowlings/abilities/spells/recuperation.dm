@@ -1,6 +1,6 @@
 /datum/action/cooldown/shadowling/recuperation
 	name = "Рекуперация"
-	desc = "Преобразовать связанного слугу в младшего шадоулинга. Требует 15 секунд и неподвижности цели."
+	desc = "Преобразовать связанного слугу в младшего тенеморфа. Требует 15 секунд и неподвижности цели."
 	button_icon_state = "shadow_recuperation"
 	cooldown_time = 45 SECONDS
 	requires_dark_user = FALSE
@@ -79,11 +79,11 @@
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
 			ability.Remove(T)
 
-	// делаем из слуги младшего шадоулинга
+	// делаем из слуги младшего тенеморфа
 	hive.join_member(T, SHADOWLING_ROLE_LESSER)
 
-	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим шадоулингом."))
-	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим шадоулингом!"))
+	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим тенеморфом."))
+	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим тенеморфом!"))
 	playsound(get_turf(T), sfx_end, 65, TRUE)
 
 	stop_beam()

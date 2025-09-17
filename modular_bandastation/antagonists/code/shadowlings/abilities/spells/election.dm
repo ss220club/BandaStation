@@ -1,6 +1,6 @@
 /datum/action/cooldown/shadowling/election
 	name = "Голос лидера"
-	desc = "Запустить голосование за лидера улья среди шадоулингов. Победитель получит одноразовый «Саботаж двигателей»."
+	desc = "Запустить голосование за лидера улья среди тенеморфов. Победитель получит одноразовый «Саботаж двигателей»."
 	button_icon_state = "shadow_vote"
 	cooldown_time = 0
 	requires_dark_user = FALSE
