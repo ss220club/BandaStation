@@ -10,9 +10,6 @@
 	maxHealth = 80
 	health = 80
 
-/mob/living/basic/pig/sanya/npc_safe(mob/user) // depriving the chef of his animals is not cool
-	return FALSE
-
 /mob/living/basic/hostile/retaliate/goat/chef
 	name = "Боря"
 	desc = "Этот козёл - парнокопытное гурме шефа, в его мрачных глазах-бусинках так и читается амибициозный нрав! Он не твой друг, ведь за каждым игривым прыжком может скрываться неожиданный выпад."
@@ -33,9 +30,6 @@
 	maxHealth = 20
 	health = 20
 
-/mob/living/basic/chicken/wife/npc_safe(mob/user) // depriving the chef of his animals is not cool
-	return FALSE
-
 /mob/living/basic/cock/clucky
 	name = "Коммандор Клакки"
 	desc = "Его великая армия бесчисленна. Ко-ко-ко."
@@ -43,9 +37,6 @@
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 40 // Veteran
 	health = 40
-
-/mob/living/basic/cock/clucky/npc_safe(mob/user) // depriving the chef of his animals is not cool
-	return FALSE
 
 /mob/living/basic/goose/scientist
 	name = "Гуськор"
@@ -61,9 +52,6 @@
 	maxHealth = 80
 	health = 80
 	resting = TRUE
-
-/mob/living/basic/goose/scientist/npc_safe(mob/user)
-	return FALSE
 
 /mob/living/basic/hostile/lizard/croco/gena
 	name = "Гена"

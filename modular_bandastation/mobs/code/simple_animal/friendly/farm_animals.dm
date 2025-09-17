@@ -74,9 +74,6 @@
 	footstep_type = FOOTSTEP_MOB_CLAW
 	// holder_type = /obj/item/holder/cock
 
-/mob/living/basic/cock/npc_safe(mob/user)
-	return TRUE
-
 /mob/living/basic/pig
 	name = "свинья"
 	attack_verb_continuous = "лягает"
@@ -84,9 +81,6 @@
 	death_sound = 'modular_bandastation/mobs/sound/pig_death.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
 	damaged_sound = list()
-
-/mob/living/basic/pig/npc_safe(mob/user)
-	return TRUE
 
 /mob/living/basic/turkey
 	name = "индюшка"
@@ -106,9 +100,6 @@
 	death_sound = 'modular_bandastation/mobs/sound/duck_quak1.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/duck_talk1.ogg', 'modular_bandastation/mobs/sound/duck_talk2.ogg', 'modular_bandastation/mobs/sound/duck_talk3.ogg', 'modular_bandastation/mobs/sound/duck_quak1.ogg', 'modular_bandastation/mobs/sound/duck_quak2.ogg', 'modular_bandastation/mobs/sound/duck_quak3.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/duck_aggro1.ogg', 'modular_bandastation/mobs/sound/duck_aggro2.ogg')
-
-/mob/living/basic/goose/npc_safe(mob/user)
-	return TRUE
 
 /mob/living/basic/goose/gosling
 	name = "гусенок"
