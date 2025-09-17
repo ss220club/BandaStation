@@ -1,6 +1,6 @@
 /mob/living/basic/mouse
 	var/non_standard = FALSE // for no "mouse_" with mouse_color
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	//icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
 	death_sound = 'modular_bandastation/mobs/sound/rat_death.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/rat_talk.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/rat_wound.ogg')

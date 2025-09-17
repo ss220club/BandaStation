@@ -1,56 +1,62 @@
-// Meat
-/obj/item/food/meat/dog
+/obj/item/food/meat/slab/dog
 	name = "dog meat"
-	desc = "Не слишком питательно. Но говорят деликатес космокорейцев."
-	list_reagents = list("protein" = 2, "epinephrine" = 2)
+	desc = "Не слишком питательно, Но говорят деликатес для космокорейцев."
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 2,
+		/datum/reagent/consumable/nutriment/epinephrine = 2
+	)
+	foodtypes = RAW | MEAT | GORE
+	tastes = list("meat" = 1)
 
-/obj/item/food/meat/security
-	name = "security meat"
-	desc = "Мясо наполненное чувством мужества и долга."
-	list_reagents = list("protein" = 3, "epinephrine" = 5)
-
-/obj/item/food/meat/pug
+/obj/item/food/meat/slab/pug
 	name = "pug meat"
 	desc = "Чуть менее очарователен в нарезке."
-	list_reagents = list("protein" = 2, "epinephrine" = 2)
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 2,
+		/datum/reagent/consumable/nutriment/epinephrine = 2
+	)
+	foodtypes = RAW | MEAT | GORE
+	tastes = list("meat" = 1)
 
-/obj/item/food/meat/ham/old
-	name = "жесткая ветчина"
-	desc = "Мясо почтенного хряка."
-	list_reagents = list("protein" = 2, "porktonium" = 10)
+/obj/item/food/meat/slab/security
+	name = "security meat"
+	desc = "Мясо наполненное чувством мужества и долга."
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 3,
+		/datum/reagent/consumable/nutriment/epinephrine = 5
+	)
+	foodtypes = RAW | MEAT
+	tastes = list("meat" = 1)
 
-/obj/item/food/meat/mouse
+/obj/item/food/meat/slab/mouse
 	name = "мышатина"
 	desc = "На безрыбье и мышь мясо. Кто знает чем питался этот грызун до его подачи к столу."
 	icon = 'modular_bandastation/mobs/icons/items.dmi'
 	icon_state = "meat_clear"
-	list_reagents = list("nutriment" = 2, "blood" = 3, "toxin" = 1)
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/nutriment = 2,
+		/datum/reagent/consumable/blood = 3,
+		/datum/reagent/toxin = 1
+	)
+	foodtypes = RAW | MEAT | GORE
+	tastes = list("meat" = 1)
 
-/obj/item/food/salmonmeat/snailmeat
+/obj/item/food/meat/slab/snailmeat
 	name = "snail meat"
 	desc = "Сырая космо-улитка в собственном соку."
-	filling_color = "#6bb4a8"
-	list_reagents = list("protein" = 5, "vitamin" = 5)
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 2,
+		/datum/reagent/consumable/nutriment/vitamin = 5
+	)
+	foodtypes = RAW | MEAT
+	tastes = list("meat" = 1)
 
-/obj/item/food/salmonmeat/turtlemeat
-	name = "snail meat"
-	desc = "Сырая космо-улитка в собственном соку."
-	filling_color = "#2fa24c"
-	list_reagents = list("protein" = 10, "vitamin" = 8)
-
-/obj/structure/bed/dogbed/pet
-	name = "Удобная лежанка"
-	desc = "Комфортная лежанка для любимейшего питомца отдела."
-	anchored = TRUE
-
-// Останки
-/obj/effect/decal/remains/mouse
-	name = "remains"
-	desc = "Некогда бывшая мышь. Её останки. Больше не будет пищать..."
-	icon = 'modular_bandastation/mobs/icons/items.dmi'
-	icon_state = "mouse_skeleton"
-	anchored = FALSE
-	move_resist = MOVE_FORCE_EXTREMELY_WEAK
-
-/obj/effect/decal/remains/mouse/water_act(volume, temperature, source, method)
-	. = ..()
+/obj/item/food/meat/slab/turtlemeat
+	name = "turtle meat"
+	desc = "Сырая космо-черепаха в собственном соку."
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 6,
+		/datum/reagent/consumable/nutriment/vitamin = 8
+	)
+	foodtypes = RAW | MEAT
+	tastes = list("meat" = 1)
