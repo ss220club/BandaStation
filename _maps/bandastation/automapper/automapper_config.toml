@@ -279,6 +279,7 @@ map_files = ["tramstation_teleporter.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [55, 130, 2]
+trait_name = "Station"
 
 [templates.tramstation_meeting_room]
 map_files = ["tramstation_meeting_room.dmm"]
