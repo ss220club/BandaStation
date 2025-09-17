@@ -1,5 +1,5 @@
 /datum/surgery/implant_removal
-	name = "Implant Removal"
+	name = "Извлечение имплантов"
 	target_mobtypes = list(/mob/living)
 	possible_locs = list(BODY_ZONE_CHEST)
 	surgery_flags = SURGERY_REQUIRE_RESTING
@@ -13,7 +13,7 @@
 
 //extract implant
 /datum/surgery_step/extract_implant
-	name = "extract implant (hemostat)"
+	name = "извлеките имплант (гемостат)"
 	implements = list(
 		TOOL_HEMOSTAT = 100,
 		TOOL_CROWBAR = 65,
@@ -28,18 +28,18 @@
 		display_results(
 			user,
 			target,
-			span_notice("You begin to extract [implant] from [target]'s [target_zone]..."),
-			span_notice("[user] begins to extract [implant] from [target]'s [target_zone]."),
-			span_notice("[user] begins to extract something from [target]'s [target_zone]."),
+			span_notice("Вы начинаете извлекать [implant.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]..."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает извлекать [implant.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает что-то извлекать из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]."),
 		)
-		display_pain(target, "You feel a serious pain in your [target_zone]!")
+		display_pain(target, "Вы чуствуете острую боль в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)]!")
 	else
 		display_results(
 			user,
 			target,
-			span_notice("You look for an implant in [target]'s [target_zone]..."),
-			span_notice("[user] looks for an implant in [target]'s [target_zone]."),
-			span_notice("[user] looks for something in [target]'s [target_zone]."),
+			span_notice("Вы ищете имплант в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]..."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] ищет имплант в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] ищет что-то в [ru_parse_zone(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 		)
 
 /datum/surgery_step/extract_implant/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
@@ -47,11 +47,11 @@
 		display_results(
 			user,
 			target,
-			span_notice("You successfully remove [implant] from [target]'s [target_zone]."),
-			span_notice("[user] successfully removes [implant] from [target]'s [target_zone]!"),
-			span_notice("[user] successfully removes something from [target]'s [target_zone]!"),
+			span_notice("Вы успешно извлекли [implant.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно извлек [implant.declent_ru(ACCUSATIVE)] из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно извлек что-то из [ru_parse_zone(target_zone, GENITIVE)] у [target.declent_ru(GENITIVE)]!"),
 		)
-		display_pain(target, "You can feel your [implant.name] pulled out of you!")
+		display_pain(target, "Вы чувствуете, как [implant.declent_ru(ACCUSATIVE)] извлекли из вас!")
 		implant.removed(target)
 
 		if (!QDELETED(implant))
@@ -68,19 +68,19 @@
 				display_results(
 					user,
 					target,
-					span_notice("You place [implant] into [case]."),
-					span_notice("[user] places [implant] into [case]!"),
-					span_notice("[user] places it into [case]!"),
+					span_notice("Вы помещаете [implant.declent_ru(ACCUSATIVE)] в [case.declent_ru(ACCUSATIVE)]."),
+					span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает [implant.declent_ru(ACCUSATIVE)] в [case.declent_ru(ACCUSATIVE)]!"),
+					span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает что-то в [case.declent_ru(ACCUSATIVE)]!"),
 				)
 			else
 				qdel(implant)
 		implant = null
 	else
-		to_chat(user, span_warning("You can't find anything in [target]'s [target_zone]!"))
+		to_chat(user, span_warning("Вы не можете найти ничего в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"))
 	return ..()
 
 /datum/surgery/implant_removal/mechanic
-	name = "Implant Removal"
+	name = "Удаление имплантов"
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	target_mobtypes = list(/mob/living/carbon/human) // Simpler mobs don't have bodypart types
 	surgery_flags = parent_type::surgery_flags | SURGERY_REQUIRE_LIMB
