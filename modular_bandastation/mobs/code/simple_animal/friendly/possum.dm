@@ -36,9 +36,12 @@
 	speak_chance = 1
 	turns_per_move = 10
 	gold_core_spawnable = FRIENDLY_SPAWN
-	footstep_type = FOOTSTEP_MOB_CLAW
 	butcher_results = list(/obj/item/food/meat = 2)
 	// holder_type = /obj/item/holder/possum
+
+/mob/living/basic/possum/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 
 /mob/living/basic/possum/attackby__legacy__attackchain(obj/item/O, mob/living/user)
 	icon_state = icon_harm

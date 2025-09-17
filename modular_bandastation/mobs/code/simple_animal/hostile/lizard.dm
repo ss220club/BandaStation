@@ -32,12 +32,16 @@
 	death_sound = 'modular_bandastation/mobs/sound/lizard_death_big.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/lizard_angry1.ogg', 'modular_bandastation/mobs/sound/lizard_angry2.ogg', 'modular_bandastation/mobs/sound/lizard_angry3.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/lizard_damaged.ogg')
-	footstep_type = FOOTSTEP_MOB_CLAW
 
 	minbodytemp = 250 //Weak to cold
 	maxbodytemp = T0C + 200
 
 	gold_core_spawnable = HOSTILE_SPAWN
+
+
+/mob/living/basic/hostile/lizard/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 
 /mob/living/basic/hostile/lizard/gator
 	name = "аллигатор"
