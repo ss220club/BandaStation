@@ -176,7 +176,7 @@
 
 	if(circle)
 		circle.stop_and_fade()
-
+	shadowling_begin_roundender(H)
 	StartCooldown()
 	return TRUE
 

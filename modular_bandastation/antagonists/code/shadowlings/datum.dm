@@ -195,3 +195,32 @@
 
 /datum/antagonist/shadowling/get_team()
 	return shadow_team
+
+/proc/shadowling_begin_roundender(mob/living/carbon/human/ascended=null)
+	if(GLOB.shadowling_roundender_started)
+		return
+	GLOB.shadowling_roundender_started = TRUE
+
+	send_to_playing_players("<span class='shadowradio'><b>ЕДИНАЯ ТЕНЬ ПОГЛОЩАЕТ СТАНЦИЮ!</b></span>")
+	sound_to_playing_players(SHADOWLING_RISEN_MUSIC, 70)
+
+	priority_announce(
+		text = "Зафиксировано поглощение объекта огромной теневой сущностью."+\
+			"Протокол: ЭВАКУАЦИЯ НЕОТЛОЖНО. Приказы на запуск шаттла подтверждены.",
+		title = "[command_name()]: Отдел паранормальных явлений",
+		sound = SSstation.announcer.get_rand_report_sound(),
+		has_important_message = TRUE,
+	)
+
+	var/atom/hostile_ref = ascended ? ascended : world
+	SSshuttle.registerHostileEnvironment(hostile_ref)
+	SSshuttle.lockdown = TRUE
+
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(_shadowling_roundender_phase2)), 15 SECONDS)
+
+/proc/_shadowling_roundender_phase2()
+	priority_announce(
+		text = "Подтверждаем: вызов эвакуационного шаттла не подлежит отмене. Экипажу занять точки эвакуации!",
+		title = "[command_name()]: Центр управления",
+		sound = SSstation.announcer.get_rand_report_sound(),
+	)
