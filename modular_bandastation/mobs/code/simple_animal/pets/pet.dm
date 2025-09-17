@@ -14,5 +14,4 @@
 	icon_state = "cool_sloth"
 	icon_living = "cool_sloth"
 	icon_dead = "cool_sloth_dead"
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN

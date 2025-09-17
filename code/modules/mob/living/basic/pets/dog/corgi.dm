@@ -347,7 +347,6 @@
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
 	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
 	///Tracks how many rounds did Ian survive from start to finish
 	var/age = 0
 	///Callback to execute upon roundend to check whether Ian has survived the round or not
@@ -476,7 +475,6 @@
 	speak_emote = list("growls", "barks ominously")
 	gold_core_spawnable = NO_SPAWN
 	can_be_shaved = FALSE
-	unique_pet = TRUE
 	held_state = "narsian"
 	/// Mobs we will consume in the name of Nar'Sie
 	var/static/list/edible_types = list(/mob/living/basic/pet)
@@ -526,7 +524,6 @@
 	gender = FEMALE
 	desc = "She's tearing you apart."
 	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
 	icon_state = "lisa"
 	icon_living = "lisa"
 	icon_dead = "lisa_dead"

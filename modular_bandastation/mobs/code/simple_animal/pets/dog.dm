@@ -47,7 +47,6 @@
 	faction = list("neutral", "clockwork_cult")
 	gold_core_spawnable = NO_SPAWN
 	nofur = TRUE
-	unique_pet = TRUE
 	maxHealth = 100
 	health = 100
 
@@ -142,7 +141,6 @@
 	desc = "Собака, обожающая котов, особенно в сапогах, прекрасно лающая на Испанском, прошла терапевтические курсы, готова выслушать все ваши проблемы и выдать вам целебных объятий с завершением в виде почесыванием животика."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	resting = TRUE
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 
 /mob/living/basic/pet/dog/pug/frank
@@ -150,7 +148,6 @@
 	real_name = "Фрэнк"
 	desc = "Мопс полученный в результате эксперимента ученых в черном. Почему его не забрали интересный вопрос. Похоже он всем надоел своей болтовней, после чего его лишили дара речи."
 	resting = TRUE
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 
 
@@ -158,7 +155,6 @@
 	name = "Геннадий"
 	desc = "Собачий аристократ. Выглядит очень важным и начитанным. Доброжелательный любимец ассистентов."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 5
 	health = 5

@@ -41,7 +41,6 @@
 	icon_dead = "alisa_dead"
 	icon_resting = "alisa_rest"
 	faction = list("nanotrasen")
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
@@ -53,5 +52,4 @@
 	desc = "Миниатюрная лисичка c важным видом и очень большими ушами. Был пойман во время разливания огромного мороженого по формочкам и теперь Магистрат держит его при себе и следит за ним. Но похоже что ему даже нравится быть частью правосудия."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	resting = TRUE
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN

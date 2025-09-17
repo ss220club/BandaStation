@@ -6,7 +6,6 @@
 	icon_living = "pig_old"
 	icon_dead = "pig_old_dead"
 	butcher_results = list(/obj/item/food/meat/ham/old = 10)
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 80
 	health = 80
@@ -30,7 +29,6 @@
 	icon_state = "chicken_white"
 	icon_living = "chicken_white"
 	icon_dead = "chicken_white_dead"
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 20
 	health = 20
@@ -42,7 +40,6 @@
 	name = "Коммандор Клакки"
 	desc = "Его великая армия бесчисленна. Ко-ко-ко."
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 40 // Veteran
 	health = 40
@@ -60,7 +57,6 @@
 	icon_resting = "goose_labcoat_rest"
 	attack_verb_continuous = "щипает по научному"
 	attack_verb_simple = "умно щипает"
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 80
 	health = 80
@@ -77,7 +73,6 @@
 /mob/living/basic/mouse/brown/demon
 	name = "Мышедемон"
 	desc = "Секретная разработка синдиката. Сидит тут потому, что сам хочет"
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 20
 	health = 20
@@ -94,7 +89,6 @@
 	real_name = "Рататуй"
 	desc = "Личная крыса шеф повара, помогающая ему при готовке наиболее изысканных блюд. До момента пока он не пропадет и повар не начнет готовить что-то новенькое..."
 	mouse_color = "gray"
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 20
 	health = 20
@@ -107,7 +101,6 @@
 	name = "Реми"
 	real_name = "Реми"
 	desc = "Близкий друг Рататуя. Не любимец повара, но пока тот не мешает на кухне, ему разрешили здесь остаться. Очень толстая крыса."
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 25
 	health = 25
@@ -121,7 +114,6 @@
 	name = "Брейн"
 	real_name = "Брейн"
 	desc = "Сообразительная личная лабораторная крыса директора исследований, даже освоившая речь. Настолько часто сбегал, что его перестали помещать в клетку. Он явно хочет захватить мир. Где-то спрятался его напарник..."
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 20
 	health = 20
@@ -146,7 +138,6 @@
 	icon_living = "hamster_rep"
 	icon_dead = "hamster_rep_dead"
 	icon_resting = "hamster_rep_rest"
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	// holder_type = /obj/item/holder/hamster_rep
 	maxHealth = 20
@@ -163,7 +154,6 @@
 	icon_harm = "possum_poppy_aaa"
 	maxHealth = 50
 	health = 50
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN
 	// holder_type = /obj/item/holder/possum/poppy
 
@@ -173,5 +163,4 @@
 	desc = "Это Среда, мои чуваки!"
 	maxHealth = 20
 	health = 20
-	unique_pet = TRUE
 	gold_core_spawnable = NO_SPAWN

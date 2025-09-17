@@ -31,7 +31,6 @@
 	var/obj/item/inventory_head
 	faction = list("neutral", "syndicate")
 	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
 	can_hide = 1
 
 /mob/living/basic/hostile/retaliate/poison/snake/rouge/verb/chasetail()

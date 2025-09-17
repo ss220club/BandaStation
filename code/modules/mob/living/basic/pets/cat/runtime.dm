@@ -10,7 +10,6 @@
 	icon_dead = "cat_dead"
 	gender = FEMALE
 	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
 	///the family we will bring in when a round starts
 	var/list/family = null
 	///saved list of kids
