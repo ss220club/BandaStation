@@ -6,7 +6,7 @@
 /// Admin-spawn or random event
 /mob/living/basic/revenant
 	name = "revenant"
-	desc = "Злой дух."
+	desc = "Злобный дух."
 	icon = 'icons/mob/simple/mob.dmi'
 	icon_state = "revenant_idle"
 	mob_biotypes = MOB_SPIRIT | MOB_UNDEAD
@@ -158,7 +158,7 @@
 	. += "Текущая эссенция: [essence >= max_essence ? essence : "[essence] / [max_essence]"] Э"
 	. += "Всего украдено эссенции: [essence_accumulated] УЭ"
 	. += "Неиспользованная эссенция: [essence_excess] УЭ"
-	. += "Идеальные души похищены: [perfectsouls]"
+	. += "Идеальных душ похищено: [perfectsouls]"
 
 /mob/living/basic/revenant/update_health_hud()
 	if(isnull(hud_used))
@@ -372,7 +372,7 @@
 	SIGNAL_HANDLER
 	visible_message(
 		span_warning("[src] резко вздрагивает!"),
-		span_revendanger("Когда [weapon.declent_ru(ACCUSATIVE)] проходит сквозь вас, то вы чувствуете, как ваша сущность покидает вас!"),
+		span_revendanger("Когда [weapon.declent_ru(ACCUSATIVE)] проходит сквозь вас, вы чувствуете, как ваша сущность покидает вас!"),
 	)
 	apply_status_effect(/datum/status_effect/revenant/inhibited, 3 SECONDS)
 
