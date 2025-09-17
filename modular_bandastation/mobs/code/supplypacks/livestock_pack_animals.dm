@@ -1,60 +1,67 @@
-// Dogs
+// --------------------
+// 🐶 Dogs
+// --------------------
+
 /datum/supply_pack/critter/corgi
-	name = "Corgi Crate"
-	desc = "Considered the optimal dog breed by thousands of research scientists, this Corgi is but one dog from the millions of Ian's noble bloodline."
+	name = "Ящик с корги"
+	desc = "Оптимальная собака по версии тысяч исследователей. В комплекте ошейник!"
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/dog/corgi)
-	crate_name = "corgi crate"
+	crate_name = "ящик с корги"
 
 /datum/supply_pack/critter/pug
-	name = "Pug Crate"
-	desc = "Like a normal dog, but... squished. Contains one pug."
+	name = "Ящик с мопсом"
+	desc = "Почти как обычная собака, но сплюснутая. Содержит одного мопса."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/dog/pug)
-	crate_name = "pug crate"
+	crate_name = "ящик с мопсом"
 
 /datum/supply_pack/critter/dog_bullterrier
-	name = "Bull Terrier Crate"
-	desc = "Like a normal dog, but with a head the shape of an egg. Contains one bull terrier."
+	name = "Ящик с бультерьером"
+	desc = "Собака с яйцеобразной головой. Содержит одного бультерьера."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/dog/bullterrier)
-	crate_name = "bull terrier crate"
+	crate_name = "ящик с бультерьером"
 
 /datum/supply_pack/critter/dog_tamaskan
-	name = "Tamaskan Crate"
-	desc = "A wolf-like dog breed known for its intelligence and loyalty. Contains one tamaskan."
+	name = "Ящик с тамасканом"
+	desc = "Похож на волка, известен умом и верностью. Содержит одного тамаскана."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/dog/tamaskan)
-	crate_name = "tamaskan crate"
+	crate_name = "ящик с тамасканом"
 
 /datum/supply_pack/critter/dog_german
-	name = "German Shepherd Crate"
-	desc = "A strong, intelligent working dog often used by security forces. Contains one german shepherd."
+	name = "Ящик с овчаркой"
+	desc = "Сильная и умная собака, часто используется в охране. Содержит одну овчарку."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/dog/german)
-	crate_name = "german shepherd crate"
+	crate_name = "ящик с овчаркой"
 
 /datum/supply_pack/critter/dog_brittany
-	name = "Brittany Crate"
-	desc = "An energetic hunting dog with a friendly disposition. Contains one brittany."
+	name = "Ящик с бретонцем"
+	desc = "Энергичная охотничья собака с дружелюбным характером. Содержит одного бретонца."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/dog/brittany)
-	crate_name = "brittany crate"
+	crate_name = "ящик с бретонцем"
 
-// Cats
+// --------------------
+// 🐱 Cats
+// --------------------
+
 /datum/supply_pack/critter/cat
-	name = "Cat Crate"
-	desc = "The cat goes meow! Comes with a collar and a nice cat toy!"
+	name = "Ящик с кошкой"
+	desc = "Кошка говорит 'мяу'! В комплекте ошейник и игрушка."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(
 		/mob/living/basic/pet/cat,
 		/obj/item/clothing/neck/petcollar,
 		/obj/item/toy/cattoy,
 	)
-	crate_name = "cat crate"
+	crate_name = "ящик с кошкой"
 
 /datum/supply_pack/critter/cat/generate()
 	. = ..()
+	// 5% chance to replace with fat cat
 	if(prob(5))
 		var/mob/living/basic/pet/cat/delete_cat = locate() in .
 		if(isnull(delete_cat))
@@ -63,29 +70,33 @@
 		new /mob/living/basic/pet/cat/fat(.)
 
 /datum/supply_pack/critter/cat_white
-	name = "White Cat Crate"
-	desc = "A pristine white feline companion. Contains one white cat."
+	name = "Ящик с белой кошкой"
+	desc = "Белоснежная кошка-компаньон. Содержит одну белую кошку."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/cat/white)
-	crate_name = "white cat crate"
+	crate_name = "ящик с белой кошкой"
 
 /datum/supply_pack/critter/cat_birman
-	name = "Birman Cat Crate"
-	desc = "A sacred cat breed with striking blue eyes. Contains one birman cat."
+	name = "Ящик с бирманской кошкой"
+	desc = "Священная порода с ярко-голубыми глазами. Содержит одну бирманскую кошку."
 	cost = CARGO_CRATE_VALUE * 5
 	contains = list(/mob/living/basic/pet/cat/birman)
-	crate_name = "birman cat crate"
+	crate_name = "ящик с бирманской кошкой"
 
-// Foxes
+// --------------------
+// 🦊 Foxes
+// --------------------
+
 /datum/supply_pack/critter/fox
-	name = "Fox Crate"
-	desc = "The fox goes...? Contains one fox."
+	name = "Ящик с лисой"
+	desc = "Что говорит лиса? Содержит одну лису."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/dog/fox)
-	crate_name = "fox crate"
+	crate_name = "ящик с лисой"
 
 /datum/supply_pack/critter/fox/generate()
 	. = ..()
+	// 30% chance to replace with forest fox
 	if(prob(30))
 		var/mob/living/basic/pet/dog/fox/delete_fox = locate() in .
 		if(isnull(delete_fox))
@@ -94,19 +105,22 @@
 		new /mob/living/basic/pet/dog/fox/forest(.)
 
 /datum/supply_pack/critter/fennec
-	name = "Fennec Crate"
-	desc = "A tiny desert fox with enormous ears. Contains one fennec fox."
+	name = "Ящик с фенеком"
+	desc = "Маленькая пустынная лисица с огромными ушами. Содержит одного фенека."
 	cost = CARGO_CRATE_VALUE * 5
 	contains = list(/mob/living/basic/pet/dog/fox/fennec)
-	crate_name = "fennec crate"
+	crate_name = "ящик с фенеком"
 
-// Amphibians
+// --------------------
+// 🐸 Amphibians
+// --------------------
+
 /datum/supply_pack/critter/frog
-	name = "Frog Crate"
-	desc = "Ribbit! Contains 1-3 frogs."
+	name = "Ящик с лягушками"
+	desc = "Ква-ква! Содержит от 1 до 3 лягушек."
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/mob/living/basic/frog)
-	crate_name = "frog crate"
+	crate_name = "ящик с лягушками"
 
 /datum/supply_pack/critter/frog/generate()
 	. = ..()
@@ -114,15 +128,16 @@
 		new /mob/living/basic/frog(.)
 
 /datum/supply_pack/critter/frog/toxic
-	name = "Toxic Frog Crate"
-	desc = "Handle with care! Contains 1-3 poisonous frogs."
+	name = "Ящик с ядовитыми лягушками"
+	desc = "Осторожно! Содержит от 1 до 3 ядовитых лягушек."
 	cost = CARGO_CRATE_VALUE * 6
 	contains = list(/mob/living/basic/frog/toxic)
-	crate_name = "toxic frog crate"
+	crate_name = "ящик с ядовитыми лягушками"
 	hidden = TRUE
 
 /datum/supply_pack/critter/frog/toxic/generate()
 	. = ..()
+	// 25% chance to replace with screaming toxic frog
 	if(prob(25))
 		var/mob/living/basic/frog/toxic/delete_frog = locate() in .
 		if(isnull(delete_frog))
@@ -131,19 +146,19 @@
 		new /mob/living/basic/frog/toxic/scream(.)
 
 /datum/supply_pack/critter/frog/scream
-	name = "Screaming Frog Crate"
-	desc = "AAAAAAH! Contains 1-3 very loud frogs."
+	name = "Ящик с кричащими лягушками"
+	desc = "ААААААА! Содержит от 1 до 3 очень громких лягушек."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/frog/scream)
-	crate_name = "screaming frog crate"
+	crate_name = "ящик с кричащими лягушками"
 	hidden = TRUE
 
 /datum/supply_pack/critter/snail
-	name = "Snail Crate"
-	desc = "Slow and steady wins the race. Contains 1-5 snails."
+	name = "Ящик с улитками"
+	desc = "Медленно, но верно. Содержит от 1 до 5 улиток."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/mob/living/basic/snail)
-	crate_name = "snail crate"
+	crate_name = "ящик с улитками"
 
 /datum/supply_pack/critter/snail/generate()
 	. = ..()
@@ -151,55 +166,61 @@
 		new /mob/living/basic/snail(.)
 
 /datum/supply_pack/critter/turtle
-	name = "Turtle Crate"
-	desc = "Cute flora turtles that'll emit good vibes to nearby plants!"
+	name = "Ящик с черепахой"
+	desc = "Милые флора-черепашки, дарующие растениям хорошие вибрации!"
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/mob/living/basic/turtle)
-	crate_name = "turtle crate"
+	crate_name = "ящик с черепахой"
 
-// Lizards
+// --------------------
+// 🦎 Lizards
+// --------------------
+
 /datum/supply_pack/critter/iguana
-	name = "Iguana Crate"
-	desc = "A large herbivorous lizard. Handle with care! Contains one iguana."
+	name = "Ящик с игуаной"
+	desc = "Большая травоядная ящерица. Содержит одну игуану."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/hostile/lizard)
-	crate_name = "iguana crate"
+	crate_name = "ящик с игуаной"
 
 /datum/supply_pack/critter/gator
-	name = "Alligator Crate"
-	desc = "A dangerous reptilian predator. Handle with extreme care! Contains one alligator."
+	name = "Ящик с аллигатором"
+	desc = "Опасный рептилийный хищник. Содержит одного аллигатора."
 	cost = CARGO_CRATE_VALUE * 8
 	contains = list(/mob/living/basic/hostile/lizard/gator)
-	crate_name = "alligator crate"
+	crate_name = "ящик с аллигатором"
 
 /datum/supply_pack/critter/croco
-	name = "Crocodile Crate"
-	desc = "An even more dangerous reptilian predator. Handle with extreme care! Contains one crocodile."
+	name = "Ящик с крокодилом"
+	desc = "Ещё более опасный хищник. Содержит одного крокодила."
 	cost = CARGO_CRATE_VALUE * 6
 	contains = list(/mob/living/basic/hostile/lizard/croco)
-	crate_name = "crocodile crate"
+	crate_name = "ящик с крокодилом"
 
-// Misc
+// --------------------
+// 🐾 Misc
+// --------------------
+
 /datum/supply_pack/critter/sloth
-	name = "Sloth Crate"
-	desc = "A slow-moving arboreal mammal. Contains one sloth."
+	name = "Ящик с ленивцем"
+	desc = "Медлительное древесное млекопитающее. Содержит одного ленивца."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/pet/sloth)
-	crate_name = "sloth crate"
+	crate_name = "ящик с ленивцем"
 
 /datum/supply_pack/critter/goose
-	name = "Goose Crate"
-	desc = "A waterfowl known for its aggressive behavior. Contains one goose."
+	name = "Ящик с гусем"
+	desc = "Известен агрессивным поведением. Содержит одного гуся."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/mob/living/basic/goose)
-	crate_name = "goose crate"
+	crate_name = "ящик с гусем"
 
 /datum/supply_pack/critter/gosling
-	name = "Gosling Crate"
-	desc = "Baby geese that will grow into terrifying adults. Contains 1-3 goslings."
+	name = "Ящик с гусятами"
+	desc = "Маленькие гуси, которые вырастут в устрашающих взрослых. Содержит от 1 до 3 гусят."
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/mob/living/basic/goose/gosling)
-	crate_name = "gosling crate"
+	crate_name = "ящик с гусятами"
 
 /datum/supply_pack/critter/gosling/generate()
 	. = ..()
@@ -207,11 +228,11 @@
 		new /mob/living/basic/goose/gosling(.)
 
 /datum/supply_pack/critter/hamster
-	name = "Hamster Crate"
-	desc = "Small, furry rodents that make great pets. Contains 1-5 hamsters."
+	name = "Ящик с хомяками"
+	desc = "Маленькие пушистые грызуны. Содержит от 1 до 5 хомяков."
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/mob/living/basic/mouse/hamster)
-	crate_name = "hamster crate"
+	crate_name = "ящик с хомяками"
 
 /datum/supply_pack/critter/hamster/generate()
 	. = ..()
@@ -219,50 +240,13 @@
 		new /mob/living/basic/mouse/hamster(.)
 
 /datum/supply_pack/critter/possum
-	name = "Possum Crate"
-	desc = "North America's only marsupial. Contains 1-5 possums."
+	name = "Ящик с опоссумами"
+	desc = "Единственный сумчатый Северной Америки. Содержит от 1 до 5 опоссумов."
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/mob/living/basic/possum)
-	crate_name = "possum crate"
+	crate_name = "ящик с опоссумами"
 
 /datum/supply_pack/critter/possum/generate()
 	. = ..()
 	for(var/i in 1 to rand(1, 5))
 		new /mob/living/basic/possum(.)
-
-// /datum/supply_pack/critter/moth
-// 	name = "Moth Crate"
-// 	desc = "A crate containing 1-5 moths. May include some... damaged clothing."
-// 	cost = CARGO_CRATE_VALUE * 5
-// 	contains = list(/mob/living/basic/moth)
-// 	crate_name = "moth crate"
-
-// /datum/supply_pack/critter/moth/generate()
-// 	. = ..()
-// 	var/moth_count = rand(1, 5)
-// 	for(var/i in 1 to moth_count)
-// 		if(prob(50))
-// 			new /mob/living/basic/nian_caterpillar(.)
-// 		else
-// 			new /mob/living/basic/moth(.)
-
-// 	if(prob(50))
-// 		var/clothes_amount = rand(1, 8)
-// 		var/static/list/possible_clothes = list(
-// 			/obj/item/clothing/suit/pimpcoat = 50,
-// 			/obj/item/clothing/suit/tailcoat = 25,
-// 			/obj/item/clothing/suit/victcoat = 25,
-// 			/obj/item/clothing/suit/victcoat/red = 25,
-// 			/obj/item/clothing/suit/draculacoat = 25,
-// 			/obj/item/clothing/suit/browntrenchcoat = 25,
-// 			/obj/item/clothing/suit/blacktrenchcoat = 25,
-// 			/obj/item/clothing/suit/storage/blueshield = 5,
-// 			/obj/item/clothing/suit/sovietcoat = 5,
-// 			/obj/item/clothing/suit/armor/vest/capcarapace/jacket = 1,
-// 			/obj/item/clothing/suit/armor/vest/capcarapace/jacket/tunic = 1,
-// 			/obj/item/clothing/suit/armor/vest/capcarapace/coat = 1,
-// 			/obj/item/clothing/suit/armor/vest/capcarapace/coat/white = 1,
-// 		)
-// 		for(var/i in 1 to clothes_amount)
-// 			var/picked = pick(possible_clothes)
-// 			new picked(.)
