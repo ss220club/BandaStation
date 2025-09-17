@@ -63,7 +63,7 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 	if(!original)
 		return
 
-	var/atom/made_copy = new original.type(spawning_location)
+	var/atom/movable/made_copy = new original.type(spawning_location) // BANDASTATION FIX: copying move to new loc
 
 	for(var/atom_vars in original.vars - GLOB.duplicate_forbidden_vars)
 		if(islist(original.vars[atom_vars]))
@@ -80,8 +80,8 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 			var/mob/living/carbon/copied_carbon = made_copy
 			//transfer DNA over (also body features), then update skin color.
 			original_carbon.dna.copy_dna(copied_carbon.dna)
+			copied_carbon.appearance = new /mutable_appearance(original_carbon.appearance) // BANDASTATION FIX: appearance copying fix
 			copied_carbon.updateappearance(mutcolor_update = TRUE)
-
 		var/mob/living/original_living = original
 		var/mob/living/copied_living = made_copy
 		//transfer implants, we do this so the original's implants being removed won't destroy ours.
@@ -91,5 +91,5 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 		//transfer quirks, we do this because transfering the original's quirks keeps the 'owner' as the original.
 		for(var/datum/quirk/original_quirks as anything in original_living.quirks)
 			copied_living.add_quirk(original_quirks.type, announce = FALSE)
-
+	made_copy.forceMove(spawning_location) // BANDASTATION FIX: copying move to new loc
 	return made_copy
