@@ -7,7 +7,7 @@
 	requires_dark_user = TRUE
 	requires_dark_target = TRUE
 	max_range = 2
-	channel_time = 0
+	var/enthrall_time = 10 SECONDS
 	cancel_on_bright = TRUE
 
 /datum/action/cooldown/shadowling/enthrall/proc/find_cone_target(mob/living/carbon/human/H)
@@ -84,7 +84,7 @@
 		if(QDELETED(T) || get_dist(H, T) > 2 || has_mindshield(T) || !is_dark(T))
 			to_chat(H, span_warning("Цель утрачена."))
 			return FALSE
-		if(!do_after(H, channel_time SECONDS, T))
+		if(!do_after(H, enthrall_time, T))
 			to_chat(H, span_warning("Связь прервана."))
 			return FALSE
 
