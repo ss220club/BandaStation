@@ -1,0 +1,4 @@
+author: "Gaxeer"
+delete-after: True
+changes:
+  - bugfix: "SDMM снова парсит карты без ошибок"
