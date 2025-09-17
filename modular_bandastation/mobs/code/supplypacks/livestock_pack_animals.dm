@@ -4,25 +4,20 @@
 
 /datum/supply_pack/critter/corgi
 	name = "Ящик с корги"
-	desc = "Оптимальная собака по версии тысяч исследователей. В комплекте ошейник!"
-	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/mob/living/basic/pet/dog/corgi)
 	crate_name = "ящик с корги"
+	desc = "Считается оптимальной породой собак по мнению тысяч учёных. Содержит одного корги."
 
 /datum/supply_pack/critter/pug
 	name = "Ящик с мопсом"
-	desc = "Почти как обычная собака, но сплюснутая. Содержит одного мопса."
-	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/mob/living/basic/pet/dog/pug)
 	crate_name = "ящик с мопсом"
+	desc = "Как обычная собака, но… приплюснутая. Содержит одного мопса."
 
-/datum/supply_pack/critter/dog_bullterrier
+/datum/supply_pack/critter/bullterrier
 	name = "Ящик с бультерьером"
 	desc = "Собака с яйцеобразной головой. Содержит одного бультерьера."
-	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/mob/living/basic/pet/dog/bullterrier)
 	crate_name = "ящик с бультерьером"
 
+// New dogs
 /datum/supply_pack/critter/dog_tamaskan
 	name = "Ящик с тамасканом"
 	desc = "Похож на волка, известен умом и верностью. Содержит одного тамаскана."
@@ -167,9 +162,7 @@
 
 /datum/supply_pack/critter/turtle
 	name = "Ящик с черепахой"
-	desc = "Милые флора-черепашки, дарующие растениям хорошие вибрации!"
-	cost = CARGO_CRATE_VALUE * 2
-	contains = list(/mob/living/basic/turtle)
+	desc = "Милые черепашки с положительным вайбом! Содержит одну черепаху."
 	crate_name = "ящик с черепахой"
 
 // --------------------
@@ -178,22 +171,22 @@
 
 /datum/supply_pack/critter/iguana
 	name = "Ящик с игуаной"
-	desc = "Большая травоядная ящерица. Содержит одну игуану."
 	cost = CARGO_CRATE_VALUE * 4
+	desc = "Крупная травоядная ящерица. Обращайтесь осторожно! Содержит одну игуану."
 	contains = list(/mob/living/basic/hostile/lizard)
 	crate_name = "ящик с игуаной"
 
 /datum/supply_pack/critter/gator
 	name = "Ящик с аллигатором"
-	desc = "Опасный рептилийный хищник. Содержит одного аллигатора."
 	cost = CARGO_CRATE_VALUE * 8
+	desc = "Опасный хищник. Обращайтесь с экстремальной осторожностью! Содержит одного аллигатора."
 	contains = list(/mob/living/basic/hostile/lizard/gator)
 	crate_name = "ящик с аллигатором"
 
 /datum/supply_pack/critter/croco
 	name = "Ящик с крокодилом"
-	desc = "Ещё более опасный хищник. Содержит одного крокодила."
 	cost = CARGO_CRATE_VALUE * 6
+	desc = "Ещё более опасный хищник. Обращайтесь с экстремальной осторожностью! Содержит одного крокодила."
 	contains = list(/mob/living/basic/hostile/lizard/croco)
 	crate_name = "ящик с крокодилом"
 
@@ -209,9 +202,9 @@
 	crate_name = "ящик с ленивцем"
 
 /datum/supply_pack/critter/goose
-	name = "Ящик с гусем"
-	desc = "Известен агрессивным поведением. Содержит одного гуся."
 	cost = CARGO_CRATE_VALUE * 3
+	name = "Ящик с гусём"
+	desc = "Водоплавающая птица, известная своей агрессивностью. Содержит одного гуся."
 	contains = list(/mob/living/basic/goose)
 	crate_name = "ящик с гусем"
 
@@ -229,8 +222,8 @@
 
 /datum/supply_pack/critter/hamster
 	name = "Ящик с хомяками"
-	desc = "Маленькие пушистые грызуны. Содержит от 1 до 5 хомяков."
 	cost = CARGO_CRATE_VALUE * 2
+	desc = "Маленькие пушистые грызуны, отличные питомцы. Содержит 1-5 хомяков."
 	contains = list(/mob/living/basic/mouse/hamster)
 	crate_name = "ящик с хомяками"
 
