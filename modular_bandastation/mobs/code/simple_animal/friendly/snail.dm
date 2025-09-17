@@ -11,7 +11,7 @@
 	speed = 10
 	attack_verb_continuous = "расталкивает"
 	attack_verb_simple = "толкает"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/crack_death1.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
 	response_help  = "pets"
 	response_disarm_continuous = "shoos"
 	response_disarm_simple = "shoos"
@@ -75,7 +75,7 @@
 	speed = 20
 	attack_verb_continuous = "расталкивает"
 	attack_verb_simple = "толкает"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/crack_death1.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
 	response_help  = "pets"
 	response_disarm_continuous = "shoos"
 	response_disarm_simple = "shoos"

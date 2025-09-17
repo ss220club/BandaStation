@@ -38,9 +38,9 @@
 	projectiletype = /obj/item/projectile/beam/disabler
 
 	attack_sound = 'sound/weapons/punch1.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/rat_talk.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/creatures/rat_wound.ogg')
-	death_sound = 'modular_bandastation/mobs/sound/creatures/rat_death.ogg'
+	talk_sound = list('modular_bandastation/mobs/sound/rat_talk.ogg')
+	damaged_sound = list('modular_bandastation/mobs/sound/rat_wound.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/rat_death.ogg'
 
 	harm_intent_damage = 5
 	melee_damage_lower = 5

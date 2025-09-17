@@ -29,9 +29,9 @@
 	attack_verb_continuous = "терзает"
 	attack_verb_simple = "терзает"
 	attack_sound = 'sound/weapons/bite.ogg'
-	death_sound = 'modular_bandastation/mobs/sound/creatures/lizard_death_big.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/lizard_angry1.ogg', 'modular_bandastation/mobs/sound/creatures/lizard_angry2.ogg', 'modular_bandastation/mobs/sound/creatures/lizard_angry3.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/creatures/lizard_damaged.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/lizard_death_big.ogg'
+	talk_sound = list('modular_bandastation/mobs/sound/lizard_angry1.ogg', 'modular_bandastation/mobs/sound/lizard_angry2.ogg', 'modular_bandastation/mobs/sound/lizard_angry3.ogg')
+	damaged_sound = list('modular_bandastation/mobs/sound/lizard_damaged.ogg')
 	footstep_type = FOOTSTEP_MOB_CLAW
 
 	minbodytemp = 250 //Weak to cold

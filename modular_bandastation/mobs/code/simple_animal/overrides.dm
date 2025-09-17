@@ -67,16 +67,16 @@
 
 /* Megafauna */
 /mob/living/basic/hostile/megafauna/legion
-	death_sound = 'modular_bandastation/mobs/sound/creatures/legion_death.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
 
 /mob/living/basic/hostile/megafauna/legion/death(gibbed)
 	for(var/area/lavaland/L in world)
-		SEND_SOUND(L, sound('modular_bandastation/mobs/sound/creatures/legion_death_far.ogg'))
+		SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
 	. = ..()
 
 /* Nar Sie */
 /obj/singularity/narsie/large/Destroy()
-	SEND_SOUND(world, sound('modular_bandastation/mobs/sound/creatures/narsie_rises.ogg'))
+	SEND_SOUND(world, sound('modular_bandastation/mobs/sound/narsie_rises.ogg'))
 	. = ..()
 
 

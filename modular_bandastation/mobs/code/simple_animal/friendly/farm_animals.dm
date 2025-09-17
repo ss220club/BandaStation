@@ -1,21 +1,21 @@
 /mob/living/basic/hostile/retaliate/goat
 	attack_verb_continuous = "бодает"
 	attack_verb_simple = "бодает"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/goat_death.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/goat_death.ogg'
 
 /mob/living/basic/cow
 	attack_verb_continuous = "бодает"
 	attack_verb_simple = "бодает"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/cow_death.ogg'
-	damaged_sound = list('modular_bandastation/mobs/sound/creatures/cow_damaged.ogg')
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/cow_talk1.ogg', 'modular_bandastation/mobs/sound/creatures/cow_talk2.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/cow_death.ogg'
+	damaged_sound = list('modular_bandastation/mobs/sound/cow_damaged.ogg')
+	talk_sound = list('modular_bandastation/mobs/sound/cow_talk1.ogg', 'modular_bandastation/mobs/sound/cow_talk2.ogg')
 
 /mob/living/basic/chicken
 	name = "курица"
 	desc = "Гордая несушка. Яички должны быть хороши!"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/chicken_death.ogg'
-	damaged_sound = list('modular_bandastation/mobs/sound/creatures/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/creatures/chicken_damaged2.ogg')
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/chicken_talk.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
+	damaged_sound = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
+	talk_sound = list('modular_bandastation/mobs/sound/chicken_talk.ogg')
 	// holder_type = /obj/item/holder/chicken
 
 /mob/living/basic/chick
@@ -23,7 +23,7 @@
 	desc = "Маленькая прелесть! Но пока что маловата..."
 	attack_verb_continuous = "клюёт"
 	attack_verb_simple = "клюёт"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/mouse_squeak.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/mouse_squeak.ogg'
 	// holder_type = /obj/item/holder/chick
 
 /mob/living/basic/chick/Life(seconds, times_fired)
@@ -60,9 +60,9 @@
 	melee_damage_upper = 6
 	attack_verb_continuous = "клюёт"
 	attack_verb_simple = "клюёт"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/chicken_death.ogg'
-	damaged_sound = list('modular_bandastation/mobs/sound/creatures/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/creatures/chicken_damaged2.ogg')
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/chicken_talk.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
+	damaged_sound = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
+	talk_sound = list('modular_bandastation/mobs/sound/chicken_talk.ogg')
 	health = 30
 	maxHealth = 30
 	ventcrawler = 2
@@ -81,8 +81,8 @@
 	name = "свинья"
 	attack_verb_continuous = "лягает"
 	attack_verb_simple = "лягает"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/pig_death.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/pig_talk1.ogg', 'modular_bandastation/mobs/sound/creatures/pig_talk2.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/pig_death.ogg'
+	talk_sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
 	damaged_sound = list()
 
 /mob/living/basic/pig/npc_safe(mob/user)
@@ -91,7 +91,7 @@
 /mob/living/basic/turkey
 	name = "индюшка"
 	desc = "И не благодари."
-	death_sound = 'modular_bandastation/mobs/sound/creatures/duck_quak1.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/duck_quak1.ogg'
 
 
 /mob/living/basic/goose
@@ -103,9 +103,9 @@
 	melee_damage_upper = 8
 	attack_verb_continuous = "щипает"
 	attack_verb_simple = "щипает"
-	death_sound = 'modular_bandastation/mobs/sound/creatures/duck_quak1.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/duck_talk1.ogg', 'modular_bandastation/mobs/sound/creatures/duck_talk2.ogg', 'modular_bandastation/mobs/sound/creatures/duck_talk3.ogg', 'modular_bandastation/mobs/sound/creatures/duck_quak1.ogg', 'modular_bandastation/mobs/sound/creatures/duck_quak2.ogg', 'modular_bandastation/mobs/sound/creatures/duck_quak3.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/creatures/duck_aggro1.ogg', 'modular_bandastation/mobs/sound/creatures/duck_aggro2.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/duck_quak1.ogg'
+	talk_sound = list('modular_bandastation/mobs/sound/duck_talk1.ogg', 'modular_bandastation/mobs/sound/duck_talk2.ogg', 'modular_bandastation/mobs/sound/duck_talk3.ogg', 'modular_bandastation/mobs/sound/duck_quak1.ogg', 'modular_bandastation/mobs/sound/duck_quak2.ogg', 'modular_bandastation/mobs/sound/duck_quak3.ogg')
+	damaged_sound = list('modular_bandastation/mobs/sound/duck_aggro1.ogg', 'modular_bandastation/mobs/sound/duck_aggro2.ogg')
 
 /mob/living/basic/goose/npc_safe(mob/user)
 	return TRUE
@@ -125,4 +125,4 @@
 	maxHealth = 20
 
 /mob/living/basic/seal
-	death_sound = 'modular_bandastation/mobs/sound/creatures/seal_death.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/seal_death.ogg'

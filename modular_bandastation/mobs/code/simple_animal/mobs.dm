@@ -1,5 +1,5 @@
 /mob/living/basic/cockroach
-	death_sound = 'modular_bandastation/mobs/sound/creatures/crack_death2.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/crack_death2.ogg'
 
 /mob/living/basic/hostile/feral_cat
 	blood_volume = BLOOD_VOLUME_NORMAL

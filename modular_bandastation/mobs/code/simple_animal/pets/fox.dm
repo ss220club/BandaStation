@@ -1,5 +1,5 @@
 /mob/living/basic/pet/dog/fox
-	yelp_sound = 'modular_bandastation/mobs/sound/creatures/fox_yelp.ogg' //Used on death.
+	yelp_sound = 'modular_bandastation/mobs/sound/fox_yelp.ogg' //Used on death.
 	// holder_type = /obj/item/holder/fox
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 

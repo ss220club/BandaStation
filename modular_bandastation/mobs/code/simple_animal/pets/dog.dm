@@ -7,7 +7,7 @@
 	melee_damage_upper = 10
 	attack_verb_continuous = "вгрызается"
 	attack_verb_simple = "кусает"
-	var/growl_sound = list('modular_bandastation/mobs/sound/creatures/dog_grawl1.ogg','modular_bandastation/mobs/sound/creatures/dog_grawl2.ogg') //Used in emote.
+	var/growl_sound = list('modular_bandastation/mobs/sound/dog_grawl1.ogg','modular_bandastation/mobs/sound/dog_grawl2.ogg') //Used in emote.
 
 	butcher_results = list(/obj/item/food/meat/dog = 4)
 	collar_type = "dog"

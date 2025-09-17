@@ -1,5 +1,5 @@
 /mob/living/basic/crab
-	death_sound = 'modular_bandastation/mobs/sound/creatures/crack_death2.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/crack_death2.ogg'
 	mob_size = MOB_SIZE_SMALL
 	response_help  = "гладит"
 	response_disarm_continuous = "отталкивает"

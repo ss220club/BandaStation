@@ -3,7 +3,7 @@
 	real_name = "rat"
 	desc = "Серая крыса. Не яркий представитель своего вида."
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
-	squeak_sound = 'modular_bandastation/mobs/sound/creatures/rat_squeak.ogg'
+	squeak_sound = 'modular_bandastation/mobs/sound/rat_squeak.ogg'
 	icon_state = "rat_gray"
 	icon_living = "rat_gray"
 	icon_dead = "rat_gray_dead"

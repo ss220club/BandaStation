@@ -1,5 +1,5 @@
 /mob/living/basic/lizard
-	death_sound = 'modular_bandastation/mobs/sound/creatures/lizard_death.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/lizard_death.ogg'
 	// holder_type = /obj/item/holder/lizard
 
 /mob/living/basic/lizard/axolotl

@@ -11,10 +11,10 @@
 	speak_emote = list("квак","куак","квуак")
 	emote_hear = list("квак","куак","квуак")
 	emote_see = list("лежит расслабленная", "издает гортанные звуки", "лупает глазками")
-	var/scream_sound = list ('modular_bandastation/mobs/sound/creatures/frog_scream_1.ogg','modular_bandastation/mobs/sound/creatures/frog_scream_2.ogg','modular_bandastation/mobs/sound/creatures/frog_scream_3.ogg')
-	talk_sound = list('modular_bandastation/mobs/sound/creatures/frog_talk1.ogg', 'modular_bandastation/mobs/sound/creatures/frog_talk2.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/creatures/frog_damaged.ogg')
-	death_sound = 'modular_bandastation/mobs/sound/creatures/frog_death.ogg'
+	var/scream_sound = list ('modular_bandastation/mobs/sound/frog_scream_1.ogg','modular_bandastation/mobs/sound/frog_scream_2.ogg','modular_bandastation/mobs/sound/frog_scream_3.ogg')
+	talk_sound = list('modular_bandastation/mobs/sound/frog_talk1.ogg', 'modular_bandastation/mobs/sound/frog_talk2.ogg')
+	damaged_sound = list('modular_bandastation/mobs/sound/frog_damaged.ogg')
+	death_sound = 'modular_bandastation/mobs/sound/frog_death.ogg'
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 10
@@ -58,7 +58,7 @@
 	name = "орущая лягушка"
 	real_name = "орущая лягушка"
 	desc = "Не любит когда на неё наступают. Используется в качестве наказания за проступки"
-	var/squeak_sound = list ('modular_bandastation/mobs/sound/creatures/frog_scream1.ogg','modular_bandastation/mobs/sound/creatures/frog_scream2.ogg')
+	var/squeak_sound = list ('modular_bandastation/mobs/sound/frog_scream1.ogg','modular_bandastation/mobs/sound/frog_scream2.ogg')
 	gold_core_spawnable = NO_SPAWN
 
 
@@ -119,7 +119,7 @@
 	AddComponent(/datum/component/squeak, squeak_sound, 50, extrarange = SHORT_RANGE_SOUND_EXTRARANGE) //as quiet as a frog or whatever
 
 /mob/living/basic/frog/toxic/scream
-	var/squeak_sound = list ('modular_bandastation/mobs/sound/creatures/frog_scream1.ogg','modular_bandastation/mobs/sound/creatures/frog_scream2.ogg')
+	var/squeak_sound = list ('modular_bandastation/mobs/sound/frog_scream1.ogg','modular_bandastation/mobs/sound/frog_scream2.ogg')
 	gold_core_spawnable = NO_SPAWN
 
 /mob/living/basic/frog/toxic/scream/Initialize(mapload)

@@ -18,7 +18,7 @@
 	var/jumpspeed = 1
 	attack_verb_continuous = "терзает"
 	attack_verb_simple = "грызёт"
-	attack_sound = 'modular_bandastation/mobs/sound/creatures/headcrab_attack.ogg'
+	attack_sound = 'modular_bandastation/mobs/sound/headcrab_attack.ogg'
 	speak_emote = list("hisses")
 	var/is_zombie = 0
 	stat_attack = DEAD // Necessary for them to attack (zombify) dead humans
@@ -72,12 +72,12 @@
 	ranged = 0
 	stat_attack = CONSCIOUS // Disables their targeting of dead mobs once they're already a zombie
 	icon = H.icon
-	speak = list('modular_bandastation/mobs/sound/creatures/zombie_idle1.ogg','modular_bandastation/mobs/sound/creatures/zombie_idle2.ogg','modular_bandastation/mobs/sound/creatures/zombie_idle3.ogg')
+	speak = list('modular_bandastation/mobs/sound/zombie_idle1.ogg','modular_bandastation/mobs/sound/zombie_idle2.ogg','modular_bandastation/mobs/sound/zombie_idle3.ogg')
 	speak_chance = 50
 	speak_emote = list("groans")
 	attack_verb_continuous = "терзает"
 	attack_verb_simple = "грызёт"
-	attack_sound = 'modular_bandastation/mobs/sound/creatures/zombie_attack.ogg'
+	attack_sound = 'modular_bandastation/mobs/sound/zombie_attack.ogg'
 	icon_state = "zombie2_s"
 	if(head_organ)
 		head_organ.h_style = null
@@ -153,7 +153,7 @@
 
 /mob/living/basic/hostile/blackmesa/xen/headcrab/fast/Zombify(mob/living/carbon/human/H)
 	. = ..()
-	speak = list('modular_bandastation/mobs/sound/creatures/fast_zombie_idle1.ogg','modular_bandastation/mobs/sound/creatures/fast_zombie_idle2.ogg','modular_bandastation/mobs/sound/creatures/fast_zombie_idle3.ogg')
+	speak = list('modular_bandastation/mobs/sound/fast_zombie_idle1.ogg','modular_bandastation/mobs/sound/fast_zombie_idle2.ogg','modular_bandastation/mobs/sound/fast_zombie_idle3.ogg')
 
 /mob/living/basic/hostile/blackmesa/xen/headcrab/poison
 	name = "poison headcrab"
@@ -169,7 +169,7 @@
 	jumpspeed = 1
 	melee_damage_lower = 8
 	melee_damage_upper = 20
-	attack_sound = 'modular_bandastation/mobs/sound/creatures/ph_scream1.ogg'
+	attack_sound = 'modular_bandastation/mobs/sound/ph_scream1.ogg'
 	speak_emote = list("screech")
 
 /mob/living/basic/hostile/blackmesa/xen/headcrab/poison/update_icons()
