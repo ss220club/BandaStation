@@ -1,90 +1,98 @@
 /area
-	/// Is the window tint control in this area on? Controls whether electrochromic windows and doors are tinted or not
-	var/window_tint = FALSE
+	/// Determies whether a new windows/airlocks will be tinted or not.
+	/// May be incorrect if there is 2 buttons on the same area.
+	var/tinted = FALSE
 
+// MARK: Button
 /obj/machinery/button/electrochromic
-	name = "electrochromic glass controller"
+	name = "electrochromic glass button"
 	desc = "Переключатель для электрохромного стекла."
-	icon = 'modular_bandastation/electrochromic_glass/icons/button.dmi'
-	icon_state = "polarizer"
-	base_icon_state = "polarizer"
+	device_type = /obj/item/assembly/control/electrochromic
 	can_alter_skin = FALSE
 	/// If equals TINT_CONTROL_GROUP_NONE, only windows with 'null-like' id are controlled by this button. Otherwise, windows with corresponding or 'null-like' id are controlled by this button.
 	id = TINT_CONTROL_GROUP_NONE
-	/// Windows in this range are controlled by this button. If it equals TINT_CONTROL_RANGE_AREA, the button controls only windows at button_area.
 	var/range = TINT_CONTROL_RANGE_AREA
-	/// The button toggle state. If range equals TINT_CONTROL_RANGE_AREA and id equals TINT_CONTROL_GROUP_NONE or is same with other button, it is shared between all such buttons in its area.
-	var/active = FALSE
-	/// The area where the button is located.
-	var/area/button_area
-	/// Cooldown between toggles
-	COOLDOWN_DECLARE(electrochromic_toggle_cooldown)
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 
-/obj/machinery/button/electrochromic/Initialize(mapload)
+/obj/machinery/button/electrochromic/setup_device()
 	. = ..()
-	button_area = get_area(src)
+	if(device && istype(device, /obj/item/assembly/control/electrochromic))
+		var/obj/item/assembly/control/electrochromic/electrochromic_device = device
+		electrochromic_device.button_area = get_area(src)
+		if(range)
+			electrochromic_device.range = range
 
-/obj/machinery/button/electrochromic/Destroy()
+// MARK: Assembly
+/obj/item/assembly/control/electrochromic
+	name = "electrochromic glass controller"
+	desc = "Небольшое электронное устройство, позволяющее управлять электрохромным стеклом."
+	/// Allows to disable linked electrochromic glass after detaching/destroying.
+	var/active = FALSE
+	/// Windows in this range are controlled by this button. If it equals TINT_CONTROL_RANGE_AREA, the button controls only windows at button_area.
+	var/range = TINT_CONTROL_RANGE_AREA
+	/// The area where the button is located.
+	var/area/button_area
+
+/obj/item/assembly/control/electrochromic/Initialize(mapload)
 	. = ..()
-	if(active)
-		toggle_tint()
+	RegisterSignal(src, COMSIG_ASSEMBLY_ADDED_TO_BUTTON, PROC_REF(on_attached))
+	RegisterSignal(src, COMSIG_ASSEMBLY_REMOVED_FROM_BUTTON, PROC_REF(on_detached))
 
-/obj/machinery/button/electrochromic/on_deconstruction(disassembled)
-	if(active)
-		toggle_tint()
-
-	var/obj/item/wallframe/button/electrochromic/dropped_frame = new /obj/item/wallframe/button/electrochromic(drop_location())
-	transfer_fingerprints_to(dropped_frame)
-
-/obj/machinery/button/electrochromic/attempt_press(mob/user)
-	if(!COOLDOWN_FINISHED(src, electrochromic_toggle_cooldown))
-		return
-
+/obj/item/assembly/control/electrochromic/Destroy()
 	. = ..()
+	disable_tint()
+	UnregisterSignal(src, COMSIG_ASSEMBLY_ADDED_TO_BUTTON)
+	UnregisterSignal(src, COMSIG_ASSEMBLY_REMOVED_FROM_BUTTON)
 
-	active = !active
-	toggle_tint()
-	COOLDOWN_START(src, electrochromic_toggle_cooldown, TINT_DURATION)
+/obj/item/assembly/control/electrochromic/activate(forced = FALSE)
+	if(!forced)
+		if(cooldown)
+			return
 
-/obj/machinery/button/electrochromic/power_change()
-	if(!..())
-		return
-	if(active && (machine_stat & NOPOWER))
-		toggle_tint()
-
-/obj/machinery/button/electrochromic/update_icon_state()
-	. = ..()
-	if(!(machine_stat & (NOPOWER|BROKEN)) && !panel_open)
-		if(active)
-			icon_state = "[base_icon_state]_on"
-		else
-			icon_state = "[base_icon_state]_off"
-
-/obj/machinery/button/electrochromic/proc/toggle_tint()
-	if(range == TINT_CONTROL_RANGE_AREA)
-		button_area.window_tint = !button_area.window_tint
-		for(var/obj/machinery/button/electrochromic/button in button_area)
-			if(button.range != TINT_CONTROL_RANGE_AREA || (button.id != id && button.id != TINT_CONTROL_GROUP_NONE))
-				continue
-			button.active = button_area.window_tint
-			button.update_icon(UPDATE_ICON)
-	else
-		active = !active
-		update_icon(UPDATE_ICON)
+		cooldown = TRUE
+		addtimer(VARSET_CALLBACK(src, cooldown, FALSE), TINT_ANIMATION_DURATION)
 	process_controlled_windows(range != TINT_CONTROL_RANGE_AREA ? range(src, range) : button_area)
 
-/obj/machinery/button/electrochromic/proc/process_controlled_windows(control_area)
+/obj/item/assembly/control/electrochromic/proc/process_controlled_windows(control_area)
+	if(!control_area)
+		return
+
+	active = !active
+	button_area.tinted = !button_area.tinted
 	for(var/obj/structure/window/window in control_area)
-		if(window.electrochromic && (window.electrochromic_id == id || !window.electrochromic_id))
+		if(window.electrochromic && (window.id_tag == id || !window.id_tag))
 			window.toggle_polarization()
 
 	for(var/obj/machinery/door/airlock/door in control_area)
-		if(door.glass && (door.electrochromic_id == id || !door.electrochromic_id))
+		if(door.glass && (door.id_tag == id || !door.id_tag))
 			door.toggle_polarization()
 
-/obj/item/wallframe/button/electrochromic
-	name = "electrochromic controller frame"
-	result_path = /obj/machinery/button/electrochromic
-	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2)
+/obj/item/assembly/control/electrochromic/proc/disable_tint()
+	if(!button_area)
+		return
+
+	if(active)
+		activate(TRUE)
+
+/obj/item/assembly/control/electrochromic/proc/on_attached(obj/machinery/button/button)
+	SIGNAL_HANDLER
+	if(!button)
+		return
+	button_area = get_area(button)
+
+/obj/item/assembly/control/electrochromic/proc/on_detached(obj/machinery/button/button)
+	SIGNAL_HANDLER
+	disable_tint()
+
+/datum/design/electrochromic_control
+	name = "Electrochromic Glass Controller"
+	id = "electrochromic"
+	build_type = PROTOLATHE | AWAY_LATHE | AUTOLATHE
+	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.5)
+	build_path = /obj/item/assembly/control/electrochromic
+	category = list(
+		RND_CATEGORY_INITIAL,
+		RND_CATEGORY_CONSTRUCTION + RND_SUBCATEGORY_CONSTRUCTION_ELECTRONICS,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING

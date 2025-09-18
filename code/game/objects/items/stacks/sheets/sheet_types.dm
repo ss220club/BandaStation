@@ -131,7 +131,6 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("fire alarm frame", /obj/item/wallframe/firealarm, 2, crafting_flags = NONE, category = CAT_STRUCTURE), \
 	new/datum/stack_recipe("extinguisher cabinet frame", /obj/item/wallframe/extinguisher_cabinet, 2, crafting_flags = NONE, category = CAT_STRUCTURE), \
 	new/datum/stack_recipe("button frame", /obj/item/wallframe/button, 1, crafting_flags = NONE, category = CAT_STRUCTURE), \
-	new/datum/stack_recipe("electrochromic controller frame", /obj/item/wallframe/button/electrochromic, 1, crafting_flags = NONE, category = CAT_STRUCTURE), /* BANDASTATION ADDITION */ \
 	new/datum/stack_recipe("light switch frame", /obj/item/wallframe/light_switch, 1, crafting_flags = NONE, category = CAT_STRUCTURE), \
 	new/datum/stack_recipe("sparker frame", /obj/item/wallframe/sparker, 1, crafting_flags = NONE, category = CAT_STRUCTURE), \
 	new/datum/stack_recipe("turret control frame", /obj/item/wallframe/turret_control, 6, crafting_flags = NONE, category = CAT_STRUCTURE), \

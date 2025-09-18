@@ -3,14 +3,13 @@
 	var/spraycan_color
 
 /obj/machinery/door/airlock
-	var/electrochromic_id
 	/// Is airlock currently with active electrochrome glass?
 	var/electrochromed = FALSE
 
 /obj/machinery/door/airlock/Initialize(mapload)
 	. = ..()
 	var/area/current_area = get_area(src)
-	if(glass && current_area.window_tint)
+	if(glass && current_area.tinted)
 		toggle_polarization()
 
 	RegisterSignal(src, COMSIG_OBJ_PAINTED, PROC_REF(on_painted))
@@ -58,11 +57,11 @@
 
 	// Animate() does not work on overlays, so a temporary effect is used
 	new /obj/effect/temp_visual/polarized_airlock(get_turf(src), polarized_image, animate_color)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon), UPDATE_OVERLAYS), TINT_DURATION)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon), UPDATE_OVERLAYS), TINT_ANIMATION_DURATION)
 
 /obj/effect/temp_visual/polarized_airlock
 	layer = OPEN_DOOR_LAYER
-	duration = TINT_DURATION
+	duration = TINT_ANIMATION_DURATION
 	randomdir = FALSE
 
 /obj/effect/temp_visual/polarized_airlock/Initialize(mapload, image/airlock_overlay, animate_color)
@@ -74,4 +73,4 @@
 	icon_state = airlock_overlay.icon_state
 	color = airlock_overlay.color
 	dir = airlock_overlay.dir
-	animate(src, color = animate_color, time = TINT_DURATION)
+	animate(src, color = animate_color, time = TINT_ANIMATION_DURATION)

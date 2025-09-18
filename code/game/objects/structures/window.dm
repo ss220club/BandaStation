@@ -76,6 +76,11 @@
 
 	if (flags_1 & ON_BORDER_1)
 		AddElement(/datum/element/connect_loc, loc_connections)
+	/* BANDASTATION ADDITION - START */
+	var/area/current_area = get_area(src)
+	if(electrochromic && current_area.tinted)
+		toggle_polarization()
+	/* BANDASTATION ADDITION - END */
 
 /obj/structure/window/mouse_drop_receive(atom/dropping, mob/user, params)
 	. = ..()
@@ -372,7 +377,7 @@
 		if(is_dark_color) // No dark colors for electrochromic windows
 			return
 
-		if(current_area.window_tint)
+		if(current_area.tinted)
 			color = generate_glass_matrix(src, TINTED_ALPHA)
 			return
 	/* BANDASTATION ADDITION - END */
