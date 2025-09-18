@@ -8547,7 +8547,7 @@
 /obj/machinery/light_switch/directional/south,
 /obj/machinery/button/electrochromic/directional/south{
 	id = "HoS save room";
-	name = "Brig Courtroom Shutter Control";
+	name = "Brig Courtroom Tint Control";
 	req_access = list("brig");
 	pixel_x = 10;
 	pixel_y = -26
@@ -38259,13 +38259,6 @@
 /obj/structure/cable/layer1,
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
-"jrC" = (
-/obj/structure/cable,
-/obj/effect/spawner/structure/window/reinforced/electrochromic{
-	id = "ce_office"
-	},
-/turf/open/floor/plating,
-/area/station/command/heads_quarters/ce)
 "jrE" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
@@ -40947,7 +40940,7 @@
 /obj/machinery/light_switch/directional/north,
 /obj/machinery/button/electrochromic/directional/north{
 	id = "HoS_office";
-	name = "Brig Courtroom TintControl";
+	name = "Brig Courtroom Tint Control";
 	req_access = list("brig");
 	pixel_x = 10;
 	pixel_y = 26
@@ -93996,6 +93989,13 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/fore)
+"xfb" = (
+/obj/structure/cable,
+/obj/effect/spawner/structure/window/reinforced/electrochromic{
+	id = "ce_office"
+	},
+/turf/open/floor/plating,
+/area/station/command/heads_quarters/ce)
 "xfc" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
@@ -194577,8 +194577,8 @@ rhb
 lbQ
 dGP
 dGP
-jrC
-jrC
+xfb
+xfb
 dGP
 dGP
 nOp
@@ -195089,7 +195089,7 @@ tGb
 iKI
 vDm
 lbQ
-jrC
+xfb
 maU
 rez
 hnp
@@ -195346,7 +195346,7 @@ txc
 bCx
 vDm
 lbQ
-jrC
+xfb
 maU
 rez
 kFk
@@ -195860,7 +195860,7 @@ iKN
 iKN
 qKk
 lbQ
-jrC
+xfb
 kkP
 hvV
 bLG
@@ -196117,7 +196117,7 @@ xjf
 iKN
 ldi
 lbQ
-jrC
+xfb
 aod
 hvV
 dGa
@@ -196633,8 +196633,8 @@ qKk
 lbQ
 dGP
 dGP
-jrC
-jrC
+xfb
+xfb
 dGP
 dGP
 bXN
