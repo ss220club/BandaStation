@@ -10,7 +10,7 @@
 	icon_dead = "possum_dead"
 	icon_resting = "possum_sleep"
 	var/icon_harm = "possum_aaa"
-	response_help_continuous
+	response_help_continuous = "pets"
 	response_help_simple = "pets"
 	response_disarm_continuous = "bops"
 	response_disarm_simple = "bops"
