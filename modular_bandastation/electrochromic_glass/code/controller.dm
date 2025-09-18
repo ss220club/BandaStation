@@ -11,6 +11,7 @@
 	can_alter_skin = FALSE
 	/// If equals TINT_CONTROL_GROUP_NONE, only windows with 'null-like' id are controlled by this button. Otherwise, windows with corresponding or 'null-like' id are controlled by this button.
 	id = TINT_CONTROL_GROUP_NONE
+	color = WINDOW_COLOR
 	var/range = TINT_CONTROL_RANGE_AREA
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
