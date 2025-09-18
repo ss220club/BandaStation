@@ -130,10 +130,9 @@
 	SIGNAL_HANDLER
 	var/was_water = istype(old_loc, /turf/open/water)
 	var/is_water = istype(src.loc, /turf/open/water) && !HAS_TRAIT(src.loc, TRAIT_TURF_IGNORE_SLOWDOWN)
-
-	 if(was_water && !is_water)
-  		src.remove_movespeed_modifier(/datum/movespeed_modifier/wet_scug)
-  		src.remove_traits(list(TRAIT_NO_STAGGER, TRAIT_NO_THROW_HITPUSH), type)
- 	else if(!was_water && is_water)
-  		src.add_movespeed_modifier(/datum/movespeed_modifier/wet_scug)
-  		src.add_traits(list(TRAIT_NO_STAGGER, TRAIT_NO_THROW_HITPUSH), type)
+	if(was_water && !is_water)
+		src.remove_movespeed_modifier(/datum/movespeed_modifier/wet_scug)
+		src.remove_traits(list(TRAIT_NO_STAGGER, TRAIT_NO_THROW_HITPUSH), type)
+	else if(!was_water && is_water)
+		src.add_movespeed_modifier(/datum/movespeed_modifier/wet_scug)
+		src.add_traits(list(TRAIT_NO_STAGGER, TRAIT_NO_THROW_HITPUSH), type)
