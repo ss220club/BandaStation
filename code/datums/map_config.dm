@@ -298,7 +298,6 @@
 		// Just pick and take based on weight
 		for(var/i in 1 to ocean_levels)
 			maps_to_spawn += pick_weight_take(ocean_wilderness)
-			to_chat(world, "map_config maps_to_spawn: [maps_to_spawn]")
 		shuffle(maps_to_spawn)
 
 #ifdef UNIT_TESTS

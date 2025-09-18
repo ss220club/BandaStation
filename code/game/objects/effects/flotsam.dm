@@ -59,7 +59,7 @@
 		if(41 to 45)
 			new /obj/item/modular_computer/pda/clear(src.loc)
 		if(46 to 50)
-			new /obj/item/storage/box/syndie_kit/chameleon/broken
+			new /obj/item/storage/box/syndie_kit/chameleon/broken(src.loc)
 		if(51 to 52) // 2% chance
 			new /obj/item/melee/baton(src.loc)
 		if(53 to 54)
