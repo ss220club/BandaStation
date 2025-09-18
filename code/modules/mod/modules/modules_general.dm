@@ -709,9 +709,9 @@
 	complexity = 0
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
 	required_slots = list(ITEM_SLOT_HEAD|ITEM_SLOT_MASK, ITEM_SLOT_OCLOTHING|ITEM_SLOT_ICLOTHING, ITEM_SLOT_GLOVES, ITEM_SLOT_FEET)
-	icon_state = "ash_accretion"
+	icon_state = "diving"
 	incompatible_modules = list(/obj/item/mod/module/diving, /obj/item/mod/module/plasma_stabilizer)
-	overlay_state_inactive = "module_ash"
+	overlay_state_inactive = "module_diving"
 	use_mod_colors = TRUE
 	var/max_traveled_tiles = 10
 	var/traveled_tiles = 0

@@ -113,12 +113,12 @@ GLOBAL_LIST_INIT(ore_probability, list(
 
 /obj/structure/spawner/ice_moon/demonic_portal/rainworld
 
-/obj/structure/spawner/ice_moon/demonic_portal/rainworld/lobstrocity
-	mob_types = list(/mob/living/basic/mining/hivelord)
+/obj/structure/spawner/ice_moon/demonic_portal/rainworld/lobstrosity
+	mob_types = list(/mob/living/basic/mining/lobstrosity)
 	mob_gps_id = "L"
 
 /obj/structure/spawner/ice_moon/demonic_portal/rainworld/hivelord
-	mob_types = list(/mob/living/basic/mining/lobstrosity)
+	mob_types = list(/mob/living/basic/mining/hivelord)
 	mob_gps_id = "H"
 
 /obj/structure/spawner/ice_moon/demonic_portal/rainworld/basilisk
