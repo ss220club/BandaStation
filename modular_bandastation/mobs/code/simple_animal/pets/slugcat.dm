@@ -20,8 +20,6 @@
 	attack_verb_simple = "бьет"
 	mob_size = MOB_SIZE_SMALL
 	pass_flags = PASSTABLE
-	ventcrawler = VENTCRAWLER_ALWAYS
-	can_collar = 1
 	butcher_results = list(/obj/item/food/meat = 5)
 	response_help  = "pets"
 	response_disarm_continuous = "gently pushes aside"
@@ -46,6 +44,14 @@
 
 	var/is_pacifist = FALSE
 	var/is_reduce_damage = TRUE
+
+	///icon state of the collar we can wear
+	var/collar_icon_state
+
+/mob/living/basic/pet/slugcat/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/wears_collar, collar_icon_state = collar_icon_state)
+	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 
 /mob/living/basic/pet/slugcat/monk
 	name = "слизнекот-монах"

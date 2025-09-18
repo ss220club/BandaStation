@@ -34,8 +34,6 @@
 	health = 3
 	maxHealth = 3
 	var/amount_grown = 0
-	can_hide = 1
-	can_collar = 0
 	// holder_type = /obj/item/holder/hamster
 
 

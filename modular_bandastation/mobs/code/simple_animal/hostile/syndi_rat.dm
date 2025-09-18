@@ -18,8 +18,6 @@
 	pull_force = 1000
 	density = 0
 	ventcrawler = 2
-	can_hide = 1
-	can_collar = 1
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	see_in_dark = 6
 	speak = list("Слава Синдикату!","Смерть НаноТрейзен!", "У вас есть сыр?")
@@ -29,10 +27,11 @@
 
 	mob_size = MOB_SIZE_TINY // If theyre not at least small it doesnt seem like the treadmill works or makes sound
 	pass_flags = PASSTABLE
-	stop_automated_movement = 1
 
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
-	minbodytemp = 0
+
+	unsuitable_cold_damage = 0
+	unsuitable_heat_damage = 0
+	unsuitable_atmos_damage = 0
 
 	ranged =  1
 	projectiletype = /obj/item/projectile/beam/disabler
@@ -48,8 +47,12 @@
 	var/chew_probability = 1
 	var/squeak_sound = 'sound/creatures/mousesqueak.ogg'
 
+	///icon state of the collar we can wear
+	var/collar_icon_state
+
 /mob/living/basic/hostile/retaliate/syndirat/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/wears_collar, collar_icon_state = collar_icon_state)
 	AddComponent(/datum/component/squeak, list('sound/creatures/mousesqueak.ogg' = 1), 100, extrarange = SHORT_RANGE_SOUND_EXTRARANGE) //as quiet as a mouse or whatever
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = PROC_REF(on_atom_entered),

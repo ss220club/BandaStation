@@ -68,13 +68,15 @@
 	ventcrawler = 2
 	pass_flags = PASSTABLE | PASSMOB
 	mob_size = MOB_SIZE_SMALL
-	can_hide = 1
-	can_collar = 1
 	gold_core_spawnable = FRIENDLY_SPAWN
 	// holder_type = /obj/item/holder/cock
 
+	///icon state of the collar we can wear
+	var/collar_icon_state
+
 /mob/living/basic/cock/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/wears_collar, collar_icon_state = collar_icon_state)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 
 /mob/living/basic/pig

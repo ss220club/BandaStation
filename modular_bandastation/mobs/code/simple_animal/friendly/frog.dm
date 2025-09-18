@@ -33,12 +33,10 @@
 	mob_size = MOB_SIZE_TINY
 	layer = MOB_LAYER
 	atmos_requirements = list("min_oxy" = 16, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
-	minbodytemp = 223 // Below -50 Degrees Celcius
-	maxbodytemp = 323 // Above 50 Degrees Celcius
+	minimum_survivable_temperature = 223 // Below -50 Degrees Celcius
+	maximum_survivable_temperature = 323 // Above 50 Degrees Celcius
 	universal_speak = 0
-	can_hide = 1
 	// holder_type = /obj/item/holder/frog
-	can_collar = 1
 	gold_core_spawnable = FRIENDLY_SPAWN
 
 /mob/living/basic/frog/toxic

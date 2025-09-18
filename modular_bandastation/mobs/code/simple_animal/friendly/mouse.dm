@@ -74,7 +74,6 @@
 	response_harm_continuous = "stamps on"
 	response_harm_simple   = "stamps on"
 	gold_core_spawnable = NO_SPAWN
-	can_collar = 0
 	butcher_results = list(/obj/item/stack/sheet/metal = 1)
 	maxHealth = 20
 	health = 20

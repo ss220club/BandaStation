@@ -33,8 +33,8 @@
 	talk_sound = list('modular_bandastation/mobs/sound/lizard_angry1.ogg', 'modular_bandastation/mobs/sound/lizard_angry2.ogg', 'modular_bandastation/mobs/sound/lizard_angry3.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/lizard_damaged.ogg')
 
-	minbodytemp = 250 //Weak to cold
-	maxbodytemp = T0C + 200
+	minimum_survivable_temperature = 250 //Weak to cold
+	maximum_survivable_temperature = T0C + 200
 
 	gold_core_spawnable = HOSTILE_SPAWN
 

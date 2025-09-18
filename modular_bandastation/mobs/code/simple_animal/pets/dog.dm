@@ -80,8 +80,8 @@
 	icon_dead = "slime_puppy_dead"
 	nofur = TRUE
 	// holder_type = /obj/item/holder/slime_puppy
-	minbodytemp = 250 //Weak to cold
-	maxbodytemp = INFINITY
+	minimum_survivable_temperature = 250 //Weak to cold
+	maximum_survivable_temperature = INFINITY
 
 /mob/living/basic/pet/dog/corgi/lisa
 	// holder_type = /obj/item/holder/lisa

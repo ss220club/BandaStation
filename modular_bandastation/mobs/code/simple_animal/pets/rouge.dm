@@ -5,7 +5,6 @@
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	mob_size = MOB_SIZE_SMALL
 	blood_volume = BLOOD_VOLUME_NORMAL
-	can_collar = TRUE
 	gender = FEMALE
 	icon_state = "rouge"
 	icon_living = "rouge"
@@ -31,7 +30,13 @@
 	var/obj/item/inventory_head
 	faction = list("neutral", "syndicate")
 	gold_core_spawnable = NO_SPAWN
-	can_hide = 1
+
+	///icon state of the collar we can wear
+	var/collar_icon_state
+
+/mob/living/basic/hostile/retaliate/poison/snake/rouge/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/wears_collar, collar_icon_state = collar_icon_state)
 
 /mob/living/basic/hostile/retaliate/poison/snake/rouge/verb/chasetail()
 	set name = "Chase your tail"
@@ -181,13 +186,6 @@
 	emote_hear = list("Зевает", "Шипит", "Дурачится", "Толкается")
 	emote_see = list("Высовывает язык", "Кружится", "Трясёт хвостом")
 
-///Этот код скопирован с кода для корги и обнуляет показатели которые ему даёт риг. Если когда нибудь змейке дадут риг, раскомментируете///
-/*
-	set_light(0)
-	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
-	mutations.Remove(BREATHLESS)
-	minbodytemp = initial(minbodytemp)
-*/
 	if(inventory_head?.snake_fashion)
 		var/datum/snake_fashion/SF = new inventory_head.snake_fashion(src)
 		SF.apply(src)

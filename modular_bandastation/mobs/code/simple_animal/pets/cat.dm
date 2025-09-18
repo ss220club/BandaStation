@@ -21,14 +21,13 @@
 	butcher_results = list(/obj/item/food/meat = 8)
 	maxHealth = 40 // Sooooo faaaat...
 	health = 40
-	speed = 10 // TOO FAT
-	wander = 0 // LAZY
-	can_hide = 0
+	speed = 20 // TOO FAT
 	resting = TRUE
 	// holder_type = /obj/item/holder/fatcat
 
-/mob/living/basic/pet/cat/fat/handle_automated_action()
-	return
+
+/obj/item/mmi/posibrain/sphere/relaymove(mob/living/user, direction)
+	return	// LAZY
 
 /mob/living/basic/pet/cat/white
 	name = "white cat"
@@ -70,8 +69,8 @@
 	icon_living = "spacecat"
 	icon_dead = "spacecat_dead"
 	unsuitable_atmos_damage = 0
-	minbodytemp = TCMB
-	maxbodytemp = T0C + 40
+	minimum_survivable_temperature = TCMB
+	maximum_survivable_temperature = T0C + 40
 	// holder_type = /obj/item/holder/spacecat
 
 //named

@@ -24,7 +24,6 @@
 	health = 30
 	mob_size = MOB_SIZE_SMALL
 	pass_flags = PASSTABLE
-	ventcrawler = VENTCRAWLER_ALWAYS
 	blood_volume = BLOOD_VOLUME_NORMAL
 	melee_damage_type = STAMINA
 	melee_damage_lower = 3
@@ -42,6 +41,7 @@
 /mob/living/basic/possum/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
+	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 
 /mob/living/basic/possum/attackby__legacy__attackchain(obj/item/O, mob/living/user)
 	icon_state = icon_harm
