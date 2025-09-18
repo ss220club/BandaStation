@@ -15,7 +15,7 @@
 
 	return TRUE
 
-/datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, _value)
+/datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, value)
 	if(!istype(target))
 		return
 
@@ -23,7 +23,6 @@
 		apply_from_prefs(target, target.client.prefs)
 		return
 
-	UnregisterSignal(target, COMSIG_HUMAN_PREFS_APPLIED)
 	RegisterSignal(target, COMSIG_HUMAN_PREFS_APPLIED, PROC_REF(on_prefs_applied_after_core))
 
 /datum/preference/body_modifications/proc/on_prefs_applied_after_core(mob/living/carbon/human/target)
@@ -38,10 +37,12 @@
 	apply_from_prefs(target, prefs)
 
 /datum/preference/body_modifications/proc/apply_from_prefs(mob/living/carbon/human/target, datum/preferences/prefs)
-	if(!istype(target) || !prefs) return
+	if(!istype(target) || !prefs)
+		return
 
 	var/list/body_mods = prefs.read_preference(type)
-	if(!islist(body_mods) || !body_mods.len) return
+	if(!islist(body_mods) || !length(body_mods))
+		return
 
 	var/list/amputations = list()
 	var/list/prostheses = list()
