@@ -220,7 +220,7 @@
 		'sound/mobs/humanoids/human/gasp/gasp_male1.ogg',
 		'sound/mobs/humanoids/human/gasp/gasp_male2.ogg',
 		)
-
+/*
 /datum/emote/living/gasp/shock
 	key = "gaspshock"
 	key_third_person = "gaspsshock"
@@ -229,7 +229,7 @@
 	message_mime = "gasps in silent shock!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	stat_allowed = SOFT_CRIT
-
+ */
 /datum/emote/living/giggle
 	key = "giggle"
 	key_third_person = "giggles"
@@ -302,7 +302,7 @@
 	message = "laughs."
 	message_mime = "laughs silently!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-	specific_emote_audio_cooldown = 8 SECONDS
+	// specific_emote_audio_cooldown = 5 SECONDS // BANDASTATION REMOVAL
 	vary = TRUE
 
 /datum/emote/living/laugh/can_run_emote(mob/living/user, status_check = TRUE , intentional, params)

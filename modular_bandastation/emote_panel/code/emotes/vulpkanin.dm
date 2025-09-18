@@ -1,20 +1,17 @@
 /datum/species/vulpkanin/get_scream_sound(mob/living/carbon/human/human)
 	if(human.physique == MALE)
+		if(prob(1))
+			return 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg'
 		return pick(
-			'sound/mobs/humanoids/human/scream/malescream_1.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_2.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_3.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_4.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_5.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_6.ogg',
+			'modular_bandastation/emote_panel/audio/human/male/scream_male_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/male/scream_male_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/male/scream_male_3.ogg',
 		)
 
 	return pick(
-		'sound/mobs/humanoids/human/scream/femalescream_1.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_2.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_3.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_4.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_5.ogg',
+		'modular_bandastation/emote_panel/audio/human/female/scream_female_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/female/scream_female_2.ogg',
+		'modular_bandastation/emote_panel/audio/human/female/scream_female_3.ogg',
 	)
 
 /datum/species/vulpkanin/get_cough_sound(mob/living/carbon/human/human)
@@ -39,15 +36,14 @@
 /datum/species/vulpkanin/get_cry_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
 		return pick(
-			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
-			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_3.ogg',
 		)
 	return pick(
-		'sound/mobs/humanoids/human/cry/male_cry1.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry2.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry3.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/cry_male_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/cry_male_2.ogg',
 	)
-
 
 /datum/species/vulpkanin/get_sneeze_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
@@ -66,7 +62,7 @@
 
 // MARK: Emotes
 /datum/emote/living/carbon/human/vulpkanin
-	species_type_whitelist_typecache = /datum/species/vulpkanin
+	species_type_whitelist_typecache = list(/datum/species/vulpkanin)
 
 /datum/emote/living/carbon/human/vulpkanin/howl
 	name = "Выть"

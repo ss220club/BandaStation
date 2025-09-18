@@ -34,25 +34,10 @@
 	set category = "Эмоции"
 	emote("moan", intentional = TRUE)
 
-/mob/living/carbon/human/verb/emote_deathgasp()
-	set name = "▷ " + EMOTE_DEATHGASP + " "
-	set category = "Эмоции"
-	emote("deathgasp", intentional = TRUE)
-
-/mob/living/carbon/human/verb/emote_gasp_shock()
-	set name = "▷ " + EMOTE_HUMAN_SHOCK_GASP + " "
-	set category = "Эмоции"
-	emote("gaspshock", intentional = TRUE)
-
 /mob/living/carbon/human/verb/emote_gasp()
 	set name = "▷ " + EMOTE_HUMAN_GASP + " "
 	set category = "Эмоции"
 	emote("gasp", intentional = TRUE)
-
-/mob/living/carbon/human/verb/emote_hiss()
-	set name = "▷ " + EMOTE_HUMAN_HISS + " "
-	set category = "Эмоции"
-	emote("hiss", intentional = TRUE)
 
 /mob/living/carbon/human/verb/emote_sigh()
 	set name = "▷ " + EMOTE_SIGH + " "
@@ -210,11 +195,6 @@
 	set category = "Эмоции"
 	emote("taunt", intentional = TRUE)
 
-/mob/living/carbon/human/verb/emote_wing()
-	set name = "○ " + EMOTE_HUMAN_WING + " "
-	set category = "Эмоции"
-	emote("wing", intentional = TRUE)
-
 /mob/living/carbon/human/verb/emote_dance()
 	set name = "○ " + EMOTE_DANCE + " "
 	set category = "Эмоции"
@@ -310,11 +290,6 @@
 	set name = "◦ " + EMOTE_GLARE + " "
 	set category = "Эмоции"
 	emote("glare", intentional = TRUE)
-
-/mob/living/carbon/human/verb/emote_groan()
-	set name = "◦ " + EMOTE_GROAN + " "
-	set category = "Эмоции"
-	emote("groan", intentional = TRUE)
 
 /mob/living/carbon/human/verb/emote_grin()
 	set name = "◦ " + EMOTE_GRIN + " "
@@ -498,32 +473,43 @@
 	emote("shiver", intentional = TRUE)
 
 // MARK: Tajaran emotes
-/mob/living/carbon/human/species/tajaran/proc/emote_meow()
+/mob/living/carbon/human/species/tajaran/verb/emote_meow()
 	set name = "▷ " + EMOTE_HUMAN_MEOW + " "
 	set category = "Эмоции"
 	emote("meow_t", intentional = TRUE)
 
-/mob/living/carbon/human/species/tajaran/proc/emote_mow()
+/mob/living/carbon/human/species/tajaran/verb/emote_mow()
 	set name = "▷ " + EMOTE_HUMAN_MOW + " "
 	set category = "Эмоции"
 	emote("mow", intentional = TRUE)
 
-/mob/living/carbon/human/species/tajaran/proc/emote_purr()
+/mob/living/carbon/human/species/tajaran/verb/emote_purr()
 	set name = "▷ " + EMOTE_HUMAN_PURR + " "
 	set category = "Эмоции"
 	emote("purr_t", intentional = TRUE)
 
-/mob/living/carbon/human/species/tajaran/proc/emote_pur()
+/mob/living/carbon/human/species/tajaran/verb/emote_pur()
 	set name = "▷ " + EMOTE_HUMAN_PUR + " "
 	set category = "Эмоции"
 	emote("pur", intentional = TRUE)
 
-/mob/living/carbon/human/species/tajaran/proc/emote_purrr()
+/mob/living/carbon/human/species/tajaran/verb/emote_purrr()
 	set name = "▷ " + EMOTE_HUMAN_PURRR + " "
 	set category = "Эмоции"
 	emote("purrr", intentional = TRUE)
 
-/mob/living/carbon/human/species/tajaran/proc/emote_hiss_t()
+/mob/living/carbon/human/species/tajaran/verb/emote_hiss()
+	set name = "▷ " + EMOTE_HUMAN_HISS + " "
+	set category = "Эмоции"
+	emote("hiss", intentional = TRUE)
+
+/mob/living/carbon/human/species/tajaran/verb/emote_hiss_t()
 	set name = "▷ " + EMOTE_HUMAN_HISST + " "
 	set category = "Эмоции"
 	emote("hiss_t", intentional = TRUE)
+
+// MARK: Moth emotes
+/mob/living/carbon/human/species/moth/verb/emote_wing()
+	set name = "○ " + EMOTE_HUMAN_WING + " "
+	set category = "Эмоции"
+	emote("wing", intentional = TRUE)

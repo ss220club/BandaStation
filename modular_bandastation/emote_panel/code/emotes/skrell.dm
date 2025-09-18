@@ -1,32 +1,29 @@
 /datum/species/skrell/get_scream_sound(mob/living/carbon/human/human)
 	if(human.physique == MALE)
+		if(prob(1))
+			return 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg'
 		return pick(
-			'sound/mobs/humanoids/human/scream/malescream_1.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_2.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_3.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_4.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_5.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_6.ogg',
+			'modular_bandastation/emote_panel/audio/human/male/scream_male_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/male/scream_male_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/male/scream_male_3.ogg',
 		)
 
 	return pick(
-		'sound/mobs/humanoids/human/scream/femalescream_1.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_2.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_3.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_4.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_5.ogg',
+		'modular_bandastation/emote_panel/audio/human/female/scream_female_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/female/scream_female_2.ogg',
+		'modular_bandastation/emote_panel/audio/human/female/scream_female_3.ogg',
 	)
 
 /datum/species/skrell/get_cry_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
 		return pick(
-			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
-			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_3.ogg',
 		)
 	return pick(
-		'sound/mobs/humanoids/human/cry/male_cry1.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry2.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry3.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/cry_male_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/cry_male_2.ogg',
 	)
 
 /datum/species/skrell/get_sigh_sound(mob/living/carbon/human/human)
@@ -87,9 +84,9 @@
 
 // MARK: Emotes
 /datum/emote/living/carbon/human/skrell
-	species_type_whitelist_typecache = /datum/species/skrell
+	species_type_whitelist_typecache = list(/datum/species/skrell)
 
-/datum/emote/living/carbon/human/screll/warble
+/datum/emote/living/carbon/human/skrell/warble
 	name = "Трелить"
 	key = "warble"
 	key_third_person = "warbles"
@@ -97,15 +94,14 @@
 	message_param = "трелит на %t."
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
 	vary = TRUE
-	species_type_whitelist_typecache = list(/datum/species/skrell)
 
-/datum/emote/living/carbon/human/screll/warble/get_sound(mob/living/user)
+/datum/emote/living/carbon/human/skrell/warble/get_sound(mob/living/user)
 	return pick(
 		'modular_bandastation/emote_panel/audio/skrell/warble_1.ogg',
 		'modular_bandastation/emote_panel/audio/skrell/warble_2.ogg',
 	)
 
-/datum/emote/living/carbon/human/screll/croak
+/datum/emote/living/carbon/human/skrell/croak
 	name = "Квакать"
 	key = "croak"
 	key_third_person = "croak"
@@ -113,16 +109,15 @@
 	message_param = "квакает на %t."
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
 	vary = TRUE
-	species_type_whitelist_typecache = list(/datum/species/skrell)
 
-/datum/emote/living/carbon/human/screll/croak/get_sound(mob/living/user)
+/datum/emote/living/carbon/human/skrell/croak/get_sound(mob/living/user)
 	return pick(
 		'modular_bandastation/emote_panel/audio/skrell/croak_1.ogg',
 		'modular_bandastation/emote_panel/audio/skrell/croak_2.ogg',
 		'modular_bandastation/emote_panel/audio/skrell/croak_3.ogg',
 	)
 
-/datum/emote/living/carbon/human/screll/croak/anger
+/datum/emote/living/carbon/human/skrell/croak/anger
 	name = "Гневно квакать"
 	key = "croak_anger"
 	key_third_person = "croak_anger"
@@ -130,9 +125,8 @@
 	message_param = "гневно квакает на %t."
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
 	vary = TRUE
-	species_type_whitelist_typecache = list(/datum/species/skrell)
 
-/datum/emote/living/carbon/human/croak/anger/get_sound(mob/living/user)
+/datum/emote/living/carbon/human/skrell/croak/anger/get_sound(mob/living/user)
 	return pick(
 		'modular_bandastation/emote_panel/audio/skrell/anger_1.ogg',
 		'modular_bandastation/emote_panel/audio/skrell/anger_2.ogg',

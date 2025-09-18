@@ -5,6 +5,8 @@
 
 #include "code/emotes/human.dm"
 #include "code/emotes/jellypeople.dm"
+#include "code/emotes/lizard.dm"
+#include "code/emotes/mothpeople.dm"
 #include "code/emotes/podpeople.dm"
 #include "code/emotes/skrell.dm"
 #include "code/emotes/tajaran.dm"
