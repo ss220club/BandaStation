@@ -11,7 +11,6 @@
 	worn_icon = 'modular_bandastation/martial_arts/icons/mob/belt.dmi'
 	worn_icon_state = "judo"
 	w_class = WEIGHT_CLASS_BULKY
-	var/datum/martial_art/judo/style
 	storage_type = /datum/storage/security_belt/judo
 
 /obj/item/storage/belt/judobelt/Initialize(mapload)
