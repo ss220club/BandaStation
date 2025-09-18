@@ -9,15 +9,16 @@
 	var/datum/tts_seed/mimic_tts_seed
 
 // Fake Voice
-/datum/action/changeling/mimicvoice/sting_action(mob/user)
+/datum/action/changeling/mimicvoice/sting_action(mob/living/carbon/human/user)
 	var/datum/antagonist/changeling/changeling = IS_CHANGELING(user)
-	if(changeling.mimicing)
-		changeling.mimicing = ""
+	if(user.override_voice)
 		changeling.chem_recharge_slowdown -= 0.25
-		to_chat(user, span_notice("Мы возвращаем наши голосовые железы в исходное положение."))
+		user.override_voice = ""
 		UnregisterSignal(user, COMSIG_TTS_COMPONENT_PRE_CAST_TTS) // BANDASTATION EDIT - TTS
 		mimic_tts_seed = null // BANDASTATION EDIT - TTS
+		to_chat(user, span_notice("Мы возвращаем наши голосовые железы в исходное положение."))
 		return
+
 	// BANDASTATION EDIT START - TTS
 	var/mimic_voice
 	var/choice = tgui_input_list(user, "Выбрать самому имя или из существующих людей?", "Имитация голоса", list("Ручной ввод имени", "Существующий человек"))
@@ -38,21 +39,21 @@
 				mimic_tts_seed = SStts220.tts_seeds[mimic_tts_seed_name]
 	// BANDASTATION EDIT END
 	..()
-	changeling.mimicing = mimic_voice
 	changeling.chem_recharge_slowdown += 0.25
+	user.override_voice = mimic_voice
 	to_chat(user, span_notice("Мы формируем наши железы так, чтобы они издавали голос <b>[mimic_voice]</b>, Это замедлит регенерацию химических веществ во время активной деятельности."))
 	to_chat(user, span_notice("Используйте эту силу снова, чтобы вернуть наш прежний голос и вернуть производство химикатов к нормальному уровню."))
 	RegisterSignal(user, COMSIG_TTS_COMPONENT_PRE_CAST_TTS, PROC_REF(replace_tts_seed)) // BANDASTATION EDIT - TTS
 	return TRUE
 
-/datum/action/changeling/mimicvoice/Remove(mob/user)
+/datum/action/changeling/mimicvoice/Remove(mob/living/carbon/human/user)
 	var/datum/antagonist/changeling/changeling = IS_CHANGELING(user)
-	if(changeling?.mimicing)
-		changeling.chem_recharge_slowdown = max(0, changeling.chem_recharge_slowdown - 0.25)
-		changeling.mimicing = ""
-		to_chat(user, span_notice("Наши голосовые железы возвращаются в исходное положение."))
+	if(user.override_voice)
+		changeling?.chem_recharge_slowdown = max(0, changeling.chem_recharge_slowdown - 0.25)
+		user.override_voice = ""
 		UnregisterSignal(user, COMSIG_TTS_COMPONENT_PRE_CAST_TTS) // BANDASTATION EDIT - TTS
 		mimic_tts_seed = null // BANDASTATION EDIT - TTS
+		to_chat(user, span_notice("Наши голосовые железы возвращаются в исходное положение."))
 	. = ..()
 
 // BANDASTATION EDIT START - TTS
