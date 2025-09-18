@@ -43,15 +43,15 @@
 	if(!electrochromed)
 		polarized_image.color = tinted_color
 		animate_color = default_color
-		set_opacity(FALSE)
 		if(multi_tile)
 			filler.set_opacity(FALSE)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, set_opacity), FALSE), TINT_ANIMATION_DURATION)
 	else
 		polarized_image.color = default_color
 		animate_color = tinted_color
-		set_opacity(TRUE)
 		if(multi_tile)
 			filler.set_opacity(TRUE)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, set_opacity), TRUE), TINT_ANIMATION_DURATION)
 
 	cut_overlay(polarized_overlay)
 

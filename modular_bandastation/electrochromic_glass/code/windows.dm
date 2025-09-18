@@ -2,12 +2,6 @@
 	/// Is this windows electrochromic?
 	var/electrochromic = FALSE
 
-/obj/structure/window/Initialize(mapload)
-	. = ..()
-	var/area/current_area = get_area(src)
-	if(electrochromic && current_area.tinted)
-		toggle_polarization()
-
 /obj/structure/window/examine(mob/user)
 	. = ..()
 	if(electrochromic)
@@ -36,7 +30,7 @@
 /obj/structure/window/proc/toggle_polarization()
 	if(opacity)
 		animate(src, color = generate_glass_matrix(src), time = TINT_ANIMATION_DURATION)
-		set_opacity(FALSE)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, set_opacity), FALSE), TINT_ANIMATION_DURATION)
 	else
 		animate(src, color = generate_glass_matrix(src, TINTED_ALPHA), time = TINT_ANIMATION_DURATION)
-		set_opacity(TRUE)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, set_opacity), TRUE), TINT_ANIMATION_DURATION)
