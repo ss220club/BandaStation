@@ -1,66 +1,3 @@
-/datum/status_effect/judo_armbar
-	id = "armbar"
-	duration = 5 SECONDS
-	alert_type = null
-	status_type = STATUS_EFFECT_REPLACE
-
-//Corporate Judo Belt
-/datum/storage/security_belt/judo
-	max_slots = 3
-	max_total_storage = 7
-
-/obj/item/storage/belt/judobelt
-	name = "Corporate Judo Belt"
-	desc = "Обучает носителя корпоративно дзюдо НТ."
-	icon = 'modular_bandastation/martial_arts/icons/belts.dmi'
-	icon_state = "judobelt"
-	worn_icon = 'modular_bandastation/martial_arts/icons/mob/belt.dmi'
-	worn_icon_state = "judo"
-	w_class = WEIGHT_CLASS_BULKY
-	var/datum/martial_art/judo/style
-	storage_type = /datum/storage/security_belt/judo
-
-/obj/item/storage/belt/judobelt/Initialize(mapload)
-	. = ..()
-	style = new()
-
-/obj/item/storage/belt/judobelt/equipped(mob/user, slot)
-	. = ..()
-	if(!ishuman(user))
-		return
-	if(slot == ITEM_SLOT_BELT)
-		var/mob/living/carbon/human/H = user
-		if(HAS_TRAIT(user, TRAIT_PACIFISM))
-			to_chat(H, span_warning("Искусство корпоративного дзюдо бесполезно отдается эхом в вашей голове, мысль о насилии вызывает у вас отвращение!"))
-			return
-		style.teach(H, TRUE)
-		return
-
-/obj/item/storage/belt/judobelt/dropped(mob/user)
-	..()
-	if(!ishuman(user))
-		return
-	var/mob/living/carbon/human/H = user
-	if(H.get_item_by_slot(ITEM_SLOT_BELT) == src)
-		style.unlearn(H)
-
-/mob/living/proc/judo_help()
-	set name = "Вспомнить основы дзюдо."
-	set desc = "Вы взываете к техникам корпоратского дзюдо."
-	set category = "IC"
-
-	var/list/message = list()
-	message += span_bolditalic("Вы взываете к техникам корпоратского дзюдо.")
-	message += "[span_notice("Бросок")]: Grab Shove. Возьмите врага в захват и бросьте на пол. Наносит урон стамине."
-	message += "[span_notice("Большое колесо")]: Grab Shove Punch. Перекиньте противника, захваченного 'рычагом', через себя или прижмите его к полу."
-	message += "[span_notice("Тычок в глаза")]: Shove Punch. Ударьте противника в глаза, мгновенно ослепляя его."
-	message += "[span_notice("Рычаг")]: Shove Shove Grab. Возьмите лежащего противника в захват."
-	message += "[span_notice("Золотой взрыв")]: Help Shove Help Grab Shove Shove Grab Help Shove Shove Grab Help. Используя боевые искусства, вы можете оглушить противника жизненной энергией. Или перегрузив наниты пояса."
-	message += "[span_notice("Сбить с толку")]: Нанесите противнику удар по уху, ненадолго сбив его с толку."
-	message += span_bolditalic("Ваши удары кулаками примерно в два раза сильнее, чем у остальных.")
-
-	to_chat(usr, message.Join("\n"))
-
 /datum/martial_art/judo
 	name = "Corporate Judo"
 	id = "corporate judo"
@@ -100,9 +37,11 @@
 		return MARTIAL_ATTACK_SUCCESS
 	defender.apply_damage(6, BRUTE)
 	playsound(get_turf(defender), 'sound/effects/hit_punch.ogg', 50, TRUE, -1)
-	defender.visible_message(span_danger("[attacker.declent_ru(NOMINATIVE)] [picked_hit_type] [defender.declent_ru(ACCUSATIVE)]!"), \
-					span_userdanger("[attacker.declent_ru(NOMINATIVE)] [picked_hit_type] вас!"))
-	log_combat(attacker, defender, "Melee attacked with [src]")
+	defender.visible_message(
+		span_danger("[attacker.declent_ru(NOMINATIVE)] [picked_hit_type] [defender.declent_ru(ACCUSATIVE)]!"),
+		span_userdanger("[attacker.declent_ru(NOMINATIVE)] [picked_hit_type] вас!")
+	)
+	log_combat(attacker, defender, "melee attack ([src])")
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/judo/disarm_act(mob/living/attacker, mob/living/defender)
@@ -120,10 +59,10 @@
 	return MARTIAL_ATTACK_INVALID
 
 /datum/martial_art/judo/grab_act(mob/living/attacker, mob/living/defender)
-	if(defender.check_block(attacker, 0, "[attacker]'s grab", UNARMED_ATTACK))
+	if(defender.check_block(attacker, 0, "захват", UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
-	defender.Stun( 0.4 SECONDS)
+	defender.Stun(0.4 SECONDS)
 
 	add_to_streak("G", defender)
 	return check_streak(attacker, defender) ? MARTIAL_ATTACK_SUCCESS : MARTIAL_ATTACK_INVALID
@@ -152,7 +91,7 @@
 	return FALSE
 
 /datum/martial_art/judo/proc/check_one_click_combo(mob/living/attacker, mob/living/defender)
-	if(findtext(streak, DISCOMBOBULATE_COMBO))
+	if(streak == DISCOMBOBULATE_COMBO)
 		reset_streak()
 		return discombobulate(attacker, defender)
 
@@ -166,15 +105,17 @@
 /datum/martial_art/judo/proc/armbar(mob/living/attacker, mob/living/defender)
 	if(defender.body_position != LYING_DOWN)
 		return FALSE
-	defender.visible_message(span_warning("[attacker.declent_ru(NOMINATIVE)] берёт [defender.declent_ru(ACCUSATIVE)] в захват!"), \
-						span_userdanger("[attacker.declent_ru(NOMINATIVE)] берёт вас в захват!"))
+	defender.visible_message(
+		span_warning("[attacker.declent_ru(NOMINATIVE)] берёт [defender.declent_ru(ACCUSATIVE)] в захват!"),
+		span_userdanger("[attacker.declent_ru(NOMINATIVE)] берёт вас в захват!")
+	)
 	playsound(get_turf(attacker), 'sound/items/weapons/slashmiss.ogg', 40, TRUE, -1)
 	if(attacker.body_position != LYING_DOWN)
 		defender.drop_all_held_items()
 	defender.apply_damage(45, STAMINA)
 	defender.apply_status_effect(/datum/status_effect/judo_armbar)
 	defender.Knockdown(5 SECONDS)
-	log_combat(attacker, defender, "Melee attacked with martial-art [src] : Armbar")
+	log_combat(attacker, defender, "armbar ([src])")
 	return TRUE
 
 /datum/martial_art/judo/proc/eyepoke(mob/living/attacker, mob/living/defender)
@@ -182,18 +123,22 @@
 		to_chat(attacker, "Глаза цели защищены от удара.")
 		return FALSE
 
-	defender.visible_message(span_warning("[attacker.declent_ru(NOMINATIVE)] тыкает в глаза [defender.declent_ru(ACCUSATIVE)]!"), \
-						span_userdanger("[attacker.declent_ru(ACCUSATIVE)] тыкает вам в глаза!"))
+	defender.visible_message(
+		span_warning("[attacker.declent_ru(NOMINATIVE)] тыкает в глаза [defender.declent_ru(ACCUSATIVE)]!"),
+		span_userdanger("[attacker.declent_ru(ACCUSATIVE)] тыкает вам в глаза!")
+	)
 	playsound(get_turf(attacker), 'sound/items/weapons/whip.ogg', 40, TRUE, -1)
 	defender.apply_damage(10, BRUTE)
 	defender.set_eye_blur_if_lower(30 SECONDS)
 	defender.adjust_temp_blindness(2 SECONDS)
-	log_combat(attacker, defender, "Melee attacked with martial-art [src] : Eye Poke")
+	log_combat(attacker, defender, "eye poke ([src])")
 	return TRUE
 
 /datum/martial_art/judo/proc/goldenblast(mob/living/attacker, mob/living/defender)
-	defender.visible_message(span_warning("[attacker.declent_ru(NOMINATIVE)] бьёт [defender.declent_ru(ACCUSATIVE)] энергией, прижимая к земле!"), \
-						span_userdanger("[attacker.declent_ru(NOMINATIVE)] делает странные жесты руками, дико кричит и тычет вам прямо в грудь! Вы чувствуете, как гнев ЗОЛОТОГО РАЗРЯДА пронзает ваше тело! Вы совершенно обробастены!"))
+	defender.visible_message(
+		span_warning("[attacker.declent_ru(NOMINATIVE)] бьёт [defender.declent_ru(ACCUSATIVE)] энергией, прижимая к земле!"),
+		span_userdanger("[attacker.declent_ru(NOMINATIVE)] делает странные жесты руками, дико кричит и тычет вам прямо в грудь! Вы чувствуете, как гнев ЗОЛОТОГО РАЗРЯДА пронзает ваше тело! Вы совершенно обробастены!")
+	)
 	playsound(get_turf(defender), 'sound/items/weapons/taser.ogg', 55, TRUE, -1)
 	defender.SpinAnimation(10, 1)
 	do_sparks(5, FALSE, defender)
@@ -202,18 +147,20 @@
 	defender.apply_damage(120, STAMINA)
 	defender.Knockdown(30 SECONDS)
 	defender.set_confusion(30 SECONDS)
-	log_combat(attacker, defender, "Melee attacked with martial-art [src] : Golden Blast")
+	log_combat(attacker, defender, "golden blast ([src])")
 	return TRUE
 
 /datum/martial_art/judo/proc/judothrow(mob/living/attacker, mob/living/defender)
 	if((attacker.body_position == LYING_DOWN) || (defender.body_position == LYING_DOWN))
 		return FALSE
-	defender.visible_message(span_warning("[attacker.declent_ru(NOMINATIVE)] бросает [defender.declent_ru(ACCUSATIVE)] на землю!"), \
-						span_userdanger("[attacker.declent_ru(NOMINATIVE)] бросает вас на землю!"))
+	defender.visible_message(
+		span_warning("[attacker.declent_ru(NOMINATIVE)] бросает [defender.declent_ru(ACCUSATIVE)] на землю!"),
+		span_userdanger("[attacker.declent_ru(NOMINATIVE)] бросает вас на землю!")
+	)
 	playsound(get_turf(attacker), 'sound/items/weapons/slam.ogg', 40, TRUE, -1)
 	defender.apply_damage(25, STAMINA)
 	defender.Knockdown(7 SECONDS)
-	log_combat(attacker, defender, "Melee attacked with martial-art [src] : Judo Throw")
+	log_combat(attacker, defender, "judo throw ([src])")
 	return TRUE
 
 /datum/martial_art/judo/proc/wheelthrow(mob/living/attacker, mob/living/defender)
@@ -221,19 +168,23 @@
 		return FALSE
 
 	if(attacker.body_position != LYING_DOWN)
-		defender.visible_message(span_warning("[attacker.declent_ru(NOMINATIVE)] бросает [defender.declent_ru(ACCUSATIVE)] через плечо, и стукает об землю!"), \
-							span_userdanger("[attacker.declent_ru(NOMINATIVE)] бросает вас через плечо,стукая об землю!"))
+		defender.visible_message(
+			span_warning("[attacker.declent_ru(NOMINATIVE)] бросает [defender.declent_ru(ACCUSATIVE)] через плечо, и стукает об землю!"),
+			span_userdanger("[attacker.declent_ru(NOMINATIVE)] бросает вас через плечо,стукая об землю!")
+		)
 		playsound(get_turf(attacker), 'sound/effects/magic/tail_swing.ogg', 40, TRUE, -1)
 		defender.SpinAnimation(10, 1)
 	else
-		defender.visible_message(span_warning("[attacker.declent_ru(NOMINATIVE)] прижимает [defender.declent_ru(ACCUSATIVE)] к земле."), \
-							span_userdanger("[attacker.declent_ru(NOMINATIVE)] прижимает вас к земле!"))
+		defender.visible_message(
+			span_warning("[attacker.declent_ru(NOMINATIVE)] прижимает [defender.declent_ru(ACCUSATIVE)] к земле."),
+			span_userdanger("[attacker.declent_ru(NOMINATIVE)] прижимает вас к земле!")
+		)
 		playsound(get_turf(attacker), 'sound/items/weapons/slam.ogg', 40, TRUE, -1)
 
 	defender.apply_damage(120, STAMINA)
 	defender.Knockdown(15 SECONDS)
 	defender.set_confusion(10 SECONDS)
-	log_combat(attacker, defender, "Melee attacked with martial-art [src] : Wheel Throw / Floor Pin")
+	log_combat(attacker, defender, "wheel throw / floor pin ([src])")
 	return TRUE
 
 /datum/action/discombobulate
@@ -248,18 +199,26 @@
 	if(!.)
 		return
 	var/datum/martial_art/source = target
-	if (source.streak ==  DISCOMBOBULATE_COMBO)
-		owner.visible_message(span_danger("[owner.declent_ru(NOMINATIVE)] встает в нейтральную стойку."), span_bolditalic("Вы не готовите новых приёмов."))
+	if (source.streak == DISCOMBOBULATE_COMBO)
+		owner.visible_message(
+			span_danger("[owner.declent_ru(NOMINATIVE)] встает в нейтральную стойку."),
+			span_bolditalic("Вы не готовите новых приёмов.")
+		)
 		source.streak = ""
 	else
-		owner.visible_message(span_danger("[owner.declent_ru(NOMINATIVE)] встает в сбивающую стойку!"), span_bolditalic("Ваше следующеё приём это 'сбить с толку'."))
+		owner.visible_message(
+			span_danger("[owner.declent_ru(NOMINATIVE)] встает в сбивающую стойку!"),
+			span_bolditalic("Ваше следующеё приём это 'сбить с толку'.")
+		)
 		source.streak = DISCOMBOBULATE_COMBO
 
 /datum/martial_art/judo/proc/discombobulate(mob/living/attacker, mob/living/defender)
-	defender.visible_message(span_warning("[attacker.declent_ru(NOMINATIVE)] бьёт [attacker.declent_ru(ACCUSATIVE)] ладонью по голове!"), \
-						span_userdanger("[attacker.declent_ru(NOMINATIVE)] ударяет вас ладонью!"))
+	defender.visible_message(
+		span_warning("[attacker.declent_ru(NOMINATIVE)] бьёт [attacker.declent_ru(ACCUSATIVE)] ладонью по голове!"),
+		span_userdanger("[attacker.declent_ru(NOMINATIVE)] ударяет вас ладонью!")
+	)
 	playsound(get_turf(attacker), 'sound/items/weapons/slap.ogg', 40, TRUE, -1)
 	defender.apply_damage(10, STAMINA)
 	defender.adjust_confusion(5 SECONDS)
-	log_combat(attacker, defender, "Melee attacked with martial-art [src] : Discombobulate")
+	log_combat(attacker, defender, "discombobulate ([src])")
 	return TRUE
