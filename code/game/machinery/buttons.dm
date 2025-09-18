@@ -67,10 +67,12 @@
 	setup_device()
 	find_and_hang_on_wall()
 	register_context()
+	RegisterSignal(src, COMSIG_MACHINERY_POWER_LOST, PROC_REF(on_power_lost)) // BANDASTATION ADDITION
 
 /obj/machinery/button/Destroy()
 	QDEL_NULL(device)
 	QDEL_NULL(board)
+	UnregisterSignal(src, COMSIG_MACHINERY_POWER_LOST) // BANDASTATION ADDITION
 	return ..()
 
 /obj/machinery/button/proc/setup_device()

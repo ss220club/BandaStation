@@ -117,6 +117,9 @@
 	display_name = "Construction"
 	description = "Tools and essential machinery used for station maintenance and expansion."
 	design_ids = list(
+		/* BANDASTATION ADDITION - START */
+		"electrochromic",
+		/* BANDASTATION ADDITION - END */
 		"circuit_imprinter_offstation",
 		"circuit_imprinter",
 		"solarcontrol",

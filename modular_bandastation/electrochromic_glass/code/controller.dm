@@ -18,11 +18,21 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/electrochromic, 24)
 
 /obj/machinery/button/electrochromic/setup_device()
 	. = ..()
-	if(device && istype(device, /obj/item/assembly/control/electrochromic))
-		var/obj/item/assembly/control/electrochromic/electrochromic_device = device
-		electrochromic_device.button_area = get_area(src)
-		if(range)
-			electrochromic_device.range = range
+	if(!device || !istype(device, /obj/item/assembly/control/electrochromic))
+		return
+
+	var/obj/item/assembly/control/electrochromic/electrochromic_device = device
+	electrochromic_device.button_area = get_area(src)
+	if(range)
+		electrochromic_device.range = range
+
+/obj/machinery/button/proc/on_power_lost()
+	SIGNAL_HANDLER
+	if(!device || !istype(device, /obj/item/assembly/control/electrochromic))
+		return
+
+	var/obj/item/assembly/control/electrochromic/electrochromic_device = device
+	electrochromic_device.disable_tint()
 
 // MARK: Assembly
 /obj/item/assembly/control/electrochromic
