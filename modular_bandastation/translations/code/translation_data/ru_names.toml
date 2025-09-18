@@ -16222,6 +16222,24 @@ instrumental = "модулем контроля питания для ЛКП"
 prepositional = "модуле контроля питания для ЛКП"
 gender = "male"
 
+["APC frame"]
+nominative = "панель ЛКП"
+genitive = "панели ЛКП"
+dative = "панели ЛКП"
+accusative = "панель ЛКП"
+instrumental = "панелью ЛКП"
+prepositional = "панели ЛКП"
+gender = "female"
+
+["terminal"]
+nominative = "клемма"
+genitive = "клеммы"
+dative = "клемме"
+accusative = "клемму"
+instrumental = "клеммой"
+prepositional = "клемме"
+gender = "female"
+
 ["airlock electronics"]
 nominative = "электроника шлюза"
 genitive = "электроники шлюза"
@@ -24775,7 +24793,7 @@ genitive = "сырого галлюцинаторного ядра"
 dative = "сырому галлюцинаторному ядру"
 accusative = "сырое галлюцинаторное ядро"
 instrumental = "сырым галлюцинаторным ядром"
-prepositional = "сыром галлюцинаторном аядре"
+prepositional = "сыром галлюцинаторном ядре"
 
 ["pyroclastic anomaly core"]
 nominative = "пирокластическое аномальное ядро"
@@ -26869,6 +26887,14 @@ instrumental = "залом заседаний совета"
 prepositional = "зале заседаний совета"
 gender = "male"
 
+["glimmering residue"]
+nominative = "мерцающий осадок"
+genitive = "мерцающего осадка"
+dative = "мерцающему осадку"
+accusative = "мерцающий осадок"
+instrumental = "мерцающим осадком"
+prepositional = "мерцающем осадке"
+
 ## Common Areas
 
 ["Dormitories"]
@@ -27295,3 +27321,11 @@ accusative = "коридор отдела обслуживания"
 instrumental = "коридором отдела обслуживания"
 prepositional = "коридоре отдела обслуживания"
 gender = "male"
+
+["Nanotrasen radio jammer"]
+nominative = "генератор помех Нанотрейзен "
+genitive = "генератора помех Нанотрейзен"
+dative = "генератору помеху Нанотрейзен"
+accusative = "генератор помех Нанотрейзен"
+instrumental = "генератором помех Нанотрейзен"
+prepositional = "генераторе помех Нанотрейзен"
