@@ -12,7 +12,6 @@
 /turf/open/floor/temple,
 /area/rainworld/surface/misty_island/temple/inside)
 "eG" = (
-/obj/structure/closet/crate/lavender,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
@@ -179,7 +178,6 @@
 /turf/open/floor/temple,
 /area/rainworld/surface/misty_island/temple/inside)
 "Jl" = (
-/obj/structure/closet/crate/lavender,
 /obj/effect/spawner/random/food_or_drink/seed_rare,
 /obj/effect/spawner/random/food_or_drink/seed_rare,
 /obj/effect/spawner/random/food_or_drink/seed_rare,
