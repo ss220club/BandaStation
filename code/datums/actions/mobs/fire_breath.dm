@@ -78,7 +78,7 @@
 	else if(fire_temperature == 10)
   		barbecued.electrocute_act(30, "electric breath", flags = SHOCK_TESLA|SHOCK_NOGLOVES|SHOCK_NOSTUN)
   		to_chat(barbecued, span_userdanger("Вы получили разряд тока электрическим дыханием [source]!"))
- 	else
+	else
 		to_chat(barbecued, span_userdanger("Вас подожгло огненное дыхание [source]!"))
 	barbecued.adjustFireLoss(fire_damage)
 
