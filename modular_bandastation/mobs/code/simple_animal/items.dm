@@ -40,23 +40,3 @@
 	)
 	foodtypes = RAW | MEAT | GORE
 	tastes = list("meat" = 1)
-
-/obj/item/food/meat/slab/snailmeat
-	name = "snail meat"
-	desc = "Сырая космо-улитка в собственном соку."
-	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 2,
-		/datum/reagent/consumable/nutriment/vitamin = 5
-	)
-	foodtypes = RAW | MEAT
-	tastes = list("meat" = 1)
-
-/obj/item/food/meat/slab/turtlemeat
-	name = "turtle meat"
-	desc = "Сырая космо-черепаха в собственном соку."
-	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 6,
-		/datum/reagent/consumable/nutriment/vitamin = 8
-	)
-	foodtypes = RAW | MEAT
-	tastes = list("meat" = 1)

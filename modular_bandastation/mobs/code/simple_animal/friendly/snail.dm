@@ -1,91 +1,47 @@
 /mob/living/basic/snail
-	name = "space snail"
+	name = "улитка"
+	desc = "Маленькая улиточка со своим маленьким домиком. Не гигиеничная..."
+	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
+	// holder_type = /obj/item/holder/snail
+
+/mob/living/basic/snail/space
+	name = "космоулитка"
 	desc = "Маленькая космо-улиточка со своим космо-домиком. Прочная, тихая и медленная."
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
 	icon_state = "snail"
 	icon_living = "snail"
 	icon_dead = "snail_dead"
-	speak = list("Uhh.", "Hurrr.")
-	health = 100
-	maxHealth = 100
-	speed = 10
-	attack_verb_continuous = "расталкивает"
-	attack_verb_simple = "толкает"
-	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
-	response_help  = "pets"
-	response_disarm_continuous = "shoos"
-	response_disarm_simple = "shoos"
-	response_harm_continuous = "stomps on"
-	response_harm_simple   = "stomps on"
-	ventcrawler = 2
-	density = 0
-	pass_flags = PASSTABLE | PASSMOB
-	mob_size = MOB_SIZE_SMALL
-	gender = NEUTER
-	can_hide = 1
-	butcher_results = list(/obj/item/food/salmonmeat/snailmeat = 1, /obj/item/stack/ore/tranquillite = 1)
-	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
-	stop_automated_movement_when_pulled = 0
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
-	faction = list("slime", "neutral")
-	reagents = new()
-	// holder_type = /obj/item/holder/snail
 
-/mob/living/basic/snail/Process_Spacemove(movement_dir = 0)
+/mob/living/basic/snail/space/Process_Spacemove(movement_dir = 0)
 	return 1
 
-/mob/living/basic/snail/Move(atom/newloc, direct, movetime)
+/mob/living/basic/snail/space/Move(atom/newloc, direct, movetime)
 	var/oldLoc = src.loc
 	. = ..()
 	if(.)
 		if(stat != DEAD)
 			make_wet_floor(oldLoc)
 
-/mob/living/basic/snail/proc/make_wet_floor(atom/oldLoc)
+/mob/living/basic/snail/space/proc/make_wet_floor(atom/oldLoc)
 	if(oldLoc != src.loc)
 		reagents.add_reagent("water",10)
 		reagents.reaction(oldLoc, REAGENT_TOUCH, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
 		reagents.remove_any(10)
 
-/mob/living/basic/snail/lube
+/mob/living/basic/snail/space/lube
 	name = "space snail"
 	desc = "Маленькая космо-улиточка со своим космо-домиком. Прочная, тихая и медленная. И очень склизкая."
 	gold_core_spawnable = HOSTILE_SPAWN
 	faction = list("slime", "hostile")
 
-/mob/living/basic/snail/lube/make_wet_floor(atom/oldLoc)
+/mob/living/basic/snail/space/lube/make_wet_floor(atom/oldLoc)
 	if(oldLoc != src.loc)
 		reagents.add_reagent("lube",10)
 		reagents.reaction(oldLoc, REAGENT_TOUCH, 10)
 		reagents.remove_any(10)
 
 /mob/living/basic/turtle
-	name = "черепаха"
-	desc = "Большая космочерепаха. Прочная, тихая и медленная."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
-	icon_state = "yeeslow"
-	icon_living = "yeeslow"
-	icon_dead = "yeeslow_dead"
-	icon_resting = "yeeslow_scared"
-	speak = list("Uhh.", "Hurrr.")
-	health = 500
-	maxHealth = 500
-	speed = 20
-	attack_verb_continuous = "расталкивает"
-	attack_verb_simple = "толкает"
 	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
-	response_help  = "pets"
-	response_disarm_continuous = "shoos"
-	response_disarm_simple = "shoos"
-	response_harm_continuous = "stomps on"
-	response_harm_simple   = "stomps on"
-	ventcrawler = 0
-	density = 1
-	pass_flags = PASSTABLE | PASSGRILLE
-	status_flags = CANPARALYSE | CANPUSH
-	mob_size = MOB_SIZE_SMALL
-	butcher_results = list(/obj/item/food/salmonmeat/turtlemeat = 10, /obj/item/stack/ore/tranquillite = 5)
-	footstep_type = FOOTSTEP_MOB_SLIME
 	// holder_type = /obj/item/holder/turtle
