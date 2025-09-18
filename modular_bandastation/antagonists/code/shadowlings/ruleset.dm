@@ -19,12 +19,6 @@
 	max_antag_cap = 3
 	var/decimator = 15
 
-/datum/dynamic_ruleset/roundstart/shadowling/New(list/dynamic_config)
-	var/list/alive_players = get_active_player_list(alive_check = TRUE, afk_check = TRUE)
-	var/left_count = alive_players - min_pop
-	var/add_units = floor(left_count / decimator)
-	min_antag_cap += add_units
-
 /datum/dynamic_ruleset/roundstart/shadowling/get_always_blacklisted_roles()
 	. = ..()
 	for(var/datum/job/J as anything in SSjob.all_occupations)

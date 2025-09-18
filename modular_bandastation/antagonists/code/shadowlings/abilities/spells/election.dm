@@ -17,7 +17,7 @@
 		to_chat(H, span_warning("Только тенелинги могут начать голосование."))
 		return FALSE
 
-	if(GLOB.shadowling_vote_finished)
+	if(GLOB.is_shadowling_vote_finished)
 		to_chat(H, span_warning("Голосование уже завершено."))
 		remove_vote_action_from(H)
 		return FALSE
@@ -55,8 +55,6 @@
 	for(var/datum/action/cooldown/shadowling/election/A in M.actions)
 		A.Remove(M)
 		qdel(A)
-
-
 
 /datum/shadow_vote
 	var/active = FALSE
@@ -146,19 +144,18 @@
 	var/mob/living/carbon/human/leader = pick(winners)
 
 	if(leader && !QDELETED(leader))
-		if(!GLOB.shadowling_engine_sabotage_used)
+		if(!GLOB.is_shadowling_engine_sabotage_used)
 			var/datum/action/cooldown/shadowling/engine_sabotage/S = new
 			S.Grant(leader)
-			GLOB.shadowling_engine_sabotage_used = TRUE
 
 		for(var/mob/living/carbon/human/L in hive.lings)
 			if(QDELETED(L))
 				continue
-			to_chat(L, span_boldnotice("Лидером улья выбран: [leader.real_name].[GLOB.shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
+			to_chat(L, span_boldnotice("Лидером улья выбран: [leader.real_name].[GLOB.is_shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
 
 	remove_vote_action_from_all()
 
-	GLOB.shadowling_vote_finished = TRUE
+	GLOB.is_shadowling_vote_finished = TRUE
 
 	if(GLOB.shadowling_vote == src)
 		GLOB.shadowling_vote = null

@@ -16,10 +16,9 @@
 
 	var/ling_role = SHADOWLING_ROLE_MAIN
 	var/is_thrall = FALSE
-	var/is_higher = FALSE
+	var/is_ascended = FALSE
 
 	var/datum/team/shadow_hive/shadow_team
-	var/added_to_team = FALSE
 
 /datum/antagonist/shadowling/can_be_owned(datum/mind/new_owner)
 	if(new_owner?.has_antag_datum(type))
@@ -34,9 +33,7 @@
 	shadow_team = hive
 	shadow_team.setup_objectives()
 
-	if(!added_to_team)
-		shadow_team.add_member(owner)
-		added_to_team = TRUE
+	shadow_team.add_member(owner)
 
 	var/mob/living/carbon/human/H = owner.current
 	if(istype(H))
@@ -63,7 +60,6 @@
 
 	if(shadow_team && owner)
 		shadow_team.remove_member(owner)
-	added_to_team = FALSE
 
 	if(istype(H))
 		for(var/datum/action/cooldown/ability in H.actions)
@@ -82,7 +78,7 @@
 	ling_role = SHADOWLING_ROLE_LESSER
 
 /datum/antagonist/shadowling/proc/set_higher(state)
-	is_higher = state
+	is_ascended = state
 	var/mob/living/carbon/human/H = owner?.current
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(istype(H) && hive)
@@ -107,7 +103,7 @@
 		tumor.Insert(H)
 
 /datum/objective/shadowling/enslave_fraction
-	name = "subjugate crew"
+	name = "Subjugate the crew"
 	admin_grantable = TRUE
 	var/percent = 25
 	var/baseline_population = 0
@@ -152,7 +148,7 @@
 		update_explanation_text()
 
 /datum/objective/shadowling/ascend
-	name = "ascend"
+	name = "Achieve Ascension"
 	admin_grantable = TRUE
 
 /datum/objective/shadowling/ascend/update_explanation_text()
@@ -184,7 +180,7 @@
 		var/alive_lings = 0
 		for(var/mob/living/carbon/human/L in hive.lings)
 			total_lings++
-			if(!QDELETED(L) && L.stat != DEAD)
+			if(L.stat != DEAD)
 				alive_lings++
 		report += "<span class='notice'>Слуг (живых): [alive_thralls]. Тенеморфы живы: [alive_lings]/[total_lings].</span>"
 	if(objectives.len == 0 || objectives_complete)
@@ -197,9 +193,9 @@
 	return shadow_team
 
 /proc/shadowling_begin_roundender(mob/living/carbon/human/ascended=null)
-	if(GLOB.shadowling_roundender_started)
+	if(GLOB.is_shadowling_roundender_started)
 		return
-	GLOB.shadowling_roundender_started = TRUE
+	GLOB.is_shadowling_roundender_started = TRUE
 
 	send_to_playing_players("<span class='shadowradio'><b>ЕДИНАЯ ТЕНЬ ПОГЛОЩАЕТ СТАНЦИЮ!</b></span>")
 	sound_to_playing_players(SHADOWLING_RISEN_MUSIC, 70)

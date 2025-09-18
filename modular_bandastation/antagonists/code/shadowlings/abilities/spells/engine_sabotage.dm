@@ -11,26 +11,26 @@
 /datum/action/cooldown/shadowling/engine_sabotage/IsAvailable(feedback = FALSE)
 	if(!..())
 		return FALSE
-	if(GLOB.shadowling_engine_sabotage_used)
+	if(GLOB.is_shadowling_engine_sabotage_used)
 		if(feedback && owner)
 			to_chat(owner, span_warning("Саботаж уже был использован в этом раунде."))
 		return FALSE
 	return TRUE
 
 /datum/action/cooldown/shadowling/engine_sabotage/Grant(mob/grantee)
-	if(GLOB.shadowling_engine_sabotage_used)
+	if(GLOB.is_shadowling_engine_sabotage_used)
 		qdel(src)
 		return FALSE
 	return ..()
 
 /datum/action/cooldown/shadowling/engine_sabotage/DoEffect(mob/living/carbon/human/H, atom/_)
-	if(GLOB.shadowling_engine_sabotage_used)
+	if(GLOB.is_shadowling_engine_sabotage_used)
 		return FALSE
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		return FALSE
 	var/success = hive.apply_evac_delay(10 MINUTES)
-	GLOB.shadowling_engine_sabotage_used = TRUE
+	GLOB.is_shadowling_engine_sabotage_used = TRUE
 	if(success)
 		to_chat(H, span_boldnotice("Вы ломаете силовые контуры — эвакуация задержана на 10 минут."))
 	else

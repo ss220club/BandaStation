@@ -1,7 +1,7 @@
 GLOBAL_VAR_INIT(shadowling_hive, null)
 GLOBAL_VAR_INIT(shadowling_vote, null)
-GLOBAL_VAR_INIT(shadowling_vote_finished, FALSE)
-GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
+GLOBAL_VAR_INIT(is_shadowling_vote_finished, FALSE)
+GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 
 #define SHADOWLING_ROLE_MAIN "shadowling_main"
 #define SHADOWLING_ROLE_THRALL "shadowling_thrall"
@@ -124,10 +124,10 @@ GLOBAL_VAR_INIT(shadowling_engine_sabotage_used, FALSE)
 /datum/team/shadow_hive/proc/grant_sync_action(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
-	var/check_spieces = isshadowling(H)
+	var/check_species = isshadowling(H)
 	var/check_thralls = (H in thralls)
 	var/check_lings = (H in lings)
-	if(!((check_spieces && check_lings) || check_thralls))
+	if(!((check_species && check_lings) || check_thralls))
 		return
 	for(var/datum/action/cooldown/shadowling/hive_sync/existing in H.actions)
 		return

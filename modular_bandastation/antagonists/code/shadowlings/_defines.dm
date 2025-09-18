@@ -11,7 +11,7 @@
 #define SHADOWLING_DARK_HEAL_PER_LIMB_DEEP 4.0 // модификатор отхила если темно
 #define SHADOWLING_DARK_HEAL_PER_LIMB_DIM  0.75 // модификатор отхила в полутьме
 
-GLOBAL_VAR_INIT(shadowling_roundender_started, FALSE)
+GLOBAL_VAR_INIT(is_shadowling_roundender_started, FALSE)
 
 #define SHADOWLING_RISEN_MUSIC 'modular_bandastation/antagonists/sound/shadowlings/abilities/shreek.ogg'
 
