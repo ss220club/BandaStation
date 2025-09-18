@@ -21,7 +21,8 @@
 	attack_verb_simple = "кусает"
 	melee_damage_lower = 5
 	melee_damage_upper = 6
-	response_help  = "pets"
+	response_help_continuous = "pets"
+	response_help_simple = "pets"
 	var/rest = FALSE
 	response_disarm_continuous = "shoos"
 	response_disarm_simple = "shoos"

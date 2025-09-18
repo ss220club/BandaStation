@@ -50,7 +50,8 @@
 	speak_chance = 2
 	turns_per_move = 3
 	butcher_results = list(/obj/item/food/meat = 4)
-	response_help  = "pets the"
+	response_help_continuous = "pets the"
+	response_help_simple = "pets the"
 	response_disarm_continuous = "gently pushes aside the"
 	response_disarm_simple = "gently pushes aside the"
 	response_harm_continuous = "kicks the"

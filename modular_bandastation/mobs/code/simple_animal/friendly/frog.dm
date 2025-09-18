@@ -22,7 +22,8 @@
 	health = 10
 	blood_volume = BLOOD_VOLUME_SURVIVE
 	butcher_results = list(/obj/item/food/monstermeat/lizardmeat = 1)
-	response_help  = "pets"
+	response_help_continuous
+	response_help_simple = "pets"
 	response_disarm_continuous = "gently pushes aside"
 	response_disarm_simple = "gently pushes aside"
 	response_harm_continuous = "stamps on"

@@ -1,7 +1,8 @@
 /mob/living/basic/crab
 	death_sound = 'modular_bandastation/mobs/sound/crack_death2.ogg'
 	mob_size = MOB_SIZE_SMALL
-	response_help  = "гладит"
+	response_help_continuous "гладит"
+	response_help_simple = "гладит"
 	response_disarm_continuous = "отталкивает"
 	response_disarm_simple = "отталкивает"
 	response_harm_continuous = "сдавливает"
@@ -15,7 +16,8 @@
 	icon_state = "bluecrab"
 	icon_living = "bluecrab"
 	icon_dead = "bluecrab_dead"
-	response_help  = "гладит"
+	response_help_continuous
+	response_help_simple = "гладит"
 	response_disarm_continuous = "отталкивает"
 	response_disarm_simple = "отталкивает"
 	response_harm_continuous = "сдавливает"
@@ -31,7 +33,8 @@
 	icon_state = "royalcrab"
 	icon_living = "royalcrab"
 	icon_dead = "royalcrab_dead"
-	response_help  = "с уважением гладит"
+	response_help_continuous
+	response_help_simple = "с уважением гладит"
 	response_disarm_continuous = "с уважением отталкивает"
 	response_disarm_simple = "с уважением отталкивает"
 	response_harm_continuous = "презрительно щипает"

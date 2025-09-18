@@ -21,7 +21,8 @@
 	mob_size = MOB_SIZE_SMALL
 	pass_flags = PASSTABLE
 	butcher_results = list(/obj/item/food/meat = 5)
-	response_help  = "pets"
+	response_help_continuous = "pets"
+	response_help_simple = "pets"
 	response_disarm_continuous = "gently pushes aside"
 	response_disarm_simple = "gently pushes aside"
 	response_harm_continuous = "kicks"

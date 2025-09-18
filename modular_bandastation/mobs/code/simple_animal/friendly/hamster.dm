@@ -23,7 +23,8 @@
 	real_name = "хомячок"
 	desc = "Очень миленький! Какие у него пушистые щечки!"
 	turns_per_move = 2
-	response_help  = "полапал"
+	response_help_continuous = "полапал"
+	response_help_simple = "полапал"
 	response_disarm_continuous = "двигает"
 	response_disarm_simple = "аккуратно отодвинул"
 	response_harm_continuous = "выпихивает"

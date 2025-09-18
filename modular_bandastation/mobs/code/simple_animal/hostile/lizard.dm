@@ -13,7 +13,8 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	butcher_results = list(/obj/item/food/monstermeat/lizardmeat = 3, /obj/item/stack/sheet/animalhide/lizard = 1)
-	response_help  = "погладил"
+	response_help_continuous = "гладит"
+	response_help_simple = "погладил"
 	response_disarm_continuous = "толкает"
 	response_disarm_simple = "аккуратно оттолкнул"
 	response_harm_continuous = "колошматит"
