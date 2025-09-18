@@ -715,7 +715,7 @@
 	use_mod_colors = TRUE
 	var/max_traveled_tiles = 10
 	var/traveled_tiles = 0
-	var/speed_added = -1
+	var/speed_added = 0.5
 	var/static/list/accretion_turfs
 	var/static/list/keep_turfs
 
