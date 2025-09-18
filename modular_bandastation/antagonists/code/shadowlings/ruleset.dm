@@ -10,13 +10,20 @@
 		DYNAMIC_TIER_MEDIUMHIGH = 3,
 		DYNAMIC_TIER_HIGH = 3,
 	)
-	min_pop = 0
+	min_pop = 30
 
 	pref_flag = ROLE_SHADOWLING
 	jobban_flag = ROLE_SHADOWLING
 
-	min_antag_cap = 1
+	min_antag_cap = 3
 	max_antag_cap = 3
+	var/decimator = 15
+
+/datum/dynamic_ruleset/roundstart/shadowling/New(list/dynamic_config)
+	var/list/alive_players = get_active_player_list(alive_check = TRUE, afk_check = TRUE)
+	var/left_count = alive_players - min_pop
+	var/add_units = floor(left_count / decimator)
+	min_antag_cap += add_units
 
 /datum/dynamic_ruleset/roundstart/shadowling/get_always_blacklisted_roles()
 	. = ..()
