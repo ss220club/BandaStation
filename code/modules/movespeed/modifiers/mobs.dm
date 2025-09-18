@@ -190,4 +190,4 @@
 
 /datum/movespeed_modifier/wet_scug
 	blacklisted_movetypes = MOVETYPES_NOT_TOUCHING_GROUND
-	multiplicative_slowdown = -1.75
+	multiplicative_slowdown = 0.5
