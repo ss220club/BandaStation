@@ -13,7 +13,7 @@
 
 GLOBAL_VAR_INIT(shadowling_roundender_started, FALSE)
 
-#define SHADOWLING_RISEN_MUSIC 'modular_bandastation/antagonists/sound/shadowlings/abilities/shreek.ogg'
+#define SHADOWLING_RISEN_MUSIC 'modular_bandastation/antagonists/sound/shadowlings/shadowling_ascend.ogg'
 
 #define isshadowling(A) (is_species(A, /datum/species/shadow/shadowling))
 

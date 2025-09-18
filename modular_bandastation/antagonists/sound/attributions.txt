@@ -2,4 +2,5 @@
 dj-34 (Discord: dj34 / Github: https://github.com/dj-34) authoring:
 shreek.ogg
 cold_wave.ogg
+shadowling_ascend.ogg
 shadowling_gain.ogg
