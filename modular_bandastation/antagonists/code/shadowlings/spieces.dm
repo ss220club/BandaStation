@@ -72,13 +72,14 @@
 		TRAIT_SILENT_FOOTSTEPS,
 		TRAIT_NOHUNGER,
 		TRAIT_NO_SLIP_ALL,
-		TRAIT_FREE_FLOAT_MOVEMENT,
-		TRAIT_MOVE_FLYING,
 		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_RESISTHIGHPRESSURE,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTHEAT,
-		TRAIT_BRAWLING_KNOCKDOWN_BLOCKED
+		TRAIT_BRAWLING_KNOCKDOWN_BLOCKED,
+		TRAIT_FREE_FLOAT_MOVEMENT,
+		TRAIT_MOVE_FLYING,
+
 	)
 
 var/ascended_max_health = 220
@@ -304,3 +305,9 @@ var/ascended_max_health = 220
 
 /mob/living/carbon/human/proc/shadowling_strip_quirks()
 	cleanse_quirk_datums()
+
+/mob/living/basic/adjustStaminaLoss(amount, updating_stamina = TRUE, forced = FALSE, required_biotype)
+	if(isshadowling_ascended(src))
+		return
+	else
+		. = ..()

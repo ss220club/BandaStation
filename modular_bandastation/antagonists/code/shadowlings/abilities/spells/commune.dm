@@ -58,8 +58,9 @@
 
 	var/name_html = bold_name ? "<b>[html_encode(name_to_show)]</b>" : "[html_encode(name_to_show)]"
 	var/body_html = html_encode(message)
+	var/style = hive.leader == sender ? "shadowradio_leader" :"shadowradio"
 
-	var/render = "<span class='shadowradio'>[role_label] [name_html]: [body_html]</span>"
+	var/render = "<span class='[style]'>[role_label] [name_html]: [body_html]</span>"
 
 	to_chat(sender, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = TRUE)
 

@@ -3,7 +3,7 @@
 	alert_type = null
 	status_type = STATUS_EFFECT_UNIQUE
 	tick_interval = 1 SECONDS
-
+	duration = -1
 	var/time_left = 0
 	var/cancel_on_bright = TRUE
 

@@ -12,6 +12,7 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 	var/list/lings = list()
 	var/list/thralls = list()
 	var/list/ling_roles = list()
+	var/mob/leader
 
 /datum/team/shadow_hive/New()
 	. = ..()
@@ -124,10 +125,9 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 /datum/team/shadow_hive/proc/grant_sync_action(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
-	var/check_species = isshadowling(H)
 	var/check_thralls = (H in thralls)
 	var/check_lings = (H in lings)
-	if(!((check_species && check_lings) || check_thralls))
+	if(!(check_lings || check_thralls))
 		return
 	for(var/datum/action/cooldown/shadowling/hive_sync/existing in H.actions)
 		return

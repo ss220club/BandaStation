@@ -147,6 +147,7 @@
 		if(!GLOB.is_shadowling_engine_sabotage_used)
 			var/datum/action/cooldown/shadowling/engine_sabotage/S = new
 			S.Grant(leader)
+			hive.leader = leader
 
 		for(var/mob/living/carbon/human/L in hive.lings)
 			if(QDELETED(L))
