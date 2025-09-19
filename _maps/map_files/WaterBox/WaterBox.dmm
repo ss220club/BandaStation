@@ -22739,6 +22739,7 @@
 "jak" = (
 /obj/machinery/suit_storage_unit/captain,
 /obj/item/radio/intercom/directional/west,
+/obj/item/mod/module/diving,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/captain)
 "jal" = (
@@ -36146,6 +36147,7 @@
 /area/station/science/robotics/lab)
 "owX" = (
 /obj/machinery/suit_storage_unit/standard_unit,
+/obj/item/mod/module/diving,
 /turf/open/floor/carpet,
 /area/station/command/heads_quarters/hop)
 "oxp" = (
