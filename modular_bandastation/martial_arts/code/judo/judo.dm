@@ -17,14 +17,30 @@
 
 /datum/martial_art/judo/activate_style(mob/living/new_holder)
 	. = ..()
+	RegisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(check_baton))
+	for(var/obj/item/item in new_holder.held_items)
+		check_baton(equipped_item = item, slot = ITEM_SLOT_HANDS)
+
 	to_chat(new_holder, span_userdanger("Наниты, содержащиеся в поясе, наделяют вас мастерством обладателя черного пояса по корпоративному дзюдо!"))
 	to_chat(new_holder, span_notice("Вы можете посмотреть приёмы во вкладке IC."))
 	discombobulate.Grant(new_holder)
 
 /datum/martial_art/judo/deactivate_style(mob/living/remove_from)
+	UnregisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM)
 	to_chat(remove_from, span_userdanger("Вы забываете мастерство корпоративного дзюдо..."))
 	discombobulate?.Remove(remove_from)
 	return ..()
+
+/datum/martial_art/judo/proc/check_baton(datum/source, obj/item/equipped_item, slot)
+	SIGNAL_HANDLER
+	if(!istype(equipped_item, /obj/item/melee/baton))
+		return
+
+	if(slot != ITEM_SLOT_HANDS)
+		return
+
+	to_chat(holder, span_warning("Вам противен[genderize_ru(equipped_item.gender, "", "а", "о", "ы")] [equipped_item.declent_ru(NOMINATIVE)]!"))
+	holder.dropItemToGround(equipped_item)
 
 //Increased harm damage
 /datum/martial_art/judo/harm_act(mob/living/carbon/human/attacker, mob/living/carbon/human/defender)
@@ -36,7 +52,7 @@
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
 	defender.apply_damage(6, BRUTE)
-	playsound(get_turf(defender), 'sound/effects/hit_punch.ogg', 50, TRUE, -1)
+	playsound(get_turf(defender), 'sound/effects/hit_punch.ogg', 50, TRUE)
 	defender.visible_message(
 		span_danger("[attacker.declent_ru(NOMINATIVE)] [picked_hit_type] [defender.declent_ru(ACCUSATIVE)]!"),
 		span_userdanger("[attacker.declent_ru(NOMINATIVE)] [picked_hit_type] вас!")
@@ -109,7 +125,7 @@
 		span_warning("[attacker.declent_ru(NOMINATIVE)] берёт [defender.declent_ru(ACCUSATIVE)] в захват!"),
 		span_userdanger("[attacker.declent_ru(NOMINATIVE)] берёт вас в захват!")
 	)
-	playsound(get_turf(attacker), 'sound/items/weapons/slashmiss.ogg', 40, TRUE, -1)
+	playsound(get_turf(attacker), 'sound/items/weapons/slashmiss.ogg', 40, TRUE)
 	if(attacker.body_position != LYING_DOWN)
 		defender.drop_all_held_items()
 	defender.apply_damage(45, STAMINA)
@@ -127,7 +143,7 @@
 		span_warning("[attacker.declent_ru(NOMINATIVE)] тыкает в глаза [defender.declent_ru(ACCUSATIVE)]!"),
 		span_userdanger("[attacker.declent_ru(ACCUSATIVE)] тыкает вам в глаза!")
 	)
-	playsound(get_turf(attacker), 'sound/items/weapons/whip.ogg', 40, TRUE, -1)
+	playsound(get_turf(attacker), 'sound/items/weapons/whip.ogg', 40, TRUE)
 	defender.apply_damage(10, BRUTE)
 	defender.set_eye_blur_if_lower(30 SECONDS)
 	defender.adjust_temp_blindness(2 SECONDS)
@@ -139,11 +155,11 @@
 		span_warning("[attacker.declent_ru(NOMINATIVE)] бьёт [defender.declent_ru(ACCUSATIVE)] энергией, прижимая к земле!"),
 		span_userdanger("[attacker.declent_ru(NOMINATIVE)] делает странные жесты руками, дико кричит и тычет вам прямо в грудь! Вы чувствуете, как гнев ЗОЛОТОГО РАЗРЯДА пронзает ваше тело! Вы совершенно обробастены!")
 	)
-	playsound(get_turf(defender), 'sound/items/weapons/taser.ogg', 55, TRUE, -1)
+	playsound(get_turf(defender), 'sound/items/weapons/taser.ogg', 55, TRUE)
 	defender.SpinAnimation(10, 1)
 	do_sparks(5, FALSE, defender)
 	attacker.say("ЗОЛОТОЙ РАЗРЯД!")
-	playsound(get_turf(attacker), 'modular_bandastation/martial_arts/sound/goldenblast.ogg', 60, TRUE, -1)
+	playsound(get_turf(attacker), 'modular_bandastation/martial_arts/sound/goldenblast.ogg', 60, TRUE)
 	defender.apply_damage(120, STAMINA)
 	defender.Knockdown(30 SECONDS)
 	defender.set_confusion(30 SECONDS)
@@ -157,7 +173,7 @@
 		span_warning("[attacker.declent_ru(NOMINATIVE)] бросает [defender.declent_ru(ACCUSATIVE)] на землю!"),
 		span_userdanger("[attacker.declent_ru(NOMINATIVE)] бросает вас на землю!")
 	)
-	playsound(get_turf(attacker), 'sound/items/weapons/slam.ogg', 40, TRUE, -1)
+	playsound(get_turf(attacker), 'sound/items/weapons/slam.ogg', 40, TRUE)
 	defender.apply_damage(25, STAMINA)
 	defender.Knockdown(7 SECONDS)
 	log_combat(attacker, defender, "judo throw ([src])")
@@ -172,19 +188,30 @@
 			span_warning("[attacker.declent_ru(NOMINATIVE)] бросает [defender.declent_ru(ACCUSATIVE)] через плечо, и стукает об землю!"),
 			span_userdanger("[attacker.declent_ru(NOMINATIVE)] бросает вас через плечо,стукая об землю!")
 		)
-		playsound(get_turf(attacker), 'sound/effects/magic/tail_swing.ogg', 40, TRUE, -1)
+		playsound(get_turf(attacker), 'sound/effects/magic/tail_swing.ogg', 40, TRUE)
 		defender.SpinAnimation(10, 1)
 	else
 		defender.visible_message(
 			span_warning("[attacker.declent_ru(NOMINATIVE)] прижимает [defender.declent_ru(ACCUSATIVE)] к земле."),
 			span_userdanger("[attacker.declent_ru(NOMINATIVE)] прижимает вас к земле!")
 		)
-		playsound(get_turf(attacker), 'sound/items/weapons/slam.ogg', 40, TRUE, -1)
+		playsound(get_turf(attacker), 'sound/items/weapons/slam.ogg', 40, TRUE)
 
 	defender.apply_damage(120, STAMINA)
 	defender.Knockdown(15 SECONDS)
 	defender.set_confusion(10 SECONDS)
 	log_combat(attacker, defender, "wheel throw / floor pin ([src])")
+	return TRUE
+
+/datum/martial_art/judo/proc/discombobulate(mob/living/attacker, mob/living/defender)
+	defender.visible_message(
+		span_warning("[attacker.declent_ru(NOMINATIVE)] бьёт [attacker.declent_ru(ACCUSATIVE)] ладонью по голове!"),
+		span_userdanger("[attacker.declent_ru(NOMINATIVE)] ударяет вас ладонью!")
+	)
+	playsound(get_turf(attacker), 'sound/items/weapons/slap.ogg', 40, TRUE)
+	defender.apply_damage(10, STAMINA)
+	defender.adjust_confusion(5 SECONDS)
+	log_combat(attacker, defender, "discombobulate ([src])")
 	return TRUE
 
 /datum/action/discombobulate
@@ -211,14 +238,3 @@
 			span_bolditalic("Ваше следующеё приём это 'сбить с толку'.")
 		)
 		source.streak = DISCOMBOBULATE_COMBO
-
-/datum/martial_art/judo/proc/discombobulate(mob/living/attacker, mob/living/defender)
-	defender.visible_message(
-		span_warning("[attacker.declent_ru(NOMINATIVE)] бьёт [attacker.declent_ru(ACCUSATIVE)] ладонью по голове!"),
-		span_userdanger("[attacker.declent_ru(NOMINATIVE)] ударяет вас ладонью!")
-	)
-	playsound(get_turf(attacker), 'sound/items/weapons/slap.ogg', 40, TRUE, -1)
-	defender.apply_damage(10, STAMINA)
-	defender.adjust_confusion(5 SECONDS)
-	log_combat(attacker, defender, "discombobulate ([src])")
-	return TRUE
