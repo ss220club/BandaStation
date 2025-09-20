@@ -31,7 +31,10 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"managed_overlays",
 	"managed_vis_overlays",
 	"overlays",
-	"obscured_slots", // BANDASTATION FIX: fix strip menu contents
+	// BANDASTATION FIX START: fix strip menu contents
+	"obscured_slots",
+	"covered_slots",
+	// BANDASTATION FIX END: fix strip menu contents
 	"overlays_standing",
 	"parent",
 	"parent_type",
