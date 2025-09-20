@@ -1,0 +1,3 @@
+#include "_diseases.dm"
+
+#include "code/diseases.dm"
