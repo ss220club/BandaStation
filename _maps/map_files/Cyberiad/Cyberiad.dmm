@@ -1711,9 +1711,9 @@
 /area/station/service/library)
 "awY" = (
 /obj/machinery/door/airlock/research/glass/incinerator/ordmix_interior,
-/obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/effect/mapping_helpers/airlock/access/all/science/ordnance,
+/obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/engine,
 /area/station/science/ordnance)
 "axd" = (
@@ -18051,6 +18051,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/effect/turf_decal/bot,
+/obj/machinery/button/door/directional/west{
+	id = "Skynet_launch";
+	name = "Mech Bay Door Control";
+	req_access = list("robotics")
+	},
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
 "erN" = (
@@ -32784,12 +32789,9 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway/west)
 "hWd" = (
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
-	},
-/obj/structure/closet/firecloset,
-/turf/open/floor/iron,
-/area/station/hallway/primary/starboard/west)
+/obj/structure/closet/emcloset,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
 "hWn" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/mechanical{
@@ -35725,11 +35727,6 @@
 /turf/open/floor/iron/dark/small,
 /area/station/medical/morgue)
 "iKc" = (
-/obj/machinery/button/door/directional/north{
-	id = "Skynet_launch";
-	name = "Mech Bay Door Control";
-	req_access = list("robotics")
-	},
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
 	dir = 1
 	},
@@ -45074,7 +45071,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
 "kYb" = (
-/obj/structure/closet/emcloset,
+/obj/effect/spawner/random/structure/crate_abandoned,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "kYf" = (
@@ -45335,6 +45332,10 @@
 /obj/machinery/holopad,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
+"lbj" = (
+/obj/effect/spawner/random/structure/crate,
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "lbx" = (
 /obj/structure/closet/secure_closet/brig,
 /obj/item/radio/intercom/directional/east,
@@ -56527,10 +56528,14 @@
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "nPk" = (
-/obj/effect/turf_decal/tile/purple,
-/obj/structure/closet/emcloset,
+/obj/machinery/door/airlock/research{
+	name = "Mech Bay"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/science/robotics,
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron,
-/area/station/hallway/primary/starboard/west)
+/area/station/science/robotics/mechbay)
 "nPl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -59625,9 +59630,6 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/port/greater)
-"oBv" = (
-/turf/open/floor/plating,
-/area/station/medical/morgue)
 "oBx" = (
 /obj/structure/closet/emcloset,
 /obj/effect/landmark/start/hangover/closet,
@@ -88328,9 +88330,9 @@
 /area/station/cargo/lobby)
 "vIA" = (
 /obj/machinery/door/airlock/research/glass/incinerator/ordmix_exterior,
-/obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/effect/mapping_helpers/airlock/access/all/science/ordnance,
+/obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/engine/vacuum,
 /area/station/science/ordnance)
 "vIE" = (
@@ -93643,9 +93645,9 @@
 /turf/open/floor/wood/parquet,
 /area/station/maintenance/department/security/ghetto)
 "xba" = (
-/obj/item/radio/intercom/directional/west,
-/turf/closed/wall/r_wall,
-/area/station/science/ordnance)
+/obj/structure/closet/firecloset,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
 "xbb" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
@@ -150639,7 +150641,7 @@ doz
 doz
 doz
 doz
-xba
+nFU
 naG
 xOK
 gKE
@@ -203567,8 +203569,8 @@ nrH
 fHn
 nke
 ckR
+xba
 lCk
-oBv
 uYN
 lCk
 luY
@@ -203824,9 +203826,9 @@ nrH
 nYw
 nke
 ckR
+hWd
 lCk
 uYN
-oBv
 lCk
 nhZ
 bri
@@ -206909,7 +206911,7 @@ sKd
 kkl
 bMM
 nnU
-nnU
+lbj
 kYb
 uta
 hFm
@@ -207164,8 +207166,8 @@ sKd
 sKd
 sKd
 kkl
-sKd
-hWd
+bMM
+htm
 htm
 htm
 htm
@@ -207936,8 +207938,8 @@ wfV
 sKd
 kkl
 sKd
+sKd
 nPk
-vlt
 iKc
 ruJ
 tZp
