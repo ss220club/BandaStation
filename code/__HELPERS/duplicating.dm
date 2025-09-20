@@ -65,6 +65,7 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 		return
 
 	var/atom/made_copy = new original.type(spawning_location)
+
 	for(var/atom_vars in original.vars - GLOB.duplicate_forbidden_vars)
 		if(islist(original.vars[atom_vars]))
 			var/list/var_list = original.vars[atom_vars]
@@ -82,6 +83,7 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 			original_carbon.dna.copy_dna(copied_carbon.dna)
 			copied_carbon.appearance = new /mutable_appearance(original_carbon.appearance) // BANDASTATION FIX: appearance copying
 			copied_carbon.updateappearance(mutcolor_update = TRUE)
+
 		var/mob/living/original_living = original
 		var/mob/living/copied_living = made_copy
 		//transfer implants, we do this so the original's implants being removed won't destroy ours.
