@@ -589,7 +589,17 @@
 
 	. += get_airlock_overlay(frame_state, icon, src, em_block = TRUE)
 	if(airlock_material)
-		. += get_airlock_overlay("[airlock_material]_[frame_state]", overlays_file, src, em_block = TRUE)
+		/* BANDASTATION ADDITION - START */
+		var/list/overlays_list = get_airlock_overlay("[airlock_material]_[frame_state]", overlays_file, src, em_block = TRUE)
+		var/image/filling_overlay = overlays_list[1]
+		if(electrochromed)
+			filling_overlay.color = generate_glass_matrix(src, TINTED_ALPHA)
+		else
+			filling_overlay.color = generate_glass_matrix(src)
+
+		. += list(filling_overlay, overlays_list[2])
+		/* BANDASTATION ADDITION - END */
+		// . += get_airlock_overlay("[airlock_material]_[frame_state]", overlays_file, src, em_block = TRUE) // BANDASTATION REMOVAL
 	else
 		. += get_airlock_overlay("fill_[frame_state]", icon, src, em_block = TRUE)
 
@@ -1424,7 +1434,7 @@
 	sleep(opaque_delay)
 	if(dangerous_close)
 		crush()
-	if(visible && !glass)
+	if((visible && !glass) || (glass && electrochromed)) // BANDASTATION REPLACEMENT: OLD - visible && !glass
 		set_opacity(TRUE)
 		if(multi_tile)
 			filler.set_opacity(TRUE)
