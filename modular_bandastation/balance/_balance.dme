@@ -29,5 +29,6 @@
 #include "code/weapons/rifle.dm"
 #include "code/wounds/cranial_fissure.dm"
 #include "code/mod_types.dm"
+#include "code/tools.dm"
 
 #include "code/~undefs.dm"

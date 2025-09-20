@@ -237,15 +237,15 @@
 		owner.balloon_alert(owner, "нужно надеть капюшон")
 		return
 	owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/stealth, multiplicative_slowdown = cloak.stealth_enabled_slowdown)
-	ADD_TRAIT(owner, TRAIT_PACIFISM, src)
-	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
+	ADD_TRAIT(owner, TRAIT_PACIFISM, REF(src))
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, REF(src))
 	return ..()
 
 /datum/action/item_action/stealth_mode/cloak/stealth_off()
 	. = ..()
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/stealth)
-	REMOVE_TRAIT(owner, TRAIT_PACIFISM, src)
-	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, src)
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, REF(src))
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, REF(src))
 
 /datum/movespeed_modifier/stealth
 	variable = TRUE

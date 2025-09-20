@@ -1,18 +1,17 @@
+/obj/item/organ/brain
+	var/death_trauma_applied = FALSE
+
 /obj/item/organ/brain/Initialize(mapload)
 	. = ..()
-	if(CONFIG_GET(flag/brain_permanent_death))
-		decay_factor = STANDARD_ORGAN_DECAY * 2 //7 минут до полной смерти (в 4 раза быстрее чем по умолчанию (30 минут))
+	if(CONFIG_GET(flag/brain_permanent_traumas))
+		decay_factor = STANDARD_ORGAN_DECAY * CONFIG_GET(number/brain_decay_rate)
 
-/datum/surgery/brain_surgery/can_start(mob/user, mob/living/carbon/target)
-	. = ..()
-	if(!.)
-		return
-
-	var/obj/item/organ/brain/brain = target.get_organ_slot(ORGAN_SLOT_BRAIN)
-	return !(brain.organ_flags & ORGAN_FAILING) || !CONFIG_GET(flag/brain_permanent_death)
-
-/datum/config_entry/flag/brain_permanent_death
+/datum/config_entry/flag/brain_permanent_traumas
 	default = FALSE
+
+/datum/config_entry/number/brain_decay_rate
+	integer = FALSE
+	default = 0.5
 
 /datum/design/stasisbodybag
 	name = "Stasis Body Bag"

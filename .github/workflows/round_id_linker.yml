@@ -5,7 +5,7 @@ on:
 
 jobs:
   link_rounds:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-22.04
     steps:
       - uses: tgstation/round_linker@master
         with:

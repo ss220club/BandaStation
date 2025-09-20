@@ -94,6 +94,13 @@ export const sound_tts_volume_announcement: Feature<number> = {
   component: FeatureSliderInput,
 };
 
+export const sound_tts_volume_telepathy: Feature<number> = {
+  name: 'TTS - громкость телепатической речи',
+  category: 'Звук',
+  description: 'Громкость text-to-speech для телепатии (хайвмайнд генокрадов, телепатия ревенанта и тд).',
+  component: FeatureSliderInput,
+};
+
 export const sound_lobby_volume: Feature<number> = {
   name: 'Громкость музыки в лобби',
   category: 'Звук',

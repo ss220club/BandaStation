@@ -5,11 +5,11 @@ on:
 
 jobs:
   linters:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
+      - uses: actions/checkout@v5
       - name: Install required packages
         run: |
           sudo apt-get update
@@ -44,9 +44,7 @@ jobs:
           path: tools/icon_cutter/cache
           key: ${{ runner.os }}-cutter-${{ hashFiles('dependencies.sh') }}
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4.2.0
-        env:
-          DOTNET_INSTALL_DIR: "./_work/.dotnet"
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 9.x
       - name: Install OpenDream
@@ -74,7 +72,6 @@ jobs:
       - name: Ticked File Enforcement
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: |
-          bash tools/bandastation_check_grep.sh # BANDASTATION EDIT ADDITION - checking modular_bandastation code
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/tgstation_dme.json
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/unit_tests.json
       - name: Check Define Sanity

@@ -160,7 +160,7 @@
 	if(inserted_item)
 		swap_pen(user, tool)
 	else
-		balloon_alert(user, "вставлен [tool.declent_ru(ACCUSATIVE)]")
+		balloon_alert(user, "вставлен[genderize_ru(tool.gender, "", "а", "о")] [tool.declent_ru(NOMINATIVE)]")
 		inserted_item = tool
 		playsound(src, 'sound/machines/pda_button/pda_button1.ogg', 50, TRUE)
 	return ITEM_INTERACT_SUCCESS
@@ -185,7 +185,7 @@
 		return
 
 	if(inserted_item)
-		balloon_alert(user, "извлечён [inserted_item.declent_ru(ACCUSATIVE)]")
+		balloon_alert(user, "извлечен[genderize_ru(inserted_item.gender, "", "а", "о")] [inserted_item.declent_ru(NOMINATIVE)]")
 		user.put_in_hands(inserted_item)
 		inserted_item = null
 		update_appearance()
@@ -210,13 +210,13 @@
 	if (ismob(loc))
 		var/mob/loc_mob = loc
 		loc_mob.show_message(
-			msg = span_userdanger("Ваш [declent_ru(ACCUSATIVE)] взрывается!"),
+			msg = span_userdanger("Ваш [declent_ru(NOMINATIVE)] взрывается!"),
 			type = MSG_VISUAL,
 			alt_msg = span_warning("Вы слышите громкий хлопок!"),
 			alt_type = MSG_AUDIBLE,
 		)
 	else
-		visible_message(span_danger("[declent_ru(ACCUSATIVE)] взрывается!"), span_warning("Вы слышите громкий хлопок!"))
+		visible_message(span_danger("[declent_ru(NOMINATIVE)] взрывается!"), span_warning("Вы слышите громкий хлопок!"))
 
 	target.client?.give_award(/datum/award/achievement/misc/clickbait, target)
 

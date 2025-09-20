@@ -6,9 +6,9 @@ on:
 jobs:
   compare_screenshots:
     timeout-minutes: 15
-    runs-on: [self-hosted]
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
+      - uses: actions/checkout@v5
       - name: Setup directory
         run: mkdir -p artifacts
       # If we ever add more artifacts, this is going to break, but it'll be obvious.

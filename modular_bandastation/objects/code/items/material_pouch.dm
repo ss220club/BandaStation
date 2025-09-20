@@ -36,9 +36,3 @@
 	atom_storage.max_slots = 2
 	atom_storage.numerical_stacking = TRUE
 	atom_storage.set_holdable(matpouch_holdables)
-
-/obj/machinery/vending/engivend/build_inventories(start_empty)
-	premium += list(
-		/obj/item/storage/bag/material_pouch = 3
-	)
-	. = ..()

@@ -11,10 +11,10 @@ on:
 jobs:
   setup_build_artifact:
     name: Setup build artifact (${{ format('{0}.{1}', inputs.major, inputs.minor) }})
-    runs-on: [self-hosted]
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
+      - uses: actions/checkout@v5
       - name: Setup Bun
         uses: ./.github/actions/setup_bun
       - name: Restore BYOND from Cache
