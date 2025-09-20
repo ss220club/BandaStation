@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"atmos_adjacent_turfs",
 	"bodyparts",
 	"ckey",
+	"pixloc", // BANDASTATION FIX: copied atom move to correct loc
 	"client_mobs_in_contents",
 	"_listen_lookup",
 	"computer_id",
@@ -63,8 +64,7 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 	if(!original)
 		return
 
-	var/atom/movable/made_copy = new original.type(spawning_location) // BANDASTATION FIX: copied atom move to correct loc
-
+	var/atom/made_copy = new original.type(spawning_location)
 	for(var/atom_vars in original.vars - GLOB.duplicate_forbidden_vars)
 		if(islist(original.vars[atom_vars]))
 			var/list/var_list = original.vars[atom_vars]
@@ -91,5 +91,5 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 		//transfer quirks, we do this because transfering the original's quirks keeps the 'owner' as the original.
 		for(var/datum/quirk/original_quirks as anything in original_living.quirks)
 			copied_living.add_quirk(original_quirks.type, announce = FALSE)
-	made_copy.forceMove(spawning_location) // BANDASTATION FIX: copied atom move to correct loc
+
 	return made_copy
