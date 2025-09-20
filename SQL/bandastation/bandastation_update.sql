@@ -73,3 +73,14 @@ CREATE TABLE `minesweeper` (
 	`bombs` TINYINT(3) UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`)
 ) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;
+
+--
+-- Table structure for table `admin_prime`
+--
+DROP TABLE IF EXISTS `admin_prime`;
+CREATE TABLE `admin_prime` (
+    `ckey` varchar(32) NOT NULL,
+    `rank` varchar(32) NOT NULL,
+    `feedback` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`ckey`)
+) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;
