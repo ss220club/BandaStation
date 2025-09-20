@@ -7566,7 +7566,7 @@
 	dir = 4;
 	dwidth = 4;
 	height = 5;
-	shuttle_id = "caravansyndicate1_custom;caravansyndicate1_ambush;caravansyndicate1_listeningpost;"caravansyndicate1_avangarde17";
+	shuttle_id = "caravansyndicate1_custom;caravansyndicate1_ambush;caravansyndicate1_listeningpost;caravansyndicate1_avangarde17";
 	name = "Avangarde-17: Caves";
 	width = 9
 	},
