@@ -2,6 +2,7 @@
 
 // MARK: Melee
 #include "code/melee/baton.dm"
+#include "code/melee/mining.dm"
 #include "code/melee/sledgehammer.dm"
 #include "code/melee/tsf_katana.dm"
 #include "code/melee/vibroblade.dm"
@@ -37,4 +38,5 @@
 // MARK: Ranged - Energy
 #include "code/ranged/energy/awaymission_gun.dm"
 #include "code/ranged/energy/eg_14.dm"
+#include "code/ranged/energy/mining.dm"
 #include "code/ranged/energy/pulse.dm"
