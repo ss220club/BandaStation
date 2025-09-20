@@ -1,0 +1,4 @@
+author: "AyIong"
+delete-after: True
+changes:
+  - bugfix: "ИИ снова может отслеживать жертв в крю мониторе"

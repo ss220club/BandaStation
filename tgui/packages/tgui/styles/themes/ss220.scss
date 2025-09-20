@@ -44,6 +44,14 @@
   --tooltip-background-lightness: 12.5;
   --imagebutton-transparecy: 0.3;
 
+  :focus-visible {
+    outline: none;
+  }
+
+  .Modal {
+    padding: var(--space-m);
+  }
+
   .Section {
     &__content {
       scrollbar-width: thin;
@@ -62,8 +70,10 @@
     transition-property: border-color, height;
     transition-duration: var(--transition-time-medium);
 
-    &:hover:not(:focus) {
-      border-color: hsl(from var(--color-border-primary) h s calc(l + 7.5));
+    &:hover:not(:focus, .Input--disabled) {
+      border-color: hsl(
+        from var(--input-border-color) h calc(s - 5) calc(l + 7.5)
+      );
     }
   }
 
