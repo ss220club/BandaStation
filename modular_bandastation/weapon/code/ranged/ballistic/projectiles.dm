@@ -171,14 +171,13 @@
 	embed_type = null
 
 /obj/projectile/bullet/a762x39/gauss/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
 	if(isliving(target))
-		var/mob/living/poor_sap = target
-		// If the target mob has enough armor to stop the bullet, or the bullet has already gone through two people, stop it on this hit
-		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 50) || (pierces > 2))
+		if(blocked > 50 || pierces > 2)
 			projectile_piercing = NONE
-			damage -= 20
-			armour_penetration -= 20
-			wound_bonus -= 10
+			damage = max(0, damage - 20)
+			armour_penetration = max(0, armour_penetration - 20)
+			wound_bonus = max(0, wound_bonus - 10)
 
 	return ..()
 
@@ -227,13 +226,12 @@
 	embed_type = null
 
 /obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
 	if(isliving(target))
-		var/mob/living/poor_sap = target
-		// If the target mob has enough armor to stop the bullet, or the bullet has already gone through two people, stop it on this hit
-		if((poor_sap.run_armor_check(def_zone, BULLET, "", "", silent = TRUE) > 60) || (pierces > 2))
+		if(blocked > 40 || pierces > 2)
 			projectile_piercing = NONE
-			damage -= 15
-			armour_penetration -= 30
+			damage = max(0, damage - 15)
+			armour_penetration = max(0, armour_penetration - 15)
 
 	return ..()
 
@@ -455,6 +453,72 @@
 	damage = 20
 	ricochets_max = 0
 	armour_penetration = 40
+
+// MARK: Railgun
+/obj/projectile/bullet/railgun
+	name = "railgun sabot-round"
+	icon_state = "greyscale_bolt"
+	damage = 50
+	armour_penetration = 50
+	ricochets_max = 4 //Originally 6
+	ricochet_incidence_leeway = 40
+	ricochet_chance = 75
+	ricochet_decay_damage = 0.75 // 50 -> ~37 -> ~27 -> ~20 -> ~15
+	shrapnel_type = /obj/item/shrapnel/bullet/railgun
+	embed_type = null
+	hitsound = 'modular_bandastation/weapon/sound/ranged/rail.ogg'
+	range = 80
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_BLUE
+	projectile_piercing = PASSMOB
+
+/obj/projectile/bullet/railgun/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
+	if(isliving(target))
+		if(blocked > 50 || pierces > 2)
+			projectile_piercing = NONE
+			damage = max(0, damage - 20)
+			armour_penetration = max(0, armour_penetration - 10)
+
+	return ..()
+
+/obj/projectile/bullet/railgun/taser
+	name = "railgun taser-round"
+	embed_type = /datum/embedding/railgun
+	damage = 10
+	stamina = 60
+	armour_penetration = 20
+	wound_bonus = -20
+	exposed_wound_bonus = -20
+	sharpness = NONE
+	projectile_piercing = NONE
+
+/obj/projectile/bullet/railgun/taser/on_hit(atom/target, blocked, pierce_hit)
+	. = ..()
+	if(. == BULLET_ACT_BLOCK)
+		return
+
+	if(isliving(target))
+		var/mob/living/living_target = target
+		living_target.apply_status_effect(/datum/status_effect/tased, 0.5 SECONDS)
+
+/obj/item/shrapnel/bullet/railgun
+	name = "railgun shredder"
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+	icon_state = "gaussphase"
+	embed_type = null
+
+/datum/embedding/railgun
+	embed_chance = 75
+	fall_chance = 3
+	pain_stam_pct = 3
+	pain_mult = 2
+	jostle_chance = 5
+	jostle_pain_mult = 1
+	ignore_throwspeed_threshold = TRUE
+	rip_time = 1 SECONDS
 
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect
