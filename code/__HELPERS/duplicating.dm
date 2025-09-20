@@ -81,8 +81,8 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 			var/mob/living/carbon/copied_carbon = made_copy
 			//transfer DNA over (also body features), then update skin color.
 			original_carbon.dna.copy_dna(copied_carbon.dna)
-			copied_carbon.appearance = new /mutable_appearance(original_carbon.appearance) // BANDASTATION FIX: appearance copying
 			copied_carbon.updateappearance(mutcolor_update = TRUE)
+			copied_carbon.regenerate_icons() // BANDASTATION FIX: appearance copying
 
 		var/mob/living/original_living = original
 		var/mob/living/copied_living = made_copy
