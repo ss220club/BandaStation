@@ -61,7 +61,7 @@
 		return 'modular_bandastation/emote_panel/audio/human/male/sniff_male.ogg'
 
 /datum/emote/living/gasp/get_sound(mob/living/user)
-	if(HAS_MIND_TRAIT(user, TRAIT_MIMING) || !ishuman(user))
+	if(!ishuman(user))
 		return
 
 	var/mob/living/carbon/human/human_user = user
@@ -86,7 +86,7 @@
 	)
 
 /datum/emote/living/yawn/get_sound(mob/living/user)
-	if(HAS_MIND_TRAIT(user, TRAIT_MIMING) || !ishuman(user))
+	if(!ishuman(user))
 		return
 
 	var/mob/living/carbon/human/human_user = user
@@ -102,7 +102,7 @@
 	)
 
 /datum/emote/living/choke/get_sound(mob/living/user)
-	if(HAS_MIND_TRAIT(user, TRAIT_MIMING) || !ishuman(user))
+	if(!ishuman(user))
 		return
 
 	var/mob/living/carbon/human/human_user = user
@@ -125,7 +125,7 @@
 	)
 
 /datum/emote/living/carbon/moan/get_sound(mob/living/user)
-	if(HAS_MIND_TRAIT(user, TRAIT_MIMING) || !ishuman(user))
+	if(!ishuman(user))
 		return
 
 	var/mob/living/carbon/human/human_user = user
@@ -142,7 +142,7 @@
 	)
 
 /datum/emote/living/giggle/get_sound(mob/living/user)
-	if(HAS_MIND_TRAIT(user, TRAIT_MIMING) || !ishuman(user))
+	if(!ishuman(user))
 		return
 
 	var/mob/living/carbon/human/human_user = user

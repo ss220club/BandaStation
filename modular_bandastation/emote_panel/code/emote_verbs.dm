@@ -89,31 +89,6 @@
 	set category = "Эмоции"
 	emote("clap", intentional = TRUE)
 
-/mob/living/carbon/human/species/vulpkanin/proc/emote_howl()
-	set name = "▷ Выть"
-	set category = "Эмоции"
-	emote("howl", intentional = TRUE)
-
-/mob/living/carbon/human/species/vulpkanin/proc/emote_growl()
-	set name = "▷ Рычать"
-	set category = "Эмоции"
-	emote("growl", intentional = TRUE)
-
-/mob/living/carbon/human/species/vulpkanin/proc/emote_purr()
-	set name = "▷ Урчать"
-	set category = "Эмоции"
-	emote("purr", intentional = TRUE)
-
-/mob/living/carbon/human/species/vulpkanin/proc/emote_bark()
-	set name = "▷ Гавкнуть"
-	set category = "Эмоции"
-	emote("bark", intentional = TRUE)
-
-/mob/living/carbon/human/species/vulpkanin/proc/emote_wbark()
-	set name = "▷ Дважды гавкнуть"
-	set category = "Эмоции"
-	emote("wbark", intentional = TRUE)
-
 /// Action Emotes ///
 /mob/living/carbon/human/verb/emote_collapse()
 	set name = "○ Рухнуть"
@@ -507,6 +482,32 @@
 	set name = "▷ Шипеть"
 	set category = "Эмоции"
 	emote("hiss_t", intentional = TRUE)
+
+// MARK: Vulpkanin emotes
+/mob/living/carbon/human/species/vulpkanin/proc/emote_howl()
+	set name = "▷ Выть"
+	set category = "Эмоции"
+	emote("howl", intentional = TRUE)
+
+/mob/living/carbon/human/species/vulpkanin/proc/emote_growl()
+	set name = "▷ Рычать"
+	set category = "Эмоции"
+	emote("growl", intentional = TRUE)
+
+/mob/living/carbon/human/species/vulpkanin/proc/emote_purr()
+	set name = "▷ Урчать"
+	set category = "Эмоции"
+	emote("purr", intentional = TRUE)
+
+/mob/living/carbon/human/species/vulpkanin/proc/emote_bark()
+	set name = "▷ Гавкнуть"
+	set category = "Эмоции"
+	emote("bark", intentional = TRUE)
+
+/mob/living/carbon/human/species/vulpkanin/proc/emote_wbark()
+	set name = "▷ Дважды гавкнуть"
+	set category = "Эмоции"
+	emote("wbark", intentional = TRUE)
 
 // MARK: Moth emotes
 /mob/living/carbon/human/species/moth/verb/emote_wing()
