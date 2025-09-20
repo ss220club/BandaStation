@@ -216,13 +216,14 @@
 		cd_action.disable()
 
 /datum/action/cooldown/Trigger(mob/clicker, trigger_flags, atom/target)
+	// BANDASTATION EDIT START - Allow unsetting abilities on cooldown
 	. = ..()
-	if(!.)
-		return FALSE
-	if(!owner)
-		return FALSE
-
 	var/mob/user = clicker || owner
+	if(!.)
+		if(!unset_after_click)
+			unset_click_ability(user, refund_cooldown = FALSE)
+		return FALSE
+	// BANDASTATION EDIT END
 
 	// If our cooldown action is a click_to_activate action:
 	// The actual action is activated on whatever the user clicks on -
