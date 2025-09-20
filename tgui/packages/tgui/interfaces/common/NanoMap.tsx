@@ -14,6 +14,7 @@ import { clamp01 } from 'tgui-core/math';
 import { type BooleanLike, classes } from 'tgui-core/react';
 
 import { resolveAsset } from '../../assets';
+import { Direction } from '../../constants';
 
 export type MapData = {
   name: string;
@@ -57,6 +58,20 @@ const tileSize = defaultMapSize / 255;
 /** Converts object position to pixel position.*/
 function posToPx(pos: number) {
   return `${pos * tileSize - tileSize}px`;
+}
+
+/** Converts Byond direction to direction */
+function dirToDeg(dir: Direction) {
+  switch (dir) {
+    case Direction.NORTH:
+      return 180;
+    case Direction.EAST:
+      return 270;
+    case Direction.SOUTH:
+      return 0;
+    case Direction.WEST:
+      return 90;
+  }
 }
 
 export function NanoMap(props: Props) {
@@ -142,6 +157,7 @@ export function NanoMap(props: Props) {
               mapState={mapState}
               setMapState={setMapState}
               minimap={minimap}
+              minimapDisabled={minimapDisabled}
               setMinimap={setMinimap}
             >
               {buttons}
@@ -183,8 +199,15 @@ function NanoMapControls(props) {
 }
 
 function NanoMapButtons(props) {
-  const { children, mapData, mapState, setMapState, minimap, setMinimap } =
-    props;
+  const {
+    children,
+    mapData,
+    mapState,
+    setMapState,
+    minimap,
+    minimapDisabled,
+    setMinimap,
+  } = props;
   return (
     <Stack fill vertical className="NanoMap__Buttons">
       <Stack.Item grow>
@@ -195,13 +218,15 @@ function NanoMapButtons(props) {
         />
       </Stack.Item>
       <Stack.Item>{children}</Stack.Item>
-      <Stack.Item>
-        <Button
-          selected={!minimap}
-          icon={minimap ? 'eye' : 'eye-slash'}
-          onClick={() => setMinimap(!minimap)}
-        />
-      </Stack.Item>
+      {!minimapDisabled && (
+        <Stack.Item>
+          <Button
+            selected={!minimap}
+            icon={minimap ? 'eye' : 'eye-slash'}
+            onClick={() => setMinimap(!minimap)}
+          />
+        </Stack.Item>
+      )}
     </Stack>
   );
 }
@@ -258,9 +283,19 @@ function NanoMapLevelSelector(props) {
 
 /** TODO: Add types when <Button> types will exported */
 function MapButton(props) {
-  const { posX, posY, hidden, highlighted, ...rest } = props;
+  const { posX, posY, hidden, highlighted, tracking, direction, ...rest } =
+    props;
   const buttonId = `${posX}_${posY}`;
 
+  const { zoomToElement } = useControls();
+
+  useEffect(() => {
+    if (tracking && props.selected && !hidden) {
+      zoomToElement('selected', maxScale, 1000, 'linear');
+    }
+  }, [posX, posY]);
+
+  console.log(posX, posY);
   return (
     <div
       id={props.selected ? 'selected' : buttonId}
@@ -268,13 +303,26 @@ function MapButton(props) {
         'NanoMap__Object--wrapper',
         hidden && 'NanoMap__Object--hidden',
         props.selected && 'NanoMap__Object--selected',
+        tracking && 'tracked',
         highlighted && 'highlighted',
       ])}
-      style={{ left: posToPx(posX), bottom: posToPx(posY) }}
+      style={{
+        transform: `translate(${posToPx(posX)}, ${posToPx(256 - posY)})`,
+      }}
     >
       <KeepScale>
         <div className="NanoMap__Object--inner">
           {highlighted && <div className="NanoMap__Object--highlighted" />}
+          {direction && (
+            <div
+              className="NanoMap__Object--direction"
+              style={{ transform: `rotate(${dirToDeg(direction)}deg)` }}
+            >
+              <svg viewBox="0 0 66 66">
+                <polygon points="100,75 200,250 0,250" />
+              </svg>
+            </div>
+          )}
           <Button
             {...rest}
             className={classes([
@@ -282,7 +330,7 @@ function MapButton(props) {
               props.circular && 'NanoMap__Object--circular',
               props.selected && 'NanoMap__Object--selected',
             ])}
-            tooltipPosition="top-end"
+            tooltipPosition={props.tooltipPosition || 'top-end'}
             onClick={(event) => {
               if (props.onClick) {
                 props.onClick(event);

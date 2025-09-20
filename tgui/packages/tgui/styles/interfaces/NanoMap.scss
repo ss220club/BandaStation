@@ -121,7 +121,6 @@
     width: 2em;
     border: 2px solid hsl(from var(--color-border-dark) h s l / 0.66);
     border-radius: var(--border-radius-small);
-    transform: scale(1.25);
     transition-property: background-color, border-color, transform;
     transition-duration: var(--transition-time-medium);
 
@@ -131,11 +130,19 @@
 
     &--wrapper {
       position: absolute;
+      top: 0;
+      left: 0;
       transform: translate(17.5%, 5%);
       z-index: 2;
 
       &.highlighted {
         z-index: 5;
+      }
+
+      &.tracked {
+        transition-property: transform;
+        transition-duration: 1s;
+        transition-timing-function: linear;
       }
     }
 
@@ -151,6 +158,21 @@
       border-radius: var(--border-radius-circular);
       filter: drop-shadow(0 0 1px hsla(0, 0%, 0%, 0.5));
       animation: 1.5s highlighted infinite;
+    }
+
+    &--direction {
+      position: absolute;
+      inset: 0;
+
+      svg {
+        overflow: visible;
+      }
+
+      polygon {
+        fill: hsl(from var(--color-green) h s l / 0.75);
+        mask-image: linear-gradient(to top, transparent 0%, black 25%);
+        transform: translate(-100%, -100%);
+      }
     }
 
     &--selected {
