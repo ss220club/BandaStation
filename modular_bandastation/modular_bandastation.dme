@@ -47,6 +47,7 @@
 #include "language_improvements/_language_improvements.dme"
 #include "loadout/_loadout.dme"
 #include "mapping/_mapping.dme"
+#include "martial_arts/_martial_arts.dme"
 #include "medical/_medical.dme"
 #include "metaserver/_metaserver.dme"
 #include "minesweeper/_minesweeper.dme"
