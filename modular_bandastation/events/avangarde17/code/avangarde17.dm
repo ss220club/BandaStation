@@ -331,23 +331,6 @@
 /area/awaymission/avangarde17/outside/base
 	name = "Аванпост КССП"
 	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside
-	name = "Аванпост КССП"
-	icon_state = "awaycontent4"
-	static_lighting = TRUE
-	base_lighting_alpha = 0
-
-/area/awaymission/avangarde17/inside/cave
-	name = "Пещеры"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/temple
-	name = "Древний храм"
-	icon_state = "awaycontent6"
-
-/area/awaymission/avangarde17/outside/base
-	name = "Music Zone"
 	var/sound_file = 'modular_bandastation/events/avangarde17/audio/red_army.ogg'
 	var/sound_channel = 61
 	var/max_volume = 40
@@ -362,6 +345,20 @@
 	var/list/current_volumes = list()
 	var/list/target_volumes  = list()
 	var/list/attached_mobs   = list()
+
+/area/awaymission/avangarde17/inside
+	name = "Аванпост КССП"
+	icon_state = "awaycontent4"
+	static_lighting = TRUE
+	base_lighting_alpha = 0
+
+/area/awaymission/avangarde17/inside/cave
+	name = "Пещеры"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/temple
+	name = "Древний храм"
+	icon_state = "awaycontent6"
 
 /area/awaymission/avangarde17/outside/base/Initialize(mapload)
 	. = ..()
