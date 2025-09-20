@@ -57,8 +57,7 @@ function CrewTableEntry(props) {
   const { act, data } = useBackend<CrewConsoleData>();
   const { link_allowed } = data;
   const { highlight, sensor_data, highlightedSensors } = props;
-  const { name, assignment, ijob, life_status, oxydam, position, can_track } =
-    sensor_data;
+  const { name, assignment, ijob, life_status, oxydam, position } = sensor_data;
 
   return (
     <Table.Row className="candystripe">
