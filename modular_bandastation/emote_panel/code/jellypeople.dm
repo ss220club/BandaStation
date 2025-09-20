@@ -1,23 +1,23 @@
 /datum/species/jelly/get_scream_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/jelly_scream.ogg'
-	return 'modular_bandastation/emote_panel/audio/jelly_scream.ogg'
+		return 'modular_bandastation/emote_panel/audio/slime/jelly_scream.ogg'
+	return 'modular_bandastation/emote_panel/audio/slime/jelly_scream.ogg'
 
 /datum/species/jelly/get_cough_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/jelly_squish.ogg'
-	return 'modular_bandastation/emote_panel/audio/jelly_squish.ogg'
+		return 'modular_bandastation/emote_panel/audio/slime/jelly_squish.ogg'
+	return 'modular_bandastation/emote_panel/audio/slime/jelly_squish.ogg'
 
 /datum/species/jelly/get_cry_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
 		return pick(
-			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
-			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/cry_female_3.ogg',
 		)
 	return pick(
-		'sound/mobs/humanoids/human/cry/male_cry1.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry2.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry3.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/cry_male_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/cry_male_2.ogg',
 	)
 
 /datum/species/jelly/get_laugh_sound(mob/living/carbon/human/jellypeople)
