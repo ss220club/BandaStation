@@ -69,6 +69,7 @@
 #include "ssd_indicator/_ssd_indicator.dme"
 #include "status_effects/_status_effects.dme"
 #include "tgui_who/_tgui_who.dme"
+#include "ticket_manager/_ticket_manager.dme"
 #include "title_screen/_title_screen.dme"
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"

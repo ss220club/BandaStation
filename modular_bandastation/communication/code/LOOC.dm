@@ -72,7 +72,7 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 
 	msg = emoji_parse(msg)
 
-	mob.log_talk(msg,LOG_OOC, tag="LOOC")
+	mob.log_talk(msg, LOG_LOOC, tag="LOOC")
 	var/list/heard
 	if(wall_pierce)
 		heard = get_hearers_in_range(LOOC_RANGE, mob.get_top_level_mob())

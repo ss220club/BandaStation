@@ -59206,13 +59206,6 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white/diagonal,
 /area/station/maintenance/ghetto/starboard)
-"ovB" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/holopad,
-/turf/open/floor/iron,
-/area/station/command/bridge)
 "ovC" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -193044,7 +193037,7 @@ cUG
 uHz
 mky
 aPX
-ovB
+nib
 fZj
 fZj
 wMd

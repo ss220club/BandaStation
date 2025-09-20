@@ -12,6 +12,17 @@
 	for(var/mob/player in GLOB.player_list)
 		if(!player.stat && player.hivecheck())
 			to_chat(player, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = player == src)
+			// BANDASTATION ADDITION START - TTS
+			cast_tts(
+				player,
+				message,
+				is_local = FALSE,
+				effects = list(/datum/singleton/sound_effect/telepathy),
+				channel_override = CHANNEL_TTS_TELEPATHY,
+				check_deafness = FALSE
+			)
+			// BANDASTATION ADDITION END
+
 		else if(player in GLOB.dead_mob_list)
 			var/link = FOLLOW_LINK(player, src)
 			to_chat(player, "[link] [rendered]", type = MESSAGE_TYPE_RADIO)
