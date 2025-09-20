@@ -39,6 +39,8 @@
 	var/list/redeemed_coupons
 	/// How many paychecks to skip when payday is called.
 	var/paydays_to_skip = 0
+	/// Desired insurance tier to be charged each payday. See code/__DEFINES/insurance.dm
+	var/insurance_desired = INSURANCE_NONE
 
 /datum/bank_account/New(newname, job, modifier = 1, player_account = TRUE)
 	account_holder = newname

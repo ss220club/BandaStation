@@ -48,6 +48,9 @@ export const MedicalRecordView = (props) => {
     quirk_notes,
     rank,
     species,
+    insurance_current,
+    insurance_desired,
+    insurance_payer_account_id,
   } = foundRecord;
 
   const minor_disabilities_array = getQuirkStrings(minor_disabilities);
@@ -135,6 +138,14 @@ export const MedicalRecordView = (props) => {
                 target_ref={crew_ref}
                 text={blood_type}
               />
+            </LabeledList.Item>
+            <LabeledList.Item label="Страховка">
+              <Box>
+                Текущая: {insurance_current || 'None'}; Желаемая: {insurance_desired || 'None'}
+              </Box>
+            </LabeledList.Item>
+            <LabeledList.Item label="Счёт страховки">
+              {insurance_payer_account_id ?? '—'}
             </LabeledList.Item>
             <LabeledList.Item
               buttons={physical_statuses.map((button, index) => {

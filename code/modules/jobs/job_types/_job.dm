@@ -208,6 +208,27 @@
 		bank_account.replaceable = FALSE
 		add_mob_memory(/datum/memory/key/account, remembered_id = account_id)
 
+		// Apply desired insurance tier from character preferences (if any)
+		if(player_client && player_client?.prefs)
+			var/desired_tier = player_client.prefs.read_preference(/datum/preference/choiced/insurance_tier)
+			if(istext(desired_tier))
+				switch(LOWER_TEXT(desired_tier))
+					if("premium")
+						bank_account.insurance_desired = INSURANCE_PREMIUM
+					if("standard")
+						bank_account.insurance_desired = INSURANCE_STANDARD
+					else
+						bank_account.insurance_desired = INSURANCE_NONE
+
+		// Seed insurance payer info into crew record
+		var/datum/record/crew/rec = find_record(real_name)
+		if(rec)
+			rec.insurance_payer_account_id = bank_account.account_id
+			// Set current insurance immediately based on character preference
+			rec.insurance_current = bank_account.insurance_desired
+			// Keep desired in sync so payday will attempt to fund it
+			rec.insurance_desired = bank_account.insurance_desired
+
 	dress_up_as_job(
 		equipping = equipping,
 		visual_only = FALSE,
