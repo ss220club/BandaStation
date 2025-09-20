@@ -3824,7 +3824,6 @@
 /obj/structure/statue/bronze/marx{
 	pixel_x = 1;
 	pixel_y = 14;
-	desc = ы
 	},
 /turf/open/floor/carpet/red,
 /area/awaymission/avangarde17/inside)
@@ -4999,7 +4998,6 @@
 /obj/structure/statue/bronze/marx{
 	pixel_x = 1;
 	pixel_y = 14;
-	desc = ы
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside)
@@ -7386,12 +7384,10 @@
 "VN" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/reagent_containers/cup/jerrycan/oil{
-	desc = ы;
 	pixel_x = -6;
 	pixel_y = 0
 	},
 /obj/item/reagent_containers/cup/jerrycan/oil{
-	desc = ы;
 	pixel_x = -2;
 	pixel_y = -7
 	},
