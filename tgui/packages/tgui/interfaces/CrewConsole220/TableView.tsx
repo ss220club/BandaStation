@@ -99,7 +99,6 @@ function CrewTableEntry(props) {
       {!!link_allowed && (
         <Table.Cell collapsing>
           <Button
-            disabled={!can_track}
             onClick={() =>
               act('select_person', {
                 name: name,
