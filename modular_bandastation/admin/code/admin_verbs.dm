@@ -102,7 +102,7 @@ ADMIN_VERB(play_sound_in_view, R_SOUND, "Play Sound in View", "Plays a sound to 
 	log_admin("[key_name(user)] played a view-sound [sound]")
 	message_admins("[key_name_admin(user)] played a view-sound [sound]")
 
-	for(var/mob/M in hearers)
+	for(var/mob/hearer as anything in hearers)
 		if(isnull(M.client))
 			continue
 		var/volume_modifier = M.client.prefs.read_preference(/datum/preference/numeric/volume/sound_midi)
