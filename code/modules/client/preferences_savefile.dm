@@ -355,6 +355,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Load prefs
 	// job_preferences = save_data?["job_preferences"] // BANDASTATION MOVED - Pref Job Slots
 
+	//Custom emote panel
+	custom_emote_panel = save_data?["custom_emote_panel"] // BANDASTATION ADD - Emote Panel
+
 	//Quirks
 	all_quirks = save_data?["all_quirks"]
 
@@ -367,6 +370,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	randomise = SANITIZE_LIST(randomise)
 	// job_preferences = SANITIZE_LIST(job_preferences) // BANDASTATION MOVED - Pref Job Slots
 	all_quirks = SANITIZE_LIST(all_quirks)
+
+	custom_emote_panel = SANITIZE_LIST(custom_emote_panel) // BANDASTATION ADD - Emote Panel
 
 	//Validate job prefs
 	// BANDASTATION MOVED - START - Pref Job Slots
@@ -414,6 +419,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Write prefs
 	// save_data["job_preferences"] = job_preferences // BANDASTATION MOVED - Pref Job Slots
+
+	// BANDASTATION ADD - Emote Panel
+	save_data["custom_emote_panel"] = custom_emote_panel // BANDASTATION ADD - Emote Panel
 
 	//Quirks
 	save_data["all_quirks"] = all_quirks
