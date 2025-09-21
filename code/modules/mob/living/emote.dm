@@ -220,7 +220,7 @@
 		'sound/mobs/humanoids/human/gasp/gasp_male1.ogg',
 		'sound/mobs/humanoids/human/gasp/gasp_male2.ogg',
 		)
-/*
+/* BANDASTATION REMOVAL - START
 /datum/emote/living/gasp/shock
 	key = "gaspshock"
 	key_third_person = "gaspsshock"
@@ -229,7 +229,7 @@
 	message_mime = "gasps in silent shock!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	stat_allowed = SOFT_CRIT
- */
+BANDASTATION REMOVAL - END */
 /datum/emote/living/giggle
 	key = "giggle"
 	key_third_person = "giggles"
