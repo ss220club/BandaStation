@@ -26375,7 +26375,6 @@
 	c_tag = "Library - South";
 	dir = 2
 	},
-/obj/structure/statue/gold/galactic_map,
 /turf/open/floor/wood,
 /area/station/service/library)
 "gwp" = (
