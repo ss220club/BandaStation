@@ -11,7 +11,7 @@
 
 /obj/machinery/door/airlock/update_overlays()
 	. = ..()
-	if(!has_open_lights || !lights || !hasPower())
+	if(!has_open_lights || !feedback || !hasPower())
 		return
 	var/light_state
 	switch(airlock_state)

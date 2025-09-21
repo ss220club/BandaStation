@@ -5,7 +5,7 @@ on:
 
 jobs:
   notify:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     if: ${{ github.event.action != 'labeled' || github.event.label.name == 'Stale' }}
     steps:
       - name: "Check for DISCORD_WEBHOOK"
