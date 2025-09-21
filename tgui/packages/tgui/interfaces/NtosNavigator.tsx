@@ -25,7 +25,7 @@ enum SIGNAL {
 
 export function NtosNavigator() {
   const { act, data } = useBackend<Data>();
-  const { mapData, location } = data;
+  const { mapData, location, signal } = data;
   const [currentLevel, setCurrentLevel] = useState<number>(mapData.mainFloor);
 
   return (
@@ -36,17 +36,20 @@ export function NtosNavigator() {
           mapData={data.mapData}
           onLevelChange={setCurrentLevel}
         >
-          <NanoMap.Button
-            circular
-            tracking
-            selected
-            posX={location?.x || 128}
-            posY={location?.y || 128}
-            direction={location?.dir || 8}
-            // hidden={location.z !== currentLevel}
-            tooltip="Вы тут!"
-            tooltipPosition="top"
-          />
+          {location && signal !== SIGNAL.LOST && (
+            <NanoMap.Button
+              circular
+              tracking
+              selected
+              posX={location.x}
+              posY={location.y}
+              posZ={location.z}
+              direction={location.dir}
+              hidden={location.z !== currentLevel}
+              tooltip="Вы тут!"
+              tooltipPosition="top"
+            />
+          )}
         </NanoMap>
       </NtosWindow.Content>
     </NtosWindow>
