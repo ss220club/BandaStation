@@ -63,7 +63,7 @@ export function NtosNavigator() {
           )}
           {mapData?.stairs?.map((stair) => (
             <NanoMap.Button
-              key={stair.posX + stair.posY}
+              key={`${stair.posX}-${stair.posY}-${stair.posZ}`}
               posX={stair.posX}
               posY={stair.posY}
               posZ={stair.posZ}
