@@ -82,7 +82,7 @@
 
 	)
 
-var/ascended_max_health = 220
+var/ascended_max_health = SHADOWLING_ASCENDED_MAX_HEALTH
 
 /mob/living/carbon/human/proc/refresh_eye_overlays()
 	remove_overlay(EYES_LAYER)
@@ -99,17 +99,8 @@ var/ascended_max_health = 220
 	. = ..()
 	if(!istype(H))
 		return
-	if(hascall(H, "setMaxHealth"))
-		call(H, "setMaxHealth")(ascended_max_health)
-	else
-		H.maxHealth = max(H.maxHealth, ascended_max_health)
-	if(hascall(H, "heal_overall_damage"))
-		H.heal_overall_damage(1000, 1000, 1, 1)
-	else
-		H.adjustBruteLoss(-1000)
-		H.adjustFireLoss(-1000)
-		H.adjustToxLoss(-1000)
-		H.adjustOxyLoss(-1000)
+	H.setMaxHealth(ascended_max_health)
+	H.heal_overall_damage()
 	shadowling_equip_ascended_claws(H)
 
 /datum/species/shadow/shadowling/ascended/on_species_loss(mob/living/carbon/human/H, datum/species/new_species)

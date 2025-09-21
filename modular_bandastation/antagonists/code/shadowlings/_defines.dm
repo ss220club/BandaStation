@@ -18,6 +18,7 @@ GLOBAL_VAR_INIT(is_shadowling_roundender_started, FALSE)
 #define isshadowling(A) (is_species(A, /datum/species/shadow/shadowling))
 #define isshadowling_ascended(A) (is_species(A, /datum/species/shadow/shadowling/ascended))
 #define GET_BODYPART_COEFFICIENT(X) round(X.len / BODYPARTS_DEFAULT_MAXIMUM , 0.1)
+#define SHADOWLING_ASCENDED_MAX_HEALTH 220
 
 //Абилки для раундстарт линга
 var/global/list/SHADOWLING_BASE_ABILITIES = list(

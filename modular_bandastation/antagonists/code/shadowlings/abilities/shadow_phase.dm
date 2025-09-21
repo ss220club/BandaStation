@@ -1,5 +1,5 @@
 /datum/movespeed_modifier/shadowling/phase
-	multiplicative_slowdown = -2
+	multiplicative_slowdown = -0.9
 	priority = 30
 	movetypes = GROUND
 
@@ -65,7 +65,7 @@
 
 	var/light_immunity = FALSE
 	light_max = SHADOWLING_LIGHT_THRESHOLD
-	movespeed = 1.5
+	movespeed = 3
 
 /obj/effect/dummy/phased_mob/shadowling/check_light_level(atom/location_to_check)
 	if(light_immunity)

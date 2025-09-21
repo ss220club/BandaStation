@@ -138,23 +138,16 @@
 		res += T
 	return res
 
-/datum/action/cooldown/shadowling/proc/find_nearest_target(range)
+/datum/action/cooldown/shadowling/proc/find_nearest_target(search_range)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	var/min_d = 999
 	var/mob/living/carbon/human/best = null
-	var/list/candidates = range(range, get_turf(owner))
+	var/list/candidates = range(search_range, get_turf(owner))
 	for(var/mob/living/carbon/human/candidate in candidates)
-		if(candidate == owner)
+		if(candidate == owner || QDELETED(candidate) || candidate.stat == DEAD)
 			continue
-		if(QDELETED(candidate))
+		if(hive && ((candidate in hive.lings) || (candidate in hive.thralls)))
 			continue
-		if(candidate.stat == DEAD)
-			continue
-		if(hive)
-			if(candidate in hive.lings)
-				continue
-			if(candidate in hive.thralls)
-				continue
 		var/d = get_dist(owner, candidate)
 		if(d < min_d)
 			min_d = d
@@ -193,10 +186,7 @@
 	return null
 
 /datum/action/cooldown/shadowling/StartCooldown(time_override)
-	var/duration = time_override
-	if(!duration)
-		duration = cooldown_time
-
+	var/duration = time_override || cooldown_time
 	var/datum/antagonist/shadowling/A = get_shadowling_antag_of(owner)
 	var/mult = A?.is_ascended ? 0.5 : 1
 	var/calculated_cd = duration * mult

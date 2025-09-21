@@ -41,7 +41,14 @@
 		if(!is_thrall)
 			hive.shadowling_grant_hatch(H)
 
-	objectives |= shadow_team.get_objectives()
+
+	if(is_thrall)
+		objectives |= list(
+			new /datum/objective/shadow_thrall/survive,
+			new /datum/objective/shadow_thrall/assist_ascension,
+		)
+	else
+		objectives |= shadow_team.get_objectives()
 
 	. = ..()
 
@@ -197,12 +204,12 @@
 		return
 	GLOB.is_shadowling_roundender_started = TRUE
 
-	send_to_playing_players("<span class='shadowradio'><b>ЕДИНАЯ ТЕНЬ ПОГЛОЩАЕТ СТАНЦИЮ!</b></span>")
+	send_to_playing_players("<span class='shadowradio_win'><b>ЕДИНАЯ ТЕНЬ ПОГЛОЩАЕТ СТАНЦИЮ!</b></span>")
 	sound_to_playing_players(SHADOWLING_RISEN_MUSIC, 70)
 
 	priority_announce(
 		text = "Зафиксировано поглощение объекта огромной теневой сущностью."+\
-			"Протокол: ЭВАКУАЦИЯ НЕОТЛОЖНО. Приказы на запуск шаттла подтверждены.",
+			"Требуется экстренная активация работоспособных активов. Приказы на запуск шаттла подтверждены - отмена невозможна.",
 		title = "[command_name()]: Отдел паранормальных явлений",
 		sound = SSstation.announcer.get_rand_report_sound(),
 		has_important_message = TRUE,
@@ -212,11 +219,30 @@
 	SSshuttle.registerHostileEnvironment(hostile_ref)
 	SSshuttle.lockdown = TRUE
 
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(_shadowling_roundender_phase2)), 15 SECONDS)
+/datum/objective/shadow_thrall
+	name = "Thrall Objective"
+	admin_grantable = TRUE
 
-/proc/_shadowling_roundender_phase2()
-	priority_announce(
-		text = "Подтверждаем: вызов эвакуационного шаттла не подлежит отмене. Экипажу занять точки эвакуации!",
-		title = "[command_name()]: Центр управления",
-		sound = SSstation.announcer.get_rand_report_sound(),
-	)
+/datum/objective/shadow_thrall/survive
+	name = "Survive"
+	explanation_text = "Выжить до конца раунда, оставаясь слугой Тени."
+
+/datum/objective/shadow_thrall/survive/check_completion()
+	if(!owner || !owner.current)
+		return FALSE
+	if(owner.current.stat == DEAD)
+		return FALSE
+	return !!owner.has_antag_datum(/datum/antagonist/shadow_thrall, TRUE)
+
+/datum/objective/shadow_thrall/assist_ascension
+	name = "Assist Ascension"
+	explanation_text = "Помочь тенеморфам вознестись: к концу раунда должен быть хотя бы один Возвышенный Тенеморф."
+
+/datum/objective/shadow_thrall/assist_ascension/check_completion()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(!hive)
+		return FALSE
+	for(var/mob/living/carbon/human/L in hive.lings)
+		if(isshadowling_ascended(L))
+			return TRUE
+	return FALSE
