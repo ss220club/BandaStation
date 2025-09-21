@@ -58,55 +58,49 @@ ADMIN_VERB(global_man_up, R_ADMIN, "Global Man Up", "Tells everyone to man up an
 //MARK: Play Z-level Sound
 
 ADMIN_VERB(play_zlevel_sound, R_SOUND, "Play Z-level Sound", "Plays a sound only on your z-level.", ADMIN_CATEGORY_FUN, sound as sound)
-	var/vol = tgui_input_number(user, "На какой громкости воспроизвести звук (1-100)?", default = 100, max_value = 100)
-	if(!vol)
-		return
-	vol = clamp(vol, 1, 100)
+	var/volume = tgui_input_number(user, "На какой громкости воспроизвести звук (1-100)?", default = 100, max_value = 100, min_value = 1)
 
-	var/sound/admin_sound = prepare_admin_sound(vol, sound)
+	var/sound/admin_sound = prepare_admin_sound(volume, sound)
 
 	var/zlevel = user.mob.z
 	log_admin("[key_name(user)] played a z-level sound [sound] on level [zlevel]")
 	message_admins("[key_name_admin(user)] played a z-level sound [sound] on level [zlevel]")
 
-	for(var/mob/M in GLOB.player_list)
-		if(M.z != zlevel)
+	for(var/mob/hearer in GLOB.player_list)
+		if(hearer.z != zlevel)
 			continue
-		var/volume_modifier = M.client.prefs.read_preference(/datum/preference/numeric/volume/sound_midi)
+		var/volume_modifier = hearer.client.prefs.read_preference(/datum/preference/numeric/volume/sound_midi)
 		if(volume_modifier > 0)
-			admin_sound.volume = vol * M.client.admin_music_volume * (volume_modifier/100)
-			SEND_SOUND(M, admin_sound)
-			admin_sound.volume = vol
+			admin_sound.volume = volume * hearer.client.admin_music_volume * (volume_modifier/100)
+			SEND_SOUND(hearer, admin_sound)
+			admin_sound.volume = volume
 
 //MARK: Play Sound in View
 
 ADMIN_VERB(play_sound_in_view, R_SOUND, "Play Sound in View", "Plays a sound to all player in view.", ADMIN_CATEGORY_FUN, sound as sound)
-	var/vol = tgui_input_number(user, "На какой громкости воспроизвести звук (1-100)?", default = 100, max_value = 100)
-	if(!vol)
-		return
-	vol = clamp(vol, 1, 100)
+	var/volume = tgui_input_number(user, "На какой громкости воспроизвести звук (1-100)?", default = 100, max_value = 100, min_value = 1)
 
-	var/sound/admin_sound = prepare_admin_sound(vol, sound)
+	var/sound/admin_sound = prepare_admin_sound(volume, sound)
 
-	var/list/mob/hearers = list()
+	var/list/hearers = list()
 	// If non-default we need additional calculations
 	if(user.view_size.width)
 		// Info about user field of view is presented by two vars Width and Height. They can be 0, 3, 5, 7...
 		// They always have the same value.
 		// So I made this kind of calculation to present them as single number.
 		// I think it's better to put it in different proc, but now I will leave it be like this.
-		hearers = get_hearers_in_view(DEFAULT_SIGHT_DISTANCE + (user.view_size.width - 1) / 2, user.mob)
+		hearers = get_hearers_in_view(DEFAULT_SIGHT_DISTANCE + (user.view_size.width - 1) / 2, user.mob, RECURSIVE_CONTENTS_CLIENT_MOBS)
 	else
-		hearers = get_hearers_in_view(DEFAULT_SIGHT_DISTANCE, user.mob)
+		hearers = get_hearers_in_view(DEFAULT_SIGHT_DISTANCE, user.mob, RECURSIVE_CONTENTS_CLIENT_MOBS)
 
 	log_admin("[key_name(user)] played a view-sound [sound]")
 	message_admins("[key_name_admin(user)] played a view-sound [sound]")
 
 	for(var/mob/hearer as anything in hearers)
-		if(isnull(M.client))
+		if(isnull(hearer.client))
 			continue
-		var/volume_modifier = M.client.prefs.read_preference(/datum/preference/numeric/volume/sound_midi)
+		var/volume_modifier = hearer.client.prefs.read_preference(/datum/preference/numeric/volume/sound_midi)
 		if(volume_modifier > 0)
-			admin_sound.volume = vol * M.client.admin_music_volume * (volume_modifier/100)
-			SEND_SOUND(M, admin_sound)
-			admin_sound.volume = vol
+			admin_sound.volume = volume * hearer.client.admin_music_volume * (volume_modifier/100)
+			SEND_SOUND(hearer, admin_sound)
+			admin_sound.volume = volume
