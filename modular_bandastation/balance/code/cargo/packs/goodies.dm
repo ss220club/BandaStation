@@ -29,3 +29,7 @@
 
 /datum/supply_pack/goody/match38br
 	cost = PAYCHECK_CREW * 4 // Original price: 100 New price: 200
+
+// MARK: TOOLS
+/datum/supply_pack/goody/rapid_lighting_device
+	cost = PAYCHECK_CREW * 4 // Original price: 500 New price: 200

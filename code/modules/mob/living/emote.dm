@@ -14,6 +14,19 @@
 	. = ..()
 	user.spin(TAUNT_EMOTE_DURATION, 0.1 SECONDS)
 
+/datum/emote/living/tongue
+	key = "tongue"
+	key_third_person = "tongues"
+	message = "sticks their tongue out."
+
+/datum/emote/living/tongue/run_emote(mob/user, params, type_override, intentional)
+	var/mob/living/carbon/human/human_user = user
+	if(istype(human_user) && !human_user.get_organ_slot(ORGAN_SLOT_TONGUE))
+		to_chat(human_user, span_warning("You don't have a tongue!"))
+		return
+	. = ..()
+	QDEL_IN(human_user.give_emote_overlay(/datum/bodypart_overlay/simple/emote/tongue), 5.2 SECONDS)
+
 /datum/emote/living/blush
 	key = "blush"
 	key_third_person = "blushes"
@@ -207,7 +220,7 @@
 		'sound/mobs/humanoids/human/gasp/gasp_male1.ogg',
 		'sound/mobs/humanoids/human/gasp/gasp_male2.ogg',
 		)
-
+/* BANDASTATION REMOVAL - START
 /datum/emote/living/gasp/shock
 	key = "gaspshock"
 	key_third_person = "gaspsshock"
@@ -216,7 +229,7 @@
 	message_mime = "gasps in silent shock!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	stat_allowed = SOFT_CRIT
-
+BANDASTATION REMOVAL - END */
 /datum/emote/living/giggle
 	key = "giggle"
 	key_third_person = "giggles"
@@ -289,7 +302,7 @@
 	message = "laughs."
 	message_mime = "laughs silently!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-	specific_emote_audio_cooldown = 8 SECONDS
+	// specific_emote_audio_cooldown = 8 SECONDS // BANDASTATION REMOVAL
 	vary = TRUE
 
 /datum/emote/living/laugh/can_run_emote(mob/living/user, status_check = TRUE , intentional, params)
@@ -385,6 +398,11 @@
 		return
 	return user.dna.species.get_cough_sound(user)
 
+/datum/emote/living/wheeze
+	key = "wheeze"
+	key_third_person = "wheezes"
+	message = "wheezes!"
+	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/pout
 	key = "pout"
@@ -630,7 +648,7 @@
 		TIMER_COOLDOWN_START(user, COOLDOWN_YAWN_PROPAGATION, cooldown * 3)
 
 	var/mob/living/carbon/carbon_user = user
-	if(istype(carbon_user) && ((carbon_user.wear_mask?.flags_inv & HIDEFACE) || carbon_user.head?.flags_inv & HIDEFACE))
+	if(carbon_user.obscured_slots & HIDEFACE)
 		return // if your face is obscured, skip propagation
 
 	var/propagation_distance = user.client ? 5 : 2 // mindless mobs are less able to spread yawns
