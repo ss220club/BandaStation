@@ -19,6 +19,7 @@ import {
 import { Button, Image, Stack } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
 import { type BooleanLike, classes } from 'tgui-core/react';
+import { throttle } from 'tgui-core/timer';
 import { resolveAsset } from '../../assets';
 import { Direction } from '../../constants';
 
@@ -170,8 +171,9 @@ export function NanoMap(props: Props) {
         wheel={{ step: defaultScale }}
         doubleClick={{ disabled: true }}
         panning={{ velocityDisabled: true }}
-        onWheel={handleTransformed}
-        onPanningStop={handleTransformed}
+        onTransformed={throttle((state) => {
+          handleTransformed(state);
+        }, 1000)} // Saving 1 time at a second, let's not fuck localState
       >
         <Stack
           fill
