@@ -17,7 +17,7 @@
 
 /datum/martial_art/judo/activate_style(mob/living/new_holder)
 	. = ..()
-	RegisterSignal(holder, COMSIG_ITEM_POST_EQUIPPED, PROC_REF(check_baton))
+	RegisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(check_baton))
 	for(var/obj/item/item in new_holder.held_items)
 		check_baton(equipped_item = item, slot = ITEM_SLOT_HANDS)
 
@@ -26,7 +26,7 @@
 	discombobulate.Grant(new_holder)
 
 /datum/martial_art/judo/deactivate_style(mob/living/remove_from)
-	UnregisterSignal(holder, COMSIG_ITEM_POST_EQUIPPED)
+	UnregisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM)
 	to_chat(remove_from, span_userdanger("Вы забываете мастерство корпоративного дзюдо..."))
 	discombobulate?.Remove(remove_from)
 	return ..()
