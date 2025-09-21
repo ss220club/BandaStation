@@ -1,7 +1,7 @@
 /mob/living/proc/judo_help()
-	set name = "Вспомнить основы дзюдо."
+	set name = "Вспомнить основы"
 	set desc = "Вы взываете к техникам корпоратского дзюдо."
-	set category = "IC"
+	set category = "Judo"
 
 	var/list/message = list()
 	message += span_bolditalic("Вы взываете к техникам корпоратского дзюдо.")
