@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"atmos_adjacent_turfs",
 	"bodyparts",
 	"ckey",
+	"pixloc", // BANDASTATION FIX: copied atom move to correct loc
 	"client_mobs_in_contents",
 	"_listen_lookup",
 	"computer_id",
@@ -81,6 +82,7 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 			//transfer DNA over (also body features), then update skin color.
 			original_carbon.dna.copy_dna(copied_carbon.dna)
 			copied_carbon.updateappearance(mutcolor_update = TRUE)
+			copied_carbon.regenerate_icons() // BANDASTATION FIX: appearance copying
 
 		var/mob/living/original_living = original
 		var/mob/living/copied_living = made_copy
