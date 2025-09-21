@@ -348,8 +348,8 @@ function MapButton(props) {
     if (
       tracking &&
       props.selected &&
-      posZ > mapData.minFloor &&
-      posZ < mapData.maxFloor
+      posZ >= mapData.minFloor &&
+      posZ <= mapData.maxFloor
     ) {
       setMapState((prev) => ({
         ...prev,
