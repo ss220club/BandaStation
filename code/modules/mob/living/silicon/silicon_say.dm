@@ -24,7 +24,7 @@
 	var/namepart = name
 	// If carbon, use voice to account for voice changers
 	if(iscarbon(src))
-		namepart = GetVoice()
+		namepart = get_voice(add_id_name = TRUE)
 
 	// AI in carbon body should still have its real name
 	var/obj/item/organ/brain/cybernetic/ai/brain = get_organ_slot(ORGAN_SLOT_BRAIN)
@@ -55,6 +55,15 @@
 					type = MESSAGE_TYPE_RADIO,
 					avoid_highlighting = (src == hearing_mob)
 				)
+
+			cast_tts(
+				hearing_mob,
+				message,
+				is_local = FALSE,
+				effects = list(/datum/singleton/sound_effect/robot, /datum/singleton/sound_effect/radio),
+				channel_override = CHANNEL_TTS_RADIO,
+				check_deafness = FALSE
+			)
 
 		if(isobserver(hearing_mob))
 			var/following = src

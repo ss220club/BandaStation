@@ -19,17 +19,17 @@ if command -v rg >/dev/null 2>&1; then
 	if [ ! rg -P '' >/dev/null 2>&1 ] ; then
 		pcre2_support=0
 	fi
-	code_files="code/**/**.dm"
+	code_files="code/**/**.dm modular_bandastation/**/**.dm" # BANDASTATION EDIT - Add modular_bandastation/
 	map_files="_maps/**/**.dmm"
 	shuttle_map_files="_maps/shuttles/**.dmm"
-	code_x_515="code/**/!(__byond_version_compat).dm"
+	code_x_515="code/**/!(__byond_version_compat).dm modular_bandastation/**/!(__byond_version_compat).dm" # BANDASTATION EDIT - Add modular_bandastation/
 else
 	pcre2_support=0
 	grep=grep
-	code_files="-r --include=code/**/**.dm"
+	code_files="-r --include=code/**/**.dm --include=modular_bandastation/**/**.dm" # BANDASTATION EDIT - Add modular_bandastation/
 	map_files="-r --include=_maps/**/**.dmm"
 	shuttle_map_files="-r --include=_maps/shuttles/**.dmm"
-	code_x_515="-r --include=code/**/!(__byond_version_compat).dm"
+	code_x_515="-r --include=code/**/!(__byond_version_compat).dm --include=modular_bandastation/**/!(__byond_version_compat).dm" # BANDASTATION EDIT - Add modular_bandastation/
 fi
 
 echo -e "${BLUE}Using grep provider at $(which $grep)${NC}"
@@ -216,6 +216,20 @@ if $grep 'forceMove\(\s*(\w+\(\)|\w+)\s*,\s*(\w+\(\)|\w+)\s*\)' $code_files; the
 	echo
 	echo -e "${RED}ERROR: forceMove() call with two arguments - this is not how forceMove() is invoked! It's x.forceMove(y), not forceMove(x, y).${NC}"
 	st=1
+fi;
+
+part "as anything on typeless loops"
+if $grep 'var/[^/]+ as anything' $code_files; then
+    echo
+    echo -e "${RED}ERROR: 'as anything' used in a typeless for loop. This doesn't do anything and should be removed.${NC}"
+    st=1
+fi;
+
+part "as anything on internal functions"
+if $grep 'var\/(turf|mob|obj|atom\/movable).+ as anything in o?(view|range|hearers)\(' $code_files; then
+    echo
+    echo -e "${RED}ERROR: 'as anything' typed for loop over an internal function. These functions have some internal optimization that relies on the loop not having 'as anything' in it.${NC}"
+    st=1
 fi;
 
 part "common spelling mistakes"
