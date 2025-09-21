@@ -24,20 +24,13 @@
 
 		// Add ladders and stairs for navigator UI
 		var/list/ladders_and_stairs = list()
-		for(var/obj/structure/ladder/ladder in GLOB.ladders)
+		for(var/obj/structure/ladded_or_stairs as anything in (GLOB.ladders + GLOB.stairs))
 			ladders_and_stairs += list(list(
-				"posX" = ladder.x,
-				"posY" = ladder.y,
-				"posZ" = ladder.z,
+				"posX" = ladded_or_stairs.x,
+				"posY" = ladded_or_stairs.y,
+				"posZ" = ladded_or_stairs.z,
 			))
-
-		for(var/obj/structure/stairs/stair in GLOB.stairs)
-			ladders_and_stairs += list(list(
-				"posX" = stair.x,
-				"posY" = stair.y,
-				"posZ" = stair.z,
-			))
-
+			
 		map_ui_data["stairs"] = ladders_and_stairs
 
 	return map_ui_data
