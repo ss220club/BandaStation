@@ -48,9 +48,9 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"verbs",
 	"x", "y", "z",
 	// BANDASTATION FIX START: fix strip menu contents
-	"pixloc",
-	"obscured_slots",
 	"covered_slots",
+	"obscured_slots",
+	"pixloc",
 	// BANDASTATION FIX END: fix strip menu contents
 ))
 GLOBAL_PROTECT(duplicate_forbidden_vars)
