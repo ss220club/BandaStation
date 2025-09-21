@@ -67,8 +67,9 @@ ADMIN_VERB(play_zlevel_sound, R_SOUND, "Play Z-level Sound", "Plays a sound only
 	log_admin("[key_name(user)] played a z-level sound [sound] on level [zlevel]")
 	message_admins("[key_name_admin(user)] played a z-level sound [sound] on level [zlevel]")
 
-	for(var/mob/hearer in GLOB.player_list)
-		if(hearer.z != zlevel)
+	for(var/mob/hearer as anything in GLOB.player_list)
+		var/turf/hearer_turf = get_turf(hearer)
+		if(hearer_turf.z != zlevel)
 			continue
 		var/volume_modifier = hearer.client.prefs.read_preference(/datum/preference/numeric/volume/sound_midi)
 		if(volume_modifier > 0)
