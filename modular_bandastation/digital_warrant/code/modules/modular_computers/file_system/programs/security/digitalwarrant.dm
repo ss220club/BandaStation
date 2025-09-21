@@ -1,9 +1,9 @@
 /datum/computer_file/program/digitalwarrant
 	filename = "digitalwarrant"
 	filedesc = "Warrant Assistant"
+	extended_desc = "Позволяет пользователю создавать, редактировать и просматривать цифровые ордера."
 	downloader_category = PROGRAM_CATEGORY_SECURITY
 	program_icon = "warrant"
-	program_open_overlay = "warrant"
 	tgui_id = "NtosDigitalWarrant"
 	size = 8
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
