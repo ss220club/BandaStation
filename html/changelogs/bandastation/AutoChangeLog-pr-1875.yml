@@ -1,4 +1,0 @@
-author: "dj-34"
-delete-after: True
-changes:
-  - bugfix: "Синдиканал больше не должен отправлять дубликаты сообщений."

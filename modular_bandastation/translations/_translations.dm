@@ -41,11 +41,11 @@ GLOBAL_LIST_EMPTY(ru_reagent_descs)
 		for(var/emote_name_key in emote_names)
 			GLOB.ru_emote_names += list("[emote_name_key]" = emote_names[emote_name_key])
 
-		for(var/emote_key as anything in GLOB.emote_list)
+		for(var/emote_key in GLOB.emote_list)
 			var/list/emote_list = GLOB.emote_list[emote_key]
 			for(var/datum/emote/emote in emote_list)
 				emote.update_to_ru()
-		for(var/emote_kb_key as anything in GLOB.keybindings_by_name)
+		for(var/emote_kb_key in GLOB.keybindings_by_name)
 			var/datum/keybinding/emote/emote_kb = GLOB.keybindings_by_name[emote_kb_key]
 			if(!istype(emote_kb))
 				continue
@@ -60,6 +60,6 @@ GLOBAL_LIST_EMPTY(ru_reagent_descs)
 		for(var/reagent_desc_key in reagent_descs)
 			GLOB.ru_reagent_descs += list("[reagent_desc_key]" = reagent_descs[reagent_desc_key])
 
-		for(var/reagent_key as anything in GLOB.chemical_reagents_list)
+		for(var/reagent_key in GLOB.chemical_reagents_list)
 			var/datum/reagent/reagent = GLOB.chemical_reagents_list[reagent_key]
 			reagent.update_to_ru()
