@@ -138,7 +138,7 @@
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		return 0
-	return hive.count_nt()
+	return hive.count_alive_thralls()
 
 /datum/objective/shadowling/enslave_fraction/update_explanation_text()
 	var/need = required_thralls()
@@ -153,6 +153,9 @@
 	if(isnum(new_pct))
 		percent = clamp(round(new_pct), 1, 100)
 		update_explanation_text()
+
+		var/datum/team/shadow_hive/hive = get_shadow_hive()
+		hive?.refresh_ascension_thralls_needed()
 
 /datum/objective/shadowling/ascend
 	name = "Achieve Ascension"
@@ -182,7 +185,7 @@
 				break
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(hive)
-		var/alive_thralls = hive.count_nt()
+		var/alive_thralls = hive.count_alive_thralls()
 		var/total_lings = 0
 		var/alive_lings = 0
 		for(var/mob/living/carbon/human/L in hive.lings)

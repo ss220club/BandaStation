@@ -108,7 +108,7 @@
 	P.dir = H.dir
 
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
-	var/nt = hive ? hive.count_nt() : 0
+	var/nt = hive ? hive.count_alive_thralls() : 0
 	P.light_immunity = (nt >= light_immunity_thralls)
 
 	P.jaunter = H

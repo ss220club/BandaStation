@@ -13,6 +13,7 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 	var/list/thralls = list()
 	var/list/ling_roles = list()
 	var/mob/leader
+	var/asc_thralls_needed = 0
 
 /datum/team/shadow_hive/New()
 	. = ..()
@@ -111,7 +112,7 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 		if(!keep[mm])
 			members -= mm
 
-/datum/team/shadow_hive/proc/count_nt()
+/datum/team/shadow_hive/proc/count_alive_thralls()
 	sanitize()
 	var/n = 0
 	for(var/mob/living/carbon/human/T in thralls)
@@ -127,7 +128,7 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 		return
 	var/check_thralls = (H in thralls)
 	var/check_lings = (H in lings)
-	if(!(check_lings || check_thralls))
+	if(!((isshadowling(H) && check_lings) || check_thralls))
 		return
 	for(var/datum/action/cooldown/shadowling/hive_sync/existing in H.actions)
 		return
@@ -204,6 +205,8 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 	add_objective(new /datum/objective/shadowling/enslave_fraction)
 	add_objective(new /datum/objective/shadowling/ascend)
 
+	refresh_ascension_thralls_needed()
+
 /datum/team/shadow_hive/proc/get_objectives()
 	return objectives
 
@@ -223,7 +226,6 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 	_shadowling_dedupe_teams()
 	return T
 
-
 /datum/team/shadow_hive/proc/shadowling_grant_hatch(mob/living/carbon/human/H)
 	if(!istype(H))
 		return null
@@ -240,3 +242,31 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 	var/datum/action/cooldown/shadowling/toggle_night_vision/A = new
 	A.Grant(H)
 	return A
+
+/datum/team/shadow_hive/proc/get_ascension_thralls_needed()
+	if(asc_thralls_needed > 0)
+		return asc_thralls_needed
+
+	return refresh_ascension_thralls_needed()
+
+/datum/team/shadow_hive/proc/refresh_ascension_thralls_needed()
+	var/datum/objective/shadowling/enslave_fraction/obj = null
+	if(islist(objectives))
+		obj = (locate(/datum/objective/shadowling/enslave_fraction) in objectives)
+
+	if(obj)
+		asc_thralls_needed = max(1, obj.required_thralls())
+		return asc_thralls_needed
+
+	var/baseline = 0
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
+		if(player.ready == PLAYER_READY_TO_PLAY)
+			baseline++
+
+	if(!baseline)
+		baseline = length(get_crewmember_minds())
+	if(baseline <= 0)
+		baseline = 1
+
+	asc_thralls_needed = max(1, floor((baseline * SHADOWLING_ASCEND_DEFAULT_PERCENT) / 100))
+	return asc_thralls_needed

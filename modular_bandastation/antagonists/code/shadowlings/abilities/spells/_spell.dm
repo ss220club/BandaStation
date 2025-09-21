@@ -16,6 +16,8 @@
 	var/max_range = 0
 	var/channel_time = 0
 	var/cancel_on_bright = TRUE
+	var/min_req = 0
+	var/max_req = 100
 
 /datum/action/cooldown/shadowling/proc/CanUse(mob/living/carbon/human/H)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()

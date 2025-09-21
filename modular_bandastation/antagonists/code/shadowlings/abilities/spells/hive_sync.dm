@@ -12,7 +12,7 @@
 		to_chat(H, span_warning("Улей не отвечает."))
 		return FALSE
 
-	var/nt = hive.count_nt()
+	var/nt = hive.count_alive_thralls()
 
 	var/list/new_unlocks = grant_unlocks_for(H, nt)
 	if(length(new_unlocks))
@@ -57,18 +57,27 @@
 	return A.type in check_list
 
 /datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(var/datum/action/cooldown/shadowling/A)
-	return A.required_thralls
+	var/percent = clamp(A.required_thralls, 0, 100)
+	if(percent <= 0)
+		return 0
 
-/datum/action/cooldown/shadowling/hive_sync/proc/grant_unlocks_for(mob/living/carbon/human/H, nt)
+	var/asc_need = get_thralls_needed_for_ascension()
+	var/count = ceil(asc_need * (percent / 100))
+	var/final_requires = clamp(count, A.min_req, A.max_req)
+
+	return final_requires
+
+/datum/action/cooldown/shadowling/hive_sync/proc/grant_unlocks_for(mob/living/carbon/human/H, thrall_count)
 	if(!istype(H))
 		return list()
+
 	var/ling_class = get_ling_class(H)
 	if(!ling_class)
 		return list()
 
 	var/list/unlocked_names = list()
 
-	for(var/path in typesof(/datum/action/cooldown/shadowling))
+	for(var/path as anything in typesof(/datum/action/cooldown/shadowling))
 		if(path == /datum/action/cooldown/shadowling)
 			continue
 		if(path == /datum/action/cooldown/shadowling/hive_sync)
@@ -81,8 +90,8 @@
 			qdel(A)
 			continue
 
-		var/req = get_required_thralls(A)
-		if(nt < req)
+		var/req_count = get_required_thralls(A)
+		if(thrall_count < req_count)
 			qdel(A)
 			continue
 
@@ -92,3 +101,9 @@
 			unlocked_names += "[n]"
 
 	return unlocked_names
+
+/datum/action/cooldown/shadowling/hive_sync/proc/get_thralls_needed_for_ascension()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(!hive)
+		return 1
+	return hive.get_ascension_thralls_needed()
