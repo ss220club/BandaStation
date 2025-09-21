@@ -24,6 +24,10 @@
 
 /datum/computer_file/program/digitalwarrant/ui_data(mob/user)
 	var/list/data = list()
+	var/list/crew_manifest = list()
+	for(var/datum/record/crew/CR in GLOB.manifest.general)
+		crew_manifest += list(list("name" = CR.name, "job" = CR.rank))
+	data["crew_manifest"] = crew_manifest
 	if(active_warrant)
 		data["active"] = serialize_warrant(active_warrant)
 	else
@@ -90,8 +94,6 @@
 			if(!warrant_subject)
 				return TRUE
 			var/list/warrant_access = get_job_accesses(J)
-			if(islist(warrant_access))
-				warrant_access.Remove(SSid_access.get_flag_access_list(ACCESS_FLAG_COMMAND))
 			active_warrant.idauth = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 			active_warrant.access = warrant_access
 			return TRUE

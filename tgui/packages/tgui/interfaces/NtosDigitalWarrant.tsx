@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import { Button, Input, LabeledList, Section, Stack } from 'tgui-core/components';
@@ -12,20 +13,43 @@ type Warrant = {
   arrestsearch: string;
 };
 
+type CrewMember = {
+  name: string;
+  job: string;
+};
+
 type Data = {
   warrants?: Warrant[];
   active?: Warrant;
+  crew_manifest?: CrewMember[];
 };
 
 export const NtosDigitalWarrant = (props, context) => {
   const { act, data } = useBackend<Data>(context);
-  const { warrants = [], active } = data;
+  const { warrants = [], active, crew_manifest = [] } = data;
+  const [showCrewManifest, setShowCrewManifest] = useState(false);
 
   return (
     <Window width={500} height={400}>
       <Window.Content>
         {active ? (
-          <WarrantEditor warrant={active} act={act} />
+          showCrewManifest ? (
+            <CrewManifest
+              crew={crew_manifest}
+              act={act}
+              onSelect={(name, job) => {
+                act('edit_name', { name, job });
+                setShowCrewManifest(false);
+              }}
+              onClose={() => setShowCrewManifest(false)}
+            />
+          ) : (
+            <WarrantEditor
+              warrant={active}
+              act={act}
+              onShowCrewManifest={() => setShowCrewManifest(true)}
+            />
+          )
         ) : (
           <WarrantList warrants={warrants} act={act} />
         )}
@@ -37,29 +61,33 @@ export const NtosDigitalWarrant = (props, context) => {
 type WarrantEditorProps = {
   warrant: Warrant;
   act: (action: string, params?: any) => void;
+  onShowCrewManifest: () => void;
 };
 
 const WarrantEditor = (props: WarrantEditorProps) => {
-  const { warrant, act } = props;
+  const { warrant, act, onShowCrewManifest } = props;
   return (
     <Section title={warrant.namewarrant}>
       <LabeledList>
         <LabeledList.Item label="Name">
           <Input
             value={warrant.namewarrant}
-            onChange={(name) => act('edit_name', { name, job: warrant.jobwarrant })}
+            onChange={(e, name) => act('edit_name', { name, job: warrant.jobwarrant })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Job">
           <Input
             value={warrant.jobwarrant}
-            onChange={(job) => act('edit_name', { name: warrant.namewarrant, job })}
+            onChange={(e, job) => act('edit_name', { name: warrant.namewarrant, job })}
           />
+        </LabeledList.Item>
+        <LabeledList.Item label="From Manifest">
+          <Button onClick={onShowCrewManifest}>Select</Button>
         </LabeledList.Item>
         <LabeledList.Item label="Charges">
           <Input
             value={warrant.charges}
-            onChange={(charges) => act('edit_charges', { charges })}
+            onChange={(e, charges) => act('edit_charges', { charges })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Authorized">
@@ -80,6 +108,47 @@ const WarrantEditor = (props: WarrantEditorProps) => {
         <Button onClick={() => act('delete', { id: warrant.id })}>Delete</Button>
         <Button onClick={() => act('back')}>Back</Button>
       </Stack>
+    </Section>
+  );
+};
+
+type CrewManifestProps = {
+  crew: CrewMember[];
+  act: (action: string, params?: any) => void;
+  onSelect: (name: string, job: string) => void;
+  onClose: () => void;
+};
+
+const CrewManifest = (props: CrewManifestProps) => {
+  const { crew, onSelect, onClose } = props;
+  const [search, setSearch] = useState('');
+
+  const filteredCrew = crew.filter(
+    (member) =>
+      member.name.toLowerCase().includes(search.toLowerCase()) ||
+      member.job.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <Section
+      title="Crew Manifest"
+      buttons={<Button onClick={onClose}>Back</Button>}
+    >
+      <Input
+        placeholder="Search by name or job"
+        onChange={(e, value) => setSearch(value)}
+        mb={1}
+      />
+      {filteredCrew.map((member) => (
+        <Stack key={member.name} justify="space-between" mb={1}>
+          <Stack.Item grow>
+            {member.name} - {member.job}
+          </Stack.Item>
+          <Button onClick={() => onSelect(member.name, member.job)}>
+            Select
+          </Button>
+        </Stack>
+      ))}
     </Section>
   );
 };
