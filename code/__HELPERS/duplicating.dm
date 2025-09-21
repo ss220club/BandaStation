@@ -9,7 +9,6 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"atmos_adjacent_turfs",
 	"bodyparts",
 	"ckey",
-	"pixloc", // BANDASTATION FIX: copied atom move to correct loc
 	"client_mobs_in_contents",
 	"_listen_lookup",
 	"computer_id",
@@ -48,6 +47,11 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"vars",
 	"verbs",
 	"x", "y", "z",
+	// BANDASTATION FIX START: fix strip menu contents
+	"covered_slots",
+	"obscured_slots",
+	"pixloc",
+	// BANDASTATION FIX END: fix strip menu contents
 ))
 GLOBAL_PROTECT(duplicate_forbidden_vars)
 
