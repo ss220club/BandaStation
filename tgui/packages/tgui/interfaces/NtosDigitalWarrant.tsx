@@ -72,13 +72,13 @@ const WarrantEditor = (props: WarrantEditorProps) => {
         <LabeledList.Item label="Name">
           <Input
             value={warrant.namewarrant}
-            onChange={(e, name) => act('edit_name', { name, job: warrant.jobwarrant })}
+            onChange={name => act('edit_name', { name, job: warrant.jobwarrant })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Job">
           <Input
             value={warrant.jobwarrant}
-            onChange={(e, job) => act('edit_name', { name: warrant.namewarrant, job })}
+            onChange={job => act('edit_name', { name: warrant.namewarrant, job })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="From Manifest">
@@ -87,7 +87,7 @@ const WarrantEditor = (props: WarrantEditorProps) => {
         <LabeledList.Item label="Charges">
           <Input
             value={warrant.charges}
-            onChange={(e, charges) => act('edit_charges', { charges })}
+            onChange={charges => act('edit_charges', { charges })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Authorized">
@@ -136,7 +136,7 @@ const CrewManifest = (props: CrewManifestProps) => {
     >
       <Input
         placeholder="Search by name or job"
-        onChange={(e, value) => setSearch(value)}
+        onChange={value => setSearch(value)}
         mb={1}
       />
       {filteredCrew.map((member) => (
