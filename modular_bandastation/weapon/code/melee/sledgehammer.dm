@@ -29,11 +29,11 @@
 /obj/item/sledgehammer/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, force_unwielded=force_unwielded, force_wielded=force_wielded, icon_wielded="[base_icon_state]1")
-	AddComponent(/datum/component/stamina_cost_per_hit,
-		stamina_cost = 12,
-		stamina_cost_wielded = 10,
-		stamina_cost_on_atom = 10,
-		stamina_cost_wielded_on_atom = 8,
+	AddComponent(/datum/component/stamina_cost_per_hit,\
+		stamina_cost = 12,\
+		stamina_cost_wielded = 10,\
+		stamina_cost_on_atom = 10,\
+		stamina_cost_wielded_on_atom = 8,\
 		)
 	AddComponent(/datum/component/rip_and_tear, stamina_cost = 40, tear_time = 6 SECONDS)
 
