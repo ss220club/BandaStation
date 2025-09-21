@@ -36,7 +36,6 @@ export const NtosDigitalWarrant = (props, context) => {
           showCrewManifest ? (
             <CrewManifest
               crew={crew_manifest}
-              act={act}
               onSelect={(name, job) => {
                 act('edit_name', { name, job });
                 setShowCrewManifest(false);
@@ -72,13 +71,13 @@ const WarrantEditor = (props: WarrantEditorProps) => {
         <LabeledList.Item label="Name">
           <Input
             value={warrant.namewarrant}
-            onChange={name => act('edit_name', { name, job: warrant.jobwarrant })}
+            onChange={(e, value) => act('edit_name', { name: value, job: warrant.jobwarrant })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Job">
           <Input
             value={warrant.jobwarrant}
-            onChange={job => act('edit_name', { name: warrant.namewarrant, job })}
+            onChange={(e, value) => act('edit_name', { name: warrant.namewarrant, job: value })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="From Manifest">
@@ -87,7 +86,7 @@ const WarrantEditor = (props: WarrantEditorProps) => {
         <LabeledList.Item label="Charges">
           <Input
             value={warrant.charges}
-            onChange={charges => act('edit_charges', { charges })}
+            onChange={(e, value) => act('edit_charges', { charges: value })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Authorized">
@@ -114,7 +113,6 @@ const WarrantEditor = (props: WarrantEditorProps) => {
 
 type CrewManifestProps = {
   crew: CrewMember[];
-  act: (action: string, params?: any) => void;
   onSelect: (name: string, job: string) => void;
   onClose: () => void;
 };
@@ -136,7 +134,7 @@ const CrewManifest = (props: CrewManifestProps) => {
     >
       <Input
         placeholder="Search by name or job"
-        onChange={value => setSearch(value)}
+        onChange={(e, value) => setSearch(value)}
         mb={1}
       />
       {filteredCrew.map((member) => (
@@ -186,4 +184,3 @@ const WarrantList = (props: WarrantListProps) => {
     </Section>
   );
 };
-
