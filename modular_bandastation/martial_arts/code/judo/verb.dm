@@ -11,6 +11,5 @@
 	message += "[span_notice("Рычаг")]: Shove Shove Grab. Возьмите лежащего противника в захват."
 	message += "[span_notice("Золотой взрыв")]: Help Shove Help Grab Shove Shove Grab Help Shove Shove Grab Help. Используя боевые искусства, вы можете оглушить противника жизненной энергией. Или перегрузив наниты пояса."
 	message += "[span_notice("Сбить с толку")]: Нанесите противнику удар по уху, ненадолго сбив его с толку."
-	message += span_bolditalic("Ваши удары кулаками примерно в два раза сильнее, чем у остальных.")
 
 	to_chat(usr, message.Join("\n"))

@@ -26,7 +26,7 @@
 	discombobulate.Grant(new_holder)
 
 /datum/martial_art/judo/deactivate_style(mob/living/remove_from)
-	UnregisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM)
+	UnregisterSignal(holder, COMSIG_ITEM_POST_EQUIPPED)
 	to_chat(remove_from, span_userdanger("Вы забываете мастерство корпоративного дзюдо..."))
 	discombobulate?.Remove(remove_from)
 	return ..()
