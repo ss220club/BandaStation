@@ -26,7 +26,6 @@
 	death_sound = 'modular_bandastation/mobs/sound/mouse_squeak.ogg'
 	// holder_type = /obj/item/holder/chick
 
-
 /mob/living/basic/chicken/cock
 	name = "петух"
 	desc = "Гордый и важный вид."
