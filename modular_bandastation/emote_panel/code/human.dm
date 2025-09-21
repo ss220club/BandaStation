@@ -61,11 +61,7 @@
 		return 'modular_bandastation/emote_panel/audio/human/male/sniff_male.ogg'
 
 /datum/emote/living/gasp/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-
-	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
+	if(user.gender == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_2.ogg',
@@ -86,11 +82,7 @@
 	)
 
 /datum/emote/living/yawn/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-
-	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
+	if(user.gender == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/yawn_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/yawn_female_2.ogg',
@@ -102,11 +94,7 @@
 	)
 
 /datum/emote/living/choke/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-
-	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
+	if(user.gender == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/choke_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/choke_female_2.ogg',
@@ -125,11 +113,7 @@
 	)
 
 /datum/emote/living/carbon/moan/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-
-	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
+	if(user.gender == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/moan_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/moan_female_2.ogg',
@@ -142,11 +126,7 @@
 	)
 
 /datum/emote/living/giggle/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-
-	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
+	if(user.gender == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/giggle_female_2.ogg',
