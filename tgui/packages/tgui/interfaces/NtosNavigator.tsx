@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Icon, NoticeBox, Stack } from 'tgui-core/components';
+import { Box, Button, Icon, NoticeBox, Stack } from 'tgui-core/components';
 import { useBackend } from '../backend';
 import type { Direction } from '../constants';
 import { NtosWindow } from '../layouts';
@@ -16,6 +16,7 @@ type Location = {
   y: number;
   z: number;
   dir: Direction;
+  area: string;
 };
 
 enum SIGNAL {
@@ -44,6 +45,7 @@ export function NtosNavigator() {
       <NtosWindow.Content>
         <NanoMap
           minimapDisabled
+          buttons={<AreaName name={location?.area} />}
           mapData={mapData}
           onLevelChange={setCurrentLevel}
         >
@@ -82,12 +84,18 @@ export function NtosNavigator() {
   );
 }
 
-function GpsIcon() {
+function AreaName(props) {
+  const { name } = props;
   return (
-    <Icon.Stack>
-      <Icon name={'location-crosshairs'} />
-      <Icon name="slash" />
-    </Icon.Stack>
+    <Box position="fixed" top={6.4} left={4.25}>
+      <Button
+        fluid
+        width="100%"
+        style={{ pointerEvents: 'none', textTransform: 'capitalize' }}
+      >
+        {name}
+      </Button>
+    </Box>
   );
 }
 
@@ -113,5 +121,14 @@ function BadSignal(props) {
         </Stack>
       </NoticeBox>
     </Box>
+  );
+}
+
+function GpsIcon() {
+  return (
+    <Icon.Stack>
+      <Icon name={'location-crosshairs'} />
+      <Icon name="slash" />
+    </Icon.Stack>
   );
 }

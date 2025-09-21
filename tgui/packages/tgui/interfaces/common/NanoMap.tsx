@@ -19,7 +19,6 @@ import {
 import { Button, Image, Stack } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
 import { type BooleanLike, classes } from 'tgui-core/react';
-
 import { resolveAsset } from '../../assets';
 import { Direction } from '../../constants';
 
@@ -98,6 +97,7 @@ type MapState = {
 };
 
 type NanoMapContextType = {
+  mapData: MapData;
   mapState: MapState;
   setMapState: Dispatch<SetStateAction<MapState>>;
 };
@@ -158,7 +158,7 @@ export function NanoMap(props: Props) {
 
   return (
     <NanoMapContext.Provider
-      value={{ mapState: mapState, setMapState: setMapState }}
+      value={{ mapData: mapData, mapState: mapState, setMapState: setMapState }}
     >
       <TransformWrapper
         centerOnInit={positionX === 0 && positionY === 0}
@@ -188,10 +188,7 @@ export function NanoMap(props: Props) {
                 (minimapDisabled || !minimap) && 'NanoMap__Minimap--disabled',
               ])}
             >
-              <NanoMapButtons
-                mapData={mapData}
-                minimapDisabled={minimapDisabled}
-              >
+              <NanoMapButtons minimapDisabled={minimapDisabled}>
                 {buttons}
               </NanoMapButtons>
               {!minimapDisabled && minimap && (
@@ -214,7 +211,7 @@ export function NanoMap(props: Props) {
   );
 }
 
-function NanoMapControls(props) {
+function NanoMapControls() {
   const { zoomIn, zoomOut, centerView } = useControls();
   const context = useContext(NanoMapContext);
   if (!context) {
@@ -237,7 +234,7 @@ function NanoMapControls(props) {
 }
 
 function NanoMapButtons(props) {
-  const { children, mapData, minimapDisabled } = props;
+  const { children, minimapDisabled } = props;
   const context = useContext(NanoMapContext);
   if (!context) {
     return null;
@@ -249,7 +246,7 @@ function NanoMapButtons(props) {
   return (
     <Stack fill vertical className="NanoMap__Buttons">
       <Stack.Item grow>
-        <NanoMapLevelSelector mapData={mapData} />
+        <NanoMapLevelSelector />
       </Stack.Item>
       <Stack.Item>{children}</Stack.Item>
       {!minimapDisabled && (
@@ -267,15 +264,14 @@ function NanoMapButtons(props) {
   );
 }
 
-function NanoMapLevelSelector(props) {
-  const { mapData } = props;
-  const { minFloor, maxFloor, mainFloor, lavalandLevel } = mapData;
+function NanoMapLevelSelector() {
   const context = useContext(NanoMapContext);
   if (!context) {
     return null;
   }
 
-  const { mapState, setMapState } = context;
+  const { mapData, mapState, setMapState } = context;
+  const { minFloor, maxFloor, mainFloor, lavalandLevel } = mapData;
   const { currentLevel } = mapState;
 
   function setLevel(level: number) {
@@ -332,15 +328,16 @@ function MapButton(props) {
     hidden,
     ...rest
   } = props;
-  const buttonId = `${posX}_${posY}`;
 
-  const { zoomToElement } = useControls();
   const context = useContext(NanoMapContext);
   if (!context) {
     return null;
   }
 
-  const { mapState, setMapState } = context;
+  const buttonId = `${posX}_${posY}`;
+  const { zoomToElement } = useControls();
+  const { mapData, mapState, setMapState } = context;
+
   useEffect(() => {
     if (tracking && props.selected && !hidden) {
       zoomToElement('selected', mapState.scale, 1000, 'linear');
@@ -348,7 +345,12 @@ function MapButton(props) {
   }, [posX, posY]);
 
   useEffect(() => {
-    if (tracking && props.selected) {
+    if (
+      tracking &&
+      props.selected &&
+      posZ > mapData.minFloor &&
+      posZ < mapData.maxFloor
+    ) {
       setMapState((prev) => ({
         ...prev,
         currentLevel: posZ,

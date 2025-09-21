@@ -23,11 +23,13 @@
 	data["signal"] = current_signal
 
 	if(current_signal)
+		var/area/area = get_area(user)
 		data["location"] = list(
 			"x" = user.x,
 			"y" = user.y,
 			"z" = user.z,
 			"dir" = user.dir,
+			"area" = area.declent_ru(NOMINATIVE),
 		)
 
 	return data
