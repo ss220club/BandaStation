@@ -17,7 +17,7 @@
 
 /datum/martial_art/judo/activate_style(mob/living/new_holder)
 	. = ..()
-	RegisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(check_baton))
+	RegisterSignal(holder, COMSIG_ITEM_POST_EQUIPPED, PROC_REF(check_baton))
 	for(var/obj/item/item in new_holder.held_items)
 		check_baton(equipped_item = item, slot = ITEM_SLOT_HANDS)
 
@@ -39,7 +39,7 @@
 	if(slot != ITEM_SLOT_HANDS)
 		return
 
-	to_chat(holder, span_warning("Вам противен[genderize_ru(equipped_item.gender, "", "а", "о", "ы")] [equipped_item.declent_ru(NOMINATIVE)]!"))
+	to_chat(holder, span_warning("Вам против[genderize_ru(equipped_item.gender, "ен", "на", "но", "ны")] [equipped_item.declent_ru(NOMINATIVE)]!"))
 	holder.dropItemToGround(equipped_item)
 
 //Increased harm damage
