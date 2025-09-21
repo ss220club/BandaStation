@@ -9,7 +9,7 @@
 
 /datum/station_trait/bananium_shipment/get_pulsar_message()
 	var/advisory_string = "Уровень предупреждения: <b>Планета клоунов</b></center><BR>"
-	advisory_string += "Уровень предупреждения в вашем секторе — Планета клоунов! Наши гудки засекли большой запас бананиума. Клоуны сообщают о большом наплыве клоунов на вашу станцию. Мы настоятельно рекомендуем вам избегать любых угроз, чтобы активы Honkotrasen оставались в Банановом секторе. Департамент разведки рекомендует защищать химию от любых клоунов, пытающихся производить лысиум или космическую смазку."
+	advisory_string += "Уровень предупреждения в вашем секторе — планета клоунов! Наши гудки засекли большой запас бананиума. Клоуны сообщают о большом наплыве клоунов на вашу станцию. Мы настоятельно рекомендуем вам избегать любых угроз, чтобы активы Хонкотрейзен оставались в Банановом секторе. Отдел разведки рекомендует защищать химию от любых клоунов, пытающихся производить лысиум или космическую смазку."
 	return advisory_string
 
 /datum/station_trait/unnatural_atmosphere
@@ -164,7 +164,7 @@
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 2
 	show_in_report = TRUE
-	report_message = "Мы здесь, в Nanotrasen, хотели бы поздравить сотрудника с днём ​​рождения."
+	report_message = "Компания Нанотрейзен хотела бы поздравить сотрудника с днём ​​рождения."
 	trait_to_give = STATION_TRAIT_BIRTHDAY
 	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/announcement_medbot) //Overiding the annoucer hides the birthday person in the annoucement message.
 	///Variable that stores a reference to the person selected to have their birthday celebrated.
@@ -216,8 +216,8 @@
 
 
 /datum/station_trait/birthday/proc/announce_birthday()
-	report_message = "Мы  здесь, в Nanotrasen, хотели бы поздравить [birthday_person ? birthday_person_name : "Employee Name"] с днём ​рождения."
-	priority_announce("Поздравляем с днём рождения [birthday_person ? birthday_person_name : "Employee Name"]! Nanotrasen желает счастливого [birthday_person ? "[birthday_person.age + 1]-го" : "255-го"] Дня Рождения.")
+	report_message = "Компания Нанотрейзен хотела бы поздравить [birthday_person ? birthday_person_name : "Employee Name"] с днём ​рождения."
+	priority_announce("Поздравляем с днём рождения [birthday_person ? birthday_person_name : "Employee Name"]! Нанотрейзен желает счастливого [birthday_person ? "[birthday_person.age + 1]-го" : "255-го"] Дня Рождения.")
 	if(birthday_person)
 		playsound(birthday_person, 'sound/items/party_horn.ogg', 50)
 		birthday_person.add_mood_event("birthday", /datum/mood_event/birthday)
@@ -297,7 +297,7 @@
 	weight = 2
 	cost = STATION_TRAIT_COST_LOW
 	show_in_report = TRUE
-	report_message = "Nanotrasen выбрали вашу станцию ​​для эксперимента — у всех есть бесплатные предсказатели! Используйте их, чтобы легко и конфиденциально общаться с другими людьми."
+	report_message = "Нанотрейзен выбрали вашу станцию ​​для эксперимента — у всех есть бесплатные предсказатели! Используйте их, чтобы легко и конфиденциально общаться с другими людьми."
 
 /datum/station_trait/scryers/New()
 	. = ..()
@@ -402,7 +402,7 @@
 
 /// A trait that lets players choose whether they want pro-skub or anti-skub (or neither), and receive the appropriate equipment.
 /datum/station_trait/skub
-	name = "Великий Skub-Раздор"
+	name = "Великий Скуб раздор"
 	trait_type = STATION_TRAIT_NEUTRAL
 	show_in_report = FALSE
 	weight = 2
@@ -578,8 +578,8 @@
 
 /// We're pulling a Jim Kramer with this one boys
 /datum/station_trait/gmm_spotlight
-	name = "Экономическое обозрение GMM"
-	report_message = "В течение этой смены Галактический рынок минералов проводит выставку богатства вашей команды! Каждый раз, когда выплачивается зарплата, ведущие новостей станции будут объявлять, у кого больше всего кредитов."
+	name = "Экономическое обозрение ГРМ"
+	report_message = "В течение этой смены Галактический рынок минералов проводит выставку богатства вашего экипажа! Каждый раз, когда выплачивается зарплата, ведущие новостей станции будут объявлять, у кого больше всего кредитов."
 	trait_type = STATION_TRAIT_NEUTRAL
 	trait_to_give = STATION_TRAIT_ECONOMY_ALERTS
 	weight = 2

@@ -57,7 +57,7 @@
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 5
 	show_in_report = TRUE
-	report_message = "Внутренние коробки для снаряжения вашей команды были увеличены в размерах и заполнены дополнительным оборудованием."
+	report_message = "Коробки экипажа для снаряжения вашей команды были увеличены в размерах и заполнены дополнительным снаряжением."
 	trait_to_give = STATION_TRAIT_PREMIUM_INTERNALS
 
 /datum/station_trait/bountiful_bounties
@@ -77,7 +77,7 @@
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 2
 	show_in_report = TRUE
-	report_message = "У нас в запасе имелось много светящихся палочек, поэтому мы разбросали часть из них по техническим тоннелям (плюс пара напольных светильников)."
+	report_message = "У нас в запасе имелось много светящихся палочек, поэтому мы разбросали часть из них по техническим тоннелям (ещё пару напольный ламп)."
 
 /datum/station_trait/glowsticks/New()
 	..()
@@ -124,7 +124,7 @@
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 5
 	show_in_report = TRUE
-	report_message = "Цены в этой системе занижены, ПОКУПАЙТЕ-ПОКУПАЙТЕ-ПОКУПАЙТЕ!"
+	report_message = "Цены в этой системе занижены. ПОКУПАЙТЕ-ПОКУПАЙТЕ-ПОКУПАЙТЕ!"
 	blacklist = list(/datum/station_trait/distant_supply_lines)
 
 /datum/station_trait/strong_supply_lines/on_round_start()
@@ -253,7 +253,7 @@
 	trait_type = STATION_TRAIT_POSITIVE
 	show_in_report = TRUE
 	weight = 1
-	report_message = "Новые веяния кибернетики добрались и до станции! У каждого есть какой-нибудь кибернетический имплантат."
+	report_message = "Новые тренды кибернетики добрались и до станции! У каждого есть какой-нибудь кибернетический имплант."
 	trait_to_give = STATION_TRAIT_CYBERNETIC_REVOLUTION
 	/// List of all job types with the cybernetics they should receive.
 	var/static/list/job_to_cybernetic = list(
@@ -325,7 +325,7 @@
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 5
 	show_in_report = TRUE
-	report_message = "В связи с хорошими показателями производительности мы снабдили вышу станцию роскошными спасательными капсулами."
+	report_message = "В связи с хорошими показателями производительности мы снабдили вашу станцию роскошными спасательными капсулами."
 	trait_to_give = STATION_TRAIT_BIGGER_PODS
 	blacklist = list(/datum/station_trait/cramped_escape_pods)
 
@@ -359,7 +359,7 @@
 
 /datum/station_trait/random_event_weight_modifier/wise_cows/get_pulsar_message()
 	var/advisory_string = "Уровень предупреждения: <b>Планета коров</b></center><BR>" //We're gonna go fast and we're gonna go far.
-	advisory_string += "Уровень предупреждения для вашего сектора — Планета коров. Мы не совсем понимаем, что это значит — модель, которую мы используем для создания отчётов об угрозах, раньше не давала подобных результатов. Берегитесь коров, наверное? Удачи!"
+	advisory_string += "Уровень предупреждения для вашего сектора — планета коров. Мы не совсем понимаем, что это значит — модель, которую мы используем для создания отчётов об угрозах, раньше не давала подобных результатов. Берегитесь коров, наверное? Удачи!"
 	return advisory_string
 
 /datum/station_trait/bright_day
@@ -373,7 +373,7 @@
 
 /datum/station_trait/shuttle_sale
 	name = "Распродажа шаттлов"
-	report_message = "Команда экстренной диспетчерской службы Nanotrasen отмечает рекордное количество вызовов шаттлов за последний квартал. На некоторые услуги экстренной диспетчерской службы действуют скидки!"
+	report_message = "Команда кстренного реагирования Нанотрейзен отмечает рекордное количество вызовов шаттлов за последний квартал. На некоторые эвакуационные шаттлы действуют скидки!"
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 4
 	trait_to_give = STATION_TRAIT_SHUTTLE_SALE
@@ -421,8 +421,8 @@
 
 /// Spawns assistants with some gear, either gimmicky or functional. Maybe, one day, it will inspire an assistant to do something productive or fun
 /datum/station_trait/assistant_gimmicks
-	name = "Пилотный проект 'Снаряжённые ассистенты'"
-	report_message = "Отдел по работе с ассистентами Nanotrassen проводит экспериментальную проверку, чтобы выяснить, поможет ли различное ассистентское оборудование повысить производительность!"
+	name = "Пилотный проект «Снаряжённые ассистенты»"
+	report_message = "Отдел по работе с ассистентами Нанотрейзен проводит экспериментальную проверку, чтобы выяснить, поможет ли различное ассистентское оборудование повысить производительность!"
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 3
 	trait_to_give = STATION_TRAIT_ASSISTANT_GIMMICKS
