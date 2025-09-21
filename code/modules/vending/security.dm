@@ -18,6 +18,7 @@
 		/obj/item/clothing/gloves/tackler = 5,
 		/obj/item/holosign_creator/security = 2,
 		/obj/item/gun_maintenance_supplies = 2,
+		/obj/item/storage/belt/judobelt = 3,
 	)
 	contraband = list(
 		/obj/item/clothing/glasses/sunglasses = 2,
