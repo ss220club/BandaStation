@@ -25190,6 +25190,16 @@ dative = "подозрительному телефону"
 accusative = "подозрительный телефон"
 instrumental = "подозрительным телефоном"
 prepositional = "подозрительном телефоне"
+
+["bluespace stream"]
+nominative = "поток блюспейса"
+genitive = "потока блюспейса"
+dative = "потоку блюспейса"
+accusative = "поток блюспейса"
+instrumental = "потоком блюспейса"
+prepositional = "потоке блюспейса"
+gender = "male"
+
 # MARK: Areas
 
 ## Cargo Areas

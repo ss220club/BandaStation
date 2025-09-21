@@ -135,7 +135,7 @@
 	if(owner.stat == DEAD)
 		return
 
-	var/message = pick("пугает вас до глубины души", "потрясает вас", "пугает вас", "приводит вас в панику", "у вас бегут мурашки по спине")
+	var/message = pick("пугает вас до глубины души", "потрясает вас", "пугает вас", "приводит вас в панику", "вызывает ощущение мурашек по спине")
 	if(trigger_word)
 		if (owner.has_status_effect(/datum/status_effect/minor_phobia_reaction))
 			return

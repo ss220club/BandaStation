@@ -95,7 +95,7 @@
 	second.linked_to = first
 
 /obj/effect/client_image_holder/bluespace_stream
-	name = "поток блюспейса"
+	name = "bluespace stream"
 	desc = "Вы видите скрытый проход через блюспейс..."
 	image_icon = 'icons/effects/effects.dmi'
 	image_state = "bluestream"
@@ -125,9 +125,9 @@
 		return
 
 	var/slip_in_message = pick("странным образом скользит в сторону и исчезает", "прыгает в невидимое измерение",\
-		"вытягивает одну ногу прямо, шевелит [user.p_their()] ногой и внезапно исчезает", "останавливается, затем исчезает из реальности", \
+		"вытягивает одну ногу прямо, шевелит своей ногой и внезапно исчезает", "останавливается, затем исчезает из реальности", \
 		"затягивается в невидимый вихрь, исчезая из виду")
-	var/slip_out_message = pick("бесшумно исчезает в", "выпрыгивает из воздуха","появляется", "выходит из невидимого дверного проема",\
+	var/slip_out_message = pick("бесшумно появляется из ниоткуда", "выпрыгивает из воздуха","появляется", "выходит из невидимого дверного проема",\
 		"выскальзывает из складки пространства-времени")
 
 	to_chat(user, span_notice("Вы пытаетесь приспособиться к потоку блюспейса..."))
@@ -145,7 +145,7 @@
 	if(do_teleport(user, destination_turf, no_effects = TRUE))
 		user.visible_message(span_warning("[user] [slip_out_message]."), span_notice("...и найти дорогу на другую сторону."))
 	else
-		user.visible_message(span_warning("[user] [slip_out_message], оказавшись точно там же, где и ушли."), span_notice("...и окажетесь там, где начали?"))
+		user.visible_message(span_warning("[user] [slip_out_message], оказавшись точно там же, откуда ушли."), span_notice("...и окажетесь там, где начали?"))
 
 
 /obj/effect/client_image_holder/bluespace_stream/attack_tk(mob/user)
@@ -427,7 +427,7 @@
 
 // Used by Veteran Security Advisor job.
 /datum/brain_trauma/special/ptsd
-	name = "Комплексное ПТСР"
+	name = "Боевое ПТСР"
 	desc = "Пациент испытывает посттравматическое стрессовое расстройство, вызванное пережитыми боевыми действиями, что приводит к отсутствию эмоций. Кроме того, у него наблюдаются лёгкие галлюцинации."
 	scan_desc = "ПТСР"
 	gain_text = span_warning("Вы возвращаетесь в хаос прошлого! Взрывы! Стрельба! Эмоции покинули строй!")

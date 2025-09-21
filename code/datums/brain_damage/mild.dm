@@ -151,7 +151,7 @@
 		var/obj/item/I = owner.get_active_held_item()
 		drop_chance += I.w_class
 		if(SPT_PROB(0.5 * drop_chance, seconds_per_tick) && owner.dropItemToGround(I))
-			to_chat(owner, span_warning("Вы роняете [I]!"))
+			to_chat(owner, span_warning("Вы роняете [I.declent_ru(ACCUSATIVE)]!"))
 
 	else if(SPT_PROB(1.5, seconds_per_tick))
 		to_chat(owner, span_warning("Вы чувствуете внезапную слабость в мышцах!"))
@@ -309,14 +309,14 @@
 
 	ADD_TRAIT(my_thing, TRAIT_NODROP, TRAUMA_TRAIT)
 	RegisterSignals(my_thing, list(COMSIG_ITEM_DROPPED, COMSIG_MOVABLE_MOVED), PROC_REF(clear_trait))
-	to_chat(owner, span_warning("Вы чувствуете потребность держать [my_thing] при себе..."))
+	to_chat(owner, span_warning("Вы чувствуете потребность держать [my_thing.declent_ru(ACCUSATIVE)] при себе..."))
 	addtimer(CALLBACK(src, PROC_REF(relax), my_thing), rand(30 SECONDS, 3 MINUTES), TIMER_DELETE_ME)
 
 /datum/brain_trauma/mild/possessive/proc/relax(obj/item/my_thing)
 	if(QDELETED(my_thing))
 		return
 	if(HAS_TRAIT_FROM_ONLY(my_thing, TRAIT_NODROP, TRAUMA_TRAIT)) // in case something else adds nodrop, somehow?
-		to_chat(owner, span_notice("Вы чувствуете себя более комфортно, отпуская [my_thing]."))
+		to_chat(owner, span_notice("Вы чувствуете себя более комфортно, отпуская [my_thing.declent_ru(ACCUSATIVE)]."))
 	clear_trait(my_thing)
 
 /datum/brain_trauma/mild/possessive/proc/clear_trait(obj/item/my_thing, ...)
