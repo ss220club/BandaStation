@@ -80,7 +80,7 @@
 	message = "screams!"
 	message_mime = "acts out a scream!"
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
-	specific_emote_audio_cooldown = 10 SECONDS
+	// specific_emote_audio_cooldown = 10 SECONDS // BANDASTATION REMOVAL
 	vary = TRUE
 
 /datum/emote/living/carbon/human/scream/can_run_emote(mob/user, status_check = TRUE , intentional, params)
