@@ -62,7 +62,8 @@ ADMIN_VERB(play_zlevel_sound, R_SOUND, "Play Z-level Sound", "Plays a sound only
 
 	var/sound/admin_sound = prepare_admin_sound(volume, sound)
 
-	var/zlevel = user.mob.z
+	var/turf/mob_turf = get_turf(user.mob)
+	var/zlevel = mob_turf.z
 	log_admin("[key_name(user)] played a z-level sound [sound] on level [zlevel]")
 	message_admins("[key_name_admin(user)] played a z-level sound [sound] on level [zlevel]")
 
