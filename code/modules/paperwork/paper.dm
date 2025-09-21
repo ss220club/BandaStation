@@ -448,7 +448,7 @@
 
 /obj/item/paper/proc/get_paper_placements_data(mob/user)
 	var/list/data = list()
-	for(var/replacement_key as anything in GLOB.paper_replacements)
+	for(var/replacement_key in GLOB.paper_replacements)
 		var/datum/paper_replacement/replacer = GLOB.paper_replacements[replacement_key]
 		UNTYPED_LIST_ADD(data, list(
 			"key" = replacement_key,
