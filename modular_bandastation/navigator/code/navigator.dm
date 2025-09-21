@@ -1,7 +1,7 @@
 /datum/computer_file/program/navigator
 	filename = "ntos_navigator"
 	filedesc = "Навигатор"
-	extended_desc = "Просмотр вашего текущего местоположения, и карты станции. Так же позволяет просмотреть проложенные маршрут."
+	extended_desc = "Просмотр вашего текущего местоположения, и карты станции. Так же позволяет найти ближайшую лестницу."
 	program_open_overlay = "generic"
 	tgui_id = "NtosNavigator"
 	program_icon = "route"
