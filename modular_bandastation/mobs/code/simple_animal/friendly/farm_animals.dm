@@ -1,4 +1,4 @@
-/mob/living/basic/hostile/retaliate/goat
+/mob/living/basic/goat
 	attack_verb_continuous = "бодает"
 	attack_verb_simple = "бодает"
 	death_sound = 'modular_bandastation/mobs/sound/goat_death.ogg'
@@ -26,15 +26,8 @@
 	death_sound = 'modular_bandastation/mobs/sound/mouse_squeak.ogg'
 	// holder_type = /obj/item/holder/chick
 
-/mob/living/basic/chick/Life(seconds, times_fired)
-	if(amount_grown >= 100 && prob(20))
-		var/mob/living/basic/C = new /mob/living/basic/cock(loc)
-		if(mind)
-			mind.transfer_to(C)
-		qdel(src)
-	. = ..()
 
-/mob/living/basic/cock
+/mob/living/basic/chicken/cock
 	name = "петух"
 	desc = "Гордый и важный вид."
 	gender = MALE
@@ -42,20 +35,7 @@
 	icon_state = "cock"
 	icon_living = "cock"
 	icon_dead = "cock_dead"
-	speak = list("Cluck!","BWAAAAARK BWAK BWAK BWAK!","Bwaak bwak.")
-	speak_emote = list("clucks","croons")
-	emote_hear = list("clucks")
-	emote_see = list("pecks at the ground","flaps its wings viciously")
-	density = 0
-	speak_chance = 2
-	turns_per_move = 3
 	butcher_results = list(/obj/item/food/meat = 4)
-	response_help_continuous = "pets the"
-	response_help_simple = "pets the"
-	response_disarm_continuous = "gently pushes aside the"
-	response_disarm_simple = "gently pushes aside the"
-	response_harm_continuous = "kicks the"
-	response_harm_simple   = "kicks the"
 	melee_damage_type = STAMINA
 	melee_damage_lower = 2
 	melee_damage_upper = 6
@@ -71,6 +51,8 @@
 	mob_size = MOB_SIZE_SMALL
 	gold_core_spawnable = FRIENDLY_SPAWN
 	// holder_type = /obj/item/holder/cock
+
+	ai_controller = /datum/ai_controller/basic_controller/goat
 
 	///icon state of the collar we can wear
 	var/collar_icon_state
@@ -88,10 +70,12 @@
 	talk_sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
 	damaged_sound = list()
 
-/mob/living/basic/turkey
+/mob/living/basic/turkey	// !!!!
 	name = "индюшка"
 	desc = "И не благодари."
 	death_sound = 'modular_bandastation/mobs/sound/duck_quak1.ogg'
+
+	ai_controller = /datum/ai_controller/basic_controller/goose
 
 
 /mob/living/basic/goose
@@ -121,5 +105,5 @@
 	health = 20
 	maxHealth = 20
 
-/mob/living/basic/seal
+/mob/living/basic/seal	// !!!!!!
 	death_sound = 'modular_bandastation/mobs/sound/seal_death.ogg'

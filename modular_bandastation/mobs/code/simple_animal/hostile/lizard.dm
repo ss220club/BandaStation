@@ -39,6 +39,7 @@
 
 	gold_core_spawnable = HOSTILE_SPAWN
 
+	ai_controller = /datum/ai_controller/basic_controller/lizard/evil
 
 /mob/living/basic/hostile/lizard/Initialize(mapload)
 	. = ..()

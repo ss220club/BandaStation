@@ -48,6 +48,8 @@
 	var/chew_probability = 1
 	var/squeak_sound = 'sound/creatures/mousesqueak.ogg'
 
+	ai_controller = /datum/ai_controller/basic_controller/syndirat
+
 	///icon state of the collar we can wear
 	var/collar_icon_state
 

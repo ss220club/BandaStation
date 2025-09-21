@@ -26,6 +26,8 @@
 	var/host_species = ""
 	var/list/human_overlays = list()
 
+	ai_controller = /datum/ai_controller/basic_controller/bear
+
 /mob/living/basic/hostile/blackmesa/xen/headcrab/Life(seconds, times_fired)
 	if(..() && !stat)
 		if(!is_zombie && isturf(src.loc))

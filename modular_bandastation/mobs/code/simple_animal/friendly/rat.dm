@@ -9,7 +9,7 @@
 	icon_dead = "rat_gray_dead"
 	icon_resting = "rat_gray_sleep"
 	non_standard = TRUE
-	mouse_color = null
+	body_color = null
 	maxHealth = 15
 	health = 15
 	mob_size = MOB_SIZE_SMALL
@@ -17,7 +17,7 @@
 
 /mob/living/basic/mouse/rat/update_desc()
 	. = ..()
-	switch(mouse_color)
+	switch(body_color)
 		if("white")
 			desc = /mob/living/basic/mouse/rat/white::desc
 		if("irish")
@@ -33,7 +33,7 @@
 	icon_living = "rat_white"
 	icon_dead = "rat_white_dead"
 	icon_resting = "rat_white_sleep"
-	mouse_color = "white"
+	body_color = "white"
 
 /mob/living/basic/mouse/rat/irish
 	name = "irish rat"
@@ -43,15 +43,15 @@
 	icon_living = "rat_irish"
 	icon_dead = "rat_irish_dead"
 	icon_resting = "rat_irish_sleep"
-	mouse_color = "irish"
+	body_color = "irish"
 
 /mob/living/basic/mouse/rat/color_pick()
-	if(!mouse_color)
-		mouse_color = pick(list("gray","white","irish"))
-	icon_state = "rat_[mouse_color]"
-	icon_living = "rat_[mouse_color]"
-	icon_dead = "rat_[mouse_color]_dead"
-	icon_resting = "rat_[mouse_color]_sleep"
+	if(!body_color)
+		body_color = pick(list("gray","white","irish"))
+	icon_state = "rat_[body_color]"
+	icon_living = "rat_[body_color]"
+	icon_dead = "rat_[body_color]_dead"
+	icon_resting = "rat_[body_color]_sleep"
 
 /mob/living/basic/mouse/rat/pull_constraint(atom/movable/AM, show_message = FALSE)
 	return TRUE

@@ -1,11 +1,11 @@
 /mob/living/basic/mouse
-	var/non_standard = FALSE // for no "mouse_" with mouse_color
+	var/non_standard = FALSE // for no "mouse_" with body_color
 	//icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
 	death_sound = 'modular_bandastation/mobs/sound/rat_death.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/rat_talk.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/rat_wound.ogg')
 	blood_volume = BLOOD_VOLUME_SURVIVE
-	butcher_results = list(/obj/item/food/meat/mouse = 1)
+	butcher_results = list(/obj/item/food/meat/slab/mouse = 1)
 
 /mob/living/basic/mouse/Initialize(mapload)
 	. = ..()
@@ -14,17 +14,17 @@
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 
-	mouse_color = initial(mouse_color) // сбрасываем из-за наследования чтобы своим проком переписать
+	body_color = initial(body_color) // сбрасываем из-за наследования чтобы своим проком переписать
 	color_pick()
 	update_appearance(UPDATE_ICON_STATE|UPDATE_DESC)
 
 /mob/living/basic/mouse/proc/color_pick()
-	if(!mouse_color)
-		mouse_color = pick( list("brown","gray","white") )
-	icon_state = "mouse_[mouse_color]"
-	icon_living = "mouse_[mouse_color]"
-	icon_dead = "mouse_[mouse_color]_dead"
-	icon_resting = "mouse_[mouse_color]_sleep"
+	if(!body_color)
+		body_color = pick( list("brown","gray","white") )
+	icon_state = "mouse_[body_color]"
+	icon_living = "mouse_[body_color]"
+	icon_dead = "mouse_[body_color]_dead"
+	icon_resting = "mouse_[body_color]_sleep"
 
 /mob/living/basic/mouse/splat(obj/item/item = null, mob/living/user = null)
 	if(non_standard)
@@ -66,7 +66,7 @@
 /mob/living/basic/mouse/fluff/clockwork
 	name = "Chip"
 	real_name = "Chip"
-	mouse_color = "clockwork"
+	body_color = "clockwork"
 	icon_state = "mouse_clockwork"
 	response_help_continuous = "pets"
 	response_help_simple = "pets"

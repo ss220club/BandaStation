@@ -33,7 +33,7 @@
 	icon_state = "royalcrab"
 	icon_living = "royalcrab"
 	icon_dead = "royalcrab_dead"
-	response_help_continuous "с уважением гладит"
+	response_help_continuous = "с уважением гладит"
 	response_help_simple = "с уважением гладит"
 	response_disarm_continuous = "с уважением отталкивает"
 	response_disarm_simple = "с уважением отталкивает"

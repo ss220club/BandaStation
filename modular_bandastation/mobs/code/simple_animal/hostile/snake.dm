@@ -1,4 +1,4 @@
-/mob/living/basic/hostile/retaliate/poison/snake
+/mob/living/basic/snake
 	attack_verb_continuous = "вгрызается"
 	attack_verb_simple = "кусает"
 	attack_sound = 'sound/weapons/bite.ogg'

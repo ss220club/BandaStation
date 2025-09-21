@@ -34,10 +34,11 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	see_in_dark = 5
 	speak_chance = 1
-	turns_per_move = 10
 	gold_core_spawnable = FRIENDLY_SPAWN
 	butcher_results = list(/obj/item/food/meat = 2)
 	// holder_type = /obj/item/holder/possum
+
+	ai_controller = /datum/ai_controller/basic_controller/goat
 
 /mob/living/basic/possum/Initialize(mapload)
 	. = ..()

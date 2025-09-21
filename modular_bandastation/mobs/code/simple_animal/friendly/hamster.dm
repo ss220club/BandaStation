@@ -10,13 +10,31 @@
 	gender = MALE
 	non_standard = TRUE
 	speak_chance = 0
-	childtype = list(/mob/living/basic/mouse/hamster/baby)
-	animal_species = /mob/living/basic/mouse/hamster
 	// holder_type = /obj/item/holder/hamster
 	gold_core_spawnable = FRIENDLY_SPAWN
 	maxHealth = 10
 	health = 10
 
+	///can this hamster breed?
+	var/can_breed = TRUE
+
+/mob/living/basic/mouse/hamster/Initialize(mapload)
+	. = ..()
+	if(can_breed)
+		add_breeding_component()
+
+/mob/living/basic/mouse/hamster/proc/add_breeding_component()
+	var/static/list/partner_types = typecacheof(list(/mob/living/basic/mouse/hamster))
+	var/static/list/baby_types = list(
+		/mob/living/basic/mouse/hamster/baby = 1,
+	)
+	AddComponent(\
+		/datum/component/breed,\
+		can_breed_with = typecacheof(list(/mob/living/basic/mouse/hamster)),\
+		baby_paths = baby_types,\
+		post_birth = post_birth_callback,\
+		breed_timer = 5 MINUTES,\
+	)
 
 /mob/living/basic/mouse/hamster/baby
 	name = "хомячок"
@@ -34,9 +52,9 @@
 	transform = matrix(0.7, 0, 0, 0, 0.7, 0)
 	health = 3
 	maxHealth = 3
+	can_breed = FALSE
 	var/amount_grown = 0
 	// holder_type = /obj/item/holder/hamster
-
 
 /mob/living/basic/mouse/hamster/baby/Initialize(mapload)
 	. = ..()
@@ -44,10 +62,6 @@
 		COMSIG_ATOM_ENTERED = PROC_REF(on_atom_entered),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
-
-// Hamster procs
-#define MAX_HAMSTER 20
-GLOBAL_VAR_INIT(hamster_count, 0)
 
 /mob/living/basic/mouse/hamster/Initialize(mapload)
 	. = ..()
@@ -59,11 +73,7 @@ GLOBAL_VAR_INIT(hamster_count, 0)
 	icon_resting = initial(icon_resting)
 
 	update_appearance(UPDATE_ICON_STATE, UPDATE_DESC)
-	GLOB.hamster_count++
 
-/mob/living/basic/mouse/hamster/Destroy()
-	GLOB.hamster_count--
-	. = ..()
 
 /mob/living/basic/mouse/hamster/color_pick()
 	return
@@ -76,25 +86,10 @@ GLOBAL_VAR_INIT(hamster_count, 0)
 /mob/living/basic/mouse/hamster/pull_constraint(atom/movable/AM, show_message = FALSE)
 	return TRUE
 
-/mob/living/basic/mouse/hamster/Life(seconds, times_fired)
-	..()
-	if(GLOB.hamster_count < MAX_HAMSTER)
-		make_babies()
-
 /mob/living/basic/mouse/hamster/baby/start_pulling(atom/movable/AM, state, force = pull_force, show_message = FALSE)
 	if(show_message)
 		to_chat(src, span_warning("Вы слишком малы чтобы что-то тащить."))
 	return
-
-/mob/living/basic/mouse/hamster/baby/Life(seconds, times_fired)
-	. =..()
-	if(.)
-		amount_grown++
-		if(amount_grown >= 100)
-			var/mob/living/basic/A = new /mob/living/basic/mouse/hamster(loc)
-			if(mind)
-				mind.transfer_to(A)
-			qdel(src)
 
 /mob/living/basic/mouse/hamster/baby/on_atom_entered(datum/source, atom/movable/entered)
 	if(!ishuman(source) || stat)
@@ -102,3 +97,23 @@ GLOBAL_VAR_INIT(hamster_count, 0)
 	to_chat(source, span_notice("[bicon(src)] раздавлен!"))
 	death()
 	splat(user = source)
+
+// Взросление, если нужно будет в будущем - расскомментите.
+// Но тогда также рекомендую добавить глобальный список с ограничением в 20 хомяков.
+// /mob/living/basic/mouse/hamster/baby/Initialize(mapload)
+// 	. = ..()
+// 	if(!isnull(grow_as)) // we don't have a set time to grow up beyond whatever RNG dictates, and if we somehow get a client, all growth halts.
+// 		AddComponent(\
+// 			/datum/component/growth_and_differentiation,\
+// 			growth_time = null,\
+// 			growth_path = grow_as,\
+// 			growth_probability = 100,\
+// 			lower_growth_value = 0.5,\
+// 			upper_growth_value = 1,\
+// 			signals_to_kill_on = list(COMSIG_MOB_CLIENT_LOGIN),\
+// 			optional_checks = CALLBACK(src, PROC_REF(ready_to_grow)),\
+// 		)
+
+// /// We don't grow into a chicken if we're not conscious.
+// /mob/living/basic/mouse/hamster/baby/proc/ready_to_grow()
+// 	return (stat == CONSCIOUS)
