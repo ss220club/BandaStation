@@ -82,18 +82,17 @@ export function NtosNavigator() {
   );
 }
 
+function GpsIcon() {
+  return (
+    <Icon.Stack>
+      <Icon name={'location-crosshairs'} />
+      <Icon name="slash" />
+    </Icon.Stack>
+  );
+}
+
 function BadSignal(props) {
   const { signal } = props;
-
-  function GpsIcon() {
-    return (
-      <Icon.Stack>
-        <Icon name={'location-crosshairs'} />
-        <Icon name="slash" />
-      </Icon.Stack>
-    );
-  }
-
   return (
     <Box
       position="absolute"
