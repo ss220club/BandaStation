@@ -1,11 +1,11 @@
 /// Disk containing info for doing advanced plastic surgery. Spawns in maint and available as a role-restricted item in traitor uplinks.
 /obj/item/disk/surgery/advanced_plastic_surgery
 	name = "Advanced Plastic Surgery Disk"
-	desc = "The disk provides instructions on how to do an Advanced Plastic Surgery, this surgery allows one-self to completely remake someone's face with that of another. Provided they have a picture of them in their offhand when reshaping the face. With the surgery long becoming obsolete with the rise of genetics technology. This item became an antique to many collectors, With only the cheaper and easier basic form of plastic surgery remaining in use in most places."
+	desc = "На диске содержатся инструкции по проведению продвинутой пластической операции, которая позволяет полностью изменить лицо другого человека. При условии, что в момент изменения лица у него под рукой будет его фотография. С развитием генетических технологий эта операция давно устарела. Этот предмет стал антиквариатом для многих коллекционеров, и только более дешевая и простая базовая форма пластической хирургии остается в использовании в большинстве мест."
 	surgeries = list(/datum/surgery/plastic_surgery/advanced)
 
 /datum/surgery/plastic_surgery
-	name = "Plastic surgery"
+	name = "Пластическая операция"
 	surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB | SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_HEAD)
 	steps = list(
@@ -16,8 +16,8 @@
 	)
 
 /datum/surgery/plastic_surgery/advanced
-	name = "Advanced plastic surgery"
-	desc =  "Surgery allows one-self to completely remake someone's face with that of another. Provided they have a picture of them in their offhand when reshaping the face."
+	name = "Продвинутая пластическая операция"
+	desc =  "Операция позволяет полностью переделать лицо другого человека. При условии, что во время изменения формы лица в руке будет его фотография."
 	requires_tech = TRUE
 	steps = list(
 		/datum/surgery_step/incise,
@@ -29,7 +29,7 @@
 
 //Insert plastic step, It ain't called plastic surgery for nothing! :)
 /datum/surgery_step/insert_plastic
-	name = "insert plastic (plastic)"
+	name = "вставьте пластик (пластик)"
 	implements = list(
 		/obj/item/stack/sheet/plastic = 100,
 		/obj/item/stack/sheet/meat = 100)
@@ -42,11 +42,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to insert [tool] into the incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]..."),
-		span_notice("[user] begins to insert [tool] into the incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
-		span_notice("[user] begins to insert [tool] into the incision in [target]'s [target.parse_zone_with_bodypart(target_zone)]."),
+		span_notice("Вы начинаете вставлять [tool.declent_ru(ACCUSATIVE)] в разрезе на [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)] ..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает вставлять [tool.declent_ru(ACCUSATIVE)] в разрезе на [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает вставлять [tool.declent_ru(ACCUSATIVE)] в разрезе на [target.parse_zone_with_bodypart(target_zone, declent = PREPOSITIONAL)] у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel something inserting just below the skin in your [target.parse_zone_with_bodypart(target_zone)].")
+	display_pain(target, "Вы чувствуете, как что-то вставили вам под кожу в [target.parse_zone_with_bodypart(target_zone, declent = ACCUSATIVE)].")
 
 /datum/surgery_step/insert_plastic/success(mob/user, mob/living/target, target_zone, obj/item/stack/tool, datum/surgery/surgery, default_display_results)
 	. = ..()
@@ -54,7 +54,7 @@
 
 //reshape_face
 /datum/surgery_step/reshape_face
-	name = "reshape face (scalpel)"
+	name = "измените форму лица (скальпель)"
 	implements = list(
 		TOOL_SCALPEL = 100,
 		/obj/item/knife = 50,
@@ -63,15 +63,15 @@
 	surgery_effects_mood = TRUE
 
 /datum/surgery_step/reshape_face/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	user.visible_message(span_notice("[user] begins to alter [target]'s appearance."), span_notice("You begin to alter [target]'s appearance..."))
+	user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает изменять внешний вид у [target.declent_ru(GENITIVE)]."), span_notice("Вы начинаете изменять внешний вид у [target.declent_ru(GENITIVE)]..."))
 	display_results(
 		user,
 		target,
-		span_notice("You begin to alter [target]'s appearance..."),
-		span_notice("[user] begins to alter [target]'s appearance."),
-		span_notice("[user] begins to make an incision in [target]'s face."),
+		span_notice("Вы начинаете изменять внешний вид у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает изменять внешний вид у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез на лице у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel slicing pain across your face!")
+	display_pain(target, "Вы чувствуете острую боль на лице!")
 
 /datum/surgery_step/reshape_face/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(HAS_TRAIT_FROM(target, TRAIT_DISFIGURED, TRAIT_GENERIC))
@@ -79,11 +79,11 @@
 		display_results(
 			user,
 			target,
-			span_notice("You successfully restore [target]'s appearance."),
-			span_notice("[user] successfully restores [target]'s appearance!"),
-			span_notice("[user] finishes the operation on [target]'s face."),
+			span_notice("Вы успешно восстанавливаете внешний вид лица у [target.declent_ru(GENITIVE)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно восстанавливает внешний вид лица у [target.declent_ru(GENITIVE)]!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает проводить операцию на лице у [target.declent_ru(GENITIVE)]."),
 		)
-		display_pain(target, "The pain fades, your face feels normal again!")
+		display_pain(target, "Боль исчезает, лицо вновь становится нормальным!")
 	else
 		var/list/names = list()
 		if(!isabductor(user))
@@ -93,7 +93,7 @@
 				for(var/namelist in disguises.picture?.names_seen)
 					names += namelist
 			else
-				to_chat(user, span_warning("You have no picture to base the appearance on, reverting to random appearances."))
+				to_chat(user, span_warning("У вас нет фотографии, на которую можно было бы опираться, и вы возвращаетесь к случайному списку внешности."))
 				for(var/i in 1 to 10)
 					names += target.generate_random_mob_name(TRUE)
 		else
@@ -109,11 +109,11 @@
 		display_results(
 			user,
 			target,
-			span_notice("You alter [oldname]'s appearance completely, [target.p_they()] is now [newname]."),
-			span_notice("[user] alters [oldname]'s appearance completely, [target.p_they()] is now [newname]!"),
-			span_notice("[user] finishes the operation on [target]'s face."),
+			span_notice("Вы полностью изменяете внешность у [oldname], [target.ru_p_they()] теперь [newname]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] полностью изменяет внешность у [oldname], [target.ru_p_they()] теперь [newname]!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает проводить операцию на лице у [target.declent_ru(GENITIVE)]."),
 		)
-		display_pain(target, "The pain fades, your face feels new and unfamiliar!")
+		display_pain(target, "Боль проходит, а ваше лицо кажется новым и непривычным!")
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		human_target.update_ID_card()
@@ -126,10 +126,10 @@
 	display_results(
 		user,
 		target,
-		span_warning("You screw up, leaving [target]'s appearance disfigured!"),
-		span_notice("[user] screws up, disfiguring [target]'s appearance!"),
-		span_notice("[user] finishes the operation on [target]'s face."),
+		span_warning("Вы ошибаетесь, сделав обезображенное лицо у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, сделав обезображенное лицо у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает проводить операцию на лице у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your face feels horribly scarred and deformed!")
+	display_pain(target, "Вы чувствуете, что теперь ваше лицо изуродовано и обезображено!")
 	ADD_TRAIT(target, TRAIT_DISFIGURED, TRAIT_GENERIC)
 	return FALSE

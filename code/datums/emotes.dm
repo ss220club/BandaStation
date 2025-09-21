@@ -57,13 +57,13 @@
 	/// Can only code call this event instead of the player.
 	var/only_forced_audio = FALSE
 	/// The cooldown between the uses of the emote.
-	var/cooldown = 0.8 SECONDS
+	var/cooldown = 3 SECONDS // BANDASTATION EDIT: 0.8 -> 3
 	/// Does this message have a message that can be modified by the user?
 	var/can_message_change = FALSE
 	/// How long is the shared emote cooldown triggered by this emote?
-	var/general_emote_audio_cooldown = 2 SECONDS
+	var/general_emote_audio_cooldown = 3 SECONDS // BANDASTATION EDIT: 2 -> 3
 	/// How long is the specific emote cooldown triggered by this emote?
-	var/specific_emote_audio_cooldown = 5 SECONDS
+	var/specific_emote_audio_cooldown = 3 SECONDS // BANDASTATION EDIT: 5 -> 3
 	/// Does this emote's sound ignore walls?
 	var/sound_wall_ignore = FALSE
 

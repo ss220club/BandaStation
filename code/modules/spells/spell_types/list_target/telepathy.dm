@@ -43,9 +43,11 @@
 	var/failure_message_for_ghosts = ""
 
 	to_chat(owner, "<span class='[bold_telepathy_span]'>You transmit to [cast_on]:</span> [formatted_message]")
+	owner.cast_tts(owner, message, is_local = FALSE, channel_override = CHANNEL_TTS_TELEPATHY, check_deafness = FALSE) // BANDASTATION ADDITION - TTS
 	if(!cast_on.can_block_magic(antimagic_flags, charge_cost = 0)) //hear no evil
 		cast_on.balloon_alert(cast_on, "you hear a voice")
 		to_chat(cast_on, "<span class='[bold_telepathy_span]'>You hear a voice in your head...</span> [formatted_message]")
+		owner.cast_tts(cast_on, message, is_local = FALSE, channel_override = CHANNEL_TTS_TELEPATHY, check_deafness = FALSE) // BANDASTATION ADDITION - TTS
 	else
 		owner.balloon_alert(owner, "transmission blocked!")
 		to_chat(owner, span_warning("Something has blocked your transmission!"))
