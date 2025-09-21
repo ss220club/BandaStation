@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Box, Icon, NoticeBox, Stack } from 'tgui-core/components';
 import { useBackend } from '../backend';
 import type { Direction } from '../constants';
 import { NtosWindow } from '../layouts';
@@ -28,6 +29,16 @@ export function NtosNavigator() {
   const { mapData, location, signal } = data;
   const [currentLevel, setCurrentLevel] = useState<number>(mapData.mainFloor);
 
+  function signalToPos(value: number) {
+    if (signal === SIGNAL.LOW) {
+      const maxOffset = 5;
+      const offset = (Math.random() * 2 - 1) * maxOffset;
+      return value + offset;
+    }
+
+    return value;
+  }
+
   return (
     <NtosWindow width={665} height={450}>
       <NtosWindow.Content>
@@ -39,19 +50,55 @@ export function NtosNavigator() {
           {location && signal !== SIGNAL.LOST && (
             <NanoMap.Button
               circular
-              tracking
               selected
-              posX={location.x}
-              posY={location.y}
+              tracking={signal === SIGNAL.GOOD}
+              posX={signalToPos(location.x)}
+              posY={signalToPos(location.y)}
               posZ={location.z}
-              direction={location.dir}
+              direction={signal === SIGNAL.GOOD && location.dir}
               hidden={location.z !== currentLevel}
               tooltip="Вы тут!"
               tooltipPosition="top"
             />
           )}
         </NanoMap>
+        {signal !== SIGNAL.GOOD && <BadSignal signal={signal} />}
       </NtosWindow.Content>
     </NtosWindow>
+  );
+}
+
+function BadSignal(props) {
+  const { signal } = props;
+
+  function GpsIcon() {
+    return (
+      <Icon.Stack>
+        <Icon name={'location-crosshairs'} />
+        <Icon name="slash" />
+      </Icon.Stack>
+    );
+  }
+
+  return (
+    <Box
+      position="absolute"
+      right="0"
+      bottom={-0.66}
+      left="0"
+      style={{ pointerEvents: 'none' }}
+    >
+      <NoticeBox danger={signal === SIGNAL.LOST}>
+        <Stack fill justify="space-between">
+          <GpsIcon />
+          <Stack.Item>
+            {signal === SIGNAL.LOW
+              ? 'Нестабильный или крайне слабый сигнал! Местоположение может быть некорректным.'
+              : 'Не удаётся пропинговать устройство! Проверьте качество подключения к NTnet.'}
+          </Stack.Item>
+          <GpsIcon />
+        </Stack>
+      </NoticeBox>
+    </Box>
   );
 }
