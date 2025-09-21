@@ -150,7 +150,7 @@ Doesn't work on other aliens/AI.*/
 		to_whisper,
 		is_local = FALSE,
 		effects = list(/datum/singleton/sound_effect/telepathy),
-		channel_override = CHANNEL_TTS_RADIO,
+		channel_override = CHANNEL_TTS_TELEPATHY,
 		check_deafness = FALSE
 	)
 	owner.cast_tts(
@@ -158,7 +158,7 @@ Doesn't work on other aliens/AI.*/
 		to_whisper,
 		is_local = FALSE,
 		effects = list(/datum/singleton/sound_effect/telepathy),
-		channel_override = CHANNEL_TTS_RADIO,
+		channel_override = CHANNEL_TTS_TELEPATHY,
 		check_deafness = FALSE
 	)
 	// BANDASTATION ADDITION END
@@ -245,7 +245,7 @@ Doesn't work on other aliens/AI.*/
 	if(get_dist(owner, target) > 1)
 		return FALSE
 	if(ismob(target)) //If it could corrode mobs, it would one-shot them.
-		owner.balloon_alert(owner, "doesn't work on mobs!")
+		owner.balloon_alert(owner, "doesn't work on creatures!")
 		return FALSE
 
 	return ..()

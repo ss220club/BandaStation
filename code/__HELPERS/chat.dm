@@ -111,7 +111,7 @@ it will be sent to all connected chats.
 			tts_seed = tts_seed,
 			is_local = FALSE,
 			effect_types = tts_effects,
-			channel_override = CHANNEL_TTS_RADIO
+			channel_override = CHANNEL_TTS_TELEPATHY
 		)
 		// BANDASTATION ADDITION END
 

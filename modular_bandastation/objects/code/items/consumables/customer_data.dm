@@ -8,7 +8,6 @@
 /datum/customer_data/british/gent/New()
 	orderable_objects[VENUE_BAR] |= list(
 		/datum/reagent/consumable/ethanol/pegu_club = 5,
-		/datum/reagent/consumable/ethanol/oldfashion = 6,
 	)
 	. = ..()
 
