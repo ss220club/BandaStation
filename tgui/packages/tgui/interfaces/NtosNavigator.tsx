@@ -44,7 +44,7 @@ export function NtosNavigator() {
       <NtosWindow.Content>
         <NanoMap
           minimapDisabled
-          mapData={data.mapData}
+          mapData={mapData}
           onLevelChange={setCurrentLevel}
         >
           {location && signal !== SIGNAL.LOST && (
@@ -61,6 +61,20 @@ export function NtosNavigator() {
               tooltipPosition="top"
             />
           )}
+          {mapData?.stairs?.map((stair) => (
+            <NanoMap.Button
+              key={stair.posX + stair.posY}
+              posX={stair.posX}
+              posY={stair.posY}
+              posZ={stair.posZ}
+              hidden={stair.posZ !== currentLevel}
+              icon="stairs"
+              color="blue"
+              tooltip={'Лестница'}
+              tooltipPosition="top"
+              className="stair"
+            />
+          ))}
         </NanoMap>
         {signal !== SIGNAL.GOOD && <BadSignal signal={signal} />}
       </NtosWindow.Content>

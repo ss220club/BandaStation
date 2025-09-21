@@ -29,6 +29,13 @@ export type MapData = {
   mainFloor: number;
   maxFloor: number;
   lavalandLevel: number;
+  stairs: Stair[];
+};
+
+type Stair = {
+  posX: number;
+  posY: number;
+  posZ: number;
 };
 
 type Props = {
@@ -360,7 +367,7 @@ function MapButton(props) {
         highlighted && 'highlighted',
       ])}
       style={{
-        transform: `translate(${posToPx(posX)}, ${posToPx(256 - posY)})`,
+        transform: `translate(calc(${posToPx(posX)} + 17.5%), calc(${posToPx(256 - posY)} + 5%)) scale(var(--map-button-scale))`,
       }}
     >
       <KeepScale>

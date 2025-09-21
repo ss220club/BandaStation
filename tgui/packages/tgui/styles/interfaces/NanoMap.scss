@@ -71,7 +71,7 @@
     text-align: center;
     gap: var(--space-s);
     padding: 0 var(--space-m);
-    z-index: 3;
+    z-index: 10;
 
     .Button {
       @include nanoButton();
@@ -90,7 +90,7 @@
 
   &__Buttons {
     padding: var(--space-m) 0;
-    z-index: 3;
+    z-index: 10;
 
     .Button {
       @include nanoButton();
@@ -119,7 +119,7 @@
     padding: 0;
     height: 2em;
     width: 2em;
-    border: 2px solid hsl(from var(--color-border-dark) h s l / 0.66);
+    border: 2px solid hsl(from var(--color-border-dark) h s l / 0.5);
     border-radius: var(--border-radius-small);
     transition-property: background-color, border-color, transform;
     transition-duration: var(--transition-time-medium);
@@ -129,10 +129,10 @@
     }
 
     &--wrapper {
+      --map-button-scale: 1.25;
       position: absolute;
       top: 0;
       left: 0;
-      transform: translate(17.5%, 5%);
       z-index: 2;
 
       &.highlighted {
@@ -140,6 +140,7 @@
       }
 
       &.tracked {
+        --map-button-scale: 1;
         transition-property: transform;
         transition-duration: 1s;
         transition-timing-function: linear;
@@ -177,6 +178,7 @@
 
     &--selected {
       transform: scale(1.5);
+      z-index: 3;
     }
 
     &--hidden {
@@ -184,6 +186,7 @@
     }
 
     .Icon {
+      position: absolute;
       transform: translate(-0.25em, 0.2em);
     }
   }
@@ -202,7 +205,7 @@
   &__Minimap--container {
     top: var(--space-l);
     left: var(--space-l);
-    z-index: 3;
+    z-index: 10;
   }
 
   &__Controls {
