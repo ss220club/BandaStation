@@ -15,12 +15,6 @@
 		'modular_bandastation/emote_panel/audio/human/male/cry_male_2.ogg',
 	)
 
-/datum/species/moth/get_laugh_sound(mob/living/carbon/human/moth)
-	return pick(
-		'sound/mobs/humanoids/moth/moth_laugh1.ogg',
-		'modular_bandastation/emote_panel/audio/moth/moth_laugh.ogg',
-	)
-
 /datum/species/moth/get_cough_sound(mob/living/carbon/human/moth)
 	return 'modular_bandastation/emote_panel/audio/moth/moth_cough.ogg'
 
