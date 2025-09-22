@@ -23,6 +23,7 @@
 	real_name = "McGriff"
 	desc = "This dog can tell something smells around here, and that something is CRIME!"
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/dog/bullterrier
 	name = "\improper bull terrier"
@@ -42,6 +43,7 @@
 	desc = "Undergraduate in 'Being a Good Boy'."
 	habitable_atmos = null
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/dog/bullterrier/guarddog //hostile dog variant for space ruins
 	name = "\improper guard dog"
