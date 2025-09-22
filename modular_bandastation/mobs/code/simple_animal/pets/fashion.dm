@@ -1,4 +1,5 @@
 /obj/item
+	// like var/datum/dog_fashion/dog_fashion = null
 	var/datum/muhtar_fashion/muhtar_fashion = null
 	var/datum/snake_fashion/snake_fashion = null
 
@@ -22,7 +23,7 @@
 	name = replacetext(name, "REAL_NAME", M.real_name)
 	desc = replacetext(desc, "NAME", name)
 
-/datum/muhtar_fashion/proc/apply(mob/living/simple_animal/pet/dog/D)
+/datum/muhtar_fashion/proc/apply(mob/living/basic/pet/dog/D)
 	if(name)
 		D.name = name
 	if(desc)
@@ -95,7 +96,7 @@
 	name = replacetext(name, "REAL_NAME", M.real_name)
 	desc = replacetext(desc, "NAME", name)
 
-/datum/snake_fashion/proc/apply(mob/living/simple_animal/hostile/retaliate/poison/snake/rouge/D)
+/datum/snake_fashion/proc/apply(mob/living/basic/hostile/retaliate/poison/snake/rouge/D)
 	if(name)
 		D.name = name
 	if(desc)

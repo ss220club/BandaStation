@@ -1,9 +1,8 @@
-/mob/living/basic/pet/dog/fox
-	yelp_sound = 'modular_bandastation/mobs/sound/fox_yelp.ogg' //Used on death.
+/mob/living/basic/pet/fox
+	death_sound = 'modular_bandastation/mobs/sound/fox_yelp.ogg'
 	// holder_type = /obj/item/holder/fox
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 
-/mob/living/basic/pet/dog/fox/fennec
+/mob/living/basic/pet/fox/fennec
 	name = "fennec"
 	real_name = "fennec"
 	desc = "Миниатюрная лисичка с очень большими ушами. Фенек, фенек, зачем тебе такие большие уши? Чтобы избегать дормитория?"
@@ -15,15 +14,15 @@
 	see_in_dark = 10
 	// holder_type = /obj/item/holder/fennec
 
-/mob/living/basic/pet/dog/fox/forest
+/mob/living/basic/pet/fox/forest
 	name = "forest fox"
 	real_name = "forest fox"
-	desc = "Лесная дикая лисица. Может укусить."
+	desc = "Лесная лисица. Может укусить."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
-	icon_state = "fox_forest"
-	icon_living = "fox_forest"
-	icon_dead = "fox_forest_dead"
-	icon_resting = "fox_forest_rest"
+	icon_state = "fox_"
+	icon_living = "fox"
+	icon_dead = "fox_dead"
+	icon_resting = "fox_rest"
 	melee_damage_type = BRUTE
 	melee_damage_lower = 6
 	melee_damage_upper = 12
@@ -32,7 +31,7 @@
 
 // named
 
-/mob/living/basic/pet/dog/fox/alisa
+/mob/living/basic/pet/fox/alisa
 	name = "Алиса"
 	desc = "Алиса, любимый питомец любого Офицера Специальных Операций. Интересно, что она говорит?"
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
@@ -49,7 +48,7 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 20
 
-/mob/living/basic/pet/dog/fox/fennec/fenya
+/mob/living/basic/pet/fox/fennec/fenya
 	name = "Феня"
 	desc = "Миниатюрная лисичка c важным видом и очень большими ушами. Был пойман во время разливания огромного мороженого по формочкам и теперь Магистрат держит его при себе и следит за ним. Но похоже что ему даже нравится быть частью правосудия."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'

@@ -10,56 +10,41 @@
 	var/growl_sound = list('modular_bandastation/mobs/sound/dog_grawl1.ogg','modular_bandastation/mobs/sound/dog_grawl2.ogg') //Used in emote.
 
 	butcher_results = list(/obj/item/food/meat/slab/corgi/dog = 4)
-	collar_type = "dog"
 
-/mob/living/basic/pet/dog/wuv(change, mob/M)
+/mob/living/basic/pet/dog/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
+	if(user.combat_mode)
+		wuv(-1, user)
+	else
+		wuv(1, user)
+
+/mob/living/basic/pet/dog/proc/wuv(change, mob/M)
 	if(change)
-		if(change < 0)
+		if(change > 0)
+			if(M && stat != DEAD) // Added check to see if this mob (the corgi) is dead to fix issue 2454
+				new /obj/effect/temp_visual/heart(loc)
+				custom_emote(EMOTE_VISIBLE, "yaps happily!")
+		else
 			if(M && stat != DEAD) // Same check here, even though emote checks it as well (poor form to check it only in the help case)
+				emote("growl")
 				playsound(src, pick(src.growl_sound), 75, TRUE)
 
 
 /mob/living/basic/pet/dog/corgi
 	// holder_type = /obj/item/holder/corgi
 
-/mob/living/basic/pet/dog/corgi/ian/persistent_load()
+/mob/living/basic/pet/dog/corgi/ian/Initialize(mapload)
 	. = ..()
-	if(age == record_age)
+	//if(age == record_age)
 		// holder_type = /obj/item/holder/old_corgi
 
 /mob/living/basic/pet/dog/corgi/narsie
-	// holder_type = /obj/item/holder/narsian
 	maxHealth = 300
 	health = 300
 	melee_damage_type = STAMINA	//Пади ниц!
 	melee_damage_lower = 50
 	melee_damage_upper = 100
-
-/*	// При добавлении Ратвара
-/mob/living/basic/pet/dog/corgi/ratvar
-	name = "Cli-k"
-	desc = "It's a coolish Ian that clicks!"
-	icon = 'icons/mob/clockwork_mobs.dmi'
-	icon_state = "clik"
-	icon_living = "clik"
-	icon_dead = "clik_dead"
-	faction = list("neutral", "clockwork_cult")
-	gold_core_spawnable = NO_SPAWN
-	nofur = TRUE
-	maxHealth = 100
-	health = 100
-
-/mob/living/basic/pet/dog/corgi/ratvar/update_corgi_fluff()
-	..()
-	speak = list("V'z fuvavat jneevbe!", "CLICK!", "KL-KL-KLIK")
-	speak_emote = list("growls", "barks ominously")
-	emote_hear = list("barks echoingly!", "woofs hauntingly!", "yaps in an judicial manner.", "mutters something unspeakable.")
-	emote_see = list("communes with the unnameable.", "seeks the light in souls.", "shakes.")
-
-/mob/living/basic/pet/dog/corgi/ratvar/ratvar_act()
-	adjustBruteLoss(-maxHealth)
-*/
+	// holder_type = /obj/item/holder/narsian
 
 /mob/living/basic/pet/dog/corgi/puppy
 	maxHealth = 20
@@ -67,8 +52,8 @@
 	butcher_results = list(/obj/item/food/meat/slab/corgi = 1)
 
 /mob/living/basic/pet/dog/corgi/puppy/void
-	maxHealth = 60
-	health = 60
+	maxHealth = 80
+	health = 80
 	// holder_type = /obj/item/holder/void_puppy
 
 /mob/living/basic/pet/dog/corgi/puppy/slime
@@ -78,30 +63,18 @@
 	icon_state = "slime_puppy"
 	icon_living = "slime_puppy"
 	icon_dead = "slime_puppy_dead"
-	nofur = TRUE
-	// holder_type = /obj/item/holder/slime_puppy
+	habitable_atmos = null
 	minimum_survivable_temperature = 250 //Weak to cold
 	maximum_survivable_temperature = INFINITY
+	// holder_type = /obj/item/holder/slime_puppy
 
 /mob/living/basic/pet/dog/corgi/lisa
 	// holder_type = /obj/item/holder/lisa
 
-/mob/living/basic/pet/dog/corgi/borgi
-	// holder_type = /obj/item/holder/borgi
-
 /mob/living/basic/pet/dog/pug
 	// holder_type = /obj/item/holder/pug
-	maxHealth = 30
-	health = 30
 
 /mob/living/basic/pet/dog/bullterrier
-	name = "bullterrier"
-	real_name = "bullterrier"
-	desc = "Кого-то его мордочка напоминает..."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
-	icon_state = "bullterrier"
-	icon_living = "bullterrier"
-	icon_dead = "bullterrier_dead"
 	// holder_type = /obj/item/holder/bullterrier
 
 /mob/living/basic/pet/dog/tamaskan
@@ -150,13 +123,10 @@
 	resting = TRUE
 	gold_core_spawnable = NO_SPAWN
 
-
 /mob/living/basic/pet/dog/bullterrier/genn
 	name = "Геннадий"
 	desc = "Собачий аристократ. Выглядит очень важным и начитанным. Доброжелательный любимец ассистентов."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
-	maxHealth = 5
-	health = 5
 	resting = TRUE
 
