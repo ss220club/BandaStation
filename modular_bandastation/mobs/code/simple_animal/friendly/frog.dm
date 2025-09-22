@@ -29,7 +29,6 @@
 	response_harm_continuous = "stamps on"
 	response_harm_simple   = "stamps on"
 	density = 0
-	ventcrawler = 2
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
 	layer = MOB_LAYER

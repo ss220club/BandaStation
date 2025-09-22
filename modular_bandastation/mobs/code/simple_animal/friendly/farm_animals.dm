@@ -45,7 +45,6 @@
 	talk_sound = list('modular_bandastation/mobs/sound/chicken_talk.ogg')
 	health = 30
 	maxHealth = 30
-	ventcrawler = 2
 	pass_flags = PASSTABLE | PASSMOB
 	mob_size = MOB_SIZE_SMALL
 	gold_core_spawnable = FRIENDLY_SPAWN
@@ -53,13 +52,10 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/goat
 
-	///icon state of the collar we can wear
-	var/collar_icon_state
-
-/mob/living/basic/cock/Initialize(mapload)
+/mob/living/basic/chicken/cock/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/wears_collar, collar_icon_state = collar_icon_state)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
+	RemoveElement(/datum/component/egg_layer)	// No EGGs from Cock
 
 /mob/living/basic/pig
 	name = "свинья"

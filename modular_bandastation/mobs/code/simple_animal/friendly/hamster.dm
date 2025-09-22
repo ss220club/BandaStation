@@ -100,6 +100,8 @@
 
 // Взросление, если нужно будет в будущем - расскомментите.
 // Но тогда также рекомендую добавить глобальный список с ограничением в 20 хомяков.
+// Пример в проке /mob/living/basic/chicken/proc/egg_laid(obj/item/egg)
+
 // /mob/living/basic/mouse/hamster/baby/Initialize(mapload)
 // 	. = ..()
 // 	if(!isnull(grow_as)) // we don't have a set time to grow up beyond whatever RNG dictates, and if we somehow get a client, all growth halts.

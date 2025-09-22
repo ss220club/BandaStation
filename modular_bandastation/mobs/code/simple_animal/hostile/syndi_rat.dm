@@ -18,7 +18,6 @@
 // 	turns_per_move = 5
 // 	pull_force = 1000
 // 	density = 0
-// 	ventcrawler = 2
 // 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 // 	see_in_dark = 6
 // 	speak = list("Слава Синдикату!","Смерть НаноТрейзен!", "У вас есть сыр?")
