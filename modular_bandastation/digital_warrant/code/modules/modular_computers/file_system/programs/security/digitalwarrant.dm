@@ -2,10 +2,10 @@
 	filename = "digitalwarrant"
 	filedesc = "Warrant Assistant"
 	extended_desc = "Позволяет пользователю создавать, редактировать и просматривать цифровые ордера."
-	downloader_category = PROGRAM_CATEGORY_SECURITY
-	program_icon = "warrant"
+	program_icon = "id-card"
 	tgui_id = "NtosDigitalWarrant"
 	size = 8
+	downloader_category = PROGRAM_CATEGORY_SECURITY
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
 	download_access = list(ACCESS_SECURITY, ACCESS_FLAG_COMMAND)
 
@@ -30,11 +30,13 @@
 	data["crew_manifest"] = crew_manifest
 	if(active_warrant)
 		data["active"] = serialize_warrant(active_warrant)
+		data["warrants"] = null
 	else
 		var/list/listed = list()
 		for(var/datum/digital_warrant/W in GLOB.all_warrants)
 			listed += list(serialize_warrant(W))
 		data["warrants"] = listed
+		data["active"] = null
 	return data
 
 /datum/computer_file/program/digitalwarrant/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
@@ -81,7 +83,7 @@
 		if("authorize_access")
 			if(!active_warrant || active_warrant.arrestsearch == "search" || !I)
 				return TRUE
-			if(!(ACCESS_CHANGE_IDS in I.access))
+			if(!(ACCESS_HOS in I.access))
 				return TRUE
 			var/datum/record/crew/warrant_subject
 			var/datum/job/J = SSjob.get_job(active_warrant.jobwarrant)
@@ -127,6 +129,7 @@
 		if(!istype(trim, /datum/id_trim/job))
 			continue
 		var/datum/id_trim/job/job_trim = trim
-		if(job_trim.find_job() == J)
+		var/datum/job/trim_job = job_trim.find_job()
+		if(trim_job && (trim_job == J || trim_job.type == J.type || trim_job.title == J.title))
 			return job_trim.access.Copy()
 	return list()

@@ -19,14 +19,15 @@ type CrewMember = {
 };
 
 type Data = {
-  warrants?: Warrant[];
-  active?: Warrant;
+  warrants?: Warrant[] | null;
+  active?: Warrant | null;
   crew_manifest?: CrewMember[];
 };
 
-export const NtosDigitalWarrant = (props, context) => {
-  const { act, data } = useBackend<Data>(context);
-  const { warrants = [], active, crew_manifest = [] } = data;
+export const NtosDigitalWarrant = () => {
+  const { act, data } = useBackend<Data>();
+  const { active, crew_manifest = [] } = data;
+  const warrants = data.warrants ?? [];
   const [showCrewManifest, setShowCrewManifest] = useState(false);
 
   return (
@@ -71,13 +72,13 @@ const WarrantEditor = (props: WarrantEditorProps) => {
         <LabeledList.Item label="Name">
           <Input
             value={warrant.namewarrant}
-            onChange={(e, value) => act('edit_name', { name: value, job: warrant.jobwarrant })}
+            onChange={(value: string) => act('edit_name', { name: value, job: warrant.jobwarrant })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Job">
           <Input
             value={warrant.jobwarrant}
-            onChange={(e, value) => act('edit_name', { name: warrant.namewarrant, job: value })}
+            onChange={(value: string) => act('edit_name', { name: warrant.namewarrant, job: value })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="From Manifest">
@@ -86,7 +87,7 @@ const WarrantEditor = (props: WarrantEditorProps) => {
         <LabeledList.Item label="Charges">
           <Input
             value={warrant.charges}
-            onChange={(e, value) => act('edit_charges', { charges: value })}
+            onChange={(value: string) => act('edit_charges', { charges: value })}
           />
         </LabeledList.Item>
         <LabeledList.Item label="Authorized">
@@ -134,7 +135,7 @@ const CrewManifest = (props: CrewManifestProps) => {
     >
       <Input
         placeholder="Search by name or job"
-        onChange={(e, value) => setSearch(value)}
+        onChange={(value: string) => setSearch(value)}
         mb={1}
       />
       {filteredCrew.map((member) => (
