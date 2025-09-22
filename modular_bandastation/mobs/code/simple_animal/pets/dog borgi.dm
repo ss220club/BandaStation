@@ -1,3 +1,4 @@
+/* TODO
 /mob/living/basic/pet/dog/corgi/borgi
 	name = "E-N"
 	real_name = "E-N"	//Intended to hold the name without altering it.
@@ -60,3 +61,5 @@
 	if(!.)
 		return FALSE
 	do_sparks(3, 1, src)
+
+*/
