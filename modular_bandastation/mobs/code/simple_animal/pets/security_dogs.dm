@@ -16,7 +16,7 @@
 	attack_verb_simple = "кусает"
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
-	butcher_results = list(/obj/item/food/meat/slab/security = 3)
+	butcher_results = list(/obj/item/food/meat/slab/corgi/dog/security = 3)
 
 /mob/living/basic/pet/dog/security/ranger
 	name = "Ranger"

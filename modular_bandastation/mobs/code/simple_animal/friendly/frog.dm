@@ -62,10 +62,10 @@
 	if(!ishuman(source))
 		return
 	var/mob/living/carbon/human/H = source
-	if(istype(user.shoes, /obj/item/clothing/shoes))
+	if(istype(H.shoes, /obj/item/clothing/shoes))
 		return
-	var/obj/item/bodypart/leg/left = user.get_bodypart(BODY_ZONE_L_LEG)
-	var/obj/item/bodypart/leg/right = user.get_bodypart(BODY_ZONE_R_LEG)
+	var/obj/item/bodypart/leg/left = H.get_bodypart(BODY_ZONE_L_LEG)
+	var/obj/item/bodypart/leg/right = H.get_bodypart(BODY_ZONE_R_LEG)
 	if(!IS_ROBOTIC_LIMB(left))
 		toxin_affect(H)
 		to_chat(H, span_warning("Ваши ступни начинают чесаться!"))

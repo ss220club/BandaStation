@@ -9,7 +9,7 @@
 	attack_verb_simple = "кусает"
 	var/growl_sound = list('modular_bandastation/mobs/sound/dog_grawl1.ogg','modular_bandastation/mobs/sound/dog_grawl2.ogg') //Used in emote.
 
-	butcher_results = list(/obj/item/food/meat/dog = 4)
+	butcher_results = list(/obj/item/food/meat/slab/corgi/dog = 4)
 	collar_type = "dog"
 
 /mob/living/basic/pet/dog/wuv(change, mob/M)
@@ -64,7 +64,7 @@
 /mob/living/basic/pet/dog/corgi/puppy
 	maxHealth = 20
 	health = 20
-	butcher_results = list(/obj/item/food/meat/corgi = 1)
+	butcher_results = list(/obj/item/food/meat/slab/corgi = 1)
 
 /mob/living/basic/pet/dog/corgi/puppy/void
 	maxHealth = 60

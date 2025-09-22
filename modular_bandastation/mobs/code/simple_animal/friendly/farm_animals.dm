@@ -90,7 +90,7 @@
 	health = 15
 	maxHealth = 15
 
-/mob/living/basiс/goose/turkey
+/mob/living/basic/goose/turkey
 	name = "индюшка"
 	desc = "И не благодари."
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
