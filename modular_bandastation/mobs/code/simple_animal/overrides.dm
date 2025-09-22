@@ -1,13 +1,14 @@
 /mob/living/basic
-	response_help   = "тычет"
+	response_help_continuous = "тычет"
+	response_help_simple = "тычет"
 	response_disarm_continuous = "толкает"
 	response_disarm_simple = "толкает"
 	response_harm_continuous = "пихает"
 	response_harm_simple   = "пихает"
 	attack_verb_continuous = "атакует"
 	attack_verb_simple = "атакует"
+
 	attack_sound = null
-	friendly = "утыкается в" //If the mob does no damage with it's attack
 	var/list/damaged_sound = null // The sound played when player hits animal
 	var/list/talk_sound = null // The sound played when talk
 
@@ -86,7 +87,7 @@
 	SEND_SOUND(world, sound('modular_bandastation/mobs/sound/narsie_rises.ogg'))
 	. = ..()
 
-
+/* ===== На случай если появится блюспейс сканер =====
 /* Loot Drops */
 /obj/effect/spawner/random/bluespace_tap/organic/Initialize(mapload)
 	. = ..()
@@ -106,12 +107,14 @@
 		/mob/living/basic/pet/cat/birman = 2,
 		/mob/living/basic/pet/cat/spacecat = 2,
 
-		//mob/living/basic/pet/dog/fox = 5,
+		//mob/living/basic/pet/fox = 5,
 
-		/mob/living/basic/pet/dog/fox/forest = 2,
-		/mob/living/basic/pet/dog/fox/fennec = 2,
+		/mob/living/basic/pet/fox/forest = 2,
+		/mob/living/basic/pet/fox/fennec = 2,
 		/mob/living/basic/possum = 2,
 
 		/mob/living/basic/pet/penguin = 5,
 		//mob/living/basic/pig = 5,
 		))
+
+*/
