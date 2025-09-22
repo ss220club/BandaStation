@@ -17,7 +17,7 @@
 
 /mob/living/basic/cow/pipa
 	name = "Пипа"
-	desc = "Старая добрая старушка. Нескончаемый источник природного молока без ГМО. Ну почти без ГМО..."
+	desc = "Старая добрая старушка прямиком с Лай'Оши. Нескончаемый источник природного молока без ГМО. Ну почти без ГМО..."
 	gold_core_spawnable = NO_SPAWN
 
 /mob/living/basic/chicken/wife
@@ -30,7 +30,7 @@
 	maxHealth = 20
 	health = 20
 
-/mob/living/basic/cock/clucky
+/mob/living/basic/chicken/cock/clucky
 	name = "Коммандор Клакки"
 	desc = "Его великая армия бесчисленна. Ко-ко-ко."
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
@@ -57,18 +57,6 @@
 	name = "Гена"
 	desc = "Крокодил обожающий музыкальные инструменты и плюшевые игрушки. Пожевать."
 	faction = list("neutral")
-
-/mob/living/basic/mouse/brown/demon
-	name = "Мышедемон"
-	desc = "Секретная разработка синдиката. Сидит тут потому, что сам хочет"
-	gold_core_spawnable = NO_SPAWN
-	maxHealth = 20
-	health = 20
-
-/mob/living/basic/mouse/brown/demon/update_desc()
-	. = ..()
-	desc = initial(desc)
-
 
 
 // rats
@@ -127,12 +115,12 @@
 	icon_dead = "hamster_rep_dead"
 	icon_resting = "hamster_rep_rest"
 	gold_core_spawnable = NO_SPAWN
-	// holder_type = /obj/item/holder/hamster_rep
 	maxHealth = 20
 	health = 20
 	resting = TRUE
+	// holder_type = /obj/item/holder/hamster_rep
 
-/mob/living/basic/possum/poppy
+/mob/living/basic/possum/key
 	name = "Ключик"
 	desc = "Маленький работяга. Его жилетка подчеркивает его рабочие... лапы. Тот еще трудяга. Очень не любит ассистентов в инженерном отделе. И Полли. Интересно, почему?"
 	icon_state = "possum_poppy"
@@ -149,6 +137,6 @@
 	name = "Среда"
 	real_name = "Среда"
 	desc = "Это Среда, мои чуваки!"
-	maxHealth = 20
-	health = 20
+	maxHealth = 30
+	health = 30
 	gold_core_spawnable = NO_SPAWN
