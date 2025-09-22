@@ -5,8 +5,11 @@
 	response_disarm_simple = "толкает"
 	response_harm_continuous = "пихает"
 	response_harm_simple   = "пихает"
+
 	attack_verb_continuous = "атакует"
 	attack_verb_simple = "атакует"
+	friendly_verb_continuous = "тычет"
+	friendly_verb_simple = "тычет"
 
 	attack_sound = null
 	var/list/damaged_sound = null // The sound played when player hits animal

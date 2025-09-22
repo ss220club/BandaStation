@@ -10,5 +10,6 @@
 	response_help_simple = "лапает"
 	response_disarm_continuous = "толкает"
 	response_disarm_simple = "осторожно отталкивает"
-	friendly = "осторожно проводит лапками по"
+	friendly_verb_continuous = "осторожно проводит лапками по"
+	friendly_verb_simple = "осторожно проводит лапками по"
 
