@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useBackend } from '../backend';
-import { Window } from '../layouts';
+import { NtosWindow } from '../layouts';
 import { Button, Input, LabeledList, Section, Stack } from 'tgui-core/components';
 
 type Warrant = {
@@ -31,8 +31,8 @@ export const NtosDigitalWarrant = () => {
   const [showCrewManifest, setShowCrewManifest] = useState(false);
 
   return (
-    <Window width={500} height={400}>
-      <Window.Content>
+    <NtosWindow title="Цифровые ордера" width={500} height={400}>
+      <NtosWindow.Content>
         {active ? (
           showCrewManifest ? (
             <CrewManifest
@@ -53,8 +53,8 @@ export const NtosDigitalWarrant = () => {
         ) : (
           <WarrantList warrants={warrants} act={act} />
         )}
-      </Window.Content>
-    </Window>
+      </NtosWindow.Content>
+    </NtosWindow>
   );
 };
 
@@ -69,44 +69,44 @@ const WarrantEditor = (props: WarrantEditorProps) => {
   return (
     <Section title={warrant.namewarrant}>
       <LabeledList>
-        <LabeledList.Item label="Name">
+        <LabeledList.Item label="Имя">
           <Input
             value={warrant.namewarrant}
             onChange={(value: string) => act('edit_name', { name: value, job: warrant.jobwarrant })}
           />
         </LabeledList.Item>
-        <LabeledList.Item label="Job">
+        <LabeledList.Item label="Должность">
           <Input
             value={warrant.jobwarrant}
             onChange={(value: string) => act('edit_name', { name: warrant.namewarrant, job: value })}
           />
         </LabeledList.Item>
-        <LabeledList.Item label="From Manifest">
-          <Button onClick={onShowCrewManifest}>Select</Button>
+        <LabeledList.Item label="Из манифеста">
+          <Button onClick={onShowCrewManifest}>Выбрать</Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Charges">
+        <LabeledList.Item label="Обвинения">
           <Input
             value={warrant.charges}
             onChange={(value: string) => act('edit_charges', { charges: value })}
           />
         </LabeledList.Item>
-        <LabeledList.Item label="Authorized">
+        <LabeledList.Item label="Авторизовал">
           {warrant.auth}
           <Button ml={1} onClick={() => act('authorize')}>
-            Auth
+            Подпись
           </Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Access Auth">
+        <LabeledList.Item label="Авторизация доступа">
           {warrant.idauth}
           <Button ml={1} onClick={() => act('authorize_access')}>
-            Auth Access
+            Подп. доступ
           </Button>
         </LabeledList.Item>
       </LabeledList>
       <Stack mt={2} justify="space-between">
-        <Button onClick={() => act('save')}>Save</Button>
-        <Button onClick={() => act('delete', { id: warrant.id })}>Delete</Button>
-        <Button onClick={() => act('back')}>Back</Button>
+        <Button onClick={() => act('save')}>Сохранить</Button>
+        <Button onClick={() => act('delete', { id: warrant.id })}>Удалить</Button>
+        <Button onClick={() => act('back')}>Назад</Button>
       </Stack>
     </Section>
   );
@@ -130,11 +130,11 @@ const CrewManifest = (props: CrewManifestProps) => {
 
   return (
     <Section
-      title="Crew Manifest"
-      buttons={<Button onClick={onClose}>Back</Button>}
+      title="Манифест экипажа"
+      buttons={<Button onClick={onClose}>Назад</Button>}
     >
       <Input
-        placeholder="Search by name or job"
+        placeholder="Поиск по имени или должности"
         onChange={(value: string) => setSearch(value)}
         mb={1}
       />
@@ -143,9 +143,9 @@ const CrewManifest = (props: CrewManifestProps) => {
           <Stack.Item grow>
             {member.name} - {member.job}
           </Stack.Item>
-          <Button onClick={() => onSelect(member.name, member.job)}>
-            Select
-          </Button>
+            <Button onClick={() => onSelect(member.name, member.job)}>
+              Выбрать
+            </Button>
         </Stack>
       ))}
     </Section>
@@ -161,11 +161,11 @@ const WarrantList = (props: WarrantListProps) => {
   const { warrants, act } = props;
   return (
     <Section
-      title="Warrants"
+      title="Ордеры"
       buttons={
         <>
-          <Button onClick={() => act('add_arrest')}>Add Arrest</Button>
-          <Button onClick={() => act('add_search')}>Add Search</Button>
+          <Button onClick={() => act('add_arrest')}>Ордер на арест</Button>
+          <Button onClick={() => act('add_search')}>Ордер на обыск</Button>
         </>
       }
     >
@@ -175,12 +175,12 @@ const WarrantList = (props: WarrantListProps) => {
             <Stack.Item grow>
               {warrant.namewarrant}: {warrant.charges}
             </Stack.Item>
-            <Button onClick={() => act('open', { id: warrant.id })}>View</Button>
-            <Button onClick={() => act('delete', { id: warrant.id })}>Delete</Button>
+            <Button onClick={() => act('open', { id: warrant.id })}>Открыть</Button>
+            <Button onClick={() => act('delete', { id: warrant.id })}>Удалить</Button>
           </Stack>
         ))
       ) : (
-        'No warrants.'
+        'Ордеров нет.'
       )}
     </Section>
   );

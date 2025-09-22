@@ -87,54 +87,79 @@
 	icon_state = "remote"
 	return ..()
 
+/obj/item/device/holowarrant/proc/warrant_html_header(section_title, station_enc)
+	return "<HTML><HEAD><TITLE>[section_title]</TITLE></HEAD>\n<BODY bgcolor='#ffffff'>\n<table width='100%' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' style='width:64px;'>\n<img src='ntlogo.png' alt='NanoTrasen' width='64' height='64'>\n</td><td align='center' valign='middle'>\n<large><b>Система отслеживания ордеров SCG SFP</b></large></br>\n</td></tr></table>\n</br>\nВыдан в юрисдикции станции</br>\n[station_enc]</br>\n</br>\n"
+
+/obj/item/device/holowarrant/proc/warrant_html_footer()
+	return "</BODY></HTML>"
+
+/obj/item/device/holowarrant/proc/build_warrant_html(datum/digital_warrant/W)
+	if(!W)
+		return list("html" = null, "title" = null)
+	var/name_enc = html_encode(W.namewarrant)
+	var/charges_enc = html_encode(W.charges)
+	var/auth_enc = html_encode(W.auth)
+	var/station_enc = html_encode(station_name())
+	var/title
+	var/list/body_lines = list()
+
+	if(W.arrestsearch == "arrest")
+
+		title = "Ордер на арест: [name_enc]"
+		body_lines += warrant_html_header(name_enc, station_enc)
+		body_lines += list(
+			"<b>ОРДЕР НА АРЕСТ</b></center></br>",
+			"<hr>",
+			"Настоящий документ является разрешением и уведомлением на арест _<u>[name_enc]</u>____ по следующ(ему/им) нарушени(ю/ям):</br>[charges_enc]</br>",
+			"</br>",
+			"Станция / объект: _<u>[station_enc]</u>____</br>",
+			"</br>_<u>[auth_enc]</u>____</br>",
+			"<small>Лицо, санкционировавшее арест</small></br>",
+			"</br>",
+			"<center><small><i>Офицер(ы) службы безопасности уполномочены задержать указанное лицо и доставить его в изолятор для дальнейшего разбирательства. Допускается применение соразмерной силы.</br>",
+			"</br>",
+			"Задержанное лицо должно быть проинформировано о причине ареста и своих базовых правах: праве на медицинскую помощь, одном обращении по связи и возможности обжалования через командование или магистратуру.</br>",
+			"</br>",
+			"Все предметы, потенциально связанные с нарушением, подлежат изъятию, документированию и передаче в помещение хранения улик.</br>",
+			"</br>",
+			"При попытке побега, активном сопротивлении или угрозе окружающим допускается временное усиление мер удержания до стабилизации ситуации.</i></small></center></br>"
+		)
+		body_lines += warrant_html_footer()
+	else if(W.arrestsearch == "search")
+		title = "Ордер на обыск: [name_enc]"
+		body_lines += warrant_html_header("Ордер на обыск: [name_enc]", station_enc)
+		body_lines += list(
+			"<b>ОРДЕР НА ОБЫСК</b></center></br>",
+			"</br>",
+			"<b>Имя подозреваемого / место: </b>[name_enc]</br>",
+			"</br>",
+			"<b>Основания: </b> [charges_enc]</br>",
+			"</br>",
+			"<b>Ордер выдал: </b> [auth_enc]</br>",
+			"</br>",
+			"Станция / объект: _<u>[station_enc]</u>____</br>",
+			"</br>",
+			"<center><small><i>Офицер(ы) службы безопасности, предъявляющие данный ордер, уполномочены произвести однократный законный обыск личности подозреваемого, его вещей, помещений и/или отдела в целях изъятия любых предметов и материалов, которые могут быть связаны с предполагаемым преступлением, указанным ниже, в рамках текущего расследования.</br>",
+			"</br>",
+			"Офицер(ы) обязаны изъять все такие предметы у подозреваемого и/или из отдела и оформить их как вещественные доказательства.</br>",
+			"</br>",
+			"От подозреваемого / персонала отдела ожидается полное содействие.</br>",
+			"</br>",
+			"В случае сопротивления, попыток воспрепятствовать обыску или побега — допускается временное усиление мер удержания до стабилизации ситуации.</br>",
+			"</br>",
+			"Все изъятые предметы должны быть помещены в помещение хранения улик!</small></i></center></br>"
+		)
+		body_lines += warrant_html_footer()
+	else
+		return list("html" = null, "title" = null)
+
+	var/html = jointext(body_lines, "\n")
+	return list("html" = html, "title" = title)
+
 /obj/item/device/holowarrant/proc/show_content(mob/user)
 	if(!active)
 		return
-	if(active.arrestsearch == "arrest")
-		var/output = {"
-		<HTML><HEAD><TITLE>[html_encode(active.namewarrant)]</TITLE></HEAD>
-		<BODY bgcolor='#ffffff'><center><large><b>SCG SFP Warrant Tracker System</b></large></br>
-		</br>
-		Issued in the jurisdiction of the</br>
-		[station_name()]</br>
-		</br>
-		<b>ARREST WARRANT</b></center></br>
-		</br>
-		This document serves as authorization and notice for the arrest of _<u>[html_encode(active.namewarrant)]</u>____ for the crime(s) of:</br>[html_encode(active.charges)]</br>
-		</br>
-		Vessel or habitat: _<u>[station_name()]</u>____</br>
-		</br>_<u>[html_encode(active.auth)]</u>____</br>
-		<small>Person authorizing arrest</small></br>
-		</BODY></HTML>
-		"}
-		user << browse(HTML_SKELETON(output), "window=Warrant for the arrest of [html_encode(active.namewarrant)]")
-	if(active.arrestsearch == "search")
-		var/output = {"
-		<HTML><HEAD><TITLE>Search Warrant: [html_encode(active.namewarrant)]</TITLE></HEAD>
-		<BODY bgcolor='#ffffff'><center><large><b>SCG SFP Warrant Tracker System</b></large></br>
-		</br>
-		Issued in the jurisdiction of the</br>
-		[station_name()]</br>
-		</br>
-		<b>SEARCH WARRANT</b></center></br>
-		</br>
-		<b>Suspect's/location name: </b>[html_encode(active.namewarrant)]</br>
-		</br>
-		<b>For the following reasons: </b> [html_encode(active.charges)]</br>
-		</br>
-		<b>Warrant issued by: </b> [html_encode(active.auth)]</br>
-		</br>
-		Vessel or habitat: _<u>[station_name()]</u>____</br>
-		</br>
-		<center><small><i>The Security Officer(s) bearing this Warrant are hereby authorized by the Issuer to conduct a one time lawful search of the Suspect's person/belongings/premises and/or Department for any items and materials that could be connected to the suspected criminal act described below, pending an investigation in progress.</br>
-		</br>
-		The Security Officer(s) are obligated to remove any and all such items from the Suspects posession and/or Department and file it as evidence.</br>
-		</br>
-		The Suspect/Department staff is expected to offer full co-operation.</br>
-		</br>
-		In the event of the Suspect/Department staff attempting to resist/impede this search or flee, they must be taken into custody immediately! </br>
-		</br>
-		All confiscated items must be filed and taken to Evidence!</small></i></center></br>
-		</BODY></HTML>
-		"}
-		user << browse(HTML_SKELETON(output), "window=Search warrant for [html_encode(active.namewarrant)]")
+	var/list/render = build_warrant_html(active)
+	if(!render || !render["html"])
+		return
+	user << browse(HTML_SKELETON(render["html"]), "window=[render["title"]]")

@@ -10,6 +10,25 @@
 	download_access = list(ACCESS_SECURITY, ACCESS_FLAG_COMMAND)
 
 	var/datum/digital_warrant/active_warrant
+	/// List of accesses that are allowed to authorize warrant access escalation (HoS, Captain, Magistrate, IAA(Lawyer))
+	var/static/list/warrant_authorizer_access = list(ACCESS_HOS, ACCESS_CAPTAIN, ACCESS_MAGISTRATE, ACCESS_LAWYER)
+
+//Helper that formats the author/approver string consistently and safely
+/datum/computer_file/program/digitalwarrant/proc/format_author(obj/item/card/id/I)
+	if(!I)
+		return "Unauthorized"
+	var/name_part = sanitize(I.registered_name)
+	var/assignment_part = I.assignment ? sanitize(I.assignment) : "(Unknown)"
+	return "[name_part] - [assignment_part]"
+
+//Checks if an ID card has any of the required accesses to authorize warrant access list
+/datum/computer_file/program/digitalwarrant/proc/has_warrant_authorizer_access(obj/item/card/id/I)
+	if(!I)
+		return FALSE
+	for(var/access_flag in warrant_authorizer_access)
+		if(access_flag in I.access)
+			return TRUE
+	return FALSE
 
 /datum/computer_file/program/digitalwarrant/proc/serialize_warrant(datum/digital_warrant/W)
 	return list(
@@ -78,25 +97,27 @@
 		if("authorize")
 			if(!active_warrant || !I)
 				return TRUE
-			active_warrant.auth = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
+			active_warrant.auth = format_author(I)
 			return TRUE
 		if("authorize_access")
 			if(!active_warrant || active_warrant.arrestsearch == "search" || !I)
 				return TRUE
-			if(!(ACCESS_HOS in I.access))
+			// Allow broader set of high-authority roles instead of only HoS
+			if(!has_warrant_authorizer_access(I))
 				return TRUE
+			// Locate the warrant subject once; from that derive the job datum
 			var/datum/record/crew/warrant_subject
-			var/datum/job/J = SSjob.get_job(active_warrant.jobwarrant)
-			if(!J)
-				return TRUE
 			for(var/datum/record/crew/CR in GLOB.manifest.general)
 				if(CR.name == active_warrant.namewarrant && CR.rank == active_warrant.jobwarrant)
 					warrant_subject = CR
 					break
 			if(!warrant_subject)
 				return TRUE
+			var/datum/job/J = SSjob.get_job(warrant_subject.rank)
+			if(!J)
+				return TRUE
 			var/list/warrant_access = get_job_accesses(J)
-			active_warrant.idauth = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
+			active_warrant.idauth = format_author(I)
 			active_warrant.access = warrant_access
 			return TRUE
 		if("save")
