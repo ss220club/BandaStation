@@ -75,7 +75,6 @@
 		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_1.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
-
 	)
 
 // MARK: Emotes

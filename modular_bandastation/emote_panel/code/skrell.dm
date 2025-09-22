@@ -57,7 +57,6 @@
 		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_1.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
-
 	)
 
 /datum/species/skrell/get_sneeze_sound(mob/living/carbon/human/human)
