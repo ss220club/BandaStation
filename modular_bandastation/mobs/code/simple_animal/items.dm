@@ -1,5 +1,5 @@
 /obj/item/food/meat/slab/dog
-	name = "dog meat"
+	name = "собачье мясо"
 	desc = "Не слишком питательно, Но говорят деликатес для космокорейцев."
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment/protein = 2,
@@ -8,18 +8,8 @@
 	foodtypes = RAW | MEAT | GORE
 	tastes = list("meat" = 1)
 
-/obj/item/food/meat/slab/pug
-	name = "pug meat"
-	desc = "Чуть менее очарователен в нарезке."
-	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 2,
-		/datum/reagent/consumable/nutriment/epinephrine = 2
-	)
-	foodtypes = RAW | MEAT | GORE
-	tastes = list("meat" = 1)
-
 /obj/item/food/meat/slab/security
-	name = "security meat"
+	name = "мясо безопасника"
 	desc = "Мясо наполненное чувством мужества и долга."
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment/protein = 3,

@@ -1,42 +1,19 @@
 /mob/living/basic/mouse
-	var/non_standard = FALSE // for no "mouse_" with body_color
-	//icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
 	death_sound = 'modular_bandastation/mobs/sound/rat_death.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/rat_talk.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/rat_wound.ogg')
 	blood_volume = BLOOD_VOLUME_SURVIVE
 	butcher_results = list(/obj/item/food/meat/slab/mouse = 1)
 
-/mob/living/basic/mouse/Initialize(mapload)
+/mob/living/basic/mouse/splat()
 	. = ..()
-
-	body_color = initial(body_color) // сбрасываем из-за наследования чтобы своим проком переписать
-	color_pick()
-	update_appearance(UPDATE_ICON_STATE|UPDATE_DESC)
-
-/mob/living/basic/mouse/proc/color_pick()
-	if(!body_color)
-		body_color = pick( list("brown","gray","white") )
-	icon_state = "mouse_[body_color]"
-	icon_living = "mouse_[body_color]"
-	icon_dead = "mouse_[body_color]_dead"
-	icon_resting = "mouse_[body_color]_sleep"
-
-/mob/living/basic/mouse/splat(obj/item/item = null, mob/living/user = null)
-	if(non_standard)
-		var/temp_state = initial(icon_state)
-		icon_dead = "[temp_state]_splat"
-		icon_state = "[temp_state]_splat"
-	else
-		..()
-
 	if(prob(50))
 		var/turf/location = get_turf(src)
 		add_splatter_floor(location)
-		if(item)
-			item.add_mob_blood(src)
-		if(user)
-			user.add_mob_blood(src)
+		// if(item)
+		// 	item.add_mob_blood(src)
+		// if(user)
+		// 	user.add_mob_blood(src)
 
 /mob/living/basic/mouse/death(gibbed)
 	if(gibbed)
@@ -59,17 +36,15 @@
 	health = 10
 
 /mob/living/basic/mouse/fluff/clockwork
-	name = "Chip"
-	real_name = "Chip"
+	name = "Чип"
+	real_name = "Чип"
 	body_color = "clockwork"
+	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
 	icon_state = "mouse_clockwork"
-	response_help_continuous = "pets"
-	response_help_simple = "pets"
-	response_disarm_continuous = "gently pushes aside"
-	response_disarm_simple = "gently pushes aside"
-	response_harm_continuous = "stamps on"
-	response_harm_simple   = "stamps on"
+	icon_living = "mouse_clockwork"
+	icon_dead = "mouse_clockwork_dead"
+	held_state = "mouse_clockwork
 	gold_core_spawnable = NO_SPAWN
-	butcher_results = list(/obj/item/stack/sheet/metal = 1)
+	butcher_results = list(/obj/item/stack/sheet/iron = 5)
 	maxHealth = 20
 	health = 20

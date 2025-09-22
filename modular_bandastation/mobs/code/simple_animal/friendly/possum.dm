@@ -1,9 +1,9 @@
 /mob/living/basic/possum
 	name = "possum"
-	desc = "The opossum is a small, scavenging marsupial of the order Didelphimorphia, previously \
-	endemic to the Americas of Earth, but now inexplicably found across settled space. Nobody is \
-	entirely sure how they travel to such disparate locations, with the leading theories including \
-	smuggling, cargo stowaways, fungal spore reproduction, teleportation, or unknown quantum effects."
+	desc = "Небольшое сумчатое животное, питающееся падалью. \
+	Ранее бывшее эндемиком Америки, но теперь по непонятной причине встречающееся по всему заселённому космосу. \
+	Никто до конца не знает, как они перемещаются в столь отдалённые места. Среди основных теорий — контрабанда, \
+	безбилетный провоз грузов, размножение спор грибов, телепортация или неизвестные квантовые эффекты."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	icon_state = "possum"
 	icon_living = "possum"
@@ -31,9 +31,8 @@
 	melee_damage_upper = 8
 	attack_verb_continuous = "грызет"
 	attack_verb_simple = "кусает"
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/items/weapons/bite.ogg'
 	see_in_dark = 5
-	speak_chance = 1
 	gold_core_spawnable = FRIENDLY_SPAWN
 	butcher_results = list(/obj/item/food/meat = 2)
 	// holder_type = /obj/item/holder/possum
@@ -45,12 +44,15 @@
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 
-/mob/living/basic/possum/attackby__legacy__attackchain(obj/item/O, mob/living/user)
-	icon_state = icon_harm
+/mob/living/basic/possum/attack_animal(mob/living/simple_animal/user, list/modifiers)
+	if(user.combat_mode)
+		icon_state = icon_harm
+	else
+		icon_state = initial(icon_state)
 	. = ..()
 
-/mob/living/basic/possum/attack_hand(mob/living/carbon/human/M)
-	if(M.combat_mode)
+/mob/living/basic/possum/attack_hand(mob/living/carbon/human/user, list/modifiers)
+	if(user.combat_mode)
 		icon_state = icon_harm
 	else
 		icon_state = initial(icon_state)

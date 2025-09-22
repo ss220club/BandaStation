@@ -1,7 +1,6 @@
 /mob/living/basic/mouse/rat
-	name = "rat"
-	real_name = "rat"
-	desc = "Серая крыса. Не яркий представитель своего вида."
+	name = "крыса"
+	real_name = "крыса"
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
 	squeak_sound = 'modular_bandastation/mobs/sound/rat_squeak.ogg'
 	icon_state = "rat_gray"
@@ -9,13 +8,15 @@
 	icon_dead = "rat_gray_dead"
 	icon_resting = "rat_gray_sleep"
 	non_standard = TRUE
-	body_color = null
 	maxHealth = 15
 	health = 15
 	mob_size = MOB_SIZE_SMALL
-	butcher_results = list(/obj/item/food/meat/mouse = 2)
+	butcher_results = list(/obj/item/food/meat/slab/mouse = 2)
+	colored_mob = "rat"
+	body_color = null
+	possible_colors = list("white", "gray", "irish")
 
-/mob/living/basic/mouse/rat/update_desc()
+/mob/living/basic/mouse/rat/Initialize(mapload)
 	. = ..()
 	switch(body_color)
 		if("white")
@@ -25,9 +26,15 @@
 		else
 			desc = /mob/living/basic/mouse/rat::desc
 
+/mob/living/basic/mouse/rat/gray
+	name = "серая крыса"
+	real_name = "серая крыса"
+	desc = "Не яркий представитель своего вида."
+	body_color = "gray"
+
 /mob/living/basic/mouse/rat/white
-	name = "white rat"
-	real_name = "white rat"
+	name = "белая крыса"
+	real_name = "белая крыса"
 	desc = "Типичный представитель лабораторных крыс."
 	icon_state = "rat_white"
 	icon_living = "rat_white"
@@ -36,22 +43,14 @@
 	body_color = "white"
 
 /mob/living/basic/mouse/rat/irish
-	name = "irish rat"
-	real_name = "irish rat"
+	name = "ирландский крыс"
+	real_name = "ирландский крыс"
 	desc = "Ирландская крыса, борец за независимость. На космической станции?! На этот раз им точно некуда бежать!"
 	icon_state = "rat_irish"
 	icon_living = "rat_irish"
 	icon_dead = "rat_irish_dead"
 	icon_resting = "rat_irish_sleep"
 	body_color = "irish"
-
-/mob/living/basic/mouse/rat/color_pick()
-	if(!body_color)
-		body_color = pick(list("gray","white","irish"))
-	icon_state = "rat_[body_color]"
-	icon_living = "rat_[body_color]"
-	icon_dead = "rat_[body_color]_dead"
-	icon_resting = "rat_[body_color]_sleep"
 
 /mob/living/basic/mouse/rat/pull_constraint(atom/movable/AM, show_message = FALSE)
 	return TRUE

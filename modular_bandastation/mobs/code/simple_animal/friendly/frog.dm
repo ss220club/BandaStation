@@ -48,7 +48,7 @@
 	gold_core_spawnable = NO_SPAWN
 
 // Toxic frog procs
-/mob/living/basic/frog/rare/toxic/attack_hand(mob/living/carbon/human/H as mob)
+/mob/living/basic/frog/rare/toxic/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	if(ishuman(H))
 		if(!istype(H.gloves, /obj/item/clothing/gloves))
 			var/obj/item/bodypart/arm/active_arm = attacker.get_active_hand()
