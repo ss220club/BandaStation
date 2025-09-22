@@ -1,19 +1,3 @@
-/datum/species/skrell/get_scream_sound(mob/living/carbon/human/human)
-	if(human.physique == MALE)
-		if(prob(1))
-			return 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg'
-		return pick(
-			'modular_bandastation/emote_panel/audio/human/male/scream_male_1.ogg',
-			'modular_bandastation/emote_panel/audio/human/male/scream_male_2.ogg',
-			'modular_bandastation/emote_panel/audio/human/male/scream_male_3.ogg',
-		)
-
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/female/scream_female_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/female/scream_female_2.ogg',
-		'modular_bandastation/emote_panel/audio/human/female/scream_female_3.ogg',
-	)
-
 /datum/species/skrell/get_cry_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
 		return pick(
