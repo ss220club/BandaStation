@@ -12,37 +12,44 @@
 	var/list/talk_sound = null // The sound played when talk
 
 
-/mob/living/basic/say(message, verb, sanitize, ignore_speech_problems, ignore_atmospherics)
+/mob/living/basic/say(
+	message,
+	bubble_type,
+	list/spans = list(),
+	sanitize = TRUE,
+	datum/language/language,
+	ignore_spam = FALSE,
+	forced,
+	filterproof = FALSE,
+	message_range = 7,
+	datum/saymode/saymode,
+	list/message_mods = list(),
+)
 	. = ..()
 	if(. && length(src.talk_sound))
 		playsound(src, pick(src.talk_sound), 75, TRUE)
 
-/mob/living/basic/attacked_by(obj/item/I, mob/living/user)
+/mob/living/basic/attacked_by(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(. && length(src.damaged_sound) && src.stat != DEAD)
 		playsound(src, pick(src.damaged_sound), 40, 1)
 
-/mob/living/basic/attack_hand(mob/living/carbon/human/M)
+/mob/living/basic/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
 	if(. && length(src.damaged_sound) && src.stat != DEAD)
 		playsound(src, pick(src.damaged_sound), 40, 1)
 
-/mob/living/basic/attack_animal(mob/living/simple_animal/M)
+/mob/living/basic/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	. = ..()
 	if(. && length(src.damaged_sound) && src.stat != DEAD)
 		playsound(src, pick(src.damaged_sound), 40, 1)
 
-/mob/living/basic/attack_alien(mob/living/carbon/alien/humanoid/M)
+/mob/living/basic/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
 	. = ..()
 	if(. && length(src.damaged_sound) && src.stat != DEAD)
 		playsound(src, pick(src.damaged_sound), 40, 1)
 
-/mob/living/basic/attack_larva(mob/living/carbon/alien/larva/L)
-	. = ..()
-	if(. && length(src.damaged_sound) && src.stat != DEAD)
-		playsound(src, pick(src.damaged_sound), 40, 1)
-
-/mob/living/basic/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/basic/attack_larva(mob/living/carbon/alien/larva/L, list/modifiers)
 	. = ..()
 	if(. && length(src.damaged_sound) && src.stat != DEAD)
 		playsound(src, pick(src.damaged_sound), 40, 1)

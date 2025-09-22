@@ -134,11 +134,11 @@
 	. = ..()
 	// 25% chance to replace with screaming toxic frog
 	if(prob(25))
-		var/mob/living/basic/frog/toxic/delete_frog = locate() in .
+		var/mob/living/basic/frog/rare/toxic/delete_frog = locate() in .
 		if(isnull(delete_frog))
 			return
 		qdel(delete_frog)
-		new /mob/living/basic/frog/toxic/scream(.)
+		new /mob/living/basic/frog/rare/toxic/scream(.)
 
 /datum/supply_pack/critter/frog/scream
 	name = "Ящик с кричащими лягушками"
