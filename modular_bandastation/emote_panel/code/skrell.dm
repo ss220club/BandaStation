@@ -25,8 +25,8 @@
 		return 'sound/mobs/humanoids/human/sniff/female_sniff.ogg'
 	return 'sound/mobs/humanoids/human/sniff/male_sniff.ogg'
 
-/datum/species/skrell/get_cough_sound(mob/living/carbon/human/tajaran)
-	if(tajaran.physique == FEMALE)
+/datum/species/skrell/get_cough_sound(mob/living/carbon/human/human)
+	if(human.physique == FEMALE)
 		return pick(
 			'sound/mobs/humanoids/human/cough/female_cough1.ogg',
 			'sound/mobs/humanoids/human/cough/female_cough2.ogg',
