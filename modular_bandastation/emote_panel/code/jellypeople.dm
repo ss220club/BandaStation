@@ -27,10 +27,18 @@
 
 /datum/species/jelly/get_laugh_sound(mob/living/carbon/human/jellypeople)
 	if(jellypeople.physique == FEMALE)
-		return 'sound/mobs/humanoids/human/laugh/womanlaugh.ogg'
+		return pick(
+			'sound/mobs/humanoids/human/laugh/womanlaugh.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/laugh_female_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/laugh_female_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/laugh_female_3.ogg',
+		)
 	return pick(
 		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
 		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/laugh_male_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/laugh_male_3.ogg',
 	)
 
 /datum/species/jelly/get_sneeze_sound(mob/living/carbon/human/jellypeople)

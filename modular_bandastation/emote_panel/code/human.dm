@@ -34,11 +34,14 @@
 /datum/species/human/get_laugh_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
 		return pick(
+			'sound/mobs/humanoids/human/laugh/womanlaugh.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/laugh_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/laugh_female_2.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/laugh_female_3.ogg',
 		)
 	return pick(
+		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
+		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_1.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_3.ogg',
