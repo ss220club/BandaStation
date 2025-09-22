@@ -51,6 +51,9 @@
 	var/mob/living/carbon/human/human_user = user
 	if(human_user.physique == FEMALE)
 		return pick(
+			'sound/mobs/humanoids/human/gasp/gasp_female1.ogg',
+			'sound/mobs/humanoids/human/gasp/gasp_female2.ogg',
+			'sound/mobs/humanoids/human/gasp/gasp_female3.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_2.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_3.ogg',
@@ -60,6 +63,8 @@
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_7.ogg',
 		)
 	return pick(
+		'sound/mobs/humanoids/human/gasp/gasp_male1.ogg',
+		'sound/mobs/humanoids/human/gasp/gasp_male2.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/gasp_male_1.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/gasp_male_2.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/gasp_male_3.ogg',
