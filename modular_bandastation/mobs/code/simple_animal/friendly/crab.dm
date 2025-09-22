@@ -9,6 +9,16 @@
 	response_harm_simple   = "щипает"
 	// holder_type = /obj/item/holder/crab
 
+/mob/living/basic/crab/old
+	name = "старый краб"
+	desc = "Когда-то такие населяли моря и аквариумы."
+	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon_state = "crab_old"
+	icon_living = "crab_old"
+	icon_dead = "crab_old_dead"
+	health = 35
+	maxHealth = 35
+
 /mob/living/basic/crab/sea
 	name = "морской краб"
 	desc = "Кто проживает на дне океана?"

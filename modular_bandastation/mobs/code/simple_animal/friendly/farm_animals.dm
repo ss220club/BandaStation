@@ -34,7 +34,7 @@
 	icon_state = "cock"
 	icon_living = "cock"
 	icon_dead = "cock_dead"
-	butcher_results = list(/obj/item/food/meat = 4)
+	butcher_results = list(/obj/item/food/meat/slab/chicken = 4)
 	melee_damage_type = STAMINA
 	melee_damage_lower = 2
 	melee_damage_upper = 6
@@ -43,14 +43,11 @@
 	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
 	damaged_sound = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
 	talk_sound = list('modular_bandastation/mobs/sound/chicken_talk.ogg')
-	health = 30
-	maxHealth = 30
-	pass_flags = PASSTABLE | PASSMOB
-	mob_size = MOB_SIZE_SMALL
-	gold_core_spawnable = FRIENDLY_SPAWN
+	health = 40
+	maxHealth = 40
 	// holder_type = /obj/item/holder/cock
 
-	ai_controller = /datum/ai_controller/basic_controller/goat
+	ai_controller = /datum/ai_controller/basic_controller/chicken/cock
 
 /mob/living/basic/chicken/cock/Initialize(mapload)
 	. = ..()
@@ -59,19 +56,12 @@
 
 /mob/living/basic/pig
 	name = "свинья"
+	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
 	attack_verb_continuous = "лягает"
 	attack_verb_simple = "лягает"
 	death_sound = 'modular_bandastation/mobs/sound/pig_death.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
 	damaged_sound = list()
-
-/mob/living/basic/turkey	// !!!!
-	name = "индюшка"
-	desc = "И не благодари."
-	death_sound = 'modular_bandastation/mobs/sound/duck_quak1.ogg'
-
-	ai_controller = /datum/ai_controller/basic_controller/goose
-
 
 /mob/living/basic/goose
 	name = "гусь"
@@ -94,11 +84,38 @@
 	icon_living = "gosling"
 	icon_dead = "gosling_dead"
 	icon_resting = "gosling_rest"
-	butcher_results = list(/obj/item/food/meat = 3)
+	butcher_results = list(/obj/item/food/meat/slab/grassfed = 1)
 	melee_damage_lower = 0
-	melee_damage_upper = 0
-	health = 20
-	maxHealth = 20
+	melee_damage_upper = 2
+	health = 15
+	maxHealth = 15
 
-/mob/living/basic/seal	// !!!!!!
+/mob/living/basi/goose/turkey
+	name = "индюшка"
+	desc = "И не благодари."
+	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon_state = "turkey"
+	icon_living = "turkey"
+	icon_dead = "turkey_dead"
+	butcher_results = list(/obj/item/food/meat/slab/grassfed = 4)
+
+/mob/living/basic/walrus // seal?
+	name = "морж"
+	desc = "Любит купаться в холодных водах на Крещение."
+	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon_state = "walrus"
+	icon_living = "walrus"
+	icon_dead = "walrus_dead"
+	mob_biotypes = MOB_ORGANIC | MOB_BEAST
+	speak_emote = list("мычит","вызывающе мычит","протяженно мычит")
+	speed = 3
+	butcher_results = list(/obj/item/food/meat/slab/grassfed = 10)
+	health = 80
+	maxHealth = 80
+	attack_sound = 'sound/items/weapons/punch1.ogg'
+	attack_vis_effect = ATTACK_EFFECT_KICK
 	death_sound = 'modular_bandastation/mobs/sound/seal_death.ogg'
+	gold_core_spawnable = FRIENDLY_SPAWN
+	blood_volume = BLOOD_VOLUME_NORMAL
+
+	ai_controller = /datum/ai_controller/basic_controller/walrus

@@ -2,11 +2,6 @@
 	name = "лягушка"
 	real_name = "лягушка"
 	desc = "Выглядит грустным не по средам и когда её не целуют."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
-	icon_state = "frog"
-	icon_living = "frog"
-	icon_dead = "frog_dead"
-	icon_resting = "frog"
 	speak = list("Квак!","КУААК!","Квуак!")
 	speak_emote = list("квак","куак","квуак")
 	emote_hear = list("квак","куак","квуак")
@@ -15,29 +10,8 @@
 	talk_sound = list('modular_bandastation/mobs/sound/frog_talk1.ogg', 'modular_bandastation/mobs/sound/frog_talk2.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/frog_damaged.ogg')
 	death_sound = 'modular_bandastation/mobs/sound/frog_death.ogg'
-	speak_chance = 1
-	turns_per_move = 5
-	see_in_dark = 10
-	maxHealth = 10
-	health = 10
-	blood_volume = BLOOD_VOLUME_SURVIVE
-	butcher_results = list(/obj/item/food/monstermeat/lizardmeat = 1)
-	response_help_continuous = "pets"
-	response_help_simple = "pets"
-	response_disarm_continuous = "gently pushes aside"
-	response_disarm_simple = "gently pushes aside"
-	response_harm_continuous = "stamps on"
-	response_harm_simple   = "stamps on"
-	density = 0
-	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
-	mob_size = MOB_SIZE_TINY
-	layer = MOB_LAYER
-	atmos_requirements = list("min_oxy" = 16, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
-	minimum_survivable_temperature = 223 // Below -50 Degrees Celcius
-	maximum_survivable_temperature = 323 // Above 50 Degrees Celcius
-	universal_speak = 0
+
 	// holder_type = /obj/item/holder/frog
-	gold_core_spawnable = FRIENDLY_SPAWN
 
 /mob/living/basic/frog/toxic
 	name = "яркая лягушка"
