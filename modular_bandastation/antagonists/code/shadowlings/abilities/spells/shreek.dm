@@ -7,6 +7,9 @@
 	var/knock_radius = 2
 	var/disorient_radius = 10
 	var/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/abilities/shreek.ogg'
+	min_req = 4
+	max_req = 20
+	required_thralls = 40
 
 /datum/action/cooldown/shadowling/shreek/DoEffect(mob/living/carbon/human/H, atom/_)
 	playsound(get_turf(H), sfx_activate, 70, TRUE)

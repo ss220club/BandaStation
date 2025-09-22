@@ -12,9 +12,9 @@
 /datum/action/cooldown/shadowling/shadow_strike/CanUse(mob/living/carbon/human/H)
 	if(!..())
 		return FALSE
-	if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
+	if(istype(owner.loc, /obj/effect/dummy/phased_mob/shadowling))
 		return TRUE
-	if(H.has_status_effect(/datum/status_effect/shadow/phase))
+	if(owner.has_status_effect(/datum/status_effect/shadow/phase))
 		return TRUE
 	owner.balloon_alert(owner, "Вы должны быть нематериальны")
 	return FALSE

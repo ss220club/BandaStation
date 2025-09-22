@@ -23,6 +23,9 @@
 	return FALSE
 
 /datum/action/cooldown/shadowling/shadow_grab/DoEffect(mob/living/carbon/human/H, atom/_)
+	if(!istype(H))
+		return FALSE
+
 	var/mob/living/carbon/human/T = find_nearest_target(2)
 	if(!T)
 		owner.balloon_alert(owner, "Нет доступных целей")

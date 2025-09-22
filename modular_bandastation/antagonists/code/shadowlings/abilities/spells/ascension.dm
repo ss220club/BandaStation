@@ -80,6 +80,10 @@
 	var/_levitate_base_y = null
 	var/_levitating = FALSE
 
+	min_req = 1
+	max_req = 30
+	required_thralls = 100
+
 /datum/action/cooldown/shadowling/ascend/DoEffect(mob/living/carbon/human/H, atom/_)
 	if(!istype(H))
 		return FALSE

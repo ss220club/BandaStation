@@ -50,21 +50,18 @@
 	return TRUE
 
 /datum/action/cooldown/shadowling/glare/DoEffectOnTargets(mob/living/carbon/human/H, list/targets)
-	if(!islist(targets))
-		owner.balloon_alert(owner, "Нет доступных целей")
-		return FALSE
-	if(!length(targets))
-		owner.balloon_alert(owner, "Нет доступных целей")
-		return FALSE
+	if(!islist(targets) || !length(targets))
+		if(istype(H))
+			play_glare_fx(H)
+			H.balloon_alert(H, "промах")
+		return TRUE
+
 	play_glare_fx(H)
 	var/hit = FALSE
 	for(var/mob/living/carbon/human/T in targets)
-		if(QDELETED(T))
+		if(QDELETED(T) || T.stat == DEAD)
 			continue
-		if(T.stat == DEAD)
-			continue
-		var/d = get_dist(H, T)
-		if(d > max_range)
+		if(get_dist(H, T) > max_range)
 			continue
 		apply_glare_primary(T)
 		addtimer(CALLBACK(src, PROC_REF(apply_glare_knock), T), knock_delay)

@@ -8,6 +8,9 @@
 	var/selection_range = 6
 	var/mob/living/carbon/human/stored_target
 	var/selection_timer
+	min_req = 6
+	max_req = 30
+	required_thralls = 60
 
 /datum/action/cooldown/shadowling/labyrinth/Remove(mob/remove_from)
 	. = ..()

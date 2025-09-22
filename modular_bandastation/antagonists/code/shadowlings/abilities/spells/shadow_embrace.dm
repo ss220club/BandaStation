@@ -8,8 +8,11 @@
 	max_range = 0
 	channel_time = 0
 	var/phase_duration = 12 SECONDS
-	var/light_immunity_thralls = 7
 	var/static/sfx_enter = 'sound/effects/magic/teleport_app.ogg'
+	min_req = 1
+	max_req = 3
+	required_thralls = 10
+
 
 /datum/action/cooldown/shadowling/shadow_phase/is_action_active(atom/movable/screen/movable/action_button/_btn)
 	var/mob/living/carbon/human/H = owner
@@ -102,14 +105,14 @@
 	playsound(start, sfx_enter, 65, TRUE)
 	fade_out(H, 0.3 SECONDS)
 
-	sleep(0.3 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(finish_enter_phase), H, start), 0.3 SECONDS)
+
+/datum/action/cooldown/shadowling/shadow_phase/proc/finish_enter_phase(mob/living/carbon/human/H, turf/start)
 
 	var/obj/effect/dummy/phased_mob/shadowling/P = new(start)
 	P.dir = H.dir
 
-	var/datum/team/shadow_hive/hive = get_shadow_hive()
-	var/nt = hive ? hive.count_alive_thralls() : 0
-	P.light_immunity = (nt >= light_immunity_thralls)
+	P.light_immunity = isshadowling_ascended(owner)
 
 	P.jaunter = H
 	H.forceMove(P)

@@ -16,6 +16,10 @@
 	var/static/sfx_end   = 'sound/effects/ghost.ogg'
 	var/prev_alpha
 
+	min_req = 1
+	max_req = 3
+	required_thralls = 70
+
 /datum/action/cooldown/shadowling/recuperation/Trigger(mob/clicker, trigger_flags, atom/target)
 	return ..()
 

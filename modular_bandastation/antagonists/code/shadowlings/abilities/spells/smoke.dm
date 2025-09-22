@@ -13,6 +13,9 @@
 	var/blind_time = 5 SECONDS
 	var/stun_chance = 25
 	var/stun_time = 2 SECONDS
+	min_req = 2
+	max_req = 5
+	required_thralls = 20
 
 /datum/action/cooldown/shadowling/shadow_smoke/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/turf/T = get_turf(H)

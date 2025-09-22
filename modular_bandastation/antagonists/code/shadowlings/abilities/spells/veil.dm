@@ -9,6 +9,9 @@
 	var/shroom_square_radius = 2
 	var/blind_duration = 6 SECONDS
 	var/sfx_emp = 'sound/effects/empulse.ogg'
+	min_req = 3
+	max_req = 10
+	required_thralls = 30
 
 /datum/action/cooldown/shadowling/veil/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/turf/center = get_turf(H)
