@@ -94,7 +94,7 @@
 /mob/living/basic/mouse/hamster/baby/on_atom_entered(datum/source, atom/movable/entered)
 	if(!ishuman(source) || stat)
 		return ..()
-	to_chat(source, span_notice("[bicon(src)] раздавлен!"))
+	to_chat(source, span_notice("[src.name] раздавлен!"))
 	death()
 	splat(user = source)
 

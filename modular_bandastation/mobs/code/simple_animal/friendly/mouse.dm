@@ -9,10 +9,6 @@
 
 /mob/living/basic/mouse/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/squeak, list("[squeak_sound]" = 1), 100, extrarange = SHORT_RANGE_SOUND_EXTRARANGE) //as quiet as a mouse or whatever
-
-	pixel_x = rand(-6, 6)
-	pixel_y = rand(0, 10)
 
 	body_color = initial(body_color) // сбрасываем из-за наследования чтобы своим проком переписать
 	color_pick()
@@ -51,7 +47,6 @@
 	var/obj/effect/decal/remains = new /obj/effect/decal/remains/mouse(src.loc)
 	remains.pixel_x = pixel_x
 	remains.pixel_y = pixel_y
-
 
 // /mob/living/basic/mouse/emote(act, m_type = 1, message = null, force)
 
