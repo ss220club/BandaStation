@@ -75,9 +75,6 @@
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_2.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_3.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/gasp_female_4.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/gasp_female_5.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/gasp_female_6.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/gasp_female_7.ogg',
 		)
 	return pick(
 		'sound/mobs/humanoids/human/gasp/gasp_male1.ogg',
@@ -87,8 +84,6 @@
 		'modular_bandastation/emote_panel/audio/human/male/gasp_male_3.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/gasp_male_4.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/gasp_male_5.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/gasp_male_6.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/gasp_male_7.ogg',
 	)
 
 /datum/emote/living/yawn/get_sound(mob/living/user)
