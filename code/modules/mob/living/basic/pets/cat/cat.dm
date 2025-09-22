@@ -206,6 +206,7 @@
 	icon_state = "original"
 	icon_living = "original"
 	icon_dead = "original_dead"
+	unique_pet = TRUE
 	held_state = "original"
 
 /mob/living/basic/pet/cat/original/add_cell_sample()
@@ -233,6 +234,7 @@
 	name = "Proc"
 	gender = MALE
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/cat/jerry //Holy shit we left jerry on donut ~ Arcane ~Fikou
 	name = "Jerry"

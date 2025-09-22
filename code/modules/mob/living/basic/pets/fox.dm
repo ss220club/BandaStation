@@ -92,6 +92,7 @@
 	desc = "Renault, the Captain's trustworthy fox."
 	gender = FEMALE
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 // A more docile subtype that won't attack other animals.
 /mob/living/basic/pet/fox/docile
