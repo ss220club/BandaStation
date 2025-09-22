@@ -1,4 +1,4 @@
-/mob/living/basic/lizard
+/mob/living/basic/lizard/big
 	name = "игуана"
 	desc = "Грациозный предок космодраконов. Её взгляд не вызывает никаких враждебных подозрений... Но она по прежнему хочет съесть вас."
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
@@ -11,7 +11,7 @@
 	emote_see = list("stares ferociously", "stomps")
 	speak_chance = 1
 	see_in_dark = 6
-	butcher_results = list(/obj/item/food/monstermeat/lizardmeat = 3, /obj/item/stack/sheet/animalhide/lizard = 1)
+	butcher_results = list(/obj/item/food/meat/slab/human/mutant/lizard = 3, /obj/item/stack/sheet/animalhide/lizard = 1)
 	response_help_continuous = "гладит"
 	response_help_simple = "погладил"
 	response_disarm_continuous = "толкает"
@@ -40,17 +40,17 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/lizard/evil
 
-/mob/living/basic/lizard/Initialize(mapload)
+/mob/living/basic/lizard/big/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 
-/mob/living/basic/lizard/gator
+/mob/living/basic/lizard/big/gator
 	name = "аллигатор"
 	desc = "Величавый аллигатор, так и норовящийся оторвать от вас самый лакомый кусочек. Или кусок. Не путать с крокодилом!"
 	icon_state = "gator"
 	icon_living = "gator"
 	icon_dead = "gator_dead"
-	butcher_results = list(/obj/item/food/monstermeat/lizardmeat = 7, /obj/item/stack/sheet/animalhide/lizard = 5)
+	butcher_results = list(/obj/item/food/meat/slab/human/mutant/lizard = 7, /obj/item/stack/sheet/animalhide/lizard = 5)
 	speed = 4
 	maxHealth = 200
 	health = 200
@@ -58,13 +58,13 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 80
 
-/mob/living/basic/lizard/croco
+/mob/living/basic/lizard/big/croco
 	name = "крокодил"
 	desc = "Не стоит сувать голову ему в пасть! Это негативно сказывается на умственных способностях"
 	icon_state = "steppy"
 	icon_living = "steppy"
 	icon_dead = "steppy_dead"
-	butcher_results = list(/obj/item/food/monstermeat/lizardmeat = 5, /obj/item/stack/sheet/animalhide/lizard = 3)
+	butcher_results = list(/obj/item/food/meat/slab/human/mutant/lizard = 5, /obj/item/stack/sheet/animalhide/lizard = 3)
 	maxHealth = 100
 	health = 100
 	obj_damage = 80

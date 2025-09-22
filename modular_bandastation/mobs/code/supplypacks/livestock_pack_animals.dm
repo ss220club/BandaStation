@@ -46,12 +46,6 @@
 /datum/supply_pack/critter/cat
 	name = "Ящик с кошкой"
 	desc = "Кошка говорит 'мяу'! В комплекте ошейник и игрушка."
-	cost = CARGO_CRATE_VALUE * 4
-	contains = list(
-		/mob/living/basic/pet/cat,
-		/obj/item/clothing/neck/petcollar,
-		/obj/item/toy/cattoy,
-	)
 	crate_name = "ящик с кошкой"
 
 /datum/supply_pack/critter/cat/generate()
@@ -85,25 +79,23 @@
 /datum/supply_pack/critter/fox
 	name = "Ящик с лисой"
 	desc = "Что говорит лиса? Содержит одну лису."
-	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/mob/living/basic/pet/dog/fox)
 	crate_name = "ящик с лисой"
 
 /datum/supply_pack/critter/fox/generate()
 	. = ..()
 	// 30% chance to replace with forest fox
 	if(prob(30))
-		var/mob/living/basic/pet/dog/fox/delete_fox = locate() in .
+		var/mob/living/basic/pet/fox/delete_fox = locate() in .
 		if(isnull(delete_fox))
 			return
 		qdel(delete_fox)
-		new /mob/living/basic/pet/dog/fox/forest(.)
+		new /mob/living/basic/pet/fox/forest(.)
 
 /datum/supply_pack/critter/fennec
 	name = "Ящик с фенеком"
 	desc = "Маленькая пустынная лисица с огромными ушами. Содержит одного фенека."
 	cost = CARGO_CRATE_VALUE * 5
-	contains = list(/mob/living/basic/pet/dog/fox/fennec)
+	contains = list(/mob/living/basic/pet/fox/fennec)
 	crate_name = "ящик с фенеком"
 
 // --------------------
@@ -126,31 +118,34 @@
 	name = "Ящик с ядовитыми лягушками"
 	desc = "Осторожно! Содержит от 1 до 3 ядовитых лягушек."
 	cost = CARGO_CRATE_VALUE * 6
-	contains = list(/mob/living/basic/frog/toxic)
+	contains = list(/mob/living/basic/frog/rare/toxic)
 	crate_name = "ящик с ядовитыми лягушками"
 	hidden = TRUE
 
 /datum/supply_pack/critter/frog/toxic/generate()
 	. = ..()
-	// 25% chance to replace with screaming toxic frog
+	// 25% chance to do screaming toxic frog
 	if(prob(25))
-		var/mob/living/basic/frog/rare/toxic/delete_frog = locate() in .
-		if(isnull(delete_frog))
-			return
-		qdel(delete_frog)
 		new /mob/living/basic/frog/rare/toxic/scream(.)
+	for(var/i in 1 to rand(1, 2))
+		new /mob/living/basic/frog/toxic(.)
 
 /datum/supply_pack/critter/frog/scream
 	name = "Ящик с кричащими лягушками"
-	desc = "ААААААА! Содержит от 1 до 3 очень громких лягушек."
+	desc = "ААААААА! Содержит пару очень громких лягушек."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/frog/scream)
 	crate_name = "ящик с кричащими лягушками"
 	hidden = TRUE
 
+/datum/supply_pack/critter/frog/scream/generate()
+	. = ..()
+	for(var/i in 1 to rand(1, 3))
+		new /mob/living/basic/frog/scream(.)
+
 /datum/supply_pack/critter/snail
 	name = "Ящик с улитками"
-	desc = "Медленно, но верно. Содержит от 1 до 5 улиток."
+	desc = "Медленно, но верно. Содержит кучу улиток."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/mob/living/basic/snail)
 	crate_name = "ящик с улитками"
@@ -173,21 +168,21 @@
 	name = "Ящик с игуаной"
 	cost = CARGO_CRATE_VALUE * 4
 	desc = "Крупная травоядная ящерица. Обращайтесь осторожно! Содержит одну игуану."
-	contains = list(/mob/living/basic/lizard)
+	contains = list(/mob/living/basic/lizard/big)
 	crate_name = "ящик с игуаной"
 
 /datum/supply_pack/critter/gator
 	name = "Ящик с аллигатором"
 	cost = CARGO_CRATE_VALUE * 8
 	desc = "Опасный хищник. Обращайтесь с экстремальной осторожностью! Содержит одного аллигатора."
-	contains = list(/mob/living/basic/lizard/gator)
+	contains = list(/mob/living/basic/lizard/big/gator)
 	crate_name = "ящик с аллигатором"
 
 /datum/supply_pack/critter/croco
 	name = "Ящик с крокодилом"
 	cost = CARGO_CRATE_VALUE * 6
 	desc = "Ещё более опасный хищник. Обращайтесь с экстремальной осторожностью! Содержит одного крокодила."
-	contains = list(/mob/living/basic/lizard/croco)
+	contains = list(/mob/living/basic/lizard/big/croco)
 	crate_name = "ящик с крокодилом"
 
 // --------------------
@@ -198,7 +193,7 @@
 	name = "Ящик с ленивцем"
 	desc = "Медлительное древесное млекопитающее. Содержит одного ленивца."
 	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/mob/living/basic/pet/sloth)
+	contains = list(/mob/living/basic/sloth)
 	crate_name = "ящик с ленивцем"
 
 /datum/supply_pack/critter/goose
