@@ -43,7 +43,7 @@
 	icon_state = "mouse_clockwork"
 	icon_living = "mouse_clockwork"
 	icon_dead = "mouse_clockwork_dead"
-	held_state = "mouse_clockwork
+	held_state = "mouse_clockwork"
 	gold_core_spawnable = NO_SPAWN
 	butcher_results = list(/obj/item/stack/sheet/iron = 5)
 	maxHealth = 20

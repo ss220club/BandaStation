@@ -7,7 +7,6 @@
 	icon_living = "rat_gray"
 	icon_dead = "rat_gray_dead"
 	icon_resting = "rat_gray_sleep"
-	non_standard = TRUE
 	maxHealth = 15
 	health = 15
 	mob_size = MOB_SIZE_SMALL

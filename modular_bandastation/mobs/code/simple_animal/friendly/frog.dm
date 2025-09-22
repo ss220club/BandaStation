@@ -9,7 +9,7 @@
 
 	talk_sound = list('modular_bandastation/mobs/sound/frog_talk1.ogg', 'modular_bandastation/mobs/sound/frog_talk2.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/frog_damaged.ogg')
-	death_sound = 'modular_bandastation/mobs/sound/frog_death.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/frog_deatuser.ogg'
 
 	attack_sound = 'modular_bandastation/mobs/sound/frog_scream_1.ogg'
 	stepped_sound = 'modular_bandastation/mobs/sound/frog_scream_2.ogg'
@@ -49,20 +49,20 @@
 
 // Toxic frog procs
 /mob/living/basic/frog/rare/toxic/attack_hand(mob/living/carbon/human/user, list/modifiers)
-	if(ishuman(H))
-		if(!istype(H.gloves, /obj/item/clothing/gloves))
-			var/obj/item/bodypart/arm/active_arm = attacker.get_active_hand()
+	if(ishuman(user))
+		if(!istype(user.gloves, /obj/item/clothing/gloves))
+			var/obj/item/bodypart/arm/active_arm = user.get_active_hand()
 			if(!IS_ROBOTIC_LIMB(active_arm))
-				to_chat(H, span_warning("Дотронувшись до [src.name], ваша кожа начинает чесаться!"))
-				toxin_affect(H)
-	..()
+				to_chat(user, span_warning("Дотронувшись до [src.name], ваша кожа начинает чесаться!"))
+				toxin_affect(user)
+	. = ..()
 
 /mob/living/basic/frog/rare/toxic/on_atom_entered(datum/source, atom/movable/entered)
-	..()
+	. = ..()
 	if(!ishuman(source))
 		return
 	var/mob/living/carbon/human/H = source
-	if(istype(H.shoes, /obj/item/clothing/shoes))
+	if(istype(user.shoes, /obj/item/clothing/shoes))
 		return
 	var/obj/item/bodypart/leg/left = user.get_bodypart(BODY_ZONE_L_LEG)
 	var/obj/item/bodypart/leg/right = user.get_bodypart(BODY_ZONE_R_LEG)
