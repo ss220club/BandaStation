@@ -73,10 +73,10 @@
 // Animals additions
 
 /* Megafauna */
-/mob/living/basic/hostile/megafauna/legion
+/mob/living/basic/megafauna/legion
 	death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
 
-/mob/living/basic/hostile/megafauna/legion/death(gibbed)
+/mob/living/basic/megafauna/legion/death(gibbed)
 	for(var/area/lavaland/L in world)
 		SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
 	. = ..()

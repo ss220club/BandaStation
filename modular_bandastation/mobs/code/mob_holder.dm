@@ -81,9 +81,9 @@
 // 	if(animal.mind)
 // 		add_attack_logs(devourer, animal, "Devoured")
 
-// 	if(istype(animal, /mob/living/basic/hostile/poison/bees))
+// 	if(istype(animal, /mob/living/basic/poison/bees))
 // 		var/obj/item/organ/external/mouth = devourer.get_organ(BODY_ZONE_PRECISE_MOUTH)
-// 		var/mob/living/basic/hostile/poison/bees/bee = animal
+// 		var/mob/living/basic/poison/bees/bee = animal
 // 		mouth.receive_damage(1)
 // 		if(bee.beegent)
 // 			bee.beegent.reaction_mob(devourer, REAGENT_INGEST)

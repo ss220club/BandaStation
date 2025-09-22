@@ -10,17 +10,10 @@
 	icon_dead = "possum_dead"
 	icon_resting = "possum_sleep"
 	var/icon_harm = "possum_aaa"
-	response_help_continuous = "pets"
-	response_help_simple = "pets"
-	response_disarm_continuous = "bops"
-	response_disarm_simple = "bops"
-	response_harm_continuous = "kicks"
-	response_harm_simple   = "kicks"
 	speak = list("Hsss...", "Hisss...")
 	speak_emote = list("Hsss", "Hisss")
 	emote_hear = list("Aaaaa!", "Ahhss!")
 	emote_see = list("shakes its head.", "chases its tail.", "shivers.")
-	faction = list("neutral")
 	maxHealth = 30
 	health = 30
 	mob_size = MOB_SIZE_SMALL

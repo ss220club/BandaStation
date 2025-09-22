@@ -8,7 +8,6 @@
 	icon_dead = "hamster_dead"
 	icon_resting = "hamster_rest"
 	gender = MALE
-	non_standard = TRUE
 	speak_chance = 0
 	// holder_type = /obj/item/holder/hamster
 	gold_core_spawnable = FRIENDLY_SPAWN
@@ -96,7 +95,7 @@
 		return ..()
 	to_chat(source, span_notice("[src.name] раздавлен!"))
 	death()
-	splat(user = source)
+	splat()
 
 // Взросление, если нужно будет в будущем - расскомментите.
 // Но тогда также рекомендую добавить глобальный список с ограничением в 20 хомяков.

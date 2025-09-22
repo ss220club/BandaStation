@@ -1,5 +1,5 @@
 // //Уникальный питомец Офицера Телекомов. Спрайты от Элл Гуда
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge
+// /mob/living/basic/retaliate/poison/snake/rouge
 // 	name = "Руж"
 // 	desc = "Уникальная трёхголовая змея Офицера Телекоммуникаций синдиката. Выращена в лаборатории. У каждой головы свой характер!"
 // 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
@@ -35,18 +35,18 @@
 // 	///icon state of the collar we can wear
 // 	var/collar_icon_state
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/Initialize(mapload)
+// /mob/living/basic/retaliate/poison/snake/rouge/Initialize(mapload)
 // 	. = ..()
 // 	AddElement(/datum/element/wears_collar, collar_icon_state = collar_icon_state)
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/verb/chasetail()
+// /mob/living/basic/retaliate/poison/snake/rouge/verb/chasetail()
 // 	set name = "Chase your tail"
 // 	set desc = "d'awwww."
 // 	set category = "Animal"
 // 	visible_message("[src] [pick("dances around", "chases [p_their()] tail")].", "[pick("You dance around", "You chase your tail")].")
 // 	spin(20, 1)
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/emote(emote_key, type_override = 1, message, intentional, force_silence)
+// /mob/living/basic/retaliate/poison/snake/rouge/emote(emote_key, type_override = 1, message, intentional, force_silence)
 // 	if(incapacitated())
 // 		return
 
@@ -59,7 +59,7 @@
 // 			message = "<B>[src]</B> [pick(src.speak_emote)]!"
 // 	..()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/attack_hand(mob/living/carbon/human/M)
+// /mob/living/basic/retaliate/poison/snake/rouge/attack_hand(mob/living/carbon/human/M)
 // 	. = ..()
 // 	switch(M.a_intent)
 // 		if(INTENT_HELP)
@@ -67,7 +67,7 @@
 // 		if(INTENT_HARM)
 // 			shh(-1, M)
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/on_lying_down(updating = 1)
+// /mob/living/basic/retaliate/poison/snake/rouge/on_lying_down(updating = 1)
 // 	..()
 // 	if(icon_resting && stat != DEAD)
 // 		icon_state = icon_resting
@@ -78,7 +78,7 @@
 // 		if(inventory_head)
 // 			regenerate_icons()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/on_standing_up(updating = 1)
+// /mob/living/basic/retaliate/poison/snake/rouge/on_standing_up(updating = 1)
 // 	..()
 // 	if(icon_resting && stat != DEAD)
 // 		icon_state = icon_living
@@ -89,7 +89,7 @@
 // 		if(inventory_head)
 // 			regenerate_icons()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/proc/shh(change, mob/M)
+// /mob/living/basic/retaliate/poison/snake/rouge/proc/shh(change, mob/M)
 // 	if(!M || stat)
 // 		return
 // 	if(change > 0)
@@ -98,29 +98,29 @@
 // 	else
 // 		custom_emote(1, "hisses angrily!")
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/Initialize(mapload)
+// /mob/living/basic/retaliate/poison/snake/rouge/Initialize(mapload)
 // 	. = ..()
 // 	regenerate_icons()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/Destroy()
+// /mob/living/basic/retaliate/poison/snake/rouge/Destroy()
 // 	QDEL_NULL(inventory_head)
 // 	return ..()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/handle_atom_del(atom/A)
+// /mob/living/basic/retaliate/poison/snake/rouge/handle_atom_del(atom/A)
 // 	if(A == inventory_head)
 // 		inventory_head = null
 // 		regenerate_icons()
 // 	return ..()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/Life(seconds, times_fired)
+// /mob/living/basic/retaliate/poison/snake/rouge/Life(seconds, times_fired)
 // 	. = ..()
 // 	regenerate_icons()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/death(gibbed)
+// /mob/living/basic/retaliate/poison/snake/rouge/death(gibbed)
 // 	..(gibbed)
 // 	regenerate_icons()
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/getarmor(def_zone, type)
+// /mob/living/basic/retaliate/poison/snake/rouge/getarmor(def_zone, type)
 // 	var/armorval = inventory_head?.armor.getRating(type)
 // 	if(!def_zone)
 // 		armorval *= 0.5
@@ -128,7 +128,7 @@
 // 		armorval = 0
 // 	return armorval
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/proc/place_on_head(obj/item/item_to_add, mob/user)
+// /mob/living/basic/retaliate/poison/snake/rouge/proc/place_on_head(obj/item/item_to_add, mob/user)
 
 // 	if(istype(item_to_add, /obj/item/grenade/plastic/c4)) // last thing she ever wears, I guess
 // 		item_to_add.afterattack__legacy__attackchain(src,user,1)
@@ -177,7 +177,7 @@
 
 // 	return valid
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/proc/update_snek_fluff() //имя, описание, эмоуты
+// /mob/living/basic/retaliate/poison/snake/rouge/proc/update_snek_fluff() //имя, описание, эмоуты
 // 	// First, change back to defaults
 // 	name = real_name
 // 	desc = initial(desc)
@@ -191,7 +191,7 @@
 // 		var/datum/snake_fashion/SF = new inventory_head.snake_fashion(src)
 // 		SF.apply(src)
 
-// /mob/living/basic/hostile/retaliate/poison/snake/rouge/regenerate_icons() // оверлей
+// /mob/living/basic/retaliate/poison/snake/rouge/regenerate_icons() // оверлей
 // 	..()
 // 	if(inventory_head)
 // 		var/image/head_icon

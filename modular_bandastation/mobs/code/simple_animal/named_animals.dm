@@ -10,7 +10,7 @@
 	maxHealth = 80
 	health = 80
 
-/mob/living/basic/hostile/retaliate/goat/chef
+/mob/living/basic/retaliate/goat/chef
 	name = "Боря"
 	desc = "Этот козёл - парнокопытное гурме шефа, в его мрачных глазах-бусинках так и читается амибициозный нрав! Он не твой друг, ведь за каждым игривым прыжком может скрываться неожиданный выпад."
 	gold_core_spawnable = NO_SPAWN
@@ -53,7 +53,7 @@
 	health = 80
 	resting = TRUE
 
-/mob/living/basic/hostile/lizard/croco/gena
+/mob/living/basic/lizard/croco/gena
 	name = "Гена"
 	desc = "Крокодил обожающий музыкальные инструменты и плюшевые игрушки. Пожевать."
 	faction = list("neutral")

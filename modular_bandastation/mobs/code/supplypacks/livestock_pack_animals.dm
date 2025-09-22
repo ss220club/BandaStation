@@ -173,21 +173,21 @@
 	name = "Ящик с игуаной"
 	cost = CARGO_CRATE_VALUE * 4
 	desc = "Крупная травоядная ящерица. Обращайтесь осторожно! Содержит одну игуану."
-	contains = list(/mob/living/basic/hostile/lizard)
+	contains = list(/mob/living/basic/lizard)
 	crate_name = "ящик с игуаной"
 
 /datum/supply_pack/critter/gator
 	name = "Ящик с аллигатором"
 	cost = CARGO_CRATE_VALUE * 8
 	desc = "Опасный хищник. Обращайтесь с экстремальной осторожностью! Содержит одного аллигатора."
-	contains = list(/mob/living/basic/hostile/lizard/gator)
+	contains = list(/mob/living/basic/lizard/gator)
 	crate_name = "ящик с аллигатором"
 
 /datum/supply_pack/critter/croco
 	name = "Ящик с крокодилом"
 	cost = CARGO_CRATE_VALUE * 6
 	desc = "Ещё более опасный хищник. Обращайтесь с экстремальной осторожностью! Содержит одного крокодила."
-	contains = list(/mob/living/basic/hostile/lizard/croco)
+	contains = list(/mob/living/basic/lizard/croco)
 	crate_name = "ящик с крокодилом"
 
 // --------------------

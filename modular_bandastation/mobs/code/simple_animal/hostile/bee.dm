@@ -1,2 +1,2 @@
-/mob/living/basic/hostile/poison/bees
+/mob/living/basic/poison/bees
 	// holder_type = /obj/item/holder/bee

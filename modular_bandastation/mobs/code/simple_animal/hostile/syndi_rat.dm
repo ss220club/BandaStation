@@ -1,4 +1,4 @@
-// /mob/living/basic/hostile/retaliate/syndirat
+// /mob/living/basic/retaliate/syndirat
 // 	name = "Синди-мышь"
 // 	desc = "Мышь на службе синдиката?"
 // 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
@@ -52,7 +52,7 @@
 // 	///icon state of the collar we can wear
 // 	var/collar_icon_state
 
-// /mob/living/basic/hostile/retaliate/syndirat/Initialize(mapload)
+// /mob/living/basic/retaliate/syndirat/Initialize(mapload)
 // 	. = ..()
 // 	AddElement(/datum/element/wears_collar, collar_icon_state = collar_icon_state)
 // 	AddComponent(/datum/component/squeak, list('sound/creatures/mousesqueak.ogg' = 1), 100, extrarange = SHORT_RANGE_SOUND_EXTRARANGE) //as quiet as a mouse or whatever
@@ -61,7 +61,7 @@
 // 	)
 // 	AddElement(/datum/element/connect_loc, loc_connections)
 
-// /mob/living/basic/hostile/retaliate/syndirat/handle_automated_action()
+// /mob/living/basic/retaliate/syndirat/handle_automated_action()
 // 	if(prob(chew_probability) && isturf(loc))
 // 		var/turf/simulated/floor/F = get_turf(src)
 // 		if(istype(F) && !F.intact)
@@ -76,17 +76,17 @@
 // 				investigate_log("was chewed through by a mouse at [COORD(F)]", "wires")
 // 				C.deconstruct()
 
-// /mob/living/basic/hostile/retaliate/syndirat/proc/toast()
+// /mob/living/basic/retaliate/syndirat/proc/toast()
 // 	add_atom_colour("#3A3A3A", FIXED_COLOUR_PRIORITY)
 // 	desc = "It's toast."
 // 	death()
 
-// /mob/living/basic/hostile/retaliate/syndirat/handle_automated_speech()
+// /mob/living/basic/retaliate/syndirat/handle_automated_speech()
 // 	..()
 // 	if(prob(speak_chance) && !incapacitated())
 // 		playsound(src, squeak_sound, 100, 1)
 
-// /mob/living/basic/hostile/retaliate/syndirat/handle_automated_movement()
+// /mob/living/basic/retaliate/syndirat/handle_automated_movement()
 // 	. = ..()
 // 	if(resting)
 // 		if(prob(1))
@@ -96,7 +96,7 @@
 // 	else if(prob(0.5))
 // 		on_lying_down()
 
-// /mob/living/basic/hostile/retaliate/syndirat/proc/on_atom_entered(datum/source, atom/movable/entered)
+// /mob/living/basic/retaliate/syndirat/proc/on_atom_entered(datum/source, atom/movable/entered)
 // 	SIGNAL_HANDLER
 // 	if(!ishuman(source))
 // 		return
@@ -104,7 +104,7 @@
 // 		return
 // 	to_chat(source, span_notice("[bicon(src)] Squeek!"))
 
-// /mob/living/basic/hostile/retaliate/syndirat/emote(emote_key, type_override = 1, message, intentional, force_silence)
+// /mob/living/basic/retaliate/syndirat/emote(emote_key, type_override = 1, message, intentional, force_silence)
 // 	if(stat != CONSCIOUS)
 // 		return
 

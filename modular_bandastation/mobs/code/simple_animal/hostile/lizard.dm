@@ -1,4 +1,4 @@
-/mob/living/basic/hostile/lizard
+/mob/living/basic/lizard
 	name = "игуана"
 	desc = "Грациозный предок космодраконов. Её взгляд не вызывает никаких враждебных подозрений... Но она по прежнему хочет съесть вас."
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
@@ -10,7 +10,6 @@
 	emote_hear = list("rawrs","grumbles","grawls")
 	emote_see = list("stares ferociously", "stomps")
 	speak_chance = 1
-	turns_per_move = 5
 	see_in_dark = 6
 	butcher_results = list(/obj/item/food/monstermeat/lizardmeat = 3, /obj/item/stack/sheet/animalhide/lizard = 1)
 	response_help_continuous = "гладит"
@@ -41,11 +40,11 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/lizard/evil
 
-/mob/living/basic/hostile/lizard/Initialize(mapload)
+/mob/living/basic/lizard/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 
-/mob/living/basic/hostile/lizard/gator
+/mob/living/basic/lizard/gator
 	name = "аллигатор"
 	desc = "Величавый аллигатор, так и норовящийся оторвать от вас самый лакомый кусочек. Или кусок. Не путать с крокодилом!"
 	icon_state = "gator"
@@ -59,7 +58,7 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 80
 
-/mob/living/basic/hostile/lizard/croco
+/mob/living/basic/lizard/croco
 	name = "крокодил"
 	desc = "Не стоит сувать голову ему в пасть! Это негативно сказывается на умственных способностях"
 	icon_state = "steppy"
