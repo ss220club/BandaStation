@@ -1,8 +1,18 @@
 /datum/sound_effect/male_sigh
-	file_paths = list('modular_bandastation/emote_panel/audio/human/male/sigh_male.ogg')
+	file_paths = list(
+		'sound/mobs/humanoids/human/sigh/male_sigh1.ogg',
+		'sound/mobs/humanoids/human/sigh/male_sigh2.ogg',
+		'sound/mobs/humanoids/human/sigh/male_sigh3.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/sigh_male.ogg',
+	)
 
 /datum/sound_effect/female_sigh
-	file_paths = list('modular_bandastation/emote_panel/audio/human/female/sigh_female.ogg')
+	file_paths = list(
+		'sound/mobs/humanoids/human/sigh/female_sigh1.ogg',
+		'sound/mobs/humanoids/human/sigh/female_sigh2.ogg',
+		'sound/mobs/humanoids/human/sigh/female_sigh3.ogg',
+		'modular_bandastation/emote_panel/audio/human/female/sigh_female.ogg',
+	)
 
 /datum/species/human/get_cry_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
