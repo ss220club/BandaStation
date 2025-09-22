@@ -35,7 +35,7 @@
 	maxHealth = 10
 	health = 10
 
-/mob/living/basic/mouse/fluff/clockwork
+/mob/living/basic/mouse/clockwork
 	name = "Чип"
 	real_name = "Чип"
 	body_color = "clockwork"
@@ -45,6 +45,7 @@
 	icon_dead = "mouse_clockwork_dead"
 	held_state = "mouse_clockwork"
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 	butcher_results = list(/obj/item/stack/sheet/iron = 5)
 	maxHealth = 20
 	health = 20

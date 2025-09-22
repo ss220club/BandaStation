@@ -115,6 +115,7 @@
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	resting = TRUE
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/dog/pug/frank
 	name = "Фрэнк"
@@ -122,11 +123,13 @@
 	desc = "Мопс полученный в результате эксперимента ученых в черном. Почему его не забрали интересный вопрос. Похоже он всем надоел своей болтовней, после чего его лишили дара речи."
 	resting = TRUE
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/dog/bullterrier/genn
 	name = "Геннадий"
 	desc = "Собачий аристократ. Выглядит очень важным и начитанным. Доброжелательный любимец ассистентов."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 	resting = TRUE
 

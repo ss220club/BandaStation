@@ -4,6 +4,8 @@
 	desc = "It's a borgi."
 	icon_state = "borgi"
 	icon_living = "borgi"
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 	var/emagged = FALSE
 	habitable_atmos = null
 	minimum_survivable_temperature = TCMB

@@ -9,7 +9,7 @@
 	// holder_type = /obj/item/holder/cak
 
 /mob/living/basic/pet/cat/fat
-	name = "fat cat"
+	name = "толстокот"
 	desc = "Упитана. Счастлива."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	icon_state = "iriska"
@@ -81,18 +81,22 @@
 	icon_state = "floppa"
 	icon_living = "floppa"
 	icon_dead = "floppa_dead"
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/cat/fat/iriska
 	name = "Ириска"
 	desc = "Упитана. Счастлива. Бюрократы её обожают. И похоже даже черезчур сильно."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/cat/white/penny
 	name = "Копейка"
 	desc = "Любит таскать монетки и мелкие предметы. Успевайте прятать их!"
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 	resting = TRUE
 
 /mob/living/basic/pet/cat/birman/crusher
@@ -100,13 +104,18 @@
 	desc = "Любит крушить всё что не прикручено. Нужно вовремя прибираться."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 	resting = TRUE
 
 /mob/living/basic/pet/cat/spacecat/musya
 	name = "Муся"
 	desc = "Любимая почтенная кошка отдела токсинов. Всегда готова к вылетам!"
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/cat/black/salem
 	name = "Салем"
 	real_name = "Салем"
 	desc = "Говорят что это бывший колдун, лишенный всех своих сил и превратившейся в черного кота Советом Колдунов из-за попытки захватить мир, а в руки НТ попал чтобы отбывать своё наказание. Судя по его скверному нраву, это может быть похоже на правду."
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE

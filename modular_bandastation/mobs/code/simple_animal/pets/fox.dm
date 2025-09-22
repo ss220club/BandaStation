@@ -3,8 +3,8 @@
 	// holder_type = /obj/item/holder/fox
 
 /mob/living/basic/pet/fox/fennec
-	name = "fennec"
-	real_name = "fennec"
+	name = "фенек"
+	real_name = "фенек"
 	desc = "Миниатюрная лисичка с очень большими ушами. Фенек, фенек, зачем тебе такие большие уши? Чтобы избегать дормитория?"
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	icon_state = "fennec"
@@ -15,8 +15,8 @@
 	// holder_type = /obj/item/holder/fennec
 
 /mob/living/basic/pet/fox/forest
-	name = "forest fox"
-	real_name = "forest fox"
+	name = "лесной лис"
+	real_name = "лесной лис"
 	desc = "Лесная лисица. Может укусить."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	icon_state = "fox_"
@@ -41,7 +41,7 @@
 	icon_resting = "alisa_rest"
 	faction = list("nanotrasen")
 	gold_core_spawnable = NO_SPAWN
-
+	unique_pet = TRUE
 	unsuitable_cold_damage = 0
 	unsuitable_heat_damage = 0
 	unsuitable_atmos_damage = 0
@@ -54,3 +54,4 @@
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	resting = TRUE
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE

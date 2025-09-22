@@ -17,6 +17,8 @@
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
 	butcher_results = list(/obj/item/food/meat/slab/corgi/dog/security = 3)
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 
 /mob/living/basic/pet/dog/security/ranger
 	name = "Ranger"
