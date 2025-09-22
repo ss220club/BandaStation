@@ -7775,7 +7775,7 @@
 /area/station/command/heads_quarters/cmo)
 "deX" = (
 /obj/effect/turf_decal/siding/white,
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "dfA" = (
 /obj/structure/closet/firecloset,
@@ -18150,7 +18150,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 6
 	},
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "hhg" = (
 /obj/machinery/light/small/directional/west,
@@ -25104,7 +25104,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 9
 	},
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "kbk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -26137,7 +26137,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 10
 	},
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "kwB" = (
 /obj/structure/disposalpipe/trunk{
@@ -26662,7 +26662,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 4
 	},
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "kGm" = (
 /obj/item/bedsheet/red,
@@ -28225,10 +28225,6 @@
 /obj/machinery/vending/modularpc,
 /turf/open/floor/iron,
 /area/station/commons/locker)
-"lrw" = (
-/obj/structure/cable,
-/turf/open/floor/iron/smooth,
-/area/station/hallway/primary/port)
 "lrK" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -29379,7 +29375,7 @@
 /obj/effect/turf_decal/siding/white/corner{
 	dir = 1
 	},
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "lNm" = (
 /obj/structure/rack,
@@ -30098,7 +30094,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 1
 	},
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "mcW" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/monitored/nitrous_input{
@@ -44381,7 +44377,7 @@
 /area/station/ai_monitored/command/storage/eva)
 "rKo" = (
 /obj/effect/decal/remains/human,
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "rKp" = (
 /obj/effect/turf_decal/trimline/red/filled/line{
@@ -56981,7 +56977,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 5
 	},
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "wEY" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -58629,7 +58625,7 @@
 /area/station/maintenance/starboard/fore)
 "xjF" = (
 /mob/living/basic/crocodile/gena,
-/turf/open/water/alternative/muddy/no_fishing,
+/turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "xjI" = (
 /obj/machinery/telecomms/broadcaster/preset_right,
@@ -77751,7 +77747,7 @@ hvs
 clv
 oCj
 sVJ
-lrw
+wYv
 poE
 sYQ
 sYQ
