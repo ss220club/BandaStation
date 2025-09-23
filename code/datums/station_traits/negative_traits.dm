@@ -42,7 +42,7 @@
 	return ..()
 
 /datum/station_trait/late_arrivals
-	name = "Поздние прибытия"
+	name = "Позднее прибытие"
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 2
 	show_in_report = TRUE
@@ -97,7 +97,7 @@
 
 
 /datum/station_trait/blackout
-	name = "Отключение электричества"
+	name = "Блэкаут"
 	trait_type = STATION_TRAIT_NEGATIVE
 	weight = 3
 	show_in_report = TRUE
