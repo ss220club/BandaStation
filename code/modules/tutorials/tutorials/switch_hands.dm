@@ -54,19 +54,19 @@
 			var/hand_name
 			if (IS_RIGHT_INDEX(hand_to_watch))
 				hand_keybinding = /datum/keybinding/mob/select_hand/right
-				hand_name = "right"
+				hand_name = "правую"
 			else
 				hand_keybinding = /datum/keybinding/mob/select_hand/left
-				hand_name = "left"
+				hand_name = "левую"
 
 			show_instruction(keybinding_message(
 				hand_keybinding,
-				"Press '%KEY%' to use your [hand_name] hand",
-				"Click '<b>SWAP</b>' to use your [hand_name] hand",
+				"Нажмите '%KEY%', чтобы сделать [hand_name] руку активной",
+				"Кликните по '<b>SWAP</b>', чтобы сделать [hand_name] руку активной",
 			))
 
 		if (STAGE_PICK_UP_ITEM)
-			show_instruction("Pick something up!")
+			show_instruction("Возьмите что-нибудь!")
 
 /datum/tutorial/switch_hands/proc/on_swap_hands()
 	SIGNAL_HANDLER
