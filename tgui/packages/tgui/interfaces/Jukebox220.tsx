@@ -192,6 +192,7 @@ export const Jukebox220 = () => {
                 </Stack>
                 <Stack.Item pr={1} pl={1} textAlign="center" textColor="label">
                   <Knob
+                    tickWhileDragging
                     size={1.75}
                     value={volume}
                     unit="%"
@@ -199,7 +200,7 @@ export const Jukebox220 = () => {
                     maxValue={50}
                     step={1}
                     stepPixelSize={5}
-                    onDrag={(e, value) =>
+                    onChange={(value) =>
                       act('set_volume', {
                         volume: value,
                       })

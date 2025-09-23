@@ -5,10 +5,13 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	/// The set of all available emojis
 	var/list/emojis
 	/// The set of all  tickets
-	var/alist/all_tickets = alist()
+	var/alist/all_tickets
 
 /datum/ticket_manager/New()
 	emojis = icon_states(EMOJI_SET)
+	// SDMM doesn't recognise this function as built-in alist initializer and treats it as regular proc,
+	// so it's not allowed to call it in datum definition
+	all_tickets = alist()
 
 /datum/ticket_manager/ui_state()
 	return GLOB.always_state
