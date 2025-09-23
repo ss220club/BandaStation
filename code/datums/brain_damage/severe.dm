@@ -41,7 +41,7 @@
 	..()
 
 /datum/brain_trauma/severe/blindness
-	name = "Церебральная слепота"
+	name = "Корковая слепота"
 	desc = "Мозг пациента больше не связан с его глазами."
 	scan_desc = "обширное повреждение затылочной доли мозга"
 	gain_text = span_warning("Вы не можете видеть!")
@@ -182,7 +182,7 @@
 		if(prob(50))
 			owner.emote("yawn")
 		else if(prob(33)) //rarest message is a custom emote
-			owner.visible_message("трет [owner.p_their()] глаза.", visible_message_flags = EMOTE_MESSAGE)
+			owner.visible_message("трёт свои глаза.", visible_message_flags = EMOTE_MESSAGE)
 	//drowsy, so fall asleep. you've had your chance to remedy it
 	else
 		to_chat(owner, span_warning("Вы засыпаете."))

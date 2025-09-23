@@ -474,7 +474,7 @@
 /datum/brain_trauma/special/primal_instincts
 	name = "Дикие инстинкты"
 	desc = "Разум пациента застревает в первобытном состоянии, заставляя его действовать скорее инстинктивно, чем разумно."
-	scan_desc = "дикость"
+	scan_desc = "одичание"
 	gain_text = span_warning("Ваши зрачки расширяются, и вам становится все труднее мыслить здраво.")
 	lose_text = span_notice("Ваш разум проясняется, и вы чувствуете, что лучше контролируете ситуацию.")
 	resilience = TRAUMA_RESILIENCE_SURGERY
@@ -668,7 +668,7 @@
 			owner.add_mood_event("fireaxe", /datum/mood_event/axe_cabinet)
 			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), "smile")
 			return
-		to_chat(owner, span_warning("Оставить его вне командования? Я в этом уверен?"))
+		to_chat(owner, span_warning("Оставить его вне мостика? Я в этом уверен?"))
 		owner.add_mood_event("fireaxe", /datum/mood_event/axe_neutral)
 		return
 	to_chat(owner, span_warning("Мне действительно стоит оставить его здесь?"))
