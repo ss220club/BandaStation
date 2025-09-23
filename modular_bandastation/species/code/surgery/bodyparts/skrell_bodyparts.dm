@@ -9,9 +9,8 @@
 	limb_id = SPECIES_SKRELL
 	is_dimorphic = FALSE
 
-/// Todo: Add butt sprite
 /obj/item/bodypart/chest/skrell/get_butt_sprite()
-	. = ..()
+	return icon('icons/mob/butts.dmi', BUTT_SPRITE_SKRELL)
 
 /obj/item/bodypart/arm/left/skrell
 	icon_greyscale = 'icons/bandastation/mob/species/skrell/bodyparts.dmi'
