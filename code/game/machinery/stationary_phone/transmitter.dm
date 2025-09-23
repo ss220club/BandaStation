@@ -39,11 +39,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 /obj/structure/transmitter
 	name = "rotary telephone"
 	icon = 'icons/obj/machines/phone.dmi'
-	icon_state = "rotary_phone"
+	icon_state = "rotary"
 	desc = "The most generic phone you have ever seen. You struggle to imagine something even more devoid of personality and miserably fail."
 	anchored = TRUE
 	layer = OBJ_LAYER + 0.01
 	pass_flags = PASSTABLE
+	greyscale_config = /datum/greyscale_config/transmitter
+	greyscale_colors = "#6e7766"
 
 	/// The tape inserted
 	var/obj/item/tape/inserted_tape
@@ -130,6 +132,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 		if(COMMSIG_RINGBACK)
 			status = STATUS_OUTGOING
+			stop_loops()
 			outring_loop.start()
 			update_icon()
 
@@ -146,11 +149,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			update_icon()
 
 		if(COMMSIG_ANSWER)
-			status = STATUS_ONGOING
+			status = STATUS_OUTGOING
 			if(ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
 				to_chat(M, span_notice("[icon2html(src, M)] Someone on the other side picks up the phone."))
 			update_icon()
+			outring_loop.stop()
+			stop_loops()
 
 		if(COMMSIG_TALK)
 			if(attached_to.loc && ismob(attached_to.loc))
@@ -180,8 +185,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	hangup_loop.stop()
 	outring_loop.stop()
 	dialtone_loop.stop()
-
-
 
 /// Generates a unique 8-character alphanumeric phone ID
 /obj/structure/transmitter/proc/generate_unique_phone_id()
@@ -250,13 +253,34 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 /obj/structure/transmitter/update_icon()
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_TRANSMITTER_UPDATE_ICON)
-	if(attached_to.loc != src)
-		icon_state = "[default_icon_state]_ear"
-		return
-	if(status == STATUS_INBOUND)
-		icon_state = "[default_icon_state]_ring"
+
+	cut_overlays()
+	icon_state = default_icon_state
+
+	if(attached_to.loc == src)
+		var/mutable_appearance/handset_overlay = mutable_appearance(icon, status == STATUS_INBOUND ? "rotary_handset_ring" : "rotary_handset")
+		handset_overlay.plane = plane
+		add_overlay(handset_overlay)
+
+	var/status_overlay
+
+	if(do_not_disturb == PHONE_DND_ON || do_not_disturb == PHONE_DND_FORCED)
+		status_overlay = "rotary_red"
 	else
-		icon_state = default_icon_state
+		if(status == STATUS_INBOUND)
+			status_overlay = "rotary_yellow"
+		else
+			status_overlay = "rotary_green"
+
+	if(status_overlay)
+		var/mutable_appearance/status_appearance = mutable_appearance(icon, status_overlay, src)
+		status_appearance.plane = plane
+		add_overlay(status_appearance)
+
+		var/mutable_appearance/emissive_overlay = emissive_appearance(icon, "rotary_light", src)
+		emissive_overlay.plane = FLOAT_PLANE
+		add_overlay(emissive_overlay)
+
 
 /obj/structure/transmitter/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
@@ -289,12 +313,12 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		CRASH("A transmitter with ID [phone_id] has no telephone!")
 
 	if(attached_to.loc == src)
-		to_chat(user, span_notice("[icon2html(src, user)] You pick up the [attached_to]."))
+		to_chat(user, span_notice("[icon2html(src, user)] You pick up [attached_to]."))
 		playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
 		user.put_in_active_hand(attached_to)
 		var/obj/structure/central_telephone_exchange/cte = GLOB.central_telephone_exchange
 		if(current_call && status == STATUS_INBOUND)
-			cte.process_commsig(phone_id, COMMSIG_ANSWER)
+			cte.process_commsig(phone_id, COMMSIG_ANSWER, current_call.phone_id)
 		else
 			cte.process_commsig(phone_id, COMMSIG_OFFHOOK)
 		update_icon()
@@ -331,14 +355,15 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(tool == attached_to)
 		recall_phone()
 		if(user.combat_mode)
-			to_chat(attached_to, span_warning("[icon2html(src, attached_to)] You slammed the [attached_to] on the cradle!"))
-			visible_message("[user] slams the [attached_to] on the [src]!")
-			playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 60)
-			playsound(loc, 'sound/machines/telephone/bell.ogg', 75, FALSE)
+			visible_message(span_warning("[user] slams [attached_to] on the [src]!"), span_warning("You slammed the [attached_to] on the cradle!"))
+			user.do_attack_animation(src)
+			Shake(2, 0, 10, shake_interval = 0.05 SECONDS)
+			playsound(src, SFX_TELEPHONE_HANDSET, 60)
+			playsound(src, 'sound/items/weapons/genhit1.ogg', 30, FALSE)
+			playsound(src, 'sound/machines/telephone/bell.ogg', 75, FALSE)
 		else
-			to_chat(attached_to, span_notice("[icon2html(src, attached_to)] You set the [attached_to] in the cradle."))
+			to_chat(attached_to, span_notice("[icon2html(src, user)] You set the [attached_to] in the cradle."))
 			playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
-
 		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/tape))
@@ -395,6 +420,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 /obj/structure/transmitter/ui_interact(mob/user, datum/tgui/ui)
 	if(status == STATUS_INBOUND)
 		return
+
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "PhoneMenu", "[display_name] Telephone")
@@ -539,8 +565,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			to_chat(attached_to_mob, span_notice("[icon2html(src, attached_to_mob)] You hang up the call."))
 			hangup_loop.start()
 
-	outring_loop.stop()
-
 	if(!forced && other && other.current_call == src)
 		other.end_call(TRUE, timeout)
 
@@ -548,10 +572,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	status = STATUS_IDLE
 	STOP_PROCESSING(SSobj, src)
 	update_icon()
-
-	busy_loop.stop()
-	hangup_loop.stop()
-	outring_loop.stop()
+	stop_loops()
 
 /obj/structure/transmitter/proc/try_ring()
 	if(!current_call || attached_to.loc != src || status != STATUS_INBOUND)

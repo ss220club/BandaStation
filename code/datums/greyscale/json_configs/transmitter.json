@@ -1,0 +1,26 @@
+{
+	"rotary": [
+		{
+			"type": "icon_state",
+			"icon_state": "rotary",
+			"blend_mode": "overlay",
+			"color_ids": [1]
+		}
+	],
+	"rotary_handset": [
+		{
+			"type": "icon_state",
+			"icon_state": "rotary_handset",
+			"blend_mode": "overlay",
+			"color_ids": [1]
+		}
+	],
+	"rotary_handset_ring": [
+		{
+			"type": "icon_state",
+			"icon_state": "rotary_handset_ring",
+			"blend_mode": "overlay",
+			"color_ids": [1]
+		}
+	]
+}

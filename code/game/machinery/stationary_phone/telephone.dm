@@ -1,11 +1,11 @@
 #define MAX_RANGE 3
 
 /obj/item/telephone
-	name = "telephone"
+	name = "handset"
 	icon = 'icons/obj/machines/phone.dmi'
 	lefthand_file = 'icons/mob/inhands/equipment/phone_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/phone_righthand.dmi'
-	icon_state = "rpb_phone"
+	icon_state = "phone"
 	w_class = WEIGHT_CLASS_BULKY
 	var/obj/structure/transmitter/attached_to
 	var/raised = FALSE
@@ -25,7 +25,7 @@
 
 /obj/item/telephone/examine(mob/user)
 	. = ..()
-	. += span_notice("Activate item to lower [src] to stop talking and listening to it.")
+	. += span_notice("Use in hand to lower [src] to stop talking and listening to it.")
 
 /obj/item/telephone/interact(mob/user)
 	if(attached_to && get_dist(user, attached_to) > MAX_RANGE)
@@ -47,6 +47,7 @@
 			update_beam()
 			if(!do_zlevel_check())
 				attached_to.recall_phone()
+
 			if(attached_to && !ismob(old_loc))
 				if(get_dist(attached_to, src) > MAX_RANGE)
 					if(ismob(loc))
@@ -140,7 +141,7 @@
 		return
 	if(!to_raise)
 		raised = FALSE
-		icon_state = "rpb_phone"
+		icon_state = "phone"
 	else
 		raised = TRUE
 
@@ -184,7 +185,7 @@
 	start_sound = 'sound/machines/telephone/dial.ogg'
 	start_length = 3.2 SECONDS
 	mid_sounds = 'sound/machines/telephone/ring_outgoing.ogg'
-	mid_length = 2.1 SECONDS
+	mid_length = 6 SECONDS
 	volume = 20
 
 /datum/looping_sound/telephone/busy

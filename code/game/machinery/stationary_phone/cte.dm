@@ -1,8 +1,7 @@
 GLOBAL_VAR_INIT(central_telephone_exchange, null)
 
-#define STATUS_IDLE                 "Idle"
-#define STATUS_DIALING              "Dialing"
-#define STATUS_ENDED                "Ended"
+#define STATUS_DIALING							"Dialing"
+#define STATUS_RINGING							"Ringing"
 #define TIMEOUT_DURATION            30 SECONDS
 
 #define COMMSIG_OFFHOOK             "Communication Signal - Offhook"           // The telephone is removed from the hook
@@ -17,31 +16,9 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 #define COMMSIG_HANGUP              "Communication Signal - Hangup"	           // The other side has hanged up
 #define COMMSIG_TIMEOUT             "Communication Signal - Timeout"	         // The line has been inactive for over 30 seconds
 
-/datum/exchange_session
-	var/obj/structure/transmitter/source
-	var/obj/structure/transmitter/target
-	var/status
-	var/starttime
-	var/endtime
-	var/list/history = list()
-
-/datum/exchange_session/New(obj/structure/transmitter/source_call, obj/structure/transmitter/target_call)
-	. = ..()
-	source = source_call
-	target = target_call
-	status = STATUS_IDLE
-	starttime = time2text(world.time)
-
-	addtimer(CALLBACK(src, PROC_REF(timeout)), TIMEOUT_DURATION)
-
-/datum/exchange_session/proc/timeout()
-	if(status == STATUS_IDLE)
-		source.process_commsig(COMMSIG_TIMEOUT)
-
 /obj/structure/central_telephone_exchange
 	name = "Central Telephone Exchange unit"
 	desc = "A central switching unit responsible for connecting telephone calls within the station sectors."
-	var/list/active_sessions = list()
 
 /obj/structure/central_telephone_exchange/Initialize(mapload)
 	. = ..()
@@ -73,70 +50,55 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 				device.process_commsig(COMMSIG_NUMBER_NOT_FOUND)
 				return
 
-			if(find_session_by_source(device) || find_session_by_target(target))
+			if(is_device_busy(device) || is_device_busy(target))
 				device.process_commsig(COMMSIG_BUSY)
 				return
 
 			device.process_commsig(COMMSIG_RINGBACK)
 			target.process_commsig(COMMSIG_RINGING, device_id)
 
-			init_session(device, target)
-
-		if(COMMSIG_BUSY)
-			var/obj/structure/transmitter/target = find_device(data)
-			if(target)
-				target.process_commsig(COMMSIG_BUSY)
+			addtimer(CALLBACK(src, PROC_REF(timeout_call), device_id, data), TIMEOUT_DURATION)
 
 		if(COMMSIG_ANSWER)
 			var/obj/structure/transmitter/new_caller = find_device(data)
-			var/datum/exchange_session/session = find_session_by_source(new_caller)
-			if(session && session.target == device)
+			if(new_caller)
 				device.process_commsig(COMMSIG_ANSWER, new_caller.phone_id)
+				new_caller.process_commsig(COMMSIG_ANSWER, device_id)
 
 		if(COMMSIG_HANGUP)
-			var/datum/exchange_session/session = find_session_by_source(device)
-			if(!session)
-				session = find_session_by_target(device)
-			if(session)
-				var/obj/structure/transmitter/other = (session.source == device) ? session.target : session.source
-				device.process_commsig(COMMSIG_HANGUP)
+			var/connected_id = get_connected_device(device)
+			if(connected_id)
+				var/obj/structure/transmitter/other = find_device(connected_id)
 				if(other)
 					other.process_commsig(COMMSIG_HANGUP)
-				active_sessions -= session
-
-		if(COMMSIG_NUMBER_NOT_FOUND)
-			device.process_commsig(COMMSIG_NUMBER_NOT_FOUND)
-
-		if(COMMSIG_RINGBACK)
-			device.process_commsig(COMMSIG_RINGBACK)
-
-		if(COMMSIG_RINGING)
-			device.process_commsig(COMMSIG_RINGING, data)
+			device.process_commsig(COMMSIG_HANGUP)
 
 		if(COMMSIG_TALK)
 			var/target_id = data["target_id"]
 			var/message = data["message"]
 			var/obj/structure/transmitter/target = find_device(target_id)
-			if(target)
-				// device.process_commsig(COMMSIG_TALK, data)
+			if(target && are_devices_connected(device, target))
 				target.process_commsig(COMMSIG_TALK, message)
 
-/obj/structure/central_telephone_exchange/proc/init_session(obj/structure/transmitter/source, obj/structure/transmitter/target)
-	var/datum/exchange_session/session = new(source, target)
-	active_sessions += session
-	return session
+/obj/structure/central_telephone_exchange/proc/is_device_busy(obj/structure/transmitter/device)
+	return (device.status == STATUS_RINGING || device.status == STATUS_DIALING)
 
-/obj/structure/central_telephone_exchange/proc/find_session_by_source(src)
-	for(var/datum/exchange_session/session in active_sessions)
-		if(session.source == src)
-			return session
+/obj/structure/central_telephone_exchange/proc/get_connected_device(obj/structure/transmitter/device)
+	if(device.current_call)
+		return device.current_call
 	return null
 
-/obj/structure/central_telephone_exchange/proc/find_session_by_target(tgt)
-	for(var/datum/exchange_session/session in active_sessions)
-		if(session.target == tgt)
-			return session
-	return null
+/obj/structure/central_telephone_exchange/proc/are_devices_connected(obj/structure/transmitter/device1, obj/structure/transmitter/device2)
+	return (device1.current_call == device2 && device2.current_call == device1)
+
+/obj/structure/central_telephone_exchange/proc/timeout_call(caller_id, target_id)
+	var/obj/structure/transmitter/new_caller = find_device(caller_id)
+	var/obj/structure/transmitter/target = find_device(target_id)
+
+	if(new_caller && target)
+		if(new_caller.status == STATUS_DIALING && target.status == STATUS_RINGING)
+			new_caller.process_commsig(COMMSIG_TIMEOUT)
+			target.process_commsig(COMMSIG_TIMEOUT)
 
 #undef COMMSIG_OFFHOOK
 #undef COMMSIG_DIALTONE
@@ -150,6 +112,6 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 #undef COMMSIG_HANGUP
 #undef COMMSIG_TIMEOUT
 
-#undef STATUS_IDLE
 #undef STATUS_DIALING
-#undef STATUS_ENDED
+#undef STATUS_RINGING
+#undef TIMEOUT_DURATION

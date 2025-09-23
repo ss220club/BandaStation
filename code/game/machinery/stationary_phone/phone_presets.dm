@@ -1,13 +1,13 @@
-#define PHONE_NET_PUBLIC	     "Public"
-#define PHONE_NET_COMMAND	     "Command"
-#define PHONE_NET_CENTCOMM	   "CentComm"
-#define PHONE_NET_BRIDGE	     "Bridge"
-#define PHONE_NET_SYNDIE	     "Syndicate"
+#define PHONE_NET_PUBLIC	     			"Public"
+#define PHONE_NET_COMMAND	     			"Command"
+#define PHONE_NET_CENTCOMM	   			"CentComm"
+#define PHONE_NET_BRIDGE	     			"Bridge"
+#define PHONE_NET_SYNDIE	     			"Syndicate"
 
-#define PHONE_DND_FORCED 2
-#define PHONE_DND_ON 1
-#define PHONE_DND_OFF 0
-#define PHONE_DND_FORBIDDEN -1
+#define PHONE_DND_FORCED            "Forced"
+#define PHONE_DND_ON                "On"
+#define PHONE_DND_OFF               "Off"
+#define PHONE_DND_FORBIDDEN         "Forbidden"
 
 /// always available.
 /obj/structure/transmitter/no_dnd
@@ -58,6 +58,9 @@
 	if(input_name)
 		name = input_name
 		phone_id = input_name
+
+/obj/structure/transmitter/engineering
+	greyscale_colors = COLOR_LIGHT_ORANGE
 
 #undef PHONE_NET_PUBLIC
 #undef PHONE_NET_COMMAND
