@@ -35,7 +35,7 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 	return null
 
 /obj/structure/central_telephone_exchange/proc/process_commsig(device_id, commsig, data)
-	to_chat(world, "DEBUG: the master CTE received [commsig] from [device_id] with data ([data])")
+	// to_chat(world, "DEBUG: the master CTE received [commsig] from [device_id] with data ([data])")
 	var/obj/structure/transmitter/device = find_device(device_id)
 	if(!device)
 		CRASH("A transmitter insists it's ID is [device_id], but was not found in the list for the given ID.")

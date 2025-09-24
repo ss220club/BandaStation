@@ -76,8 +76,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/is_advanced = TRUE
 	/// Last 5 call origins
 	var/list/callers_list = list()
-	/// If this phone's `display_name` can be changed
-	var/can_rename = FALSE
 	// If calling this phone is free of charge
 	var/is_free = TRUE
 	// If the next call has been paid for
@@ -113,7 +111,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /// Processes incoming communication signals. Arguments: `commsig`: string, `data`: object
 /obj/structure/transmitter/proc/process_commsig(commsig, data)
-	to_chat(world, "DEBUG: transmitter [display_name] with ID [phone_id] received [commsig] with data ([data])")
+	// to_chat(world, "DEBUG: transmitter [display_name] with ID [phone_id] received [commsig] with data ([data])")
 	stop_loops()
 	switch(commsig)
 		if(COMMSIG_DIALTONE)
@@ -160,8 +158,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(COMMSIG_TALK)
 			if(attached_to.loc && ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
-				// M.playsound_local(get_turf(M), 'sound/machines/telephone/voice.ogg', 50)
-				to_chat(M, span_notice("[icon2html(src, M)] [src] says, \"[data]\""))
+				to_chat(M, span_notice("[icon2html(src, M)] [src] says, \"[capitalize(data)]\""))
 
 		if(COMMSIG_HANGUP)
 			end_call(forced = TRUE)
@@ -169,7 +166,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 		if(COMMSIG_TIMEOUT)
 			status = STATUS_IDLE
-			// playsound(src, 'sound/machines/telephone/timeout.ogg', 50)
 			end_call(forced = TRUE, timeout = TRUE)
 			update_icon()
 
@@ -197,7 +193,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		for(var/i in 97 to 122)
 			valid_chars += ascii2text(i)
 
-	var/unique_id
+	var/unique_id = phone_id
 	var/attempts = 0
 	var/max_attempts = 100
 
@@ -239,9 +235,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/examine(mob/user)
 	. = ..()
-
-	if(can_rename)
-		. += span_notice("Alt-LMB to change the phone ID.")
 
 	if(is_advanced && (current_call))
 		. += span_notice("Now calling: [current_call.display_name]")
