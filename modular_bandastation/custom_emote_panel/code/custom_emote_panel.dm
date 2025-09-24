@@ -14,9 +14,9 @@
 /*
 	Панель эмоутов была переделана, и теперь вместо простого ассоциативного списка `emotes["sigh"] = "вздох"`
 	у нас будет один из вариантов:
-	 * `emotes["вздох"] = list("type" = 1, "key" = "sigh")`
- 	 * `emotes["вздох"] = list("type" = 2, "key" = "sigh", "message_override" = "круто по-кастомну вздыхает")`
-	 * `emotes["вздох"] = list("type" = 3, "message" = "круто по-кастомну вздыхает")`
+	* `emotes["вздох"] = list("type" = 1, "key" = "sigh")`
+	* `emotes["вздох"] = list("type" = 2, "key" = "sigh", "message_override" = "круто по-кастомну вздыхает")`
+	* `emotes["вздох"] = list("type" = 3, "message" = "круто по-кастомну вздыхает")`
 	Где 1, 2 и 3 - TGUI_PANEL_EMOTE_TYPE_DEFAULT, TGUI_PANEL_EMOTE_TYPE_CUSTOM и TGUI_PANEL_EMOTE_TYPE_ME соответственно.
 	В чём отличие между вторым и третьим вариантом? Во втором варианте всё ещё будет звук от "sigh". Особенно актуально в
 	случае эмоутов с особыми эффектами (щелчками, маниакальным смехом и т.д.)
@@ -43,7 +43,7 @@
 /datum/tgui_panel/proc/populate_all_emotes_list()
 	if(length(all_emotes))
 		return
-	for(var/emote_key as anything in GLOB.emote_list)
+	for(var/emote_key in GLOB.emote_list)
 		var/list/emote_list = GLOB.emote_list[emote_key]
 		for(var/datum/emote/emote in emote_list)
 			if(is_type_in_list(emote, blacklisted_emote_types))
