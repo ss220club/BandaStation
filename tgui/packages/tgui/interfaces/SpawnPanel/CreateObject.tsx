@@ -58,7 +58,7 @@ export function CreateObject(props: CreateObjectProps) {
   const { query, setQuery, results } = useFuzzySearch({
     searchArray: Object.keys(allObjects),
     matchStrategy: 'smart',
-    getSearchString: (key) => (searchBy ? key : allObjects[key]?.name || ''),
+    getSearchString: (key) => (!searchBy ? key : allObjects[key]?.name || ''), // BANDASTATION FIX: on search by changed
   });
 
   const filteredResults = results.filter((obj) => {
@@ -335,6 +335,7 @@ export function CreateObject(props: CreateObjectProps) {
                   icon={searchBy ? 'code' : 'font'}
                   onClick={() => {
                     updateSearchBy(!searchBy);
+                    updateSearchText(query); // BANDASTATION FIX: on search by changed
                   }}
                   tooltip={`Cycle the search method (by name, by type)`}
                 >

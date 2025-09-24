@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(spawnpanels_by_ckey, list())
 	/// Custom atom description (leave `null` for initial).
 	var/atom_desc = null
 	/// Custom atom dir (leave `null` for `2`).
-	var/atom_dir = 2 // BANDASTATION EDIT: No more facing up objects/mobs
+	var/atom_dir = null // BANDASTATION EDIT: No more facing up objects/mobs
 	/// An associative list of x-y-z offsets.
 	var/offset = list()
 	/// The pivot point for offsetting — relative or absolute.
@@ -168,7 +168,7 @@ GLOBAL_LIST_INIT(spawnpanels_by_ckey, list())
 			var/list/spawn_params = list(
 				"selected_atom" = selected_atom,
 				"offset" = params["offset"],
-				"atom_dir" = text2num(params["dir"]) || 1,
+				"atom_dir" = text2num(params["atom_dir"]) || 2, // BANDASTATION FIX: No more facing up objects/mobs
 				"atom_amount" = text2num(params["atom_amount"]) || 1,
 				"atom_name" = params["atom_name"],
 				"where_target_type" = params["where_target_type"] || WHERE_FLOOR_BELOW_MOB,
