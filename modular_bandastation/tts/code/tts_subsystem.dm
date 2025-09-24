@@ -239,6 +239,8 @@ SUBSYSTEM_DEF(tts220)
 	channel_override,
 )
 
+	set waitfor = FALSE
+
 	if(!is_enabled)
 		return
 	if(!message)
@@ -393,16 +395,14 @@ SUBSYSTEM_DEF(tts220)
 	postSFX = null,
 	channel_override = null,
 )
+	var/static/alist/channel_to_preference = alist(
+		CHANNEL_TTS_RADIO = /datum/preference/numeric/volume/sound_tts_volume_radio,
+		CHANNEL_TTS_ANNOUNCEMENT = /datum/preference/numeric/volume/sound_tts_volume_announcement,
+		CHANNEL_TTS_TELEPATHY = /datum/preference/numeric/volume/sound_tts_volume_telepathy
+	)
 
-	var/volume
-	switch(channel_override)
-		if(CHANNEL_TTS_RADIO)
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_radio)
-		if(CHANNEL_TTS_ANNOUNCEMENT)
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_announcement)
-		else
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume)
-
+	var/channel_volume_preference_path = channel_to_preference[channel_override] || /datum/preference/numeric/volume/sound_tts_volume
+	var/volume = listener?.client?.prefs?.read_preference(channel_volume_preference_path)
 	if(!volume)
 		return
 
