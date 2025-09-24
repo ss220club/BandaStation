@@ -67,7 +67,7 @@
 		if(user.put_in_hands(parent))
 			user.balloon_alert(user, "Извлечено: [parent.declent_ru(NOMINATIVE)]")
 			unregister_target_signals()
-			RemoveElement(/datum/element/contextual_screentip_bare_hands)
+			target.RemoveElement(/datum/element/contextual_screentip_bare_hands)
 			spotted_by.Cut()
 		else
 			user.balloon_alert(user, "Не удалось извлечь: [parent.declent_ru(NOMINATIVE)]")

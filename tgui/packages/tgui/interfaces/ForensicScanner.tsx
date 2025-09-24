@@ -23,6 +23,7 @@ type LogData = {
   Blood: Record<string, string>;
   Reagents: Record<string, number>;
   'ID Access': Record<string, string[]>;
+  'Illegal Tech': Record<string, string>;
 };
 
 export const ForensicScanner = (props) => {
@@ -78,7 +79,7 @@ const ForensicLog = ({ log, index }: { log: LogData; index: number }) => {
         />
       }
     >
-      {!log.Prints && !log.Fibers && !log.Blood && !log.Reagents ? (
+      {!log.Prints && !log.Fibers && !log.Blood && !log.Reagents && !log['Illegal Tech'] ? (
         <Box opacity={0.5}>No forensic traces found.</Box>
       ) : (
         <LabeledList>
@@ -136,6 +137,20 @@ const ForensicLog = ({ log, index }: { log: LogData; index: number }) => {
                   </LabeledList.Item>
                 ))}
               </LabeledList>
+            </LabeledList.Item>
+          )}
+          {log['Illegal Tech'] && Object.values(log['Illegal Tech']).length > 0 && (
+            <LabeledList.Item label="Illegal Tech">
+              {Object.values(log['Illegal Tech']).map((print) => (
+                <Box
+                  key={print}
+                  py={0.5}
+                  style={{ textTransform: 'uppercase' }}
+                >
+                  <Icon name="spider" mr={1} color="red" />
+                  {print}
+                </Box>
+              ))}
             </LabeledList.Item>
           )}
         </LabeledList>
