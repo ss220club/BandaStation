@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(spawnpanels_by_ckey, list())
 	/// Custom atom description (leave `null` for initial).
 	var/atom_desc = null
 	/// Custom atom dir (leave `null` for `2`).
-	var/atom_dir = 1
+	var/atom_dir = 2 // BANDASTATION EDIT: No more facing up objects/mobs
 	/// An associative list of x-y-z offsets.
 	var/offset = list()
 	/// The pivot point for offsetting — relative or absolute.
