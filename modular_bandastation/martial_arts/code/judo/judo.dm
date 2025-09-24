@@ -78,8 +78,6 @@
 	if(defender.check_block(attacker, 0, "захват", UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
-	defender.Stun(0.4 SECONDS)
-
 	add_to_streak("G", defender)
 	return check_streak(attacker, defender) ? MARTIAL_ATTACK_SUCCESS : MARTIAL_ATTACK_INVALID
 
