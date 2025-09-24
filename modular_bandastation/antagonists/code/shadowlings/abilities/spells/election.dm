@@ -152,7 +152,7 @@
 		for(var/mob/living/carbon/human/L in hive.lings)
 			if(QDELETED(L))
 				continue
-			to_chat(L, span_boldnotice("Лидером улья выбран: [leader.real_name].[GLOB.is_shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
+			to_chat(L, span_boldnotice("Лидером улья выбран: [leader.real_name].[!GLOB.is_shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
 
 	remove_vote_action_from_all()
 

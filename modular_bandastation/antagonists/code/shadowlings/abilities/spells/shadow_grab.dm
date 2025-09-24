@@ -31,14 +31,19 @@
 		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
-	var/obj/effect/dummy/phased_mob/shadowling/P = istype(H.loc, /obj/effect/dummy/phased_mob/shadowling) ? H.loc : null
-	if(P)
-		var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
-		if(nearby)
-			P.forceMove(nearby)
-		P.eject_jaunter(FALSE)
+	var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
+	var/datum/action/cooldown/shadowling/shadow_phase/SP
+	for(var/datum/action/cooldown/shadowling/shadow_phase/X in H.actions)
+		SP = X; break
+	if(SP)
+		SP.materialize_near(H, nearby, FALSE)
 	else
-		H.remove_status_effect(/datum/status_effect/shadow/phase)
+		if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
+			var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
+			if(istype(nearby)) P.forceMove(nearby)
+			P.eject_jaunter(FALSE)
+		else
+			H.remove_status_effect(/datum/status_effect/shadow/phase)
 
 	if(get_dist(H, T) > 1)
 		step_towards(H, T)
@@ -55,9 +60,6 @@
 			break
 		if(!T.grippedby(H, TRUE))
 			break
-
-	for(var/datum/action/cooldown/shadowling/shadow_phase/A in H.actions)
-		A.exit_phase(H, forced_out = FALSE)
 
 	return (H.pulling == T)
 

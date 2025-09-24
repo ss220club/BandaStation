@@ -6,7 +6,7 @@
 #define SHADOWLING_LIGHT_THRESHOLD 0.35
 #define SHADOWLING_DIM_THRESHOLD   0.1
 
-#define SHADOWLING_BRIGHT_BURN_PER_LIMB 2     // модификаторы получения урона на свету
+#define SHADOWLING_BRIGHT_BURN_PER_LIMB 2 // модификаторы получения урона на свету
 #define SHADOWLING_BRIGHT_BRUTE_PER_LIMB 2
 #define SHADOWLING_DARK_HEAL_PER_LIMB_DEEP 4.0 // модификатор отхила если темно
 #define SHADOWLING_DARK_HEAL_PER_LIMB_DIM  0.75 // модификатор отхила в полутьме

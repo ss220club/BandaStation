@@ -1,4 +1,3 @@
-// MARK: Ability
 /datum/action/cooldown/shadowling/root
 	name = "Путы"
 	desc = "Опутать цель тенями на 10 секунд. Работает только если цель стоит в тени."
@@ -58,7 +57,6 @@
 	StartCooldown()
 	return TRUE
 
-// MARK: Effects
 /obj/effect/shadow_bind_anchor
 	name = "writhing shadows"
 	desc = "Tendrils of shadow coil here."

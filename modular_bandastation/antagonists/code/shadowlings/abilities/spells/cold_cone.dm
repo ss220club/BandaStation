@@ -5,7 +5,7 @@
 
 /datum/action/cooldown/shadowling/cold_wave
 	name = "Волна холода"
-	desc = "Выплеск ледяной тьмы в 90° конусе на 4 тайла, наносящий 30 урона по выносливости и замедляющий врагов на 10 секунд."
+	desc = "Выплеск ледяной тьмы в 45° конусе на 4 тайла, наносящий 30 урона по выносливости и замедляющий врагов на 10 секунд."
 	button_icon_state = "shadow_cold"
 	cooldown_time = 20 SECONDS
 	requires_dark_user = FALSE

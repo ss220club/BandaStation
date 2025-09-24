@@ -69,14 +69,19 @@
 		owner.balloon_alert(owner, "Нет доступных целей")
 		return FALSE
 
-	var/obj/effect/dummy/phased_mob/shadowling/P = istype(H.loc, /obj/effect/dummy/phased_mob/shadowling) ? H.loc : null
-	if(P)
-		var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
-		if(nearby)
-			P.forceMove(nearby)
-		P.eject_jaunter(FALSE)
+	var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
+	var/datum/action/cooldown/shadowling/shadow_phase/SP
+	for(var/datum/action/cooldown/shadowling/shadow_phase/X in H.actions)
+		SP = X; break
+	if(SP)
+		SP.materialize_near(H, nearby, FALSE)
 	else
-		H.remove_status_effect(/datum/status_effect/shadow/phase)
+		if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
+			var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
+			if(istype(nearby)) P.forceMove(nearby)
+			P.eject_jaunter(FALSE)
+		else
+			H.remove_status_effect(/datum/status_effect/shadow/phase)
 
 	if(get_dist(H, T) > 1)
 		step_towards(H, T)
@@ -90,10 +95,6 @@
 		span_userdanger("Вы вырываетесь из тени и поражаете [T]!"),
 		ignored_mobs = null
 	)
-
-	to_chat(T, span_danger("Тень материализуется рядом — [H] наносит удар!"))
-	for(var/datum/action/cooldown/shadowling/shadow_phase/A in H.actions)
-		A.exit_phase(H, forced_out = FALSE)
 
 	T.apply_damage(20, BRUTE, null, sharpness = SHARP_POINTY)
 	H.do_attack_animation(T)

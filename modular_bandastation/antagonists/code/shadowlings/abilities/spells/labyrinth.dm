@@ -19,11 +19,11 @@
 /datum/action/cooldown/shadowling/labyrinth/is_action_active(atom/movable/screen/movable/action_button/_btn)
 	return stored_target
 
-/datum/action/cooldown/shadowling/root/unset_click_ability(mob/on_who, refund_cooldown)
+/datum/action/cooldown/shadowling/labyrinth/unset_click_ability(mob/on_who, refund_cooldown)
 	. = ..()
 	apply_button_overlay()
 
-/datum/action/cooldown/shadowling/root/set_click_ability(mob/on_who, refund_cooldown)
+/datum/action/cooldown/shadowling/labyrinth/set_click_ability(mob/on_who, refund_cooldown)
 	. = ..()
 	apply_button_overlay()
 

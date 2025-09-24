@@ -147,3 +147,22 @@
 		A.apply_button_overlay()
 
 	return TRUE
+
+/datum/action/cooldown/shadowling/shadow_phase/proc/materialize_near(mob/living/carbon/human/H, turf/nearby, forced_out = FALSE)
+	if(!istype(H))
+		return FALSE
+
+	// если в dummy — подвинем dummy к нужному тайлу и корректно выбросим
+	if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
+		var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
+		if(istype(nearby))
+			P.forceMove(nearby)
+		P.eject_jaunter(forced_out)
+		return TRUE
+
+	// если фаза статусом — снимем статус
+	if(H.has_status_effect(/datum/status_effect/shadow/phase))
+		H.remove_status_effect(/datum/status_effect/shadow/phase)
+		return TRUE
+
+	return FALSE

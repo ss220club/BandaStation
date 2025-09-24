@@ -51,8 +51,8 @@
 		if(SHADOWLING_ROLE_LESSER)
 			check_list = SHADOWLING_MINOR_ABILITIES
 		else
-			var/datum/antagonist/shadowling/hive = get_shadowling_antag_of(owner)
-			check_list = hive?.is_ascended ? SHADOWLING_ASCENDED_ABILITIES : SHADOWLING_BASE_ABILITIES
+			var/datum/antagonist/shadowling/antag_datum  = get_shadowling_antag_of(owner)
+			check_list = antag_datum?.is_ascended ? SHADOWLING_ASCENDED_ABILITIES : SHADOWLING_BASE_ABILITIES
 
 	return A.type in check_list
 

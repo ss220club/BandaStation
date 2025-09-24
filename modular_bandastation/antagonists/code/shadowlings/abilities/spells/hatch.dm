@@ -78,13 +78,11 @@
 	playsound(start, sfx_start, 60, TRUE)
 	to_chat(H, span_notice("Вы начинаете разрывать оболочку..."))
 
-	var/total_time = steps * step_time
 	var/turf/anchor_turf = get_turf(H)
 	var/area/anchor_area = get_area(H)
 	prev_alpha = H.alpha
 	H.alpha = 0
 	H.drop_all_held_items()
-	H.Paralyze(total_time)
 
 	for(var/i = 1, i <= steps, i++)
 		if(QDELETED(H) || H.stat == DEAD)
@@ -117,7 +115,13 @@
 		else
 			to_chat(H, span_notice("Тьма сгущается ([passed]/[total] сек)."))
 
-		sleep(step_time)
+		if(!do_after(H, step_time, H)) {
+			to_chat(H, span_warning("Вы вырвались из кокона — вылупление прервано."))
+			detach_cover()
+			cleanup(walls)
+			H.alpha = prev_alpha
+			return FALSE
+		}
 
 	if(QDELETED(H))
 		detach_cover()
