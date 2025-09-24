@@ -4,6 +4,7 @@
 	var/removal_delay = 5 SECONDS
 	var/list/spotted_by = list()
 	var/datum/weakref/target_ref
+	var/context_callback
 
 /datum/component/stealth_device/Initialize(install_delay = 3 SECONDS, is_silent_install = TRUE, removal_delay = 5 SECONDS)
 	if(!isitem(parent))
@@ -42,7 +43,8 @@
 	device.forceMove(installation_target)
 	RegisterSignal(installation_target, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(on_secondary_attack_hand))
 	RegisterSignal(installation_target, COMSIG_DETECTIVE_SCANNED, PROC_REF(on_scan))
-	installation_target.AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Извлечь скрытый объект", show_requirements_check_callback = CALLBACK(src, PROC_REF(show_requirements_check_callback)))
+	context_callback = CALLBACK(src, PROC_REF(show_requirements_check_callback))
+	installation_target.AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Извлечь скрытый объект", show_requirements_check_callback = context_callback)
 	spotted_by[user.mind] = TRUE
 	return TRUE
 
@@ -50,7 +52,6 @@
 	SIGNAL_HANDLER
 	spotted_by[user.mind] = TRUE
 	LAZYADD(extra_data[DETSCAN_CATEGORY_ILLEGAL], "Обнаружен скрытый объект: [parent.declent_ru(NOMINATIVE)].")
-	to_chat(user, span_alert("Обнаружен скрытый объект: [parent.declent_ru(NOMINATIVE)]"))
 
 /datum/component/stealth_device/proc/on_secondary_attack_hand(datum/source, mob/user)
 	SIGNAL_HANDLER
@@ -67,7 +68,7 @@
 		if(user.put_in_hands(parent))
 			user.balloon_alert(user, "Извлечено: [parent.declent_ru(NOMINATIVE)]")
 			unregister_target_signals()
-			target.RemoveElement(/datum/element/contextual_screentip_bare_hands)
+			target.RemoveElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Извлечь скрытый объект", show_requirements_check_callback = context_callback)
 			spotted_by.Cut()
 		else
 			user.balloon_alert(user, "Не удалось извлечь: [parent.declent_ru(NOMINATIVE)]")
