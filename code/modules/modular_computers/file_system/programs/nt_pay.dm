@@ -10,7 +10,7 @@
 	filedesc = "Nanotrasen Pay System"
 	downloader_category = PROGRAM_CATEGORY_DEVICE
 	program_open_overlay = "generic"
-	extended_desc = "An application that locally (in your sector) helps to transfer money or track your expenses and profits."
+	extended_desc = "Приложение, которое локально (в вашем секторе) помогает переводить деньги или отслеживать расходы и прибыль."
 	size = 2
 	tgui_id = "NtosPay"
 	program_icon = "money-bill-wave"

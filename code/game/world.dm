@@ -214,19 +214,23 @@ GLOBAL_VAR(restart_counter)
 		var/realtime = world.realtime
 		var/texttime = time2text(realtime, "YYYY/MM/DD", TIMEZONE_UTC)
 		GLOB.log_directory = "data/logs/[texttime]/round-"
+		GLOB.logis_logs_directory = "data/logis_logs/[texttime]/round-" // BANDASTATION ADDITION - Logis
 		GLOB.picture_logging_prefix = "L_[time2text(realtime, "YYYYMMDD", TIMEZONE_UTC)]_"
 		GLOB.picture_log_directory = "data/picture_logs/[texttime]/round-"
 		if(GLOB.round_id)
 			GLOB.log_directory += "[GLOB.round_id]"
+			GLOB.logis_logs_directory += "[GLOB.round_id]" // BANDASTATION ADDITION - Logis
 			GLOB.picture_logging_prefix += "R_[GLOB.round_id]_"
 			GLOB.picture_log_directory += "[GLOB.round_id]"
 		else
 			var/timestamp = replacetext(time_stamp(), ":", ".")
 			GLOB.log_directory += "[timestamp]"
+			GLOB.logis_logs_directory += "[timestamp]" // BANDASTATION ADDITION - Logis
 			GLOB.picture_log_directory += "[timestamp]"
 			GLOB.picture_logging_prefix += "T_[timestamp]_"
 	else
 		GLOB.log_directory = "data/logs/[override_dir]"
+		GLOB.logis_logs_directory += "data/logis_logs/[override_dir]" // BANDASTATION ADDITION - Logis
 		GLOB.picture_logging_prefix = "O_[override_dir]_"
 		GLOB.picture_log_directory = "data/picture_logs/[override_dir]"
 
@@ -365,6 +369,7 @@ GLOBAL_VAR(restart_counter)
 /world/Del()
 	QDEL_NULL(Tracy)
 	QDEL_NULL(Debugger)
+	rustg_close_async_http_client() // BANDSATION ADDITION - Rust Utils
 	. = ..()
 
 /world/proc/update_status()
