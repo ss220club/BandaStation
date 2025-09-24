@@ -63,7 +63,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/enabled = TRUE
 	/// Whether or not the phone will emit sound when receiving a call.
 	var/do_not_disturb = PHONE_DND_OFF
-	var/default_icon_state
 	/// What network does this phone belong to?
 	var/phone_category = PHONE_NET_PUBLIC
 	/// Which networks this phone can call?
@@ -83,7 +82,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/Initialize(mapload, new_phone_id, new_display_name)
 	. = ..()
-	default_icon_state = icon_state
 	attached_to = new phone_type(src)
 	RegisterSignal(attached_to, COMSIG_QDELETING, PROC_REF(override_delete))
 	update_icon()
@@ -248,7 +246,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	SEND_SIGNAL(src, COMSIG_TRANSMITTER_UPDATE_ICON)
 
 	cut_overlays()
-	icon_state = default_icon_state
 
 	if(attached_to.loc == src)
 		var/mutable_appearance/handset_overlay = mutable_appearance(icon, status == STATUS_INBOUND ? "rotary_handset_ring" : "rotary_handset")
@@ -273,7 +270,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		var/mutable_appearance/emissive_overlay = emissive_appearance(icon, "rotary_light", src)
 		emissive_overlay.plane = FLOAT_PLANE
 		add_overlay(emissive_overlay)
-
 
 /obj/structure/transmitter/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
@@ -605,7 +601,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		user_mob.dropItemToGround(attached_to)
 	playsound(loc, SFX_TELEPHONE_HANDSET, 20, FALSE, 7)
 	attached_to.forceMove(src)
-	send_commsig(COMMSIG_HANGUP)
+	send_commsig(COMMSIG_HANGUP, current_call && current_call.phone_id)
 	end_call()
 	stop_loops()
 	current_call = null

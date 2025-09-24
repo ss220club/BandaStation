@@ -22,5 +22,29 @@
 			"blend_mode": "overlay",
 			"color_ids": [1]
 		}
+	],
+	"wall_phone": [
+		{
+			"type": "icon_state",
+			"icon_state": "wall_phone",
+			"blend_mode": "overlay",
+			"color_ids": [1]
+		}
+	],
+	"wall_handset": [
+		{
+			"type": "icon_state",
+			"icon_state": "wall_handset",
+			"blend_mode": "overlay",
+			"color_ids": [1]
+		}
+	],
+	"phone": [
+		{
+			"type": "icon_state",
+			"icon_state": "phone",
+			"blend_mode": "overlay",
+			"color_ids": [1]
+		}
 	]
 }
