@@ -2,6 +2,10 @@
 	icon = 'modular_bandastation/aesthetics/boxes/icons/boxes.dmi'
 	icon_state = "default"
 
+/obj/item/flatpack
+	icon = 'modular_bandastation/aesthetics/boxes/icons/boxes.dmi'
+	icon_state = "flatpack"
+
 // MARK: Default
 /obj/item/storage/box/aquarium_props
 	illustration = "fish"

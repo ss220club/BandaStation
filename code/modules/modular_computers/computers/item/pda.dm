@@ -43,6 +43,7 @@
 		/datum/computer_file/program/nt_pay,
 		/datum/computer_file/program/notepad,
 		/datum/computer_file/program/crew_manifest,
+		/datum/computer_file/program/navigator, // BANDASTATION ADDITION
 	)
 	///List of items that can be stored in a PDA
 	var/static/list/contained_item = list(
@@ -70,7 +71,7 @@
 		apps_to_download += default_programs + pda_programs
 	apps_to_download += starting_programs
 
-	for(var/programs as anything in apps_to_download)
+	for(var/programs in apps_to_download)
 		var/datum/computer_file/program/program_type = new programs
 		store_file(program_type)
 
@@ -160,7 +161,7 @@
 	if(inserted_item)
 		swap_pen(user, tool)
 	else
-		balloon_alert(user, "вставлен [tool.declent_ru(ACCUSATIVE)]")
+		balloon_alert(user, "вставлен[genderize_ru(tool.gender, "", "а", "о")] [tool.declent_ru(NOMINATIVE)]")
 		inserted_item = tool
 		playsound(src, 'sound/machines/pda_button/pda_button1.ogg', 50, TRUE)
 	return ITEM_INTERACT_SUCCESS
@@ -185,7 +186,7 @@
 		return
 
 	if(inserted_item)
-		balloon_alert(user, "извлечён [inserted_item.declent_ru(ACCUSATIVE)]")
+		balloon_alert(user, "извлечен[genderize_ru(inserted_item.gender, "", "а", "о")] [inserted_item.declent_ru(NOMINATIVE)]")
 		user.put_in_hands(inserted_item)
 		inserted_item = null
 		update_appearance()
@@ -210,13 +211,13 @@
 	if (ismob(loc))
 		var/mob/loc_mob = loc
 		loc_mob.show_message(
-			msg = span_userdanger("Ваш [declent_ru(ACCUSATIVE)] взрывается!"),
+			msg = span_userdanger("Ваш [declent_ru(NOMINATIVE)] взрывается!"),
 			type = MSG_VISUAL,
 			alt_msg = span_warning("Вы слышите громкий хлопок!"),
 			alt_type = MSG_AUDIBLE,
 		)
 	else
-		visible_message(span_danger("[declent_ru(ACCUSATIVE)] взрывается!"), span_warning("Вы слышите громкий хлопок!"))
+		visible_message(span_danger("[declent_ru(NOMINATIVE)] взрывается!"), span_warning("Вы слышите громкий хлопок!"))
 
 	target.client?.give_award(/datum/award/achievement/misc/clickbait, target)
 
