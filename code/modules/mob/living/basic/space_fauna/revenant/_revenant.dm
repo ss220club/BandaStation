@@ -6,7 +6,7 @@
 /// Admin-spawn or random event
 /mob/living/basic/revenant
 	name = "revenant"
-	desc = "A malevolent spirit."
+	desc = "Злобный дух."
 	icon = 'icons/mob/simple/mob.dmi'
 	icon_state = "revenant_idle"
 	mob_biotypes = MOB_SPIRIT | MOB_UNDEAD
@@ -23,14 +23,14 @@
 	lighting_cutoff_green = 15
 	lighting_cutoff_blue = 35
 
-	friendly_verb_continuous = "touches"
-	friendly_verb_simple = "touch"
-	response_help_continuous = "passes through"
-	response_help_simple = "pass through"
-	response_disarm_continuous = "swings through"
-	response_disarm_simple = "swing through"
-	response_harm_continuous = "punches through"
-	response_harm_simple = "punch through"
+	friendly_verb_continuous = "касаетесь"
+	friendly_verb_simple = "трогаете"
+	response_help_continuous = "проходите насквозь"
+	response_help_simple = "проходите сквозь"
+	response_disarm_continuous = "взмахивает насквозь"
+	response_disarm_simple = "взмахивает сквозь"
+	response_harm_continuous = "пробивает насквозь"
+	response_harm_simple = "пробивает сквозь"
 	unsuitable_atmos_damage = 0
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, STAMINA = 0, OXY = 0) //I don't know how you'd apply those, but revenants no-sell them anyway.
 	habitable_atmos = null
@@ -155,10 +155,10 @@
 
 /mob/living/basic/revenant/get_status_tab_items()
 	. = ..()
-	. += "Current Essence: [essence >= max_essence ? essence : "[essence] / [max_essence]"] E"
-	. += "Total Essence Stolen: [essence_accumulated] SE"
-	. += "Unused Stolen Essence: [essence_excess] SE"
-	. += "Perfect Souls Stolen: [perfectsouls]"
+	. += "Текущая эссенция: [essence >= max_essence ? essence : "[essence] / [max_essence]"] Э"
+	. += "Всего украдено эссенции: [essence_accumulated] УЭ"
+	. += "Неиспользованная эссенция: [essence_excess] УЭ"
+	. += "Идеальных душ похищено: [perfectsouls]"
 
 /mob/living/basic/revenant/update_health_hud()
 	if(isnull(hud_used))
@@ -169,7 +169,7 @@
 		essencecolor = "#9A5ACB" //oh boy you've got a lot of essence
 	else if(essence <= 0)
 		essencecolor = "#1D2953" //oh jeez you're dying
-	hud_used.healths.maptext = MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='[essencecolor]'>[essence]E</font></div>")
+	hud_used.healths.maptext = MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='[essencecolor]'>[essence]Э</font></div>")
 
 /mob/living/basic/revenant/say(
 	message,
@@ -189,7 +189,7 @@
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, span_boldwarning("You cannot send IC messages (muted)."))
+			to_chat(src, span_boldwarning("Вы не можете отправлять IC сообщения (мут)."))
 			return
 		if (!(ignore_spam || forced) && client.handle_spam_prevention(message, MUTE_IC))
 			return
@@ -198,7 +198,7 @@
 		message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN)) // BANDASTATION EDIT - Sanitize emotes
 
 	log_talk(message, LOG_SAY)
-	var/rendered = span_deadsay("<b>UNDEAD: [src]</b> says, \"[message]\"")
+	var/rendered = span_deadsay("<b>НЕЖИТЬ: [src]</b> говорит, \"[message]\"")
 	relay_to_list_and_observers(rendered, GLOB.revenant_relay_mobs, src)
 
 /mob/living/basic/revenant/ClickOn(atom/A, params) //revenants can't interact with the world directly, so we gotta do some wacky override stuff
@@ -311,8 +311,8 @@
 	dormant = TRUE
 
 	visible_message(
-		span_warning("[src] lets out a waning screech as violet mist swirls around its dissolving body!"),
-		span_revendanger("NO! No... it's too late, you can feel your essence [pick("breaking apart", "drifting away")]..."),
+		span_warning("[src] издаёт затихающий визг, пока фиолетовый туман клубится вокруг его растворяющегося тела!"),
+		span_revendanger("НЕТ! Нет... уже слишком поздно, вы чувствуете, как ваша эссенция [pick("распадается на части", "рассеивается")]..."),
 	)
 
 	SetInvisibility(INVISIBILITY_NONE, id=type)
@@ -327,7 +327,7 @@
 	if(QDELETED(src) || !dormant) // something fucky happened, abort. we MUST be dormant to go inside the ectoplasm.
 		return
 
-	visible_message(span_danger("[src]'s body breaks apart into a fine pile of blue dust."))
+	visible_message(span_danger("[src] рассыпается в мелкую голубую пыль."))
 
 	var/obj/item/ectoplasm/revenant/goop = new(get_turf(src)) // the ectoplasm will handle moving us out of dormancy
 	goop.old_ckey = client.ckey
@@ -337,7 +337,7 @@
 /mob/living/basic/revenant/proc/on_move(datum/source, atom/entering_loc)
 	SIGNAL_HANDLER
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM)) // just in case it occurs, need to provide some feedback
-		balloon_alert(src, "can't move!")
+		balloon_alert(src, "нельзя двигаться!")
 		return
 
 	if(isnull(orbiting) || incorporeal_move_check(entering_loc))
@@ -351,19 +351,19 @@
 /mob/living/basic/revenant/proc/create_login_string()
 	RETURN_TYPE(/list)
 	var/list/returnable_list = list()
-	returnable_list += span_deadsay(span_boldbig("You are a revenant."))
-	returnable_list += span_bold("Your formerly mundane spirit has been infused with alien energies and empowered into a revenant.")
-	returnable_list += span_bold("You are not dead, not alive, but somewhere in between. You are capable of limited interaction with both worlds.")
-	returnable_list += span_bold("You are invincible and invisible to everyone but other ghosts. Most abilities will reveal you, rendering you vulnerable.")
-	returnable_list += span_bold("To function, you are to drain the life essence from humans. This essence is a resource, as well as your health, and will power all of your abilities.")
-	returnable_list += span_bold("<i>You do not remember anything of your past lives, nor will you remember anything about this one after your death.</i>")
-	returnable_list += span_bold("Be sure to read <a href=\"https://tgstation13.org/wiki/Revenant\">the wiki page</a> to learn more.")
+	returnable_list += span_deadsay(span_boldbig("Вы - Ревенант."))
+	returnable_list += span_bold("Ваш некогда обычный дух был наполнен чужеродной энергией и превращён в ревенанта.")
+	returnable_list += span_bold("Вы не мертвы и не живы, а находитесь где-то посередине. Вы способны ограниченно взаимодействовать с обоими мирами.")
+	returnable_list += span_bold("Вы неуязвимы и невидимы для всех, кроме других призраков. Большинство способностей раскроют вас, сделав уязвимым.")
+	returnable_list += span_bold("Для функционирования вам необходимо поглощать жизненную эссенцию гуманоидов. Эта эссенция является ресурсом, вашим здоровьем и источником силы для всех способностей.")
+	returnable_list += span_bold("<i>Вы не помните ничего из своих прошлых жизней, как и не будете помнить ничего об этой после своей смерти.</i>")
+	returnable_list += span_bold("Обязательно прочтите <a href=\"https://bs.ss220.club/index.php/Ревенант\">страницу на вики</a>, чтобы узнать больше.")
 	return returnable_list
 
 /mob/living/basic/revenant/generate_random_mob_name()
 	var/list/built_name_strings = list()
 	built_name_strings += pick(strings(REVENANT_NAME_FILE, "spirit_type"))
-	built_name_strings += " of "
+	//built_name_strings += " of " // BANDASTATION REMOVAL
 	built_name_strings += pick(strings(REVENANT_NAME_FILE, "adverb"))
 	built_name_strings += pick(strings(REVENANT_NAME_FILE, "theme"))
 	return built_name_strings.Join("")
@@ -371,8 +371,8 @@
 /mob/living/basic/revenant/proc/on_baned(obj/item/weapon, mob/living/user)
 	SIGNAL_HANDLER
 	visible_message(
-		span_warning("[src] violently flinches!"),
-		span_revendanger("As [weapon] passes through you, you feel your essence draining away!"),
+		span_warning("[src] резко вздрагивает!"),
+		span_revendanger("Когда [weapon.declent_ru(ACCUSATIVE)] проходит сквозь вас, вы чувствуете, как ваша сущность покидает вас!"),
 	)
 	apply_status_effect(/datum/status_effect/revenant/inhibited, 3 SECONDS)
 
@@ -383,17 +383,17 @@
 		return TRUE // what? whatever let it happen
 
 	if(step_turf.turf_flags & NOJAUNT)
-		to_chat(src, span_warning("Some strange aura is blocking the way."))
+		to_chat(src, span_warning("Какая-то странная аура преграждает путь."))
 		return FALSE
 
 	if(locate(/obj/effect/decal/cleanable/food/salt) in step_turf)
-		balloon_alert(src, "blocked by salt!")
+		balloon_alert(src, "заблокировано солью!")
 		apply_status_effect(/datum/status_effect/revenant/revealed, 2 SECONDS)
 		apply_status_effect(/datum/status_effect/incapacitating/paralyzed/revenant, 2 SECONDS)
 		return FALSE
 
 	if(locate(/obj/effect/blessing) in step_turf)
-		to_chat(src, span_warning("Holy energies block your path!"))
+		to_chat(src, span_warning("Святая энергия преграждают вам путь!"))
 		return FALSE
 
 	return TRUE
@@ -405,21 +405,21 @@
 	var/turf/current = get_turf(src)
 
 	if(isclosedturf(current))
-		to_chat(src, span_revenwarning("You cannot use abilities from inside of a wall."))
+		to_chat(src, span_revenwarning("Вы не можете использовать способности, находясь внутри стены."))
 		return FALSE
 
 	for(var/obj/thing in current)
 		if(!thing.density || thing.CanPass(src, get_dir(current, src)))
 			continue
-		to_chat(src, span_revenwarning("You cannot use abilities inside of a dense object."))
+		to_chat(src, span_revenwarning("Вы не можете использовать способности внутри плотного объекта."))
 		return FALSE
 
 	if(HAS_TRAIT(src, TRAIT_REVENANT_INHIBITED))
-		to_chat(src, span_revenwarning("Your powers have been suppressed by a nullifying energy!"))
+		to_chat(src, span_revenwarning("Ваши силы были подавлены нуллифицирующей энергией!"))
 		return FALSE
 
 	if(!change_essence_amount(essence_cost, TRUE))
-		to_chat(src, span_revenwarning("You lack the essence to use that ability."))
+		to_chat(src, span_revenwarning("Вам не хватает эссенции, чтобы использовать эту способность."))
 		return FALSE
 
 	return TRUE
@@ -461,9 +461,9 @@
 	update_mob_action_buttons()
 	if(!silent)
 		if(essence_to_change_by > 0)
-			to_chat(src, span_revennotice("Gained [essence_to_change_by]E [source ? "from [source]":""]."))
+			to_chat(src, span_revennotice("Получено [essence_to_change_by]Э [source ? "из [source]":""]."))
 		else
-			to_chat(src, span_revenminor("Lost [essence_to_change_by]E [source ? "from [source]":""]."))
+			to_chat(src, span_revenminor("Потеряно [essence_to_change_by]Э [source ? "из [source]":""]."))
 	return TRUE
 
 #undef REVENANT_STUNNED_TRAIT

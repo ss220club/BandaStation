@@ -71,7 +71,6 @@
 "ep" = (
 /obj/structure/table/reinforced,
 /obj/machinery/chem_dispenser/drinks/beer/fullupgrade{
-	pixel_x = 0;
 	pixel_y = 9
 	},
 /obj/effect/turf_decal/siding/dark/end{
@@ -115,7 +114,6 @@
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/chem_dispenser/drinks/fullupgrade{
-	pixel_x = 0;
 	pixel_y = 9
 	},
 /turf/open/floor/iron/dark/smooth_large,
@@ -248,8 +246,7 @@
 	pixel_y = -2
 	},
 /obj/item/implanter/mindshield{
-	pixel_x = -6;
-	pixel_y = 0
+	pixel_x = -6
 	},
 /obj/item/storage/box/trackimp{
 	pixel_x = -3;
@@ -292,8 +289,7 @@
 	pixel_y = 4
 	},
 /obj/effect/spawner/random/entertainment/lighter{
-	pixel_x = -5;
-	pixel_y = 0
+	pixel_x = -5
 	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 4
@@ -457,8 +453,7 @@
 "EF" = (
 /obj/structure/table/wood,
 /obj/item/folder/blue{
-	pixel_x = -7;
-	pixel_y = 0
+	pixel_x = -7
 	},
 /obj/item/folder/red{
 	pixel_x = -8;
@@ -478,16 +473,13 @@
 	pixel_y = 6
 	},
 /obj/item/stamp/centcom{
-	pixel_x = 5;
-	pixel_y = 0
+	pixel_x = 5
 	},
 /obj/item/stamp/granted{
-	pixel_x = 8;
-	pixel_y = 0
+	pixel_x = 8
 	},
 /obj/item/stamp/denied{
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood,
@@ -537,7 +529,6 @@
 	},
 /obj/machinery/button/door/indestructible{
 	pixel_x = -6;
-	pixel_y = 0;
 	id = "argos_window";
 	name = "Argos Window Protector";
 	req_access = list("cent_captain")
@@ -601,10 +592,10 @@
 /turf/open/floor/plating,
 /area/shuttle/argos)
 "QY" = (
-/obj/machinery/telecomms/allinone/nuclear,
-/obj/machinery/door/window/brigdoor/left/directional/east,
-/obj/structure/window/reinforced/spawner/directional/north,
-/turf/open/floor/circuit,
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/diagonal,
 /area/shuttle/argos)
 "Rs" = (
 /obj/structure/dresser,
@@ -666,17 +657,14 @@
 	pixel_y = 6
 	},
 /obj/item/storage/medkit/tactical/premium{
-	pixel_x = 0;
 	pixel_y = 9
 	},
 /obj/item/defibrillator/compact/combat/loaded/nanotrasen{
-	pixel_x = 0;
 	pixel_y = -4
 	},
 /obj/item/defibrillator/compact/combat/loaded/nanotrasen,
 /obj/item/reagent_containers/hypospray/combat/nanites,
 /obj/item/reagent_containers/hypospray/combat/nanites{
-	pixel_x = 0;
 	pixel_y = 4
 	},
 /obj/effect/turf_decal/tile/blue{
