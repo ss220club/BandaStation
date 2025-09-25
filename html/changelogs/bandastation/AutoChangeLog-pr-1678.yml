@@ -1,4 +1,0 @@
-author: "MiraHell"
-delete-after: True
-changes:
-  - rscadd: "Добавлена TGUI панель эмоций в чат, чтобы открыть - нажать на звездочку рядом с пингом."
