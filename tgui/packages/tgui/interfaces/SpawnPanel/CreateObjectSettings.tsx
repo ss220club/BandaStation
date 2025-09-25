@@ -40,7 +40,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
   const [amount, setAmount] = useState(1);
   const [cordsType, setCordsType] = useState(0);
   const [spawnLocation, setSpawnLocation] = useState('Current location');
-  const [direction, setDirection] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [objectName, setObjectName] = useState('');
   const [offset, setOffset] = useState('');
 
