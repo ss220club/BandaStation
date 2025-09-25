@@ -245,6 +245,12 @@
 /obj/item/banner/species/machine/mundane
 	inspiration_available = FALSE
 
+/obj/item/banner/species/rakht/mundane
+    name = "raknt banner"
+    desc = "Баннер, гордо провозглашающий превосходящее влияние вульпканского Клана Рахт."
+    icon_state = "banner_rakht"
+    inhand_icon_state = "banner_rakht"
+
 // MARK: Override to defaults
 /obj/item/banner/red
 	icon = 'icons/obj/banner.dmi'
