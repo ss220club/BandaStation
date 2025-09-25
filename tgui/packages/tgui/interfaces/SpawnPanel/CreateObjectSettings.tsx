@@ -135,7 +135,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
     const defaultAmount = 1;
     const defaultCordsType = 0;
     const defaultSpawnLocation = 'Current location';
-    const defaultDirection = 2; // BANDASTATION EDIT: No more facing up objects/mobs
+    const defaultDirection = 1; // BANDASTATION EDIT: No more facing up objects/mobs
     const defaultObjectName = '';
     const defaultOffset = '';
 
