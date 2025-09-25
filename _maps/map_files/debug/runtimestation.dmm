@@ -1219,6 +1219,10 @@
 /obj/structure/server,
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
+"kv" = (
+/obj/effect/turf_decal/board_number/four,
+/turf/open/floor/plating,
+/area/station/construction)
 "kS" = (
 /turf/closed/wall/r_wall,
 /area/station/medical/chemistry)
@@ -1248,6 +1252,14 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/engineering/main)
+"my" = (
+/obj/structure/transmitter/mounted{
+	dir = 1;
+	pixel_y = -24;
+	display_name = "2"
+	},
+/turf/open/floor/plating,
+/area/station/construction)
 "mC" = (
 /turf/open/floor/iron/dark,
 /area/station/medical/medbay)
@@ -1432,6 +1444,14 @@
 "rT" = (
 /turf/open/floor/circuit/green,
 /area/station/cargo/bitrunning/den)
+"si" = (
+/obj/structure/transmitter/mounted{
+	dir = 8;
+	pixel_x = 17;
+	display_name = "3"
+	},
+/turf/open/floor/plating,
+/area/station/construction)
 "sr" = (
 /obj/machinery/door/airlock/shell,
 /turf/open/floor/iron/dark,
@@ -1539,6 +1559,10 @@
 /mob/living/circuit_drone,
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
+"vn" = (
+/obj/effect/turf_decal/board_number/two,
+/turf/open/floor/plating,
+/area/station/construction)
 "vs" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
@@ -1931,6 +1955,12 @@
 	},
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
+"Eb" = (
+/obj/structure/transmitter{
+	display_name = "Engineering"
+	},
+/turf/open/floor/plating,
+/area/station/construction)
 "Ef" = (
 /obj/machinery/light/directional/north,
 /obj/effect/turf_decal/tile/blue{
@@ -2004,10 +2034,18 @@
 /obj/effect/mapping_helpers/airalarm/unlocked,
 /turf/open/floor/iron,
 /area/station/command/bridge)
+"Fe" = (
+/obj/structure/central_telephone_exchange,
+/turf/open/floor/plating,
+/area/station/construction)
 "Fy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Fz" = (
+/obj/structure/transmitter,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/entry)
 "FA" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -2097,6 +2135,14 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted,
 /turf/open/floor/iron,
 /area/station/command/bridge)
+"Iz" = (
+/obj/structure/transmitter/mounted{
+	pixel_y = 23;
+	display_name = "1"
+	},
+/obj/effect/turf_decal/board_number/one,
+/turf/open/floor/plating,
+/area/station/construction)
 "IF" = (
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
@@ -2181,6 +2227,10 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
+"KT" = (
+/obj/effect/turf_decal/board_number/three,
+/turf/open/floor/plating,
+/area/station/construction)
 "KW" = (
 /obj/structure/sink/directional/south,
 /obj/item/storage/bag/plants,
@@ -2237,6 +2287,14 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/engineering/main)
+"Mb" = (
+/obj/structure/transmitter/mounted{
+	dir = 4;
+	pixel_x = -16;
+	display_name = "4"
+	},
+/turf/open/floor/plating,
+/area/station/construction)
 "Mg" = (
 /obj/machinery/door/airlock/public/glass,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -2607,6 +2665,15 @@
 "Ue" = (
 /turf/closed/wall/r_wall,
 /area/station/cargo/bitrunning/den)
+"Ug" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/transmitter{
+	display_name = "Test"
+	},
+/turf/open/floor/iron,
+/area/station/construction)
 "Un" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/iron,
@@ -6008,7 +6075,7 @@ eh
 eF
 HW
 fM
-eh
+Fz
 eh
 eh
 eh
@@ -6192,7 +6259,7 @@ dm
 dy
 ii
 dX
-dy
+Ug
 dy
 gG
 ii
@@ -6379,7 +6446,7 @@ dn
 dn
 dn
 dn
-dn
+Fe
 dn
 dn
 dL
@@ -6558,8 +6625,8 @@ cN
 bV
 dn
 dn
-dn
-dn
+cN
+Iz
 dn
 dn
 dn
@@ -6649,9 +6716,9 @@ bE
 cN
 ZW
 dn
-dn
-dn
-dn
+my
+cN
+vn
 Pe
 dn
 dn
@@ -6742,9 +6809,9 @@ cN
 PB
 qf
 dn
+si
 dn
-dn
-dn
+Eb
 dn
 dn
 dn
@@ -6834,8 +6901,8 @@ cN
 vs
 dn
 dn
-dn
-dn
+cN
+KT
 dn
 dn
 dn
@@ -6926,8 +6993,8 @@ cN
 yL
 dn
 dn
-dn
-dn
+cN
+kv
 dn
 dn
 dn
@@ -7018,7 +7085,7 @@ ef
 cY
 dn
 dn
-dn
+Mb
 dn
 dn
 dn
