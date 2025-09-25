@@ -34,6 +34,8 @@
 		return
 
 /obj/item/organ/cyberimp/arm/toolkit/custom/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!user.transferItemToLoc(tool, src))
+		return
 	if(tool.tool_behaviour == TOOL_SCREWDRIVER)
 		return
 	if(LAZYLEN(items_list) == 1)
@@ -44,8 +46,6 @@
 		return
 	if(tool.w_class > max_w_class)
 		user.balloon_alert(user, "Не помещается!")
-		return
-	if(!user.transferItemToLoc(tool, src))
 		return
 	items_list += WEAKREF(tool)
 	active_item = tool
