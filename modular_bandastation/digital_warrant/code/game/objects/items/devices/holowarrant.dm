@@ -82,11 +82,6 @@
 		return TRUE
 	return ..()
 
-/obj/item/device/holowarrant/update_icon_state()
-	// Use a consistent icon state present in remote.dmi to avoid missing states
-	icon_state = "remote"
-	return ..()
-
 /obj/item/device/holowarrant/proc/warrant_html_header(section_title, station_enc)
 	return "<HTML><HEAD><TITLE>[section_title]</TITLE></HEAD>\n<BODY bgcolor='#ffffff'>\n<table width='100%' cellspacing='0' cellpadding='0'><tr><td align='left' valign='top' style='width:64px;'>\n<img src='ntlogo.png' alt='NanoTrasen' width='64' height='64'>\n</td><td align='center' valign='middle'>\n<large><b>Система отслеживания ордеров SCG SFP</b></large></br>\n</td></tr></table>\n</br>\nВыдан в юрисдикции станции</br>\n[station_enc]</br>\n</br>\n"
 
