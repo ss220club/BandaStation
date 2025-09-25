@@ -240,7 +240,40 @@
 // MARK: .38
 /obj/item/ammo_casing/c38/ap
 	name = ".38 armor-piercing bullet casing"
-	desc = "Бронебойный пистолетный патроны калибра .38."
+	desc = "Бронебойный пистолетный патрон калибра .38."
 	projectile_type = /obj/projectile/bullet/c38/ap
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sa-casing"
+
+// MARK: .310 Strilka
+/obj/item/ammo_casing/strilka310/rubber
+
+/obj/item/ammo_casing/strilka310/ap
+
+/obj/item/ammo_casing/strilka310/hp
+
+/obj/item/ammo_casing/strilka310
+
+// MARK: .90 Strela
+/obj/item/ammo_casing/c90strela
+	name = ".90 Strela anti-material bullet casing"
+	desc = "Крупнокалиберный безгильзовый винтовочный патрон калибра .90 Стрела."
+	//projectile_type = /obj/projectile/bullet/c90strela
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "90strela-casing"
+
+// MARK: 7.62x54mmR
+/obj/item/ammo_casing/c762x54mmr
+	name = "7.62x54mmR bullet casing"
+	desc = "Крупнокалиберный винтовочный патрон калибра 7.62x54ммр."
+	//projectile_type = /obj/projectile/bullet/c762x54mmr
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "c762x54mmr-casing"
+
+// MARK: 12.7x108mm
+/obj/item/ammo_casing/c127x108mm
+	name = "12.7x108mm bullet casing"
+	desc = "Крупнокалиберный винтовочный патрон калибра 12.7x108мм."
+	//projectile_type = /obj/projectile/bullet/c762x54mmr
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "c127x108mm-casing"

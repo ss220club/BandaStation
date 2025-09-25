@@ -771,3 +771,32 @@
 	name = "pistol magazine (.45 incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c45/inc
+
+// MARK: Wylom AMR - .90 Strela
+
+
+// MARK: DSHK - 12.7x108mm
+
+
+// MARK: Volna-12 (Kord) - 12.7x108mm
+
+
+// MARK: PMK - .310 / 7.62x54mmR
+
+
+// MARK: Zashch - 10mm
+
+
+// MARK: Lanca - .310 Strilka
+
+
+// MARK: Napad - 10mm
+
+
+// MARK: Bison - .27
+
+
+// MARK: Dvoystvol - 7.62x38mm / .310 Strilka / .90 Strela
+
+
+// MARK: Bobr - 12ga

@@ -456,6 +456,12 @@
 	ricochets_max = 0
 	armour_penetration = 40
 
+// MARK: .90 Strela
+
+// MARK: 12.7x108mm
+
+// MARK: 7.62x54mmR
+
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect
 	light_system = OVERLAY_LIGHT
