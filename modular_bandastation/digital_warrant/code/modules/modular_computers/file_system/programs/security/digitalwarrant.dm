@@ -127,12 +127,12 @@
 			return TRUE
 		if("add_arrest")
 			active_warrant = new()
-			active_warrant.charges = "No charges present"
+			active_warrant.charges = ""
 			active_warrant.arrestsearch = "arrest"
 			return TRUE
 		if("add_search")
 			active_warrant = new()
-			active_warrant.charges = "No reason given"
+			active_warrant.charges = ""
 			active_warrant.arrestsearch = "search"
 			return TRUE
 		if("edit_name")
