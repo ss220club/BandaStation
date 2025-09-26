@@ -10,3 +10,5 @@ GLOBAL_LIST_EMPTY_TYPED(all_warrants, /datum/digital_warrant)
 	var/list/access = list()
 	var/arrestsearch = "arrest"
 	var/archived = FALSE
+	// Cached base64 icon of the subject (generated lazily when active)
+	var/subject_icon_b64 = null

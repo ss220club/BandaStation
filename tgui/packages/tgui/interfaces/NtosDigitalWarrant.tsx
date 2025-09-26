@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
-import { Button, Input, LabeledList, Section, Stack, TextArea, NoticeBox } from 'tgui-core/components';
+import { Button, Input, LabeledList, Section, Stack, TextArea, NoticeBox, Image } from 'tgui-core/components';
 
 type Warrant = {
   id: string;
@@ -11,6 +11,7 @@ type Warrant = {
   auth: string;
   idauth: string;
   arrestsearch: string;
+  subject_icon?: string | null;
 };
 
 type CrewMember = {
@@ -31,7 +32,7 @@ export const NtosDigitalWarrant = () => {
   const [showCrewManifest, setShowCrewManifest] = useState(false);
 
   return (
-    <NtosWindow title="Цифровые ордера" width={500} height={400}>
+    <NtosWindow title="Цифровые ордера" width={500} height={530}>
       <NtosWindow.Content>
         {active ? (
           showCrewManifest ? (
@@ -93,11 +94,25 @@ const WarrantEditor = (props: WarrantEditorProps) => {
 	const sameIdSigned = !!(warrant.idauth && warrant.idauth !== 'Unauthorized');
 	const isNew = !warrant.id || warrant.id.length === 0;
 
+	const subjectIcon = warrant.subject_icon ? (
+		<img
+			style={{ border: '1px solid #666', imageRendering: 'pixelated' }}
+			src={`data:image/png;base64,${warrant.subject_icon}`}
+			alt={warrant.namewarrant}
+			width={90}
+			height={64}
+		/>
+	) : (
+		<span style={{ opacity: 0.5 }}>нет иконки</span>
+	);
+
 	return (
 		<Section title={warrant.namewarrant}>
 			<LabeledList>
+				<LabeledList.Item label="Субъект (иконка)">
+					{subjectIcon}
+				</LabeledList.Item>
 				<LabeledList.Item label="Имя">
-					{/* Имя теперь только из манифеста */}
 					{warrant.namewarrant}
 				</LabeledList.Item>
 				<LabeledList.Item label="Должность">

@@ -10,10 +10,12 @@
 	download_access = list(ACCESS_SECURITY, ACCESS_FLAG_COMMAND)
 
 	var/datum/digital_warrant/active_warrant
-	/// List of accesses that are allowed to authorize warrant access escalation (HoS, Captain, Magistrate, IAA(Lawyer))
+	/// List of accesses that are allowed to authorize warrant access escalation
 	var/static/list/warrant_authorizer_access = list(ACCESS_HOS, ACCESS_CAPTAIN, ACCESS_MAGISTRATE, ACCESS_LAWYER)
 
-//Helper that formats the author/approver string consistently and safely
+	var/last_icon_attempt
+
+
 /datum/computer_file/program/digitalwarrant/proc/format_author(obj/item/card/id/I)
 	if(!I)
 		return "Unauthorized"
@@ -21,7 +23,6 @@
 	var/assignment_part = I.assignment ? sanitize(I.assignment) : "(Unknown)"
 	return "[name_part] - [assignment_part]"
 
-//Checks if an ID card has any of the required accesses to authorize warrant access list
 /datum/computer_file/program/digitalwarrant/proc/has_warrant_authorizer_access(obj/item/card/id/I)
 	if(!I)
 		return FALSE
@@ -39,7 +40,59 @@
 		"auth" = W.auth,
 		"idauth" = W.idauth,
 		"arrestsearch" = W.arrestsearch,
+		"subject_icon" = W.subject_icon_b64,
 	)
+
+// Attempts to populate the subject icon cache for the active warrant (lazy generation)
+/datum/computer_file/program/digitalwarrant/proc/ensure_subject_icon()
+	if(!active_warrant)
+		return
+
+	if(active_warrant.subject_icon_b64)
+		return // Already cached
+
+	if(!isnull(last_icon_attempt) && world.time < last_icon_attempt + 50)
+		return
+	last_icon_attempt = world.time
+
+	var/datum/record/crew/matched_record
+	for(var/datum/record/crew/CR in GLOB.manifest.general)
+		if(CR.name == active_warrant.namewarrant && CR.rank == active_warrant.jobwarrant)
+			matched_record = CR
+			break
+	if(!matched_record)
+		return
+
+	var/obj/item/photo/front = matched_record.get_front_photo()
+	if(!front || !front.picture?.picture_image)
+		return
+	var/icon/record_icon = front.picture.picture_image
+	if(!record_icon)
+		return
+
+	var/icon/processed = process_subject_icon(record_icon)
+	if(!processed)
+		processed = record_icon
+	active_warrant.subject_icon_b64 = icon2base64(processed)
+
+
+#define DIGITAL_WARRANT_ICON_TARGET_SIZE 96
+#define DIGITAL_WARRANT_ICON_HEAD_HEIGHT 16
+/datum/computer_file/program/digitalwarrant/proc/process_subject_icon(icon/I)
+	if(!I)
+		return null
+	var/icon/W = new(I)
+
+	var/height = 32
+	var/width = 32
+
+	if(DIGITAL_WARRANT_ICON_HEAD_HEIGHT < height)
+		var/start_y = max(1, height - DIGITAL_WARRANT_ICON_HEAD_HEIGHT + 1)
+
+		W.Crop(1, start_y, width, height)
+
+	W.Scale(DIGITAL_WARRANT_ICON_TARGET_SIZE, DIGITAL_WARRANT_ICON_TARGET_SIZE)
+	return W
 
 /datum/computer_file/program/digitalwarrant/ui_data(mob/user)
 	var/list/data = list()
@@ -48,6 +101,8 @@
 		crew_manifest += list(list("name" = CR.name, "job" = CR.rank))
 	data["crew_manifest"] = crew_manifest
 	if(active_warrant)
+		// Lazily attempt to (re)generate subject icon if absent
+		ensure_subject_icon()
 		data["active"] = serialize_warrant(active_warrant)
 		data["warrants"] = null
 	else
@@ -88,6 +143,8 @@
 			active_warrant.auth = "Unauthorized"
 			active_warrant.idauth = "Unauthorized"
 			active_warrant.access = list()
+			// Invalidate cached subject icon since subject identity changed
+			active_warrant.subject_icon_b64 = null
 			return TRUE
 		if("edit_charges")
 			if(!active_warrant)
