@@ -32,31 +32,14 @@
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_TRANSMITTER_UPDATE_ICON)
 
-	cut_overlays()
-
-	if(attached_to.loc == src)
-		var/mutable_appearance/handset_overlay = mutable_appearance(icon, "wall_handset")
-		handset_overlay.plane = plane
-		add_overlay(handset_overlay)
-
-	var/status_overlay
-
-	if(do_not_disturb == PHONE_DND_ON || do_not_disturb == PHONE_DND_FORCED)
-		status_overlay = "wall_red"
-	else
-		if(status == STATUS_INBOUND)
-			status_overlay = "wall_yellow"
-		else
-			status_overlay = "wall_green"
-
-	if(status_overlay)
-		var/mutable_appearance/status_appearance = mutable_appearance(icon, status_overlay, src)
-		status_appearance.plane = plane
-		add_overlay(status_appearance)
-
-		var/mutable_appearance/emissive_overlay = emissive_appearance(icon, "wall_light", src)
-		emissive_overlay.plane = FLOAT_PLANE
-		add_overlay(emissive_overlay)
+	apply_transmitter_overlays(
+		/*handset_state=*/ "wall_handset",
+		/*handset_ring_state=*/ null,
+		/*status_red=*/ "wall_red",
+		/*status_yellow=*/ "wall_yellow",
+		/*status_green=*/ "wall_green",
+		/*light_state=*/ "wall_light"
+	)
 
 // A personal command line for private offices.
 /obj/structure/transmitter/command

@@ -245,31 +245,44 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_TRANSMITTER_UPDATE_ICON)
 
+	apply_transmitter_overlays(
+		/*handset_state=*/ "rotary_handset",
+		/*handset_ring_state=*/ "rotary_handset_ring",
+		/*status_red=*/ "rotary_red",
+		/*status_yellow=*/ "rotary_yellow",
+		/*status_green=*/ "rotary_green",
+		/*light_state=*/ "rotary_light"
+	)
+
+/// Shared helper to (re)build overlays for a transmitter appearance
+/obj/structure/transmitter/proc/apply_transmitter_overlays(handset_state, handset_ring_state, status_red, status_yellow, status_green, light_state)
 	cut_overlays()
 
 	if(attached_to.loc == src)
-		var/mutable_appearance/handset_overlay = mutable_appearance(icon, status == STATUS_INBOUND ? "rotary_handset_ring" : "rotary_handset")
+		var/handset_icon_state = (status == STATUS_INBOUND && handset_ring_state) ? handset_ring_state : handset_state
+		var/mutable_appearance/handset_overlay = mutable_appearance(icon, handset_icon_state)
 		handset_overlay.plane = plane
 		add_overlay(handset_overlay)
 
 	var/status_overlay
 
 	if(do_not_disturb == PHONE_DND_ON || do_not_disturb == PHONE_DND_FORCED)
-		status_overlay = "rotary_red"
+		status_overlay = status_red
 	else
 		if(status == STATUS_INBOUND)
-			status_overlay = "rotary_yellow"
+			status_overlay = status_yellow
 		else
-			status_overlay = "rotary_green"
+			status_overlay = status_green
 
 	if(status_overlay)
 		var/mutable_appearance/status_appearance = mutable_appearance(icon, status_overlay, src)
 		status_appearance.plane = plane
 		add_overlay(status_appearance)
 
-		var/mutable_appearance/emissive_overlay = emissive_appearance(icon, "rotary_light", src)
-		emissive_overlay.plane = FLOAT_PLANE
-		add_overlay(emissive_overlay)
+		if(light_state)
+			var/mutable_appearance/emissive_overlay = emissive_appearance(icon, light_state, src)
+			emissive_overlay.plane = FLOAT_PLANE
+			add_overlay(emissive_overlay)
 
 /obj/structure/transmitter/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
