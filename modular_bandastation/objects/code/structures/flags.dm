@@ -159,4 +159,3 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/rakht, 32)
 	desc = "Сложенный флаг вульпканского клана Рахт."
 	icon_state = "folded_rakht"
 	sign_path = /obj/structure/sign/flag/rakht
-
