@@ -22,7 +22,7 @@
 	hotkey_keys = list("Unbound") // BANDASTATION EDIT
 	name = "screenshot"
 	full_name = "Сделать скриншот"
-	description = "Сделайть скриншот"
+	description = "Сделать скриншот"
 	keybind_signal = COMSIG_KB_CLIENT_SCREENSHOT_DOWN
 
 /datum/keybinding/client/screenshot/down(client/user, turf/target)

@@ -54,7 +54,7 @@
 	hotkey_keys = list("Q")
 	name = "unequip_module"
 	full_name = "Выложить в хранилище"
-	description = "Вылаживает предмет из текущий модуля"
+	description = "Убирает предмет из текущего модуля"
 	keybind_signal = COMSIG_KB_SILICON_UNEQUIPMODULE_DOWN
 
 /datum/keybinding/robot/unequip_module/down(client/user, turf/target)

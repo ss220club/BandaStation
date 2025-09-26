@@ -114,7 +114,7 @@
 	hotkey_keys = list("Unbound")
 	name = "readmin"
 	full_name = "Readmin"
-	description = "Вернить свои админские силы"
+	description = "Вернуть свои админские силы"
 	keybind_signal = COMSIG_KB_ADMIN_READMIN_DOWN
 
 /datum/keybinding/admin/readmin/down(client/user, turf/target)
