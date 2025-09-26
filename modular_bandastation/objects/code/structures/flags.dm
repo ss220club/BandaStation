@@ -153,3 +153,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/rakht, 32)
 	desc = "Сложенный флаг Союза Советских Социалистических Планет."
 	icon_state = "folded_ussp"
 	sign_path = /obj/structure/sign/flag/ussp
+
+/obj/item/sign/flag/rakht
+    name = "folded flag of the Rakht"
+	desc = "Сложенный флаг вульпканского клана Рахт."
+	icon_state = "folded_rakht"
+	sign_path = /obj/structure/sign/flag/rakht
+
