@@ -109,8 +109,11 @@ const WarrantEditor = (props: WarrantEditorProps) => {
 	return (
 		<Section title={warrant.namewarrant}>
 			<LabeledList>
-				<LabeledList.Item label="Субъект (иконка)">
+				<LabeledList.Item label="Фотография">
 					{subjectIcon}
+				</LabeledList.Item>
+				<LabeledList.Item label="Выбрать из манифеста">
+					<Button onClick={onShowCrewManifest}>Выбрать</Button>
 				</LabeledList.Item>
 				<LabeledList.Item label="Имя">
 					{warrant.namewarrant}
@@ -118,15 +121,13 @@ const WarrantEditor = (props: WarrantEditorProps) => {
 				<LabeledList.Item label="Должность">
 					{warrant.jobwarrant}
 				</LabeledList.Item>
-				<LabeledList.Item label="Из манифеста">
-					<Button onClick={onShowCrewManifest}>Выбрать</Button>
-				</LabeledList.Item>
 				<LabeledList.Item label="Обвинения">
 					<TextArea
 						value={chargesDraft}
 						onChange={(value: string) => value.length <= maxChargesLen && setChargesDraft(value)}
 						onKeyDown={onKeyDown}
 						height={8}
+            width={24}
 						placeholder="Опишите основания..."
 					/>
 					<Stack mt={0.5} justify="space-between">
@@ -137,13 +138,13 @@ const WarrantEditor = (props: WarrantEditorProps) => {
 				<LabeledList.Item label="Авторизовал">
 					{warrant.auth}
 					<Button ml={1} disabled={alreadySigned} onClick={() => act('authorize')}>
-						Подпись
+						Авторизовать ордер
 					</Button>
 				</LabeledList.Item>
 				<LabeledList.Item label="Авторизация доступа">
 					{warrant.idauth}
 					<Button ml={1} disabled={sameIdSigned} onClick={() => act('authorize_access')}>
-						Подп. доступ
+						Авторизовать доступ
 					</Button>
 				</LabeledList.Item>
 			</LabeledList>
