@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
-import { Button, Input, LabeledList, Section, Stack } from 'tgui-core/components';
+import { Button, Input, LabeledList, Section, Stack, TextArea, NoticeBox } from 'tgui-core/components';
 
 type Warrant = {
   id: string;
@@ -65,51 +65,80 @@ type WarrantEditorProps = {
 };
 
 const WarrantEditor = (props: WarrantEditorProps) => {
-  const { warrant, act, onShowCrewManifest } = props;
-  return (
-    <Section title={warrant.namewarrant}>
-      <LabeledList>
-        <LabeledList.Item label="Имя">
-          <Input
-            value={warrant.namewarrant}
-            onChange={(value: string) => act('edit_name', { name: value, job: warrant.jobwarrant })}
-          />
-        </LabeledList.Item>
-        <LabeledList.Item label="Должность">
-          <Input
-            value={warrant.jobwarrant}
-            onChange={(value: string) => act('edit_name', { name: warrant.namewarrant, job: value })}
-          />
-        </LabeledList.Item>
-        <LabeledList.Item label="Из манифеста">
-          <Button onClick={onShowCrewManifest}>Выбрать</Button>
-        </LabeledList.Item>
-        <LabeledList.Item label="Обвинения">
-          <Input
-            value={warrant.charges}
-            onChange={(value: string) => act('edit_charges', { charges: value })}
-          />
-        </LabeledList.Item>
-        <LabeledList.Item label="Авторизовал">
-          {warrant.auth}
-          <Button ml={1} onClick={() => act('authorize')}>
-            Подпись
-          </Button>
-        </LabeledList.Item>
-        <LabeledList.Item label="Авторизация доступа">
-          {warrant.idauth}
-          <Button ml={1} onClick={() => act('authorize_access')}>
-            Подп. доступ
-          </Button>
-        </LabeledList.Item>
-      </LabeledList>
-      <Stack mt={2} justify="space-between">
-        <Button onClick={() => act('save')}>Сохранить</Button>
-        <Button onClick={() => act('delete', { id: warrant.id })}>Удалить</Button>
-        <Button onClick={() => act('back')}>Назад</Button>
-      </Stack>
-    </Section>
-  );
+	const { warrant, act, onShowCrewManifest } = props;
+	const [chargesDraft, setChargesDraft] = useState(warrant.charges || "");
+	const maxChargesLen = 1000;
+
+	// Синхронизация при смене активного ордера
+	useEffect(() => {
+		setChargesDraft(warrant.charges || "");
+	}, [warrant.id]);
+
+	const saveCharges = useCallback(() => {
+		const trimmed = chargesDraft.trim();
+		if(trimmed !== warrant.charges) {
+			act('edit_charges', { charges: trimmed });
+		}
+		act('save');
+	}, [chargesDraft, warrant.charges, act]);
+
+	const onKeyDown = (e: any) => {
+		if(e.ctrlKey && e.key === 'Enter') {
+			e.preventDefault();
+			saveCharges();
+		}
+	};
+
+	const alreadySigned = !!(warrant.auth && warrant.auth !== 'Unauthorized');
+	const sameIdSigned = !!(warrant.idauth && warrant.idauth !== 'Unauthorized');
+	const isNew = !warrant.id || warrant.id.length === 0;
+
+	return (
+		<Section title={warrant.namewarrant}>
+			<LabeledList>
+				<LabeledList.Item label="Имя">
+					{/* Имя теперь только из манифеста */}
+					{warrant.namewarrant}
+				</LabeledList.Item>
+				<LabeledList.Item label="Должность">
+					{warrant.jobwarrant}
+				</LabeledList.Item>
+				<LabeledList.Item label="Из манифеста">
+					<Button onClick={onShowCrewManifest}>Выбрать</Button>
+				</LabeledList.Item>
+				<LabeledList.Item label="Обвинения">
+					<TextArea
+						value={chargesDraft}
+						onChange={(value: string) => value.length <= maxChargesLen && setChargesDraft(value)}
+						onKeyDown={onKeyDown}
+						height={8}
+						placeholder="Опишите основания..."
+					/>
+					<Stack mt={0.5} justify="space-between">
+						<Stack.Item>Ctrl+Enter = Сохранить</Stack.Item>
+						<Stack.Item>{chargesDraft.trim().length}/{maxChargesLen}</Stack.Item>
+					</Stack>
+				</LabeledList.Item>
+				<LabeledList.Item label="Авторизовал">
+					{warrant.auth}
+					<Button ml={1} disabled={alreadySigned} onClick={() => act('authorize')}>
+						Подпись
+					</Button>
+				</LabeledList.Item>
+				<LabeledList.Item label="Авторизация доступа">
+					{warrant.idauth}
+					<Button ml={1} disabled={sameIdSigned} onClick={() => act('authorize_access')}>
+						Подп. доступ
+					</Button>
+				</LabeledList.Item>
+			</LabeledList>
+			<Stack mt={2} justify="space-between">
+				<Button onClick={saveCharges}>Сохранить</Button>
+				<Button disabled={isNew} onClick={() => act('delete', { id: warrant.id })}>Удалить</Button>
+				<Button onClick={() => act('back')}>Назад</Button>
+			</Stack>
+		</Section>
+	);
 };
 
 type CrewManifestProps = {
