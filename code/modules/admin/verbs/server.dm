@@ -32,10 +32,10 @@ ADMIN_VERB(restart, R_SERVER, "Reboot World", "Restarts the world immediately.",
 		options += TGS_RESTART;
 
 	if(SSticker.admin_delay_notice)
-		if(tgui_alert(user, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", list("Yes", "No")) != "Yes") // BANDASTATION EDIT: Tgui input
+		if(tgui_alert(user, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", list("Yes", "No")) != "Yes") // BANDASTATION EDIT: TGUI input
 			return FALSE
 
-	var/result = tgui_input_list(user, "Select reboot method", "World Reboot", options, REGULAR_RESTART) // BANDASTATION EDIT: Tgui input
+	var/result = tgui_input_list(user, "Select reboot method", "World Reboot", options, REGULAR_RESTART) // BANDASTATION EDIT: TGUI input
 
 	if(isnull(result))
 		return
@@ -45,16 +45,16 @@ ADMIN_VERB(restart, R_SERVER, "Reboot World", "Restarts the world immediately.",
 	switch(result)
 		if(REGULAR_RESTART)
 			if(!user.is_localhost())
-				if(tgui_alert(user, "Are you sure you want to restart the server?","This server is live", list("Restart", "Cancel")) != "Restart") // BANDASTATION EDIT: Tgui input
+				if(tgui_alert(user, "Are you sure you want to restart the server?","This server is live", list("Restart", "Cancel")) != "Restart") // BANDASTATION EDIT: TGUI input
 					return FALSE
 			SSticker.Reboot(init_by, "admin reboot - by [user.key] [user.holder.fakekey ? "(stealth)" : ""]", 10)
 		if(REGULAR_RESTART_DELAYED)
-			var/delay = tgui_input_number(user, "What delay should the restart have (in seconds)?", "Restart Delay", 5) // BANDASTATION EDIT: Tgui input
+			var/delay = tgui_input_number(user, "What delay should the restart have (in seconds)?", "Restart Delay", 5) // BANDASTATION EDIT: TGUI input
 
 			if(!delay)
 				return FALSE
 			if(!user.is_localhost())
-				if(tgui_alert(user,"Are you sure you want to restart the server?","This server is live", list("Restart", "Cancel")) != "Restart") // BANDASTATION EDIT: Tgui input
+				if(tgui_alert(user,"Are you sure you want to restart the server?","This server is live", list("Restart", "Cancel")) != "Restart") // BANDASTATION EDIT: TGUI input
 					return FALSE
 			SSticker.Reboot(init_by, "admin reboot - by [user.key] [user.holder.fakekey ? "(stealth)" : ""]", delay * 10)
 		if(HARD_RESTART)
@@ -133,7 +133,7 @@ ADMIN_VERB(delay_round_end, R_SERVER, "Delay Round End", "Prevent the server fro
 		tgui_alert(user, "The round end is already delayed. The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Alert", list("Ok"))
 		return
 
-	var/delay_reason = tgui_input_text(user, "Enter a reason for delaying the round end", "Round Delay Reason", max_length=50) // BANDASTATION EDIT: Tgui input
+	var/delay_reason = tgui_input_text(user, "Enter a reason for delaying the round end", "Round Delay Reason", max_length=50) // BANDASTATION EDIT: TGUI input
 
 	if(isnull(delay_reason))
 		return
