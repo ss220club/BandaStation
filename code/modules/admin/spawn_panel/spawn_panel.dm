@@ -99,6 +99,11 @@ GLOBAL_LIST_INIT(spawnpanels_by_ckey, list())
 		return FALSE
 
 	switch(action)
+		// BANDASTATION EDIT START: More handy verb
+		if("game-mode-panel")
+			dynamic_panel(user)
+			return TRUE
+		// BANDASTATION EDIT END: More handy verb
 		if("select-new-DMI")
 			var/icon/new_icon = input("Select a new icon file:", "Icon") as null|icon
 			if(new_icon)

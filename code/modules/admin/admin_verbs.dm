@@ -97,7 +97,7 @@ ADMIN_VERB(unban_panel, R_BAN, "Unbanning Panel", "Unban players here.", ADMIN_C
 
 // BANDASTATION EDIT START: More handy verb
 // ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Look at the state of the game.", ADMIN_CATEGORY_GAME)
-// 	user.holder.Game()
+	// user.holder.Game()
 // 	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
 // BANDASTATION EDIT END: More handy verb
 
