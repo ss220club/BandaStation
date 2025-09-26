@@ -28,6 +28,7 @@
 #include "code/weapons/baton.dm"
 #include "code/weapons/rifle.dm"
 #include "code/wounds/cranial_fissure.dm"
+#include "code/bodyparts/plasmaman_limbs.dm"
 #include "code/mod_types.dm"
 #include "code/tools.dm"
 
