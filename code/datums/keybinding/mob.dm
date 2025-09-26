@@ -81,7 +81,7 @@
 	return TRUE
 
 /datum/keybinding/mob/drop_item
-	hotkey_keys = list("Q")
+	hotkey_keys = list("Q") // BANDASTATION EDIT
 	name = "drop_item"
 	full_name = "Drop Item"
 	description = ""
