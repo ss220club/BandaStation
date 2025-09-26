@@ -41,7 +41,7 @@
 
 // MARK: Structures
 
-#include "code/structure/mortar/mortar.dm"
-#include "code/structure/mortar/mortar_shell.dm"
+#include "code/machinery/mortar/mortar.dm"
+#include "code/machinery/mortar/mortar_shell.dm"
 
 
