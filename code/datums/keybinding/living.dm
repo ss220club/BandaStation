@@ -203,7 +203,7 @@
 	living_user.throw_mode_off(THROW_MODE_HOLD)
 
 /datum/keybinding/living/give
-	hotkey_keys = list("G")
+	hotkey_keys = list("V") // BANDASTATION EDIT
 	name = "Give_Item"
 	full_name = "Передать вещь"
 	description = "Передать предмет в активной руке"
