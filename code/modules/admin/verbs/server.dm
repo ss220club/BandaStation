@@ -32,7 +32,7 @@ ADMIN_VERB(restart, R_SERVER, "Reboot World", "Restarts the world immediately.",
 		options += TGS_RESTART;
 
 	if(SSticker.admin_delay_notice)
-		if(tgui_alert(user, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", list("Yes", "No")) != "Yes")
+		if(tgui_alert(user, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", list("Yes", "No")) != "Yes") // BANDASTATION EDIT: Tgui input
 			return FALSE
 
 	var/result = tgui_input_list(user, "Select reboot method", "World Reboot", options, REGULAR_RESTART) // BANDASTATION EDIT: Tgui input
@@ -49,7 +49,7 @@ ADMIN_VERB(restart, R_SERVER, "Reboot World", "Restarts the world immediately.",
 					return FALSE
 			SSticker.Reboot(init_by, "admin reboot - by [user.key] [user.holder.fakekey ? "(stealth)" : ""]", 10)
 		if(REGULAR_RESTART_DELAYED)
-			var/delay = tgui_input_number(user, "What delay should the restart have (in seconds)?", "Restart Delay", 5)
+			var/delay = tgui_input_number(user, "What delay should the restart have (in seconds)?", "Restart Delay", 5) // BANDASTATION EDIT: Tgui input
 
 			if(!delay)
 				return FALSE
