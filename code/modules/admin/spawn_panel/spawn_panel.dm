@@ -101,7 +101,7 @@ GLOBAL_LIST_INIT(spawnpanels_by_ckey, list())
 	switch(action)
 		// BANDASTATION EDIT START: More handy verb
 		if("game-mode-panel")
-			dynamic_panel(user)
+			dynamic_panel(usr)
 			return TRUE
 		// BANDASTATION EDIT END: More handy verb
 		if("select-new-DMI")
