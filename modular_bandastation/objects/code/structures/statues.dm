@@ -231,34 +231,34 @@
 	abstract_type = /obj/structure/statue/statue_holoplanet
 
 /obj/structure/statue/vulp_scroll
-    name = "wall sculpture of a vulpkan priest of the Rakht clan"
-    desc = "Мраморная скульптура вульпканина, похожего на священнослужителя, обрамлённая золотом. В своих цепких лапах он держит тайное писание, которое останется с ним навеки. Морда вульпканина под капюшоном кажется таинственной и загадочной.."
-    icon = 'modular_bandastation/objects/icons/obj/structures/statue.dmi'
-    icon_state = "vulp-scroll"
-    pixel_y = 4
-    anchored = TRUE
-    impressiveness = 50
-    abstract_type = /obj/structure/statue/vulp_scroll
+	name = "wall sculpture of a vulpkan priest of the Rakht clan"
+	desc = "Мраморная скульптура вульпканина, похожего на священнослужителя, обрамлённая золотом. В своих цепких лапах он держит тайное писание, которое останется с ним навеки. Морда вульпканина под капюшоном кажется таинственной и загадочной.."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statue.dmi'
+	icon_state = "vulp-scroll"
+	pixel_y = 4
+	anchored = TRUE
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/vulp_scroll
 
 /obj/structure/statue/vulp_pike
-    name = "warrior statue of a vulpkan woman of the Rakht clan"
-    desc = "Высокая и величественная мраморная статуя воинственной вульпканки, обрамлённая золотом. Она смело устремила свой взгляд вперёд, сжимая в своих лапах золотую пику и огромный щит. На табличке у основания статуи указаны надписи на канилунце - Ахтер'Марза, Дева Щита, Святая Защитница Клана Рахт."
-    icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
-    icon_state = "vulp-pike"
-    anchored = TRUE
-    max_integrity = 1000
-    impressiveness = 70
-    abstract_type = /obj/structure/statue/vulp_pike
+	name = "warrior statue of a vulpkan woman of the Rakht clan"
+	desc = "Высокая и величественная мраморная статуя воинственной вульпканки, обрамлённая золотом. Она смело устремила свой взгляд вперёд, сжимая в своих лапах золотую пику и огромный щит. На табличке у основания статуи указаны надписи на канилунце - Ахтер'Марза, Дева Щита, Святая Защитница Клана Рахт."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "vulp-pike"
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 70
+	abstract_type = /obj/structure/statue/vulp_pike
 
 /obj/structure/statue/vulp_sword
-    name = "warlike statue of a vulpkan of the Rakht clan"
-    desc = "Высокая, маскулинная мраморная статуя вульпканина, обрамленная золотом. Вульпканин смотрит исподлобья уверенным взглядом, приподняв свой меч. На табличке у основании статуи указаны надписи на канилунце - Рахтар'Бэр, Отец Мироздания, Великий Учитель Рахта."
-    icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
-    icon_state = "vulp-sword"
-    anchored = TRUE
-    max_integrity = 1000
-    impressiveness = 80
-    abstract_type = /obj/structure/statue/vulp_sword
+	name = "warlike statue of a vulpkan of the Rakht clan"
+	desc = "Высокая, маскулинная мраморная статуя вульпканина, обрамленная золотом. Вульпканин смотрит исподлобья уверенным взглядом, приподняв свой меч. На табличке у основании статуи указаны надписи на канилунце - Рахтар'Бэр, Отец Мироздания, Великий Учитель Рахта."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "vulp-sword"
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 80
+	abstract_type = /obj/structure/statue/vulp_sword
 
 // Dummies
 /**

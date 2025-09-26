@@ -79,11 +79,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/syndicate, 32)
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/ussp, 32)
 
 /obj/structure/sign/flag/rakht
-    name = "flag of the Rakht clan"
-    desc = "Официальный флаг вульпканского клана Рахт на Альтаме."
-    icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
-    icon_state = "flag_rakht"
-    foldable_type = /obj/item/sign/flag/rakht
+	name = "flag of the Rakht clan"
+	desc = "Официальный флаг вульпканского клана Рахт на Альтаме."
+	icon = 'modular_bandastation/objects/icons/obj/structures/flags.dmi'
+	icon_state = "flag_rakht"
+	foldable_type = /obj/item/sign/flag/rakht
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/rakht, 32)
 
@@ -155,7 +155,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/flag/rakht, 32)
 	sign_path = /obj/structure/sign/flag/ussp
 
 /obj/item/sign/flag/rakht
-    name = "folded flag of the Rakht clan"
+	name = "folded flag of the Rakht clan"
 	desc = "Сложенный флаг вульпканского клана Рахт."
 	icon_state = "folded_rakht"
 	sign_path = /obj/structure/sign/flag/rakht
