@@ -44,7 +44,6 @@
 #include "job_slots_preferences/_job_slots_preferences.dme"
 #include "jobs/_jobs.dme"
 #include "jukebox/_jukebox.dme"
-#include "keybinding/_keybinding.dme"
 #include "language_improvements/_language_improvements.dme"
 #include "loadout/_loadout.dme"
 #include "mapping/_mapping.dme"
