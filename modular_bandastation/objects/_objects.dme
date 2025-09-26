@@ -106,14 +106,7 @@
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
 
 #include "code/mecha/mecha.dm"
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
+
 #include "_objects.dm"
 #include "code\effects\decal.dm"
 #include "code\effects\landmark.dm"
