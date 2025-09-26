@@ -57,7 +57,6 @@ export function SpawnPanel() {
       // BANDASTATION EDIT END: More handy verb
       }>
       <Window.Content>
-        // BANDASTATION EDIT START: More handy verb
         {advancedSettings && (
           <Modal
             style={{
