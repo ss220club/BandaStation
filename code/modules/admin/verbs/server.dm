@@ -32,10 +32,11 @@ ADMIN_VERB(restart, R_SERVER, "Reboot World", "Restarts the world immediately.",
 		options += TGS_RESTART;
 
 	if(SSticker.admin_delay_notice)
-		if(alert(user, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", "Yes", "No") != "Yes")
+		if(tgui_alert(user, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", list("Yes", "No")) != "Yes")
 			return FALSE
 
-	var/result = input(user, "Select reboot method", "World Reboot", options[1]) as null|anything in options
+	var/result = tgui_input_list(user, "Select reboot method", "World Reboot", options, REGULAR_RESTART) // BANDASTATION EDIT: Tgui input
+
 	if(isnull(result))
 		return
 
@@ -44,15 +45,16 @@ ADMIN_VERB(restart, R_SERVER, "Reboot World", "Restarts the world immediately.",
 	switch(result)
 		if(REGULAR_RESTART)
 			if(!user.is_localhost())
-				if(alert(user, "Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
+				if(tgui_alert(user, "Are you sure you want to restart the server?","This server is live", list("Restart", "Cancel")) != "Restart") // BANDASTATION EDIT: Tgui input
 					return FALSE
 			SSticker.Reboot(init_by, "admin reboot - by [user.key] [user.holder.fakekey ? "(stealth)" : ""]", 10)
 		if(REGULAR_RESTART_DELAYED)
-			var/delay = input("What delay should the restart have (in seconds)?", "Restart Delay", 5) as num|null
+			var/delay = tgui_input_number(user, "What delay should the restart have (in seconds)?", "Restart Delay", 5)
+
 			if(!delay)
 				return FALSE
 			if(!user.is_localhost())
-				if(alert(user,"Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
+				if(tgui_alert(user,"Are you sure you want to restart the server?","This server is live", list("Restart", "Cancel")) != "Restart") // BANDASTATION EDIT: Tgui input
 					return FALSE
 			SSticker.Reboot(init_by, "admin reboot - by [user.key] [user.holder.fakekey ? "(stealth)" : ""]", delay * 10)
 		if(HARD_RESTART)
@@ -131,7 +133,7 @@ ADMIN_VERB(delay_round_end, R_SERVER, "Delay Round End", "Prevent the server fro
 		tgui_alert(user, "The round end is already delayed. The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Alert", list("Ok"))
 		return
 
-	var/delay_reason = input(user, "Enter a reason for delaying the round end", "Round Delay Reason") as null|text
+	var/delay_reason = tgui_input_text(user, "Enter a reason for delaying the round end", "Round Delay Reason", max_length=50) // BANDASTATION EDIT: Tgui input
 
 	if(isnull(delay_reason))
 		return
@@ -206,7 +208,7 @@ ADMIN_VERB(toggle_respawn, R_SERVER, "Toggle Respawn", "Toggle the ability to re
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Respawn", "[new_state_text]")) // If you are copy-pasting this, ensure the 4th parameter is unique to the new proc!
 
 ADMIN_VERB(delay, R_SERVER, "Delay Pre-Game", "Delay the game start.", ADMIN_CATEGORY_SERVER)
-	var/newtime = input(user, "Set a new time in seconds. Set -1 for indefinite delay.", "Set Delay", round(SSticker.GetTimeLeft()/10)) as num|null
+	var/newtime = tgui_input_number(user, "Set a new time in seconds. Set -1 for indefinite delay.", "Set Delay", min_value=-1) // BANDASTATAION EDIT: TGUI input
 	if(!newtime)
 		return
 	if(SSticker.current_state > GAME_STATE_PREGAME)

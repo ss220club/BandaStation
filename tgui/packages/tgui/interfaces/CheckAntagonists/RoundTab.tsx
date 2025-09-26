@@ -34,14 +34,16 @@ export function RoundTab(props: RoundTabInfoProps) {
     <Stack vertical>
       <Stack.Item>
         <Section fontSize="13px" textAlign="center">
-          <Button onClick={() => act("delay-pre-game")} width="33%">
-            Delay Pre-Game
+          <Button onClick={() => act("end-round-now")} width="24%">
+            End Round Now
           </Button>
-          <Button onClick={() => act("delay-round-end")} width="33%">
+          <Button onClick={() => act("delay-round-end")} width="24%">
             Delay Round End
           </Button>
-          <Button onClick={() => act("end-round-now")} width="33%">
-            End Round Now
+          <Button onClick={() => act("undelay-round-end")} width="24%">
+            Undelay Round End
+          </Button><Button onClick={() => act("reboot-world")} width="24%">
+            Reboot world
           </Button>
         </Section>
       </Stack.Item>

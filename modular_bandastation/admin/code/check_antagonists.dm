@@ -33,6 +33,7 @@ ADMIN_VERB(ccheck_antagonists, R_ADMIN, "CCheck Antagonists", "See all antagonis
 	var/security = 0
 	var/security_dead = 0
 	var/antagonists_info = list()
+	var/teams_info = list()
 
 /datum/check_antagonists_panel/New(user)
 	if(istype(user, /client))
@@ -87,25 +88,11 @@ ADMIN_VERB(ccheck_antagonists, R_ADMIN, "CCheck Antagonists", "See all antagonis
 				brains++
 			else
 				other_players++
-	// dat += "<BR><b><font color='blue' size='3'>Players:|[connected_players - lobby_players] ingame|[connected_players] connected|[lobby_players] lobby|</font></b>"
-	// dat += "<BR><b><font color='green'>Living Players:|[living_players_connected] active|[living_players - living_players_connected] disconnected|</font></b>"
-	// dat += "<BR><b><font color='#e29300'>Antagonists Players:|[antagonists] ingame|[antagonists-antagonists_dead] alive|[antagonists_dead] dead|</font></b>"
-	// dat += "<BR><b><font color='#860e03'>Security Players:|[security] ingame|[security-security_dead] alive|[security_dead] dead|</font></b>"
-	// dat += "<BR><b><font color='#bf42f4'>SKIPPED \[On centcom Z-level\]: [living_skipped] living players|[drones] living drones|</font></b>"
-	// dat += "<BR><b><font color='red'>Dead/Observing players:|[observers_connected] active|[observers - observers_connected] disconnected|[brains] brains|</font></b>"
-	// if(other_players)
-	// 	dat += "<BR>[span_userdanger("[other_players] players in invalid state or the statistics code is bugged!")]"
-	// dat += "<br><br>"
 
-	// dat += build_antag_listing()
+	build_antag_listing()
 
-	// dat += "</body></html>"
-	// var/datum/browser/browser = new(usr, "roundstatus", "Round Status", 500, 500)
 
 /datum/check_antagonists_panel/proc/build_antag_listing()
-	var/list/sections = list()
-	var/list/priority_sections = list()
-
 	var/list/all_teams = list()
 	var/list/all_antagonists = list()
 
@@ -119,32 +106,12 @@ ADMIN_VERB(ccheck_antagonists, R_ADMIN, "CCheck Antagonists", "See all antagonis
 		for(var/datum/antagonist/X in all_antagonists)
 			if(X.get_team() == T)
 				all_antagonists -= X
-		sections += T.antag_listing_entry()
+		// sections += T.antag_listing_entry()
 
 	sortTim(all_antagonists, GLOBAL_PROC_REF(cmp_antag_category))
 
-	var/current_category
-	var/list/current_section = list()
-	for(var/i in 1 to all_antagonists.len)
-		var/datum/antagonist/current_antag = all_antagonists[i]
-		var/datum/antagonist/next_antag
-		if(i < all_antagonists.len)
-			next_antag = all_antagonists[i+1]
-		if(!current_category)
-			current_category = current_antag.roundend_category
-			current_section += "[capitalize(current_category)]"
-
-
-		current_section += current_antag.antag_listing_entry() // Name - (Traitor) - FLW | PM | TP
-
-
-		if(!next_antag || next_antag.roundend_category != current_antag.roundend_category) //End of section
-			current_section += "</table>"
-			sections += current_section.Join()
-			current_section.Cut()
-			current_category = null
-	var/list/all_sections = priority_sections + sections
-	return all_sections.Join("<br>")
+	antagonists_info = all_antagonists
+	teams_info = all_teams
 
 /datum/check_antagonists_panel/Destroy()
 	. = ..()
@@ -169,6 +136,27 @@ ADMIN_VERB(ccheck_antagonists, R_ADMIN, "CCheck Antagonists", "See all antagonis
 	switch(action)
 		if("game-mode-panel")
 			dynamic_panel(ui.user)
+		if("delay-round-end")
+			return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/delay_round_end)
+		if("undelay-round-end")
+			if(!check_rights(R_SERVER))
+				return
+
+			if(tgui_alert(usr, "Really cancel current round end delay? The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Undelay round end", list("Yes", "No")) == "No")
+				return
+
+			SSticker.admin_delay_notice = null
+			SSticker.delay_end = FALSE
+
+			log_admin("[key_name(usr)] undelayed the round end.")
+			if(SSticker.ready_for_reboot)
+				message_admins("[key_name_admin(usr)] undelayed the round end. You must now manually Reboot World to start the next shift.")
+			else
+				message_admins("[key_name_admin(usr)] undelayed the round end.")
+		if("end-round-now")
+			return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/end_round)
+		if("reboot-world")
+			return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/restart)
 
 /datum/check_antagonists_panel/ui_data(mob/user)
 	var/data = list()
