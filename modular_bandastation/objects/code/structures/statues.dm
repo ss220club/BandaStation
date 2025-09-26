@@ -260,8 +260,6 @@
     impressiveness = 80
     abstract_type = /obj/structure/statue/vulp_sword
 
-
-
 // Dummies
 /**
  *	It is used as decorative element, or for shitspawn/events
