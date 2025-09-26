@@ -246,7 +246,7 @@
 	inspiration_available = FALSE
 
 /obj/item/banner/species/rakht/mundane
-    name = "raknt banner"
+    name = "rakht banner"
     desc = "Баннер, гордо провозглашающий превосходящее влияние вульпканского Клана Рахт."
     icon_state = "banner_rakht"
     inhand_icon_state = "banner_rakht"
