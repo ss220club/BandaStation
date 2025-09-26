@@ -42,3 +42,6 @@
 	full_name = "Отключить Combat Mode"
 	hotkey_keys = list("1")
 	description = "Отключает боевой режим"
+
+/datum/keybinding/living/toggle_throw_mode
+	hotkey_keys = list("R", "Southwest")
