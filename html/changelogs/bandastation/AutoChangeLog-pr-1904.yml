@@ -1,0 +1,4 @@
+author: "NatWak"
+delete-after: True
+changes:
+  - balance: "Теперь флатпак требует две руки для переноски"
