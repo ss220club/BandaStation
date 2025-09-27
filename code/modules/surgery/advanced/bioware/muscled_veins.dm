@@ -1,6 +1,6 @@
 /datum/surgery/advanced/bioware/muscled_veins
-	name = "Vein Muscle Membrane"
-	desc = "A surgical procedure which adds a muscled membrane to blood vessels, allowing them to pump blood without a heart."
+	name = "Мышечная мембрана вены"
+	desc = "Хирургическая процедура, в ходе которой к кровеносным сосудам добавляется мышечная мембрана, позволяющая им перекачивать кровь без участия сердца."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -16,8 +16,8 @@
 	status_effect_gained = /datum/status_effect/bioware/heart/muscled_veins
 
 /datum/surgery/advanced/bioware/muscled_veins/mechanic
-	name = "Hydraulics Redundancy Subroutine"
-	desc = "A robotic upgrade which adds sophisticated hydraulics redundancies, allowing a patient to pump hydraulic fluid without an engine."
+	name = "Подпрограмма резервирования гидравлики"
+	desc = "Роботизированная модернизация, которая дополняет сложную гидравлику, позволяя пациенту перекачивать гидравлическую жидкость без использования двигателя."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -31,17 +31,17 @@
 	)
 
 /datum/surgery_step/apply_bioware/muscled_veins
-	name = "shape vein muscles (hand)"
+	name = "формирование мышцы вен (рука)"
 
 /datum/surgery_step/apply_bioware/muscled_veins/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
-		span_notice("You start wrapping muscles around [target]'s circulatory system."),
-		span_notice("[user] starts wrapping muscles around [target]'s circulatory system."),
-		span_notice("[user] starts manipulating [target]'s circulatory system."),
+		span_notice("Вы начинаете обматывать мышцами кровеносную систему [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает обматывать мышцами кровеносную систему [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает манипулировать кровеносной системой [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your entire body burns in agony!")
+	display_pain(target, "Все ваше тело горит в агонии!")
 
 /datum/surgery_step/apply_bioware/muscled_veins/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	. = ..()
@@ -51,8 +51,8 @@
 	display_results(
 		user,
 		target,
-		span_notice("You reshape [target]'s circulatory system, adding a muscled membrane!"),
-		span_notice("[user] reshapes [target]'s circulatory system, adding a muscled membrane!"),
-		span_notice("[user] finishes manipulating [target]'s circulatory system."),
+		span_notice("Вы изменяете кровеносную систему [target.declent_ru(GENITIVE)], добавляя мышечную мембрану!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] изменяет кровеносную систему [target.declent_ru(GENITIVE)], добавляя мышечную мембрану!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает манипулировать кровеносной системой [target.declent_ru(GENITIVE)]"),
 	)
-	display_pain(target, "You can feel your heartbeat's powerful pulses ripple through your body!")
+	display_pain(target, "Вы можете чувствовать, как мощные удары вашего сердца разносятся по всему телу!")
