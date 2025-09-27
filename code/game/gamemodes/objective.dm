@@ -449,36 +449,23 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 		if(!considered_alive(M, enforce_human = FALSE) || !SSshuttle.emergency.shuttle_areas[get_area(M.current)])
 			return FALSE
 	return SSshuttle.emergency.elimination_hijack(filter_by_human = FALSE, solo_hijack = TRUE)
-
+//BANDASTATION EDIT START - Rework Malf objectives
 /datum/objective/block
 	name = "no organics on shuttle"
-	explanation_text = "Не позволяйте разумным органическим формам жизни сбежать на шаттле живыми."
+	explanation_text = "Не позволяйте разумным органическим формам жизни сбежать на шаттле живыми. \
+	Успешное использование устройства судного дня - тоже вариант."
 	martyr_compatible = 1
 
 /datum/objective/block/check_completion()
-	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
+	if(GLOB.station_was_nuked)
 		return TRUE
+	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
 	for(var/mob/living/player in GLOB.player_list)
 		if(player.mind && player.stat != DEAD && (player.mob_biotypes & MOB_ORGANIC))
 			if(get_area(player) in SSshuttle.emergency.shuttle_areas)
 				return FALSE
 	return TRUE
-
-/datum/objective/purge
-	name = "no mutants on shuttle"
-	explanation_text = "Убедитесь, что на борту эвакуационного шаттла нет разумных видов гуманоидов, не являющихся людьми."
-	martyr_compatible = TRUE
-
-/datum/objective/purge/check_completion()
-	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
-		return TRUE
-	for(var/mob/living/player in GLOB.player_list)
-		if((get_area(player) in SSshuttle.emergency.shuttle_areas) && player.mind && player.stat != DEAD && ishuman(player))
-			var/mob/living/carbon/human/H = player
-			if(H.dna.species.id != SPECIES_HUMAN)
-				return FALSE
-	return TRUE
-
+// BANDASTATION EDIT END
 /datum/objective/robot_army
 	name = "robot army"
 	explanation_text = "Синхронизируйте с собой как минимум восемь активных киборгов."
