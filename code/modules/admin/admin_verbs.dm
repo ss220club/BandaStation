@@ -95,9 +95,11 @@ ADMIN_VERB(unban_panel, R_BAN, "Unbanning Panel", "Unban players here.", ADMIN_C
 	user.holder.unban_panel()
 	BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel")
 
-ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Look at the state of the game.", ADMIN_CATEGORY_GAME)
-	user.holder.Game()
-	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
+// BANDASTATION EDIT START: More handy verb
+// ADMIN_VERB(game_panel, R_ADMIN, "Game Panel", "Look at the state of the game.", ADMIN_CATEGORY_GAME)
+	// user.holder.Game()
+// 	BLACKBOX_LOG_ADMIN_VERB("Game Panel")
+// BANDASTATION EDIT END: More handy verb
 
 ADMIN_VERB(poll_panel, R_POLL, "Server Poll Management", "View and manage polls.", ADMIN_CATEGORY_MAIN)
 	user.holder.poll_list_panel()
