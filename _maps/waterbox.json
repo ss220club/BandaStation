@@ -35,7 +35,7 @@
 		"Cook": {
 			"additional_cqc_areas": [
 				"/area/station/service/bar",
-				"/area/station/commons/lounge"
+				"/area/station/commons/lounge",
 				"/area/station/service/kitchen"
 			]
 		},
