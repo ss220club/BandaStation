@@ -10,7 +10,7 @@
 	is_dimorphic = TRUE
 
 /obj/item/bodypart/chest/vulpkanin/get_butt_sprite()
-	return BUTT_SPRITE_VULPKANIN
+	return icon('icons/mob/butts.dmi', BUTT_SPRITE_VULPKANIN)
 
 /obj/item/bodypart/arm/left/vulpkanin
 	icon_greyscale = 'icons/bandastation/mob/species/vulpkanin/bodyparts.dmi'

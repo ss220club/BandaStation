@@ -6788,9 +6788,9 @@
 /obj/structure/closet/cabinet,
 /obj/item/gun/ballistic/revolver/mateba,
 /obj/item/storage/belt/holster,
-/obj/item/ammo_box/a357,
-/obj/item/ammo_box/a357,
-/obj/item/ammo_box/a357,
+/obj/item/ammo_box/speedloader/c357,
+/obj/item/ammo_box/speedloader/c357,
+/obj/item/ammo_box/speedloader/c357,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/cabin/soo)
 "aFL" = (
@@ -22255,8 +22255,8 @@
 /obj/item/clothing/glasses/hud/security/sunglasses/centcom_officer,
 /obj/item/clothing/gloves/color/white,
 /obj/item/gun/ballistic/revolver/cowboy,
-/obj/item/ammo_box/a357,
-/obj/item/ammo_box/a357,
+/obj/item/ammo_box/speedloader/c357,
+/obj/item/ammo_box/speedloader/c357,
 /obj/item/storage/backpack/satchel/leather,
 /obj/item/reagent_containers/hypospray/combat/nanites,
 /obj/item/clothing/accessory/medal/gold,
