@@ -66,6 +66,9 @@
 			rank = target.rank,
 			species = target.species,
 			trim = target.trim,
+			insurance_current = INSURANCE_TIER_TO_TEXT(target.insurance_current),
+			insurance_desired = INSURANCE_TIER_TO_TEXT(target.insurance_desired),
+			insurance_payer_account_id = target.insurance_payer_account_id,
 		))
 
 	data["records"] = records

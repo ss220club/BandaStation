@@ -103,3 +103,6 @@ GLOBAL_LIST_INIT(prototype_organs, typecacheof(list(
 	/obj/item/organ/tongue/dullahan,
 	/obj/item/organ/eyes/dullahan,
 ), only_root_path = TRUE))
+
+/// Active NTOS Insurance programs (for targeted UI refresh)
+GLOBAL_LIST_INIT(ntos_insurance_programs, list())

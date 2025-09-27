@@ -84,6 +84,13 @@
 	/// Current arrest status
 	var/wanted_status = WANTED_NONE
 
+	/// Insurance data: desired tier (what the owner picked)
+	var/insurance_desired = INSURANCE_NONE
+	/// Insurance data: current applied tier for this payday
+	var/insurance_current = INSURANCE_NONE
+	/// Bank account id used to pay insurance (0 if none)
+	var/insurance_payer_account_id = 0
+
 	///Photo used for records, which we store here so we don't have to constantly make more of.
 	var/list/obj/item/photo/record_photos
 

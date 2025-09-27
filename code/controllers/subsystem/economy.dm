@@ -53,6 +53,13 @@ SUBSYSTEM_DEF(economy)
 	 */
 	var/list/audit_log = list()
 
+	/// Aggregated sum of insurance premiums credited to MED this shift
+	var/insurance_premium_total = 0
+	/// Aggregated medical kiosk stats: total revenue and total covered by insurance
+	var/list/med_kiosk_report = list("total_revenue" = 0, "total_covered" = 0)
+	/// Aggregated medical vendor stats: total revenue and total covered by insurance
+	var/list/med_vendor_report = list("total_revenue" = 0, "total_covered" = 0)
+
 	/// Number of mail items generated.
 	var/mail_waiting = 0
 	/// Mail Holiday: AKA does mail arrive today? Always blocked on Sundays.
@@ -158,11 +165,97 @@ SUBSYSTEM_DEF(economy)
 		if(bank_account?.account_job && !ispath(bank_account.account_job))
 			temporary_total += (bank_account.account_job.paycheck * STARTING_PAYCHECKS)
 		bank_account.payday(1, skippable = TRUE)
+
+		// Handle optional insurance payment per account per payday
+		handle_insurance(bank_account)
 		station_total += bank_account.account_balance
 		if(MC_TICK_CHECK)
 			cached_processing.Cut(1, i + 1)
 			return FALSE
 	return TRUE
+
+/**
+ * Processes insurance for a player's bank account during payday.
+ * - Attempts to apply the desired tier, or downgrades to an affordable tier.
+ * - Deposits collected premium into the Medical department account.
+ * - Updates the crew record with current/desired tier and payer account id.
+ */
+/datum/controller/subsystem/economy/proc/handle_insurance(datum/bank_account/account)
+	if(!account)
+		return
+
+	// Validate desired tier
+	var/desired = isnull(account.insurance_desired) ? INSURANCE_NONE : account.insurance_desired
+	var/list/ALLOWED_TIERS = list(INSURANCE_NONE, INSURANCE_STANDARD, INSURANCE_PREMIUM)
+	if(!(desired in ALLOWED_TIERS))
+		desired = INSURANCE_NONE
+
+	var/final_tier = INSURANCE_NONE
+	var/success = FALSE
+
+	// Build attempt order: desired, then downgrade to standard if premium fails
+	var/list/tiers_to_try = list()
+	if(desired == INSURANCE_PREMIUM)
+		tiers_to_try += INSURANCE_PREMIUM
+		tiers_to_try += INSURANCE_STANDARD
+	else if(desired == INSURANCE_STANDARD)
+		tiers_to_try += INSURANCE_STANDARD
+	// desired == NONE -> no attempts
+
+	// Attempt to charge for each tier, rolling back on credit failure
+	for(var/tier in tiers_to_try)
+		var/cost = INSURANCE_TIER_TO_COST(tier)
+		if(cost <= 0)
+			continue
+		if(account.adjust_money(-cost, "Insurance Premium"))
+			var/datum/bank_account/department/med = get_dep_account(ACCOUNT_MED)
+			if(med?.adjust_money(cost, "Insurance Premium"))
+				final_tier = tier
+				success = TRUE
+				record_insurance_premium(cost)
+				break
+			// Roll back debit if MED account missing or credit failed
+			account.adjust_money(cost, "Insurance Premium Refund")
+		// If debit failed, loop will try next (downgraded) tier
+
+	// Update crew record after final result
+	var/datum/record/crew/rec = find_record(account.account_holder)
+	if(rec)
+		rec.insurance_desired = desired
+		rec.insurance_current = success ? final_tier : INSURANCE_NONE
+		rec.insurance_payer_account_id = isnull(account.account_id) ? 0 : account.account_id
+
+/**
+ * Records insurance premium income for reporting.
+ */
+/datum/controller/subsystem/economy/proc/record_insurance_premium(amount)
+	if(!isnum(amount) || amount <= 0)
+		return
+	insurance_premium_total += amount
+
+/**
+ * Records a medical kiosk transaction for reporting.
+ * amount: total paid by user; covered: discount value covered by insurance.
+ */
+/datum/controller/subsystem/economy/proc/report_med_kiosk(amount, covered)
+	if(!isnum(amount) || amount <= 0)
+		return
+	if(!isnum(covered) || covered < 0)
+		covered = 0
+	med_kiosk_report["total_revenue"] = (med_kiosk_report["total_revenue"] || 0) + amount
+	med_kiosk_report["total_covered"] = (med_kiosk_report["total_covered"] || 0) + covered
+
+/**
+ * Records a medical vendor transaction for reporting.
+ * amount: total paid by user; covered: discount value covered by insurance.
+ */
+/datum/controller/subsystem/economy/proc/report_med_vendor(amount, covered)
+	if(!isnum(amount) || amount <= 0)
+		return
+	if(!isnum(covered) || covered < 0)
+		covered = 0
+	med_vendor_report["total_revenue"] = (med_vendor_report["total_revenue"] || 0) + amount
+	med_vendor_report["total_covered"] = (med_vendor_report["total_covered"] || 0) + covered
 
 /**
  * Updates the the inflation_value, effecting newscaster alerts and the mail system.
