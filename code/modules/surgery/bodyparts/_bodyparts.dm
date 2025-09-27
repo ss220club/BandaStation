@@ -124,7 +124,7 @@
 	var/bleed_overlay_icon
 
 	//Damage messages used by help_shake_act()
-	var/light_brute_msg = "ушибленной и болит"
+	var/light_brute_msg = "ушибленной"
 	var/medium_brute_msg = "потрёпанной"
 	var/heavy_brute_msg = "искалеченной"
 
