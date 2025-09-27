@@ -1,0 +1,4 @@
+author: "azym76"
+delete-after: True
+changes:
+  - rscadd: "TTS ревенанта заменен на gollum"
