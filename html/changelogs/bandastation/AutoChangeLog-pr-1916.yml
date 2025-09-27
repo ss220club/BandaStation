@@ -1,0 +1,4 @@
+author: "ROdenFL"
+delete-after: True
+changes:
+  - image: "меняет иконку кнопки DNR"
