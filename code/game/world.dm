@@ -383,8 +383,6 @@ GLOBAL_VAR(restart_counter)
 	var/hostedby
 	if(config)
 		var/server_name = CONFIG_GET(string/servername)
-if (server_name)
-            var/discord_url = CONFIG_GET(string/discord_url)
 	if(server_name)
 		var/discord_url = CONFIG_GET(string/discord_url)
 		new_status += discord_url ? "<a href=\"[discord_url]\"><b>[server_name]</b></a>" : "<b>[server_name]</b>" // BANDASTATION EDIT
