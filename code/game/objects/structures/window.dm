@@ -76,6 +76,11 @@
 
 	if (flags_1 & ON_BORDER_1)
 		AddElement(/datum/element/connect_loc, loc_connections)
+	/* BANDASTATION ADDITION - START */
+	var/area/current_area = get_area(src)
+	if(electrochromic && current_area.tinted)
+		toggle_polarization()
+	/* BANDASTATION ADDITION - END */
 
 /obj/structure/window/mouse_drop_receive(atom/dropping, mob/user, params)
 	. = ..()
@@ -366,6 +371,16 @@
 	SIGNAL_HANDLER
 	if(!spraycan.actually_paints)
 		return
+	/* BANDASTATION ADDITION - START */
+	var/area/current_area = get_area(src)
+	if(electrochromic)
+		if(is_dark_color) // No dark colors for electrochromic windows
+			return
+
+		if(current_area.tinted)
+			color = generate_glass_matrix(src, TINTED_ALPHA)
+			return
+	/* BANDASTATION ADDITION - END */
 	if (is_dark_color && fulltile) //Opaque directional windows restrict vision even in directions they are not placed in, please don't do this
 		set_opacity(255)
 	else
