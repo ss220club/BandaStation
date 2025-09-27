@@ -10,6 +10,7 @@
 #include "code/greyscale/config_types/greyscale_clothes.dm"
 
 #include "code/items/banners.dm"
+#include "code/items/binoculars.dm"
 #include "code/items/cards_ids.dm"
 #include "code/items/hampters.dm"
 #include "code/items/instruments.dm"
