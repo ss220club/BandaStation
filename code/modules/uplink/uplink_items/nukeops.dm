@@ -925,7 +925,6 @@
 		you need before he gets back. And remember: DON'T TELL ANYONE! -M.T"
 	item = /obj/item/keycard/syndicate_fridge
 	purchasable_from = UPLINK_CLOWN_OPS | UPLINK_NUKE_OPS
-*/
 
 /datum/uplink_item/base_keys/custodial_key
 	name = "Syndicate Custodial Access Card"
@@ -933,6 +932,7 @@
 	with some janitorial supplies and an canister of water vapour."
 	item = /obj/item/keycard/syndicate_custodial
 	purchasable_from = UPLINK_CLOWN_OPS | UPLINK_NUKE_OPS
+*/
 
 // Hats
 // It is fundamental for the game's health for there to be a hat crate for nuclear operatives.
