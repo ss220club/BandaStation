@@ -124,12 +124,12 @@
 	var/bleed_overlay_icon
 
 	//Damage messages used by help_shake_act()
-	var/light_brute_msg = "ушиблена и болит"
-	var/medium_brute_msg = "избита"
+	var/light_brute_msg = "ушибленной и болит"
+	var/medium_brute_msg = "побитой"
 	var/heavy_brute_msg = "словно отслаивается"
 
-	var/light_burn_msg = "покраснела и онемела"
-	var/medium_burn_msg = "покрыта волдырями"
+	var/light_burn_msg = "покрасневшей и онемевшей"
+	var/medium_burn_msg = "покрытой волдырями"
 	var/heavy_burn_msg = "отслаивает кожу"
 
 	//Damage messages used by examine(). the desc that is most common accross all bodyparts gets shown
@@ -326,7 +326,7 @@
 
 	if(self_aware)
 		if(!shown_brute && !shown_burn)
-			status = "никаких повреждений"
+			status = "нет повреждений"
 		else
 			status = "[shown_brute] урона от ушибов и [shown_burn] урона от ожогов"
 
@@ -349,10 +349,10 @@
 			status += light_burn_msg
 
 		if(status == "")
-			status = "в порядке"
+			status = "невредимой"
 
 	var/no_damage
-	if(status == "в порядке" || status == "нет повреждений")
+	if(status == "невредимой" || status == "нет повреждений")
 		no_damage = TRUE
 
 	var/is_disabled = ""
