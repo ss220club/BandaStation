@@ -385,7 +385,9 @@ GLOBAL_VAR(restart_counter)
 		var/server_name = CONFIG_GET(string/servername)
 if (server_name)
             var/discord_url = CONFIG_GET(string/discord_url)
-            new_status += discord_url ? "<a href=\"[discord_url]\"><b>[server_name]</b></a>" : "<b>[server_name]</b>" // BANDASTATION EDIT
+	if(server_name)
+		var/discord_url = CONFIG_GET(string/discord_url)
+		new_status += discord_url ? "<a href=\"[discord_url]\"><b>[server_name]</b></a>" : "<b>[server_name]</b>" // BANDASTATION EDIT
 		if(CONFIG_GET(flag/allow_respawn))
 			features += "respawn" // show "respawn" regardless of "respawn as char" or "free respawn"
 		if(!CONFIG_GET(flag/allow_ai))
