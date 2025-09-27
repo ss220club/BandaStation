@@ -1,12 +1,12 @@
 name: "Discord PR Notification"
 on:
   pull_request_target:
-    types: [opened, closed, labeled]
+    types: [opened, reopened, closed, labeled]
 
 jobs:
   notify:
     runs-on: ubuntu-latest
-    if: ${{ github.event.action != 'labeled' || github.event.label.name == 'Stale' }}
+    if: "${{ github.event.action != 'labeled' || github.event.label.name == ':poop: Stale' }}"
     steps:
       - name: "Check for DISCORD_WEBHOOK"
         id: secrets_set
