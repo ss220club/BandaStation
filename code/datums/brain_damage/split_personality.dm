@@ -19,6 +19,7 @@
 	var/temp_component = FALSE
 
 /datum/brain_trauma/severe/split_personality/on_gain()
+	ADD_TRAIT(owner, TRAIT_NO_SDD, REF(src))
 	var/mob/living/brain_owner = owner
 	if(brain_owner.stat == DEAD || !GET_CLIENT(brain_owner) || istype(get_area(brain_owner), /area/deathmatch)) //No use assigning people to a corpse or braindead
 		return FALSE
@@ -58,7 +59,7 @@
 	if(isnull(ghost))
 		qdel(src)
 		return
-	if(ghost.mind.current)// if they previous had a body preserve them else that means they never had one or it was destroyed so assign ckey like normal
+	if(ghost?.mind?.current)// if they previous had a body preserve them else that means they never had one or it was destroyed so assign ckey like normal
 		stranger_backseat.AddComponent( \
 		/datum/component/temporary_body, \
 		old_mind = ghost.mind, \
@@ -94,6 +95,7 @@
 		stranger_backseat?.ghostize()
 	QDEL_NULL(stranger_backseat)
 	QDEL_NULL(owner_backseat)
+	REMOVE_TRAIT(owner, TRAIT_NO_SDD, REF(src))
 	..()
 
 // Changes who controls the body

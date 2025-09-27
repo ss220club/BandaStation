@@ -2,12 +2,16 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 
 /datum/element/ssd
 	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
+	var/blacklisted_types = list(
+	/mob/living/silicon/robot/shell,
+	/mob/living/split_personality,
+	)
 
 /datum/element/ssd/Attach(datum/target)
 	. = ..()
 	if(!isliving(target))
 		return ELEMENT_INCOMPATIBLE
-	if(istype(target, /mob/living/silicon/robot/shell))
+	if(is_type_in_list(target, blacklisted_types))
 		Detach(target)
 		return
 	RegisterSignal(target, COMSIG_MOB_LOGOUT, PROC_REF(on_mob_logout))
@@ -26,11 +30,13 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	. = ..()
 	if(istype(source, /mob/living/silicon/robot/shell))
 		return
-	UnregisterSignal(source, COMSIG_MOB_LOGIN)
-	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
-	UnregisterSignal(source, COMSIG_LIVING_DEATH)
-	UnregisterSignal(source, COMSIG_LIVING_REVIVE)
-	UnregisterSignal(source, COMSIG_MOB_ADMIN_GHOSTED)
+	UnregisterSignal(source, list(
+		COMSIG_MOB_LOGIN,
+		COMSIG_MOB_LOGOUT,
+		COMSIG_LIVING_DEATH,
+		COMSIG_LIVING_REVIVE,
+		COMSIG_MOB_ADMIN_GHOSTED,
+	))
 	if(isAI(source))
 		UnregisterSignal(source, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF)
 	if(iscyborg(source))
@@ -41,16 +47,22 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 /datum/element/ssd/proc/on_mob_logout(mob/living/source)
 	SIGNAL_HANDLER
 
+	if(HAS_TRAIT(source, TRAIT_NO_SDD))
+		return
+
 	if(source.stat != DEAD)
 		source.add_overlay(GLOB.ssd_indicator_overlay)
 	source.player_logged = FALSE
 
-/datum/element/ssd/proc/on_mob_login(mob/living/source)
-	SIGNAL_HANDLER
-
+/datum/element/ssd/proc/handle_detach(mob/living/source)
 	source.cut_overlay(GLOB.ssd_indicator_overlay)
 	source.player_logged = TRUE
 	Detach(source)
+
+/datum/element/ssd/proc/on_mob_login(mob/living/source)
+	SIGNAL_HANDLER
+
+	handle_detach(source)
 
 /datum/element/ssd/proc/on_mob_death(mob/living/source)
 	SIGNAL_HANDLER
@@ -68,16 +80,12 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	if(!source.key || source.key[1] != "@")
 		return
 
-	source.cut_overlay(GLOB.ssd_indicator_overlay)
-	source.player_logged = TRUE
-	Detach(source)
+	handle_detach(source)
 
 /datum/element/ssd/proc/on_ai_mind_transfer(mob/living/silicon/ai/source)
 	SIGNAL_HANDLER
 
-	source.cut_overlay(GLOB.ssd_indicator_overlay)
-	source.player_logged = TRUE
-	Detach(source)
+	handle_detach(source)
 
 /datum/element/ssd/proc/on_cyborg_update_overlays(mob/living/silicon/robot/cyborg)
 	SIGNAL_HANDLER
@@ -91,9 +99,7 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 /datum/element/ssd/proc/on_slimeman_swap_body(mob/living/source)
 	SIGNAL_HANDLER
 
-	source.cut_overlay(GLOB.ssd_indicator_overlay)
-	source.player_logged = TRUE
-	Detach(source)
+	handle_detach(source)
 
 /mob/living/Logout()
 	AddElement(/datum/element/ssd)

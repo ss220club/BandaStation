@@ -457,6 +457,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HALLUCINATION_IMMUNE "hallucination_immune"
 /// Increases chance of getting special traumas, makes them harder to cure
 #define TRAIT_SPECIAL_TRAUMA_BOOST "special_trauma_boost"
+#define TRAIT_NO_SDD "no_sdd" // BANDASTATION ADD - No SSD
 #define TRAIT_SPACEWALK "spacewalk"
 /// Mobs with this trait still breathe gas in and out but aren't harmed by lacking any particular gas mix. (You can still be hurt by TOO MUCH of a specific gas).
 #define TRAIT_NO_BREATHLESS_DAMAGE "spacebreathing"
