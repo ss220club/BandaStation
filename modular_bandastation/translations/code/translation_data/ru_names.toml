@@ -27350,6 +27350,15 @@ instrumental = "коридором отдела обслуживания"
 prepositional = "коридоре отдела обслуживания"
 gender = "male"
 
+["Corporate Judo Belt"]
+nominative = "пояс корпоративного дзюдо"
+genitive = "пояса корпоративного дзюдо"
+dative = "поясу корпоративного дзюдо"
+accusative = "пояс корпоративного дзюдо"
+instrumental = "поясом корпоративного дзюдо"
+prepositional = "поясе корпоративного дзюдо"
+gender = "male"
+
 ["Nanotrasen radio jammer"]
 nominative = "генератор помех Нанотрейзен "
 genitive = "генератора помех Нанотрейзен"
