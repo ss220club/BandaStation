@@ -4,7 +4,6 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 	var/blacklisted_types = list(
 	/mob/living/silicon/robot/shell,
-	/mob/living/split_personality,
 	)
 
 /datum/element/ssd/Attach(datum/target)

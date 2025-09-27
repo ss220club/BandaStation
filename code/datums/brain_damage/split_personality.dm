@@ -34,10 +34,12 @@
 
 /datum/brain_trauma/severe/split_personality/proc/make_backseats()
 	stranger_backseat = new(owner, src)
+	ADD_TRAIT(stranger_backseat, TRAIT_NO_SDD, REF(src))
 	var/datum/action/personality_commune/stranger_spell = new(src)
 	stranger_spell.Grant(stranger_backseat)
 
 	owner_backseat = new(owner, src)
+	ADD_TRAIT(owner_backseat, TRAIT_NO_SDD, REF(src))
 	var/datum/action/personality_commune/owner_spell = new(src)
 	owner_spell.Grant(owner_backseat)
 
@@ -274,7 +276,7 @@
 		qdel(src)
 
 /datum/brain_trauma/severe/split_personality/blackout/on_life(seconds_per_tick, times_fired)
-	if(current_controller == OWNER && stranger_backseat)//we should only start transitioning after the other personality has entered
+	if(current_controller == OWNER && stranger_backseat.client)//we should only start transitioning after the other personality has entered
 		owner.overlay_fullscreen("fade_to_black", /atom/movable/screen/fullscreen/blind)
 		owner.clear_fullscreen("fade_to_black", animated = 4 SECONDS)
 		switch_personalities()
