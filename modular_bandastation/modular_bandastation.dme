@@ -31,6 +31,7 @@
 #include "customization/_customization.dme"
 #include "cyrillic_fixes/_cyrillic_fixes.dme"
 #include "database220/_database220.dme"
+#include "digital_warrant/_digital_warrant.dme"
 #include "discord/_discord.dme"
 #include "emote_panel/_emote_panel.dme"
 #include "ert/_ert.dme"
