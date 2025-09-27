@@ -2,15 +2,12 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 
 /datum/element/ssd
 	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
-	var/blacklisted_types = list(
-	/mob/living/silicon/robot/shell,
-	)
 
 /datum/element/ssd/Attach(datum/target)
 	. = ..()
 	if(!isliving(target))
 		return ELEMENT_INCOMPATIBLE
-	if(is_type_in_list(target, blacklisted_types))
+	if(istype(target, /mob/living/silicon/robot/shell))
 		Detach(target)
 		return
 	RegisterSignal(target, COMSIG_MOB_LOGOUT, PROC_REF(on_mob_logout))
@@ -45,9 +42,6 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 
 /datum/element/ssd/proc/on_mob_logout(mob/living/source)
 	SIGNAL_HANDLER
-
-	if(HAS_TRAIT(source, TRAIT_NO_SDD))
-		return
 
 	if(source.stat != DEAD)
 		source.add_overlay(GLOB.ssd_indicator_overlay)

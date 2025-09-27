@@ -19,7 +19,6 @@
 	var/temp_component = FALSE
 
 /datum/brain_trauma/severe/split_personality/on_gain()
-	ADD_TRAIT(owner, TRAIT_NO_SDD, REF(src))
 	var/mob/living/brain_owner = owner
 	if(brain_owner.stat == DEAD || !GET_CLIENT(brain_owner) || istype(get_area(brain_owner), /area/deathmatch)) //No use assigning people to a corpse or braindead
 		return FALSE
@@ -34,12 +33,10 @@
 
 /datum/brain_trauma/severe/split_personality/proc/make_backseats()
 	stranger_backseat = new(owner, src)
-	ADD_TRAIT(stranger_backseat, TRAIT_NO_SDD, REF(src))
 	var/datum/action/personality_commune/stranger_spell = new(src)
 	stranger_spell.Grant(stranger_backseat)
 
 	owner_backseat = new(owner, src)
-	ADD_TRAIT(owner_backseat, TRAIT_NO_SDD, REF(src))
 	var/datum/action/personality_commune/owner_spell = new(src)
 	owner_spell.Grant(owner_backseat)
 
@@ -97,7 +94,6 @@
 		stranger_backseat?.ghostize()
 	QDEL_NULL(stranger_backseat)
 	QDEL_NULL(owner_backseat)
-	REMOVE_TRAIT(owner, TRAIT_NO_SDD, REF(src))
 	..()
 
 // Changes who controls the body
