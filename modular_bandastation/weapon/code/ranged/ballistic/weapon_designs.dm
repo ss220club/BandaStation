@@ -90,3 +90,29 @@
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+// MARK: Railgun rounds
+/datum/design/railgun_round
+	name = "railgun sabot-round (30mm NT) (Lethal)"
+	desc = "Специальный бронебойный снаряд калибра 30мм для использования в ручных электромагнитных ускорителей масс. Отлично подходит для уничтожения чего угодно, но какой ценой?"
+	id = "railgun_lethal"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 10
+	)
+	build_path = /obj/item/ammo_casing/railgun
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/railgun_round/taser
+	name = "railgun taser-round (30mm NT) (Less-lethal)"
+	desc = "Специальный менее летальный оглушающий снаряд калибра 30мм для использования в ручных электромагнитных ускорителей масс. Отлично подходит для обезвреживания особо опасных преступников."
+	id = "railgun_taser"
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT * 10
+	)
+	build_path = /obj/item/ammo_casing/railgun/taser

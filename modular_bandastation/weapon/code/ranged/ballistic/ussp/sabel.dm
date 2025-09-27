@@ -128,7 +128,7 @@
 	/// Maximum degradation stage.
 	var/degradation_stage_max = 5
 	/// The probability of degradation increasing per shot.
-	var/degradation_probability = 50
+	var/degradation_probability = 15
 	/// The maximum speed malus for projectile flight speed. Projectiles probably shouldn't move too slowly or else they will start to cause problems.
 	var/maximum_speed_malus = 0.7
 	/// What is our damage multiplier if the gun is emagged?
@@ -159,18 +159,28 @@
 	if(!gauss_mode_selection)
 		gauss_mode = TRUE
 		balloon_alert(user, "режим - гаусс")
+		degradation_probability += 10
 	else
 		gauss_mode = FALSE
 		balloon_alert(user, "режим - обычный")
+		degradation_probability -= 10
+
 	playsound(user, 'sound/items/weapons/empty.ogg', 100, TRUE)
 	update_appearance()
 	update_item_action_buttons()
 
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/examine(mob/user)
+	. = ..()
+	if(shots_before_degradation)
+		. += span_notice("[declent_ru(NOMINATIVE)] может совершить [shots_before_degradation] выстрелов перед риском деградации системы рельсовых накопителей.")
+	else
+		. += span_notice("[declent_ru(NOMINATIVE)] в процессе деградации системы рельсовых накопителей. Стадия [degradation_stage] из [degradation_stage_max]. Используйте мультитул на [declent_ru(NOMINATIVE)] чтобы перезагрузить систему.")
+
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/examine_more(mob/user)
 	. = ..()
 	. += "Этот вариант является эксперементальной переделкой автомата AMK с использованием гаусс-технологий. \
-	На оригинальные детали были установлены капаситоры и катушки, используемые для ускорения пули в стволе. \
-	На прикладе имеется батарея с индикатором загруженности капаситоров. \
+	На оригинальные детали были установлены конденсаторы и катушки, используемые для ускорения пули в стволе. \
+	На прикладе имеется батарея с индикатором загруженности конденсаторов. \
 	Из-за того что модификация сделана 'на коленке', о защите от ЭМИ можно только мечтать."
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/Initialize(mapload)
@@ -180,7 +190,7 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(held_item?.tool_behaviour == TOOL_MULTITOOL)
-		context[SCREENTIP_CONTEXT_LMB] = "Перезагрузить капаситоры"
+		context[SCREENTIP_CONTEXT_LMB] = "Перезагрузить конденсаторы"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/update_overlays()
@@ -204,7 +214,7 @@
 		return FALSE
 	obj_flags |= EMAGGED
 	projectile_damage_multiplier = emagged_projectile_damage_multiplier
-	balloon_alert(user, "капаситоры перегружены")
+	balloon_alert(user, "конденсаторы перегружены")
 	return TRUE
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/multitool_act(mob/living/user, obj/item/tool)
@@ -218,7 +228,7 @@
 	projectile_speed_multiplier = initial(projectile_speed_multiplier)
 	fire_delay = initial(fire_delay)
 	update_appearance()
-	balloon_alert(user, "капаситоры перезагружены")
+	balloon_alert(user, "конденсаторы перезагружены")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/try_fire_gun(atom/target, mob/living/user, params)
@@ -226,21 +236,20 @@
 	if(!chambered || (chambered && !chambered.loaded_projectile))
 		return
 
-	if(shots_before_degradation)
-		shots_before_degradation --
-		return
-
-	else if ((obj_flags & EMAGGED) && degradation_stage == degradation_stage_max && !explosion_timer)
-		perform_extreme_malfunction(user)
-
-	else
-		attempt_degradation(FALSE)
-
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(chambered.loaded_projectile && prob(75) && (emp_malfunction || degradation_stage == degradation_stage_max))
 		balloon_alert_to_viewers("*шелк*")
 		playsound(src, dry_fire_sound, dry_fire_sound_volume, TRUE)
 		return
+
+	. = ..()
+	if(.)
+		if(shots_before_degradation)
+			shots_before_degradation --
+		else if((obj_flags & EMAGGED) && degradation_stage == degradation_stage_max && !explosion_timer)
+			perform_extreme_malfunction(user)
+		else
+			attempt_degradation(FALSE)
 
 	if(chambered.loaded_projectile && gauss_mode)
 		chambered.loaded_projectile = new /obj/projectile/bullet/a762x39/gauss
@@ -253,9 +262,6 @@
 
 /// Proc to handle weapon degradation. Called when attempting to fire or immediately after an EMP takes place.
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/attempt_degradation(force_increment = FALSE)
-	if(gauss_mode)
-		degradation_probability += 25
-
 	if(!prob(degradation_probability) && !force_increment || degradation_stage == degradation_stage_max)
 		return // Only update if we actually increment our degradation stage
 
@@ -282,6 +288,8 @@
 	base_icon_state = "amk_gauss_tacticool"
 	worn_icon_state = "amk_modern"
 	recoil = 0.2
+	degradation_probability = 10
+	shots_before_degradation = 60
 
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/examine_more(mob/user)
 	. = ..()
