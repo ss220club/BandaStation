@@ -2,8 +2,8 @@
 	name = "Bóbr revolver"
 	desc = "Устаревшая попытка увеличить размер револьвера до «пригодного для использования» калибра для пограничных и/или отдаленных планет. \
 		Очевидно, результатом этих усилий стал барабан на четыре патрона, изготовленный для патронов 12-го калибра."
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev762     //cylinder/rev12ga
-	recoil = 1
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga
+	recoil = 2
 	weapon_weight = WEAPON_MEDIUM
 	icon = 'modular_bandastation/weapon/icons/ranged/32x32.dmi'
 	icon_state = "bobr"

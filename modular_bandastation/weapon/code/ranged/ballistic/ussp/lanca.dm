@@ -14,9 +14,14 @@
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
 	slot_flags = ITEM_SLOT_BACK
-	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x51mm    //lanca
-	//fire_sound = 'modular_nova/modules/modular_weapons/sounds/battle_rifle.ogg'
-	//suppressed_sound = 'modular_nova/modules/modular_weapons/sounds/suppressed_heavy.ogg'
+	accepted_magazine_type = /obj/item/ammo_box/magazine/strilka310
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/rifle_heavy_2.ogg'
+	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_heavy.ogg'
+	rack_sound = 'modular_bandastation/weapon/sound/ranged/dmr_cocked.ogg'
+	load_sound = 'modular_bandastation/weapon/sound/ranged/dmr_reload.ogg'
+	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/dmr_reload.ogg'
+	eject_sound = 'modular_bandastation/weapon/sound/ranged/dmr_unload.ogg'
+	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dmr_unload.ogg'
 	can_suppress = TRUE
 	suppressor_x_offset = 2
 	suppressor_y_offset = 1
@@ -49,9 +54,9 @@
 	desc = "Относительно компактная длинноствольная боевая винтовка под патрон .310 Strilka. Имеет встроенный прицел с \
 		удивительно высокой кратностью увеличения, учитывая его происхождение."
 	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
-	icon_state = "lanca"
+	icon_state = "lanca_army"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
 	worn_icon_state = "lanca"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
-	inhand_icon_state = "lanca"
+	inhand_icon_state = "lanca_army"

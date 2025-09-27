@@ -12,18 +12,23 @@
 	base_icon_state = "dshk"
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	accepted_magazine_type = /obj/item/ammo_box/magazine/m7mm
+	accepted_magazine_type = /obj/item/ammo_box/magazine/dshk
 	weapon_weight = WEAPON_HEAVY
 	burst_size = 1
 	actions_types = list()
 	can_suppress = FALSE
-	spread = 7
+	recoil = 1.2
+	spread = 10
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
 	mag_display = TRUE
 	tac_reloads = FALSE
-	fire_sound = 'sound/items/weapons/gun/l6/shot.ogg'
-	rack_sound = 'sound/items/weapons/gun/l6/l6_rack.ogg'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/dshk.ogg'
+	rack_sound = 'modular_bandastation/weapon/sound/ranged/dshk_cocked_alt.ogg'
+	load_sound = 'modular_bandastation/weapon/sound/ranged/dshk_reload.ogg'
+	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
+	eject_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
+	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
 	var/cover_open = FALSE
 
@@ -94,9 +99,8 @@
 	За свою индетичность с оригиналом, но в тоже время различие, солдаты часто дают ему схожее ласковое название - \"Дашка\""
 	icon_state = "dshk12"
 	base_icon_state = "dshk12"
-	accepted_magazine_type = /obj/item/ammo_box/magazine/m12g
-	spread = 7
-	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
+	accepted_magazine_type = /obj/item/ammo_box/magazine/dshk/c12ga
+	spread = 15
 
 /obj/item/gun/ballistic/automatic/dshk/shotgun/examine_more(mob/user)
 	. = ..()

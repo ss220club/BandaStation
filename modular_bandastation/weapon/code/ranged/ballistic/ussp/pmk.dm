@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/pmk
 	name = "PMK light machine gun"
-	desc = "Легкий ручной пулемет оснащенный калибром 7.62x54ммР, разработанный в СССП как надежное оружие поддержки пехоты."
+	desc = "Легкий ручной пулемет калибра 7.62x54ммР, разработанный в СССП как надежное оружие поддержки пехоты."
 	icon = 'modular_bandastation/weapon/icons/ranged/64x32.dmi'
 	icon_state = "pmk"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
@@ -12,18 +12,23 @@
 	SET_BASE_PIXEL(-16, 0)
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	accepted_magazine_type = /obj/item/ammo_box/magazine/m7mm
+	accepted_magazine_type = /obj/item/ammo_box/magazine/pmk
 	weapon_weight = WEAPON_HEAVY
 	burst_size = 1
 	actions_types = list()
 	can_suppress = TRUE
-	spread = 7
+	spread = 10
+	recoil = 1
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
 	mag_display = TRUE
 	tac_reloads = FALSE
-	fire_sound = 'sound/items/weapons/gun/l6/shot.ogg'
-	rack_sound = 'sound/items/weapons/gun/l6/l6_rack.ogg'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/cm40.ogg'
+	rack_sound = 'modular_bandastation/weapon/sound/ranged/dshk_cocked.ogg'
+	load_sound = 'modular_bandastation/weapon/sound/ranged/pmk_reload.ogg'
+	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/pmk_reload.ogg'
+	eject_sound = 'modular_bandastation/weapon/sound/ranged/pmk_unload.ogg'
+	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/pmk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
 	var/cover_open = FALSE
 
@@ -43,7 +48,7 @@
 	. = ..()
 	. += "Легкий ручной пулемет ПМК был разработан Оборонной Коллегией СССП с целью создания компактного, \
 		но надежного оружия для поддержки пехоты, способного выдерживать различные экстремальные условия. <br>\
-		Оснащенный калибром .310 / 7.62x54 и ленточным питанием на 100 патронов, он предоставляет высокую скорострельность и кучную стрельбу. \
+		Оснащенный калибром 7.62x54мм и ленточным питанием на 100 патронов, он предоставляет высокую скорострельность и кучную стрельбу. \
 		ПМК имеет универсальные крепления для тактических аксессуаров, включая фонари и лазерные целеуказатели, \
 		а эргономичный приклад с амортизирующей накладкой ослабляет отдачу и обеспечивает комфорт при длительном использовании. \
 		Использовавшие ПМК отмечают высокую надежность пулемета, полученную благодаря использованию легких титановых сплавов и керамических покрытий при сборке."

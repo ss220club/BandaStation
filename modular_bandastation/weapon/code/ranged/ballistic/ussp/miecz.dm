@@ -12,10 +12,15 @@
 	special_mags = FALSE
 	bolt_type = BOLT_TYPE_STANDARD
 	w_class = WEIGHT_CLASS_BULKY
-	weapon_weight = WEAPON_MEDIUM
+	weapon_weight = WEAPON_HEAVY
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
-	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm      //miecz
-	//fire_sound = 'modular_nova/modules/modular_weapons/sounds/ak_shoot.ogg'
+	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/ak_shoot.ogg'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
+	rack_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_cock.ogg'
+	load_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
+	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
+	eject_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magout.ogg'
 	can_suppress = TRUE
 	suppressor_x_offset = 5
 	suppressor_y_offset = 3
@@ -40,3 +45,8 @@
 
 /obj/item/gun/ballistic/automatic/miecz/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/miecz/army
+	icon_state = "miecz_army"
+	worn_icon_state = "miecz_army"
+	inhand_icon_state = "miecz_army"

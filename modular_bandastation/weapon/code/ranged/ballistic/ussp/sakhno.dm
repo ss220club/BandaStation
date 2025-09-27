@@ -3,6 +3,7 @@
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	recoil = 1
 
 /obj/item/gun/ballistic/rifle/boltaction/surplus
 	inhand_icon_state = "sakhno"
@@ -63,12 +64,13 @@
 	inhand_icon_state = "sakhno"
 	slot_flags = ITEM_SLOT_BACK
 	SET_BASE_PIXEL(-8, 0)
-	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x51mm  //lanca
+	accepted_magazine_type = /obj/item/ammo_box/magazine/strilka310 //lanca
 	mag_display = TRUE
 	tac_reloads = TRUE
 	internal_magazine = FALSE
 	can_be_sawn_off = FALSE
 	weapon_weight = WEAPON_HEAVY
+	recoil = 0.5
 
 /obj/item/gun/ballistic/rifle/krov/examine(mob/user)
 	. = ..()
@@ -96,4 +98,5 @@
 
 /obj/item/gun/ballistic/rifle/krov/empty
 	bolt_locked = TRUE // so the bolt starts visibly open
-	//spawn_magazine_type = /obj/item/ammo_box/magazine/lanca/spawns_empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/strilka310/starts_empty
+

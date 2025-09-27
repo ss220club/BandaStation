@@ -161,3 +161,51 @@
 	desc = "Коробка с бронебойными пистолетными патронами калибра 9x25мм НТ, вмещает 24 патрона. Серебрянная полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "35box_ap"
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
+
+// MARK: 5.56x45
+
+
+// MARK: BOXES WITH MAGAZINES
+/obj/item/storage/toolbox/ammobox/c9x25mm
+	name = "9x25mm NT pistol magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol
+
+/obj/item/storage/toolbox/ammobox/c9x25mm/extended
+	name = "9x25mm NT pistol extended magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo
+
+/obj/item/storage/toolbox/ammobox/amk
+	name = "7.62x39mm AMK magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c762x39mm
+
+/obj/item/storage/toolbox/ammobox/c40sol
+	name = ".40 Sol Long standart magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c40sol_rifle/standard
+
+/obj/item/storage/toolbox/ammobox/c35sol
+	name = ".35 Sol short standart magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c35sol_pistol
+
+/obj/item/storage/toolbox/ammobox/c762x51mm
+	name = "7.62x51mm magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c762x51mm
+
+/obj/item/storage/toolbox/ammobox/wt550m9ap
+	name = "7.62x54mmR ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/
+
+/obj/item/storage/toolbox/ammobox/c223
+	name = "5.56x45mm magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c223
+
+/obj/item/storage/toolbox/ammobox/c45
+	name = ".45 magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/c45
+
+/obj/item/storage/toolbox/ammobox/m9mm
+	name = "9mm SMG magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/m9mm
+
+/obj/item/storage/toolbox/ammobox/m10mm
+	name = "10mm SMG magazines ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/magazine/smg10mm

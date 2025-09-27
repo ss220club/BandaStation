@@ -245,35 +245,122 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sa-casing"
 
-// MARK: .310 Strilka
-/obj/item/ammo_casing/strilka310/rubber
+// MARK: 9mm
+/obj/item/ammo_casing/c9mm/rubber
+	name = "9mm rubber bullet casing"
+	desc = "Травматический пистолетный патрон калибра 9мм."
+	projectile_type = /obj/projectile/bullet/c9mm/rubber
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
 
+// MARK: 10mm
+/obj/item/ammo_casing/c10mm/rubber
+	name = "10mm rubber bullet casing"
+	desc = "Травматический пистолетный патрон калибра 10мм."
+	projectile_type = /obj/projectile/bullet/c10mm/rubber
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
+
+// MARK: .310 Strilka
 /obj/item/ammo_casing/strilka310/ap
+	name = ".310 Strilka armor-piercing bullet casing"
+	desc = "Бронебойный винтовочный безгильзовый патрон калибра .310 Стрилка."
+	projectile_type = /obj/projectile/bullet/strilka310/ap
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "310ap-casing"
 
 /obj/item/ammo_casing/strilka310/hp
+	name = ".310 Strilka hollow-point bullet casing"
+	desc = "Экспансивный винтовочный безгильзовый патрон калибра .310 Стрилка."
+	projectile_type = /obj/projectile/bullet/strilka310/hp
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "310hp-casing"
 
-/obj/item/ammo_casing/strilka310
+/obj/item/ammo_casing/strilka310/incendiary
+	name = ".310 Strilka incendiary bullet casing"
+	desc = "Зажигательный винтовочный безгильзовый патрон калибра .310 Стрилка."
+	projectile_type = /obj/projectile/bullet/incendiary/strilka310
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "310hp-casing"
+
+/obj/item/ammo_casing/strilka310/phasic
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "310ap-casing"
 
 // MARK: .90 Strela
-/obj/item/ammo_casing/c90strela
+/obj/item/ammo_casing/strela60
 	name = ".90 Strela anti-material bullet casing"
 	desc = "Крупнокалиберный безгильзовый винтовочный патрон калибра .90 Стрела."
-	//projectile_type = /obj/projectile/bullet/c90strela
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
-	icon_state = "90strela-casing"
+	icon_state = "strela60-casing"
+	caliber = CALIBER_STRELA60
+	projectile_type = /obj/projectile/bullet/p50/strela60
+
+/obj/item/ammo_casing/strela60/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/caseless)
 
 // MARK: 7.62x54mmR
 /obj/item/ammo_casing/c762x54mmr
 	name = "7.62x54mmR bullet casing"
-	desc = "Крупнокалиберный винтовочный патрон калибра 7.62x54ммр."
-	//projectile_type = /obj/projectile/bullet/c762x54mmr
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
-	icon_state = "c762x54mmr-casing"
+	desc = "Винтовочный патрон калибра 7.62x54мм."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "762x51-casing"
+	caliber = CALIBER_762x54mmR
+	projectile_type = /obj/projectile/bullet/c762x54mmr
+
+/obj/item/ammo_casing/c762x54mmr/rubber
+	name = "7.62x54mmR rubber bullet casing"
+	desc = "Травматический винтовочный патрон c резиновой пулей калибра 7.62x54мм."
+	icon_state = "762x51r-casing"
+	projectile_type = /obj/projectile/bullet/c762x54mmr/rubber
+
+/obj/item/ammo_casing/c762x54mmr/hp
+	name = "7.62x54mmR hollow-point bullet casing"
+	desc = "Экспансивный винтовочный патрон калибра 7.62x54мм."
+	icon_state = "762x51hp-casing"
+	projectile_type = /obj/projectile/bullet/c762x54mmr/hp
+
+/obj/item/ammo_casing/c762x54mmr/ap
+	name = "7.62x54mmR armor-piercing bullet casing"
+	icon_state = "762x51ap-casing"
+	desc = "Бронебойный винтовочный патрон калибра 7.62x54мм."
+	projectile_type = /obj/projectile/bullet/c762x54mmr/ap
+
+/obj/item/ammo_casing/c762x54mmr/incendiary
+	name = "7.62x54mmR incendiary bullet casing"
+	icon_state = "762x51i-casing"
+	desc = "Зажигательный винтовочный патрон калибра 7.62x54мм."
+	projectile_type = /obj/projectile/bullet/incendiary/c762x54mmr
 
 // MARK: 12.7x108mm
 /obj/item/ammo_casing/c127x108mm
 	name = "12.7x108mm bullet casing"
-	desc = "Крупнокалиберный винтовочный патрон калибра 12.7x108мм."
-	//projectile_type = /obj/projectile/bullet/c762x54mmr
+	desc = "Крупнокалиберный патрон калибра 12.7x108мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
 	icon_state = "c127x108mm-casing"
+	caliber = CALIBER_127x108mm
+	projectile_type = /obj/projectile/bullet/p50/mmg
+
+// MARK: RPG
+/obj/item/ammo_casing/rocket/rpg
+	name = "RPG-70 HE rocket"
+	desc = "An 84mm High Explosive rocket. Fire at people and pray."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "rpg_rocket"
+	base_icon_state = "rpg_rocket"
+	projectile_type = /obj/projectile/bullet/rocket
+
+/obj/item/ammo_casing/rocket/rpg/heap
+	name = "RPG-70 HE-AP rocket"
+	desc = "An 84mm High Explosive All Purpose rocket. For when you just need something to not exist anymore."
+	icon_state = "rpg_rocket_heap"
+	base_icon_state = "rpg_rocket_heap"
+	projectile_type = /obj/projectile/bullet/rocket/heap
+
+/obj/item/ammo_casing/rocket/rpg/weak
+	name = "RPG-70 HE Low-Yield rocket"
+	desc = "An 84mm High Explosive rocket. This one isn't quite as devastating."
+	icon_state = "rpg_rocket_low_yield"
+	base_icon_state = "rpg_rocket_low_yield"
+	projectile_type = /obj/projectile/bullet/rocket/weak

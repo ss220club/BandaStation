@@ -17,6 +17,7 @@
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
 	slot_flags = ITEM_SLOT_BACK
 	weapon_weight = WEAPON_HEAVY
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin
 
 /obj/item/gun/ballistic/rifle/boltaction/mosin/add_bayonet_point()
 	AddComponent(/datum/component/bayonet_attachable, offset_x = 27, offset_y = 13)

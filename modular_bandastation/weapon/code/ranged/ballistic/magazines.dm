@@ -773,30 +773,266 @@
 	ammo_type = /obj/item/ammo_casing/c45/inc
 
 // MARK: Wylom AMR - .90 Strela
-
+/obj/item/ammo_box/magazine/wylom
+	name = "Wylom magazine (.60 Strela)"
+	desc = "Магазин для антиматериальных винтовок Wylom калибра .60 Стрела, вмещающий 5 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "wylom_mag"
+	base_icon_state = "wylom_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_STRELA60
+	max_ammo = 5
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/strela60
 
 // MARK: DSHK - 12.7x108mm
+/obj/item/ammo_box/magazine/dshk
+	name = "DSHK box (12.7x108mm)"
+	desc = "Короб для тяжелых пулеметов ДКШ калибра 12.7x108мм, вмещающий 50 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "dshk_mag"
+	base_icon_state = "dshk_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_127x108mm
+	max_ammo = 50
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c127x108mm
 
+/obj/item/ammo_box/magazine/dshk/c12ga
+	name = "DSHK-12 box (12ga)"
+	desc = "Короб для тяжелых пулеметов ДКШ 12го калибра, вмещающий 40 патронов."
+	icon_state = "dshk12_mag"
+	base_icon_state = "dshk12_mag"
+	caliber = CALIBER_SHOTGUN
+	max_ammo = 40
+	ammo_type = /obj/item/ammo_casing/shotgun
 
 // MARK: Volna-12 (Kord) - 12.7x108mm
-
+/obj/item/ammo_box/magazine/volna
+	name = "volna box (12.7x108mm)"
+	desc = "Короб для тяжелых пулеметов Волна калибра 12.7x108мм, вмещающий 50 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "volna_mag"
+	base_icon_state = "volna_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_127x108mm
+	max_ammo = 50
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c127x108mm
 
 // MARK: PMK - .310 / 7.62x54mmR
+/obj/item/ammo_box/magazine/pmk
+	name = "PMK box (7.62x54mmR)"
+	desc = "Короб для легких пулеметов PMK калибра 7.62x54мм, вмещающий 100 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "pmk_mag"
+	base_icon_state = "pmk_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_762x54mmR
+	max_ammo = 100
+	ammo_band_icon = "+pmk_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c762x54mmr
 
+/obj/item/ammo_box/magazine/pmk/rubber
+	name = "PMK box (7.62x54mmR rubber)"
+	desc = "Короб для легких пулеметов PMK калибра 7.62x54мм, вмещающий 100 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c762x54mmr/rubber
+
+/obj/item/ammo_box/magazine/pmk/hp
+	name = "PMK box (7.62x54mmR HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c762x54mmr/hp
+
+/obj/item/ammo_box/magazine/pmk/ap
+	name = "PMK box (7.62x54mmR AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c762x54mmr/ap
+
+/obj/item/ammo_box/magazine/pmk/incendiary
+	name = "PMK box (7.62x54mmR incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c762x54mmr/incendiary
 
 // MARK: Zashch - 10mm
+/obj/item/ammo_box/magazine/zashch
+	name = "pistol magazine (10mm)"
+	desc = "Пистолетный магазин калибра 10мм, вмещающий 15 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "zashch_mag"
+	base_icon_state = "zashch_mag"
+	ammo_band_icon = "+zashch_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c10mm
+	caliber = CALIBER_10MM
+	max_ammo = 15
 
+/obj/item/ammo_box/magazine/zashch/fire
+	name = "pistol magazine (10mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c10mm/fire
+
+/obj/item/ammo_box/magazine/zashch/hp
+	name = "pistol magazine (10mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c10mm/hp
+
+/obj/item/ammo_box/magazine/zashch/ap
+	name = "pistol magazine (10mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c10mm/ap
 
 // MARK: Lanca - .310 Strilka
+/obj/item/ammo_box/magazine/strilka310
+	name = "battle rifle magazine (.310 Strilka)"
+	desc = "Магазин для боевых винтовок калибра .310 Стрилка, вмещающий 20 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "lanca_mag"
+	base_icon_state = "lanca_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_STRILKA310
+	max_ammo = 20
+	ammo_band_icon = "+lanca_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/strilka310
 
+/obj/item/ammo_box/magazine/strilka310/starts_empty
+	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/strilka310/hp
+	name = "battle rifle magazine (.310 Strilka HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/strilka310/hp
+
+/obj/item/ammo_box/magazine/strilka310/ap
+	name = "battle rifle magazine (.310 Strilka AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/strilka310/ap
+
+/obj/item/ammo_box/magazine/strilka310/incendiary
+	name = "battle rifle magazine (.310 Strilka incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/strilka310/incendiary
 
 // MARK: Napad - 10mm
+/obj/item/ammo_box/magazine/smg10mm
+	name = "SMG magazine (10mm)"
+	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "napad_mag"
+	base_icon_state = "napad_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_10MM
+	max_ammo = 30
+	ammo_band_icon = "+napad_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c10mm
 
+/obj/item/ammo_box/magazine/smg10mm/rubber
+	name = "SMG magazine (10mm rubber)"
+	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 травматических патронов."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c10mm/rubber
 
-// MARK: Bison - .27
+/obj/item/ammo_box/magazine/smg10mm/hp
+	name = "SMG magazine (10mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c10mm/hp
 
+/obj/item/ammo_box/magazine/smg10mm/ap
+	name = "SMG magazine (10mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c10mm/ap
+
+/obj/item/ammo_box/magazine/smg10mm/fire
+	name = "SMG magazine (10mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c10mm/fire
+
+// MARK: Bison - 9mm / .27
+/obj/item/ammo_box/magazine/bison
+	name = "bison magazine (9mm)"
+	desc = "Шнековый магазин для пистолетов-пулеметов Бисон калибра 9мм, вмещающий 64 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon_state = "bison_mag"
+	base_icon_state = "bison_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_9MM
+	max_ammo = 64
+	ammo_band_icon = "+bison_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c9mm
+
+/obj/item/ammo_box/magazine/bison/rubber
+	name = "bison magazine (9mm rubber)"
+	desc = "Шнековый магазин для пистолетов-пулеметов Бисон калибра 9мм, вмещающий 64 травматических патронов."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c9mm/rubber
+
+/obj/item/ammo_box/magazine/bison/hp
+	name = "bison magazine (9mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c9mm/hp
+
+/obj/item/ammo_box/magazine/bison/ap
+	name = "bison magazine (9mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c9mm/ap
+
+/obj/item/ammo_box/magazine/bison/fire
+	name = "bison magazine (9mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c9mm/fire
 
 // MARK: Dvoystvol - 7.62x38mm / .310 Strilka / .90 Strela
 
+/obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev762
+	name = "Dvoystvol-8 revolver cylinder"
+	ammo_type = /obj/item/ammo_casing/n762
+	caliber = CALIBER_N762
+	max_ammo = 8
+
+/obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev310
+	name = "Dvoystvol-6 revolver cylinder"
+	ammo_type = /obj/item/ammo_casing/strilka310
+	caliber = CALIBER_STRILKA310
+	max_ammo = 6
+
+/obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev60
+	name = "Dvoystvol-60 revolver cylinder"
+	ammo_type = /obj/item/ammo_casing/n762
+	caliber = CALIBER_STRELA60
+	max_ammo = 4
 
 // MARK: Bobr - 12ga
+
+/obj/item/ammo_box/magazine/internal/cylinder/rev12ga
+	name = "Bobr-12 revolver cylinder"
+	ammo_type = /obj/item/ammo_casing/shotgun
+	caliber = CALIBER_SHOTGUN
+	max_ammo = 4
+
+// MARK: RPG
+
+/obj/item/ammo_box/magazine/internal/rocketlauncher/rpg
+	name = "rpg-70 internal tube"
+	ammo_type = /obj/item/ammo_casing/rocket/rpg
+
+// MARK: Mosin
+/obj/item/ammo_box/magazine/internal/boltaction/mosin
+	ammo_type = /obj/item/ammo_casing/c762x54mmr
+	caliber = CALIBER_762x54mmR

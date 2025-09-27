@@ -4,3 +4,6 @@
 #define CALIBER_9x25NT "9x25mm NT"
 #define CALIBER_338 ".338"
 #define CALIBER_762x51mm "7.62x51mm"
+#define CALIBER_762x54mmR "7.62x54mmR"
+#define CALIBER_STRELA60 ".60 Strela"
+#define CALIBER_127x108mm "12.7x108mm"

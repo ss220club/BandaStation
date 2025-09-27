@@ -11,18 +11,23 @@
 	inhand_icon_state = "volnaclosedmag"
 	base_icon_state = "volna"
 	w_class = WEIGHT_CLASS_BULKY
-	accepted_magazine_type = /obj/item/ammo_box/magazine/m7mm
+	accepted_magazine_type = /obj/item/ammo_box/magazine/volna
 	weapon_weight = WEAPON_HEAVY
 	burst_size = 1
 	actions_types = list()
 	can_suppress = FALSE
-	spread = 7
+	recoil = 1.5
+	spread = 15
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
 	mag_display = TRUE
 	tac_reloads = FALSE
-	fire_sound = 'sound/items/weapons/gun/l6/shot.ogg'
-	rack_sound = 'sound/items/weapons/gun/l6/l6_rack.ogg'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/dshk.ogg'
+	rack_sound = 'modular_bandastation/weapon/sound/ranged/dshk_cocked.ogg'
+	load_sound = 'modular_bandastation/weapon/sound/ranged/dshk_reload.ogg'
+	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
+	eject_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
+	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
 	var/cover_open = FALSE
 

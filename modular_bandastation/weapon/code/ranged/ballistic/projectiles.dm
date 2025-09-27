@@ -317,7 +317,7 @@
 
 // MARK: .223 aka 5.56mm
 /obj/projectile/bullet/a223
-	name = "5.56mm bullet"
+	name = "5.56x45mm bullet"
 	damage = 30
 	armour_penetration = 10
 	wound_bonus = 5
@@ -325,7 +325,7 @@
 	wound_falloff_tile = -3
 
 /obj/projectile/bullet/a223/rubber
-	name = "5.56mm rubber bullet"
+	name = "5.56x45mm rubber bullet"
 	damage = 5
 	stamina = 25
 	armour_penetration = 0
@@ -334,7 +334,7 @@
 	weak_against_armour = TRUE
 
 /obj/projectile/bullet/a223/hp
-	name = "5.56mm hollow-point bullet"
+	name = "5.56x45mm hollow-point bullet"
 	damage = 35
 	armour_penetration = 0
 	wound_bonus = 30
@@ -342,7 +342,7 @@
 	weak_against_armour = TRUE
 
 /obj/projectile/bullet/a223/ap
-	name = "5.56mm armor-piercing bullet"
+	name = "5.56x45mm armor-piercing bullet"
 	damage = 25
 	armour_penetration = 50
 	wound_bonus = 0
@@ -351,7 +351,7 @@
 	embed_type = null
 
 /obj/projectile/bullet/incendiary/a223
-	name = "5.56mm incendiary bullet"
+	name = "5.56x45mm incendiary bullet"
 	icon_state = "redtrac"
 	light_system = OVERLAY_LIGHT
 	light_range = 2
@@ -456,11 +456,127 @@
 	ricochets_max = 0
 	armour_penetration = 40
 
+// MARK: 9mm
+/obj/projectile/bullet/c9mm/rubber
+	name = "9mm bullet"
+	damage = 5
+	stamina = 25
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
+// MARK: 10mm
+/obj/projectile/bullet/c10mm/rubber
+	name = "10mm bullet"
+	damage = 5
+	stamina = 30
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
+// MARK: .310 Strilka
+/obj/projectile/bullet/strilka310/ap
+	name = ".310 Strilka armor-piercing bullet"
+	damage = 50
+	armour_penetration = 60
+	wound_bonus = 0
+
+/obj/projectile/bullet/strilka310/hp
+	name = ".310 Strilka hollow-point bullet"
+	damage = 60
+	wound_bonus = 45
+	exposed_wound_bonus = 45
+	armour_penetration = 10
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+
+/obj/projectile/bullet/incendiary/strilka310
+	name = ".310 Strilka incendiary bullet"
+	icon_state = "redtrac"
+	damage = 40
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	fire_stacks = 3
+	leaves_fire_trail = FALSE
+
 // MARK: .90 Strela
+/obj/projectile/bullet/p50/strela60
+	name =".90 Strela bullet"
 
 // MARK: 12.7x108mm
+/obj/projectile/bullet/c127x108mm
+	name ="12.7x108mm bullet"
+	speed = 2
+	range = 100
+	damage = 50
 
 // MARK: 7.62x54mmR
+/obj/projectile/bullet/c762x54mmr
+	name = "7.62x54mmR bullet"
+	damage = 35
+	armour_penetration = 10
+	wound_bonus = 5
+	exposed_wound_bonus = 5
+	wound_falloff_tile = -3
+
+/obj/projectile/bullet/c762x54mmr/rubber
+	name = "7.62x54mmR rubber bullet"
+	damage = 5
+	stamina = 30
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = NONE
+
+/obj/projectile/bullet/c762x54mmr/hp
+	name = "7.62x54mmR hollow-point bullet"
+	damage = 40
+	wound_bonus = 30
+	exposed_wound_bonus = 30
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+
+/obj/projectile/bullet/c762x54mmr/ap
+	name = "7.62x54mmR armor-piercing bullet"
+	damage = 30
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	armour_penetration = 60
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/incendiary/c762x54mmr
+	name = "7.62x54mmR incendiary bullet"
+	icon_state = "redtrac"
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	damage = 30
+	fire_stacks = 3
+	leaves_fire_trail = FALSE
 
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect

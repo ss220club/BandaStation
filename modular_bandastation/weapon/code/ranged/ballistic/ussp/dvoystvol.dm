@@ -1,7 +1,7 @@
 /obj/item/gun/ballistic/revolver/dvoystvol
 	name = "Dvoystvol-6 revolver"
 	desc = "Уникальный дизайн револьвера имеющий два ствола под винтовочный калибр для элитных подразделений СССП."
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev762     //cylinder/rev12ga
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev310
 	recoil = 1
 	weapon_weight = WEAPON_MEDIUM
 	icon = 'modular_bandastation/weapon/icons/ranged/32x32.dmi'
@@ -26,25 +26,24 @@
 
 /obj/item/gun/ballistic/revolver/dvoystvol/high_caliber
 	name = "Dvoystvol-60 revolver"
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev762     //cylinder/rev60
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev60
 	recoil = 5
 	weapon_weight = WEAPON_MEDIUM
 	icon_state = "sakhnomanni_big"
-	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire_2.ogg'
 
 /obj/item/gun/ballistic/revolver/dvoystvol/high_caliber/examine_more(mob/user)
 	. = ..()
-	. += "<br>Этот образец создан под крупнокалиберный винтовочный патрон .60 Стрела, что делает его еще более уникальнее чем оригинальная модель. \
+	. += "<br>Этот образец создан под крупнокалиберный безгильзовый винтовочный патрон .60 Стрела, что делает его еще более уникальнее чем оригинальная модель. \
 		И в тоже время, кто в здравом уме сделал револьвер под крупнокалиберные винтовочные патроны?"
 
 /obj/item/gun/ballistic/revolver/dvoystvol/low_caliber
 	name = "Dvoystvol-8 revolver"
 	desc = "Уникальный дизайн револьвера имеющий два ствола под калибр 7.62x38мм для элитных подразделений СССП."
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev762     //cylinder/rev60
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev762
 	recoil = 1
 	weapon_weight = WEAPON_LIGHT
 	icon_state = "sakhnomanni_small"
-	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
 
 /obj/item/gun/ballistic/revolver/dvoystvol/low_caliber/examine_more(mob/user)
 	. = ..()

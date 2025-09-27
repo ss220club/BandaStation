@@ -15,9 +15,16 @@
 	worn_icon_state = "rpg"
 	base_icon_state = "rpg"
 	SET_BASE_PIXEL(-16, 0)
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/rocketlauncher    //rpg
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/rocketlauncher/rpg
 	pin = /obj/item/firing_pin
 	mag_display_ammo = TRUE
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/rpg_fire.ogg'
+	load_sound = 'modular_bandastation/weapon/sound/ranged/rpg_load.ogg'
+	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/rpg_load.ogg'
+	eject_sound = 'modular_bandastation/weapon/sound/ranged/rpg_load.ogg'
+	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/rpg_load.ogg'
+	dry_fire_sound = 'modular_bandastation/weapon/sound/ranged/launcher_empty.ogg'
+	recoil = 0.5
 
 /obj/item/gun/ballistic/rocketlauncher/rpg/Initialize(mapload)
 	. = ..()
