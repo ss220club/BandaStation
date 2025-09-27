@@ -932,7 +932,7 @@
 	switch(hunter_backstory)
 		if(HUNTER_PACK_COPS)
 			announcement_text_list += "Внимание, экипаж [station_name()], это межгалактическая полиция Космопола. Сообщается, что на вашей станции нашел убежище разыскиваемый преступник."
-			announcement_text_list += "У нас есть ордер от департамента защиты вашего сектора на его задержание. Офицеры направлены к вам."
+			announcement_text_list += "У нас есть ордер от департамента защиты вашего сектора на проведение задержания. Офицеры направлены к вам."
 			announcement_text_list += "Мы требуем вашего сотрудничества в привлечении этого преступника к ответственности."
 			announcement_title += "Командование Космопола"
 		if(HUNTER_PACK_RUSSIAN)
@@ -944,7 +944,7 @@
 			announcement_text_list += "Быстро всё сделаем и улетим. Не хотите проблем - катитесь к чёрту с нашей дороги."
 			announcement_title += "Незарегистрированный сигнал"
 		if(HUNTER_PACK_PSYKER)
-			announcement_text_list += "ЭЙ, ВЫ МЕНЯ СЛЫШИТЕ? Мы уже на подлёте к вашей станции! У вас там гад, настоящий отпетый негодяй! Мы его должны арестовать!"
+			announcement_text_list += "ЭЙ, ВЫ НАС СЛЫШИТЕ? Мы уже на подлёте к вашей станции! У вас там гад, настоящий отпетый негодяй! Мы его должны арестовать!"
 			announcement_text_list += "Кстати, мы ещё и гадаем прямо у входа. Можете направлять к нам своих клиентов, если у них есть деньги."
 			announcement_title += "Шаттл гадания и развлечений"
 		if(HUNTER_PACK_MI13)
@@ -953,7 +953,7 @@
 			announcement_title += "Нанотрейзен: контрмеры электронному вторжению"
 
 	if(!length(announcement_text_list))
-		announcement_text_list += "Обнаружен неопознаный шаттл вблизи станции."
+		announcement_text_list += "Обнаружен неопознанный шаттл вблизи станции."
 		stack_trace("Fugitive hunter announcement was unable to generate an announcement text based on backstory: [hunter_backstory]")
 
 	if(!length(announcement_title))
