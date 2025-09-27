@@ -240,8 +240,8 @@
 	AddElement(/datum/element/swabable, CELL_VIRUS_TABLE_GENERIC_MOB)
 
 /obj/item/food/meat/slab/pug
-	name = "pug meat"
-	desc = "Tastes like... well you know..."
+	name = "мясо мопса"
+	desc = "Чуть менее очарователен в нарезке."
 	foodtypes = RAW | MEAT | GORE
 
 /obj/item/food/meat/slab/pug/Initialize(mapload)
