@@ -156,7 +156,7 @@
 	SSshuttle.supply.callTime *= 0.5
 
 /datum/station_trait/deathrattle_department
-	name = "отдел предсмертных хрипов"
+	name = "отдел с предсмертным хрипом"
 	trait_type = STATION_TRAIT_POSITIVE
 	show_in_report = TRUE
 	abstract_type = /datum/station_trait/deathrattle_department
@@ -186,49 +186,49 @@
 
 
 /datum/station_trait/deathrattle_department/service
-	name = "Предсмертный хрип отдела обслуживания"
+	name = "Отдел обслуживания с предсмертным хрипом"
 	weight = 1
 	department_to_apply_to = DEPARTMENT_BITFLAG_SERVICE
 	department_name = "Service"
 
 /datum/station_trait/deathrattle_department/cargo
-	name = "Предсмертный хрип отдела снабжения"
+	name = "Отдел снабжения с предсмертным хрипом"
 	weight = 1
 	department_to_apply_to = DEPARTMENT_BITFLAG_CARGO
 	department_name = "Cargo"
 
 /datum/station_trait/deathrattle_department/engineering
-	name = "Предсмертный хрип инженерного отдела"
+	name = "Инженерный отдел с предсмертным хрипом"
 	weight = 1
 	department_to_apply_to = DEPARTMENT_BITFLAG_ENGINEERING
 	department_name = "Engineering"
 
 /datum/station_trait/deathrattle_department/command
-	name = "Предсмертный хрип командования"
+	name = "Командование с предсмертным хрипом"
 	weight = 1
 	department_to_apply_to = DEPARTMENT_BITFLAG_COMMAND
 	department_name = "Command"
 
 /datum/station_trait/deathrattle_department/science
-	name = "Предсмертный хрип научного отдела"
+	name = "Научный отдел с предсмертным хрипом"
 	weight = 1
 	department_to_apply_to = DEPARTMENT_BITFLAG_SCIENCE
 	department_name = "Science"
 
 /datum/station_trait/deathrattle_department/security
-	name = "Предсмертный хрип отдела службы безопасности"
+	name = "Отдел безопасности с предсмертным хрипом"
 	weight = 1
 	department_to_apply_to = DEPARTMENT_BITFLAG_SECURITY
 	department_name = "Security"
 
 /datum/station_trait/deathrattle_department/medical
-	name = "Предсмертный хрип медицинского отдела"
+	name = "Медицинский отдел с предсмертным хрипом"
 	weight = 1
 	department_to_apply_to = DEPARTMENT_BITFLAG_MEDICAL
 	department_name = "Medical"
 
 /datum/station_trait/deathrattle_all
-	name = "Предсмертный хрип всей станции"
+	name = "Вся станция с предсмертным хрипом"
 	trait_type = STATION_TRAIT_POSITIVE
 	show_in_report = TRUE
 	weight = 1
