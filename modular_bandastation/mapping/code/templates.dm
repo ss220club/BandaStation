@@ -82,3 +82,19 @@
 	map_dir = "_maps/deathmatch/ss220"
 	map_name = "underground_arena_big"
 	key = "underground_arena_big"
+
+// Distress Signal - Shuttles
+/datum/map_template/shuttle/distress
+	prefix = "_maps/shuttles/ss220"
+	who_can_purchase = null
+
+/datum/map_template/shuttle/distress/tsf
+	port_id = "tsf"
+	suffix = "patrol"
+	name = "Патрульный корабль ТСФ"
+
+// Distress Signal - Bases
+/datum/lazy_template/tsf_base
+	map_dir = "_maps/templates/lazy_templates/ss220"
+	map_name = "tsf_base"
+	key = LAZY_TEMPLATE_KEY_TSF_BASE
