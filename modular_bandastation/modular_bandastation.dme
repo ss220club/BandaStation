@@ -37,7 +37,6 @@
 #include "food_and_drinks/_food_and_drinks.dme"
 #include "galactic_map/_galactic_map.dme"
 #include "gunhud/_gunhud.dme"
-#include "hud/_hud.dme"
 #include "hydroponics/_hydroponics.dme"
 #include "id_stickers/_id_stickers.dme"
 #include "implants/_implants.dme"
