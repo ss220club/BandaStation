@@ -1045,6 +1045,10 @@
 	pixel_x = 6;
 	pixel_y = -4
 	},
+/obj/item/storage/toolbox/mechanical{
+	pixel_y = -5;
+	pixel_x = -9
+	},
 /turf/open/floor/carpet/red,
 /area/centcom/syndicate_base/control)
 "lRu" = (
@@ -1905,8 +1909,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "tJz" = (
-/obj/machinery/computer/shuttle/syndicate{
-	name = "Nuclear Operatives Shuttle Console";
+/obj/machinery/computer/security/overwatch{
 	dir = 8
 	},
 /turf/open/floor/carpet/black,
