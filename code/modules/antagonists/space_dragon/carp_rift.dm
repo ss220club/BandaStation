@@ -111,7 +111,9 @@
 		healing_color = COLOR_BLUE, \
 	)
 
+	/* BANDASTATION REMOVAL START - Stupid TG Shit
 	AddComponent(/datum/component/fishing_spot, /datum/fish_source/carp_rift)
+	BANDASTATION REMOVAL END */
 
 	gravity_aura = new(
 		/* host = */src,

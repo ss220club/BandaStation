@@ -171,9 +171,17 @@ function JobRow(props: JobRowProps) {
     const { experience_type, required_playtime } = experienceNeeded;
     const hoursNeeded = Math.ceil(required_playtime / 60);
 
-    rightSide = `${(<b>{hoursNeeded}ч.</b>)} как ${experience_type}`;
+    rightSide = (
+      <>
+        <b>{hoursNeeded}ч.</b> как {experience_type}
+      </>
+    );
   } else if (daysLeft > 0) {
-    rightSide = `Нужно ещё дней: ${(<b>{daysLeft}</b>)}`;
+    rightSide = (
+      <>
+        Нужно еще дней: <b>{daysLeft}</b>
+      </>
+    );
   } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
     rightSide = <b>Забанен</b>;
   } else {

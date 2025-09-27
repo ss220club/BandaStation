@@ -25200,6 +25200,24 @@ instrumental = "потоком блюспейса"
 prepositional = "потоке блюспейса"
 gender = "male"
 
+["birthday invitation"]
+nominative = "приглашение на день рождения"
+genitive = "приглашения на день рождения"
+dative = "приглашению на день рождения"
+accusative = "приглашение на день рождения"
+instrumental = "приглашением на день рождения"
+prepositional = "приглашении на день рождения"
+gender = "neuter"
+
+["party hat"]
+nominative = "праздничный колпак"
+genitive = "праздничного колпака"
+dative = "праздничному колпаку"
+accusative = "праздничный колпак"
+instrumental = "праздничным колпаком"
+prepositional = "праздничном колпаке"
+gender = "male"
+
 # MARK: Areas
 
 ## Cargo Areas
