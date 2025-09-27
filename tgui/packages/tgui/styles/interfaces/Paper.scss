@@ -199,3 +199,56 @@
     }
   }
 }
+
+.Paper {
+  &__Spread {
+    display: flex;
+    gap: var(--space-s);
+  }
+
+  &__Column {
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    height: 535px;
+  }
+
+  &__Sheet {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__Sheet--dimmed {
+    opacity: 0.6;
+  }
+
+  &__Content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--space-m);
+  }
+
+  &__Footer {
+    padding: var(--space-s) var(--space-m);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fafafa;
+  }
+
+  &__Spine {
+    width: 10px;
+    height: 535px;
+    background: linear-gradient(180deg, #ececec 0%, #dcdcdc 100%);
+    border-radius: 3px;
+  }
+}
+
+.Paper__Page {
+  white-space: pre-wrap;
+}
