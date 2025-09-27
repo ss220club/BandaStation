@@ -46,6 +46,8 @@ map cyberiad
 endmap
 
 map waterbox
+	maxplayers 100
+	votable
 endmap
 
 # Debug-only maps.
