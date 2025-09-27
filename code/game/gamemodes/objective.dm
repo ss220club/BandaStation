@@ -453,6 +453,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/block
 	name = "no organics on shuttle"
 	explanation_text = "Не позволяйте разумным органическим формам жизни сбежать на шаттле живыми. \
+	Захват шаттла эвакуации синтетиками неплохая идея. \
 	Успешное использование устройства судного дня - тоже вариант."
 	martyr_compatible = 1
 
