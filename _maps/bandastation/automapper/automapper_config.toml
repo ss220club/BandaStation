@@ -316,8 +316,6 @@ required_map = "tramstation.dmm"
 coordinates = [54, 96, 2]
 trait_name = "Station"
 
-trait_name = "Station"
-
 [templates.tramstation_armory_hammer]
 map_files = ["tramstation_armory_hammer.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
