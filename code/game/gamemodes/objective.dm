@@ -461,6 +461,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	if(GLOB.station_was_nuked)
 		return TRUE
 	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
+		return TRUE
 	for(var/mob/living/player in GLOB.player_list)
 		if(player.mind && player.stat != DEAD && (player.mob_biotypes & MOB_ORGANIC))
 			if(get_area(player) in SSshuttle.emergency.shuttle_areas)
