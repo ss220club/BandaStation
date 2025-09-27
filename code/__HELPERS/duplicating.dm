@@ -34,6 +34,7 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"parent",
 	"parent_type",
 	"power_supply",
+	"pixloc",
 	"quirks",
 	"reagents",
 	"_signal_procs",
@@ -47,6 +48,11 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"vars",
 	"verbs",
 	"x", "y", "z",
+	// BANDASTATION FIX START: fix strip menu contents
+	"covered_slots",
+	"obscured_slots",
+	"pixloc",
+	// BANDASTATION FIX END: fix strip menu contents
 ))
 GLOBAL_PROTECT(duplicate_forbidden_vars)
 
@@ -65,14 +71,16 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 
 	var/atom/made_copy = new original.type(spawning_location)
 
-	for(var/atom_vars in original.vars - GLOB.duplicate_forbidden_vars)
-		if(islist(original.vars[atom_vars]))
-			var/list/var_list = original.vars[atom_vars]
-			made_copy.vars[atom_vars] = var_list.Copy()
-			continue
-		else if(istype(original.vars[atom_vars], /datum) || ismob(original.vars[atom_vars]))
+	for(var/atom_vars in (original.vars - GLOB.duplicate_forbidden_vars))
+		var/var_value = original.vars[atom_vars]
+		if(isdatum(var_value))
 			continue // this would reference the original's object, that will break when it is used or deleted.
-		made_copy.vars[atom_vars] = original.vars[atom_vars]
+
+		if(islist(var_value))
+			var/list/var_list = var_value
+			var_value = var_list.Copy()
+
+		made_copy.vars[atom_vars] = var_value
 
 	if(isliving(made_copy))
 		if(iscarbon(made_copy))
@@ -81,6 +89,7 @@ GLOBAL_PROTECT(duplicate_forbidden_vars)
 			//transfer DNA over (also body features), then update skin color.
 			original_carbon.dna.copy_dna(copied_carbon.dna)
 			copied_carbon.updateappearance(mutcolor_update = TRUE)
+			copied_carbon.regenerate_icons() // BANDASTATION FIX: appearance copying
 
 		var/mob/living/original_living = original
 		var/mob/living/copied_living = made_copy
