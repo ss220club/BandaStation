@@ -49,7 +49,7 @@
 	for(var/list/log in log_data)
 		report_text += "<H2>[capitalize(log["scan_target"])] scan at [log["scan_time"]]</H2><DL>"
 
-		if(!log[DETSCAN_CATEGORY_FIBER] && !log[DETSCAN_CATEGORY_BLOOD] && !log[DETSCAN_CATEGORY_FINGERS] && !log[DETSCAN_CATEGORY_DRINK] && !log[DETSCAN_CATEGORY_ACCESS])
+		if(!log[DETSCAN_CATEGORY_FIBER] && !log[DETSCAN_CATEGORY_BLOOD] && !log[DETSCAN_CATEGORY_FINGERS] && !log[DETSCAN_CATEGORY_DRINK] && !log[DETSCAN_CATEGORY_ACCESS] && !log[DETSCAN_CATEGORY_ILLEGAL])
 			report_text += "No forensic traces found.<HR>"
 			continue
 
@@ -84,6 +84,11 @@
 				report_text += "<B>[region]</B>: [access_list.Join(", ")]<BR>"
 			report_text += "</DD>"
 
+		if(log[DETSCAN_CATEGORY_ILLEGAL])
+			report_text += "<DT><B>[DETSCAN_CATEGORY_ILLEGAL]</B></DT><DD>"
+			for(var/illegal in log[DETSCAN_CATEGORY_ILLEGAL])
+				report_text += illegal + "<BR>"
+			report_text += "</DD>"
 		report_text += "</DL><HR>"
 
 	report_text += "<H1>Notes:</H1><BR>"

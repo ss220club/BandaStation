@@ -67,6 +67,7 @@
 #include "code/items/devices/radio.dm"
 #include "code/items/devices/nanotrasen_radio_jammer.dm"
 #include "code/items/devices/recorder/recorder_message.dm"
+#include "code/items/devices/stealth/spy_spider.dm"
 #include "code/items/drugs/cocaine_chem.dm"
 #include "code/items/drugs/cocaine_item.dm"
 #include "code/items/drugs/crack_pipe.dm"
