@@ -815,6 +815,10 @@ SUBSYSTEM_DEF(ticker)
 
 	if(!delay)
 		delay = CONFIG_GET(number/round_end_countdown) * 10
+		// BANDASTATION ADD Start - roundend vote
+		var/vote_time = CONFIG_GET(number/vote_period)
+		delay = vote_time > delay ? vote_time * 1.5 : delay
+		// BANDASTATION ADD End - roundend vote
 
 	var/skip_delay = check_rights()
 	if(delay_end && !skip_delay)
