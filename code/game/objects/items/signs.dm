@@ -28,7 +28,7 @@
 		playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
 		label = txt
 		name = "плакат"
-		desc = "Надпись на плакате: \"[label]»\""
+		desc = "На нём написано: «[label]»"
 
 /obj/item/picket_sign/attackby(obj/item/W, mob/user, list/modifiers, list/attack_modifiers)
 	if(IS_WRITING_UTENSIL(W))
