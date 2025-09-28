@@ -56,7 +56,7 @@
 	prompt_name = "пират-скелет"
 	mob_species = /datum/species/skeleton
 	outfit = /datum/outfit/pirate
-	rank = "Напарник"
+	rank = "Боцман"
 	fluff_spawn = null
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/skeleton/captain
@@ -64,7 +64,7 @@
 	outfit = /datum/outfit/pirate/captain/skeleton
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/skeleton/gunner
-	rank = "Наводчик"
+	rank = "Канонир"
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/silverscale
 	name = "elegant sleeper"
