@@ -1,4 +1,4 @@
-/datum/map_template/ruin/rainworld
+/datum/map_template/ruin/waterbox
 	prefix = "_maps/RandomRuins/WaterRuins/"
 	allow_duplicates = FALSE
 	cost = 5
