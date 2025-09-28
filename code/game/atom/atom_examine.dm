@@ -27,9 +27,9 @@
 			tag_string += (isnull(tags_list[atom_tag]) ? atom_tag : span_tooltip(tags_list[atom_tag], atom_tag))
 		// some regex to ensure that we don't add another "and" if the final element's main text (not tooltip) has one
 		tag_string = english_list(tag_string, and_text = (findtext(tag_string[length(tag_string)], regex(@">.*?и .*?<"))) ? " " : " и ")
-		. += "[p_They()] [p_are()] a [tag_string] [examine_descriptor(user)][post_desc_string]."
+		. += "Это [tag_string] [examine_descriptor(user)][post_desc_string]."
 	else if(post_desc_string)
-		. += "Это [examine_descriptor(user)] [tag_string][post_desc_string]."
+		. += "Это [examine_descriptor(user)][post_desc_string]."
 
 	if(reagents)
 		var/user_sees_reagents = user.can_see_reagents()
@@ -81,25 +81,25 @@
 		.[span_hypnophrase("abstract")] = "This is an abstract concept, you should report this to a strange entity called GITHUB!"
 
 	if(resistance_flags & INDESTRUCTIBLE)
-		.["indestructible"] = "It is extremely robust! It'll probably withstand anything that could happen to it!"
+		.["неразрушаемый"] = "Предмет очень прочный! Он выдержит всё, что с ним может случиться!"
 	else
 		if(resistance_flags & LAVA_PROOF)
-			.["lava-proof"] = "It is made of an extremely heat-resistant material, it'd probably be able to withstand lava!"
+			.["лавастойкий"] = "Предмет сделан из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
 		if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-			.["acid-proof"] = "It looks pretty robust! It'd probably be able to withstand acid!"
+			.["кислотостойкий"] = "Предмет выглядит довольно прочным! Возможно, он выдержит воздействие кислоты!"
 		if(resistance_flags & FREEZE_PROOF)
-			.["freeze-proof"] = "It is made of cold-resistant materials."
+			.["морозостойкий"] = "Предмет изготовлен из моростойких материалов."
 		if(resistance_flags & FIRE_PROOF)
-			.["fire-proof"] = "It is made of fire-retardant materials."
+			.["огнестойкий"] = "Предмет изготовлен из огнестойких материалов."
 		if(resistance_flags & SHUTTLE_CRUSH_PROOF)
-			.["crush-proof"] = "It is extremely solid. It should be able to withstand being run over by a shuttle!"
+			.["очень прочный"] = "Предмет невероятно прочный. Должен выдержать даже наезд шаттла!"
 		if(resistance_flags & BOMB_PROOF)
-			.["bomb-proof"] = "It looks like it could survive an explosion!"
+			.["взрывоустойчивый"] = "Предмет способен пережить взрыв!"
 		if(resistance_flags & FLAMMABLE)
-			.["flammable"] = "It looks like it could easily catch on fire."
+			.["легковоспламеняющийся"] = "Предмет может легко загореться."
 
 	if(flags_1 & HOLOGRAM_1)
-		.["holographic"] = "It looks like a hologram."
+		.["голографический"] = "Похоже на голограмму."
 
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_TAGS, user, .)
 
