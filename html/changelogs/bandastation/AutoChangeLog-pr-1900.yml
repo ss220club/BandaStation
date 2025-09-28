@@ -1,5 +1,0 @@
-author: "Ez-Briz"
-delete-after: True
-changes:
-  - admin: "Возвращён \"game panel\" вёрб вместо \"spawn panel\" а также кнопка динамика в spawn panel"
-  - bugfix: "Направление объекта и смена сортировки теперь корректно работает у TGUI спавн панели"
