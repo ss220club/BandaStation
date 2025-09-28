@@ -675,6 +675,16 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		return
 
 	var/client_is_in_db = query_client_in_db.NextRow()
+
+	if(GLOB.clients.len >= CONFIG_GET(number/extreme_popcap))
+		var/list/connectiontopic_a = params2list(connectiontopic)
+		var/list/panic_addr = CONFIG_GET(string/panic_server_address)
+		if(panic_addr && !connectiontopic_a["redirect"])
+			var/panic_name = CONFIG_GET(string/panic_server_name)
+			to_chat_immediate(src, span_notice("Sending you to [panic_name ? panic_name : panic_addr]."))
+			winset(src, null, "command=.options")
+			src << link("[panic_addr]?redirect=1")
+
 	// If we aren't an admin, and the flag is set (the panic bunker is enabled).
 	if(CONFIG_GET(flag/panic_bunker) && !holder && !GLOB.deadmins[ckey])
 		// The amount of hours needed to bypass the panic bunker.

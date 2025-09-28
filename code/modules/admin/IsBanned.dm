@@ -80,15 +80,8 @@
 		var/popcap_value = GLOB.clients.len
 		if(popcap_value >= extreme_popcap && !GLOB.joined_player_list.Find(ckey))
 			if(!CONFIG_GET(flag/byond_member_bypass_popcap) || !world.IsSubscribed(ckey, "BYOND"))
-				var/panic_addr = CONFIG_GET(string/panic_server_address)
-				if(panic_addr)
-					var/panic_name = CONFIG_GET(string/panic_server_name)
-					to_chat_immediate(src, span_notice("Sending you to [panic_name ? panic_name : panic_addr]."))
-					winset(src, null, "command=.options")
-					src << link("[panic_addr]?redirect=1")
-				else
-					log_access("Failed Login: [ckey] - Population cap reached")
-					return list("reason"="popcap", "desc"= "\nReason: [CONFIG_GET(string/extreme_popcap_message)]")
+				log_access("Failed Login: [ckey] - Population cap reached")
+				return list("reason"="popcap", "desc"= "\nReason: [CONFIG_GET(string/extreme_popcap_message)]")
 
 	if(CONFIG_GET(flag/sql_enabled))
 		if(!SSdbcore.Connect())
