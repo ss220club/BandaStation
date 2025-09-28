@@ -18185,12 +18185,12 @@ prepositional = "стене"
 gender = "female"
 
 ["reinforced wall"]
-nominative = "усиленная стена"
-genitive = "усиленной стены"
-dative = "усиленной стене"
-accusative = "усиленную стену"
-instrumental = "усиленной стеной"
-prepositional = "усиленной стене"
+nominative = "укреплённая стена"
+genitive = "укреплённой стены"
+dative = "укреплённой стене"
+accusative = "укреплённую стену"
+instrumental = "укреплённой стеной"
+prepositional = "укреплённой стене"
 gender = "female"
 
 # MARK: Command
@@ -27373,6 +27373,73 @@ dative = "Камуфлированному летнему маскировочн
 accusative = "Камуфлированный летний маскировочный костюм «Флора»"
 instrumental = "Камуфлированным летним маскировочным костюмом «Флора»"
 prepositional = "Камуфлированном летнем маскировочном костюме «Флора»"
+
+["hull"]
+nominative = "корабельная обшивка"
+genitive = "корабельной обшивки"
+dative = "корабельной обшивке"
+accusative = "корабельную обшивку"
+instrumental = "корабельной обшивкой"
+prepositional = "корабельной обшивке"
+
+["blank picket sign"]
+nominative = "плакат"
+genitive = "плаката"
+dative = "плакату"
+accusative = "плакат"
+instrumental = "плакатом"
+prepositional = "плакате"
+
+["metallic nano-sign"]
+nominative = "металлический наноплакат"
+genitive = "металлического наноплаката"
+dative = "металлическому наноплакату"
+accusative = "металлический наноплакат"
+instrumental = "металлическим наноплакатом"
+prepositional = "металлическом наноплакате"
+
+["survival box"]
+nominative = "аварийный спаскомплект"
+genitive = "аварийного спаскомплекта"
+dative = "аварийному спаскомплекту"
+accusative = "аварийный спаскомплект"
+instrumental = "аварийным спаскомплектом"
+prepositional = "аварийном спаскомплеке"
+
+["invisible box"]
+nominative = "невидимый спаскомплект"
+genitive = "невидимого спаскомплекта"
+dative = "невидимому спаскомплекту"
+accusative = "невидимый спаскомплект"
+instrumental = "невидимым спаскомплектом"
+prepositional = "невидимом спаскомплекте"
+
+["sledgehammer"]
+nominative = "кувалда"
+genitive = "кувалды"
+dative = "кувалде"
+accusative = "кувалду"
+instrumental = "кувалдой"
+prepositional = "кувалде"
+gender = "female"
+
+["D-4 tactical breaching hammer"]
+nominative = "тактическая штурмовая кувалда D-4"
+genitive = "тактической штурмовой кувалды D-4"
+dative = "тактической штурмовой кувалде D-4"
+accusative = "тактическую штурмовую кувалду D-4"
+instrumental = "тактической штурмовой кувалдой D-4"
+prepositional = "тактической штурмовой кувалде D-4"
+gender = "female"
+
+["D-6 tactical breaching hammer"]
+nominative = "тактическая штурмовая кувалда D-6"
+genitive = "тактической штурмовой кувалды D-6"
+dative = "тактической штурмовой кувалде D-6"
+accusative = "тактическую штурмовую кувалду D-6"
+instrumental = "тактической штурмовой кувалдой D-6"
+prepositional = "тактической штурмовой кувалде D-6"
+gender = "female"
 
 ["'ChapAI' Core AI Module"]
 nominative = "плата основных законов ИИ 'Священник'"
