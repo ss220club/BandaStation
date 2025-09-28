@@ -47,9 +47,11 @@
 		return FALSE
 	var/atom/movable/thrown_thing
 	var/obj/item/held_item = get_active_held_item()
-	var/verb_text = pick("throw", "toss", "hurl", "chuck", "fling")
-	if(prob(0.5))
-		verb_text = "yeet"
+	// BANDASTATION EDIT START — Общий глагол действия
+	var/verb_index = pick(1, 2, 3, 4)
+	var/verb_list_self = list("бросаете", "швыряете", "метаете", "запускаете")
+	var/verb_list_visible = list("бросает", "швыряет", "метает", "запускает")
+	// BANDASTATION EDIT END
 	var/neckgrab_throw = FALSE // we can't check for if it's a neckgrab throw when totaling up power_throw since we've already stopped pulling them by then, so get it early
 	var/frequency_number = 1 //We assign a default frequency number for the sound of the throw.
 	if(!held_item)
@@ -93,22 +95,23 @@
 	if(isitem(thrown_thing))
 		var/obj/item/thrown_item = thrown_thing
 		frequency_number = 1-(thrown_item.w_class-3)/8 //At normal weight, the frequency is at 1. For tiny, it is 1.25. For huge, it is 0.75.
-		if(thrown_item.throw_verb)
-			verb_text = thrown_item.throw_verb
+	// BANDASTATION REMOVE — Сложно будет склонять кастомные вербы, а они используются пока что только для одного предмета ВПРИНЦИПЕ
 	do_attack_animation(target, no_effect = 1)
 	var/sound/throwsound = 'sound/items/weapons/throw.ogg'
-	var/power_throw_text = "."
+	var/power_throw_text = ""
 	if(power_throw > 0) //If we have anything that boosts our throw power like hulk, we use the rougher heavier variant.
 		throwsound = 'sound/items/weapons/throwhard.ogg'
-		power_throw_text = " really hard!"
+		power_throw_text = " c силой"
 	if(power_throw < 0) //if we have anything that weakens our throw power like dward, we use a slower variant.
 		throwsound = 'sound/items/weapons/throwsoft.ogg'
-		power_throw_text = " flimsily."
+		power_throw_text = " небрежно"
 	frequency_number = frequency_number + (rand(-5,5)/100); //Adds a bit of randomness in the frequency to not sound exactly the same.
 	//The volume of the sound takes the minimum between the distance thrown or the max range an item, but no more than 50. Short throws are quieter. A fast throwing speed also makes the noise sharper.
 	playsound(src, throwsound, clamp(8*min(get_dist(loc,target),thrown_thing.throw_range), 10, 50), vary = TRUE, extrarange = -1, frequency = frequency_number)
-	visible_message(span_danger("[src] [verb_text][plural_s(verb_text)] [thrown_thing][power_throw_text]"), \
-					span_danger("You [verb_text] [thrown_thing][power_throw_text]"))
+	// BANDASTATION EDIT START — Общий глагол действия
+	visible_message(span_danger("[src][power_throw_text] [verb_list_visible[verb_index]] [thrown_thing.declent_ru(ACCUSATIVE)][power_throw > 0 ? "!" : "."]"), \
+					span_danger("Вы[power_throw_text] [verb_list_self[verb_index]] [thrown_thing.declent_ru(ACCUSATIVE)][power_throw > 0 ? "!" : "."]"))
+	// BANDASTATION EDIT END
 	log_message("has thrown [thrown_thing] [power_throw_text]", LOG_ATTACK)
 
 	var/drift_force = max(0.5 NEWTONS, 1 NEWTONS + power_throw)
