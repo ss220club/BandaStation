@@ -15,7 +15,7 @@
 
 /obj/item/picket_sign/cyborg
 	name = "металлический нано-плакат"
-	desc = "Высокотехнологичный плакат используемый кремниевыми формами жизни с возможностью в любой момент изменить надпись. Да, думаю получить по голове этим <i>тоже</i> будет больновато."
+	desc = "Высокотехнологичный плакат используемый кремниевыми формами жизни с возможностью в любой момент изменить надпись. Да, думаю получить таким по голове <i>тоже</i> будет больновато."
 	force = 13
 	resistance_flags = NONE
 	actions_types = list(/datum/action/item_action/nano_picket_sign)
@@ -27,8 +27,8 @@
 	if(txt && user.can_perform_action(src))
 		playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
 		label = txt
-		name = "табличка «[label]»"
-		desc = "На ней написано «[label]»"
+		name = "плакат"
+		desc = "Надпись на табличке: \"[label]»\""
 
 /obj/item/picket_sign/attackby(obj/item/W, mob/user, list/modifiers, list/attack_modifiers)
 	if(IS_WRITING_UTENSIL(W))
