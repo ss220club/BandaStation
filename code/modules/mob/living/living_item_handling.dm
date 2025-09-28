@@ -110,8 +110,8 @@
 	//The volume of the sound takes the minimum between the distance thrown or the max range an item, but no more than 50. Short throws are quieter. A fast throwing speed also makes the noise sharper.
 	playsound(src, throwsound, clamp(8*min(get_dist(loc,target),thrown_thing.throw_range), 10, 50), vary = TRUE, extrarange = -1, frequency = frequency_number)
 	// BANDASTATION EDIT — Глаголы из ru_verbs
-	visible_message(span_danger("[src][power_throw_text] [visible_throw_verb] [thrown_thing.declent_ru(ACCUSATIVE)][power_throw > 0 ? "!" : "."]"), \
-					span_danger("Вы[power_throw_text] [self_throw_verb] [thrown_thing.declent_ru(ACCUSATIVE)][power_throw > 0 ? "!" : "."]"))
+	visible_message(span_danger("[src][power_throw_text] [visible_throw_verb] [thrown_thing.declent_ru(ACCUSATIVE)][power_throw >= 0 ? "!" : "."]"), \
+					span_danger("Вы[power_throw_text] [self_throw_verb] [thrown_thing.declent_ru(ACCUSATIVE)][power_throw >= 0 ? "!" : "."]"))
 	log_message("has thrown [thrown_thing] [power_throw_text]", LOG_ATTACK)
 
 	var/drift_force = max(0.5 NEWTONS, 1 NEWTONS + power_throw)
