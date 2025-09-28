@@ -27389,3 +27389,19 @@ dative = "плакату"
 accusative = "плакат"
 instrumental = "плакатом"
 prepositional = "плакате"
+
+["survival box"]
+nominative = "аварийный спаскомплект"
+genitive = "аварийного спаскомплекта"
+dative = "аварийному спаскомплекту"
+accusative = "аварийный спаскомплект"
+instrumental = "аварийным спаскомплектом"
+prepositional = "аварийном спаскомплеке"
+
+["invisible box"]
+nominative = "невидимый спаскомплект"
+genitive = "невидимого спаскомплекта"
+dative = "невидимому спаскомплекту"
+accusative = "невидимый спаскомплект"
+instrumental = "невидимым спаскомплектом"
+prepositional = "невидимом спаскомплекте"
