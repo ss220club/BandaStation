@@ -2,7 +2,7 @@
 
 #include "code/ert.dm"
 #include "code/shadowlings/_defines.dm"
-#include "code/shadowlings/spieces.dm"
+#include "code/shadowlings/species.dm"
 #include "code/shadowlings/team.dm"
 #include "code/shadowlings/thrall_tumor.dm"
 #include "code/shadowlings/abilities/nyxosynthesis.dm"
