@@ -132,7 +132,7 @@
 			mix_material_colors(colors)
 
 	if(material_flags & MATERIAL_ADD_PREFIX)
-		var/prefixes = get_material_prefixes(materials)
+		var/prefixes = get_material_english_list(materials) // BANDASTATION EDIT - Material naming
 		ru_names_rename(ru_names_toml(name, suffix = " из [prefixes]", override_base = "[prefixes] [name]"))
 		name = "[declent_ru_initial(initial(name), NOMINATIVE, name)] из [prefixes]" // BANDASTATION EDIT - Material naming
 

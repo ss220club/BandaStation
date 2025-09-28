@@ -162,8 +162,8 @@
 	else
 		playsound(src, 'sound/effects/bang.ogg', 50, TRUE)
 		add_dent(WALL_DENT_HIT)
-		user.visible_message(span_danger("[user] крушит [src.declent_ru(DATIVE)]!"), \
-					span_danger("Вы крушите [src.declent_ru(DATIVE)]!"), \
+		user.visible_message(span_danger("[user] крушит [src.declent_ru(ACCUSATIVE)]!"), \
+					span_danger("Вы крушите [src.declent_ru(ACCUSATIVE)]!"), \
 					span_hear("Вы слышите оглушительный грохот!"))
 	return TRUE
 
@@ -188,7 +188,7 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	to_chat(user, span_notice("Вы толкаете [src.declent_ru(DATIVE)], но ничего не происходит."))
+	to_chat(user, span_notice("Вы толкаете [src.declent_ru(ACCUSATIVE)], но ничего не происходит."))
 	playsound(src, 'sound/items/weapons/genhit.ogg', 25, TRUE)
 	add_fingerprint(user)
 
@@ -342,6 +342,6 @@
 	else
 		smoothing_flags |= SMOOTH_DIAGONAL_CORNERS
 	QUEUE_SMOOTH(src)
-	to_chat(user, span_notice("Вы регулируете угол [src.declent_ru(DATIVE)]."))
+	to_chat(user, span_notice("Вы регулируете угол [src.declent_ru(ACCUSATIVE)]."))
 	tool.play_tool_sound(src)
 	return ITEM_INTERACT_SUCCESS

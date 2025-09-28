@@ -103,7 +103,7 @@
 	var/power_throw_text = ""
 	if(power_throw > 0) //If we have anything that boosts our throw power like hulk, we use the rougher heavier variant.
 		throwsound = 'sound/items/weapons/throwhard.ogg'
-		power_throw_text = " c силой"
+		power_throw_text = " с силой"
 	if(power_throw < 0) //if we have anything that weakens our throw power like dward, we use a slower variant.
 		throwsound = 'sound/items/weapons/throwsoft.ogg'
 		power_throw_text = " небрежно"
