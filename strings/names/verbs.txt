@@ -1,4 +1,4 @@
-accept
+﻿accept
 add
 admire
 admit
