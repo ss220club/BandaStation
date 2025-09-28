@@ -13,49 +13,56 @@
 	..()
 	syndicate_name = syndicate_name()
 
+	var/datum/objective/maingoal = new core_objective()
+	maingoal.team = src
+	objectives += maingoal
+
+	// when a nuke team is created, the infiltrator has not loaded in yet - it takes some time. so no nuke, we have to wait
+	addtimer(CALLBACK(src, PROC_REF(assign_nuke_delayed)), 4 SECONDS)
+
 /datum/team/nuclear/roundend_report()
 	var/list/parts = list()
-	parts += span_header("[syndicate_name] Operatives:")
+	parts += span_header("Оперативники [syndicate_name]:")
 
 	switch(get_result())
 		if(NUKE_RESULT_FLUKE)
-			parts += "<span class='redtext big'>Humiliating Syndicate Defeat</span>"
-			parts += "<B>The crew of [station_name()] gave [syndicate_name] operatives back their bomb! The syndicate base was destroyed!</B> Next time, don't lose the nuke!"
+			parts += "<span class='redtext big'>Унизительное поражение Синдиката!</span>"
+			parts += "<B>Экипаж станции [station_name()] вернули оперативникам [syndicate_name] бомбу обратно на их базу! База Синдиката была уничтожена!</B> В следующий раз - не теряйте ядерную бомбу!"
 		if(NUKE_RESULT_NUKE_WIN)
-			parts += "<span class='greentext big'>Syndicate Major Victory!</span>"
-			parts += "<B>[syndicate_name] operatives have destroyed [station_name()]!</B>"
+			parts += "<span class='greentext big'>Разгромная победа Синдиката!</span>"
+			parts += "<B>Оперативники [syndicate_name] уничтожили [station_name()]!</B>"
 		if(NUKE_RESULT_NOSURVIVORS)
-			parts += "<span class='neutraltext big'>Total Annihilation!</span>"
-			parts += "<B>[syndicate_name] operatives destroyed [station_name()] but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!"
+			parts += "<span class='neutraltext big'>Полное уничтожение!</span>"
+			parts += "<B>Оперативники [syndicate_name] уничтожили [station_name()], но не смогли покинуть станцию вовремя и попали под взрыв.</B> В следующий раз - не теряйте диск!"
 		if(NUKE_RESULT_WRONG_STATION)
-			parts += "<span class='redtext big'>Crew Minor Victory!</span>"
-			parts += "<B>[syndicate_name] operatives secured the authentication disk but blew up something that wasn't [station_name()].</B> Next time, don't do that!"
+			parts += "<span class='redtext big'>Незначительная победа экипажа!</span>"
+			parts += "<B>Оперативники [syndicate_name] сохранили диск аутентификации, но взорвали то, что не являлось [station_name()].</B> В следующий раз - не делайте так!"
 		if(NUKE_RESULT_WRONG_STATION_DEAD)
-			parts += "<span class='redtext big'>[syndicate_name] operatives have earned Darwin Award!</span>"
-			parts += "<B>[syndicate_name] operatives blew up something that wasn't [station_name()] and got caught in the explosion.</B> Next time, don't do that!"
+			parts += "<span class='redtext big'>Оперативники [syndicate_name] получили премию Дарвина!</span>"
+			parts += "<B>Оперативники [syndicate_name] взорвали то, что не являлось [station_name()] и попали под взрыв.</B> В следующий раз - не делайте так!"
 		if(NUKE_RESULT_HIJACK_DISK)
-			parts += "<span class='greentext big'>Syndicate Miniscule Victory!</span>"
-			parts += "<B>[syndicate_name] operatives failed to destroy [station_name()], but they managed to secure the disk and hijack the emergency shuttle, causing it to land on the syndicate base. Good job?</B>"
+			parts += "<span class='greentext big'>Ничтожная победа Синдиката!</span>"
+			parts += "<B>Оперативники [syndicate_name] потерпели неудачу в уничтожении [station_name()], но им удалось захватить диск и угнать эвакуационный шаттл, в результате чего он приземлился на базе синдиката. Хорошая работа?</B>"
 		if(NUKE_RESULT_HIJACK_NO_DISK)
-			parts += "<span class='greentext big'>Syndicate Insignificant Victory!</span>"
-			parts += "<B>[syndicate_name] operatives failed to destroy [station_name()] or secure the disk, but they managed to hijack the emergency shuttle, causing it to land on the syndicate base. Good job?</B>"
+			parts += "<span class='greentext big'>Незначительная победа Синдиката!</span>"
+			parts += "<B>Оперативники [syndicate_name] потерпели неудачу в уничтожении [station_name()] и в сохранении диска, но им удалось угнать эвакуационный шаттл, в результате чего он приземлился на базе синдиката. Хорошая работа?</B>"
 		if(NUKE_RESULT_CREW_WIN_SYNDIES_DEAD)
-			parts += "<span class='redtext big'>Crew Major Victory!</span>"
-			parts += "<B>The Research Staff has saved the disk and killed the [syndicate_name] Operatives</B>"
+			parts += "<span class='redtext big'>Разгромная победа экипажа!</span>"
+			parts += "<B>Экипаж спас диск и уничтожил оперативников [syndicate_name]!</B>"
 		if(NUKE_RESULT_CREW_WIN)
-			parts += "<span class='redtext big'>Crew Major Victory!</span>"
-			parts += "<B>The Research Staff has saved the disk and stopped the [syndicate_name] Operatives!</B>"
+			parts += "<span class='redtext big'>Разгромная победа экипажа!</span>"
+			parts += "<B>Экипаж спас диск и остановил оперативников [syndicate_name]!</B>"
 		if(NUKE_RESULT_DISK_LOST)
-			parts += "<span class='neutraltext big'>Neutral Victory!</span>"
-			parts += "<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the [syndicate_name] Operatives!</B>"
+			parts += "<span class='neutraltext big'>Победа экипажа!</span>"
+			parts += "<B>Экипаж не смог сохранить диск, но смогли уничтожить большую часть оперативников [syndicate_name]!</B>"
 		if(NUKE_RESULT_DISK_STOLEN)
-			parts += "<span class='greentext big'>Syndicate Minor Victory!</span>"
-			parts += "<B>[syndicate_name] operatives survived the assault but did not achieve the destruction of [station_name()].</B> Next time, don't lose the disk!"
+			parts += "<span class='greentext big'>Незначительная победа Синдиката!</span>"
+			parts += "<B>Оперативники [syndicate_name] пережили задание, но не смогли уничтожить [station_name()].</B> В следующий раз - не теряйте диск!"
 		else
-			parts += "<span class='neutraltext big'>Neutral Victory</span>"
-			parts += "<B>Mission aborted!</B>"
+			parts += "<span class='neutraltext big'>Победа</span>"
+			parts += "<B>Миссия прервана!</B>"
 
-	var/text = span_header("<br>The syndicate operatives were:")
+	var/text = span_header("<br>Оперативниками Синдиката были:")
 	var/purchases = ""
 	var/TC_uses = 0
 	LAZYINITLIST(GLOB.uplink_purchase_logs_by_key)
@@ -67,7 +74,7 @@
 			purchases += H.generate_render(show_key = FALSE)
 	text += printplayerlist(members)
 	text += "<br>"
-	text += "(Syndicates used [TC_uses] TC) [purchases]"
+	text += "(Оперативники потратили [TC_uses] ТК) [purchases]"
 	if(TC_uses == 0 && GLOB.station_was_nuked && !are_all_operatives_dead())
 		text += "<BIG>[icon2html('icons/ui/antags/badass.dmi', world, "badass")]</BIG>"
 
@@ -102,24 +109,24 @@
 
 	var/war_declared = FALSE
 	for(var/obj/item/circuitboard/computer/syndicate_shuttle/board as anything in GLOB.syndicate_shuttle_boards)
-		if(board.challenge)
+		if(board.challenge_start_time)
 			war_declared = TRUE
 
 	var/force_war_button = ""
 
 	if(war_declared)
-		post_report += "<b>War declared.</b>"
-		force_war_button = "\[Force war\]"
+		post_report += "<b>Объявление войны.</b>"
+		force_war_button = "\[Объявить войну\]"
 	else
-		post_report += "<b>War not declared.</b>"
+		post_report += "<b>Война не объявлена.</b>"
 		var/obj/item/nuclear_challenge/war_button = war_button_ref?.resolve()
 		if(war_button)
-			force_war_button = "<a href='byond://?_src_=holder;[HrefToken()];force_war=[REF(war_button)]'>\[Force war\]</a>"
+			force_war_button = "<a href='byond://?_src_=holder;[HrefToken()];force_war=[REF(war_button)]'>\[Объявить войну\]</a>"
 		else
-			force_war_button = "\[Cannot declare war, challenge button missing!\]"
+			force_war_button = "\[Нельзя объявить войну. Кнопка испытания отсутствует!\]"
 
 	post_report += "\n[force_war_button]"
-	post_report += "\n<a href='byond://?_src_=holder;[HrefToken()];give_reinforcement=[REF(src)]'>\[Send Reinforcement\]</a>"
+	post_report += "\n<a href='byond://?_src_=holder;[HrefToken()];give_reinforcement=[REF(src)]'>\[Отправить подкрепление\]</a>"
 
 	var/final_report = ..()
 	final_report += disk_report
@@ -128,15 +135,10 @@
 
 /datum/team/nuclear/proc/rename_team(new_name)
 	syndicate_name = new_name
-	name = "[syndicate_name] Team"
-	for(var/I in members)
-		var/datum/mind/synd_mind = I
-		var/mob/living/carbon/human/human_to_rename = synd_mind.current
-		if(!istype(human_to_rename))
-			continue
-		var/first_name = human_to_rename.client?.prefs?.read_preference(/datum/preference/name/operative_alias) || pick(GLOB.operative_aliases)
-		var/chosen_name = "[first_name] [syndicate_name]"
-		human_to_rename.fully_replace_character_name(human_to_rename.real_name, chosen_name)
+	name = "Команда [syndicate_name]"
+	for(var/datum/mind/synd_mind in members)
+		var/datum/antagonist/nukeop/synd_datum = synd_mind.has_antag_datum(/datum/antagonist/nukeop)
+		synd_datum?.give_alias()
 
 /datum/team/nuclear/proc/admin_spawn_reinforcement(mob/admin)
 	if(!check_rights_for(admin.client, R_ADMIN))
@@ -160,12 +162,12 @@
 		poll_time = 30 SECONDS,
 		ignore_category = POLL_IGNORE_SYNDICATE,
 		alert_pic = /obj/structure/sign/poster/contraband/gorlex_recruitment,
-		role_name_text = "emergency syndicate reinforcement",
+		role_name_text = "Экстренное подкрепление Синдиката",
 		amount_to_pick = 1,
 	)
 
 	if(isnull(chosen_one))
-		tgui_alert(admin, "No candidates found.", "Recruitment Shortage", list("OK"))
+		tgui_alert(admin, "Кандидаты не найдены.", "Нехватка персонала", list("OK"))
 		return
 
 
@@ -212,12 +214,6 @@
 	playsound(spawn_loc, 'sound/effects/phasein.ogg', 50, TRUE)
 
 	tgui_alert(admin, "Reinforcement spawned at [infil_or_nukebase] with [tc_to_spawn].", "Reinforcements have arrived", list("God speed"))
-
-/datum/team/nuclear/proc/update_objectives()
-	if(core_objective)
-		var/datum/objective/O = new core_objective
-		O.team = src
-		objectives += O
 
 /datum/team/nuclear/proc/is_disk_rescued()
 	for(var/obj/item/disk/nuclear/nuke_disk in SSpoints_of_interest.real_nuclear_disks)
@@ -317,5 +313,42 @@
 	..()
 	SEND_SIGNAL(src, COMSIG_NUKE_TEAM_ADDITION, new_member.current)
 
+/datum/team/nuclear/proc/assign_nuke_delayed()
+	assign_nuke()
+	if(tracked_nuke && memorized_code)
+		for(var/datum/mind/synd_mind in members)
+			var/datum/antagonist/nukeop/synd_datum = synd_mind.has_antag_datum(/datum/antagonist/nukeop)
+			synd_datum?.memorize_code()
+
+/datum/team/nuclear/proc/assign_nuke()
+	memorized_code = random_nukecode()
+	var/obj/machinery/nuclearbomb/syndicate/nuke = locate() in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/nuclearbomb/syndicate)
+	if(!nuke)
+		stack_trace("Syndicate nuke not found during nuke team creation.")
+		memorized_code = null
+		return
+	tracked_nuke = nuke
+	if(nuke.r_code == NUKE_CODE_UNSET)
+		nuke.r_code = memorized_code
+	else //Already set by admins/something else?
+		memorized_code = nuke.r_code
+	for(var/obj/machinery/nuclearbomb/beer/beernuke as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/nuclearbomb/beer))
+		beernuke.r_code = memorized_code
+
 #undef SPAWN_AT_BASE
 #undef SPAWN_AT_INFILTRATOR
+
+/datum/team/nuclear/loneop
+
+/datum/team/nuclear/loneop/assign_nuke()
+	memorized_code = random_nukecode()
+	var/obj/machinery/nuclearbomb/selfdestruct/nuke = locate() in SSmachines.get_machines_by_type(/obj/machinery/nuclearbomb/selfdestruct)
+	if(nuke)
+		tracked_nuke = nuke
+		if(nuke.r_code == NUKE_CODE_UNSET)
+			nuke.r_code = memorized_code
+		else //Already set by admins/something else?
+			memorized_code = nuke.r_code
+	else
+		stack_trace("Station self-destruct not found during lone op team creation.")
+		memorized_code = null

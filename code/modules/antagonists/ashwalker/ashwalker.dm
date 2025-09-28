@@ -1,12 +1,11 @@
 /datum/antagonist/ashwalker
 	name = "\improper Ash Walker"
-	job_rank = ROLE_LAVALAND
+	pref_flag = ROLE_LAVALAND
 	show_in_antagpanel = FALSE
 	show_to_ghosts = TRUE
-	prevent_roundtype_conversion = FALSE
 	antagpanel_category = ANTAG_GROUP_ASHWALKERS
 	suicide_cry = "I HAVE NO IDEA WHAT THIS THING DOES!!"
-	count_against_dynamic_roll_chance = FALSE
+	antag_flags = ANTAG_FAKE|ANTAG_SKIP_GLOBAL_LIST
 	var/datum/team/ashwalkers/ashie_team
 
 /datum/antagonist/ashwalker/create_team(datum/team/ashwalkers/ashwalker_team)
@@ -33,6 +32,8 @@
 
 /datum/antagonist/ashwalker/on_removal()
 	. = ..()
+	if(!owner.current)
+		return
 	UnregisterSignal(owner.current, COMSIG_MOB_EXAMINATE)
 	if(!(FACTION_NEUTRAL in owner.current.faction))
 		owner.current.faction.Add(FACTION_NEUTRAL)
@@ -44,8 +45,8 @@
 		owner.current.add_mood_event("oogabooga", /datum/mood_event/sacrifice_good)
 
 /datum/team/ashwalkers
-	name = "Ash Walker Tribe"
-	member_name = "Ash Walker"
+	name = "Племя Пеплоходцев"
+	member_name = "Пеплоходцы"
 	///A list of "worthy" (meat-bearing) sacrifices made to the Necropolis
 	var/sacrifices_made = 0
 	///A list of how many eggs were created by the Necropolis
@@ -54,28 +55,28 @@
 /datum/team/ashwalkers/roundend_report()
 	var/list/report = list()
 
-	report += span_header("An Ash Walker Tribe inhabited the wastes...</span><br>")
+	report += span_header("Племя Пеплоходцев населяло пустоши...</span><br>")
 	if(length(members)) //The team is generated alongside the tendril, and it's entirely possible that nobody takes the role.
-		report += "The [member_name]s were:"
+		report += "[member_name] были:"
 		report += printplayerlist(members)
 
 		var/datum/objective/protect_object/necropolis_objective = locate(/datum/objective/protect_object) in objectives
 
 		if(necropolis_objective)
 			objectives -= necropolis_objective //So we don't count it in the check for other objectives.
-			report += "<b>The [name] was tasked with defending the Necropolis:</b>"
+			report += "<b>Племени Пеплоходцев было поручено защищать Некрополь:</b>"
 			if(necropolis_objective.check_completion())
-				report += span_greentext(span_header("The nest stands! Glory to the Necropolis!<br>"))
+				report += span_greentext(span_header("Гнездо уцелело! Слава Некрополю!<br>"))
 			else
-				report += span_redtext(span_header("The Necropolis was destroyed, the tribe has fallen...<br>"))
+				report += span_redtext(span_header("Некрополь был разрушен. Племя пало...<br>"))
 
 		if(length(objectives))
-			report += span_header("The [name]'s other objectives were:")
+			report += span_header("Другие цели племени были:")
 			printobjectives(objectives)
 
-		report += "The [name] managed to perform <b>[sacrifices_made]</b> sacrifices to the Necropolis. From this, the Necropolis produced <b>[eggs_created]</b> Ash Walker eggs."
+		report += "[name] сумело принести [sacrifices_made] жертв Некрополю. Взамен Некрополь породил [eggs_created] яиц Пеплоходцев."
 
 	else
-		report += "<b>But none of its eggs hatched!</b>"
+		report += "<b>Но ни одно из яиц не вылупилось!</b>"
 
 	return "<div class='panel redborder'>[report.Join("<br>")]</div>"

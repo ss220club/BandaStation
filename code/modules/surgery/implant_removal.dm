@@ -18,14 +18,12 @@
 		TOOL_HEMOSTAT = 100,
 		TOOL_CROWBAR = 65,
 		/obj/item/kitchen/fork = 35)
-	time = 64
+	time = 6.4 SECONDS
 	success_sound = 'sound/items/handling/surgery/hemostat1.ogg'
 	var/obj/item/implant/implant
 
 /datum/surgery_step/extract_implant/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	for(var/obj/item/object in target.implants)
-		implant = object
-		break
+	implant = LAZYACCESS(target.implants, 1)
 	if(implant)
 		display_results(
 			user,
@@ -56,29 +54,27 @@
 		display_pain(target, "Вы чувствуете, как [implant.declent_ru(ACCUSATIVE)] извлекли из вас!")
 		implant.removed(target)
 
-		if (QDELETED(implant))
-			return ..()
-
-		var/obj/item/implantcase/case
-		for(var/obj/item/implantcase/implant_case in user.held_items)
-			case = implant_case
-			break
-		if(!case)
-			case = locate(/obj/item/implantcase) in get_turf(target)
-		if(case && !case.imp)
-			case.imp = implant
-			implant.forceMove(case)
-			case.update_appearance()
-			display_results(
-				user,
-				target,
-				span_notice("Вы помещаете [implant.declent_ru(ACCUSATIVE)] в [case.declent_ru(ACCUSATIVE)]."),
-				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает [implant.declent_ru(ACCUSATIVE)] в [case.declent_ru(ACCUSATIVE)]!"),
-				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает что-то в [case.declent_ru(ACCUSATIVE)]!"),
-			)
-		else
-			qdel(implant)
-
+		if (!QDELETED(implant))
+			var/obj/item/implantcase/case
+			for(var/obj/item/implantcase/implant_case in user.held_items)
+				case = implant_case
+				break
+			if(!case)
+				case = locate(/obj/item/implantcase) in get_turf(target)
+			if(case && !case.imp)
+				case.imp = implant
+				implant.forceMove(case)
+				case.update_appearance()
+				display_results(
+					user,
+					target,
+					span_notice("Вы помещаете [implant.declent_ru(ACCUSATIVE)] в [case.declent_ru(ACCUSATIVE)]."),
+					span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает [implant.declent_ru(ACCUSATIVE)] в [case.declent_ru(ACCUSATIVE)]!"),
+					span_notice("[capitalize(user.declent_ru(NOMINATIVE))] помещает что-то в [case.declent_ru(ACCUSATIVE)]!"),
+				)
+			else
+				qdel(implant)
+		implant = null
 	else
 		to_chat(user, span_warning("Вы не можете найти ничего в [ru_parse_zone(target_zone, declent = ACCUSATIVE)] у [target.declent_ru(GENITIVE)]!"))
 	return ..()

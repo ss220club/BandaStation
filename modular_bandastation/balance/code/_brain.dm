@@ -1,18 +1,17 @@
+/obj/item/organ/brain
+	var/death_trauma_applied = FALSE
+
 /obj/item/organ/brain/Initialize(mapload)
 	. = ..()
-	if(CONFIG_GET(flag/brain_permanent_death))
-		decay_factor = STANDARD_ORGAN_DECAY * 2 //7 минут до полной смерти (в 4 раза быстрее чем по умолчанию (30 минут))
+	if(CONFIG_GET(flag/brain_permanent_traumas))
+		decay_factor = STANDARD_ORGAN_DECAY * CONFIG_GET(number/brain_decay_rate)
 
-/datum/surgery/brain_surgery/can_start(mob/user, mob/living/carbon/target)
-	. = ..()
-	if(!.)
-		return
+/datum/config_entry/flag/brain_permanent_traumas
+	default = FALSE
 
-	var/obj/item/organ/brain/brain = target.get_organ_slot(ORGAN_SLOT_BRAIN)
-	return !(brain.organ_flags & ORGAN_FAILING) || !CONFIG_GET(flag/brain_permanent_death)
-
-/datum/config_entry/flag/brain_permanent_death
-	default = TRUE
+/datum/config_entry/number/brain_decay_rate
+	integer = FALSE
+	default = 0.5
 
 /datum/design/stasisbodybag
 	name = "Stasis Body Bag"
@@ -52,7 +51,6 @@
 	close_sound = 'sound/effects/spray.ogg'
 	foldedbag_path = /obj/item/bodybag/stasis
 
-//Добавить механизм добавления оверлея на предмет
 /obj/structure/closet/body_bag/stasis/closet_update_overlays(list/new_overlays)
 	. = ..()
 	. = new_overlays
@@ -82,17 +80,21 @@
 		ADD_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 		mob.extinguish_mob()
 
-/obj/structure/closet/body_bag/stasis/open(mob/living/user, force = FALSE, special_effects = TRUE)
+/obj/structure/closet/body_bag/stasis/Destroy()
 	for(var/mob/living/mob in contents)
 		mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		REMOVE_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
-	. = ..()
+	return ..()
 
-/obj/item/reagent_containers/hypospray/medipen
-	list_reagents = list(/datum/reagent/medicine/epinephrine = 10, /datum/reagent/medicine/coagulant = 2)
+/obj/structure/closet/body_bag/stasis/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(isliving(gone))
+		var/mob/living/leaver = gone
+		leaver.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
+		REMOVE_TRAIT(leaver, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 
 /obj/item/reagent_containers/hypospray/medipen/survival
 	list_reagents = list( /datum/reagent/medicine/epinephrine = 7, /datum/reagent/medicine/c2/aiuri = 7, /datum/reagent/medicine/c2/libital = 7, /datum/reagent/medicine/leporazine = 6, /datum/reagent/toxin/formaldehyde = 3)
 
 /obj/item/reagent_containers/hypospray/medipen/survival/luxury
-	list_reagents = list(/datum/reagent/medicine/salbutamol = 10, /datum/reagent/medicine/c2/penthrite = 10, /datum/reagent/medicine/oxandrolone = 10, /datum/reagent/medicine/sal_acid = 10 ,/datum/reagent/medicine/omnizine = 10 ,/datum/reagent/medicine/leporazine = 5, /datum/reagent/toxin/formaldehyde = 5)
+	list_reagents = list(/datum/reagent/medicine/salbutamol = 9, /datum/reagent/medicine/c2/penthrite = 9, /datum/reagent/medicine/oxandrolone = 9, /datum/reagent/medicine/sal_acid = 10, /datum/reagent/medicine/omnizine = 10, /datum/reagent/medicine/leporazine = 10, /datum/reagent/toxin/formaldehyde = 3)

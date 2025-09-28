@@ -7,7 +7,7 @@
 	description = "Replaces the emergency shuttle with a random one."
 	admin_setup = list(/datum/event_admin_setup/warn_admin/shuttle_catastrophe, /datum/event_admin_setup/listed_options/shuttle_catastrophe)
 
-/datum/round_event_control/shuttle_catastrophe/can_spawn_event(players, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/shuttle_catastrophe/can_spawn_event(players, allow_magic = FALSE)
 	. = ..()
 	if(!.)
 		return .
@@ -46,7 +46,6 @@
 		if(!isnull(template.who_can_purchase) && template.credit_cost < INFINITY) //if we could get it from the communications console, it's cool for us to get it here
 			valid_shuttle_templates += template
 	new_shuttle = pick(valid_shuttle_templates)
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/shuttle_catastrophe/start()
 	if(SSshuttle.shuttle_insurance)
@@ -55,6 +54,13 @@
 		return
 	SSshuttle.shuttle_purchased = SHUTTLEPURCHASE_FORCED
 	SSshuttle.unload_preview()
+	// We need to move our docking port back in case a crashlanding shuttle has been purchased previously
+	for(var/obj/docking_port/stationary/port as anything in SSshuttle.stationary_docking_ports)
+		if(port.shuttle_id != "emergency_home")
+			continue
+		var/turf/initial_loc = locate(port.initial_x, port.initial_y, port.initial_z)
+		port.forceMove(initial_loc)
+		break
 	SSshuttle.existing_shuttle = SSshuttle.emergency
 	SSshuttle.action_load(new_shuttle, replace = TRUE)
 	log_shuttle("Shuttle Catastrophe set a new shuttle, [new_shuttle.name].")

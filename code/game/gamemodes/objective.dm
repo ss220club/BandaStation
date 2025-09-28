@@ -100,7 +100,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/proc/get_roundend_success_suffix()
 	if(no_failure)
 		return "" // Just print the objective with no success/fail evaluation, as it has no mechanical backing
-	return check_completion() ? span_greentext("Success!") : span_redtext("Fail.")
+	return check_completion() ? span_greentext("Успех!") : span_redtext("Неудача.")
 
 /datum/objective/proc/is_unique_objective(possible_target, dupe_search_range)
 	if(!islist(dupe_search_range))
@@ -196,7 +196,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	button_icon = 'icons/obj/devices/tracker.dmi'
 	button_icon_state = "beacon"
 
-/datum/action/special_equipment_fallback/Trigger(trigger_flags)
+/datum/action/special_equipment_fallback/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -230,7 +230,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/assassinate/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Убейте [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : target.special_role]."
+		explanation_text = "Убейте [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())]."
 	else
 		explanation_text = "Свободная задача."
 
@@ -280,7 +280,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/mutiny/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Убейте или отправьте в изгнание [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : target.special_role]."
+		explanation_text = "Убейте или отправьте в изгнание [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())]."
 	else
 		explanation_text = "Свободная задача."
 
@@ -302,7 +302,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 
 /datum/objective/maroon/update_explanation_text()
 	if(target?.current)
-		explanation_text = "Не дайте [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : target.special_role], эвакуироватся живым со станции."
+		explanation_text = "Не дайте [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())], эвакуироватся живым со станции."
 	else
 		explanation_text = "Свободная задача."
 
@@ -333,7 +333,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/debrain/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Украдите мозг [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : target.special_role]."
+		explanation_text = "Украдите мозг [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())]."
 	else
 		explanation_text = "Свободная задача."
 
@@ -359,7 +359,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/protect/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Защитите [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : target.special_role]."
+		explanation_text = "Защитите [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())]."
 	else
 		explanation_text = "Свободная задача."
 
@@ -384,7 +384,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/jailbreak/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Удостоверьтесь, что [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : target.special_role], сбежит живым и вне заключения."
+		explanation_text = "Удостоверьтесь, что [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())], сбежит живым и вне заключения."
 	else
 		explanation_text = "Свободная задача."
 
@@ -400,7 +400,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/jailbreak/detain/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Удостоверьтесь, что [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : target.special_role], доставлен на ЦК живым и в заключении."
+		explanation_text = "Удостоверьтесь, что [target.name], [!target_role_type ? job_title_ru(target.assigned_role.title) : english_list(target.get_special_roles())], доставлен на ЦК живым и в заключении."
 	else
 		explanation_text = "Свободная задача."
 

@@ -16,13 +16,13 @@
 	icon_state = "crestpoints"
 
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_limb
-	dna_feature_key = "vulpkanin_limb_markings"
-	dna_color_feature_key = "vulpkanin_body_markings_color"
+	dna_feature_key = FEATURE_VULPKANIN_LIMB_MARKINGS
+	dna_color_feature_key = FEATURE_VULPKANIN_BODY_MARKINGS_COLOR
 	applies_to = list(
 		/obj/item/bodypart/arm/right,
 		/obj/item/bodypart/arm/left,
-		/obj/item/bodypart/leg/right,
-		/obj/item/bodypart/leg/left,
+		/obj/item/bodypart/leg/right/digitigrade,
+		/obj/item/bodypart/leg/left/digitigrade,
 	)
 
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_limb/get_accessory(name)

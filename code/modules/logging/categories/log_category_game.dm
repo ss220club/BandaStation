@@ -12,6 +12,11 @@
 	config_flag = /datum/config_entry/flag/log_emote
 	master_category = /datum/log_category/game
 
+/datum/log_category/game_ghost_polls
+	category = LOG_CATEGORY_GAME_GHOST_POLLS
+	config_flag = /datum/config_entry/flag/log_ghost_poll
+	master_category = /datum/log_category/game
+
 /datum/log_category/game_internet_request
 	category = LOG_CATEGORY_GAME_INTERNET_REQUEST
 	config_flag = /datum/config_entry/flag/log_internet_request
@@ -46,6 +51,12 @@
 	category = LOG_CATEGORY_GAME_OOC
 	config_flag = /datum/config_entry/flag/log_ooc
 	master_category = /datum/log_category/game
+
+// BANDASTATION ADDITION START - Logis
+/datum/log_category/game_looc
+	category = LOG_CATEGORY_GAME_LOOC
+	master_category = /datum/log_category/game
+// BANDASTATION ADDITION END - Logis
 
 /datum/log_category/game_prayer
 	category = LOG_CATEGORY_GAME_PRAYER

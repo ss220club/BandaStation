@@ -160,7 +160,7 @@
 	else
 		status["where"] = "[user.real_name]"
 
-	status["antagonist"] = is_special_character(user)
+	status["antagonist"] = user.is_antag()
 	status["state"] = get_state(user)
 	return status
 
@@ -242,7 +242,3 @@
 		who = new()
 
 	who.ui_interact(mob)
-
-/client/Destroy()
-	QDEL_NULL(who)
-	. = ..()

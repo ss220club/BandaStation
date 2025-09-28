@@ -2,237 +2,169 @@
  * Get the HTML of title screen.
  */
 /datum/title_screen/proc/get_title_html(client/viewer, mob/user, styles)
-	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
-	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 	var/mob/dead/new_player/player = user
-	var/list/html = list()
-	html += {"
+	var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
+
+	var/discord_linked = !CONFIG_GET(flag/force_discord_verification) || (SStitle.discord_verification_possible && SScentral.is_player_discord_linked(player.ckey))
+	var/player_name = player.client.prefs.read_preference(/datum/preference/name/real_name)
+	var/screen_image_url = SSassets.transport.get_asset_url(asset_cache_item = screen_image)
+	var/loading_percentage = CLAMP01(SStitle.subsystems_loaded / SStitle.subsystems_total) * 100
+
+	return {"
 		<!DOCTYPE html>
-		<html>
-		<head>
-			<title>Title Screen</title>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "font-awesome.css")]'>
-			<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(asset_name = "brands.min.css")]'>
-			[sheet.css_tag()]
-			<style type='text/css'>
-				[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
-				[styles ? file2text(styles) : ""]
-			</style>
-		</head>
-		<body>
-	"}
-
-	if(screen_image_url)
-		html += {"
-			<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">
-			<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fix_image()">
-		"}
-
-	html += {"<input type="checkbox" id="hide_menu">"}
-	html += {"<div id="container_notice" class="[SStitle.notice ? "" : "hidden"]">[SStitle.notice]</div>"}
-
-	html += {"<div class="lobby_wrapper">"}
-	html += {"<div class="lobby_container">"}
-
-	html += {"
-		<div class="lobby_element lobby-name">
-			<label class="lobby_element lobby-collapse" for="hide_menu"></label>
-			<span id="character_name">[player.client.prefs.read_preference(/datum/preference/name/real_name)]</span>
-			<div class="logo">
-				<img src="[SSassets.transport.get_asset_url(asset_name = "ss220_logo.png")]">
-			</div>
-		</div>"}
-
-	html += {"<div class="lobby_buttons">"}
-
-	if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
-		html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
-	else
-		html += create_button(player, "late_join", "Присоединиться")
-
-	html += {"
-		[create_button(player, "observe", "Наблюдать")]
-		[create_button(player, "manifest", "Манифест персонала")]
-		<hr>
-		[create_button(player, "character_setup", "Настройка персонажа")]
-		[create_button(player, "settings", "Настройки игры")]
-	"}
-
-	if(length(GLOB.lobby_station_traits))
-		var/number = 0
-		for(var/datum/station_trait/job/trait as anything in GLOB.lobby_station_traits)
-			if(!istype(trait))
-				continue // Skip trait if it is not a job
-
-			if(!trait.can_display_lobby_button(player.client))
-				continue
-
-			number++
-			if(number == 1)
-				html += {"<hr>"}
-
-			var/assigned = LAZYFIND(trait.lobby_candidates, player)
-			html += {"
-				<a id="lobby-trait-[number]" class="lobby_element checkbox [assigned ? "good" : "bad"]" href='byond://?src=[REF(player)];trait_signup=[trait.name];id=[number]'>
-					<span class="lobby-text">[trait.name]</span>
-					<div class="lobby-tooltip" data-position="right">
-						<span class="lobby-tooltip-content">[trait.button_desc]</span>
+		<html [!MC_RUNNING() ? "class='loading' style='--loading-percentage: [loading_percentage]%;'" : ""]>
+			<head>
+				<meta charset="UTF-8">
+				<title>Title Screen</title>
+				<script>globalThis.playerRef = '[REF(player)]';</script>
+				<script defer src='[SSassets.transport.get_asset_url("title_screen.js")]'></script>
+				<link rel='stylesheet' href='[SSassets.transport.get_asset_url("font-awesome.css")]'>
+				<link rel='stylesheet' href='[SSassets.transport.get_asset_url("brands.min.css")]'>
+				[sheet.css_tag() /* Emoji support */]
+				<style>
+					[file2text('modular_bandastation/title_screen/html/title_screen_default.css')]
+					[styles ? file2text(styles) : ""]
+				</style>
+			</head>
+			<body>
+				<input type="checkbox" id="hide_menu">
+				<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
+				<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
+				<div class="lobby_wrapper">
+					<div class="lobby_container">
+						<div class="lobby-name">
+							<label class="lobby_element lobby-collapse" for="hide_menu"></label>
+							<span id="character_name" data-loading="[SStitle.subsystem_loading]" data-name="[player_name]"></span>
+							<div id="logo" data-loaded="[round(loading_percentage)]%">
+								<img src="[SSassets.transport.get_asset_url("ss220_logo.png")]">
+							</div>
+						</div>
+						<div class="lobby_buttons">
+							[create_default_buttons(viewer, player, discord_linked)]
+							[!discord_linked || player.client.interviewee ? "" : {"
+								<div id="lobby_traits" class="[!length(GLOB.lobby_station_traits) ? "hidden" : ""]">
+									[discord_linked ? create_trait_buttons(player) : ""]
+								</div>
+							"}]
+							<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
+								<hr>
+								[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
+								[create_button(player, "delay", "Отложить начало раунда", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
+								[create_button(player, "notice", "Оставить уведомление")]
+								[create_button(player, "picture", "Сменить изображение")]
+							</div>
+						</div>
 					</div>
-				</a>
-			"}
+					<div class="lobby_buttons-end">
+						[create_button(player, "wiki", tooltip = "Перейти на вики", tooltip_position = "top-start")]
+						[create_button(player, "discord", tooltip = "Открыть наш дискорд", tooltip_position = "top-start")]
+						[create_button(player, "github", tooltip = "Перейти в наш репозиторий", tooltip_position = "top")]
+						[create_button(player, "bug", tooltip = "Сообщить о баге", tooltip_position = "top")]
+						[create_button(player, "changelog", tooltip = "Открыть чейнджлог", tooltip_position = "top-end")]
+					</div>
+				</div>
+				<div id="lobby_info">
+					<div id="round_info"></div>
+				</div>
+				<div id="container_notice" class="[SStitle.notice ? "" : "hidden"]">[SStitle.notice]</div>
+				<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>
+				[create_auth_modal(player, discord_linked)]
+			</body>
+		</html>
+	"}
 
-	html += {"
-		<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
+/datum/title_screen/proc/create_button(user, href, text, tooltip, tooltip_position = "right", advanced_classes, enabled = TRUE)
+	return {"
+		<a class="lobby_element lobby-[href] [!enabled ? "disabled" : ""] [advanced_classes]" href='byond://?src=[REF(user)];[href]=1'>
+			<span class="lobby-text">[text]</span>
+			[tooltip ? {"
+			<div class="lobby-tooltip" data-position="[tooltip_position]">
+				<span class="lobby-tooltip-content">[tooltip]</span>
+			</div> "} : ""]
+		</a>
+	"}
+
+/datum/title_screen/proc/create_default_buttons(client/viewer, mob/dead/new_player/player, discord_linked)
+	var/list/html = list()
+	if(discord_linked && !player.client.interviewee)
+		if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
+			html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
+		else
+			html += create_button(player, "late_join", "Присоединиться")
+
+		html += create_button(player, "observe", "Наблюдать")
+		html += {"
+			[create_button(player, "manifest", "Манифест персонала")]
 			<hr>
-			[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
-			[create_button(player, "delay", "Отложить начало раунда", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
-			[create_button(player, "notice", "Оставить уведомление")]
-			[create_button(player, "picture", "Сменить изображение")]
-		</div>
-	"}
+			[create_button(player, "character_setup", "Настройка персонажа")]
+			[create_button(player, "settings", "Настройки игры")]
+		"}
+		return html.Join()
 
-	html += {"</div></div>"}
+	if(discord_linked && player.client.interviewee)
+		return create_button(player, "interview", "Пройти интервью")
 
-	html += {"
-		<div class="lobby_buttons-end">
-			[create_button(player, "wiki", tooltip = "Перейти на вики", tooltip_position = "top-start")]
-			[create_button(player, "discord", tooltip = "Открыть наш дискорд", tooltip_position = "top")]
-			[create_button(player, "changelog", tooltip = "Открыть чейнджлог", tooltip_position = "top-end")]
-		</div>
-	"}
+	return "<button class='lobby_element lobby-auth' onclick='toggleAuthModal()'><span class='lobby-text'>Авторизация</span></button>"
 
-	html += {"</div>"}
-	html += {"<label class="lobby_element lobby-collapse outside" for="hide_menu"></label>"}
-	html += {"<div id="lobby_info"></div>"}
-	html += {"</body>"}
+/datum/title_screen/proc/create_trait_buttons(mob/dead/new_player/player)
+	if(!length(GLOB.lobby_station_traits))
+		return
 
-	html += {"
-		<script language="JavaScript">
-			function call_byond(href, value) {
-				window.location = `byond://?src=[REF(player)];${href}=${value}`
-			}
+	var/number = 0
+	var/list/html = list()
+	for(var/datum/station_trait/job/trait as anything in GLOB.lobby_station_traits)
+		if(!istype(trait))
+			continue // Skip trait if it is not a job
 
-			let ready_int = 0;
-			const readyID = document.querySelector(".lobby-toggle_ready");
-			const ready_class = \[ "bad", "good" \];
-			function toggle_ready(setReady) {
-				if(setReady) {
-					ready_int = setReady;
-					readyID.classList.add(ready_class\[ready_int\]);
-					readyID.classList.remove(ready_class\[1 - ready_int\]);
-				} else {
-					ready_int++;
-					if(ready_int === ready_class.length)
-						ready_int = 0;
-					readyID.classList.add("good");
-					readyID.classList.remove("bad");
-				}
-			}
+		if(!trait.can_display_lobby_button(player.client))
+			continue
 
-			function job_sign(assign, id) {
-				let traitID;
-				let trait_link;
+		number++
+		if(number == 1)
+			html += {"<hr>"}
 
-				if(!id) {
-					return
-				}
-
-				if (id === "1") {
-					traitID = "lobby-trait-1";
-				} else if (id === "2") {
-					traitID = "lobby-trait-2";
-				} else if (id === "3"){
-					traitID = "lobby-trait-3";
-				} else {
-					return
-				}
-
-				trait_link = document.getElementById(traitID);
-				if(assign === "true") {
-					trait_link.classList.add("good");
-					trait_link.classList.remove("bad");
-				} else {
-					trait_link.classList.remove("good");
-					trait_link.classList.add("bad");
-				}
-			}
-
-			const admin_buttons = document.getElementById("lobby_admin")
-			function admin_buttons_visibility(visible) {
-				if(visible === "true") {
-					admin_buttons.classList.remove("hidden")
-				} else {
-					admin_buttons.classList.add("hidden")
-				}
-			}
-
-			const notice_container = document.getElementById("container_notice");
-			function update_notice(notice) {
-				if(notice === undefined) {
-					notice_container.classList.add("hidden");
-					notice_container.innerHTML = "";
-				} else {
-					notice_container.classList.remove("hidden");
-					notice_container.innerHTML = notice;
-				}
-			}
-
-			const character_name_slot = document.getElementById("character_name");
-			function update_character_name(name) {
-				character_name_slot.textContent = name;
-			}
-
-			let image_src;
-			const image_container = document.getElementById("screen_image");
-			const image_blur_container = document.getElementById("screen_blur");
-			function update_image(image) {
-				image_src = image;
-				image_container.src = image_src;
-				image_blur_container.src = image_src;
-			}
-
-			let attempts = 0;
-			const maxAttempts = 10;
-			function fix_image() {
-				const img = new Image();
-				img.src = image_src;
-				if(img.naturalWidth === 0 || img.naturalHeight === 0) {
-					if(attempts === maxAttempts) {
-						attempts = 0;
-						return;
-					}
-
-					attempts++;
-					setTimeout(function() {
-						fix_image();
-					}, 1000);
-				} else {
-					attempts = 0;
-					image_container.src = image_src;
-					return;
-				}
-			}
-
-			const info_placement = document.getElementById("lobby_info");
-			function update_info(info) {
-				info_placement.innerHTML = info;
-			}
-
-			/* Return focus to Byond after click */
-			function reFocus() {
-				call_byond("focus", true);
-			}
-
-			document.addEventListener('keyup', reFocus);
-			document.addEventListener('mouseup', reFocus);
-
-			/* Tell Byond that the title screen is ready */
-			call_byond("title_ready", true);
-		</script>
-	"}
-
-	html += "</html>"
-
+		var/assigned = LAZYFIND(trait.lobby_candidates, player)
+		html += {"
+			<a id="lobby-trait-[number]" class="lobby_element checkbox [assigned ? "good" : "bad"]" href='byond://?src=[REF(player)];trait_signup=[trait.name];id=[number]'>
+				<span class="lobby-text">[trait.name]</span>
+				<div class="lobby-tooltip" data-position="right">
+					<span class="lobby-tooltip-content">[trait.button_desc]</span>
+				</div>
+			</a>
+		"}
 	return html.Join()
+
+/datum/title_screen/proc/create_auth_modal(mob/dead/new_player/player, discord_linked)
+	if(discord_linked)
+		return
+
+	return {"
+		<input type="checkbox" id="hide_auth" class="hidden">
+		<div class="modal">
+			<div class="lobby_auth">
+				<button class='lobby_element lobby-collapse auth' onclick='toggleAuthModal()'></button>
+				<div class="lobby_auth_title">Авторизация</div>
+				<div class="lobby_auth_content">
+					<div class="lobby_auth_text">
+						[SStitle.discord_verification_possible ? {"
+							Вход в игру требует привязать аккаунт<br>
+							Для этого воспользуйтесь авторизацией через Discord<br>
+							После авторизации, просто <b>закройте это окно</b><br>
+							<small>Ссылка продублирована в чат, если вы хотите авторизоваться через свой браузер
+						"} : {"
+							Включена система привязок Space Station Central, однако на данный момент она недоступна<br>
+							<span class="bad"><b>Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.</b></span>
+						"}]
+					</div>
+					<div id="external_auth"></div>
+					[SStitle.discord_verification_possible ? {"
+						<div class="lobby_auth_controls">
+							<button id="open_auth" class="lobby_element lobby-auth-discord" onclick="call_byond('discord_oauth', true)">
+								<span class="lobby-text">Привязать Discord</span>
+							</button>
+						</div>
+					"} : ""]
+				</div>
+			</div>
+		</div>
+	"}

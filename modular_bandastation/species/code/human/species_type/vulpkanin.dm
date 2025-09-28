@@ -8,6 +8,7 @@
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 
 	species_language_holder = /datum/language_holder/vulpkanin
+	digitigrade_customization = DIGITIGRADE_FORCED
 
 	mutantbrain = /obj/item/organ/brain/vulpkanin
 	mutantheart = /obj/item/organ/heart/vulpkanin
@@ -33,8 +34,8 @@
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/vulpkanin,
 		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/vulpkanin,
 		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/vulpkanin,
-		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/vulpkanin,
-		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/vulpkanin,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/digitigrade/vulpkanin,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/digitigrade/vulpkanin,
 	)
 
 	payday_modifier = 0.8
@@ -45,25 +46,25 @@
 /datum/species/vulpkanin/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.set_haircolor("#A26324", update = FALSE) // brown
 	human.set_hairstyle("Jagged", update = TRUE)
-	human.dna.features["mcolor"] = "#D69E67"
-	human.dna.features["vulpkanin_body_markings_color"] = "#bd762f"
-	human.dna.features["vulpkanin_tail_markings_color"] = "#2b2015"
-	human.dna.features["vulpkanin_head_markings_color"] = "#2b2015"
-	human.dna.features["vulpkanin_facial_hair_color"] = "#bd762f"
+	human.dna.features[FEATURE_MUTANT_COLOR] = "#D69E67"
+	human.dna.features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = "#bd762f"
+	human.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR] = "#2b2015"
+	human.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR] = "#2b2015"
+	human.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = "#bd762f"
 	human.update_body(is_creating = TRUE)
 
 /datum/species/vulpkanin/randomize_features()
 	var/list/features = ..()
-	features["vulpkanin_chest_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_chest_markings_list) : SPRITE_ACCESSORY_NONE
-	features["tail_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : SPRITE_ACCESSORY_NONE
-	features["vulpkanin_head_markings"] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : SPRITE_ACCESSORY_NONE
-	features["vulpkanin_facial_hair"] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_CHEST_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_chest_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_TAIL_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_HEAD_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_FACIAL_HAIR] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : SPRITE_ACCESSORY_NONE
 
 	var/furcolor = "#[random_color()]"
-	features["vulpkanin_body_markings_color"] = furcolor
-	features["vulpkanin_tail_markings_color"] = furcolor
-	features["vulpkanin_head_markings_color"] = furcolor
-	features["vulpkanin_facial_hair_color"] = furcolor
+	features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = furcolor
+	features[FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR] = furcolor
+	features[FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR] = furcolor
+	features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = furcolor
 	return features
 
 /datum/species/vulpkanin/get_physical_attributes()
@@ -123,69 +124,3 @@
 	)
 
 	return to_add
-
-/datum/species/vulpkanin/get_scream_sound(mob/living/carbon/human/human)
-	if(human.physique == MALE)
-		return pick(
-			'sound/mobs/humanoids/human/scream/malescream_1.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_2.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_3.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_4.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_5.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_6.ogg',
-		)
-
-	return pick(
-		'sound/mobs/humanoids/human/scream/femalescream_1.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_2.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_3.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_4.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_5.ogg',
-	)
-
-/datum/species/vulpkanin/get_cough_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'sound/mobs/humanoids/human/cough/female_cough1.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough2.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough3.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough4.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough5.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough6.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/cough/male_cough1.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough2.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough3.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough4.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough5.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough6.ogg',
-	)
-
-/datum/species/vulpkanin/get_cry_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
-			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/cry/male_cry1.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry2.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry3.ogg',
-	)
-
-
-/datum/species/vulpkanin/get_sneeze_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return 'sound/mobs/humanoids/human/sneeze/female_sneeze1.ogg'
-	return 'sound/mobs/humanoids/human/sneeze/male_sneeze1.ogg'
-
-/datum/species/vulpkanin/get_laugh_sound(mob/living/carbon/human/human)
-	if(!ishuman(human))
-		return
-	if(human.physique == FEMALE)
-		return 'sound/mobs/humanoids/human/laugh/womanlaugh.ogg'
-	return pick(
-		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
-		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
-	)

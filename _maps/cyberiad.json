@@ -6,6 +6,7 @@
 	"fluff_name": "ИСН Кибериада",
 	"welcome_sound_override": "modular_bandastation/aesthetics_sounds/sound/welcome_sounds/welcome_cyberiad.ogg",
 	"main_floor": 2,
+	"give_players_hooks": 1,
 	"shuttles": {
 		"cargo": "cargo_box",
 		"ferry": "ferry_fancy",
@@ -22,15 +23,15 @@
 		}
 	],
 	"job_changes": {
+		"Captain": {
+			"no_charter": 1
+		},
 		"Cook": {
 			"additional_cqc_areas": [
 				"/area/station/service/bar",
 				"/area/station/commons/lounge",
 				"/area/station/service/kitchen"
 			]
-		},
-		"Captain": {
-			"no_charter": 1
 		},
 		"Nanotrasen Representative": {
 			"spawn_positions": 1

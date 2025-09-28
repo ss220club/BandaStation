@@ -331,7 +331,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	item_flags = NONE
 	force = 0
-	bare_wound_bonus = 5
+	exposed_wound_bonus = 5
 	clumsy_knockdown_time = 15 SECONDS
 	active = FALSE
 	activated_word = "extended"
@@ -777,14 +777,15 @@
 /obj/item/melee/baton/security/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
 	if(!. && active && prob(throw_stun_chance) && isliving(hit_atom))
-		finalize_baton_attack(hit_atom, throwingdatum.get_thrower())
+		finalize_baton_attack(hit_atom, throwingdatum?.get_thrower())
 
 /obj/item/melee/baton/security/emp_act(severity)
 	. = ..()
 	if (!cell)
 		return
 	if (!(. & EMP_PROTECT_SELF))
-		deductcharge(STANDARD_CELL_CHARGE / severity)
+		cell.emp_act(severity)
+
 	if (cell.charge >= cell_hit_cost)
 		var/scramble_time
 		scramble_mode()
@@ -978,7 +979,7 @@
 	stamina_damage = 30 // 4 hit stamcrit
 	stun_armour_penetration = 30 // bronze-silver telescopic
 	force = 16 // 7 hit crit
-	bare_wound_bonus = 5
+	exposed_wound_bonus = 5
 
 /obj/item/melee/baton/nunchaku/proc/randomize_state()
 	icon_state = pick(list("nunchaku", "nunchaku_x", "nunchaku_y"))

@@ -24,6 +24,8 @@
 	)
 	premium = list(
 		/obj/item/storage/belt/utility = 3,
+		/obj/item/storage/bag/material_pouch = 3, //BANDASTATION ADD - engivend expansion
+		/obj/item/construction/rld = 2,	//BANDASTATION ADD - engivend expansion
 		/obj/item/construction/rcd/loaded = 2,
 		/obj/item/storage/box/smart_metal_foam = 1,
 	)
@@ -32,6 +34,7 @@
 	extra_price = PAYCHECK_COMMAND * 1.5
 	payment_department = ACCOUNT_ENG
 	light_mask = "engivend-light-mask"
+	allow_custom = TRUE
 
 /obj/item/vending_refill/engivend
 	machine_name = "Engi-Vend"

@@ -1,7 +1,7 @@
 import { useBackend } from 'tgui/backend';
 import { Dropdown, Tooltip } from 'tgui-core/components';
 
-import { PreferencesMenuData } from '../types';
+import type { PreferencesMenuData } from '../types';
 
 const SLOT_ICONS = {
   '-1': 'fa-random',
@@ -25,21 +25,25 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   const { data, act } = useBackend<PreferencesMenuData>();
   const { name } = props;
 
-  const currentSlotNumber = data.pref_job_slots[name] || 0;
-  const currentSlotName = data.profile_index[currentSlotNumber];
-  const slotOptions = Object.entries(data.profile_index).map(([key, name]) => ({
+  const prefJobSlots = data.pref_job_slots ?? {};
+  const profileIndex = data.profile_index ?? {};
+
+  const currentSlotNumber = prefJobSlots[name] ?? 0;
+  const currentSlotName = profileIndex[currentSlotNumber] ?? '';
+
+  const slotOptions = Object.entries(profileIndex).map(([key, slotName]) => ({
     value: key,
-    displayText: name,
+    displayText: String(slotName) as React.ReactNode,
   }));
 
   return (
-    <Tooltip content={currentSlotName} position="right">
+    <Tooltip content={currentSlotName} position="top-end">
       <div>
         <Dropdown
           noChevron
           iconOnly
           icon={SLOT_ICONS[currentSlotNumber]}
-          width="100%"
+          width="auto"
           menuWidth="auto"
           selected={currentSlotName}
           options={slotOptions}

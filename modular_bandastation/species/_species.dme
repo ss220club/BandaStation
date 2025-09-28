@@ -6,7 +6,6 @@
 
 #include "code/human/species/skills.dm"
 #include "code/human/species_type/moth.dm"
-#include "code/human/species_type/podpeople.dm"
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
@@ -34,6 +33,7 @@
 #include "code/language/canilunzt.dm"
 #include "code/language/qurvolious.dm"
 #include "code/language/siiktajr.dm"
+#include "code/language/spinwarder.dm"
 
 #include "code/preferences/species_features/skrell/skrell_head_tentacle.dm"
 

@@ -94,12 +94,13 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/atom/movable/screen/healthdoll/healthdoll
 	var/atom/movable/screen/spacesuit
 	var/atom/movable/screen/hunger/hunger
-	// subtypes can override this to force a specific UI style
+
+	/// Subtypes can override this to force a specific UI style
 	var/ui_style
 
-	// List of weakrefs to objects that we add to our screen that we don't expect to DO anything
-	// They typically use * in their render target. They exist solely so we can reuse them,
-	// and avoid needing to make changes to all idk 300 consumers if we want to change the appearance
+	/// List of weakrefs to objects that we add to our screen that we don't expect to DO anything
+	/// They typically use * in their render target. They exist solely so we can reuse them,
+	/// and avoid needing to make changes to all idk 300 consumers if we want to change the appearance
 	var/list/asset_refs_for_reuse = list()
 
 /datum/hud/New(mob/owner)
@@ -182,7 +183,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	if(should_sight_scale(new_sight) == should_sight_scale(old_sight))
 		return
 
-	for(var/group_key as anything in master_groups)
+	for(var/group_key in master_groups)
 		var/datum/plane_master_group/group = master_groups[group_key]
 		group.build_planes_offset(src, current_plane_offset)
 
@@ -206,7 +207,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	current_plane_offset = new_offset
 
 	SEND_SIGNAL(src, COMSIG_HUD_OFFSET_CHANGED, old_offset, new_offset)
-	for(var/group_key as anything in master_groups)
+	for(var/group_key in master_groups)
 		var/datum/plane_master_group/group = master_groups[group_key]
 		group.build_planes_offset(src, new_offset)
 
@@ -229,6 +230,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	zone_select = null
 	pull_icon = null
 	rest_icon = null
+	sleep_icon = null
 	floor_change = null
 	hand_slots.Cut()
 
@@ -327,6 +329,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	if(display_hud_version > HUD_VERSIONS) //If the requested version number is greater than the available versions, reset back to the first version
 		display_hud_version = 1
 
+	// BANDASTATION INFOSCREEN FIX START: Remove null entries from infodisplay to prevent rendering errors.
+	infodisplay -= null
+	static_inventory -= null
+	// BANDASTATION INFOSCREEN FIX END
 	switch(display_hud_version)
 		if(HUD_STYLE_STANDARD) //Default HUD
 			hud_shown = TRUE //Governs behavior of other procs

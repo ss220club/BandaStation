@@ -5,7 +5,7 @@ import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 import { Clients, UserInfo } from './BaseInfo';
 import { Subject } from './Subject';
-import { WhoData } from './types';
+import type { WhoData } from './types';
 
 export function Who(props) {
   const { data } = useBackend<WhoData>();

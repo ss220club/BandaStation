@@ -8,7 +8,7 @@
 	return COLOR_WHITE
 
 /datum/preference/color/tajaran_tail_markings_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["tajaran_tail_markings_color"] = value
+	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS_COLOR] = value
 
 /datum/preference/color/tajaran_tail_markings_color/is_accessible(datum/preferences/preferences)
 	if(!..(preferences))

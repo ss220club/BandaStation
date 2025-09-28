@@ -1,13 +1,13 @@
 /// Antag datum associated with the experimental cloner
 /datum/antagonist/evil_clone
-	name = "\improper Evil Clone"
+	name = "\improper Злой клон"
 	stinger_sound = 'sound/music/antag/hypnotized.ogg'
-	job_rank = ROLE_EVIL_CLONE
-	roundend_category = "evil clones"
+	pref_flag = ROLE_EVIL_CLONE
+	roundend_category = "Злые клоны"
 	show_in_antagpanel = TRUE
 	antagpanel_category = ANTAG_GROUP_CREW
 	show_name_in_check_antagonists = TRUE
-	count_against_dynamic_roll_chance = FALSE
+	antag_flags = ANTAG_SKIP_GLOBAL_LIST
 
 /datum/antagonist/evil_clone/on_gain()
 	if (owner.current)

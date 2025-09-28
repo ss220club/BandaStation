@@ -1,4 +1,4 @@
-import { deepMerge } from 'common/collections';
+import { toMerged } from 'es-toolkit';
 import { Color } from 'tgui-core/color';
 import {
   Box,
@@ -9,7 +9,7 @@ import {
   Stack,
   StyleableSection,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import {
@@ -142,7 +142,7 @@ function DepartmentEntry(props: DepartmentEntryProps) {
                 color: Color.fromHex(department.color).darken(60).toString(),
               }}
             >
-              {'позиций доступно: ' + department.open_slots}
+              {`позиций доступно: ${department.open_slots}`}
             </span>
           </>
         }
@@ -186,7 +186,7 @@ export function JobSelection(props) {
     return null; // Stop TGUI whitescreens with TGUI-dev!
   }
 
-  const departments: Record<string, Department> = deepMerge(
+  const departments: Record<string, Department> = toMerged(
     data.departments,
     data.departments_static,
   );

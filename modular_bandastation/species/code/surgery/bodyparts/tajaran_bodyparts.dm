@@ -10,7 +10,7 @@
 	is_dimorphic = TRUE
 
 /obj/item/bodypart/chest/tajaran/get_butt_sprite()
-	return icon('icons/mob/butts.dmi', BUTT_SPRITE_CAT)
+	return icon('icons/mob/butts.dmi', BUTT_SPRITE_TAJARAN)
 
 /obj/item/bodypart/arm/left/tajaran
 	icon_greyscale = 'icons/bandastation/mob/species/tajaran/bodyparts.dmi'
@@ -45,7 +45,7 @@
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/obj/item/bodypart/leg/left/digitigrade/tajaran/update_limb(dropping_limb = FALSE, is_creating = TRUE)
+/obj/item/bodypart/leg/left/digitigrade/tajaran/update_limb(dropping_limb = FALSE, is_creating = FALSE)
 	. = ..()
 	limb_id = owner?.is_digitigrade_squished() ? SPECIES_TAJARAN : BODYPART_ID_DIGITIGRADE
 
@@ -56,6 +56,6 @@
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/obj/item/bodypart/leg/right/digitigrade/tajaran/update_limb(dropping_limb = FALSE, is_creating = TRUE)
+/obj/item/bodypart/leg/right/digitigrade/tajaran/update_limb(dropping_limb = FALSE, is_creating = FALSE)
 	. = ..()
 	limb_id = owner?.is_digitigrade_squished() ? SPECIES_TAJARAN : BODYPART_ID_DIGITIGRADE

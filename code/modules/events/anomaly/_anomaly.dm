@@ -24,12 +24,11 @@
 		impact_area = get_area(spawn_location)
 	else
 		impact_area = placer.findValidArea()
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
 /datum/round_event/anomaly/announce(fake)
 	if(isnull(impact_area))
 		impact_area = placer.findValidArea()
-	priority_announce("Энергетический поток обнаружен на [ANOMALY_ANNOUNCE_DANGEROUS_TEXT] [impact_area.name].", "Обнаружена аномалия")
+	priority_announce("Энергетический поток обнаружен на [ANOMALY_ANNOUNCE_DANGEROUS_TEXT] [impact_area.declent_ru(NOMINATIVE)].", "Обнаружена аномалия")
 
 /datum/round_event/anomaly/start()
 	var/turf/anomaly_turf

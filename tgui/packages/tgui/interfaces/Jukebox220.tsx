@@ -1,5 +1,5 @@
-import { sortBy } from 'common/collections';
-import React, { useState } from 'react';
+import { sortBy } from 'es-toolkit';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -13,7 +13,7 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -56,7 +56,7 @@ export const Jukebox220 = () => {
   } = data;
 
   const MAX_NAME_LENGTH = 35;
-  const songs_sorted: Song[] = sortBy(songs, (song: Song) => song.name);
+  const songs_sorted: Song[] = sortBy(songs, [(song: Song) => song.name]);
   const song_selected: Song | undefined = songs.find(
     (song) => song.name === track_selected,
   );
@@ -71,7 +71,7 @@ export const Jukebox220 = () => {
     const seconds = Math.floor(deciseconds / 10);
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    const formattedTime = `${minutes}:${remainingSeconds > 9 ? remainingSeconds : '0' + remainingSeconds}`;
+    const formattedTime = `${minutes}:${remainingSeconds > 9 ? remainingSeconds : `0${remainingSeconds}`}`;
     return formattedTime;
   };
 
@@ -192,6 +192,7 @@ export const Jukebox220 = () => {
                 </Stack>
                 <Stack.Item pr={1} pl={1} textAlign="center" textColor="label">
                   <Knob
+                    tickWhileDragging
                     size={1.75}
                     value={volume}
                     unit="%"
@@ -199,7 +200,7 @@ export const Jukebox220 = () => {
                     maxValue={50}
                     step={1}
                     stepPixelSize={5}
-                    onDrag={(e, value) =>
+                    onChange={(value) =>
                       act('set_volume', {
                         volume: value,
                       })

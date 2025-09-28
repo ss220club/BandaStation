@@ -77,11 +77,11 @@
 
 /turf/closed/mineral/strong/wasteland/drop_ores()
 	if(prob(10))
-		new /obj/item/stack/ore/iron(src, 1)
-		new /obj/item/stack/ore/glass(src, 1)
+		new /obj/item/stack/ore/iron(src)
+		new /obj/item/stack/ore/glass(src)
 		new /obj/effect/decal/remains/human(src, 1)
 	else
-		new /obj/item/stack/sheet/bone(src, 1)
+		new /obj/item/stack/sheet/bone(src)
 
 //***Oil well puddles.
 /obj/structure/sink/oil_well //You're not going to enjoy bathing in this...
@@ -332,6 +332,14 @@
 	..()
 	new /obj/effect/decal/cleanable/blood/gibs/old(src)
 	new /obj/item/book/granter/crafting_recipe/boneyard_notes(src)
+
+/obj/structure/closet/crate/grave/skeleton
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	affect_mood = TRUE
+
+/obj/structure/closet/crate/grave/skeleton/PopulateContents()
+	. = ..()
+	new /mob/living/carbon/human/species/skeleton(src)
 
 //***Fluff items for lore/intrigue
 /obj/item/paper/crumpled/muddy/fluff/elephant_graveyard

@@ -72,7 +72,7 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 
 	msg = emoji_parse(msg)
 
-	mob.log_talk(msg,LOG_OOC, tag="LOOC")
+	mob.log_talk(msg, LOG_LOOC, tag="LOOC")
 	var/list/heard
 	if(wall_pierce)
 		heard = get_hearers_in_range(LOOC_RANGE, mob.get_top_level_mob())
@@ -109,12 +109,11 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 
 		to_chat(hearing_client, span_looc(span_prefix("LOOC[wall_pierce ? " (WALL PIERCE)" : ""]:</span> <EM>[mob.name]:</EM> <span class='message'>[msg]")))
 
-	for(var/cli in GLOB.admins)
-		var/client/cli_client = cli
-		if (admin_seen[cli_client])
-			to_chat(cli_client, span_looc("[ADMIN_FLW(usr)] <span class='prefix'>LOOC[wall_pierce ? " (WALL PIERCE)" : ""]:</span> <EM>[key]/[mob.name]:</EM> <span class='message'>[msg]</span>"))
-		else if (cli_client.prefs.read_preference(/datum/preference/toggle/see_looc))
-			to_chat(cli_client, span_looc("[ADMIN_FLW(usr)] <span class='prefix'>(R)LOOC[wall_pierce ? " (WALL PIERCE)" : ""]:</span> <EM>[key]/[mob.name]:</EM> <span class='message'>[msg]</span>"))
+	for(var/client/admin as anything in get_holders_with_rights(R_ADMIN))
+		if (admin_seen[admin])
+			to_chat(admin, span_looc("[ADMIN_FLW(usr)] <span class='prefix'>LOOC[wall_pierce ? " (WALL PIERCE)" : ""]:</span> <EM>[key]/[mob.name]:</EM> <span class='message'>[msg]</span>"))
+		else if (admin.prefs.read_preference(/datum/preference/toggle/see_looc))
+			to_chat(admin, span_looc("[ADMIN_FLW(usr)] <span class='prefix'>(R)LOOC[wall_pierce ? " (WALL PIERCE)" : ""]:</span> <EM>[key]/[mob.name]:</EM> <span class='message'>[msg]</span>"))
 
 #undef LOOC_RANGE
 

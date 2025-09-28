@@ -57,13 +57,13 @@
 	/// Can only code call this event instead of the player.
 	var/only_forced_audio = FALSE
 	/// The cooldown between the uses of the emote.
-	var/cooldown = 0.8 SECONDS
+	var/cooldown = 3 SECONDS // BANDASTATION EDIT: 0.8 -> 3
 	/// Does this message have a message that can be modified by the user?
 	var/can_message_change = FALSE
 	/// How long is the shared emote cooldown triggered by this emote?
-	var/general_emote_audio_cooldown = 2 SECONDS
+	var/general_emote_audio_cooldown = 3 SECONDS // BANDASTATION EDIT: 2 -> 3
 	/// How long is the specific emote cooldown triggered by this emote?
-	var/specific_emote_audio_cooldown = 5 SECONDS
+	var/specific_emote_audio_cooldown = 3 SECONDS // BANDASTATION EDIT: 5 -> 3
 	/// Does this emote's sound ignore walls?
 	var/sound_wall_ignore = FALSE
 
@@ -92,8 +92,9 @@
  * * intentional - Bool that says whether the emote was forced (FALSE) or not (TRUE).
  *
  */
-/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE)
-	var/msg = select_message_type(user, message, intentional)
+/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, message_override = null) // BANDASTATION EDIT - Emote Panel
+	var/msg = message_override || select_message_type(user, message, intentional) // BANDASTATION EDIT - Emote Panel
+
 	if(params && message_param)
 		msg = select_param(user, params)
 
@@ -101,7 +102,8 @@
 	if(!msg)
 		return
 
-	user.log_message(msg, LOG_EMOTE)
+	if(user.client)
+		user.log_message(msg, LOG_EMOTE)
 
 	var/tmp_sound = get_sound(user)
 	if(tmp_sound && should_play_sound(user, intentional) && TIMER_COOLDOWN_FINISHED(user, "general_emote_audio_cooldown") && TIMER_COOLDOWN_FINISHED(user, type))
@@ -388,18 +390,21 @@
 *
 * Returns TRUE if it was able to run the emote, FALSE otherwise.
 */
-/atom/proc/manual_emote(text)
-	if(!text)
+/atom/proc/manual_emote(text, log_emote = TRUE)
+	if (!text)
 		CRASH("Someone passed nothing to manual_emote(), fix it")
 
-	log_message(text, LOG_EMOTE)
+	if (log_emote)
+		log_message(text, LOG_EMOTE)
 	visible_message(text, visible_message_flags = EMOTE_MESSAGE)
 	return TRUE
 
-/mob/manual_emote(text)
+/mob/manual_emote(text, log_emote = null)
 	if (stat != CONSCIOUS)
 		return FALSE
-	. = ..()
+	if (isnull(log_emote))
+		log_emote = !isnull(client)
+	. = ..(text, log_emote)
 	if (!.)
 		return FALSE
 	if (!client)

@@ -32,8 +32,6 @@
 		/datum/reagent/consumable/condensedcapsaicin,
 		/datum/reagent/drug/mushroomhallucinogen,
 		/datum/reagent/lube,
-		/datum/reagent/glitter/blue,
-		/datum/reagent/glitter/pink,
 		/datum/reagent/cryptobiolin,
 		/datum/reagent/blood,
 		/datum/reagent/medicine/c2/multiver,
@@ -53,7 +51,7 @@
 		/datum/reagent/consumable/ethanol/beer,
 		/datum/reagent/hair_dye,
 		/datum/reagent/consumable/sugar,
-		/datum/reagent/glitter/white,
+		// /datum/reagent/glitter/random, // BANDASTATION REMOVAL - No Glitters
 		/datum/reagent/gravitum,
 		/datum/reagent/growthserum,
 		/datum/reagent/yuck,
@@ -84,9 +82,8 @@
 
 	if(!scrubbers.len)
 		return kill()
-	setup = TRUE // BANDASTATION EDIT - STORYTELLER
 
-/datum/round_event_control/scrubber_overflow/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) // BANDASTATION EDIT - STORYTELLER
+/datum/round_event_control/scrubber_overflow/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
 	if(!.)
 		return

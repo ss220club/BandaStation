@@ -21,7 +21,8 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	var/medical_slots = 0
 	var/engineering_slots = 0
 	var/janitor_slots = 0
-	var/inquisitor_slots = 0
+	var/chaplain_slots = 0
+	var/clown_slots = 0
 	var/should_be_announced = TRUE
 
 /datum/ert_manager/ui_state(mob/user)
@@ -46,8 +47,9 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	data["medicalSlots"] = medical_slots
 	data["engineeringSlots"] = engineering_slots
 	data["janitorSlots"] = janitor_slots
-	data["inquisitorSlots"] = inquisitor_slots
-	data["totalSlots"] = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + inquisitor_slots
+	data["chaplainSlots"] = chaplain_slots
+	data["clownSlots"] = clown_slots
+	data["totalSlots"] = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + chaplain_slots + clown_slots
 	data["ertSpawnpoints"] = length(GLOB.emergencyresponseteamspawn)
 	data["shouldBeAnnounced"] = should_be_announced
 
@@ -78,7 +80,9 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 		if("setJan")
 			janitor_slots = text2num(params["setJan"])
 		if("setInq")
-			inquisitor_slots = text2num(params["setInq"])
+			chaplain_slots = text2num(params["setInq"])
+		if("setClw")
+			clown_slots = text2num(params["setClw"])
 		if("dispatchErt")
 			var/datum/ert/new_ert
 			switch(ert_type)
@@ -88,18 +92,20 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 					new_ert = new /datum/ert/red
 				if("Gamma")
 					new_ert = new /datum/ert/gamma
+				if("Inquisition")
+					new_ert = new /datum/ert/inquisition
 				else
 					to_chat(usr, "<span class='userdanger'>Invalid ERT type.</span>")
 					return
 
-			if((commander_slots + medical_slots + janitor_slots + inquisitor_slots + security_slots + engineering_slots) == 0)
+			if((commander_slots + medical_slots + janitor_slots + clown_slots + chaplain_slots + security_slots + engineering_slots) == 0)
 				message_admins("[key_name_admin(usr)] tried to create a [ert_type] ERT with zero slots available!")
 				log_admin("[key_name(usr)] tried to create a [ert_type] ERT with zero slots available.")
 				to_chat(usr, span_userdanger("ERT must have at least 1 slot available!"))
 				return
 
-			new_ert.teamsize = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + inquisitor_slots
-			new_ert.roles = slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots, ert_type)
+			new_ert.teamsize = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + chaplain_slots + clown_slots
+			new_ert.roles = slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots, ert_type)
 
 			GLOB.ert_request_answered = TRUE
 			var/slots_list = list()
@@ -113,15 +119,17 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 				slots_list += "engineering: [engineering_slots]"
 			if(janitor_slots > 0)
 				slots_list += "janitor: [janitor_slots]"
-			if(inquisitor_slots > 0)
-				slots_list += "inquisitor: [inquisitor_slots]"
+			if(chaplain_slots > 0)
+				slots_list += "chaplain: [chaplain_slots]"
+			if(clown_slots > 0)
+				slots_list += "clown: [clown_slots]"
 
 			var/slot_text = english_list(slots_list)
 			message_admins("[key_name_admin(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
 			log_admin("[key_name(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
 			if(should_be_announced)
 				priority_announce("Внимание, [station_name()]. Мы рассматриваем возможность отправки ОБР, ожидайте.", "Активирован протокол ОБР")
-			makeERTFromSlots(new_ert, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots)
+			makeERTFromSlots(new_ert, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots)
 
 		if("view_player_panel")
 			SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/show_player_panel, locate(params["uid"]))
@@ -135,10 +143,30 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 		else
 			return FALSE
 
-/datum/ert_manager/proc/slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots, ert_type)
+/datum/ert_manager/proc/slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots, ert_type)
 	var/list/roles = list()
-	var/slots_sans_leader = security_slots + medical_slots + engineering_slots + janitor_slots + inquisitor_slots
-	if(ert_type != "Amber")
+	var/slots_sans_leader = security_slots + medical_slots + engineering_slots + janitor_slots + chaplain_slots + clown_slots
+	if(ert_type == "Amber")
+		for(var/role in 1 to slots_sans_leader)
+			if(security_slots > 0)
+				roles.Add(/datum/antagonist/ert/security/amber)
+				security_slots--
+			if(medical_slots > 0)
+				roles.Add(/datum/antagonist/ert/medic/amber)
+				medical_slots--
+			if(engineering_slots > 0)
+				roles.Add(/datum/antagonist/ert/engineer/amber)
+				engineering_slots--
+			if(janitor_slots > 0)
+				roles.Add(/datum/antagonist/ert/janitor/amber)
+				janitor_slots--
+			if(chaplain_slots > 0)
+				roles.Add(/datum/antagonist/ert/chaplain/amber)
+				chaplain_slots--
+			if(clown_slots > 0)
+				roles.Add(/datum/antagonist/ert/clown/amber)
+				clown_slots--
+	if(ert_type == "Red")
 		for(var/role in 1 to slots_sans_leader)
 			if(security_slots > 0)
 				roles.Add(/datum/antagonist/ert/security/red)
@@ -150,31 +178,48 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 				roles.Add(/datum/antagonist/ert/engineer/red)
 				engineering_slots--
 			if(janitor_slots > 0)
-				roles.Add(/datum/antagonist/ert/janitor)
+				roles.Add(/datum/antagonist/ert/janitor/red)
 				janitor_slots--
-			if(inquisitor_slots > 0)
-				roles.Add(/datum/antagonist/ert/chaplain/inquisitor)
-				inquisitor_slots--
-	else
+			if(chaplain_slots > 0)
+				roles.Add(/datum/antagonist/ert/chaplain/red)
+				chaplain_slots--
+			if(clown_slots > 0)
+				roles.Add(/datum/antagonist/ert/clown/red)
+				clown_slots--
+	if(ert_type == "Gamma")
 		for(var/role in 1 to slots_sans_leader)
 			if(security_slots > 0)
-				roles.Add(/datum/antagonist/ert/security)
+				roles.Add(/datum/antagonist/ert/security/gamma)
 				security_slots--
 			if(medical_slots > 0)
-				roles.Add(/datum/antagonist/ert/medic)
+				roles.Add(/datum/antagonist/ert/medic/gamma)
 				medical_slots--
 			if(engineering_slots > 0)
-				roles.Add(/datum/antagonist/ert/engineer)
+				roles.Add(/datum/antagonist/ert/engineer/gamma)
 				engineering_slots--
 			if(janitor_slots > 0)
-				roles.Add(/datum/antagonist/ert/janitor)
+				roles.Add(/datum/antagonist/ert/janitor/gamma)
 				janitor_slots--
-			if(inquisitor_slots > 0)
+			if(chaplain_slots > 0)
+				roles.Add(/datum/antagonist/ert/chaplain/gamma)
+				chaplain_slots--
+			if(clown_slots > 0)
+				roles.Add(/datum/antagonist/ert/clown/gamma)
+				clown_slots--
+	if(ert_type == "Inquisition")
+		for(var/role in 1 to slots_sans_leader)
+			if(security_slots > 0)
+				roles.Add(/datum/antagonist/ert/security/inquisitor)
+				security_slots--
+			if(medical_slots > 0)
+				roles.Add(/datum/antagonist/ert/medic/inquisitor)
+				medical_slots--
+			if(chaplain_slots > 0)
 				roles.Add(/datum/antagonist/ert/chaplain/inquisitor)
-				inquisitor_slots--
+				chaplain_slots--
 	return roles
 
-/datum/ert_manager/proc/makeERTFromSlots(datum/ert/ertemplate, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, inquisitor_slots)
+/datum/ert_manager/proc/makeERTFromSlots(datum/ert/ertemplate, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots)
 	var/human_authority_setting = CONFIG_GET(string/human_authority)
 
 	ertemplate.enforce_human = (human_authority_setting == HUMAN_AUTHORITY_ENFORCED ? TRUE : FALSE)
@@ -183,7 +228,31 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 	var/list/spawnpoints = GLOB.emergencyresponseteamspawn
 	var/index = 0
 
-	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for [span_notice(ertemplate.polldesc)]?", check_jobban = "deathsquad", alert_pic = /obj/item/card/id/advanced/centcom/ert, role_name_text = "emergency response team")
+	var/list/slot_list = list(
+		"Commander" = commander_slots,
+		"Security" = security_slots,
+		"Medical" = medical_slots,
+		"Engineer" = engineering_slots,
+		"Janitor" = janitor_slots,
+		"Inquisitor" = chaplain_slots,
+		"Clown" = clown_slots,
+		)
+
+	var/list/active_slots = list()
+	for (var/role in slot_list)
+		if(!slot_list[role])
+			continue
+		active_slots += "[role]: [slot_list[role]]"
+
+	var/slot_text = active_slots.Join(", ")
+
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+	"Do you wish to be considered for [span_notice(ertemplate.polldesc)]? \n[span_smallnotice(slot_text)]",
+	check_jobban = "deathsquad",
+	alert_pic = create_leader_preview(ertemplate) || /obj/item/card/id/advanced/centcom/ert,
+	role_name_text = ertemplate.polldesc
+	)
+
 	var/teamSpawned = FALSE
 
 	// This list will take priority over spawnpoints if not empty
@@ -295,6 +364,8 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 					priority_announce("Внимание, [station_name()]. Мы направляем усиленный отряд быстрого реагирования кода «РЭД». Ожидайте.", "ОБР в пути")
 				if("Gamma")
 					priority_announce("Внимание, [station_name()]. Мы направляем элитный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
+				if("Inquisition")
+					priority_announce("Внимание, [station_name()]. Мы направляем инквизиторский отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
 
 	//Open the Armory doors
 	if(ertemplate.opendoors)
@@ -303,10 +374,9 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			CHECK_TICK
 	return TRUE
 
-/datum/ert/gamma
-	leader_role = /datum/antagonist/ert/commander/red
-	roles = list(/datum/antagonist/ert/security/red, /datum/antagonist/ert/medic/red, /datum/antagonist/ert/engineer/red)
-	code = "Gamma"
+/datum/ert_manager/proc/create_leader_preview(datum/ert/ert_template)
+	var/datum/antagonist/ert/preview = ert_template.leader_role
+	return image(get_dynamic_human_appearance(preview.outfit, r_hand = NO_REPLACE, l_hand = NO_REPLACE))
 
 /obj/effect/landmark/ert_brief_spawn
 	name = "ertbriefspawn"

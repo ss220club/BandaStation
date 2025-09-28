@@ -11,7 +11,7 @@ import {
   TextArea,
 } from 'tgui-core/components';
 import { formatTime } from 'tgui-core/format';
-import { BooleanLike, classes } from 'tgui-core/react';
+import { type BooleanLike, classes } from 'tgui-core/react';
 import { decodeHtmlEntities } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
@@ -23,6 +23,7 @@ type RoleInfo = {
   desc: string;
   hud_icon: string;
   revealed_icon: string;
+  role_dead: string;
 };
 
 type PlayerInfo = {
@@ -106,51 +107,49 @@ export const MafiaPanelData = (props) => {
           {phase !== 'No Game' && (
             <Stack.Item>
               <Stack fill>
-                <>
-                  <Stack.Item grow>
-                    <MafiaPlayers />
-                  </Stack.Item>
-                  <Stack.Item grow>
-                    <Stack.Item>
-                      <Tabs fluid>
-                        <Tabs.Tab
-                          align="center"
-                          selected={mafia_tab === 'Role list'}
-                          onClick={() => setMafiaMode('Role list')}
-                        >
-                          Role list
-                          <Button
-                            color="transparent"
-                            icon="address-book"
-                            tooltipPosition="bottom-start"
-                            tooltip={`
+                <Stack.Item grow>
+                  <MafiaPlayers />
+                </Stack.Item>
+                <Stack.Item grow>
+                  <Stack.Item>
+                    <Tabs fluid>
+                      <Tabs.Tab
+                        align="center"
+                        selected={mafia_tab === 'Role list'}
+                        onClick={() => setMafiaMode('Role list')}
+                      >
+                        Role list
+                        <Button
+                          color="transparent"
+                          icon="address-book"
+                          tooltipPosition="bottom-start"
+                          tooltip={`
                             Это список ролей в игре.
                             Вы можетенажать на знак вопроса,
                             чтобы получить краткую информациюо самой роли.`}
-                          />
-                        </Tabs.Tab>
-                        <Tabs.Tab
-                          align="center"
-                          selected={mafia_tab === 'Notes'}
-                          onClick={() => setMafiaMode('Notes')}
-                        >
-                          Notes
-                          <Button
-                            color="transparent"
-                            icon="pencil"
-                            tooltipPosition="bottom-start"
-                            tooltip={`
+                        />
+                      </Tabs.Tab>
+                      <Tabs.Tab
+                        align="center"
+                        selected={mafia_tab === 'Notes'}
+                        onClick={() => setMafiaMode('Notes')}
+                      >
+                        Notes
+                        <Button
+                          color="transparent"
+                          icon="pencil"
+                          tooltipPosition="bottom-start"
+                          tooltip={`
                             Это ваши заметки, все, что вы хотите написать
                             можно сохранить для дальнейшего использования. Вы можете
                             также отправить их в чат с помощью кнопки.`}
-                          />
-                        </Tabs.Tab>
-                      </Tabs>
-                    </Stack.Item>
-                    {mafia_tab === 'Role list' && <MafiaListOfRoles />}
-                    {mafia_tab === 'Notes' && <MafiaNotesTab />}
+                        />
+                      </Tabs.Tab>
+                    </Tabs>
                   </Stack.Item>
-                </>
+                  {mafia_tab === 'Role list' && <MafiaListOfRoles />}
+                  {mafia_tab === 'Notes' && <MafiaNotesTab />}
+                </Stack.Item>
               </Stack>
             </Stack.Item>
           )}
@@ -164,12 +163,7 @@ export const MafiaPanel = (props) => {
   const { act, data } = useBackend<MafiaData>();
   const { roleinfo } = data;
   return (
-    <Window
-      title="Мафия"
-      theme={roleinfo && roleinfo.role_theme}
-      width={900}
-      height={600}
-    >
+    <Window title="Мафия" theme={roleinfo?.role_theme} width={900} height={600}>
       <Window.Content>
         <MafiaPanelData />
       </Window.Content>
@@ -293,7 +287,7 @@ const MafiaRole = (props) => {
     <Section
       fill
       title={phase + turn}
-      minHeight="100px"
+      minHeight="110px"
       maxHeight="50px"
       buttons={
         <Box
@@ -306,10 +300,16 @@ const MafiaRole = (props) => {
         </Box>
       }
     >
-      <Stack align="center">
+      <Stack>
         <Stack.Item grow>
-          <Box bold>Вы {roleinfo.role}</Box>
-          <Box italic>{roleinfo.desc}</Box>
+          <Box fontSize="16px">Вы {roleinfo.role}</Box>
+          {!!roleinfo.role_dead && (
+            <Box bold>
+              Вы уже мертвы. Вы можете поговорить с Священником ночью, если он
+              есть.
+            </Box>
+          )}
+          {!roleinfo.role_dead && <Box italic>{roleinfo.desc}</Box>}
         </Stack.Item>
         <Stack.Item>
           <Box
@@ -443,7 +443,7 @@ const MafiaPlayers = (props) => {
               >
                 {player.name}
                 {(!!player.is_you && ' (YOU)') ||
-                  (!!player.role_revealed && ' - ' + player.role_revealed)}
+                  (!!player.role_revealed && ` - ${player.role_revealed}`)}
               </Stack.Item>
               <Stack.Item>
                 {player.votes !== undefined &&

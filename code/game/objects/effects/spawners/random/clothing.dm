@@ -66,6 +66,8 @@
 		/obj/item/clothing/under/syndicate/soviet,
 		/obj/item/clothing/under/syndicate/combat,
 		/obj/item/clothing/under/syndicate/rus_army,
+		/obj/item/clothing/under/syndicate/rus_army/berezka, //  BANDASTATION ADDITION
+		/obj/item/clothing/under/syndicate/rus_army/flora, //  BANDASTATION ADDITION
 		/obj/item/clothing/under/syndicate/bloodred/sleepytime,
 	)
 
@@ -204,7 +206,7 @@
 		/obj/item/clothing/head/costume/cueball,
 		/obj/item/clothing/head/costume/snowman,
 		/obj/item/clothing/head/costume/witchwig,
-		/obj/item/clothing/head/costume/maidheadband,
+		/obj/item/clothing/head/costume/maid_headband,
 		/obj/item/clothing/head/costume/chicken,
 		/obj/item/clothing/head/costume/griffin,
 		/obj/item/clothing/head/costume/xenos,

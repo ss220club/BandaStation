@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, Flex, Icon, Section } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 import { capitalizeFirst } from 'tgui-core/string';
 
 import { useBackend } from '../backend';
@@ -187,7 +187,7 @@ export const EmotePanelContent = (props) => {
                     {showNames
                       ? capitalizeFirst(
                           (emote.name.length > 12
-                            ? emote.name.slice(0, 10) + '...'
+                            ? `${emote.name.slice(0, 10)}...`
                             : emote.name
                           ).toLowerCase(),
                         )

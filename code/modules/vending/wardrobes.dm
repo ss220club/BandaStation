@@ -46,6 +46,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	products = list(
 		/obj/item/clothing/head/beret/sec = 3,
 		/obj/item/clothing/head/soft/sec = 3,
+		/obj/item/clothing/head/costume/ushanka/sec = 3,
 		/obj/item/clothing/mask/bandana/striped/security = 3,
 		/obj/item/clothing/under/rank/security/officer = 3,
 		/obj/item/clothing/under/rank/security/officer/skirt = 3,
@@ -71,6 +72,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
 	payment_department = ACCOUNT_SEC
 	light_color = COLOR_MOSTLY_PURE_RED
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/sec_wardrobe
 	machine_name = "SecDrobe"
@@ -117,6 +119,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/medi_wardrobe
 	payment_department = ACCOUNT_MED
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/medi_wardrobe
 	machine_name = "MediDrobe"
@@ -147,6 +150,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/engi_wardrobe
 	payment_department = ACCOUNT_ENG
 	light_color = COLOR_VIVID_YELLOW
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/engi_wardrobe
 	machine_name = "EngiDrobe"
@@ -155,7 +159,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	name = "AtmosDrobe"
 	desc = "This relatively unknown vending machine delivers clothing for Atmospherics Technicians, an equally unknown job."
 	icon_state = "atmosdrobe"
-	product_ads = "Приобретайте огнеупорную одежду прямо здесь!!!"
+	product_slogans = "Приобретайте огнеупорную одежду прямо здесь!!!"
 	vend_reply = "Благодарим за использование AtmosDrobe!"
 	products = list(
 		/obj/item/clothing/accessory/pocketprotector = 3,
@@ -172,6 +176,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/atmos_wardrobe
 	payment_department = ACCOUNT_ENG
 	light_color = COLOR_VIVID_YELLOW
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/atmos_wardrobe
 	machine_name = "AtmosDrobe"
@@ -215,6 +220,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/cargo_wardrobe
 	payment_department = ACCOUNT_CAR
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/cargo_wardrobe
 	machine_name = "CargoDrobe"
@@ -249,6 +255,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/robo_wardrobe
 	extra_price = PAYCHECK_COMMAND * 1.2
 	payment_department = ACCOUNT_SCI
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/robo_wardrobe
 	machine_name = "RoboDrobe"
@@ -278,6 +285,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/science_wardrobe
 	payment_department = ACCOUNT_SCI
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/science_wardrobe
 	machine_name = "SciDrobe"
@@ -306,6 +314,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/hydro_wardrobe
 	payment_department = ACCOUNT_SRV
 	light_color = LIGHT_COLOR_ELECTRIC_GREEN
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/hydro_wardrobe
 	machine_name = "HyDrobe"
@@ -314,7 +323,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	name = "CuraDrobe"
 	desc = "A low-stock vendor only capable of vending clothing for curators and librarians."
 	icon_state = "curadrobe"
-	product_ads = "Очки для глаз и литература для души - у Curadrobe есть всё!; Впечатлите и поразите гостей вашей библиотеки расширенной линейкой ручек Curadrobe!"
+	product_slogans = "Очки для глаз и литература для души - у Curadrobe есть всё!; Впечатлите и поразите гостей вашей библиотеки расширенной линейкой ручек Curadrobe!"
 	vend_reply = "Благодарим за использование CuraDrobe!"
 	products = list(
 		/obj/item/clothing/accessory/pocketprotector = 2,
@@ -339,6 +348,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/curator_wardrobe
 	payment_department = ACCOUNT_SRV
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/curator_wardrobe
 	machine_name = "CuraDrobe"
@@ -364,6 +374,10 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/hemostat/cruel = 1,
 		/obj/item/retractor/cruel = 1,
 		/obj/item/scalpel/cruel = 1,
+		/obj/item/surgicaldrill/cruel = 1,
+		/obj/item/circular_saw/cruel = 1,
+		/obj/item/bonesetter/cruel = 1,
+		/obj/item/blood_filter/cruel = 1,
 		/obj/item/storage/backpack/coroner = 1,
 		/obj/item/storage/backpack/duffelbag/coroner = 1,
 		/obj/item/storage/backpack/messenger/coroner = 1,
@@ -384,6 +398,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/coroner_wardrobe
 	payment_department = ACCOUNT_MED
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/coroner_wardrobe
 	machine_name = "MortiDrobe"
@@ -421,6 +436,8 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/bar_wardrobe
 	payment_department = ACCOUNT_MED
 	extra_price = PAYCHECK_COMMAND
+	allow_custom = TRUE
+
 /obj/item/vending_refill/wardrobe/bar_wardrobe
 	machine_name = "BarDrobe"
 
@@ -450,6 +467,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/chef_wardrobe
 	payment_department = ACCOUNT_SRV
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/chef_wardrobe
 	machine_name = "ChefDrobe"
@@ -489,6 +507,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	extra_price = PAYCHECK_COMMAND * 0.8
 	payment_department = ACCOUNT_SRV
 	light_color = COLOR_STRONG_MAGENTA
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/jani_wardrobe
 	machine_name = "JaniDrobe"
@@ -531,6 +550,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/law_wardrobe
 	payment_department = ACCOUNT_SRV
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/law_wardrobe
 	machine_name = "LawDrobe"
@@ -577,6 +597,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/chap_wardrobe
 	payment_department = ACCOUNT_SRV
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/chap_wardrobe
 	machine_name = "DeusVend"
@@ -608,6 +629,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/chem_wardrobe
 	payment_department = ACCOUNT_MED
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/chem_wardrobe
 	machine_name = "ChemDrobe"
@@ -633,6 +655,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/gene_wardrobe
 	payment_department = ACCOUNT_SCI
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/gene_wardrobe
 	machine_name = "GeneDrobe"
@@ -641,7 +664,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	name = "ViroDrobe"
 	desc = "An unsterilized machine for dispensing virology related clothing."
 	icon_state = "virodrobe"
-	product_ads = "Вирусы донимают вас? Тогда переходите на стерильную спецодежду уже сегодня!"
+	product_slogans = "Вирусы донимают вас? Тогда переходите на стерильную спецодежду уже сегодня!"
 	vend_reply = "Благодарим за использование ViroDrobe!"
 	products = list(
 		/obj/item/clothing/mask/surgical = 2,
@@ -660,6 +683,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/viro_wardrobe
 	payment_department = ACCOUNT_MED
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/viro_wardrobe
 	machine_name = "ViroDrobe"
@@ -706,6 +730,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/det_wardrobe
 	extra_price = PAYCHECK_COMMAND * 1.75
 	payment_department = ACCOUNT_SEC
+	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/det_wardrobe
 	machine_name = "DetDrobe"

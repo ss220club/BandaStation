@@ -12,6 +12,7 @@
 	icon = 'icons/obj/service/kitchen.dmi'
 	lefthand_file = 'icons/mob/inhands/equipment/kitchen_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/kitchen_righthand.dmi'
+	abstract_type = /obj/item/kitchen
 	worn_icon_state = "kitchen_tool"
 
 /obj/item/kitchen/Initialize(mapload)
@@ -176,7 +177,7 @@
 	obj_flags = CONDUCTS_ELECTRICITY
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 1.5)
 	custom_price = PAYCHECK_CREW * 2
-	bare_wound_bonus = 14
+	exposed_wound_bonus = 14
 
 /obj/item/kitchen/rollingpin/suicide_act(mob/living/carbon/user)
 	user.visible_message(span_suicide("[user] begins flattening [user.p_their()] head with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))

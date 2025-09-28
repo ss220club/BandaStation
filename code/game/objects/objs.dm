@@ -1,5 +1,6 @@
 
 /obj
+	abstract_type = /obj
 	animate_movement = SLIDE_STEPS
 	speech_span = SPAN_ROBOT
 	var/obj_flags = CAN_BE_HIT
@@ -22,7 +23,7 @@
 	/// How good a given object is at causing wounds on carbons. Higher values equal better shots at creating serious wounds.
 	var/wound_bonus = 0
 	/// If this attacks a human with no wound armor on the affected body part, add this to the wound mod. Some attacks may be significantly worse at wounding if there's even a slight layer of armor to absorb some of it vs bare flesh
-	var/bare_wound_bonus = 0
+	var/exposed_wound_bonus = 0
 
 	/// A multiplier to an object's force when used against a structure, vehicle, machine, or robot.
 	/// Use [/obj/proc/get_demolition_modifier] to get the value.
@@ -100,8 +101,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 				message_verb_continuous = "pulverises"
 
 		if(demo_mod < 1)
-			message_verb_simple = "безуспешно " + ru_attack_verb(message_verb_simple)
-			message_verb_continuous = "безуспешно " + ru_attack_verb(message_verb_continuous)
+			message_verb_simple = "слабо " + ru_attack_verb(message_verb_simple)
+			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
 
 		user.visible_message(
 			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
@@ -222,6 +223,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 	. = ..()
 	if(obj_flags & UNIQUE_RENAME)
 		.["с возможностью переименования"] = "Используйте ручку на предмете, чтобы переименовать его или изменить его описание."
+	if(obj_flags & CONDUCTS_ELECTRICITY)
+		.["проводящий"] = "Похоже, это является хорошим проводником электричества."
 
 /obj/analyzer_act(mob/living/user, obj/item/analyzer/tool)
 	if(atmos_scan(user=user, target=src, silent=FALSE))

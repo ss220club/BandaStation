@@ -138,10 +138,11 @@
 	var/cool_temp = cooling_temperature
 
 	var/obj/effect/hotspot/hotspot = (locate(/obj/effect/hotspot) in exposed_turf)
-	if(hotspot && !isspaceturf(exposed_turf))
+	if(hotspot && !isspaceturf(exposed_turf)) // the water evaporates in an endothermic reaction
 		if(exposed_turf.air)
 			var/datum/gas_mixture/air = exposed_turf.air
-			air.temperature = max(min(air.temperature-(cool_temp*1000), air.temperature/cool_temp),TCMB)
+			air.temperature = min(max(min(air.temperature-(cool_temp*1000), air.temperature/cool_temp), T0C), air.temperature) // the outer min temperature check is for weird phenomena like freon combustion
+			exposed_turf.temperature = clamp(min(exposed_turf.temperature-(cool_temp*1000), exposed_turf.temperature/cool_temp), T20C, exposed_turf.temperature) // turfs normally don't go below T20C so I'll just clamp it to that in case of weird phenomena.
 			air.react(src)
 			qdel(hotspot)
 
@@ -363,6 +364,8 @@
 				need_mob_update += affected_mob.adjustFireLoss(10 * REM * seconds_per_tick, updating_health = FALSE)
 		affected_mob.remove_status_effect(/datum/status_effect/jitter)
 		affected_mob.remove_status_effect(/datum/status_effect/speech/stutter)
+		for(var/datum/status_effect/eldritch_painting/eldritch_curses in affected_mob.status_effects)
+			qdel(eldritch_curses)
 		holder?.remove_reagent(type, volume) // maybe this is a little too perfect and a max() cap on the statuses would be better??
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
@@ -587,7 +590,7 @@
 						exposed_human.skin_tone = "mixed3"
 			//take current alien color and darken it slightly
 			else if(HAS_TRAIT(exposed_human, TRAIT_MUTANT_COLORS) && !HAS_TRAIT(exposed_human, TRAIT_FIXED_MUTANT_COLORS))
-				var/list/existing_color = rgb2num(exposed_human.dna.features["mcolor"])
+				var/list/existing_color = rgb2num(exposed_human.dna.features[FEATURE_MUTANT_COLOR])
 				var/list/darkened_color = list()
 				// Reduces each part of the color by 16
 				for(var/channel in existing_color)
@@ -597,7 +600,7 @@
 				var/list/new_hsv = rgb2hsv(new_color)
 				// Can't get too dark now
 				if(new_hsv[3] >= 50)
-					exposed_human.dna.features["mcolor"] = new_color
+					exposed_human.dna.features[FEATURE_MUTANT_COLOR] = new_color
 			exposed_human.update_body(is_creating = TRUE)
 
 		if((methods & INGEST) && show_message)
@@ -621,7 +624,7 @@
 		if(HAS_TRAIT(affected_human, TRAIT_USES_SKINTONES))
 			affected_human.skin_tone = "orange"
 		else if(HAS_TRAIT(affected_human, TRAIT_MUTANT_COLORS) && !HAS_TRAIT(affected_human, TRAIT_FIXED_MUTANT_COLORS)) //Aliens with custom colors simply get turned orange
-			affected_human.dna.features["mcolor"] = "#ff8800"
+			affected_human.dna.features[FEATURE_MUTANT_COLOR] = "#ff8800"
 		affected_human.update_body(is_creating = TRUE)
 		if(SPT_PROB(3.5, seconds_per_tick))
 			if(affected_human.w_uniform)
@@ -716,10 +719,10 @@
 
 /datum/reagent/mutationtoxin/moth
 	name = "Moth Mutation Toxin"
-	description = "A glowing toxin."
+	description = "Светящийся токсин."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/moth
-	taste_description = "clothing"
+	taste_description = "ткани"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
 
 /datum/reagent/mutationtoxin/pod
@@ -1560,21 +1563,21 @@
 /datum/reagent/nitrous_oxide/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
 	if(!HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //IF the mob does not have a coagulant in them, we add the blood mess trait to make the bleed quicker
-		ADD_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+		ADD_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 /datum/reagent/nitrous_oxide/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
-	REMOVE_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+	REMOVE_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 /datum/reagent/nitrous_oxide/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	affected_mob.adjust_drowsiness(4 SECONDS * REM * seconds_per_tick)
 
-	if(!HAS_TRAIT(affected_mob, TRAIT_BLOODY_MESS) && !HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //So long as they do not have a coagulant, if they did not have the bloody mess trait, they do now
-		ADD_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+	if(!HAS_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN) && !HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //So long as they do not have a coagulant, if they did not have the bloody mess trait, they do now
+		ADD_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 	else if(HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //if we find they now have a coagulant, we remove the trait
-		REMOVE_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+		REMOVE_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 	if(SPT_PROB(10, seconds_per_tick))
 		affected_mob.losebreath += 2
@@ -2127,6 +2130,8 @@
 	color = COLOR_GRAY
 	taste_description = "rainbows"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	inverse_chem_val = 0.3
+	inverse_chem = /datum/reagent/inverse/colorful_reagent
 	/// Whenever this reagent can color mob limbs and organs upon exposure
 	var/can_color_mobs = TRUE
 	/// Whenever this reagent can color mob equipment when they're exposed to it externally
@@ -2310,6 +2315,8 @@
 	taste_description = "bitterness"
 	penetrates_skin = NONE
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	inverse_chem_val = 0.3
+	inverse_chem = /datum/reagent/inverse/baldium
 
 /datum/reagent/baldium/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume, show_message=TRUE, touch_protection = 0)
 	. = ..()
@@ -2521,45 +2528,74 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/glitter
-	name = "Generic Glitter"
-	description = "if you can see this description, contact a coder."
+	name = "Glitter"
+	description = "The herpes of arts and crafts."
+	data = list("colors" = list(COLOR_WHITE = 100))
 	color = COLOR_WHITE //pure white
 	taste_description = "plastic"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	var/glitter_type = /obj/effect/decal/cleanable/glitter
+
+/datum/reagent/glitter/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	if(SPT_PROB(25, seconds_per_tick))
+		affected_mob.emote("cough")
+		expose_turf(get_turf(affected_mob), 0)
 
 /datum/reagent/glitter/expose_turf(turf/exposed_turf, reac_volume)
 	. = ..()
+
 	if(!istype(exposed_turf))
 		return
-	exposed_turf.spawn_unique_cleanable(glitter_type)
+	exposed_turf.spawn_glitter(data["colors"])
 
-/datum/reagent/glitter/pink
-	name = "Pink Glitter"
-	description = "pink sparkles that get everywhere"
-	color = "#ff8080" //A light pink color
-	glitter_type = /obj/effect/decal/cleanable/glitter/pink
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+/datum/reagent/glitter/on_new(data)
+	. = ..()
 
-/datum/reagent/glitter/white
-	name = "White Glitter"
-	description = "white sparkles that get everywhere"
-	glitter_type = /obj/effect/decal/cleanable/glitter/white
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	if(src.data["colors"])
+		color = pick_weight(src.data["colors"])
+	else
+		color = COLOR_WHITE
 
-/datum/reagent/glitter/blue
-	name = "Blue Glitter"
-	description = "blue sparkles that get everywhere"
-	color = "#4040FF" //A blueish color
-	glitter_type = /obj/effect/decal/cleanable/glitter/blue
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+/datum/reagent/glitter/on_merge(list/mix_data, amount)
+	. = ..()
 
-/datum/reagent/glitter/confetti
+	var/prop_current = (volume-amount)/(volume)
+
+	if(mix_data)
+		data["colors"] = blend_weighted_lists(mix_data["colors"], data["colors"], prop_current)
+
+	if(data["colors"])
+		color = pick_weight(data["colors"])
+	else
+		color = COLOR_WHITE
+
+/datum/reagent/glitter/random
+	name = "Glitter (Random)"
+	// The weighted list of random color choices that can be chosen upon spawning
+	var/static/list/possible_colors = list(
+		COLOR_WHITE = 25,
+		"#ff8080" = 25,
+		"#4040ff" = 25,
+		"#ff5555" = 8,
+		"#55ff55" = 9,
+		"#5555ff" = 8,
+	)
+
+/datum/reagent/glitter/random/on_new(data)
+	src.data["colors"] = possible_colors
+	return ..()
+
+/datum/reagent/confetti
 	name = "Confetti"
 	description = "Tiny plastic flakes that are impossible to sweep up."
 	color = "#7dd87b"
-	glitter_type = /obj/effect/decal/cleanable/confetti
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/reagent/confetti/expose_turf(turf/exposed_turf, reac_volume)
+	. = ..()
+	if(!istype(exposed_turf))
+		return
+	exposed_turf.spawn_unique_cleanable(/obj/effect/decal/cleanable/confetti)
 
 /datum/reagent/pax
 	name = "Pax"
@@ -2693,15 +2729,15 @@
 	. = ..()
 	yuck_cycle = 0 // reset vomiting
 
-/datum/reagent/yuck/on_transfer(atom/A, methods=TOUCH, trans_volume)
-	if((methods & INGEST) || !iscarbon(A))
-		return ..()
+/datum/reagent/yuck/expose_mob(mob/living/carbon/exposed_mob, methods, expose_volume, show_message, touch_protection)
+	. = ..()
+	if(!(methods & INGEST) || !iscarbon(exposed_mob))
+		return
 
-	A.reagents.remove_reagent(type, trans_volume)
-	A.reagents.add_reagent(/datum/reagent/fuel, trans_volume * 0.75)
-	A.reagents.add_reagent(/datum/reagent/water, trans_volume * 0.25)
-
-	return ..()
+	var/datum/reagents/mob_reagents = exposed_mob.reagents
+	mob_reagents.remove_reagent(type, expose_volume)
+	mob_reagents.add_reagent(/datum/reagent/fuel, expose_volume * 0.75)
+	mob_reagents.add_reagent(/datum/reagent/water, expose_volume * 0.25)
 
 //monkey powder heehoo
 /datum/reagent/monkey_powder
@@ -2780,6 +2816,8 @@
 	taste_mult = 0 // oderless and tasteless
 	metabolization_rate = 0.1 * REAGENTS_METABOLISM //20 times as long, so it's actually viable to use
 	var/time_multiplier = 1 MINUTES //1 minute per unit of gravitum on objects. Seems overpowered, but the whole thing is very niche
+	inverse_chem_val = 0.3
+	inverse_chem = /datum/reagent/inverse/gravitum
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	self_consuming = TRUE //this works on objects, so it should work on skeletons and robots too
 

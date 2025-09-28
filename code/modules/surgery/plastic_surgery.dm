@@ -59,7 +59,7 @@
 		TOOL_SCALPEL = 100,
 		/obj/item/knife = 50,
 		TOOL_WIRECUTTER = 35)
-	time = 64
+	time = 6.4 SECONDS
 	surgery_effects_mood = TRUE
 
 /datum/surgery_step/reshape_face/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -90,10 +90,10 @@
 			var/obj/item/offhand = user.get_inactive_held_item()
 			if(istype(offhand, /obj/item/photo) && istype(surgery, /datum/surgery/plastic_surgery/advanced))
 				var/obj/item/photo/disguises = offhand
-				for(var/namelist as anything in disguises.picture?.names_seen)
+				for(var/namelist in disguises.picture?.names_seen)
 					names += namelist
 			else
-				user.visible_message(span_warning("У вас нет фотографии, на которую можно было бы опираться, и вы возвращаетесь к случайному списку внешности."))
+				to_chat(user, span_warning("У вас нет фотографии, на которую можно было бы опираться, и вы возвращаетесь к случайному списку внешности."))
 				for(var/i in 1 to 10)
 					names += target.generate_random_mob_name(TRUE)
 		else
@@ -116,7 +116,7 @@
 		display_pain(target, "Боль проходит, а ваше лицо кажется новым и непривычным!")
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
-		human_target.sec_hud_set_ID()
+		human_target.update_ID_card()
 	if(HAS_MIND_TRAIT(user, TRAIT_MORBID) && ishuman(user))
 		var/mob/living/carbon/human/morbid_weirdo = user
 		morbid_weirdo.add_mood_event("morbid_abominable_surgery_success", /datum/mood_event/morbid_abominable_surgery_success)

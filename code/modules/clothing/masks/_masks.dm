@@ -3,10 +3,11 @@
 	icon = 'icons/obj/clothing/masks.dmi'
 	lefthand_file = 'icons/mob/inhands/clothing/masks_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/clothing/masks_righthand.dmi'
+	abstract_type = /obj/item/clothing/mask
 	body_parts_covered = HEAD
 	slot_flags = ITEM_SLOT_MASK
-	strip_delay = 40
-	equip_delay_other = 40
+	strip_delay = 4 SECONDS
+	equip_delay_other = 4 SECONDS
 	visor_vars_to_toggle = NONE
 	unique_reskin_changes_base_icon_state = TRUE
 
@@ -19,6 +20,18 @@
 	var/use_radio_beeps_tts = FALSE
 	/// The unique sound effect of dying while wearing this
 	var/unique_death
+	/// Define posibiliaty of mask to be adjusted
+	var/can_be_adjusted = TRUE // BANDASTATION EDIT - Surgery mask fix
+
+// BANDASTATION ADDITION START - Surgery mask fix
+/obj/item/clothing/mask/Initialize(mapload)
+	. = ..()
+	if(!can_be_adjusted)
+		if(islist(actions_types))
+			actions_types -= list(/datum/action/item_action/toggle)
+		else
+			actions_types = list()
+// BANDASTATION ADDITION END - Surgery mask fix
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if((clothing_flags & VOICEBOX_TOGGLABLE))
@@ -49,6 +62,11 @@
 
 //Proc that moves gas/breath masks out of the way, disabling them and allowing pill/food consumption
 /obj/item/clothing/mask/visor_toggling(mob/living/user)
+	// BANDASTATION ADDITION START - Surgery mask fix
+	if(!can_be_adjusted)
+		return
+	// BANDASTATION ADDITION END - Surgery mask fix
+
 	. = ..()
 	if(up)
 		if(adjusted_flags)

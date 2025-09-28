@@ -1,5 +1,6 @@
 /obj/item/circuitboard/computer
 	name = "Generic"
+	abstract_type = /obj/item/circuitboard/computer
 	name_extension = "(Computer Board)"
 
 /obj/item/circuitboard/computer/examine()
@@ -222,6 +223,11 @@
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/computer/message_monitor
 
+/obj/item/circuitboard/computer/modular_shield_console
+	name = "Modular Shield Generator Console"
+	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
+	build_path = /obj/machinery/computer/modular_shield
+
 /obj/item/circuitboard/computer/powermonitor
 	name = "Power Monitor"  //name fixed 250810
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
@@ -331,7 +337,8 @@
 	name = "Syndicate Shuttle"
 	greyscale_colors = CIRCUIT_COLOR_GENERIC
 	build_path = /obj/machinery/computer/shuttle/syndicate
-	var/challenge = FALSE
+	/// If operatives declared war this will be the time challenge was started
+	var/challenge_start_time
 	var/moved = FALSE
 
 /obj/item/circuitboard/computer/syndicate_shuttle/Initialize(mapload)
@@ -670,9 +677,9 @@
 		machine.connect_to_shuttle(TRUE, shuttle)
 
 /obj/item/circuitboard/computer/shuttle/flight_control
-	name = "Shuttle Flight Control (Computer Board)"
+	name = "Shuttle Flight Control"
 	build_path = /obj/machinery/computer/shuttle/custom_shuttle
 
 /obj/item/circuitboard/computer/shuttle/docker
-	name = "Shuttle Navigation Computer (Computer Board)"
+	name = "Shuttle Navigation Computer"
 	build_path = /obj/machinery/computer/camera_advanced/shuttle_docker/custom

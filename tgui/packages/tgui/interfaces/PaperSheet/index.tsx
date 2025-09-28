@@ -2,7 +2,7 @@ import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 import { TEXTAREA_INPUT_HEIGHT } from './constants';
 import { PrimaryView } from './PrimaryView';
-import { PaperContext } from './types';
+import type { PaperContext } from './types';
 
 export function PaperSheet(props) {
   const { data } = useBackend<PaperContext>();
@@ -11,7 +11,7 @@ export function PaperSheet(props) {
   return (
     <Window
       title={paper_name}
-      theme="paper"
+      theme="paper220"
       width={600}
       height={500 + TEXTAREA_INPUT_HEIGHT}
     >

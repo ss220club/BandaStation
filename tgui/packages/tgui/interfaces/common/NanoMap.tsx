@@ -1,7 +1,14 @@
 import '../../styles/interfaces/NanoMap.scss';
 
 import { useLocalStorage } from '@uidotdev/usehooks';
-import { type ReactNode, useRef, useState } from 'react';
+import {
+  createContext,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+  useContext,
+  useEffect,
+} from 'react';
 import {
   KeepScale,
   MiniMap,
@@ -9,20 +16,12 @@ import {
   TransformWrapper,
   useControls,
 } from 'react-zoom-pan-pinch';
-import {
-  Button,
-  Icon,
-  Image,
-  LabeledList,
-  Modal,
-  Section,
-  Stack,
-} from 'tgui-core/components';
+import { Button, Image, Stack } from 'tgui-core/components';
 import { clamp01 } from 'tgui-core/math';
-import { BooleanLike, classes } from 'tgui-core/react';
-
+import { type BooleanLike, classes } from 'tgui-core/react';
+import { throttle } from 'tgui-core/timer';
 import { resolveAsset } from '../../assets';
-import { useSharedState } from '../../backend';
+import { Direction } from '../../constants';
 
 export type MapData = {
   name: string;
@@ -30,6 +29,13 @@ export type MapData = {
   mainFloor: number;
   maxFloor: number;
   lavalandLevel: number;
+  stairs: Stair[];
+};
+
+type Stair = {
+  posX: number;
+  posY: number;
+  posZ: number;
 };
 
 type Props = {
@@ -47,8 +53,6 @@ type Props = {
   minimapPosition?: MinimapPosition;
   /** All needed map data from backend */
   mapData: MapData;
-  /** UI name for shared state */
-  uiName?: string;
   /** Called when level changes. Returns current level */
   onLevelChange: (level: number) => void;
 };
@@ -62,6 +66,7 @@ type MinimapPosition =
 const defaultScale = 0.125;
 const maxScale = defaultScale * 8;
 
+/// Each tile is 16px size, we have 256 tiles
 const defaultMapSize = 4080;
 const tileSize = defaultMapSize / 255;
 
@@ -70,213 +75,209 @@ function posToPx(pos: number) {
   return `${pos * tileSize - tileSize}px`;
 }
 
+/** Converts Byond direction to direction */
+function dirToDeg(dir: Direction) {
+  switch (dir) {
+    case Direction.NORTH:
+      return 180;
+    case Direction.EAST:
+      return 270;
+    case Direction.SOUTH:
+      return 0;
+    case Direction.WEST:
+      return 90;
+  }
+}
+
+type MapState = {
+  scale: number;
+  positionX: number;
+  positionY: number;
+  currentLevel: number;
+  minimap: boolean;
+};
+
+type NanoMapContextType = {
+  mapData: MapData;
+  mapState: MapState;
+  setMapState: Dispatch<SetStateAction<MapState>>;
+};
+
+export const NanoMapContext = createContext<NanoMapContextType | null>(null);
+
 export function NanoMap(props: Props) {
   const {
     children,
     buttons,
     mapData,
-    uiName,
     minimapDisabled,
     minimapPosition,
     onLevelChange,
   } = props;
 
-  const [prefs, setPrefs] = useState(false);
-  const [mapPrefs, setMapPrefs] = useLocalStorage('nanomap-preferences', {
+  const [mapState, setMapState] = useLocalStorage<MapState>('nanomap-state', {
+    scale: defaultScale,
+    positionX: 0,
+    positionY: 0,
+    currentLevel: mapData.mainFloor,
     minimap: true,
-    minimapPosition: 'top-left',
   });
-  const [mapState, setMapState] = uiName
-    ? useSharedState(`${uiName}-nanomap`, {
-        scale: defaultScale,
-        positionX: 0,
-        positionY: 0,
-        currentLevel: mapData.mainFloor,
-      })
-    : useState({
-        scale: defaultScale,
-        positionX: 0,
-        positionY: 0,
-        currentLevel: mapData.mainFloor,
-      });
 
-  function getMapImage(level) {
+  function getMapImage(level: number) {
     const { name, lavalandLevel, minFloor } = mapData;
-    let imageAsset;
-    if (level === lavalandLevel && lavalandLevel !== minFloor) {
-      imageAsset = resolveAsset(`Lavaland_nanomap_z1.png`);
-    } else {
-      imageAsset = resolveAsset(`${name}_nanomap_z${level - 1}.png`);
-    }
+    const image =
+      level === lavalandLevel && lavalandLevel !== minFloor
+        ? 'Lavaland_nanomap_z1.png'
+        : `${name}_nanomap_z${level - 1}.png`;
+
     return (
       <Image
         width={`${defaultMapSize}px`}
         height={`${defaultMapSize}px`}
-        src={imageAsset}
+        src={resolveAsset(image)}
       />
     );
   }
 
-  // Send component data to UI, if he has useState for them.
-  onLevelChange && onLevelChange(mapState.currentLevel);
   function handleTransformed({ state }) {
-    setMapState({
-      scale: state.scale,
+    setMapState((prev) => ({
+      ...prev,
       positionX: state.positionX,
       positionY: state.positionY,
-      currentLevel: mapState.currentLevel,
-    });
+      scale: state.scale,
+    }));
   }
 
+  const { scale, positionX, positionY, currentLevel, minimap } = mapState;
+
+  // Send component data to UI, if he has useState for them.
+  useEffect(() => {
+    onLevelChange?.(currentLevel);
+  }, [currentLevel]);
+
+  const mapImage = getMapImage(currentLevel);
+
   return (
-    <TransformWrapper
-      centerOnInit={mapState.positionX === 0 && mapState.positionY === 0}
-      minScale={defaultScale}
-      maxScale={maxScale}
-      initialScale={mapState.scale}
-      initialPositionX={mapState.positionX}
-      initialPositionY={mapState.positionY}
-      smooth={false}
-      wheel={{ step: defaultScale }}
-      panning={{ velocityDisabled: true }}
-      doubleClick={{ disabled: true }}
-      alignmentAnimation={{ animationTime: 0 }}
-      onZoomStop={handleTransformed}
-      onPanningStop={handleTransformed}
+    <NanoMapContext.Provider
+      value={{ mapData: mapData, mapState: mapState, setMapState: setMapState }}
     >
-      <Section fill>
-        {prefs && (
-          <NanoMapPreferences
-            setPrefs={setPrefs}
-            mapPrefs={mapPrefs}
-            setMapPrefs={setMapPrefs}
-            minimapDisabled={minimapDisabled}
-          />
-        )}
-        <Stack fill vertical>
-          <Stack.Item
-            grow
-            minWidth={0}
-            minHeight={0}
-            className={classes([
-              'NanoMap',
-              `NanoMap--${minimapPosition ? minimapPosition : mapPrefs.minimapPosition}`,
-            ])}
-          >
+      <TransformWrapper
+        centerOnInit={positionX === 0 && positionY === 0}
+        minScale={defaultScale}
+        maxScale={maxScale}
+        initialScale={scale}
+        initialPositionX={positionX}
+        initialPositionY={positionY}
+        wheel={{ step: defaultScale }}
+        doubleClick={{ disabled: true }}
+        panning={{ velocityDisabled: true }}
+        onTransformed={throttle((state) => {
+          handleTransformed(state);
+        }, 1000)} // Saving 1 time at a second, let's not fuck localState
+      >
+        <Stack
+          fill
+          vertical
+          className={classes([
+            'NanoMap',
+            minimapPosition && `NanoMap--${minimapPosition}`,
+          ])}
+        >
+          <Stack.Item grow minHeight={0} minWidth={0}>
             <div
               className={classes([
                 'NanoMap__Minimap--container',
-                minimapDisabled
-                  ? 'NanoMap__Minimap--disabled'
-                  : !mapPrefs.minimap && 'NanoMap__Minimap--disabled',
+                (minimapDisabled || !minimap) && 'NanoMap__Minimap--disabled',
               ])}
             >
-              <NanoMapButtons
-                mapData={mapData}
-                mapState={mapState}
-                setMapState={setMapState}
-                prefs={prefs}
-                setPrefs={setPrefs}
-              >
+              <NanoMapButtons minimapDisabled={minimapDisabled}>
                 {buttons}
               </NanoMapButtons>
-              {!minimapDisabled && mapPrefs.minimap && (
+              {!minimapDisabled && minimap && (
                 <MiniMap className="NanoMap__Minimap" width={150}>
-                  {getMapImage(mapState.currentLevel)}
+                  {mapImage}
                 </MiniMap>
               )}
-              <NanoMapControls zoom={mapState.scale} />
+              <NanoMapControls />
             </div>
-            <NanoMapTransformComponent
-              mapState={mapState}
-              uiName={uiName}
-              getMapImage={getMapImage}
+            <TransformComponent
+              wrapperStyle={{ width: '100%', height: '100%' }}
             >
-              {children}
-            </NanoMapTransformComponent>
+              {mapImage}
+              <div>{children}</div>
+            </TransformComponent>
           </Stack.Item>
         </Stack>
-      </Section>
-    </TransformWrapper>
+      </TransformWrapper>
+    </NanoMapContext.Provider>
   );
 }
 
-function NanoMapTransformComponent(props) {
-  const { children, mapState, uiName, getMapImage } = props;
-  const { setTransform } = useControls();
-  const mapStateRef = useRef(mapState);
-
-  if (uiName) {
-    const prevMapState = mapStateRef.current;
-    if (JSON.stringify(prevMapState) !== JSON.stringify(mapState)) {
-      setTransform(mapState.positionX, mapState.positionY, mapState.scale);
-    }
-    mapStateRef.current = mapState;
+function NanoMapControls() {
+  const { zoomIn, zoomOut, centerView } = useControls();
+  const context = useContext(NanoMapContext);
+  if (!context) {
+    return null;
   }
 
   return (
-    <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
-      {getMapImage(mapState.currentLevel)}
-      <div>{children}</div>
-    </TransformComponent>
-  );
-}
-
-function NanoMapControls(props) {
-  const { zoom } = props;
-  const { zoomIn, zoomOut, centerView } = useControls();
-
-  return (
     <div className="NanoMap__Controls">
-      <Button icon="plus" onClick={() => zoomIn(maxScale)} />
+      <Button icon="minus" onClick={() => zoomOut(maxScale)} />
       <Button fluid width="100%" onClick={() => centerView()}>
         <div
           className="NanoMap__Controls--zoom"
-          style={{ width: `${clamp01(zoom) * 100}%` }}
+          style={{ width: `${clamp01(context.mapState.scale) * 100}%` }}
         />
         Центр
       </Button>
-      <Button icon="minus" onClick={() => zoomOut(maxScale)} />
+      <Button icon="plus" onClick={() => zoomIn(maxScale)} />
     </div>
   );
 }
 
 function NanoMapButtons(props) {
-  const { children, prefs, setPrefs, mapData, mapState, setMapState } = props;
+  const { children, minimapDisabled } = props;
+  const context = useContext(NanoMapContext);
+  if (!context) {
+    return null;
+  }
+
+  const { mapState, setMapState } = context;
+  const { minimap } = mapState;
+
   return (
     <Stack fill vertical className="NanoMap__Buttons">
       <Stack.Item grow>
-        <NanoMapLevelSelector
-          mapData={mapData}
-          mapState={mapState}
-          setMapState={setMapState}
-        />
+        <NanoMapLevelSelector />
       </Stack.Item>
       <Stack.Item>{children}</Stack.Item>
-      <Stack.Item mt={0.5}>
-        <Button
-          icon="gear"
-          tooltip="Параметры"
-          tooltipPosition="right"
-          onClick={() => setPrefs(!prefs)}
-        />
-      </Stack.Item>
+      {!minimapDisabled && (
+        <Stack.Item>
+          <Button
+            selected={!minimap}
+            icon={minimap ? 'eye' : 'eye-slash'}
+            onClick={() =>
+              setMapState((prev) => ({ ...prev, minimap: !minimap }))
+            }
+          />
+        </Stack.Item>
+      )}
     </Stack>
   );
 }
 
-function NanoMapLevelSelector(props) {
-  const { mapData, mapState, setMapState } = props;
+function NanoMapLevelSelector() {
+  const context = useContext(NanoMapContext);
+  if (!context) {
+    return null;
+  }
+
+  const { mapData, mapState, setMapState } = context;
   const { minFloor, maxFloor, mainFloor, lavalandLevel } = mapData;
   const { currentLevel } = mapState;
 
   function setLevel(level: number) {
-    setMapState({
-      scale: mapState.scale,
-      positionX: mapState.positionX,
-      positionY: mapState.positionY,
-      currentLevel: level,
-    });
+    setMapState((prev) => ({ ...prev, currentLevel: level }));
   }
 
   return (
@@ -290,7 +291,7 @@ function NanoMapLevelSelector(props) {
               onClick={() => setLevel(currentLevel + 1)}
             />
           </Stack.Item>
-          <Stack.Item mt={0.5}>
+          <Stack.Item>
             <Button
               icon="chevron-down"
               disabled={currentLevel > maxFloor || currentLevel <= minFloor}
@@ -300,7 +301,7 @@ function NanoMapLevelSelector(props) {
         </>
       )}
       {lavalandLevel > maxFloor && (
-        <Stack.Item mt={minFloor !== maxFloor && 0.5}>
+        <Stack.Item>
           <Button
             icon="volcano"
             selected={currentLevel === lavalandLevel}
@@ -317,69 +318,47 @@ function NanoMapLevelSelector(props) {
   );
 }
 
-function NanoMapPreferences(props) {
-  const { mapPrefs, setMapPrefs, setPrefs, minimapDisabled } = props;
-  const minimapPositions: Record<MinimapPosition, number> = {
-    'top-left': -90,
-    'top-right': 0,
-    'bottom-left': 180,
-    'bottom-right': 90,
-  };
-
-  const cannotSetPrefText = minimapDisabled
-    ? 'В данном интерфейсе нельзя изменять параметры мини-карты, и её состояние.'
-    : undefined;
-
-  return (
-    <Modal p={0.5}>
-      <Section
-        m={0}
-        title="Параметры карты"
-        backgroundColor="rgba(0, 0, 0, 0.33)"
-        buttons={
-          <Button color="red" icon="times" onClick={() => setPrefs(false)} />
-        }
-      >
-        <LabeledList>
-          <LabeledList.Item label="Позиция мини-карты">
-            <Stack wrap width={5}>
-              {Object.keys(minimapPositions).map((key) => (
-                <Button
-                  key={key}
-                  color="transparent"
-                  selected={mapPrefs.minimapPosition === key}
-                  onClick={() =>
-                    setMapPrefs((old) => ({ ...old, minimapPosition: key }))
-                  }
-                >
-                  <Icon
-                    name="location-arrow"
-                    rotation={minimapPositions[key]}
-                  />
-                </Button>
-              ))}
-            </Stack>
-          </LabeledList.Item>
-          <LabeledList.Item label="Мини-карта">
-            <Button.Checkbox
-              checked={mapPrefs.minimap}
-              disabled={minimapDisabled}
-              tooltip={cannotSetPrefText}
-              onClick={() =>
-                setMapPrefs((old) => ({ ...old, minimap: !old.minimap }))
-              }
-            />
-          </LabeledList.Item>
-        </LabeledList>
-      </Section>
-    </Modal>
-  );
-}
-
 /** TODO: Add types when <Button> types will exported */
 function MapButton(props) {
-  const { posX, posY, hidden, ...rest } = props;
+  const {
+    posX,
+    posY,
+    posZ,
+    direction,
+    tracking,
+    highlighted,
+    hidden,
+    ...rest
+  } = props;
+
+  const context = useContext(NanoMapContext);
+  if (!context) {
+    return null;
+  }
+
   const buttonId = `${posX}_${posY}`;
+  const { zoomToElement } = useControls();
+  const { mapData, mapState, setMapState } = context;
+
+  useEffect(() => {
+    if (tracking && props.selected && !hidden) {
+      zoomToElement('selected', mapState.scale, 1000, 'linear');
+    }
+  }, [posX, posY]);
+
+  useEffect(() => {
+    if (
+      tracking &&
+      props.selected &&
+      posZ >= mapData.minFloor &&
+      posZ <= mapData.maxFloor
+    ) {
+      setMapState((prev) => ({
+        ...prev,
+        currentLevel: posZ,
+      }));
+    }
+  }, [posZ]);
 
   return (
     <div
@@ -387,54 +366,35 @@ function MapButton(props) {
       className={classes([
         'NanoMap__Object--wrapper',
         hidden && 'NanoMap__Object--hidden',
-      ])}
-      style={{ left: posToPx(posX), bottom: posToPx(posY) }}
-    >
-      <KeepScale>
-        <Button
-          {...rest}
-          className="NanoMap__Object"
-          tooltipPosition={'top-end'}
-          onClick={(event) => {
-            if (props.onClick) {
-              props.onClick(event);
-            }
-          }}
-        />
-      </KeepScale>
-    </div>
-  );
-}
-
-NanoMap.Button = MapButton;
-
-/** TODO: Add types when <Button> types will exported */
-function MapMarker(props) {
-  const { posX, posY, hidden, color, highlighted, ...rest } = props;
-  const markerId = `${posX}_${posY}`;
-
-  return (
-    <div
-      id={props.selected ? 'selected' : markerId}
-      className={classes([
-        'NanoMap__Marker--wrapper',
-        hidden && 'NanoMap__Marker--hidden',
-        props.selected && 'NanoMap__Marker--selected',
+        props.selected && 'NanoMap__Object--selected',
+        tracking && 'tracked',
         highlighted && 'highlighted',
       ])}
-      style={{ left: posToPx(posX), bottom: posToPx(posY) }}
+      style={{
+        transform: `translate(calc(${posToPx(posX)} + 17.5%), calc(${posToPx(256 - posY)} + 5%)) scale(var(--map-button-scale))`,
+      }}
     >
       <KeepScale>
-        <div className="NanoMap__Marker--container">
-          <div className={highlighted && 'NanoMap__Marker--highlighted'} />
+        <div className="NanoMap__Object--inner">
+          {highlighted && <div className="NanoMap__Object--highlighted" />}
+          {direction && (
+            <div
+              className="NanoMap__Object--direction"
+              style={{ transform: `rotate(${dirToDeg(direction)}deg)` }}
+            >
+              <svg viewBox="0 0 66 66">
+                <polygon points="100,75 200,250 0,250" />
+              </svg>
+            </div>
+          )}
           <Button
             {...rest}
             className={classes([
-              'NanoMap__Marker',
-              props.selected && 'NanoMap__Marker--selected',
+              'NanoMap__Object',
+              props.circular && 'NanoMap__Object--circular',
+              props.selected && 'NanoMap__Object--selected',
             ])}
-            style={{ backgroundColor: color }}
-            tooltipPosition={'top-end'}
+            tooltipPosition={props.tooltipPosition || 'top-end'}
             onClick={(event) => {
               if (props.onClick) {
                 props.onClick(event);
@@ -447,4 +407,4 @@ function MapMarker(props) {
   );
 }
 
-NanoMap.Marker = MapMarker;
+NanoMap.Button = MapButton;

@@ -66,6 +66,8 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	/// The POI we're orbiting (orbit menu)
 	var/orbiting_ref
 
+	///The description camera obscuras have when they get a photo of us.
+	var/photo_description = "You can also see a g-g-g-g-ghooooost!"
 	var/static/list/observer_hud_traits = list(
 		TRAIT_SECURITY_HUD,
 		TRAIT_MEDICAL_HUD,
@@ -144,11 +146,12 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	show_data_huds()
 
 	SSpoints_of_interest.make_point_of_interest(src)
-	ADD_TRAIT(src, TRAIT_HEAR_THROUGH_DARKNESS, ref(src))
+	ADD_TRAIT(src, TRAIT_HEAR_THROUGH_DARKNESS, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_GOOD_HEARING, INNATE_TRAIT)
 
 /mob/dead/observer/get_photo_description(obj/item/camera/camera)
 	if(!invisibility || camera.see_ghosts)
-		return "You can also see a g-g-g-g-ghooooost!"
+		return photo_description
 
 /mob/dead/observer/narsie_act()
 	var/old_color = color
@@ -374,7 +377,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(mind.current.key && !IS_FAKE_KEY(mind.current.key)) //makes sure we don't accidentally kick any clients
 		to_chat(usr, span_warning("Another consciousness is in your body...It is resisting you."))
 		return
-	client.view_size.setDefault(getScreenSize(client.prefs.read_preference(/datum/preference/toggle/widescreen)))//Let's reset so people can't become allseeing gods
+	client.view_size.resetToDefault()//Let's reset so people can't become allseeing gods
 	SStgui.on_transfer(src, mind.current) // Transfer NanoUIs.
 	if(mind.current.stat == DEAD && SSlag_switch.measures[DISABLE_DEAD_KEYLOOP])
 		to_chat(src, span_warning("To leave your body again use the Ghost verb."))
@@ -966,12 +969,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	GLOB.observer_default_invisibility = amount
 
 /mob/dead/observer/proc/open_spawners_menu()
+	set name = "Spawners Menu"
 	if(!spawners_menu)
 		spawners_menu = new(src)
 
 	spawners_menu.ui_interact(src)
 
 /mob/dead/observer/proc/open_minigames_menu()
+	set name = "Minigames Menu"
 	if(!client)
 		return
 	if(!isobserver(src))

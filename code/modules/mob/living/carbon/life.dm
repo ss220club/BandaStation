@@ -176,12 +176,7 @@
 
 	var/obj/item/organ/lungs = get_organ_slot(ORGAN_SLOT_LUNGS)
 	// Indicates if lungs can breathe without gas.
-	var/can_breathe_vacuum = FALSE
-	if(lungs)
-		// Breathing with lungs.
-		// Check for vacuum-adapted lungs.
-		can_breathe_vacuum = HAS_TRAIT(lungs, TRAIT_SPACEBREATHING)
-	else
+	if(!lungs)
 		// Lungs are missing! Can't breathe.
 		// Simulates breathing zero moles of gas.
 		has_moles = FALSE
@@ -213,6 +208,8 @@
 	var/n2o_pp = 0
 	var/nitrium_pp = 0
 	var/miasma_pp = 0
+
+	var/can_breathe_vacuum = HAS_TRAIT(src, TRAIT_NO_BREATHLESS_DAMAGE)
 
 	// Check for moles of gas and handle partial pressures / special conditions.
 	if(has_moles)
@@ -488,13 +485,17 @@
 	if(blood_type.reagent_type != chem.type)
 		return
 
+	var/blood_stream_volume = min(round(reac_volume, CHEMICAL_VOLUME_ROUNDING), BLOOD_VOLUME_MAXIMUM - blood_volume)
+	if(blood_stream_volume > 0) //remove reagents from mob that has now entered the bloodstream
+		reagents.remove_reagent(chem.type, blood_stream_volume)
+		blood_volume += blood_stream_volume
+
 	if(chem.data?["blood_type"])
 		var/datum/blood_type/donor_type = chem.data["blood_type"]
 		if(!(donor_type.type_key() in blood_type.compatible_types))
 			reagents.add_reagent(/datum/reagent/toxin, reac_volume * 0.5)
 			return COMPONENT_NO_EXPOSE_REAGENTS
 
-	blood_volume = min(blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 	return COMPONENT_NO_EXPOSE_REAGENTS
 
 /mob/living/carbon/proc/handle_bodyparts(seconds_per_tick, times_fired)

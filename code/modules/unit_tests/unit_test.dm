@@ -31,6 +31,9 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	return focused_tests.len > 0 ? focused_tests : null
 
 /datum/unit_test
+	/// Do not instantiate if type matches this
+	abstract_type = /datum/unit_test
+
 	//Bit of metadata for the future maybe
 	var/list/procs_tested
 
@@ -46,9 +49,6 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	var/succeeded = TRUE
 	var/list/allocated
 	var/list/fail_reasons
-
-	/// Do not instantiate if type matches this
-	var/abstract_type = /datum/unit_test
 
 	/// List of atoms that we don't want to ever initialize in an agnostic context, like for Create and Destroy. Stored on the base datum for usability in other relevant tests that need this data.
 	var/static/list/uncreatables = null
@@ -278,8 +278,10 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 		/obj/item/food/grown,
 		// BANDASTATION ADD - Shouldn't exist without a parent hookah
 		/obj/item/hookah_mouthpiece,
-		///Single use case holder atom requiring a user
-		/atom/movable/looking_holder
+		//Single use case holder atom requiring a user
+		/atom/movable/looking_holder,
+		//Should not exist outside of holders
+		/obj/effect/decal/cleanable/blood/trail,
 	)
 
 	// Everything that follows is a typesof() check.
@@ -344,7 +346,7 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	//Needs a linked mecha
 	returnable_list += typesof(/obj/effect/skyfall_landingzone)
 	//Expects a mob to holderize, we have nothing to give
-	returnable_list += typesof(/obj/item/clothing/head/mob_holder)
+	returnable_list += typesof(/obj/item/mob_holder)
 	//Needs cards passed into the initilazation args
 	returnable_list += typesof(/obj/item/toy/cards/cardhand)
 	//Needs a holodeck area linked to it which is not guarenteed to exist and technically is supposed to have a 1:1 relationship with computer anyway.
@@ -358,6 +360,7 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	// Can't spawn openspace above nothing, it'll get pissy at me
 	returnable_list += typesof(/turf/open/space/openspace)
 	returnable_list += typesof(/turf/open/openspace)
+	returnable_list += typesof(/obj/item/robot_model) // These should never be spawned outside of a robot.
 
 	return returnable_list
 

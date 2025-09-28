@@ -23,7 +23,7 @@
 	def_zone,
 	blocked,
 	wound_bonus,
-	bare_wound_bonus,
+	exposed_wound_bonus,
 	sharpness,
 	attack_direction,
 	attacking_item,
@@ -106,6 +106,20 @@
 /datum/status_effect/throat_soothed/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_SOOTHED_THROAT, TRAIT_STATUS_EFFECT(id))
+
+/datum/status_effect/headache_soothed
+	id = "headache_soothed"
+	duration = 60 SECONDS
+	status_type = STATUS_EFFECT_REFRESH
+	alert_type = null
+
+/datum/status_effect/headache_soothed/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_SOOTHED_HEADACHE, TRAIT_STATUS_EFFECT(id))
+
+/datum/status_effect/headache_soothed/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_SOOTHED_HEADACHE, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/bounty
 	id = "bounty"

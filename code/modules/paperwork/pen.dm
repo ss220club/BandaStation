@@ -93,7 +93,7 @@
 		"embedding" = get_embed().create_copy(),
 		"armour_penetration" = armour_penetration,
 		"wound_bonus" = wound_bonus,
-		"bare_wound_bonus" = bare_wound_bonus,
+		"exposed_wound_bonus" = exposed_wound_bonus,
 		"demolition_mod" = demolition_mod,
 	)
 
@@ -153,7 +153,7 @@
 	name = "fountain pen"
 	desc = "It's a common fountain pen, with a faux wood body. Rumored to work in zero gravity situations."
 	icon_state = "pen-fountain"
-	font = FOUNTAIN_PEN_FONT
+	font = PEN_FONT // BANDASTATION EDIT - Readble fountain pen font
 	requires_gravity = FALSE // fancy spess pens
 	dart_insert_casing_icon_state = "overlay_fountainpen"
 	dart_insert_projectile_icon_state = "overlay_fountainpen_proj"
@@ -309,7 +309,7 @@
 	attack_verb_simple = list("slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
 	sharpness = SHARP_POINTY
 	armour_penetration = 20
-	bare_wound_bonus = 10
+	exposed_wound_bonus = 10
 	item_flags = NO_BLOOD_ON_ITEM
 	light_system = OVERLAY_LIGHT
 	light_range = 1.5
