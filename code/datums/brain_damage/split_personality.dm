@@ -92,6 +92,7 @@
 	// qdel the mob with the temporary component will ensure the original mind will go back into the body and vice versa for the stranger mind
 	if(!temp_component)
 		stranger_backseat?.ghostize()
+	switch_personalities(reset_to_owner = TRUE) // BANDASTATION ADD
 	QDEL_NULL(stranger_backseat)
 	QDEL_NULL(owner_backseat)
 	..()
