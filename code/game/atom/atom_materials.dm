@@ -132,9 +132,9 @@
 			mix_material_colors(colors)
 
 	if(material_flags & MATERIAL_ADD_PREFIX)
-		var/prefixes = get_material_prefixes(materials)
+		var/prefixes = get_material_english_list(materials) // BANDASTATION EDIT - Material naming
 		ru_names_rename(ru_names_toml(name, suffix = " из [prefixes]", override_base = "[prefixes] [name]"))
-		name = "[prefixes] [name]"
+		name = "[declent_ru_initial(initial(name), NOMINATIVE, name)] из [prefixes]" // BANDASTATION EDIT - Material naming
 
 	SEND_SIGNAL(src, COMSIG_ATOM_FINALIZE_MATERIAL_EFFECTS, materials, main_material)
 
@@ -193,7 +193,7 @@
 /atom/proc/get_material_english_list(list/materials)
 	var/list/mat_names = list()
 	for(var/datum/material/material as anything in materials)
-		mat_names += material.name
+		mat_names += material.declent_ru(GENITIVE) // BANDASTATION EDIT - Material naming
 	return english_list(mat_names)
 
 ///Searches for a subtype of config_type that is to be used in its place for specific materials (like shimmering gold for cleric maces)
