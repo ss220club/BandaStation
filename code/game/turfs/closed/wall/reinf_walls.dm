@@ -30,7 +30,7 @@
 		if(COVER)
 			return span_notice("Поддержки были <i>откручены</i>. Внешняя обшивка накрепко <b>приварена</b> к балке.")
 		if(CUT_COVER)
-			return span_notice("Внешняя обшивка была <i>срезана</i> и едва держится на <b>паре болтов</b>.")
+			return span_notice("Внешняя обшивка была <i>срезана</i> и едва держится на <b>паре заклёпок</b>.")
 		if(ANCHOR_BOLTS)
 			return span_notice("Внешняя обшивка была <i>отодрана</i>. Болты, крепящие опорные стержни, плотно <b>затянуты</b>.")
 		if(SUPPORT_RODS)
@@ -84,7 +84,7 @@
 						return TRUE
 					d_state = CUT_COVER
 					update_appearance()
-					to_chat(user, span_notice("Вы сильно нажимаете на лист обшивки, снимая его с каркаса."))
+					to_chat(user, span_notice("Вы сильно нажимаете на лист обшивки, отцепляя его от крепления."))
 				return TRUE
 
 			if(W.tool_behaviour == TOOL_SCREWDRIVER)

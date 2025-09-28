@@ -27381,3 +27381,19 @@ dative = "корабельной обшивке"
 accusative = "корабельную обшивку"
 instrumental = "корабельной обшивкой"
 prepositional = "корабельной обшивке"
+
+["blank picket sign"]
+nominative = "пустой плакат"
+genitive = "пустого плаката"
+dative = "пустому плакату"
+accusative = "пустой плакат"
+instrumental = "пустым плакатом"
+prepositional = "пустом плакате"
+
+["blank picket sign"]
+nominative = "пустой плакат"
+genitive = "пустого плаката"
+dative = "пустому плакату"
+accusative = "пустой плакат"
+instrumental = "пустым плакатом"
+prepositional = "пустом плакате"

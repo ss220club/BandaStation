@@ -134,7 +134,7 @@
 	if(material_flags & MATERIAL_ADD_PREFIX)
 		var/prefixes = get_material_prefixes(materials)
 		ru_names_rename(ru_names_toml(name, suffix = " из [prefixes]", override_base = "[prefixes] [name]"))
-		name = "[declent_ru(NOMINATIVE)] из [prefixes]"
+		name = "[declent_ru_initial(initial(name), NOMINATIVE, name)] из [prefixes]"
 
 	SEND_SIGNAL(src, COMSIG_ATOM_FINALIZE_MATERIAL_EFFECTS, materials, main_material)
 
