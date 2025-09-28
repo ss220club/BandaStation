@@ -81,6 +81,13 @@ required_map = "DeltaStation2.dmm"
 coordinates = [173, 94, 1]
 trait_name = "Station"
 
+[templates.deltastation_armory_hammer]
+map_files = ["deltastation_armory_hammer.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [208, 128, 1]
+trait_name = "Station"
+
 # MetaStation
 [templates.metastation_lawyer_office]
 map_files = ["metastation_lawyer_office.dmm"]
@@ -150,6 +157,13 @@ map_files = ["metastation_library_galactic_map.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
 coordinates = [85, 129, 1]
+trait_name = "Station"
+
+[templates.metastation_armory_hammer]
+map_files = ["metastation_armory_hammer.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [108, 171, 1]
 trait_name = "Station"
 
 
@@ -231,6 +245,13 @@ required_map = "IceBoxStation.dmm"
 coordinates = [100, 128, 3]
 trait_name = "Station"
 
+[templates.iceboxstation_armory_hammer]
+map_files = ["iceboxstation_armory_hammer.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [105, 182, 2]
+trait_name = "Station"
+
 # TramStation
 [templates.tramstation_detective_office]
 map_files = ["tramstation_detective_office.dmm"]
@@ -293,6 +314,13 @@ map_files = ["tramstation_library_galactic_map.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [54, 96, 2]
+trait_name = "Station"
+
+[templates.tramstation_armory_hammer]
+map_files = ["tramstation_armory_hammer.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [68, 165, 2]
 trait_name = "Station"
 
 # Birdshot
