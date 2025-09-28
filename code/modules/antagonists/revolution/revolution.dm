@@ -1,6 +1,6 @@
 /datum/antagonist/rev
 	name = "\improper Revolutionary"
-	roundend_category = "revolutionaries" // if by some miracle revolutionaries without revolution happen
+	roundend_category = "Революционеры" // if by some miracle revolutionaries without revolution happen
 	antagpanel_category = "Revolution"
 	pref_flag = ROLE_REV
 	antag_moodlet = /datum/mood_event/revolution

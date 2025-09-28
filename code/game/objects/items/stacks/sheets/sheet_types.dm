@@ -210,7 +210,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	. += GLOB.metal_recipes
 
 /obj/item/stack/sheet/iron/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins whacking [user.p_them()]self over the head with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins whacking [user.p_them()]self over the head with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/stack/sheet/iron/welder_act(mob/living/user, obj/item/tool)
@@ -437,7 +437,7 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 			user.visible_message(span_notice("[user] starts to fix their [affecting.name]."), span_notice("You start fixing [target == user ? "your" : "[target]'s"] [affecting.name]."))
 			if(!do_after(user, 5 SECONDS, target))
 				return ITEM_INTERACT_FAILURE
-		if(target.item_heal(user, brute_heal = 15, burn_heal = 15, heal_message_brute = "splintering", heal_message_burn = "charring", required_bodytype = BODYTYPE_PEG))
+		if(target.item_heal(user, brute_heal = 15, burn_heal = 15, heal_message_brute = "расколы", heal_message_burn = "обугление", required_bodytype = BODYTYPE_PEG))
 			use(1)
 		return ITEM_INTERACT_SUCCESS
 	else

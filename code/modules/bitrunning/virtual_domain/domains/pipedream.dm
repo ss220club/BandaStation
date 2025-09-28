@@ -1,12 +1,12 @@
 /datum/lazy_template/virtual_domain/pipedream
-	name = "Disposal Pipe Factory"
+	name = "Завод труб отправки"
 	cost = BITRUNNER_COST_LOW
-	desc = "An abandoned and infested factory manufacturing disposal pipes."
+	desc = "Заброшенный и зараженный завод по производству труб отправки."
 	difficulty = BITRUNNER_DIFFICULTY_LOW
 	completion_loot = list(/obj/item/stack/pipe_cleaner_coil/random/five = 1)
-	help_text = "Not long ago, this place was thriving with activity. The workers \
-	seemed to have left in a hurry, and now productivity is in the bin. Something \
-	must have trashed the place, but what?"
+	help_text = "Не так давно здесь кипела бурная деятельность. Рабочие, \
+	похоже, уходили в спешке, и производительность теперь на нуле. Что-то, \
+	должно быть, разгромило это место, но что?"
 	is_modular = TRUE
 	key = "pipedream"
 	map_name = "pipedream"

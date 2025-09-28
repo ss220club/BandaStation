@@ -80,15 +80,17 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 /obj/item/nuclear_challenge/proc/war_was_declared(mob/living/user, memo)
 	priority_announce(
 		text = memo,
-		title = "Declaration of War",
+		title = "Объявление войны",
 		sound = announcement_sound,
 		has_important_message = TRUE,
-		sender_override = "Nuclear Operative Outpost",
+		sender_override = "Аванпост ядерных оперативников",
 		color_override = "red",
 	)
 	if(user)
 		to_chat(user, "You've attracted the attention of powerful forces within the syndicate. \
 			A bonus bundle of telecrystals has been granted to your team. Great things await you if you complete the mission.")
+
+	SSsecurity_level.set_level(SEC_LEVEL_GAMMA) // BANDASTATION ADD
 
 	distribute_tc()
 	CONFIG_SET(number/shuttle_refuel_delay, max(CONFIG_GET(number/shuttle_refuel_delay), CHALLENGE_SHUTTLE_DELAY))
@@ -193,10 +195,10 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 
 	priority_announce(
 		text = memo,
-		title = "Declaration of War",
+		title = "Объявление войны",
 		sound = announcement_sound,
 		has_important_message = TRUE,
-		sender_override = "Nuclear Operative Outpost",
+		sender_override = "Аванпост ядерных оперативников",
 		color_override = "red",
 	)
 
