@@ -684,6 +684,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			to_chat_immediate(src, span_notice("Sending you to [panic_name ? panic_name : panic_addr]."))
 			winset(src, null, "command=.options")
 			src << link("[panic_addr]?redirect=1")
+			qdel(query_client_in_db)
+			qdel(src)
+			return
 
 	// If we aren't an admin, and the flag is set (the panic bunker is enabled).
 	if(CONFIG_GET(flag/panic_bunker) && !holder && !GLOB.deadmins[ckey])
