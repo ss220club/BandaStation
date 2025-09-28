@@ -676,7 +676,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	var/client_is_in_db = query_client_in_db.NextRow()
 
-	if(GLOB.clients.len >= CONFIG_GET(number/extreme_popcap))
+	if(GLOB.clients.len >= CONFIG_GET(number/extreme_popcap) && !holder && !GLOB.deadmins[ckey])
 		var/list/connectiontopic_a = params2list(connectiontopic)
 		var/list/panic_addr = CONFIG_GET(string/panic_server_address)
 		if(panic_addr && !connectiontopic_a["redirect"])
