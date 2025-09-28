@@ -418,7 +418,6 @@
 /turf/open/floor/iron/smooth,
 /area/station/construction/mining/aux_base)
 "aiU" = (
-/obj/machinery/bluespace_vendor/directional/south,
 /obj/effect/turf_decal/bot,
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/iron/dark,
@@ -48831,7 +48830,6 @@
 	dir = 4
 	},
 /obj/effect/spawner/random/trash/cigbutt,
-/obj/machinery/bluespace_vendor/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/science/breakroom)
 "tvf" = (
