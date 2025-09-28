@@ -416,16 +416,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/nanotrasen_representative)
-"Jy" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral/half/contrasted{
-	dir = 1
-	},
-/obj/machinery/bluespace_vendor/directional/north,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "JC" = (
 /obj/machinery/holopad,
 /obj/structure/cable,
@@ -820,7 +810,7 @@ mz
 mz
 mz
 mz
-Jy
+hm
 gC
 "}
 (8,1,1) = {"
