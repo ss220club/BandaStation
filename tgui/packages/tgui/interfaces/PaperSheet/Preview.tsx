@@ -158,12 +158,15 @@ export function PreviewView(props: PreviewViewProps) {
       return '';
     }
 
+    if (advanced_html) {
+      return rawText;
+    }
+
     const parsedText = runMarkedDefault(rawText);
     const sanitizedText = sanitizeText(parsedText, advanced_html);
     const fieldedText = createWriteButtons(sanitizedText, paperInputRef);
     const specialTokensParsedText = parseSpecialTokens(fieldedText);
 
-    // Forth, we wrap the created text in the writing implement properties.
     return setFontInText(specialTokensParsedText, font, color, bold);
   }
 

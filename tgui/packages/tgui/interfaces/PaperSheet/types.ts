@@ -1,5 +1,4 @@
 export type PaperContext = {
-  // ui_static_data
   default_pen_color: string;
   default_pen_font: string;
   max_length: number;
@@ -11,10 +10,19 @@ export type PaperContext = {
   signature_font: string;
   user_name: string;
 
+  current_side: 'front' | 'back';
+
+  is_stack?: boolean;
+  stack_page_index?: number;
+  stack_page_count?: number;
+
   // ui_data
   held_item_details?: WritingImplement;
   advanced_html_user: boolean;
   replacements: PaperReplacement[];
+
+  can_prev?: boolean;
+  can_next?: boolean;
 };
 
 export type PaperInput = {
@@ -33,7 +41,11 @@ type StampInput = {
   x: number;
   y: number;
   rotation: number;
-};
+} & Partial<{
+  photo_src: string;
+  photo_w: number;
+  photo_h: number;
+}>;
 
 export enum InteractionType {
   reading = 0,
