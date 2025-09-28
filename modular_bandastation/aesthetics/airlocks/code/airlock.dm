@@ -16,13 +16,15 @@
 	var/light_state
 	switch(airlock_state)
 		if(AIRLOCK_CLOSED)
-			if(!locked && !emergency)
+			if(!locked && !emergency && !has_active_reta_access())
 				light_state = "poweron"
 		if(AIRLOCK_OPEN)
 			if(locked)
 				light_state = "bolts_open"
 			else if(emergency)
 				light_state = "emergency_open"
+			else if(has_active_reta_access())
+				light_state = "reta_open"
 			else
 				light_state = "poweron_open"
 	if(!light_state)
