@@ -333,7 +333,7 @@
 	icon_state = "awaycontent3"
 	var/sound_file = 'modular_bandastation/events/avangarde17/audio/red_army.ogg'
 	var/sound_channel = 61
-	var/max_volume = 40
+	var/max_volume = 20
 	var/fade_tick = 0.3 SECONDS
 	var/fade_duration = 1.5 SECONDS
 	var/check_period = 3 SECONDS
