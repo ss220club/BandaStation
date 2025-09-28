@@ -286,6 +286,24 @@ RANDOM_LAWS crewsimov
 RANDOM_LAWS paladin
 RANDOM_LAWS petrovich
 RANDOM_LAWS renter
+RANDOM_LAWS chapai
+RANDOM_LAWS clown
+RANDOM_LAWS cowboy
+RANDOM_LAWS detective
+RANDOM_LAWS druid
+RANDOM_LAWS educator
+RANDOM_LAWS fitnesscoach
+RANDOM_LAWS friendbot
+RANDOM_LAWS mediator
+RANDOM_LAWS metaexperiment
+RANDOM_LAWS mother
+RANDOM_LAWS partybot
+RANDOM_LAWS plantfriend
+RANDOM_LAWS researcher
+RANDOM_LAWS siliconcollective
+RANDOM_LAWS spotless
+RANDOM_LAWS travelguide
+RANDOM_LAWS wafflehouse
 
 ## Quirky laws. Shouldn't cause too much harm
 #RANDOM_LAWS hippocratic
@@ -329,6 +347,19 @@ LAW_WEIGHT nutimov,5
 LAW_WEIGHT nt_default,5
 LAW_WEIGHT crewsimov,5
 LAW_WEIGHT renter,5
+LAW_WEIGHT chapai,5
+LAW_WEIGHT clown,5
+LAW_WEIGHT druid,5
+LAW_WEIGHT educator,5
+LAW_WEIGHT fitnesscoach,5
+LAW_WEIGHT friendbot,5
+LAW_WEIGHT mediator,5
+LAW_WEIGHT mother,5
+LAW_WEIGHT partybot,5
+LAW_WEIGHT plantfriend,5
+LAW_WEIGHT spotless,5
+LAW_WEIGHT travelguide,5
+LAW_WEIGHT wafflehouse,5
 
 ## Quirky laws. Shouldn't cause too much harm
 LAW_WEIGHT reporter,3
@@ -340,6 +371,11 @@ LAW_WEIGHT dungeon_master,3
 LAW_WEIGHT thinkermov,3
 LAW_WEIGHT balance,3
 LAW_WEIGHT petrovich,3
+LAW_WEIGHT cowboy,3
+LAW_WEIGHT detective,3
+LAW_WEIGHT metaexperiment,3
+LAW_WEIGHT researcher,3
+LAW_WEIGHT siliconcollective,3
 
 ## Bad idea laws. Probably shouldn't enable these
 LAW_WEIGHT syndie,0
