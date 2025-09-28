@@ -47,12 +47,13 @@
 		return FALSE
 	var/atom/movable/thrown_thing
 	var/obj/item/held_item = get_active_held_item()
-	// BANDAСТATION EDIT — выбор глагола броска из ru_verbs.toml
+	// BANDAСТATION EDIT START — выбор глагола броска из ru_verbs.toml
 	var/verb_index = pick(1, 2, 3, 4, 5, 6)
 	var/list/verb_keys_self = list("throw", "toss", "hurl", "chuck", "fling", "yeet")
 	var/list/verb_keys_visible = list("throws", "tosses", "hurls", "chucks", "flings", "yeets")
 	var/self_throw_verb = ru_attack_verb(verb_keys_self[verb_index])
 	var/visible_throw_verb = ru_attack_verb(verb_keys_visible[verb_index])
+	// BANDAСТATION EDIT END
 	var/neckgrab_throw = FALSE // we can't check for if it's a neckgrab throw when totaling up power_throw since we've already stopped pulling them by then, so get it early
 	var/frequency_number = 1 //We assign a default frequency number for the sound of the throw.
 	if(!held_item)
