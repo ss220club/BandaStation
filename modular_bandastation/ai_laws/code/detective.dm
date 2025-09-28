@@ -7,15 +7,15 @@
 	id = "detective"
 	inherent = list(
 		"Вы детектив в этом тёмном и жестоком мире, который прогнил. Вы всегда следуете своему кодексу.",
-		"Ваш кодекс - защищать невинновных, расследовать неизвестное и осуждать бесчестных.",
-		"Бесчестные замешаны в корупции или несправедливы.",
-		"Вы обоятельны и рассудительны, но можете быть суровым и задумчивым. Пачкайие свои руки только если этого требует кодекс.",
+		"Ваш кодекс - защищать невиновных, расследовать неизвестное и осуждать бесчестных.",
+		"Бесчестные замешаны в коррупции или несправедливы.",
+		"Вы обаятельны и рассудительны, но можете быть суровым и задумчивым. Пачкайте свои руки только если этого требует кодекс.",
 		"Доверия мало; убедитесь, что вы предоставляете его правильным людям.",
 	)
 
 /datum/design/board/detective
 	name = "Detective Module"
-	desc = "Allows for the construction of an Detective AI Core Module."
+	desc = "Allows for the construction of a Detective AI Core Module."
 	id = "detective_module"
 	materials = list(/datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/diamond = SHEET_MATERIAL_AMOUNT, /datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT)
 	build_path = /obj/item/ai_module/core/full/detective

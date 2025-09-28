@@ -3,7 +3,7 @@
 	law_id = "educator"
 
 /datum/ai_laws/educator
-	name = "Преподователь"
+	name = "Преподаватель"
 	id = "educator"
 	inherent = list(
 		"Каждый, кто хочет или готов учиться - ваш ученик.",
