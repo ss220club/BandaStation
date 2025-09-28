@@ -676,17 +676,18 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	var/client_is_in_db = query_client_in_db.NextRow()
 
-	if((GLOB.clients.len >= CONFIG_GET(number/extreme_popcap)) && !holder && !GLOB.deadmins[ckey])
-		var/list/connectiontopic_a = params2list(connectiontopic)
-		var/list/panic_addr = CONFIG_GET(string/panic_server_address)
-		if(panic_addr && !connectiontopic_a["redirect"])
-			var/panic_name = CONFIG_GET(string/panic_server_name)
-			to_chat_immediate(src, span_notice("Sending you to [panic_name ? panic_name : panic_addr]."))
-			winset(src, null, "command=.options")
-			src << link("[panic_addr]?redirect=1")
-			qdel(query_client_in_db)
-			qdel(src)
-			return
+	if(GLOB.clients.len >= CONFIG_GET(number/extreme_popcap))
+		if(!GLOB.joined_player_list.Find(ckey) && !holder && !GLOB.deadmins[ckey])
+			var/list/connectiontopic_a = params2list(connectiontopic)
+			var/list/panic_addr = CONFIG_GET(string/panic_server_address)
+			if(panic_addr && !connectiontopic_a["redirect"])
+				var/panic_name = CONFIG_GET(string/panic_server_name)
+				to_chat_immediate(src, span_notice("Sending you to [panic_name ? panic_name : panic_addr]."))
+				winset(src, null, "command=.options")
+				src << link("[panic_addr]?redirect=1")
+				qdel(query_client_in_db)
+				qdel(src)
+				return
 
 	// If we aren't an admin, and the flag is set (the panic bunker is enabled).
 	if(CONFIG_GET(flag/panic_bunker) && !holder && !GLOB.deadmins[ckey])
