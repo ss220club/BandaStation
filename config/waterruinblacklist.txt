@@ -1,0 +1,36 @@
+#Listing maps here will blacklist them from generating in rainworld.
+#Maps must be the full path to them
+#A list of maps valid to blacklist can be found in _maps\RandomRuins\WaterRuins
+#SPECIFYING AN INVALID MAP WILL RESULT IN RUNTIMES ON GAME START
+
+##MISC
+#_maps/RandomRuins/WaterRuins/1.dmm
+#_maps/RandomRuins/WaterRuins/2.dmm
+#_maps/RandomRuins/WaterRuins/3.dmm
+#_maps/RandomRuins/WaterRuins/4.dmm
+#_maps/RandomRuins/WaterRuins/5.dmm
+#_maps/RandomRuins/WaterRuins/6.dmm
+#_maps/RandomRuins/WaterRuins/7.dmm
+#_maps/RandomRuins/WaterRuins/8.dmm
+#_maps/RandomRuins/WaterRuins/9.dmm
+#_maps/RandomRuins/WaterRuins/10.dmm
+#_maps/RandomRuins/WaterRuins/11.dmm
+#_maps/RandomRuins/WaterRuins/12.dmm
+#_maps/RandomRuins/WaterRuins/13.dmm
+#_maps/RandomRuins/WaterRuins/14.dmm
+#_maps/RandomRuins/WaterRuins/15.dmm
+#_maps/RandomRuins/WaterRuins/16.dmm
+#_maps/RandomRuins/WaterRuins/17.dmm
+#_maps/RandomRuins/WaterRuins/18.dmm
+#_maps/RandomRuins/WaterRuins/19.dmm
+#_maps/RandomRuins/WaterRuins/20.dmm
+#_maps/RandomRuins/WaterRuins/21.dmm
+#_maps/RandomRuins/WaterRuins/22.dmm
+#_maps/RandomRuins/WaterRuins/23.dmm
+#_maps/RandomRuins/WaterRuins/24.dmm
+#_maps/RandomRuins/WaterRuins/25.dmm
+#_maps/RandomRuins/WaterRuins/26.dmm
+#_maps/RandomRuins/WaterRuins/27.dmm
+#_maps/RandomRuins/WaterRuins/28.dmm
+#_maps/RandomRuins/WaterRuins/29.dmm
+#_maps/RandomRuins/WaterRuins/30.dmm
