@@ -167,8 +167,11 @@
 	playsound(get_turf(H), 'sound/effects/magic/mutate.ogg', 70, TRUE)
 
 	for(var/datum/action/cooldown/ability in H.actions)
-		if(ability.type in typesof(/datum/action/cooldown/shadowling) && !(istype(ability.type, /datum/action/cooldown/shadowling/engine_sabotage)))
-			ability.Remove(H)
+		if(!istype(ability, /datum/action/cooldown/shadowling))
+			continue
+		if(istype(ability, /datum/action/cooldown/shadowling/engine_sabotage))
+			continue
+		ability.Remove(H)
 
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(hive)
