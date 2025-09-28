@@ -1,0 +1,5 @@
+#include "_digital_warrant.dm"
+
+#include "code/datums/warrants.dm"
+#include "code/game/objects/items/devices/holowarrant.dm"
+#include "code/modules/modular_computers/file_system/programs/security/digitalwarrant.dm"
