@@ -1,7 +1,7 @@
 //Radiation storms occur when the station passes through an irradiated area, and irradiate anyone not standing in protected areas (maintenance, emergency storage, etc.)
 /datum/weather/rad_storm
 	name = "radiation storm"
-	desc = "Станция проходит через радиационный пояс высокой интенсивности, облучающее всех, кому не повезло оказаться без защиты."
+	desc = "Станция проходит через радиационный пояс высокой интенсивности, облучающий всех, кому не повезло оказаться без защиты."
 
 	telegraph_duration = 40 SECONDS
 	telegraph_message = span_danger("Вам кажется, что воздух вокруг становится теплее.")
