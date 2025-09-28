@@ -1,3 +1,40 @@
+// MARK: Effects
+/obj/effect/temp_visual/shadowling/hatch_pulse
+	name = "shadow pulse"
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	plane = ABOVE_GAME_PLANE
+	layer = EFFECTS_LAYER
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "sparks"
+	color = "#6e00a8"
+	alpha = 220
+
+/obj/effect/temp_visual/shadowling/hatch_pulse/Initialize(mapload)
+	. = ..()
+	animate(src, alpha = 0, time = 6)
+	QDEL_IN(src, 0.6 SECONDS)
+	return .
+
+// MARK: Structures
+/obj/structure/shadowling_cocoon
+	name = "shadow cocoon"
+	desc = "Пульсирующий кокон живой тени."
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
+	icon_state = "shadowcocoon"
+	layer = ABOVE_MOB_LAYER
+	anchored = TRUE
+	density = TRUE
+	resistance_flags = INDESTRUCTIBLE
+
+/obj/structure/alien/resin/wall/shadowling
+	name = "umbral mass"
+	desc = "Скользкая, гнетущая тьма, затвердевшая в непробиваемый барьер."
+	color = "#5e545a"
+	move_resist = MOVE_FORCE_VERY_STRONG
+	resistance_flags = INDESTRUCTIBLE
+
+// MARK: Ability
 /datum/action/cooldown/shadowling/hatch
 	name = "Вылупиться"
 	desc = "Обратить свою оболочку и явить истинную тень."
@@ -148,37 +185,3 @@
 	Remove(H)
 	qdel(src)
 	return TRUE
-
-/obj/structure/shadowling_cocoon
-	name = "shadow cocoon"
-	desc = "Пульсирующий кокон живой тени."
-	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
-	icon_state = "shadowcocoon"
-	layer = ABOVE_MOB_LAYER
-	anchored = TRUE
-	density = TRUE
-	resistance_flags = INDESTRUCTIBLE
-
-/obj/structure/alien/resin/wall/shadowling
-	name = "umbral mass"
-	desc = "Скользкая, гнетущая тьма, затвердевшая в непробиваемый барьер."
-	color = "#5e545a"
-	move_resist = MOVE_FORCE_VERY_STRONG
-	resistance_flags = INDESTRUCTIBLE
-
-/obj/effect/temp_visual/shadowling/hatch_pulse
-	name = "shadow pulse"
-	anchored = TRUE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = ABOVE_GAME_PLANE
-	layer = EFFECTS_LAYER
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "sparks"
-	color = "#6e00a8"
-	alpha = 220
-
-/obj/effect/temp_visual/shadowling/hatch_pulse/Initialize(mapload)
-	. = ..()
-	animate(src, alpha = 0, time = 6)
-	QDEL_IN(src, 0.6 SECONDS)
-	return .

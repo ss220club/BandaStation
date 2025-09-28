@@ -22,13 +22,13 @@
 /datum/action/cooldown/shadowling/proc/CanUse(mob/living/carbon/human/H)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
-		owner.balloon_alert(owner, "Нарушена связь с роем")
+		owner.balloon_alert(owner, "нарушена связь с роем")
 		return FALSE
 	if(requires_dark_user && !is_dark(H))
-		owner.balloon_alert(owner, "Слишком светло")
+		owner.balloon_alert(owner, "слишком светло")
 		return FALSE
 	if(!IsAvailable(TRUE))
-		owner.balloon_alert(owner, "Способность недоступна")
+		owner.balloon_alert(owner, "способность недоступна")
 		return FALSE
 	return TRUE
 
@@ -69,7 +69,7 @@
 	var/list/targets = CollectTargets(owner, target)
 	if(!ValidateTargets(owner, targets))
 		enable()
-		owner.balloon_alert(owner, "Нет доступных целей")
+		owner.balloon_alert(owner, "нет доступных целей")
 		return
 	if(channel_time > 0)
 		if(!PerformChannel(owner, null))

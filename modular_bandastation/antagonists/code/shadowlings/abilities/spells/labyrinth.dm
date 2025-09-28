@@ -1,16 +1,18 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/labyrinth
 	name = "Лабиринт"
-	desc = "Захватывает ближайшую цель в тени (≤6 тайлов, в видимости), затем кликом выбери тёмную точку для телепорта. Окутывает область чёрным дымом."
+	desc = "Захватывает ближайшую цель в тени (≤6 тайлов, в видимости), затем кликом выберите тёмную точку для телепорта. Окутывает область чёрным дымом."
 	button_icon_state = "shadow_labyrinth"
 	cooldown_time = 20 SECONDS
 	click_to_activate = TRUE
 	unset_after_click = TRUE
-	var/selection_range = 6
-	var/mob/living/carbon/human/stored_target
-	var/selection_timer
+	// Shadowling related
 	min_req = 6
 	max_req = 30
 	required_thralls = 60
+	var/selection_range = 6
+	var/selection_timer
+	var/mob/living/carbon/human/stored_target
 
 /datum/action/cooldown/shadowling/labyrinth/Remove(mob/remove_from)
 	. = ..()
@@ -38,7 +40,7 @@
 	if(!stored_target)
 		var/mob/living/carbon/human/T = find_target(clicker)
 		if(!T)
-			owner.balloon_alert(owner, "Нет доступных целей")
+			owner.balloon_alert(owner, "нет доступных целей")
 			return FALSE
 		stored_target = T
 		clicker.balloon_alert(clicker, "цель зафиксирована")

@@ -1,8 +1,55 @@
+// MARK: Effects
+/obj/effect/temp_visual/dir_setting/shadow_plume
+	icon = 'icons/effects/160x160.dmi'
+	icon_state = "entropic_plume"
+	duration = 3 SECONDS
+	color = "#015fff"
+	alpha = 220
+
+/obj/effect/temp_visual/dir_setting/shadow_plume/setDir(dir)
+	. = ..()
+	switch(dir)
+		if(NORTH)
+			pixel_x = -64
+		if(SOUTH)
+			pixel_x = -64
+			pixel_y = -128
+		if(EAST)
+			pixel_y = -64
+		if(WEST)
+			pixel_y = -64
+			pixel_x = -128
+
+// MARK: Status effects
+/datum/status_effect/cloudstruck/shadow
+	id = "cloudstruck_shadow"
+	var/disable_blind = TRUE
+	var/static/mutable_appearance/mob_overlay_shadow
+
+/datum/status_effect/cloudstruck/shadow/on_creation(mob/living/new_owner, duration = 2 SECONDS)
+	src.duration = duration
+	if(!mob_overlay_shadow)
+		// Base is the same as for the heretic, but we use blue color
+		mob_overlay_shadow = mutable_appearance('icons/effects/eldritch.dmi', "cloud_swirl", ABOVE_MOB_LAYER)
+		mob_overlay_shadow.color = "#66ccff"
+	return ..()
+
+/datum/status_effect/cloudstruck/shadow/on_apply()
+	owner.add_overlay(mob_overlay_shadow)
+	owner.become_blind(id)
+	return TRUE
+
+/datum/status_effect/cloudstruck/shadow/on_remove()
+	owner.cure_blind(id)
+	owner.cut_overlay(mob_overlay_shadow)
+
+// MARK: Movespeed modifier
 /datum/movespeed_modifier/shadowling/cold_wave
 	multiplicative_slowdown = 1.25
 	priority = 20
 	movetypes = GROUND
 
+// MARK: Ability
 /datum/action/cooldown/shadowling/cold_wave
 	name = "Волна холода"
 	desc = "Выплеск ледяной тьмы в 45° конусе на 4 тайла, наносящий 30 урона по выносливости и замедляющий врагов на 10 секунд."
@@ -95,46 +142,3 @@
 	var/turf/anchor = get_step(H, H.dir)
 	if(!anchor) anchor = get_turf(H)
 	new /obj/effect/temp_visual/dir_setting/shadow_plume(anchor, H.dir)
-
-/obj/effect/temp_visual/dir_setting/shadow_plume
-	icon = 'icons/effects/160x160.dmi'
-	icon_state = "entropic_plume"
-	duration = 3 SECONDS
-	color = "#015fff"
-	alpha = 220
-
-/obj/effect/temp_visual/dir_setting/shadow_plume/setDir(dir)
-	. = ..()
-	switch(dir)
-		if(NORTH)
-			pixel_x = -64
-		if(SOUTH)
-			pixel_x = -64
-			pixel_y = -128
-		if(EAST)
-			pixel_y = -64
-		if(WEST)
-			pixel_y = -64
-			pixel_x = -128
-
-/datum/status_effect/cloudstruck/shadow
-	id = "cloudstruck_shadow"
-	var/disable_blind = TRUE
-	var/static/mutable_appearance/mob_overlay_shadow
-
-/datum/status_effect/cloudstruck/shadow/on_creation(mob/living/new_owner, duration = 2 SECONDS)
-	src.duration = duration
-	if(!mob_overlay_shadow)
-		// база та же, что у еретика, но применяем синий цвет
-		mob_overlay_shadow = mutable_appearance('icons/effects/eldritch.dmi', "cloud_swirl", ABOVE_MOB_LAYER)
-		mob_overlay_shadow.color = "#66ccff"
-	return ..()
-
-/datum/status_effect/cloudstruck/shadow/on_apply()
-	owner.add_overlay(mob_overlay_shadow)
-	owner.become_blind(id)
-	return TRUE
-
-/datum/status_effect/cloudstruck/shadow/on_remove()
-	owner.cure_blind(id)
-	owner.cut_overlay(mob_overlay_shadow)

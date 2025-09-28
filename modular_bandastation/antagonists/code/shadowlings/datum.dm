@@ -3,11 +3,11 @@
 	mood_change = 12
 	hidden = TRUE
 
+// MARK: Antagonist
 /datum/antagonist/shadowling
-	name = "Shadowlings"
-	antagpanel_category = "Shadowlings"
-	show_in_antagpanel = TRUE
-	preview_outfit = null
+	name = "Тенеморф"
+	roundend_category = "Тенеморфы"
+	antagpanel_category = "Тенеморф"
 	pref_flag = ROLE_SHADOWLING
 	stinger_sound = 'modular_bandastation/antagonists/sound/shadowlings/shadowling_gain.ogg'
 	antag_moodlet = /datum/mood_event/shadowling
@@ -109,6 +109,7 @@
 		var/obj/item/organ/brain/shadow/tumor_thrall/tumor = new
 		tumor.Insert(H)
 
+// MARK: Objectives
 /datum/objective/shadowling/enslave_fraction
 	name = "Subjugate the crew"
 	admin_grantable = TRUE
@@ -202,26 +203,6 @@
 /datum/antagonist/shadowling/get_team()
 	return shadow_team
 
-/proc/shadowling_begin_roundender(mob/living/carbon/human/ascended=null)
-	if(GLOB.is_shadowling_roundender_started)
-		return
-	GLOB.is_shadowling_roundender_started = TRUE
-
-	send_to_playing_players("<span class='shadowradio_win'><b>ЕДИНАЯ ТЕНЬ ПОГЛОЩАЕТ СТАНЦИЮ!</b></span>")
-	sound_to_playing_players(SHADOWLING_RISEN_MUSIC, 70)
-
-	priority_announce(
-		text = "Зафиксировано поглощение объекта огромной теневой сущностью."+\
-			"Требуется экстренная активация работоспособных активов. Приказы на запуск шаттла подтверждены - отмена невозможна.",
-		title = "[command_name()]: Отдел паранормальных явлений",
-		sound = SSstation.announcer.get_rand_report_sound(),
-		has_important_message = TRUE,
-	)
-
-	var/atom/hostile_ref = ascended ? ascended : world
-	SSshuttle.registerHostileEnvironment(hostile_ref)
-	SSshuttle.lockdown = TRUE
-
 /datum/objective/shadow_thrall
 	name = "Thrall Objective"
 	admin_grantable = TRUE
@@ -249,3 +230,23 @@
 		if(isshadowling_ascended(L))
 			return TRUE
 	return FALSE
+
+// MARK: Global shadowling roundender
+/proc/shadowling_begin_roundender(mob/living/carbon/human/ascended=null)
+	if(GLOB.is_shadowling_roundender_started)
+		return
+	GLOB.is_shadowling_roundender_started = TRUE
+
+	send_to_playing_players("<span class='shadowradio_win'><b>ЕДИНАЯ ТЕНЬ ПОГЛОТИТ СТАНЦИЮ!</b></span>")
+	sound_to_playing_players(SHADOWLING_RISEN_MUSIC, 70)
+
+	priority_announce(
+		text = "Внимание! Ситуация критическая: угроза поглощения, объект на грани утраты. Незамедлительно задействуйте все доступные ресурсы и приступайте к процедуре эвакуации. Запуск эвакуационного шаттла утверждён и отмене не подлежит.",
+		title = "[command_name()]: Отдел паранормальных явлений",
+		sound = SSstation.announcer.get_rand_report_sound(),
+		has_important_message = TRUE,
+	)
+
+	var/atom/hostile_ref = ascended ? ascended : world
+	SSshuttle.registerHostileEnvironment(hostile_ref)
+	SSshuttle.lockdown = TRUE

@@ -1,3 +1,4 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/enthrall
 	name = "Порабощение"
 	desc = "Подчиняет ближайшее существо к вам в небольшом конусе служить улью."
@@ -34,7 +35,7 @@
 	if(!istype(T))
 		return FALSE
 	if(!T?.mind)
-		owner.balloon_alert(owner, "Цель недостаточно разумна")
+		owner.balloon_alert(owner, "цель недостаточно разумна")
 		return FALSE
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(hive)
@@ -60,7 +61,7 @@
 		return FALSE
 
 	if(!is_dark(H) || !is_dark(T))
-		owner.balloon_alert(owner, "Свет разрушил связь")
+		owner.balloon_alert(owner, "свет разрушил связь")
 		StartCooldown()
 		return FALSE
 
@@ -70,14 +71,14 @@
 
 	var/obj/item/organ/existing = T.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL)
 	if(existing)
-		owner.balloon_alert(owner, "Уже связан с ульем")
+		owner.balloon_alert(owner, "уже связан с ульем")
 		to_chat(H, span_notice("[T.real_name] уже связан с ульем."))
 		return TRUE
 
 	to_chat(H, span_notice("Вы начинаете связывать разум [T.real_name] с ульем. Не шевелитесь и оставайтесь в тени..."))
 	to_chat(T, span_danger("Холодная тьма обволакивает ваш разум..."))
 
-	// 30 секундный каст - чтобы игроки не пытались спидранить конверт
+	// 30 second cast - to prevent players from speedrunning converts
 	for(var/i = 1 to 3)
 		if(cancel_on_bright && !is_dark(H))
 			to_chat(H, span_warning("Свет разорвал связь."))
@@ -96,10 +97,10 @@
 	var/obj/item/organ/brain/shadow/tumor_thrall/O = new
 	if(!O.Insert(T))
 		qdel(O)
-		owner.balloon_alert(owner, "Связать не удалось")
+		owner.balloon_alert(owner, "связать не удалось")
 		to_chat(H, span_warning("Не удалось связать [T.real_name] с ульем."))
 		return FALSE
 
 	to_chat(H, span_notice("Вы связываете разум [T.real_name] с ульем."))
-	to_chat(T, span_danger("Холодная тьма пронзает ваш мозг... Вы становитесь слугой улья!"))
+	to_chat(T, span_danger("Холодная тьма пронзает ваш мозг... Вы становитесь слугой роя!"))
 	return TRUE

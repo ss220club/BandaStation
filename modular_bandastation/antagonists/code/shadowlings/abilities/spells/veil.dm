@@ -1,17 +1,24 @@
+// MARK: Effects
+/obj/effect/temp_visual/circle_wave/shadow_veil
+	color = "#5a3a7e"
+	max_alpha = 200
+	duration = 0.6 SECONDS
+	amount_to_scale = 6
+
+// MARK: Ability
 /datum/action/cooldown/shadowling/veil
 	name = "Вуаль"
 	desc = "Ваше присутствие гасит свет и пламя поблизости; противники в тени слабеют, АПЦ обнуляют заряд, светогрибы чахнут."
 	button_icon_state = "shadow_veil"
 	cooldown_time = 15 SECONDS
-	required_thralls = 0
-
-	var/dark_square_radius = 5
-	var/shroom_square_radius = 2
-	var/blind_duration = 6 SECONDS
-	var/sfx_emp = 'sound/effects/empulse.ogg'
+	// Shadowling related
 	min_req = 3
 	max_req = 10
 	required_thralls = 30
+	var/dark_square_radius = 5
+	var/shroom_square_radius = 2
+	var/blind_duration = 6 SECONDS
+	var/static/sfx_emp = 'sound/effects/empulse.ogg'
 
 /datum/action/cooldown/shadowling/veil/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/turf/center = get_turf(H)
@@ -94,9 +101,3 @@
 	for(var/turf/T in turfs)
 		for(var/obj/structure/glowshroom/G in T)
 			qdel(G)
-
-/obj/effect/temp_visual/circle_wave/shadow_veil
-	color = "#5a3a7e"
-	max_alpha = 200
-	duration = 0.6 SECONDS
-	amount_to_scale = 6

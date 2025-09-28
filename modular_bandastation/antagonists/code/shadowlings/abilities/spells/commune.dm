@@ -1,5 +1,6 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/commune
-	name = "Связь улья"
+	name = "Связь роя"
 	desc = "Передать мысленное сообщение всем тенелингам и слугам."
 	button_icon_state = "shadow_talk"
 	cooldown_time = 0
@@ -16,7 +17,7 @@
 	if(!IsAvailable(TRUE))
 		return FALSE
 
-	var/text_msg = tgui_input_text(H, "Сообщение для улья", "Связь улья", max_length = MAX_MESSAGE_LEN)
+	var/text_msg = tgui_input_text(H, "Сообщение для роя", "Связь роя", max_length = MAX_MESSAGE_LEN)
 	if(!text_msg)
 		return FALSE
 
@@ -39,7 +40,6 @@
 
 	H.log_talk(text_msg, LOG_SAY, tag = "SHADOW_HIVE")
 	return TRUE
-
 
 /datum/action/cooldown/shadowling/commune/proc/shadowling_commune_broadcast(mob/living/carbon/human/sender, message)
 	if(!istype(sender))
@@ -84,7 +84,6 @@
 
 	return TRUE
 
-
 /datum/action/cooldown/shadowling/commune/proc/shadowling_commune_role_label(mob/living/carbon/human/H, datum/team/shadow_hive/hive)
 	if(H in hive.thralls)
 		return "(Раб Тенеморфа)"
@@ -97,7 +96,6 @@
 		return "(Младший Тенеморф)"
 
 	return "(Тенеморф)"
-
 
 /datum/action/cooldown/shadowling/commune/proc/shadowling_commune_bold_name(mob/living/carbon/human/H, datum/team/shadow_hive/hive)
 	if(!(H in hive.lings))

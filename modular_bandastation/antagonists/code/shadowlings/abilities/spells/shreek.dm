@@ -1,15 +1,24 @@
+// MARK: Effects
+/obj/effect/temp_visual/circle_wave/shadow_shreek_wave
+	color = "#9fd7ff"
+	max_alpha = 220
+	duration = 0.5 SECONDS
+	amount_to_scale = 5
+
+// MARK: Ability
 /datum/action/cooldown/shadowling/shreek
 	name = "Крик"
-	desc = "Ударная волна тьмы вокруг: рядом швыряет и оглушает, до 5 тайлов дезориентирует и трясёт. Бьёт стёкла и лампы."
+	desc = "Ударная волна тьмы вокруг: рядом швыряет и оглушает, до 5 тайлов дезориентирует. Бьёт стёкла и лампы."
 	button_icon_state = "shadow_screech"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 30 SECONDS
-	var/knock_radius = 2
-	var/disorient_radius = 10
-	var/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/abilities/shreek.ogg'
+	// Shadowling related
 	min_req = 4
 	max_req = 20
 	required_thralls = 40
+	var/knock_radius = 2
+	var/disorient_radius = 10
+	var/static/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/abilities/shreek.ogg'
 
 /datum/action/cooldown/shadowling/shreek/DoEffect(mob/living/carbon/human/H, atom/_)
 	playsound(get_turf(H), sfx_activate, 70, TRUE)
@@ -50,12 +59,6 @@
 
 	break_wall_lights_with_falloff(H)
 	return TRUE
-
-/obj/effect/temp_visual/circle_wave/shadow_shreek_wave
-	color = "#9fd7ff"
-	max_alpha = 220
-	duration = 0.5 SECONDS
-	amount_to_scale = 5
 
 /datum/action/cooldown/shadowling/shreek/proc/damage_glass_with_falloff(mob/living/carbon/human/H, obj/structure/W)
 	if(QDELETED(W))

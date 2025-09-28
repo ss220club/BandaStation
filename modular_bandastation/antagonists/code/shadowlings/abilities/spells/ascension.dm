@@ -1,3 +1,4 @@
+// MARK: Effects
 /obj/effect/temp_visual/shadowling/ascend_circle
 	name = "umbral circle"
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
@@ -55,6 +56,7 @@
 	duration = 1.2 SECONDS
 	amount_to_scale = 8
 
+// MARK: Ability
 /datum/action/cooldown/shadowling/ascend
 	name = "Возвышение"
 	desc = "Разрывая оболочку, вы восходите к истинной форме. Требует темноты."
@@ -69,11 +71,10 @@
 	var/steps = 3
 	var/step_time = 10 SECONDS
 
-	var/static/sfx_start = 'sound/effects/splat.ogg'
+	var/static/sfx_tick = 'sound/effects/magic/teleport_diss.ogg'
 	var/static/sfx_end = 'sound/effects/magic/mutate.ogg'
-	var/static/list/sfx_tick = list('sound/items/weapons/slice.ogg', 'sound/items/weapons/slash.ogg', 'sound/items/weapons/slashmiss.ogg')
 
-	/// параметры парения персонажа
+	// Levitation params
 	var/levitate_offset = 4
 	var/levitate_half = 0.5 SECONDS
 	var/levitate_until = 0
@@ -101,7 +102,6 @@
 
 	StartCooldown()
 
-	playsound(start_turf, sfx_start, 60, TRUE)
 	to_chat(H, span_notice("Вы начинаете собирать тьму в себе."))
 
 	var/ritual_total = (steps * step_time) + 1 SECONDS

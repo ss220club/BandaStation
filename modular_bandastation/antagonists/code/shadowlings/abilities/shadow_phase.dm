@@ -3,6 +3,7 @@
 	priority = 30
 	movetypes = GROUND
 
+// MARK: Status effects
 /datum/status_effect/shadow/phase
 	id = "shadow_phase"
 	tick_interval = 0.3 SECONDS
@@ -13,9 +14,8 @@
 
 /datum/status_effect/shadow/phase/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_UNDENSE, src)
-
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
+	ADD_TRAIT(owner, TRAIT_UNDENSE, REF(src))
 
 	return TRUE
 
@@ -25,7 +25,7 @@
 		return
 
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
-	REMOVE_TRAIT(owner, TRAIT_UNDENSE, src)
+	REMOVE_TRAIT(owner, TRAIT_UNDENSE, REF(src))
 
 	var/is_inside = FALSE
 	if(istype(owner.loc, /obj/effect/dummy/phased_mob/shadowling))
@@ -58,6 +58,7 @@
 		owner.Paralyze(1 SECONDS)
 		owner.remove_status_effect(type)
 
+// MARK: Object visual effects
 /obj/effect/dummy/phased_mob/shadowling
 	parent_type = /obj/effect/dummy/phased_mob/shadow
 	name = "shadows"

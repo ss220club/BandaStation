@@ -1,31 +1,17 @@
-/datum/action/cooldown/shadowling/shadow_smoke
-	name = "Теневой дым"
-	desc = "Заполняет область дымом: лечит союзных теней и их слуг, ослепляет и иногда оглушает остальных."
-	button_icon_state = "shadow_smoke"
-	cooldown_time = 60 SECONDS
-	requires_dark_user = FALSE
-	requires_dark_target = FALSE
-	max_range = 0
-	channel_time = 0
-	var/smoke_radius = 4
-	var/smoke_ticks = 6
-	var/heal_amount = 10
-	var/blind_time = 5 SECONDS
-	var/stun_chance = 25
-	var/stun_time = 2 SECONDS
-	min_req = 2
-	max_req = 5
-	required_thralls = 20
+// MARK: Global procedure
+/proc/shadow_spawn_smoke(turf/where, mob/living/holder, r = 4, ticks = 6, heal = 10, blind = 5 SECONDS, schance = 25, stun = 2 SECONDS)
+	if(!istype(where))
+		return
+	var/datum/effect_system/shadow_smoke/S = new
+	S.set_up(r, holder = holder, location = where)
+	S.heal_amount = heal
+	S.blind_time = blind
+	S.stun_chance = schance
+	S.stun_time = stun
+	S.total_ticks = ticks
+	S.start()
 
-/datum/action/cooldown/shadowling/shadow_smoke/DoEffect(mob/living/carbon/human/H, atom/_)
-	var/turf/T = get_turf(H)
-	if(!T)
-		return FALSE
-	playsound(T, 'sound/effects/smoke.ogg', 50, TRUE, -3)
-	shadow_spawn_smoke(T, H, smoke_radius, smoke_ticks, heal_amount, blind_time, stun_chance, stun_time)
-	return TRUE
-
-
+// MARK: Effects
 /obj/effect/particle_effect/fluid/smoke/shadow
 	name = "shadow smoke"
 	opacity = FALSE
@@ -107,14 +93,31 @@
 				visited[N] = dist + 1
 				queue += N
 
-/proc/shadow_spawn_smoke(turf/where, mob/living/holder, r = 4, ticks = 6, heal = 10, blind = 5 SECONDS, schance = 25, stun = 2 SECONDS)
-	if(!istype(where))
-		return
-	var/datum/effect_system/shadow_smoke/S = new
-	S.set_up(r, holder = holder, location = where)
-	S.heal_amount = heal
-	S.blind_time = blind
-	S.stun_chance = schance
-	S.stun_time = stun
-	S.total_ticks = ticks
-	S.start()
+// MARK: Ability
+/datum/action/cooldown/shadowling/shadow_smoke
+	name = "Теневой дым"
+	desc = "Заполняет область дымом: лечит союзных теней и их слуг, ослепляет и иногда оглушает остальных."
+	button_icon_state = "shadow_smoke"
+	cooldown_time = 60 SECONDS
+	// Shadowling related
+	requires_dark_user = FALSE
+	requires_dark_target = FALSE
+	max_range = 0
+	channel_time = 0
+	min_req = 2
+	max_req = 5
+	required_thralls = 20
+	var/smoke_radius = 4
+	var/smoke_ticks = 6
+	var/heal_amount = 10
+	var/blind_time = 5 SECONDS
+	var/stun_chance = 25
+	var/stun_time = 2 SECONDS
+
+/datum/action/cooldown/shadowling/shadow_smoke/DoEffect(mob/living/carbon/human/H, atom/_)
+	var/turf/T = get_turf(H)
+	if(!T)
+		return FALSE
+	playsound(T, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+	shadow_spawn_smoke(T, H, smoke_radius, smoke_ticks, heal_amount, blind_time, stun_chance, stun_time)
+	return TRUE
