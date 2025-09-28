@@ -3,6 +3,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	can_randomize = FALSE
+	var/list/pending_body_modifications
 
 /datum/preference/body_modifications/is_valid(value)
 	if(!islist(value))
@@ -16,12 +17,12 @@
 	return TRUE
 
 /datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, value)
-	if(!istype(target))
+	if (!istype(target))
 		return
 
-	if(target.client?.prefs)
-		apply_from_prefs(target, target.client.prefs)
-		return
+	if (!pending_body_modifications)
+		pending_body_modifications = list()
+	pending_body_modifications[REF(target)] = value
 
 	RegisterSignal(target, COMSIG_HUMAN_PREFS_APPLIED, PROC_REF(on_prefs_applied_after_core))
 
@@ -29,19 +30,16 @@
 	SIGNAL_HANDLER
 	UnregisterSignal(target, COMSIG_HUMAN_PREFS_APPLIED)
 
-	var/ck = target?.mind?.key || target?.ckey
-	var/datum/preferences/prefs = ck ? GLOB.preferences_datums?[ck] : null
-	if(!prefs)
+	if (!pending_body_modifications)
 		return
+	var/reference = REF(target)
+	var/list/body_mods = pending_body_modifications[reference]
+	pending_body_modifications -= reference
 
-	apply_from_prefs(target, prefs)
+	apply_from_prefs(target, body_mods)
 
-/datum/preference/body_modifications/proc/apply_from_prefs(mob/living/carbon/human/target, datum/preferences/prefs)
-	if(!istype(target) || !prefs)
-		return
-
-	var/list/body_mods = prefs.read_preference(type)
-	if(!islist(body_mods) || !length(body_mods))
+/datum/preference/body_modifications/proc/apply_from_prefs(mob/living/carbon/human/target, list/body_mods)
+	if(!istype(target) || !body_mods)
 		return
 
 	var/list/amputations = list()

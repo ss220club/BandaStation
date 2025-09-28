@@ -121,7 +121,16 @@
 
 	body_modifications -= body_modification_key
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications)
-	user.update_body()
+
+	var/atom/movable/screen/map_view/char_preview/preview = preferences.character_preview_view
+	if (!preview)
+		preview = preferences.create_character_preview_view(user)
+	else
+		preview.create_body()
+
+	preferences.apply_prefs_to(preview.body, TRUE)
+	preview.appearance = preferences.render_new_preview_appearance(preview.body, preview.show_job_clothes)
+
 	return TRUE
 
 /datum/preference_middleware/body_modifications/proc/set_body_modification_manufacturer(list/params, mob/user)
