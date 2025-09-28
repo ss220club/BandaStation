@@ -1,4 +1,0 @@
-author: "Gaxeer"
-delete-after: True
-changes:
-  - bugfix: "Ограничения по часам на ролях, должны отображаться корректно."
