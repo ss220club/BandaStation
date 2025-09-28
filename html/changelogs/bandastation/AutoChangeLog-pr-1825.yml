@@ -1,0 +1,4 @@
+author: "Ingakem"
+delete-after: True
+changes:
+  - bugfix: "Исправлены спрайты кувалд в руках и на спине."
