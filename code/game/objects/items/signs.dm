@@ -14,7 +14,7 @@
 	COOLDOWN_DECLARE(picket_sign_cooldown)
 
 /obj/item/picket_sign/cyborg
-	name = "металлический нано-плакат"
+	name = "metallic nano-sign"
 	desc = "Высокотехнологичный плакат используемый кремниевыми формами жизни с возможностью в любой момент изменить надпись. Да, думаю получить таким по голове <i>тоже</i> будет больновато."
 	force = 13
 	resistance_flags = NONE

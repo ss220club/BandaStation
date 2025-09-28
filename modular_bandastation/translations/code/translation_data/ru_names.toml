@@ -27390,6 +27390,14 @@ accusative = "плакат"
 instrumental = "плакатом"
 prepositional = "плакате"
 
+["metallic nano-sign"]
+nominative = "металлический наноплакат"
+genitive = "металлического наноплаката"
+dative = "металлическому наноплакату"
+accusative = "металлический наноплакат"
+instrumental = "металлическим наноплакатом"
+prepositional = "металлическом наноплакате"
+
 ["survival box"]
 nominative = "аварийный спаскомплект"
 genitive = "аварийного спаскомплекта"
