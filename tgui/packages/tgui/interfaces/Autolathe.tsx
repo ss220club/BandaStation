@@ -16,8 +16,7 @@ import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import { DesignBrowser } from './Fabrication/DesignBrowser';
 import { MaterialCostSequence } from './Fabrication/MaterialCostSequence';
-import type { Design, MaterialMap } from './Fabrication/Types';
-import type { Material } from './Fabrication/Types';
+import type { Design, Material, MaterialMap } from './Fabrication/Types';
 
 type AutolatheDesign = Design & {
   customMaterials: BooleanLike;
@@ -95,7 +94,7 @@ export const Autolathe = (props) => {
                             >
                               <div style={{ transform: 'scaleX(-1)' }}>
                                 {material.amount / SHEET_MATERIAL_AMOUNT +
-                                  ' лисов'}
+                                  ' листов'}
                               </div>
                             </ProgressBar>
                           </LabeledList.Item>
