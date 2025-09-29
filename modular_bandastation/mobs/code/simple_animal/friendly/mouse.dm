@@ -1,4 +1,5 @@
 /mob/living/basic/mouse
+	attack_sound = 'modular_bandastation/mobs/sound/rat_squeak.ogg'
 	death_sound = 'modular_bandastation/mobs/sound/rat_death.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/rat_wound.ogg')
 	blood_volume = BLOOD_VOLUME_SURVIVE

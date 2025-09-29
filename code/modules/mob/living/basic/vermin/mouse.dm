@@ -365,6 +365,7 @@
 	body_color = dead_critter.body_color
 	critter_type = dead_critter.type
 	name = dead_critter.name
+	icon = dead_critter.icon // SS220 EDIT - rats and hamsters
 	icon_state = dead_critter.icon_dead
 
 /obj/item/food/deadmouse/examine(mob/user)
