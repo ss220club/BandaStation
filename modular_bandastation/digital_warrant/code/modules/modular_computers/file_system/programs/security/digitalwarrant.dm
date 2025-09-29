@@ -32,6 +32,7 @@
 	return FALSE
 
 /datum/computer_file/program/digitalwarrant/proc/serialize_warrant(datum/digital_warrant/W)
+	var/is_new = !GLOB.all_warrants.Find(W)
 	return list(
 		"id" = REF(W),
 		"namewarrant" = W.namewarrant,
@@ -41,17 +42,17 @@
 		"idauth" = W.idauth,
 		"arrestsearch" = W.arrestsearch,
 		"subject_icon" = W.subject_icon_b64,
+		"is_new" = is_new,
 	)
+
+#define DIGITAL_WARRANT_ICON_CACHE_COOLDOWN 50
 
 // Attempts to populate the subject icon cache for the active warrant (lazy generation)
 /datum/computer_file/program/digitalwarrant/proc/ensure_subject_icon()
-	if(!active_warrant)
+	if(!active_warrant || active_warrant.subject_icon_b64)
 		return
 
-	if(active_warrant.subject_icon_b64)
-		return // Already cached
-
-	if(!isnull(last_icon_attempt) && world.time < last_icon_attempt + 50)
+	if(last_icon_attempt && world.time < last_icon_attempt + DIGITAL_WARRANT_ICON_CACHE_COOLDOWN)
 		return
 	last_icon_attempt = world.time
 
@@ -63,35 +64,23 @@
 	if(!matched_record)
 		return
 
-	var/obj/item/photo/front = matched_record.get_front_photo()
-	if(!front || !front.picture?.picture_image)
-		return
-	var/icon/record_icon = front.picture.picture_image
+	var/icon/record_icon = matched_record?.get_front_photo()?.picture?.picture_image
 	if(!record_icon)
 		return
 
-	var/icon/processed = process_subject_icon(record_icon)
-	if(!processed)
-		processed = record_icon
+	var/icon/processed = process_subject_icon(record_icon) || record_icon
 	active_warrant.subject_icon_b64 = icon2base64(processed)
 
 
-#define DIGITAL_WARRANT_ICON_TARGET_SIZE 96
 #define DIGITAL_WARRANT_ICON_HEAD_HEIGHT 16
 /datum/computer_file/program/digitalwarrant/proc/process_subject_icon(icon/I)
 	if(!I)
 		return null
 	var/icon/W = new(I)
 
-	var/height = 32
-	var/width = 32
+	var/start_y = max(1, W.Height() - DIGITAL_WARRANT_ICON_HEAD_HEIGHT + 1)
+	W.Crop(1, start_y, W.Width(), W.Height())
 
-	if(DIGITAL_WARRANT_ICON_HEAD_HEIGHT < height)
-		var/start_y = max(1, height - DIGITAL_WARRANT_ICON_HEAD_HEIGHT + 1)
-
-		W.Crop(1, start_y, width, height)
-
-	W.Scale(DIGITAL_WARRANT_ICON_TARGET_SIZE, DIGITAL_WARRANT_ICON_TARGET_SIZE)
 	return W
 
 /datum/computer_file/program/digitalwarrant/ui_data(mob/user)
@@ -211,3 +200,6 @@
 		if(trim_job && (trim_job == J || trim_job.type == J.type || trim_job.title == J.title))
 			return job_trim.access.Copy()
 	return list()
+
+#undef DIGITAL_WARRANT_ICON_CACHE_COOLDOWN
+#undef DIGITAL_WARRANT_ICON_HEAD_HEIGHT

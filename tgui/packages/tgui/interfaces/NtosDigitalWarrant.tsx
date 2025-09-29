@@ -12,6 +12,7 @@ type Warrant = {
   idauth: string;
   arrestsearch: string;
   subject_icon?: string | null;
+  is_new?: number | boolean;
 };
 
 type CrewMember = {
@@ -25,7 +26,7 @@ type Data = {
   crew_manifest?: CrewMember[];
 };
 
-export const NtosDigitalWarrant = () => {
+export function NtosDigitalWarrant() {
   const { act, data } = useBackend<Data>();
   const { active, crew_manifest = [] } = data;
   const warrants = data.warrants ?? [];
@@ -57,7 +58,7 @@ export const NtosDigitalWarrant = () => {
       </NtosWindow.Content>
     </NtosWindow>
   );
-};
+}
 
 type WarrantEditorProps = {
   warrant: Warrant;
@@ -65,12 +66,10 @@ type WarrantEditorProps = {
   onShowCrewManifest: () => void;
 };
 
-const WarrantEditor = (props: WarrantEditorProps) => {
-  const { warrant, act, onShowCrewManifest } = props;
+function WarrantEditor({ warrant, act, onShowCrewManifest }: WarrantEditorProps) {
   const [chargesDraft, setChargesDraft] = useState(warrant.charges || '');
   const maxChargesLen = 1000;
 
-  // Синхронизируем черновик при смене активного ордера или его текста обвинений
   useEffect(() => {
     setChargesDraft(warrant.charges || '');
   }, [warrant.id, warrant.charges]);
@@ -92,7 +91,7 @@ const WarrantEditor = (props: WarrantEditorProps) => {
 
   const alreadySigned = !!(warrant.auth && warrant.auth !== 'Unauthorized');
   const sameIdSigned = !!(warrant.idauth && warrant.idauth !== 'Unauthorized');
-  const isNew = !warrant.id || warrant.id.length === 0;
+  const isNew = warrant.is_new !== undefined ? Boolean(warrant.is_new) : !warrant.id || warrant.id.length === 0;
 
   const subjectIcon = warrant.subject_icon ? (
     <img
@@ -160,7 +159,7 @@ const WarrantEditor = (props: WarrantEditorProps) => {
       </Stack>
     </Section>
   );
-};
+}
 
 type CrewManifestProps = {
   crew: CrewMember[];
@@ -168,8 +167,7 @@ type CrewManifestProps = {
   onClose: () => void;
 };
 
-const CrewManifest = (props: CrewManifestProps) => {
-  const { crew, onSelect, onClose } = props;
+function CrewManifest({ crew, onSelect, onClose }: CrewManifestProps) {
   const [search, setSearch] = useState('');
 
   const filteredCrew = crew.filter(
@@ -205,15 +203,14 @@ const CrewManifest = (props: CrewManifestProps) => {
       )}
     </Section>
   );
-};
+}
 
 type WarrantListProps = {
   warrants: Warrant[];
   act: (action: string, params?: any) => void;
 };
 
-const WarrantList = (props: WarrantListProps) => {
-  const { warrants, act } = props;
+function WarrantList({ warrants, act }: WarrantListProps) {
 
   return (
     <Section
@@ -242,4 +239,4 @@ const WarrantList = (props: WarrantListProps) => {
       )}
     </Section>
   );
-};
+}

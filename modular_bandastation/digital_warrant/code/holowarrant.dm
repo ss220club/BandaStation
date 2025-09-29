@@ -1,4 +1,4 @@
-﻿/obj/item/device/holowarrant
+/obj/item/device/holowarrant
 	name = "warrant projector"
 	desc = "The practical paperwork replacement for the officer on the go."
 	icon = 'modular_bandastation/digital_warrant/icons/holowarrant.dmi'
@@ -6,6 +6,7 @@
 	inhand_icon_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
+	worn_icon_state = "electronic"
 	throwforce = 5
 	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 4
@@ -18,7 +19,7 @@
 /obj/item/device/holowarrant/examine(mob/user)
 	. = ..()
 	if(active)
-		. += "It's a holographic warrant for '[active.namewarrant]'."
+		. += "It's a holographic warrant for [active.namewarrant]."
 	if(in_range(src, user))
 		show_content(user)
 	else
@@ -47,7 +48,7 @@
 	if(QDELETED(src) || !user || !user.can_perform_action(src) || !in_range(src, user))
 		update_appearance()
 		return
-	active = warrants[temp]
+	active = temp
 	update_appearance()
 
 /obj/item/device/holowarrant/update_appearance()
@@ -83,12 +84,10 @@
 		"type" = W.arrestsearch,
 		"logo" = "ntlogo.png",
 	)
-	var/charges_text = W.charges ? trimtext(W.charges) : ""
-	if(!length(charges_text))
-		charges_text = "Не указано"
-	var/auth_text = W.auth ? trimtext(W.auth) : ""
-	if(!length(auth_text))
-		auth_text = "Не указано"
+
+	var/charges_text = trimtext(W.charges) || "Не указано"
+	var/auth_text = trimtext(W.auth) || "Не указано"
+
 	switch(W.arrestsearch)
 		if("arrest")
 			view["title"] = "Ордер на арест"
