@@ -36,6 +36,7 @@
 	var/const/baton_stamina = 35
 	var/const/knock_delay = 0.6 SECONDS
 	var/const/knock_time = 1 SECONDS
+	var/const/dizzy_time = 2
 
 /datum/action/cooldown/shadowling/glare/CollectTargets(mob/living/carbon/human/H, atom/explicit)
 	var/list/targets = list()
@@ -134,7 +135,7 @@
 /datum/action/cooldown/shadowling/glare/proc/apply_shake(mob/living/L, strength, dur)
 	if(!istype(L))
 		return
-	L.adjust_dizzy(2)
+	L.adjust_dizzy(dur)
 
 /datum/action/cooldown/shadowling/glare/proc/collect_cone_turfs(mob/living/carbon/human/H, range_tiles, fov_deg)
 	var/list/turfs_in_cone = list()

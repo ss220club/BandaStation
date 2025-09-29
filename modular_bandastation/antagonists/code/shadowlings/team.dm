@@ -1,9 +1,3 @@
-GLOBAL_VAR_INIT(shadowling_hive, null)
-
-#define SHADOWLING_ROLE_MAIN "shadowling_main"
-#define SHADOWLING_ROLE_THRALL "shadowling_thrall"
-#define SHADOWLING_ROLE_LESSER "shadowling_lesser"
-
 /datum/team/shadow_hive
 	name = "\improper Shadow Hive"
 	var/shadowling_vote

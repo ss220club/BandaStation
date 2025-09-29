@@ -32,10 +32,10 @@
 	return TRUE
 
 /datum/dynamic_ruleset/roundstart/shadowling/proc/target_count_for(population_size)
-	if(population_size < 30)
+	if(population_size < min_pop)
 		return 0
-	var/excess = population_size - 30
-	return 3 + floor(excess / 15)
+	var/excess = population_size - min_pop
+	return 3 + floor(excess / decimator)
 
 /datum/dynamic_ruleset/roundstart/shadowling/execute()
 	var/list/alive_players = get_active_player_list(alive_check = TRUE, afk_check = TRUE)

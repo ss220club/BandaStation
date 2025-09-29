@@ -1,3 +1,11 @@
+#define COLD_WAVE_STAMINA_DAMAGE 30
+#define COLD_WAVE_SLOW_DURATION (10 SECONDS)
+#define COLD_WAVE_TEMP_DROP -260
+#define COLD_WAVE_TEMP_DROP_VULP -400
+#define COLD_WAVE_FROSTOIL_AMOUNT 12
+#define COLD_WAVE_FROSTOIL_AMOUNT_VULP 20
+#define COLD_WAVE_BLIND_DURATION (10 SECONDS)
+
 // MARK: Effects
 /obj/effect/temp_visual/dir_setting/shadow_plume
 	icon = 'icons/effects/160x160.dmi'
@@ -79,17 +87,17 @@
 			continue
 
 		var/is_vulp = istype(T?.dna?.species, /datum/species/vulpkanin)
-		var/temp_drop = is_vulp ? -400 : -260
-		var/frostoil_amt = is_vulp ? 20 : 12
+		var/temp_drop = is_vulp ? COLD_WAVE_TEMP_DROP_VULP : COLD_WAVE_TEMP_DROP
+		var/frostoil_amt = is_vulp ? COLD_WAVE_FROSTOIL_AMOUNT_VULP : COLD_WAVE_FROSTOIL_AMOUNT
 
-		T.adjustStaminaLoss(30)
-		apply_slow(T, 10 SECONDS)
+		T.adjustStaminaLoss(COLD_WAVE_STAMINA_DAMAGE)
+		apply_slow(T, COLD_WAVE_SLOW_DURATION)
 		T.adjust_bodytemperature(temp_drop)
 
 		if(T.reagents)
 			T.reagents.add_reagent(reagent_type, frostoil_amt)
 
-		T.apply_status_effect(/datum/status_effect/cloudstruck/shadow, 10 SECONDS)
+		T.apply_status_effect(/datum/status_effect/cloudstruck/shadow, COLD_WAVE_SLOW_DURATION)
 		hit = TRUE
 
 	return hit

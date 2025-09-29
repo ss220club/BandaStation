@@ -78,10 +78,6 @@
 			continue
 		to_chat(T, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
 
-	for(var/mob/dead/ghost in GLOB.dead_mob_list)
-		var/link = FOLLOW_LINK(ghost, sender)
-		to_chat(ghost, "[link] [render]", type = MESSAGE_TYPE_RADIO)
-
 	return TRUE
 
 /datum/action/cooldown/shadowling/commune/proc/shadowling_commune_role_label(mob/living/carbon/human/H, datum/team/shadow_hive/hive)

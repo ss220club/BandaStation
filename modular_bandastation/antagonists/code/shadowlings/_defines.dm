@@ -6,6 +6,12 @@
 #define SHADOWLING_LIGHT_THRESHOLD 0.35
 #define SHADOWLING_DIM_THRESHOLD   0.1
 
+GLOBAL_VAR_INIT(shadowling_hive, null)
+
+#define SHADOWLING_ROLE_MAIN "shadowling_main"
+#define SHADOWLING_ROLE_THRALL "shadowling_thrall"
+#define SHADOWLING_ROLE_LESSER "shadowling_lesser"
+
 // Light DAMAGE modifiers
 #define SHADOWLING_BRIGHT_BURN_PER_LIMB 2
 #define SHADOWLING_BRIGHT_BRUTE_PER_LIMB 2
@@ -16,6 +22,8 @@
 GLOBAL_VAR_INIT(is_shadowling_roundender_started, FALSE)
 
 #define SHADOWLING_RISEN_MUSIC 'modular_bandastation/antagonists/sound/shadowlings/shadowling_ascend.ogg'
+
+#define SHADOWLING_ASCENDED_CD_MULT 0.5
 
 #define isshadowling(A) (is_species(A, /datum/species/shadow/shadowling))
 #define isshadowling_ascended(A) (is_species(A, /datum/species/shadow/shadowling/ascended))

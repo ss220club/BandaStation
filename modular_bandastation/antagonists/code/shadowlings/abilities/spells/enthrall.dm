@@ -1,3 +1,6 @@
+#define ENTHRALL_OXY_DRAIN 30
+#define ENTHRALL_OXY_RESTORE -100
+
 // MARK: Ability
 /datum/action/cooldown/shadowling/enthrall
 	name = "Порабощение"
@@ -90,9 +93,9 @@
 			to_chat(H, span_warning("Связь прервана."))
 			return FALSE
 
-		T.adjustOxyLoss(30)
+		T.adjustOxyLoss(ENTHRALL_OXY_DRAIN)
 
-	T.adjustOxyLoss(-100)
+	T.adjustOxyLoss(ENTHRALL_OXY_RESTORE)
 
 	var/obj/item/organ/brain/shadow/tumor_thrall/O = new
 	if(!O.Insert(T))

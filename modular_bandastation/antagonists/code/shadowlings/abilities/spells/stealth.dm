@@ -17,7 +17,6 @@
 		A.apply_button_overlay()
 
 	owner.alpha = 80
-	owner.invisibility = INVISIBILITY_OBSERVER // или подходящий для билда уровень
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(_break_on_move))
 	RegisterSignal(owner, COMSIG_ATOM_ATTACKBY, PROC_REF(_break_on_damage))
 	RegisterSignal(owner, COMSIG_ATOM_ATTACKBY_SECONDARY, PROC_REF(_break_on_damage))

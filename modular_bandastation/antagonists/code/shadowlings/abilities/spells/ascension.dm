@@ -108,7 +108,7 @@
 
 	_begin_levitate(H, ritual_total)
 
-	var/obj/effect/temp_visual/shadowling/ascend_circle/circle = new(get_turf(H))
+	var/obj/effect/temp_visual/shadowling/ascend_circle/circle = new(start_turf)
 	circle.start_pulse()
 
 	for(var/i = 1, i <= steps, i++)

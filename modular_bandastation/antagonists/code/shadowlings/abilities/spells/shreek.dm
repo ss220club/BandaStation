@@ -1,3 +1,11 @@
+#define SHREEK_EAR_DAMAGE_CLOSE 15
+#define SHREEK_EAR_DAMAGE_FAR 8
+#define SHREEK_GLASS_DAMAGE_BASE 110
+#define SHREEK_GLASS_DAMAGE_FALLOFF 15
+#define SHREEK_LIGHT_BREAK_CHANCE_BASE 100
+#define SHREEK_LIGHT_BREAK_CHANCE_FALLOFF 15
+#define SHREEK_LIGHT_BREAK_CHANCE_MIN 20
+
 // MARK: Effects
 /obj/effect/temp_visual/circle_wave/shadow_shreek_wave
 	color = "#9fd7ff"
@@ -39,12 +47,12 @@
 				continue
 		var/dist = get_dist(H, L)
 		if(dist <= knock_radius)
-			L.adjustOrganLoss(ORGAN_SLOT_EARS, 15)
+			L.adjustOrganLoss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_CLOSE)
 			L.Knockdown(0.6 SECONDS)
 			L.adjust_dizzy(4)
 			knockback_away_from(H, L, 3)
 		else
-			L.adjustOrganLoss(ORGAN_SLOT_EARS, 8)
+			L.adjustOrganLoss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_FAR)
 			L.adjust_confusion(6 SECONDS)
 			L.adjust_staggered(6 SECONDS)
 			L.adjust_dizzy(3)
@@ -66,7 +74,7 @@
 	if(QDELETED(W))
 		return
 	var/d = clamp(get_dist(H, W), 1, disorient_radius)
-	var/damage = max(10, 110 - 15 * d)
+	var/damage = max(10, SHREEK_GLASS_DAMAGE_BASE - SHREEK_GLASS_DAMAGE_FALLOFF * d)
 	W.take_damage(damage, damage_type = BRUTE, damage_flag = MELEE, sound_effect = TRUE)
 
 /datum/action/cooldown/shadowling/shreek/proc/knockback_away_from(mob/living/source, mob/living/target, range)
@@ -100,6 +108,6 @@
 /datum/action/cooldown/shadowling/shreek/proc/break_wall_lights_with_falloff(mob/living/carbon/human/H)
 	for(var/obj/machinery/light/L in range(disorient_radius, H))
 		var/d = clamp(get_dist(H, L), 1, disorient_radius)
-		var/chance = clamp(100 - (15 * d), 20, 100)
+		var/chance = clamp(SHREEK_LIGHT_BREAK_CHANCE_BASE - (SHREEK_LIGHT_BREAK_CHANCE_FALLOFF * d), SHREEK_LIGHT_BREAK_CHANCE_MIN, SHREEK_LIGHT_BREAK_CHANCE_BASE)
 		if(prob(chance))
 			L.break_light_tube()

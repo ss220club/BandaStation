@@ -11,6 +11,7 @@
 	max_range = 0
 	channel_time = 0
 	var/target_grab_level = GRAB_NECK
+	var/grab_range = 2
 
 /datum/action/cooldown/shadowling/shadow_grab/can_use(mob/living/carbon/human/H)
 	if(!..())
@@ -26,7 +27,7 @@
 	if(!istype(H))
 		return FALSE
 
-	var/mob/living/carbon/human/T = find_nearest_target(2)
+	var/mob/living/carbon/human/T = find_nearest_target(grab_range)
 	if(!T)
 		owner.balloon_alert(owner, "нет доступных целей")
 		return FALSE

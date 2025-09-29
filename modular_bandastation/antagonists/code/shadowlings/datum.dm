@@ -95,7 +95,6 @@
 	parent_type = /datum/antagonist/shadowling
 	name = "Shadow Thrall"
 	antagpanel_category = "Shadowlings"
-	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
 	antag_hud_name = "shadowling_thrall"
 
 	is_thrall = TRUE
