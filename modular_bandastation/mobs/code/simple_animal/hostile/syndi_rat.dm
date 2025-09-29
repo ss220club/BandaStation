@@ -92,7 +92,8 @@
 // 		if(prob(1))
 // 			on_standing_up()
 // 		else if(prob(5))
-// 			custom_emote(2, "snuffles")
+// 			emote("snuffles")
+
 // 	else if(prob(0.5))
 // 		on_lying_down()
 

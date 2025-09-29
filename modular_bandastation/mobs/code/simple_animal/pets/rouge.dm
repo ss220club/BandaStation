@@ -49,6 +49,6 @@
 		return
 	if(change > 0)
 		new /obj/effect/temp_visual/heart(loc)
-		custom_emote(1, "радостно шипит!")
+		manual_emote("радостно шипит!")
 	else
-		custom_emote(1, "злобно шипит!")
+		manual_emote("злобно шипит!")

@@ -96,7 +96,7 @@
 	name = replacetext(name, "REAL_NAME", M.real_name)
 	desc = replacetext(desc, "NAME", name)
 
-/datum/snake_fashion/proc/apply(mob/living/basic/hostile/retaliate/poison/snake/rouge/D)
+/datum/snake_fashion/proc/apply(mob/living/basic/snake/rouge/D)
 	if(name)
 		D.name = name
 	if(desc)
