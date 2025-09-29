@@ -35,3 +35,9 @@
 		/datum/reagent/consumable/coffee = 2, // Крысы пьют много кофе и всякую гадость
 		/datum/reagent/toxin = 1
 	)
+
+/obj/effect/decal/remains/mouse
+	name = "останки"
+	desc = "Это когда-то было грызуном и оно даже бегало..."
+	icon = 'modular_bandastation/mobs/icons/items.dmi'
+	icon_state = "mouse_skeleton"
