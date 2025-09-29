@@ -35,5 +35,5 @@
 	item_path = /obj/item/toy/plush/hampter/security
 
 /datum/loadout_item/pocket_items/plush/shark
-	name = "Blahaj"
+	name = "Плюшевая игрушка (Акула)"
 	item_path = /obj/item/toy/plush/shark
