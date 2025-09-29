@@ -2,6 +2,7 @@
 /obj/item
 	name = "item"
 	icon = 'icons/obj/anomaly.dmi'
+	abstract_type = /obj/item
 	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 	burning_particles = /particles/smoke/burning/small
 	pass_flags_self = PASSITEM
@@ -456,19 +457,6 @@
 		.["изолирующий"] = "Предмет изготовлен из прочного изолятора и блокирует проходящее через него электричество!"
 	else if (siemens_coefficient <= 0.5)
 		.["частично изолирующий"] = "Предмет изготовлен из плохого изолятора, который гасит (но не полностью блокирует) проходящее через него электричество."
-
-	if(resistance_flags & INDESTRUCTIBLE)
-		.["неразрушаемый"] = "Предмет очень прочный! Он выдержит всё, что с ним может случиться!"
-		return
-
-	if(resistance_flags & LAVA_PROOF)
-		.["лавастойкий"] = "Предмет сделан из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
-	if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-		.["кислотостойкий"] = "Предмет выглядит довольно прочным! Возможно, он выдержит воздействие кислоты!"
-	if(resistance_flags & FREEZE_PROOF)
-		.["морозостойкий"] = "Предмет изготовлен из моростойких материалов."
-	if(resistance_flags & FIRE_PROOF)
-		.["огнестойкий"] = "Предмет изготовлен из огнестойких материалов."
 
 /obj/item/examine_descriptor(mob/user)
 	return "предмет"

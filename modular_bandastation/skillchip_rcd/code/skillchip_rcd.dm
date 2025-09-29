@@ -23,6 +23,12 @@
 /obj/item/construction/rcd/exosuit/check_engineer_skillchip(mob/user, alert = TRUE)
 	return TRUE
 
+/obj/item/construction/rcd/combat/admin/check_engineer_skillchip(mob/user, alert = TRUE)
+	return TRUE
+
+/obj/item/construction/rcd/arcd/check_engineer_skillchip(mob/user, alert = TRUE)
+	return TRUE
+
 /obj/item/construction/rcd/examine(mob/user)
 	. = ..()
 	. += "Для полноценного использования требуется скиллчип инженера."

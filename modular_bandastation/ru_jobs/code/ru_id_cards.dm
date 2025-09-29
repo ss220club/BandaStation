@@ -129,7 +129,7 @@
 
 /datum/id_trim/job/explorer
 	assignment = JOB_EXPLORER_RU
-  
+
 // Event jobs
 /datum/id_trim/job/bridge_assistant
 	assignment = JOB_BRIDGE_ASSISTANT_RU

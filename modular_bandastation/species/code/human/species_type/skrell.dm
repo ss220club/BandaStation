@@ -78,7 +78,7 @@
 		"Скреллианская Империя – надгосударственный союз скреллианских городов-государств, \
 			княжеств и небольших королевств. Империя всю свою историю является децентрализованным образованием \
 			со сложной феодальной иерархической структурой, \
-		 	объединяющей несколько тысяч территориально-государственных образований, \
+			объединяющей несколько тысяч территориально-государственных образований, \
 			но, несмотря на это, Империи удается проводить более-менее схожую политику во всех своих уголках. \
 			Официальной политической идеологией Империи и опорой её общественного строя является Вечный мир.",
 
@@ -128,90 +128,3 @@
 			но в истории были и случаи открытых карательных экспедиций, собранных с ОСС по всей Империи для \
 			недопущения образования центров объединения и, как следствие, общественного прогресса."
 	)
-
-/datum/species/skrell/get_scream_sound(mob/living/carbon/human/human)
-	if(human.physique == MALE)
-		return pick(
-			'sound/mobs/humanoids/human/scream/malescream_1.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_2.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_3.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_4.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_5.ogg',
-			'sound/mobs/humanoids/human/scream/malescream_6.ogg',
-		)
-
-	return pick(
-		'sound/mobs/humanoids/human/scream/femalescream_1.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_2.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_3.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_4.ogg',
-		'sound/mobs/humanoids/human/scream/femalescream_5.ogg',
-	)
-
-/datum/species/skrell/get_cry_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
-			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/cry/male_cry1.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry2.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry3.ogg',
-	)
-
-/datum/species/skrell/get_sigh_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return SFX_FEMALE_SIGH
-	return SFX_MALE_SIGH
-
-/datum/species/skrell/get_sniff_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return 'sound/mobs/humanoids/human/sniff/female_sniff.ogg'
-	return 'sound/mobs/humanoids/human/sniff/male_sniff.ogg'
-
-/datum/species/skrell/get_cough_sound(mob/living/carbon/human/tajaran)
-	if(tajaran.physique == FEMALE)
-		return pick(
-			'sound/mobs/humanoids/human/cough/female_cough1.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough2.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough3.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough4.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough5.ogg',
-			'sound/mobs/humanoids/human/cough/female_cough6.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/cough/male_cough1.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough2.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough3.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough4.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough5.ogg',
-		'sound/mobs/humanoids/human/cough/male_cough6.ogg',
-	)
-
-/datum/species/skrell/get_laugh_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'modular_bandastation/emote_panel/audio/skrell/laugh_female_1.ogg',
-			'modular_bandastation/emote_panel/audio/skrell/laugh_female_2.ogg',
-			'modular_bandastation/emote_panel/audio/skrell/laugh_female_3.ogg',
-		)
-
-	return pick(
-		'modular_bandastation/emote_panel/audio/skrell/laugh_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/skrell/laugh_male_2.ogg',
-		'modular_bandastation/emote_panel/audio/skrell/laugh_male_3.ogg',
-	)
-
-/datum/species/skrell/get_sneeze_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return 'sound/mobs/humanoids/human/sneeze/female_sneeze1.ogg'
-	return 'sound/mobs/humanoids/human/sneeze/male_sneeze1.ogg'
-
-/datum/species/skrell/get_snore_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return SFX_SNORE_FEMALE
-	return SFX_SNORE_MALE
-
-/datum/species/skrell/get_hiss_sound(mob/living/carbon/human/human)
-	return 'sound/mobs/humanoids/human/hiss/human_hiss.ogg'

@@ -38,6 +38,7 @@
 	desc = "A generic vending machine."
 	icon = 'icons/obj/machines/vending.dmi'
 	icon_state = "generic"
+	abstract_type = /obj/machinery/vending
 	layer = BELOW_OBJ_LAYER
 	density = TRUE
 	verb_say = "beeps"
@@ -240,8 +241,10 @@
 		AddComponent(/datum/component/payment, 0, SSeconomy.get_dep_account(payment_department), PAYMENT_VENDING)
 	register_context()
 
+	/* BANDASTATION REMOVAL START - Stupid TG Shit
 	if(fish_source_path)
 		AddComponent(/datum/component/fishing_spot, fish_source_path)
+	BANDASTATION REMOVAL END */
 
 /obj/machinery/vending/atom_break(damage_flag)
 	. = ..()

@@ -4,7 +4,7 @@
 #define NO_PAINKILLER_SURGFAIL_PROBABILITY_INCREASE 70
 #define BASIC_SURGERY_SUCCESS_CHANCE 100
 
-/datum/surgery_step/proc/get_failure_probability(mob/living/user, mob/living/target, target_zone, obj/item/tool, var/modded_time)
+/datum/surgery_step/proc/get_failure_probability(mob/living/user, mob/living/target, target_zone, obj/item/tool, modded_time)
 	var/success_prob = implement_type ? implements[implement_type] : BASIC_SURGERY_SUCCESS_CHANCE
 	if(!user.has_nightvision())
 		var/turf/target_turf = get_turf(target)

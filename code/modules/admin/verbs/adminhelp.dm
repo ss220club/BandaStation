@@ -564,7 +564,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	dat += "<h4>Admin Help Ticket #[id]: [LinkedReplyName(ref_src)]</h4>"
 	dat += "<b>State: [ticket_status()]</b>"
 	dat += "[FOURSPACES][TicketHref("Refresh", ref_src)][FOURSPACES][TicketHref("Re-Title", ref_src, "retitle")]"
-	if(state != AHELP_ACTIVE) 
+	if(state != AHELP_ACTIVE)
 		dat += "[FOURSPACES][TicketHref("Reopen", ref_src, "reopen")]"
 	dat += "<br><br>Opened at: [gameTimestamp(wtime = opened_at)] (Approx [DisplayTimeText(world.time - opened_at)] ago)"
 	if(closed_at)
@@ -806,8 +806,18 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 /client/verb/adminhelp()
 	set category = "Admin"
 	set name = "Adminhelp"
+	/* BANDASTATION REMOVAL
 	GLOB.admin_help_ui_handler.ui_interact(mob)
 	to_chat(src, span_boldnotice("Adminhelp failing to open or work? <a href='byond://?src=[REF(src)];tguiless_adminhelp=1'>Click here</a>"))
+	*/
+	// BANDASTATION ADDITION - START
+	if(persistent_client.current_help_ticket)
+		ticket_to_open = persistent_client.current_help_ticket.id
+		GLOB.ticket_manager.ui_interact(mob)
+		return
+
+	GLOB.help_ui_handler.ui_interact(mob)
+	// BANDASTATION ADDITION - END
 
 /client/verb/view_latest_ticket()
 	set category = "Admin"
@@ -846,6 +856,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 /// player_message: If the message should be shown in the player ticket panel, fill this out
 /// log_in_blackbox: Whether or not this message with the blackbox system.
 /// If disabled, this message should be logged with a different proc call
+/* BANDASTATION REMOVAL
 /proc/admin_ticket_log(what, message, player_message, log_in_blackbox = TRUE)
 	var/client/mob_client
 	var/mob/Mob = what
@@ -871,7 +882,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 			if(log_in_blackbox)
 				SSblackbox.LogAhelp(active_admin_help.id, "Interaction", message, what, usr.ckey)
 			return active_admin_help
-
+*/
 //
 // HELPER PROCS
 //

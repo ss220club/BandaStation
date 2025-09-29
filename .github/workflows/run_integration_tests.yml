@@ -26,10 +26,10 @@ jobs:
     # Otherwise, it will output `Run Tests (map; max)`.
     # For example, `Run Tests (runtimestation; 515)`.
     name: Run Tests (${{ inputs.major && format('{0}.{1}; ', inputs.major, inputs.minor) || '' }}${{ inputs.map }}; ${{ inputs.max_required_byond_client }})
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4.3.0 # BANDASTATION EDIT 5 -> 4.3.0
+      - uses: actions/checkout@v5
       - name: Install required packages
         run: |
           sudo dpkg --add-architecture i386
@@ -49,7 +49,7 @@ jobs:
         env:
           MYSQL_CONFIG_FILE: tools/ci/mysql_config.cnf
         run: |
-          sudo service mysql start
+          sudo systemctl start mysql
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} -e 'CREATE DATABASE tg_ci;'
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} tg_ci < SQL/tgstation_schema.sql
           mysql --defaults-extra-file=${{ env.MYSQL_CONFIG_FILE }} -e 'CREATE DATABASE tg_ci_prefixed;'

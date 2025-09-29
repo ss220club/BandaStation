@@ -2,6 +2,7 @@
 	name = "mineral wall"
 	desc = "This shouldn't exist"
 	icon_state = ""
+	abstract_type = /turf/closed/wall/mineral
 	smoothing_flags = SMOOTH_BITMASK
 	canSmoothWith = null
 	rcd_memory = null
@@ -330,7 +331,7 @@
 
 /turf/closed/wall/mineral/plastitanium
 	name = "wall"
-	desc = "A durable wall made of an alloy of plasma and titanium."
+	desc = "Особо прочная стена из сплава плазмы и титана."
 	icon = 'icons/turf/walls/plastitanium_wall.dmi'
 	icon_state = "plastitanium_wall-0"
 	base_icon_state = "plastitanium_wall"

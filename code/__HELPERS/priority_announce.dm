@@ -212,19 +212,14 @@
 				var/mob/living/silicon/ai/active_ai = DEFAULTPICK(active_ais(TRUE, null), null)
 				announcement_tts_seed = active_ai ? active_ai.get_tts_seed() : /datum/tts_seed/silero/glados
 
-			INVOKE_ASYNC(
-				SStts220, \
-				TYPE_PROC_REF(/datum/controller/subsystem/tts220, get_tts), \
-				null, \
-				target, \
-				tts_message, \
-				announcement_tts_seed, \
-				FALSE, \
-				list(/datum/singleton/sound_effect/announcement), \
-				null, \
-				sound_to_play, \
-				null, \
-				CHANNEL_TTS_ANNOUNCEMENT, \
+			SStts220.get_tts(
+				listener = target,
+				message = tts_message,
+				tts_seed = announcement_tts_seed,
+				is_local = FALSE,
+				effect_types = list(/datum/singleton/sound_effect/announcement),
+				preSFX = sound_to_play,
+				channel_override = CHANNEL_TTS_ANNOUNCEMENT
 			)
 			// BANDASTATION EDIT END - TTS
 
