@@ -27396,13 +27396,13 @@ prepositional = "блюспейс артиллерии"
 gender = "female"
 
 ["bluespace artillery control"]
-nominative = "контроль блюспейс артиллерии"
-genitive = "контроля блюспейс артиллерии"
-dative = "контролю блюспейс артиллерии"
-accusative = "контроль блюспейс артиллерии"
-instrumental = "контролем блюспейс артиллерии"
-prepositional = "контроле блюспейс артиллерии"
-gender = "male"
+nominative = "консоль блюспейс артиллерии"
+genitive = "консоли блюспейс артиллерии"
+dative = "консоли блюспейс артиллерии"
+accusative = "консоль блюспейс артиллерии"
+instrumental = "консолью блюспейс артиллерии"
+prepositional = "консоли блюспейс артиллерии"
+gender = "female"
 
 ["Meteor Shield Satellite"]
 nominative = "спутник метеоритного щита"
