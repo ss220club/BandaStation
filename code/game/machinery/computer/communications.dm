@@ -206,6 +206,11 @@
 			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_DELTA)
 				to_chat(user, span_warning("Central Command has placed a lock on the alert level due to a doomsday!"))
 				return
+			// BANDASTATION ADD Start - Sec Levels
+			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_GAMMA) // GAMMA and EPSILON
+				to_chat(user, span_warning("Центральным командованием установлено военное положение. Изменение кода невозможно."))
+				return
+			// BANDASTATION ADD End - Sec Levels
 			if (SSsecurity_level.get_current_level_as_number() == new_sec_level)
 				return
 
