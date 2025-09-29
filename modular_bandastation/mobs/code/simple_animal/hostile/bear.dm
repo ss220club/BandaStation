@@ -5,3 +5,6 @@
 	death_sound = 'modular_bandastation/mobs/sound/bear_death.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/bear_onerawr1.ogg', 'modular_bandastation/mobs/sound/bear_onerawr2.ogg', 'modular_bandastation/mobs/sound/bear_onerawr3.ogg')
 	attack_sound = 'modular_bandastation/mobs/sound/bear_rawr.ogg'
+
+/mob/living/basic/bear/butter
+	icon = 'icons/mob/simple/animal.dmi'
