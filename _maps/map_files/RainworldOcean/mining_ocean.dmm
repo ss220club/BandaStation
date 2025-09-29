@@ -1609,10 +1609,6 @@
 /obj/effect/turf_decal/box,
 /turf/open/floor/iron/smooth,
 /area/mine/mechbay)
-"EK" = (
-/mob/living/simple_animal/hostile/megafauna/serpent,
-/turf/open/water/no_planet_atmos/deep/rainworld,
-/area/rainworld/surface/outdoors)
 "ER" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/mineral/labor_points_checker{
@@ -17454,7 +17450,7 @@ rD
 rD
 rD
 Ui
-EK
+Ui
 Ui
 rD
 rD

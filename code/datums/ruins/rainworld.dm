@@ -3,7 +3,7 @@
 	allow_duplicates = FALSE
 	cost = 5
 	ruin_type = ZTRAIT_OCEAN_RUINS
-	default_area = /area/rainworld/surface/outdoors/unexplored
+	default_area = /area/rainworld/surface/outdoors/unexplored/mining/deep_ocean
 
 /datum/map_template/ruin/rainworld/one
 	name = "Water-Ruin 1"
