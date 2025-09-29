@@ -19,7 +19,7 @@
 	var/min_req = 0
 	var/max_req = 100
 
-/datum/action/cooldown/shadowling/proc/CanUse(mob/living/carbon/human/H)
+/datum/action/cooldown/shadowling/proc/can_use(mob/living/carbon/human/H)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		owner.balloon_alert(owner, "Нарушена связь с роем")
@@ -63,7 +63,7 @@
 		return ..()
 	if(!istype(owner))
 		return
-	if(!CanUse(owner))
+	if(!can_use(owner))
 		enable()
 		return
 	var/list/targets = CollectTargets(owner, target)

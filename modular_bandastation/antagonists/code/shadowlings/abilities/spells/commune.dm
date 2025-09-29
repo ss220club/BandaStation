@@ -58,7 +58,7 @@
 
 	var/name_html = bold_name ? "<b>[html_encode(name_to_show)]</b>" : "[html_encode(name_to_show)]"
 	var/body_html = html_encode(message)
-	var/style = hive.leader == sender ? "shadowradio_leader" :"shadowradio"
+	var/style = hive.leader == sender ? "shadowradio_leader" : "shadowradio"
 
 	var/render = "<span class='[style]'>[role_label] [name_html]: [body_html]</span>"
 

@@ -41,7 +41,7 @@
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
-	if(!CanUse(clicker))
+	if(!can_use(clicker))
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 

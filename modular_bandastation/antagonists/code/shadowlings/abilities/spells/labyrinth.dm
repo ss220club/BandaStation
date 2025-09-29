@@ -29,7 +29,7 @@
 
 /datum/action/cooldown/shadowling/labyrinth/Trigger(mob/clicker, trigger_flags, atom/target)
 	apply_button_overlay()
-	if(!istype(clicker) || !IsAvailable(TRUE) || !CanUse(clicker))
+	if(!istype(clicker) || !IsAvailable(TRUE) || !can_use(clicker))
 		return FALSE
 	if(stored_target && clicker.click_intercept == src)
 		owner.balloon_alert(owner, "отменено")

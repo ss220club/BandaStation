@@ -1,7 +1,4 @@
 GLOBAL_VAR_INIT(shadowling_hive, null)
-GLOBAL_VAR_INIT(shadowling_vote, null)
-GLOBAL_VAR_INIT(is_shadowling_vote_finished, FALSE)
-GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 
 #define SHADOWLING_ROLE_MAIN "shadowling_main"
 #define SHADOWLING_ROLE_THRALL "shadowling_thrall"
@@ -14,6 +11,9 @@ GLOBAL_VAR_INIT(is_shadowling_engine_sabotage_used, FALSE)
 	var/list/ling_roles = list()
 	var/mob/leader
 	var/asc_thralls_needed = 0
+	var/shadowling_vote
+	var/is_shadowling_vote_finished
+	var/is_shadowling_engine_sabotage_used
 
 /datum/team/shadow_hive/New()
 	. = ..()

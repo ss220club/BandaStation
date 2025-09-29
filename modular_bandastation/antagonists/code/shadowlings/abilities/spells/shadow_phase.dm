@@ -34,7 +34,7 @@
 	var/is_in_phase = !!P
 
 	if(!is_in_phase)
-		if(!CanUse(H))
+		if(!can_use(H))
 			return FALSE
 		if(channel_time > 0)
 			if(!PerformChannel(H, null))

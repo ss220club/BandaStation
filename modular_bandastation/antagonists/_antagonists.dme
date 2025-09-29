@@ -14,7 +14,7 @@
 #include "code/shadowlings/abilities/spells/glare.dm"
 #include "code/shadowlings/abilities/spells/veil.dm"
 #include "code/shadowlings/abilities/spells/cold_cone.dm"
-#include "code/shadowlings/abilities/spells/shadow_embrace.dm"
+#include "code/shadowlings/abilities/spells/shadow_phase.dm"
 #include "code/shadowlings/abilities/spells/shadow_grab.dm"
 #include "code/shadowlings/abilities/spells/shadow_attack.dm"
 #include "code/shadowlings/abilities/spells/roots.dm"

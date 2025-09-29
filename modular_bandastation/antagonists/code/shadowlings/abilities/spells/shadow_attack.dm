@@ -9,7 +9,7 @@
 	channel_time = 0
 	var/static/sfx_activate   = 'sound/effects/magic/demon_attack1.ogg'
 
-/datum/action/cooldown/shadowling/shadow_strike/CanUse(mob/living/carbon/human/H)
+/datum/action/cooldown/shadowling/shadow_strike/can_use(mob/living/carbon/human/H)
 	if(!..())
 		return FALSE
 	if(istype(owner.loc, /obj/effect/dummy/phased_mob/shadowling))
@@ -23,7 +23,7 @@
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return
-	if(!CanUse(H))
+	if(!can_use(H))
 		return
 	var/mob/living/target_mob = find_closest_target(H)
 	if(!target_mob)

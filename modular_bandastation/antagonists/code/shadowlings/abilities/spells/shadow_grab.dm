@@ -12,7 +12,7 @@
 	max_range = 0
 	channel_time = 0
 
-/datum/action/cooldown/shadowling/shadow_grab/CanUse(mob/living/carbon/human/H)
+/datum/action/cooldown/shadowling/shadow_grab/can_use(mob/living/carbon/human/H)
 	if(!..())
 		return FALSE
 	if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))

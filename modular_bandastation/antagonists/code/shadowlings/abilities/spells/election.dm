@@ -17,12 +17,12 @@
 		to_chat(H, span_warning("Только тенелинги могут начать голосование."))
 		return FALSE
 
-	if(GLOB.is_shadowling_vote_finished)
+	if(hive.is_shadowling_vote_finished)
 		to_chat(H, span_warning("Голосование уже завершено."))
 		remove_vote_action_from(H)
 		return FALSE
 
-	var/datum/shadow_vote/V = GLOB.shadowling_vote
+	var/datum/shadow_vote/V = hive.shadowling_vote
 
 	if(isnull(V))
 		if(length(hive.lings) <= 0)
@@ -31,7 +31,7 @@
 
 		V = new
 		V.hive = hive
-		GLOB.shadowling_vote = V
+		hive.shadowling_vote = V
 		V.start()
 		to_chat(H, span_notice("Вы запускаете голосование за лидера улья."))
 		return TRUE
@@ -144,7 +144,7 @@
 	var/mob/living/carbon/human/leader = pick(winners)
 
 	if(leader && !QDELETED(leader))
-		if(!GLOB.is_shadowling_engine_sabotage_used)
+		if(!hive.is_shadowling_engine_sabotage_used)
 			var/datum/action/cooldown/shadowling/engine_sabotage/S = new
 			S.Grant(leader)
 			hive.leader = leader
@@ -152,14 +152,14 @@
 		for(var/mob/living/carbon/human/L in hive.lings)
 			if(QDELETED(L))
 				continue
-			to_chat(L, span_boldnotice("Лидером улья выбран: [leader.real_name].[!GLOB.is_shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
+			to_chat(L, span_boldnotice("Лидером улья выбран: [leader.real_name].[!hive.is_shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
 
 	remove_vote_action_from_all()
 
-	GLOB.is_shadowling_vote_finished = TRUE
+	hive.is_shadowling_vote_finished = TRUE
 
-	if(GLOB.shadowling_vote == src)
-		GLOB.shadowling_vote = null
+	if(hive.shadowling_vote == src)
+		hive.shadowling_vote = null
 
 	qdel(src)
 

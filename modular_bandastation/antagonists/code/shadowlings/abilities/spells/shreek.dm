@@ -20,7 +20,9 @@
 	)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 
-	for(var/mob/living/L in range(disorient_radius, H))
+	var/list_disorient = range(disorient_radius, H)
+	var/list_knock = range(knock_radius, H)
+	for(var/mob/living/L in list_disorient)
 		if(L == H)
 			continue
 		if(istype(L, /mob/living/carbon/human) && hive)
@@ -38,14 +40,14 @@
 			L.adjust_staggered(6 SECONDS)
 			L.adjust_dizzy(3)
 
-	for(var/obj/item/I in range(knock_radius, H))
+	for(var/obj/item/I in list_knock)
 		if(!isturf(I.loc))
 			continue
 		if(I.anchored)
 			continue
 		throw_away_from(H, I, 3, 2)
 
-	for(var/obj/structure/window/W in range(disorient_radius, H))
+	for(var/obj/structure/window/W in list_disorient)
 		damage_glass_with_falloff(H, W)
 
 	break_wall_lights_with_falloff(H)

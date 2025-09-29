@@ -40,8 +40,11 @@
 	return null
 
 /datum/action/cooldown/shadowling/hive_sync/proc/role_allowed(var/datum/action/cooldown/shadowling/A, ling_role)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(!hive)
+		return FALSE
 	if(istype(A, /datum/action/cooldown/shadowling/election))
-		if(GLOB.is_shadowling_vote_finished)
+		if(hive.is_shadowling_vote_finished)
 			return FALSE
 
 	var/list/check_list = list()
