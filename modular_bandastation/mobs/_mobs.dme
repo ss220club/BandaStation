@@ -1,6 +1,5 @@
 #include "_mobs.dm"
 
-#include "code/basic.dm"
 #include "code/mobs_resting.dm"
 #include "code/mob_holder.dm"
 // #include "code/mob_spawner.dm"

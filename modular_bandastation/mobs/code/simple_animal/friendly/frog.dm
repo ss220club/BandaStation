@@ -54,11 +54,11 @@
 				toxin_affect(user)
 	. = ..()
 
-/mob/living/basic/frog/rare/toxic/on_atom_entered(datum/source, atom/movable/entered)
+/mob/living/basic/frog/rare/toxic/on_entered(datum/source, entered as mob|obj)
 	. = ..()
-	if(!ishuman(source))
+	if(stat || !ishuman(entered))
 		return
-	var/mob/living/carbon/human/H = source
+	var/mob/living/carbon/human/H = entered
 	if(istype(H.shoes, /obj/item/clothing/shoes))
 		return
 	var/obj/item/bodypart/leg/left = H.get_bodypart(BODY_ZONE_L_LEG)

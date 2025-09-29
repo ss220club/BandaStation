@@ -62,7 +62,7 @@
 /mob/living/basic/mouse/hamster/baby/Initialize(mapload)
 	. = ..()
 	var/static/list/loc_connections = list(
-		COMSIG_ATOM_ENTERED = PROC_REF(on_atom_entered),
+		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
 
@@ -94,10 +94,10 @@
 		to_chat(src, span_warning("Вы слишком малы чтобы что-то тащить."))
 	return
 
-/mob/living/basic/mouse/hamster/baby/on_atom_entered(datum/source, atom/movable/entered)
-	if(!ishuman(source) || stat)
+/mob/living/basic/mouse/hamster/baby/on_entered(datum/source, entered as mob|obj)
+	if(stat || !ishuman(entered))
 		return ..()
-	to_chat(source, span_notice("[src.name] раздавлен!"))
+	to_chat(entered, span_notice("[src.name] раздавлен!"))
 	death()
 	splat()
 
