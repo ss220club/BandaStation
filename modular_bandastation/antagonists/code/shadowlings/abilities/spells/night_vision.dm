@@ -19,7 +19,7 @@
 	var/list/cut_high = list(50, 25, 90)
 
 /datum/action/cooldown/shadowling/toggle_night_vision/is_action_active(atom/movable/screen/movable/action_button/_btn)
-	return nv_level != NV_OFF
+	return FALSE
 
 /datum/action/cooldown/shadowling/toggle_night_vision/DoEffect(mob/living/carbon/human/H, atom/_)
 	if(!istype(H))
