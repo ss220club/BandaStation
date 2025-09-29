@@ -122,7 +122,7 @@
 			var/obj/item/holochip/inserted_chip = inserted
 			if(!user.temporarilyRemoveItemFromInventory(inserted_chip))
 				return ITEM_INTERACT_BLOCKING
-			balloon_alert(user, "вставлен[inserted_chip.credits == 1 ? "" : "о"] [inserted_chip.credits] [declension_ru(inserted_chip.credits, "кредит", "кредита", "кредитов")]")
+			balloon_alert(user, "[declension_ru(inserted_chip.credits, "вставлен", "вставлено", "вставлено")] [inserted_chip.credits] [declension_ru(inserted_chip.credits, "кредит", "кредита", "кредитов")]")
 			balance += inserted_chip.credits
 			qdel(inserted_chip)
 			return ITEM_INTERACT_SUCCESS
@@ -134,7 +134,7 @@
 
 /obj/machinery/computer/slot_machine/multitool_act(mob/living/user, obj/item/tool)
 	if(balance > 0)
-		visible_message("<b>[src]</b> says, 'ОШИБКА! Пожалуйста, опустошите машину перед изменением способа оплаты'") //Prevents converting coins into holocredits and vice versa
+		visible_message("<b>[src]</b> докладывает, 'ОШИБКА! Пожалуйста, опустошите машину перед изменением способа оплаты'") //Prevents converting coins into holocredits and vice versa
 		return ITEM_INTERACT_BLOCKING
 
 	if(paymode == HOLOCHIP)
@@ -321,11 +321,11 @@
 				sleep(REEL_DEACTIVATE_DELAY)
 
 	else if(linelength == 5)
-		visible_message("<b>[src]</b> says, 'Большой выигрыш! Тысяча кредитов!'")
+		visible_message("<b>[src]</b> докладывает, 'Большой выигрыш! Тысяча кредитов!'")
 		give_money(BIG_PRIZE)
 
 	else if(linelength == 4)
-		visible_message("<b>[src]</b> says, 'Выигрыш! Четыреста кредитов!'")
+		visible_message("<b>[src]</b> докладывает, 'Выигрыш! Четыреста кредитов!'")
 		give_money(SMALL_PRIZE)
 
 	else if(linelength == 3)
