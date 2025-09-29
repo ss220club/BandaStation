@@ -16,6 +16,9 @@
 	unsuitable_heat_damage = 0
 	unsuitable_atmos_damage = 0
 
+	var/datum/reagent/wet_reagent = /datum/reagent/water
+	var/wet_volume = 10
+
 /mob/living/basic/snail/space/Process_Spacemove(movement_dir = 0)
 	return 1
 
@@ -28,21 +31,16 @@
 
 /mob/living/basic/snail/space/proc/make_wet_floor(atom/oldLoc)
 	if(oldLoc != src.loc)
-		reagents.add_reagent("water",10)
-		reagents.reaction(oldLoc, REAGENT_TOUCH, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
-		reagents.remove_any(10)
+		//create_reagents(10)	// !!!! TODO: Need Testing
+		reagents.add_reagent(wet_reagent, wet_volume)
+		reagents.expose(oldLoc, TOUCH, wet_volume) //Needed for proper floor wetting.
 
 /mob/living/basic/snail/space/lube
 	name = "space snail"
 	desc = "Маленькая космо-улиточка со своим космо-домиком. Прочная, тихая и медленная. И очень склизкая."
 	gold_core_spawnable = HOSTILE_SPAWN
 	faction = list("slime", "hostile")
-
-/mob/living/basic/snail/space/lube/make_wet_floor(atom/oldLoc)
-	if(oldLoc != src.loc)
-		reagents.add_reagent("lube",10)
-		reagents.reaction(oldLoc, REAGENT_TOUCH, 10)
-		reagents.remove_any(10)
+	wet_reagent = /datum/reagent/lube
 
 /mob/living/basic/turtle
 	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
