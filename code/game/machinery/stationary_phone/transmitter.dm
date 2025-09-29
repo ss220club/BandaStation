@@ -297,6 +297,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(ismob(attached_to.loc))
 			var/mob/M = attached_to.loc
 			M.dropItemToGround(attached_to, TRUE)
+			recall_phone()
 		else
 			recall_phone()
 
@@ -529,7 +530,9 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(TRANSMITTER_UNAVAILABLE(target))
 		return
 
-	user.put_in_hands(attached_to)
+	if(attached_to.loc != user)
+		user.put_in_hands(attached_to)
+
 	to_chat(user, span_notice("[icon2html(src, user)] Dialing [display] ([calling_phone_id])..."))
 	playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 100)
 
@@ -544,6 +547,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	is_paid = FALSE
 	START_PROCESSING(SSobj, src)
+	SStgui.update_uis(src)
 
 /obj/structure/transmitter/proc/toggle_dnd(mob/living/carbon/human/user)
 	switch(do_not_disturb)
@@ -586,6 +590,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	STOP_PROCESSING(SSobj, src)
 	update_icon()
 	stop_loops()
+	SStgui.update_uis(src)
 
 /obj/structure/transmitter/proc/add_call_history(direction, obj/structure/transmitter/other)
 	if(!other)
