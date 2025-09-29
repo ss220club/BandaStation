@@ -329,7 +329,7 @@
 		give_money(SMALL_PRIZE)
 
 	else if(linelength == 3)
-		to_chat(user, span_notice("Вы выиграли три бесплатных игры!"))
+		to_chat(user, span_notice("Вы выиграли три фриспина!"))
 		balance += SPIN_PRICE * 4
 		money = max(money - SPIN_PRICE * 4, money)
 
