@@ -324,7 +324,7 @@
 	desc = "У обладателя данного гена мышцы слегка увеличиваются. Commonly seen in top-ranking boxers."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Ты чувствуешь себя сильнее.")
-	instability = POSITIVE_INSTABILITY_MINI
+	instability = POSITIVE_INSTABILITY_MINOR
 	difficulty = 16
 	mutation_traits = list(TRAIT_STRENGTH)
 
