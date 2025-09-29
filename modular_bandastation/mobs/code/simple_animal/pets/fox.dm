@@ -20,7 +20,7 @@
 	real_name = "лесной лис"
 	desc = "Лесная лисица. Может укусить."
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
-	icon_state = "fox_"
+	icon_state = "fox"
 	icon_living = "fox"
 	icon_dead = "fox_dead"
 	icon_resting = "fox_rest"

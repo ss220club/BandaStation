@@ -67,10 +67,11 @@
 	real_name = "Рататуй"
 	desc = "Личная крыса шеф повара, помогающая ему при готовке наиболее изысканных блюд. До момента пока он не пропадет и повар не начнет готовить что-то новенькое..."
 	gold_core_spawnable = NO_SPAWN
+	faction = list(FACTION_RAT, FACTION_MAINT_CREATURES, FACTION_NEUTRAL)
 	maxHealth = 20
 	health = 20
 
-/mob/living/basic/mouse/rat/ratatui/update_desc()
+/mob/living/basic/mouse/rat/gray/ratatui/update_desc()
 	. = ..()
 	desc = initial(desc)
 
@@ -79,6 +80,7 @@
 	real_name = "Реми"
 	desc = "Близкий друг Рататуя. Не любимец повара, но пока тот не мешает на кухне, ему разрешили здесь остаться. Очень толстая крыса."
 	gold_core_spawnable = NO_SPAWN
+	faction = list(FACTION_RAT, FACTION_MAINT_CREATURES, FACTION_NEUTRAL)
 	maxHealth = 25
 	health = 25
 	transform = matrix(1.250, 0, 0, 0, 1, 0) // Толстячок на +2 пикселя
@@ -92,6 +94,7 @@
 	real_name = "Брейн"
 	desc = "Сообразительная личная лабораторная крыса директора исследований, даже освоившая речь. Настолько часто сбегал, что его перестали помещать в клетку. Он явно хочет захватить мир. Где-то спрятался его напарник..."
 	gold_core_spawnable = NO_SPAWN
+	faction = list(FACTION_RAT, FACTION_MAINT_CREATURES, FACTION_NEUTRAL)
 	maxHealth = 20
 	health = 20
 	//universal_speaker = 1
@@ -190,3 +193,30 @@
 	desc = "Говорят что это бывший колдун, лишенный всех своих сил и превратившейся в черного кота Советом Колдунов из-за попытки захватить мир, а в руки НТ попал чтобы отбывать своё наказание. Судя по его скверному нраву, это может быть похоже на правду."
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
+
+// dogs
+/mob/living/basic/pet/dog/brittany/psycho
+	name = "Перрито"
+	real_name = "Перрито"
+	desc = "Собака, обожающая котов, особенно в сапогах, прекрасно лающая на Испанском, прошла терапевтические курсы, готова выслушать все ваши проблемы и выдать вам целебных объятий с завершением в виде почесыванием животика."
+	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	resting = TRUE
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
+
+/mob/living/basic/pet/dog/pug/frank
+	name = "Фрэнк"
+	real_name = "Фрэнк"
+	desc = "Мопс полученный в результате эксперимента ученых в черном. Почему его не забрали интересный вопрос. Похоже он всем надоел своей болтовней, после чего его лишили дара речи."
+	resting = TRUE
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
+
+/mob/living/basic/pet/dog/bullterrier/genn
+	name = "Геннадий"
+	desc = "Собачий аристократ. Выглядит очень важным и начитанным. Доброжелательный любимец ассистентов."
+	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
+	resting = TRUE
+

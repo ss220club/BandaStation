@@ -10,10 +10,11 @@
 	held_state = "hamster"
 	gender = MALE
 	body_color = ""
-	colored_mob = "hamster"
-	possible_colors = list("")
+	colored_mob = null
+	possible_colors = null
 	// holder_type = /obj/item/holder/hamster
 	gold_core_spawnable = FRIENDLY_SPAWN
+	faction = list(FACTION_RAT, FACTION_NEUTRAL)
 	maxHealth = 10
 	health = 10
 

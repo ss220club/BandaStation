@@ -44,9 +44,6 @@
 	else
 		manual_emote("злобно шипит!")
 
-// Fashion
-/mob/living/basic/snake/syndicate/proc/make_beret()
-
 // Змея офицера синдиката
 /mob/living/basic/snake/syndicate/rouge
 	name = "Руж"
@@ -55,8 +52,17 @@
 
 /mob/living/basic/snake/syndicate/rouge/Initialize(mapload, special_reagent)
 	. = ..()
-	make_beret()
+	update_overlays()
 
+/mob/living/basic/snake/syndicate/rouge/update_overlays()
+	. = ..()
+
+	var/mutable_appearance/acc = mutable_appearance(
+		'modular_bandastation/mobs/icons/rouge_accessories.dmi',
+		"beret_hos_black"
+	)
+
+	. += acc
 
 // Для змеи необходимо провести полный рефактор шмоток, если хотим шапки
 

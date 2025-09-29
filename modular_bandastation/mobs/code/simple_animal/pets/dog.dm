@@ -1,5 +1,4 @@
 /mob/living/basic/pet/dog
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	maxHealth = 50
 	health = 50
 	melee_damage_type = STAMINA
@@ -106,32 +105,3 @@
 	icon_state = "brittany"
 	icon_living = "brittany"
 	icon_dead = "brittany_dead"
-
-
-
-// named
-/mob/living/basic/pet/dog/brittany/psycho
-	name = "Перрито"
-	real_name = "Перрито"
-	desc = "Собака, обожающая котов, особенно в сапогах, прекрасно лающая на Испанском, прошла терапевтические курсы, готова выслушать все ваши проблемы и выдать вам целебных объятий с завершением в виде почесыванием животика."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
-	resting = TRUE
-	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
-
-/mob/living/basic/pet/dog/pug/frank
-	name = "Фрэнк"
-	real_name = "Фрэнк"
-	desc = "Мопс полученный в результате эксперимента ученых в черном. Почему его не забрали интересный вопрос. Похоже он всем надоел своей болтовней, после чего его лишили дара речи."
-	resting = TRUE
-	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
-
-/mob/living/basic/pet/dog/bullterrier/genn
-	name = "Геннадий"
-	desc = "Собачий аристократ. Выглядит очень важным и начитанным. Доброжелательный любимец ассистентов."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
-	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
-	resting = TRUE
-

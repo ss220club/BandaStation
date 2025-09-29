@@ -93,8 +93,11 @@
 
 /datum/ai_controller/basic_controller/mouse/rat/syndi/New(atom/new_pawn)
 	. = ..()
-	LAZYREMOVE(planning_subtrees, /datum/ai_planning_subtree/random_speech/mouse/rat)
-	LAZYADD(planning_subtrees, /datum/ai_planning_subtree/random_speech/mouse/rat/syndi)
+	var/datum/ai_planning_subtree/S = locate(/datum/ai_planning_subtree/random_speech/mouse/rat) in planning_subtrees
+	if(S)
+		planning_subtrees -= S
+		qdel(S)
+	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/mouse/rat/syndi)
 
 /datum/ai_planning_subtree/random_speech/mouse/rat/syndi
 	speech_chance = 2
@@ -105,8 +108,11 @@
 
 /datum/ai_controller/basic_controller/pig/old/New(atom/new_pawn)
 	. = ..()
-	LAZYREMOVE(planning_subtrees, /datum/ai_planning_subtree/random_speech/pig)
-	LAZYADD(planning_subtrees, /datum/ai_planning_subtree/random_speech/pig/old)
+	var/datum/ai_planning_subtree/S = locate(/datum/ai_planning_subtree/random_speech/pig) in planning_subtrees
+	if(S)
+		planning_subtrees -= S
+		qdel(S)
+	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/old)
 
 /datum/ai_planning_subtree/random_speech/pig/old
 	sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')	// SS220 EDIT

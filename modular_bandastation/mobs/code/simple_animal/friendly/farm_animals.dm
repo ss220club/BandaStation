@@ -52,6 +52,10 @@
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	RemoveElement(/datum/component/egg_layer)	// No EGGs from Cock
 
+	icon_state = initial(icon_state)
+	icon_living = initial(icon_living)
+	icon_dead = initial(icon_dead)
+
 /mob/living/basic/pig
 	name = "свинья"
 	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
