@@ -12,7 +12,6 @@
 	body_color = ""
 	colored_mob = "hamster"
 	possible_colors = list("")
-	speak_chance = 0
 	// holder_type = /obj/item/holder/hamster
 	gold_core_spawnable = FRIENDLY_SPAWN
 	maxHealth = 10
@@ -20,6 +19,8 @@
 
 	///can this hamster breed?
 	var/can_breed = TRUE
+	///callback for after a hamster is born
+	var/datum/callback/post_birth_callback
 
 /mob/living/basic/mouse/hamster/Initialize(mapload)
 	. = ..()
