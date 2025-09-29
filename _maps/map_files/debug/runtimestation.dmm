@@ -1220,6 +1220,7 @@
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
 "kv" = (
+/obj/structure/transmitter/mounted/directional/west,
 /obj/effect/turf_decal/board_number/four,
 /turf/open/floor/plating,
 /area/station/construction)
@@ -1253,11 +1254,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/main)
 "my" = (
-/obj/structure/transmitter/mounted{
-	dir = 1;
-	pixel_y = -24;
-	display_name = "2"
-	},
+/obj/structure/transmitter/mounted/directional/south,
 /turf/open/floor/plating,
 /area/station/construction)
 "mC" = (
@@ -1445,11 +1442,8 @@
 /turf/open/floor/circuit/green,
 /area/station/cargo/bitrunning/den)
 "si" = (
-/obj/structure/transmitter/mounted{
-	dir = 8;
-	pixel_x = 17;
-	display_name = "3"
-	},
+/obj/structure/transmitter/mounted/directional/east,
+/obj/effect/turf_decal/board_number/three,
 /turf/open/floor/plating,
 /area/station/construction)
 "sr" = (
@@ -1956,9 +1950,7 @@
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
 "Eb" = (
-/obj/structure/transmitter{
-	display_name = "Engineering"
-	},
+/obj/structure/transmitter/engineering,
 /turf/open/floor/plating,
 /area/station/construction)
 "Ef" = (
@@ -2136,11 +2128,8 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "Iz" = (
-/obj/structure/transmitter/mounted{
-	pixel_y = 23;
-	display_name = "1"
-	},
 /obj/effect/turf_decal/board_number/one,
+/obj/structure/transmitter/mounted/directional/north,
 /turf/open/floor/plating,
 /area/station/construction)
 "IF" = (
@@ -2227,10 +2216,6 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
-"KT" = (
-/obj/effect/turf_decal/board_number/three,
-/turf/open/floor/plating,
-/area/station/construction)
 "KW" = (
 /obj/structure/sink/directional/south,
 /obj/item/storage/bag/plants,
@@ -2288,11 +2273,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/main)
 "Mb" = (
-/obj/structure/transmitter/mounted{
-	dir = 4;
-	pixel_x = -16;
-	display_name = "4"
-	},
+/obj/structure/transmitter/bridge,
 /turf/open/floor/plating,
 /area/station/construction)
 "Mg" = (
@@ -6533,7 +6514,7 @@ ef
 cY
 dn
 dn
-dn
+kv
 dn
 dn
 dn
@@ -6901,9 +6882,9 @@ cN
 vs
 dn
 dn
-cN
-KT
 dn
+dn
+Mb
 dn
 dn
 dn
@@ -6993,8 +6974,8 @@ cN
 yL
 dn
 dn
-cN
-kv
+dn
+dn
 dn
 dn
 dn
@@ -7085,7 +7066,7 @@ ef
 cY
 dn
 dn
-Mb
+dn
 dn
 dn
 dn

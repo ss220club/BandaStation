@@ -7,7 +7,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define PHONE_NET_CENTCOM           "CentCom"
 #define PHONE_NET_SYNDIE            "Syndicate"
 
-#define PHONE_DND_FORCED            "Forced"
 #define PHONE_DND_ON                "On"
 #define PHONE_DND_OFF               "Off"
 #define PHONE_DND_FORBIDDEN         "Forbidden"
@@ -15,6 +14,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define SINGLE_CALL_PRICE           5
 #define MAX_RANGE                   3
 #define RING_TIMEOUT                4 SECONDS
+#define HISTORY_LENGTH 							5
 
 #define STATUS_INBOUND              "Inbound call"
 #define STATUS_ONGOING              "Ongoing call"
@@ -72,7 +72,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/datum/looping_sound/telephone/dialtone/dialtone_loop
 	/// If this phone is advanced enough to display the caller and the call history
 	var/is_advanced = TRUE
-	/// Last 5 call origins
+	/// Last HISTORY_LENGTH calls
 	var/list/callers_list = list()
 	// If calling this phone is free of charge
 	var/is_free = TRUE
@@ -122,6 +122,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			var/obj/structure/transmitter/new_caller = find_device(data)
 			if(new_caller)
 				current_call = new_caller
+				add_call_history("in", new_caller)
 				try_ring()
 			update_icon()
 
@@ -264,7 +265,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	var/status_overlay
 
-	if(do_not_disturb == PHONE_DND_ON || do_not_disturb == PHONE_DND_FORCED)
+	if(do_not_disturb == PHONE_DND_ON)
 		status_overlay = status_red
 	else
 		if(status == STATUS_INBOUND)
@@ -401,19 +402,30 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
-	if(.)
-		return
+
 	if(TRANSMITTER_UNAVAILABLE(src))
 		return
+
 	if(!ishuman(usr))
 		return
+
 	var/mob/living/carbon/human/user = usr
 	switch(action)
 		if("call_phone")
 			process_outbound_call(user, params["phone_id"])
-			. = TRUE
+			return TRUE
+
 		if("toggle_dnd")
 			toggle_dnd(user)
+			return TRUE
+
+		if("hangup")
+			end_call()
+			return TRUE
+
+		if("clear_history")
+			callers_list = list()
+			return TRUE
 	update_icon()
 
 /obj/structure/transmitter/ui_interact(mob/user, datum/tgui/ui)
@@ -431,6 +443,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	data["last_caller"] = current_call
 	data["current_display_name"] = display_name
 	data["current_phone_id"] = phone_id
+	data["callers_list"] = callers_list
+	if(current_call)
+		data["current_call"] = list(
+			"display_name" = current_call.display_name,
+			"phone_id" = current_call.phone_id,
+		)
+	data["is_advanced"] = is_advanced
 	return data
 
 /obj/structure/transmitter/ui_static_data(mob/user)
@@ -458,7 +477,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			GLOB.transmitters.Remove(target_phone)
 			continue
 
-		if(TRANSMITTER_UNAVAILABLE(target_phone) || target_phone.do_not_disturb == PHONE_DND_ON || target_phone.do_not_disturb == PHONE_DND_FORCED)
+		if(TRANSMITTER_UNAVAILABLE(target_phone) || target_phone.do_not_disturb == PHONE_DND_ON)
 			continue
 
 		if(target_phone == src)
@@ -525,6 +544,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	// 	return
 
 	current_call = target
+	add_call_history("out", target)
 	send_commsig(COMMSIG_DIAL, target.phone_id)
 
 	is_paid = FALSE
@@ -537,8 +557,8 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			do_not_disturb = PHONE_DND_OFF
 		if(PHONE_DND_OFF)
 			do_not_disturb = PHONE_DND_ON
-		else
-			return FALSE
+
+	update_overlays()
 	return TRUE
 
 // /obj/structure/transmitter/proc/set_tether_holder(atom/A)
@@ -572,6 +592,19 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	STOP_PROCESSING(SSobj, src)
 	update_icon()
 	stop_loops()
+
+/obj/structure/transmitter/proc/add_call_history(direction, obj/structure/transmitter/other)
+	if(!other)
+		return
+
+	if(length(callers_list) >= HISTORY_LENGTH)
+		callers_list.Cut(1, 2)
+	var/entry = list(
+		"dir" = direction,
+		"id" = other.phone_id,
+		"name" = other.display_name,
+	)
+	callers_list += list(entry)
 
 /obj/structure/transmitter/proc/try_ring()
 	if(!current_call || attached_to.loc != src || status != STATUS_INBOUND)
@@ -639,7 +672,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #undef PHONE_NET_CENTCOM
 #undef PHONE_NET_SYNDIE
 
-#undef PHONE_DND_FORCED
 #undef PHONE_DND_ON
 #undef PHONE_DND_OFF
 #undef PHONE_DND_FORBIDDEN

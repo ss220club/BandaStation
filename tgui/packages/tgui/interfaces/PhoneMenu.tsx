@@ -9,6 +9,7 @@ type Data = {
   current_display_name: string;
   current_phone_id: string;
   available_transmitters: string[];
+  callers_list?: { dir: 'in' | 'out'; id: string; name: string }[];
   transmitters: {
     phone_category: string;
     phone_color: string;
@@ -32,6 +33,7 @@ export const PhoneMenu = (props) => {
 const GeneralPanel = (props) => {
   const { act, data } = useBackend<Data>();
   const { availability, last_caller } = data;
+  const callers = Array.isArray(data.callers_list) ? data.callers_list : [];
   const available_transmitters = data.available_transmitters || [];
 
   const transmitters = (data.transmitters || []).filter((val1) =>
@@ -68,33 +70,68 @@ const GeneralPanel = (props) => {
     setSelectedPhone(null);
   }, [currentCategory]);
 
-  let dnd_tooltip = 'Do Not Disturb is DISABLED';
-  let dnd_locked = 'No';
-  let dnd_icon = 'volume-high';
-  if (availability === 1) {
-    dnd_tooltip = 'Do Not Disturb is ENABLED';
-    dnd_icon = 'volume-xmark';
-  } else if (availability >= 2) {
-    dnd_tooltip = 'Do Not Disturb is ENABLED (LOCKED)';
-    dnd_locked = 'Yes';
-    dnd_icon = 'volume-xmark';
-  } else if (availability < 0) {
-    dnd_tooltip = 'Do Not Disturb is DISABLED (LOCKED)';
-    dnd_locked = 'Yes';
-  }
+  const dnd_state =
+    typeof availability === 'string' ? availability : String(availability);
+  const dnd_is_on = dnd_state === 'On' || dnd_state === 'Forced';
+  const dnd_locked_bool = dnd_state === 'Forced' || dnd_state === 'Forbidden';
+  const dnd_locked = dnd_locked_bool ? 'Yes' : 'No';
+  const dnd_icon = dnd_is_on ? 'volume-xmark' : 'volume-high';
+  const dnd_tooltip =
+    dnd_state === 'Forced'
+      ? 'Do Not Disturb is ENABLED (LOCKED)'
+      : dnd_state === 'Forbidden'
+        ? 'Do Not Disturb is DISABLED (LOCKED)'
+        : dnd_is_on
+          ? 'Do Not Disturb is ENABLED'
+          : 'Do Not Disturb is DISABLED';
 
   return (
     <Box height="100%">
       <Stack fill>
         <Stack.Item width="30%">
           <Stack vertical fill>
+            <Stack.Item grow>
+              <Section title="Call History" fill>
+                <Box height="calc(100% - 1.5em)" style={{ overflowY: 'auto' }}>
+                  {callers.length === 0 && !!last_caller && (
+                    <Box>{last_caller}</Box>
+                  )}
+                  {callers.map((c, idx) => (
+                    <Button
+                      fluid
+                      key={idx}
+                      color={c.dir === 'in' ? 'label' : 'good'}
+                      icon={c.dir === 'in' ? 'phone' : 'phone-slash'}
+                      textAlign="left"
+                      style={{
+                        whiteSpace: 'normal',
+                        wordBreak: 'break-word',
+                        paddingLeft: '5px',
+                      }}
+                    >
+                      {c.name} ({c.id})
+                    </Button>
+                  ))}
+                </Box>
+                <Button.Confirm
+                  icon="trash"
+                  color="transparent"
+                  confirmColor="red"
+                  confirmIcon="close"
+                  fluid
+                  onClick={() => act('clear_history')}
+                >
+                  Clear
+                </Button.Confirm>
+              </Section>
+            </Stack.Item>
             <Stack.Item>
               <Section>
                 <Button.Checkbox
-                  color="red"
+                  color="green"
                   tooltip={dnd_tooltip}
                   disabled={dnd_locked === 'Yes'}
-                  checked={availability >= 1}
+                  checked={dnd_is_on}
                   fluid
                   textAlign="center"
                   onClick={() => act('toggle_dnd')}
@@ -104,42 +141,10 @@ const GeneralPanel = (props) => {
                 </Button.Checkbox>
               </Section>
             </Stack.Item>
-            <Stack.Item grow>
-              <Section title="Call History" fill>
-                <Box height="calc(100% - 1.5em)">
-                  {!!last_caller && <Box>{last_caller}</Box>}
-                </Box>
-                <Button.Confirm
-                  icon="trash"
-                  color="transparent"
-                  confirmColor="red"
-                  confirmIcon="close"
-                  fluid
-                >
-                  Clear
-                </Button.Confirm>
-              </Section>
-            </Stack.Item>
           </Stack>
         </Stack.Item>
         <Stack.Item grow>
           <Stack vertical fill>
-            <Stack.Item>
-              <Stack.Item>
-                <Section>
-                  <Table>
-                    <Table.Row className="candystripe">
-                      <Table.Cell p={0.25}>Display Name</Table.Cell>
-                      <Table.Cell>{data.current_display_name}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row className="candystripe">
-                      <Table.Cell p={0.25}>Device ID</Table.Cell>
-                      <Table.Cell>{data.current_phone_id}</Table.Cell>
-                    </Table.Row>
-                  </Table>
-                </Section>
-              </Stack.Item>
-            </Stack.Item>
             <Stack.Item grow>
               <Section fill>
                 <Stack vertical fill>
@@ -164,7 +169,6 @@ const GeneralPanel = (props) => {
                             typeof val.phone_category === 'string'
                               ? val.phone_category.trim()
                               : '';
-                          // If no current category selected, show all; otherwise match exactly
                           return !currentCategory || cat === currentCategory;
                         })
                         .map((val) => (
@@ -181,22 +185,43 @@ const GeneralPanel = (props) => {
                         ))}
                     </Section>
                   </Stack.Item>
-                  {!!selectedPhone && (
-                    <Stack.Item>
-                      <Button
-                        color="good"
-                        fluid
-                        textAlign="center"
-                        onClick={() =>
-                          act('call_phone', { phone_id: selectedPhone })
-                        }
-                      >
-                        Dial
-                      </Button>
-                    </Stack.Item>
-                  )}
+                  <Stack.Item>
+                    <Button
+                      color={(data as any)?.current_call ? 'red' : 'good'}
+                      fluid
+                      textAlign="center"
+                      style={{ alignContent: 'center' }}
+                      fontSize="1.5em"
+                      disabled={!(data as any)?.current_call && !selectedPhone}
+                      onClick={() =>
+                        (data as any)?.current_call
+                          ? act('hangup')
+                          : act('call_phone', { phone_id: selectedPhone })
+                      }
+                    >
+                      {(data as any)?.current_call
+                        ? `Hang Up ${(data as any)?.current_call?.display_name || ''}`
+                        : 'Dial'}
+                    </Button>
+                  </Stack.Item>
                 </Stack>
               </Section>
+            </Stack.Item>
+            <Stack.Item>
+              <Stack.Item>
+                <Section>
+                  <Table>
+                    <Table.Row className="candystripe">
+                      <Table.Cell p={0.25}>Display Name</Table.Cell>
+                      <Table.Cell>{data.current_display_name}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row className="candystripe">
+                      <Table.Cell p={0.25}>Device ID</Table.Cell>
+                      <Table.Cell>{data.current_phone_id}</Table.Cell>
+                    </Table.Row>
+                  </Table>
+                </Section>
+              </Stack.Item>
             </Stack.Item>
           </Stack>
         </Stack.Item>

@@ -4,7 +4,6 @@
 #define PHONE_NET_BRIDGE	     			"Bridge"
 #define PHONE_NET_SYNDIE	     			"Syndicate"
 
-#define PHONE_DND_FORCED            "Forced"
 #define PHONE_DND_ON                "On"
 #define PHONE_DND_OFF               "Off"
 #define PHONE_DND_FORBIDDEN         "Forbidden"
@@ -104,7 +103,6 @@
 #undef PHONE_NET_SYNDIE
 #undef PHONE_NET_BRIDGE
 
-#undef PHONE_DND_FORCED
 #undef PHONE_DND_ON
 #undef PHONE_DND_OFF
 #undef PHONE_DND_FORBIDDEN
