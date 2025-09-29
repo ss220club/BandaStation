@@ -60,11 +60,10 @@
 
 
 // rats
-/mob/living/basic/mouse/rat/ratatui
+/mob/living/basic/mouse/rat/gray/ratatui
 	name = "Рататуй"
 	real_name = "Рататуй"
 	desc = "Личная крыса шеф повара, помогающая ему при готовке наиболее изысканных блюд. До момента пока он не пропадет и повар не начнет готовить что-то новенькое..."
-	mouse_color = "gray"
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 20
 	health = 20

@@ -128,7 +128,7 @@
 	if(prob(25))
 		new /mob/living/basic/frog/rare/toxic/scream(.)
 	for(var/i in 1 to rand(1, 2))
-		new /mob/living/basic/frog/toxic(.)
+		new /mob/living/basic/frog/rare/toxic(.)
 
 /datum/supply_pack/critter/frog/scream
 	name = "Ящик с кричащими лягушками"

@@ -31,7 +31,7 @@
 	icon_state = "meat_clear"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment/protein = 2,
-		/datum/reagent/consumable/blood = 3,
+		/datum/reagent/blood = 3,
 		/datum/reagent/consumable/coffee = 2, // Крысы пьют много кофе и всякую гадость
 		/datum/reagent/toxin = 1
 	)
