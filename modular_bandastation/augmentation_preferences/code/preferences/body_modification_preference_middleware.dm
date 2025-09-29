@@ -6,7 +6,6 @@
 	)
 	var/last_preview_slot = null
 
-/// Append all of these into ui_data
 /datum/preference_middleware/body_modifications/get_ui_data(mob/user)
 	if (last_preview_slot != preferences.default_slot)
 		var/atom/movable/screen/map_view/char_preview/preview = preferences.character_preview_view
@@ -25,7 +24,6 @@
 	data["selected_manufacturer"] = get_current_manufacturers(user)
 	return data
 
-/// Append all of these into ui_static_data
 /datum/preference_middleware/body_modifications/get_constant_data(mob/user)
 	var/list/data = list()
 	for(var/body_modification_key in GLOB.body_modifications)

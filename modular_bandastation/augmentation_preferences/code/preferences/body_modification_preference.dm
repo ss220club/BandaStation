@@ -13,13 +13,10 @@
 	for(var/body_modification_key in values)
 		var/entry = values[body_modification_key]
 		if (islist(entry))
-			// ожидаем entry["type"] = /datum/body_modification/...
 			if (!ispath(entry["type"], /datum/body_modification))
-				// бэкомпат: разрешим старый формат только если ключ есть в реестре
 				if (isnull(GLOB.body_modifications[body_modification_key]))
 					return FALSE
 		else
-			// старый TRUE — проверяем, что ключ существует в реестре
 			if (isnull(GLOB.body_modifications[body_modification_key]))
 				return FALSE
 
@@ -69,7 +66,7 @@
 		var/typepath = entry ? entry["type"] : null
 
 		if(!ispath(typepath, /datum/body_modification))
-			var/datum/body_modification/fallback = GLOB.body_modifications[key] // бэкомпат
+			var/datum/body_modification/fallback = GLOB.body_modifications[key]
 			if(!fallback)
 				continue
 			typepath = fallback.type
@@ -114,14 +111,12 @@
 		var/value = input[body_modification_key]
 
 		if(islist(value))
-			// гарантируем наличие type; при старом формате — подставим из реестра
 			if (!ispath(value["type"], /datum/body_modification))
 				if(!GLOB.body_modifications[body_modification_key])
 					continue
 				value = list("type" = GLOB.body_modifications[body_modification_key].type) + value
 			result[body_modification_key] = value
 		else
-			// TRUE (старое) → новый формат с type, если ключ известен
 			if(!GLOB.body_modifications[body_modification_key])
 				continue
 			result[body_modification_key] = list("type" = GLOB.body_modifications[body_modification_key].type)
@@ -137,7 +132,6 @@
 	for (var/body_modification_key in input)
 		var/value = input[body_modification_key]
 		if(islist(value))
-			// стараемся сохранить type
 			if(!ispath(value["type"], /datum/body_modification))
 				if (GLOB.body_modifications[body_modification_key])
 					value["type"] = GLOB.body_modifications[body_modification_key].type

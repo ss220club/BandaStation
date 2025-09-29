@@ -1,15 +1,10 @@
 GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_modifications())
 
 /datum/body_modification
-	/// The abstract type of this body modification
 	abstract_type = /datum/body_modification
-	/// The key used to identify this body modification
 	var/key = null
-	/// The name of this body modification
 	var/name = null
-	/// Cost in quirk points of thisbody modification
 	var/cost = 0
-	/// The list of body modifications incompatible with this body modification
 	var/list/incompatible_body_modifications = list()
 	var/category = null
 
@@ -22,13 +17,11 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 		stack_trace("abstract body modification attempted to be instantiated: [type]")
 		qdel(src)
 
-/// Apply this set of body modifications to the given mob
 /datum/body_modification/proc/apply_to_human(mob/living/carbon/target)
 	SHOULD_CALL_PARENT(TRUE)
 
 	return can_be_applied(target)
 
-/// Returns TRUE if this body modification can be applied
 /datum/body_modification/proc/can_be_applied(mob/living/carbon/target)
 	SHOULD_CALL_PARENT(TRUE)
 
@@ -45,7 +38,6 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 
 	return TRUE
 
-/// Returns the list of body modifications incompatible with this body modification
 /datum/body_modification/proc/get_conflicting_body_modifications(mob/living/carbon/target)
 	return incompatible_body_modifications & target.client?.prefs?.read_preference(/datum/preference/body_modifications)
 
