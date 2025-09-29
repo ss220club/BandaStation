@@ -395,11 +395,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	else
 		return ..()
 
-/obj/structure/transmitter/ui_status(mob/user, datum/ui_state/state)
-	. = ..()
-	if(TRANSMITTER_UNAVAILABLE(src))
-		return UI_CLOSE
-
 /obj/structure/transmitter/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 
@@ -549,7 +544,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	is_paid = FALSE
 	START_PROCESSING(SSobj, src)
-	SStgui.close_uis(src)
 
 /obj/structure/transmitter/proc/toggle_dnd(mob/living/carbon/human/user)
 	switch(do_not_disturb)

@@ -1219,11 +1219,6 @@
 /obj/structure/server,
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
-"kv" = (
-/obj/structure/transmitter/mounted/directional/west,
-/obj/effect/turf_decal/board_number/four,
-/turf/open/floor/plating,
-/area/station/construction)
 "kS" = (
 /turf/closed/wall/r_wall,
 /area/station/medical/chemistry)
@@ -2027,7 +2022,8 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "Fe" = (
-/obj/structure/central_telephone_exchange,
+/obj/structure/transmitter/mounted/directional/west,
+/obj/effect/turf_decal/board_number/four,
 /turf/open/floor/plating,
 /area/station/construction)
 "Fy" = (
@@ -2216,6 +2212,10 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
+"KT" = (
+/obj/structure/transmitter/bridge,
+/turf/open/floor/plating,
+/area/station/construction)
 "KW" = (
 /obj/structure/sink/directional/south,
 /obj/item/storage/bag/plants,
@@ -2272,10 +2272,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/engineering/main)
-"Mb" = (
-/obj/structure/transmitter/bridge,
-/turf/open/floor/plating,
-/area/station/construction)
 "Mg" = (
 /obj/machinery/door/airlock/public/glass,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -6427,7 +6423,7 @@ dn
 dn
 dn
 dn
-Fe
+dn
 dn
 dn
 dL
@@ -6514,7 +6510,7 @@ ef
 cY
 dn
 dn
-kv
+Fe
 dn
 dn
 dn
@@ -6884,7 +6880,7 @@ dn
 dn
 dn
 dn
-Mb
+KT
 dn
 dn
 dn

@@ -1,7 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Window } from 'tgui/layouts';
-import { Box, Button, Section, Stack, Table, Tabs } from 'tgui-core/components';
+import {
+  BlockQuote,
+  Box,
+  Button,
+  Section,
+  Stack,
+  Table,
+  Tabs,
+} from 'tgui-core/components';
+import type { BooleanLike } from 'tgui-core/react';
 
 type Data = {
   availability: number;
@@ -17,6 +26,7 @@ type Data = {
     phone_icon: string;
     display_name: string;
   }[];
+  is_advanced: BooleanLike;
 };
 
 export const PhoneMenu = (props) => {
@@ -33,6 +43,7 @@ export const PhoneMenu = (props) => {
 const GeneralPanel = (props) => {
   const { act, data } = useBackend<Data>();
   const { availability, last_caller } = data;
+  const isAdvanced = !!Number((data as any).is_advanced);
   const callers = Array.isArray(data.callers_list) ? data.callers_list : [];
   const available_transmitters = data.available_transmitters || [];
 
@@ -55,6 +66,7 @@ const GeneralPanel = (props) => {
       categories.push(category);
     }
   });
+  const showTabs = categories.length > 1;
 
   const [selectedPhone, setSelectedPhone] = useState<string | null>(null);
   const [currentCategory, setCategory] = useState(categories[0] || '');
@@ -87,80 +99,67 @@ const GeneralPanel = (props) => {
 
   return (
     <Box height="100%">
-      <Stack fill>
-        <Stack.Item width="30%">
-          <Stack vertical fill>
-            <Stack.Item grow>
-              <Section title="Call History" fill>
-                <Box height="calc(100% - 1.5em)" style={{ overflowY: 'auto' }}>
-                  {callers.length === 0 && !!last_caller && (
-                    <Box>{last_caller}</Box>
-                  )}
-                  {callers.map((c, idx) => (
-                    <Button
-                      fluid
-                      key={idx}
-                      color={c.dir === 'in' ? 'label' : 'good'}
-                      icon={c.dir === 'in' ? 'phone' : 'phone-slash'}
-                      textAlign="left"
-                      style={{
-                        whiteSpace: 'normal',
-                        wordBreak: 'break-word',
-                        paddingLeft: '5px',
-                      }}
-                    >
-                      {c.name} ({c.id})
-                    </Button>
-                  ))}
-                </Box>
-                <Button.Confirm
-                  icon="trash"
-                  color="transparent"
-                  confirmColor="red"
-                  confirmIcon="close"
-                  fluid
-                  onClick={() => act('clear_history')}
-                >
-                  Clear
-                </Button.Confirm>
-              </Section>
-            </Stack.Item>
-            <Stack.Item>
-              <Section>
-                <Button.Checkbox
-                  color="green"
-                  tooltip={dnd_tooltip}
-                  disabled={dnd_locked === 'Yes'}
-                  checked={dnd_is_on}
-                  fluid
-                  textAlign="center"
-                  onClick={() => act('toggle_dnd')}
-                  lineHeight="3em"
-                >
-                  Do Not Disturb
-                </Button.Checkbox>
-              </Section>
-            </Stack.Item>
-          </Stack>
-        </Stack.Item>
+      <Stack fill vertical>
         <Stack.Item grow>
-          <Stack vertical fill>
+          {' '}
+          {/* Первый горизонтальный */}
+          <Stack fill>
+            {isAdvanced && (
+              <Stack.Item width="30%">
+                <Section title="Call History" fill>
+                  <Box
+                    height="calc(100% - 1.5em)"
+                    style={{ overflowY: 'auto' }}
+                  >
+                    {callers.length === 0 && !!last_caller && (
+                      <Box>{last_caller}</Box>
+                    )}
+                    {callers.map((c, idx) => (
+                      <BlockQuote
+                        key={idx}
+                        color={c.dir === 'in' ? 'bad' : 'good'}
+                        textAlign="left"
+                        style={{
+                          whiteSpace: 'normal',
+                          wordBreak: 'break-word',
+                          paddingLeft: '5px',
+                        }}
+                      >
+                        {c.name} ({c.id})
+                      </BlockQuote>
+                    ))}
+                  </Box>
+                  <Button.Confirm
+                    icon="trash"
+                    color="transparent"
+                    confirmColor="red"
+                    confirmIcon="close"
+                    fluid
+                    onClick={() => act('clear_history')}
+                  >
+                    Clear
+                  </Button.Confirm>
+                </Section>
+              </Stack.Item>
+            )}
             <Stack.Item grow>
-              <Section fill>
+              <Section fill title="Phone Book">
                 <Stack vertical fill>
-                  <Stack.Item>
-                    <Tabs>
-                      {categories.map((val) => (
-                        <Tabs.Tab
-                          selected={val === currentCategory}
-                          onClick={() => setCategory(val)}
-                          key={val}
-                        >
-                          {val}
-                        </Tabs.Tab>
-                      ))}
-                    </Tabs>
-                  </Stack.Item>
+                  {showTabs && (
+                    <Stack.Item>
+                      <Tabs>
+                        {categories.map((val) => (
+                          <Tabs.Tab
+                            selected={val === currentCategory}
+                            onClick={() => setCategory(val)}
+                            key={val}
+                          >
+                            {val}
+                          </Tabs.Tab>
+                        ))}
+                      </Tabs>
+                    </Stack.Item>
+                  )}
                   <Stack.Item grow>
                     <Section fill scrollable>
                       {transmitters
@@ -180,7 +179,7 @@ const GeneralPanel = (props) => {
                             onClick={() => setSelectedPhone(val.phone_id)}
                             style={{ marginBottom: '0.5em', textAlign: 'left' }}
                           >
-                            {val.display_name}
+                            {val.display_name} ({val.phone_id})
                           </Button>
                         ))}
                     </Section>
@@ -199,15 +198,33 @@ const GeneralPanel = (props) => {
                           : act('call_phone', { phone_id: selectedPhone })
                       }
                     >
-                      {(data as any)?.current_call
-                        ? `Hang Up ${(data as any)?.current_call?.display_name || ''}`
-                        : 'Dial'}
+                      {(data as any)?.current_call ? `Hang Up` : 'Dial'}
                     </Button>
                   </Stack.Item>
                 </Stack>
               </Section>
             </Stack.Item>
-            <Stack.Item>
+          </Stack>
+        </Stack.Item>
+        <Stack.Item>
+          <Stack fill>
+            <Stack.Item width="30%">
+              <Section>
+                <Button.Checkbox
+                  color="green"
+                  tooltip={dnd_tooltip}
+                  disabled={dnd_locked === 'Yes'}
+                  checked={dnd_is_on}
+                  fluid
+                  textAlign="center"
+                  onClick={() => act('toggle_dnd')}
+                  lineHeight="3em"
+                >
+                  Do Not Disturb
+                </Button.Checkbox>
+              </Section>
+            </Stack.Item>
+            <Stack.Item grow>
               <Stack.Item>
                 <Section>
                   <Table>
