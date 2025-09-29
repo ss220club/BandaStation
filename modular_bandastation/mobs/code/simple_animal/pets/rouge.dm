@@ -9,10 +9,6 @@
 	icon_living = "rouge"
 	icon_dead = "rouge_dead"
 	icon_resting = "rouge_rest"
-	speak = list("Шшш", "Тсс!", "Тц тц тц!", "ШШшшШШшшШ!")
-	speak_emote = list("hisses")
-	emote_hear = list("Зевает", "Шипит", "Дурачится", "Толкается")
-	emote_see = list("Высовывает язык", "Кружится", "Трясёт хвостом")
 	health = 20
 	maxHealth = 20
 	attack_verb_continuous = "вгрызается"

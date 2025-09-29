@@ -50,47 +50,47 @@
 /datum/ai_planning_subtree/random_speech/insect
 	speech_chance = 5
 	sound = list('sound/mobs/non-humanoids/insect/chitter.ogg')
-	emote_hear = list("chitters.")
+	emote_hear = list("стрекочет.")
 
 /datum/ai_planning_subtree/random_speech/mothroach
 	speech_chance = 15
-	emote_hear = list("flutters.")
+	emote_hear = list("трепетает.")
 
 /datum/ai_planning_subtree/random_speech/mouse
 	speech_chance = 1
-	speak = list("Squeak!", "SQUEAK!", "Squeak?")
+	speak = list("Скви!", "СКВИИИ!", "Скви?")
 	sound = list('sound/mobs/non-humanoids/mouse/mousesqueek.ogg')
-	emote_hear = list("squeaks.")
-	emote_see = list("runs in a circle.", "shakes.")
+	emote_hear = list("пищит.")
+	emote_see = list("бегает по кругу.", "встряхивается.")
 
 /datum/ai_planning_subtree/random_speech/frog
 	speech_chance = 3
-	emote_see = list("jumps in a circle.", "shakes.")
+	emote_see = list("прыгает по кругу", "раздувается.")
 
 /datum/ai_planning_subtree/random_speech/lizard // all of these have to be three words long or i'm killing you. you're dead.
 	speech_chance = 3
-	emote_hear = list("stamps around some.", "hisses a bit.")
-	emote_see = list("blehs the tongue.", "tilts the head.", "does a spin.")
+	emote_hear = list("топчется.", "шипит.")
+	emote_see = list("шумит гортанью", "заплетается языком", "наклоняет голову.", "вертится.")
 
 /datum/ai_planning_subtree/random_speech/sheep
 	speech_chance = 5
-	speak = list("baaa","baaaAAAAAH!","baaah")
+	speak = list("бэээ","бэээЭЭЭЭЭ!","бэээ...")
 	sound = list('sound/mobs/non-humanoids/sheep/sheep1.ogg', 'sound/mobs/non-humanoids/sheep/sheep2.ogg', 'sound/mobs/non-humanoids/sheep/sheep3.ogg')
-	emote_hear = list("bleats.")
-	emote_see = list("shakes her head.", "stares into the distance.")
+	emote_hear = list("блеет.")
+	emote_see = list("трясет головой.", "пялится вдаль.")
 
 /datum/ai_planning_subtree/random_speech/rabbit
 	speech_chance = 10
-	speak = list("Mrrp.", "CHIRP!", "Mrrp?") // rabbits make some weird noises dude i don't know what to tell you
-	emote_hear = list("hops.")
-	emote_see = list("hops around.", "bounces up and down.")
+	speak = list("Мррр.", "Чиррр!", "Мррр?") // rabbits make some weird noises dude i don't know what to tell you
+	emote_hear = list("прыгает.")
+	emote_see = list("прыгает вокруг.", "скачет вверх и вниз.")
 
 /// For the easter subvariant of rabbits, these ones actually speak catchphrases.
 /datum/ai_planning_subtree/random_speech/rabbit/easter
 	speak = list(
-		"Hop into Easter!",
-		"Come get your eggs!",
-		"Prizes for everyone!",
+		"Врывайтесь в Пасху!",
+		"Приди за своими яйцами!",
+		"Наградя для всех!",
 	)
 
 /// These ones have a space mask on, so their catchphrases are muffled.
@@ -103,24 +103,24 @@
 
 /datum/ai_planning_subtree/random_speech/chicken
 	speech_chance = 15 // really talkative ladies
-	speak = list("Cluck!", "BWAAAAARK BWAK BWAK BWAK!", "Bwaak bwak.")
+	speak = list("Кудах!", "КУУУД КУУУД КУДАААААХ!", "Кудах-тах-тах.")
 	sound = list('sound/mobs/non-humanoids/chicken/clucks.ogg', 'sound/mobs/non-humanoids/chicken/bagawk.ogg')
-	emote_hear = list("clucks.", "croons.")
-	emote_see = list("pecks at the ground.","flaps her wings viciously.")
+	emote_hear = list("кудахчет.", "клокочет.")
+	emote_see = list("ключет землю.", "хлопает крыльями","дерзко машет крыльями")
 
 /datum/ai_planning_subtree/random_speech/chick
 	speech_chance = 4
-	speak = list("Cherp.", "Cherp?", "Chirrup.", "Cheep!")
+	speak = list("Чирик.", "Чирик?", "Чирип.", "Чик!")
 	sound = list('sound/mobs/non-humanoids/chicken/chick_peep.ogg')
-	emote_hear = list("cheeps.")
-	emote_see = list("pecks at the ground.","flaps her tiny wings.")
+	emote_hear = list("чирикает.")
+	emote_see = list("ключет землю.","машет крошечными крыльями.")
 
 /datum/ai_planning_subtree/random_speech/cow
 	speech_chance = 1
-	speak = list("moo?","moo","MOOOOOO")
+	speak = list("муу?","муу","МУУУУУ")
 	sound = list('sound/mobs/non-humanoids/cow/cow.ogg')
-	emote_hear = list("brays.")
-	emote_see = list("shakes her head.")
+	emote_hear = list("мычит.")
+	emote_see = list("трясет головой.")
 
 ///unlike normal cows, wisdom cows speak of wisdom and won't shut the fuck up
 /datum/ai_planning_subtree/random_speech/cow/wisdom
@@ -133,9 +133,9 @@
 
 /datum/ai_planning_subtree/random_speech/deer
 	speech_chance = 1
-	speak = list("Weeeeeeee?", "Weeee", "WEOOOOOOOOOO")
-	emote_hear = list("brays.")
-	emote_see = list("shakes her head.")
+	speak = list("Вуоооо?", "Воооо", "ВУОООООО")
+	emote_hear = list("ревет.")
+	emote_see = list("трясет головой.")
 
 /datum/ai_planning_subtree/random_speech/dog
 	speech_chance = 1
@@ -166,22 +166,22 @@
 
 /datum/ai_planning_subtree/random_speech/pig
 	speech_chance = 3
-	speak = list("oink?","oink","snurf")
+	speak = list("хрю?","хрю","хрюк")
 	sound = list('sound/mobs/non-humanoids/pig/pig1.ogg', 'sound/mobs/non-humanoids/pig/pig2.ogg')
-	emote_hear = list("snorts.")
-	emote_see = list("sniffs around.")
+	emote_hear = list("хрюкает.")
+	emote_see = list("обнюхивается.")
 
 /datum/ai_planning_subtree/random_speech/pony
 	speech_chance = 3
 	sound = list('sound/mobs/non-humanoids/pony/whinny01.ogg', 'sound/mobs/non-humanoids/pony/whinny02.ogg', 'sound/mobs/non-humanoids/pony/whinny03.ogg')
-	emote_hear = list("whinnies!")
-	emote_see = list("horses around.")
+	emote_hear = list("игогочет!")
+	emote_see = list("скачет по кругу.")
 
 /datum/ai_planning_subtree/random_speech/pony/tamed
 	speech_chance = 3
 	sound = list('sound/mobs/non-humanoids/pony/snort.ogg')
-	emote_hear = list("snorts.")
-	emote_see = list("snorts.")
+	emote_hear = list("фыркает.")
+	emote_see = list("фыркает.")
 
 /datum/ai_planning_subtree/random_speech/killer_tomato
 	speech_chance = 3

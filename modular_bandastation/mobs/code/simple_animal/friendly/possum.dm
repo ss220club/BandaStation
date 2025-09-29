@@ -10,10 +10,7 @@
 	icon_dead = "possum_dead"
 	icon_resting = "possum_sleep"
 	var/icon_harm = "possum_aaa"
-	speak = list("Hsss...", "Hisss...")
-	speak_emote = list("Hsss", "Hisss")
-	emote_hear = list("Aaaaa!", "Ahhss!")
-	emote_see = list("shakes its head.", "chases its tail.", "shivers.")
+	speak_emote = list("Хммм", "Хиссс")
 	maxHealth = 30
 	health = 30
 	mob_size = MOB_SIZE_SMALL
@@ -30,12 +27,16 @@
 	butcher_results = list(/obj/item/food/meat = 2)
 	// holder_type = /obj/item/holder/possum
 
-	ai_controller = /datum/ai_controller/basic_controller/goat
+	ai_controller = /datum/ai_controller/basic_controller/possum
 
 /mob/living/basic/possum/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
+	add_traits(list(TRAIT_FENCE_CLIMBER), INNATE_TRAIT)
+	AddElement(/datum/element/ai_retaliate)
+	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
+	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = food_types)
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
 
 /mob/living/basic/possum/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	if(user.combat_mode)

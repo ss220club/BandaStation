@@ -43,14 +43,15 @@
 	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
 	damaged_sound = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
 	talk_sound = list('modular_bandastation/mobs/sound/chicken_talk.ogg')
-	health = 40
-	maxHealth = 40
+	health = 50
+	maxHealth = 50
 	// holder_type = /obj/item/holder/cock
 
 	ai_controller = /datum/ai_controller/basic_controller/chicken/cock
 
 /mob/living/basic/chicken/cock/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	RemoveElement(/datum/component/egg_layer)	// No EGGs from Cock
 
@@ -118,4 +119,4 @@
 	gold_core_spawnable = FRIENDLY_SPAWN
 	blood_volume = BLOOD_VOLUME_NORMAL
 
-	ai_controller = /datum/ai_controller/basic_controller/walrus
+	ai_controller = /datum/ai_controller/basic_controller/base_animal

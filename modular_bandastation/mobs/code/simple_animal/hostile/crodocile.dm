@@ -2,7 +2,7 @@
 /mob/living/basic/crocodile
 	name = "crocodile"
 	desc = "Клац, клац, клац. Острые зубки, толстая кожа - страшно!"
-	icon = 'modular_bandastation/mobs/icons/crocodile.dmi'
+	icon = 'modular_bandastation/mobs/icons/mob/crocodile.dmi'
 	icon_state = "crocodile"
 	icon_living = "crocodile"
 	icon_dead = "crocodile_dead"
