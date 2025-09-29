@@ -10,6 +10,8 @@
 	maxHealth = 80
 	health = 80
 
+	ai_controller = /datum/ai_controller/basic_controller/pig/old
+
 /mob/living/basic/retaliate/goat/chef
 	name = "Боря"
 	desc = "Этот козёл - парнокопытное гурме шефа, в его мрачных глазах-бусинках так и читается амибициозный нрав! Он не твой друг, ведь за каждым игривым прыжком может скрываться неожиданный выпад."

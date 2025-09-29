@@ -5,7 +5,7 @@
 	speak_emote = list("квак","куак","квуак")
 
 	talk_sound = list('modular_bandastation/mobs/sound/frog_talk1.ogg', 'modular_bandastation/mobs/sound/frog_talk2.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/frog_damaged.ogg')
+	damaged_sounds = list('modular_bandastation/mobs/sound/frog_damaged.ogg')
 	death_sound = 'modular_bandastation/mobs/sound/frog_death.ogg'
 
 	attack_sound = 'modular_bandastation/mobs/sound/frog_scream_1.ogg'

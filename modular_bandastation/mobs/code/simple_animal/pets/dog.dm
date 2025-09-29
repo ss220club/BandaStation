@@ -7,7 +7,9 @@
 	melee_damage_upper = 10
 	attack_verb_continuous = "вгрызается"
 	attack_verb_simple = "кусает"
-	var/growl_sound = list('modular_bandastation/mobs/sound/dog_grawl1.ogg','modular_bandastation/mobs/sound/dog_grawl2.ogg') //Used in emote.
+	death_sound = 'modular_bandastation/mobs/sound/dog_yelp.ogg'
+	damaged_sounds = list('modular_bandastation/mobs/sound/dog_yelp.ogg')
+	var/list/growl_sounds = list('modular_bandastation/mobs/sound/dog_grawl1.ogg','modular_bandastation/mobs/sound/dog_grawl2.ogg') //Used in emote.
 
 	butcher_results = list(/obj/item/food/meat/slab/corgi/dog = 4)
 
@@ -27,7 +29,7 @@
 		else
 			if(M && stat != DEAD) // Same check here, even though emote checks it as well (poor form to check it only in the help case)
 				emote("growl")
-				playsound(src, pick(src.growl_sound), 75, TRUE)
+				playsound(src, pick(src.growl_sounds), 75, TRUE)
 
 
 /mob/living/basic/pet/dog/corgi

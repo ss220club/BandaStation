@@ -66,28 +66,10 @@
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
 
-/mob/living/basic/mouse/hamster/Initialize(mapload)
-	. = ..()
-	gender = prob(80) ? MALE : FEMALE
-
-	icon_state = initial(icon_state)
-	icon_living = initial(icon_living)
-	icon_dead = initial(icon_dead)
-	icon_resting = initial(icon_resting)
-
-	update_appearance(UPDATE_ICON_STATE, UPDATE_DESC)
-
-
-/mob/living/basic/mouse/hamster/color_pick()
-	return
-
 /mob/living/basic/mouse/hamster/update_desc()
 	. = ..()
 	desc = initial(desc)
 	desc += MALE ? " Самец!" : " Самочка! Ох... Нет... "
-
-/mob/living/basic/mouse/hamster/pull_constraint(atom/movable/AM, show_message = FALSE)
-	return TRUE
 
 /mob/living/basic/mouse/hamster/baby/start_pulling(atom/movable/AM, state, force = pull_force, show_message = FALSE)
 	if(show_message)

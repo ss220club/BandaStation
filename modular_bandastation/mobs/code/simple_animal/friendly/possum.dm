@@ -35,8 +35,6 @@
 	add_traits(list(TRAIT_FENCE_CLIMBER), INNATE_TRAIT)
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
-	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = food_types)
-	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
 
 /mob/living/basic/possum/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	if(user.combat_mode)

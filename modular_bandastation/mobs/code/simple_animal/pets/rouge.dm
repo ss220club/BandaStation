@@ -18,7 +18,6 @@
 	//var/obj/item/inventory_head // TODO Snake Fashion
 	faction = list("neutral", "syndicate")
 	gold_core_spawnable = NO_SPAWN
-	unique_pet = TRUE
 	///icon state of the collar we can wear
 	var/collar_icon_state
 

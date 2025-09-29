@@ -27,10 +27,9 @@
 	sharpness = SHARP_EDGED
 	attack_vis_effect = ATTACK_EFFECT_BITE
 
-	attack_sound = 'sound/weapons/items/bite.ogg'
+	attack_sound = 'sound/items/weapons/bite.ogg'
 	death_sound = 'modular_bandastation/mobs/sound/lizard_death_big.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/lizard_angry1.ogg', 'modular_bandastation/mobs/sound/lizard_angry2.ogg', 'modular_bandastation/mobs/sound/lizard_angry3.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/lizard_damaged.ogg')
+	damaged_sounds = list('modular_bandastation/mobs/sound/lizard_damaged.ogg')
 
 	minimum_survivable_temperature = 250 //Weak to cold
 	maximum_survivable_temperature = T0C + 200

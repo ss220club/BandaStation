@@ -489,6 +489,6 @@
 		/datum/ai_planning_subtree/attack_obstacle_in_path,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cheese,
-		/datum/ai_planning_subtree/random_speech/mouse,
+		/datum/ai_planning_subtree/random_speech/mouse/rat,	// SS220 EDIT
 		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cables,
 	)

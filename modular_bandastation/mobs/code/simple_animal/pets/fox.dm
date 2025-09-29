@@ -1,5 +1,6 @@
 /mob/living/basic/pet/fox
 	death_sound = 'modular_bandastation/mobs/sound/fox_yelp.ogg'
+	damaged_sounds = list('modular_bandastation/mobs/sound/fox_yelp.ogg')
 	// holder_type = /obj/item/holder/fox
 
 /mob/living/basic/pet/fox/fennec

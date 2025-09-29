@@ -7,15 +7,13 @@
 	attack_verb_continuous = "бодает"
 	attack_verb_simple = "бодает"
 	death_sound = 'modular_bandastation/mobs/sound/cow_death.ogg'
-	damaged_sound = list('modular_bandastation/mobs/sound/cow_damaged.ogg')
-	talk_sound = list('modular_bandastation/mobs/sound/cow_talk1.ogg', 'modular_bandastation/mobs/sound/cow_talk2.ogg')
+	damaged_sounds = list('modular_bandastation/mobs/sound/cow_damaged.ogg')
 
 /mob/living/basic/chicken
 	name = "курица"
 	desc = "Гордая несушка. Яички должны быть хороши!"
 	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
-	damaged_sound = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
-	talk_sound = list('modular_bandastation/mobs/sound/chicken_talk.ogg')
+	damaged_sounds = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
 	// holder_type = /obj/item/holder/chicken
 
 /mob/living/basic/chick
@@ -41,8 +39,7 @@
 	attack_verb_continuous = "клюёт"
 	attack_verb_simple = "клюёт"
 	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
-	damaged_sound = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
-	talk_sound = list('modular_bandastation/mobs/sound/chicken_talk.ogg')
+	damaged_sounds = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
 	health = 50
 	maxHealth = 50
 	// holder_type = /obj/item/holder/cock
@@ -61,8 +58,6 @@
 	attack_verb_continuous = "лягает"
 	attack_verb_simple = "лягает"
 	death_sound = 'modular_bandastation/mobs/sound/pig_death.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
-	damaged_sound = list()
 
 /mob/living/basic/goose
 	name = "гусь"
@@ -74,8 +69,7 @@
 	attack_verb_continuous = "щипает"
 	attack_verb_simple = "щипает"
 	death_sound = 'modular_bandastation/mobs/sound/duck_quak1.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/duck_talk1.ogg', 'modular_bandastation/mobs/sound/duck_talk2.ogg', 'modular_bandastation/mobs/sound/duck_talk3.ogg', 'modular_bandastation/mobs/sound/duck_quak1.ogg', 'modular_bandastation/mobs/sound/duck_quak2.ogg', 'modular_bandastation/mobs/sound/duck_quak3.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/duck_aggro1.ogg', 'modular_bandastation/mobs/sound/duck_aggro2.ogg')
+	damaged_sounds = list('modular_bandastation/mobs/sound/duck_aggro1.ogg', 'modular_bandastation/mobs/sound/duck_aggro2.ogg')
 
 /mob/living/basic/goose/gosling
 	name = "гусенок"

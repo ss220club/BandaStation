@@ -85,11 +85,29 @@
 	speak = list("ГРРР!", "Гррр!", "Рыр!", "Грх!")
 	emote_hear = list("рычит.", "ворчит.", "грохочет.")
 	emote_see = list("топает.", "свирепо пялится.")
+	sound = list('modular_bandastation/mobs/sound/lizard_angry1.ogg', 'modular_bandastation/mobs/sound/lizard_angry2.ogg', 'modular_bandastation/mobs/sound/lizard_angry3.ogg')
 
-// =========== ... ===========
+// =========== Крысы ===========
+/datum/ai_planning_subtree/random_speech/mouse/rat
+	sound = list('modular_bandastation/mobs/sound/rat_talk.ogg')
 
-// =========== ... ===========
+// =========== Старый хряк, Саня ===========
+/datum/ai_controller/basic_controller/pig/old
 
-// =========== ... ===========
+/datum/ai_controller/basic_controller/pig/old/New(atom/new_pawn)
+	. = ..()
+	LAZYREMOVE(planning_subtrees, /datum/ai_planning_subtree/random_speech/pig)
+	LAZYADD(planning_subtrees, /datum/ai_planning_subtree/random_speech/pig/old)
+
+/datum/ai_planning_subtree/random_speech/pig/old
+	sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')	// SS220 EDIT
+
+// =========== Зомби звуки ===========
+
+/datum/ai_planning_subtree/random_speech/zombie
+	sound = list('modular_bandastation/mobs/sound/zombie_idle1.ogg', 'modular_bandastation/mobs/sound/zombie_idle3.ogg')
+
+/datum/ai_planning_subtree/random_speech/zombie/fast
+	sound = list('modular_bandastation/mobs/sound/fast_zombie_idle1.ogg', 'modular_bandastation/mobs/sound/fast_zombie_idle2.ogg')
 
 // =========== ... ===========

@@ -1,4 +1,6 @@
 /mob/living/basic/pet/cat
+	death_sound = 'modular_bandastation/mobs/sound/cat_meow.ogg'
+	damaged_sounds = list('modular_bandastation/mobs/sound/cat_meow.ogg')
 	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
 	// holder_type = /obj/item/holder/cat2
 

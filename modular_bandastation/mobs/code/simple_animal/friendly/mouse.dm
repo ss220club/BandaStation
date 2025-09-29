@@ -1,7 +1,6 @@
 /mob/living/basic/mouse
 	death_sound = 'modular_bandastation/mobs/sound/rat_death.ogg'
-	talk_sound = list('modular_bandastation/mobs/sound/rat_talk.ogg')
-	damaged_sound = list('modular_bandastation/mobs/sound/rat_wound.ogg')
+	damaged_sounds = list('modular_bandastation/mobs/sound/rat_wound.ogg')
 	blood_volume = BLOOD_VOLUME_SURVIVE
 	butcher_results = list(/obj/item/food/meat/slab/mouse = 1)
 
@@ -24,12 +23,6 @@
 	var/obj/effect/decal/remains = new /obj/effect/decal/remains/mouse(src.loc)
 	remains.pixel_x = pixel_x
 	remains.pixel_y = pixel_y
-
-// /mob/living/basic/mouse/emote(act, m_type = 1, message = null, force)
-
-// 		if("help")
-// 			to_chat(src, "scream, squeak")
-// 			playsound(src, damaged_sound, 40, 1)
 
 /mob/living/basic/mouse/brown/tom
 	maxHealth = 10
