@@ -239,7 +239,7 @@
 /obj/structure/statue/dummy
 	name = "Unknown"
 	desc = null
-	icon = 'modular_bandastation/mobs/icons/dummies.dmi'
+	icon = 'modular_bandastation/mobs/icons/mob/dummies.dmi'
 	icon_state = null
 	pixel_y = 7
 	anchored = TRUE

@@ -44,17 +44,6 @@
 	if(. && length(src.damaged_sounds) && src.stat != DEAD)
 		playsound(src, pick(src.damaged_sounds), 40, 1)
 
-
-// Simple animal procs
-/mob/living/basic/start_pulling(atom/movable/AM, state, force = pull_force, supress_message = FALSE)
-
-	if(pull_constraint(AM, supress_message))
-		return ..()
-
-/mob/living/basic/proc/pull_constraint(atom/movable/AM, supress_message = FALSE)
-	return TRUE
-
-
 // Animals additions
 
 /* Megafauna */

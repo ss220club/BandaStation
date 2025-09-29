@@ -12,15 +12,16 @@
 	icon_living = "snail"
 	icon_dead = "snail_dead"
 
-	unsuitable_cold_damage = 0
-	unsuitable_heat_damage = 0
-	unsuitable_atmos_damage = 0
+	habitable_atmos = null
+	minimum_survivable_temperature = TCMB
+	maximum_survivable_temperature = T0C + 1500
 
 	var/datum/reagent/wet_reagent = /datum/reagent/water
 	var/wet_volume = 10
 
-/mob/living/basic/snail/space/Process_Spacemove(movement_dir = 0)
-	return 1
+/mob/living/basic/snail/space/Initialize(mapload)
+	. = ..()
+	add_traits(list(TRAIT_SPACEWALK, TRAIT_SWIMMER, TRAIT_FENCE_CLIMBER, TRAIT_SNOWSTORM_IMMUNE), INNATE_TRAIT)
 
 /mob/living/basic/snail/space/Move(atom/newloc, direct, movetime)
 	var/oldLoc = src.loc
