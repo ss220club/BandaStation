@@ -321,11 +321,11 @@
 				sleep(REEL_DEACTIVATE_DELAY)
 
 	else if(linelength == 5)
-		visible_message("<b>[src]</b> says, 'Большой выигрыш! Вы выиграли тысячу кредитов!'")
+		visible_message("<b>[src]</b> says, 'Большой выигрыш! Тысяча кредитов!'")
 		give_money(BIG_PRIZE)
 
 	else if(linelength == 4)
-		visible_message("<b>[src]</b> says, 'Выигрыш! Вы выиграли четыреста кредитов!'")
+		visible_message("<b>[src]</b> says, 'Выигрыш! Четыреста кредитов!'")
 		give_money(SMALL_PRIZE)
 
 	else if(linelength == 3)
