@@ -606,7 +606,7 @@
 	mix_message = "Красный свет из сосуда заполняет всё вокруг."
 
 /datum/reagent/consumable/slimetea
-	name = "Слизнечай"
+	name = "Slimetea"
 	description = "Странная жидкость, слегка студинистая, в которой плавают ягоды, но пахнет вкусно."
 	color = "#22e46c"
 	taste_description = "яблочный джем с черникой и чаем"
@@ -617,7 +617,7 @@
 
 /datum/glass_style/drinking_glass/slimetea
 	required_drink_type = /datum/reagent/consumable/slimetea
-	name = "Слизнечай"
+	name = "Slimetea"
 	desc = "Стакан с студинистой жидкостью. внутри которой плавают ягоды."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "slimetea"
@@ -638,7 +638,7 @@
 		to_chat(affected_mob,span_notice(pick("Вы чувствуете себя склизским","Вы прилипаете ко всему","Вы слышите как что-то хлюпает в вашем ботинке")))
 
 /datum/reagent/consumable/glace
-	name = "Гляссе"
+	name = "Glace"
 	description = "Кофе с шариком мороженного сверху."
 	color = "#dfa057"
 	taste_description = "холодный кофе, пломбир и шоколадная крошка"
@@ -649,7 +649,7 @@
 
 /datum/glass_style/drinking_glass/glace
 	required_drink_type = /datum/reagent/consumable/glace
-	name = "Гляссе"
+	name = "Glace"
 	desc = "Стакан доверху заполненный мороженным, который плавает на кофе."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "glace"
@@ -665,7 +665,7 @@
 	required_temp = 213
 
 /datum/reagent/consumable/robbusto
-	name = "Роббусто"
+	name = "Robbusto"
 	description = "Крепкий кофе для рабочей смены."
 	color = "#4e361b"
 	taste_description = "горький кофе с сладким послевкусием"
@@ -676,7 +676,7 @@
 
 /datum/glass_style/drinking_glass/robbusto
 	required_drink_type = /datum/reagent/consumable/robbusto
-	name = "Роббусто"
+	name = "Robbusto"
 	desc = "Стакан с крепким кофе."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "robbusto"
@@ -718,7 +718,7 @@
 		affected_mob.emote(pick("twitch", "shiver"))
 
 /datum/reagent/consumable/vortex
-	name = "Вортекс-кофе"
+	name = "Vortex"
 	description = "Кофе, тоник и Блюспейс, любимый рецепт рода Дремисов."
 	color = "#45a2e0"
 	taste_description = "горечь кофе с привкусом стекла"
@@ -729,7 +729,7 @@
 
 /datum/glass_style/drinking_glass/vortex
 	required_drink_type = /datum/reagent/consumable/vortex
-	name = "Вортекс-кофе"
+	name = "Vortex"
 	desc = "Кофе, тоник и Блюспейс, любимый рецепт рода Дремисов."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "vortex"
@@ -751,7 +751,7 @@
 		do_teleport(affected_mob, get_turf(affected_mob), pick(2,3), channel = TELEPORT_CHANNEL_BLUESPACE)
 
 /datum/reagent/consumable/mokko
-	name = "Мокко"
+	name = "Mokko"
 	description = "Изящный кофе для распития, сидя в капитанском кресле."
 	color = "#57361b"
 	taste_description = "капучинно с взбитыми сливками и шоколадной крошкой"
@@ -762,7 +762,7 @@
 
 /datum/glass_style/drinking_glass/mokko
 	required_drink_type = /datum/reagent/consumable/mokko
-	name = "Мокко"
+	name = "Mokko"
 	desc = "Изящный кофе для распития, сидя в капитанском кресле."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "mokka"
@@ -778,7 +778,7 @@
 	required_temp = 303
 
 /datum/reagent/consumable/frappuchino
-	name = "Фраппучино"
+	name = "Frappuchino"
 	description = "Холодный кофе со льдом, который вы уже где-то видели..."
 	color = "#bb8960"
 	taste_description = "мороженное с кофе, столь холодный, что зубы сводит"
@@ -789,7 +789,7 @@
 
 /datum/glass_style/drinking_glass/frappuchino
 	required_drink_type = /datum/reagent/consumable/frappuchino
-	name = "Фраппучино"
+	name = "Frappuchino"
 	desc = "Холодный кофе со льдом, который вы уже где-то видели..."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "frappuchino"
@@ -806,7 +806,7 @@
 	required_temp = 243
 
 /datum/reagent/consumable/macchiato
-	name = "Макиато"
+	name = "Macchiato"
 	description = "Младшая сестра мокко. Или латте? Здесь слишком мало молока чтобы понять."
 	color = "#503620"
 	taste_description = "сливочный вкус с густой бархатистой молочной пенкой"
@@ -817,7 +817,7 @@
 
 /datum/glass_style/drinking_glass/macchiato
 	required_drink_type = /datum/reagent/consumable/macchiato
-	name = "Макиато"
+	name = "Macchiato"
 	desc = "Младшая сестра мокко. Или латте? Здесь слишком мало молока чтобы понять."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "macchiato"
@@ -832,7 +832,7 @@
 	required_temp = 303
 
 /datum/reagent/consumable/espresso
-	name = "Эспрессо"
+	name = "Espresso"
 	description = "Бессмертная классика кофейных напитков в миниатюрном формате."
 	color = "#503620"
 	taste_description = "кисло-сладкий кофе с легким оттенком горечи"
@@ -843,7 +843,7 @@
 
 /datum/glass_style/drinking_glass/espresso
 	required_drink_type = /datum/reagent/consumable/espresso
-	name = "Эспрессо"
+	name = "Espresso"
 	desc = "Бессмертная классика кофейных напитков в миниатюрном формате."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "espresso"
@@ -858,7 +858,7 @@
 	required_temp = 333
 
 /datum/reagent/consumable/fruit_tea
-	name = "Фруктовый чай"
+	name = "Fruit tea"
 	description = "Зелёный чай с плавающими в нем ягодами."
 	color = "#b9a756"
 	taste_description = "кисло-сладкий чай с ягодным вкусном"
@@ -869,7 +869,7 @@
 
 /datum/glass_style/drinking_glass/fruit_tea
 	required_drink_type = /datum/reagent/consumable/fruit_tea
-	name = "Фруктовый чай"
+	name = "Fruit tea"
 	desc = "Зелёный чай с плавающими в нем ягодами."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "fruit_tea"
@@ -885,7 +885,7 @@
 	required_temp = 333
 
 /datum/reagent/consumable/pumpkin_latte
-	name = "Тыквенный латте"
+	name = "Pumpkin latte"
 	description = "Латте с содержанием тыквенного сока."
 	color = "#e48648"
 	taste_description = "сладкий латте с привкусом тыквы"
@@ -896,7 +896,7 @@
 
 /datum/glass_style/drinking_glass/pumpkin_latte
 	required_drink_type = /datum/reagent/consumable/pumpkin_latte
-	name = "Тыквенный латте"
+	name = "Pumpkin latte"
 	desc = "Латте с содержанием тыквенного сока."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "pumpkin_latte"
@@ -912,7 +912,7 @@
 	required_temp = 333
 
 /datum/reagent/consumable/teh_tahlua
-	name = "Тэ-талуа"
+	name = "Teh tahlua"
 	description = "очень сладкий черный чай с апельсиновым соком"
 	color = "#e7c6b0"
 	taste_description = "кисло-сладкий чай с ягодным вкусном"
@@ -923,7 +923,7 @@
 
 /datum/glass_style/drinking_glass/teh_tahlua
 	required_drink_type = /datum/reagent/consumable/teh_tahlua
-	name = "Тэ-талуа"
+	name = "Teh tahlua"
 	desc = "Зелёный чай с плавающими в нем ягодами."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "teh_tahlua"
@@ -939,7 +939,7 @@
 	required_temp = 333
 
 /datum/reagent/consumable/chifir
-	name = "Чифир"
+	name = "Chifir"
 	description = "Крайне распространенный в местах не столь отдалённых напиток."
 	color = "#e7c6b0"
 	taste_description = "очень крепкий чай, отдающий железом"
@@ -950,7 +950,7 @@
 
 /datum/glass_style/drinking_glass/chifir
 	required_drink_type = /datum/reagent/consumable/chifir
-	name = "Чифир"
+	name = "Chifir"
 	desc = "Крайне распространенный в местах не столь отдалённых напиток."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "chifir"
@@ -976,7 +976,7 @@
 		. = UPDATE_MOB_HEALTH
 
 /datum/reagent/consumable/lord_of_perma
-	name = "Повелитель Пермабрига"
+	name = "Lord of Permabrig"
 	description = "Любимый напиток тех, кто не желает покидать родной пермабриг."
 	color = "#e7c6b0"
 	taste_description = "молочный улун с бананом и ванилью"
@@ -987,7 +987,7 @@
 
 /datum/glass_style/drinking_glass/lord_of_perma
 	required_drink_type = /datum/reagent/consumable/lord_of_perma
-	name = "Повелитель Пермабрига"
+	name = "Lord of Permabrig"
 	desc = "Любимый напиток тех, кто не желает покидать родной пермабриг."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "lord_of_perma"
@@ -1008,7 +1008,7 @@
 		drinker.say(pick("Мам, у меня всё хорошо, кормят, поят, жильё бесплатное. Только соседи странные — домой не уходят.","Ты кем был на свободе? Музыкантом. А тут кем будешь? Тут тоже: «играю» на нервах охраны.","Мужики, а что у нас сегодня на ужин? Да как обычно: решётка с котлетами!"))
 
 /datum/reagent/consumable/lavender_raf
-	name = "Лавандовый рафф"
+	name = "Lavender ruff"
 	description = "Напиток для тех, кто обожает ИИ и разработку."
 	color = "#be30e9"
 	taste_description = "кофе со сливками и вкусом сушенной лаванды"
@@ -1019,7 +1019,7 @@
 
 /datum/glass_style/drinking_glass/lavender_raf
 	required_drink_type = /datum/reagent/consumable/lavender_raf
-	name = "Лавандовый рафф"
+	name = "Lavender ruff"
 	desc = "Напиток для тех, кто обожает ИИ и разработку."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "lavender_raf"

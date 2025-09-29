@@ -18,9 +18,6 @@
 	var/heater_coefficient = 0.45
 	/// Current temperature for reagents
 	var/temperature = 273
-	var/TEAPOT_MAX_TEMP = 333
-	var/TEAPOT_MIN_TEMP = 213
-	var/TEAPOT_TEMP_STEP = 30
 
 /obj/machinery/teapot/Initialize(mapload)
 	. = ..()
@@ -46,7 +43,7 @@
 		if(EXPLODE_HEAVY)
 			SSexplosions.med_mov_atom += glass
 		if(EXPLODE_LIGHT)
-			SSexplosions.low_mov_atom +=glass
+			SSexplosions.low_mov_atom += glass
 
 /obj/machinery/teapot/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	var/result = NONE
@@ -281,15 +278,15 @@
 
 
 		if("temp_up")
-			if(temperature < TEAPOT_MAX_TEMP)
-				temperature += TEAPOT_TEMP_STEP
+			if(temperature < 333)
+				temperature += 30
 				balloon_alert(user,"Температура: [temperature]")
 			else
 				balloon_alert(user,"Это максимальная температура")
 
 		if("temp_down")
-			if(temperature > TEAPOT_MIN_TEMP)
-				temperature += -TEAPOT_TEMP_STEP
+			if(temperature > 213)
+				temperature += -30
 				balloon_alert(user,"Температура: [temperature]")
 			else
 				balloon_alert(user,"Это минимальная температура")

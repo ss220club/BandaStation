@@ -5891,6 +5891,132 @@ instrumental = "голландским горячим шоколадом"
 prepositional = "голландском горячем шоколаде"
 gender = "male"
 
+["Slimetea"]
+nominative = "Слизнечай"
+genitive = "Слизнечая"
+dative = "Слизнечаю"
+accusative = "Слизнечай"
+instrumental = "Слизнечаем"
+prepositional = "Слизнечае"
+gender = "male"
+
+["Robbusto"]
+nominative = "Роббусто"
+genitive = "Роббусто"
+dative = "Роббусто"
+accusative = "Роббусто"
+instrumental = "Роббусто"
+prepositional = "Роббусто"
+gender = "male"
+
+["Glace"]
+nominative = "Гляссе"
+genitive = "Гляссе"
+dative = "Гляссе"
+accusative = "Гляссе"
+instrumental = "Гляссе"
+prepositional = "Гляссе"
+gender = "neuter"
+
+["Vortex"]
+nominative = "Вортекс-кофе"
+genitive = "Вортекс-кофе"
+dative = "Вортекс-кофе"
+accusative = "Вортекс-кофе"
+instrumental = "Вортекс-кофе"
+prepositional = "Вортекс-кофе"
+gender = "neuter"
+
+["Mokko"]
+nominative = "Мокко"
+genitive = "Мокко"
+dative = "Мокко"
+accusative = "Мокко"
+instrumental = "Мокко"
+prepositional = "Мокко"
+gender = "neuter"
+
+["Frappuchino"]
+nominative = "Фраппучино"
+genitive = "Фраппучино"
+dative = "Фраппучино"
+accusative = "Фраппучино"
+instrumental = "Фраппучино"
+prepositional = "Фраппучино"
+gender = "neuter"
+
+["Macchiato"]
+nominative = "Макиато"
+genitive = "Макиато"
+dative = "Макиато"
+accusative = "Макиато"
+instrumental = "Макиато"
+prepositional = "Макиато"
+gender = "neuter"
+
+["Espresso"]
+nominative = "Эспрессо"
+genitive = "Эспрессо"
+dative = "Эспрессо"
+accusative = "Эспрессо"
+instrumental = "Эспрессо"
+prepositional = "Эспрессо"
+gender = "neuter"
+
+["Fruit tea"]
+nominative = "Фруктовый чай"
+genitive = "Фруктового чая"
+dative = "Фруктовому чаю"
+accusative = "Фруктовый чай"
+instrumental = "Фруктовым чаем"
+prepositional = "Фруктовом чае"
+gender = "male"
+
+["Pumpkin latte"]
+nominative = "Тыквенный латте"
+genitive = "Тыквенного латте"
+dative = "Тыквенному латте"
+accusative = "Тыквенный латте"
+instrumental = "Тыквенным латте"
+prepositional = "Тыквенном латте"
+gender = "male"
+
+["Teh tahlua"]
+nominative = "Тэ-талуа"
+genitive = "Тэ-талуа"
+dative = "Тэ-талуа"
+accusative = "Тэ-талуа"
+instrumental = "Тэ-талуа"
+prepositional = "Тэ-талуа"
+gender = "neuter"
+
+["Chifir"]
+nominative = "Чифир"
+genitive = "Чифира"
+dative = "Чифиру"
+accusative = "Чифир"
+instrumental = "Чифиром"
+prepositional = "Чифире"
+gender = "male"
+
+["Lord of Permabrig"]
+nominative = "Повелитель Пермабрига"
+genitive = "Повелителя Пермабрига"
+dative = "Повелителю Пермабрига"
+accusative = "Повелителя Пермабрига"
+instrumental = "Повелителем Пермабрига"
+prepositional = "Повелителе Пермабрига"
+gender = "male"
+
+["Lavender ruff"]
+nominative = "Лавандовый рафф"
+genitive = "Лавандового раффа"
+dative = "Лавандовому раффу"
+accusative = "Лавандовый рафф"
+instrumental = "Лавандовым раффом"
+prepositional = "Лавандовом раффе"
+gender = "male"
+
 # MARK: Boozies
 ["Beekhof Blauw Curaçao"]
 nominative = "Бейкхоф Блау Кюрасао"
@@ -26859,3 +26985,4 @@ accusative = "зал заседаний совета"
 instrumental = "залом заседаний совета"
 prepositional = "зале заседаний совета"
 gender = "male"
+

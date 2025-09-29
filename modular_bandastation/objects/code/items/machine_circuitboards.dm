@@ -8,4 +8,8 @@
 		/obj/item/stack/sheet/iron = 5,
 		/obj/item/stack/sheet/glass = 5
 		)
-	needs_anchored = FALSE //wew lad
+	needs_anchored = FALSE
+
+/datum/techweb_node/cafeteria_equip/New()
+	. = ..()
+	design_ids += "teapot"
