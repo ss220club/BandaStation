@@ -4,9 +4,20 @@
 		"remove_body_modification" = PROC_REF(remove_body_modification),
 		"set_body_modification_manufacturer" = PROC_REF(set_body_modification_manufacturer),
 	)
+	var/last_preview_slot = null
 
 /// Append all of these into ui_data
 /datum/preference_middleware/body_modifications/get_ui_data(mob/user)
+	if (last_preview_slot != preferences.default_slot)
+		var/atom/movable/screen/map_view/char_preview/preview = preferences.character_preview_view
+		if (!preview)
+			preview = preferences.create_character_preview_view(user)
+		else
+			preview.create_body()
+		preferences.apply_prefs_to(preview.body, TRUE)
+		preview.appearance = preferences.render_new_preview_appearance(preview.body, preview.show_job_clothes)
+		last_preview_slot = preferences.default_slot
+
 	var/list/data = list()
 	data["applied_body_modifications"] = get_applied_body_modifications()
 	data["incompatible_body_modifications"] = get_incompatible_body_modifications(user)
@@ -45,10 +56,12 @@
 	PRIVATE_PROC(TRUE)
 
 	var/list/incompatible_body_modifications = list()
-	for(var/body_modification_key in GLOB.body_modifications)
-		if(GLOB.body_modifications[body_modification_key].can_be_applied(user))
-			continue
+	var/list/applied = preferences.read_preference(/datum/preference/body_modifications)
 
+	for(var/body_modification_key in GLOB.body_modifications)
+		var/datum/body_modification/M = GLOB.body_modifications[body_modification_key]
+		if (!LAZYLEN(M.incompatible_body_modifications & applied))
+			continue
 		incompatible_body_modifications += body_modification_key
 
 	return incompatible_body_modifications
@@ -103,9 +116,12 @@
 
 	if (istype(mod, /datum/body_modification/bodypart_prosthesis))
 		var/datum/body_modification/bodypart_prosthesis/prosthesis = mod
-		prefs[key] = list("selected_manufacturer" = prosthesis.selected_manufacturer)
+		prefs[key] = list(
+			"type" = mod.type,
+			"selected_manufacturer" = prosthesis.selected_manufacturer,
+		)
 	else
-		prefs[key] = TRUE
+		prefs[key] = list("type" = mod.type)
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], prefs)
 	return TRUE
@@ -158,8 +174,12 @@
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], prefs)
 
-	if (istype(user, /mob/living/carbon/human))
-		GLOB.body_modifications[key].apply_to_human(user)
+	var/atom/movable/screen/map_view/char_preview/preview = preferences.character_preview_view
+	if (!preview)
+		preview = preferences.create_character_preview_view(user)
+	else
+		preview.create_body()
+	preferences.apply_prefs_to(preview.body, TRUE)
+	preview.appearance = preferences.render_new_preview_appearance(preview.body, preview.show_job_clothes)
 
 	return TRUE
-
