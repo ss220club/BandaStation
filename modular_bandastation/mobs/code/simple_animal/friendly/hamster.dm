@@ -7,7 +7,11 @@
 	icon_living = "hamster"
 	icon_dead = "hamster_dead"
 	icon_resting = "hamster_rest"
+	held_state = "hamster"
 	gender = MALE
+	body_color = ""
+	colored_mob = "hamster"
+	possible_colors = list("")
 	speak_chance = 0
 	// holder_type = /obj/item/holder/hamster
 	gold_core_spawnable = FRIENDLY_SPAWN
