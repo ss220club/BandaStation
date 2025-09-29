@@ -65,7 +65,9 @@
 
 /datum/ai_planning_subtree/random_speech/frog
 	speech_chance = 3
-	emote_see = list("прыгает по кругу", "раздувается.")
+	speak = list("Квак!","КУААК!","Квуак!")
+	emote_hear = list("квак","куак","квуак")
+	emote_see = list("прыгает по кругу", "раздувается.", "лежит расслабленная.", "издает гортанные звуки.", "лупает глазками.")
 
 /datum/ai_planning_subtree/random_speech/lizard // all of these have to be three words long or i'm killing you. you're dead.
 	speech_chance = 3

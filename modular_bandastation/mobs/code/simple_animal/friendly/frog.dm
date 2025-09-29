@@ -2,14 +2,11 @@
 	name = "лягушка"
 	real_name = "лягушка"
 	desc = "Выглядит грустным не по средам и когда её не целуют."
-	speak = list("Квак!","КУААК!","Квуак!")
 	speak_emote = list("квак","куак","квуак")
-	emote_hear = list("квак","куак","квуак")
-	emote_see = list("лежит расслабленная", "издает гортанные звуки", "лупает глазками")
 
 	talk_sound = list('modular_bandastation/mobs/sound/frog_talk1.ogg', 'modular_bandastation/mobs/sound/frog_talk2.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/frog_damaged.ogg')
-	death_sound = 'modular_bandastation/mobs/sound/frog_deatuser.ogg'
+	death_sound = 'modular_bandastation/mobs/sound/frog_death.ogg'
 
 	attack_sound = 'modular_bandastation/mobs/sound/frog_scream_1.ogg'
 	stepped_sound = 'modular_bandastation/mobs/sound/frog_scream_2.ogg'
@@ -24,7 +21,7 @@
 	icon_living = "rare_frog"
 	icon_dead = "rare_frog_dead"
 	icon_resting = "rare_frog"
-	melee_damage_type = TOXIN
+	melee_damage_type = TOX
 	melee_damage_lower = 1
 	melee_damage_upper = 3
 
