@@ -147,9 +147,9 @@
 	desc = "Слиток зазубренной тени."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "claw_right"
-	lefthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
-	righthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
-	inhand_icon_state = "claw_right"
+	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/items_lefthand.dmi'
+	inhand_icon_state = "nothing"
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = INDESTRUCTIBLE
 	force = 18

@@ -6,14 +6,14 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 
 /datum/team/shadow_hive
 	name = "\improper Shadow Hive"
-	var/list/lings = list()
-	var/list/thralls = list()
-	var/list/ling_roles = list()
-	var/mob/leader
-	var/asc_thralls_needed = 0
 	var/shadowling_vote
 	var/is_shadowling_vote_finished
 	var/is_shadowling_engine_sabotage_used
+	var/asc_thralls_needed = 0
+	var/mob/leader
+	var/list/lings = list()
+	var/list/thralls = list()
+	var/list/ling_roles = list()
 
 /datum/team/shadow_hive/New()
 	. = ..()
