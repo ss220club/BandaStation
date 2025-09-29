@@ -40,7 +40,7 @@
 		return role || SHADOWLING_ROLE_MAIN
 	return null
 
-/datum/action/cooldown/shadowling/hive_sync/proc/role_allowed(var/datum/action/cooldown/shadowling/A, ling_role)
+/datum/action/cooldown/shadowling/hive_sync/proc/role_allowed(datum/action/cooldown/shadowling/A, ling_role)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
 		return FALSE
