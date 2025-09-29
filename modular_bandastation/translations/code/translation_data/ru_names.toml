@@ -27441,6 +27441,79 @@ instrumental = "тактической штурмовой кувалдой D-6"
 prepositional = "тактической штурмовой кувалде D-6"
 gender = "female"
 
+## Station Goals
+
+["DNA Vault"]
+nominative = "ДНК хранилище"
+genitive = "ДНК хранилище"
+dative = "ДНК хранилищу"
+accusative = "ДНК хранилище"
+instrumental = "ДНК хранилищем"
+prepositional = "ДНК хранилище"
+
+["DNA Sampler"]
+nominative = "ДНК семплер"
+genitive = "ДНК семплера"
+dative = "ДНК семплеру"
+accusative = "ДНК семплер"
+instrumental = "ДНК семплером"
+prepositional = "ДНК семплере"
+gender = "male"
+
+["Bluespace Artillery Generator"]
+nominative = "генератор блюспейс артиллерии"
+genitive = "генератора блюспейс артиллерии"
+dative = "генератору блюспейс артиллерии"
+accusative = "генератор блюспейс артиллерии"
+instrumental = "генератором блюспейс артиллерии"
+prepositional = "генераторе блюспейс артиллерии"
+gender = "male"
+
+["Bluespace Artillery Bore"]
+nominative = "ствол блюспейс артиллерии"
+genitive = "ствола блюспейс артиллерии"
+dative = "стволу блюспейс артиллерии"
+accusative = "ствол блюспейс артиллерии"
+instrumental = "стволом блюспейс артиллерии"
+prepositional = "стволе блюспейс артиллерии"
+gender = "male"
+
+["Bluespace Artillery Fusor"]
+nominative = "реактор блюспейс артиллерии"
+genitive = "реактора блюспейс артиллерии"
+dative = "реактору блюспейс артиллерии"
+accusative = "реактор блюспейс артиллерии"
+instrumental = "реактором блюспейс артиллерии"
+prepositional = "реакторе блюспейс артиллерии"
+gender = "male"
+
+["Bluespace Artillery"]
+nominative = "блюспейс артиллерия"
+genitive = "блюспейс артиллерии"
+dative = "блюспейс артиллерии"
+accusative = "блюспейс артиллерию"
+instrumental = "блюспейс артиллерией"
+prepositional = "блюспейс артиллерии"
+gender = "female"
+
+["bluespace artillery control"]
+nominative = "консоль управления блюспейс артиллерией"
+genitive = "консоли управления блюспейс артиллерией"
+dative = "консоли управления блюспейс артиллерией"
+accusative = "консоль управления блюспейс артиллерией"
+instrumental = "консолью управления блюспейс артиллерией"
+prepositional = "консоли управления блюспейс артиллерией"
+gender = "female"
+
+["Meteor Shield Satellite"]
+nominative = "спутник метеоритного щита"
+genitive = "спутника метеоритного щита"
+dative = "спутнику метеоритного щита"
+accusative = "спутник метеоритного щита"
+instrumental = "спутником метеоритного щита"
+prepositional = "спутнике метеоритного щита"
+gender = "male"
+
 ["'ChapAI' Core AI Module"]
 nominative = "плата основных законов ИИ 'Священник'"
 genitive = "платы основных законов ИИ 'Священник'"

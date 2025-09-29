@@ -1,0 +1,4 @@
+author: "ostrkrs"
+delete-after: True
+changes:
+  - rscadd: "Теперь плюшевая акула доступна в меню лодаута."

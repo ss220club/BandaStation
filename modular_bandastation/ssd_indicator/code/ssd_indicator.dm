@@ -95,7 +95,8 @@ GLOBAL_VAR_INIT(ssd_indicator_overlay, mutable_appearance('modular_bandastation/
 	handle_detach(source)
 
 /mob/living/Logout()
-	AddElement(/datum/element/ssd)
+	if(!QDELETED(src))
+		AddElement(/datum/element/ssd)
 	. = ..()
 
 /mob/living

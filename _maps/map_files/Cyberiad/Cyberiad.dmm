@@ -10737,11 +10737,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
-"cDX" = (
-/obj/machinery/bluespace_vendor/directional/west,
-/obj/structure/closet,
-/turf/open/floor/iron,
-/area/station/security/prison/ghetto)
 "cDZ" = (
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -20137,10 +20132,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/wood/large,
 /area/station/commons/lounge)
-"eUY" = (
-/obj/machinery/bluespace_vendor/directional/north,
-/turf/open/floor/iron,
-/area/station/hallway/primary/starboard/west)
 "eUZ" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -45133,7 +45124,6 @@
 /turf/open/floor/iron/large,
 /area/station/maintenance/ghetto/central)
 "kYx" = (
-/obj/machinery/bluespace_vendor/directional/south,
 /obj/effect/turf_decal/bot,
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/iron,
@@ -58989,13 +58979,6 @@
 	},
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/qm)
-"osD" = (
-/obj/machinery/atmospherics/components/unary/bluespace_sender,
-/obj/effect/turf_decal/tile/yellow/half/contrasted{
-	dir = 1
-	},
-/turf/open/floor/iron,
-/area/station/engineering/atmos)
 "osJ" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -62947,7 +62930,6 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 4
 	},
-/obj/machinery/bluespace_vendor/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/dock)
 "prz" = (
@@ -91869,7 +91851,6 @@
 	},
 /area/station/maintenance/starboard/fore)
 "wDG" = (
-/obj/machinery/bluespace_vendor/directional/east,
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 4
 	},
@@ -118959,7 +118940,7 @@ ceC
 htA
 sYw
 nUd
-cDX
+cDp
 brF
 tlt
 aNy
@@ -193358,7 +193339,7 @@ rCC
 rCC
 sjq
 jQC
-osD
+vEJ
 jGU
 eau
 pjP
@@ -208193,7 +208174,7 @@ uFW
 peu
 kWv
 wfV
-eUY
+sKd
 kkl
 cpL
 vlt
