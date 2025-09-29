@@ -88,4 +88,17 @@
 	name = "OMON helmet"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	icon_state = "ussp_riot"
+	base_icon_state = "ussp_riot"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+
+/obj/item/clothing/head/helmet/toggleable/riot/ussp_heavy
+	name = "Altyn helmet"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_altyn"
+	base_icon_state = "ussp_altyn"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+
+/obj/item/clothing/head/helmet/space/ussp_expedition
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "voskhod_helmet"

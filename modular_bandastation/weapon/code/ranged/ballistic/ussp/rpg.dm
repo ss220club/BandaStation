@@ -1,12 +1,11 @@
 /obj/item/gun/ballistic/rocketlauncher/rpg
 	name = "RPG-70"
-	desc = "A reusable rocket propelled grenade launcher. An arrow pointing toward the front of the launcher \
-		alongside the words \"Front Toward Enemy\" are printed on the tube. Someone seems to have crossed out \
-		that last word and written \"NT\" over it at some point. A sticker near the back of the launcher warn \
-		to \"CHECK BACKBLAST CLEAR BEFORE FIRING\", whatever that means."
+	desc = "Ручной общецелевой гранатомет многоразового применения. На трубке нанесена стрелка, указывающая на переднюю часть пусковой установки, \
+		а также надпись «Передней частью в сторону врага». Наклейка на задней части пусковой установки предупреждает: \
+        «НЕ ВСТАВАТЬ ЗА ГРАНАТОМЕТОМ ПЕРЕД ВЫСТРЕЛОМ», что бы это ни значило."
 	icon = 'modular_bandastation/weapon/icons/ranged/64x32.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/inhands_64_left.dmi'
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/inhands_64_right.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/inhands_64_right.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/inhands_64_left.dmi'
 	inhand_x_dimension = 64
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back64x32.dmi'
 	worn_x_dimension = 64

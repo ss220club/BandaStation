@@ -22,7 +22,7 @@
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/napad_unload.ogg'
 	can_suppress = FALSE
 	burst_size = 1
-	fire_delay = 0.3 SECONDS
+	fire_delay = 0.2 SECONDS
 	actions_types = list()
 	spread = 6
 

@@ -143,6 +143,15 @@
 	icon_state = "ussp_riot"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
+/obj/item/clothing/suit/armor/swat/ussp_heavy
+	name = "heavy soviet armor"
+	desc = "Тяжелая броня советского производства, состоит из усиленных титано-керамических плит и множества слоев нанокевлара. \
+		Отлично защищает от любых повреждений, особенно от пуль. Броня для настоящих суровых советских Джаггернаутов."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	icon_state = "ussp_heavy"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	armor_type = /datum/armor/armor_heavy
+
 // MARK: ERT
 /obj/item/clothing/suit/armor/swat/ert
 	name = "MK.II SWAT Suit"
@@ -175,8 +184,8 @@
 	name = "chestplate armor"
 	desc = "Бронежилет сочетающий в себе удобство, лёгкость и хорошую бронезащиту груди и спины. Модульность позволяет собрать его под себя и упрощает замену бронеплит."
 	icon_state = "ntci_chestplate_armor"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/ntci_armor.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/ntci_armor.dmi'
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 	armor_type = /datum/armor/vest_marine
 	clothing_flags = THICKMATERIAL
 	body_parts_covered = CHEST|GROIN

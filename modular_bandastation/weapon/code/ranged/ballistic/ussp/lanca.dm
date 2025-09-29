@@ -56,7 +56,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
 	icon_state = "lanca_army"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
-	worn_icon_state = "lanca"
+	worn_icon_state = "lanca_army"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
 	inhand_icon_state = "lanca_army"
