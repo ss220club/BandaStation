@@ -19,6 +19,8 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 /obj/structure/central_telephone_exchange
 	name = "Central Telephone Exchange unit"
 	desc = "A central switching unit responsible for connecting telephone calls within the station sectors."
+	icon = 'icons/obj/machines/phone.dmi'
+	icon_state = "cte"
 
 /obj/structure/central_telephone_exchange/Initialize(mapload)
 	. = ..()
@@ -26,7 +28,11 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 		return INITIALIZE_HINT_QDEL // there should only exist one of those
 
 	GLOB.central_telephone_exchange = src
-	to_chat(world, "DEBUG: New master CTE initialized at [get_area_name(src, TRUE)]")
+	update_overlays()
+
+/obj/structure/central_telephone_exchange/update_overlays()
+	. = ..()
+	overlays += emissive_appearance(icon, "cte_light", src)
 
 /obj/structure/central_telephone_exchange/proc/find_device(device_id)
 	for(var/obj/structure/transmitter/each_transmitter in GLOB.transmitters)

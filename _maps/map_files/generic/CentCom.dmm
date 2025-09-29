@@ -58,7 +58,9 @@
 	pixel_y = -2
 	},
 /obj/item/stack/rods/fifty,
-/obj/item/stack/cable_coil,
+/obj/item/stack/cable_coil{
+	color = "#333333"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
@@ -303,8 +305,14 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/evacuation)
 "bp" = (
-/obj/item/trash/sosjerky,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/fluff/paper/stack{
+	dir = 10;
+	pixel_x = 3;
+	pixel_y = -6
+	},
+/obj/structure/central_telephone_exchange,
+/obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
 "bx" = (
@@ -946,6 +954,11 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/evacuation/ship)
+"ed" = (
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/filingcabinet/security,
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/control)
 "eg" = (
 /obj/structure/table/wood,
 /obj/item/storage/box/drinkingglasses,
@@ -1082,11 +1095,16 @@
 /turf/open/floor/iron/grimy,
 /area/centcom/tdome/observation)
 "eP" = (
-/obj/structure/chair/office{
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fluff/paper/stack{
 	dir = 4
 	},
-/obj/effect/mob_spawn/corpse/human/intern,
-/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/west,
+/obj/item/stack/cable_coil/cut{
+	color = "#333333";
+	pixel_x = 3;
+	pixel_y = 9
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
 "eR" = (
@@ -2777,7 +2795,9 @@
 /obj/structure/table,
 /obj/item/clipboard,
 /obj/item/stack/package_wrap,
-/obj/item/stack/cable_coil,
+/obj/item/stack/cable_coil{
+	color = "#333333"
+	},
 /obj/item/hand_labeler,
 /obj/effect/turf_decal/tile/green/anticorner/contrasted{
 	dir = 1
@@ -7084,20 +7104,12 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "Gm" = (
-/obj/structure/table/reinforced,
-/obj/item/paper_bin{
-	pixel_x = 8;
-	pixel_y = -4
-	},
-/obj/item/pen{
-	pixel_x = 8;
-	pixel_y = -4
-	},
-/obj/item/flashlight/lamp{
-	pixel_x = -5;
-	pixel_y = 6
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/item/stack/cable_coil/cut{
+	color = "#333333";
+	pixel_x = -2;
+	pixel_y = 9
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
 "Gs" = (
@@ -7130,7 +7142,9 @@
 	pixel_y = -2
 	},
 /obj/item/stack/rods/fifty,
-/obj/item/stack/cable_coil,
+/obj/item/stack/cable_coil{
+	color = "#333333"
+	},
 /obj/item/screwdriver/power,
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -7872,6 +7886,18 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/evacuation/ship)
+"Lr" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fluff/paper/stack{
+	dir = 9
+	},
+/obj/item/stack/cable_coil/cut{
+	color = "#333333";
+	pixel_x = -3;
+	pixel_y = -4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/control)
 "Lt" = (
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/centcom/central_command_areas/evacuation/ship)
@@ -8455,10 +8481,12 @@
 /area/centcom/tdome/observation)
 "Oh" = (
 /obj/structure/table/reinforced,
-/obj/item/clipboard,
-/obj/item/folder/red,
-/obj/item/pen/red,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/transmitter/centcom{
+	pixel_x = 0;
+	pixel_y = 6;
+	display_name = "Central Command"
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
 "Oi" = (
@@ -9662,6 +9690,15 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/tdome/observation)
+"Tr" = (
+/obj/item/trash/sosjerky,
+/obj/structure/fluff/paper/stack{
+	dir = 10;
+	pixel_x = 3;
+	pixel_y = -6
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/control)
 "Ts" = (
 /obj/structure/table/reinforced,
 /obj/item/restraints/handcuffs/cable/zipties,
@@ -9968,6 +10005,18 @@
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/control)
+"UP" = (
+/obj/structure/chair/office{
+	dir = 4
+	},
+/obj/effect/mob_spawn/corpse/human/intern,
+/obj/structure/fluff/paper/stack{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = 12
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/control)
 "UR" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
@@ -10004,7 +10053,9 @@
 /turf/open/floor/iron/white,
 /area/centcom/tdome/observation)
 "Vc" = (
-/obj/effect/decal/cleanable/vomit/old,
+/obj/structure/fluff/paper/stack{
+	dir = 1
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
 "Vd" = (
@@ -10332,6 +10383,22 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/armory)
+"WJ" = (
+/obj/structure/table/reinforced,
+/obj/item/flashlight/lamp{
+	pixel_x = -5;
+	pixel_y = 6
+	},
+/obj/item/paper_bin{
+	pixel_x = 8;
+	pixel_y = -4
+	},
+/obj/item/pen{
+	pixel_x = 8;
+	pixel_y = -4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/control)
 "WK" = (
 /obj/structure/chair,
 /obj/effect/turf_decal/tile/green{
@@ -10728,6 +10795,16 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/centcom/central_command_areas/admin)
+"YR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/vomit/old,
+/obj/structure/fluff/paper/stack,
+/obj/item/wirecutters{
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/control)
 "YT" = (
 /obj/structure/table/wood,
 /obj/structure/plaque/static_plaque/thunderdome{
@@ -54854,7 +54931,7 @@ Za
 tN
 gL
 io
-SQ
+ed
 uc
 kl
 xW
@@ -55875,8 +55952,8 @@ Fo
 GC
 Mz
 io
-TU
-WP
+Lr
+YR
 Gm
 io
 eu
@@ -56132,9 +56209,9 @@ iT
 iT
 ls
 io
-io
-io
-io
+Tr
+UP
+WJ
 io
 Fq
 UO
@@ -56388,9 +56465,9 @@ iU
 iU
 jx
 jG
-iu
-Ym
 io
+TU
+WP
 io
 rK
 iu

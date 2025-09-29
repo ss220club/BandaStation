@@ -1,11 +1,10 @@
 GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
-#define COMSIG_TRANSMITTER_UPDATE_ICON "transmitter_update_icon"
 #define TRANSMITTER_UNAVAILABLE(T) (!T.attached_to || !T.enabled)
 
 #define PHONE_NET_PUBLIC            "Public"
 #define PHONE_NET_COMMAND           "Command"
-#define PHONE_NET_CENTCOMM          "CentComm"
+#define PHONE_NET_CENTCOM           "CentCom"
 #define PHONE_NET_SYNDIE            "Syndicate"
 
 #define PHONE_DND_FORCED            "Forced"
@@ -50,7 +49,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	/// The tape inserted
 	var/obj/item/tape/inserted_tape
 	/// The unique 8-character alphanumeric ID of this transmitter
-	var/phone_id = "0x00000b"
+	var/phone_id = "0x00000b" // reserved for CC
 	/// The name of this transmitter as visible on the other devices
 	var/display_name
 	var/phone_icon
@@ -243,7 +242,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/update_icon()
 	. = ..()
-	SEND_SIGNAL(src, COMSIG_TRANSMITTER_UPDATE_ICON)
 
 	apply_transmitter_overlays(
 		/*handset_state=*/ "rotary_handset",
@@ -275,13 +273,12 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			status_overlay = status_green
 
 	if(status_overlay)
-		var/mutable_appearance/status_appearance = mutable_appearance(icon, status_overlay, src)
+		var/mutable_appearance/status_appearance = mutable_appearance('icons/obj/machines/phone.dmi', status_overlay, src, layer = layer)
 		status_appearance.plane = plane
 		add_overlay(status_appearance)
 
 		if(light_state)
-			var/mutable_appearance/emissive_overlay = emissive_appearance(icon, light_state, src)
-			emissive_overlay.plane = FLOAT_PLANE
+			var/mutable_appearance/emissive_overlay = emissive_appearance('icons/obj/machines/phone.dmi', status == STATUS_INBOUND ? "[light_state]_blink" : light_state, src, layer = layer)
 			add_overlay(emissive_overlay)
 
 /obj/structure/transmitter/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
@@ -635,12 +632,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 #undef MAX_RANGE
 
-#undef COMSIG_TRANSMITTER_UPDATE_ICON
 #undef TRANSMITTER_UNAVAILABLE
 
 #undef PHONE_NET_PUBLIC
 #undef PHONE_NET_COMMAND
-#undef PHONE_NET_CENTCOMM
+#undef PHONE_NET_CENTCOM
 #undef PHONE_NET_SYNDIE
 
 #undef PHONE_DND_FORCED
