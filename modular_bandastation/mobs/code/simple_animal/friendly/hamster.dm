@@ -87,20 +87,22 @@
 // Но тогда также рекомендую добавить глобальный список с ограничением в 20 хомяков.
 // Пример в проке /mob/living/basic/chicken/proc/egg_laid(obj/item/egg)
 
-// /mob/living/basic/mouse/hamster/baby/Initialize(mapload)
-// 	. = ..()
-// 	if(!isnull(grow_as)) // we don't have a set time to grow up beyond whatever RNG dictates, and if we somehow get a client, all growth halts.
-// 		AddComponent(\
-// 			/datum/component/growth_and_differentiation,\
-// 			growth_time = null,\
-// 			growth_path = grow_as,\
-// 			growth_probability = 100,\
-// 			lower_growth_value = 0.5,\
-// 			upper_growth_value = 1,\
-// 			signals_to_kill_on = list(COMSIG_MOB_CLIENT_LOGIN),\
-// 			optional_checks = CALLBACK(src, PROC_REF(ready_to_grow)),\
-// 		)
+/*
+/mob/living/basic/mouse/hamster/baby/Initialize(mapload)
+	. = ..()
+	if(!isnull(grow_as)) // we don't have a set time to grow up beyond whatever RNG dictates, and if we somehow get a client, all growth halts.
+		AddComponent(\
+			/datum/component/growth_and_differentiation,\
+			growth_time = null,\
+			growth_path = grow_as,\
+			growth_probability = 100,\
+			lower_growth_value = 0.5,\
+			upper_growth_value = 1,\
+			signals_to_kill_on = list(COMSIG_MOB_CLIENT_LOGIN),\
+			optional_checks = CALLBACK(src, PROC_REF(ready_to_grow)),\
+		)
 
-// /// We don't grow into a chicken if we're not conscious.
-// /mob/living/basic/mouse/hamster/baby/proc/ready_to_grow()
-// 	return (stat == CONSCIOUS)
+/// We don't grow into a chicken if we're not conscious.
+/mob/living/basic/mouse/hamster/baby/proc/ready_to_grow()
+	return (stat == CONSCIOUS)
+*/

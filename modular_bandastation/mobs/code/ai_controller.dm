@@ -97,7 +97,7 @@
 	LAZYADD(planning_subtrees, /datum/ai_planning_subtree/random_speech/mouse/rat/syndi)
 
 /datum/ai_planning_subtree/random_speech/mouse/rat/syndi
-	speak_chance = 2
+	speech_chance = 2
 	speak = list("Слава Синдикату!", "Смерть НаноТрейзен!", "Отдавайте сыр!", "Слава Сыркату!", "Смерть за сыр!")
 
 // =========== Старый хряк, Саня ===========

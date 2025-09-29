@@ -58,18 +58,18 @@
 // Animals additions
 
 /* Megafauna */
-/mob/living/basic/megafauna/legion
+/mob/living/basic/mining/legion
 	death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
 
-/mob/living/basic/megafauna/legion/death(gibbed)
+/mob/living/basic/mining/legion/death(gibbed)
 	for(var/area/lavaland/L in world)
 		SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
 	. = ..()
 
 /* Nar Sie */
-/obj/singularity/narsie/large/Destroy()
-	SEND_SOUND(world, sound('modular_bandastation/mobs/sound/narsie_rises.ogg'))
+/obj/narsie/Initialize(mapload)
 	. = ..()
+	SEND_SOUND(world, sound('modular_bandastation/mobs/sound/narsie_rises.ogg'))
 
 /* ===== На случай если появится блюспейс сканер =====
 /* Loot Drops */
