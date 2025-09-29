@@ -4,6 +4,8 @@
 
 /datum/dog_fashion/head/beret/sec
 	name = "Лейтенант %REAL_NAME%"
+	desc = "Уже не младший лейтенант, требующий уважения."
+	speak = list()
 	icon_file = 'modular_bandastation/mobs/icons/dog_accessories.dmi'
 	obj_icon_state = "beret"
 
