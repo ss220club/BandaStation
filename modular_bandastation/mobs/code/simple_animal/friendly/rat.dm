@@ -50,8 +50,3 @@
 	icon_dead = "rat_irish_dead"
 	icon_resting = "rat_irish_sleep"
 	body_color = "irish"
-
-/mob/living/basic/mouse/rat/pull_constraint(atom/movable/AM, show_message = FALSE)
-	return TRUE
-
-

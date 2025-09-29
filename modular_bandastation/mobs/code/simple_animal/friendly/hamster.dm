@@ -71,7 +71,7 @@
 	desc = initial(desc)
 	desc += MALE ? " Самец!" : " Самочка! Ох... Нет... "
 
-/mob/living/basic/mouse/hamster/baby/start_pulling(atom/movable/AM, state, force = pull_force, show_message = FALSE)
+/mob/living/basic/mouse/hamster/baby/start_pulling(atom/movable/AM, state, force = pull_force, supress_message = FALSE)
 	if(show_message)
 		to_chat(src, span_warning("Вы слишком малы чтобы что-то тащить."))
 	return
