@@ -1,11 +1,11 @@
 /obj/item/organ/brain/shadow/shadowling
 	name = "shadowling swarm brain"
-	desc = "A writhing nexus of shadowstuff, binding its owner to the Hive."
+	desc = "Извивающийся клубок теневой плоти, намертво приковывающий хозяина к Рою."
 	slot = ORGAN_SLOT_BRAIN
 
 /obj/item/organ/brain/shadow/tumor_thrall
 	name = "shadow thrall tumor"
-	desc = "A parasitic node of the Hive, binding the host’s mind."
+	desc = "Паразитический узел Роя, опутывающий сознание носителя."
 	slot = ORGAN_SLOT_BRAIN_THRALL
 
 /obj/item/organ/brain/shadow/tumor_thrall/Insert(mob/living/carbon/receiver, special = FALSE, movement_flags)
@@ -14,7 +14,7 @@
 		return
 	receiver?.mind?.add_antag_datum(/datum/antagonist/shadow_thrall)
 	RegisterSignal(receiver, COMSIG_ATOM_EXAMINE, PROC_REF(on_holder_examine))
-	to_chat(receiver, span_danger("A frigid whisper coils in your mind... You are a thrall."))
+	to_chat(receiver, span_danger("Леденящий шёпот пронизывает разум... Вы порабощены."))
 
 /obj/item/organ/brain/shadow/tumor_thrall/Remove(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
 	. = ..()
@@ -22,7 +22,7 @@
 		return
 	organ_owner?.mind?.remove_antag_datum(/datum/antagonist/shadow_thrall)
 	UnregisterSignal(organ_owner, COMSIG_ATOM_EXAMINE)
-	to_chat(organ_owner, span_notice("The chilling presence leaves your mind."))
+	to_chat(organ_owner, span_notice("Сковывающий холод покидает ваше сознание. Вы снова подвластны себе!"))
 
 /obj/item/organ/brain/shadow/tumor_thrall/proc/on_holder_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
@@ -35,4 +35,4 @@
 		return
 	if(H.wear_mask)
 		return
-	examine_list += span_warning("Его лицо как-то неестественно искажено.")
+	examine_list += span_warning("[capitalize(H.ru_p_them())] лицо до жути неестественно искажено.")

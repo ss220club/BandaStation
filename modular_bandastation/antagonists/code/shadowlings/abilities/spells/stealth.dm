@@ -1,3 +1,4 @@
+// MARK: Status effects
 /datum/status_effect/shadow/stealth
 	id = "shadowling_stealth"
 	alert_type = null
@@ -63,6 +64,7 @@
 	SIGNAL_HANDLER
 	owner.remove_status_effect(type)
 
+// MARK: Ability
 /datum/action/cooldown/shadowling/stealth
 	name = "Скрытность"
 	desc = "Слиться с тенью. Снимается при движении, уроне или действиях."

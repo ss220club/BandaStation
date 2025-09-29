@@ -102,6 +102,7 @@
 
 	return current
 
+// MARK: Hook projectile
 /obj/projectile/magic/shadow_hand_sl
 	name = "shadow hand"
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
@@ -230,9 +231,86 @@
 /obj/projectile/magic/shadow_hand_sl/Destroy()
 	if(!hit_committed && istype(firer))
 		var/mob/living/L = firer
-		L.balloon_alert(L, "Промах!")
+		L.balloon_alert(L, "промах!")
 
 	if(chain && !QDELETED(chain))
 		qdel(chain)
 	chain = null
 	return ..()
+
+// MARK: Ability
+/datum/action/cooldown/shadowling/hook
+	parent_type = /datum/action/cooldown/shadowling
+
+	name = "Хук"
+	desc = "Выпускает теневую руку. При попадании тянет задетую цель к вам."
+	button_icon_state = "shadow_hook"
+
+	cooldown_time = 10 SECONDS
+	max_range = 8
+	channel_time = 0
+	click_to_activate = TRUE
+	unset_after_click = TRUE
+
+	var/targeting = FALSE
+	var/static/sfx_fire = 'sound/effects/splat.ogg'
+	var/static/sfx_hit = 'sound/items/weapons/shove.ogg'
+
+/datum/action/cooldown/shadowling/hook/DoEffect(mob/living/carbon/human/H, atom/target)
+	to_chat(H, span_notice("ЛКМ по направлению/цели, чтобы выпустить теневую руку."))
+	return FALSE
+
+/datum/action/cooldown/shadowling/hook/is_action_active(atom/movable/screen/movable/action_button/_btn)
+	return targeting
+
+/datum/action/cooldown/shadowling/hook/unset_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	targeting = FALSE
+	apply_button_overlay()
+
+/datum/action/cooldown/shadowling/hook/set_click_ability(mob/on_who, refund_cooldown)
+	. = ..()
+	targeting = TRUE
+	apply_button_overlay()
+
+/datum/action/cooldown/shadowling/hook/InterceptClickOn(mob/living/clicker, params, atom/target)
+	if(!istype(clicker))
+		unset_click_ability(clicker, TRUE)
+		return FALSE
+
+	if(!IsAvailable(TRUE))
+		unset_click_ability(clicker, TRUE)
+		return FALSE
+
+	if(!CanUse(clicker))
+		unset_click_ability(clicker, TRUE)
+		return FALSE
+
+	var/mob/living/carbon/human/H = clicker
+	var/turf/start_turf = get_turf(H)
+	var/turf/click_turf = get_turf(target)
+	if(!istype(start_turf) || !istype(click_turf))
+		unset_click_ability(clicker, TRUE)
+		return TRUE
+
+	var/turf/end_turf = SHADOW_hook__compute_endpoint(start_turf, click_turf, max_range)
+	if(!istype(end_turf))
+		H.balloon_alert(H, "слишком близко")
+		unset_click_ability(clicker, TRUE)
+		return TRUE
+
+	// IMPORTANT: spawn projectile in start turf
+	var/obj/projectile/magic/shadow_hand_sl/P = new(start_turf)
+	P.firer = H
+	P.range = max_range
+	P.hitsound = sfx_hit
+
+	// Now navigate - loc is already known, angle is calculated correctly
+	P.aim_projectile(end_turf, H)
+
+	playsound(start_turf, sfx_fire, 55, TRUE)
+	P.fire()
+
+	StartCooldown()
+	unset_click_ability(clicker, FALSE)
+	return TRUE

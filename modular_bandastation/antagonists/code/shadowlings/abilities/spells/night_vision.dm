@@ -1,20 +1,19 @@
-// toggle_night_vision.dm
-
 #define NV_OFF 0
 #define NV_LOW 1
 #define NV_MID 2
 #define NV_HI  3
 
+// MARK: Ability
 /datum/action/cooldown/shadowling/toggle_night_vision
 	name = "Ночное зрение"
-	desc = "Переключить режим ночного зрения (вычисляется на текущих глазах)."
+	desc = "Переключить режим ночного зрения."
 	button_icon_state = "shadow_nightvision"
 	cooldown_time = 0 SECONDS
 
-	/// 0=off, 1/2/3 – уровни
+	/// 0 = OFF, 1/2/3 – LEVELS
 	var/nv_level = NV_OFF
 
-	/// пресеты отсечек по аналогии с night_vision глазами
+	/// NV Presets
 	var/list/cut_low  = list(20, 10, 40)
 	var/list/cut_mid  = list(35, 18, 65)
 	var/list/cut_high = list(50, 25, 90)

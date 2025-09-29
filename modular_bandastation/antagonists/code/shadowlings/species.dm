@@ -1,3 +1,4 @@
+// MARK: Species datums
 /datum/species/shadow/shadowling
 	name = "Shadowling"
 	plural_form = "Shadowlings"
@@ -82,24 +83,14 @@
 
 	)
 
-var/ascended_max_health = SHADOWLING_ASCENDED_MAX_HEALTH
-
-/mob/living/carbon/human/proc/refresh_eye_overlays()
-	remove_overlay(EYES_LAYER)
-
-	var/obj/item/organ/eyes/E = get_organ_slot(ORGAN_SLOT_EYES)
-	if(!E)
-		return
-
-	E.refresh(call_update = FALSE)
-	overlays_standing[EYES_LAYER] = E.generate_body_overlay(src)
-	apply_overlay(EYES_LAYER)
+/datum/species/shadow/shadowling/check_roundstart_eligible()
+	return FALSE
 
 /datum/species/shadow/shadowling/ascended/on_species_gain(mob/living/carbon/human/H)
 	. = ..()
 	if(!istype(H))
 		return
-	H.setMaxHealth(ascended_max_health)
+	H.setMaxHealth(SHADOWLING_ASCENDED_MAX_HEALTH)
 	H.heal_overall_damage()
 	shadowling_equip_ascended_claws(H)
 
@@ -108,41 +99,6 @@ var/ascended_max_health = SHADOWLING_ASCENDED_MAX_HEALTH
 	if(!istype(H))
 		return
 	shadowling_remove_ascended_claws(H)
-
-/obj/item/knife/combat/umbral_claw
-	name = "umbral claw (right)"
-	desc = "Слиток зазубренной тени."
-	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
-	icon_state = "claw_right"
-	lefthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
-	righthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
-	inhand_icon_state = "claw_right"
-	worn_icon = null
-	w_class = WEIGHT_CLASS_TINY
-	force = 18
-	armour_penetration = 25
-	sharpness = SHARP_EDGED
-	attack_verb_continuous = list("rends", "slashes", "tears")
-	attack_verb_simple = list("rend", "slash", "tear")
-	hitsound = 'sound/items/weapons/slash.ogg'
-	resistance_flags = INDESTRUCTIBLE
-	throwforce = 0
-	throw_speed = 0
-	throw_range = 0
-
-/obj/item/knife/combat/umbral_claw/Initialize(mapload)
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
-
-/obj/item/knife/combat/umbral_claw/left
-	name = "umbral claw (left)"
-	icon_state = "claw_left"
-	inhand_icon_state = "claw_left"
-	worn_icon = null
-	sharpness = SHARP_POINTY
-	attack_verb_continuous = list("pierces", "impales", "shreads")
-	attack_verb_simple = list("pierce", "impale", "shread")
-
 
 /datum/species/shadow/shadowling/ascended/proc/shadowling_equip_ascended_claws(mob/living/carbon/human/H)
 	if(!istype(H))
@@ -164,12 +120,58 @@ var/ascended_max_health = SHADOWLING_ASCENDED_MAX_HEALTH
 	for(var/obj/item/knife/combat/umbral_claw/C in H.get_all_contents())
 		qdel(C)
 
-/datum/species/shadow/shadowling/check_roundstart_eligible()
-	return FALSE
+// MARK: Mob related
+/mob/living/basic/adjustStaminaLoss(amount, updating_stamina = TRUE, forced = FALSE, required_biotype)
+	if(isshadowling_ascended(src))
+		return
+	else
+		. = ..()
 
-/obj/item/organ/brain/shadow/shadowling
-	name = "shadowling swarm tumor"
+/mob/living/carbon/human/proc/shadowling_strip_quirks()
+	cleanse_quirk_datums()
 
+/mob/living/carbon/human/proc/refresh_eye_overlays()
+	remove_overlay(EYES_LAYER)
+
+	var/obj/item/organ/eyes/E = get_organ_slot(ORGAN_SLOT_EYES)
+	if(!E)
+		return
+
+	E.refresh(call_update = FALSE)
+	overlays_standing[EYES_LAYER] = E.generate_body_overlay(src)
+	apply_overlay(EYES_LAYER)
+
+// MARK: Claws
+/obj/item/knife/combat/umbral_claw
+	name = "umbral claw (right)"
+	desc = "Слиток зазубренной тени."
+	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
+	icon_state = "claw_right"
+	lefthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
+	righthand_file = 'modular_bandastation/antagonists/icons/shadowling/shadowling_empty.dmi'
+	inhand_icon_state = "claw_right"
+	w_class = WEIGHT_CLASS_TINY
+	resistance_flags = INDESTRUCTIBLE
+	force = 18
+	armour_penetration = 25
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("разрывает", "режет", "раздирает")
+	attack_verb_simple = list("разрывать", "резать", "раздирать")
+	hitsound = 'sound/items/weapons/slash.ogg'
+
+/obj/item/knife/combat/umbral_claw/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
+
+/obj/item/knife/combat/umbral_claw/left
+	name = "umbral claw (left)"
+	icon_state = "claw_left"
+	inhand_icon_state = "claw_left"
+	sharpness = SHARP_POINTY
+	attack_verb_continuous = list("пронзает", "протыкает", "разрывает")
+	attack_verb_simple = list("пронзать", "протыкать", "разрывать")
+
+// MARK: Bodyparts
 /obj/item/bodypart/head/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
@@ -231,6 +233,34 @@ var/ascended_max_health = SHADOWLING_ASCENDED_MAX_HEALTH
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 
+/obj/item/bodypart/head/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+
+/obj/item/bodypart/chest/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+
+/obj/item/bodypart/leg/left/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+
+/obj/item/bodypart/leg/right/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+
+/obj/item/bodypart/arm/left/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+
+/obj/item/bodypart/arm/right/shadow/shadowling/ascended
+	limb_id = SPECIES_SHADOWLING_ASCENDED
+	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+
+// MARK: Organs
+/obj/item/organ/brain/shadow/shadowling
+	name = "shadowling swarm tumor"
+
 /obj/item/organ/eyes/shadow/shadowling
 	name = "freezing blue eyes"
 	desc = "Even without their shadowy owner, looking at these eyes gives you a sense of dread."
@@ -268,37 +298,3 @@ var/ascended_max_health = SHADOWLING_ASCENDED_MAX_HEALTH
 			continue
 
 	return .
-
-
-/obj/item/bodypart/head/shadow/shadowling/ascended
-	limb_id = SPECIES_SHADOWLING_ASCENDED
-	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
-
-/obj/item/bodypart/chest/shadow/shadowling/ascended
-	limb_id = SPECIES_SHADOWLING_ASCENDED
-	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
-
-/obj/item/bodypart/leg/left/shadow/shadowling/ascended
-	limb_id = SPECIES_SHADOWLING_ASCENDED
-	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
-
-/obj/item/bodypart/leg/right/shadow/shadowling/ascended
-	limb_id = SPECIES_SHADOWLING_ASCENDED
-	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
-
-/obj/item/bodypart/arm/left/shadow/shadowling/ascended
-	limb_id = SPECIES_SHADOWLING_ASCENDED
-	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
-
-/obj/item/bodypart/arm/right/shadow/shadowling/ascended
-	limb_id = SPECIES_SHADOWLING_ASCENDED
-	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
-
-/mob/living/carbon/human/proc/shadowling_strip_quirks()
-	cleanse_quirk_datums()
-
-/mob/living/basic/adjustStaminaLoss(amount, updating_stamina = TRUE, forced = FALSE, required_biotype)
-	if(isshadowling_ascended(src))
-		return
-	else
-		. = ..()

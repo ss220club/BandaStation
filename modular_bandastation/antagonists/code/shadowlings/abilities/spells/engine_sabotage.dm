@@ -1,6 +1,7 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/engine_sabotage
 	name = "Саботаж двигателей"
-	desc = "Вы обращаетесь к Единой тени, и та хитро ломает двигатели спасательного шаттла, задерживая его прибытие на 10 минут."
+	desc = "Вы обращаетесь к Единой тени, и та хитро ломает двигатели эвакуационного шаттла, задерживая его прибытие на 10 минут."
 	button_icon_state = "shadow_sabotage"
 	cooldown_time = 0
 	requires_dark_user = FALSE

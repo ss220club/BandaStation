@@ -1,24 +1,24 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/recuperation
 	name = "Рекуперация"
-	desc = "Преобразовать связанного слугу в младшего тенеморфа. Требует 15 секунд и неподвижности цели."
+	desc = "Преобразовать связанного слугу в младшего Тенеморфа. Занимает 15 секунд и требует неподвижности цели."
 	button_icon_state = "shadow_recuperation"
 	cooldown_time = 45 SECONDS
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
-	max_range = 1
-	channel_time = 15 SECONDS
 	click_to_activate = TRUE
 	unset_after_click = TRUE
-
-	var/obj/effect/beam/active_beam
-	var/obj/structure/shadowling_cocoon/cover
-	var/static/sfx_begin = 'sound/effects/magic/teleport_diss.ogg'
-	var/static/sfx_end   = 'sound/effects/ghost.ogg'
-	var/prev_alpha
-
+	// Shadowling related
+	channel_time = 15 SECONDS
+	max_range = 1
 	min_req = 1
 	max_req = 3
 	required_thralls = 70
+	var/prev_alpha
+	var/static/sfx_begin = 'sound/effects/magic/teleport_diss.ogg'
+	var/static/sfx_end   = 'sound/effects/ghost.ogg'
+	var/obj/effect/beam/active_beam
+	var/obj/structure/shadowling_cocoon/cover
 
 /datum/action/cooldown/shadowling/recuperation/Trigger(mob/clicker, trigger_flags, atom/target)
 	return ..()
@@ -83,7 +83,7 @@
 		if(ability.type in typesof(/datum/action/cooldown/shadowling))
 			ability.Remove(T)
 
-	// делаем из слуги младшего тенеморфа
+	// Make our thrall a lesser Shadowling
 	hive.join_member(T, SHADOWLING_ROLE_LESSER)
 
 	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим тенеморфом."))

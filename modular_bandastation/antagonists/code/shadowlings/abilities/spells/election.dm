@@ -1,6 +1,7 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/election
 	name = "Голос лидера"
-	desc = "Запустить голосование за лидера улья среди тенеморфов. Победитель получит одноразовый «Саботаж двигателей»."
+	desc = "Запустить голосование за лидера роя среди Тенеморфов. Победитель получит одноразовую способность «Саботаж двигателей»."
 	button_icon_state = "shadow_vote"
 	cooldown_time = 0
 	requires_dark_user = FALSE
@@ -33,7 +34,7 @@
 		V.hive = hive
 		hive.shadowling_vote = V
 		V.start()
-		to_chat(H, span_notice("Вы запускаете голосование за лидера улья."))
+		to_chat(H, span_notice("Вы запускаете голосование за лидера роя."))
 		return TRUE
 
 	if(!V.active)
@@ -56,6 +57,7 @@
 		A.Remove(M)
 		qdel(A)
 
+// MARK: Vote related
 /datum/shadow_vote
 	var/active = FALSE
 	var/duration = 30 SECONDS
@@ -104,7 +106,7 @@
 	for(var/mob/living/carbon/human/C in candidates)
 		choices["[C.real_name]"] = C
 
-	var/ans = tgui_input_list(voter, "Выберите лидера улья:", "Голосование", choices)
+	var/ans = tgui_input_list(voter, "Выберите лидера роя:", "Голосование", choices)
 	if(!active)
 		return
 
@@ -112,7 +114,7 @@
 		if(voter in hive.lings)
 			votes[voter] = choices[ans]
 			to_chat(voter, span_notice("Ваш голос учтён."))
-			// скрыть кнопку у проголосовавшего
+			// Hide button from voters
 			for(var/datum/action/cooldown/shadowling/election/A in voter.actions)
 				A.Remove(voter)
 				qdel(A)
@@ -152,7 +154,7 @@
 		for(var/mob/living/carbon/human/L in hive.lings)
 			if(QDELETED(L))
 				continue
-			to_chat(L, span_boldnotice("Лидером улья выбран: [leader.real_name].[!hive.is_shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
+			to_chat(L, span_boldnotice("Лидером роя выбран: [leader.real_name].[!hive.is_shadowling_engine_sabotage_used ? " Ему дарован «Саботаж двигателей»." : ""]"))
 
 	remove_vote_action_from_all()
 

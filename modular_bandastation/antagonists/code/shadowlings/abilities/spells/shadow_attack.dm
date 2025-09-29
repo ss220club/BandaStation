@@ -1,13 +1,15 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/shadow_strike
 	name = "Теневой удар"
 	desc = "Материализуясь из тени рядом с ближайшей целью в 2 тайлах, наносит быстрый удар."
 	button_icon_state = "shadow_strike"
 	cooldown_time = 0
+	// Shadowling related
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	max_range = 2
 	channel_time = 0
-	var/static/sfx_activate   = 'sound/effects/magic/demon_attack1.ogg'
+	var/static/sfx_activate = 'sound/effects/magic/demon_attack1.ogg'
 
 /datum/action/cooldown/shadowling/shadow_strike/can_use(mob/living/carbon/human/H)
 	if(!..())
@@ -16,7 +18,7 @@
 		return TRUE
 	if(owner.has_status_effect(/datum/status_effect/shadow/phase))
 		return TRUE
-	owner.balloon_alert(owner, "Вы должны быть нематериальны")
+	owner.balloon_alert(owner, "вы должны быть нематериальны")
 	return FALSE
 
 /datum/action/cooldown/shadowling/shadow_strike/Trigger(mob/clicker, trigger_flags, atom/target)
@@ -27,7 +29,7 @@
 		return
 	var/mob/living/target_mob = find_closest_target(H)
 	if(!target_mob)
-		owner.balloon_alert(owner, "Нет доступных целей")
+		owner.balloon_alert(owner, "нет доступных целей")
 		return
 	if(DoEffect(H, target_mob))
 		StartCooldown()
@@ -66,7 +68,7 @@
 		T = find_closest_target(H)
 
 	if(!istype(T))
-		owner.balloon_alert(owner, "Нет доступных целей")
+		owner.balloon_alert(owner, "нет доступных целей")
 		return FALSE
 
 	var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
@@ -87,7 +89,7 @@
 		step_towards(H, T)
 
 	if(QDELETED(H) || QDELETED(T) || get_dist(H, T) > 1)
-		owner.balloon_alert(owner, "Слишком далеко для удара")
+		owner.balloon_alert(owner, "слишком далеко для удара")
 		return FALSE
 
 	H.visible_message(

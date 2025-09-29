@@ -1,5 +1,6 @@
+// MARK: Ability
 /datum/action/cooldown/shadowling/hive_sync
-	name = "Синхронизация улья"
+	name = "Синхронизация роя"
 	desc = "Показать число живых слуг и получить доступные вам способности по их количеству."
 	button_icon_state = "shadow_sync"
 	cooldown_time = 6 SECONDS
@@ -50,16 +51,16 @@
 	var/list/check_list = list()
 	switch(ling_role)
 		if(SHADOWLING_ROLE_THRALL)
-			check_list = SHADOWLING_THRALL_ABILITIES
+			check_list = GLOB.shadowling_thrall_abilities
 		if(SHADOWLING_ROLE_LESSER)
-			check_list = SHADOWLING_MINOR_ABILITIES
+			check_list = GLOB.shadowling_lesser_abilities
 		else
 			var/datum/antagonist/shadowling/antag_datum  = get_shadowling_antag_of(owner)
-			check_list = antag_datum?.is_ascended ? SHADOWLING_ASCENDED_ABILITIES : SHADOWLING_BASE_ABILITIES
+			check_list = antag_datum?.is_ascended ? GLOB.shadowling_ascended_abilities : GLOB.shadowling_base_abilities
 
 	return A.type in check_list
 
-/datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(var/datum/action/cooldown/shadowling/A)
+/datum/action/cooldown/shadowling/hive_sync/proc/get_required_thralls(datum/action/cooldown/shadowling/A)
 	var/percent = clamp(A.required_thralls, 0, 100)
 	if(percent <= 0)
 		return 0
@@ -80,7 +81,7 @@
 
 	var/list/unlocked_names = list()
 
-	for(var/path as anything in typesof(/datum/action/cooldown/shadowling))
+	for(var/path in typesof(/datum/action/cooldown/shadowling))
 		if(path == /datum/action/cooldown/shadowling)
 			continue
 		if(path == /datum/action/cooldown/shadowling/hive_sync)

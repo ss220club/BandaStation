@@ -55,10 +55,8 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 		return
 	if(QDELETED(H))
 		return
-	if(H in lings)
-		lings -= H
-	if(H in thralls)
-		thralls -= H
+	lings -= H
+	thralls -= H
 	ling_roles -= H
 	UnregisterSignal(H, COMSIG_QDELETING)
 	if(role == SHADOWLING_ROLE_THRALL)
@@ -69,7 +67,7 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 	RegisterSignal(H, COMSIG_QDELETING, PROC_REF(_on_member_qdel))
 	if(H.mind && !(H.mind in members))
 		members += H.mind
-	to_chat(H, span_notice("Вы ощущаете голоса улья в своей голове..."))
+	to_chat(H, span_notice("Вы ощущаете голоса роя в своей голове..."))
 	grant_sync_action(H)
 	grant_comm_action(H)
 

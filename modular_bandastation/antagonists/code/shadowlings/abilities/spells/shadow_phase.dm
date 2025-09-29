@@ -1,18 +1,46 @@
+// MARK: Global procedure
+/proc/shadow_phase_start_entry_cooldown(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	for(var/datum/action/cooldown/shadowling/shadow_phase/A in H.actions)
+		if(!A.IsAvailable())
+			return
+		A.StartCooldown()
+		return
+
+// MARK: Effects
+/obj/effect/temp_visual/shadow_phase_smoke
+	name = "umbral plume"
+	icon = 'icons/effects/eldritch.dmi'
+	icon_state = "cloud_swirl"
+	plane = ABOVE_GAME_PLANE
+	layer = EFFECTS_LAYER
+	color = "#015fff"
+	alpha = 220
+
+/obj/effect/temp_visual/shadow_phase_smoke/Initialize(mapload)
+	. = ..()
+	animate(src, transform = matrix() * 1.2, time = 4)
+	animate(alpha = 0, time = 6)
+	QDEL_IN(src, 0.6 SECONDS)
+	return .
+
+// MARK: Ability
 /datum/action/cooldown/shadowling/shadow_phase
 	name = "Теневой вход"
 	desc = "Стать нематериальным и проходить сквозь стены на ограниченное время. Яркий свет до набора достаточного числа слуг разрывает фазу."
 	button_icon_state = "shadowling_crawl"
 	cooldown_time = 30 SECONDS
+	// Shadowling related
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	max_range = 0
 	channel_time = 0
-	var/phase_duration = 12 SECONDS
-	var/static/sfx_enter = 'sound/effects/magic/teleport_app.ogg'
 	min_req = 1
 	max_req = 3
 	required_thralls = 10
-
+	var/phase_duration = 12 SECONDS
+	var/static/sfx_enter = 'sound/effects/magic/teleport_app.ogg'
 
 /datum/action/cooldown/shadowling/shadow_phase/is_action_active(atom/movable/screen/movable/action_button/_btn)
 	var/mob/living/carbon/human/H = owner
@@ -25,7 +53,6 @@
 	return FALSE
 
 /datum/action/cooldown/shadowling/shadow_phase/Trigger(mob/clicker, trigger_flags, atom/target)
-
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE
@@ -57,33 +84,6 @@
 	if(!istype(L))
 		return
 	P.eject_jaunter(FALSE)
-
-/proc/shadow_phase_start_entry_cooldown(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-	for(var/datum/action/cooldown/shadowling/shadow_phase/A in H.actions)
-		if(!A.IsAvailable())
-			return
-		A.StartCooldown()
-		return
-
-/obj/effect/temp_visual/shadow_phase_smoke
-	name = "umbral plume"
-	anchored = TRUE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = ABOVE_GAME_PLANE
-	layer = EFFECTS_LAYER
-	icon = 'icons/effects/eldritch.dmi'
-	icon_state = "cloud_swirl"
-	color = "#015fff"
-	alpha = 220
-
-/obj/effect/temp_visual/shadow_phase_smoke/Initialize(mapload)
-	. = ..()
-	animate(src, transform = matrix()*1.2, time = 4)
-	animate(alpha = 0, time = 6)
-	QDEL_IN(src, 0.6 SECONDS)
-	return .
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/fade_out(mob/living/carbon/human/H, fade_time = 0.3 SECONDS)
 	if(!istype(H)) return
@@ -152,7 +152,7 @@
 	if(!istype(H))
 		return FALSE
 
-	// если в dummy — подвинем dummy к нужному тайлу и корректно выбросим
+	// If in dummy — move dummy to the desired tile and discard correctly
 	if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
 		var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
 		if(istype(nearby))
@@ -160,7 +160,7 @@
 		P.eject_jaunter(forced_out)
 		return TRUE
 
-	// если фаза статусом — снимем статус
+	// If the phase status is — remove the status
 	if(H.has_status_effect(/datum/status_effect/shadow/phase))
 		H.remove_status_effect(/datum/status_effect/shadow/phase)
 		return TRUE

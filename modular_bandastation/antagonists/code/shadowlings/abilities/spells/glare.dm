@@ -1,6 +1,30 @@
+// MARK: Effects
+/obj/effect/temp_visual/shadowling/glare_cone_tile
+	name = "glare cone"
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	plane = ABOVE_GAME_PLANE
+	layer = EFFECTS_LAYER
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "sparks"
+	alpha = 180
+	color = "#ff2a2a"
+
+/obj/effect/temp_visual/shadowling/glare_cone_tile/Initialize(mapload)
+	. = ..()
+	animate(src, alpha = 0, time = 6)
+	QDEL_IN(src, 0.6 SECONDS)
+
+// MARK: Movespeed modifier
+/datum/movespeed_modifier/shadowling/glare_slow
+	multiplicative_slowdown = 1.35
+	priority = 20
+	movetypes = GROUND
+
+// MARK: Ability
 /datum/action/cooldown/shadowling/glare
 	name = "Взгляд"
-	desc = "Сокрующий взгляд в сторону, куда вы смотрите, позволяющий оглушать и обесиливать ваших врагов."
+	desc = "Сокрующий взгляд в сторону куда вы смотрите, позволяющий оглушать и обессиливать ваших врагов."
 	button_icon_state = "shadow_glare"
 	cooldown_time = 30 SECONDS
 	required_thralls = 0
@@ -111,27 +135,6 @@
 	if(!istype(L))
 		return
 	L.adjust_dizzy(2)
-
-/datum/movespeed_modifier/shadowling/glare_slow
-	multiplicative_slowdown = 1.35
-	priority = 20
-	movetypes = GROUND
-
-/obj/effect/temp_visual/shadowling/glare_cone_tile
-	name = "glare cone"
-	anchored = TRUE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = ABOVE_GAME_PLANE
-	layer = EFFECTS_LAYER
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "sparks"
-	alpha = 180
-	color = "#ff2a2a"
-
-/obj/effect/temp_visual/shadowling/glare_cone_tile/Initialize(mapload)
-	. = ..()
-	animate(src, alpha = 0, time = 6)
-	QDEL_IN(src, 0.6 SECONDS)
 
 /datum/action/cooldown/shadowling/glare/proc/collect_cone_turfs(mob/living/carbon/human/H, range_tiles, fov_deg)
 	var/list/turfs_in_cone = list()
