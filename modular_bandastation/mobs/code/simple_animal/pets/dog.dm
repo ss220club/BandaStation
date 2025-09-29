@@ -24,11 +24,9 @@
 			if(M && stat != DEAD) // Added check to see if this mob (the corgi) is dead to fix issue 2454
 				new /obj/effect/temp_visual/heart(loc)
 				manual_emote("счастливо скулит!")
-				emote(act, m_type = null, message = null, intentional = FALSE, force_silence = FALSE, forced = FALSE)
-
 		else
 			if(M && stat != DEAD) // Same check here, even though emote checks it as well (poor form to check it only in the help case)
-				emote("рычит")
+				emote("growl")
 				playsound(src, pick(src.growl_sound), 75, TRUE)
 
 

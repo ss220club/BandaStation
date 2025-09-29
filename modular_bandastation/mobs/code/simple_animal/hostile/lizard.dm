@@ -28,7 +28,7 @@
 	melee_damage_upper = 30
 	attack_verb_continuous = "терзает"
 	attack_verb_simple = "терзает"
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/weapons/items/bite.ogg'
 	death_sound = 'modular_bandastation/mobs/sound/lizard_death_big.ogg'
 	talk_sound = list('modular_bandastation/mobs/sound/lizard_angry1.ogg', 'modular_bandastation/mobs/sound/lizard_angry2.ogg', 'modular_bandastation/mobs/sound/lizard_angry3.ogg')
 	damaged_sound = list('modular_bandastation/mobs/sound/lizard_damaged.ogg')

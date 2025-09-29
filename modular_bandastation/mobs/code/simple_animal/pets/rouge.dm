@@ -40,9 +40,9 @@
 /mob/living/basic/snake/rouge/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
 	if(user.combat_mode)
-		shh(-1, M)
+		shh(-1, user)
 	else
-		shh(1, M)
+		shh(1, user)
 
 /mob/living/basic/snake/rouge/proc/shh(change, mob/M)
 	if(!M || stat)
