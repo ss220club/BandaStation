@@ -2,7 +2,7 @@
 
 /obj/machinery/chem_master
 	name = "ChemMaster 3000"
-	desc = "Used to separate chemicals and distribute them in a variety of forms."
+	desc = "Используется для выведения и разделения химикатов и их различных форм."
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "chemmaster"
 	base_icon_state = "chemmaster"
@@ -507,7 +507,7 @@
 			var/datum/reagent/master_reagent = reagents.get_master_reagent()
 			if(selected_container == default_container) // Tubes and bottles gain reagent name
 				item_name_default = "[master_reagent.name] [item_name_default]"
-			if(!(initial(selected_container.reagent_flags) & OPENCONTAINER)) // Closed containers get both reagent name and units in the name
+			if(!(initial(selected_container.initial_reagent_flags) & OPENCONTAINER)) // Closed containers get both reagent name and units in the name
 				item_name_default = "[master_reagent.name] [item_name_default] ([volume_in_each]u)"
 			var/item_name = tgui_input_text(
 				usr,
@@ -573,7 +573,7 @@
 
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"
-	desc = "Used to create condiments and other cooking supplies."
+	desc = "Используется для создания приправ."
 	icon_state = "condimaster"
 
 /obj/machinery/chem_master/condimaster/load_printable_containers()

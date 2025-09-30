@@ -7,7 +7,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	set category = "OOC"
 
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
-		to_chat(usr, span_danger("Speech is currently admin-disabled."))
+		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
 		return
 
 	var/client_initalized = VALIDATE_CLIENT_INITIALIZATION(src)
@@ -76,7 +76,9 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		return
 
 	mob.log_talk(raw_msg, LOG_OOC)
-
+	// BANDASTATION CHAT BADGES REPLACE START
+	var/keyname = get_ooc_badged_name()
+	/*
 	var/keyname = key
 	if(prefs.unlock_content)
 		if(prefs.toggles & MEMBER_PUBLIC)
@@ -84,6 +86,8 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(prefs.hearted)
 		var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 		keyname = "[sheet.icon_tag("emoji-heart")][keyname]"
+	*/
+	// BANDASTATION CHAT BADGES REPLACE END
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
 	for(var/client/receiver as anything in GLOB.clients)
 		if(!receiver.prefs) // Client being created or deleted. Despite all, this can be null.
@@ -420,10 +424,9 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 /client/proc/attempt_auto_fit_viewport()
 	if (!prefs?.read_preference(/datum/preference/toggle/auto_fit_viewport))
 		return
+	// No need to attempt to fit the viewport on non-initialized clients as they'll auto-fit viewport right before finishing init
 	if(fully_created)
 		INVOKE_ASYNC(src, VERB_REF(fit_viewport))
-	else //Delayed to avoid wingets from Login calls.
-		addtimer(CALLBACK(src, VERB_REF(fit_viewport), 1 SECONDS))
 
 /client/verb/policy()
 	set name = "Show Policy"

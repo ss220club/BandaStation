@@ -719,10 +719,10 @@
 
 /datum/reagent/mutationtoxin/moth
 	name = "Moth Mutation Toxin"
-	description = "A glowing toxin."
+	description = "Светящийся токсин."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/moth
-	taste_description = "clothing"
+	taste_description = "ткани"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
 
 /datum/reagent/mutationtoxin/pod
@@ -1563,21 +1563,21 @@
 /datum/reagent/nitrous_oxide/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
 	if(!HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //IF the mob does not have a coagulant in them, we add the blood mess trait to make the bleed quicker
-		ADD_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+		ADD_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 /datum/reagent/nitrous_oxide/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
-	REMOVE_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+	REMOVE_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 /datum/reagent/nitrous_oxide/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	affected_mob.adjust_drowsiness(4 SECONDS * REM * seconds_per_tick)
 
-	if(!HAS_TRAIT(affected_mob, TRAIT_BLOODY_MESS) && !HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //So long as they do not have a coagulant, if they did not have the bloody mess trait, they do now
-		ADD_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+	if(!HAS_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN) && !HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //So long as they do not have a coagulant, if they did not have the bloody mess trait, they do now
+		ADD_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 	else if(HAS_TRAIT(affected_mob, TRAIT_COAGULATING)) //if we find they now have a coagulant, we remove the trait
-		REMOVE_TRAIT(affected_mob, TRAIT_BLOODY_MESS, type)
+		REMOVE_TRAIT(affected_mob, TRAIT_BLOOD_FOUNTAIN, type)
 
 	if(SPT_PROB(10, seconds_per_tick))
 		affected_mob.losebreath += 2
@@ -2493,16 +2493,18 @@
 	. = ..()
 	var/newsize = current_size
 	switch(volume)
+		// BANDASTATION EDIT - START - Changes newsize to smaller values
 		if(0 to 19)
-			newsize = 1.25*RESIZE_DEFAULT_SIZE
+			newsize = 1.05*RESIZE_DEFAULT_SIZE
 		if(20 to 49)
-			newsize = 1.5*RESIZE_DEFAULT_SIZE
+			newsize = 1.10*RESIZE_DEFAULT_SIZE
 		if(50 to 99)
-			newsize = 2*RESIZE_DEFAULT_SIZE
+			newsize = 1.15*RESIZE_DEFAULT_SIZE
 		if(100 to 199)
-			newsize = 2.5*RESIZE_DEFAULT_SIZE
+			newsize = 1.20*RESIZE_DEFAULT_SIZE
 		if(200 to INFINITY)
-			newsize = 3.5*RESIZE_DEFAULT_SIZE
+			newsize = 1.25*RESIZE_DEFAULT_SIZE
+		// BANDASTATION EDIT - END
 
 	affected_mob.update_transform(newsize/current_size)
 	current_size = newsize

@@ -364,7 +364,7 @@
 	apply_verb = "applying to"
 
 /obj/item/stack/medical/bruise_pack/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is bludgeoning [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is bludgeoning [user.p_them()]self with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/stack/medical/gauze

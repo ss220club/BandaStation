@@ -110,7 +110,7 @@
 
 	if(physical_cash_total > 0)
 		var/obj/item/holochip/holochange = new /obj/item/holochip(user.loc, physical_cash_total) //Change is made in holocredits exclusively.
-		holochange.name = "[holochange.credits] credit holochip"
+		holochange.name = "голочип с [holochange.credits] кр."
 		if(ishuman(user))
 			var/mob/living/carbon/human/paying_customer = user
 			var/successfully_put_in_hands

@@ -287,6 +287,7 @@
 
 	var/static/list/syndie_typecache = typecacheof(list(
 		/area/centcom/syndicate_mothership, // syndicate base itself
+		/area/centcom/syndicate_base, // SS220 EDIT - ADDITION
 		/area/shuttle/assault_pod, // steel rain
 		/area/shuttle/syndicate, // infiltrator
 	))
@@ -394,11 +395,11 @@
 	return is_refillable() && is_drainable()
 
 /// Is this atom injectable into other atoms
-/atom/proc/is_injectable(mob/user, allowmobs = TRUE)
+/atom/proc/is_injectable()
 	return reagents && (reagents.flags & (INJECTABLE | REFILLABLE))
 
 /// Can we draw from this atom with an injectable atom
-/atom/proc/is_drawable(mob/user, allowmobs = TRUE)
+/atom/proc/is_drawable()
 	return reagents && (reagents.flags & (DRAWABLE | DRAINABLE))
 
 /// Can this atoms reagents be refilled
@@ -478,7 +479,7 @@
 		return
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 25
-		balloon_alert(user, "can't move while buckled!")
+		balloon_alert(user, "вы пристегнуты - нельзя двигаться!")
 	return
 
 /**
@@ -862,7 +863,7 @@
 	var/shift_lmb_ctrl_shift_lmb_line = ""
 	var/extra_lines = 0
 	var/extra_context = ""
-	var/used_name = name
+	var/used_name = get_tip_name()
 
 	if(isliving(user) || isovermind(user) || iscameramob(user) || (ghost_screentips && isobserver(user)))
 		var/obj/item/held_item = user.get_active_held_item()

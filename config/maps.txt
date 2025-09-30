@@ -27,11 +27,6 @@ map icebox
 	votable
 endmap
 
-map catwalkstation
-	minplayers 25
-	votable
-endmap
-
 map metastation
 	minplayers 25
 	#voteweight 0.5
@@ -45,14 +40,9 @@ map tramstation
 	votable
 endmap
 
-map nebulastation
-	minplayers 35
+map cyberiad
+	maxplayers 100
 	votable
-endmap
-
-map wawastation
-	votable
-	minplayers 40
 endmap
 
 # Debug-only maps.

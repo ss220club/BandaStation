@@ -19,17 +19,17 @@ if command -v rg >/dev/null 2>&1; then
 	if [ ! rg -P '' >/dev/null 2>&1 ] ; then
 		pcre2_support=0
 	fi
-	code_files="code/**/**.dm"
+	code_files="code/**/**.dm modular_bandastation/**/**.dm" # BANDASTATION EDIT - Add modular_bandastation/
 	map_files="_maps/**/**.dmm"
 	shuttle_map_files="_maps/shuttles/**.dmm"
-	code_x_515="code/**/!(__byond_version_compat).dm"
+	code_x_515="code/**/!(__byond_version_compat).dm modular_bandastation/**/!(__byond_version_compat).dm" # BANDASTATION EDIT - Add modular_bandastation/
 else
 	pcre2_support=0
 	grep=grep
-	code_files="-r --include=code/**/**.dm"
+	code_files="-r --include=code/**/**.dm --include=modular_bandastation/**/**.dm" # BANDASTATION EDIT - Add modular_bandastation/
 	map_files="-r --include=_maps/**/**.dmm"
 	shuttle_map_files="-r --include=_maps/shuttles/**.dmm"
-	code_x_515="-r --include=code/**/!(__byond_version_compat).dm"
+	code_x_515="-r --include=code/**/!(__byond_version_compat).dm --include=modular_bandastation/**/!(__byond_version_compat).dm" # BANDASTATION EDIT - Add modular_bandastation/
 fi
 
 echo -e "${BLUE}Using grep provider at $(which $grep)${NC}"
@@ -259,6 +259,14 @@ if ls _maps/*.json | $grep "[A-Z]"; then
     echo -e "${RED}ERROR: Uppercase in a map .JSON file detected, these must be all lowercase.${NC}"
     st=1
 fi;
+
+part "Ineffective easing flags in animate()"
+if $grep 'easing\w*=\w*(EASE_IN|EASE_OUT|\(EASE_IN\w*\|\w*EASE_OUT\))' $code_files; then
+    echo
+    echo -e "${RED}ERROR: 'animate' was called with an easing argument and the default, LINEAR_EASING curve. This doesn't do anything and should be adjusted.${NC}"
+    st=1
+fi;
+
 part "map json sanity"
 for json in _maps/*.json
 do

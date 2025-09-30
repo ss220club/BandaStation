@@ -7,7 +7,7 @@
 	tick_interval = 1 SECONDS
 
 /datum/status_effect/amok/on_apply(mob/living/afflicted)
-	to_chat(owner, span_boldwarning("You feel filled with a rage that is not your own!"))
+	to_chat(owner, span_boldwarning("Вы чувствуете, что вас переполняет не вашим гневом"))
 	return TRUE
 
 /datum/status_effect/amok/tick(seconds_between_ticks)
@@ -61,7 +61,7 @@
 	tick_interval = 1 SECONDS
 
 /datum/status_effect/corrosion_curse/on_apply()
-	to_chat(owner, span_userdanger("Your body starts to break apart!"))
+	to_chat(owner, span_userdanger("Ваше тело начинает распадаться на части!"))
 	return TRUE
 
 /datum/status_effect/corrosion_curse/tick(seconds_between_ticks)
@@ -116,7 +116,7 @@
 
 /atom/movable/screen/alert/status_effect/star_mark
 	name = "Star Mark"
-	desc = "A ring above your head prevents you from entering cosmic fields or teleporting through cosmic runes..."
+	desc = "Кольцо на вашей голове не позволяет вам входить в космические поля или телепортироваться через космические руны..."
 	icon_state = "star_mark"
 
 /datum/status_effect/star_mark/on_creation(mob/living/new_owner, mob/living/new_spell_caster)
@@ -165,12 +165,12 @@
 
 /atom/movable/screen/alert/status_effect/heretic_lastresort
 	name = "Last Resort"
-	desc = "Your head spins, heart pumping as fast as it can, losing the fight with the ground. Run to safety!"
+	desc = "Голова идет кругом, сердце бешенно бьется, сложно стоять на земле. Бегите в безопасное место!"
 	icon_state = "lastresort"
 
 /datum/status_effect/heretic_lastresort/on_apply()
 	ADD_TRAIT(owner, TRAIT_IGNORESLOWDOWN, TRAIT_STATUS_EFFECT(id))
-	to_chat(owner, span_userdanger("You are on the brink of losing consciousness, run!"))
+	to_chat(owner, span_userdanger("Вы вот-вот потеряете сознание, бегите!"))
 	return TRUE
 
 /datum/status_effect/heretic_lastresort/on_remove()
@@ -194,7 +194,7 @@
 
 /atom/movable/screen/alert/status_effect/moon_converted
 	name = "Moon Converted"
-	desc = "THEY LIE, THEY ALL LIE!!! SLAY THEM!!! BURN THEM!!! MAKE THEM SEE THE TRUTH!!!"
+	desc = "ОНИ ЛГУТ, ОНИ ВСЕ ЛГУТ!!! УБЕЙ ИХ!!! СОЖГИ ИХ!!! ЗАСТАВЬ ИХ УЗРЕТЬ ПРАВДУ!!!"
 	icon_state = "lastresort"
 
 /datum/status_effect/moon_converted/on_creation()
@@ -211,8 +211,8 @@
 	owner.adjustBruteLoss( -150 + owner.mob_mood.sanity)
 	owner.adjustFireLoss(-150 + owner.mob_mood.sanity)
 
-	to_chat(owner, span_hypnophrase(("THE MOON SHOWS YOU THE TRUTH AND THE LIARS WISH TO COVER IT, SLAY THEM ALL!!!</span>")))
-	owner.balloon_alert(owner, "they lie..THEY ALL LIE!!!")
+	to_chat(owner, span_hypnophrase(("ЛУНА УКАЗЫВАЕТ ТЕБЕ ПРАВДУ И ЛЖЕЦЫ ПЫТАЮТСЯ СКРЫТЬ ЕЕ, УБЕЙ ИХ ВСЕХ!!!</span>")))
+	owner.balloon_alert(owner, "они лгут... ОНИ ВСЕ ЛГУТ!!!")
 	owner.AdjustUnconscious(7 SECONDS, ignore_canstun = FALSE)
 	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
 	RegisterSignal(owner, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(update_owner_overlay))
@@ -240,7 +240,7 @@
 
 /datum/status_effect/moon_converted/on_remove()
 	// Span warning and unconscious so they realize they aren't evil anymore
-	to_chat(owner, span_warning("Your mind is cleared from the effect of the mansus, your alligiences are as they were before"))
+	to_chat(owner, span_warning("Ваш разум очищен от влияний Мансуса, ваша лояльность вернулась к прежней"))
 	REMOVE_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
 	owner.AdjustUnconscious(5 SECONDS, ignore_canstun = FALSE)
 	owner.log_message("[owner] is no longer insane.", LOG_GAME)
@@ -252,7 +252,7 @@
 
 /atom/movable/screen/alert/status_effect/moon_converted
 	name = "Moon Converted"
-	desc = "They LIE, SLAY ALL OF THE THEM!!! THE LIARS OF THE SUN MUST FALL!!!"
+	desc = "Они ЛГУТ, УБЕЙ ИХ ВСЕХ ДО ПОСЛЕДНЕГО!!! ЛЖЕЦЫ СОЛНЦА ДОЛЖНЫ ПАСТЬ!!!"
 	icon_state = "moon_insanity"
 
 // Status effects that eldritch paintings apply

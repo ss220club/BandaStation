@@ -6,6 +6,8 @@
 
 // Themes
 import './styles/main.scss';
+import './styles/themes/paper220.scss';
+import './styles/themes/ss220.scss';
 
 import { perf } from 'common/perf';
 import { setupGlobalEvents } from 'tgui-core/events';

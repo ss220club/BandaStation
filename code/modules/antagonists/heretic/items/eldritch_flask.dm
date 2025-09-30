@@ -2,7 +2,7 @@
 // Heals heretics, harms non-heretics. Pretty much identical.
 /obj/item/reagent_containers/cup/beaker/eldritch
 	name = "flask of eldritch essence"
-	desc = "Toxic to the closed minded, yet refreshing to those with knowledge of the beyond."
+	desc = "Токсичный для недалеких умов, но освежающий для тех, кто имеет знания о потустороннем."
 	icon = 'icons/obj/antags/eldritch.dmi'
 	icon_state = "eldritch_flask"
 	list_reagents = list(/datum/reagent/eldritch = 50)
@@ -15,7 +15,7 @@
 	icon_state = "phylactery"
 	base_icon_state = "phylactery"
 	has_variable_transfer_amount = FALSE
-	reagent_flags = OPENCONTAINER | DUNKABLE | TRANSPARENT
+	initial_reagent_flags = OPENCONTAINER | DUNKABLE | TRANSPARENT
 	volume = 10
 	/// Cooldown before you can steal blood again
 	COOLDOWN_DECLARE(drain_cooldown)

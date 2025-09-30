@@ -146,7 +146,7 @@ ADMIN_VERB(change_sec_level, R_ADMIN, "Set Security Level", "Changes the securit
 	if(!level)
 		return
 
-	SSsecurity_level.set_level(level)
+	SSsecurity_level.set_level(level, user = user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 
 	log_admin("[key_name(user)] changed the security level to [level]")
 	message_admins("[key_name_admin(user)] changed the security level to [level]")

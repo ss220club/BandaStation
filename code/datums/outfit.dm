@@ -502,10 +502,10 @@
 			backpack_contents[itype] = backpack[item]
 	var/list/beltpack = outfit_data["belt_contents"]
 	belt_contents = list()
-	for(var/item in beltpack)
-		var/itype = text2path(item)
-		if(itype)
-			belt_contents[itype] = belt[item]
+	for(var/itype in beltpack)
+		var/inum = beltpack[itype] || 1
+		for(var/i in 1 to inum)
+			belt_contents += itype
 	box = text2path(outfit_data["box"])
 	var/list/impl = outfit_data["implants"]
 	implants = list()

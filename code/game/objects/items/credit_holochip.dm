@@ -1,6 +1,6 @@
 /obj/item/holochip
 	name = "credit holochip"
-	desc = "A hard-light chip encoded with an amount of credits. It is a modern replacement for physical money that can be directly converted to virtual currency and vice-versa. Keep away from magnets."
+	desc = "Чип, в котором закодировано количество кредитов. Это современная замена физическим деньгам, которые можно напрямую конвертировать в виртуальную валюту и наоборот. Держите подальше от магнитов."
 	icon = 'icons/obj/economy.dmi'
 	icon_state = "holochip"
 	base_icon_state = "holochip"
@@ -24,20 +24,20 @@
 
 /obj/item/holochip/examine(mob/user)
 	. = ..()
-	. += "[span_notice("It's loaded with [credits] credit[( credits > 1 ) ? "s" : ""]")]\n"+\
-	span_notice("Alt-Click to split.")
+	. += "[span_notice("В нём [credits] кр.")]"+\
+	span_notice("Alt-ЛКМ, чтобы разделить.")
 
 /obj/item/holochip/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	if(istype(held_item, /obj/item/holochip))
-		context[SCREENTIP_CONTEXT_LMB] = "Merge Into"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Extract Credits"
+		context[SCREENTIP_CONTEXT_LMB] = "Объединить с..."
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Разделить кредиты"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/holochip/get_item_credit_value()
 	return credits
 
 /obj/item/holochip/update_name()
-	name = "\improper [credits] credit holochip"
+	name = "голочип номиналом [credits] кр."
 	return ..()
 
 /obj/item/holochip/update_icon_state()
@@ -108,16 +108,16 @@
 
 	var/obj/item/holochip/merged_holochip = tool
 	credits += merged_holochip.credits
-	balloon_alert(user, "merged!")
+	balloon_alert(user, "объединено!")
 	update_appearance()
 	qdel(merged_holochip)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/holochip/click_alt(mob/user)
 	if(loc != user)
-		to_chat(user, span_warning("You must be holding the holochip to continue!"))
+		to_chat(user, span_warning("Вы должны держать голочип, чтобы продолжить!"))
 		return CLICK_ACTION_BLOCKING
-	var/split_amount = tgui_input_number(user, "How many credits do you want to extract from the holochip? (Max: [credits] cr)", "Holochip", max_value = credits)
+	var/split_amount = tgui_input_number(user, "Сколько кредитов вы хотите разделить с голочипа? (Макс: [credits] кр.)", "Голочип", max_value = credits)
 	if(!split_amount || QDELETED(user) || QDELETED(src) || issilicon(user) || !usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || loc != user)
 		return CLICK_ACTION_BLOCKING
 	var/new_credits = spend(split_amount, TRUE)
@@ -126,7 +126,7 @@
 		if(!user.put_in_hands(chip))
 			chip.forceMove(user.drop_location())
 		add_fingerprint(user)
-	to_chat(user, span_notice("You extract [split_amount] credits into a new holochip."))
+	to_chat(user, span_notice("Вы разделили [split_amount] кр. в новый голочип."))
 	return CLICK_ACTION_SUCCESS
 
 /obj/item/holochip/emp_act(severity)
@@ -135,7 +135,7 @@
 		return
 	var/wipe_chance = 60 / severity
 	if(prob(wipe_chance))
-		visible_message(span_warning("[src] fizzles and disappears!"))
+		visible_message(span_warning("[declent_ru(ACCUSATIVE)] шипит и исчезает!"))
 		qdel(src) //rip cash
 
 /obj/item/holochip/thousand
