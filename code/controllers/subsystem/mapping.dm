@@ -282,9 +282,9 @@ SUBSYSTEM_DEF(mapping)
 		var/proportional_budget = round(CONFIG_GET(number/space_budget) * (space_ruins.len / DEFAULT_SPACE_RUIN_LEVELS))
 		seedRuins(space_ruins, proportional_budget, list(/area/space), themed_ruins[ZTRAIT_SPACE_RUINS], mineral_budget = 0, ruins_type = ZTRAIT_SPACE_RUINS)
 
-		var/list/ocean_ruins = levels_by_trait(ZTRAIT_OCEAN_RUINS)
-		if (ocean_ruins.len)
-			seedRuins(ocean_ruins, 150, list(/area/rainworld/surface/outdoors/unexplored/mining/deep_ocean), themed_ruins[ZTRAIT_OCEAN_RUINS], clear_below = TRUE, mineral_budget = 30, mineral_budget_update = OREGEN_PRESET_TRIPLE_Z, ruins_type = ZTRAIT_OCEAN_RUINS)
+	var/list/ocean_ruins = levels_by_trait(ZTRAIT_OCEAN_RUINS)
+	if (ocean_ruins.len)
+		seedRuins(ocean_ruins, 150, list(/area/rainworld/surface/outdoors/unexplored/mining/deep_ocean), themed_ruins[ZTRAIT_OCEAN_RUINS], clear_below = TRUE, mineral_budget = 30, mineral_budget_update = OREGEN_PRESET_TRIPLE_Z, ruins_type = ZTRAIT_OCEAN_RUINS)
 
 /// Sets up rivers, and things that behave like rivers. So lava/plasma rivers, and chasms
 /// It is important that this happens AFTER generating mineral walls and such, since we rely on them for river logic
