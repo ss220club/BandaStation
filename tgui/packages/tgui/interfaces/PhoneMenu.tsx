@@ -32,7 +32,7 @@ type Data = {
 export const PhoneMenu = (props) => {
   const { act, data } = useBackend();
   return (
-    <Window title="Telephone" width={500} height={400}>
+    <Window title="Telephone" width={500} height={400} theme="retro">
       <Window.Content>
         <GeneralPanel />
       </Window.Content>
@@ -106,7 +106,7 @@ const GeneralPanel = (props) => {
           <Stack fill>
             {isAdvanced && (
               <Stack.Item width="30%">
-                <Section title="Call History" fill>
+                <Section title="Call History" fill pb="1.5em">
                   <Box
                     height="calc(100% - 1.5em)"
                     style={{ overflowY: 'auto' }}
@@ -117,7 +117,7 @@ const GeneralPanel = (props) => {
                     {callers.map((c, idx) => (
                       <BlockQuote
                         key={idx}
-                        color={c.dir === 'in' ? 'bad' : 'good'}
+                        color={c.dir === 'in' ? 'red' : 'green'}
                         textAlign="left"
                         style={{
                           whiteSpace: 'normal',
@@ -131,11 +131,13 @@ const GeneralPanel = (props) => {
                   </Box>
                   <Button.Confirm
                     icon="trash"
-                    color="transparent"
                     confirmColor="red"
                     confirmIcon="close"
                     fluid
                     onClick={() => act('clear_history')}
+                    mb="1em"
+                    height="3em"
+                    style={{ alignContent: 'center' }}
                   >
                     Clear
                   </Button.Confirm>
@@ -186,7 +188,6 @@ const GeneralPanel = (props) => {
                   </Stack.Item>
                   <Stack.Item>
                     <Button
-                      color={(data as any)?.current_call ? 'red' : 'good'}
                       fluid
                       textAlign="center"
                       style={{ alignContent: 'center' }}
@@ -211,7 +212,6 @@ const GeneralPanel = (props) => {
             <Stack.Item width="30%">
               <Section>
                 <Button.Checkbox
-                  color="green"
                   tooltip={dnd_tooltip}
                   disabled={dnd_locked === 'Yes'}
                   checked={dnd_is_on}
@@ -229,11 +229,11 @@ const GeneralPanel = (props) => {
                 <Section>
                   <Table>
                     <Table.Row className="candystripe">
-                      <Table.Cell p={0.25}>Display Name</Table.Cell>
+                      <Table.Cell p={0.4}>Display Name</Table.Cell>
                       <Table.Cell>{data.current_display_name}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="candystripe">
-                      <Table.Cell p={0.25}>Device ID</Table.Cell>
+                      <Table.Cell p={0.4}>Device ID</Table.Cell>
                       <Table.Cell>{data.current_phone_id}</Table.Cell>
                     </Table.Row>
                   </Table>

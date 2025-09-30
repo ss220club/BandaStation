@@ -17,6 +17,7 @@
 	name = "wallmount telephone"
 	desc = "It is a wall mounted telephone."
 	icon_state = "wall_phone"
+	post_init_icon_state = "wall_phone"
 	is_free = FALSE
 	is_advanced = FALSE
 	greyscale_colors = "#6e7766"

@@ -39,6 +39,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	name = "rotary telephone"
 	icon = 'icons/obj/machines/phone.dmi'
 	icon_state = "rotary"
+	post_init_icon_state = "rotary"
 	desc = "The most generic phone you have ever seen. You struggle to imagine something even more devoid of personality and miserably fail."
 	anchored = TRUE
 	layer = OBJ_LAYER + 0.01
@@ -395,9 +396,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
 		if(!anchored && !isinspace())
 			to_chat(user,"<span class='notice'>You secure [src] to the floor.</span>")
+			anchored = TRUE
 			return ITEM_INTERACT_SUCCESS
 		else if(anchored)
 			to_chat(user,"<span class='notice'>You unsecure and disconnect [src].</span>")
+			anchored = FALSE
 			return ITEM_INTERACT_SUCCESS
 		return
 	else
