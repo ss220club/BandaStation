@@ -13,7 +13,7 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/treant)
 
 /mob/living/basic/revenant/add_tts_component()
-	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/sylvanas)
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/gollum, list(/datum/singleton/sound_effect/telepathy))
 
 /mob/living/basic/demon/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/mannoroth)

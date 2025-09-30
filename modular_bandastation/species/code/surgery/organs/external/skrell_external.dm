@@ -27,6 +27,10 @@
 	. = ..()
 	atom_storage.open_storage(user)
 
+/obj/item/organ/head_tentacle/on_bodypart_remove(obj/item/bodypart/limb, movement_flags)
+	. = ..()
+	atom_storage.remove_all()
+
 // MARK: Action
 
 /datum/action/item_action/organ_action/headpocket

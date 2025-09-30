@@ -362,14 +362,6 @@ $department_map: (
       background-size: 250%;
       animation: captain 4s infinite ease-in-out;
 
-      &:before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-color: var(--background-color);
-        z-index: 0;
-      }
-
       .job-name {
         position: relative;
         font-size: 1.15em;

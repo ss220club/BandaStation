@@ -16,7 +16,7 @@
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom,
-		/obj/item/ammo_box/a357 = 3,
+		/obj/item/ammo_box/speedloader/c357 = 3,
 		/obj/item/storage/fancy/cigarettes/cigars
 	)
 	belt = /obj/item/gun/ballistic/revolver/mateba
@@ -160,7 +160,7 @@
 // DeathSquad outifit
 /datum/outfit/centcom/death_commando/officer
 	backpack_contents = list(
-		/obj/item/ammo_box/a357 = 1,
+		/obj/item/ammo_box/speedloader/c357 = 1,
 		/obj/item/flashlight = 1,
 		/obj/item/grenade/c4/x4 = 1,
 		/obj/item/storage/box/flashbangs = 1,
