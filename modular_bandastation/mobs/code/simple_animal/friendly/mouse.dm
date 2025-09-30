@@ -33,7 +33,7 @@
 	name = "Чип"
 	real_name = "Чип"
 	body_color = "clockwork"
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "mouse_clockwork"
 	icon_living = "mouse_clockwork"
 	icon_dead = "mouse_clockwork_dead"

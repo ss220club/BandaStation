@@ -1,7 +1,7 @@
 /mob/living/basic/pig/sanya
 	name = "Саня"
 	desc = "Старый добрый хряк с сединой. Слегка подслеповат, но нюх и харизма по прежнему с ним. Чудом не пущен на мясо и дожил до почтенного возраста."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "pig_old"
 	icon_living = "pig_old"
 	icon_dead = "pig_old_dead"
@@ -35,7 +35,7 @@
 /mob/living/basic/chicken/cock/clucky
 	name = "Коммандор Клакки"
 	desc = "Его великая армия бесчисленна. Ко-ко-ко."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 40 // Veteran
 	health = 40
@@ -43,7 +43,7 @@
 /mob/living/basic/goose/scientist
 	name = "Гуськор"
 	desc = "Учёный Гусь. Везде учусь. Крайне умная и задиристая птица. Обожает генетику. Надеемся это не бывший пропавший генетик..."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "goose_labcoat"
 	icon_living = "goose_labcoat"
 	icon_dead = "goose_labcoat_dead"
@@ -55,11 +55,10 @@
 	health = 80
 	resting = TRUE
 
-/mob/living/basic/crocodile/gena
+/mob/living/basic/lizard/big/crocodile/gena
 	name = "Гена"
 	desc = "Крокодил обожающий музыкальные инструменты и плюшевые игрушки. Пожевать."
 	faction = list("neutral")
-
 
 // rats
 /mob/living/basic/mouse/rat/gray/ratatui
@@ -113,16 +112,16 @@
 /mob/living/basic/mouse/hamster/representative
 	name = "представитель Алексей"
 	desc = "Представитель федерации хомяков. Проявите уважение при его виде, ведь он с позитивным исходом решил немало дипломатических вопросов между федерацией мышей, республикой крыс и корпорацией Нанотрейзен. Да и кто вообще хомяка так назвал?!"
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "hamster_rep"
 	icon_living = "hamster_rep"
 	icon_dead = "hamster_rep_dead"
 	icon_resting = "hamster_rep_rest"
+	held_state = "hamster_rep"
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 20
 	health = 20
 	resting = TRUE
-	// holder_type = /obj/item/holder/hamster_rep
 
 /mob/living/basic/possum/key
 	name = "Ключик"
@@ -135,7 +134,8 @@
 	maxHealth = 50
 	health = 50
 	gold_core_spawnable = NO_SPAWN
-	// holder_type = /obj/item/holder/possum/poppy
+
+	held_state = "possum_poppy"
 
 /mob/living/basic/frog/wednesday
 	name = "Среда"
@@ -150,7 +150,7 @@
 /mob/living/basic/pet/cat/floppa
 	name = "Большой Шлёпа"
 	desc = "Он выглядит так, будто собирается совершить военное преступление."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "floppa"
 	icon_living = "floppa"
 	icon_dead = "floppa_dead"
@@ -160,14 +160,14 @@
 /mob/living/basic/pet/cat/fat/iriska
 	name = "Ириска"
 	desc = "Упитана. Счастлива. Бюрократы её обожают. И похоже даже черезчур сильно."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 
 /mob/living/basic/pet/cat/white/penny
 	name = "Копейка"
 	desc = "Любит таскать монетки и мелкие предметы. Успевайте прятать их!"
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 	resting = TRUE
@@ -175,7 +175,7 @@
 /mob/living/basic/pet/cat/birman/crusher
 	name = "Бедокур"
 	desc = "Любит крушить всё что не прикручено. Нужно вовремя прибираться."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 	resting = TRUE
@@ -199,7 +199,7 @@
 	name = "Перрито"
 	real_name = "Перрито"
 	desc = "Собака, обожающая котов, особенно в сапогах, прекрасно лающая на Испанском, прошла терапевтические курсы, готова выслушать все ваши проблемы и выдать вам целебных объятий с завершением в виде почесыванием животика."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	resting = TRUE
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
@@ -215,8 +215,35 @@
 /mob/living/basic/pet/dog/bullterrier/genn
 	name = "Геннадий"
 	desc = "Собачий аристократ. Выглядит очень важным и начитанным. Доброжелательный любимец ассистентов."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 	resting = TRUE
 
+
+// fox
+
+/mob/living/basic/pet/fox/forest/alisa
+	name = "Алиса"
+	desc = "Алиса, любимый питомец любого Офицера Специальных Операций. Интересно, что она говорит?"
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
+	icon_state = "alisa"
+	icon_living = "alisa"
+	icon_dead = "alisa_dead"
+	icon_resting = "alisa_rest"
+	faction = list("nanotrasen")
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
+	unsuitable_cold_damage = 0
+	unsuitable_heat_damage = 0
+	unsuitable_atmos_damage = 0
+	melee_damage_lower = 10
+	melee_damage_upper = 20
+
+/mob/living/basic/pet/fox/fennec/fenya
+	name = "Феня"
+	desc = "Миниатюрная лисичка c важным видом и очень большими ушами. Был пойман во время разливания огромного мороженого по формочкам и теперь Магистрат держит его при себе и следит за ним. Но похоже что ему даже нравится быть частью правосудия."
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
+	resting = TRUE
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE

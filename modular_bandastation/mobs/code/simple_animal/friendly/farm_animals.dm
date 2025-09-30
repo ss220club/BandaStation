@@ -14,7 +14,17 @@
 	desc = "Гордая несушка. Яички должны быть хороши!"
 	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
-	// holder_type = /obj/item/holder/chicken
+
+	held_state = "chicken_brown" // Выбирается через инициализатор при розыгрыше раскраски
+	can_be_held = TRUE
+	held_w_class = WEIGHT_CLASS_SMALL
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
+
+/mob/living/basic/chicken/Initialize(mapload)
+	. = ..()
+	held_icon = icon_state
 
 /mob/living/basic/chick
 	name = "цыпленок"
@@ -22,13 +32,19 @@
 	attack_verb_continuous = "клюёт"
 	attack_verb_simple = "клюёт"
 	death_sound = 'modular_bandastation/mobs/sound/mouse_squeak.ogg'
-	// holder_type = /obj/item/holder/chick
+
+	held_state = "chick"
+	can_be_held = TRUE
+	held_w_class = WEIGHT_CLASS_TINY
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 /mob/living/basic/chicken/cock
 	name = "петух"
 	desc = "Гордый и важный вид."
 	gender = MALE
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "cock"
 	icon_living = "cock"
 	icon_dead = "cock_dead"
@@ -42,7 +58,13 @@
 	damaged_sounds = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
 	health = 50
 	maxHealth = 50
-	// holder_type = /obj/item/holder/cock
+
+	held_state = "cock"
+	can_be_held = TRUE
+	held_w_class = WEIGHT_CLASS_SMALL
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 	ai_controller = /datum/ai_controller/basic_controller/chicken/cock
 
@@ -52,13 +74,15 @@
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	RemoveElement(/datum/component/egg_layer)	// No EGGs from Cock
 
+	// Убираем "раскраску" курицы
 	icon_state = initial(icon_state)
 	icon_living = initial(icon_living)
 	icon_dead = initial(icon_dead)
+	held_icon = icon_state
 
 /mob/living/basic/pig
 	name = "свинья"
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	attack_verb_continuous = "лягает"
 	attack_verb_simple = "лягает"
 	death_sound = 'modular_bandastation/mobs/sound/pig_death.ogg'
@@ -78,7 +102,7 @@
 /mob/living/basic/goose/gosling
 	name = "гусенок"
 	desc = "Симпатичный гусенок. Скоро он станей грозой всей станции."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "gosling"
 	icon_living = "gosling"
 	icon_dead = "gosling_dead"
@@ -92,7 +116,7 @@
 /mob/living/basic/goose/turkey
 	name = "индюшка"
 	desc = "И не благодари."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "turkey"
 	icon_living = "turkey"
 	icon_dead = "turkey_dead"
@@ -101,7 +125,7 @@
 /mob/living/basic/walrus // seal?
 	name = "морж"
 	desc = "Любит купаться в холодных водах на Крещение."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "walrus"
 	icon_living = "walrus"
 	icon_dead = "walrus_dead"

@@ -1,8 +1,8 @@
 // MARK: Crocodile
-/mob/living/basic/crocodile
+/mob/living/basic/lizard/big/crocodile
 	name = "crocodile"
 	desc = "Клац, клац, клац. Острые зубки, толстая кожа - страшно!"
-	icon = 'modular_bandastation/mobs/icons/mob/crocodile.dmi'
+	icon = 'modular_bandastation/mobs/icons/crocodile.dmi'
 	icon_state = "crocodile"
 	icon_living = "crocodile"
 	icon_dead = "crocodile_dead"
@@ -11,59 +11,17 @@
 	base_pixel_x = -8
 	base_pixel_y = -4
 	gender = MALE
-	butcher_results = list(/obj/item/food/meat/slab = 5)
-
-	response_help_continuous = "гладит"
-	response_help_simple = "гладите"
-	response_disarm_continuous = "осторожно отодвигает в сторону"
-	response_disarm_simple = "осторожно отодвигает в сторону"
-	response_disarm_continuous = "осторожно отодвигаете в сторону"
-	response_disarm_simple = "осторожно отодвигаете в сторону"
+	butcher_results = list(/obj/item/food/meat/slab/human/mutant/lizard = 5)
 
 	maxHealth = 250
 	health = 250
-	combat_mode = TRUE
-	mob_size = MOB_SIZE_LARGE
-	mob_biotypes = MOB_ORGANIC | MOB_BEAST
 
-	obj_damage = 60
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	wound_bonus = -5
-	exposed_wound_bonus = 10
-	sharpness = SHARP_EDGED
-	attack_verb_continuous = "кусает"
-	attack_verb_simple = "кусаете"
-	attack_sound = 'sound/items/weapons/bite.ogg'
-	attack_vis_effect = ATTACK_EFFECT_BITE
-	friendly_verb_continuous = "дружелюбно обвивает хвостом"
-	friendly_verb_simple = "дружелюбно обвиваете хвостом"
-
-	speak_emote = list("рычит")
 
 	ai_controller = /datum/ai_controller/basic_controller/crocodile
 
-	var/static/list/food_types = list(
-		/obj/item/food/meat,
-		/obj/item/food/deadmouse,
-		/mob/living/basic/mouse
-	)
-
-/mob/living/basic/crocodile/gena
-	name = "Gena"
-	desc = "Крокодил Гена."
-
-/mob/living/basic/crocodile/Initialize(mapload)
-	. = ..()
-	add_traits(list(TRAIT_FENCE_CLIMBER), INNATE_TRAIT)
-	AddElement(/datum/element/ai_retaliate)
-	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
-	AddElement(/datum/element/nerfed_pulling, GLOB.typecache_general_bad_things_to_easily_move)
-	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = food_types)
-	AddComponent(/datum/component/health_scaling_effects, min_health_slowdown = 1.5)
-	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
-
-/mob/living/basic/crocodile/Login()
+/mob/living/basic/lizard/big/crocodile/Login()
 	. = ..()
 	if(!. || !client)
 		return FALSE

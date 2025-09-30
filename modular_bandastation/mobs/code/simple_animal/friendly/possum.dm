@@ -4,7 +4,7 @@
 	Ранее бывшее эндемиком Америки, но теперь по непонятной причине встречающееся по всему заселённому космосу. \
 	Никто до конца не знает, как они перемещаются в столь отдалённые места. Среди основных теорий — контрабанда, \
 	безбилетный провоз грузов, размножение спор грибов, телепортация или неизвестные квантовые эффекты."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "possum"
 	icon_living = "possum"
 	icon_dead = "possum_dead"
@@ -25,7 +25,13 @@
 	see_in_dark = 5
 	gold_core_spawnable = FRIENDLY_SPAWN
 	butcher_results = list(/obj/item/food/meat = 2)
-	// holder_type = /obj/item/holder/possum
+
+	held_state = "possum"
+	can_be_held = TRUE
+	held_w_class = WEIGHT_CLASS_NORMAL
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 	ai_controller = /datum/ai_controller/basic_controller/possum
 

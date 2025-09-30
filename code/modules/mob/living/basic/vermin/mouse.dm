@@ -73,7 +73,7 @@
 		body_color = new_body_color
 	if(isnull(body_color))
 		body_color = pick(possible_colors)	// SS220 edit
-	held_state = "[colored_mob]_[body_color]" // not handled by variety element // SS220 EDIT
+	if(!isnull(colored_mob)) held_state = "[colored_mob]_[body_color]" // not handled by variety element // SS220 EDIT
 	if(!isnull(colored_mob)) AddElement(/datum/element/animal_variety, "[colored_mob]", body_color, FALSE)	// SS220 EDIT
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_MOUSE, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 10)
 	AddComponent(/datum/component/squeak, list(squeak_sound = 1), 100, extrarange = SHORT_RANGE_SOUND_EXTRARANGE) //as quiet as a mouse or whatever

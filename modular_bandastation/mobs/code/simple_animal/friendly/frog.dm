@@ -10,8 +10,6 @@
 	attack_sound = 'modular_bandastation/mobs/sound/frog_scream_1.ogg'
 	stepped_sound = 'modular_bandastation/mobs/sound/frog_scream_2.ogg'
 
-	// holder_type = /obj/item/holder/frog
-
 /mob/living/basic/frog/rare/toxic
 	name = "яркая лягушка"
 	real_name = "яркая лягушка"
@@ -28,7 +26,6 @@
 
 	gold_core_spawnable = HOSTILE_SPAWN
 	stepped_sound = 'modular_bandastation/mobs/sound/frog_scream_3.ogg'
-	// holder_type = /obj/item/holder/frog/toxic
 
 /mob/living/basic/frog/scream
 	name = "орущая лягушка"

@@ -7,7 +7,7 @@
 /mob/living/basic/snail/space
 	name = "космоулитка"
 	desc = "Маленькая космо-улиточка со своим космо-домиком. Прочная, тихая и медленная."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "snail"
 	icon_living = "snail"
 	icon_dead = "snail_dead"

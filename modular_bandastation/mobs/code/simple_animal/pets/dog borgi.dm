@@ -14,7 +14,14 @@
 	loot = list(/obj/effect/decal/cleanable/blood/gibs/robot) // !!! TODO from PARACODE: d:\GitHub\Paradise-Remake-SS220\code\game\objects\effects\decals\Cleanable\robots.dm
 	basic_mob_flags = DEL_ON_DEATH
 	//deathmessage = "blows apart!"
-	// holder_type = /obj/item/holder/borgi
+
+	// holder
+	held_state = "borgi"
+	can_be_held = TRUE
+	held_w_class = WEIGHT_CLASS_NORMAL
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 
 /mob/living/basic/pet/dog/corgi/borgi/emag_act(user as mob)

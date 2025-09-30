@@ -3,11 +3,12 @@
 	name = "Мухтар"
 	real_name = "Мухтар"
 	desc = "Верный служебный пес. Он гордо несёт бремя хорошего мальчика."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "german_shep"
 	icon_living = "german_shep"
 	icon_resting = "german_shep_rest"
 	icon_dead = "german_shep_dead"
+	held_state = "bullterrier"
 	health = 100
 	maxHealth = 100
 	melee_damage_lower = 10

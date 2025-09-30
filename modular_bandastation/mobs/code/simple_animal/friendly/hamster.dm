@@ -2,7 +2,7 @@
 	name = "хомяк"
 	real_name = "хомяк"
 	desc = "С надутыми щечками."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "hamster"
 	icon_living = "hamster"
 	icon_dead = "hamster_dead"
@@ -12,11 +12,17 @@
 	body_color = ""
 	colored_mob = null
 	possible_colors = null
-	// holder_type = /obj/item/holder/hamster
 	gold_core_spawnable = FRIENDLY_SPAWN
 	faction = list(FACTION_RAT, FACTION_NEUTRAL)
 	maxHealth = 10
 	health = 10
+
+	// holder
+	can_be_held = TRUE
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+    worn_slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_BOTH_EARS
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 	///can this hamster breed?
 	var/can_breed = TRUE
@@ -58,7 +64,6 @@
 	maxHealth = 3
 	can_breed = FALSE
 	var/amount_grown = 0
-	// holder_type = /obj/item/holder/hamster
 
 /mob/living/basic/mouse/hamster/baby/Initialize(mapload)
 	. = ..()

@@ -1,7 +1,7 @@
 /mob/living/basic/mouse/rat/syndirat
 	name = "Синди-мышь"
 	desc = "Мышь на службе синдиката?"
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "syndirat"
 	icon_living = "syndirat"
 	icon_dead = "syndirat_dead"

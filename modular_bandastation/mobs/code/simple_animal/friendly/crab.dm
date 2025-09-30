@@ -7,12 +7,18 @@
 	response_disarm_simple = "отталкивает"
 	response_harm_continuous = "сдавливает"
 	response_harm_simple   = "щипает"
-	// holder_type = /obj/item/holder/crab
+
+	held_state = "crab"
+	can_be_held = TRUE
+	held_w_class = WEIGHT_CLASS_SMALL
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 /mob/living/basic/crab/old
 	name = "старый краб"
 	desc = "Когда-то такие населяли моря и аквариумы."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "crab_old"
 	icon_living = "crab_old"
 	icon_dead = "crab_old_dead"
@@ -22,7 +28,7 @@
 /mob/living/basic/crab/sea
 	name = "морской краб"
 	desc = "Кто проживает на дне океана?"
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "bluecrab"
 	icon_living = "bluecrab"
 	icon_dead = "bluecrab_dead"
@@ -39,7 +45,7 @@
 /mob/living/basic/crab/royal
 	name = "королевский краб"
 	desc = "Величественный королевский краб."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "royalcrab"
 	icon_living = "royalcrab"
 	icon_dead = "royalcrab_dead"
@@ -54,4 +60,4 @@
 	butcher_results = list(/obj/item/food/meat = 5)
 
 /mob/living/basic/crab/evil
-	// holder_type = /obj/item/holder/evilcrab
+	held_state = "evilcrab"

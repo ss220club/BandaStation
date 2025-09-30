@@ -1,3 +1,4 @@
+// TODO: Закинуть коммит на ТГ.
 /mob/living/basic
 	var/icon_resting
 

@@ -2,11 +2,12 @@
 /mob/living/basic/snake/syndicate
 	name = "Синдизмей"
 	desc = "Опасная змея выращенная в лаборатории для уничтожения неприятелей Синдиката."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "snake_syndicate"
 	icon_living = "snake_syndicate"
 	icon_dead = "snake_syndicate_dead"
 	icon_resting = "snake_syndicate_rest"
+	held_state = "pai_snake"
 	health = 100
 	maxHealth = 100
 	melee_damage_lower = 5

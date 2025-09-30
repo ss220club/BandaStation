@@ -1,7 +1,7 @@
 /mob/living/basic/lizard/big
 	name = "игуана"
 	desc = "Грациозный предок космодраконов. Её взгляд не вызывает никаких враждебных подозрений... Но она по прежнему хочет съесть вас."
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	icon_state = "iguana"
 	icon_living = "iguana"
 	icon_dead = "iguana_dead"
@@ -12,19 +12,30 @@
 	response_help_simple = "погладил"
 	response_disarm_continuous = "толкает"
 	response_disarm_simple = "аккуратно оттолкнул"
-	response_harm_continuous = "колошматит"
-	response_harm_simple = "ударил"
+	response_harm_continuous = "вгрызается"
+	response_harm_simple = "кусает"
+	friendly_verb_continuous = "дружелюбно обвивает хвостом"
+	friendly_verb_simple = "дружелюбно обвиваете хвостом"
+
+	combat_mode = TRUE
+	mob_size = MOB_SIZE_LARGE
+	mob_biotypes = MOB_ORGANIC | MOB_BEAST
+	blood_volume = BLOOD_VOLUME_NORMAL
+
 	speed = 2
 	maxHealth = 100
 	health = 100
-	blood_volume = BLOOD_VOLUME_NORMAL
 
 	obj_damage = 60
 	melee_damage_lower = 20
 	melee_damage_upper = 30
+	wound_bonus = -5
+	exposed_wound_bonus = 10
+	sharpness = SHARP_EDGED
+
 	attack_verb_continuous = "терзает"
 	attack_verb_simple = "терзает"
-	sharpness = SHARP_EDGED
+	attack_sound = 'sound/items/weapons/bite.ogg'
 	attack_vis_effect = ATTACK_EFFECT_BITE
 
 	attack_sound = 'sound/items/weapons/bite.ogg'
@@ -35,8 +46,15 @@
 	maximum_survivable_temperature = T0C + 200
 
 	gold_core_spawnable = HOSTILE_SPAWN
+	can_be_held = FALSE
 
 	ai_controller = /datum/ai_controller/basic_controller/lizard/big
+
+	var/static/list/food_types = list(
+		/obj/item/food/meat,
+		/obj/item/food/deadmouse,
+		/mob/living/basic/mouse
+	)
 
 /mob/living/basic/lizard/big/Initialize(mapload)
 	. = ..()
@@ -44,7 +62,9 @@
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/nerfed_pulling, GLOB.typecache_general_bad_things_to_easily_move)
+	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = food_types)
 	AddComponent(/datum/component/health_scaling_effects, min_health_slowdown = 1.5)
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
 
 /mob/living/basic/lizard/big/gator
 	name = "аллигатор"

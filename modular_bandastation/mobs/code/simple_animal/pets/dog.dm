@@ -67,7 +67,11 @@
 	habitable_atmos = null
 	minimum_survivable_temperature = 250 //Weak to cold
 	maximum_survivable_temperature = INFINITY
-	// holder_type = /obj/item/holder/slime_puppy
+
+	held_state = "slime_puppy"
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 /mob/living/basic/pet/dog/corgi/lisa
 	// holder_type = /obj/item/holder/lisa
@@ -82,26 +86,28 @@
 	name = "tamaskan"
 	real_name = "tamaskan"
 	desc = "Хорошая семейная собака. Уживается с другими собаками и ассистентами."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "tamaskan"
 	icon_living = "tamaskan"
 	icon_dead = "tamaskan_dead"
-	// holder_type = /obj/item/holder/bullterrier
+	held_state = "bullterrier"
 
 /mob/living/basic/pet/dog/german
 	name = "german"
 	real_name = "german"
 	desc = "Немецкая овчарка с помесью двортерьера. Судя по крупу - явно не породистый."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "german"
 	icon_living = "german"
 	icon_dead = "german_dead"
+	held_state = "bullterrier"
 
 /mob/living/basic/pet/dog/brittany
 	name = "brittany"
 	real_name = "brittany"
 	desc = "Старая порода, которую любят аристократы."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "brittany"
 	icon_living = "brittany"
 	icon_dead = "brittany_dead"
+	held_state = "bullterrier"

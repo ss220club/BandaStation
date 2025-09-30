@@ -1,6 +1,7 @@
 /mob/living/basic/pet/cat
 	death_sound = 'modular_bandastation/mobs/sound/cat_meow.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/cat_meow.ogg')
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 	// holder_type = /obj/item/holder/cat2
 
 /mob/living/basic/pet/cat/runtime
@@ -12,7 +13,7 @@
 /mob/living/basic/pet/cat/fat
 	name = "толстокот"
 	desc = "Упитана. Счастлива."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "iriska"
 	icon_living = "iriska"
 	icon_dead = "iriska_dead"
@@ -31,37 +32,49 @@
 	return	// LAZY
 
 /mob/living/basic/pet/cat/white
-	name = "white cat"
+	name = "белый кот"
 	desc = "Белоснежная шерстка. Плохо различается на белой плитке, зато отлично виден в темноте!"
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "penny"
 	icon_living = "penny"
 	icon_dead = "penny_dead"
 	gender = MALE
-	// holder_type = /obj/item/holder/cak
+
+	held_state = "crusher"
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 /mob/living/basic/pet/cat/birman
-	name = "birman cat"
-	real_name = "birman cat"
+	name = "кот бирма"
+	real_name = "кот бирма"
 	desc = "Священная порода Бирма."
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "crusher"
 	icon_living = "crusher"
 	icon_dead = "crusher_dead"
 	gender = MALE
-	// holder_type = /obj/item/holder/crusher
+
+	held_state = "crusher"
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 
 /mob/living/basic/pet/cat/black
 	name = "black cat"
 	real_name = "black cat"
 	desc = "Он ужас летящий на крыльях ночи! Он - тыгыдык и спотыкание во тьме ночной! Бойся не заметить черного кота в тени!"
-	icon = 'modular_bandastation/mobs/icons/mob/pets.dmi'
+	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "salem"
 	icon_living = "salem"
 	icon_dead = "salem_dead"
 	gender = MALE
-	// holder_type = /obj/item/holder/cat
+
+	held_state = "black_cat"
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 /mob/living/basic/pet/cat/spacecat
 	name = "космокот"
@@ -69,6 +82,7 @@
 	icon_state = "spacecat"
 	icon_living = "spacecat"
 	icon_dead = "spacecat_dead"
+	held_state = "spacecat"
 	unsuitable_atmos_damage = 0
 	minimum_survivable_temperature = TCMB
 	maximum_survivable_temperature = T0C + 40

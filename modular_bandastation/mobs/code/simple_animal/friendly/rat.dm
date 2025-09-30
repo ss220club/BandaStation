@@ -1,7 +1,7 @@
 /mob/living/basic/mouse/rat
 	name = "крыса"
 	real_name = "крыса"
-	icon = 'modular_bandastation/mobs/icons/mob/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	squeak_sound = 'modular_bandastation/mobs/sound/rat_squeak.ogg'
 	icon_state = "rat_gray"
 	icon_living = "rat_gray"
@@ -14,6 +14,13 @@
 	colored_mob = "rat"
 	body_color = null
 	possible_colors = list("white", "gray", "irish")
+
+	// holder
+	can_be_held = TRUE
+	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
+	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
+    worn_slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_BOTH_EARS
+	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
 /mob/living/basic/mouse/rat/Initialize(mapload)
 	. = ..()
