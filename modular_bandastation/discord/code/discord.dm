@@ -17,7 +17,6 @@
 
 /datum/config_entry/string/round_end_webhook_url
 	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
-	default = "https://discord.com/api/webhooks/1421277891647377418/Exe2MMIv47hXpBGdCG1wqnutdU8XM45YLD9UQ2Mcr5MlIojc7XsV6TvjTRmN7T2xmjgR"
 
 /datum/config_entry/string/round_end_webhook_name
 	protection = CONFIG_ENTRY_LOCKED
