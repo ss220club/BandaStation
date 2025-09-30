@@ -53896,10 +53896,6 @@
 	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/captain)
-"vgm" = (
-/obj/structure/lattice/water,
-/turf/closed/wall/r_wall,
-/area/station/hallway/secondary/entry)
 "vgs" = (
 /obj/machinery/fax{
 	fax_name = "Magistrate's Office";
@@ -68763,7 +68759,7 @@ jku
 jku
 jku
 jku
-vgm
+jku
 wIo
 wIo
 wIo
