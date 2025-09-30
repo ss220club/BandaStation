@@ -1,7 +1,4 @@
 /mob/living/basic/frog
-	name = "лягушка"
-	real_name = "лягушка"
-	desc = "Выглядит грустным не по средам и когда её не целуют."
 	speak_emote = list("квак","куак","квуак")
 
 	damaged_sounds = list('modular_bandastation/mobs/sound/frog_damaged.ogg')
@@ -12,7 +9,6 @@
 
 /mob/living/basic/frog/rare/toxic
 	name = "яркая лягушка"
-	real_name = "яркая лягушка"
 	desc = "Уникальная токсичная раскраска. Лучше не трогать голыми руками."
 	icon_state = "rare_frog"
 	icon_living = "rare_frog"

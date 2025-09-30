@@ -1,21 +1,15 @@
 /mob/living/basic/goat
-	attack_verb_continuous = "бодает"
-	attack_verb_simple = "бодает"
 	death_sound = 'modular_bandastation/mobs/sound/goat_death.ogg'
 
 /mob/living/basic/cow
-	attack_verb_continuous = "бодает"
-	attack_verb_simple = "бодает"
 	death_sound = 'modular_bandastation/mobs/sound/cow_death.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/cow_damaged.ogg')
 
 /mob/living/basic/chicken
-	name = "курица"
-	desc = "Гордая несушка. Яички должны быть хороши!"
 	death_sound = 'modular_bandastation/mobs/sound/chicken_death.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/chicken_damaged1.ogg', 'modular_bandastation/mobs/sound/chicken_damaged2.ogg')
 
-	held_state = "chicken_brown" // Выбирается через инициализатор при розыгрыше раскраски
+	// held_state Выбирается через инициализатор при розыгрыше раскраски
 	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_SMALL
 	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
@@ -27,12 +21,7 @@
 	held_icon = icon_state
 
 /mob/living/basic/chick
-	name = "цыпленок"
-	desc = "Маленькая прелесть! Но пока что маловата..."
-	attack_verb_continuous = "клюёт"
-	attack_verb_simple = "клюёт"
 	death_sound = 'modular_bandastation/mobs/sound/mouse_squeak.ogg'
-
 	held_state = "chick"
 	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_TINY
@@ -81,15 +70,12 @@
 	held_icon = icon_state
 
 /mob/living/basic/pig
-	name = "свинья"
 	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	attack_verb_continuous = "лягает"
 	attack_verb_simple = "лягает"
 	death_sound = 'modular_bandastation/mobs/sound/pig_death.ogg'
 
 /mob/living/basic/goose
-	name = "гусь"
-	desc = "Прекрасная птица для набива подушек и страха детишек."
 	icon_resting = "goose_rest"
 	melee_damage_type = STAMINA
 	melee_damage_lower = 2

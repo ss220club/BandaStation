@@ -25,8 +25,6 @@
 	tastes = list("meat" = 1, "безопасность" = 1, "храбрость" = 1, "долг" = 1)
 
 /obj/item/food/meat/slab/mouse
-	name = "мышатина"
-	desc = "На безрыбье и мышь мясо. Кто знает чем питался этот грызун до его подачи к столу."
 	icon = 'modular_bandastation/mobs/icons/items.dmi'
 	icon_state = "meat_clear"
 	food_reagents = list(
@@ -38,6 +36,6 @@
 
 /obj/effect/decal/remains/mouse
 	name = "останки"
-	desc = "Это когда-то было грызуном и оно даже бегало..."
+	desc = "Бывший грызун..."
 	icon = 'modular_bandastation/mobs/icons/items.dmi'
 	icon_state = "mouse_skeleton"

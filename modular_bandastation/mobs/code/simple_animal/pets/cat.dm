@@ -2,17 +2,10 @@
 	death_sound = 'modular_bandastation/mobs/sound/cat_meow.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/cat_meow.ogg')
 	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
-	// holder_type = /obj/item/holder/cat2
-
-/mob/living/basic/pet/cat/runtime
-	// holder_type = /obj/item/holder/cat
-
-/mob/living/basic/pet/cat/cak
-	// holder_type = /obj/item/holder/cak
 
 /mob/living/basic/pet/cat/fat
 	name = "толстокот"
-	desc = "Упитана. Счастлива."
+	desc = "Упитан. Счастлив. В своей тарелке."
 	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "iriska"
 	icon_living = "iriska"
@@ -25,8 +18,6 @@
 	health = 40
 	speed = 20 // TOO FAT
 	resting = TRUE
-	// holder_type = /obj/item/holder/fatcat
-
 
 /obj/item/mmi/posibrain/sphere/relaymove(mob/living/user, direction)
 	return	// LAZY
@@ -62,8 +53,8 @@
 
 
 /mob/living/basic/pet/cat/black
-	name = "black cat"
-	real_name = "black cat"
+	name = "черный кот"
+	real_name = "черный кот"
 	desc = "Он ужас летящий на крыльях ночи! Он - тыгыдык и спотыкание во тьме ночной! Бойся не заметить черного кота в тени!"
 	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "salem"
@@ -86,7 +77,6 @@
 	unsuitable_atmos_damage = 0
 	minimum_survivable_temperature = TCMB
 	maximum_survivable_temperature = T0C + 40
-	// holder_type = /obj/item/holder/spacecat
 
 /mob/living/basic/pet/cat/spacecat/Initialize(mapload)
 	. = ..()

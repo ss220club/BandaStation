@@ -1,5 +1,5 @@
 /mob/living/basic/bear
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/animal.dmi' // Более красивые иконки
 	attack_verb_continuous = "рвет"
 	attack_verb_simple = "терзает"
 	death_sound = 'modular_bandastation/mobs/sound/bear_death.ogg'

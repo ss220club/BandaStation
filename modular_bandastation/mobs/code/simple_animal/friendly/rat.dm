@@ -1,6 +1,4 @@
 /mob/living/basic/mouse/rat
-	name = "крыса"
-	real_name = "крыса"
 	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	squeak_sound = 'modular_bandastation/mobs/sound/rat_squeak.ogg'
 	icon_state = "rat_gray"

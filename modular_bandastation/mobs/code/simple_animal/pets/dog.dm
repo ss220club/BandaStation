@@ -30,22 +30,12 @@
 				emote("growl")
 				playsound(src, pick(src.growl_sounds), 75, TRUE)
 
-
-/mob/living/basic/pet/dog/corgi
-	// holder_type = /obj/item/holder/corgi
-
-/mob/living/basic/pet/dog/corgi/ian/Initialize(mapload)
-	. = ..()
-	//if(age == record_age)
-		// holder_type = /obj/item/holder/old_corgi
-
 /mob/living/basic/pet/dog/corgi/narsie
 	maxHealth = 300
 	health = 300
 	melee_damage_type = STAMINA	//Пади ниц!
 	melee_damage_lower = 50
 	melee_damage_upper = 100
-	// holder_type = /obj/item/holder/narsian
 
 /mob/living/basic/pet/dog/corgi/puppy
 	maxHealth = 20
@@ -55,11 +45,10 @@
 /mob/living/basic/pet/dog/corgi/puppy/void
 	maxHealth = 80
 	health = 80
-	// holder_type = /obj/item/holder/void_puppy
 
 /mob/living/basic/pet/dog/corgi/puppy/slime
-	name = "\improper slime puppy"
-	real_name = "slimy"
+	name = "слизнёк"
+	real_name = "слизи"
 	desc = "Крайне склизкий. Но прикольный!"
 	icon_state = "slime_puppy"
 	icon_living = "slime_puppy"
@@ -73,18 +62,9 @@
 	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
 	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
-/mob/living/basic/pet/dog/corgi/lisa
-	// holder_type = /obj/item/holder/lisa
-
-/mob/living/basic/pet/dog/pug
-	// holder_type = /obj/item/holder/pug
-
-/mob/living/basic/pet/dog/bullterrier
-	// holder_type = /obj/item/holder/bullterrier
-
 /mob/living/basic/pet/dog/tamaskan
-	name = "tamaskan"
-	real_name = "tamaskan"
+	name = "тамаскан"
+	real_name = "тамаскан"
 	desc = "Хорошая семейная собака. Уживается с другими собаками и ассистентами."
 	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "tamaskan"
@@ -93,8 +73,8 @@
 	held_state = "bullterrier"
 
 /mob/living/basic/pet/dog/german
-	name = "german"
-	real_name = "german"
+	name = "овчарка"
+	real_name = "овчарка"
 	desc = "Немецкая овчарка с помесью двортерьера. Судя по крупу - явно не породистый."
 	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "german"
@@ -103,8 +83,8 @@
 	held_state = "bullterrier"
 
 /mob/living/basic/pet/dog/brittany
-	name = "brittany"
-	real_name = "brittany"
+	name = "брит"
+	real_name = "брит"
 	desc = "Старая порода, которую любят аристократы."
 	icon = 'modular_bandastation/mobs/icons/pets.dmi'
 	icon_state = "brittany"

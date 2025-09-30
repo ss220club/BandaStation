@@ -1,8 +1,5 @@
 /mob/living/basic/snail
-	name = "улитка"
-	desc = "Маленькая улиточка со своим маленьким домиком. Не гигиеничная..."
 	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
-	// holder_type = /obj/item/holder/snail
 
 /mob/living/basic/snail/space
 	name = "космоулитка"
@@ -37,7 +34,7 @@
 		reagents.expose(oldLoc, TOUCH, wet_volume) //Needed for proper floor wetting.
 
 /mob/living/basic/snail/space/lube
-	name = "space snail"
+	name = "космоулитка"
 	desc = "Маленькая космо-улиточка со своим космо-домиком. Прочная, тихая и медленная. И очень склизкая."
 	gold_core_spawnable = HOSTILE_SPAWN
 	faction = list("slime", "hostile")
@@ -45,4 +42,3 @@
 
 /mob/living/basic/turtle
 	death_sound = 'modular_bandastation/mobs/sound/crack_death1.ogg'
-	// holder_type = /obj/item/holder/turtle
