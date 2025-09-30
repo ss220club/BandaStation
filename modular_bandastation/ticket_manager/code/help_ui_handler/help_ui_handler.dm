@@ -63,15 +63,24 @@ GLOBAL_DATUM_INIT(help_ui_handler, /datum/help_ui_handler, new)
 		if("create_ticket")
 			var/ticket_message = sanitize(trim(params["message"], MAX_MESSAGE_LEN))
 			if(!ticket_message)
-				return
+				return FALSE
 
 			var/client/user_client = ui.user.client
-			var/ticket_type = params["ticketType"]
-			if(isnull(ticket_type) || !GLOB.help_ticket_types[ticket_type])
-				CRASH("Invalid ticket type created by [user_client]. Ticket type: [ticket_type]")
+			var/ticket_type_id = params["ticketType"]
+			if(ticket_type_id != TICKET_TYPE_ADMIN && ticket_type_id != TICKET_TYPE_MENTOR)
+				CRASH("Invalid ticket type created by [user_client]. Ticket type: [ticket_type_id]")
 
-			if(user_client.handle_spam_prevention(ticket_message, MUTE_ADMINHELP))
-				return
+			if(!isnull(user_client.persistent_client.current_help_ticket))
+				var/active_ticket_id = user_client.persistent_client.current_help_ticket.id
+				to_chat(
+					user_client,
+					custom_boxed_message("red_box", "У вас уже есть [TICKET_OPEN_LINK(active_ticket_id, "активный тикет #[active_ticket_id]")]"),
+					MESSAGE_TYPE_ADMINPM
+				)
+			else
+				if(user_client.handle_spam_prevention(ticket_message, MUTE_ADMINHELP))
+					return FALSE
 
-			new /datum/help_ticket(creator = user_client, message = ticket_message, ticket_type_id = ticket_type)
+				new /datum/help_ticket(user_client, message = ticket_message, ticket_type_id = ticket_type_id)
+
 			ui.close()

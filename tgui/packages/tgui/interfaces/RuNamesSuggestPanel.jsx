@@ -23,7 +23,7 @@ export const RuNamesSuggestPanel = (props) => {
               width="100%"
               value={nominative}
               placeholder="Клоун/Ассистуха..."
-              onChange={(e, value) => setNominative(value)}
+              onChange={setNominative}
             />
           </LabeledList.Item>
           <LabeledList.Item label="Родительный (Кого? Чего?)">
@@ -31,7 +31,7 @@ export const RuNamesSuggestPanel = (props) => {
               width="100%"
               value={genitive}
               placeholder="Клоуна/Ассистухи..."
-              onChange={(e, value) => setGenitive(value)}
+              onChange={setGenitive}
             />
           </LabeledList.Item>
           <LabeledList.Item label="Дательный (Кому? Чему?)">
@@ -39,7 +39,7 @@ export const RuNamesSuggestPanel = (props) => {
               width="100%"
               value={dative}
               placeholder="Клоуну/Ассистухе..."
-              onChange={(e, value) => setDative(value)}
+              onChange={setDative}
             />
           </LabeledList.Item>
           <LabeledList.Item label="Винительный (Кого? Что?)">
@@ -47,7 +47,7 @@ export const RuNamesSuggestPanel = (props) => {
               width="100%"
               value={accusative}
               placeholder="Клоуна/Ассистуху..."
-              onChange={(e, value) => setAccusative(value)}
+              onChange={setAccusative}
             />
           </LabeledList.Item>
           <LabeledList.Item label="Творительный (Кем? Чем?)">
@@ -55,7 +55,7 @@ export const RuNamesSuggestPanel = (props) => {
               width="100%"
               value={instrumental}
               placeholder="Клоуном/Ассистухой..."
-              onChange={(e, value) => setInstrumental(value)}
+              onChange={setInstrumental}
             />
           </LabeledList.Item>
           <LabeledList.Item label="Предложный (О/В ком/чём?)">
@@ -63,7 +63,7 @@ export const RuNamesSuggestPanel = (props) => {
               width="100%"
               value={prepositional}
               placeholder="Клоуне/Ассистухе..."
-              onChange={(e, value) => setPrepositional(value)}
+              onChange={setPrepositional}
             />
           </LabeledList.Item>
         </LabeledList>
