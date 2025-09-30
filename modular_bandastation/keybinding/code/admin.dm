@@ -1,3 +1,11 @@
+/datum/keybinding/admin/mentor_say
+	hotkey_keys = list("F4")
+	name = MENTOR_CHANNEL
+	full_name = "Msay"
+	description = "Разговаривайте с другими менторами"
+	keybind_signal = COMSIG_KB_ADMIN_MSAY_DOWN
+	required_permissions = R_MENTOR // BANDASTATION EDIT - Valid permissions
+
 /datum/keybinding/admin/admin_say
 	full_name = "Asay"
 	hotkey_keys = list("F5")

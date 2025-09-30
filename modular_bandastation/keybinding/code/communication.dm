@@ -12,7 +12,7 @@
 
 /datum/keybinding/client/communication/me
 	full_name = "Эмоция"
-	hotkey_keys = list("F4", "M")
+	hotkey_keys = list("M")
 
 /datum/keybinding/client/communication/looc
 	full_name = "LOOC"

@@ -1,9 +1,13 @@
 /datum/keybinding/admin
 	category = CATEGORY_ADMIN
 	weight = WEIGHT_ADMIN
+	// BANDASTATION ADDITION START - Valid permissions
+	/// Bitfield with permissions required for this keybind
+	var/required_permissions = R_NONE
+	// BANDASTATION ADDITION END
 
 /datum/keybinding/admin/can_use(client/user)
-	return user.holder ? TRUE : FALSE
+	return check_rights_for(user, required_permissions) // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/admin_say
 	hotkey_keys = list("F3")
@@ -11,6 +15,7 @@
 	full_name = "Admin say"
 	description = "Talk with other admins."
 	keybind_signal = COMSIG_KB_ADMIN_ASAY_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/admin_ghost
 	hotkey_keys = list("F5")
@@ -18,6 +23,7 @@
 	full_name = "Aghost"
 	description = "Go ghost"
 	keybind_signal = COMSIG_KB_ADMIN_AGHOST_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/admin_ghost/down(client/user, turf/target)
 	. = ..()
@@ -46,6 +52,7 @@
 	full_name = "Toggle Buildmode Self"
 	description = "Toggles buildmode"
 	keybind_signal = COMSIG_KB_ADMIN_TOGGLEBUILDMODE_DOWN
+	required_permissions = R_BUILD // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/toggle_buildmode_self/down(client/user, turf/target)
 	. = ..()
@@ -60,6 +67,7 @@
 	full_name = "Stealth mode"
 	description = "Enters stealth mode"
 	keybind_signal = COMSIG_KB_ADMIN_STEALTHMODETOGGLE_DOWN
+	required_permissions = R_STEALTH // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/stealthmode/down(client/user, turf/target)
 	. = ..()
@@ -74,6 +82,7 @@
 	full_name = "Admin invisibility"
 	description = "Toggles ghost-like invisibility (Don't abuse this)"
 	keybind_signal = COMSIG_KB_ADMIN_INVISIMINTOGGLE_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/invisimin/down(client/user, turf/target)
 	. = ..()
@@ -88,6 +97,7 @@
 	full_name = "deadsay"
 	description = "Allows you to send a message to dead chat"
 	keybind_signal = COMSIG_KB_ADMIN_DSAY_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/deadsay/down(client/user, turf/target)
 	. = ..()
@@ -130,6 +140,7 @@
 	full_name = "View Tags"
 	description = "Open the View-Tags menu"
 	keybind_signal = COMSIG_KB_ADMIN_VIEWTAGS_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/view_tags/down(client/user, turf/target)
 	. = ..()

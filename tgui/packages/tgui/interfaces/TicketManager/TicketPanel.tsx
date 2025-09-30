@@ -9,25 +9,26 @@ import { TicketAdminInteractions, TicketInteractions } from './Ticket';
 import { TicketMessage } from './TicketMessage';
 import { TicketPanelEmbed } from './TicketPanelEmbed';
 import { TicketPanelEmoji } from './TicketPanelEmoji';
-import type { ManagerData } from './types';
+import type { ManagerData, TicketProps } from './types';
 
-export function TicketPanel(props) {
+type TicketPanelProps = {
+  selectedTicket: TicketProps;
+  setSelectedTicketId: React.Dispatch<React.SetStateAction<number | null>>;
+};
+
+export function TicketPanel(props: TicketPanelProps) {
   const { act, data } = useBackend<ManagerData>();
-  const { userKey, isAdmin, isMentor, maxMessageLength, replyCooldown } = data;
-  const { allTickets, ticketNumber, setSelectedTicket } = props;
+  const { userKey, isAdmin, maxMessageLength, replyCooldown } = data;
+  const { selectedTicket, setSelectedTicketId } = props;
 
-  const selectedTicket = allTickets.find(
-    (ticket) => ticket.number === ticketNumber,
-  );
   const {
     number,
-    initiator,
-    initiatorCkey,
     messages,
     state,
     type,
     linkedAdmin,
     writers,
+    userHasStaffAccess,
   } = selectedTicket;
 
   const ticketOpen = state === TICKET_STATE.Open;
@@ -119,33 +120,12 @@ export function TicketPanel(props) {
       className={classes(['TicketPanel', `Ticket--${type}`])}
     >
       <Stack.Item>
-        <Section
-          fitted={!isAdmin}
-          title={
-            <Stack fill align="center">
-              <Stack.Item fontSize={1}>
-                <Button
-                  icon="arrow-left"
-                  onClick={() => setSelectedTicket(false)}
-                />
-              </Stack.Item>
-              <Stack.Item grow className="TicketPanel__Title">
-                Тикет #{number} - {initiator}
-              </Stack.Item>
-              {(isAdmin || isMentor) && (
-                <Stack.Item>
-                  <TicketInteractions
-                    linkedAdmin={linkedAdmin}
-                    ticketId={number}
-                    ticketState={state}
-                  />
-                </Stack.Item>
-              )}
-            </Stack>
-          }
-        >
-          {!!isAdmin && <TicketAdminInteractions ticketId={number} />}
-        </Section>
+        <TicketTitle
+          isAdmin={!!isAdmin}
+          hasStaffAccess={!!userHasStaffAccess}
+          selectedTicket={selectedTicket}
+          setSelectedTicketId={setSelectedTicketId}
+        />
       </Stack.Item>
       {!!isAdmin && <Stack.Divider />}
       <Stack.Item grow position="relative">
@@ -164,8 +144,8 @@ export function TicketPanel(props) {
             {messages.map((message) => (
               <TicketMessage
                 key={message.time}
-                initiatorCkey={initiatorCkey}
-                message={message}
+                messageHolder={message}
+                hasStaffAccess={!!userHasStaffAccess}
               />
             ))}
           </Stack>
@@ -178,8 +158,8 @@ export function TicketPanel(props) {
             value={inputMessage}
             placeholder={ticketOpen ? 'Введите сообщение...' : 'Тикет закрыт!'}
             maxLength={maxMessageLength}
-            cooldown={!isAdmin && !isMentor && replyCooldown}
-            disabled={!ticketOpen || (!isAdmin && !linkedAdmin)}
+            cooldown={!userHasStaffAccess && replyCooldown}
+            disabled={!ticketOpen || (!userHasStaffAccess && !linkedAdmin)}
             onChange={(value) => {
               setInputMessage(value);
               handleTyping();
@@ -206,11 +186,53 @@ export function TicketPanel(props) {
   );
 }
 
+type TitcketTitleProps = {
+  isAdmin: boolean;
+  hasStaffAccess: boolean;
+  selectedTicket: TicketProps;
+  setSelectedTicketId: React.Dispatch<React.SetStateAction<number | null>>;
+};
+
+function TicketTitle(props: TitcketTitleProps) {
+  const { isAdmin, hasStaffAccess, selectedTicket, setSelectedTicketId } =
+    props;
+  const { number, initiator, state, isLinkedToCurrentAdmin } = selectedTicket;
+  return (
+    <Section
+      fitted={!isAdmin}
+      title={
+        <Stack fill align="center">
+          <Stack.Item fontSize={1}>
+            <Button
+              icon="arrow-left"
+              onClick={() => setSelectedTicketId(null)}
+            />
+          </Stack.Item>
+          <Stack.Item grow className="TicketPanel__Title">
+            Тикет #{number} - {initiator}
+          </Stack.Item>
+          {hasStaffAccess && (
+            <Stack.Item>
+              <TicketInteractions
+                isLinkedToCurrentAdmin={!!isLinkedToCurrentAdmin}
+                ticketId={number}
+                ticketState={state}
+              />
+            </Stack.Item>
+          )}
+        </Stack>
+      }
+    >
+      {isAdmin && <TicketAdminInteractions ticketId={number} />}
+    </Section>
+  );
+}
+
 function TypingIndicator(props) {
   const { writers, userKey } = props;
   const others = writers.filter((writer) => writer !== userKey);
 
-  let writersText;
+  let writersText: string = '';
   if (others.length === 1) {
     writersText = `${others[0]} печатает...`;
   }

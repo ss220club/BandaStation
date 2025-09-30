@@ -42,15 +42,18 @@ GLOBAL_LIST_EMPTY_TYPED(persistent_clients, /datum/persistent_client)
 	/// BANDASTATION ADDITION START - SScentral
 	/// Discord of the player
 	var/discord_id
+	/// Key of the player
+	var/key
 	/// Ckey of the player
 	var/ckey
 	/// BANDASTATION ADDITION END - SScentral
 
-/datum/persistent_client/New(ckey)
+/datum/persistent_client/New(ckey, key)
 	achievements = new(ckey)
 	GLOB.persistent_clients_by_ckey[ckey] = src
 	GLOB.persistent_clients += src
 	src.ckey = ckey /// BANDASTATION ADDITION - SScentral
+	src.key = key /// BANDASTATION ADDITION - Mentors
 
 /datum/persistent_client/Destroy(force)
 	SHOULD_CALL_PARENT(FALSE)

@@ -17,10 +17,17 @@
 /datum/log_category/admin_private
 	category = LOG_CATEGORY_ADMIN_PRIVATE
 	config_flag = /datum/config_entry/flag/log_admin
-	secret = TRUE
+	// secret = TRUE
 
 /datum/log_category/admin_asay
 	category = LOG_CATEGORY_ADMIN_PRIVATE_ASAY
 	master_category = /datum/log_category/admin_private
 	config_flag = /datum/config_entry/flag/log_adminchat
-	secret = TRUE
+	// secret = TRUE
+
+// BANDASTATION ADDITION - Mentors
+/datum/log_category/admin_msay
+	category = LOG_CATEGORY_ADMIN_MSAY
+	master_category = /datum/log_category/admin_private
+	// secret = TRUE
+// BANDASTATION ADDITION - Mentors

@@ -1,63 +1,91 @@
-/// Checks if user can send message to ticket.
-/datum/ticket_manager/proc/can_send_message(client/user, datum/help_ticket/user_ticket, datum/help_ticket/needed_ticket)
-	if(user_ticket && (user_ticket.id != needed_ticket.id))
-		to_chat(user, span_danger("Создатель этого тикета, уже имеет другой тикет, ответ в выбранный тикет невозможен!"), MESSAGE_TYPE_ADMINPM)
-		return FALSE
+/// Returns `/datum/help_ticket` by id from `all_tickets`
+/datum/ticket_manager/proc/get_help_ticket_by_id(help_ticket_id)
+	if(!help_ticket_id)
+		return null
 
+	return all_tickets[help_ticket_id]
+
+/datum/ticket_manager/proc/can_send_message(client/user, datum/help_ticket/needed_ticket)
 	if(needed_ticket.state != TICKET_OPEN)
-		to_chat(user, span_danger("Этот тикет уже закрыт! Создайте новый при необходимости."), MESSAGE_TYPE_ADMINPM)
+		to_chat(
+			user,
+			span_danger("Этот тикет уже закрыт! Создайте новый при необходимости."),
+			MESSAGE_TYPE_ADMINPM
+		)
+
 		return FALSE
 
-	if(!needed_ticket.admin_replied && !check_rights_for(user, R_ADMIN))
-		to_chat(user, span_danger("На ваш тикет ещё не ответил ни один администратор! Ожидайте ответа."), MESSAGE_TYPE_ADMINPM)
+	if(needed_ticket.has_staff_access(user))
+		return TRUE
+
+	if(!needed_ticket.admin_replied)
+		to_chat(
+			user,
+			span_danger("На ваш тикет ещё не ответил ни один администратор! Ожидайте ответа."),
+			MESSAGE_TYPE_ADMINPM
+		)
+
 		return FALSE
 
-	if(!needed_ticket.linked_admin && !check_rights_for(user, R_ADMIN))
-		to_chat(user, span_danger("У вашего тикета нет привязанного администратора! Ожидайте пока кто-то вам ответит."), MESSAGE_TYPE_ADMINPM)
+	if(!needed_ticket.linked_admin)
+		to_chat(
+			user,
+			span_danger("У вашего тикета нет привязанного администратора! Ожидайте пока кто-то вам ответит."),
+			MESSAGE_TYPE_ADMINPM
+		)
+
 		return FALSE
 
-	if(!user.holder && !COOLDOWN_FINISHED(user, ticket_response))
-		to_chat(user, span_danger("Слишком быстро! Разрешено писать 1 сообщение в [TICKET_REPLY_COOLDOWN / 1 SECONDS] секунд."), MESSAGE_TYPE_ADMINPM)
+	if(!COOLDOWN_FINISHED(user, ticket_response))
+		to_chat(
+			user,
+			span_danger("Слишком быстро! Разрешено писать 1 сообщение в [TICKET_REPLY_COOLDOWN / (1 SECONDS)] секунд."),
+			MESSAGE_TYPE_ADMINPM
+		)
+
 		return FALSE
+
 	return TRUE
 
-/// Link admin to ticket.
 /datum/ticket_manager/proc/link_admin_to_ticket(client/admin, datum/help_ticket/needed_ticket)
 	if(!admin || !needed_ticket)
 		CRASH("Tried to link admin to ticket with invalid arguments!")
 
-	if(!needed_ticket.linked_admin)
-		needed_ticket.linked_admin = admin.persistent_client
-		deltimer(needed_ticket.ticket_autoclose_timer_id)
-		message_admins("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
-		log_admin("[key_name_admin(admin)] взял тикет #[needed_ticket.id] на рассмотрение.")
+	needed_ticket.link_admin(admin)
 
 /datum/ticket_manager/proc/unlink_admin_from_ticket(client/admin, datum/help_ticket/needed_ticket)
-	if(!admin || !needed_ticket)
+	if(isnull(admin) || isnull(needed_ticket))
 		CRASH("Tried to unlink admin from ticket with invalid arguments!")
 
-	if(!needed_ticket.linked_admin)
-		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], к которому не привязан администратор.")
-		CRASH("Tried to unlink admin from ticket without linked admin!")
+	if(!needed_ticket.has_staff_access(admin))
+		message_admins(
+			"[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], не имея прав доступа к нему!"
+		)
 
-	if(!admin.holder)
-		message_admins("[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], не имея прав администратора!")
-		CRASH("Tried to unlink admin from ticket without a required rights!")
+		stack_trace("Tried to unlink admin from ticket without required rights!")
+		return FALSE
 
-	var/autoclose_delay = TICKET_AUTOCLOSE_TIMER / 2
-	needed_ticket.linked_admin = null
-	needed_ticket.ticket_autoclose_timer_id = addtimer(CALLBACK(src, PROC_REF(autoclose_ticket), needed_ticket), autoclose_delay, TIMER_STOPPABLE)
-	to_chat(GLOB.admins, span_admin("[key_name_admin(admin)] отказался от тикета [TICKET_OPEN_LINK(needed_ticket.id, "#[needed_ticket.id]")]."), MESSAGE_TYPE_ADMINPM)
-	log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
-	SStgui.update_uis(src)
+	if(needed_ticket.linked_admin?.client != admin)
+		message_admins(
+			"[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], к которому не привязан."
+		)
 
-	var/client/initiator = needed_ticket.initiator_client.client
-	if(!initiator)
-		return
+		stack_trace("Tried to unlink admin from ticket not being linked admin!")
+		return FALSE
 
-	to_chat(initiator,
-		custom_boxed_message("green_box", span_adminhelp("[admin.key] отказался от вашего тикета. Ожидайте другого администратора. Если никто не ответит на ваш тикет, он автоматически закроется через [autoclose_delay / 1 SECONDS] секунд.")),
-		MESSAGE_TYPE_ADMINPM)
+	if(needed_ticket.unlink_linked_admin())
+		log_admin("[key_name_admin(admin)] отказался от тикета #[needed_ticket.id].")
+
+		SStgui.update_uis(src)
+		for(var/client/admin_to_notify as anything in GLOB.admins)
+			if(!needed_ticket.has_user_access(admin_to_notify))
+				continue
+
+			to_chat(
+				admin_to_notify,
+				span_admin("[key_name_admin(admin)] отказался от тикета [TICKET_OPEN_LINK(needed_ticket.id, "#[needed_ticket.id]")]."),
+				MESSAGE_TYPE_ADMINPM
+			)
 
 /// Adds user to ticket writers when he starts typing. Used for type indicator in ticket chat UI
 /datum/ticket_manager/proc/add_to_ticket_writers(client/writer, datum/help_ticket/needed_ticket, update_ui = TRUE)
@@ -97,7 +125,7 @@
 	else
 		COOLDOWN_START(sender, ticket_response, TICKET_REPLY_COOLDOWN)
 
-	var/client/initiator = needed_ticket.initiator_client.client
+	var/client/initiator = needed_ticket.get_initiator_client()
 	if(sender.key != initiator.key && !needed_ticket.admin_replied)
 		needed_ticket.admin_replied = TRUE
 
@@ -164,7 +192,7 @@
 	SStgui.update_uis(src)
 
 	if(initiator.client)
-		to_chat(initiator.client, custom_boxed_message("red_box", "[user_message]"), MESSAGE_TYPE_ADMINPM)
+		to_chat(initiator.client, custom_boxed_message("[needed_ticket.get_boxed_message_class()]", "[user_message]"), MESSAGE_TYPE_ADMINPM)
 	message_admins(span_admin(admin_message))
 	log_admin_private(admin_message)
 	internal_admin_ticket_log(needed_ticket, admin_message)
@@ -175,20 +203,9 @@
 
 	set_ticket_state(null, needed_ticket, TICKET_CLOSED)
 
-/* NEEDED MENTOR SYSTEM
-/datum/ticket_manager/proc/convert_ticket(ticket_id)
-	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
-	if(!needed_ticket)
-		CRASH("Ticket with id [ticket_id] not found in all tickets!")
-
-	switch(needed_ticket.ticket_type)
-		if(TICKET_TYPE_ADMIN)
-			needed_ticket.ticket_type = TICKET_TYPE_MENTOR
-		if(TICKET_TYPE_MENTOR)
-			needed_ticket.ticket_type = TICKET_TYPE_ADMIN
-
-	SStgui.update_uis(src)
-*/
+/datum/ticket_manager/proc/convert_ticket(client/converter, datum/help_ticket/needed_ticket)
+	if(needed_ticket.convert(converter))
+		SStgui.update_uis(src)
 
 /// Adds little notification to ticket chat about player disconnect
 /datum/ticket_manager/proc/client_logout(datum/persistent_client/p_client)
@@ -202,7 +219,7 @@
 
 	remove_from_ticket_writers(user, needed_ticket, FALSE)
 	needed_ticket.messages += list(list(
-		"sender" = "CLIENT_DISCONNECTED",
+		"sender" = TICKET_LOG_SENDER_CLIENT_DISCONNECTED,
 		"message" = "[user.key] отключился",
 		"time" = time_stamp(NONE),
 	))
@@ -221,7 +238,7 @@
 		return
 
 	needed_ticket.messages += list(list(
-		"sender" = "CLIENT_CONNECTED",
+		"sender" = TICKET_LOG_SENDER_CLIENT_CONNECTED,
 		"message" = "[user.key] подключился",
 		"time" = time_stamp(NONE),
 	))
@@ -233,29 +250,35 @@
 	var/message = emoji_parse(raw_message)
 	var/id = needed_ticket.id
 	var/is_pm = needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM
-	var/title = span_adminhelp("Ответ на тикет #[id]")
-	if(is_pm)
-		title = span_adminhelp("Личное сообщение от администратора")
 
-	var/client/player = needed_ticket.initiator_client.client
+	var/text_span_class = needed_ticket.get_text_span_class()
+	var/title = span_class(text_span_class, ("Ответ на тикет #[id]"))
+	if(is_pm)
+		title = span_class(text_span_class, ("Личное сообщение от администратора"))
+
+	var/client/player = needed_ticket.get_initiator_client()
 	var/admin_key = key_name(admin, TRUE, FALSE)
 	var/player_key = needed_ticket.initiator_client.ckey
 	if(player)
 		player_key = key_name(player, TRUE, FALSE)
-		SEND_SOUND(player, sound('sound/effects/adminhelp.ogg'))
-		window_flash(player, ignorepref = TRUE)
-		to_chat(player, fieldset_block(
-			title, "[TICKET_REPLY_LINK(id, admin.key)]\n\n\
-			[span_adminsay(message)]\n\n\
-			[span_adminsay("Нажмите на ник, чтобы ответить. Либо [TICKET_OPEN_LINK(id, "откройте чат")].")]",
-			"boxed_message red_box"),
-			MESSAGE_TYPE_ADMINPM)
+
+		send_adminhelp_message(
+			player,
+			fieldset_block(
+				title,\
+				"[TICKET_REPLY_LINK(id, admin.key)]\n\n\
+				[span_class(text_span_class, message)]\n\n\
+				[span_class(text_span_class, "Нажмите на ник, чтобы ответить. Либо [TICKET_OPEN_LINK(id, "откройте чат")].")]",\
+				"boxed_message [needed_ticket.get_boxed_message_class()]"\
+			)
+		)
 
 	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [admin_key] → [player_key]:"
 	var/log_message = "[message]"
 	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
 	log_admin_private("[log_prefix] [log_message]")
 	SSblackbox.LogAhelp(id, "Reply", message, player_key, admin_key)
+
 
 /// Send player ticket reply to admin, if he's online. And make some logs for other admins
 /datum/ticket_manager/proc/send_chat_message_to_admin(client/player, datum/help_ticket/needed_ticket, raw_message)
@@ -265,71 +288,64 @@
 
 	var/id = needed_ticket.id
 	var/is_pm = needed_ticket.ticket_type_hidden == TICKET_TYPE_HIDDEN_PM
-	var/title = span_adminhelp("Ответ на тикет #[id]")
+	var/title = span_class(needed_ticket.get_text_span_class(), ("Ответ на тикет #[id]"))
 	if(is_pm)
-		title = span_adminhelp("Ответ на личное сообщение")
+		title = span_class(needed_ticket.get_text_span_class(), ("Ответ на личное сообщение"))
 
-	var/client/admin = needed_ticket.linked_admin.client
+	var/client/linked_admin = needed_ticket.linked_admin.client
 	var/admin_key = needed_ticket.linked_admin.ckey
 	var/player_key = key_name(player, TRUE, FALSE)
-	if(admin)
-		admin_key = key_name(admin, TRUE, FALSE)
-		if(admin.prefs.toggles & SOUND_ADMINHELP)
-			SEND_SOUND(admin, sound('sound/effects/adminhelp.ogg'))
-		window_flash(admin, ignorepref = TRUE)
-		to_chat(admin, fieldset_block(
-			title, "[TICKET_REPLY_LINK(id, player.key)]\n\n\
-			[span_adminsay(message)]\n\n\
-			[TICKET_FULLMONTY(player.mob, id)]",
-			"boxed_message red_box"),
-			MESSAGE_TYPE_ADMINPM)
+	if(linked_admin)
+		admin_key = key_name(linked_admin, TRUE, FALSE)
+
+		var/chat_message = "\
+			[TICKET_REPLY_LINK(id, player.key)]\n\n\
+			[span_class(needed_ticket.get_text_span_class(), message)]\n\n\
+			[TICKET_FULLMONTY(player.mob, id)]\
+		"
+		var/fieldset_block_message = fieldset_block(title, chat_message, "boxed_message [needed_ticket.get_boxed_message_class()]")
+
+		send_adminhelp_message(linked_admin, fieldset_block_message)
 
 	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [player_key] → [admin_key]:"
 	var/log_message = "[message]"
-	for(var/client/A in GLOB.admins)
-		if(A.key == admin.key)
+
+	for(var/client/admin as anything in GLOB.admins)
+		if((linked_admin.key == admin.key) || !needed_ticket.has_user_access(admin))
 			continue
-		to_chat(A, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
+
+		to_chat(admin, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
 
 	log_admin_private("[log_prefix] [log_message]")
 	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
 	SSblackbox.LogAhelp(id, "Reply", message, admin_key, player_key)
 
-/// Checking existing user ticket, and send message to it IF stuff writed something
-/datum/ticket_manager/proc/open_existing_ticket(client/stuff, client/ticket_holder, message)
-	if(!ticket_holder)
-		to_chat(stuff, span_danger("Кажется клиент покинул сервер..."), MESSAGE_TYPE_ADMINPM)
-		return TRUE
+/// Checking existing user ticket, and send message to it IF staff has written something
+/datum/ticket_manager/proc/open_ticket(client/staff, datum/help_ticket/target_ticket, message)
+	if(!target_ticket?.has_user_access(staff))
+		return FALSE
 
-	var/datum/help_ticket/subject_ticket = ticket_holder.persistent_client.current_help_ticket
-	if(subject_ticket)
-		if(message)
-			add_ticket_message(stuff, subject_ticket, message)
+	if(message)
+		add_ticket_message(staff, target_ticket, message)
 
-		stuff.ticket_to_open = subject_ticket.id
-		ui_interact(stuff.mob)
-		return TRUE
-	return FALSE
+	staff.ticket_to_open = target_ticket.id
+	ui_interact(staff.mob)
+	return TRUE
 
 /// Logging any actions on ticket initiator mob/client, and sending it to ticket chat
 /// Stripped all html tags, so we got only text
 /proc/admin_ticket_log(thing, message, player_message, log_in_blackbox)
-	var/client/user_client
 	var/mob/user = thing
-	if(istype(user))
-		user_client = user.client
-	else
-		user_client = thing
-
-	if(!user_client)
+	var/client/user_client = istype(user) ? user.client : user
+	if(!istype(user_client))
 		return
 
 	var/datum/help_ticket/user_ticket = user_client.persistent_client.current_help_ticket
-	if(!user_ticket)
+	if(isnull(user_ticket))
 		return
 
 	user_ticket.messages += list(list(
-		"sender" = "ADMIN_TICKET_LOG",
+		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = strip_html_full(message),
 		"time" = time_stamp(NONE),
 	))
@@ -342,7 +358,7 @@
 		return
 
 	ticket.messages += list(list(
-		"sender" = "ADMIN_TICKET_LOG",
+		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = strip_html_full(message),
 		"time" = time_stamp(NONE),
 	))
