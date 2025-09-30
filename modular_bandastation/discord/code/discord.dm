@@ -32,7 +32,7 @@
 	if(!webhook)
 		return
 
-	var/role_id = CONFIG_GET(string/round_end_webhook_role_id)
+	var/role_id = CONFIG_GET(string/round_end_webhook_ping_role_id)
 	var/content = role_id ? "<@&[role_id]>" : null
 
 	var/message_content = GLOB.survivor_report
