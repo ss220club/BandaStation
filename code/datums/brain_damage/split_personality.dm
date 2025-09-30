@@ -55,10 +55,17 @@
 
 /// Ghost poll has concluded
 /datum/brain_trauma/severe/split_personality/proc/schism(mob/dead/observer/ghost)
+	owner_backseat.AddComponent( \
+		/datum/component/temporary_body, \
+		old_mind = owner.mind, \
+		old_body = owner, \
+		perma_body_attached = TRUE, \
+	)
+
 	if(isnull(ghost))
 		qdel(src)
 		return
-	if(ghost.mind.current)// if they previous had a body preserve them else that means they never had one or it was destroyed so assign ckey like normal
+	if(ghost?.mind?.current)// if they previous had a body preserve them else that means they never had one or it was destroyed so assign ckey like normal // BANDASTATION FIX
 		stranger_backseat.AddComponent( \
 		/datum/component/temporary_body, \
 		old_mind = ghost.mind, \
@@ -70,13 +77,14 @@
 	stranger_backseat.PossessByPlayer(ghost.ckey)
 	stranger_backseat.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
 	message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
-
+	/* BANDASTATION MOVE
 	owner_backseat.AddComponent( \
 		/datum/component/temporary_body, \
 		old_mind = owner.mind, \
 		old_body = owner, \
 		perma_body_attached = TRUE, \
 	)
+	*/
 
 
 /datum/brain_trauma/severe/split_personality/on_life(seconds_per_tick, times_fired)
@@ -92,6 +100,8 @@
 	// qdel the mob with the temporary component will ensure the original mind will go back into the body and vice versa for the stranger mind
 	if(!temp_component)
 		stranger_backseat?.ghostize()
+	if(current_controller != OWNER)
+		switch_personalities(reset_to_owner = TRUE) // BANDASTATION ADD
 	QDEL_NULL(stranger_backseat)
 	QDEL_NULL(owner_backseat)
 	..()
@@ -272,7 +282,7 @@
 		qdel(src)
 
 /datum/brain_trauma/severe/split_personality/blackout/on_life(seconds_per_tick, times_fired)
-	if(current_controller == OWNER && stranger_backseat)//we should only start transitioning after the other personality has entered
+	if(current_controller == OWNER && stranger_backseat.client)//we should only start transitioning after the other personality has entered //BANDASTATION FIX
 		owner.overlay_fullscreen("fade_to_black", /atom/movable/screen/fullscreen/blind)
 		owner.clear_fullscreen("fade_to_black", animated = 4 SECONDS)
 		switch_personalities()

@@ -1,7 +1,7 @@
 /datum/antagonist/pirate
 	name = "\improper Space Pirate"
 	pref_flag = ROLE_TRAITOR
-	roundend_category = "space pirates"
+	roundend_category = "Космические пираты"
 	antagpanel_category = ANTAG_GROUP_PIRATES
 	show_in_antagpanel = FALSE
 	show_to_ghosts = TRUE

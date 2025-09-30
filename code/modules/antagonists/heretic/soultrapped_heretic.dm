@@ -1,7 +1,7 @@
 ///a heretic that got soultrapped by cultists. does nothing, other than signify they suck
 /datum/antagonist/soultrapped_heretic
 	name = "\improper Soultrapped Heretic"
-	roundend_category = "Heretics"
+	roundend_category = "Еретики"
 	antagpanel_category = "Heretic"
 	pref_flag = ROLE_HERETIC
 	antag_moodlet = /datum/mood_event/soultrapped_heretic

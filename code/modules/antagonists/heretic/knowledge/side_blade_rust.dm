@@ -11,10 +11,10 @@
 // Sidepaths for knowledge between Rust and Blade.
 /datum/heretic_knowledge/armor
 	name = "Armorer's Ritual"
-	desc = "Allows you to transmute a table and a gas mask to create Eldritch Armor. \
-		Eldritch Armor provides great protection while also acting as a focus when hooded."
-	gain_text = "The Rusted Hills welcomed the Blacksmith in their generosity. And the Blacksmith \
-		returned their generosity in kind."
+	desc = "Позволяет трансмутировать стол и противогаз для создания Мистической брони. \
+		Мистическая броня обеспечивает отличную защиту, а также действует как фокус, когда на него накинут капюшон."
+	gain_text = "Ржавые холмы приветствовали Кузнеца в своей щедрости. И Кузнец \
+		ответил им щедростью на щедрость."
 
 	required_atoms = list(
 		/obj/structure/table = 1,
@@ -30,10 +30,10 @@
 
 /datum/heretic_knowledge/crucible
 	name = "Mawed Crucible"
-	desc = "Allows you to transmute a portable water tank and a table to create a Mawed Crucible. \
-		The Mawed Crucible can brew powerful potions for combat and utility, but must be fed bodyparts and organs between uses."
-	gain_text = "This is pure agony. I wasn't able to summon the figure of the Aristocrat, \
-		but with the Priest's attention I stumbled upon a different recipe..."
+	desc = "Позволяет трансмутировать переносной бак с водой и стол для создания Голодного горнила. \
+		Голодное горнило позволяет варить мощные боевые и воспомогательные зелья, но взамен требует части тела и органы."
+	gain_text = "Это чистая агония. Мне не удалось вызвать образ Аристократа, \
+		но благодаря вниманию Жреца я наткнулся на другой рецепт..."
 
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
@@ -48,14 +48,14 @@
 
 /datum/heretic_knowledge/rifle
 	name = "Lionhunter's Rifle"
-	desc = "Allows you to transmute a piece of wood, with hide \
-		from any animal,and a camera to create the Lionhunter's rifle. \
-		The Lionhunter's Rifle is a long ranged ballistic weapon with three shots. \
-		These shots function as normal, albeit weak high-caliber munitions when fired from \
-		close range or at inanimate objects. You can aim the rifle at distant foes, \
-		causing the shot to mark your victim with your grasp and teleport you directly to them."
-	gain_text = "I met an old man in an antique shop who wielded a very unusual weapon. \
-		I could not purchase it at the time, but they showed me how they made it ages ago."
+	desc = "Позволяет трансмутировать любую деревянную доску, шкуру \
+		любого животного и камеру в винтовку Lionhunter. \
+		Lionhunter - это дальнобойное баллистическое оружие с тремя выстрелами. \
+		При стрельбе с близкого расстояния или по неодушевленным предметам эти выстрелы \
+		действуют как обычные, хотя и слабые высококалиберные боеприпасы. Ты можешь направить винтовку на противников на большом расстояние,\
+		в результате чего выстрел даст Метку жертве и телепортирует вас к ней."
+	gain_text = "В антикварном магазине я встретил старика, который владел очень необычным оружием. \
+		В то время я не мог его приобрести, но они показали мне, как они делали его много лет назад."
 
 	required_atoms = list(
 		/obj/item/stack/sheet/mineral/wood = 1,
@@ -71,11 +71,11 @@
 
 /datum/heretic_knowledge/rifle_ammo
 	name = "Lionhunter Rifle Ammunition"
-	desc = "Allows you to transmute 3 ballistic ammo casings (used or unused) of any caliber, \
-		including shotgun shells to create an extra clip of ammunition for the Lionhunter Rifle."
-	gain_text = "The weapon came with three rough iron balls, intended to be used as ammunition. \
-		They were very effective, for simple iron, but used up quickly. I soon ran out. \
-		No replacement munitions worked in their stead. It was peculiar in what it wanted."
+	desc = "Позволяет трансмутировать 3 баллистические гильзы (использованные или неиспользованные) любого калибра, \
+		включая дробь, чтобы создать дополнительную обойму боеприпасов для винтовки Lionhunter."
+	gain_text = "К оружию прилагались три грубых железных шара, предназначенных для использования в качестве боеприпасов. \
+		Они были очень эффективны для простого железа, но быстро расходовались. Вскоре они у меня закончились. \
+		Никакие запасные боеприпасы не помогали. Винтовка была своеобразна в том, чего она хотела."
 	required_atoms = list(
 		/obj/item/ammo_casing = 3,
 	)
@@ -109,8 +109,8 @@
 
 /datum/heretic_knowledge/spell/rust_charge
 	name = "Rust Charge"
-	desc = "A charge that must be started on a rusted tile and will destroy any rusted objects you come into contact with, will deal high damage to others and rust around you during the charge."
-	gain_text = "The hills sparkled now, as I neared them my mind began to wander. I quickly regained my resolve and pushed forward, this last leg would be the most treacherous."
+	desc = "Рывок, который должен начаться на ржавом тайле, уничтожающий все ржавые объекты по пути. Наносит большой урон остальным и создает ржавчину вокруг вас во время рывка."
+	gain_text = "Холмы сверкали, и по мере приближения мой разум начал метаться. Я быстро вернул свою решимость и устремился вперед, ведь последний этап будет самым коварным."
 
 	action_to_add = /datum/action/cooldown/mob_cooldown/charge/rust
 	cost = 1

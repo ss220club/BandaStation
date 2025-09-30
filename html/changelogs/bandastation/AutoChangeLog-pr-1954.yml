@@ -1,0 +1,4 @@
+author: "MiraHell"
+delete-after: True
+changes:
+  - bugfix: "Владельца тела больше не выкидывает в госты, если вторая личность не нашлась"

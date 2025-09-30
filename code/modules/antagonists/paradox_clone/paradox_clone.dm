@@ -1,6 +1,6 @@
 /datum/antagonist/paradox_clone
 	name = "\improper Paradox Clone"
-	roundend_category = "Paradox Clone"
+	roundend_category = "Парадокс-клоны"
 	pref_flag = ROLE_PARADOX_CLONE
 	antagpanel_category = ANTAG_GROUP_PARADOX
 	antag_hud_name = "paradox_clone"

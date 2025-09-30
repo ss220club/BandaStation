@@ -68,6 +68,8 @@
 	var/pupils_name = "pupils"
 	/// do these eyes have pupils (or equivalent) that react to light when penlighted.
 	var/light_reactive = TRUE
+	/// variable to hold the eye icon state path for different eye types
+	var/icon_eyes_path = 'icons/mob/human/human_face.dmi' // BANDASTATION ADDITION  - Feat: Augmentation
 
 /obj/item/organ/eyes/Initialize(mapload)
 	. = ..()
@@ -263,8 +265,11 @@
 	if(isnull(eye_icon_state))
 		return list()
 
-	var/mutable_appearance/eye_left = mutable_appearance('icons/mob/human/human_face.dmi', "[eye_icon_state]_l", -EYES_LAYER, parent)
-	var/mutable_appearance/eye_right = mutable_appearance('icons/mob/human/human_face.dmi', "[eye_icon_state]_r", -EYES_LAYER, parent)
+	// BANDASTATION EDIT START - Feat: Augmentation
+	var/mutable_appearance/eye_left = mutable_appearance(icon_eyes_path, "[eye_icon_state]_l", -EYES_LAYER, parent)
+	var/mutable_appearance/eye_right = mutable_appearance(icon_eyes_path, "[eye_icon_state]_r", -EYES_LAYER, parent)
+	// BANDASTATION EDIT END - Feat: Augmentation
+
 	var/list/overlays = list(eye_left, eye_right)
 
 	if(overlay_ignore_lighting && !(parent.obscured_slots & HIDEEYES))
@@ -284,12 +289,12 @@
 			overlays += eyelids
 
 	if (scarring & RIGHT_EYE_SCAR)
-		var/mutable_appearance/right_scar = mutable_appearance('icons/mob/human/human_face.dmi', "eye_scar_right", -EYES_LAYER, parent)
+		var/mutable_appearance/right_scar = mutable_appearance(icon_eyes_path, "eye_scar_right", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
 		right_scar.color = my_head.draw_color
 		overlays += right_scar
 
 	if (scarring & LEFT_EYE_SCAR)
-		var/mutable_appearance/left_scar = mutable_appearance('icons/mob/human/human_face.dmi', "eye_scar_left", -EYES_LAYER, parent)
+		var/mutable_appearance/left_scar = mutable_appearance(icon_eyes_path, "eye_scar_left", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
 		left_scar.color = my_head.draw_color
 		overlays += left_scar
 
@@ -657,9 +662,12 @@
 	name = "basic robotic eyes"
 	desc = "A pair of basic cybernetic eyes that restore vision, but at some vulnerability to light."
 	icon_state = "eyes_cyber_basic"
-	iris_overlay = null
-	eye_color_left = "#2f3032"
-	eye_color_right = "#2f3032"
+	// BANDASTATION EDIT START - Feat: Augmentation
+	iris_overlay = "eyes_cyber_glow_iris"
+	eye_icon_state = "eyes_glow_gs"
+	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
+	overlay_ignore_lighting = TRUE
+	// BANDASTATION EDIT END - Feat: Augmentation
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	penlight_message = "are low grade cybernetics, poorly compensating for the light"
 
@@ -1039,6 +1047,10 @@
 	desc = "Your vision is augmented. Much like actual moth eyes, very sensitive to bright lights."
 	icon_state = "eyes_moth_cyber"
 	eye_icon_state = "motheyes_cyber"
+	// BANDASTATION EDIT START - Feat: Augmentation
+	iris_overlay = "eyes_cyber_glow_iris"
+	overlay_ignore_lighting = TRUE
+	// BANDASTATION EDIT END - Feat: Augmentation
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	pupils_name = "aperture clusters"
 	penlight_message = "are metal hemispheres, resembling insect eyes"
@@ -1174,8 +1186,10 @@
 	name = "pod eyes"
 	desc = "Strangest salad you've ever seen."
 	icon_state = "eyes_pod"
-	eye_color_left = "#375846"
-	eye_color_right = "#375846"
+	/// BANDASTATION REMOVAL START - Podman eye color fix
+	// eye_color_left = "#375846"
+	// eye_color_right = "#375846"
+	/// BANDASTATION REMOVAL END - Podman eye color fix
 	iris_overlay = null
 	foodtype_flags = PODPERSON_ORGAN_FOODTYPES
 	penlight_message = "are green and plant-like"

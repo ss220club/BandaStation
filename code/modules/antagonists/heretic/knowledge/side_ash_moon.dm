@@ -11,9 +11,9 @@
 // Sidepaths for knowledge between Ash and Flesh.
 /datum/heretic_knowledge/medallion
 	name = "Ashen Eyes"
-	desc = "Allows you to transmute a pair of eyes, a candle, and a glass shard into an Eldritch Medallion. \
-		The Eldritch Medallion grants you thermal vision while worn, and also functions as a focus."
-	gain_text = "Piercing eyes guided them through the mundane. Neither darkness nor terror could stop them."
+	desc = "Позволяет трансмутировать пару глаз, свечу и осколок стекла в Мистический медальон. \
+		Мистический медальон дает вам термальное зрение при ношении, а также действует как фокус."
+	gain_text = "Пронзительные глаза вели их сквозь обыденность. Ни тьма, ни ужас не могли остановить их."
 
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
@@ -27,11 +27,11 @@
 
 /datum/heretic_knowledge/ether
 	name = "Ether Of The Newborn"
-	desc = "Transmutes a pool of vomit and a shard into a single use potion, drinking it will remove any sort of abnormality from your body including diseases, traumas and implants \
-		on top of restoring it to full health, at the cost of losing consciousness for an entire minute."
-	gain_text = "Vision and thought grow hazy as the fumes of this ichor swirl up to meet me. \
-		Through the haze, I find myself staring back in relief, or something grossly resembling my visage. \
-		It is this wretched thing that I consign to my fate, and whose own that I snatch through the haze of dreams. Fools that we are."
+	desc = "Преобразует лужу рвоты и осколок, в одноразовое зелье, выпив которое, вы избавитесь от любой аномалии в вашем теле, включая болезни, травмы и имплантаты, \
+		а также полностью восстановите здоровье, ценой потери сознания на целую минуту."
+	gain_text = "Зрение и мысли затуманиваются, как и пары этого ихора, уносящиеся навстречу мне. \
+		Сквозь туманную пелену я с облегчением смотрю на себя или на нечто, очень напоминающее мой облик. \
+		Это то жалкое создание, которое я предоставляю своей судьбе, и чье собственное я вырываю из тумана грез. Какими же глупцами мы были."
 	required_atoms = list(
 		/obj/item/shard = 1,
 		/obj/effect/decal/cleanable/vomit = 1,
@@ -43,10 +43,10 @@
 
 /datum/heretic_knowledge/summon/ashy
 	name = "Ashen Ritual"
-	desc = "Allows you to transmute a head, a pile of ash, and a book to create an Ash Spirit. \
-		Ash Spirits have a short range jaunt and the ability to cause bleeding in foes at range. \
-		They also have the ability to create a ring of fire around themselves for a length of time."
-	gain_text = "I combined my principle of hunger with my desire for destruction. The Marshal knew my name, and the Nightwatcher gazed on."
+	desc = "Позволяет трансмутировать голову, кучу пепла и книгу, чтобы создать Пепельного духа. \
+		Пепельные духи обладают коротким джаунтом и способностью вызывать кровотечение у противников на расстоянии. \
+		Они также обладают способностью создавать вокруг себя огненное кольцо на длительное время."
+	gain_text = "Я объединил свой принцип голода с желанием разрушения. Маршал знал мое имя, а Ночной дозорный наблюдал."
 
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,

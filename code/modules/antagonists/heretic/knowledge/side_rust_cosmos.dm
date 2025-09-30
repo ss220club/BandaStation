@@ -13,10 +13,10 @@
 
 /datum/heretic_knowledge/essence
 	name = "Priest's Ritual"
-	desc = "Allows you to transmute a tank of water and a glass shard into a Flask of Eldritch Essence. \
-		Eldritch Essence can be consumed for potent healing, or given to heathens for deadly poisoning."
-	gain_text = "This is an old recipe. The Owl whispered it to me. \
-		Created by the Priest - the Liquid that both was and is not."
+	desc = "Позволяет трансмутировать емкость с водой и осколок стекла в Колбу с мистической эссенцией. \
+		Мистическую эссенцию можно употреблять для мощного исцеления или давать язычникам для смертельного отравления."
+	gain_text = "Это старый рецепт. Сова шепнула мне его. \
+		Созданная Жрецом - Жидкость, которая есть, и которой нет."
 
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
@@ -44,8 +44,8 @@
 
 /datum/heretic_knowledge/entropy_pulse
 	name = "Pulse of Entropy"
-	desc = "Allows you to transmute 10 iron sheets and a garbage item to fill the surrounding vicinity of the rune with rust."
-	gain_text = "Reality begins to whisper to me. To give it its entropic end."
+	desc = "Позволяет трансмутировать 10 железа и мусорный предмет, чтобы заполнить ржавчиной окружение вокруг руны."
+	gain_text = "Реальность начинает нашептывать мне, чтобы дать ей энтропийный конец."
 	required_atoms = list(
 		/obj/item/stack/sheet/iron = 10,
 		/obj/item/trash = 1,
