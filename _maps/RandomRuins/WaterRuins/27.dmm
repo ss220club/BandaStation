@@ -634,7 +634,7 @@
 "UW" = (
 /obj/effect/mist/rainworld,
 /turf/open/water/no_planet_atmos/deep/rainworld,
-/area/lavaland/surface/outdoors/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Vq" = (
 /obj/effect/decal/cleanable/food/pie_smudge,
 /obj/effect/turf_decal/tile/yellow/fourcorners,

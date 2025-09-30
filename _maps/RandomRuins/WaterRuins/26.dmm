@@ -23,7 +23,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "cy" = (
 /obj/structure/stone_tile/surrounding/cracked{
 	dir = 10
@@ -43,7 +43,7 @@
 /obj/structure/stone_tile/surrounding/burnt,
 /obj/structure/stone_tile/center/burnt,
 /turf/open/water/no_planet_atmos/deep/rainworld,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "hg" = (
 /turf/closed/mineral/volcanic/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
@@ -116,7 +116,7 @@
 /area/lavaland/surface/outdoors)
 "px" = (
 /turf/closed/mineral/snowmountain/cavern/icemoon,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "rB" = (
 /mob/living/basic/mining/legion/cult_skeleton,
 /turf/open/indestructible/necropolis/air,
@@ -127,7 +127,7 @@
 	dir = 1
 	},
 /turf/open/water/no_planet_atmos/deep/rainworld,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "uo" = (
 /obj/item/melee/cultblade/dagger,
 /obj/item/clothing/glasses/hud/health/night/cultblind,
@@ -141,7 +141,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "uH" = (
 /obj/structure/stone_tile/slab,
 /obj/structure/stone_tile/block/cracked{
@@ -150,7 +150,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "ve" = (
 /obj/structure/stone_tile/slab,
 /turf/open/floor/cult,
@@ -161,7 +161,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "zI" = (
 /obj/structure/stone_tile/cracked{
 	dir = 8
@@ -169,7 +169,7 @@
 /turf/open/misc/asteroid{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "zM" = (
 /obj/structure/stone_tile/slab,
 /obj/structure/stone_tile/surrounding_tile{
@@ -178,7 +178,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "zR" = (
 /turf/open/floor/engine/cult{
 	initial_gas_mix = "LAVALAND_ATMOS"
@@ -188,10 +188,10 @@
 /turf/closed/mineral/volcanic/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Bs" = (
 /turf/open/misc/ashplanet/wateryrock,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Ch" = (
 /obj/structure/stone_tile,
 /obj/structure/stone_tile{
@@ -238,7 +238,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "FH" = (
 /turf/closed/indestructible/necropolis,
 /area/lavaland/surface)
@@ -260,10 +260,10 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Hm" = (
 /turf/closed/mineral/volcanic/lava_land_surface,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Hx" = (
 /obj/item/paper/crumpled/bloody/ruins/lavaland_incursion,
 /turf/open/floor/engine/cult{
@@ -285,7 +285,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Km" = (
 /obj/structure/stone_tile/slab/cracked,
 /turf/open/floor/engine/cult{
@@ -300,7 +300,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Nj" = (
 /obj/structure/trap/cult,
 /obj/effect/mob_spawn/corpse/human/skeleton/cultist,
@@ -320,7 +320,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Qk" = (
 /obj/machinery/door/airlock/cult/friendly{
 	use_power = 0
@@ -345,7 +345,7 @@
 /turf/open/misc/asteroid{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "RG" = (
 /obj/structure/stone_tile/block/burnt{
 	dir = 4
@@ -357,7 +357,7 @@
 	dir = 8
 	},
 /turf/open/water/no_planet_atmos/deep/rainworld,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "RT" = (
 /turf/open/indestructible/necropolis/air,
 /area/lavaland/surface)
@@ -376,7 +376,7 @@
 "TG" = (
 /obj/structure/stone_tile/slab/cracked,
 /turf/open/water/no_planet_atmos/deep/rainworld,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "TL" = (
 /turf/closed/mineral/volcanic/lava_land_surface,
 /area/lavaland/surface)
@@ -410,17 +410,17 @@
 /turf/open/misc/asteroid{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "VG" = (
 /turf/open/genturf,
 /area/lavaland/surface/outdoors/unexplored/danger/no_ruins)
 "VH" = (
 /turf/closed/mineral/random/rainworld,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "VX" = (
 /obj/effect/mist/rainworld,
 /turf/open/water/no_planet_atmos/deep/rainworld,
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Wt" = (
 /turf/template_noop,
 /area/template_noop)
@@ -429,7 +429,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Xy" = (
 /obj/structure/stone_tile/slab,
 /obj/structure/stone_tile/block/burnt{
@@ -438,7 +438,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 "Yb" = (
 /obj/item/grown/bananapeel,
 /obj/structure/stone_tile/slab,
@@ -457,7 +457,7 @@
 /turf/open/misc/asteroid{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
-/area/icemoon/underground/explored)
+/area/rainworld/surface/outdoors/nospawn)
 
 (1,1,1) = {"
 Wt
