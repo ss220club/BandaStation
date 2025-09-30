@@ -71,7 +71,7 @@
 			continue
 		to_chat(lings, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
 		sender.cast_tts(
-			thralls,
+			lings,
 			message,
 			is_local = FALSE,
 			effects = list(/datum/singleton/sound_effect/telepathy),
