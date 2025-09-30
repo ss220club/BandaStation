@@ -5,7 +5,7 @@
 
 /obj/item/storage/belt/judobelt
 	name = "Corporate Judo Belt"
-	desc = "Обучает носителя корпоративно дзюдо НТ."
+	desc = "Обучает носителя корпоративному дзюдо НТ."
 	icon = 'modular_bandastation/martial_arts/icons/belts.dmi'
 	icon_state = "judobelt"
 	worn_icon = 'modular_bandastation/martial_arts/icons/mob/belt.dmi'
