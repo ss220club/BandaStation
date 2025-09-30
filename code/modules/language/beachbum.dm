@@ -1,6 +1,6 @@
 /datum/language/beachbum
 	name = "Beachtongue"
-	desc = "An ancient language from the distant Beach Planet. People magically learn to speak it under the influence of space drugs."
+	desc = "Древний язык с далёкой Пляжной Планеты. Люди волшебным образом учатся говорить на нём под воздействием космических наркотиков."
 	key = "u"
 	space_chance = 80
 	sentence_chance = 5
@@ -10,17 +10,17 @@
 	additional_syllable_high = -1
 	default_priority = 90
 	syllables = list(
-		"cowabunga", "rad", "radical", "dudes", "bogus", "weeed", "every",
-		"dee", "dah", "woah", "surf", "blazed", "high", "heinous", "day",
-		"brah", "bro", "blown", "catch", "body", "beach", "oooo", "twenty",
-		"shiz", "phiz", "wizz", "pop", "chill", "awesome", "dude", "it",
-		"wax", "stoked", "yes", "ding", "way", "no", "wicked", "aaaa",
-		"cool", "hoo", "wah", "wee", "man", "maaaaaan", "mate", "wick",
-		"oh", "ocean", "up", "out", "rip", "slide", "big", "stomp",
-		"weed", "pot", "smoke", "four-twenty", "shove", "wacky", "hah",
-		"sick", "slash", "spit", "stoked", "shallow", "gun", "party",
-		"heavy", "stellar", "excellent", "triumphant", "babe", "four",
-		"tail", "trim", "tube", "wobble", "roll", "gnarly", "epic",
+		"кабанга", "отпад", "улет", "чуваки", "фуфло", "травка", "каждый",
+		"ди", "да", "воу", "серф", "подрыв", "под кайфом", "мрак", "день",
+		"братан", "бро", "тащиться", "зачёт", "тело", "пляж", "уууу", "двадцать",
+		"ништяк", "фигня", "визз", "поп", "расслабон", "круто", "чувак", "это",
+		"воск", "завод", "да", "динг", "путь", "нет", "злой", "аааа",
+		"клёво", "ху", "ва", "ви", "чувак", "чеееел", "кореш", "фитиль",
+		"о", "океан", "вверх", "вне", "рвать", "скользить", "большой", "топот",
+		"мариванна", "план", "дым", "четыре-двадцать", "пихать", "прикольный", "ха",
+		"больной", "слэш", "плевать", "заводной", "мелкий", "ствол", "туса",
+		"тяжелый", "звёздный", "превосходно", "триумф", "детка", "четыре",
+		"хвост", "отделка", "труба", "качка", "ролл", "жуткий", "эпик",
 	)
 	icon_state = "beach"
 	always_use_default_namelist = TRUE
