@@ -1057,6 +1057,8 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 #define BUTT_SPRITE_SLIME "slime"
 /// BANDASTATION ADDITION START - Species
 #define BUTT_SPRITE_VULPKANIN "vulpkanin"
+#define BUTT_SPRITE_SKRELL "skrell"
+#define BUTT_SPRITE_TAJARAN "tajaran"
 /// BANDASTATION ADDITION END - Species
 
 /// Distance which you can see someone's ID card

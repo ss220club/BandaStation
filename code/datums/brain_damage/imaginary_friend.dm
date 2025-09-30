@@ -4,11 +4,11 @@
 #define IMAGINARY_FRIEND_EXTENDED_SPEECH_RANGE 999
 
 /datum/brain_trauma/special/imaginary_friend
-	name = "Imaginary Friend"
-	desc = "Patient can see and hear an imaginary person."
-	scan_desc = "partial schizophrenia"
-	gain_text = span_notice("You feel in good company, for some reason.")
-	lose_text = span_warning("You feel lonely again.")
+	name = "Воображаемый друг"
+	desc = "Пациент может видеть и слышать воображаемого человека."
+	scan_desc = "частичная шизофрения"
+	gain_text = span_notice("По какой-то причине вы чувствуете себя в хорошей компании.")
+	lose_text = span_warning("Вы снова чувствуете себя одиноким.")
 	var/mob/eye/imaginary_friend/friend
 	var/friend_initialized = FALSE
 
@@ -76,10 +76,10 @@
 	message_admins("[ADMIN_LOOKUPFLW(friend)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
 
 /mob/eye/imaginary_friend
-	name = "imaginary friend"
-	real_name = "imaginary friend"
+	name = "воображаемый друг"
+	real_name = "воображаемый друг"
 	move_on_shuttle = TRUE
-	desc = "A wonderful yet fake friend."
+	desc = "Замечательный, но ненастоящий друг."
 	sight = NONE
 	mouse_opacity = MOUSE_OPACITY_ICON
 	see_invisible = SEE_INVISIBLE_LIVING
@@ -104,9 +104,9 @@
 	Show()
 
 /mob/eye/imaginary_friend/proc/greet()
-	to_chat(src, span_notice("<b>You are the imaginary friend of [owner]!</b>"))
-	to_chat(src, span_notice("You are absolutely loyal to your friend, no matter what."))
-	to_chat(src, span_notice("You cannot directly influence the world around you, but you can see what [owner] cannot."))
+	to_chat(src, span_notice("<b>Вы - воображаемый друг [owner]!</b>"))
+	to_chat(src, span_notice("Вы абсолютно преданы своему другу, несмотря ни на что."))
+	to_chat(src, span_notice("Вы не можете напрямую влиять на окружающий вас мир, но вы можете видеть то, чего не может видеть [owner]."))
 
 /**
  * Arguments:
@@ -216,10 +216,14 @@
 	owner.imaginary_group -= src
 	return ..()
 
-/mob/eye/imaginary_friend/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, freq_name, freq_color, list/spans, list/message_mods = list(), message_range)
+/mob/eye/imaginary_friend/Hear(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, freq_name, freq_color, list/spans, list/message_mods = list(), message_range)
 	if (safe_read_pref(client, /datum/preference/toggle/enable_runechat) && (safe_read_pref(client, /datum/preference/toggle/enable_runechat_non_mobs) || ismob(speaker)))
 		create_chat_message(speaker, message_language, raw_message, spans)
 	to_chat(src, compose_message(speaker, message_language, raw_message, radio_freq, freq_name, freq_color, spans, message_mods))
+	// BANDASTATION ADD Start - TTS
+	var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
+	speaker.cast_tts(src, message_to_tts, is_radio = !!radio_freq, tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE), channel_override = radio_freq ? CHANNEL_TTS_RADIO : null)
+	// BANDASTATION ADD End - TTS
 
 /mob/eye/imaginary_friend/send_speech(message, range = IMAGINARY_FRIEND_SPEECH_RANGE, obj/source = src, bubble_type = bubble_icon, list/spans = list(), datum/language/message_language = null, list/message_mods = list(), forced = null)
 	message = get_message_mods(message, message_mods)
@@ -257,14 +261,13 @@
 	log_sayverb_talk(message, message_mods, tag = "imaginary friend", forced_by = forced)
 
 	var/messagepart = generate_messagepart(message, spans, message_mods)
-	var/rendered = "[span_name("[name]")] [messagepart]"
 	var/dead_rendered = "[span_name("[name] (Imaginary friend of [owner])")] [messagepart]"
 
 	var/language = message_language || owner.get_selected_language()
-	Hear(rendered, src, language, message, null, null, null, spans, message_mods) // We always hear what we say
+	Hear(src, language, message, null, null, null, spans, message_mods) // We always hear what we say
 	var/group = owner.imaginary_group - src // The people in our group don't, so we have to exclude ourselves not to hear twice
 	for(var/mob/person in group)
-		person.Hear(null, src, language, message, null, null, null, spans, message_mods, range)
+		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
 	// Speech bubble, but only for those who have runechat off
 	var/list/speech_bubble_recipients = list()
@@ -393,7 +396,7 @@
 	var/obj/visual = image('icons/hud/screen_gen.dmi', our_tile, "arrow", FLY_LAYER)
 
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(flick_overlay_global), visual, group_clients(), 2.5 SECONDS)
-	animate(visual, pixel_x = (tile.x - our_tile.x) * ICON_SIZE_X + pointed_atom.pixel_x, pixel_y = (tile.y - our_tile.y) * ICON_SIZE_Y + pointed_atom.pixel_y, time = 1.7, easing = EASE_OUT)
+	animate(visual, pixel_x = (tile.x - our_tile.x) * ICON_SIZE_X + pointed_atom.pixel_x, pixel_y = (tile.y - our_tile.y) * ICON_SIZE_Y + pointed_atom.pixel_y, time = 1.7, easing = SINE_EASING|EASE_OUT)
 
 /mob/eye/imaginary_friend/create_thinking_indicator()
 	if(active_thinking_indicator || active_typing_indicator || !HAS_TRAIT(src, TRAIT_THINKING_IN_CHARACTER))
