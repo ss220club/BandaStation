@@ -5,8 +5,8 @@
 /obj/structure/light_fake
 	name = "light fixture"
 	desc = "A lighting fixture."
-	icon = 'modular_bandastation/objects/icons/obj/structures/light.dmi'
-	icon_state = "tube"
+	icon = 'modular_bandastation/aesthetics/lights/icons/light.dmi'
+	icon_state = "tube-fake"
 	anchored = TRUE
 	layer = WALL_OBJ_LAYER
 	light_color = "#FFF7F2"
@@ -45,7 +45,7 @@
 /obj/structure/light_fake/small
 	name = "light fixture"
 	desc = "A small lighting fixture."
-	icon_state = "bulb"
+	icon_state = "bulb-fake"
 	base_state = "bulb"
 	light_color = "#FFD6AA"
 	light_range = 4
@@ -72,7 +72,7 @@
 
 // MARK: Floor
 /obj/structure/light_fake/floor
-	icon_state = "floor"
+	icon_state = "floor-fake"
 	base_state = "floor"
 	layer = ABOVE_OPEN_TURF_LAYER
 	plane = FLOOR_PLANE
@@ -134,7 +134,7 @@
 
 // MARK: Floodlight
 /obj/structure/light_fake/floodlight
-	name = "floodlight"
+	name = "floodlight_on"
 	icon_state = "floodlight"
 	base_state = "floodlight"
 	density = TRUE
