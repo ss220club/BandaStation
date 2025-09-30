@@ -132,9 +132,9 @@
 		return
 
 	if(ismob(loc))
-		telephone_beam = loc.Beam(attached_to, icon_state="wire", icon = 'icons/effects/beam.dmi', time = INFINITY, maxdistance = MAX_RANGE)
+		telephone_beam = loc.Beam(attached_to, icon_state="zipline_hook", icon = 'icons/effects/beam.dmi', time = INFINITY, maxdistance = MAX_RANGE)
 	else
-		telephone_beam = Beam(attached_to, icon_state="wire", icon = 'icons/effects/beam.dmi', time = INFINITY, maxdistance = MAX_RANGE)
+		telephone_beam = Beam(attached_to, icon_state="zipline_hook", icon = 'icons/effects/beam.dmi', time = INFINITY, maxdistance = MAX_RANGE)
 
 /obj/item/telephone/proc/set_raised(to_raise, mob/living/carbon/human/H)
 	if(!istype(H))

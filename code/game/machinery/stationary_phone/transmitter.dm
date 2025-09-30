@@ -371,6 +371,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		insert_tape(tool, user)
 		return ITEM_INTERACT_SUCCESS
 
+	if(istype(tool, /obj/item/coin))
+		if(is_free)
+			to_chat(user, span_notice("You try to insert [tool], but this phone doesn't require payment."))
+			return ITEM_INTERACT_BLOCKING
+
+		return process_coin_payment(user, tool)
+
 	var/obj/item/card/id/used_card = tool.GetID()
 	if(used_card)
 		if(is_free)
@@ -395,6 +402,17 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		return
 	else
 		return ..()
+
+/obj/structure/transmitter/proc/process_coin_payment(mob/living/user, obj/item/coin/inserted_coin)
+	if(!inserted_coin)
+		return ITEM_INTERACT_BLOCKING
+
+	qdel(inserted_coin)
+	playsound(src, 'sound/items/coinflip.ogg', 50, TRUE)
+	to_chat(user, span_notice("You insert [inserted_coin] in the coin slot."))
+	paid = TRUE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/transmitter/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
