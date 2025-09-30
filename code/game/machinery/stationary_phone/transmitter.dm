@@ -410,7 +410,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	qdel(inserted_coin)
 	playsound(src, 'sound/items/coinflip.ogg', 50, TRUE)
 	to_chat(user, span_notice("You insert [inserted_coin] in the coin slot."))
-	paid = TRUE
+	is_paid = TRUE
 
 	return ITEM_INTERACT_SUCCESS
 
