@@ -64,3 +64,4 @@ BRAIN_DECAY_RATE 2
 #round_end_webhook_url
 #round_end_webhook_name
 #round_end_webhook_avatar_url
+#round_end_webhook_ping_role_id

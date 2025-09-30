@@ -24,10 +24,16 @@
 /datum/config_entry/string/round_end_webhook_avatar_url
 	protection = CONFIG_ENTRY_LOCKED
 
+/datum/config_entry/string/round_end_webhook_ping_role_id
+	protection = CONFIG_ENTRY_LOCKED
+
 /proc/send_round_end_webhook()
 	var/webhook = CONFIG_GET(string/round_end_webhook_url)
 	if(!webhook)
 		return
+
+	var/role_id = CONFIG_GET(string/round_end_webhook_role_id)
+	var/content = role_id ? "<@&[role_id]>" : null
 
 	var/message_content = GLOB.survivor_report
 
@@ -59,6 +65,8 @@
 		"embeds" = list(embed)
 	)
 
+	if(content)
+		webhook_info["content"] = content
 	if(CONFIG_GET(string/round_end_webhook_name))
 		webhook_info["username"] = CONFIG_GET(string/round_end_webhook_name)
 	if(CONFIG_GET(string/round_end_webhook_avatar_url))
