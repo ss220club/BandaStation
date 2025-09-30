@@ -1,4 +1,4 @@
-﻿Mr. One
+Mr. One
 Process Kill
 Event Handler
 Q. Del
