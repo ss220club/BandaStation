@@ -27,7 +27,7 @@
 	melee_damage_lower = 6
 	melee_damage_upper = 12
 
-    held_state = "fox"
+	held_state = "fox"
 	held_lh = 'modular_bandastation/mobs/icons/inhands/mobs_lefthand.dmi'
 	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
 	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'

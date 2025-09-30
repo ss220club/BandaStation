@@ -18,7 +18,7 @@
 
 /mob/living/basic/chicken/Initialize(mapload)
 	. = ..()
-	held_icon = icon_state
+	held_state = icon_state
 
 /mob/living/basic/chick
 	death_sound = 'modular_bandastation/mobs/sound/mouse_squeak.ogg'
@@ -67,7 +67,7 @@
 	icon_state = initial(icon_state)
 	icon_living = initial(icon_living)
 	icon_dead = initial(icon_dead)
-	held_icon = icon_state
+	held_state = icon_state
 
 /mob/living/basic/pig
 	icon = 'modular_bandastation/mobs/icons/animal.dmi'
