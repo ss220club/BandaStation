@@ -46,7 +46,7 @@
 
 	// SS220 ADD - START
 	var/colored_mob = "mouse"
-	var/list/possible_colors = list("brown", "gray", "white")
+	var/list/possible_colors = list("brown", "gray", "white", "wooly") // wooly - мохнатая мышка из кастомных спрайтов
 	var/squeak_sound = 'sound/mobs/non-humanoids/mouse/mousesqueek.ogg'
 	// SS220 ADD - END
 

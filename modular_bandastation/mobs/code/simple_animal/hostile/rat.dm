@@ -1,5 +1,5 @@
 /mob/living/basic/mouse/rat
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/mouse.dmi'
 	squeak_sound = 'modular_bandastation/mobs/sound/rat_squeak.ogg'
 	icon_state = "rat_gray"
 	icon_living = "rat_gray"

@@ -2,7 +2,7 @@
 	name = "хомяк"
 	real_name = "хомяк"
 	desc = "С надутыми щечками."
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/mouse.dmi'
 	icon_state = "hamster"
 	icon_living = "hamster"
 	icon_dead = "hamster_dead"
