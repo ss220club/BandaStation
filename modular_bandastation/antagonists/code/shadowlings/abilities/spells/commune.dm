@@ -64,19 +64,35 @@
 
 	to_chat(sender, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = TRUE)
 
-	for(var/mob/living/carbon/human/L in hive.lings)
-		if(QDELETED(L))
+	for(var/mob/living/carbon/human/lings in hive.lings)
+		if(QDELETED(lings))
 			continue
-		if(L == sender)
+		if(lings == sender)
 			continue
-		to_chat(L, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
+		to_chat(lings, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
+		sender.cast_tts(
+			thralls,
+			message,
+			is_local = FALSE,
+			effects = list(/datum/singleton/sound_effect/telepathy),
+			channel_override = CHANNEL_TTS_TELEPATHY,
+			check_deafness = FALSE
+		)
 
-	for(var/mob/living/carbon/human/T in hive.thralls)
-		if(QDELETED(T))
+	for(var/mob/living/carbon/human/thralls in hive.thralls)
+		if(QDELETED(thralls))
 			continue
-		if(T == sender)
+		if(thralls == sender)
 			continue
-		to_chat(T, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
+		to_chat(thralls, render, type = MESSAGE_TYPE_RADIO, avoid_highlighting = FALSE)
+		sender.cast_tts(
+			thralls,
+			message,
+			is_local = FALSE,
+			effects = list(/datum/singleton/sound_effect/telepathy),
+			channel_override = CHANNEL_TTS_TELEPATHY,
+			check_deafness = FALSE
+		)
 
 	return TRUE
 
