@@ -7,17 +7,17 @@
 	explanation_text = pick(world.file2list("strings/abductee_objectives.txt"))
 
 /datum/objective/abductee/steal
-	explanation_text = "Украдите все(-х)"
+	explanation_text = "Украдите"
 
 /datum/objective/abductee/steal/New()
-	var/target = pick(list("животных", "лампочки", "обезьян", "фрукты", "ботинки", "мыло", "оружие", "технику", "органы"))
+	var/target = pick(list("всех животных", "все лампочки", "всех обезьян", "все фрукты", "все ботинки", "всё мыло", "всё оружие", "всю технику", "все органы"))
 	explanation_text+=" [target]."
 
 /datum/objective/abductee/paint
 	explanation_text = "Эта станция ужасна. Вы должны разукрасить её"
 
 /datum/objective/abductee/paint/New()
-	var/color = pick(list("red", "blue", "green", "yellow", "orange", "purple", "black", "in rainbows", "in blood"))
+	var/color = pick(list("красным цветом", "голубым цветом", "зеленым цветом", "желтым цветом", "оранжевым цветом", "розовым цветом", "черным цветом", "разноцветным", "кровью"))
 	explanation_text+= " [color]!"
 
 /datum/objective/abductee/speech
@@ -50,4 +50,4 @@
 
 /datum/objective/abductee/forbiddennumber/New()
 	var/number = rand(2,10)
-	explanation_text = "Игнорируйте всё, что содержит цифру [number], этого не существует."
+	explanation_text = "Игнорируйте группы предметов из [number] штук, их не существует."
