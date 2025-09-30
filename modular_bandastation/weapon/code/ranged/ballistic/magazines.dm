@@ -722,7 +722,7 @@
 	max_ammo = 8
 	ammo_band_icon = "+c357_mag_ammo_band"
 	ammo_band_color = null
-	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprites = AMMO_BOX_PER_BULLET
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c357
 
@@ -753,7 +753,7 @@
 	max_ammo = 10
 	ammo_band_icon = "+c45_mag_ammo_band"
 	ammo_band_color = null
-	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprites = AMMO_BOX_PER_BULLET
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c45
 
@@ -771,3 +771,19 @@
 	name = "pistol magazine (.45 incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c45/inc
+
+// M45A5 - 1911 / .456 Magnum
+/obj/item/ammo_box/magazine/m45a5
+	name = "pistol magazine (.456 Magnum)"
+	desc = "Пистолетный магазин калибра .456, вмещающий 7 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "c456_mag"
+	base_icon_state = "c456_mag"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_456MAG
+	max_ammo = 7
+	ammo_band_icon = "+c456_mag_ammo_band"
+	ammo_band_color = null
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	multiple_sprite_use_base = TRUE
+	ammo_type = /obj/item/ammo_casing/c456magnum

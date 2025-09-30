@@ -244,3 +244,12 @@
 	projectile_type = /obj/projectile/bullet/c38/ap
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sa-casing"
+
+// MARK: .456 Magnum
+/obj/item/ammo_casing/c456magnum
+	name = ".456 magnum bullet casing"
+	desc = "Пистолетный патроны калибра .456 Магнум."
+	projectile_type = /obj/projectile/bullet/c456magnum
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sa-casing"
+	caliber = CALIBER_456MAG
