@@ -101,4 +101,5 @@
 
 /mob/living/basic/migo/hatsune/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/death_drops, /obj/item/instrument/piano_synth)
+	var/static/list/death_loot = list(/obj/item/instrument/piano_synth)
+	AddElement(/datum/element/death_drops, death_loot)

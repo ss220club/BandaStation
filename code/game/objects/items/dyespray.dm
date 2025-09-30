@@ -46,7 +46,7 @@
 	if(!what_to_dye || !user.can_perform_action(src, NEED_DEXTERITY))
 		return
 
-	if(what_to_dye == "External Body Parts")
+	if(what_to_dye == "External Bodyparts/Organs")
 		dye_organ(target, user)
 		return
 

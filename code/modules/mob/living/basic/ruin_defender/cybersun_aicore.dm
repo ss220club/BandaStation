@@ -38,7 +38,8 @@
 /mob/living/basic/cybersun_ai_core/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_IMMOBILIZED, INNATE_TRAIT)
-	AddElement(/datum/element/death_drops, /obj/effect/temp_visual/cybersun_ai_core_death)
+	var/static/list/death_loot = list(/obj/effect/temp_visual/cybersun_ai_core_death)
+	AddElement(/datum/element/death_drops, death_loot)
 	AddElement(/datum/element/relay_attackers)
 	var/static/list/innate_actions = list(
 		LIGHTNING_ABILITY_TYPEPATH = BB_CYBERSUN_CORE_LIGHTNING,

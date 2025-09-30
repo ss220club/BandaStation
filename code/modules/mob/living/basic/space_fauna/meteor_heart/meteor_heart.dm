@@ -36,7 +36,8 @@
 /mob/living/basic/meteor_heart/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_IMMOBILIZED, INNATE_TRAIT)
-	AddElement(/datum/element/death_drops, /obj/effect/temp_visual/meteor_heart_death)
+	var/static/list/death_loot = list(/obj/effect/temp_visual/meteor_heart_death)
+	AddElement(/datum/element/death_drops, death_loot)
 	AddElement(/datum/element/relay_attackers)
 
 	var/static/list/innate_actions = list(

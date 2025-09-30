@@ -86,7 +86,8 @@
 	attack_verb_simple = possible_weapons[weapon_of_choice]
 	attack_verb_continuous = "[attack_verb_simple]s"
 
-	AddElement(/datum/element/death_drops, /obj/effect/mob_spawn/corpse/human/revolutionary)
+	var/static/list/death_loot = list(/obj/effect/mob_spawn/corpse/human/revolutionary)
+	AddElement(/datum/element/death_drops, death_loot)
 	apply_dynamic_human_appearance(src, mob_spawn_path = /obj/effect/mob_spawn/corpse/human/revolutionary, l_hand = weapon_of_choice)
 
 	gender = pick(MALE, FEMALE, PLURAL)

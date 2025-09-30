@@ -262,7 +262,8 @@
 		channel_data["channel_messages"] = list()
 		for(var/datum/feed_message/feed_messages as anything in current_channel.messages)
 			if(feed_messages.creation_time > creation_time)
-				continue
+				data["channel_has_messages"] = FALSE
+				break
 			data["channel_has_messages"] = TRUE
 			var/has_image = FALSE
 			if(feed_messages.img)

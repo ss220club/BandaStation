@@ -41,7 +41,8 @@
 
 /mob/living/basic/hivebot/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/death_drops, /obj/effect/decal/cleanable/blood/gibs/robot_debris)
+	var/static/list/death_loot = list(/obj/effect/decal/cleanable/blood/gibs/robot_debris)
+	AddElement(/datum/element/death_drops, death_loot)
 	AddComponent(/datum/component/appearance_on_aggro, overlay_icon = icon, overlay_state = "[initial(icon_state)]_attack")
 	if(!ranged_attacker)
 		return
