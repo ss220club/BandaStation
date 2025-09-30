@@ -33,8 +33,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define COMMSIG_HANGUP              "Communication Signal - Hangup"	           // The other side has hanged up
 #define COMMSIG_TIMEOUT             "Communication Signal - Timeout"	         // The line has been inactive for over 30 seconds
 
-// holy shit now that's a lot of defines
-
 /obj/structure/transmitter
 	name = "rotary telephone"
 	icon = 'icons/obj/machines/phone.dmi'
@@ -411,7 +409,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		return ITEM_INTERACT_BLOCKING
 
 	qdel(inserted_coin)
-	playsound(src, 'sound/items/coinflip.ogg', 50, TRUE)
+	playsound(src, 'sound/machines/coindrop.ogg', 50, TRUE)
 	to_chat(user, span_notice("You insert [inserted_coin] in the coin slot."))
 	is_paid = TRUE
 
