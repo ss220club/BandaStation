@@ -6173,6 +6173,7 @@
 "ckz" = (
 /obj/effect/landmark/generic_maintenance_landmark,
 /obj/machinery/atmospherics/components/binary/pump/on/layer4{
+	dir = 2;
 	name = "Airlock Pump";
 	target_pressure = 300;
 	hide = 1
@@ -7418,11 +7419,6 @@
 /obj/structure/dresser,
 /turf/open/floor/wood,
 /area/station/service/theater)
-"cEy" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/item/light/bulb/broken,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry)
 "cEY" = (
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/brown/opposingcorners,
@@ -8327,6 +8323,7 @@
 /obj/effect/mapping_helpers/broken_floor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/components/binary/pump/on/layer4{
+	dir = 2;
 	name = "Airlock Pump";
 	target_pressure = 300;
 	hide = 1
@@ -9054,6 +9051,7 @@
 	c_tag = "Chemistry West";
 	network = list("ss13","medbay")
 	},
+/obj/machinery/light/directional/west,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 8
 	},
@@ -11359,6 +11357,7 @@
 /area/station/commons/fitness/recreation)
 "dYG" = (
 /obj/structure/sign/poster/official/anniversary_vintage_reprint/directional/north,
+/obj/machinery/light/directional/north,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 1
 	},
@@ -14123,11 +14122,6 @@
 	},
 /turf/open/floor/wood/large,
 /area/station/service/theater)
-"eSS" = (
-/obj/effect/turf_decal/tile/yellow/opposingcorners,
-/obj/item/light/tube/broken,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry)
 "eTg" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -24589,13 +24583,6 @@
 /obj/item/radio/intercom/directional/west,
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/qm)
-"izX" = (
-/obj/effect/turf_decal/tile/yellow/half/contrasted{
-	dir = 1
-	},
-/obj/machinery/light/warm/directional/north,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry)
 "izZ" = (
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple{
 	dir = 4
@@ -40049,8 +40036,10 @@
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "nKM" = (
-/obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/item/light/bulb,
+/obj/effect/turf_decal/tile/yellow/half/contrasted{
+	dir = 1
+	},
+/obj/machinery/light/directional/north,
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry)
 "nKN" = (
@@ -58965,6 +58954,7 @@
 "unt" = (
 /obj/item/radio/intercom/directional/south,
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted,
+/obj/machinery/light/directional/east,
 /obj/machinery/disposal/bin,
 /obj/structure/disposalpipe/trunk{
 	dir = 8
@@ -65410,6 +65400,7 @@
 /area/station/service/theater)
 "wsp" = (
 /obj/machinery/atmospherics/components/binary/pump/on/layer4{
+	dir = 2;
 	name = "Airlock Pump";
 	target_pressure = 300;
 	hide = 1
@@ -65930,13 +65921,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
 /turf/open/floor/iron/dark,
 /area/station/security/execution/education)
-"wzn" = (
-/obj/effect/turf_decal/tile/yellow/opposingcorners{
-	dir = 1
-	},
-/obj/item/light/tube,
-/turf/open/floor/iron/white,
-/area/station/medical/chemistry)
 "wzq" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -66782,7 +66766,6 @@
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 4
 	},
-/obj/machinery/light/cold/directional/east,
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry)
 "wPM" = (
@@ -94792,7 +94775,7 @@ rHk
 sXT
 sTK
 bqX
-izX
+jYy
 iqz
 iqz
 iqz
@@ -95049,7 +95032,7 @@ qLk
 pXM
 iNc
 bqX
-jYy
+nKM
 iqz
 bgt
 dkx
@@ -95824,9 +95807,9 @@ iqz
 tqd
 hFD
 pbz
-wzn
+vfU
 mAb
-nKM
+mAb
 uYI
 iqz
 hjx
@@ -96338,9 +96321,9 @@ iqz
 fmo
 vfU
 qXL
-eSS
+hFD
 mAb
-cEy
+mAb
 uYI
 iqz
 iaK
