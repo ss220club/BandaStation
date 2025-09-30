@@ -38,14 +38,12 @@
 	var/list/lines = splittext(message_content, "\n")
 	for(var/i in 1 to length(lines))
 		var/line = lines[i]
-		var/list/line_parts = splittext(line, ": ")
-		for(var/j in 1 to length(line_parts))
-			if(j % 2 == 0)
-				line_parts[j] = "**[line_parts[j]]**"
-		lines[i] = line_parts.Join(": ")
-
+		var/delimiter_pos = findtext(line, ": ")
+		if(delimiter_pos)
+			var/key = copytext(line, 1, delimiter_pos)
+			var/value = copytext(line, delimiter_pos + 2)
+			lines[i] = "[key]: **[value]**"
 	message_content = lines.Join("\n")
-
 
 	var/list/embed = list(
 		"title" = "Раунд #[GLOB.round_id] закончился",
