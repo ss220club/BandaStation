@@ -60,3 +60,7 @@ BRAIN_PERMANENT_TRAUMAS
 BRAIN_DECAY_RATE 2
 
 #DISCORD_URL
+
+#round_end_webhook_url
+#round_end_webhook_name
+#round_end_webhook_avatar_url
