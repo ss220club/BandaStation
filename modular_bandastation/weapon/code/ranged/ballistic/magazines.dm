@@ -772,7 +772,7 @@
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c45/inc
 
-// M45A5 - 1911 / .456 Magnum
+// MARK: M45A5 - 1911 / .456 Magnum
 /obj/item/ammo_box/magazine/m45a5
 	name = "pistol magazine (.456 Magnum)"
 	desc = "Пистолетный магазин калибра .456, вмещающий 7 патронов."
