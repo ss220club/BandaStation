@@ -106,15 +106,15 @@
 /// Returns a string we should display to communicate what you should be doing
 /datum/component/weather_announcer/proc/get_warning_message()
 	if (!is_weather_dangerous)
-		return "No risk expected from incoming weather front."
+		return "От приближающегося атмосферного фронта не ожидается неблагоприятной погоды."
 	switch(warning_level)
 		if(WEATHER_ALERT_CLEAR)
-			return "All clear, no weather alerts to report."
+			return "Предупреждения о погоде отсутствуют."
 		if(WEATHER_ALERT_INCOMING)
-			return "Weather front incoming, begin to seek shelter."
+			return "Внимание! К местному сектору приближается неблагоприятная погода. Немедленно прекратите любую деятельность на поверхности планеты."
 		if(WEATHER_ALERT_IMMINENT_OR_ACTIVE)
-			return "Weather front imminent, find shelter immediately."
-	return "Error in meteorological calculation. Please report this deviation to a trained programmer."
+			return "Неблагоприятная погода охватила местный сектор. Немедленно найдите убежище."
+	return "Произошла ошибка в метеорологических расчётах. Пожалуйста, сообщите об этом квалифицированному программисту."
 
 /datum/component/weather_announcer/proc/time_till_storm()
 	var/list/mining_z_levels = SSmapping.levels_by_trait(ZTRAIT_MINING)
@@ -167,9 +167,9 @@
 	if(isnull(time_until_next))
 		return
 	if (time_until_next == 0)
-		examine_texts += span_warning ("A storm is currently active, please seek shelter.")
+		examine_texts += span_warning ("В настоящее время активен шторм, пожалуйста, не покидайте укрытие.")
 	else
-		examine_texts += span_notice("The next storm is inbound in [DisplayTimeText(time_until_next)].")
+		examine_texts += span_notice("Следующий шторм ожидается через [DisplayTimeText(time_until_next)].")
 
 /datum/component/weather_announcer/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))

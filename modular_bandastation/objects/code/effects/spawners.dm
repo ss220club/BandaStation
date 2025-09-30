@@ -28,3 +28,12 @@
 		/obj/item/id_sticker/jokerge = 1,
 		/obj/item/id_sticker/boykisser = 1
 	)
+
+/obj/effect/spawner/random/clothing/rus_camosuits
+	name = "random camo suit spawner"
+	icon_state = "costume"
+	loot = list(
+		/obj/item/clothing/under/syndicate/rus_army = 1,
+		/obj/item/clothing/under/syndicate/rus_army/berezka = 1,
+		/obj/item/clothing/under/syndicate/rus_army/flora = 1
+	)
