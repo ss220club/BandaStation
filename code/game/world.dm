@@ -383,8 +383,9 @@ GLOBAL_VAR(restart_counter)
 	var/hostedby
 	if(config)
 		var/server_name = CONFIG_GET(string/servername)
-		if (server_name)
-			new_status += "<b>[server_name]</b> "
+		if(server_name)
+			var/discord_url = CONFIG_GET(string/discord_url)
+			new_status += discord_url ? "<a href=\"[discord_url]\"><b>[server_name]</b></a>" : "<b>[server_name]</b>" // BANDASTATION EDIT
 		if(CONFIG_GET(flag/allow_respawn))
 			features += "respawn" // show "respawn" regardless of "respawn as char" or "free respawn"
 		if(!CONFIG_GET(flag/allow_ai))
@@ -421,7 +422,6 @@ GLOBAL_VAR(restart_counter)
 		new_status += "<br>Map: <b>[SSmapping.current_map.map_path == CUSTOM_MAP_PATH ? "Uncharted Territory" : SSmapping.current_map.map_name]</b>"
 	if(SSmap_vote.next_map_config)
 		new_status += "[SSmapping.current_map ? " | " : "<br>"]Next: <b>[SSmap_vote.next_map_config.map_path == CUSTOM_MAP_PATH ? "Uncharted Territory" : SSmap_vote.next_map_config.map_name]</b>"
-
 	status = new_status
 
 /world/proc/update_hub_visibility(new_visibility)

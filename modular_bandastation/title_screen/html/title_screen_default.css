@@ -329,7 +329,7 @@ html.loading {
   top: 0.5rem;
   right: 0.5rem;
   gap: 0.5rem;
-  width: 15rem;
+  width: 230px;
   transition: transform var(--transition-time);
   z-index: 2;
 
@@ -359,6 +359,7 @@ html.loading {
     width: 100%;
 
     td {
+      white-space: nowrap;
       padding: 0;
 
       &:last-child {

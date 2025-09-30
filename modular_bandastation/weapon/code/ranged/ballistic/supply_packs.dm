@@ -105,6 +105,7 @@
 
 /datum/supply_pack/security/armory/sledgehammer
 	name = "D4 Tactical Sledgehammer"
+	crate_name = "D4 tactical sledgehammer crate"
 	desc = "В этом ящике находится композитный молот для создания брешей или уничтожения препятствий."
 	cost = CARGO_CRATE_VALUE * 15
 	access_view = ACCESS_ARMORY
