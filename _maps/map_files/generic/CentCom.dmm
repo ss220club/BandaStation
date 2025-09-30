@@ -311,8 +311,8 @@
 	pixel_x = 3;
 	pixel_y = -6
 	},
-/obj/structure/central_telephone_exchange,
 /obj/effect/turf_decal/bot,
+/obj/machinery/central_telephone_exchange,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
 "bx" = (

@@ -170,7 +170,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(!GLOB.central_telephone_exchange)
 		return
 
-	var/obj/structure/central_telephone_exchange/cte = GLOB.central_telephone_exchange
+	var/obj/machinery/central_telephone_exchange/cte = GLOB.central_telephone_exchange
 	cte.process_commsig(phone_id, commsig, data)
 
 /obj/structure/transmitter/proc/stop_loops()
@@ -316,7 +316,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		to_chat(user, span_notice("[icon2html(src, user)] You pick up [attached_to]."))
 		playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
 		user.put_in_active_hand(attached_to)
-		var/obj/structure/central_telephone_exchange/cte = GLOB.central_telephone_exchange
+		var/obj/machinery/central_telephone_exchange/cte = GLOB.central_telephone_exchange
 		if(current_call && status == STATUS_INBOUND)
 			cte.process_commsig(phone_id, COMMSIG_ANSWER, current_call.phone_id)
 		else
