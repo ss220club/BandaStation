@@ -8,7 +8,7 @@
 	between_word_space_chance = 75
 	additional_syllable_low = 0
 	additional_syllable_high = 0
-	syllables = list("уук", "ак", "чи", "иик", "ук")
+	syllables = list("ук", "ак", "чи", "иик", "уук")
 	default_priority = 80
 
 	icon_state = "animal"
