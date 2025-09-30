@@ -49,7 +49,7 @@
 		"title" = "Раунд #[GLOB.round_id] закончился",
 		"description" = message_content,
 		"color" = 5814783, // light blue
-		"timestamp" = rustg_formatted_timestamp_tz("%Y-%m-%d %H:%M:%S%.3f", "+3"),
+		// "timestamp" = rustg_formatted_timestamp_tz("%Y-%m-%d %H:%M:%S%.3f", "+0"),
 		"footer" = list(
 			"text" = "Round End Report"
 		)
