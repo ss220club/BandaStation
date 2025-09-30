@@ -166,7 +166,6 @@
 /obj/item/knife/combat/umbral_claw/left
 	name = "umbral claw (left)"
 	icon_state = "claw_left"
-	inhand_icon_state = "claw_left"
 	sharpness = SHARP_POINTY
 	attack_verb_continuous = list("пронзает", "протыкает", "разрывает")
 	attack_verb_simple = list("пронзать", "протыкать", "разрывать")
