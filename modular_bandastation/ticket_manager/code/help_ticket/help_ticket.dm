@@ -41,8 +41,8 @@
 		qdel(src)
 		CRASH("Tried to create a ticket with invalid arguments!")
 
-	stat_name = sanitize(trim(message, TICKET_STAT_PANEL_MESSAGE_MAX_LENGHT))
-	if(length(message) > TICKET_STAT_PANEL_MESSAGE_MAX_LENGHT)
+	stat_name = sanitize(trim(message, TICKET_STAT_PANEL_MESSAGE_MAX_LENGTH))
+	if(length(message) > TICKET_STAT_PANEL_MESSAGE_MAX_LENGTH)
 		stat_name += "..."
 
 	id = ++ticket_counter

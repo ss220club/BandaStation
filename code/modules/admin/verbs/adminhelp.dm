@@ -1152,7 +1152,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 	if(!findtext(message, "@") && !findtext(message, "#"))
 		return message
 
-	var/list/link_results = check_asay_links(message)
+	var/list/link_results = check_asay_links(message, target_permissions)
 	if(!length(link_results))
 		return message
 
@@ -1161,8 +1161,6 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 	var/list/pinged_admin_clients = link_results[ASAY_LINK_PINGED_ADMINS_INDEX]
 	for(var/iter_ckey in pinged_admin_clients)
 		var/client/iter_admin_client = pinged_admin_clients[iter_ckey]
-		if(!check_rights_for(iter_admin_client, target_permissions))
-			continue
 
 		window_flash(iter_admin_client)
 		SEND_SOUND(iter_admin_client.mob, sound('sound/misc/asay_ping.ogg'))
