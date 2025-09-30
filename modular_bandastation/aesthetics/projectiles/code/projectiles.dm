@@ -89,3 +89,15 @@
 
 /obj/projectile/bullet/incendiary/c338
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/paperball
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/shotgun_beanbag
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/shotgun_stunslug
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/coin
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
