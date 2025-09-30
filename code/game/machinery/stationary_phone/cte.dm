@@ -1,7 +1,9 @@
 GLOBAL_VAR_INIT(central_telephone_exchange, null)
 
-#define STATUS_DIALING							"Dialing"
-#define STATUS_RINGING							"Ringing"
+#define STATUS_INBOUND              "Inbound call"
+#define STATUS_ONGOING              "Ongoing call"
+#define STATUS_OUTGOING             "Outgoing call"
+#define STATUS_IDLE                 "Idle"
 #define TIMEOUT_DURATION            30 SECONDS
 
 #define COMMSIG_OFFHOOK             "Communication Signal - Offhook"           // The telephone is removed from the hook
@@ -89,7 +91,7 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 				target.process_commsig(COMMSIG_TALK, message)
 
 /obj/machinery/central_telephone_exchange/proc/is_device_busy(obj/structure/transmitter/device)
-	return (device.status == STATUS_RINGING || device.status == STATUS_DIALING)
+	return (device.status == STATUS_INBOUND || device.status == STATUS_OUTGOING)
 
 /obj/machinery/central_telephone_exchange/proc/get_connected_device(obj/structure/transmitter/device)
 	if(device.current_call)
@@ -125,6 +127,4 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 #undef COMMSIG_HANGUP
 #undef COMMSIG_TIMEOUT
 
-#undef STATUS_DIALING
-#undef STATUS_RINGING
 #undef TIMEOUT_DURATION

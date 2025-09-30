@@ -87,6 +87,16 @@
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND)
 	greyscale_colors = COLOR_SECURITY_RED
 
+/obj/structure/transmitter/science
+	phone_category = PHONE_NET_PUBLIC
+	networks_transmit = list(PHONE_NET_PUBLIC)
+	greyscale_colors = COLOR_SCIENCE_PINK
+
+/obj/structure/transmitter/service
+	phone_category = PHONE_NET_PUBLIC
+	networks_transmit = list(PHONE_NET_PUBLIC)
+	greyscale_colors = COLOR_SERVICE_LIME
+
 // The CentCom line. Call anyone anytime.
 /obj/structure/transmitter/centcom
 	phone_category = PHONE_NET_CENTCOM

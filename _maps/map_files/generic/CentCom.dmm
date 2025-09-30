@@ -17387,6 +17387,10 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/conference_room)
+"lAm" = (
+/obj/structure/transmitter/mounted/directional/east,
+/turf/open/space/basic,
+/area/space)
 "lCp" = (
 /obj/structure/table/glass,
 /obj/item/folder/blue{
@@ -19253,15 +19257,12 @@
 /area/centcom/central_command_areas/planetary_port/club)
 "pFb" = (
 /obj/structure/table/glass,
-/obj/item/paper_bin{
-	pixel_x = 7;
-	pixel_y = 5
-	},
-/obj/item/pen{
-	pixel_x = -7;
-	pixel_y = 6
-	},
 /obj/effect/turf_decal/siding/wood/end,
+/obj/structure/transmitter/centcom{
+	pixel_x = 0;
+	pixel_y = 6;
+	display_name = "Центральное Командование"
+	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "pFr" = (
@@ -29424,7 +29425,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+lAm
 aaa
 aaa
 aaa

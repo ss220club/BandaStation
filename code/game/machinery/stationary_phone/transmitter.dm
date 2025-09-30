@@ -93,8 +93,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	GLOB.transmitters += src
 
+
 	phone_id = new_phone_id ? new_phone_id : generate_unique_phone_id()
-	display_name = new_display_name || "[get_area_name(src, TRUE)]"
+	if(!display_name || display_name == initial(display_name))
+		if(name && name != initial(name))
+			display_name = name
+		else
+			display_name = new_display_name ? new_display_name : "[get_area_name(src, TRUE)]"
 
 	if(name == initial(name))
 		name = "[get_area_name(src, TRUE)] [initial(name)]"
