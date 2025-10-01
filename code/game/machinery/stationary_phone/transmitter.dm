@@ -682,14 +682,14 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		// громко для держателя
 		if(ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
-			speaking.cast_tts(holder, message, attached_to, TRUE)
+			speaking.cast_tts(holder, message, attached_to, TRUE, TRUE)
 		// для тех кто рядом
 		var/list/nearby = get_hearers_in_view(4, attached_to)
 		if(LAZYLEN(nearby))
 			for(var/mob/listener in nearby)
 				if(ismob(attached_to.loc) && listener == attached_to.loc)
 					continue
-				speaking.cast_tts(listener, message, attached_to, TRUE, FALSE, null)
+				speaking.cast_tts(listener, message, attached_to, TRUE, TRUE)
 		if(attached_to.raised && ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
 			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
