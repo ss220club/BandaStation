@@ -1308,9 +1308,9 @@ $border-width-px: $border-width * 1px;
   color: transparent !important;
   background: linear-gradient(
     130deg,
-    var(--shine-color) 1em,
-    hsl(from var(--shine-color) h s calc(l + 20)) 2em,
-    var(--shine-color) 3em
+    var(--stabilized-color) 1em,
+    hsl(from var(--stabilized-color) h s calc(l + 20)) 2em,
+    var(--stabilized-color) 3em
   );
   background-clip: text;
   background-size: 220% 220%;
@@ -1333,9 +1333,9 @@ $border-width-px: $border-width * 1px;
   color: transparent !important;
   background: linear-gradient(
     to right,
-    var(--shine-color),
-    hsl(from var(--shine-color) calc(h + 15) s calc(l + 20)),
-    var(--shine-color)
+    var(--stabilized-color),
+    hsl(from var(--stabilized-color) calc(h + 15) s calc(l + 20)),
+    var(--stabilized-color)
   );
   background-clip: text;
   background-size: var(--size) auto;
@@ -1344,7 +1344,7 @@ $border-width-px: $border-width * 1px;
 
 @mixin shine() {
   &:before {
-    --tranclucent-shine: hsl(from var(--shine-color) h s l / 0.5);
+    --tranclucent-shine: hsl(from var(--stabilized-color) h s l / 0.5);
     content: '';
     filter: blur(6px);
     pointer-events: none;
@@ -1361,6 +1361,12 @@ $border-width-px: $border-width * 1px;
     background-size: inherit;
     animation: glowing-anim 3s infinite linear;
   }
+}
+
+.tier-3,
+.tier-4,
+.tier-5 {
+  --stabilized-color: oklch(from var(--shine-color) min(max(l, 0.33), 0.8) c h);
 }
 
 .metal {
