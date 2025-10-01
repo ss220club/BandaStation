@@ -406,6 +406,9 @@ ADMIN_VERB(lag_switch_panel, R_ADMIN, "Show Lag Switches", "Display the controls
 	dat += "Disable late joining: <a href='byond://?_src_=holder;[HrefToken()];change_lag_switch=[DISABLE_NON_OBSJOBS]'><b>[SSlag_switch.measures[DISABLE_NON_OBSJOBS] ? "On" : "Off"]</b></a><br/>"
 	dat += "<br/>============! MAD GHOSTS ZONE !============<br/>"
 	dat += "Disable deadmob keyLoop (except staff, informs dchat): <a href='byond://?_src_=holder;[HrefToken()];change_lag_switch=[DISABLE_DEAD_KEYLOOP]'><b>[SSlag_switch.measures[DISABLE_DEAD_KEYLOOP] ? "On" : "Off"]</b></a><br/>"
+	// BANDASTATION EDIT START - ghost runechat
+	dat += "Disable ghosts runechat: <a href='byond://?_src_=holder;[HrefToken()];change_lag_switch=[DISABLE_GHOST_RUNECHAT]'><b>[SSlag_switch.measures[DISABLE_GHOST_RUNECHAT] ? "On" : "Off"]</b></a><br/>"
+	// BANDASTATION EDIT END - ghost runechat
 	dat += "==========================================<br/>"
 	dat += "<br/><b>Measures below can be bypassed with a <abbr title='TRAIT_BYPASS_MEASURES'><u>special trait</u></abbr></b><br/>"
 	dat += "Slowmode say verb (informs world): <a href='byond://?_src_=holder;[HrefToken()];change_lag_switch=[SLOWMODE_SAY]'><b>[SSlag_switch.measures[SLOWMODE_SAY] ? "On" : "Off"]</b></a><br/>"
