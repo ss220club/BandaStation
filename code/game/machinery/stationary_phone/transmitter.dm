@@ -38,7 +38,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	icon = 'icons/obj/machines/phone.dmi'
 	icon_state = "rotary"
 	post_init_icon_state = "rotary"
-	desc = "The most generic phone you have ever seen. You struggle to imagine something even more devoid of personality and miserably fail."
+	desc = "Ничем не выделяющийся телефон."
 	anchored = TRUE
 	layer = OBJ_LAYER + 0.01
 	pass_flags = PASSTABLE
@@ -152,7 +152,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			status = STATUS_OUTGOING
 			if(ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
-				to_chat(M, span_notice("[icon2html(src, M)] Someone on the other side picks up the phone."))
+				to_chat(M, span_notice("[icon2html(src, M)] Кто-то поднимает трубку..."))
 			update_icon()
 			outring_loop.stop()
 			stop_loops()
@@ -160,7 +160,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(COMMSIG_TALK)
 			if(attached_to.loc && ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
-				to_chat(M, span_notice("[icon2html(src, M)] [src] says, \"[capitalize(data)]\""))
+				to_chat(M, span_notice("[icon2html(src, M)] приглушённый голос: \"[capitalize(data)]\""))
 
 		if(COMMSIG_HANGUP)
 			end_call(forced = TRUE)
@@ -318,7 +318,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		CRASH("A transmitter with ID [phone_id] has no telephone!")
 
 	if(attached_to.loc == src)
-		to_chat(user, span_notice("[icon2html(src, user)] You pick up [attached_to]."))
+		to_chat(user, span_notice("Вы поднимаете трубку."))
 		playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
 		user.put_in_active_hand(attached_to)
 		var/obj/machinery/central_telephone_exchange/cte = GLOB.central_telephone_exchange
@@ -332,17 +332,17 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/proc/process_payment(mob/living/user, obj/item/card/id/used_card)
 	if(!used_card.registered_account)
-		to_chat(user, span_warning("You don't have a bank account!"))
+		to_chat(user, span_warning("У вас нет банковского аккаунта!"))
 		playsound(src, 'sound/machines/buzz/buzz-two.ogg', 30, TRUE)
 		return FALSE
 
 	if(used_card.registered_account.account_balance < SINGLE_CALL_PRICE)
-		to_chat(user, span_warning("Insufficient funds!"))
+		to_chat(user, span_warning("Недостаточно средств!"))
 		playsound(src, 'sound/machines/buzz/buzz-two.ogg', 30, TRUE)
 		return FALSE
 
 	var/datum/bank_account/service_account = SSeconomy.get_dep_account(ACCOUNT_SRV)
-	to_chat(user, span_notice("You swipe the card..."))
+	to_chat(user, span_notice("Вы проводите картой по приёмнику..."))
 	is_paid = TRUE
 	service_account.transfer_money(used_card.registered_account, SINGLE_CALL_PRICE, "Telephone: [phone_id]")
 
@@ -360,14 +360,14 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(tool == attached_to)
 		recall_phone()
 		if(user.combat_mode)
-			visible_message(span_warning("[user] slams [attached_to] on the [src]!"), span_warning("You slammed the [attached_to] on the cradle!"))
+			visible_message(span_warning("[user] с грохотом впечатывает [attached_to] в [src]!"), span_warning("Вы с силой бросаете [attached_to] на рычаг!"))
 			user.do_attack_animation(src)
 			Shake(2, 0, 10, shake_interval = 0.05 SECONDS)
 			playsound(src, SFX_TELEPHONE_HANDSET, 60)
 			playsound(src, 'sound/items/weapons/genhit1.ogg', 30, FALSE)
 			playsound(src, 'sound/machines/telephone/bell.ogg', 75, FALSE)
 		else
-			to_chat(attached_to, span_notice("[icon2html(src, user)] You set the [attached_to] in the cradle."))
+			to_chat(attached_to, span_notice("Вы возвращаете [attached_to] на рычаг."))
 			playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
 		return ITEM_INTERACT_SUCCESS
 
@@ -377,7 +377,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	if(istype(tool, /obj/item/coin))
 		if(is_free)
-			to_chat(user, span_notice("You try to insert [tool], but this phone doesn't require payment."))
+			to_chat(user, span_notice("У этого телефона, кажется, нет слота под монеты."))
 			return ITEM_INTERACT_BLOCKING
 
 		return process_coin_payment(user, tool)
@@ -385,7 +385,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/obj/item/card/id/used_card = tool.GetID()
 	if(used_card)
 		if(is_free)
-			to_chat(user, span_notice("You poke the [src] with the [tool] only to realize it doesn't have a card slot. You feel stupid."))
+			to_chat(user, span_notice("Вы тычете [src] [tool.declension_ru(INSTRUMENTAL)], но у него нет слота для карты. Вы чувствуете себя неловко."))
 			return ITEM_INTERACT_BLOCKING
 		else
 			if(isidcard(tool))
@@ -398,11 +398,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	else if(tool.tool_behaviour == TOOL_WRENCH)
 		playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
 		if(!anchored && !isinspace())
-			to_chat(user,"<span class='notice'>You secure [src] to the floor.</span>")
+			to_chat(user, span_notice("Вы крепите [src] к полу."))
 			anchored = TRUE
 			return ITEM_INTERACT_SUCCESS
 		else if(anchored)
-			to_chat(user,"<span class='notice'>You unsecure and disconnect [src].</span>")
+			to_chat(user, span_notice("Вы открепляете [src] от пола."))
 			anchored = FALSE
 			return ITEM_INTERACT_SUCCESS
 		return
@@ -415,7 +415,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	qdel(inserted_coin)
 	playsound(src, 'sound/machines/coindrop.ogg', 50, TRUE)
-	to_chat(user, span_notice("You insert [inserted_coin] in the coin slot."))
+	to_chat(user, span_notice("Вы пропихиваете [inserted_coin.declension_ru(ACCUSATIVE)] в слот для монет."))
 	is_paid = TRUE
 
 	return ITEM_INTERACT_SUCCESS
@@ -525,12 +525,12 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 /obj/structure/transmitter/proc/process_outbound_call(mob/living/carbon/human/user, calling_phone_id)
 	if(!is_free && !is_paid)
-		to_chat(user, span_notice("[icon2html(src, user)] Please deposit $[SINGLE_CALL_PRICE]."))
+		to_chat(user, span_notice("Стоимость вызова — $[SINGLE_CALL_PRICE]."))
 		return
 
 	var/list/transmitters = get_transmitters()
 	if(!length(transmitters))
-		to_chat(user, span_notice("[icon2html(src, user)] No transmitters could be located to call!"))
+		to_chat(user, span_warning("Сеть недоступна."))
 		return
 
 	var/obj/structure/transmitter/target = null
@@ -544,7 +544,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			break
 
 	if(!target)
-		to_chat(user, span_notice("[icon2html(src, user)] No transmitter with ID [calling_phone_id] could be located!"))
+		to_chat(user, span_notice("No transmitter with ID [calling_phone_id] could be located!"))
 		return
 
 	if(!istype(target) || QDELETED(target))
@@ -557,11 +557,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(attached_to.loc != user)
 		user.put_in_hands(attached_to)
 
-	to_chat(user, span_notice("[icon2html(src, user)] Dialing [display] ([calling_phone_id])..."))
+	to_chat(user, span_notice("Звоним [display] ([calling_phone_id])..."))
 	playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 100)
 
 	// if(target.current_call || target.attached_to.loc != target)
-	// 	to_chat(user, span_purple("[icon2html(src, user)] Your call to [display] ([calling_phone_id]) has reached voicemail, the line is busy."))
+	// 	to_chat(user, span_purple("Your call to [display] ([calling_phone_id]) has reached voicemail, the line is busy."))
 	// 	busy_loop.start()
 	// 	return
 
@@ -597,13 +597,13 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 	if(attached_to_mob && ismob(attached_to_mob))
 		if(timeout)
-			to_chat(attached_to_mob, span_notice("[icon2html(src, attached_to_mob)] Your call to [other.display_name] has reached voicemail."))
+			to_chat(attached_to_mob, span_notice("Ваш звонок [other.display_name] был переведён на голосовую почту."))
 			busy_loop.start()
 		else if(forced)
-			to_chat(attached_to_mob, span_notice("[icon2html(src, attached_to_mob)] [other.display_name] has hung up."))
+			to_chat(attached_to_mob, span_notice("[other.display_name] вешает трубку."))
 			hangup_loop.start()
 		else
-			to_chat(attached_to_mob, span_notice("[icon2html(src, attached_to_mob)] You hang up the call."))
+			to_chat(attached_to_mob, span_notice("Вы вешаете трубку."))
 			hangup_loop.start()
 
 	if(!forced && other && other.current_call == src)
@@ -634,11 +634,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		return
 
 	playsound(loc, 'sound/machines/telephone/telephone_ring.ogg', 75, FALSE)
-	visible_message(span_warning("[src] rings vigorously!"))
+	visible_message(span_warning("[src] оглушительно звонит!"))
 	if(is_advanced)
-		say("Incoming call: [current_call.display_name]!")
+		say("Входящий вызов: [current_call.display_name]!")
 	else
-		balloon_alert_to_viewers("ring, ring!")
+		balloon_alert_to_viewers("дзынь, дзынь!")
 
 	addtimer(CALLBACK(src, PROC_REF(try_ring)), RING_TIMEOUT)
 

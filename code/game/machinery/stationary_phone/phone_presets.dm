@@ -15,7 +15,7 @@
 
 /obj/structure/transmitter/mounted
 	name = "wallmount telephone"
-	desc = "It is a wall mounted telephone."
+	desc = "Настенный телефон."
 	icon_state = "wall_phone"
 	post_init_icon_state = "wall_phone"
 	is_free = FALSE
@@ -24,8 +24,8 @@
 
 /obj/structure/transmitter/mounted/examine(mob/user)
 	. = ..()
-	. += span_notice("The fine print on the metal placard reads:")
-	. += span_notice("\"$5 per call, swipe your ID or insert a coin to pay. Regarding all complaints about the quality of service, please call... \[unreadable\]\"")
+	. += span_notice("Мелким шрифтом на металлической табличке выгравировано:")
+	. += span_notice("«Один звонок — $5. Вставьте монету или проведите картой. Жалобы на качество обслуживания принимаются по... \[нечитаемо\]»")
 
 /obj/structure/transmitter/mounted/update_icon()
 	. = ..()
