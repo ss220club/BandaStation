@@ -1377,22 +1377,8 @@ $border-width-px: $border-width * 1px;
   }
 }
 
+.auto,
 .glowing {
-  &.tier-3 {
-    @include metalic();
-  }
-
-  &.tier-4,
-  &.tier-5 {
-    @include glowing();
-  }
-
-  &.tier-5 {
-    @include shine();
-  }
-}
-
-.auto {
   &.tier-3 {
     @include metalic();
   }
