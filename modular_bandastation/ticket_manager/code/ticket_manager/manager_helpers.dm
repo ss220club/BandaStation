@@ -59,7 +59,7 @@
 
 	if(!needed_ticket.has_staff_access(admin))
 		message_admins(
-			"[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], не имея прав доступа к нему!"
+			"[key_name_admin(admin)] попытался отказаться от тикета #[needed_ticket.id], не имея прав доступа к нему!"
 		)
 
 		stack_trace("Tried to unlink admin from ticket without required rights!")
@@ -67,7 +67,7 @@
 
 	if(needed_ticket.linked_admin?.client != admin)
 		message_admins(
-			"[key_name_admin(admin)] попытался отказался от тикета #[needed_ticket.id], к которому не привязан."
+			"[key_name_admin(admin)] попытался отказаться от тикета #[needed_ticket.id], к которому не привязан."
 		)
 
 		stack_trace("Tried to unlink admin from ticket not being linked admin!")

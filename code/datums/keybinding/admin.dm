@@ -9,13 +9,15 @@
 /datum/keybinding/admin/can_use(client/user)
 	return check_rights_for(user, required_permissions) // BANDASTATION EDIT - Valid permissions
 
+// BANDASTATION EDIT START - Mentors
 /datum/keybinding/admin/mentor_say
 	hotkey_keys = list("F4")
 	name = MENTOR_CHANNEL
 	full_name = "Msay"
 	description = "Разговаривайте с другими менторами"
 	keybind_signal = COMSIG_KB_ADMIN_MSAY_DOWN
-	required_permissions = R_MENTOR // BANDASTATION EDIT - Valid permissions
+	required_permissions = R_MENTOR
+// BANDASTATION EDIT END - Mentors
 
 /datum/keybinding/admin/admin_say
 	hotkey_keys = list("F5") // BANDASTATION EDIT
