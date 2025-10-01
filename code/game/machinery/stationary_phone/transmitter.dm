@@ -689,7 +689,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			for(var/mob/listener in nearby)
 				if(ismob(attached_to.loc) && listener == attached_to.loc)
 					continue
-				speaking.cast_tts(listener, message, attached_to, TRUE, FALSE, null, TTS_TRAIT_PITCH_WHISPER)
+				speaking.cast_tts(listener, message, attached_to, TRUE, FALSE, null)
 		if(attached_to.raised && ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
 			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
