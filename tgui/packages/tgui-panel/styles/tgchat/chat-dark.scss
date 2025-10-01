@@ -1364,24 +1364,24 @@ $border-width-px: $border-width * 1px;
 }
 
 .metal {
-  .tier-3,
-  .tier-4,
-  .tier-5 {
+  &.tier-3,
+  &.tier-4,
+  &.tier-5 {
     @include metalic();
   }
 }
 
 .glowing {
-  .tier-3 {
+  &.tier-3 {
     @include metalic();
   }
 
-  .tier-4,
-  .tier-5 {
+  &.tier-4,
+  &.tier-5 {
     @include glowing();
   }
 
-  .tier-5 {
+  &.tier-5 {
     @include shine();
   }
 }
