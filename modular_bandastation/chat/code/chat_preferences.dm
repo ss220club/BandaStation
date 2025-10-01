@@ -2,7 +2,7 @@ GLOBAL_LIST_INIT(donor_shines, list(
 	"Автоматически" = "auto",
 	"Металлик" = "metal",
 	"Светящийся" = "glowing",
-	"Выключить" = "off",
+	"Выключить" = null,
 ))
 
 /datum/preference/choiced/donor_chat_effect
