@@ -102,11 +102,13 @@
 		if(!has_user_access(admin))
 			continue
 
+
+		var/ticket_body_actions = check_rights_for(admin, R_ADMIN) ? TICKET_ADMIN(creator.mob, id) : TICKET_MENTOR(creator.mob, id)
 		send_adminhelp_message(
 			admin,
 			fieldset_block(\
 				title, \
-				"[body]\n\n[TICKET_FULLMONTY(creator.mob, id)]", \
+				"[body]\n\n[ticket_body_actions]", \
 				"boxed_message [boxed_message_class]" \
 			)
 		)

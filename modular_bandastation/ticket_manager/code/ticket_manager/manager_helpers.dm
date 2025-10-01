@@ -298,10 +298,11 @@
 	if(linked_admin)
 		admin_key = key_name(linked_admin, TRUE, FALSE)
 
+		var/ticket_body_actions = check_rights_for(linked_admin, R_ADMIN) ? TICKET_ADMIN(player.mob, id) : TICKET_MENTOR(player.mob, id)
 		var/chat_message = "\
 			[TICKET_REPLY_LINK(id, player.key)]\n\n\
 			[span_class(needed_ticket.get_text_span_class(), message)]\n\n\
-			[TICKET_FULLMONTY(player.mob, id)]\
+			[ticket_body_actions]\
 		"
 		var/fieldset_block_message = fieldset_block(title, chat_message, "boxed_message [needed_ticket.get_boxed_message_class()]")
 

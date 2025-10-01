@@ -230,5 +230,6 @@ GLOBAL_VAR_INIT(ghost_role_flags, ALL)
 #define TICKET_RESOLVE_LINK(id) ("<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];resolve_ticket=1'>Решить</a>")
 #define TICKET_CLOSE_LINK(id) ("<a href='byond://?src=[GLOB.ticket_manager_ref];ticket_id=[id];close_ticket=1'>Закрыть</a>")
 
-#define TICKET_FULLMONTY(user, id) "[ADMIN_FULLMONTY_NONAME(user)] [TICKET_RESOLVE_LINK(id)] [TICKET_CLOSE_LINK(id)] [TICKET_OPEN_LINK(id, "Открыть чат")]"
+#define TICKET_ADMIN(user, id) "[ADMIN_FULLMONTY_NONAME(user)] [TICKET_RESOLVE_LINK(id)] [TICKET_CLOSE_LINK(id)] [TICKET_OPEN_LINK(id, "Открыть чат")]"
+#define TICKET_MENTOR(user, id) "[ADMIN_FLW(user)] [TICKET_RESOLVE_LINK(id)] [TICKET_CLOSE_LINK(id)] [TICKET_OPEN_LINK(id, "Открыть чат")]"
 // BANDASTATION ADDITION END - Ticket manager
