@@ -680,16 +680,27 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		var/obj/item/telephone/current_telephone = current_call.attached_to
 		send_commsig(COMMSIG_TALK, data)
 		// громко для держателя
-		if(ismob(attached_to.loc))
-			var/mob/holder = attached_to.loc
-			speaking.cast_tts(holder, message, attached_to, TRUE, TRUE)
+		if(ismob(current_telephone.loc))
+			var/mob/listener = current_telephone.loc
+			speaking.cast_tts(
+				listener,
+				message,
+				is_local = FALSE,
+				effects = list(/datum/singleton/sound_effect/radio)
+			)
+
 		// для тех кто рядом
-		var/list/nearby = get_hearers_in_view(4, attached_to)
-		if(LAZYLEN(nearby))
-			for(var/mob/listener in nearby)
-				if(ismob(attached_to.loc) && listener == attached_to.loc)
-					continue
-				speaking.cast_tts(listener, message, attached_to, TRUE, FALSE, list(/datum/singleton/sound_effect/muffled))
+		var/list/nearby = get_hearers_in_view(4, current_telephone, RECURSIVE_CONTENTS_CLIENT_MOBS)
+		for(var/mob/listener as anything in nearby)
+			if(ismob(current_telephone.loc) && listener == current_telephone.loc)
+				continue
+
+			speaking.cast_tts(
+				listener,
+				message,
+				current_telephone,
+				effects = list(/datum/singleton/sound_effect/muffled)
+			)
 		if(attached_to.raised && ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
 			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
