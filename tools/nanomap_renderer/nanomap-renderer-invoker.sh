@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 # Generate maps
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Blueshift/Blueshift.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Cyberiad/Cyberiad.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Deltastation/DeltaStation2.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/IceBoxStation/IceBoxStation.dmm"
@@ -16,6 +17,8 @@ mv "IceBoxStation_nanomap_z3.png" "Ice Box Station_nanomap_z3.png"
 mv "tramstation_nanomap_z1.png" "Tramstation_nanomap_z1.png"
 mv "tramstation_nanomap_z2.png" "Tramstation_nanomap_z2.png"
 cd "../../"
+cp "data/nanomaps/Blueshift_nanomap_z1.png" "icons/_nanomaps"
+cp "data/nanomaps/Blueshift_nanomap_z2.png" "icons/_nanomaps"
 cp "data/nanomaps/Cyberiad_nanomap_z1.png" "icons/_nanomaps"
 cp "data/nanomaps/Cyberiad_nanomap_z2.png" "icons/_nanomaps"
 cp "data/nanomaps/Delta Station_nanomap_z1.png" "icons/_nanomaps"

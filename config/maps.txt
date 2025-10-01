@@ -45,6 +45,11 @@ map cyberiad
 	votable
 endmap
 
+map blueshift
+	minplayers 80
+	votable
+endmap
+
 # Debug-only maps.
 
 map gateway_test
