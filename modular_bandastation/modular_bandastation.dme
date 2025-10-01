@@ -65,6 +65,7 @@
 #include "tts/_tts.dme"
 #include "turfs/_turfs.dme"
 #include "world_topics/_world_topics.dme"
+#include "xeno_rework/_xeno_rework.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
