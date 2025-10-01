@@ -27514,3 +27514,29 @@ instrumental = "спутником метеоритного щита"
 prepositional = "спутнике метеоритного щита"
 gender = "male"
 
+["rotary telephone"]
+nominative = "телефон"
+genitive = "телефона"
+dative = "телефону"
+accusative = "телефон"
+instrumental = "телефоном"
+prepositional = "телефоне"
+gender = "male"
+
+["wallmount telephone"]
+nominative = "настенный телефон"
+genitive = "настенного телефона"
+dative = "настенному телефону"
+accusative = "настенный телефон"
+instrumental = "настенным телефоном"
+prepositional = "настенном телефоне"
+gender = "male"
+
+["handset"]
+nominative = "трубка"
+genitive = "трубки"
+dative = "трубке"
+accusative = "трубку"
+instrumental = "трубкой"
+prepositional = "трубке"
+gender = "female"
