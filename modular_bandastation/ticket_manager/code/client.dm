@@ -41,7 +41,7 @@
 		"Личное сообщение",
 		multiline = TRUE,
 		encode = FALSE,
-		ui_state = ADMIN_STATE(R_ADMIN|R_MENTOR)
+		ui_state = ADMIN_STATE(R_ADMIN)
 	)
 
 	if(!message_to_send)
@@ -57,8 +57,7 @@
 			)
 		return
 
-	var/new_ticket_type = check_rights_for(src, R_ADMIN) ? TICKET_TYPE_ADMIN : TICKET_TYPE_MENTOR
-	var/datum/help_ticket/subject_ticket = new(subject, src, message_to_send, new_ticket_type)
+	var/datum/help_ticket/subject_ticket = new(subject, src, message_to_send, TICKET_TYPE_ADMIN)
 
 	message_admins("[key_name_admin(src)] написал личное сообщение [key_name_admin(whom)]. Создан тикет [TICKET_OPEN_LINK(subject_ticket.id, "#[subject_ticket.id]")].")
 	log_admin("[key_name(src)] написал личное сообщение [key_name(whom)].")
