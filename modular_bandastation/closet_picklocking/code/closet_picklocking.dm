@@ -1,6 +1,6 @@
-#define PANEL_OPEN 0
-#define WIRES_DISCONNECTED 1
-#define LOCK_OFF 2
+#define CLOSET_LOCK_PANEL_OPEN 0
+#define CLOSET_LOCK_WIRES_DISCONNECTED 1
+#define CLOSET_LOCK_HACKED 2
 
 /obj/structure/closet
 	var/picklocking_stage
@@ -8,11 +8,11 @@
 /obj/structure/closet/examine(mob/user)
 	. = ..()
 	switch(picklocking_stage)
-		if(PANEL_OPEN)
+		if(CLOSET_LOCK_PANEL_OPEN)
 			. += span_notice("Панель замка снята.")
-		if(WIRES_DISCONNECTED)
+		if(CLOSET_LOCK_WIRES_DISCONNECTED)
 			. += span_notice("Панель замка снята, а провода торчат наружу.")
-		if(LOCK_OFF)
+		if(CLOSET_LOCK_HACKED)
 			. += span_notice("Замок полностью взломан.")
 
 /obj/structure/closet/screwdriver_act(mob/living/user, obj/item/I)
@@ -29,7 +29,7 @@
 		if(I.use_tool(src, user, 16 SECONDS, volume = 50))
 			if(prob(95))
 				broken = TRUE
-				picklocking_stage = PANEL_OPEN
+				picklocking_stage = CLOSET_LOCK_PANEL_OPEN
 				update_icon()
 				to_chat(user, span_notice("Вы успешно открутили и сняли панель с замка!"))
 				balloon_alert(user, "панель снята")
@@ -42,14 +42,14 @@
 
 /obj/structure/closet/wirecutter_act(mob/living/user, obj/item/I)
 	. = ..()
-	if(locked && picklocking_stage == PANEL_OPEN && !user.combat_mode)
+	if(locked && picklocking_stage == CLOSET_LOCK_PANEL_OPEN && !user.combat_mode)
 		to_chat(user, span_notice("Вы начинаете перерезать провода [I.declent_ru(INSTRUMENTAL)]..."))
 		balloon_alert(user, "подготовка проводки...")
 		if(I.use_tool(src, user, 16 SECONDS, volume = 50))
 			if(prob(80))
 				to_chat(user, span_notice("Вы успешно подготовили проводку для взлома!"))
 				balloon_alert(user, "проводка подготовлена")
-				picklocking_stage = WIRES_DISCONNECTED
+				picklocking_stage = CLOSET_LOCK_WIRES_DISCONNECTED
 			else
 				to_chat(user, span_warning("Черт! Не тот провод!"))
 				balloon_alert(user, "неудача!")
@@ -59,13 +59,13 @@
 
 /obj/structure/closet/multitool_act(mob/living/user, obj/item/I)
 	. = ..()
-	if(locked && picklocking_stage == WIRES_DISCONNECTED && !user.combat_mode)
+	if(locked && picklocking_stage == CLOSET_LOCK_WIRES_DISCONNECTED && !user.combat_mode)
 		to_chat(user, span_notice("Вы начинаете подключать [I.declent_ru(NOMINATIVE)] к проводам..."))
 		balloon_alert(user, "взлом проводки...")
 		if(I.use_tool(src, user, 16 SECONDS, volume = 50))
 			if(prob(80))
 				broken = FALSE
-				picklocking_stage = LOCK_OFF
+				picklocking_stage = CLOSET_LOCK_HACKED
 				emag_act(user)
 			else
 				to_chat(user, span_warning("Черт! Не тот провод!"))
@@ -74,6 +74,6 @@
 				electrocute_mob(user, get_area(src), src, 0.5, TRUE)
 		return TRUE
 
-#undef PANEL_OPEN
-#undef WIRES_DISCONNECTED
-#undef LOCK_OFF
+#undef CLOSET_LOCK_PANEL_OPEN
+#undef CLOSET_LOCK_WIRES_DISCONNECTED
+#undef CLOSET_LOCK_HACKED
