@@ -8,7 +8,6 @@
 	maxHealth = 15
 	health = 15
 	mob_size = MOB_SIZE_SMALL
-	butcher_results = list(/obj/item/food/meat/slab/mouse = 2)
 	colored_mob = "rat"
 	body_color = null
 	possible_colors = list("white", "gray", "irish")

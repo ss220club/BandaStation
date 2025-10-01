@@ -1,7 +1,7 @@
 /mob/living/basic/mouse/rat/syndirat
-	name = "Синди-мышь"
-	desc = "Мышь на службе синдиката?"
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
+	name = "Синдикрыс"
+	desc = "На службе синдиката"
+	icon = 'modular_bandastation/mobs/icons/mouse.dmi'
 	icon_state = "syndirat"
 	icon_living = "syndirat"
 	icon_dead = "syndirat_dead"
@@ -20,3 +20,13 @@
 	melee_damage_upper = 15
 
 	ai_controller = /datum/ai_controller/basic_controller/mouse/rat/syndi
+
+/mob/living/basic/mouse/rat/syndirat/jet
+	desc = "Нарушитель безполетных зон."
+	icon_state = "syndirat_jet"
+	icon_living = "syndirat_jet"
+	speed = 0.8
+
+/mob/living/basic/mouse/rat/syndirat/jet/Initialize(mapload)
+	. = ..()
+	add_traits(list(TRAIT_SPACEWALK, TRAIT_SWIMMER, TRAIT_FENCE_CLIMBER), INNATE_TRAIT)
