@@ -38,7 +38,7 @@
 	var/message_content = GLOB.survivor_report
 
 	message_content = rustutils_regex_replace(message_content, "<br>", "i", "\n")
-	message_content = rustutils_regex_replace(message_content, "&nbsp;&nbsp;&nbsp;&nbsp;", "i", "")
+	message_content = rustutils_regex_replace(message_content, "&nbsp;", "i", "")
 	message_content = STRIP_HTML_FULL(message_content, 4096)
 
 	var/list/lines = splittext(message_content, "\n")
@@ -50,6 +50,7 @@
 			var/value = copytext(line, delimiter_pos + 2)
 			lines[i] = "[key]: **[value]**"
 	message_content = lines.Join("\n")
+	message_content = rustutils_regex_replace(message_content, "\n\n", "i", "\n")
 
 	var/list/embed = list(
 		"title" = "Раунд #[GLOB.round_id] закончился",
