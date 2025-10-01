@@ -69,6 +69,7 @@ const GeneralPanel = (props) => {
   const showTabs = categories.length > 1;
 
   const [selectedPhone, setSelectedPhone] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
   const [currentCategory, setCategory] = useState(categories[0] || '');
 
   useEffect(() => {
@@ -162,6 +163,18 @@ const GeneralPanel = (props) => {
                       </Tabs>
                     </Stack.Item>
                   )}
+                  <Stack.Item>
+                    <Box mb="0.5em">
+                      <input
+                        type="text"
+                        placeholder="Поиск по названию/ID..."
+                        value={search}
+                        onChange={(e) =>
+                          setSearch((e.target as HTMLInputElement).value)
+                        }
+                      />
+                    </Box>
+                  </Stack.Item>
                   <Stack.Item grow>
                     <Section fill scrollable>
                       {transmitters
@@ -171,6 +184,16 @@ const GeneralPanel = (props) => {
                               ? val.phone_category.trim()
                               : '';
                           return !currentCategory || cat === currentCategory;
+                        })
+                        .filter((val) => {
+                          if (!search) return true;
+                          const q = search.toLowerCase();
+                          return (
+                            (val.display_name || '')
+                              .toLowerCase()
+                              .includes(q) ||
+                            (val.phone_id || '').toLowerCase().includes(q)
+                          );
                         })
                         .map((val) => (
                           <Button

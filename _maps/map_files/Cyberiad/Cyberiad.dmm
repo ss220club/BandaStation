@@ -23440,6 +23440,10 @@
 /obj/machinery/duct,
 /turf/open/floor/carpet/red,
 /area/station/maintenance/department/security/ghetto)
+"fIq" = (
+/obj/structure/transmitter/mounted/directional/north,
+/turf/open/floor/iron/dark,
+/area/station/construction)
 "fIs" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -31420,6 +31424,11 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
+/obj/structure/transmitter{
+	pixel_x = 0;
+	pixel_y = 4
+	},
+/obj/structure/table,
 /turf/open/floor/iron,
 /area/station/engineering/lobby)
 "hEf" = (
@@ -36114,6 +36123,10 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/station/maintenance/department/security/ghetto)
+"iMR" = (
+/obj/structure/transmitter/mounted/directional/north,
+/turf/open/floor/iron/dark/textured,
+/area/station/engineering/gravity_generator)
 "iMX" = (
 /turf/open/floor/carpet/black,
 /area/station/maintenance/ghetto/fore/starboard)
@@ -39691,6 +39704,12 @@
 	dir = 1
 	},
 /obj/machinery/airalarm/directional/north,
+/obj/structure/table,
+/obj/structure/transmitter/medbay{
+	pixel_x = 0;
+	pixel_y = 4;
+	display_name = "МЕД - Главный холл"
+	},
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/theatre)
 "jHz" = (
@@ -42241,6 +42260,11 @@
 /obj/structure/railing{
 	dir = 6
 	},
+/obj/structure/transmitter{
+	pixel_x = 0;
+	pixel_y = 4
+	},
+/obj/structure/table,
 /turf/open/floor/iron,
 /area/station/cargo/storage/ghetto)
 "kob" = (
@@ -55903,6 +55927,10 @@
 	pixel_x = -8;
 	pixel_y = 0
 	},
+/obj/structure/transmitter{
+	pixel_x = 0;
+	pixel_y = -14
+	},
 /turf/open/floor/wood,
 /area/station/service/library)
 "nEj" = (
@@ -63940,6 +63968,13 @@
 /obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron,
 /area/station/maintenance/port)
+"pBB" = (
+/obj/effect/turf_decal/tile/yellow/half/contrasted{
+	dir = 1
+	},
+/obj/structure/transmitter/mounted/directional/north,
+/turf/open/floor/iron,
+/area/station/engineering/hallway)
 "pBC" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/burnt_floor,
@@ -79840,6 +79875,18 @@
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/hidden,
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway)
+"tyF" = (
+/obj/effect/turf_decal/trimline/green/filled/line{
+	dir = 8
+	},
+/obj/structure/transmitter/medbay{
+	pixel_x = 0;
+	pixel_y = 5;
+	display_name = "МЕД - Вирусология"
+	},
+/obj/structure/table,
+/turf/open/floor/iron/white,
+/area/station/medical/virology)
 "tyW" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 8
@@ -191282,7 +191329,7 @@ wID
 gAm
 iOf
 reL
-qzN
+fIq
 qzN
 qzN
 qzN
@@ -195672,7 +195719,7 @@ nTW
 nTW
 ceC
 kzp
-xWH
+pBB
 gCE
 kpf
 veW
@@ -201581,7 +201628,7 @@ iCA
 alC
 ceC
 qCU
-bWk
+iMR
 uVG
 xtX
 dEN
@@ -204139,7 +204186,7 @@ xmN
 xoo
 xeg
 sTU
-sTU
+tyF
 uxN
 aDt
 owG

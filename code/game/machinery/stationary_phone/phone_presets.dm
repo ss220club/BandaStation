@@ -15,12 +15,13 @@
 
 /obj/structure/transmitter/mounted
 	name = "wallmount telephone"
-	desc = "Настенный телефон."
+	desc = "Настенный таксофон. Кажется, платный!"
 	icon_state = "wall_phone"
 	post_init_icon_state = "wall_phone"
 	is_free = FALSE
 	is_advanced = FALSE
 	greyscale_colors = "#6e7766"
+	phone_category = null // эта штобы нельзя было звонить на таксофоны
 
 /obj/structure/transmitter/mounted/examine(mob/user)
 	. = ..()

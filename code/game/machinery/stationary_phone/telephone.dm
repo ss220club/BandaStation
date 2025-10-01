@@ -186,7 +186,7 @@
 	start_length = 3.2 SECONDS
 	mid_sounds = 'sound/machines/telephone/ring_outgoing.ogg'
 	mid_length = 6 SECONDS
-	volume = 10
+	volume = 50
 
 /datum/looping_sound/telephone/busy
 	start_sound = 'sound/machines/telephone/callstation_unavailable.ogg'
@@ -207,6 +207,6 @@
 	start_length = 0.6 SECONDS
 	mid_sounds = 'sound/machines/telephone/dialtone.ogg'
 	mid_length = 5 SECONDS
-	volume = 50
+	volume = 10
 
 #undef MAX_RANGE
