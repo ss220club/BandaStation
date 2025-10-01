@@ -357,14 +357,14 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(tool == attached_to)
 		recall_phone()
 		if(user.combat_mode)
-			visible_message(span_warning("[user] с грохотом впечатывает [attached_to] в [src]!"), span_warning("Вы с силой бросаете [attached_to] на рычаг!"))
+			visible_message(span_warning("[user] с грохотом впечатывает [attached_to.declent_ru(ACCUSATIVE)] в [src.declent_ru(NOMINATIVE)]!"), span_warning("Вы с силой бросаете [attached_to] на рычаг!"))
 			user.do_attack_animation(src)
 			Shake(2, 0, 10, shake_interval = 0.05 SECONDS)
 			playsound(src, SFX_TELEPHONE_HANDSET, 60)
 			playsound(src, 'sound/items/weapons/genhit1.ogg', 30, FALSE)
 			playsound(src, 'sound/machines/telephone/bell.ogg', 75, FALSE)
 		else
-			to_chat(attached_to, span_notice("Вы возвращаете [attached_to] на рычаг."))
+			to_chat(attached_to, span_notice("Вы возвращаете [attached_to.declent_ru(ACCUSATIVE)] на рычаг."))
 			playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
 		return ITEM_INTERACT_SUCCESS
 
@@ -677,10 +677,21 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			"target_id" = current_call.phone_id,
 			"message" = message
 		)
+		var/obj/item/telephone/current_telephone = current_call.attached_to
 		send_commsig(COMMSIG_TALK, data)
+		// громко для держателя
+		if(ismob(attached_to.loc))
+			var/mob/holder = attached_to.loc
+			speaking.cast_tts(holder, message, attached_to, TRUE)
+		// для тех кто рядом
+		var/list/nearby = get_hearers_in_view(4, attached_to)
+		if(LAZYLEN(nearby))
+			for(var/mob/listener in nearby)
+				if(ismob(attached_to.loc) && listener == attached_to.loc)
+					continue
+				speaking.cast_tts(listener, message, attached_to, TRUE, FALSE, null, TTS_TRAIT_PITCH_WHISPER)
 		if(attached_to.raised && ismob(attached_to.loc))
 			var/mob/holder = attached_to.loc
-			holder.playsound_local(get_turf(holder), SFX_TELEPHONE_SPEAKING, 20)
 			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
 
 #undef MAX_RANGE

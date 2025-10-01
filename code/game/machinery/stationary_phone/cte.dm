@@ -108,9 +108,6 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 	if(!new_caller || !target)
 		return
 
-	if(are_devices_connected(new_caller, target))
-		return
-
 	if(new_caller.status == STATUS_OUTGOING && target.status == STATUS_INBOUND)
 		new_caller.process_commsig(COMMSIG_TIMEOUT)
 		target.process_commsig(COMMSIG_TIMEOUT)

@@ -186,7 +186,7 @@
 	start_length = 3.2 SECONDS
 	mid_sounds = 'sound/machines/telephone/ring_outgoing.ogg'
 	mid_length = 6 SECONDS
-	volume = 20
+	volume = 10
 
 /datum/looping_sound/telephone/busy
 	start_sound = 'sound/machines/telephone/callstation_unavailable.ogg'
