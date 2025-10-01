@@ -326,6 +326,10 @@ GLOBAL_LIST_EMPTY(objectives)
 		balloon_alert(user, "слишком недавно в SSD")
 		return
 
+	if(target.buckled || target.has_buckled_mobs())
+		to_chat(user, span_warning("Тело [target] к чему-то пристегнуто."))
+		return
+
 	var/answer = tgui_alert(
 		user,
 		"Вы уверены что хотите переместить [target] в криогенный стазис? Через [DisplayTimeText(time_till_despawn)] персонаж будет удален из игры и больше не сможет вернуться в этом раунде.",
@@ -360,6 +364,10 @@ GLOBAL_LIST_EMPTY(objectives)
 /obj/machinery/cryopod/proc/put_self_inside(mob/target)
 	PRIVATE_PROC(TRUE)
 
+	if(target.buckled || target.has_buckled_mobs())
+		to_chat(target, span_warning("Вы к чему-то пристегнуты."))
+		return
+
 	var/answer = tgui_alert(
 		target,
 		"Вы уверены что хотите погрузиться в криогенный стазис? Через [DisplayTimeText(time_till_despawn)] после выхода из игры или тела ваш персонаж будет удален и больше не сможет вернуться в этом раунде.",
@@ -372,8 +380,8 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(target.mind?.assigned_role.req_admin_notify)
 		answer = tgui_alert(
 			target,
-			"Вы ТОЧНО уверены что хотите погрузиться в криогенный стазис? Вы заманиете важную для раунда профессию.",
-			"Погрузиться криогенный стазис?",
+			"Вы ТОЧНО уверены что хотите погрузиться в криогенный стазис? Вы занимаете важную для раунда профессию.",
+			"Погрузиться в криогенный стазис?",
 			list("Да", "Нет")
 		)
 		if(answer != "Да")

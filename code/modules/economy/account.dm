@@ -37,6 +37,8 @@
 	var/list/transaction_history = list()
 	///A lazylist of coupons redeemed with the Coupon Master pda app associated with this account.
 	var/list/redeemed_coupons
+	/// How many paychecks to skip when payday is called.
+	var/paydays_to_skip = 0
 
 /datum/bank_account/New(newname, job, modifier = 1, player_account = TRUE)
 	account_holder = newname
@@ -146,10 +148,10 @@
 /datum/bank_account/proc/pay_debt(amount, is_payment = TRUE)
 	var/amount_to_pay = min(amount, account_debt)
 	if(is_payment)
-		if(!adjust_money(-amount, "Other: Debt Payment"))
+		if(!adjust_money(-amount, "Прочее: Оплата долга"))
 			return 0
 	else
-		add_log_to_history(-amount, "Other: Debt Collection")
+		add_log_to_history(-amount, "Прочее: Взыскание долгов")
 	log_econ("[amount_to_pay] credits were removed from [account_holder]'s bank account to pay a debt of [account_debt]")
 	account_debt -= amount_to_pay
 	SEND_SIGNAL(src, COMSIG_BANK_ACCOUNT_DEBT_PAID)
@@ -164,11 +166,11 @@
  */
 /datum/bank_account/proc/transfer_money(datum/bank_account/from, amount, transfer_reason)
 	if(from.has_money(amount))
-		var/reason_to = "Transfer: From [from.account_holder]"
-		var/reason_from = "Transfer: To [account_holder]"
+		var/reason_to = "Перевод: От [from.account_holder]"
+		var/reason_from = "Перевод: [account_holder]"
 
 		if(IS_DEPARTMENTAL_ACCOUNT(from))
-			reason_to = "Nanotrasen: Salary"
+			reason_to = "Нанотрейзен: Зарплата"
 			reason_from = ""
 
 		if(transfer_reason)
@@ -188,30 +190,39 @@
  * Arguments:
  * * amount_of_paychecks - literally the number of salaries, 1 for issuing one salary, 5 for issuing five salaries.
  * * free - issuance of free funds, if TRUE then takes funds from the void, if FALSE (default) tries to send from the department's account.
+ * * skippable - if TRUE, this proc may pay out nothing if the account has paydays_to_skip
+ * * event - the name of the event that is being processed, used for bank card messages.
  */
-/datum/bank_account/proc/payday(amount_of_paychecks, free = FALSE)
+/datum/bank_account/proc/payday(amount_of_paychecks, free = FALSE, skippable = FALSE, event = "Выплата зарплаты")
 	if(!account_job)
-		return
+		return FALSE
+
+	if(skippable && !free)
+		while(paydays_to_skip > 0 && amount_of_paychecks > 0)
+			amount_of_paychecks -= 1
+			paydays_to_skip -= 1
+
+	if(amount_of_paychecks <= 0)
+		return FALSE
+
 	var/money_to_transfer = round(account_job.paycheck * payday_modifier * amount_of_paychecks)
 	if(amount_of_paychecks == 1)
 		money_to_transfer = clamp(money_to_transfer, 0, PAYCHECK_CREW) //We want to limit single, passive paychecks to regular crew income.
 	if(free)
-		adjust_money(money_to_transfer, "Nanotrasen: Shift Payment")
+		adjust_money(money_to_transfer, "Нанотрейзен: Оплата смены")
 		SSblackbox.record_feedback("amount", "free_income", money_to_transfer)
 		SSeconomy.station_target += money_to_transfer
 		log_econ("[money_to_transfer] credits were given to [src.account_holder]'s account from income.")
 		return TRUE
-	else
-		var/datum/bank_account/department_account = SSeconomy.get_dep_account(account_job.paycheck_department)
-		if(department_account)
-			if(!transfer_money(department_account, money_to_transfer))
-				bank_card_talk("ERROR: Payday aborted, departmental funds insufficient.")
-				return FALSE
-			else
-				bank_card_talk("Payday processed, account now holds [account_balance] cr.")
-				return TRUE
-	bank_card_talk("ERROR: Payday aborted, unable to contact departmental account.")
-	return FALSE
+	var/datum/bank_account/department_account = SSeconomy.get_dep_account(account_job.paycheck_department)
+	if(isnull(department_account))
+		bank_card_talk("ОШИБКА: [event] отменена. Не удалось связаться со счётом отдела.")
+		return FALSE
+	if(!transfer_money(department_account, money_to_transfer))
+		bank_card_talk("ОШИБКА: [event] отменена. Средств отдела недостаточно.")
+		return FALSE
+	bank_card_talk("[event] успешна. На аккаунте теперь [account_balance] кр.")
+	return TRUE
 
 /**
  * This sends a local chat message to the owner of a bank account, on all ID cards registered to the bank_account.

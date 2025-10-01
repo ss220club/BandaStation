@@ -3,7 +3,7 @@
 
 /datum/antagonist/changeling
 	name = "\proper Генокрад"
-	roundend_category = "Генокрадами"
+	roundend_category = "Генокрады"
 	antagpanel_category = "Changeling"
 	pref_flag = ROLE_CHANGELING
 	antag_moodlet = /datum/mood_event/focused

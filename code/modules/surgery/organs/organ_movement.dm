@@ -74,11 +74,6 @@
 		wash(CLEAN_TYPE_BLOOD)
 		organ_flags &= ~ORGAN_VIRGIN
 
-	if(external_bodytypes)
-		receiver.synchronize_bodytypes()
-	if(external_bodyshapes)
-		receiver.synchronize_bodyshapes()
-
 	receiver.organs |= src
 	receiver.organs_slot[slot] = src
 	owner = receiver
@@ -141,6 +136,11 @@
 	ADD_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
 	interaction_flags_item &= ~INTERACT_ITEM_ATTACK_HAND_PICKUP
 
+	if(external_bodytypes)
+		limb.owner?.synchronize_bodytypes()
+	if(external_bodyshapes)
+		limb.owner?.synchronize_bodyshapes()
+
 	if(bodypart_overlay)
 		limb.add_bodypart_overlay(bodypart_overlay)
 
@@ -186,8 +186,6 @@
 	SEND_SIGNAL(organ_owner, COMSIG_CARBON_LOSE_ORGAN, src, special)
 	ADD_TRAIT(src, TRAIT_USED_ORGAN, ORGAN_TRAIT)
 
-	organ_owner.synchronize_bodytypes()
-	organ_owner.synchronize_bodyshapes()
 	if(!special)
 		organ_owner.hud_used?.update_locked_slots()
 
@@ -219,7 +217,7 @@
 
 /// Called to remove an organ from a limb. Do not put any mob operations here (except the bodypart_getter at the start)
 /// Give EITHER a limb OR a limb_owner
-/obj/item/organ/proc/bodypart_remove(obj/item/bodypart/limb, mob/living/carbon/limb_owner, movement_flags)
+/obj/item/organ/proc/bodypart_remove(obj/item/bodypart/limb, mob/living/carbon/limb_owner, movement_flags, atom/drop_location) // BANDASTATION ADDITION - Don't move organs to nullspace to move later: (atom/drop_location)
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(!isnull(limb_owner))
@@ -227,9 +225,14 @@
 
 	UnregisterSignal(src, COMSIG_MOVABLE_MOVED) //DONT MOVE THIS!!!! we moves the organ right after, so we unregister before we move them physically
 
+	// BANDASTATION ADDITION START - Don't move organs to nullspace to move later
 	// The true movement is here
-	moveToNullspace()
+	if(drop_location)
+		forceMove(drop_location)
+	else
+		moveToNullspace()
 	bodypart_owner = null
+	// BANDASTATION ADDITION END - Don't move organs to nullspace to move later
 
 	on_bodypart_remove(limb)
 
@@ -247,6 +250,9 @@
 	item_flags &= ~ABSTRACT
 	REMOVE_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
 	interaction_flags_item |= INTERACT_ITEM_ATTACK_HAND_PICKUP
+
+	limb.owner?.synchronize_bodytypes()
+	limb.owner?.synchronize_bodyshapes()
 
 	if(!bodypart_overlay)
 		return

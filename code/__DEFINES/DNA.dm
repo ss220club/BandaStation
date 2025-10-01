@@ -79,11 +79,12 @@
 #define FEATURE_LEGS "legs"
 
 // BANDASTATION ADDITION START - Species Features
+// keep in line with sprite_accessories .dmi
 #define FEATURE_VULPKANIN_HEAD_MARKINGS "vulpkanin_head_markings"
 #define FEATURE_VULPKANIN_CHEST_MARKINGS "vulpkanin_chest_markings"
 #define FEATURE_VULPKANIN_LIMB_MARKINGS "vulpkanin_limb_markings"
-#define FEATURE_VULPKANIN_TAIL "tail_vulpkanin" // keep in line with icons/bandastation/mob/species/vulpkanin/sprite_accessories/tails.dmi
-#define FEATURE_VULPKANIN_TAIL_MARKINGS "vulpkanin_tailmarkings" // keep in line with icons/bandastation/mob/species/vulpkanin/sprite_accessories/tail_markings.dmi
+#define FEATURE_VULPKANIN_TAIL "tail_vulpkanin"
+#define FEATURE_VULPKANIN_TAIL_MARKINGS "vulpkanin_tailmarkings"
 #define FEATURE_VULPKANIN_FACIAL_HAIR "vulpkanin_facial_hair"
 #define FEATURE_VULPKANIN_BODY_MARKINGS_COLOR "vulpkanin_body_markings_color"
 #define FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR "vulpkanin_tail_markings_color"
@@ -93,8 +94,8 @@
 #define FEATURE_TAJARAN_HEAD_MARKINGS "tajaran_head_markings"
 #define FEATURE_TAJARAN_CHEST_MARKINGS "tajaran_chest_markings"
 #define FEATURE_TAJARAN_LIMB_MARKINGS "tajaran_limb_markings"
-#define FEATURE_TAJARAN_TAIL "tail_tajaran" // keep in line with icons/bandastation/mob/species/tajaran/sprite_accessories/tails.dmi
-#define FEATURE_TAJARAN_TAIL_MARKINGS "tajaran_tailmarkings" // keep in line with icons/bandastation/mob/species/tajaran/sprite_accessories/tail_markings.dmi
+#define FEATURE_TAJARAN_TAIL "tail_tajaran"
+#define FEATURE_TAJARAN_TAIL_MARKINGS "tajaran_tailmarkings"
 #define FEATURE_TAJARAN_FACIAL_HAIR "tajaran_facial_hair"
 #define FEATURE_TAJARAN_BODY_MARKINGS_COLOR "tajaran_body_markings_color"
 #define FEATURE_TAJARAN_HEAD_MARKINGS_COLOR "tajaran_head_markings_color"

@@ -407,6 +407,9 @@
 /datum/dynamic_ruleset/midround/from_ghosts/blob/false_alarm()
 	priority_announce("Вспышка биологической угрозы 5-го уровня зафиксирована на борту [station_name()]. Всему персоналу надлежит сдержать её распространение любой ценой!", "Биологическая угроза", ANNOUNCER_OUTBREAK5)
 
+	// Set status displays to biohazard alert even for false alarm
+	send_status_display_biohazard_alert()
+
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
 	config_tag = "Xenomorph"
@@ -678,45 +681,28 @@
 	min_pop = 10
 	max_antag_cap = 1
 	signup_atom_appearance = /obj/effect/bluespace_stream
-	var/datum/weakref/original // BANDASTATION ADD
+	/// Chance of getting another clone for the price of free
+	var/bonus_clone_chance = 20
+
+/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/New(list/dynamic_config)
+	. = ..()
+	max_antag_cap += prob(bonus_clone_chance)
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/can_be_selected()
 	return ..() && !isnull(find_clone()) && !isnull(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 
+/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/create_execute_args()
+	return list(find_clone())
+
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/create_ruleset_body()
 	return // handled by assign_role() entirely
 
-// BANDASTATION ADD - START
-#define RANDOM_CLONE "Рандом"
-
-/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/configure_ruleset(mob/admin)
-	var/list/admin_pool = list("[RULESET_CONFIG_CANCEL]" = TRUE, "[RANDOM_CLONE]" = TRUE)
-	for(var/mob/living/carbon/human/player in GLOB.player_list)
-		if(!player.client || !player.mind || !(player.mind.assigned_role.job_flags & JOB_CREW_MEMBER))
-			continue
-		admin_pool += player
-
-	var/picked = tgui_input_list(admin, "Выберите игрока для клонирования", "Выбор игрока для клонирования", admin_pool)
-	switch(picked)
-		if(RANDOM_CLONE)
-			return
-		if(RULESET_CONFIG_CANCEL, null)
-			return RULESET_CONFIG_CANCEL
-		else
-			message_admins("[key_name_admin(admin)] picked [picked] to be cloned as Paradox Clone.")
-			original = WEAKREF(picked)
-
-#undef RANDOM_CLONE
-// BANDASTATION ADD - END
-
-/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/assign_role(datum/mind/candidate)
-	var/mob/living/carbon/human/good_version = original?.resolve() || find_clone() // BANDASTATION EDIT
+/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/assign_role(datum/mind/candidate, mob/living/carbon/human/good_version)
 	var/mob/living/carbon/human/bad_version = good_version.make_full_human_copy(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 	candidate.transfer_to(bad_version, force_key_move = TRUE)
 
 	var/datum/antagonist/paradox_clone/antag = candidate.add_antag_datum(/datum/antagonist/paradox_clone)
-	antag.original_ref = WEAKREF(good_version.mind)
-	antag.setup_clone()
+	antag.setup_clone(good_version.mind)
 
 	playsound(bad_version, 'sound/items/weapons/zapbang.ogg', 30, TRUE)
 	bad_version.put_in_hands(new /obj/item/storage/toolbox/mechanical()) //so they dont get stuck in maints
@@ -854,12 +840,12 @@
 		HUNTER_PACK_MI13,
 	)
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(check_spawn_hunters), hunter_backstory, 10 MINUTES), 1 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(check_spawn_hunters), 10 MINUTES), 1 MINUTES)
 
 /datum/dynamic_ruleset/midround/from_ghosts/fugitives/assign_role(datum/mind/candidate, datum/team/fugitive/team, turf/team_spawn)
 	candidate.current.forceMove(team_spawn)
 	equip_fugitive(candidate.current, team)
-	if(length(selected_minds) > 1 && candidate == selected_minds[1])
+	if(candidate == selected_minds[1])
 		equip_fugitive_leader(candidate.current)
 	playsound(candidate.current, 'sound/items/weapons/emitter.ogg', 50, TRUE)
 
@@ -948,33 +934,33 @@
 	var/announcement_title = ""
 	switch(hunter_backstory)
 		if(HUNTER_PACK_COPS)
-			announcement_text_list += "Attention Crew of [station_name()], this is the Police. A wanted criminal has been reported taking refuge on your station."
-			announcement_text_list += "We have a warrant from the SSC authorities to take them into custody. Officers have been dispatched to your location."
-			announcement_text_list += "We demand your cooperation in bringing this criminal to justice."
-			announcement_title += "Spacepol Command"
+			announcement_text_list += "Внимание, экипаж [station_name()], это межгалактическая полиция Космопола. Сообщается, что на вашей станции нашел убежище разыскиваемый преступник."
+			announcement_text_list += "У нас есть ордер от департамента защиты вашего сектора на проведение задержания. Офицеры направлены к вам."
+			announcement_text_list += "Мы требуем вашего сотрудничества в привлечении этого преступника к ответственности."
+			announcement_title += "Командование Космопола"
 		if(HUNTER_PACK_RUSSIAN)
-			announcement_text_list += "Zdraviya zhelaju, [station_name()] crew. We are coming to your station."
-			announcement_text_list += "There is a criminal aboard. We will arrest them and return them to the gulag. That's good, yes?"
-			announcement_title += "Russian Freighter"
+			announcement_text_list += "Zdraviya zhelaju, экипаж [station_name()]. Мы направляемся к вашей станции."
+			announcement_text_list += "На вашем борту находится преступник. Мы его арестуем и вернём в ГУЛАГ. Хорошо, да?"
+			announcement_title += "Разыскной шаттл НКВД КССП"
 		if(HUNTER_PACK_BOUNTY)
-			announcement_text_list += "[station_name()]. One of our bounty marks has ended up on your station. We will be arriving to collect shortly."
-			announcement_text_list += "Let's make this quick. If you don't want trouble, stay the hell out of our way."
-			announcement_title += "Unregistered Signal"
+			announcement_text_list += "[station_name()]. Одна из наших \"голов\" объявилась на вашей станции. Мы скоро прибудем, чтобы забрать её."
+			announcement_text_list += "Быстро всё сделаем и улетим. Не хотите проблем - катитесь к чёрту с нашей дороги."
+			announcement_title += "Незарегистрированный сигнал"
 		if(HUNTER_PACK_PSYKER)
-			announcement_text_list += "HEY, CAN YOU HEAR US? We're coming to your station. There's a bad guy down there, really bad guy. We need to arrest them."
-			announcement_text_list += "We're also offering fortune telling services out of the front door if you have paying customers."
-			announcement_title += "Fortune-Telling Entertainment Shuttle"
+			announcement_text_list += "ЭЙ, ВЫ НАС СЛЫШИТЕ? Мы уже на подлёте к вашей станции! У вас там гад, настоящий отпетый негодяй! Мы его должны арестовать!"
+			announcement_text_list += "Кстати, мы ещё и гадаем прямо у входа. Можете направлять к нам своих клиентов, если у них есть деньги."
+			announcement_title += "Шаттл гадания и развлечений"
 		if(HUNTER_PACK_MI13)
-			announcement_text_list += "Illegal intrusion detected in the crew monitoring network. Central Command has been informed."
-			announcement_text_list += "Please report any suspicious individuals or behaviour to your local security team."
-			announcement_title += "Nanotrasen Intrusion Countermeasures Electronics"
+			announcement_text_list += "Обнаружено несанкционированное проникновение в сеть мониторинга экипажа. Центральное командование уведомлено."
+			announcement_text_list += "Любые проявления подозрительной активности или подозрительных лиц следует немедленно сообщать в местную службу безопасности."
+			announcement_title += "Нанотрейзен: контрмеры электронному вторжению"
 
 	if(!length(announcement_text_list))
-		announcement_text_list += "Unidentified ship detected near the station."
+		announcement_text_list += "Обнаружен неопознанный шаттл вблизи станции."
 		stack_trace("Fugitive hunter announcement was unable to generate an announcement text based on backstory: [hunter_backstory]")
 
 	if(!length(announcement_title))
-		announcement_title += "Unknown Signal"
+		announcement_title += "Неизвестный сигнал"
 		stack_trace("Fugitive hunter announcement was unable to generate an announcement title based on backstory: [hunter_backstory]")
 
 	priority_announce(jointext(announcement_text_list, " "), announcement_title)

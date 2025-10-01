@@ -1,3 +1,6 @@
+/obj/item/clothing/mask/breath/muzzle
+	can_be_adjusted = FALSE
+
 // MARK: Misc mask
 /obj/item/clothing/mask/breath/red_gas
 	name = "prs-1"

@@ -1,0 +1,9 @@
+#include "_ticket_manager.dm"
+
+#include "code/_defines.dm"
+#include "code/client.dm"
+#include "code/create_ticket_ui.dm"
+#include "code/manager_ui.dm"
+#include "code/manager_topic.dm"
+#include "code/manager_helpers.dm"
+#include "code/ticket.dm"

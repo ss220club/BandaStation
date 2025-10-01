@@ -285,7 +285,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	set_right_click_menu_mode(TRUE)
 
-	GLOB.ahelp_tickets.ClientLogin(src)
+	GLOB.ticket_manager.client_login(persistent_client) // BANDASTATION REPLACEMENT - Original: GLOB.ahelp_tickets.ClientLogin(src)
 	GLOB.interviews.client_login(src)
 	GLOB.requests.client_login(src)
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
@@ -570,6 +570,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	set_fullscreen(logging_in = TRUE)
 	view_size.resetFormat()
 	view_size.setZoomMode()
+	view_size.apply()
 	Master.UpdateTickRate()
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_CLIENT_CONNECT, src)
 	fully_created = TRUE
@@ -600,10 +601,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	GLOB.clients -= src
 	GLOB.directory -= ckey
-	persistent_client.set_client(null)
+	if(persistent_client)
+		GLOB.ticket_manager.client_logout(persistent_client) // BANDASTATION ADDITION
+		persistent_client.set_client(null)
+	else
+		stack_trace("A client was Del()'d without a persistent_client! This should not be happening.")
 
 	log_access("Logout: [key_name(src)]")
-	GLOB.ahelp_tickets.ClientLogout(src)
+	// GLOB.ahelp_tickets.ClientLogout(src) // BANDASTATION REMOVAL
 	GLOB.interviews.client_logout(src)
 	GLOB.requests.client_logout(src)
 	SSserver_maint.UpdateHubStatus()
@@ -625,6 +630,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	QDEL_NULL(loot_panel)
 	QDEL_NULL(parallax_rock)
 	QDEL_LIST(parallax_layers_cached)
+	QDEL_NULL(who) // BANDASTATION ADDITION - TGUI Who
 	parallax_layers = null
 	seen_messages = null
 	Master.UpdateTickRate()

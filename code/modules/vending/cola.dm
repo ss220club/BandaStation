@@ -15,6 +15,7 @@
 		/obj/item/reagent_containers/cup/soda_cans/pwr_game = 10,
 		/obj/item/reagent_containers/cup/soda_cans/lemon_lime = 10,
 		/obj/item/reagent_containers/cup/soda_cans/sol_dry = 10,
+		/obj/item/reagent_containers/cup/soda_cans/lipo = 5, // BANDASTATION ADDITION
 		/obj/item/reagent_containers/cup/glass/waterbottle = 10,
 		/obj/item/reagent_containers/cup/glass/bottle/mushi_kombucha = 3,
 		/obj/item/reagent_containers/cup/soda_cans/volt_energy = 3,

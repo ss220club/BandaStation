@@ -37,7 +37,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	else
 		icon_state = "[parent.radial_slice_icon]_focus"
 	if(tooltips)
-		openToolTip(usr, src, params, title = declent_ru(NOMINATIVE), theme = tooltip_theme)
+		openToolTip(usr, src, params, title = get_tip_name(), theme = tooltip_theme)
 	if (click_on_hover && !isnull(usr) && !isnull(parent))
 		Click(location, control, params)
 
@@ -233,7 +233,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 		E.pixel_x = px
 
 	if(anim_flag & BUTTON_FADE_IN)
-		animate(E, alpha = 255, time = 0.15 SECONDS, easing = EASE_OUT)
+		animate(E, alpha = 255, time = 0.15 SECONDS, easing = CUBIC_EASING|EASE_OUT)
 	else
 		E.alpha = 255
 

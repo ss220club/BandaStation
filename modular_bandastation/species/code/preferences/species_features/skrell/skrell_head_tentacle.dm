@@ -26,7 +26,7 @@
 	return head
 
 /datum/preference/choiced/skrell_head_tentacle/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["skrell_head_tentacle"] = value
+	target.dna.features[FEATURE_SKRELL_HEAD_TENTACLE] = value
 
 /datum/preference/choiced/skrell_head_tentacle/create_default_value()
 	return pick(SSaccessories.skrell_head_tentacles_list)

@@ -233,7 +233,7 @@
 	for(var/i in 1 to rand(3,5))
 		unstable += copytext_char(name, -1)
 	var/unhinged = uppertext(unstable.Join(""))//example Tinea Luxor > TINEA LUXORRRR (with randomness in how long that slur is)
-	description = "ИМ НУЖНАААА [unhinged]!!"
+	description = "ОНИИИ ТРЕЕЕЕБУЮТ [unhinged]!!"
 
 /datum/mood_event/tower_of_babel
 	description = "My ability to communicate is an incoherent babel..."
@@ -519,7 +519,7 @@
 
 /datum/mood_event/encountered_evil
 	description = "I didn't want to believe it, but there are people out there that are genuinely evil."
-	mood_change = -4
+	mood_change = -1
 	timeout = 1 MINUTES
 
 /datum/mood_event/smoke_in_face

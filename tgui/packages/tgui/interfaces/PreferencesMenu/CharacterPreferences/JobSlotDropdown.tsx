@@ -25,11 +25,15 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   const { data, act } = useBackend<PreferencesMenuData>();
   const { name } = props;
 
-  const currentSlotNumber = data.pref_job_slots[name] || 0;
-  const currentSlotName = data.profile_index[currentSlotNumber];
-  const slotOptions = Object.entries(data.profile_index).map(([key, name]) => ({
+  const prefJobSlots = data.pref_job_slots ?? {};
+  const profileIndex = data.profile_index ?? {};
+
+  const currentSlotNumber = prefJobSlots[name] ?? 0;
+  const currentSlotName = profileIndex[currentSlotNumber] ?? '';
+
+  const slotOptions = Object.entries(profileIndex).map(([key, slotName]) => ({
     value: key,
-    displayText: name,
+    displayText: String(slotName) as React.ReactNode,
   }));
 
   return (

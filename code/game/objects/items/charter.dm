@@ -57,10 +57,11 @@
 	to_chat(user, span_notice("Your name has been sent to your employers for approval."))
 	// Autoapproves after a certain time
 	response_timer_id = addtimer(CALLBACK(src, PROC_REF(rename_station), new_name, user.name, user.real_name, key_name(user)), approval_time, TIMER_STOPPABLE)
-	to_chat(GLOB.admins,
+	var/list/admins = get_holders_with_rights(R_ADMIN) /// BANDASTATION EDIT: Proper permissions
+	to_chat(admins, /// BANDASTATION EDIT: Proper permissions
 		span_adminnotice("<b><font color=orange>CUSTOM STATION RENAME:</font></b>[ADMIN_LOOKUPFLW(user)] proposes to rename the [name_type] to [new_name] (will autoapprove in [DisplayTimeText(approval_time)]). [ADMIN_SMITE(user)] (<A href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];reject_custom_name=[REF(src)]'>REJECT</A>) [ADMIN_CENTCOM_REPLY(user)]"),
 		type = MESSAGE_TYPE_PRAYER)
-	for(var/client/admin_client in GLOB.admins)
+	for(var/client/admin_client as anything in admins) /// BANDASTATION EDIT: Proper permissions
 		if(admin_client.prefs.toggles & SOUND_ADMINHELP)
 			window_flash(admin_client, ignorepref = TRUE)
 			SEND_SOUND(admin_client, sound('sound/effects/gong.ogg'))

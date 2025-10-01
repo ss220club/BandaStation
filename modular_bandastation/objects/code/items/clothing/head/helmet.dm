@@ -37,6 +37,12 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "hardsuit0-sec"
 
+// MARK: ERT
+/obj/item/clothing/head/helmet/plate/crusader/ert
+	name = "ERT crusader's hood"
+	desc = "Усовершенствованный капюшон для крестовых походов против ереси, состоящий из освященного нанометалла и ткани. Обеспечивает очень хорошую защиту от еретиков и нечисти."
+	resistance_flags = FIRE_PROOF
+
 /obj/item/clothing/head/helmet/ntci_helmet
 	name = "tactical helmet"
 	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров."

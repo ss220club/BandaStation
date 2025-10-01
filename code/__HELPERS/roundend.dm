@@ -158,8 +158,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	var/json_file = file("[GLOB.log_directory]/newscaster.json")
 	var/list/file_data = list()
 	var/pos = 1
-	for(var/V in GLOB.news_network.network_channels)
-		var/datum/feed_channel/channel = V
+	for(var/datum/feed_channel/channel as anything in GLOB.news_network.network_channels)
 		if(!istype(channel))
 			stack_trace("Non-channel in newscaster channel list")
 			continue
@@ -527,18 +526,25 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += "[venue] обслужил [venue.customers_served] гостей и заработал [venue.total_income] кредитов.<br>"
 	parts += "В общем заработав [tourist_income] кредитов[tourist_income ? "!" : "..."]<br>"
 	log_econ("В конце раунда обслуживание заработало: [tourist_income] кредитов.")
+
+	// Award service achievements based on tourist income
+	switch(tourist_income)
+		if(1 to 2000)
+			award_service(/datum/award/achievement/jobs/service_bad)
+		if(2001 to 4999)
+			award_service(/datum/award/achievement/jobs/service_okay)
+		if(5000 to INFINITY)
+			award_service(/datum/award/achievement/jobs/service_good)
+
 	switch(tourist_income)
 		if(0)
 			parts += "[span_redtext("Обслуживание не заработало кредитов...")]<br>"
 		if(1 to 2000)
 			parts += "[span_redtext("Центральное командование недовольно. Отдел обслуживания, вы однозначно можете работать лучше, чем в эту смену.")]<br>"
-			award_service(/datum/award/achievement/jobs/service_bad)
 		if(2001 to 4999)
 			parts += "[span_greentext("Центральное командование довольно работой отдела обслуживания за эту смену.")]<br>"
-			award_service(/datum/award/achievement/jobs/service_okay)
 		else
 			parts += "<span class='reallybig greentext'>Центральное командование впечатлено проделанной работой отделом обслуживания! Вот это команда!</span><br>"
-			award_service(/datum/award/achievement/jobs/service_good)
 
 	parts += "<b>Общая статистика:</b><br>"
 	parts += "В эту смену экипаж собрал [station_vault] кредитов.<br>"
@@ -549,7 +555,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += "Самым богатым членом экипажа в конце смены был <b>[mr_moneybags.account_holder] с [mr_moneybags.account_balance]</b> кредитов!</div>"
 	else
 		parts += "Каким-то образом, никто не смог заработать кредитов за эту смену...</div>"
-	return parts
+	return parts.Join()
 
 /**
  * Awards the service department an achievement and updates the chef and bartender's highscore for tourists served.
@@ -666,7 +672,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	button_icon_state = "round_end"
 	show_to_observers = FALSE
 
-/datum/action/report/Trigger(trigger_flags)
+/datum/action/report/Trigger(mob/clicker, trigger_flags)
 	if(owner && GLOB.common_report && SSticker.current_state == GAME_STATE_FINISHED)
 		SSticker.show_roundend_report(owner.client)
 

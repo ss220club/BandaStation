@@ -95,6 +95,11 @@
 			/obj/item/instrument/recorder,
 			/obj/item/instrument/harmonica,
 			/obj/item/instrument/piano_synth/headphones,
+			// BANDASTATION ADDITION BEGIN - Expand instruments
+			/obj/item/instrument/soundhand_bass_guitar,
+			/obj/item/instrument/soundhand_rock_guitar,
+			/obj/item/instrument/drumskit_folded,
+			// BANDASTATION ADDITION END - Expand  instruments
 		)
 		for(var/obj/item/instrument/instrument as anything in possible_instruments)
 			instruments[initial(instrument.name)] = instrument

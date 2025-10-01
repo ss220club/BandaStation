@@ -33,6 +33,8 @@
 /// server name (the name of the game window)
 /datum/config_entry/string/servername
 
+/datum/config_entry/string/discord_url // BANDASTATION ADD
+
 /// short form server name used for the DB
 /datum/config_entry/string/serversqlname
 
@@ -638,6 +640,13 @@
 
 /datum/config_entry/flag/picture_logging_camera
 
+/datum/config_entry/number/roundstart_logout_report_time_average
+	default = 10 MINUTES
+	min_val = 0
+
+/datum/config_entry/number/roundstart_logout_report_time_variance
+	default = 3 MINUTES
+	min_val = 0
 
 /datum/config_entry/flag/reopen_roundstart_suicide_roles
 

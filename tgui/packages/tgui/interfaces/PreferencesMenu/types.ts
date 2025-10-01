@@ -185,11 +185,16 @@ export type PreferencesMenuData = {
   window: PrefsWindow;
 
   // BANDASTATION ADDITION START
+  pref_job_slots?: Record<string, number>;
+  profile_index?: Record<string, string>;
   donator_level: number;
   tts_seed: string;
   tts_enabled: BooleanLike;
-  profile_index: Record<string, string>;
-  pref_job_slots: Record<string, number>;
+
+  incompatible_body_modifications: string[];
+  applied_body_modifications: string[];
+  manufacturers: Record<string, string[]>;
+  selected_manufacturer: Record<string, string>;
   // BANDASTATION ADDITION END
 };
 
@@ -213,10 +218,23 @@ export type TtsData = {
   seeds: Array<Seed>;
   phrases: string[];
 };
+
+export type BodyModification = {
+  key: string;
+  name: string;
+  category: string;
+  description: string;
+  cost: number;
+  manufacturers?: Record<string, string>;
+  selectedManufacturer?: string;
+};
 // BANDASTATION ADDITION END
 
 export type ServerData = {
-  text_to_speech: TtsData; // BANDASTATION ADD
+  // BANDASTATION ADDITION START
+  text_to_speech: TtsData;
+  body_modifications: BodyModification[];
+  // BANDASTATION ADDITION END
   jobs: {
     departments: Record<string, Department>;
     jobs: Record<string, Job>;

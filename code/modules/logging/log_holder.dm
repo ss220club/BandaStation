@@ -230,10 +230,14 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 	if(!human_readable_enabled)
 		return
 
-	file_path = category.get_output_file(null, "log")
+	file_path = category.get_output_file(null, "log", logis_log = TRUE) // BANDASTATION EDIT - Logis: added `logis_log = TRUE`
 	if(fexists(file_path))
-		rustg_file_append(LOG_CATEGORY_RESET_FILE_MARKER_READABLE, file_path)
-		fcopy(file_path, get_recovery_file_for(file_path))
+		// BANDASTATION REMOVAL START - Logis
+		// rustg_file_append(LOG_CATEGORY_RESET_FILE_MARKER_READABLE, file_path)
+		// fcopy(file_path, get_recovery_file_for(file_path))
+		// BANDASTATION REMOVAL END - Logis
+		return
+
 	rustg_file_write("\[[human_readable_timestamp()]\] Starting up round ID [round_id].\n - -------------------------\n", file_path)
 
 #undef LOG_CATEGORY_RESET_FILE_MARKER
@@ -308,14 +312,6 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 	if(!log_category)
 		Log(LOG_CATEGORY_INTERNAL_CATEGORY_NOT_FOUND, message, data)
 		CRASH("Attempted to log to a category that doesn't exist! [category]")
-
-	// BANDASTATION EDIT START - Logis
-	// Duplicate it for Logis
-	if(category != LOG_CATEGORY_GAME)
-		var/duplicate_category = LOG_CATEGORY_GAME
-		var/duplicate_message = "[uppertext(category)]: [message]"
-		Log(duplicate_category, duplicate_message, data)
-	// BANDASTATION EDIT END
 
 	var/list/semver_store = null
 	if(length(data))

@@ -2,7 +2,7 @@
 	icon = 'icons/hud/screen_midnight.dmi'
 
 /atom/movable/screen/human/toggle
-	name = "toggle"
+	name = "переключить"
 	icon_state = "toggle"
 	base_icon_state = "toggle"
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -34,12 +34,12 @@
 	icon = 'icons/hud/screen_changeling.dmi'
 
 /atom/movable/screen/ling/chems
-	name = "chemical storage"
+	name = "химическое хранилище"
 	icon_state = "power_display"
 	screen_loc = ui_lingchemdisplay
 
 /atom/movable/screen/ling/sting
-	name = "current sting"
+	name = "текущее жало"
 	screen_loc = ui_lingstingdisplay
 	invisibility = INVISIBILITY_ABSTRACT
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -88,7 +88,7 @@
 	static_inventory += using
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "uniform"
+	inv_box.name = "одежда"
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_ICLOTHING
 	inv_box.icon_state = "uniform"
@@ -97,7 +97,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "suit"
+	inv_box.name = "костюм"
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_OCLOTHING
 	inv_box.icon_state = "suit"
@@ -128,7 +128,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "mask"
+	inv_box.name = "маска"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "mask"
 	inv_box.icon_full = "template"
@@ -137,7 +137,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "neck"
+	inv_box.name = "шея"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "neck"
 	inv_box.icon_full = "template"
@@ -146,7 +146,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "back"
+	inv_box.name = "спина"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "back"
 	inv_box.icon_full = "template_small"
@@ -155,7 +155,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "left pocket"
+	inv_box.name = "левый карман"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
 	inv_box.icon_full = "template_small"
@@ -164,7 +164,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "right pocket"
+	inv_box.name = "правый карман"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
 	inv_box.icon_full = "template_small"
@@ -173,7 +173,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "suit storage"
+	inv_box.name = "хранилище костюма"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "suit_storage"
 	inv_box.icon_full = "template"
@@ -192,7 +192,7 @@
 	static_inventory += using
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "gloves"
+	inv_box.name = "перчатки"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "gloves"
 	inv_box.icon_full = "template"
@@ -201,7 +201,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "eyes"
+	inv_box.name = "глаза"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "glasses"
 	inv_box.icon_full = "template"
@@ -210,7 +210,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "ears"
+	inv_box.name = "уши"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "ears"
 	inv_box.icon_full = "template"
@@ -219,7 +219,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "head"
+	inv_box.name = "голова"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "head"
 	inv_box.icon_full = "template"
@@ -228,7 +228,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "shoes"
+	inv_box.name = "обувь"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "shoes"
 	inv_box.icon_full = "template"
@@ -237,7 +237,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "belt"
+	inv_box.name = "пояс"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "belt"
 	inv_box.icon_full = "template_small"
@@ -301,7 +301,7 @@
 	var/mob/living/carbon/human/human_mob = mymob
 	if(istype(human_mob))
 		blocked_slots |= human_mob.dna?.species?.no_equip_flags
-		if(isnull(human_mob.w_uniform) && !HAS_TRAIT(human_mob, TRAIT_NO_JUMPSUIT))
+		if((isnull(human_mob.w_uniform) || !(human_mob.w_uniform.item_flags & IN_INVENTORY)) && !HAS_TRAIT(human_mob, TRAIT_NO_JUMPSUIT))
 			var/obj/item/bodypart/chest = human_mob.get_bodypart(BODY_ZONE_CHEST)
 			if(isnull(chest) || IS_ORGANIC_LIMB(chest))
 				blocked_slots |= ITEM_SLOT_ID|ITEM_SLOT_BELT
@@ -311,7 +311,7 @@
 			var/obj/item/bodypart/right_leg = human_mob.get_bodypart(BODY_ZONE_R_LEG)
 			if(isnull(right_leg) || IS_ORGANIC_LIMB(right_leg))
 				blocked_slots |= ITEM_SLOT_RPOCKET
-		if(isnull(human_mob.wear_suit))
+		if(isnull(human_mob.wear_suit) || !(human_mob.wear_suit.item_flags & IN_INVENTORY))
 			blocked_slots |= ITEM_SLOT_SUITSTORE
 		if(human_mob.num_hands <= 0)
 			blocked_slots |= ITEM_SLOT_GLOVES

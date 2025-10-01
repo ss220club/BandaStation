@@ -25,7 +25,7 @@
 /datum/round_event/anomaly/anomaly_dimensional/announce(fake)
 	if(isnull(impact_area))
 		impact_area = placer.findValidArea()
-	priority_announce("Пространственная аномалия обнаружена на [ANOMALY_ANNOUNCE_MEDIUM_TEXT] [impact_area.name].", "Обнаружена аномалия")
+	priority_announce("Пространственная аномалия обнаружена на [ANOMALY_ANNOUNCE_MEDIUM_TEXT] [impact_area.declent_ru(NOMINATIVE)].", "Обнаружена аномалия")
 
 /datum/event_admin_setup/listed_options/anomaly_dimensional
 	input_text = "Выбрать тему пространственной аномалии?"

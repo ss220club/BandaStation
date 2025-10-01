@@ -76,7 +76,7 @@
 			if(WOUND_BLUNT)
 				occur_text = "теряет от удара последнюю [bone_text], что удерживала конечность!"
 			if(WOUND_SLASH)
-				occur_text = "теряет от разрезра последнюю [tissue_text], что удерживала конечность!"
+				occur_text = "теряет от разреза последнюю [tissue_text], что удерживала конечность!"
 			if(WOUND_PIERCE)
 				occur_text = "теряет от прокалывания последнюю [tissue_text], что удерживала конечность!"
 			if(WOUND_BURN)

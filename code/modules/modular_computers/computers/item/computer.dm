@@ -3,7 +3,7 @@
 // consoles use "procssor" item that is held inside it.
 /obj/item/modular_computer
 	name = "modular microcomputer"
-	desc = "A small portable microcomputer."
+	desc = "Небольшой портативный микрокомпьютер."
 	icon = 'icons/obj/machines/computer.dmi'
 	icon_state = "laptop"
 	light_on = FALSE
@@ -15,7 +15,9 @@
 	interaction_flags_mouse_drop = NEED_HANDS | ALLOW_RESTING
 
 	///The ID currently stored in the computer.
-	var/obj/item/card/id/computer_id_slot
+	var/obj/item/card/id/stored_id
+	///The alt slot, only used by certain UIs like the access app.
+	var/obj/item/card/id/alt_stored_id
 	///The disk in this PDA. If set, this will be inserted on Initialize.
 	var/obj/item/computer_disk/inserted_disk
 	///The power cell the computer uses to run on.
@@ -189,8 +191,9 @@
 		QDEL_NULL(inserted_disk)
 	if(istype(inserted_pai))
 		QDEL_NULL(inserted_pai)
-	if(computer_id_slot)
-		QDEL_NULL(computer_id_slot)
+
+	QDEL_NULL(stored_id)
+	QDEL_NULL(alt_stored_id)
 
 	shell = null
 	physical = null
@@ -230,7 +233,7 @@
 	if(issilicon(user))
 		return NONE
 
-	if(RemoveID(user))
+	if(remove_id(user))
 		return CLICK_ACTION_SUCCESS
 
 	if(istype(inserted_pai)) // Remove pAI
@@ -239,22 +242,31 @@
 
 	return CLICK_ACTION_BLOCKING
 
+/obj/item/modular_computer/click_alt_secondary(mob/user)
+	if(issilicon(user))
+		return NONE
+
+	if(remove_secondary_id(user))
+		return CLICK_ACTION_SUCCESS
+
+	return NONE
+
 // Gets IDs/access levels from card slot. Would be useful when/if PDAs would become modular PCs. //guess what
 /obj/item/modular_computer/GetAccess()
-	if(computer_id_slot)
-		return computer_id_slot.GetAccess()
+	if(stored_id)
+		return stored_id.GetAccess()
 	return ..()
 
 /obj/item/modular_computer/GetID()
-	if(computer_id_slot)
-		return computer_id_slot
+	if(stored_id)
+		return stored_id
 	return ..()
 
 /obj/item/modular_computer/get_id_examine_strings(mob/user)
 	. = ..()
-	if(computer_id_slot)
-		. += "[src] is displaying [computer_id_slot]:"
-		. += computer_id_slot.get_id_examine_strings(user)
+	if(stored_id)
+		. += "[declent_ru()] отображает [stored_id]:"
+		. += stored_id.get_id_examine_strings(user)
 
 /obj/item/modular_computer/proc/print_text(text_to_print, paper_title = "")
 	if(!stored_paper)
@@ -269,34 +281,34 @@
 	return TRUE
 
 /**
- * InsertID
  * Attempt to insert the ID in either card slot, if ID is present - attempts swap
+ *
  * Args:
  * inserting_id - the ID being inserted
  * user - The person inserting the ID
  */
-/obj/item/modular_computer/InsertID(obj/item/card/inserting_id, mob/user)
+/obj/item/modular_computer/insert_id(obj/item/card/inserting_id, mob/user)
 	if(!isnull(user) && !user.transferItemToLoc(inserting_id, src))
 		return FALSE
 
 	else
 		inserting_id.forceMove(src)
 
-	if(!isnull(computer_id_slot))
-		RemoveID(user, silent = TRUE)
+	if(!isnull(stored_id))
+		remove_id(user, silent = TRUE)
 
-	computer_id_slot = inserting_id
+	stored_id = inserting_id
 
 	if(!isnull(user))
-		to_chat(user, span_notice("You insert \the [inserting_id] into the card slot."))
-		balloon_alert(user, "inserted ID")
+		to_chat(user, span_notice("Вы вставляете [inserting_id] в слот карты."))
+		balloon_alert(user, "вставлен ID")
 
 	playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
 
 	if(ishuman(loc))
 		var/mob/living/carbon/human/human_wearer = loc
 		if(human_wearer.wear_id == src)
-			human_wearer.sec_hud_set_ID()
+			human_wearer.update_ID_card()
 
 	update_appearance()
 	update_slot_icon()
@@ -304,34 +316,83 @@
 	return TRUE
 
 /**
+ * Attempts to insert a secondary ID card into the computer. If there is already a secondary ID card, attempts to swap
+ *
+ * Args:
+ * * secondary_id - The ID card to insert into the secondary slot.
+ * * user - The mob trying to insert the ID, if there is one.
+ */
+/obj/item/modular_computer/proc/insert_secondary_id(obj/item/card/id/secondary_id, mob/user)
+	if(!isnull(alt_stored_id))
+		remove_secondary_id(user, silent = TRUE)
+
+	if(!user.transferItemToLoc(secondary_id, src))
+		return FALSE
+
+	alt_stored_id = secondary_id
+	if(!isnull(user))
+		to_chat(user, span_notice("Вы вставляете [secondary_id] в слот дополнительной карты."))
+		balloon_alert(user, "вставлен дополнительный ID")
+	playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
+
+	return TRUE
+
+/**
+ * Removes the alt ID card from the computer, and puts it in loc's hand if it's a mob
+ *
+ * Args:
+ * * user - The mob trying to remove the ID, if there is one
+ * * silent - Boolean, determines whether fluff text would be printed
+ */
+/obj/item/modular_computer/proc/remove_secondary_id(mob/user, silent = FALSE)
+	if(!alt_stored_id)
+		return FALSE
+
+	if(!issilicon(user) && in_range(src, user))
+		user.put_in_hands(alt_stored_id)
+	else
+		alt_stored_id.forceMove(drop_location())
+
+	var/obj/item/lost_id = alt_stored_id
+	alt_stored_id = null
+
+	if(!silent && !isnull(user))
+		to_chat(user, span_notice("Вы вытаскиваете [lost_id] из слота дополнительной карты."))
+		balloon_alert(user, "дополнительный ID извлечён")
+	playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
+
+	return TRUE
+
+/**
  * Removes the ID card from the computer, and puts it in loc's hand if it's a mob
  * Args:
- * user - The mob trying to remove the ID, if there is one
- * silent - Boolean, determines whether fluff text would be printed
+ * * user - The mob trying to remove the ID, if there is one
+ * * silent - Boolean, determines whether fluff text would be printed
  */
-/obj/item/modular_computer/RemoveID(mob/user, silent = FALSE)
-	if(!computer_id_slot)
+/obj/item/modular_computer/remove_id(mob/user, silent = FALSE)
+	if(!stored_id)
 		return ..()
 
 	if(crew_manifest_update)
-		GLOB.manifest.modify(computer_id_slot.registered_name, computer_id_slot.assignment, computer_id_slot.get_trim_assignment())
+		GLOB.manifest.modify(stored_id.registered_name, stored_id.assignment, stored_id.get_trim_assignment())
 
 	if(user && !issilicon(user) && in_range(src, user))
-		user.put_in_hands(computer_id_slot)
+		user.put_in_hands(stored_id)
 	else
-		computer_id_slot.forceMove(drop_location())
+		stored_id.forceMove(drop_location())
 
-	computer_id_slot = null
+	var/obj/item/lost_id = stored_id
+	stored_id = null
 
 	if(!silent && !isnull(user))
-		to_chat(user, span_notice("You remove the card from the card slot."))
-		playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
-		balloon_alert(user, "removed ID")
+		to_chat(user, span_notice("Вы вытаскиваете [lost_id] со слота карты."))
+		balloon_alert(user, "извлечён ID")
+	playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
 
 	if(ishuman(loc))
 		var/mob/living/carbon/human/human_wearer = loc
 		if(human_wearer.wear_id == src)
-			human_wearer.sec_hud_set_ID()
+			human_wearer.update_ID_card()
 
 	update_slot_icon()
 	update_appearance()
@@ -357,12 +418,12 @@
 
 /obj/item/modular_computer/emag_act(mob/user, obj/item/card/emag/emag_card, forced)
 	if(!enabled && !forced)
-		balloon_alert(user, "turn it on first!")
+		balloon_alert(user, "сначала включите!")
 		return FALSE
 	if(obj_flags & EMAGGED)
-		balloon_alert(user, "already emagged!")
+		balloon_alert(user, "уже емагнут!")
 		if (emag_card)
-			to_chat(user, span_notice("You swipe \the [src] with [emag_card]. A console window fills the screen, but it quickly closes itself after only a few lines are written to it."))
+			to_chat(user, span_notice("Вы проводите по [declent_ru(DATIVE)] [emag_card.declent_ru(INSTRUMENTAL)]. Окно консоли включается, но оно быстро закрывается после того, как в него записывается всего несколько строк."))
 		return FALSE
 
 	. = ..()
@@ -371,9 +432,9 @@
 	obj_flags |= EMAGGED
 	device_theme = PDA_THEME_SYNDICATE
 	if(user)
-		balloon_alert(user, "syndieOS loaded")
+		balloon_alert(user, "syndieOS загружен")
 		if (emag_card)
-			to_chat(user, span_notice("You swipe \the [src] with [emag_card]. A console window momentarily fills the screen, with white text rapidly scrolling past."))
+			to_chat(user, span_notice("Вы проводите по [declent_ru(DATIVE)] [emag_card.declent_ru(INSTRUMENTAL)]. Окно консоли на мгновение заполняет белый текст, быстро прокручиваемый по экрану."))
 	return TRUE
 
 /obj/item/modular_computer/examine(mob/user)
@@ -388,53 +449,63 @@
 			. += span_warning("Разваливается на части!")
 
 	if(long_ranged)
-		. += "It is upgraded with an experimental long-ranged network capabilities, picking up NTNet frequencies while further away."
-	. += span_notice("It has [max_capacity] GQ of storage capacity.")
+		. += "Он оснащён экспериментальными сетевыми возможностями дальнего действия, позволяющими работать на частотах NTNet на удалении."
+	. += span_notice("Ёмкость жёсткого диска [max_capacity] GQ.")
 
-	if(computer_id_slot)
+	if(stored_id)
 		if(Adjacent(user))
-			. += "It has \the [computer_id_slot] card installed in its card slot."
+			. += "Внутри имеется [stored_id] в слоте карты.[alt_stored_id ? "" : " [span_info("Alt+ЛКМ, чтобы вытащить.")]"]"
 		else
-			. += "Its identification card slot is currently occupied."
-		. += span_info("Alt-click [src] to eject the identification card.")
+			. += "Слот ID-карты занят."
+
+	if(alt_stored_id)
+		if(Adjacent(user))
+			. += "Внутри имеется [alt_stored_id] в дополнительном слоте карты. [span_info("Alt+ЛКМ, чтобы вытащить.")]"
+		else
+			. += "Дополнительный слот ID-карты занят."
 
 	if(internal_cell)
-		. += span_info("Right-click it with a screwdriver to eject the [internal_cell]")
+		. += span_info("ПКМ с отвёрткой, чтобы вытащить [internal_cell.declent_ru(ACCUSATIVE)].")
 
 /obj/item/modular_computer/examine_more(mob/user)
 	. = ..()
-	. += "Storage capacity: [used_capacity]/[max_capacity]GQ"
+	. += "Жёсткий диск: [used_capacity]/[max_capacity]GQ"
 
 	for(var/datum/computer_file/app_examine as anything in stored_files)
 		if(app_examine.on_examine(src, user))
 			. += app_examine.on_examine(src, user)
 
 	if(Adjacent(user))
-		. += span_notice("Paper level: [stored_paper] / [max_paper].")
+		. += span_notice("Количество бумаги: [stored_paper] / [max_paper].")
 
 /obj/item/modular_computer/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	. = ..()
 
-	if(computer_id_slot && isidcard(held_item))
-		context[SCREENTIP_CONTEXT_LMB] = "Swap ID"
+	if(isidcard(held_item))
+		context[SCREENTIP_CONTEXT_LMB] = stored_id ? "Поменять ID" : "Вставить ID"
+		if(HAS_TRAIT(src, TRAIT_MODPC_TWO_ID_SLOTS))
+			context[SCREENTIP_CONTEXT_RMB] = alt_stored_id ? "Поменять дополнительный ID" : "Вставить дополнительный ID"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item?.tool_behaviour == TOOL_SCREWDRIVER && internal_cell)
-		context[SCREENTIP_CONTEXT_RMB] = "Remove Cell"
+		context[SCREENTIP_CONTEXT_RMB] = "Вытащить батарею"
 		. = CONTEXTUAL_SCREENTIP_SET
 	if(held_item?.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_RMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_RMB] = "Разрушить"
 		. = CONTEXTUAL_SCREENTIP_SET
 
-	if(computer_id_slot) // ID get removed first before pAIs
-		context[SCREENTIP_CONTEXT_ALT_LMB] = "Remove ID"
+	if(alt_stored_id)
+		context[SCREENTIP_CONTEXT_ALT_RMB] = "Вытащить дополнительный ID"
+		. = CONTEXTUAL_SCREENTIP_SET
+	if(stored_id) // ID get removed first before pAIs
+		context[SCREENTIP_CONTEXT_ALT_LMB] = "Вытащить ID"
 		. = CONTEXTUAL_SCREENTIP_SET
 	else if(inserted_pai)
-		context[SCREENTIP_CONTEXT_ALT_LMB] = "Remove pAI"
+		context[SCREENTIP_CONTEXT_ALT_LMB] = "Вытащить пИИ"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(inserted_disk)
-		context[SCREENTIP_CONTEXT_CTRL_SHIFT_LMB] = "Remove Disk"
+		context[SCREENTIP_CONTEXT_CTRL_SHIFT_LMB] = "Вытащить диск"
 		. = CONTEXTUAL_SCREENTIP_SET
 	return . || NONE
 
@@ -457,12 +528,14 @@
 		internal_cell = null
 		if(enabled && !use_energy())
 			shutdown_computer()
-	if(computer_id_slot == gone)
-		computer_id_slot = null
+	if(stored_id == gone)
+		stored_id = null
 		update_slot_icon()
 		if(ishuman(loc))
 			var/mob/living/carbon/human/human_wearer = loc
-			human_wearer.sec_hud_set_ID()
+			human_wearer.update_ID_card()
+	if(alt_stored_id == gone)
+		alt_stored_id = null
 	if(inserted_pai == gone)
 		update_appearance(UPDATE_ICON)
 	if(inserted_disk == gone)
@@ -485,9 +558,9 @@
 	if(atom_integrity <= integrity_failure * max_integrity)
 		if(user)
 			if(issynth)
-				to_chat(user, span_warning("You send an activation signal to \the [src], but it responds with an error code. It must be damaged."))
+				to_chat(user, span_warning("Вы отправляете сигнал активации на [declent_ru(ACCUSATIVE)], но он выдаёт код ошибки. Должно быть, он повреждён."))
 			else
-				to_chat(user, span_warning("You press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again."))
+				to_chat(user, span_warning("Вы нажимаете кнопку питания, но компьютер не загружается, отображая различные ошибки, прежде чем снова выключиться."))
 		return FALSE
 
 	if(use_energy(base_active_power_usage)) // checks if the PC is powered
@@ -497,9 +570,9 @@
 		update_appearance()
 		if(user)
 			if(issynth)
-				to_chat(user, span_notice("You send an activation signal to \the [src], turning it on."))
+				to_chat(user, span_notice("Вы отправляете сигнал активации на [declent_ru(ACCUSATIVE)], включая его."))
 			else
-				to_chat(user, span_notice("You press the power button and start up \the [src]."))
+				to_chat(user, span_notice("Вы нажимаете кнопку питания, включая [declent_ru(ACCUSATIVE)]."))
 			if(open_ui)
 				update_tablet_open_uis(user)
 		SEND_SIGNAL(src, COMSIG_MODULAR_COMPUTER_TURNED_ON, user)
@@ -507,9 +580,9 @@
 	else // Unpowered
 		if(user)
 			if(issynth)
-				to_chat(user, span_warning("You send an activation signal to \the [src] but it does not respond."))
+				to_chat(user, span_warning("Вы отправляете сигнал активации на [declent_ru(ACCUSATIVE)], но он не отвечает."))
 			else
-				to_chat(user, span_warning("You press the power button but \the [src] does not respond."))
+				to_chat(user, span_warning("Вы нажимаете кнопку питания [declent_ru(ACCUSATIVE)], но он не отвечает."))
 		return FALSE
 
 // Process currently calls handle_power(), may be expanded in future if more things are added.
@@ -552,7 +625,7 @@
 	if(!call_source || !call_source.alert_able || call_source.alert_silenced || !alerttext) //Yeah, we're checking alert_able. No, you don't get to make alerts that the user can't silence.
 		return FALSE
 	playsound(src, sound, 50, TRUE)
-	physical.loc.visible_message(span_notice("[icon2html(physical, viewers(physical.loc))] \The [src] displays a [call_source.filedesc] notification: [alerttext]"))
+	physical.loc.visible_message(span_notice("[icon2html(physical, viewers(physical.loc))] Монитор [declent_ru(GENITIVE)] показывает уведомление [call_source.filedesc]: [alerttext]"))
 
 /obj/item/modular_computer/proc/ring(ringtone, list/balloon_alertees) // bring bring
 	if(!use_energy())
@@ -629,7 +702,7 @@
 
 	if(isnull(program) || !istype(program)) // Program not found or it's not executable program.
 		if(user)
-			to_chat(user, span_danger("\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning."))
+			to_chat(user, span_danger("Монитор [declent_ru(GENITIVE)] показывает предупреждение \"ОШИБКА ВВОДА/ВЫВОДА - Невозможно запустить программу\"."))
 		return FALSE
 
 	if(active_program == program)
@@ -651,12 +724,12 @@
 
 	if(idle_threads.len > max_idle_programs)
 		if(user)
-			to_chat(user, span_danger("\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error."))
+			to_chat(user, span_danger("[declent_ru(NOMINATIVE)] показывает ошибку \"Максимальная нагрузка на ЦП. Не удаётся запустить другую программу.\"."))
 		return FALSE
 
 	if(program.program_flags & PROGRAM_REQUIRES_NTNET && !get_ntnet_status()) // The program requires NTNet connection, but we are not connected to NTNet.
 		if(user)
-			to_chat(user, span_danger("\The [src]'s screen shows \"Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning."))
+			to_chat(user, span_danger("[declent_ru(NOMINATIVE)] показывает предупреждение \"Не удаётся подключиться к NTNet. Пожалуйста, повторите попытку. Если проблема не устраняется, обратитесь к своему системному администратору.\"."))
 		return FALSE
 
 	if(!program.on_start(user))
@@ -698,7 +771,7 @@
 	if(!get_ntnet_status())
 		return FALSE
 
-	return SSmodular_computers.add_log("[src]: [text]")
+	return SSmodular_computers.add_log("[declent_ru(NOMINATIVE)]: [text]")
 
 /obj/item/modular_computer/proc/close_all_programs()
 	active_program?.kill_program()
@@ -710,7 +783,7 @@
 	if(looping_sound)
 		soundloop.stop()
 	if(physical && loud)
-		physical.visible_message(span_notice("\The [src] shuts down."))
+		physical.visible_message(span_notice("[declent_ru(NOMINATIVE)] выключается."))
 	enabled = FALSE
 	update_appearance()
 	SEND_SIGNAL(src, COMSIG_MODULAR_COMPUTER_SHUT_DOWN, loud)
@@ -718,8 +791,8 @@
 ///Imprints name and job into the modular computer, and calls back to necessary functions.
 ///Acts as a replacement to directly setting the imprints fields. All fields are optional, the proc will try to fill in missing gaps.
 /obj/item/modular_computer/proc/imprint_id(name = null, job_name = null)
-	saved_identification = name || computer_id_slot?.registered_name || saved_identification
-	saved_job = job_name || computer_id_slot?.assignment || saved_job
+	saved_identification = name || stored_id?.registered_name || saved_identification
+	saved_job = job_name || stored_id?.assignment || saved_job
 	SEND_SIGNAL(src, COMSIG_MODULAR_PDA_IMPRINT_UPDATED, saved_identification, saved_job)
 	UpdateDisplay()
 
@@ -750,7 +823,7 @@
 		return FALSE
 	if(!COOLDOWN_FINISHED(src, disabled_time))
 		if(user)
-			balloon_alert(user, "disrupted!")
+			balloon_alert(user, "сбой!")
 		return FALSE
 	set_light_on(!light_on)
 	update_appearance()
@@ -787,45 +860,51 @@
 	if(!saved_identification && !saved_job)
 		name = initial(name)
 		return
-	name = "[saved_identification] ([saved_job])"
+	name = "КПК «[saved_identification]» ([saved_job])"
 
 /obj/item/modular_computer/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	. = ..()
 	if(internal_cell)
-		user.balloon_alert(user, "cell removed")
+		user.balloon_alert(user, "батарея извлечена")
 		internal_cell.forceMove(drop_location())
 		internal_cell = null
 		return ITEM_INTERACT_SUCCESS
 	else
-		user.balloon_alert(user, "no cell!")
+		user.balloon_alert(user, "нет батареи!")
 
 /obj/item/modular_computer/wrench_act_secondary(mob/living/user, obj/item/tool)
 	. = ..()
 	tool.play_tool_sound(src, user, 20, volume=20)
 	deconstruct(TRUE)
-	user.balloon_alert(user, "disassembled")
+	user.balloon_alert(user, "разобрано")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/modular_computer/welder_act(mob/living/user, obj/item/tool)
 	. = ..()
 	if(atom_integrity == max_integrity)
-		to_chat(user, span_warning("\The [src] does not require repairs."))
+		to_chat(user, span_warning("[declent_ru(NOMINATIVE)] не требует починки."))
 		return ITEM_INTERACT_SUCCESS
 
 	if(!tool.tool_start_check(user, amount=1))
 		return ITEM_INTERACT_SUCCESS
 
-	to_chat(user, span_notice("You begin repairing damage to \the [src]..."))
+	to_chat(user, span_notice("Вы начинаете чинить повреждения [declent_ru(ACCUSATIVE)]..."))
 	if(!tool.use_tool(src, user, 20, volume=50))
 		return ITEM_INTERACT_SUCCESS
 	atom_integrity = max_integrity
-	to_chat(user, span_notice("You repair \the [src]."))
+	to_chat(user, span_notice("Вы чините [declent_ru(ACCUSATIVE)]."))
 	update_appearance()
 	return ITEM_INTERACT_SUCCESS
 
+/obj/item/modular_computer/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(isidcard(tool) && HAS_TRAIT(src, TRAIT_MODPC_TWO_ID_SLOTS))
+		return insert_secondary_id(tool, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+
+	return item_interaction(user, tool, modifiers)
+
 /obj/item/modular_computer/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(isidcard(tool))
-		return InsertID(tool, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+		return insert_id(tool, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 	if(iscash(tool))
 		return money_act(user, tool)
@@ -854,10 +933,12 @@
 	if(istype(tool, /obj/item/computer_disk))
 		return computer_disk_act(user, tool)
 
+	return NONE
+
 /obj/item/modular_computer/proc/money_act(mob/user, obj/item/money)
-	var/obj/item/card/id/inserted_id = computer_id_slot?.GetID()
+	var/obj/item/card/id/inserted_id = stored_id?.GetID()
 	if(!inserted_id)
-		balloon_alert(user, "no ID!")
+		balloon_alert(user, "нет ID!")
 		return ITEM_INTERACT_BLOCKING
 	return inserted_id.insert_money(money, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
@@ -867,7 +948,7 @@
 	if(!user.transferItemToLoc(card, src))
 		return ITEM_INTERACT_BLOCKING
 	inserted_pai = card
-	balloon_alert(user, "inserted pai")
+	balloon_alert(user, "пИИ установлен")
 	if(inserted_pai.pai)
 		inserted_pai.pai.give_messenger_ability()
 	update_appearance(UPDATE_ICON)
@@ -877,28 +958,28 @@
 	if(ismachinery(physical))
 		return ITEM_INTERACT_BLOCKING
 	if(internal_cell)
-		to_chat(user, span_warning("You try to connect \the [new_cell] to \the [src], but its connectors are occupied."))
+		to_chat(user, span_warning("Вы пытаетесь установить [new_cell.declent_ru(ACCUSATIVE)] к [declent_ru(DATIVE)], но разъём уже занят."))
 		return ITEM_INTERACT_BLOCKING
 	if(!user.transferItemToLoc(new_cell, src))
 		return ITEM_INTERACT_BLOCKING
 	internal_cell = new_cell
-	to_chat(user, span_notice("You plug \the [new_cell] to \the [src]."))
+	to_chat(user, span_notice("Вы вставляете [new_cell.declent_ru(ACCUSATIVE)] в [declent_ru(DATIVE)]."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/modular_computer/proc/photo_act(mob/user, obj/item/photo/scanned_photo)
 	if(!store_file(new /datum/computer_file/picture(scanned_photo.picture)))
-		balloon_alert(user, "no space!")
+		balloon_alert(user, "нет места!")
 		return ITEM_INTERACT_BLOCKING
-	balloon_alert(user, "photo scanned")
+	balloon_alert(user, "фото отсканировано")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/modular_computer/proc/paper_act(mob/user, obj/item/paper/new_paper)
 	if(stored_paper >= max_paper)
-		balloon_alert(user, "no more room!")
+		balloon_alert(user, "нет больше места!")
 		return ITEM_INTERACT_BLOCKING
 	if(!user.temporarilyRemoveItemFromInventory(new_paper))
 		return ITEM_INTERACT_BLOCKING
-	balloon_alert(user, "inserted paper")
+	balloon_alert(user, "бумага вставлена")
 	qdel(new_paper)
 	playsound(src, 'sound/machines/computer/paper_insert.ogg', 40, vary = TRUE)
 	stored_paper++
@@ -906,7 +987,7 @@
 
 /obj/item/modular_computer/proc/paper_bin_act(mob/user, obj/item/paper_bin/bin)
 	if(bin.total_paper <= 0)
-		balloon_alert(user, "empty bin!")
+		balloon_alert(user, "корзина пуста!")
 		return ITEM_INTERACT_BLOCKING
 	var/papers_added //just to keep track
 	while((bin.total_paper > 0) && (stored_paper < max_paper))
@@ -915,8 +996,8 @@
 		bin.remove_paper()
 	if(!papers_added)
 		return ITEM_INTERACT_BLOCKING
-	balloon_alert(user, "inserted paper")
-	to_chat(user, span_notice("Added in [papers_added] new sheets. You now have [stored_paper] / [max_paper] printing paper stored."))
+	balloon_alert(user, "бумага вставлена")
+	to_chat(user, span_notice("Добавлено [papers_added] новых листов. У вас теперь [stored_paper] / [max_paper] сохранённой бумага для печати."))
 	playsound(src, 'sound/machines/computer/paper_insert.ogg', 40, vary = TRUE)
 	bin.update_appearance()
 	return ITEM_INTERACT_SUCCESS
@@ -926,24 +1007,24 @@
 		return ITEM_INTERACT_BLOCKING
 	if(inserted_disk)
 		user.put_in_hands(inserted_disk)
-		balloon_alert(user, "disks swapped")
+		balloon_alert(user, "диски поменяны местами")
 	else
-		balloon_alert(user, "disk inserted")
+		balloon_alert(user, "диск вставлен")
 	inserted_disk = disk
 	playsound(src, 'sound/machines/card_slide.ogg', 50)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/modular_computer/atom_deconstruct(disassembled = TRUE)
+	var/atom/droploc = drop_location()
 	remove_pai()
 	eject_aicard()
-	if (disassembled)
-		internal_cell?.forceMove(drop_location())
-		computer_id_slot?.forceMove(drop_location())
-		inserted_disk?.forceMove(drop_location())
-		new /obj/item/stack/sheet/iron(drop_location(), steel_sheet_cost)
-	else
-		physical.visible_message(span_notice("\The [src] breaks apart!"))
-		new /obj/item/stack/sheet/iron(drop_location(), round(steel_sheet_cost * 0.5))
+	internal_cell?.forceMove(droploc)
+	stored_id?.forceMove(droploc)
+	alt_stored_id?.forceMove(droploc)
+	inserted_disk?.forceMove(droploc)
+	if (!disassembled)
+		physical.visible_message(span_notice("[declent_ru(NOMINATIVE)] распадается на части!"))
+	new /obj/item/stack/sheet/iron(droploc, steel_sheet_cost * (disassembled ? 1 : 0.5))
 	relay_qdel()
 
 // Ejects the inserted intellicard, if one exists. Used when the computer is deconstructed.
@@ -974,7 +1055,7 @@
 		inserted_pai.pai.remove_messenger_ability()
 	if(user)
 		user.put_in_hands(inserted_pai)
-		balloon_alert(user, "removed pAI")
+		balloon_alert(user, "пИИ извлечён")
 	else
 		inserted_pai.forceMove(drop_location())
 	inserted_pai = null
@@ -998,7 +1079,7 @@
 		if(SEC_LEVEL_RED) // all-hands-on-deck situations, everyone is responsible for combatting a threat
 			return ALERT_RELEVANCY_PERTINENT
 		if(SEC_LEVEL_BLUE) // suspected threat. security needs to be alert and possibly preparing for it, no further concerns
-			if(ACCESS_SECURITY in computer_id_slot?.access)
+			if(ACCESS_SECURITY in stored_id?.access)
 				return ALERT_RELEVANCY_PERTINENT
 			else
 				return ALERT_RELEVANCY_WARN

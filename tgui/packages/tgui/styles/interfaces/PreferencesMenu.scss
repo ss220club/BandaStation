@@ -362,14 +362,6 @@ $department_map: (
       background-size: 250%;
       animation: captain 4s infinite ease-in-out;
 
-      &:before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-color: var(--background-color);
-        z-index: 0;
-      }
-
       .job-name {
         position: relative;
         font-size: 1.15em;
@@ -741,5 +733,33 @@ $department_map: (
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+// MARK: AugmentationsPage
+.PreferencesMenu__Augmentations {
+  position: absolute;
+  top: 1rem;
+  right: 20vw;
+  width: 50vw;
+  height: calc(100% - 2rem);
+
+  &Title {
+    align-items: center;
+    font-size: 1.33rem;
+  }
+
+  &Row {
+    line-height: 1;
+    align-items: center;
+
+    &--name {
+      flex: 1 1 66%;
+      font-weight: bold;
+    }
+  }
+
+  .Dropdown {
+    margin: 0;
   }
 }

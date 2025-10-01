@@ -941,12 +941,8 @@ em {
 }
 
 .upside_down {
-  display: inline;
-  -moz-transform: scale(-1, -1);
-  -webkit-transform: scale(-1, -1);
-  -o-transform: scale(-1, -1);
-  -ms-transform: scale(-1, -1);
-  transform: scale(-1, -1);
+  transform: rotate(180deg);
+  display: inline-block;
 }
 
 .connectionClosed,
@@ -1278,9 +1274,13 @@ $border-width-px: $border-width * 1px;
   }
 }
 
-//MARK:  BANDASTATION
+//MARK: BANDASTATION
 .looc {
   color: #6699cc;
+}
+
+.justiceradio {
+  color: #df3e71;
 }
 
 .tooltip-img > span {

@@ -619,8 +619,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 /datum/species/proc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	SHOULD_CALL_PARENT(TRUE)
-	if(H.stat == DEAD)
-		return
 	if(HAS_TRAIT(H, TRAIT_NOBREATH) && (H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
 		H.adjustBruteLoss(0.5 * seconds_per_tick)
 
@@ -740,15 +738,14 @@ GLOBAL_LIST_EMPTY(features_by_species)
 				if(!disable_warning)
 					to_chat(H, span_warning("Вам нужно сперва надеть костюм, чтобы прикрепить [I.declent_ru(ACCUSATIVE)]!"))
 				return FALSE
-			if(!H.wear_suit.allowed)
-				if(!disable_warning)
-					to_chat(H, span_warning("Каким-то образом этот костюм не имеет списка разрешенных хранимых предметов. Сообщите кодерам!"))
-				return FALSE
+			var/any_suit_storage = (is_type_in_typecache(I, GLOB.any_suit_storage) || I.w_class == WEIGHT_CLASS_TINY)
+			if(any_suit_storage)
+				return TRUE
 			if(I.w_class > WEIGHT_CLASS_BULKY)
 				if(!disable_warning)
 					to_chat(H, span_warning("[capitalize(I.declent_ru(NOMINATIVE))] имеет слишком большой размер!")) //should be src?
 				return FALSE
-			if( istype(I, /obj/item/modular_computer/pda) || istype(I, /obj/item/pen) || is_type_in_list(I, H.wear_suit.allowed) )
+			if( is_type_in_list(I, H.wear_suit.allowed) )
 				return TRUE
 			return FALSE
 		if(ITEM_SLOT_HANDCUFFED)
@@ -811,7 +808,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	if(time_since_irradiated > RAD_MOB_HAIRLOSS && SPT_PROB(RAD_MOB_HAIRLOSS_PROB, seconds_per_tick))
 		var/obj/item/bodypart/head/head = source.get_bodypart(BODY_ZONE_HEAD)
-		if(!(source.hairstyle == "Bald") && (head?.head_flags & HEAD_HAIR|HEAD_FACIAL_HAIR))
+		if(!(source.hairstyle == "Bald") && (head?.head_flags & (HEAD_HAIR|HEAD_FACIAL_HAIR)))
 			to_chat(source, span_danger("Ваши волосы начинают выпадать клочьями..."))
 			addtimer(CALLBACK(src, PROC_REF(go_bald), source), 5 SECONDS)
 
@@ -850,11 +847,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		return FALSE
 
 	var/obj/item/organ/brain/brain = user.get_organ_slot(ORGAN_SLOT_BRAIN)
-	var/obj/item/bodypart/attacking_bodypart
-	if(brain)
-		attacking_bodypart = brain.get_attacking_limb(target)
-	if(!attacking_bodypart)
-		attacking_bodypart = user.get_active_hand()
+	var/obj/item/bodypart/attacking_bodypart = attacker_style?.get_attacking_limb(user, target) || brain?.get_attacking_limb(target) || user.get_active_hand()
 
 	// Whether or not we get some protein for a successful attack. Nom.
 	var/biting = FALSE
@@ -890,8 +883,22 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	//Someone in a grapple is much more vulnerable to being harmed by punches.
 	var/grappled = (target.pulledby && target.pulledby.grab_state >= GRAB_AGGRESSIVE)
 
-	var/damage = rand(attacking_bodypart.unarmed_damage_low, attacking_bodypart.unarmed_damage_high)
+	// Our lower and upper unarmed damage values. Damage is rolled between these two values.
+	var/lower_unarmed_damage = attacking_bodypart.unarmed_damage_low
+	var/upper_unarmed_damage = attacking_bodypart.unarmed_damage_high
+
+	// The presence of TRAIT_STRENGTH increases our upper unarmed damage. This is a damage cap increase.
+	upper_unarmed_damage += HAS_TRAIT(user, TRAIT_STRENGTH) ? 2 : 0
+
+	// Out athletics skill is used to set our potential base damage roll. It won't increase our potential damage roll, but will make our unarmed attack more consistent.
+	// For a normal human arm, this would cap at 10, and for a normal human leg, this would go up to 14.
+	lower_unarmed_damage =  min(lower_unarmed_damage + (user.mind?.get_skill_level(/datum/skill/athletics) || 0), upper_unarmed_damage)
+
+	// The actual damage roll. May still be augmented by further factors.
+	var/damage = rand(lower_unarmed_damage, upper_unarmed_damage)
+	// Limb accuracy is used to determine miss probabilities (higher the value, the less likely you are to miss), armor penetration (if entitled) and the possible result from a stagger combo hit.
 	var/limb_accuracy = attacking_bodypart.unarmed_effectiveness
+	// Limb sharpness determines the type of wounds this unarmed strike could possibly roll. By default, most limbs are blunt and have no sharpness.
 	var/limb_sharpness = attacking_bodypart.unarmed_sharpness
 
 	if(grappled)
@@ -930,7 +937,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	var/obj/item/bodypart/affecting = target.get_bodypart(hit_zone)
 
 	var/miss_chance = 100//calculate the odds that a punch misses entirely. considers stamina and brute damage of the puncher. punches miss by default to prevent weird cases
-	if(attacking_bodypart.unarmed_damage_low)
+	if(lower_unarmed_damage)
 		if((target.body_position == LYING_DOWN) || HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER) || staggered || user_drunkenness && HAS_TRAIT(user, TRAIT_DRUNKEN_BRAWLER)) //kicks and attacks against staggered targets never miss (provided your species deals more than 0 damage). Drunken brawlers while drunk also don't miss
 			miss_chance = 0
 		else
@@ -1000,6 +1007,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		tasty_meal.trans_to(user, tasty_meal.total_volume, transferred_by = user, methods = INGEST)
 
 	SEND_SIGNAL(target, COMSIG_HUMAN_GOT_PUNCHED, user, damage, attack_type, affecting, final_armor_block, kicking, limb_sharpness)
+	SEND_SIGNAL(user, COMSIG_HUMAN_PUNCHED, target, damage, attack_type, affecting, final_armor_block, kicking, limb_sharpness)
 
 	// If our target is staggered and has sustained enough damage, we can apply a randomly determined status effect to inflict when we punch them.
 	// The effects are based on the punching effectiveness of our attacker. Some effects are not reachable by the average human, and require augmentation to reach or being a species with a heavy punch effectiveness.
@@ -1014,8 +1022,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 /// Handles the stagger combo effect of our punch. Follows the same logic as the above proc, target is our owner, user is our attacker.
 /datum/species/proc/stagger_combo(mob/living/carbon/human/user, mob/living/carbon/human/target, atk_verb = "ударяет", limb_accuracy = 0, armor_block = 0)
-	// Randomly determines the effects of our punch. Limb accuracy is a bonus, armor block is a defense
-	var/roll_them_bones = rand(-20, 20) + limb_accuracy - armor_block
+	// Randomly determines the effects of our punch. Limb accuracy is a bonus, armor block is a defense, attacker athletics provides a minor to significant bonus.
+	var/roll_them_bones = rand(-20, 20) + limb_accuracy - armor_block + ((user.mind?.get_skill_modifier(/datum/skill/athletics, SKILL_RANDS_MODIFIER) / 2) || 0)
 
 	switch(roll_them_bones)
 		if (-INFINITY to 0) //Mostly a gimmie, this one just keeps them staggered briefly
@@ -1121,19 +1129,19 @@ GLOBAL_LIST_EMPTY(features_by_species)
  * * humi (required)(type: /mob/living/carbon/human) The mob we will target
  */
 /datum/species/proc/handle_body_temperature(mob/living/carbon/human/humi, seconds_per_tick, times_fired)
-	//when in a cryo unit we suspend all natural body regulation
+	// When in a cryo unit we suspend all natural body regulation
 	if(istype(humi.loc, /obj/machinery/cryo_cell))
 		return
 
-	//Only stabilise core temp when alive and not in statis
+	// Only stabilise core temp when alive and not in statis
 	if(humi.stat < DEAD && !HAS_TRAIT(humi, TRAIT_STASIS))
 		body_temperature_core(humi, seconds_per_tick, times_fired)
 
-	//These do run in statis
+	// These do run in statis
 	body_temperature_skin(humi, seconds_per_tick, times_fired)
 	body_temperature_alerts(humi, seconds_per_tick, times_fired)
 
-	//Do not cause more damage in statis
+	// Do not cause more damage in statis
 	if(!HAS_TRAIT(humi, TRAIT_STASIS))
 		body_temperature_damage(humi, seconds_per_tick, times_fired)
 

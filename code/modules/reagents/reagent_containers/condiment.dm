@@ -13,7 +13,7 @@
 	inhand_icon_state = "beer" //Generic held-item sprite until unique ones are made.
 	lefthand_file = 'icons/mob/inhands/items/drinks_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/drinks_righthand.dmi'
-	reagent_flags = OPENCONTAINER
+	initial_reagent_flags = OPENCONTAINER
 	obj_flags = UNIQUE_RENAME
 	possible_transfer_amounts = list(1, 5, 10, 15, 20, 25, 30, 50)
 	volume = 50
@@ -40,57 +40,59 @@
 	user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] пытается проглотить [declent_ru(ACCUSATIVE)] целиком! Кажется, [ru_p_they()] не знает, как работает еда!"))
 	return OXYLOSS
 
-/obj/item/reagent_containers/condiment/attack(mob/M, mob/user, def_zone)
+/obj/item/reagent_containers/condiment/proc/try_eat(atom/target, mob/living/user)
+	if(!canconsume(target, user))
+		return ITEM_INTERACT_BLOCKING
 
-	if(!reagents || !reagents.total_volume)
-		to_chat(user, span_warning("Внутри [declent_ru(GENITIVE)] пусто, о нет!"))
-		return FALSE
-
-	if(!canconsume(M, user))
-		return FALSE
-
-	if(M == user)
-		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] проглатывает немного содержимого [declent_ru(GENITIVE)]."), \
-			span_notice("Вы проглотили немного содержимого [declent_ru(GENITIVE)]."))
+	if(target == user)
+		user.visible_message(
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] проглатывает немного содержимого [declent_ru(GENITIVE)]."),
+			span_notice("Вы проглотили немного содержимого [declent_ru(GENITIVE)]."),
+		)
 	else
-		M.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] пытается накормить [M.declent_ru(ACCUSATIVE)] c помощью [declent_ru(GENITIVE)]."), \
-			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] пытается накормить вас [declent_ru(INSTRUMENTAL)]."))
-		if(!do_after(user, 3 SECONDS, M))
-			return
+		target.visible_message(
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] пытается накормить [target.declent_ru(ACCUSATIVE)] c помощью [declent_ru(GENITIVE)]."),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] пытается накормить вас [declent_ru(INSTRUMENTAL)]."),
+		)
+		if(!do_after(user, 3 SECONDS, target))
+			return ITEM_INTERACT_BLOCKING
 		if(!reagents || !reagents.total_volume)
-			return // The condiment might be empty after the delay.
-		M.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] кормит [M.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]."), \
-			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] кормит вас [declent_ru(INSTRUMENTAL)]"))
-		log_combat(user, M, "fed", reagents.get_reagent_log_string())
-	reagents.trans_to(M, 10, transferred_by = user, methods = INGEST)
-	playsound(M.loc,'sound/items/drink.ogg', rand(10,50), TRUE)
-	return TRUE
+			return ITEM_INTERACT_BLOCKING // The condiment might be empty after the delay.
+		target.visible_message(
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] кормит [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]."),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] кормит вас [declent_ru(INSTRUMENTAL)]"),
+		)
+		log_combat(user, target, "fed", reagents.get_reagent_log_string())
+	reagents.trans_to(target, 10, transferred_by = user, methods = INGEST)
+	playsound(target, 'sound/items/drink.ogg', rand(10, 50), TRUE)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/condiment/interact_with_atom(atom/target, mob/living/user, list/modifiers)
-	if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
-		if(!target.reagents.total_volume)
-			to_chat(user, span_warning("Внутри [target.declent_ru(GENITIVE)] пусто!"))
-			return ITEM_INTERACT_BLOCKING
-
-		if(reagents.total_volume >= reagents.maximum_volume)
-			to_chat(user, span_warning("Внутри [declent_ru(GENITIVE)] нет места!"))
-			return ITEM_INTERACT_BLOCKING
-
-		var/trans = round(target.reagents.trans_to(src, amount_per_transfer_from_this, transferred_by = user), CHEMICAL_VOLUME_ROUNDING)
-		to_chat(user, span_notice("Вы наполняете [declent_ru(ACCUSATIVE)] на [trans] [declension_ru(trans,"юнит","юнита","юнитов")] из [target.declent_ru(GENITIVE)]."))
-		return ITEM_INTERACT_SUCCESS
+	if(!is_open_container())
+		return NONE
 
 	//Something like a glass or a food item. Player probably wants to transfer TO it.
-	else if(target.is_drainable() || IS_EDIBLE(target))
-		if(!reagents.total_volume)
-			to_chat(user, span_warning("Внутри [declent_ru(GENITIVE)] пусто!"))
-			return ITEM_INTERACT_BLOCKING
-		if(target.reagents.total_volume >= target.reagents.maximum_volume)
-			to_chat(user, span_warning("Внутри [target.declent_ru(GENITIVE)] недостаточно места!"))
-			return ITEM_INTERACT_BLOCKING
-		var/trans = round(reagents.trans_to(target, amount_per_transfer_from_this, transferred_by = user), CHEMICAL_VOLUME_ROUNDING)
-		to_chat(user, span_notice("Вы переносите [trans] [declension_ru(trans,"юнит","юнита","юнитов")] в [target.declent_ru(ACCUSATIVE)]."))
-		return ITEM_INTERACT_SUCCESS
+	if(target.is_refillable() || IS_EDIBLE(target))
+		return try_refill(target, user)
+	//A dispenser. Transfer FROM it TO us.
+	if(target.is_drainable())
+		return try_drain(target, user)
+	//Eating directly from the ketchup packet
+	if(isliving(target))
+		return try_eat(target, user)
+
+	return NONE
+
+
+/obj/item/reagent_containers/condiment/interact_with_atom_secondary(atom/target, mob/living/user, list/modifiers)
+	. = ..()
+	if(. & ITEM_INTERACT_ANY_BLOCKER)
+		return .
+	if(!is_open_container())
+		return NONE
+	//A dispenser. Transfer FROM it TO us.
+	if(target.is_drainable())
+		return try_drain(target, user)
 
 	return NONE
 
@@ -443,8 +445,8 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-/obj/item/reagent_containers/condiment/pack/attack(mob/M, mob/user, def_zone) //Can't feed these to people directly.
-	return
+/obj/item/reagent_containers/condiment/pack/try_eat(atom/target, mob/living/user)
+	return NONE
 
 /obj/item/reagent_containers/condiment/pack/interact_with_atom(atom/target, mob/living/user, list/modifiers)
 	//You can tear the bag open above food to put the condiments on it, obviously.

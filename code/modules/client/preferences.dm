@@ -88,6 +88,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	/// If set to TRUE, will update character_profiles on the next ui_data tick.
 	var/tainted_character_profiles = FALSE
 
+	var/list/custom_emote_panel = list() // BANDASTATION ADD - Emote Panel
+
 /datum/preferences/Destroy(force)
 	QDEL_NULL(character_preview_view)
 	QDEL_LIST(middleware)
@@ -101,8 +103,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		middleware += new middleware_type(src)
 
 	if(IS_CLIENT_OR_MOCK(parent))
-		load_and_save = !is_guest_key(parent.key)
-		load_path(parent.ckey)
+		if(is_guest_key(parent.key))
+			if(parent.is_localhost())
+				path = DEV_PREFS_PATH // guest + locallost = dev instance, load dev preferences if possible
+			else
+				load_and_save = FALSE // guest + not localhost = guest on live, don't save anything
+		else
+			load_path(parent.ckey) // not guest = load their actual savefile
 		if(load_and_save && !fexists(path))
 			try_savefile_type_migration()
 
@@ -209,6 +216,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			save_character()
 			// SAFETY: `switch_to_slot` performs sanitization on the slot number
 			switch_to_slot(params["slot"])
+
+			parent.tgui_panel?.window.send_message("emotes/setList", custom_emote_panel) // BANDASTATION ADD - Emote Panel
+
 			return TRUE
 		if ("remove_current_slot")
 			remove_current_slot()

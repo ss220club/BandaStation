@@ -48,8 +48,36 @@
 	QDEL_LIST(cached_outfits)
 
 
+/obj/machinery/netpod/add_context(atom/source, list/context, obj/item/held_item, mob/user)
+	. = ..()
+
+	if(isnull(held_item))
+		context[SCREENTIP_CONTEXT_LMB] = "Выбрать одежду"
+		return CONTEXTUAL_SCREENTIP_SET
+
+	if(held_item.tool_behaviour == TOOL_SCREWDRIVER && !occupant && !state_open)
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
+		return CONTEXTUAL_SCREENTIP_SET
+
+	if(held_item.tool_behaviour == TOOL_CROWBAR)
+		if(isnull(occupant))
+			if(panel_open)
+				context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
+			else
+				context[SCREENTIP_CONTEXT_LMB] = "[state_open ? "Закрыть" : "Открыть"] заслонку"
+		else
+			context[SCREENTIP_CONTEXT_LMB] = "Вскрыть"
+		return CONTEXTUAL_SCREENTIP_SET
+
 /obj/machinery/netpod/examine(mob/user)
 	. = ..()
+
+	. += span_notice("Панель технического обслуживания может быть [panel_open ? "прикручена" : "откручена"] при помощи [EXAMINE_HINT("отвертки")].")
+	if(isnull(occupant))
+		if(panel_open)
+			. += span_notice("Её можно поддеть [EXAMINE_HINT("ломом")].")
+		else
+			. += span_notice("Её люк можно поддеть [EXAMINE_HINT("ломом")] и [state_open ? "закрыть" : "открыть"].")
 
 	if(isnull(server_ref?.resolve()))
 		. += span_infoplain("Оно ни к чему не подключено.")
@@ -72,18 +100,6 @@
 		return
 
 	. += span_notice("Оно может быть насильно открыто монтировкой, но системы безопасности оповестят пользователя.")
-
-
-/obj/machinery/netpod/add_context(atom/source, list/context, obj/item/held_item, mob/user)
-	. = ..()
-
-	if(isnull(held_item))
-		context[SCREENTIP_CONTEXT_LMB] = "Выбрать одежду"
-		return CONTEXTUAL_SCREENTIP_SET
-
-	if(istype(held_item, /obj/item/crowbar) && occupant)
-		context[SCREENTIP_CONTEXT_LMB] = "Насильно открыть"
-		return CONTEXTUAL_SCREENTIP_SET
 
 
 /obj/machinery/netpod/update_icon_state()

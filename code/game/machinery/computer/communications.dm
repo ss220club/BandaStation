@@ -206,6 +206,11 @@
 			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_DELTA)
 				to_chat(user, span_warning("Central Command has placed a lock on the alert level due to a doomsday!"))
 				return
+			// BANDASTATION ADD Start - Sec Levels
+			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_GAMMA) // GAMMA and EPSILON
+				to_chat(user, span_warning("Центральным командованием установлено военное положение. Изменение кода невозможно."))
+				return
+			// BANDASTATION ADD End - Sec Levels
 			if (SSsecurity_level.get_current_level_as_number() == new_sec_level)
 				return
 
@@ -368,7 +373,7 @@
 
 			user.log_message("is about to send the following message to [destination]: [message]", LOG_GAME)
 			to_chat(
-				GLOB.admins,
+				get_holders_with_rights(R_ADMIN), /// BANDASTATION EDIT: Proper permissions
 				span_adminnotice( \
 					"<b color='orange'>CROSS-SECTOR MESSAGE (OUTGOING):</b> [ADMIN_LOOKUPFLW(user)] is about to send \
 					the following message to <b>[destination]</b> (will autoapprove in [GLOB.communications_controller.soft_filtering ? DisplayTimeText(EXTENDED_CROSS_SECTOR_CANCEL_TIME) : DisplayTimeText(CROSS_SECTOR_CANCEL_TIME)]): \

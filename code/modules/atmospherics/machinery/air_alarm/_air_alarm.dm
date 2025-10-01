@@ -101,8 +101,8 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		set_panel_open(TRUE)
 
 	if(name == initial(name))
-		ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(src)])", override_base = "[get_area_name(src)] Air Alarm"))
-		name = "[get_area_name(src)] Air Alarm"
+		var/area/current_area = get_area(src)
+		name = "[declent_ru(NOMINATIVE)] [current_area.declent_ru(GENITIVE)]"
 
 	tlv_collection = list()
 	tlv_collection["pressure"] = new /datum/tlv/pressure
@@ -182,8 +182,8 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 /obj/machinery/airalarm/update_name(updates)
 	. = ..()
-	ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(my_area)])", override_base = "[get_area_name(my_area)] Air Alarm"))
-	name = "[get_area_name(my_area)] Air Alarm"
+	var/area/current_area = get_area(src)
+	name = "[declent_ru(NOMINATIVE)] [current_area.declent_ru(GENITIVE)]"
 
 /obj/machinery/airalarm/on_exit_area(datum/source, area/area_to_unregister)
 	//we cannot unregister from an area we never registered to in the first place
@@ -716,7 +716,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 27)
 
 ///Used for air alarm link helper, which connects air alarm to a sensor with corresponding chamber_id
 /obj/machinery/airalarm/proc/setup_chamber_link()
-	var/obj/machinery/air_sensor/sensor = GLOB.objects_by_id_tag[GLOB.map_loaded_sensors[air_sensor_chamber_id]]
+	var/obj/machinery/air_sensor/sensor = null
+	for(var/obj/machinery/air_sensor/target as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/air_sensor))
+		if(target.z == z && target.chamber_id == air_sensor_chamber_id)
+			sensor = target
+			break
 	if(isnull(sensor))
 		log_mapping("[src] at [AREACOORD(src)] tried to connect to a sensor, but no sensor with chamber_id:[air_sensor_chamber_id] found!")
 		return

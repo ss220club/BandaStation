@@ -27,6 +27,10 @@
 	. = ..()
 	atom_storage.open_storage(user)
 
+/obj/item/organ/head_tentacle/on_bodypart_remove(obj/item/bodypart/limb, movement_flags)
+	. = ..()
+	atom_storage.remove_all()
+
 // MARK: Action
 
 /datum/action/item_action/organ_action/headpocket
@@ -46,7 +50,7 @@
 
 /datum/bodypart_overlay/mutant/head_tentacle
 	layers = EXTERNAL_FRONT|EXTERNAL_ADJACENT
-	feature_key = "skrell_head_tentacle"
+	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
 	color_source = ORGAN_COLOR_INHERIT
 
 /datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()

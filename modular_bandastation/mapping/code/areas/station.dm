@@ -23,6 +23,9 @@
 
 // Ghetto
 // Department's Lower Floor
+/area/station/commons/locker/ghetto
+	name = "Locker Room Lower Floor"
+
 /area/station/service/library/ghetto
 	name = "Library Lower Floor"
 
@@ -108,10 +111,6 @@
 /area/station/maintenance/ghetto/starboard
 	name = "Ghetto Starboard Maintenance"
 	icon_state = "starboardmaint"
-
-/area/station/maintenance/ghetto/starboard/aft
-	name = "Ghetto Aft Starboard Maintenance"
-	icon_state = "asmaint"
 
 /area/station/maintenance/ghetto/fore
 	name = "Ghetto Fore Maintenance"
