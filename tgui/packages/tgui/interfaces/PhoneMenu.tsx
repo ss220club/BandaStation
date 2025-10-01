@@ -173,6 +173,11 @@ const GeneralPanel = (props) => {
                               : '';
                           return !currentCategory || cat === currentCategory;
                         })
+                        .sort((a, b) =>
+                          (a.display_name || '').localeCompare(
+                            b.display_name || '',
+                          ),
+                        )
                         .map((val) => (
                           <Button
                             key={val.phone_id}
