@@ -32,7 +32,7 @@ type Data = {
 export const PhoneMenu = (props) => {
   const { act, data } = useBackend();
   return (
-    <Window title="Telephone" width={500} height={400} theme="retro">
+    <Window title="Телефон" width={500} height={400} theme="retro">
       <Window.Content>
         <GeneralPanel />
       </Window.Content>
@@ -106,7 +106,7 @@ const GeneralPanel = (props) => {
           <Stack fill>
             {isAdvanced && (
               <Stack.Item width="30%">
-                <Section title="Call History" fill pb="1.5em">
+                <Section title="История звонков" fill pb="1.5em">
                   <Box
                     height="calc(100% - 1.5em)"
                     style={{ overflowY: 'auto' }}
@@ -139,13 +139,13 @@ const GeneralPanel = (props) => {
                     height="3em"
                     style={{ alignContent: 'center' }}
                   >
-                    Clear
+                    Очистить
                   </Button.Confirm>
                 </Section>
               </Stack.Item>
             )}
             <Stack.Item grow>
-              <Section fill title="Phone Book">
+              <Section fill title="Телефонная книга">
                 <Stack vertical fill>
                   {showTabs && (
                     <Stack.Item>
@@ -199,7 +199,7 @@ const GeneralPanel = (props) => {
                           : act('call_phone', { phone_id: selectedPhone })
                       }
                     >
-                      {(data as any)?.current_call ? `Hang Up` : 'Dial'}
+                      {(data as any)?.current_call ? `Завершить` : 'Вызов'}
                     </Button>
                   </Stack.Item>
                 </Stack>
@@ -220,7 +220,7 @@ const GeneralPanel = (props) => {
                   onClick={() => act('toggle_dnd')}
                   lineHeight="3em"
                 >
-                  Do Not Disturb
+                  Не беспокоить
                 </Button.Checkbox>
               </Section>
             </Stack.Item>
@@ -229,11 +229,11 @@ const GeneralPanel = (props) => {
                 <Section>
                   <Table>
                     <Table.Row className="candystripe">
-                      <Table.Cell p={0.4}>Display Name</Table.Cell>
+                      <Table.Cell p={0.4}>Имя устройства</Table.Cell>
                       <Table.Cell>{data.current_display_name}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="candystripe">
-                      <Table.Cell p={0.4}>Device ID</Table.Cell>
+                      <Table.Cell p={0.4}>ID устройства</Table.Cell>
                       <Table.Cell>{data.current_phone_id}</Table.Cell>
                     </Table.Row>
                   </Table>

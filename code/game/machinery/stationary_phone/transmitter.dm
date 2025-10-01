@@ -2,10 +2,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 
 #define TRANSMITTER_UNAVAILABLE(T) (!T.attached_to || !T.enabled)
 
-#define PHONE_NET_PUBLIC            "Public"
-#define PHONE_NET_COMMAND           "Command"
-#define PHONE_NET_CENTCOM           "CentCom"
-#define PHONE_NET_SYNDIE            "Syndicate"
+#define PHONE_NET_PUBLIC            "Общий"
 
 #define PHONE_DND_ON                "On"
 #define PHONE_DND_OFF               "Off"
@@ -385,7 +382,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/obj/item/card/id/used_card = tool.GetID()
 	if(used_card)
 		if(is_free)
-			to_chat(user, span_notice("Вы тычете [src] [tool.declension_ru(INSTRUMENTAL)], но у него нет слота для карты. Вы чувствуете себя неловко."))
+			to_chat(user, span_notice("Вы тычете [src] [tool.declent_ru(INSTRUMENTAL)], но у него нет слота для карты. Вы чувствуете себя неловко."))
 			return ITEM_INTERACT_BLOCKING
 		else
 			if(isidcard(tool))
@@ -413,9 +410,9 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(!inserted_coin)
 		return ITEM_INTERACT_BLOCKING
 
+	to_chat(user, span_notice("Вы пропихиваете [inserted_coin.declent_ru(ACCUSATIVE)] в слот для монет."))
 	qdel(inserted_coin)
 	playsound(src, 'sound/machines/coindrop.ogg', 50, TRUE)
-	to_chat(user, span_notice("Вы пропихиваете [inserted_coin.declension_ru(ACCUSATIVE)] в слот для монет."))
 	is_paid = TRUE
 
 	return ITEM_INTERACT_SUCCESS
@@ -691,9 +688,6 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #undef TRANSMITTER_UNAVAILABLE
 
 #undef PHONE_NET_PUBLIC
-#undef PHONE_NET_COMMAND
-#undef PHONE_NET_CENTCOM
-#undef PHONE_NET_SYNDIE
 
 #undef PHONE_DND_ON
 #undef PHONE_DND_OFF

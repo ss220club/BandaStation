@@ -1,8 +1,8 @@
-#define PHONE_NET_PUBLIC	     			"Public"
-#define PHONE_NET_COMMAND	     			"Command"
-#define PHONE_NET_CENTCOM	   			  "CentCom"
-#define PHONE_NET_BRIDGE	     			"Bridge"
-#define PHONE_NET_SYNDIE	     			"Syndicate"
+#define PHONE_NET_PUBLIC	     			"Общий"
+#define PHONE_NET_COMMAND	     			"Командный"
+#define PHONE_NET_CENTCOM	   			  "ЦентКом"
+#define PHONE_NET_BRIDGE	     			"Мостик"
+#define PHONE_NET_SYNDIE	     			"Синдикат"
 
 #define PHONE_DND_ON                "On"
 #define PHONE_DND_OFF               "Off"
@@ -58,7 +58,7 @@
 // A personal command line for private offices.
 /obj/structure/transmitter/command
 	phone_category = PHONE_NET_COMMAND
-	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND)
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND, PHONE_NET_BRIDGE)
 	greyscale_colors = "#8198E1"
 
 // THE "Red Phone". Can call the station networks AND the CentCom, if they feel like it.
