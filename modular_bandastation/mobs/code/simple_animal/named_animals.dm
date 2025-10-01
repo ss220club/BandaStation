@@ -1,23 +1,24 @@
-/mob/living/basic/pig/sanya
+/mob/living/basic/pig/big/sanya
 	name = "Саня"
-	desc = "Старый добрый хряк с сединой. Слегка подслеповат, но нюх и харизма по прежнему с ним. Чудом не пущен на мясо и дожил до почтенного возраста."
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
-	icon_state = "pig_old"
-	icon_living = "pig_old"
-	icon_dead = "pig_old_dead"
-	butcher_results = list(/obj/item/food/meat/slab/pig = 10)
+	desc = "Упитанный харизматичный хряк в самом расцвете сил. Чудом не пущен на мясо и разожрался до состояния неприкосновенного запаса на черный день."
 	gold_core_spawnable = NO_SPAWN
-	maxHealth = 80
-	health = 80
 
-	ai_controller = /datum/ai_controller/basic_controller/pig/old
+/mob/living/basic/pig/big/sanya/Initialize(mapload)
+	. = ..()
+	if(prob(2)) // Редкий шанс увидеть СТАРОГО Саню
+		desc = "Старый добрый хряк с сединой. Слегка подслеповат, но нюх и харизма по прежнему с ним. Чудом не пущен на мясо и дожил до почтенного возраста."
+		icon = /mob/living/basic/pig/big/old::icon
+		maxHealth = /mob/living/basic/pig/big/old::maxHealth
+		health = /mob/living/basic/pig/big/old::health
+		speed = /mob/living/basic/pig/big/old::speed
+		butcher_results = /mob/living/basic/pig/big/old::butcher_results
 
-/mob/living/basic/retaliate/goat/chef
+/mob/living/basic/goat/chef
 	name = "Боря"
 	desc = "Этот козёл - парнокопытное гурме шефа, в его мрачных глазах-бусинках так и читается амибициозный нрав! Он не твой друг, ведь за каждым игривым прыжком может скрываться неожиданный выпад."
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/basic/cow/pipa
+/mob/living/basic/cow/black/pipa
 	name = "Пипа"
 	desc = "Старая добрая старушка прямиком с Лай'Оши. Нескончаемый источник природного молока без ГМО. Ну почти без ГМО..."
 	gold_core_spawnable = NO_SPAWN
@@ -35,7 +36,6 @@
 /mob/living/basic/chicken/cock/clucky
 	name = "Коммандор Клакки"
 	desc = "Его великая армия бесчисленна. Ко-ко-ко."
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 40 // Veteran
 	health = 40
@@ -43,7 +43,7 @@
 /mob/living/basic/goose/scientist
 	name = "Гуськор"
 	desc = "Учёный Гусь. Везде учусь. Крайне умная и задиристая птица. Обожает генетику. Надеемся это не бывший пропавший генетик..."
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/farm_animals.dmi'
 	icon_state = "goose_labcoat"
 	icon_living = "goose_labcoat"
 	icon_dead = "goose_labcoat_dead"

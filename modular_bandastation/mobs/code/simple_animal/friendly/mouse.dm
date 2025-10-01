@@ -7,7 +7,7 @@
 
 /mob/living/basic/mouse/Initialize(mapload, tame, new_body_color)
 	. = ..()
-	if(body_color = "wooly")
+	if(body_color == "wooly")
 		name = /mob/living/basic/mouse/wooly::name
 		desc = /mob/living/basic/mouse/wooly::desc
 		icon = /mob/living/basic/mouse/wooly::icon
@@ -80,6 +80,8 @@
 	icon_dead = "mouse_zavod_dead"
 	colored_mob = null // чтобы не перекрасился
 	butcher_results = list(/obj/item/food/meat/slab/mouse = 1, /obj/item/stack/sheet/iron = 2)
+	minimum_survivable_temperature = NPC_DEFAULT_MIN_TEMP - 100
+	maximum_survivable_temperature = NPC_DEFAULT_MAX_TEMP + 200
 	maxHealth = 15
 	health = 15
 
@@ -91,6 +93,8 @@
 	icon_living = "mouse_rep"
 	icon_dead = "mouse_rep_dead"
 	colored_mob = null // чтобы не перекрасился
-	maxHealth = 10
-	health = 10
+	minimum_survivable_temperature = NPC_DEFAULT_MIN_TEMP - 150 // Это всё-таки пушистый мышь
+	maximum_survivable_temperature = NPC_DEFAULT_MAX_TEMP + 150
+	maxHealth = 20
+	health = 20
 	// TODO: VERB сидения с спрайтами "mouse_rep_sit" и "mouse_rep_chair"

@@ -104,18 +104,18 @@
 	speak = list("Слава Синдикату!", "Смерть НаноТрейзен!", "Отдавайте сыр!", "Слава Сыркату!", "Смерть за сыр!")
 
 // =========== Старый хряк, Саня ===========
-/datum/ai_controller/basic_controller/pig/old
+/datum/ai_controller/basic_controller/pig/big
 
-/datum/ai_controller/basic_controller/pig/old/New(atom/new_pawn)
+/datum/ai_controller/basic_controller/pig/big/New(atom/new_pawn)
 	. = ..()
 	var/datum/ai_planning_subtree/S = locate(/datum/ai_planning_subtree/random_speech/pig) in planning_subtrees
 	if(S)
 		planning_subtrees -= S
 		qdel(S)
-	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/old)
+	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/big)
 
-/datum/ai_planning_subtree/random_speech/pig/old
-	sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')	// SS220 EDIT
+/datum/ai_planning_subtree/random_speech/pig/big
+	sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
 
 // =========== Зомби звуки ===========
 
