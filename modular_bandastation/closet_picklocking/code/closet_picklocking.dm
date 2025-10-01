@@ -9,20 +9,17 @@
 	. = ..()
 	switch(picklocking_stage)
 		if(PANEL_OPEN)
-			. += span_notice("Панель управления снята.")
+			. += span_notice("Панель замка снята.")
 		if(WIRES_DISCONNECTED)
-			. += span_notice("Панель управления снята.")
-			. += span_notice("Провода отключены и торчат наружу.")
+			. += span_notice("Панель замка снята, а провода торчат наружу.")
 		if(LOCK_OFF)
-			. += span_notice("Панель управления снята.")
-			. += span_notice("Провода отключены и торчат наружу.")
-			. += span_notice("Замок отключён.")
+			. += span_notice("Замок полностью взломан.")
 
 /obj/structure/closet/screwdriver_act(mob/living/user, obj/item/I)
 	. = ..()
 	if(!secure)
 		return
-	if(istype(src, /obj/structure/closet/crate/secure/loot))
+	if(istype(src, /obj/structure/closet/crate/secure/loot) && !user.combat_mode)
 		to_chat(user, span_warning("Панель этого замка приржавела намертво!")) // отмена изичного открытия ящиков с лутом, которого после взлома там и так не будет
 		balloon_alert(user, "не поддается!")
 		return
