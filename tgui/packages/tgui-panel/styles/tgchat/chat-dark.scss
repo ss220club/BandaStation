@@ -1363,21 +1363,6 @@ $border-width-px: $border-width * 1px;
   }
 }
 
-.auto {
-  &.tier-3 {
-    @include metalic();
-  }
-
-  &.tier-4,
-  &.tier-5 {
-    @include glowing();
-  }
-
-  &.tier-5 {
-    @include shine();
-  }
-}
-
 .tier-3,
 .tier-4,
 .tier-5 {
@@ -1390,8 +1375,21 @@ $border-width-px: $border-width * 1px;
   }
 }
 
-.tier-5 {
-  &.glowing {
+.tier-5.glowing {
+  @include shine();
+}
+
+.auto {
+  &.tier-3 {
+    @include metalic();
+  }
+
+  &.tier-4,
+  &.tier-5 {
+    @include glowing();
+  }
+
+  &.tier-5 {
     @include shine();
   }
 }
