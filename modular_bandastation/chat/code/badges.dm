@@ -20,7 +20,7 @@ GLOBAL_LIST(badge_icons_cache)
 
 	if(donor_tier && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.is_byond_member && (prefs.toggles & MEMBER_PUBLIC))
 		var/donor_color = prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour
-		var/donor_shine = "class='tier-[donor_tier] [GLOB.donor_shines[prefs.read_preference(/datum/preference/choiced/donor_chat_shine)]]'"
+		var/donor_shine = "class='tier-[donor_tier] [GLOB.donor_shines[prefs.read_preference(/datum/preference/choiced/donor_chat_effect)]]'"
 		parts += "<span [donor_shine] style='[donor_shine ? "--shine-color: [donor_color];" : "color: [donor_color];"]'>[key]</span>"
 	else
 		parts += "[key]"

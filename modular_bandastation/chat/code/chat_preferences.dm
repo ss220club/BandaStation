@@ -2,17 +2,18 @@ GLOBAL_LIST_INIT(donor_shines, list(
 	"Автоматически" = "auto",
 	"Металлик" = "metal",
 	"Светящийся" = "glowing",
+	"Выключить" = "off",
 ))
 
-/datum/preference/choiced/donor_chat_shine
+/datum/preference/choiced/donor_chat_effect
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
-	savefile_key = "donor_chat_shine"
+	savefile_key = "donor_chat_effect"
 	savefile_identifier = PREFERENCE_PLAYER
 
-/datum/preference/choiced/donor_chat_shine/init_possible_values()
+/datum/preference/choiced/donor_chat_effect/init_possible_values()
 	return assoc_to_keys(GLOB.donor_shines)
 
-/datum/preference/choiced/donor_chat_shine/create_default_value()
+/datum/preference/choiced/donor_chat_effect/create_default_value()
 	return GLOB.donor_shines[1]
 
 /datum/preference/toggle/donor_public
