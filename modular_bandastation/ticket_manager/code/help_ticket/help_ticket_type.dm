@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT_TYPED(help_ticket_types, /datum/help_ticket_type, initialize_he
 
 /datum/help_ticket_type/admin
 	id = TICKET_TYPE_ADMIN
-	name = "А"
+	name = "Админ"
 	required_permissions = R_ADMIN
 	type_to_convert_to = TICKET_TYPE_MENTOR
 	boxed_message_class = "red_box"
@@ -31,7 +31,7 @@ GLOBAL_LIST_INIT_TYPED(help_ticket_types, /datum/help_ticket_type, initialize_he
 
 /datum/help_ticket_type/mentor
 	id = TICKET_TYPE_MENTOR
-	name = "М"
+	name = "Ментор"
 	required_permissions = R_MENTOR
 	type_to_convert_to = TICKET_TYPE_ADMIN
 	boxed_message_class = "blue_box"
