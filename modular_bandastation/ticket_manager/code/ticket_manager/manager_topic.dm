@@ -104,7 +104,7 @@
 	for(var/datum/help_ticket/ticket as anything in active_tickets)
 
 		UNTYPED_LIST_ADD(stat_info, \
-			list("Тикет ([ticket.get_ticket_type().name]) #[ticket.id]:", "[ticket.stat_name]", null, "[GLOB.ticket_manager_ref];ticket_id=[ticket.id];open_ticket=[ticket.id]") \
+			list("\[[ticket.get_ticket_type().name]\] Тикет #[ticket.id]:", "[ticket.stat_name]", null, "[GLOB.ticket_manager_ref];ticket_id=[ticket.id];open_ticket=[ticket.id]") \
 		)
 
 	UNTYPED_LIST_ADD(stat_info, \

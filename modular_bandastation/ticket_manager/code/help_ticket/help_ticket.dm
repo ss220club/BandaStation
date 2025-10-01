@@ -145,17 +145,16 @@
 
 	var/boxed_message_class = get_boxed_message_class()
 	var/text_span_class = get_text_span_class()
+
+	var/ticket_converted_message = custom_boxed_message(\
+		"[boxed_message_class]", \
+		span_class(text_span_class, "[key_name_admin(converter)] конвертировал тикет [TICKET_OPEN_LINK(id, "#[id]")] в [ticket_type_id].") \
+	)
 	for(var/client/admin as anything in GLOB.admins)
 		if(admin == converter || !has_user_access(admin))
 			continue
 
-		send_adminhelp_message(
-			admin,
-			custom_boxed_message(\
-				"[boxed_message_class]", \
-				span_class(text_span_class, "[key_name_admin(admin)] конвертировал тикет [TICKET_OPEN_LINK(id, "#[id]")] в [ticket_type_id].") \
-			)
-		)
+		send_adminhelp_message(admin, ticket_converted_message)
 
 	messages += list(list(
 		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
