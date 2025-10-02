@@ -12,6 +12,7 @@
 	aug_overlay = "nutripump"
 	slot = ORGAN_SLOT_STOMACH_AID
 	var/is_reagent_threshhold = TRUE
+	var/cooldown_time = 5 SECONDS
 	/**
 	 * list of reagents with their injection and threshold amounts
 	 * * REAGENT_AMOUNT - amount of reagent to inject per time
@@ -19,7 +20,6 @@
 	 */
 	var/list/reagent_data = list()
 	/// time between injections
-	var/cooldown_time = 5 SECONDS
 
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
 	if(!TIMER_COOLDOWN_FINISHED(src, COOLDOWN_PUMP))
