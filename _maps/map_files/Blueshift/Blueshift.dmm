@@ -3260,6 +3260,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/bridge)
+"aHc" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/junction,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/command)
 "aHh" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -6308,11 +6315,14 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/port)
 "bnn" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/disposalpipe/segment{
-	dir = 10
+	dir = 4
 	},
-/turf/open/floor/carpet/executive,
-/area/station/command/heads_quarters/blueshield)
+/turf/open/floor/iron,
+/area/station/hallway/secondary/command)
 "bnq" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -9011,15 +9021,6 @@
 /obj/machinery/computer/communications,
 /turf/open/floor/iron/dark,
 /area/station/command/bridge)
-"bMR" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/station/hallway/secondary/command)
 "bMW" = (
 /obj/effect/turf_decal/trimline/blue/filled/corner{
 	dir = 1
@@ -19315,7 +19316,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/disposalpipe/segment{
-	dir = 5
+	dir = 4
 	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/blueshield)
@@ -27649,6 +27650,13 @@
 /obj/machinery/firealarm/directional/north,
 /turf/open/floor/carpet,
 /area/station/service/lawoffice)
+"fnZ" = (
+/obj/structure/chair/office{
+	dir = 1
+	},
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/wood,
+/area/station/command/heads_quarters/blueshield)
 "foe" = (
 /obj/effect/turf_decal/stripes,
 /obj/effect/turf_decal/stripes{
@@ -33447,6 +33455,12 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/service)
+"gwa" = (
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
+/turf/open/floor/carpet/executive,
+/area/station/command/heads_quarters/blueshield)
 "gwb" = (
 /obj/structure/table,
 /obj/effect/turf_decal/tile/yellow,
@@ -45209,15 +45223,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
-"iOo" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/station/command/heads_quarters/blueshield)
 "iOq" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/turf_decal/bot,
@@ -61621,13 +61626,6 @@
 /obj/item/modular_computer/pda/clown,
 /turf/open/floor/noslip,
 /area/station/maintenance/port/greater)
-"lVv" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/disposalpipe/junction,
-/turf/open/floor/iron,
-/area/station/hallway/secondary/command)
 "lVA" = (
 /obj/machinery/atmospherics/components/tank/air,
 /turf/open/floor/iron,
@@ -72181,11 +72179,8 @@
 /turf/open/floor/iron/white/small,
 /area/station/medical/break_room)
 "nZT" = (
-/obj/machinery/power/smes{
-	capacity = 1.8e+008;
-	charge = 2e+005
-	},
 /obj/structure/cable,
+/obj/machinery/power/smes,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/disposal/incinerator)
 "oag" = (
@@ -123501,6 +123496,15 @@
 /obj/structure/closet/secure_closet/security/med,
 /turf/open/floor/iron/dark,
 /area/station/security/checkpoint/medical)
+"xRy" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
+/turf/open/floor/wood,
+/area/station/command/heads_quarters/blueshield)
 "xRH" = (
 /obj/structure/chair/office{
 	dir = 4
@@ -125087,13 +125091,6 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/black,
 /area/station/service/barber)
-"ygC" = (
-/obj/structure/chair/office{
-	dir = 1
-	},
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/wood,
-/area/station/command/heads_quarters/blueshield)
 "ygF" = (
 /obj/structure/window/reinforced/fulltile,
 /obj/structure/flora/grass/jungle,
@@ -217789,10 +217786,10 @@ taP
 qJL
 lLw
 vfN
-bnn
+gwa
 dBT
-ygC
-dJx
+fnZ
+xRy
 qCC
 sZp
 aBB
@@ -218306,7 +218303,7 @@ ixt
 sRq
 rle
 hSt
-iOo
+dJx
 ohl
 sZp
 nAD
@@ -218563,7 +218560,7 @@ lsn
 cGu
 pRa
 kAU
-iOo
+dJx
 mTw
 sZp
 ycn
@@ -219077,7 +219074,7 @@ qsP
 lKB
 rXp
 qsP
-bMR
+bnn
 qsP
 qsP
 neN
@@ -219334,7 +219331,7 @@ rpk
 rpk
 bnq
 bnq
-lVv
+aHc
 bnq
 cYv
 hdx
