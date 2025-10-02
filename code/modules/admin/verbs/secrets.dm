@@ -783,6 +783,9 @@ ADMIN_VERB(secrets, R_DEBUG|R_FUN, "Secrets", "Abuse harder than you ever have b
 				assign_admin_objective_and_antag(player, antag_datum)
 				var/datum/uplink_handler/uplink = antag_datum.uplink_handler
 				uplink.has_progression = FALSE
+				//  BANDASTATION ADDITION START
+				uplink.has_objectives = FALSE
+				//  BANDASTATION ADDITION END
 			if(ROLE_CHANGELING)
 				var/datum/antagonist/changeling/antag_datum = new
 				antag_datum.give_objectives = keep_generic_objecives

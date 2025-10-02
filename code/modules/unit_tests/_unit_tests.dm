@@ -229,6 +229,9 @@
 #include "mutant_organs.dm"
 #include "novaflower_burn.dm"
 #include "nuke_cinematic.dm"
+//  BANDASTATION ADDITION START
+#include "objectives.dm"
+//  BANDASTATION ADDITION END
 #include "omnitools.dm"
 #include "operating_table.dm"
 #include "orderable_items.dm"

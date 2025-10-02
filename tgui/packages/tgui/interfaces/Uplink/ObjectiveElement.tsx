@@ -1,4 +1,5 @@
-import { Box, Flex, Stack } from 'tgui-core/components';
+//  BANDASTATION REMOVAL START
+/*import { Box, Flex, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 export type Objective = {
@@ -38,4 +39,5 @@ export const ObjectiveElement = (props: ObjectiveElementProps) => {
       </Flex.Item>
     </Flex>
   );
-};
+};*/
+//  BANDASTATION REMOVAL END
