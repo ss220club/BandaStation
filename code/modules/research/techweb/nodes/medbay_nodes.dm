@@ -83,7 +83,7 @@
 		"defibmount",
 		"medicalbed_emergency",
 		"piercesyringe",
-		"diode_disk_healing",
+		// "diode_disk_healing", // BANDASTATION REMOVAL - Healing beam design removal
 		"diode_disk_sanity",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)

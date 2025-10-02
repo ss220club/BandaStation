@@ -407,6 +407,9 @@
 /datum/dynamic_ruleset/midround/from_ghosts/blob/false_alarm()
 	priority_announce("Вспышка биологической угрозы 5-го уровня зафиксирована на борту [station_name()]. Всему персоналу надлежит сдержать её распространение любой ценой!", "Биологическая угроза", ANNOUNCER_OUTBREAK5)
 
+	// Set status displays to biohazard alert even for false alarm
+	send_status_display_biohazard_alert()
+
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
 	config_tag = "Xenomorph"
