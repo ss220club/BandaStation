@@ -44,7 +44,7 @@
 	return TRUE
 
 /datum/keybinding/client/communication/me
-	hotkey_keys = list("F4", "M") // BANDASTATION EDIT
+	hotkey_keys = list("M") // BANDASTATION EDIT
 	name = ME_CHANNEL
 	full_name = "Эмоция"
 	keybind_signal = COMSIG_KB_CLIENT_ME_DOWN
