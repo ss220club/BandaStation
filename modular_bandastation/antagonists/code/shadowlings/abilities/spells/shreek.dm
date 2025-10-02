@@ -1,5 +1,5 @@
-#define SHREEK_EAR_DAMAGE_CLOSE 15
-#define SHREEK_EAR_DAMAGE_FAR 8
+#define SHREEK_EAR_DAMAGE_CLOSE 40
+#define SHREEK_EAR_DAMAGE_FAR 20
 #define SHREEK_GLASS_DAMAGE_BASE 110
 #define SHREEK_GLASS_DAMAGE_FALLOFF 15
 #define SHREEK_LIGHT_BREAK_CHANCE_BASE 100
@@ -19,7 +19,7 @@
 	desc = "Ударная волна тьмы вокруг: рядом швыряет и оглушает, до 5 тайлов дезориентирует. Бьёт стёкла и лампы."
 	button_icon_state = "shadow_screech"
 	check_flags = AB_CHECK_CONSCIOUS
-	cooldown_time = 30 SECONDS
+	cooldown_time = 40 SECONDS
 	// Shadowling related
 	min_req = 4
 	max_req = 20
@@ -48,11 +48,13 @@
 		var/dist = get_dist(H, L)
 		if(dist <= knock_radius)
 			L.adjustOrganLoss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_CLOSE)
-			L.Knockdown(0.6 SECONDS)
+			L.soundbang_act(2, 10 SECONDS, 10)
+			L.Knockdown(2 SECONDS)
 			L.adjust_dizzy(4)
 			knockback_away_from(H, L, 3)
 		else
 			L.adjustOrganLoss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_FAR)
+			L.soundbang_act(2, 5 SECONDS, 5)
 			L.adjust_confusion(6 SECONDS)
 			L.adjust_staggered(6 SECONDS)
 			L.adjust_dizzy(3)

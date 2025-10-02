@@ -176,6 +176,7 @@
 	biological_state = BIO_INORGANIC
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
+	burn_modifier = 1.2
 
 /obj/item/bodypart/chest/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
@@ -183,18 +184,21 @@
 	bodypart_traits = list(TRAIT_NO_JUMPSUIT)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
+	burn_modifier = 1.2
 
 /obj/item/bodypart/leg/left/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
+	burn_modifier = 1.2
 
 /obj/item/bodypart/leg/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
+	burn_modifier = 1.2
 
 /obj/item/bodypart/arm/left/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
@@ -213,6 +217,7 @@
 	unarmed_sharpness = SHARP_EDGED
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
+	burn_modifier = 1.2
 
 /obj/item/bodypart/arm/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
@@ -231,30 +236,43 @@
 	unarmed_sharpness = SHARP_POINTY
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
+	burn_modifier = 1.2
 
 /obj/item/bodypart/head/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+	burn_modifier = 0.5
+	brute_modifier = 0.5
 
 /obj/item/bodypart/chest/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+	burn_modifier = 0.5
+	brute_modifier = 0.5
 
 /obj/item/bodypart/leg/left/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+	burn_modifier = 0.5
+	brute_modifier = 0.5
 
 /obj/item/bodypart/leg/right/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+	burn_modifier = 0.5
+	brute_modifier = 0.5
 
 /obj/item/bodypart/arm/left/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+	burn_modifier = 0.5
+	brute_modifier = 0.5
 
 /obj/item/bodypart/arm/right/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling_ascended.dmi'
+	burn_modifier = 0.5
+	brute_modifier = 0.5
 
 // MARK: Organs
 /obj/item/organ/brain/shadow/shadowling
@@ -270,7 +288,7 @@
 	overlay_ignore_lighting = TRUE
 	pepperspray_protect = TRUE
 	color_cutoffs = null
-	flash_protect = FLASH_PROTECTION_SENSITIVE
+	flash_protect = FLASH_PROTECTION_FLASH
 	eye_color_left = "#ff0000"
 	eye_color_right = "#ff0000"
 

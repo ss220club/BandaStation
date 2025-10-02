@@ -236,7 +236,7 @@
 		return
 	GLOB.is_shadowling_roundender_started = TRUE
 
-	send_to_playing_players("<span class='shadowradio_win'><b>ЕДИНАЯ ТЕНЬ ПОГЛОТИТ СТАНЦИЮ!</b></span>")
+	send_to_playing_players("<span class='shadowradio_win'><b>ЕДИНАЯ ТЕНЬ ПОГЛОЩАЕТ СТАНЦИЮ!</b></span>")
 	sound_to_playing_players(SHADOWLING_RISEN_MUSIC, 70)
 
 	priority_announce(
@@ -249,3 +249,4 @@
 	var/atom/hostile_ref = ascended ? ascended : world
 	SSshuttle.registerHostileEnvironment(hostile_ref)
 	SSshuttle.lockdown = TRUE
+	SSshuttle.requestEvac(ascended, "Внимание! Ситуация критическая: угроза поглощения, объект на грани утраты. Незамедлительно задействуйте все доступные ресурсы и приступайте к процедуре эвакуации. Запуск эвакуационного шаттла утверждён и отмене не подлежит.")

@@ -2,9 +2,11 @@
 #define COLD_WAVE_SLOW_DURATION (10 SECONDS)
 #define COLD_WAVE_TEMP_DROP -260
 #define COLD_WAVE_TEMP_DROP_VULP -400
-#define COLD_WAVE_FROSTOIL_AMOUNT 12
-#define COLD_WAVE_FROSTOIL_AMOUNT_VULP 20
+#define COLD_WAVE_FROSTOIL_AMOUNT 8
+#define COLD_WAVE_FROSTOIL_AMOUNT_VULP 10
 #define COLD_WAVE_BLIND_DURATION (10 SECONDS)
+#define COLD_WAVE_BURN_DAMAGE 20
+#define COLD_WAVE_BURN_DAMAGE_VULP 40
 
 // MARK: Effects
 /obj/effect/temp_visual/dir_setting/shadow_plume
@@ -62,7 +64,7 @@
 	name = "Волна холода"
 	desc = "Выплеск ледяной тьмы в 45° конусе на 4 тайла, наносящий 30 урона по выносливости и замедляющий врагов на 10 секунд."
 	button_icon_state = "shadow_cold"
-	cooldown_time = 20 SECONDS
+	cooldown_time = 40 SECONDS
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	max_range = 4
@@ -89,7 +91,8 @@
 		var/is_vulp = istype(T?.dna?.species, /datum/species/vulpkanin)
 		var/temp_drop = is_vulp ? COLD_WAVE_TEMP_DROP_VULP : COLD_WAVE_TEMP_DROP
 		var/frostoil_amt = is_vulp ? COLD_WAVE_FROSTOIL_AMOUNT_VULP : COLD_WAVE_FROSTOIL_AMOUNT
-
+		var/burn_amt = is_vulp ? COLD_WAVE_BURN_DAMAGE : COLD_WAVE_BURN_DAMAGE_VULP
+		T.adjustFireLoss(burn_amt)
 		T.adjustStaminaLoss(COLD_WAVE_STAMINA_DAMAGE)
 		apply_slow(T, COLD_WAVE_SLOW_DURATION)
 		T.adjust_bodytemperature(temp_drop)

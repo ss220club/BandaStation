@@ -13,7 +13,7 @@
 		to_chat(H, span_warning("Улей не отвечает."))
 		return FALSE
 
-	var/nt = hive.count_alive_thralls()
+	var/nt = hive.count_max_thralls()
 
 	var/list/new_unlocks = grant_unlocks_for(H, nt)
 	if(length(new_unlocks))

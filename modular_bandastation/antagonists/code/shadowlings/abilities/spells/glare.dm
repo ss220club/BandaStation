@@ -33,9 +33,9 @@
 	requires_dark_target = FALSE
 	channel_time = 0
 	var/const/fov_degree = 90
-	var/const/baton_stamina = 35
+	var/const/baton_stamina = 70
 	var/const/knock_delay = 0.6 SECONDS
-	var/const/knock_time = 1 SECONDS
+	var/const/knock_time = 4 SECONDS
 	var/const/dizzy_time = 2
 
 /datum/action/cooldown/shadowling/glare/CollectTargets(mob/living/carbon/human/H, atom/explicit)

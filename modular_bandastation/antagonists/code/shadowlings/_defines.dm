@@ -3,8 +3,8 @@
 #define SPECIES_SHADOWLING_ASCENDED "shadowlingascended"
 #define ORGAN_SLOT_BRAIN_THRALL "brain_thrall_tumor"
 
-#define SHADOWLING_LIGHT_THRESHOLD 0.35
-#define SHADOWLING_DIM_THRESHOLD   0.1
+#define SHADOWLING_LIGHT_THRESHOLD 0.5
+#define SHADOWLING_DIM_THRESHOLD   0.2
 
 GLOBAL_VAR_INIT(shadowling_hive, null)
 

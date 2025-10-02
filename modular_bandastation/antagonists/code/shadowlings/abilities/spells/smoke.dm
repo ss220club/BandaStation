@@ -111,7 +111,7 @@
 	var/smoke_ticks = 6
 	var/heal_amount = 10
 	var/blind_time = 5 SECONDS
-	var/stun_chance = 25
+	var/stun_chance = 50
 	var/stun_time = 2 SECONDS
 
 /datum/action/cooldown/shadowling/shadow_smoke/DoEffect(mob/living/carbon/human/H, atom/_)

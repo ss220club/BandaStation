@@ -8,6 +8,7 @@
 	var/list/lings = list()
 	var/list/thralls = list()
 	var/list/ling_roles = list()
+	var/last_sync_thrall_count = 0
 
 /datum/team/shadow_hive/New()
 	. = ..()
@@ -106,14 +107,17 @@
 
 /datum/team/shadow_hive/proc/count_alive_thralls()
 	sanitize()
-	var/n = 0
+	var/count = 0
 	for(var/mob/living/carbon/human/T in thralls)
 		if(QDELETED(T))
 			continue
 		if(T.stat == DEAD)
 			continue
-		n++
-	return n
+		count++
+	return count++
+
+/datum/team/shadow_hive/proc/count_max_thralls()
+	return max(count_alive_thralls(), last_sync_thrall_count)
 
 /datum/team/shadow_hive/proc/grant_sync_action(mob/living/carbon/human/H)
 	if(!istype(H))

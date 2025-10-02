@@ -10,7 +10,7 @@
 	max_range = 2
 	channel_time = 0
 	var/static/sfx_activate = 'sound/effects/magic/demon_attack1.ogg'
-	var/attack_value = 20
+	var/attack_value = 30
 
 /datum/action/cooldown/shadowling/shadow_strike/can_use(mob/living/carbon/human/H)
 	if(!..())
