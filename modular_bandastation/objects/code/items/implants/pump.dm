@@ -11,7 +11,6 @@
 	icon_state = "nutriment_implant"
 	aug_overlay = "nutripump"
 	slot = ORGAN_SLOT_STOMACH_AID
-	var/is_reagent_threshhold = TRUE
 	var/cooldown_time = 5 SECONDS
 	/**
 	 * list of reagents with their injection and threshold amounts
@@ -24,19 +23,17 @@
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
 	if(!TIMER_COOLDOWN_FINISHED(src, COOLDOWN_PUMP))
 		return
-		
+
 	for(var/key,value in reagent_data)
 		var/reagent_type = key
-		var/list/reagent_data = value
-		
-		if(is_reagent_threshhold)
-			var/datum/reagent/reagent_inside_owner = owner.reagents.has_reagent(reagent_type)
-			if(reagent_inside_owner?.amount < reagent_data[REAGENT_THRESHOLD])
-				owner.reagents.add_reagent(reagent_type, reagent_data[REAGENT_AMOUNT])
-			
+		var/list/reagent_data_value = value
+		var/datum/reagent/reagent_inside_owner = owner.reagents.has_reagent(reagent_type)
+		if(!reagent_inside_owner || reagent_inside_owner.volume < reagent_data_value[REAGENT_THRESHOLD])
+			owner.reagents.add_reagent(reagent_type, reagent_data_value[REAGENT_AMOUNT])
+
 	if(custom_check(seconds_per_tick, times_fired))
 		custom_effect(seconds_per_tick, times_fired)
-		
+
 	TIMER_COOLDOWN_START(src, COOLDOWN_PUMP, cooldown_time)
 
 /**
