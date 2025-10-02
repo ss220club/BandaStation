@@ -20,10 +20,11 @@
 	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/add_seclight_point()
-	AddComponent(/datum/component/seclite_attachable, \
+	AddComponent(\
+		/datum/component/seclite_attachable, \
 		starting_light = new /obj/item/flashlight/seclite(src), \
 		is_light_removable = FALSE, \
-		)
+	)
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/examine_more(mob/user)
 	. = ..()
