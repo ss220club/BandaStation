@@ -77,10 +77,10 @@
 /datum/mood_event/disgust/dirty_food/add_effects(...)
 	if(HAS_PERSONALITY(owner, /datum/personality/ascetic))
 		mood_change *= 0.25
-		description = "That food was dirty, but edible."
+		description = "Еда была грязной, но съедобной."
 	if(HAS_PERSONALITY(owner, /datum/personality/gourmand))
 		mood_change *= 1.5
-		description = "That food was filthy, was it made in a dumpster?!"
+		description = "Эта еда была грязной, ее что, приготовили на помойке?!"
 
 //Generic needs events
 /datum/mood_event/shower
@@ -91,39 +91,39 @@
 /datum/mood_event/shower/add_effects(shower_reagent)
 	if(istype(shower_reagent, /datum/reagent/blood))
 		if(HAS_TRAIT(owner, TRAIT_MORBID) || HAS_TRAIT(owner, TRAIT_EVIL) || (owner.mob_biotypes & MOB_UNDEAD))
-			description = "The sensation of a lovely blood shower felt good."
+			description = "Ощущение прекрасного кровавого душа было приятным."
 			mood_change = 6 // you sicko
 		else
-			description = "I have recently had a horrible shower raining blood!"
+			description = "Недавно у меня был ужасный кровавый душ!"
 			mood_change = -4
 			timeout = 3 MINUTES
 	else if(istype(shower_reagent, /datum/reagent/water))
 		if(HAS_TRAIT(owner, TRAIT_WATER_HATER) && !HAS_TRAIT(owner, TRAIT_WATER_ADAPTATION))
-			description = "I hate being wet!"
+			description = "Ненавижу быть мокрым!"
 			mood_change = -2
 			timeout = 3 MINUTES
 		else
 			return // just normal clean shower
 	else // it's dirty ass water
-		description = "I have recently had a dirty shower!"
+		description = "Недавно я принимал грязный душ!"
 		mood_change = -3
 		timeout = 3 MINUTES
 
 /datum/mood_event/hot_spring
-	description = "It's so relaxing to bathe in steamy water..."
+	description = "Так приятно купаться в горячей воде..."
 	mood_change = 5
 
 /datum/mood_event/hot_spring_hater
-	description = "No, no, no, no, I don't want to take a bath!"
+	description = "Нет, нет, нет, нет, я не хочу принимать ванну!"
 	mood_change = -2
 
 /datum/mood_event/hot_spring_left
-	description = "That was an enjoyable bath."
+	description = "Это была приятная ванна."
 	mood_change = 4
 	timeout = 4 MINUTES
 
 /datum/mood_event/hot_spring_hater_left
-	description = "I hate baths! And I hate how cold it's once you step out of it!"
+	description = "Ненавижу ванну! И ненавижу, как холодно, когда из неё вылезаешь!"
 	mood_change = -3
 	timeout = 2 MINUTES
 

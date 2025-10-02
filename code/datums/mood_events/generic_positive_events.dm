@@ -6,15 +6,15 @@
 /datum/mood_event/hug/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
 		mood_change = -1
-		description = "A hug? Call HR!"
+		description = "Обнимашки? Я звоню в отдел кадров!"
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = -1
-		description = "I would prefer not to be touched."
+		description = "Я бы предпочел, чтобы меня не трогали."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/callous))
 		mood_change = 0
-		description = "I hate hugs."
+		description = "Я ненавижу обнимашки."
 		return
 
 /datum/mood_event/bear_hug
@@ -28,7 +28,7 @@
 		|| HAS_PERSONALITY(owner, /datum/personality/callous) \
 	)
 		mood_change = -2
-		description = "They're squeezing me too tightly!"
+		description = "Они сжимают меня слишком сильно!"
 		return
 
 /datum/mood_event/betterhug
@@ -39,15 +39,15 @@
 /datum/mood_event/betterhug/add_effects(mob/friend)
 	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
 		mood_change = 1
-		description = "[friend.name] is nice, but that's it."
+		description = "[capitalize(friend.declent_ru(NOMINATIVE))] мил, но это всё."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 1
-		description = "[friend.name] is nice, but I wish they'd stop touching me."
+		description = "[capitalize(friend.declent_ru(NOMINATIVE))] мил, но я бы предпочел, чтобы меня не трогали."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/callous))
 		mood_change = 0
-		description = "[friend.name] is way too nice for this station."
+		description = "[capitalize(friend.declent_ru(NOMINATIVE))] слишком мил для этой станции."
 		return
 
 	description = "[capitalize(friend.declent_ru(NOMINATIVE))] был очень добр ко мне."
@@ -60,15 +60,15 @@
 /datum/mood_event/besthug/add_effects(mob/friend)
 	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
 		mood_change = 2
-		description = "[friend.name] is great to be around, but that's it."
+		description = "Весело находиться рядом с [friend.declent_ru(NOMINATIVE)] но это всё."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 2
-		description = "[friend.name] is great to be around, but I wish they'd stop touching me."
+		description = "Весело находиться рядом с [friend.declent_ru(NOMINATIVE)], но я бы предпочел, чтобы меня не трогали."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/callous))
 		mood_change = 0
-		description = "[friend.name] is way too nice for this station."
+		description = "[friend.declent_ru(NOMINATIVE)] слишком мил для этой станции."
 		return
 
 	description = "Весело находиться рядом с [friend.declent_ru(INSTRUMENTAL)], не могу нарадоваться!"
@@ -81,15 +81,15 @@
 /datum/mood_event/warmhug/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
 		mood_change = 0
-		description = "I don't like hugs, but the warmth is nice...."
+		description = "Я не люблю обнимашки, но тепло приятно..."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 0
-		description = "I would prefer not to be touched, but the warmth is nice...."
+		description = "Я бы предпочел, чтобы меня не трогали, но тепло приятно..."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/callous))
 		mood_change = 0
-		description = "I hate hugs. I can warm myself up."
+		description = "Я ненавижу обнимашки. Я могу согреться сам."
 		return
 
 /datum/mood_event/tailpulled
@@ -103,7 +103,7 @@
 		|| HAS_PERSONALITY(owner, /datum/personality/callous) \
 	)
 		mood_change = -2
-		description = "Who the hell is touching my tail?"
+		description = "Кто, чёрт возьми, трогает мой хвост?"
 
 /datum/mood_event/arcade
 	description = "Я победил в этой аркаде!"
@@ -114,7 +114,7 @@
 /datum/mood_event/arcade/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/industrious) || HAS_PERSONALITY(owner, /datum/personality/slacking/diligent))
 		mood_change = -1
-		description = "Wow, I beat the game. I could've been doing anything productive instead."
+		description = "Вау, я прошел игру. Я мог бы делать что-то продуктивное вместо этого."
 
 /datum/mood_event/blessing
 	description = "Меня благословили."
@@ -136,10 +136,10 @@
 /datum/mood_event/book_nerd/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/erudite))
 		mood_change = 2
-		description = "I love reading books!"
+		description = "Я обожаю читать книги!"
 	if(HAS_PERSONALITY(owner, /datum/personality/uneducated))
 		mood_change = -1
-		description = "Who cares about books?"
+		description = "Кому какое дело до книг?"
 
 /datum/mood_event/exercise
 	description = "Спорт высвобождает эндорфины!"
@@ -149,10 +149,10 @@
 	mood_change = fitness_level // the more fit you are, the more you like to work out
 	if(HAS_PERSONALITY(owner, /datum/personality/slacking/lazy))
 		mood_change *= -0.5
-		description = "Working out, what a chore!"
+		description = "Тренировки, какая рутина!"
 	else if(!HAS_PERSONALITY(owner, /datum/personality/athletic))
 		mood_change *= 0.5
-		description = "Working out is a bit of a chore, but it is pretty fulfilling."
+		description = "Тренировки немного утомительны, но довольно приятны."
 
 /datum/mood_event/pet_animal
 	description = "Животные такие милые! Не могу перестать гладить!"
@@ -165,7 +165,7 @@
 
 	if(HAS_PERSONALITY(owner, /datum/personality/animal_disliker))
 		mood_change = -1
-		description = "Ewww, [animal.name] is so dirty! I don't want to touch it!"
+		description = "Фу, [animal.declent_ru(NOMINATIVE)] такой грязный! Я не хочу его трогать!"
 		return
 
 	var/dog_fan = HAS_PERSONALITY(owner, /datum/personality/dog_fan)
@@ -174,19 +174,19 @@
 	var/iscat = istype(animal, /mob/living/basic/pet/cat)
 	if((dog_fan && isdog) || (cat_fan && iscat) || HAS_PERSONALITY(owner, /datum/personality/animal_friend))
 		mood_change = 3
-		description = "I love [animal.name] so much, [animal.p_theyre()] so adorable! I can't stop petting [animal.p_them()]!"
+		description = "Я так люблю [animal.declent_ru(ACCUSATIVE)], [animal.ru_p_they()] такой очаровательный! Не могу перестать гладить [animal.p_them()]!"
 		return
 	if(dog_fan && iscat)
 		mood_change = -1
-		description = "I don't like [animal.name]! I prefer dogs!"
+		description = "Мне не нравится [animal.declent_ru(NOMINATIVE)]! Я предпочитаю собак!"
 		return
 	if(cat_fan && isdog)
 		mood_change = -1
-		description = "I don't like [animal.name]! I prefer cats!"
+		description = "Мне не нравится [animal.declent_ru(NOMINATIVE)]! Я предпочитаю кошек!"
 		return
 
 	mood_change = 1
-	description = "[animal.name] is adorable!"
+	description = "[animal.declent_ru(NOMINATIVE)] очарователен!"
 
 // Change the moodlet if we get refreshed (we may have pet another type of animal)
 /datum/mood_event/pet_animal/be_refreshed(datum/mood/home, mob/animal)
@@ -211,10 +211,10 @@
 /datum/mood_event/saved_life/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/callous))
 		mood_change = 0
-		description = "I don't care much for saving lives."
+		description = "Меня не особо волнует спасение жизней."
 	if(HAS_PERSONALITY(owner, /datum/personality/misanthropic))
 		mood_change = -1
-		description = "Saving lives is a waste of time."
+		description = "Спасение жизней - пустая трата времени."
 
 /datum/mood_event/oblivious
 	description = "Какой прекрасный день."
@@ -238,7 +238,7 @@
 	special_screen_replace = FALSE
 
 /datum/mood_event/ling
-	description = "We have a goal, and we will reach it, whatever it takes!"
+	description = "У нас есть цель, и мы достигнем её, чего бы это ни стоило!"
 	mood_change = 12
 	hidden = TRUE
 
@@ -249,7 +249,7 @@
 	hidden = TRUE
 
 /datum/mood_event/revolution
-	description = "VIVA LA REVOLUTION!"
+	description = "ДА ЗДРАВСТВУЕТ РЕВОЛЮЦИЯ!"
 	mood_change = 3
 	hidden = TRUE
 
@@ -259,12 +259,12 @@
 	hidden = TRUE
 
 /datum/mood_event/heretics
-	description = "THE HIGHER I RISE, THE MORE I SEE."
+	description = "ЧЕМ ВЫШЕ Я ПОДНИМАЮСЬ, ТЕМ БОЛЬШЕ Я ВИЖУ."
 	mood_change = 12 //maybe being a heretic isnt that bad after all
 	hidden = TRUE
 
 /datum/mood_event/rift_fishing
-	description = "THE MORE I FISH, THE HIGHER I RISE."
+	description = "ЧЕМ БОЛЬШЕ Я РЫБАЧУ, ТЕМ ВЫШЕ Я ПОДНИМАЮСЬ."
 	mood_change = 6
 	timeout = 5 MINUTES
 
@@ -346,7 +346,7 @@
 /datum/mood_event/hope_lavaland/add_effects(...)
 	if(HAS_PERSONALITY(owner, /datum/personality/pessimistic))
 		mood_change = 0
-		description = "This emblem is a lie. There is no hope for me."
+		description = "Эта эмблема - ложь. Для меня нет надежды."
 		return
 
 /datum/mood_event/confident_mane
@@ -382,16 +382,16 @@
 	if(HAS_PERSONALITY(owner, /datum/personality/callous) || HAS_PERSONALITY(owner, /datum/personality/misanthropic))
 		mood_change = -2
 		if(helper)
-			description = "They should have helped themselves."
+			description = "Им следовало помочь себе самим."
 		else
-			description = "I could've gotten up myself."
+			description = "Я мог бы подняться сам."
 
 	else if(HAS_PERSONALITY(owner, /datum/personality/compassionate))
 		mood_change = 2
 		if(helper)
 			description = "Мне понравилось помогать [other_person]!"
 		else
-			description = "[other_person] helped me up, how nice of [other_person.p_them()]!"
+			description = "[other_person.declent_ru(NOMINATIVE)] помог мне подняться, как мило с [other_person.ru_p_them()] стороны!"
 
 /datum/mood_event/high_ten
 	description = "ВЕЛИКОЛЕПНО! ДВОЙНАЯ ПЯТЮНЯ!"
@@ -422,7 +422,7 @@
 /datum/mood_event/kiss/add_effects(mob/beau, direct)
 	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
 		mood_change = -2
-		description = "A kiss? Call HR!"
+		description = "Поцелуй? Я звоню в отдел кадров!"
 		return
 	if(!beau)
 		return
@@ -466,10 +466,10 @@
 /datum/mood_event/gaming/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/industrious) || HAS_PERSONALITY(owner, /datum/personality/slacking/diligent))
 		mood_change = -1
-		description = "Is now really the time to be playing games? I should be working."
+		description = "Разве сейчас время для игр? Мне следует работать."
 
 /datum/mood_event/gamer_won
-	description = "Я люблю выигрывать в видеоиграх!"
+	description = "Я люблю выигрывать в видеоигры!"
 	mood_change = 6
 	timeout = 5 MINUTES
 	event_flags = MOOD_EVENT_GAMING
@@ -481,7 +481,7 @@
 /datum/mood_event/love_reagent/add_effects(duration)
 	if(HAS_PERSONALITY(owner, /datum/personality/pessimistic))
 		mood_change = 0
-		description = "This food is okay, I guess."
+		description = "Эта еда нормальная, наверное."
 		return
 
 	if(isnum(duration))
@@ -530,30 +530,30 @@
 	timeout = 3 MINUTES
 
 /datum/mood_event/fish_released
-	description = "Go, fish, swim and be free!"
+	description = "Плыви, рыбка, плыви и будь свободна!"
 	mood_change = 1
 	timeout = 2 MINUTES
 
 /datum/mood_event/fish_released/add_effects(morbid, obj/item/fish/fish)
 	if(!morbid)
-		description = "Go, [fish.name], swim and be free!"
+		description = "Плыви, [fish.declent_ru(NOMINATIVE)], плыви и будь свободна!"
 		return
 	if(fish.status == FISH_DEAD)
-		description = "Some scavenger will surely find a use for the remains of [fish.name]. How pragmatic."
+		description = "Какой-нибудь падальщик наверняка найдет применение останкам [fish.declent_ru(INSTRUMENTAL)]. Как практично."
 	else
-		description = "Returned to the burden of the deep. But is this truly a mercy, [fish.name]? There will always be bigger fish..."
+		description = "Вернулся к бремени глубин. Но разве это милосердие, [fish.declent_ru(NOMINATIVE)]? Всегда найдется рыбка покрупнее..."
 
 /datum/mood_event/fish_petting
-	description = "It felt nice to pet the fish."
+	description = "Было приятно погладить рыбку."
 	mood_change = 2
 	timeout = 2 MINUTES
 	event_flags = MOOD_EVENT_WHIMSY
 
 /datum/mood_event/fish_petting/add_effects(obj/item/fish/fish, morbid)
 	if(!morbid)
-		description = "It felt nice to pet \the [fish]."
+		description = "Было приятно погладить [fish.declent_ru(INSTRUMENTAL)]."
 	else
-		description = "I caress \the [fish] as [fish.p_they()] squirms under my touch, blissfully unaware of how cruel this world is."
+		description = "Я ласкаю [fish.declent_ru(INSTRUMENTAL)], пока [fish.ru_p_they()] извивается под моим прикосновением, блаженно не осознавая, насколько жесток этот мир."
 
 /datum/mood_event/kobun
 	description = "Вы все любимы Вселенной. Я не одинок, как и вы."
@@ -577,13 +577,13 @@
 	special_screen_replace = FALSE
 
 /datum/mood_event/basketball_score
-	description = "Swish! Nothing but net."
+	description = "Свищ! Только сетка."
 	mood_change = 2
 	timeout = 5 MINUTES
 	event_flags = MOOD_EVENT_WHIMSY | MOOD_EVENT_GAMING
 
 /datum/mood_event/basketball_dunk
-	description = "Slam dunk! Boom, shakalaka!"
+	description = "Слэм-данк! Бум, шакалака!"
 	mood_change = 2
 	timeout = 5 MINUTES
 	event_flags = MOOD_EVENT_WHIMSY | MOOD_EVENT_GAMING
@@ -599,12 +599,12 @@
 	mood_change = 200
 
 /datum/mood_event/prophat
-	description = "This hat fills me with whimsical joy!"
+	description = "Эта шляпа наполняет меня причудливой радостью!"
 	mood_change = 2
 	event_flags = MOOD_EVENT_WHIMSY
 
 /datum/mood_event/slots
-	description = "Let's go gambling!"
+	description = "Давайте играть в азартные игры!"
 	mood_change = 1
 	timeout = 1 MINUTES
 	event_flags = MOOD_EVENT_GAMING
@@ -614,11 +614,11 @@
 		mood_change *= 2
 	else if(HAS_PERSONALITY(owner, /datum/personality/industrious) || HAS_PERSONALITY(owner, /datum/personality/slacking/diligent))
 		mood_change *= -1
-		description = "Why am I gambling my time and money away?"
+		description = "Зачем я трачу время и деньги на азартные игры?"
 
 
 /datum/mood_event/slots/win
-	description = "Aw yeah I won!"
+	description = "О да, я выиграл!"
 	mood_change = 2
 	timeout = 5 MINUTES
 	event_flags = MOOD_EVENT_GAMING
@@ -633,71 +633,71 @@
 	timeout = 10 MINUTES
 
 /datum/mood_event/slots/win/jackpot
-	description = "JACKPOT! AW YEAH!"
+	description = "ДЖЕКПОТ! О ДА!"
 	mood_change = 6
 	timeout = 30 MINUTES
 
 /datum/mood_event/empathetic_happy
-	description = "Seeing happy people makes me happy."
+	description = "Видеть счастливых людей приятно."
 	mood_change = 2
 	timeout = 2 MINUTES
 
 /datum/mood_event/misanthropic_happy
-	description = "Seeing sad people makes me glad."
+	description = "Видеть грустных людей радует."
 	mood_change = 2
 	timeout = 2 MINUTES
 
 /datum/mood_event/paranoid/alone
-	description = "Peace and quiet, no one around to threaten me."
+	description = "Мир и тишина, никого рядом, чтобы угрожать мне."
 	mood_change = 1
 
 /datum/mood_event/paranoid/small_group
-	description = "I feel safer in this small group. We've got each other's backs."
+	description = "Я чувствую себя в безопасности в этой небольшой группе. Мы прикрываем друг друга."
 	mood_change = 2
 
 /datum/mood_event/nt_loyalist
-	description = "I feel proud to be part of the NT™ family!"
+	description = "Я горжусь тем, что являюсь частью семьи NT™!"
 	mood_change = 2
 
 /datum/mood_event/loyalist_revs_lost
-	description = "The revolution was defeated! Long live the Nanotrasen!"
+	description = "Революция разгромлена! Да здравствует NanoTrasen!"
 	mood_change = 4
 	timeout = 10 MINUTES
 
 /datum/mood_event/disillusioned_revs_win
-	description = "The revolution was a success! Viva la revolution!"
+	description = "Революция победила! Да здравствует революция!"
 	mood_change = 4
 	timeout = 10 MINUTES
 
 /datum/mood_event/enjoying_department_area
-	description = "I love my job."
+	description = "Я обожаю свою работу."
 	mood_change = 1
 
 /datum/mood_event/slacking_off_lazy
-	description = "Boss makes a dollar, I make a dime. That's why I slack on job time."
+	description = "Босс получает доллар, я получаю десять центов. Поэтому я бездельничаю на работе."
 	mood_change = 1
 
 /datum/mood_event/working_diligent
-	description = "Working hard is its own reward."
+	description = "Усердная работа сама по себе награда."
 	mood_change = 1
 
 /datum/mood_event/creative_patronage
-	description = "Support artists!"
+	description = "Поддерживаю художников!"
 	mood_change = 2
 	timeout = 5 MINUTES
 
 /datum/mood_event/creative_framing
-	description = "Hanging up art really ties the room together."
+	description = "Развешивание картин действительно связывает комнату воедино."
 	mood_change = 2
 	timeout = 5 MINUTES
 
 /datum/mood_event/creative_sculpting
-	description = "Sculpting is a great creative outlet."
+	description = "Скульптура - отличный творческий выход."
 	mood_change = 2
 	timeout = 5 MINUTES
 
 /datum/mood_event/whimsical_slip
-	description = "Haha! That guy fell over!"
+	description = "Хаха! Этот парень упал!"
 	mood_change = 3
 	timeout = 2 MINUTES
 	event_flags = MOOD_EVENT_WHIMSY

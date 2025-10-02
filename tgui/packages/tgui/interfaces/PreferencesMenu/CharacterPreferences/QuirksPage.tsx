@@ -478,7 +478,7 @@ export function QuirkPersonalityPage() {
               align="center"
               fontSize="14px"
             >
-              Personality
+              Тип личности
             </Button>
           </Stack.Item>
         </Stack>

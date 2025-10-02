@@ -168,7 +168,7 @@ export function CharacterPreferenceWindow(props) {
               page={Page.Quirks}
               setPage={setCurrentPage}
             >
-              Черты и личность
+              Черты и тип личности
             </PageButton>
             {!!data.tts_enabled && (
               <PageButton

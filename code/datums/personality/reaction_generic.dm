@@ -1,8 +1,8 @@
 /datum/personality/apathetic
 	savefile_key = "apathetic"
-	name = "Apathetic"
-	desc = "I don't care about much. Not the good, nor the bad, and certainly not the ugly."
-	neut_gameplay_desc = "All moodlets affect you less"
+	name = "Безразличный"
+	desc = "Мне почти ни до чего нет дела. Ни до хорошего, ни до плохого, и уж точно ни до отвратительного."
+	neut_gameplay_desc = "Настроение влияет на вас слабее"
 	groups = list(PERSONALITY_GROUP_MOOD_POWER)
 
 /datum/personality/apathetic/apply_to_mob(mob/living/who)
@@ -15,9 +15,9 @@
 
 /datum/personality/sensitive
 	savefile_key = "sensitive"
-	name = "Sensitive"
-	desc = "I am easily influenced by the world around me."
-	neut_gameplay_desc = "All moodlets affect you more"
+	name = "Чувствительный"
+	desc = "На меня легко влияет всё, что происходит вокруг."
+	neut_gameplay_desc = "Настроение влияет на вас сильнее"
 	groups = list(PERSONALITY_GROUP_MOOD_POWER)
 
 /datum/personality/sensitive/apply_to_mob(mob/living/who)
@@ -30,9 +30,9 @@
 
 /datum/personality/resilient
 	savefile_key = "resilient"
-	name = "Resilient"
-	desc = "It's whatever. I can take it!"
-	pos_gameplay_desc = "Negative moodlets expire faster"
+	name = "Стойкий"
+	desc = "Всё равно. Я всё смогу!"
+	pos_gameplay_desc = "Негативное настроение проходит быстрее"
 	groups = list(PERSONALITY_GROUP_MOOD_LENGTH)
 
 /datum/personality/resilient/apply_to_mob(mob/living/who)
@@ -45,9 +45,9 @@
 
 /datum/personality/brooding
 	savefile_key = "brooding"
-	name = "Brooding"
-	desc = "Everything gets to me and I can't help but think about it."
-	neg_gameplay_desc = "Negative moodlets last longer"
+	name = "Унылый"
+	desc = "Всё меня задевает, и я не могу перестать об этом думать."
+	neg_gameplay_desc = "Негативное настроение длится дольше"
 	groups = list(PERSONALITY_GROUP_MOOD_LENGTH)
 
 /datum/personality/brooding/apply_to_mob(mob/living/who)
@@ -60,9 +60,9 @@
 
 /datum/personality/hopeful
 	savefile_key = "hopeful"
-	name = "Hopeful"
-	desc = "I believe things will always get better."
-	pos_gameplay_desc = "Positive moodlets last longer"
+	name = "Надеющийся"
+	desc = "Я верю, что всё всегда наладится."
+	pos_gameplay_desc = "Позитивное настроение длится дольше"
 	groups = list(PERSONALITY_GROUP_HOPE)
 
 /datum/personality/hopeful/apply_to_mob(mob/living/who)
@@ -75,9 +75,9 @@
 
 /datum/personality/pessimistic
 	savefile_key = "pessimistic"
-	name = "Pessimistic"
-	desc = "I believe our best days are behind us."
-	neg_gameplay_desc = "Positive moodlets last shorter"
+	name = "Пессимистичный"
+	desc = "Я считаю, что наши лучшие дни остались позади."
+	neg_gameplay_desc = "Позитивное настроение длится меньше"
 	groups = list(PERSONALITY_GROUP_HOPE)
 
 /datum/personality/pessimistic/apply_to_mob(mob/living/who)
@@ -90,13 +90,13 @@
 
 /datum/personality/whimsical
 	savefile_key = "whimsical"
-	name = "Whimsical"
-	desc = "This station is too serious sometimes, lighten up!"
-	pos_gameplay_desc = "Likes ostensibly pointless but silly things, and does not mind clownish pranks"
+	name = "Причудливый"
+	desc = "На этой станции иногда слишком серьёзно относятся ко всему, расслабьтесь!"
+	pos_gameplay_desc = "Любит бессмысленные, но забавные вещи и не против клоунских проделок"
 
 /datum/personality/snob
 	savefile_key = "snob"
-	name = "Snobbish"
-	desc = "I expect only the best out of this station - anything less is unacceptable!"
-	neut_gameplay_desc = "Room quality affects your mood"
+	name = "Снобистский"
+	desc = "Я ожидаю от этой станции только самого лучшего — всё остальное неприемлемо!"
+	neut_gameplay_desc = "Качество помещения влияет на ваше настроение"
 	personality_trait = TRAIT_SNOB
