@@ -175,9 +175,8 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 						qdel(temp_speaker)
 
 					to_chat(M, span_notice("[icon2html(src, M)] [voice_desc]: \"[capitalize(message)]\""))
-				else
-					// Обратная совместимость для старого формата
-					to_chat(M, span_notice("[icon2html(src, M)] [voice_desc]: \"[capitalize(data)]\""))
+
+					M.create_chat_message(attached_to, raw_message = capitalize(message), spans = list("whisper"))
 
 		if(COMMSIG_HANGUP)
 			end_call(forced = TRUE)
