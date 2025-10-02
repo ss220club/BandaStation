@@ -12,7 +12,7 @@
 	button_icon_state = "shadow_veil"
 	cooldown_time = 15 SECONDS
 	// Shadowling related
-	min_req = 3
+	min_req = 1
 	max_req = 10
 	required_thralls = 30
 	var/dark_square_radius = 5
