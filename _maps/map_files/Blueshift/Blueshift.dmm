@@ -6305,13 +6305,11 @@
 /area/station/maintenance/ghetto/port)
 "bnn" = (
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/disposalpipe/segment{
-	dir = 5
-	},
-/turf/open/floor/wood,
-/area/station/command/heads_quarters/blueshield)
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/disposalpipe/junction,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/command)
 "bnq" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -14842,12 +14840,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/security/checkpoint/customs)
-"cPk" = (
-/obj/effect/decal/cleanable/dirt{
-	icon_state = "dirt-flat-1"
-	},
-/turf/closed/wall/rust,
-/area/station/maintenance/department/medical/central)
 "cPw" = (
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
@@ -19477,10 +19469,13 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "dKH" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/disposalpipe/segment{
-	dir = 10
+	dir = 5
 	},
-/turf/open/floor/carpet/executive,
+/turf/open/floor/wood,
 /area/station/command/heads_quarters/blueshield)
 "dKI" = (
 /obj/structure/flora/bush/jungle/b/style_2,
@@ -36482,14 +36477,12 @@
 /turf/open/floor/carpet,
 /area/station/security/detectives_office)
 "hck" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/structure/chair/office{
+	dir = 1
 	},
-/turf/open/floor/iron,
-/area/station/hallway/secondary/command)
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/wood,
+/area/station/command/heads_quarters/blueshield)
 "hcn" = (
 /obj/machinery/light/directional/east,
 /obj/machinery/status_display/ai/directional/east,
@@ -38614,7 +38607,6 @@
 	dir = 4
 	},
 /obj/effect/landmark/start/assistant,
-/obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/station/commons/fitness/recreation/entertainment)
@@ -64008,11 +64000,10 @@
 /turf/open/floor/plating/airless,
 /area/station/maintenance/fore/upper)
 "muS" = (
-/obj/structure/chair/office{
-	dir = 1
+/obj/structure/disposalpipe/segment{
+	dir = 10
 	},
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/wood,
+/turf/open/floor/carpet/executive,
 /area/station/command/heads_quarters/blueshield)
 "muU" = (
 /obj/structure/chair,
@@ -68660,9 +68651,11 @@
 /area/station/service/cafeteria)
 "nqO" = (
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/disposalpipe/junction,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "nqY" = (
@@ -217738,10 +217731,10 @@ taP
 qJL
 lLw
 vfN
-dKH
-dBT
 muS
-bnn
+dBT
+hck
+dKH
 qCC
 sZp
 aBB
@@ -219026,7 +219019,7 @@ qsP
 lKB
 rXp
 qsP
-hck
+nqO
 qsP
 qsP
 neN
@@ -219283,7 +219276,7 @@ rpk
 rpk
 bnq
 bnq
-nqO
+bnn
 bnq
 cYv
 hdx
@@ -230591,7 +230584,7 @@ dtD
 dtD
 vzh
 vzh
-cPk
+dtD
 vzh
 uJT
 vzh
