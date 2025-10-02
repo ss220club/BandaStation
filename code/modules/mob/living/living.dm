@@ -512,7 +512,7 @@
 //for more info on why this is not atom/pull, see examinate() in mob.dm
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 
 	if(istype(AM) && Adjacent(AM))
 		start_pulling(AM)
@@ -528,7 +528,7 @@
 
 /mob/living/verb/stop_pulling1()
 	set name = "Stop Pulling"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 	stop_pulling()
 
 //same as above
@@ -663,7 +663,7 @@
 
 /mob/living/proc/toggle_resting()
 	set name = "Rest"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 
 	set_resting(!resting, FALSE)
 
@@ -1128,7 +1128,7 @@
 
 /mob/living/verb/resist()
 	set name = "Resist"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 
 	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(execute_resist)))
 
