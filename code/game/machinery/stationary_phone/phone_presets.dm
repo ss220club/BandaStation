@@ -132,6 +132,18 @@
 		was_renamed = TRUE
 		name = "[declent_ru(NOMINATIVE)] «[display_name]»"
 
+// пока добавлю сюда
+
+/datum/supply_pack/transmitter
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE
+	crate_name = "стационарный телефон"
+	desc = "Один стационарный телефон для любых ваших стартапов!"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	contains = list(/obj/structure/transmitter)
+
 #undef PHONE_NET_PUBLIC
 #undef PHONE_NET_COMMAND
 #undef PHONE_NET_CENTCOM
