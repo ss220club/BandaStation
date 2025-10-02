@@ -13,8 +13,6 @@
 	var/wieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberon.ogg'
 	var/unwieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberoff.ogg'
 	var/saber_name = "mid"
-	var/hit_wield = 'modular_bandastation/weapon/sound/melee/mid_saberhit.ogg'
-	var/hit_unwield = "swing_hit"
 	var/ranged = FALSE
 	var/power = 1
 	var/refusal_text = "Злоба неподвластна твоей воле, усмрить её сможет лишь сильнейший."
@@ -23,6 +21,7 @@
 	block_chance = 88
 	two_hand_force = 45
 	attack_speed = CLICK_CD_RAGE_MELEE
+	bypass_nodrop = TRUE
 
 /obj/item/dualsaber/legendary_saber/Initialize(mapload)
 	. = ..()
@@ -35,17 +34,6 @@
 /obj/item/dualsaber/legendary_saber/update_icon_state()
 	. = ..()
 	icon_state = inhand_icon_state = HAS_TRAIT(src, TRAIT_WIELDED) ? "[saber_name]_dualsaber[saber_color][HAS_TRAIT(src, TRAIT_WIELDED)]" : "[saber_name]_dualsaber0"
-
-/obj/item/dualsaber/legendary_saber/on_wield(obj/item/source, mob/living/carbon/user)
-	update_weight_class(w_class_on)
-	hitsound = hit_wield
-	START_PROCESSING(SSobj, src)
-	set_light_on(TRUE)
-	return .
-
-/obj/item/dualsaber/legendary_saber/on_unwield()
-	. = ..()
-	hitsound = hit_unwield
 
 /obj/item/dualsaber/legendary_saber/sorrow_catcher
 	name = "Ловец Скорби"

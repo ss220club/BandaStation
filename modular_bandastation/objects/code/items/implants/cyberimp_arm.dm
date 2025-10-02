@@ -20,7 +20,7 @@
 	items_to_create = list()
 	var/max_w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/organ/cyberimp/arm/toolkit/custom/screwdriver_act(mob/living/user, obj/item/tool)
+/obj/item/organ/cyberimp/arm/toolkit/custom/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	if(LAZYLEN(items_list) == 1)
 		var/datum/weakref/ref = items_list[1]
 		active_item = ref.resolve()
@@ -34,10 +34,6 @@
 		return
 
 /obj/item/organ/cyberimp/arm/toolkit/custom/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!user.transferItemToLoc(tool, src))
-		return
-	if(tool.tool_behaviour == TOOL_SCREWDRIVER)
-		return
 	if(LAZYLEN(items_list) == 1)
 		var/datum/weakref/ref = items_list[1]
 		active_item = ref.resolve()
@@ -47,10 +43,15 @@
 	if(tool.w_class > max_w_class)
 		user.balloon_alert(user, "Не помещается!")
 		return
+	if(!user.transferItemToLoc(tool, src))
+		return
 	items_list += WEAKREF(tool)
 	active_item = tool
 	user.balloon_alert(user, "Установлено: [tool].")
 	playsound(get_turf(src), 'sound/machines/click.ogg', 50, TRUE)
+
+/obj/item/organ/cyberimp/arm/toolkit/custom/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	return NONE // to prevent screwdriver insertion after item removal
 
 /obj/item/organ/cyberimp/arm/toolkit/custom/on_mob_remove(mob/living/carbon/arm_owner)
 	if(active_item)
