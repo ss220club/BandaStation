@@ -142,7 +142,7 @@
 
 		if(SSlag_switch.measures[SLOWMODE_SAY] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES) && src == usr)
 			if(!COOLDOWN_FINISHED(client, say_slowmode))
-				to_chat(src, span_warning("Сообщение было отправлено из-за слоумода. Пожалуйста, ждите [SSlag_switch.slowmode_cooldown/10] секунд между сообщениями.\n\"[message]\""))
+				to_chat(src, span_warning("Сообщение не было отправлено из-за слоумода. Пожалуйста, ждите [SSlag_switch.slowmode_cooldown/10] секунд между сообщениями.\n\"[message]\""))
 				return
 			COOLDOWN_START(client, say_slowmode, SSlag_switch.slowmode_cooldown)
 
@@ -169,7 +169,9 @@
 	var/displayed_key = key
 	if(client?.holder?.fakekey)
 		displayed_key = null
-	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key)
+	// BANDASTATION EDIT START - ghost runechat
+	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key, raw_message = message)
+	// BANDASTATION EDIT END - ghost runechat
 
 ///Check if this message is an emote
 /mob/proc/check_emote(message, forced)
