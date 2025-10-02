@@ -25,11 +25,13 @@
 	recoil = 0.3
 
 /obj/item/gun/ballistic/automatic/sindano/add_seclight_point()
-	AddComponent(/datum/component/seclite_attachable, \
+	AddComponent(\
+		/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "mini-light", \
 		overlay_x = 22, \
-		overlay_y = 9)
+		overlay_y = 9 \
+	)
 
 /obj/item/gun/ballistic/automatic/sindano/Initialize(mapload)
 	. = ..()

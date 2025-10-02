@@ -25,11 +25,13 @@
 	obj_flags = UNIQUE_RENAME
 
 /obj/item/gun/ballistic/automatic/fn18/add_seclight_point()
-	AddComponent(/datum/component/seclite_attachable, \
+	AddComponent(\
+		/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
 		overlay_x = 27, \
-		overlay_y = 12)
+		overlay_y = 12 \
+	)
 
 /obj/item/gun/ballistic/automatic/fn18/Initialize(mapload)
 	. = ..()

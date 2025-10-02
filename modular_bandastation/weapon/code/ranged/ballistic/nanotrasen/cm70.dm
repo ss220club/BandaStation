@@ -22,11 +22,13 @@
 	suppressor_y_offset = 0
 
 /obj/item/gun/ballistic/automatic/pistol/cm70/add_seclight_point()
-	AddComponent(/datum/component/seclite_attachable, \
+	AddComponent(\
+		/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "mini-light", \
 		overlay_x = 22, \
-		overlay_y = 13)
+		overlay_y = 13 \
+	)
 
 /obj/item/gun/ballistic/automatic/pistol/cm70/no_mag
 	spawnwithmagazine = FALSE

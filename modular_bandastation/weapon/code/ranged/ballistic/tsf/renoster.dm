@@ -28,11 +28,13 @@
 	)
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/add_seclight_point()
-	AddComponent(/datum/component/seclite_attachable, \
+	AddComponent(
+		/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
 		overlay_x = 32, \
-		overlay_y = 10)
+		overlay_y = 10 \
+	)
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/examine(mob/user)
 	. = ..()

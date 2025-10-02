@@ -34,11 +34,13 @@
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
 /obj/item/gun/ballistic/automatic/as32/add_seclight_point()
-	AddComponent(/datum/component/seclite_attachable, \
+	AddComponent(\
+		/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
 		overlay_x = 29, \
-		overlay_y = 13)
+		overlay_y = 13 \
+	)
 
 /obj/item/gun/ballistic/automatic/as32/no_mag
 	spawnwithmagazine = FALSE
