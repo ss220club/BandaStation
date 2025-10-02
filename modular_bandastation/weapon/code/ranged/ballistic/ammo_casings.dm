@@ -17,7 +17,7 @@
 	name = ".35 Sol Short ripper bullet casing"
 	desc = "Стандартный экспансивный пистолетный патрон ТСФ калибра .35 Sol Short. Наносит целям режущие раны, но слаб против брони."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "sl-casing"
+	icon_state = "sh-casing"
 	projectile_type = /obj/projectile/bullet/c35sol/ripper
 
 // .35 sol armor piercing are the AP rounds for this weapon
@@ -128,7 +128,7 @@
 	name = "9x25mm NT hollow-point bullet casing"
 	desc = "Стандартный экспансивный пистолетный патрон НТ калибра 9x25мм. Наносит целям режущие раны, но слаб против брони."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "sl-casing"
+	icon_state = "sh-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/hp
 
 /obj/item/ammo_casing/c9x25mm/ap
@@ -244,3 +244,68 @@
 	projectile_type = /obj/projectile/bullet/c38/ap
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sa-casing"
+
+/obj/item/ammo_casing/c38/dumdum
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sh-casing"
+
+/obj/item/ammo_casing/c38/match
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
+
+/obj/item/ammo_casing/c38/hotshot
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "si-casing"
+
+// MARK: .357
+/obj/item/ammo_casing/c357/match
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
+
+/obj/item/ammo_casing/c357/phasic
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sa-casing"
+
+/obj/item/ammo_casing/c357/heartseeker
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sh-casing"
+
+// MARK: 9mm
+/obj/item/ammo_casing/c9mm/hp
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sh-casing"
+
+/obj/item/ammo_casing/c9mm/ap
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sa-casing"
+
+/obj/item/ammo_casing/c9mm/fire
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "si-casing"
+
+/obj/item/ammo_casing/c9mm/rubber
+	name = "9mm rubber bullet casing"
+	desc = "Травматический пистолетный патрон с резиновой пулей калибра 9мм. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
+	projectile_type = /obj/projectile/bullet/c9mm/rubber
+
+// MARK: .45
+/obj/item/ammo_casing/c45/rubber
+	name = ".45 rubber bullet casing"
+	desc = "Травматический пистолетный патрон калибра .45 с резиновой пулей. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
+	projectile_type = /obj/projectile/bullet/c45/rubber
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
+
+/obj/item/ammo_casing/c45/ap
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sa-casing"
+
+/obj/item/ammo_casing/c45/hp
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sh-casing"
+
+/obj/item/ammo_casing/c45/inc
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "si-casing"

@@ -279,6 +279,7 @@ export function TguiSay() {
     Radio: 'Радио',
     Me: 'Эмоц',
     Admin: 'Админ',
+    Mentor: `Мент`,
   };
 
   const theme =

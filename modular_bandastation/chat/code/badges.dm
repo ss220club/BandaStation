@@ -19,8 +19,9 @@ GLOBAL_LIST(badge_icons_cache)
 		parts += badge_parts
 
 	if(donor_tier && prefs.read_preference(/datum/preference/toggle/donor_public) || prefs.is_byond_member && (prefs.toggles & MEMBER_PUBLIC))
+		var/selected_pref = GLOB.donor_chat_effects[prefs.read_preference(/datum/preference/choiced/donor_chat_effect)]
 		var/donor_color = prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour
-		var/donor_shine = donor_tier >= 3 && prefs.read_preference(/datum/preference/toggle/donor_chat_shine) ? "class='shine'" : ""
+		var/donor_shine = donor_tier >= 3 && selected_pref ? "class='tier-[donor_tier] [selected_pref]'" : ""
 		parts += "<span [donor_shine] style='[donor_shine ? "--shine-color: [donor_color];" : "color: [donor_color];"]'>[key]</span>"
 	else
 		parts += "[key]"
