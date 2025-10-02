@@ -660,7 +660,7 @@
 	mood_change = 2
 
 /datum/mood_event/loyalist_revs_lost
-	description = "Революция разгромлена! Да здравствует NanoTrasen!"
+	description = "Революция разгромлена! Да здравствует Nanotrasen!"
 	mood_change = 4
 	timeout = 10 MINUTES
 

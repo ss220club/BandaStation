@@ -33,6 +33,6 @@
 /datum/personality/nt/disillusioned
 	savefile_key = "disillusioned"
 	name = "Разочарованный"
-	desc = "NanoTrasen уже не та, что раньше. Я не на это подписывался."
+	desc = "Nanotrasen уже не та, что раньше. Я не на это подписывался."
 	neg_gameplay_desc = "Не нравятся корпоративные постеры и знаки"
 	mood_event_type = /datum/mood_event/nt_disillusioned
