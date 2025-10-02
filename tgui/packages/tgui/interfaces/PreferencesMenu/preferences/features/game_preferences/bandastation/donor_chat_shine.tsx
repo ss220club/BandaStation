@@ -5,6 +5,6 @@ export const donor_chat_effect: Feature<string> = {
   name: 'Блеск ника в чате',
   category: 'Чат',
   description:
-    'Выбор эффекта переливания ckey в OOC чате. Требует включённого статуса бустера.',
+    'Выбор эффекта переливания никнейма в OOC чате. Требует включённого статуса бустера.',
   component: FeatureDropdownInput,
 };

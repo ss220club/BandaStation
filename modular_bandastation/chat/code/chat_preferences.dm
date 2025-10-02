@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(donor_shines, list(
+GLOBAL_LIST_INIT(donor_chat_effects, list(
 	"Автоматически" = "auto",
 	"Металлик" = "metal",
 	"Светящийся" = "glowing",
@@ -11,10 +11,10 @@ GLOBAL_LIST_INIT(donor_shines, list(
 	savefile_identifier = PREFERENCE_PLAYER
 
 /datum/preference/choiced/donor_chat_effect/init_possible_values()
-	return assoc_to_keys(GLOB.donor_shines)
+	return assoc_to_keys(GLOB.donor_chat_effects)
 
 /datum/preference/choiced/donor_chat_effect/create_default_value()
-	return GLOB.donor_shines[1]
+	return GLOB.donor_chat_effects[1]
 
 /datum/preference/toggle/donor_public
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
