@@ -19,6 +19,10 @@ type Data = {
   current_phone_id: string;
   available_transmitters: string[];
   callers_list?: { dir: 'in' | 'out'; id: string; name: string }[];
+  current_call?: {
+    display_name: string;
+    phone_id: string;
+  };
   transmitters: {
     phone_category: string;
     phone_color: string;
@@ -77,25 +81,11 @@ const GeneralPanel = (props) => {
     }
   }, [categories, currentCategory]);
 
-  // Reset selected phone when category changes so selection doesn't leak across tabs
-  useEffect(() => {
-    setSelectedPhone(null);
-  }, [currentCategory]);
-
   const dnd_state =
     typeof availability === 'string' ? availability : String(availability);
   const dnd_is_on = dnd_state === 'On' || dnd_state === 'Forced';
   const dnd_locked_bool = dnd_state === 'Forced' || dnd_state === 'Forbidden';
   const dnd_locked = dnd_locked_bool ? 'Yes' : 'No';
-  const dnd_icon = dnd_is_on ? 'volume-xmark' : 'volume-high';
-  const dnd_tooltip =
-    dnd_state === 'Forced'
-      ? 'Do Not Disturb is ENABLED (LOCKED)'
-      : dnd_state === 'Forbidden'
-        ? 'Do Not Disturb is DISABLED (LOCKED)'
-        : dnd_is_on
-          ? 'Do Not Disturb is ENABLED'
-          : 'Do Not Disturb is DISABLED';
 
   return (
     <Box height="100%">
@@ -111,9 +101,6 @@ const GeneralPanel = (props) => {
                     height="calc(100% - 1.5em)"
                     style={{ overflowY: 'auto' }}
                   >
-                    {callers.length === 0 && !!last_caller && (
-                      <Box>{last_caller}</Box>
-                    )}
                     {callers.map((c, idx) => (
                       <BlockQuote
                         key={idx}
@@ -198,14 +185,13 @@ const GeneralPanel = (props) => {
                       textAlign="center"
                       style={{ alignContent: 'center' }}
                       fontSize="1.5em"
-                      disabled={!(data as any)?.current_call && !selectedPhone}
                       onClick={() =>
-                        (data as any)?.current_call
-                          ? act('hangup')
-                          : act('call_phone', { phone_id: selectedPhone })
+                        !data.current_call &&
+                        selectedPhone &&
+                        act('call_phone', { phone_id: selectedPhone })
                       }
                     >
-                      {(data as any)?.current_call ? `Завершить` : 'Вызов'}
+                      ВЫЗОВ
                     </Button>
                   </Stack.Item>
                 </Stack>
@@ -218,7 +204,6 @@ const GeneralPanel = (props) => {
             <Stack.Item width="30%">
               <Section>
                 <Button.Checkbox
-                  tooltip={dnd_tooltip}
                   disabled={dnd_locked === 'Yes'}
                   checked={dnd_is_on}
                   fluid

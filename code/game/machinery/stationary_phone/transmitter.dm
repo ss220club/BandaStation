@@ -3,6 +3,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define TRANSMITTER_UNAVAILABLE(T) (!T.attached_to || !T.enabled)
 
 #define PHONE_NET_PUBLIC            "Общий"
+#define PHONE_NET_CENTCOM	   			  "ЦентКом"
 
 #define PHONE_DND_ON                "On"
 #define PHONE_DND_OFF               "Off"
@@ -48,6 +49,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/phone_id = "0x00000b" // reserved for CC
 	/// The name of this transmitter as visible on the other devices
 	var/display_name
+	/// A fontawesome icon to see in the UI
 	var/phone_icon
 	var/obj/item/telephone/attached_to
 	/// Currently active call
@@ -74,6 +76,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	var/is_free = TRUE
 	// If the next call has been paid for
 	var/is_paid = FALSE
+	var/was_renamed = FALSE
 
 /obj/structure/transmitter/Initialize(mapload, new_phone_id, new_display_name)
 	. = ..()
@@ -99,7 +102,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			display_name = new_display_name ? new_display_name : "[get_area_name(src, TRUE)]"
 
 	if(name == initial(name))
-		name = "[get_area_name(src, TRUE)] [initial(name)]"
+		name = "[declent_ru(NOMINATIVE)] «[display_name]»"
 
 /obj/structure/transmitter/proc/find_device(device_id)
 	for(var/obj/structure/transmitter/each_transmitter in GLOB.transmitters)
@@ -157,7 +160,24 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		if(COMMSIG_TALK)
 			if(attached_to.loc && ismob(attached_to.loc))
 				var/mob/M = attached_to.loc
-				to_chat(M, span_notice("[icon2html(src, M)] приглушённый голос: \"[capitalize(data)]\""))
+				var/voice_desc = "приглушённый голос"
+
+				// Если данные содержат информацию о говорящем, создаём описание голоса
+				if(islist(data))
+					var/speaker_physique = data["speaker_physique"]
+					var/message = data["message"]
+
+					if(!isnull(speaker_physique))
+						// Создаём временного персонажа для функции описания голоса
+						var/mob/living/carbon/human/temp_speaker = new()
+						temp_speaker.physique = speaker_physique
+						voice_desc = get_voice_description(temp_speaker)
+						qdel(temp_speaker)
+
+					to_chat(M, span_notice("[icon2html(src, M)] [voice_desc]: \"[capitalize(message)]\""))
+				else
+					// Обратная совместимость для старого формата
+					to_chat(M, span_notice("[icon2html(src, M)] [voice_desc]: \"[capitalize(data)]\""))
 
 		if(COMMSIG_HANGUP)
 			end_call(forced = TRUE)
@@ -167,6 +187,22 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			status = STATUS_IDLE
 			end_call(forced = TRUE, timeout = TRUE)
 			update_icon()
+
+/obj/structure/transmitter/proc/get_voice_description(mob/living/carbon/human/speaker)
+	if(!ishuman(speaker))
+		return "Приглушённый голос"
+
+	var/gender_desc = ""
+
+	switch(speaker.physique)
+		if(MALE)
+			gender_desc = "Мужской"
+		if(FEMALE)
+			gender_desc = "Женский"
+		else
+			gender_desc = "Приглушённый"
+
+	return "[gender_desc] голос"
 
 /obj/structure/transmitter/proc/send_commsig(commsig, data)
 	if(!GLOB.central_telephone_exchange)
@@ -364,7 +400,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			playsound(src, 'sound/items/weapons/genhit1.ogg', 30, FALSE)
 			playsound(src, 'sound/machines/telephone/bell.ogg', 75, FALSE)
 		else
-			to_chat(attached_to, span_notice("Вы возвращаете [attached_to.declent_ru(ACCUSATIVE)] на рычаг."))
+			to_chat(user, span_notice("Вы кладёте [attached_to.declent_ru(ACCUSATIVE)] на рычаг."))
 			playsound(get_turf(user), SFX_TELEPHONE_HANDSET, 20)
 		return ITEM_INTERACT_SUCCESS
 
@@ -494,7 +530,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 			GLOB.transmitters.Remove(target_phone)
 			continue
 
-		if(TRANSMITTER_UNAVAILABLE(target_phone) || target_phone.do_not_disturb == PHONE_DND_ON)
+		if(TRANSMITTER_UNAVAILABLE(target_phone))
+			continue
+
+		// с ЦК можна звонить всем
+		if(target_phone.do_not_disturb == PHONE_DND_ON && phone_category != PHONE_NET_CENTCOM)
 			continue
 
 		if(target_phone == src)
@@ -666,6 +706,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	attached_to.forceMove(src)
 	send_commsig(COMMSIG_HANGUP, current_call && current_call.phone_id)
 	end_call()
+	SStgui.update_uis(src)
 	stop_loops()
 	current_call = null
 	update_icon()
@@ -675,7 +716,8 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(current_call && status == STATUS_OUTGOING)
 		var/list/data = list(
 			"target_id" = current_call.phone_id,
-			"message" = message
+			"message" = message,
+			"speaker_physique" = ishuman(speaking) ? speaking:physique : null
 		)
 		var/obj/item/telephone/current_telephone = current_call.attached_to
 		send_commsig(COMMSIG_TALK, data)
@@ -701,8 +743,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 				current_telephone,
 				effects = list(/datum/singleton/sound_effect/muffled)
 			)
-		if(attached_to.raised && ismob(attached_to.loc))
-			var/mob/holder = attached_to.loc
+		if(attached_to.raised && speaking)
 			log_say("TELEPHONE: [key_name(speaking)] at '[display_name]' to '[current_call.display_name]' said '[message]'")
 
 #undef MAX_RANGE

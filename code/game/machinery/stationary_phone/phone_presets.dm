@@ -61,53 +61,76 @@
 	phone_category = PHONE_NET_COMMAND
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND, PHONE_NET_BRIDGE)
 	greyscale_colors = "#8198E1"
+	phone_icon = "shield-halved"
+	was_renamed = TRUE
 
 // THE "Red Phone". Can call the station networks AND the CentCom, if they feel like it.
 /obj/structure/transmitter/bridge
 	phone_category = PHONE_NET_BRIDGE
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND, PHONE_NET_CENTCOM)
 	greyscale_colors = "#CB3E3E"
+	phone_icon = "shield-halved"
+	was_renamed = TRUE
 
 /obj/structure/transmitter/engineering
 	phone_category = PHONE_NET_PUBLIC
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND)
 	greyscale_colors = COLOR_ENGINEERING_ORANGE
+	phone_icon = "gear"
+	was_renamed = TRUE
 
 /obj/structure/transmitter/cargo
 	phone_category = PHONE_NET_PUBLIC
 	networks_transmit = list(PHONE_NET_PUBLIC)
 	greyscale_colors = COLOR_CARGO_BROWN
+	phone_icon = "boxes-stacked"
+	was_renamed = TRUE
 
 /obj/structure/transmitter/medbay
 	phone_category = PHONE_NET_PUBLIC
 	networks_transmit = list(PHONE_NET_PUBLIC)
 	greyscale_colors = COLOR_MEDICAL_BLUE
+	phone_icon = "kit-medical"
+	was_renamed = TRUE
 
 /obj/structure/transmitter/secutiry
 	phone_category = PHONE_NET_PUBLIC
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND)
 	greyscale_colors = COLOR_SECURITY_RED
+	phone_icon = "user-secret"
+	was_renamed = TRUE
 
 /obj/structure/transmitter/science
 	phone_category = PHONE_NET_PUBLIC
 	networks_transmit = list(PHONE_NET_PUBLIC)
 	greyscale_colors = COLOR_SCIENCE_PINK
+	phone_icon = "flask"
+	was_renamed = TRUE
 
 /obj/structure/transmitter/service
 	phone_category = PHONE_NET_PUBLIC
 	networks_transmit = list(PHONE_NET_PUBLIC)
 	greyscale_colors = COLOR_SERVICE_LIME
+	phone_icon = "bell-concierge"
+	was_renamed = TRUE
 
 // The CentCom line. Call anyone anytime.
 /obj/structure/transmitter/centcom
 	phone_category = PHONE_NET_CENTCOM
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND, PHONE_NET_SYNDIE, PHONE_NET_CENTCOM)
 	greyscale_colors = "#415F78"
+	phone_icon = "closed-captioning"
 
-/obj/structure/transmitter/centcom/click_alt(mob/user)
-	var/input_name = stripped_input(user, "Rename this phone?", "Rename this phone", name, MAX_NAME_LEN)
-	if(input_name)
+/obj/structure/transmitter/click_alt(mob/user)
+	if(was_renamed && !istype(src, /obj/structure/transmitter/centcom))
+		to_chat(user, span_warning("Этот телефон не может быть переименован!"))
+		return
+
+	var/input_name = tgui_input_text(user, "Как вы хотите назвать этот телефон? Изменить название можно только один раз!", "Переименовать телефон", display_name, MAX_NAME_LEN)
+	if(input_name && can_interact(user))
 		display_name = input_name
+		was_renamed = TRUE
+		name = "[declent_ru(NOMINATIVE)] «[display_name]»"
 
 #undef PHONE_NET_PUBLIC
 #undef PHONE_NET_COMMAND

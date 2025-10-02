@@ -86,9 +86,16 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 		if(COMMSIG_TALK)
 			var/target_id = data["target_id"]
 			var/message = data["message"]
+			var/speaker_age = data["speaker_age"]
+			var/speaker_physique = data["speaker_physique"]
 			var/obj/structure/transmitter/target = find_device(target_id)
 			if(target && are_devices_connected(device, target))
-				target.process_commsig(COMMSIG_TALK, message)
+				var/list/talk_data = list(
+					"message" = message,
+					"speaker_age" = speaker_age,
+					"speaker_physique" = speaker_physique
+				)
+				target.process_commsig(COMMSIG_TALK, talk_data)
 
 /obj/machinery/central_telephone_exchange/proc/is_device_busy(obj/structure/transmitter/device)
 	return (device.status == STATUS_INBOUND || device.status == STATUS_OUTGOING)

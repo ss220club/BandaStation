@@ -186,21 +186,21 @@
 	start_length = 3.2 SECONDS
 	mid_sounds = 'sound/machines/telephone/ring_outgoing.ogg'
 	mid_length = 6 SECONDS
-	volume = 50
+	volume = 25
 
 /datum/looping_sound/telephone/busy
 	start_sound = 'sound/machines/telephone/callstation_unavailable.ogg'
 	start_length = 5.7 SECONDS
 	mid_sounds = 'sound/machines/telephone/phone_busy.ogg'
 	mid_length = 5 SECONDS
-	volume = 50
+	volume = 25
 
 /datum/looping_sound/telephone/hangup
 	start_sound = 'sound/machines/telephone/remote_hangup.ogg'
 	start_length = 0.6 SECONDS
 	mid_sounds = 'sound/machines/telephone/phone_busy.ogg'
 	mid_length = 5 SECONDS
-	volume = 50
+	volume = 25
 
 /datum/looping_sound/telephone/dialtone
 	start_sound = 'sound/machines/telephone/rtb_handset_1.ogg'
