@@ -2,9 +2,11 @@
 #define CHALLENGE_TIME_LIMIT (5 MINUTES)
 #define CHALLENGE_SHUTTLE_DELAY (25 MINUTES) // 25 minutes, so the ops have at least 5 minutes before the shuttle is callable.
 
+// BANDASTATION ADD - Start
 /datum/config_entry/number/challenge_telecrystals_per_crewman
 	default = 3.5
 	integer = FALSE
+// BANDASTATION ADD - End
 
 GLOBAL_LIST_EMPTY(jam_on_wardec)
 
