@@ -1,5 +1,15 @@
 GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_modifications())
 
+/proc/init_body_modifications()
+	var/list/body_modifications = list()
+	for(var/datum/body_modification/body_modification_type as anything in subtypesof(/datum/body_modification))
+		if(body_modification_type == body_modification_type::abstract_type)
+			continue
+
+		body_modifications[body_modification_type::key] = new body_modification_type()
+
+	return body_modifications
+
 /datum/body_modification
 	abstract_type = /datum/body_modification
 	var/key = null
@@ -17,12 +27,12 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 		stack_trace("abstract body modification attempted to be instantiated: [type]")
 		qdel(src)
 
-/datum/body_modification/proc/apply_to_human(mob/living/carbon/target)
+/datum/body_modification/proc/apply_to_human(mob/living/carbon/target, additional_params)
 	SHOULD_CALL_PARENT(TRUE)
 
-	return can_be_applied(target)
+	return can_be_applied(target, additional_params)
 
-/datum/body_modification/proc/can_be_applied(mob/living/carbon/target)
+/datum/body_modification/proc/can_be_applied(mob/living/carbon/target, additional_params)
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(isnull(target))
@@ -44,12 +54,19 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 /datum/body_modification/proc/get_description()
 	return "No description yet"
 
-/proc/init_body_modifications()
-	var/list/body_modifications = list()
-	for(var/datum/body_modification/body_modification_type as anything in subtypesof(/datum/body_modification))
-		if(body_modification_type == body_modification_type::abstract_type)
-			continue
+/// Checks if the preference value is valid
+/datum/body_modification/proc/preference_value_valid(params)
+	return TRUE
 
-		body_modifications[body_modification_type::key] = new body_modification_type()
+/// Return default value for preference
+/datum/body_modification/proc/default_preference_value(params)
+	return list()
 
-	return body_modifications
+/// Checks if passed params from UI are valid
+/datum/body_modification/proc/ui_params_valid(params)
+	return TRUE
+
+/// Dangerously deserialize preference ui params,
+/// as `/datum/body_modification/proc/is_valid_preference_params` is called before
+/datum/body_modification/proc/handle_ui_params(params)
+	return list()
