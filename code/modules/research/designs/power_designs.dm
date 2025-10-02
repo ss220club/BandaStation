@@ -226,7 +226,6 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_ENGINEERING
 
-/* BANDASTATION REMOVAL START - Healing beam design removal
 /datum/design/diode_disk_healing
 	name = "Bioregenerative Diode Disk"
 	desc = "A living creature healing Diode Disk."
