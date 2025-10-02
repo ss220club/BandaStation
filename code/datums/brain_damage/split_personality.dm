@@ -55,6 +55,13 @@
 
 /// Ghost poll has concluded
 /datum/brain_trauma/severe/split_personality/proc/schism(mob/dead/observer/ghost)
+	owner_backseat.AddComponent( \
+		/datum/component/temporary_body, \
+		old_mind = owner.mind, \
+		old_body = owner, \
+		perma_body_attached = TRUE, \
+	)
+
 	if(isnull(ghost))
 		qdel(src)
 		return
@@ -70,13 +77,14 @@
 	stranger_backseat.PossessByPlayer(ghost.ckey)
 	stranger_backseat.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
 	message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
-
+	/* BANDASTATION MOVE
 	owner_backseat.AddComponent( \
 		/datum/component/temporary_body, \
 		old_mind = owner.mind, \
 		old_body = owner, \
 		perma_body_attached = TRUE, \
 	)
+	*/
 
 
 /datum/brain_trauma/severe/split_personality/on_life(seconds_per_tick, times_fired)
@@ -92,7 +100,8 @@
 	// qdel the mob with the temporary component will ensure the original mind will go back into the body and vice versa for the stranger mind
 	if(!temp_component)
 		stranger_backseat?.ghostize()
-	switch_personalities(reset_to_owner = TRUE) // BANDASTATION ADD
+	if(current_controller != OWNER)
+		switch_personalities(reset_to_owner = TRUE) // BANDASTATION ADD
 	QDEL_NULL(stranger_backseat)
 	QDEL_NULL(owner_backseat)
 	..()

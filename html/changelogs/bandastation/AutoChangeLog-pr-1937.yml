@@ -1,4 +1,0 @@
-author: "MiraHell"
-delete-after: True
-changes:
-  - bugfix: "Код гамма ставится через 20 секунд после объявления войны"
