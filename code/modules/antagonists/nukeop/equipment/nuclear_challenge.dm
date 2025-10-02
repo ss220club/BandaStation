@@ -1,6 +1,9 @@
-#define CHALLENGE_TELECRYSTALS_PER_CREWMAN 3.5 // BandaStation Edit: Challenge balance
 #define CHALLENGE_TIME_LIMIT (5 MINUTES)
 #define CHALLENGE_SHUTTLE_DELAY (25 MINUTES) // 25 minutes, so the ops have at least 5 minutes before the shuttle is callable.
+
+/datum/config_entry/number/challenge_telecrystals_per_crewman
+	default = 3.5
+	integer = TRUE
 
 GLOBAL_LIST_EMPTY(jam_on_wardec)
 
@@ -122,7 +125,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 			continue
 		uplinks += uplink
 
-	var/tc_to_distribute = GLOB.player_list.len * CHALLENGE_TELECRYSTALS_PER_CREWMAN // BandaStation Edit: Challenge balance
+	var/tc_to_distribute = GLOB.player_list.len * CONFIG_GET(number/challenge_telecrystals_per_crewman) // BandaStation Edit: Challenge balance
 	var/tc_per_nukie = round(tc_to_distribute / (length(orphans)+length(uplinks)))
 
 	for (var/datum/component/uplink/uplink in uplinks)
@@ -203,6 +206,5 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 /obj/item/nuclear_challenge/literally_just_does_the_message/distribute_tc()
 	return
 
-#undef CHALLENGE_TELECRYSTALS_PER_CREWMAN // BandaStation Edit: Challenge balance
 #undef CHALLENGE_TIME_LIMIT
 #undef CHALLENGE_SHUTTLE_DELAY
