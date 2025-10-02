@@ -30,7 +30,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 /datum/ticket_manager/ui_data(mob/user)
 	var/list/data = list()
-	data["allTickets"] = get_tickets_data(user.client)
+	data["allTickets"] = get_tickets_data(user)
 	return data
 
 /datum/ticket_manager/ui_static_data(mob/user)
@@ -39,7 +39,8 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	data["emojis"] = emojis
 	data["userKey"] = user_client.key
 	data["isAdmin"] = check_rights_for(user_client, R_ADMIN)
-	data["isMentor"] = null // NEEDED MENTOR SYSTEM
+	data["isMentor"] = check_rights_for(user_client, R_MENTOR)
+	data["userType"] = get_user_type(user_client)
 	data["ticketToOpen"] = user_client.ticket_to_open
 	data["maxMessageLength"] = MAX_MESSAGE_LEN
 	data["replyCooldown"] = TICKET_REPLY_COOLDOWN
@@ -55,14 +56,14 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 	if(!ticket_id)
 		CRASH("Called ticket_manager ui_act() without a ticket number!")
 
-	var/datum/help_ticket/needed_ticket = all_tickets[ticket_id]
+	var/datum/help_ticket/needed_ticket = get_help_ticket_by_id(ticket_id)
 	if(!needed_ticket)
 		CRASH("Requested ticket not found in all tickets list!")
 
 	// Can be used by anyone
 	switch(action)
 		if("start_writing")
-			if(!can_send_message(user, user.persistent_client.current_help_ticket, needed_ticket))
+			if(!can_send_message(user, needed_ticket))
 				return FALSE
 
 			add_to_ticket_writers(user, needed_ticket)
@@ -73,7 +74,7 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			return TRUE
 
 		if("reply")
-			if(!can_send_message(user, user.persistent_client.current_help_ticket, needed_ticket))
+			if(!can_send_message(user, needed_ticket))
 				return FALSE
 
 			if(!params["message"])
@@ -86,10 +87,9 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			add_ticket_message(user, needed_ticket, trimmed_message)
 			return TRUE
 
-	if(!check_rights(R_ADMIN)) // Check for mentor rights after implementing mentors
+	if(!needed_ticket.has_staff_access(user))
 		return FALSE
 
-	// Admin/Mentor only
 	switch(action)
 		if("reopen")
 			set_ticket_state(user, needed_ticket, TICKET_OPEN)
@@ -107,14 +107,11 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 			unlink_admin_from_ticket(user, needed_ticket)
 			return TRUE
 
-		/* NEEDED MENTOR SYSTEM
 		if("convert")
-			convert_ticket(ticket_number)
-			return TRUE
-		*/
+			convert_ticket(user, needed_ticket)
+			return FALSE
 
-	// Admin only
-	var/client/ticket_holder = needed_ticket.initiator_client.client
+	var/client/ticket_holder = needed_ticket.get_initiator_client()
 	if(!ticket_holder)
 		to_chat(user, span_danger("Владелец тикета оффлайн!"))
 		return FALSE
@@ -165,11 +162,11 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 				remove_from_ticket_writers(user, needed_ticket)
 				return FALSE
 
-			if(!needed_ticket.initiator_client.client)
+			if(!needed_ticket.get_initiator_client())
 				to_chat(user, span_notice("Кажется игрок покинул сервер..."))
 				return FALSE
 
-			give_admin_popup(needed_ticket.initiator_client.client, user, message)
+			give_admin_popup(needed_ticket.get_initiator_client(), user, message)
 			return TRUE
 
 	return FALSE
@@ -185,30 +182,22 @@ GLOBAL_VAR_INIT(ticket_manager_ref, REF(GLOB.ticket_manager))
 
 	user.client.ticket_to_open = null
 
-/datum/ticket_manager/proc/get_tickets_data(client/user)
+/datum/ticket_manager/proc/get_tickets_data(mob/user)
 	var/list/tickets = list()
-	for(var/ticket_key, ticket_datum in all_tickets)
-		var/datum/help_ticket/ticket = ticket_datum
-		if(!check_rights_for(user, R_ADMIN))
-			/*
-			if(check_rights_for(user, R_MENTOR) && ticket.ticket_type != TICKET_TYPE_MENTOR)
-				continue // Skip non-mentor tickets for mentors
-			*/
-			if(ticket.initiator_key != user.key)
-				continue // Skip any tickets not initiated by the user
+	for(var/key,value in all_tickets)
+		var/datum/help_ticket/ticket = value
+		if(!ticket.has_user_access(user.client))
+			continue
 
-		tickets += list(list(
-			"number" = ticket_key,
-			"state" = ticket.state,
-			"type" = ticket.ticket_type,
-			"initiator" = ticket.initiator,
-			"initiatorKey" = ticket.initiator_key,
-			"openedTime" = ticket.opened_at,
-			"closedTime" = ticket.closed_at,
-			"linkedAdmin" = !!ticket.linked_admin,
-			"adminReplied" = ticket.admin_replied,
-			"writers" = ticket.writers,
-			"messages" = ticket.messages,
-		))
+		UNTYPED_LIST_ADD(tickets, ticket.ui_data(user))
 
 	return tickets
+
+/datum/ticket_manager/proc/get_user_type(client/user)
+	if(check_rights_for(user, R_ADMIN))
+		return TICKET_MANAGER_USER_TYPE_ADMIN
+
+	if(check_rights_for(user, R_MENTOR))
+		return TICKET_MANAGER_USER_TYPE_MENTOR
+
+	return TICKET_MANAGER_USER_TYPE_PLAYER
