@@ -1,6 +1,6 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { Button, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
-
 import { useBackend } from '../../backend';
 import { TICKET_STATE } from './constants';
 import { toLocalTime } from './helpers';
@@ -8,7 +8,7 @@ import type { TicketProps } from './types';
 
 export function Ticket(
   props: TicketProps & {
-    setSelectedTicketId: React.Dispatch<React.SetStateAction<number | null>>;
+    setSelectedTicketId: Dispatch<SetStateAction<number | null>>;
   },
 ) {
   const {

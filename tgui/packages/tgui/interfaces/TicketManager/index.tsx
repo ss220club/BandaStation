@@ -58,7 +58,7 @@ function TicketsMainPage(props: TicketsMainPageProps) {
       : ticket.state !== TICKET_STATE.Open,
   );
 
-  const openTicktsAmount =
+  const openTicketsAmount =
     selectedTab === TICKET_MANAGER_TABS.OpenTickets
       ? selectedTickets.length
       : allTickets.length - selectedTickets.length;
@@ -78,7 +78,7 @@ function TicketsMainPage(props: TicketsMainPageProps) {
             selected={selectedTab === TICKET_MANAGER_TABS.OpenTickets}
             onClick={() => setSelectedTab(TICKET_MANAGER_TABS.OpenTickets)}
           >
-            Открытые ({openTicktsAmount})
+            Открытые ({openTicketsAmount})
           </Tabs.Tab>
           <Tabs.Tab
             icon="trash-can"

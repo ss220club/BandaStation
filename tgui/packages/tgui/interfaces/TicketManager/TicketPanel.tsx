@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Button, Section, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
@@ -13,7 +19,7 @@ import type { ManagerData, TicketProps } from './types';
 
 type TicketPanelProps = {
   selectedTicket: TicketProps;
-  setSelectedTicketId: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedTicketId: Dispatch<SetStateAction<number | null>>;
 };
 
 export function TicketPanel(props: TicketPanelProps) {
@@ -190,7 +196,7 @@ type TitcketTitleProps = {
   isAdmin: boolean;
   hasStaffAccess: boolean;
   selectedTicket: TicketProps;
-  setSelectedTicketId: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedTicketId: Dispatch<SetStateAction<number | null>>;
 };
 
 function TicketTitle(props: TitcketTitleProps) {
