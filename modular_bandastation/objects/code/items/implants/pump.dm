@@ -24,12 +24,19 @@
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
 	if(!TIMER_COOLDOWN_FINISHED(src, COOLDOWN_PUMP))
 		return
-	for(var/reagent_type in reagent_data)
-		var/list/data = reagent_data[reagent_type]
-		if(is_reagent_threshhold && !owner.reagents.has_reagent(target_reagent = reagent_type, amount = data[REAGENT_THRESHOLD]))
-			owner.reagents.add_reagent(reagent_type, data[REAGENT_AMOUNT])
+		
+	for(var/key,value in reagent_data)
+		var/reagent_type = key
+		var/list/reagent_data = value
+		
+		if(is_reagent_threshhold)
+			var/datum/reagent/reagent_inside_owner = owner.reagents.has_reagent(reagent_type)
+			if(reagent_inside_owner?.amount < reagent_data[REAGENT_THRESHOLD])
+				owner.reagents.add_reagent(reagent_type, reagent_data[REAGENT_AMOUNT])
+			
 	if(custom_check(seconds_per_tick, times_fired))
 		custom_effect(seconds_per_tick, times_fired)
+		
 	TIMER_COOLDOWN_START(src, COOLDOWN_PUMP, cooldown_time)
 
 /**
