@@ -28,15 +28,12 @@
 #include "code/ranged/ballistic/nanotrasen/f4.dm"
 #include "code/ranged/ballistic/nanotrasen/f90.dm"
 #include "code/ranged/ballistic/nanotrasen/gp9.dm"
-<<<<<<< HEAD
 #include "code/ranged/ballistic/nanotrasen/1911.dm"
-=======
 #include "code/ranged/ballistic/elyzium/fn4.dm"
 #include "code/ranged/ballistic/elyzium/fn18.dm"
 #include "code/ranged/ballistic/elyzium/as32.dm"
 #include "code/ranged/ballistic/elyzium/hlrm2.dm"
 #include "code/ranged/ballistic/elyzium/tp14.dm"
->>>>>>> upstream/master
 #include "code/ranged/ballistic/tsf/carwo.dm"
 #include "code/ranged/ballistic/tsf/renoster.dm"
 #include "code/ranged/ballistic/tsf/sindano.dm"
@@ -47,12 +44,3 @@
 #include "code/ranged/energy/awaymission_gun.dm"
 #include "code/ranged/energy/eg_14.dm"
 #include "code/ranged/energy/pulse.dm"
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-// END_INCLUDE
