@@ -7,7 +7,7 @@
 	click_to_activate = TRUE
 	unset_after_click = TRUE
 	// Shadowling related
-	min_req = 6
+	min_req = 1
 	max_req = 30
 	required_thralls = 60
 	var/selection_range = 6

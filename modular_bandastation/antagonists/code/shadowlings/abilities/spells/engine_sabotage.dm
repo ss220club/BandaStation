@@ -41,7 +41,7 @@
 	if(success)
 		to_chat(H, span_boldnotice("Вы ломаете силовые контуры — эвакуация задержана на 10 минут."))
 	else
-		to_chat(H, span_boldnotice("Вы срываете работу двигателей — эвакуация должна быть задержана."))
+		return FALSE
 	cleanup_from_all_hive(hive)
 	Remove(H)
 	qdel(src)

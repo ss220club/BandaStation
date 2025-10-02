@@ -104,7 +104,7 @@
 	requires_dark_target = FALSE
 	max_range = 0
 	channel_time = 0
-	min_req = 2
+	min_req = 1
 	max_req = 5
 	required_thralls = 20
 	var/smoke_radius = 4

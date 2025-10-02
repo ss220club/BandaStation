@@ -7,6 +7,9 @@
 
 	layer = EFFECTS_LAYER
 	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	resistance_flags = INDESTRUCTIBLE
+	obj_flags = IGNORE_DENSITY
 
 	can_buckle = TRUE
 	max_buckled_mobs = 1
@@ -15,6 +18,18 @@
 
 	var/grapple_time = 10 SECONDS
 	var/mob/living/caster
+
+/obj/effect/shadow_bind_anchor/attack_hand(mob/user)
+	return TRUE
+
+/obj/effect/shadow_bind_anchor/attackby(obj/item/I, mob/user, params)
+	return TRUE
+
+/obj/effect/shadow_bind_anchor/attackby_secondary(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
+	return
+
+/obj/effect/shadow_bind_anchor/attack_hand_secondary(mob/user, list/modifiers)
+	return
 
 /obj/effect/shadow_bind_anchor/Initialize(mapload, mob/living/caster_ref)
 	. = ..()

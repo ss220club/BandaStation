@@ -143,7 +143,7 @@
 
 // MARK: Claws
 /obj/item/knife/combat/umbral_claw
-	name = "umbral claw (right)"
+	name = "umbral claw (slash)"
 	desc = "Слиток зазубренной тени."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "claw_right"
@@ -163,8 +163,19 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
 
+/obj/item/knife/combat/umbral_claw/unequipped(mob/user, slot)
+	. = ..()
+	if(!QDELETED(src))
+		qdel(src)
+
+/obj/item/knife/combat/umbral_claw/dropped(mob/user)
+	. = ..()
+	if(!QDELETED(src))
+		qdel(src)
+
 /obj/item/knife/combat/umbral_claw/left
-	name = "umbral claw (left)"
+	name = "umbral claw (pierce)"
+	desc = "Слиток копьевой тени."
 	icon_state = "claw_left"
 	sharpness = SHARP_POINTY
 	attack_verb_continuous = list("пронзает", "протыкает", "разрывает")

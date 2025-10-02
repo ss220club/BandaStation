@@ -21,7 +21,7 @@
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 40 SECONDS
 	// Shadowling related
-	min_req = 4
+	min_req = 1
 	max_req = 20
 	required_thralls = 40
 	var/knock_radius = 2

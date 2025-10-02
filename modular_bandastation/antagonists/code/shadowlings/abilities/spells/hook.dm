@@ -170,6 +170,10 @@
 	apply_button_overlay()
 
 /datum/action/cooldown/shadowling/hook/InterceptClickOn(mob/living/clicker, params, atom/target)
+	if(clicker.has_status_effect(/datum/status_effect/shadow/phase))
+		unset_click_ability(clicker, TRUE)
+		return FALSE
+
 	if(!istype(clicker))
 		unset_click_ability(clicker, TRUE)
 		return FALSE

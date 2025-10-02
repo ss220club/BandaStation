@@ -72,7 +72,7 @@
 	var/const/fov_degree = 45
 	var/static/sfx_cold = 'modular_bandastation/antagonists/sound/shadowlings/abilities/cold_wave.ogg'
 	var/reagent_type = /datum/reagent/consumable/frostoil
-	min_req = 5
+	min_req = 1
 	max_req = 10
 	required_thralls = 50
 

@@ -1,4 +1,4 @@
-#define ENTHRALL_OXY_DRAIN 30
+#define ENTHRALL_OXY_DRAIN 35
 #define ENTHRALL_OXY_RESTORE -100
 
 // MARK: Ability

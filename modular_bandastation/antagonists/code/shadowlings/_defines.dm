@@ -18,6 +18,9 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 // Dark HEALING modifiers
 #define SHADOWLING_DARK_HEAL_PER_LIMB_DEEP 4.0
 #define SHADOWLING_DARK_HEAL_PER_LIMB_DIM  0.75
+// Stamina regen modifiers
+#define SHADOWLING_DARK_STAMINA_PER_LIMB_DIM   1
+#define SHADOWLING_DARK_STAMINA_PER_LIMB_DEEP  2
 
 GLOBAL_VAR_INIT(is_shadowling_roundender_started, FALSE)
 
