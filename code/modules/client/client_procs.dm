@@ -262,7 +262,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		reconnecting = TRUE
 		persistent_client = GLOB.persistent_clients_by_ckey[ckey]
 	else
-		persistent_client = new(ckey)
+		persistent_client = new(ckey, key) // BANDASTATION ADDITION - Mentors: (key)
 	persistent_client.set_client(src)
 
 	if(SScentral.can_run())
@@ -1024,9 +1024,15 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 				if("South")
 					movement_keys[key] = SOUTH
 				if(ADMIN_CHANNEL)
-					if(holder)
+					if(check_rights_for(src, R_ADMIN))
 						var/asay = tgui_say_create_open_command(ADMIN_CHANNEL)
 						winset(src, "default-[REF(key)]", "parent=default;name=[key];command=[asay]")
+					else
+						winset(src, "default-[REF(key)]", "parent=default;name=[key];command=")
+				if(MENTOR_CHANNEL)
+					if(check_rights_for(src, R_MENTOR))
+						var/msay = tgui_say_create_open_command(MENTOR_CHANNEL)
+						winset(src, "default-[REF(key)]", "parent=default;name=[key];command=[msay]")
 					else
 						winset(src, "default-[REF(key)]", "parent=default;name=[key];command=")
 	calculate_move_dir()

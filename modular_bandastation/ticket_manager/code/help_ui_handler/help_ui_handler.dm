@@ -22,16 +22,36 @@ GLOBAL_DATUM_INIT(help_ui_handler, /datum/help_ui_handler, new)
 
 /datum/help_ui_handler/ui_data(mob/user)
 	var/list/data = list()
-	data["adminCount"] = length(GLOB.admins)
+	data["adminCount"] = get_admins_count_by_ticket_type()
 	return data
+
+/datum/help_ui_handler/proc/get_admins_count_by_ticket_type()
+	var/list/count_by_ticket_type = list()
+	for(var/key,value in GLOB.help_ticket_types)
+		var/datum/help_ticket_type/type = value
+		for(var/client/admin as anything in GLOB.admins)
+			if(!check_rights_for(admin, type.required_permissions))
+				continue
+
+			count_by_ticket_type[key] += 1
+
+	return count_by_ticket_type
 
 /datum/help_ui_handler/ui_static_data(mob/user)
 	var/list/data = list()
 	data["maxMessageLength"] = MAX_MESSAGE_LEN
-	data["ticketTypes"] = list(
-		list("name" = "Админ", "type" = TICKET_TYPE_ADMIN),
-		list("name" = "Ментор", "type" = TICKET_TYPE_MENTOR),
-	)
+
+	var/list/ticket_types = list()
+	for(var/key,value in GLOB.help_ticket_types)
+		var/datum/help_ticket_type/type = value
+
+		var/list/ticket_type_data = list()
+		ticket_type_data["id"] = type.id
+		ticket_type_data["name"] = type.name
+		UNTYPED_LIST_ADD(ticket_types, ticket_type_data)
+
+	data["ticketTypes"] = ticket_types
+
 	return data
 
 /datum/help_ui_handler/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -46,9 +66,9 @@ GLOBAL_DATUM_INIT(help_ui_handler, /datum/help_ui_handler, new)
 				return FALSE
 
 			var/client/user_client = ui.user.client
-			var/ticket_type = params["ticketType"]
-			if(ticket_type != TICKET_TYPE_ADMIN && ticket_type != TICKET_TYPE_MENTOR)
-				CRASH("Invalid ticket type created by [user_client]. Ticket type: [ticket_type]")
+			var/ticket_type_id = params["ticketType"]
+			if(ticket_type_id != TICKET_TYPE_ADMIN && ticket_type_id != TICKET_TYPE_MENTOR)
+				CRASH("Invalid ticket type created by [user_client]. Ticket type: [ticket_type_id]")
 
 			if(!isnull(user_client.persistent_client.current_help_ticket))
 				var/active_ticket_id = user_client.persistent_client.current_help_ticket.id
@@ -61,6 +81,6 @@ GLOBAL_DATUM_INIT(help_ui_handler, /datum/help_ui_handler, new)
 				if(user_client.handle_spam_prevention(ticket_message, MUTE_ADMINHELP))
 					return FALSE
 
-				new /datum/help_ticket(user_client, message = ticket_message, new_type = ticket_type)
+				new /datum/help_ticket(user_client, message = ticket_message, ticket_type_id = ticket_type_id)
 
 			ui.close()

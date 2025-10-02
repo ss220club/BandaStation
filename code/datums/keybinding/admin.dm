@@ -1,9 +1,23 @@
 /datum/keybinding/admin
 	category = CATEGORY_ADMIN
 	weight = WEIGHT_ADMIN
+	// BANDASTATION ADDITION START - Valid permissions
+	/// Bitfield with permissions required for this keybind
+	var/required_permissions = R_NONE
+	// BANDASTATION ADDITION END
 
 /datum/keybinding/admin/can_use(client/user)
-	return user.holder ? TRUE : FALSE
+	return check_rights_for(user, required_permissions) // BANDASTATION EDIT - Valid permissions
+
+// BANDASTATION EDIT START - Mentors
+/datum/keybinding/admin/mentor_say
+	hotkey_keys = list("F4")
+	name = MENTOR_CHANNEL
+	full_name = "Msay"
+	description = "Разговаривайте с другими менторами"
+	keybind_signal = COMSIG_KB_ADMIN_MSAY_DOWN
+	required_permissions = R_MENTOR
+// BANDASTATION EDIT END - Mentors
 
 /datum/keybinding/admin/admin_say
 	hotkey_keys = list("F5") // BANDASTATION EDIT
@@ -11,6 +25,7 @@
 	full_name = "Asay"
 	description = "Разговаривайте с другими админами"
 	keybind_signal = COMSIG_KB_ADMIN_ASAY_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/admin_ghost
 	hotkey_keys = list("F6") // BANDASTATION EDIT
@@ -18,6 +33,7 @@
 	full_name = "Aghost"
 	description = "Уйти в призраки"
 	keybind_signal = COMSIG_KB_ADMIN_AGHOST_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/admin_ghost/down(client/user, turf/target)
 	. = ..()
@@ -46,6 +62,7 @@
 	full_name = "Toggle Buildmode Self"
 	description = "Включает режим строительства"
 	keybind_signal = COMSIG_KB_ADMIN_TOGGLEBUILDMODE_DOWN
+	required_permissions = R_BUILD // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/toggle_buildmode_self/down(client/user, turf/target)
 	. = ..()
@@ -60,6 +77,7 @@
 	full_name = "Stealth mode"
 	description = "Включает стелс режим"
 	keybind_signal = COMSIG_KB_ADMIN_STEALTHMODETOGGLE_DOWN
+	required_permissions = R_STEALTH // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/stealthmode/down(client/user, turf/target)
 	. = ..()
@@ -74,6 +92,7 @@
 	full_name = "Invisimin"
 	description = "Включает невидимость, как у призраков (Не абузьте этим)"
 	keybind_signal = COMSIG_KB_ADMIN_INVISIMINTOGGLE_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/invisimin/down(client/user, turf/target)
 	. = ..()
@@ -88,6 +107,7 @@
 	full_name = "Dsay"
 	description = "Отправляет сообщение в чат мертвых"
 	keybind_signal = COMSIG_KB_ADMIN_DSAY_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/deadsay/down(client/user, turf/target)
 	. = ..()
@@ -130,6 +150,7 @@
 	full_name = "View Tags"
 	description = "Открывает меню View-Tags"
 	keybind_signal = COMSIG_KB_ADMIN_VIEWTAGS_DOWN
+	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
 /datum/keybinding/admin/view_tags/down(client/user, turf/target)
 	. = ..()
