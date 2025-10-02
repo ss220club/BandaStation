@@ -163,15 +163,9 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
 
-/obj/item/knife/combat/umbral_claw/unequipped(mob/user, slot)
-	. = ..()
-	if(!QDELETED(src))
-		qdel(src)
-
 /obj/item/knife/combat/umbral_claw/dropped(mob/user)
 	. = ..()
-	if(!QDELETED(src))
-		qdel(src)
+	qdel(src)
 
 /obj/item/knife/combat/umbral_claw/left
 	name = "umbral claw (pierce)"
