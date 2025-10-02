@@ -238,7 +238,6 @@
 		RND_CATEGORY_EQUIPMENT
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_ENGINEERING
- */ // BANDASTATION REMOVAL END - Healing beam design removal
 
 /datum/design/diode_disk_incendiary
 	name = "Conflagratory Diode Disk"
