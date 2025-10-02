@@ -456,6 +456,42 @@
 	ricochets_max = 0
 	armour_penetration = 40
 
+// MARK: .45
+/obj/projectile/bullet/c45/rubber
+	name = ".45 rubber bullet"
+	damage = 5
+	stamina = 25
+	wound_bonus = -20
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
+// MARK: 9mm
+/obj/projectile/bullet/c9mm/rubber
+	name = "9mm rubber bullet"
+	damage = 5
+	stamina = 20
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect
 	light_system = OVERLAY_LIGHT
