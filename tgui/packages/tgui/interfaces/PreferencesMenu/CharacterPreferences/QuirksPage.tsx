@@ -467,7 +467,7 @@ export function QuirkPersonalityPage() {
               align="center"
               fontSize="14px"
             >
-              Quirks
+              Черты
             </Button>
           </Stack.Item>
           <Stack.Item grow>
