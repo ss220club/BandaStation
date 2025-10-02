@@ -16,8 +16,8 @@
 
 	spell_requirements = NONE
 
-	active_msg = "You summon forth three blades of furious silver."
-	deactive_msg = "You conceal the blades of furious silver."
+	active_msg = "Вы вызываете три клинка из яростного серебра."
+	deactive_msg = "Ты скрываешь клинки из яростного серебра."
 	cast_range = 20
 	projectile_type = /obj/projectile/floating_blade
 	projectile_amount = 3
@@ -144,7 +144,7 @@
 				return PROJECTILE_PIERCE_PHASE
 
 		if(victim.can_block_magic(MAGIC_RESISTANCE))
-			visible_message(span_warning("[src] drops to the ground and melts on contact [victim]!"))
+			visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] падает на землю и тает при контакте с [victim.declent_ru(INSTRUMENTAL)]!"))
 			return PROJECTILE_DELETE_WITHOUT_HITTING
 
 	return ..()

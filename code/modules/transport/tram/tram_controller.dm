@@ -257,7 +257,7 @@
 	if(controller_status & EMERGENCY_STOP)
 		set_status_code(EMERGENCY_STOP, FALSE)
 		playsound(paired_cabinet, 'sound/machines/synth/synth_yes.ogg', 40, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-		paired_cabinet.say("Controller reset.")
+		paired_cabinet.say("Контроллер сброшен.")
 
 	SEND_SIGNAL(src, COMSIG_TRAM_TRAVEL, idle_platform, destination_platform)
 
@@ -349,15 +349,15 @@
 	if((controller_status & SYSTEM_FAULT) && (nav_beacon.loc == destination_platform.loc)) //position matches between controller and tram, we're back on track
 		set_status_code(SYSTEM_FAULT, FALSE)
 		playsound(paired_cabinet, 'sound/machines/synth/synth_yes.ogg', 40, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-		paired_cabinet.say("Controller reset.")
+		paired_cabinet.say("Контроллер сброшен.")
 		log_transport("TC: [specific_transport_id] position data successfully reset.")
-		speed_limiter = initial(speed_limiter)
+		speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 	idle_platform = destination_platform
 	tram_registration.distance_travelled += (travel_trip_length - travel_remaining)
 	travel_trip_length = 0
 	current_speed = 0
 	current_load = 0
-	speed_limiter = initial(speed_limiter)
+	speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 
 /**
  * Tram comes to an in-station degraded stop, throwing the players. Caused by power loss or tram malfunction event.
@@ -369,22 +369,22 @@
 	if(controller_status & SYSTEM_FAULT)
 		set_status_code(SYSTEM_FAULT, FALSE)
 		playsound(paired_cabinet, 'sound/machines/synth/synth_yes.ogg', 40, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-		paired_cabinet.say("Controller reset.")
+		paired_cabinet.say("Контроллер сброшен.")
 		log_transport("TC: [specific_transport_id] position data successfully reset. ")
-		speed_limiter = initial(speed_limiter)
+		speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 	if(malf_active == TRANSPORT_LOCAL_FAULT)
 		set_status_code(SYSTEM_FAULT, TRUE)
 		addtimer(CALLBACK(src, PROC_REF(cycle_doors), CYCLE_OPEN), 2 SECONDS)
 		malf_active = TRANSPORT_SYSTEM_NORMAL
 		throw_chance = initial(throw_chance)
 		playsound(paired_cabinet, 'sound/machines/buzz/buzz-sigh.ogg', 60, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-		paired_cabinet.say("Controller error. Please contact your engineering department.")
+		paired_cabinet.say("Ошибка контроллера. Пожалуйста, свяжитесь с инженерным отделом.")
 	idle_platform = destination_platform
 	tram_registration.distance_travelled += (travel_trip_length - travel_remaining)
 	travel_trip_length = 0
 	current_speed = 0
 	current_load = 0
-	speed_limiter = initial(speed_limiter)
+	speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 	var/throw_direction = travel_direction
 	for(var/obj/structure/transport/linear/tram/module in transport_modules)
 		module.estop_throw(throw_direction)
@@ -396,7 +396,7 @@
 	if(controller_status & SYSTEM_FAULT)
 		if(!isnull(paired_cabinet))
 			playsound(paired_cabinet, 'sound/machines/buzz/buzz-sigh.ogg', 60, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-			paired_cabinet.say("Controller error. Please contact your engineering department.")
+			paired_cabinet.say("Ошибка контроллера. Пожалуйста, свяжитесь с инженерным отделом.")
 		log_transport("TC: [specific_transport_id] Transport Controller failed!")
 
 	if(travel_remaining)
@@ -425,7 +425,7 @@
 			set_status_code(SYSTEM_FAULT, FALSE)
 			set_status_code(EMERGENCY_STOP, FALSE)
 			playsound(paired_cabinet, 'sound/machines/synth/synth_yes.ogg', 40, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-			paired_cabinet.say("Controller reset.")
+			paired_cabinet.say("Контроллер сброшен.")
 			log_transport("TC: [specific_transport_id] Transport Controller reset was requested, but the tram nav data seems correct. Info: nav_pos ([nav_beacon.x], [nav_beacon.y], [nav_beacon.z]) idle_pos ([idle_platform.x], [idle_platform.y], [idle_platform.z]).")
 			return
 
@@ -440,7 +440,7 @@
 
 	if(!reset_beacon)
 		playsound(paired_cabinet, 'sound/machines/buzz/buzz-sigh.ogg', 60, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-		paired_cabinet.say("Controller reset failed. Contact manufacturer.") // If you screwed up the tram this bad, I don't even
+		paired_cabinet.say("Ошибка сброса контроллера. Пожалуйста, свяжитесь с производителем.") // If you screwed up the tram this bad, I don't even
 		log_transport("TC: [specific_transport_id] non-recoverable error! Tram is at ([nav_beacon.x], [nav_beacon.y], [nav_beacon.z] [tram_velocity_sign ? "OUTBOUND" : "INBOUND"]) and can't find a reset beacon.")
 		message_admins("Tram ID [specific_transport_id] is in a non-recoverable error state at [ADMIN_JMP(nav_beacon)]. If it's causing problems, delete the controller datum from the 'Reset Tram' proc in the Debug tab.")
 		return
@@ -451,7 +451,7 @@
 	destination_platform = reset_beacon
 	speed_limiter = 1.5
 	playsound(paired_cabinet, 'sound/machines/ping.ogg', 40, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-	paired_cabinet.say("Peforming controller reset... Navigating to reset point.")
+	paired_cabinet.say("Выполняется сброс контроллера... Переход к точке сброса.")
 	log_transport("TC: [specific_transport_id] trip calculation: src: [nav_beacon.x], [nav_beacon.y], [nav_beacon.z] dst: [destination_platform] [destination_platform.x], [destination_platform.y], [destination_platform.z] = Dir [travel_direction] Dist [travel_remaining].")
 	cycle_doors(CYCLE_CLOSED)
 	set_active(TRUE)
@@ -461,7 +461,7 @@
 
 /datum/transport_controller/linear/tram/proc/estop()
 	playsound(paired_cabinet, 'sound/machines/buzz/buzz-sigh.ogg', 60, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
-	paired_cabinet.say("Emergency stop activated!")
+	paired_cabinet.say("Активирована аварийная остановка!")
 	set_status_code(EMERGENCY_STOP, TRUE)
 	log_transport("TC: [specific_transport_id] requested emergency stop.")
 
@@ -625,7 +625,7 @@
 	log_transport("TC: [specific_transport_id] ending Tram Malfunction event.")
 
 /datum/transport_controller/linear/tram/proc/announce_malf_event()
-	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please stand by, engineering has been dispatched to the tram to perform a reset.", "[command_name()] Engineering Division")
+	priority_announce("Наша автоматизированная система управления потеряла связь с бортовым компьютером трамвая. Пожалуйста, ожидайте, к трамваю направлены инженеры для сброса настроек.", "[command_name()]: Инженерный отдел")
 
 /datum/transport_controller/linear/tram/proc/register_collision(points = 1)
 	tram_registration.collisions += points
@@ -865,7 +865,7 @@
 	if(cover_locked)
 		var/obj/item/card/id/id_card = user.get_idcard(TRUE)
 		if(isnull(id_card))
-			balloon_alert(user, "access denied!")
+			balloon_alert(user, "в доступе отказано!")
 			return
 
 		try_toggle_lock(user, id_card)
@@ -881,7 +881,7 @@
 	if(!cover_open)
 		var/obj/item/card/id/id_card = user.get_idcard(TRUE)
 		if(isnull(id_card))
-			balloon_alert(user, "access denied!")
+			balloon_alert(user, "в доступе отказано!")
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 		try_toggle_lock(user, id_card)
@@ -911,7 +911,7 @@
 		update_appearance()
 		return TRUE
 
-	balloon_alert(user, "access denied!")
+	balloon_alert(user, "в доступе отказано!")
 	return FALSE
 
 /obj/machinery/transport/tram_controller/wrench_act_secondary(mob/living/user, obj/item/tool)

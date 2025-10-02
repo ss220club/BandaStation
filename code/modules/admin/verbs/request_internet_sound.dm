@@ -3,7 +3,7 @@
 	set name = "Request Internet Sound"
 
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
-		to_chat(usr, span_danger("Speech is currently admin-disabled."), confidential = TRUE)
+		to_chat(usr, span_danger("Общение было заблокировано администрацией."), confidential = TRUE)
 		return
 
 	if (!CONFIG_GET(flag/request_internet_sound))
@@ -40,7 +40,8 @@
 	GLOB.requests.music_request(usr.client, request_url, credit)
 	to_chat(usr, span_info("You requested: \"[request_url]\" to be played."), confidential = TRUE)
 	request_url = span_adminnotice("<b><font color='cyan'>MUSIC REQUEST: </font>[ADMIN_FULLMONTY(src)] [ADMIN_SC(src)]:</b> [span_linkify(request_url)] [ADMIN_PLAY_INTERNET(request_url, credit)]")
-	for(var/client/admin_client in GLOB.admins)
+	var/list/admins = get_holders_with_rights(R_ADMIN) /// BANDASTATION EDIT: Proper permissions
+	for(var/client/admin_client in admins) /// BANDASTATION EDIT: Proper permissions
 		if(get_chat_toggles(admin_client) & CHAT_PRAYER)
 			to_chat(admin_client, request_url, type = MESSAGE_TYPE_PRAYER, confidential = TRUE)
 

@@ -82,7 +82,7 @@
 		. += burnt_appearance
 
 /turf/open/examine_descriptor(mob/user)
-	return "floor"
+	return "пол"
 
 //direction is direction of travel of A
 /turf/open/zPassIn(direction)
@@ -420,7 +420,7 @@
 	wash(CLEAN_WASH | CLEAN_RAD, TRUE)
 	return TRUE
 
-/turf/open/handle_slip(mob/living/slipper, knockdown_amount, obj/slippable, lube, paralyze_amount, daze_amount, force_drop)
+/turf/open/handle_slip(mob/living/slipper, knockdown_amount, obj/slippable, lube, paralyze_amount, daze_amount, force_drop, immobilize)  /// BANDASTATION EDIT - Immobilizing slippery
 	if(slipper.movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 		return FALSE
 	if(!has_gravity(src))
@@ -474,6 +474,7 @@
 	else
 		slipper.Paralyze(paralyze_amount)
 		slipper.Knockdown(knockdown_amount, daze_amount = daze_amount)
+		slipper.Immobilize(immobilize)  // BANDASTATION EDIT - Immobilizing slippery
 
 	if(!isnull(buckled_obj) && !ismob(buckled_obj))
 		buckled_obj.unbuckle_mob(slipper)

@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/pointed/moon_smile
 	name = "Smile of the moon"
-	desc = "Lets you turn the gaze of the moon on someone \
-			temporarily blinding, muting, deafening and knocking down a single target if their sanity is low enough."
+	desc = "Позволяет обратить взгляд луны на кого-то, временно \
+			заглушая, ослепляя, оглушая и сбивая с ног одну цель."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -17,7 +17,7 @@
 	spell_requirements = NONE
 	cast_range = 6
 
-	active_msg = "You prepare to let them see the true face..."
+	active_msg = "Вы готовитесь показать им лицо правды..."
 
 /datum/action/cooldown/spell/pointed/moon_smile/can_cast_spell(feedback = TRUE)
 	return ..() && isliving(owner)
@@ -31,12 +31,12 @@
 	var/maximum_duration = 15 SECONDS
 	var/moon_smile_duration = ((SANITY_MAXIMUM - cast_on.mob_mood.sanity) / (SANITY_MAXIMUM - SANITY_INSANE)) * maximum_duration
 	if(cast_on.can_block_magic(antimagic_flags))
-		to_chat(cast_on, span_notice("The moon turns, its smile no longer set on you."))
-		to_chat(owner, span_warning("The moon does not smile upon them."))
+		to_chat(cast_on, span_notice("Луна отворачивается, её улыбка больше не обращена к вам."))
+		to_chat(owner, span_warning("Луна не улыбается им."))
 		return FALSE
 
 	playsound(cast_on, 'sound/effects/hallucinations/i_see_you1.ogg', 50, 1)
-	to_chat(cast_on, span_warning("Your eyes cry out in pain, your ears bleed and your lips seal! THE MOON SMILES UPON YOU!"))
+	to_chat(cast_on, span_warning("Ваши глаза горят от боли, из ушей течет кровь, а губы запечатаны. ЛУНА УЛЫБАЕТСЯ ТЕБЕ!"))
 	cast_on.adjust_temp_blindness(moon_smile_duration + 1 SECONDS)
 	cast_on.set_eye_blur_if_lower(moon_smile_duration + 2 SECONDS)
 
