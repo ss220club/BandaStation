@@ -1074,7 +1074,7 @@
 /datum/dynamic_ruleset/midround/from_living/traitor
 	name = "Traitor"
 	config_tag = "Midround Traitor"
-	preview_antag_datum = /datum/antagonist/traitor
+	preview_antag_datum = /datum/antagonist/traitor/infiltrator/sleeper_agent
 	midround_type = LIGHT_MIDROUND
 	false_alarm_able = TRUE
 	pref_flag = ROLE_SLEEPER_AGENT
