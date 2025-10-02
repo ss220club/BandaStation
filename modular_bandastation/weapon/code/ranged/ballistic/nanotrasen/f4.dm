@@ -33,7 +33,7 @@
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
 		overlay_x = 31, \
-		overlay_y = 12
+		overlay_y = 12 \
 	)
 
 /obj/item/gun/ballistic/automatic/f4/no_mag
