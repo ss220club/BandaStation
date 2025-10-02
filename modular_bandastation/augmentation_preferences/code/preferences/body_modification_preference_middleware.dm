@@ -91,7 +91,7 @@
 		return FALSE
 
 	var/datum/body_modification/modification = GLOB.body_modifications[key]
-	if(isnull(modification) || !modification.can_be_applied(user))
+	if(!istype(modification) || !modification.can_be_applied(user))
 		return FALSE
 
 	var/list/updated_preference = preferences.read_preference(/datum/preference/body_modifications)

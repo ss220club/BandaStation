@@ -11,7 +11,7 @@
 	var/list/result = list()
 	for(var/key,value in input)
 		var/datum/body_modification/modification = GLOB.body_modifications[key]
-		if(isnull(modification))
+		if(!istype(modification))
 			continue
 
 		if(!modification.preference_value_valid(value))
@@ -41,7 +41,7 @@
 	var/list/values = value
 	for(var/key,entry in values)
 		var/datum/body_modification/modification = GLOB.body_modifications[key]
-		if(isnull(modification))
+		if(!istype(modification))
 			return FALSE
 
 		if(!modification.preference_value_valid(entry))
@@ -55,7 +55,7 @@
 
 	for(var/key,value in body_modifications)
 		var/datum/body_modification/modification = GLOB.body_modifications[key]
-		if(isnull(modification))
+		if(!istype(modification))
 			continue
 
 		modification.apply_to_human(target, value)
