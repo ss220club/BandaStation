@@ -35,11 +35,13 @@
 	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
 /obj/item/gun/ballistic/automatic/cm5/add_seclight_point()
-	AddComponent(/datum/component/seclite_attachable, \
+	AddComponent(\
+		/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "mini-light", \
 		overlay_x = 26, \
-		overlay_y = 13)
+		overlay_y = 13 \
+	)
 
 /obj/item/gun/ballistic/automatic/cm5/examine_more(mob/user)
 	. = ..()
