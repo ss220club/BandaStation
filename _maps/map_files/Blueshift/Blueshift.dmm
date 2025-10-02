@@ -19500,7 +19500,6 @@
 /area/station/engineering/atmos)
 "dKH" = (
 /obj/structure/closet/crate/preopen,
-/obj/structure/closet/crate/preopen,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/service/minibar)
 "dKI" = (
