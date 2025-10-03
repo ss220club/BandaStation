@@ -1,1 +1,0 @@
-#define HOLIDAY_HAT_CHANCE 20
