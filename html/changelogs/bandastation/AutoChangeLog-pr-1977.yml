@@ -1,4 +1,0 @@
-author: "Lime-7"
-delete-after: True
-changes:
-  - code_imp: "Изменение base_speed_limiter теперь сохраняет скорость трамма после остоновок"
