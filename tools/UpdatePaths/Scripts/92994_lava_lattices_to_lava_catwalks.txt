@@ -1,1 +1,0 @@
-/obj/structure/lattice/lava : /obj/structure/lattice/catwalk/lava

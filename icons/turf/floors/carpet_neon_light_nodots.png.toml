@@ -1,2 +1,0 @@
-output_name = "light-nodots"
-template = "bitmask/diagonal_32x32.toml"

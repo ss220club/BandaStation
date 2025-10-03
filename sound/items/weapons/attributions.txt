@@ -1,4 +1,0 @@
-{
-	rust_sower_armbomb.ogg - EnterTheJake
-	rust_sower_explode.ogg - EnterTheJake
-}

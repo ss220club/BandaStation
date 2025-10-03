@@ -1,3 +1,0 @@
-#comment This replaces the surplus rifle with the new Sakhno SKS semi-automatic rifle.
-
-/obj/item/gun/ballistic/automatic/surplus : /obj/item/gun/ballistic/automatic/sks{@OLD}

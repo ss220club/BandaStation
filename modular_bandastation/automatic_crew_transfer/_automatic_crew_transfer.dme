@@ -1,5 +1,0 @@
-#include "_automatic_crew_transfer.dm"
-
-#include "code/crew_tranfer_vote.dm"
-#include "code/automatic_transfer_subsystem.dm"
-#include "code/automatic_transfer_configuration.dm"

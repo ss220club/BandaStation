@@ -1,3 +1,0 @@
-#include "_announcers.dm"
-
-#include "code/intern_announcer.dm"
