@@ -158,14 +158,11 @@
 	attack_verb_continuous = list("разрывает", "режет", "раздирает")
 	attack_verb_simple = list("разрывать", "резать", "раздирать")
 	hitsound = 'sound/items/weapons/slash.ogg'
+	item_flags = DROPDEL
 
 /obj/item/knife/combat/umbral_claw/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
-
-/obj/item/knife/combat/umbral_claw/dropped(mob/user)
-	. = ..()
-	qdel(src)
 
 /obj/item/knife/combat/umbral_claw/left
 	name = "umbral claw (pierce)"
