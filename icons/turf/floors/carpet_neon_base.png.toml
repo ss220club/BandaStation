@@ -1,2 +1,0 @@
-output_name = "base"
-template = "bitmask/diagonal_32x32.toml"

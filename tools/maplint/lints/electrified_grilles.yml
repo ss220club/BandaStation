@@ -1,3 +1,0 @@
-/obj/effect/spawner/structure/electrified_grille:
-  banned_neighbors:
-    - /obj/effect/spawner/structure/window

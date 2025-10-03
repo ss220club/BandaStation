@@ -1,3 +1,0 @@
-#include "_tgui_who.dm"
-
-#include "code/tgui_who.dm"

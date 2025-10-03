@@ -1,3 +1,0 @@
-=/obj/structure/cable/multilayer/multiz:
-  banned_neighbors:
-    - /obj/structure/cable

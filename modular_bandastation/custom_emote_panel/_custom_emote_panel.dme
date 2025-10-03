@@ -1,3 +1,0 @@
-#include "_custom_emote_panel.dm"
-
-#include "code/custom_emote_panel.dm"

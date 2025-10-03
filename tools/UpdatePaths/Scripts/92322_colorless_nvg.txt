@@ -1,2 +1,0 @@
-# Colorless NVG was removed alongside the forced tint
-/obj/item/clothing/glasses/night/colorless : /obj/item/clothing/glasses/night{@OLD}

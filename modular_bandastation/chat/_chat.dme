@@ -1,4 +1,0 @@
-#include "_chat.dm"
-
-#include "code/badges.dm"
-#include "code/chat_preferences.dm"

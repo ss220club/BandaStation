@@ -1,3 +1,0 @@
-#include "_status_effects.dm"
-
-#include "code/debuffs.dm"
