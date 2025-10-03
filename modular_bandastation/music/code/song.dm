@@ -1,5 +1,4 @@
 #define AUTO_UNISON_RADIUS 5
-#define AUTO_UNISON_PERIOD_TICKS 10
 
 /datum/song
 	var/auto_unison_enabled = FALSE
@@ -134,26 +133,6 @@
 
 	var/obj/structure/musician/M = parent
 	return M.can_play(player) ? NONE : STOP_PLAYING
-
-/datum/song/stop_playing(finished = FALSE)
-	ignore_play_checks = FALSE
-
-	..()
-
-	if(auto_unison_enabled)
-		START_PROCESSING(SSinstruments, src)
-
-/datum/song/process(wait)
-	if(playing)
-		return ..()
-
-	if(auto_unison_enabled)
-		if(world.time >= (last_unison_check + AUTO_UNISON_PERIOD_TICKS))
-			last_unison_check = world.time
-			try_auto_unison_once()
-		return
-
-	return PROCESS_KILL
 
 /datum/song/ui_data(mob/user)
 	var/list/data = ..()
