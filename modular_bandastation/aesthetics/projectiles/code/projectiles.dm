@@ -104,3 +104,6 @@
 
 /obj/projectile/bullet/shotgun_frag12
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/railgun
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
