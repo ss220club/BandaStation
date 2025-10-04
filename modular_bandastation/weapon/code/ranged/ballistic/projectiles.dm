@@ -492,6 +492,13 @@
 	sharpness = NONE
 	embed_type = null
 
+// MARK: .456 Magnum
+/obj/projectile/bullet/c456magnum
+	name = ".456 magnum bullet"
+	damage = 60
+	armour_penetration = 40
+	wound_falloff_tile = -1
+
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect
 	light_system = OVERLAY_LIGHT

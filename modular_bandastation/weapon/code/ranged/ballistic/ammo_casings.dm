@@ -240,7 +240,7 @@
 // MARK: .38
 /obj/item/ammo_casing/c38/ap
 	name = ".38 armor-piercing bullet casing"
-	desc = "Бронебойный пистолетный патроны калибра .38."
+	desc = "Бронебойный пистолетный патрон калибра .38."
 	projectile_type = /obj/projectile/bullet/c38/ap
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sa-casing"
@@ -309,3 +309,12 @@
 /obj/item/ammo_casing/c45/inc
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "si-casing"
+
+// MARK: .456 Magnum
+/obj/item/ammo_casing/c456magnum
+	name = ".456 magnum bullet casing"
+	desc = "Пистолетный патрон калибра .456 Магнум."
+	projectile_type = /obj/projectile/bullet/c456magnum
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sa-casing"
+	caliber = CALIBER_456MAG
