@@ -372,7 +372,7 @@ ADMIN_VERB(combo_hud, R_ADMIN, "Toggle Combo HUD", "Toggles the Admin Combo HUD.
 	mob.lighting_cutoff = mob.default_lighting_cutoff()
 	mob.update_sight()
 
-ADMIN_VERB(show_traitor_panel, R_ADMIN, "Show Traitor Panel", "Edit mobs's memory and role", ADMIN_CATEGORY_GAME, mob/target_mob)
+ADMIN_VERB(show_traitor_panel, R_ADMIN, "Show Traitor Panel", "Edit mobs's memory and role", ADMIN_CATEGORY_HIDDEN, mob/target_mob) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_GAME
 	var/datum/mind/target_mind = target_mob.mind
 	if(!target_mind)
 		to_chat(user, "This mob has no mind!", confidential = TRUE)

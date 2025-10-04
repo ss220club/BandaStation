@@ -1,4 +1,4 @@
-ADMIN_VERB(cmd_admin_say, R_ADMIN, "ASay", "Send a message to other admins", ADMIN_CATEGORY_MAIN, message as text)
+ADMIN_VERB(cmd_admin_say, R_ADMIN, "ASay", "Send a message to other admins", ADMIN_CATEGORY_HIDDEN, message as text) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_MAIN
 	send_message_to_admin_related_chat(
 		user,
 		message,
@@ -11,7 +11,7 @@ ADMIN_VERB(cmd_admin_say, R_ADMIN, "ASay", "Send a message to other admins", ADM
 
 	BLACKBOX_LOG_ADMIN_VERB("Asay")
 
-ADMIN_VERB(cmd_mentor_say, R_MENTOR, "MSay", "Send a message to other mentors", ADMIN_CATEGORY_MAIN, message as text)
+ADMIN_VERB(cmd_mentor_say, R_MENTOR, "MSay", "Send a message to other mentors", ADMIN_CATEGORY_HIDDEN, message as text) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_MAIN
 	send_message_to_admin_related_chat(
 		user,
 		message,
