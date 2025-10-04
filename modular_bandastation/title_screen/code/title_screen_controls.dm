@@ -1,7 +1,7 @@
 /**
  * Enables an admin to upload a new titlescreen image.
  */
-ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить изображение", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_EVENTS)
+ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить изображение", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN)
 	if(!check_rights(R_ADMIN))
 		return
 
@@ -17,7 +17,7 @@ ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить изоб�
 /**
  * Sets a titlescreen notice, a big red text on the main screen.
  */
-ADMIN_VERB(change_title_screen_notice, R_ADMIN, "Лобби: Изменить уведомление", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_EVENTS)
+ADMIN_VERB(change_title_screen_notice, R_ADMIN, "Лобби: Изменить уведомление", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN)
 	if(!check_rights(R_ADMIN))
 		return
 
@@ -42,7 +42,7 @@ ADMIN_VERB(change_title_screen_notice, R_ADMIN, "Лобби: Изменить у
 /**
  * An admin debug command that enables you to change the CSS on the go.
  */
-ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_EVENTS)
+ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_DEBUG)
 	if(!check_rights(R_DEBUG))
 		to_chat(src, span_warning("Недостаточно прав! Необходимы права R_DEBUG."))
 		return

@@ -818,7 +818,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 
 	GLOB.help_ui_handler.ui_interact(mob)
 	// BANDASTATION ADDITION - END
-
+/* BANDASTATION REMOVAL - START
 /client/verb/view_latest_ticket()
 	set category = "Admin"
 	set name = "View Latest Ticket"
@@ -846,7 +846,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 		return
 
 	current_ticket.player_ticket_panel()
-
+BANDASTATION REMOVAL - END */
 //
 // LOGGING
 //
