@@ -209,7 +209,6 @@
 			/obj/item/stack/medical,
 			/obj/item/stamp,
 			/obj/item/toy/crayon,
-			/obj/item/poker_chip,
 		),
 		cant_hold_list = list(
 			/obj/item/screwdriver/power

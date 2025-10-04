@@ -71,7 +71,7 @@
 		if(isliving(thing)) // so we can mutate them
 			var/mob/living/creature = thing
 
-			if(istype(creature, /mob/living/simple_animal/hostile/megafauna))
+			if(ismegafauna(creature))
 				var/mob/living/simple_animal/hostile/megafauna/boss = creature
 				boss.make_virtual_megafauna()
 				continue

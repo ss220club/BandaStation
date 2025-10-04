@@ -56,9 +56,8 @@
 	base_pixel_x = -32
 	maptext_height = 64
 	maptext_width = 64
+	crusher_loot = list(/obj/structure/closet/crate/necropolis/dragon/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/dragon)
-	crusher_loot = /obj/structure/closet/crate/necropolis/dragon/crusher
-	replace_crusher_drop = TRUE
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
 	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/ashdrake = 10)
 	initial_language_holder = /datum/language_holder/lizard/hear_common
@@ -313,9 +312,7 @@
 	mouse_opacity = MOUSE_OPACITY_ICON
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 0, OXY = 1)
 	loot = list()
-	crusher_loot = null
-	achievement_type = null
-	score_achievement_type = null
+	crusher_loot = list()
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
 	attack_action_types = list()
 
@@ -329,6 +326,8 @@
 	. = ..()
 	lava_swoop?.enraged = FALSE // In case taking damage caused us to start deleting ourselves
 
+/mob/living/simple_animal/hostile/megafauna/dragon/lesser/grant_achievement(medaltype,scoretype)
+	return
 
 #undef DRAKE_ENRAGED
 #undef SWOOP_DAMAGEABLE
