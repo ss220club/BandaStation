@@ -250,6 +250,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Раунд [GLOB.round_id]" : "Раунд только что"] закончился."), channel_tag)
 	send2adminchat("Server", "Round just ended.")
 
+	send_round_end_webhook() // BANDASATION ADD
+
 	if(length(CONFIG_GET(keyed_list/cross_server)))
 		send_news_report()
 
