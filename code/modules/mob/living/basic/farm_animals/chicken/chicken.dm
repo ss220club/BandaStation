@@ -7,8 +7,8 @@ GLOBAL_VAR_INIT(chicken_count, 0)
 * Not-entirely-flightless domesticated birds that lay eggs, which are then consumed by humans and other animals.
 */
 /mob/living/basic/chicken
-	name = "\improper chicken"
-	desc = "Hopefully the eggs are good this season."
+	name = "курица"
+	desc = "Гордая несушка. Яички должны быть хороши!"
 	gender = FEMALE
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	icon_state = "chicken_brown"
