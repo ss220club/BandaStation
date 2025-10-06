@@ -358,6 +358,7 @@ GLOBAL_LIST_INIT(tool_items, list(
 	/obj/item/wirecutters,
 	/obj/item/wrench,
 	/obj/item/spess_knife,
+	/obj/item/fireaxe/metal_h2_axe,
 ))
 
 // Keys for equip_in_one_of_slots, if you add new ones update the assoc lists in equip_in_one_of_slots

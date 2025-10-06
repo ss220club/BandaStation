@@ -1,0 +1,3 @@
+#include "_atmos_tweaks.dm"
+
+#include "code/atmos_tweaks.dm"
