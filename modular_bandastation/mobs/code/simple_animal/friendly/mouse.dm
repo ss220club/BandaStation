@@ -106,7 +106,7 @@
 
 /mob/living/basic/mouse/jet
 	name = "мышь-летяга"
-	desс = "У неё есть летные права."
+	desc = "У неё есть летные права."
 	speed = 0.8
 
 /mob/living/basic/mouse/jet/Initialize(mapload, tame = FALSE, new_body_color)
