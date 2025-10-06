@@ -31,6 +31,58 @@
 	/// Имя с которым будет записываться в .json файл
 	var/json_name = "pig"
 
+// =================================
+// Именованные хрюшки
+// =================================
+
+// Саня
+/mob/living/basic/pig/named/Sanya
+	gender = MALE
+	json_name = "pig_sanya"
+	age_stage_data = list(
+		AGE_STAGE_1 = list("name" = "Саня", "desc" = ""),
+		AGE_STAGE_2 = list("name" = "Саня", "desc" = ""),
+		AGE_STAGE_3 = list("name" = "Саня", "desc" = ""),
+		AGE_STAGE_4 = list("name" = "Саня", "desc" = ""),
+		AGE_STAGE_5 = list("name" = "Александр", "desc" = ""),
+		AGE_STAGE_6 = list("name" = "Александр", "desc" = ""),
+		AGE_STAGE_7 = list("name" = "Александр", "desc" = "Стал слеп на левый глаз, но не растерял свою былую харизму")
+	)
+
+// Янас - инвертация Сани в виде черного хряка
+/mob/living/basic/pig/named/Yanas
+	gender = MALE
+	json_name = "pig_yanas"
+	age_stage_data = list(
+		AGE_STAGE_1 = list("name" = "Ян", "desc" = ""),
+		AGE_STAGE_2 = list("name" = "Янс", "desc" = ""),
+		AGE_STAGE_3 = list("name" = "Янас", "desc" = ""),
+		AGE_STAGE_4 = list("name" = "Янас", "desc" = ""),
+		AGE_STAGE_5 = list("name" = "Янас Старший", "desc" = ""),
+		AGE_STAGE_6 = list("name" = "Старый Янас", "desc" = ""),
+		AGE_STAGE_7 = list("name" = "Старый Янас", "desc" = "")
+	)
+
+// Марина - Snake Eater в Маринаде
+/mob/living/basic/pig/named/Marina
+	gender = FEMALE
+	json_name = "pig_marina"
+	age_stage_data = list(
+		AGE_STAGE_1 = list("name" = "Маринка", "desc" = "Маленькая свинка с характером."),
+		AGE_STAGE_2 = list("name" = "Маринка", "desc" = "Бойкая маленькая хрюшка, любящая коробки."),
+		AGE_STAGE_3 = list("name" = "Марина", "desc" = "Молодая хрюшка со смелым взглядом и татуировкой в виде сердца на плече. Она готова бороться!"),
+		AGE_STAGE_4 = list("name" = "Марина", "desc" = "Хрюшка способная постоять за себя, о чем свидетельствуют шрамы от когтей на спине. На плечах татуировки в виде сердца и корпуса морской пехоты."),
+		AGE_STAGE_5 = list("name" = "Маринада", "desc" = "Боевая хрюшка, готовая на всё и постоять за свои права, о чем свидетельствуют многочисленные шрамы от когтей на теле. На плечах татуировки в виде сердца и корпуса морской пехоты. На спине красуется надпись 3.10 и 33 ярких звезды"),
+		AGE_STAGE_6 = list("name" = "Маринадовна", "desc" = "Боевой хряк, прошедший множество сражений, о чем свидетельствуют многочисленные шрамы от когтей на теле. На плечах татуировки в виде сердца и корпуса морской пехоты. На спине красуется надпись 3.10 и 33 звезды, из которых 30 сильно потускнели."),
+		AGE_STAGE_7 = list("name" = "Маринадовна", "desc" = "Престарелая матрона повидавшая слишком многое. Старые шрамы и татуировки заполонили всё её тело.")
+	)
+
+// поедатель змей в маринаде
+
+// =================================
+// Функции
+// =================================
+
 /mob/living/basic/pig/named/Initialize(mapload)
 	. = ..()
 	// Ensure pig exists
@@ -60,7 +112,7 @@
 
 /mob/living/basic/pig/named/gib()
 	if(!memory_saved)
-		Write_Memory(TRUE, gibbed)
+		Write_Memory(TRUE, TRUE)
 	. = ..()
 
 /mob/living/basic/pig/named/Write_Memory(dead, gibbed)
@@ -111,13 +163,13 @@
 
 	// применяем характеристики
 	switch(stage)
-		if(AGE_STAGE_1) Apply_StatsFrom(/mob/living/basic/pig/baby)
-		if(AGE_STAGE_2) Apply_StatsFrom(/mob/living/basic/pig/baby/teen)
-		if(AGE_STAGE_3) Apply_StatsFrom(/mob/living/basic/pig/baby/young)
-		if(AGE_STAGE_4) Apply_StatsFrom(/mob/living/basic/pig)
-		if(AGE_STAGE_5) Apply_StatsFrom(/mob/living/basic/pig/adult)
-		if(AGE_STAGE_6) Apply_StatsFrom(/mob/living/basic/pig/old)
-		if(AGE_STAGE_7) Apply_StatsFrom(/mob/living/basic/pig/old/ancient)
+		if(AGE_STAGE_1) apply_stats_from(/mob/living/basic/pig/baby)
+		if(AGE_STAGE_2) apply_stats_from(/mob/living/basic/pig/baby/teen)
+		if(AGE_STAGE_3) apply_stats_from(/mob/living/basic/pig/baby/young)
+		if(AGE_STAGE_4) apply_stats_from(/mob/living/basic/pig)
+		if(AGE_STAGE_5) apply_stats_from(/mob/living/basic/pig/adult)
+		if(AGE_STAGE_6) apply_stats_from(/mob/living/basic/pig/old)
+		if(AGE_STAGE_7) apply_stats_from(/mob/living/basic/pig/old/ancient)
 
 	// собираем финальный спрайт
 	var/final_icon = "[body_icon_state]"
@@ -164,39 +216,12 @@
 
 /// Копирование характеристик из шаблона
 /mob/living/basic/pig/named/proc/apply_stats_from(var/typepath)
-	var/mob/template = new typepath
+	var/mob/living/basic/pig/template = new typepath
 	speed = template.speed
 	health = template.health
 	maxHealth = template.maxHealth
 	ai_controller = template.ai_controller
 	qdel(template)
-
-
-// =================================
-// Именованные хрюшки
-// =================================
-
-// Саня
-/mob/living/basic/pig/named/Sanya
-	gender = MALE
-	json_name = "pig_sanya"
-
-// Янас - инвертация Сани в виде черного хряка
-/mob/living/basic/pig/named/Yanas
-	gender = MALE
-	json_name = "pig_yanas"
-
-// Марина
-/mob/living/basic/pig/named/Marina
-	gender = FEMALE
-	json_name = "pig_marina"
-	age_stage_data = list(
-		AGE_STAGE_1 = list("name" = "Маринка", "desc" = "Маленькая свинка с характером."),
-		"adult" = list("name" = "Марина", "desc" = "Крепкая свинья, умеющая настоять на своём."),
-		"ancient" = list("name" = "Марина-матрона", "desc" = "Древняя мудрая свиноматка.")
-	)
-
-// поедатель змей в маринаде
 
 #undef AGE_STAGE_1 // baby
 #undef AGE_STAGE_2 // teen
