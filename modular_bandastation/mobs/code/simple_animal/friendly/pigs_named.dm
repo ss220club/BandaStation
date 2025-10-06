@@ -143,15 +143,15 @@
 			return AGE_STAGE_1
 		if(2 to 3)
 			return AGE_STAGE_2
-		if(4 to 5)
+		if(4 to 7)
 			return AGE_STAGE_3
-		if(6 to 7)
+		if(8 to 12)
 			return AGE_STAGE_4
-		if(8 to 9)
+		if(13 to 19)
 			return AGE_STAGE_5
-		if(10 to 11)
+		if(20 to 49)
 			return AGE_STAGE_6
-		if(12 to INFINITY)
+		if(50 to INFINITY)
 			return AGE_STAGE_7
 	return AGE_STAGE_DEFAULT
 
