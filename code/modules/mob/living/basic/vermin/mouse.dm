@@ -45,8 +45,8 @@
 	)
 
 	// SS220 ADD - START
-	var/colored_mob = "mouse"
-	var/list/possible_colors = list("brown", "gray", "white", "wooly") // wooly - мохнатая мышка из кастомных спрайтов
+	var/body_icon_state = "mouse"
+	var/list/possible_body_colors = list("brown", "gray", "white", "wooly") // wooly - мохнатая мышка из кастомных спрайтов
 	var/squeak_sound = 'sound/mobs/non-humanoids/mouse/mousesqueek.ogg'
 	// SS220 ADD - END
 
@@ -72,9 +72,9 @@
 	if(!isnull(new_body_color))
 		body_color = new_body_color
 	if(isnull(body_color))
-		body_color = pick(possible_colors)	// SS220 edit
-	if(!isnull(colored_mob)) held_state = "[colored_mob]_[body_color]" // not handled by variety element // SS220 EDIT
-	if(!isnull(colored_mob)) AddElement(/datum/element/animal_variety, "[colored_mob]", body_color, FALSE)	// SS220 EDIT
+		body_color = pick(possible_body_colors)	// SS220 edit
+	if(!isnull(body_icon_state)) held_state = "[body_icon_state]_[body_color]" // not handled by variety element // SS220 EDIT
+	if(!isnull(body_icon_state)) AddElement(/datum/element/animal_variety, "[body_icon_state]", body_color, FALSE)	// SS220 EDIT
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_MOUSE, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 10)
 	AddComponent(/datum/component/squeak, list(squeak_sound = 1), 100, extrarange = SHORT_RANGE_SOUND_EXTRARANGE) //as quiet as a mouse or whatever
 	var/static/list/loc_connections = list(
@@ -116,7 +116,7 @@
 
 /// Kills the rat and changes its icon state to be splatted (bloody).
 /mob/living/basic/mouse/proc/splat()
-	icon_dead = "[colored_mob]_[body_color]_splat"	// SS220 EDIT
+	icon_dead = "[body_icon_state]_[body_color]_splat"	// SS220 EDIT
 	adjust_health(maxHealth)
 
 // On revival, re-add the mouse to the ratcap, or block it if we're at it

@@ -12,6 +12,8 @@
 #include "code/simple_animal/friendly/hamster.dm"
 #include "code/simple_animal/friendly/lizard.dm"
 #include "code/simple_animal/friendly/mouse.dm"
+#include "code/simple_animal/friendly/pigs_named.dm"
+#include "code/simple_animal/friendly/pigs.dm"
 #include "code/simple_animal/friendly/possum.dm"
 #include "code/simple_animal/friendly/snail.dm"
 #include "code/simple_animal/hostile/alien.dm"

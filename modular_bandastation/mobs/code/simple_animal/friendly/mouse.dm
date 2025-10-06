@@ -67,7 +67,7 @@
 	icon_living = "mouse_clockwork"
 	icon_dead = "mouse_clockwork_dead"
 	held_state = "mouse_clockwork"
-	colored_mob = null // чтобы не перекрасился
+	body_icon_state = null // чтобы не перекрасился
 	gold_core_spawnable = NO_SPAWN
 	butcher_results = list(/obj/item/stack/sheet/iron = 5)
 	maxHealth = 20
@@ -80,7 +80,7 @@
 	icon_state = "mouse_zavod" // Спрайт авторства vitalya_kramsatel (discord)
 	icon_living = "mouse_zavod"
 	icon_dead = "mouse_zavod_dead"
-	colored_mob = null // чтобы не перекрасился
+	body_icon_state = null // чтобы не перекрасился
 	butcher_results = list(/obj/item/food/meat/slab/mouse = 1, /obj/item/stack/sheet/iron = 2)
 	minimum_survivable_temperature = NPC_DEFAULT_MIN_TEMP - 100
 	maximum_survivable_temperature = NPC_DEFAULT_MAX_TEMP + 200
@@ -97,7 +97,7 @@
 	icon_state = "mouse_rep" // Спрайт авторства vitalya_kramsatel (discord)
 	icon_living = "mouse_rep"
 	icon_dead = "mouse_rep_dead"
-	colored_mob = null // чтобы не перекрасился
+	body_icon_state = null // чтобы не перекрасился
 	minimum_survivable_temperature = NPC_DEFAULT_MIN_TEMP - 150 // Это всё-таки пушистый мышь
 	maximum_survivable_temperature = NPC_DEFAULT_MAX_TEMP + 150
 	maxHealth = 20

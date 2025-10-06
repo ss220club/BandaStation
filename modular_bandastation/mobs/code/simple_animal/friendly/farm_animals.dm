@@ -4,6 +4,9 @@
 	icon_gib = "gib"
 	death_sound = 'modular_bandastation/mobs/sound/goat_death.ogg'
 
+// ====================
+// ======= Cow ========
+
 /mob/living/basic/cow
 	icon = 'modular_bandastation/mobs/icons/farm_animals.dmi'
 	icon_state = "cow_black"
@@ -13,33 +16,36 @@
 	icon_gib = "gib"
 	death_sound = 'modular_bandastation/mobs/sound/cow_death.ogg'
 	damaged_sounds = list('modular_bandastation/mobs/sound/cow_damaged.ogg')
-	var/list/possible_colors = list("brown", "black", "white")
+	var/list/possible_body_colors = list("brown", "black", "white")
 
 /mob/living/basic/cow/Initialize(mapload)
 	. = ..()
-	if(!isnull(possible_colors))
-		AddElement(/datum/element/animal_variety, "cow", pick(possible_colors), modify_pixels = FALSE)
+	if(!isnull(possible_body_colors))
+		AddElement(/datum/element/animal_variety, "cow", pick(possible_body_colors), modify_pixels = FALSE)
 
 /mob/living/basic/cow/black
 	icon_state = "cow_black"
 	icon_living = "cow_black"
 	icon_dead = "cow_black_dead"
 	icon_resting = "cow_black_rest"
-	possible_colors = null
+	possible_body_colors = null
 
 /mob/living/basic/cow/brown
 	icon_state = "cow_brown"
 	icon_living = "cow_brown"
 	icon_dead = "cow_brown_dead"
 	icon_resting = "cow_brown_rest"
-	possible_colors = null
+	possible_body_colors = null
 
 /mob/living/basic/cow/white
 	icon_state = "cow_white"
 	icon_living = "cow_white"
 	icon_dead = "cow_white_dead"
 	icon_resting = "cow_white_rest"
-	possible_colors = null
+	possible_body_colors = null
+
+// ====================
+// ===== Chickens =====
 
 /mob/living/basic/chicken
 	icon = 'modular_bandastation/mobs/icons/farm_animals.dmi'
@@ -123,42 +129,8 @@
 	health = 80
 	maxHealth = 80
 
-/mob/living/basic/pig
-	icon = 'modular_bandastation/mobs/icons/farm_animals.dmi'
-	icon_state = "pig"
-	icon_living = "pig"
-	icon_dead = "pig_dead"
-	icon_resting = "pig_rest"
-	icon_gib = "gib"
-	attack_verb_continuous = "лягает"
-	attack_verb_simple = "лягает"
-	death_sound = 'modular_bandastation/mobs/sound/pig_death.ogg'
-
-/mob/living/basic/pig/big
-	name = "хряк"
-	desc = "Большой упитанный толстый порось. В нем много мяса."
-	icon_state = "pig_big"
-	icon_living = "pig_big"
-	icon_dead = "pig_big_dead"
-	icon_resting = "pig_big_rest"
-	health = 100
-	maxHealth = 100
-	speed = 2
-	butcher_results = list(/obj/item/food/meat/slab/pig = 12)
-
-	ai_controller = /datum/ai_controller/basic_controller/pig/big
-
-/mob/living/basic/pig/big/old
-	name = "боров"
-	desc = "Большой старый упитанный хряк. В нем очень много мяса."
-	icon_state = "pig_hog"
-	icon_living = "pig_hog"
-	icon_dead = "pig_hog_dead"
-	icon_resting = "pig_hog_rest"
-	health = 150
-	maxHealth = 150
-	speed = 3
-	butcher_results = list(/obj/item/food/meat/slab/pig = 18)
+// ====================
+// ======= Goose ======
 
 /mob/living/basic/goose
 	icon_resting = "goose_rest"
