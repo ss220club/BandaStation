@@ -103,8 +103,16 @@
 	speech_chance = 2
 	speak = list("Слава Синдикату!", "Смерть НаноТрейзен!", "Отдавайте сыр!", "Слава Сыркату!", "Смерть за сыр!")
 
-// =========== Старый хряк, Саня ===========
+// =========== Хряки ===========
 /datum/ai_controller/basic_controller/pig/big
+		planning_subtrees = list(
+		/datum/ai_planning_subtree/capricious_retaliate, // Capricious like Capra, get it?
+		/datum/ai_planning_subtree/target_retaliate,
+		/datum/ai_planning_subtree/find_food,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree,
+		/datum/ai_planning_subtree/random_speech/pig/alt,
+	)
+
 
 /datum/ai_controller/basic_controller/pig/big/New(atom/new_pawn)
 	. = ..()
@@ -112,9 +120,9 @@
 	if(S)
 		planning_subtrees -= S
 		qdel(S)
-	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/big)
+	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/alt)
 
-/datum/ai_planning_subtree/random_speech/pig/big
+/datum/ai_planning_subtree/random_speech/pig/alt
 	sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
 
 // =========== Зомби звуки ===========

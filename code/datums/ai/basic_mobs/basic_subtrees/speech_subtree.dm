@@ -175,7 +175,7 @@
 /datum/ai_planning_subtree/random_speech/pig
 	speech_chance = 3
 	speak = list("хрю?","хрю","хрюк")
-	sound = list('sound/mobs/non-humanoids/pig/pig1.ogg', 'sound/mobs/non-humanoids/pig/pig2.ogg', 'modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')	// SS220 EDIT
+	sound = list('sound/mobs/non-humanoids/pig/pig1.ogg', 'sound/mobs/non-humanoids/pig/pig2.ogg')
 	emote_hear = list("хрюкает.")
 	emote_see = list("обнюхивается.")
 

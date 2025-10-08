@@ -23,7 +23,7 @@
 	var/addition_age = 1
 	/// Со скольки лет начинает свою "новую жизнь"
 	var/null_age = 0
-	/// Словарь стадий: каждая стадия содержит имя и описание
+	/// Словарь стадий: каждая стадия содержит имя, описание и дополнительный лут. Формат: "name", "desc", "loot" (добавочный лут к butcher_results)
 	var/list/age_stage_data
 
 	/// Записали ли мы уже достижения этой свиньи в базу данных?
@@ -40,13 +40,13 @@
 	gender = MALE
 	json_name = "pig_sanya"
 	age_stage_data = list(
-		AGE_STAGE_1 = list("name" = "Саня", "desc" = ""),
-		AGE_STAGE_2 = list("name" = "Саня", "desc" = ""),
-		AGE_STAGE_3 = list("name" = "Саня", "desc" = ""),
-		AGE_STAGE_4 = list("name" = "Саня", "desc" = ""),
-		AGE_STAGE_5 = list("name" = "Александр", "desc" = ""),
-		AGE_STAGE_6 = list("name" = "Александр", "desc" = ""),
-		AGE_STAGE_7 = list("name" = "Александр", "desc" = "Стал слеп на левый глаз, но не растерял свою былую харизму")
+		AGE_STAGE_1 = list("name" = "Саня", "desc" = "Маленький поросёнок, ест больше чем весит. В его глазах мелькает доброта.", "loot" = null),
+		AGE_STAGE_2 = list("name" = "Саня", "desc" = "Подросшее хрюкало, поевшая всё до чего дотянулось его хрюкало. Мечтает стать как его дедушка.", "loot" = null),
+		AGE_STAGE_3 = list("name" = "Саня", "desc" = "Весёлый подсвинок, любимец не только повара, но и всей станции. Местает попасть как его дедушка на обед.", "loot" = null),
+		AGE_STAGE_4 = list("name" = "Саня", "desc" = "Зрелая свинья, которую обожает весь персонал. Увидеть его живым вне загона - уже и не редкость!", "loot" = null),
+		AGE_STAGE_5 = list("name" = "Александр", "desc" = "Статный хряк. Его уважают за спокойный нрав и харизму, а к повару он относится как к лучшему другу.", "loot" = null),
+		AGE_STAGE_6 = list("name" = "Александр", "desc" = "Старый, но всё ещё гордый. Его походка медленная, но взгляд наполнен теплом и мудростью.", "loot" = null),
+		AGE_STAGE_7 = list("name" = "Александр", "desc" = "Легенда и любимец станции. Стал слеп на левый глаз, но не растерял своей харизмы. Персонал считает его живым талисманом, пережившим многих членов экипажа.", "loot" = null)
 	)
 
 // Янас - инвертация Сани в виде черного хряка
@@ -54,13 +54,20 @@
 	gender = MALE
 	json_name = "pig_yanas"
 	age_stage_data = list(
-		AGE_STAGE_1 = list("name" = "Ян", "desc" = ""),
-		AGE_STAGE_2 = list("name" = "Янс", "desc" = ""),
-		AGE_STAGE_3 = list("name" = "Янас", "desc" = ""),
-		AGE_STAGE_4 = list("name" = "Янас", "desc" = ""),
-		AGE_STAGE_5 = list("name" = "Янас Старший", "desc" = ""),
-		AGE_STAGE_6 = list("name" = "Старый Янас", "desc" = ""),
-		AGE_STAGE_7 = list("name" = "Старый Янас", "desc" = "")
+		AGE_STAGE_1 = list("name" = "Ян", "desc" = "Мелкий поросёнок-клептоман с наглым взглядом. Утащит всё, что блестит.",
+			"loot" = list(/obj/item/stack/spacecash/c10 = 1)),
+		AGE_STAGE_2 = list("name" = "Янс", "desc" = "Подросший воришка, уже пробует грызть купюры и монеты.",
+			"loot" = list(/obj/item/stack/spacecash/c20 = 1)),
+		AGE_STAGE_3 = list("name" = "Янас", "desc" = "Молодой хряк с повадками гангстера. Любит хрюкать под музыку и рыться в чужих карманах.",
+			"loot" = list(/obj/item/stack/spacecash/c50 = 1)),
+		AGE_STAGE_4 = list("name" = "Янас", "desc" = "Авторитет в загоне. Находит бабки даже там, где их быть не должно.",
+			"loot" = list(/obj/item/stack/spacecash/c100 = 1, /obj/item/ammo_casing/c10mm = 1)),
+		AGE_STAGE_5 = list("name" = "Янас Старший", "desc" = "Опытный гангстер-хряк. Шрамы и запах пороха выдают его бурное прошлое.",
+			"loot" = list(/obj/item/stack/spacecash/c200 = 1, /obj/item/ammo_casing/c10mm = 2)),
+		AGE_STAGE_6 = list("name" = "Старый Янас", "desc" = "Старый мафиози загона. В его брюхе слышно позвякивание монет и гильз.",
+			"loot" = list(/obj/item/stack/spacecash/c500 = 1, /obj/item/ammo_casing/c10mm = 4, /obj/item/ammo_casing/a50ae = 1)),
+		AGE_STAGE_7 = list("name" = "Старый Янас", "desc" = "Пахан хрюшек. Подслеповат, но по прежнему способен выдержать пару пуль за загон. Даже повара боятся его.",
+			"loot" = list(/obj/item/stack/spacecash/c1000 = 1, /obj/item/ammo_casing/c10mm = 5, /obj/item/ammo_casing/a50ae = 3))
 	)
 
 // Марина - Snake Eater в Маринаде
@@ -68,13 +75,17 @@
 	gender = FEMALE
 	json_name = "pig_marina"
 	age_stage_data = list(
-		AGE_STAGE_1 = list("name" = "Маринка", "desc" = "Маленькая свинка с характером."),
-		AGE_STAGE_2 = list("name" = "Маринка", "desc" = "Бойкая маленькая хрюшка, любящая коробки."),
-		AGE_STAGE_3 = list("name" = "Марина", "desc" = "Молодая хрюшка со смелым взглядом и татуировкой в виде сердца на плече. Она готова бороться!"),
-		AGE_STAGE_4 = list("name" = "Марина", "desc" = "Хрюшка способная постоять за себя, о чем свидетельствуют шрамы от когтей на спине. На плечах татуировки в виде сердца и корпуса морской пехоты."),
-		AGE_STAGE_5 = list("name" = "Маринада", "desc" = "Боевая хрюшка, готовая на всё и постоять за свои права, о чем свидетельствуют многочисленные шрамы от когтей на теле. На плечах татуировки в виде сердца и корпуса морской пехоты. На спине красуется надпись 3.10 и 33 ярких звезды"),
-		AGE_STAGE_6 = list("name" = "Маринадовна", "desc" = "Боевой хряк, прошедший множество сражений, о чем свидетельствуют многочисленные шрамы от когтей на теле. На плечах татуировки в виде сердца и корпуса морской пехоты. На спине красуется надпись 3.10 и 33 звезды, из которых 30 сильно потускнели."),
-		AGE_STAGE_7 = list("name" = "Маринадовна", "desc" = "Престарелая матрона повидавшая слишком многое. Старые шрамы и татуировки заполонили всё её тело.")
+		AGE_STAGE_1 = list("name" = "Маринка", "desc" = "Маленькая свинка с характером.", "loot" = null),
+		AGE_STAGE_2 = list("name" = "Маринка", "desc" = "Бойкая маленькая хрюшка, любящая коробки и маринад.", "loot" = null),
+		AGE_STAGE_3 = list("name" = "Марина", "desc" = "Молодая хрюшка со смелым взглядом и татуировкой в виде сердца на плече. Она готова бороться!", "loot" = null),
+		AGE_STAGE_4 = list("name" = "Марина", "desc" = "Хрюшка способная постоять за себя, о чем свидетельствуют шрамы от когтей на спине. На плечах татуировки в виде сердца и корпуса морской пехоты.",
+			"loot" = list(/obj/item/ammo_casing/a40mm/rubber = 1)),
+		AGE_STAGE_5 = list("name" = "Маринада", "desc" = "Боевая хрюшка, готовая на всё и постоять за свои права, о чем свидетельствуют многочисленные шрамы. На плечах татуировки в виде сердца и корпуса морской пехоты. На спине красуется надпись 3.10 и 33 ярких звезды.",
+			"loot" = list(/obj/item/knife/combat = 1)),
+		AGE_STAGE_6 = list("name" = "Маринадовна", "desc" = "Боевой хряк, прошедший множество сражений. На плечах татуировки в виде сердца и корпуса морской пехоты. На спине надпись 3.10 и 33 звезды, из которых 30 уже потускнели.",
+			"loot" = list(/obj/item/knife/combat = 1, /obj/item/xenos_claw = 2=1)),
+		AGE_STAGE_7 = list("name" = "Маринадовна", "desc" = "Престарелая матрона, повидавшая слишком многое. Старые шрамы и татуировки заполонили всё её тело.",
+			"loot" = list(/obj/item/knife/combat = 1, /obj/item/xenos_claw = 2))
 	)
 
 // поедатель змей в маринаде
@@ -188,6 +199,13 @@
 		var/list/data = age_stage_data[stage]
 		name = data["name"]
 		desc = data["desc"]
+		try_add_loot()
+
+/mob/living/basic/pig/named/proc/try_add_loot()
+	var/list/additional_butcher_results = data["loot"]
+	if(isnull(additional_butcher_results) || !length(additional_butcher_results))
+		return
+	butcher_results += additional_butcher_results
 
 /mob/living/basic/pig/named/proc/get_age_stage()
 	switch(age)
@@ -220,6 +238,7 @@
 	speed = template.speed
 	health = template.health
 	maxHealth = template.maxHealth
+	butcher_results = template.butcher_results
 	ai_controller = template.ai_controller
 	qdel(template)
 
