@@ -3457,13 +3457,11 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/emergency/port)
 "aSb" = (
-/mob/living/basic/chicken{
-	name = "Коммандор Клакки"
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4;
 	color = "#777777"
 	},
+/mob/living/basic/chicken/cock/clucky,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "aSg" = (
@@ -10110,7 +10108,6 @@
 /turf/open/floor/iron/dark/small,
 /area/station/security/mechbay)
 "cvQ" = (
-/mob/living/basic/crocodile/gena,
 /turf/open/water/alternative/muddy/no_fishing,
 /area/station/service/kitchen/abandoned)
 "cvT" = (
@@ -42771,13 +42768,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "kvX" = (
-/mob/living/basic/chicken{
-	name = "Галя"
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4;
 	color = "#777777"
 	},
+/mob/living/basic/chicken/wife,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "kwf" = (
@@ -43811,13 +43806,11 @@
 	name = "Garden";
 	req_access = list("kitchen")
 	},
-/mob/living/basic/pig{
-	name = "Саня"
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 5;
 	color = "#777777"
 	},
+/mob/living/basic/pig/named/Sanya,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "kIk" = (
@@ -87843,13 +87836,11 @@
 /turf/open/floor/iron,
 /area/station/cargo/drone_bay/ghetto)
 "vBW" = (
-/mob/living/basic/cow{
-	name = "Бетси"
-	},
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 4;
 	color = "#777777"
 	},
+/mob/living/basic/cow/black/pipa,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "vBZ" = (
@@ -91243,6 +91234,14 @@
 "wwy" = (
 /turf/closed/wall/r_wall,
 /area/station/engineering/storage/tech)
+"wwK" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1;
+	color = "#777777"
+	},
+/mob/living/basic/pig/named/Yanas,
+/turf/open/misc/sandy_dirt,
+/area/station/service/hydroponics)
 "wwR" = (
 /obj/effect/spawner/random/trash/mess,
 /turf/open/floor/iron/grimy,
@@ -97491,6 +97490,7 @@
 	dir = 1;
 	color = "#777777"
 	},
+/mob/living/basic/pig/named/Marina,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "xYj" = (
@@ -203288,7 +203288,7 @@ fxv
 mdc
 wCj
 fot
-xYd
+wwK
 voK
 obc
 ckR

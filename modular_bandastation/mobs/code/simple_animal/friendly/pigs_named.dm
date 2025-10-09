@@ -60,6 +60,8 @@
 // Янас - инвертация Сани в виде черного хряка
 /mob/living/basic/pig/named/Yanas
 	gender = MALE
+	icon_state = "pig_black" // для иконки
+	icon_living = "pig_black"
 	json_name = "pig_yanas"
 	age_stage_data = list(
 		AGE_STAGE_1 = list("name" = "Ян", "desc" = "Мелкий поросёнок-клептоман с наглым взглядом. Утащит всё, что блестит.",
@@ -83,6 +85,8 @@
 // Марина - Snake Eater в Маринаде
 /mob/living/basic/pig/named/Marina
 	gender = FEMALE
+	icon_state = "pig_mar" // для иконки
+	icon_living = "pig_mar"
 	json_name = "pig_marina"
 	age_stage_data = list(
 		AGE_STAGE_1 = list("name" = "Маринка", "desc" = "Маленькая свинка с характером.", "loot" = null),

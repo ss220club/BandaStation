@@ -106,7 +106,7 @@
 	desc = "Представитель федерации хомяков. Проявите уважение при его виде, \
 	ведь он с позитивным исходом решил немало дипломатических вопросов между федерацией мышей, \
 	республикой крыс и корпорацией Нанотрейзен. Да и кто вообще хомяка так назвал?!"
-	icon = 'modular_bandastation/mobs/icons/animal.dmi'
+	icon = 'modular_bandastation/mobs/icons/mouse.dmi'
 	icon_state = "hamster_rep"
 	icon_living = "hamster_rep"
 	icon_dead = "hamster_rep_dead"
