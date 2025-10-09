@@ -120,7 +120,7 @@
 	speak = list("Чирик.", "Чирик?", "Чирип.", "Чик!")
 	sound = list('sound/mobs/non-humanoids/chicken/chick_peep.ogg')
 	emote_hear = list("чирикает.")
-	emote_see = list("ключет землю.","машет крошечными крыльями.")
+	emote_see = list("клюет землю.","машет крошечными крыльями.")
 
 /datum/ai_planning_subtree/random_speech/cow
 	speech_chance = 1
