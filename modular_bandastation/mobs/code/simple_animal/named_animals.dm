@@ -139,6 +139,14 @@
 	health = 30
 	gold_core_spawnable = NO_SPAWN
 
+/mob/living/basic/frog/scream/nonconformist
+	name = "Нонконформист"
+	real_name = "Нонконформитс"
+	desc = "Доносит свою позицию через крик."
+	maxHealth = 30
+	health = 30
+	gold_core_spawnable = NO_SPAWN
+
 
 //cats
 /mob/living/basic/pet/cat/floppa
