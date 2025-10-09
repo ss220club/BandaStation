@@ -254,7 +254,7 @@
 
 /// Копирование характеристик из шаблона
 /mob/living/basic/pig/named/proc/apply_stats_from(typepath)
-	var/mob/living/basic/pig/template = new typepath
+	var/mob/living/basic/pig/template = new typepath(src)
 	speed = template.speed
 	health = template.health
 	maxHealth = template.maxHealth
