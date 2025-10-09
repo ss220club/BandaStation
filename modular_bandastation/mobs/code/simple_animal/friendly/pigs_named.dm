@@ -222,7 +222,7 @@
 		desc = data["desc"]
 		try_add_loot(data["loot"])
 
-/mob/living/basic/pig/named/proc/try_add_loot(var/list/additional_butcher_results)
+/mob/living/basic/pig/named/proc/try_add_loot(list/additional_butcher_results)
 	if(isnull(additional_butcher_results) || !length(additional_butcher_results))
 		return
 	butcher_results += additional_butcher_results
@@ -253,7 +253,7 @@
 	return ""
 
 /// Копирование характеристик из шаблона
-/mob/living/basic/pig/named/proc/apply_stats_from(var/typepath)
+/mob/living/basic/pig/named/proc/apply_stats_from(typepath)
 	var/mob/living/basic/pig/template = new typepath
 	speed = template.speed
 	health = template.health
