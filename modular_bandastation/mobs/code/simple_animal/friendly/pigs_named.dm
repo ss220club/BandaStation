@@ -99,7 +99,7 @@
 		AGE_STAGE_6 = list("name" = "Маринадовна", "desc" = "Боевой хряк, прошедший множество сражений. \
 			На плечах татуировки в виде сердца и корпуса морской пехоты. На спине надпись 3.10 и 33 звезды, \
 			из которых 30 уже потускнели.",
-			"loot" = list(/obj/item/knife/combat = 1, /obj/item/xenos_claw = 2=1)),
+			"loot" = list(/obj/item/knife/combat = 1, /obj/item/xenos_claw = 1)),
 		AGE_STAGE_7 = list("name" = "Маринадовна", "desc" = "Престарелая матрона, повидавшая слишком многое. \
 			Старые шрамы и татуировки заполонили всё её тело.",
 			"loot" = list(/obj/item/knife/combat = 1, /obj/item/xenos_claw = 2))
