@@ -87,7 +87,14 @@
 	if(!payload?["channel"])
 		CRASH("No channel provided to an open TGUI-Say")
 	window_open = TRUE
-	if(payload["channel"] != OOC_CHANNEL && payload["channel"] != ADMIN_CHANNEL)
+	// BANDASTATION ADDITION START - Mentors
+	var/static/list/no_thinking_bubble_channels = list(
+		OOC_CHANNEL,
+		ADMIN_CHANNEL,
+		MENTOR_CHANNEL
+	)
+	// BANDASTATION ADDITION END - Mentors
+	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels)
 		start_thinking()
 	if(!client.typing_indicators)
 		log_speech_indicators("[key_name(client)] started typing at [loc_name(client.mob)], indicators DISABLED.")

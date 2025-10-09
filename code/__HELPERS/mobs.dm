@@ -358,7 +358,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 
 // Displays a message in deadchat, sent by source. source is not linkified, message is, to avoid stuff like character names to be linkified.
 // Automatically gives the class deadsay to the whole message (message + source)
-/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR, admin_only=FALSE)
+// BANDASTATION EDIT START - ghost runechat
+/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR, admin_only=FALSE, raw_message)
+	var/should_show_runechat = !SSlag_switch.measures[DISABLE_GHOST_RUNECHAT] && raw_message && follow_target && !follow_target.orbiting
+// BANDASTATION EDIT END - ghost runechat
 	message = span_deadsay("[source][span_linkify(message)]")
 
 	if(admin_only)
@@ -418,6 +421,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 				var/turf_link = TURF_LINK(M, turf_target)
 				rendered_message = "[turf_link] [message]"
 
+			// BANDASTATION EDIT START - ghost runechat
+			if(should_show_runechat && M.client?.prefs.read_preference(/datum/preference/toggle/enable_runechat) && M.see_invisible >= follow_target.invisibility)
+				M.create_chat_message(follow_target, raw_message = raw_message, spans = list("deadsay"))
+			// BANDASTATION EDIT END - ghost runechat
 			to_chat(M, rendered_message, avoid_highlighting = speaker_key == M.key)
 		else
 			to_chat(M, message, avoid_highlighting = speaker_key == M.key)

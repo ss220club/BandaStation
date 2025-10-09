@@ -528,7 +528,7 @@
  */
 /mob/verb/examinate(atom/examinify as mob|obj|turf in view()) //It used to be oview(12), but I can't really say why
 	set name = "Examine"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 
 	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(run_examinate), examinify))
 
@@ -755,7 +755,7 @@
  */
 /mob/verb/mode()
 	set name = "Activate Held Object"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 	set src = usr
 
 	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(execute_mode)))
@@ -853,7 +853,7 @@
  */
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
-	set category = "OOC"
+	set category = "Special" // BANDASTATION REPLACEMENT: Original: "OOC"
 	reset_perspective(null)
 
 //suppress the .click/dblclick macros so people can't use them to identify the location of items or aimbot
@@ -1474,7 +1474,7 @@
 ///Show the language menu for this mob
 /mob/verb/open_language_menu_verb()
 	set name = "Open Language Menu"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 
 	get_language_holder().open_language_menu(usr)
 
