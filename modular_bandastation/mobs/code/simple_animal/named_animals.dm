@@ -174,7 +174,7 @@
 	unique_pet = TRUE
 	resting = TRUE
 
-/mob/living/basic/pet/cat/spacecat/musya
+/mob/living/basic/pet/cat/space/musya
 	name = "Муся"
 	desc = "Кошка мечтательница, всегда стремящаяся ввысь. Любимая почтенная кошка отдела токсинов. Всегда готова к вылетам!"
 	gender = FEMALE

@@ -67,17 +67,6 @@
 	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
 	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
-/mob/living/basic/pet/cat/spacecat
-	name = "космокот"
-	desc = "Космический котенок!!! Он наблюдал за горизонт событий."
-	icon_state = "spacecat"
-	icon_living = "spacecat"
-	icon_dead = "spacecat_dead"
-	held_state = "spacecat"
-	unsuitable_atmos_damage = 0
-	minimum_survivable_temperature = TCMB
-	maximum_survivable_temperature = T0C + 40
-
-/mob/living/basic/pet/cat/spacecat/Initialize(mapload)
+/mob/living/basic/pet/cat/space/Initialize(mapload)
 	. = ..()
 	add_traits(list(TRAIT_SPACEWALK, TRAIT_SWIMMER, TRAIT_FENCE_CLIMBER, TRAIT_SNOWSTORM_IMMUNE), INNATE_TRAIT)
