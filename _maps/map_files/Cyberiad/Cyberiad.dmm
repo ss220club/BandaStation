@@ -23978,6 +23978,7 @@
 "fPu" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light_switch/directional/north,
+/mob/living/basic/mouse/rat/gray/ratatui,
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/fore/starboard)
 "fPJ" = (
@@ -35020,6 +35021,7 @@
 "iAi" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/effect/decal/cleanable/dirt,
+/mob/living/basic/mouse/rat/irish/remi,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "iAj" = (
@@ -42108,6 +42110,10 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/rd)
+"knO" = (
+/mob/living/basic/pet/cat/birman/crusher,
+/turf/open/floor/iron,
+/area/station/construction/mining/aux_base)
 "knX" = (
 /obj/structure/railing{
 	dir = 6
@@ -45201,6 +45207,7 @@
 /area/station/maintenance/ghetto/port)
 "kYU" = (
 /obj/structure/cable,
+/mob/living/basic/mouse/factory/pizdos,
 /turf/open/floor/plating,
 /area/station/maintenance/disposal)
 "kYV" = (
@@ -63351,6 +63358,10 @@
 /obj/machinery/airalarm/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/science/breakroom)
+"pvS" = (
+/mob/living/basic/mouse/rat/white/brain,
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "pvW" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -112107,7 +112118,7 @@ aCP
 aCP
 vhz
 njL
-lGq
+knO
 fDr
 cVi
 pry
@@ -209035,7 +209046,7 @@ alr
 fZm
 fZm
 qTt
-nPZ
+pvS
 qBn
 biB
 spK

@@ -228,10 +228,9 @@
 
 /datum/ai_planning_subtree/random_speech/cats
 	speech_chance = 10
-	sound = list(SFX_CAT_MEOW)
+	sound = list(/*SFX_CAT_MEOW*/'modular_bandastation/mobs/sound/cat_meow.ogg') // SS220 EDIT
 	emote_hear = list("meows.")
 	emote_see = list("meows.")
-	sound = list('modular_bandastation/mobs/sound/cat_meow.ogg')
 
 /datum/ai_planning_subtree/random_speech/blackboard //literal tower of babel, subtree form
 	speech_chance = 1

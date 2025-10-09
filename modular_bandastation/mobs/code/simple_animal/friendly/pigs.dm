@@ -33,7 +33,7 @@
 		return
 	if(!prob(color_chance))
 		return
-	var/picked_color = possible_body_colors
+	var/picked_color = pick(possible_body_colors)
 	if(!isnull(body_icon_state))
 		AddElement(/datum/element/animal_variety, "[body_icon_state]", "[picked_color]", modify_pixels = FALSE)
 
