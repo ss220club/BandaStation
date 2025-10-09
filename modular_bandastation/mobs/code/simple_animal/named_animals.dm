@@ -1,18 +1,3 @@
-/mob/living/basic/pig/big/sanya
-	name = "Саня"
-	desc = "Упитанный харизматичный хряк в самом расцвете сил. Чудом не пущен на мясо и разожрался до состояния неприкосновенного запаса на черный день."
-	gold_core_spawnable = NO_SPAWN
-
-/mob/living/basic/pig/big/sanya/Initialize(mapload)
-	. = ..()
-	if(prob(2)) // Редкий шанс увидеть СТАРОГО Саню
-		desc = "Старый добрый хряк с сединой. Слегка подслеповат, но нюх и харизма по прежнему с ним. Чудом не пущен на мясо и дожил до почтенного возраста."
-		icon = /mob/living/basic/pig/big/old::icon
-		maxHealth = /mob/living/basic/pig/big/old::maxHealth
-		health = /mob/living/basic/pig/big/old::health
-		speed = /mob/living/basic/pig/big/old::speed
-		butcher_results = /mob/living/basic/pig/big/old::butcher_results
-
 /mob/living/basic/goat/chef
 	name = "Боря"
 	desc = "Этот козёл - парнокопытное гурме шефа, в его мрачных глазах-бусинках так и читается амибициозный нрав! Он не твой друг, ведь за каждым игривым прыжком может скрываться неожиданный выпад."

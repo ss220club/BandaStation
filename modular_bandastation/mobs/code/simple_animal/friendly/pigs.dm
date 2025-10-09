@@ -79,7 +79,7 @@
 	melee_damage_lower = 1
 	melee_damage_upper = 3
 	butcher_results = list(/obj/item/food/meat/slab/pig = 12)
-	ai_controller = /datum/ai_controller/basic_controller/pig/alt
+	ai_controller = /datum/ai_controller/basic_controller/pig/big
 
 /mob/living/basic/pig/adult
 	name = "свин"

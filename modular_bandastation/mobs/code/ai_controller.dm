@@ -110,9 +110,8 @@
 		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/find_food,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/random_speech/pig/alt,
+		/datum/ai_planning_subtree/random_speech/pig/bit,
 	)
-
 
 /datum/ai_controller/basic_controller/pig/big/New(atom/new_pawn)
 	. = ..()
@@ -120,9 +119,9 @@
 	if(S)
 		planning_subtrees -= S
 		qdel(S)
-	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/alt)
+	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/big)
 
-/datum/ai_planning_subtree/random_speech/pig/alt
+/datum/ai_planning_subtree/random_speech/pig/big
 	sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
 
 // =========== Зомби звуки ===========

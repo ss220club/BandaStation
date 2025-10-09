@@ -7,8 +7,8 @@
 	icon_dead = "syndirat_dead"
 	icon_resting = "syndirat_sleep"
 	body_color = ""
-	colored_mob = null
-	possible_colors = null
+	body_icon_state = null
+	possible_body_colors = null
 	health = 50
 	maxHealth = 50
 

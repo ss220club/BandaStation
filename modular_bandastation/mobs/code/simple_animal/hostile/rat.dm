@@ -8,9 +8,9 @@
 	maxHealth = 15
 	health = 15
 	mob_size = MOB_SIZE_SMALL
-	colored_mob = "rat"
+	body_icon_state = "rat"
 	body_color = null
-	possible_colors = list("white", "gray", "irish")
+	possible_body_colors = list("white", "gray", "irish")
 
 	// holder
 	can_be_held = TRUE
