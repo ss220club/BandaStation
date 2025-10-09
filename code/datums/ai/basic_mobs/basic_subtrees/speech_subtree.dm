@@ -97,7 +97,7 @@
 	speak = list(
 		"Врывайтесь в Пасху!",
 		"Приди за своими яйцами!",
-		"Наградя для всех!",
+		"Награда для всех!",
 	)
 
 /// These ones have a space mask on, so their catchphrases are muffled.
