@@ -9,7 +9,7 @@
 	hair_hidden = FALSE
 	facial_hair_hidden = FALSE
 	LAZYNULL(hair_masks)
-	// BANDASTATION ADD START — накладываем маски для VULPKANIN
+	// BANDASTATION ADD START — накладываем маски для кастомных рас
 	if(species_hair_mask)
 		LAZYSET(hair_masks, species_hair_mask, TRUE)
 	// BANDASTATION ADD END
