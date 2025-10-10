@@ -1,7 +1,3 @@
-/datum/hair_mask/vulp
-	icon_state = "hide_vulp"
-	strict_coverage_zones = HAIR_APPENDAGE_TOP
-
 /obj/item/bodypart/head/vulpkanin
 	icon_greyscale = 'icons/bandastation/mob/species/vulpkanin/bodyparts.dmi'
 	limb_id = SPECIES_VULPKANIN
