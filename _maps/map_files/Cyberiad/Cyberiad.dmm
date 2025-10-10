@@ -77552,9 +77552,7 @@
 	},
 /area/station/engineering/hallway/west)
 "sXK" = (
-/mob/living/basic/goat/pete{
-	name = "Боря"
-	},
+/mob/living/basic/goat/pete,
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
