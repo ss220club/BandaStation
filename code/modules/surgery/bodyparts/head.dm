@@ -92,6 +92,7 @@
 	var/datum/worn_feature_offset/worn_head_offset
 	/// Offset to apply to overlays placed on the face
 	var/datum/worn_feature_offset/worn_face_offset
+	var/datum/hair_mask/species_hair_mask = null // BANDASTATION ADD — маска для отображения ушей VULPKANIN поверх причёсок
 
 	VAR_PROTECTED
 		/// Draw this head as "debrained"
