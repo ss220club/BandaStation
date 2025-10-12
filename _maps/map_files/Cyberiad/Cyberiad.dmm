@@ -306,6 +306,10 @@
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
 /area/station/medical/treatment_center)
+"afk" = (
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/plating,
+/area/station/maintenance/aft)
 "afw" = (
 /obj/machinery/atmospherics/components/binary/pump/on{
 	dir = 1
@@ -2125,6 +2129,7 @@
 /area/station/security/interrogation/ghetto)
 "aAV" = (
 /obj/structure/water_source/puddle,
+/mob/living/basic/turtle,
 /turf/open/floor/grass,
 /area/station/commons/dorms)
 "aBh" = (
@@ -3467,13 +3472,11 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/emergency/port)
 "aSb" = (
-/mob/living/basic/chicken{
-	name = "Коммандор Клакки"
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4;
 	color = "#777777"
 	},
+/mob/living/basic/chicken/cock/clucky,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "aSg" = (
@@ -5683,6 +5686,11 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/port)
+"bsn" = (
+/obj/structure/lattice,
+/mob/living/basic/pet/cat/space/musya,
+/turf/open/space/openspace,
+/area/space/nearstation)
 "bst" = (
 /obj/structure/railing{
 	dir = 8
@@ -7373,6 +7381,7 @@
 /area/station/security/courtroom)
 "bNX" = (
 /obj/structure/chair/comfy/brown,
+/mob/living/basic/pet/cat/floppa,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
 "bOe" = (
@@ -8670,6 +8679,14 @@
 /obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/security/lockers)
+"ceR" = (
+/obj/machinery/shower/directional/south,
+/obj/structure/curtain,
+/obj/structure/fluff/shower_drain,
+/obj/effect/decal/cleanable/dirt,
+/mob/living/basic/frog/wednesday,
+/turf/open/floor/iron/showroomfloor,
+/area/station/maintenance/starboard/aft)
 "ceS" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -9342,6 +9359,7 @@
 	network = list("ss13","rd")
 	},
 /obj/effect/turf_decal/tile/purple/half,
+/mob/living/basic/pet/dog/pug/frank,
 /turf/open/floor/iron/white,
 /area/station/science/explab)
 "clY" = (
@@ -10101,7 +10119,6 @@
 /turf/open/floor/iron/dark/small,
 /area/station/security/mechbay)
 "cvQ" = (
-/mob/living/basic/crocodile/gena,
 /turf/open/water/alternative/muddy/no_fishing,
 /area/station/service/kitchen/abandoned)
 "cvT" = (
@@ -12293,11 +12310,11 @@
 /area/station/maintenance/port/greater)
 "cVC" = (
 /obj/structure/bed/dogbed,
-/mob/living/basic/pet/dog/pug/mcgriff,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/mob/living/basic/pet/dog/corgi/security/warden,
 /turf/open/floor/iron/dark,
 /area/station/security/warden)
 "cVE" = (
@@ -13547,7 +13564,6 @@
 "dkj" = (
 /obj/structure/flora/bush/jungle,
 /obj/structure/flora/bush/jungle/b/style_random,
-/mob/living/basic/rabbit,
 /turf/open/floor/grass,
 /area/station/commons/dorms)
 "dkl" = (
@@ -14956,6 +14972,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 9
 	},
+/obj/effect/decal/remains/mouse,
 /turf/open/water/alternative/muddy/no_fishing,
 /area/station/service/kitchen/abandoned)
 "dBI" = (
@@ -16844,6 +16861,7 @@
 	},
 /obj/machinery/light/small/dim/directional/east,
 /obj/item/radio/intercom/prison/directional/north,
+/mob/living/basic/frog/scream/nonconformist,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/prison)
 "ebd" = (
@@ -20399,6 +20417,8 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 1
 	},
+/obj/structure/bed/dogbed,
+/mob/living/basic/mouse/hamster/representative,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "eYv" = (
@@ -21878,6 +21898,7 @@
 /obj/structure/sign/painting/library_private{
 	pixel_x = -32
 	},
+/mob/living/basic/pet/dog/bullterrier/genn,
 /turf/open/floor/engine/cult,
 /area/station/service/library)
 "frW" = (
@@ -23938,6 +23959,7 @@
 "fPu" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light_switch/directional/north,
+/mob/living/basic/mouse/rat/gray/ratatui,
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/fore/starboard)
 "fPJ" = (
@@ -35000,6 +35022,7 @@
 "iAi" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/effect/decal/cleanable/dirt,
+/mob/living/basic/mouse/rat/irish/remi,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "iAj" = (
@@ -35318,6 +35341,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/small,
 /area/station/security/interrogation/ghetto)
+"iEO" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "iEU" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -36337,7 +36365,7 @@
 	anchored = 1;
 	name = "Tom's bed"
 	},
-/mob/living/basic/pet/dog/pug,
+/mob/living/basic/pet/dog/brittany/psycho,
 /turf/open/floor/wood/large,
 /area/station/medical/psychology)
 "iRE" = (
@@ -40782,6 +40810,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/starboard/aft)
+"jWJ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/plating,
+/area/station/maintenance/port/fore)
 "jWK" = (
 /obj/machinery/light/directional/south,
 /obj/structure/sign/poster/official/random/directional/south,
@@ -42081,6 +42114,10 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/rd)
+"knO" = (
+/mob/living/basic/pet/cat/birman/crusher,
+/turf/open/floor/iron,
+/area/station/construction/mining/aux_base)
 "knX" = (
 /obj/structure/railing{
 	dir = 6
@@ -42774,13 +42811,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/central)
 "kvX" = (
-/mob/living/basic/chicken{
-	name = "Галя"
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4;
 	color = "#777777"
 	},
+/mob/living/basic/chicken/wife,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "kwf" = (
@@ -43813,13 +43848,11 @@
 	name = "Garden";
 	req_access = list("kitchen")
 	},
-/mob/living/basic/pig{
-	name = "Саня"
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 5;
 	color = "#777777"
 	},
+/mob/living/basic/pig/named/Sanya,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "kIk" = (
@@ -45066,6 +45099,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
+"kXV" = (
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "kXW" = (
 /obj/effect/decal/cleanable/molten_object/large,
 /obj/effect/landmark/generic_maintenance_landmark,
@@ -45167,6 +45204,7 @@
 /area/station/maintenance/ghetto/port)
 "kYU" = (
 /obj/structure/cable,
+/mob/living/basic/mouse/factory/pizdos,
 /turf/open/floor/plating,
 /area/station/maintenance/disposal)
 "kYV" = (
@@ -46147,6 +46185,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/lavendergrass,
+/mob/living/basic/rabbit,
 /turf/open/misc/grass,
 /area/station/hallway/secondary/exit/departure_lounge)
 "lmH" = (
@@ -63348,6 +63387,10 @@
 /obj/machinery/airalarm/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/science/breakroom)
+"pvS" = (
+/mob/living/basic/mouse/rat/white/brain,
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "pvW" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -67480,6 +67523,10 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white,
 /area/station/medical/virology)
+"qya" = (
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/plating,
+/area/station/maintenance/port/aft)
 "qyb" = (
 /obj/structure/cable,
 /turf/open/floor/plating,
@@ -67729,6 +67776,10 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/project)
+"qAX" = (
+/mob/living/basic/pet/cat/birman/crusher,
+/turf/open/floor/iron,
+/area/station/cargo/storage/ghetto/depot)
 "qBf" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 6
@@ -68732,9 +68783,6 @@
 /obj/structure/sink/directional/west,
 /obj/structure/mirror/directional/east,
 /obj/machinery/newscaster/directional/west,
-/mob/living/basic/frog{
-	name = "Среда"
-	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/prison)
 "qPE" = (
@@ -68949,6 +68997,11 @@
 /obj/item/clothing/gloves/latex,
 /turf/open/floor/plating,
 /area/station/security/prison/ghetto)
+"qSJ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/iron/showroomfloor,
+/area/station/service/kitchen/abandoned)
 "qSL" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -77499,9 +77552,7 @@
 	},
 /area/station/engineering/hallway/west)
 "sXK" = (
-/mob/living/basic/goat/pete{
-	name = "Боря"
-	},
+/mob/living/basic/goat/pete,
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
@@ -77977,6 +78028,10 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/plating,
 /area/station/science/ordnance/testlab)
+"tfs" = (
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/plating,
+/area/station/maintenance/department/engine/atmos)
 "tfw" = (
 /obj/machinery/duct,
 /obj/machinery/light/small/directional/south,
@@ -79802,6 +79857,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 5
 	},
+/mob/living/basic/lizard/big/crocodile/gena,
 /turf/open/water/alternative/muddy/no_fishing,
 /area/station/service/kitchen/abandoned)
 "tCb" = (
@@ -84328,6 +84384,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/red/anticorner/contrasted,
+/mob/living/basic/pet/dog/corgi/security,
 /turf/open/floor/iron,
 /area/station/security/office)
 "uJj" = (
@@ -87347,6 +87404,7 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
+/mob/living/basic/pet/dog/corgi/security/grom,
 /turf/open/floor/iron,
 /area/station/security/processing)
 "vuy" = (
@@ -87916,13 +87974,11 @@
 /turf/open/floor/iron,
 /area/station/cargo/drone_bay/ghetto)
 "vBW" = (
-/mob/living/basic/cow{
-	name = "Бетси"
-	},
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 4;
 	color = "#777777"
 	},
+/mob/living/basic/cow/black/pipa,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "vBZ" = (
@@ -88583,6 +88639,7 @@
 /area/station/engineering/hallway)
 "vKz" = (
 /obj/structure/chair/comfy/black,
+/mob/living/basic/pet/cat/white/penny,
 /turf/open/floor/carpet/green,
 /area/station/commons/dorms/apartment1)
 "vKS" = (
@@ -90483,6 +90540,7 @@
 /area/station/service/chapel/monastery)
 "wkn" = (
 /obj/structure/water_source/puddle,
+/mob/living/basic/walrus,
 /turf/open/misc/beach/sand,
 /area/station/hallway/secondary/exit/departure_lounge)
 "wko" = (
@@ -91326,6 +91384,14 @@
 "wwy" = (
 /turf/closed/wall/r_wall,
 /area/station/engineering/storage/tech)
+"wwK" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1;
+	color = "#777777"
+	},
+/mob/living/basic/pig/named/Yanas,
+/turf/open/misc/sandy_dirt,
+/area/station/service/hydroponics)
 "wwR" = (
 /obj/effect/spawner/random/trash/mess,
 /turf/open/floor/iron/grimy,
@@ -94063,6 +94129,10 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
+"xeo" = (
+/mob/living/basic/pet/dog/corgi/security/detective,
+/turf/open/floor/carpet/red,
+/area/station/maintenance/department/security/ghetto)
 "xes" = (
 /obj/machinery/firealarm/directional/north,
 /turf/open/floor/iron,
@@ -94611,6 +94681,10 @@
 /obj/effect/spawner/random/engineering/tracking_beacon,
 /turf/open/floor/iron,
 /area/station/command/bridge)
+"xkn" = (
+/obj/effect/decal/remains/mouse/pinkie,
+/turf/open/floor/engine/vacuum,
+/area/station/science/ordnance)
 "xkx" = (
 /obj/structure/flora/tree/jungle/small/style_random,
 /turf/open/floor/grass,
@@ -96828,6 +96902,8 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/engine)
 "xNt" = (
+/mob/living/basic/pet/fox/fennec/fenya,
+/obj/structure/bed/dogbed,
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/magistrate)
 "xNB" = (
@@ -97608,6 +97684,7 @@
 	dir = 1;
 	color = "#777777"
 	},
+/mob/living/basic/pig/named/Marina,
 /turf/open/misc/sandy_dirt,
 /area/station/service/hydroponics)
 "xYj" = (
@@ -112159,7 +112236,7 @@ aCP
 aCP
 vhz
 njL
-lGq
+knO
 fDr
 cVi
 pry
@@ -119633,7 +119710,7 @@ tWQ
 yfu
 qUy
 kwL
-wrB
+qAX
 wrB
 rdN
 xZe
@@ -127289,7 +127366,7 @@ gVh
 ovd
 jxu
 nuS
-ejN
+xeo
 lPO
 jrf
 fIp
@@ -152540,7 +152617,7 @@ doz
 doz
 doz
 ngu
-kRY
+xkn
 rEK
 hmw
 nNg
@@ -182881,7 +182958,7 @@ tYD
 tYD
 spZ
 sGN
-kAy
+qya
 ydu
 wtj
 xkR
@@ -186422,7 +186499,7 @@ giO
 xuZ
 qsJ
 pFd
-ydj
+jWJ
 qsJ
 qsJ
 qsJ
@@ -188067,7 +188144,7 @@ rgH
 oay
 aWy
 aWy
-aWy
+tfs
 cZJ
 bJg
 vJj
@@ -201056,7 +201133,7 @@ jup
 cgv
 hNe
 qXZ
-pkG
+iEO
 lqC
 hJP
 fgy
@@ -203408,7 +203485,7 @@ fxv
 mdc
 wCj
 fot
-xYd
+wwK
 voK
 obc
 ckR
@@ -204754,7 +204831,7 @@ hXT
 hXT
 hXT
 cWT
-hXT
+afk
 hpN
 hpN
 hpN
@@ -207565,7 +207642,7 @@ nPZ
 nPZ
 nPZ
 luc
-nPZ
+kXV
 nPZ
 eWp
 uGd
@@ -209087,7 +209164,7 @@ alr
 fZm
 fZm
 qTt
-nPZ
+pvS
 qBn
 biB
 spK
@@ -213397,7 +213474,7 @@ tYD
 tpO
 frR
 uUa
-eKw
+qSJ
 tpO
 bNm
 mvp
@@ -216019,7 +216096,7 @@ bTH
 rMZ
 jJZ
 bTH
-kJd
+bsn
 kJd
 kJd
 kJd
@@ -217329,7 +217406,7 @@ nOg
 bTH
 bTH
 bTH
-nOg
+ceR
 bTH
 opq
 koX
