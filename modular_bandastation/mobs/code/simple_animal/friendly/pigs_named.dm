@@ -260,6 +260,9 @@
 	maxHealth = template.maxHealth
 	butcher_results = template.butcher_results
 	ai_controller = template.ai_controller
+	melee_damage_lower = template.melee_damage_lower
+	melee_damage_upper = template.melee_damage_upper
+	obj_damage = template.obj_damage
 	qdel(template)
 
 #undef AGE_STAGE_1 // baby

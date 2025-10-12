@@ -50,6 +50,7 @@
 	maxHealth = 20
 	melee_damage_lower = 1
 	melee_damage_upper = 2
+	obj_damage = 2
 	butcher_results = list(/obj/item/food/meat/slab/pig = 2)
 
 	ai_controller = /datum/ai_controller/basic_controller/pig
@@ -65,6 +66,9 @@
 
 	health = 20
 	maxHealth = 20
+	melee_damage_lower = 1
+	melee_damage_upper = 3
+	obj_damage = 3
 	butcher_results = list(/obj/item/food/meat/slab/pig = 5)
 
 /mob/living/basic/pig/baby/young
@@ -78,6 +82,9 @@
 
 	health = 50
 	maxHealth = 50
+	melee_damage_lower = 2
+	melee_damage_upper = 5
+	obj_damage = 6
 	butcher_results = list(/obj/item/food/meat/slab/pig = 10)
 
 /mob/living/basic/pig
@@ -92,8 +99,9 @@
 	health = 80
 	maxHealth = 80
 	speed = 2
-	melee_damage_lower = 1
-	melee_damage_upper = 3
+	melee_damage_lower = 2
+	melee_damage_upper = 8
+	obj_damage = 10
 	butcher_results = list(/obj/item/food/meat/slab/pig = 12)
 	ai_controller = /datum/ai_controller/basic_controller/pig/big
 
@@ -109,8 +117,9 @@
 	maxHealth = 100
 	speed = 2
 	butcher_results = list(/obj/item/food/meat/slab/pig = 16)
-	melee_damage_lower = 2
-	melee_damage_upper = 4
+	melee_damage_lower = 3
+	melee_damage_upper = 10
+	obj_damage = 13
 
 /mob/living/basic/pig/old
 	name = "хряк"
@@ -123,8 +132,9 @@
 	health = 150
 	maxHealth = 150
 	speed = 3
-	melee_damage_lower = 3
-	melee_damage_upper = 6
+	melee_damage_lower = 4
+	melee_damage_upper = 12
+	obj_damage = 15
 	butcher_results = list(/obj/item/food/meat/slab/pig = 22)
 
 /mob/living/basic/pig/old/ancient
@@ -139,4 +149,5 @@
 	maxHealth = 200
 	melee_damage_lower = 5
 	melee_damage_upper = 15
+	obj_damage = 20
 	butcher_results = list(/obj/item/food/meat/slab/pig = 30)
