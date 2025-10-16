@@ -62024,6 +62024,7 @@
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 8
 	},
+/mob/living/basic/goose/scientist,
 /turf/open/floor/iron/dark,
 /area/station/science/breakroom)
 "pfs" = (
@@ -71471,6 +71472,7 @@
 	dir = 6
 	},
 /obj/machinery/firealarm/directional/east,
+/mob/living/basic/possum/key,
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage)
 "rwp" = (
