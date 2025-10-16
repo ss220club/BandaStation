@@ -19,8 +19,8 @@
 	health = 20
 
 /mob/living/basic/chicken/cock/clucky
-	name = "Коммандор Клакки"
-	desc = "Его великая армия бесчисленна. Ко-ко-ко."
+	name = "Коммандор Курицын"
+	desc = "Также известный как Клакки, Кудахтор и Мистер Вселенная. Его великая армия бесчисленна, а грудка накачана. Ко-ко-ко, вот так вот."
 	gold_core_spawnable = NO_SPAWN
 	maxHealth = 40 // Veteran
 	health = 40
