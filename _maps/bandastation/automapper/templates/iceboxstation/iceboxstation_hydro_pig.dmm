@@ -1,0 +1,55 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/flora/bush/flowers_pp/style_random,
+/obj/structure/flora/bush/flowers_br/style_random,
+/mob/living/basic/pig/named/Yanas,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"f" = (
+/obj/machinery/hydroponics/constructable,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"w" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/structure/flora/bush/generic/style_random,
+/mob/living/basic/cow/black/pipa,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"x" = (
+/obj/machinery/hydroponics/constructable,
+/mob/living/basic/chicken/cock/clucky,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"B" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/mob/living/basic/pig/named/Sanya,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"I" = (
+/obj/machinery/hydroponics/constructable,
+/mob/living/basic/chicken/wife,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"R" = (
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/flora/bush/flowers_br/style_random,
+/mob/living/basic/pig/named/Marina,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+
+(1,1,1) = {"
+B
+a
+"}
+(2,1,1) = {"
+f
+x
+"}
+(3,1,1) = {"
+f
+I
+"}
+(4,1,1) = {"
+R
+w
+"}

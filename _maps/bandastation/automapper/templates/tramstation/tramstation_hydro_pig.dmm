@@ -1,0 +1,55 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/machinery/door/window/left/directional/south,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"d" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"i" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/mob/living/basic/pig/named/Sanya,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"o" = (
+/mob/living/basic/cow/black/pipa,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"C" = (
+/obj/machinery/light/warm/directional/north,
+/mob/living/basic/pig/named/Yanas,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"U" = (
+/mob/living/basic/pig/named/Marina,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"V" = (
+/mob/living/basic/chicken/cock/clucky,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"Y" = (
+/obj/effect/landmark/event_spawn,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+"Z" = (
+/mob/living/basic/chicken/wife,
+/turf/open/floor/grass,
+/area/station/service/hydroponics)
+
+(1,1,1) = {"
+U
+V
+i
+"}
+(2,1,1) = {"
+C
+Y
+a
+"}
+(3,1,1) = {"
+o
+Z
+d
+"}

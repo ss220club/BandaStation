@@ -1,0 +1,52 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/effect/turf_decal/tile/green{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/mob/living/basic/pig/named/Sanya,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"s" = (
+/mob/living/basic/pig/named/Marina,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"u" = (
+/obj/machinery/hydroponics/constructable,
+/obj/effect/turf_decal/bot,
+/mob/living/basic/chicken/cock/clucky,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"v" = (
+/mob/living/basic/pig/named/Yanas,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"y" = (
+/obj/effect/turf_decal/tile/green{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/mob/living/basic/cow/black/pipa,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"R" = (
+/obj/machinery/hydroponics/constructable,
+/obj/effect/turf_decal/bot,
+/mob/living/basic/chicken/wife,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+
+(1,1,1) = {"
+a
+v
+s
+"}
+(2,1,1) = {"
+y
+R
+u
+"}

@@ -1,0 +1,55 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/mob/living/basic/cow/black/pipa,
+/turf/open/floor/iron/half,
+/area/station/service/hydroponics)
+"l" = (
+/mob/living/basic/pig/named/Yanas,
+/turf/open/floor/iron/half,
+/area/station/service/hydroponics)
+"n" = (
+/obj/machinery/light/directional/south,
+/obj/machinery/hydroponics/constructable,
+/obj/machinery/status_display/ai/directional/south,
+/obj/effect/turf_decal/tile/green{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue,
+/mob/living/basic/chicken/cock/clucky,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"q" = (
+/obj/machinery/hydroponics/constructable,
+/obj/structure/extinguisher_cabinet/directional/south,
+/obj/effect/turf_decal/tile/green{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue,
+/mob/living/basic/chicken/wife,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"w" = (
+/obj/effect/turf_decal/tile/green{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue,
+/mob/living/basic/pig/named/Sanya,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
+"N" = (
+/mob/living/basic/pig/named/Marina,
+/turf/open/floor/iron/half,
+/area/station/service/hydroponics)
+
+(1,1,1) = {"
+N
+w
+"}
+(2,1,1) = {"
+l
+n
+"}
+(3,1,1) = {"
+a
+q
+"}
