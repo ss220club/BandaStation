@@ -108,7 +108,7 @@
 
 /mob/living/basic/chicken/cock/Initialize(mapload)
 	. = ..()
-	RemoveComponentSource(REF(src), /datum/component/egg_layer)
+	RemoveComponentSource(REF(src), /datum/component/egg_layer)// No EGGs from Cock
 
 	// Убираем "раскраску" курицы
 	icon_state = initial(icon_state)
