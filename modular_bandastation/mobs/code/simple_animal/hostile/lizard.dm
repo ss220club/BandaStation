@@ -50,6 +50,9 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/lizard/big
 
+/mob/living/basic/lizard/big/Initialize(mapload)
+	. = ..()
+
 	edibles = typecacheof(list(
 		/obj/item/food/meat,
 		/obj/item/food/deadmouse,
@@ -58,8 +61,6 @@
 		/mob/living/basic/cockroach
 	))
 
-/mob/living/basic/lizard/big/Initialize(mapload)
-	. = ..()
 	REMOVE_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_FENCE_CLIMBER, INNATE_TRAIT)
 	AddElement(/datum/element/ai_retaliate)
