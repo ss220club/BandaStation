@@ -207,7 +207,6 @@
 	name = "Nanotrasen Representative's Requests Console";
 	department = "Nanotrasen Representative's Office"
 	},
-/obj/effect/landmark/start/nanotrasen_representative,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "hQ" = (
