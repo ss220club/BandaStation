@@ -216,7 +216,7 @@
 	icon_dead = "[final_icon]_dead"
 
 	// подгружаем имя и описание из age_stage_data
-	if(islist(age_stage_data) && stage in age_stage_data)
+	if(islist(age_stage_data) && (stage in age_stage_data))
 		var/list/data = age_stage_data[stage]
 		if(islist(data))
 			name = data["name"] || name
