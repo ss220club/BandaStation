@@ -51,7 +51,7 @@
 	ai_controller = /datum/ai_controller/basic_controller/lizard/big
 
 /mob/living/basic/lizard/big/Initialize(mapload)
-	// Переопределяем статичный лист для этого типа
+	// Переопределяем список из статичного листа
 	edibles = typecacheof(list(
 		/obj/item/food/meat,
 		/obj/item/food/deadmouse,
