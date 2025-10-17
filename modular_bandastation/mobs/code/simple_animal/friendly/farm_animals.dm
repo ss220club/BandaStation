@@ -108,8 +108,6 @@
 
 /mob/living/basic/chicken/cock/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/ai_retaliate)
-	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	RemoveElement(/datum/component/egg_layer)	// No EGGs from Cock
 
 	// Убираем "раскраску" курицы

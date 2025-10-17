@@ -216,11 +216,12 @@
 	icon_dead = "[final_icon]_dead"
 
 	// подгружаем имя и описание из age_stage_data
-	if(age_stage_data[stage])
+	if(islist(age_stage_data) && stage in age_stage_data)
 		var/list/data = age_stage_data[stage]
-		name = data["name"]
-		desc = data["desc"]
-		try_add_loot(data["loot"])
+		if(islist(data))
+			name = data["name"] || name
+			desc = data["desc"] || desc
+			try_add_loot(data["loot"])
 
 /mob/living/basic/pig/named/proc/try_add_loot(list/additional_butcher_results)
 	if(isnull(additional_butcher_results) || !length(additional_butcher_results))
