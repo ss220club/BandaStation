@@ -1,5 +1,0 @@
-author: "HailFriend"
-delete-after: True
-changes:
-  - rscadd: "Добавил LOOC и Mentor say в логи"
-  - admin: "В кнопке OOC Log добавлен LOOC и в Show all добавлен Mentor say вместе с LOOC"
