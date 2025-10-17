@@ -104,12 +104,11 @@
 	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
 	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
+	can_egg_layer = FALSE // Мы не хотим чтобы петух высаживал яйца.
 	ai_controller = /datum/ai_controller/basic_controller/chicken/cock
 
 /mob/living/basic/chicken/cock/Initialize(mapload)
 	. = ..()
-	RemoveComponentSource(REF(src), /datum/component/egg_layer)// No EGGs from Cock
-
 	// Убираем "раскраску" курицы
 	icon_state = initial(icon_state)
 	icon_living = initial(icon_living)

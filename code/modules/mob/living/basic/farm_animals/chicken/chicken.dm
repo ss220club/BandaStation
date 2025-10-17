@@ -37,6 +37,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)
 
 	///boolean deciding whether eggs laid by this chicken can hatch into chicks
 	var/fertile = TRUE
+	var/can_egg_layer = TRUE // SS220 EDIT
 
 /datum/emote/chicken
 	mob_type_allowed_typecache = /mob/living/basic/chicken
@@ -59,7 +60,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_CHICKEN, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
 	AddElement(/datum/element/animal_variety, "chicken", pick("brown", "black", "white"), modify_pixels = TRUE)
-	AddComponent(\
+	if(can_egg_layer) AddComponent(\	 // SS220 EDIT
 		/datum/component/egg_layer,\
 		/obj/item/food/egg/organic,\
 		list(/obj/item/food/grown/wheat),\
