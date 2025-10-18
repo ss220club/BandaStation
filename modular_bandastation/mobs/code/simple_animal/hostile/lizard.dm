@@ -50,21 +50,22 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/lizard/big
 
-	var/static/list/food_types = list(
+/mob/living/basic/lizard/big/Initialize(mapload)
+	// Переопределяем список из статичного листа
+	edibles = typecacheof(list(
 		/obj/item/food/meat,
 		/obj/item/food/deadmouse,
-		/mob/living/basic/mouse
-	)
-
-/mob/living/basic/lizard/big/Initialize(mapload)
+		/mob/living/basic/mouse,
+		/mob/living/basic/butterfly,
+		/mob/living/basic/cockroach
+	))
 	. = ..()
-	add_traits(list(TRAIT_FENCE_CLIMBER), INNATE_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_FENCE_CLIMBER, INNATE_TRAIT)
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/nerfed_pulling, GLOB.typecache_general_bad_things_to_easily_move)
-	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = food_types)
 	AddComponent(/datum/component/health_scaling_effects, min_health_slowdown = 1.5)
-	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
 
 /mob/living/basic/lizard/big/gator
 	name = "аллигатор"
