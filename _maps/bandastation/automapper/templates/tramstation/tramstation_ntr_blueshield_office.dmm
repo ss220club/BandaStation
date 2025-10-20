@@ -652,7 +652,7 @@
 /area/station/command/heads_quarters/nanotrasen_representative)
 "vg" = (
 /obj/structure/reagent_dispensers/wall/peppertank/directional/north,
-/obj/machinery/suit_storage_unit/security,
+/obj/machinery/suit_storage_unit/blueshield,
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/blueshield)
 "vp" = (
