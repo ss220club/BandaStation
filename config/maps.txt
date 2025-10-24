@@ -55,3 +55,6 @@ endmap
 
 map runtimestation
 endmap
+
+map extended_station
+endmap
