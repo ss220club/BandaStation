@@ -255,7 +255,6 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 			entry["burndam"] = rand(0,175)
 			entry["brutedam"] = rand(0,175)
 			entry["health"] = -50
-			entry["can_track"] = tracked_living_mob.can_track()
 			results[++results.len] = entry
 			continue
 
@@ -285,9 +284,6 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 				"z" = tracked_living_mob.z,
 			)
 			// BANDASTATION REPLACEMENT - END
-
-		// Trackability
-		entry["can_track"] = tracked_living_mob.can_track()
 
 		results[++results.len] = entry
 

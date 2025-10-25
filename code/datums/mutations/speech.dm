@@ -208,7 +208,7 @@
 	. = ..()
 	AddComponent(/datum/component/speechmod, replacements = strings("elvis_replacement.json", "elvis"))
 
-/datum/mutation/chav/New(datum/mutation/copymut)
+/datum/mutation/elvis/New(datum/mutation/copymut)
 	. = ..()
 	AddComponent(/datum/component/speechmod, replacements = strings("elvis_replacement.json", "elvis"))
 

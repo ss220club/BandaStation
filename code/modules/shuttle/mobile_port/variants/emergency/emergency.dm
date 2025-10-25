@@ -47,7 +47,6 @@
 		SSshuttle.emergency_last_call_loc = signal_origin
 	else
 		SSshuttle.emergency_last_call_loc = null
-
 	priority_announce(
 		text = "Эвакуационный шаттл вызван. [red_alert ? "Красный уровень угрозы подтверждён: Отправлен приоритетный шаттл. " : "" ]Ожидаемое время прибытия: [timeLeft(60 SECONDS)] [declension_ru(timeLeft(60 SECONDS), "минуты", "минут", "минут")].[reason][SSshuttle.emergency_last_call_loc ? "\n\nСигнал вызова отслежен. Результаты можно просмотреть на любой консоли коммуникаций." : "" ][SSshuttle.admin_emergency_no_recall ? "\n\nПредупреждение: Подсистемы отзыва шаттла отключены; Отзыв невозможен." : ""]",
 		title = "Вызван эвакуационный шаттл",

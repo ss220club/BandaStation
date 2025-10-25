@@ -148,7 +148,7 @@ export function PrimaryView() {
           (textAreaActive ? (
             <Stack.Item
               shrink={1}
-              height={TEXTAREA_INPUT_HEIGHT + 'px'}
+              height={`${TEXTAREA_INPUT_HEIGHT}px`}
               position="relative"
             >
               {paperReplacementHint.length > 0 && textAreaActive && (

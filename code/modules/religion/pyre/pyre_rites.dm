@@ -14,7 +14,7 @@
 	"... позволь этому непригодному одеянию служить тебе ...",
 	"... сделай его достаточно крепким, чтобы гореть тысячу раз и больше ...")
 	invoke_msg = "... Выйди на свет в своей новой форме и присоединись к нерастворимому воску едино-истинного пламени!"
-	favor_cost = 1000
+	favor_cost = 700
 ///the piece of clothing that will be fireproofed, only one per rite
 	var/obj/item/clothing/chosen_clothing
 
@@ -123,7 +123,7 @@
 		"... пусть горит он ярко ...",
 	)
 	invoke_msg = "... зажгись, пылающая звезда!"
-	favor_cost = 2000
+	favor_cost = 1500
 	///arrow to enchant
 	var/obj/item/ammo_casing/arrow/holy/enchant_target
 

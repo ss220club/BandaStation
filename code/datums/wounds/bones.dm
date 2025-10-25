@@ -8,7 +8,7 @@
 	abstract = TRUE
 	required_limb_biostate = BIO_BONE
 
-	required_wounding_types = list(WOUND_BLUNT)
+	required_wounding_type = WOUND_BLUNT
 
 	wound_series = WOUND_SERIES_BONE_BLUNT_BASIC
 
@@ -279,6 +279,8 @@
 	if(prob(40))
 		victim.visible_message(span_danger("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] у [victim.declent_ru(GENITIVE)] встала обратно на место!"), span_userdanger("Сустав в районе [limb.ru_plaintext_zone[GENITIVE] || limb.plaintext_zone] встал обратно на место! Ай!"))
 		remove_wound()
+		return DOORCRUSH_NO_WOUND
+	return NONE
 
 /datum/wound/blunt/bone/moderate/try_handling(mob/living/user)
 	if(user.usable_hands <= 0 || user.pulling != victim)

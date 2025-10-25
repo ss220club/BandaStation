@@ -11,6 +11,9 @@
 	slot_flags = ITEM_SLOT_BELT
 	custom_price = PAYCHECK_CREW * 5
 	custom_premium_price = PAYCHECK_CREW * 6
+	sound_vary = TRUE
+	pickup_sound = SFX_GENERIC_DEVICE_PICKUP
+	drop_sound = SFX_GENERIC_DEVICE_DROP
 
 /** BANDASTATION REMOVAL - Crew Monitor NanoMap
 /obj/item/sensor_device/attack_self(mob/user)

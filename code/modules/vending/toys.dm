@@ -7,7 +7,6 @@
 	product_ads = "Почувствуй себя робастом с нашими игрушками!;Вернитесь в детство уже сегодня!;Игрушечное оружие не убивает, но вы можете попробовать!;Кому нужна ответственность, когда есть игрушечное оружие?;Сделайте своё следующее убийство ВЕСЕЛЫМ!"
 	vend_reply = "Возвращайтесь за добавкой!"
 	light_mask = "donksoft-light-mask"
-	circuit = /obj/item/circuitboard/machine/vending/donksofttoyvendor
 	products = list(
 		/obj/item/card/emagfake = 4,
 		/obj/item/hot_potato/harmless/toy = 4,

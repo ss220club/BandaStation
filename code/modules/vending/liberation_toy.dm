@@ -6,7 +6,6 @@
 	product_slogans = "Получите крутые игрушки уже сегодня!;Запустите «Валидхантера» уже сегодня!;Качественное игрушечное оружие по низким ценам!;Подарите их ГП ради полного доступа!;Подарите их ГСБ для оформления в пермабриг!"
 	product_ads = "Почувствуй себя робастом вместе со своими игрушками!;Прояви своего внутреннего ребенка прямо сейчас!;«Валидхантеры» убивают, а игрушечное оружие - нет!;Кому нужна ответственность, когда у тебя есть игрушечное оружие?;Сделай свое следующее убийство ВЕСЕЛЫМ!"
 	vend_reply = "Приходите ещё!"
-	circuit = /obj/item/circuitboard/machine/vending/syndicatedonksofttoyvendor
 	products = list(
 		/obj/item/card/emagfake = 4,
 		/obj/item/hot_potato/harmless/toy = 4,
@@ -37,6 +36,7 @@
 	extra_price = PAYCHECK_COMMAND
 	payment_department = NO_FREEBIES
 	light_mask = "donksoft-light-mask"
+	allow_custom = FALSE
 
 /datum/armor/vending_toyliberationstation
 	melee = 100

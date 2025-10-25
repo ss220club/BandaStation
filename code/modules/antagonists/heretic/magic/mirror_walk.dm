@@ -1,8 +1,9 @@
 /datum/action/cooldown/spell/jaunt/mirror_walk
 	name = "Mirror Walk"
-	desc = "Позволяет незаметно и свободно перемещаться по станции в пределах мира зеркала. \
-		Войти в мир зеркал и выйти из него можно только при наличии рядом отражающих поверхностей и предметов, \
-		например, окна, зеркала, отражающие стены или оборудование."
+	desc = "Allows you to traverse invisibly and freely across the station within the realm of the mirror. \
+		You can only enter and exit the realm of mirrors when nearby reflective surfaces and items, \
+		such as windows, mirrors, and reflective walls or equipment. \
+		You will slowly heal damage while in this form."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_minor_antag.dmi'
@@ -156,3 +157,14 @@
 
 /obj/effect/dummy/phased_mob/mirror_walk
 	name = "reflection"
+
+/obj/effect/dummy/phased_mob/mirror_walk/Initialize(mapload, atom/movable/jaunter)
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/effect/dummy/phased_mob/mirror_walk/process(seconds_per_tick)
+	if(!isliving(jaunter))
+		STOP_PROCESSING(SSobj, src)
+		return ..()
+	var/mob/living/living_jaunter = jaunter
+	living_jaunter.heal_overall_damage(5 * seconds_per_tick)

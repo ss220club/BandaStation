@@ -43,6 +43,8 @@
 
 Вы конечно можете попросить помощи, или совета в канале Discord [#разработка-ss13](https://discord.com/channels/1097181193939730453/1214475261547118612). Мы здесь только для того, чтобы получать удовольствие и помогать, так что, пожалуйста, не ждите профессиональной поддержки.
 
+Не мержите ПРы которые затрагивают [список запрещенного контента](/CONTRIBUTING.md#banned-content).
+
 ## Знакомство с командой
 
 ### Ведущий Разработчик
@@ -69,28 +71,28 @@
 
 #### Написание читаемого кода
 
-[Style guide](./guides/STYLE.md)
+[Style guide](/.github/guides/STYLE.md)
 
 #### Написание здравого кода
 
-[Code standards](./guides/STANDARDS.md)
+[Code standards](/.github/guides/STANDARDS.md)
 
 #### Написание понятного кода
 
-[Autodocumenting code](./guides/AUTODOC.md)
+[Autodocumenting code](/.github/guides/AUTODOC.md)
 
 #### Прочее
 
-- [AI Datums](../code/datums/ai/learn_ai.md)
-- [Embedding TGUI Components in Chat](../tgui/docs/chat-embedded-components.md)
-- [Hard Deletes](./guides/HARDDELETES.md)
-- [MC Tab Guide](./guides/MC_tab.md)
-- [Policy Configuration System](./guides/POLICYCONFIG.md)
-- [Quickly setting up a development database with ezdb](./guides/EZDB.md)
-- [Required Tests (Continuous Integration)](./guides/CI.md)
-- [Splitting up pull requests, aka atomization](./guides/ATOMIZATION.md)
-- [UI Development](../tgui/README.md)
-- [Visual Effects and Systems](./guides/VISUALS.md)
+- [AI Datums](/code/datums/ai/learn_ai.md)
+- [Embedding TGUI Components in Chat](/tgui/docs/chat-embedded-components.md)
+- [Hard Deletes](/.github/guides/HARDDELETES.md)
+- [MC Tab Guide](/.github/guides/MC_tab.md)
+- [Policy Configuration System](/.github/guides/POLICYCONFIG.md)
+- [Quickly setting up a development database with ezdb](/.github/guides/EZDB.md)
+- [Required Tests (Continuous Integration)](/.github/guides/CI.md)
+- [Splitting up pull requests, aka atomization](/.github/guides/ATOMIZATION.md)
+- [UI Development](/.github/tgui/README.md)
+- [Visual Effects and Systems](/.github/guides/VISUALS.md)
 
 ## Процесс открытия Pull Request
 

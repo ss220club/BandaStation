@@ -2,7 +2,7 @@
 	name = "Tiny Prick"
 	desc = "Stabby stabby"
 
-/datum/action/changeling/sting/Trigger(trigger_flags)
+/datum/action/changeling/sting/Trigger(mob/clicker, trigger_flags)
 	var/mob/user = owner
 	if(!user || !user.mind)
 		return
@@ -166,7 +166,7 @@
 
 	var/obj/item/held = target.get_active_held_item()
 	if(held && !target.dropItemToGround(held))
-		to_chat(user, span_warning("У цели нельзя снять [held.declent_ru(ACCUSATIVE)], вы не можете наложить на цель ложный армблейд!"))
+		to_chat(user, span_warning("[held] is stuck to [target.p_their()] hand, we cannot grow a false armblade over it!"))
 		return
 
 	..()
