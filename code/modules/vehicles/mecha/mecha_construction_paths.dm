@@ -844,7 +844,7 @@
 			"desc" = "The external armor is welded, and the <b>mech power core</b> socket is open.",
 			"forward_message" = "inserted mech power core",
 			"backward_message" = "cut off external armor"
-		)
+		),
 		// BANDASTATION EDIT END
 		list(
 			"key" = /obj/item/assembly/signaler/anomaly/ectoplasm,
