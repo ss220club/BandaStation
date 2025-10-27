@@ -27701,3 +27701,12 @@ accusative = "плату основных законов ИИ 'Хозяин ва
 instrumental = "платой основных законов ИИ 'Хозяин вафельной'"
 prepositional = "плате основных законов ИИ 'Хозяин вафельной'"
 gender = "female"
+
+["mech power core"]
+nominative = "силовое ядро меха"
+genitive = "силового ядра меха"
+dative = "силовому ядру меха"
+accusative = "силовое ядро меха"
+instrumental = "силовым ядром меха"
+prepositional = "силовом ядре меха"
+gender = "neuter"
