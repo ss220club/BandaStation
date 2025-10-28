@@ -205,7 +205,7 @@ trait_name = "Station"
 map_files = ["metastation_robo_mech_core.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
-coordinates = [110, 096, 1]
+coordinates = [110, 96, 1]
 trait_name = "Station"
 
 # IceBoxStation
