@@ -58,4 +58,4 @@
 /datum/loadout_item/pocket_items/instruments/soundhand_metal_guitar
 	name = "Электро-гитара Арии"
 	item_path = /obj/item/instrument/soundhand_metal_guitar
-	donator_level = DONATOR_TIER_5
+	donator_level = DONATOR_TIER_2

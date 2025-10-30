@@ -295,6 +295,22 @@ const RightKnobs = () => {
   const pitchLabel = `${pitchVal > 0 ? '+' : ''}${r0(pitchVal)}`;
   const sustainLabel = `${r1(sustainVal).toFixed(1)}s`;
 
+  // Универсальный адаптер под любые сигнатуры Knob
+  const asKnobHandler =
+    (cb: (value: number) => void) =>
+    // даём тайпинги через any, чтобы не бодаться с разными версиями типов
+    (...args: any[]) => {
+      // варианты: (value), (event), (event, value)
+      let value: number | undefined;
+
+      if (typeof args[1] === 'number') value = args[1];
+      else if (typeof args[0] === 'number') value = args[0];
+      else if (args[0]?.target?.value != null) value = Number(args[0].target.value);
+      else if (args[0]?.currentTarget?.value != null) value = Number(args[0].currentTarget.value);
+
+      if (typeof value === 'number' && !Number.isNaN(value)) cb(value);
+    };
+
   return (
     <Section title="Amp">
       <Stack>
@@ -306,7 +322,9 @@ const RightKnobs = () => {
             maxValue={VOL_MAX}
             step={1}
             stepPixelSize={6}
-            onDrag={(e, v) => act('set_volume', { amount: clamp(r0(v), 0, max_volume) })}
+            // поддержим и onChange, и onDrag — что бы ни ожидал Knob
+            onChange={asKnobHandler((v) => act('set_volume', { amount: clamp(r0(v), 0, max_volume) }))}
+            onDrag={asKnobHandler((v) => act('set_volume', { amount: clamp(r0(v), 0, max_volume) }))}
           />
           <Box mt={0.3}>
             Volume <Box as="span" color="label">({volLabel})</Box>
@@ -321,7 +339,8 @@ const RightKnobs = () => {
             maxValue={DROP_MAX}
             step={1}
             stepPixelSize={6}
-            onDrag={(e, v) => act('set_dropoff_volume', { amount: r0(v) })}
+            onChange={asKnobHandler((v) => act('set_dropoff_volume', { amount: r0(v) }))}
+            onDrag={asKnobHandler((v) => act('set_dropoff_volume', { amount: r0(v) }))}
           />
           <Box mt={0.3}>
             Dropoff <Box as="span" color="label">({dropLabel})</Box>
@@ -338,7 +357,8 @@ const RightKnobs = () => {
             maxValue={PITCH_MAX}
             step={1}
             stepPixelSize={6}
-            onDrag={(e, v) => act('set_note_shift', { amount: r0(v) })}
+            onChange={asKnobHandler((v) => act('set_note_shift', { amount: r0(v) }))}
+            onDrag={asKnobHandler((v) => act('set_note_shift', { amount: r0(v) }))}
           />
           <Box mt={0.3}>
             Pitch <Box as="span" color="label">({pitchLabel})</Box>
@@ -353,7 +373,8 @@ const RightKnobs = () => {
             maxValue={SUSTAIN_MAX}
             step={0.1}
             stepPixelSize={5}
-            onDrag={(e, v) => act('edit_sustain_mode', { amount: r1(v) })}
+            onChange={asKnobHandler((v) => act('edit_sustain_mode', { amount: r1(v) }))}
+            onDrag={asKnobHandler((v) => act('edit_sustain_mode', { amount: r1(v) }))}
           />
           <Box mt={0.3}>
             Sustain <Box as="span" color="label">({sustainLabel})</Box>
