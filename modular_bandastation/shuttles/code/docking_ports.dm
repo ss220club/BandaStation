@@ -70,9 +70,9 @@
 			initiate_drop_landing(destination, tl)
 
 /obj/docking_port/mobile/initiate_docking(obj/docking_port/stationary/S1, force = FALSE)
-    . = ..()
-    // Failsafe reset to FALSE, even if it's already FALSE because initiate_drop_landing() isn't called
-    drop_landing_in_progress = FALSE
+	. = ..()
+	// Failsafe reset to FALSE, even if it's already FALSE because initiate_drop_landing() isn't called
+	drop_landing_in_progress = FALSE
 
 /obj/docking_port/mobile/syndicate_sit
 	name = "syndicate sit shuttle"

@@ -1,9 +1,10 @@
-import { CheckboxInput, type FeatureToggle } from '../../base';
+import type { Feature } from '../../base';
+import { FeatureDropdownInput } from '../../dropdowns';
 
-export const donor_chat_shine: FeatureToggle = {
+export const donor_chat_effect: Feature<string> = {
   name: 'Блеск ника в чате',
   category: 'Чат',
   description:
-    'Если включено, ваш никнейм в OOC чате будет "блестеть". Требует включённого статуса бустера.',
-  component: CheckboxInput,
+    'Выбор эффекта переливания никнейма в OOC чате. Требует включённого статуса бустера.',
+  component: FeatureDropdownInput,
 };

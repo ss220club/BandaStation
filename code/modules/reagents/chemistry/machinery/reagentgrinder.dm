@@ -97,7 +97,7 @@
 		total_weight += target.w_class
 	if(to_process.len)
 		. += span_notice("Сейчас содержит:")
-		for(var/target_name as anything in to_process)
+		for(var/target_name in to_process)
 			. += span_notice("[to_process[target_name]] [target_name]")
 		. += span_notice("Наполнен на <b>[round((total_weight / maximum_weight) * 100)]%</b> вместимости.")
 

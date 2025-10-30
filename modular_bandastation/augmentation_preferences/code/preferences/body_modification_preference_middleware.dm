@@ -5,16 +5,14 @@
 		"set_body_modification_manufacturer" = PROC_REF(set_body_modification_manufacturer),
 	)
 
-/// Append all of these into ui_data
 /datum/preference_middleware/body_modifications/get_ui_data(mob/user)
 	var/list/data = list()
 	data["applied_body_modifications"] = get_applied_body_modifications()
 	data["incompatible_body_modifications"] = get_incompatible_body_modifications(user)
 	data["manufacturers"] = get_prosthesis_manufacturers()
-	data["selected_manufacturer"] = get_current_manufacturers(user)
+	data["selected_manufacturer"] = get_selected_manufacturers(user)
 	return data
 
-/// Append all of these into ui_static_data
 /datum/preference_middleware/body_modifications/get_constant_data(mob/user)
 	var/list/data = list()
 	for(var/body_modification_key in GLOB.body_modifications)
@@ -45,10 +43,12 @@
 	PRIVATE_PROC(TRUE)
 
 	var/list/incompatible_body_modifications = list()
-	for(var/body_modification_key in GLOB.body_modifications)
-		if(GLOB.body_modifications[body_modification_key].can_be_applied(user))
-			continue
+	var/list/applied = preferences.read_preference(/datum/preference/body_modifications)
 
+	for(var/body_modification_key in GLOB.body_modifications)
+		var/datum/body_modification/M = GLOB.body_modifications[body_modification_key]
+		if(!LAZYLEN(M.incompatible_body_modifications & applied))
+			continue
 		incompatible_body_modifications += body_modification_key
 
 	return incompatible_body_modifications
@@ -58,57 +58,52 @@
 
 	var/list/manufacturers_map = list()
 	for (var/key in GLOB.body_modifications)
-		var/datum/body_modification/mod = GLOB.body_modifications[key]
-		if (!istype(mod, /datum/body_modification/bodypart_prosthesis))
+		var/datum/body_modification/modification = GLOB.body_modifications[key]
+		if(!istype(modification, /datum/body_modification/bodypart_prosthesis))
 			continue
 
-		var/datum/body_modification/bodypart_prosthesis/prosthesis_mod = mod
+		var/datum/body_modification/bodypart_prosthesis/prosthesis = modification
 
-		manufacturers_map[key] = prosthesis_mod.manufacturers || list()
+		manufacturers_map[key] = prosthesis.manufacturers || list()
 
 	return manufacturers_map
 
-/datum/preference_middleware/body_modifications/proc/get_current_manufacturers(mob/user)
+/datum/preference_middleware/body_modifications/proc/get_selected_manufacturers(mob/user)
 	PRIVATE_PROC(TRUE)
 
 	var/list/current_brands = list()
 	var/list/player_modifications = preferences.read_preference(/datum/preference/body_modifications)
 
 	for (var/key in GLOB.body_modifications)
-		var/datum/body_modification/mod = GLOB.body_modifications[key]
+		var/datum/body_modification/modification = GLOB.body_modifications[key]
 
-		if (!istype(mod, /datum/body_modification/bodypart_prosthesis))
+		if(!istype(modification, /datum/body_modification/bodypart_prosthesis))
 			continue
 
-		var/datum/body_modification/bodypart_prosthesis/prosthesis_mod = mod
+		var/datum/body_modification/bodypart_prosthesis/prosthesis = modification
+		current_brands[key] = player_modifications[key]?["selected_manufacturer"] || prosthesis.get_default_manufacturer()
 
-		if (player_modifications && istype(player_modifications[key], /list) && player_modifications[key]["selected_manufacturer"])
-			current_brands[key] = player_modifications[key]["selected_manufacturer"]
-		else
-			current_brands[key] = prosthesis_mod.selected_manufacturer
 	return current_brands
 
 /datum/preference_middleware/body_modifications/proc/apply_body_modification(list/params, mob/user)
 	var/key = params["body_modification_key"]
-	if (!key)
+	if(!key)
 		return FALSE
 
-	var/datum/body_modification/mod = GLOB.body_modifications[key]
-	if (isnull(mod) || !mod.can_be_applied(user))
+	var/datum/body_modification/modification = GLOB.body_modifications[key]
+	if(!istype(modification) || !modification.can_be_applied(user))
 		return FALSE
 
-	var/list/prefs = preferences.read_preference(/datum/preference/body_modifications)
-	if (prefs[key])
+	var/list/updated_preference = preferences.read_preference(/datum/preference/body_modifications)
+	if(!isnull(updated_preference[key]))
 		return FALSE
 
-	if (istype(mod, /datum/body_modification/bodypart_prosthesis))
-		var/datum/body_modification/bodypart_prosthesis/prosthesis = mod
-		prefs[key] = list("selected_manufacturer" = prosthesis.selected_manufacturer)
+	if(modification.ui_params_valid(params))
+		updated_preference[key] = modification.handle_ui_params(params)
 	else
-		prefs[key] = TRUE
+		updated_preference[key] = modification.default_preference_value(params)
 
-	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], prefs)
-	return TRUE
+	return preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference)
 
 /datum/preference_middleware/body_modifications/proc/remove_body_modification(list/params, mob/user)
 	var/body_modification_key = params["body_modification_key"]
@@ -116,41 +111,26 @@
 		return FALSE
 
 	var/list/body_modifications = preferences.read_preference(/datum/preference/body_modifications)
-	if(!body_modifications[body_modification_key])
+	if(isnull(body_modifications[body_modification_key]))
 		return FALSE
 
 	body_modifications -= body_modification_key
-	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications)
-	user.update_body()
-	return TRUE
+	return preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications)
 
 /datum/preference_middleware/body_modifications/proc/set_body_modification_manufacturer(list/params, mob/user)
 	var/key = params["body_modification_key"]
-	var/brand = params["manufacturer"]
-
-	if (!key || !brand)
+	if(!key)
 		return FALSE
 
-	var/list/prefs = preferences.read_preference(/datum/preference/body_modifications)
-	if (!prefs[key])
+	var/list/updated_preference = preferences.read_preference(/datum/preference/body_modifications)
+	if(!islist(updated_preference[key]))
 		return FALSE
 
-	var/datum/body_modification/mod = GLOB.body_modifications[key]
-	if (!istype(mod, /datum/body_modification/bodypart_prosthesis))
+	var/datum/body_modification/modification = GLOB.body_modifications[key]
+	if(!modification.ui_params_valid(params))
 		return FALSE
 
-	var/datum/body_modification/bodypart_prosthesis/prosthesis = mod
-	if (!(brand in prosthesis.manufacturers))
-		return FALSE
-
-	if (!islist(prefs[key]))
-		prefs[key] = list()
-	prefs[key]["selected_manufacturer"] = brand
-
-	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], prefs)
-
-	if (istype(user, /mob/living/carbon/human))
-		GLOB.body_modifications[key].apply_to_human(user)
+	updated_preference[key] = modification.handle_ui_params(params)
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference)
 
 	return TRUE
-

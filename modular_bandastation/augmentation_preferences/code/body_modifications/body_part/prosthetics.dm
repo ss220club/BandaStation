@@ -21,32 +21,15 @@
 		"Xion Light",
 		"Zeng-Hu",
 	)
-	var/selected_manufacturer = "General"
 
-/datum/body_modification/bodypart_prosthesis/proc/get_replacement_type()
-	if (!selected_manufacturer || selected_manufacturer == "None")
-		return replacement_bodypart_type
-
-	var/base_type_str = "[replacement_bodypart_type]"
-	var/brand = lowertext(selected_manufacturer)
-	brand = replacetext(brand, " ", "_")
-	brand = replacetext(brand, "-", "")
-
-	if (!findtext(base_type_str, "/"))
-		base_type_str = "/[base_type_str]"
-
-	var/full_path = "[base_type_str]/[brand]"
-	var/path = text2path(full_path)
-
-	return path || replacement_bodypart_type
-
-/datum/body_modification/bodypart_prosthesis/apply_to_human(mob/living/carbon/target)
+/datum/body_modification/bodypart_prosthesis/apply_to_human(mob/living/carbon/target, additional_params)
 	. = ..()
-	if (!.)
+	if(!.)
 		return
 
-	var/type_to_spawn = get_replacement_type()
-	if (!ispath(type_to_spawn))
+	var/manufacturer = additional_params["selected_manufacturer"] || get_default_manufacturer()
+	var/type_to_spawn = get_replacement_type(manufacturer)
+	if(!ispath(type_to_spawn))
 		return
 
 	var/obj/item/bodypart/replacement_bodypart = new type_to_spawn()
@@ -56,9 +39,43 @@
 	if(limb_to_remove)
 		qdel(limb_to_remove)
 
-	target.update_body()
-
 	return TRUE
+
+/datum/body_modification/bodypart_prosthesis/preference_value_valid(value)
+	if(!islist(value))
+		return FALSE
+
+	var/list/value_list = value
+	var/brand = value_list["selected_manufacturer"]
+	return !isnull(brand) && (brand in manufacturers)
+
+/datum/body_modification/bodypart_prosthesis/default_preference_value(params)
+	return list("selected_manufacturer" = get_default_manufacturer())
+
+/datum/body_modification/bodypart_prosthesis/ui_params_valid(params)
+	var/brand = params["manufacturer"]
+	return !isnull(brand) && (brand in manufacturers)
+
+/datum/body_modification/bodypart_prosthesis/handle_ui_params(params)
+	var/brand = params["manufacturer"]
+	return list("selected_manufacturer" = brand)
+
+/datum/body_modification/bodypart_prosthesis/proc/get_replacement_type(manufacturer)
+	var/base_type_str = "[replacement_bodypart_type]"
+	if(!manufacturer || manufacturer == get_default_manufacturer())
+		return text2path(base_type_str)
+
+	var/brand = LOWER_TEXT(manufacturer)
+	brand = replacetext(brand, " ", "_")
+	brand = replacetext(brand, "-", "")
+
+	if(!findtext(base_type_str, "/"))
+		base_type_str = "/[base_type_str]"
+
+	return text2path("[base_type_str]/[brand]")
+
+/datum/body_modification/bodypart_prosthesis/proc/get_default_manufacturer()
+	return length(manufacturers) ? manufacturers[1] : ""
 
 /datum/body_modification/bodypart_prosthesis/arm
 	abstract_type = /datum/body_modification/bodypart_prosthesis/arm

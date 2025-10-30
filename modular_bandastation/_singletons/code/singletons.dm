@@ -1,5 +1,5 @@
 /datum/singleton
-	var/abstract_type = /datum/singleton
+	abstract_type = /datum/singleton
 
 /datum/singleton/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)

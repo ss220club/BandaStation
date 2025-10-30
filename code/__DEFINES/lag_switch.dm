@@ -16,5 +16,9 @@
 #define DISABLE_PARALLAX 7
 /// Disables footsteps, TRAIT_BYPASS_MEASURES exempted
 #define DISABLE_FOOTSTEPS 8
+// BANDASTATION EDIT START - ghost runechat
+/// Disables ghost_runechat, no exemptions
+#define DISABLE_GHOST_RUNECHAT 9
 
-#define MEASURES_AMOUNT 8 // The total number of switches defined above
+#define MEASURES_AMOUNT 9 // The total number of switches defined above
+// BANDASTATION EDIT START - ghost runechat

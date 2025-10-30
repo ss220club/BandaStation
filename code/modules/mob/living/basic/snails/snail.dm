@@ -1,6 +1,6 @@
 /mob/living/basic/snail
-	name = "snail"
-	desc = "Is petting this thing sanitary?"
+	name = "улитка"
+	desc = "Маленькая улиточка со своим маленьким домиком. Не гигиеничная..."
 	icon_state = "snail"
 	icon_living = "snail"
 	icon_dead = "snail_dead"
@@ -11,6 +11,8 @@
 	butcher_results = list(/obj/item/food/meat/slab/bugmeat = 1)
 	mob_biotypes = MOB_ORGANIC
 	density = FALSE
+	mob_size = MOB_SIZE_TINY
+	held_w_class = WEIGHT_CLASS_TINY
 	pass_flags = PASSTABLE | PASSMOB
 	health = 30
 	maxHealth = 30

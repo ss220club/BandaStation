@@ -1,8 +1,13 @@
 // MARK: General
 /datum/lazy_template/nukie_base
 	map_dir = "_maps/templates/lazy_templates/ss220"
-	map_name = "syndie_cc"
+	map_name = "syndie_cc_small"
 	key = LAZY_TEMPLATE_KEY_NUKIEBASE
+
+/datum/lazy_template/syndie_cc
+	map_dir = "_maps/templates/lazy_templates/ss220"
+	map_name = "syndie_cc"
+	key = LAZY_TEMPLATE_KEY_SYNDIE_CC
 
 // MARK: Shuttles
 /datum/map_template/shuttle/sit

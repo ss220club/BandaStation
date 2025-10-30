@@ -1,5 +1,6 @@
 
 /obj
+	abstract_type = /obj
 	animate_movement = SLIDE_STEPS
 	speech_span = SPAN_ROBOT
 	var/obj_flags = CAN_BE_HIT
@@ -222,6 +223,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 	. = ..()
 	if(obj_flags & UNIQUE_RENAME)
 		.["с возможностью переименования"] = "Используйте ручку на предмете, чтобы переименовать его или изменить его описание."
+	if(obj_flags & CONDUCTS_ELECTRICITY)
+		.["проводящий"] = "Похоже, это является хорошим проводником электричества."
 
 /obj/analyzer_act(mob/living/user, obj/item/analyzer/tool)
 	if(atmos_scan(user=user, target=src, silent=FALSE))

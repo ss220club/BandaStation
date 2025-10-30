@@ -1,0 +1,6 @@
+author: "CallmeHouston"
+delete-after: True
+changes:
+  - rscadd: "Добавлен Mech power core с пары для крафта боевых мехов (Фазон, Дюранд, Гигакс, Саванна-Иванов)."
+  - rscadd: "Добавлен Mech Power Core Crate в консоли заказов с карго, содержит 2 силовых ядра."
+  - map: "На все карты в робо добавлено 1 силовое ядро мехов."
