@@ -401,6 +401,44 @@
 		. = check_step(used_atom, user)
 	return .
 
+// BANDASTATION EDIT START - gygax mech core
+/datum/component/construction/mecha/gygax/get_outer_plating_steps()
+	return list(
+		list(
+			"key" = outer_plating,
+			"amount" = 1,
+			"action" = ITEM_DELETE,
+			"back_key" = TOOL_WELDER,
+			"desc" = "Internal armor is welded, [initial(outer_plating.name)] can be used as external armor.",
+			"forward_message" = "added external armor layer",
+			"backward_message" = "cut off internal armor layer"
+		),
+		list(
+			"key" = TOOL_WRENCH,
+			"back_key" = TOOL_CROWBAR,
+			"desc" = "External armor is installed, and can be <b>wrenched</b> into place.",
+			"forward_message" = "secured external armor layer",
+			"backward_message" = "pried off external armor"
+		),
+		list(
+			"key" = TOOL_WELDER,
+			"back_key" = TOOL_WRENCH,
+			"desc" = "External armor is wrenched, and can be <b>welded</b>.",
+			"forward_message" = "welded external armor",
+			"backward_message" = "unfastened external armor layer"
+		),
+		list(
+			"key" = /obj/item/mecha_parts/core,
+			"action" = ITEM_DELETE,
+			"back_key" = TOOL_WELDER,
+			"desc" = "The external armor is welded, and the <b>mech power core</b> socket is open.",
+			"icon_state" = "gygax24",
+			"forward_message" = "inserted mech power core",
+			"backward_message" = "cut off external armor"
+		)
+	)
+// BANDASTATION EDIT END
+
 //CLARKE
 /datum/component/construction/unordered/mecha_chassis/clarke
 	result = /datum/component/construction/mecha/clarke
@@ -620,6 +658,44 @@
 	outer_plating = /obj/item/mecha_parts/part/durand_armor
 	outer_plating_amount = 1
 
+// BANDASTATION EDIT START - durand mech core
+/datum/component/construction/mecha/durand/get_outer_plating_steps()
+	return list(
+		list(
+			"key" = outer_plating,
+			"amount" = 1,
+			"action" = ITEM_DELETE,
+			"back_key" = TOOL_WELDER,
+			"desc" = "Internal armor is welded, [initial(outer_plating.name)] can be used as external armor.",
+			"forward_message" = "added external armor layer",
+			"backward_message" = "cut off internal armor layer"
+		),
+		list(
+			"key" = TOOL_WRENCH,
+			"back_key" = TOOL_CROWBAR,
+			"desc" = "External armor is installed, and can be <b>wrenched</b> into place.",
+			"forward_message" = "secured external armor layer",
+			"backward_message" = "pried off external armor"
+		),
+		list(
+			"key" = TOOL_WELDER,
+			"back_key" = TOOL_WRENCH,
+			"desc" = "External armor is wrenched, and can be <b>welded</b>.",
+			"forward_message" = "welded external armor",
+			"backward_message" = "unfastened external armor layer"
+		),
+		list(
+			"key" = /obj/item/mecha_parts/core,
+			"action" = ITEM_DELETE,
+			"back_key" = TOOL_WELDER,
+			"desc" = "The external armor is welded, and the <b>mech power core</b> socket is open.",
+			"icon_state" = "durand24",
+			"forward_message" = "inserted mech power core",
+			"backward_message" = "cut off external armor"
+		)
+	)
+// BANDASTATION EDIT END
+
 //PHAZON
 /datum/component/construction/unordered/mecha_chassis/phazon
 	result = /datum/component/construction/mecha/phazon
@@ -760,11 +836,21 @@
 			"forward_message" = "welded external armor",
 			"backward_message" = "unfastened external armor layer"
 		),
+		// BANDASTATION EDIT START - phazon mech core
+		list(
+			"key" = /obj/item/mecha_parts/core,
+			"action" = ITEM_DELETE,
+			"back_key" = TOOL_WELDER,
+			"desc" = "The external armor is welded, and the <b>mech power core</b> socket is open.",
+			"forward_message" = "inserted mech power core",
+			"backward_message" = "cut off external armor"
+		),
+		// BANDASTATION EDIT END
 		list(
 			"key" = /obj/item/assembly/signaler/anomaly/ectoplasm,
 			"action" = ITEM_DELETE,
 			"back_key" = TOOL_WELDER,
-			"desc" = "The external armor is welded, and the <b>ectoplasm anomaly core</b> socket is open.",
+			"desc" = "The mech power core is inserted, and the <b>ectoplasm anomaly core</b> socket is open.",
 			"icon_state" = "phazon26",
 			"forward_message" = "inserted ectoplasm anomaly core",
 			"backward_message" = "cut off external armor"
@@ -796,6 +882,44 @@
 
 	outer_plating = /obj/item/mecha_parts/part/savannah_ivanov_armor
 	outer_plating_amount = 1
+
+// BANDASTATION EDIT START - savannah_ivanov mech core
+/datum/component/construction/mecha/savannah_ivanov/get_outer_plating_steps()
+	return list(
+		list(
+			"key" = outer_plating,
+			"amount" = 1,
+			"action" = ITEM_DELETE,
+			"back_key" = TOOL_WELDER,
+			"desc" = "Internal armor is welded, [initial(outer_plating.name)] can be used as external armor.",
+			"forward_message" = "added external armor layer",
+			"backward_message" = "cut off internal armor layer"
+		),
+		list(
+			"key" = TOOL_WRENCH,
+			"back_key" = TOOL_CROWBAR,
+			"desc" = "External armor is installed, and can be <b>wrenched</b> into place.",
+			"forward_message" = "secured external armor layer",
+			"backward_message" = "pried off external armor"
+		),
+		list(
+			"key" = TOOL_WELDER,
+			"back_key" = TOOL_WRENCH,
+			"desc" = "External armor is wrenched, and can be <b>welded</b>.",
+			"forward_message" = "welded external armor",
+			"backward_message" = "unfastened external armor layer"
+		),
+		list(
+			"key" = /obj/item/mecha_parts/core,
+			"action" = ITEM_DELETE,
+			"back_key" = TOOL_WELDER,
+			"desc" = "The external armor is welded, and the <b>mech power core</b> socket is open.",
+			"icon_state" = "savannah_ivanov24",
+			"forward_message" = "inserted mech power core",
+			"backward_message" = "cut off external armor"
+		)
+	)
+// BANDASTATION EDIT END
 
 //ODYSSEUS
 /datum/component/construction/unordered/mecha_chassis/odysseus
