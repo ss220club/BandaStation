@@ -9,6 +9,7 @@
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
+#include "code/human/species_type/kidan.dm"
 
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
 
@@ -34,6 +35,7 @@
 #include "code/language/qurvolious.dm"
 #include "code/language/siiktajr.dm"
 #include "code/language/spinwarder.dm"
+#include "code/language/chittin.dm"
 
 #include "code/preferences/species_features/skrell/skrell_head_tentacle.dm"
 
@@ -64,7 +66,9 @@
 #include "code/surgery/bodyparts/skrell_bodyparts.dm"
 #include "code/surgery/bodyparts/tajaran_bodyparts.dm"
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
+#include "code/surgery/bodyparts/kidan_bodyparts.dm"
 
+#include "code/surgery/organs/internal/kidan_internal.dm"
 #include "code/surgery/organs/external/skrell_external.dm"
 #include "code/surgery/organs/external/vulpkanin_external.dm"
 #include "code/surgery/organs/internal/vulpkanin_internal.dm"

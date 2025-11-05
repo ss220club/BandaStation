@@ -423,6 +423,7 @@ ROUNDSTART_RACES skrell
 ROUNDSTART_RACES moth
 ROUNDSTART_RACES plasmaman
 #ROUNDSTART_RACES shadow
+ROUNDSTART_RACES kidan
 
 ## Races that are better than humans in some ways, but worse in others
 ROUNDSTART_RACES ethereal
