@@ -264,6 +264,7 @@
 			if(feed_messages.creation_time > creation_time)
 				data["channel_has_messages"] = FALSE
 				break
+				continue
 			data["channel_has_messages"] = TRUE
 			var/has_image = FALSE
 			if(feed_messages.img)
