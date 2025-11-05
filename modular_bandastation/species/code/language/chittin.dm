@@ -10,7 +10,7 @@
 	icon_state = "kidanmark"
 	default_priority = 80
 
-/datum/language/kidan/default_name(gender)
+/datum/language/chittin/default_name(gender)
 	if(gender == MALE)
 		return "[pick(GLOB.first_names_male_kidan)][random_name_spacer][pick(GLOB.last_names_kidan)]"
 	return "[pick(GLOB.first_names_female_kidan)][random_name_spacer][pick(GLOB.last_names_kidan)]"

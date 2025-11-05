@@ -9,9 +9,6 @@
 	limb_id = SPECIES_KIDAN
 	is_dimorphic = FALSE
 
-/obj/item/bodypart/chest/kidan/get_butt_sprite()
-	return icon('icons/mob/butts.dmi', "BUTT_SPRITE_KIDAN")
-
 /obj/item/bodypart/arm/left/kidan
 	icon_greyscale = 'icons/bandastation/mob/species/kidan/bodyparts.dmi'
 	limb_id = SPECIES_KIDAN

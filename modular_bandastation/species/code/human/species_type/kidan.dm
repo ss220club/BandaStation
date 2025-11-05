@@ -4,7 +4,7 @@
 	id = SPECIES_KIDAN
 
 	inherent_traits = list()
-	inherent_biotypes = MOB_ORGANIC | MOB_HUMANOID
+	inherent_biotypes = MOB_ORGANIC | MOB_HUMANOID | MOB_BUG
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 
 	species_language_holder = /datum/language_holder/kidan
@@ -72,7 +72,7 @@
 	// --- Токсины/Химия
 	to_add += list(
 		list(
-		SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "syringe",
 			SPECIES_PERK_NAME = "Слабость к токсинам",
 			SPECIES_PERK_DESC = "[plural_form] слабы к токсинам и химическим веществам."

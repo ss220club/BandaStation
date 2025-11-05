@@ -1,7 +1,7 @@
 /obj/item/organ/brain/kidan
 	parent_type = /obj/item/organ/brain
 	name = "kidan brain"
-	desc = "Специфический мозг киданов, адаптированный к их фермерской биологии."
+	desc = "The Kidan's unique brain, adapted to their farming biology."
 	icon = 'icons/bandastation/mob/species/kidan/organs.dmi'
 
 /obj/item/organ/heart/kidan
@@ -14,14 +14,14 @@
 
 /obj/item/organ/eyes/kidan
 	name = "kidan eyes"
-	desc = "Многогранные фасеточные глаза, отражающие свет и обеспечивающие широкий угол обзора."
+	desc = "Multifaceted compound eyes that reflect light and provide a wide field of view."
 	icon = 'icons/bandastation/mob/species/kidan/organs.dmi'
 	synchronized_blinking = FALSE
 	eye_icon_state = null
 
 /obj/item/organ/tongue/kidan
 	name = "kidan tongue"
-	desc = "Короткий, но чувствительный язык киданов."
+	desc = "The short but sensitive language of the Kidans"
 	icon = 'icons/bandastation/mob/species/kidan/organs.dmi'
 	modifies_speech = FALSE
 	languages_native = list(/datum/language/chittin)
