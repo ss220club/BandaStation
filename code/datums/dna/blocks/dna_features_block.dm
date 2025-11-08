@@ -87,12 +87,6 @@
 /datum/dna_block/feature/accessory/pod_hair
 	feature_key = FEATURE_POD_HAIR
 
-/datum/dna_block/feature/pod_hair/create_unique_block(mob/living/carbon/human/target)
-	return construct_block(SSaccessories.pod_hair_list.Find(target.dna.features[feature_key]), length(SSaccessories.pod_hair_list))
-
-/datum/dna_block/feature/pod_hair/apply_to_mob(mob/living/carbon/human/target, dna_hash)
-	target.dna.features[feature_key] = SSaccessories.pod_hair_list[deconstruct_block(get_block(dna_hash), length(SSaccessories.pod_hair_list))]
-
 // BANDASTATION ADD START - Species
 // MARK: Vulpkanin
 /datum/dna_block/feature/vulpkanin_head_markings

@@ -63,23 +63,6 @@
 	mark_type = /datum/status_effect/eldritch/ash
 	eldritch_passive = /datum/status_effect/heretic_passive/ash
 
-/datum/heretic_knowledge/ashen_grasp
-	name = "Grasp of Ash"
-	desc = "Ваша Хватка Мансуса обожжет глаза жертвы, нанося глазам урон и затуманивания их зрение."
-	gain_text = "Первым из них был Ночной дозорный, с его измены все и началось. \
-		Их фонарь, истлевший до пепла, их дозор, отсутствовавший."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_ash"
-
-/datum/heretic_knowledge/ashen_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/ashen_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
-
-/datum/heretic_knowledge/ashen_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
 /datum/heretic_knowledge/limited_amount/starting/base_ash/on_mansus_grasp(mob/living/source, mob/living/target)
 	. = ..()
 
@@ -89,31 +72,10 @@
 	if(!target.get_organ_slot(ORGAN_SLOT_EYES))
 		return
 
-	to_chat(target, span_danger("Яркий зеленый свет ужасно жжет глаза!"))
+	to_chat(target, span_danger("A bright green light burns your eyes horrifically!"))
 	target.adjustOrganLoss(ORGAN_SLOT_EYES, 15)
 	target.set_eye_blur_if_lower(20 SECONDS)
 
-/datum/heretic_knowledge/spell/ash_passage
-	name = "Ashen Passage"
-	desc = "Дает вам Ashen Passage, заклинание, позволяющее исчезать и перемещаться на короткое расстояние, игнорируя стены"
-	gain_text = "Он знал, как ходить между мирами."
-
-	action_to_add = /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash
-	cost = 1
-
-
-/datum/heretic_knowledge/mark/ash_mark
-	name = "Mark of Ash"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку пепла. Метка срабатывает при атаке вашим Пепельным клинком. \
-		При срабатывании жертва получает дополнительный урон стаминой и ожогами, а метка передается всем находящимся поблизости язычникам. \
-		Наносимый урон уменьшается с каждой передачей. \
-		Активация метки также значительно уменьшает перезарядку Хватки Мансуса."
-	gain_text = "Он был очень конкретным человеком, всегда бдительным в ночное время. \
-		Но, несмотря на свои обязанности, он регулярно проходил через Мансе с высоко поднятым горящим фонарем. \
-		Он ярко сиял во тьме, пока пламя не начинало угасать."
-	mark_type = /datum/status_effect/eldritch/ash
-
-/datum/heretic_knowledge/mark/ash_mark/trigger_mark(mob/living/source, mob/living/target)
 /datum/heretic_knowledge/limited_amount/starting/base_ash/trigger_mark(mob/living/source, mob/living/target)
 	. = ..()
 	if(!.)
@@ -127,9 +89,8 @@
 
 /datum/heretic_knowledge/spell/ash_passage
 	name = "Ashen Passage"
-	desc = "Grants you Ashen Passage, a spell that lets you phase out of reality, allowing you to traverse a short distance, passing though any walls. \
-			When empowered, it will break you out of any stuns and restraints, and will have a longer range."
-	gain_text = "He knew how to walk between the planes."
+	desc = "Дает вам Ashen Passage, заклинание, позволяющее исчезать и перемещаться на короткое расстояние, игнорируя стены"
+	gain_text = "Он знал, как ходить между мирами."
 
 	action_to_add = /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash
 	cost = 2
@@ -146,12 +107,12 @@
 	research_tree_icon_frame = 7
 
 /datum/heretic_knowledge/armor/ash
-	desc = "Allows you to transmute a table (or a suit), a mask and a match to create a scorched mantle. \
-		It provides completes protection from fire, and is able to produce more flames passively. \
-		When you have enough fire, you may cast empowered versions of your ashen spells. \
-		Acts as a focus while hooded."
-	gain_text = "The Watch remain as they fell, crumbling away from sight. \
-			Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen."
+	desc = "Позволяет трансмутировать стол (или верхний костюм), маску и спичку в обгоревшую мантию. \
+		Мантия даёт защиту от огня, и она способна пассивно производить больше пламени. \
+		Когда у вас достаточно пламени, то вы сможете кастовать улучшенные версии ваших заклинаний. \
+		Работает как фокус когда надет капюшон."
+	gain_text = "Дозорный остаётся таким, каким он был, исчезая из виду. \
+			А ветры, пробегающие по городу, зовут его обратно к службе — пыль взмывает в воздух, и в воздухе плыл мутный силуэт павших."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/ash)
 	research_tree_icon_state = "ash_armor"
 	required_atoms = list(
@@ -179,9 +140,9 @@
 
 /datum/heretic_knowledge/blade_upgrade/ash
 	name = "Fiery Blade"
-	desc = "Ваш клинок теперь поджигает врагов при атаке."
-	gain_text = "Он вернулся, с клинком в руке, он размахивал и размахивал, когда пепел падал с неба. \
-		Его город, люди, за которыми он поклялся наблюдать... и он наблюдал, пока все они сгорали дотла."
+	desc = "Теперь ваш нож зажигает врагов в огне при атаке."
+	gain_text = "Он вернулся с ножом в руке, он наносил удар за ударом, пока пепел падал с небес \
+		Его город, его люди, за которых он поклялся следить... и он следил, пока все они не превратились в пепел."
 
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -214,7 +175,7 @@
 		Cascade, который вызывает массивное, растущее огненное кольцо вокруг вас, \
 		и Oath of Flame, заставляя вас пассивно создавать кольцо пламени, когда вы идете. \
 		Некоторые известные заклинания пепла также будут усилены. \
-		tУ вас также появится иммунитет к огню, космосу и подобным опасностям окружающей среды."
+		У вас также появится иммунитет к огню, космосу и подобным опасностям окружающей среды."
 	gain_text = "Дозор мертв, и Ночной дозорный сгорел вместе с ним. И все же его огонь горит вечно, \
 		ибо он принес человечеству обряд! Его взгляд продолжается, и теперь я един с пламенем, \
 		УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ, ПЕПЕЛЬНЫЙ ФОНАРЬ ВОСПЛАМЕНИТСЯ ВНОВЬ!"

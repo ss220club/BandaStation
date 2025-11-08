@@ -174,7 +174,7 @@
 	var/iscat = istype(animal, /mob/living/basic/pet/cat)
 	if((dog_fan && isdog) || (cat_fan && iscat) || HAS_PERSONALITY(owner, /datum/personality/animal_friend))
 		mood_change = 3
-		description = "Я очень люблю [animal.name], [capitalize(animal.declent_ru(NOMINATIVE))] такой милый! Не могу перестать гладить!"!"
+		description = "Я очень люблю [animal.name], [capitalize(animal.declent_ru(NOMINATIVE))] такой милый! Не могу перестать гладить!"
 		return
 	if(dog_fan && iscat)
 		mood_change = -1

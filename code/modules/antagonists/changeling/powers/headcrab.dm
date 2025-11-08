@@ -96,7 +96,7 @@
 
 /// Ruptures nearby walls using the torn_wall component. Also it destroys objects with density.
 /datum/action/changeling/headcrab/proc/escaping_prison(mob/living/user)
-	user.visible_message(span_boldwarning("Расшираюшся форма [имя пользователя] начинается с того, что она разрушает окружающие препятствия!!"))
+	user.visible_message(span_boldwarning("Расшираюшся форма [user] начинается с того, что она разрушает окружающие препятствия!"))
 	var/list/walls_to_destroy = list()
 
 	for(var/turf/nearby_turf in range(1, user))
