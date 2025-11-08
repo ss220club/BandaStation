@@ -48,8 +48,8 @@
 		return ..()
 
 	visible_message(
-		span_danger("[capitalize(bullet.declent_ru(NOMINATIVE))] отражается от [declent_ru(GENITIVE)]!"),
-		span_userdanger("[capitalize(bullet.declent_ru(NOMINATIVE))] отражается от [declent_ru(GENITIVE)]!"),
+		span_danger("[capitalize(hitting_projectile.declent_ru(NOMINATIVE))] отражается от [declent_ru(GENITIVE)]!"),
+		span_userdanger("[capitalize(hitting_projectile.declent_ru(NOMINATIVE))] отражается от [declent_ru(GENITIVE)]!"),
 	)
 	// Finds and plays the block_sound of item which reflected
 	for(var/obj/item/held_item in held_items)
