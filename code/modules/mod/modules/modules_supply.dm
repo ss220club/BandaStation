@@ -219,15 +219,13 @@
 		playsound(mod.wearer, SFX_RUSTLE, 50, TRUE)
 
 /obj/item/mod/module/orebag/proc/move_ore(obj/item/stack/ore)
-	for(var/obj/item/stack/stored_ore as anything in ores)
+	for(var/obj/item/stack/ore/stored_ore as anything in src)
 		if(!ore.can_merge(stored_ore))
 			continue
 		ore.merge(stored_ore)
 		if(QDELETED(ore))
 			return
-		break
 	ore.forceMove(src)
-	ores += ore
 
 /obj/item/mod/module/orebag/on_use(mob/activator)
 	dropping_ores = TRUE
