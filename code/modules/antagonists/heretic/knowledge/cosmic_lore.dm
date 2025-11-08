@@ -60,22 +60,6 @@
 	result_atoms = list(/obj/item/melee/sickly_blade/cosmic)
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
 	research_tree_icon_state = "cosmic_blade"
-
-/datum/heretic_knowledge/cosmic_grasp
-	name = "Grasp of Cosmos"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку звезды (космическое кольцо) и создаст космическое поле там, где вы стоите. \
-		Люди с Меткой звезды не могут проходить через космические поля."
-	gain_text = "Некоторые звезды меркли, другие увеличивались. \
-		С новообретенной силой я смог направить силу туманности в себя."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_cosmos"
-
-/datum/heretic_knowledge/cosmic_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/cosmic_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
 	mark_type = /datum/status_effect/eldritch/cosmic
 	eldritch_passive = /datum/status_effect/heretic_passive/cosmic
 
@@ -83,7 +67,7 @@
 /datum/heretic_knowledge/limited_amount/starting/base_cosmic/on_mansus_grasp(mob/living/source, mob/living/target)
 	. = ..()
 
-	to_chat(target, span_danger("Над вашей головой появилось космическое кольцо!"))
+	to_chat(target, span_danger("A cosmic ring appeared above your head!"))
 	target.apply_status_effect(/datum/status_effect/star_mark, source)
 	create_cosmic_field(get_turf(source), source)
 
@@ -100,27 +84,18 @@
 
 /datum/heretic_knowledge/spell/star_blast
 	name = "Star Blast"
-	desc = "Fires a projectile that moves very slowly, raising a short-lived wall of cosmic fields where it goes. \
-		Anyone hit by the projectile will receive burn damage, a knockdown, and give people in a three tile range a star mark."
-	gain_text = "The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me."
+	desc = "Выпускает снаряд, который движется очень медленно и создает стену космического поля на своем пути на короткое время. \
+		Каждый, в кого попадет снаряд, получит урон от ожога, будет сбит с ног и даст людям в радиусе трех тайлов Метку звезды."
+	gain_text = "Зверь теперь всегда следовал за мной, и при каждом жертвоприношении в меня вливались слова одобрения."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/star_blast
 	cost = 2
 
-/datum/heretic_knowledge/mark/cosmic_mark
-	name = "Mark of Cosmos"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку космоса. Метка срабатывает при атаке вашим Космическим клинком. \
-		При срабатывании жертва возвращается в то место, где на нее первоначально была нанесена метка, \
-		оставляя в прошлом месте космическое поле. \
-		Затем они будут парализованы на 2 секунды."
-	gain_text = "Теперь Зверь изредка шептал мне, рассказывая лишь немного о своих обстоятельствах. \
-		Я могу им помочь, я должен им помочь."
-	mark_type = /datum/status_effect/eldritch/cosmic
 /datum/heretic_knowledge/armor/cosmic
 
-	desc = "Allows you to transmute a table (or a suit), a mask and a sheet of plasma to create a Starwoven Cloak, grants protection from the hazards of space while granting to the user the ability to levitate at will. \
-			Acts as a focus while hooded."
-	gain_text = "Like radiant cords, the stars shone in union across the silken shape of a billowing cloak, that at once does and does not drape my shoulders. \
-				The eyes of the Beast rested upon me, and through me."
+	desc = "Позволяет трансмутирвать стол (или верхний костюм), маску и лист плазмы в Затеменный Плащ Звездоплетения, даёт защиту от космоса и возможность левитации. \
+			Работает как фокус когда надет капюшон."
+	gain_text = "Как сверкающие нити, звёзды сияли в единении на шелковистой форме развевающегося плаща, который одновременно обвивает и не обвивает мои плечи. \
+				Глаза Зверя покоились на мне, и через меня."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/cosmic)
 	research_tree_icon_state = "cosmic_armor"
 	required_atoms = list(
@@ -138,15 +113,7 @@
 	gain_text = "Проснувшись в холодном поту, я почувствовал ладонь на своем скальпе, сигил был выжжен на мне. \
 		Теперь мои вены изучали странное фиолетовое сияние: Зверь знает, что я превзойду их ожидания."
 	action_to_add = /datum/action/cooldown/spell/touch/star_touch
-	cost = 1
-
-/datum/heretic_knowledge/spell/star_blast
-	name = "Star Blast"
-	desc = "Выпускает снаряд, который движется очень медленно и создает стену космического поля на своем пути на короткое время. \
-		Каждый, в кого попадет снаряд, получит урон от ожога, будет сбит с ног и даст людям в радиусе трех тайлов Метку звезды."
-	gain_text = "Зверь теперь всегда следовал за мной, и при каждом жертвоприношении в меня вливались слова одобрения."
-	action_to_add = /datum/action/cooldown/spell/pointed/projectile/star_blast
-	cost = 1
+	cost = 2
 
 /datum/heretic_knowledge/blade_upgrade/cosmic
 	name = "Cosmic Blade"
@@ -242,7 +209,7 @@
 
 /datum/heretic_knowledge/spell/cosmic_expansion
 	name = "Cosmic Expansion"
-	desc = "Дарует вам Cosmic Expansion, заклинание, создающее вокруг вас область космических полей размером 3x3. \
+	desc = "Дарует вам Cosmic Expansion, заклинание, создающее вокруг вас область космических полей размером 5x5. \
 		Близлежащие существа также будут отмечены Меткой звезды."
 	gain_text = "Теперь земля содрогалась подо мной. Зверь вселился в меня, и его голос был пьянящим."
 	action_to_add = /datum/action/cooldown/spell/conjure/cosmic_expansion
@@ -252,9 +219,9 @@
 /datum/heretic_knowledge/ultimate/cosmic_final
 	name = "Creators's Gift"
 	desc = "Ритуал вознесения Пути Космоса. \
-		Для завершения ритуала принесите 3 трупа с блуспейс пылью в теле к руне трансмутации. \
+		Для завершения ритуала принесите 3 трупа с блюспейс пылью в теле к руне трансмутации. \
 		После завершения вы станете обладателем Звездочета. \
-		Вы сможете управлять Звездочет с помощью Альт-Клик. \
+		Вы сможете управлять Звездочетом с помощью Альт-Клик. \
 		Вы также можете отдавать ему команды с помощью речи. \
 		Звездочет - сильный союзник, который может даже разрушить укрепленные стены. \
 		Звездочет обладает аурой, которая исцеляет вас и наносит урон противникам. \
@@ -330,7 +297,7 @@
 /// Replace an annoying griefer you were paired up to with a different but probably no less annoying player.
 /datum/action/cooldown/mob_cooldown/replace_star_gazer
 	name = "Reset Star Gazer Consciousness"
-	desc = "Replaces the mind of your summon with that of a different ghost."
+	desc = "Заменяет ум вашего миньёна на ум другого приведения."
 	button_icon = 'icons/mob/simple/mob.dmi'
 	button_icon_state = "ghost"
 	background_icon_state = "bg_heretic"
@@ -348,14 +315,14 @@
 
 	var/mob/living/to_reset = bad_dog.resolve()
 
-	to_chat(owner, span_hierophant("You prompt [to_reset] to shift it\'s personality..."))
-	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Do you want to play as [span_danger("[owner.real_name]'s")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
+	to_chat(owner, span_hierophant("Вы командуете [to_reset], чтобы изменить его личность…"))
+	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Хотите сыграть за [span_danger("[owner.real_name]")] [span_notice(to_reset.name)]??", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
 	if(isnull(chosen_one))
-		to_chat(owner, span_hierophant("Your request to shift [to_reset]'\s personality appears to have been denied... Looks like you're stuck with it for now."))
+		to_chat(owner, span_hierophant("Ваш запрос на изменение личности [to_reset] был отклонён... Похоже, вам придётся оставить всё как есть пока что."))
 		StartCooldown()
 		return FALSE
-	to_chat(to_reset, span_hierophant("Your summoner reset you, and your body was taken over by a ghost. Looks like they weren't happy with your performance."))
-	to_chat(owner, span_hierophant("The mind of [to_reset] has twisted itself to suit you better."))
+	to_chat(to_reset, span_hierophant("Ваш призыватель сбросил вас, и ваше тело было захвачено призраком. Похоже, они были недовольны вашей работой."))
+	to_chat(owner, span_hierophant("Сознание [to_reset] искажено и подстроено под вас."))
 	message_admins("[key_name_admin(chosen_one)] has taken control of ([ADMIN_LOOKUPFLW(to_reset)])")
 	to_reset.ghostize(FALSE)
 	to_reset.PossessByPlayer(chosen_one.key)
