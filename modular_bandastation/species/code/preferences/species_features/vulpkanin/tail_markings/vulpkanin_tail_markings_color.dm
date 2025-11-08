@@ -3,7 +3,7 @@
 	savefile_key = "vulpkanin_tail_markings_color"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
-	relevant_external_organ = /obj/item/organ/tail/vulpkanin
+	relevant_organ = /obj/item/organ/tail/vulpkanin
 
 /datum/preference/color/vulpkanin_tail_markings_color/create_default_value()
 	return COLOR_WHITE

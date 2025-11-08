@@ -123,27 +123,25 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	feature_list[FEATURE_TAIL_MONKEY] = INIT_ACCESSORY(/datum/sprite_accessory/tails/monkey)
 	feature_list[FEATURE_TAIL_XENO] = INIT_ACCESSORY(/datum/sprite_accessory/tails/xeno)
 
-	/// BANDASTATION ADDITION START - Species
+	/// BANDASTATION ADDITION START - фурри нечисть
 	//  vulpkanin
-	vulpkanin_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-	vulpkanin_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-	vulpkanin_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-
-	tails_list_vulpkanin = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/vulpkanin)[DEFAULT_SPRITE_LIST]
-	vulpkanin_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-	vulpkanin_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	feature_list[FEATURE_VULPKANIN_HEAD_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vulpkanin_head_markings)
+	feature_list[FEATURE_VULPKANIN_CHEST_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vulpkanin_chest_markings)
+	feature_list[FEATURE_VULPKANIN_LIMB_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vulpkanin_limb_markings)
+	feature_list[FEATURE_VULPKANIN_TAIL] = INIT_ACCESSORY(/datum/sprite_accessory/tails/vulpkanin)
+	feature_list[FEATURE_VULPKANIN_TAIL_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vulpkanin_tail_markings)
+	feature_list[FEATURE_VULPKANIN_FACIAL_HAIR] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vulpkanin_facial_hair)
 
 	// tajaran
-	tajaran_head_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_head_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-	tajaran_chest_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_chest_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-	tajaran_limb_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_limb_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-
-	tails_list_tajaran = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/tajaran)[DEFAULT_SPRITE_LIST]
-	tajaran_tail_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_tail_markings, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
-	tajaran_facial_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/tajaran_facial_hair, add_blank = TRUE)[DEFAULT_SPRITE_LIST]
+	feature_list[FEATURE_TAJARAN_HEAD_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/tajaran_head_markings)
+	feature_list[FEATURE_TAJARAN_CHEST_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/tajaran_chest_markings)
+	feature_list[FEATURE_TAJARAN_LIMB_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/tajaran_limb_markings)
+	feature_list[FEATURE_TAJARAN_TAIL] = INIT_ACCESSORY(/datum/sprite_accessory/tails/tajaran)
+	feature_list[FEATURE_TAJARAN_TAIL_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/tajaran_tail_markings)
+	feature_list[FEATURE_TAJARAN_FACIAL_HAIR] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/tajaran_facial_hair)
 
 	// skrell
-	skrell_head_tentacles_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/skrell_head_tentacle)[DEFAULT_SPRITE_LIST]
+	feature_list[FEATURE_SKRELL_HEAD_TENTACLE] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_head_tentacle)
 	/// BANDASTATION ADDITION END - Species
 
 /// This proc just initializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name

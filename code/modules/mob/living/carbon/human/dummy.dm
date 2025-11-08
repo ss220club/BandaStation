@@ -116,53 +116,9 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 /proc/create_consistent_human_dna(mob/living/carbon/human/target)
 	target.dna.features[FEATURE_MUTANT_COLOR] = COLOR_VIBRANT_LIME
 	target.dna.features[FEATURE_ETHEREAL_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_LIZARD_MARKINGS] = get_consistent_feature_entry(SSaccessories.lizard_markings_list)
-	target.dna.features[FEATURE_EARS] = get_consistent_feature_entry(SSaccessories.ears_list)
-	target.dna.features[FEATURE_FRILLS] = get_consistent_feature_entry(SSaccessories.frills_list)
-	target.dna.features[FEATURE_HORNS] = get_consistent_feature_entry(SSaccessories.horns_list)
-	target.dna.features[FEATURE_MOTH_ANTENNAE] = get_consistent_feature_entry(SSaccessories.moth_antennae_list)
-	target.dna.features[FEATURE_MOTH_MARKINGS] = get_consistent_feature_entry(SSaccessories.moth_markings_list)
-	target.dna.features[FEATURE_MOTH_WINGS] = get_consistent_feature_entry(SSaccessories.moth_wings_list)
-	target.dna.features[FEATURE_SNOUT] = get_consistent_feature_entry(SSaccessories.snouts_list)
-	target.dna.features[FEATURE_SPINES] = get_consistent_feature_entry(SSaccessories.spines_list)
-	target.dna.features[FEATURE_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_felinid) // it's a lie
-	target.dna.features[FEATURE_TAIL_LIZARD] = get_consistent_feature_entry(SSaccessories.tails_list_lizard)
-	target.dna.features[FEATURE_TAIL_MONKEY] = get_consistent_feature_entry(SSaccessories.tails_list_monkey)
-	target.dna.features[FEATURE_TAIL_FISH] = get_consistent_feature_entry(SSaccessories.tails_list_fish)
-	target.dna.features[FEATURE_POD_HAIR] = get_consistent_feature_entry(SSaccessories.pod_hair_list)
-	target.dna.features[FEATURE_MUSH_CAP] = get_consistent_feature_entry(SSaccessories.caps_list)
-
-	// BANDA STATION EDIT START
-	// vulpkanin
-	target.dna.features[FEATURE_VULPKANIN_CHEST_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_chest_markings_list)
-	target.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_head_markings_list)
-	target.dna.features[FEATURE_VULPKANIN_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_vulpkanin)
-	target.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_tail_markings_list)
-	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR] = get_consistent_feature_entry(SSaccessories.vulpkanin_facial_hair_list)
-	target.dna.features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = COLOR_WHITE
-
-	// tajaran
-	target.dna.features[FEATURE_TAJARAN_CHEST_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_chest_markings_list)
-	target.dna.features[FEATURE_TAJARAN_HEAD_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_head_markings_list)
-	target.dna.features[FEATURE_TAJARAN_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_tajaran)
-	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_tail_markings_list)
-	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR] = get_consistent_feature_entry(SSaccessories.tajaran_facial_hair_list)
-	target.dna.features[FEATURE_TAJARAN_BODY_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_TAJARAN_HEAD_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR_COLOR] = COLOR_WHITE
-
-	// skrell
-	target.dna.features[FEATURE_SKRELL_HEAD_TENTACLE] = get_consistent_feature_entry(SSaccessories.skrell_head_tentacles_list)
-	// BANDA STATION EDIT STOP
-
 	for(var/feature_key in SSaccessories.feature_list)
 		target.dna.features[feature_key] = get_consistent_feature_entry(SSaccessories.feature_list[feature_key])
 	target.dna.initialize_dna(newblood_type = get_blood_type(BLOOD_TYPE_O_MINUS), create_mutation_blocks = FALSE, randomize_features = FALSE)
-
 	// UF and UI are nondeterministic, even though the features are the same some blocks will randomize slightly
 	// In practice this doesn't matter, but this is for the sake of 100%(ish) consistency
 	var/static/consistent_UF
