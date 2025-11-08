@@ -67,23 +67,6 @@
 	mark_type = /datum/status_effect/eldritch/blade
 	eldritch_passive = /datum/status_effect/heretic_passive/blade
 
-/datum/heretic_knowledge/blade_grasp
-	name = "Grasp of the Blade"
-	desc = "Ваша Хватка Мансуса вызывает короткое оглушение при использовании на лежачей или стоящей спиной к вам цели."
-	gain_text = "История пехотинца рассказывается с древности. Это история крови и доблести, \
-		за которую выступают меч, сталь и серебро."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_blade"
-
-/datum/heretic_knowledge/blade_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/blade_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
-
-/datum/heretic_knowledge/blade_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
 /datum/heretic_knowledge/limited_amount/starting/base_blade/on_mansus_grasp(mob/living/source, mob/living/target)
 	. = ..()
 
@@ -96,115 +79,12 @@
 	target.balloon_alert(source, "удар в спину!")
 	playsound(target, 'sound/items/weapons/guillotine.ogg', 100, TRUE)
 
-/// The cooldown duration between triggers of blade dance
-#define BLADE_DANCE_COOLDOWN (20 SECONDS)
-
-/datum/heretic_knowledge/blade_dance
-	name = "Dance of the Brand"
-	desc = "Если вас атакуют, когда вы держите клинок еретика в любой руке, вы рипостом \
-		наносите удар в сторону нападающего. Этот эффект может сработать только один раз в 20 секунд."
-	gain_text = "Пехотинец был известен как грозный дуэлянт. \
-		Их генерал быстро назначил своим личным чемпионом."
-	cost = 1
-	research_tree_icon_path = 'icons/mob/actions/actions_ecult.dmi'
-	research_tree_icon_state = "shatter"
-	/// Whether the counter-attack is ready or not.
-	/// Used instead of cooldowns, so we can give feedback when it's ready again
-	var/riposte_ready = TRUE
-
-/datum/heretic_knowledge/blade_dance/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(on_shield_reaction))
-
-/datum/heretic_knowledge/blade_dance/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_LIVING_CHECK_BLOCK)
-
-/datum/heretic_knowledge/blade_dance/proc/on_shield_reaction(
-	mob/living/carbon/human/source,
-	atom/movable/hitby,
-	damage = 0,
-	attack_text = "the attack",
-	attack_type = MELEE_ATTACK,
-	armour_penetration = 0,
-	damage_type = BRUTE,
-)
-
-	SIGNAL_HANDLER
-
-	if(attack_type != MELEE_ATTACK)
-		return
-
-	if(!riposte_ready)
-		return
-
-	if(INCAPACITATED_IGNORING(source, INCAPABLE_GRAB))
-		return
-
-	var/mob/living/attacker = hitby.loc
-	if(!istype(attacker))
-		return
-
-	if(!source.Adjacent(attacker))
-		return
-
-	// Let's check their held items to see if we can do a riposte
-	var/obj/item/main_hand = source.get_active_held_item()
-	var/obj/item/off_hand = source.get_inactive_held_item()
-	// This is the item that ends up doing the "blocking" (flavor)
-	var/obj/item/striking_with
-
-	// First we'll check if the offhand is valid
-	if(!QDELETED(off_hand) && istype(off_hand, /obj/item/melee/sickly_blade))
-		striking_with = off_hand
-
-	// Then we'll check the mainhand
-	// We do mainhand second, because we want to prioritize it over the offhand
-	if(!QDELETED(main_hand) && istype(main_hand, /obj/item/melee/sickly_blade))
-		striking_with = main_hand
-
-	// No valid item in either slot? No riposte
-	if(!striking_with)
-		return
-
-	// If we made it here, deliver the strike
-	INVOKE_ASYNC(src, PROC_REF(counter_attack), source, attacker, striking_with, attack_text)
-
-	// And reset after a bit
-	riposte_ready = FALSE
-	addtimer(CALLBACK(src, PROC_REF(reset_riposte), source), BLADE_DANCE_COOLDOWN)
-
-/datum/heretic_knowledge/blade_dance/proc/counter_attack(mob/living/carbon/human/source, mob/living/target, obj/item/melee/sickly_blade/weapon, attack_text)
-	playsound(get_turf(source), 'sound/items/weapons/parry.ogg', 100, TRUE)
-	source.balloon_alert(source, "рипост использован")
-	source.visible_message(
-		span_warning("[capitalize(source.declent_ru(NOMINATIVE))] наклоняется к [attack_text] и наносит внезапный рипост [target.declent_ru(DATIVE)]!"),
-		span_warning("Вы наклоняетесь к [attack_text] и наносите внезапный рипост [target.declent_ru(DATIVE)]!"),
-		span_hear("Вы слышите лязг, за которым следует удар."),
-	)
-	weapon.melee_attack_chain(source, target)
-
-/datum/heretic_knowledge/blade_dance/proc/reset_riposte(mob/living/carbon/human/source)
-	riposte_ready = TRUE
-	source.balloon_alert(source, "рипост готов")
-
-#undef BLADE_DANCE_COOLDOWN
-
-/datum/heretic_knowledge/mark/blade_mark
-	name = "Mark of the Blade"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку клинка. Во время действия метки \
-		жертва не сможет покинуть текущую комнату, пока не истечет срок ее действия или пока она не сработает. \
-		Срабатывание метки вызовет нож, который в течение короткого времени будет вращаться вокруг вас. \
-		Нож блокирует любую направленную на вас атаку, но расходуется при использовании."
-	gain_text = "Его генерал хотел закончить войну, но чемпион знал, что без смерти не может быть жизни. \
-		Он сам убьет труса и всех, кто попытается бежать."
-	mark_type = /datum/status_effect/eldritch/blade
-
-/datum/heretic_knowledge/mark/blade_mark/create_mark(mob/living/source, mob/living/target)
 /datum/heretic_knowledge/limited_amount/starting/base_blade/create_mark(mob/living/source, mob/living/target)
 	var/datum/status_effect/eldritch/blade/blade_mark = ..()
 	if(istype(blade_mark))
 		var/area/to_lock_to = get_area(target)
 		blade_mark.locked_to = to_lock_to
-		to_chat(target, span_hypnophrase("Потусторонняя сила заставляет вас оставаться в [get_area_name(to_lock_to)]!"))
+		to_chat(target, span_hypnophrase("Сила из другого мира заставляет тебя оставаться в [get_area_name(to_lock_to)]!"))
 	return blade_mark
 
 /datum/heretic_knowledge/limited_amount/starting/base_blade/trigger_mark(mob/living/source, mob/living/target)
@@ -227,11 +107,11 @@
 
 /datum/heretic_knowledge/duel_stance
 	name = "Stance of the Torn Champion"
-	desc = "Grants resilience to blood loss from wounds and immunity to having your limbs dismembered. \
-		Additionally, when damaged below 50% of your maximum health, \
-		you gain increased resistance to gaining wounds and resistance to slowdown."
-	gain_text = "In time, it was he who stood alone among the bodies of his former comrades, awash in blood, none of it his own. \
-		He was without rival, equal, or purpose."
+	desc = "Обеспечивает устойчивость к кровотечению из ран и иммунитет к дезампутации конечностей. \
+		Также, когда ХП ниже 50% от вашего максимального здоровья, \
+		вы получаете повышенную сопротивляемость к получению ран и замедлению."
+	gain_text = "Со временем он оказался один среди тел своих бывших товарищей, окровавленных, но не их кровью. \
+		У него не было соперников, товарищей или цели. "
 	cost = 2
 	research_tree_icon_path = 'icons/effects/blood.dmi'
 	research_tree_icon_state = "suitblood"
@@ -263,7 +143,7 @@
 
 	var/obj/item/held_item = source.get_active_held_item()
 	if(in_duelist_stance)
-		examine_list += span_warning("[source] looks unnaturally poised[held_item?.force >= 15 ? " and ready to strike out":""].")
+		examine_list += span_warning("[source] выглядит отравленным[held_item?.force >= 15 ? " и готовым нанести удар":""].")
 
 /datum/heretic_knowledge/duel_stance/proc/on_wound_gain(mob/living/source, datum/wound/gained_wound, obj/item/bodypart/limb)
 	SIGNAL_HANDLER
@@ -277,14 +157,14 @@
 	SIGNAL_HANDLER
 
 	if(in_duelist_stance && source.health > source.maxHealth * 0.5)
-		source.balloon_alert(source, "exited duelist stance")
+		source.balloon_alert(source, "вышел из стойки дуэлянта")
 		in_duelist_stance = FALSE
 		source.remove_traits(list(TRAIT_HARDLY_WOUNDED), type)
 		source.remove_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown, TRUE)
 		return
 
 	if(!in_duelist_stance && source.health <= source.maxHealth * 0.5)
-		source.balloon_alert(source, "entered duelist stance")
+		source.balloon_alert(source, "встал в стойку дуэлянта")
 		in_duelist_stance = TRUE
 		ADD_TRAIT(source, TRAIT_HARDLY_WOUNDED, type)
 		source.add_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown, TRUE)
@@ -293,11 +173,11 @@
 #undef BLOOD_FLOW_PER_SEVEIRTY
 
 /datum/heretic_knowledge/armor/blade
-	desc = "Allows you to transmute a table (or a suit), a mask and a sheet of titanium or silver to create a Shattered Panoply. \
-			Provides baton resistance and shock insulation while worn. \
-			Acts as a focus while hooded."
-	gain_text = "The echoing, directionless cacophony of violence reverberates about me. \
-				Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers."
+	desc = "Позволяет трансмутирвать стол (или верхний костюм), маску и лист серебра или титана в разбитые доспехи. \
+			Обеспечивает устойчивость к ударам дубинки и изоляцию от тока при ношении. \
+			Работает как фокус при надетом капюшоне."
+	gain_text = "Гулкая, бесцельная какофония насилия разносится вокруг меня. \
+				Даже когда стальная броня Чемпиона была сорвана с его тела, каждый кусочек всё ещё жаждал своей цели, стремясь перехватить невидимых или воображаемых нападающих."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/blade)
 	research_tree_icon_state = "blade_armor"
 	required_atoms = list(
@@ -452,7 +332,6 @@
 
 /datum/heretic_knowledge/ultimate/blade_final/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	. = ..()
-
 	ADD_TRAIT(user, TRAIT_NEVER_WOUNDED, type)
 	RegisterSignal(user, COMSIG_HERETIC_BLADE_ATTACK, PROC_REF(on_eldritch_blade))
 	user.apply_status_effect(/datum/status_effect/protective_blades/recharging, STATUS_EFFECT_PERMANENT, 8, 30, 0.25 SECONDS, /obj/effect/floating_blade, 60 SECONDS)
