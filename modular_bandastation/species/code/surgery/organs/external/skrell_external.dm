@@ -8,7 +8,7 @@
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE
 
-	preference = "feature_skrell_head_tentacle"
+	//preference = "feature_skrell_head_tentacle"
 
 	dna_block = /datum/dna_block/feature/skrell_head_tentacle
 	restyle_flags = EXTERNAL_RESTYLE_FLESH

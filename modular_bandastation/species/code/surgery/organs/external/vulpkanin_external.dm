@@ -2,7 +2,7 @@
 
 /obj/item/organ/tail/vulpkanin
 	name = "vulpkanin tail"
-	preference = "feature_vulpkanin_tail"
+	//preference = "feature_vulpkanin_tail"
 
 	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/vulpkanin
 

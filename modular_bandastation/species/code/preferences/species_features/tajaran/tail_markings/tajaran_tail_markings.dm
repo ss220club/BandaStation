@@ -2,7 +2,7 @@
 	savefile_key = "feature_tajaran_tail_markings"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
-	relevant_external_organ = /obj/item/organ/tail/tajaran
+	relevant_organ = /obj/item/organ/tail/tajaran
 
 /datum/preference/choiced/tajaran_tail_markings/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.tajaran_tail_markings_list)

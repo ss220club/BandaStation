@@ -4,7 +4,7 @@
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Щупальца на голове"
 	should_generate_icons = TRUE
-	relevant_external_organ = /obj/item/organ/head_tentacle
+	relevant_organ = /obj/item/organ/head_tentacle
 
 /datum/preference/choiced/skrell_head_tentacle/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.skrell_head_tentacles_list)
