@@ -623,7 +623,7 @@
 		return CLICK_ACTION_BLOCKING
 	if(!user.is_holding(src))
 		return CLICK_ACTION_BLOCKING
-	balloon_alert(user, "снятие [S.declent_ru(GENITIVE)]")
+	balloon_alert(user, "снятие [suppressor.declent_ru(GENITIVE)]")
 	user.put_in_hands(suppressor)
 	clear_suppressor()
 	return CLICK_ACTION_SUCCESS
