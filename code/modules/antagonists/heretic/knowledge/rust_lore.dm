@@ -76,8 +76,6 @@
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "grasp_rust"
 
-/datum/heretic_knowledge/rust_fist/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
 /datum/heretic_knowledge/limited_amount/starting/base_rust/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
 	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK_SECONDARY, PROC_REF(on_secondary_mansus_grasp))
@@ -114,38 +112,10 @@
 	source.do_rust_heretic_act(target)
 	return COMPONENT_USE_HAND
 
-/datum/heretic_knowledge/rust_regen
-	name = "Leeching Walk"
-	desc = "Дает вам пассивное исцеление и устойчивость к батонам, когда вы стоите над ржавчиной."
-	gain_text = "Скорость была беспрецедентной, сила - неестественной. Кузнец улыбался."
-	cost = 1
-	research_tree_icon_path = 'icons/effects/eldritch.dmi'
-	research_tree_icon_state = "cloud_swirl"
-
-
-/datum/heretic_knowledge/rust_regen/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	user.AddElement(/datum/element/leeching_walk)
-
-/datum/heretic_knowledge/rust_regen/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	user.RemoveElement(/datum/element/leeching_walk)
-
-/datum/heretic_knowledge/mark/rust_mark
-	name = "Mark of Rust"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку ржавчины. Метка срабатывает при атаке вашим Ржавым клинком. \
-		При срабатывании, жертва получит сильное отвращение и будет контужена. \
-		Позволяет заставить ржаветь укрепленные стены и пол, а также пласталь."
-	gain_text = "Кузнец смотрит вдаль. В давно потерянное место. \"Ржавые холмы помогают остро нуждающимся... за определенную плату.\""
-	mark_type = /datum/status_effect/eldritch/rust
-
-/datum/heretic_knowledge/mark/rust_mark/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	. = ..()
-	our_heretic.increase_rust_strength()
-
-/datum/heretic_knowledge/knowledge_ritual/rust
 /datum/heretic_knowledge/spell/rust_charge
 	name = "Rust Charge"
-	desc = "A charge that must be started on a rusted tile and will destroy any rusted objects you come into contact with, will deal high damage to others and rust around you during the charge."
-	gain_text = "The hills sparkled now, as I neared them my mind began to wander. I quickly regained my resolve and pushed forward, this last leg would be the most treacherous."
+	desc = "Рывок, который необходимо начать на ржавом тайле и который уничтожит любые ржавые объекты, с которыми вы столкнётесь, нанесёт высокий урон другим и вызовет ржавчину вокруг вас во время рывка."
+	gain_text = "Горы сияли, и по мере приближения к ним мой разум начал метаться. Я быстро собрался с духом и пошёл вперёд — этот последний участок будет самым опасным."
 
 	action_to_add = /datum/action/cooldown/mob_cooldown/charge/rust
 	cost = 2
@@ -153,7 +123,7 @@
 
 /datum/heretic_knowledge/spell/rust_construction
 	name = "Rust Construction"
-	desc = "Дает вам Rust Construction - заклинание, позволяющее возвести стену из ржавого пола. \
+	desc = "Дает вам Rust Construction - заклинание, позволяющее возвести стену из ржавого тайла. \
 		Любой человек, находящийся над стеной, будет отброшен в сторону (или вверх) и получит урон."
 	gain_text = "В моем сознании начали плясать образы иноземных и зловещих сооружений. Покрытые с ног до головы толстым слоем ржавчины, \
 		они больше не выглядели рукотворными. А может быть, они вообще никогда и не существовали."
@@ -161,11 +131,11 @@
 	cost = 2
 
 /datum/heretic_knowledge/armor/rust
-	desc = "Allows you to transmute a table (or a suit), a mask and any trash item to create a Salvaged Remains. \
-			Has extra armor, tackle resistance and syringe immunity while standing on rust. \
-			Acts as a focus while hooded."
-	gain_text = "From beneath warped scrap, the Blacksmith pulls forth an ancient fabric. \
-				\"Whatever this once stood for is lost. So now, we give it new purpose.\""
+	desc = "Позволяет трансмутирвать стол (или верхний костюм), маску и любой мусорный предмет в спасённые останки. \
+			Имеет дополнительную броню, устойчивость к атакам и иммунитет к уколам, пока стоит на ржавчине. \
+			Работает как фокус когда надет капюшон."
+	gain_text = "Из-под искаженых обломков металлолома кузнец извлекает древнюю ткань. \
+				\"То, что это когда-то означало, потеряно. Так что теперь мы придаем ему новое предназначение.\""
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/rust)
 	research_tree_icon_state = "rust_armor"
 	required_atoms = list(
@@ -185,7 +155,7 @@
 
 /datum/heretic_knowledge/blade_upgrade/rust
 	name = "Toxic Blade"
-	desc = "Ваш Ржавый клинок теперь отвращает врагов при атаке. \ Позволяет заставить ржаветь титаниум и пластитаниум."
+	desc = "Ваш Ржавый клинок теперь отвращает врагов при атаке. \ Позволяет заставить ржаветь титан и пластитан."
 	gain_text = "Кузнец протягивает вам свой клинок. \"Клинок проведет тебя через плоть, если ты позволишь ему.\" \
 		Тяжелая ржавчина утяжеляет клинок. Вы пристально вглядываетесь в него. Ржавые холмы зовут тебя."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -257,7 +227,7 @@
 	if(ritual_location)
 		var/area/our_area = get_area(loc)
 		if(!istype(our_area, ritual_location))
-			loc.balloon_alert(user, "ритуал провален, должны быть в [initial(ritual_location.name)]!") // "must be in bridge"
+			loc.balloon_alert(user, "ритуал провален, ритуал должен быть проведён в [initial(ritual_location.name)]!") // "must be in bridge"
 			return FALSE
 
 	return ..()
