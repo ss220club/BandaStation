@@ -688,7 +688,7 @@
 	iris_overlay = "eyes_cyber_glow_iris"
 	eye_icon_state = "eyes_glow_gs"
 	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
-	overlay_ignore_lighting = TRUE
+	organ_traits = list(TRAIT_LUMINESCENT_EYES)
 	// BANDASTATION EDIT END - Feat: Augmentation
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	penlight_message = "are low grade cybernetics, poorly compensating for the light"
@@ -1072,7 +1072,7 @@
 	eye_icon_state = "motheyes_cyber"
 	// BANDASTATION EDIT START - Feat: Augmentation
 	iris_overlay = "eyes_cyber_glow_iris"
-	overlay_ignore_lighting = TRUE
+	organ_traits = list(TRAIT_LUMINESCENT_EYES)
 	// BANDASTATION EDIT END - Feat: Augmentation
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	pupils_name = "aperture clusters"
