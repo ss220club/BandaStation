@@ -128,7 +128,7 @@
 
 /obj/item/dualsaber/legendary_saber/proc/get_proximity(atom/A, mob/living/user)
 	reach = 1
-	var/proximity = user.CanReach(A, src)
+	var/proximity = A.IsReachableBy(user)
 	reach = enchant.range
 	return proximity
 
