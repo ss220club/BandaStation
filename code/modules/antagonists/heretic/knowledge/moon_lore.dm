@@ -71,19 +71,11 @@
 	. = ..()
 	user.AddComponentFrom(REF(src), /datum/component/empathy, seen_it = TRUE, visible_info = ALL, self_empath = FALSE, sense_dead = FALSE, sense_whisper = TRUE, smite_target = FALSE)
 
-/datum/heretic_knowledge/moon_grasp
-	name = "Grasp of Lunacy"
-	desc = "Ваша Хватка Мансуса заставит жертву галлюцинировать, что все вокруг - лунная масса, \
-		и на короткое время скроет вашу личность."
-	gain_text = "Труппа на стороне луны показала мне правду, и я принял её."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_moon"
 /datum/heretic_knowledge/limited_amount/starting/base_moon/on_mansus_grasp(mob/living/source, mob/living/target)
 	. = ..()
 
 	if(target.can_block_magic(MAGIC_RESISTANCE_MOON))
-		to_chat(target, span_danger("You hear echoing laughter from above..but it is dull and distant."))
+		to_chat(target, span_danger("Ты слышишь отдалённый и глухой эхом смех сверху.."))
 		return
 
 	source.apply_status_effect(/datum/status_effect/moon_grasp_hide)
@@ -91,37 +83,19 @@
 	if(!iscarbon(target))
 		return
 	var/mob/living/carbon/carbon_target = target
-	to_chat(carbon_target, span_danger("Сверху доносится смех, отдающийся эхом."))
+	to_chat(carbon_target, span_danger("Ты слышишь эхо раздающегося смеха сверху."))
 	carbon_target.cause_hallucination(/datum/hallucination/delusion/preset/moon, "delusion/preset/moon hallucination caused by mansus grasp")
 	carbon_target.mob_mood.adjust_sanity(-30)
 
-/datum/heretic_knowledge/spell/moon_smile
-	name = "Smile of the moon"
-	desc = "Дает вам заклинание Smile of the moon, позволяющее на расстоянии заглушить, ослепить, оглушить и сбить с ног цель \
-		на время, зависящее от ее рассудка."
-	gain_text = "Луна улыбается всем нам, и те, кто видит ее правдивую сторону, могут приносить её радость."
+/datum/heretic_knowledge/spell/mind_gate
+	name = "Mind Gate"
+	desc = "Дарует вам Mind Gate — заклятие, которое за 10 секунд парализует, оглушает, ослепляет, вызывает галлюцинации, \
+		путаницу, потерю кислорода и повреждение мозга у своей цели. \
+		При этом маг, произносящий заклятие, получает 20 единиц урона мозгу за каждое его использование."
+	gain_text = "Мой разум распахивается, как ворота, и его проницательность позволит мне постичь истину."
 
-	action_to_add = /datum/action/cooldown/spell/pointed/moon_smile
-	cost = 1
-
-/datum/heretic_knowledge/mark/moon_mark
-	name = "Mark of Moon"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку луны, которая накладывает пацифизм на цель, пока ее не атакуют. \
-		Метка может быть активирована вашим Лунным клинком, оставляя жертву в замешательстве."
-	gain_text = "Труппа на луне могла танцевать весь день \
-		и в этом танце луна улыбалась нам \
-		но когда наступала ночь, ее улыбка тусклела, так как была вынуждена смотреть на землю."
-	mark_type = /datum/status_effect/eldritch/moon
-
-/datum/heretic_knowledge/knowledge_ritual/moon
-
-/datum/heretic_knowledge/spell/moon_parade
-	name = "Lunar Parade"
-	desc = "Дает вам заклинание Lunar Parade, которое через короткую задержку посылает вперед карнавал. \
-		Те, в кого попал карнавал, вынуждены присоединиться к параду и страдать от галлюцинаций."
-	gain_text = "Музыка, как отражение души, побуждала их, и они, словно мотыльки на пламя, следовали за ней."
-	action_to_add = /datum/action/cooldown/spell/pointed/projectile/moon_parade
-	cost = 1
+	action_to_add = /datum/action/cooldown/spell/pointed/mind_gate
+	cost = 2
 
 /datum/heretic_knowledge/moon_amulet
 	name = "Moonlight Amulet"
@@ -129,10 +103,6 @@
 			Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд; \
 			если рассудок не достаточно низок, то уменьшается их настроение."
 	gain_text = "Во главе парада стоял он, луна сгустилась в единную массу, отражение души."
-
-	action_to_add = /datum/action/cooldown/spell/pointed/mind_gate
-	cost = 2
-
 
 	required_atoms = list(
 		/obj/item/organ/heart = 1,
@@ -147,11 +117,11 @@
 	research_tree_icon_frame = 9
 
 /datum/heretic_knowledge/armor/moon
-	desc = "Allows you to transmute a table (or a suit), a mask and two sheets of glass to create a Resplendant Regalia, this robe will render the user   fully immune to disabling effects and convert all forms of damage into brain damage, while also pacifying the user and render him unable to use ranged weapons (Moon blade will bypass pacifism). \
-			Acts as a focus while hooded."
-	gain_text = "Trails of light and mirth flowed from every arm of this magnificent attire. \
-				The troupe twirled in irridescent cascades, dazzling onlookers with the truth they sought. \
-				I observed, basking in the light, to find my self."
+	desc = "Позволяет трансмутировать стол (или верхний костюм), маску и 2 листа стекла в блистательный наряд, эта мантия сделает владельца полностью невосприимчивым к дисейблер эффектам и превратит все виды урона в повреждения мозга, одновременно пацифицируя пользователя и делая его неспособным использовать дальнобойное оружие (Лунный клинок обойдет пацифизм). \
+			Работает как фокус когда надет капюшон.."
+	gain_text = "Следы света и радости исходили из каждой руки этого великолепного наряда. \
+				Труппа кружилась в переливных каскадах, ослепляя зрителей той истиной, которую они искали. \
+				Я наблюдал, купаясь в свете, чтобы найти себя."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/moon)
 	research_tree_icon_state = "moon_armor"
 	required_atoms = list(
@@ -162,9 +132,9 @@
 
 /datum/heretic_knowledge/spell/moon_parade
 	name = "Lunar Parade"
-	desc = "Grants you Lunar Parade, a spell that - after a short charge - sends a carnival forward \
-		when hitting someone they are forced to join the parade and suffer hallucinations."
-	gain_text = "The music like a reflection of the soul compelled them, like moths to a flame they followed"
+	desc = "Дает вам заклинание Lunar Parade, которое через короткую задержку посылает вперед карнавал. \
+		Те, в кого попал карнавал, вынуждены присоединиться к параду и страдать от галлюцинаций."
+	gain_text = "Музыка, как отражение души, побуждала их, и они, словно мотыльки на пламя, следовали за ней."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/moon_parade
 	cost = 2
 	drafting_tier = 5
@@ -267,11 +237,11 @@
 /datum/heretic_knowledge/ultimate/moon_final/proc/attempt_conversion(mob/living/carbon/convertee, mob/user)
 	// Heretics, lunatics and monsters shouldn't become lunatics because they either have a master or have a mansus grasp
 	if(IS_HERETIC_OR_MONSTER(convertee))
-		to_chat(convertee, span_boldwarning("[user]'s rise is influencing those who are weak willed. Their minds shall rend." ))
+		to_chat(convertee, span_boldwarning("Возвышение [user] влияет на тех, кто слаб духом. Их умы будут разрушатся." ))
 		return FALSE
 	// Mindshielded and anti-magic folks are immune against this effect because this is a magical mind effect
 	if(HAS_MIND_TRAIT(convertee, TRAIT_UNCONVERTABLE) || convertee.can_block_magic(MAGIC_RESISTANCE))
-		to_chat(convertee, span_boldwarning("You feel shielded from something." ))
+		to_chat(convertee, span_boldwarning("Вы чуствуете что вы защищены от чего-то." ))
 		return FALSE
 
 	if(!convertee.mind)
@@ -309,7 +279,7 @@
 			continue
 		new /obj/effect/temp_visual/moon_ringleader(get_turf(carbon_view))
 		if(carbon_view.has_status_effect(/datum/status_effect/confusion))
-			to_chat(carbon_view, span_big(span_hypnophrase("YOUR HEAD RATTLES WITH A THOUSAND VOICES JOINED IN A MADDENING CACOPHONY OF SOUND AND MUSIC. EVERY FIBER OF YOUR BEING SAYS 'RUN'.")))
+			to_chat(carbon_view, span_big(span_hypnophrase("Твой разум трещит от тысячи голосов, слитых в безумную какофонию звуков и музыки. Каждая щепка твоего существа кричит: «Беги».")))
 		carbon_view.adjust_confusion(2 SECONDS)
 		carbon_view.mob_mood.adjust_sanity(-20)
 
