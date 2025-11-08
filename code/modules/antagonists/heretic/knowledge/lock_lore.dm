@@ -62,17 +62,6 @@
 	mark_type = /datum/status_effect/eldritch/lock
 	eldritch_passive = /datum/status_effect/heretic_passive/lock
 
-/datum/heretic_knowledge/lock_grasp
-	name = "Grasp of Lock"
-	desc = "Ваша Хватка Мансуса позволяет получить доступ ко всему! ПКМ на шлюзу или шкафу отопрет их. \
-		ДНК замки мехов будут очищены, а пилот извлечен. Также работает на консолях. \
-		Издает характерный звук стучка при использовании."
-	gain_text = "Ничто не останется закрытым от моего прикосновения."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_lock"
-
-/datum/heretic_knowledge/lock_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
 /datum/heretic_knowledge/limited_amount/starting/base_knock/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
 	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK_SECONDARY, PROC_REF(on_secondary_mansus_grasp))
@@ -110,7 +99,7 @@
 	else if(istype(target, /obj/machinery/computer))
 		var/obj/machinery/computer/computer = target
 		computer.authenticated = TRUE
-		computer.balloon_alert(source, "unlocked")
+		computer.balloon_alert(source, "разблокировано")
 
 	var/turf/target_turf = get_turf(target)
 	SEND_SIGNAL(target_turf, COMSIG_ATOM_MAGICALLY_UNLOCKED, src, source)
@@ -157,25 +146,10 @@
 	result_item.shapeshift(id)
 	return TRUE
 
-/datum/heretic_knowledge/mark/lock_mark
-	name = "Mark of Lock"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку замка. \
-		Активация метки закроет доступ ко всем проходам на время действие метки. \
-		У них не будет доступа к чему-либо, даже публичные шлюзы будут отклонять их."
-	gain_text = "Привратница была коррумпированным Управляющим. Она мешала своим собратьям ради собственного извращенного развлечения."
-	mark_type = /datum/status_effect/eldritch/lock
-
-/datum/heretic_knowledge/knowledge_ritual/lock
-
-/datum/heretic_knowledge/limited_amount/concierge_rite // item that creates 3 max at a time heretic only barriers, probably should limit to 1 only, holy people can also pass
-	name = "Concierge's Rite"
-	desc = "Позволяет трансмутировать мелок, деревянную доску и мультитул, чтобы создать Справочник лабиринта. \
-		Оно может материализовать на расстоянии баррикаду, через которую могут пройти только вы и люди с сопротивлением против магии. 3 использования."
-	gain_text = "Консьерж записал мое имя в Справочник. \"Добро пожаловать в ваш новый дом, коллега Управляющий.\""
 /datum/heretic_knowledge/limited_amount/concierge_rite
 	name = "Concierge's Rite"
 	desc = "Позволяет трансмутировать мелок, деревянную доску и мультитул, чтобы создать Справочник лабиринта. \
-		Оно может материализовать на расстоянии баррикаду, через которую могут пройти только вы и люди с сопротивлением против магии. 3 использования."
+		Оно может материализовать на расстоянии баррикаду, через которую могут пройти только вы и люди с сопротивлением против магии. 5 использования."
 	gain_text = "Консьерж записал мое имя в Справочник. \"Добро пожаловать в ваш новый дом, коллега Управляющий.\""
 	required_atoms = list(
 		/obj/item/toy/crayon = 1,
@@ -189,12 +163,12 @@
 	drafting_tier = 5
 
 /datum/heretic_knowledge/armor/lock
-	desc = "Allows you to transmute a table (or a suit), a mask and a crowbar to create a shifting guise. \
-		It grants you camoflage from cameras, hides your identity, voice and muffles your footsteps. \
-		Acts as a focus while hooded."
-	gain_text = "While stewards are known to the Concierge, \
-				they still consort between one another and with outsiders under shaded cloaks and drawn hoods. \
-				Familiarity is treachery, even to oneself."
+	desc = "Позволяет трансмутировать стол (или верхний костюм), маску и лом в меняющийся облик. \
+		Это дает вам маскировку от камер, скрывает вашу личность, голос и приглушает шаги. \
+		Работает как фокус когда надет капюшон."
+	gain_text = "Пока стюарды известны как Консьержи, \
+				они всё же общаются между собой и с посторонними под тенистыми плащами и сдвинутыми капюшонами. \
+				Знакомство — это предательство, даже по отношению к самому себе."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/lock)
 	research_tree_icon_state = "lock_armor"
 	required_atoms = list(
