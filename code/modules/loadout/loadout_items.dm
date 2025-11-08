@@ -341,7 +341,7 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	if(loadout_flags & LOADOUT_FLAG_ALLOW_RESKIN)
 		displayed_text[FA_ICON_SWATCHBOOK] = "Reskinnable"
 	// BANDASTATION ADDITION - START
-	if(can_be_named)
+	if(loadout_flags & LOADOUT_FLAG_ALLOW_NAMING)
 		displayed_text[FA_ICON_SIGNATURE] = "Смена имени"
 
 	if(animated)
