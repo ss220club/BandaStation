@@ -4,7 +4,8 @@
 /atom/movable/screen/alert/status_effect/unholy_determination
 	name = "Unholy Determination"
 	desc = "Вы появляетесь в незнакомой комнате. Темнота начинает смыкаться. Начинается паника. Времени нет. Сражайтесь или умрите!"
-	icon_state = "wounded"
+	icon_state = "heretic_template"
+	overlay_state = "wounded"
 
 /// The buff given to people within the shadow realm to assist them in surviving.
 /datum/status_effect/unholy_determination

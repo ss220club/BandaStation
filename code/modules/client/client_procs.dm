@@ -4,8 +4,11 @@
 
 GLOBAL_LIST_INIT(blacklisted_builds, list(
 	"1622" = "Bug breaking rendering can lead to wallhacks.",
-	))
-
+))
+GLOBAL_LIST_INIT(unrecommended_builds, list(
+	"1670" = "Bug breaking in-world text rendering.",
+	"1671" = "Bug breaking in-world text rendering.",
+))
 #define LIMITER_SIZE 5
 #define CURRENT_SECOND 1
 #define SECOND_COUNT 2
@@ -267,12 +270,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		persistent_client = new(ckey, key) // BANDASTATION ADDITION - Mentors: (key)
 	persistent_client.set_client(src)
 
-	if(SScentral.can_run())
-		SScentral.update_player_discord_async(ckey)
-		SScentral.update_player_donate_tier_blocking(src)
-
-	if(byond_version >= 516)
-		winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION EDIT - Removed 'refresh'
+	winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION REMOVE: find,refresh
 
 	// Instantiate stat panel
 	stat_panel = new(src, "statbrowser")

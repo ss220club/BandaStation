@@ -1,19 +1,50 @@
-
-/datum/heretic_knowledge_tree_column/main/ash
-	neighbour_type_left = /datum/heretic_knowledge_tree_column/cosmic_to_ash
-	neighbour_type_right = /datum/heretic_knowledge_tree_column/ash_to_moon
-
+/datum/heretic_knowledge_tree_column/ash
 	route = PATH_ASH
 	ui_bgr = "node_ash"
+	complexity = "Easy"
+	complexity_color = COLOR_GREEN
+	icon = list(
+		"icon" = 'icons/obj/weapons/khopesh.dmi',
+		"state" = "ash_blade",
+		"frame" = 1,
+		"dir" = SOUTH,
+		"moving" = FALSE,
+	)
+	description = list(
+		"The Path of Ash revolves around fire, mobility and brutal crowd control against single opponents.",
+		"Play this path if you are new to Heretic, or really enjoy hit and run playstyles.",
+	)
+	pros = list(
+		"Very potent even from the beginning of the path.",
+		"Easy access to a mobility spells and expanded vision.",
+		"Very powerful mark effect.",
+	)
+	cons = list(
+		"Has less power than most heretics beyond their starting abilities.",
+		"Lacks durability in long conflicts.",
+		"Reliant on hitting fast and hard before their opponents can mount proper countermeasures.",
+	)
+	tips = list(
+		"Your Mansus Grasp applies a short blind and a mark that puts your opponent into stamina crit when triggered by your blade. The mark can spread to nearby opponents.",
+		"Selecting this path makes you immune to high temperature damage. Remember, however, that your clothes can still burn! If you want to protect yourself from your own fire, wear a Scorched Mantle.",
+		"Your Scorched Mantle will cause you to generate firestacks on your own body (Make sure you toggle the effect!). Upon reaching 5 fire stacks, your ashen spells will be  empowered (indicated by your spells being highlighted in green).",
+		"Your Ashen passage is a short cooldown jaunt capable of removing restraints. If empowered, it gains a longer jaunt time, and also will remove stuns and stamina crit.",
+		"Volcano blast can make short work of your enemies, should they be foolish enough to stick close to each other. If empowered, it will have no cast time and generate twice the amount of firestacks. Burn the heathens to ashes!",
+		"Do not neglect the Mask of Madness. It will slowly sap the stamina of your enemies and make them hallucinate.",
+		"Make sure to set as many enemies on fire as you possibly can! Nightwatcher's Rebirth will heal you and have its cooldown reduced based on how many mobs you siphon.",
+		"Your ascension grants you complete immunity to environmental hazards, including bombs! But you are still vulnerable to more conventional weaponry. Do not become overconfident.",
+	)
+
 	start = /datum/heretic_knowledge/limited_amount/starting/base_ash
-	grasp = /datum/heretic_knowledge/ashen_grasp
-	tier1 = /datum/heretic_knowledge/spell/ash_passage
-	mark = /datum/heretic_knowledge/mark/ash_mark
-	ritual_of_knowledge = /datum/heretic_knowledge/knowledge_ritual/ash
-	unique_ability = /datum/heretic_knowledge/spell/fire_blast
-	tier2 = /datum/heretic_knowledge/mad_mask
+	knowledge_tier1 = /datum/heretic_knowledge/spell/ash_passage
+	guaranteed_side_tier1 = /datum/heretic_knowledge/medallion
+	knowledge_tier2 = /datum/heretic_knowledge/spell/fire_blast
+	guaranteed_side_tier2 = /datum/heretic_knowledge/rifle
+	robes = /datum/heretic_knowledge/armor/ash
+	knowledge_tier3 = /datum/heretic_knowledge/mad_mask
+	guaranteed_side_tier3 = /datum/heretic_knowledge/summon/ashy
 	blade = /datum/heretic_knowledge/blade_upgrade/ash
-	tier3 =	/datum/heretic_knowledge/spell/flame_birth
+	knowledge_tier4 = /datum/heretic_knowledge/spell/flame_birth
 	ascension = /datum/heretic_knowledge/ultimate/ash_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_ash
@@ -29,6 +60,8 @@
 	result_atoms = list(/obj/item/melee/sickly_blade/ash)
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
 	research_tree_icon_state = "ash_blade"
+	mark_type = /datum/status_effect/eldritch/ash
+	eldritch_passive = /datum/status_effect/heretic_passive/ash
 
 /datum/heretic_knowledge/ashen_grasp
 	name = "Grasp of Ash"
@@ -47,6 +80,8 @@
 
 /datum/heretic_knowledge/ashen_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
 	SIGNAL_HANDLER
+/datum/heretic_knowledge/limited_amount/starting/base_ash/on_mansus_grasp(mob/living/source, mob/living/target)
+	. = ..()
 
 	if(target.is_blind())
 		return
@@ -79,6 +114,7 @@
 	mark_type = /datum/status_effect/eldritch/ash
 
 /datum/heretic_knowledge/mark/ash_mark/trigger_mark(mob/living/source, mob/living/target)
+/datum/heretic_knowledge/limited_amount/starting/base_ash/trigger_mark(mob/living/source, mob/living/target)
 	. = ..()
 	if(!.)
 		return
@@ -89,9 +125,15 @@
 		grasp.next_use_time -= round(grasp.cooldown_time*0.75)
 		grasp.build_all_button_icons()
 
-/datum/heretic_knowledge/knowledge_ritual/ash
+/datum/heretic_knowledge/spell/ash_passage
+	name = "Ashen Passage"
+	desc = "Grants you Ashen Passage, a spell that lets you phase out of reality, allowing you to traverse a short distance, passing though any walls. \
+			When empowered, it will break you out of any stuns and restraints, and will have a longer range."
+	gain_text = "He knew how to walk between the planes."
 
-
+	action_to_add = /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash
+	cost = 2
+	drafting_tier = 5
 
 /datum/heretic_knowledge/spell/fire_blast
 	name = "Volcano Blast"
@@ -100,9 +142,23 @@
 		луч продолжит движение к другой цели."
 	gain_text = "Ни один огонь не был достаточно горячим, чтобы разжечь их. Ни один огонь не был достаточно ярким, чтобы спасти их. Ни один огонь не вечен."
 	action_to_add = /datum/action/cooldown/spell/charged/beam/fire_blast
-	cost = 1
+	cost = 2
 	research_tree_icon_frame = 7
 
+/datum/heretic_knowledge/armor/ash
+	desc = "Allows you to transmute a table (or a suit), a mask and a match to create a scorched mantle. \
+		It provides completes protection from fire, and is able to produce more flames passively. \
+		When you have enough fire, you may cast empowered versions of your ashen spells. \
+		Acts as a focus while hooded."
+	gain_text = "The Watch remain as they fell, crumbling away from sight. \
+			Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen."
+	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/ash)
+	research_tree_icon_state = "ash_armor"
+	required_atoms = list(
+		list(/obj/structure/table, /obj/item/clothing/suit) = 1,
+		/obj/item/clothing/mask = 1,
+		/obj/item/match = 1,
+	)
 
 /datum/heretic_knowledge/mad_mask
 	name = "Mask of Madness"
@@ -117,7 +173,7 @@
 		/obj/item/flashlight/flare/candle = 4,
 	)
 	result_atoms = list(/obj/item/clothing/mask/madness_mask)
-	cost = 1
+	cost = 2
 	research_tree_icon_path = 'icons/obj/clothing/masks.dmi'
 	research_tree_icon_state = "mad_mask"
 
@@ -146,8 +202,9 @@
 	gain_text = "Огонь был неизбежным, и все же жизнь оставалась в его обугленном теле. \
 		Ночной дозорный был конкретным человеком, всегда бдительным."
 	action_to_add = /datum/action/cooldown/spell/aoe/fiery_rebirth
-	cost = 1
+	cost = 2
 	research_tree_icon_frame = 5
+	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/ash_final
 	name = "Ashlord's Rite"

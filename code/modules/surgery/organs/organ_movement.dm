@@ -234,7 +234,8 @@
 	bodypart_owner = null
 	// BANDASTATION ADDITION END - Don't move organs to nullspace to move later
 
-	on_bodypart_remove(limb)
+	if(!isnull(limb))
+		on_bodypart_remove(limb)
 
 	return TRUE
 

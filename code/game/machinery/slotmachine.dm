@@ -227,6 +227,9 @@
 	if(user)
 		the_name = user.real_name
 		visible_message(span_notice("[user] тянет рычаг и слот-машина начинает крутиться!"))
+		if(isliving(user))
+			var/mob/living/living_user = user
+			living_user.add_mood_event("slots_spin", /datum/mood_event/slots)
 	else
 		the_name = "Exaybachay"
 
@@ -306,8 +309,11 @@
 
 	else if(check_jackpot(JACKPOT_SEVENS))
 		var/prize = money + JACKPOT
-		visible_message("<b>[capitalize(declent_ru(NOMINATIVE))]</b> говорит, 'ДЖЕКПОТ! Джекпоооот!!!! [prize] [declension_ru(prize, "кредит", "кредита", "кредитов")] тебе в рот!'")
+		visible_message("<b>[src]</b> говорит, 'ДЖЕКПОТ! Джекпоооот!!!! Вы выйграли [prize] кредитов!'")
 		priority_announce("Джекпот! Джекпоооот!!!! Бабки [user ? user.real_name : usrname] в рот! Поздравить победителя можно в [get_area(src)]!")
+		if(isliving(user) && (user in viewers(src)))
+			var/mob/living/living_user = user
+			living_user.add_mood_event("slots", /datum/mood_event/slots/win/jackpot)
 		jackpots += 1
 		money = 0
 		if(paymode == HOLOCHIP)
@@ -323,10 +329,16 @@
 	else if(linelength == 5)
 		visible_message("<b>[src]</b> докладывает, 'Большой выигрыш! Тысяча кредитов!'")
 		give_money(BIG_PRIZE)
+		if(isliving(user) && (user in viewers(src)))
+			var/mob/living/living_user = user
+			living_user.add_mood_event("slots", /datum/mood_event/slots/win/big)
 
 	else if(linelength == 4)
 		visible_message("<b>[src]</b> докладывает, 'Выигрыш! Четыреста кредитов!'")
 		give_money(SMALL_PRIZE)
+		if(isliving(user) && (user in viewers(src)))
+			var/mob/living/living_user = user
+			living_user.add_mood_event("slots", /datum/mood_event/slots/win)
 
 	else if(linelength == 3)
 		to_chat(user, span_notice("Вы выиграли три фриспина!"))
@@ -337,6 +349,9 @@
 		balloon_alert(user, "неудача!")
 		playsound(src, 'sound/machines/buzz/buzz-sigh.ogg', 50)
 		did_player_win = FALSE
+		if(isliving(user) && (user in viewers(src)))
+			var/mob/living/living_user = user
+			living_user.add_mood_event("slots", /datum/mood_event/slots/loss)
 
 	if(did_player_win)
 		add_filter("jackpot_rays", 3, ray_filter)
