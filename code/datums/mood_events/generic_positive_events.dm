@@ -551,7 +551,7 @@
 
 /datum/mood_event/fish_petting/add_effects(obj/item/fish/fish, morbid)
 	if(!morbid)
-		description = "Было приятно погладить [fish.declent_ru(INSTRUMENTAL)].
+		description = "Было приятно погладить [fish.declent_ru(INSTRUMENTAL)]."
 	else
 		description = "Я ласкаю [fish.declent_ru(INSTRUMENTAL)], пока [fish.ru_p_they()] извивается под моим прикосновением, блаженно не осознавая, насколько жесток этот мир."
 
