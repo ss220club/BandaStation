@@ -18,22 +18,22 @@
 	switch(drunkness)
 		if(0 to 30)
 			mood_change = 3
-			description = "Everything just feels better after a drink or two."
+			description = "После пары напитков всё становится лучше."
 		if(30 to 45)
 			mood_change = 4
-			description = "Is it getting hotter, or is it just me? I need another drink to cool down."
+			description = "Становится жарче или это только мне? Нужен ещё один напиток, чтобы остыть."
 		if(45 to 60)
 			mood_change = 5
-			description = "Who keeps moving the floor? I'm going to talk to them... after this drink."
+			description = "Кто постоянно двигает пол? Я поговорю с ними... после этого напитка."
 		if(60 to 90)
 			mood_change = 6
-			description = "I'm noooot drunk, you're drunk! In fact... I need another drink!"
+			description = "Я не пьян, это ты пьян! Вообще-то... мне нужен ещё один напиток!"
 		if(90 to INFINITY)
 			mood_change = 3 // crash out
-			description = "You're my BESSST frien'... You and me agains' th' world, buddy. Le's get another drink."
+			description = "Ты мой ЛУЧШИЙ друган... Мы с тобой против всего мира, приятель. Давай ещё по одной."
 	if(HAS_PERSONALITY(owner, /datum/personality/teetotal))
 		mood_change *= -1.5
-		description = "I don't like drinking... It makes me feel horrible."
+		description = "Я не люблю выпивать... Мне от этого плохо."
 	if(HAS_PERSONALITY(owner, /datum/personality/bibulous))
 		mood_change *= 1.5
 	if(old_mood != mood_change)
@@ -44,7 +44,7 @@
 
 /datum/mood_event/drunk_after
 	mood_change = 2
-	description = "The buzz might be gone, but I still feel good."
+	description = "Опьянение прошло, но я всё ещё чувствую себя хорошо."
 	timeout = 5 MINUTES
 
 /datum/mood_event/wrong_brandy
@@ -53,7 +53,7 @@
 	timeout = 6 MINUTES
 
 /datum/mood_event/quality_revolting
-	description = "Это был самый худший напиток из всей истории напитков."
+	description = "Это был самый отвратительный напиток за всю историю напитков."
 	mood_change = -8
 	timeout = 7 MINUTES
 
