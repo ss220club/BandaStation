@@ -19,7 +19,7 @@
 	feature_key = FEATURE_TAJARAN_TAIL
 
 /datum/bodypart_overlay/mutant/tail/tajaran/get_global_feature_list()
-	return SSaccessories.tails_list_tajaran
+	return SSaccessories.feature_list[FEATURE_TAJARAN_TAIL]
 
 // MARK: Tajaran tail markings
 /datum/bodypart_overlay/mutant/tajaran_tail_markings
@@ -30,7 +30,7 @@
 	var/tajaran_tail_markings_color = "#FFFFFF"
 
 /datum/bodypart_overlay/mutant/tajaran_tail_markings/get_global_feature_list()
-	return SSaccessories.tajaran_tail_markings_list
+	return SSaccessories.feature_list[FEATURE_TAJARAN_TAIL_MARKINGS]
 
 /datum/bodypart_overlay/mutant/tajaran_tail_markings/get_base_icon_state()
 	return (!isnull(tail_markings_key) ? "[tail_markings_key]_" : "") + (wagging ? "wagging_" : "") + sprite_datum.icon_state

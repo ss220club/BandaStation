@@ -38,5 +38,5 @@
 		/obj/item/bodypart/head,
 	)
 
-/datum/bodypart_overlay/simple/body_marking/tajaran_facial_hair/get_accessory(name)
-	return SSaccessories.feature_list[FEATURE_TAJARAN_FACIAL_HAIR][name]
+// /datum/bodypart_overlay/simple/body_marking/tajaran_facial_hair/get_accessory(name)
+// 	return SSaccessories.feature_list[FEATURE_TAJARAN_FACIAL_HAIR][name]

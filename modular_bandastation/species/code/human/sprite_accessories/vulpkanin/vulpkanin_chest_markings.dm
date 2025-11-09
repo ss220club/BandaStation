@@ -37,5 +37,5 @@
 		/obj/item/bodypart/chest,
 	)
 
-/datum/bodypart_overlay/simple/body_marking/vulpkanin_chest/get_accessory(name)
-	return SSaccessories.feature_list[FEATURE_VULPKANIN_CHEST_MARKINGS][name]
+// /datum/bodypart_overlay/simple/body_marking/vulpkanin_chest/get_accessory(name)
+// 	return SSaccessories.feature_list[FEATURE_VULPKANIN_CHEST_MARKINGS][name]

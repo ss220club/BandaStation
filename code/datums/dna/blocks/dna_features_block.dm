@@ -92,73 +92,135 @@
 /datum/dna_block/feature/accessory/vulpkanin_head_markings
 	feature_key = FEATURE_VULPKANIN_HEAD_MARKINGS
 
+/datum/dna_block/feature/accessory/vulpkanin_head_markings/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_HEAD_MARKINGS]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/vulpkanin_head_markings/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_HEAD_MARKINGS]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
+
 /datum/dna_block/feature/accessory/vulpkanin_chest_markings
 	feature_key = FEATURE_VULPKANIN_CHEST_MARKINGS
+
+/datum/dna_block/feature/accessory/vulpkanin_chest_markings/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_CHEST_MARKINGS]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/vulpkanin_chest_markings/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_CHEST_MARKINGS]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
 
 /datum/dna_block/feature/accessory/vulpkanin_limb_markings
 	feature_key = FEATURE_VULPKANIN_LIMB_MARKINGS
 
+/datum/dna_block/feature/accessory/vulpkanin_limb_markings/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_LIMB_MARKINGS]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/vulpkanin_limb_markings/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_LIMB_MARKINGS]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
+
 /datum/dna_block/feature/accessory/vulpkanin_tail
 	feature_key = FEATURE_VULPKANIN_TAIL
+
+/datum/dna_block/feature/accessory/vulpkanin_tail/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_TAIL]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/vulpkanin_tail/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_TAIL]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
 
 /datum/dna_block/feature/accessory/vulpkanin_tail_markings
 	feature_key = FEATURE_VULPKANIN_TAIL_MARKINGS
 
+/datum/dna_block/feature/accessory/vulpkanin_tail_markings/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_TAIL_MARKINGS]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/vulpkanin_tail_markings/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_TAIL_MARKINGS]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
+
 /datum/dna_block/feature/accessory/vulpkanin_facial_hair
 	feature_key = FEATURE_VULPKANIN_FACIAL_HAIR
 
-/datum/dna_block/feature/accessory/vulpkanin_body_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_BODY_MARKINGS_COLOR
+/datum/dna_block/feature/accessory/vulpkanin_facial_hair/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_FACIAL_HAIR]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
 
-/datum/dna_block/feature/accessory/vulpkanin_tail_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR
-
-/datum/dna_block/feature/accessory/vulpkanin_head_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR
-
-/datum/dna_block/feature/accessory/vulpkanin_facial_hair_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_FACIAL_HAIR_COLOR
+/datum/dna_block/feature/accessory/vulpkanin_facial_hair/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_VULPKANIN_FACIAL_HAIR]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
 
 // MARK: Tajaran
+/datum/dna_block/feature/accessory/tajaran_tail
+	feature_key = FEATURE_TAJARAN_TAIL
+
+/datum/dna_block/feature/accessory/tajaran_tail/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_TAIL]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/tajaran_tail/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_TAIL]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
+
 /datum/dna_block/feature/accessory/tajaran_head_markings
 	feature_key = FEATURE_TAJARAN_HEAD_MARKINGS
+
+/datum/dna_block/feature/accessory/tajaran_head_markings/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_HEAD_MARKINGS]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/tajaran_head_markings/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_HEAD_MARKINGS]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
 
 /datum/dna_block/feature/accessory/tajaran_chest_markings
 	feature_key = FEATURE_TAJARAN_CHEST_MARKINGS
 
-/datum/dna_block/feature/accessory/tajaran_limb_markings
-	feature_key = FEATURE_TAJARAN_LIMB_MARKINGS
+/datum/dna_block/feature/accessory/tajaran_chest_markings/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_CHEST_MARKINGS]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
 
-/datum/dna_block/feature/accessory/tajaran_tail
-	feature_key = FEATURE_TAJARAN_TAIL
+/datum/dna_block/feature/accessory/tajaran_chest_markings/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_CHEST_MARKINGS]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
 
 /datum/dna_block/feature/accessory/tajaran_tail_markings
 	feature_key = FEATURE_TAJARAN_TAIL_MARKINGS
 
+/datum/dna_block/feature/accessory/tajaran_tail_markings/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_TAIL_MARKINGS]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/tajaran_tail_markings/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_TAIL_MARKINGS]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
+
 /datum/dna_block/feature/accessory/tajaran_facial_hair
 	feature_key = FEATURE_TAJARAN_FACIAL_HAIR
 
-/datum/dna_block/feature/accessory/tajaran_body_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_BODY_MARKINGS_COLOR
+/datum/dna_block/feature/accessory/tajaran_facial_hair/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_FACIAL_HAIR]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
 
-/datum/dna_block/feature/accessory/tajaran_head_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_HEAD_MARKINGS_COLOR
-
-/datum/dna_block/feature/accessory/tajaran_tail_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_TAIL_MARKINGS_COLOR
-
-/datum/dna_block/feature/accessory/tajaran_facial_hair_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_FACIAL_HAIR_COLOR
+/datum/dna_block/feature/accessory/tajaran_facial_hair/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_TAJARAN_FACIAL_HAIR]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
 
 // MARK: Skrell
 /datum/dna_block/feature/accessory/skrell_head_tentacle
 	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
+
+/datum/dna_block/feature/accessory/skrell_head_tentacle/create_unique_block(mob/living/carbon/human/target)
+	var/list/features = SSaccessories.feature_list[FEATURE_SKRELL_HEAD_TENTACLE]
+	return construct_block(features.Find(target.dna.features[feature_key]), length(features))
+
+/datum/dna_block/feature/accessory/skrell_head_tentacle/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	var/list/features = SSaccessories.feature_list[FEATURE_SKRELL_HEAD_TENTACLE]
+	target.dna.features[feature_key] = features[deconstruct_block(get_block(dna_hash), length(features))]
+
 // BANDASTATION ADD END - Species

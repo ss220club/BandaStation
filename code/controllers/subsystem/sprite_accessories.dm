@@ -44,26 +44,26 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	//All features, indexed by feature key, then name of the sprite accessory to the datum iteslf
 	var/list/list/feature_list
 
-	/// BANDASTATION ADDITION START - Species
-	// Vulpkanin
-	var/list/vulpkanin_head_markings_list
-	var/list/vulpkanin_chest_markings_list
-	var/list/vulpkanin_limb_markings_list
-	var/list/tails_list_vulpkanin
-	var/list/vulpkanin_tail_markings_list
-	var/list/vulpkanin_facial_hair_list
+	// /// BANDASTATION ADDITION START - Species
+	// // Vulpkanin
+	// var/list/vulpkanin_head_markings_list
+	// var/list/vulpkanin_chest_markings_list
+	// var/list/vulpkanin_limb_markings_list
+	// var/list/tails_list_vulpkanin
+	// var/list/vulpkanin_tail_markings_list
+	// var/list/vulpkanin_facial_hair_list
 
-	//  Tajaran
-	var/list/tajaran_head_markings_list
-	var/list/tajaran_chest_markings_list
-	var/list/tajaran_limb_markings_list
-	var/list/tails_list_tajaran
-	var/list/tajaran_tail_markings_list
-	var/list/tajaran_facial_hair_list
+	// //  Tajaran
+	// var/list/tajaran_head_markings_list
+	// var/list/tajaran_chest_markings_list
+	// var/list/tajaran_limb_markings_list
+	// var/list/tails_list_tajaran
+	// var/list/tajaran_tail_markings_list
+	// var/list/tajaran_facial_hair_list
 
-	// Skrell
-	var/list/skrell_head_tentacles_list
-	/// BANDASTATION ADDITION END - Species
+	// // Skrell
+	// var/list/skrell_head_tentacles_list
+	// /// BANDASTATION ADDITION END - Species
 
 /datum/controller/subsystem/accessories/PreInit() // this stuff NEEDS to be set up before GLOB for preferences and stuff to work so this must go here. sorry
 	setup_lists()
