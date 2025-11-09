@@ -522,13 +522,13 @@
 /area/centcom/syndicate_base)
 "bnK" = (
 /obj/structure/table/wood,
-/obj/item/tank/jetpack/oxygen/harness{
+/obj/item/tank/jetpack/harness{
 	pixel_y = 6
 	},
-/obj/item/tank/jetpack/oxygen/harness{
+/obj/item/tank/jetpack/harness{
 	pixel_y = 3
 	},
-/obj/item/tank/jetpack/oxygen/harness,
+/obj/item/tank/jetpack/harness,
 /obj/effect/turf_decal/tile/yellow/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/cargo)
@@ -7742,13 +7742,13 @@
 /area/centcom/syndicate_base/control)
 "sdJ" = (
 /obj/structure/table/reinforced/plastitaniumglass,
-/obj/item/tank/jetpack/oxygen/harness{
+/obj/item/tank/jetpack/harness{
 	pixel_y = 6
 	},
-/obj/item/tank/jetpack/oxygen/harness{
+/obj/item/tank/jetpack/harness{
 	pixel_y = 3
 	},
-/obj/item/tank/jetpack/oxygen/harness,
+/obj/item/tank/jetpack/harness,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "sfM" = (
