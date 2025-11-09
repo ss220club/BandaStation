@@ -86,12 +86,12 @@
 	timeout = 3 MINUTES
 
 /datum/mood_event/antinarcotic_medium
-	description = "I wish I was numb again!"
+	description = "Я хочу снова онеметь!"
 	mood_change = -4
 	timeout = 3 MINUTES
 
 /datum/mood_event/antinarcotic_heavy
-	description = "NO!! Make the cotton come back!"
+	description = "НЕТ!! Верните мой хлопок!"
 	mood_change = -9
 	timeout = 3 MINUTES
 
@@ -136,6 +136,6 @@
 	timeout = 8 MINUTES
 
 /datum/mood_event/sadness_inverse
-	description = "I'M SO SAD..."
+	description = "МНЕ ТАК ГРУСТНО..."
 	mood_change = -150
 	special_screen_obj = "mood_happiness_bad"
