@@ -54,7 +54,7 @@
 	color_source = ORGAN_COLOR_INHERIT
 
 /datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()
-	return SSaccessories.feature_list[FEATURE_SKRELL_HEAD_TENTACLE] //SSaccessories.skrell_head_tentacles_list
+	return SSaccessories.feature_list[FEATURE_SKRELL_HEAD_TENTACLE]
 
 /datum/bodypart_overlay/mutant/head_tentacle/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
 	var/mob/living/carbon/human/human = bodypart_owner.owner

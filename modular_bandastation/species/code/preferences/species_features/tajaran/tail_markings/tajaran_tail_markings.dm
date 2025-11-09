@@ -4,7 +4,7 @@
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
 	relevant_organ = /obj/item/organ/tail/tajaran
 
-/datum/preference/choiced/species_feature/tajaran_head_markings/get_accessory_list()
+/datum/preference/choiced/species_feature/tajaran_tail_markings/get_accessory_list()
 	return SSaccessories.feature_list[FEATURE_TAJARAN_TAIL_MARKINGS]
 
 /datum/preference/choiced/species_feature/tajaran_tail_markings/apply_to_human(mob/living/carbon/human/target, value)
