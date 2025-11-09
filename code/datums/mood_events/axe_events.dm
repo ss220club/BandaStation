@@ -1,20 +1,20 @@
 
 /datum/mood_event/axe_gone
-	description = "What happened to the axe... Where is it? It can't be..."
+	description = "Что случилось с топором... Где он? Этого не может быть..."
 	mood_change = -15
 
 /datum/mood_event/axe_neutral
-	description = "I'm sure the axe is okay."
+	description = "Я уверен, что с топором всё в порядке."
 	mood_change = 1
 
 /datum/mood_event/axe_cabinet
-	description = "The axe is where it belongs."
+	description = "Топор на своём месте."
 	mood_change = 5
 
 /datum/mood_event/axe_missing
-	description = "The axe, there's something wrong..."
+	description = "С топором что-то не так..."
 	mood_change = -5
 
 /datum/mood_event/axe_held
-	description = "I'm not worthy of you, axe. I need to put you back."
+	description = "Я недостоин тебя, топор. Мне нужно вернуть тебя обратно."
 	mood_change = -10

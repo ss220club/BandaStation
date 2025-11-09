@@ -37,7 +37,7 @@
 	event_flags = MOOD_EVENT_WHIMSY // if whimsical, no penalty
 
 /datum/mood_event/inked
-	description = "I've been splashed with squid ink. Tastes like salt."
+	description = "Меня обрызгали чернилами кальмара. На вкус как соль"
 	mood_change = -3
 	timeout = 3 MINUTES
 
@@ -92,7 +92,7 @@
 		description = "Ай! Такое ощущение, что я уснул на <i>[limb.plaintext_zone]</i>."
 
 /datum/mood_event/tased
-	description = "There's no \"z\" in \"taser\". It's in the zap."
+	description = "В слове 'тазер' нет буквы 'д'. Она в разряде.."
 	mood_change = -3
 	timeout = 2 MINUTES
 
@@ -200,13 +200,13 @@
 	event_flags = MOOD_EVENT_PAIN
 
 /datum/mood_event/startled
-	description = "Hearing that word made me think about something scary."
+	description = "Это слово заставило меня подумать о чем-то страшном"
 	mood_change = -1
 	timeout = 1 MINUTES
 	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/phobia
-	description = "I saw something very frightening!"
+	description = "Я увидел нечто очень пугающее!"
 	mood_change = -4
 	timeout = 4 MINUTES
 	event_flags = MOOD_EVENT_FEAR
@@ -236,7 +236,7 @@
 	description = "ОНИИИ ТРЕЕЕЕБУЮТ [unhinged]!!"
 
 /datum/mood_event/tower_of_babel
-	description = "My ability to communicate is an incoherent babel..."
+	description = "Моя способность общаться превратилась в невнятный вавилон..."
 	mood_change = -1
 	timeout = 15 SECONDS
 
@@ -435,7 +435,7 @@
 	event_flags = MOOD_EVENT_WHIMSY | MOOD_EVENT_GAMING
 
 /datum/mood_event/russian_roulette_lose_cheater
-	description = "I gambled and lost! Good thing I wasn't aiming for my head..."
+	description = "Я рискнул и проиграл! Хорошо, что я не целился в голову..."
 	mood_change = -10
 	timeout = 10 MINUTES
 
@@ -447,7 +447,7 @@
 /datum/mood_event/russian_roulette_lose/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/gambler))
 		mood_change *= 0.5
-		description = "I gambled my life and lost! Truth is, the game was rigged from the start..."
+		description = "Я ПРОСРАЛ ЖИЗНЬ В КАЗИК! Ты, наверно, думаешь, что тебе выпало 18 карат невезения? Да нет, просто игра попалась нечестная."
 		return
 
 /datum/mood_event/bad_touch_bear_hug
@@ -486,7 +486,7 @@
 		mood_change *= 2
 
 /datum/mood_event/amulet_insanity
-	description = "Я вИжУ сВеТ, и ЕгО нУжНо ПоТуШиТь"
+	description = "Я вИжУ сВеТ, и ЕгО нУжНо ПоТуШиТь!"
 	mood_change = -6
 	timeout = 5 MINUTES
 	event_flags = MOOD_EVENT_FEAR
@@ -520,7 +520,7 @@
 
 //Gained when you're hit over the head with wrapping paper or cardboard roll
 /datum/mood_event/bapped
-	description = "Ow.. my head, I feel a bit foolish now!"
+	description = "Ай.. моя голова, теперь я чувствую себя немного глупенько!"
 	mood_change = -1
 	timeout = 3 MINUTES
 
@@ -530,12 +530,12 @@
 		mood_change = -2
 
 /datum/mood_event/encountered_evil
-	description = "I didn't want to believe it, but there are people out there that are genuinely evil."
+	description = "Я не хотел верить, но есть люди, которые действительно злы."
 	mood_change = -1
 	timeout = 1 MINUTES
 
 /datum/mood_event/smoke_in_face
-	description = "Cigarette smoke is disgusting."
+	description = "Сигаретный дым отвратителен."
 	mood_change = -3
 	timeout = 30 SECONDS
 
@@ -548,17 +548,17 @@
 		mood_change = 0
 
 /datum/mood_event/see_death
-	description = "I just saw someone die. How horrible..."
+	description = "Я только что увидел, как кто-то умер. Как ужасно..."
 	mood_change = -8
 	timeout = 5 MINUTES
 	/// Message variant for callous people
-	var/dont_care_message = "Oh, %DEAD_MOB% died. Shame, I guess."
+	var/dont_care_message = "О, %DEAD_MOB% умер. Жаль, наверное."
 	/// Message variant for people who care about animals
-	var/pet_message = "%DEAD_MOB% just died!!"
+	var/pet_message = "%DEAD_MOB% умер!!"
 	/// Message variant for desensitized people (security, medical, cult with halo, etc)
-	var/desensitized_message = "I saw %DEAD_MOB% die."
+	var/desensitized_message = "Я видел как умер %DEAD_MOB%."
 	/// Standard message variant
-	var/normal_message = "I just saw %DEAD_MOB% die. How horrible..."
+	var/normal_message = "Я просто увидел как умер %DEAD_MOB%. Ну и ужас..."
 	/// Naive mobs are immune to the effect
 	var/naive_immune = TRUE
 
@@ -566,7 +566,7 @@
 	if(isnull(dead_mob))
 		return
 	if(HAS_TRAIT(owner, TRAIT_NAIVE) && naive_immune)
-		description = "Have a good nap, [dead_mob.name]."
+		description = "Спокойного сна, [dead_mob.name]."
 		mood_change = 0
 		timeout *= 0.2
 		return
@@ -576,7 +576,7 @@
 	if(HAS_TRAIT(owner, TRAIT_CULT_HALO) && !HAS_TRAIT(dead_mob, TRAIT_CULT_HALO))
 		// When cultists get halos, they stop caring about death
 		mood_change *= -0.5
-		description = "More souls for the Geometer!"
+		description = "Больше душ для Геометра!"
 		return
 
 	var/ispet = istype(dead_mob, /mob/living/basic/pet) || ismonkey(dead_mob)
@@ -630,27 +630,27 @@
 	return "someone"
 
 /datum/mood_event/see_death/gibbed
-	description = "Someone just exploded in front of me!!"
+	description = "Кто-то только что взорвался передо мной!!"
 	mood_change = -12
 	timeout = 10 MINUTES
-	dont_care_message = "Oh, %DEAD_MOB% exploded. Now I have to get the mop."
-	pet_message = "%DEAD_MOB% just exploded!!"
-	desensitized_message = "I saw %DEAD_MOB% explode."
-	normal_message = "%DEAD_MOB% just exploded in front of me!!"
+	dont_care_message = "О, %DEAD_MOB% взорвался. Теперь нужно это всё чистить."
+	pet_message = "%DEAD_MOB% рванул!!"
+	desensitized_message = "Я увидел как %DEAD_MOB% взорвался."
+	normal_message = "%DEAD_MOB% взорвался буквально рядом со мной!!"
 	naive_immune = FALSE
 
 /datum/mood_event/see_death/dusted
-	description = "Someone was just vaporized in front of me!! I don't feel so good..."
+	description = "Кого-то только что испарили передо мной!! Мне нехорошо.."
 	mood_change = -12
 	timeout = 10 MINUTES
-	dont_care_message = "Oh, %DEAD_MOB% was vaporized. Now I have to get the dustpan."
-	pet_message = "%DEAD_MOB% just vaporized!!"
-	desensitized_message = "I saw %DEAD_MOB% get vaporized."
-	normal_message = "%DEAD_MOB% was just vaporized in front of me!!"
+	dont_care_message = "О, %DEAD_MOB% был испарен. Теперь нужно взять совок."
+	pet_message = "%DEAD_MOB% стал прахом!!"
+	desensitized_message = "Я увидел как %DEAD_MOB% стал пылью."
+	normal_message = "%DEAD_MOB% испарился прямо перед моим лицом!!"
 	naive_immune = FALSE
 
 /datum/mood_event/slots/loss
-	description = "Aww dang it!"
+	description = "Ох чёрт!"
 	mood_change = -2
 	timeout = 5 MINUTES
 	event_flags = MOOD_EVENT_GAMING
@@ -658,70 +658,70 @@
 /datum/mood_event/slots/loss/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/gambler))
 		mood_change = 0
-		description = "Aww dang it."
+		description = "Мдееее..."
 	if(HAS_PERSONALITY(owner, /datum/personality/industrious) || HAS_PERSONALITY(owner, /datum/personality/slacking/diligent))
 		mood_change *= 1.5
 
 /datum/mood_event/lost_control_of_life
-	description = "I've lost control of my life."
+	description = "Я потерял контроль над своей жизнью."
 	mood_change = -5
 	timeout = 5 MINUTES
 
 /datum/mood_event/empathetic_sad
-	description = "Seeing sad people makes me sad."
+	description = "Видеть грустных людей грустно."
 	mood_change = -2
 	timeout = 3 MINUTES
 
 /datum/mood_event/misanthropic_sad
-	description = "Seeing happy people makes me uneasy."
+	description = "Видеть счастливых людей заставляет меня чувствовать себя неловко."
 	mood_change = -2
 	timeout = 3 MINUTES
 
 /datum/mood_event/paranoid/one_on_one
-	description = "I'm alone with someone - what if they want to kill me?"
+	description = "Я наедине с кем-то - что, если они хотят меня убить?"
 	mood_change = -3
 	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/paranoid/large_group
-	description = "There are so many people around - any one of them could be out to get me!"
+	description = "Вокруг так много людей - любой из них может быть против меня!"
 	mood_change = -3
 	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/nt_disillusioned
-	description = "I hate the company, and everything it stands for."
+	description = "Я ненавижу НТ и всё, что она представляет."
 	mood_change = -2
 
 /datum/mood_event/disillusioned_revs_lost
-	description = "The revolution was defeated... greaaaat."
+	description = "Революция была разгромлена... замечательно."
 	mood_change = -2
 	timeout = 10 MINUTES
 
 /datum/mood_event/loyalist_revs_win
-	description = "The revolution was a success... This will hurt quarterly profits."
+	description = "Революция победила... Это ударит по квартальной прибыли."
 	mood_change = -2
 	timeout = 10 MINUTES
 
 /datum/mood_event/slacking_off_diligent
-	description = "I should get back to work."
+	description = "Я должен вернутся к работе."
 	mood_change = -1
 
 /datum/mood_event/unimaginative_patronage
-	description = "That felt like a waste of money."
+	description = "У меня такая мысль, что это пустая трата денег."
 	mood_change = -2
 	timeout = 5 MINUTES
 
 /datum/mood_event/unimaginative_framing
-	description = "I could've hung something more useful there."
+	description = "Я мог бы повесить там что-то более полезное."
 	mood_change = -2
 	timeout = 5 MINUTES
 
 /datum/mood_event/unimaginative_sculpting
-	description = "That felt like a waste of materials."
+	description = "Это было похоже на пустую трату материалов."
 	mood_change = -2
 	timeout = 5 MINUTES
 
 /datum/mood_event/splattered_with_blood
-	description = "Eugh, I just got coated in blood!"
+	description = "Фу, меня только что залили кровью!"
 	mood_change = -4
 	timeout = 4 MINUTES
 
@@ -734,9 +734,9 @@
 /datum/mood_event/splattered_with_blood/add_effects(...)
 	if(HAS_TRAIT(owner, TRAIT_CULT_HALO))
 		mood_change = 2
-		description = "Blood, blood! The Geometer will be pleased."
+		description = "КРОВЬ, КРОВЬ! Геометр будет доволен."
 		return
 	if(HAS_TRAIT(owner, TRAIT_MORBID) || HAS_TRAIT(owner, TRAIT_EVIL))
 		mood_change = 0
-		description = "I just got coated in blood. Fascinating!"
+		description = "Меня только что залили кровью. Занимательно!"
 		return
