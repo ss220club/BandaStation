@@ -7,7 +7,7 @@
 	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/vulpkanin
 
 	wag_flags = WAG_ABLE
-	dna_block = /datum/dna_block/feature/vulpkanin_tail
+	dna_block = /datum/dna_block/feature/accessory/vulpkanin_tail
 	var/datum/bodypart_overlay/mutant/vulpkanin_tail_markings/tail_markings_overlay
 
 /obj/item/organ/tail/vulpkanin/on_mob_insert(mob/living/carbon/owner)

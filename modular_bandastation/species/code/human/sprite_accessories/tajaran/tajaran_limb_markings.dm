@@ -30,4 +30,4 @@
 	)
 
 /datum/bodypart_overlay/simple/body_marking/tajaran_limb/get_accessory(name)
-	return SSaccessories.tajaran_limb_markings_list[name]
+	return SSaccessories.feature_list[FEATURE_TAJARAN_LIMB_MARKINGS][name]

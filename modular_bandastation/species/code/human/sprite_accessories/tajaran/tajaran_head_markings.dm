@@ -55,4 +55,4 @@
 	)
 
 /datum/bodypart_overlay/simple/body_marking/tajaran_head/get_accessory(name)
-	return SSaccessories.tajaran_head_markings_list[name]
+	return SSaccessories.feature_list[FEATURE_TAJARAN_HEAD_MARKINGS][name]

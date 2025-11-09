@@ -14,5 +14,5 @@
 /datum/preference/color/vulpkanin_tail_markings_color/is_accessible(datum/preferences/preferences)
 	if (!..(preferences))
 		return FALSE
-	var/pref = preferences.read_preference(/datum/preference/choiced/tail_vulpkanin)
-	return (pref == "Default" || pref == "Bushy" || pref == "Straight Bushy") && preferences.read_preference(/datum/preference/choiced/vulpkanin_tail_markings) != SPRITE_ACCESSORY_NONE
+	var/pref = preferences.read_preference(/datum/preference/choiced/species_feature/tail_vulpkanin)
+	return (pref == "Default" || pref == "Bushy" || pref == "Straight Bushy") && preferences.read_preference(/datum/preference/choiced/species_feature/vulpkanin_tail_markings) != SPRITE_ACCESSORY_NONE

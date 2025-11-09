@@ -43,4 +43,4 @@
 	)
 
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_head/get_accessory(name)
-	return SSaccessories.vulpkanin_head_markings_list[name]
+	return SSaccessories.feature_list[FEATURE_VULPKANIN_HEAD_MARKINGS]

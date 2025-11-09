@@ -35,4 +35,4 @@
 	)
 
 /datum/bodypart_overlay/simple/body_marking/tajaran_chest/get_accessory(name)
-	return SSaccessories.tajaran_chest_markings_list[name]
+	return SSaccessories.feature_list[FEATURE_TAJARAN_CHEST_MARKINGS][name]

@@ -63,4 +63,4 @@
 	)
 
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_facial_hair/get_accessory(name)
-	return SSaccessories.vulpkanin_facial_hair_list[name]
+	return SSaccessories.feature_list[FEATURE_VULPKANIN_FACIAL_HAIR]

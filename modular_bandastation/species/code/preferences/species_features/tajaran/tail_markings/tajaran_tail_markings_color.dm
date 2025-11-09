@@ -13,5 +13,5 @@
 /datum/preference/color/tajaran_tail_markings_color/is_accessible(datum/preferences/preferences)
 	if(!..(preferences))
 		return FALSE
-	var/pref = preferences.read_preference(/datum/preference/choiced/tail_tajaran)
-	return (pref == "Long tail" || pref == "Huge tail") && preferences.read_preference(/datum/preference/choiced/tajaran_tail_markings) != SPRITE_ACCESSORY_NONE
+	var/pref = preferences.read_preference(/datum/preference/choiced/species_feature/tail_tajaran)
+	return (pref == "Long tail" || pref == "Huge tail") && preferences.read_preference(/datum/preference/choiced/species_feature/tajaran_tail_markings) != SPRITE_ACCESSORY_NONE

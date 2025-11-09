@@ -38,4 +38,4 @@
 	)
 
 /datum/bodypart_overlay/simple/body_marking/vulpkanin_chest/get_accessory(name)
-	return SSaccessories.vulpkanin_chest_markings_list[name]
+	return SSaccessories.feature_list[FEATURE_VULPKANIN_CHEST_MARKINGS][name]
