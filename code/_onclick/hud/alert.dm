@@ -272,10 +272,10 @@
 	overlay_state = "bronchoconstricted"
 
 /atom/movable/screen/alert/gross
-    name = "Мерзко"
-    desc = "Это было довольно противно..."
-    use_user_hud_icon = TRUE
-    overlay_state = "gross"
+	name = "Мерзко"
+	desc = "Это было довольно противно..."
+	use_user_hud_icon = TRUE
+	overlay_state = "gross"
 
 /atom/movable/screen/alert/verygross
 	name = "Very grossed out."
