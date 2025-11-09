@@ -1914,7 +1914,7 @@
 /area/station/hallway/secondary/exit/departure_lounge)
 "ayR" = (
 /obj/effect/turf_decal/tile/yellow/fourcorners,
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
@@ -27710,7 +27710,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "gLS" = (
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
@@ -37466,7 +37466,7 @@
 /area/station/engineering/supermatter/room)
 "jel" = (
 /obj/structure/cable,
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 1
 	},
 /obj/machinery/light/directional/south,
@@ -78450,7 +78450,7 @@
 /area/station/command/heads_quarters/hos)
 "tlk" = (
 /obj/machinery/airalarm/directional/west,
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -81003,7 +81003,7 @@
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "tPy" = (
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/yellow{
