@@ -54,5 +54,5 @@
 		/obj/item/bodypart/head,
 	)
 
-/datum/bodypart_overlay/simple/body_marking/tajaran_head/get_accessory(name)
-	return SSaccessories.feature_list[FEATURE_TAJARAN_HEAD_MARKINGS][name]
+// /datum/bodypart_overlay/simple/body_marking/tajaran_head/get_accessory(name)
+// 	return SSaccessories.feature_list[FEATURE_TAJARAN_HEAD_MARKINGS][name]
