@@ -44,7 +44,7 @@
 	mood_change = max(mood_change, calculate_mood_change(quality))
 	// if mood_change is the same, we don't need to update the description
 	if(old_mood != mood_change)
-		description = "That food was [GLOB.food_quality_description[quality]]."
+		description = "Эта была [GLOB.food_quality_description[quality]] пища."
 	return ..()
 
 /datum/mood_event/food/proc/calculate_mood_change(base_quality)
