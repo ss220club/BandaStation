@@ -66,16 +66,6 @@
 	mark_type = /datum/status_effect/eldritch/rust
 	eldritch_passive = /datum/status_effect/heretic_passive/rust
 
-/datum/heretic_knowledge/rust_fist
-	name = "Grasp of Rust"
-	desc = "Ваша Хватка Мансуса наносит 500 единиц урона неживой материи и ржавеет любая поверхность, которой она коснется. \
-		Уже заржавевшие поверхности разрушаются. Поверхности и структуры можно заставить ржаветь с помощью ПКМ. \
-		Позволяет заставить ржаветь обычные железные стены и пол."
-	gain_text = "На потолке Мансуса ржавчина растет, как мох на камне."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_rust"
-
 /datum/heretic_knowledge/limited_amount/starting/base_rust/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
 	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK_SECONDARY, PROC_REF(on_secondary_mansus_grasp))

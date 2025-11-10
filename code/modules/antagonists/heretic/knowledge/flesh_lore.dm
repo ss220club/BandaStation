@@ -75,28 +75,6 @@
 	to_chat(user, span_hierophant("Пройдя Путь плоти, вы получаете еще одну цель."))
 	our_heretic.owner.announce_objectives()
 
-/datum/heretic_knowledge/limited_amount/flesh_grasp
-	name = "Grasp of Flesh"
-	desc = "Ваша Хватка Мансуса получает способность создавать гуля из трупа с душой. \
-		Гули имеют всего 25 здоровья и выглядят как хаски в глазах язычников, но могут эффективно использовать Кровавые клинки. \
-		Используя этот способ, можно иметь только одного."
-	gain_text = "Мои новообретенные желания заставляли меня достигать все больших и больших высот."
-
-	limit = 1
-	cost = 1
-
-
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_flesh"
-
-/datum/heretic_knowledge/limited_amount/flesh_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/limited_amount/flesh_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
-
-/datum/heretic_knowledge/limited_amount/flesh_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
 /datum/heretic_knowledge/limited_amount/starting/base_flesh/on_mansus_grasp(mob/living/source, mob/living/target)
 	. = ..()
 
