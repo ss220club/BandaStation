@@ -251,17 +251,19 @@
 	return ""
 
 /// Копирование характеристик из шаблона
-/mob/living/basic/pig/named/proc/apply_stats_from(typepath)
-	var/mob/living/basic/pig/template = new typepath(src)
-	speed = template.speed
-	health = template.health
-	maxHealth = template.maxHealth
-	butcher_results = template.butcher_results
-	ai_controller = template.ai_controller
-	melee_damage_lower = template.melee_damage_lower
-	melee_damage_upper = template.melee_damage_upper
-	obj_damage = template.obj_damage
-	qdel(template)
+/mob/living/basic/pig/named/proc/apply_stats_from(mob/living/basic/pig/new_pig)
+	if(!ispath(new_pig))
+		CRASH("Failed to apply stats to [src]: [new_pig] is not a path!")
+	speed = new_pig::speed
+	health = new_pig::health
+	maxHealth = new_pig::maxHealth
+	butcher_results = new_pig::butcher_results
+	if(ispath(new_pig::ai_controller))
+		var/datum/ai_controller/pig_controller_path = new_pig::ai_controller
+		ai_controller = new pig_controller_path(src)
+	melee_damage_lower = new_pig::melee_damage_lower
+	melee_damage_upper = new_pig::melee_damage_upper
+	obj_damage = new_pig::obj_damage
 
 #undef AGE_STAGE_1 // baby
 #undef AGE_STAGE_2 // teen
