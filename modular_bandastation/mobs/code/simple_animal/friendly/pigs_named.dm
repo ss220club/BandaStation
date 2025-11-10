@@ -117,9 +117,6 @@
 
 /mob/living/basic/pig/named/Initialize(mapload)
 	. = ..()
-	// Ensure pig exists
-	REGISTER_REQUIRED_MAP_ITEM(1, 1)
-
 	//parent call must happen first to ensure pig
 	//is not in nullspace when child puppies spawn
 	Read_Memory()
