@@ -1,9 +1,4 @@
 /mob/living/basic/pet/dog
-	maxHealth = 50
-	health = 50
-	melee_damage_type = STAMINA
-	melee_damage_lower = 6
-	melee_damage_upper = 10
 	attack_verb_continuous = "вгрызается"
 	attack_verb_simple = "кусает"
 	death_sound = 'modular_bandastation/mobs/sound/dog_yelp.ogg'
@@ -38,8 +33,6 @@
 	melee_damage_upper = 100
 
 /mob/living/basic/pet/dog/corgi/puppy
-	maxHealth = 20
-	health = 20
 	butcher_results = list(/obj/item/food/meat/slab/corgi = 1)
 
 /mob/living/basic/pet/dog/corgi/puppy/void

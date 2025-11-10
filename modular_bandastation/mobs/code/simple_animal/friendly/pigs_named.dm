@@ -117,9 +117,6 @@
 
 /mob/living/basic/pig/named/Initialize(mapload)
 	. = ..()
-	// Ensure pig exists
-	REGISTER_REQUIRED_MAP_ITEM(1, 1)
-
 	//parent call must happen first to ensure pig
 	//is not in nullspace when child puppies spawn
 	Read_Memory()
@@ -254,17 +251,21 @@
 	return ""
 
 /// Копирование характеристик из шаблона
-/mob/living/basic/pig/named/proc/apply_stats_from(typepath)
-	var/mob/living/basic/pig/template = new typepath(src)
-	speed = template.speed
-	health = template.health
-	maxHealth = template.maxHealth
-	butcher_results = template.butcher_results
-	ai_controller = template.ai_controller
-	melee_damage_lower = template.melee_damage_lower
-	melee_damage_upper = template.melee_damage_upper
-	obj_damage = template.obj_damage
-	qdel(template)
+/mob/living/basic/pig/named/proc/apply_stats_from(mob/living/basic/pig/new_pig_path)
+	if(!ispath(new_pig_path))
+		CRASH("Failed to apply stats to [src]: [new_pig_path] is not a path!")
+	var/mob/living/basic/pig/alive_piggy = new new_pig_path(get_turf(loc)) // Need to create to copy lists
+	speed = alive_piggy.speed
+	maxHealth = alive_piggy.maxHealth
+	health = alive_piggy.health
+	butcher_results = alive_piggy.butcher_results
+	if(alive_piggy.ai_controller)
+		var/datum/ai_controller/pig_controller_path = alive_piggy.ai_controller.type
+		ai_controller = new pig_controller_path(src)
+	melee_damage_lower = alive_piggy.melee_damage_lower
+	melee_damage_upper = alive_piggy.melee_damage_upper
+	obj_damage = alive_piggy.obj_damage
+	qdel(alive_piggy)
 
 #undef AGE_STAGE_1 // baby
 #undef AGE_STAGE_2 // teen
