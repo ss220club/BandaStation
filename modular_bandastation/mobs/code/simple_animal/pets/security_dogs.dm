@@ -11,6 +11,7 @@
 	held_state = "bullterrier"
 	health = 100
 	maxHealth = 100
+	melee_damage_type = STAMINA
 	melee_damage_lower = 10
 	melee_damage_upper = 25
 	butcher_results = list(/obj/item/food/meat/slab/corgi/dog/security = 3)
