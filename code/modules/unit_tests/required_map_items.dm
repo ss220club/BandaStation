@@ -23,6 +23,10 @@
 	expected_types += /obj/machinery/drone_dispenser
 	expected_types += /obj/item/piggy_bank/vault
 
+	// BANDASTATION EDIT START
+	expected_types += subtypesof(/mob/living/basic/pig/named)
+	// BANDASTATION EDIT END
+
 /datum/unit_test/required_map_items/Run()
 	setup_expected_types()
 
