@@ -254,7 +254,7 @@
 /mob/living/basic/pig/named/proc/apply_stats_from(mob/living/basic/pig/new_pig_path)
 	if(!ispath(new_pig_path))
 		CRASH("Failed to apply stats to [src]: [new_pig_path] is not a path!")
-	var/mob/living/basic/pig/alive_piggy = new new_pig_path() // Need to create to copy lists
+	var/mob/living/basic/pig/alive_piggy = new new_pig_path(get_turf(loc)) // Need to create to copy lists
 	speed = alive_piggy.speed
 	maxHealth = alive_piggy.maxHealth
 	health = alive_piggy.health
