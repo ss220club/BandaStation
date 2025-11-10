@@ -6,7 +6,7 @@
 	if(!(lube_flags & SLIDE_ICE))
 		log_combat(src, (slipped_on || get_turf(src)), "slipped on the", null, ((lube_flags & SLIDE) ? "(SLIDING)" : null))
 	..()
-	return loc.handle_slip(src, knockdown_amount, slipped_on, lube_flags, paralyze, daze, force_drop, immobilize)  /// BANDASTATION EDIT - Immobilizing slippery
+	return TRUE
 
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
