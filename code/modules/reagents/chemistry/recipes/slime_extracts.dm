@@ -65,10 +65,12 @@
 	required_reagents = list(/datum/reagent/uranium/radium = 1)
 	required_container = /obj/item/slime_extract/green
 
-/datum/chemical_reaction/slime/slimefelinid
-	results = list(/datum/reagent/mutationtoxin/felinid = 1)
-	required_reagents = list(/datum/reagent/consumable/milk = 1)
-	required_container = /obj/item/slime_extract/green
+// BANDASTATION REMOVING: Felinid slime extract
+// /datum/chemical_reaction/slime/slimefelinid
+// 	results = list(/datum/reagent/mutationtoxin/felinid = 1)
+// 	required_reagents = list(/datum/reagent/consumable/milk = 1)
+// 	required_container = /obj/item/slime_extract/green
+// BANDASTATION REMOVING END
 
 /datum/chemical_reaction/slime/slimemoth
 	results = list(/datum/reagent/mutationtoxin/moth = 1)
