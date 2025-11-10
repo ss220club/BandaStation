@@ -35,8 +35,17 @@
 #include "soap/code/soap.dm"
 #include "supply_pods/code/supply_pods.dm"
 #include "vending/code/vending.dm"
-#include "vendors_restock/code/vendors_restock.dm"
+//#include "vendors_restock/code/vendors_restock.dm" Similar stuff was added in upstream
 #include "walls/code/rocks.dm"
 #include "walls/code/walls.dm"
 #include "windoors/code/windoors.dm"
 #include "windows/code/windows.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE
