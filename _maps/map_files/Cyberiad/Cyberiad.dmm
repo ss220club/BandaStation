@@ -595,7 +595,7 @@
 /area/station/cargo/miningoffice)
 "aip" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover/,
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/iron/cafeteria{
 	dir = 8
@@ -1914,7 +1914,7 @@
 /area/station/hallway/secondary/exit/departure_lounge)
 "ayR" = (
 /obj/effect/turf_decal/tile/yellow/fourcorners,
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
@@ -3933,7 +3933,7 @@
 /area/station/engineering/atmos/hfr_room)
 "aXc" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover/,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/iron/white/corner{
 	dir = 8
@@ -12000,7 +12000,7 @@
 /area/station/construction/mining/aux_base)
 "cSx" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
 	},
@@ -12009,7 +12009,7 @@
 	},
 /area/station/hallway/secondary/entry)
 "cSJ" = (
-/obj/machinery/computer/station_alert/station_only,
+/obj/machinery/computer/station_alert,
 /turf/open/floor/iron,
 /area/station/engineering/break_room)
 "cSO" = (
@@ -27710,7 +27710,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "gLS" = (
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
@@ -30845,7 +30845,7 @@
 /area/station/cargo/storage/ghetto)
 "hyw" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/iron/white/corner{
 	dir = 4
@@ -36125,7 +36125,7 @@
 /area/station/service/hydroponics/garden)
 "iNK" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/iron/white/corner{
 	dir = 8
@@ -37466,7 +37466,7 @@
 /area/station/engineering/supermatter/room)
 "jel" = (
 /obj/structure/cable,
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 1
 	},
 /obj/machinery/light/directional/south,
@@ -42101,7 +42101,7 @@
 "knG" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "knI" = (
@@ -47570,7 +47570,7 @@
 /area/station/maintenance/port/greater)
 "lCq" = (
 /obj/structure/closet/radiation,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /obj/effect/turf_decal/tile/purple/anticorner,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/firealarm/directional/south,
@@ -54641,7 +54641,7 @@
 /turf/open/floor/iron,
 /area/station/service/janitor)
 "npG" = (
-/obj/machinery/computer/station_alert/station_only,
+/obj/machinery/computer/station_alert,
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /turf/open/floor/iron,
 /area/station/command/bridge)
@@ -59699,7 +59699,7 @@
 /area/station/medical/morgue)
 "oBx" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -64670,7 +64670,7 @@
 /area/station/service/chapel/monastery)
 "pLe" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "pLp" = (
@@ -74882,7 +74882,7 @@
 /area/station/command/heads_quarters/qm)
 "snW" = (
 /obj/structure/closet/firecloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "soe" = (
@@ -78444,7 +78444,7 @@
 /area/station/command/heads_quarters/hos)
 "tlk" = (
 /obj/machinery/airalarm/directional/west,
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -79682,7 +79682,7 @@
 /area/station/engineering/hallway)
 "tyO" = (
 /obj/structure/closet/crate/coffin,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /obj/effect/turf_decal/tile/neutral/full,
 /turf/open/floor/iron/dark/small,
 /area/station/service/chapel/monastery)
@@ -80894,7 +80894,7 @@
 	c_tag = "Departure Lounge South-East"
 	},
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/closet,
+/obj/effect/landmark/start/hangover,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "tOt" = (
@@ -81003,7 +81003,7 @@
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "tPy" = (
-/obj/machinery/computer/station_alert/station_only{
+/obj/machinery/computer/station_alert{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/yellow{
