@@ -595,6 +595,7 @@
 /area/station/cargo/miningoffice)
 "aip" = (
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/iron/cafeteria{
 	dir = 8
@@ -1913,7 +1914,7 @@
 /area/station/hallway/secondary/exit/departure_lounge)
 "ayR" = (
 /obj/effect/turf_decal/tile/yellow/fourcorners,
-/obj/machinery/computer/station_alert{
+/obj/machinery/computer/station_alert/station_only{
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
@@ -3932,6 +3933,7 @@
 /area/station/engineering/atmos/hfr_room)
 "aXc" = (
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/iron/white/corner{
 	dir = 8
@@ -4217,7 +4219,7 @@
 	network = list("minisat")
 	},
 /obj/machinery/turretid{
-	control_area = "/area/station/ai/satellite/interior";
+	control_area = "/area/station/ai_monitored/turret_protected/aisat_interior";
 	name = "Antechamber Turret Control";
 	pixel_y = -24;
 	req_access = list("minisat")
@@ -8762,7 +8764,7 @@
 /area/station/maintenance/department/security/ghetto/aft)
 "cgk" = (
 /obj/machinery/turretid{
-	control_area = "/area/station/ai/upload/chamber";
+	control_area = "/area/station/ai_monitored/turret_protected/ai_upload";
 	name = "AI Upload Turret Control";
 	pixel_y = -25
 	},
@@ -11998,6 +12000,7 @@
 /area/station/construction/mining/aux_base)
 "cSx" = (
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
 	},
@@ -12005,6 +12008,10 @@
 	dir = 4
 	},
 /area/station/hallway/secondary/entry)
+"cSJ" = (
+/obj/machinery/computer/station_alert/station_only,
+/turf/open/floor/iron,
+/area/station/engineering/break_room)
 "cSO" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
@@ -13548,7 +13555,7 @@
 	dir = 1
 	},
 /obj/machinery/turretid{
-	control_area = "/area/station/ai/satellite/atmos";
+	control_area = "/area/station/ai_monitored/turret_protected/aisat/atmos";
 	name = "Atmospherics Turret Control";
 	pixel_x = -27;
 	req_access = list("minisat")
@@ -27510,7 +27517,7 @@
 	dir = 4
 	},
 /obj/machinery/turretid{
-	control_area = "/area/station/ai/satellite/service";
+	control_area = "/area/station/ai_monitored/turret_protected/aisat/service";
 	name = "Service Bay Turret Control";
 	pixel_x = 27;
 	req_access = list("minisat")
@@ -27703,7 +27710,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "gLS" = (
-/obj/machinery/computer/station_alert{
+/obj/machinery/computer/station_alert/station_only{
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
@@ -29601,7 +29608,8 @@
 /obj/machinery/atmospherics/components/unary/passive_vent/layer2{
 	dir = 8
 	},
-/turf/open/floor/plating/airless)
+/turf/open/floor/plating/airless,
+/area/station/ai/satellite/interior)
 "hjp" = (
 /obj/effect/turf_decal/tile/dark/half,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
@@ -30837,6 +30845,7 @@
 /area/station/cargo/storage/ghetto)
 "hyw" = (
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/iron/white/corner{
 	dir = 4
@@ -36116,6 +36125,7 @@
 /area/station/service/hydroponics/garden)
 "iNK" = (
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/iron/white/corner{
 	dir = 8
@@ -37456,7 +37466,7 @@
 /area/station/engineering/supermatter/room)
 "jel" = (
 /obj/structure/cable,
-/obj/machinery/computer/station_alert{
+/obj/machinery/computer/station_alert/station_only{
 	dir = 1
 	},
 /obj/machinery/light/directional/south,
@@ -42091,6 +42101,7 @@
 "knG" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "knI" = (
@@ -47559,6 +47570,7 @@
 /area/station/maintenance/port/greater)
 "lCq" = (
 /obj/structure/closet/radiation,
+/obj/effect/landmark/start/hangover/closet,
 /obj/effect/turf_decal/tile/purple/anticorner,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/firealarm/directional/south,
@@ -54629,6 +54641,7 @@
 /turf/open/floor/iron,
 /area/station/service/janitor)
 "npG" = (
+/obj/machinery/computer/station_alert/station_only,
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /turf/open/floor/iron,
 /area/station/command/bridge)
@@ -59686,6 +59699,7 @@
 /area/station/medical/morgue)
 "oBx" = (
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -64656,6 +64670,7 @@
 /area/station/service/chapel/monastery)
 "pLe" = (
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "pLp" = (
@@ -65593,7 +65608,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable/layer3,
 /obj/machinery/turretid{
-	control_area = "/area/station/ai/satellite/hallway";
+	control_area = "/area/station/ai_monitored/turret_protected/aisat/hallway";
 	name = "Chamber Hallway Turret Control";
 	pixel_x = 32;
 	pixel_y = -24;
@@ -74867,6 +74882,7 @@
 /area/station/command/heads_quarters/qm)
 "snW" = (
 /obj/structure/closet/firecloset,
+/obj/effect/landmark/start/hangover/closet,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "soe" = (
@@ -78428,7 +78444,7 @@
 /area/station/command/heads_quarters/hos)
 "tlk" = (
 /obj/machinery/airalarm/directional/west,
-/obj/machinery/computer/station_alert{
+/obj/machinery/computer/station_alert/station_only{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -79664,6 +79680,12 @@
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/hidden/layer5,
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway)
+"tyO" = (
+/obj/structure/closet/crate/coffin,
+/obj/effect/landmark/start/hangover/closet,
+/obj/effect/turf_decal/tile/neutral/full,
+/turf/open/floor/iron/dark/small,
+/area/station/service/chapel/monastery)
 "tyW" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 8
@@ -80872,6 +80894,7 @@
 	c_tag = "Departure Lounge South-East"
 	},
 /obj/structure/closet/emcloset,
+/obj/effect/landmark/start/hangover/closet,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "tOt" = (
@@ -80980,7 +81003,7 @@
 /turf/open/floor/carpet/black,
 /area/station/command/meeting_room)
 "tPy" = (
-/obj/machinery/computer/station_alert{
+/obj/machinery/computer/station_alert/station_only{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/yellow{
@@ -197605,7 +197628,7 @@ hXT
 hXT
 bnl
 hpN
-urB
+cSJ
 ykF
 nHE
 oLX
@@ -211160,7 +211183,7 @@ iPQ
 rLi
 gnf
 kdS
-kdS
+tyO
 kdS
 gnf
 nRm
