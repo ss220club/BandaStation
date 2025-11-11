@@ -135,8 +135,6 @@
 		if("bulb")
 			if(prob(5))
 				break_light_tube(TRUE)
-		if("floor bulb")
-			frame = new /obj/item/wallframe/light_fixture/small(drop_point)
 #endif
 	update(trigger = FALSE)
 
@@ -425,6 +423,8 @@
 		if("tube")
 			frame = new /obj/item/wallframe/light_fixture(drop_point)
 		if("bulb")
+			frame = new /obj/item/wallframe/light_fixture/small(drop_point)
+		if("floor bulb")
 			frame = new /obj/item/wallframe/light_fixture/small(drop_point)
 	if(!disassembled)
 		frame.take_damage(frame.max_integrity * 0.5, sound_effect = FALSE)
@@ -741,13 +741,6 @@
 	status = LIGHT_BROKEN
 	icon_state = "floor-broken"
 
-/obj/machinery/light/floor/transport
-	name = "transport light"
-	break_if_moved = FALSE
-	// has to render above tram things (trams are stupid)
-	layer = BELOW_OPEN_DOOR_LAYER
-	plane = GAME_PLANE
-
 /obj/machinery/light/floor/burned
 	status = LIGHT_BURNED
 	icon_state = "floor-burned"
@@ -756,3 +749,10 @@
 	icon_state = "floor-empty"
 	start_with_cell = FALSE
 	status = LIGHT_EMPTY
+
+/obj/machinery/light/floor/transport
+	name = "transport light"
+	break_if_moved = FALSE
+	// has to render above tram things (trams are stupid)
+	layer = BELOW_OPEN_DOOR_LAYER
+	plane = GAME_PLANE
