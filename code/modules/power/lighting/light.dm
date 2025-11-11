@@ -135,6 +135,8 @@
 		if("bulb")
 			if(prob(5))
 				break_light_tube(TRUE)
+		if("floor bulb")
+			frame = new /obj/item/wallframe/light_fixture/small(drop_point)
 #endif
 	update(trigger = FALSE)
 
@@ -728,7 +730,7 @@
 	layer = BELOW_CATWALK_LAYER
 	plane = FLOOR_PLANE
 	light_type = /obj/item/light/bulb
-	fitting = "bulb"
+	fitting = "floor bulb"
 	nightshift_brightness = 4
 	fire_brightness = 4.5
 
@@ -745,3 +747,12 @@
 	// has to render above tram things (trams are stupid)
 	layer = BELOW_OPEN_DOOR_LAYER
 	plane = GAME_PLANE
+
+/obj/machinery/light/floor/burned
+	status = LIGHT_BURNED
+	icon_state = "floor-burned"
+
+/obj/machinery/light/floor/empty
+	icon_state = "floor-empty"
+	start_with_cell = FALSE
+	status = LIGHT_EMPTY
