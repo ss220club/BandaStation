@@ -265,15 +265,11 @@
 		occur_text = "разрывает небольшое отверстие"
 
 /datum/wound_pregen_data/flesh_pierce/breakage/projectile
-
 	wound_path_to_generate = /datum/wound/pierce/bleed/moderate/projectile
 
 /datum/wound_pregen_data/flesh_pierce/breakage/projectile/get_weight(obj/item/bodypart/limb, woundtype, damage, attack_direction, damage_source)
-
 	if (!isprojectile(damage_source))
-
 		return 0
-
 	return weight
 
 /datum/wound/pierce/bleed/severe

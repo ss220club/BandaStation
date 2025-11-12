@@ -51,3 +51,4 @@
 
 	new /obj/structure/light_construct/floor(local_turf)
 	qdel(src)
+

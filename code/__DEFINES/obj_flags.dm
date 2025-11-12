@@ -96,12 +96,12 @@
 #define HEADINTERNALS (1<<16)
 /// Prevents masks from getting adjusted from enabling internals
 #define INTERNALS_ADJUST_EXEMPT (1<<17)
-// BANDASTATION ADDITION - START
-/// Does not leave fibers behind
-#define FIBERLESS_GLOVES (1<<18)
-// BANDASTATION ADDITION - END
 /// Indicates that the piece of clothing contributes towards Sleeping Carp's style factor, which determines evasion probabilities. See /datums/martial/sleeping_carp/carp_style_check().
 #define CARP_STYLE_FACTOR (1<<18)
+// BANDASTATION ADDITION - START
+/// Does not leave fibers behind
+#define FIBERLESS_GLOVES (1<<19)
+// BANDASTATION ADDITION - END
 
 /// Integrity defines for clothing (not flags but close enough)
 #define CLOTHING_PRISTINE 0 // We have no damage on the clothing

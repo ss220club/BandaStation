@@ -480,9 +480,7 @@
 			bodypart_organ.Remove(bodypart_organ.owner)
 		else
 			if(bodypart_organ.bodypart_remove(src))
-
 				if(drop_loc) //can be null if being deleted
-
 					bodypart_organ.forceMove(get_turf(drop_loc))
 
 	if(drop_loc) //can be null during deletion

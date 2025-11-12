@@ -21,7 +21,7 @@
 
 /obj/item/gun/ballistic/rifle/rack(mob/user = null)
 	if (bolt_locked == FALSE)
-		balloon_alert(user, "bolt opened")
+		balloon_alert(user, "открытие [bolt_wording]")
 		playsound(src, rack_sound, rack_sound_volume, rack_sound_vary)
 		process_chamber(FALSE, FALSE, FALSE)
 		bolt_locked = TRUE
@@ -32,7 +32,7 @@
 
 /obj/item/gun/ballistic/rifle/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(need_bolt_lock_to_interact && !bolt_locked && !istype(tool, /obj/item/knife))
-		balloon_alert(user, "bolt closed!")
+		balloon_alert(user, "затвор закрыт!")
 		return
 
 	return ..()
@@ -44,7 +44,7 @@
 
 /obj/item/gun/ballistic/rifle/examine(mob/user)
 	. = ..()
-	. += "The bolt is [bolt_locked ? "open" : "closed"]."
+	. += "Затвор [bolt_locked ? "открыт" : "закрыт"]."
 
 ///////////////////////
 // BOLT ACTION RIFLE //
@@ -208,9 +208,9 @@
 	internal_magazine = TRUE
 	can_modify_ammo = FALSE
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_SUITSTORE
-	bolt_wording = "bowstring"
-	magazine_wording = "rod"
-	cartridge_wording = "rod"
+	bolt_wording = "тетивы"
+	magazine_wording = "прута"
+	cartridge_wording = "прутов"
 	weapon_weight = WEAPON_HEAVY
 	initial_caliber = CALIBER_REBAR
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/rebarxbow/normal
