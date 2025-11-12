@@ -80,8 +80,8 @@
 	maxHealth = 300
 	health = 300
 	obj_damage = 80
-	melee_damage_lower = 15
-	melee_damage_upper = 25
+	melee_damage_lower = 20
+	melee_damage_upper = 35
 
 /mob/living/basic/lizard/big/croco
 	name = "крокодил"
@@ -94,4 +94,4 @@
 	health = 200
 	obj_damage = 80
 	melee_damage_lower = 10
-	melee_damage_upper = 15
+	melee_damage_upper = 25
