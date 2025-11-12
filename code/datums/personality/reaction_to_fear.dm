@@ -1,13 +1,13 @@
 /datum/personality/brave
 	savefile_key = "brave"
-	name = "Храбрый"
-	desc = "Нужно нечто большее, чем немного крови, чтобы напугать меня."
-	pos_gameplay_desc = "Страх накапливается медленнее, а эффекты настроения, связанные со страхом, слабее"
+	name = "Brave"
+	desc = "It'll take a lot more than a little blood to scare me."
+	pos_gameplay_desc = "Accumulate fear slower, and moodlets related to fear are weaker"
 	groups = list(PERSONALITY_GROUP_GENERAL_FEAR, PERSONALITY_GROUP_PEOPLE_FEAR)
 
 /datum/personality/cowardly
 	savefile_key = "cowardly"
-	name = "Трусливый"
-	desc = "Здесь всё представляет опасность! Даже воздух!"
-	neg_gameplay_desc = "Страх накапливается быстрее, а эффекты настроения, связанные со страхом, сильнее"
+	name = "Cowardly"
+	desc = "Everything is a danger around here! Even the air!"
+	neg_gameplay_desc = "Accumulate fear faster, and moodlets related to fear are stronger"
 	groups = list(PERSONALITY_GROUP_GENERAL_FEAR)

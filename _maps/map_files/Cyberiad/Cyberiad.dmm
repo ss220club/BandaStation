@@ -595,7 +595,6 @@
 /area/station/cargo/miningoffice)
 "aip" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/,
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/iron/cafeteria{
 	dir = 8
@@ -3933,7 +3932,6 @@
 /area/station/engineering/atmos/hfr_room)
 "aXc" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start/hangover/,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/iron/white/corner{
 	dir = 8

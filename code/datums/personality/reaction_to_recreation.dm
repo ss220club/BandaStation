@@ -1,8 +1,8 @@
 /datum/personality/gambler
 	savefile_key = "gambler"
-	name = "Азартный"
-	desc = "Бросить кости всегда стоит того!"
-	pos_gameplay_desc = "Любит азартные игры и карточные игры, и спокоен при проигрыше"
+	name = "Gambler"
+	desc = "Throwing the dice is always worth it!"
+	pos_gameplay_desc = "Likes gambling and card games, and content with losing when gambling"
 
 /datum/personality/slacking
 	/// Areas which are considered "slacking off"
@@ -31,27 +31,27 @@
 	if(!istype(new_area, /area/station/service))
 		return TRUE
 	// Service workers don't slack in service
-	if(who.mind?.assigned_role.departments_bitflags & DEPARTMENT_SERVICE)
+	if(who.mind?.assigned_role.departments_bitflags & DEPARTMENT_BITFLAG_SERVICE)
 		return FALSE
 
 	return TRUE
 
 /datum/personality/slacking/lazy
 	savefile_key = "lazy"
-	name = "Ленивый"
-	desc = "Мне сегодня не очень хочется работать."
-	pos_gameplay_desc = "Счастлив в баре или зонах отдыха"
+	name = "Lazy"
+	desc = "I don't really feel like working today."
+	pos_gameplay_desc = "Happy in the bar or recreation areas"
 	mood_event_type = /datum/mood_event/slacking_off_lazy
-	groups = list(PERSONALITY_GROUP_INTERACTION, PERSONALITY_GROUP_WORK, PERSONALITY_GROUP_ATHLETICS)
+	groups = list(PERSONALITY_GROUP_RECREATION, PERSONALITY_GROUP_WORK, PERSONALITY_GROUP_ATHLETICS)
 
 /datum/personality/slacking/diligent
 	savefile_key = "diligent"
-	name = "Старательный"
-	desc = "Здесь нужно работать!"
-	pos_gameplay_desc = "Счастлив, когда находится в своём отделе"
-	neg_gameplay_desc = "Несчастлив, когда бездельничает в баре или зонах отдыха"
+	name = "Diligent"
+	desc = "Things need to get done around here!"
+	pos_gameplay_desc = "Happy when in their department"
+	neg_gameplay_desc = "Unhappy when slacking off in the bar or recreation areas"
 	mood_event_type = /datum/mood_event/slacking_off_diligent
-	groups = list(PERSONALITY_GROUP_INTERACTION)
+	groups = list(PERSONALITY_GROUP_RECREATION)
 
 /datum/personality/slacking/diligent/apply_to_mob(mob/living/who)
 	. = ..()
@@ -73,37 +73,37 @@
 
 /datum/personality/industrious
 	savefile_key = "industrious"
-	name = "Трудолюбивый"
-	desc = "Все должны работать - иначе мы все тратим время впустую."
-	neg_gameplay_desc = "Не любит играть в игры"
+	name = "Industrious"
+	desc = "Everyone needs to be working - otherwise we're all wasting our time."
+	neg_gameplay_desc = "Dislikes playing games"
 	groups = list(PERSONALITY_GROUP_WORK)
 
 /datum/personality/athletic
 	savefile_key = "athletic"
-	name = "Атлетичный"
-	desc = "Не могу же я сидеть без дела весь день! Нужно двигаться."
-	pos_gameplay_desc = "Любит упражняться"
-	neg_gameplay_desc = "Не любит бездельничать"
+	name = "Athletic"
+	desc = "Can't just sit around all day! Have to keep moving."
+	pos_gameplay_desc = "Likes exercising"
+	neg_gameplay_desc = "Dislikes being lazy"
 	groups = list(PERSONALITY_GROUP_ATHLETICS)
 
 /datum/personality/erudite
 	savefile_key = "erudite"
-	name = "Эрудированный"
-	desc = "Знание - сила. Особенно так глубоко в космосе."
-	pos_gameplay_desc = "Любит читать книги"
+	name = "Erudite"
+	desc = "Knowledge is power. Especially this deep in space."
+	pos_gameplay_desc = "Likes reading books"
 	groups = list(PERSONALITY_GROUP_READING)
 
 /datum/personality/uneducated
 	savefile_key = "uneducated"
-	name = "Необразованный"
-	desc = "Мне не нужны книги - я уже знаю всё, что мне нужно."
-	neg_gameplay_desc = "Не любит читать книги"
+	name = "Uneducated"
+	desc = "I don't care much for books - I already know everything I need to know."
+	neg_gameplay_desc = "Dislikes reading books"
 	groups = list(PERSONALITY_GROUP_READING)
 
 /datum/personality/spiritual
 	savefile_key = "spiritual"
-	name = "Духовный"
-	desc = "Я верю в высшую силу."
-	pos_gameplay_desc = "Любит Часовню и Капеллана, имеет специальные молитвы"
-	neg_gameplay_desc = "Не любит нечестивые вещи"
+	name = "Spiritual"
+	desc = "I believe in a higher power."
+	pos_gameplay_desc = "Likes the Chapel and the Chaplain, and has special prayers"
+	neg_gameplay_desc = "Dislikes unholy things"
 	personality_trait = TRAIT_SPIRITUAL

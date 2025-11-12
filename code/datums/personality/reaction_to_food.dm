@@ -1,29 +1,29 @@
 /datum/personality/ascetic
 	savefile_key = "ascetic"
-	name = "Аскетичный"
-	desc = "Мне не нужна роскошная еда - это всего лишь топливо для тела."
-	pos_gameplay_desc = "Снижена грусть от употребления нелюбимой еды"
-	neg_gameplay_desc = "Ограничено удовольствие от употребления любимой еды"
+	name = "Ascetic"
+	desc = "I don't care much for luxurious foods - It's all fuel for the body."
+	pos_gameplay_desc = "Sorrow from eating disliked food is reduced"
+	neg_gameplay_desc = "Enjoyment from eating liked food is limited"
 	groups = list(PERSONALITY_GROUP_FOOD)
 
 /datum/personality/gourmand
 	savefile_key = "gourmand"
-	name = "Гурман"
-	desc = "Еда для меня значит всё!"
-	pos_gameplay_desc = "Усилено удовольствие от употребления любимой еды"
-	neg_gameplay_desc = "Усилена грусть от употребления нелюбимой еды, а посредственная еда менее приятна"
+	name = "Gourmand"
+	desc = "Food means everything to me!"
+	pos_gameplay_desc = "Enjoyment from eating liked food is strengthened"
+	neg_gameplay_desc = "Sadness from eating food you dislike is increased, and mediocre food is less enjoyable"
 	groups = list(PERSONALITY_GROUP_FOOD)
 
 /datum/personality/teetotal
 	savefile_key = "teetotal"
-	name = "Трезвенник"
-	desc = "Алкоголь не для меня."
-	neg_gameplay_desc = "Не любит употреблять алкоголь"
+	name = "Teetotaler"
+	desc = "Alcohol isn't for me."
+	neg_gameplay_desc = "Dislikes drinking alcohol"
 	groups = list(PERSONALITY_GROUP_ALCOHOL)
 
 /datum/personality/bibulous
 	savefile_key = "bibulous"
-	name = "Любитель выпить"
-	desc = "Я всегда готов выпить ещё!"
-	pos_gameplay_desc = "Удовлетворение от выпивки длится дольше, даже после того, как вы протрезвеете"
+	name = "Bibulous"
+	desc = "I'll always go for another round of drinks!"
+	pos_gameplay_desc = "Fulfillment from drinking lasts longer, even after you are no longer drunk"
 	groups = list(PERSONALITY_GROUP_ALCOHOL)
