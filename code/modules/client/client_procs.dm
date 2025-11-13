@@ -270,7 +270,8 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 		persistent_client = new(ckey, key) // BANDASTATION ADDITION - Mentors: (key)
 	persistent_client.set_client(src)
 
-	winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION REMOVE: find,refresh
+	//winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION REMOVE: find,refresh
+	winset(src, null, list("browser-options" = "find,refresh"))
 
 	// Instantiate stat panel
 	stat_panel = new(src, "statbrowser")
