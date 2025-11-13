@@ -2,6 +2,10 @@ GLOBAL_LIST_INIT(first_names_female_vulp, world.file2list("strings/names/first_f
 GLOBAL_LIST_INIT(first_names_male_vulp, world.file2list("strings/names/first_male_vulp.txt"))
 GLOBAL_LIST_INIT(last_names_vulp, world.file2list("strings/names/last_vulp.txt"))
 
+GLOBAL_LIST_INIT(first_names_female_kidan, world.file2list("strings/names/first_female_kidan.txt"))
+GLOBAL_LIST_INIT(first_names_male_kidan, world.file2list("strings/names/first_male_kidan.txt"))
+GLOBAL_LIST_INIT(last_names_kidan, world.file2list("strings/names/last_kidan.txt"))
+
 GLOBAL_LIST_INIT(first_names_female_tajaran, world.file2list("strings/names/first_female_tajaran.txt"))
 GLOBAL_LIST_INIT(first_names_male_tajaran, world.file2list("strings/names/first_male_tajaran.txt"))
 GLOBAL_LIST_INIT(last_names_tajaran, world.file2list("strings/names/last_tajaran.txt"))
