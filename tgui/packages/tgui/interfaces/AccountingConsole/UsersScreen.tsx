@@ -46,8 +46,18 @@ export const UsersScreen = () => {
     return 0;
   });
 
-  return (
-    <Section scrollable height="320px">
+   return (
+    <Section
+      scrollable
+      fill // ← ДОБАВЬТЕ ЭТО
+      style={{
+        height: "100%", // ← ИЗМЕНИТЕ НА 100%
+        maxHeight: "80vh", // ← ДОБАВЬТЕ МАКСИМАЛЬНУЮ ВЫСОТУ
+        overflow: "auto", // ← ЯВНОЕ УКАЗАНИЕ ПРОКРУТКИ
+        resize: "vertical", // ← ВОЗМОЖНОСТЬ ИЗМЕНЕНИЯ РАЗМЕРА (опционально)
+        minHeight: "200px" // ← МИНИМАЛЬНАЯ ВЫСОТА
+      }}
+    >
       {!!crashing && (
         <Modal width="300px" align="center">
           <Blink time={500} interval={500}>
@@ -55,16 +65,6 @@ export const UsersScreen = () => {
           </Blink>
         </Modal>
       )}
-      <Table>
-        <Table.Row>
-          <Table.Cell bold>
-            <Stack>
-              <Stack.Item>Account</Stack.Item>
-              <Stack.Item>
-                <SortButton
-                  sorting={accountNameSorting}
-                  setSorting={setAccountNameSorting}
-                  otherSorters={[setBalanceSorting, setJobSorting]}
                 />
               </Stack.Item>
             </Stack>
