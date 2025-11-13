@@ -1,4 +1,0 @@
-author: "larentoun"
-delete-after: True
-changes:
-  - balance: "Вернули отсутствие урона у собак. Секурити собаки оставят себе стамина урон."

@@ -27,8 +27,8 @@
 	health = 100
 
 	obj_damage = 60
-	melee_damage_lower = 20
-	melee_damage_upper = 30
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 	wound_bonus = -5
 	exposed_wound_bonus = 10
 	sharpness = SHARP_EDGED
@@ -80,8 +80,8 @@
 	maxHealth = 300
 	health = 300
 	obj_damage = 80
-	melee_damage_lower = 30
-	melee_damage_upper = 80
+	melee_damage_lower = 20
+	melee_damage_upper = 35
 
 /mob/living/basic/lizard/big/croco
 	name = "крокодил"
@@ -93,5 +93,5 @@
 	maxHealth = 200
 	health = 200
 	obj_damage = 80
-	melee_damage_lower = 20
-	melee_damage_upper = 50
+	melee_damage_lower = 10
+	melee_damage_upper = 25
