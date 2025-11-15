@@ -53,12 +53,6 @@
 
 /// Ghost poll has concluded
 /datum/brain_trauma/severe/split_personality/proc/schism(mob/dead/observer/ghost)
-	owner_backseat.AddComponent( \
-		/datum/component/temporary_body, \
-		old_mind = owner.mind, \
-		old_body = owner, \
-		perma_body_attached = TRUE, \
-	)
 
 	if(isnull(ghost))
 		qdel(src)
