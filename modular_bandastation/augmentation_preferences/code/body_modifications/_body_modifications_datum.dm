@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 /datum/body_modification/proc/can_be_applied(mob/living/carbon/target, additional_params)
 	SHOULD_CALL_PARENT(TRUE)
 
-	if(!istype(target))
+	if(isnull(target))
 		return FALSE
 
 	var/list/applied_body_modifications = target.client?.prefs?.read_preference(/datum/preference/body_modifications)
