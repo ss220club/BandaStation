@@ -188,7 +188,7 @@
 
 	user.visible_message(span_danger("[user] нажимает несколько кнопок на [src], и оно начинает зловеще пищать!"), span_notice("Ты активируешь [src] и начинаешь сканировать зону. Не покидай [get_area_name(user, TRUE)] до конца скана!"))
 	playsound(user, 'sound/machines/beep/triple_beep.ogg', 30, TRUE)
-	var/alertstr = span_userdanger("Сетевая тревога: обнаружена попытка зондирования станции в сети[user_area?" в [get_area_name(user, TRUE)]":". Не удаётся определить местоположение"].")
+	var/alertstr = span_userdanger("Сетевая тревога: обнаружена попытка зондирования станции в сети. [user_area ? "Местоположение: [get_area_name(user, TRUE)]." : "Не удаётся определить местоположение."]")
 	for(var/mob/living/silicon/ai/ai_player in GLOB.player_list)
 		to_chat(ai_player, alertstr)
 
