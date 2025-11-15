@@ -270,8 +270,13 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 		persistent_client = new(ckey, key) // BANDASTATION ADDITION - Mentors: (key)
 	persistent_client.set_client(src)
 
-	//winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION REMOVE: find,refresh
-	winset(src, null, list("browser-options" = "find,refresh"))
+	if(SScentral.can_run())
+
+		SScentral.update_player_discord_async(ckey)
+
+		SScentral.update_player_donate_tier_blocking(src)
+
+	winset(src, null, list("browser-options" = "")) // BANDASTATION REMOVE: find,refresh
 
 	// Instantiate stat panel
 	stat_panel = new(src, "statbrowser")
