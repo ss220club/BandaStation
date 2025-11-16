@@ -538,7 +538,9 @@
 		breather.Unconscious(6 SECONDS)
 	// Enough to make the mob sleep.
 	if(n2o_pp > n2o_sleep_min)
-		breather.Sleeping(min(breather.AmountSleeping() + 100, 200))
+	//	BANDASTATION ADDITION: Говнофикс съехавших таймингов после рефактора статусов основанном на тиках сабсистемы 337ab7f
+	//	Добавляем +200 в duration, чтобы персонаж не успевал просыпаться, и IsSleeping() проверка не падала при анестезии и ССД. TODO: Глянуть в следующем мердже с апстримом
+		breather.Sleeping(min(breather.AmountSleeping() + 100, 200) + 200) // ADDITION: +200
 
 /// N2O side-effects. "Too much N2O!"
 /obj/item/organ/lungs/proc/safe_n2o(mob/living/carbon/breather, datum/gas_mixture/breath, old_n2o_pp)
