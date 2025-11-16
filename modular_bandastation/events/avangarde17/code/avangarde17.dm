@@ -442,3 +442,26 @@
 	current_volumes -= M
 	target_volumes  -= M
 	attached_mobs   -= M
+
+// MARK: Вечный огонь
+
+/obj/structure/eternal_flame/eternal_fire
+	name = "вечный огонь"
+	desc = "Вы смотрите на теплое пламя и ощущаете, как от него веет духом красного патриотизма..."
+	icon = 'modular_bandastation/events/avangarde17/icons/eternal_flame.dmi'
+	icon_state = "eternal_fire"
+	light_color = LIGHT_COLOR_FIRE
+	density = FALSE
+	anchored = TRUE
+	pass_flags_self = PASSTABLE | LETPASSTHROW
+
+/obj/structure/eternal_flame/nozzle
+	name = "сопло вечного огня"
+	desc = "Место, откуда исходит вечный огонь"
+	icon = 'modular_bandastation/events/avangarde17/icons/eternal_flame.dmi'
+	icon_state = "nozzle"
+	pass_flags_self = PASSTABLE | LETPASSTHROW | PASSGRILLE | PASSWINDOW
+	opacity = FALSE
+	density = FALSE
+	max_integrity = 500
+	anchored = TRUE
