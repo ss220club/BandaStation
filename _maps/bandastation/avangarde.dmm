@@ -479,31 +479,13 @@
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside)
 "df" = (
-/obj{
-	name = "вечный огонь";
-	desc = "Вечное пламя, символически знаменующее собой торжественную память народа КССП о павших героях, борцах за свободу и честь Родины.";
-	icon = 'icons/obj/structures.dmi';
-	icon_state = "reflector_base";
-	color = "#3a0c0c";
-	layer = 2.9
-	},
-/obj{
-	name = "вечный огонь";
-	desc = "Пламя, символически знаменующее собой торжественную память народа КССП о павших героях, борцах за свободу и честь Родины.";
-	icon = 'icons/obj/service/hydroponics/equipment.dmi';
-	icon_state = "bonfire_on_fire_intense";
-	pixel_x = -1;
-	pixel_y = 11
-	},
 /obj/effect/turf_decal/siding/golden/end,
 /obj/structure/railing,
-/obj/effect/light_emitter{
-	light_color = "#FAA019";
-	light_range = 4;
-	name = "fire light";
-	light_power = 4
-	},
 /obj/structure/fans/tiny/invisible,
+/obj/structure/eternal_flame/nozzle,
+/obj/structure/eternal_flame/eternal_fire{
+	pixel_y = 10
+	},
 /turf/open/floor/vault/rock,
 /area/awaymission/avangarde17/outside/base)
 "dh" = (
@@ -6834,6 +6816,12 @@
 	},
 /obj/structure/railing/platform,
 /obj/structure/platform/iron,
+/obj/effect/light_emitter{
+	light_color = "#FAA019";
+	light_range = 4;
+	name = "fire light";
+	light_power = 4
+	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/base)
 "Sq" = (
