@@ -1373,7 +1373,6 @@
 	pixel_x = 4;
 	pixel_y = 0
 	},
-/obj/machinery/light/directional/west,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside)
 "jh" = (
@@ -3695,7 +3694,7 @@
 /area/awaymission/avangarde17/inside/cave)
 "yr" = (
 /obj/structure/dresser,
-/obj/machinery/light/directional/north,
+/obj/machinery/light/directional/east,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside)
 "yt" = (
@@ -3823,7 +3822,7 @@
 /obj/structure/table/bronze,
 /obj/structure/statue/bronze/marx{
 	pixel_x = 1;
-	pixel_y = 14;
+	pixel_y = 14
 	},
 /turf/open/floor/carpet/red,
 /area/awaymission/avangarde17/inside)
@@ -4862,7 +4861,6 @@
 "GJ" = (
 /obj/structure/dresser,
 /obj/machinery/light/directional/west,
-/obj/machinery/light/directional/west,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside)
 "GK" = (
@@ -4997,7 +4995,7 @@
 /obj/structure/table/wood/fancy/red,
 /obj/structure/statue/bronze/marx{
 	pixel_x = 1;
-	pixel_y = 14;
+	pixel_y = 14
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside)
@@ -7247,16 +7245,6 @@
 /obj/item/surgical_drapes,
 /obj/item/clothing/mask/breath/muzzle,
 /turf/open/floor/iron/white/small,
-/area/awaymission/avangarde17/inside)
-"UQ" = (
-/obj/structure/fans/tiny,
-/obj/machinery/door/poddoor/shutters/indestructible/preopen{
-	dir = 8
-	},
-/obj/machinery/door/poddoor/shutters/indestructible/preopen{
-	dir = 8
-	},
-/turf/open/floor/plating,
 /area/awaymission/avangarde17/inside)
 "UR" = (
 /obj/structure/fake_stairs/stone,
@@ -15155,7 +15143,7 @@ dR
 lk
 lk
 dR
-UQ
+lk
 lk
 dR
 dR
