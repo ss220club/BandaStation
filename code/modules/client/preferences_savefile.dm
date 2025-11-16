@@ -246,7 +246,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		update_preferences(data_validity_integer, savefile)
 
 	check_keybindings() // this apparently fails every time and overwrites any unloaded prefs with the default values, so don't load anything after this line or it won't actually save
-	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
 	//Sanitize
 	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
@@ -266,6 +265,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
 			job_preferences -= j
 	// BANDASTATION ADDITION - END
+
+	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
 	if(SHOULD_UPDATE_DATA(data_validity_integer)) //save the updated version
 		var/old_default_slot = default_slot
@@ -355,6 +356,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Load prefs
 	// job_preferences = save_data?["job_preferences"] // BANDASTATION MOVED - Pref Job Slots
 
+	//Custom emote panel
+	custom_emote_panel = save_data?["custom_emote_panel"] // BANDASTATION ADD - Emote Panel
+
 	//Quirks
 	all_quirks = save_data?["all_quirks"]
 
@@ -367,6 +371,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	randomise = SANITIZE_LIST(randomise)
 	// job_preferences = SANITIZE_LIST(job_preferences) // BANDASTATION MOVED - Pref Job Slots
 	all_quirks = SANITIZE_LIST(all_quirks)
+
+	custom_emote_panel = SANITIZE_LIST(custom_emote_panel) // BANDASTATION ADD - Emote Panel
 
 	//Validate job prefs
 	// BANDASTATION MOVED - START - Pref Job Slots
@@ -414,6 +420,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Write prefs
 	// save_data["job_preferences"] = job_preferences // BANDASTATION MOVED - Pref Job Slots
+
+	// BANDASTATION ADD - Emote Panel
+	save_data["custom_emote_panel"] = custom_emote_panel // BANDASTATION ADD - Emote Panel
 
 	//Quirks
 	save_data["all_quirks"] = all_quirks

@@ -72,3 +72,5 @@
 #include "code/surgery/organs/internal/tajaran_internal.dm"
 #include "code/surgery/organs/internal/skrell_internal.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"
+
+#include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"

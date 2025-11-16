@@ -21,6 +21,7 @@
 #include "code/items/shields.dm"
 #include "code/items/stamp.dm"
 #include "code/items/wallets.dm"
+#include "code/items/mech_core.dm"
 #include "code/items/clothing/accessories/accessories.dm"
 #include "code/items/clothing/glasses/glasses.dm"
 #include "code/items/clothing/gloves/gloves.dm"

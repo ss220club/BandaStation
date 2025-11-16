@@ -4,106 +4,58 @@
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	can_randomize = FALSE
 
-/datum/preference/body_modifications/is_valid(value)
-	if(!islist(value))
-		return FALSE
-
-	var/list/values = value
-	for(var/body_modification_key in values)
-		if(isnull(GLOB.body_modifications[body_modification_key]))
-			return FALSE
-
-	return TRUE
-
-/datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, value)
-	if(!islist(value))
-		return
-
-	var/list/body_modifications = value
-	for(var/obj/item/bodypart/L in target.bodyparts)
-		if(L.body_zone in GLOB.limb_zones)
-			qdel(L)
-
-	target.regenerate_limbs()
-
-	var/datum/preferences/client_prefs = usr?.client?.prefs
-	if(client_prefs)
-		for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
-			if (preference.savefile_identifier != PREFERENCE_CHARACTER)
-				continue
-			if (preference.category != PREFERENCE_CATEGORY_SECONDARY_FEATURES)
-				continue
-			preference.apply_to_human(target, client_prefs.read_preference(preference.type))
-
-	for(var/key in body_modifications)
-		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if(!mod_proto || !istype(mod_proto, /datum/body_modification/limb_amputation))
-			continue
-
-		var/datum/body_modification/limb_amputation/amputation = new mod_proto.type
-		amputation.apply_to_human(target)
-		qdel(amputation)
-
-	for(var/key in body_modifications)
-		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if(!mod_proto || !istype(mod_proto, /datum/body_modification/bodypart_prosthesis))
-			continue
-
-		var/datum/body_modification/bodypart_prosthesis/prosthesis = new mod_proto.type
-		if(islist(body_modifications[key]) && body_modifications[key]["selected_manufacturer"])
-			prosthesis.selected_manufacturer = body_modifications[key]["selected_manufacturer"]
-
-		prosthesis.apply_to_human(target)
-		qdel(prosthesis)
-
-	for(var/key in body_modifications)
-		var/datum/body_modification/mod_proto = GLOB.body_modifications[key]
-		if(!mod_proto || !istype(mod_proto, /datum/body_modification/implants))
-			continue
-
-		var/datum/body_modification/implants/implant = new mod_proto.type
-		implant.apply_to_human(target)
-		qdel(implant)
-
-	// Обновляем тело один раз в конце
-	target.update_body()
-
 /datum/preference/body_modifications/deserialize(input, datum/preferences/preferences)
 	if(!islist(input))
 		return list()
 
 	var/list/result = list()
-
-	for (var/body_modification_key in input)
-		if(!GLOB.body_modifications[body_modification_key])
+	for(var/key,value in input)
+		var/datum/body_modification/modification = GLOB.body_modifications[key]
+		if(!istype(modification))
 			continue
 
-		var/value = input[body_modification_key]
+		if(!modification.preference_value_valid(value))
+			continue
 
-		if(islist(value))
-			result[body_modification_key] = value
-		else
-			result[body_modification_key] = TRUE
+		result[key] = value
 
 	return result
 
-/datum/preference/body_modifications/serialize(input)
-	if(!islist(input))
-		return list()
-
-	var/list/result = list()
-
-	for (var/body_modification_key in input)
-		if(!GLOB.body_modifications[body_modification_key])
-			continue
-
-		var/value = input[body_modification_key]
-		if(islist(value))
-			result[body_modification_key] = value
-		else
-			result[body_modification_key] = TRUE
-
-	return result
 
 /datum/preference/body_modifications/create_default_value()
 	return list()
+
+/datum/preference/body_modifications/apply_to_human(mob/living/carbon/human/target, value)
+	if (!istype(target))
+		return
+
+	if (!islist(value) || !length(value))
+		return
+
+	apply_body_modifications(target, value)
+
+/datum/preference/body_modifications/is_valid(value)
+	if(!islist(value))
+		return FALSE
+
+	var/list/values = value
+	for(var/key,entry in values)
+		var/datum/body_modification/modification = GLOB.body_modifications[key]
+		if(!istype(modification))
+			return FALSE
+
+		if(!modification.preference_value_valid(entry))
+			return FALSE
+
+	return TRUE
+
+/datum/preference/body_modifications/proc/apply_body_modifications(mob/living/carbon/human/target, list/body_modifications)
+	if(!istype(target) || !length(body_modifications))
+		return
+
+	for(var/key,value in body_modifications)
+		var/datum/body_modification/modification = GLOB.body_modifications[key]
+		if(!istype(modification))
+			continue
+
+		modification.apply_to_human(target, value)

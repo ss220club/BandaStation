@@ -58,3 +58,10 @@ admin_table admin
 BRAIN_PERMANENT_TRAUMAS
 ## Decay rate for a brain organ, default - 0.5 (30 min), works only with BRAIN_PERMANENT_TRAUMAS enabled
 BRAIN_DECAY_RATE 2
+
+#DISCORD_URL
+
+#round_end_webhook_url
+#round_end_webhook_name
+#round_end_webhook_avatar_url
+#round_end_webhook_ping_role_id

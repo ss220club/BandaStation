@@ -4,22 +4,26 @@ import { Section, Stack, Tabs } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
-import { TICKET_STATE } from './constants';
+import { TICKET_MANAGER_TABS, TICKET_STATE, USER_TYPES } from './constants';
 import { Ticket } from './Ticket';
 import { TicketPanel } from './TicketPanel';
-import { ManagerData, TicketProps, TicketsMainPageProps } from './types';
+import type { ManagerData, TicketProps, TicketsMainPageProps } from './types';
 
 export function TicketManager() {
   const { data } = useBackend<ManagerData>();
-  const { allTickets, isAdmin, isMentor, ticketToOpen } = data;
-  const [selectedTicket, setSelectedTicket] = useState<number | null>(
+  const { allTickets, ticketToOpen, userType } = data;
+  const [selectedTicketId, setSelectedTicketId] = useState<number | null>(
     ticketToOpen,
   );
-  const userUsing = isAdmin ? 'Админ' : isMentor ? 'Ментор' : 'Игрок';
+
+  const selectedTicket = allTickets.find(
+    (ticket: TicketProps) => ticket.number === selectedTicketId,
+  );
+  const userTypeName = USER_TYPES[userType] || 'Неизвестный тип пользователя';
 
   return (
     <Window
-      title={`Менеджер тикетов - ${userUsing}`}
+      title={`Менеджер тикетов - ${userTypeName}`}
       theme="ss220"
       width={550}
       height={750}
@@ -27,14 +31,13 @@ export function TicketManager() {
       <Window.Content>
         {selectedTicket ? (
           <TicketPanel
-            allTickets={allTickets}
-            ticketNumber={selectedTicket}
-            setSelectedTicket={setSelectedTicket}
+            selectedTicket={selectedTicket}
+            setSelectedTicketId={setSelectedTicketId}
           />
         ) : (
           <TicketsMainPage
             allTickets={allTickets}
-            setSelectedTicket={setSelectedTicket}
+            setSelectedTicketId={setSelectedTicketId}
           />
         )}
       </Window.Content>
@@ -43,22 +46,27 @@ export function TicketManager() {
 }
 
 function TicketsMainPage(props: TicketsMainPageProps) {
-  const { allTickets, setSelectedTicket } = props;
+  const { allTickets, setSelectedTicketId } = props;
   const [selectedTab, setSelectedTab] = useLocalStorage(
     'ticketManagerTab',
-    TICKET_STATE.Open,
+    TICKET_MANAGER_TABS.OpenTickets,
   );
 
-  const openTickets = allTickets.filter(
-    (ticket: TicketProps) => ticket.state === TICKET_STATE.Open,
+  const selectedTickets = allTickets.filter((ticket: TicketProps) =>
+    selectedTab === TICKET_MANAGER_TABS.OpenTickets
+      ? ticket.state === TICKET_STATE.Open
+      : ticket.state !== TICKET_STATE.Open,
   );
-  const closedTickets = allTickets.filter(
-    (ticket: TicketProps) =>
-      ticket.state === TICKET_STATE.Closed ||
-      ticket.state === TICKET_STATE.Resolved,
-  );
-  const selectedTickets =
-    selectedTab === TICKET_STATE.Open ? openTickets : closedTickets;
+
+  const openTicketsAmount =
+    selectedTab === TICKET_MANAGER_TABS.OpenTickets
+      ? selectedTickets.length
+      : allTickets.length - selectedTickets.length;
+
+  const closedTicketsAmount =
+    selectedTab === TICKET_MANAGER_TABS.ClosedTickets
+      ? selectedTickets.length
+      : allTickets.length - selectedTickets.length;
 
   return (
     <Stack fill vertical>
@@ -67,18 +75,18 @@ function TicketsMainPage(props: TicketsMainPageProps) {
           <Tabs.Tab
             icon="envelope-open-text"
             color="average"
-            selected={selectedTab === TICKET_STATE.Open}
-            onClick={() => setSelectedTab(TICKET_STATE.Open)}
+            selected={selectedTab === TICKET_MANAGER_TABS.OpenTickets}
+            onClick={() => setSelectedTab(TICKET_MANAGER_TABS.OpenTickets)}
           >
-            Открытые ({allTickets.length - closedTickets.length})
+            Открытые ({openTicketsAmount})
           </Tabs.Tab>
           <Tabs.Tab
             icon="trash-can"
             color="good"
-            selected={selectedTab === TICKET_STATE.Closed}
-            onClick={() => setSelectedTab(TICKET_STATE.Closed)}
+            selected={selectedTab === TICKET_MANAGER_TABS.ClosedTickets}
+            onClick={() => setSelectedTab(TICKET_MANAGER_TABS.ClosedTickets)}
           >
-            Закрытые ({closedTickets.length})
+            Закрытые ({closedTicketsAmount})
           </Tabs.Tab>
         </Tabs>
       </Stack.Item>
@@ -88,7 +96,7 @@ function TicketsMainPage(props: TicketsMainPageProps) {
             {selectedTickets.map((ticket: TicketProps) => (
               <Ticket
                 key={ticket.number}
-                setSelectedTicket={setSelectedTicket}
+                setSelectedTicketId={setSelectedTicketId}
                 {...ticket}
               />
             ))}
