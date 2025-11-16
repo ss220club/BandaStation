@@ -23,15 +23,15 @@
 		}
 	],
 	"job_changes": {
+		"Captain": {
+			"no_charter": 1
+		},
 		"Cook": {
 			"additional_cqc_areas": [
 				"/area/station/service/bar",
 				"/area/station/commons/lounge",
 				"/area/station/service/kitchen"
 			]
-		},
-		"Captain": {
-			"no_charter": 1
 		},
 		"Nanotrasen Representative": {
 			"spawn_positions": 1

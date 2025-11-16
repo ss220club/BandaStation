@@ -429,7 +429,7 @@
 
 /obj/item/verb/move_to_top()
 	set name = "Move To Top"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 	set src in oview(1)
 
 	if(!isturf(loc) || usr.stat != CONSCIOUS || HAS_TRAIT(usr, TRAIT_HANDS_BLOCKED) || anchored)
@@ -457,19 +457,6 @@
 		.["изолирующий"] = "Предмет изготовлен из прочного изолятора и блокирует проходящее через него электричество!"
 	else if (siemens_coefficient <= 0.5)
 		.["частично изолирующий"] = "Предмет изготовлен из плохого изолятора, который гасит (но не полностью блокирует) проходящее через него электричество."
-
-	if(resistance_flags & INDESTRUCTIBLE)
-		.["неразрушаемый"] = "Предмет очень прочный! Он выдержит всё, что с ним может случиться!"
-		return
-
-	if(resistance_flags & LAVA_PROOF)
-		.["лавастойкий"] = "Предмет сделан из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
-	if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-		.["кислотостойкий"] = "Предмет выглядит довольно прочным! Возможно, он выдержит воздействие кислоты!"
-	if(resistance_flags & FREEZE_PROOF)
-		.["морозостойкий"] = "Предмет изготовлен из моростойких материалов."
-	if(resistance_flags & FIRE_PROOF)
-		.["огнестойкий"] = "Предмет изготовлен из огнестойких материалов."
 
 /obj/item/examine_descriptor(mob/user)
 	return "предмет"
@@ -867,7 +854,7 @@
 
 /obj/item/verb/verb_pickup()
 	set src in oview(1)
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 	set name = "Pick up"
 
 	if(usr.incapacitated || !Adjacent(usr))

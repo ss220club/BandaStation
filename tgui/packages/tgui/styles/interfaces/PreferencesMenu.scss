@@ -249,6 +249,7 @@ $department_map: (
 // MARK: JobPage
 .PreferencesMenu {
   &__Department {
+    --text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.75);
     --head-color: oklch(from var(--background-color) calc(l * 0.85) c h);
     --border-color: oklch(from var(--background-color) calc(l * 1.1) c h);
     --border-color-darker: oklch(from var(--border-color) calc(l * 0.8) c h);
@@ -276,14 +277,16 @@ $department_map: (
       text-overflow: ellipsis;
       line-height: 1.2em;
       padding: var(--space-s) var(--space-m);
-      text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.75);
+      text-shadow: var(--text-shadow);
     }
 
     .options {
       display: flex;
+      max-width: 50%;
       gap: var(--button-gap);
       padding: 2px;
       text-align: right;
+      z-index: 1;
 
       .Button--color--default {
         overflow: visible;
@@ -327,6 +330,20 @@ $department_map: (
         &.Dropdown__control {
           width: 1.667em !important; // Override inline style
           height: 1.667em;
+        }
+      }
+
+      .restricted {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: var(--button-height);
+        text-shadow: var(--text-shadow);
+
+        &.ban {
+          margin-right: 0.33em;
+          font-weight: bold;
+          color: hsl(from var(--border-color) h calc(s + 20) calc(l + 20));
         }
       }
     }
