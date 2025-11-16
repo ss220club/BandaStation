@@ -160,6 +160,11 @@
 	// Bandastation Edit Start
 	else if (extra_classes.Find("looc"))
 		LAZYADD(prefixes, "<span style='font-size: 6px; color: #6699cc;'><b>\[LOOC\]</b></span> ")
+	else if (extra_classes.Find("deadsay"))
+		target.chat_color = "#b826b3"
+		// We need to force these vars to avoid color override
+		target.chat_color_name = "ghost"
+		chat_color_name_to_use = "ghost"
 	// Bandastation Edit End
 
 	if(isnull(chat_color_name_to_use))

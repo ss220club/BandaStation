@@ -124,13 +124,13 @@
 	var/bleed_overlay_icon
 
 	//Damage messages used by help_shake_act()
-	var/light_brute_msg = "ушиблена и болит"
-	var/medium_brute_msg = "избита"
-	var/heavy_brute_msg = "словно отслаивается"
+	var/light_brute_msg = "ушибленной"
+	var/medium_brute_msg = "потрёпанной"
+	var/heavy_brute_msg = "искалеченной"
 
-	var/light_burn_msg = "покраснела и онемела"
-	var/medium_burn_msg = "покрыта волдырями"
-	var/heavy_burn_msg = "отслаивает кожу"
+	var/light_burn_msg = "покрасневшей и онемевшей"
+	var/medium_burn_msg = "покрытой волдырями"
+	var/heavy_burn_msg = "отслаивающей кожу"
 
 	//Damage messages used by examine(). the desc that is most common accross all bodyparts gets shown
 	var/list/damage_examines = list(
@@ -326,7 +326,7 @@
 
 	if(self_aware)
 		if(!shown_brute && !shown_burn)
-			status = "никаких повреждений"
+			status = "ноль повреждений"
 		else
 			status = "[shown_brute] урона от ушибов и [shown_burn] урона от ожогов"
 
@@ -349,10 +349,10 @@
 			status += light_burn_msg
 
 		if(status == "")
-			status = "в порядке"
+			status = "невредимой"
 
 	var/no_damage
-	if(status == "в порядке" || status == "нет повреждений")
+	if(status == "невредимой" || status == "ноль повреждений")
 		no_damage = TRUE
 
 	var/is_disabled = ""
@@ -471,9 +471,7 @@
 		if(owner)
 			bodypart_organ.Remove(bodypart_organ.owner)
 		else
-			if(bodypart_organ.bodypart_remove(src))
-				if(drop_loc) //can be null if being deleted
-					bodypart_organ.forceMove(get_turf(drop_loc))
+			bodypart_organ.bodypart_remove(src, drop_location = get_turf(drop_loc)) // BANDASTATION ADDITION - Don't move organs to nullspace to move later
 
 	if(drop_loc) //can be null during deletion
 		for(var/atom/movable/movable as anything in src)

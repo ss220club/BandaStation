@@ -1,5 +1,5 @@
-import { Dispatch } from 'react';
-import { BooleanLike } from 'tgui-core/react';
+import type { Dispatch } from 'react';
+import type { BooleanLike } from 'tgui-core/react';
 
 export type ManagerData = {
   emojis: Record<string, null>; // That's FUCKING CURSED SHIT
@@ -8,7 +8,7 @@ export type ManagerData = {
   maxMessageLength: number;
   replyCooldown: number;
   isAdmin: BooleanLike;
-  isMentor: BooleanLike;
+  userType: number;
   allTickets: TicketProps[];
 };
 
@@ -16,15 +16,14 @@ export type TicketProps = {
   number: number;
   state: number;
   initiator: string;
-  initiatorCkey: string;
   type: string;
   openedTime: string;
   closedTime: string;
   linkedAdmin: string;
   writers: string[];
-  adminReplied: BooleanLike;
-  initiatorReplied: BooleanLike;
   messages: MessageProps[];
+  userHasStaffAccess: BooleanLike;
+  isLinkedToCurrentAdmin: BooleanLike;
 };
 
 export type MessageProps = {
@@ -35,5 +34,5 @@ export type MessageProps = {
 
 export type TicketsMainPageProps = {
   allTickets: TicketProps[];
-  setSelectedTicket: Dispatch<number>;
+  setSelectedTicketId: Dispatch<number>;
 };

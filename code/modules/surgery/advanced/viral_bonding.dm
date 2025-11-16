@@ -1,6 +1,6 @@
 /datum/surgery/advanced/viral_bonding
-	name = "Viral Bonding"
-	desc = "A surgical procedure that forces a symbiotic relationship between a virus and its host. The patient must be dosed with spaceacillin, virus food, and formaldehyde."
+	name = "Вирусная связь"
+	desc = "Хирургическая процедура, которая вызывает симбиотические отношения между вирусом и его хозяином. Пациенту необходимо ввести дозу спейсацилина, питательную среду и формальдегид."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -21,7 +21,7 @@
 	return TRUE
 
 /datum/surgery_step/viral_bond
-	name = "viral bond (cautery)"
+	name = "вирусная связь (прижигатель)"
 	implements = list(
 		TOOL_CAUTERY = 100,
 		TOOL_WELDER = 50,
@@ -39,21 +39,21 @@
 	display_results(
 		user,
 		target,
-		span_notice("You start heating [target]'s bone marrow with [tool]..."),
-		span_notice("[user] starts heating [target]'s bone marrow with [tool]..."),
-		span_notice("[user] starts heating something in [target]'s chest with [tool]..."),
+		span_notice("Вы начинаете нагревать костный мозг у [target.declent_ru(GENITIVE)] с помощью [tool.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает нагревать костный мозг у [target.declent_ru(GENITIVE)] с помощью [tool.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает нагревать что-то в груди у [target.declent_ru(GENITIVE)] с помощью [tool.declent_ru(GENITIVE)]..."),
 	)
-	display_pain(target, "You feel a searing heat spread through your chest!")
+	display_pain(target, "Вы чувствуете, как жгучий жар распространяется по вашей груди!")
 
 /datum/surgery_step/viral_bond/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results)
 	display_results(
 		user,
 		target,
-		span_notice("[target]'s bone marrow begins pulsing slowly. The viral bonding is complete."),
-		span_notice("[target]'s bone marrow begins pulsing slowly."),
-		span_notice("[user] finishes the operation."),
+		span_notice("Костный мозг у [target.declent_ru(GENITIVE)] начинает медленно пульсировать. Вирусная связь завершена."),
+		span_notice("Костный мозг у [target.declent_ru(GENITIVE)] начинает медленно пульсировать."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию."),
 	)
-	display_pain(target, "You feel a faint throbbing in your chest.")
+	display_pain(target, "Вы чувствуете легкую пульсацию в груди.")
 	for(var/datum/disease/infected_disease as anything in target.diseases)
 		if(infected_disease.severity != DISEASE_SEVERITY_UNCURABLE) //no curing quirks, sweaty
 			infected_disease.carrier = TRUE
