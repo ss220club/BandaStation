@@ -80,8 +80,8 @@ export const PrimaryObjectiveMenu = (props: PrimaryObjectiveMenuProps) => {
               description={prim_obj.task_text}
  */
 //  BANDASTATION ADDITION START (re_traitorsecondary)
-              name={prim_obj['task_name']}
-              description={prim_obj['task_text']}
+              name={prim_obj.task_name}
+              description={prim_obj.task_text}
               dangerLevel={{
                 minutesLessThan: 0,
                 title: 'none',

@@ -23,8 +23,8 @@ import {
 /* //  BANDASTATION EDIT START (re_traitorsecondary)
 ORIGINAL: import { GenericUplink, type Item } from './GenericUplink';
 */
-import { GenericUplink, Item } from './GenericUplink';
-import { Objective, ObjectiveMenu } from './ObjectiveMenu';
+import { GenericUplink, type Item } from './GenericUplink';
+import { type Objective, ObjectiveMenu } from './ObjectiveMenu';
 //  BANDASTATION EDIT END (re_traitorsecondary)
 import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
 

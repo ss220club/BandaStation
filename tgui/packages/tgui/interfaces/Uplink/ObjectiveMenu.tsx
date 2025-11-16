@@ -1,4 +1,4 @@
-import { Component, MouseEvent } from 'react';
+import { Component, type MouseEvent·} from 'react';
 import {
   Box,
   Button,
@@ -10,12 +10,12 @@ import {
   Stack,
   Tooltip,
 } from 'tgui-core/components';
-import { BooleanLike, classes } from 'tgui-core/react';
+import { type BooleanLike, classes } from 'tgui-core/react';
 
 import {
   calculateProgression,
   getDangerLevel,
-  Rank,
+  type Rank,
 } from './calculateDangerLevel';
 import { ObjectiveState } from './constants';
 

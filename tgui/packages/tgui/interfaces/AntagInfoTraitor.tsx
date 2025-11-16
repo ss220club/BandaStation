@@ -10,7 +10,7 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
 //  BANDASTATION EDIT END (re_traitorsecondary)
 import { Window } from '../layouts';
 import { type Objective, ObjectivePrintout } from './common/Objectives';
