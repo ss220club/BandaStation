@@ -1,4 +1,4 @@
-import { Component, type MouseEvent·} from 'react';
+import { Component, type MouseEvent } from 'react';
 import {
   Box,
   Button,
