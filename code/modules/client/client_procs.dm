@@ -4,8 +4,11 @@
 
 GLOBAL_LIST_INIT(blacklisted_builds, list(
 	"1622" = "Bug breaking rendering can lead to wallhacks.",
-	))
-
+))
+GLOBAL_LIST_INIT(unrecommended_builds, list(
+	"1670" = "Bug breaking in-world text rendering.",
+	"1671" = "Bug breaking in-world text rendering.",
+))
 #define LIMITER_SIZE 5
 #define CURRENT_SECOND 1
 #define SECOND_COUNT 2
@@ -271,8 +274,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		SScentral.update_player_discord_async(ckey)
 		SScentral.update_player_donate_tier_blocking(src)
 
-	if(byond_version >= 516)
-		winset(src, null, list("browser-options" = "find,byondstorage")) // BANDASTATION EDIT - Removed 'refresh'
+	winset(src, null, list("browser-options" = "find")) // BANDASTATION EDIT - Removed 'refresh'
 
 	// Instantiate stat panel
 	stat_panel = new(src, "statbrowser")
