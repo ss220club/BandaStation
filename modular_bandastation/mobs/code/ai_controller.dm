@@ -28,7 +28,7 @@
 /datum/ai_controller/basic_controller/chicken/cock
 	planning_subtrees = list(
 		// Addition subtrees
-		/datum/ai_planning_subtree/capricious_retaliate, // Capricious like Capra, get it?
+		/datum/ai_planning_subtree/capricious_retaliate,
 		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 
@@ -49,7 +49,7 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
-		/datum/ai_planning_subtree/capricious_retaliate, // Capricious like Capra, get it?
+		/datum/ai_planning_subtree/capricious_retaliate,
 		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/find_food,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
@@ -91,13 +91,17 @@
 /datum/ai_planning_subtree/random_speech/mouse/rat
 	sound = list('modular_bandastation/mobs/sound/rat_talk.ogg')
 
-/datum/ai_controller/basic_controller/mouse/rat/syndi/New(atom/new_pawn)
-	. = ..()
-	var/datum/ai_planning_subtree/S = locate(/datum/ai_planning_subtree/random_speech/mouse/rat) in planning_subtrees
-	if(S)
-		planning_subtrees -= S
-		qdel(S)
-	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/mouse/rat/syndi)
+/datum/ai_controller/basic_controller/mouse/rat/syndi
+	planning_subtrees = list(
+		/datum/ai_planning_subtree/escape_captivity,
+		/datum/ai_planning_subtree/pet_planning,
+		/datum/ai_planning_subtree/simple_find_target,
+		/datum/ai_planning_subtree/attack_obstacle_in_path,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree,
+		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cheese,
+		/datum/ai_planning_subtree/random_speech/mouse/rat/syndi,
+		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cables,
+	)
 
 /datum/ai_planning_subtree/random_speech/mouse/rat/syndi
 	speech_chance = 2
@@ -105,21 +109,13 @@
 
 // =========== Хряки ===========
 /datum/ai_controller/basic_controller/pig/big
-		planning_subtrees = list(
-		/datum/ai_planning_subtree/capricious_retaliate, // Capricious like Capra, get it?
+	planning_subtrees = list(
+		/datum/ai_planning_subtree/capricious_retaliate,
 		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/find_food,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 		/datum/ai_planning_subtree/random_speech/pig/big,
 	)
-
-/datum/ai_controller/basic_controller/pig/big/New(atom/new_pawn)
-	. = ..()
-	var/datum/ai_planning_subtree/S = locate(/datum/ai_planning_subtree/random_speech/pig) in planning_subtrees
-	if(S)
-		planning_subtrees -= S
-		qdel(S)
-	LAZYADD(planning_subtrees, new /datum/ai_planning_subtree/random_speech/pig/big)
 
 /datum/ai_planning_subtree/random_speech/pig/big
 	sound = list('modular_bandastation/mobs/sound/pig_talk1.ogg', 'modular_bandastation/mobs/sound/pig_talk2.ogg')
