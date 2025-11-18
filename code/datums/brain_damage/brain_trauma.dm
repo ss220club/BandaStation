@@ -6,7 +6,7 @@
 /datum/brain_trauma
 	/// Tracks abstract types of brain traumas, useful for determining traumas that should not exist
 	abstract_type = /datum/brain_trauma
-	var/name = "равма мозга"
+	var/name = "Травма мозга"
 	var/desc = "Травма, вызванная повреждением мозга, которая вызывает проблемы у пациента."
 	/// Description when detected by a health scanner
 	var/scan_desc = "общая травма мозга"

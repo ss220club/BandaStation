@@ -552,13 +552,13 @@
 	mood_change = -8
 	timeout = 5 MINUTES
 	/// Message variant for callous people
-	var/dont_care_message = "Oh, %DEAD_MOB% died. Shame, I guess."
+	var/dont_care_message = "О, %DEAD_MOB% %DEAD_VERB%. Жаль, наверное."
 	/// Message variant for people who care about animals
-	var/pet_message = "%DEAD_MOB% just died!!"
+	var/pet_message = "Питомец %DEAD_MOB% %DEAD_VERB%!!"
 	/// Message variant for desensitized people (security, medical, cult with halo, etc)
-	var/desensitized_message = "I saw %DEAD_MOB% die."
+	var/desensitized_message = "Я увидел, как %DEAD_VERB% %DEAD_MOB%."
 	/// Standard message variant
-	var/normal_message = "I just saw %DEAD_MOB% die. How horrible..."
+	var/normal_message = "На моих глазах %DEAD_VERB% %DEAD_MOB%. Ну и ужас..."
 	/// Naive mobs are immune to the effect
 	var/naive_immune = TRUE
 
@@ -566,7 +566,7 @@
 	if(isnull(dead_mob))
 		return
 	if(HAS_TRAIT(owner, TRAIT_NAIVE) && naive_immune)
-		description = "Have a good nap, [dead_mob.name]."
+		description = "Спокойного сна, [dead_mob.declent_ru(NOMINATIVE)]."
 		mood_change = 0
 		timeout *= 0.2
 		return
@@ -579,15 +579,16 @@
 		description = "More souls for the Geometer!"
 		return
 
+	description = replacetext_char(normal_message, "%DEAD_VERB%", get_ru_verb(dead_mob)) // BANDASTATION EDIT ADD
 	var/ispet = istype(dead_mob, /mob/living/basic/pet) || ismonkey(dead_mob)
 	if(HAS_PERSONALITY(owner, /datum/personality/callous) || (ispet && HAS_PERSONALITY(owner, /datum/personality/animal_disliker)))
-		description = replacetext(dont_care_message, "%DEAD_MOB%", get_descriptor(dead_mob))
+		description = replacetext_char(dont_care_message, "%DEAD_MOB%", get_descriptor(dead_mob))
 		mood_change = 0
 		timeout *= 0.5
 		return
 	// future todo : make the hop care about ian, cmo runtime, etc.
 	if(ispet)
-		description = replacetext(pet_message, "%DEAD_MOB%", capitalize(dead_mob.name)) // doesn't use a descriptor, so it says "Ian died"
+		description = replacetext_char(pet_message, "%DEAD_MOB%", capitalize(dead_mob.declent_ru(NOMINATIVE))) // doesn't use a descriptor, so it says "Ian died"
 		if(HAS_PERSONALITY(owner, /datum/personality/animal_friend))
 			mood_change *= 1.5
 			timeout *= 1.25
@@ -601,10 +602,10 @@
 	if(HAS_TRAIT(owner, TRAIT_DESENSITIZED))
 		mood_change *= 0.5
 		timeout *= 0.5
-		description = replacetext(desensitized_message, "%DEAD_MOB%", get_descriptor(dead_mob))
+		description = replacetext_char(desensitized_message, "%DEAD_MOB%", get_descriptor(dead_mob))
 		return
 
-	description = replacetext(normal_message, "%DEAD_MOB%", get_descriptor(dead_mob))
+	description = replacetext_char(normal_message, "%DEAD_MOB%", get_descriptor(dead_mob))
 
 /datum/mood_event/see_death/be_refreshed(datum/mood/home, mob/dead_mob, ...)
 	// Every time we get refreshed we get worse if not desensitized
@@ -624,33 +625,44 @@
 /// Changes "I saw Joe x" to "I saw the engineer x"
 /datum/mood_event/see_death/proc/get_descriptor(mob/dead_mob)
 	if(isnull(dead_mob))
-		return "something"
+		return "что-то"
 	if(dead_mob.name != "Unknown" && dead_mob.mind?.assigned_role?.job_flags & JOB_CREW_MEMBER)
-		return "the [LOWER_TEXT(dead_mob.mind?.assigned_role.title)]"
-	return "someone"
+		return "[LOWER_TEXT(dead_mob.mind?.assigned_role.title)]"
+	return "кто-то"
 
 /datum/mood_event/see_death/gibbed
-	description = "Someone just exploded in front of me!!"
+	description = "Кто-то только что взорвался на моих глазах!!"
 	mood_change = -12
 	timeout = 10 MINUTES
-	dont_care_message = "Oh, %DEAD_MOB% exploded. Now I have to get the mop."
-	pet_message = "%DEAD_MOB% just exploded!!"
-	desensitized_message = "I saw %DEAD_MOB% explode."
-	normal_message = "%DEAD_MOB% just exploded in front of me!!"
+	dont_care_message = "О, %DEAD_MOB% %DEAD_VERB%. Теперь нужно это всё чистить."
+	pet_message = "%DEAD_MOB% %DEAD_VERB%!!"
+	desensitized_message = "Я увидел, как %DEAD_MOB% %DEAD_VERB%."
+	normal_message = "%DEAD_MOB% %DEAD_VERB% на моих глазах!!"
 	naive_immune = FALSE
 
 /datum/mood_event/see_death/dusted
-	description = "Someone was just vaporized in front of me!! I don't feel so good..."
+	description = "Кто-то обратился в пыль на моих глазах!! Мне нехорошо.."
 	mood_change = -12
 	timeout = 10 MINUTES
-	dont_care_message = "Oh, %DEAD_MOB% was vaporized. Now I have to get the dustpan."
-	pet_message = "%DEAD_MOB% just vaporized!!"
-	desensitized_message = "I saw %DEAD_MOB% get vaporized."
-	normal_message = "%DEAD_MOB% was just vaporized in front of me!!"
+	dont_care_message = "О, %DEAD_MOB% %DEAD_VERB%. Теперь нужно взять совок."
+	pet_message = "%DEAD_MOB% %DEAD_VERB%!!"
+	desensitized_message = "Я увидел, как %DEAD_MOB% %DEAD_VERB%."
+	normal_message = "%DEAD_MOB% %DEAD_VERB% на моих глазах!!"
 	naive_immune = FALSE
 
+// BANDASTATION EDIT START
+/datum/mood_event/see_death/proc/get_ru_verb(mob/dead_mob)
+	return genderize_ru(dead_mob.gender, "умер", "умерла", "умерло", "умерли")
+
+/datum/mood_event/see_death/gibbed/get_ru_verb(mob/dead_mob)
+	return genderize_ru(dead_mob.gender, "взорвался", "взорвалась", "взорвалось", "взорвались")
+
+/datum/mood_event/see_death/dusted/get_ru_verb(mob/dead_mob)
+	return genderize_ru(dead_mob.gender, "обратился в пыль", "обратилась в пыль", "обратилось в пыль", "обратились в пыль")
+// BANDASTATION EDIT END
+
 /datum/mood_event/slots/loss
-	description = "Aww dang it!"
+	description = "Вот блин!"
 	mood_change = -2
 	timeout = 5 MINUTES
 	event_flags = MOOD_EVENT_GAMING
@@ -658,7 +670,7 @@
 /datum/mood_event/slots/loss/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/gambler))
 		mood_change = 0
-		description = "Aww dang it."
+		description = "Вот блин."
 	if(HAS_PERSONALITY(owner, /datum/personality/industrious) || HAS_PERSONALITY(owner, /datum/personality/slacking/diligent))
 		mood_change *= 1.5
 

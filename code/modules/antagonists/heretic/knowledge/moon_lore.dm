@@ -102,8 +102,8 @@
 	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Moonlight Amulet. \
 			Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд; \
 			если рассудок не достаточно низок, то уменьшается их настроение. \
-			Wearing this will grant you the ability to see heathens through walls and make your blades harmless, they will instead directly attack their mind. \
-			Provides thermal vision and doubles the brain regen of a moon heretic while worn."
+			Ношение этого предмета дарует вам способность видеть язычников сквозь стены, а ваши клинки сделает безвредными - они будут калечить разум жертв. \
+			Предоставляет термальное зрение и удваивает регенерацию мозга еретика Луны при ношении."
 	gain_text = "Во главе парада стоял он, луна сгустилась в единную массу, отражение души."
 
 	required_atoms = list(
@@ -144,7 +144,7 @@
 /datum/heretic_knowledge/blade_upgrade/moon
 	name = "Moonlight Blade"
 	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации. \
-			Deals more brain damage if your victim is insane or unconscious."
+			Наносит больше урона мозгу если жертва в безумии или спит."
 	gain_text = "Его остроумие было острым, как клинок, оно прорезало ложь, чтобы принести нам радость."
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -281,7 +281,7 @@
 			continue
 		new /obj/effect/temp_visual/moon_ringleader(get_turf(carbon_view))
 		if(carbon_view.has_status_effect(/datum/status_effect/confusion))
-			to_chat(carbon_view, span_big(span_hypnophrase("YOUR HEAD RATTLES WITH A THOUSAND VOICES JOINED IN A MADDENING CACOPHONY OF SOUND AND MUSIC. EVERY FIBER OF YOUR BEING SAYS 'RUN'.")))
+			to_chat(carbon_view, span_big(span_hypnophrase("ВАШ РАЗУМ ТРЕЩИТ ОТ ТЫСЯЧИ ГОЛОСОВ, СЛИТЫХ В БЕЗУМНУЮ КАКОФОНИЮ ЗВУКОВ И МУЗЫКИ. КАЖДАЯ ЩЕПКА ВАШЕГО СУЩЕСТВА КРИЧИТ: «БЕГИ».")))
 		carbon_view.adjust_confusion(2 SECONDS)
 		carbon_view.mob_mood.adjust_sanity(-20)
 
@@ -289,7 +289,7 @@
 			return
 		// So our sanity is dead, time to fuck em up
 		if(SPT_PROB(20, seconds_per_tick))
-			to_chat(carbon_view, span_warning("оно эхом отдается в вас!"))
+			to_chat(carbon_view, span_warning("оно эхом отдаётся в вас!"))
 		visible_hallucination_pulse(
 			center = get_turf(carbon_view),
 			radius = 7,
@@ -298,8 +298,8 @@
 		carbon_view.adjust_temp_blindness(5 SECONDS)
 		if(should_mind_explode(carbon_view))
 			to_chat(carbon_view, span_boldbig(span_red(\
-				"YOUR SENSES REEL AS YOUR MIND IS ENVELOPED BY AN OTHERWORLDLY FORCE ATTEMPTING TO REWRITE YOUR VERY BEING. \
-				YOU CANNOT EVEN BEGIN TO SCREAM BEFORE YOUR IMPLANT ACTIVATES ITS PSIONIC FAIL-SAFE PROTOCOL, TAKING YOUR HEAD WITH IT.")))
+				"ВАШИ ЧУВСТВА ОХВАЧЕНЫ УЖАСОМ, КОГДА В ВАШ РАЗУМ ВТОРГАЕТСЯ ПОТУСТОРОННЯЯ СИЛА, ПЫТАЮЩАЯСЯ ПЕРЕПИСЫВАТЬ ВАШЕ СУЩЕСТВО. \
+				ВЫ ДАЖЕ НЕ УСПЕВАЕТЕ КРИКНУТЬ, КАК ВАШ ИМПЛАНТ АКТИВИРУЕТ СВОЮ СИСТЕМУ АВАРИЙНОЙ ПСИОНИЧЕСКОЙ ЗАЩИТЫ, СНОСЯ ВАМ ГОЛОВУ.")))
 			var/obj/item/bodypart/head/head = locate() in carbon_view.bodyparts
 			if(head)
 				head.dismember()

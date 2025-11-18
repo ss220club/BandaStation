@@ -39,18 +39,18 @@
 /datum/mood_event/betterhug/add_effects(mob/friend)
 	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
 		mood_change = 1
-		description = "[friend.name] is nice, but that's it."
+		description = "[friend.name] приятный человек, но на этом всё."
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 1
-		description = "[friend.name] is nice, but I wish they'd stop touching me."
+		description = "[friend.name] приятный человек, но мне хотелось бы, чтобы он перестал меня трогать"
 		return
 	if(HAS_PERSONALITY(owner, /datum/personality/callous))
 		mood_change = 0
-		description = "[friend.name] is way too nice for this station."
+		description = "[friend.name] слишком приятный для этой станции."
 		return
 
-	description = "[capitalize(friend.declent_ru(NOMINATIVE))] был очень добр ко мне."
+	description = "[friend.name] был очень добр ко мне."
 
 /datum/mood_event/besthug
 	description = "Весело находиться рядом с кем-то, не могу нарадоваться!"
@@ -71,7 +71,7 @@
 		description = "[friend.name] is way too nice for this station."
 		return
 
-	description = "Весело находиться рядом с [friend.declent_ru(INSTRUMENTAL)], не могу нарадоваться!"
+	description = "Мне весело находиться рядом с [friend.declent_ru(INSTRUMENTAL)], не могу нарадоваться!"
 
 /datum/mood_event/warmhug
 	description = "Теплые и уютные обнимашки самые лучшие!"
@@ -126,7 +126,7 @@
 	mood_change = 8
 
 /datum/mood_event/maintenance_adaptation/add_effects()
-	description = "[GLOB.deity] помог мне адаптироваться к техническим помещениям!"
+	description = "Божество [GLOB.deity] помогло мне адаптироваться к техническим помещениям!"
 
 /datum/mood_event/book_nerd
 	description = "Я недавно прочитал книгу."
@@ -165,7 +165,7 @@
 
 	if(HAS_PERSONALITY(owner, /datum/personality/animal_disliker))
 		mood_change = -1
-		description = "Ewww, [animal.name] is so dirty! I don't want to touch it!"
+		description = "Беееее, [animal.declent_ru(NOMINATIVE)] такой грязный! Не буду его трогать от греха подальше!"
 		return
 
 	var/dog_fan = HAS_PERSONALITY(owner, /datum/personality/dog_fan)
@@ -174,19 +174,19 @@
 	var/iscat = istype(animal, /mob/living/basic/pet/cat)
 	if((dog_fan && isdog) || (cat_fan && iscat) || HAS_PERSONALITY(owner, /datum/personality/animal_friend))
 		mood_change = 3
-		description = "I love [animal.name] so much, [animal.p_theyre()] so adorable! I can't stop petting [animal.p_them()]!"
+		description = "Я очень люблю [animal.declent_ru(ACCUSATIVE)], такая милота! Не могу перестать гладить!"
 		return
 	if(dog_fan && iscat)
 		mood_change = -1
-		description = "I don't like [animal.name]! I prefer dogs!"
+		description = "Я не люблю [animal.declent_ru(ACCUSATIVE)]! Я люблю собак!"
 		return
 	if(cat_fan && isdog)
 		mood_change = -1
-		description = "I don't like [animal.name]! I prefer cats!"
+		description = "Я не люблю [animal.declent_ru(ACCUSATIVE)]! Я люблю котов!"
 		return
 
 	mood_change = 1
-	description = "[animal.name] is adorable!"
+	description = "[capitalize(animal.declent_ru(NOMINATIVE))] - сама милота!"
 
 // Change the moodlet if we get refreshed (we may have pet another type of animal)
 /datum/mood_event/pet_animal/be_refreshed(datum/mood/home, mob/animal)
@@ -231,7 +231,7 @@
 	hidden = TRUE
 
 /datum/mood_event/badass_antag
-	description = "Как же я чертовски крут, и все вокруг это знают. Только посмотрите на то, как они чертовски дрожат от одной только мысли о том, что я рядом."
+	description = "Какой же я зверь, и все вокруг это знают. Только посмотрите на то, как они чертовски дрожат от одной только мысли о том, что я рядом."
 	mood_change = 8
 	hidden = TRUE
 	special_screen_obj = "badass_sun"
@@ -382,16 +382,16 @@
 	if(HAS_PERSONALITY(owner, /datum/personality/callous) || HAS_PERSONALITY(owner, /datum/personality/misanthropic))
 		mood_change = -2
 		if(helper)
-			description = "They should have helped themselves."
+			description = "Они должны были сами достать свою задницу из своих проблем."
 		else
-			description = "I could've gotten up myself."
+			description = "Я мог встать сам."
 
 	else if(HAS_PERSONALITY(owner, /datum/personality/compassionate))
 		mood_change = 2
 		if(helper)
-			description = "Мне понравилось помогать [other_person]!"
+			description = "Мне понравилось помогать [other_person.declent_ru(DATIVE)]!"
 		else
-			description = "[other_person] помог мне, как мило с их стороны!"
+			description = "[capitalize(other_person.declent_ru(NOMINATIVE))] помог[genderize_ru(other_person.gender, "", "ла", "ло", "ли")] мне, как мило с их стороны!"
 
 /datum/mood_event/high_ten
 	description = "ВЕЛИКОЛЕПНО! ДВОЙНАЯ ПЯТЮНЯ!"
@@ -455,7 +455,7 @@
 	if(!spilled_mob)
 		return
 
-	description = "Ахаха! [spilled_mob] пролил свою же газировку на себя! Классика."
+	description = "Ахаха! [capitalize(spilled_mob.declent_ru(NOMINATIVE))] пролил[genderize_ru(spilled_mob.gender, "", "а", "о", "и")] свою же газировку на себя! Классика."
 
 /datum/mood_event/gaming
 	description = "Я наслаждаюсь хорошей игровой сессией!"

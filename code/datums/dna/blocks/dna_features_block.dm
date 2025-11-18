@@ -89,77 +89,41 @@
 
 // BANDASTATION ADD START - Species
 // MARK: Vulpkanin
-/datum/dna_block/feature/vulpkanin_head_markings
+/datum/dna_block/feature/accessory/vulpkanin_head_markings
 	feature_key = FEATURE_VULPKANIN_HEAD_MARKINGS
 
-/datum/dna_block/feature/vulpkanin_chest_markings
+/datum/dna_block/feature/accessory/vulpkanin_chest_markings
 	feature_key = FEATURE_VULPKANIN_CHEST_MARKINGS
 
-/datum/dna_block/feature/vulpkanin_limb_markings
+/datum/dna_block/feature/accessory/vulpkanin_limb_markings
 	feature_key = FEATURE_VULPKANIN_LIMB_MARKINGS
 
-/datum/dna_block/feature/vulpkanin_tail
+/datum/dna_block/feature/accessory/vulpkanin_tail
 	feature_key = FEATURE_VULPKANIN_TAIL
 
-/datum/dna_block/feature/vulpkanin_tail_markings
+/datum/dna_block/feature/accessory/vulpkanin_tail_markings
 	feature_key = FEATURE_VULPKANIN_TAIL_MARKINGS
 
-/datum/dna_block/feature/vulpkanin_facial_hair
+/datum/dna_block/feature/accessory/vulpkanin_facial_hair
 	feature_key = FEATURE_VULPKANIN_FACIAL_HAIR
 
-/datum/dna_block/feature/vulpkanin_body_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_BODY_MARKINGS_COLOR
-
-/datum/dna_block/feature/vulpkanin_tail_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR
-
-/datum/dna_block/feature/vulpkanin_head_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR
-
-/datum/dna_block/feature/vulpkanin_facial_hair_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_VULPKANIN_FACIAL_HAIR_COLOR
-
 // MARK: Tajaran
-/datum/dna_block/feature/tajaran_head_markings
-	feature_key = FEATURE_TAJARAN_HEAD_MARKINGS
-
-/datum/dna_block/feature/tajaran_chest_markings
-	feature_key = FEATURE_TAJARAN_CHEST_MARKINGS
-
-/datum/dna_block/feature/tajaran_limb_markings
-	feature_key = FEATURE_TAJARAN_LIMB_MARKINGS
-
-/datum/dna_block/feature/tajaran_tail
+/datum/dna_block/feature/accessory/tajaran_tail
 	feature_key = FEATURE_TAJARAN_TAIL
 
-/datum/dna_block/feature/tajaran_tail_markings
+/datum/dna_block/feature/accessory/tajaran_head_markings
+	feature_key = FEATURE_TAJARAN_HEAD_MARKINGS
+
+/datum/dna_block/feature/accessory/tajaran_chest_markings
+	feature_key = FEATURE_TAJARAN_CHEST_MARKINGS
+
+/datum/dna_block/feature/accessory/tajaran_tail_markings
 	feature_key = FEATURE_TAJARAN_TAIL_MARKINGS
 
-/datum/dna_block/feature/tajaran_facial_hair
+/datum/dna_block/feature/accessory/tajaran_facial_hair
 	feature_key = FEATURE_TAJARAN_FACIAL_HAIR
 
-/datum/dna_block/feature/tajaran_body_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_BODY_MARKINGS_COLOR
-
-/datum/dna_block/feature/tajaran_head_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_HEAD_MARKINGS_COLOR
-
-/datum/dna_block/feature/tajaran_tail_markings_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_TAIL_MARKINGS_COLOR
-
-/datum/dna_block/feature/tajaran_facial_hair_color
-	block_length = DNA_BLOCK_SIZE_COLOR
-	feature_key = FEATURE_TAJARAN_FACIAL_HAIR_COLOR
-
 // MARK: Skrell
-/datum/dna_block/feature/skrell_head_tentacle
+/datum/dna_block/feature/accessory/skrell_head_tentacle
 	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
-
 // BANDASTATION ADD END - Species

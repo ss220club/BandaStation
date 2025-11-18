@@ -479,7 +479,9 @@
 		if(owner)
 			bodypart_organ.Remove(bodypart_organ.owner)
 		else
-			bodypart_organ.bodypart_remove(src, drop_location = get_turf(drop_loc)) // BANDASTATION ADDITION - Don't move organs to nullspace to move later
+			if(bodypart_organ.bodypart_remove(src))
+				if(drop_loc) //can be null if being deleted
+					bodypart_organ.forceMove(get_turf(drop_loc))
 
 	if(drop_loc) //can be null during deletion
 		for(var/atom/movable/movable as anything in src)

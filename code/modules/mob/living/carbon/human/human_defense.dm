@@ -61,10 +61,9 @@
 	hitting_projectile.reflect(src)
 	return BULLET_ACT_FORCE_PIERCE // complete projectile permutation
 
-	if(check_block(bullet, bullet.damage, "\the [bullet]", PROJECTILE_ATTACK, bullet.armour_penetration, bullet.damage_type))
-		bullet.on_hit(src, 100, def_zone, piercing_hit)
-		return BULLET_ACT_HIT
-
+/mob/living/carbon/human/bullet_act(obj/projectile/bullet, def_zone, piercing_hit, blocked)
+	if(check_block(bullet, bullet.damage, "[bullet.declent_ru(ACCUSATIVE)]", PROJECTILE_ATTACK, bullet.armour_penetration, bullet.damage_type))
+		return ..(bullet, def_zone, piercing_hit, 100)
 	return ..()
 
 ///Reflection checks for anything in your l_hand, r_hand, or wear_suit based on the reflection chance of the object

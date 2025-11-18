@@ -107,7 +107,7 @@
 /obj/item/flag/syndi : /obj/item/banner/syndicate{@OLD}
 /obj/item/paper_bin/syndicate : /obj/item/paper_bin{@OLD}
 /obj/item/bio_chip_implanter/emp : /obj/item/implanter/emp{@OLD}
-/obj/item/bio_chip_implanter/krav_maga : /obj/item/implanter/krav_maga{@OLD}
+/obj/item/bio_chip_implanter/krav_maga : /obj/item/implanter/kaza_ruk{@OLD}
 /obj/item/restraints/handcuffs/pinkcuffs : /obj/item/restraints/handcuffs/cable/pink{@OLD}
 /obj/item/card/id/prisoner/random : /obj/item/card/id/advanced/prisoner{@OLD}
 /obj/item/beach_ball/holoball : /obj/item/toy/basketball{@OLD}

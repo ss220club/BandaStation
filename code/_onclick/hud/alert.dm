@@ -1170,15 +1170,15 @@
 	carbon_owner.shoes.handle_tying(carbon_owner)
 
 /atom/movable/screen/alert/shoes/untied
-	name = "Untied Shoes"
-	desc = "Your shoes are untied! Click the alert or your shoes to tie them."
+	name = "Развязаны шнурки"
+	desc = "Ваши шнурки на обуви развязаны! Нажмите на уведомление или обувь, чтобы завязать их."
 	use_user_hud_icon = TRUE
 	overlay_icon = /obj/item/clothing/shoes/sneakers::icon
 	overlay_state = /obj/item/clothing/shoes/sneakers::icon_state
 
 /atom/movable/screen/alert/shoes/knotted
-	name = "Knotted Shoes"
-	desc = "Someone tied your shoelaces together! Click the alert or your shoes to undo the knot."
+	name = "Завязанные узлом шнурки"
+	desc = "Кто-то завязал шнурки на обуви вместе! Нажмите на уведомление или обувь, чтобы развязать узел."
 
 /atom/movable/screen/alert/unpossess_object
 	name = "Отвязаться"

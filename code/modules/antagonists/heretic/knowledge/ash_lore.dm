@@ -50,7 +50,7 @@
 /datum/heretic_knowledge/limited_amount/starting/base_ash
 	name = "Nightwatcher's Secret"
 	desc = "Открывает перед вами путь пепла. \
-		Позволяет трансмутировать спичку и нож в пепельный клинок. \
+		Позволяет трансмутировать спичку и нож в Пепельный клинок. \
 		Одновременно можно иметь только два."
 	gain_text = "Городская стража знает своих дозорных. Если вы спросите их ночью, они могут рассказать вам о пепельном фонаре."
 	required_atoms = list(
@@ -91,7 +91,7 @@
 	name = "Ashen Passage"
 	desc = "Grants you Ashen Passage, a spell that lets you phase out of reality, allowing you to traverse a short distance, passing though any walls. \
 			When empowered, it will break you out of any stuns and restraints, and will have a longer range."
-	gain_text = "He knew how to walk between the planes."
+	gain_text = "Он знал, как ходить между мирами."
 
 	action_to_add = /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash
 	cost = 2
@@ -102,7 +102,7 @@
 	desc = "Дает вам Volcano Blast - заклинание, которое после короткой зарядки выстреливает лучом энергии \
 		в ближайшего врага, поджигая и обжигая его. Если они не потушат себя, \
 		луч продолжит движение к другой цели. \
-		When empowered, has instant cast time and blasts enemies with more flames."
+		При усилении не имеет зарядки и выстреливает большим количеством пламени."
 	gain_text = "Ни один огонь не был достаточно горячим, чтобы разжечь их. Ни один огонь не был достаточно ярким, чтобы спасти их. Ни один огонь не вечен."
 	action_to_add = /datum/action/cooldown/spell/charged/beam/fire_blast
 	cost = 2

@@ -802,9 +802,9 @@
 		return CLICK_ACTION_BLOCKING
 	if(!alt_click_can_use_id(user))
 		return CLICK_ACTION_BLOCKING
-	if(!registered_account.adjust_money(-amount_to_remove, "System: Withdrawal"))
+	if(!registered_account.adjust_money(-amount_to_remove, "Система: Вывод средств"))
 		var/difference = amount_to_remove - registered_account.account_balance
-		registered_account.bank_card_talk(span_warning("ERROR: The linked account requires [difference] more credit\s to perform that withdrawal."), TRUE)
+		registered_account.bank_card_talk(span_warning("ОШИБКА: Для вывода средств с привязанного аккаунта требуется на [difference] кр. больше."), TRUE)
 		return CLICK_ACTION_BLOCKING
 	var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
 	user.put_in_hands(holochip)
@@ -846,8 +846,8 @@
 		. += span_notice("Alt-ПКМ, чтобы привязать ID-карту к банковскому счёту.")
 
 	if(HAS_TRAIT(user, TRAIT_ID_APPRAISER))
-		. += HAS_TRAIT(src, TRAIT_JOB_FIRST_ID_CARD) ? span_boldnotice("Hmm... yes, this ID was issued from Central Command!") : span_boldnotice("This ID was created in this sector, not by Central Command.")
-		if(HAS_TRAIT(src, TRAIT_TASTEFULLY_THICK_ID_CARD) && (user.is_holding(src) || (user.CanReach(src) && user.put_in_hands(src, ignore_animation = FALSE))))
+		. += HAS_TRAIT(src, TRAIT_JOB_FIRST_ID_CARD) ? span_boldnotice("Хмм... да, этот ID был выдан Центральным Командованием!") : span_boldnotice("Этот ID был сделан в этом секторе, не Центральным Командованием.")
+		if(HAS_TRAIT(src, TRAIT_TASTEFULLY_THICK_ID_CARD) && (user.is_holding(src) || (IsReachableBy(user) && user.put_in_hands(src, ignore_animation = FALSE))))
 			ADD_TRAIT(src, TRAIT_NODROP, "psycho")
 			. += span_hypnophrase("Посмотрите, какой нежный оттенок... На изысканную толщину. Боже мой, на нём даже есть водяной знак...")
 			var/sound/slowbeat = sound('sound/effects/health/slowbeat.ogg', repeat = TRUE)
@@ -1932,7 +1932,7 @@
 	if(!after_input_check(user))
 		return TRUE
 
-	var/new_age = tgui_input_number(user, "Choose the ID's age", "Agent card age", AGE_MIN, AGE_MAX, AGE_MIN)
+	var/new_age = tgui_input_number(user, "Введите возраст", "Возраст агентской карты", AGE_MIN, AGE_MAX, AGE_MIN)
 	if(!after_input_check(user))
 		return TRUE
 

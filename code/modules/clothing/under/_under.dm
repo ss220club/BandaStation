@@ -443,7 +443,7 @@
 			if(SENSOR_COORDS)
 				. += "Датчики жизненных показателей и маячок слежения, похоже, включены."
 	else
-		. += span_tooltip("You can always get new suit sensors to install from a lathe.", "It isn't equipped with medical sensors.")
+		. += span_tooltip("Вы всегда можете получить новые датчики из автолата", "Отсутствуют медицинские датчики.")
 
 	if(LAZYLEN(attached_accessories))
 		var/list/accessories = list_accessories_with_icon(user)

@@ -54,10 +54,10 @@
 
 /datum/species/tajaran/randomize_features()
 	var/list/features = ..()
-	features[FEATURE_TAJARAN_CHEST_MARKINGS] = prob(50) ? pick(SSaccessories.tajaran_chest_markings_list) : SPRITE_ACCESSORY_NONE
-	features[FEATURE_TAJARAN_HEAD_MARKINGS] = prob(50) ? pick(SSaccessories.tajaran_head_markings_list) : SPRITE_ACCESSORY_NONE
-	features[FEATURE_TAJARAN_TAIL_MARKINGS] = prob(50) ? pick(SSaccessories.tajaran_tail_markings_list) : SPRITE_ACCESSORY_NONE
-	features[FEATURE_TAJARAN_FACIAL_HAIR] = prob(50) ? pick(SSaccessories.tajaran_facial_hair_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_CHEST_MARKINGS] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_TAJARAN_CHEST_MARKINGS]) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_HEAD_MARKINGS] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_TAJARAN_HEAD_MARKINGS]) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_TAIL_MARKINGS] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_TAJARAN_TAIL_MARKINGS]) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_TAJARAN_FACIAL_HAIR] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_TAJARAN_FACIAL_HAIR]) : SPRITE_ACCESSORY_NONE
 
 	var/furcolor = "#[random_color()]"
 	features[FEATURE_TAJARAN_BODY_MARKINGS_COLOR] = furcolor

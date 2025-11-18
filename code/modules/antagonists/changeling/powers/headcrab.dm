@@ -91,7 +91,7 @@
 
 	stored_mind.transfer_to(crab, force_key_move = TRUE)
 	spawn_location.transfer_observers_to(crab)
-	to_chat(crab, span_warning("We burst out of the remains of our former body in a shower of gore!"))
+	to_chat(crab, span_warning("Вы вырываетесь из останков своего прежнего тела под ливнем кровавых ошметков!"))
 	active = FALSE
 
 /// Ruptures nearby walls using the torn_wall component. Also it destroys objects with density.
