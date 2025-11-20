@@ -56,7 +56,7 @@ SUBSYSTEM_DEF(traitor)
 		for(var/typepath in data)
 			var/actual_typepath = text2path(typepath)
 			if(!actual_typepath)
-				log_world("[configuration_path] обнаружен недопустимый тип ([typepath]), который не существует в кодбазе! Пожалуйста, исправьте или удалите [typepath]")
+				log_world("[configuration_path] has an invalid type ([typepath]) that does not exist in the codebase! Please fix or remove [typepath]")
 			configuration_data[actual_typepath] = data[typepath]
 	return SS_INIT_SUCCESS
 //  BANDASTATION EDIT END
