@@ -16,14 +16,14 @@
 /// The heretic antagonist itself.
 /datum/antagonist/heretic
 	name = "\improper Heretic"
-	roundend_category = "Heretics"
+	roundend_category = "Еретики"
 	antagpanel_category = "Heretic"
 	ui_name = "AntagInfoHeretic"
 	antag_moodlet = /datum/mood_event/heretics
 	pref_flag = ROLE_HERETIC
 	antag_hud_name = "heretic"
 	hijack_speed = 0.5
-	suicide_cry = "THE MANSUS SMILES UPON ME!!"
+	suicide_cry = "МАНСУС УЛЫБАЕТСЯ МНЕ!!"
 	preview_outfit = /datum/outfit/heretic
 	can_assign_self_objectives = TRUE
 	default_custom_objective = "Turn a department into a testament for your dark knowledge."
@@ -301,10 +301,10 @@
 		return
 	var/confirmed = tgui_alert(
 		owner.current,
-		message = "Are you sure? You will no longer be able to Ascend.",
-		title = "Reject the call?",
-		buttons = list("Yes", "No"),
-	) == "Yes"
+		message = "Вы уверены? Вы не сможете вознестись.",
+		title = "Отказаться от призыва?",
+		buttons = list("Да", "Нет"),
+	) == "Да"
 	if (!confirmed)
 		return
 	return ..()
@@ -337,7 +337,7 @@
 
 /datum/antagonist/heretic/farewell()
 	if(!silent && owner.current)
-		to_chat(owner.current, span_userdanger("Your mind begins to flare as the otherwordly knowledge escapes your grasp!"))
+		to_chat(owner.current, span_userdanger("Ваш разум начинает разгораться, когда потусторонние знания ускользают от вас!"))
 	return ..()
 
 /datum/antagonist/heretic/on_gain()
@@ -375,7 +375,7 @@
 
 /datum/antagonist/heretic/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/our_mob = mob_override || owner.current
-	handle_clown_mutation(our_mob, "Ancient knowledge described to you has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself.")
+	handle_clown_mutation(our_mob, "Древнее знание, данное вам, позволило преодолеть свою клоунскую натуру, позволяя вам владеть оружием без вреда для себя.")
 	our_mob.faction |= FACTION_HERETIC
 
 	if(!issilicon(our_mob))
@@ -494,7 +494,7 @@
 		return
 
 	// We shouldn't be able to cast this! Cancel it.
-	source.balloon_alert(source, "you need a focus!")
+	source.balloon_alert(source, "нужна фокусировка!")
 	return SPELL_CANCEL_CAST
 
 /*
@@ -530,15 +530,15 @@
 /datum/antagonist/heretic/proc/try_draw_rune(mob/living/user, turf/target_turf, drawing_time = 20 SECONDS, additional_checks)
 	for(var/turf/nearby_turf as anything in RANGE_TURFS(1, target_turf))
 		if(!isopenturf(nearby_turf) || is_type_in_typecache(nearby_turf, blacklisted_rune_turfs))
-			target_turf.balloon_alert(user, "invalid placement for rune!")
+			target_turf.balloon_alert(user, "плохое место для руны!")
 			return
 
 	if(locate(/obj/effect/heretic_rune) in range(3, target_turf))
-		target_turf.balloon_alert(user, "too close to another rune!")
+		target_turf.balloon_alert(user, "слишком близко к другой руне!")
 		return
 
 	if(drawing_rune)
-		target_turf.balloon_alert(user, "already drawing a rune!")
+		target_turf.balloon_alert(user, "уже рисуете руну!")
 		return
 
 	INVOKE_ASYNC(src, PROC_REF(draw_rune), user, target_turf, drawing_time, additional_checks)
@@ -556,7 +556,7 @@
 	drawing_rune = TRUE
 
 	var/rune_colour = GLOB.heretic_path_to_color[heretic_path?.route || PATH_START]
-	target_turf.balloon_alert(user, "drawing rune...")
+	target_turf.balloon_alert(user, "создание руны...")
 	var/obj/effect/temp_visual/drawing_heretic_rune/drawing_effect
 	if (drawing_time < (10 SECONDS))
 		drawing_effect = new /obj/effect/temp_visual/drawing_heretic_rune/fast(target_turf, rune_colour)
@@ -564,14 +564,14 @@
 		drawing_effect = new(target_turf, rune_colour)
 
 	if(!do_after(user, drawing_time, target_turf, extra_checks = additional_checks, hidden = TRUE))
-		target_turf.balloon_alert(user, "interrupted!")
+		target_turf.balloon_alert(user, "прервано!")
 		new /obj/effect/temp_visual/drawing_heretic_rune/fail(target_turf, rune_colour)
 		qdel(drawing_effect)
 		drawing_rune = FALSE
 		return
 
 	qdel(drawing_effect)
-	target_turf.balloon_alert(user, "rune created")
+	target_turf.balloon_alert(user, "руна создана")
 	new /obj/effect/heretic_rune/big(target_turf, rune_colour)
 	drawing_rune = FALSE
 
@@ -772,7 +772,7 @@
 /datum/antagonist/heretic/proc/passive_influence_gain()
 	adjust_knowledge_points(1)
 	if(owner?.current?.stat <= SOFT_CRIT)
-		to_chat(owner.current, "[span_hear("You hear a whisper...")] [span_hypnophrase(pick_list(HERETIC_INFLUENCE_FILE, "drain_message"))]")
+		to_chat(owner.current, "[span_hear("Вы слышите шепот...")] [span_hypnophrase(pick_list(HERETIC_INFLUENCE_FILE, "drain_message"))]")
 	addtimer(CALLBACK(src, PROC_REF(passive_influence_gain)), passive_gain_timer)
 
 /datum/antagonist/heretic/proc/adjust_knowledge_points(amount, update = TRUE)
@@ -789,27 +789,27 @@
 	var/succeeded = TRUE
 
 	parts += printplayer(owner)
-	parts += "<b>Sacrifices Made:</b> [total_sacrifices]"
-	parts += "The heretic's sacrifice targets were: [english_list(all_sac_targets, nothing_text = "No one")]."
+	parts += "<b>Жертвоприношений сделано:</b> [total_sacrifices]"
+	parts += "Целями для жертвоприношения были: [english_list(all_sac_targets, nothing_text = "Никто")]."
 	if(length(objectives))
 		var/count = 1
 		for(var/datum/objective/objective as anything in objectives)
 			if(!objective.check_completion())
 				succeeded = FALSE
-			parts += "<b>Objective #[count]</b>: [objective.explanation_text] [objective.get_roundend_success_suffix()]"
+			parts += "<b>Задача #[count]</b>: [objective.explanation_text] [objective.get_roundend_success_suffix()]"
 			count++
 	if(feast_of_owls)
 		parts += span_greentext("Ascension Forsaken")
 	if(ascended)
-		parts += span_greentext(span_big("THE HERETIC ASCENDED!"))
+		parts += span_greentext(span_big("ЕРЕТИК ВОЗНЕССЯ!"))
 
 	else
 		if(succeeded)
-			parts += span_greentext("The heretic was successful, but did not ascend!")
+			parts += span_greentext("Еретик преуспел, но не возносся!")
 		else
-			parts += span_redtext("The heretic has failed.")
+			parts += span_redtext("Еретик провалился.")
 
-	parts += "<b>Knowledge Researched:</b> "
+	parts += "<b>Исследованные знания:</b> "
 
 	var/list/string_of_knowledge = list()
 
@@ -931,13 +931,13 @@
 		else
 			string_of_knowledge += knowledge.name
 
-	return "<br><b>Research Done:</b><br>[english_list(string_of_knowledge, and_text = ", and ")]<br>"
+	return "<br><b>Исследованые знания:</b><br>[english_list(string_of_knowledge, and_text = ", and ")]<br>"
 
 /datum/antagonist/heretic/antag_panel_objectives()
 	. = ..()
 
 	. += "<br>"
-	. += "<i><b>Current Targets:</b></i><br>"
+	. += "<i><b>Текущие цели:</b></i><br>"
 	if(LAZYLEN(sac_targets))
 		for(var/mob/living/carbon/human/target as anything in sac_targets)
 			. += " - <b>[target.real_name]</b>, the [target.mind?.assigned_role?.title || "human"].<br>"
@@ -1100,7 +1100,7 @@
 
 /datum/objective/minor_sacrifice/update_explanation_text()
 	. = ..()
-	explanation_text = "Sacrifice at least [target_amount] crewmembers."
+	explanation_text = "Принесите в жертву не менее [target_amount] членов экипажа."
 
 /datum/objective/minor_sacrifice/check_completion()
 	var/datum/antagonist/heretic/heretic_datum = owner?.has_antag_datum(/datum/antagonist/heretic)
@@ -1112,7 +1112,7 @@
 /datum/objective/major_sacrifice
 	name = "major sacrifice"
 	target_amount = 1
-	explanation_text = "Sacrifice 1 head of staff."
+	explanation_text = "Пожертвуйте главу станции."
 
 /datum/objective/major_sacrifice/check_completion()
 	var/datum/antagonist/heretic/heretic_datum = owner?.has_antag_datum(/datum/antagonist/heretic)
@@ -1150,7 +1150,7 @@
 
 /datum/objective/heretic_research/update_explanation_text()
 	. = ..()
-	explanation_text = "Research at least [target_amount] knowledge from the Mansus. You start with [length(GLOB.heretic_start_knowledge)] researched."
+	explanation_text = "Изучите как минимум [target_amount] знаний Мансуса. Изначально исследовано: [length(GLOB.heretic_start_knowledge)]"
 
 /datum/objective/heretic_research/check_completion()
 	var/datum/antagonist/heretic/heretic_datum = owner?.has_antag_datum(/datum/antagonist/heretic)
@@ -1161,7 +1161,7 @@
 /datum/objective/heretic_summon
 	name = "summon monsters"
 	target_amount = 2
-	explanation_text = "Summon 2 monsters from the Mansus into this realm."
+	explanation_text = "Вызовите двух монстров из Мансуса в этот мир."
 	/// The total number of summons the objective owner has done
 	var/num_summoned = 0
 

@@ -8,6 +8,10 @@
 	hair_hidden = FALSE
 	facial_hair_hidden = FALSE
 	LAZYNULL(hair_masks)
+	// BANDASTATION ADD START — накладываем маски для кастомных рас
+	if(species_hair_mask)
+		LAZYSET(hair_masks, species_hair_mask, TRUE)
+	// BANDASTATION ADD END
 	if(human_head_owner)
 		for(var/obj/item/worn_item in human_head_owner.get_equipped_items(INCLUDE_ABSTRACT))
 			if(worn_item.hair_mask)

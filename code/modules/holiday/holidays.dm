@@ -97,19 +97,22 @@ GLOBAL_LIST_INIT(holiday_mail, list())
 			return holiday_colors[(thing_to_color.x % holiday_colors.len) + 1]
 
 /proc/request_holiday_colors(atom/thing_to_color, pattern)
-	switch(pattern)
-		if(PATTERN_RANDOM)
-			return "#[random_short_color()]"
-		if(PATTERN_RAINBOW)
-			var/datum/holiday/pride_week/rainbow_datum = new()
-			return rainbow_datum.get_holiday_colors(thing_to_color, PATTERN_DEFAULT)
-	if(!length(GLOB.holidays))
-		return
-	for(var/holiday_key in GLOB.holidays)
-		var/datum/holiday/holiday_real = GLOB.holidays[holiday_key]
-		if(!holiday_real.holiday_colors)
-			continue
-		return holiday_real.get_holiday_colors(thing_to_color, pattern || holiday_real.holiday_pattern)
+	// // BANDASTATION REMOVAL START - Remove holiday tile recoloring
+	// switch(pattern)
+	// 	if(PATTERN_RANDOM)
+	// 		return "#[random_short_color()]"
+	// 	if(PATTERN_RAINBOW)
+	// 		var/datum/holiday/pride_week/rainbow_datum = new()
+	// 		return rainbow_datum.get_holiday_colors(thing_to_color, PATTERN_DEFAULT)
+	// if(!length(GLOB.holidays))
+	// 	return
+	// for(var/holiday_key in GLOB.holidays)
+	// 	var/datum/holiday/holiday_real = GLOB.holidays[holiday_key]
+	// 	if(!holiday_real.holiday_colors)
+	// 		continue
+	// 	return holiday_real.get_holiday_colors(thing_to_color, pattern || holiday_real.holiday_pattern)
+	// // BANDASTATION REMOVAL END - Remove holiday tile recoloring
+	return // BANDASTATION ADDITION - Remove holiday tile recoloring
 
 // The actual holidays
 

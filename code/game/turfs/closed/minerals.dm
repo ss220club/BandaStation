@@ -441,6 +441,7 @@
 	weak_turf = TRUE
 	proximity_based = TRUE
 
+/* BANDASTATION REMOVAL
 /turf/closed/mineral/random/snow/Change_Ore(ore_type, random = 0)
 	. = ..()
 	if(mineralType)
@@ -448,6 +449,7 @@
 		icon_state = "icerock_wall-0"
 		base_icon_state = "icerock_wall"
 		smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
+*/
 
 /turf/closed/mineral/random/snow/mineral_chances()
 	return list(

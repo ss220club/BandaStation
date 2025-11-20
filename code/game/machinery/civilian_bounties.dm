@@ -38,7 +38,7 @@
 /obj/machinery/computer/piratepad_control/civilian
 	name = "civilian bounty control terminal"
 	desc = "A console for assigning civilian bounties to inserted ID cards, and for controlling the bounty pad for export."
-	status_report = "Ready for delivery."
+	status_report = "Готов к доставке."
 	icon_screen = "civ_bounty"
 	icon_keyboard = "id_key"
 	warmup_time = 3 SECONDS
@@ -56,7 +56,7 @@
 
 /obj/machinery/computer/piratepad_control/multitool_act(mob/living/user, obj/item/multitool/I)
 	if(istype(I) && istype(I.buffer,/obj/machinery/piratepad/civilian))
-		to_chat(user, span_notice("You link [src] with [I.buffer] in [I] buffer."))
+		to_chat(user, span_notice("Вы привязываете [declent_ru(ACCUSATIVE)] к [I.buffer] с помощью буффера [I.declent_ru(GENITIVE)]."))
 		pad_ref = WEAKREF(I.buffer)
 		return TRUE
 
@@ -75,14 +75,14 @@
 	if(sending)
 		return FALSE
 	if(!inserted_scan_id)
-		status_report = "Please insert your ID first."
+		status_report = "Пожалуйста, вставьте сначала ID карту."
 		playsound(loc, 'sound/machines/synth/synth_no.ogg', 30 , TRUE)
 		return FALSE
 	if(!inserted_scan_id.registered_account.civilian_bounty)
-		status_report = "Please accept a new civilian bounty first."
+		status_report = "Пожалуйста, возьмите сначала новый заказ."
 		playsound(loc, 'sound/machines/synth/synth_no.ogg', 30 , TRUE)
 		return FALSE
-	status_report = "Civilian Bounty: "
+	status_report = "Гражданский заказ: "
 	var/obj/machinery/piratepad/civilian/pad = pad_ref?.resolve()
 	for(var/atom/movable/possible_shippable in get_turf(pad))
 		if(possible_shippable == pad)
@@ -94,10 +94,10 @@
 			if(possible_shippable_item.item_flags & ABSTRACT)
 				continue
 		if(inserted_scan_id.registered_account.civilian_bounty.applies_to(possible_shippable))
-			status_report += "Target Applicable."
+			status_report += "Цель применима."
 			playsound(loc, 'sound/machines/synth/synth_yes.ogg', 30 , TRUE)
 			return
-	status_report += "Not Applicable."
+	status_report += "Цель неприменима."
 	playsound(loc, 'sound/machines/synth/synth_no.ogg', 30 , TRUE)
 
 /**
@@ -128,13 +128,13 @@
 			current_bounty.ship(possible_shippable)
 			qdel(possible_shippable)
 	if(active_stack >= 1)
-		status_report += "Bounty Target Found x[active_stack]. "
+		status_report += "Цель заказа найдена x[active_stack]. "
 	else
-		status_report = "No applicable targets found. Aborting."
+		status_report = "Цель заказа не обнаружена. Отмена."
 		stop_sending()
 	if(current_bounty.can_claim())
 		//Pay for the bounty with the ID's department funds.
-		status_report += "Bounty completed! Please give your bounty cube to cargo for your automated payout shortly."
+		status_report += "Заказ выполнен! Пожалуйста, передайте свой куб-награду в отдел снабжения для перевода средств на ваш аккаунт."
 		SSblackbox.record_feedback("tally", "bounties_completed", 1, current_bounty.type)
 		id_account.reset_bounty()
 		SSeconomy.civ_bounty_tracker++
@@ -142,7 +142,7 @@
 		var/obj/item/bounty_cube/reward = new /obj/item/bounty_cube(drop_location())
 		reward.set_up(current_bounty, inserted_scan_id)
 
-	pad.visible_message(span_notice("[pad] activates!"))
+	pad.visible_message(span_notice("[capitalize(pad.declent_ru(NOMINATIVE))] активируется!"))
 	flick(pad.sending_state,pad)
 	pad.icon_state = pad.idle_state
 	playsound(loc, 'sound/machines/synth/synth_yes.ogg', 30 , TRUE)
@@ -155,10 +155,10 @@
 		return
 	if((id_account.civilian_bounty || id_account.bounties) && !COOLDOWN_FINISHED(id_account, bounty_timer))
 		var/time_left = DisplayTimeText(COOLDOWN_TIMELEFT(id_account, bounty_timer), round_seconds_to = 1)
-		balloon_alert(user, "try again in [time_left]!")
+		balloon_alert(user, "попробуйте еще раз через [time_left]!")
 		return FALSE
 	if(!id_account.account_job)
-		say("Requesting ID card has no job assignment registered!")
+		say("Запрашиваемая ID карта не имеет зарегистрированной должности!")
 		return FALSE
 
 	var/list/datum/bounty/crumbs = generate_bounty_list(id_account.account_job.bounty_types)
@@ -279,8 +279,8 @@
 		else
 			id_eject(user, target)
 
-	user.visible_message(span_notice("[user] inserts \the [card_to_insert] into \the [src]."),
-						span_notice("You insert \the [card_to_insert] into \the [src]."))
+	user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вставляет [card_to_insert.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]."),
+						span_notice("Вы вставляете [card_to_insert.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]."))
 	playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
 	ui_interact(user)
 	return TRUE
@@ -288,12 +288,12 @@
 ///Removes A stored ID card.
 /obj/machinery/computer/piratepad_control/civilian/proc/id_eject(mob/user, obj/item/target)
 	if(!target)
-		to_chat(user, span_warning("That slot is empty!"))
+		to_chat(user, span_warning("Этот слот пуст!"))
 		return FALSE
 	else
 		try_put_in_hand(target, user)
-		user.visible_message(span_notice("[user] gets \the [target] from \the [src]."), \
-							span_notice("You get \the [target] from \the [src]."))
+		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] получает [target.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."), \
+							span_notice("Вы получаете [target.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."))
 		playsound(src, 'sound/machines/terminal/terminal_insert_disc.ogg', 50, FALSE)
 		inserted_scan_id = null
 		return TRUE
@@ -336,7 +336,7 @@
 /obj/item/bounty_cube/examine()
 	. = ..()
 	if(speed_bonus)
-		. += span_notice("<b>[time2text(next_nag_time - world.time,"mm:ss", NO_TIMEZONE)]</b> remains until <b>[bounty_value * speed_bonus]</b> credit speedy delivery bonus lost.")
+		. += span_notice("<b>[time2text(next_nag_time - world.time,"mm:ss", NO_TIMEZONE)]</b> остаётся до потери бонуса за быструю доставку в размере <b>[bounty_value * speed_bonus]</b> кредитов.")
 	if(handler_tip && !bounty_handler_account)
 		. += span_notice("Scan this in the cargo shuttle with an export scanner to register your bank account for the <b>[bounty_value * handler_tip]</b> credit handling tip.")
 
@@ -344,7 +344,7 @@
 	//if our nag cooldown has finished and we aren't on Centcom or in transit, then nag
 	if(COOLDOWN_FINISHED(src, next_nag_time) && !is_centcom_level(z) && !is_reserved_level(z))
 		//set up our fallback message, in case of AAS being broken it will be sent to card holders
-		var/nag_message = "[src] is unsent in [get_area(src)]."
+		var/nag_message = "[capitalize(declent_ru(NOMINATIVE))] лежит неотправленным в [get_area(src)]."
 
 		//nag on Supply channel and reduce the speed bonus multiplier to nothing
 		var/obj/machinery/announcement_system/aas = get_announcement_system(/datum/aas_config_entry/bounty_cube_unsent, src, list(RADIO_CHANNEL_SUPPLY))
@@ -372,8 +372,8 @@
 	bounty_holder = holder_id.registered_name
 	bounty_holder_job = holder_id.assignment
 	bounty_holder_account = holder_id.registered_account
-	name = "\improper [bounty_value] cr [name]"
-	desc += " The sales tag indicates it was <i>[bounty_holder] ([bounty_holder_job])</i>'s reward for completing the <i>[bounty_name]</i> bounty."
+	name = "\improper [bounty_value] cr [declent_ru(NOMINATIVE)]"
+	desc += " Торговая бирка показывает, что этот куб-награда для <i>[bounty_holder] ([bounty_holder_job])</i> за выполнение заказа \"<i>[bounty_name]</i>\" ."
 	AddComponent(/datum/component/pricetag, holder_id.registered_account, holder_cut, FALSE)
 	AddComponent(/datum/component/gps, "[src]")
 	START_PROCESSING(SSobj, src)
@@ -417,7 +417,7 @@
 	var/uses = 2
 
 /obj/item/civ_bounty_beacon/attack_self()
-	loc.visible_message(span_warning("\The [src] begins to beep loudly!"))
+	loc.visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает громко гудеть!"))
 	addtimer(CALLBACK(src, PROC_REF(launch_payload)), 1 SECONDS)
 
 /obj/item/civ_bounty_beacon/proc/launch_payload()

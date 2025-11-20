@@ -288,7 +288,7 @@
 		to_chat(src, span_warning("There is no blob adjacent to the target tile!"))
 		return FALSE
 
-	if(!can_buy(BLOB_EXPAND_COST))
+	if(!can_buy(expand_cost)) // BANDASTATION EDIT - Underfloor Blobs
 		return FALSE
 
 	var/attack_success
@@ -309,7 +309,7 @@
 			add_points(BLOB_ATTACK_REFUND)
 		else
 			to_chat(src, span_warning("There is a blob there!"))
-			add_points(BLOB_EXPAND_COST) //otherwise, refund all of the cost
+			add_points(expand_cost) //otherwise, refund all of the cost // BANDASTATION EDIT - Underfloor Blobs
 	else
 		directional_attack(tile, possible_blobs, attack_success)
 
@@ -342,7 +342,7 @@
 			playsound(attacker, 'sound/effects/splat.ogg', 50, TRUE)
 			add_points(BLOB_ATTACK_REFUND)
 		else
-			add_points(BLOB_EXPAND_COST) //if we're attacking diagonally and didn't hit anything, refund
+			add_points(expand_cost) //if we're attacking diagonally and didn't hit anything, refund // BANDASTATION EDIT - Underfloor Blobs
 	return TRUE
 
 /** Rally spores to a location */

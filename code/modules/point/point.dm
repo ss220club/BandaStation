@@ -24,7 +24,7 @@
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_POINTED, pointed_atom, visual, intentional)
 
-	animate(visual, pixel_x = (tile.x - our_tile.x) * ICON_SIZE_X + pointed_atom.pixel_x, pixel_y = (tile.y - our_tile.y) * ICON_SIZE_Y + pointed_atom.pixel_y, time = 1.7, easing = EASE_OUT)
+	animate(visual, pixel_x = (tile.x - our_tile.x) * ICON_SIZE_X + pointed_atom.pixel_x, pixel_y = (tile.y - our_tile.y) * ICON_SIZE_Y + pointed_atom.pixel_y, time = POINT_TIME / 4.5, easing = CIRCULAR_EASING|EASE_OUT) // BANDASTATION EDIT: 'time = 1.7' => 'time = POINT_TIME / 4.5' & 'easing = CIRCULAR_EASING|EASE_OUT'
 	return TRUE
 
 /mob/point_at(atom/pointed_atom, intentional = FALSE)
@@ -101,7 +101,7 @@
  */
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 
 	if(istype(A, /obj/effect/temp_visual/point))
 		return FALSE
@@ -112,6 +112,11 @@
 /// either called immediately or in the tick after pointed() was called, as per the [DEFAULT_QUEUE_OR_CALL_VERB()] macro
 /mob/proc/_pointed(atom/pointing_at)
 	if(client) //Clientless mobs can just go ahead and point
+		// BANDASTATION ADDITION START - Point to cooldown
+		if(!TIMER_COOLDOWN_FINISHED(src, "pointed_cooldown"))
+			return FALSE
+		// BANDASTATION ADDITION END - Point to cooldown
+
 		if(ismovable(pointing_at))
 			var/atom/movable/pointed_movable = pointing_at
 			if(HAS_TRAIT(pointed_movable, TRAIT_SKIP_BASIC_REACH_CHECK) || pointing_at.loc.IsContainedAtomAccessible(pointing_at, src))
@@ -129,5 +134,10 @@
 				to_chat(src, span_warning("You need to wait before pointing again!"))
 				return FALSE
 	point_at(pointing_at, TRUE)
+
+	// BANDASTATION ADDITION START - Point to cooldown
+	if(client)
+		TIMER_COOLDOWN_START(src, "pointed_cooldown", 1 SECONDS)
+	// BANDASTATION ADDITION END - Point to cooldown
 
 	return TRUE

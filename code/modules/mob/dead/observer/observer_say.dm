@@ -78,4 +78,17 @@
 	to_chat(src,
 		html = "[link] [message]",
 		avoid_highlighting = speaker == src)
+
+	// BANDASTATION ADDITION START - TTS
+	if(isnull(message_mods[MODE_CUSTOM_SAY_EMOTE]) && isnull(message_mods[MODE_CUSTOM_SAY_ERASE_INPUT]) && radio_freq != FREQ_ENTERTAINMENT)
+		var/tts_message = message_mods[MODE_TTS_MESSAGE_OVERRIDE] || raw_message
+		speaker.cast_tts(
+			src,
+			tts_message,
+			is_radio = !!radio_freq,
+			tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE),
+			channel_override = radio_freq ? CHANNEL_TTS_RADIO : null
+		)
+	// BANDASTATION ADDITION END - TTS
+
 	return TRUE

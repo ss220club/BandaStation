@@ -50,7 +50,7 @@
 	if(check_access(id_card))
 		return TRUE
 	if(!silent)
-		balloon_alert(user, "access denied!")
+		balloon_alert(user, "в доступе отказано!")
 	return FALSE
 
 /obj/item/storage/lockbox/proc/toggle_locked(mob/living/user)

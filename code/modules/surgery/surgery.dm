@@ -133,7 +133,7 @@
 		return FALSE
 	//Just because you used the wrong tool it doesn't mean you meant to whack the patient with it
 	if((surgery_flags & SURGERY_CHECK_TOOL_BEHAVIOUR) ? tool.tool_behaviour : (tool.item_flags & SURGICAL_TOOL))
-		to_chat(user, span_warning("This step requires a different tool!"))
+		to_chat(user, span_warning("Для этого шага требуется другой инструмент!"))
 		return TRUE
 
 	return FALSE
@@ -166,12 +166,12 @@
 	return operating_computer
 
 /datum/surgery/advanced
-	name = "advanced surgery"
+	name = "продвинутая хирургия"
 	requires_tech = TRUE
 
 /obj/item/disk/surgery
-	name = "Surgery Procedure Disk"
-	desc = "A disk that contains advanced surgery procedures, must be loaded into an Operating Console."
+	name = "Диск с хирургическими процедурами"
+	desc = "Диск, содержащий продвинутые хирургические процедуры, должен быть загружен в операционную консоль."
 	icon_state = "datadisk1"
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT * 3, /datum/material/glass=SMALL_MATERIAL_AMOUNT)
 	var/list/surgeries

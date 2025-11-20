@@ -17,7 +17,11 @@ import { createSearch } from 'tgui-core/string';
 
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
-import { CATEGORY_ICONS_COOKING, CATEGORY_ICONS_CRAFTING } from './constants';
+import {
+  CATEGORY_ICONS_COOKING,
+  CATEGORY_ICONS_CRAFTING,
+  CATEGORY_NAMES,
+} from './constants';
 import { FoodtypeContent } from './content/FoodtypeContent';
 import { MaterialContent } from './content/MaterialContent';
 import { RecipeContent, RecipeContentCompact } from './content/RecipeContent';
@@ -147,9 +151,9 @@ export function PersonalCrafting(props: any) {
                     autoFocus
                     expensive
                     placeholder={
-                      'Search in ' +
+                      'Поиск в ' +
                       data.recipes.length +
-                      (mode === MODE.cooking ? ' recipes...' : ' designs...')
+                      (mode === MODE.cooking ? ' рецептах...' : ' чертежах...')
                     }
                     value={searchText}
                     onChange={(value) => {
@@ -176,7 +180,7 @@ export function PersonalCrafting(props: any) {
                         );
                       }}
                     >
-                      Category
+                      Категория
                     </Tabs.Tab>
                     {mode === MODE.cooking && (
                       <Tabs.Tab
@@ -194,7 +198,7 @@ export function PersonalCrafting(props: any) {
                           );
                         }}
                       >
-                        Type
+                        Тип
                       </Tabs.Tab>
                     )}
                     <Tabs.Tab
@@ -208,7 +212,7 @@ export function PersonalCrafting(props: any) {
                         setMaterial(material_occurences[0].atom_id);
                       }}
                     >
-                      {mode === MODE.cooking ? 'Ingredient' : 'Material'}
+                      {mode === MODE.cooking ? 'Ингредиенты' : 'Материалы'}
                     </Tabs.Tab>
                   </Tabs>
                 </Stack.Item>
@@ -308,7 +312,7 @@ export function PersonalCrafting(props: any) {
                                   category === 'Blood Cult' ? 'red' : 'default'
                                 }
                               >
-                                {category}
+                                {CATEGORY_NAMES[category] || category}
                               </Stack.Item>
                               {category === 'Can Make' && (
                                 <Stack.Item>
@@ -330,14 +334,14 @@ export function PersonalCrafting(props: any) {
                       act('toggle_recipes');
                     }}
                   >
-                    Can make only
+                    Можно сделать сейчас
                   </Button.Checkbox>
                   <Button.Checkbox
                     fluid
                     checked={display_compact}
                     onClick={() => act('toggle_compact')}
                   >
-                    Compact list
+                    Компактный список
                   </Button.Checkbox>
                 </Stack.Item>
                 {!forced_mode && (
@@ -363,7 +367,7 @@ export function PersonalCrafting(props: any) {
                             act('toggle_mode');
                           }}
                         >
-                          Craft
+                          Создание
                         </Button.Checkbox>
                       </Stack.Item>
                       <Stack.Item grow>
@@ -386,7 +390,7 @@ export function PersonalCrafting(props: any) {
                             act('toggle_mode');
                           }}
                         >
-                          Cook
+                          Готовка
                         </Button.Checkbox>
                       </Stack.Item>
                     </Stack>
@@ -436,7 +440,7 @@ export function PersonalCrafting(props: any) {
                 </VirtualList>
               ) : (
                 <NoticeBox m={1} p={1}>
-                  No recipes found.
+                  Не найдены рецепты.
                 </NoticeBox>
               )}
               {recipes.length > displayLimit && (
@@ -446,8 +450,8 @@ export function PersonalCrafting(props: any) {
                   style={{ cursor: 'pointer' }}
                   onClick={() => setPages(pages + 1)}
                 >
-                  Load {Math.min(pageSize, recipes.length - displayLimit)}{' '}
-                  more...
+                  Загрузить ещё{' '}
+                  {Math.min(pageSize, recipes.length - displayLimit)}
                 </Section>
               )}
             </Box>

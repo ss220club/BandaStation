@@ -6,7 +6,7 @@
 
 	circuit = /obj/item/circuitboard/machine/quantum_server
 	density = TRUE
-	desc = "A hulking computational machine designed to fabricate virtual domains."
+	desc = "Громоздкая вычислительная машина, предназначенная для создания виртуальных доменов."
 	icon = 'icons/obj/machines/bitrunning.dmi'
 	base_icon_state = "qserver"
 	icon_state = "qserver"
@@ -86,7 +86,7 @@
 /obj/machinery/quantum_server/examine(mob/user)
 	. = ..()
 
-	. += span_infoplain("Can be resource intensive to run. Ensure adequate power supply.")
+	. += span_infoplain("Может требовать много ресурсов при работе. Обеспечьте достаточное энергоснабжение.")
 
 	. += span_notice("Its maintainance panel can be [EXAMINE_HINT("screwed")] [panel_open ? "close" : "open"].")
 	if(panel_open)
@@ -94,22 +94,22 @@
 
 	var/upgraded = FALSE
 	if(capacitor_coefficient < 1)
-		. += span_infoplain("- Its coolant capacity reduces cooldown time by [(1 - capacitor_coefficient) * 100]%.")
+		. += span_infoplain("- Вместимость охладителя уменьшает время задержки на [(1 - capacitor_coefficient) * 100]%.")
 		upgraded = TRUE
 
 	if(servo_bonus > 0.2)
-		. += span_infoplain("- Its manipulation potential is increasing rewards by [servo_bonus]x.")
-		. += span_infoplain("- Injury from unsafe ejection reduced [servo_bonus * 100]%.")
+		. += span_infoplain("- Потенциал манипуляторов увеличивает награду на [servo_bonus]x.")
+		. += span_infoplain("- Повреждения, получаемые при небезопасном выходе, уменьшены на [servo_bonus * 100]%.")
 		upgraded = TRUE
 
 	if(!upgraded)
-		. += span_notice("Its output is suboptimal. Improved components will grant domain information, reduce cooldowns and increase rewards.")
+		. += span_notice("Его производительность неоптимальна. Улучшенные компоненты дадут информацию о домене, сократят время действия и увеличат награду.")
 
 	if(!is_ready)
-		. += span_notice("It is currently cooling down. Give it a few moments.")
+		. += span_notice("Сервер охлаждается, пожалуйста, ожидайте.")
 
 	if(isobserver(user) && (obj_flags & EMAGGED))
-		. += span_notice("Ominous warning lights are blinking red. This server has been tampered with.")
+		. += span_notice("Предупреждающие индикаторы зловеще мигают красным. Этот сервер подвергся вмешательству.")
 
 
 /obj/machinery/quantum_server/emag_act(mob/user, obj/item/card/emag/emag_card)
