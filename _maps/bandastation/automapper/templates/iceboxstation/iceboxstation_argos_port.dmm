@@ -57,6 +57,10 @@
 "fd" = (
 /turf/closed/wall,
 /area/station/hallway/secondary/entry)
+"ft" = (
+/obj/structure/sign/nanotrasen,
+/turf/closed/wall/r_wall,
+/area/station/hallway/secondary/entry)
 "ij" = (
 /obj/structure/flora/tree/pine/style_random,
 /turf/open/misc/asteroid/snow/icemoon,
@@ -179,7 +183,6 @@
 /area/station/hallway/secondary/entry)
 "sP" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/light/small/directional/west,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -377,9 +380,6 @@
 /obj/effect/turf_decal/delivery/red,
 /obj/machinery/camera/directional/north{
 	c_tag = "Arrivals Emergency EVA"
-	},
-/obj/structure/sign/nanotrasen{
-	pixel_y = 32
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/hallway/secondary/entry)
@@ -1026,7 +1026,7 @@ DK
 kg
 kg
 kg
-eK
+ft
 Qv
 yC
 qu
