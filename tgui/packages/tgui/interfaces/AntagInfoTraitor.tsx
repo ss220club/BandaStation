@@ -10,11 +10,11 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
-import { BooleanLike } from 'tgui-core/react';
+import type { BooleanLike } from 'tgui-core/react';
+import { useBackend } from '../backend';
 //  BANDASTATION EDIT END (re_traitorsecondary)
 import { Window } from '../layouts';
 import { type Objective, ObjectivePrintout } from './common/Objectives';
-import { useBackend } from '../backend';
 
 const allystyle = {
   fontWeight: 'bold',
@@ -153,7 +153,7 @@ const UplinkSection = (props) => {
             </Stack.Item>
           </Dimmer>
         )) || (
-  //  BANDASTATION ADDITION END (re_traitorsecondary) i hate tgui(((
+          //  BANDASTATION ADDITION END (re_traitorsecondary) i hate tgui(((
           <>
             <Stack.Item bold>
               {uplink_intro}

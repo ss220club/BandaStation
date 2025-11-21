@@ -11,6 +11,7 @@ import { useBackend } from '../../backend';
 import { ObjectiveElement } from './ObjectiveElement';
 */
 import { ObjectiveElement } from './ObjectiveMenu';
+
 //  BANDASTATION EDIT END (re_traitorsecondary)
 type PrimaryObjectiveMenuProps = {
   primary_objectives;
@@ -29,7 +30,7 @@ export const PrimaryObjectiveMenu = (props: PrimaryObjectiveMenuProps) => {
   const { primary_objectives, final_objective, can_renegotiate } = props;
   //  BANDASTATION EDIT END (re_traitorsecondary)
   //  BANDASTATION ADDITION START (re_traitorsecondary) cant write comments where needed, so it will be left here
-   return (
+  return (
     <Section fill scrollable align="center">
       <Box my={4} bold fontSize={1.2} color="green">
         ПРИВЕТСТВУЕМ, АГЕНТ.
@@ -70,18 +71,18 @@ export const PrimaryObjectiveMenu = (props: PrimaryObjectiveMenuProps) => {
           <Stack.Item key={index}>
             <ObjectiveElement
               key={prim_obj.id}
- //  BANDASTATION EDIT END (re_traitorsecondary)
- //  BANDASTATION EDIT START (re_traitorsecondary)
- /*
+              //  BANDASTATION EDIT END (re_traitorsecondary)
+              //  BANDASTATION EDIT START (re_traitorsecondary)
+              /*
           <Stack.Item key={index}>
             <ObjectiveElement
               key={prim_obj.id}
               name={prim_obj.task_name}
               description={prim_obj.task_text}
  */
-//  BANDASTATION ADDITION START (re_traitorsecondary)
-              name={prim_obj['task_name']}
-              description={prim_obj['task_text']}
+              //  BANDASTATION ADDITION START (re_traitorsecondary)
+              name={prim_obj.task_name}
+              description={prim_obj.task_text}
               dangerLevel={{
                 minutesLessThan: 0,
                 title: 'none',
@@ -98,7 +99,7 @@ export const PrimaryObjectiveMenu = (props: PrimaryObjectiveMenuProps) => {
               canAbort={false}
               grow={false}
               finalObjective={false}
-//  BANDASTATION ADDITION END (re_traitorsecondary)
+              //  BANDASTATION ADDITION END (re_traitorsecondary)
             />
           </Stack.Item>
         ))}

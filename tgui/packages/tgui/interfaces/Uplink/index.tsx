@@ -23,8 +23,8 @@ import {
 /* //  BANDASTATION EDIT START (re_traitorsecondary)
 ORIGINAL: import { GenericUplink, type Item } from './GenericUplink';
 */
-import { GenericUplink, Item } from './GenericUplink';
-import { Objective, ObjectiveMenu } from './ObjectiveMenu';
+import { GenericUplink, type Item } from './GenericUplink';
+import { type Objective, ObjectiveMenu } from './ObjectiveMenu';
 //  BANDASTATION EDIT END (re_traitorsecondary)
 import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
 
@@ -69,7 +69,7 @@ type UplinkData = {
     [key: string]: number;
   };
 
-  has_objectives: BooleanLike;  // BANDASTATION ADDITION
+  has_objectives: BooleanLike; // BANDASTATION ADDITION
   has_progression: BooleanLike;
   primary_objectives: {
     [key: number]: string;
@@ -287,7 +287,8 @@ export class Uplink extends Component<any, UplinkState> {
     let progressionPercentage = // BANDASTATION ADDITION
       current_expected_progression - progression_points; // BANDASTATION ADDITION
     // Clamp it down between 0 and 2 // BANDASTATION ADDITION
-    progressionPercentage = Math.min( // BANDASTATION ADDITION
+    progressionPercentage = Math.min(
+      // BANDASTATION ADDITION
       Math.max(progressionPercentage / progression_scaling_deviance, -1), // BANDASTATION ADDITION
       1, // BANDASTATION ADDITION
     ); // BANDASTATION ADDITION
@@ -328,20 +329,26 @@ export class Uplink extends Component<any, UplinkState> {
                                   {progressionPercentage < 0 // BANDASTATION ADDITION
                                     ? ' выше ' // BANDASTATION ADDITION
                                     : ' ниже '}
-                                  отметки на который он должен быть, то вы будете получать
+                                  отметки на который он должен быть, то вы
+                                  будете получать
                                   <Box // BANDASTATION ADDITION
                                     as="span" // BANDASTATION ADDITION
-                                    color={ // BANDASTATION ADDITION
+                                    color={
+                                      // BANDASTATION ADDITION
                                       progressionPercentage < 0 // BANDASTATION ADDITION
                                         ? 'red' // BANDASTATION ADDITION
                                         : 'green' // BANDASTATION ADDITION
                                     } // BANDASTATION ADDITION
                                     ml={1} // BANDASTATION ADDITION
                                     mr={1} // BANDASTATION ADDITION
-                                  > //
+                                  >
+                                    {' '}
+                                    {/*  */}
                                     {progressionPercentage}%
                                   </Box>
-                                  {progressionPercentage < 0 ? 'меньше' : 'больше'}{' '}
+                                  {progressionPercentage < 0
+                                    ? 'меньше'
+                                    : 'больше'}{' '}
                                   угрозы каждую минуту.
                                 </Box> // BANDASTATION ADDITION
                               )}
