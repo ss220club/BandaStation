@@ -1014,7 +1014,7 @@
 
 /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev60
 	name = "Dvoystvol-60 revolver cylinder"
-	ammo_type = /obj/item/ammo_casing/n762
+	ammo_type = /obj/item/ammo_casing/strela60
 	caliber = CALIBER_STRELA60
 	max_ammo = 4
 

@@ -40,8 +40,8 @@
 // KORD
 
 /obj/item/mounted_machine_gun_folded/volna
-	name = "folded M2T9 mounted machine gun"
-	desc = "Сложенный и разряженный станковый пулемет, готовый к развертыванию и использованию."
+	name = "folded 'Volna-15' mounted machine gun"
+	desc = "Сложенный и разряженный станковый пулемет СССП калибра 12.7x108мм, готовый к развертыванию и использованию."
 	icon = 'modular_bandastation/weapon/icons/ranged/turret_objects.dmi'
 	icon_state = "folded_hmg"
 	max_integrity = 250
@@ -54,7 +54,7 @@
 
 /obj/machinery/deployable_turret/mounted_machine_gun/volna
 	name = "'Volna-15' Mounted Machine Gun"
-	desc = "Крупнокалиберный станковый пулемет, способный вести огонь на подавление."
+	desc = "Крупнокалиберный станковый пулемет СССП калибра 12.7x108мм, способный вести огонь на подавление."
 	icon = 'modular_bandastation/weapon/icons/ranged/turret.dmi'
 	icon_state = "volna"
 	base_icon_state = "volna"

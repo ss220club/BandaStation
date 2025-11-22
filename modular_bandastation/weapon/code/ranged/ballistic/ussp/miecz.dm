@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/miecz
-	name = "АМК-462 'Miecz' assault rifle"
-	desc = "Модернизированный дизайн автомата АМК под патрон 7.62мм. Стандартный и надежный автомат солдат СССП."
+	name = "AMC-874 'Miecz' assault carbine"
+	desc = "Модернизированный дизайн штурмового карабина на базе АМК под патрон 7.62x39мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
 	icon_state = "miecz"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
@@ -25,9 +25,10 @@
 	suppressor_x_offset = 5
 	suppressor_y_offset = 3
 	burst_size = 1
-	fire_delay = 0.35 SECONDS
+	fire_delay = 0.20 SECONDS
 	actions_types = list()
-	spread = 5
+	spread = 2.5
+	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/miecz/examine(mob/user)
 	. = ..()
@@ -35,9 +36,9 @@
 
 /obj/item/gun/ballistic/automatic/miecz/examine_more(mob/user)
 	. = ..()
-	. += "Это усовершенствованная версия самого культового огнестрельного оружия, когда-либо созданного человеком, \
-	перепроектированная для уменьшения веса, улучшения управляемости и точности стрельбы, под патрон 7.62мм. \
-	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-462 не использует компановку Бул-пап'."
+	. += "Штурмовой карабин AMC-874 'Мечь', это усовершенственная конструкция на основе автомата АМК под патрон 7.62x39мм. \
+	Этот карабин был создан для штурмовых операций внутри очень тесных пространств, для этого карабин имеет короткий ствол и малые габариты. \
+	На затворе выгравировано «Оборонная Коллегия СССП»."
 
 /obj/item/gun/ballistic/automatic/miecz/Initialize(mapload)
 	. = ..()
@@ -50,3 +51,7 @@
 	icon_state = "miecz_army"
 	worn_icon_state = "miecz_army"
 	inhand_icon_state = "miecz_army"
+
+/obj/item/gun/ballistic/automatic/miecz/examine_more(mob/user)
+	. = ..()
+	. += "<br>Этот вариант сделан с армейским зеленым полимерным корпусом."

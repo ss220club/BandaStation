@@ -10,7 +10,7 @@
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
 	inhand_icon_state = "volnaclosedmag"
 	base_icon_state = "volna"
-	w_class = WEIGHT_CLASS_BULKY
+	w_class = WEIGHT_CLASS_HUGE
 	accepted_magazine_type = /obj/item/ammo_box/magazine/volna
 	weapon_weight = WEAPON_HEAVY
 	burst_size = 1

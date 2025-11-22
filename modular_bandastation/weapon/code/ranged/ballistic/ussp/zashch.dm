@@ -14,6 +14,7 @@
 	lock_back_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'
 	bolt_drop_sound = 'sound/items/weapons/gun/pistol/slide_drop.ogg'
 	fire_sound_volume = 80
+	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/pistol/zashch/examine(mob/user)
 	. = ..()

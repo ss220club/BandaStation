@@ -64,7 +64,7 @@
 
 /obj/item/gun/ballistic/automatic/sabel/auto/upp
 	name = "AMK-462 rifle"
-	desc = "Модернизированный дизайн автомата под патрон 7.62мм. Стандартный и надежный автомат солдат СССП."
+	desc = "Модернизированный дизайн автомата под патрон 7.62x39мм. Стандартный и надежный автомат солдат СССП."
 	icon_state = "amk_new"
 	inhand_icon_state = "amk_new"
 	worn_icon_state = "amk_new"

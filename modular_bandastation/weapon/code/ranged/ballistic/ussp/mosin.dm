@@ -34,5 +34,5 @@
 		пьяных криозамороженных космических русских, пьяных работников оружейных складов с желанием умереть \
 		и сотрудников охраны, не особо заботящихся о профессиональном поведении, когда «арестовывают» выстрелом в затылок \
         до тех пор, пока пушка не щелкнет. ЧРЕЗВЫЧАЙНО сырая."
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/surplus
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin
 	can_jam = TRUE
