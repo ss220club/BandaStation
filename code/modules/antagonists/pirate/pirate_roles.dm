@@ -14,6 +14,7 @@
 	you_are_text = "Вы — космический пират"
 	flavour_text = "От станции поступил отказ в оплате за вашу защиту. Защитите корабль, похитьте кредиты со станции и совершите набег на неё для ещё большей добычи."
 	spawner_job_path = /datum/job/space_pirate
+	allow_custom_character = GHOSTROLE_ALLOW_OTHER
 	///Rank of the pirate on the ship, it's used in generating pirate names!
 	var/rank = "Дезертир"
 	///Path of the structure we spawn after creating a pirate.
@@ -58,6 +59,7 @@
 	outfit = /datum/outfit/pirate
 	rank = "Боцман"
 	fluff_spawn = null
+	allow_custom_character = NONE
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/skeleton/captain
 	rank = "Капитан"
@@ -75,6 +77,7 @@
 	mob_species = /datum/species/lizard/silverscale
 	outfit = /datum/outfit/pirate/silverscale
 	rank = "Знатного рода"
+	allow_custom_character = NONE
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/silverscale/generate_pirate_name(spawn_gender)
 	var/first_name
@@ -184,6 +187,7 @@
 	mob_species = /datum/species/ethereal/lustrous
 	outfit = /datum/outfit/pirate/lustrous
 	rank = "Сверкающий"
+	allow_custom_character = NONE
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/lustrous/captain
 	rank = "Сияющий"

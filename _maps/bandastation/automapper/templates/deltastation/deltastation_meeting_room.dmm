@@ -91,13 +91,6 @@
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/station/command/meeting_room/council)
-"z" = (
-/obj/structure/sign/nanotrasen{
-	pixel_x = 32;
-	pixel_y = 32
-	},
-/turf/open/floor/wood,
-/area/station/command/meeting_room/council)
 "A" = (
 /obj/structure/table/wood,
 /obj/item/storage/briefcase{
@@ -301,7 +294,7 @@ N
 "}
 (9,1,1) = {"
 l
-z
+N
 N
 M
 q

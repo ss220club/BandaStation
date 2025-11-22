@@ -59,11 +59,11 @@
 	balloon_alert(user, "проверка аутентификации переписана")
 	return TRUE
 
-/obj/item/firing_pin/proc/gun_insert(mob/living/user, obj/item/gun/new_gun)
+/obj/item/firing_pin/proc/gun_insert(mob/living/user, obj/item/gun/new_gun, starting = FALSE)
 	gun = new_gun
 	forceMove(gun)
 	gun.pin = src
-	SEND_SIGNAL(gun, COMSIG_GUN_PIN_INSERTED, src, user)
+	SEND_SIGNAL(gun, COMSIG_GUN_PIN_INSERTED, src, user, starting)
 	return TRUE
 
 /obj/item/firing_pin/proc/gun_remove(mob/living/user)
@@ -173,7 +173,7 @@
 			return TRUE //The clown op leader antag datum isn't a subtype of the normal clown op antag datum.
 	return FALSE
 
-/obj/item/firing_pin/clown/ultra/gun_insert(mob/living/user, obj/item/gun/new_gun)
+/obj/item/firing_pin/clown/ultra/gun_insert(mob/living/user, obj/item/gun/new_gun, starting = FALSE)
 	..()
 	new_gun.clumsy_check = FALSE
 
@@ -232,69 +232,66 @@
 	desc = "A firing pin with a built-in configurable paywall."
 	color = COLOR_GOLD
 	fail_message = ""
-	///list of account IDs which have accepted the license prompt. If this is the multi-payment pin, then this means they accepted the waiver that each shot will cost them money
+	/// List of account IDs which have accepted the license prompt. If this is the multi-payment pin, then this means they accepted the waiver that each shot will cost them money
 	var/list/gun_owners = list()
-	///how much gets paid out to license yourself to the gun
+	/// How much gets paid out to license yourself to the gun
 	var/payment_amount
+	/// Owner of the gun
 	var/datum/bank_account/pin_owner
-	///if true, user has to pay everytime they fire the gun
+	/// If true, user has to pay everytime they fire the gun
 	var/multi_payment = FALSE
-	var/owned = FALSE
-	///purchase prompt to prevent spamming it, set to the user who opens to prompt to prevent locking the gun up for other users.
+	/// Purchase prompt to prevent spamming it, set to the user who opens to prompt to prevent locking the gun up for other users.
 	var/active_prompt_user
 
 /obj/item/firing_pin/paywall/attack_self(mob/user)
 	multi_payment = !multi_payment
-	to_chat(user, span_notice("Вы устанавливаете режим оплаты ударника на [( multi_payment ) ? "оплату каждым выстрелом" : "одноразовую оплату лицензии"]."))
+	to_chat(user, span_notice("Вы устанавливаете режим оплаты ударника на [multi_payment ? "оплату каждым выстрелом" : "одноразовую оплату лицензии"]."))
 
 /obj/item/firing_pin/paywall/examine(mob/user)
 	. = ..()
 	if(pin_owner)
 		. += span_notice("Этот ударник настроен на оплату счета имени: [pin_owner.account_holder].")
 
-/obj/item/firing_pin/paywall/gun_insert(mob/living/user, obj/item/gun/new_gun)
-	if(!pin_owner)
-		if(isnull(user))
-			forceMove(new_gun.drop_location())
-		else
-			to_chat(user, span_warning("ОШИБКА: Пожалуйста, проведите действующую ID-карту перед установкой ударника!"))
-			user.put_in_hands(src)
-		return FALSE
-	..()
-	if(multi_payment)
-		gun.desc += span_notice(" [capitalize(gun.declent_ru(NOMINATIVE))] требует оплату за каждый выстрел в размере [payment_amount] кредит[declension_ru(payment_amount, "", "а", "ов")].")
-		return TRUE
-	gun.desc += span_notice(" [capitalize(gun.declent_ru(NOMINATIVE))] требует оплаты лицензии в размере [payment_amount] кредит[declension_ru(payment_amount, "", "а", "ов")].")
-	return TRUE
+/obj/item/firing_pin/paywall/gun_insert(mob/living/user, obj/item/gun/new_gun, starting = FALSE)
+	if(pin_owner || starting)
+		. = ..()
+		gun.desc += span_notice("This [gun.name] has a [multi_payment ? "per-shot" : "license permit"] cost of [payment_amount] credit[payment_amount > 1 ? "s" : ""].")
+		return
 
+	if(isnull(user))
+		forceMove(new_gun.drop_location())
+	else
+		to_chat(user, span_warning("ОШИБКА: Пожалуйста, проведите действующую ID-карту перед установкой ударника!"))
+		user.put_in_hands(src)
+	return FALSE
 
 /obj/item/firing_pin/paywall/gun_remove(mob/living/user)
 	gun.desc = gun::desc
-	..()
+	. = ..()
 
-/obj/item/firing_pin/paywall/attackby(obj/item/M, mob/living/user, list/modifiers, list/attack_modifiers)
-	if(isidcard(M))
-		var/obj/item/card/id/id = M
-		if(!id.registered_account)
-			to_chat(user, span_warning("ОШИБКА: ID-карта не имеет зарегистрированного банковского счета!"))
-			return
-		if(id.registered_account != pin_owner && owned)
-			to_chat(user, span_warning("ОШИБКА: Этот ударник уже имеет привязанный счет!"))
-			return
-		if(id.registered_account == pin_owner)
-			to_chat(user, span_notice("Вы отвязываете ID-карту от ударника."))
-			gun_owners -= user.get_bank_account()
-			pin_owner = null
-			owned = FALSE
-			return
-		var/transaction_amount = tgui_input_number(user, "Введите допустимую сумму оплаты оружия", "Сумма оплаты")
-		if(!transaction_amount || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
-			return
-		pin_owner = id.registered_account
-		owned = TRUE
-		payment_amount = transaction_amount
-		gun_owners += user.get_bank_account()
-		to_chat(user, span_notice("Вы привязываете ID-карту к ударнику."))
+/obj/item/firing_pin/paywall/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!isidcard(tool))
+		return NONE
+	var/obj/item/card/id/id = tool
+	if(!id.registered_account)
+		to_chat(user, span_warning("ОШИБКА: ID-карта не имеет зарегистрированного банковского счета!"))
+		return ITEM_INTERACT_BLOCKING
+	if(id.registered_account != pin_owner)
+		to_chat(user, span_warning("ОШИБКА: Этот ударник уже имеет привязанный счет!"))
+		return ITEM_INTERACT_BLOCKING
+	if(id.registered_account == pin_owner)
+		to_chat(user, span_notice("Вы отвязываете ID-карту от ударника."))
+		gun_owners -= user.get_bank_account()
+		pin_owner = NUTRITION_LEVEL_START_MIN
+		return ITEM_INTERACT_SUCCESS
+	var/transaction_amount = tgui_input_number(user, "Введите допустимую сумму оплаты оружия", "Сумма оплаты")
+	if(!transaction_amount || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		return ITEM_INTERACT_BLOCKING
+	pin_owner = id.registered_account
+	payment_amount = transaction_amount
+	gun_owners += user.get_bank_account()
+	to_chat(user, span_notice("Вы привязываете ID-карту к ударнику."))
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/firing_pin/paywall/pin_auth(mob/living/user)
 	if(!istype(user))//nice try commie
@@ -331,13 +328,14 @@
 				if(pin_owner)
 					pin_owner.adjust_money(payment_amount, "Ударник: зарплата за лицензию оружия")
 				gun_owners += credit_card_details
-				to_chat(user, span_notice("Лицензия на оружие куплена, безопасного вам дня!"))
+				to_chat(user, span_notice("Gun license purchased, have a secure day!"))
 
 			else
 				to_chat(user, span_warning("ОШИБКА: Недостаточно баланса у пользователя для транзакции!"))
 
 		if("Нет", null)
 			to_chat(user, span_warning("ОШИБКА: Пользователь отказался от оплаты оружия!"))
+
 	active_prompt_user = null
 	return FALSE //we return false here so you don't click initially to fire, get the prompt, accept the prompt, and THEN the gun
 

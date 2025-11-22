@@ -7,7 +7,7 @@
 	full_name = "Говорить"
 	keybind_signal = COMSIG_KB_CLIENT_SAY_DOWN
 
-/datum/keybinding/client/communication/say/down(client/user, turf/target)
+/datum/keybinding/client/communication/say/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -21,7 +21,7 @@
 	full_name = "Общий канал рации (;)"
 	keybind_signal = COMSIG_KB_CLIENT_RADIO_DOWN
 
-/datum/keybinding/client/communication/radio/down(client/user, turf/target)
+/datum/keybinding/client/communication/radio/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -35,7 +35,7 @@
 	full_name = "OOC"
 	keybind_signal = COMSIG_KB_CLIENT_OOC_DOWN
 
-/datum/keybinding/client/communication/ooc/down(client/user, turf/target)
+/datum/keybinding/client/communication/ooc/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -49,7 +49,7 @@
 	full_name = "Эмоция"
 	keybind_signal = COMSIG_KB_CLIENT_ME_DOWN
 
-/datum/keybinding/client/communication/me/down(client/user, turf/target)
+/datum/keybinding/client/communication/me/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return

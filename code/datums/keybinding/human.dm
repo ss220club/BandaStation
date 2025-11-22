@@ -12,7 +12,7 @@
 	description = "Быстро экипирует предмет в любой подходящий слот"
 	keybind_signal = COMSIG_KB_HUMAN_QUICKEQUIP_DOWN
 
-/datum/keybinding/human/quick_equip/down(client/user, turf/target)
+/datum/keybinding/human/quick_equip/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -31,7 +31,7 @@
 	var/slot_item_name = "пояса"
 	keybind_signal = COMSIG_KB_HUMAN_QUICKEQUIPBELT_DOWN
 
-/datum/keybinding/human/quick_equip_belt/down(client/user, turf/target)
+/datum/keybinding/human/quick_equip_belt/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
