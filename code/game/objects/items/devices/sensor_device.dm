@@ -15,5 +15,7 @@
 	pickup_sound = SFX_GENERIC_DEVICE_PICKUP
 	drop_sound = SFX_GENERIC_DEVICE_DROP
 
+/** BANDASTATION REMOVAL - Crew Monitor NanoMap
 /obj/item/sensor_device/attack_self(mob/user)
 	GLOB.crewmonitor.show(user,src) //Proc already exists, just had to call it
+*/

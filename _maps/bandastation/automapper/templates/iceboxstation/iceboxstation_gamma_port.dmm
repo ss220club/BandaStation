@@ -1,0 +1,283 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"b" = (
+/obj/structure/fence{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"d" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"g" = (
+/obj/structure/fence{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"i" = (
+/obj/structure/sign/warning/docking/directional/west,
+/turf/template_noop,
+/area/template_noop)
+"j" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"k" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"o" = (
+/obj/structure/sign/warning/secure_area,
+/turf/closed/wall/ice,
+/area/icemoon/surface/outdoors/nospawn)
+"p" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"r" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"s" = (
+/obj/structure/fence{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"t" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"x" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"y" = (
+/obj/structure/fence{
+	dir = 4
+	},
+/obj/structure/sign/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"A" = (
+/obj/structure/fence{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"C" = (
+/obj/structure/fence{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"E" = (
+/obj/structure/fence{
+	dir = 1
+	},
+/turf/open/floor/plating/snowed/smoothed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"F" = (
+/turf/open/floor/glass,
+/area/station/security/lockers)
+"J" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"K" = (
+/turf/template_noop,
+/area/template_noop)
+"O" = (
+/obj/machinery/firealarm/directional/south,
+/turf/template_noop,
+/area/template_noop)
+"S" = (
+/obj/machinery/door/poddoor/shuttledock{
+	checkdir = 8
+	},
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
+/obj/machinery/atmos_shield_gen/active,
+/obj/machinery/atmos_shield_gen/active{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/security/lockers)
+"X" = (
+/obj/docking_port/stationary{
+	dir = 8;
+	dwidth = 4;
+	height = 5;
+	name = "SS13: Gamma Armory";
+	shuttle_id = "gamma_home";
+	width = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/floor/plating/snowed/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+
+(1,1,1) = {"
+K
+C
+b
+s
+g
+E
+C
+b
+g
+C
+K
+"}
+(2,1,1) = {"
+K
+j
+a
+a
+a
+J
+J
+a
+a
+t
+K
+"}
+(3,1,1) = {"
+K
+k
+a
+a
+a
+a
+a
+a
+a
+x
+o
+"}
+(4,1,1) = {"
+K
+k
+a
+a
+a
+a
+a
+a
+a
+a
+y
+"}
+(5,1,1) = {"
+K
+k
+a
+a
+a
+a
+a
+a
+a
+a
+A
+"}
+(6,1,1) = {"
+K
+d
+p
+p
+p
+X
+p
+p
+p
+r
+o
+"}
+(7,1,1) = {"
+K
+K
+K
+K
+K
+S
+K
+K
+K
+K
+K
+"}
+(8,1,1) = {"
+K
+K
+K
+i
+K
+F
+K
+K
+K
+K
+K
+"}
+(9,1,1) = {"
+K
+K
+K
+K
+K
+K
+K
+K
+K
+K
+K
+"}
+(10,1,1) = {"
+K
+K
+K
+K
+K
+K
+K
+O
+K
+K
+K
+"}

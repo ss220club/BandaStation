@@ -250,7 +250,7 @@
 						dmgreport += "<td><font color='#cc3333'>-</font></td>"
 						dmgreport += "<td><font color='#ff9933'>-</font></td>"
 						dmgreport += "</tr>"
-						dmgreport += "<tr><td colspan=6><span class='alert ml-2'>&rdsh; Physical trauma: [conditional_tooltip("Dismembered", "Reattach or replace surgically.", tochat)]</span></td></tr>"
+						dmgreport += "<tr><td colspan=6><span class='alert ml-2'>&rdsh; Физическая травма: [conditional_tooltip("Ампутирована", "Переприсоединить или заменить хирургическим путем.", tochat)]</span></td></tr>"
 						continue
 					var/has_any_embeds = length(limb.embedded_objects) >= 1
 					var/has_any_wounds = length(limb.wounds) >= 1
@@ -274,10 +274,10 @@
 							var/embedded_amt = embedded_names[embedded_name]
 							if(embedded_amt > 1)
 								displayed = "[embedded_amt]x [embedded_name]"
-							dmgreport += "<tr><td colspan=6><span class='alert ml-2'>&rdsh; Foreign object(s): [conditional_tooltip(displayed, "Use a hemostat to remove.", tochat)]</span></td></tr>"
+							dmgreport += "<tr><td colspan=6><span class='alert ml-2'>&rdsh; Инородные объекты: [conditional_tooltip(displayed, "Используйте гемостат для извлечения.", tochat)]</span></td></tr>"
 					if(has_any_wounds)
 						for(var/datum/wound/wound as anything in limb.wounds)
-							dmgreport += "<tr><td colspan=6><span class='alert ml-2'>&rdsh; Physical trauma: [conditional_tooltip("[wound.name] ([wound.severity_text()])", wound.treat_text_short, tochat)]</span></td></tr>"
+							dmgreport += "<tr><td colspan=6><span class='alert ml-2'>&rdsh; Физическая травма: [conditional_tooltip("[wound.name] ([wound.severity_text()])", wound.treat_text_short, tochat)]</span></td></tr>"
 
 			dmgreport += "</table></font>"
 			render_list += dmgreport // tables do not need extra linebreak
@@ -623,7 +623,7 @@
 	var/advised = FALSE
 	for(var/limb in patient.get_wounded_bodyparts())
 		var/obj/item/bodypart/wounded_part = limb
-		render_list += "<span class='alert ml-1'><b>Warning: Physical trauma[LAZYLEN(wounded_part.wounds) > 1? "s" : ""] detected in [wounded_part.name]</b>"
+		render_list += "<span class='alert ml-1'><b>ВНИМАНИЕ: Физическ[LAZYLEN(wounded_part.wounds) > 1? "ие травмы обнаружены" : "ая травма обнаружена"]  в [wounded_part.declent_ru(PREPOSITIONAL)]</b>"
 		for(var/limb_wound in wounded_part.wounds)
 			var/datum/wound/current_wound = limb_wound
 			render_list += "<div class='ml-2'>[simple_scan ? current_wound.get_simple_scanner_description() : current_wound.get_scanner_description()]</div><br>"

@@ -124,13 +124,13 @@
 	var/bleed_overlay_icon
 
 	//Damage messages used by help_shake_act()
-	var/light_brute_msg = "bruised and feels sore"
-	var/medium_brute_msg = "battered"
-	var/heavy_brute_msg = "mangled"
+	var/light_brute_msg = "ушибленной"
+	var/medium_brute_msg = "потрёпанной"
+	var/heavy_brute_msg = "искалеченной"
 
-	var/light_burn_msg = "red and feels numb"
-	var/medium_burn_msg = "blistered"
-	var/heavy_burn_msg = "like its peeling away"
+	var/light_burn_msg = "покрасневшей и онемевшей"
+	var/medium_burn_msg = "покрытой волдырями"
+	var/heavy_burn_msg = "отслаивающей кожу"
 
 	//Damage messages used by examine(). the desc that is most common accross all bodyparts gets shown
 	var/list/damage_examines = list(
@@ -260,6 +260,7 @@
 	else
 		blood_dna_info = list("Unknown DNA" = get_blood_type(BLOOD_TYPE_O_PLUS))
 
+	ru_names_rename(ru_names_list("[limb_id] [parse_zone(body_zone)]", "[ru_parse_zone(body_zone, declent = NOMINATIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = GENITIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = DATIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = ACCUSATIVE)] ([limb_id])", "[ru_parse_zone(body_zone, declent = INSTRUMENTAL)] ([limb_id])", "[ru_parse_zone(body_zone, declent = PREPOSITIONAL)] ([limb_id])", gender = FEMALE))
 	name = "[limb_id] [parse_zone(body_zone)]"
 	update_icon_dropped()
 	refresh_bleed_rate()
@@ -306,9 +307,9 @@
 
 	. = ..()
 	if(brute_dam > DAMAGE_PRECISION)
-		. += span_warning("This limb has [brute_dam > 30 ? "severe" : "minor"] bruising.")
+		. += span_warning("У этой конечности [brute_dam > 30 ? "тяжёлые" : "лёгкие"] ушибы.")
 	if(burn_dam > DAMAGE_PRECISION)
-		. += span_warning("This limb has [burn_dam > 30 ? "severe" : "minor"] burns.")
+		. += span_warning("У этой конечности [burn_dam > 30 ? "тяжёлые" : "лёгкие"] ожоги.")
 
 	for(var/datum/wound/wound as anything in wounds)
 		var/wound_desc = wound.get_limb_examine_description()
@@ -333,9 +334,9 @@
 
 	if(self_aware)
 		if(!shown_brute && !shown_burn)
-			status = "no damage"
+			status = "ноль повреждений"
 		else
-			status = "[shown_brute] brute damage and [shown_burn] burn damage"
+			status = "[shown_brute] урона от ушибов и [shown_burn] урона от ожогов"
 
 	else
 		if(shown_brute > (max_damage * 0.8))
@@ -346,7 +347,7 @@
 			status += light_brute_msg
 
 		if(shown_brute > DAMAGE_PRECISION && shown_burn > DAMAGE_PRECISION)
-			status += " and "
+			status += " и "
 
 		if(shown_burn > (max_damage * 0.8))
 			status += heavy_burn_msg
@@ -356,21 +357,21 @@
 			status += light_burn_msg
 
 		if(status == "")
-			status = "OK"
+			status = "невредимой"
 
 	var/no_damage
-	if(status == "OK" || status == "no damage")
+	if(status == "невредимой" || status == "ноль повреждений")
 		no_damage = TRUE
 
 	var/is_disabled = ""
 	if(bodypart_disabled)
-		is_disabled = " is disabled"
+		is_disabled = " обездвижена"
 		if(no_damage)
-			is_disabled += " but otherwise"
+			is_disabled += ", но в целом"
 		else
-			is_disabled += " and"
+			is_disabled += " и"
 
-	check_list += "<span class='[no_damage ? "notice" : "warning"]'>Your [plaintext_zone][is_disabled][self_aware ? " has " : " looks "][status].</span>"
+	check_list += "<span class='[no_damage ? "notice" : "warning"]'>Ваша [ru_plaintext_zone[NOMINATIVE] || plaintext_zone][is_disabled][self_aware ? " имеет " : " выглядит "][status].</span>"
 
 	var/adept_organ_feeler = owner == examiner && HAS_TRAIT(examiner, TRAIT_SELF_AWARE)
 	for(var/obj/item/organ/organ in src)
@@ -389,8 +390,8 @@
 		if(embedded_thing.get_embed().stealthy_embed)
 			continue
 		var/harmless = embedded_thing.get_embed().is_harmless()
-		var/stuck_wordage = harmless ? "stuck to" : "embedded in"
-		var/embed_text = "\t<a href='byond://?src=[REF(examiner)];embedded_object=[REF(embedded_thing)];embedded_limb=[REF(src)]'> There is [icon2html(embedded_thing, examiner)] \a [embedded_thing] [stuck_wordage] your [plaintext_zone]!</a>"
+		var/stuck_wordage = harmless ? "застрял" : "прилип"
+		var/embed_text = "\t<a href='byond://?src=[REF(examiner)];embedded_object=[REF(embedded_thing)];embedded_limb=[REF(src)]'> There is [icon2html(embedded_thing, examiner)] \a [embedded_thing] [stuck_wordage == "застрял" ? "в" : "к"] вашей [ru_plaintext_zone[DATIVE] || plaintext_zone]!</a>"
 		if (harmless)
 			check_list += span_italics(span_notice(embed_text))
 		else
@@ -423,17 +424,17 @@
 			if(!human_victim.get_bodypart(body_zone))
 				user.temporarilyRemoveItemFromInventory(src, TRUE)
 				if(!try_attach_limb(victim))
-					to_chat(user, span_warning("[human_victim]'s body rejects [src]!"))
+					to_chat(user, span_warning("Тело [human_victim.declent_ru(GENITIVE)] отвергает [declent_ru(ACCUSATIVE)]!"))
 					forceMove(human_victim.loc)
 					return
 				if(check_for_frankenstein(victim))
 					bodypart_flags |= BODYPART_IMPLANTED
 				if(human_victim == user)
-					human_victim.visible_message(span_warning("[human_victim] jams [src] into [human_victim.p_their()] empty socket!"),\
-					span_notice("You force [src] into your empty socket, and it locks into place!"))
+					human_victim.visible_message(span_warning("[capitalize(human_victim.declent_ru(NOMINATIVE))] вклинивает [declent_ru(ACCUSATIVE)] в пустой сокет на своём теле!"),\
+					span_notice("Вы вставляете [declent_ru(GENITIVE)] в свой пустой сокет, и [declent_ru(NOMINATIVE)] встаёт на место!"))
 				else
-					human_victim.visible_message(span_warning("[user] jams [src] into [human_victim]'s empty socket!"),\
-					span_notice("[user] forces [src] into your empty socket, and it locks into place!"))
+					human_victim.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] вклинивает [declent_ru(ACCUSATIVE)] в пустой сокет на теле [human_victim.declent_ru(GENITIVE)]!"),\
+					span_notice("[capitalize(user.declent_ru(NOMINATIVE))] вставляет [declent_ru(GENITIVE)] в свой пустой сокет, и [declent_ru(NOMINATIVE)] встаёт на место!"))
 				return
 	return ..()
 
@@ -443,11 +444,11 @@
 	if(weapon.get_sharpness())
 		add_fingerprint(user)
 		if(!contents.len)
-			to_chat(user, span_warning("There is nothing left inside [src]!"))
+			to_chat(user, span_warning("Внутри [declent_ru(GENITIVE)] ничего не осталось!"))
 			return
 		playsound(loc, 'sound/items/weapons/slice.ogg', 50, TRUE, -1)
-		user.visible_message(span_warning("[user] begins to cut open [src]."),\
-			span_notice("You begin to cut open [src]..."))
+		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] начинает вскрывать [declent_ru(ACCUSATIVE)]."),\
+			span_notice("Вы начинаете вскрывать [declent_ru(ACCUSATIVE)]..."))
 		if(do_after(user, 5.4 SECONDS, target = src))
 			drop_organs(user, TRUE)
 	else
@@ -1022,7 +1023,8 @@
 		overlay.inherit_color(src, force = TRUE)
 	// Ensures marking overlays are updated accordingly as well
 	for(var/datum/bodypart_overlay/simple/body_marking/marking in bodypart_overlays)
-		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], species_color)
+		var/marking_color = marking.dna_color_feature_key ? human_owner.dna.features[marking.dna_color_feature_key] : species_color /// BANDASTATION ADDITION - Species
+		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], marking_color) /// BANDASTATION EDIT - Species
 
 	return TRUE
 
@@ -1507,25 +1509,25 @@
 	if(can_be_disabled && (get_damage() / max_damage) >= robotic_emp_paralyze_damage_percent_threshold)
 		ADD_TRAIT(src, TRAIT_PARALYSIS, EMP_TRAIT)
 		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_PARALYSIS, EMP_TRAIT), time_needed)
-		owner?.visible_message(span_danger("[owner]'s [plaintext_zone] seems to malfunction!"))
+		owner?.visible_message(span_danger("[capitalize(owner.declent_ru(NOMINATIVE))], похоже, имеет не рабочую [ru_plaintext_zone[GENITIVE] || plaintext_zone]!"))
 
 	return TRUE
 
 /// Returns the generic description of our BIO_EXTERNAL feature(s), prioritizing certain ones over others. Returns error on failure.
 /obj/item/bodypart/proc/get_external_description()
 	if (biological_state & BIO_FLESH)
-		return "flesh"
+		return "плоть"
 	if (biological_state & BIO_WIRED)
-		return "wiring"
+		return "проводку"
 
 	return "error"
 
 /// Returns the generic description of our BIO_INTERNAL feature(s), prioritizing certain ones over others. Returns error on failure.
 /obj/item/bodypart/proc/get_internal_description()
 	if (biological_state & BIO_BONE)
-		return "bone"
+		return "кость"
 	if (biological_state & BIO_METAL)
-		return "metal"
+		return "метал"
 	if (biological_state & BIO_FLESH)
 		return "shreds of ligaments"
 	if (biological_state & BIO_WOOD)

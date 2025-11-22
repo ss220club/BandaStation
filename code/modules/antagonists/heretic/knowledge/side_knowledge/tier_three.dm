@@ -59,13 +59,13 @@
 
 /datum/heretic_knowledge/limited_amount/risen_corpse
 	name = "Shattered Ritual"
-	desc = "Allows you to transmute a corpse with a soul, a pair of latex or nitrile gloves, and \
-		and any exosuit clothing (such as armor) to create a Shattered Risen. \
-		Shattered Risen are strong ghouls that have 125 health, but cannot hold items, \
-		instead having two brutal weapons for hands. You can only create one at a time."
-	gain_text = "I witnessed a cold, rending force drag this corpse back to near-life. \
-		When it moves, it crunches like broken glass. Its hands are no longer recognizable as human - \
-		each clenched fist contains a brutal nest of sharp bone-shards instead."
+	desc = "Позволяет трансмутировать труп с душой, пару латексных или нитриловых перчаток, \
+		и любой костюм, чтобы создать Разбитого восставшего. \
+		Разбитые восставшие это сильные гули с 125 здоровья, но не могут держать предметы, \
+		вместо этого имеют в руках два жестоких оружия. Вы можете иметь только одного."
+	gain_text = "Я узрел как холодная, раздирающая сила вернула этот труп к полу-жизни. \
+		Движения хрустящие, как сломанное стекло. Руки больше не похожи на человеческие - \
+		в каждом сжатом кулаке жестокие гнезда острых костяных осколков."
 
 	required_atoms = list(
 		/obj/item/clothing/suit = 1,
@@ -86,33 +86,33 @@
 		if(body.stat != DEAD)
 			continue
 		if(!IS_VALID_GHOUL_MOB(body) || HAS_TRAIT(body, TRAIT_HUSK))
-			to_chat(user, span_hierophant_warning("[body] is not in a valid state to be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не в подходящем состоянии для превращения в гуля."))
 			continue
 		if(!body.mind)
-			to_chat(user, span_hierophant_warning("[body] is mindless and cannot be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не имеет разума и не может быть превращен в гуля."))
 			continue
 		if(!body.client && !body.mind.get_ghost(ghosts_with_clients = TRUE))
-			to_chat(user, span_hierophant_warning("[body] is soulless and cannot be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не имеет души и не может быть превращен в гуля."))
 			continue
 
 		// We will only accept valid bodies with a mind, or with a ghost connected that used to control the body
 		selected_atoms += body
 		return TRUE
 
-	loc.balloon_alert(user, "ritual failed, no valid body!")
+	loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 	return FALSE
 
 /datum/heretic_knowledge/limited_amount/risen_corpse/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	var/mob/living/carbon/human/soon_to_be_ghoul = locate() in selected_atoms
 	if(QDELETED(soon_to_be_ghoul)) // No body? No ritual
 		stack_trace("[type] reached on_finished_recipe without a human in selected_atoms to make a ghoul out of.")
-		loc.balloon_alert(user, "ritual failed, no valid body!")
+		loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 		return FALSE
 
 	soon_to_be_ghoul.grab_ghost()
 	if(!soon_to_be_ghoul.mind || !soon_to_be_ghoul.client)
 		stack_trace("[type] reached on_finished_recipe without a minded / cliented human in selected_atoms to make a ghoul out of.")
-		loc.balloon_alert(user, "ritual failed, no valid body!")
+		loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 		return FALSE
 
 	selected_atoms -= soon_to_be_ghoul
@@ -148,7 +148,7 @@
 /// The "hand" "weapon" used by shattered risen
 /obj/item/mutant_hand/shattered_risen
 	name = "bone-shards"
-	desc = "What once appeared to be a normal human fist, now holds a mauled nest of sharp bone-shards."
+	desc = "То, что когда-то казалось обычным человеческим кулаком, теперь превратилось в гнездо острых костяных осколков."
 	color = "#001aff"
 	hitsound = SFX_SHATTER
 	force = 16

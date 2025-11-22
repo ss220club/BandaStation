@@ -1,0 +1,4580 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"acA" = (
+/obj/structure/sign/poster/contraband/random/directional/south,
+/obj/structure/railing/corner/end/flip{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"app" = (
+/obj/structure/sign/poster/contraband/random/directional/west,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
+"aqq" = (
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/red/line,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"aAs" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/item/pizzabox/margherita,
+/obj/item/pizzabox/margherita,
+/obj/item/knife/kitchen,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"aDf" = (
+/obj/item/target,
+/obj/effect/decal/cleanable/confetti,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"aDp" = (
+/turf/open/floor/iron/stairs/medium{
+	color = "#adadad";
+	dir = 1
+	},
+/area/centcom/syndicate_base)
+"aHv" = (
+/obj/machinery/light/directional/north,
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"aLl" = (
+/obj/structure/chair/sofa/middle/brown,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"aSV" = (
+/obj/structure/curtain/bounty/start_closed{
+	pixel_y = -32
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark,
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"aTN" = (
+/obj/structure/ore_box,
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"aXh" = (
+/obj/structure/table/wood/poker,
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	pixel_x = -5;
+	pixel_y = 9
+	},
+/obj/item/toy/cards/deck/syndicate,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"bbA" = (
+/obj/structure/chair/comfy/purp{
+	dir = 8
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo5"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/effect/landmark/start/nukeop_overwatch,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"bcl" = (
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"bgj" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 1
+	},
+/area/centcom/syndicate_base)
+"bjf" = (
+/obj/item/banner/syndicate,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"bjU" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base)
+"blJ" = (
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/directional/north,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"bnr" = (
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"bpw" = (
+/obj/machinery/computer/shuttle/syndicate{
+	name = "Nuclear Operatives Shuttle Console"
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"bxW" = (
+/obj/structure/railing/corner/end{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"bJW" = (
+/obj/machinery/photocopier/syndicate,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"bLA" = (
+/obj/structure/table,
+/obj/item/gun/energy/ionrifle,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"bMd" = (
+/obj/machinery/computer/shuttle/syndicate{
+	name = "Nuclear Operatives Shuttle Console";
+	dir = 4
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"bNg" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/machinery/fax/admin/syndicate,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"bRD" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"bRF" = (
+/obj/machinery/computer/message_monitor{
+	pixel_x = -6;
+	dir = 8
+	},
+/obj/item/paper/monitorkey,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/obj/machinery/light/directional/north,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"bUd" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"bUU" = (
+/obj/structure/window/reinforced/survival_pod/spawner/directional/south,
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"bVX" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"chA" = (
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"ciG" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 1
+	},
+/area/centcom/syndicate_base)
+"cji" = (
+/obj/machinery/door/poddoor/ert{
+	id = "nukeop_ready";
+	name = "Shuttle Dock Door"
+	},
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"crr" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo9"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"cyn" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"cDl" = (
+/obj/structure/sign/poster/contraband/random/directional/north,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"cHl" = (
+/obj/item/reagent_containers/cup/glass/bottle/rum{
+	pixel_x = -16;
+	pixel_y = 11
+	},
+/obj/structure/table/wood/poker,
+/obj/item/toy/cards/deck/syndicate{
+	pixel_y = 4
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"cNm" = (
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"cSv" = (
+/obj/structure/chair/sofa/right/brown,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"cWW" = (
+/obj/effect/turf_decal/arrows{
+	dir = 1
+	},
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"cZG" = (
+/obj/structure/ore_box,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"cZH" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo6"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"deV" = (
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"dfR" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"dlo" = (
+/obj/structure/closet/syndicate/personal,
+/obj/machinery/light/small/directional/south,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"dlt" = (
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/obj/machinery/door/airlock/external{
+	id_tag = "syndicate_away"
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"dlQ" = (
+/obj/structure/chair/stool/bar{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"don" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/machinery/door/poddoor/ert{
+	id = "nukeop_storage"
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"dts" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"dCq" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 8
+	},
+/area/centcom/syndicate_base)
+"dCB" = (
+/obj/structure/chair/comfy/red{
+	dir = 8
+	},
+/obj/effect/landmark/start/nukeop_leader,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"dNj" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/machinery/jukebox,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"dPy" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"dUG" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/cardboard,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"eim" = (
+/obj/machinery/light/small/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/kirbyplants/random,
+/obj/structure/railing,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"emh" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/machinery/door/window/survival_pod/left/directional/south{
+	req_access = list("syndicate")
+	},
+/obj/item/assembly/flash/handheld{
+	pixel_y = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"epF" = (
+/obj/structure/ore_box,
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"evm" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"eEu" = (
+/obj/machinery/computer/camera_advanced{
+	pixel_x = -6;
+	dir = 8
+	},
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"eFN" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo4"
+	},
+/obj/effect/turf_decal/siding/dark/inner_corner{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"ePf" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"eSY" = (
+/obj/structure/mop_bucket,
+/obj/item/mop,
+/obj/item/soap/syndie,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"eXO" = (
+/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"fbq" = (
+/obj/structure/table/wood,
+/obj/machinery/chem_dispenser/drinks/beer/fullupgrade{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"ffq" = (
+/obj/machinery/light/small/directional/east,
+/obj/structure/toilet,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"flo" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/command,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"fmQ" = (
+/obj/machinery/light/small/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/corner,
+/obj/effect/turf_decal/stripes/red/corner,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"fnU" = (
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base)
+"ful" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"fxM" = (
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base/control)
+"fAH" = (
+/obj/structure/ore_box,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"fHu" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/box,
+/turf/open/floor/iron/recharge_floor,
+/area/centcom/syndicate_base)
+"fQZ" = (
+/turf/open/floor/iron/stairs/medium{
+	dir = 1
+	},
+/area/centcom/syndicate_base)
+"fTe" = (
+/obj/effect/turf_decal/delivery/red,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"fZK" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/railing/corner/end{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"gbc" = (
+/obj/effect/turf_decal/arrows{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"gqH" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"gty" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/item/storage/box/drinkingglasses,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"gyK" = (
+/obj/machinery/button/door/indestructible{
+	wires = 1;
+	id = "nukeop_ready";
+	name = "Shuttle Dock Door";
+	specialfunctions = 4;
+	req_access = list("syndicate")
+	},
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base)
+"gOQ" = (
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"gVh" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/ore_box,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"gVQ" = (
+/obj/effect/baseturf_helper{
+	baseturf = /turf/open/misc/asteroid
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"gXs" = (
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/caution/stand_clear,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"gXS" = (
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"gZt" = (
+/obj/structure/chair/stool{
+	dir = 1
+	},
+/obj/effect/landmark/start/nukeop,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"hii" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"hiV" = (
+/obj/effect/turf_decal/siding/wood/corner,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"hse" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/machinery/door/window/survival_pod/left/directional/south{
+	req_access = list("syndicate")
+	},
+/obj/machinery/recharger{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"hxf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"hxU" = (
+/obj/structure/ore_box,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery/white,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"hAD" = (
+/obj/machinery/light/small/directional/east,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/toilet{
+	dir = 1
+	},
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"hDK" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"hEn" = (
+/obj/item/kirbyplants/random,
+/obj/structure/railing,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"hLd" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/red/line,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"hMQ" = (
+/obj/machinery/light/small/directional/south,
+/obj/structure/curtain/bounty/start_closed{
+	pixel_y = -32
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark,
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"hOo" = (
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"hSN" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"hXC" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"icT" = (
+/obj/structure/sink/directional/east,
+/obj/structure/mirror/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"iiw" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"inv" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 1
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo3"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"ios" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"ipn" = (
+/obj/machinery/button/door/indestructible{
+	pixel_x = -24;
+	wires = 1;
+	id = "nukeop_ready";
+	name = "Shuttle Dock Door";
+	specialfunctions = 4;
+	req_access = list("syndicate")
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"iwO" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 1;
+	color = "gray"
+	},
+/area/centcom/syndicate_base)
+"iAT" = (
+/obj/structure/chair/stool{
+	dir = 1
+	},
+/obj/structure/sign/poster/contraband/random/directional/west,
+/obj/effect/landmark/start/nukeop,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"iBV" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood,
+/obj/machinery/chem_dispenser/drinks/beer/fullupgrade{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"iDh" = (
+/obj/structure/closet/syndicate/personal,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"iVu" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/ore_box,
+/obj/effect/turf_decal/delivery/white,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jdM" = (
+/obj/machinery/light/small/directional/south,
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"jfm" = (
+/obj/effect/turf_decal/arrows{
+	dir = 1
+	},
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jfZ" = (
+/obj/item/storage/box/donkpockets{
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/item/storage/box/donkpockets{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/box/donkpockets,
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"jkN" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"jmk" = (
+/obj/structure/sign/poster/contraband/random/directional/south,
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"jpY" = (
+/obj/machinery/light/small/directional/north,
+/obj/machinery/vending/cigarette/syndicate,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"jrf" = (
+/obj/machinery/light/directional/west,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jsR" = (
+/obj/machinery/computer/mech_bay_power_console,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jtX" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jud" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/structure/closet/crate/cardboard/mothic,
+/obj/effect/turf_decal/delivery/white,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jAn" = (
+/obj/machinery/oven/range,
+/obj/item/food/cookie{
+	pixel_y = 5
+	},
+/obj/item/food/cookie{
+	pixel_x = 6;
+	pixel_y = 8
+	},
+/obj/item/food/cookie{
+	pixel_x = -6;
+	pixel_y = 11
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"jIP" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jLf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/east,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jLT" = (
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"jVL" = (
+/obj/machinery/light/small/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"jYa" = (
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"kcQ" = (
+/obj/structure/ore_box,
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"keH" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/ore_box,
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"khe" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"klm" = (
+/obj/machinery/computer/shuttle/syndicate/recall,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"kni" = (
+/obj/machinery/light/small/directional/east,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"koA" = (
+/obj/machinery/light/small/directional/north,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"kqr" = (
+/obj/item/storage/fancy/donut_box,
+/obj/structure/table/wood/fancy/black,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/obj/machinery/light/directional/north,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"kEs" = (
+/obj/effect/decal/cleanable/blood,
+/obj/item/kirbyplants/random,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"kEw" = (
+/obj/structure/railing/corner/end/flip{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"kFg" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"kVN" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"ldu" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/turf/open/floor/plating,
+/area/centcom/syndicate_base)
+"lkx" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"lnr" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/ore_box,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"lrc" = (
+/obj/docking_port/stationary{
+	area_type = /area/centcom/syndicate_base;
+	height = 22;
+	name = "Syndicate Mothership Dock";
+	roundstart_template = /datum/map_template/shuttle/infiltrator/basic;
+	shuttle_id = "syndicate_away";
+	width = 18;
+	dwidth = 8
+	},
+/turf/open/floor/plating,
+/area/centcom/syndicate_base)
+"ltU" = (
+/obj/item/storage/box/drinkingglasses,
+/obj/structure/sign/poster/contraband/random/directional/north,
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 9
+	},
+/obj/item/rag{
+	pixel_y = -6
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"lGp" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"lHj" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/paper_bin{
+	pixel_x = -2;
+	pixel_y = 2
+	},
+/obj/item/pen/fountain{
+	pixel_x = 8
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"lKs" = (
+/obj/machinery/door/poddoor/ert{
+	id = "nukeop_ready";
+	name = "Shuttle Dock Door"
+	},
+/obj/effect/turf_decal/bot,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"lPt" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/syndicatedetonator{
+	pixel_x = -6;
+	pixel_y = 5
+	},
+/obj/item/stamp/chameleon{
+	pixel_x = 4;
+	pixel_y = 6
+	},
+/obj/item/stamp/syndicate{
+	pixel_x = 6;
+	pixel_y = -4
+	},
+/obj/item/storage/toolbox/mechanical{
+	pixel_y = -5;
+	pixel_x = -9
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"lRu" = (
+/obj/structure/table,
+/obj/item/paper/fluff{
+	name = "записка";
+	default_raw_text = "Пришлось срочно вылететь на задание. Печенье доделаете сами. - Джордж";
+	pixel_x = 3
+	},
+/obj/item/pai_card{
+	pixel_x = -4
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"lWm" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 1;
+	color = "gray"
+	},
+/area/centcom/syndicate_base)
+"lZQ" = (
+/obj/structure/table,
+/obj/structure/bedsheetbin,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"maY" = (
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/light/small/directional/south,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sign/poster/contraband/random/directional/south,
+/obj/machinery/recharge_station,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"mcR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/kirbyplants/random,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"miA" = (
+/obj/effect/decal/syndie_logo,
+/obj/effect/turf_decal/siding/dark/inner_corner{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"mjL" = (
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"mjQ" = (
+/obj/structure/noticeboard/directional/west,
+/obj/item/banner/syndicate,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"mkU" = (
+/obj/item/target,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"mmT" = (
+/obj/machinery/light/small/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/kirbyplants/random,
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"mpO" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo13"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"mtm" = (
+/obj/item/banner/syndicate,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"muB" = (
+/obj/item/kirbyplants/random,
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"mvf" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo19"
+	},
+/obj/effect/turf_decal/siding/dark/inner_corner,
+/obj/structure/chair/comfy/red{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"mvw" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"mwf" = (
+/obj/machinery/light/directional/south,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"mxA" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"mBE" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sign/poster/contraband/random/directional/west,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
+"mEk" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"mNS" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"mRk" = (
+/obj/machinery/shieldwall{
+	icon_state = "wave2";
+	max_integrity = 9999
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/door/poddoor/ert{
+	id = "nukeop_ready"
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"mRM" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/syndicatedetonator{
+	pixel_x = -6;
+	pixel_y = -2
+	},
+/obj/item/stamp/syndicate,
+/obj/item/stamp/chameleon{
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"nbn" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"ngQ" = (
+/obj/structure/extinguisher_cabinet/directional/south,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"niK" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/crate,
+/obj/item/target,
+/obj/item/target,
+/obj/item/target,
+/obj/item/katana/cursed{
+	desc = "A gift from your benefactors.";
+	force = 20
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"niY" = (
+/obj/structure/ore_box,
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/delivery/white,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"njR" = (
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"npT" = (
+/obj/item/paper_bin{
+	pixel_y = 7
+	},
+/obj/item/pen/fourcolor,
+/obj/structure/table/wood/fancy/black,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"nwV" = (
+/obj/machinery/light/small/directional/east,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"nCv" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/west,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"nCM" = (
+/obj/machinery/light/directional/north,
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"nFd" = (
+/obj/structure/closet/syndicate/personal,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"nFN" = (
+/obj/structure/mirror/directional/west,
+/obj/structure/sink/directional/east,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"nHO" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"nNU" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/paper_bin{
+	pixel_y = 7
+	},
+/obj/item/pen/fountain,
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"nOK" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/closed/indestructible/syndicate,
+/area/centcom/syndicate_base)
+"nQs" = (
+/obj/machinery/door/poddoor/ert{
+	id = "nukeop_outside"
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"nSk" = (
+/obj/structure/chair/comfy/purp{
+	dir = 4
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo8"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/landmark/start/nukeop_overwatch,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"nSN" = (
+/obj/structure/chair/sofa/left/brown,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"nUA" = (
+/obj/structure/table/wood,
+/obj/machinery/microwave{
+	pixel_y = 5
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"odA" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo17"
+	},
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"oea" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo11"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"ogO" = (
+/obj/machinery/fax/admin/syndicate,
+/obj/structure/table/wood/fancy/black,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"oiT" = (
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	pixel_x = -6;
+	pixel_y = 8
+	},
+/obj/item/syndicatedetonator{
+	pixel_x = 4
+	},
+/obj/structure/table/wood/poker,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"oju" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/delivery/white,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"omf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"onL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/vending/boozeomat/syndicate,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 6
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"orc" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"ovu" = (
+/obj/structure/fans/tiny/invisible,
+/obj/machinery/door/poddoor/ert{
+	id = "SST_pod_ready";
+	name = "Shuttle Dock Door"
+	},
+/obj/effect/turf_decal/bot,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"ovP" = (
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"oxa" = (
+/obj/item/banner/syndicate,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"oyT" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/ore_box,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"oKL" = (
+/obj/machinery/computer/crew{
+	pixel_x = -6;
+	dir = 8
+	},
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"oOS" = (
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"oPQ" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"oRl" = (
+/obj/structure/curtain/bounty/start_closed{
+	pixel_y = -32
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"oTz" = (
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"oTB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/recharge_station,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"oUP" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"paG" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo16"
+	},
+/obj/effect/turf_decal/siding/dark/inner_corner{
+	dir = 8
+	},
+/obj/structure/chair/comfy/red{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"piT" = (
+/obj/item/kirbyplants/random,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"plv" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/nukeop,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"psX" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"pwf" = (
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"pxu" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/table/wood,
+/obj/machinery/chem_dispenser/drinks/fullupgrade{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"pxW" = (
+/obj/structure/table/wood,
+/obj/machinery/chem_dispenser/drinks/fullupgrade{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"pCf" = (
+/turf/open/floor/iron/stairs/medium{
+	color = "gray";
+	dir = 1
+	},
+/area/centcom/syndicate_base)
+"pOV" = (
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/structure/sign/poster/contraband/random/directional/south,
+/obj/item/pizzabox/margherita,
+/obj/item/knife/kitchen,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 10
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"pSB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/vehicle/ridden/scooter{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"pSO" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo10"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"pUk" = (
+/turf/closed/indestructible/opsglass,
+/area/centcom/syndicate_base)
+"pUQ" = (
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"qbl" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo12"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"qkt" = (
+/obj/machinery/light/directional/north,
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"qqR" = (
+/obj/structure/closet/crate/cardboard,
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"qwD" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 4
+	},
+/area/centcom/syndicate_base)
+"qAX" = (
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/light/small/directional/east,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"qEz" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/mech_bay_recharge_port,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"qIZ" = (
+/obj/structure/table/wood,
+/obj/item/paper_bin{
+	pixel_y = 5
+	},
+/obj/item/pen/edagger{
+	pixel_x = 4;
+	pixel_y = 5
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"qNs" = (
+/obj/machinery/light/small/directional/north,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/bed/dogbed,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"qPk" = (
+/obj/docking_port/stationary{
+	dwidth = 25;
+	height = 50;
+	name = "Syndicate Auxiliary Shuttle Dock";
+	shuttle_id = "emergency_syndicate";
+	width = 50;
+	dir = 2
+	},
+/turf/open/floor/plating,
+/area/centcom/syndicate_base)
+"reD" = (
+/obj/effect/baseturf_helper{
+	baseturf = /turf/open/misc/asteroid
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"rlk" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo7"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"rnW" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"rqQ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"rrb" = (
+/obj/machinery/light/directional/south,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"ryx" = (
+/obj/item/toy/nuke,
+/obj/structure/table/wood/poker,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base)
+"rzF" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"rJo" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"rMi" = (
+/obj/machinery/washing_machine,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"rQg" = (
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"rVx" = (
+/obj/machinery/light/small/directional/north,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/vending/tool,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"rVI" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Syndicate Base"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"saI" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 4
+	},
+/area/centcom/syndicate_base)
+"sfM" = (
+/obj/structure/table,
+/obj/item/storage/crayons,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"sgp" = (
+/obj/structure/urinal/directional/north,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"siL" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"slA" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fans/tiny/invisible,
+/obj/structure/marker_beacon/burgundy,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"soz" = (
+/obj/item/storage/crayons,
+/obj/structure/table/wood{
+	color = "#996633"
+	},
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"srn" = (
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"suT" = (
+/obj/machinery/light/small/directional/south,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"szK" = (
+/obj/machinery/computer/camera_advanced,
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"sFl" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 8
+	},
+/area/centcom/syndicate_base)
+"sFZ" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"sLM" = (
+/turf/open/space/basic,
+/area/space)
+"sNe" = (
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
+"sUc" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/centcom/syndicate_base)
+"sUZ" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"sZm" = (
+/obj/structure/closet/syndicate/personal,
+/obj/machinery/light/small/directional/north,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tdd" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"tls" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/chair/stool/bar{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"tnT" = (
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tou" = (
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tsc" = (
+/obj/structure/ore_box,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tCJ" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tDh" = (
+/obj/machinery/shieldwall{
+	icon_state = "wave2";
+	max_integrity = 9999
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tEM" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/sheet/mineral/sandbags,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tJr" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo15"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"tJz" = (
+/obj/machinery/computer/security/overwatch{
+	dir = 8
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+"tLQ" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tLW" = (
+/obj/machinery/light/directional/south,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"tOi" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"tWa" = (
+/obj/machinery/light/small/directional/south,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"tYt" = (
+/obj/effect/spawner/random/vending/snackvend,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"uln" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sign/poster/contraband/random/directional/south,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"umq" = (
+/obj/structure/closet/syndicate/personal,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/spacecash/c20,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/tile/dark_red/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"uns" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/machinery/vending/boozeomat/syndicate,
+/turf/open/floor/wood/parquet,
+/area/centcom/syndicate_base/control)
+"uwa" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"uze" = (
+/obj/vehicle/ridden/scooter{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"uCR" = (
+/obj/machinery/light/small/directional/west,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"uKg" = (
+/obj/structure/fans/tiny/invisible,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"uRN" = (
+/obj/docking_port/stationary{
+	area_type = /area/centcom/syndicate_base;
+	dir = 2;
+	dwidth = 3;
+	height = 7;
+	name = "Syndicate Assault Pod Dock";
+	roundstart_template = /datum/map_template/shuttle/assault_pod/default;
+	width = 7
+	},
+/turf/open/floor/plating,
+/area/centcom/syndicate_base)
+"vef" = (
+/obj/machinery/light/directional/north,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"veZ" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"vfA" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 1;
+	color = "#adadad"
+	},
+/area/centcom/syndicate_base)
+"viA" = (
+/turf/open/floor/plating,
+/area/centcom/syndicate_base)
+"vpZ" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/delivery/white,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"vru" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"vuE" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/turf/open/floor/iron,
+/area/centcom/syndicate_base)
+"vwR" = (
+/obj/effect/turf_decal/arrows/red{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"vDJ" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/obj/structure/ore_box,
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"vIe" = (
+/obj/machinery/door/window/survival_pod/left/directional/south{
+	req_access = list("syndicate")
+	},
+/turf/open/floor/carpet/red,
+/area/centcom/syndicate_base/control)
+"vPu" = (
+/obj/structure/chair,
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"vQE" = (
+/obj/machinery/door/poddoor/ert{
+	id = "SST_to_ATOM"
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"vRN" = (
+/obj/machinery/light/small/directional/east,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"vUB" = (
+/obj/effect/turf_decal/delivery/red,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"vVI" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"vVY" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 1;
+	color = "#adadad"
+	},
+/area/centcom/syndicate_base)
+"vYw" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"wgp" = (
+/obj/machinery/computer/shuttle/syndicate/recall,
+/obj/machinery/button/door/indestructible{
+	id = "nukeop_ready";
+	name = "Mission Launch Control";
+	pixel_y = 24;
+	specialfunctions = 4;
+	wires = 1;
+	req_access = list("syndicate")
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"wkC" = (
+/obj/machinery/door/poddoor/ert{
+	id = "nukeop_ready";
+	name = "Shuttle Dock Door"
+	},
+/turf/open/floor/iron/stairs/medium{
+	color = "#adadad";
+	dir = 1
+	},
+/area/centcom/syndicate_base)
+"wrP" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo18"
+	},
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"wBp" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"wMN" = (
+/obj/structure/noticeboard/directional/west,
+/obj/item/paper/fluff/stations/centcom/disk_memo{
+	default_raw_text = "ПОЛУЧИТЕ ЭТОТ ЕБУЧИЙ ДИСК!"
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"wOm" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 1
+	},
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo2"
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"wXs" = (
+/obj/structure/sign/poster/contraband/c20r/directional/north,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"wXx" = (
+/obj/structure/table/wood,
+/obj/structure/curtain/bounty/start_closed{
+	pixel_y = -32
+	},
+/obj/item/reagent_containers/cup/glass/waterbottle/large{
+	pixel_x = -15;
+	pixel_y = 9
+	},
+/obj/item/stack/spacecash/c100,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"wZM" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/chair/stool/bar{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"xfp" = (
+/obj/structure/bed/dogbed,
+/obj/structure/sign/poster/contraband/random/directional/north,
+/turf/open/floor/wood,
+/area/centcom/syndicate_base)
+"xyp" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/obj/effect/turf_decal/delivery/white,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"xND" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/extinguisher_cabinet/directional/east,
+/turf/open/floor/iron/grimy,
+/area/centcom/syndicate_base)
+"xSx" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/delivery/white,
+/turf/open/floor/iron/dark,
+/area/centcom/syndicate_base)
+"yaB" = (
+/obj/effect/decal/syndie_logo{
+	icon_state = "logo14"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base/control)
+"yaO" = (
+/obj/machinery/shower/directional/south,
+/obj/machinery/light/small/directional/south,
+/obj/structure/fluff/shower_drain,
+/obj/structure/curtain/cloth/fancy,
+/turf/open/floor/iron/white,
+/area/centcom/syndicate_base)
+"ycx" = (
+/obj/structure/window/reinforced/survival_pod/spawner/directional/east,
+/obj/structure/table/wood/fancy/black,
+/obj/item/paper/fluff/overwatch{
+	pixel_y = 8;
+	pixel_x = -2
+	},
+/obj/item/circuitboard/computer/overwatch{
+	pixel_x = -2
+	},
+/turf/open/floor/carpet/black,
+/area/centcom/syndicate_base/control)
+
+(1,1,1) = {"
+sLM
+fnU
+fnU
+bjU
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+don
+don
+don
+don
+fnU
+don
+don
+don
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+sLM
+sLM
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+"}
+(2,1,1) = {"
+fnU
+fnU
+hxf
+hxf
+uCR
+gOQ
+gOQ
+hxf
+uCR
+gOQ
+gOQ
+hxf
+uCR
+gOQ
+gOQ
+hxf
+uCR
+gOQ
+gOQ
+hxf
+nCv
+gbc
+dts
+hxf
+gOQ
+jVL
+hxf
+gOQ
+gOQ
+fnU
+eSY
+icT
+oPQ
+nFN
+eXO
+fnU
+srn
+srn
+srn
+mcR
+fnU
+sLM
+sLM
+fnU
+gOQ
+njR
+gXS
+jrf
+gXS
+gXS
+gXS
+gXS
+gXS
+jrf
+gXS
+gXS
+jrf
+gXS
+gXS
+gXS
+gXS
+gXS
+jrf
+gXS
+chA
+gOQ
+fnU
+"}
+(3,1,1) = {"
+fnU
+qkt
+gXS
+gXS
+gXS
+gXS
+gXS
+omf
+ful
+omf
+omf
+omf
+gXS
+slA
+omf
+omf
+omf
+omf
+omf
+omf
+omf
+jfm
+gXS
+gXS
+rqQ
+jIP
+gqH
+vDJ
+rrb
+fnU
+sgp
+ePf
+ePf
+hOo
+hOo
+fnU
+srn
+orc
+orc
+uln
+fnU
+sLM
+sLM
+fnU
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(4,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+oyT
+qqR
+sUZ
+gOQ
+fnU
+hOo
+hOo
+ePf
+ePf
+ePf
+ios
+vru
+vru
+orc
+mwf
+fnU
+sLM
+sLM
+fnU
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(5,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+iVu
+ovP
+keH
+gOQ
+fnU
+lkx
+fnU
+lkx
+fnU
+rzF
+fnU
+fZK
+vru
+vru
+acA
+fnU
+sLM
+sLM
+fnU
+blJ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(6,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+tCJ
+bcl
+sUZ
+gOQ
+fnU
+yaO
+fnU
+ffq
+aXh
+hAD
+fnU
+hEn
+qwD
+saI
+muB
+fnU
+fnU
+fnU
+fnU
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(7,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+xSx
+tsc
+oju
+gOQ
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+flo
+flo
+fnU
+fnU
+cSv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(8,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+tCJ
+vUB
+gVh
+gOQ
+fnU
+wMN
+plv
+oiT
+iAT
+kVN
+fnU
+bjf
+mEk
+jLT
+bjf
+fnU
+aLl
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(9,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+jud
+lnr
+bUd
+rrb
+fnU
+cDl
+plv
+ryx
+gZt
+tWa
+fnU
+qNs
+mEk
+dPy
+maY
+fnU
+nSN
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(10,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+nwV
+vVI
+mvw
+mvw
+vVI
+fnU
+wXs
+plv
+cHl
+gZt
+srn
+fnU
+xfp
+mEk
+jLT
+oTB
+fnU
+blJ
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(11,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+pUk
+pUk
+pUk
+pUk
+fnU
+srn
+pUQ
+dCB
+pUQ
+srn
+fnU
+kEs
+mEk
+jLT
+qIZ
+fnU
+cSv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(12,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+lrc
+dlt
+ovP
+ovP
+ovP
+ovP
+cji
+rJo
+rJo
+rJo
+rJo
+rJo
+rJo
+rJo
+kFg
+vPu
+wXx
+pUk
+aLl
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(13,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+dlt
+ovP
+ovP
+ovP
+ovP
+cji
+nbn
+nbn
+nbn
+bRD
+hiV
+xND
+vYw
+nbn
+hSN
+oRl
+pUk
+nSN
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(14,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+pUk
+pUk
+pUk
+pUk
+fnU
+wgp
+kVN
+srn
+tdd
+jLT
+fnU
+dlQ
+wZM
+tls
+dlQ
+fnU
+aHv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(15,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fmQ
+psX
+rnW
+rnW
+rnW
+fnU
+tYt
+kVN
+srn
+mEk
+suT
+fnU
+ltU
+soz
+jfZ
+pOV
+fnU
+cSv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(16,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+hLd
+kcQ
+gqH
+xyp
+tLW
+fnU
+jpY
+uwa
+jkN
+mEk
+jLT
+fnU
+koA
+mxA
+mxA
+hMQ
+pUk
+nSN
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(17,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+fAH
+fTe
+epF
+hxf
+fnU
+lRu
+vru
+iiw
+mEk
+bnr
+ldu
+mxA
+vuE
+vuE
+aSV
+pUk
+oxa
+reD
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(18,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+sFZ
+dUG
+tEM
+hxf
+fnU
+jAn
+srn
+vru
+mEk
+jLT
+fnU
+nUA
+pxW
+fbq
+onL
+fnU
+oxa
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(19,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+siL
+fTe
+sUZ
+dts
+wkC
+mNS
+mNS
+mNS
+tOi
+jdM
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+cSv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(20,1,1) = {"
+mRk
+cyn
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+hxU
+ovP
+niY
+hxf
+fnU
+piT
+srn
+kVN
+mEk
+jmk
+fnU
+umq
+app
+mBE
+iDh
+fnU
+nSN
+gOQ
+gOQ
+gOQ
+tou
+qPk
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(21,1,1) = {"
+mRk
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+tCJ
+bcl
+sUZ
+gOQ
+fnU
+sfM
+kVN
+srn
+mEk
+jLT
+fnU
+nFd
+sNe
+sUc
+iDh
+fnU
+aHv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(22,1,1) = {"
+fnU
+nCM
+uKg
+khe
+hDK
+hDK
+uKg
+uKg
+uKg
+hDK
+hDK
+khe
+hDK
+oUP
+khe
+hDK
+khe
+hDK
+hDK
+uKg
+uKg
+cWW
+hDK
+hDK
+mjL
+vpZ
+cZG
+aTN
+rrb
+fnU
+lZQ
+iiw
+kVN
+mEk
+jLT
+fnU
+sZm
+sUc
+sNe
+dlo
+fnU
+cSv
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(23,1,1) = {"
+fnU
+fnU
+klm
+hxf
+bVX
+hxf
+hxf
+evm
+hxf
+gOQ
+rQg
+gOQ
+gOQ
+rQg
+gOQ
+gOQ
+vRN
+hxf
+dts
+vRN
+hxf
+gbc
+gOQ
+jLf
+hxf
+kni
+hxf
+gOQ
+gOQ
+fnU
+rMi
+veZ
+srn
+mEk
+jLT
+fnU
+nFd
+sNe
+sUc
+iDh
+fnU
+aLl
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(24,1,1) = {"
+sLM
+fnU
+fnU
+nOK
+fnU
+fnU
+fnU
+fnU
+vQE
+vQE
+fnU
+vQE
+vQE
+fnU
+vQE
+vQE
+fnU
+vQE
+vQE
+fnU
+don
+don
+don
+gyK
+lKs
+fnU
+jtX
+jtX
+jtX
+fnU
+fnU
+fnU
+fnU
+dfR
+dfR
+fnU
+fnU
+rVI
+rVI
+fnU
+fnU
+nSN
+gOQ
+gOQ
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(25,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fnU
+fnU
+fnU
+fnU
+jYa
+fnU
+fnU
+fnU
+fnU
+fnU
+qEz
+bLA
+eim
+dCq
+sFl
+mmT
+hXC
+ovP
+ovP
+ovP
+fnU
+fnU
+pUk
+fnU
+vef
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(26,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+fxM
+kqr
+npT
+ogO
+bJW
+bMd
+bNg
+lHj
+mRM
+bUU
+hii
+aAs
+fxM
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+fHu
+hXC
+kEw
+ovP
+ovP
+bxW
+hXC
+hXC
+ovP
+bgj
+nQs
+lWm
+vVY
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(27,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+mjQ
+miA
+bbA
+crr
+mpO
+paG
+oTz
+pwf
+pwf
+vIe
+cNm
+gty
+fxM
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+jsR
+hXC
+hXC
+hXC
+hXC
+lGp
+ovP
+ovP
+ovP
+fQZ
+nQs
+pCf
+aDp
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(28,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+szK
+wOm
+cZH
+pSO
+gVQ
+odA
+oTz
+pwf
+pwf
+bUU
+cNm
+dNj
+fxM
+fnU
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+fnU
+fnU
+rVx
+hXC
+ovP
+ovP
+lGp
+hXC
+hXC
+ovP
+ciG
+nQs
+iwO
+vfA
+dlt
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(29,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+bpw
+inv
+rlk
+oea
+yaB
+wrP
+oTz
+pwf
+pwf
+bUU
+cNm
+pxu
+fxM
+tnT
+uRN
+viA
+viA
+viA
+viA
+viA
+viA
+gXs
+lKs
+ipn
+hXC
+hXC
+hXC
+lGp
+hXC
+ovP
+ovP
+ovP
+ngQ
+fnU
+fnU
+fnU
+fnU
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(30,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+mtm
+eFN
+nSk
+qbl
+tJr
+mvf
+oTz
+pwf
+pwf
+vIe
+cNm
+iBV
+fxM
+fnU
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+fnU
+fnU
+pUk
+pUk
+pUk
+pUk
+niK
+ovP
+ovP
+hXC
+pSB
+fnU
+sLM
+sLM
+fnU
+gOQ
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+gOQ
+fnU
+"}
+(31,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+fxM
+bRF
+eEu
+oKL
+ycx
+tJz
+bNg
+nNU
+lPt
+bUU
+oOS
+uns
+fxM
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+mkU
+nHO
+ovP
+wBp
+hse
+ovP
+hXC
+ovP
+ovP
+pSB
+fnU
+sLM
+sLM
+fnU
+vef
+tou
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+aqq
+rrb
+fnU
+"}
+(32,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+fxM
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+viA
+fnU
+aDf
+qAX
+hXC
+ovP
+emh
+ovP
+tLQ
+hXC
+lGp
+uze
+fnU
+sLM
+sLM
+fnU
+gOQ
+deV
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+uKg
+mjL
+gOQ
+fnU
+"}
+(33,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fnU
+fnU
+fnU
+fnU
+fnU
+ovu
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+fnU
+sLM
+sLM
+fnU
+gOQ
+gOQ
+vwR
+gOQ
+vwR
+gOQ
+gOQ
+vwR
+gOQ
+gOQ
+vwR
+vwR
+gOQ
+gOQ
+vwR
+gOQ
+gOQ
+vwR
+gOQ
+vwR
+gOQ
+gOQ
+fnU
+"}
+(34,1,1) = {"
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+sLM
+fnU
+fnU
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+tDh
+fnU
+fnU
+"}

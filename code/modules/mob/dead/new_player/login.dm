@@ -21,6 +21,10 @@
 		if (required_living_minutes >= living_minutes)
 			client.interviewee = TRUE
 
+	// BANDASTATION ADDITION - START
+	check_whitelist_or_make_interviewee()
+	SStitle.show_title_screen_to(client)
+	// BANDASTATION ADDITION - END
 	. = ..()
 	if(!. || !client)
 		return FALSE

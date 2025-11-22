@@ -762,6 +762,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BONSAI "bonsai"
 #define TRAIT_LIGHTBULB_REMOVER "lightbulb_remover"
 #define TRAIT_KNOW_ROBO_WIRES "know_robo_wires"
+#define TRAIT_ADVANCED_RCD_KNOWLEDGE "advanced_rcd_knowledge" //BANDASTATION ADD - Engineer Skillchip RCD
 #define TRAIT_KNOW_ENGI_WIRES "know_engi_wires"
 #define TRAIT_ENTRAILS_READER "entrails_reader"
 #define TRAIT_SABRAGE_PRO "sabrage_pro"

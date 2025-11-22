@@ -219,7 +219,6 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, span_boldannounce("Starting game..."))
 	var/init_start = world.timeofday
-
 	CHECK_TICK
 	//Configure mode and assign player to antagonists
 	var/can_continue = FALSE
@@ -272,7 +271,7 @@ SUBSYSTEM_DEF(ticker)
 	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore,SetRoundStart))
 
 	to_chat(world, span_notice(span_bold("Welcome to [station_name()], enjoy your stay!")))
-	SEND_SOUND(world, sound(SSstation.announcer.get_rand_welcome_sound()))
+	SEND_SOUND(world, sound(SSmapping.current_map?.welcome_sound_override || SSstation.announcer.get_rand_welcome_sound()))
 
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
@@ -405,7 +404,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/concatenated_message = msg.Join()
 	log_admin(concatenated_message)
-	to_chat(GLOB.admins, concatenated_message)
+	to_chat(get_holders_with_rights(R_ADMIN), concatenated_message) /// BANDASTATION EDIT: Proper permissions
 
 /datum/controller/subsystem/ticker/proc/reopen_roundstart_suicide_roles()
 	var/include_command = CONFIG_GET(flag/reopen_roundstart_suicide_roles_command_positions)
@@ -461,6 +460,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/create_characters()
 	for(var/i in GLOB.new_player_list)
 		var/mob/dead/new_player/player = i
+		SStitle.show_title_screen_to(player.client) // BANDASTATION ADDITION - HTML Title Screen
 		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
 			GLOB.joined_player_list += player.ckey
 			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
@@ -805,7 +805,12 @@ SUBSYSTEM_DEF(ticker)
 		return
 
 	if(!delay)
-		delay = CONFIG_GET(number/round_end_countdown) * 10
+		delay = CONFIG_GET(number/round_end_countdown) SECONDS
+		// BANDASTATION ADD Start - roundend vote
+		var/vote_time_and_delay_diff = delay - CONFIG_GET(number/vote_period)
+		if(vote_time_and_delay_diff <= 5 SECONDS)
+			delay = delay + 5 SECONDS
+		// BANDASTATION ADD End - roundend vote
 
 	var/skip_delay = check_rights()
 	if(delay_end && !skip_delay)

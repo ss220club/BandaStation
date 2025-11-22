@@ -186,13 +186,17 @@ export function TguiSay() {
       newValue = newValue.slice(3);
       iterator.set('Say');
 
-      if (newPrefix === ':b ') {
+      if (newPrefix === ':b ' || newPrefix === ':и ') {
         Byond.sendMessage('thinking', { visible: false });
       }
     }
 
     // Handles typing indicators
-    if (channelIterator.current.isVisible() && newPrefix !== ':b ') {
+    if (
+      channelIterator.current.isVisible() &&
+      newPrefix !== ':b ' &&
+      newPrefix !== ':и '
+    ) {
       messages.current.typingMsg();
     }
 
@@ -283,27 +287,38 @@ export function TguiSay() {
     }
   }, [value]);
 
+  const TRANSLATE_ITTERATOR: Record<string, string> = {
+    Say: 'Говор',
+    Whis: 'Шёпот',
+    Radio: 'Радио',
+    Me: 'Эмоц',
+    Admin: 'Админ',
+    Mentor: `Мент`,
+  };
+
   const theme =
-    (lightMode && 'lightMode') ||
     (currentPrefix.current && RADIO_PREFIXES[currentPrefix.current]) ||
+    TRANSLATE_ITTERATOR[channelIterator.current.current()] ||
     channelIterator.current.current();
 
+  useEffect(() => {
+    setButtonContent(TRANSLATE_ITTERATOR[buttonContent] || buttonContent);
+  }, [buttonContent]);
+
   return (
-    <>
-      <div
-        className={`window window-${theme} window-${size}`}
-        onMouseDown={dragStartHandler}
-      >
-        {!lightMode && <div className={`shine shine-${theme}`} />}
-      </div>
-      <div
-        className={classes(['content', lightMode && 'content-lightMode'])}
-        style={{
-          zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
-        }}
-      >
+    <div
+      className={classes([
+        'window',
+        `window-${theme}`,
+        lightMode && 'window-light',
+      ])}
+      style={{
+        zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
+      }}
+    >
+      <div className="content">
         <button
-          className={`button button-${theme}`}
+          className="button"
           onMouseDown={handleButtonClick}
           onMouseUp={handleButtonRelease}
           type="button"
@@ -312,11 +327,7 @@ export function TguiSay() {
         </button>
         <textarea
           autoCorrect="off"
-          className={classes([
-            'textarea',
-            `textarea-${theme}`,
-            value.length > LineLength.Large && 'textarea-large',
-          ])}
+          className="textarea"
           maxLength={maxLength}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
@@ -325,6 +336,6 @@ export function TguiSay() {
           value={value}
         />
       </div>
-    </>
+    </div>
   );
 }

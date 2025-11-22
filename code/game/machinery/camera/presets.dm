@@ -201,6 +201,7 @@
 
 	if(name == initial(name))
 		name = "motion-sensitive security camera"
+		ru_names_rename(ru_names_toml(name))
 	if(!proximity_monitor)
 		proximity_monitor = new(src)
 	camera_upgrade_bitflags |= CAMERA_UPGRADE_MOTION
@@ -209,6 +210,7 @@
 /obj/machinery/camera/proc/removeMotion()
 	if(name == "motion-sensitive security camera")
 		name = "security camera"
+		ru_names_rename(ru_names_toml(name))
 	camera_upgrade_bitflags &= ~CAMERA_UPGRADE_MOTION
 	if(!area_motion)
 		QDEL_NULL(proximity_monitor)

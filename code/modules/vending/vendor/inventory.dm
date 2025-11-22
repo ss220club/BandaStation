@@ -30,7 +30,7 @@
 
 		var/obj/item/temp = typepath
 		var/datum/data/vending_product/new_record = new
-		new_record.name = initial(temp.name)
+		new_record.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
 		new_record.product_path = typepath
 		if(!start_empty)
 			new_record.amount = amount
