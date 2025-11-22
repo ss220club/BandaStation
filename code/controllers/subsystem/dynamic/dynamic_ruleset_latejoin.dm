@@ -23,7 +23,7 @@
 /datum/dynamic_ruleset/latejoin/traitor
 	name = "Traitor"
 	config_tag = "Latejoin Traitor"
-	preview_antag_datum = /datum/antagonist/traitor
+	preview_antag_datum = /datum/antagonist/traitor/infiltrator
 	pref_flag = ROLE_SYNDICATE_INFILTRATOR
 	jobban_flag = ROLE_TRAITOR
 	weight = 10

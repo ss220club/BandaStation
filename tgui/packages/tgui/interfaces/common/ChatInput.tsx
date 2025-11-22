@@ -1,6 +1,12 @@
 import '../../styles/interfaces/ChatInput.scss';
 
-import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
+import {
+  type CSSProperties,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Stack } from 'tgui-core/components';
 import { KEY } from 'tgui-core/keys';
 import { classes } from 'tgui-core/react';
