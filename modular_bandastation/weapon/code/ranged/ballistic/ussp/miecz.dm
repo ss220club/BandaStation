@@ -21,6 +21,7 @@
 	load_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magout.ogg'
+	fire_sound_volume = 80
 	can_suppress = TRUE
 	suppressor_x_offset = 5
 	suppressor_y_offset = 3
@@ -36,7 +37,7 @@
 
 /obj/item/gun/ballistic/automatic/miecz/examine_more(mob/user)
 	. = ..()
-	. += "Штурмовой карабин AMC-874 'Мечь', это усовершенственная конструкция на основе автомата АМК под патрон 7.62x39мм. \
+	. += "Штурмовой карабин AMC-874 'Мечь', это усовершенствованная конструкция на основе автомата АМК под патрон 7.62x39мм. \
 	Этот карабин был создан для штурмовых операций внутри очень тесных пространств, для этого карабин имеет короткий ствол и малые габариты. \
 	На затворе выгравировано «Оборонная Коллегия СССП»."
 

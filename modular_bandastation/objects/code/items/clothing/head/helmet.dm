@@ -99,6 +99,7 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 
 /obj/item/clothing/head/helmet/space/ussp_expedition
+	name = "'Voskhod' EVA helmet"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "voskhod_helmet"

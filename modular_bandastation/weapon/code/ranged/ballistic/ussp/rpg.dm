@@ -42,4 +42,3 @@
 	else
 		inhand_icon_state = "[base_icon_state]_empty"
 		worn_icon_state = "[base_icon_state]_empty"
-		return

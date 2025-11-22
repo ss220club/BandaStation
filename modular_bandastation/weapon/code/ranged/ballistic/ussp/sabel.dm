@@ -243,7 +243,7 @@
 		return
 
 	if(chambered.loaded_projectile && gauss_mode)
-		chambered.loaded_projectile = new /obj/projectile/bullet/a762x39/gauss
+		chambered.loaded_projectile = new /obj/projectile/bullet/c762x39/gauss
 		fire_sound = 'modular_bandastation/weapon/sound/ranged/laser1.ogg'
 
 	if(chambered.loaded_projectile && !gauss_mode)

@@ -15,7 +15,7 @@
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
 	accepted_magazine_type = /obj/item/ammo_box/magazine/smg10mm
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/smg_heavy_2.ogg'
-	fire_sound_volume = 80
+	fire_sound_volume = 70
 	load_sound = 'modular_bandastation/weapon/sound/ranged/napad_reload.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/napad_reload.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/napad_unload.ogg'
@@ -35,7 +35,7 @@
 	. += "ПП-694 \"Напад\" - одно из новейших оружий, созданных Оборонной Коллегией для армии СССП. \
 		Этот пистолет-пулемет был разработан для специальных сил СССП, в качестве скорострельного, компактного и мощного оружия для ближнего боя. \
 		Поэтому он оснащен складным прикладом, магазином на 30 калибра 10мм, а также множественными планками для установки тактических аксессуаров. \
-		Хотя он немного больше, чем пистолеты пулеметы, используемые в ТСФ, он с лихвой компенсирует это легкостью управления и значительной скорострельностью."
+		Хотя он немного больше, чем пистолеты-пулеметы, используемые в ТСФ, он с лихвой компенсирует это легкостью управления и значительной скорострельностью."
 
 /obj/item/gun/ballistic/automatic/napad/Initialize(mapload)
 	. = ..()

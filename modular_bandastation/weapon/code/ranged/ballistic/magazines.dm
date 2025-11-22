@@ -95,7 +95,8 @@
 	icon_state = "amk"
 	ammo_band_icon = "+amk_ammo_band"
 	ammo_band_color = null
-	ammo_type = /obj/item/ammo_casing/a762x39
+	w_class = WEIGHT_CLASS_SMALL
+	ammo_type = /obj/item/ammo_casing/c762x39
 	caliber = CALIBER_762x39mm
 	max_ammo = 30
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
@@ -107,36 +108,36 @@
 	name = "rifle magazine (7.62x39mm match)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит патроны с высокой рикошетностью."
 	ammo_band_color = COLOR_AMMO_MATCH
-	ammo_type = /obj/item/ammo_casing/a762x39/ricochet
+	ammo_type = /obj/item/ammo_casing/c762x39/ricochet
 
 /obj/item/ammo_box/magazine/c762x39mm/fire
 	name = "rifle magazine (7.62x39mm incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
-	ammo_type = /obj/item/ammo_casing/a762x39/fire
+	ammo_type = /obj/item/ammo_casing/c762x39/fire
 
 /obj/item/ammo_box/magazine/c762x39mm/ap
 	name = "rifle magazine (7.62x39mm AP)"
 	MAGAZINE_TYPE_ARMORPIERCE
-	ammo_type = /obj/item/ammo_casing/a762x39/ap
+	ammo_type = /obj/item/ammo_casing/c762x39/ap
 
 /obj/item/ammo_box/magazine/c762x39mm/emp
 	name = "rifle magazine (7.62x39mm EMP)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит ионные патроны, которые хорошо подходят для выведения из строя электроники и разрушения мехов."
 	ammo_band_color = "#1ea2ee"
-	ammo_type = /obj/item/ammo_casing/a762x39/emp
+	ammo_type = /obj/item/ammo_casing/c762x39/emp
 
 /obj/item/ammo_box/magazine/c762x39mm/rubber
 	name = "rifle magazine (7.62x39mm rubber)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит нелетальные травматические патроны."
 	ammo_band_color = COLOR_AMMO_RUBBER
-	ammo_type = /obj/item/ammo_casing/a762x39/rubber
+	ammo_type = /obj/item/ammo_casing/c762x39/rubber
 
 /obj/item/ammo_box/magazine/c762x39mm/civ
 	name = "rifle short magazine (7.62x39mm)"
 	desc = "Укороченный двухрядный магазин, вмещающий 15 патронов калибра 7.62х39мм."
 	icon_state = "amk_civ"
 	max_ammo = 15
-	ammo_type = /obj/item/ammo_casing/a762x39/civilian
+	ammo_type = /obj/item/ammo_casing/c762x39/civilian
 
 /obj/item/ammo_box/magazine/c762x39mm/civ/starts_empty
 	start_empty = TRUE
@@ -145,7 +146,7 @@
 	name = "rifle magazine (7.62x39mm hunting)"
 	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит патроны для охоты."
 	ammo_band_color = "#05880c"
-	ammo_type = /obj/item/ammo_casing/a762x39/hunting
+	ammo_type = /obj/item/ammo_casing/c762x39/hunting
 
 // MARK: Fal aka Carwo
 /obj/item/ammo_box/magazine/c40sol_rifle
@@ -353,7 +354,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "cm5_mag"
 	base_icon_state = "cm5_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_9x25NT
 	max_ammo = 30
 	ammo_band_icon = "+cm5_ammo_band"
@@ -385,7 +386,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "cm82_mag"
 	base_icon_state = "cm82_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_A223
 	max_ammo = 30
 	ammo_band_icon = "+cm82_ammo_band"
@@ -427,7 +428,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "cm15_standart"
 	base_icon_state = "cm15_standart"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_SHOTGUN
 	max_ammo = 8
 	ammo_band_icon = "+cm15_standart_ammo_band"
@@ -481,6 +482,7 @@
 	desc = "Барабан для штурмовых дробовиков CM15 12-го калибра, вмещающий 16 патронов."
 	icon_state = "cm15_drum"
 	base_icon_state = "cm15_drum"
+	w_class = WEIGHT_CLASS_NORMAL
 	max_ammo = 16
 	ammo_band_icon = "+cm15_drum_ammo_band"
 
@@ -531,7 +533,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "762x51_mag"
 	base_icon_state = "762x51_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_762x51mm
 	max_ammo = 20
 	ammo_band_icon = "+762x51_ammo_band"
@@ -605,7 +607,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "338_mag"
 	base_icon_state = "338_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_338
 	max_ammo = 5
 	ammo_band_icon = "+338_ammo_band"
@@ -635,6 +637,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "338_mag_ext"
 	base_icon_state = "338_mag_ext"
+	w_class = WEIGHT_CLASS_NORMAL
 	ammo_band_icon = "+338_ext_ammo_band"
 	ammo_band_color = null
 	max_ammo = 10
@@ -661,7 +664,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c38_mag"
 	base_icon_state = "c38_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_TINY
 	caliber = CALIBER_38
 	max_ammo = 12
 	ammo_band_icon = "+c38_mag_ammo_band"
@@ -717,7 +720,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c357_mag"
 	base_icon_state = "c357_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_357
 	max_ammo = 8
 	ammo_band_icon = "+c357_mag_ammo_band"
@@ -748,7 +751,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c45_mag"
 	base_icon_state = "c45_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_45
 	max_ammo = 10
 	ammo_band_icon = "+c45_mag_ammo_band"
@@ -812,6 +815,12 @@
 	base_icon_state = "dshk12_mag"
 	caliber = CALIBER_SHOTGUN
 	max_ammo = 40
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot
+
+/obj/item/ammo_box/magazine/dshk/c12ga/slug
+	name = "DSHK-12 box (12ga slug)"
+	icon_state = "dshk12_mag_slug"
+	base_icon_state = "dshk12_mag_slug"
 	ammo_type = /obj/item/ammo_casing/shotgun
 
 // MARK: Volna-12 (Kord) - 12.7x108mm
@@ -872,6 +881,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
 	icon_state = "zashch_mag"
 	base_icon_state = "zashch_mag"
+	w_class = WEIGHT_CLASS_TINY
 	ammo_band_icon = "+zashch_ammo_band"
 	ammo_band_color = null
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
@@ -902,7 +912,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
 	icon_state = "lanca_mag"
 	base_icon_state = "lanca_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_STRILKA310
 	max_ammo = 20
 	ammo_band_icon = "+lanca_ammo_band"
@@ -936,7 +946,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
 	icon_state = "napad_mag"
 	base_icon_state = "napad_mag"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_10MM
 	max_ammo = 30
 	ammo_band_icon = "+napad_ammo_band"
@@ -1041,6 +1051,7 @@
 /obj/item/ammo_box/magazine/internal/boltaction/mosin
 	ammo_type = /obj/item/ammo_casing/c762x54mmr
 	caliber = CALIBER_762x54mmR
+
 // MARK: FN18 - 9mm SMG
 /obj/item/ammo_box/magazine/fn18
 	name = "SMG magazine (9mm)"
