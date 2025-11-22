@@ -45,8 +45,10 @@
 		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на ушах у [target.declent_ru(GENITIVE)]."),
 	)
 	display_pain(target, "Голова кружится, но кажется, что к вам возвращается слух!")
-	target_ears.deaf = (20) //deafness works off ticks, so this should work out to about 30-40s
 	target_ears.set_organ_damage(0)
+	///makes you temporarily deaf for a duration post-surgery
+	var/deaf_change = 40 SECONDS - target_ears.temporary_deafness
+	target_ears.adjust_temporary_deafness(deaf_change)
 	return ..()
 
 /datum/surgery_step/fix_ears/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)

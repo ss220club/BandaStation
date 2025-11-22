@@ -220,7 +220,7 @@
 		'sound/mobs/humanoids/human/gasp/gasp_male1.ogg',
 		'sound/mobs/humanoids/human/gasp/gasp_male2.ogg',
 		)
-
+/* BANDASTATION REMOVAL - START
 /datum/emote/living/gasp/shock
 	key = "gaspshock"
 	key_third_person = "gaspsshock"
@@ -229,7 +229,7 @@
 	message_mime = "gasps in silent shock!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	stat_allowed = SOFT_CRIT
-
+BANDASTATION REMOVAL - END */
 /datum/emote/living/giggle
 	key = "giggle"
 	key_third_person = "giggles"
@@ -302,7 +302,7 @@
 	message = "laughs."
 	message_mime = "laughs silently!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-	specific_emote_audio_cooldown = 8 SECONDS
+	// specific_emote_audio_cooldown = 8 SECONDS // BANDASTATION REMOVAL
 	vary = TRUE
 
 /datum/emote/living/laugh/can_run_emote(mob/living/user, status_check = TRUE , intentional, params)
@@ -416,8 +416,10 @@
 	message = "screams!"
 	message_mime = "acts out a scream!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-	mob_type_blacklist_typecache = list(/mob/living/brain, /mob/living/carbon/human)
+	mob_type_blacklist_typecache = list(/mob/living/brain)
 	sound_wall_ignore = TRUE
+	specific_emote_audio_cooldown = 10 SECONDS
+	vary = TRUE
 
 /datum/emote/living/scream/run_emote(mob/user, params, type_override, intentional = FALSE)
 	if(!intentional && HAS_TRAIT(user, TRAIT_ANALGESIA))
@@ -428,6 +430,12 @@
 	. = ..()
 	if(!intentional && isanimal_or_basicmob(user))
 		return "makes a loud and pained whimper."
+
+/datum/emote/living/scream/get_sound(mob/living/user)
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/humie = user
+	return humie.dna.species.get_scream_sound(user)
 
 /datum/emote/living/scowl
 	key = "scowl"

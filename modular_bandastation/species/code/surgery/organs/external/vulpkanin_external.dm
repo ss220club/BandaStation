@@ -2,12 +2,11 @@
 
 /obj/item/organ/tail/vulpkanin
 	name = "vulpkanin tail"
-	preference = "feature_vulpkanin_tail"
 
 	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/vulpkanin
 
 	wag_flags = WAG_ABLE
-	dna_block = /datum/dna_block/feature/vulpkanin_tail
+	dna_block = /datum/dna_block/feature/accessory/vulpkanin_tail
 	var/datum/bodypart_overlay/mutant/vulpkanin_tail_markings/tail_markings_overlay
 
 /obj/item/organ/tail/vulpkanin/on_mob_insert(mob/living/carbon/owner)
@@ -22,7 +21,7 @@
 	feature_key = FEATURE_VULPKANIN_TAIL
 
 /datum/bodypart_overlay/mutant/tail/vulpkanin/get_global_feature_list()
-	return SSaccessories.tails_list_vulpkanin
+	return SSaccessories.feature_list[FEATURE_VULPKANIN_TAIL]
 
 /obj/item/organ/tail/vulpkanin/on_bodypart_insert(obj/item/bodypart/bodypart)
 	var/data = ..()
@@ -82,7 +81,7 @@
 	var/tail_markings_color = "#FFFFFF"
 
 /datum/bodypart_overlay/mutant/vulpkanin_tail_markings/get_global_feature_list()
-	return SSaccessories.vulpkanin_tail_markings_list
+	return SSaccessories.feature_list[FEATURE_VULPKANIN_TAIL_MARKINGS]
 
 /datum/bodypart_overlay/mutant/vulpkanin_tail_markings/get_base_icon_state()
 	return (!isnull(tail_markings_key) ? "[tail_markings_key]_" : "") + (wagging ? "wagging_" : "") + sprite_datum.icon_state

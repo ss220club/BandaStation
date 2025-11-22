@@ -351,13 +351,13 @@
 		playsound(paired_cabinet, 'sound/machines/synth/synth_yes.ogg', 40, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		paired_cabinet.say("Контроллер сброшен.")
 		log_transport("TC: [specific_transport_id] position data successfully reset.")
-		speed_limiter = initial(speed_limiter)
+		speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 	idle_platform = destination_platform
 	tram_registration.distance_travelled += (travel_trip_length - travel_remaining)
 	travel_trip_length = 0
 	current_speed = 0
 	current_load = 0
-	speed_limiter = initial(speed_limiter)
+	speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 
 /**
  * Tram comes to an in-station degraded stop, throwing the players. Caused by power loss or tram malfunction event.
@@ -371,7 +371,7 @@
 		playsound(paired_cabinet, 'sound/machines/synth/synth_yes.ogg', 40, vary = FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		paired_cabinet.say("Контроллер сброшен.")
 		log_transport("TC: [specific_transport_id] position data successfully reset. ")
-		speed_limiter = initial(speed_limiter)
+		speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 	if(malf_active == TRANSPORT_LOCAL_FAULT)
 		set_status_code(SYSTEM_FAULT, TRUE)
 		addtimer(CALLBACK(src, PROC_REF(cycle_doors), CYCLE_OPEN), 2 SECONDS)
@@ -384,7 +384,7 @@
 	travel_trip_length = 0
 	current_speed = 0
 	current_load = 0
-	speed_limiter = initial(speed_limiter)
+	speed_limiter = base_speed_limiter // BANDASTATION EDIT - tram VV speed change
 	var/throw_direction = travel_direction
 	for(var/obj/structure/transport/linear/tram/module in transport_modules)
 		module.estop_throw(throw_direction)
@@ -1198,3 +1198,12 @@
 	custom_materials = list(/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 4, /datum/material/iron = SHEET_MATERIAL_AMOUNT * 2, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 2)
 	result_path = /obj/machinery/transport/tram_controller
 	pixel_shift = 32
+
+/obj/item/wallframe/tram/try_build(obj/structure/tram/on_tram, mob/user)
+	var/turf/tram_turf = get_turf(user)
+	var/obj/structure/thermoplastic/tram_floor = locate() in tram_turf
+	if(!istype(tram_floor))
+		balloon_alert(user, "needs tram!")
+		return FALSE
+
+	return ..()

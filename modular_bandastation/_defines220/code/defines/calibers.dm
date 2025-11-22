@@ -7,3 +7,4 @@
 #define CALIBER_762x54mmR "7.62x54mmR"
 #define CALIBER_STRELA60 ".60 Strela"
 #define CALIBER_127x108mm "12.7x108mm"
+#define CALIBER_456MAG ".456 Magnum"

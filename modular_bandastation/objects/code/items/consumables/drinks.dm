@@ -26,7 +26,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "kvass"
 
-/datum/export/large/reagent_dispenser/kvass
+/datum/export/reagent_dispenser/kvass
 	unit_name = "kvasstank"
 	export_types = list(/obj/structure/reagent_dispensers/kvasstank)
 
@@ -243,32 +243,6 @@
 		/datum/reagent/consumable/ethanol/bitters = 1,
 		/datum/reagent/consumable/ethanol/beer = 1,
 		/datum/reagent/consumable/berryjuice = 1,
-	)
-
-/datum/reagent/consumable/ethanol/oldfashion
-	name = "Old Fashion"
-	description = "Ходят слухи, что этот коктейль самый старый, но, однако, это совсем другая история."
-	color = "#6b4017"
-	boozepwr = 60
-	taste_description = "старые времена"
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	quality = DRINK_VERYGOOD
-	glass_price = DRINK_PRICE_MEDIUM
-
-/datum/glass_style/drinking_glass/oldfashion
-	required_drink_type = /datum/reagent/consumable/ethanol/oldfashion
-	name = "Old Fashion"
-	desc = "Ходят слухи, что этот коктейль самый старый, но, однако, это совсем другая история."
-	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
-	icon_state = "oldfashion"
-
-/datum/chemical_reaction/drink/oldfashion
-	results = list(/datum/reagent/consumable/ethanol/oldfashion = 10)
-	required_reagents = list(
-		/datum/reagent/consumable/ethanol/whiskey = 5,
-		/datum/reagent/consumable/ethanol/bitters = 2,
-		/datum/reagent/consumable/sugar = 2,
-		/datum/reagent/consumable/orangejuice = 1,
 	)
 
 /datum/reagent/consumable/ethanol/brandy_crusta

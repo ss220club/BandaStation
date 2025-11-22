@@ -429,7 +429,7 @@
 
 /obj/item/verb/move_to_top()
 	set name = "Move To Top"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 	set src in oview(1)
 
 	if(!isturf(loc) || usr.stat != CONSCIOUS || HAS_TRAIT(usr, TRAIT_HANDS_BLOCKED) || anchored)
@@ -458,18 +458,8 @@
 	else if (siemens_coefficient <= 0.5)
 		.["частично изолирующий"] = "Предмет изготовлен из плохого изолятора, который гасит (но не полностью блокирует) проходящее через него электричество."
 
-	if(resistance_flags & INDESTRUCTIBLE)
-		.["неразрушаемый"] = "Предмет очень прочный! Он выдержит всё, что с ним может случиться!"
-		return
-
-	if(resistance_flags & LAVA_PROOF)
-		.["лавастойкий"] = "Предмет сделан из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
-	if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-		.["кислотостойкий"] = "Предмет выглядит довольно прочным! Возможно, он выдержит воздействие кислоты!"
-	if(resistance_flags & FREEZE_PROOF)
-		.["морозостойкий"] = "Предмет изготовлен из моростойких материалов."
-	if(resistance_flags & FIRE_PROOF)
-		.["огнестойкий"] = "Предмет изготовлен из огнестойких материалов."
+	if(LAZYLEN(unique_reskin) && !current_skin)
+		.["reskinnable"] = "This item is able to be reskinned! Alt-Click to do so!"
 
 /obj/item/examine_descriptor(mob/user)
 	return "предмет"
@@ -624,7 +614,7 @@
 	if(throwing)
 		throwing.finalize(FALSE)
 	if(loc == user && outside_storage)
-		if(!allow_attack_hand_drop(user) || !user.temporarilyRemoveItemFromInventory(src))
+		if(!can_mob_unequip(user) || !user.temporarilyRemoveItemFromInventory(src))
 			return
 
 	. = FALSE
@@ -634,7 +624,9 @@
 		user.dropItemToGround(src)
 		return TRUE
 
-/obj/item/proc/allow_attack_hand_drop(mob/user)
+/// Called when a mob is manually attempting to unequip the item
+/// Returning FALSE will prevent the unequip from happening
+/obj/item/proc/can_mob_unequip(mob/user)
 	return TRUE
 
 /obj/item/attack_paw(mob/user, list/modifiers)
@@ -754,7 +746,8 @@
 	item_flags &= ~IN_INVENTORY
 	UnregisterSignal(src, list(SIGNAL_ADDTRAIT(TRAIT_NO_WORN_ICON), SIGNAL_REMOVETRAIT(TRAIT_NO_WORN_ICON)))
 	SEND_SIGNAL(src, COMSIG_ITEM_DROPPED, user)
-	if(!silent)
+	SEND_SIGNAL(user, COMSIG_MOB_DROPPED_ITEM, src)
+	if(!silent && drop_sound)
 		play_drop_sound(DROP_SOUND_VOLUME)
 
 /// called just as an item is picked up (loc is not yet changed)
@@ -867,7 +860,7 @@
 
 /obj/item/verb/verb_pickup()
 	set src in oview(1)
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 	set name = "Pick up"
 
 	if(usr.incapacitated || !Adjacent(usr))
@@ -982,7 +975,7 @@
 
 /obj/item/proc/update_slot_icon()
 	SIGNAL_HANDLER
-	if(!ismob(loc))
+	if(!ismob(loc) || QDELETED(loc))
 		return
 	var/mob/owner = loc
 	owner.update_clothing(slot_flags | owner.get_slot_by_item(src))
@@ -1222,9 +1215,13 @@
 			if("operative")
 				outline_color = COLOR_THEME_OPERATIVE
 			if("clockwork")
-				outline_color = COLOR_THEME_CLOCKWORK //if you want free gbp go fix the fact that clockwork's tooltip css is glass'
+				outline_color = COLOR_THEME_CLOCKWORK
 			if("glass")
 				outline_color = COLOR_THEME_GLASS
+			if("trasen-knox")
+				outline_color = COLOR_THEME_TRASENKNOX
+			if("detective")
+				outline_color = COLOR_THEME_DETECTIVE
 			else //this should never happen, hopefully
 				outline_color = COLOR_WHITE
 	if(color)

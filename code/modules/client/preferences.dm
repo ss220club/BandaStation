@@ -88,6 +88,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	/// If set to TRUE, will update character_profiles on the next ui_data tick.
 	var/tainted_character_profiles = FALSE
 
+	var/list/custom_emote_panel = list() // BANDASTATION ADD - Emote Panel
+
 /datum/preferences/Destroy(force)
 	QDEL_NULL(character_preview_view)
 	QDEL_LIST(middleware)
@@ -214,6 +216,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			save_character()
 			// SAFETY: `switch_to_slot` performs sanitization on the slot number
 			switch_to_slot(params["slot"])
+
+			parent.tgui_panel?.window.send_message("emotes/setList", custom_emote_panel) // BANDASTATION ADD - Emote Panel
+
 			return TRUE
 		if ("remove_current_slot")
 			remove_current_slot()
@@ -426,7 +431,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	return TRUE
 
 /datum/preferences/proc/GetQuirkBalance()
-	var/bal = 0
+	var/bal = CONFIG_GET(number/default_quirk_points)
 	for(var/V in all_quirks)
 		var/datum/quirk/T = SSquirks.quirks[V]
 		bal -= initial(T.value)

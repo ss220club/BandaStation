@@ -4,3 +4,4 @@
 #include "code/admin_hotkeys.dm"
 #include "code/admin_secrets.dm"
 #include "code/admin_verbs.dm"
+#include "code/buildmode_offer.dm"

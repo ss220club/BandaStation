@@ -59,6 +59,10 @@
 	suffix = "_megaphone"
 	ffmpeg_arguments = "highpass=f=500, lowpass=f=4000, volume=volume=10, acrusher=1:1:45:0:log"
 
+/datum/singleton/sound_effect/telepathy
+	suffix = "_telepathy"
+	ffmpeg_arguments = "chorus=0.5:0.9:50|60|70:0.3|0.22|0.3:0.25|0.4|0.3:2|2.3|1.3"
+
 /datum/singleton/sound_effect/announcement
 	complex = TRUE
 	suffix = "_announcement"

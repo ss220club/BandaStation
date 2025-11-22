@@ -16,7 +16,7 @@
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom,
-		/obj/item/ammo_box/a357 = 3,
+		/obj/item/ammo_box/speedloader/c357 = 3,
 		/obj/item/storage/fancy/cigarettes/cigars
 	)
 	belt = /obj/item/gun/ballistic/revolver/mateba
@@ -160,10 +160,21 @@
 // DeathSquad outifit
 /datum/outfit/centcom/death_commando/officer
 	backpack_contents = list(
-		/obj/item/ammo_box/a357 = 1,
+		/obj/item/ammo_box/speedloader/c357 = 1,
 		/obj/item/flashlight = 1,
 		/obj/item/grenade/c4/x4 = 1,
 		/obj/item/storage/box/flashbangs = 1,
 		/obj/item/storage/medkit/regular = 1,
-		/obj/item/disk/nuclear,
+		/obj/item/disk/nuclear/death_commando = 1,
 	)
+
+/obj/item/disk/nuclear/death_commando
+	fake = TRUE
+
+/obj/item/disk/nuclear/death_commando/Initialize(mapload)
+	. = ..()
+	// So, functionality is dictated by var/fake
+	// By making it TRUE on init, we don't give it roundstart nuke disk safety measures, etc.
+	// So, this disk is just good for making bomb go boom
+	fake = FALSE
+	SSpoints_of_interest.make_point_of_interest(src)

@@ -1,14 +1,15 @@
-import type { Dispatch } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { Button, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
-
 import { useBackend } from '../../backend';
 import { TICKET_STATE } from './constants';
 import { toLocalTime } from './helpers';
 import type { TicketProps } from './types';
 
 export function Ticket(
-  props: TicketProps & { setSelectedTicket: Dispatch<number> },
+  props: TicketProps & {
+    setSelectedTicketId: Dispatch<SetStateAction<number | null>>;
+  },
 ) {
   const {
     number,
@@ -17,7 +18,7 @@ export function Ticket(
     openedTime,
     closedTime,
     messages,
-    setSelectedTicket,
+    setSelectedTicketId,
   } = props;
 
   return (
@@ -25,7 +26,7 @@ export function Ticket(
       g={0.5}
       vertical
       className={classes(['Ticket', type && `Ticket--${type}`])}
-      onClick={() => setSelectedTicket(number)}
+      onClick={() => setSelectedTicketId(number)}
     >
       <Stack fill className="Ticket__Header">
         <Stack.Item className="Ticket__Id">#{number}</Stack.Item>
@@ -44,13 +45,15 @@ export function Ticket(
   );
 }
 
-export function TicketInteractions(props: {
-  linkedAdmin: string;
+type TicketInteractionsProps = {
+  isLinkedToCurrentAdmin: boolean;
   ticketId: number;
   ticketState: TICKET_STATE;
-}) {
+};
+
+export function TicketInteractions(props: TicketInteractionsProps) {
   const { act } = useBackend();
-  const { linkedAdmin, ticketId, ticketState } = props;
+  const { isLinkedToCurrentAdmin, ticketId, ticketState } = props;
 
   return (
     <Stack fontSize={1}>
@@ -80,7 +83,7 @@ export function TicketInteractions(props: {
               onClick={() => act('close', { ticketId: ticketId })}
             />
           </Stack.Item>
-          {!!linkedAdmin && (
+          {isLinkedToCurrentAdmin && (
             <Stack.Item>
               <Button.Confirm
                 icon="link-slash"
@@ -90,15 +93,15 @@ export function TicketInteractions(props: {
               />
             </Stack.Item>
           )}
-          {/*
           <Stack.Item>
             <Button
               icon="exchange"
-              tooltip="Перенаправить тикет менторам"
-              onClick={() => act('convert', { ticketId: ticketId })}
+              tooltip="Изменить тип тикета"
+              onClick={() => {
+                act('convert', { ticketId: ticketId });
+              }}
             />
           </Stack.Item>
-          */}
         </>
       )}
     </Stack>

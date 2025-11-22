@@ -51,7 +51,17 @@ ROUNDSTART_RACES tajaran
 # SPEECH_FILTER_BYPASS ckey
 # SPEECH_FILTER_BYPASS ckey
 
+## SQL table to load admins
+admin_table admin
+
 ## Will player get a permanent severe brain trauma at 200 brain damage once per round
 BRAIN_PERMANENT_TRAUMAS
 ## Decay rate for a brain organ, default - 0.5 (30 min), works only with BRAIN_PERMANENT_TRAUMAS enabled
 BRAIN_DECAY_RATE 2
+
+#DISCORD_URL
+
+#round_end_webhook_url
+#round_end_webhook_name
+#round_end_webhook_avatar_url
+#round_end_webhook_ping_role_id

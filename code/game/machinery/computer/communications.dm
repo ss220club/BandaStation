@@ -206,6 +206,11 @@
 			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_DELTA)
 				to_chat(user, span_warning("Central Command has placed a lock on the alert level due to a doomsday!"))
 				return
+			// BANDASTATION ADD Start - Sec Levels
+			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_GAMMA) // GAMMA and EPSILON
+				to_chat(user, span_warning("Центральным командованием установлено военное положение. Изменение кода невозможно."))
+				return
+			// BANDASTATION ADD End - Sec Levels
 			if (SSsecurity_level.get_current_level_as_number() == new_sec_level)
 				return
 
@@ -261,7 +266,7 @@
 				if (can_buy_shuttles_or_fail_reason != FALSE)
 					to_chat(user, span_alert("[can_buy_shuttles_or_fail_reason]"))
 				return
-			var/list/shuttles = flatten_list(SSmapping.shuttle_templates)
+			var/list/shuttles = assoc_to_values(SSmapping.shuttle_templates)
 			var/datum/map_template/shuttle/shuttle = locate(params["shuttle"]) in shuttles
 			if (!istype(shuttle))
 				return

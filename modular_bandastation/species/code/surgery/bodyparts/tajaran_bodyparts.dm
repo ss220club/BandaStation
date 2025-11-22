@@ -10,7 +10,7 @@
 	is_dimorphic = TRUE
 
 /obj/item/bodypart/chest/tajaran/get_butt_sprite()
-	return icon('icons/mob/butts.dmi', BUTT_SPRITE_CAT)
+	return icon('icons/mob/butts.dmi', BUTT_SPRITE_TAJARAN)
 
 /obj/item/bodypart/arm/left/tajaran
 	icon_greyscale = 'icons/bandastation/mob/species/tajaran/bodyparts.dmi'

@@ -12,8 +12,19 @@
 	// If main_floor is not specified in the JSON, assume the target is ON the main floor
 	if(isnull(current_map.main_floor))
 		return TRUE
-		
+
 	// Get Z-levels associated with the station
 	var/list/station_levels = levels_by_trait(ZTRAIT_STATION)
-	
+
 	return target.z == station_levels[current_map.main_floor]
+
+/// Sends message which bwoinks and also has window flashing effect
+/proc/send_adminhelp_message(client/target, message)
+	if(isnull(target))
+		return
+
+	if(target.prefs.toggles & SOUND_ADMINHELP)
+		SEND_SOUND(target, sound('sound/effects/adminhelp.ogg'))
+
+	window_flash(target, ignorepref = TRUE)
+	to_chat(target, message, MESSAGE_TYPE_ADMINPM)

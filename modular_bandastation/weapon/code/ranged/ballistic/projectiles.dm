@@ -456,12 +456,12 @@
 	ricochets_max = 0
 	armour_penetration = 40
 
-// MARK: 9mm
-/obj/projectile/bullet/c9mm/rubber
-	name = "9mm bullet"
+// MARK: .45
+/obj/projectile/bullet/c45/rubber
+	name = ".45 rubber bullet"
 	damage = 5
 	stamina = 25
-	wound_bonus = -40
+	wound_bonus = -20
 	exposed_wound_bonus = -20
 	weak_against_armour = TRUE
 	ricochet_auto_aim_angle = 30
@@ -474,11 +474,11 @@
 	sharpness = NONE
 	embed_type = null
 
-// MARK: 10mm
-/obj/projectile/bullet/c10mm/rubber
-	name = "10mm bullet"
+// MARK: 9mm
+/obj/projectile/bullet/c9mm/rubber
+	name = "9mm rubber bullet"
 	damage = 5
-	stamina = 30
+	stamina = 20
 	wound_bonus = -40
 	exposed_wound_bonus = -20
 	weak_against_armour = TRUE
@@ -577,6 +577,12 @@
 	damage = 30
 	fire_stacks = 3
 	leaves_fire_trail = FALSE
+// MARK: .456 Magnum
+/obj/projectile/bullet/c456magnum
+	name = ".456 magnum bullet"
+	damage = 60
+	armour_penetration = 40
+	wound_falloff_tile = -1
 
 // MARK: Visual effect after firing (muzzle flash)
 /obj/effect/temp_visual/dir_setting/firing_effect

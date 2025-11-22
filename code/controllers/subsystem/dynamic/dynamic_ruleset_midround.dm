@@ -407,6 +407,9 @@
 /datum/dynamic_ruleset/midround/from_ghosts/blob/false_alarm()
 	priority_announce("Вспышка биологической угрозы 5-го уровня зафиксирована на борту [station_name()]. Всему персоналу надлежит сдержать её распространение любой ценой!", "Биологическая угроза", ANNOUNCER_OUTBREAK5)
 
+	// Set status displays to biohazard alert even for false alarm
+	send_status_display_biohazard_alert()
+
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
 	config_tag = "Xenomorph"
@@ -655,7 +658,7 @@
 	candidate_role = "Changeling"
 	pref_flag = ROLE_CHANGELING_MIDROUND
 	jobban_flag = ROLE_CHANGELING
-	ruleset_flags = RULESET_INVADER
+	ruleset_flags = RULESET_INVADER|RULESET_VARIATION
 	weight = 5
 	min_pop = 15
 	max_antag_cap = 1
@@ -666,6 +669,21 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_changeling/assign_role(datum/mind/candidate)
 	generate_changeling_meteor(candidate)
+
+/datum/dynamic_ruleset/midround/from_ghosts/space_changeling/mass
+	name = "Mass Space Changelings"
+	config_tag = "Mass Changelings"
+	midround_type = HEAVY_MIDROUND
+	min_pop = 25
+	min_antag_cap = 2
+	max_antag_cap = 3
+	repeatable_weight_decrease = 4
+	weight = list(
+		DYNAMIC_TIER_LOW = 0,
+		DYNAMIC_TIER_LOWMEDIUM = 3,
+		DYNAMIC_TIER_MEDIUMHIGH = 4,
+		DYNAMIC_TIER_HIGH = 5,
+	)
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone
 	name = "Paradox Clone"
@@ -931,33 +949,33 @@
 	var/announcement_title = ""
 	switch(hunter_backstory)
 		if(HUNTER_PACK_COPS)
-			announcement_text_list += "Attention Crew of [station_name()], this is the Police. A wanted criminal has been reported taking refuge on your station."
-			announcement_text_list += "We have a warrant from the SSC authorities to take them into custody. Officers have been dispatched to your location."
-			announcement_text_list += "We demand your cooperation in bringing this criminal to justice."
-			announcement_title += "Spacepol Command"
+			announcement_text_list += "Внимание, экипаж [station_name()], это межгалактическая полиция Космопола. Сообщается, что на вашей станции нашел убежище разыскиваемый преступник."
+			announcement_text_list += "У нас есть ордер от департамента защиты вашего сектора на проведение задержания. Офицеры направлены к вам."
+			announcement_text_list += "Мы требуем вашего сотрудничества в привлечении этого преступника к ответственности."
+			announcement_title += "Командование Космопола"
 		if(HUNTER_PACK_RUSSIAN)
-			announcement_text_list += "Zdraviya zhelaju, [station_name()] crew. We are coming to your station."
-			announcement_text_list += "There is a criminal aboard. We will arrest them and return them to the gulag. That's good, yes?"
-			announcement_title += "Russian Freighter"
+			announcement_text_list += "Zdraviya zhelaju, экипаж [station_name()]. Мы направляемся к вашей станции."
+			announcement_text_list += "На вашем борту находится преступник. Мы его арестуем и вернём в ГУЛАГ. Хорошо, да?"
+			announcement_title += "Разыскной шаттл НКВД КССП"
 		if(HUNTER_PACK_BOUNTY)
-			announcement_text_list += "[station_name()]. One of our bounty marks has ended up on your station. We will be arriving to collect shortly."
-			announcement_text_list += "Let's make this quick. If you don't want trouble, stay the hell out of our way."
-			announcement_title += "Unregistered Signal"
+			announcement_text_list += "[station_name()]. Одна из наших \"голов\" объявилась на вашей станции. Мы скоро прибудем, чтобы забрать её."
+			announcement_text_list += "Быстро всё сделаем и улетим. Не хотите проблем - катитесь к чёрту с нашей дороги."
+			announcement_title += "Незарегистрированный сигнал"
 		if(HUNTER_PACK_PSYKER)
-			announcement_text_list += "HEY, CAN YOU HEAR US? We're coming to your station. There's a bad guy down there, really bad guy. We need to arrest them."
-			announcement_text_list += "We're also offering fortune telling services out of the front door if you have paying customers."
-			announcement_title += "Fortune-Telling Entertainment Shuttle"
+			announcement_text_list += "ЭЙ, ВЫ НАС СЛЫШИТЕ? Мы уже на подлёте к вашей станции! У вас там гад, настоящий отпетый негодяй! Мы его должны арестовать!"
+			announcement_text_list += "Кстати, мы ещё и гадаем прямо у входа. Можете направлять к нам своих клиентов, если у них есть деньги."
+			announcement_title += "Шаттл гадания и развлечений"
 		if(HUNTER_PACK_MI13)
-			announcement_text_list += "Illegal intrusion detected in the crew monitoring network. Central Command has been informed."
-			announcement_text_list += "Please report any suspicious individuals or behaviour to your local security team."
-			announcement_title += "Nanotrasen Intrusion Countermeasures Electronics"
+			announcement_text_list += "Обнаружено несанкционированное проникновение в сеть мониторинга экипажа. Центральное командование уведомлено."
+			announcement_text_list += "Любые проявления подозрительной активности или подозрительных лиц следует немедленно сообщать в местную службу безопасности."
+			announcement_title += "Нанотрейзен: контрмеры электронному вторжению"
 
 	if(!length(announcement_text_list))
-		announcement_text_list += "Unidentified ship detected near the station."
+		announcement_text_list += "Обнаружен неопознанный шаттл вблизи станции."
 		stack_trace("Fugitive hunter announcement was unable to generate an announcement text based on backstory: [hunter_backstory]")
 
 	if(!length(announcement_title))
-		announcement_title += "Unknown Signal"
+		announcement_title += "Неизвестный сигнал"
 		stack_trace("Fugitive hunter announcement was unable to generate an announcement title based on backstory: [hunter_backstory]")
 
 	priority_announce(jointext(announcement_text_list, " "), announcement_title)
@@ -1061,6 +1079,7 @@
 	false_alarm_able = TRUE
 	pref_flag = ROLE_SLEEPER_AGENT
 	jobban_flag = ROLE_TRAITOR
+	ruleset_flags = RULESET_VARIATION
 	weight = 10
 	min_pop = 3
 	blacklisted_roles = list(
@@ -1074,6 +1093,22 @@
 	priority_announce(
 		"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
 		"[command_name()] High-Priority Update",
+	)
+
+/datum/dynamic_ruleset/midround/from_living/traitor/mass
+	name = "Mass Traitors"
+	config_tag = "Mass Traitors"
+	midround_type = HEAVY_MIDROUND
+	min_pop = 15
+	min_antag_cap = 2
+	max_antag_cap = 4
+	repeatable_weight_decrease = 8
+	blacklisted_roles = list()
+	weight = list(
+		DYNAMIC_TIER_LOW = 0,
+		DYNAMIC_TIER_LOWMEDIUM = 3,
+		DYNAMIC_TIER_MEDIUMHIGH = 8,
+		DYNAMIC_TIER_HIGH = 10,
 	)
 
 /datum/dynamic_ruleset/midround/from_living/malf_ai

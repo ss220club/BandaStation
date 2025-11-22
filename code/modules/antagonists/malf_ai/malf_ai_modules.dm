@@ -158,13 +158,13 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 		Получение контроля над оружием будет легче, если ЛКП в кабинетах глав отделов находятся под вашим контролем."
 	cost = 130
 	one_purchase = TRUE
-	minimum_apcs = 15 // So you cant speedrun delta
+	minimum_apcs = 10 // So you cant speedrun delta
 	power_type = /datum/action/innate/ai/nuke_station
 	unlock_text = span_notice("Вы медленно и осторожно устанавливаете соединение с устройством самоуничтожения станции. Вы можете активировать его в любое время.")
 	///List of areas that grant discounts. "heads_quarters" will match any head of staff office.
 	var/list/discount_areas = list(
 		/area/station/command/heads_quarters,
-		/area/station/ai_monitored/command/nuke_storage
+		/area/station/command/vault
 	)
 	///List of hacked head of staff office areas. Includes the vault too. Provides a 20 PT discount per (Min 50 PT cost)
 	var/list/hacked_command_areas = list()
@@ -364,6 +364,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 /obj/machinery/doomsday_device/proc/trigger_doomsday()
 	callback_on_everyone_on_z(SSmapping.levels_by_trait(ZTRAIT_STATION), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(bring_doomsday)), src)
 	to_chat(world, span_bold("ИИ уничтожил жизнь на станции с помощью [src.name]!"))
+	GLOB.station_was_nuked = TRUE // BANDASTATION EDIT: Add change for station was nuked
 	SSticker.force_ending = FORCE_END_ROUND
 
 /proc/bring_doomsday(mob/living/victim, atom/source)
@@ -409,8 +410,8 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(_malf_ai_undo_lockdown)), 90 SECONDS)
 
-	var/obj/machinery/computer/communications/random_comms_console = locate() in GLOB.shuttle_caller_list
-	random_comms_console?.post_status("alert", "lockdown")
+	// Set status displays to lockdown alert
+	send_status_display_lockdown_alert()
 
 	minor_announce("Вредоносное программное обеспечение обнаружено в системе контроля шлюзов. Задействованы протоколы изоляции. Пожалуйста, сохраняйте спокойствие.", "Тревога сети", TRUE)
 	to_chat(owner, span_danger("Инициирована блокировка. Система перезагрузится через 90 секунд."))
@@ -426,6 +427,9 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 			continue
 		INVOKE_ASYNC(locked_down, TYPE_PROC_REF(/obj/machinery/door, disable_lockdown))
 		CHECK_TICK
+
+	// Clear the lockdown emergency display
+	clear_status_display_lockdown()
 
 /// Override Machine: Allows the AI to override a machine, animating it into an angry, living version of itself.
 /datum/ai_module/malf/destructive/override_machine
@@ -627,11 +631,13 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 			continue
 		found_intercom.audible_message(message = "Из [found_intercom.declent_ru(GENITIVE)] на мгновение издается треск.", hearing_distance = 3)
 		playsound(found_intercom, 'sound/items/airhorn/airhorn.ogg', 100, TRUE)
-		for(var/mob/living/carbon/honk_victim in ohearers(6, found_intercom))
+		for(var/mob/living/honk_victim in ohearers(6, found_intercom))
+			if(issilicon(honk_victim))
+				continue
 			var/turf/victim_turf = get_turf(honk_victim)
 			if(isspaceturf(victim_turf) && !victim_turf.Adjacent(found_intercom)) //Prevents getting honked in space
 				continue
-			if(honk_victim.soundbang_act(intensity = 1, stun_pwr = 20, damage_pwr = 30, deafen_pwr = 60)) //Ear protection will prevent these effects
+			if(honk_victim.soundbang_act(SOUNDBANG_NORMAL, stun_pwr = 20, damage_pwr = 30, deafen_pwr = 60)) //Ear protection will prevent these effects
 				honk_victim.set_jitter_if_lower(120 SECONDS)
 				to_chat(honk_victim, span_clown("ХООООООНК!"))
 
@@ -885,7 +891,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 
 /datum/ai_module/malf/upgrade/upgrade_turrets/upgrade(mob/living/silicon/ai/AI)
 	for(var/obj/machinery/porta_turret/ai/turret as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/porta_turret/ai))
-		turret.AddElement(/datum/element/empprotection, EMP_PROTECT_ALL)
+		turret.AddElement(/datum/element/empprotection, EMP_PROTECT_ALL|EMP_NO_EXAMINE)
 		turret.max_integrity = 200
 		turret.repair_damage(200)
 		turret.lethal_projectile = /obj/projectile/beam/laser/heavylaser //Once you see it, you will know what it means to FEAR.

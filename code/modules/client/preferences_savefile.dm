@@ -13,7 +13,7 @@
 /// You do not need to raise this if you are adding new values that have sane defaults.
 /// Only raise this value when changing the meaning/format/name/layout of an existing value
 /// where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX 49
+#define SAVEFILE_VERSION_MAX 51
 
 #define IS_DATA_OBSOLETE(version) (version == SAVE_DATA_OBSOLETE)
 #define SHOULD_UPDATE_DATA(version) (version >= SAVE_DATA_NO_ERROR && version < SAVEFILE_VERSION_MAX)
@@ -137,6 +137,33 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			quirk_to_migrate = "Cyborg Pre-screened dogtag",
 			new_typepath = /obj/item/clothing/accessory/dogtag/borg_ready,
 		)
+	if(current_version < 50)
+		migrate_quirk_to_personality(
+			quirk_to_migrate = "Extrovert",
+			new_typepath = /datum/personality/extrovert,
+		)
+		migrate_quirk_to_personality(
+			quirk_to_migrate = "Introvert",
+			new_typepath = /datum/personality/introvert,
+		)
+		migrate_quirk_to_personality(
+			quirk_to_migrate = "Bad Touch",
+			new_typepath = /datum/personality/aloof,
+		)
+		migrate_quirk_to_personality(
+			quirk_to_migrate = "Apathetic",
+			new_typepath = /datum/personality/apathetic,
+		)
+		migrate_quirk_to_personality(
+			quirk_to_migrate = "Snob",
+			new_typepath = /datum/personality/snob,
+		)
+		migrate_quirk_to_personality(
+			quirk_to_migrate = "Spiritual",
+			new_typepath = /datum/personality/spiritual,
+		)
+	if(current_version < 51)
+		migrate_felinid_feature_keys(save_data)
 
 /// checks through keybindings for outdated unbound keys and updates them
 /datum/preferences/proc/check_keybindings()
@@ -246,7 +273,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		update_preferences(data_validity_integer, savefile)
 
 	check_keybindings() // this apparently fails every time and overwrites any unloaded prefs with the default values, so don't load anything after this line or it won't actually save
-	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
 	//Sanitize
 	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
@@ -266,6 +292,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
 			job_preferences -= j
 	// BANDASTATION ADDITION - END
+
+	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
 	if(SHOULD_UPDATE_DATA(data_validity_integer)) //save the updated version
 		var/old_default_slot = default_slot
@@ -355,6 +383,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Load prefs
 	// job_preferences = save_data?["job_preferences"] // BANDASTATION MOVED - Pref Job Slots
 
+	//Custom emote panel
+	custom_emote_panel = save_data?["custom_emote_panel"] // BANDASTATION ADD - Emote Panel
+
 	//Quirks
 	all_quirks = save_data?["all_quirks"]
 
@@ -367,6 +398,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	randomise = SANITIZE_LIST(randomise)
 	// job_preferences = SANITIZE_LIST(job_preferences) // BANDASTATION MOVED - Pref Job Slots
 	all_quirks = SANITIZE_LIST(all_quirks)
+
+	custom_emote_panel = SANITIZE_LIST(custom_emote_panel) // BANDASTATION ADD - Emote Panel
 
 	//Validate job prefs
 	// BANDASTATION MOVED - START - Pref Job Slots
@@ -414,6 +447,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Write prefs
 	// save_data["job_preferences"] = job_preferences // BANDASTATION MOVED - Pref Job Slots
+
+	// BANDASTATION ADD - Emote Panel
+	save_data["custom_emote_panel"] = custom_emote_panel // BANDASTATION ADD - Emote Panel
 
 	//Quirks
 	save_data["all_quirks"] = all_quirks

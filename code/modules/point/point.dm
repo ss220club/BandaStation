@@ -48,10 +48,7 @@
 	pointed_atom_appearance.pixel_x = 0
 	pointed_atom_appearance.pixel_y = 0
 	thought_bubble.overlays += pointed_atom_appearance
-
-	var/hover_outline_index = pointed_atom.get_filter_index(HOVER_OUTLINE_FILTER)
-	if (!isnull(hover_outline_index))
-		pointed_atom_appearance.filters.Cut(hover_outline_index, hover_outline_index + 1)
+	pointed_atom_appearance.remove_filter(HOVER_OUTLINE_FILTER)
 
 	thought_bubble.pixel_w = 16
 	thought_bubble.pixel_z = 32
@@ -104,7 +101,7 @@
  */
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 
 	if(istype(A, /obj/effect/temp_visual/point))
 		return FALSE
@@ -122,7 +119,7 @@
 
 		if(ismovable(pointing_at))
 			var/atom/movable/pointed_movable = pointing_at
-			if(pointed_movable.flags_1 & IS_ONTOP_1)
+			if(HAS_TRAIT(pointed_movable, TRAIT_SKIP_BASIC_REACH_CHECK) || pointing_at.loc.IsContainedAtomAccessible(pointing_at, src))
 				pointing_at = pointed_movable.loc
 
 		if(!(pointing_at in view(client.view, src)))
