@@ -2,6 +2,10 @@
 	icon = 'modular_bandastation/aesthetics/boxes/icons/boxes.dmi'
 	icon_state = "default"
 
+/obj/item/flatpack
+	icon = 'modular_bandastation/aesthetics/boxes/icons/boxes.dmi'
+	icon_state = "flatpack"
+
 // MARK: Default
 /obj/item/storage/box/aquarium_props
 	illustration = "fish"
@@ -355,3 +359,12 @@
 /obj/structure/votebox
 	icon = 'modular_bandastation/aesthetics/boxes/icons/boxes.dmi'
 	icon_state = "votebox_maint"
+
+/obj/item/storage/box/methdealer
+	icon = 'icons/obj/storage/box.dmi'
+
+/obj/item/storage/box/opiumdealer
+	icon = 'icons/obj/storage/box.dmi'
+
+/obj/item/storage/box/kronkdealer
+	icon = 'icons/obj/storage/box.dmi'

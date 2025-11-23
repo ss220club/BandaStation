@@ -179,7 +179,7 @@
 	if(transferred <= 0)
 		to_chat(user, span_warning("В [src.declent_ru(PREPOSITIONAL)] нет места!"))
 		return
-		
+
 	user.visible_message(
 		span_notice("[user] переливает что-то в [src.declent_ru(NOMINATIVE)]."),
 		span_notice("Вы переливаете [transferred] единиц жидкости в [src.declent_ru(NOMINATIVE)].")
@@ -324,7 +324,7 @@
 	if(hookah_mouthpiece)
 		hookah_mouthpiece.source_hookah = null
 		hookah_mouthpiece.disconnect()
-		qdel(hookah_mouthpiece)
+		QDEL_NULL(hookah_mouthpiece)
 
 	set_light(0)
 	return ..()
@@ -509,7 +509,7 @@
 	. = ..()
 	. += span_info("В кучке три кубика.")
 
-/obj/machinery/vending/cigarette/Initialize()
+/obj/machinery/vending/cigarette/Initialize(mapload)
 	premium += list(
 		/obj/item/hookah_coals = 3,
 	)

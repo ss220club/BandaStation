@@ -11,7 +11,7 @@
 	points = 50
 	refined_type = /obj/item/stack/sheet/bluespace_crystal
 	grind_results = list(/datum/reagent/bluespace = 20)
-	scan_state = "rock_BScrystal"
+	scan_state = "rock_bscrystal"
 	merge_type = /obj/item/stack/ore/bluespace_crystal
 	/// The teleport range when crushed/thrown at someone.
 	var/blink_range = 8
@@ -28,11 +28,16 @@
 	. = ..()
 	pixel_x = rand(-5, 5)
 	pixel_y = rand(-5, 5)
+	AddElement(/datum/element/raptor_food, ability_modifier = 0.05, attack_modifier = 0.5, color_chances = string_list(list(/datum/raptor_color/black = 1)))
 
 /obj/item/stack/ore/bluespace_crystal/get_part_rating()
 	return 1
 
 /obj/item/stack/ore/bluespace_crystal/attack_self(mob/user)
+	// BANDASTATION ADDITION - START
+	if(!do_after(user, SQUASH_WITH_HANDS_DELAY, src))
+		return
+	// BANDASTATION ADDITION - END
 	user.visible_message(span_warning("[user] crushes [src]!"), span_danger("You crush [src]!"))
 	new /obj/effect/particle_effect/sparks(loc)
 	playsound(loc, SFX_PORTAL_ENTER, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)

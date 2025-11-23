@@ -136,8 +136,8 @@ SUBSYSTEM_DEF(statpanels)
 	target.stat_panel.send_message("update_mc", list("mc_data" = mc_data, "coord_entry" = coord_entry))
 
 /datum/controller/subsystem/statpanels/proc/set_tickets_tab(client/target)
-	var/list/ahelp_tickets = GLOB.ahelp_tickets.stat_entry()
-	target.stat_panel.send_message("update_tickets", ahelp_tickets)
+	var/list/help_tickets = GLOB.ticket_manager.stat_entry(target) // BANDASTATION EDIT - Original: ahelp_tickets = GLOB.ahelp_tickets.stat_entry()
+	target.stat_panel.send_message("update_tickets", help_tickets) // BANDASTATION EDIT - Original: ahelp_tickets
 	var/datum/interview_manager/m = GLOB.interviews
 
 	// get open interview count
@@ -220,7 +220,6 @@ SUBSYSTEM_DEF(statpanels)
 #endif
 	for(var/datum/controller/subsystem/sub_system as anything in Master.subsystems)
 		mc_data[++mc_data.len] = list("\[[sub_system.state_letter()]][sub_system.name]", sub_system.stat_entry(), text_ref(sub_system))
-	mc_data[++mc_data.len] = list("Camera Net", "Cameras: [GLOB.cameranet.cameras.len] | Chunks: [GLOB.cameranet.chunks.len]", text_ref(GLOB.cameranet))
 
 ///immediately update the active statpanel tab of the target client
 /datum/controller/subsystem/statpanels/proc/immediate_send_stat_data(client/target)

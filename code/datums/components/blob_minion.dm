@@ -49,6 +49,8 @@
 	RegisterSignal(overmind, COMSIG_QDELETING, PROC_REF(overmind_deleted))
 	RegisterSignal(overmind, COMSIG_BLOB_SELECTED_STRAIN, PROC_REF(strain_properties_changed))
 	strain_properties_changed(overmind, overmind.blobstrain)
+	var/mob/living_parent = parent
+	living_parent.pass_flags |= PASSBLOB
 
 /// Our overmind is gone, uh oh!
 /datum/component/blob_minion/proc/overmind_deleted()
@@ -70,7 +72,6 @@
 
 /datum/component/blob_minion/RegisterWithParent()
 	var/mob/living/living_parent = parent
-	living_parent.pass_flags |= PASSBLOB
 	living_parent.faction |= ROLE_BLOB
 	ADD_TRAIT(parent, TRAIT_BLOB_ALLY, REF(src))
 	remove_verb(parent, /mob/living/verb/pulled) // No dragging people into the blob
@@ -113,6 +114,7 @@
 		COMSIG_HOSTILE_PRE_ATTACKINGTARGET,
 	))
 	GLOB.blob_telepathy_mobs -= parent
+	living_parent.pass_flags &= ~PASSBLOB
 
 /// Become blobpilled when we gain a mind
 /datum/component/blob_minion/proc/on_mind_init(mob/living/minion, datum/mind/new_mind)
@@ -182,7 +184,17 @@
 	minion.log_sayverb_talk(message, message_mods, tag = "blob hivemind telepathy")
 	var/spanned_message = minion.generate_messagepart(adjusted_message, message_mods = message_mods)
 	var/rendered = span_blob("<b>\[Blob Telepathy\] [minion.real_name]</b> [spanned_message]")
-	relay_to_list_and_observers(rendered, GLOB.blob_telepathy_mobs, minion, MESSAGE_TYPE_RADIO)
+	// BANDASTATION EDIT START - TTS
+	relay_to_list_and_observers(
+		rendered,
+		GLOB.blob_telepathy_mobs,
+		minion,
+		MESSAGE_TYPE_RADIO,
+		tts_message = adjusted_message,
+		tts_seed = minion.get_tts_seed(),
+		tts_effects = list(/datum/singleton/sound_effect/telepathy)
+	)
+	// BANDASTATION EDIT END
 
 /// Called when a blob minion is transformed into something else, hopefully a spore into a zombie
 /datum/component/blob_minion/proc/on_transformed(mob/living/minion, mob/living/replacement)

@@ -26,7 +26,7 @@
 	if(istype(proj, /obj/projectile/beam/emitter))
 		finish_experiment(linked_experiment_handler)
 
-/datum/experiment/physical/meat_wall_explosion/finish_experiment(datum/component/experiment_handler/experiment_handler)
+/datum/experiment/physical/meat_wall_explosion/finish_experiment(datum/component/experiment_handler/experiment_handler, datum/techweb/linked_web_override)
 	. = ..()
 	new /obj/effect/gibspawner/generic(currently_scanned_atom)
 	var/turf/meat_wall = currently_scanned_atom
@@ -43,12 +43,12 @@
 		linked_experiment_handler.announce_message("Неподходящий объект для эксперимента.")
 		return FALSE
 
-	RegisterSignal(currently_scanned_atom, COMSIG_ARCADE_PRIZEVEND, PROC_REF(win_arcade))
+	RegisterSignal(currently_scanned_atom, COMSIG_ARCADE_VICTORY, PROC_REF(win_arcade))
 	linked_experiment_handler.announce_message("Эксперимент готов к началу.")
 	return TRUE
 
 /datum/experiment/physical/arcade_winner/unregister_events()
-	UnregisterSignal(currently_scanned_atom, COMSIG_ARCADE_PRIZEVEND)
+	UnregisterSignal(currently_scanned_atom, COMSIG_ARCADE_VICTORY)
 
 /datum/experiment/physical/arcade_winner/check_progress()
 	. += EXPERIMENT_PROG_BOOL("Выиграйте аркадную игру в отслеживаемом игровом зале.", is_complete())

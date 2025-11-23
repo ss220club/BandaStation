@@ -13,7 +13,10 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/treant)
 
 /mob/living/basic/revenant/add_tts_component()
-	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/sylvanas)
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/gollum, list(/datum/singleton/sound_effect/telepathy))
+
+/mob/living/basic/voidwalker/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/abaddon, list(/datum/singleton/sound_effect/telepathy))
 
 /mob/living/basic/demon/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/mannoroth)
@@ -39,7 +42,7 @@
 /mob/living/basic/creature/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/earth)
 
-/mob/living/basic/giant_spider/add_tts_component()
+/mob/living/basic/spider/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/anubarak)
 
 /mob/living/basic/regal_rat/add_tts_component()

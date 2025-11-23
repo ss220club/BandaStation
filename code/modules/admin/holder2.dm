@@ -32,7 +32,7 @@ GLOBAL_PROTECT(href_token)
 
 	var/deadmined
 
-	var/datum/filter_editor/filteriffic
+	var/datum/filter_editor/filterrific
 	var/datum/particle_editor/particle_test
 	var/datum/colorblind_tester/color_test
 	var/datum/plane_master_debug/plane_debug
@@ -183,7 +183,7 @@ GLOBAL_PROTECT(href_token)
 	if (!SSdbcore.IsConnected())
 		return null
 
-	var/datum/db_query/feedback_query = SSdbcore.NewQuery("SELECT feedback FROM [format_table_name("admin")] WHERE ckey = '[owner.ckey]'")
+	var/datum/db_query/feedback_query = SSdbcore.NewQuery("SELECT feedback FROM [format_table_name(CONFIG_GET(string/admin_table))] WHERE ckey = '[owner.ckey]'") // BANDASTATION EDIT - Prime Admins
 
 	if(!feedback_query.Execute())
 		log_sql("Error retrieving feedback link for [src]")

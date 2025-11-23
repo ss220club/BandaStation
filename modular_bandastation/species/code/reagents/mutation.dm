@@ -8,7 +8,7 @@
 
 /datum/chemical_reaction/slime/slimevulpkanin
 	results = list(/datum/reagent/mutationtoxin/vulpkanin = 1)
-	required_reagents = list(/datum/reagent/love = 5)
+	required_reagents = list(/datum/reagent/consumable/nutriment/protein = 1)
 	required_container = /obj/item/slime_extract/green
 
 /datum/reagent/mutationtoxin/tajaran
@@ -19,12 +19,9 @@
 	taste_description = "шерсти"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+/* TODO220: Replace with something. Currently copied felinid
 /datum/chemical_reaction/slime/slimetajaran
 	results = list(/datum/reagent/mutationtoxin/tajaran = 1)
-	required_reagents = list(/datum/reagent/consumable/milk = 5)
+	required_reagents = list(/datum/reagent/consumable/milk = 1)
 	required_container = /obj/item/slime_extract/green
-
-/datum/chemical_reaction/slime/slimemoth
-	results = list(/datum/reagent/mutationtoxin/moth = 1)
-	required_reagents = list(/datum/reagent/consumable/honey = 1)
-	required_container = /obj/item/slime_extract/green
+*/

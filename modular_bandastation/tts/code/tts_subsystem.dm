@@ -239,6 +239,8 @@ SUBSYSTEM_DEF(tts220)
 	channel_override,
 )
 
+	set waitfor = FALSE
+
 	if(!is_enabled)
 		return
 	if(!message)
@@ -276,7 +278,7 @@ SUBSYSTEM_DEF(tts220)
 	if(traits & TTS_TRAIT_PITCH_WHISPER)
 		text = provider.pitch_whisper(text)
 
-	var/hash = md5(lowertext(text))
+	var/hash = md5(LOWER_TEXT(text))
 
 	var/filename = "data/tts_cache/[tts_seed.name]/[hash]"
 	var/list/effect_singletons = list()
@@ -393,16 +395,14 @@ SUBSYSTEM_DEF(tts220)
 	postSFX = null,
 	channel_override = null,
 )
+	var/static/alist/channel_to_preference = alist(
+		CHANNEL_TTS_RADIO = /datum/preference/numeric/volume/sound_tts_volume_radio,
+		CHANNEL_TTS_ANNOUNCEMENT = /datum/preference/numeric/volume/sound_tts_volume_announcement,
+		CHANNEL_TTS_TELEPATHY = /datum/preference/numeric/volume/sound_tts_volume_telepathy
+	)
 
-	var/volume
-	switch(channel_override)
-		if(CHANNEL_TTS_RADIO)
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_radio)
-		if(CHANNEL_TTS_ANNOUNCEMENT)
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume_announcement)
-		else
-			volume = listener?.client?.prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume)
-
+	var/channel_volume_preference_path = channel_to_preference[channel_override] || /datum/preference/numeric/volume/sound_tts_volume
+	var/volume = listener?.client?.prefs?.read_preference(channel_volume_preference_path)
 	if(!volume)
 		return
 
@@ -495,7 +495,7 @@ SUBSYSTEM_DEF(tts220)
 /datum/controller/subsystem/tts220/proc/sanitize_tts_input(message)
 	var/hash
 	if(sanitized_messages_caching)
-		hash = md5(lowertext(message))
+		hash = md5(LOWER_TEXT(message))
 		if(sanitized_messages_cache[hash])
 			sanitized_messages_cache_hit++
 			return sanitized_messages_cache[hash]
@@ -552,7 +552,7 @@ SUBSYSTEM_DEF(tts220)
 	if(!word || !LAZYLEN(SStts220.tts_acronym_replacements))
 		return word
 
-	var/match = SStts220.tts_acronym_replacements[lowertext(word)]
+	var/match = SStts220.tts_acronym_replacements[LOWER_TEXT(word)]
 	return match || word
 
 /datum/sound_effects_request

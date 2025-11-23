@@ -53,6 +53,3 @@
 	applies_to = list(
 		/obj/item/bodypart/head,
 	)
-
-/datum/bodypart_overlay/simple/body_marking/tajaran_head/get_accessory(name)
-	return SSaccessories.tajaran_head_markings_list[name]

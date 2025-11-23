@@ -90,10 +90,10 @@
 			var/obj/item/offhand = user.get_inactive_held_item()
 			if(istype(offhand, /obj/item/photo) && istype(surgery, /datum/surgery/plastic_surgery/advanced))
 				var/obj/item/photo/disguises = offhand
-				for(var/namelist as anything in disguises.picture?.names_seen)
+				for(var/namelist in disguises.picture?.names_seen)
 					names += namelist
 			else
-				user.visible_message(span_warning("У вас нет фотографии, на которую можно было бы опираться, и вы возвращаетесь к случайному списку внешности."))
+				to_chat(user, span_warning("У вас нет фотографии, на которую можно было бы опираться, и вы возвращаетесь к случайному списку внешности."))
 				for(var/i in 1 to 10)
 					names += target.generate_random_mob_name(TRUE)
 		else

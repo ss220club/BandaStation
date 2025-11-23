@@ -4,7 +4,6 @@
 
 #include "code/_brain.dm"
 #include "code/bodyparts/head.dm"
-#include "code/cargo/exports/materials.dm"
 #include "code/cargo/packs/goodies.dm"
 #include "code/cargo/packs/livestock.dm"
 #include "code/cargo/packs/science.dm"
@@ -29,5 +28,6 @@
 #include "code/weapons/rifle.dm"
 #include "code/wounds/cranial_fissure.dm"
 #include "code/mod_types.dm"
+#include "code/tools.dm"
 
 #include "code/~undefs.dm"

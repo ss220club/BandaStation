@@ -16,20 +16,60 @@ const HEALTH_COLOR_BY_LEVEL = [
   '#801308',
 ];
 
-const SORT_NAMES = {
-  ijob: 'Job',
-  name: 'Name',
-  area: 'Position',
-  health: 'Vitals',
-  head: 'Head',
-};
-
 const STAT_LIVING = 0;
 const STAT_DEAD = 4;
 
-const SORT_OPTIONS = ['health', 'ijob', 'name', 'area', 'head'];
-
 const jobIsHead = (jobId: number) => jobId % 10 === 0;
+
+const SORT_OPTIONS = [
+  {
+    name: 'Job',
+    sort: (a: CrewSensor, b: CrewSensor) => {
+      return a.ijob - b.ijob;
+    },
+  },
+  {
+    name: 'Name',
+    sort: (a: CrewSensor, b: CrewSensor) => {
+      if (a.name > b.name) return 1;
+      if (a.name < b.name) return -1;
+      return 0;
+    },
+  },
+  {
+    name: 'Area',
+    sort: (a: CrewSensor, b: CrewSensor) => {
+      if (a.area === undefined) return 1;
+      if (b.area === undefined) return -1;
+      if (a.area > b.area) return 1;
+      if (a.area < b.area) return -1;
+      return 0;
+    },
+  },
+  {
+    name: 'Vitals',
+    sort: (a: CrewSensor, b: CrewSensor) => {
+      if (a.life_status > b.life_status) return -1;
+      if (a.life_status < b.life_status) return 1;
+
+      if (b.oxydam === undefined) return -1;
+      if (a.oxydam === undefined) return 1;
+
+      if (a.health < b.health) return -1;
+      if (a.health > b.health) return 1;
+
+      return 0;
+    },
+  },
+  {
+    name: 'Head',
+    sort: (a: CrewSensor, b: CrewSensor) => {
+      if (a.ijob % 10 === 0 && b.ijob % 10 !== 0) return -1;
+      else if (a.ijob % 10 !== 0 && b.ijob % 10 === 0) return 1;
+      else return a.ijob - b.ijob;
+    },
+  },
+];
 
 const jobToColor = (jobId: number) => {
   if (jobId === 0) {
@@ -67,28 +107,6 @@ const statToIcon = (life_status: number) => {
       return 'skull';
   }
   return 'heartbeat';
-};
-
-const healthSort = (a: CrewSensor, b: CrewSensor) => {
-  if (a.life_status > b.life_status) return -1;
-  if (a.life_status < b.life_status) return 1;
-  if (a.health < b.health) return -1;
-  if (a.health > b.health) return 1;
-  return 0;
-};
-
-const areaSort = (a: CrewSensor, b: CrewSensor) => {
-  a.area ??= '~';
-  b.area ??= '~';
-  if (a.area < b.area) return -1;
-  if (a.area > b.area) return 1;
-  return 0;
-};
-
-const headSort = (a: CrewSensor, b: CrewSensor) => {
-  if (a.ijob % 10 === 0 && b.ijob % 10 !== 0) return -1;
-  else if (a.ijob % 10 !== 0 && b.ijob % 10 === 0) return 1;
-  else return a.ijob - b.ijob;
 };
 
 const healthToAttribute = (
@@ -140,7 +158,6 @@ type CrewSensor = {
   brutedam: number;
   area: string | undefined;
   health: number;
-  can_track: BooleanLike;
   ref: string;
 };
 
@@ -155,38 +172,29 @@ const CrewTable = () => {
 
   const [sortAsc, setSortAsc] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState(SORT_OPTIONS[0]);
+  const [indexOfSortingOption, setIndexOfSortingOption] = useState(0);
 
   const cycleSortBy = () => {
-    let idx = SORT_OPTIONS.indexOf(sortBy) + 1;
-    if (idx === SORT_OPTIONS.length) idx = 0;
-    setSortBy(SORT_OPTIONS[idx]);
+    setIndexOfSortingOption((indexOfSortingOption + 1) % SORT_OPTIONS.length);
   };
 
   const nameSearch = createSearch(searchQuery, (crew: CrewSensor) => crew.name);
 
-  const sorted = sensors.filter(nameSearch).sort((a, b) => {
-    switch (sortBy) {
-      case 'name':
-        return sortAsc ? +(a.name > b.name) : +(b.name > a.name);
-      case 'ijob':
-        return sortAsc ? a.ijob - b.ijob : b.ijob - a.ijob;
-      case 'health':
-        return sortAsc ? healthSort(a, b) : healthSort(b, a);
-      case 'area':
-        return sortAsc ? areaSort(a, b) : areaSort(b, a);
-      case 'head':
-        return sortAsc ? headSort(a, b) : headSort(b, a);
-      default:
-        return 0;
-    }
-  });
+  const sorted = sensors
+    .filter(nameSearch)
+    .sort((a, b) =>
+      sortAsc
+        ? SORT_OPTIONS[indexOfSortingOption].sort(a, b)
+        : SORT_OPTIONS[indexOfSortingOption].sort(b, a),
+    );
 
   return (
     <Section
       title={
         <>
-          <Button onClick={cycleSortBy}>{SORT_NAMES[sortBy]}</Button>
+          <Button onClick={cycleSortBy}>
+            {SORT_OPTIONS[indexOfSortingOption].name}
+          </Button>
           <Button onClick={() => setSortAsc(!sortAsc)}>
             <Icon
               style={{ marginLeft: '2px' }}
@@ -243,7 +251,6 @@ const CrewTableEntry = (props: CrewTableEntryProps) => {
     burndam,
     brutedam,
     area,
-    can_track,
   } = sensor_data;
 
   return (
@@ -298,7 +305,6 @@ const CrewTableEntry = (props: CrewTableEntryProps) => {
       {!!link_allowed && (
         <Table.Cell collapsing>
           <Button
-            disabled={!can_track}
             onClick={() =>
               act('select_person', {
                 name: name,

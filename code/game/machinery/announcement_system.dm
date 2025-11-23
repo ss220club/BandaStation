@@ -29,10 +29,10 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	var/errorlight = "Error_Red"
 
 /obj/machinery/announcement_system/Initialize(mapload)
-	. = ..()
-	GLOB.announcement_systems += src
-	radio = new radio_type(src)
 	config_entries = init_subtypes(/datum/aas_config_entry, list())
+	. = ..()
+	radio = new radio_type(src)
+	GLOB.announcement_systems += src
 	update_appearance()
 
 /obj/machinery/announcement_system/randomize_language_if_on_station()
@@ -122,6 +122,13 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 		))
 	return list("config_entries" = configs)
 
+/obj/machinery/announcement_system/ui_static_data(mob/user)
+	var/list/data = list()
+
+	data["max_announcement_len"] = MAX_AAS_LENGTH
+
+	return data
+
 /obj/machinery/announcement_system/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
@@ -148,7 +155,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 				message_admins("[ADMIN_LOOKUPFLW(usr)] tried to set announcement line for nonexisting line in the [config.name] for AAS. Probably href injection. Received line: [html_encode(params["lineKey"])]")
 				log_game("[key_name(usr)] tried to mess with AAS. For [config.name] he tried to edit nonexistend [params["lineKey"]]")
 				return
-			var/new_message = trim(html_encode(params["newText"]), MAX_MESSAGE_LEN)
+			var/new_message = trim(html_encode(params["newText"]), MAX_AAS_LENGTH)
 			if(new_message)
 				config.announcement_lines_map[params["lineKey"]] = new_message
 				usr.log_message("updated [params["lineKey"]] line in the [config.name] to: [new_message]", LOG_GAME)
@@ -168,13 +175,14 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 /obj/machinery/announcement_system/proc/has_supported_channels(list/channels)
 	if (!LAZYLEN(channels) || (RADIO_CHANNEL_COMMON in channels))
 		// Okay, I am not proud of this, but I don't want CentCom or Syndie AASs to broadcast on Common.
-		return src.type == /obj/machinery/announcement_system
+		// Because our overrides can just change radio withour creating new subtype we prefer to check both.
+		return src.type == /obj/machinery/announcement_system && src.radio_type == /obj/machinery/announcement_system::radio_type
 	for(var/channel in channels)
 		if(radio.channels[channel])
 			return TRUE
 	return FALSE
 
-/// Can AAS receive request for broadcast from you?
+/// Can AAS receive request for broadcast from you? Null source means yes.
 /obj/machinery/announcement_system/proc/can_be_reached_from(atom/source)
 	if(!source || !istype(source))
 		return TRUE
@@ -182,6 +190,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	if (!source_turf)
 		return TRUE
 	// Keep updated with broadcasting.dm (/datum/signal/subspace/vocal/New)
+	// FFF (For Future Feature): think about adding radio relay support. Maybe implementing /datum/signal/subspace/aas_event or something similar.
 	return z in SSmapping.get_connected_levels(source_turf)
 
 /// Compiles the announcement message with the provided variables. Announcement line is optional.
@@ -205,13 +214,13 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	for(var/channel in channels)
 		radio.talk_into(src, message, channel, command_span ? list(speech_span, SPAN_COMMAND) : null)
 
-/// Announces configs entry message with the provided variables. Channels and announcement_line are optional.
+/// Announces configs entry message with the provided variables. Channels, announcement_line and command_span are optional.
 /obj/machinery/announcement_system/proc/announce(aas_config_entry_type, list/variables_map, list/channels, announcement_line, command_span)
 	var/msg = compile_config_message(aas_config_entry_type, variables_map, announcement_line, TRUE)
 	if (msg)
 		broadcast(msg, channels, command_span)
 
-/// Returns a random announcement system that is operational, has the specified config entry, signal can reach source and radio supports any channel in list. Config entry, source and channels are optional.
+/// Returns a random announcement system that is operational, has the specified config entry, signal can reach source and radio supports any channel in list. All args are optional.
 /proc/get_announcement_system(aas_config_entry_type, source, list/channels)
 	if (!GLOB.announcement_systems.len)
 		return null
@@ -225,7 +234,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 			intact_aass += announce
 	return intact_aass.len ? pick(intact_aass) : null
 
-/// Announces the provided message with the provided variables and config entry type. Channels, announcement_line, command_span and source are optional.
+/// Announces the provided message with the provided variables and config entry type. Only aas_config_entry_type and variables_map are mandatory. Other args are optional.
 /proc/aas_config_announce(aas_config_entry_type, list/variables_map, source, list/channels, announcement_line, command_span)
 	var/obj/machinery/announcement_system/announcer = get_announcement_system(aas_config_entry_type, source, channels)
 	if (!announcer)
@@ -245,7 +254,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	// Can be changed or disabled by players
 	var/modifiable = TRUE
 
-/// Compiles the announcement message with the provided variables. Announcement line is optional.
+/// Compiles the announcement message with the provided variables. Announcement line is optional, may be both index or line key.
 /datum/aas_config_entry/proc/compile_announce(list/variables_map, announcement_line)
 	var/announcement_message = LAZYACCESS(announcement_lines_map, announcement_line)
 	// If index was provided LAZYACCESS will return us a key, not value
@@ -273,9 +282,9 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 */
 
 /datum/aas_config_entry/arrival
-	name = "Arrival Announcement"
+	name = "Global: Arrival Announcement"
 	announcement_lines_map = list(
-		"Message" = "%PERSON has signed up as %RANK")
+		"Message" = "%PERSON прибывает на станцию в должности %RANK")
 	vars_and_tooltips_map = list(
 		"PERSON" = "will be replaced with their name.",
 		"RANK" = "with their job."
@@ -286,14 +295,14 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	if (.)
 		return
 
-	announcement_lines_map["Message"] = pick("#!@%ERR-34%2 CANNOT LOCAT@# JO# F*LE!",
-		"CRITICAL ERROR 99.",
-		"ERR)#: DA#AB@#E NOT F(*ND!")
+	announcement_lines_map["Message"] = pick("#!@%ОШБ-34%2 НЕВ@ЗМОЖН@ НАЙТ# РАБ@ТУ!",
+		"КРИТИЧЕСКАЯ ОШИБКА 99.",
+		"ОШБ)#: БАЗ@ Д@ННЫХ НЕ Н@(*ЙДЕНА!")
 
 /datum/aas_config_entry/newhead
-	name = "Departmental Head Announcement"
+	name = "Departmental: Head Announcement"
 	announcement_lines_map = list(
-		"Message" = "%PERSON, %RANK, is the department head.")
+		"Message" = "%PERSON, %RANK назначен(а) главой отдела.")
 	vars_and_tooltips_map = list(
 		"PERSON" = "will be replaced with their name.",
 		"RANK" = "with their job."
@@ -304,14 +313,14 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	if (.)
 		return
 
-	announcement_lines_map["Message"] = pick("OV#RL()D: \[UNKNOWN??\] DET*#CT)D!",
-		"ER)#R - B*@ TEXT F*O(ND!",
-		"AAS.exe is not responding. NanoOS is searching for a solution to the problem.")
+	announcement_lines_map["Message"] = pick("ОВ#РЛ()Д: \[НЕИЗВЕСТНО??\] ОБНАРУЖ*#Н)!",
+		"ОШ)#КА - Т*@КСТ Н*(ДЕН!",
+		"AAS.exe не отвечает. NanoOS ищет решение проблемы.")
 
 /datum/aas_config_entry/researched_node
-	name = "Research Node Announcement"
+	name = "Science Alert: Research Node Announcement"
 	announcement_lines_map = list(
-		"Message" = "The %NODE techweb node has been researched")
+		"Message" = "Исследован технологический узел «%NODE»")
 	vars_and_tooltips_map = list(
 		"NODE" = "will be replaced with the researched node."
 	)
@@ -323,21 +332,21 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 
 	announcement_lines_map["Message"] = pick(
 		replacetext(/datum/aas_config_entry/researched_node::announcement_lines_map["Message"], "%NODE", /datum/techweb_node/mech_clown::display_name),
-		"R/NT1M3 A= ANNOUN-*#nt_SY!?EM.dm, LI%£ 86: N=0DE NULL!",
-		"BEPIS BEPIS BEPIS",
-		"ERR)#R - B*@ TEXT F*O(ND!")
+		"R/NT1M3 А= ОБЪЯВЛ-*#nt_SYS!?M.dm, ЛИ%£ 86: У=0ЗЕЛ НУЛЕВОЙ!",
+		"БЕПИС БЕПИС БЕПИС",
+		"ОШ)#КА - Т*@КСТ Н*Е(ЙДЕН!")
 
 /datum/aas_config_entry/arrivals_broken
-	name = "Arrivals Shuttle Malfunction Announcement"
+	name = "Engineering Alert: Arrivals Shuttle Malfunction Announcement"
 	announcement_lines_map = list(
-		"Message" = "The arrivals shuttle has been damaged. Docking for repairs...")
+		"Message" = "Шаттл прибытия поврежден. Стыковка для ремонта...")
 	general_tooltip = "Broadcasted, when arrivals shuttle docks for repairs. No replacable variables provided."
 	modifiable = FALSE
 
 /datum/aas_config_entry/announce_officer
 	name = "Security Alert: Officer Arrival Announcement"
 	announcement_lines_map = list(
-		"Message" = "Officer %OFFICER has been assigned to %DEPARTMENT.")
+		"Message" = "Офицер %OFFICER назначен(а) в %DEPARTMENT.")
 	vars_and_tooltips_map = list(
 		"OFFICER" = "will be replaced with the officer's name.",
 		"DEPARTMENT" = "with the department they were assigned to."

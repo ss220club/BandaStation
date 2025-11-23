@@ -16,7 +16,7 @@
 
 /obj/machinery/power/apc
 	name = "area power controller"
-	desc = "A control terminal for the area's electrical systems."
+	desc = "Терминал управления электрическими системами области."
 	icon = 'icons/obj/machines/wallmounts.dmi'
 	icon_state = "apc0"
 	use_power = NO_POWER_USE
@@ -173,35 +173,13 @@
 	//. += NAMEOF(src, locked)
 	return .
 
-/obj/machinery/power/apc/Initialize(mapload, ndir)
+/obj/machinery/power/apc/Initialize(mapload)
 	. = ..()
+
 	//APCs get added to their own processing tasks for the machines subsystem.
 	if (!(datum_flags & DF_ISPROCESSING))
 		datum_flags |= DF_ISPROCESSING
 		SSmachines.processing_apcs += src
-
-	//Pixel offset its appearance based on its direction
-	dir = ndir
-	switch(dir)
-		if(NORTH)
-			offset_old = pixel_y
-			pixel_y = APC_PIXEL_OFFSET
-		if(SOUTH)
-			offset_old = pixel_y
-			pixel_y = -APC_PIXEL_OFFSET
-		if(EAST)
-			offset_old = pixel_x
-			pixel_x = APC_PIXEL_OFFSET
-		if(WEST)
-			offset_old = pixel_x
-			pixel_x = -APC_PIXEL_OFFSET
-
-	var/image/hud_image = image(icon = 'icons/mob/huds/hud.dmi', icon_state = "apc_hacked")
-	hud_image.pixel_w = pixel_x
-	hud_image.pixel_z = pixel_y
-	hud_list = list(
-		MALF_APC_HUD = hud_image
-	)
 
 	//Assign it to its area. If mappers already assigned an area string fast load the area from it else get the current area
 	var/area/our_area = get_area(loc)
@@ -236,8 +214,10 @@
 			cell.charge = start_charge * cell.maxcharge / 100 // (convert percentage to actual value)
 		make_terminal()
 		///This is how we test to ensure that mappers use the directional subtypes of APCs, rather than use the parent and pixel-shift it themselves.
+		setDir(dir)
 		if(abs(offset_old) != APC_PIXEL_OFFSET)
 			log_mapping("APC: ([src]) at [AREACOORD(src)] with dir ([dir] | [uppertext(dir2text(dir))]) has pixel_[dir & (WEST|EAST) ? "x" : "y"] value [offset_old] - should be [dir & (SOUTH|EAST) ? "-" : ""][APC_PIXEL_OFFSET]. Use the directional/ helpers!")
+		find_and_hang_on_atom()
 	// For apcs created during the round players need to configure them from scratch
 	else
 		opened = APC_COVER_OPENED
@@ -252,16 +232,15 @@
 
 	var/static/list/hovering_mob_typechecks = list(
 		/mob/living/silicon = list(
-			SCREENTIP_CONTEXT_CTRL_LMB = "Toggle power",
-			SCREENTIP_CONTEXT_ALT_LMB = "Toggle equipment power",
-			SCREENTIP_CONTEXT_SHIFT_LMB = "Toggle lighting power",
-			SCREENTIP_CONTEXT_CTRL_SHIFT_LMB = "Toggle environment power",
+			SCREENTIP_CONTEXT_CTRL_LMB = "Переключить питание",
+			SCREENTIP_CONTEXT_ALT_LMB = "Переключить питание оборудования",
+			SCREENTIP_CONTEXT_SHIFT_LMB = "Переключить питание освещения",
+			SCREENTIP_CONTEXT_CTRL_SHIFT_LMB = "Переключить питание окружения",
 		)
 	)
 
-	AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Toggle interface lock")
+	AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Переключить блокировку интерфейса")
 	AddElement(/datum/element/contextual_screentip_mob_typechecks, hovering_mob_typechecks)
-	find_and_hang_on_wall()
 
 /obj/machinery/power/apc/Destroy()
 	if(malfai)
@@ -276,6 +255,30 @@
 	if(terminal)
 		disconnect_terminal()
 	return ..()
+
+/obj/machinery/power/apc/setDir(newdir)
+	. = ..()
+
+	switch(newdir)
+		if(NORTH)
+			offset_old = pixel_y
+			pixel_y = APC_PIXEL_OFFSET
+		if(SOUTH)
+			offset_old = pixel_y
+			pixel_y = -APC_PIXEL_OFFSET
+		if(EAST)
+			offset_old = pixel_x
+			pixel_x = APC_PIXEL_OFFSET
+		if(WEST)
+			offset_old = pixel_x
+			pixel_x = -APC_PIXEL_OFFSET
+
+	var/image/hud_image = image(icon = 'icons/mob/huds/hud.dmi', icon_state = "apc_hacked")
+	hud_image.pixel_w = pixel_x
+	hud_image.pixel_z = pixel_y
+	hud_list = list(
+		MALF_APC_HUD = hud_image
+	)
 
 /obj/machinery/power/apc/on_saboteur(datum/source, disrupt_duration)
 	. = ..()
@@ -339,24 +342,23 @@
 	. = ..()
 	if(machine_stat & BROKEN)
 		if(opened != APC_COVER_REMOVED)
-			. += "The cover is broken and can probably be <i>pried</i> off with enough force."
+			. += "Панель сломана, и её можно <i>поддеть</i>, приложив достаточное усилие."
 			return
 		if(terminal && has_electronics)
-			. += "The cover is missing but can be replaced using a new frame."
+			. += "Панель отсутствует, но может быть заменена с использованием новой панели."
 		return
 	if(opened)
 		if(has_electronics && terminal)
-			. += "The cover is [opened == APC_COVER_REMOVED?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
+			. += "Панель [opened == APC_COVER_REMOVED?"убрана":"открыта"] и батарея [ cell ? "установлена" : "отсутствует"]."
 		else
-			. += {"It's [ !terminal ? "not" : "" ] wired up.\n
-			The electronics are[!has_electronics?"n't":""] installed."}
+			. += {"Проводка[ !terminal ? " не" : "" ] подключена.\n	Электроника [!has_electronics?"не":""] установлена."}
 	else
 		if(machine_stat & MAINT)
-			. += "The cover is closed. Something is wrong with it. It doesn't work."
+			. += "Панель закрыта. С ней что-то не так. Она не работает."
 		else if(malfhack)
-			. += "The cover is broken. It may be hard to force it open."
+			. += "Панель повреждена. Возможно, будет сложно открыть."
 		else
-			. += "The cover is closed."
+			. += "Панель закрыта."
 
 /obj/machinery/power/apc/atom_break(damage_flag)
 	. = ..()
@@ -369,7 +371,7 @@
 	if(opened != APC_COVER_REMOVED)
 		opened = APC_COVER_REMOVED
 		coverlocked = FALSE
-		visible_message(span_warning("The APC cover is knocked down!"))
+		visible_message(span_warning("Панель ЛКП сбита!"))
 		update_appearance()
 
 /obj/machinery/power/apc/ui_interact(mob/user, datum/tgui/ui)
@@ -399,7 +401,7 @@
 
 		"powerChannels" = list(
 			list(
-				"title" = "Equipment",
+				"title" = "Оборудование",
 				"powerLoad" = display_power(lastused_equip),
 				"status" = equipment,
 				"topicParams" = list(
@@ -409,7 +411,7 @@
 				)
 			),
 			list(
-				"title" = "Lighting",
+				"title" = "Освещение",
 				"powerLoad" = display_power(lastused_light),
 				"status" = lighting,
 				"topicParams" = list(
@@ -419,7 +421,7 @@
 				)
 			),
 			list(
-				"title" = "Environment",
+				"title" = "Окружение",
 				"powerLoad" = display_power(lastused_environ),
 				"status" = environ,
 				"topicParams" = list(
@@ -438,8 +440,8 @@
 	remote_control_user = remote_user
 	ui_interact(remote_user)
 	remote_user.log_message("remotely accessed [src].", LOG_GAME)
-	say("Remote access detected.[locked ? " Interface unlocked." : ""]")
-	to_chat(remote_control_user, span_danger("[icon2html(src, remote_control_user)] Connected to [src]."))
+	say("Удалённый доступ обнаружен.[locked ? " Интерфейс разблокирован." : ""]")
+	to_chat(remote_control_user, span_danger("[icon2html(src, remote_control_user)] Подключился к [declent_ru(DATIVE)]."))
 	if(locked)
 		playsound(src, 'sound/machines/terminal/terminal_on.ogg', 25, FALSE)
 		locked = FALSE
@@ -456,9 +458,9 @@
 	if(isnull(remote_control_user))
 		return
 	locked = TRUE
-	to_chat(remote_control_user, span_danger("[icon2html(src, remote_control_user)] Disconnected from [src]."))
+	to_chat(remote_control_user, span_danger("[icon2html(src, remote_control_user)] Отключён от [declent_ru(GENITIVE)]."))
 	if(!mute)
-		say("Remote access canceled. Interface locked.")
+		say("Удалённый доступ отменён. Интерфейс заблокирован.")
 		playsound(src, 'sound/machines/terminal/terminal_off.ogg', 25, FALSE)
 		playsound(src, 'sound/machines/terminal/terminal_alert.ogg', 50, FALSE)
 	update_appearance()
@@ -479,7 +481,7 @@
 		if("lock")
 			if(HAS_SILICON_ACCESS(user))
 				if((obj_flags & EMAGGED) || (machine_stat & (BROKEN|MAINT)) || remote_control_user)
-					to_chat(user, span_warning("The APC does not respond to the command!"))
+					to_chat(user, span_warning("ЛКП не отвечает на команду!"))
 				else
 					locked = !locked
 					update_appearance()
@@ -595,15 +597,14 @@
 		force_update = TRUE
 		return
 
-	if(obj_flags & EMAGGED || malfai)
+	if((obj_flags & EMAGGED) || malfai)
 		hacked_flicker_counter = hacked_flicker_counter - 1
 		if(hacked_flicker_counter <= 0)
 			flicker_hacked_icon()
-		if(COOLDOWN_FINISHED(src, malf_ai_pt_generation) && cell.use(60 KILO JOULES)>0 && malfai.malf_picker.processing_time<MALF_MAX_PP) // Over time generation of malf points for the ai controlling it, costs a bit of power
-			COOLDOWN_START(src, malf_ai_pt_generation, 30 SECONDS)
-			malfai.malf_picker.processing_time += 1
 
-
+	if(malfai && COOLDOWN_FINISHED(src, malf_ai_pt_generation) && cell.use(60 KILO JOULES) > 0 && malfai.malf_picker.processing_time < MALF_MAX_PP) // Over time generation of malf points for the ai controlling it, costs a bit of power
+		COOLDOWN_START(src, malf_ai_pt_generation, 30 SECONDS)
+		malfai.malf_picker.processing_time += 1
 
 	//dont use any power from that channel if we shut that power channel off
 	if(operating)
@@ -806,7 +807,7 @@
 /obj/item/electronics/apc
 	name = "power control module"
 	icon_state = "power_mod"
-	desc = "Heavy-duty switching circuits for power control."
+	desc = "Схемы управления мощностью для контроля энергораспределения."
 
 /// Returns the amount of time it will take the APC at its current trickle charge rate to reach a charge level. If the APC is functionally not charging, returns null.
 /obj/machinery/power/apc/proc/time_to_charge(joules)

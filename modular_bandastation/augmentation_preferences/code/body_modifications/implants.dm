@@ -7,13 +7,13 @@
 	name = "Robotic implants"
 	abstract_type = /datum/body_modification/implants/robotic
 
-/datum/body_modification/implants/apply_to_human(mob/living/carbon/target)
+/datum/body_modification/implants/apply_to_human(mob/living/carbon/target, additional_params)
 	. = ..()
 	if(!.)
 		return
 
-	var/obj/item/organ/o = new replacement_organ
-	o.replace_into(target)
+	var/obj/item/organ/organ_to_apply = new replacement_organ
+	organ_to_apply.replace_into(target)
 	return TRUE
 
 /datum/body_modification/implants/robotic/eyes
@@ -33,15 +33,6 @@
 	name = "Кибернетический мозг"
 	category = "Органы"
 	replacement_organ = /obj/item/organ/brain/cybernetic
-
-/obj/item/organ/brain/cybernetic/emp_act(severity)
-	. = ..()
-	switch(severity) // Hard cap on brain damage from EMP
-		if (EMP_HEAVY)
-			owner.Paralyze(0.25 SECONDS * damage)
-			owner.adjust_staggered_up_to(0.5 SECONDS * damage, 20 SECONDS)
-		if (EMP_LIGHT)
-			owner.adjust_staggered_up_to(0.2 SECONDS * damage, 20 SECONDS)
 
 /datum/body_modification/implants/robotic/ears
 	key = "cybernetic_ears"

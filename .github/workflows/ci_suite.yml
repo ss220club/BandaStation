@@ -17,7 +17,7 @@ jobs:
   start_gate:
     if: ( !contains(github.event.head_commit.message, '[ci skip]') )
     name: Start Gate
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Mandatory Empty Step
         run: exit 0
@@ -39,70 +39,33 @@ jobs:
     with:
       max_required_byond_client: ${{ needs.collect_data.outputs.max_required_byond_client }}
 
-  # BANDASTATION EDIT START: temporary disabled artifact storage
-
-  # setup_build_artifacts:
-  #   name: Setup build artifacts
-  #   needs: collect_data
-  #   uses: ./.github/workflows/setup_build_artifacts.yml
-  #   with:
-  #     build_versions: ${{ needs.collect_data.outputs.required_build_versions }}
-
-  # run_all_tests:
-  #   name: Integration Tests
-  #   needs: [collect_data, setup_build_artifacts]
-  #   uses: ./.github/workflows/perform_regular_version_tests.yml
-  #   with:
-  #     maps: ${{ needs.collect_data.outputs.maps }}
-  #     max_required_byond_client: ${{ needs.collect_data.outputs.max_required_byond_client }}
-
-  # run_alternate_tests:
-  #   if: needs.collect_data.outputs.alternate_tests != '[]'
-  #   name: Alternate Tests
-  #   needs: [collect_data, setup_build_artifacts]
-  #   uses: ./.github/workflows/perform_alternate_version_tests.yml
-  #   with:
-  #     alternate_tests: ${{ needs.collect_data.outputs.alternate_tests }}
-  #     default_max_required_byond_client: ${{ needs.collect_data.outputs.max_required_byond_client }}
-
-  # compare_screenshots:
-  #   if: needs.collect_data.outputs.alternate_tests == '[]' || needs.run_alternate_tests.result == 'success'
-  #   needs: [collect_data, run_all_tests, run_alternate_tests]
-  #   name: Compare Screenshot Tests
-  #   uses: ./.github/workflows/compare_screenshots.yml
-
-  # completion_gate: # Serves as a non-moving target for branch rulesets
-  #   if: always() && !cancelled()
-  #   name: Completion Gate
-  #   needs:
-  #     [
-  #       compare_screenshots,
-  #       compile_all_maps,
-  #       run_all_tests,
-  #       run_alternate_tests,
-  #       run_linters,
-  #     ]
-  #   runs-on: [self-hosted]
-  #   steps:
-  #     - name: Decide whether the needed jobs succeeded or failed
-  #       uses: re-actors/alls-green@release/v1
-  #       with:
-  #         jobs: ${{ toJSON(needs) }}
-  #         allowed-skips: compare_screenshots
-
-  combined_build_and_test:
-    name: Combined Build & Test
-    needs: [collect_data]
-    uses: ./.github/workflows/combined_build_and_test.yml
+  setup_build_artifacts:
+    name: Setup build artifacts
+    needs: collect_data
+    uses: ./.github/workflows/setup_build_artifacts.yml
     with:
       build_versions: ${{ needs.collect_data.outputs.required_build_versions }}
+
+  run_all_tests:
+    name: Integration Tests
+    needs: [collect_data, setup_build_artifacts]
+    uses: ./.github/workflows/perform_regular_version_tests.yml
+    with:
       maps: ${{ needs.collect_data.outputs.maps }}
       max_required_byond_client: ${{ needs.collect_data.outputs.max_required_byond_client }}
+
+  run_alternate_tests:
+    if: needs.collect_data.outputs.alternate_tests != '[]'
+    name: Alternate Tests
+    needs: [collect_data, setup_build_artifacts]
+    uses: ./.github/workflows/perform_alternate_version_tests.yml
+    with:
       alternate_tests: ${{ needs.collect_data.outputs.alternate_tests }}
+      default_max_required_byond_client: ${{ needs.collect_data.outputs.max_required_byond_client }}
 
   compare_screenshots:
-    if: needs.collect_data.outputs.alternate_tests == '[]' || needs.combined_build_and_test.result == 'success'
-    needs: [collect_data, combined_build_and_test]
+    if: needs.collect_data.outputs.alternate_tests == '[]' || needs.run_alternate_tests.result == 'success'
+    needs: [collect_data, run_all_tests, run_alternate_tests]
     name: Compare Screenshot Tests
     uses: ./.github/workflows/compare_screenshots.yml
 
@@ -113,14 +76,14 @@ jobs:
       [
         compare_screenshots,
         compile_all_maps,
-        combined_build_and_test,
+        run_all_tests,
+        run_alternate_tests,
         run_linters,
       ]
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
           allowed-skips: compare_screenshots
-# BANDASTATION EDIT END

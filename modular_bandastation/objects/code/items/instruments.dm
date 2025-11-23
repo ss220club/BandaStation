@@ -183,8 +183,8 @@
 	allowed_instrument_ids = list("drums")
 
 /obj/item/instrument/drumskit_folded/examine(mob/user)
-    . = ..()
-    . += span_notice("Гаечным ключом разверните установку на полу рядом с собой.")
+	. = ..()
+	. += span_notice("Гаечным ключом разверните установку на полу рядом с собой.")
 
 /obj/item/instrument/drumskit_folded/tool_act(mob/living/user, obj/item/tool, list/modifiers)
 	if(tool.tool_behaviour != TOOL_WRENCH)
