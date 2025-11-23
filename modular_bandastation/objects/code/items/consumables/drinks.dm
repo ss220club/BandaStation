@@ -831,59 +831,6 @@
 	)
 	required_temp = 303
 
-/datum/reagent/consumable/espresso
-	name = "Espresso"
-	description = "Бессмертная классика кофейных напитков в миниатюрном формате."
-	color = "#503620"
-	taste_description = "кисло-сладкий кофе с легким оттенком горечи"
-	nutriment_factor = 1
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	quality = DRINK_NICE
-	glass_price = DRINK_PRICE_MEDIUM
-
-/datum/glass_style/drinking_glass/espresso
-	required_drink_type = /datum/reagent/consumable/espresso
-	name = "Espresso"
-	desc = "Бессмертная классика кофейных напитков в миниатюрном формате."
-	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
-	icon_state = "espresso"
-
-/datum/chemical_reaction/drink/espresso
-	results = list(/datum/reagent/consumable/espresso = 3)
-	required_reagents = list(
-		/datum/reagent/toxin/coffeepowder = 4,
-		/datum/reagent/consumable/tonic = 1,
-
-	)
-	required_temp = 333
-
-/datum/reagent/consumable/fruit_tea
-	name = "Fruit tea"
-	description = "Зелёный чай с плавающими в нем ягодами."
-	color = "#b9a756"
-	taste_description = "кисло-сладкий чай с ягодным вкусном"
-	nutriment_factor = 1
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	quality = DRINK_NICE
-	glass_price = DRINK_PRICE_MEDIUM
-
-/datum/glass_style/drinking_glass/fruit_tea
-	required_drink_type = /datum/reagent/consumable/fruit_tea
-	name = "Fruit tea"
-	desc = "Зелёный чай с плавающими в нем ягодами."
-	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
-	icon_state = "fruit_tea"
-
-/datum/chemical_reaction/drink/fruit_tea
-	results = list(/datum/reagent/consumable/fruit_tea = 5)
-	required_reagents = list(
-		/datum/reagent/toxin/teapowder = 2,
-		/datum/reagent/consumable/berryjuice = 2,
-		/datum/reagent/consumable/orangejuice = 1,
-
-	)
-	required_temp = 333
-
 /datum/reagent/consumable/pumpkin_latte
 	name = "Pumpkin latte"
 	description = "Латте с содержанием тыквенного сока."
@@ -974,38 +921,6 @@
 	drinker.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
-
-/datum/reagent/consumable/lord_of_perma
-	name = "Lord of Permabrig"
-	description = "Любимый напиток тех, кто не желает покидать родной пермабриг."
-	color = "#e7c6b0"
-	taste_description = "молочный улун с бананом и ванилью"
-	nutriment_factor = 1
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	quality = DRINK_GOOD
-	glass_price = DRINK_PRICE_MEDIUM
-
-/datum/glass_style/drinking_glass/lord_of_perma
-	required_drink_type = /datum/reagent/consumable/lord_of_perma
-	name = "Lord of Permabrig"
-	desc = "Любимый напиток тех, кто не желает покидать родной пермабриг."
-	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
-	icon_state = "lord_of_perma"
-
-/datum/chemical_reaction/drink/lord_of_perma
-	results = list(/datum/reagent/consumable/lord_of_perma = 5)
-	required_reagents = list(
-		/datum/reagent/toxin/teapowder = 3,
-		/datum/reagent/consumable/bananashake = 2
-
-	)
-	required_temp = 303
-
-/datum/reagent/consumable/lord_of_perma/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
-	. = ..()
-	drinker.set_drugginess(20 SECONDS * REM * seconds_per_tick)
-	if(SPT_PROB(10, seconds_per_tick))
-		drinker.say(pick("Мам, у меня всё хорошо, кормят, поят, жильё бесплатное. Только соседи странные — домой не уходят.","Ты кем был на свободе? Музыкантом. А тут кем будешь? Тут тоже: «играю» на нервах охраны.","Мужики, а что у нас сегодня на ужин? Да как обычно: решётка с котлетами!"))
 
 /datum/reagent/consumable/lavender_raf
 	name = "Lavender ruff"
