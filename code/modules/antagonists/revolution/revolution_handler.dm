@@ -108,8 +108,8 @@ GLOBAL_DATUM(revolution_handler, /datum/revolution_handler)
 				/datum/personality/nt/disillusioned = /datum/mood_event/disillusioned_revs_lost
 			), range = 5)
 
-	priority_announce("It appears the mutiny has been quelled. Please return yourself and your incapacitated colleagues to work. \
-		We have remotely blacklisted the head revolutionaries in your medical records to prevent accidental revival.", null, null, null, "[command_name()] Loyalty Monitoring Division")
+	priority_announce("Похоже, мятеж подавлен. Пожалуйста, верните себя и своих недееспособных коллег к работе. \
+		Мы дистанционно внесли глав революции в черный список в ваших медицинских записях, чтобы предотвратить нежелательную реанимацию.", null, null, null, "[command_name()]: Отдел мониторинга лояльности")
 
 	result = STATION_VICTORY
 

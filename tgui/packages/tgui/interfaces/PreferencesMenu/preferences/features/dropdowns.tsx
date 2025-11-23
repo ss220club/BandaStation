@@ -36,16 +36,15 @@ type DropdownOptions = ComponentProps<typeof Dropdown>['options'];
 
 export function FeatureDropdownInput(props: DropdownInputProps) {
   const { serverData, disabled, buttons, handleSetValue, value } = props;
-
   const [dropdownOptions, setDropdownOptions] = useState<DropdownOptions>([]);
 
   function populateOptions() {
-    if (!serverData) return;
+    if (!serverData) {
+      return;
+    }
 
     const { choices = [] } = serverData;
-
     const newOptions: DropdownOptions = [];
-
     for (const choice of choices) {
       const displayText: ReactNode = serverData.display_names
         ? serverData.display_names[choice]
@@ -67,7 +66,6 @@ export function FeatureDropdownInput(props: DropdownInputProps) {
   }, [serverData]);
 
   const displayText = serverData?.display_names?.[value] || String(value);
-
   return (
     <Dropdown
       buttons={buttons}
@@ -76,14 +74,12 @@ export function FeatureDropdownInput(props: DropdownInputProps) {
       displayText={displayText ? capitalizeFirst(displayText) : ''}
       options={dropdownOptions}
       selected={value}
-      width="100%"
     />
   );
 }
 
 export function FeatureIconnedDropdownInput(props: IconnedDropdownInputProps) {
   const { serverData, handleSetValue, value } = props;
-
   const [dropdownOptions, setDropdownOptions] = useState<DropdownOptions>([]);
 
   function populateOptions() {
@@ -91,7 +87,6 @@ export function FeatureIconnedDropdownInput(props: IconnedDropdownInputProps) {
     const { icons = {}, choices = [] } = serverData;
 
     const newOptions: DropdownOptions = [];
-
     for (const choice of choices) {
       let displayText: ReactNode = serverData.display_names?.[choice]
         ? serverData.display_names?.[choice]
@@ -127,7 +122,6 @@ export function FeatureIconnedDropdownInput(props: IconnedDropdownInputProps) {
   }, [serverData]);
 
   const displayText = serverData?.display_names?.[value] || String(value);
-
   return (
     <Dropdown
       buttons
@@ -135,7 +129,6 @@ export function FeatureIconnedDropdownInput(props: IconnedDropdownInputProps) {
       onSelected={handleSetValue}
       options={dropdownOptions}
       selected={value}
-      width="100%"
     />
   );
 }

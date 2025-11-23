@@ -79,6 +79,33 @@
 #define FEATURE_TAILSPINES "tailspines" // Different from regular spines, these appear on tails
 #define FEATURE_LEGS "legs"
 
+// BANDASTATION ADDITION START - Species Features
+// keep in line with sprite_accessories .dmi
+#define FEATURE_VULPKANIN_HEAD_MARKINGS "vulpkanin_head_markings"
+#define FEATURE_VULPKANIN_CHEST_MARKINGS "vulpkanin_chest_markings"
+#define FEATURE_VULPKANIN_LIMB_MARKINGS "vulpkanin_limb_markings"
+#define FEATURE_VULPKANIN_TAIL "tail_vulpkanin"
+#define FEATURE_VULPKANIN_TAIL_MARKINGS "vulpkanin_tailmarkings"
+#define FEATURE_VULPKANIN_FACIAL_HAIR "vulpkanin_facial_hair"
+#define FEATURE_VULPKANIN_BODY_MARKINGS_COLOR "vulpkanin_body_markings_color"
+#define FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR "vulpkanin_tail_markings_color"
+#define FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR "vulpkanin_head_markings_color"
+#define FEATURE_VULPKANIN_FACIAL_HAIR_COLOR "vulpkanin_facial_hair_color"
+
+#define FEATURE_TAJARAN_HEAD_MARKINGS "tajaran_head_markings"
+#define FEATURE_TAJARAN_CHEST_MARKINGS "tajaran_chest_markings"
+#define FEATURE_TAJARAN_LIMB_MARKINGS "tajaran_limb_markings"
+#define FEATURE_TAJARAN_TAIL "tail_tajaran"
+#define FEATURE_TAJARAN_TAIL_MARKINGS "tajaran_tailmarkings"
+#define FEATURE_TAJARAN_FACIAL_HAIR "tajaran_facial_hair"
+#define FEATURE_TAJARAN_BODY_MARKINGS_COLOR "tajaran_body_markings_color"
+#define FEATURE_TAJARAN_HEAD_MARKINGS_COLOR "tajaran_head_markings_color"
+#define FEATURE_TAJARAN_TAIL_MARKINGS_COLOR "tajaran_tail_markings_color"
+#define FEATURE_TAJARAN_FACIAL_HAIR_COLOR "tajaran_facial_hair_color"
+
+#define FEATURE_SKRELL_HEAD_TENTACLE "skrell_head_tentacle"
+// BANDASTATION ADDITION END - Species Features
+
 ///flag for the transfer_flag argument from dna/proc/copy_dna(). This one makes it so the SE is copied too.
 #define COPY_DNA_SE (1<<0)
 ///flag for the transfer_flag argument from dna/proc/copy_dna(). This one copies the species.
@@ -124,6 +151,9 @@
 #define ORGAN_SLOT_EXTERNAL_WINGS "wings"
 #define ORGAN_SLOT_EXTERNAL_ANTENNAE "antennae"
 #define ORGAN_SLOT_EXTERNAL_POD_HAIR "pod_hair"
+/// BADNASTATION ADDITION START - Species
+#define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE "head_tentacles"
+/// BADNASTATION ADDITION END - Species
 
 /// Xenomorph organ slots
 #define ORGAN_SLOT_XENO_ACIDGLAND "acid_gland"

@@ -86,3 +86,44 @@
 
 /datum/dna_block/feature/accessory/pod_hair
 	feature_key = FEATURE_POD_HAIR
+
+// BANDASTATION ADD START - Species
+// MARK: Vulpkanin
+/datum/dna_block/feature/accessory/vulpkanin_head_markings
+	feature_key = FEATURE_VULPKANIN_HEAD_MARKINGS
+
+/datum/dna_block/feature/accessory/vulpkanin_chest_markings
+	feature_key = FEATURE_VULPKANIN_CHEST_MARKINGS
+
+/datum/dna_block/feature/accessory/vulpkanin_limb_markings
+	feature_key = FEATURE_VULPKANIN_LIMB_MARKINGS
+
+/datum/dna_block/feature/accessory/vulpkanin_tail
+	feature_key = FEATURE_VULPKANIN_TAIL
+
+/datum/dna_block/feature/accessory/vulpkanin_tail_markings
+	feature_key = FEATURE_VULPKANIN_TAIL_MARKINGS
+
+/datum/dna_block/feature/accessory/vulpkanin_facial_hair
+	feature_key = FEATURE_VULPKANIN_FACIAL_HAIR
+
+// MARK: Tajaran
+/datum/dna_block/feature/accessory/tajaran_tail
+	feature_key = FEATURE_TAJARAN_TAIL
+
+/datum/dna_block/feature/accessory/tajaran_head_markings
+	feature_key = FEATURE_TAJARAN_HEAD_MARKINGS
+
+/datum/dna_block/feature/accessory/tajaran_chest_markings
+	feature_key = FEATURE_TAJARAN_CHEST_MARKINGS
+
+/datum/dna_block/feature/accessory/tajaran_tail_markings
+	feature_key = FEATURE_TAJARAN_TAIL_MARKINGS
+
+/datum/dna_block/feature/accessory/tajaran_facial_hair
+	feature_key = FEATURE_TAJARAN_FACIAL_HAIR
+
+// MARK: Skrell
+/datum/dna_block/feature/accessory/skrell_head_tentacle
+	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
+// BANDASTATION ADD END - Species

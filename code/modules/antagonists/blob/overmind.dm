@@ -172,7 +172,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 			qdel(src)
 	else if(!victory_in_progress && (blobs_legit.len >= blobwincount))
 		victory_in_progress = TRUE
-		priority_announce("Biohazard has reached critical mass. Station loss is imminent.", "Biohazard Alert")
+		priority_announce("Биоугроза достигла критической массы. Потеря станции неминуема.", "Биологическая угроза")
 		SSsecurity_level.set_level(SEC_LEVEL_DELTA)
 
 		// Set status displays to biohazard alert - critical level
@@ -189,7 +189,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 		max_count = blobs_legit.len
 
 	if(announcement_time && (world.time >= announcement_time || blobs_legit.len >= announcement_size) && !has_announced)
-		priority_announce("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", ANNOUNCER_OUTBREAK5)
+		priority_announce("Вспышка биологической угрозы 5-го уровня зафиксирована на борту [station_name()]. Всему персоналу надлежит сдержать её распространение любой ценой!", "Биологическая угроза", ANNOUNCER_OUTBREAK5)
 
 		// Set status displays to biohazard alert
 		send_status_display_biohazard_alert()
@@ -344,7 +344,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 
 /mob/eye/blob/proc/blob_talk(message)
 
-	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = trim(copytext_char(sanitize(message, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN)) // BANDASTATION EDIT - Sanitize emotes
 
 	if (!message)
 		return
@@ -354,7 +354,17 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 	log_sayverb_talk(message, message_mods, tag = "blob hivemind telepathy")
 	var/messagepart = generate_messagepart(adjusted_message, message_mods = message_mods)
 	var/rendered = span_big(span_blob("<b>\[Blob Telepathy\] [name](<font color=\"[blobstrain.color]\">[blobstrain.name]</font>)</b> [messagepart]"))
-	relay_to_list_and_observers(rendered, GLOB.blob_telepathy_mobs, src, MESSAGE_TYPE_RADIO)
+	// BANDASTATION EDIT START - TTS
+	relay_to_list_and_observers(
+		rendered,
+		GLOB.blob_telepathy_mobs,
+		src,
+		MESSAGE_TYPE_RADIO,
+		tts_message = adjusted_message,
+		tts_seed = get_tts_seed(),
+		tts_effects = list(/datum/singleton/sound_effect/telepathy)
+	)
+	// BANDASTATION EDIT END
 
 /mob/eye/blob/blob_act(obj/structure/blob/B)
 	return

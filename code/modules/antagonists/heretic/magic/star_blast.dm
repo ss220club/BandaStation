@@ -15,8 +15,8 @@
 	invocation_type = INVOCATION_SHOUT
 	spell_requirements = NONE
 
-	active_msg = "You prepare to cast your star blast!"
-	deactive_msg = "You stop swirling cosmic energies from the palm of your hand... for now."
+	active_msg = "Вы готовитесь создать звездный взрыв!"
+	deactive_msg = "Вы прекращаете завихрять космическую энергию с ладони... пока что."
 	cast_range = 12
 	projectile_type = /obj/projectile/magic/star_ball
 	/// Weakref to the projectile we fire, so that we can recast our ability to teleport to its location

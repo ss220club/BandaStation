@@ -33,11 +33,14 @@
 	QDEL_IN(escape_menu, 0)
 
 	var/client/client = escape_menu.client
-
+	/* BANDASTATION REPLACEMENT - START
 	if (has_open_adminhelp())
 		client?.view_latest_ticket()
 	else
 		client?.adminhelp()
+	*/
+	client?.adminhelp()
+	// BANDASTATION REPLACEMENT - END
 
 /atom/movable/screen/escape_menu/text/clickable/admin_help/proc/has_open_adminhelp()
 	var/client/client = escape_menu.client
