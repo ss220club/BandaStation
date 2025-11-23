@@ -41,7 +41,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "NanoMap Generation"
           git pull origin master
-          git commit -m "NanoMap Auto-Update (`date`)" -a || true
+          git commit -m "NanoMap Auto-Update (`date`) [ci skip]" -a || true
           git push -f -u origin nanomap-render
           result=$(gh pr create -t "Automatic NanoMap Update" -b "This pull request updates the server NanoMaps. Please review the diff images before merging." -l "NanoMaps" -H "nanomap-render" -B "master") || true
           if echo "$result" | grep -q "No commits between master and nanomap-render"; then
