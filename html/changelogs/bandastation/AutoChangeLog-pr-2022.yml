@@ -1,0 +1,4 @@
+author: "larentoun"
+delete-after: True
+changes:
+  - bugfix: "Опоссумы и свины больше не ищут еду, которой не существует."
