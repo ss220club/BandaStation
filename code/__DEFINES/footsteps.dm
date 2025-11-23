@@ -29,6 +29,10 @@
 #define FOOTSTEP_OBJ_MACHINE "footstep_machine"
 #define FOOTSTEP_OBJ_ROBOT "footstep_robot"
 
+// BANDASTATION EDIT - Start
+#define FOOTSTEP_MOB_GIANT "footstep_giant"
+// BANDASTATION EDIT - End
+
 //priority defines for the footstep_override element
 #define STEP_SOUND_NO_PRIORITY 0
 #define STEP_SOUND_CONVEYOR_PRIORITY 1

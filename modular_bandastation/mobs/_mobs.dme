@@ -19,6 +19,7 @@
 #include "code/simple_animal/hostile/alien.dm"
 #include "code/simple_animal/hostile/bear.dm"
 #include "code/simple_animal/hostile/bee.dm"
+#include "code/simple_animal/hostile/composer.dm"
 #include "code/simple_animal/hostile/rat.dm"
 // #include "code/simple_animal/hostile/headcrab.dm"
 #include "code/simple_animal/hostile/lizard.dm"
