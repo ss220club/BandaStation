@@ -105,9 +105,6 @@
 	if(!QDELETED(glass))
 		. += "[base_icon_state]_cup"
 
-	if(anchored && !panel_open && is_operational)
-		. += "[base_icon_state]_on"
-
 /obj/machinery/teapot/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(gone == glass)
