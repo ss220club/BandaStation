@@ -173,19 +173,19 @@
 /obj/item/ammo_box/strilka310/hp
 	name = "ammo box (.310 Strilka hollow-point)"
 	desc = parent_type::desc + "<br>Оранжевая полоска указывает на то, что в ней должны храниться экспансивные боеприпасы."
-	icon_state = "310_box-hp"
+	icon_state = "310_box_hp"
 	ammo_type = /obj/item/ammo_casing/strilka310/hp
 
 /obj/item/ammo_box/strilka310/ap
 	name = "ammo box (.310 Strilka armor-piercing)"
 	desc = parent_type::desc + "<br>Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
-	icon_state = "310_box-ap"
+	icon_state = "310_box_ap"
 	ammo_type = /obj/item/ammo_casing/strilka310/ap
 
 /obj/item/ammo_box/strilka310/incendiary
 	name = "ammo box (.310 Strilka incendiary)"
 	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
-	icon_state = "310_box-incendiary"
+	icon_state = "310_box_incendiary"
 	ammo_type = /obj/item/ammo_casing/strilka310/incendiary
 
 // MARK: 7.62x54mmR
