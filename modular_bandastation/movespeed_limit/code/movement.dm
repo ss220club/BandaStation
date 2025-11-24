@@ -14,6 +14,9 @@ GLOBAL_VAR_INIT(legs_break_threshold, 0.3)
 	check_movespeed()
 
 /mob/living/carbon/human/proc/check_movespeed() // чем ближе коэффицент замедления к legs_break_threshold -> тем выше шанс повредить ноги
+	if(has_movespeed_modifier(/datum/movespeed_modifier/status_speed_boost))
+		return
+
 	if(cached_multiplicative_slowdown >= GLOB.legs_trip_threshold)
 		return
 
