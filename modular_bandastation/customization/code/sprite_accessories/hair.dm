@@ -148,3 +148,14 @@
 	name = "Ponytail 80s"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_ponytail_80s"
+
+/datum/sprite_accessory/hair/twoside_long
+	name = "Twoside Long"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_twoside_long"
+
+/datum/sprite_accessory/hair/curtains_long
+	name = "Curtains Long"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_curtains_long"
+
