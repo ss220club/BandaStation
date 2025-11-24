@@ -46,4 +46,4 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka
 
 /obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310/empty
-	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka/empty

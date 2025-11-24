@@ -114,7 +114,9 @@
 	projectile_damage_multiplier = 1
 
 /obj/item/gun/ballistic/rifle/sks/c762x54mmr/empty
-	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/sks/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/sks/c762x54mmr/empty
 
 /obj/item/gun/ballistic/rifle/boltaction/pipegun
 	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
+	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
