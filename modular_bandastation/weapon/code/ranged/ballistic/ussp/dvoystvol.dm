@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/revolver/dvoystvol
 	name = "Dvoystvol-6 revolver"
-	desc = "Уникальный дизайн револьвера имеющий два ствола под винтовочный калибр для элитных подразделений СССП."
+	desc = "Уникальный дизайн револьвера имеющий два ствола под винтовочный калибр .310 для элитных подразделений СССП."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev310
 	recoil = 1
 	weapon_weight = WEAPON_MEDIUM

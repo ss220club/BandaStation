@@ -104,3 +104,9 @@
 
 /obj/projectile/bullet/shotgun_frag12
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/incendiary/c762x54mmr
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/incendiary/strilka310
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'

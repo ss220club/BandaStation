@@ -95,3 +95,6 @@
 		balloon_alert(user, "откройте крышку!")
 		return
 	..()
+
+/obj/item/gun/ballistic/automatic/pmk/empty
+	spawnwithmagazine = FALSE

@@ -874,6 +874,9 @@
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c762x54mmr/incendiary
 
+/obj/item/ammo_box/magazine/pmk/starts_empty
+	start_empty = TRUE
+
 // MARK: Zashch - 10mm
 /obj/item/ammo_box/magazine/zashch
 	name = "pistol magazine (10mm)"
