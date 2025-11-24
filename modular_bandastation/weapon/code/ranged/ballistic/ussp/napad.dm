@@ -11,7 +11,7 @@
 	special_mags = FALSE
 	bolt_type = BOLT_TYPE_OPEN
 	w_class = WEIGHT_CLASS_BULKY
-	weapon_weight = WEAPON_HEAVY
+	weapon_weight = WEAPON_MEDIUM
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
 	accepted_magazine_type = /obj/item/ammo_box/magazine/smg10mm
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/smg_heavy_2.ogg'

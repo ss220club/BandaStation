@@ -6,7 +6,7 @@
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
 	inhand_icon_state = "zashch"
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_SMALL
 	accepted_magazine_type = /obj/item/ammo_box/magazine/zashch
 	can_suppress = TRUE
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/pistol_heavy.ogg'

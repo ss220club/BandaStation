@@ -51,7 +51,7 @@
 
 /obj/item/gun/ballistic/automatic/lanca/army
 	name = "BV-30 'Lanca' battle rifle"
-	desc = "Относительно компактная длинноствольная боевая винтовка под патрон .310 Strilka. Имеет встроенный прицел с \
+	desc = "Относительно новая компактная длинноствольная боевая винтовка под патрон .310 Стрилка. Имеет встроенный прицел с \
 		удивительно высокой кратностью увеличения, учитывая его происхождение."
 	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
 	icon_state = "lanca_army"

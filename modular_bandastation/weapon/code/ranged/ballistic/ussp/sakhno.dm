@@ -115,3 +115,6 @@
 
 /obj/item/gun/ballistic/rifle/sks/c762x54mmr/empty
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/sks/empty
+
+/obj/item/gun/ballistic/rifle/boltaction/pipegun
+	icon = 'icons/obj/weapons/guns/wide_guns.dmi'

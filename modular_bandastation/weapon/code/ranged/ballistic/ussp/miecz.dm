@@ -49,6 +49,7 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/miecz/army
+	desc = parent_type::desc + "<br>Версия в армейском зеленом полимере."
 	icon_state = "miecz_army"
 	worn_icon_state = "miecz_army"
 	inhand_icon_state = "miecz_army"

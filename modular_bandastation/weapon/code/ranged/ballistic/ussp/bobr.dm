@@ -4,7 +4,7 @@
 		Очевидно, результатом этих усилий стал барабан на четыре патрона, изготовленный для патронов 12-го калибра."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga
 	recoil = 2
-	weapon_weight = WEAPON_MEDIUM
+	weapon_weight = WEAPON_LIGHT
 	icon = 'modular_bandastation/weapon/icons/ranged/32x32.dmi'
 	icon_state = "bobr"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
@@ -24,3 +24,12 @@
         В отличие от спортивных вариантов из серебра и дерева, это модель, предназначенная исключительно для выживания, с \
         стандартной прорезиненной рукояткой пистолета и устойчивым к погодным условиям покрытием. \
         Хотя \"Бобр\" и не является самым привлекательным оружием, оно, по крайней мере, довольно практичное."
+
+/obj/item/gun/ballistic/revolver/bobr/short
+	name = "snubnose Bóbr revolver"
+	desc = parent_type::desc + "<br>Укороченная версия, помещающаяся в карманы. Большой дамский угодник."
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga
+	recoil = 3
+	weapon_weight = WEAPON_LIGHT
+	w_class = WEIGHT_CLASS_SMALL
+	icon_state = "bobr_short"

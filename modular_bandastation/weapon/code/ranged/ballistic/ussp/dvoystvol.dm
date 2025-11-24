@@ -3,7 +3,7 @@
 	desc = "Уникальный дизайн револьвера имеющий два ствола под винтовочный калибр .310 для элитных подразделений СССП."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev310
 	recoil = 1
-	weapon_weight = WEAPON_MEDIUM
+	weapon_weight = WEAPON_LIGHT
 	icon = 'modular_bandastation/weapon/icons/ranged/32x32.dmi'
 	icon_state = "sakhnomanni"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
@@ -28,7 +28,7 @@
 	name = "Dvoystvol-60 revolver"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev60
 	recoil = 5
-	weapon_weight = WEAPON_MEDIUM
+	weapon_weight = WEAPON_LIGHT
 	icon_state = "sakhnomanni_big"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire_2.ogg'
 	fire_sound_volume = 100
