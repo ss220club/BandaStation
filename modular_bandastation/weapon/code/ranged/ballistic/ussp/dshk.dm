@@ -22,6 +22,7 @@
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
 	mag_display = TRUE
+	mag_display_ammo = TRUE
 	tac_reloads = FALSE
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/dshk.ogg'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/dshk_cocked_alt.ogg'

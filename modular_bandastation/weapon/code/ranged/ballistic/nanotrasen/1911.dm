@@ -14,7 +14,7 @@
 
 /obj/item/gun/ballistic/automatic/pistol/m1911/gold
 	name = "gold trimmed m1911"
-	desc = parent_type::desc + " Теперь отделанный золотом."
+	desc = parent_type::desc + "<br>Мастерски отделанный золотом."
 	icon_state = "m1911gold"
 	unique_reskin = list(
 		"Default" = "m1911gold",

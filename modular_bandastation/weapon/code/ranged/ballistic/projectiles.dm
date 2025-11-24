@@ -510,6 +510,24 @@
 	sharpness = NONE
 	embed_type = null
 
+// MARK: 4.6x30mm
+/obj/projectile/bullet/c46x30mm/rubber
+	name = "4.6x30mm rubber bullet"
+	damage = 5
+	stamina = 20
+	wound_bonus = -20
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
 // MARK: .310 Strilka
 /obj/projectile/bullet/strilka310/ap
 	name = ".310 Strilka armor-piercing bullet"

@@ -381,7 +381,7 @@
 
 // MARK: CM82 - assault rifle
 /obj/item/ammo_box/magazine/c223
-	name = "assault rifle magazine (5.56mm)"
+	name = "assault rifle magazine (5.56x45mm)"
 	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "cm82_mag"
@@ -396,28 +396,28 @@
 	ammo_type = /obj/item/ammo_casing/a223
 
 /obj/item/ammo_box/magazine/c223/rubber
-	name = "assault rifle magazine (5.56mm rubber)"
+	name = "assault rifle magazine (5.56x45mm rubber)"
 	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/a223/rubber
 
 /obj/item/ammo_box/magazine/c223/hp
-	name = "assault rifle magazine (5.56mm HP)"
+	name = "assault rifle magazine (5.56x45mm HP)"
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/a223/hp
 
 /obj/item/ammo_box/magazine/c223/ap
-	name = "assault rifle magazine (5.56mm AP)"
+	name = "assault rifle magazine (5.56x45mm AP)"
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/a223/ap
 
 /obj/item/ammo_box/magazine/c223/phasic
-	name = "assault rifle magazine (5.56mm phasic)"
+	name = "assault rifle magazine (5.56x45mm phasic)"
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/a223/phasic
 
 /obj/item/ammo_box/magazine/c223/incendiary
-	name = "assault rifle magazine (5.56mm incendiary)"
+	name = "assault rifle magazine (5.56x45mm incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/a223/incendiary
 
@@ -976,7 +976,7 @@
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c10mm/fire
 
-// MARK: Bison - 9mm / .27
+// MARK: Bison - 9mm
 /obj/item/ammo_box/magazine/bison
 	name = "bison magazine (9mm)"
 	desc = "Шнековый магазин для пистолетов-пулеметов Бисон калибра 9мм, вмещающий 64 патронов."
@@ -1047,10 +1047,26 @@
 	name = "rpg-70 internal tube"
 	ammo_type = /obj/item/ammo_casing/rocket/rpg
 
-// MARK: Mosin
+// MARK: Mosin / SKS
 /obj/item/ammo_box/magazine/internal/boltaction/mosin
 	ammo_type = /obj/item/ammo_casing/c762x54mmr
 	caliber = CALIBER_762x54mmR
+
+/obj/item/ammo_box/magazine/internal/boltaction/mosin/empty
+	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka
+	ammo_type = /obj/item/ammo_casing/strilka310
+
+/obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka/empty
+	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/internal/sks/c762x54mmr
+	ammo_type = /obj/item/ammo_casing/c762x54mmr
+	caliber = CALIBER_762x54mmR
+
+/obj/item/ammo_box/magazine/internal/sks/c762x54mmr/empty
+	start_empty = TRUE
 
 // MARK: FN18 - 9mm SMG
 /obj/item/ammo_box/magazine/fn18
@@ -1208,3 +1224,9 @@
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c456magnum
+
+// MARK: 4.6x30mm
+/obj/item/ammo_box/magazine/wt550m9/wtrubber
+	name = "WT-550 magazine (4.6x30mm rubber)"
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber

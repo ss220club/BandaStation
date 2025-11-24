@@ -18,10 +18,11 @@
 	actions_types = list()
 	can_suppress = TRUE
 	spread = 10
-	recoil = 1
+	recoil = 0.7
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
 	mag_display = TRUE
+	mag_display_ammo = TRUE
 	tac_reloads = FALSE
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/cm40.ogg'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/dshk_cocked.ogg'
@@ -35,7 +36,7 @@
 /obj/item/gun/ballistic/automatic/pmk/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
-	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
+	AddComponent(/datum/component/automatic_fire, 0.18 SECONDS)
 
 /obj/item/gun/ballistic/automatic/pmk/examine(mob/user)
 	. = ..()

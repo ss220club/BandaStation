@@ -38,7 +38,7 @@
 		На боковой стороне винтовки выбита надпись \"Сахно M2550 Армейская\". \
 		Вероятно, изначально было веское основание не производить винтовки такой короткой длины."
 
-	icon_state = "sakhno_army_tactifucked"
+	icon_state = "sakhno_tactifucked_army"
 
 /obj/item/gun/ballistic/rifle/boltaction/army/tactical/surplus
 	desc = "Модификация устаревшей винтовки Сахно поздней армейской модели, на боковой стороне которой выбита надпись \"Сахно M2550 Армейская\". \
@@ -100,3 +100,18 @@
 	bolt_locked = TRUE // so the bolt starts visibly open
 	spawn_magazine_type = /obj/item/ammo_box/magazine/strilka310/starts_empty
 
+/obj/item/gun/ballistic/rifle/sks
+	desc = "Возрождение старинной полуавтоматической винтовки СКС, переработанной для использования патронов калибра .310 Strilka. \
+		Эта винтовка должна была заменить Сахно, но была остановлена появлением боевых винтовок Ланка. Это оружие заняло уникальное место в истории среди населения союза. \
+		Из-за малого количества произведенных образцов, оно встречается реже чем Сахно и поэтому является церемониальным оружием в армии СССП. \
+		Пограничные поселенцы известны тем, что владеют таким оружием для охоты. Или для отражения назойливых сборщиков налогов."
+
+/obj/item/gun/ballistic/rifle/sks/c762x54mmr
+	name = "Old Sakhno SKS semi-automatic rifle"
+	desc = parent_type::desc + "<br>Этот вариант винтовки еще более редкий, так как не был переделан под новый калибр .310 Strilka. \
+		Кто знает, может быть это даже раритеный оригинал."
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/sks/c762x54mmr
+	projectile_damage_multiplier = 1
+
+/obj/item/gun/ballistic/rifle/sks/c762x54mmr/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/sks/empty

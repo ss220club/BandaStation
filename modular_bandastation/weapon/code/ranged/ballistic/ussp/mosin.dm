@@ -36,3 +36,14 @@
         до тех пор, пока пушка не щелкнет. ЧРЕЗВЫЧАЙНО сырая."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin
 	can_jam = TRUE
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/empty
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310
+	desc = parent_type::desc + "<br>Кто-то решил что эта винтовка еще должна послужить и переделал ее под новый калибр .310 Стрилка. Ужасный и безумный человек. \
+		Остается надеятся что это не раритеный оригинал."
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/empty

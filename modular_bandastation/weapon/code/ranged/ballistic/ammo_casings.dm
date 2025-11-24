@@ -140,40 +140,40 @@
 
 // MARK: .223 aka 5.56mm
 /obj/item/ammo_casing/a223
-	name = "5.56mm bullet casing"
-	desc = "Стандартный летальный винтовочный патрон калибра 5.56мм."
+	name = "5.56x45mm bullet casing"
+	desc = "Стандартный летальный винтовочный патрон калибра 5.56x45мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "556-casing"
 	caliber = CALIBER_A223
 	projectile_type = /obj/projectile/bullet/a223
 
 /obj/item/ammo_casing/a223/rubber
-	name = "5.56mm rubber bullet casing"
-	desc = "Травматический винтовочный патрон c резиновой пулей калибра 5.56мм."
+	name = "5.56x45mm rubber bullet casing"
+	desc = "Травматический винтовочный патрон c резиновой пулей калибра 5.56x45мм."
 	icon_state = "556r-casing"
 	projectile_type = /obj/projectile/bullet/a223/rubber
 
 /obj/item/ammo_casing/a223/hp
-	name = "5.56mm hollow-point bullet casing"
-	desc = "Экспансивный винтовочный патрон калибра 5.56мм."
+	name = "5.56x45mm hollow-point bullet casing"
+	desc = "Экспансивный винтовочный патрон калибра 5.56x45мм."
 	icon_state = "556hp-casing"
 	projectile_type = /obj/projectile/bullet/a223/hp
 
 /obj/item/ammo_casing/a223/ap
-	name = "5.56mm armor-piercing bullet casing"
-	desc = "Бронебойный винтовочный патрон калибра 5.56мм."
+	name = "5.56x45mm armor-piercing bullet casing"
+	desc = "Бронебойный винтовочный патрон калибра 5.56x45мм."
 	icon_state = "556ap-casing"
 	projectile_type = /obj/projectile/bullet/a223/ap
 
 /obj/item/ammo_casing/a223/phasic
-	name = "5.56mm phasic bullet casing"
-	desc = "Бронебойный-фазовый винтовочный патрон калибра 5.56мм."
+	name = "5.56x45mm phasic bullet casing"
+	desc = "Бронебойный-фазовый винтовочный патрон калибра 5.56x45мм."
 	icon_state = "556pen-casing"
 	projectile_type = /obj/projectile/bullet/a223/phasic
 
 /obj/item/ammo_casing/a223/incendiary
-	name = "5.56mm incendiary bullet casing"
-	desc = "Зажигательный винтовочный патрон калибра 5.56мм."
+	name = "5.56x45mm incendiary bullet casing"
+	desc = "Зажигательный винтовочный патрон калибра 5.56x45мм."
 	icon_state = "556i-casing"
 	projectile_type = /obj/projectile/bullet/incendiary/a223
 
@@ -319,15 +319,6 @@
 	icon_state = "sa-casing"
 	caliber = CALIBER_456MAG
 
-
-// MARK: 9mm
-/obj/item/ammo_casing/c9mm/rubber
-	name = "9mm rubber bullet casing"
-	desc = "Травматический пистолетный патрон калибра 9мм."
-	projectile_type = /obj/projectile/bullet/c9mm/rubber
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "sr-casing"
-
 // MARK: 10mm
 /obj/item/ammo_casing/c10mm/rubber
 	name = "10mm rubber bullet casing"
@@ -335,6 +326,20 @@
 	projectile_type = /obj/projectile/bullet/c10mm/rubber
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sr-casing"
+
+// MARK: 4.6x30mm
+/obj/item/ammo_casing/c46x30mm/rubber
+	name = "4.6x30mm rubber bullet casing"
+	desc = "Травматический патрон с резиновой пулей калибра 4.6x30мм. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
+	projectile_type = /obj/projectile/bullet/c46x30mm/rubber
+
+/obj/item/ammo_casing/c46x30mm/ap
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sa-casing"
+
+/obj/item/ammo_casing/c46x30mm/inc
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "si-casing"
 
 // MARK: .310 Strilka
 /obj/item/ammo_casing/strilka310/ap
