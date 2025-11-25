@@ -79,6 +79,7 @@
 #include "turfs/_turfs.dme"
 #include "weapon/_weapon.dme"
 #include "world_topics/_world_topics.dme"
+#include "movespeed_limit/_movespeed_limit.dme"
 #include "tesla_rework/_teslarework.dme"
 // --- MODULES END --- //
 
