@@ -1528,6 +1528,10 @@
 		return "кость"
 	if (biological_state & BIO_METAL)
 		return "метал"
+	if (biological_state & BIO_FLESH)
+		return "shreds of ligaments"
+	if (biological_state & BIO_WOOD)
+		return "splinters of poorly manufactured wood"
 
 	return "error"
 

@@ -8,6 +8,11 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_afropuffright"
 
+/datum/sprite_accessory/hair/birdnest
+	name = "Birdnest"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_birdnest"
+
 /datum/sprite_accessory/hair/baum
 	name = "Baum"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
@@ -22,6 +27,11 @@
 	name = "Cotton Alt"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_cottonalt"
+
+/datum/sprite_accessory/hair/curtains_long
+	name = "Curtains Long"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_curtains_long"
 
 /datum/sprite_accessory/hair/flipped
 	name = "Flipped"
@@ -74,6 +84,16 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_ponytail_strict"
 
+/datum/sprite_accessory/hair/ponytail_alt_80s
+	name = "Ponytail 80s alt"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_ponytail_alt_80s"
+
+/datum/sprite_accessory/hair/ponytail_80s
+	name = "Ponytail 80s"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_ponytail_80s"
+
 /datum/sprite_accessory/hair/quadcurls
 	name = "Quadcurls"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
@@ -99,6 +119,11 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_supernova"
 
+/datum/sprite_accessory/hair/school_ponytail
+	name = "School ponytail"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_school_ponytail"
+
 /datum/sprite_accessory/hair/tribum
 	name = "Tri-bun"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
@@ -108,6 +133,16 @@
 	name = "Twintails"
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_twintail"
+
+/datum/sprite_accessory/hair/twincurls
+	name = "Twincurls"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_twincurls"
+
+/datum/sprite_accessory/hair/twoside_long
+	name = "Twoside Long"
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_twoside_long"
 
 /datum/sprite_accessory/hair/unkempt
 	name = "Unkempt"
@@ -124,27 +159,4 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_vivi"
 
-/datum/sprite_accessory/hair/birdnest
-	name = "Birdnest"
-	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
-	icon_state = "hair_birdnest"
 
-/datum/sprite_accessory/hair/school_ponytail
-	name = "School ponytail"
-	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
-	icon_state = "hair_school_ponytail"
-
-/datum/sprite_accessory/hair/twincurls
-	name = "Twincurls"
-	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
-	icon_state = "hair_twincurls"
-
-/datum/sprite_accessory/hair/ponytail_alt_80s
-	name = "Ponytail 80s alt"
-	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
-	icon_state = "hair_ponytail_alt_80s"
-
-/datum/sprite_accessory/hair/ponytail_80s
-	name = "Ponytail 80s"
-	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
-	icon_state = "hair_ponytail_80s"

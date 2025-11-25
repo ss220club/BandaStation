@@ -37,15 +37,13 @@
 	allergy_string = allergy_chem_names.Join(", ")
 	name = "Экстремальная аллергия на: <b>[LOWER_TEXT(allergy_string)]</b>"
 	medical_record_text = "Иммунная система пациента бурно реагирует на: <b>[LOWER_TEXT(allergy_string)]</b>"
+	RegisterSignal(quirk_holder, COMSIG_MOB_REAGENT_TICK, PROC_REF(block_metab))
 
 /datum/quirk/item_quirk/allergic/add_unique(client/client_source)
 	var/mob/living/carbon/human/human_holder = quirk_holder
 	var/obj/item/clothing/accessory/dogtag/allergy/dogtag = new(get_turf(human_holder), allergy_string)
 
-	give_item_to_holder(dogtag, list(LOCATION_BACKPACK, LOCATION_HANDS), flavour_text = "Убедитесь, что медицинский персонал может это увидеть...", notify_player = TRUE)
-
-/datum/quirk/item_quirk/allergic/add()
-	RegisterSignal(quirk_holder, COMSIG_MOB_REAGENT_TICK, PROC_REF(block_metab))
+	give_item_to_holder(dogtag, list(LOCATION_BACKPACK, LOCATION_HANDS), flavour_text = "Make sure medical staff can see this...", notify_player = TRUE)
 
 /datum/quirk/item_quirk/allergic/remove()
 	UnregisterSignal(quirk_holder, COMSIG_MOB_REAGENT_TICK)

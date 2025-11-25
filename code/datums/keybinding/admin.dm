@@ -35,7 +35,7 @@
 	keybind_signal = COMSIG_KB_ADMIN_AGHOST_DOWN
 	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
-/datum/keybinding/admin/admin_ghost/down(client/user, turf/target)
+/datum/keybinding/admin/admin_ghost/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -49,7 +49,7 @@
 	description = "Открывает панель новых игроков"
 	keybind_signal = COMSIG_KB_ADMIN_PLAYERPANELNEW_DOWN
 
-/datum/keybinding/admin/player_panel_new/down(client/user, turf/target)
+/datum/keybinding/admin/player_panel_new/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -64,7 +64,7 @@
 	keybind_signal = COMSIG_KB_ADMIN_TOGGLEBUILDMODE_DOWN
 	required_permissions = R_BUILD // BANDASTATION EDIT - Valid permissions
 
-/datum/keybinding/admin/toggle_buildmode_self/down(client/user, turf/target)
+/datum/keybinding/admin/toggle_buildmode_self/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -79,7 +79,7 @@
 	keybind_signal = COMSIG_KB_ADMIN_STEALTHMODETOGGLE_DOWN
 	required_permissions = R_STEALTH // BANDASTATION EDIT - Valid permissions
 
-/datum/keybinding/admin/stealthmode/down(client/user, turf/target)
+/datum/keybinding/admin/stealthmode/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -94,7 +94,7 @@
 	keybind_signal = COMSIG_KB_ADMIN_INVISIMINTOGGLE_DOWN
 	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
-/datum/keybinding/admin/invisimin/down(client/user, turf/target)
+/datum/keybinding/admin/invisimin/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -109,7 +109,7 @@
 	keybind_signal = COMSIG_KB_ADMIN_DSAY_DOWN
 	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
-/datum/keybinding/admin/deadsay/down(client/user, turf/target)
+/datum/keybinding/admin/deadsay/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -123,7 +123,7 @@
 	description = "Избавиться от своих админских сил"
 	keybind_signal = COMSIG_KB_ADMIN_DEADMIN_DOWN
 
-/datum/keybinding/admin/deadmin/down(client/user, turf/target)
+/datum/keybinding/admin/deadmin/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -137,7 +137,7 @@
 	description = "Вернуть свои админские силы"
 	keybind_signal = COMSIG_KB_ADMIN_READMIN_DOWN
 
-/datum/keybinding/admin/readmin/down(client/user, turf/target)
+/datum/keybinding/admin/readmin/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -152,7 +152,7 @@
 	keybind_signal = COMSIG_KB_ADMIN_VIEWTAGS_DOWN
 	required_permissions = R_ADMIN // BANDASTATION EDIT - Valid permissions
 
-/datum/keybinding/admin/view_tags/down(client/user, turf/target)
+/datum/keybinding/admin/view_tags/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
