@@ -183,9 +183,7 @@
 
 	AddElement(/datum/element/block_turf_fingerprints)
 	AddComponent(/datum/component/redirect_attack_hand_from_turf, interact_check = CALLBACK(src, PROC_REF(verify_user_can_see)))
-	/* BANDASTATION REMOVAL START - Stupid TG Shit
 	AddComponent(/datum/component/fishing_spot, GLOB.preset_fish_sources[/datum/fish_source/dimensional_rift])
-	BANDASTATION REMOVAL END */
 	monitor = new(src, 7)
 
 /obj/effect/heretic_influence/proc/verify_user_can_see(mob/user)

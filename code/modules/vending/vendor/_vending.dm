@@ -241,10 +241,8 @@
 		AddComponent(/datum/component/payment, 0, SSeconomy.get_dep_account(payment_department), PAYMENT_VENDING)
 	register_context()
 
-	/* BANDASTATION REMOVAL START - Stupid TG Shit
 	if(fish_source_path)
 		AddComponent(/datum/component/fishing_spot, fish_source_path)
-	BANDASTATION REMOVAL END */
 
 /obj/machinery/vending/atom_break(damage_flag)
 	. = ..()
