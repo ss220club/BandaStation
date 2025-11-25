@@ -69,7 +69,6 @@
 	. = ..()
 	. += "pmk_door_[cover_open ? "open" : "closed"]"
 
-
 /obj/item/gun/ballistic/automatic/pmk/try_fire_gun(atom/target, mob/living/user, params)
 	if(cover_open)
 		balloon_alert(user, "закройте крышку!")

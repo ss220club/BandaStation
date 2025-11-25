@@ -9,7 +9,6 @@
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
 	inhand_icon_state = "miecz"
 	SET_BASE_PIXEL(-8, 0)
-	special_mags = FALSE
 	bolt_type = BOLT_TYPE_STANDARD
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
@@ -22,8 +21,6 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magout.ogg'
 	fire_sound_volume = 80
 	can_suppress = TRUE
-	suppressor_x_offset = 5
-	suppressor_y_offset = 3
 	burst_size = 1
 	fire_delay = 0.20 SECONDS
 	actions_types = list()
@@ -44,6 +41,10 @@
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+
+/obj/item/gun/ballistic/automatic/miecz/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "_mag":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/miecz/no_mag
 	spawnwithmagazine = FALSE

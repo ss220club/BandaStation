@@ -8,7 +8,6 @@
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
 	inhand_icon_state = "napad"
-	special_mags = FALSE
 	bolt_type = BOLT_TYPE_OPEN
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_MEDIUM
@@ -23,10 +22,12 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/napad_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/napad_unload.ogg'
 	can_suppress = TRUE
+	suppressor_x_offset = 4
 	burst_size = 1
 	fire_delay = 0.2 SECONDS
 	actions_types = list()
 	spread = 6
+	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/napad/examine(mob/user)
 	. = ..()
@@ -41,7 +42,12 @@
 
 /obj/item/gun/ballistic/automatic/napad/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
-/obj/item/gun/ballistic/automatic/napad/no_mag
+/obj/item/gun/ballistic/automatic/napad/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "_mag":"_nomag"]"
+
+/obj/item/gun/ballistic/automatic/napad/empty
 	spawnwithmagazine = FALSE

@@ -22,10 +22,19 @@
 	actions_types = list()
 	burst_size = 1
 	recoil = 0.3
+	unique_reskin = list(
+		"Green" = "bison",
+		"Black" = "bison_black",
+	)
 
 /obj/item/gun/ballistic/automatic/bison/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+
+/obj/item/gun/ballistic/automatic/bison/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "_mag":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/bison/examine(mob/user)
 	. = ..()
