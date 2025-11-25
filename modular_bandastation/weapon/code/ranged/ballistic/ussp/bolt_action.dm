@@ -19,6 +19,9 @@
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 
+/obj/item/gun/ballistic/rifle/boltaction/pipegun/pistol
+	worn_icon = 'icons/mob/clothing/belt.dmi'
+
 /obj/item/gun/ballistic/rifle/boltaction/harpoon
 	worn_icon = 'icons/mob/clothing/back.dmi'
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
@@ -127,3 +130,53 @@
 
 /obj/item/gun/ballistic/rifle/sks/c762x54mmr/empty
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/sks/c762x54mmr/empty
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin
+	name = "Mosin-Nagant rifle"
+	desc = "Классическая винтовка Мосина-Нагана. Такие больше не делают. Ладно, честно говоря, это на самом деле \
+		новая отреставрированная версия. Так что работает просто отлично! Часто встречается в музеях, оружейных коллекциях или в руках новобранцев в качестве тренеровочного оружия, \
+		а иногда и в руках революционеров, бандитов или работников оружейных складов. Все еще немного сырая на ощупь."
+	sawn_desc = "Обрезанная винтовка Мосина-Нагана, больше известная как \"Обрез\". \
+		Наверняка была причина, по которой изначально не производили столь короткие модели. \
+		Этот экземпляр все еще находится в удивительно хорошем состоянии. Часто встречается в руках \
+		коллекционеров или революционеров без чувства заботы об антиквариате, \
+		пьяных бандитов, убийц из Кооператива \"Тигр\" и пьяных работников оружейных складов. <I>По-прежнему</I> немного сырая на ощупь."
+	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
+	icon_state = "mosin"
+	inhand_icon_state = "mosin"
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon_state = "mosin"
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	slot_flags = ITEM_SLOT_BACK
+	weapon_weight = WEAPON_HEAVY
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/add_bayonet_point()
+	AddComponent(/datum/component/bayonet_attachable, offset_x = 27, offset_y = 13)
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/surplus
+	desc = "Классическая винтовка Мосина-Нагана, испорченная многовековой влагой. Некоторые оружейные эксперты утверждают, что влага \
+		это знак удачи. Трезвый пользователь будет понимать, что эта штука будет блять заклинивать. Постоянно. \
+		Часто встречается в руках бедных новобранцев, террористических ячеек из Кооператива \"Тигр\", бандитов, \
+		криозамороженных космических русских и неудачливых работников оружейных складов. ЧРЕЗВЫЧАЙНО сырая."
+	sawn_desc = "Обрезанная винтовка Мосина-Нагана, больше известная как \"Обрез\". \
+		Наверняка была причина, по которой изначально не производили столь короткие модели. \
+		Этот экземпляр был испорчен многовековой влажностью и БУДЕТ заклинивать. Часто встречается в руках \
+		пьяных революционеров, ОЧЕНЬ пьяных бандитов, пьяных убийц из Кооператива \"Тигр\", \
+		пьяных криозамороженных космических русских, пьяных работников оружейных складов с желанием умереть \
+		и сотрудников охраны, не особо заботящихся о профессиональном поведении, когда «арестовывают» выстрелом в затылок \
+        до тех пор, пока пушка не щелкнет. ЧРЕЗВЫЧАЙНО сырая."
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin
+	can_jam = TRUE
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/empty
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310
+	desc = parent_type::desc + "<br>Кто-то решил что эта винтовка еще должна послужить и переделал ее под новый калибр .310 Стрилка. Ужасный и безумный человек. \
+		Остается надеятся что это не раритеный оригинал."
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka/empty
