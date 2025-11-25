@@ -13,6 +13,8 @@
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_MEDIUM
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	empty_indicator = TRUE
+	mag_display = TRUE
 	accepted_magazine_type = /obj/item/ammo_box/magazine/smg10mm
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/smg_heavy_2.ogg'
 	fire_sound_volume = 70
@@ -20,7 +22,7 @@
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/napad_reload.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/napad_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/napad_unload.ogg'
-	can_suppress = FALSE
+	can_suppress = TRUE
 	burst_size = 1
 	fire_delay = 0.2 SECONDS
 	actions_types = list()

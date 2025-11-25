@@ -29,11 +29,6 @@
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
 
-/obj/item/gun/ballistic/rocketlauncher/rpg/update_overlays()
-	. = ..()
-	if(get_ammo())
-		. += "rpg_loaded"
-
 /obj/item/gun/ballistic/rocketlauncher/rpg/update_icon_state()
 	. = ..()
 	if(get_ammo())

@@ -11,6 +11,18 @@
 
 /obj/item/gun/ballistic/rifle/boltaction/donkrifle
 	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
+	worn_icon = 'icons/mob/clothing/back.dmi'
+
+/obj/item/gun/ballistic/rifle/boltaction/pipegun
+	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+
+/obj/item/gun/ballistic/rifle/boltaction/harpoon
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 
 /obj/item/gun/ballistic/rifle/boltaction/army
 	name = "Sakhno M2500 Army"
@@ -115,8 +127,3 @@
 
 /obj/item/gun/ballistic/rifle/sks/c762x54mmr/empty
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/sks/c762x54mmr/empty
-
-/obj/item/gun/ballistic/rifle/boltaction/pipegun
-	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
-	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'

@@ -16,7 +16,6 @@
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/ak_shoot.ogg'
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_cock.ogg'
 	load_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
@@ -43,6 +42,7 @@
 
 /obj/item/gun/ballistic/automatic/miecz/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
 /obj/item/gun/ballistic/automatic/miecz/no_mag

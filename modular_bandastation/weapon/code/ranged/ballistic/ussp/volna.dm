@@ -5,7 +5,7 @@
 	icon_state = "volna"
 	SET_BASE_PIXEL(-16, 0)
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
-	worn_icon_state = "volna"
+	worn_icon_state = "pmk"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
 	inhand_icon_state = "volnaclosedmag"
@@ -30,6 +30,10 @@
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
 	var/cover_open = FALSE
+	unique_reskin = list(
+		"Green" = "volna",
+		"Black" = "volna_black",
+	)
 
 /obj/item/gun/ballistic/automatic/volna/Initialize(mapload)
 	. = ..()
