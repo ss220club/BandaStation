@@ -160,6 +160,11 @@
 	// Bandastation Edit Start
 	else if (extra_classes.Find("looc"))
 		LAZYADD(prefixes, "<span style='font-size: 6px; color: #6699cc;'><b>\[LOOC\]</b></span> ")
+	else if (extra_classes.Find("deadsay"))
+		target.chat_color = "#b826b3"
+		// We need to force these vars to avoid color override
+		target.chat_color_name = "ghost"
+		chat_color_name_to_use = "ghost"
 	// Bandastation Edit End
 
 	if(isnull(chat_color_name_to_use))
@@ -212,7 +217,7 @@
 	var/starting_height = target.maptext_height
 	// Translate any existing messages upwards, apply exponential decay factors to timers
 	message_loc = isturf(target) ? target : get_atom_on_turf(target)
-	if (owned_by.seen_messages)
+	if (owned_by && owned_by.seen_messages)
 		var/idx = 1
 		var/combined_height = approx_lines
 		for(var/datum/chatmessage/m as anything in owned_by.seen_messages[message_loc])
@@ -285,8 +290,9 @@
 	animate_lifespan = lifespan
 
 	// View the message
-	LAZYADDASSOCLIST(owned_by.seen_messages, message_loc, src)
-	owned_by.images |= message
+	if(owned_by)
+		LAZYADDASSOCLIST(owned_by.seen_messages, message_loc, src)
+		owned_by.images |= message
 
 	// Fade in
 	animate(message, alpha = 255, time = CHAT_MESSAGE_SPAWN_TIME)

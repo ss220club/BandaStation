@@ -690,7 +690,7 @@
  */
 /obj/item/card/id/proc/insert_money(obj/item/money, mob/user)
 	var/physical_currency
-	if(istype(money, /obj/item/stack/spacecash) || istype(money, /obj/item/coin))
+	if(istype(money, /obj/item/stack/spacecash) || istype(money, /obj/item/coin) || istype(money, /obj/item/poker_chip))
 		physical_currency = TRUE
 
 	if(!registered_account)
@@ -777,6 +777,9 @@
 /obj/item/card/id/click_alt(mob/living/user)
 	if(!alt_click_can_use_id(user))
 		return NONE
+	if (registered_account.being_dumped)
+		registered_account.bank_card_talk(span_warning("内部服务器错误"), TRUE)
+		return CLICK_ACTION_SUCCESS
 	if(registered_account.account_debt)
 		var/choice = tgui_alert(user, "Выберите действие", "Аккаунт банка", list("Вывести", "Погасить долг"))
 		if(!choice || QDELETED(user) || QDELETED(src) || !alt_click_can_use_id(user) || loc != user)
@@ -784,9 +787,6 @@
 		if(choice == "Погасить долг")
 			pay_debt(user)
 			return CLICK_ACTION_SUCCESS
-	if (registered_account.being_dumped)
-		registered_account.bank_card_talk(span_warning("内部服务器错误"), TRUE)
-		return CLICK_ACTION_SUCCESS
 	if(loc != user)
 		to_chat(user, span_warning("Вы должны держать ID-карту, чтобы продолжить!"))
 		return CLICK_ACTION_BLOCKING
@@ -802,17 +802,17 @@
 		return CLICK_ACTION_BLOCKING
 	if(!alt_click_can_use_id(user))
 		return CLICK_ACTION_BLOCKING
-	if(registered_account.adjust_money(-amount_to_remove, "Система: Вывод средств"))
-		var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
-		user.put_in_hands(holochip)
-		to_chat(user, span_notice("Вы вывели [amount_to_remove] кр. в голочип."))
-		SSblackbox.record_feedback("amount", "credits_removed", amount_to_remove)
-		log_econ("[amount_to_remove] credits were removed from [src] owned by [src.registered_name]")
-		return CLICK_ACTION_SUCCESS
-	else
+	if(!registered_account.adjust_money(-amount_to_remove, "Система: Вывод средств"))
 		var/difference = amount_to_remove - registered_account.account_balance
 		registered_account.bank_card_talk(span_warning("ОШИБКА: Для вывода средств с привязанного аккаунта требуется на [difference] кр. больше."), TRUE)
 		return CLICK_ACTION_BLOCKING
+	var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
+	user.put_in_hands(holochip)
+	to_chat(user, span_notice("You withdraw [amount_to_remove] credits into a holochip."))
+	SSblackbox.record_feedback("amount", "credits_removed", amount_to_remove)
+	log_econ("[amount_to_remove] credits were removed from [src] owned by [registered_name]")
+	return CLICK_ACTION_SUCCESS
+
 
 /obj/item/card/id/click_alt_secondary(mob/user)
 	if(!alt_click_can_use_id(user))
@@ -847,7 +847,7 @@
 
 	if(HAS_TRAIT(user, TRAIT_ID_APPRAISER))
 		. += HAS_TRAIT(src, TRAIT_JOB_FIRST_ID_CARD) ? span_boldnotice("Хмм... да, этот ID был выдан Центральным Командованием!") : span_boldnotice("Этот ID был сделан в этом секторе, не Центральным Командованием.")
-		if(HAS_TRAIT(src, TRAIT_TASTEFULLY_THICK_ID_CARD) && (user.is_holding(src) || (user.CanReach(src) && user.put_in_hands(src, ignore_animation = FALSE))))
+		if(HAS_TRAIT(src, TRAIT_TASTEFULLY_THICK_ID_CARD) && (user.is_holding(src) || (IsReachableBy(user) && user.put_in_hands(src, ignore_animation = FALSE))))
 			ADD_TRAIT(src, TRAIT_NODROP, "psycho")
 			. += span_hypnophrase("Посмотрите, какой нежный оттенок... На изысканную толщину. Боже мой, на нём даже есть водяной знак...")
 			var/sound/slowbeat = sound('sound/effects/health/slowbeat.ogg', repeat = TRUE)
@@ -1932,7 +1932,7 @@
 	if(!after_input_check(user))
 		return TRUE
 
-	var/new_age = tgui_input_number(user, "Выберите возраст на ID", "Возраст на агентской карте", AGE_MIN, AGE_MAX, AGE_MIN)
+	var/new_age = tgui_input_number(user, "Введите возраст", "Возраст агентской карты", AGE_MIN, AGE_MAX, AGE_MIN)
 	if(!after_input_check(user))
 		return TRUE
 
@@ -2130,7 +2130,7 @@
 /obj/item/card/cardboard/proc/after_input_check(mob/living/user, obj/item/item, input, value)
 	if(!input || (value && input == value))
 		return FALSE
-	if(QDELETED(user) || QDELETED(item) || QDELETED(src) || user.incapacitated || !user.is_holding(item) || !user.CanReach(src) || !user.can_write(item))
+	if(QDELETED(user) || QDELETED(item) || QDELETED(src) || user.incapacitated || !user.is_holding(item) || !IsReachableBy(user) || !user.can_write(item))
 		return FALSE
 	return TRUE
 

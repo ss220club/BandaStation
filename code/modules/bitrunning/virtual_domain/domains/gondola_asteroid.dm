@@ -6,6 +6,7 @@
 	Наверняка есть способ сдвинуть его своими силами."
 	key = "gondola_asteroid"
 	map_name = "gondola_asteroid"
+	domain_flags = DOMAIN_NO_NOHIT_BONUS
 
 /// Very pushy gondolas, great for moving loot crates.
 /obj/structure/closet/crate/secure/bitrunning/encrypted/gondola

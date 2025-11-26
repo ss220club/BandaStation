@@ -13,8 +13,8 @@
 	response_disarm_simple = "gently push aside"
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
-	attack_verb_continuous = "kicks"
-	attack_verb_simple = "kick"
+	attack_verb_continuous = "бодает"
+	attack_verb_simple = "бодает"
 	attack_sound = 'sound/items/weapons/punch1.ogg'
 	attack_vis_effect = ATTACK_EFFECT_KICK
 
@@ -31,7 +31,7 @@
 
 	minimum_survivable_temperature = COLD_ROOM_TEMP - 75 // enough so that they can survive the cold room spawn with plenty of room for comfort
 
-	blood_volume = BLOOD_VOLUME_NORMAL
+	default_blood_volume = BLOOD_VOLUME_NORMAL
 
 	ai_controller = /datum/ai_controller/basic_controller/goat
 	/// How often will we develop an evil gleam in our eye?

@@ -673,8 +673,7 @@
 
 /datum/reagent/consumable/ethanol/bloody_mary/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
 	. = ..()
-	if(drinker.blood_volume < BLOOD_VOLUME_NORMAL)
-		drinker.blood_volume = min(drinker.blood_volume + (3 * REM * seconds_per_tick), BLOOD_VOLUME_NORMAL) //Bloody Mary quickly restores blood loss.
+	drinker.adjust_blood_volume(3 * REM * seconds_per_tick, maximum = BLOOD_VOLUME_NORMAL) // Bloody Mary quickly restores blood loss.
 
 /datum/reagent/consumable/ethanol/brave_bull
 	name = "Brave Bull"
@@ -1338,8 +1337,9 @@
 
 /datum/reagent/consumable/ethanol/fetching_fizz/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
 	. = ..()
-	for(var/obj/item/stack/ore/O in orange(3, drinker))
-		step_towards(O, get_turf(drinker))
+	var/turf/drinker_turf = get_turf(drinker)
+	for(var/obj/item/stack/ore/ore in orange(3, drinker))
+		step_towards(ore, drinker_turf)
 
 //Another reference. Heals those in critical condition extremely quickly.
 /datum/reagent/consumable/ethanol/hearty_punch
@@ -1422,7 +1422,7 @@
 
 /datum/reagent/consumable/ethanol/neurotoxin
 	name = "Neurotoxin"
-	description = "A strong neurotoxin that puts the subject into a death-like state."
+	description = "A strong neurotoxin that puts the patient into a death-like state."
 	color = "#2E2E61" // rgb: 46, 46, 97
 	boozepwr = 50
 	quality = DRINK_VERYGOOD
@@ -2152,9 +2152,10 @@
 	taste_description = "simpler times"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/consumable/ethanol/old_timer/on_mob_life(mob/living/carbon/human/metabolizer, seconds_per_tick, times_fired)
+/datum/reagent/consumable/ethanol/old_timer/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
 	. = ..()
-	if(SPT_PROB(10, seconds_per_tick) && istype(metabolizer))
+	if(SPT_PROB(10, seconds_per_tick) && ishuman(drinker))
+		var/mob/living/carbon/human/metabolizer = drinker
 		metabolizer.age += 1
 		if(metabolizer.age > 70)
 			metabolizer.set_facial_haircolor("#cccccc", update = FALSE)
@@ -2894,7 +2895,7 @@
 	quality = DRINK_VERYGOOD
 	taste_description = "the aloha state"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	
+
 /datum/reagent/consumable/ethanol/boston_sour
 	name = "Boston Sour"
 	description = "Whiskey sour texturally elevated by an egg white."
@@ -2985,7 +2986,7 @@
 	affected_mob.adjust_disgust(-5 * REM * seconds_per_tick) //removes disgust, same with sol dry
 	if(affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, -0.5 * REM * seconds_per_tick * normalise_creation_purity(), required_organ_flag = affected_organ_flags)) //heals brain damage very slowly, about 12 damage per 5u
 		return UPDATE_MOB_HEALTH
-		
+
 /datum/reagent/consumable/ethanol/blue_blazer
 	name = "Blue Blazer"
 	description = "The signature drink of a legendary bartender from the 19th century. While remembered for how he innovated the art of bartending, at the end of the day this drink is really just warmed and sweetened whiskey."
@@ -2994,7 +2995,7 @@
 	quality = DRINK_NICE
 	taste_description = "scorched sweet whiskey"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	
+
 /datum/reagent/consumable/ethanol/blue_blazer/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	affected_mob.adjust_bodytemperature(25 * REM * TEMPERATURE_DAMAGE_COEFFICIENT * seconds_per_tick, 0, affected_mob.get_body_temp_normal())

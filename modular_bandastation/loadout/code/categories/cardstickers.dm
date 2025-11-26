@@ -6,7 +6,7 @@
 /datum/loadout_item/id_sticker
 	abstract_type = /datum/loadout_item/id_sticker
 
-/datum/loadout_item/id_sticker/on_equip_item(obj/item/equipped_item, datum/preferences/preference_source, list/preference_list, mob/living/carbon/human/equipper, visuals_only)
+/datum/loadout_item/id_sticker/on_equip_item(obj/item/equipped_item, list/item_details, mob/living/carbon/human/equipper, datum/outfit/outfit, visuals_only)
 	if(visuals_only)
 		return NONE
 	. = ..()

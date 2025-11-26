@@ -1,2 +1,2 @@
 /datum/wound_pregen_data/cranial_fissure
-	required_wounding_types = list(WOUND_BLUNT)
+	required_wounding_type = WOUND_BLUNT
