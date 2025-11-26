@@ -6,11 +6,6 @@
 /datum/loadout_item/suits
 	abstract_type = /datum/loadout_item/suits
 
-/datum/loadout_item/suits/insert_path_into_outfit(datum/outfit/outfit, mob/living/carbon/human/equipper, visuals_only = FALSE)
-	if(outfit.suit)
-		LAZYADD(outfit.backpack_contents, outfit.suit)
-	outfit.suit = item_path
-
 // MARK: Tier 0
 /datum/loadout_item/suits/wintercoat
 	name = "Зимняя"
