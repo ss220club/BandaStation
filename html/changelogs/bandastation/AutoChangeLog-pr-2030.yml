@@ -1,5 +1,0 @@
-author: "PetyaFX"
-delete-after: True
-changes:
-  - rscadd: "Добавлена механика спотыкания от чрезмерно большой скорости бега."
-  - code_imp: "Модульный оверрайд для carbon/human/Move()"
