@@ -324,7 +324,7 @@
 	if(hookah_mouthpiece)
 		hookah_mouthpiece.source_hookah = null
 		hookah_mouthpiece.disconnect()
-		qdel(hookah_mouthpiece)
+		QDEL_NULL(hookah_mouthpiece)
 
 	set_light(0)
 	return ..()

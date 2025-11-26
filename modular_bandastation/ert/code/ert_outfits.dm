@@ -484,14 +484,19 @@
 	l_hand = /obj/item/pneumatic_cannon/pie/selfcharge
 
 // MARK: OLD PRESETS
+// TODO220: Don't change TG ert teams modularly, need to create our own
 /datum/outfit/centcom/ert/security/alert
 	name = "(OLD OUTFIT) ERT Security - High Alert"
+	back = /obj/item/mod/control/pre_equipped/responsory/security
 
 /datum/outfit/centcom/ert/medic/alert
 	name = "(OLD OUTFIT) ERT Medic - High Alert"
+	back = /obj/item/mod/control/pre_equipped/responsory/medic
 
 /datum/outfit/centcom/ert/engineer/alert
 	name = "(OLD OUTFIT) ERT Engineer - High Alert"
+	back = /obj/item/mod/control/pre_equipped/responsory/engineer
 
 /datum/outfit/centcom/ert/commander/alert
 	name = "(OLD OUTFIT) ERT Commander - High Alert"
+	back = /obj/item/mod/control/pre_equipped/responsory/commander
