@@ -198,56 +198,56 @@
 // 		if(!isturf(target.loc) || target == quirk_holder || target.alpha <= 128 || target.invisibility > quirk_holder.see_invisible)
 // 			continue
 
-/datum/quirk/transhumanist/process(seconds_per_tick)
-	var/organics_nearby = 0
-	var/silicons_nearby = 0
+// /datum/quirk/transhumanist/process(seconds_per_tick)
+// 	var/organics_nearby = 0
+// 	var/silicons_nearby = 0
 
-	// Only cares about things that are nearby
-	var/list/mobs = get_hearers_in_LOS(3, quirk_holder)
+// 	// Only cares about things that are nearby
+// 	var/list/mobs = get_hearers_in_LOS(3, quirk_holder)
 
-	for(var/mob/living/target in mobs)
-		if(!isturf(target.loc) || target == quirk_holder || target.alpha <= 128 || target.invisibility > quirk_holder.see_invisible)
-			continue
+// 	for(var/mob/living/target in mobs)
+// 		if(!isturf(target.loc) || target == quirk_holder || target.alpha <= 128 || target.invisibility > quirk_holder.see_invisible)
+// 			continue
 
-		if(iscarbon(target))
-			var/alist/score = get_bodypart_score(target, limbs_only = TRUE)
-			// For an average human, they'll need 2 augmented limbs to not get counted as an organic nor a silicon.
-			// If some monstrosity has 20-30 organic limbs, they'll likely need more.
-			if(score[BODYPART_SCORE_OVERALL] < 1)
-				organics_nearby += 1
-			else if(score[BODYPART_SCORE_ORGANIC] == 0)
-				silicons_nearby += 1
-		else if(target.mob_biotypes & MOB_ORGANIC)
-			organics_nearby += 1
-		else if(target.mob_biotypes & MOB_ROBOTIC && target.stat != DEAD) // Dead silicons don't count, they're basically just machinery
-			silicons_nearby += 1
+// 		if(iscarbon(target))
+// 			var/alist/score = get_bodypart_score(target, limbs_only = TRUE)
+// 			// For an average human, they'll need 2 augmented limbs to not get counted as an organic nor a silicon.
+// 			// If some monstrosity has 20-30 organic limbs, they'll likely need more.
+// 			if(score[BODYPART_SCORE_OVERALL] < 1)
+// 				organics_nearby += 1
+// 			else if(score[BODYPART_SCORE_ORGANIC] == 0)
+// 				silicons_nearby += 1
+// 		else if(target.mob_biotypes & MOB_ORGANIC)
+// 			organics_nearby += 1
+// 		else if(target.mob_biotypes & MOB_ROBOTIC && target.stat != DEAD) // Dead silicons don't count, they're basically just machinery
+// 			silicons_nearby += 1
 
-	var/mood_result = silicons_nearby - organics_nearby
+// 	var/mood_result = silicons_nearby - organics_nearby
 
-	switch(mood_result)
-		if(TRANSHUMANIST_LEVEL_ECSTATIC to INFINITY)
-			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/surrounded_by_silicon)
-		if(TRANSHUMANIST_LEVEL_HAPPY to TRANSHUMANIST_LEVEL_ECSTATIC)
-			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_many_silicon)
-		if(TRANSHUMANIST_LEVEL_NEUTRAL + 0.01 to TRANSHUMANIST_LEVEL_HAPPY)
-			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_silicon)
-		if(TRANSHUMANIST_LEVEL_NEUTRAL)
-			quirk_holder.clear_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE)
-		if(TRANSHUMANIST_LEVEL_UNHAPPY to TRANSHUMANIST_LEVEL_NEUTRAL - 0.01)
-			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_organic)
-		if(TRANSHUMANIST_LEVEL_ANGRY to TRANSHUMANIST_LEVEL_UNHAPPY)
-			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_many_organic)
-		if(-INFINITY to TRANSHUMANIST_LEVEL_ANGRY)
-			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/surrounded_by_organic)
+// 	switch(mood_result)
+// 		if(TRANSHUMANIST_LEVEL_ECSTATIC to INFINITY)
+// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/surrounded_by_silicon)
+// 		if(TRANSHUMANIST_LEVEL_HAPPY to TRANSHUMANIST_LEVEL_ECSTATIC)
+// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_many_silicon)
+// 		if(TRANSHUMANIST_LEVEL_NEUTRAL + 0.01 to TRANSHUMANIST_LEVEL_HAPPY)
+// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_silicon)
+// 		if(TRANSHUMANIST_LEVEL_NEUTRAL)
+// 			quirk_holder.clear_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE)
+// 		if(TRANSHUMANIST_LEVEL_UNHAPPY to TRANSHUMANIST_LEVEL_NEUTRAL - 0.01)
+// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_organic)
+// 		if(TRANSHUMANIST_LEVEL_ANGRY to TRANSHUMANIST_LEVEL_UNHAPPY)
+// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/around_many_organic)
+// 		if(-INFINITY to TRANSHUMANIST_LEVEL_ANGRY)
+// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE, /datum/mood_event/surrounded_by_organic)
 
-#undef MOOD_CATEGORY_TRANSHUMANIST_PEOPLE
-#undef MOOD_CATEGORY_TRANSHUMANIST_BODYPART
-#undef TRANSHUMANIST_LEVEL_ECSTATIC
-#undef TRANSHUMANIST_LEVEL_HAPPY
-#undef TRANSHUMANIST_LEVEL_NEUTRAL
-#undef TRANSHUMANIST_LEVEL_UNHAPPY
-#undef TRANSHUMANIST_LEVEL_ANGRY
-#undef BODYPART_SCORE_ORGANIC
-#undef BODYPART_SCORE_SILICON
-#undef BODYPART_SCORE_OTHER_BODYTYPES
-#undef BODYPART_SCORE_OVERALL
+// #undef MOOD_CATEGORY_TRANSHUMANIST_PEOPLE
+// #undef MOOD_CATEGORY_TRANSHUMANIST_BODYPART
+// #undef TRANSHUMANIST_LEVEL_ECSTATIC
+// #undef TRANSHUMANIST_LEVEL_HAPPY
+// #undef TRANSHUMANIST_LEVEL_NEUTRAL
+// #undef TRANSHUMANIST_LEVEL_UNHAPPY
+// #undef TRANSHUMANIST_LEVEL_ANGRY
+// #undef BODYPART_SCORE_ORGANIC
+// #undef BODYPART_SCORE_SILICON
+// #undef BODYPART_SCORE_OTHER_BODYTYPES
+// #undef BODYPART_SCORE_OVERALL
