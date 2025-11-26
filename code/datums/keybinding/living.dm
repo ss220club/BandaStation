@@ -12,7 +12,7 @@
 	description = "Освободиться от текущего состояния. В наручниках? Вы горите? Сопротивляйтесь!"
 	keybind_signal = COMSIG_KB_LIVING_RESIST_DOWN
 
-/datum/keybinding/living/resist/down(client/user, turf/target)
+/datum/keybinding/living/resist/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -37,7 +37,7 @@
 	description = "Посмотреть на нижний Z-уровень. Возможно только если над вами свободное пространство."
 	keybind_signal = COMSIG_KB_LIVING_LOOKUP_DOWN
 
-/datum/keybinding/living/look_up/down(client/user, turf/target)
+/datum/keybinding/living/look_up/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -58,7 +58,7 @@
 	description = "Посмотреть на нижний Z-уровень. Возможно только если под вами его видно."
 	keybind_signal = COMSIG_KB_LIVING_LOOKDOWN_DOWN
 
-/datum/keybinding/living/look_down/down(client/user, turf/target)
+/datum/keybinding/living/look_down/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -79,7 +79,7 @@
 	description = "Нажмите, чтобы лечь или встать"
 	keybind_signal = COMSIG_KB_LIVING_REST_DOWN
 
-/datum/keybinding/living/rest/down(client/user, turf/target)
+/datum/keybinding/living/rest/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -95,7 +95,7 @@
 	keybind_signal = COMSIG_KB_LIVING_TOGGLE_COMBAT_DOWN
 
 
-/datum/keybinding/living/toggle_combat_mode/down(client/user, turf/target)
+/datum/keybinding/living/toggle_combat_mode/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -109,7 +109,7 @@
 	description = "Включает боевой режим"
 	keybind_signal = COMSIG_KB_LIVING_ENABLE_COMBAT_DOWN
 
-/datum/keybinding/living/enable_combat_mode/down(client/user, turf/target)
+/datum/keybinding/living/enable_combat_mode/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -123,7 +123,7 @@
 	description = "Отключает боевой режим"
 	keybind_signal = COMSIG_KB_LIVING_DISABLE_COMBAT_DOWN
 
-/datum/keybinding/living/disable_combat_mode/down(client/user, turf/target)
+/datum/keybinding/living/disable_combat_mode/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -137,7 +137,7 @@
 	description = "Удерживайте, чтобы временно поменять режим передвижения."
 	keybind_signal = COMSIG_KB_LIVING_TOGGLEMOVEINTENT_DOWN
 
-/datum/keybinding/living/toggle_move_intent/down(client/user, turf/target)
+/datum/keybinding/living/toggle_move_intent/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -158,7 +158,7 @@
 	description = "Нажмите, чтобы поменять режим передвижения."
 	keybind_signal = COMSIG_KB_LIVING_TOGGLEMOVEINTENTALT_DOWN
 
-/datum/keybinding/living/toggle_move_intent_alternative/down(client/user, turf/target)
+/datum/keybinding/living/toggle_move_intent_alternative/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -188,7 +188,7 @@
 	description = "Удерживайте, чтобы включить режим броска, и отпустите, чтобы выключить его"
 	keybind_signal = COMSIG_KB_LIVING_HOLDTHROWMODE_DOWN
 
-/datum/keybinding/living/hold_throw_mode/down(client/user, turf/target)
+/datum/keybinding/living/hold_throw_mode/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -219,7 +219,7 @@
 		return FALSE
 	return TRUE
 
-/datum/keybinding/living/give/down(client/user, turf/target)
+/datum/keybinding/living/give/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return

@@ -1,6 +1,12 @@
-#define CHALLENGE_TELECRYSTALS 280
+// #define CHALLENGE_TELECRYSTALS 280 // BANDASTATION EDIT
 #define CHALLENGE_TIME_LIMIT (5 MINUTES)
 #define CHALLENGE_SHUTTLE_DELAY (25 MINUTES) // 25 minutes, so the ops have at least 5 minutes before the shuttle is callable.
+
+// BANDASTATION ADD - Start
+/datum/config_entry/number/challenge_telecrystals_per_crewman
+	default = 3.5
+	integer = FALSE
+// BANDASTATION ADD - End
 
 GLOBAL_LIST_EMPTY(jam_on_wardec)
 
@@ -90,6 +96,8 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 		to_chat(user, "You've attracted the attention of powerful forces within the syndicate. \
 			A bonus bundle of telecrystals has been granted to your team. Great things await you if you complete the mission.")
 
+	addtimer(CALLBACK(SSsecurity_level, TYPE_PROC_REF(/datum/controller/subsystem/security_level, set_level), SEC_LEVEL_GAMMA), 20 SECONDS) // BANDASTATION ADD
+
 	distribute_tc()
 	CONFIG_SET(number/shuttle_refuel_delay, max(CONFIG_GET(number/shuttle_refuel_delay), CHALLENGE_SHUTTLE_DELAY))
 	SSblackbox.record_feedback("amount", "nuclear_challenge_mode", 1)
@@ -102,7 +110,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 
 	var/datum/techweb/station_techweb = locate(/datum/techweb/science) in SSresearch.techwebs
 	if(station_techweb)
-		var/obj/machinery/announcement_system/announcement_system = get_announcement_system()
+		var/obj/machinery/announcement_system/announcement_system = get_announcement_system(null, null, list(RADIO_CHANNEL_SCIENCE))
 		if (!isnull(announcement_system))
 			announcement_system.broadcast("Additional research data received from Nanotrasen R&D Division following the emergency protocol.", list(RADIO_CHANNEL_SCIENCE), TRUE)
 		station_techweb.add_point_list(list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_5_POINTS * 3))
@@ -122,7 +130,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 			continue
 		uplinks += uplink
 
-	var/tc_to_distribute = CHALLENGE_TELECRYSTALS
+	var/tc_to_distribute = GLOB.player_list.len * CONFIG_GET(number/challenge_telecrystals_per_crewman) // BandaStation Edit: Challenge balance
 	var/tc_per_nukie = round(tc_to_distribute / (length(orphans)+length(uplinks)))
 
 	for (var/datum/component/uplink/uplink in uplinks)
@@ -203,6 +211,6 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 /obj/item/nuclear_challenge/literally_just_does_the_message/distribute_tc()
 	return
 
-#undef CHALLENGE_TELECRYSTALS
+// #undef CHALLENGE_TELECRYSTALS // BANDASTATION EDIT
 #undef CHALLENGE_TIME_LIMIT
 #undef CHALLENGE_SHUTTLE_DELAY

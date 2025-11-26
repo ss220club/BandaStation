@@ -14,6 +14,7 @@
 	client.interviewee = TRUE
 
 /datum/config_entry/string/interview_webhook_url
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
 /datum/interview/approve(client/approved_by)
 	if(!SScentral.is_player_discord_linked(owner_ckey))

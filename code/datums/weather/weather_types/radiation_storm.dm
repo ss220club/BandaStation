@@ -1,10 +1,10 @@
 //Radiation storms occur when the station passes through an irradiated area, and irradiate anyone not standing in protected areas (maintenance, emergency storage, etc.)
 /datum/weather/rad_storm
 	name = "radiation storm"
-	desc = "A cloud of intense radiation passes through the area dealing rad damage to those who are unprotected."
+	desc = "Станция проходит через радиационный пояс высокой интенсивности, облучающий всех, кому не повезло оказаться без защиты."
 
 	telegraph_duration = 40 SECONDS
-	telegraph_message = span_danger("Воздух начинает нагреваться.")
+	telegraph_message = span_danger("Вам кажется, что воздух вокруг становится теплее.")
 
 	weather_message = span_userdanger("<i>Вы чувствуете, как вас окутывают волны тепла! Найдите убежище!</i>")
 	weather_overlay = "ash_storm"
@@ -17,10 +17,29 @@
 	end_message = span_notice("Кажется, воздух снова остывает.")
 
 	area_type = /area
-	protected_areas = list(/area/station/maintenance, /area/station/ai_monitored/turret_protected/ai_upload, /area/station/ai_monitored/turret_protected/ai_upload_foyer,
-							/area/station/ai_monitored/turret_protected/aisat/maint, /area/station/ai_monitored/command/storage/satellite,
-							/area/station/ai_monitored/turret_protected/ai, /area/station/commons/storage/emergency/starboard, /area/station/commons/storage/emergency/port,
-							/area/shuttle, /area/station/security/prison/safe, /area/station/security/prison/toilet, /area/mine/maintenance, /area/icemoon/underground, /area/ruin/comms_agent/maint)
+	protected_areas = list(
+		// General areas
+		/area/station/maintenance, // This is where we tell people to go
+		/area/shuttle, // Would be quite rude
+
+		// AI
+		/area/station/ai/satellite/maintenance, // Duh...
+		/area/station/ai/upload,
+		/area/station/ai/satellite/chamber,
+
+		// Rad shelters
+		/area/station/commons/storage/emergency/starboard,
+		/area/station/commons/storage/emergency/port,
+
+		// Prison
+		/area/station/security/prison/safe,
+		/area/station/security/prison/toilet,
+
+		// Off-station
+		/area/mine/maintenance,
+		/area/ruin/comms_agent/maint,
+		/area/icemoon/underground,
+	)
 	target_trait = ZTRAIT_STATION
 
 	immunity_type = TRAIT_RADSTORM_IMMUNE
@@ -74,19 +93,10 @@
 	mutant.domutcheck()
 
 /datum/weather/rad_storm/proc/status_alarm(active) //Makes the status displays show the radiation warning for those who missed the announcement.
-	var/datum/radio_frequency/frequency = SSradio.return_frequency(FREQ_STATUS_DISPLAYS)
-	if(!frequency)
-		return
-
-	var/datum/signal/signal = new
 	if (active)
-		signal.data["command"] = "alert"
-		signal.data["picture_state"] = "radiation"
+		send_status_display_radiation_alert()
 	else
-		signal.data["command"] = "shuttle"
-
-	var/atom/movable/virtualspeaker/virtual_speaker = new(null)
-	frequency.post_signal(virtual_speaker, signal)
+		clear_status_display_radiation()
 
 /// Used by the radioactive nebula when the station doesnt have enough shielding
 /datum/weather/rad_storm/nebula

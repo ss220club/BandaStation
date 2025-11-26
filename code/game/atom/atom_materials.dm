@@ -132,9 +132,9 @@
 			mix_material_colors(colors)
 
 	if(material_flags & MATERIAL_ADD_PREFIX)
-		var/prefixes = get_material_prefixes(materials)
+		var/prefixes = get_material_english_list(materials) // BANDASTATION EDIT - Material naming
 		ru_names_rename(ru_names_toml(name, suffix = " из [prefixes]", override_base = "[prefixes] [name]"))
-		name = "[prefixes] [name]"
+		name = "[declent_ru_initial(initial(name), NOMINATIVE, name)] из [prefixes]" // BANDASTATION EDIT - Material naming
 
 	SEND_SIGNAL(src, COMSIG_ATOM_FINALIZE_MATERIAL_EFFECTS, materials, main_material)
 
@@ -193,7 +193,7 @@
 /atom/proc/get_material_english_list(list/materials)
 	var/list/mat_names = list()
 	for(var/datum/material/material as anything in materials)
-		mat_names += material.name
+		mat_names += material.declent_ru(GENITIVE) // BANDASTATION EDIT - Material naming
 	return english_list(mat_names)
 
 ///Searches for a subtype of config_type that is to be used in its place for specific materials (like shimmering gold for cleric maces)
@@ -379,16 +379,7 @@
 	var/list/cached_materials = custom_materials
 	if(!length(cached_materials))
 		return null
-
-	var/most_common_material = null
-	var/max_amount = 0
-	for(var/material in cached_materials)
-		if(cached_materials[material] > max_amount)
-			most_common_material = material
-			max_amount = cached_materials[material]
-
-	if(most_common_material)
-		return GET_MATERIAL_REF(most_common_material)
+	return GET_MATERIAL_REF(cached_materials[1]) //materials are sorted by amount, the first is always the main one
 
 /**
  * Gets the total amount of materials in this atom.

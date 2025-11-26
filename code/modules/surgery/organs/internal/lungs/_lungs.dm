@@ -752,13 +752,13 @@
 	// Low pressure.
 	if(breath_pp)
 		var/ratio = safe_breath_min / breath_pp
-		suffocator.adjustOxyLoss(min(5 * ratio, HUMAN_MAX_OXYLOSS))
+		suffocator.apply_damage(min(5 * ratio, HUMAN_MAX_OXYLOSS), OXY)
 		return mole_count * ratio / 6
 	// Zero pressure.
 	if(suffocator.health >= suffocator.crit_threshold)
-		suffocator.adjustOxyLoss(HUMAN_MAX_OXYLOSS)
+		suffocator.apply_damage(HUMAN_MAX_OXYLOSS, OXY)
 	else
-		suffocator.adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
+		suffocator.apply_damage(HUMAN_CRIT_MAX_OXYLOSS, OXY)
 
 
 /obj/item/organ/lungs/proc/handle_breath_temperature(datum/gas_mixture/breath, mob/living/carbon/human/breather) // called by human/life, handles temperatures
@@ -911,7 +911,7 @@
 	. = ..()
 	if (breath?.gases[/datum/gas/plasma])
 		var/plasma_pp = breath.get_breath_partial_pressure(breath.gases[/datum/gas/plasma][MOLES])
-		breather_slime.blood_volume += (0.2 * plasma_pp) // 10/s when breathing literally nothing but plasma, which will suffocate you.
+		breather_slime.adjust_blood_volume(0.2 * plasma_pp) // 10/s when breathing literally nothing but plasma, which will suffocate you.
 
 /obj/item/organ/lungs/smoker_lungs
 	name = "smoker lungs"

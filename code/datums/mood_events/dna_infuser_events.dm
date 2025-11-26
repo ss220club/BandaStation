@@ -2,6 +2,7 @@
 	description = "Хе-хе. \"Всё самое чумовое\". Вот эта игра слов."
 	mood_change = 1
 	timeout = 2 MINUTES
+	event_flags = MOOD_EVENT_WHIMSY
 
 /datum/mood_event/gondola_serenity
 	description = "Многое могло бы сейчас волновать вас. Но это чувство удовлетворенности, вселенский зов к тому, чтобы просто сидеть и наблюдать, овладевает над всем остальным..."

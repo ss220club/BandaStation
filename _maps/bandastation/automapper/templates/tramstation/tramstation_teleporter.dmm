@@ -239,7 +239,7 @@
 /area/station/command/teleporter)
 "T" = (
 /turf/closed/wall/r_wall,
-/area/station/ai_monitored/command/storage/eva)
+/area/station/command/eva)
 "U" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron/dark,

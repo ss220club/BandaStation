@@ -1,7 +1,7 @@
 //pig
 /mob/living/basic/pig
-	name = "pig"
-	desc = "A fat pig."
+	name = "Свинья"
+	desc = "Жирнюча."
 	icon_state = "pig"
 	icon_living = "pig"
 	icon_dead = "pig_dead"
@@ -25,7 +25,7 @@
 	health = 50
 	maxHealth = 50
 	gold_core_spawnable = FRIENDLY_SPAWN
-	blood_volume = BLOOD_VOLUME_NORMAL
+	default_blood_volume = BLOOD_VOLUME_NORMAL
 	ai_controller = /datum/ai_controller/basic_controller/pig
 
 /datum/emote/pig

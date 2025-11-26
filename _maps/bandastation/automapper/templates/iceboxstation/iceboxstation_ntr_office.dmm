@@ -92,6 +92,8 @@
 /obj/effect/mapping_helpers/requests_console/assistance,
 /obj/effect/mapping_helpers/requests_console/information,
 /obj/effect/mapping_helpers/requests_console/announcement,
+/obj/structure/bed/dogbed,
+/mob/living/basic/mouse/hamster/representative,
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "p" = (

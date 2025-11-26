@@ -12,7 +12,7 @@
 	description = "Выбирает активным/неактивным первый модуль"
 	keybind_signal = COMSIG_KB_SILICON_TOGGLEMODULEONE_DOWN
 
-/datum/keybinding/robot/moduleone/down(client/user, turf/target)
+/datum/keybinding/robot/moduleone/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -27,7 +27,7 @@
 	description = "Выбирает активным/неактивным второй модуль"
 	keybind_signal = COMSIG_KB_SILICON_TOGGLEMODULETWO_DOWN
 
-/datum/keybinding/robot/moduletwo/down(client/user, turf/target)
+/datum/keybinding/robot/moduletwo/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -42,7 +42,7 @@
 	description = "Выбирает активным/неактивным третий модуль"
 	keybind_signal = COMSIG_KB_SILICON_TOGGLEMODULETHREE_DOWN
 
-/datum/keybinding/robot/modulethree/down(client/user, turf/target)
+/datum/keybinding/robot/modulethree/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -57,7 +57,7 @@
 	description = "Убирает предмет из текущего модуля"
 	keybind_signal = COMSIG_KB_SILICON_UNEQUIPMODULE_DOWN
 
-/datum/keybinding/robot/unequip_module/down(client/user, turf/target)
+/datum/keybinding/robot/unequip_module/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -73,7 +73,7 @@
 	description = "Возвращает в ваше ядро ИИ"
 	keybind_signal = COMSIG_KB_SILION_UNDEPLOY_DOWN
 
-/datum/keybinding/robot/undeploy/down(client/user, turf/target)
+/datum/keybinding/robot/undeploy/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return

@@ -1,12 +1,12 @@
 import DOMPurify from 'dompurify';
-import { createElement, ReactNode } from 'react';
+import { createElement, type ReactNode } from 'react';
 import { Box, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { useBackend } from '../../backend';
 import { CONNECTED, DISCONNECTED, TICKET_LOG } from './constants';
 import { toLocalTime } from './helpers';
-import { ManagerData } from './types';
+import type { ManagerData, MessageProps } from './types';
 
 function splitMessage(message: string) {
   const clean = DOMPurify.sanitize(message, {
@@ -87,10 +87,17 @@ function isInlineTag(tag: string): boolean {
   ].includes(tag);
 }
 
-export function TicketMessage(props) {
+type TicketMessageProps = {
+  hasStaffAccess: boolean;
+  messageHolder: MessageProps;
+};
+
+export function TicketMessage(props: TicketMessageProps) {
   const { data } = useBackend<ManagerData>();
-  const { isAdmin, userKey } = data;
-  const { sender, message, time } = props.message;
+  const { userKey } = data;
+  const { messageHolder, hasStaffAccess } = props;
+  const { sender, message, time } = messageHolder;
+
   const messageSender = userKey === sender;
 
   if (sender === DISCONNECTED || sender === CONNECTED) {
@@ -110,7 +117,7 @@ export function TicketMessage(props) {
 
   if (sender === TICKET_LOG) {
     return (
-      !!isAdmin && (
+      hasStaffAccess && (
         <Stack fill className="TicketMessage TicketMessage__Log">
           <div className="ticket-message">{message}</div>
           <div className="ticket-time">{toLocalTime(time)}</div>
