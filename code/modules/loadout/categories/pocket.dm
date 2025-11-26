@@ -295,7 +295,9 @@
 	if(istype(id_card, /obj/item/storage/wallet)) // Wallets station trait guard
 		return
 
-	var/obj/item/storage/wallet/wallet = new(equipper)
+	//var/obj/item/storage/wallet/wallet = new(equipper) // BANDASTATION REMOVAL: Loadout wallets
+	var/obj/item/storage/wallet/wallet = new src.item_path(equipper) // BANDASTATION ADDITION: Loadout wallets fix
+
 	if(!istype(id_card))
 		// They must have a PDA or some other thing in their ID slot, abort
 		if(!equipper.equip_to_storage(wallet, ITEM_SLOT_BACK, indirect_action = TRUE))
