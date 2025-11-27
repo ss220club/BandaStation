@@ -14239,6 +14239,7 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/any/command/magistrate,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
 "eMW" = (
@@ -20486,12 +20487,14 @@
 /area/station/command/bridge)
 "gHI" = (
 /obj/machinery/door/firedoor,
-/obj/effect/mapping_helpers/airlock/access/all/supply/qm,
 /obj/machinery/door/airlock/command{
 	name = "Quartermaster's Office"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/supply/qm,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/qm)
 "gIo" = (
@@ -26980,7 +26983,9 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/access/all/medical/cmo,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/medical/cmo,
 /turf/open/floor/iron/dark,
 /area/station/medical/storage)
 "iGK" = (
@@ -32505,7 +32510,9 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/access/all/security/hos,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/access/any/security/hos,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "kAR" = (
@@ -38230,8 +38237,10 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/siding/wood/corner,
-/obj/effect/mapping_helpers/airlock/access/all/command/hop,
 /obj/effect/landmark/navigate_destination/hop,
+/obj/effect/mapping_helpers/airlock/access/any/command/hop,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
 "mqn" = (
@@ -47006,7 +47015,9 @@
 /obj/effect/turf_decal/siding/yellow/corner{
 	dir = 4
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/ce,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/ce,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/ce)
 "pqH" = (
@@ -49462,7 +49473,9 @@
 /obj/machinery/door/airlock/command{
 	name = "Research Director's Office"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/science/rd,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/access/any/science/rd,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/rd)
 "qhT" = (
@@ -50337,7 +50350,9 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/mapping_helpers/airlock/access/all/command/hop,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
+/obj/effect/mapping_helpers/airlock/access/any/command/hop,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hop)
 "qxC" = (
@@ -70373,6 +70388,8 @@
 /obj/machinery/door/airlock/corporate{
 	id_tag = "blueshield_door"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/blueshield)
 "wMH" = (
@@ -73673,7 +73690,9 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/ce,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/ce,
+/obj/effect/mapping_helpers/airlock/access/any/command/nanotrasen_representative,
+/obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/ce)
 "xRv" = (
