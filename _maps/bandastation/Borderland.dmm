@@ -544,10 +544,7 @@
 "aox" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/west,
-/turf/open/floor/iron/checker{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
+/turf/open/floor/iron,
 /area/awaymission/snowdin/base{
 	area_has_base_lighting = 1;
 	base_lighting_alpha = 255;
@@ -18983,10 +18980,7 @@
 	})
 "kFa" = (
 /obj/machinery/light/small/directional/east,
-/turf/open/floor/iron/checker{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
+/turf/open/floor/iron,
 /area/awaymission/snowdin/base{
 	area_has_base_lighting = 1;
 	base_lighting_alpha = 255;
@@ -26479,6 +26473,15 @@
 	base_lighting_color = "#C8E4FF";
 	light_color = "#C8E4FF"
 	})
+"oNA" = (
+/obj/machinery/light/small/directional/west,
+/turf/open/floor/iron,
+/area/awaymission/snowdin/base{
+	area_has_base_lighting = 1;
+	base_lighting_alpha = 255;
+	base_lighting_color = "#C8E4FF";
+	light_color = "#C8E4FF"
+	})
 "oNO" = (
 /obj/structure/flora/grass/brown,
 /obj/structure/closet/crate/secure/syndicate/gorlex,
@@ -32262,7 +32265,8 @@
 	explosive_resistance = 1
 	})
 "snX" = (
-)
+/turf/open/space/basic,
+/area/space)
 "soc" = (
 /obj/item/gun/ballistic/automatic/carwo/marksman/wooden,
 /turf/open/misc/dirt/dark{
@@ -79445,9 +79449,9 @@ vNS
 uPM
 aox
 uPM
-aas
+oNA
 uPM
-aas
+oNA
 uPM
 ets
 jUc
