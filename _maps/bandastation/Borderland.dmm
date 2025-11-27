@@ -1,16 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aas" = (
-/obj/machinery/light/small/directional/west,
-/turf/open/floor/iron/checker{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/awaymission/snowdin/base{
-	area_has_base_lighting = 1;
-	base_lighting_alpha = 255;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF"
-	})
 "aaB" = (
 /obj/structure/bonfire/dense,
 /turf/open/misc/dirt/jungle/wasteland{
