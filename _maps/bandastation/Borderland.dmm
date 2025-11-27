@@ -17688,16 +17688,6 @@
 	light_color = "#C8E4FF";
 	explosive_resistance = 1
 	})
-"jVT" = (
-/obj/item/paper{
-	text = ГорнодобывающаякомпанияВос....Докладот19...08..2051...Наобъектепокабезштатныхпроисшествий.Возникаливолненияместныхижалобынагромкостьпроведенияработ,однаколицанаобъектдопущенынебыли.Применениевзрывчаткидлярасчисткипородыпозволилодобратьсядозалежиредкоземельныхметаллов.Ноработникамтеперьнедаютпокоящёлкающиезвукипоночам,доносящиесяизстен.Просьбавыслатьдопол....
-	},
-/turf/open/floor/wood/freezing{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/awaymission/undergroundoutpost45/caves)
 "jWU" = (
 /obj/effect/turf_decal/siding/golden{
 	dir = 8
@@ -27061,6 +27051,23 @@
 	light_color = "#C8E4FF";
 	explosive_resistance = 1
 	})
+"phz" = (
+/obj/item/ammo_casing/a762x39/hunting{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/awaymission/snowdin/outside{
+	area_has_base_lighting = 1;
+	static_lighting = 1;
+	base_lighting_color = "#C8E4FF";
+	light_color = "#C8E4FF";
+	explosive_resistance = 1
+	})
 "phP" = (
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 1
@@ -28537,8 +28544,8 @@
 	explosive_resistance = 1
 	})
 "qbC" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 6
+/obj/effect/decal/cleanable/blood/gibs/old{
+	icon_state = "floor4"
 	},
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/misc/asteroid/snow/atmosphere{
@@ -29309,23 +29316,6 @@
 "qyd" = (
 /obj/effect/spawner/structure/window/hollow/reinforced,
 /turf/open/floor/plating,
-/area/awaymission/snowdin/outside{
-	area_has_base_lighting = 1;
-	static_lighting = 1;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF";
-	explosive_resistance = 1
-	})
-"qyD" = (
-/obj/effect/decal/cleanable/blood/gibs/old{
-	icon_state = "floor4"
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
 /area/awaymission/snowdin/outside{
 	area_has_base_lighting = 1;
 	static_lighting = 1;
@@ -52135,7 +52125,7 @@ xFJ
 suR
 veT
 gQR
-qbC
+phz
 uSo
 fKV
 uGt
@@ -52650,7 +52640,7 @@ suR
 suR
 ocd
 suR
-qyD
+qbC
 uGt
 uGt
 uGt
@@ -73223,7 +73213,7 @@ tkk
 hBP
 oRM
 tbF
-jVT
+vBS
 vcJ
 lsn
 mlq
