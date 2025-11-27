@@ -112,7 +112,7 @@
 /datum/loadout_item/suits/soundhand_white_jacket
 	name = "Серебристая куртка Арии"
 	item_path = /obj/item/clothing/suit/soundhand_white_jacket/tag
-	donator_level = DONATOR_TIER_5
+	donator_level = DONATOR_TIER_2
 
 /datum/loadout_item/suits/etamin_coat
 	name = "Офицерский плащ Etamin Industries"
