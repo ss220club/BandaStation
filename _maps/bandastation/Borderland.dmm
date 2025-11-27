@@ -1,15 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aaa" = (
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/awaymission/snowdin/outside{
-	area_has_base_lighting = 1;
-	static_lighting = 1;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF"
-	})
 "aas" = (
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/iron/checker{
@@ -10121,6 +10110,25 @@
 	base_lighting_color = "#C8E4FF";
 	light_color = "#C8E4FF"
 	})
+"fEA" = (
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 6
+	},
+/obj/item/banner/species/rakht/mundane{
+	pixel_y = 5
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/awaymission/snowdin/outside{
+	area_has_base_lighting = 1;
+	static_lighting = 1;
+	base_lighting_color = "#C8E4FF";
+	light_color = "#C8E4FF";
+	explosive_resistance = 1
+	})
 "fEJ" = (
 /obj/effect/turf_decal/weather/snow,
 /obj/effect/spawner/random/food_or_drink/donkpockets,
@@ -16107,6 +16115,21 @@
 	base_lighting_color = "#C8E4FF";
 	light_color = "#C8E4FF"
 	})
+"jaN" = (
+/obj/effect/mine/explosive,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/awaymission/snowdin/outside{
+	area_has_base_lighting = 1;
+	static_lighting = 1;
+	base_lighting_color = "#C8E4FF";
+	light_color = "#C8E4FF";
+	explosive_resistance = 1
+	})
 "jbw" = (
 /obj/structure/railing{
 	dir = 4
@@ -16162,11 +16185,13 @@
 	},
 /area/awaymission/snowdin/post/mining_main)
 "jdc" = (
-/obj/item/banner/species/vulpkanin,
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 6
 	},
 /obj/effect/turf_decal/weather/snow,
+/obj/item/banner/species/rakht/mundane{
+	pixel_y = 5
+	},
 /turf/open/floor/stone/icemoon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -17678,6 +17703,23 @@
 "jVC" = (
 /obj/structure/ladder,
 /turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/awaymission/snowdin/outside{
+	area_has_base_lighting = 1;
+	static_lighting = 1;
+	base_lighting_color = "#C8E4FF";
+	light_color = "#C8E4FF";
+	explosive_resistance = 1
+	})
+"jVT" = (
+/obj/effect/decal/cleanable/blood/gibs/old{
+	icon_state = "floor4"
+	},
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -28036,21 +28078,6 @@
 	light_color = "#C8E4FF";
 	explosive_resistance = 1
 	})
-"pLL" = (
-/obj/effect/mine/explosive,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/awaymission/snowdin/outside{
-	area_has_base_lighting = 1;
-	static_lighting = 1;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF";
-	explosive_resistance = 1
-	})
 "pMx" = (
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor4"
@@ -28535,23 +28562,6 @@
 /obj/effect/turf_decal/weather/snow,
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
-	},
-/area/awaymission/snowdin/outside{
-	area_has_base_lighting = 1;
-	static_lighting = 1;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF";
-	explosive_resistance = 1
-	})
-"qbC" = (
-/obj/effect/decal/cleanable/blood/gibs/old{
-	icon_state = "floor4"
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
 	},
 /area/awaymission/snowdin/outside{
 	area_has_base_lighting = 1;
@@ -51096,7 +51106,7 @@ suR
 suR
 suR
 suR
-pLL
+jaN
 uGt
 uGt
 uGt
@@ -52640,7 +52650,7 @@ suR
 suR
 ocd
 suR
-qbC
+jVT
 uGt
 uGt
 uGt
@@ -57337,7 +57347,7 @@ qZh
 kbT
 kbT
 mwC
-xUE
+fEA
 eNB
 xXU
 xXU
