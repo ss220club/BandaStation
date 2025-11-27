@@ -14200,6 +14200,16 @@
 	light_color = "#C8E4FF";
 	explosive_resistance = 1
 	})
+"hUQ" = (
+/obj/item/kirbyplants/organic/plant9,
+/turf/open/floor/iron,
+/area/awaymission/snowdin/outside{
+	area_has_base_lighting = 1;
+	static_lighting = 1;
+	base_lighting_color = "#C8E4FF";
+	light_color = "#C8E4FF";
+	explosive_resistance = 1
+	})
 "hVe" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
@@ -15240,10 +15250,10 @@
 	explosive_resistance = 1
 	})
 "iyl" = (
-/obj/item/kirbyplants/organic/plant19,
 /obj/effect/decal/cleanable/cobweb/cobweb2{
 	icon_state = "cobweb1"
 	},
+/obj/item/kirbyplants/organic/plant9,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -32263,6 +32273,8 @@
 	light_color = "#C8E4FF";
 	explosive_resistance = 1
 	})
+"snX" = (
+)
 "soc" = (
 /obj/item/gun/ballistic/automatic/carwo/marksman/wooden,
 /turf/open/misc/dirt/dark{
@@ -53494,9 +53506,9 @@ suR
 qzZ
 eGD
 eGD
-aaa
-aaa
-aaa
+snX
+snX
+snX
 eGD
 eGD
 qzZ
@@ -142775,7 +142787,7 @@ lcV
 lcV
 lcV
 cYg
-ugn
+hUQ
 ugn
 ugn
 cYg
