@@ -460,7 +460,7 @@
 /area/station/command/heads_quarters/nanotrasen_representative)
 "PN" = (
 /turf/closed/wall/r_wall,
-/area/station/ai_monitored/command/storage/eva)
+/area/station/command/eva)
 "QL" = (
 /obj/structure/closet/cabinet,
 /obj/effect/turf_decal/siding/wood{

@@ -228,7 +228,11 @@ SUBSYSTEM_DEF(garbage)
 					LAZYADD(I.extra_details, detail)
 
 				#ifdef TESTING
-				to_chat(get_holders_with_rights(R_ADMIN), "## TESTING: GC: -- [ADMIN_VV(D)] | [type] was unable to be GC'd --") /// BANDASTATION EDIT: Proper permissions
+				for(var/c in GLOB.admins) //Using testing() here would fill the logs with ADMIN_VV garbage
+					var/client/admin = c
+					if(!check_rights_for(admin, R_ADMIN))
+						continue
+					to_chat(admin, "## TESTING: GC: -- [ADMIN_VV(D)] | [type] was unable to be GC'd --")
 				#endif
 				I.failures++
 

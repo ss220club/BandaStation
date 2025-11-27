@@ -24,12 +24,6 @@
 /obj/effect/mapping_helpers/no_atoms_ontop,
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
-"r" = (
-/obj/structure/sign/nanotrasen{
-	pixel_y = 32
-	},
-/turf/open/misc/asteroid/snow/icemoon,
-/area/icemoon/surface/outdoors/nospawn)
 
 (1,1,1) = {"
 a
@@ -64,7 +58,7 @@ a
 a
 "}
 (3,1,1) = {"
-r
+f
 g
 f
 f

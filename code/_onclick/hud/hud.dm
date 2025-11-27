@@ -239,6 +239,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	throw_icon = null
 	resist_icon = null
 	QDEL_LIST(infodisplay)
+	open_containers = null
 
 	healths = null
 	stamina = null
@@ -346,7 +347,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += infodisplay
 			if(always_visible_inventory.len)
 				screenmob.client.screen += always_visible_inventory
-
+			if(open_containers.len && screenmob == mymob) // Don't show open inventories to ghosts
+				list_clear_nulls(open_containers)
+				screenmob.client.screen += open_containers
 			screenmob.client.screen += toggle_palette
 
 			if(action_intent)
@@ -842,4 +845,4 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 /datum/action_group/listed/refresh_actions()
 	. = ..()
-	owner.palette_actions.refresh_actions() // We effect them, so we gotta refresh em
+	owner?.palette_actions.refresh_actions() // We effect them, so we gotta refresh em

@@ -6,6 +6,7 @@
 	Может быть, парочка рюмочек жидкого очарования поднимут им настроение. Как говорится, если не можешь их победить - присоединись к ним!"
 	key = "beach_bar"
 	map_name = "beach_bar"
+	domain_flags = DOMAIN_NO_NOHIT_BONUS
 
 /datum/lazy_template/virtual_domain/beach_bar/setup_domain(list/created_atoms)
 	. = ..()

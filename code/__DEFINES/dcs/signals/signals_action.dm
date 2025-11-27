@@ -58,6 +58,9 @@
 /// From /datum/action/vehicle/ridden/wheelchair/bell/Trigger():
 #define COMSIG_WHEELCHAIR_BELL_RANG "wheelchair_bell_rang"
 
+/// From /datum/action/cooldown/spell/touch/lay_on_hands/proc/determine_if_this_hurts_instead(), sent to the /mob/living/carbon/hurtguy: (/mob/living/carbon/mendicant)
+#define COMSIG_ON_LAY_ON_HANDS "mob_ability_lay_on_hands"
+
 // BANDASTATION ADD START - SSD INDICATOR
 #define COMSIG_SLIMEMAN_SWAPPED_BODY "slimeman_swapped_body"
 // BANDASTATION ADD END - SSD INDICATOR

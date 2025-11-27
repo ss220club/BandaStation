@@ -51,7 +51,7 @@
 	var/list/base_verbs = list("throw", "toss", "hurl", "chuck", "fling")
 	var/chosen_verb = prob(0.5) ? "yeet" : pick(base_verbs)
 	var/self_throw_verb = ru_attack_verb(chosen_verb)
-	var/visible_throw_verb = ru_attack_verb(plural_s(chosen_verb))
+	var/visible_throw_verb = ru_attack_verb(chosen_verb + plural_s(chosen_verb))
 	// BANDAСТATION EDIT END
 	var/neckgrab_throw = FALSE // we can't check for if it's a neckgrab throw when totaling up power_throw since we've already stopped pulling them by then, so get it early
 	var/frequency_number = 1 //We assign a default frequency number for the sound of the throw.
@@ -161,7 +161,7 @@
 			to_chat(src, span_warning("[offered.p_Theyre()] unable to take anything in [offered.p_their()] current state!"))
 			return
 
-		if(!CanReach(offered))
+		if(!offered.IsReachableBy(src))
 			to_chat(src, span_warning("You have to be beside [offered.p_them()]!"))
 			return
 

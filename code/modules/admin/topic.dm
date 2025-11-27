@@ -929,6 +929,16 @@
 			return
 		M.get_language_holder().open_language_menu(usr)
 
+	else if(href_list["rpreminder"])
+		var/mob/rper = locate(href_list["rpreminder"]) in GLOB.player_list
+		if(QDELETED(rper))
+			return
+		// literally just gives them a sound and a message
+		SEND_SOUND(rper, sound('sound/misc/roleplay.ogg'))
+		to_chat(rper, boxed_message("You hear a nagging voice in your head... [span_hypnophrase("Please roleplay appropriately.")]"))
+		message_admins("[ADMIN_LOOKUPFLW(usr)] reminded [ADMIN_LOOKUPFLW(rper)] to roleplay appropriately.")
+		log_admin("[key_name(usr)] reminded [key_name(rper)] to roleplay appropriately.")
+
 	else if(href_list["traitor"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1280,9 +1290,6 @@
 	else if(href_list["unbanlog"])
 		var/ban_id = href_list["unbanlog"]
 		ban_log(ban_id)
-
-	else if(href_list["beakerpanel"])
-		beaker_panel_act(href_list)
 
 	else if(href_list["reloadpolls"])
 		GLOB.polls.Cut()

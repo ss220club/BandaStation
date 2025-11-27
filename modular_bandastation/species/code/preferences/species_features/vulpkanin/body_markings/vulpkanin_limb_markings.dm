@@ -1,4 +1,4 @@
-/datum/preference/choiced/vulpkanin_limb_markings
+/datum/preference/choiced/species_feature/vulpkanin_limb_markings
 	savefile_key = "feature_vulpkanin_limb_markings"
 	category = PREFERENCE_CATEGORY_FEATURES
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -6,10 +6,10 @@
 	should_generate_icons = TRUE
 	relevant_body_markings = /datum/bodypart_overlay/simple/body_marking/vulpkanin_limb
 
-/datum/preference/choiced/vulpkanin_limb_markings/init_possible_values()
-	return assoc_to_keys_features(SSaccessories.vulpkanin_limb_markings_list)
+/datum/preference/choiced/species_feature/vulpkanin_limb_markings/get_accessory_list()
+	return SSaccessories.feature_list[FEATURE_VULPKANIN_LIMB_MARKINGS]
 
-/datum/preference/choiced/vulpkanin_limb_markings/icon_for(value)
+/datum/preference/choiced/species_feature/vulpkanin_limb_markings/icon_for(value)
 	var/static/list/limb_types = list(
 		/obj/item/bodypart/arm/left/vulpkanin,
 		/obj/item/bodypart/arm/right/vulpkanin,
@@ -48,7 +48,7 @@
 
 	var/datum/universal_icon/final_icon = body.copy()
 	if(value != SPRITE_ACCESSORY_NONE)
-		var/datum/sprite_accessory/body_markings = SSaccessories.vulpkanin_limb_markings_list[value]
+		var/datum/sprite_accessory/body_markings = get_accessory_for_value(value)
 		for(var/obj/item/bodypart/limb_type as anything in limb_types)
 			var/datum/universal_icon/body_marking_icon = uni_icon(body_markings.icon, "[body_markings.icon_state]_[limb_type::body_zone]")
 			body_marking_icon.blend_color(COLOR_VERY_LIGHT_GRAY, ICON_MULTIPLY)
@@ -59,10 +59,10 @@
 
 	return final_icon
 
-/datum/preference/choiced/vulpkanin_limb_markings/apply_to_human(mob/living/carbon/human/target, value)
+/datum/preference/choiced/species_feature/vulpkanin_limb_markings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features[FEATURE_VULPKANIN_LIMB_MARKINGS] = value
 
-/datum/preference/choiced/vulpkanin_limb_markings/compile_constant_data()
+/datum/preference/choiced/species_feature/vulpkanin_limb_markings/compile_constant_data()
 	var/list/data = ..()
 	data[SUPPLEMENTAL_FEATURE_KEY] = /datum/preference/color/vulpkanin_body_markings_color::savefile_key
 	return data

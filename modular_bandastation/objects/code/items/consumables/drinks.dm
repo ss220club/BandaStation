@@ -26,7 +26,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "kvass"
 
-/datum/export/large/reagent_dispenser/kvass
+/datum/export/reagent_dispenser/kvass
 	unit_name = "kvasstank"
 	export_types = list(/obj/structure/reagent_dispensers/kvasstank)
 
