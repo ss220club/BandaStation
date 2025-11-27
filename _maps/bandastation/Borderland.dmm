@@ -432,9 +432,6 @@
 	},
 /area/altam/embassy/main)
 "arS" = (
-/obj/structure/window/reinforced{
-	dir = 8
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
 	},
@@ -690,8 +687,9 @@
 	},
 /area/altam/main_zones/main)
 "aGR" = (
-/obj/structure/cable,
-/obj/structure/cable,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -1855,9 +1853,13 @@
 	},
 /area/awaymission/snowdin/post/mining_main)
 "bFE" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/open/floor/wood{
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -2960,10 +2962,7 @@
 /area/altam/main_zones/main)
 "cxZ" = (
 /obj/machinery/door/airlock/highsecurity,
-/turf/open/floor/wood{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
+/turf/open/floor/iron,
 /area/altam/embassy/main)
 "cyd" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark,
@@ -4800,7 +4799,7 @@
 "ebd" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/structure/cable,
-/turf/closed/wall,
+/turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
 "ebf" = (
 /obj/item/storage/medkit/toxin{
@@ -5555,6 +5554,15 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
+/area/altam/embassy/main)
+"eHQ" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/embassy/main)
 "eHT" = (
 /obj/effect/turf_decal/weather/snow,
@@ -6659,9 +6667,6 @@
 	},
 /area/altam/main_zones/main)
 "fDN" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /obj/item/banner/species/vulpkanin,
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
@@ -6709,6 +6714,9 @@
 "fFg" = (
 /obj/structure/table/glass,
 /obj/item/cigarette/cigar/premium,
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -7972,10 +7980,11 @@
 	},
 /area/altam/main_zones/main)
 "gGi" = (
-/obj/structure/window{
-	dir = 4
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
 	},
-/turf/open/floor/carpet/royalblue{
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -8081,9 +8090,6 @@
 "gJH" = (
 /obj/structure/chair/comfy/blue{
 	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
 	},
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
@@ -9057,6 +9063,15 @@
 /obj/effect/decal/cleanable/greenglow/radioactive,
 /turf/open/floor/vault,
 /area/altam/main_zones/premises)
+"hAg" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/wood{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "hBP" = (
 /obj/effect/spawner/random/engineering/toolbox,
 /turf/open/misc/dirt/dark{
@@ -9734,7 +9749,6 @@
 	},
 /area/altam/main_zones/caves)
 "ioU" = (
-/obj/structure/window/reinforced,
 /obj/item/banner/solgov,
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
@@ -11034,7 +11048,6 @@
 	},
 /area/altam/main_zones/caves)
 "jxe" = (
-/obj/structure/table/reinforced,
 /obj/structure/table/reinforced,
 /obj/machinery/fax/auto_name{
 	pixel_y = 5
@@ -14420,11 +14433,11 @@
 /turf/closed/wall/mineral/wood,
 /area/altam/main_zones/caves)
 "mmi" = (
-/obj/structure/window{
-	dir = 8
-	},
 /obj/structure/chair/sofa/right{
 	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
 	},
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
@@ -14911,6 +14924,16 @@
 	icon_state = "wood_tile"
 	},
 /area/altam/main_zones/main)
+"mFB" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "mGb" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
@@ -15696,9 +15719,6 @@
 /obj/structure/chair/comfy/blue{
 	dir = 4
 	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -15800,9 +15820,13 @@
 /turf/closed/wall/mineral/iron,
 /area/altam/main_zones/premises)
 "nqT" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/open/floor/iron/dark/diagonal,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/open/floor/wood{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/embassy/main)
 "nqY" = (
 /obj/structure/cable,
@@ -17477,10 +17501,8 @@
 	},
 /area/altam/main_zones/main)
 "oXI" = (
-/obj/machinery/door/window/left/directional/west{
-	dir = 2
-	},
 /obj/machinery/light/floor,
+/obj/machinery/door/window/left/directional/south,
 /turf/open/floor/iron/dark/diagonal,
 /area/altam/embassy/main)
 "oXW" = (
@@ -18807,7 +18829,7 @@
 	base_icon_state = "greenerdirt";
 	icon_state = "greenerdirt"
 	},
-/turf/open/misc/asteroid/snow/atmosphere{
+/turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -20633,9 +20655,6 @@
 	},
 /area/altam/main_zones/main)
 "rLY" = (
-/obj/structure/window/reinforced{
-	dir = 8
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
@@ -20667,7 +20686,6 @@
 	},
 /area/altam/main_zones/caves)
 "rNB" = (
-/obj/structure/window/reinforced,
 /obj/item/banner/solgov,
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -21905,14 +21923,15 @@
 /turf/open/floor/plating,
 /area/altam/main_zones/premises)
 "sTq" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/open/floor/vault/rock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+/obj/effect/turf_decal/siding/wood,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/embassy/main)
 "sTz" = (
 /obj/machinery/anomalous_crystal,
 /turf/open/misc/dirt/dark{
@@ -21922,9 +21941,6 @@
 	},
 /area/altam/main_zones/caves)
 "sTB" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
@@ -22480,9 +22496,6 @@
 	},
 /area/altam/main_zones/caves)
 "txU" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
@@ -22610,9 +22623,6 @@
 	},
 /area/altam/embassy/main)
 "tEE" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /obj/item/banner/species/vulpkanin,
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -23034,10 +23044,15 @@
 	},
 /area/altam/main_zones/main)
 "tWZ" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/open/floor/iron,
-/area/altam/main_zones/premises)
+/obj/effect/turf_decal/siding/wood,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "tXj" = (
 /obj/item/stack/ore/diamond,
 /obj/item/stack/ore/diamond,
@@ -23364,10 +23379,11 @@
 /area/altam/main_zones/main)
 "ulL" = (
 /obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/structure/cable,
-/obj/structure/cable,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -24165,11 +24181,11 @@
 	},
 /area/altam/main_zones/main)
 "uVD" = (
-/obj/structure/window{
-	dir = 8
-	},
 /obj/structure/chair/sofa/middle{
 	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
 	},
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
@@ -24179,10 +24195,7 @@
 "uWo" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/structure/cable,
-/turf/open/floor/wood{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
+/turf/open/floor/iron,
 /area/altam/embassy/main)
 "uWB" = (
 /obj/effect/turf_decal/trimline/neutral/tram{
@@ -25768,12 +25781,8 @@
 	},
 /area/altam/main_zones/caves)
 "woW" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/open/floor/carpet/royalblue{
+/obj/structure/window/reinforced,
+/turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -26370,6 +26379,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"wPR" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "wQi" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 1
@@ -26402,11 +26420,11 @@
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
 "wRa" = (
-/obj/structure/window{
-	dir = 8
-	},
 /obj/structure/chair/sofa/left{
 	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
 	},
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
@@ -26593,7 +26611,6 @@
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
 "wZG" = (
-/obj/structure/cable,
 /obj/structure/cable,
 /obj/effect/turf_decal/stripes/white{
 	dir = 4
@@ -58364,7 +58381,7 @@ ozd
 ozd
 uhC
 uhC
-sTq
+kHW
 uhC
 ozd
 ozd
@@ -64550,7 +64567,7 @@ wiB
 wiB
 wiB
 mJI
-det
+ulL
 det
 fKK
 vNS
@@ -65578,7 +65595,7 @@ wiB
 wiB
 wiB
 mJI
-vOU
+wPR
 iPc
 frz
 vNS
@@ -65592,7 +65609,7 @@ rsZ
 rsZ
 rsZ
 uWo
-bFE
+iJU
 wte
 iPc
 eNY
@@ -66854,13 +66871,13 @@ sFz
 wiB
 peH
 vNS
-vOU
 aRC
+vOU
 haA
 gAR
 upS
-aRC
 vOU
+aRC
 fvr
 bRs
 lgR
@@ -67882,16 +67899,16 @@ hcs
 vfb
 peH
 lgR
-plE
-uLx
+gGi
+woW
 tEE
 dou
 mdD
 dou
 rNB
-uLx
-bRs
-lgR
+eHQ
+tWZ
+nqT
 lgR
 qVw
 pUR
@@ -69424,16 +69441,16 @@ saA
 hyW
 peH
 lgR
-plE
-aRC
+mFB
+woW
 fDN
 xNQ
 xNQ
 bKK
 ioU
-aRC
-bRs
-lgR
+eHQ
+sTq
+hAg
 lgR
 qWL
 rac
@@ -70452,13 +70469,13 @@ wiB
 wiB
 peH
 vNS
-vOU
 uLx
+vOU
 haA
 gAR
 upS
-uLx
 vOU
+uLx
 txL
 bRs
 lgR
@@ -70664,7 +70681,7 @@ hfZ
 bfl
 pUD
 cWU
-tWZ
+qbT
 hEN
 vaa
 sFz
@@ -71746,7 +71763,7 @@ wiB
 wiB
 wiB
 mJI
-vOU
+aGR
 iPc
 frz
 rlg
@@ -72774,7 +72791,7 @@ wiB
 wiB
 wiB
 mJI
-bYf
+bFE
 bYf
 iYX
 vNS
@@ -74805,7 +74822,7 @@ jiC
 rka
 rka
 rka
-nqT
+dUJ
 rka
 cDA
 qeQ
@@ -135754,9 +135771,9 @@ vOU
 vNS
 lkC
 lkC
-gGi
-gGi
-gGi
+lkC
+lkC
+lkC
 eNY
 aXm
 aXm
@@ -136009,7 +136026,7 @@ qEo
 eKi
 sMo
 wIH
-ulL
+iYX
 sMo
 bWJ
 bRd
@@ -136268,9 +136285,9 @@ vOU
 vNS
 iru
 yiN
-iPc
+hVC
 fFg
-iPc
+hVC
 eNY
 aXm
 aXm
@@ -137289,7 +137306,7 @@ jvB
 dUJ
 dUJ
 rHl
-aGR
+sMo
 qEo
 wIM
 vOU
@@ -138575,7 +138592,7 @@ dUJ
 dUJ
 hJM
 sMo
-woW
+qEo
 eKi
 sMo
 wIH
