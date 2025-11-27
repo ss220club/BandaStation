@@ -1,8 +1,5 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aaa" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -3389,6 +3386,7 @@
 	})
 "bUu" = (
 /obj/structure/mecha_wreckage/durand,
+/obj/effect/turf_decal/weather/dirt,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -10123,23 +10121,6 @@
 	base_lighting_color = "#C8E4FF";
 	light_color = "#C8E4FF"
 	})
-"fEA" = (
-/obj/item/paper{
-	text = Смерть за тобою, ходит по пятам. Нет тебе спасения, всё узнаешь сам
-	},
-/obj/effect/turf_decal/trimline/yellow/line,
-/turf/open/floor/asphalt{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/awaymission/snowdin/outside{
-	area_has_base_lighting = 1;
-	static_lighting = 1;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF";
-	explosive_resistance = 1
-	})
 "fEJ" = (
 /obj/effect/turf_decal/weather/snow,
 /obj/effect/spawner/random/food_or_drink/donkpockets,
@@ -16125,22 +16106,6 @@
 	static_lighting = 1;
 	base_lighting_color = "#C8E4FF";
 	light_color = "#C8E4FF"
-	})
-"jaN" = (
-/obj/item/pen,
-/obj/effect/turf_decal/weather/snow,
-/obj/effect/turf_decal/trimline/yellow/line,
-/turf/open/floor/asphalt{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/awaymission/snowdin/outside{
-	area_has_base_lighting = 1;
-	static_lighting = 1;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF";
-	explosive_resistance = 1
 	})
 "jbw" = (
 /obj/structure/railing{
@@ -26714,14 +26679,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/awaymission/undergroundoutpost45/caves)
-"oUE" = (
-/obj/item/modular_computer/pda/syndicate{
-	desc = "Небольшой портативный микрокомпьютер, весь исцарапанный и в грязи. Дисплей затёртый и весь в поломанных пикселях. На экране можно разобрать лишь одно сообщение - Груз приняли, но Когти нас поджидали. Переходим к плану Бешеный зверь. Тайник оставляем здесь до лучших времен."
-	},
-/turf/open/misc/dirt/jungle/wasteland{
-	initial_gas_mix = "o2=22;n2=82;TEMP=200"
-	},
-/area/awaymission/undergroundoutpost45/caves)
 "oWt" = (
 /obj/structure/flora/tree/pine/style_2,
 /turf/open/misc/asteroid/snow/atmosphere{
@@ -27094,19 +27051,6 @@
 	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/awaymission/snowdin/outside{
-	area_has_base_lighting = 1;
-	static_lighting = 1;
-	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF";
-	explosive_resistance = 1
-	})
-"phz" = (
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -28086,10 +28030,10 @@
 	explosive_resistance = 1
 	})
 "pLL" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/wood/large{
+/obj/effect/mine/explosive,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -28593,13 +28537,22 @@
 	explosive_resistance = 1
 	})
 "qbC" = (
-/obj/item/paper{
-	text = Привет,Арзунур.Незнаю,найдёшьлитымоюписульку,ноеслида-токаквидишь-мнепришлакрышка.Менявнезапнонастиглитварииокружили,загнаввсамыйуголпещеры,даещёиобвалустроилисвоимрычанием.Незрятымнеговорил,чтобыянесовалсвойносвмертвыйгород-тамиправданичегохорошегонесыщешь,кромепогибели.Забираймоювинтовку-пустьчто-топутноеостанетсяотменянапамять.Надеюсь,тыспомощьюнеёзавершишьнашестобойдело.
+/obj/item/ammo_casing/a762x39/hunting{
+	dir = 6
 	},
-/turf/open/misc/dirt/jungle/wasteland{
-	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
-/area/awaymission/undergroundoutpost45/caves)
+/area/awaymission/snowdin/outside{
+	area_has_base_lighting = 1;
+	static_lighting = 1;
+	base_lighting_color = "#C8E4FF";
+	light_color = "#C8E4FF";
+	explosive_resistance = 1
+	})
 "qbL" = (
 /obj/item/pickaxe/drill,
 /turf/open/misc/ice{
@@ -29364,12 +29317,14 @@
 	explosive_resistance = 1
 	})
 "qyD" = (
-/obj/item/paper{
-	name = "послание абдукторов";
-	desc = Слегка помятый, отсыревший клочок бумаги, на котором написано фиолетовой кровью, похожей на абдукторскую, на ОЧЕНЬ ломанном общегалактическом - Шэст днэй без вада эда, павсюд клык звэри, выпустет плазма шоб согретса, аставит таник справ гара, просем помош...
+/obj/effect/decal/cleanable/blood/gibs/old{
+	icon_state = "floor4"
 	},
-/turf/open/misc/asteroid/snow/ice{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/awaymission/snowdin/outside{
 	area_has_base_lighting = 1;
@@ -30660,6 +30615,7 @@
 "rly" = (
 /obj/effect/decal/cleanable/blood/gibs/robot_debris/down,
 /obj/effect/decal/cleanable/blood/oil,
+/obj/effect/turf_decal/weather/dirt,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -43696,10 +43652,10 @@ hAM
 suR
 suR
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 suR
 suR
@@ -43953,10 +43909,10 @@ suR
 suR
 suR
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 suR
 suR
@@ -44210,10 +44166,10 @@ suR
 suR
 suR
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 suR
 suR
@@ -44467,10 +44423,10 @@ xXU
 suR
 suR
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 hAM
 suR
@@ -44724,10 +44680,10 @@ xXU
 suR
 hAM
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 suR
 suR
@@ -44981,10 +44937,10 @@ xXU
 xXU
 suR
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 suR
 suR
@@ -45238,10 +45194,10 @@ xXU
 xXU
 xXU
 suR
-hAM
+oJS
 uGt
 uGt
-suR
+ylz
 suR
 suR
 suR
@@ -45495,10 +45451,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -45752,10 +45708,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-hAM
+nul
 suR
 xXU
 xXU
@@ -46009,10 +45965,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -46266,10 +46222,10 @@ xXU
 xXU
 xXU
 hAM
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -46523,10 +46479,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+eQa
 suR
 hAM
 xXU
@@ -46780,11 +46736,11 @@ xXU
 xXU
 xXU
 xXU
-suR
+cmy
 uGt
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -47037,11 +46993,11 @@ xXU
 xXU
 xXU
 xXU
-suR
+cmy
 uGt
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -47295,10 +47251,10 @@ xXU
 xXU
 hAM
 suR
-suR
+gaN
 uGt
 uGt
-hAM
+nul
 suR
 xXU
 xXU
@@ -47552,10 +47508,10 @@ xXU
 xXU
 suR
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -47809,10 +47765,10 @@ xXU
 xXU
 suR
 suR
-hAM
+oJS
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -48066,10 +48022,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 hAM
 xXU
 xXU
@@ -48323,10 +48279,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -48580,10 +48536,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 suR
 xXU
 xXU
@@ -48837,10 +48793,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 hAM
 xXU
 xXU
@@ -49094,10 +49050,10 @@ xXU
 xXU
 xXU
 hAM
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 xXU
 xXU
 xXU
@@ -49351,10 +49307,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 xXU
 xXU
 xXU
@@ -49608,10 +49564,10 @@ xXU
 xXU
 xXU
 suR
-suR
+cmy
 uGt
 uGt
-hAM
+nul
 xXU
 xXU
 xXU
@@ -49865,10 +49821,10 @@ xXU
 xXU
 suR
 suR
-suR
+cmy
 uGt
 uGt
-suR
+ylz
 xXU
 xXU
 xXU
@@ -50893,7 +50849,7 @@ xFJ
 suR
 suR
 suR
-suR
+cmy
 bSh
 bSh
 xwG
@@ -51150,7 +51106,7 @@ suR
 suR
 suR
 suR
-kiQ
+pLL
 uGt
 uGt
 uGt
@@ -52179,7 +52135,7 @@ xFJ
 suR
 veT
 gQR
-xon
+qbC
 uSo
 fKV
 uGt
@@ -52694,7 +52650,7 @@ suR
 suR
 ocd
 suR
-chM
+qyD
 uGt
 uGt
 uGt
@@ -53794,11 +53750,11 @@ xXU
 suR
 kmd
 eGD
-phz
+eGD
 uGt
 uGt
 uGt
-pLL
+eGD
 eGD
 qzZ
 xXU
@@ -54051,11 +54007,11 @@ xXU
 hAM
 kmd
 eGD
-phz
+eGD
 uGt
 eHx
 uGt
-pLL
+eGD
 eGD
 qzZ
 xXU
@@ -54291,7 +54247,7 @@ xXU
 xXU
 wAP
 suR
-eNB
+tMT
 uGt
 uGt
 jJu
@@ -54308,11 +54264,11 @@ xXU
 eNB
 qzZ
 eGD
-phz
+eGD
 uGt
 uGt
 uGt
-pLL
+eGD
 eGD
 qzZ
 xXU
@@ -58795,7 +58751,7 @@ xXU
 xXU
 xXU
 hZn
-qbC
+oUo
 jhx
 jhx
 taz
@@ -61409,7 +61365,7 @@ xXU
 ezj
 jhx
 oUo
-oUE
+oUo
 ezj
 ezj
 xXU
@@ -62148,7 +62104,7 @@ xFJ
 egY
 ixu
 dMZ
-jaN
+ljv
 xAQ
 pRe
 suR
@@ -62405,7 +62361,7 @@ qWN
 egY
 ixu
 dMZ
-fEA
+cQE
 vdi
 pRe
 aaF
@@ -70601,7 +70557,7 @@ xXU
 xXU
 suR
 bHu
-qyD
+naC
 naC
 naC
 naC
@@ -140829,7 +140785,7 @@ hAM
 suR
 suR
 suR
-ctg
+suR
 xXU
 xXU
 lcV
@@ -141341,7 +141297,7 @@ bHu
 xXU
 xXU
 suR
-ctg
+suR
 qYe
 lcV
 lcV
