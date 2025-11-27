@@ -10125,7 +10125,7 @@
 	})
 "fEA" = (
 /obj/item/paper{
-	text = Смертьзатобою,ходитпопятам.Неттебеспасения-всёузнаешьсам...
+	text = Смерть за тобою, ходит по пятам. Нет тебе спасения, всё узнаешь сам
 	},
 /obj/effect/turf_decal/trimline/yellow/line,
 /turf/open/floor/asphalt{
