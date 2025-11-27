@@ -44,33 +44,12 @@
 			continue
 		if(S.id != target_id)
 			continue
+		if(require_in_view)
+			var/atom/other_player = S.find_sync_player()
+			if(isnull(other_player) || !(other_player in view(parent)))
+				continue
 		out += S
 	return out
-
-/datum/song/sync_play()
-	if(!multi_sync_enabled)
-		var/list/targets = songs_by_id(id, TRUE)
-		for(var/datum/song/other in targets)
-			if(other.playing)
-				continue
-			transmit_song_to(other)
-			other.force_start_playing()
-		return
-
-	if(!length(multi_tracks))
-		return
-
-	for(var/list/T in multi_tracks)
-		var/target = T["target_id"]
-		if(!istext(target) || !length(target))
-			continue
-		var/delay_beats = max(0, round(T["delay_beats"] || 0))
-		var/delay_ds = delay_beats * ds_per_beat()
-		var/list/targets2 = songs_by_id(target, TRUE)
-		for(var/datum/song/other2 in targets2)
-			if(other2.playing)
-				continue
-			addtimer(CALLBACK(other2, /datum/song/proc/force_start_playing), delay_ds)
 
 /datum/song/proc/try_auto_unison_once()
 	if(playing)
