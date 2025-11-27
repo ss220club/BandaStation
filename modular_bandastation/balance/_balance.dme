@@ -8,6 +8,7 @@
 #include "code/cargo/packs/livestock.dm"
 #include "code/cargo/packs/science.dm"
 #include "code/cargo/packs/security.dm"
+#include "code/containers/reagent_containers.dm"
 #include "code/blob.dm"
 #include "code/crew_manifest.dm"
 #include "code/dynamic.dm"
