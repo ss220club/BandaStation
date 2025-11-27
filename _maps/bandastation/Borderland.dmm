@@ -449,16 +449,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"asn" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/machinery/light/directional/east,
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "asz" = (
 /obj/effect/spawner/random/vending/snackvend,
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -697,7 +687,8 @@
 	},
 /area/altam/main_zones/main)
 "aGR" = (
-/obj/structure/window/reinforced/spawner/directional/east,
+/obj/effect/turf_decal/siding/wood,
+/obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -1541,10 +1532,10 @@
 	},
 /area/altam/main_zones/main)
 "brN" = (
-/obj/structure/window/reinforced{
-	dir = 4
+/obj/structure/closet/crate/freezer/surplus_limbs{
+	pixel_x = -6
 	},
-/obj/structure/closet/crate/freezer/surplus_limbs,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/showroomfloor,
 /area/altam/embassy/main)
 "brR" = (
@@ -1579,9 +1570,7 @@
 /area/altam/embassy/main)
 "bsV" = (
 /obj/structure/sign/flag/syndicate/directional/south,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
 "bth" = (
@@ -1861,7 +1850,7 @@
 	},
 /area/awaymission/snowdin/post/mining_main)
 "bFE" = (
-/obj/structure/window/reinforced/spawner/directional/west,
+/obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -2073,13 +2062,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
-"bPt" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/turf/open/floor/wood{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "bPu" = (
 /obj/machinery/door/airlock/highsecurity,
 /turf/open/floor/iron/showroomfloor,
@@ -2192,16 +2174,6 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"bUc" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/machinery/light/directional/west,
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "bUf" = (
 /obj/effect/spawner/structure/window/hollow/directional,
 /turf/open/floor/plating/reinforced,
@@ -6850,9 +6822,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
 	dir = 9
 	},
-/obj/structure/window/reinforced/plasma{
-	dir = 4
-	},
+/obj/structure/window/reinforced/plasma/spawner/directional/east,
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
@@ -10438,14 +10408,6 @@
 /obj/machinery/photocopier,
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
-"iSt" = (
-/obj/effect/turf_decal/siding/wood,
-/obj/structure/window/reinforced/spawner/directional/north,
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "iSD" = (
 /obj/structure/closet/l3closet/janitor,
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -11235,6 +11197,13 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"jHA" = (
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "jHV" = (
 /turf/closed/wall/mineral/wood,
 /area/altam/main_zones/premises)
@@ -11382,6 +11351,13 @@
 	uses_integrity = 10000
 	},
 /area/altam/medbay)
+"jLY" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "jMc" = (
 /obj/item/banner/species/rakht/mundane,
 /turf/open/misc/dirt/dark{
@@ -13963,13 +13939,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"lTj" = (
-/obj/structure/window/reinforced/spawner/directional/west,
-/turf/open/floor/wood{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "lTz" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -15053,9 +15022,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
 	dir = 4
 	},
-/obj/structure/window/reinforced/plasma{
-	dir = 4
-	},
+/obj/structure/window/reinforced/plasma/spawner/directional/east,
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
@@ -15819,9 +15786,9 @@
 /area/altam/main_zones/premises)
 "nqT" = (
 /obj/effect/turf_decal/siding/wood{
-	dir = 8
+	dir = 1
 	},
-/obj/structure/window/reinforced/spawner/directional/east,
+/obj/machinery/light/directional/west,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -18817,11 +18784,8 @@
 	},
 /area/altam/main_zones/main)
 "qeI" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/structure/window/reinforced/spawner/directional/south,
-/turf/open/floor/wood/tile{
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -19554,6 +19518,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"qOn" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "qOK" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 6
@@ -21911,9 +21885,8 @@
 /turf/open/floor/plating,
 /area/altam/main_zones/premises)
 "sTq" = (
-/obj/effect/turf_decal/siding/wood,
-/obj/structure/window/reinforced/spawner/directional/west,
-/turf/open/floor/wood/tile{
+/obj/structure/window/reinforced/spawner/directional/east,
+/turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -23031,9 +23004,9 @@
 /area/altam/main_zones/main)
 "tWZ" = (
 /obj/effect/turf_decal/siding/wood{
-	dir = 4
+	dir = 1
 	},
-/obj/structure/window/reinforced/spawner/directional/west,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -23364,7 +23337,8 @@
 	},
 /area/altam/main_zones/main)
 "ulL" = (
-/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/siding/wood,
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -24805,9 +24779,7 @@
 	},
 /area/altam/embassy/main)
 "vzR" = (
-/obj/structure/window/reinforced{
-	dir = 8
-	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
 "vzY" = (
@@ -25762,7 +25734,10 @@
 	},
 /area/altam/main_zones/caves)
 "woW" = (
-/obj/structure/window/reinforced/spawner/directional/south,
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -27925,6 +27900,13 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"ydd" = (
+/obj/structure/window/reinforced/spawner/directional/east,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "ydp" = (
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple{
 	dir = 9
@@ -28003,6 +27985,16 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"ygn" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "ygQ" = (
 /obj/structure/altar,
 /turf/open/floor/vault/rock{
@@ -64285,7 +64277,7 @@ mJI
 lgR
 lLp
 iJU
-qeI
+tWZ
 iRS
 ajm
 iPc
@@ -64295,7 +64287,7 @@ trb
 sCf
 iPc
 rmv
-iSt
+aGR
 iJU
 vNS
 eJe
@@ -64539,7 +64531,7 @@ wiB
 wiB
 wiB
 mJI
-nqT
+woW
 det
 fKK
 vNS
@@ -65567,7 +65559,7 @@ wiB
 wiB
 wiB
 mJI
-bFE
+jHA
 iPc
 frz
 vNS
@@ -67871,16 +67863,16 @@ hcs
 vfb
 peH
 lgR
-asn
-woW
+ygn
+jLY
 tEE
 dou
 mdD
 dou
 rNB
-ulL
+bFE
 gGi
-bPt
+sTq
 lgR
 qVw
 pUR
@@ -69413,16 +69405,16 @@ saA
 hyW
 peH
 lgR
-bUc
-woW
+nqT
+jLY
 fDN
 xNQ
 xNQ
 bKK
 ioU
+bFE
 ulL
-sTq
-lTj
+qeI
 lgR
 qWL
 rac
@@ -71735,7 +71727,7 @@ wiB
 wiB
 wiB
 mJI
-aGR
+ydd
 iPc
 frz
 rlg
@@ -72763,7 +72755,7 @@ wiB
 wiB
 wiB
 mJI
-tWZ
+qOn
 bYf
 iYX
 vNS
