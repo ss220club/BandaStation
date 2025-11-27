@@ -11,8 +11,7 @@
 	area_has_base_lighting = 1;
 	static_lighting = 1;
 	base_lighting_color = "#C8E4FF";
-	light_color = "#C8E4FF";
-	explosive_resistance = 1
+	light_color = "#C8E4FF"
 	})
 "aas" = (
 /obj/machinery/light/small/directional/west,
