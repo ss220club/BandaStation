@@ -449,6 +449,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"asn" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "asz" = (
 /obj/effect/spawner/random/vending/snackvend,
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -687,9 +697,7 @@
 	},
 /area/altam/main_zones/main)
 "aGR" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -767,8 +775,8 @@
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/altam/main_zones/premises)
 "aKr" = (
-/obj/structure/window/reinforced,
 /obj/structure/showcase/machinery,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -1853,12 +1861,7 @@
 	},
 /area/awaymission/snowdin/post/mining_main)
 "bFE" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -2070,6 +2073,13 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"bPt" = (
+/obj/structure/window/reinforced/spawner/directional/east,
+/turf/open/floor/wood{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "bPu" = (
 /obj/machinery/door/airlock/highsecurity,
 /turf/open/floor/iron/showroomfloor,
@@ -2182,6 +2192,16 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"bUc" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "bUf" = (
 /obj/effect/spawner/structure/window/hollow/directional,
 /turf/open/floor/plating/reinforced,
@@ -4209,7 +4229,6 @@
 	},
 /area/altam/main_zones/caves)
 "dDu" = (
-/obj/structure/window/reinforced,
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /obj/item/food/grown/tomato{
 	pixel_x = 2;
@@ -4307,6 +4326,7 @@
 /obj/item/food/grown/rice,
 /obj/item/food/grown/rice,
 /obj/item/food/grown/rice,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -4970,10 +4990,10 @@
 /area/altam/main_zones/main)
 "egV" = (
 /obj/structure/table,
-/obj/structure/window/reinforced,
 /obj/machinery/processor{
 	pixel_y = 6
 	},
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -5554,15 +5574,6 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
-/area/altam/embassy/main)
-"eHQ" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
 /area/altam/embassy/main)
 "eHT" = (
 /obj/effect/turf_decal/weather/snow,
@@ -6264,8 +6275,8 @@
 	},
 /area/altam/main_zones/main)
 "flc" = (
-/obj/structure/window/reinforced,
 /obj/machinery/vending/dinnerware,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -6401,19 +6412,17 @@
 /turf/open/floor/iron/dark,
 /area/altam/rakht_base/main)
 "fpM" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/machinery/vending/boozeomat,
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
 "fpR" = (
-/obj/structure/window/reinforced,
 /obj/structure/sink/kitchen/directional/north,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -7980,10 +7989,8 @@
 	},
 /area/altam/main_zones/main)
 "gGi" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/machinery/light/directional/east,
+/obj/effect/turf_decal/siding/wood,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -8639,9 +8646,7 @@
 /obj/machinery/chem_dispenser/drinks/beer{
 	dir = 8
 	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -9063,15 +9068,6 @@
 /obj/effect/decal/cleanable/greenglow/radioactive,
 /turf/open/floor/vault,
 /area/altam/main_zones/premises)
-"hAg" = (
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/turf/open/floor/wood{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "hBP" = (
 /obj/effect/spawner/random/engineering/toolbox,
 /turf/open/misc/dirt/dark{
@@ -9092,7 +9088,7 @@
 	},
 /area/altam/main_zones/main)
 "hEh" = (
-/obj/structure/window/reinforced,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -9294,9 +9290,9 @@
 	},
 /area/altam/main_zones/main)
 "hNX" = (
-/obj/structure/window/reinforced,
 /obj/effect/spawner/random/entertainment/musical_instrument,
 /obj/structure/table/wood,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -10415,9 +10411,6 @@
 	dir = 1
 	},
 /obj/structure/bookcase/random/religion,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -10444,6 +10437,14 @@
 "iRY" = (
 /obj/machinery/photocopier,
 /turf/open/floor/iron/dark/smooth_large,
+/area/altam/embassy/main)
+"iSt" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/structure/window/reinforced/spawner/directional/north,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/embassy/main)
 "iSD" = (
 /obj/structure/closet/l3closet/janitor,
@@ -13962,6 +13963,13 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"lTj" = (
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/wood{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "lTz" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -14924,16 +14932,6 @@
 	icon_state = "wood_tile"
 	},
 /area/altam/main_zones/main)
-"mFB" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/machinery/light/directional/west,
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "mGb" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
@@ -14942,9 +14940,9 @@
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
 "mGd" = (
-/obj/structure/window/reinforced,
 /obj/structure/table/wood,
 /obj/effect/spawner/random/structure/musician,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -15820,10 +15818,11 @@
 /turf/closed/wall/mineral/iron,
 /area/altam/main_zones/premises)
 "nqT" = (
-/obj/structure/window/reinforced{
-	dir = 4
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
 	},
-/turf/open/floor/wood{
+/obj/structure/window/reinforced/spawner/directional/east,
+/turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -17646,9 +17645,7 @@
 /obj/structure/showcase/machinery/microwave{
 	pixel_x = -4
 	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -18820,21 +18817,15 @@
 	},
 /area/altam/main_zones/main)
 "qeI" = (
-/obj/structure/stairs/wood{
+/obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
-/obj/structure/stairs/material{
-	dir = 1;
-	icon = 'icons/turf/floors.dmi';
-	base_icon_state = "greenerdirt";
-	icon_state = "greenerdirt"
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+/obj/structure/window/reinforced/spawner/directional/south,
+/turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/embassy/main)
 "qeQ" = (
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron/dark,
@@ -20010,9 +20001,7 @@
 /obj/machinery/chem_dispenser/drinks{
 	dir = 8
 	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -20126,7 +20115,6 @@
 /obj/effect/turf_decal/siding/wood,
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/east,
-/obj/structure/window/reinforced,
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -21924,9 +21912,7 @@
 /area/altam/main_zones/premises)
 "sTq" = (
 /obj/effect/turf_decal/siding/wood,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -23044,10 +23030,10 @@
 	},
 /area/altam/main_zones/main)
 "tWZ" = (
-/obj/effect/turf_decal/siding/wood,
-/obj/structure/window/reinforced{
+/obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -23378,12 +23364,7 @@
 	},
 /area/altam/main_zones/main)
 "ulL" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -25781,7 +25762,7 @@
 	},
 /area/altam/main_zones/caves)
 "woW" = (
-/obj/structure/window/reinforced,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -26379,15 +26360,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"wPR" = (
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
 "wQi" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 1
@@ -64313,7 +64285,7 @@ mJI
 lgR
 lLp
 iJU
-plE
+qeI
 iRS
 ajm
 iPc
@@ -64323,7 +64295,7 @@ trb
 sCf
 iPc
 rmv
-bRs
+iSt
 iJU
 vNS
 eJe
@@ -64567,7 +64539,7 @@ wiB
 wiB
 wiB
 mJI
-ulL
+nqT
 det
 fKK
 vNS
@@ -65595,7 +65567,7 @@ wiB
 wiB
 wiB
 mJI
-wPR
+bFE
 iPc
 frz
 vNS
@@ -67899,16 +67871,16 @@ hcs
 vfb
 peH
 lgR
-gGi
+asn
 woW
 tEE
 dou
 mdD
 dou
 rNB
-eHQ
-tWZ
-nqT
+ulL
+gGi
+bPt
 lgR
 qVw
 pUR
@@ -69441,16 +69413,16 @@ saA
 hyW
 peH
 lgR
-mFB
+bUc
 woW
 fDN
 xNQ
 xNQ
 bKK
 ioU
-eHQ
+ulL
 sTq
-hAg
+lTj
 lgR
 qWL
 rac
@@ -72452,8 +72424,8 @@ bHu
 mgz
 bHu
 mgz
-qeI
-qeI
+qzm
+qzm
 dwZ
 wiB
 wiB
@@ -72791,7 +72763,7 @@ wiB
 wiB
 wiB
 mJI
-bFE
+tWZ
 bYf
 iYX
 vNS
