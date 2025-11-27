@@ -10496,7 +10496,7 @@
 "dxK" = (
 /obj/structure/sign/painting/large/library_private{
 	dir = 8;
-	pixel_x = 2
+	pixel_x = -3
 	},
 /turf/closed/wall,
 /area/station/service/library)
@@ -10963,6 +10963,12 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/ai/satellite/foyer)
+"dHD" = (
+/obj/structure/sign/painting/library{
+	pixel_x = 6
+	},
+/turf/closed/wall/rust,
+/area/station/service/library)
 "dHL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/old,
@@ -13676,7 +13682,9 @@
 /turf/open/floor/plating,
 /area/station/cargo/warehouse/upper)
 "eCG" = (
-/obj/structure/sign/painting/library_private,
+/obj/structure/sign/painting/library_private{
+	pixel_y = 6
+	},
 /turf/closed/wall,
 /area/station/maintenance/department/crew_quarters/bar)
 "eCU" = (
@@ -32085,7 +32093,6 @@
 "ksr" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/airalarm/directional/east,
 /obj/machinery/camera/directional/east{
 	c_tag = "Port Hallway Chemistry Desk";
 	name = "port camera"
@@ -36442,7 +36449,9 @@
 /turf/open/floor/engine/vacuum,
 /area/station/science/ordnance/burnchamber)
 "lMU" = (
-/obj/structure/sign/painting/library,
+/obj/structure/sign/painting/library{
+	pixel_x = -6
+	},
 /turf/closed/wall/rust,
 /area/station/service/library)
 "lMZ" = (
@@ -38938,7 +38947,9 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard)
 "mCM" = (
-/obj/structure/sign/painting/library,
+/obj/structure/sign/painting/library{
+	pixel_x = 6
+	},
 /turf/closed/wall,
 /area/station/service/library)
 "mCO" = (
@@ -51980,10 +51991,10 @@
 "rbk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/status_display/evac/directional/east,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
+/obj/machinery/airalarm/directional/east,
 /turf/open/floor/iron/dark/corner,
 /area/station/hallway/primary/port)
 "rbn" = (
@@ -52300,7 +52311,9 @@
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/entry)
 "rgD" = (
-/obj/structure/sign/painting/library_secure,
+/obj/structure/sign/painting/library_secure{
+	pixel_x = 6
+	},
 /turf/closed/wall,
 /area/station/service/library)
 "rgY" = (
@@ -64711,6 +64724,12 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"vbJ" = (
+/obj/structure/sign/painting/library{
+	pixel_x = -6
+	},
+/turf/closed/wall,
+/area/station/service/library)
 "vbP" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 8
@@ -99049,7 +99068,7 @@ kKm
 igl
 cml
 rgD
-lMU
+dHD
 mCM
 tdk
 tdk
@@ -100075,7 +100094,7 @@ oCI
 kHR
 kHR
 riQ
-mCM
+vbJ
 lMU
 cml
 dxK
