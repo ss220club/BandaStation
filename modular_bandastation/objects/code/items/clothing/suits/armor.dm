@@ -118,27 +118,41 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/ussp_officer
+	name = "tactical soviet armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, но с чёткими опознавательными знаками командира отряда. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, главное верить и не задавать вопросов."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_command"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/security/ussp_security
+	name = "large tactical soviet armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, с дополнительными наколенниками. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, главное верить и не задавать вопросов."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_security"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/engineer/ussp_engineer
+	name = "tactical soviet utility armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, но с дополнительными инженерными подсумками и бронированием. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, но возможно чуть лучше так как имеет дополнительный слой стали, главное верить."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_engineer"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/medic/ussp_medic
+	name = "tactical soviet medic's armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, но с чёткими опознавательными знаками медика отряда. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, но защиту от военных преступлений не предоставляет."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_medic"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/riot/ussp_riot
 	name = "OMON armor"
+	desc = "Стандартная тактическая противоударная броня бойцов групп быстрого реагирования \"ОМОН\" для подавления беспорядков. \
+		Отлично защищает от колюще-режущих и ударных повреждений. "
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_riot"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
