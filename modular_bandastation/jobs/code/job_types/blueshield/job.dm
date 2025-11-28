@@ -11,7 +11,7 @@
 	exp_requirements = 1800
 	exp_required_type = EXP_TYPE_SECURITY
 	exp_required_type_department = EXP_TYPE_SECURITY
-	exp_granted_type = EXP_TYPE_SECURITY
+	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "BLUESHIELD"
 
 	outfit = /datum/outfit/job/blueshield
