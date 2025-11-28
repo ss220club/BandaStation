@@ -207,6 +207,12 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	return ..()
 
 /obj/machinery/bsa/full/proc/fire(mob/user, turf/bullseye)
+	// BANDASTATION ADDITION: BSA check
+	if(!ready)
+		to_chat(user, span_warning("Индикатор готовности мигает, сигнализируя перезарядку орудия."))
+		return
+	// BANDASTATION ADDITION: End
+
 	reload()
 
 	var/turf/point = get_front_turf()
