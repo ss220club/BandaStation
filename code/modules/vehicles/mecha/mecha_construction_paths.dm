@@ -842,6 +842,7 @@
 			"action" = ITEM_DELETE,
 			"back_key" = TOOL_WELDER,
 			"desc" = "The external armor is welded, and the <b>mech power core</b> socket is open.",
+			"icon_state" = "phazon25",
 			"forward_message" = "inserted mech power core",
 			"backward_message" = "cut off external armor"
 		),

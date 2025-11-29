@@ -10,8 +10,9 @@
 	spawn_positions = 1
 	minimal_player_age = 7
 	supervisors = JOB_CAPTAIN_RU
+	exp_requirements = 1200
 	exp_required_type_department = EXP_TYPE_SUPPLY
-	exp_granted_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "QUARTERMASTER"
 
 	outfit = /datum/outfit/job/quartermaster
