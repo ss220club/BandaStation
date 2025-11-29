@@ -343,7 +343,7 @@
 "yC" = (
 /obj/structure/disposalpipe/segment,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "zq" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -494,7 +494,7 @@
 	dir = 5
 	},
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "NH" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,

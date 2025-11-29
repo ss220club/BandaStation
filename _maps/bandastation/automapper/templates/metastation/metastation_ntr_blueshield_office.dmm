@@ -313,7 +313,7 @@
 "yx" = (
 /obj/machinery/holopad,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "zz" = (
 /turf/closed/wall/r_wall,
 /area/station/command/heads_quarters/nanotrasen_representative)
