@@ -1,0 +1,4 @@
+author: "CallmeHouston"
+delete-after: True
+changes:
+  - bugfix: "Токсин мутации в таяр можно снова получить через зеленые экстракты в ксено, добавив cream в них"
