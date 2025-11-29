@@ -234,6 +234,9 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ZAP_DEFAULT_FLAGS ZAP_MOB_STUN | ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE
 #define ZAP_FUSION_FLAGS ZAP_OBJ_DAMAGE | ZAP_MOB_DAMAGE | ZAP_MOB_STUN
 #define ZAP_SUPERMATTER_FLAGS ZAP_GENERATES_POWER
+// BANDASTATION ADDITION: Tesla Rework
+#define ZAP_TESLA_FLAGS ZAP_MOB_STUN | ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE | ZAP_GENERATES_POWER
+// BANDASTATION ADDITION: END
 
 ///Object will protect itself.
 #define EMP_PROTECT_SELF (1<<0)
@@ -359,7 +362,3 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define EMPATH_SEE_COLD (1<<7)
 /// Can the empath see if living mob has the fundamentally evil trait
 #define EMPATH_SEE_EVIL (1<<8)
-
-// Flags for using your static for a ghost role
-#define GHOSTROLE_ALLOW_SPECIES (1<<0)
-#define GHOSTROLE_ALLOW_OTHER (1<<1)

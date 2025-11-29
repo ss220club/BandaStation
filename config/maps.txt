@@ -45,6 +45,11 @@ map cyberiad
 	votable
 endmap
 
+map kilostation
+	maxplayers 40
+	votable
+endmap
+
 # Debug-only maps.
 
 map gateway_test

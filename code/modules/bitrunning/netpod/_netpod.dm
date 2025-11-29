@@ -1,5 +1,5 @@
 #define BASE_DISCONNECT_DAMAGE 40
-
+#define SCANNING_TOGGLE_COOLDOWN 5
 
 /obj/machinery/netpod
 	name = "netpod"
@@ -26,6 +26,10 @@
 	var/disconnect_damage
 	/// Static list of outfits to select from
 	var/list/cached_outfits = list()
+	/// Whether bit avatars become visually similar to their bitrunner on first creation
+	var/copy_body = FALSE
+	/// The next time copy_body can be toggled
+	var/scanning_can_toggle = 0
 
 
 /obj/machinery/netpod/post_machine_initialize()
@@ -53,21 +57,21 @@
 
 	if(isnull(held_item))
 		context[SCREENTIP_CONTEXT_LMB] = "Выбрать одежду"
-		return CONTEXTUAL_SCREENTIP_SET
+	else
+		if(held_item.tool_behaviour == TOOL_SCREWDRIVER && !occupant && !state_open)
+			context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 
-	if(held_item.tool_behaviour == TOOL_SCREWDRIVER && !occupant && !state_open)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
-		return CONTEXTUAL_SCREENTIP_SET
-
-	if(held_item.tool_behaviour == TOOL_CROWBAR)
-		if(isnull(occupant))
-			if(panel_open)
-				context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
+		if(held_item.tool_behaviour == TOOL_CROWBAR)
+			if(isnull(occupant))
+				if(panel_open)
+					context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
+				else
+					context[SCREENTIP_CONTEXT_LMB] = "[state_open ? "Открыть" : "Закрыть"] кожух"
 			else
-				context[SCREENTIP_CONTEXT_LMB] = "[state_open ? "Закрыть" : "Открыть"] заслонку"
-		else
-			context[SCREENTIP_CONTEXT_LMB] = "Вскрыть"
-		return CONTEXTUAL_SCREENTIP_SET
+				context[SCREENTIP_CONTEXT_LMB] = "Выломать"
+
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "[copy_body ? "Выключить" : "Включить"] скан"
+	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/netpod/examine(mob/user)
 	. = ..()
@@ -87,7 +91,10 @@
 	if(!isobserver(user))
 		. += span_infoplain("Перетащите себя на под, чтобы начать подключение.")
 		. += span_infoplain("Под имеет ограниченные возможности реанимации. Нахождение в поде может вылечить некоторые ранения.")
-		. += span_infoplain("Имеется система безопасности, оповещающая пользователя, если начнется вмешательство с подом.")
+		. += span_infoplain("Имеется система безопасности, оповещающая пользователя, если начнётся вмешательство с подом.")
+		if(copy_body)
+			. += span_infoplain("В настоящее время включено сканирование пользователя, благодаря чему аватары будут выглядят как пользователь при первом его создании.")
+		. += span_infoplain("Alt-click to [copy_body ? "выключить" : "включить"] сканирование пользователя.")
 
 	if(isnull(occupant))
 		. += span_infoplain("Сейчас внутри пусто.")
@@ -149,5 +156,14 @@
 
 	disconnect_damage = BASE_DISCONNECT_DAMAGE * (1 - source.servo_bonus)
 
+/obj/machinery/netpod/click_alt(mob/user)
+	if(world.time < scanning_can_toggle)
+		return CLICK_ACTION_BLOCKING
+	copy_body = !copy_body
+	scanning_can_toggle = world.time + SCANNING_TOGGLE_COOLDOWN
+	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+	user.balloon_alert_to_viewers(user, "scanning [copy_body ? "enabled" : "disabled"]")
+	return CLICK_ACTION_SUCCESS
 
 #undef BASE_DISCONNECT_DAMAGE
+#undef SCANNING_TOGGLE_COOLDOWN
