@@ -1,6 +1,6 @@
 import { binaryInsertWith } from 'common/collections';
 import { sortBy } from 'es-toolkit';
-import type { ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Stack } from 'tgui-core/components';
 
@@ -67,15 +67,33 @@ export function GamePreferencesPage(props) {
     );
   }
 
-  const gamePreferenceEntries: [string, PreferenceChild[]][] = sortByName(
+  const [searchText, setSearchText] = useState('');
+
+  const gamePreferenceEntries: [string, ReactNode[]][] = sortByName(
     Object.entries(gamePreferences),
   ).map(([category, preferences]) => {
-    return [category, preferences.map((entry) => entry)];
+    return [
+      category,
+      preferences
+        .filter((entry) => {
+          return (
+            !searchText ||
+            searchText.length < 2 ||
+            entry.name.toLowerCase().includes(searchText.toLowerCase())
+          );
+        })
+        .map((entry) => entry.children),
+    ];
   });
 
   return (
-    <Stack fill vertical>
-      <TabbedMenu categories={gamePreferenceEntries} />
-    </Stack>
+    <TabbedMenu
+      categoryEntries={gamePreferenceEntries}
+      contentProps={{
+        fontSize: 1.5,
+      }}
+      searchText={searchText}
+      setSearchText={setSearchText}
+    />
   );
 }

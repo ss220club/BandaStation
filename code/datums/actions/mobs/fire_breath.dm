@@ -77,7 +77,7 @@
 		to_chat(barbecued, span_userdanger("Вы заморожены ледяным дыханием [source]!"))
 	else
 		to_chat(barbecued, span_userdanger("Вас подожгло огненное дыхание [source]!"))
-	barbecued.adjustFireLoss(fire_damage)
+	barbecued.adjust_fire_loss(fire_damage)
 
 /// Shoot three lines of fire in a sort of fork pattern approximating a cone
 /datum/action/cooldown/mob_cooldown/fire_breath/cone
