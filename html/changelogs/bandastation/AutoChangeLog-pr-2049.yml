@@ -1,0 +1,4 @@
+author: "CallmeHouston"
+delete-after: True
+changes:
+  - bugfix: "Фазон теперь при строительстве на предпоследнем этапе не становится прозрачным"
