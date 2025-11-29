@@ -768,13 +768,12 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 27)
 
 // BANDASTATION ADDITION: Airalarm duplicating name fix
 /obj/machinery/airalarm/proc/update_zone_name()
-    var/static/list/base_names = ru_names_toml(initial(name))
-    var/base_name = base_names[NOMINATIVE] || initial(name)
-    var/area/current_area = get_area(src)
-    if(!current_area)
-        name = base_name
-        return
-    name = "[base_name] [current_area.declent_ru(GENITIVE)]"
+	var/base_name = initial(name) // air alarm
+	var/area/current_area = get_area(src)
+	if(!current_area)
+		name = base_name
+		return
+	name = "[base_name] [current_area.declent_ru(GENITIVE)]"
 // BANDASTATION ADDITION: End
 
 #undef AIRALARM_WARNING_COOLDOWN
