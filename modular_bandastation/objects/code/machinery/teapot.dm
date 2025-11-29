@@ -95,7 +95,7 @@
 		. += span_notice("Машина может быть [EXAMINE_HINT("откручена")].")
 	else
 		. += span_warning("Машина должна быть [EXAMINE_HINT("прикручена")] к полу для работы.")
-	. += span_notice("Панель обслуживания может быть [EXAMINE_HINT(panel_open ? "привинчина" : "отвинчина")].")
+	. += span_notice("Панель обслуживания может быть [EXAMINE_HINT("отвинчина")].")
 	if(panel_open)
 		. += span_notice("Машина может быть [EXAMINE_HINT("разобрана")] при помощи лома.")
 
