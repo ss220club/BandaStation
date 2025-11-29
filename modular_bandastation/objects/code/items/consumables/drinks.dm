@@ -581,7 +581,7 @@
 
 /datum/reagent/consumable/slimetea
 	name = "Slimetea"
-	description = "Странная жидкость, слегка студинистая, в которой плавают ягоды, но пахнет вкусно."
+	description = "Странная жидкость, слегка студенистая, в которой плавают ягоды, но пахнет вкусно."
 	color = "#22e46c"
 	taste_description = "яблочный джем с черникой и чаем"
 	nutriment_factor = 1
@@ -592,7 +592,7 @@
 /datum/glass_style/drinking_glass/slimetea
 	required_drink_type = /datum/reagent/consumable/slimetea
 	name = "Slimetea"
-	desc = "Стакан с студинистой жидкостью. внутри которой плавают ягоды."
+	desc = "Стакан с студенистой жидкостью. внутри которой плавают ягоды."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "slimetea"
 
@@ -624,7 +624,7 @@
 /datum/glass_style/drinking_glass/glace
 	required_drink_type = /datum/reagent/consumable/glace
 	name = "Glace"
-	desc = "Стакан доверху заполненный мороженным, который плавает на кофе."
+	desc = "Стакан доверху заполненный мороженым, который плавает на кофе."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
 	icon_state = "glace"
 
@@ -728,7 +728,7 @@
 	name = "Mokko"
 	description = "Изящный кофе для распития, сидя в капитанском кресле."
 	color = "#57361b"
-	taste_description = "капучинно с взбитыми сливками и шоколадной крошкой"
+	taste_description = "капучинно со взбитыми сливками и шоколадной крошкой"
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_NICE
@@ -755,7 +755,7 @@
 	name = "Frappuchino"
 	description = "Холодный кофе со льдом, который вы уже где-то видели..."
 	color = "#bb8960"
-	taste_description = "мороженное с кофе, столь холодный, что зубы сводит"
+	taste_description = "мороженое с кофе, столь холодный, что зубы сводит"
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_GOOD
