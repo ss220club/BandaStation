@@ -99,8 +99,9 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		set_panel_open(TRUE)
 
 	if(name == initial(name))
-		var/area/current_area = get_area(src)
-		name = "[declent_ru(NOMINATIVE)] [current_area.declent_ru(GENITIVE)]"
+		update_zone_name() // BANDASTATION ADDITION
+		/*var/area/current_area = get_area(src) // BANDASTATION REMOVAL
+		name = "[declent_ru(NOMINATIVE)] [current_area.declent_ru(GENITIVE)]"*/
 
 	tlv_collection = list()
 	tlv_collection["pressure"] = new /datum/tlv/pressure
@@ -177,12 +178,14 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 	. = ..()
 
 	my_area = connected_sensor ? get_area(connected_sensor) : area_to_register
+	update_zone_name() // BANDASTATION ADDITION: Airalarm duplicating name fix
 	update_appearance()
 
 /obj/machinery/airalarm/update_name(updates)
 	. = ..()
-	var/area/current_area = get_area(src)
-	name = "[declent_ru(NOMINATIVE)] [current_area.declent_ru(GENITIVE)]"
+	/*var/area/current_area = get_area(src) BANDASTATION REMOVAL
+	name = "[declent_ru(NOMINATIVE)] [current_area.declent_ru(GENITIVE)]"*/
+	update_zone_name() // BANDASTATION ADDITION
 
 /obj/machinery/airalarm/on_exit_area(datum/source, area/area_to_unregister)
 	//we cannot unregister from an area we never registered to in the first place
@@ -762,5 +765,15 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 27)
 
 	update_appearance()
 	update_name()
+
+// BANDASTATION ADDITION: Airalarm duplicating name fix
+/obj/machinery/airalarm/proc/update_zone_name()
+	var/base_name = initial(name) // air alarm
+	var/area/current_area = get_area(src)
+	if(!current_area)
+		name = base_name
+		return
+	name = "[base_name] [current_area.declent_ru(GENITIVE)]"
+// BANDASTATION ADDITION: End
 
 #undef AIRALARM_WARNING_COOLDOWN
