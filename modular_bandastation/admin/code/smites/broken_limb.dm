@@ -13,7 +13,7 @@
 	var/blunt_choice = tgui_input_list(user,
 		"Какой тип перелома необходим?",
 		"Тип перелома?",
-		list(CHOICE_SEVERE_TYPE, CHOICE_CRITICAL_TYPE, CHOICE_MODERATE_TYPE))
+		list(CHOICE_CRITICAL_TYPE, CHOICE_SEVERE_TYPE, CHOICE_MODERATE_TYPE))
 	blunt_type = blunt_choice
 
 	if(!blunt_choice)
@@ -31,15 +31,16 @@
 	. = ..()
 
 	if (!iscarbon(target))
-		to_chat(user, span_warning("This must be used on a carbon mob."), confidential = TRUE)
+		to_chat(user, span_warning("Этот смайт можно использовать только на карбонах."), confidential = TRUE)
 		return
 
 	var/mob/living/carbon/carbon_target = target
 	var/obj/item/bodypart/bodypart = carbon_target.get_bodypart(targeted_limb)
 	if(!IS_ORGANIC_LIMB(bodypart))
+		to_chat(user, span_warning("У цели нет выбранной органической части тела или она не является органической."), confidential = TRUE)
 		return FALSE
-	var/severity = blunt_type == CHOICE_SEVERE_TYPE ? 2 : \
-					blunt_type == CHOICE_MODERATE_TYPE ? 1 : 3
+	var/severity = blunt_type == CHOICE_SEVERE_TYPE ? WOUND_SEVERITY_SEVERE : \
+					blunt_type == CHOICE_MODERATE_TYPE ? WOUND_SEVERITY_MODERATE : WOUND_SEVERITY_CRITICAL
 	carbon_target.cause_wound_of_type_and_severity(WOUND_BLUNT, bodypart, severity)
 
 #undef CHOICE_SEVERE_TYPE
