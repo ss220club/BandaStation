@@ -15,6 +15,7 @@
 		"Тип перелома?",
 		list(CHOICE_SEVERE_TYPE, CHOICE_CRITICAL_TYPE, CHOICE_MODERATE_TYPE))
 	blunt_type = blunt_choice
+
 	if(!blunt_choice)
 		return FALSE
 	var/limb_selection_choice = tgui_input_list(user,
@@ -44,3 +45,5 @@
 #undef CHOICE_SEVERE_TYPE
 #undef CHOICE_MODERATE_TYPE
 #undef CHOICE_CRITICAL_TYPE
+#undef ALL_BODYTYPES
+#undef ALL_LIMBS
