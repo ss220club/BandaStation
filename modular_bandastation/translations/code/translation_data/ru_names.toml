@@ -12589,12 +12589,12 @@ prepositional = "реактивной маскирующей броне"
 gender = "female"
 
 ["reactive tesla armor"]
-nominable = "реактивная броня Теслы"
-genitive = "реактивной брони Теслы"
-dative = "реактивной броне Теслы"
-accusative = "реактивную броню Теслы"
-instrumental = "реактивной бронёй Теслы"
-prepositional = "реактивной броне Теслы"
+nominative = "реактивная Тесла броня"
+genitive = "реактивной Тесла брони"
+dative = "реактивной Тесла броне"
+accusative = "реактивную Тесла броню"
+instrumental = "реактивной Тесла бронёй"
+prepositional = "реактивной Тесла броне"
 gender = "female"
 
 ["reactive repulse armor"]
