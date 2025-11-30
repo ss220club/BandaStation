@@ -1,6 +1,6 @@
-#define CHOICE_SEVERE_TYPE "Severe"
-#define CHOICE_MODERATE_TYPE "Moderate"
-#define CHOICE_CRITICAL_TYPE "Critical"
+#define CHOICE_CRITICAL_TYPE "Открытый перелом"
+#define CHOICE_SEVERE_TYPE "Закрытый перелом"
+#define CHOICE_MODERATE_TYPE "Вывих конечности"
 #define ALL_BODYTYPES list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 #define ALL_LIMBS list(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 
@@ -44,8 +44,8 @@
 					blunt_type == CHOICE_MODERATE_TYPE ? WOUND_SEVERITY_MODERATE : WOUND_SEVERITY_CRITICAL
 	carbon_target.cause_wound_of_type_and_severity(WOUND_BLUNT, bodypart, severity)
 
+#undef CHOICE_CRITICAL_TYPE
 #undef CHOICE_SEVERE_TYPE
 #undef CHOICE_MODERATE_TYPE
-#undef CHOICE_CRITICAL_TYPE
 #undef ALL_BODYTYPES
 #undef ALL_LIMBS
