@@ -23,7 +23,7 @@
 
 /datum/personality/department/analytical
 	savefile_key = "analytical"
-	name = "Аналитический"
+	name = "Аналитик"
 	desc = "При принятии решений я склонен действовать более отстранённо и объективно."
 	neut_gameplay_desc = "Предпочитает работать в структурированных системах, таких как инженерия, наука или медицина"
 	applicable_areas = list(
