@@ -377,7 +377,7 @@
 "FW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "HO" = (
 /obj/machinery/fax{
 	fax_name = "Nanotrasen Representative's Office";
@@ -485,7 +485,7 @@
 "Se" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "SA" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/shutters/preopen{
