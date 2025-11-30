@@ -1,5 +1,5 @@
 /datum/quirk/no_taste
-	name = "Ageusia"
+	name = "Агевзия"
 	desc = "Вы не сможете ничего попробовать на вкус! Токсичная пища всё еще может отравить вас."
 	icon = FA_ICON_MEH_BLANK
 	value = 0

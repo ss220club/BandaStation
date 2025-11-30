@@ -1,5 +1,5 @@
 /datum/quirk/selfaware
-	name = "Self-Aware"
+	name = "Самосознающий"
 	desc = "Вы хорошо знаете свое тело и можете точно оценить тяжесть полученных ран."
 	icon = FA_ICON_BONE
 	value = 8

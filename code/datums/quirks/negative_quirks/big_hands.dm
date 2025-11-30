@@ -1,5 +1,5 @@
 /datum/quirk/bighands
-	name = "Big Hands"
+	name = "Большие руки"
 	desc = "У вас большие руки, и это затрудняет использование многих вещей."
 	icon = FA_ICON_HAND_DOTS
 	value = -6

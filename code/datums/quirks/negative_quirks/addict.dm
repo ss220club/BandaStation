@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/addict
-	name = "Addict"
+	name = "Зависимый"
 	desc = "Вы зависимы от того, чего не существует. Страдайте."
 	gain_text = span_danger("Вы вдруг почувствовали тягу к... чему-то? Вы не уверены, к чему конкретно.")
 	medical_record_text = "У пациента есть зависимость к чему-то, но он отказывается говорить, к чему конкретно."
@@ -81,7 +81,7 @@
 			human_holder.last_mind?.add_addiction_points(addiction, 1000) ///Max that shit out
 
 /datum/quirk/item_quirk/addict/junkie
-	name = "Junkie"
+	name = "Наркоман"
 	desc = "Вы не можете перестать употреблять тяжелые наркотики."
 	icon = FA_ICON_PILLS
 	value = -6
@@ -108,7 +108,7 @@
 			quirk_holder.mind.remove_addiction_points(addiction_type, MAX_ADDICTION_POINTS)
 
 /datum/quirk/item_quirk/addict/smoker
-	name = "Smoker"
+	name = "Курильщик"
 	desc = "Иногда вам очень хочется закурить. Возможно, это не очень полезно для ваших легких."
 	icon = FA_ICON_SMOKING
 	value = -4
@@ -166,7 +166,7 @@
 			quirk_holder.add_mood_event("wrong_cigs", /datum/mood_event/wrong_brand)
 
 /datum/quirk/item_quirk/addict/alcoholic
-	name = "Alcoholic"
+	name = "Алкоголик"
 	desc = "Вы просто не можете жить без алкоголя. Ваша печень - это машина, которая превращает этанол в ацетальдегид."
 	icon = FA_ICON_WINE_GLASS
 	value = -4

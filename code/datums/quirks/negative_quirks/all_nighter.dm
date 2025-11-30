@@ -1,7 +1,7 @@
 #define SLEEP_BANK_MULTIPLIER 10
 
 /datum/quirk/all_nighter
-	name = "All Nighter"
+	name = "Бессонник"
 	desc = "Вы заметно не выспались прошлой ночью! У вас постоянно будет плохое настроение, а спать будете дольше. Стимуляторы или сон могут помочь."
 	icon = FA_ICON_MOON
 	value = -4

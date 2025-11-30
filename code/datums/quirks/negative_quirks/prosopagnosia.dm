@@ -1,5 +1,5 @@
 /datum/quirk/prosopagnosia
-	name = "Prosopagnosia"
+	name = "Прозопагнозия"
 	desc = "У вас психическое расстройство, из-за которого вы вообще не можете распознавать лица."
 	icon = FA_ICON_USER_SECRET
 	value = -4

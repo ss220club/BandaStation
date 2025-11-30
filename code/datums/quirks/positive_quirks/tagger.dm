@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/tagger
-	name = "Tagger"
+	name = "Графитчик"
 	desc = "Вы опытный художник. Люди будут впечатлены вашим граффити, а вы сможете использовать в два раза больше краски для рисования."
 	icon = FA_ICON_SPRAY_CAN
 	value = 4

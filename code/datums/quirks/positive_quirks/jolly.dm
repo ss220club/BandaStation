@@ -1,5 +1,5 @@
 /datum/quirk/jolly
-	name = "Jolly"
+	name = "Весёлый"
 	desc = "Иногда вы просто чувствуете себя счастливым без всякой причины."
 	icon = FA_ICON_GRIN
 	value = 4

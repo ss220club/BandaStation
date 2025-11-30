@@ -1,5 +1,5 @@
 /datum/quirk/strong_stomach
-	name = "Strong Stomach"
+	name = "Крепкий желудок"
 	desc = "Вы можете есть еду находящуюся на земле без последствий в виде болезни, а рвота влияет на вас меньше."
 	icon = FA_ICON_FACE_GRIN_BEAM_SWEAT
 	value = 4
