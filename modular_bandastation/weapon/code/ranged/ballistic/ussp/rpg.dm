@@ -2,7 +2,7 @@
 	name = "RPG-70"
 	desc = "Ручной общецелевой гранатомет многоразового применения. На трубке нанесена стрелка, указывающая на переднюю часть пусковой установки, \
 		а также надпись «Передней частью в сторону врага». Наклейка на задней части пусковой установки предупреждает: \
-        «НЕ ВСТАВАТЬ ЗА ГРАНАТОМЕТОМ ПЕРЕД ВЫСТРЕЛОМ», что бы это ни значило."
+		«НЕ ВСТАВАТЬ ЗА ГРАНАТОМЕТОМ ПЕРЕД ВЫСТРЕЛОМ», что бы это ни значило."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/inhands_64_right.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/inhands_64_left.dmi'
