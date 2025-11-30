@@ -896,35 +896,3 @@
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
 
-/datum/reagent/consumable/lavender_raf
-	name = "Lavender ruff"
-	description = "Напиток для тех, кто обожает ИИ и разработку."
-	color = "#be30e9"
-	taste_description = "кофе со сливками и вкусом сушенной лаванды"
-	nutriment_factor = 1
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	quality = DRINK_NICE
-	glass_price = DRINK_PRICE_STOCK
-
-/datum/glass_style/drinking_glass/lavender_raf
-	required_drink_type = /datum/reagent/consumable/lavender_raf
-	name = "Lavender ruff"
-	desc = "Напиток для тех, кто обожает ИИ и разработку."
-	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
-	icon_state = "lavender_raf"
-
-/datum/chemical_reaction/drink/lavender_raf
-	results = list(/datum/reagent/consumable/lavender_raf = 5)
-	required_reagents = list(
-		/datum/reagent/toxin/coffeepowder = 2,
-		/datum/reagent/consumable/nutriment = 1,
-		/datum/reagent/consumable/cream = 2,
-
-	)
-	required_temp = 333
-
-/datum/reagent/consumable/lavender_raf/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
-	. = ..()
-	if(SPT_PROB(10, seconds_per_tick))
-		drinker.say(pick("Не кофе — а вайб в кружке","С этим кофе даже дедлайн выглядит как фича","Для тех, кто уже сделал гит коммит доброе утро","Мой дейли стэнд-ап внутри"))
-
