@@ -683,9 +683,9 @@
 	affected_mob.add_mood_event("tweaking", /datum/mood_event/stimulant_medium)
 	affected_mob.AdjustAllImmobility(-10 * REM * seconds_per_tick)
 	var/need_mob_update
-	need_mob_update = affected_mob.adjustStaminaLoss(-1 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	need_mob_update = affected_mob.adjust_stamina_loss(-1 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
 	affected_mob.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
-	need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_HEART, (rand(1,3) * REM * seconds_per_tick)/5, required_organ_flag = affected_organ_flags)
+	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(1,3) * REM * seconds_per_tick)/5, required_organ_flag = affected_organ_flags)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
 	if(SPT_PROB(2.5, seconds_per_tick))
@@ -891,7 +891,7 @@
 	if(SPT_PROB(10, seconds_per_tick))
 		drinker.say(pick("Эх, раз, ещё раз, ещё много-много раз!","Марсианский централ, ветер северный!","Мурка, ты мой мурёночек…","За решёткой мостика не видать..."))
 	var/need_mob_update
-	need_mob_update = drinker.adjustStaminaLoss(2 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	need_mob_update = drinker.adjust_stamina_loss(2 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
 	drinker.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
