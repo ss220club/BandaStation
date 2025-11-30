@@ -43,6 +43,9 @@
 		Лазерная этикетка предупреждает пользователей о необходимости остерегаться ударной волны от дульного тормоза... \
 		и не стрелять без опоры, если человек не имеет достаточной силы, чтобы \"справиться\" с отдачей."
 
+/obj/item/gun/ballistic/automatic/wylom/no_mag
+	spawnwithmagazine = FALSE
+
 /obj/item/gun/ballistic/automatic/wylom/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 2)
@@ -57,3 +60,6 @@
 /obj/item/gun/ballistic/automatic/wylom/bulpup/examine_more(mob/user)
 	. = ..()
 	. += "Эта модель \"Wyłom\" сделана в компоновке булпап, что серьезно снизило отдачу и повысило точность взамен удобства пользования."
+
+/obj/item/gun/ballistic/automatic/wylom/bulpup/no_mag
+	spawnwithmagazine = FALSE

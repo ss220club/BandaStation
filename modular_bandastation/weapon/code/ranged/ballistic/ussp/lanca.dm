@@ -45,6 +45,11 @@
 /obj/item/gun/ballistic/automatic/lanca/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 1.5)
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/automatic/lanca/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/lanca/no_mag
 	spawnwithmagazine = FALSE
@@ -61,3 +66,6 @@
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "lanca_army"
 	fire_delay = 1 SECONDS
+
+/obj/item/gun/ballistic/automatic/lanca/army/no_mag
+	spawnwithmagazine = FALSE

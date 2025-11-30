@@ -103,7 +103,6 @@
 		в неудобных условиях близкого боя для высокоточного оружия. Из-за уменьшенного пространства между компонентами \"Ворон\" нельзя обрезать \
 		срезание любой части этого оружия, по сути, сделает его либо опасным для стрельбы, либо нефункциональным."
 
-
 /obj/item/gun/ballistic/rifle/krov/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 1.5)
@@ -111,9 +110,8 @@
 /obj/item/gun/ballistic/rifle/krov/add_bayonet_point()
 	AddComponent(/datum/component/bayonet_attachable, offset_x = 35, offset_y = 12)
 
-/obj/item/gun/ballistic/rifle/krov/empty
+/obj/item/gun/ballistic/rifle/krov/no_mag
 	bolt_locked = TRUE // so the bolt starts visibly open
-	spawn_magazine_type = /obj/item/ammo_box/magazine/strilka310/starts_empty
 
 /obj/item/gun/ballistic/rifle/sks
 	desc = "Возрождение старинной полуавтоматической винтовки СКС, переработанной для использования патронов калибра .310 Стрилка. \
@@ -129,6 +127,7 @@
 	projectile_damage_multiplier = 1
 
 /obj/item/gun/ballistic/rifle/sks/c762x54mmr/empty
+	bolt_locked = TRUE
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/sks/c762x54mmr/empty
 
 /obj/item/gun/ballistic/rifle/boltaction/mosin
@@ -171,6 +170,7 @@
 	can_jam = TRUE
 
 /obj/item/gun/ballistic/rifle/boltaction/mosin/empty
+	bolt_locked = TRUE
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/empty
 
 /obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310
@@ -179,4 +179,5 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka
 
 /obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310/empty
+	bolt_locked = TRUE
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka/empty

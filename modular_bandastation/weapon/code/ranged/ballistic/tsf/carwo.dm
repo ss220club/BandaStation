@@ -27,6 +27,10 @@
 	recoil = 0.4
 	obj_flags = UNIQUE_RENAME
 
+/obj/item/gun/ballistic/automatic/carwo/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
+
 /obj/item/gun/ballistic/automatic/carwo/add_seclight_point()
 	AddComponent(\
 		/datum/component/seclite_attachable, \
@@ -35,7 +39,6 @@
 		overlay_x = 28, \
 		overlay_y = 10 \
 	)
-	AddElement(/datum/element/update_icon_updates_onmob)
 
 /obj/item/gun/ballistic/automatic/carwo/update_icon_state()
 	. = ..()

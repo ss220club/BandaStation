@@ -332,6 +332,8 @@
 	name = "4.6x30mm rubber bullet casing"
 	desc = "Травматический патрон с резиновой пулей калибра 4.6x30мм. Изнуряет цель при попадании, имеет тенденцию отскакивать от стен под небольшим углом."
 	projectile_type = /obj/projectile/bullet/c46x30mm/rubber
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
 
 /obj/item/ammo_casing/c46x30mm/ap
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
@@ -421,7 +423,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c127x108mm-casing"
 	caliber = CALIBER_127x108mm
-	projectile_type = /obj/projectile/bullet/p50/mmg
+	projectile_type = /obj/projectile/bullet/c127x108mm
 
 // MARK: RPG
 /obj/item/ammo_casing/rocket/rpg

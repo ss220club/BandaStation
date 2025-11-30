@@ -50,5 +50,5 @@
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
-/obj/item/gun/ballistic/automatic/napad/empty
+/obj/item/gun/ballistic/automatic/napad/no_mag
 	spawnwithmagazine = FALSE

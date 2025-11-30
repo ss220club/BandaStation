@@ -561,9 +561,14 @@
 // MARK: 12.7x108mm
 /obj/projectile/bullet/c127x108mm
 	name ="12.7x108mm bullet"
+	icon_state = "gaussstrong"
 	speed = 2
 	range = 100
 	damage = 50
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_FIRE
 
 // MARK: 7.62x54mmR
 /obj/projectile/bullet/c762x54mmr

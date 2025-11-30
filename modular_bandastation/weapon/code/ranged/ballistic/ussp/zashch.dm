@@ -35,3 +35,6 @@
 		starting_light = new /obj/item/flashlight/seclite(src), \
 		is_light_removable = FALSE, \
 	)
+
+/obj/item/gun/ballistic/automatic/pistol/zashch/no_mag
+	spawnwithmagazine = FALSE

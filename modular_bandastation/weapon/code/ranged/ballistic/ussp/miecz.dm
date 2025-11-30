@@ -45,6 +45,7 @@
 /obj/item/gun/ballistic/automatic/miecz/update_icon_state()
 	. = ..()
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/miecz/no_mag
 	spawnwithmagazine = FALSE
@@ -58,3 +59,6 @@
 /obj/item/gun/ballistic/automatic/miecz/examine_more(mob/user)
 	. = ..()
 	. += "<br>Этот вариант сделан с армейским зеленым полимерным корпусом."
+
+/obj/item/gun/ballistic/automatic/miecz/army/no_mag
+	spawnwithmagazine = FALSE

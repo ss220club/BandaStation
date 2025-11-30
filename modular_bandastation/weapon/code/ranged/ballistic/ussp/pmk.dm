@@ -95,5 +95,5 @@
 		return
 	..()
 
-/obj/item/gun/ballistic/automatic/pmk/empty
+/obj/item/gun/ballistic/automatic/pmk/no_mag
 	spawnwithmagazine = FALSE
