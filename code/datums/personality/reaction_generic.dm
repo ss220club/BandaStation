@@ -30,7 +30,7 @@
 
 /datum/personality/resilient
 	savefile_key = "resilient"
-	name = "Гибкий"
+	name = "Стойкий"
 	desc = "Неважно. Я могу это вынести!"
 	pos_gameplay_desc = "Негативные модификаторы настроения заканчиваются быстрее"
 	groups = list(PERSONALITY_GROUP_MOOD_LENGTH)
