@@ -1,0 +1,5 @@
+author: "PetyaFX"
+delete-after: True
+changes:
+  - code_imp: "добавлен прок update_zone_name() для удобства"
+  - bugfix: "исправлен баг названия зоны воздушной тревоги"
