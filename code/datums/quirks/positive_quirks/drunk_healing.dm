@@ -1,5 +1,5 @@
 /datum/quirk/drunkhealing
-	name = "Drunken Resilience"
+	name = "Пьянящая стойкость"
 	desc = "Ничто так не помогает почувствовать себя на вершине мира, как хорошая выпивка. Когда вы пьяны, вы медленно восстанавливаетесь от повреждений."
 	icon = FA_ICON_WINE_BOTTLE
 	value = 8

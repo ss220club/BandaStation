@@ -1,7 +1,7 @@
 #define MOOD_CATEGORY_PHOTOPHOBIA "photophobia"
 
 /datum/quirk/photophobia
-	name = "Photophobia"
+	name = "Фотофобия"
 	desc = "Кажется, что яркий свет беспокоит вас больше остальных. Возможно, это следствие какой-либо болезни."
 	icon = FA_ICON_ARROWS_TO_EYE
 	value = -4

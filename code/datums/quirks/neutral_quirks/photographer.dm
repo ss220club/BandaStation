@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/photographer
-	name = "Photographer"
+	name = "Фотограф"
 	desc = "Вы повсюду носите с собой фотоаппарат и личный фотоальбом, а о ваших альбомах ходят легенды среди коллег."
 	icon = FA_ICON_CAMERA
 	value = 0

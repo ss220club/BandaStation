@@ -1,5 +1,5 @@
 /datum/quirk/softspoken
-	name = "Soft-Spoken"
+	name = "Тихий голос"
 	desc = "Вы немногословны, и ваш голос трудно услышать."
 	icon = FA_ICON_COMMENT
 	value = -2

@@ -1,5 +1,5 @@
 /datum/quirk/illiterate
-	name = "Illiterate"
+	name = "Неграмотный"
 	desc = "Вы бросили школу и не умеете читать и писать. Это влияет на чтение, письмо, использование компьютеров и другой электроники."
 	icon = FA_ICON_GRADUATION_CAP
 	value = -8
