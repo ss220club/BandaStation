@@ -24,7 +24,7 @@
 
 /datum/personality/misanthropic
 	savefile_key = "misanthropic"
-	name = "Мизантропический"
+	name = "Мизантроп"
 	desc = "Нам вообще не следовало отправляться к звёздам."
 	pos_gameplay_desc = "Любит видеть других людей грустными"
 	neg_gameplay_desc = "Не любит видеть других людей счастливыми"

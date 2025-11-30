@@ -23,7 +23,7 @@
 
 /datum/personality/bibulous
 	savefile_key = "bibulous"
-	name = "Алкоголик"
+	name = "Любитель выпить"
 	desc = "Я всегда готов выпить ещё!"
 	pos_gameplay_desc = "Удовлетворение от выпивки длится дольше, даже после того, как вы больше не пьяны"
 	groups = list(PERSONALITY_GROUP_ALCOHOL)

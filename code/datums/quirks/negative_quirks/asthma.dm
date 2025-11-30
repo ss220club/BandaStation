@@ -178,7 +178,7 @@
 	if (difference > 0) // it decreased
 		if (prob(1 * change_mult))
 			// in my experience with asthma an inhaler causes a bunch of mucous and you tend to cough it up
-			to_chat(quirk_holder, span_notice("Мокрота в горле заставляет тебя кашлять!"))
+			to_chat(quirk_holder, span_notice("Мокрота в горле заставляет вас кашлять!"))
 			quirk_holder.emote("cough")
 
 	else if (difference < 0)// it increased

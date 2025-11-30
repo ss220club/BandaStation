@@ -24,7 +24,7 @@
 	if(isnull(chip_pref))
 		return ..()
 	installed_chip = GLOB.quirk_chipped_choice[chip_pref] || GLOB.quirk_chipped_choice[pick(GLOB.quirk_chipped_choice)]
-	gain_text = span_notice("[installed_chip::name] наполняется вашу голову знанием.")
+	gain_text = span_notice("[installed_chip::name] наполняет вашу голову знанием.")
 	lose_text = span_notice("Вы перестаёте ощущать чип внутри вашей головы.")
 	return ..()
 

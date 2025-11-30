@@ -4,7 +4,7 @@
 	icon = FA_ICON_PLUG
 	value = 4
 	gain_text = span_notice("Вы чувствуете СОЕДИНЕНИЕ.")
-	lose_text = span_danger("Вы юольше не чувствуете СОЕДИНЕНИЯ.")
+	lose_text = span_danger("Вы больше не чувствуете СОЕДИНЕНИЯ.")
 	medical_record_text = "У пациента установлен кибернетический имплант на затылочной части головы, позволяющий произвольно устанавливать и снимать чипы навыков. Бр-р-р."
 	mail_goodies = list()
 	var/obj/item/organ/cyberimp/brain/connector/connector

@@ -80,7 +80,7 @@
 
 /datum/personality/athletic
 	savefile_key = "athletic"
-	name = "Атлетический"
+	name = "Атлетичный"
 	desc = "Нельзя же весь день сидеть сложа руки! Нужно двигаться."
 	pos_gameplay_desc = "Любит заниматься спортом"
 	neg_gameplay_desc = "Не любит лениться"

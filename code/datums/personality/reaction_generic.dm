@@ -75,7 +75,7 @@
 
 /datum/personality/pessimistic
 	savefile_key = "pessimistic"
-	name = "Пессимистический"
+	name = "Пессимистичный"
 	desc = "Я верю, что наши лучшие дни остались позади."
 	neg_gameplay_desc = "Позитивные модификаторы настроения длятся меньше"
 	groups = list(PERSONALITY_GROUP_HOPE)
@@ -90,13 +90,13 @@
 
 /datum/personality/whimsical
 	savefile_key = "whimsical"
-	name = "Капризный"
+	name = "Эксцентричный"
 	desc = "Эта станция иногда бывает слишком серьезной, расслабься!"
 	pos_gameplay_desc = "Любит якобы бессмысленные, но глупые вещи и не возражает против клоунских выходок"
 
 /datum/personality/snob
 	savefile_key = "snob"
-	name = "Снобистский"
+	name = "Сноб"
 	desc = "Я ожидаю от этой станции только самого лучшего - меньшее неприемлемо!"
 	neut_gameplay_desc = "Качество комнаты влияет на ваше настроение"
 	personality_trait = TRAIT_SNOB
