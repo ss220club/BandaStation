@@ -1,5 +1,5 @@
 /datum/quirk/indebted
-	name = "Indebted"
+	name = "Задолжавший"
 	desc = "Неудачные жизненные решения, медицинские счета, студенческие кредиты, подписка на wetskr... - что бы это ни было, вы имеете хвост из долгов. Часть всего, что вы получаете, пойдет на его погашение."
 	icon = FA_ICON_DOLLAR
 	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_HIDE_FROM_SCAN

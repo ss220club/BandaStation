@@ -1,5 +1,5 @@
 /datum/quirk/blooddeficiency
-	name = "Blood Deficiency"
+	name = "Дефицит крови"
 	desc = "Ваш организм не может вырабатывать достаточно крови для поддержания жизнедеятельности."
 	icon = FA_ICON_TINT
 	value = -8

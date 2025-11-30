@@ -1,5 +1,5 @@
 /datum/quirk/light_drinker
-	name = "Light Drinker"
+	name = "Малопьющий"
 	desc = "Вы просто не умеете обращаться с напитками и очень быстро пьянеете."
 	icon = FA_ICON_COCKTAIL
 	value = -2

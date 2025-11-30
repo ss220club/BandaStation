@@ -1,5 +1,5 @@
 /datum/quirk/social_anxiety
-	name = "Social Anxiety"
+	name = "Социальная тревожность"
 	desc = "Вам очень трудно разговаривать с людьми, заикаясь или даже запираясь в себе."
 	icon = FA_ICON_COMMENT_SLASH
 	value = -3

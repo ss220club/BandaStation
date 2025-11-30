@@ -1,5 +1,5 @@
 /datum/quirk/mute
-	name = "Mute"
+	name = "Немой"
 	desc = "По какой-то причине вы совершенно не можете говорить."
 	icon = FA_ICON_VOLUME_XMARK
 	value = -4

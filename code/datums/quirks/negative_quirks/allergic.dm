@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/allergic
-	name = "Extreme Medicine Allergy"
+	name = "Экстремальная аллергия на лекарства"
 	desc = "С самого детства у вас была аллергия на некоторые химические вещества..."
 	icon = FA_ICON_PRESCRIPTION_BOTTLE
 	value = -6

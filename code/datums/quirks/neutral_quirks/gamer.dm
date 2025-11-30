@@ -1,6 +1,6 @@
 #define GAMING_WITHDRAWAL_TIME (15 MINUTES)
 /datum/quirk/gamer
-	name = "Gamer"
+	name = "Геймер"
 	desc = "Вы хардкорный геймер, и у вас есть потребность играть. Вы любите выигрывать и ненавидите проигрывать. Вы любите только геймерскую еду."
 	icon = FA_ICON_GAMEPAD
 	value = 0

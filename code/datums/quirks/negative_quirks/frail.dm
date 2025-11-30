@@ -1,5 +1,5 @@
 /datum/quirk/frail
-	name = "Frail"
+	name = "Хрупкий"
 	desc = "У вас кожа из бумаги и кости из стекла! Вы получаете раны гораздо легче, чем остальные."
 	icon = FA_ICON_SKULL
 	value = -6
