@@ -1,5 +1,5 @@
 /datum/quirk/monochromatic
-	name = "Монокромазия"
+	name = "Monochromacy"
 	desc = "Вы страдаете полным дальтонизмом и воспринимаете весь мир в черно-белых тонах."
 	icon = FA_ICON_ADJUST
 	value = 0

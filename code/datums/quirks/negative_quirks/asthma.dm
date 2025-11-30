@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/asthma
-	name = "Астма"
+	name = "Asthma"
 	desc = "Вы страдаете астмой — воспалительным заболеванием, которое вызывает сужение дыхательных путей! Будьте осторожны около дыма!"
 	icon = FA_ICON_LUNGS_VIRUS
 	value = -4 // trivialized by NOBREATH but still quite dangerous

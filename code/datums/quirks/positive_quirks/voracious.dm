@@ -1,5 +1,5 @@
 /datum/quirk/voracious
-	name = "Прожорливый"
+	name = "Voracious"
 	desc = "Ничто не встает между вами и едой. Вы едите быстрее и можете налегать на нездоровую пищу! Быть толстым вам очень идет."
 	icon = FA_ICON_DRUMSTICK_BITE
 	value = 4

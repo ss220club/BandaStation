@@ -4,7 +4,7 @@
 	 * - 5u mannitol will heal 12.5% (25 organ damage) brain damage
 	 */
 /datum/quirk/item_quirk/brainproblems
-	name = "Опухоль головного мозга"
+	name = "Brain Tumor"
 	desc = "У вас в мозгу есть маленький друг, который медленно разрушает его. Лучше взять с собой немного маннитола!"
 	icon = FA_ICON_BRAIN
 	value = -12

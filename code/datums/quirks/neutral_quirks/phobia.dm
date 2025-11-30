@@ -1,5 +1,5 @@
 /datum/quirk/phobia
-	name = "Фобия"
+	name = "Phobia"
 	desc = "Вы постоянно чего-то боитесь."
 	icon = FA_ICON_SPIDER
 	value = 0

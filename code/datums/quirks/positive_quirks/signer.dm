@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/signer
-	name = "Пользователь жестового языка"
+	name = "Signer"
 	desc = "Вы обладаете отличными навыками общения на языке жестов."
 	icon = FA_ICON_HANDS
 	value = 4

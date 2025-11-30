@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/mime_fan
-	name = "Поклонник пантомимы"
+	name = "Mime Fan"
 	desc = "Вы поклонник выходок мимов и получаете заряд бодрости от ношения их значков."
 	icon = FA_ICON_THUMBTACK
 	value = 2

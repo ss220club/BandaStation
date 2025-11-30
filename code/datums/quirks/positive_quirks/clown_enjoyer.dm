@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/clown_enjoyer
-	name = "Любитель клоунов"
+	name = "Clown Enjoyer"
 	desc = "Вам нравятся клоунские выходки, и у вас поднимается настроение от ношения клоунского значка."
 	icon = FA_ICON_MAP_PIN
 	value = 2

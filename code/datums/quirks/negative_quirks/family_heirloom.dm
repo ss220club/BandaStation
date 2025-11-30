@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/family_heirloom
-	name = "Семейная реликвия"
+	name = "Family Heirloom"
 	desc = "У вас есть семейная реликвия, передающаяся из поколения в поколение. Вы должны сохранить её любой ценой!"
 	icon = FA_ICON_TOOLBOX
 	value = -2

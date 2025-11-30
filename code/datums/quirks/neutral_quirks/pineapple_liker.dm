@@ -1,5 +1,5 @@
 /datum/quirk/pineapple_liker
-	name = "Приверженность к ананасу"
+	name = "Ananas Affinity"
 	desc = "Вам очень нравятся ананасы. Кажется, вы никогда не сможете насытиться их великолепием!"
 	icon = FA_ICON_THUMBS_UP
 	value = 0

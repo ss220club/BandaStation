@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/scarred_eye
-	name = "Изувеченный глаз"
+	name = "Scarred Eye"
 	desc = "В результате несчастного случая вы лишились одного глаза, зато теперь у вас крутая пиратская повязка. Йо-хо-хо!"
 	icon = FA_ICON_EYE_SLASH
 	value = -2

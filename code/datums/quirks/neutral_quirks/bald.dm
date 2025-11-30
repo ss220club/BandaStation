@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/bald
-	name = "Лысый"
+	name = "Smooth-Headed"
 	desc = "У вас нет волос, и вы чувствуете себя неуверенно из-за этого! Не снимайте парик или хотя бы прикрывайте голову."
 	icon = FA_ICON_EGG
 	value = 0

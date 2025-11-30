@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/fluoride_stare
-	name = "Свечение флуорида"
+	name = "Fluoride Stare"
 	desc = "В результате ужасного несчастного случая вы потеряли веки, или говорите так другим. Вам приходится периодически вручную увлажнять глаза солевым раствором!"
 	icon = FA_ICON_EYE_DROPPER
 	value = -6

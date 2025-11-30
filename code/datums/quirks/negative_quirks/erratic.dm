@@ -1,5 +1,5 @@
 /datum/quirk/erratic
-	name = "Неустойчивый"
+	name = "Erratic"
 	desc = "Ваше настроение колеблется подобно маятнику, вызывая частые и непредсказуемые изменения вашей личности."
 	icon = FA_ICON_MASKS_THEATER
 	value = -3
