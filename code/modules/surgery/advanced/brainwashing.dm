@@ -110,7 +110,7 @@
 			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 		)
 		display_pain(target, "Голова раскалывается от ужасной боли!")
-		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 40)
+		target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 40)
 	else
 		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] внезапно замечает, что мозг над которым велась операция, более не здесь."), span_warning("Вы вдруг замечаете, что мозг, над которым вы работали, более не здесь."))
 	return FALSE

@@ -388,7 +388,7 @@
 "PV" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "Rl" = (
 /obj/modular_map_root/tramstation{
 	key = "barcargoupper_cave"

@@ -29,7 +29,7 @@
 "i" = (
 /obj/structure/sign/warning/docking/directional/west,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "j" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -123,7 +123,7 @@
 "O" = (
 /obj/machinery/firealarm/directional/south,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "S" = (
 /obj/machinery/door/poddoor/shuttledock{
 	checkdir = 8

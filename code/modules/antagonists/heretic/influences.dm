@@ -156,7 +156,7 @@
 		return
 
 	. += span_userdanger("Ваш разум горит, когда вы смотрите на разрыв!")
-	user.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10, 190)
+	user.adjust_organ_loss(ORGAN_SLOT_BRAIN, 10, 190)
 	user.add_mood_event("gates_of_mansus", /datum/mood_event/gates_of_mansus)
 
 /obj/effect/heretic_influence

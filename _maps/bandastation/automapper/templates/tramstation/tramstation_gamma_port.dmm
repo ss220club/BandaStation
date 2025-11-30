@@ -36,12 +36,12 @@
 "K" = (
 /obj/structure/sign/warning/docking/directional/north,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "N" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "R" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/door/airlock/external,

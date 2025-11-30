@@ -154,7 +154,7 @@
 			if((L in hit_list) || L == source)
 				continue
 			hit_list += L
-			L.adjustFireLoss(20)
+			L.adjust_fire_loss(20)
 			to_chat(L, span_userdanger("Вы поражены мистическим пламенем [source.declent_ru(GENITIVE)]!"))
 
 		new /obj/effect/hotspot(T)

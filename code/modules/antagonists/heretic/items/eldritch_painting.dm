@@ -123,8 +123,9 @@
 		// Gives them some nutrition
 		examiner.adjust_nutrition(50)
 		to_chat(examiner, span_warning("Вы чувствуете жгучую боль в животе!"))
-		examiner.adjustOrganLoss(ORGAN_SLOT_STOMACH, 5)
-		to_chat(examiner, span_notice("Вы чувствуете себя менее голодным, но, каким-то образом, более пустым?"))
+		examiner.adjust_organ_loss(ORGAN_SLOT_STOMACH, 5)
+		to_chat(examiner, span_notice("Вы чувствуете себя менее голодным."))
+		to_chat(examiner, span_warning("Вам следует запастись сырым мясом и органами, прежде чем вы снова проголодаетесь."))
 		examiner.add_mood_event("respite_eldritch_hunger", /datum/mood_event/eldritch_painting/desire_examine)
 		return
 
