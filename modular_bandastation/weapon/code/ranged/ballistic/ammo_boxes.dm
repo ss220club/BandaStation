@@ -162,7 +162,7 @@
 /obj/item/ammo_box/strilka310
 	name = "ammo box (.310 Strilka)"
 	desc = "Коробка с винтовочными патронами калибра .310, вмещает 30 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310_box"
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 	w_class = WEIGHT_CLASS_NORMAL
@@ -192,7 +192,7 @@
 /obj/item/ammo_box/speedloader/c762x54mmr
 	name = "stripper clip (7.62x54mmR)"
 	desc = "Пятизарядная обойма для винтовок калибра 7.62x54ммР."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "762_strip"
 	ammo_type = /obj/item/ammo_casing/c762x54mmr
 	max_ammo = 5
@@ -222,7 +222,7 @@
 /obj/item/ammo_box/c762x54mmr
 	name = "ammo box (7.62x54mmR)"
 	desc = "Коробка с винтовочными патронами калибра 7.62x54ммР, вмещает 25 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "a762_54box"
 	w_class = WEIGHT_CLASS_NORMAL
 	caliber = CALIBER_762x54mmR
@@ -257,7 +257,7 @@
 /obj/item/ammo_box/c9x25mm
 	name = "ammo box (9x25mm NT)"
 	desc = "Коробка с пистолетными патронами калибра 9x25мм НТ, вмещает 30 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "9mmbox"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_9x25NT
@@ -286,7 +286,7 @@
 /obj/item/ammo_box/c38
 	name = "ammo box (.38)"
 	desc = "Коробка с пистолетными патронами калибра .38, вмещает 25 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "38box"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_38
@@ -327,7 +327,7 @@
 /obj/item/ammo_box/c357
 	name = "ammo box (.357)"
 	desc = "Коробка с пистолетными патронами калибра .357, вмещает 20 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "357box"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_357
@@ -356,7 +356,7 @@
 /obj/item/ammo_box/c45
 	name = "ammo box (.45)"
 	desc = "Коробка с пистолетными патронами калибра .45, вмещает 20 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "45box"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_45
@@ -385,7 +385,7 @@
 /obj/item/ammo_box/c10mm
 	name = "ammo box (10mm)"
 	desc = "Коробка с пистолетными патронами калибра 10мм, вмещает 20 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "10mmbox"
 	w_class = WEIGHT_CLASS_SMALL
 
@@ -417,7 +417,7 @@
 /obj/item/ammo_box/c9mm
 	name = "ammo box (9mm)"
 	desc = "Коробка с пистолетными патронами калибра 9мм, вмещает 20 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "9mmbox-surplus"
 	w_class = WEIGHT_CLASS_SMALL
 
@@ -449,7 +449,7 @@
 /obj/item/ammo_box/c223
 	name = "ammo box (5.56x45mm)"
 	desc = "Коробка с винтовочными патронами калибра 5.56x45мм, вмещает 45 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "556box_big"
 	w_class = WEIGHT_CLASS_NORMAL
 	caliber = CALIBER_A223
@@ -484,7 +484,7 @@
 /obj/item/ammo_box/c762x51
 	name = "ammo box (7.62x51mm)"
 	desc = "Коробка с винтовочными патронами калибра 7.62x51мм, вмещает 30 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "762_51box_big"
 	w_class = WEIGHT_CLASS_NORMAL
 	caliber = CALIBER_762x51mm
@@ -519,7 +519,7 @@
 /obj/item/ammo_box/c338
 	name = "ammo box (.338)"
 	desc = "Коробка с винтовочными патронами калибра .338, вмещает 15 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "86x70mmbox"
 	w_class = WEIGHT_CLASS_NORMAL
 	caliber = CALIBER_338
@@ -544,11 +544,46 @@
 	icon_state = "86x70mmbox-incendiary"
 	ammo_type = /obj/item/ammo_casing/c338/incendiary
 
+// MARK: .50 BMG
+/obj/item/ammo_box/c50
+	name = "ammo box (.50)"
+	desc = "Коробка с винтовочными патронами калибра .50 BMG, вмещает 15 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "a50box"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_50BMG
+	ammo_type = /obj/item/ammo_casing/p50
+	max_ammo = 10
+
+/obj/item/ammo_box/c50/penetrator
+	name = "ammo box (.50 penetrator)"
+	desc = parent_type::desc + "<br>Желтая полоска указывает на то, что в ней должны храниться пробивные боеприпасы."
+	icon_state = "a50box-penetrator"
+	ammo_type = /obj/item/ammo_casing/p50/penetrator
+
+/obj/item/ammo_box/c50/disruptor
+	name = "ammo box (.50 disruptor)"
+	desc = parent_type::desc + "<br>Синяя полоска указывает на то, что здесь должны храниться нелетальные боеприпасы."
+	icon_state = "a50box-disruptor"
+	ammo_type = /obj/item/ammo_casing/p50/disruptor
+
+/obj/item/ammo_box/c50/marksman
+	name = "ammo box (.50 marksman)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что здесь должны храниться высокоскоростные боеприпасы."
+	icon_state = "a50box-marksman"
+	ammo_type = /obj/item/ammo_casing/p50/marksman
+
+/obj/item/ammo_box/c50/incendiary
+	name = "ammo box (.50 incendiary)"
+	desc = parent_type::desc + "<br>Оранжевая полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "a50box-incendiary"
+	ammo_type = /obj/item/ammo_casing/p50/incendiary
+
 // MARK: 4.6x30mm
 /obj/item/ammo_box/c46x30
 	name = "ammo box (4.6x30mm)"
 	desc = "Коробка с патронами калибра 4.6x30мм, вмещает 30 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "46x30mmbox"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_46X30MM
@@ -577,7 +612,7 @@
 /obj/item/ammo_box/c12ga
 	name = "ammo box (12 gauge)"
 	desc = "Коробка с патронами для дробовиков 12-калибра, вмещает 20 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "12gbox-buckshot"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_SHOTGUN
@@ -587,13 +622,11 @@
 /obj/item/ammo_box/c12ga/milspec
 	name = "ammo box (12 gauge)"
 	desc = parent_type::desc + "<br>Качественная, почти новая коробка. На коробке имеется спец маркировка, указывающая что внутри картечь военного типа."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
 	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
 
 /obj/item/ammo_box/c12ga/old
 	name = "ammo box (12 gauge)"
 	desc = parent_type::desc + "<br>Старая, потрепанная и странно пахнущая.. <br>Неизвестно какого качества патроны внутри, но вероятно не самого лучшего.. или безопастного."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
 	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/old
 
 /obj/item/ammo_box/c12ga/slug
@@ -697,9 +730,9 @@
 	name = "7.62x51mm battle rifle magazines box"
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c762x51mm
 
-// /obj/item/storage/toolbox/ammobox/c762x54mmr
-// 	name = "7.62x54mmR ammo box"
-// 	ammo_to_spawn = /obj/item/ammo_box/magazine/c762x54mmr
+/obj/item/storage/toolbox/ammobox/c762x54mmr
+	name = "7.62x54mmR ammo box"
+	ammo_to_spawn = /obj/item/ammo_box/c762x54mmr
 
 /obj/item/storage/toolbox/ammobox/c223
 	name = "5.56x45mm ARG magazines box"

@@ -29,6 +29,12 @@
 /obj/item/gun/ballistic/automatic/cm5/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/automatic/cm5/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/cm5/examine(mob/user)
 	. = ..()

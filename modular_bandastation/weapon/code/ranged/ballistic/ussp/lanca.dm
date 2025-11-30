@@ -1,12 +1,12 @@
 /obj/item/gun/ballistic/automatic/lanca
 	name = "BV-27 'Lanca' battle rifle"
 	desc = "Боевая винтовка под патрон .310 Стрилка. Имеет встроенный прицел с удивительно высокой кратностью увеличения, учитывая его происхождение."
-	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "lanca"
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "lanca"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "lanca"
 	SET_BASE_PIXEL(-8, 0)
 	special_mags = FALSE
@@ -53,11 +53,11 @@
 	name = "BV-30 'Lanca' battle rifle"
 	desc = "Относительно новая компактная длинноствольная боевая винтовка под патрон .310 Стрилка. Имеет встроенный прицел с \
 		удивительно высокой кратностью увеличения, учитывая его происхождение."
-	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "lanca_army"
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "lanca_army"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "lanca_army"
 	fire_delay = 1 SECONDS

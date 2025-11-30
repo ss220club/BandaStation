@@ -1,12 +1,12 @@
 /obj/item/gun/ballistic/automatic/pmk
 	name = "PMK light machine gun"
 	desc = "Легкий ручной пулемет калибра 7.62x54ммР, разработанный в СССП как надежное оружие поддержки пехоты."
-	icon = 'modular_bandastation/weapon/icons/ranged/64x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
 	icon_state = "pmk"
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "pmk"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "pmkclosedmag"
 	base_icon_state = "pmk"
 	SET_BASE_PIXEL(-16, 0)

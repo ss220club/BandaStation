@@ -26,3 +26,4 @@
 	icon_state = "m45a5"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m45a5
 	recoil = 1
+	unique_reskin = null

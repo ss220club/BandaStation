@@ -2,12 +2,12 @@
 	name = "DKSH-12.7 'Dushka' HMG"
 	desc = "Тяжелый стационарный пулемет калибра 12.7x108мм переоснащенный в ручной вариант, мощное оружие поддержки для пехоты. \
 	За свои характеристики солдаты часто дают ему более ласковое название - \"Душка\""
-	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "dshk"
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "dshk"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "dshkclosedmag"
 	base_icon_state = "dshk"
 	w_class = WEIGHT_CLASS_BULKY

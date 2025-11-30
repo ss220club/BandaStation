@@ -5,7 +5,7 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga
 	recoil = 2
 	weapon_weight = WEAPON_LIGHT
-	icon = 'modular_bandastation/weapon/icons/ranged/32x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "bobr"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
 	spread = 15

@@ -36,5 +36,14 @@
 		overlay_y = 12 \
 	)
 
+/obj/item/gun/ballistic/automatic/f4/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/automatic/f4/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+
 /obj/item/gun/ballistic/automatic/f4/no_mag
 	spawnwithmagazine = FALSE

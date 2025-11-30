@@ -553,9 +553,10 @@
 	fire_stacks = 3
 	leaves_fire_trail = FALSE
 
-// MARK: .90 Strela
+// MARK: .60 Strela
 /obj/projectile/bullet/p50/strela60
-	name =".90 Strela bullet"
+	name =".60 Strela bullet"
+	damage = 80
 
 // MARK: 12.7x108mm
 /obj/projectile/bullet/c127x108mm

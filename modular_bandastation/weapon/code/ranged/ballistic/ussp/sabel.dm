@@ -10,6 +10,7 @@
 	inhand_icon_state = "amk_civ"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/amk_fire.ogg'
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
+	worn_icon_state = "amk_civ"
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_cock.ogg'
 	load_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
@@ -20,18 +21,21 @@
 	can_suppress = TRUE
 	suppressor_x_offset = 7
 	actions_types = list()
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
 	fire_delay = 0.75 SECONDS
 	spread = 1
-	worn_icon_state = "amk_civ"
 	recoil = 0.2
 	obj_flags = UNIQUE_RENAME
 	SET_BASE_PIXEL(-5, 0)
 
 /obj/item/gun/ballistic/automatic/sabel/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sabel/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 
 // MARK: Automatic AK
 /obj/item/gun/ballistic/automatic/sabel/auto
@@ -47,6 +51,12 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/automatic/sabel/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/sabel/auto/examine(mob/user)
 	. = ..()
@@ -57,7 +67,7 @@
 	. += "AMK — надежная штурмовая винтовка под патрон калибра 7.62x39мм. Обладает высокой убойной силой, \
 	хорошей пробиваемостью и стабильной эффективностью на средних дистанциях.\
 	Имеет заметную отдачу, но компенсируется уроном и доступностью боеприпасов. \
-	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии."
+	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии.<br><br>"
 
 /obj/item/gun/ballistic/automatic/sabel/auto/no_mag
 	spawnwithmagazine = FALSE
@@ -111,10 +121,10 @@
 	name = "gauss AMK rifle"
 	desc = "Эксперементальный дизайн автомата под патрон 7.62x39мм. Оружие совмещающее в себе новые технологии и нестареющую классику."
 	icon_state = "amk_gauss"
-	inhand_icon_state = "amk"
+	inhand_icon_state = "amk_gauss"
 	actions_types = list(/datum/action/item_action/toggle_gauss)
 	base_icon_state = "amk_gauss"
-	worn_icon_state = "amk"
+	worn_icon_state = "amk_gauss"
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_heavy.ogg'
 	suppressor_x_offset = 8
 	projectile_speed_multiplier = 1.5
@@ -282,9 +292,9 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical
 	name = "tactical gauss AMK rifle"
 	icon_state = "amk_gauss_tacticool"
-	inhand_icon_state = "amk_modern"
+	inhand_icon_state = "amk_gauss_tacticool"
 	base_icon_state = "amk_gauss_tacticool"
-	worn_icon_state = "amk_modern"
+	worn_icon_state = "amk_gauss_tacticool"
 	recoil = 0.2
 	shots_before_degradation = 60
 

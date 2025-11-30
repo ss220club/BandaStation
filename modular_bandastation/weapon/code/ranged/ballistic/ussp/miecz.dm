@@ -1,12 +1,12 @@
 /obj/item/gun/ballistic/automatic/miecz
 	name = "AMC-874 'Miecz' assault carbine"
 	desc = "Модернизированный дизайн штурмового карабина на базе АМК под патрон 7.62x39мм."
-	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "miecz"
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "miecz"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "miecz"
 	SET_BASE_PIXEL(-8, 0)
 	bolt_type = BOLT_TYPE_STANDARD
@@ -44,7 +44,7 @@
 
 /obj/item/gun/ballistic/automatic/miecz/update_icon_state()
 	. = ..()
-	inhand_icon_state = "[icon_state][magazine ? "_mag":"_nomag"]"
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/miecz/no_mag
 	spawnwithmagazine = FALSE

@@ -1,8 +1,8 @@
 /obj/item/gun/ballistic/rifle/boltaction
-	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	recoil = 1
 
 /obj/item/gun/ballistic/rifle/boltaction/surplus
@@ -70,12 +70,12 @@
 	name = "Krov precision rifle"
 	desc = "Сильно модифицированная винтовка Сахно, с деталями изготовленными компанией Xhihao. \
 		Имеет корпус, в котором вместо внутреннего магазина используются магазины от винтовок \"Ланка\"."
-	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "rengo"
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "sakhno"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "sakhno"
 	slot_flags = ITEM_SLOT_BACK
 	SET_BASE_PIXEL(-8, 0)
@@ -141,13 +141,13 @@
 		Этот экземпляр все еще находится в удивительно хорошем состоянии. Часто встречается в руках \
 		коллекционеров или революционеров без чувства заботы об антиквариате, \
 		пьяных бандитов, убийц из Кооператива \"Тигр\" и пьяных работников оружейных складов. <I>По-прежнему</I> немного сырая на ощупь."
-	icon = 'modular_bandastation/weapon/icons/ranged/48x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "mosin"
 	inhand_icon_state = "mosin"
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "mosin"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	slot_flags = ITEM_SLOT_BACK
 	weapon_weight = WEAPON_HEAVY
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin

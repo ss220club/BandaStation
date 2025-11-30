@@ -346,33 +346,33 @@
 	name = ".310 Strilka armor-piercing bullet casing"
 	desc = "Бронебойный винтовочный безгильзовый патрон калибра .310 Стрилка."
 	projectile_type = /obj/projectile/bullet/strilka310/ap
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310ap-casing"
 
 /obj/item/ammo_casing/strilka310/hp
 	name = ".310 Strilka hollow-point bullet casing"
 	desc = "Экспансивный винтовочный безгильзовый патрон калибра .310 Стрилка."
 	projectile_type = /obj/projectile/bullet/strilka310/hp
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310hp-casing"
 
 /obj/item/ammo_casing/strilka310/incendiary
 	name = ".310 Strilka incendiary bullet casing"
 	desc = "Зажигательный винтовочный безгильзовый патрон калибра .310 Стрилка."
 	projectile_type = /obj/projectile/bullet/incendiary/strilka310
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310ic-casing"
 
 /obj/item/ammo_casing/strilka310/phasic
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	desc = "Фазовый винтовочный безгильзовый патрон калибра .310 Стрилка."
 	icon_state = "310ap-casing"
 
-// MARK: .90 Strela
+// MARK: .60 Strela
 /obj/item/ammo_casing/strela60
-	name = ".90 Strela anti-material bullet casing"
-	desc = "Крупнокалиберный безгильзовый винтовочный патрон калибра .90 Стрела."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	name = ".60 Strela anti-material bullet casing"
+	desc = "Крупнокалиберный безгильзовый винтовочный патрон калибра .60 Стрела."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "strela60-casing"
 	caliber = CALIBER_STRELA60
 	projectile_type = /obj/projectile/bullet/p50/strela60
@@ -418,7 +418,7 @@
 /obj/item/ammo_casing/c127x108mm
 	name = "12.7x108mm bullet casing"
 	desc = "Крупнокалиберный патрон калибра 12.7x108мм."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c127x108mm-casing"
 	caliber = CALIBER_127x108mm
 	projectile_type = /obj/projectile/bullet/p50/mmg
@@ -427,7 +427,7 @@
 /obj/item/ammo_casing/rocket/rpg
 	name = "RPG-70 HE rocket"
 	desc = "84-мм фугасная ракета. Стреляйте в людей и молитесь."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "rpg_rocket"
 	base_icon_state = "rpg_rocket"
 	projectile_type = /obj/projectile/bullet/rocket

@@ -2,7 +2,7 @@
 	name = "AMV-90 'Wyłom'"
 	desc = "Массивное чудовище в виде анти-материальной винтовки, предназначенное для уничтожения вражеской легкой техники и экзокостюмов, а также для «контроля агрессивной фауны». Стреляет разрушительными безгильзовыми патронами калибра .60 Strela, \
 		чрезвычайно высокая пробивная способность которых стала причиной того, что в конечном итоге это оружие было запрещено к торговле в галактике."
-	icon = 'modular_bandastation/weapon/icons/ranged/64x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
 	icon_state = "wylom"
 	SET_BASE_PIXEL(-16, 0)
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/inhands_64_left.dmi'
@@ -10,7 +10,7 @@
 	inhand_icon_state = "wylom"
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "wylom"
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY

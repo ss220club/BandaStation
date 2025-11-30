@@ -45,9 +45,9 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/turret_objects.dmi'
 	icon_state = "folded_hmg_volna"
 	worn_icon_state = "folded_hmg"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
-	inhand_icon_state = "volnaclosedmag"
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
+	inhand_icon_state = "volna"
 
 /obj/item/mounted_machine_gun_folded/volna/Initialize(mapload)
 	. = ..()

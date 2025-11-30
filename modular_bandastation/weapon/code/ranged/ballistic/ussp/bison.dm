@@ -1,10 +1,10 @@
 /obj/item/gun/ballistic/automatic/bison
 	name = "PP-542L 'Bison'"
 	desc = "Компактный пистолет-пулемет в калибре 9мм с уникальными магазинами шнекового типа."
-	icon = 'modular_bandastation/weapon/icons/ranged/32x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "bison"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "bison"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/bison
 	spread = 10
@@ -34,7 +34,7 @@
 
 /obj/item/gun/ballistic/automatic/bison/update_icon_state()
 	. = ..()
-	inhand_icon_state = "[icon_state][magazine ? "_mag":"_nomag"]"
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/bison/examine(mob/user)
 	. = ..()

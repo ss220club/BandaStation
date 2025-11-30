@@ -1,10 +1,10 @@
 /obj/item/gun/ballistic/automatic/pistol/zashch
 	name = "P-10 'Zashchitnik' pistol"
 	desc = "Массивный самозарядный пистолет калибра 10мм, получивший название 'Защитник'. Питается магазинами на 15 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/32x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "zashch"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "zashch"
 	w_class = WEIGHT_CLASS_SMALL
 	accepted_magazine_type = /obj/item/ammo_box/magazine/zashch

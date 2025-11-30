@@ -780,11 +780,11 @@
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c45/inc
 
-// MARK: Wylom AMR - .90 Strela
+// MARK: Wylom AMR - .60 Strela
 /obj/item/ammo_box/magazine/wylom
 	name = "Wylom magazine (.60 Strela)"
 	desc = "Магазин для антиматериальных винтовок Wylom калибра .60 Стрела, вмещающий 5 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "wylom_mag"
 	base_icon_state = "wylom_mag"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -794,11 +794,11 @@
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/strela60
 
-// MARK: DSHK - 12.7x108mm
+// MARK: DKSH - 12.7x108mm
 /obj/item/ammo_box/magazine/dshk
-	name = "DSHK box (12.7x108mm)"
+	name = "DKSH box (12.7x108mm)"
 	desc = "Короб для тяжелых пулеметов ДКШ калибра 12.7x108мм, вмещающий 50 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "dshk_mag"
 	base_icon_state = "dshk_mag"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -809,7 +809,7 @@
 	ammo_type = /obj/item/ammo_casing/c127x108mm
 
 /obj/item/ammo_box/magazine/dshk/c12ga
-	name = "DSHK-12 box (12ga)"
+	name = "DKSH-12 box (12ga)"
 	desc = "Короб для тяжелых пулеметов ДКШ 12го калибра, вмещающий 40 патронов."
 	icon_state = "dshk12_mag"
 	base_icon_state = "dshk12_mag"
@@ -818,7 +818,7 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/buckshot
 
 /obj/item/ammo_box/magazine/dshk/c12ga/slug
-	name = "DSHK-12 box (12ga slug)"
+	name = "DKSH-12 box (12ga slug)"
 	icon_state = "dshk12_mag_slug"
 	base_icon_state = "dshk12_mag_slug"
 	ammo_type = /obj/item/ammo_casing/shotgun
@@ -827,7 +827,7 @@
 /obj/item/ammo_box/magazine/volna
 	name = "volna box (12.7x108mm)"
 	desc = "Короб для тяжелых пулеметов Волна калибра 12.7x108мм, вмещающий 50 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "volna_mag"
 	base_icon_state = "volna_mag"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -840,8 +840,8 @@
 // MARK: PMK - .310 / 7.62x54mmR
 /obj/item/ammo_box/magazine/pmk
 	name = "PMK box (7.62x54mmR)"
-	desc = "Короб для легких пулеметов PMK калибра 7.62x54мм, вмещающий 100 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	desc = "Короб для легких пулеметов ПМК калибра 7.62x54мм, вмещающий 100 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "pmk_mag"
 	base_icon_state = "pmk_mag"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -855,7 +855,7 @@
 
 /obj/item/ammo_box/magazine/pmk/rubber
 	name = "PMK box (7.62x54mmR rubber)"
-	desc = "Короб для легких пулеметов PMK калибра 7.62x54мм, вмещающий 100 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	desc = "Короб для легких пулеметов ПМК калибра 7.62x54мм, вмещающий 100 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c762x54mmr/rubber
 
@@ -881,7 +881,7 @@
 /obj/item/ammo_box/magazine/zashch
 	name = "pistol magazine (10mm)"
 	desc = "Пистолетный магазин калибра 10мм, вмещающий 15 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "zashch_mag"
 	base_icon_state = "zashch_mag"
 	w_class = WEIGHT_CLASS_TINY
@@ -912,7 +912,7 @@
 /obj/item/ammo_box/magazine/strilka310
 	name = "battle rifle magazine (.310 Strilka)"
 	desc = "Магазин для боевых винтовок калибра .310 Стрилка, вмещающий 20 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "lanca_mag"
 	base_icon_state = "lanca_mag"
 	w_class = WEIGHT_CLASS_SMALL
@@ -946,7 +946,7 @@
 /obj/item/ammo_box/magazine/smg10mm
 	name = "SMG magazine (10mm)"
 	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "napad_mag"
 	base_icon_state = "napad_mag"
 	w_class = WEIGHT_CLASS_SMALL
@@ -983,7 +983,7 @@
 /obj/item/ammo_box/magazine/bison
 	name = "bison magazine (9mm)"
 	desc = "Шнековый магазин для пистолетов-пулеметов Бисон калибра 9мм, вмещающий 64 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo2.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "bison_mag"
 	base_icon_state = "bison_mag"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -1016,7 +1016,7 @@
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c9mm/fire
 
-// MARK: Dvoystvol - 7.62x38mm / .310 Strilka / .90 Strela
+// MARK: Dvoystvol - 7.62x38mm / .310 Strilka / .60 Strela
 
 /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev762
 	name = "Dvoystvol-8 revolver cylinder"

@@ -1,13 +1,13 @@
 /obj/item/gun/ballistic/automatic/volna
 	name = "'Volna-12' HMG"
 	desc = "Относительно новый крупнокалиберный станковый пулемет калибра 12.7x108мм, часто встречающийся на военных обьектах СССП."
-	icon = 'modular_bandastation/weapon/icons/ranged/64x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
 	icon_state = "volna"
 	SET_BASE_PIXEL(-16, 0)
-	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back2.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "pmk"
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand2.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand2.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "volnaclosedmag"
 	base_icon_state = "volna"
 	w_class = WEIGHT_CLASS_HUGE
