@@ -1,5 +1,5 @@
 /datum/quirk/hypersensitive
-	name = "Гиперчувствительный"
+	name = "Hypersensitive"
 	desc = "К сожалению или к счастью, вам кажется, что всё влияет на ваше настроение сильнее обычного."
 	icon = FA_ICON_FLUSHED
 	value = -2

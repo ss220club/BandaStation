@@ -1,5 +1,5 @@
 /datum/quirk/throwingarm
-	name = "Метатель"
+	name = "Throwing Arm"
 	desc = "У вас очень сильные руки! Предметы, которые вы бросаете, всегда летят дальше остальных, и вы никогда не промахиваетесь при броске."
 	icon = FA_ICON_BASEBALL
 	value = 7

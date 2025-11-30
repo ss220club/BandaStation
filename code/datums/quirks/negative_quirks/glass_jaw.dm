@@ -1,5 +1,5 @@
 /datum/quirk/glass_jaw
-	name = "Стеклянная челюсть"
+	name = "Glass Jaw"
 	desc = "У вас очень хрупкая челюсть. Любой достаточно сильный удар по голове может лишить вас сознания."
 	icon = FA_ICON_HAND_FIST
 	value = -4

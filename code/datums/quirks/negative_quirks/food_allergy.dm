@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(possible_food_allergies, list(
 ))
 
 /datum/quirk/item_quirk/food_allergic
-	name = "Пищевая аллергия"
+	name = "Food Allergy"
 	desc = "С самого детства у вас была аллергия на некоторые продукты."
 	icon = FA_ICON_SHRIMP
 	value = -2

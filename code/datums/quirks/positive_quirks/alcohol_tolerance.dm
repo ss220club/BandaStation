@@ -1,5 +1,5 @@
 /datum/quirk/alcohol_tolerance
-	name = "Алкогольная толерантность"
+	name = "Alcohol Tolerance"
 	desc = "Вы пьянеете медленнее и испытываете меньше проблем от алкоголя."
 	icon = FA_ICON_BEER
 	value = 4

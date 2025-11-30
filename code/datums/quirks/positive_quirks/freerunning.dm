@@ -1,5 +1,5 @@
 /datum/quirk/freerunning
-	name = "Паркур"
+	name = "Freerunning"
 	desc = "У вас отлично получаются быстрые движения! Вы можете быстрее взбираться на столы и не получать повреждений от коротких падений."
 	icon = FA_ICON_RUNNING
 	value = 8

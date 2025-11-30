@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/chronic_illness
-	name = "Устойчивое хроническое заболевание"
+	name = "Eradicative Chronic Illness"
 	desc = "У вас аномальное хроническое заболевание, которое требует постоянного приёма лекарств для контроля над ним, иначе оно вызывает коррекцию временной линии."
 	icon = FA_ICON_DISEASE
 	value = -12

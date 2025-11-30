@@ -1,5 +1,5 @@
 /datum/quirk/heterochromatic
-	name = "Гетерохромия"
+	name = "Heterochromatic"
 	desc = "Один ваш глаз отличается по цвету от второго!"
 	icon = FA_ICON_EYE_LOW_VISION // Ignore the icon name, its actually a fairly good representation of different color eyes
 	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_CHANGES_APPEARANCE

@@ -1,5 +1,5 @@
 /datum/quirk/friendly
-	name = "Дружелюбный"
+	name = "Friendly"
 	desc = "Вы обнимаете лучше всех, особенно когда вы в хорошем настроении."
 	icon = FA_ICON_HANDS_HELPING
 	value = 2

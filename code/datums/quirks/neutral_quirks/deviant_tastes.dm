@@ -1,5 +1,5 @@
 /datum/quirk/deviant_tastes
-	name = "Извращённые вкусы"
+	name = "Deviant Tastes"
 	desc = "Вам не нравится еда, которая нравится большинству людей, и вы находите вкусным то, что не всем по нраву."
 	icon = FA_ICON_GRIN_TONGUE_SQUINT
 	value = 0

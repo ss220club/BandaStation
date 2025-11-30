@@ -1,5 +1,5 @@
 /datum/quirk/foreigner
-	name = "Иностранец"
+	name = "Foreigner"
 	desc = "Вы не местный. Вы не знаете общегалактический!"
 	icon = FA_ICON_LANGUAGE
 	value = 0

@@ -1,5 +1,5 @@
 /datum/quirk/depression
-	name = "Депрессия"
+	name = "Depression"
 	desc = "Иногда вы просто ненавидите жизнь."
 	icon = FA_ICON_FROWN
 	value = -3

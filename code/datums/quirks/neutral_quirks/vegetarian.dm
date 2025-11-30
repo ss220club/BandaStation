@@ -1,5 +1,5 @@
 /datum/quirk/vegetarian
-	name = "Вегетарианец"
+	name = "Vegetarian"
 	desc = "Вы считаете идею употребления мяса аморальной и физически отвратительной."
 	icon = FA_ICON_CARROT
 	value = 0

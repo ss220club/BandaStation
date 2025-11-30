@@ -1,5 +1,5 @@
 /datum/quirk/item_quirk/deafness
-	name = "Глухой"
+	name = "Deaf"
 	desc = "Вы неизлечимо глухой."
 	icon = FA_ICON_DEAF
 	value = -8
