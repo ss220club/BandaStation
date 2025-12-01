@@ -78,7 +78,6 @@
 /obj/structure/kitchenspike/Initialize(mapload)
 	. = ..()
 	register_context()
-	ADD_TRAIT(src, TRAIT_DANGEROUS_BUCKLE, INNATE_TRAIT)
 
 /obj/structure/kitchenspike/examine(mob/user)
 	. = ..()

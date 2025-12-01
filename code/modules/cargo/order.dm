@@ -72,7 +72,7 @@
 	coupon,
 	charge_on_purchase = TRUE,
 	manifest_can_fail = TRUE,
-	cost_type = MONEY_SYMBOL,
+	cost_type = "cr",
 	can_be_cancelled = TRUE,
 )
 	id = SSshuttle.order_number++
