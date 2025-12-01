@@ -23,7 +23,8 @@ DISCORD_TAG_EMOJI = {
     "server": ":shield:",
     "sound": ":notes:",
     "spellcheck": ":pencil:",
-    "translation": ":nerd:"
+    "translation": ":nerd:",
+    "sprite": ":frame_photo:"
 }
 
 
