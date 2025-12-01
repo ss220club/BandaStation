@@ -13,6 +13,18 @@
 	icon_state = "centcom_officer"
 
 // Blueshield
+/datum/atom_skin/blueshield_armor/slim
+	preview_name = "Slim"
+	new_icon_state = "blueshield_armor"
+
+/datum/atom_skin/blueshield_armor/marine
+	preview_name = "Marine"
+	new_icon_state = "blueshield_marine"
+
+/datum/atom_skin/blueshield_armor/bulky
+	preview_name = "Bulky"
+	new_icon_state = "vest_black"
+
 /obj/item/clothing/suit/armor/vest/blueshield
 	name = "blueshield's armor"
 	desc = "A tight-fitting kevlar-lined vest with a blue badge on the chest of it."
@@ -20,11 +32,10 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 	icon_state = "blueshield_armor"
 	body_parts_covered = CHEST
-	unique_reskin = list(
-		"Slim" = "blueshield_armor",
-		"Marine" = "blueshield_marine",
-		"Bulky" = "vest_black"
-	)
+
+/obj/item/clothing/suit/armor/vest/blueshield/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/blueshield_armor)
 
 /obj/item/clothing/suit/armor/vest/blueshield_jacket
 	name = "blueshield's jacket"

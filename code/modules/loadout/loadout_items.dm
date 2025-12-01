@@ -333,12 +333,6 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	if((loadout_flags & LOADOUT_FLAG_GREYSCALING_ALLOWED) && !(loadout_flags & LOADOUT_FLAG_JOB_GREYSCALING))
 		displayed_text[FA_ICON_PALETTE] = "Смена цвета"
 
-	if(reskin_datum)
-		displayed_text[FA_ICON_SWATCHBOOK] = "Reskinnable"
-    
-	if(loadout_flags & LOADOUT_FLAG_ALLOW_RESKIN)
-		displayed_text[FA_ICON_SWATCHBOOK] = "Смена стиля"
-
 	// BANDASTATION ADDITION - START
 	if(loadout_flags & LOADOUT_FLAG_ALLOW_NAMING)
 		displayed_text[FA_ICON_SIGNATURE] = "Смена имени"
@@ -346,6 +340,8 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	if(animated)
 		displayed_text[FA_ICON_PERSON_RUNNING] = "Анимированно"
 	// BANDASTATION ADDITION - END
+	if(reskin_datum)
+		displayed_text[FA_ICON_SWATCHBOOK] = "Reskinnable"
 
 	return displayed_text
 
