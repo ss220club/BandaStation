@@ -58,8 +58,8 @@
 	AddComponent(/datum/component/alternative_sharpness, SHARP_POINTY, alt_continuous, alt_simple)
 
 /obj/item/knife/suicide_act(mob/living/user)
-	user.visible_message(pick(span_suicide("[user] is slitting [user.p_their()] wrists with \the [src]! It looks like [user.p_theyre()] trying to commit suicide."), \
-		span_suicide("[user] is slitting [user.p_their()] throat with \the [src]! It looks like [user.p_theyre()] trying to commit suicide."), \
+	user.visible_message(pick(span_suicide("[user] is slitting [user.p_their()] wrists with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство."), \
+		span_suicide("[user] is slitting [user.p_their()] throat with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство."), \
 		span_suicide("[user] is slitting [user.p_their()] stomach open with \the [src]! It looks like [user.p_theyre()] trying to commit seppuku.")))
 	return BRUTELOSS
 
@@ -321,7 +321,7 @@
 	custom_materials = null
 
 /obj/item/knife/shiv/carrot/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] forcefully drives \the [src] into [user.p_their()] eye! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] forcefully drives \the [src] into [user.p_their()] eye! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/knife/shiv/parsnip

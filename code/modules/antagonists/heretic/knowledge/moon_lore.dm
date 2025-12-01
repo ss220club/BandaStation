@@ -53,10 +53,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_moon
 	name = "Moonlight Troupe"
-	desc = "Opens up the Path of Moon to you. \
-		Allows you to transmute 2 sheets of glass and a knife into an Lunar Blade. \
-		You can only create two at a time."
-	gain_text = "Under the light of the moon the laughter echoes."
+	desc = "Открывает перед вами Путь луны. \
+		Позволяет трансмутировать 2 листа стекла и нож в Лунный клинок. \
+		Одновременно можно иметь только два."
+	gain_text = "Под лунным светом смех отдается эхом."
 	required_atoms = list(
 		/obj/item/knife = 1,
 		/obj/item/stack/sheet/glass = 2,
@@ -83,7 +83,7 @@
 	if(!iscarbon(target))
 		return
 	var/mob/living/carbon/carbon_target = target
-	to_chat(carbon_target, span_danger("You hear echoing laughter from above"))
+	to_chat(carbon_target, span_danger("Сверху доносится смех, отдающийся эхом."))
 	carbon_target.cause_hallucination(/datum/hallucination/delusion/preset/moon, "delusion/preset/moon hallucination caused by mansus grasp")
 	carbon_target.mob_mood.adjust_sanity(-30)
 
@@ -99,12 +99,12 @@
 
 /datum/heretic_knowledge/moon_amulet
 	name = "Moonlight Amulet"
-	desc = "Allows you to transmute 2 sheets of glass, a heart and a tie to create a Moonlight Amulet. \
-			If the item is used on someone with low sanity they go berserk attacking everyone, \
-			if their sanity isn't low enough it decreases their mood. \
-			Wearing this will grant you the ability to see heathens through walls and make your blades harmless, they will instead directly attack their mind. \
-			Provides thermal vision and doubles the brain regen of a moon heretic while worn."
-	gain_text = "At the head of the parade he stood, the moon condensed into one mass, a reflection of the soul."
+	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Moonlight Amulet. \
+			Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд; \
+			если рассудок не достаточно низок, то уменьшается их настроение. \
+			Ношение этого предмета дарует вам способность видеть язычников сквозь стены, а ваши клинки сделает безвредными - они будут калечить разум жертв. \
+			Предоставляет термальное зрение и удваивает регенерацию мозга еретика Луны при ношении."
+	gain_text = "Во главе парада стоял он, луна сгустилась в единную массу, отражение души."
 
 	required_atoms = list(
 		/obj/item/organ/heart = 1,
@@ -143,9 +143,9 @@
 
 /datum/heretic_knowledge/blade_upgrade/moon
 	name = "Moonlight Blade"
-	desc = "Your blade now deals brain damage, causes  random hallucinations and does sanity damage. \
-			Deals more brain damage if your victim is insane or unconscious."
-	gain_text = "His wit was sharp as a blade, cutting through the lie to bring us joy."
+	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации. \
+			Наносит больше урона мозгу если жертва в безумии или спит."
+	gain_text = "Его остроумие было острым, как клинок, оно прорезало ложь, чтобы принести нам радость."
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_moon"
@@ -170,11 +170,11 @@
 
 /datum/heretic_knowledge/spell/moon_ringleader
 	name = "Ringleaders Rise"
-	desc = "Grants you Ringleaders Rise, an AoE spell that deals more brain damage the lower the sanity of everyone in the AoE \
-			and causes hallucinations, with those who have less sanity getting more. \
-			If their sanity is low enough this turns them insane, the spell then halves their sanity."
-	gain_text = "I grabbed his hand and we rose, those who saw the truth rose with us. \
-		The ringleader pointed up and the dim light of truth illuminated us further."
+	desc = "Дает вам Ringleaders Rise, заклинание по области, которое наносит больше урона мозгу в зависимости от отсутствующего рассудка у целей, \
+			также вызывает им галлюцинации, больше тем, у кого мало рассудка. \
+			Если их рассудок достаточно слабый, они обезумеют и потеряют половину рассудка."
+	gain_text = "Взял его за руку, мы поднялись, и те, кто видел правду, поднялись вместе с нами. \
+		Шпрехшталмейстер указал вверх, и тусклый свет правды осветил нас еще больше."
 
 	action_to_add = /datum/action/cooldown/spell/aoe/moon_ringleader
 	cost = 2
@@ -184,18 +184,18 @@
 
 /datum/heretic_knowledge/ultimate/moon_final
 	name = "The Last Act"
-	desc = "The ascension ritual of the Path of Moon. \
-		Bring 3 corpses with more than 50 brain damage to a transmutation rune to complete the ritual. \
-		When completed, you become a harbinger of madness gaining and aura of passive sanity decrease, \
-		crewmembers with low enough sanity will be converted into acolytes. \
-		1/5th of the crew will turn into acolytes and follow your command, they will all receive moonlight amulets."
-	gain_text = "We dived down towards the crowd, his soul splitting off in search of greater venture \
-		for where the Ringleader had started the parade, I shall continue it unto the suns demise \
-		WITNESS MY ASCENSION, THE MOON SMILES ONCE MORE AND FOREVER MORE IT SHALL!"
+	desc = "Ритуал вознесения Пути луны. \
+		Принесите 3 трупа с более чем 50 урона мозгу на руну трансмутации, чтобы завершить ритуал \
+		При завершении, вы становитесь предвестником безумия и получаете ауру пассивного снижения рассудка, \
+		а члены экипажа с достаточно низким рассудком станут аколитами. \
+		Одна пятая экипажа превратится в аколитов и будет следовать вашим приказам, также они получат Moonlight Amulet"
+	gain_text = "Мы нырнули вниз, к толпе, его душа отделилась в поисках более великой авантюры, \
+		туда, откуда Шпрехшталмейстер начал парад, и я продолжу его до самой кончины солнца \
+		УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ, ЛУНА УЛЫБНЕТСЯ РАЗ И НАВСЕГДА!"
 
 	ascension_achievement = /datum/award/achievement/misc/moon_ascension
-	announcement_text = "%SPOOKY% Laugh, for the ringleader %NAME% has ascended! \
-						The truth shall finally devour the lie! %SPOOKY%"
+	announcement_text = "%SPOOKY% Смейтесь, ибо Шпрехшталмейстер %NAME% вознесся! \
+						Правда наконец поглотит ложь! %SPOOKY%"
 	announcement_sound = 'sound/music/antag/heretic/ascend_moon.ogg'
 
 /datum/heretic_knowledge/ultimate/moon_final/is_valid_sacrifice(mob/living/sacrifice)
@@ -231,7 +231,7 @@
 
 	for(var/mob/living/carbon/human/crewmate as anything in lunatic_candidates)
 		if(amount_of_lunatics > max_lunatics)
-			to_chat(crewmate, span_boldwarning("You feel uneasy, as if for a brief moment something was gazing at you."))
+			to_chat(crewmate, span_boldwarning("Вы чувствуете неспокойство, как будто на мгновение что-то смотрело на вас."))
 			continue
 		if(attempt_conversion(crewmate, user))
 			amount_of_lunatics++
@@ -281,7 +281,7 @@
 			continue
 		new /obj/effect/temp_visual/moon_ringleader(get_turf(carbon_view))
 		if(carbon_view.has_status_effect(/datum/status_effect/confusion))
-			to_chat(carbon_view, span_big(span_hypnophrase("YOUR HEAD RATTLES WITH A THOUSAND VOICES JOINED IN A MADDENING CACOPHONY OF SOUND AND MUSIC. EVERY FIBER OF YOUR BEING SAYS 'RUN'.")))
+			to_chat(carbon_view, span_big(span_hypnophrase("ВАШ РАЗУМ ТРЕЩИТ ОТ ТЫСЯЧИ ГОЛОСОВ, СЛИТЫХ В БЕЗУМНУЮ КАКОФОНИЮ ЗВУКОВ И МУЗЫКИ. КАЖДАЯ ЩЕПКА ВАШЕГО СУЩЕСТВА КРИЧИТ: «БЕГИ».")))
 		carbon_view.adjust_confusion(2 SECONDS)
 		carbon_view.mob_mood.adjust_sanity(-20)
 
@@ -289,7 +289,7 @@
 			return
 		// So our sanity is dead, time to fuck em up
 		if(SPT_PROB(20, seconds_per_tick))
-			to_chat(carbon_view, span_warning("it echoes through you!"))
+			to_chat(carbon_view, span_warning("оно эхом отдаётся в вас!"))
 		visible_hallucination_pulse(
 			center = get_turf(carbon_view),
 			radius = 7,
@@ -298,8 +298,8 @@
 		carbon_view.adjust_temp_blindness(5 SECONDS)
 		if(should_mind_explode(carbon_view))
 			to_chat(carbon_view, span_boldbig(span_red(\
-				"YOUR SENSES REEL AS YOUR MIND IS ENVELOPED BY AN OTHERWORLDLY FORCE ATTEMPTING TO REWRITE YOUR VERY BEING. \
-				YOU CANNOT EVEN BEGIN TO SCREAM BEFORE YOUR IMPLANT ACTIVATES ITS PSIONIC FAIL-SAFE PROTOCOL, TAKING YOUR HEAD WITH IT.")))
+				"ВАШИ ЧУВСТВА ОХВАЧЕНЫ УЖАСОМ, КОГДА В ВАШ РАЗУМ ВТОРГАЕТСЯ ПОТУСТОРОННЯЯ СИЛА, ПЫТАЮЩАЯСЯ ПЕРЕПИСЫВАТЬ ВАШЕ СУЩЕСТВО. \
+				ВЫ ДАЖЕ НЕ УСПЕВАЕТЕ КРИКНУТЬ, КАК ВАШ ИМПЛАНТ АКТИВИРУЕТ СВОЮ СИСТЕМУ АВАРИЙНОЙ ПСИОНИЧЕСКОЙ ЗАЩИТЫ, СНОСЯ ВАМ ГОЛОВУ.")))
 			var/obj/item/bodypart/head/head = locate() in carbon_view.bodyparts
 			if(head)
 				head.dismember()

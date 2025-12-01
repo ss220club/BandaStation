@@ -331,6 +331,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	if(display_hud_version > HUD_VERSIONS) //If the requested version number is greater than the available versions, reset back to the first version
 		display_hud_version = 1
 
+	// BANDASTATION INFOSCREEN FIX START: Remove null entries from infodisplay to prevent rendering errors.
+	infodisplay -= null
+	static_inventory -= null
+	// BANDASTATION INFOSCREEN FIX END
 	switch(display_hud_version)
 		if(HUD_STYLE_STANDARD) //Default HUD
 			hud_shown = TRUE //Governs behavior of other procs
@@ -427,10 +431,12 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/mob/screenmob = viewmob || mymob
 	hidden_inventory_update(screenmob)
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /datum/hud/new_player/show_hud(version = 0, mob/viewmob)
 	. = ..()
 	if(.)
 		show_station_trait_buttons()
+*/
 
 /datum/hud/proc/hidden_inventory_update()
 	return

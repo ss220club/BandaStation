@@ -79,6 +79,7 @@
 		ready = PLAYER_NOT_READY
 		return FALSE
 
+	SStitle.hide_title_screen_from(client) // BANDASTATION ADDITION - HTML Title Screen
 	var/mob/dead/observer/observer = new()
 	spawning = TRUE
 
@@ -110,21 +111,21 @@
 /proc/get_job_unavailable_error_message(retval, jobtitle)
 	switch(retval)
 		if(JOB_AVAILABLE)
-			return "[jobtitle] is available."
+			return "[job_title_ru(jobtitle)] доступна для выбора."
 		if(JOB_UNAVAILABLE_GENERIC)
-			return "[jobtitle] is unavailable."
+			return "[job_title_ru(jobtitle)] недоступна для выбора."
 		if(JOB_UNAVAILABLE_BANNED)
-			return "You are currently banned from [jobtitle]."
+			return "На данный момент вам выдан бан роли на [job_title_ru(jobtitle)]."
 		if(JOB_UNAVAILABLE_PLAYTIME)
-			return "You do not have enough relevant playtime for [jobtitle]."
+			return "У вас не наиграно достаточно часов для игры за [job_title_ru(jobtitle)]."
 		if(JOB_UNAVAILABLE_ACCOUNTAGE)
-			return "Your account is not old enough for [jobtitle]."
+			return "Ваш аккаунт недостаточно стар для игры за [job_title_ru(jobtitle)]."
 		if(JOB_UNAVAILABLE_SLOTFULL)
-			return "[jobtitle] is already filled to capacity."
+			return "Роль [job_title_ru(jobtitle)] уже заполнена до максимума."
 		if(JOB_UNAVAILABLE_ANTAG_INCOMPAT)
-			return "[jobtitle] is not compatible with some antagonist role assigned to you."
+			return "[job_title_ru(jobtitle)] несовместим с некоторыми выбранными вами ролями антагонистов."
 		if(JOB_UNAVAILABLE_AGE)
-			return "Your character is not old enough for [jobtitle]."
+			return "Ваш персонаж недостаточно стар для игры за [job_title_ru(jobtitle)]."
 
 	return GENERIC_JOB_UNAVAILABLE_ERROR
 
@@ -154,7 +155,7 @@
 	// Check that they're picking someone new for new character respawning
 	if(CONFIG_GET(flag/allow_respawn) == RESPAWN_FLAG_NEW_CHARACTER)
 		if("[client.prefs.default_slot]" in persistent_client.joined_as_slots)
-			tgui_alert(usr, "You already have played this character in this round!")
+			tgui_alert(usr, "Вы уже играли на данном персонаже в этом раунде!")
 			return FALSE
 
 	var/error = IsJobUnavailable(rank)
@@ -164,7 +165,7 @@
 
 	if(SSshuttle.arrivals)
 		if(SSshuttle.arrivals.damaged && CONFIG_GET(flag/arrivals_shuttle_require_safe_latejoin))
-			tgui_alert(usr,"The arrivals shuttle is currently malfunctioning! You cannot join.")
+			tgui_alert(usr,"В данный момент шаттл прибытия сломан. Вы не сможете присоединится.")
 			return FALSE
 
 		if(CONFIG_GET(flag/arrivals_shuttle_require_undocked))
@@ -177,7 +178,7 @@
 	var/datum/job/job = SSjob.get_job(rank)
 
 	if(!SSjob.assign_role(src, job, TRUE))
-		tgui_alert(usr, "There was an unexpected error putting you into your requested job. If you cannot join with any job, you should contact an admin.")
+		tgui_alert(usr, "Возникла непредвиденная ошибка при выдаче роли, выбранной вами. Если вы не можете зайти, обратитесь к администрации.")
 		return FALSE
 
 	var/latejoin_period = CEILING(STATION_TIME_PASSED() / (5 MINUTES), 5)
@@ -285,6 +286,7 @@
 	. = new_character
 	if(!.)
 		return
+	SStitle.hide_title_screen_from(client) // BANDASTATION ADDITION - HTML Title Screen
 	new_character.PossessByPlayer(key) //Manually transfer the key to log them in,
 	new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 	var/area/joined_area = get_area(new_character.loc)
@@ -347,7 +349,7 @@
 
 	// Then we create the interview form and show it to the client
 	var/datum/interview/I = GLOB.interviews.interview_for_client(client)
-	if (I)
+	if(I && SScentral.is_player_discord_linked(src.ckey)) // BANDASTATION EDIT - if(I) => if(I && SScentral.is_player_discord_linked(owner.ckey))
 		I.ui_interact(src)
 
 	// Add verb for re-opening the interview panel, fixing chat and re-init the verbs for the stat panel
@@ -357,7 +359,7 @@
 ///Resets the Lobby Menu HUD, recreating and reassigning it to the new player
 /mob/dead/new_player/proc/reset_menu_hud()
 	set name = "Reset Lobby Menu HUD"
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 	var/mob/dead/new_player/new_player = usr
 	if(!COOLDOWN_FINISHED(new_player, reset_hud_cooldown))
 		to_chat(new_player, span_warning("You must wait <b>[DisplayTimeText(COOLDOWN_TIMELEFT(new_player, reset_hud_cooldown))]</b> before resetting the Lobby Menu HUD again!"))

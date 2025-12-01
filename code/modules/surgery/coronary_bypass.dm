@@ -1,5 +1,5 @@
 /datum/surgery/coronary_bypass
-	name = "Coronary Bypass"
+	name = "Коронарное шунтирование"
 	organ_to_manipulate = ORGAN_SLOT_HEART
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -34,7 +34,7 @@
 
 //an incision but with greater bleed, and a 90% base success chance
 /datum/surgery_step/incise_heart
-	name = "incise heart (scalpel)"
+	name = "надрежьте сердце (скальпель)"
 	implements = list(
 		TOOL_SCALPEL = 90,
 		/obj/item/melee/energy/sword = 45,
@@ -47,7 +47,7 @@
 	surgery_effects_mood = TRUE
 
 /datum/surgery_step/incise_heart/mechanic
-	name = "access engine internals (scalpel or crowbar)"
+	name = "получите доступ к двигателю (скальпель или лом)"
 	implements = list(
 		TOOL_SCALPEL = 95,
 		TOOL_CROWBAR = 95,
@@ -61,11 +61,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to make an incision in [target]'s heart..."),
-		span_notice("[user] begins to make an incision in [target]'s heart."),
-		span_notice("[user] begins to make an incision in [target]'s heart."),
+		span_notice("Вы начинаете делать надрез сердца у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез сердца у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез сердца у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a horrendous pain in your heart, it's almost enough to make you pass out!")
+	display_pain(target, "Вы чувствуете ужасную боль в сердце. Вы близки к тому, чтобы потерять сознание!")
 
 /datum/surgery_step/incise_heart/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(ishuman(target))
@@ -75,9 +75,9 @@
 			display_results(
 				user,
 				target,
-				span_notice("[blood_name] pools around the incision in [target_human]'s heart."),
-				span_notice("[blood_name] pools around the incision in [target_human]'s heart."),
-				span_notice("[blood_name] pools around the incision in [target_human]'s heart."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
+				span_notice("Вокруг сердца у [target_human.declent_ru(GENITIVE)] образуется лужа [blood_name]."),
 			)
 			var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 			target_bodypart.adjustBleedStacks(10)
@@ -91,9 +91,9 @@
 		display_results(
 			user,
 			target,
-			span_warning("You screw up, cutting too deeply into the heart!"),
-			span_warning("[user] screws up, causing [blood_name] to spurt out of [target_human]'s chest!"),
-			span_warning("[user] screws up, causing [blood_name] to spurt out of [target_human]'s chest!"),
+			span_warning("Вы ошибаетесь, совершив слишком глубокий надрез сердца!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается [blood_name]!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] выплескивается [blood_name]!"),
 		)
 		var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 		target_bodypart.adjustBleedStacks(10)
@@ -102,7 +102,7 @@
 
 //grafts a coronary bypass onto the individual's heart, success chance is 90% base again
 /datum/surgery_step/coronary_bypass
-	name = "graft coronary bypass (hemostat)"
+	name = "проведите коронарное шунтирование (гемостат)"
 	implements = list(
 		TOOL_HEMOSTAT = 90,
 		TOOL_WIRECUTTER = 35,
@@ -114,7 +114,7 @@
 	failure_sound = 'sound/items/handling/surgery/organ2.ogg'
 
 /datum/surgery_step/coronary_bypass/mechanic
-	name = "perform maintenance (hemostat or wrench)"
+	name = "проведите обслуживание (гемостат или ключ)"
 	implements = list(
 		TOOL_HEMOSTAT = 90,
 		TOOL_WRENCH = 90,
@@ -128,11 +128,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to graft a bypass onto [target]'s heart..."),
-		span_notice("[user] begins to graft something onto [target]'s heart!"),
-		span_notice("[user] begins to graft something onto [target]'s heart!"),
+		span_notice("Вы начинаете шунтирование сердца у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает шунтирование сердца у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает шунтирование сердца у [target.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(target, "The pain in your chest is unbearable! You can barely take it anymore!")
+	display_pain(target, "Боль в груди невыносима! Вы едва можете это вытерпеть!")
 
 /datum/surgery_step/coronary_bypass/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	target.set_organ_loss(ORGAN_SLOT_HEART, 60)
@@ -144,11 +144,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You successfully graft a bypass onto [target]'s heart."),
-		span_notice("[user] finishes grafting something onto [target]'s heart."),
-		span_notice("[user] finishes grafting something onto [target]'s heart."),
+		span_notice("Вы успешно проводите шунтирование сердца у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно проводит шунтирование сердца у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно проводит шунтирование сердца у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "The pain in your chest throbs, but your heart feels better than ever!")
+	display_pain(target, "Боль в груди не отступает, но сердце чувствует себя как никогда хорошо!")
 	return ..()
 
 /datum/surgery_step/coronary_bypass/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -157,11 +157,11 @@
 		display_results(
 			user,
 			target,
-			span_warning("You screw up in attaching the graft, and it tears off, tearing part of the heart!"),
-			span_warning("[user] screws up, causing blood to spurt out of [target_human]'s chest profusely!"),
-			span_warning("[user] screws up, causing blood to spurt out of [target_human]'s chest profusely!"),
+			span_warning("Вы ошибаетесь при шунтировании сердца и повредили часть сердца!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] обильно хлещет кровь!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] обильно хлещет кровь!"),
 		)
-		display_pain(target, "Your chest burns; you feel like you're going insane!")
+		display_pain(target, "В груди все горит; вам кажется, что вы сходите с ума!")
 		target_human.adjust_organ_loss(ORGAN_SLOT_HEART, 20)
 		var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 		target_bodypart.adjustBleedStacks(30)

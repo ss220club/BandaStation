@@ -365,22 +365,22 @@ GLOBAL_LIST_INIT(tool_items, list(
 
 // Keys for equip_in_one_of_slots, if you add new ones update the assoc lists in equip_in_one_of_slots
 /// Items placed into the left pocket.
-#define LOCATION_LPOCKET "in your left pocket"
+#define LOCATION_LPOCKET "в левом кармане"
 /// Items placed into the right pocket
-#define LOCATION_RPOCKET "in your right pocket"
+#define LOCATION_RPOCKET "в правом кармане"
 /// Items placed into the backpack.
-#define LOCATION_BACKPACK "in your backpack"
+#define LOCATION_BACKPACK "в сумке"
 /// Items placed into the hands.
-#define LOCATION_HANDS "in your hands"
+#define LOCATION_HANDS "в руках"
 /// Items placed in the glove slot.
-#define LOCATION_GLOVES "on your hands"
+#define LOCATION_GLOVES "на руках"
 /// Items placed in the eye/glasses slot.
-#define LOCATION_EYES "covering your eyes"
+#define LOCATION_EYES "на глазах"
 /// Items placed in the mask slot.
-#define LOCATION_MASK "covering your face"
+#define LOCATION_MASK "на лице"
 /// Items placed on the head/hat slot.
-#define LOCATION_HEAD "on your head"
+#define LOCATION_HEAD "на голове"
 /// Items placed in the neck slot.
-#define LOCATION_NECK "around your neck"
+#define LOCATION_NECK "на шее"
 /// Items placed in the id slot
-#define LOCATION_ID "in your ID slot"
+#define LOCATION_ID "в кармашке ID карты"

@@ -1,0 +1,4 @@
+author: "PetyaFX"
+delete-after: True
+changes:
+  - rscadd: "добавлен прок запроса к бэкенду для создания публичного сообщения о бане"

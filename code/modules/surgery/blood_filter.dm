@@ -1,5 +1,5 @@
 /datum/surgery/blood_filter
-	name = "Filter blood"
+	name = "Фильтрация крови"
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
 		/datum/surgery_step/incise,
@@ -31,9 +31,9 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin filtering [target]'s blood..."),
-		span_notice("[user] uses [tool] to filter [target]'s blood."),
-		span_notice("[user] uses [tool] on [target]'s chest."),
+		span_notice("Вы начинаете фильтровать кровь у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] использует [tool.declent_ru(ACCUSATIVE)] для фильтрации крови у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] использует [tool.declent_ru(ACCUSATIVE)] на груди у [target.declent_ru(GENITIVE)]."),
 	)
 	if(!..())
 		return
@@ -53,7 +53,7 @@
  */
 /datum/surgery_step/filter_blood/proc/has_filterable_chems(mob/living/carbon/target, obj/item/blood_filter/bloodfilter)
 	if(!length(target.reagents?.reagent_list))
-		bloodfilter.audible_message(span_notice("[bloodfilter] pings as it reports no chemicals detected in [target]'s blood."))
+		bloodfilter.audible_message(span_notice("[capitalize(bloodfilter.declent_ru(NOMINATIVE))] сигнализирует об отсутствии химикатов в крови у [target.declent_ru(GENITIVE)]."))
 		playsound(get_turf(target), 'sound/machines/ping.ogg', 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 		return FALSE
 
@@ -67,14 +67,14 @@
 	return FALSE
 
 /datum/surgery_step/filter_blood
-	name = "Filter blood (blood filter)"
+	name = "Проведите фильтрацию крови (фильтр крови)"
 	implements = list(/obj/item/blood_filter = 95)
 	repeatable = TRUE
 	time = 2.5 SECONDS
 	success_sound = 'sound/machines/card_slide.ogg'
 
 /datum/surgery_step/filter_blood/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_pain(target, "You feel a throbbing pain in your chest!")
+	display_pain(target, "Вы чувствуете ужасную боль в груди!")
 
 /datum/surgery_step/filter_blood/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/obj/item/blood_filter/bloodfilter = tool
@@ -85,9 +85,9 @@
 	display_results(
 		user,
 		target,
-		span_notice("\The [tool] completes a cycle filtering [target]'s blood."),
-		span_notice("\The [tool] whirrs as it filters [target]'s blood."),
-		span_notice("\The [tool] whirrs as it pumps."),
+		span_notice("[capitalize(tool.declent_ru(NOMINATIVE))] сигнализирует о завершении фильтрация крови у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(tool.declent_ru(NOMINATIVE))] сигнализирует об окончании перекачивания крови у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(tool.declent_ru(NOMINATIVE))] сигнализирует об окончании перекачивания крови."),
 	)
 
 	if(locate(/obj/item/healthanalyzer) in user.held_items)
@@ -99,8 +99,8 @@
 	display_results(
 		user,
 		target,
-		span_warning("You screw up, bruising [target]'s chest!"),
-		span_warning("[user] screws up, brusing [target]'s chest!"),
-		span_warning("[user] screws up!"),
+		span_warning("Вы ошибаетесь, оставляя ушиб на груди у [target.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, оставляя ушиб на груди у [target.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
 	)
 	target.adjust_brute_loss(5)

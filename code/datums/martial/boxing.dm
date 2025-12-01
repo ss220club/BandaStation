@@ -38,7 +38,7 @@
 		reset_streak()
 		if(COOLDOWN_FINISHED(src, warning_cooldown))
 			COOLDOWN_START(src, warning_cooldown, 2 SECONDS)
-			attacker.balloon_alert(attacker, "weak combo, alternate your hits!")
+			attacker.balloon_alert(attacker, "слабое комбо, чередуйте удары!")
 		return combo_multiplier * 0.5
 
 	if(findtext(streak, LEFT_RIGHT_COMBO) || findtext(streak, RIGHT_LEFT_COMBO))
@@ -56,27 +56,27 @@
 /datum/martial_art/boxing/disarm_act(mob/living/attacker, mob/living/defender)
 	if(honor_check(defender))
 		add_to_streak("D", defender)
-	tussle(attacker, defender, "right hook", "right hooked")
+	tussle(attacker, defender, "хук справа", "хук справа")
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/boxing/grab_act(mob/living/attacker, mob/living/defender)
 	if(honorable_boxer)
-		attacker.balloon_alert(attacker, "no grabbing while boxing!")
+		attacker.balloon_alert(attacker, "никаких захватов в боксе!")
 		return MARTIAL_ATTACK_FAIL
 	return MARTIAL_ATTACK_INVALID //UNLESS YOU'RE EVIL
 
 /datum/martial_art/boxing/harm_act(mob/living/attacker, mob/living/defender)
 	if(honor_check(defender))
 		add_to_streak("H", defender)
-	tussle(attacker, defender, "left hook", "left hooked")
+	tussle(attacker, defender, "хук слева", "хук слева")
 	return MARTIAL_ATTACK_SUCCESS
 
 // Our only boxing move, which occurs on literally all attacks; the tussle. However, quite a lot morphs the results of this proc. Combos, unlike most martial arts attacks, are checked in this proc rather than our standard unarmed procs
-/datum/martial_art/boxing/proc/tussle(mob/living/attacker, mob/living/defender, atk_verb = "blind jab", atk_verbed = "blind jabbed")
+/datum/martial_art/boxing/proc/tussle(mob/living/attacker, mob/living/defender, atk_verb = "блайнд джеб", atk_verbed = "блайнд джеб")
 
 	if(honorable_boxer) //Being a good sport, you never hit someone on the ground or already knocked down. It shows you're the better person.
 		if(defender.body_position == LYING_DOWN && defender.get_stamina_loss() >= 100 || defender.IsUnconscious()) //If they're in stamcrit or unconscious, don't bloody punch them
-			attacker.balloon_alert(attacker, "unsportsmanlike behaviour!")
+			attacker.balloon_alert(attacker, "неспортивное поведение!")
 			return FALSE
 
 	var/obj/item/bodypart/arm/active_arm = attacker.get_active_hand()
@@ -120,19 +120,19 @@
 	var/current_atk_verbed = atk_verbed
 
 	if(is_detective_job(attacker.mind?.assigned_role)) //In short: discombobulate
-		current_atk_verb = "discombobulate"
-		current_atk_verbed = "discombulated"
+		current_atk_verb = "дискомбулейт"
+		current_atk_verbed = "дискомбулейт"
 
 	// Similar to a normal punch, should we have a value of 0 for our lower force, we simply miss outright.
 	if(!lower_force)
 		playsound(defender.loc, active_arm.unarmed_miss_sound, 25, TRUE, -1)
-		defender.visible_message(span_warning("[attacker]'s [current_atk_verb] misses [defender]!"), \
-			span_danger("You avoid [attacker]'s [current_atk_verb]!"), span_hear("You hear a swoosh!"), COMBAT_MESSAGE_RANGE, attacker)
-		to_chat(attacker, span_warning("Your [current_atk_verb] misses [defender]!"))
+		defender.visible_message(span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] совершает [current_atk_verb] и промахивается по [defender.declent_ru(DATIVE)]!"), \
+			span_danger("Вы увернулись, [current_atk_verb] [attacker.declent_ru(GENITIVE)] прошел мимо!"), span_hear("Вы слышите свист!"), COMBAT_MESSAGE_RANGE, attacker)
+		to_chat(attacker, span_warning("Ваш [current_atk_verb] промахивается по [defender.declent_ru(DATIVE)]!"))
 		log_combat(attacker, defender, "attempted to hit", current_atk_verb)
 		return FALSE
 
-	if(defender.check_block(attacker, damage, "[attacker]'s [current_atk_verb]", UNARMED_ATTACK))
+	if(defender.check_block(attacker, damage, "[current_atk_verb] [attacker.declent_ru(GENITIVE)]", UNARMED_ATTACK))
 		return FALSE
 
 	var/obj/item/bodypart/affecting = defender.get_bodypart(defender.get_random_valid_zone(attacker.zone_selected))
@@ -141,14 +141,14 @@
 	playsound(defender, attack_sound, 25, TRUE, -1)
 
 	defender.visible_message(
-		span_danger("[attacker] [current_atk_verbed] [defender]!"),
-		span_userdanger("You're [current_atk_verbed] by [attacker]!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] наносит [current_atk_verbed] по [defender.declent_ru(DATIVE)]!"),
+		span_userdanger("Вы получаете [current_atk_verbed] от [attacker.declent_ru(GENITIVE)]!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
 
-	to_chat(attacker, span_danger("You [current_atk_verbed] [defender]!"))
+	to_chat(attacker, span_danger("Вы нанесли [current_atk_verbed] по [defender.declent_ru(DATIVE)]!"))
 
 	// Determines the total amount of experience earned per punch
 	var/experience_earned = round(damage/4, 1)
@@ -189,26 +189,26 @@
 /datum/martial_art/boxing/proc/crit_effect(mob/living/attacker, mob/living/defender, armor_block = 0, damage_type = STAMINA, damage = 0)
 	if(defender.get_timed_status_effect_duration(/datum/status_effect/staggered))
 		defender.visible_message(
-			span_danger("[attacker] knocks [defender] out with a haymaker!"),
-			span_userdanger("You're knocked unconscious by [attacker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] вырубает [defender] хеймейкером!"),
+			span_userdanger("Вас вырубает [attacker.declent_ru(NOMINATIVE)]!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
-		to_chat(attacker, span_danger("You knock [defender] out with a haymaker!"))
+		to_chat(attacker, span_danger("Вы вырубаете [defender.declent_ru(ACCUSATIVE)] хеймейкером!"))
 		defender.apply_effect(20 SECONDS, EFFECT_KNOCKDOWN, armor_block)
 		defender.SetSleeping(10 SECONDS)
 		log_combat(attacker, defender, "knocked out (boxing) ")
 	else
 		defender.visible_message(
-			span_danger("[attacker] staggers [defender] with a haymaker!"),
-			span_userdanger("You're nearly knocked off your feet by [attacker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] ошеломляет [defender.declent_ru(ACCUSATIVE)] хеймейкером!"),
+			span_userdanger("Вас почти сбивает с ног удар [attacker.declent_ru(GENITIVE)]!"),
+			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
 		defender.adjust_staggered_up_to(STAGGERED_SLOWDOWN_LENGTH, 10 SECONDS)
-		to_chat(attacker, span_danger("You stagger [defender] with a haymaker!"))
+		to_chat(attacker, span_danger("Вы ошеломляете [defender.declent_ru(ACCUSATIVE)] хеймейкером!"))
 		log_combat(attacker, defender, "staggered (boxing) ")
 
 /// Returns whether whoever is checked by this proc is complying with the rules of boxing. The boxer cannot block non-boxers, and cannot apply their scariest moves against non-boxers.
@@ -249,7 +249,7 @@
 
 	var/block_chance = base_unarmed_effectiveness + athletics_skill_rands
 
-	var/block_text = pick("block", "evade")
+	var/block_text = pick("блокирует", "избегает")
 
 	var/mob/living/attacker = GET_ASSAILANT(hitby)
 
@@ -273,10 +273,10 @@
 		perform_extra_effect(boxer, attacker)
 
 	boxer.visible_message(
-		span_danger("[boxer] [block_text]s [attack_text]!"),
-		span_userdanger("You [block_text] [attack_text]!"),
+		span_danger("[capitalize(boxer.declent_ru(NOMINATIVE))] [block_text] [attack_text]!"),
+		span_userdanger("Вы [block_text]е [attack_text]!"),
 	)
-	if(block_text == "evade")
+	if(block_text == "избегает")
 		playsound(boxer.loc, active_arm.unarmed_miss_sound, 25, TRUE, -1)
 
 	return SUCCESSFUL_BLOCK
@@ -310,8 +310,8 @@
 	/// The mobs we are looking for to pass the honor check
 	var/honorable_mob_biotypes = MOB_BEAST | MOB_SPECIAL | MOB_PLANT | MOB_BUG | MOB_MINING | MOB_CRUSTACEAN | MOB_REPTILE
 	/// Our crit shout words. First word is then paired with a second word to form an attack name.
-	var/list/first_word_strike = list("Extinction", "Brutalization", "Explosion", "Adventure", "Thunder", "Lightning", "Sonic", "Atomizing", "Whirlwind", "Tornado", "Shark", "Falcon")
-	var/list/second_word_strike = list(" Punch", " Pawnch", "-punch", " Jab", " Hook", " Fist", " Uppercut", " Straight", " Strike", " Lunge")
+	var/list/first_word_strike = list("Вымирающим", "Брутализирующим", "Взрывным", "Приключенческим", "Громовым", "Молниеносным", "Сверхзвуковым", "Атомизирующим", "Вихривым", "Торнадо", "Акульим", "Сокольным")
+	var/list/second_word_strike = list(" ударом", " джебом", " хуком", " кулаком", " апперкотом", " стрейтом", " страйком", " выпадом")
 
 /datum/martial_art/boxing/hunter/honor_check(mob/living/possible_boxer)
 	if(HAS_TRAIT(possible_boxer, TRAIT_BOXING_READY))
@@ -335,13 +335,13 @@
 	var/second_word_pick = pick(second_word_strike)
 
 	defender.visible_message(
-		span_danger("[attacker] knocks the absolute bajeezus out of [defender] utilizing the terrifying [first_word_pick][second_word_pick]!!!"),
-		span_userdanger("You have the absolute bajeezus knocked out of you by [attacker]!!!"),
-		span_hear("You hear a sickening sound of flesh hitting flesh!"),
+		span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] полностью выбивают всю дурь из [defender.declent_ru(GENITIVE)] ужасающим [first_word_pick][second_word_pick]!!!"),
+		span_userdanger("Из вас полностью выбивают всю дурь ударом от [attacker.declent_ru(GENITIVE)]!!!"),
+		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
-	to_chat(attacker, span_danger("You knock the absolute bajeezus out of [defender] out with the terrifying [first_word_pick][second_word_pick]!!!"))
+	to_chat(attacker, span_danger("Вы полностью выбиваете всю дурь из [defender.declent_ru(GENITIVE)] своим ужасающим [first_word_pick][second_word_pick]!!!"))
 	if(ishuman(attacker))
 		var/mob/living/carbon/human/human_attacker = attacker
 		human_attacker.force_say()

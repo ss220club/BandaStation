@@ -1,5 +1,5 @@
 /datum/surgery/autopsy
-	name = "Autopsy"
+	name = "Вскрытие"
 	surgery_flags = SURGERY_IGNORE_CLOTHES | SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -10,7 +10,7 @@
 	)
 
 /datum/surgery/autopsy/mechanic
-	name = "System Failure Analysis"
+	name = "Анализ системного сбоя"
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -29,7 +29,7 @@
 	return TRUE
 
 /datum/surgery_step/autopsy
-	name = "Perform Autopsy (autopsy scanner)"
+	name = "Проведите вскрытие (сканер аутопсии)"
 	implements = list(/obj/item/autopsy_scanner = 100)
 	time = 10 SECONDS
 	success_sound = 'sound/machines/printer.ogg'
@@ -38,11 +38,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin performing an autopsy on [target]..."),
-		span_notice("[user] uses [tool] to perform an autopsy on [target]."),
-		span_notice("[user] uses [tool] on [target]'s chest."),
+		span_notice("Вы приступаете к вскрытию [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] использует [tool.declent_ru(ACCUSATIVE)] для вскрытия [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] использует [tool.declent_ru(ACCUSATIVE)] на груди у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a burning sensation in your chest!")
+	display_pain(target, "Вы чувствуете жжение в груди!")
 
 /datum/surgery_step/autopsy/success(mob/living/user, mob/living/carbon/target, target_zone, obj/item/autopsy_scanner/tool, datum/surgery/surgery, default_display_results = FALSE)
 	ADD_TRAIT(target, TRAIT_DISSECTED, AUTOPSY_TRAIT)
@@ -59,8 +59,8 @@
 	display_results(
 		user,
 		target,
-		span_warning("You screw up, bruising [target]'s chest!"),
-		span_warning("[user] screws up, brusing [target]'s chest!"),
-		span_warning("[user] screws up!"),
+		span_warning("Вы ошибаетесь, оставляя ушиб на груди у [target.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, оставляя ушиб на груди у [target.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
 	)
 	target.adjust_brute_loss(5)

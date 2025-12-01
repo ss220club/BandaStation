@@ -49,11 +49,11 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_void
 	name = "Glimmer of Winter"
-	desc = "Opens up the Path of Void to you. \
-		Allows you to transmute a knife in sub-zero temperatures into a Void Blade. \
-		You can only create two at a time."
-	gain_text = "I feel a shimmer in the air, the air around me gets colder. \
-		I start to realize the emptiness of existence. Something's watching me."
+	desc = "Открывает перед вами Путь пустоты. \
+		Позволяет трансмутировать нож при отрицательных температурах в Пустотный клинок. \
+		дновременно можно иметь только два."
+	gain_text = "Я чувствую мерцание в воздухе, воздух вокруг меня становится холоднее. \
+		Я начинаю осознавать пустоту существования. Что-то наблюдает за мной."
 	required_atoms = list(/obj/item/knife = 1)
 	result_atoms = list(/obj/item/melee/sickly_blade/void)
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
@@ -63,12 +63,12 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_void/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	if(!isopenturf(loc))
-		loc.balloon_alert(user, "ritual failed, invalid location!")
+		loc.balloon_alert(user, "ритуал провален, неподходящая локация!")
 		return FALSE
 
 	var/turf/open/our_turf = loc
 	if(our_turf.GetTemperature() > T0C)
-		loc.balloon_alert(user, "ritual failed, not cold enough!")
+		loc.balloon_alert(user, "ритуал провален, не достаточно холодно!")
 		return FALSE
 
 	return ..()
@@ -85,10 +85,10 @@
 
 /datum/heretic_knowledge/spell/void_phase
 	name = "Void Phase"
-	desc = "Grants you Void Phase, a long range targeted teleport spell. \
-		Additionally causes damage to heathens around your original and target destination."
-	gain_text = "The entity calls themself the Aristocrat. They effortlessly walk through air like \
-		nothing - leaving a harsh, cold breeze in their wake. They disappear, and I am left in the blizzard."
+	desc = "Дарует вам Void Phase, заклинание телепортации дальнего действия. \
+		Дополнительно наносит урон язычникам вокруг вашей первоначальной и целевой цели."
+	gain_text = "Сущность называет себя Аристократом. Он легко проходит сквозь воздух, \
+		оставляя за собой резкий холодный ветер. Он исчезает, а я остаюсь в метели."
 	action_to_add = /datum/action/cooldown/spell/pointed/void_phase
 	cost = 2
 	research_tree_icon_frame = 7
@@ -145,8 +145,8 @@
 
 /datum/heretic_knowledge/blade_upgrade/void
 	name = "Seeking Blade"
-	desc = "Your blade now freezes enemies. Additionally, you can now attack distant marked targets with your Void Blade, teleporting directly next to them."
-	gain_text = "Fleeting memories, fleeting feet. I mark my way with frozen blood upon the snow. Covered and forgotten."
+	desc = "Ваш клинок теперь замораживает врагов. К тому же, теперь вы можете атаковать отмеченные цели на расстоянии Пустотным клинком, телепортируясь прямо к ним. "
+	gain_text = "Мимолетные воспоминания, мимолетные ноги. Я отмечаю свой путь застывшей кровью на снегу. Покрытый и забытый."
 
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -182,17 +182,17 @@
 
 /datum/heretic_knowledge/ultimate/void_final
 	name = "Waltz at the End of Time"
-	desc = "The ascension ritual of the Path of Void. \
-		Bring 3 corpses to a transmutation rune in sub-zero temperatures to complete the ritual. \
-		When completed, causes a violent storm of void snow \
-		to assault the station, freezing and damaging heathens. Those nearby will be silenced and frozen even quicker. \
-		Additionally, you will become immune to the effects of space."
-	gain_text = "The world falls into darkness. I stand in an empty plane, small flakes of ice fall from the sky. \
-		The Aristocrat stands before me, beckoning. We will play a waltz to the whispers of dying reality, \
-		as the world is destroyed before our eyes. The void will return all to nothing, WITNESS MY ASCENSION!"
+	desc = "Ритуал вознесения Пути пустоты. \
+		Принесите 3 трупа к руне трансмутации при отрицательных температурах, чтобы завершить риAdditionally, you will become immune to the effects of space.туал. \
+		После завершения вызывает сильный шторм пустотного снега, \
+		который обрушивается на станцию, замораживая и повреждая язычников. Те, кто находится поблизости, замолчат и замерзнут еще быстрее. \
+		Кроме того, у вас появится иммунитет к воздействию космоса."
+	gain_text = "Мир погружается во тьму. Я стою в пустом мире, с неба падают мелкие хлопья льда. \
+		Аристократ стоит передо мной, призывая. Мы будем играть вальс под шепот умирающей реальности, \
+		пока мир разрушается на наших глазах. Пустота вернет все в ничто, УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ!"
 
 	ascension_achievement = /datum/award/achievement/misc/void_ascension
-	announcement_text = "%SPOOKY% The nobleman of void %NAME% has arrived, stepping along the Waltz that ends worlds! %SPOOKY%"
+	announcement_text = "%SPOOKY% Аристократ пустоты %NAME% ступил в Вальс, завершающий миры! %SPOOKY%"
 	announcement_sound = 'sound/music/antag/heretic/ascend_void.ogg'
 	///soundloop for the void theme
 	var/datum/looping_sound/void_loop/sound_loop
@@ -203,12 +203,12 @@
 
 /datum/heretic_knowledge/ultimate/void_final/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	if(!isopenturf(loc))
-		loc.balloon_alert(user, "ritual failed, invalid location!")
+		loc.balloon_alert(user, "ритуал провален, неподходящая локация!")
 		return FALSE
 
 	var/turf/open/our_turf = loc
 	if(our_turf.GetTemperature() > T0C)
-		loc.balloon_alert(user, "ritual failed, not cold enough!")
+		loc.balloon_alert(user, "ритуал провален, не достаточно холодно!")
 		return FALSE
 
 	return ..()

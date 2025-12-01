@@ -35,7 +35,7 @@
 
 /obj/structure/energy_net/atom_destruction(damage_flag)
 	for(var/mob/recovered_mob as anything in buckled_mobs)
-		recovered_mob.visible_message(span_notice("[recovered_mob] is recovered from the energy net!"), span_notice("You are recovered from the energy net!"), span_hear("You hear a grunt."))
+		recovered_mob.visible_message(span_notice("[capitalize(recovered_mob.declent_ru(NOMINATIVE))] высвобождается из энергетической сети!"), span_notice("Вы высвобождаетесь из энергетической сети!"), span_hear("Вы слышите треск."))
 	return ..()
 
 /obj/structure/energy_net/attack_paw(mob/user, list/modifiers)
