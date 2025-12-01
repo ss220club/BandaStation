@@ -1,0 +1,4 @@
+author: "PetyaFX"
+delete-after: True
+changes:
+  - code_imp: "добавлен новый тэг для CL экшена"
