@@ -1,13 +1,13 @@
-/datum/atom_skin/weapons/renoster
-	abstract_type = /datum/atom_skin/weapons/renoster
+/datum/atom_skin/renoster
+	abstract_type = /datum/atom_skin/renoster
 	change_inhand_icon_state = TRUE
 	change_base_icon_state = TRUE
 
-/datum/atom_skin/weapons/renoster/default
+/datum/atom_skin/renoster/default
 	preview_name = "Default"
 	new_icon_state = "renoster"
 
-/datum/atom_skin/weapons/renoster/green
+/datum/atom_skin/renoster/green
 	preview_name = "Green"
 	new_icon_state = "renoster_green"
 
@@ -38,7 +38,7 @@
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/weapons/renoster)
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/renoster)
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/add_seclight_point()
 	AddComponent(

@@ -13,6 +13,11 @@
 	icon_state = "centcom_officer"
 
 // Blueshield
+/datum/atom_skin/blueshield_armor
+	abstract_type = /datum/atom_skin/blueshield_armor
+	change_inhand_icon_state = TRUE
+	change_base_icon_state = TRUE
+
 /datum/atom_skin/blueshield_armor/slim
 	preview_name = "Slim"
 	new_icon_state = "blueshield_armor"
