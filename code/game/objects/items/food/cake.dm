@@ -263,6 +263,7 @@
 	tastes = list("cake" = 5, "sweetness" = 1)
 	foodtypes = GRAIN | DAIRY | JUNKFOOD | SUGAR
 	crafting_complexity = FOOD_COMPLEXITY_3
+	custom_materials = list(/datum/material/plastic = 5) // BANDASTATION ADDITION: crafting fix
 
 /obj/item/food/cake/birthday/energy
 	name = "energy cake"
