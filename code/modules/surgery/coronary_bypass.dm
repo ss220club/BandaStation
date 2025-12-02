@@ -81,7 +81,7 @@
 			)
 			var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 			target_bodypart.adjustBleedStacks(10)
-			target_human.adjustBruteLoss(10)
+			target_human.adjust_brute_loss(10)
 	return ..()
 
 /datum/surgery_step/incise_heart/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -97,8 +97,8 @@
 		)
 		var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 		target_bodypart.adjustBleedStacks(10)
-		target_human.adjustOrganLoss(ORGAN_SLOT_HEART, 10)
-		target_human.adjustBruteLoss(10)
+		target_human.adjust_organ_loss(ORGAN_SLOT_HEART, 10)
+		target_human.adjust_brute_loss(10)
 
 //grafts a coronary bypass onto the individual's heart, success chance is 90% base again
 /datum/surgery_step/coronary_bypass
@@ -135,7 +135,7 @@
 	display_pain(target, "Боль в груди невыносима! Вы едва можете это вытерпеть!")
 
 /datum/surgery_step/coronary_bypass/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
-	target.setOrganLoss(ORGAN_SLOT_HEART, 60)
+	target.set_organ_loss(ORGAN_SLOT_HEART, 60)
 	var/obj/item/organ/heart/target_heart = target.get_organ_slot(ORGAN_SLOT_HEART)
 	if(target_heart) //slightly worrying if we lost our heart mid-operation, but that's life
 		target_heart.operated = TRUE
@@ -162,7 +162,7 @@
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, в результате чего из груди [target_human.declent_ru(GENITIVE)] обильно хлещет кровь!"),
 		)
 		display_pain(target, "В груди все горит; вам кажется, что вы сходите с ума!")
-		target_human.adjustOrganLoss(ORGAN_SLOT_HEART, 20)
+		target_human.adjust_organ_loss(ORGAN_SLOT_HEART, 20)
 		var/obj/item/bodypart/target_bodypart = target_human.get_bodypart(target_zone)
 		target_bodypart.adjustBleedStacks(30)
 	return FALSE

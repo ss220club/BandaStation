@@ -10,9 +10,9 @@
 	spawn_positions = 1
 	supervisors = JOB_HEAD_OF_SECURITY_RU
 	minimal_player_age = 7
-	exp_requirements = 300
-	exp_required_type = EXP_TYPE_CREW
-	exp_granted_type = EXP_TYPE_CREW
+	exp_requirements = 600
+	exp_required_type = EXP_TYPE_SECURITY
+	exp_granted_type = EXP_TYPE_SECURITY
 	config_tag = "WARDEN"
 
 	outfit = /datum/outfit/job/warden
@@ -21,6 +21,7 @@
 	paycheck = PAYCHECK_CREW
 	paycheck_department = ACCOUNT_SEC
 
+	mind_traits = list(SECURITY_MIND_TRAITS)
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM, TRAIT_PRETENDER_ROYAL_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_WARDEN

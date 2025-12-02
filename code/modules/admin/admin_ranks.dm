@@ -90,6 +90,8 @@ GLOBAL_PROTECT(protected_ranks)
 				flag = R_SPAWN
 			if("AUTOADMIN")
 				flag = R_AUTOADMIN
+			if("MENTOR")
+				flag = R_MENTOR
 			if("DBRANKS")
 				flag = R_DBRANKS
 			if("@")

@@ -11,7 +11,6 @@
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "hm" = (
-/obj/machinery/holopad,
 /obj/structure/sign/poster/official/random/directional/west,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
@@ -94,7 +93,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/aft)
 "nz" = (
-/obj/structure/chair/comfy/brown,
+/obj/structure/chair/comfy/black,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "nI" = (
@@ -205,8 +204,9 @@
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/blueshield)
 "tQ" = (
-/obj/machinery/holopad,
 /obj/structure/sign/poster/official/random/directional/east,
+/obj/structure/bed/dogbed,
+/mob/living/basic/mouse/hamster/representative,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "ub" = (
@@ -377,7 +377,7 @@
 "FW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "HO" = (
 /obj/machinery/fax{
 	fax_name = "Nanotrasen Representative's Office";
@@ -460,7 +460,7 @@
 /area/station/command/heads_quarters/nanotrasen_representative)
 "PN" = (
 /turf/closed/wall/r_wall,
-/area/station/ai_monitored/command/storage/eva)
+/area/station/command/eva)
 "QL" = (
 /obj/structure/closet/cabinet,
 /obj/effect/turf_decal/siding/wood{
@@ -485,7 +485,7 @@
 "Se" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "SA" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/shutters/preopen{
@@ -496,13 +496,15 @@
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "SH" = (
-/obj/structure/chair,
+/obj/structure/chair/comfy/brown,
+/mob/living/basic/pet/cat/floppa,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
 "SK" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
+/obj/machinery/holopad,
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "TQ" = (
@@ -587,6 +589,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
+/obj/machinery/holopad,
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/blueshield)
 

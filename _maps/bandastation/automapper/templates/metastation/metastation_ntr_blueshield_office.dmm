@@ -14,6 +14,8 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/airalarm/directional/west,
+/obj/structure/bed/dogbed,
+/mob/living/basic/mouse/hamster/representative,
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "aE" = (
@@ -241,8 +243,9 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "sJ" = (
-/obj/structure/chair,
 /obj/structure/cable,
+/obj/structure/chair/comfy/brown,
+/mob/living/basic/pet/cat/floppa,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
 "te" = (
@@ -310,7 +313,7 @@
 "yx" = (
 /obj/machinery/holopad,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "zz" = (
 /turf/closed/wall/r_wall,
 /area/station/command/heads_quarters/nanotrasen_representative)
@@ -416,16 +419,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/nanotrasen_representative)
-"Jy" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral/half/contrasted{
-	dir = 1
-	},
-/obj/machinery/bluespace_vendor/directional/north,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "JC" = (
 /obj/machinery/holopad,
 /obj/structure/cable,
@@ -698,8 +691,8 @@
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/blueshield)
 "Yg" = (
-/obj/structure/chair/office,
 /obj/structure/cable,
+/obj/structure/chair/comfy/black,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "Yp" = (
@@ -820,7 +813,7 @@ mz
 mz
 mz
 mz
-Jy
+hm
 gC
 "}
 (8,1,1) = {"

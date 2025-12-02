@@ -46,7 +46,7 @@
 "h" = (
 /obj/machinery/light/directional/west,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "i" = (
 /turf/template_noop,
 /area/template_noop)

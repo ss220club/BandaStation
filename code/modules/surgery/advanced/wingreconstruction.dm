@@ -1,6 +1,6 @@
 /datum/surgery/advanced/wing_reconstruction
-	name = "Wing Reconstruction"
-	desc = "An experimental surgical procedure that reconstructs the damaged wings of moth people. Requires Synthflesh."
+	name = "Реконструкция крыльев"
+	desc = "Экспериментальная хирургическая процедура по восстановлению повреждённых крыльев молей. Требуется синтплоть."
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
 		/datum/surgery_step/incise,
@@ -18,7 +18,7 @@
 	return ..() && wings?.burnt
 
 /datum/surgery_step/wing_reconstruction
-	name = "start wing reconstruction (hemostat)"
+	name = "начать реконструкцию крыльев (гемостат)"
 	implements = list(
 		TOOL_HEMOSTAT = 85,
 		TOOL_SCREWDRIVER = 35,
@@ -31,11 +31,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to fix [target]'s charred wing membranes..."),
-		span_notice("[user] begins to fix [target]'s charred wing membranes."),
-		span_notice("[user] begins to perform surgery on [target]'s charred wing membranes."),
+		span_notice("Вы начинаете восстанавливать обугленные мембраны крыльев [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает чинить обугленные мембраны крыльев [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на обугленных мембранах крыльев [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your wings sting like hell!")
+	display_pain(target, "Ваши крылья жжет, как в аду!")
 
 /datum/surgery_step/wing_reconstruction/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(ishuman(target))
@@ -43,11 +43,11 @@
 		display_results(
 			user,
 			target,
-			span_notice("You succeed in reconstructing [target]'s wings."),
-			span_notice("[user] successfully reconstructs [target]'s wings!"),
-			span_notice("[user] completes the surgery on [target]'s wings."),
+			span_notice("Вам удалось восстановить крылья [target.declent_ru(GENITIVE)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно восстанавливает крылья [target.declent_ru(GENITIVE)]!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на крыльях [target.declent_ru(GENITIVE)]."),
 		)
-		display_pain(target, "You can feel your wings again!")
+		display_pain(target, "Вы снова чувствуете свои крылья!")
 		var/obj/item/organ/wings/moth/wings = target.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
 		if(istype(wings, /obj/item/organ/wings/moth)) //make sure we only heal moth wings.
 			wings.heal_wings(user, ALL)

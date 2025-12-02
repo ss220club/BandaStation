@@ -55,14 +55,14 @@
 /// Only set things geese will try to eat
 /datum/ai_behavior/find_and_set/in_list/goose_food
 
-/datum/ai_behavior/find_and_set/in_list/goose_food/search_tactic(datum/ai_controller/controller, locate_paths, search_range)
+/datum/ai_behavior/find_and_set/in_list/goose_food/search_tactic(datum/ai_controller/controller, locate_paths, search_range = SEARCH_TACTIC_DEFAULT_RANGE)
 	var/list/found = typecache_filter_list(oview(search_range, controller.pawn), locate_paths)
 	if(!length(found))
 		return
 
 	var/list/filtered = list()
 	for (var/obj/item/thing as anything in found)
-		if (IsEdible(thing) || thing.has_material_type(/datum/material/plastic))
+		if (IS_EDIBLE(thing) || thing.has_material_type(/datum/material/plastic))
 			filtered += thing
 
 	if(length(filtered))
@@ -81,3 +81,4 @@
 	emote_hear = list("honks.", "honks loudly.", "honks aggressively.")
 	emote_see = list("flaps.", "preens.", "glares around.")
 	speak = list("Honk!")
+	sound = list('modular_bandastation/mobs/sound/duck_talk1.ogg', 'modular_bandastation/mobs/sound/duck_talk2.ogg', 'modular_bandastation/mobs/sound/duck_talk3.ogg') // SS220 ADD

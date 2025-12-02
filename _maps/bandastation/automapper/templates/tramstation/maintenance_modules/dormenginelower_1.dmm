@@ -302,7 +302,7 @@
 "rA" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "rK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
@@ -448,7 +448,7 @@
 /area/station/maintenance/central/lesser)
 "zv" = (
 /turf/open/misc/asteroid,
-/area/template_noop)
+/area/space/nearstation)
 "zF" = (
 /obj/item/assembly/mousetrap/armed,
 /obj/effect/decal/cleanable/dirt,
@@ -469,14 +469,14 @@
 "Ad" = (
 /obj/structure/flora/bush/style_random,
 /turf/open/floor/grass,
-/area/template_noop)
+/area/space/nearstation)
 "As" = (
 /obj/machinery/door/airlock{
 	name = "Custodial Closet"
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
-/area/template_noop)
+/area/space/nearstation)
 "AN" = (
 /turf/template_noop,
 /area/template_noop)
@@ -798,11 +798,11 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
-/area/template_noop)
+/area/space/nearstation)
 "UQ" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
 /turf/open/floor/grass,
-/area/template_noop)
+/area/space/nearstation)
 "Vf" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/directional/east,
@@ -817,7 +817,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /turf/open/floor/plating,
-/area/template_noop)
+/area/space/nearstation)
 "VT" = (
 /obj/item/stack/sheet/iron{
 	amount = 2
@@ -827,7 +827,7 @@
 /area/station/maintenance/central/lesser)
 "Ws" = (
 /turf/open/floor/grass,
-/area/template_noop)
+/area/space/nearstation)
 "WR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/wardrobe/engineering_yellow,

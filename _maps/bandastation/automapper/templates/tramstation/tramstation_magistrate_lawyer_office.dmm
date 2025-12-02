@@ -861,11 +861,10 @@
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
 "YW" = (
-/obj/machinery/button/door/directional/east{
+/obj/machinery/button/door/directional/west{
 	id = "law_office";
 	name = "Law Office Shutter Control";
-	req_access = list("lawyer");
-	pixel_x = -24
+	req_access = list("lawyer")
 	},
 /turf/open/floor/carpet/black,
 /area/station/service/lawoffice)

@@ -11,10 +11,10 @@
 	supervisors = JOB_CAPTAIN_RU
 	req_admin_notify = 1
 	minimal_player_age = 14
-	exp_requirements = 300
+	exp_requirements = 1200
 	exp_required_type = EXP_TYPE_CREW
 	exp_required_type_department = EXP_TYPE_SECURITY
-	exp_granted_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "HEAD_OF_SECURITY"
 
 	outfit = /datum/outfit/job/hos
@@ -24,7 +24,7 @@
 		/datum/job_department/command,
 		)
 
-	mind_traits = list(HEAD_OF_STAFF_MIND_TRAITS)
+	mind_traits = list(HEAD_OF_STAFF_MIND_TRAITS, SECURITY_MIND_TRAITS)
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM, TRAIT_ROYAL_METABOLISM)
 
 	paycheck = PAYCHECK_COMMAND

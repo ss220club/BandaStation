@@ -45,10 +45,6 @@
 "gV" = (
 /turf/closed/mineral/random/stationside/asteroid/porus,
 /area/station/asteroid)
-"hs" = (
-/obj/machinery/light/small/directional/south,
-/turf/open/floor/grass,
-/area/station/asteroid)
 "hz" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/event_spawn,
@@ -1272,7 +1268,7 @@ XJ
 XJ
 fd
 rJ
-hs
+jx
 jx
 nm
 nm

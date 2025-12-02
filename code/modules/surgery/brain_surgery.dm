@@ -69,7 +69,7 @@
 	display_pain(target, "Боль в голове утихает, мыслить становится немного легче!")
 	if(target.mind?.has_antag_datum(/datum/antagonist/brainwashed))
 		target.mind.remove_antag_datum(/datum/antagonist/brainwashed)
-	target.setOrganLoss(ORGAN_SLOT_BRAIN, target.get_organ_loss(ORGAN_SLOT_BRAIN) - 50) //we set damage in this case in order to clear the "failing" flag
+	target.set_organ_loss(ORGAN_SLOT_BRAIN, target.get_organ_loss(ORGAN_SLOT_BRAIN) - 50) //we set damage in this case in order to clear the "failing" flag
 	target.cure_all_traumas(TRAUMA_RESILIENCE_SURGERY)
 	if(target.get_organ_loss(ORGAN_SLOT_BRAIN) > 0)
 		to_chat(user, "Мозг у [target.declent_ru(GENITIVE)] выглядит так, будто его дальнейшее восстановление возможно.")
@@ -85,7 +85,7 @@
 			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 		)
 		display_pain(target, "Голова раскалывается от ужасной боли; от одной мысли об этом уже начинает болеть голова!")
-		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 60)
+		target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 60)
 		target.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 	else
 		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] внезапно замечает, что мозг над которым велась операция, более не здесь."), span_warning("Вы вдруг замечаете, что мозг, над которым вы работали, более не здесь."))

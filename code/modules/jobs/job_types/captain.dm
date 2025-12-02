@@ -11,10 +11,10 @@
 	supervisors = "официальными лицами Нанотрейзен"
 	req_admin_notify = 1
 	minimal_player_age = 14
-	exp_requirements = 180
-	exp_required_type = EXP_TYPE_CREW
+	exp_requirements = 1800
+	exp_required_type = EXP_TYPE_COMMAND
 	exp_required_type_department = EXP_TYPE_COMMAND
-	exp_granted_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "CAPTAIN"
 
 	outfit = /datum/outfit/job/captain
@@ -23,7 +23,7 @@
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC
 
-	mind_traits = list(HEAD_OF_STAFF_MIND_TRAITS)
+	mind_traits = list(HEAD_OF_STAFF_MIND_TRAITS, TRAIT_DESENSITIZED)
 	liver_traits = list(TRAIT_ROYAL_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_CAPTAIN
