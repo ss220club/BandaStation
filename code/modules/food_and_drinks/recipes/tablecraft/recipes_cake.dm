@@ -77,6 +77,9 @@
 	result = /obj/item/food/cake/birthday
 	added_foodtypes = JUNKFOOD
 	category = CAT_CAKE
+	result_custom_materials = list(
+		/datum/material/plastic = 5 // BANDASTATION ADDITION: crafting fix
+	)
 
 /datum/crafting_recipe/food/energycake
 	name = "Energy cake"
