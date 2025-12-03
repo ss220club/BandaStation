@@ -79,20 +79,20 @@
 	var/changed = FALSE
 
 	if(has_sensor == HAS_SENSORS && (isnull(held_item) || held_item == src))
-		context[SCREENTIP_CONTEXT_RMB] = "Toggle suit sensors"
-		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Set suit sensors to tracking"
+		context[SCREENTIP_CONTEXT_RMB] = "Переключить датчики"
+		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Поставить датчики на слежение"
 		changed = TRUE
 
 	if(istype(held_item, /obj/item/clothing/accessory) && length(attached_accessories) < max_number_of_accessories)
-		context[SCREENTIP_CONTEXT_LMB] = "Attach accessory"
+		context[SCREENTIP_CONTEXT_LMB] = "Прикрепить аксессуар"
 		changed = TRUE
 
 	if(LAZYLEN(attached_accessories))
-		context[SCREENTIP_CONTEXT_ALT_RMB] = "Remove accessory"
+		context[SCREENTIP_CONTEXT_ALT_RMB] = "Убрать аксессуар"
 		changed = TRUE
 
 	if(has_sensor == BROKEN_SENSORS && istype(held_item, /obj/item/stack/cable_coil))
-		context[SCREENTIP_CONTEXT_LMB] = "Repair suit sensors"
+		context[SCREENTIP_CONTEXT_LMB] = "Починить датчики"
 		changed = TRUE
 
 	if(has_sensor == NO_SENSORS)
@@ -104,7 +104,7 @@
 		changed = TRUE
 
 	if(can_adjust && adjusted != DIGITIGRADE_STYLE)
-		context[SCREENTIP_CONTEXT_ALT_LMB] =  "Wear [adjusted == ALT_STYLE ? "normally" : "casually"]"
+		context[SCREENTIP_CONTEXT_ALT_LMB] =  "Сменить стиль на [adjusted == ALT_STYLE ? "стандартный" : "свободный"]"
 		changed = TRUE
 
 	return changed ? CONTEXTUAL_SCREENTIP_SET : .
@@ -236,7 +236,7 @@
 	if(has_sensor == BROKEN_SENSORS || has_sensor == NO_SENSORS)
 		return
 
-	visible_message(span_warning("[src]'s medical sensors short out!"), blind_message = span_warning("The [src] makes an electronic sizzling sound!"), vision_distance = COMBAT_MESSAGE_RANGE)
+	visible_message(span_warning("Медицинские датчики на [declent_ru(PREPOSITIONAL)] коротят!"), blind_message = span_warning("[capitalize(declent_ru(NOMINATIVE))] издает электронный шипящий звук!"), vision_distance = COMBAT_MESSAGE_RANGE)
 	set_has_sensor(BROKEN_SENSORS)
 	sensor_malfunction()
 
@@ -247,7 +247,7 @@
 /obj/item/clothing/under/proc/repair_sensors(mob/user)
 	if(has_sensor != BROKEN_SENSORS)
 		if(user)
-			balloon_alert(user, "sensors [has_sensor == NO_SENSORS ? "missing" : "not broken"]!")
+			balloon_alert(user, "датчики [has_sensor == NO_SENSORS ? "отсутствуют" : "не сломаны"]!")
 		return FALSE
 
 	playsound(source = src, soundin = 'sound/effects/sparks/sparks4.ogg', vol = 100, vary = TRUE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE, ignore_walls = FALSE)
@@ -314,7 +314,7 @@
 
 	set_sensor_mode(pick(SENSOR_OFF, SENSOR_OFF, SENSOR_OFF, SENSOR_LIVING, SENSOR_LIVING, SENSOR_VITALS, SENSOR_VITALS, SENSOR_COORDS))
 	playsound(source = src, soundin = 'sound/effects/sparks/sparks3.ogg', vol = 75, vary = TRUE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE, ignore_walls = FALSE)
-	visible_message(span_warning("The [src]'s medical sensors flash and change rapidly!"), blind_message = span_warning("The [src] makes an electronic sizzling sound!"), vision_distance = COMBAT_MESSAGE_RANGE)
+	visible_message(span_warning("Медицинские датчики на [declent_ru(PREPOSITIONAL)] быстро мигают и меняются!"), blind_message = span_warning("[capitalize(declent_ru(NOMINATIVE))] издает электронный шипящий звук!"), vision_distance = COMBAT_MESSAGE_RANGE)
 
 /**
  * Called by medical scanners a simple summary of the status
@@ -324,20 +324,20 @@
  */
 /obj/item/clothing/under/proc/get_sensor_text(silent = TRUE)
 	if(has_sensor == BROKEN_SENSORS)
-		return "<font color='#ffcc33'>Non-Functional: Repair with cable coil</font>"
+		return "<font color='#ffcc33'>Не работают: Почините с помощью проводов</font>"
 
 	if(silent)
 		return ""
 
 	switch(has_sensor)
 		if(NO_SENSORS)
-			return "Not Present"
+			return "Отсутствуют"
 
 		if(LOCKED_SENSORS)
-			return "Functional, Locked"
+			return "Работают, Заблокированы"
 
 		if(HAS_SENSORS)
-			return "Functional"
+			return "Работают"
 
 // End suit sensor handling
 
@@ -374,7 +374,7 @@
 
 	user.put_in_hands(popped_accessory)
 	if(attach_message)
-		popped_accessory.balloon_alert(user, "accessory removed")
+		popped_accessory.balloon_alert(user, "аксессуар снят")
 
 /// Removes the passed accesory from our accessories list
 /obj/item/clothing/under/proc/remove_accessory(obj/item/clothing/accessory/removed, update = TRUE)
@@ -420,28 +420,28 @@
 	return ..()
 
 /obj/item/clothing/under/examine(mob/user)
-	. = ..()
+	. = ..() // TRANSLATE THIS
 	if(can_adjust)
-		. += "Alt-click on [src] to wear it [adjusted == ALT_STYLE ? "normally" : "casually"]."
+		. += "Альт-Клик для смены стиля на [adjusted == ALT_STYLE ? "стандартный" : "свободный"]."
 	if(has_sensor == BROKEN_SENSORS)
-		. += span_warning("The medical sensors appear to be shorted out. You could repair it with some cabling.")
+		. += span_warning("Похоже, медицинские датчики закоротили. Вы можете починить их с помощью проводов.")
 	else if(has_sensor > NO_SENSORS)
 		switch(sensor_mode)
 			if(SENSOR_OFF)
-				. += "Its sensors appear to be disabled."
+				. += "Датчики, похоже, отключены."
 			if(SENSOR_LIVING)
-				. += "Its binary life sensors appear to be enabled."
+				. += "Датчики \"жив-мертв\", похоже, включены."
 			if(SENSOR_VITALS)
-				. += "Its vital tracker appears to be enabled."
+				. += "Датчики жизненных показателей, похоже, включены."
 			if(SENSOR_COORDS)
-				. += "Its vital tracker and tracking beacon appear to be enabled."
+				. += "Датчики жизненных показателей и маячок слежения, похоже, включены."
 	else
-		. += span_tooltip("You can always get new suit sensors to install from a lathe.", "It isn't equipped with medical sensors.")
+		. += span_tooltip("Вы всегда можете получить новые датчики из автолата", "Отсутствуют медицинские датчики.")
 
 	if(LAZYLEN(attached_accessories))
 		var/list/accessories = list_accessories_with_icon(user)
-		. += "It has [english_list(accessories)] attached."
-		. += "Alt-Right-Click to remove [attached_accessories[1]]."
+		. += "Имеет прикрепленные: [english_list(accessories)]."
+		. += "Альт-ПКМ для снятия [attached_accessories[1].declent_ru(GENITIVE)]."
 
 /// Helper to list out all accessories with an icon besides it, for use in examine
 /obj/item/clothing/under/proc/list_accessories_with_icon(mob/user)
@@ -453,14 +453,14 @@
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 	set src in usr
 	var/mob/user_mob = usr
 	if(!can_toggle_sensors(user_mob))
 		return
 
 	var/current_mode_text = GLOB.suit_sensor_mode_to_defines[sensor_mode + 1]
-	var/new_mode = tgui_input_list(user_mob, "Select a sensor mode", "Suit Sensors", GLOB.suit_sensor_mode_to_defines, current_mode_text)
+	var/new_mode = tgui_input_list(user_mob, "Выберите режим датчиков", "Медицинские датчики", GLOB.suit_sensor_mode_to_defines, current_mode_text)
 	if(isnull(new_mode))
 		return
 	if(!can_toggle_sensors(user_mob))
@@ -470,20 +470,20 @@
 	if (loc == user_mob)
 		switch(sensor_mode)
 			if(SENSOR_OFF)
-				to_chat(user_mob, span_notice("You disable your suit's remote sensing equipment."))
+				to_chat(user_mob, span_notice("Вы отключаете датчики на комбинезоне."))
 			if(SENSOR_LIVING)
-				to_chat(user_mob, span_notice("Your suit will now only report whether you are alive or dead."))
+				to_chat(user_mob, span_notice("Ваш комбинезон теперь будет сообщать только о том, живы вы или мертвы."))
 			if(SENSOR_VITALS)
-				to_chat(user_mob, span_notice("Your suit will now only report your exact vital lifesigns."))
+				to_chat(user_mob, span_notice("Ваш комбинезон теперь будет сообщать только о ваших жизненных показателях."))
 			if(SENSOR_COORDS)
-				to_chat(user_mob, span_notice("Your suit will now report your exact vital lifesigns as well as your coordinate position."))
+				to_chat(user_mob, span_notice("Ваш комбинезон теперь будет сообщать о ваших жизненных показателях и ваши текущие координаты."))
 
 /obj/item/clothing/under/item_ctrl_click(mob/user)
 	if(!can_toggle_sensors(user))
 		return CLICK_ACTION_BLOCKING
 
 	set_sensor_mode(SENSOR_COORDS)
-	balloon_alert(user, "set to tracking")
+	balloon_alert(user, "режим - слежение")
 	return CLICK_ACTION_SUCCESS
 
 /// Checks if the toggler is allowed to toggle suit sensors currently
@@ -491,25 +491,25 @@
 	if(!can_use(toggler) || toggler.stat == DEAD) //make sure they didn't hold the window open.
 		return FALSE
 	if(get_dist(toggler, src) > 1)
-		balloon_alert(toggler, "too far!")
+		balloon_alert(toggler, "слишком далеко!")
 		return FALSE
 
 	switch(has_sensor)
 		if(LOCKED_SENSORS)
-			balloon_alert(toggler, "sensor controls locked!")
+			balloon_alert(toggler, "управление датчиков заблокировано!")
 			return FALSE
 		if(BROKEN_SENSORS)
-			balloon_alert(toggler, "sensors shorted!")
+			balloon_alert(toggler, "датчики коротят!")
 			return FALSE
 		if(NO_SENSORS)
-			balloon_alert(toggler, "no sensors to adjust!")
+			balloon_alert(toggler, "отсутствуют датчики!")
 			return FALSE
 
 	return TRUE
 
 /obj/item/clothing/under/click_alt(mob/user)
 	if(!can_adjust)
-		balloon_alert(user, "can't be adjusted!")
+		balloon_alert(user, "нельзя сменить стиль!")
 		return CLICK_ACTION_BLOCKING
 	if(!can_use(user))
 		return NONE
@@ -518,7 +518,7 @@
 
 /obj/item/clothing/under/click_alt_secondary(mob/user)
 	if(!LAZYLEN(attached_accessories))
-		balloon_alert(user, "no accessories to remove!")
+		balloon_alert(user, "нет аксессуаров для снятия!")
 		return
 	pop_accessory(user)
 
@@ -528,7 +528,7 @@
 	set src in usr
 
 	if(!can_adjust)
-		balloon_alert(usr, "can't be adjusted!")
+		balloon_alert(usr, "нельзя сменить стиль!")
 		return
 	if(!can_use(usr))
 		return
@@ -536,9 +536,9 @@
 
 /obj/item/clothing/under/proc/rolldown()
 	if(toggle_jumpsuit_adjust())
-		to_chat(usr, span_notice("You adjust the suit to wear it more casually."))
+		to_chat(usr, span_notice("Вы изменяете стиль на свободный."))
 	else
-		to_chat(usr, span_notice("You adjust the suit back to normal."))
+		to_chat(usr, span_notice("Вы изменяете стиль на стандартный."))
 
 	update_appearance()
 

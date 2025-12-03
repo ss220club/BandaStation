@@ -26,7 +26,7 @@
 	wound_bonus = -15
 	exposed_wound_bonus = 15
 	/// For explosive spears, what we cry out when we use this to bap someone
-	var/war_cry = "AAAAARGH!!!"
+	var/war_cry = "ААААААРРР!!!"
 	/// The icon prefix for this flavor of spear
 	var/icon_prefix = "spearglass"
 	/// How much damage to do unwielded
@@ -84,7 +84,7 @@
 	return ..()
 
 /obj/item/spear/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins to sword-swallow \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins to sword-swallow \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/spear/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
@@ -207,7 +207,7 @@
 	return ..()
 
 /obj/item/spear/explosive/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins to sword-swallow \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins to sword-swallow \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	user.say("[war_cry]", forced="spear warcry")
 	explosive.forceMove(user)
 	explosive.detonate()

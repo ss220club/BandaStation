@@ -151,7 +151,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	AddComponent(/datum/component/alternative_sharpness, SHARP_POINTY, alt_continuous, alt_simple, -15)
 
 /obj/item/claymore/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is falling on [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is falling on [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/claymore/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
@@ -582,7 +582,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	tool_behaviour = (active ? TOOL_KNIFE : NONE)
 
 /obj/item/switchblade/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is slitting [user.p_their()] own throat with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] is slitting [user.p_their()] own throat with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/switchblade/extended
@@ -604,9 +604,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/phone/suicide_act(mob/living/user)
 	if(locate(/obj/structure/chair/stool) in user.loc)
-		user.visible_message(span_suicide("[user] begins to tie a noose with [src]'s cord! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] begins to tie a noose with [src]'s cord! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	else
-		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]'s cord! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is strangling [user.p_them()]self with [src]'s cord! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
 /obj/item/bambostaff
@@ -898,6 +898,8 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	var/homerun_able = FALSE
 	/// Are we ready to do a homerun?
 	var/homerun_ready = FALSE
+	/// Does this bat always have homerun active?
+	var/always_homerun = FALSE
 	/// Can we launch mobs thrown at us away?
 	var/mob_thrower = FALSE
 	/// List of all thrown datums we sent.
@@ -913,32 +915,36 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		make_silly()
 
 /obj/item/melee/baseball_bat/attack_self(mob/user)
-	if(!homerun_able)
-		return ..()
-	if(homerun_ready)
-		to_chat(user, span_warning("You're already ready to do a home run!"))
-		return ..()
-	to_chat(user, span_warning("You begin gathering strength..."))
-	playsound(get_turf(src), 'sound/effects/magic/lightning_chargeup.ogg', 65, TRUE)
-	if(do_after(user, 9 SECONDS, target = src))
-		to_chat(user, span_userdanger("You gather power! Time for a home run!"))
-		homerun_ready = TRUE
+	if(!always_homerun)
+		if(!homerun_able)
+			return ..()
+		if(homerun_ready)
+			to_chat(user, span_warning("You're already ready to do a home run!"))
+			return ..()
+		to_chat(user, span_warning("You begin gathering strength..."))
+		playsound(get_turf(src), 'sound/effects/magic/lightning_chargeup.ogg', 65, TRUE)
+		if(do_after(user, 9 SECONDS, target = src))
+			to_chat(user, span_userdanger("You gather power! Time for a home run!"))
+			homerun_ready = TRUE
+
 	return ..()
 
 /obj/item/melee/baseball_bat/attack(mob/living/target, mob/living/user)
 	// we obtain the relative direction from the bat itself to the target
-	var/relative_direction = get_cardinal_dir(src, target)
+	var/relative_direction = get_dir(src, target)
 	var/atom/throw_target = get_edge_target_turf(target, relative_direction)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		return
-	if(homerun_ready)
+	if(homerun_ready || always_homerun)
 		user.visible_message(span_userdanger("It's a home run!"))
 		if(!QDELETED(target))
 			target.throw_at(throw_target, rand(8,10), 14, user)
 		SSexplosions.medturf += throw_target
-		playsound(get_turf(src), 'sound/items/weapons/homerun.ogg', 100, TRUE)
-		homerun_ready = FALSE
+		playsound(get_turf(src), 'sound/items/weapons/homerun.ogg', 75, TRUE)
+		if(!always_homerun)
+			homerun_ready = FALSE
+
 		return
 	else if(!QDELETED(target) && !target.anchored)
 		var/whack_speed = (prob(60) ? 1 : 4)

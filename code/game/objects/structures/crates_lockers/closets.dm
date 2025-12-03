@@ -1123,7 +1123,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 			if(!can_unlock(user, user.get_idcard(), registered_id))
 				error_msg = "not your locker!"
 		else if(!can_unlock(user, user.get_idcard()))
-			error_msg = "access denied!"
+			error_msg = "в доступе отказано!"
 		if(error_msg)
 			if(!silent)
 				balloon_alert(user, error_msg)
@@ -1161,8 +1161,8 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 
 /obj/structure/closet/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(secure && !broken)
-		visible_message(span_warning("Sparks fly from [src]!"), blind_message = span_hear("You hear a faint electrical spark."))
-		balloon_alert(user, "lock broken open")
+		visible_message(span_warning("Искры вылетают из панели замка!"), blind_message = span_hear("Вы слышите слабый электрический треск.."))
+		balloon_alert(user, "замок взломан!")
 		playsound(src, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 		broken = TRUE
 		locked = FALSE

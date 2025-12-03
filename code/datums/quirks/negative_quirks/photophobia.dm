@@ -2,12 +2,12 @@
 
 /datum/quirk/photophobia
 	name = "Photophobia"
-	desc = "Bright lights seem to bother you more than others. Maybe it's a medical condition."
+	desc = "Кажется, что яркий свет беспокоит вас больше остальных. Возможно, это следствие какой-либо болезни."
 	icon = FA_ICON_ARROWS_TO_EYE
 	value = -4
-	gain_text = span_danger("The safety of light feels off...")
-	lose_text = span_notice("Enlightening.")
-	medical_record_text = "Patient has acute phobia of light, and insists it is physically harmful."
+	gain_text = span_danger("Кажется защиты от света больше нет...")
+	lose_text = span_notice("Просветление.")
+	medical_record_text = "Пациент страдает острой фобией света и настаивает на том, что он физически вреден."
 	hardcore_value = 4
 	mail_goodies = list(
 		/obj/item/flashlight/flashdark,

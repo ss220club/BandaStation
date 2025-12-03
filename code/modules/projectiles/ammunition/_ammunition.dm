@@ -101,12 +101,12 @@
 		proj_damage_mult = our_gun.projectile_damage_multiplier
 	var/list/readout = list()
 	if(proj_damage_mult <= 0 || (initial_damage <= 0 && initial_stamina <= 0))
-		return "Our legal team has determined the offensive nature of these [span_warning(caliber)] rounds to be esoteric."
+		return "Наша юридическая команда определила, что оружейная способность [span_warning(caliber)] патронов является эзотерическим."
 	// No dividing by 0
 	if(initial_damage)
-		readout += "Most monkeys our legal team subjected to these [span_warning(caliber)] rounds succumbed to their wounds after [span_warning("[HITS_TO_CRIT((initial(exam_proj.damage) * proj_damage_mult) * pellets)] shot\s")] at point-blank, taking [span_warning("[pellets] shot\s")] per round."
+		readout += "Большинство мартышек, в которых стреляла наша юридическая команда [span_warning(caliber)] патронами, скончались от ран от следующего числа выстрелов в упор - [span_warning("[HITS_TO_CRIT((initial(exam_proj.damage) * proj_damage_mult) * pellets)]")], принимая попаданий за выстрел - [span_warning("[pellets]")]."
 	if(initial_stamina)
-		readout += "[!readout.len ? "Most monkeys" : "More fortunate monkeys"] collapsed from exhaustion after [span_warning("[HITS_TO_CRIT((initial(exam_proj.stamina) * proj_damage_mult) * pellets)] impact\s")] of these [span_warning("[caliber]")] rounds."
+		readout += "[!readout.len ? "Большинство мартышек" : "Более везучие мартышки"] упали от усталости от [span_warning("[caliber]")] патронов от следующего числа выстрелов - [span_warning("[HITS_TO_CRIT((initial(exam_proj.stamina) * proj_damage_mult) * pellets)]")]"
 	return readout.Join("\n") // Sending over a single string, rather than the whole list
 
 /obj/item/ammo_casing/update_icon_state()

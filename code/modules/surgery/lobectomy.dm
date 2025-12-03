@@ -1,5 +1,5 @@
 /datum/surgery/lobectomy
-	name = "Lobectomy" //not to be confused with lobotomy
+	name = "Лобэктомия" //not to be confused with lobotomy
 	organ_to_manipulate = ORGAN_SLOT_LUNGS
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
@@ -12,7 +12,7 @@
 	)
 
 /datum/surgery/lobectomy/mechanic
-	name = "Air Filtration Diagnostic"
+	name = "Диагностика воздушного фильтра"
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -31,7 +31,7 @@
 
 //lobectomy, removes the most damaged lung lobe with a 95% base success chance
 /datum/surgery_step/lobectomy
-	name = "excise damaged lung node (scalpel)"
+	name = "удалите поврежденный участок легкого (скальпель)"
 	implements = list(
 		TOOL_SCALPEL = 95,
 		/obj/item/melee/energy/sword = 65,
@@ -44,7 +44,7 @@
 	surgery_effects_mood = TRUE
 
 /datum/surgery_step/lobectomy/mechanic
-	name = "Perform maintenance (scalpel or wrench)"
+	name = "проведите обслуживание (скальпель или ключ)"
 	implements = list(
 		TOOL_SCALPEL = 95,
 		TOOL_WRENCH = 95,
@@ -58,11 +58,11 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to make an incision in [target]'s lungs..."),
-		span_notice("[user] begins to make an incision in [target]."),
-		span_notice("[user] begins to make an incision in [target]."),
+		span_notice("Вы начинаете делать надрез на легких у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает делать надрез у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a stabbing pain in your chest!")
+	display_pain(target, "Вы чувствуете колющую боль в груди!")
 
 /datum/surgery_step/lobectomy/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(ishuman(target))
@@ -76,11 +76,11 @@
 		display_results(
 			user,
 			target,
-			span_notice("You successfully excise [human_target]'s most damaged lobe."),
-			span_notice("Successfully removes a piece of [human_target]'s lungs."),
+			span_notice("Вы успешно вырезаете самую поврежденную долю у [human_target.declent_ru(GENITIVE)]."),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно вырезает часть легких у [human_target.declent_ru(GENITIVE)]."),
 			"",
 		)
-		display_pain(target, "Your chest hurts like hell, but breathing becomes slightly easier.")
+		display_pain(target, "Грудь адски болит, но дышать становится немного легче.")
 	return ..()
 
 /datum/surgery_step/lobectomy/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -89,11 +89,11 @@
 		display_results(
 			user,
 			target,
-			span_warning("You screw up, failing to excise [human_target]'s damaged lobe!"),
-			span_warning("[user] screws up!"),
-			span_warning("[user] screws up!"),
+			span_warning("Вы ошибаетесь, не сумев вырезать поврежденную долю у [human_target.declent_ru(GENITIVE)]!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
 		)
-		display_pain(target, "You feel a sharp stab in your chest; the wind is knocked out of you and it hurts to catch your breath!")
+		display_pain(target, "Вы чувствуете резкий удар в грудь; последний вздох выбивает из вас все силы, и вам больно дышать!")
 		human_target.losebreath += 4
 		human_target.adjust_organ_loss(ORGAN_SLOT_LUNGS, 10)
 	return FALSE

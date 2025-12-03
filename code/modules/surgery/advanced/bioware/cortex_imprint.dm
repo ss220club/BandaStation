@@ -1,6 +1,6 @@
 /datum/surgery/advanced/bioware/cortex_imprint
-	name = "Cortex Imprint"
-	desc = "A surgical procedure which modifies the cerebral cortex into a redundant neural pattern, making the brain able to bypass impediments caused by minor brain traumas."
+	name = "Отпечаток коры"
+	desc = "Хирургическая процедура, которая преобразует кору головного мозга в избыточную нейронную структуру, позволяя мозгу обходить препятствия, вызванные незначительными травмами головного мозга."
 	surgery_flags = SURGERY_MORBID_CURIOSITY
 	possible_locs = list(BODY_ZONE_HEAD)
 	steps = list(
@@ -16,9 +16,9 @@
 	status_effect_gained = /datum/status_effect/bioware/cortex/imprinted
 
 /datum/surgery/advanced/bioware/cortex_imprint/mechanic
-	name = "Wetware OS Ver 2.0"
-	desc = "A robotic upgrade which updates the patient's operating system to the 'latest version', whatever that means, making the brain able to bypass damage caused by minor brain traumas. \
-		Shame about all the adware."
+	name = "Wetware OS Версия 2.0"
+	desc = "Роботизированная модернизация, которая обновляет операционную систему пациента до 'последней версии', что бы это ни значило, позволяя мозгу обходить повреждения, вызванные незначительными травмами головного мозга. \
+		Жаль, что все это рекламное ПО."
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	steps = list(
 		/datum/surgery_step/mechanic_open,
@@ -38,17 +38,17 @@
 	return ..()
 
 /datum/surgery_step/apply_bioware/imprint_cortex
-	name = "imprint cortex (hand)"
+	name = "отпечаток коры (рука)"
 
 /datum/surgery_step/apply_bioware/imprint_cortex/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
-		span_notice("You start carving [target]'s outer cerebral cortex into a self-imprinting pattern."),
-		span_notice("[user] starts carving [target]'s outer cerebral cortex into a self-imprinting pattern."),
-		span_notice("[user] begins to perform surgery on [target]'s brain."),
+		span_notice("Вы начинаете вырезать на внешней коре головного мозга [target.declent_ru(GENITIVE)] самопечатающийся шаблон."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает вырезать на внешней коре головного мозга [target.declent_ru(GENITIVE)] самопечатающийся шаблон."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на мозге [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head throbs with gruesome pain, it's nearly too much to handle!")
+	display_pain(target, "Ваша голова раскалывается от ужасной боли, с ней почти невозможно справиться!")
 
 /datum/surgery_step/apply_bioware/imprint_cortex/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	. = ..()
@@ -58,24 +58,24 @@
 	display_results(
 		user,
 		target,
-		span_notice("You reshape [target]'s outer cerebral cortex into a self-imprinting pattern!"),
-		span_notice("[user] reshapes [target]'s outer cerebral cortex into a self-imprinting pattern!"),
-		span_notice("[user] completes the surgery on [target]'s brain."),
+		span_notice("Вы преобразуете внешнюю кору головного мозга [target.declent_ru(GENITIVE)] в самопечатающийся шаблон!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] перестраивает внешнюю кору головного мозга [target.declent_ru(GENITIVE)] в самопечатающийся шаблон!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your brain feels stronger... more resillient!")
+	display_pain(target, "Ваш мозг становится сильнее... более устойчивым!")
 
 /datum/surgery_step/apply_bioware/imprint_cortex/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(target.get_organ_slot(ORGAN_SLOT_BRAIN))
 		display_results(
 			user,
 			target,
-			span_warning("You screw up, damaging the brain!"),
-			span_warning("[user] screws up, damaging the brain!"),
-			span_notice("[user] completes the surgery on [target]'s brain."),
+			span_warning("Вы ошибаетесь, повреждая мозг!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, нанеся повреждения мозгу!"),
+			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на мозге [target.declent_ru(GENITIVE)]."),
 		)
-		display_pain(target, "Your brain throbs with intense pain; Thinking hurts!")
+		display_pain(target, "Голова раскалывается от ужасной боли; от одной мысли об этом уже начинает болеть голова!")
 		target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 60)
 		target.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 	else
-		user.visible_message(span_warning("[user] suddenly notices that the brain [user.p_they()] [user.p_were()] working on is not there anymore."), span_warning("You suddenly notice that the brain you were working on is not there anymore."))
+		user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] внезапно замечает, что мозг над которым велась операция, более не здесь."), span_warning("Вы вдруг замечаете, что мозг, над которым вы работали, более не здесь."))
 	return FALSE

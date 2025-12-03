@@ -1,0 +1,7 @@
+#define CALIBER_SOL35SHORT ".35 Sol Short"
+#define CALIBER_762x39mm "7.62x39mm"
+#define CALIBER_SOL40LONG ".40 Sol Long"
+#define CALIBER_9x25NT "9x25mm NT"
+#define CALIBER_338 ".338"
+#define CALIBER_762x51mm "7.62x51mm"
+#define CALIBER_456MAG ".456 Magnum"

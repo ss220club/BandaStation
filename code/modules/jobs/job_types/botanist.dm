@@ -1,11 +1,11 @@
 /datum/job/botanist
 	title = JOB_BOTANIST
-	description = "Grow plants for the cook, for medicine, and for recreation."
+	description = "Выращивайте растения для повара, медицины и отдыха."
 	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = SUPERVISOR_HOP
+	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "BOTANIST"
 

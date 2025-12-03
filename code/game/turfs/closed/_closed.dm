@@ -18,4 +18,4 @@
 	return FALSE
 
 /turf/closed/examine_descriptor(mob/user)
-	return "wall"
+	return "стена"

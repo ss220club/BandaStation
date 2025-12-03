@@ -6,7 +6,7 @@
 	max_damage = LIMB_MAX_HP_CORE
 	body_zone = BODY_ZONE_HEAD
 	body_part = HEAD
-	plaintext_zone = "head"
+	plaintext_zone = "голова"
 	w_class = WEIGHT_CLASS_BULKY //Quite a hefty load
 	slowdown = 1 //Balancing measure
 	throw_range = 2 //No head bowling
@@ -17,8 +17,8 @@
 	scars_covered_by_clothes = FALSE
 	grind_results = null
 	is_dimorphic = TRUE
-	unarmed_attack_verbs = list("bite", "chomp")
-	unarmed_attack_verbs_continuous = list("bites", "chomps")
+	unarmed_attack_verbs = list("кусает", "грызет")
+	unarmed_attack_verbs_continuous = list("кусает", "грызет")
 	unarmed_attack_effect = ATTACK_EFFECT_BITE
 	unarmed_attack_sound = 'sound/items/weapons/bite.ogg'
 	unarmed_miss_sound = 'sound/items/weapons/bite.ogg'
@@ -92,6 +92,7 @@
 	var/datum/worn_feature_offset/worn_head_offset
 	/// Offset to apply to overlays placed on the face
 	var/datum/worn_feature_offset/worn_face_offset
+	var/datum/hair_mask/species_hair_mask = null // BANDASTATION ADD — маска для отображения ушей кастомных рас поверх причёсок
 
 	VAR_PROTECTED
 		/// Draw this head as "debrained"

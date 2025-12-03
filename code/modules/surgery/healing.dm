@@ -34,7 +34,7 @@
 		)
 
 /datum/surgery_step/heal
-	name = "repair body (hemostat)"
+	name = "восстановите тело (гемостат)"
 	implements = list(
 		TOOL_HEMOSTAT = 100,
 		TOOL_SCREWDRIVER = 65,
@@ -56,22 +56,22 @@
 /datum/surgery_step/heal/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/woundtype
 	if(brutehealing && burnhealing)
-		woundtype = "wounds"
+		woundtype = "раны"
 	else if(brutehealing)
-		woundtype = "bruises"
+		woundtype = "ушибы"
 	else //why are you trying to 0,0...?
-		woundtype = "burns"
+		woundtype = "ожоги"
 	if(istype(surgery,/datum/surgery/healing))
 		var/datum/surgery/healing/the_surgery = surgery
 		if(!the_surgery.antispam)
 			display_results(
 				user,
 				target,
-				span_notice("You attempt to patch some of [target]'s [woundtype]."),
-				span_notice("[user] attempts to patch some of [target]'s [woundtype]."),
-				span_notice("[user] attempts to patch some of [target]'s [woundtype]."),
+				span_notice("Вы пытаетесь наложить швы на [woundtype] у [target.declent_ru(GENITIVE)]."),
+				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] пытается наложить швы на [woundtype] у [target.declent_ru(GENITIVE)]."),
+				span_notice("[capitalize(user.declent_ru(NOMINATIVE))] пытается наложить швы на [woundtype] у [target.declent_ru(GENITIVE)]."),
 			)
-		display_pain(target, "Your [woundtype] sting like hell!")
+		display_pain(target, "Ваши [woundtype] чертовски болят!")
 
 /datum/surgery_step/heal/initiate(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	if(!..())
@@ -81,8 +81,8 @@
 			break
 
 /datum/surgery_step/heal/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
-	var/user_msg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
-	var/target_msg = "[user] fixes some of [target]'s wounds" //see above
+	var/user_msg = "Вы успешно обрабатываете раны у [target.declent_ru(GENITIVE)]" //no period, add initial space to "addons"
+	var/target_msg = "[capitalize(user.declent_ru(NOMINATIVE))] успешно обрабатывает раны у [target.declent_ru(GENITIVE)]" //see above
 	var/brute_healed = brutehealing
 	var/burn_healed = burnhealing
 	var/dead_patient = FALSE
@@ -97,8 +97,8 @@
 	if(!get_location_accessible(target, target_zone))
 		brute_healed *= 0.55
 		burn_healed *= 0.55
-		user_msg += " as best as you can while [target.p_they()] [target.p_have()] clothing on"
-		target_msg += " as best as [user.p_they()] can while [target.p_they()] [target.p_have()] clothing on"
+		user_msg += " по силе возможностей, пока на них надета одежда"
+		target_msg += " по силе их возможностей, пока на них надета одежда"
 	target.heal_bodypart_damage(brute_healed,burn_healed)
 
 	user_msg += get_progress(user, target, brute_healed, burn_healed)
@@ -123,9 +123,9 @@
 	display_results(
 		user,
 		target,
-		span_warning("You screwed up!"),
-		span_warning("[user] screws up!"),
-		span_notice("[user] fixes some of [target]'s wounds."),
+		span_warning("Вы ошибаетесь!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] зашивает некоторые раны у [target.declent_ru(GENITIVE)]."),
 		target_detailed = TRUE,
 	)
 	var/brute_dealt = brutehealing * 0.8
@@ -137,27 +137,27 @@
 
 /***************************BRUTE***************************/
 /datum/surgery/healing/brute
-	name = "Tend Wounds (Bruises)"
+	name = "Залечить раны (Ушибы)"
 
 /datum/surgery/healing/brute/basic
-	name = "Tend Wounds (Bruises, Basic)"
+	name = "Залечить раны (Ушибы, Базово)"
 	replaced_by = /datum/surgery/healing/brute/upgraded
 	healing_step_type = /datum/surgery_step/heal/brute/basic
-	desc = "A surgical procedure that provides basic treatment for a patient's brute traumas. Heals slightly more when the patient is severely injured."
+	desc = "Хирургическая процедура, обеспечивающая базовое лечение ушибов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /datum/surgery/healing/brute/upgraded
-	name = "Tend Wounds (Bruises, Adv.)"
+	name = "Залечить раны (Ушибы, Продв.)"
 	replaced_by = /datum/surgery/healing/brute/upgraded/femto
 	requires_tech = TRUE
 	healing_step_type = /datum/surgery_step/heal/brute/upgraded
-	desc = "A surgical procedure that provides advanced treatment for a patient's brute traumas. Heals more when the patient is severely injured."
+	desc = "Хирургическая процедура, обеспечивающая продвинутое лечение ушибов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /datum/surgery/healing/brute/upgraded/femto
-	name = "Tend Wounds (Bruises, Exp.)"
+	name = "Залечить раны (Ушибы, Экспер.)"
 	replaced_by = /datum/surgery/healing/combo/upgraded/femto
 	requires_tech = TRUE
 	healing_step_type = /datum/surgery_step/heal/brute/upgraded/femto
-	desc = "A surgical procedure that provides experimental treatment for a patient's brute traumas. Heals considerably more when the patient is severely injured."
+	desc = "Хирургическая процедура, которая обеспечивает экспериментальное лечение ушибов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /********************BRUTE STEPS********************/
 /datum/surgery_step/heal/brute/get_progress(mob/user, mob/living/carbon/target, brute_healed, burn_healed)
@@ -168,28 +168,28 @@
 	var/progress_text
 
 	if(locate(/obj/item/healthanalyzer) in user.held_items)
-		progress_text = ". Remaining brute: <font color='#ff3333'>[target.get_brute_loss()]</font>"
+		progress_text = ". Оставшиеся ушибы: <font color='#ff3333'>[target.get_brute_loss()]</font>"
 	else
 		switch(estimated_remaining_steps)
 			if(-INFINITY to 1)
 				return
 			if(1 to 3)
-				progress_text = ", stitching up the last few scrapes"
+				progress_text = ", осталось зашить пару царапин и все"
 			if(3 to 6)
-				progress_text = ", counting down the last few bruises left to treat"
+				progress_text = ", осталось залатать всего-лишь пару ушибов"
 			if(6 to 9)
-				progress_text = ", continuing to plug away at [target.p_their()] extensive rupturing"
+				progress_text = ", продолжайте лечить разрывы тканей"
 			if(9 to 12)
-				progress_text = ", steadying yourself for the long surgery ahead"
+				progress_text = ", надо подсобраться, ведь операция будет ещё долго идти"
 			if(12 to 15)
-				progress_text = ", though [target.p_they()] still look[target.p_s()] more like ground beef than a person"
+				progress_text = ", судя по внешнему виду, тело больше напоминает отбивную, нежели чем человеческое тело"
 			if(15 to INFINITY)
-				progress_text = ", though you feel like you're barely making a dent in treating [target.p_their()] pulped body"
+				progress_text = ", вам кажется, что вы ещё долго будете лечить это обезображенное тело"
 
 	return progress_text
 
 /datum/surgery_step/heal/brute/basic
-	name = "tend bruises (hemostat)"
+	name = "обработайте ушибы (гемостат)"
 	brutehealing = 5
 	brute_multiplier = 0.07
 
@@ -203,27 +203,27 @@
 
 /***************************BURN***************************/
 /datum/surgery/healing/burn
-	name = "Tend Wounds (Burn)"
+	name = "Залечить раны (Ожоги)"
 
 /datum/surgery/healing/burn/basic
-	name = "Tend Wounds (Burn, Basic)"
+	name = "Залечить раны (Ожоги, Базово)"
 	replaced_by = /datum/surgery/healing/burn/upgraded
 	healing_step_type = /datum/surgery_step/heal/burn/basic
-	desc = "A surgical procedure that provides basic treatment for a patient's burns. Heals slightly more when the patient is severely injured."
+	desc = "Хирургическая процедура, обеспечивающая базовое лечение ожогов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /datum/surgery/healing/burn/upgraded
-	name = "Tend Wounds (Burn, Adv.)"
+	name = "Залечить раны (Ожоги, Продв.)"
 	replaced_by = /datum/surgery/healing/burn/upgraded/femto
 	requires_tech = TRUE
 	healing_step_type = /datum/surgery_step/heal/burn/upgraded
-	desc = "A surgical procedure that provides advanced treatment for a patient's burns. Heals more when the patient is severely injured."
+	desc = "Хирургическая процедура, обеспечивающая продвинутое лечение ожогов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /datum/surgery/healing/burn/upgraded/femto
-	name = "Tend Wounds (Burn, Exp.)"
+	name = "Залечить раны (Ожоги, Экспер.)"
 	replaced_by = /datum/surgery/healing/combo/upgraded/femto
 	requires_tech = TRUE
 	healing_step_type = /datum/surgery_step/heal/burn/upgraded/femto
-	desc = "A surgical procedure that provides experimental treatment for a patient's burns. Heals considerably more when the patient is severely injured."
+	desc = "Хирургическое вмешательство, в ходе которого проводится экспериментальное лечение ожогов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /********************BURN STEPS********************/
 /datum/surgery_step/heal/burn/get_progress(mob/user, mob/living/carbon/target, brute_healed, burn_healed)
@@ -233,28 +233,28 @@
 	var/progress_text
 
 	if(locate(/obj/item/healthanalyzer) in user.held_items)
-		progress_text = ". Remaining burn: <font color='#ff9933'>[target.get_fire_loss()]</font>"
+		progress_text = ". Оставшиеся ожоговые повреждения: <font color='#ff9933'>[target.get_fire_loss()]</font>"
 	else
 		switch(estimated_remaining_steps)
 			if(-INFINITY to 1)
 				return
 			if(1 to 3)
-				progress_text = ", finishing up the last few singe marks"
+				progress_text = ", осталось обработать пару царапин и все"
 			if(3 to 6)
-				progress_text = ", counting down the last few blisters left to treat"
+				progress_text = ", осталось обработать всего-лишь пару ожогов"
 			if(6 to 9)
-				progress_text = ", continuing to plug away at [target.p_their()] thorough roasting"
+				progress_text = ", продолжайте работать над обработкой ожогов"
 			if(9 to 12)
-				progress_text = ", steadying yourself for the long surgery ahead"
+				progress_text = ", надо подсобраться, ведь операция будет ещё долго идти"
 			if(12 to 15)
-				progress_text = ", though [target.p_they()] still look[target.p_s()] more like burnt steak than a person"
+				progress_text = ", судя по внешнему виду, тело больше напоминает подгоревший стейк, нежели чем человеческое тело"
 			if(15 to INFINITY)
-				progress_text = ", though you feel like you're barely making a dent in treating [target.p_their()] charred body"
+				progress_text = ", вам кажется, что вы ещё долго будете лечить это обгоревшее тело"
 
 	return progress_text
 
 /datum/surgery_step/heal/burn/basic
-	name = "tend burn wounds (hemostat)"
+	name = "обработайте ожоги (гемостат)"
 	burnhealing = 5
 	burn_multiplier = 0.07
 
@@ -271,24 +271,24 @@
 
 
 /datum/surgery/healing/combo
-	name = "Tend Wounds (Mixture, Basic)"
+	name = "Обработайте раны (Смесь, Базово)"
 	replaced_by = /datum/surgery/healing/combo/upgraded
 	requires_tech = TRUE
 	healing_step_type = /datum/surgery_step/heal/combo
-	desc = "A surgical procedure that provides basic treatment for a patient's burns and brute traumas. Heals slightly more when the patient is severely injured."
+	desc = "Хирургическая процедура, обеспечивающая базовое лечение ожогов и ушибов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /datum/surgery/healing/combo/upgraded
-	name = "Tend Wounds (Mixture, Adv.)"
+	name = "Обработайте раны (Смесь, Продв.)"
 	replaced_by = /datum/surgery/healing/combo/upgraded/femto
 	healing_step_type = /datum/surgery_step/heal/combo/upgraded
-	desc = "A surgical procedure that provides advanced treatment for a patient's burns and brute traumas. Heals more when the patient is severely injured."
+	desc = "Хирургическая процедура, обеспечивающая продвинутое лечение ожогов и ушибов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 
 /datum/surgery/healing/combo/upgraded/femto //no real reason to type it like this except consistency, don't worry you're not missing anything
-	name = "Tend Wounds (Mixture, Exp.)"
+	name = "Обработайте раны (Смесь, Экспер.)"
 	replaced_by = null
 	healing_step_type = /datum/surgery_step/heal/combo/upgraded/femto
-	desc = "A surgical procedure that provides experimental treatment for a patient's burns and brute traumas. Heals considerably more when the patient is severely injured."
+	desc = "Хирургическая процедура, которая обеспечивает экспериментальное лечение ожогов и ушибов пациента. Лечение происходит быстрее, если пациент сильно ранен."
 
 /********************COMBO STEPS********************/
 /datum/surgery_step/heal/combo/get_progress(mob/user, mob/living/carbon/target, brute_healed, burn_healed)
@@ -302,30 +302,30 @@
 
 	if(locate(/obj/item/healthanalyzer) in user.held_items)
 		if(target.get_brute_loss())
-			progress_text = ". Remaining brute: <font color='#ff3333'>[target.get_brute_loss()]</font>"
+			progress_text = ". Оставшиеся ушибы: <font color='#ff3333'>[target.get_brute_loss()]</font>"
 		if(target.get_fire_loss())
-			progress_text += ". Remaining burn: <font color='#ff9933'>[target.get_fire_loss()]</font>"
+			progress_text += ". Оставшиеся ожоги: <font color='#ff9933'>[target.get_fire_loss()]</font>"
 	else
 		switch(estimated_remaining_steps)
 			if(-INFINITY to 1)
 				return
 			if(1 to 3)
-				progress_text = ", finishing up the last few signs of damage"
+				progress_text = ", осталось обработать пару последние следы повреждений"
 			if(3 to 6)
-				progress_text = ", counting down the last few patches of trauma"
+				progress_text = ", осталось обработать всего-лишь пару повреждений"
 			if(6 to 9)
-				progress_text = ", continuing to plug away at [target.p_their()] extensive injuries"
+				progress_text = ", продолжайте работать над обработкой провреждений"
 			if(9 to 12)
-				progress_text = ", steadying yourself for the long surgery ahead"
+				progress_text = ", надо подсобраться, ведь операция будет ещё долго идти"
 			if(12 to 15)
-				progress_text = ", though [target.p_they()] still look[target.p_s()] more like smooshed baby food than a person"
+				progress_text = ", судя по внешнему виду, тело больше напоминает еду для карапузов, нежели чем человеческое тело"
 			if(15 to INFINITY)
-				progress_text = ", though you feel like you're barely making a dent in treating [target.p_their()] broken body"
+				progress_text = ", вам кажется, что вы ещё долго будете лечить это обезображенное тело"
 
 	return progress_text
 
 /datum/surgery_step/heal/combo
-	name = "tend physical wounds (hemostat)"
+	name = "обработайте телесные раны (гемостат)"
 	brutehealing = 3
 	burnhealing = 3
 	brute_multiplier = 0.07
@@ -348,9 +348,9 @@
 	display_results(
 		user,
 		target,
-		span_warning("You screwed up!"),
-		span_warning("[user] screws up!"),
-		span_notice("[user] fixes some of [target]'s wounds."),
+		span_warning("Вы ошибаетесь!"),
+		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] обрабатывает некоторые раны у [target.declent_ru(GENITIVE)]."),
 		target_detailed = TRUE,
 	)
 	target.take_bodypart_damage(5,5)

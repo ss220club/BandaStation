@@ -1,6 +1,6 @@
 //Head surgery to fix the ears organ
 /datum/surgery/ear_surgery
-	name = "Ear surgery"
+	name = "Операция на ушах"
 	requires_bodypart_type = NONE
 	organ_to_manipulate = ORGAN_SLOT_EARS
 	possible_locs = list(BODY_ZONE_HEAD)
@@ -15,7 +15,7 @@
 
 //fix ears
 /datum/surgery_step/fix_ears
-	name = "fix ears (hemostat)"
+	name = "вылечите уши (гемостат)"
 	implements = list(
 		TOOL_HEMOSTAT = 100,
 		TOOL_SCREWDRIVER = 45,
@@ -29,22 +29,22 @@
 	display_results(
 		user,
 		target,
-		span_notice("You begin to fix [target]'s ears..."),
-		span_notice("[user] begins to fix [target]'s ears."),
-		span_notice("[user] begins to perform surgery on [target]'s ears."),
+		span_notice("Вы начинаете лечить уши у [target.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает лечить уши у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает проводить операцию на ушах у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "You feel a dizzying pain in your head!")
+	display_pain(target, "Вы чувствуете острую боль в голове!")
 
 /datum/surgery_step/fix_ears/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/obj/item/organ/ears/target_ears = target.get_organ_slot(ORGAN_SLOT_EARS)
 	display_results(
 		user,
 		target,
-		span_notice("You succeed in fixing [target]'s ears."),
-		span_notice("[user] successfully fixes [target]'s ears!"),
-		span_notice("[user] completes the surgery on [target]'s ears."),
+		span_notice("Вы успешно вылечиваете уши у [target.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно вылечивает уши у [target.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на ушах у [target.declent_ru(GENITIVE)]."),
 	)
-	display_pain(target, "Your head swims, but it seems like you can feel your hearing coming back!")
+	display_pain(target, "Голова кружится, но кажется, что к вам возвращается слух!")
 	target_ears.set_organ_damage(0)
 	///makes you temporarily deaf for a duration post-surgery
 	var/deaf_change = 40 SECONDS - target_ears.temporary_deafness
@@ -56,19 +56,19 @@
 		display_results(
 			user,
 			target,
-			span_warning("You accidentally stab [target] right in the brain!"),
-			span_warning("[user] accidentally stabs [target] right in the brain!"),
-			span_warning("[user] accidentally stabs [target] right in the brain!"),
+			span_warning("Вы отвлекаетесь, случайно задевая мозг у [target.declent_ru(GENITIVE)]!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] отвлекается, случайно задевая мозг у [target.declent_ru(GENITIVE)]!"),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] отвлекается, случайно задевая мозг у [target.declent_ru(GENITIVE)]!"),
 		)
-		display_pain(target, "You feel a visceral stabbing pain right through your head, into your brain!")
+		display_pain(target, "Вы чувствуете сильную колющую боль в голове, прямо в мозгу!")
 		target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 70)
 	else
 		display_results(
 			user,
 			target,
-			span_warning("You accidentally stab [target] right in the brain! Or would have, if [target] had a brain."),
-			span_warning("[user] accidentally stabs [target] right in the brain! Or would have, if [target] had a brain."),
-			span_warning("[user] accidentally stabs [target] right in the brain!"),
+			span_warning("Вы отвлекаетесь, случайно задев мозг у [target.declent_ru(GENITIVE)]! Либо, задели бы его, был бы у [target.declent_ru(GENITIVE)] мозг."),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] отвлекается, случайно задев мозг у [target.declent_ru(GENITIVE)]! Либо, задел бы его, был бы у [target.declent_ru(GENITIVE)] мозг."),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] отвлекается, случайно задев мозг у [target.declent_ru(GENITIVE)]!"),
 		)
-		display_pain(target, "You feel a visceral stabbing pain right through your head!") // dunno who can feel pain w/o a brain but may as well be consistent.
+		display_pain(target, "Вы чувствуете сильную колющую боль в голове!") // dunno who can feel pain w/o a brain but may as well be consistent.
 	return FALSE

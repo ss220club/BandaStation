@@ -364,7 +364,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 
 // Displays a message in deadchat, sent by source. source is not linkified, message is, to avoid stuff like character names to be linkified.
 // Automatically gives the class deadsay to the whole message (message + source)
-/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR, admin_only=FALSE)
+// BANDASTATION EDIT START - ghost runechat
+/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR, admin_only=FALSE, raw_message)
+	var/should_show_runechat = !SSlag_switch.measures[DISABLE_GHOST_RUNECHAT] && raw_message && follow_target && !follow_target.orbiting
+// BANDASTATION EDIT END - ghost runechat
 	message = span_deadsay("[source][span_linkify(message)]")
 
 	if(admin_only)
@@ -424,6 +427,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 				var/turf_link = TURF_LINK(M, turf_target)
 				rendered_message = "[turf_link] [message]"
 
+			// BANDASTATION EDIT START - ghost runechat
+			if(should_show_runechat && M.client?.prefs.read_preference(/datum/preference/toggle/enable_runechat) && M.see_invisible >= follow_target.invisibility)
+				M.create_chat_message(follow_target, raw_message = raw_message, spans = list("deadsay"))
+			// BANDASTATION EDIT END - ghost runechat
 			to_chat(M, rendered_message, avoid_highlighting = speaker_key == M.key)
 		else
 			to_chat(M, message, avoid_highlighting = speaker_key == M.key)
@@ -623,36 +630,40 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 			return mob
 
 /// Returns a string for the specified body zone. If we have a bodypart in this zone, refers to its plaintext_zone instead.
-/mob/living/proc/parse_zone_with_bodypart(zone)
+/mob/living/proc/parse_zone_with_bodypart(zone, declent = NOMINATIVE) // BANDASTATION EDIT - Declents
 	var/obj/item/bodypart/part = get_bodypart(zone)
 
-	return part?.plaintext_zone || parse_zone(zone)
+	// BANDASTATION EDIT START - Declents
+	if(part?.ru_plaintext_zone[declent])
+		return part.ru_plaintext_zone[declent]
+	return ru_parse_zone(zone, declent)
+	// BANDASTATION EDIT END
 
 ///Return a string for the specified body zone. Should be used for parsing non-instantiated bodyparts, otherwise use [/obj/item/bodypart/var/plaintext_zone]
 /proc/parse_zone(zone)
 	switch(zone)
 		if(BODY_ZONE_CHEST)
-			return "chest"
+			return "грудь"
 		if(BODY_ZONE_HEAD)
-			return "head"
+			return "голова"
 		if(BODY_ZONE_PRECISE_R_HAND)
-			return "right hand"
+			return "правая кисть"
 		if(BODY_ZONE_PRECISE_L_HAND)
-			return "left hand"
+			return "левая кисть"
 		if(BODY_ZONE_L_ARM)
-			return "left arm"
+			return "левая рука"
 		if(BODY_ZONE_R_ARM)
-			return "right arm"
+			return "правая рука"
 		if(BODY_ZONE_L_LEG)
-			return "left leg"
+			return "левая нога"
 		if(BODY_ZONE_R_LEG)
-			return "right leg"
+			return "правая нога"
 		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "left foot"
+			return "левая ступня"
 		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "right foot"
+			return "правая ступня"
 		if(BODY_ZONE_PRECISE_GROIN)
-			return "groin"
+			return "паховая область"
 		else
 			return zone
 

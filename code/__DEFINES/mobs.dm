@@ -53,6 +53,10 @@
 #define BLOOD_TYPE_XENO "X*"
 #define BLOOD_TYPE_H2O "H2O"
 #define BLOOD_TYPE_SNAIL "S"
+/// BANDASTATION ADDITION START - Species
+#define BLOOD_TYPE_MOTH "M"
+#define BLOOD_TYPE_SKRELL "SK"
+/// BANDASTATION ADDITION START - Species
 
 // Blood exposure behavior flag defines
 /// Add our DNA to turfs/mobs/items, does not correlate with adding decals/overlays
@@ -196,6 +200,11 @@
 #define SPECIES_ZOMBIE_INFECTIOUS "memezombie"
 #define SPECIES_ZOMBIE_KROKODIL "krokodil_zombie"
 #define SPECIES_VOIDWALKER "voidwalker"
+/// BANDASTATION ADDITION START - Species
+#define SPECIES_VULPKANIN "vulpkanin"
+#define SPECIES_TAJARAN "tajaran"
+#define SPECIES_SKRELL "skrell"
+/// BANDASTATION ADDITION END - Species
 
 // Like species IDs, but not specifically attached a species.
 #define BODYPART_ID_ALIEN "alien"
@@ -518,11 +527,11 @@
 #define MAX_REVIVE_FIRE_DAMAGE 180
 #define MAX_REVIVE_BRUTE_DAMAGE 180
 
-#define DEFAULT_BRUTE_EXAMINE_TEXT "bruising"
-#define DEFAULT_BURN_EXAMINE_TEXT "burns"
+#define DEFAULT_BRUTE_EXAMINE_TEXT "ушибы"
+#define DEFAULT_BURN_EXAMINE_TEXT "ожоги"
 
-#define ROBOTIC_BRUTE_EXAMINE_TEXT "denting"
-#define ROBOTIC_BURN_EXAMINE_TEXT "charring"
+#define ROBOTIC_BRUTE_EXAMINE_TEXT "вмятины"
+#define ROBOTIC_BURN_EXAMINE_TEXT "обугления"
 
 #define GLASSY_BRUTE_EXAMINE_TEXT "cracking"
 #define GLASSY_BURN_EXAMINE_TEXT "deformation"
@@ -556,13 +565,13 @@
 // Randomization keys for calling wabbajack with.
 // Note the contents of these keys are important, as they're displayed to the player
 // Ex: (You turn into a "monkey", You turn into a "xenomorph")
-#define WABBAJACK_MONKEY "monkey"
-#define WABBAJACK_ROBOT "robot"
-#define WABBAJACK_CLOWN "clown"
-#define WABBAJACK_SLIME "slime"
-#define WABBAJACK_XENO "xenomorph"
-#define WABBAJACK_HUMAN "humanoid"
-#define WABBAJACK_ANIMAL "animal"
+#define WABBAJACK_MONKEY "мартышки"
+#define WABBAJACK_ROBOT "робота"
+#define WABBAJACK_CLOWN "клоуна"
+#define WABBAJACK_SLIME "слайма"
+#define WABBAJACK_XENO "ксеноморфа"
+#define WABBAJACK_HUMAN "гуманоида"
+#define WABBAJACK_ANIMAL "животного"
 
 // Reasons a defibrillation might fail
 #define DEFIB_POSSIBLE (1<<0)
@@ -576,6 +585,7 @@
 #define DEFIB_FAIL_NO_INTELLIGENCE (1<<8)
 #define DEFIB_FAIL_BLACKLISTED (1<<9)
 #define DEFIB_NOGRAB_AGHOST (1<<10)
+#define DEFIB_FAIL_PERMANENTLY_DEAD (1<<11) // BANDASTATION ADDITION - PERMA-DEATH
 
 // Bit mask of possible return values by can_defib that would result in a revivable patient
 #define DEFIB_REVIVABLE_STATES (DEFIB_FAIL_NO_HEART | DEFIB_FAIL_FAILING_HEART | DEFIB_FAIL_HUSK | DEFIB_FAIL_TISSUE_DAMAGE | DEFIB_FAIL_FAILING_BRAIN | DEFIB_POSSIBLE)
@@ -1070,6 +1080,11 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 #define BUTT_SPRITE_PLASMA "plasma"
 #define BUTT_SPRITE_FUZZY "fuzzy"
 #define BUTT_SPRITE_SLIME "slime"
+/// BANDASTATION ADDITION START - Species
+#define BUTT_SPRITE_VULPKANIN "vulpkanin"
+#define BUTT_SPRITE_SKRELL "skrell"
+#define BUTT_SPRITE_TAJARAN "tajaran"
+/// BANDASTATION ADDITION END - Species
 
 /// Distance which you can see someone's ID card
 /// Short enough that you can inspect over tables (bartender checking age)

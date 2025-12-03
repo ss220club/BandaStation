@@ -38,7 +38,7 @@
 	if(panel_open)
 		return NONE
 	if(anchored)
-		balloon_alert(user, "unanchor first!")
+		balloon_alert(user, "нужно открутить!")
 		return ITEM_INTERACT_BLOCKING
 	return ..()
 

@@ -55,22 +55,22 @@
 	var/activated_word = "ready"
 
 	/// The context to show when the baton is active and targeting a living thing
-	var/context_living_target_active = "Stun"
+	var/context_living_target_active = "Оглушить"
 
 	/// The context to show when the baton is active and targeting a living thing in combat mode
-	var/context_living_target_active_combat_mode = "Stun"
+	var/context_living_target_active_combat_mode = "Оглушить"
 
 	/// The context to show when the baton is inactive and targeting a living thing
-	var/context_living_target_inactive = "Prod"
+	var/context_living_target_inactive = "Тыкнуть"
 
 	/// The context to show when the baton is inactive and targeting a living thing in combat mode
-	var/context_living_target_inactive_combat_mode = "Attack"
+	var/context_living_target_inactive_combat_mode = "Атаковать"
 
 	/// The RMB context to show when the baton is active and targeting a living thing
-	var/context_living_rmb_active = "Attack"
+	var/context_living_rmb_active = "Атаковать"
 
 	/// The RMB context to show when the baton is inactive and targeting a living thing
-	var/context_living_rmb_inactive = "Attack"
+	var/context_living_rmb_inactive = "Атаковать"
 
 /obj/item/melee/baton/Initialize(mapload)
 	. = ..()
@@ -245,19 +245,19 @@
 /obj/item/melee/baton/proc/get_stun_description(mob/living/target, mob/living/user)
 	PROTECTED_PROC(TRUE)
 	. = list()
-	.["visible"] = span_danger("[user] knocks [target] down with [src]!")
-	.["local"] = span_userdanger("[user] knocks you down with [src]!")
+	.["visible"] = span_danger("[capitalize(user.declent_ru(NOMINATIVE))] сбивает [target.declent_ru(ACCUSATIVE)] с ног с помощью [declent_ru(GENITIVE)]!")
+	.["local"] = span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] сбивает вас с ног с помощью [declent_ru(GENITIVE)]!")
 
 /// Default message for stunning a cyborg.
 /obj/item/melee/baton/proc/get_cyborg_stun_description(mob/living/target, mob/living/user)
 	PROTECTED_PROC(TRUE)
 	. = list()
 	if(affect_cyborg)
-		.["visible"] = span_danger("[user] pulses [target]'s sensors with the baton!")
-		.["local"] = span_danger("You pulse [target]'s sensors with the baton!")
+		.["visible"] = span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пульсирует сенсоры [target.declent_ru(GENITIVE)] с помощью [declent_ru(GENITIVE)]!")
+		.["local"] = span_danger("Вы пульсируете сенсоры [target.declent_ru(GENITIVE)] с помощью [declent_ru(GENITIVE)]!")
 	else
-		.["visible"] = span_danger("[user] tries to knock down [target] with [src], and predictably fails!") //look at this duuuuuude
-		.["local"] = span_userdanger("[user] tries to... knock you down with [src]?") //look at the top of his head!
+		.["visible"] = span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается сбить [target.declent_ru(ACCUSATIVE)] с ног с помощью [declent_ru(GENITIVE)], и предсказуемо терпит неудачу!") //look at this duuuuuude
+		.["local"] = span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] пытается... сбить вас с помощью [declent_ru(GENITIVE)]?") //look at the top of his head!
 
 /// Contains any special effects that we apply to living, non-cyborg mobs we stun. Does not include applying a knockdown, dealing stamina damage, etc.
 /obj/item/melee/baton/proc/additional_effects_non_cyborg(mob/living/target, mob/living/user)
@@ -281,7 +281,7 @@
 /obj/item/melee/baton/proc/clumsy_check(mob/living/user, mob/living/intented_target)
 	if(!active || !HAS_TRAIT(user, TRAIT_CLUMSY) || prob(50))
 		return FALSE
-	user.visible_message(span_danger("[user] accidentally hits [user.p_them()]self over the head with [src]! What a doofus!"), span_userdanger("You accidentally hit yourself over the head with [src]!"), visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE)
+	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] случайно бьет себя по голове с помощью [declent_ru(GENITIVE)]! Какой дурачок!"), span_userdanger("Вы случайно бьете себя по голове с помощью [declent_ru(GENITIVE)]!"), visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE)
 
 	if(iscyborg(user))
 		if(affect_cyborg)
@@ -368,7 +368,7 @@
 	var/mob/living/carbon/human/human_user = user
 	var/obj/item/organ/brain/our_brain = human_user.get_organ_by_type(/obj/item/organ/brain)
 
-	user.visible_message(span_suicide("[user] stuffs [src] up [user.p_their()] nose and presses the 'extend' button! It looks like [user.p_theyre()] trying to clear [user.p_their()] mind."))
+	user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] вставляет [declent_ru(ACCUSATIVE)] себе в нос и нажимает кнопку 'вытянуть'! Кажется, [user.ru_p_they()] пытается очистить свой разум."))
 	if(active)
 		playsound(src, on_sound, 50, TRUE)
 		add_fingerprint(user)
@@ -395,7 +395,7 @@
 	src.active = active
 	inhand_icon_state = active ? on_inhand_icon_state : null // When inactive, there is no inhand icon_state.
 	if(user)
-		balloon_alert(user, active ? "extended" : "collapsed")
+		balloon_alert(user, active ? "вытянуто" : "втянуто")
 	if(!active)
 		drop_sound = folded_drop_sound
 		pickup_sound = folded_pickup_sound
@@ -528,11 +528,11 @@
 
 /obj/item/melee/baton/security/suicide_act(mob/living/user)
 	if(cell?.charge && active)
-		user.visible_message(span_suicide("[user] is putting the live [name] in [user.p_their()] mouth! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] вставляет [declent_ru(ACCUSATIVE)] с включенной батареей себе в рот! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		finalize_baton_attack(user, user)
 		return FIRELOSS
 	else
-		user.visible_message(span_suicide("[user] is shoving \the [src] down their throat! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] заталкивает [declent_ru(ACCUSATIVE)] себе в горло! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		return OXYLOSS
 
 /obj/item/melee/baton/security/Destroy()
@@ -588,9 +588,9 @@
 /obj/item/melee/baton/security/examine(mob/user)
 	. = ..()
 	if(cell)
-		. += span_notice("\The [src] is [round(cell.percent())]% charged.")
+		. += span_notice("Батарея [declent_ru(GENITIVE)] заряжена на [round(cell.percent())]%.")
 	else
-		. += span_warning("\The [src] does not have a power source installed.")
+		. += span_warning("[capitalize(declent_ru(NOMINATIVE))] не имеет установленного источника питания.")
 
 /obj/item/melee/baton/security/screwdriver_act(mob/living/user, obj/item/tool)
 	if(tryremovecell(user))
@@ -601,15 +601,15 @@
 	if(istype(item, /obj/item/stock_parts/power_store/cell))
 		var/obj/item/stock_parts/power_store/cell/active_cell = item
 		if(cell)
-			to_chat(user, span_warning("[src] already has a cell!"))
+			to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] уже имеет батарею!"))
 		else
 			if(active_cell.maxcharge < cell_hit_cost)
-				to_chat(user, span_notice("[src] requires a higher capacity cell."))
+				to_chat(user, span_notice("[capitalize(declent_ru(NOMINATIVE))] нуждается в более емкой батарее."))
 				return
 			if(!user.transferItemToLoc(item, src))
 				return
 			cell = item
-			to_chat(user, span_notice("You install a cell in [src]."))
+			to_chat(user, span_notice("Вы вставляете батарею в [capitalize(declent_ru(ACCUSATIVE))]."))
 			update_appearance()
 	else
 		return ..()
@@ -617,22 +617,22 @@
 /obj/item/melee/baton/security/proc/tryremovecell(mob/user)
 	if(cell && can_remove_cell)
 		cell.forceMove(drop_location())
-		to_chat(user, span_notice("You remove the cell from [src]."))
+		to_chat(user, span_notice("Вы вынимаете батарею из [capitalize(declent_ru(GENITIVE))]."))
 		return TRUE
 	return FALSE
 
 /obj/item/melee/baton/security/attack_self(mob/user)
 	if(cell?.charge >= cell_hit_cost && !active)
 		turn_on(user)
-		balloon_alert(user, "turned on")
+		balloon_alert(user, "включение")
 	else
 		turn_off()
 		if(!cell)
-			balloon_alert(user, "no power source!")
+			balloon_alert(user, "нет источника питания!")
 		else if(cell?.charge < cell_hit_cost)
-			balloon_alert(user, "out of charge!")
+			balloon_alert(user, "не хватает заряда!")
 		else
-			balloon_alert(user, "turned off")
+			balloon_alert(user, "выключение")
 	add_fingerprint(user)
 
 /// Toggles the stun baton's light
@@ -679,8 +679,8 @@
 
 	if(!active && !user.combat_mode)
 		target.visible_message(
-			span_warning("[user] prods [target] with [src]. Luckily it was off."),
-			span_warning("[user] prods you with [src]. Luckily it was off."),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."),
+			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] тыкает вас с помощью [declent_ru(GENITIVE)]. К счастью, оно было выключено."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 		return TRUE
@@ -713,7 +713,7 @@
 /obj/item/melee/baton/security/proc/apply_stun_effect_end(mob/living/target)
 	var/trait_check = HAS_TRAIT(target, TRAIT_BATON_RESISTANCE) //var since we check it in out to_chat as well as determine stun duration
 	if(!target.IsKnockdown())
-		to_chat(target, span_warning("Your muscles seize, making you collapse[trait_check ? ", but your body quickly recovers..." : "!"]"))
+		to_chat(target, span_warning("Ваши мышцы сводит судорогой, заставляя вас упасть[trait_check ? ", но ваше тело быстро восстанавливается..." : "!"]"))
 
 	if(!trait_check)
 		target.Knockdown(knockdown_time)
@@ -721,14 +721,14 @@
 /obj/item/melee/baton/security/get_stun_description(mob/living/target, mob/living/user)
 	. = list()
 
-	.["visible"] = span_danger("[user] stuns [target] with [src]!")
-	.["local"] = span_userdanger("[user] stuns you with [src]!")
+	.["visible"] = span_danger("[capitalize(user.declent_ru(NOMINATIVE))] оглушает [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]!")
+	.["local"] = span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] оглушает вас с помощью [declent_ru(GENITIVE)]!")
 
 /obj/item/melee/baton/security/get_cyborg_stun_description(mob/living/target, mob/living/user)
 	. = ..()
 	if(!affect_cyborg)
-		.["visible"] = span_danger("[user] tries to stun [target] with [src], and predictably fails!")
-		.["local"] = span_userdanger("[user] tries to... stun you with [src]?")
+		.["visible"] = span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается оглушить [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)], и предсказуемо терпит неудачу!")
+		.["local"] = span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] пытается... оглушить вас с помощью [declent_ru(GENITIVE)]?")
 
 /obj/item/melee/baton/security/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
@@ -853,11 +853,11 @@
 		return ..()
 
 	if(!can_upgrade)
-		user.visible_message(span_warning("This prod is already improved!"))
+		user.visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] уже улучшен!"))
 		return ..()
 
 	if(cell)
-		user.visible_message(span_warning("You can't put the crystal onto the stunprod while it has a power cell installed!"))
+		user.visible_message(span_warning("Вы не можете вставить кристалл в [declent_ru(ACCUSATIVE)] пока установлен источник питания!"))
 		return ..()
 
 	var/our_prod
@@ -871,10 +871,10 @@
 		our_crystal.use(1)
 		our_prod = /obj/item/melee/baton/security/cattleprod/telecrystalprod
 	else
-		to_chat(user, span_notice("You don't think \the [item] will do anything to improve \the [src]."))
+		to_chat(user, span_notice("Вы не думаете, что [item.declent_ru(NOMINATIVE)] способен хоть как-то улучшить [declent_ru(ACCUSATIVE)]."))
 		return ..()
 
-	to_chat(user, span_notice("You place \the [item] firmly into \the [sparkler]."))
+	to_chat(user, span_notice("Вы крепко вставляете [item.declent_ru(ACCUSATIVE)] в [sparkler.declent_ru(ACCUSATIVE)]."))
 	remove_item_from_storage(user)
 	qdel(src)
 	var/obj/item/melee/baton/security/cattleprod/brand_new_prod = new our_prod(user.loc)
@@ -965,10 +965,10 @@
 	if(!user || !stuff_in_hand || !target.temporarilyRemoveItemFromInventory(stuff_in_hand))
 		return
 	if(user.put_in_inactive_hand(stuff_in_hand))
-		stuff_in_hand.loc.visible_message(span_warning("[stuff_in_hand] suddenly appears in [user]'s hand!"))
+		stuff_in_hand.loc.visible_message(span_warning("[capitalize(stuff_in_hand.declent_ru(NOMINATIVE))] внезапно появляется в руке [user.declent_ru(GENITIVE)]!"))
 	else
 		stuff_in_hand.forceMove(user.drop_location())
-		stuff_in_hand.loc.visible_message(span_warning("[stuff_in_hand] suddenly appears!"))
+		stuff_in_hand.loc.visible_message(span_warning("[capitalize(stuff_in_hand.declent_ru(NOMINATIVE))] внезапно появляется!"))
 
 
 /obj/item/melee/baton/nunchaku

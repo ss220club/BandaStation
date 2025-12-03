@@ -48,10 +48,10 @@
 	else
 		SSshuttle.emergency_last_call_loc = null
 	priority_announce(
-		text = "The emergency shuttle has been called. [red_alert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]It will arrive in [timeLeft(60 SECONDS)] minute\s.[reason][SSshuttle.emergency_last_call_loc ? "\n\nCall signal traced. Results can be viewed on any communications console." : "" ][SSshuttle.admin_emergency_no_recall ? "\n\nWarning: Shuttle recall subroutines disabled; Recall not possible." : ""]",
-		title = "Emergency Shuttle Dispatched",
+		text = "Эвакуационный шаттл вызван. [red_alert ? "Красный уровень угрозы подтверждён: Отправлен приоритетный шаттл. " : "" ]Ожидаемое время прибытия: [timeLeft(60 SECONDS)] [declension_ru(timeLeft(60 SECONDS), "минуты", "минут", "минут")].[reason][SSshuttle.emergency_last_call_loc ? "\n\nСигнал вызова отслежен. Результаты можно просмотреть на любой консоли коммуникаций." : "" ][SSshuttle.admin_emergency_no_recall ? "\n\nПредупреждение: Подсистемы отзыва шаттла отключены; Отзыв невозможен." : ""]",
+		title = "Вызван эвакуационный шаттл",
 		sound = ANNOUNCER_SHUTTLECALLED,
-		sender_override = "Emergency Shuttle Uplink Alert",
+		sender_override = "Аварийное оповещение эвакуационного шаттла",
 		color_override = "orange",
 		)
 
@@ -69,10 +69,10 @@
 	else
 		SSshuttle.emergency_last_call_loc = null
 	priority_announce(
-		text = "The emergency shuttle has been recalled.[SSshuttle.emergency_last_call_loc ? " Recall signal traced. Results can be viewed on any communications console." : "" ]",
-		title = "Emergency Shuttle Recalled",
+		text = "Эвакуационный шаттл был отозван.[SSshuttle.emergency_last_call_loc ? " Сигнал отзыва шаттла отслежен. Результаты можно просмотреть на любой консоли коммуникаций." : "" ]",
+		title = "Эвакуационный шаттл отозван",
 		sound = ANNOUNCER_SHUTTLERECALLED,
-		sender_override = "Emergency Shuttle Uplink Alert",
+		sender_override = "Аварийное оповещение эвакуационного шаттла",
 		color_override = "orange",
 		)
 
@@ -164,10 +164,10 @@
 				setTimer(SSshuttle.emergency_dock_time)
 				send2adminchat("Server", "The Emergency Shuttle has docked with the station.")
 				priority_announce(
-					text = "[SSshuttle.emergency] has docked with the station. You have [DisplayTimeText(SSshuttle.emergency_dock_time)] to board the emergency shuttle.",
-					title = "Emergency Shuttle Arrival",
+					text = "[SSshuttle.emergency] состыковался со станцией. У вас есть [DisplayTimeText(SSshuttle.emergency_dock_time)], чтобы прибыть на борт шаттла.",
+					title = "Эвакуационный шаттл прибыл",
 					sound = ANNOUNCER_SHUTTLEDOCK,
-					sender_override = "Emergency Shuttle Uplink Alert",
+					sender_override = "Аварийное оповещение эвакуационного шаттла",
 					color_override = "orange",
 				)
 				ShuttleDBStuff()
@@ -227,13 +227,13 @@
 				launch_status = ENDGAME_LAUNCHED
 				setTimer(SSshuttle.emergency_escape_time * engine_coeff)
 				priority_announce(
-					text = "The emergency shuttle has left the station. Estimate [timeLeft(60 SECONDS)] minutes until the shuttle docks at [command_name()].",
-					title = "Emergency Shuttle Departure",
-					sender_override = "Emergency Shuttle Uplink Alert",
+					text = "Эвакуационный шаттл покинул станцию. Приблизительное время ожидания: [timeLeft(60 SECONDS)] [declension_ru(timeLeft(60 SECONDS), "минуты", "минут", "минут")], прежде чем шаттл прибудет на [command_name()].",
+					title = "Произведена отстыковка эвакуационного шаттла",
+					sender_override = "Аварийное оповещение эвакуационного шаттла",
 					color_override = "orange",
 				)
 				INVOKE_ASYNC(SSticker, TYPE_PROC_REF(/datum/controller/subsystem/ticker, poll_hearts))
-				INVOKE_ASYNC(SSvote, TYPE_PROC_REF(/datum/controller/subsystem/vote, initiate_vote), /datum/vote/map_vote, vote_initiator_name = "Map Rotation", forced = TRUE)
+				// INVOKE_ASYNC(SSvote, TYPE_PROC_REF(/datum/controller/subsystem/vote, initiate_vote), /datum/vote/map_vote, vote_initiator_name = "Map Rotation", forced = TRUE) // BANDASTATION REMOVE - move to roundend
 
 				if(!is_reserved_level(z))
 					CRASH("Emergency shuttle did not move to transit z-level!")
@@ -277,9 +277,9 @@
 					// just double check
 					SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_NUKIEBASE)
 					destination_dock = "emergency_syndicate"
-					minor_announce("Corruption detected in \
-						shuttle navigation protocols. Please contact your \
-						supervisor.", "SYSTEM ERROR:", sound_override = 'sound/announcer/announcement/announce_syndi.ogg')
+					minor_announce("Обнаружен сбой в \
+						навигационных протоколах. Пожалуйста, свяжитесь с \
+						руководством.", "КРИТИЧЕСКАЯ НЕИСПРАВНОСТЬ", sound_override = 'sound/announcer/announcement/announce_syndi.ogg')
 
 				dock_id(destination_dock)
 				mode = SHUTTLE_ENDGAME
@@ -293,9 +293,9 @@
 	launch_status = ENDGAME_LAUNCHED
 	setTimer(SSshuttle.emergency_escape_time)
 	priority_announce(
-		text = "The emergency shuttle is preparing for direct jump. Estimate [timeLeft(60 SECONDS)] minutes until the shuttle docks at [command_name()].",
-		title = "Emergency Shuttle Transit Failure",
-		sender_override = "Emergency Shuttle Uplink Alert",
+		text = "Эвакуационный шаттл готовится к Блюспейс прыжку. Приблизительное время ожидания: [timeLeft(60 SECONDS)] [declension_ru(timeLeft(60 SECONDS), "минуты", "минут", "минут")], прежде чем шаттл прибудет на [command_name()].",
+		title = "Экстренный транзит шаттла",
+		sender_override = "Аварийное оповещение эвакуационного шаттла",
 		color_override = "orange",
 	)
 

@@ -87,11 +87,11 @@
 
 /obj/item/chainsaw/suicide_act(mob/living/carbon/user)
 	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
-		user.visible_message(span_suicide("[user] smashes [src] into [user.p_their()] neck, destroying [user.p_their()] esophagus! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] smashes [src] into [user.p_their()] neck, destroying [user.p_their()] esophagus! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		playsound(src, 'sound/items/weapons/genhit1.ogg', 100, TRUE)
 		return BRUTELOSS
 
-	user.visible_message(span_suicide("[user] begins to tear [user.p_their()] head off with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins to tear [user.p_their()] head off with [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(src, 'sound/items/weapons/chainsawhit.ogg', 100, TRUE)
 	var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)
 	if(myhead)

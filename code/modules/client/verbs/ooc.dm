@@ -4,10 +4,10 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 ///talking in OOC uses this
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
-		to_chat(usr, span_danger("Speech is currently admin-disabled."))
+		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
 		return
 
 	var/client_initalized = VALIDATE_CLIENT_INITIALIZATION(src)
@@ -76,7 +76,9 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		return
 
 	mob.log_talk(raw_msg, LOG_OOC)
-
+	// BANDASTATION CHAT BADGES REPLACE START
+	var/keyname = get_ooc_badged_name()
+	/*
 	var/keyname = key
 	if(prefs.unlock_content)
 		if(prefs.toggles & MEMBER_PUBLIC)
@@ -84,6 +86,8 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(prefs.hearted)
 		var/datum/asset/spritesheet_batched/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
 		keyname = "[sheet.icon_tag("emoji-heart")][keyname]"
+	*/
+	// BANDASTATION CHAT BADGES REPLACE END
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
 	for(var/client/receiver as anything in GLOB.clients)
 		if(!receiver.prefs) // Client being created or deleted. Despite all, this can be null.
@@ -343,7 +347,7 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"
-	set category = "OOC"
+	set category = "Special" // BANDASTATION REPLACEMENT: Original: "OOC"
 	set desc = "Fit the width of the map window to match the viewport"
 
 	// Fetch aspect ratio
@@ -427,7 +431,7 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 /client/verb/policy()
 	set name = "Show Policy"
 	set desc = "Show special server rules related to your current character."
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 
 	//Collect keywords
 	var/list/keywords = mob.get_policy_keywords()
@@ -456,7 +460,7 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 /client/proc/export_preferences()
 	set name = "Export Preferences"
 	set desc = "Export your current preferences to a file."
-	set category = "OOC"
+	set category = "Special" // BANDASTATION REPLACEMENT: Original: "OOC"
 
 	ASSERT(prefs, "User attempted to export preferences while preferences were null!") // what the fuck
 
@@ -465,12 +469,12 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 /client/verb/map_vote_tally_count()
 	set name = "Show Map Vote Tallies"
 	set desc = "View the current map vote tally counts."
-	set category = "Server"
+	set category = "OOC" // BANDASTATION REPLACEMENT: Original: "Server"
 	to_chat(mob, SSmap_vote.tally_printout)
 
 
 /client/verb/linkforumaccount()
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 	set name = "Link Forum Account"
 	set desc = "Validates your byond account to your forum account. Required to post on the forums."
 
