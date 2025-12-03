@@ -458,7 +458,7 @@
 			"action" = ITEM_DELETE,
 			"back_key" = TOOL_WELDER,
 			"desc" = "The external armor is welded, and the <b>mech power core</b> socket is open.",
-			"icon_state" = "gygax24",
+			"icon_state" = "gygax23", // was gygax24 (looked like a duplicate)
 			"forward_message" = "inserted mech power core",
 			"backward_message" = "cut off external armor"
 		)
