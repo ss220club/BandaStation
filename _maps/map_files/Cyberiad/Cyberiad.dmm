@@ -24016,10 +24016,6 @@
 /obj/item/radio/intercom/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/pumproom)
-"fQL" = (
-/obj/machinery/light/small/directional/west,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/starboard)
 "fQO" = (
 /obj/effect/spawner/random/maintenance,
 /turf/open/floor/plating,
@@ -40526,6 +40522,17 @@
 /obj/structure/closet/wardrobe/white,
 /turf/open/floor/iron,
 /area/station/commons/locker)
+"jTw" = (
+/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/machinery/door/poddoor/preopen{
+	id = "research_lockdown";
+	name = "Research Lockdown Blast Doors"
+	},
+/obj/machinery/computer/security/telescreen/ordnance/directional/east{
+	pixel_x = 0
+	},
+/turf/open/floor/plating,
+/area/station/science/ordnance/testlab)
 "jTy" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/plating,
@@ -75052,17 +75059,6 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/service/library/ghetto)
-"soJ" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
-/obj/machinery/door/poddoor/preopen{
-	id = "research_lockdown";
-	name = "Research Lockdown Blast Doors"
-	},
-/obj/machinery/computer/security/telescreen/ordnance/directional/east{
-	pixel_x = 0
-	},
-/turf/open/floor/plating,
-/area/station/science/ordnance/testlab)
 "soN" = (
 /obj/effect/spawner/random/maintenance,
 /obj/effect/turf_decal/tile/dark/opposingcorners,
@@ -88272,6 +88268,10 @@
 /obj/machinery/duct,
 /turf/open/floor/iron,
 /area/station/security/prison/ghetto)
+"vEx" = (
+/obj/machinery/light/small/directional/west,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
 "vEy" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/dirt,
@@ -144728,7 +144728,7 @@ stl
 gDo
 xjE
 rYk
-fQL
+vEx
 naq
 hPY
 rYk
@@ -218513,9 +218513,9 @@ jLS
 kTP
 fwd
 vLK
-soJ
+jTw
 hkN
-soJ
+jTw
 vLK
 vjX
 vLK
