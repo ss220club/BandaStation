@@ -35515,7 +35515,6 @@
 	dir = 4
 	},
 /turf/open/floor/iron,
-/area/space,
 /area/station/science/ordnance/testlab)
 "iGp" = (
 /obj/item/kirbyplants/random,
@@ -40522,17 +40521,6 @@
 /obj/structure/closet/wardrobe/white,
 /turf/open/floor/iron,
 /area/station/commons/locker)
-"jTw" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
-/obj/machinery/door/poddoor/preopen{
-	id = "research_lockdown";
-	name = "Research Lockdown Blast Doors"
-	},
-/obj/machinery/computer/security/telescreen/ordnance/directional/east{
-	pixel_x = 0
-	},
-/turf/open/floor/plating,
-/area/station/science/ordnance/testlab)
 "jTy" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/plating,
@@ -69902,6 +69890,10 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
+"rcA" = (
+/obj/machinery/light/small/directional/west,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
 "rcD" = (
 /obj/machinery/status_display/ai/directional/north,
 /obj/structure/cable,
@@ -88268,10 +88260,6 @@
 /obj/machinery/duct,
 /turf/open/floor/iron,
 /area/station/security/prison/ghetto)
-"vEx" = (
-/obj/machinery/light/small/directional/west,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/starboard)
 "vEy" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/dirt,
@@ -97091,6 +97079,17 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
+"xOq" = (
+/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/machinery/door/poddoor/preopen{
+	id = "research_lockdown";
+	name = "Research Lockdown Blast Doors"
+	},
+/obj/machinery/computer/security/telescreen/ordnance/directional/east{
+	pixel_x = 0
+	},
+/turf/open/floor/plating,
+/area/station/science/ordnance/testlab)
 "xOr" = (
 /obj/effect/turf_decal/trimline/white/line{
 	dir = 1
@@ -144728,7 +144727,7 @@ stl
 gDo
 xjE
 rYk
-vEx
+rcA
 naq
 hPY
 rYk
@@ -218513,9 +218512,9 @@ jLS
 kTP
 fwd
 vLK
-jTw
+xOq
 hkN
-jTw
+xOq
 vLK
 vjX
 vLK
