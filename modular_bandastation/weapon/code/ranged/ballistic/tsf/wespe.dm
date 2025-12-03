@@ -1,3 +1,16 @@
+/datum/atom_skin/wespe
+	abstract_type = /datum/atom_skin/wespe
+	change_inhand_icon_state = TRUE
+	change_base_icon_state = TRUE
+
+/datum/atom_skin/wespe/default
+	preview_name = "Default"
+	new_icon_state = "wespe"
+
+/datum/atom_skin/wespe/black
+	preview_name = "Black"
+	new_icon_state = "wespe_black"
+
 /obj/item/gun/ballistic/automatic/pistol/wespe
 	name = "'Wespe' pistol"
 	desc = "Стандартный служебный пистолет различных военных подразделений ТСФ. Использует патрон .35 Sol Short имеет встроенный фонарик."
@@ -10,10 +23,10 @@
 	suppressor_x_offset = 7
 	suppressor_y_offset = 0
 	obj_flags = UNIQUE_RENAME
-	unique_reskin = list(
-		"Default" = "wespe",
-		"Black" = "wespe_black",
-	)
+
+/obj/item/gun/ballistic/automatic/pistol/wespe/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/wespe)
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/examine(mob/user)
 	. = ..()
