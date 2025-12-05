@@ -1,13 +1,41 @@
+/obj/item/gun/ballistic/rifle
+	recoil = 1
+
 /obj/item/gun/ballistic/rifle/boltaction
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
-	recoil = 1
+	desc = "Винтовка Сахно с продольно-скользящим затвором, которое было (и, безусловно, остается) популярным среди \
+		колонистов, карготехников, частных охранных сил, исследователей и других неприятных типов. Эта конкретная модель винтовки берет свое начало еще в 2440 году."
+	sawn_desc = "Обрезанная версия винтовки Сахно, широко известная как \"Обрез\". \
+		Вероятно, была причина, по которой изначально она не производилась такой короткой. \
+		Несмотря на ужасающий характер модификации, оружие в остальном выглядит в хорошем состоянии."
 
 /obj/item/gun/ballistic/rifle/boltaction/surplus
+	name = "Sakhno Precision Rifle"
+	icon_state = "sakhno"
 	inhand_icon_state = "sakhno"
 	worn_icon_state = "sakhno"
+	desc = parent_type::desc + "<br>По какой-то причине все внутренние детали покрыты влагой."
+	sawn_desc = "Обрезанная версия винтовки Сахно, широко известная как \"Обрез\". \
+		Вероятно, была причина, по которой изначально она не производилась такой короткой. \
+		Несмотря на ужасающий характер модификации, оружие в остальном выглядит в хорошем состоянии. \
+		Обрезка оружия, по-видимому, не помогла решить проблему влажности."
+
+/obj/item/gun/ballistic/rifle/boltaction/tactical
+	name = "Sakhno Tactical Precision Rifle"
+	desc = "Модификация давно устаревшей винтовки Сахно. Неизвестно, кем и когда была изготовлена эта модель винтовки и использовалась ли она когда-либо."
+	sawn_desc = "Обрезанная модель винтовки Сахно, широко известная как \"Обрез\". \
+		Вероятно, изначально было веское основание не производить винтовки такой короткой длины."
+	icon_state = "sakhno_tactifucked"
+	recoil = 0.7
+
+/obj/item/gun/ballistic/rifle/boltaction/tactical/surplus
+	desc = parent_type::desc + "<br>Однако можно с уверенностью сказать, что предыдущий владелец не бережно относился к оружию. \
+		По какой-то причине все внутренние детали покрыты влагой."
+	sawn_desc = parent_type::sawn_desc + "<br>Обрезка оружия, по-видимому, не помогла решить проблему влажности."
+	can_jam = TRUE
 
 /obj/item/gun/ballistic/rifle/boltaction/donkrifle
 	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
@@ -33,37 +61,31 @@
 	sawn_desc = "Обрезанная военная модель винтовки Сахно, широко известная как \"Обрез\". \
 		Вероятно, была причина, по которой изначально она не производилась такой короткой. \
 		Несмотря на ужасающий характер модификации, оружие в остальном выглядит в хорошем состоянии."
-
 	icon_state = "sakhno_army"
 	inhand_icon_state = "sakhno_army"
 	worn_icon_state = "sakhno_army"
 
 /obj/item/gun/ballistic/rifle/boltaction/army/surplus
-	desc = "Давно устаревшая винтовка Сахно поздней армейской модели. Эта конкретная модель винтовки датируется 2500 годом. \
-		По какой-то причине все внутренние детали покрыты влагой."
-	sawn_desc = "Обрезанная военная модель винтовки Сахно, широко известная как \"Обрез\" \
+	desc = parent_type::desc + "<br>По какой-то причине все внутренние детали покрыты влагой."
+	sawn_desc = "Обрезанная военная модель винтовки Сахно, широко известная как \"Обрез\". \
 		Вероятно, была причина, по которой изначально она не производилась такой короткой. \
 		Обрезка оружия, по-видимому, не помогла решить проблему влажности."
 	can_jam = TRUE
 
 /obj/item/gun/ballistic/rifle/boltaction/army/tactical
+	name = "Sakhno M2550 Army"
 	desc = "Модификация устаревшей винтовки Сахно поздней армейской модели, на боковой стороне которой выбита надпись \"Сахно M2550 Армейская\". \
 		Неизвестно, для какой армии была изготовлена эта модель винтовки и использовалась ли она когда-либо в армии какого-либо рода."
-	sawn_desc = "Обрезанная военная модель винтовки Сахно, широко известная как \"Обрез\" \
+	sawn_desc = "Обрезанная военная модель винтовки Сахно, широко известная как \"Обрез\". \
 		На боковой стороне винтовки выбита надпись \"Сахно M2550 Армейская\". \
 		Вероятно, изначально было веское основание не производить винтовки такой короткой длины."
-
 	icon_state = "sakhno_tactifucked_army"
+	recoil = 0.5
 
 /obj/item/gun/ballistic/rifle/boltaction/army/tactical/surplus
-	desc = "Модификация устаревшей винтовки Сахно поздней армейской модели, на боковой стороне которой выбита надпись \"Сахно M2550 Армейская\". \
-		Неизвестно, для какой армии была изготовлена эта модель винтовки и использовалась ли она когда-либо в армии какого-либо рода. \
-		Однако можно с уверенностью сказать, что предыдущий владелец не бережно относился к оружию. \
+	desc = parent_type::desc + "<br>Однако можно с уверенностью сказать, что предыдущий владелец не бережно относился к оружию. \
 		По какой-то причине все внутренние детали покрыты влагой."
-	sawn_desc = "Обрезанная военная модель винтовки Сахно, широко известная как \"Обрез\" \
-		На боковой стороне винтовки выбита надпись \"Сахно M2550 Армейская\". \
-		Вероятно, изначально было веское основание не производить винтовки такой короткой длины. \
-		Обрезка оружия, по-видимому, не помогла решить проблему влажности."
+	sawn_desc = parent_type::sawn_desc + "<br>Обрезка оружия, по-видимому, не помогла решить проблему влажности."
 	can_jam = TRUE
 
 /obj/item/gun/ballistic/rifle/krov
@@ -112,6 +134,7 @@
 
 /obj/item/gun/ballistic/rifle/krov/no_mag
 	bolt_locked = TRUE // so the bolt starts visibly open
+	spawn_magazine_type = /obj/item/ammo_box/magazine/strilka310/starts_empty
 
 /obj/item/gun/ballistic/rifle/sks
 	desc = "Возрождение старинной полуавтоматической винтовки СКС, переработанной для использования патронов калибра .310 Стрилка. \
@@ -170,6 +193,10 @@
 	can_jam = TRUE
 
 /obj/item/gun/ballistic/rifle/boltaction/mosin/empty
+	bolt_locked = TRUE
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/empty
+
+/obj/item/gun/ballistic/rifle/boltaction/mosin/surplus/empty
 	bolt_locked = TRUE
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/empty
 

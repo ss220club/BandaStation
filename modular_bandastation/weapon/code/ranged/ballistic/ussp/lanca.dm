@@ -26,7 +26,7 @@
 	suppressor_x_offset = 2
 	suppressor_y_offset = 1
 	burst_size = 1
-	fire_delay = 1.2 SECONDS
+	fire_delay = 1 SECONDS
 	actions_types = list()
 	recoil = 0.5
 	spread = 2.5
@@ -65,7 +65,13 @@
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "lanca_army"
-	fire_delay = 1 SECONDS
+	fire_delay = 0.5 SECONDS
+
+/obj/item/gun/ballistic/automatic/lanca/army/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/gun/ballistic/automatic/lanca/army/no_mag
 	spawnwithmagazine = FALSE

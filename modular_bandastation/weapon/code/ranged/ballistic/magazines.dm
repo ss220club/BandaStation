@@ -30,13 +30,13 @@
 
 /obj/item/ammo_box/magazine/c35sol_pistol/rubber
 	name = "pistol magazine (.35 Sol Short rubber)"
-	desc = "Магазин стандартного размера для пистолетов ТСФ калибра .35 Sol Short, вмещает 12 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c35sol/rubber
 
 /obj/item/ammo_box/magazine/c35sol_pistol/stendo/rubber
 	name = "extended pistol magazine (.35 Sol Short rubber)"
-	desc = "Увеличенный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 16 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c35sol/rubber
 
@@ -73,7 +73,7 @@
 
 /obj/item/ammo_box/magazine/c35sol_pistol/drum/rubber
 	name = "drum pistol magazine (.35 Sol Short rubber)"
-	desc = "Барабанный магазин для пистолетов ТСФ калибра .35 Sol Short, вмещает 35 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c35sol/rubber
 
@@ -90,7 +90,7 @@
 // MARK: AMK(AKM)
 /obj/item/ammo_box/magazine/c762x39mm
 	name = "rifle magazine (7.62x39mm)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами»."
+	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62x39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами»."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "amk"
 	ammo_band_icon = "+amk_ammo_band"
@@ -106,7 +106,7 @@
 
 /obj/item/ammo_box/magazine/c762x39mm/ricochet
 	name = "rifle magazine (7.62x39mm match)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит патроны с высокой рикошетностью."
+	desc = parent_type::desc + "<br>Содержит патроны с высокой рикошетностью."
 	ammo_band_color = COLOR_AMMO_MATCH
 	ammo_type = /obj/item/ammo_casing/c762x39/ricochet
 
@@ -122,29 +122,33 @@
 
 /obj/item/ammo_box/magazine/c762x39mm/emp
 	name = "rifle magazine (7.62x39mm EMP)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит ионные патроны, которые хорошо подходят для выведения из строя электроники и разрушения мехов."
+	desc = parent_type::desc + "<br>Содержит ионные патроны, которые хорошо подходят для выведения из строя электроники и разрушения мехов."
 	ammo_band_color = "#1ea2ee"
 	ammo_type = /obj/item/ammo_casing/c762x39/emp
 
 /obj/item/ammo_box/magazine/c762x39mm/rubber
 	name = "rifle magazine (7.62x39mm rubber)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит нелетальные травматические патроны."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c762x39/rubber
 
-/obj/item/ammo_box/magazine/c762x39mm/civ
+/obj/item/ammo_box/magazine/c762x39mm/small
 	name = "rifle short magazine (7.62x39mm)"
-	desc = "Укороченный двухрядный магазин, вмещающий 15 патронов калибра 7.62х39мм."
-	icon_state = "amk_civ"
+	desc = "Укороченный двухрядный магазин, вмещающий 15 патронов калибра 7.62x39мм."
+	icon_state = "amk_small"
 	max_ammo = 15
+
+/obj/item/ammo_box/magazine/c762x39mm/small/civ
+	desc = parent_type::desc + "<br>Содержит гражданские патроны."
+	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c762x39/civilian
 
-/obj/item/ammo_box/magazine/c762x39mm/civ/starts_empty
+/obj/item/ammo_box/magazine/c762x39mm/small/starts_empty
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c762x39mm/hunting
 	name = "rifle magazine (7.62x39mm hunting)"
-	desc = "Бананообразный двухрядный магазин, вмещающий 30 патронов калибра 7.62х39 мм. Говорят, что на заре распространения ТСФ, повстанцы из испанских колоний часто называли их «козьими рогами». Содержит патроны для охоты."
+	desc = parent_type::desc + "<br>Содержит охотничьи патроны."
 	ammo_band_color = "#05880c"
 	ammo_type = /obj/item/ammo_casing/c762x39/hunting
 
@@ -167,7 +171,7 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/fragmentation
 	name = "rifle short magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Укороченный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 15 осколочно-травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные осколочно-травматические патроны."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
@@ -193,7 +197,7 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/fragmentation
 	name = "rifle magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Магазин стандартного размера для винтовок ТСФ калибра .40 Sol Long, вмещает 20 осколочно-травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные осколочно-травматические патроны."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
@@ -219,7 +223,7 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/fragmentation
 	name = "rifle long magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Удлиненный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 30 осколочно-травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные осколочно-травматические патроны."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
@@ -245,7 +249,7 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/fragmentation
 	name = "rifle drum magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Барабанный магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 60 осколочно-травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные осколочно-травматические патроны."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
@@ -271,7 +275,7 @@
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/fragmentation
 	name = "rifle box magazine (.40 Sol Long rubber-fragmentation)"
-	desc = "Коробчатый магазин для винтовок ТСФ калибра .40 Sol Long, вмещает 100 осколочно-травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные осколочно-травматические патроны."
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
@@ -288,7 +292,7 @@
 // MARK: NT Glock aka GP-9
 /obj/item/ammo_box/magazine/c9x25mm_pistol
 	name = "pistol magazine (9x25mm NT)"
-	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 патронов."
+	desc = "Магазин стандартного размера для пистолетов GP-9 калибра 9x25мм, вмещает 12 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "pistol_9x25_standart"
 	base_icon_state = "pistol_9x25_standart"
@@ -306,7 +310,7 @@
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo
 	name = "extended pistol magazine (9x25mm NT)"
-	desc = "Увеличенный магазин для пистолетов НТ калибра 9x25мм, вмещает 22 патронов."
+	desc = "Увеличенный магазин для пистолетов GP-9 калибра 9x25мм, вмещает 22 патрона."
 	icon_state = "pistol_9x25_stendo"
 	base_icon_state = "pistol_9x25_stendo"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -317,13 +321,13 @@
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
 	name = "pistol magazine (9x25mm NT rubber)"
-	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9x25mm/rubber
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/rubber
 	name = "extended pistol magazine (9x25mm NT rubber)"
-	desc = "Увеличенный магазин для пистолетов НТ калибра 9x25мм, вмещает 22 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9x25mm/rubber
 
@@ -350,7 +354,7 @@
 // MARK: CM5 - SMG
 /obj/item/ammo_box/magazine/cm5
 	name = "SMG magazine (9x25mm NT)"
-	desc = "Магазин для пистолетов-пулеметов калибра 9x25мм НТ, вмещающий 30 патронов."
+	desc = "Магазин для пистолетов-пулеметов CM5 калибра 9x25мм НТ, вмещающий 30 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "cm5_mag"
 	base_icon_state = "cm5_mag"
@@ -365,7 +369,7 @@
 
 /obj/item/ammo_box/magazine/cm5/rubber
 	name = "SMG magazine (9x25mm NT rubber)"
-	desc = "Магазин для пистолетов-пулеметов калибра 9x25мм НТ, вмещающий 30 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9x25mm/rubber
 
@@ -382,7 +386,7 @@
 // MARK: CM82 - assault rifle
 /obj/item/ammo_box/magazine/c223
 	name = "assault rifle magazine (5.56x45mm)"
-	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов."
+	desc = "Магазин для штурмовых винтовок калибра 5.56x45мм, вмещающий 30 патронов. Подходит для винтовок CM82 и АРГ."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "cm82_mag"
 	base_icon_state = "cm82_mag"
@@ -397,7 +401,7 @@
 
 /obj/item/ammo_box/magazine/c223/rubber
 	name = "assault rifle magazine (5.56x45mm rubber)"
-	desc = "Магазин для штурмовых винтовок калибра 5.56мм, вмещающий 30 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей. Подходит для винтовок CM82 и АРГ."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/a223/rubber
 
@@ -529,7 +533,7 @@
 // MARK: F4 - battle rifle
 /obj/item/ammo_box/magazine/c762x51mm
 	name = "battle rifle magazine (7.62x51mm)"
-	desc = "Магазин для боевых винтовок калибра 7.62x51мм, вмещающий 20 патронов."
+	desc = "Магазин для боевых винтовок калибра 7.62x51мм, вмещающий 20 патронов. Подходит для винтовок F4 и FN4."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "762x51_mag"
 	base_icon_state = "762x51_mag"
@@ -544,7 +548,7 @@
 
 /obj/item/ammo_box/magazine/c762x51mm/rubber
 	name = "battle rifle magazine (7.62x51mm rubber)"
-	desc = "Магазин для боевых винтовок калибра 7.62x51мм, вмещающий 20 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей. Подходит для винтовок F4 и FN4."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c762x51mm/rubber
 
@@ -581,7 +585,7 @@
 
 /obj/item/ammo_box/magazine/cm40/rubber
 	name = "CM40 box (7.62x51mm rubber)"
-	desc = "Короб для легких пулеметов CM40 калибра 7.62x51мм, вмещающий 80 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c762x51mm/rubber
 
@@ -603,7 +607,7 @@
 // MARK: F90 - sniper rifle
 /obj/item/ammo_box/magazine/c338
 	name = "sniper rifle magazine (.338)"
-	desc = "Магазин для снайперских винтовок калибра .338, вмещающий 5 патронов."
+	desc = "Магазин для снайперских винтовок калибра .338, вмещающий 5 патронов. Подходит для винтовок F90 и HLRM2."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "338_mag"
 	base_icon_state = "338_mag"
@@ -633,7 +637,7 @@
 
 /obj/item/ammo_box/magazine/c338/extended
 	name = "extended sniper rifle magazine (.338)"
-	desc = "Магазин для снайперских винтовок калибра .338, вмещающий 10 патронов."
+	desc = "Магазин для снайперских винтовок калибра .338, вмещающий 10 патронов. Подходит для винтовок F90 и HLRM2."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "338_mag_ext"
 	base_icon_state = "338_mag_ext"
@@ -660,7 +664,7 @@
 // MARK: CM23 - .38 cal pistol
 /obj/item/ammo_box/magazine/c38
 	name = "pistol magazine (.38)"
-	desc = "Пистолетный магазин калибра .38, вмещающий 12 патронов."
+	desc = "Пистолетный магазин калибра .38, вмещающий 12 патронов. Подходит для пистолетов GP-38."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c38_mag"
 	base_icon_state = "c38_mag"
@@ -675,6 +679,7 @@
 
 /obj/item/ammo_box/magazine/c38/rubber
 	name = "pistol magazine (.38 Rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c38/match/bouncy
 
@@ -716,7 +721,7 @@
 // MARK: CM357 - .357 cal pistol
 /obj/item/ammo_box/magazine/c357
 	name = "pistol magazine (.357)"
-	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов."
+	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов. Подходит для пистолетов GP-357."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c357_mag"
 	base_icon_state = "c357_mag"
@@ -747,7 +752,7 @@
 // MARK: CM70 - .45 cal pistol
 /obj/item/ammo_box/magazine/c45
 	name = "pistol magazine (.45)"
-	desc = "Пистолетный магазин калибра .45, вмещающий 10 патронов."
+	desc = "Пистолетный магазин калибра .45, вмещающий 10 патронов. Подходит для пистолетов GP-45."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c45_mag"
 	base_icon_state = "c45_mag"
@@ -767,6 +772,7 @@
 
 /obj/item/ammo_box/magazine/c45/rubber
 	name = "pistol magazine (.45 rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c45/rubber
 
@@ -810,7 +816,7 @@
 
 /obj/item/ammo_box/magazine/dshk/c12ga
 	name = "DKSH-12 box (12ga)"
-	desc = "Короб для тяжелых пулеметов ДКШ 12го калибра, вмещающий 40 патронов."
+	desc = "Короб для тяжелых пулеметов ДКШ 12-го калибра, вмещающий 40 патронов."
 	icon_state = "dshk12_mag"
 	base_icon_state = "dshk12_mag"
 	caliber = CALIBER_SHOTGUN
@@ -855,7 +861,7 @@
 
 /obj/item/ammo_box/magazine/pmk/rubber
 	name = "PMK box (7.62x54mmR rubber)"
-	desc = "Короб для легких пулеметов ПМК калибра 7.62x54мм, вмещающий 100 патронов. Cодержит нелетальные травматические патроны с резиновой пулей."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c762x54mmr/rubber
 
@@ -880,7 +886,7 @@
 // MARK: Zashch - 10mm
 /obj/item/ammo_box/magazine/zashch
 	name = "pistol magazine (10mm)"
-	desc = "Пистолетный магазин калибра 10мм, вмещающий 15 патронов."
+	desc = "Двухрядный пистолетный магазин калибра 10мм, вмещающий 15 патронов. Подходит для пистолетов П-10."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "zashch_mag"
 	base_icon_state = "zashch_mag"
@@ -892,6 +898,12 @@
 	ammo_type = /obj/item/ammo_casing/c10mm
 	caliber = CALIBER_10MM
 	max_ammo = 15
+
+/obj/item/ammo_box/magazine/zashch/rubber
+	name = "pistol magazine (10mm rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c10mm/rubber
 
 /obj/item/ammo_box/magazine/zashch/fire
 	name = "pistol magazine (10mm incendiary)"
@@ -945,7 +957,7 @@
 // MARK: Napad - 10mm
 /obj/item/ammo_box/magazine/smg10mm
 	name = "SMG magazine (10mm)"
-	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 патронов."
+	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 патронов. Подходит для ПП \"Напад\"."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "napad_mag"
 	base_icon_state = "napad_mag"
@@ -960,7 +972,7 @@
 
 /obj/item/ammo_box/magazine/smg10mm/rubber
 	name = "SMG magazine (10mm rubber)"
-	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c10mm/rubber
 
@@ -982,7 +994,7 @@
 // MARK: Bison - 9mm
 /obj/item/ammo_box/magazine/bison
 	name = "bison magazine (9mm)"
-	desc = "Шнековый магазин для пистолетов-пулеметов Бисон калибра 9мм, вмещающий 64 патронов."
+	desc = "Шнековый магазин для пистолетов-пулеметов \"Бисон\" калибра 9мм, вмещающий 64 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "bison_mag"
 	base_icon_state = "bison_mag"
@@ -997,7 +1009,7 @@
 
 /obj/item/ammo_box/magazine/bison/rubber
 	name = "bison magazine (9mm rubber)"
-	desc = "Шнековый магазин для пистолетов-пулеметов Бисон калибра 9мм, вмещающий 64 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9mm/rubber
 
@@ -1074,7 +1086,7 @@
 // MARK: FN18 - 9mm SMG
 /obj/item/ammo_box/magazine/fn18
 	name = "SMG magazine (9mm)"
-	desc = "Магазин для пистолетов-пулеметов калибра 9мм, вмещающий 40 патронов."
+	desc = "Магазин для пистолетов-пулеметов калибра 9мм, вмещающий 40 патронов. Подходит для ПП FN18."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "fn18_mag"
 	base_icon_state = "fn18_mag"
@@ -1089,7 +1101,7 @@
 
 /obj/item/ammo_box/magazine/fn18/rubber
 	name = "SMG magazine (9mm rubber)"
-	desc = "Магазин для пистолетов-пулеметов калибра 9мм, вмещающий 40 травматических патронов."
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9mm/rubber
 
@@ -1215,7 +1227,7 @@
 // MARK: M45A5 - 1911 / .456 Magnum
 /obj/item/ammo_box/magazine/m45a5
 	name = "pistol magazine (.456 Magnum)"
-	desc = "Пистолетный магазин калибра .456, вмещающий 7 патронов."
+	desc = "Пистолетный магазин калибра .456, вмещающий 7 патронов. Подходит для пистолетов M45A5."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c456_mag"
 	base_icon_state = "c456_mag"
@@ -1231,5 +1243,6 @@
 // MARK: 4.6x30mm
 /obj/item/ammo_box/magazine/wt550m9/wtrubber
 	name = "WT-550 magazine (4.6x30mm rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber

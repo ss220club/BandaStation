@@ -557,6 +557,14 @@
 /obj/projectile/bullet/p50/strela60
 	name =".60 Strela bullet"
 	damage = 80
+	icon_state = "gaussstrong"
+	speed = 2
+	range = 100
+	damage = 50
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_FIRE
 
 // MARK: 12.7x108mm
 /obj/projectile/bullet/c127x108mm

@@ -2,6 +2,7 @@
 /obj/item/gun/ballistic/shotgun/riot/renoster
 	name = "Renoster shotgun"
 	desc = "Тяжелый дробовик двенадцатого калибра, вмещающий шесть патронов. Производится для различных военных подразделений ТСФ и используется ими."
+	sawn_desc = "Обрез тяжелого дробовика двенадцатого калибра, вмещающий шесть патронов. Главное не сломать себе руки."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "renoster"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -26,6 +27,15 @@
 		"Default" = "renoster",
 		"Green" = "renoster_green"
 	)
+
+/obj/item/gun/ballistic/shotgun/riot/renoster/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/shotgun/riot/renoster/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][sawn_off ? "":"_sawoff"]"
+	worn_icon_state = "[icon_state][sawn_off ? "":"_sawoff"]"
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/add_seclight_point()
 	AddComponent(
@@ -71,3 +81,9 @@
 		позволяет серьезно уменьшить отдачу. Внутренний механизм также был усилен, \
 		что позволяет выстреливать еще более мощные боеприпасы. Этот экземлпяр покрашен в черные \
 		и красные цвета для повышения тактикульности и серьезности намерений владельца."
+
+/obj/item/gun/ballistic/shotgun/riot/renoster/sawoff
+	sawn_off = TRUE
+
+/obj/item/gun/ballistic/shotgun/riot/renoster/black/sawoff
+	sawn_off = TRUE

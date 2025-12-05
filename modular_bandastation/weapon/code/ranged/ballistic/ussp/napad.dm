@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/napad
 	name = "PP-694 'Napad' submachine gun"
-	desc = "Пистолет пулемет калибра 10мм, используемый специальными силами СССП."
+	desc = "Пистолет-пулемет калибра 10мм, используемый специальными силами СССП."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "napad"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
