@@ -26427,12 +26427,12 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/engineering/atmos)
 "gwo" = (
-/obj/machinery/light/small/directional/south,
 /obj/machinery/camera/directional/east{
 	c_tag = "Library - South";
 	dir = 2
 	},
 /obj/structure/statue/gold/galactic_map,
+/obj/machinery/light/small/directional/south,
 /turf/open/floor/wood,
 /area/station/service/library)
 "gwp" = (
@@ -35510,7 +35510,6 @@
 /obj/structure/chair{
 	dir = 4
 	},
-/obj/machinery/computer/security/telescreen/ordnance/directional/east,
 /turf/open/floor/iron,
 /area/station/science/ordnance/testlab)
 "iGp" = (
@@ -45506,7 +45505,6 @@
 /obj/structure/chair{
 	dir = 4
 	},
-/obj/machinery/computer/security/telescreen/ordnance/directional/east,
 /obj/machinery/airalarm/directional/north,
 /turf/open/floor/iron,
 /area/station/science/ordnance/testlab)
@@ -68526,7 +68524,6 @@
 /turf/open/floor/wood/large,
 /area/station/service/kitchen/abandoned)
 "qLi" = (
-/obj/machinery/light/small/directional/west,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/wood,
 /obj/effect/spawner/random/maintenance/two,
@@ -69867,6 +69864,10 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
+"rcA" = (
+/obj/machinery/light/small/directional/west,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
 "rcD" = (
 /obj/machinery/status_display/ai/directional/north,
 /obj/structure/cable,
@@ -97053,6 +97054,17 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
+"xOq" = (
+/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/machinery/door/poddoor/preopen{
+	id = "research_lockdown";
+	name = "Research Lockdown Blast Doors"
+	},
+/obj/machinery/computer/security/telescreen/ordnance/directional/east{
+	pixel_x = 0
+	},
+/turf/open/floor/plating,
+/area/station/science/ordnance/testlab)
 "xOr" = (
 /obj/effect/turf_decal/trimline/white/line{
 	dir = 1
@@ -144690,7 +144702,7 @@ stl
 gDo
 xjE
 rYk
-qTP
+rcA
 naq
 hPY
 rYk
@@ -218475,9 +218487,9 @@ jLS
 kTP
 fwd
 vLK
+xOq
 hkN
-hkN
-hkN
+xOq
 vLK
 vjX
 vLK

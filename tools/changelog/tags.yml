@@ -22,7 +22,6 @@ tags:
   spellcheck: "spellcheck"
   typo: "spellcheck"
   translation: "translation"
-  sprite: "sprite"
 
 defaults:
   add: "Изменил геймплей или добавил новую механику"
@@ -48,4 +47,3 @@ defaults:
   spellcheck: "Исправил опечатку"
   typo: "Исправил опечатку"
   translation: "Добавил или изменил перевод"
-  sprite: "Добавил, удалил или изменил спрайт"
