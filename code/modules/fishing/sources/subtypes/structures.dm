@@ -85,10 +85,10 @@
 	overlay_state = "portal_tray"
 	fish_table = list(
 		FISHING_DUD = 25,
-		/obj/item/food/grown/grass = 25,
-		FISHING_RANDOM_SEED = 16,
+		/obj/item/food/grown/grass = 20,
+		FISHING_RANDOM_SEED = 20,
 		/obj/item/seeds/grass = 6,
-		/obj/item/seeds/random = 1,
+		/obj/item/seeds/random = 2,
 		/obj/effect/spawner/random/frog = 1,
 		/mob/living/basic/axolotl = 1,
 		/mob/living/basic/turtle = 2,
@@ -96,8 +96,8 @@
 	fish_counts = list(
 		/obj/item/food/grown/grass = 10,
 		/obj/item/seeds/grass = 4,
-		FISHING_RANDOM_SEED = 4,
-		/obj/item/seeds/random = 1,
+		FISHING_RANDOM_SEED = 6,
+		/obj/item/seeds/random = 2,
 		/obj/effect/spawner/random/frog = 1,
 		/mob/living/basic/axolotl = 1,
 	)
@@ -146,16 +146,19 @@
 	return data
 
 /datum/fish_source/hydro_tray/reason_we_cant_fish(obj/item/fishing_rod/rod, mob/fisherman, atom/parent)
-	if(!istype(parent, /obj/machinery/hydroponics/constructable))
-		return ..()
+    if(!istype(parent, /obj/machinery/hydroponics/constructable))
+        return ..()
 
-	var/obj/machinery/hydroponics/constructable/basin = parent
-	if(basin.waterlevel <= 0)
-		return "There's no water in [parent] to fish in."
-	if(basin.myseed)
-		return "There's a plant growing in [parent]."
+    var/obj/machinery/hydroponics/constructable/basin = parent
+    if(basin.waterlevel <= 0)
+        return "There's no water in [parent] to fish in."
+    if(basin.myseed)
+        return "There's a plant growing in [parent]."
+    // BANDASTATION EDIT Проверяем наличие fishy_reagent
+    if(!basin.reagents.has_reagent(/datum/reagent/medicine/strange_reagent/fishy_reagent))
+        return "В [parent] отсутствует реагент для рыбалки."
 
-	return ..()
+    return ..()
 
 /datum/fish_source/hydro_tray/spawn_reward_from_explosion(atom/location, severity)
 	if(!istype(location, /obj/machinery/hydroponics/constructable))
