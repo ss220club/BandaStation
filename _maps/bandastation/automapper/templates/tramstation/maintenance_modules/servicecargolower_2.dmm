@@ -20,7 +20,7 @@
 "cL" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "cV" = (
 /turf/open/misc/asteroid/airless,
 /area/station/asteroid)

@@ -7,6 +7,7 @@ tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_fil
 tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/MetaStation/MetaStation.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/tramstation/tramstation.dmm"
 tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/Mining/Lavaland.dmm"
+tools/nanomap_renderer/nanomap-renderer minimap -w 2040 -h 2040 "./_maps/map_files/KiloStation/KiloStation.dmm"
 # Move and rename files so the game understands them
 cd "data/nanomaps"
 mv "DeltaStation2_nanomap_z1.png" "Delta Station_nanomap_z1.png"
@@ -26,3 +27,5 @@ cp "data/nanomaps/MetaStation_nanomap_z1.png" "icons/_nanomaps"
 cp "data/nanomaps/Tramstation_nanomap_z1.png" "icons/_nanomaps"
 cp "data/nanomaps/Tramstation_nanomap_z2.png" "icons/_nanomaps"
 cp "data/nanomaps/Lavaland_nanomap_z1.png" "icons/_nanomaps"
+cp "data/nanomaps/KiloStation_nanomap_z1.png" "icons/_nanomaps"
+

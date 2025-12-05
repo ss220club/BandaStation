@@ -31,7 +31,7 @@ In all, this is a lot like the monkey code. /N
 		visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] кусает [declent_ru(ACCUSATIVE)]!"), \
 						span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] кусает вас!"), span_hear("Вы слышите кусание!"), COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, span_danger("Вы кусаете [declent_ru(ACCUSATIVE)]!"))
-		adjustBruteLoss(1)
+		adjust_brute_loss(1)
 		log_combat(user, src, "attacked")
 	else
 		to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] слишком ранен для этого."))

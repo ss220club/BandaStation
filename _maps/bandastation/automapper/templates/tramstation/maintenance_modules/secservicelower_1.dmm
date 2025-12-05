@@ -455,7 +455,7 @@
 "Ey" = (
 /obj/structure/disposalpipe/segment,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "EK" = (
 /turf/closed/mineral/random/stationside/asteroid/porus,
 /area/station/asteroid)
@@ -467,7 +467,7 @@
 	dir = 6
 	},
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "Gt" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4

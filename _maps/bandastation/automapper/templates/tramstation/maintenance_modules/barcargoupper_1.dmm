@@ -245,7 +245,7 @@
 "Gy" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "HP" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
 /turf/open/floor/grass,

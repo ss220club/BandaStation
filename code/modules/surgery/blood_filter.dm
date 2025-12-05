@@ -103,4 +103,4 @@
 		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, оставляя ушиб на груди у [target.declent_ru(GENITIVE)]!"),
 		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
 	)
-	target.adjustBruteLoss(5)
+	target.adjust_brute_loss(5)

@@ -459,7 +459,7 @@
 		if(!COOLDOWN_FINISHED(src, inhale_cooldown) || transferred > BASE_INHALE_LIMIT)
 			living_user.visible_message(span_warning(pick("[living_user] закашливается!", "[living_user] морщится, откашливаясь.", "[living_user] задыхается!")), span_warning(pick("Голова кружится...", "Вы закашливаетесь, морщась от острого покалывания в горле.", "Вы задыхаетесь!")))
 			living_user.emote("cough")
-			living_user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * (transferred / BASE_INHALE_LIMIT))
+			living_user.adjust_stamina_loss(BASE_COUGH_STAMINA_LOSS * (transferred / BASE_INHALE_LIMIT))
 
 		switch(smoke_efficiency * 100)
 			if(-INFINITY to 20)
@@ -490,7 +490,7 @@
 		return
 
 	var/mob/living/carbon/human/human_user = living_user
-	human_user.adjustStaminaLoss(BASE_COUGH_STAMINA_LOSS * 4)
+	human_user.adjust_stamina_loss(BASE_COUGH_STAMINA_LOSS * 4)
 
 /obj/item/hookah_mouthpiece/proc/delayed_puff(mob/user, amount)
 	var/datum/effect_system/fluid_spread/smoke/chem/quick/puff = new

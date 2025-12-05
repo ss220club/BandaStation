@@ -71,5 +71,5 @@
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается, оставляя ушиб на груди [target_human.declent_ru(GENITIVE)]!"),
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] ошибается!"),
 		)
-		target_human.adjustOrganLoss(ORGAN_SLOT_STOMACH, 5)
-		target_human.adjustBruteLoss(5)
+		target_human.adjust_organ_loss(ORGAN_SLOT_STOMACH, 5)
+		target_human.adjust_brute_loss(5)

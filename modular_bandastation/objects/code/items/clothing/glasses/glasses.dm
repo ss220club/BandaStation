@@ -50,6 +50,7 @@
 		/obj/item/stack/cable_coil = 5
 	)
 	category = CAT_EQUIPMENT
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
 
 /datum/crafting_recipe/hudsunmesonremoval
 	name = "Meson HUD Removal"
@@ -58,3 +59,4 @@
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
 	reqs = list(/obj/item/clothing/glasses/meson/sunglasses = 1)
 	category = CAT_EQUIPMENT
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY

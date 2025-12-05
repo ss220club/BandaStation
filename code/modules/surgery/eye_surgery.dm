@@ -59,7 +59,7 @@
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] отвлекается, случайно задевая мозг у [target.declent_ru(GENITIVE)]!"),
 		)
 		display_pain(target, "Вы чувствуете сильную колющую боль в голове, прямо в мозгу!")
-		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 70)
+		target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 70)
 	else
 		display_results(
 			user,

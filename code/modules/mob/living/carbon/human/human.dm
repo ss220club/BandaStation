@@ -183,12 +183,12 @@
 			if(!HAS_TRAIT(human_user, TRAIT_MEDICAL_HUD))
 				return
 			if(href_list["evaluation"])
-				if(!getBruteLoss() && !getFireLoss() && !getOxyLoss() && getToxLoss() < 20)
+				if(!get_brute_loss() && !get_fire_loss() && !get_oxy_loss() && get_tox_loss() < 20)
 					to_chat(human_user, "[span_notice("Не обнаружены внешние повреждения.")]<br>")
 					return
 				var/span = "notice"
 				var/status = ""
-				if(getBruteLoss())
+				if(get_brute_loss())
 					to_chat(human_user, "<b>Анализ ушибов на коже:</b>")
 					for(var/X in bodyparts)
 						var/obj/item/bodypart/BP = X
@@ -204,7 +204,7 @@
 							span = "userdanger"
 						if(brutedamage)
 							to_chat(human_user, "<span class='[span]'>[capitalize(BP.declent_ru(NOMINATIVE))] [status]</span>")
-				if(getFireLoss())
+				if(get_fire_loss())
 					to_chat(human_user, "<b>Анализ ожогов на коже:</b>")
 					for(var/X in bodyparts)
 						var/obj/item/bodypart/BP = X
@@ -220,9 +220,9 @@
 							span = "userdanger"
 						if(burndamage)
 							to_chat(human_user, "<span class='[span]'>[capitalize(BP.declent_ru(NOMINATIVE))] [status]</span>")
-				if(getOxyLoss())
+				if(get_oxy_loss())
 					to_chat(human_user, span_danger("Пациент имеет признаки удушья, может быть потребована экстренная помощь."))
-				if(getToxLoss() > 20)
+				if(get_tox_loss() > 20)
 					to_chat(human_user, span_danger("Собранные данные не согласуются с результатами анализа, возможная причина: отравление."))
 			if(!human_user.wear_id) //You require access from here on out.
 				to_chat(human_user, span_warning("ОШИБКА: Недостаточно доступа."))
@@ -560,7 +560,7 @@
 		else if (!target.get_organ_slot(ORGAN_SLOT_LUNGS))
 			to_chat(target, span_unconscious("Вы чувствуете глоток свежего воздуха... но вам не становится лучше..."))
 		else
-			target.adjustOxyLoss(-min(target.getOxyLoss(), 7))
+			target.adjust_oxy_loss(-min(target.get_oxy_loss(), 7))
 			to_chat(target, span_unconscious("Вы чувствуете глоток свежего воздуха, входящий в ваши легкие... Вам становится лучше..."))
 
 		if (target.health <= target.crit_threshold)
@@ -1025,6 +1025,7 @@
 	ai_controller = /datum/ai_controller/monkey
 
 /mob/living/carbon/human/species
+	abstract_type = /mob/living/carbon/human/species
 	var/race = null
 	var/use_random_name = TRUE
 

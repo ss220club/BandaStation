@@ -142,7 +142,7 @@
 	name = "ERT Commander - Inquisition"
 	back = /obj/item/mod/control/pre_equipped/responsory/inquisitory/commander
 	suit_store = /obj/item/storage/belt/holster/ert/full_gamma_commander
-	belt = /obj/item/nullrod/vibro/talking/chainsword
+	belt = /obj/item/nullrod/claymore/talking/chainsword
 	l_pocket = /obj/item/melee/baton/telescopic/gold
 	backpack_contents = list(
 		/obj/item/book/bible = 1,

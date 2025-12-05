@@ -1,6 +1,6 @@
 /datum/quirk/friendly
 	name = "Friendly"
-	desc = "Ты обнимаешь лучше всех, особенно когда ты в хорошем настроении."
+	desc = "Вы обнимаете лучше всех, особенно когда вы в хорошем настроении."
 	icon = FA_ICON_HANDS_HELPING
 	value = 2
 	mob_trait = TRAIT_FRIENDLY
