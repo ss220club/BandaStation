@@ -265,11 +265,12 @@
 
 // MARK: MB Under
 /obj/item/clothing/under/mb_under
-	name = "punk jumpsuit"
-	desc = "Элегантный нательный костюм с символом «S». Удобен и практичен."
+	name = "nanofiber jumpsuit"
+	desc = "Элегантный нательный костюм из неизвестного материала с символом «S». Удобен и практичен."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
 	icon_state = "mb_under"
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
 	inhand_icon_state = "mb_under"
+	armor_type = /datum/armor/suit_armor
