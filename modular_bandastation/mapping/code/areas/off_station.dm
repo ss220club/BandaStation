@@ -150,3 +150,62 @@
 
 /area/centcom/central_command_areas/srt/brief_srt
 	name = "ЦК - Брифинг ГСН"
+
+// MARK: Altam
+/area/altam/main_zones/main
+	name = "Альтам"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
+	icon_state = "main"
+	area_has_base_lighting = 1
+	base_lighting_alpha = 255
+	base_lighting_color = "#C8E4FF"
+	light_color = "#C8E4FF"
+
+/area/altam/main_zones/caves
+	name = "Пещеры"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
+	icon_state = "caves"
+
+/area/altam/main_zones/premises
+	name = "Помещение"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
+	icon_state = "premises"
+	area_has_base_lighting = 1
+	base_lighting_alpha = 255
+	base_lighting_color = "#FFFFFF"
+	light_color = "#FFFFFF"
+	requires_power = 1
+
+/area/altam/embassy/main
+	name = "Посольство"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
+	icon_state = "embassy"
+	area_has_base_lighting = 1
+	base_lighting_alpha = 255
+	base_lighting_color = "#FFFFFF"
+	light_color = "#FFFFFF"
+	requires_power = 1
+
+/area/altam/rakht_base/main
+	name = "Военная база Рахта"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
+	icon_state = "rakht"
+	area_has_base_lighting = 1
+	base_lighting_alpha = 255
+	base_lighting_color = "#FFFFFF"
+	light_color = "#FFFFFF"
+	requires_power = 1
+
+/area/altam/medbay
+	name = "Медблок"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
+	icon_state = "medbay"
+	area_has_base_lighting = 1
+	base_lighting_alpha = 255
+	base_lighting_color = "#FFFFFF"
+	light_color = "#FFFFFF"
+	requires_power = 1
+
+
+
+
