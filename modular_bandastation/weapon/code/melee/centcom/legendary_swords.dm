@@ -6,13 +6,13 @@
 	icon = 'modular_bandastation/weapon/icons/melee/legendary.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
-	icon_state = "mb_dualsaber0"
-	inhand_icon_state = "mb_dualsaber0"
+	icon_state = "mid_dualsaber0"
+	inhand_icon_state = "mid_dualsaber0"
 	saber_color = "midnight"
-	light_color = LIGHT_COLOR_LAVENDER
+	light_color = LIGHT_COLOR_INTENSE_RED
 	var/wieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberon.ogg'
 	var/unwieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberoff.ogg'
-	var/saber_name = "mb"
+	var/saber_name = "mid"
 	var/ranged = FALSE
 	var/power = 1
 	var/refusal_text = "Злоба неподвластна твоей воле, усмрить её сможет лишь сильнейший."
