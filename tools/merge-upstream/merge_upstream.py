@@ -293,7 +293,7 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
 
     translated_text = sanitize_translation(translated_text)
 
-    for change, translated_message in zip(changes, translated_text.split("\n"), strict=True):
+    for change, translated_message in zip(changes, translated_text.split("\n")):
         change["translated_message"] = translated_message
         logging.debug("Translated: %s -> %s", change["message"], translated_message)
 

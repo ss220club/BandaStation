@@ -55,7 +55,7 @@
 	carbon_mob.AdjustParalyzed(-15 * REM * seconds_per_tick)
 	if(SPT_PROB(2.5, seconds_per_tick))
 		carbon_mob.emote("shiver")
-		carbon_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, (rand(1, 2) * unhealthy_multiplier) * REM * seconds_per_tick)
+		carbon_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, (rand(1, 2) * unhealthy_multiplier) * REM * seconds_per_tick)
 	..()
 	return TRUE
 
@@ -63,8 +63,8 @@
 	to_chat(carbon_mob, span_userdanger("Ваше сердце бьется слишком быстро, это причиняет вам боль!"))
 
 /datum/reagent/drug/cocaine/overdose_process(mob/living/carbon/carbon_mob, seconds_per_tick, times_fired)
-	carbon_mob.adjustToxLoss(1 * REM * seconds_per_tick * unhealthy_multiplier, 0)
-	carbon_mob.adjustOrganLoss(ORGAN_SLOT_HEART, (rand(10, 20) / 10 * unhealthy_multiplier) * REM * seconds_per_tick)
+	carbon_mob.adjust_tox_loss(1 * REM * seconds_per_tick * unhealthy_multiplier, 0)
+	carbon_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(10, 20) / 10 * unhealthy_multiplier) * REM * seconds_per_tick)
 	carbon_mob.set_jitter_if_lower(5 SECONDS * unhealthy_multiplier)
 	if(SPT_PROB(2.5, seconds_per_tick))
 		carbon_mob.emote(pick("twitch","drool"))

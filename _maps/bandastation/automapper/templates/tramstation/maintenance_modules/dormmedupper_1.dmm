@@ -172,7 +172,7 @@
 "wP" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "yF" = (
 /obj/effect/turf_decal/sand/plating,
 /obj/effect/spawner/random/structure/steam_vent,

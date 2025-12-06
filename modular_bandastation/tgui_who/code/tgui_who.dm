@@ -187,12 +187,12 @@
 		return
 
 	var/list/health = list()
-	health["brute"] = user.getBruteLoss()
-	health["burn"] = user.getFireLoss()
-	health["toxin"] = user.getToxLoss()
-	health["oxygen"] = user.getOxyLoss()
+	health["brute"] = user.get_brute_loss()
+	health["burn"] = user.get_fire_loss()
+	health["toxin"] = user.get_tox_loss()
+	health["oxygen"] = user.get_oxy_loss()
 	health["brain"] = user.get_organ_loss(ORGAN_SLOT_BRAIN)
-	health["stamina"] = user.getStaminaLoss()
+	health["stamina"] = user.get_stamina_loss()
 	return health
 
 /datum/tgui_who/proc/get_position(mob/user)

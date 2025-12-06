@@ -8,10 +8,10 @@
 	spawn_positions = 0
 	supervisors = "Представитель Нанотрейзен и Центральное Командование"
 	minimal_player_age = 7
-	exp_requirements = 1500
-	exp_required_type = EXP_TYPE_CREW
+	exp_requirements = 1800
+	exp_required_type = EXP_TYPE_SECURITY
 	exp_required_type_department = EXP_TYPE_SECURITY
-	exp_granted_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "BLUESHIELD"
 
 	outfit = /datum/outfit/job/blueshield

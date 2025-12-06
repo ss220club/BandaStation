@@ -65,7 +65,7 @@
 "k" = (
 /obj/structure/sign/departments/lawyer/directional/south,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "l" = (
 /obj/structure/cable,
 /turf/open/floor/wood,
@@ -82,7 +82,7 @@
 "r" = (
 /obj/effect/landmark/navigate_destination/lawyer,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "s" = (
 /obj/machinery/status_display/ai/directional/west,
 /obj/structure/table/wood,
