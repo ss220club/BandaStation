@@ -236,7 +236,7 @@
 
 /obj/structure/flora/tree/jungle/small/dead/style_random/Initialize(mapload)
 	. = ..()
-	icon_state = "tree_autumn[rand(1, 4)]"
+	icon_state = "tree_dead_autumn[rand(1, 4)]"
 	update_appearance()
 
 /obj/structure/flora/tree/jungle/small/birch
@@ -254,7 +254,7 @@
 
 /obj/structure/flora/tree/jungle/small/birch/style_random/Initialize(mapload)
 	. = ..()
-	icon_state = "tree_autumn[rand(1, 3)]"
+	icon_state = "tree_birch[rand(1, 3)]"
 	update_appearance()
 
 // MARK: TURF
