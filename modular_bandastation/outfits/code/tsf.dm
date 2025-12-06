@@ -187,7 +187,7 @@
 	name = "TSF - Marine Weapon Specialist"
 	id_trim = /datum/id_trim/tsf/marine/engineer
 	suit = /obj/item/clothing/suit/armor/vest/marine/engineer
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/bottom_fed // Я об этом еще пожалею
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun // Я об этом еще пожалею
 	back = /obj/item/deployable_turret_folded
 	backpack_contents = null
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
@@ -294,7 +294,7 @@
 	name = "TSF - MARSOC Officer"
 	id_trim = /datum/id_trim/tsf/marsoc/officer
 	uniform = /obj/item/clothing/under/rank/tsf/marsoc_officer
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/bottom_fed
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun
 	back = /obj/item/mod/control/pre_equipped/tsf_elite
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,

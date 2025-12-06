@@ -33,3 +33,10 @@
 /obj/item/gun/ballistic/automatic/f90/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 4)
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/automatic/f90/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+

@@ -40,7 +40,7 @@
 
 /obj/item/gun/ballistic/automatic/pistol/m1911/gold
 	name = "gold trimmed m1911"
-	desc = parent_type::desc + " Теперь отделанный золотом."
+	desc = parent_type::desc + "<br>Мастерски отделанный золотом."
 	icon_state = "m1911gold"
 
 /obj/item/gun/ballistic/automatic/pistol/m1911/gold/Initialize(mapload)
@@ -53,3 +53,4 @@
 	icon_state = "m45a5"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m45a5
 	recoil = 1
+	unique_reskin = null

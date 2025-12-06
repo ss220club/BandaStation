@@ -22,7 +22,7 @@
 	fire_delay = 0.1 SECONDS
 	actions_types = list()
 	spread = 10
-	recoil = 1.5
+	recoil = 1
 	obj_flags = UNIQUE_RENAME
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/cm40_cocked.ogg'
 	load_sound = 'modular_bandastation/weapon/sound/ranged/cm40_reload.ogg'
@@ -33,6 +33,12 @@
 /obj/item/gun/ballistic/automatic/cm40/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/automatic/cm40/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/cm40/no_mag
 	spawnwithmagazine = FALSE

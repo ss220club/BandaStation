@@ -3783,7 +3783,7 @@ instrumental = "пистолетом \"Оса\""
 prepositional = "пистолете \"Оса\""
 gender = "male"
 
-["Carwo-Cawil Battle Rifle"]
+["Carwo-Cawil battle rifle"]
 nominative = "боевая винтовка \"Карво-Кэвил\""
 genitive = "боевой винтовки \"Карво-Кэвил\""
 dative = "боевой винтовке \"Карво-Кэвил\""
@@ -3792,7 +3792,7 @@ instrumental = "боевой винтовкой \"Карво-Кэвил\""
 prepositional = "боевой винтовке \"Карво-Кэвил\""
 gender = "female"
 
-["Cawil Marksman Rifle"]
+["Cawil marksman rifle"]
 nominative = "марксманская винтовка \"Кэвил\""
 genitive = "марксманской винтовки \"Кэвил\""
 dative = "марксманской винтовке \"Кэвил\""
@@ -3801,7 +3801,7 @@ instrumental = "марксманской винтовкой \"Кэвил\""
 prepositional = "марксманской винтовке \"Кэвил\""
 gender = "female"
 
-["Qarad Light Machinegun"]
+["Qarad light machinegun"]
 nominative = "лёгкий пулемёт \"Кварад\""
 genitive = "лёгкого пулемёта \"Кварад\""
 dative = "лёгкому пулемёту \"Кварад\""
@@ -3810,7 +3810,7 @@ instrumental = "лёгким пулемётом \"Кварад\""
 prepositional = "лёгком пулемёте \"Кварад\""
 gender = "male"
 
-["Daraq Light Machinegun"]
+["Daraq light machinegun"]
 nominative = "лёгкий пулемёт \"Дарак\""
 genitive = "лёгкого пулемёта \"Дарак\""
 dative = "лёгкому пулемёту \"Дарак\""

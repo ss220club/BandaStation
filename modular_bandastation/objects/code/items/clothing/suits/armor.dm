@@ -134,30 +134,53 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/ussp_officer
+	name = "tactical soviet armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, но с чёткими опознавательными знаками командира отряда. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, главное верить и не задавать вопросов."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_command"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/security/ussp_security
+	name = "large tactical soviet armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, с дополнительными наколенниками. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, главное верить и не задавать вопросов."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_security"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/engineer/ussp_engineer
+	name = "tactical soviet utility armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, но с дополнительными инженерными подсумками и бронированием. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, но возможно чуть лучше так как имеет дополнительный слой стали, главное верить."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_engineer"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/vest/marine/medic/ussp_medic
+	name = "tactical soviet medic's armor vest"
+	desc = "Стандартная тактическая броня для бойцов армии СССП, но с чёткими опознавательными знаками медика отряда. \
+		Состоит из пласталевых плит и многослойного арамида. Защищает так, как должна по ГОСТу, но защиту от военных преступлений не предоставляет."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_medic"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
 /obj/item/clothing/suit/armor/riot/ussp_riot
 	name = "OMON armor"
+	desc = "Стандартная тактическая противоударная броня бойцов групп быстрого реагирования \"ОМОН\" для подавления беспорядков. \
+		Отлично защищает от колюще-режущих и ударных повреждений. "
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	icon_state = "ussp_riot"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+
+/obj/item/clothing/suit/armor/swat/ussp_heavy
+	name = "heavy soviet armor"
+	desc = "Тяжелая броня советского производства, состоит из усиленных титано-керамических плит и множества слоев нанокевлара. \
+		Отлично защищает от любых повреждений, особенно от пуль. Броня для настоящих суровых советских Джаггернаутов."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	icon_state = "ussp_heavy"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	armor_type = /datum/armor/armor_heavy
 
 // MARK: ERT
 /obj/item/clothing/suit/armor/swat/ert
@@ -191,8 +214,8 @@
 	name = "chestplate armor"
 	desc = "Бронежилет сочетающий в себе удобство, лёгкость и хорошую бронезащиту груди и спины. Модульность позволяет собрать его под себя и упрощает замену бронеплит."
 	icon_state = "ntci_chestplate_armor"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/ntci_armor.dmi'
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/ntci_armor.dmi'
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 	armor_type = /datum/armor/vest_marine
 	clothing_flags = THICKMATERIAL
 	body_parts_covered = CHEST|GROIN

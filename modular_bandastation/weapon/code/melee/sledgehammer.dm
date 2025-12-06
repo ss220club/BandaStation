@@ -97,7 +97,7 @@
 	cost = 10
 	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER, JOB_ATMOSPHERIC_TECHNICIAN)
 
-/datum/uplink_item/weapon_kits/medium_cost/syndiesledge
+/datum/uplink_item/weapon_kits/low_cost/syndiesledge
 	name = "Syndicate Breaching Sledgehammer (Hard)"
 	desc = "Contains a plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders. Comes with a welding helmet for your safety on the workplace!"
 	item = /obj/item/storage/toolbox/guncase/syndiesledge
