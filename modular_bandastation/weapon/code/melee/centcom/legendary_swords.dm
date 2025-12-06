@@ -19,7 +19,7 @@
 	var/datum/enchantment/enchant
 	possible_colors = null
 	block_chance = 88
-	two_hand_force = 45
+	two_hand_force = 35
 	attack_speed = CLICK_CD_RAGE_MELEE
 	bypass_nodrop = TRUE
 
@@ -146,7 +146,7 @@
 	name = "Рывок"
 	desc = "Этот клинок несёт владельца прямо к цели. Никто не уйдёт."
 	ranged = TRUE
-	range = 7
+	range = 5
 	actions_types = list(/datum/action/item_action/legendary_saber/rage)
 	var/movespeed = 0.8
 	var/on_leap_cooldown = FALSE
@@ -169,20 +169,20 @@
 
 /datum/enchantment/dash/on_legendary_hit(mob/living/target, mob/living/user, proximity, obj/item/dualsaber/legendary_saber/S)
 	if(proximity || !HAS_TRAIT(S, TRAIT_WIELDED)) // don't put it on cooldown if adjacent
-		return
+		return FALSE
 	. = ..()
 	if(!.)
-		return
-	charge(user, target, S)
+		return FALSE
+	return charge(user, target, S)
 
 /datum/enchantment/dash/proc/charge(mob/living/user, atom/chargeat, obj/item/dualsaber/legendary_saber/S)
 	if(on_leap_cooldown)
-		return
+		return FALSE
 	if(!chargeat)
-		return
+		return FALSE
 	var/turf/destination_turf  = get_turf(chargeat)
 	if(!destination_turf)
-		return
+		return FALSE
 	charging = TRUE
 	S.block_chance = 100
 	var/obj/effect/temp_visual/decoy/D = new /obj/effect/temp_visual/decoy(user.loc, user)
@@ -196,13 +196,16 @@
 
 	spawn(45 MILLISECONDS)
 		if(get_dist(user, destination_turf) > 1)
-			return
-		charge_end(user, S)
+			charging = FALSE
 		S.block_chance = initial(S.block_chance)
+	if(!charging)
+		return FALSE
+	return charge_end(user, S)
 
-/datum/enchantment/dash/proc/charge_end(list/targets = list(), mob/living/user, obj/item/dualsaber/legendary_saber/S)
+/datum/enchantment/dash/proc/charge_end(mob/living/user, obj/item/dualsaber/legendary_saber/S)
 	charging = FALSE
-	user.apply_damage(-40, STAMINA)
+	user.apply_damage(10, STAMINA)
+	return TRUE
 
 /datum/action/item_action/legendary_saber/rage
 	name = "Swordsman Rage"
