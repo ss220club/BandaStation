@@ -20,7 +20,7 @@
 	max_integrity = 250
 	projectile_type = /obj/projectile/bullet/p50/mmg
 	anchored = TRUE
-	number_of_shots = 5
+	number_of_shots = 4
 	cooldown_duration = 1 SECONDS
 	rate_of_fire = 2
 	firesound = 'modular_bandastation/weapon/sound/ranged/50cal_fire.ogg'
@@ -30,7 +30,20 @@
 	SET_BASE_PIXEL(-8, -8)
 	always_anchored = TRUE
 
-/obj/machinery/deployable_turret/mounted_machine_gun/checkfire(atom/targeted_atom, mob/user)
+/obj/item/mounted_machine_gun_folded/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/deployable, 5 SECONDS, /obj/machinery/deployable_turret/mounted_machine_gun/full_auto)
+
+/obj/machinery/deployable_turret/mounted_machine_gun/full_auto
+	number_of_shots = 1
+	cooldown_duration = 1 SECONDS
+	rate_of_fire = 1
+	spawned_on_undeploy = /obj/item/mounted_machine_gun_folded/full_auto
+
+/obj/machinery/deployable_turret/mounted_machine_gun/full_auto/stationary
+	can_be_undeployed = FALSE
+
+/obj/machinery/deployable_turret/mounted_machine_gun/full_auto/checkfire(atom/targeted_atom, mob/user)
 	target = targeted_atom
 	if(target == user || target == get_turf(src))
 		return
@@ -59,8 +72,36 @@
 	icon_state = "volna"
 	base_icon_state = "volna"
 	projectile_type = /obj/projectile/bullet/c127x108mm
-	number_of_shots = 5
-	cooldown_duration = 1.5 SECONDS
+	number_of_shots = 4
+	cooldown_duration = 1 SECONDS
 	rate_of_fire = 2
 	firesound = 'modular_bandastation/weapon/sound/ranged/dshk.ogg'
 	spawned_on_undeploy = /obj/item/mounted_machine_gun_folded/volna
+
+/obj/item/mounted_machine_gun_folded/volna/full_auto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/deployable, 5 SECONDS, /obj/machinery/deployable_turret/mounted_machine_gun/volna/full_auto)
+
+/obj/machinery/deployable_turret/mounted_machine_gun/volna/full_auto
+	number_of_shots = 1
+	cooldown_duration = 1 SECONDS
+	rate_of_fire = 1
+	spawned_on_undeploy = /obj/item/mounted_machine_gun_folded/volna/full_auto
+
+/obj/machinery/deployable_turret/mounted_machine_gun/volna/full_auto/stationary
+	can_be_undeployed = FALSE
+
+/obj/machinery/deployable_turret/mounted_machine_gun/volna/full_auto/checkfire(atom/targeted_atom, mob/user)
+	target = targeted_atom
+	if(target == user || target == get_turf(src))
+		return
+	target_turf = get_turf(target)
+	fire_helper(user)
+
+/obj/machinery/deployable_turret/hmg
+	name = "CM90 heavy laser machine gun"
+	desc = "Тяжелый лазерный пулемет часто используемый силами Нанотрейзен, известен своей способностью оставлять у получателей больше дыр, чем обычно."
+	projectile_type = /obj/projectile/beam/laser/flare
+	number_of_shots = 4
+	cooldown_duration = 1 SECONDS
+	rate_of_fire = 2

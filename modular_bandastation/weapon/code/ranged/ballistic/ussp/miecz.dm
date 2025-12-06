@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/miecz
-	name = "AMC-874 'Miecz' assault carbine"
-	desc = "Модернизированный дизайн штурмового карабина на базе АМК под патрон 7.62x39мм."
+	name = "AMC-874 'Miecz' assault rifle"
+	desc = "Модернизированный дизайн штурмовой винтовки под патрон 7.62x39мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "miecz"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -8,24 +8,25 @@
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "miecz"
-	SET_BASE_PIXEL(-8, 0)
 	bolt_type = BOLT_TYPE_STANDARD
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
-	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
+	accepted_magazine_type = /obj/item/ammo_box/magazine/miecz
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/ak_shoot.ogg'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_cock.ogg'
 	load_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magout.ogg'
-	fire_sound_volume = 80
+	fire_sound_volume = 70
 	can_suppress = TRUE
+	suppressor_x_offset = 6
 	burst_size = 1
-	fire_delay = 0.20 SECONDS
+	fire_delay = 0.18 SECONDS
 	actions_types = list()
-	spread = 2.5
+	spread = 1.5
 	recoil = 0.1
+	SET_BASE_PIXEL(-8, 0)
 
 /obj/item/gun/ballistic/automatic/miecz/examine(mob/user)
 	. = ..()
@@ -33,9 +34,9 @@
 
 /obj/item/gun/ballistic/automatic/miecz/examine_more(mob/user)
 	. = ..()
-	. += "Штурмовой карабин AMC-874 \"Мечь\", это усовершенствованная конструкция на основе автомата АМК под патрон 7.62x39мм. \
-	Этот карабин был создан для штурмовых операций внутри очень тесных пространств, для этого карабин имеет короткий ствол и малые габариты. \
-	На затворе выгравировано «Оборонная Коллегия СССП»."
+	. += "Штурмовая винтовка AMC-874 \"Мечь\", это усовершенствованная конструкция на основе прошлых образцов по типу автомата АМК. \
+	Эта винтовка была спроектированная с требованиями максимальной возможной управляемости и точности стрельбы.<br>\
+	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-874 не использует компановку Бул-пап'."
 
 /obj/item/gun/ballistic/automatic/miecz/Initialize(mapload)
 	. = ..()
@@ -48,17 +49,4 @@
 	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
 /obj/item/gun/ballistic/automatic/miecz/no_mag
-	spawnwithmagazine = FALSE
-
-/obj/item/gun/ballistic/automatic/miecz/army
-	desc = parent_type::desc + "<br>Версия в армейском зеленом полимере."
-	icon_state = "miecz_army"
-	worn_icon_state = "miecz_army"
-	inhand_icon_state = "miecz_army"
-
-/obj/item/gun/ballistic/automatic/miecz/examine_more(mob/user)
-	. = ..()
-	. += "<br>Этот вариант сделан с армейским зеленым полимерным корпусом."
-
-/obj/item/gun/ballistic/automatic/miecz/army/no_mag
 	spawnwithmagazine = FALSE

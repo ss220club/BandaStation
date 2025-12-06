@@ -1,9 +1,9 @@
 // MARK: Civilian AMK(AK) rifle
 /obj/item/gun/ballistic/automatic/sabel
 	name = "Sabel-42 carbine"
-	desc = "Нестареющий дизайн карабина под патрон калибра 7.62x39мм. Оружие настолько простое и надежное что им сможет пользоватся любой. \
+	desc = "Нестареющий дизайн карабина под патрон калибра 7.62x39мм. Оружие настолько простое и надежное что им сможет пользоватся любой.<br>\
 	Внесенные в оружие для невоенного использования лишили возможности вести автоматический огонь."
-	icon = 'modular_bandastation/weapon/icons/ranged/ballistic40x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "amk_civ"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
@@ -18,6 +18,7 @@
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/heavy_shot_suppressed.ogg'
 	burst_size = 1
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
+	special_mags = TRUE
 	can_suppress = TRUE
 	suppressor_x_offset = 7
 	actions_types = list()
@@ -28,7 +29,7 @@
 	spread = 1
 	recoil = 0.2
 	obj_flags = UNIQUE_RENAME
-	SET_BASE_PIXEL(-5, 0)
+	SET_BASE_PIXEL(-8, 0)
 
 /obj/item/gun/ballistic/automatic/sabel/no_mag
 	spawnwithmagazine = FALSE
@@ -48,9 +49,9 @@
 	desc = "Нестареющий дизайн автомата под патрон калибра 7.62x39мм. Оружие настолько простое и надежное что им сможет пользоватся любой."
 	icon_state = "amk"
 	inhand_icon_state = "amk"
-	fire_delay = 0.25 SECONDS
 	worn_icon_state = "amk"
-	recoil = 0.5
+	fire_delay = 0.25 SECONDS
+	recoil = 0.7
 	spread = 6.5
 
 /obj/item/gun/ballistic/automatic/sabel/auto/Initialize(mapload)
@@ -63,42 +64,106 @@
 
 /obj/item/gun/ballistic/automatic/sabel/auto/examine_more(mob/user)
 	. = ..()
-	. += "AMK — надежная штурмовая винтовка под патрон калибра 7.62x39мм. Обладает высокой убойной силой, \
+	. += "AMK — надежная штурмовая винтовка. Обладает высокой убойной силой, \
 	хорошей пробиваемостью и стабильной эффективностью на средних дистанциях.\
 	Имеет заметную отдачу, но компенсируется уроном и доступностью боеприпасов. \
-	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии.<br><br>"
+	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии.<br>"
 
 /obj/item/gun/ballistic/automatic/sabel/auto/no_mag
 	spawnwithmagazine = FALSE
 
-/obj/item/gun/ballistic/automatic/sabel/auto/upp
-	name = "AMK-462 rifle"
-	desc = "Модернизированный дизайн автомата АМК под патрон калибра 7.62x39мм. Стандартный и надежный автомат солдат СССП."
-	icon_state = "amk_new"
-	inhand_icon_state = "amk_new"
-	worn_icon_state = "amk_new"
-	suppressor_x_offset = 6
-	fire_delay = 0.20 SECONDS
-	spread = 2.5
-	recoil = 0.1
+/obj/item/gun/ballistic/automatic/sabel/auto/short
+	name = "AMKu rifle"
+	desc = parent_type::desc + "<br>Укороченная компактная версия."
+	icon_state = "amk_shorty"
+	worn_icon_state = "amk_shorty"
+	inhand_icon_state = "amk_shorty"
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	w_class = WEIGHT_CLASS_NORMAL
+	recoil = 1.2
+	spread = 10
 
-/obj/item/gun/ballistic/automatic/sabel/auto/upp/examine_more(mob/user)
-	. = ..()
-	. += "Это усовершенствованная версия самого культового огнестрельного оружия, когда-либо созданного человеком, \
-	перепроектированная для уменьшения веса, улучшения управляемости и точности стрельбы, под патрон калибра 7.62x39мм. \
-	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-462 не использует компановку Бул-пап'."
+/obj/item/gun/ballistic/automatic/sabel/auto/army
+	name = "AMK rifle"
+	desc = parent_type::desc + "<br>Армейский вариант в зеленом полимере."
+	icon_state = "amk_army"
+	worn_icon_state = "amk_army"
+	inhand_icon_state = "amk_army"
+	fire_delay = 0.23 SECONDS
+	recoil = 0.5
+	spread = 5
 
-/obj/item/gun/ballistic/automatic/sabel/auto/upp/no_mag
-	spawnwithmagazine = FALSE
+/obj/item/gun/ballistic/automatic/sabel/auto/army/alt
+	name = "AMKC rifle"
+	desc = parent_type::desc + "C складным прикладом."
+	icon_state = "amk_army_alt"
+	worn_icon_state = "amk_army_alt"
+	inhand_icon_state = "amk_army_alt"
+	recoil = 0.6
+	spread = 6
 
-/obj/item/gun/ballistic/automatic/sabel/auto/upp/suppressed/Initialize(mapload)
-	. = ..()
-	var/obj/item/suppressor/S = new(src)
-	install_suppressor(S)
-	w_class = WEIGHT_CLASS_BULKY
+/obj/item/gun/ballistic/automatic/sabel/auto/short/army
+	name = "AMKu rifle"
+	desc = parent_type::desc + "<br>Армейский вариант в зеленом полимере."
+	icon_state = "amk_army_shorty"
+	worn_icon_state = "amk_army_shorty"
+	inhand_icon_state = "amk_army_shorty"
+	fire_delay = 0.23 SECONDS
 
 /obj/item/gun/ballistic/automatic/sabel/auto/modern
-	name = "modern AMK rifle"
+	name = "AMK-462 rifle"
+	desc = "Модернизированный дизайн автомата на базе AMK под патрон калибра 7.62x39мм."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	icon_state = "amk_new"
+	worn_icon_state = "amk_new"
+	inhand_icon_state = "amk_new"
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	fire_delay = 0.20 SECONDS
+	spread = 2
+	recoil = 0.1
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/examine_more(mob/user)
+	. = ..()
+	. += "Это усовершенствованная версия самого культового огнестрельного оружия, когда-либо созданного человеком, \
+	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-462 не использует компановку Бул-пап'."
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/army
+	desc = parent_type::desc + "<br>Версия в армейском зеленом полимере."
+	icon_state = "amk_new_army"
+	worn_icon_state = "amk_new_army"
+	inhand_icon_state = "amk_new_army"
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/army/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup
+	name = "AMK-462/2B rifle"
+	icon_state = "amk_new_bullpup"
+	inhand_icon_state = "amk_new_bullpup"
+	worn_icon_state = "amk_new_bullpup"
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/examine_more(mob/user)
+	. = ..()
+	. = "Этот образец был создан для штурмовых операций внутри очень тесных пространств, поэтому он имеет такой короткий ствол и малые габариты.<br>\
+	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-462/2B использует компановку Бул-пап'."
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/army
+	desc = parent_type::desc + "<br>Версия в армейском зеленом полимере."
+	icon_state = "amk_new_bullpup_army"
+	inhand_icon_state = "amk_new_bullpup_army"
+	worn_icon_state = "amk_new_bullpup_army"
+
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/army/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sabel/auto/upgraded
+	name = "modified AMK rifle"
 	icon_state = "amk_modern"
 	inhand_icon_state = "amk_modern"
 	worn_icon_state = "amk_modern"
@@ -106,13 +171,27 @@
 	spread = 2.5
 	recoil = 0.1
 
-/obj/item/gun/ballistic/automatic/sabel/auto/modern/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/sabel/auto/upgraded/examine_more(mob/user)
 	. = ..()
 	. += "Этот вариант является модернизированной версией автомата AMK с использованием более совершенных деталей. \
 	На замену оригинальных деталей были установлены новые, обновленные версии. \
 	Внутренний механизм был улучшен и настроен, что повышает боевые способности данного варианта."
 
-/obj/item/gun/ballistic/automatic/sabel/auto/modern/no_mag
+/obj/item/gun/ballistic/automatic/sabel/auto/upgraded/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/sabel/auto/upgraded/short
+	name = "modified AMKu rifle"
+	desc = parent_type::desc + "<br>Укороченная компактная версия."
+	icon_state = "amk_modern_shorty"
+	inhand_icon_state = "amk_modern_shorty"
+	worn_icon_state = "amk_modern_shorty"
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	w_class = WEIGHT_CLASS_NORMAL
+	recoil = 0.7
+	spread = 5
+
+/obj/item/gun/ballistic/automatic/sabel/auto/upgraded/short/no_mag
 	spawnwithmagazine = FALSE
 
 // MARK: Gauss AK
@@ -121,9 +200,9 @@
 	desc = "Эксперементальный дизайн автомата под патрон 7.62x39мм. Оружие совмещающее в себе новые технологии и нестареющую классику."
 	icon_state = "amk_gauss"
 	inhand_icon_state = "amk_gauss"
-	actions_types = list(/datum/action/item_action/toggle_gauss)
 	base_icon_state = "amk_gauss"
 	worn_icon_state = "amk_gauss"
+	actions_types = list(/datum/action/item_action/toggle_gauss)
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_heavy.ogg'
 	suppressor_x_offset = 8
 	projectile_speed_multiplier = 1.5
@@ -288,8 +367,12 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/proc/fucking_explodes_you()
 	explosion(src, devastation_range = 1, heavy_impact_range = 3, light_impact_range = 6, explosion_cause = src)
 
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/no_mag
+	spawnwithmagazine = FALSE
+
 /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical
 	name = "tactical gauss AMK rifle"
+	desc = parent_type::desc + "<br>Этот экземпляр имеет более надежный и тактикульный вид."
 	icon_state = "amk_gauss_tacticool"
 	inhand_icon_state = "amk_gauss_tacticool"
 	base_icon_state = "amk_gauss_tacticool"
@@ -297,6 +380,5 @@
 	recoil = 0.2
 	shots_before_degradation = 60
 
-/obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/examine_more(mob/user)
-	. = ..()
-	. += "Этот экземпляр имеет более надежный и тактикульный вид."
+/obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical/no_mag
+	spawnwithmagazine = FALSE

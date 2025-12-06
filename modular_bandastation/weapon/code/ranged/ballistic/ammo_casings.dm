@@ -42,7 +42,7 @@
 	desc = "Спортивный патрон калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/c762x39/ricochet
 
-/obj/item/ammo_casing/c762x39/fire
+/obj/item/ammo_casing/c762x39/incendiary
 	name = "7.62x39mm incendiary bullet casing"
 	desc = "Патрон с зажигательной пулей калибра 7.62x39мм."
 	projectile_type = /obj/projectile/bullet/incendiary/c762x39

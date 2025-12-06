@@ -22,14 +22,23 @@
 	actions_types = list()
 	burst_size = 1
 	recoil = 0.5
-	unique_reskin = list(
-		"Green" = "bison",
-		"Black" = "bison_black",
-	)
+
+/datum/atom_skin/bison
+	abstract_type = /datum/atom_skin/bison
+	change_base_icon_state = TRUE
+
+/datum/atom_skin/bison/default
+	preview_name = "Green"
+	new_icon_state = "bison"
+
+/datum/atom_skin/bison/black
+	preview_name = "Black"
+	new_icon_state = "bison_black"
 
 /obj/item/gun/ballistic/automatic/bison/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/bison)
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
 /obj/item/gun/ballistic/automatic/bison/update_icon_state()

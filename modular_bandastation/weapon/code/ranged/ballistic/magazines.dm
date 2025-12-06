@@ -110,10 +110,10 @@
 	ammo_band_color = COLOR_AMMO_MATCH
 	ammo_type = /obj/item/ammo_casing/c762x39/ricochet
 
-/obj/item/ammo_box/magazine/c762x39mm/fire
+/obj/item/ammo_box/magazine/c762x39mm/incendiary
 	name = "rifle magazine (7.62x39mm incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
-	ammo_type = /obj/item/ammo_casing/c762x39/fire
+	ammo_type = /obj/item/ammo_casing/c762x39/incendiary
 
 /obj/item/ammo_box/magazine/c762x39mm/ap
 	name = "rifle magazine (7.62x39mm AP)"
@@ -151,6 +151,41 @@
 	desc = parent_type::desc + "<br>Содержит охотничьи патроны."
 	ammo_band_color = "#05880c"
 	ammo_type = /obj/item/ammo_casing/c762x39/hunting
+
+/obj/item/ammo_box/magazine/miecz
+	name = "miecz magazine (7.62x39mm)"
+	desc = "Магазин для штурмовых винтовок калибра 7.62x39мм, вмещающий 30 патронов. Подходит для винтовок AMK-874 \"Мечь\"."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "miecz"
+	ammo_band_icon = "+miecz_ammo_band"
+	ammo_band_color = null
+	w_class = WEIGHT_CLASS_SMALL
+	ammo_type = /obj/item/ammo_casing/c762x39
+	caliber = CALIBER_762x39mm
+	max_ammo = 30
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+
+/obj/item/ammo_box/magazine/miecz/ap
+	name = "rifle magazine (7.62x39mm AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c762x39/ap
+
+/obj/item/ammo_box/magazine/miecz/emp
+	name = "rifle magazine (7.62x39mm EMP)"
+	desc = parent_type::desc + "<br>Содержит ионные патроны, которые хорошо подходят для выведения из строя электроники и разрушения мехов."
+	ammo_band_color = "#1ea2ee"
+	ammo_type = /obj/item/ammo_casing/c762x39/emp
+
+/obj/item/ammo_box/magazine/miecz/rubber
+	name = "rifle magazine (7.62x39mm rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c762x39/rubber
+
+/obj/item/ammo_box/magazine/miecz/incendiary
+	name = "rifle magazine (7.62x39mm incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c762x39/incendiary
 
 // MARK: Fal aka Carwo
 /obj/item/ammo_box/magazine/c40sol_rifle

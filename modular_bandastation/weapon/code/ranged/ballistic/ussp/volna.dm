@@ -30,14 +30,23 @@
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
 	var/cover_open = FALSE
-	unique_reskin = list(
-		"Green" = "volna",
-		"Black" = "volna_black",
-	)
+
+/datum/atom_skin/volna
+	abstract_type = /datum/atom_skin/volna
+	change_base_icon_state = TRUE
+
+/datum/atom_skin/volna/default
+	preview_name = "Green"
+	new_icon_state = "volna"
+
+/datum/atom_skin/volna/black
+	preview_name = "Black"
+	new_icon_state = "volna_black"
 
 /obj/item/gun/ballistic/automatic/volna/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/volna)
 	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
 
 /obj/item/gun/ballistic/automatic/volna/examine(mob/user)
