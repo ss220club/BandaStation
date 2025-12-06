@@ -523,6 +523,9 @@
 		loc.visible_message(span_warning("Конец руки [loc.declent_ru(GENITIVE)] быстро раздувается, образуя огромную массу, похожую на щит!"), span_warning("Мы надуваем руку, превращая ее в прочный щит."), span_hear("Вы слышите, как рвется и разрывается органическая масса!"))
 
 /obj/item/shield/changeling/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
+	if(attack_type == OVERWHELMING_ATTACK)
+		return FALSE
+
 	if(remaining_uses < 1)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
