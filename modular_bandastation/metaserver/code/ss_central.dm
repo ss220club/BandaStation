@@ -248,7 +248,7 @@ SUBSYSTEM_DEF(central)
 		duration_hours = duration
 
 	// determine job
-	var/job = (!is_server_ban && roles_to_ban && roles_to_ban.len == 1) ? roles_to_ban[1] : null
+	var/job = is_server_ban ? null : roles_to_ban
 
 	var/is_permaban = (duration_hours <= 0)
 
