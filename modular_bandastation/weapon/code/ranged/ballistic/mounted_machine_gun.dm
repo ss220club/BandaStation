@@ -30,7 +30,7 @@
 	SET_BASE_PIXEL(-8, -8)
 	always_anchored = TRUE
 
-/obj/item/mounted_machine_gun_folded/Initialize(mapload)
+/obj/item/mounted_machine_gun_folded/full_auto/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/deployable, 5 SECONDS, /obj/machinery/deployable_turret/mounted_machine_gun/full_auto)
 

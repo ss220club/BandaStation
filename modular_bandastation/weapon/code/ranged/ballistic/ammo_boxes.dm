@@ -76,11 +76,11 @@
 	icon_state = "762x39box_ricochet"
 	ammo_type = /obj/item/ammo_casing/c762x39/ricochet
 
-/obj/item/ammo_box/c762x39/fire
+/obj/item/ammo_box/c762x39/incendiary
 	name = "ammo box (7.62x39mm incendiary)"
 	desc = parent_type::desc + "<br>Красная марка указывает на то, что в ней должны храниться зажигательные боеприпасы."
 	icon_state = "762x39box_fire"
-	ammo_type = /obj/item/ammo_casing/c762x39/fire
+	ammo_type = /obj/item/ammo_casing/c762x39/incendiary
 
 /obj/item/ammo_box/c762x39/ap
 	name = "ammo box (7.62x39mm armor-piercing)"
