@@ -38,6 +38,15 @@
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
 
+/obj/item/gun/ballistic/automatic/sabel/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 28, \
+		overlay_y = 10 \
+	)
+
 /obj/item/gun/ballistic/automatic/sabel/update_icon_state()
 	. = ..()
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
@@ -150,6 +159,15 @@
 	. = "Этот образец был создан для штурмовых операций внутри очень тесных пространств, поэтому он имеет такой короткий ствол и малые габариты.<br>\
 	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-462/2B использует компановку Бул-пап'."
 
+/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 31, \
+		overlay_y = 10 \
+	)
+
 /obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/no_mag
 	spawnwithmagazine = FALSE
 
@@ -176,6 +194,15 @@
 	. += "Этот вариант является модернизированной версией автомата AMK с использованием более совершенных деталей. \
 	На замену оригинальных деталей были установлены новые, обновленные версии. \
 	Внутренний механизм был улучшен и настроен, что повышает боевые способности данного варианта."
+
+/obj/item/gun/ballistic/automatic/sabel/auto/upgraded/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 34, \
+		overlay_y = 10 \
+	)
 
 /obj/item/gun/ballistic/automatic/sabel/auto/upgraded/no_mag
 	spawnwithmagazine = FALSE

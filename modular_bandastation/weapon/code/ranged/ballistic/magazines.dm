@@ -995,17 +995,17 @@
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/strilka310/incendiary
 
-// MARK: Napad - 10mm
+// MARK: Vityaz - 10mm
 /obj/item/ammo_box/magazine/smg10mm
 	name = "SMG magazine (10mm)"
-	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 патронов. Подходит для ПП \"Напад\"."
+	desc = "Магазин для пистолетов-пулеметов калибра 10мм, вмещающий 30 патронов. Подходит для ПП \"Витязь\"."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "napad_mag"
-	base_icon_state = "napad_mag"
+	icon_state = "vityaz_mag"
+	base_icon_state = "vityaz_mag"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_10MM
 	max_ammo = 30
-	ammo_band_icon = "+napad_ammo_band"
+	ammo_band_icon = "+vityaz_ammo_band"
 	ammo_band_color = null
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 	multiple_sprite_use_base = TRUE

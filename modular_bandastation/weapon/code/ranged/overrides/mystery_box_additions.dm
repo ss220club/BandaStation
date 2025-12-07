@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(new_special_firearms, list(
 	/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/army,
 	/obj/item/gun/ballistic/automatic/sabel/auto/gauss,
 	/obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical,
-	/obj/item/gun/ballistic/automatic/napad,
+	/obj/item/gun/ballistic/automatic/vityaz,
 	/obj/item/gun/ballistic/automatic/pistol/zashch,
 	/obj/item/gun/ballistic/revolver/bobr,
 	/obj/item/gun/ballistic/revolver/dvoystvol,

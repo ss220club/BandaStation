@@ -368,7 +368,7 @@
 	id = /obj/item/card/id/advanced/ussp
 	id_trim = /datum/id_trim/ussp/spetsnaz
 	uniform = /obj/item/clothing/under/rank/ussp/spetsnaz
-	suit_store = /obj/item/gun/ballistic/automatic/napad
+	suit_store = /obj/item/gun/ballistic/automatic/vityaz
 	back = /obj/item/mod/control/pre_equipped/ussp_standart
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,

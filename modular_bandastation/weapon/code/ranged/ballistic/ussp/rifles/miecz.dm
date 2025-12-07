@@ -38,6 +38,15 @@
 	Эта винтовка была спроектированная с требованиями максимальной возможной управляемости и точности стрельбы.<br>\
 	На затворе выгравировано «Оборонная Коллегия СССП». По центру приклада мелким шрифтом написано: 'Изделие-874 не использует компановку Бул-пап'."
 
+/obj/item/gun/ballistic/automatic/miecz/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 32, \
+		overlay_y = 10 \
+	)
+
 /obj/item/gun/ballistic/automatic/miecz/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
