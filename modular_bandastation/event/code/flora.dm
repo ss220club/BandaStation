@@ -189,6 +189,9 @@
 	can_uproot = FALSE
 	delete_on_harvest = TRUE
 
+/obj/structure/flora/dry_log/get_potential_products()
+	return list(/obj/item/grown/log/tree = 1)
+
 // Деревья осень
 /obj/structure/flora/tree/jungle/small/autumn
 	desc = "It's seriously hampering your view of the forest."
