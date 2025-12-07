@@ -13,8 +13,6 @@
 	wound_bonus = -40
 	exposed_wound_bonus = -20
 	weak_against_armour = TRUE
-	// The stats of the ricochet are a nerfed version of detective revolver rubber ammo
-	// This is due to the fact that there's a lot more rounds fired quickly from weapons that use this, over a revolver
 	ricochet_auto_aim_angle = 30
 	ricochet_auto_aim_range = 5
 	ricochets_max = 4
@@ -527,6 +525,16 @@
 	embed_type = null
 
 // MARK: .310 Strilka
+/obj/projectile/bullet/strilka310/rubber
+	name = ".310 Strilka rubber bullet"
+	damage = 5
+	stamina = 30
+	wound_bonus = -40
+	exposed_wound_bonus = -20
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = NONE
+
 /obj/projectile/bullet/strilka310/ap
 	name = ".310 Strilka armor-piercing bullet"
 	damage = 50
@@ -632,10 +640,3 @@
 	damage = 60
 	armour_penetration = 40
 	wound_falloff_tile = -1
-
-// MARK: Visual effect after firing (muzzle flash)
-/obj/effect/temp_visual/dir_setting/firing_effect
-	light_system = OVERLAY_LIGHT
-	light_range = 2
-	light_power = 1
-	light_color = LIGHT_COLOR_FIRE

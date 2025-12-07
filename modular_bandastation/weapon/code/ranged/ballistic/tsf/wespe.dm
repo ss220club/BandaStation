@@ -22,7 +22,7 @@
 	special_mags = TRUE
 	suppressor_x_offset = 7
 	suppressor_y_offset = 0
-	obj_flags = UNIQUE_RENAME
+	recoil = 0.2
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/Initialize(mapload)
 	. = ..()

@@ -26,7 +26,6 @@
 	actions_types = list()
 	spread = 3
 	recoil = 1
-	obj_flags = UNIQUE_RENAME
 	load_sound = 'modular_bandastation/weapon/sound/ranged/ar_reload.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/ar_reload.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ar_unload.ogg'

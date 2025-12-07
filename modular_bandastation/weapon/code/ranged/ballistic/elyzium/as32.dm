@@ -26,7 +26,6 @@
 	actions_types = list()
 	spread = 2.5
 	recoil = 0.8
-	obj_flags = UNIQUE_RENAME
 	rack_sound = 'sound/items/weapons/gun/general/chunkyrack.ogg'
 
 /obj/item/gun/ballistic/automatic/as32/Initialize(mapload)

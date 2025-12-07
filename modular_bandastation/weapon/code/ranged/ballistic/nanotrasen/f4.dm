@@ -23,8 +23,7 @@
 	fire_delay = 0.4 SECONDS
 	actions_types = list()
 	spread = 1
-	recoil = 0.3
-	obj_flags = UNIQUE_RENAME
+	recoil = 0.4
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/smg_rack.ogg'
 
 /obj/item/gun/ballistic/automatic/f4/add_seclight_point()

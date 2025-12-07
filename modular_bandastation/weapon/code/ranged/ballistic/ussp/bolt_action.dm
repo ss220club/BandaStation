@@ -1,6 +1,3 @@
-/obj/item/gun/ballistic/rifle
-	recoil = 1
-
 /obj/item/gun/ballistic/rifle/boltaction
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'

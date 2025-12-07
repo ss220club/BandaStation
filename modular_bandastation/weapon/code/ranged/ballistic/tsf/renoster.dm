@@ -34,16 +34,12 @@
 	recoil = 2
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	projectile_damage_multiplier = 1.4
-	obj_flags = UNIQUE_RENAME
-
-/obj/item/gun/ballistic/shotgun/riot/renoster/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/renoster)
+	projectile_damage_multiplier = 1.2
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/renoster)
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/update_icon_state()
 	. = ..()

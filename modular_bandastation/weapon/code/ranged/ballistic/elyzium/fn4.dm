@@ -24,7 +24,6 @@
 	actions_types = list()
 	spread = 2.5
 	recoil = 0.3
-	obj_flags = UNIQUE_RENAME
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/smg_rack.ogg'
 
 /obj/item/gun/ballistic/automatic/fn4/add_seclight_point()

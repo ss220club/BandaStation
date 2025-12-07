@@ -25,7 +25,6 @@
 	actions_types = list()
 	spread = 5.5
 	recoil = 0.4
-	obj_flags = UNIQUE_RENAME
 
 /obj/item/gun/ballistic/automatic/carwo/Initialize(mapload)
 	. = ..()
@@ -99,7 +98,6 @@
 	. = ..()
 	var/obj/item/suppressor/S = new(src)
 	install_suppressor(S)
-	w_class = WEIGHT_CLASS_BULKY
 
 // MARK: Machineguns based on the base Sol rifle
 /obj/item/gun/ballistic/automatic/carwo/auto/machinegun

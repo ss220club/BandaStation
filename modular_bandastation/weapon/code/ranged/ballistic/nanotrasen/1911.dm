@@ -47,10 +47,17 @@
 	. = ..()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/m1911/gold)
 
-/obj/item/gun/ballistic/automatic/pistol/m1911/m45a5
+/obj/item/gun/ballistic/automatic/pistol/m45a5
 	name = "M45A5 'Rowland'"
 	desc = "Модернизированная версия легендарного M1911 в калибре .456 Magnum, в настоящее время широко распространенная среди высокопоставленных сотрудников Нанотрейзен."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic40x32.dmi'
 	icon_state = "m45a5"
+	w_class = WEIGHT_CLASS_NORMAL
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m45a5
+	can_suppress = FALSE
+	fire_sound = 'sound/items/weapons/gun/pistol/shot_alt.ogg'
+	rack_sound = 'sound/items/weapons/gun/pistol/rack.ogg'
+	lock_back_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'
+	bolt_drop_sound = 'sound/items/weapons/gun/pistol/slide_drop.ogg'
 	recoil = 1
 	fire_sound_volume = 100

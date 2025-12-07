@@ -71,7 +71,6 @@
 	. = ..()
 	var/obj/item/suppressor/S = new(src)
 	install_suppressor(S)
-	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/gun/ballistic/automatic/lanca/army/no_mag
 	spawnwithmagazine = FALSE

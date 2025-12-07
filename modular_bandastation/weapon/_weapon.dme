@@ -10,14 +10,18 @@
 #include "code/melee/centcom/legendary_swords.dm"
 #include "code/melee/centcom/rapier.dm"
 
+// MARK: Ranged - General
+#include "code/ranged/supply_packs.dm"
+#include "code/ranged/weapon_designs.dm"
+#include "code/ranged/overrides/ballistic_master.dm"
+#include "code/ranged/overrides/mystery_box_additions.dm"
+
 // MARK: Ranged - Ballistic
 #include "code/ranged/ballistic/ammo_boxes.dm"
 #include "code/ranged/ballistic/ammo_casings.dm"
 #include "code/ranged/ballistic/magazines.dm"
 #include "code/ranged/ballistic/mounted_machine_gun.dm"
 #include "code/ranged/ballistic/projectiles.dm"
-#include "code/ranged/ballistic/supply_packs.dm"
-#include "code/ranged/ballistic/weapon_designs.dm"
 #include "code/ranged/ballistic/nanotrasen/cm5.dm"
 #include "code/ranged/ballistic/nanotrasen/cm15.dm"
 #include "code/ranged/ballistic/nanotrasen/cm23.dm"

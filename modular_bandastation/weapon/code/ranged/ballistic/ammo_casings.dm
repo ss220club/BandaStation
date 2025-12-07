@@ -344,6 +344,13 @@
 	icon_state = "si-casing"
 
 // MARK: .310 Strilka
+/obj/item/ammo_casing/strilka310/rubber
+	name = ".310 Strilka rubber bullet casing"
+	desc = "Травматический безгильзовый винтовочный патрон c резиновой пулей калибра .310 Стрилка."
+	icon_state = "762x51r-casing"
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	projectile_type = /obj/projectile/bullet/strilka310/rubber
+
 /obj/item/ammo_casing/strilka310/ap
 	name = ".310 Strilka armor-piercing bullet casing"
 	desc = "Бронебойный винтовочный безгильзовый патрон калибра .310 Стрилка."

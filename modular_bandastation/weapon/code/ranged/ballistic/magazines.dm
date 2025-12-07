@@ -958,13 +958,13 @@
 // MARK: Lanca - .310 Strilka
 /obj/item/ammo_box/magazine/strilka310
 	name = "battle rifle magazine (.310 Strilka)"
-	desc = "Магазин для боевых винтовок калибра .310 Стрилка, вмещающий 20 патронов."
+	desc = "Магазин для боевых винтовок калибра .310 Стрилка, вмещающий 15 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "lanca_mag"
 	base_icon_state = "lanca_mag"
 	w_class = WEIGHT_CLASS_SMALL
 	caliber = CALIBER_STRILKA310
-	max_ammo = 20
+	max_ammo = 15
 	ammo_band_icon = "+lanca_ammo_band"
 	ammo_band_color = null
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
@@ -973,6 +973,12 @@
 
 /obj/item/ammo_box/magazine/strilka310/starts_empty
 	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/strilka310/rubber
+	name = "battle rifle magazine (.310 Strilka rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/strilka310/rubber
 
 /obj/item/ammo_box/magazine/strilka310/hp
 	name = "battle rifle magazine (.310 Strilka HP)"

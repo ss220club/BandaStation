@@ -20,7 +20,6 @@
 	actions_types = list()
 	spread = 5
 	recoil = 0.1
-	obj_flags = UNIQUE_RENAME
 	load_sound = 'modular_bandastation/weapon/sound/ranged/cm5_reload.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/cm5_reload.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/cm5_unload.ogg'

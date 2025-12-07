@@ -17,9 +17,9 @@
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/cm357_unload.ogg'
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c45
 	can_suppress = TRUE
-	obj_flags = UNIQUE_RENAME
 	suppressor_x_offset = 0
 	suppressor_y_offset = 0
+	recoil = 0.6
 
 /obj/item/gun/ballistic/automatic/pistol/cm70/add_seclight_point()
 	AddComponent(\

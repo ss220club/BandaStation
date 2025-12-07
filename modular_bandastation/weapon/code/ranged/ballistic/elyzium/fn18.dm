@@ -22,7 +22,6 @@
 	actions_types = list()
 	spread = 5
 	recoil = 0.1
-	obj_flags = UNIQUE_RENAME
 
 /obj/item/gun/ballistic/automatic/fn18/add_seclight_point()
 	AddComponent(\

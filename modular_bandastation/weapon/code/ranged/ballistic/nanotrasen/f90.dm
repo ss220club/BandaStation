@@ -24,7 +24,6 @@
 	fire_delay = 1 SECONDS
 	actions_types = list()
 	recoil = 1
-	obj_flags = UNIQUE_RENAME
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/smg_rack.ogg'
 
 /obj/item/gun/ballistic/automatic/f90/no_mag
