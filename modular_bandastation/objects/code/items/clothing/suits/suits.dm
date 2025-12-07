@@ -97,3 +97,14 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "ei_coat"
 	body_parts_covered = CHEST | GROIN | ARMS
+
+// MARK: MB Coat
+/obj/item/clothing/suit/mb_coat
+	name = "elegant coat"
+	desc = "Элегантное пальто. Популярно среди тех, кто ценит минимализм и стиль."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "mb_coat"
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
+	body_parts_covered = CHEST | GROIN | ARMS
