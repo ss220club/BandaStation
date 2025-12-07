@@ -181,7 +181,6 @@
 	icon = 'modular_bandastation/event/icons/obj/flora/grass-sticks.dmi'
 	density = TRUE
 	resistance_flags = FLAMMABLE
-	product_types = list(/obj/item/grown/log/tree = 1)
 	harvest_amount_low = 2
 	harvest_amount_high = 4
 	harvest_message_med = "You finish chopping the log."
