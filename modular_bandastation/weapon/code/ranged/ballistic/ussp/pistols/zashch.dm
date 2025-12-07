@@ -9,6 +9,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	accepted_magazine_type = /obj/item/ammo_box/magazine/zashch
 	can_suppress = TRUE
+	suppressor_x_offset = 10
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/pistol_heavy.ogg'
 	rack_sound = 'sound/items/weapons/gun/pistol/rack.ogg'
 	lock_back_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'

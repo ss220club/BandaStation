@@ -20,7 +20,7 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
 	special_mags = TRUE
 	can_suppress = TRUE
-	suppressor_x_offset = 7
+	suppressor_x_offset = 3
 	actions_types = list()
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
@@ -91,6 +91,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	recoil = 1.2
 	spread = 10
+	suppressor_x_offset = 0
 
 /obj/item/gun/ballistic/automatic/sabel/auto/army
 	name = "AMK rifle"
@@ -130,6 +131,7 @@
 	fire_delay = 0.20 SECONDS
 	spread = 2
 	recoil = 0.1
+	suppressor_x_offset = 0
 
 /obj/item/gun/ballistic/automatic/sabel/auto/modern/examine_more(mob/user)
 	. = ..()
@@ -188,6 +190,7 @@
 	fire_delay = 0.20 SECONDS
 	spread = 2.5
 	recoil = 0.1
+	suppressor_x_offset = 2
 
 /obj/item/gun/ballistic/automatic/sabel/auto/upgraded/examine_more(mob/user)
 	. = ..()
@@ -231,7 +234,7 @@
 	worn_icon_state = "amk_gauss"
 	actions_types = list(/datum/action/item_action/toggle_gauss)
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_heavy.ogg'
-	suppressor_x_offset = 8
+	suppressor_x_offset = 4
 	projectile_speed_multiplier = 1.5
 
 	/// Determines how many shots we can make before the weapon needs to be maintained.

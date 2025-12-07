@@ -23,8 +23,7 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/dmr_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dmr_unload.ogg'
 	can_suppress = TRUE
-	suppressor_x_offset = 2
-	suppressor_y_offset = 1
+	suppressor_x_offset = 4
 	burst_size = 1
 	fire_delay = 1 SECONDS
 	actions_types = list()
@@ -39,8 +38,8 @@
 	. = ..()
 	. += "Разработка боевой винтовки \"Ланка\" началась как попытка заменить устаревшую \"Сахно\", на новую полуавтоматическую винтовку для армии СССП. <br>\
 		Первоначальная разработка на основе модернизированной \"Сахно\" с добавлением возможности вести полуавтоматический огонь не удовлетворило комиссию. \
-		В связи с этим, новый вариант был основан на базе автомата АМК-462, изменение калибра потребовало обновления верхнего ресивера и установки мощной возвратной пружины, \
-		что привело к увеличению веса винтовки. Чтобы компенсировать дополнительный вес, приклад был скелетонизирован, а ствольная нарезка заменена на минималистичный дизайн."
+		Поэтому была взяты за основу модификации \"Сахно\" под именованием \"Ворон\" и немного измененны под запросы комиссии. \
+		Для этого приклад был скелетонизирован, а ствольная нарезка заменена на минималистичный дизайн."
 
 /obj/item/gun/ballistic/automatic/lanca/Initialize(mapload)
 	. = ..()
@@ -65,12 +64,18 @@
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "lanca_army"
-	fire_delay = 0.5 SECONDS
+	fire_delay = 0.3 SECONDS
 
 /obj/item/gun/ballistic/automatic/lanca/army/suppressed/Initialize(mapload)
 	. = ..()
 	var/obj/item/suppressor/S = new(src)
 	install_suppressor(S)
+
+/obj/item/gun/ballistic/automatic/lanca/army/examine_more(mob/user)
+	. = ..()
+	. = "Образец боевой винтовки \"Ланка\" номер 30, это последняя вариация винтовки этого вида, созданная для специальных сил СССП.<br>\
+		Новый вариант был основан на базе автомата АМК-462, изменение калибра потребовало обновления верхнего ресивера и установки мощной возвратной пружины, \
+		что привело к увеличению веса винтовки, но это было компенсировано изпользованием новой компоновки и полимеров.
 
 /obj/item/gun/ballistic/automatic/lanca/army/no_mag
 	spawnwithmagazine = FALSE

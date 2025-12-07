@@ -17,6 +17,7 @@
 	burst_size = 1
 	actions_types = list()
 	can_suppress = TRUE
+	suppressor_x_offset = 8
 	spread = 10
 	recoil = 0.7
 	bolt_type = BOLT_TYPE_OPEN

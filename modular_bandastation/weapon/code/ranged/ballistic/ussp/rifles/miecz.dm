@@ -20,7 +20,7 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magout.ogg'
 	fire_sound_volume = 70
 	can_suppress = TRUE
-	suppressor_x_offset = 6
+	suppressor_x_offset = 2
 	burst_size = 1
 	fire_delay = 0.18 SECONDS
 	actions_types = list()
