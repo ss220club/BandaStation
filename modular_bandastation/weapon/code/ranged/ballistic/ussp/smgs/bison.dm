@@ -22,6 +22,7 @@
 	actions_types = list()
 	burst_size = 1
 	recoil = 0.5
+	projectile_damage_multiplier = 0.6
 
 /datum/atom_skin/bison
 	abstract_type = /datum/atom_skin/bison

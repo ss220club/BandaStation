@@ -120,13 +120,26 @@
 	ammo_type = /obj/item/ammo_casing/c762x39/blank
 
 // MARK: 7.62x38mmR
-/obj/item/ammo_box/n762_cylinder
+/obj/item/ammo_box/speedloader/n762_cylinder
 	name = "speed loader (7.62x38mmR)"
-	desc = "Предназначен для быстрой перезарядки револьверов. Произведено в СССП."
+	desc = "Предназначен для быстрой перезарядки револьверов калибра 7.62x38ммР. Произведено в СССП."
 	icon_state = "357"
 	ammo_type = /obj/item/ammo_casing/n762
 	max_ammo = 7
 	caliber = CALIBER_N762
+	multiple_sprites = AMMO_BOX_PER_BULLET
+	item_flags = NO_MAT_REDEMPTION
+	ammo_band_icon = "+357_ammo_band"
+	ammo_band_color = null
+
+/obj/item/ammo_box/speedloader/strilka310_cylinder
+	name = "speed loader (.310 Strilka)"
+	desc = "Предназначен для быстрой перезарядки револьверов калибра .310 Стрилка. Произведено в СССП, не удивительно."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "310speedload"
+	ammo_type = /obj/item/ammo_casing/strilka310
+	max_ammo = 7
+	caliber = CALIBER_STRILKA310
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	item_flags = NO_MAT_REDEMPTION
 	ammo_band_icon = "+357_ammo_band"

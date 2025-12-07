@@ -433,6 +433,9 @@
 	projectile_type = /obj/projectile/bullet/c127x108mm
 
 // MARK: RPG
+/obj/item/ammo_casing/rocket
+	w_class = WEIGHT_CLASS_NORMAL
+
 /obj/item/ammo_casing/rocket/rpg
 	name = "RPG-70 HE rocket"
 	desc = "84-мм фугасная ракета. Стреляйте в людей и молитесь."

@@ -61,6 +61,14 @@
 /obj/item/gun/ballistic/automatic/bow
 	recoil = 0
 
+
+/obj/item/gun/ballistic/shotgun/riot/lethal
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot/lethal
+
+/obj/item/ammo_box/magazine/internal/shot/riot/lethal
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
+	max_ammo = 6
+
 // Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/install_suppressor(obj/item/suppressor/new_suppressor)
 	. = ..()

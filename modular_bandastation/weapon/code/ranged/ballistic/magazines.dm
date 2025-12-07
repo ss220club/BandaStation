@@ -824,13 +824,13 @@
 // MARK: Wylom AMR - .60 Strela
 /obj/item/ammo_box/magazine/wylom
 	name = "Wylom magazine (.60 Strela)"
-	desc = "Магазин для антиматериальных винтовок Wylom калибра .60 Стрела, вмещающий 5 патронов."
+	desc = "Магазин для антиматериальных винтовок Wylom калибра .60 Стрела, вмещающий 4 патрона."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "wylom_mag"
 	base_icon_state = "wylom_mag"
 	w_class = WEIGHT_CLASS_NORMAL
 	caliber = CALIBER_STRELA60
-	max_ammo = 5
+	max_ammo = 4
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/strela60
@@ -1027,7 +1027,7 @@
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c10mm/ap
 
-/obj/item/ammo_box/magazine/smg10mm/fire
+/obj/item/ammo_box/magazine/smg10mm/incendiary
 	name = "SMG magazine (10mm incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c10mm/fire
