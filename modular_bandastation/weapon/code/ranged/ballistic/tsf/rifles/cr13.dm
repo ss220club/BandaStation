@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/cr13
 	name = "CR-13"
-	desc = ""
+	desc = "Относительно новая штурмовая винтовка ТСФ в калибре 5.56x45мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "cr13"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -30,24 +30,24 @@
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/cm82_unload.ogg'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/ar_cock.ogg'
 
-/obj/item/gun/ballistic/automatic/cm82/Initialize(mapload)
+/obj/item/gun/ballistic/automatic/cr13/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 	AddElement(/datum/element/update_icon_updates_onmob)
 
-/obj/item/gun/ballistic/automatic/cm82/update_icon_state()
+/obj/item/gun/ballistic/automatic/cr13/update_icon_state()
 	. = ..()
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
-/obj/item/gun/ballistic/automatic/cm82/examine(mob/user)
+/obj/item/gun/ballistic/automatic/cr13/examine(mob/user)
 	. = ..()
 	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
-/obj/item/gun/ballistic/automatic/cm82/examine_more(mob/user)
+/obj/item/gun/ballistic/automatic/cr13/examine_more(mob/user)
 	. = ..()
-	. += "Относительно новое боевое оружие. Точная, надежная и простая в использовании, CM-82 практически в одночасье заменила АРГ \"Пограничник\" в качестве штурмовой винтовки Нанотрейзен и с тех пор пользуется огромной популярностью."
+	. += "Относительно новая винтовка в вооружении ТСФ."
 
-/obj/item/gun/ballistic/automatic/cm82/no_mag
+/obj/item/gun/ballistic/automatic/cr13/no_mag
 	spawnwithmagazine = FALSE
 
