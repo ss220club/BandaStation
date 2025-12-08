@@ -19214,6 +19214,15 @@ gender = "male"
 
 # MARK: Chief Medical Officer
 
+["hypospray"]
+nominative = "гипоспрей"
+genitive = "гипоспрея"
+dative = "гипоспрею"
+accusative = "гипоспрей"
+instrumental = "гипоспреем"
+prepositional = "гипоспрее"
+gender = "male"
+
 ["chief medical officer's jumpsuit"]
 nominative = "комбинезон главного врача"
 genitive = "комбинезона главного врача"
@@ -20740,6 +20749,33 @@ accusative = "пиратскую бандану"
 instrumental = "пиратской банданой"
 prepositional = "пиратской бандане"
 gender = "female"
+
+["combat boots"]
+nominative = "боевые ботинки"
+genitive = "боевых ботинок"
+dative = "боевым ботинкам"
+accusative = "боевые ботинки"
+instrumental = "боевыми ботинками"
+prepositional = "боевых ботинках"
+gender = "plural"
+
+["SWAT boots"]
+nominative = "ботинки SWAT"
+genitive = "ботинок SWAT"
+dative = "ботинкам SWAT"
+accusative = "ботинки SWAT"
+instrumental = "ботинками SWAT"
+prepositional = "ботинках SWAT"
+gender = "plural"
+
+["ice hiking boots"]
+nominative = "ледовые походные ботинки"
+genitive = "ледовых походных ботинок"
+dative = "ледовым походным ботинкам"
+accusative = "ледовые походные ботинки"
+instrumental = "ледовыми походными ботинками"
+prepositional = "ледовых походных ботинках"
+gender = "plural"
 
 ["pirate boots"]
 nominative = "пиратские ботинки"
@@ -22387,6 +22423,15 @@ accusative = "красные очки"
 instrumental = "красными очками"
 prepositional = "красных очках"
 gender = "male"
+
+["combat gloves"]
+nominative = "боевые перчатки"
+genitive = "боевых перчаток"
+dative = "боевым перчаткам"
+accusative = "боевые перчатки"
+instrumental = "боевыми перчатками"
+prepositional = "боевых перчатках"
+gender = "plural"
 
 ["fingerless gloves"]
 nominative = "перчатки без пальцев"
