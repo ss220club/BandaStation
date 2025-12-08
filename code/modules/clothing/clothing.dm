@@ -131,7 +131,7 @@
 		if(CLOTHING_SHREDDED)
 			var/obj/item/stack/cloth_repair = weapon
 			if(cloth_repair.amount < 3)
-				to_chat(user, span_warning("Вам требуется три ткани, чтобы починить [src.declent_ru(NOMINATIVE)]."))
+				to_chat(user, span_warning("Вам требуется три ткани, чтобы починить [declent_ru(NOMINATIVE)]."))
 				return ITEM_INTERACT_BLOCKING
 			to_chat(user, span_notice("Вы начинаете чинить повреждения на [src.declent_ru(PREPOSITIONAL)]..."))
 			if(!do_after(user, 6 SECONDS, src) || !cloth_repair.use(3))
