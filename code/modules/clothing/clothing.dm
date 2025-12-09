@@ -131,9 +131,9 @@
 		if(CLOTHING_SHREDDED)
 			var/obj/item/stack/cloth_repair = weapon
 			if(cloth_repair.amount < 3)
-				to_chat(user, span_warning("Вам требуется три ткани, чтобы починить [src.declent_ru(NOMINATIVE)]."))
+				to_chat(user, span_warning("Вам требуется три [cloth_repair.declent_ru(GENITIVE)], чтобы починить [declent_ru(NOMINATIVE)]."))
 				return ITEM_INTERACT_BLOCKING
-			to_chat(user, span_notice("Вы начинаете чинить повреждения на [src.declent_ru(PREPOSITIONAL)]..."))
+			to_chat(user, span_notice("Вы начинаете чинить повреждения на [declent_ru(PREPOSITIONAL)]..."))
 			if(!do_after(user, 6 SECONDS, src) || !cloth_repair.use(3))
 				return ITEM_INTERACT_BLOCKING
 			repair(user)
@@ -149,7 +149,7 @@
 	damage_by_parts = null
 	if(user)
 		UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
-		to_chat(user, span_notice("Вы починили повреждения на [src.declent_ru(PREPOSITIONAL)]."))
+		to_chat(user, span_notice("Вы починили повреждения на [declent_ru(PREPOSITIONAL)]."))
 	update_appearance()
 
 /**
@@ -200,7 +200,7 @@
 	if(iscarbon(loc))
 		var/mob/living/carbon/carbon_loc = loc
 		zone_name = carbon_loc.parse_zone_with_bodypart(def_zone)
-		carbon_loc.visible_message(span_danger("[capitalize(zone_name)] [break_verb] на [declent_ru(PREPOSITIONAL)] у [carbon_loc]!"), span_userdanger("[capitalize(zone_name)] [break_verb] на вашем [declent_ru(PREPOSITIONAL)]!"), vision_distance = COMBAT_MESSAGE_RANGE)
+		carbon_loc.visible_message(span_danger("[capitalize(zone_name)] [break_verb] на [declent_ru(PREPOSITIONAL)] у [carbon_loc.declent_ru(PREPOSITIONAL)]!"), span_userdanger("[capitalize(zone_name)] [break_verb] на вашем [declent_ru(PREPOSITIONAL)]!"), vision_distance = COMBAT_MESSAGE_RANGE)
 		RegisterSignal(carbon_loc, COMSIG_MOVABLE_MOVED, PROC_REF(bristle), override = TRUE)
 	else
 		zone_name = parse_zone(def_zone)
@@ -331,11 +331,11 @@
 		if(atom_storage.attack_hand_interact)
 			how_cool_are_your_threads += "Хранилище [declent_ru(GENITIVE)] открывается при нажатии.\n"
 		else
-			how_cool_are_your_threads += "Хранилище [declent_ru(GENITIVE)] открывается, если перетащить на себя.\n"
+			how_cool_are_your_threads += "Хранилище [declent_ru(GENITIVE)] открывается при перетаскивании на себя.\n"
 		if (atom_storage.can_hold?.len) // If pocket type can hold anything, vs only specific items
-			how_cool_are_your_threads += "[capitalize(declent_ru(NOMINATIVE))] могут хранить [atom_storage.max_slots] <a href='byond://?src=[REF(src)];show_valid_pocket_items=1'>предмета</a>.\n"
+			how_cool_are_your_threads += "[capitalize(declent_ru(NOMINATIVE))] [genderize_ru(gender, "может", "может", "может", "могут")] хранить [atom_storage.max_slots] <a href='byond://?src=[REF(src)];show_valid_pocket_items=1'>предмета</a>.\n"
 		else
-			how_cool_are_your_threads += "[capitalize(declent_ru(NOMINATIVE))] могут хранить [atom_storage.max_slots] предмета размером [weight_class_to_text(atom_storage.max_specific_storage)] или меньше.\n"
+			how_cool_are_your_threads += "[capitalize(declent_ru(NOMINATIVE))] [genderize_ru(gender, "может", "может", "может", "могут")] хранить [atom_storage.max_slots] предмета размером [weight_class_to_text(atom_storage.max_specific_storage)] или меньше.\n"
 		if(atom_storage.quickdraw)
 			how_cool_are_your_threads += "Вы можете достать предмет из [declent_ru(GENITIVE)] используя ПКМ.\n"
 		if(atom_storage.silent)
@@ -425,7 +425,7 @@
 			var/list/parts_covered = list()
 			var/output_string = "Защищает"
 			if(!(clothing_flags & STOPSPRESSUREDAMAGE))
-				output_string = "Если активирована, защищает"
+				output_string = "Если активирован, защищает"
 			if(body_parts_covered & HEAD)
 				parts_covered += "голову"
 			if(body_parts_covered & CHEST)
@@ -446,10 +446,10 @@
 			if (1601 to 35000)
 				heat_prot = "экстремальную"
 		if (heat_prot)
-			. += "[capitalize(declent_ru(NOMINATIVE))] обеспечивает владельцу [heat_protection] защиту от перегрева с точностью до [max_heat_protection_temperature] по Кельвину."
+			. += "[capitalize(declent_ru(NOMINATIVE))] обеспечивает владельцу [heat_protection] защиту от перегрева с точностью до [max_heat_protection_temperature]° по Кельвину."
 
 		if(min_cold_protection_temperature)
-			readout += "Защищает владельца от [min_cold_protection_temperature <= SPACE_SUIT_MIN_TEMP_PROTECT ? span_tooltip("Хотя это и не так опасно, как отсутствие давления, чрезвычайно низкая температура в космосе также представляет опасность.", "холода в космосе, вплоть до [min_cold_protection_temperature] по Кельвину") : "холода, вплоть до [min_cold_protection_temperature] по Кельвину"]."
+			readout += "Защищает владельца от [min_cold_protection_temperature <= SPACE_SUIT_MIN_TEMP_PROTECT ? span_tooltip("Хотя это и не так опасно, как отсутствие давления, чрезвычайно низкая температура в космосе также представляет опасность.", "холода космоса до [min_cold_protection_temperature]° по Кельвину") : "холода до [min_cold_protection_temperature]° по Кельвину"]."
 
 		if(!length(readout))
 			readout += "Нет информации о прочности или защите."
@@ -476,7 +476,7 @@
 	if(isliving(loc)) //It's not important enough to warrant a message if it's not on someone
 		var/mob/living/M = loc
 		if(src in M.get_equipped_items())
-			to_chat(M, span_warning("Ваш[genderize_ru(src, "", "а", "е", "и")] [declent_ru(NOMINATIVE)] распадается на части!"))
+			to_chat(M, span_warning("Ваш[genderize_ru(gender, "", "а", "е", "и")] [declent_ru(NOMINATIVE)] начинает распадаться на части!"))
 		else
 			to_chat(M, span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает распадаться на части!"))
 
@@ -489,7 +489,7 @@
 	var/fresh_mood = AddComponent( \
 		/datum/component/onwear_mood, \
 		saved_event_type = /datum/mood_event/fresh_laundry, \
-		examine_string = "[capitalize(declent_ru(NOMINATIVE))] выглядит свежим и нетронутым.", \
+		examine_string = {"[capitalize(declent_ru(NOMINATIVE))] [genderize_ru(gender, "выглядит свежим и нетронутым", "выглядит свежей и нетронутой", "выглядит свежим и нетронутым", "выглядит свежими и нетронутыми")]."} \
 	)
 
 	QDEL_IN(fresh_mood, 2 MINUTES)
@@ -541,9 +541,9 @@ BLIND     // can't see anything
 
 	var/message
 	if(up)
-		message = src.alt_toggle_message || "Вы отодвигаете [declent_ru(NOMINATIVE)]."
+		message = src.alt_toggle_message || "Вы убираете [declent_ru(NOMINATIVE)]."
 	else
-		message = src.toggle_message || "Вы передвигаете [declent_ru(NOMINATIVE)] обратно."
+		message = src.toggle_message || "Вы ставите обратно [declent_ru(NOMINATIVE)]."
 
 	to_chat(user, span_notice("[message]"))
 
@@ -609,11 +609,11 @@ BLIND     // can't see anything
 		if(isliving(loc))
 			var/mob/living/M = loc
 			if(src in M.get_equipped_items()) //make sure they were wearing it and not attacking the item in their hands
-				M.visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] спадает c [M], полностью развалившись на кусочки!"), span_warning("<b>[capitalize(declent_ru(NOMINATIVE))] спадает с вас, полностью развалившись на кусочки!</b>"), vision_distance = COMBAT_MESSAGE_RANGE)
+				M.visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] спадает c [M.declent_ru(PREPOSITIONAL)], полностью развалившись на кусочки!"), span_warning("<b>[capitalize(declent_ru(NOMINATIVE))] спадает с вас, полностью развалившись на кусочки!</b>"), vision_distance = COMBAT_MESSAGE_RANGE)
 				M.dropItemToGround(src)
 			else
 				M.visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] разваливается на кусочки!"), vision_distance = COMBAT_MESSAGE_RANGE)
-		name = "[initial(name)]" // change the name -after- the message, not before.
+		name = "shredded [initial(name)]" // change the name -after- the message, not before.
 		update_appearance()
 	SEND_SIGNAL(src, COMSIG_ATOM_DESTRUCTION, damage_flag)
 
