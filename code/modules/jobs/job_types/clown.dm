@@ -1,7 +1,6 @@
 /datum/job/clown
 	title = JOB_CLOWN
 	description = "Веселите экипаж, шутите несмешные шутки, выполните священное задание по поиску бананиума, ХОНК!"
-	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
