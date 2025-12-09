@@ -2,7 +2,6 @@
 	title = JOB_BRIDGE_ASSISTANT
 	description = "Следите за мостиком, управляйте консолями на нем и проводите дни, варя кофе для вышестоящих лиц."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD //not really a head but close enough
-	department_head = list(JOB_CAPTAIN)
 	faction = FACTION_STATION
 	total_positions = 0
 	spawn_positions = 0
