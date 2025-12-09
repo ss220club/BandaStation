@@ -88,7 +88,6 @@
 "cK" = (
 /obj/structure/bed,
 /obj/item/bedsheet/nanotrasen,
-/obj/effect/landmark/start/blueshield,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/carpet/cyan,
 /area/station/command/heads_quarters/blueshield)
@@ -442,7 +441,8 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/holopad,
+/obj/structure/bed/dogbed,
+/mob/living/basic/mouse/hamster/representative,
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "oy" = (
@@ -550,6 +550,7 @@
 /turf/closed/wall/r_wall,
 /area/station/command/heads_quarters/captain/private)
 "tA" = (
+/obj/machinery/holopad,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "tM" = (
@@ -651,7 +652,7 @@
 /area/station/command/heads_quarters/nanotrasen_representative)
 "vg" = (
 /obj/structure/reagent_dispensers/wall/peppertank/directional/north,
-/obj/machinery/suit_storage_unit/security,
+/obj/machinery/suit_storage_unit/blueshield,
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/blueshield)
 "vp" = (
@@ -727,6 +728,7 @@
 /area/station/command/heads_quarters/captain)
 "xy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/landmark/start/nanotrasen_representative,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "xD" = (
@@ -771,6 +773,7 @@
 /area/station/command/heads_quarters/captain/private)
 "ym" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/landmark/start/blueshield,
 /turf/open/floor/carpet/cyan,
 /area/station/command/heads_quarters/blueshield)
 "yo" = (
@@ -1223,6 +1226,7 @@
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/captain/private)
 "NE" = (
+/obj/machinery/holopad,
 /turf/open/floor/carpet/royalblue,
 /area/station/command/heads_quarters/blueshield)
 "NL" = (
@@ -1241,17 +1245,9 @@
 /turf/open/floor/carpet,
 /area/station/command/heads_quarters/captain)
 "Of" = (
-/obj/effect/turf_decal/trimline/blue/filled/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/trimline/neutral/filled/warning{
-	dir = 1
-	},
-/obj/structure/sign/nanotrasen{
-	pixel_y = 32
-	},
-/turf/open/floor/iron,
-/area/station/hallway/secondary/command)
+/obj/structure/sign/nanotrasen,
+/turf/closed/wall/r_wall,
+/area/station/command/heads_quarters/blueshield)
 "Og" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -1297,10 +1293,6 @@
 /area/station/command/heads_quarters/blueshield)
 "QK" = (
 /obj/structure/table/wood,
-/obj/item/stamp/centcom{
-	pixel_x = 4;
-	pixel_y = 4
-	},
 /obj/item/clipboard{
 	pixel_y = 1
 	},
@@ -1320,6 +1312,10 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/mob/living/basic/pet/cat/floppa,
+/obj/structure/chair/comfy/brown{
 	dir = 8
 	},
 /turf/open/floor/wood/large,
@@ -1399,7 +1395,6 @@
 "Tm" = (
 /obj/item/radio/intercom/command/directional/north,
 /obj/machinery/light/warm/directional/north,
-/obj/machinery/holopad,
 /turf/open/floor/carpet/royalblue,
 /area/station/command/heads_quarters/blueshield)
 "TP" = (
@@ -1673,8 +1668,8 @@ vM
 vM
 vM
 vM
-vM
 Of
+XU
 zg
 ty
 HV

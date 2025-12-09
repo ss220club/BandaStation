@@ -33,6 +33,8 @@
 /// server name (the name of the game window)
 /datum/config_entry/string/servername
 
+/datum/config_entry/string/discord_url // BANDASTATION ADD
+
 /// short form server name used for the DB
 /datum/config_entry/string/serversqlname
 
@@ -793,3 +795,7 @@
 
 /datum/config_entry/flag/generate_assets_in_init
 	default = FALSE
+
+/datum/config_entry/number/minimum_ascension_time
+	default = 0 // 1 minute
+	min_val = 0

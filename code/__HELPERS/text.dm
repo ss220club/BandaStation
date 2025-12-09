@@ -41,7 +41,7 @@
 /proc/sanitize(text, apply_ic_filter = FALSE)
 	text = rustutils_regex_replace(text, "\[\n\t\]", "i", "#")
 	if(apply_ic_filter)
-		text = rustutils_regex_replace(text, "\[^a-zA-Za-åa-ö-w-я 0-9/@%\"!#?¨'.,:;*+\]", "i", "")
+		text = rustutils_regex_replace(text, "\[^a-zA-Za-åa-ö-w-я 0-9/@%\"!#?¨'.,:;*+\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\uAC00-\uD7AF\u1100-\u11FF]", "i", "")
 
 	return html_encode(text)
 // BANDASTATION EDIT END - Sanitize emotes

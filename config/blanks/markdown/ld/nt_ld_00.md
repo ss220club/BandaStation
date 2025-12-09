@@ -9,9 +9,9 @@ category = Юридический отдел
 
 Имя заявителя: [input_field autofill_type=name]
 -# Полностью и без ошибок
-Имя заявителя: [input_field autofill_type=bank_id]
+Номер аккаунта заявителя: [input_field autofill_type=bank_id]
 -# Эта информация есть в ваших заметках
-Имя заявителя: [input_field autofill_type=job]
+Должность заявителя: [input_field autofill_type=job]
 -# Указано на ID карте
 
 # === Заявление ===

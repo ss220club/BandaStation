@@ -1,7 +1,6 @@
 /datum/job/bitrunner
 	title = JOB_BITRUNNER
 	description = "Путешествуйте по виртуальному миру в поисках снаряжения и лута. Расшифровывайте свои награды на станции."
-	department_head = list(JOB_QUARTERMASTER)
 	faction = FACTION_STATION
 	total_positions = 3
 	spawn_positions = 3
@@ -39,3 +38,6 @@
 	uniform = /obj/item/clothing/under/rank/cargo/bitrunner
 	belt = /obj/item/modular_computer/pda/bitrunner
 	ears = /obj/item/radio/headset/headset_cargo
+
+/datum/job/bit_avatar
+	title = "Bit Avatar"

@@ -324,7 +324,7 @@
 	desc = "У обладателя данного гена мышцы слегка увеличиваются. Commonly seen in top-ranking boxers."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Ты чувствуешь себя сильнее.")
-	instability = POSITIVE_INSTABILITY_MINI
+	instability = POSITIVE_INSTABILITY_MINOR
 	difficulty = 16
 	mutation_traits = list(TRAIT_STRENGTH)
 
@@ -702,9 +702,9 @@
 		return
 	// Gives you 30 seconds of being in soft crit... give or take
 	if(HAS_TRAIT(owner, TRAIT_TOXIMMUNE) || HAS_TRAIT(owner, TRAIT_TOXINLOVER))
-		owner.adjustBruteLoss(1 * seconds_per_tick * GET_MUTATION_SYNCHRONIZER(src), forced = TRUE)
+		owner.adjust_brute_loss(1 * seconds_per_tick * GET_MUTATION_SYNCHRONIZER(src), forced = TRUE)
 	else
-		owner.adjustToxLoss(0.5 * seconds_per_tick * GET_MUTATION_SYNCHRONIZER(src), forced = TRUE)
-		owner.adjustBruteLoss(0.5 * seconds_per_tick * GET_MUTATION_SYNCHRONIZER(src), forced = TRUE)
+		owner.adjust_tox_loss(0.5 * seconds_per_tick * GET_MUTATION_SYNCHRONIZER(src), forced = TRUE)
+		owner.adjust_brute_loss(0.5 * seconds_per_tick * GET_MUTATION_SYNCHRONIZER(src), forced = TRUE)
 	// Offsets suffocation but not entirely
-	owner.adjustOxyLoss(-0.5 * seconds_per_tick, forced = TRUE)
+	owner.adjust_oxy_loss(-0.5 * seconds_per_tick, forced = TRUE)

@@ -205,8 +205,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
  * @param {icon} icon - The icon file of the cog. Default: 'icons/effects/progressbar.dmi'
  *
  * @param {iconstate} iconstate - The icon state of the cog. Default: "Cog"
+ *
+ * @param {mob} bar_override - Mob which should see the bar instead of the user
  */
-/proc/do_after(mob/user, delay, atom/target, timed_action_flags = NONE, progress = TRUE, datum/callback/extra_checks, interaction_key, max_interact_count = 1, hidden = FALSE, icon = 'icons/effects/progressbar.dmi', iconstate = "cog")
+/proc/do_after(mob/user, delay, atom/target, timed_action_flags = NONE, progress = TRUE, datum/callback/extra_checks, interaction_key, max_interact_count = 1, hidden = FALSE, icon = 'icons/effects/progressbar.dmi', iconstate = "cog", mob/bar_override = null)
 	if(!user)
 		return FALSE
 	if(!isnum(delay))
@@ -229,6 +231,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 
 	var/holding = user.get_active_held_item()
 
+#ifdef UNIT_TESTS
+	timed_action_flags &= ~IGNORE_SLOWDOWNS //it shouldn't stop unit test dummies from being fast as hell
+#endif
+
 	if(!(timed_action_flags & IGNORE_SLOWDOWNS))
 		delay *= user.cached_multiplicative_actions_slowdown
 
@@ -236,11 +242,11 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 	var/datum/cogbar/cog
 
 	if(progress)
-		if(user.client)
-			progbar = new(user, delay, target || user)
+		if(user.client || bar_override?.client)
+			progbar = new(bar_override || user, delay, target || user)
 
 		if(!hidden && delay >= 1 SECONDS)
-			cog = new(user, icon, iconstate)
+			cog = new(bar_override || user, icon, iconstate)
 
 	SEND_SIGNAL(user, COMSIG_DO_AFTER_BEGAN)
 
@@ -358,7 +364,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 
 // Displays a message in deadchat, sent by source. source is not linkified, message is, to avoid stuff like character names to be linkified.
 // Automatically gives the class deadsay to the whole message (message + source)
-/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR, admin_only=FALSE)
+// BANDASTATION EDIT START - ghost runechat
+/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR, admin_only=FALSE, raw_message)
+	var/should_show_runechat = !SSlag_switch.measures[DISABLE_GHOST_RUNECHAT] && raw_message && follow_target && !follow_target.orbiting
+// BANDASTATION EDIT END - ghost runechat
 	message = span_deadsay("[source][span_linkify(message)]")
 
 	if(admin_only)
@@ -418,6 +427,10 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 				var/turf_link = TURF_LINK(M, turf_target)
 				rendered_message = "[turf_link] [message]"
 
+			// BANDASTATION EDIT START - ghost runechat
+			if(should_show_runechat && M.client?.prefs.read_preference(/datum/preference/toggle/enable_runechat) && M.see_invisible >= follow_target.invisibility)
+				M.create_chat_message(follow_target, raw_message = raw_message, spans = list("deadsay"))
+			// BANDASTATION EDIT END - ghost runechat
 			to_chat(M, rendered_message, avoid_highlighting = speaker_key == M.key)
 		else
 			to_chat(M, message, avoid_highlighting = speaker_key == M.key)
@@ -843,3 +856,20 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	else
 		. = invoked_callback.Invoke()
 	usr = temp
+
+/**
+ * Iterates over all mobs that can see the passed movable and adds specific mood events to them based on their personalities.
+ *
+ * * source: String source for the mood event
+ * * personality_to_mood: A list mapping personality types to mood event types. Example: list(/datum/personality/chill = /datum/mood_event/chill_guy)
+ * * range: The range in which to check for viewers. Default is view range.
+ * * additional args may be supplied to pass into the mood event constructor.
+ */
+/proc/add_personality_mood_to_viewers(atom/movable/source, mood_key, list/personality_to_mood, range, ...)
+	for(var/mob/living/nearby in viewers(range, source))
+		if(nearby.stat >= UNCONSCIOUS || nearby.is_blind())
+			continue
+		for(var/personality in personality_to_mood)
+			if(HAS_PERSONALITY(nearby, personality))
+				nearby.add_mood_event(arglist( list("[mood_key]_[personality]", personality_to_mood[personality]) + args.Copy(4) ))
+				break

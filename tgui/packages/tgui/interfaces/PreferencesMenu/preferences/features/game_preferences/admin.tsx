@@ -9,7 +9,7 @@ import { FeatureDropdownInput } from '../dropdowns';
 export const asaycolor: Feature<string> = {
   name: 'Цвет админских сообщений',
   category: 'Админ',
-  description: 'Цвет ваших сообщений в Adminsay.',
+  description: 'Цвет ваших сообщений в админском и менторском чатах.',
   component: FeatureColorInput,
 };
 

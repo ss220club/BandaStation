@@ -2,7 +2,6 @@
 	title = JOB_LAWYER
 	description = "Защищайте заключенных, заключайте юридически грамотные соглашения, \
 		убедитесь, что СБ следует СРП и КЗ."
-	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
@@ -28,7 +27,6 @@
 	job_flags = STATION_JOB_FLAGS
 
 	job_tone = "objection"
-
 
 /datum/outfit/job/lawyer
 	name = "Lawyer"
