@@ -66,6 +66,10 @@
 	new /obj/item/clothing/shoes/galoshes(src)
 	new /obj/item/watertank/janitor(src)
 	new /obj/item/storage/belt/janitor(src)
+	// BANDASTATION ADDITION START
+	new /obj/item/air_refresher(src)
+	new /obj/item/air_refresher(src)
+	// BANDASTATION ADDITION END
 
 
 /obj/structure/closet/lawcloset

@@ -23,7 +23,11 @@
 	/// What's our current air temperature?
 	var/current_temperature = 0
 
-/datum/component/grillable/Initialize(cook_result, required_cook_time, positive_result, use_large_steam_sprite, list/added_reagents)
+// BANDASTATION EDIT ADDITION START: /datum/component/grillable/Initialize(cook_result, required_cook_time, positive_result, use_large_steam_sprite, list/added_reagents)
+	/// What type of pollutant we spread around as we are grilleed, can be none
+	var/pollutant_type
+
+/datum/component/grillable/Initialize(cook_result, required_cook_time, positive_result, use_large_steam_sprite, list/added_reagents, pollutant_type) // BANDASTATION EDIT ADDITION END
 	. = ..()
 	if(!isitem(parent)) //Only items support grilling at the moment
 		return COMPONENT_INCOMPATIBLE
@@ -32,6 +36,7 @@
 	src.required_cook_time = required_cook_time
 	src.positive_result = positive_result
 	src.use_large_steam_sprite = use_large_steam_sprite
+	src.pollutant_type = pollutant_type // BANDASTATION ADDITION
 	src.added_reagents = added_reagents
 
 	var/obj/item/item_parent = parent
@@ -134,7 +139,11 @@
 	SIGNAL_HANDLER
 
 	. = COMPONENT_HANDLED_GRILLING
-
+// BANDASTATION ADDITION START
+	if(pollutant_type)
+		var/turf/parent_turf = get_turf(parent)
+		parent_turf.pollute_turf(pollutant_type, 10)
+// BANDASTATION ADDITION END
 	current_cook_time += seconds_per_tick * 10 //turn it into ds
 	if(current_cook_time >= required_cook_time)
 		finish_grilling(used_grill)

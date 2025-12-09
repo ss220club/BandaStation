@@ -9,6 +9,8 @@
 	var/barefootstep = null
 	var/clawfootstep = null
 	var/heavyfootstep = null
+	/// Pollution of this turf
+	var/datum/pollution/pollution // BANDASTATION ADDITION
 
 	/// Determines the type of damage overlay that will be used for the tile
 	var/damaged_dmi = null
