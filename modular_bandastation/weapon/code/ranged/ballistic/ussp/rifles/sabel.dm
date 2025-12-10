@@ -11,7 +11,7 @@
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/amk_fire.ogg'
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "amk_civ"
-	rack_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_cock.ogg'
+	rack_sound = 'modular_bandastation/weapon/sound/ranged/ak_cocked.ogg'
 	load_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magin.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ltrifle_magout.ogg'

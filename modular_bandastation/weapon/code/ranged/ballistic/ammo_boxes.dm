@@ -234,13 +234,13 @@
 
 /obj/item/ammo_box/c762x54mmr
 	name = "ammo box (7.62x54mmR)"
-	desc = "Коробка с винтовочными патронами калибра 7.62x54ммР, вмещает 25 патронов."
+	desc = "Коробка с винтовочными патронами калибра 7.62x54ммР, вмещает 30 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "a762_54box"
 	w_class = WEIGHT_CLASS_NORMAL
 	caliber = CALIBER_762x54mmR
 	ammo_type = /obj/item/ammo_casing/c762x54mmr
-	max_ammo = 25
+	max_ammo = 30
 
 /obj/item/ammo_box/c762x54mmr/rubber
 	name = "ammo box (7.62x54mmR rubber)"
@@ -336,7 +336,7 @@
 	icon_state = "38box-hotshot"
 	ammo_type = /obj/item/ammo_casing/c38/hotshot
 
-// MARK: .38
+// MARK: .357
 /obj/item/ammo_box/c357
 	name = "ammo box (.357)"
 	desc = "Коробка с пистолетными патронами калибра .357, вмещает 20 патронов."
@@ -559,8 +559,8 @@
 
 // MARK: .50 BMG
 /obj/item/ammo_box/c50
-	name = "ammo box (.50)"
-	desc = "Коробка с винтовочными патронами калибра .50 BMG, вмещает 15 патронов."
+	name = "ammo box (.50 BMG)"
+	desc = "Коробка с винтовочными патронами калибра .50 BMG, вмещает 10 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "a50box"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -703,70 +703,152 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/frag12
 
 // MARK: BOXES WITH MAGAZINES / AMMO BOXES
-/obj/item/storage/toolbox/ammobox/c9x25mm
-	name = "9x25mm NT pistol magazines box"
+/obj/item/storage/toolbox/ammobox/c9x25mm_mags
+	name = "9x25mm NT GP-9 pistol magazines box"
+	desc = "Содержит несколько магазинов обычного размера для пистолетов GP-9 калибра 9x25мм."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol
 
-/obj/item/storage/toolbox/ammobox/c9x25mm/extended
-	name = "9x25mm NT pistol extended magazines box"
+/obj/item/storage/toolbox/ammobox/c9x25mm_mags/extended
+	name = "9x25mm NT GP-9 pistol extended magazines box"
+	desc = "Содержит несколько магазинов увеличенного размера для пистолетов GP-9 калибра 9x25мм."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo
 
-/obj/item/storage/toolbox/ammobox/c9x25mm
+/obj/item/storage/toolbox/ammobox/c9x25mm_bullets
 	name = "9x25mm NT ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 9x25мм."
 	ammo_to_spawn = /obj/item/ammo_box/c9x25mm
 
-/obj/item/storage/toolbox/ammobox/amk
+/obj/item/storage/toolbox/ammobox/amk_mags
 	name = "7.62x39mm AMK magazines box"
+	desc = "Содержит несколько магазинов для автоматов образца АМК калибра 7.62x39мм."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c762x39mm
 
-/obj/item/storage/toolbox/ammobox/amk
+/obj/item/storage/toolbox/ammobox/amk_bullets
 	name = "7.62x39mm ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 7.62x39мм."
 	ammo_to_spawn = /obj/item/ammo_box/c762x39
 
 /obj/item/storage/toolbox/ammobox/c40sol_mags
 	name = ".40 Sol Long standart magazines box"
+	desc = "Содержит несколько стандартных магазинов для боевых винтовок \"Карво\" калибра .40 Sol Long."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c40sol_rifle/standard
 
 /obj/item/storage/toolbox/ammobox/c40sol_bullets
 	name = ".40 Sol Long ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .40 Sol Long."
 	ammo_to_spawn = /obj/item/ammo_box/c40sol
 
 /obj/item/storage/toolbox/ammobox/c35sol_mags
 	name = ".35 Sol short standart pistol magazines box"
+	desc = "Содержит несколько магазинов обычного размера для пистолетов \"Оса\" калибра .35 Sol short."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c35sol_pistol
 
 /obj/item/storage/toolbox/ammobox/c35sol_bullets
 	name = ".35 Sol short ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .35 Sol Short."
 	ammo_to_spawn = /obj/item/ammo_box/c35sol
 
-/obj/item/storage/toolbox/ammobox/c762x51mm
+/obj/item/storage/toolbox/ammobox/c762x51mm_mags
 	name = "7.62x51mm battle rifle magazines box"
+	desc = "Содержит несколько стандартных магазинов для боевых винтовок калибра 7.62x51мм."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c762x51mm
 
-/obj/item/storage/toolbox/ammobox/c762x54mmr
+/obj/item/storage/toolbox/ammobox/c762x51mm_bullets
+	name = "7.62x51mm ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 7.62x51мм."
+	ammo_to_spawn = /obj/item/ammo_box/c762x51
+
+/obj/item/storage/toolbox/ammobox/c762x54mmr_bullets
 	name = "7.62x54mmR ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 7.62x54ммР."
 	ammo_to_spawn = /obj/item/ammo_box/c762x54mmr
 
-/obj/item/storage/toolbox/ammobox/c223
-	name = "5.56x45mm ARG magazines box"
+/obj/item/storage/toolbox/ammobox/c762x54mmr_clips
+	name = "7.62x54mmR stripper clips box"
+	desc = "Содержит несколько обойм для патронов калибра 7.62x54ммР."
+	ammo_to_spawn = /obj/item/ammo_box/speedloader/c762x54mmr
+
+/obj/item/storage/toolbox/ammobox/c223_arg_mags
+	name = "5.56x45mm ARG/CM-82 magazines box"
+	desc = "Содержит несколько стандартных магазинов для штурмовых винтовок калибра 5.56x45мм."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c223
 
-/obj/item/storage/toolbox/ammobox/c45
-	name = ".45 pistol magazines box"
+/obj/item/storage/toolbox/ammobox/c223_bullets
+	name = "5.56x45mm ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 5.56x45мм."
+	ammo_to_spawn = /obj/item/ammo_box/c223
+
+/obj/item/storage/toolbox/ammobox/c45_cm45_mags
+	name = ".45 pistol GP-45 magazines box"
+	desc = "Содержит несколько магазинов для пистолетов GP-45 калибра .45."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c45
 
+/obj/item/storage/toolbox/ammobox/c45_bullets
+	name = ".45 ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .45."
+	ammo_to_spawn = /obj/item/ammo_box/c45
+
 /obj/item/storage/toolbox/ammobox/m9mm_magazines
-	name = "9mm SMG magazines box"
+	name = "9mm Saber magazines box"
+	desc = "Содержит несколько магазинов для пистолетов-пулеметов \"Saber\" калибра 9мм."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/smgm9mm
 
 /obj/item/storage/toolbox/ammobox/m9mm_bullets
 	name = "9mm ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 9мм."
 	ammo_to_spawn = /obj/item/ammo_box/c9mm
 
 /obj/item/storage/toolbox/ammobox/m10mm_magazines
-	name = "10mm SMG magazines box"
+	name = "10mm Vityaz magazines box"
+	desc = "Содержит несколько магазинов для пистолетов-пулеметов \"Витязь\" калибра 10мм."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/smg10mm
 
 /obj/item/storage/toolbox/ammobox/m10mm_bullets
 	name = "10mm ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 10мм."
 	ammo_to_spawn = /obj/item/ammo_box/c10mm
+
+/obj/item/storage/toolbox/ammobox/c46x30
+	name = "4.6x30mm ammo box"
+	desc = "Содержит несколько коробок с патронами калибра 4.6x30мм."
+	ammo_to_spawn = /obj/item/ammo_box/c46x30
+
+/obj/item/storage/toolbox/ammobox/c12ga_buck_mil
+	name = "12ga buckshot ammo box"
+	desc = "Содержит несколько коробок с дробью для дробовиков 12-го калибра."
+	ammo_to_spawn = /obj/item/ammo_box/c12ga
+
+/obj/item/storage/toolbox/ammobox/c12ga_slug_mil
+	name = "12ga slug ammo box"
+	desc = "Содержит несколько коробок с пулями для дробовиков 12-го калибра."
+	ammo_to_spawn = /obj/item/ammo_box/c12ga/slug/milspec
+
+/obj/item/storage/toolbox/ammobox/c50
+	name = ".50 BMG ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .50 BMG."
+	ammo_to_spawn = /obj/item/ammo_box/c50
+
+/obj/item/storage/toolbox/ammobox/c357
+	name = ".357 ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .357."
+	ammo_to_spawn = /obj/item/ammo_box/c357
+
+/obj/item/storage/toolbox/ammobox/c38
+	name = ".38 ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .38."
+	ammo_to_spawn = /obj/item/ammo_box/c38
+
+/obj/item/storage/toolbox/ammobox/c338
+	name = ".338 ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .338."
+	ammo_to_spawn = /obj/item/ammo_box/c338
+
+/obj/item/storage/toolbox/ammobox/n762_speedloaders
+	name = "7.62x38mmR ammo box"
+	desc = "Содержит несколько ускорителей заряжания для револьверов калибра 7.62x38ммР."
+	ammo_to_spawn = /obj/item/ammo_box/speedloader/n762_cylinder
+
+/obj/item/storage/toolbox/ammobox/strilka310_bullets
+	name = ".310 Strilka ammo box"
+	desc = "Содержит несколько коробок с патронами калибра .310 Стрилка."
+	ammo_to_spawn = /obj/item/ammo_box/strilka310
