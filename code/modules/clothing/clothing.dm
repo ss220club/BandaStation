@@ -375,7 +375,7 @@
 				cold_desc = "чрезвычайно низких"
 		.["термоизолированный"] = "Защищает носителя от [jointext(list(heat_desc, cold_desc) - null, " и ")] температур."
 	if((TRAIT_QUICK_CARRY in clothing_traits) || (TRAIT_QUICKER_CARRY in clothing_traits))
-		.["тактильный"] = "Уменьшает требуемое время для поднятие существ на [(TRAIT_QUICKER_CARRY in clothing_traits) ? "две секунды" : "одну секунду"]."
+		.["тактильный"] = "Уменьшает требуемое время для поднятия существ на [(TRAIT_QUICKER_CARRY in clothing_traits) ? "две секунды" : "одну секунду"]."
 	if(TRAIT_FASTMED in clothing_traits)
 		.["стерильный"] = "Увеличивает скорость введения реагентов на [round((1/NITRILE_GLOVES_MULTIPLIER-1)*100, 1)]%."
 	if(TRAIT_FAST_CUFFING in clothing_traits)
