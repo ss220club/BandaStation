@@ -1,7 +1,6 @@
 /datum/job/blueshield
 	title = JOB_BLUESHIELD
 	description = "Персональная охрана глав"
-	department_head = list("Представитель Нанотрейзен")
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	faction = FACTION_STATION
 	total_positions = 1

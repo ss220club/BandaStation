@@ -2,7 +2,6 @@
 	title = JOB_STATION_ENGINEER
 	description = "Запускайте двигатель Суперматерии, чините солнечные панели, чините обшивку станции \
 		и поврежденную технику."
-	department_head = list(JOB_CHIEF_ENGINEER)
 	faction = FACTION_STATION
 	total_positions = 5
 	spawn_positions = 5

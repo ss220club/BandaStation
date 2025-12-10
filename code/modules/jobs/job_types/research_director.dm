@@ -4,8 +4,7 @@
 		штатно функционирует, следите, чтобы ИИ и киборги не были сбойными, в противном случае \
 		замените их."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
-	department_head = list(JOB_CAPTAIN)
-	head_announce = list("Science")
+	head_announce = RADIO_CHANNEL_SCIENCE
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1

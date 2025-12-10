@@ -2,9 +2,8 @@
 	title = JOB_CHIEF_MEDICAL_OFFICER
 	description = "Координируйте врачей и помогайте мед персоналу, убедитесь, что \
 		они умеют спасать жизни, следите за состоянием экипажа при помощи датчиков."
-	department_head = list(JOB_CAPTAIN)
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
-	head_announce = list(RADIO_CHANNEL_MEDICAL)
+	head_announce = RADIO_CHANNEL_MEDICAL
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
