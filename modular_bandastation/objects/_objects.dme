@@ -87,6 +87,7 @@
 #include "code/items/storage/id_stickers_box.dm"
 #include "code/items/storage/paper_spray_box.dm"
 #include "code/items/storage/tape_box.dm"
+#include "code/items/machine_designs.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
