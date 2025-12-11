@@ -99,7 +99,7 @@
 		to_chat(hapless_manhandler, span_changeling("Наша добыча пытается отпугнуть нас одной из простейших адаптаций нашей же биологии. Забавно."))
 		return
 	user.visible_message(
-		span_danger("[user] извергает струю шипящей кислоты на [hapless_manhandler.declent_ru(ACCUSATIVE)], используя возможность вырваться."),
+		span_danger("[user.declent_ru(NOMINATIVE)] извергает струю шипящей кислоты на [hapless_manhandler.declent_ru(ACCUSATIVE)], используя возможность вырваться."),
 		user.balloon_alert(user, "отпугиваем похитителя..."),
 		span_danger("Вы слышите рвотный позыв, затем шипение, быстро заглушаемое громким стоном боли."))
 	hapless_manhandler.Stun(2 SECONDS)
