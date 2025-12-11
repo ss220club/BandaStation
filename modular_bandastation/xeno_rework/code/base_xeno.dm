@@ -108,7 +108,7 @@
 
 	type_to_evolve_into = evolver.next_evolution
 	if(!type_to_evolve_into)
-		to_chat(evolver, span_bolddanger("Something is wrong... We can't evolve into anything? (This is broken report it on GitHub)"))
+		to_chat(evolver, span_bolddanger("Something is wrong... We can't evolve into anything?"))
 		CRASH("Couldn't find an evolution for [owner] ([owner.type]).")
 
 	if(!isturf(evolver.loc))

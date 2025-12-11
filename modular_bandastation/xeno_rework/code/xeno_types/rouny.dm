@@ -14,7 +14,7 @@
 	var/datum/action/cooldown/alien/banda/evade/evade_ability
 	melee_damage_lower = 15
 	melee_damage_upper = 20
-	next_evolution = /mob/living/carbon/alien/adult/banda/ravager
+	next_evolution = NONE // /mob/living/carbon/alien/adult/banda/ravager // todo: rebalance ravager
 	on_fire_pixel_y = 0
 
 	default_organ_types_by_slot = list(
