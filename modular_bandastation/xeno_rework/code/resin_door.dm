@@ -30,7 +30,7 @@
 	/// List of smoothing junction numbers for vertical door states
 	var/list/vertical_sides = list(1, 2, 3, 5, 6, 7, 9, 10, 11, 21, 23, 38, 39, 55, 63, 74, 75, 137, 139, 203, 207, 223, 239, 255)
 	/// List of smoothing junction numbers for horizontal door states
-    var/list/horizontal_sides = list(0, 4, 8, 12, 13, 14, 15, 29, 31, 46, 47, 78, 79, 95, 110, 111, 127, 141, 143, 157, 159, 175, 191)
+	var/list/horizontal_sides = list(0, 4, 8, 12, 13, 14, 15, 29, 31, 46, 47, 78, 79, 95, 110, 111, 127, 141, 143, 157, 159, 175, 191)
 
 	/// Duration of animations in ticks, based on .dmi
 	var/list/anim_lengths = list(
@@ -129,7 +129,7 @@
 	// Play sound.
 	playsound(loc, state_open ? close_sound : open_sound, 50, TRUE)
 
-	var/duration = anim_lengths[anim_state] || 6
+	var/duration = src.anim_lengths[anim_state] || 6
 
 	// Check for mobs when closing.
 	if (state_open)

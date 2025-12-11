@@ -137,7 +137,7 @@
 	if (QDELETED(src) || !weapon.hitsound)
 		return // Skip if no hitsound
 	var/damage = weapon.force * (1 - owner.getarmor() / 100) // Account for armor
-	owner.adjustBruteLoss(damage)
+	owner.adjust_brute_loss(damage)
 	owner.do_attack_animation(attacker)
 	playsound(owner, weapon.hitsound, 50, TRUE)
 
