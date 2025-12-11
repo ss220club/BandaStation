@@ -72,7 +72,7 @@
 	///Icon for the maintenance panel overlay
 	var/panel_type = "panel1"
 	///Whether this vendor can be selected when building a custom vending machine
-	var/allow_custom = FALSE
+	var/allow_custom = TRUE
 
 	/**
 	  * List of products this machine sells
@@ -153,7 +153,7 @@
 	///fontawesome icon name to use in to display the user's balance in the vendor UI
 	var/displayed_currency_icon = "coins"
 	///String of the used currency to display in the vendor UI
-	var/displayed_currency_name = " cr"
+	var/displayed_currency_name = MONEY_SYMBOL
 	///Whether our age check is currently functional
 	var/age_restrictions = TRUE
 	/// How many credits does this vending machine have? 20% of all sales go to this pool, and are given freely when the machine is restocked, or successfully tilted. Lost on deconstruction.

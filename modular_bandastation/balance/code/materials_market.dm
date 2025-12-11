@@ -5,9 +5,9 @@
 	по всей системе. Ещё недавно она предоставляла возможность не только покупать, но и продавать материалы. Однако после обвала рынка минералов в 2565 году механизм продажи был удалён. \
 		Известно, что цены колеблются довольно часто, как правило в течение нескольких минут. Все сделки являются окончательными."
 
-/obj/machinery/materials_market/attackby(obj/item/attacking_item, mob/user, params)
-	if(is_type_in_list(attacking_item, exportable_material_items))
+/obj/machinery/materials_market/attackby(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
+	if(istype(weapon, /obj/item/stack/sheet))
 		say("Продажа материалов через Галактический рынок материалов невозможна из-за Красного экономического закона №0931, введённого Отделом экономического роста и развития НТ. Пожалуйста, экспортируйте материалы с использованием стандартных транспортно-грузовых отношений в соответствии с рабочими процедурами НТ.")
 		playsound(src, 'sound/machines/scanner/scanbuzz.ogg', 25, FALSE)
-		return TRUE
-	return ..()
+		return ITEM_INTERACT_SUCCESS
+	. = ..()

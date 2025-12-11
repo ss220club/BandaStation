@@ -1,14 +1,13 @@
 /datum/techweb_node/syndicate_basic
 	id = TECHWEB_NODE_SYNDICATE_BASIC
-	display_name = "Illegal Technology"
-	description = "Dangerous research used to create dangerous objects."
+	display_name = "Нелегальные технологии"
+	description = "Опасные исследования, используемые для создания опасных предметов."
 	prereq_ids = list(TECHWEB_NODE_EXP_TOOLS, TECHWEB_NODE_EXOTIC_AMMO)
 	design_ids = list(
 		"advanced_camera",
 		"ai_cam_upgrade",
 		"borg_syndicate_module",
 		"donksoft_refill",
-		"donksofttoyvendor",
 		"largecrossbow",
 		"mag_autorifle",
 		"mag_autorifle_ap",
@@ -31,16 +30,15 @@
 	SIGNAL_HANDLER
 	UnregisterSignal(SSearly_assets, COMSIG_SUBSYSTEM_POST_INITIALIZE)
 	required_items_to_unlock = list()
-	for(var/datum/uplink_item/item_path as anything in SStraitor.uplink_items_by_type)
-		var/datum/uplink_item/item = SStraitor.uplink_items_by_type[item_path]
-		if(!item.item || !(item.uplink_item_flags & SYNDIE_ILLEGAL_TECH))
+	for(var/datum/uplink_item/item as anything in SStraitor.uplink_items)
+		if(isnull(item.item) || item.item == ABSTRACT_UPLINK_ITEM || !(item.uplink_item_flags & SYNDIE_ILLEGAL_TECH))
 			continue
 		required_items_to_unlock |= item.item //allows deconning to unlock.
 
 /datum/techweb_node/unregulated_bluespace
 	id = TECHWEB_NODE_UNREGULATED_BLUESPACE
-	display_name = "Unregulated Bluespace Research"
-	description = "Bluespace technology using unstable or unbalanced procedures, prone to damaging the fabric of bluespace. Outlawed by galactic conventions."
+	display_name = "Нерегулируемое блюспейс исследование"
+	description = "Блюспейс технологии, что используют нестабильные и несбалансированные процедуры, способные повредить структуру самого блюспейса. Запрещена Галактической конвенцией."
 	prereq_ids = list(TECHWEB_NODE_PARTS_BLUESPACE, TECHWEB_NODE_SYNDICATE_BASIC)
 	design_ids = list(
 		"desynchronizer",

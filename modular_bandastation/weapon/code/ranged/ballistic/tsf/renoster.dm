@@ -1,3 +1,16 @@
+/datum/atom_skin/renoster
+	abstract_type = /datum/atom_skin/renoster
+	change_inhand_icon_state = TRUE
+	change_base_icon_state = TRUE
+
+/datum/atom_skin/renoster/default
+	preview_name = "Default"
+	new_icon_state = "renoster"
+
+/datum/atom_skin/renoster/green
+	preview_name = "Green"
+	new_icon_state = "renoster_green"
+
 // MARK: SolFed shotgun (this was gonna be in a proprietary shotgun shell type outside of 12ga at some point, wild right?)
 /obj/item/gun/ballistic/shotgun/riot/renoster
 	name = "Renoster shotgun"
@@ -22,9 +35,18 @@
 	slot_flags = ITEM_SLOT_BACK
 	projectile_damage_multiplier = 1.4
 	obj_flags = UNIQUE_RENAME
-	unique_reskin = list(
-		"Default" = "renoster",
-		"Green" = "renoster_green"
+
+/obj/item/gun/ballistic/shotgun/riot/renoster/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/renoster)
+
+/obj/item/gun/ballistic/shotgun/riot/renoster/add_seclight_point()
+	AddComponent(
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 32, \
+		overlay_y = 10 \
 	)
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/examine(mob/user)

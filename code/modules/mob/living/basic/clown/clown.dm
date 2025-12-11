@@ -25,7 +25,7 @@
 	habitable_atmos = list("min_oxy" = 5, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	minimum_survivable_temperature = (T0C - 10)
 	maximum_survivable_temperature = (T0C + 100)
-	blood_volume = BLOOD_VOLUME_NORMAL
+	default_blood_volume = BLOOD_VOLUME_NORMAL
 	faction = list(FACTION_CLOWN)
 	ai_controller = /datum/ai_controller/basic_controller/clown
 	///list of stuff we drop on death
@@ -470,10 +470,10 @@
 			health += 10
 		if(istype(eaten_atom, /obj/item/food/grown/banana))
 			var/obj/item/food/grown/banana/banana_morsel = eaten_atom
-			adjustBruteLoss(-(banana_morsel.seed.potency / 100 ) * maxHealth * 0.2)
+			adjust_brute_loss(-(banana_morsel.seed.potency / 100 ) * maxHealth * 0.2)
 			prank_pouch += banana_morsel.generate_trash(src)
 		else
-			adjustBruteLoss(-maxHealth * 0.1)
+			adjust_brute_loss(-maxHealth * 0.1)
 		qdel(eaten_atom)
 
 	playsound(loc,'sound/items/eatfood.ogg', rand(30,50), TRUE)
@@ -597,7 +597,7 @@
 	. = ..()
 	var/list/reachable_turfs = list()
 	for(var/turf/adjacent_turf in RANGE_TURFS(1, owner.loc))
-		if(adjacent_turf == owner.loc || !owner.CanReach(adjacent_turf) || !isopenturf(adjacent_turf))
+		if(adjacent_turf == owner.loc || !adjacent_turf.IsReachableBy(owner) || !isopenturf(adjacent_turf))
 			continue
 		reachable_turfs += adjacent_turf
 
@@ -625,10 +625,10 @@
 /datum/action/cooldown/exquisite_bunch/Trigger(mob/clicker, trigger_flags, atom/target)
 	if(activating)
 		return
-	var/bunch_turf = get_step(owner.loc, owner.dir)
+	var/atom/bunch_turf = get_step(owner.loc, owner.dir)
 	if(!bunch_turf)
 		return
-	if(!owner.CanReach(bunch_turf) || !isopenturf(bunch_turf))
+	if(!bunch_turf.IsReachableBy(owner) || !isopenturf(bunch_turf))
 		owner.balloon_alert(owner, "can't do that here!")
 		return
 	activating = TRUE

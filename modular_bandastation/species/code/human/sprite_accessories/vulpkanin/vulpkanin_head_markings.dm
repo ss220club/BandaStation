@@ -41,6 +41,3 @@
 	applies_to = list(
 		/obj/item/bodypart/head,
 	)
-
-/datum/bodypart_overlay/simple/body_marking/vulpkanin_head/get_accessory(name)
-	return SSaccessories.vulpkanin_head_markings_list[name]

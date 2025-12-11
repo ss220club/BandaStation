@@ -24,6 +24,7 @@
 #include "changelog/_changelog.dme"
 #include "chat/_chat.dme"
 #include "chemistry/_chemistry.dme"
+#include "closet_picklocking/_closet_picklocking.dme"
 #include "communication/_communication.dme"
 #include "cryosleep/_cryosleep.dme"
 #include "cult_overhaul/_cult_overhaul.dme"
@@ -48,6 +49,7 @@
 #include "language_improvements/_language_improvements.dme"
 #include "loadout/_loadout.dme"
 #include "mapping/_mapping.dme"
+#include "martial_arts/_martial_arts.dme"
 #include "medical/_medical.dme"
 #include "metaserver/_metaserver.dme"
 #include "minesweeper/_minesweeper.dme"
@@ -78,6 +80,8 @@
 #include "weapon/_weapon.dme"
 #include "world_topics/_world_topics.dme"
 #include "xeno_rework/_xeno_rework.dme"
+#include "movespeed_limit/_movespeed_limit.dme"
+#include "tesla_rework/_teslarework.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //

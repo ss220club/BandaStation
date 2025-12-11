@@ -16,7 +16,7 @@
 
 /datum/mutation/quick
 	name = "Quick"
-	desc = "A mutation within the leg muscles that allows it to operate at 20% more than the usual capacity."
+	desc = "Мутация мышц ног, которая позволяет им функционировать на 7.5% эффективней, чем обычно."
 	text_gain_indication = span_notice("Ваши ноги становятся сильнее и быстрее.")
 	text_lose_indication = span_warning("Ваши ноги становятся слабее и медленнее.")
 	locked = TRUE

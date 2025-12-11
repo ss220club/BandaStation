@@ -181,6 +181,8 @@
 		tgui_alert(usr, "Возникла непредвиденная ошибка при выдаче роли, выбранной вами. Если вы не можете зайти, обратитесь к администрации.")
 		return FALSE
 
+	var/latejoin_period = CEILING(STATION_TIME_PASSED() / (5 MINUTES), 5)
+	SSblackbox.record_feedback("tally", "latejoin_time", 1, latejoin_period)
 	mind.late_joiner = TRUE
 	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
 	if(!destination)
@@ -236,8 +238,12 @@
 	if(CONFIG_GET(flag/allow_latejoin_antagonists) && !EMERGENCY_PAST_POINT_OF_NO_RETURN && humanc) //Borgs aren't allowed to be antags. Will need to be tweaked if we get true latejoin ais.
 		SSdynamic.on_latejoin(humanc)
 
-	if((job.job_flags & JOB_ASSIGN_QUIRKS) && humanc && CONFIG_GET(flag/roundstart_traits))
-		SSquirks.AssignQuirks(humanc, humanc.client)
+	if(humanc)
+		if(job.job_flags & JOB_ASSIGN_QUIRKS)
+			if(CONFIG_GET(flag/roundstart_traits))
+				SSquirks.AssignQuirks(humanc, humanc.client)
+		else // clear any personalities the prefs added since our job clearly does not want them
+			humanc.clear_personalities()
 
 	if(humanc) // Quirks may change manifest datapoints, so inject only after assigning quirks
 		GLOB.manifest.inject(humanc)
@@ -353,7 +359,7 @@
 ///Resets the Lobby Menu HUD, recreating and reassigning it to the new player
 /mob/dead/new_player/proc/reset_menu_hud()
 	set name = "Reset Lobby Menu HUD"
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 	var/mob/dead/new_player/new_player = usr
 	if(!COOLDOWN_FINISHED(new_player, reset_hud_cooldown))
 		to_chat(new_player, span_warning("You must wait <b>[DisplayTimeText(COOLDOWN_TIMELEFT(new_player, reset_hud_cooldown))]</b> before resetting the Lobby Menu HUD again!"))

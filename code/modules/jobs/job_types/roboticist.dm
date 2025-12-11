@@ -1,7 +1,6 @@
 /datum/job/roboticist
 	title = JOB_ROBOTICIST
 	description = "Создавайте и обслуживайте роботов и ИИ, создавайте мехов."
-	department_head = list(JOB_RESEARCH_DIRECTOR)
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2

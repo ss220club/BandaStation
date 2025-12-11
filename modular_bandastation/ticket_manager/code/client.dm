@@ -1,6 +1,3 @@
-/// Client var used for tracking the ticket the (usually) not-admin client is dealing with
-/datum/persistent_client/var/datum/help_ticket/current_help_ticket
-
 /client
 	/// What ticket will be opened after opening ui
 	var/ticket_to_open
@@ -29,18 +26,38 @@
 	if(!istype(subject))
 		return
 
-	if(GLOB.ticket_manager.open_existing_ticket(src, subject))
+	if(subject.persistent_client.current_help_ticket)
+		if(!GLOB.ticket_manager.open_ticket(src, subject.persistent_client.current_help_ticket))
+			to_chat(
+				src,
+				span_danger("Игрок имеет открытый тикет, к которому у вас нет доступа."),
+				MESSAGE_TYPE_ADMINPM
+			)
 		return
 
-	var/message_to_send = tgui_input_text(src, "Введите сообщения для [subject.ckey]", "Личное сообщение", multiline = TRUE, encode = FALSE, ui_state = ADMIN_STATE(R_ADMIN))
+	var/message_to_send = tgui_input_text(
+		src,
+		"Введите сообщения для [subject.ckey]",
+		"Личное сообщение",
+		multiline = TRUE,
+		encode = FALSE,
+		ui_state = ADMIN_STATE(R_ADMIN)
+	)
+
 	if(!message_to_send)
 		return
 
 	// Double check if user created a ticket during PM writing
-	if(GLOB.ticket_manager.open_existing_ticket(src, subject, message_to_send))
+	if(subject.persistent_client.current_help_ticket)
+		if(!GLOB.ticket_manager.open_ticket(src, subject.persistent_client.current_help_ticket, message_to_send))
+			to_chat(
+				src,
+				span_danger("Игрок имеет открытый тикет, к которому у вас нет доступа."),
+				MESSAGE_TYPE_ADMINPM
+			)
 		return
 
 	var/datum/help_ticket/subject_ticket = new(subject, src, message_to_send, TICKET_TYPE_ADMIN)
-	var/log_body = "[key_name(src)] написал личное сообщение [key_name_admin(whom)]."
-	message_admins("[log_body] Создан тикет [TICKET_OPEN_LINK(subject_ticket.id, "#[subject_ticket.id]")].")
-	log_admin(log_body)
+
+	message_admins("[key_name_admin(src)] написал личное сообщение [key_name_admin(whom)]. Создан тикет [TICKET_OPEN_LINK(subject_ticket.id, "#[subject_ticket.id]")].")
+	log_admin("[key_name(src)] написал личное сообщение [key_name(whom)].")

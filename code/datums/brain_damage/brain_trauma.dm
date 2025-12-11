@@ -8,14 +8,22 @@
 	abstract_type = /datum/brain_trauma
 	var/name = "Травма мозга"
 	var/desc = "Травма, вызванная повреждением мозга, которая вызывает проблемы у пациента."
-	var/scan_desc = "общая травма мозга" //description when detected by a health scanner
-	var/mob/living/carbon/owner //the poor bastard
-	var/obj/item/organ/brain/brain //the poor bastard's brain
+	/// Description when detected by a health scanner
+	var/scan_desc = "общая травма мозга"
+	/// The poor bastard
+	var/mob/living/carbon/owner
+	/// The poor bastard's brain
+	var/obj/item/organ/brain/brain
+	/// Message sent in chat when trauma is gained
 	var/gain_text = span_notice("Вы чувствуете себя травмированными.")
+	/// Message sent in chat when trauma is lost
 	var/lose_text = span_notice("Вы больше не чувствуете себя травмированными.")
+	/// If the trauma can be gained, checked in can_gain_trauma
 	var/can_gain = TRUE
-	var/random_gain = TRUE //can this be gained through random traumas?
-	var/resilience = TRAUMA_RESILIENCE_BASIC //how hard is this to cure?
+	/// If this trauma can be gained randomly
+	var/random_gain = TRUE
+	/// How hard is this to cure?
+	var/resilience = TRAUMA_RESILIENCE_BASIC
 
 /datum/brain_trauma/Destroy()
 	// Handles our references with our brain

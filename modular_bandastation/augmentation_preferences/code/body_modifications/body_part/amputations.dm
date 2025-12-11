@@ -3,7 +3,7 @@
 	abstract_type = /datum/body_modification/limb_amputation
 	var/limb_body_zone = null
 
-/datum/body_modification/limb_amputation/apply_to_human(mob/living/carbon/target)
+/datum/body_modification/limb_amputation/apply_to_human(mob/living/carbon/target, additional_params)
 	. = ..()
 	if(!.)
 		return

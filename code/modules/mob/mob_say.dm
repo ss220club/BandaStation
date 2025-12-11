@@ -3,7 +3,7 @@
 ///what clients use to speak. when you type a message into the chat bar in say mode, this is the first thing that goes off serverside.
 /mob/verb/say_verb(message as text)
 	set name = "Say"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 	set instant = TRUE
 
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
@@ -18,7 +18,7 @@
 ///Whisper verb
 /mob/verb/whisper_verb(message as text)
 	set name = "Whisper"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 	set instant = TRUE
 
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
@@ -41,7 +41,7 @@
 ///The me emote verb
 /mob/verb/me_verb(message as text)
 	set name = "Me"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 	set desc = "Perform a custom emote. Leave blank to pick between an audible or a visible emote (Defaults to visible)."
 
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
@@ -54,7 +54,7 @@
 		return
 	// BANDASTATION EDIT END - Sanitize emotes
 
-	QUEUE_OR_CALL_VERB_FOR(VERB_CALLBACK(src, TYPE_PROC_REF(/mob, emote), "me", EMOTE_VISIBLE|EMOTE_AUDIBLE, message, TRUE), SSspeech_controller)
+	QUEUE_OR_CALL_VERB_FOR(VERB_CALLBACK(src, TYPE_PROC_REF(/mob, emote), "me", NONE, message, TRUE), SSspeech_controller)
 
 /mob/try_speak(message, ignore_spam = FALSE, forced = null, filterproof = FALSE)
 	var/list/filter_result
@@ -142,7 +142,7 @@
 
 		if(SSlag_switch.measures[SLOWMODE_SAY] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES) && src == usr)
 			if(!COOLDOWN_FINISHED(client, say_slowmode))
-				to_chat(src, span_warning("Сообщение было отправлено из-за слоумода. Пожалуйста, ждите [SSlag_switch.slowmode_cooldown/10] секунд между сообщениями.\n\"[message]\""))
+				to_chat(src, span_warning("Сообщение не было отправлено из-за слоумода. Пожалуйста, ждите [SSlag_switch.slowmode_cooldown/10] секунд между сообщениями.\n\"[message]\""))
 				return
 			COOLDOWN_START(client, say_slowmode, SSlag_switch.slowmode_cooldown)
 
@@ -169,7 +169,9 @@
 	var/displayed_key = key
 	if(client?.holder?.fakekey)
 		displayed_key = null
-	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key)
+	// BANDASTATION EDIT START - ghost runechat
+	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key, raw_message = message)
+	// BANDASTATION EDIT END - ghost runechat
 
 ///Check if this message is an emote
 /mob/proc/check_emote(message, forced)

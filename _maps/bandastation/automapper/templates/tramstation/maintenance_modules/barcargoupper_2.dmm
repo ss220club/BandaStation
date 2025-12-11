@@ -188,15 +188,11 @@
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/department/cargo)
 "tf" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
 /obj/structure/sign/warning/secure_area{
 	desc = "A warning sign which reads 'MULE CROSSING - LOOK BOTH WAYS";
-	name = "MULE CROSSING - LOOK BOTH WAYS";
-	pixel_x = -32
+	name = "MULE CROSSING - LOOK BOTH WAYS"
 	},
-/turf/open/floor/catwalk_floor,
+/turf/closed/wall,
 /area/station/maintenance/department/cargo)
 "tI" = (
 /obj/structure/plasticflaps/opaque{
@@ -371,7 +367,7 @@
 "Ek" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "ED" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/girder,
@@ -1123,7 +1119,7 @@ Fz
 Fz
 Fz
 Fz
-Fz
+tf
 wo
 Fz
 Fz
@@ -1160,7 +1156,7 @@ se
 se
 se
 Fz
-tf
+nK
 wo
 Fz
 se

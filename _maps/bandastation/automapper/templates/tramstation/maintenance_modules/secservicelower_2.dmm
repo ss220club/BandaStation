@@ -331,7 +331,7 @@
 "sL" = (
 /obj/structure/disposalpipe/segment,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "tZ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/directional/north,
@@ -556,7 +556,7 @@
 	dir = 6
 	},
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "Ke" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,

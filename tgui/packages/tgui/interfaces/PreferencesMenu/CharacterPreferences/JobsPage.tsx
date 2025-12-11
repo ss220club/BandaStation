@@ -172,18 +172,21 @@ function JobRow(props: JobRowProps) {
     const hoursNeeded = Math.ceil(required_playtime / 60);
 
     rightSide = (
-      <>
-        <b>{hoursNeeded}ч.</b> как {experience_type}
-      </>
+      <Stack.Item className="restricted">
+        <b>{hoursNeeded}ч.</b> как{' '}
+        <Tooltip content={experience_type}>
+          <span>{experience_type}</span>
+        </Tooltip>
+      </Stack.Item>
     );
   } else if (daysLeft > 0) {
     rightSide = (
-      <>
+      <Stack.Item className="restricted">
         Нужно еще дней: <b>{daysLeft}</b>
-      </>
+      </Stack.Item>
     );
   } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
-    rightSide = <b>Забанен</b>;
+    rightSide = <Stack.Item className="restricted ban">Забанен</Stack.Item>;
   } else {
     const priority = data.job_preferences[name];
     const isOverflow = data.overflow_role === name;

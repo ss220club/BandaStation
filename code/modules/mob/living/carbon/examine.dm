@@ -106,7 +106,7 @@
 		if(user == src && has_status_effect(/datum/status_effect/grouped/screwy_hud/fake_crit))//fake damage
 			temp = 50
 		else
-			temp = getBruteLoss()
+			temp = get_brute_loss()
 		var/list/damage_desc = get_majority_bodypart_damage_desc()
 		if(temp)
 			if(temp < 25)
@@ -116,7 +116,7 @@
 			else
 				. += span_bolddanger("У [ru_p_theirs()] тяжелые [damage_desc[BRUTE]]!")
 
-		temp = getFireLoss()
+		temp = get_fire_loss()
 		if(temp)
 			if(temp < 25)
 				. += span_danger("У [ru_p_theirs()] незначительные [damage_desc[BURN]].")
@@ -143,7 +143,7 @@
 		if(DISGUST_LEVEL_DISGUSTED to INFINITY)
 			. += "[t_He] выглядит крайне отвращенно."
 
-	var/apparent_blood_volume = blood_volume
+	var/apparent_blood_volume = CAN_HAVE_BLOOD(src) ? get_blood_volume(apply_modifiers = TRUE) : BLOOD_VOLUME_NORMAL
 	if(HAS_TRAIT(src, TRAIT_USES_SKINTONES) && ishuman(src))
 		var/mob/living/carbon/human/husrc = src // gross istypesrc but easier than refactoring even further for now
 		if(husrc.skin_tone == "albino")
@@ -198,39 +198,13 @@
 	if(reagents.has_reagent(/datum/reagent/teslium, needs_metabolizing = TRUE))
 		. += span_smallnoticeital("[t_He] излучает слабое голубое свечение!") // this should be signalized
 
+	var/mob/living/living_user = user
+	SEND_SIGNAL(living_user, COMSIG_CARBON_MID_EXAMINE, src, .) // Adds examine text after clothing and wounds but before death and scars
 	if(just_sleeping)
 		. += span_notice("[t_He] не реагирует на [t_him] окружение и, кажется, спит.")
-
 	else if(!appears_dead)
-		var/mob/living/living_user = user
 		if(src != user)
-			if(HAS_TRAIT(user, TRAIT_EMPATH))
-				if (combat_mode)
-					. += "[t_He] выглядит начеку."
-				if (getOxyLoss() >= 10)
-					. += "[t_He] выглядит измотанным."
-				if (getToxLoss() >= 10)
-					. += "[t_He] выглядит болезненно."
-				if(mob_mood.sanity <= SANITY_DISTURBED)
-					. += "[t_He] выглядит обеспокоенным."
-					living_user.add_mood_event("empath", /datum/mood_event/sad_empath, src)
-				if(is_blind())
-					. += "[t_He], кажется, смотрит в пустоту."
-				if (HAS_TRAIT(src, TRAIT_DEAF))
-					. += "[t_He], кажется, не реагирует на звуки."
-				if (bodytemperature > dna.species.bodytemp_heat_damage_limit)
-					. += "[t_He] краснеет и хрипло дышит."
-				if (bodytemperature < dna.species.bodytemp_cold_damage_limit)
-					. += "[t_He] дрожит."
-				if(HAS_TRAIT(src, TRAIT_EVIL))
-					. += "[t_His] глаза излучают полную безчувственность и холодную отстраненность. Нет ничего, кроме как тьмы, в [t_his] душе."
-					if(living_user.mind?.holy_role >= HOLY_ROLE_PRIEST)
-						. += span_warning("ИДЕАЛЬНЫЙ КАНДИДАТ ДЛЯ КАРЫ!!")
-					else
-						living_user.add_mood_event("encountered_evil", /datum/mood_event/encountered_evil)
-						living_user.set_jitter_if_lower(15 SECONDS)
-
-			if(HAS_TRAIT(user, TRAIT_SPIRITUAL) && mind?.holy_role)
+			if(HAS_TRAIT(user, TRAIT_SPIRITUAL) && mind?.holy_role && user != src)
 				. += "Вокруг [ru_p_theirs()] видно святую ауру."
 				living_user.add_mood_event("religious_comfort", /datum/mood_event/religiously_comforted)
 

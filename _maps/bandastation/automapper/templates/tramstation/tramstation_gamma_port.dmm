@@ -3,7 +3,7 @@
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
-/area/station/ai_monitored/security/armory)
+/area/station/security/armory)
 "k" = (
 /obj/docking_port/stationary{
 	dwidth = 4;
@@ -23,25 +23,25 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
-/area/station/ai_monitored/security/armory)
+/area/station/security/armory)
 "t" = (
 /turf/open/misc/asteroid/airless,
 /area/station/asteroid)
 "u" = (
 /turf/closed/wall/r_wall,
-/area/station/ai_monitored/security/armory)
+/area/station/security/armory)
 "C" = (
 /turf/template_noop,
 /area/template_noop)
 "K" = (
 /obj/structure/sign/warning/docking/directional/north,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "N" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "R" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/door/airlock/external,
@@ -50,7 +50,7 @@
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
-/area/station/ai_monitored/security/armory)
+/area/station/security/armory)
 "U" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/light/small/directional/east,
@@ -59,7 +59,7 @@
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
-/area/station/ai_monitored/security/armory)
+/area/station/security/armory)
 
 (1,1,1) = {"
 C

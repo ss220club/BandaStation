@@ -10,7 +10,7 @@
 
 /mob/living/verb/navigate()
 	set name = "Navigate"
-	set category = "IC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
 
 	if(incapacitated)
 		return
