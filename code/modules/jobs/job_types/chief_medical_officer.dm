@@ -2,19 +2,18 @@
 	title = JOB_CHIEF_MEDICAL_OFFICER
 	description = "Координируйте врачей и помогайте мед персоналу, убедитесь, что \
 		они умеют спасать жизни, следите за состоянием экипажа при помощи датчиков."
-	department_head = list(JOB_CAPTAIN)
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
-	head_announce = list(RADIO_CHANNEL_MEDICAL)
+	head_announce = RADIO_CHANNEL_MEDICAL
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = JOB_CAPTAIN_RU
 	req_admin_notify = 1
 	minimal_player_age = 7
-	exp_requirements = 180
+	exp_requirements = 1200
 	exp_required_type = EXP_TYPE_CREW
 	exp_required_type_department = EXP_TYPE_MEDICAL
-	exp_granted_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "CHIEF_MEDICAL_OFFICER"
 
 	outfit = /datum/outfit/job/cmo

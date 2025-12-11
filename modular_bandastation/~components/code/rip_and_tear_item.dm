@@ -128,7 +128,7 @@
 			user.balloon_alert(user, "заняты!")
 			return
 
-		if(!ignore_exhaustion && ((user.maxHealth - (user.getStaminaLoss() + get_stamina_cost())) <= user.crit_threshold))
+		if(!ignore_exhaustion && ((user.maxHealth - (user.get_stamina_loss() + get_stamina_cost())) <= user.crit_threshold))
 			user.balloon_alert(user, "вы слишком устали!")
 			return
 
@@ -145,7 +145,7 @@
 
 	user.do_attack_animation(target)
 	target.AddComponent(/datum/component/torn_wall)
-	user.adjustStaminaLoss(get_stamina_cost())
+	user.adjust_stamina_loss(get_stamina_cost())
 	playsound(target, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 
 	is_valid = validate_target(target, user)

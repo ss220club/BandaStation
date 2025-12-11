@@ -1,7 +1,6 @@
 /datum/job/geneticist
 	title = JOB_GENETICIST
 	description = "Модифицируйте гены, отвергните человечество и станьте обезьяной (и наоборот), и создавайте резервные копии ДНК."
-	department_head = list(JOB_RESEARCH_DIRECTOR)
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
