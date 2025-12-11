@@ -9,6 +9,7 @@
 		"resin wall" = /obj/structure/alien/resin/wall,
 		"resin membrane" = /obj/structure/alien/resin/membrane,
 		"resin nest" = /obj/structure/bed/nest,
+		"resin door" = /obj/structure/alien/resin/door,
 	)
 
 /datum/action/cooldown/alien/select_resin_structure/Activate(atom/target)
@@ -46,6 +47,7 @@
 		"resin wall" = /obj/structure/alien/resin/wall,
 		"resin membrane" = /obj/structure/alien/resin/membrane,
 		"resin nest" = /obj/structure/bed/nest,
+		"resin door" = /obj/structure/alien/resin/door,
 	)
 	for(var/blocker_name in structures)
 		var/obj/structure/blocker_type = structures[blocker_name]
@@ -112,8 +114,14 @@
 
 	// Определяем название структуры для сообщений
 	var/structure_name
-	for(var/name in list("resin wall" = /obj/structure/alien/resin/wall, "resin membrane" = /obj/structure/alien/resin/membrane, "resin nest" = /obj/structure/bed/nest))
-		if(choice_path == list("resin wall" = /obj/structure/alien/resin/wall, "resin membrane" = /obj/structure/alien/resin/membrane, "resin nest" = /obj/structure/bed/nest)[name])
+	var/list/structure_map = list(
+		"resin wall" = /obj/structure/alien/resin/wall,
+		"resin membrane" = /obj/structure/alien/resin/membrane,
+		"resin nest" = /obj/structure/bed/nest,
+		"resin door" = /obj/structure/alien/resin/door
+	)
+	for (var/name in structure_map)
+		if (choice_path == structure_map[name])
 			structure_name = name
 			break
 

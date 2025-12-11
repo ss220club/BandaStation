@@ -111,10 +111,19 @@
 /obj/structure/alien/resin/door/proc/operate(bumped_open = FALSE)
 	if (is_operating || QDELETED(src))
 		return
-	is_operating = TRUE
 
+	var/is_closing = state_open
+
+	if (is_closing)
+		var/list/mobs_present = locate(/mob/living) in get_turf(src)
+		if (length(mobs_present))
+			if (state_open)
+				addtimer(CALLBACK(src, PROC_REF(mobless_try_to_operate)), close_delay)
+			return
+
+	is_operating = TRUE
 	var/isvert = is_vertical()
-	var/anim_state = state_open ? (isvert ? "resinclosing-side" : "resinclosing") : (isvert ? "resinopening-side" : "resinopening")
+	var/anim_state = is_closing ? (isvert ? "resinclosing-side" : "resinclosing") : (isvert ? "resinopening-side" : "resinopening")
 
 	// Remove static closed overlay when opening to show the "hole".
 	if (!state_open && close_overlay)
@@ -127,17 +136,9 @@
 	flick(anim_state, anim_overlay)
 
 	// Play sound.
-	playsound(loc, state_open ? close_sound : open_sound, 50, TRUE)
+	playsound(loc, is_closing ? close_sound : open_sound, 50, TRUE)
 
 	var/duration = src.anim_lengths[anim_state] || 6
-
-	// Check for mobs when closing.
-	if (state_open)
-		for (var/mob/living/L in get_turf(src))
-			is_operating = FALSE
-			if (state_open)
-				addtimer(CALLBACK(src, PROC_REF(mobless_try_to_operate)), close_delay)
-			return
 
 	// Schedule update after animation.
 	addtimer(CALLBACK(src, PROC_REF(operate_update), bumped_open), duration)
@@ -168,19 +169,27 @@
 		smooth_icon(src)
 
 	is_operating = FALSE
-
 	if (state_open && bumped_open)
 		addtimer(CALLBACK(src, PROC_REF(mobless_try_to_operate)), close_delay)
 
 /// Attempts to close the door automatically if no mobs are present.
 /obj/structure/alien/resin/door/proc/mobless_try_to_operate()
-	if (is_operating || QDELETED(src))
-		if (state_open)
-			addtimer(CALLBACK(src, PROC_REF(mobless_try_to_operate)), close_delay)
+	if (QDELETED(src))
+		return
+
+	if (!state_open)
+		return
+
+	if (is_operating)
+		addtimer(CALLBACK(src, PROC_REF(mobless_try_to_operate)), close_delay)
+		return
+
+	var/list/mobs_present = locate(/mob/living) in get_turf(src)
+	if (length(mobs_present))
+		addtimer(CALLBACK(src, PROC_REF(mobless_try_to_operate)), close_delay)
 		return
 	operate()
 
-/// Updates the door's icon and overlays based on its state.
 /obj/structure/alien/resin/door/update_icon()
 	. = ..()
 	// Clear only static overlay (preserve anim_overlay if playing).
