@@ -228,7 +228,7 @@
 	playsound(defender, attack_sound, 25, TRUE, -1)
 
 	defender.visible_message(
-		span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] наносит [current_atk_verbed] по [defender.declent_ru(DATIVE)]!"),
+		span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] наносит [current_atk_verb] по [defender.declent_ru(DATIVE)]!"),
 		span_userdanger("Вы получаете [current_atk_verbed] от [attacker.declent_ru(GENITIVE)]!"),
 		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
