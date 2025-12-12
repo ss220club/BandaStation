@@ -1,3 +1,9 @@
 #include "_events.dm"
 
-#include "avangarde17/code/avangarde17.dm"
+#include "avangarde17/code/obj/area.dm"
+#include "avangarde17/code/obj/cursed_arch.dm"
+#include "avangarde17/code/obj/misc.dm"
+#include "avangarde17/code/obj/portrait.dm"
+#include "avangarde17/code/obj/statue.dm"
+
+#include "avangarde17/code/turf/turf.dm"
