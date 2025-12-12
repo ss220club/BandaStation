@@ -1,0 +1,4 @@
+author: "NatWak"
+delete-after: True
+changes:
+  - rscdel: "Удалён старый ребаланс лазерного карабина из-за неактуальности"
