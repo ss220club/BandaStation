@@ -10,7 +10,6 @@
 	borg_skins = list(
 		"Landmate" = list(SKIN_ICON_STATE = "engineer"),
 		"Landmate - Treads" = list(SKIN_ICON_STATE = "engi-tread", SKIN_LIGHT_KEY = "engineer", SKIN_ICON = CYBORG_ICON_ENG),
-		"Handy" = list(SKIN_ICON_STATE = "handyeng", SKIN_ICON = CYBORG_ICON_ENG, SKIN_HAT_OFFSET = INFINITY),
 		"Can" = list(SKIN_ICON_STATE = "caneng", SKIN_ICON = CYBORG_ICON_ENG, SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(0, 3), "west" = list(0, 3))),
 		"Spider" = list(SKIN_ICON_STATE = "spidereng", SKIN_ICON = CYBORG_ICON_ENG),
 		"Robot" = list(SKIN_ICON_STATE = "robotbot", SKIN_ICON = CYBORG_ICON_ENG, SKIN_HAT_OFFSET = INFINITY)
