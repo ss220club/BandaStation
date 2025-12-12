@@ -9,7 +9,6 @@
 /obj/item/robot_model/engineering
 	borg_skins = list(
 		"Landmate" = list(SKIN_ICON_STATE = "engineer"),
-		"Standard" = list(SKIN_ICON_STATE = "standard", SKIN_ICON = CYBORG_ICON_ENG),
 		"Landmate - Treads" = list(SKIN_ICON_STATE = "engi-tread", SKIN_LIGHT_KEY = "engineer", SKIN_ICON = CYBORG_ICON_ENG),
 		"Handy" = list(SKIN_ICON_STATE = "handyeng", SKIN_ICON = CYBORG_ICON_ENG, SKIN_HAT_OFFSET = INFINITY),
 		"Can" = list(SKIN_ICON_STATE = "caneng", SKIN_ICON = CYBORG_ICON_ENG, SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(0, 3), "west" = list(0, 3))),
@@ -22,7 +21,6 @@
 	borg_skins = list(
 		"Machinified Doctor" = list(SKIN_ICON_STATE = "medical", SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(-1, 3), "west" = list(1, 3))),
 		"Qualified Doctor" = list(SKIN_ICON_STATE = "qualified_doctor", SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(1, 3), "west" = list(-1, 3))),
-		"Standard" = list(SKIN_ICON_STATE = "standard", SKIN_ICON = CYBORG_ICON_MED),
 		"Droid" = list(SKIN_ICON = CYBORG_ICON_MED, SKIN_ICON_STATE = "medical", SKIN_HAT_OFFSET = list("north" = list(0, 4), "south" = list(0, 4), "east" = list(0, 4), "west" = list(0, 4))),
 		"Robot" = list(SKIN_ICON_STATE = "robotbot", SKIN_ICON = CYBORG_ICON_MED, SKIN_HAT_OFFSET = INFINITY)
 	)
@@ -31,7 +29,6 @@
 /obj/item/robot_model/janitor
 	borg_skins = list(
 		"Mopgearrex" = list(SKIN_ICON_STATE = "janitor", SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(-4, -1), "west" = list(4, -1))),
-		"Standard" = list(SKIN_ICON_STATE = "standard", SKIN_ICON = CYBORG_ICON_JANI),
 		"Can" = list(SKIN_ICON_STATE = "canjan", SKIN_ICON = CYBORG_ICON_JANI, SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(0, 3), "west" = list(0, 3))),
 		"Spider" = list(SKIN_ICON_STATE = "spidersci", SKIN_ICON = CYBORG_ICON_JANI),
 		"Robot" = list(SKIN_ICON_STATE = "robotbot", SKIN_ICON = CYBORG_ICON_JANI, SKIN_HAT_OFFSET = INFINITY)
@@ -53,7 +50,6 @@
 		"Lavaland" = list(SKIN_ICON_STATE = "miner", SKIN_LIGHT_KEY = "miner"),
 		"Asteroid" = list(SKIN_ICON_STATE = "minerOLD", SKIN_LIGHT_KEY = "miner"),
 		"Spider Miner" = list(SKIN_ICON_STATE = "spidermin", SKIN_ICON = CYBORG_ICON_MINING),
-		"Standard" = list(SKIN_ICON_STATE = "standard", SKIN_ICON = CYBORG_ICON_MINING),
 		"Can" = list(SKIN_ICON_STATE = "canmin", SKIN_ICON = CYBORG_ICON_MINING, SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(0, 3), "west" = list(0, 3)))
 	)
 
