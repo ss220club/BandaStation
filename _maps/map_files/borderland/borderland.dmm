@@ -21363,9 +21363,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"snX" = (
-/turf/open/space/basic,
-/area/altam/main_zones/main)
 "soc" = (
 /obj/item/gun/ballistic/automatic/carwo/marksman/wooden,
 /turf/open/misc/dirt/dark{
@@ -94149,7 +94146,7 @@ fRH
 fRH
 fRH
 fRH
-snX
+fRH
 "}
 (2,1,2) = {"
 fRH
