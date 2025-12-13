@@ -4,8 +4,8 @@
 	name = "alien defender"
 	desc = "Тяжелый на вид чужой с хвостом, похожим на ядро тарана — получить удар таким было бы больно."
 	caste = "defender"
-	maxHealth = 250
-	health = 250
+	maxHealth = 300
+	health = 300
 	icon_state = "aliendefender"
 	melee_damage_lower = 10
 	melee_damage_upper = 15

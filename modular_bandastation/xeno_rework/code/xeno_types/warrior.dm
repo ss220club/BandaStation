@@ -4,8 +4,8 @@
 	name = "alien warrior"
 	desc = "Если среди чужих и есть ходячие танки, то этот — один из них, с тяжёлой бронёй и мощными руками, подтверждающими этот статус."
 	caste = "warrior"
-	maxHealth = 250
-	health = 250
+	maxHealth = 400
+	health = 400
 	icon_state = "alienwarrior"
 	melee_damage_lower = 15
 	melee_damage_upper = 20

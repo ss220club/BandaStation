@@ -4,8 +4,8 @@
 	name = "alien praetorian"
 	desc = "Чужой, выглядящий как нечто среднее между королевой и дроном — и, вероятно, именно так оно и есть."
 	caste = "praetorian"
-	maxHealth = 250
-	health = 250
+	maxHealth = 400
+	health = 400
 	icon_state = "alienpraetorian"
 	melee_damage_lower = 15
 	melee_damage_upper = 20

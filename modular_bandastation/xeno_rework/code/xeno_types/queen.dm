@@ -4,8 +4,8 @@
 	name = "alien queen"
 	desc = "Исполинская тварь с устрашающей аурой. Пора действовать, а не глазеть."
 	caste = "queen"
-	maxHealth = 300
-	health = 300
+	maxHealth = 500
+	health = 500
 	icon_state = "alienqueen"
 	melee_damage_lower = 20
 	melee_damage_upper = 25

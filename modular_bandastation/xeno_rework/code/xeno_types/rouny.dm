@@ -7,8 +7,8 @@
 	name = "alien runner"
 	desc = "Невысокий чужой с гладким красным хитином, явно следующий теореме «красный значит быстрый» и почти всегда передвигающийся на четырёх лапах."
 	caste = "runner"
-	maxHealth = 150
-	health = 150
+	maxHealth = 200
+	health = 200
 	icon_state = "alienrunner"
 	/// Holds the evade ability to be granted to the runner later
 	var/datum/action/cooldown/alien/banda/evade/evade_ability

@@ -4,8 +4,8 @@
 	name = "alien spitter"
 	desc = "Довольно массивный чужой с выраженными кислотными железами, из его рта капает... то ли токсин, то ли кислота."
 	caste = "spitter"
-	maxHealth = 200
-	health = 200
+	maxHealth = 300
+	health = 300
 	icon_state = "alienspitter"
 	melee_damage_lower = 10
 	melee_damage_upper = 15
