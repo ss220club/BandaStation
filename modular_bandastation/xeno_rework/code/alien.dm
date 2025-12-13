@@ -14,5 +14,5 @@
 		ignore_walls = TRUE, \
 		sound_play_chance = 100)
 
-/mob/living/carbon/alien/royal/queen/Destroy()
+/mob/living/carbon/alien/adult/banda/queen/Destroy()
 	return ..() // Компонент автоматически удаляется
