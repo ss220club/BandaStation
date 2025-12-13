@@ -73,7 +73,7 @@
 	name = "Deafening Screech"
 	desc = "Издаёт оглушительный визг, который, вероятно, ненадолго выведет из строя всех слышащих существ вокруг. Перезарядка 5 минут."
 	button_icon_state = "screech"
-	cooldown_time = 5 MINUTES
+	cooldown_time = 3 MINUTES
 
 /datum/action/cooldown/alien/banda/queen_screech/Activate()
 	. = ..()
