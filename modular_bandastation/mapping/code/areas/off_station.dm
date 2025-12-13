@@ -156,6 +156,7 @@
 	name = "Альтам"
 	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
 	icon_state = "main"
+	default_gravity = 1
 	area_has_base_lighting = 1
 	base_lighting_alpha = 255
 	base_lighting_color = "#C8E4FF"
@@ -165,11 +166,13 @@
 	name = "Пещеры"
 	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
 	icon_state = "caves"
+	default_gravity = 1
 
 /area/altam/main_zones/premises
 	name = "Помещение"
 	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
 	icon_state = "premises"
+	default_gravity = 1
 	area_has_base_lighting = 1
 	base_lighting_alpha = 255
 	base_lighting_color = "#FFFFFF"
@@ -180,6 +183,7 @@
 	name = "Посольство"
 	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
 	icon_state = "embassy"
+	default_gravity = 1
 	area_has_base_lighting = 1
 	base_lighting_alpha = 255
 	base_lighting_color = "#FFFFFF"
@@ -190,6 +194,7 @@
 	name = "Военная база Рахта"
 	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
 	icon_state = "rakht"
+	default_gravity = 1
 	area_has_base_lighting = 1
 	base_lighting_alpha = 255
 	base_lighting_color = "#FFFFFF"
@@ -200,6 +205,7 @@
 	name = "Медблок"
 	icon = 'modular_bandastation/mapping/icons/areas/areas_altam.dmi'
 	icon_state = "medbay"
+	default_gravity = 1
 	area_has_base_lighting = 1
 	base_lighting_alpha = 255
 	base_lighting_color = "#FFFFFF"
