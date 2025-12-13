@@ -2,7 +2,6 @@
 	title = JOB_SHAFT_MINER
 	description = "Отправляйтесь в неведомые земли. Копайте руду. \
 		Встречайте странных существ. Убейте их всех ради наживы."
-	department_head = list(JOB_QUARTERMASTER)
 	faction = FACTION_STATION
 	total_positions = 3
 	spawn_positions = 3
