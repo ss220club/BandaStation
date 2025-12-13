@@ -1,0 +1,31 @@
+{
+	"version": 1,
+	"map_name": "Borderland",
+	"map_path": "map_files/bandastation/borderland",
+	"map_file": "borderland.dmm",
+	"fluff_name": "Приграничье",
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"main_floor": 1,
+	"planetary": 1,
+	"give_players_hooks": 1,
+	"shuttles": {
+		"ferry": "ferry_fancy",
+		"whiteship": "whiteship_delta"
+	},
+	"traits": [
+		{
+			"Up": true,
+			"Linkage": null,
+			"Weather_Snowstorm": true,
+			"Gravity": true
+		},
+		{
+			"Down": true,
+			"Linkage": null,
+			"Baseturf": "/turf/open/misc/asteroid/snow/atmosphere",
+			"Weather_Snowstorm": true,
+			"Gravity": true
+		}
+	]
+}
