@@ -276,7 +276,7 @@ SUBSYSTEM_DEF(central)
 	body["player_ckey"] = ckey
 	body["admin_ckey"] = admin_ckey
 	body["reason"] = reason
-	body["server_type"] = "BandaStation" // should be called from config actually
+	body["server_type"] = CONFIG_GET(string/servername)
 	body["duration_hours"] = duration_hours
 	body["bantype"] = bantype
 	body["job"] = job_string
