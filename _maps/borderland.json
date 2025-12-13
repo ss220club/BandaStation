@@ -1,7 +1,7 @@
 {
 	"version": 1,
 	"map_name": "Borderland",
-	"map_path": "map_files/bandastation/borderland",
+	"map_path": "map_files/borderland",
 	"map_file": "borderland.dmm",
 	"fluff_name": "Приграничье",
 	"space_ruin_levels": 0,
