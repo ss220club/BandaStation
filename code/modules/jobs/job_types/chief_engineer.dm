@@ -3,8 +3,7 @@
 	description = "Руководите инженерным отделом, следите, чтобы никакое оборудование не было украдено, \
 		чтобы кристалл Суперматерии не взорвался, а также обслуживайте телекоммуникации."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
-	department_head = list(JOB_CAPTAIN)
-	head_announce = list("Engineering")
+	head_announce = RADIO_CHANNEL_ENGINEERING
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1

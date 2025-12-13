@@ -698,6 +698,7 @@
 	signup_atom_appearance = /obj/effect/bluespace_stream
 	/// Chance of getting another clone for the price of free
 	var/bonus_clone_chance = 20
+	var/datum/weakref/original // BANDASTATION ADDITION
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/New(list/dynamic_config)
 	. = ..()
@@ -712,7 +713,32 @@
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/create_ruleset_body()
 	return // handled by assign_role() entirely
 
+
+// BANDASTATION ADD - START
+#define RANDOM_CLONE "Рандом"
+
+/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/configure_ruleset(mob/admin)
+	var/list/admin_pool = list("[RULESET_CONFIG_CANCEL]" = TRUE, "[RANDOM_CLONE]" = TRUE)
+	for(var/mob/living/carbon/human/player in GLOB.player_list)
+		if(!player.client || !player.mind || !(player.mind.assigned_role.job_flags & JOB_CREW_MEMBER))
+			continue
+		admin_pool += player
+
+	var/picked = tgui_input_list(admin, "Выберите игрока для клонирования", "Выбор игрока для клонирования", admin_pool)
+	switch(picked)
+		if(RANDOM_CLONE)
+			return
+		if(RULESET_CONFIG_CANCEL, null)
+			return RULESET_CONFIG_CANCEL
+		else
+			message_admins("[key_name_admin(admin)] picked [picked] to be cloned as Paradox Clone.")
+			original = WEAKREF(picked)
+
+#undef RANDOM_CLONE
+// BANDASTATION ADD - END
+
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/assign_role(datum/mind/candidate, mob/living/carbon/human/good_version)
+	good_version = original?.resolve() || find_clone() // BANDASTATION ADDITION
 	var/mob/living/carbon/human/bad_version = good_version.make_full_human_copy(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 	candidate.transfer_to(bad_version, force_key_move = TRUE)
 

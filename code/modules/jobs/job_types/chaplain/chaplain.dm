@@ -2,7 +2,6 @@
 	title = JOB_CHAPLAIN
 	description = "Проводите похороны и службы в церкви, кремируйте людей, распространяйте свою \
 		веру, защищайте людей от культистов."
-	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
