@@ -4,11 +4,11 @@
 	name = "alien queen"
 	desc = "Исполинская тварь с устрашающей аурой. Пора действовать, а не глазеть."
 	caste = "queen"
-	maxHealth = 500
-	health = 500
+	maxHealth = 300
+	health = 300
 	icon_state = "alienqueen"
-	melee_damage_lower = 30
-	melee_damage_upper = 35
+	melee_damage_lower = 20
+	melee_damage_upper = 25
 
 	default_organ_types_by_slot = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/alien,

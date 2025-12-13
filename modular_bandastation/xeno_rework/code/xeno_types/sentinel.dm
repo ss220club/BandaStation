@@ -7,8 +7,8 @@
 	maxHealth = 200
 	health = 200
 	icon_state = "aliensentinel"
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	melee_damage_lower = 15
+	melee_damage_upper = 20
 	next_evolution = /mob/living/carbon/alien/adult/banda/spitter
 
 	default_organ_types_by_slot = list(

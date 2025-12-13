@@ -4,11 +4,11 @@
 	name = "alien praetorian"
 	desc = "Чужой, выглядящий как нечто среднее между королевой и дроном — и, вероятно, именно так оно и есть."
 	caste = "praetorian"
-	maxHealth = 400
-	health = 400
+	maxHealth = 250
+	health = 250
 	icon_state = "alienpraetorian"
-	melee_damage_lower = 25
-	melee_damage_upper = 30
+	melee_damage_lower = 15
+	melee_damage_upper = 20
 	next_evolution = /mob/living/carbon/alien/adult/banda/queen
 
 	default_organ_types_by_slot = list(

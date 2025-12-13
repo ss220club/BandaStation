@@ -4,11 +4,11 @@
 	name = "alien spitter"
 	desc = "Довольно массивный чужой с выраженными кислотными железами, из его рта капает... то ли токсин, то ли кислота."
 	caste = "spitter"
-	maxHealth = 300
-	health = 300
+	maxHealth = 200
+	health = 200
 	icon_state = "alienspitter"
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 
 	default_organ_types_by_slot = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/alien,

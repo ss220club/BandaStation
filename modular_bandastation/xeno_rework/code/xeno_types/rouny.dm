@@ -12,8 +12,8 @@
 	icon_state = "alienrunner"
 	/// Holds the evade ability to be granted to the runner later
 	var/datum/action/cooldown/alien/banda/evade/evade_ability
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 	next_evolution = NONE // /mob/living/carbon/alien/adult/banda/ravager // todo: rebalance ravager
 	on_fire_pixel_y = 0
 

@@ -4,11 +4,11 @@
 	name = "alien defender"
 	desc = "Тяжелый на вид чужой с хвостом, похожим на ядро тарана — получить удар таким было бы больно."
 	caste = "defender"
-	maxHealth = 300
-	health = 300
+	maxHealth = 250
+	health = 250
 	icon_state = "aliendefender"
-	melee_damage_lower = 25
-	melee_damage_upper = 30
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 	next_evolution = /mob/living/carbon/alien/adult/banda/warrior
 
 	default_organ_types_by_slot = list(

@@ -4,11 +4,11 @@
 	name = "alien warrior"
 	desc = "Если среди чужих и есть ходячие танки, то этот — один из них, с тяжёлой бронёй и мощными руками, подтверждающими этот статус."
 	caste = "warrior"
-	maxHealth = 400
-	health = 400
+	maxHealth = 250
+	health = 250
 	icon_state = "alienwarrior"
-	melee_damage_lower = 30
-	melee_damage_upper = 35
+	melee_damage_lower = 15
+	melee_damage_upper = 20
 
 	default_organ_types_by_slot = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/alien,
