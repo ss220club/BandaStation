@@ -69,26 +69,6 @@
 
 	return ..()
 
-/datum/action/cooldown/alien/banda/queen_screech
-	name = "Deafening Screech"
-	desc = "Издаёт оглушительный визг, который, вероятно, ненадолго выведет из строя всех слышащих существ вокруг. Перезарядка 5 минут."
-	button_icon_state = "screech"
-	cooldown_time = 3 MINUTES
-
-/datum/action/cooldown/alien/banda/queen_screech/Activate()
-	. = ..()
-	var/mob/living/carbon/alien/adult/banda/queenie = owner
-	playsound(queenie, 'modular_bandastation/xeno_rework/sound/alien_queen_screech.ogg', 70, FALSE, 8, 0.9)
-	queenie.create_shriekwave()
-	shake_camera(owner, 2, 2)
-
-	for(var/mob/living/carbon/human/screech_target in get_hearers_in_view(7, get_turf(queenie)))
-		screech_target.soundbang_act(intensity = 5, stun_pwr = 50, damage_pwr = 10, deafen_pwr = 30) //Only being deaf will save you from the screech
-		shake_camera(screech_target, 4, 3)
-		to_chat(screech_target, span_red("[queenie] lets out a deafening screech!"))
-
-	return TRUE
-
 /mob/living/carbon/alien/adult/banda/proc/create_shriekwave()
 	remove_overlay(HALO_LAYER)
 	overlays_standing[HALO_LAYER] = image("icon" = 'modular_bandastation/xeno_rework/icons/big_xenos.dmi', "icon_state" = "shriek_waves") //Ehh, suit layer's not being used.

@@ -31,3 +31,28 @@
 
 /mob/living/carbon/alien/adult/banda/spitter/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/janna)
+
+// MARK: SPITTER UNIQUE ABILITIES
+
+/datum/action/cooldown/alien/acid/banda/spread/spitter
+	name = "Spit Neurotoxin Spread"
+	desc = "Выплёвывает нейротоксин, истощая противника."
+	plasma_cost = 1
+	cooldown_time = 1.5 SECONDS
+
+/datum/action/cooldown/alien/acid/banda/spread/lethal/spitter
+	name = "Spit Acid Spread"
+	desc = "Выплёвывает облако кислоты в цель, обжигая её."
+	plasma_cost = 1
+	cooldown_time = 1.5 SECONDS
+
+/obj/item/organ/alien/neurotoxin/spitter
+	name = "large neurotoxin gland"
+	icon_state = "neurotox"
+	zone = BODY_ZONE_PRECISE_MOUTH
+	slot = ORGAN_SLOT_XENO_NEUROTOXINGLAND
+	actions_types = list(
+		/datum/action/cooldown/alien/acid/banda/spread/spitter,
+		/datum/action/cooldown/alien/acid/banda/spread/lethal/spitter,
+		/datum/action/cooldown/alien/acid/corrosion,
+	)

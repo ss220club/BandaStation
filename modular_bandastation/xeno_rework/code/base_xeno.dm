@@ -37,7 +37,7 @@
 
 	pixel_x = -16
 
-	ADD_TRAIT(src, TRAIT_XENO_HEAL_AURA, TRAIT_XENO_INNATE)
+	ADD_TRAIT(src, TRAIT_XENO_HEAL_AURA, TRAIT_XENO_INNATE, TRAIT_SLEEPIMMUNE)
 	real_name = "alien [caste]"
 
 /// Called when a larva or xeno evolves, adds a configurable timer on evolving again to the xeno
@@ -69,71 +69,6 @@
 	var/mob/living/carbon/alien/adult/banda/owner_alien = owner
 	if(!istype(owner_alien) || owner_alien.unable_to_use_abilities)
 		return FALSE
-
-/datum/action/cooldown/alien/banda/sleepytime //I don't think this has a mechanical advantage but they have cool resting sprites so...
-	name = "Rest"
-	desc = "Иногда даже кровожадным чужим нужно немного полежать."
-	button_icon_state = "sleepytime"
-
-/datum/action/cooldown/alien/banda/sleepytime/Activate()
-	var/mob/living/carbon/sleepytime_mob = owner
-	if(!isalien(owner))
-		return FALSE
-	if(!sleepytime_mob.resting)
-		sleepytime_mob.set_resting(new_resting = TRUE, silent = FALSE, instant = TRUE)
-		return TRUE
-	sleepytime_mob.set_resting(new_resting = FALSE, silent = FALSE, instant = FALSE)
-	return TRUE
-
-/datum/action/cooldown/alien/banda/generic_evolve
-	name = "Evolve"
-	desc = "Позволяет нам эволюционировать в высшую касту нашего типа, если такая ещё не существует."
-	button_icon_state = "evolution"
-	/// What type this ability will turn the owner into upon completion
-	var/type_to_evolve_into
-
-/datum/action/cooldown/alien/banda/generic_evolve/Grant(mob/grant_to)
-	. = ..()
-	if(!isalien(owner))
-		return
-	var/mob/living/carbon/alien/target_alien = owner
-	plasma_cost = target_alien.get_max_plasma() //This ability should always require that a xeno be at their max plasma capacity to use
-
-/datum/action/cooldown/alien/banda/generic_evolve/Activate()
-	var/mob/living/carbon/alien/adult/banda/evolver = owner
-
-	if(!istype(evolver))
-		to_chat(owner, span_warning("You aren't an alien, you can't evolve!"))
-		return FALSE
-
-	type_to_evolve_into = evolver.next_evolution
-	if(!type_to_evolve_into)
-		to_chat(evolver, span_bolddanger("Something is wrong... We can't evolve into anything?"))
-		CRASH("Couldn't find an evolution for [owner] ([owner.type]).")
-
-	if(!isturf(evolver.loc))
-		return FALSE
-
-	if(get_alien_type(type_to_evolve_into))
-		evolver.balloon_alert(evolver, "Слишком много наших эволюционировавших форм уже существует.")
-		return FALSE
-
-	var/obj/item/organ/alien/hivenode/node = evolver.get_organ_by_type(/obj/item/organ/alien/hivenode)
-	if(!node)
-		to_chat(evolver, span_bolddanger("Мы не ощущаем связь нашего узла с ульем... Мы не можем эволюционировать!"))
-		return FALSE
-
-	if(node.recent_queen_death)
-		to_chat(evolver, span_bolddanger("Смерть нашей королевы... Мы не можем собрать достаточно ментальной энергии, чтобы эволюционировать..."))
-		return FALSE
-
-	if(evolver.has_evolved_recently)
-		evolver.balloon_alert(evolver, "сможет эволюционировать через 1.5 минуты") //Make that 1.5 variable later, but it keeps fucking up for me :(
-		return FALSE
-
-	var/new_beno = new type_to_evolve_into(evolver.loc)
-	evolver.alien_evolve(new_beno)
-	return TRUE
 
 /datum/movespeed_modifier/alien_quick
 	multiplicative_slowdown = -0.5
