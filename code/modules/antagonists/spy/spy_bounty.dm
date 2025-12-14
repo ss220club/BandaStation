@@ -735,10 +735,10 @@
 	bot_type = /mob/living/simple_animal/bot/secbot/pingsky
 	help = "Похитьте офицера Пингски - обычно защищает ИИ станции."
 
-/datum/spy_bounty/some_bot/scrubbs
+/datum/spy_bounty/some_bot/scrubs
 	difficulty = SPY_DIFFICULTY_EASY
 	bot_type = /mob/living/basic/bot/cleanbot/medbay
 	help = "Похитьте доктора Scrubbs - обычно убирает кровь в медотсеке."
 
-/datum/spy_bounty/some_bot/scrubbs/can_claim(mob/user)
+/datum/spy_bounty/some_bot/scrubs/can_claim(mob/user)
 	return !(user.mind?.assigned_role.departments_bitflags & DEPARTMENT_BITFLAG_MEDICAL)
