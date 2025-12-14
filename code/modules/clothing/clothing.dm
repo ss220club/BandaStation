@@ -489,7 +489,7 @@
 	var/fresh_mood = AddComponent( \
 		/datum/component/onwear_mood, \
 		saved_event_type = /datum/mood_event/fresh_laundry, \
-		examine_string = {"[capitalize(declent_ru(NOMINATIVE))] [genderize_ru(gender, "выглядит свежим и нетронутым", "выглядит свежей и нетронутой", "выглядит свежим и нетронутым", "выглядит свежими и нетронутыми")]."} \
+		examine_string = {"[capitalize(declent_ru(NOMINATIVE))] выглядит [genderize_ru(gender, "свежим и нетронутым", "свежей и нетронутой", "свежим и нетронутым", "свежими и нетронутыми")]."} \
 	)
 
 	QDEL_IN(fresh_mood, 2 MINUTES)
