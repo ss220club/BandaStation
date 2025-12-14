@@ -295,16 +295,13 @@
 /datum/action/cooldown/spell/aoe/repulse/xeno/banda_tailsweep/slicing
 	name = "Slicing Tail Sweep"
 	desc = "Отбросьте нападающих взмахом хвоста, разрезая их его заострённым кончиком."
-
 	aoe_radius = 2
-
 	button_icon_state = "slice_tail"
-
 	sparkle_path = /obj/effect/temp_visual/dir_setting/tailsweep/ravager
 
 	sound = 'modular_bandastation/xeno_rework/sound/alien_tail_swipe.ogg' //The defender's tail sound isn't changed because its big and heavy, this isn't
-
 	impact_sound = 'modular_bandastation/xeno_rework/sound/bloodyslice.ogg'
+
 	impact_damage = 40
 	impact_sharpness = SHARP_EDGED
 
@@ -427,30 +424,73 @@
 		return FALSE
 
 /datum/action/cooldown/spell/aoe/repulse/xeno/banda_tailsweep/cast_on_thing_in_aoe(atom/movable/victim, atom/caster)
-	if(!isliving(victim))
+	if(!isliving(victim) && !istype(victim, /obj/vehicle/sealed))
 		return
 
 	if(isalien(victim))
 		return
 
-	var/turf/throwtarget = get_edge_target_turf(caster, get_dir(caster, get_step_away(victim, caster)))
-	var/dist_from_caster = get_dist(victim, caster)
-	var/mob/living/victim_living = victim
+	var/turf/throwtarget = get_edge_target_turf(
+		caster,
+		get_dir(caster, get_step_away(victim, caster))
+	)
 
-	if(dist_from_caster <= 0)
-		victim_living.Knockdown(knockdown_time)
+	if(!throwtarget)
+		return
+
+	var/dist_from_caster = get_dist(victim, caster)
+
+	if(isliving(victim))
+		var/mob/living/victim_living = victim
+
+		if(dist_from_caster <= 0)
+			victim_living.Knockdown(knockdown_time)
+		else
+			victim_living.Knockdown(knockdown_time * 2)
+
 		if(sparkle_path)
 			new sparkle_path(get_turf(victim_living), get_dir(caster, victim_living))
 
-	else
-		victim_living.Knockdown(knockdown_time * 2) //They are on the same turf as us, or... somewhere else, I'm not sure how but they are getting smacked down
+		victim_living.apply_damage(
+			impact_damage,
+			impact_damage_type,
+			BODY_ZONE_CHEST,
+			wound_bonus = impact_wound_bonus,
+			sharpness = impact_sharpness
+		)
 
-	victim_living.apply_damage(impact_damage, impact_damage_type, BODY_ZONE_CHEST, wound_bonus = impact_wound_bonus, sharpness = impact_sharpness)
-	shake_camera(victim_living, 4, 3)
-	playsound(victim_living, impact_sound, 70, TRUE, 8, 0.9)
-	to_chat(victim_living, span_userdanger("Хвост [caster] обрушивается на вас, отбрасывая назад!"))
+		shake_camera(victim_living, 4, 3)
+		playsound(victim_living, impact_sound, 70, TRUE, 8, 0.9)
 
-	victim_living.safe_throw_at(throwtarget, ((clamp((max_throw - (clamp(dist_from_caster - 2, 0, dist_from_caster))), 3, max_throw))), 1, caster, force = repulse_force)
+		to_chat(
+			victim_living,
+			span_userdanger("Хвост [caster] обрушивается на вас, отбрасывая назад!")
+		)
+
+	else if(istype(victim, /obj/vehicle/sealed))
+		var/obj/vehicle/sealed/vehicle = victim
+
+		if(sparkle_path)
+			new sparkle_path(get_turf(vehicle), get_dir(caster, vehicle))
+
+		playsound(vehicle, impact_sound, 70, TRUE, 8, 0.9)
+
+	victim.throw_at(
+		throwtarget,
+		clamp(
+			max_throw - clamp(dist_from_caster - 2, 0, dist_from_caster),
+			3,
+			max_throw
+		),
+		1,
+		caster,
+		FALSE,
+		FALSE,
+		null,
+		repulse_force,
+		FALSE,
+		TRUE
+	)
 
 /obj/effect/temp_visual/dir_setting/tailsweep/defender
 	icon = 'modular_bandastation/xeno_rework/icons/xeno_actions.dmi'
