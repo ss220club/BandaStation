@@ -11,6 +11,7 @@
 	maptext_height = 64
 	maptext_width = 64
 	pressure_resistance = 200
+
 	/// What icon file update_held_items will look for when making inhands for xenos
 	var/alt_inhands_file = 'modular_bandastation/xeno_rework/icons/big_xenos.dmi'
 	/// Setting this will give a xeno generic_evolve set to evolve them into this type
@@ -37,7 +38,8 @@
 
 	pixel_x = -16
 
-	ADD_TRAIT(src, TRAIT_XENO_HEAL_AURA, TRAIT_XENO_INNATE, TRAIT_SLEEPIMMUNE)
+	ADD_TRAIT(src, TRAIT_XENO_HEAL_AURA, TRAIT_XENO_INNATE)
+	ADD_TRAIT(src, TRAIT_SLEEPIMMUNE, TRAIT_XENO_INNATE)
 	real_name = "alien [caste]"
 
 /// Called when a larva or xeno evolves, adds a configurable timer on evolving again to the xeno
