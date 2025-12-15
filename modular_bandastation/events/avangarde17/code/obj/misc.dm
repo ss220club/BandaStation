@@ -189,3 +189,18 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink/shell_only, (-16))
 		new /obj/effect/spawner/random/trash/garbage(src)
 		if(prob(12))
 			new /obj/item/storage/bag/trash/filled(src)
+
+// Bus
+/obj/structure/bus
+	name = "ЗИЛ - 220"
+	desc = "Удобное и дешовое средство для перемещения между поселениями."
+	icon = 'modular_bandastation/events/avangarde17/icons/bus.dmi'
+	icon_state = "bus"
+	max_integrity = 1000
+	anchored = TRUE
+	density = TRUE
+	bound_width = 192
+	bound_height = 96
+
+/obj/structure/bus/wrench_act(mob/living/user, obj/item/tool)
+	return TRUE

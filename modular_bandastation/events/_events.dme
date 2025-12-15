@@ -2,6 +2,7 @@
 
 #include "avangarde17/code/obj/area.dm"
 #include "avangarde17/code/obj/bobik.dm"
+#include "avangarde17/code/obj/closet.dm"
 #include "avangarde17/code/obj/cursed_arch.dm"
 #include "avangarde17/code/obj/misc.dm"
 #include "avangarde17/code/obj/portrait.dm"
