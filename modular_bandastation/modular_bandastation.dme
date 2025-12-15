@@ -82,6 +82,7 @@
 #include "world_topics/_world_topics.dme"
 #include "movespeed_limit/_movespeed_limit.dme"
 #include "tesla_rework/_teslarework.dme"
+#include "job_restrictions/_job_restrictions.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //

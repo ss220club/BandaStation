@@ -139,7 +139,7 @@ PROTECT_ROLES_FROM_ANTAGONIST
 ## "NON_HUMAN_WHITELIST": non-humans will not be able to play as heads of staff, unless that job incorporates the "allow non-humans" flag (Which can be configured via a variable or the job config txt).
 ## "ENFORCED": non-humans cannot be heads of staff, only humans can. the "allow non-humans" setting will be ignored.
 ## Uncomment to enable a human authority mode of your choice.
-#HUMAN_AUTHORITY HUMAN_WHITELIST
+HUMAN_AUTHORITY HUMAN_WHITELIST
 
 ## If late-joining players have a chance to become a traitor/changeling
 ALLOW_LATEJOIN_ANTAGONISTS
