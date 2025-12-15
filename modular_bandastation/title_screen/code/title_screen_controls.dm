@@ -87,3 +87,6 @@ ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB
 				to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
 				SStitle.title_output(src, FALSE, "toggleReady")
 				return
+
+/datum/client_interface/proc/validate_job_restrictions()
+	return TRUE
