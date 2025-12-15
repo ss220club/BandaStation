@@ -202,6 +202,7 @@
 	if(isnull(flashed.mind) || !GET_CLIENT(flashed))
 		to_chat(source, span_warning("[flashed]'s mind is so vacant that it is not susceptible to influence!"))
 		return
+	rev_team.check_size()  /// BANDASTATION EDIT - Revolution Overhaul
 
 	var/holiday_meme_chance = check_holidays(APRIL_FOOLS) && prob(10)
 	if(add_revolutionary(flashed.mind, mute = !holiday_meme_chance)) // don't mute if we roll the meme holiday chance
@@ -370,6 +371,8 @@
 
 	/// List of all ex-revs. Useful because dynamic removes antag status when it ends, so this can be kept for the roundend report.
 	var/list/datum/mind/ex_revs = list()
+
+	var/rev_ascendent = FALSE  /// BANDASTATION EDIT - Revolution Overhaul
 
 /// Saves all current headrevs and revs
 /datum/team/revolution/proc/save_members()

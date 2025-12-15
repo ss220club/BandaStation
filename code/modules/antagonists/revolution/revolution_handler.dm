@@ -67,6 +67,13 @@ GLOBAL_DATUM(revolution_handler, /datum/revolution_handler)
 	new_target.update_explanation_text()
 	revs.objectives += new_target
 
+/// BANDASTATION EDIT START - Revolution Overhaul
+	for(var/datum/mind/rev_mind as anything in revs.members)
+		var/mob/living/rev_mob = rev_mind.current
+		if(rev_mob && rev_mob.stat != DEAD)
+			to_chat(rev_mob, span_userdanger("НОВАЯ ЦЕЛЬ: [spawned.real_name] ([job.title]) прибыл на станцию!"))
+/// BANDASTATION EDIT END - Revolution Overhaul
+
 /datum/revolution_handler/proc/declare_revs_win()
 	for(var/datum/mind/headrev_mind as anything in revs.ex_headrevs)
 		var/mob/living/real_headrev = headrev_mind.current
@@ -78,6 +85,15 @@ GLOBAL_DATUM(revolution_handler, /datum/revolution_handler)
 			/datum/personality/nt/disillusioned = /datum/mood_event/disillusioned_revs_win,
 		), range = 5)
 
+/// BANDASTATION EDIT START - Revolution Overhaul
+	priority_announce(
+			text = "Похоже, восстание одержало победу. Пожалуйста, немедленно прекратите работу и окажите помощь пострадавшим лидерам революции и своим товарищам. \
+				Лидерам революции разрешается вызвать эвакуационный шаттл для возвращения на оперативную базу.",
+			color_override = "red",
+			sender_override = "Оповещение от Синдиката: Viva la Revolution",
+			has_important_message = TRUE,
+	)
+/// BANDASTATION EDIT END - Revolution Overhaul
 	result = REVOLUTION_VICTORY
 
 /datum/revolution_handler/proc/declare_heads_win()
