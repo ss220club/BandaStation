@@ -123,7 +123,7 @@
 	var/new_credits = spend(split_amount, TRUE)
 	var/obj/item/holochip/chip = new(user ? user : drop_location(), new_credits)
 	if(user)
-		if(!user.put_in_hands(chip))[MONEY_NAME]
+		if(!user.put_in_hands(chip)[MONEY_NAME])
 			chip.forceMove(user.drop_location())
 		add_fingerprint(user)
 	to_chat(user, span_notice("Вы разделили [split_amount] [MONEY_NAME]. в новый голочип."))
