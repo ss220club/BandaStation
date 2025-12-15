@@ -339,7 +339,7 @@
 		if(atom_storage.quickdraw)
 			how_cool_are_your_threads += "Вы можете достать предмет из [declent_ru(GENITIVE)] используя ПКМ.\n"
 		if(atom_storage.silent)
-			how_cool_are_your_threads += "Вы можете положить или достать предмет из [declent_ru(GENITIVE)] не издавая шума.\n"
+			how_cool_are_your_threads += "Вы можете положить или достать предмет из [declent_ru(GENITIVE)], не издавая шума.\n"
 		how_cool_are_your_threads += "</span>"
 		. += how_cool_are_your_threads.Join()
 
@@ -489,7 +489,7 @@
 	var/fresh_mood = AddComponent( \
 		/datum/component/onwear_mood, \
 		saved_event_type = /datum/mood_event/fresh_laundry, \
-		examine_string = {"[capitalize(declent_ru(NOMINATIVE))] выглядит [genderize_ru(gender, "свежим и нетронутым", "свежей и нетронутой", "свежим и нетронутым", "свежими и нетронутыми")]."} \
+		examine_string = "[capitalize(declent_ru(NOMINATIVE))] выглядит [genderize_ru(gender, "свежим и нетронутым", "свежей и нетронутой", "свежим и нетронутым", "свежими и нетронутыми")].", \
 	)
 
 	QDEL_IN(fresh_mood, 2 MINUTES)
