@@ -407,7 +407,10 @@ const ChatMessage = (props: ChatMessageProps) => {
   return (
     <Box className={`NtosChatMessage${outgoing ? '_outgoing' : ''}`}>
       <Box className="NtosChatMessage__content">
-        <Box as="span" dangerouslySetInnerHTML={messageHTML} />
+        {/* <Box as="span" dangerouslySetInnerHTML={messageHTML} /> BANDASTATION EDIT: as text */}
+        <Box as="span" style={{ whiteSpace: 'pre-wrap' }}>
+          {message}
+        </Box>
         <Tooltip content={timestamp} position={outgoing ? 'left' : 'right'}>
           <Icon
             className="NtosChatMessage__timestamp"

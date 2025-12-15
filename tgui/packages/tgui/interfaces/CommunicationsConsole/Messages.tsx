@@ -73,6 +73,7 @@ export function PageMessages(props) {
           </Button.Confirm>
         }
       >
+        {/** biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized> */}
         <Box dangerouslySetInnerHTML={textHtml} />
 
         {answers}

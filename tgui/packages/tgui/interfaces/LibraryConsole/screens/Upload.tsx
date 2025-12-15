@@ -107,6 +107,7 @@ export function Upload(props) {
                 fontSize="15px"
                 title="Content:"
               >
+                {/** biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized> */}
                 <Box dangerouslySetInnerHTML={contentHtml} />
               </Section>
             </Stack.Item>

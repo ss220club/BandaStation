@@ -17,14 +17,12 @@ export const Terminal = (props) => {
     <Window theme={data.tguitheme} title="Terminal" width={480} height={520}>
       <Window.Content scrollable>
         <NoticeBox textAlign="left">{uppertext}</NoticeBox>
-        {messages.map((message) => {
-          return (
-            <Box
-              key={message.key}
-              dangerouslySetInnerHTML={{ __html: message }}
-            />
-          );
-        })}
+        {messages.map((message) => (
+          <Box key={message.key} style={{ whiteSpace: 'pre-wrap' }}>
+            {/* BANDASTATION EDIT: as text*/}
+            {message.key}
+          </Box>
+        ))}
       </Window.Content>
     </Window>
   );

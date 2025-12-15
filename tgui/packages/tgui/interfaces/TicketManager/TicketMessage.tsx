@@ -65,6 +65,7 @@ function splitMessage(message: string) {
 
   return {
     textElements: textParts.length > 0 && (
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized>
       <Box as="span" dangerouslySetInnerHTML={{ __html: textParts.join('') }} />
     ),
     blockElement: blockElement,
