@@ -543,7 +543,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.icon_render_keys = list()
 		character.update_body(is_creating = TRUE)
 
-	src.parent.mob.client.validate_job_restrictions() // BANDASTATION ADDITION: Job restrictions
+	src.parent.validate_job_restrictions() // BANDASTATION ADDITION: Job restrictions
 	SEND_SIGNAL(character, COMSIG_HUMAN_PREFS_APPLIED)
 
 /// Returns whether the parent mob should have the random hardcore settings enabled. Assumes it has a mind.
