@@ -337,7 +337,7 @@
 		else
 			how_cool_are_your_threads += "[capitalize(declent_ru(NOMINATIVE))] [genderize_ru(gender, "может", "может", "может", "могут")] хранить [atom_storage.max_slots] предмета размером [weight_class_to_text(atom_storage.max_specific_storage)] или меньше.\n"
 		if(atom_storage.quickdraw)
-			how_cool_are_your_threads += "Вы можете достать предмет из [declent_ru(GENITIVE)] используя ПКМ.\n"
+			how_cool_are_your_threads += "Вы можете достать предмет из [declent_ru(GENITIVE)], используя ПКМ.\n"
 		if(atom_storage.silent)
 			how_cool_are_your_threads += "Вы можете положить или достать предмет из [declent_ru(GENITIVE)], не издавая шума.\n"
 		how_cool_are_your_threads += "</span>"
