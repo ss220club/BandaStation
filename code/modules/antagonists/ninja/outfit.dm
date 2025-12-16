@@ -5,7 +5,7 @@
 	mask = /obj/item/clothing/mask/gas/ninja
 	ears = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/jackboots
-	l_pocket = /obj/item/grenade/c4/ninja
+	//l_pocket = /obj/item/grenade/c4/ninja // BANDASTATION REMOVAL - Ninja rework Remove C4
 	r_pocket = /obj/item/tank/internals/emergency_oxygen
 	internals_slot = ITEM_SLOT_RPOCKET
 	belt = /obj/item/energy_katana

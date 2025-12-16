@@ -1,3 +1,5 @@
 #include "_antagonists.dm"
 
 #include "code/ert.dm"
+#include "code/space_ninja/space_ninja.dm"
+#include "code/space_ninja/modules_ninja.dm"

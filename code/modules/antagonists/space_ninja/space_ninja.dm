@@ -67,6 +67,7 @@
  *
  * Proc that adds all the ninja's objectives to the antag datum.  Called when the datum is gained.
  */
+/* BANDASTATION EDIT START - NINJA REWORK OBJECTIVES
 /datum/antagonist/ninja/proc/addObjectives()
 	//Cyborg Hijack: Flag set to complete in the DrainAct in ninjaDrainAct.dm
 	var/datum/objective/hijack = new /datum/objective/cyborg_hijack()
@@ -106,6 +107,7 @@
 	var/datum/objective/survival = new /datum/objective/survive()
 	survival.owner = owner
 	objectives += survival
+ BANDASTATION EDIT END - NINJA REWORK OBJECTIVES */
 
 /datum/antagonist/ninja/greet()
 	. = ..()
@@ -116,10 +118,10 @@
 	owner.announce_objectives()
 
 /datum/antagonist/ninja/on_gain()
+	equip_space_ninja(owner.current) // Bandastation EDIT - Change line position
 	if(give_objectives)
 		addObjectives()
 	addMemories()
-	equip_space_ninja(owner.current)
 	owner.current.add_quirk(/datum/quirk/freerunning, announce = FALSE)
 	owner.current.add_quirk(/datum/quirk/light_step, announce = FALSE)
 	owner.current.mind.set_assigned_role(SSjob.get_job_type(/datum/job/space_ninja))
