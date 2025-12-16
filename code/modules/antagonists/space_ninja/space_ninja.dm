@@ -107,7 +107,7 @@
 	var/datum/objective/survival = new /datum/objective/survive()
 	survival.owner = owner
 	objectives += survival
- BANDASTATION EDIT END - NINJA REWORK OBJECTIVES */
+BANDASTATION EDIT END - NINJA REWORK OBJECTIVES */
 
 /datum/antagonist/ninja/greet()
 	. = ..()
