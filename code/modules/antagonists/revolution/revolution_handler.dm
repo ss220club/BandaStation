@@ -69,9 +69,10 @@ GLOBAL_DATUM(revolution_handler, /datum/revolution_handler)
 
 /// BANDASTATION EDIT START - Revolution Overhaul
 	for(var/datum/mind/rev_mind as anything in revs.members)
-		var/mob/living/rev_mob = rev_mind.current
-		if(rev_mob && rev_mob.stat != DEAD)
-			to_chat(rev_mob, span_userdanger("НОВАЯ ЦЕЛЬ: [spawned.real_name] ([job.title]) прибыл на станцию!"))
+		var/datum/antagonist/rev/rev_datum = rev_mind.has_antag_datum(/datum/antagonist/rev)
+		if(rev_datum)
+			rev_datum.objectives |= new_target
+		rev_mind.announce_objectives()
 /// BANDASTATION EDIT END - Revolution Overhaul
 
 /datum/revolution_handler/proc/declare_revs_win()
