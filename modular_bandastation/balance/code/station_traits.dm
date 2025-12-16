@@ -8,9 +8,6 @@
 
 	weight = 0
 
-/datum/station_trait/job/human_ai
-	weight = 0
-
 /datum/station_trait/pet_day
 	weight = 0
 
