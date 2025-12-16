@@ -25,7 +25,6 @@ export const NtosPhysScanner = (props) => {
           </Box>
           <Box
             style={{ whiteSpace: 'pre-line' }}
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized>
             dangerouslySetInnerHTML={textHtml}
           />
         </Section>

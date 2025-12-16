@@ -632,7 +632,6 @@ const NewscasterChannelMessages = (props) => {
                 </Section>
               ) : (
                 <Section pl={1}>
-                  {/** biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized> */}
                   <Box dangerouslySetInnerHTML={processedText(message.body)} />
                 </Section>
               )}
@@ -648,7 +647,6 @@ const NewscasterChannelMessages = (props) => {
                       </Box>
                       <Section ml={2.5}>
                         <Box
-                          // biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized>
                           dangerouslySetInnerHTML={processedText(comment.body)}
                         />
                       </Section>

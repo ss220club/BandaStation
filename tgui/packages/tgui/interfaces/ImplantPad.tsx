@@ -45,7 +45,6 @@ export const ImplantPad = (props) => {
             {!!has_case && !!has_implant && (
               <Box
                 style={{ whiteSpace: 'pre-line' }}
-                // biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized>
                 dangerouslySetInnerHTML={textHtml}
               />
             )}

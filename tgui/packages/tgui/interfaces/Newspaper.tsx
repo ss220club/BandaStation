@@ -125,7 +125,6 @@ const NewspaperChannel = (props) => {
                 <>
                   <Box key={message.message}>
                     <Box
-                      // biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized>
                       dangerouslySetInnerHTML={processedText(message.message)}
                     />
                     {!!message.photo && <Image src={message.photo} />}

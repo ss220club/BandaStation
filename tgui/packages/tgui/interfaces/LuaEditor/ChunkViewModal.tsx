@@ -35,7 +35,6 @@ export const ChunkViewModal = (props: ChunkViewModalProps) => {
       >
         <Box
           as="pre"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: <sanitized>
           dangerouslySetInnerHTML={{
             __html: hljs.highlight(sanitizeText(viewedChunk), {
               language: 'lua',
