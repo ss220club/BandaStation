@@ -4,6 +4,22 @@
 
 GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 
+// BANDASTATION ADDITION: Job restrictions
+/datum/latejoin_menu/proc/is_job_allowed_for_species_with_string(job_title, mob/dead/new_player/owner)
+	var/species = owner.client?.prefs?.read_preference(/datum/preference/choiced/species)
+	if(!species)
+		return TRUE
+
+	if(species == /datum/species/human)
+		return TRUE
+
+	if(!job_title)
+		return TRUE
+
+	var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
+	return !(job_title in job_restrictions)
+// BANDASTATION ADDITION END
+
 /// Makes a list of jobs and pushes them to a DM list selector. Just in case someone did a special kind of fucky-wucky with TGUI.
 /datum/latejoin_menu/proc/fallback_ui(mob/dead/new_player/user)
 	var/list/jobs = list()
@@ -166,6 +182,12 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 				if((living_player_count() >= relevant_cap) || (owner != SSticker.queued_players[1]))
 					tgui_alert(owner, "The server is full!", "Oh No!")
 					return TRUE
+
+			// BANDASTATION ADDITION: Job restriction
+			if(!is_job_allowed_for_species_with_string(params["job"], owner))
+				to_chat(usr,span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
+				return TRUE
+			// BANDASTATION ADDITION END
 
 			// SAFETY: AttemptLateSpawn has it's own sanity checks. This is perfectly safe.
 			owner.AttemptLateSpawn(params["job"])
