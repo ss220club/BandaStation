@@ -30,7 +30,7 @@
 	if(ratio >= rev_ascended_threshold && !rev_ascendent)
 		for(var/datum/mind/mind as anything in members)
 			if(mind.current)
-				SEND_SOUND(mind.current, sound('sound/music/antag/revolutionary_tide.ogg'))
+				SEND_SOUND(mind.current, sound('sound/music/antag/traitor/final_objective.ogg'))
 				to_chat(mind.current, span_userdanger(span_warning("Ваше революционное движение набирает силу. Сотрудникам службы безопасности и командованию станции известно о вашей активности. \
 				Пора начинать действовать!")))
 		rev_ascendent = TRUE
