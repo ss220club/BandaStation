@@ -86,6 +86,10 @@
 #define SURGERY_SPEED_MORBID_CURIOSITY 0.7
 ///Modifier given to patients with TRAIT_ANALGESIA
 #define SURGERY_SPEED_TRAIT_ANALGESIA 0.8
+// BANDASTATION EDIT START - Боль повышает шанс на провал операции
+///Modifier given to patients without painkillers
+#define SURGERY_SPEED_TRAIT_PAIN 2.4
+// BANDASTATION EDIT END
 
 /datum/surgery_step/proc/initiate(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	// Only followers of Asclepius have the ability to use Healing Touch and perform miracle feats of surgery.
@@ -93,7 +97,7 @@
 
 	var/interaction_key = HAS_TRAIT(user, TRAIT_HIPPOCRATIC_OATH) ? target : DOAFTER_SOURCE_SURGERY
 	if(DOING_INTERACTION(user, interaction_key))
-		user.balloon_alert(user, "already doing surgery!")
+		user.balloon_alert(user, "уже проводите операцию!")
 		return FALSE
 
 	if(!chem_check(target))
@@ -122,18 +126,25 @@
 	if(check_morbid_curiosity(user, tool, surgery))
 		speed_mod *= SURGERY_SPEED_MORBID_CURIOSITY
 
-	if(HAS_TRAIT(target, TRAIT_ANALGESIA))
+	// BANDASTATION EDIT START - Боль повышает шанс на провал операции
+	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS))
 		speed_mod *= SURGERY_SPEED_TRAIT_ANALGESIA
+	else
+		speed_mod *= SURGERY_SPEED_TRAIT_PAIN
+	// BANDASTATION EDIT END
 
 	var/implement_speed_mod = 1
 	if(implement_type) //this means it isn't a require hand or any item step.
 		implement_speed_mod = implements[implement_type] / 100.0
 
-	speed_mod /= (get_location_modifier(target) * (1 + surgery.speed_modifier) * implement_speed_mod) * target.mob_surgery_speed_mod
+	//multiply speed_mod by sterilizer modifier
+	speed_mod *= surgery.speed_modifier
+
+	speed_mod /= (get_location_modifier(target) * implement_speed_mod) * target.mob_surgery_speed_mod
 	var/modded_time = time * speed_mod
 
 
-	fail_prob = get_failure_probability(user, target, target_zone, tool, modded_time) //BANDASTATION EDIT - было: if modded_time > time * modifier, then fail_prob = modded_time - time*modifier. starts at 0, caps at 99 // BANDASTATION EDIT
+	fail_prob = max(0, modded_time - (time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)) //if modded_time > time * modifier, then fail_prob = modded_time - time*modifier
 
 	var/list/user_modifiers = list(0, 1)
 	SEND_SIGNAL(user, COMSIG_LIVING_INITIATE_SURGERY_STEP, user, target, target_zone, tool, surgery, src, user_modifiers)
@@ -263,7 +274,7 @@
 	var/screwedmessage = ""
 	switch(fail_prob)
 		if(0 to 24)
-			screwedmessage = " А ведь у вас почти получилось."
+			screwedmessage = " А ведь почти получилось."
 		if(50 to 74)//25 to 49 = no extra text
 			screwedmessage = " В таких условиях трудно сделать все правильно...."
 		if(75 to 99)
@@ -351,10 +362,10 @@
 	var/drunken_ignorance_probability = clamp(drunken_patient, 0, 90)
 
 	if(target.stat < UNCONSCIOUS)
-		if(HAS_TRAIT(target, TRAIT_ANALGESIA) || drunken_patient && prob(drunken_ignorance_probability))
+		if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT - Боль повышает шанс на провал операции
 			if(!pain_message)
 				return
-			to_chat(target, span_notice("Вы чувствуете онемение, пока ваше тело оперируют."))
+			to_chat(target, span_notice("Вы чувствуете слабое покалывание, пока ваше тело оперируют."))
 		else
 			if(!pain_message)
 				return
