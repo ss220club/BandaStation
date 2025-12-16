@@ -358,6 +358,9 @@
 		return
 	var/obj/item/thing = get_active_held_item()
 	var/obj/item/equipped_item = get_item_by_slot(slot_type)
+	var/thing_reject = NONE
+	if(thing)
+		thing_reject = SEND_SIGNAL(thing, COMSIG_HUMAN_NON_STORAGE_HOTKEY, src, equipped_item)
 	if(!equipped_item) // We also let you equip an item like this
 		if(!thing)
 			to_chat(src, span_warning("У вас нет [slot_item_name], чтобы брать что-то оттуда!"))
@@ -370,6 +373,8 @@
 		if(!thing)
 			equipped_item.attack_hand(src)
 		else
+			if(thing_reject & COMPONENT_STORAGE_HOTKEY_HANDLED)
+				return
 			to_chat(src, span_warning("Вы не можете поместить [thing.declent_ru(ACCUSATIVE)] в [equipped_item.ru_p_own(ACCUSATIVE)] [equipped_item.declent_ru(ACCUSATIVE)]!"))
 		return
 	if(!storage.supports_smart_equip)
