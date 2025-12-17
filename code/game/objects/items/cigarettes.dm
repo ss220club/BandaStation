@@ -96,8 +96,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return
 // BANDASTATION ADDITION START
 	var/turf/my_turf = get_turf(src)
-	if(my_turf)
-		my_turf.pollute_turf(/datum/pollutant/sulphur, 5)
+	my_turf.pollute_turf(/datum/pollutant/sulphur, 5)
 // BANDASTATION ADDITION END
 	playsound(src, 'sound/items/match_strike.ogg', 15, TRUE)
 	lit = TRUE
@@ -588,8 +587,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		extinguish()
 		return
 
-	if(location) // BANDASTATION ADDITION
-		location.pollute_turf(pollution_type, 5, POLLUTION_PASSIVE_EMITTER_CAP) // BANDASTATION ADDITION
+	location.pollute_turf(pollution_type, 5, POLLUTION_PASSIVE_EMITTER_CAP) // BANDASTATION ADDITION
 
 	smoketime -= seconds_per_tick * (1 SECONDS)
 	if(smoketime <= 0)
@@ -1215,8 +1213,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 // BANDASTATION ADDITION START
 	//open flame removed because vapes are a closed system, they won't light anything on fire
 	var/turf/my_turf = get_turf(src)
-	if(my_turf)
-		my_turf.pollute_turf(/datum/pollutant/smoke/vape, 5, POLLUTION_PASSIVE_EMITTER_CAP)
+	my_turf.pollute_turf(/datum/pollutant/smoke/vape, 5, POLLUTION_PASSIVE_EMITTER_CAP)
 // BANDASTATION ADDITION END
 	if(obj_flags & EMAGGED)
 		var/datum/effect_system/fluid_spread/smoke/chem/smoke_machine/puff = new

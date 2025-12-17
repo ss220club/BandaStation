@@ -216,7 +216,6 @@
 // BANDASTATION ADDITION START
 		if(equilibrium.reaction.pollutant_type && my_atom)
 			var/turf/my_turf = get_turf(my_atom)
-		if(my_turf)
 			my_turf.pollute_turf(equilibrium.reaction.pollutant_type, equilibrium.reaction.pollutant_amount * equilibrium.reacted_vol)
 // BANDASTATION ADDITION END
 	qdel(equilibrium)
@@ -351,8 +350,7 @@
 	//If the reaction pollutes, pollute it here if we have an atom
 	if(selected_reaction.pollutant_type && my_atom)
 		var/turf/my_turf = get_turf(my_atom)
-		if(my_turf)
-			my_turf.pollute_turf(selected_reaction.pollutant_type, selected_reaction.pollutant_amount * multiplier)
+		my_turf.pollute_turf(selected_reaction.pollutant_type, selected_reaction.pollutant_amount * multiplier)
 // BANDASTATION ADDITION END
 
 	//finish the reaction
