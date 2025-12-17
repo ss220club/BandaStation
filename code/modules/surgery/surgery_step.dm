@@ -89,6 +89,7 @@
 // BANDASTATION EDIT START - Боль повышает шанс на провал операции
 ///Modifier given to patients without painkillers
 #define SURGERY_SPEED_TRAIT_PAIN 2.4
+#define SURGERY_LIGHT_AMOUNT_REQUIRED 0.6
 // BANDASTATION EDIT END
 
 /datum/surgery_step/proc/initiate(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
@@ -131,6 +132,12 @@
 		speed_mod *= SURGERY_SPEED_TRAIT_ANALGESIA
 	else
 		speed_mod *= SURGERY_SPEED_TRAIT_PAIN
+	// Свет тоже!
+	if(!user.has_nightvision())
+		var/turf/target_turf = get_turf(target)
+		var/light_amount = target_turf.get_lumcount()
+		if (light_amount < SURGERY_LIGHT_AMOUNT_REQUIRED)
+			speed_mod *= ((1 + SURGERY_LIGHT_AMOUNT_REQUIRED) - light_amount) * 1.2
 	// BANDASTATION EDIT END
 
 	var/implement_speed_mod = 1
@@ -276,7 +283,7 @@
 		if(0 to 24)
 			screwedmessage = " А ведь почти получилось."
 		if(50 to 74)//25 to 49 = no extra text
-			screwedmessage = " В таких условиях трудно сделать все правильно...."
+			screwedmessage = " В таких условиях трудно сделать все правильно..."
 		if(75 to 99)
 			screwedmessage = " В таких условиях это практически невозможно..."
 
