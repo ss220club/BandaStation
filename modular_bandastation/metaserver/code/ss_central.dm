@@ -248,7 +248,10 @@ SUBSYSTEM_DEF(central)
 		duration_hours = duration
 
 	// determine job
-	var/job = is_server_ban ? null : roles_to_ban
+	var/list/job = is_server_ban ? null : roles_to_ban
+	var/job_string = null
+	if(job)
+		job_string = jointext(job, ",")
 
 	var/is_permaban = (duration_hours <= 0)
 
@@ -273,10 +276,10 @@ SUBSYSTEM_DEF(central)
 	body["player_ckey"] = ckey
 	body["admin_ckey"] = admin_ckey
 	body["reason"] = reason
-	body["server_type"] = "BandaStation" // should be called from config actually
+	body["server_type"] = CONFIG_GET(string/servername)
 	body["duration_hours"] = duration_hours
 	body["bantype"] = bantype
-	body["job"] = job
+	body["job"] = job_string
 
 	if(player_ip)
 		body["player_ip"] = player_ip
