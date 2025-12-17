@@ -226,6 +226,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 // BANDASTATION ADDITION START
 		if(stashed_pollution)
 			new_turf.pollution = stashed_pollution
+			stashed_pollution.my_turf = new_turf
 			stashed_pollution.handle_overlay()
 // BANDASTATION ADDITION END
 		new_turf.air.copy_from(stashed_air)

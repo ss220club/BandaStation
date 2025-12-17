@@ -698,6 +698,7 @@
 // BANDASTATION ADDITION START
 	if(scented_type)
 		var/turf/my_turf = get_turf(src)
+	if(my_turf)
 		my_turf.pollute_turf(scented_type, 5)
 // BANDASTATION ADDITION END
 	check_wax_level()

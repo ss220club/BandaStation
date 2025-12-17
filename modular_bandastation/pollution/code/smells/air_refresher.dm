@@ -27,7 +27,8 @@
 		return TRUE
 	uses_remaining--
 	var/turf/aimed_turf = get_turf(attacked)
-	aimed_turf.pollute_turf(/datum/pollutant/fragrance/air_refresher, 200)
+		if(aimed_turf)
+			aimed_turf.pollute_turf(/datum/pollutant/fragrance/air_refresher, 200)
 	user.visible_message(span_notice("[user] распыляет в аэрозоль с помощью [src]."), span_notice("Вы распыляете аэрозоль с помощью [src]."))
 	user.changeNext_move(CLICK_CD_RANGE*2)
 	playsound(aimed_turf, 'sound/effects/spray2.ogg', 50, TRUE, -6)
@@ -58,8 +59,8 @@
 /obj/machinery/pollution_scrubber/process()
 	if(machine_stat)
 		return
-	if(on && isopenturf(get_turf(src)))
+	if(on)
 		var/turf/open/open_turf = get_turf(src)
-		if(open_turf.pollution)
-			open_turf.pollution.scrub_amount(scrub_amount)
-			available_energy(100)
+	if(istype(open_turf) && open_turf.pollution)
+		open_turf.pollution.scrub_amount(scrub_amount)
+		available_energy(100)

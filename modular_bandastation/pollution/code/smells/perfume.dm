@@ -58,7 +58,8 @@
 		return TRUE
 	uses_remaining--
 	var/turf/my_turf = get_turf(user)
-	my_turf.pollute_turf(fragrance_type, 20)
+		if(my_turf)
+			my_turf.pollute_turf(fragrance_type, 20)
 	user.visible_message(span_notice("[user] распыляет аэрозоль на [attacked] с помощью [src]."), span_notice("Вы распыляете аэрозоль [attacked] с помощью [src]."))
 	user.changeNext_move(CLICK_CD_RANGE*2)
 	playsound(my_turf, 'sound/effects/spray2.ogg', 50, TRUE, -6)

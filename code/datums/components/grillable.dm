@@ -142,6 +142,7 @@
 // BANDASTATION ADDITION START
 	if(pollutant_type)
 		var/turf/parent_turf = get_turf(parent)
+	if(parent_turf)
 		parent_turf.pollute_turf(pollutant_type, 10)
 // BANDASTATION ADDITION END
 	current_cook_time += seconds_per_tick * 10 //turn it into ds
