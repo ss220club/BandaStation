@@ -26,7 +26,7 @@
 				kill_objective.find_target()
 				objectives += kill_objective
 			if(3)
-				var/datum/objective/protect/protection_objective = new()
+				var/datum/objective/protect/protection_objective = new /datum/objective/protect()
 				protection_objective.owner = owner
 				protection_objective.find_target()
 				objectives += protection_objective
