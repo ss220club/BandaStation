@@ -5,8 +5,6 @@
 #define SET_PROCESSED_THIS_RUN(pollution) SSpollution.processed_this_run[pollution] = TRUE
 #define REMOVE_POLLUTION_CURRENTRUN(pollution) SSpollution.current_run -= pollution
 
-#define POLLUTION_HEIGHT_DIVISOR 10
-
 #define TICKS_TO_DISSIPATE 20
 
 #define POLLUTION_TASK_PROCESS 1
@@ -24,8 +22,6 @@
 #define POLLUTANT_SMELL_NORMAL 20
 #define POLLUTANT_SMELL_STRONG 40
 
-#define SMELL_COOLDOWN 1 MINUTES
-
 //Bitflags for pollutants
 #define POLLUTANT_APPEARANCE (1<<0) //Pollutant has an appearance
 #define POLLUTANT_SMELL (1<<1) //Pollutant has a smell
@@ -34,8 +30,3 @@
 
 #define POLLUTANT_APPEARANCE_THICKNESS_THRESHOLD 30
 #define THICKNESS_ALPHA_COEFFICIENT 0.0025
-
-//Cap for active emitters that can be running for a very long time
-#define POLLUTION_ACTIVE_EMITTER_CAP 200
-//For things that you dont want to cause too much pollution
-#define POLLUTION_PASSIVE_EMITTER_CAP 70
