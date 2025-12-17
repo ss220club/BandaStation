@@ -8,6 +8,9 @@
 	// Взлом боргов
 	var/datum/objective/hijack = new /datum/objective/cyborg_hijack()
 	objectives += hijack
+	// Взлом консоли СБух
+	var/datum/objective/securityobjective = new /datum/objective/security_scramble()
+	objectives += securityobjective
 
 	for(var/i in objective_count to objective_limit - 1)
 		var/pick_objectives = rand(1,4)
