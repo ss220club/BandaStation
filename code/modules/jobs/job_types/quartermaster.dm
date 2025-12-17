@@ -3,8 +3,7 @@
 	description = "Руководите отделом поставок и шахтерами, принимайте \
 		заказы от экипажа."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
-	department_head = list(JOB_CAPTAIN)
-	head_announce = list(RADIO_CHANNEL_SUPPLY)
+	head_announce = RADIO_CHANNEL_SUPPLY
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1

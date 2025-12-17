@@ -1,8 +1,7 @@
 /datum/job/psychologist
 	title = JOB_PSYCHOLOGIST
 	description = "Следите за рассудком экипажа, а также за своим, и помогайте экипажу \
-		с их бедами с бошкой."
-	department_head = list(JOB_HEAD_OF_PERSONNEL)
+		с их бедами с башкой."
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
