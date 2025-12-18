@@ -327,14 +327,14 @@
 				sleep(REEL_DEACTIVATE_DELAY)
 
 	else if(linelength == 5)
-		visible_message("<b>[src]</b> докладывает, 'Большой выигрыш! Тысяча кредитов!'")
+		visible_message("<b>[src]</b> докладывает, 'Большой выигрыш! Тысяча [MONEY_NAME]!'")
 		give_money(BIG_PRIZE)
 		if(isliving(user) && (user in viewers(src)))
 			var/mob/living/living_user = user
 			living_user.add_mood_event("slots", /datum/mood_event/slots/win/big)
 
 	else if(linelength == 4)
-		visible_message("<b>[src]</b> докладывает, 'Выигрыш! Четыреста кредитов!'")
+		visible_message("<b>[src]</b> докладывает, 'Выигрыш! Четыреста [MONEY_NAME]!'")
 		give_money(SMALL_PRIZE)
 		if(isliving(user) && (user in viewers(src)))
 			var/mob/living/living_user = user
