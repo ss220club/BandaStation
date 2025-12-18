@@ -52,6 +52,7 @@
 		to_chat(quirk_holder, span_boldnotice("Волна экзистенциального ужаса окатывает вас, когда вы осознаете, что пропала ваша драгоценная семейная реликвия. Может быть, боги смилостивятся над вашей проклятой душой?"))
 		return
 	family_heirloom.AddComponent(/datum/component/heirloom, quirk_holder.mind, family_name)
+	quirk_holder.add_mob_memory(/datum/memory/key/quirk_heirloom, protagonist = quirk_holder, heirloom_name = initial(family_heirloom.name))
 
 	return ..()
 

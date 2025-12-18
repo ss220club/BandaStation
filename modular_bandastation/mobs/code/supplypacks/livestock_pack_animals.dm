@@ -120,7 +120,7 @@
 	cost = CARGO_CRATE_VALUE * 6
 	contains = list(/mob/living/basic/frog/rare/toxic)
 	crate_name = "ящик с ядовитыми лягушками"
-	hidden = TRUE
+	order_flags = ORDER_INVISIBLE
 
 /datum/supply_pack/critter/frog/toxic/generate()
 	. = ..()
@@ -136,7 +136,7 @@
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/mob/living/basic/frog/scream)
 	crate_name = "ящик с кричащими лягушками"
-	hidden = TRUE
+	order_flags = ORDER_INVISIBLE
 
 /datum/supply_pack/critter/frog/scream/generate()
 	. = ..()
