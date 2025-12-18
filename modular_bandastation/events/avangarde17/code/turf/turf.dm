@@ -5,4 +5,6 @@
 	initial_gas_mix = COLD_ATMOS
 
 /turf/open/misc/snow/avangarde
-	initial_gas_mix = COLD_ATMOS
+	slowdown = 1
+	planetary_atmos = TRUE
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS

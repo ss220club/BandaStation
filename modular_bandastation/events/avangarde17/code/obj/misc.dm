@@ -77,11 +77,19 @@
 	icon_state = "book1"
 	w_class = WEIGHT_CLASS_SMALL
 	color = "#4b4b4b"
+	var/text = "Вам неизвестен этот язык."
 
 /obj/item/dark_book/attack_self(mob/user)
 	if(!user) return FALSE
-	to_chat(user, span_hypnophrase("Вам неизвестен этот язык."))
+	to_chat(user, span_hypnophrase.text)
 	return TRUE
+
+/obj/item/dark_book/vedi
+	name = "велесова книга"
+	desc = "Старый том в светлом кожаном переплёте, покрытый странными письменами."
+	icon_state = "book7"
+	color = "#c5c81a"
+	text = "Вас переполняет память предков!"
 
 // Бетонные баррикады
 /obj/structure/barricade/concrete_block
@@ -204,3 +212,134 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink/shell_only, (-16))
 
 /obj/structure/bus/wrench_act(mob/living/user, obj/item/tool)
 	return TRUE
+
+// Calendar
+/obj/structure/sign/calendar/ussp
+	name = "календарь"
+	desc = "Я календарь... Я календарь... Я календарь... Я календарь..."
+	icon = 'modular_bandastation/events/avangarde17/icons/obj.dmi'
+	icon_state = "calendar_ussp"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
+
+// House stuff
+/obj/structure/wheels
+	name = "покрышка"
+	desc = "Простой и красивый способ украсить двор."
+	icon = 'modular_bandastation/events/avangarde17/icons/obj.dmi'
+	icon_state = "wheels"
+	anchored = TRUE
+	density = FALSE
+
+/obj/structure/wheels/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/elevation, pixel_shift = 12)
+
+/obj/structure/wheels/style_2
+	name = "клумба"
+	desc = "Покрышечное искусство."
+	icon_state = "wheels_grass_1"
+
+/obj/structure/wheels/style_3
+	name = "клумба"
+	desc = "Покрышечное искусство."
+	icon_state = "wheels_grass_2"
+
+/obj/structure/wheels/style_4
+	name = "клумба"
+	desc = "Покрышечное искусство."
+	icon_state = "wheels_grass_3"
+
+/obj/structure/wheels/style_5
+	name = "клумба"
+	desc = "Покрышечное искусство."
+	icon_state = "wheels_grass_4"
+
+/obj/structure/toys
+	name = "колобок"
+	desc = "Смотрит прямо в душу."
+	icon = 'modular_bandastation/events/avangarde17/icons/obj.dmi'
+	icon_state = "kolobok"
+	anchored = TRUE
+	density = TRUE
+	layer = LOW_ITEM_LAYER
+
+/obj/structure/toys/style_2
+	name = "мишутка"
+	desc = "О холеро..."
+	icon_state = "mishutka"
+
+/obj/structure/toys/style_3
+	name = "белый мишутка"
+	desc = "Чэто Фредди Фазз бэар..."
+	icon_state = "mishutka_2"
+
+/obj/structure/toys/style_4
+	name = "ёжик"
+	desc = "Все еще в тумане."
+	icon_state = "ezhik"
+
+/obj/structure/toys/style_5
+	name = "белый лебедь"
+	desc = "Очередная жертва покрышечного искусства."
+	icon_state = "lebed"
+
+/obj/structure/toys/style_6
+	name = "миша"
+	desc = "Прямо из сказки, но есть нюанс."
+	icon = 'modular_bandastation/events/avangarde17/icons/32x64_statue.dmi'
+	icon_state = "misha"
+
+/obj/structure/toys/style_7
+	name = "Маша"
+	desc = "Прямо из сказки, но есть нюанс."
+	icon = 'modular_bandastation/events/avangarde17/icons/32x64_statue.dmi'
+	icon_state = "masha"
+
+/obj/structure/toys/style_8
+	name = "чебурашка"
+	desc = "Я был когда-то странной, игрушкой очень всратой..."
+	icon_state = "cheburator"
+
+/obj/structure/walk_sign
+	name = "пешеходный знак"
+	desc = "Лучше переходить дорогу тут."
+	icon = 'modular_bandastation/events/avangarde17/icons/32x64_statue.dmi'
+	icon_state = "walk_sign"
+	anchored = TRUE
+	density = TRUE
+	layer = ABOVE_MOB_LAYER
+
+/obj/structure/swings
+	name = "качели"
+	desc = "Очень травмоопасно."
+	icon = 'modular_bandastation/events/avangarde17/icons/64x64_statue.dmi'
+	icon_state = "swings"
+	anchored = TRUE
+	density = TRUE
+	layer = ABOVE_MOB_LAYER
+	bound_width = 64
+	can_buckle = TRUE
+
+/obj/structure/swings/wrench_act(mob/living/user, obj/item/tool)
+	return TRUE
+
+/obj/structure/swings/style_2
+	icon = 'modular_bandastation/events/avangarde17/icons/64x32_statue.dmi'
+	icon_state = "kacheli"
+	layer = LOW_ITEM_LAYER
+
+/obj/structure/swings/style_3
+	icon = 'modular_bandastation/events/avangarde17/icons/64x64_statue.dmi'
+	icon_state = "gorka"
+	layer = ABOVE_MOB_LAYER
+	can_buckle = FALSE
+
+// WISE TREE
+/obj/structure/flora/tree/jungle/wise
+	name = "ведическое древо"
+	desc = "Дедушка, ты что, эллизиец?"
+	icon = 'modular_bandastation/events/avangarde17/icons/128x160.dmi'
+	icon_state = "wise_tree"
+	pixel_x = -48
+	pixel_y = -20
