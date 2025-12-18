@@ -5,8 +5,8 @@ on:
 
 jobs:
   notify:
-    runs-on: ubuntu-latest
-    if: "${{ github.event.action != 'labeled' || github.event.label.name == ':poop: Stale' }}"
+    runs-on: ubuntu-24.04
+    if: ${{ github.event.action != 'labeled' || github.event.label.name == 'Stale' }}
     steps:
       - name: "Check for DISCORD_WEBHOOK"
         id: secrets_set

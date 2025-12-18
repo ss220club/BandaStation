@@ -54,7 +54,7 @@
 	name = "Soundhand Fan Crate"
 	desc = "Содержит фанатские куртки группы Саундхэнд"
 	cost = CARGO_CRATE_VALUE * 30
-	special = TRUE
+	order_flags = ORDER_SPECIAL
 	access_view = ACCESS_SERVICE
 	contains = list(
 		/obj/item/clothing/suit/soundhand_black_jacket,
