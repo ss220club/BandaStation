@@ -13,12 +13,12 @@
 	projectile_type = /obj/projectile/bullet/c35sol/rubber
 
 // .35 Sol ripper, similar to the detective revolver's dumdum rounds, causes slash wounds and is weak to armor
-/obj/item/ammo_casing/c35sol/ripper
-	name = ".35 Sol Short ripper bullet casing"
+/obj/item/ammo_casing/c35sol/hp
+	name = ".35 Sol Short hollow-point bullet casing"
 	desc = "Стандартный экспансивный пистолетный патрон ТСФ калибра .35 Sol Short. Наносит целям режущие раны, но слаб против брони."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sh-casing"
-	projectile_type = /obj/projectile/bullet/c35sol/ripper
+	projectile_type = /obj/projectile/bullet/c35sol/hp
 
 // .35 sol armor piercing are the AP rounds for this weapon
 /obj/item/ammo_casing/c35sol/ap
@@ -87,21 +87,21 @@
 	caliber = CALIBER_SOL40LONG
 	projectile_type = /obj/projectile/bullet/c40sol
 
-// .40 Sol fragmentation rounds, embeds shrapnel in the target almost every time at close to medium range. Teeeechnically less lethals.
+// .40 Sol rubber-fragmentation rounds, embeds shrapnel in the target almost every time at close to medium range. Teeeechnically less lethals.
 /obj/item/ammo_casing/c40sol/fragmentation
 	name = ".40 Sol Long rubber-fragmentation bullet casing"
 	desc = "Стандартный осколочно-травматический винтовочный патрон ТСФ с резиновой пулей калибра .40 Sol Long. Разрывается при ударе, выбрасывая резиновую шрапнель, которая может вывести цель из строя."
 	icon_state = "40sol_disabler"
 	projectile_type = /obj/projectile/bullet/c40sol/fragmentation
 
-// .40 Sol match grade, bounces a lot, and if there's less than 20 bullet armor on wherever these hit, it'll go completely through the target and out the other side
-/obj/item/ammo_casing/c40sol/pierce
-	name = ".40 Sol Long pierce bullet casing"
+// .40 Sol armor-pierce grade, bounces a lot, and if there's less than 20 bullet armor on wherever these hit, it'll go completely through the target and out the other side
+/obj/item/ammo_casing/c40sol/ap
+	name = ".40 Sol Long armor-pierce bullet casing"
 	desc = "Стандартный бронебойный винтовочный патрон ТСФ калибра .40 Sol Long. Стреляет под более высоким давлением и, \
 	следовательно, несколько быстрее. По слухам, с ними можно пробивать несколько препятствий или противников насквозь, \
 	хотя официальная рекомендация - стрелять только в цель, а не в стену рядом с ней."
 	icon_state = "40sol_pierce"
-	projectile_type = /obj/projectile/bullet/c40sol/pierce
+	projectile_type = /obj/projectile/bullet/c40sol/ap
 
 // .40 Sol incendiary
 /obj/item/ammo_casing/c40sol/incendiary

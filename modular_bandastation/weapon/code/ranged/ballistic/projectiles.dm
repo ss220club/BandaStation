@@ -23,17 +23,17 @@
 	sharpness = NONE
 	embed_type = null
 
-/obj/projectile/bullet/c35sol/ripper
-	name = ".35 Sol ripper bullet"
+/obj/projectile/bullet/c35sol/hp
+	name = ".35 Sol hollow-point bullet"
 	damage = 15
 	weak_against_armour = TRUE
 	sharpness = SHARP_EDGED
 	wound_bonus = 20
 	exposed_wound_bonus = 20
-	embed_type = /datum/embedding/bullet/c35sol/ripper
+	embed_type = /datum/embedding/bullet/c35sol/hp
 	embed_falloff_tile = -15
 
-/datum/embedding/bullet/c35sol/ripper
+/datum/embedding/bullet/c35sol/hp
 	embed_chance = 75
 	fall_chance = 3
 	jostle_chance = 4
@@ -189,7 +189,7 @@
 	wound_falloff_tile = -3
 
 /obj/projectile/bullet/c40sol/fragmentation
-	name = ".40 Sol Long fragmentation bullet"
+	name = ".40 Sol Long rubber-fragmentation bullet"
 	damage = 5
 	stamina = 25
 	weak_against_armour = TRUE
@@ -211,8 +211,8 @@
 	jostle_pain_mult = 3
 	rip_time = 0.5 SECONDS
 
-/obj/projectile/bullet/c40sol/pierce
-	name = ".40 Sol pierce bullet"
+/obj/projectile/bullet/c40sol/ap
+	name = ".40 Sol armor-piercing bullet"
 	icon_state = "gaussphase"
 	damage = 30
 	armour_penetration = 60

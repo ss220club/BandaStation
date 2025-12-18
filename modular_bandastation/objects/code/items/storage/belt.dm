@@ -31,7 +31,7 @@
 	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/pierce(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/ap(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_rifle_standart/PopulateContents()
@@ -40,7 +40,7 @@
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/ap(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_engineer/PopulateContents()
@@ -56,7 +56,7 @@
 	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
 	new /obj/item/ammo_box/magazine/m45(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/box(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/box/pierce(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/box/ap(src)
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_infiltrator/PopulateContents()
@@ -65,7 +65,7 @@
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/ap(src)
 
 /obj/item/storage/belt/holster/detective/full/ert/tsf_commander
 	name = "TSF commander's holster"
@@ -99,7 +99,7 @@
 	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/ussp/full_rifle/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/(src)
+	new /obj/item/gun/ballistic/automatic/pistol(src)
 	new /obj/item/ammo_box/magazine/m9mm(src)
 	new /obj/item/ammo_box/speedloader/strilka310(src)
 	new /obj/item/ammo_box/speedloader/strilka310(src)

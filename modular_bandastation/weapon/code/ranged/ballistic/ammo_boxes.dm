@@ -16,11 +16,11 @@
 	icon_state = "35box_disabler"
 	ammo_type = /obj/item/ammo_casing/c35sol/rubber
 
-/obj/item/ammo_box/c35sol/ripper
-	name = "ammo box (.35 Sol Short ripper)"
+/obj/item/ammo_box/c35sol/hp
+	name = "ammo box (.35 Sol Short hollow-point)"
 	desc = parent_type::desc + "<br>Оранжевая полоска указывает на то, что в ней должны храниться экспансивные боеприпасы."
 	icon_state = "35box_shrapnel"
-	ammo_type = /obj/item/ammo_casing/c35sol/ripper
+	ammo_type = /obj/item/ammo_casing/c35sol/hp
 
 /obj/item/ammo_box/c35sol/ap
 	name = "ammo box (.35 Sol Short armor-piercing)"
@@ -46,11 +46,11 @@
 	icon_state = "40box_disabler"
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 
-/obj/item/ammo_box/c40sol/pierce
+/obj/item/ammo_box/c40sol/ap
 	name = "ammo box (.40 Sol Long armor-piercing)"
 	desc = parent_type::desc + "<br>Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "40box_pierce"
-	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	ammo_type = /obj/item/ammo_casing/c40sol/ap
 
 /obj/item/ammo_box/c40sol/incendiary
 	name = "ammo box (.40 Sol Long incendiary)"

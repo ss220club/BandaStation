@@ -72,7 +72,7 @@
 /obj/projectile/bullet/rocket
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
 
-/obj/projectile/bullet/c40sol/pierce
+/obj/projectile/bullet/c40sol/ap
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
 
 /obj/projectile/bullet/incendiary/c40sol

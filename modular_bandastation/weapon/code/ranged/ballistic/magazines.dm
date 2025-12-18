@@ -50,15 +50,15 @@
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c35sol/ap
 
-/obj/item/ammo_box/magazine/c35sol_pistol/ripper
+/obj/item/ammo_box/magazine/c35sol_pistol/hp
 	name = "pistol magazine (.35 Sol Short HP)"
 	MAGAZINE_TYPE_HOLLOWPOINT
-	ammo_type = /obj/item/ammo_casing/c35sol/ripper
+	ammo_type = /obj/item/ammo_casing/c35sol/hp
 
-/obj/item/ammo_box/magazine/c35sol_pistol/stendo/ripper
+/obj/item/ammo_box/magazine/c35sol_pistol/stendo/hp
 	name = "extended pistol magazine (.35 Sol Short HP)"
 	MAGAZINE_TYPE_HOLLOWPOINT
-	ammo_type = /obj/item/ammo_casing/c35sol/ripper
+	ammo_type = /obj/item/ammo_casing/c35sol/hp
 
 /obj/item/ammo_box/magazine/c35sol_pistol/drum
 	name = "drum pistol magazine (.35 Sol Short)"
@@ -82,10 +82,10 @@
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c35sol/ap
 
-/obj/item/ammo_box/magazine/c35sol_pistol/drum/ripper
+/obj/item/ammo_box/magazine/c35sol_pistol/drum/hp
 	name = "drum pistol magazine (.35 Sol Short HP)"
 	MAGAZINE_TYPE_HOLLOWPOINT
-	ammo_type = /obj/item/ammo_casing/c35sol/ripper
+	ammo_type = /obj/item/ammo_casing/c35sol/hp
 
 // MARK: AMK(AKM)
 /obj/item/ammo_box/magazine/c762x39mm
@@ -210,9 +210,9 @@
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
-/obj/item/ammo_box/magazine/c40sol_rifle/pierce
+/obj/item/ammo_box/magazine/c40sol_rifle/ap
 	name = "rifle short magazine (.40 Sol Long AP)"
-	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	ammo_type = /obj/item/ammo_casing/c40sol/ap
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/incendiary
@@ -236,9 +236,9 @@
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
-/obj/item/ammo_box/magazine/c40sol_rifle/standard/pierce
+/obj/item/ammo_box/magazine/c40sol_rifle/standard/ap
 	name = "rifle magazine (.40 Sol Long AP)"
-	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	ammo_type = /obj/item/ammo_casing/c40sol/ap
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/standard/incendiary
@@ -262,9 +262,9 @@
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
-/obj/item/ammo_box/magazine/c40sol_rifle/long/pierce
+/obj/item/ammo_box/magazine/c40sol_rifle/long/ap
 	name = "rifle long magazine (.40 Sol Long AP)"
-	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	ammo_type = /obj/item/ammo_casing/c40sol/ap
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/long/incendiary
@@ -288,9 +288,9 @@
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
-/obj/item/ammo_box/magazine/c40sol_rifle/drum/pierce
+/obj/item/ammo_box/magazine/c40sol_rifle/drum/ap
 	name = "rifle drum magazine (.40 Sol Long AP)"
-	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	ammo_type = /obj/item/ammo_casing/c40sol/ap
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/incendiary
@@ -314,9 +314,9 @@
 	ammo_type = /obj/item/ammo_casing/c40sol/fragmentation
 	ammo_band_color = COLOR_AMMO_RUBBER
 
-/obj/item/ammo_box/magazine/c40sol_rifle/box/pierce
+/obj/item/ammo_box/magazine/c40sol_rifle/box/ap
 	name = "rifle box magazine (.40 Sol Long AP)"
-	ammo_type = /obj/item/ammo_casing/c40sol/pierce
+	ammo_type = /obj/item/ammo_casing/c40sol/ap
 	MAGAZINE_TYPE_ARMORPIERCE
 
 /obj/item/ammo_box/magazine/c40sol_rifle/box/incendiary

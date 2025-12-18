@@ -434,7 +434,7 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	neck = /obj/item/binoculars
 	belt = /obj/item/storage/belt/military/army/ussp/full_infiltrator
-	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
+	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	l_pocket = /obj/item/knife/combat
 
 /datum/id_trim/ussp/infiltrator
