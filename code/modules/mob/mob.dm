@@ -879,7 +879,7 @@
  */
 /mob/verb/reset_ui_positions_for_mob()
 	set name = "Reset UI Positions"
-	set category = "OOC"
+	set category = "Special"
 	SStgui.reset_ui_position(src)
 
 //suppress the .click/dblclick macros so people can't use them to identify the location of items or aimbot
