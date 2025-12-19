@@ -327,7 +327,7 @@
 			'sound/items/tools/welder.ogg',
 			'sound/items/tools/ratchet.ogg',
 			), 80, TRUE, -1)
-		do_sparks(2, FALSE, src)
+		do_sparks(2, FALSE, src) // BANDASTATION ADDITION - Borg Skins
 		sleep(0.7 SECONDS)
 	cyborg.SetLockdown(FALSE)
 	cyborg.ai_lockdown = FALSE

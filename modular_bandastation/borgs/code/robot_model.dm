@@ -10,9 +10,10 @@
 	borg_skins = list(
 		"Landmate" = list(SKIN_ICON_STATE = "engineer"),
 		"Landmate - Treads" = list(SKIN_ICON_STATE = "engi-tread", SKIN_LIGHT_KEY = "engineer", SKIN_ICON = CYBORG_ICON_ENG),
+		"Сhiefmate" = list(SKIN_ICON_STATE = "chiefmate", SKIN_LIGHT_KEY = "engineer", SKIN_ICON = CYBORG_ICON_ENG),
 		"Can" = list(SKIN_ICON_STATE = "caneng", SKIN_ICON = CYBORG_ICON_ENG, SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(0, 3), "west" = list(0, 3))),
 		"Spider" = list(SKIN_ICON_STATE = "spidereng", SKIN_ICON = CYBORG_ICON_ENG),
-		"Robot" = list(SKIN_ICON_STATE = "robotbot", SKIN_ICON = CYBORG_ICON_ENG, SKIN_HAT_OFFSET = INFINITY)
+		"EngBot" = list(SKIN_ICON_STATE = "engbot", SKIN_ICON = CYBORG_ICON_ENG, SKIN_LIGHT_KEY = "service", SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(0, -1), "west" = list(0, -1)))
 	)
 
 ///MEDICAL
@@ -20,8 +21,9 @@
 	borg_skins = list(
 		"Machinified Doctor" = list(SKIN_ICON_STATE = "medical", SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(-1, 3), "west" = list(1, 3))),
 		"Qualified Doctor" = list(SKIN_ICON_STATE = "qualified_doctor", SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(1, 3), "west" = list(-1, 3))),
+		"СhiefDoctor" = list(SKIN_ICON_STATE = "chiefbot", SKIN_ICON = CYBORG_ICON_MED, SKIN_LIGHT_KEY = "medical", SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(-1, 3), "west" = list(1, 3))),
 		"Droid" = list(SKIN_ICON = CYBORG_ICON_MED, SKIN_ICON_STATE = "medical", SKIN_HAT_OFFSET = list("north" = list(0, 4), "south" = list(0, 4), "east" = list(0, 4), "west" = list(0, 4))),
-		"Robot" = list(SKIN_ICON_STATE = "robotbot", SKIN_ICON = CYBORG_ICON_MED, SKIN_HAT_OFFSET = INFINITY)
+		"MedBot" = list(SKIN_ICON_STATE = "medbot", SKIN_ICON = CYBORG_ICON_MED, SKIN_LIGHT_KEY = "service", SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(0, -1), "west" = list(0, -1)))
 	)
 
 ///JANITOR
@@ -30,15 +32,15 @@
 		"Mopgearrex" = list(SKIN_ICON_STATE = "janitor", SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(-4, -1), "west" = list(4, -1))),
 		"Can" = list(SKIN_ICON_STATE = "canjan", SKIN_ICON = CYBORG_ICON_JANI, SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(0, 3), "west" = list(0, 3))),
 		"Spider" = list(SKIN_ICON_STATE = "spidersci", SKIN_ICON = CYBORG_ICON_JANI),
-		"Robot" = list(SKIN_ICON_STATE = "robotbot", SKIN_ICON = CYBORG_ICON_JANI, SKIN_HAT_OFFSET = INFINITY)
+		"JanBot" = list(SKIN_ICON_STATE = "janbot", SKIN_ICON = CYBORG_ICON_JANI, SKIN_LIGHT_KEY = "service", SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(0, -1), "west" = list(0, -1)))
 	)
 
 ///PEACEKEEPER
 /obj/item/robot_model/peacekeeper
 	borg_skins = list(
 		"Peaceborg" = list(SKIN_ICON_STATE = "peace"),
-		"ARACHNE" = list(SKIN_ICON_STATE = "arachne_peacekeeper", SKIN_ICON = CYBORG_ICON_PEACEKEEPER),
-		"Spider" = list(SKIN_ICON_STATE = "whitespider", SKIN_ICON = CYBORG_ICON_PEACEKEEPER)
+		"Spider" = list(SKIN_ICON_STATE = "whitespider", SKIN_ICON = CYBORG_ICON_PEACEKEEPER),
+		"PeaceBot" = list(SKIN_ICON_STATE = "peacebot", SKIN_ICON = CYBORG_ICON_PEACEKEEPER, SKIN_LIGHT_KEY = "service", SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(0, -1), "west" = list(0, -1)))
 	)
 
 ///MINING
