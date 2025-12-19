@@ -153,6 +153,16 @@
 
 	fail_prob = max(0, modded_time - (time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)) //if modded_time > time * modifier, then fail_prob = modded_time - time*modifier
 
+	// BANDASTATION EDIT START - Боль повышает шанс на провал операции, инструмент дает флат шанс на провал
+	if(implement_type) // есть инструмент
+		if(implements[implement_type] < 85) // если имплемент меньше 85 - инструмент гетто
+			fail_prob += 5
+		else if(tool.toolspeed == 1) // стандартные
+			fail_prob += 3
+		else if(tool.toolspeed == 0.25) // абдукторские
+			fail_prob += 1
+	// BANDASTATION EDIT END
+
 	var/list/user_modifiers = list(0, 1)
 	SEND_SIGNAL(user, COMSIG_LIVING_INITIATE_SURGERY_STEP, user, target, target_zone, tool, surgery, src, user_modifiers)
 	fail_prob += user_modifiers[FAIL_PROB_INDEX]
