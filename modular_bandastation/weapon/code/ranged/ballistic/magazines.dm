@@ -787,7 +787,7 @@
 // MARK: CM70 - .45 cal pistol
 /obj/item/ammo_box/magazine/c45
 	name = "pistol magazine (.45)"
-	desc = "Пистолетный магазин калибра .45, вмещающий 10 патронов. Подходит для пистолетов GP-45."
+	desc = "Пистолетный магазин калибра .45, вмещающий 10 патронов. Подходит для пистолетов GP-45 и TP-14."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c45_mag"
 	base_icon_state = "c45_mag"
