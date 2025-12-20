@@ -2797,6 +2797,9 @@
 /obj/item/stack/sheet/mineral/wood/fifty,
 /obj/item/stack/sheet/mineral/wood/fifty,
 /obj/item/stack/sheet/mineral/wood/fifty,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -5262,11 +5265,7 @@
 	},
 /area/altam/main_zones/main)
 "euw" = (
-/obj/structure/flora/rock/icy/style_random{
-	icon_state = "lavarocks2"
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/misc/asteroid/snow/atmosphere{
+/turf/open/floor/wood/freezing{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -6369,10 +6368,7 @@
 /area/altam/main_zones/caves)
 "fmq" = (
 /obj/machinery/power/smes/magical{
-	charge = 1;
-	use_power = 1;
-	static_power_usage = 100;
-	active_power_usage = 1000
+	charge = 5e+007
 	},
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/premises)
@@ -13497,10 +13493,7 @@
 /area/altam/main_zones/main)
 "lwM" = (
 /obj/machinery/power/smes/magical{
-	charge = 1;
-	use_power = 1;
-	static_power_usage = 100;
-	active_power_usage = 1000
+	charge = 5e+007
 	},
 /obj/structure/cable,
 /obj/effect/turf_decal/stripes/line,
@@ -19789,7 +19782,7 @@
 /area/altam/main_zones/main)
 "qSx" = (
 /obj/item/kitchen/tongs,
-/turf/open/misc/dirt/dark{
+/turf/open/floor/wood/freezing{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -21752,10 +21745,7 @@
 /area/altam/main_zones/main)
 "sFE" = (
 /obj/machinery/power/smes/magical{
-	charge = 1;
-	use_power = 1;
-	static_power_usage = 100;
-	active_power_usage = 1000
+	charge = 5e+007
 	},
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/cable,
@@ -22402,6 +22392,17 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"thC" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
+/obj/structure/flora/grass/brown/style_random,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -23173,10 +23174,7 @@
 /area/altam/main_zones/premises)
 "tUO" = (
 /obj/machinery/power/smes/magical{
-	charge = 1;
-	use_power = 1;
-	static_power_usage = 100;
-	active_power_usage = 1000
+	charge = 5e+007
 	},
 /obj/structure/cable,
 /turf/open/floor/circuit/telecomms/server,
@@ -26677,12 +26675,11 @@
 	},
 /area/altam/embassy/main)
 "wVH" = (
-/obj/structure/barricade/sandbags,
 /obj/structure/sign/flag/terragov/directional/south,
 /obj/effect/turf_decal/siding/wideplating_new/dark{
 	dir = 8
 	},
-/turf/open/misc/dirt/dark{
+/turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -28204,9 +28201,8 @@
 	},
 /area/altam/main_zones/main)
 "yfq" = (
-/obj/structure/barricade/sandbags,
 /obj/structure/sign/flag/terragov/directional/south,
-/turf/open/misc/dirt/dark{
+/turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -64702,7 +64698,7 @@ flZ
 wiB
 jYl
 wiB
-wiB
+cKJ
 wiB
 wiB
 wiB
@@ -64713,8 +64709,8 @@ qYR
 wiB
 wiB
 dwZ
-wiB
-wiB
+cKJ
+cKJ
 sFz
 wiB
 wiB
@@ -64959,18 +64955,18 @@ nCK
 dwZ
 wiB
 sFz
-wiB
+cKJ
 wiB
 sFz
 wiB
-wiB
-wiB
-wiB
-jTQ
-wiB
+cKJ
+cKJ
 wiB
 jTQ
 wiB
+wiB
+jTQ
+cKJ
 wiB
 wiB
 wiB
@@ -65221,8 +65217,8 @@ jTQ
 dwZ
 wiB
 wiB
-wiB
-wiB
+cKJ
+cKJ
 wiB
 dwZ
 pJJ
@@ -66508,7 +66504,7 @@ bcP
 bcP
 bcP
 bcP
-iMq
+bcP
 wVH
 ket
 ket
@@ -66765,9 +66761,9 @@ wiB
 wiB
 jTQ
 wiB
-euw
+tCi
+tdD
 wQE
-dPH
 dPH
 dPH
 crw
@@ -67022,10 +67018,10 @@ sFz
 wiB
 wiB
 wiB
-bSc
+sFz
+tdD
 wQE
-wQE
-dPH
+kjE
 dPH
 dPH
 dPH
@@ -67280,9 +67276,9 @@ wiB
 sFz
 wiB
 wiB
-mJi
+tdD
 wQE
-kjE
+dPH
 dPH
 dPH
 dPH
@@ -67529,7 +67525,7 @@ qso
 uVx
 flZ
 dwZ
-wiB
+cKJ
 sFz
 qTX
 wiB
@@ -67786,7 +67782,7 @@ apl
 lcu
 kfF
 wiB
-wiB
+cKJ
 cxG
 wiB
 wiB
@@ -67796,11 +67792,11 @@ sFz
 wiB
 wiB
 ftF
-mJi
+thC
 dPH
-dPH
+euw
 qSx
-dPH
+euw
 dPH
 uRQ
 rVM
@@ -68055,9 +68051,9 @@ wiB
 wiB
 tdD
 dPH
-dPH
+euw
 uyP
-dPH
+euw
 dPH
 dPH
 dPH
@@ -68309,12 +68305,12 @@ sFz
 wiB
 dwZ
 wiB
-wiB
-tdD
+sFz
+dfh
 dPH
-dPH
-dPH
-dPH
+euw
+euw
+euw
 dPH
 eHH
 wWw
@@ -69079,9 +69075,9 @@ wiB
 wiB
 wiB
 tCi
-lUb
+tdD
 wQE
-kjE
+dPH
 dPH
 dPH
 dPH
@@ -69335,10 +69331,10 @@ cxG
 wiB
 jTQ
 dwZ
+wiB
 tdD
 wQE
-wQE
-dPH
+kjE
 dPH
 dPH
 dPH
@@ -69592,14 +69588,14 @@ wiB
 wiB
 wiB
 sFz
+wiB
 tdD
 wQE
 dPH
 dPH
+jDk
+jDk
 mkZ
-jDk
-jDk
-dPH
 lMS
 wQE
 ylz
@@ -69849,7 +69845,7 @@ wiB
 jTQ
 wiB
 wiB
-tdD
+wiB
 yfq
 ket
 ket
@@ -70103,11 +70099,11 @@ jTQ
 qTX
 wiB
 dwZ
-wiB
+cKJ
 wiB
 wiB
 jTQ
-ftF
+wiB
 wiB
 wiB
 wiB
@@ -70360,8 +70356,8 @@ wiB
 wiB
 pJJ
 sFz
-wiB
-wiB
+cKJ
+cKJ
 sFz
 cxG
 dwZ
@@ -71396,7 +71392,7 @@ wiB
 wiB
 wiB
 jTQ
-wiB
+cKJ
 wiB
 wiB
 jTQ
@@ -71653,9 +71649,9 @@ qTX
 wiB
 dwZ
 wiB
-wiB
-wiB
-wiB
+cKJ
+cKJ
+cKJ
 wiB
 dwZ
 wiB
@@ -71912,7 +71908,7 @@ jTQ
 qTX
 cxG
 sFz
-wiB
+cKJ
 wiB
 wiB
 jTQ
