@@ -216,6 +216,9 @@
 /area/altam/main_zones/main)
 "ahm" = (
 /obj/item/flashlight/lantern/on,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 5
+	},
 /turf/open/floor/stone/icemoon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -537,13 +540,13 @@
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
 "axJ" = (
-/obj/effect/mob_spawn/corpse/human/nanotrasenassaultsoldier,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/effect/turf_decal/weather/dirt{
+	dir = 9
 	},
-/area/altam/main_zones/main)
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "ayU" = (
 /obj/structure/chair/sofa/corp{
 	dir = 1
@@ -2380,6 +2383,9 @@
 /area/altam/main_zones/caves)
 "ccZ" = (
 /mob/living/carbon/human/species/vulpkanin,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
 /turf/open/floor/stone/icemoon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -2540,6 +2546,16 @@
 "cip" = (
 /obj/item/pickaxe/improvised,
 /turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"ciL" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/floor/wood/freezing{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -3397,6 +3413,16 @@
 /obj/structure/barricade/security,
 /turf/open/misc/dirt/jungle/wasteland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
+/area/altam/main_zones/main)
+"cRn" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/turf/open/floor/wood/freezing{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "cRG" = (
@@ -5265,6 +5291,12 @@
 	},
 /area/altam/main_zones/main)
 "euw" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/chair/plastic{
+	dir = 8
+	},
 /turf/open/floor/wood/freezing{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -5298,6 +5330,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"evG" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "evH" = (
 /obj/structure/railing,
 /turf/open/floor/engine/hull/reinforced{
@@ -5964,6 +6004,18 @@
 /obj/item/storage/toolbox/syndicate,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"eUM" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/structure/flora/rock/pile/icy/style_random,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "eVh" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 8
@@ -6711,6 +6763,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"fDF" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/turf/open/floor/wood/freezing{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "fDN" = (
 /obj/item/banner/species/vulpkanin,
 /obj/effect/turf_decal/siding/wood{
@@ -7298,6 +7360,14 @@
 /obj/item/bedsheet/blue,
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
+"fZN" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "gas" = (
 /obj/structure/closet/firecloset/full,
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -9708,6 +9778,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"ign" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/item/kitchen/tongs,
+/turf/open/floor/wood/freezing{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "igE" = (
 /obj/effect/turf_decal/siding{
 	dir = 4
@@ -11404,6 +11485,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"jIS" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/caves)
 "jIV" = (
 /obj/structure/flora/grass/brown/style_2,
 /obj/effect/turf_decal/weather/dirt{
@@ -11999,6 +12091,12 @@
 /obj/effect/bump_teleporter{
 	id = 4;
 	id_target = 3
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
 	},
 /turf/open/floor/fakepit,
 /area/altam/main_zones/caves)
@@ -14515,6 +14613,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"mkg" = (
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/wood/freezing{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "mkm" = (
 /turf/open/floor/carpet/cyan,
 /area/altam/main_zones/premises)
@@ -14808,6 +14914,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"mwv" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "mwC" = (
 /obj/effect/spawner/random/clothing/mafia_outfit,
 /turf/open/floor/stone/icemoon{
@@ -16870,6 +16987,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"omM" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/turf/open/floor/wood/freezing{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "omU" = (
 /obj/structure/flora/rock/icy/style_random{
 	icon_state = "lavarocks"
@@ -18835,6 +18962,9 @@
 /area/altam/main_zones/caves)
 "pYj" = (
 /obj/effect/spawner/random/structure/closet_empty/crate/with_loot,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -19614,6 +19744,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"qJT" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/caves)
 "qKi" = (
 /obj/effect/turf_decal/siding{
 	dir = 1
@@ -19781,7 +19921,12 @@
 	},
 /area/altam/main_zones/main)
 "qSx" = (
-/obj/item/kitchen/tongs,
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/chair/plastic{
+	dir = 4
+	},
 /turf/open/floor/wood/freezing{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -20281,6 +20426,15 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
+"rmT" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "rnj" = (
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor6"
@@ -24402,6 +24556,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"uYL" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "uYP" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
@@ -25083,6 +25245,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"vBh" = (
+/mob/living/basic/mining/ice_demon,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/caves)
 "vBv" = (
 /obj/structure/sign/poster/sword_of_altam/brotherhood/directional/north,
 /turf/open/floor/wood/tile/amaranth,
@@ -25113,6 +25286,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"vDf" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "vEr" = (
 /obj/machinery/button/door/directional/north{
 	id = "Skynet_launch";
@@ -26708,6 +26892,16 @@
 	},
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"wWe" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/caves)
 "wWw" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
@@ -27032,17 +27226,13 @@
 	},
 /area/altam/main_zones/main)
 "xjw" = (
-/obj/effect/mob_spawn/corpse/human/nanotrasenassaultsoldier,
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 8
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
 	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "xjK" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/warning,
 /turf/open/floor/iron/dark/smooth_large,
@@ -27566,6 +27756,12 @@
 /obj/effect/bump_teleporter{
 	id = 10;
 	id_target = 9
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
 	},
 /turf/open/floor/fakepit,
 /area/altam/main_zones/caves)
@@ -39766,7 +39962,7 @@ mgz
 mgz
 uHg
 fCZ
-gLB
+wWe
 qAR
 bgV
 qAR
@@ -40023,7 +40219,7 @@ mgz
 mgz
 uHg
 waG
-qNT
+vBh
 gLB
 gLB
 gLB
@@ -40539,8 +40735,8 @@ qSz
 waG
 ahm
 mmT
-gLB
-gLB
+qJT
+qJT
 gLB
 uHg
 uHg
@@ -40795,7 +40991,7 @@ uZu
 uZu
 xMk
 mNt
-gLB
+jIS
 oUo
 lpl
 uHg
@@ -41663,11 +41859,11 @@ mgz
 bHu
 pJJ
 wiB
-qYR
-wiB
-dwZ
-qYR
-wiB
+aZA
+ctg
+nrs
+aZA
+ctg
 wiB
 qYR
 mgz
@@ -41919,13 +42115,13 @@ mgz
 qYR
 cxG
 wiB
-qYR
+lbX
 dPA
 wJa
 wJa
 rGN
 ddK
-dwZ
+nul
 pJJ
 bHu
 mgz
@@ -42176,7 +42372,7 @@ bHu
 wiB
 lkp
 oeP
-wiB
+tdD
 qZh
 qdI
 uyP
@@ -42433,13 +42629,13 @@ dwZ
 wiB
 qYR
 wiB
-iPb
+eUM
 qZh
 kbT
 qCb
 kbT
 fMP
-wiB
+ylz
 dwZ
 bHu
 mgz
@@ -42696,7 +42892,7 @@ pdp
 uyP
 kbT
 bXS
-qYR
+tHS
 mgz
 mgz
 mgz
@@ -42953,7 +43149,7 @@ kbT
 kbT
 mwC
 fEA
-qYR
+tHS
 mgz
 mgz
 mgz
@@ -43209,7 +43405,7 @@ oEh
 ekU
 ekU
 xUE
-dwZ
+fYL
 bHu
 mgz
 mgz
@@ -64920,7 +65116,7 @@ wiB
 wiB
 qDl
 uKS
-axJ
+wiB
 wiB
 tdD
 dPH
@@ -65433,7 +65629,7 @@ wiB
 wiB
 wiB
 wiB
-axJ
+wiB
 wiB
 uKS
 lUb
@@ -66463,7 +66659,7 @@ bcP
 mFj
 bcP
 myN
-xjw
+iMq
 tEj
 tEj
 tEj
@@ -67794,9 +67990,9 @@ wiB
 ftF
 thC
 dPH
-euw
+ign
 qSx
-euw
+fDF
 dPH
 uRQ
 rVM
@@ -68051,9 +68247,9 @@ wiB
 wiB
 tdD
 dPH
-euw
+ciL
 uyP
-euw
+mkg
 dPH
 dPH
 dPH
@@ -68308,9 +68504,9 @@ wiB
 sFz
 dfh
 dPH
+omM
 euw
-euw
-euw
+cRn
 dPH
 eHH
 wWw
@@ -88942,7 +89138,7 @@ faA
 faA
 mxd
 oUo
-coC
+rmT
 oUo
 szW
 faA
@@ -89198,8 +89394,8 @@ kyo
 szW
 fIg
 oUo
-coC
-coC
+axJ
+evG
 fIg
 qSz
 mxd
@@ -89451,11 +89647,11 @@ mgz
 faA
 faA
 faA
-coC
-coC
+vDf
+xjw
 oUo
 qSz
-coC
+rmT
 mxd
 faA
 oUo
@@ -89709,14 +89905,14 @@ faA
 mxd
 rHd
 fIg
-coC
+rmT
 oUo
 faA
 faA
 faA
 faA
-coC
-coC
+ovF
+xjw
 kyo
 faA
 mgz
@@ -89966,15 +90162,15 @@ oUo
 oUo
 qSz
 oUo
-coC
+rmT
 mxd
 faA
 mgz
 mgz
 faA
 faA
-coC
-coC
+fZN
+mwv
 faA
 mgz
 mgz
@@ -90217,13 +90413,13 @@ oUo
 xgI
 oUo
 oUo
-coC
+rmT
 oUo
 oUo
 oUo
 oUo
 oUo
-coC
+rmT
 faA
 faA
 mgz
@@ -90473,8 +90669,8 @@ oUo
 oUo
 qSz
 oUo
-coC
-coC
+axJ
+evG
 oUo
 fIg
 szW
@@ -90730,7 +90926,7 @@ oUo
 rPB
 oUo
 rHd
-coC
+rmT
 mxd
 rHd
 qSz
@@ -90746,7 +90942,7 @@ mgz
 faA
 faA
 oUo
-coC
+uYL
 faA
 faA
 faA
@@ -91002,10 +91198,10 @@ mgz
 mgz
 faA
 faA
-coC
-coC
-coC
-coC
+mwv
+fZN
+fZN
+fZN
 faA
 faA
 mRq
@@ -91263,8 +91459,8 @@ oUo
 oUo
 fIg
 oUo
-coC
-coC
+uYL
+evG
 oUo
 uJb
 uJb
@@ -91520,7 +91716,7 @@ qSz
 rHd
 faA
 mxd
-coC
+rmT
 oUo
 fIg
 qSz
@@ -91771,9 +91967,9 @@ mgz
 faA
 faA
 faA
-coC
-coC
-coC
+vDf
+ovF
+ovF
 faA
 faA
 faA
@@ -92029,7 +92225,7 @@ faA
 rHd
 fIg
 oUo
-coC
+rzY
 faA
 faA
 mgz
@@ -92540,9 +92736,9 @@ mgz
 mgz
 mgz
 faA
-coC
-coC
-coC
+ovF
+mwv
+mwv
 faA
 faA
 mgz
@@ -92797,7 +92993,7 @@ mgz
 mgz
 faA
 faA
-coC
+evG
 oUo
 mxd
 faA
@@ -93774,8 +93970,8 @@ mgz
 mgz
 mgz
 cDd
-mAT
-mAT
+uHg
+uHg
 mgz
 mgz
 mgz
