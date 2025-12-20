@@ -36,47 +36,6 @@
 		var/amount = pollutants[type]
 		pollutant.breathe_act(victim, amount)
 
-/// When a user smells this pollution
-/datum/pollution/proc/smell_act(mob/living/sniffer)
-	var/list/singleton_cache = SSpollution.singletons
-	var/datum/pollutant/dominant_pollutant
-	var/dominiant_smell_power
-	for(var/type in pollutants)
-		var/datum/pollutant/pollutant = singleton_cache[type]
-		if(!(pollutant.pollutant_flags & POLLUTANT_SMELL))
-			continue
-		var/smelly_power = pollutant.smell_intensity * pollutants[type]
-		if(smelly_power < POLLUTANT_SMELL_THRESHOLD)
-			continue
-		if(!dominant_pollutant || smelly_power > dominiant_smell_power)
-			dominant_pollutant = pollutant
-			dominiant_smell_power = smelly_power
-	if(!dominant_pollutant)
-		return
-
-	var/smell_string
-	switch(dominiant_smell_power)
-		if(0 to POLLUTANT_SMELL_NORMAL)
-			if(sniffer.mob_biotypes & MOB_ROBOTIC)
-				smell_string = "Ваши датчики обнаруживают незначительные количество [dominant_pollutant.scent] в воздухе."
-			else
-				smell_string = "Едва уловимый  [dominant_pollutant.descriptor] аромат [dominant_pollutant.scent] щекочет ваш нос..."
-		if(POLLUTANT_SMELL_NORMAL to POLLUTANT_SMELL_STRONG)
-			if(sniffer.mob_biotypes & MOB_ROBOTIC)
-				smell_string = "Ваши сенсоры улавливают присутствие [dominant_pollutant.scent] в воздухе."
-			else
-				smell_string = "[dominant_pollutant.descriptor] [dominant_pollutant.scent] наполняет воздух."
-		if(POLLUTANT_SMELL_STRONG to INFINITY)
-			if(sniffer.mob_biotypes & MOB_ROBOTIC)
-				smell_string = "Ваши сенсоры улавливают значительную концентрацию  [dominant_pollutant.scent]."
-			else
-				smell_string = "Смердящий [dominant_pollutant.descriptor] аромат [dominant_pollutant.scent] бомбандирует ваш нос."
-
-	if(dominant_pollutant.descriptor == SCENT_DESC_ODOR)
-		to_chat(sniffer, span_warning(smell_string))
-	else
-		to_chat(sniffer, span_notice(smell_string))
-
 /datum/pollution/proc/scrub_amount(amount_to_scrub, update_active = TRUE, planetary_multiplier = FALSE)
 	if(amount_to_scrub >= total_amount)
 		qdel(src)

@@ -1,8 +1,5 @@
 #include "_pollution.dm"
 
-#include "code/smells/air_refresher.dm"
-#include "code/smells/fancy_candles.dm"
-#include "code/smells/perfume.dm"
 #include "code/generic_pollutants.dm"
 #include "code/generic_turf_pollutions.dm"
 #include "code/pollutant_datum.dm"
@@ -12,4 +9,3 @@
 #include "code/pollution_emitter_element.dm"
 #include "code/pollution_generic_inits.dm"
 #include "code/pollution.dm"
-#include "code/temporary_pollutants.dm"
