@@ -88,8 +88,11 @@
 #define SURGERY_SPEED_TRAIT_ANALGESIA 0.8
 // BANDASTATION EDIT START - Боль повышает шанс на провал операции
 ///Modifier given to patients without painkillers
-#define SURGERY_SPEED_TRAIT_PAIN 2.4
+#define SURGERY_SPEED_PAIN_MULTIPLIER 1.5
+///Light requirement (default tube lamp)
 #define SURGERY_LIGHT_AMOUNT_REQUIRED 0.6
+///Modifier given to patients depending on light level
+#define SURGERY_LIGHT_AMOUNT_MODIFIER 1.2
 // BANDASTATION EDIT END
 
 /datum/surgery_step/proc/initiate(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
@@ -113,6 +116,7 @@
 	surgery.step_in_progress = TRUE
 	var/speed_mod = 1
 	var/fail_prob = 0//100 - fail_prob = success_prob
+	var/fail_prob_modifier = 0 // BANDASTATION EDIT - провалы
 	var/advance = FALSE
 
 	update_surgery_mood(target, SURGERY_STATE_STARTED)
@@ -131,13 +135,23 @@
 	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS))
 		speed_mod *= SURGERY_SPEED_TRAIT_ANALGESIA
 	else
-		speed_mod *= SURGERY_SPEED_TRAIT_PAIN
-	// Свет тоже!
+		speed_mod *= SURGERY_SPEED_PAIN_MULTIPLIER
+		fail_prob_modifier += 40 // больно!
+	// свет тоже!
 	if(!user.has_nightvision())
 		var/turf/target_turf = get_turf(target)
 		var/light_amount = target_turf.get_lumcount()
 		if (light_amount < SURGERY_LIGHT_AMOUNT_REQUIRED)
 			speed_mod *= ((1 + SURGERY_LIGHT_AMOUNT_REQUIRED) - light_amount) * 1.2
+			fail_prob_modifier += max(0, 60 * (1 - (light_amount / SURGERY_LIGHT_AMOUNT_REQUIRED)))
+	// есть инструмент
+	if(implement_type)
+		if(implements[implement_type] < 85) // если имплемент меньше 85 - инструмент гетто
+			fail_prob_modifier += 5
+		else if(tool.toolspeed == 1) // стандартные
+			fail_prob_modifier += 3
+		else if(tool.toolspeed == 0.25) // абдукторские
+			fail_prob_modifier += 1
 	// BANDASTATION EDIT END
 
 	var/implement_speed_mod = 1
@@ -153,15 +167,7 @@
 
 	fail_prob = max(0, modded_time - (time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)) //if modded_time > time * modifier, then fail_prob = modded_time - time*modifier
 
-	// BANDASTATION EDIT START - Боль повышает шанс на провал операции, инструмент дает флат шанс на провал
-	if(implement_type) // есть инструмент
-		if(implements[implement_type] < 85) // если имплемент меньше 85 - инструмент гетто
-			fail_prob += 5
-		else if(tool.toolspeed == 1) // стандартные
-			fail_prob += 3
-		else if(tool.toolspeed == 0.25) // абдукторские
-			fail_prob += 1
-	// BANDASTATION EDIT END
+	fail_prob += fail_prob_modifier // BANDASTATION EDIT
 
 	var/list/user_modifiers = list(0, 1)
 	SEND_SIGNAL(user, COMSIG_LIVING_INITIATE_SURGERY_STEP, user, target, target_zone, tool, surgery, src, user_modifiers)
