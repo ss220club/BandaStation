@@ -49,21 +49,20 @@
 		var/prefs_specie = client.prefs.read_preference(/datum/preference/choiced/species)
 		var/list/prefs_jobs = client.prefs.job_preferences
 		var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
+		var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
 
 		if(!prefs_specie || !islist(prefs_jobs))
 			to_chat(usr, span_boldwarning("Ошибка настроек персонажа. Выберите предпочитаемую должность."))
 			return
 
-		if(prefs_specie != /datum/species/human)
-			for(var/job_id in prefs_jobs)
-				if(job_id in job_restrictions)
-					to_chat(
-						usr,
-						span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий.")
-					)
-					ready = FALSE
-					SStitle.title_output(client, FALSE, "toggleReady")
-					return
+		if(allowed_species && length(allowed_species))
+			if(!("[prefs_specie]" in allowed_species))
+				for(var/job_id in prefs_jobs)
+					if(job_id in job_restrictions)
+						to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
+						ready = FALSE
+						SStitle.title_output(client, FALSE, "toggleReady")
+						return
 
 		ready = !ready
 		SStitle.title_output(client, ready, "toggleReady")

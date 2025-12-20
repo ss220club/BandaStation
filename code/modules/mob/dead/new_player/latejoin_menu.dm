@@ -10,14 +10,18 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 	if(!species)
 		return TRUE
 
-	if(species == /datum/species/human)
-		return TRUE
-
 	if(!job_title)
 		return TRUE
 
 	var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
-	return !(job_title in job_restrictions)
+	if(!(job_title in job_restrictions))
+		return TRUE
+
+	var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
+	if(!allowed_species || !length(allowed_species))
+		return TRUE
+
+	return ("[species]" in allowed_species)
 // BANDASTATION ADDITION END
 
 /// Makes a list of jobs and pushes them to a DM list selector. Just in case someone did a special kind of fucky-wucky with TGUI.
@@ -185,7 +189,7 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 
 			// BANDASTATION ADDITION: Job restriction
 			if(!is_job_allowed_for_species_with_string(params["job"], owner))
-				to_chat(usr,span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
+				to_chat(usr,span_alertwarning("Выбранная раса несовместима с выбранной профессией!"))
 				return TRUE
 			// BANDASTATION ADDITION END
 

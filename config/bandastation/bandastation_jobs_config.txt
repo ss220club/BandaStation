@@ -11,3 +11,6 @@ JOB_RESTRICTIONS Head of Personnel
 JOB_RESTRICTIONS Magistrate
 JOB_RESTRICTIONS Blueshield
 
+ALLOWED_SPECIES /datum/species/human
+ALLOWED_SPECIES /datum/species/skrell
+
