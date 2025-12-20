@@ -696,7 +696,7 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	. = ..()
 
 /obj/item/nullrod/tribal_knife/process()
-	slowdown = rand(-10, 10)/10
+	slowdown = rand(-8, 10)/10
 	if(iscarbon(loc))
 		var/mob/living/carbon/wielder = loc
 		if(wielder.is_holding(src))
@@ -859,7 +859,7 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	if(user == living_target)
 		return
 
-	if(living_target.stat == DEAD)
+	if(living_target.stat == DEAD || QDELETED(living_target))
 		return
 
 	sneak_attack(living_target, user)

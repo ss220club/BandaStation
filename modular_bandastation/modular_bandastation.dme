@@ -54,6 +54,7 @@
 #include "medical/_medical.dme"
 #include "metaserver/_metaserver.dme"
 #include "minesweeper/_minesweeper.dme"
+#include "music/_music.dme"
 #include "mobs/_mobs.dme"
 #include "nanomap/_nanomap.dme"
 #include "navigator/_navigator.dme"

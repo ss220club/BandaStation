@@ -50996,8 +50996,8 @@
 /obj/structure/cable,
 /obj/structure/table/wood,
 /obj/machinery/fax{
-	fax_name = "Captain's Office";
-	name = "Captain's Fax Machine"
+	fax_name = "Blueshield's Office";
+	name = "Blueshield's Fax Machine"
 	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/blueshield)
