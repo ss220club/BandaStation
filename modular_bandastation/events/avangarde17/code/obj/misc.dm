@@ -77,11 +77,11 @@
 	icon_state = "book1"
 	w_class = WEIGHT_CLASS_SMALL
 	color = "#4b4b4b"
-	var/text = "Вам неизвестен этот язык."
+	var/text_in_head = "Вам неизвестен этот язык."
 
 /obj/item/dark_book/attack_self(mob/user)
 	if(!user) return FALSE
-	to_chat(user, span_hypnophrase.text)
+	to_chat(user, span_hypnophrase(text_in_head))
 	return TRUE
 
 /obj/item/dark_book/vedi
@@ -201,7 +201,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink/shell_only, (-16))
 // Bus
 /obj/structure/bus
 	name = "ЗИЛ - 220"
-	desc = "Удобное и дешовое средство для перемещения между поселениями."
+	desc = "На нём вы приехали в ПГТ \"Зорька\"! Водитель отошел за сигаретами, так что на скорый отъезд не расчитывайте."
 	icon = 'modular_bandastation/events/avangarde17/icons/bus.dmi'
 	icon_state = "bus"
 	max_integrity = 1000

@@ -7,5 +7,6 @@
 #include "avangarde17/code/obj/misc.dm"
 #include "avangarde17/code/obj/portrait.dm"
 #include "avangarde17/code/obj/statue.dm"
+#include "avangarde17/code/obj/tools.dm"
 
 #include "avangarde17/code/turf/turf.dm"
