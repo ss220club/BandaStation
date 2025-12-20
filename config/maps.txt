@@ -45,6 +45,11 @@ map cyberiad
 	votable
 endmap
 
+map avangarde
+	maxplayers 50
+	votable
+endmap
+
 map kilostation
 	maxplayers 40
 	votable
