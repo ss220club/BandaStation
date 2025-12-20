@@ -223,7 +223,7 @@
 	shrapnel_type = null
 	embed_type = null
 
-/obj/projectile/bullet/c40sol/pierce/on_hit(atom/target, blocked = 0, pierce_hit)
+/obj/projectile/bullet/c40sol/ap/on_hit(atom/target, blocked = 0, pierce_hit)
 	. = ..()
 	if(isliving(target))
 		if(blocked > 40 || pierces > 2)

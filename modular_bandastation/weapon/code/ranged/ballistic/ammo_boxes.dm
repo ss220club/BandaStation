@@ -244,7 +244,7 @@
 
 /obj/item/ammo_box/c762x54mmr/rubber
 	name = "ammo box (7.62x54mmR rubber)"
-	desc = parent_type::desc + "<br>Синяя полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	desc = parent_type::desc + "<br>Синяя полоска указывает на то, что в ней должны храниться травматические боеприпасы."
 	icon_state = "a762_54box-rubber"
 	ammo_type = /obj/item/ammo_casing/c762x54mmr/rubber
 
@@ -551,7 +551,7 @@
 	icon_state = "86x70mmbox-trac"
 	ammo_type = /obj/item/ammo_casing/c338/ap
 
-/obj/item/ammo_box/c338/rubber
+/obj/item/ammo_box/c338/incendiary
 	name = "ammo box (.338 incendiary)"
 	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
 	icon_state = "86x70mmbox-incendiary"
