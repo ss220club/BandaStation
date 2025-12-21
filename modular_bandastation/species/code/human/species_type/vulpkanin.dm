@@ -1,5 +1,5 @@
 /datum/species/vulpkanin
-	name = "\improper Вульпканин"
+	name = "\improper Розовая вульпочка"
 	plural_form = "Вульпкане"
 	id = SPECIES_VULPKANIN
 	inherent_traits = list(
