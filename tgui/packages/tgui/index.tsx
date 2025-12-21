@@ -10,19 +10,26 @@ import './styles/themes/paper220.scss';
 import './styles/themes/ss220.scss';
 
 import { perf } from 'common/perf';
+import { combineReducers } from 'common/redux';
 import { setupGlobalEvents } from 'tgui-core/events';
 import { setupHotKeys } from 'tgui-core/hotkeys';
 import { captureExternalLinks } from 'tgui-core/links';
 import { setupHotReloading } from 'tgui-dev-server/link/client';
+import { emotesReducer } from 'tgui-panel/emotes'; // BANDASTATION ADD  - Emote Panel
 import { App } from './App';
 import { setGlobalStore } from './backend';
+
 import { render } from './renderer';
 import { configureStore } from './store';
 
 perf.mark('inception', window.performance?.timeOrigin);
 perf.mark('init');
 
-const store = configureStore();
+const store = configureStore({
+  reducer: combineReducers({
+    emotes: emotesReducer, // // BANDASTATION ADD  - Emote Panel
+  }),
+});
 
 function setupApp() {
   // Delay setup
