@@ -12,7 +12,6 @@ import { setupGlobalEvents } from 'tgui-core/events';
 import { captureExternalLinks } from 'tgui-core/links';
 import { setupHotReloading } from 'tgui-dev-server/link/client';
 import { App } from './app';
-//import { emotesReducer } from './emotes'; // BANDASTATION ADD  - Emote Panel
 import { bus } from './events/listeners';
 import { setupPanelFocusHacks } from './panelFocus';
 
@@ -57,28 +56,9 @@ function setupApp() {
   if (import.meta.webpackHot) {
     setupHotReloading();
 
-    <<<<<<< HEAD
-    import.meta.webpackHot.accept(
-      [
-        './audio',
-        './chat',
-        './emotes', // BANDASTATION ADD  - Emote Panel
-        './game',
-        './Notifications',
-        './Panel',
-        './ping',
-        './settings',
-        './telemetry',
-      ],
-      () => {
-        render(<Panel />);
-      },
-    );
-    =======
     import.meta.webpackHot.accept(['./app'], () => {
       render(<App />);
     });
-    >>>>>>> 84c2131725b71a999c82a4c27dd1cbedeb325c15
   }
 }
 
