@@ -40,8 +40,8 @@
 /mob/living/carbon/alien/adult/banda/queen/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/alexstraza)
 
-/mob/living/carbon/alien/adult/banda/queen/alien_talk(message, shown_name = name)
-	..(message, shown_name, TRUE)
+/mob/living/carbon/alien/adult/banda/queen/alien_talk(message, list/spans = list(), list/message_mods = list(), shown_name = name, big_voice = TRUE)
+	..(message, spans, message_mods, shown_name, TRUE)
 
 /obj/item/organ/alien/neurotoxin/queen
 	name = "neurotoxin gland"
