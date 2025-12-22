@@ -108,23 +108,23 @@
 		Due to that, it isn't of much use out in space. Their eyes are very sensitive."
 
 /datum/species/moth/get_species_description()
-	return "Hailing from a planet that was lost long ago, the moths travel \
-		the galaxy as a nomadic people aboard a colossal fleet of ships, seeking a new homeland."
+	return "Происходя с давно утраченной планеты, нианы странствуют \
+		по галактике как кочевой народ, обитая на борту великого кочевого флота в поисках нового дома"
 
 /datum/species/moth/get_species_lore()
 	return list(
-		"Their homeworld lost to the ages, the moths live aboard the Grand Nomad Fleet. \
-		Made up of what could be found, bartered, repaired, or stolen the armada is a colossal patchwork \
-		built on a history of politely flagging travelers down and taking their things. Occasionally a moth \
-		will decide to leave the fleet, usually to strike out for fortunes to send back home.",
+		"Их родной мир был утрачен много веков назад, и с тех пор нианы живут на борту Великого Кочевого Флота. \
+		Собранная из всего, что удалось найти, выменять, отремонтировать или украсть, эта армада представляет собой огромное лоскутное полотно, \
+		созданное на основе долгой истории перехвата путников и присвоения их имущества. Время от времени отдельный ниан \
+		решает покинуть флот, обычно отправляясь на поиски удачи, чтобы затем отправить добытое домой.",
 
-		"Nomadic life produces a tight-knit culture, with moths valuing their friends, family, and vessels highly. \
-		Moths are gregarious by nature and do best in communal spaces. This has served them well on the galactic stage, \
-		maintaining a friendly and personable reputation even in the face of hostile encounters. \
-		It seems that the galaxy has come to accept these former pirates.",
+		"Кочевая жизнь сформировала сплочённую культуру, в которой нианы высоко ценят своих друзей, семью и корабли. \
+		Нианы по своей природе общительны и лучше всего чувствуют себя в коллективе. Это сослужило им хорошую службу на галактической арене, \
+		позволив сохранить дружелюбную и располагающую к себе репутацию даже перед лицом враждебных столкновений. \
+		Похоже, галактика со временем приняла этих хоть и бывших но пиратов.",
 
-		"Surprisingly, living together in a giant fleet hasn't flattened variance in dialect and culture. \
-		These differences are welcomed and encouraged within the fleet for the variety that they bring.",
+		"Удивительно, но совместная жизнь в рамках одного гигантского флота не сгладила различия в диалектах и культуре. \
+		Напротив, эти различия приветствуются и поощряются внутри флота за то разнообразие, которое они приносят.",
 	)
 
 /datum/species/moth/create_pref_unique_perks()
