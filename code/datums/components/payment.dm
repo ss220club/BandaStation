@@ -110,7 +110,7 @@
 
 	if(physical_cash_total > 0)
 		var/obj/item/holochip/holochange = new /obj/item/holochip(user.loc, physical_cash_total) //Change is made in holocredits exclusively.
-		holochange.name = "голочип с [holochange.credits] [MONEY_NAME_SINGULAR]."
+		holochange.name = "голочип с [holochange.credits][MONEY_NAME_SINGULAR]."
 		if(ishuman(user))
 			var/mob/living/carbon/human/paying_customer = user
 			var/successfully_put_in_hands
@@ -120,8 +120,8 @@
 				user.pulling = holochange
 		else
 			user.pulling = holochange
-	log_econ("[total_cost] [MONEY_NAME] were spent on [parent] by [user].")
-	to_chat(user, span_notice("Purchase completed with held [MONEY_NAME]."))
+	log_econ("[total_cost][MONEY_NAME] were spent on [parent] by [user].")
+	to_chat(user, span_notice("Purchase completed with held credits."))
 	playsound(user, 'sound/effects/cashregister.ogg', 20, TRUE)
 	return TRUE
 
@@ -166,7 +166,7 @@
 		return FALSE
 	target_acc.transfer_money(idcard.registered_account, total_cost, "Nanotrasen: Usage of Corporate Machinery")
 	log_econ("[total_cost] [MONEY_NAME] were spent on [parent] by [user] via [idcard.registered_account.account_holder]'s card.")
-	idcard.registered_account.bank_card_talk("[total_cost] [MONEY_NAME] deducted from your account.")
+	idcard.registered_account.bank_card_talk("[total_cost][MONEY_NAME] deducted from your account.")
 	playsound(src, 'sound/effects/cashregister.ogg', 20, TRUE)
 	SSeconomy.add_audit_entry(idcard.registered_account, total_cost, parent)
 	return TRUE
