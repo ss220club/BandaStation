@@ -11,25 +11,25 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Lock revolves around access, area denial, theft and gadgets.",
-		"Pick this path if you want a less confrontational playstyle and more interested in being a slippery rat.",
+		"Путь Хранителя Ключей сосредоточен на проникновении, блокировании доступа, кражах и хитрости.",
+		"Выберайте этот путь, если вы предпочитаете менее конфронтационный стиль игры и больше интересуетесь ролью скользкой крысы.",
 	)
 	pros = list(
-		"Your mansus grasp can open any lock, unlock every terminal and bypass any access restriction.",
-		"lock heretics get a discount from the knowledge shop, making it the perfect path if you want to experiment with the various trinkets the shop has to offer.",
+		"Ваша Хватка Мансуса может открыть любой замок, разблокировать любой терминал и обойти любые ограничения доступа.",
+		"Хранители Ключей получают скидку в магазине знаний, что делает его идеальным выбором, если вы хотите поэкспериментировать с различными безделушками, которые предлагает магазин.",
 	)
 	cons = list(
-		"The weakest heretic path in direct combat, period.",
-		"Very limited direct combat benefits.",
-		"You have no defensive benefits or immunities.",
-		"no mobility or direct additional teleportation",
-		"Highly reliant on sourcing power from other departments, players and the game world.",
+		"Самый слабый путь еретика в прямом бою и точка.",
+		"Очень ограниченные преимущества в откротом бою.",
+		"У вас нет защитных преимуществ или иммунитетов.",
+		"без мобильности или прямой дополнительной телепортации",
+		"В значительной степени зависит от ресурсов других отделов, игроков и игрового мира.",
 	)
 	tips = list(
-		"Your mansus grasp allows you to access everything, from airlocks, consoles and even exosuits, but it has no additional effects on players. It will however leave a mark that when triggered will make your victim unable to leave the room you are in.",
-		"Your blade also functions as a crowbar! You can store it in utility belts And, in a pitch, use it to force open an airlock.",
-		"Your Eldritch ID can create a portal between 2 different airlocks. Useful if you want to enstablish a secret base.",
-		"Use your labyrinth book to shake off pursuers. It creates impassible walls to anyone but you.",
+		"Ваша Хватка Мансуса позволяет вам получить доступ ко всему, от шлюзов и консолей до экзокостюмов, но не оказывает дополнительного воздействия на игроков. Однако он оставляет след, который при срабатывании не дает вашей жертве покинуть комнату, в которой вы находитесь.",
+		"Ваш клинок также функционирует как ломик! Вы можете хранить его в поясе для инструментов и, в случае необходимости, использовать его, чтобы взломать шлюз.",
+		"Ваша Мистическая ID может создать портал между двумя разными шлюзами. Полезно, если вы хотите создать секретную базу.",
+		"Используйте свою книгу лабиринтов, чтобы оторваться от преследователей. Она создает непроходимые стены для всех, кроме вас.",
 	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_lock
@@ -45,12 +45,12 @@
 	ascension = /datum/heretic_knowledge/ultimate/lock_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_lock
-	name = "A Steward's Secret"
+	name = "Секрет Хранителя Ключей"
 	desc = "Открывает перед вами Путь замка. \
 		Позволяет трансмутировать нож и монтировку в Ключ-клинок. \
 		Одновременно можно иметь только два, а также он действует как быстрая монтировка. \
 		К тому же, они помещаются в пояса для инструментов."
-	gain_text = "Запертный лабиринт ведет к свободе. Но только пойманные Управляющие знают верный путь."
+	gain_text = "Запертый лабиринт ведет к свободе. Но только пойманные Хранители Ключей знают верный путь."
 	required_atoms = list(
 		/obj/item/knife = 1,
 		/obj/item/crowbar = 1,
@@ -117,7 +117,7 @@
 	return COMPONENT_USE_HAND
 
 /datum/heretic_knowledge/key_ring
-	name = "Key Keeper’s Burden"
+	name = "Бремя хранителя ключей"
 	desc = "Позволяет трансмутировать кошелек, железный прут и ИД-карта, чтобы создать Мистическую карту. \
 		Ударьте ею по двум шлюзам, чтобы создать спаренный портал, который будет телепортировать вас между ними, а не-еретиков случайно. \
 		С помощью Ctrl-Click по карте, вы можете инвертировать поведение созданных порталов. \
@@ -148,10 +148,10 @@
 	return TRUE
 
 /datum/heretic_knowledge/limited_amount/concierge_rite
-	name = "Concierge's Rite"
+	name = "Обряд Хранителя"
 	desc = "Позволяет трансмутировать мелок, деревянную доску и мультитул, чтобы создать Справочник лабиринта. \
 		Оно может материализовать на расстоянии баррикаду, через которую могут пройти только вы и люди с сопротивлением против магии. Имеет 5 зарядов, которые перезаряжаются со временем."
-	gain_text = "Консьерж записал мое имя в Справочник. \"Добро пожаловать в ваш новый дом, коллега Управляющий.\""
+	gain_text = "Хранитель Ключей записал мое имя в Справочник. \"Добро пожаловать в ваш новый дом, коллега Хранитель Ключей.\""
 	required_atoms = list(
 		/obj/item/toy/crayon = 1,
 		/obj/item/stack/sheet/mineral/wood = 1,
@@ -179,16 +179,16 @@
 	)
 
 /datum/heretic_knowledge/spell/burglar_finesse
-	name = "Burglar's Finesse"
-	desc = "Дарует вам заклинание, Burglar's Finesse, которое \
+	name = "Ловкость воришки"
+	desc = "Дарует вам заклинание, Ловкость воришки, которое \
 		перемещает случайный предмет из сумки жертвы в вашу руку."
-	gain_text = "Общение с духами Взломщиками не одобряется, но Управляющий всегда хочет узнавать о новых дверях."
+	gain_text = "Общение с Духами-Взломщиками не одобряется, но Хранитель Ключей всегда хочет узнавать о новых дверях."
 
 	action_to_add = /datum/action/cooldown/spell/pointed/burglar_finesse
 	cost = 2
 
 /datum/heretic_knowledge/blade_upgrade/flesh/lock
-	name = "Opening Blade"
+	name = "Открывающий клинок"
 	desc = "Ваш клинок теперь может накладывать сильное кровотечение при атаке."
 	gain_text = "Пилигрим-Хирург не был Управляющим. Тем не менее, его клинки и швы оказались достойны их ключей."
 	wound_type = /datum/wound/slash/flesh/critical
@@ -201,7 +201,7 @@
 		return ..()
 
 /datum/heretic_knowledge/spell/caretaker_refuge
-	name = "Caretaker’s Last Refuge"
+	name = "Последнее убежище смотрителя"
 	desc = "Заклинание, позволяющее становиться прозрачным и безтелесным. Невозможно использовать рядом с живыми разумными существами. \
 		Пока вы находитесь в убежище, вы не можете использовать руки и заклинания, и вы имеете иммунитет к замедлению. \
 		Вы неуязвимы, но также не можете ничему вредить. При попадании анти-магией, эффект прерывается."
@@ -211,7 +211,7 @@
 	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/lock_final
-	name = "Unlock the Labyrinth"
+	name = "Открытие Лабиринта"
 	desc = "Ритуал вознесения Пути замка. \
 		Принесите 3 трупа без органов в их торсе к руне трансмутации, чтобы завершить ритуал. \
 		При завершении, вы сможете превращаться в усиленных мистических существ, \
