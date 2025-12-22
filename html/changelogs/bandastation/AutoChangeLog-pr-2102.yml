@@ -1,0 +1,4 @@
+author: "Ingakem"
+delete-after: True
+changes:
+  - rscdel: "Убран нерабочий код баланса Галактик Маркета."
