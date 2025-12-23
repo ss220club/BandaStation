@@ -1,0 +1,4 @@
+author: "NatWak"
+delete-after: True
+changes:
+  - spellcheck: "Теперь большая часть слов связанная с кредитами поменяны на символ \"¢\""

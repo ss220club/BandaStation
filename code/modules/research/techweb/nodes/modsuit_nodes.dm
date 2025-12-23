@@ -37,8 +37,8 @@
 
 /datum/techweb_node/mod_service
 	id = TECHWEB_NODE_MOD_SERVICE
-	display_name = "Civilian Modular Suits"
-	description = "Civilian MODsuits for dignified living."
+	display_name = "Гражданские МОДули"
+	description = "Гражданские модульные костюмы для достойной жизни."
 	prereq_ids = list(TECHWEB_NODE_MOD_SUIT)
 	design_ids = list(
 		"mod_clamp",
