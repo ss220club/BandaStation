@@ -109,7 +109,7 @@
 	starting_reagent_purity = 0.4 // Take a look at their diet
 
 /obj/item/food/meat/slab/human/mutant/lizard/make_grillable()
-	AddComponent(/datum/component/grillable, /obj/item/food/meat/steak/plain/human/lizard, rand(30 SECONDS, 90 SECONDS), TRUE, TRUE) //Add medium rare later maybe?
+	AddComponent(/datum/component/grillable, /obj/item/food/meat/steak/plain/human/lizard, rand(30 SECONDS, 90 SECONDS), TRUE, TRUE)
 
 /obj/item/food/meat/slab/human/mutant/plant
 	icon_state = "plantmeat"

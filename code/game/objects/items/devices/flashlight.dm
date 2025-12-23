@@ -584,9 +584,6 @@
 	/// The previous wax level, remembered so we only have to make 3 update_appearance calls total as opposed to every tick
 	var/last_wax_level = 1
 
-	/// Pollutant type for scented candles
-	var/scented_type // BANDASTATION ADDITION
-
 /obj/item/flashlight/flare/candle/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/floor_placeable)
@@ -695,11 +692,6 @@
 
 /obj/item/flashlight/flare/candle/process(seconds_per_tick)
 	. = ..()
-// BANDASTATION ADDITION START
-	if(scented_type)
-		var/turf/my_turf = get_turf(src)
-		my_turf.pollute_turf(scented_type, 5)
-// BANDASTATION ADDITION END
 	check_wax_level()
 
 /obj/item/flashlight/flare/candle/infinite

@@ -67,6 +67,7 @@
 	new /obj/item/watertank/janitor(src)
 	new /obj/item/storage/belt/janitor(src)
 
+
 /obj/structure/closet/lawcloset
 	name = "legal closet"
 	desc = "It's a storage unit for courtroom apparel and items."
