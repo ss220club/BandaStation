@@ -1,5 +1,5 @@
 /datum/antagonist/ninja/proc/addObjectives()
-	var/objective_limit = 4
+	var/objective_limit = 3
 	var/objective_count = length(objectives)
 	// Взлом серверов РнД
 	var/datum/objective/research_secrets/sabotage_research = new /datum/objective/research_secrets()
@@ -11,6 +11,9 @@
 	// Взлом консоли СБух
 	var/datum/objective/securityobjective = new /datum/objective/security_scramble()
 	objectives += securityobjective
+	// Взлом консоли коммуникации
+	var/datum/objective/communicationobjective = new /datum/objective/terror_message()
+	objectives += communicationobjective
 
 	for(var/i in objective_count to objective_limit - 1)
 		var/pick_objectives = rand(1,4)
@@ -30,12 +33,6 @@
 				protection_objective.owner = owner
 				protection_objective.find_target()
 				objectives += protection_objective
-			if(4)
-				var/datum/objective/debrain/debrain_objective = new /datum/objective/debrain()
-				debrain_objective.owner = owner
-				debrain_objective.find_target()
-				objectives += debrain_objective
-
 	var/datum/objective/survival = new /datum/objective/survive()
 	survival.owner = owner
 	objectives += survival
