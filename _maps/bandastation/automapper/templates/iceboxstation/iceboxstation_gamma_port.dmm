@@ -26,10 +26,6 @@
 	},
 /turf/open/floor/plating/snowed/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
-"i" = (
-/obj/structure/sign/warning/docking/directional/west,
-/turf/template_noop,
-/area/template_noop)
 "j" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -246,11 +242,11 @@ K
 K
 K
 K
-i
+K
 K
 F
 K
-K
+O
 K
 K
 K
@@ -276,7 +272,7 @@ K
 K
 K
 K
-O
+K
 K
 K
 K
