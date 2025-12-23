@@ -26,6 +26,17 @@
 	},
 /turf/open/floor/plating/snowed/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
+"i" = (
+/obj/structure/table,
+/obj/machinery/recharger,
+/obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
+/obj/machinery/light/directional/south,
+/obj/machinery/firealarm/directional/south,
+/turf/open/floor/iron/smooth_edge{
+	dir = 1
+	},
+/area/station/security/lockers)
 "j" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -114,10 +125,6 @@
 /turf/open/floor/plating/snowed/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
 "K" = (
-/turf/template_noop,
-/area/template_noop)
-"O" = (
-/obj/machinery/firealarm/directional/south,
 /turf/template_noop,
 /area/template_noop)
 "S" = (
@@ -246,7 +253,7 @@ K
 K
 F
 K
-O
+i
 K
 K
 K
