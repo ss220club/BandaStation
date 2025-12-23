@@ -5,9 +5,9 @@
 
 /obj/machinery/materials_market
 	name = "galactic materials market"
-	desc = "This machine allows the user to buy and sell sheets of minerals \
-		across the system. Prices are known to fluxuate quite often,\
-		sometimes even within the same minute. All transactions are final."
+	desc = "Данная машина позволяет пользователю покупать различные полезные материалы \
+	по всей системе. Известно, что цены колеблются довольно часто, как правило в течение нескольких минут. \
+	Все сделки являются окончательными."
 	circuit = /obj/item/circuitboard/machine/materials_market
 	req_access = list(ACCESS_CARGO)
 	density = TRUE
