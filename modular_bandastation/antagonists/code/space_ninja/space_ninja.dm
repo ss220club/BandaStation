@@ -16,7 +16,7 @@
 	objectives += communicationobjective
 
 	for(var/i in objective_count to objective_limit - 1)
-		var/pick_objectives = rand(1,4)
+		var/pick_objectives = rand(1,3)
 		switch(pick_objectives)
 			if(1)
 				var/datum/objective/steal/steal_objective = new /datum/objective/steal()
