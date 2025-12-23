@@ -360,3 +360,8 @@
 	name = "MOD Soul Core"
 	icon_file = 'icons/obj/clothing/modsuit/mod_construction.dmi'
 	json_config = 'code/datums/greyscale/json_configs/mod_core_soul.json'
+
+/datum/greyscale_config/transmitter
+	name = "Transmitter"
+	icon_file = 'icons/obj/machines/phone.dmi'
+	json_config = 'code/datums/greyscale/json_configs/transmitter.json'
