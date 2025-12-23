@@ -211,7 +211,7 @@
 
 	var/max = CONFIG_GET(number/maxfine)
 	if(params["fine"] > max)
-		to_chat(usr, span_warning("The maximum fine is [max] [MONEY_NAME]."))
+		to_chat(usr, span_warning("The maximum fine is [max][MONEY_NAME]."))
 		playsound(src, 'sound/machines/terminal/terminal_error.ogg', 75, TRUE)
 		return FALSE
 
