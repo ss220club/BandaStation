@@ -22,10 +22,10 @@
 	if(incapacitated)
 		return
 	var/selection = tgui_input_list(src, "Пожалуйста, выберите новый VOX голос:", "VOX VOICE", vox_voices)
-	if(selection == null)
+	if(isnull(selection))
 		return
 	vox_type = selection
 
-	to_chat(src, "VOX голос изменен на [vox_type].")
+	to_chat(src, span_info("VOX голос изменен на [vox_type]."))
 
 #endif
