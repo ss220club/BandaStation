@@ -553,10 +553,10 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			parts += "<span class='reallybig greentext'>Центральное командование впечатлено проделанной работой отделом обслуживания! Вот это команда!</span><br>"
 
 	parts += "<b>Общая статистика:</b><br>"
-	parts += "В эту смену экипаж собрал [station_vault] [MONEY_NAME].<br>"
+	parts += "В эту смену экипаж собрал [station_vault][MONEY_NAME].<br>"
 	if(total_players > 0)
 		parts += "В среднем было собрано [station_vault/total_players][MONEY_NAME].<br>"
-		log_econ("Roundend credits total: [station_vault] [MONEY_NAME]. Average: [station_vault/total_players][MONEY_NAME_CAPITALIZED]")
+		log_econ("Roundend credits total: [station_vault][MONEY_NAME]. Average: [station_vault/total_players][MONEY_NAME_CAPITALIZED]")
 	if(mr_moneybags)
 		parts += "Самым богатым членом экипажа в конце смены был <b>[mr_moneybags.account_holder] с [mr_moneybags.account_balance]</b>[MONEY_SYMBOL]!</div>"
 	else
