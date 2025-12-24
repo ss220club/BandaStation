@@ -19290,6 +19290,13 @@
 	dir = 4
 	},
 /area/awaymission/avangarde17/inside/police/armory)
+"lvj" = (
+/obj/structure/cable,
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/inside/energy)
 "lws" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -83699,7 +83706,7 @@ cJt
 cxC
 wTB
 pZI
-pZI
+lvj
 pZI
 aWy
 cxC
