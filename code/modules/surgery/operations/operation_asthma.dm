@@ -1,9 +1,9 @@
 /datum/surgery_operation/organ/asthmatic_bypass
-	name = "открытие трахеи с усилием"
+	name = "Открытие трахеи с усилием"
 	// google says the *actual* operation used to relieve asthma is called bronchial thermoplasty but this operation doesn't resemble that at all
 	// local doctors suggested "bronchial dilatation" instead
-	rnd_name = "Расширение бронхов (астматическое шунтирование)"
-	desc = "Принудительно расширьте трахею пациента, облегчая симптомы астмы."
+	rnd_name = "Расширение бронхов (Астматическое шунтирование)"
+	desc = "Принудительное расширение трахеи пациента, для облегчения симптомов астмы."
 	operation_flags = OPERATION_PRIORITY_NEXT_STEP
 	implements = list(
 		TOOL_RETRACTOR = 1.25,

@@ -1,7 +1,7 @@
 /datum/surgery_operation/limb/autopsy
 	name = "Аутопсия"
-	rnd_name = "Андротомия (вскрытие и аутопсия)"
-	desc = "Проведите детальный анализ тела умершего пациента."
+	rnd_name = "Андротомия (Вскрытие и аутопсия)"
+	desc = "Проведение детального анализа тела умершего пациента."
 	implements = list(/obj/item/autopsy_scanner = 1)
 	time = 10 SECONDS
 	success_sound = 'sound/machines/printer.ogg'
@@ -50,7 +50,7 @@
 
 /datum/surgery_operation/limb/autopsy/mechanic
 	name = "Анализ системных сбоев"
-	rnd_name = "Анализ системных сбоев (вскрытие и аутопсия)"
-	desc = "Выполните детальный анализ деактивированных систем роботизированного пациента."
+	rnd_name = "Анализ системных сбоев (Вскрытие и аутопсия)"
+	desc = "Выполнение детального анализа деактивированных систем роботизированного пациента."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC

@@ -3,7 +3,7 @@
 // This surgery is so snowflake that it doesn't use any of the operation subtypes, it forges its own path
 /datum/surgery_operation/prosthetic_replacement
 	name = "Замена протеза"
-	desc = "Замените отсутствующую конечность протезом (или произвольным предметом)."
+	desc = "Замена отсутствующей конечности протезом (или произвольным предметом)."
 	implements = list(
 		/obj/item/bodypart = 1,
 		/obj/item = 1,
@@ -161,7 +161,7 @@
 #undef OPERATION_REJECTION_DAMAGE
 
 /datum/surgery_operation/limb/secure_arbitrary_prosthetic
-	name = "Надежный протез"
+	name = "Закрепление протеза"
 	desc = "Убедитесь, что произвольный протез правильно прикреплен к телу пациента."
 	implements = list(
 		/obj/item/stack/medical/suture = 1,

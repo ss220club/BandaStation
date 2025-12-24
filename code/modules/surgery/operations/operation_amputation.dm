@@ -1,7 +1,7 @@
 /datum/surgery_operation/limb/amputate
 	name = "Ампутация конечности"
-	rnd_name = "Разъединение (ампутация)"
-	desc = "Отделите конечность от тела пациента."
+	rnd_name = "Разъединение (Ампутация)"
+	desc = "Отделение конечности от тела пациента."
 	operation_flags = OPERATION_MORBID | OPERATION_AFFECTS_MOOD | OPERATION_NOTABLE
 	required_bodytype = ~(BODYTYPE_ROBOTIC|BODYTYPE_PEG)
 	implements = list(
@@ -62,7 +62,7 @@
 
 /datum/surgery_operation/limb/amputate/mechanic
 	name = "Разбор конечности"
-	rnd_name = "Разборка (ампутация)"
+	rnd_name = "Разборка (Ампутация)"
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 	implements = list(

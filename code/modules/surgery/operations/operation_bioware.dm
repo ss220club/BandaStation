@@ -44,8 +44,8 @@
 
 /datum/surgery_operation/limb/bioware/vein_threading
 	name = "Венозная нить"
-	rnd_name = "Симваскулодез (венозная нить)" // "together vessel fusion"
-	desc = "Сплетите вены пациента в усиленную сетку, уменьшая кровопотерю при травмах."
+	rnd_name = "Симваскулодез (Венозная нить)" // "together vessel fusion"
+	desc = "Сплетение вен пациента в усиленную сетку, для уменьшения кровопотери при травмах."
 	status_effect_gained = /datum/status_effect/bioware/heart/threaded_veins
 
 /datum/surgery_operation/limb/bioware/vein_threading/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
@@ -70,15 +70,15 @@
 	display_pain(limb.owner, "Вы можете почувствовать, как кровь движется по усиленным венам!")
 
 /datum/surgery_operation/limb/bioware/vein_threading/mechanic
-	rnd_name = "Оптимизация маршрутизации гидравлики (венозная нить)"
-	desc = "Оптимизируйте работу гидравлической системы роботизированного пациента, снижая потери жидкости из-за утечек."
+	rnd_name = "Оптимизация маршрутизации гидравлики (Венозная нить)"
+	desc = "Оптимизирование работы гидравлической системы роботизированного пациента, для снижения потери жидкости из-за утечек."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/muscled_veins
 	name = "Мышечная мембрана вены"
-	rnd_name = "Миоваскулопластика (мышечная мембрана вены)" // "muscle vessel reshaping"
-	desc = "Добавьте мышечную оболочку к венам пациента, что позволит ему перекачивать кровь без участия сердца."
+	rnd_name = "Миоваскулопластика (Мышечная мембрана вены)" // "muscle vessel reshaping"
+	desc = "Добавление мышечной оболочки к венам пациента, что позволит ему перекачивать кровь без участия сердца."
 	status_effect_gained = /datum/status_effect/bioware/heart/muscled_veins
 
 /datum/surgery_operation/limb/bioware/muscled_veins/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
@@ -103,15 +103,15 @@
 	display_pain(limb.owner, "Вы можете чувствовать, как мощные удары вашего сердца разносятся по всему телу!")
 
 /datum/surgery_operation/limb/bioware/muscled_veins/mechanic
-	rnd_name = "Hydraulics Redundancy Subroutine (Muscled Veins)"
-	desc = "Add redundancies to a robotic patient's hydraulic system, allowing it to pump fluids without an engine or pump."
+	rnd_name = "Подпрограмма резервирования гидравлики (Мышечная мембрана вены)"
+	desc = "Добавление избыточности в гидравлическую систему роботизированного пациента, что позволяет ему перекачивать жидкости без двигателя или насоса."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/nerve_splicing
 	name = "Сращивание нервов"
-	rnd_name = "Симневродез (сращивание нервов)" // "together nerve fusion"
-	desc = "Соедините нервы пациента вместе, чтобы сделать их более устойчивыми к оглушению."
+	rnd_name = "Симневродез (Сращивание нервов)" // "together nerve fusion"
+	desc = "Соединение нервов пациента вместе, чтобы сделать их более устойчивыми к оглушению."
 	time = 15.5 SECONDS
 	status_effect_gained = /datum/status_effect/bioware/nerves/spliced
 
@@ -137,15 +137,15 @@
 	display_pain(limb.owner, "Вы вновь обретаете чувствительность в своем теле; вам кажется, что всё происходит вокруг вас в замедлении!")
 
 /datum/surgery_operation/limb/bioware/nerve_splicing/mechanic
-	rnd_name = "Подпрограмма автоматического сброса системы (сращивание нервов)"
-	desc = "Модернизируйте автоматические системы роботизированного пациента, чтобы он мог лучше противостоять оглушению."
+	rnd_name = "Подпрограмма автоматического сброса системы (Сращивание нервов)"
+	desc = "Модернизирование автоматических систем роботизированного пациента, чтобы он мог лучше противостоять оглушению."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/nerve_grounding
 	name = "Заземление нервов"
-	rnd_name = "Ксантоневропластика (заземление нервов)" // "yellow nerve reshaping". see: yellow gloves
-	desc = "Reroute a patient's nerves to act as grounding rods, protecting them from electrical shocks."
+	rnd_name = "Ксантоневропластика (Заземление нервов)" // "yellow nerve reshaping". see: yellow gloves
+	desc = "Перенаправление нервов пациента так, чтобы они действовали как заземляющие стержни, защищая их от поражения электрическим током."
 	time = 15.5 SECONDS
 	status_effect_gained = /datum/status_effect/bioware/nerves/grounded
 
@@ -171,15 +171,15 @@
 	display_pain(limb.owner, "Вы возвращаете своему телу ощущение свежести! Вы чувствуете прилив сил!")
 
 /datum/surgery_operation/limb/bioware/nerve_grounding/mechanic
-	rnd_name = "Система гашения ударов (заземление нервов)"
-	desc = "Установите заземляющие стержни в нервную систему роботизированного пациента, защищая её от поражения электрическим током."
+	rnd_name = "Система гашения ударов (Заземление нервов)"
+	desc = "Установка заземляющих стержней в нервную систему роботизированного пациента, защищая её от поражения электрическим током."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/ligament_hook
 	name = "Изменение формы связок"
-	rnd_name = "Артропластика (крюк для связок)" // "joint reshaping"
-	desc = "Измените форму связок пациента, чтобы в случае отсоединения конечности её можно было прикрепить вручную, за счет облегчения отсоединения конечностей."
+	rnd_name = "Артропластика (Крюк для связок)" // "joint reshaping"
+	desc = "Изменение формы связок пациента, чтобы в случае отсоединения конечности её можно было прикрепить вручную, за счет облегчения отсоединения конечностей."
 	status_effect_gained = /datum/status_effect/bioware/ligaments/hooked
 
 /datum/surgery_operation/limb/bioware/ligament_hook/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
@@ -204,16 +204,16 @@
 	display_pain(limb.owner, "Ваши конечности кажутся... странно свободными.")
 
 /datum/surgery_operation/limb/bioware/ligament_hook/mechanic
-	rnd_name = "Защелкивающиеся точки крепления (крюк для связок)"
-	desc = "Преобразуйте суставы конечностей роботизированного пациента таким образом, чтобы обеспечить быструю фиксацию и возможность повторного прикрепления конечностей вручную в случае их отсоединения - \
+	rnd_name = "Защелкивающиеся точки крепления (Крюк для связок)"
+	desc = "Преобразование суставов конечностей роботизированного пациента таким образом, чтобы обеспечить быструю фиксацию и возможность повторного прикрепления конечностей вручную в случае их отсоединения - \
 		за счет того, что конечности легче отсоединить."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/ligament_reinforcement
 	name = "Укрепление связок"
-	rnd_name = "Артрорафия (укрепление связок)" // "joint strengthening" / "joint stitching"
-	desc = "Укрепляет связки пациента, чтобы затруднить расчленение за счет облегчения прерывания нервных связей."
+	rnd_name = "Артрорафия (Укрепление связок)" // "joint strengthening" / "joint stitching"
+	desc = "Укрепление связок пациента, чтобы затруднить расчленение за счет облегчения прерывания нервных связей."
 	status_effect_gained = /datum/status_effect/bioware/ligaments/reinforced
 
 /datum/surgery_operation/limb/bioware/ligament_reinforcement/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
@@ -238,14 +238,14 @@
 	display_pain(limb.owner, "Ваши конечности чувствуют себя более защищенными, но также более хрупкими.")
 
 /datum/surgery_operation/limb/bioware/ligament_reinforcement/mechanic
-	rnd_name = "Укрепление опорной точки (укрепление связок)"
-	desc = "Укрепите суставы конечностей роботизированного пациента, чтобы предотвратить расчленение, за счет облегчения разрыва нервных связей."
+	rnd_name = "Укрепление опорной точки (Укрепление связок)"
+	desc = "Укрепление суставов конечностей роботизированного пациента, чтобы предотвратить расчленение, за счет облегчения разрыва нервных связей."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/cortex_folding
 	name = "Складывание коры"
-	rnd_name = "Энцефалофрактопластика (складывание коры)" // it's a stretch - "brain fractal reshaping"
+	rnd_name = "Энцефалофрактопластика (Складывание коры)" // it's a stretch - "brain fractal reshaping"
 	desc = "Биологическая модернизация, которая преобразует кору головного мозга пациента во фрактальный узор, повышая плотность и гибкость нейронов."
 	status_effect_gained = /datum/status_effect/bioware/cortex/folded
 	required_zone = BODY_ZONE_HEAD
@@ -286,14 +286,14 @@
 	limb.owner.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 
 /datum/surgery_operation/limb/bioware/cortex_folding/mechanic
-	rnd_name = "Лабиринтное программирование Wetware OS (складывание коры)"
-	desc = "Перепрограммируйте нейронную сеть роботизированного пациента на совершенно необычном языке программирования, предоставив пространство для нестандартных нейронных паттернов."
+	rnd_name = "Лабиринтное программирование Wetware OS (Складывание коры)"
+	desc = "Перепрограммирование нейронной сети роботизированного пациента на совершенно необычном языке программирования, предоставив пространство для нестандартных нейронных паттернов."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/cortex_imprint
 	name = "Отпечаток коры"
-	rnd_name = "Энцефалопластика (отпечаток коры)" // it's a stretch - "brain print reshaping"
+	rnd_name = "Энцефалопластика (Отпечаток коры)" // it's a stretch - "brain print reshaping"
 	desc = "Биологическая модернизация, которая формирует самозапечатлевающийся узор на коре головного мозга пациента, увеличивая плотность и устойчивость нервных клеток."
 	status_effect_gained = /datum/status_effect/bioware/cortex/imprinted
 	required_zone = BODY_ZONE_HEAD
@@ -334,8 +334,8 @@
 	limb.owner.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 
 /datum/surgery_operation/limb/bioware/cortex_imprint/mechanic
-	rnd_name = "Wetware OS Версия 2.0 (отпечаток коры)"
-	desc = "Обновите операционную систему роботизированного пациента до 'новой версии', повысив общую производительность и надежность. \
+	rnd_name = "Wetware OS Версия 2.0 (Отпечаток коры)"
+	desc = "Обновление операционной системы роботизированного пациента до «новой версии», повысив общую производительность и надежность. \
 		Жаль, что все это рекламное ПО."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
