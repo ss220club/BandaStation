@@ -8,9 +8,9 @@
 
 /obj/structure/closet/secure_closet/armory4/PopulateContents()
 	..()
-	new /obj/item/gun/ballistic/automatic/sabel/auto/short(src)
+	new /obj/item/gun/ballistic/automatic/sabel/auto(src)
 	for(var/i in 1 to 4)
-		new /obj/item/ammo_box/magazine/c762x39mm/small(src)
+		new /obj/item/ammo_box/magazine/c762x39mm(src)
 
 /obj/structure/closet/secure_closet/omon
 	name = "шкафчик со снаряжением"
