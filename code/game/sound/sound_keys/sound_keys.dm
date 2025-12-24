@@ -1134,7 +1134,9 @@
 	file_paths = list(
 		'sound/items/hard_hat/hard_hat_equip1.ogg',
 		'sound/items/hard_hat/hard_hat_equip2.ogg',
-		'sound/items/hard_hat/hard_hat_equip3.ogg',
+		'sound/items/hard_hat/hard_hat_equip3.ogg'
+		)
+
 /datum/sound_effect/telephone_handset
 	key = SFX_TELEPHONE_HANDSET
 	file_paths = list(

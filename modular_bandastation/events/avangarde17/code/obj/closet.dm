@@ -10,7 +10,7 @@
 	..()
 	new /obj/item/gun/ballistic/automatic/sabel/auto(src)
 	for(var/i in 1 to 4)
-		new /obj/item/ammo_box/magazine/c762x39mm/civ(src)
+		new /obj/item/ammo_box/magazine/c762x39mm(src)
 
 /obj/structure/closet/secure_closet/omon
 	name = "шкафчик со снаряжением"
