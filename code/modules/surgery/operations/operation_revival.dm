@@ -1,7 +1,7 @@
 /datum/surgery_operation/basic/revival
 	name = "Дефибриляция мозга"
 	rnd_name = "Дефибриляция мозга (Оживление)"
-	desc = "Использовать дефибриллятор, чтобы вернуть мозг пациента к жизни."
+	desc = "Использование дефибриллятора, чтобы вернуть мозг пациента к жизни."
 	implements = list(
 		/obj/item/shockpaddles = 1,
 		/obj/item/melee/touch_attack/shock = 1,
@@ -96,7 +96,7 @@
 
 /// Called when revival fails
 /datum/surgery_operation/basic/revival/proc/on_no_revive(mob/living/surgeon, mob/living/patient)
-	patient.visible_message(span_warning("...[patient.p_they()] дёргает[patient.p_s()] в конвульсиях и замирает[patient.p_s()]."))
+	patient.visible_message(span_warning("...[patient.p_they()] дёргает [patient.p_s()] в конвульсиях и замирает [patient.p_s()]."))
 	patient.adjust_organ_loss(ORGAN_SLOT_BRAIN, 50, 199) // MAD SCIENCE
 
 /datum/surgery_operation/basic/revival/on_failure(mob/living/patient, mob/living/surgeon, obj/item/tool, list/operation_args)
@@ -109,7 +109,7 @@
 	)
 
 /datum/surgery_operation/basic/revival/mechanic
-	name = "full system reboot"
+	name = "Полная перезагрузка системы"
 	required_biotype = MOB_ROBOTIC
 
 /datum/surgery_operation/basic/revival/mechanic/brain_check(obj/item/organ/brain/brain)

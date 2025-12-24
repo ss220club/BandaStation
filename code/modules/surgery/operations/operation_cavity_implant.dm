@@ -1,6 +1,6 @@
 /datum/surgery_operation/limb/prepare_cavity
 	name = "Расширение грудной полости"
-	desc = "Расширяет грудную полость пациента для имплатнации больших вещей."
+	desc = "Расширение грудной полости пациента для имплантирования больших вещей."
 	implements = list(
 		TOOL_RETRACTOR = 1,
 		TOOL_CROWBAR = 1.5,
@@ -36,7 +36,7 @@
 
 /datum/surgery_operation/limb/cavity_implant
 	name = "Полостное имплантирование"
-	desc = "Имплантировать предметImplant an item into a patient's body cavity."
+	desc = "Имплантирование предмета в полость тела пациента."
 	operation_flags = OPERATION_NOTABLE
 	implements = list(
 		/obj/item = 1,
@@ -120,8 +120,8 @@
 
 
 /datum/surgery_operation/limb/undo_cavity_implant
-	name = "Убрать имплант из полости"
-	desc = "Убрать предмет из полости в теле."
+	name = "Убрание импланта из полости"
+	desc = "Убрание предмета из полости в теле."
 	implements = list(
 		IMPLEMENT_HAND = 1,
 		TOOL_HEMOSTAT = 2,
@@ -163,20 +163,20 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to extract [limb.cavity_item] from [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to extract [limb.cavity_item] from [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to extract something from [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете извлекать [limb.cavity_item] из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает извлекать [limb.cavity_item] из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает извлекать что-то из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a serious pain in your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете сильную боль в своей [limb.plaintext_zone]!")
 
 /datum/surgery_operation/limb/undo_cavity_implant/on_success(obj/item/bodypart/chest/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	if(isnull(limb.cavity_item)) // something else could have removed it mid surgery?
 		display_results(
 			surgeon,
 			limb.owner,
-			span_warning("You find nothing to remove from [limb.owner]'s [limb.plaintext_zone]."),
-			span_warning("[surgeon] finds nothing to remove from [limb.owner]'s [limb.plaintext_zone]."),
-			span_warning("[surgeon] finds nothing to remove from [limb.owner]'s [limb.plaintext_zone]."),
+			span_warning("Вы не нашли ничего, что можно было бы извлечь из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
+			span_warning("[surgeon] не нашел ничего, что можно было бы извлечь из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
+			span_warning("[surgeon] не нашел ничего, что можно было бы извлечь из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
 		)
 		return
 
@@ -186,9 +186,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You pull [implant] out of [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] pulls [implant] out of [limb.owner]'s [limb.plaintext_zone]!"),
-		span_notice("[surgeon] pulls something out of [limb.owner]'s [limb.plaintext_zone]!"),
+		span_notice("Вы извлекаете [implant] из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] извлекает [implant] из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] извлекает что-то из [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(limb.owner, "You can feel [implant.name] being pulled out of you!")
+	display_pain(limb.owner, "Вы почувствуете, как [implant.name] вытягиваю из вас!")
 	surgeon.put_in_hands(implant)

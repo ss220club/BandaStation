@@ -1,7 +1,7 @@
 /datum/surgery_operation/limb/replace_limb
 	name = "Аугментация конечности"
 	rnd_name = "Аугментация"
-	desc = "Заменить конечность пациента роботизированной или протезом."
+	desc = "Замена конечности пациента роботизированной или протезом."
 	operation_flags = OPERATION_NOTABLE
 	implements = list(
 		/obj/item/bodypart = 1,
