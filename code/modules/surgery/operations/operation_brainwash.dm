@@ -1,8 +1,8 @@
 #define OPERATION_OBJECTIVE "objective"
 
 /datum/surgery_operation/organ/brainwash
-	name = "промывание мозгов"
-	desc = "Implant a directive into the patient's brain, making it their absolute priority."
+	name = "Промывание мозгов"
+	desc = "Внедрите директиву в мозг пациента, сделав ее его абсолютным приоритетом."
 	rnd_name = "Нейронное промывание мозгов (Промывание мозгов)"
 	rnd_desc = "Хирургическая процедура, которая непосредственно внедряет директиву в мозг пациента, \
 		что делает ее абсолютным приоритетом. Это можно устранить с помощью импланта «Защита Разума»."
@@ -68,7 +68,7 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Ты облажался, повредив мозговую ткань!"),
+		span_notice("Вы облажались, повредив мозговую ткань!"),
 		span_notice("[surgeon] облажался, что привело к повреждению мозга!"),
 		span_notice("[surgeon] заканчивает операцию на мозге [organ.owner]."),
 	)
@@ -76,7 +76,7 @@
 	organ.owner.adjust_organ_loss(ORGAN_SLOT_BRAIN, 40)
 
 /datum/surgery_operation/organ/brainwash/mechanic
-	name = "перепрограммирование"
+	name = "Перепрограммирование"
 	rnd_name = "Нейронное перепрограммирование (Промывание мозгов)"
 	rnd_desc = "Установите вредоносное ПО, которое непосредственно внедряет директиву в операционную систему робота-пациента, \
 		делая это своим абсолютным приоритетом. Это можно устранить с помощью импланта «Защита Разума»."
@@ -93,7 +93,7 @@
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/organ/brainwash/sleeper
-	name = "установить директивы спящего агента"
+	name = "Установить директивы спящего агента"
 	rnd_name = "Имплантация спящего агента (Промывание мозгов)"
 	preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
 	success_sound = 'sound/items/handling/surgery/hemostat1.ogg'
@@ -133,7 +133,7 @@
 	brainwashed.gain_trauma(new /datum/brain_trauma/mild/phobia/conspiracies(), TRAUMA_RESILIENCE_LOBOTOMY)
 
 /datum/surgery_operation/organ/brainwash/sleeper/mechanic
-	name = "установить программу спящего агента"
+	name = "Установить программу спящего агента"
 	rnd_name = "Программирование спящего агента (Промывание мозгов)"
 	implements = list(
 		TOOL_MULTITOOL = 1.15,

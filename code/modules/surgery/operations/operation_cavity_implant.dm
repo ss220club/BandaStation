@@ -1,6 +1,6 @@
 /datum/surgery_operation/limb/prepare_cavity
-	name = "widen chest cavity"
-	desc = "Widen a patient's chest cavity to allow for implanting of larger items."
+	name = "Расширение грудной полости"
+	desc = "Расширяет грудную полость пациента для имплатнации больших вещей."
 	implements = list(
 		TOOL_RETRACTOR = 1,
 		TOOL_CROWBAR = 1.5,
@@ -15,7 +15,7 @@
 	return image(/obj/item/retractor)
 
 /datum/surgery_operation/limb/prepare_cavity/all_required_strings()
-	return list("operate on chest (target chest)") + ..()
+	return list("операция на груди") + ..()
 
 /datum/surgery_operation/limb/prepare_cavity/state_check(obj/item/bodypart/chest/limb)
 	return limb.body_zone == BODY_ZONE_CHEST
@@ -24,19 +24,19 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to open [limb.owner]'s [limb.plaintext_zone] cavity wide..."),
-		span_notice("[surgeon] begins to open [limb.owner]'s [limb.plaintext_zone] cavity wide."),
-		span_notice("[surgeon] begins to open [limb.owner]'s [limb.plaintext_zone] cavity wide."),
+		span_notice("Вы начинаете раскрывать грудную полость [limb.owner]..."),
+		span_notice("[surgeon] начинает раскрывать грудную полость [limb.owner]."),
+		span_notice("[surgeon] начинает раскрывать грудную полость [limb.owner]."),
 	)
-	display_pain(limb.owner, "You can feel pressure as your [limb.plaintext_zone] is being opened wide!")
+	display_pain(limb.owner, "Вы чувствуете давление, когда ваша грудь широко расскрывается!")
 
 /datum/surgery_operation/limb/prepare_cavity/on_success(obj/item/bodypart/chest/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	limb.add_surgical_state(SURGERY_CAVITY_WIDENED)
 
 /datum/surgery_operation/limb/cavity_implant
-	name = "cavity implant"
-	desc = "Implant an item into a patient's body cavity."
+	name = "Полостное имплантирование"
+	desc = "Имплантировать предметImplant an item into a patient's body cavity."
 	operation_flags = OPERATION_NOTABLE
 	implements = list(
 		/obj/item = 1,
@@ -55,7 +55,7 @@
 	))
 
 /datum/surgery_operation/limb/cavity_implant/all_required_strings()
-	return list("operate on chest (target chest)") + ..()
+	return list("операция на груди") + ..()
 
 /datum/surgery_operation/limb/cavity_implant/get_default_radial_image()
 	return image('icons/hud/screen_gen.dmi', "arrow_large_still")
@@ -91,20 +91,20 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to insert [tool] into [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to insert [tool] into [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to insert [tool.w_class > WEIGHT_CLASS_SMALL ? tool : "something"] into [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете вставлять [tool.declent_ru(ACCUSATIVE)] в грудь [limb.owner]..."),
+		span_notice("[surgeon] начинает вставлять [tool.declent_ru(ACCUSATIVE)] в грудь [limb.owner]."),
+		span_notice("[surgeon] начинает вставлять [tool.w_class > WEIGHT_CLASS_SMALL ? tool : "что-то"] в грудь [limb.owner]."),
 	)
-	display_pain(limb.owner, "You can feel something being inserted into your [limb.plaintext_zone], it hurts like hell!")
+	display_pain(limb.owner, "Вы чувствуете, что что-то вставили в вашу грудь. Болит ужасно!")
 
 /datum/surgery_operation/limb/cavity_implant/on_success(obj/item/bodypart/chest/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	if (!surgeon.transferItemToLoc(tool, limb.owner, force = TRUE)) // shouldn't fail but just in case
 		display_results(
 			surgeon,
 			limb.owner,
-			span_warning("You can't seem to fit [tool] in [limb.owner]'s [limb.plaintext_zone]!"),
-			span_warning("[surgeon] can't seem to fit [tool] in [limb.owner]'s [limb.plaintext_zone]!"),
-			span_warning("[surgeon] can't seem to fit [tool.w_class > WEIGHT_CLASS_SMALL ? tool : "something"] in [limb.owner]'s [limb.plaintext_zone]!"),
+			span_warning("Вы не можете вместить [tool.declent_ru(ACCUSATIVE)] в грудь [limb.owner]!"),
+			span_warning("[surgeon] не может вместить [tool.declent_ru(ACCUSATIVE)] в грудь [limb.owner]!"),
+			span_warning("[surgeon] не может вместить [tool.w_class > WEIGHT_CLASS_SMALL ? tool : "что-то"] в грудь [limb.owner]!"),
 		)
 		return
 
@@ -113,15 +113,15 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You stuff [tool] into [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] stuffs [tool] into [limb.owner]'s [limb.plaintext_zone]!"),
-		span_notice("[surgeon] stuffs [tool.w_class > WEIGHT_CLASS_SMALL ? tool : "something"] into [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы помещаете [tool.declent_ru(ACCUSATIVE)] в грудь [limb.owner]."),
+		span_notice("[surgeon] помещает [tool.declent_ru(ACCUSATIVE)] в грудь [limb.owner]!"),
+		span_notice("[surgeon] помещает [tool.w_class > WEIGHT_CLASS_SMALL ? tool : "что-то"] в грудь [limb.owner]."),
 	)
 
 
 /datum/surgery_operation/limb/undo_cavity_implant
-	name = "remove cavity implant"
-	desc = "Remove an item from a body cavity."
+	name = "Убрать имплант из полости"
+	desc = "Убрать предмет из полости в теле."
 	implements = list(
 		IMPLEMENT_HAND = 1,
 		TOOL_HEMOSTAT = 2,
@@ -135,7 +135,7 @@
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_ORGANS_CUT|SURGERY_CAVITY_WIDENED
 
 /datum/surgery_operation/limb/undo_cavity_implant/all_required_strings()
-	return list("operate on chest (target chest)") + ..()
+	return list("операция на груди") + ..()
 
 /datum/surgery_operation/limb/undo_cavity_implant/get_default_radial_image()
 	return image('icons/hud/screen_gen.dmi', "arrow_large_still")
@@ -143,7 +143,7 @@
 /datum/surgery_operation/limb/undo_cavity_implant/get_radial_options(obj/item/bodypart/chest/limb, obj/item/tool, operating_zone)
 	// Not bothering to cache this as the chance of hitting the same cavity item in the same round is rather low
 	var/datum/radial_menu_choice/option = new()
-	option.name = "remove [limb.cavity_item]"
+	option.name = "убрать [declent_ru(limb.cavity_item, ACCUSATIVE)]"
 	option.info = "Replace the [limb.cavity_item] embededd in the patient's chest cavity."
 	option.image = get_generic_limb_radial_image(BODY_ZONE_CHEST)
 	option.image.overlays += add_radial_overlays(limb.cavity_item)
