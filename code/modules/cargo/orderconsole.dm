@@ -157,8 +157,8 @@
 				"packs" = get_packs_data(pack.group),
 			)
 
-	data["displayed_currency_full_name"] = " [MONEY_NAME]"
-	data["displayed_currency_name"] = " [MONEY_SYMBOL]"
+	data["displayed_currency_full_name"] = "[MONEY_NAME]"
+	data["displayed_currency_name"] = "[MONEY_SYMBOL]"
 
 	return data
 
