@@ -549,7 +549,7 @@
 	if(isnull(registered_account) || registered_account.replaceable) //Same check we use when we check if we can assign an account
 		context[SCREENTIP_CONTEXT_ALT_RMB] = "Привязать аккаунт"
 	else if(registered_account.account_balance > 0)
-		context[SCREENTIP_CONTEXT_ALT_LMB] = "Вывести [MONEY_NAME]"
+		context[SCREENTIP_CONTEXT_ALT_LMB] = "Вывести кредиты"
 	if(trim && length(trim.honorifics))
 		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Переключить звание"
 	return CONTEXTUAL_SCREENTIP_SET
@@ -675,7 +675,7 @@
 		var/money_added = mass_insert_money(money_contained, user)
 		if(!money_added)
 			return ITEM_INTERACT_BLOCKING
-		to_chat(user, span_notice("Вы вставляете содержимое на карту! Они исчезают в клубах блюспейс-дыма, пополняя счёт на [money_added] [MONEY_NAME]. к привязанному аккаунту."))
+		to_chat(user, span_notice("Вы вставляете содержимое на карту! Они исчезают в клубах блюспейс-дыма, пополняя счёт на [money_added][MONEY_NAME]. к привязанному аккаунту."))
 		return ITEM_INTERACT_SUCCESS
 	return NONE
 
@@ -702,13 +702,13 @@
 		return FALSE
 	registered_account.adjust_money(cash_money, "Система: Пополнение")
 	SSblackbox.record_feedback("amount", "credits_inserted", cash_money)
-	log_econ("[cash_money] [MONEY_NAME] were inserted into [src] owned by [src.registered_name]")
+	log_econ("[cash_money][MONEY_NAME] were inserted into [src] owned by [src.registered_name]")
 	if(physical_currency)
-		to_chat(user, span_notice("Вы запихиваете [money.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]. Деньги исчезают в клубе блюспейс-дыма, пополняя счёт на [cash_money] [MONEY_SYMBOL]."))
+		to_chat(user, span_notice("Вы запихиваете [money.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]. Деньги исчезают в клубе блюспейс-дыма, пополняя счёт на [cash_money][MONEY_SYMBOL]."))
 	else
-		to_chat(user, span_notice("Вы вставляете [money.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)], пополняя счёт на [cash_money] [MONEY_SYMBOL]."))
+		to_chat(user, span_notice("Вы вставляете [money.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)], пополняя счёт на [cash_money][MONEY_SYMBOL]."))
 
-	to_chat(user, span_notice("Текущий баланс счёта: [registered_account.account_balance] кр."))
+	to_chat(user, span_notice("Текущий баланс счёта: [registered_account.account_balance][MONEY_SYMBOL]."))
 	qdel(money)
 	return TRUE
 
@@ -735,7 +735,7 @@
 
 	registered_account.adjust_money(total, "Система: Пополнение")
 	SSblackbox.record_feedback("amount", "credits_inserted", total)
-	log_econ("[total] [MONEY_NAME] were inserted into [src] owned by [src.registered_name]")
+	log_econ("[total][MONEY_NAME] were inserted into [src] owned by [src.registered_name]")
 	QDEL_LIST(money)
 
 	return total
@@ -771,7 +771,7 @@
 		account.account_balance += old_account.account_balance
 	account.bank_cards += src
 	registered_account = account
-	to_chat(user, span_notice("Указанный аккаунт был привязан к этой ID-карте. Он содержит [account.account_balance] [MONEY_NAME]."))
+	to_chat(user, span_notice("Указанный аккаунт был привязан к этой ID-карте. Он содержит [account.account_balance][MONEY_NAME]."))
 	return TRUE
 
 /obj/item/card/id/click_alt(mob/living/user)
@@ -797,7 +797,7 @@
 		if(choice == "Привязать аккаунт")
 			set_new_account(user)
 			return CLICK_ACTION_SUCCESS
-	var/amount_to_remove = tgui_input_number(user, "Сколько вы хотите вывести? (Макс: [registered_account.account_balance] [MONEY_SYMBOL].)", "Вывести средства", max_value = registered_account.account_balance)
+	var/amount_to_remove = tgui_input_number(user, "Сколько вы хотите вывести? (Макс: [registered_account.account_balance][MONEY_SYMBOL].)", "Вывести средства", max_value = registered_account.account_balance)
 	if(!amount_to_remove || QDELETED(user) || QDELETED(src) || issilicon(user) || loc != user)
 		return CLICK_ACTION_BLOCKING
 	if(!alt_click_can_use_id(user))
@@ -808,7 +808,7 @@
 		return CLICK_ACTION_BLOCKING
 	var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
 	user.put_in_hands(holochip)
-	to_chat(user, span_notice("You withdraw [amount_to_remove] [MONEY_NAME] into a holochip."))
+	to_chat(user, span_notice("Вы выводите [amount_to_remove][MONEY_NAME] в голочип."))
 	SSblackbox.record_feedback("amount", "credits_removed", amount_to_remove)
 	log_econ("[amount_to_remove] [MONEY_NAME] were removed from [src] owned by [registered_name]")
 	return CLICK_ACTION_SUCCESS
@@ -821,15 +821,15 @@
 		set_new_account(user)
 
 /obj/item/card/id/proc/pay_debt(user)
-	var/amount_to_pay = tgui_input_number(user, "Сколько вы хотите заплатить? (Макс: [registered_account.account_balance] [MONEY_SYMBOL].)", "Выплата долга", max_value = min(registered_account.account_balance, registered_account.account_debt))
+	var/amount_to_pay = tgui_input_number(user, "Сколько вы хотите заплатить? (Макс: [registered_account.account_balance][MONEY_SYMBOL].)", "Выплата долга", max_value = min(registered_account.account_balance, registered_account.account_debt))
 	if(!amount_to_pay || QDELETED(src) || loc != user || !alt_click_can_use_id(user))
 		return
 	var/prev_debt = registered_account.account_debt
 	var/amount_paid = registered_account.pay_debt(amount_to_pay)
 	if(amount_paid)
-		var/message = span_notice("Вы заплатили [amount_to_pay] кредитов из [prev_debt] [MONEY_SYMBOL] вашего долга. Осталось выплатить [registered_account.account_debt] [MONEY_SYMBOL].")
+		var/message = span_notice("Вы заплатили [amount_to_pay] кредитов из [prev_debt][MONEY_SYMBOL] вашего долга. Осталось выплатить [registered_account.account_debt][MONEY_SYMBOL].")
 		if(!registered_account.account_debt)
-			message = span_nicegreen("Вы заплатили последние [amount_to_pay] [MONEY_NAME]. из вашего долга, погасив его. Поздравляем!")
+			message = span_nicegreen("Вы заплатили последние [amount_to_pay][MONEY_NAME] из вашего долга, погасив его. Поздравляем!")
 		to_chat(user, message)
 
 /obj/item/card/id/examine(mob/user)
@@ -838,10 +838,10 @@
 		return
 
 	if(registered_account && !isnull(registered_account.account_id))
-		. += "Аккаунт привязанный к ID-карте принадлежит '[registered_account.account_holder]' и отображает баланс в размере [registered_account.account_balance] [MONEY_SYMBOL]."
+		. += "Аккаунт привязанный к ID-карте принадлежит '[registered_account.account_holder]' и отображает баланс в размере [registered_account.account_balance][MONEY_SYMBOL]."
 		if(ACCESS_COMMAND in access)
 			var/datum/bank_account/linked_dept = SSeconomy.get_dep_account(registered_account.account_job.paycheck_department)
-			. += "[linked_dept.account_holder] привязанный к ID-карте отображает баланс [linked_dept.account_balance] [MONEY_SYMBOL]."
+			. += "[linked_dept.account_holder] привязанный к ID-карте отображает баланс [linked_dept.account_balance][MONEY_SYMBOL]."
 	else
 		. += span_notice("Alt-ПКМ, чтобы привязать ID-карту к банковскому счёту.")
 
@@ -881,15 +881,15 @@
 	if(registered_account)
 		if(registered_account.mining_points)
 			. += "На карточке показывается шахтёрские очки в количестве [registered_account.mining_points]."
-		. += "Привязанный аккаунт к ID-карте принадлежит «[registered_account.account_holder]» и отображает баланс в размере [registered_account.account_balance] кр."
+		. += "Привязанный аккаунт к ID-карте принадлежит «[registered_account.account_holder]» и отображает баланс в размере [registered_account.account_balance][MONEY_SYMBOL]."
 		if(registered_account.account_debt)
-			. += span_warning("На данный момент на счёте имеется задолженность в размере [registered_account.account_debt] [MONEY_SYMBOL]. [100*DEBT_COLLECTION_COEFF]% заработанных средств пойдет на его погашение.")
+			. += span_warning("На данный момент на счёте имеется задолженность в размере [registered_account.account_debt][MONEY_SYMBOL]. [100*DEBT_COLLECTION_COEFF]% заработанных средств пойдет на его погашение.")
 		if(registered_account.account_job)
 			var/datum/bank_account/D = SSeconomy.get_dep_account(registered_account.account_job.paycheck_department)
 			if(D)
-				. += "[D.account_holder] имеет баланс [D.account_balance] [MONEY_SYMBOL]."
+				. += "[D.account_holder] имеет баланс [D.account_balance][MONEY_SYMBOL]."
 		. += span_info("Alt-ЛКМ, чтобы снять деньги с ID-карты в виде голочипов.")
-		. += span_info("Вы можете вставлять [MONEY_NAME] на привязанный аккаунт, прикладывая голочипы, наличку или монеты на ID-карту.")
+		. += span_info("Вы можете вставлять кредиты на привязанный аккаунт, прикладывая голочипы, наличку или монеты на ID-карту.")
 		if(registered_account.replaceable)
 			. += span_info("Alt-ПКМ, чтобы поменять привязанный банковский аккаунт.")
 		if(registered_account.civilian_bounty)
