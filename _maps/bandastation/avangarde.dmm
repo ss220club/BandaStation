@@ -8,6 +8,7 @@
 /obj/structure/railing/platform{
 	dir = 5
 	},
+/obj/structure/light_fake/small/directional/north,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "aaJ" = (
@@ -251,6 +252,11 @@
 /obj/structure/dresser,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = -3;
+	pixel_y = 14;
+	name = "Ленина 2 - Этаж 2 - Квартира 2"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/six_apartment/bedroom)
@@ -545,6 +551,7 @@
 /obj/structure/railing/platform{
 	dir = 5
 	},
+/obj/structure/light_fake/small/directional/north,
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
 "aul" = (
@@ -2011,6 +2018,11 @@
 	pixel_x = -4;
 	pixel_y = 21
 	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 8;
+	pixel_y = 13;
+	name = "Советская 2 - Подъезд 1 - Этаж 2 -  Квартира 2"
+	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_1/fourth_apartment)
 "bkK" = (
@@ -2291,6 +2303,11 @@
 /obj/structure/dresser,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = -3;
+	pixel_y = 13;
+	name = "Ленина 1 - Этаж 2 - Квартира 2"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/six_apartment/bedroom)
@@ -2839,6 +2856,7 @@
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/police/cabinet)
 "bFF" = (
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "bFW" = (
@@ -3347,15 +3365,10 @@
 /area/awaymission/avangarde17/inside/house_2/second_apartment/first_bedroom)
 "bSF" = (
 /obj/structure/table/bronze,
-/obj/item/phone{
-	desc = "Прямая линия до высшего командования. Он даже не подключен...";
-	name = "красный телефон";
-	pixel_x = -10;
-	pixel_y = -3
-	},
-/obj/item/cigarette/pipe{
-	pixel_x = 8;
-	pixel_y = 12
+/obj/structure/transmitter/ussp{
+	pixel_x = -7;
+	pixel_y = 1;
+	name = "Райкомцентр"
 	},
 /turf/open/floor/carpet/red,
 /area/awaymission/avangarde17/inside/gov)
@@ -3663,6 +3676,13 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/third_apartment)
+"ccU" = (
+/obj/structure/railing/platform{
+	dir = 10
+	},
+/obj/structure/light_fake/small/directional,
+/turf/open/floor/asphalt,
+/area/awaymission/avangarde17/outside/city)
 "ccW" = (
 /obj/structure/stone_tile/slab{
 	color = "#464646"
@@ -3784,6 +3804,7 @@
 /obj/structure/railing/platform{
 	dir = 8
 	},
+/obj/structure/light_fake/small/directional/west,
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
 "chr" = (
@@ -4267,6 +4288,11 @@
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/structure/sibirskiy{
 	pixel_y = 32
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 6;
+	pixel_y = -2;
+	name = "Советская 2 - Подъезд 1 - Этаж 1 -  Квартира 2"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/second_apartment)
@@ -5864,6 +5890,14 @@
 "dqm" = (
 /turf/open/openspace,
 /area/awaymission/avangarde17/inside/ruin)
+"dqq" = (
+/obj/structure/railing/platform{
+	dir = 4
+	},
+/obj/structure/flora/grass/green/style_random,
+/obj/structure/light_fake/small/directional/east,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "dqs" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/structure/sign/warning/no_smoking/circle/directional/east,
@@ -6180,6 +6214,11 @@
 /obj/structure/dresser,
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
+/obj/structure/transmitter/ussp{
+	pixel_x = -3;
+	pixel_y = 12;
+	name = "Ленина 1 - Этаж 1 - Квартира 3"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/third_apartment/bedroom)
 "dyM" = (
@@ -6324,9 +6363,12 @@
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/base)
 "dBM" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/old_hangar/first_floor)
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/machinery/door/window/left/directional/east,
+/obj/structure/transmitter/mounted/free/directional/east,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "dDv" = (
 /obj/structure/cable,
 /turf/open/misc/snow/avangarde,
@@ -6756,6 +6798,9 @@
 /obj/structure/table/wood,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 6
+	},
+/obj/structure/transmitter/ussp{
+	name = "Радиостанция - 1"
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/radio)
@@ -7298,6 +7343,7 @@
 "eca" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /obj/structure/cable,
+/obj/structure/light_fake/small/directional,
 /turf/open/floor/iron/small,
 /area/awaymission/avangarde17/outside/city)
 "ecG" = (
@@ -7723,6 +7769,14 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment/bedroom)
+"euX" = (
+/obj/structure/railing/platform{
+	dir = 9
+	},
+/obj/structure/cable,
+/obj/structure/light_fake/small/directional/west,
+/turf/open/floor/asphalt,
+/area/awaymission/avangarde17/outside/city)
 "evr" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/effect/decal/cleanable/blood/tracks/xeno{
@@ -7753,6 +7807,7 @@
 /area/awaymission/avangarde17/inside/shop_1)
 "ewJ" = (
 /obj/effect/mapping_helpers/broken_floor,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/bedroom)
 "ewN" = (
@@ -7840,6 +7895,7 @@
 	pixel_y = 2
 	},
 /obj/machinery/light/small/directional/east,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "eyv" = (
@@ -8049,6 +8105,11 @@
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
+"eFA" = (
+/obj/structure/cable,
+/obj/structure/light_fake/small/directional,
+/turf/open/floor/iron/small,
+/area/awaymission/avangarde17/outside/city)
 "eGG" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_4/fifth_apartment/bedroom)
@@ -8288,6 +8349,7 @@
 /area/awaymission/avangarde17/inside/house_3/third_apartment)
 "eOB" = (
 /obj/effect/decal/cleanable/glass,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "eON" = (
@@ -8422,6 +8484,11 @@
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/ruin)
+"eSI" = (
+/obj/structure/mineral_door/wood,
+/obj/structure/cable,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "eSJ" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 8
@@ -8467,6 +8534,13 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple)
+"eUi" = (
+/obj/structure/railing/platform{
+	dir = 6
+	},
+/obj/structure/light_fake/small/directional,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "eUA" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8684,17 +8758,12 @@
 "fcp" = (
 /obj/structure/platform/iron,
 /obj/structure/window/reinforced/survival_pod/spawner/directional/west,
-/obj/item/reagent_containers/cup/glass/drinkingglass{
-	pixel_x = -1;
-	pixel_y = 0
-	},
-/obj/item/reagent_containers/cup/glass/drinkingglass{
-	pixel_x = 5;
-	pixel_y = 0
-	},
 /obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
 	pixel_x = 11;
 	pixel_y = -2
+	},
+/obj/structure/transmitter/ussp{
+	name = "Советская 2 - Подъезд 2 - Этаж 1 -  Квартира 1"
 	},
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_2/first_apartment)
@@ -9378,6 +9447,11 @@
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/machinery/light_switch/directional/west,
 /obj/structure/cable,
+/obj/structure/transmitter/ussp{
+	pixel_x = -4;
+	pixel_y = 14;
+	name = "Советская 2 - Подъезд 1 - Этаж 2 -  Квартира 3"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/fifth_apartment/bedroom)
 "fCZ" = (
@@ -9412,6 +9486,9 @@
 	pixel_y = 14
 	},
 /obj/machinery/light/small/directional/east,
+/obj/structure/transmitter/ussp{
+	name = "Ленина 2 - Этаж 1 - Квартира 1"
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/first_apartment)
 "fDB" = (
@@ -11357,6 +11434,11 @@
 	pixel_x = -6;
 	pixel_y = 11
 	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 7;
+	pixel_y = -1;
+	name = "Ленина 1 - Этаж 2 - Квартира 4"
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/eighth_apartment)
 "gLq" = (
@@ -11510,6 +11592,7 @@
 	dir = 9
 	},
 /obj/structure/flora/tree/pine/style_random,
+/obj/structure/light_fake/small/directional/north,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "gPH" = (
@@ -12019,7 +12102,7 @@
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/house_2/second_apartment)
 "hlF" = (
-/obj/structure/closet/crate/large,
+/obj/structure/closet/cardboard,
 /obj/item/climbing_hook,
 /obj/item/climbing_hook,
 /obj/item/climbing_hook,
@@ -12027,6 +12110,10 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 9
 	},
+/obj/item/clothing/mask/balaclava,
+/obj/item/clothing/mask/balaclava,
+/obj/item/clothing/mask/balaclava,
+/obj/item/clothing/mask/balaclava,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "hmf" = (
@@ -12324,6 +12411,18 @@
 	name = "Столичная";
 	pixel_x = 8;
 	pixel_y = 18
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_x = 2;
+	pixel_y = -3
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_x = 6;
+	pixel_y = -3
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = 9;
+	pixel_y = -5
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_1/first_apartment)
@@ -12690,10 +12789,6 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
 "hFB" = (
-/obj/machinery/griddle,
-/obj/effect/turf_decal/siding/wood/cherry{
-	dir = 8
-	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment)
 "hFG" = (
@@ -13054,6 +13149,7 @@
 	dir = 9
 	},
 /obj/structure/cable,
+/obj/structure/light_fake/small/directional/north,
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
 "hOA" = (
@@ -13273,7 +13369,19 @@
 	desc = "Разлит на Лазаре.";
 	name = "Столичная";
 	pixel_x = 8;
-	pixel_y = 17
+	pixel_y = 18
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_x = 2;
+	pixel_y = -3
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_x = 6;
+	pixel_y = -3
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = 9;
+	pixel_y = -5
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_2/first_apartment)
@@ -13398,6 +13506,11 @@
 /obj/item/cigarette/pipe{
 	pixel_x = 9;
 	pixel_y = -1
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = -9;
+	pixel_y = 0;
+	name = "Вахтовики"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/miner)
@@ -14412,6 +14525,10 @@
 /obj/machinery/light_switch/directional/south,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_1/second_apartment)
+"iKN" = (
+/obj/structure/light_fake/small/directional,
+/turf/open/floor/iron/small,
+/area/awaymission/avangarde17/outside/city)
 "iKP" = (
 /obj/machinery/shower/directional/south,
 /obj/structure/fluff/shower_drain,
@@ -14656,6 +14773,11 @@
 /obj/structure/dresser,
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/structure/sign/poster/contraband/random/directional/north,
+/obj/structure/transmitter/ussp{
+	pixel_x = -2;
+	pixel_y = 13;
+	name = "Ленина 2 - Этаж 2 - Квартира 1"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/fifth_apartment/bedroom)
 "iTt" = (
@@ -15078,6 +15200,7 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "jhm" = (
@@ -15251,7 +15374,9 @@
 /turf/open/floor/iron/diagonal,
 /area/awaymission/avangarde17/inside/house_1/fourth_apartment/bedroom)
 "jkT" = (
-/obj/machinery/power/smes,
+/obj/machinery/power/smes/full{
+	name = "трансформатор"
+	},
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/old_hangar/eng)
@@ -15679,6 +15804,7 @@
 /area/awaymission/avangarde17/outside)
 "jyR" = (
 /obj/effect/mapping_helpers/broken_floor,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "jyZ" = (
@@ -15841,7 +15967,7 @@
 /obj/structure/table/wood,
 /obj/structure/showcase/machinery/tv/broken{
 	pixel_x = 0;
-	pixel_y = 9
+	pixel_y = 14
 	},
 /obj/structure/railing{
 	dir = 8;
@@ -15849,6 +15975,11 @@
 	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 6
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 5;
+	pixel_y = -1;
+	name = "Ленина 2 - Этаж 1 - Квартира 4"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment)
@@ -16014,6 +16145,14 @@
 "jFS" = (
 /obj/structure/sign/poster/contraband/vodka/directional/west,
 /obj/structure/cable,
+/obj/item/picket_sign{
+	pixel_x = 12;
+	pixel_y = 22;
+	anchored = 1;
+	label = "Шашлычная ''Братские Народы''";
+	name = "Предупреждение";
+	desc = "НЕ РЕЗАТЬ ПРОВОДА! БЕРЕГИ ОБЩЕСТВЕННУЮ СОБСТВЕННОСТЬ!"
+	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "jGe" = (
@@ -16681,6 +16820,11 @@
 "kaE" = (
 /obj/structure/platform/iron,
 /obj/structure/window/reinforced/survival_pod/spawner/directional/south,
+/obj/structure/transmitter/ussp{
+	pixel_x = -9;
+	pixel_y = 11;
+	name = "Ленина 2 - Этаж 1 - Квартира 2"
+	},
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_4/second_apartment/bedroom)
 "kaG" = (
@@ -16835,6 +16979,11 @@
 /obj/machinery/microwave{
 	pixel_x = 1;
 	pixel_y = 14
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = -4;
+	pixel_y = -1;
+	name = "Ленина 1 - Этаж 1 - Квартира 1"
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/first_apartment)
@@ -17251,6 +17400,7 @@
 "krj" = (
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/effect/decal/cleanable/blood/old,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "kry" = (
@@ -17840,6 +17990,7 @@
 /area/awaymission/avangarde17/inside/house_2/fifth_apartment)
 "kLt" = (
 /obj/machinery/disposal/bin,
+/obj/structure/light_fake/small/directional/north,
 /turf/open/floor/iron/herringbone,
 /area/awaymission/avangarde17/outside/city)
 "kLP" = (
@@ -18211,6 +18362,7 @@
 /obj/effect/mapping_helpers/broken_floor,
 /obj/effect/decal/cleanable/glass,
 /obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "kVd" = (
@@ -18602,9 +18754,8 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
 	},
-/obj/item/phone{
-	pixel_x = -7;
-	pixel_y = -1
+/obj/structure/transmitter/ussp{
+	name = "Радиостанция - 2"
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/radio)
@@ -18684,7 +18835,7 @@
 /obj/structure/table/wood,
 /obj/structure/showcase/machinery/tv/broken{
 	pixel_x = 0;
-	pixel_y = 9
+	pixel_y = 13
 	},
 /obj/structure/railing{
 	dir = 8;
@@ -18692,6 +18843,11 @@
 	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 5
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 6;
+	pixel_y = -1;
+	name = "Ленина 2 - Этаж 1 - Квартира 3"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
@@ -20206,6 +20362,7 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
 	},
+/obj/structure/cable,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "mnY" = (
@@ -20228,6 +20385,7 @@
 /obj/structure/railing/platform{
 	dir = 9
 	},
+/obj/structure/light_fake/small/directional/west,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "mpl" = (
@@ -21140,6 +21298,7 @@
 "mQM" = (
 /obj/structure/mineral_door/wood,
 /obj/structure/barricade/wooden/crude,
+/obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "mRr" = (
@@ -21480,6 +21639,13 @@
 /obj/structure/sign/flag/ussp/directional/east,
 /turf/open/floor/iron/dark/smooth_large,
 /area/space)
+"ncw" = (
+/obj/structure/railing/platform{
+	dir = 6
+	},
+/obj/structure/light_fake/small/directional,
+/turf/open/floor/asphalt,
+/area/awaymission/avangarde17/outside/city)
 "ndk" = (
 /obj/machinery/oven/range,
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -21932,6 +22098,13 @@
 	},
 /turf/open/floor/wood/parquet/oak,
 /area/space)
+"nrq" = (
+/obj/structure/railing/platform{
+	dir = 9
+	},
+/obj/structure/light_fake/small/directional/north,
+/turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/outside/city)
 "nrt" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/first_apartment/bathroom)
@@ -22299,6 +22472,10 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_3/first_apartment/bedroom)
+"nDv" = (
+/obj/structure/cable/multilayer/multiz,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "nDz" = (
 /obj/machinery/light/directional/east,
 /obj/effect/decal/cleanable/generic,
@@ -23159,6 +23336,14 @@
 	dir = 5
 	},
 /obj/structure/cable,
+/obj/item/picket_sign{
+	pixel_x = 12;
+	pixel_y = 22;
+	anchored = 1;
+	label = "Шашлычная ''Братские Народы''";
+	name = "Предупреждение";
+	desc = "НЕ РЕЗАТЬ ПРОВОДА! БЕРЕГИ ОБЩЕСТВЕННУЮ СОБСТВЕННОСТЬ!"
+	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "ojA" = (
@@ -23255,10 +23440,6 @@
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "olj" = (
 /obj/structure/table/wood,
-/obj/item/phone{
-	pixel_x = -7;
-	pixel_y = -1
-	},
 /obj/item/paper_bin/carbon{
 	pixel_x = 7;
 	pixel_y = 5
@@ -23266,6 +23447,11 @@
 /obj/item/pen{
 	pixel_x = 6;
 	pixel_y = 2
+	},
+/obj/structure/transmitter/ussp_militsia{
+	pixel_x = -6;
+	pixel_y = 6;
+	name = "МИЛИЦИЯ - 02"
 	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/police)
@@ -23804,6 +23990,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
 	},
+/obj/structure/light_fake/small/directional/east,
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
 "oBM" = (
@@ -24385,7 +24572,8 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/wood/large/cherry,
+/obj/structure/cable/multilayer/multiz,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/roofs)
 "oZW" = (
 /obj/structure/shelves,
@@ -24677,6 +24865,14 @@
 "pib" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /obj/structure/cable,
+/obj/item/picket_sign{
+	pixel_x = 12;
+	pixel_y = 22;
+	anchored = 1;
+	label = "Шашлычная ''Братские Народы''";
+	name = "Предупреждение";
+	desc = "НЕ РЕЗАТЬ ПРОВОДА! БЕРЕГИ ОБЩЕСТВЕННУЮ СОБСТВЕННОСТЬ!"
+	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "pic" = (
@@ -24744,6 +24940,11 @@
 	},
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
+/obj/structure/transmitter/ussp{
+	pixel_x = -5;
+	pixel_y = 0;
+	name = "Фельдшерско-Акушерский Пункт"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hospital/dr)
 "pjX" = (
@@ -25053,6 +25254,13 @@
 /obj/structure/window/reinforced/survival_pod/spawner/directional/east,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/bar)
+"prE" = (
+/obj/structure/railing/platform{
+	dir = 5
+	},
+/obj/structure/light_fake/small/directional/east,
+/turf/open/floor/asphalt,
+/area/awaymission/avangarde17/outside/city)
 "prU" = (
 /obj/structure/stone_tile/slab/cracked{
 	color = "#464646"
@@ -25162,17 +25370,18 @@
 "ptM" = (
 /obj/structure/platform/iron,
 /obj/structure/window/reinforced/survival_pod/spawner/directional/west,
-/obj/item/reagent_containers/cup/glass/drinkingglass{
+/obj/structure/transmitter/ussp{
 	pixel_x = -1;
-	pixel_y = 0
-	},
-/obj/item/reagent_containers/cup/glass/drinkingglass{
-	pixel_x = 5;
-	pixel_y = 0
+	pixel_y = 0;
+	name = "Советская 2 - Подъезд 1 - Этаж 1 -  Квартира 1"
 	},
 /obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
-	pixel_x = 11;
-	pixel_y = -2
+	pixel_x = 9;
+	pixel_y = 7
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = 10;
+	pixel_y = 1
 	},
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_1/first_apartment)
@@ -25920,6 +26129,14 @@
 /obj/structure/cable,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"pTD" = (
+/obj/structure/railing/platform{
+	dir = 10
+	},
+/obj/structure/cable,
+/obj/structure/light_fake/small/directional,
+/turf/open/floor/asphalt,
+/area/awaymission/avangarde17/outside/city)
 "pTR" = (
 /obj/structure/table/wood,
 /obj/item/radio/entertainment/speakers/physical{
@@ -25929,6 +26146,11 @@
 /obj/item/kirbyplants/organic/plant15{
 	pixel_x = -6;
 	pixel_y = 11
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 6;
+	pixel_y = 0;
+	name = "Ленина 2 - Этаж 2 - Квартира 3"
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/seven_apartment)
@@ -26250,6 +26472,7 @@
 	pixel_x = 6;
 	pixel_y = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "qbH" = (
@@ -26403,6 +26626,11 @@
 /obj/machinery/light/small/directional/south,
 /obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
+/obj/structure/transmitter/ussp{
+	pixel_x = -4;
+	pixel_y = 13;
+	name = "Советская 2 - Подъезд 2 - Этаж 2-  Квартира 1"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_2/third_apartment/bedroom)
 "qfi" = (
@@ -26593,6 +26821,7 @@
 	dir = 5
 	},
 /obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/bedroom)
 "qlD" = (
@@ -26905,6 +27134,11 @@
 /obj/machinery/light/small/directional/south,
 /obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
+/obj/structure/transmitter/ussp{
+	pixel_x = -3;
+	pixel_y = 13;
+	name = "Советская 2 - Подъезд 1 - Этаж 2 -  Квартира 1"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/third_apartment/bedroom)
 "quu" = (
@@ -27422,6 +27656,11 @@
 	pixel_x = -3;
 	pixel_y = 0
 	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 8;
+	pixel_y = 2;
+	name = "Гастроном ''Козерог''"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/shop_1)
 "qLp" = (
@@ -27646,6 +27885,13 @@
 	pixel_y = -19
 	},
 /turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/outside/city)
+"qSV" = (
+/obj/structure/railing/platform{
+	dir = 4
+	},
+/obj/structure/light_fake/small/directional/east,
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "qTp" = (
 /obj/structure/fence{
@@ -27976,6 +28222,17 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
+"rgv" = (
+/obj/structure/railing/platform{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/structure/cable,
+/obj/structure/light_fake/small/directional/west,
+/turf/open/floor/asphalt,
+/area/awaymission/avangarde17/outside/city)
 "rgL" = (
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
@@ -28300,6 +28557,12 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/garage)
+"rta" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/outside/city)
 "rtl" = (
 /obj/structure/hedge,
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -28634,6 +28897,7 @@
 	color = "gray";
 	layer = 2.89\
 	},
+/obj/structure/light_fake/small/directional,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "rDQ" = (
@@ -29261,6 +29525,11 @@
 /obj/machinery/light/small/directional/south,
 /obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
+/obj/structure/transmitter/ussp{
+	pixel_x = -4;
+	pixel_y = 13;
+	name = "Советская 2 - Подъезд 2 - Этаж 2 -  Квартира 2"
+	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_2/fourth_apartment)
 "rWo" = (
@@ -29616,6 +29885,11 @@
 	pixel_y = 11;
 	name = "Прима";
 	desc = "Как в детстве."
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = -9;
+	pixel_y = 0;
+	name = "Рюмочная ''Красная Звезда''"
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/bar)
@@ -31207,6 +31481,11 @@
 /area/awaymission/avangarde17/inside/house_4/first_apartment/bedroom)
 "tkY" = (
 /obj/structure/dresser,
+/obj/structure/transmitter/ussp{
+	pixel_x = -3;
+	pixel_y = 13;
+	name = "Ленина 1 - Этаж 1 - Квартира 2"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/second_apartment/bedroom)
 "tlE" = (
@@ -31852,6 +32131,11 @@
 /obj/structure/dresser,
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/structure/sign/poster/contraband/random/directional/north,
+/obj/structure/transmitter/ussp{
+	pixel_x = -3;
+	pixel_y = 14;
+	name = "Ленина 1 - Этаж 2 - Квартира 1"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/fifth_apartment/bedroom)
 "tEp" = (
@@ -32186,7 +32470,7 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/mine)
 "tON" = (
-/obj/machinery/power/apc/auto_name/directional/north,
+/obj/structure/transmitter/mounted/free/directional/north,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "tOP" = (
@@ -33400,6 +33684,13 @@
 	},
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
+"uFd" = (
+/obj/structure/railing/platform{
+	dir = 4
+	},
+/obj/structure/light_fake/small/directional/east,
+/turf/open/floor/asphalt,
+/area/awaymission/avangarde17/outside/city)
 "uFj" = (
 /obj/structure/table/wood,
 /obj/item/stamp/ussp{
@@ -33411,6 +33702,11 @@
 	pixel_y = 0
 	},
 /obj/effect/turf_decal/siding/wood/cherry/end,
+/obj/structure/transmitter/ussp{
+	pixel_x = 7;
+	pixel_y = 6;
+	name = "Промтовары ''Михалыч''"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/shop_2)
 "uFl" = (
@@ -33429,6 +33725,7 @@
 /obj/structure/railing{
 	dir = 4
 	},
+/obj/structure/light_fake/small/directional/west,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "uGc" = (
@@ -33670,6 +33967,11 @@
 	pixel_x = -6;
 	pixel_y = 11
 	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 6;
+	pixel_y = -1;
+	name = "Ленина 1 - Этаж 2 - Квартира 3"
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment)
 "uNS" = (
@@ -33870,6 +34172,10 @@
 /obj/structure/steps/directional/north,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
+"uTk" = (
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside/roofs)
 "uTr" = (
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron/white/small,
@@ -34737,6 +35043,11 @@
 	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 6
+	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 4;
+	pixel_y = 0;
+	name = "Ленина 1 - Этаж 1 - Квартира 4"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/fourth_apartment)
@@ -35760,10 +36071,6 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
 "vZv" = (
-/obj/machinery/griddle,
-/obj/effect/turf_decal/siding/wood/cherry{
-	dir = 8
-	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
 "wai" = (
@@ -36386,6 +36693,12 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple)
+"wmd" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "wmh" = (
 /obj/structure/flora/rock/icy/style_random,
 /turf/open/misc/snow/avangarde,
@@ -36739,6 +37052,7 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
 "wxF" = (
+/obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "wyk" = (
@@ -37458,6 +37772,16 @@
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/first_apartment)
+"wQa" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 4
+	},
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/machinery/door/window/left/directional/south,
+/obj/structure/transmitter/mounted/free/directional/north,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "wQm" = (
 /obj/structure/flora/bush/snow/style_random,
 /turf/open/misc/snow/avangarde,
@@ -37527,6 +37851,17 @@
 	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment)
+"wRK" = (
+/obj/item/picket_sign{
+	pixel_x = 11;
+	pixel_y = 2;
+	anchored = 1;
+	label = "Шашлычная ''Братские Народы''";
+	name = "Предупреждение";
+	desc = "НЕ РЕЗАТЬ ПРОВОДА! БЕРЕГИ ОБЩЕСТВЕННУЮ СОБСТВЕННОСТЬ!"
+	},
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "wRP" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
@@ -37936,10 +38271,6 @@
 /area/awaymission/avangarde17/inside/police/second_floor)
 "xek" = (
 /obj/structure/table/wood,
-/obj/item/phone{
-	pixel_x = -7;
-	pixel_y = -1
-	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 10
 	},
@@ -37947,6 +38278,11 @@
 	pixel_y = 32
 	},
 /obj/machinery/light_switch/directional/west,
+/obj/item/paper_bin/carbon{
+	pixel_x = 4;
+	pixel_y = 8
+	},
+/obj/item/pen,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/radio)
 "xff" = (
@@ -38510,6 +38846,11 @@
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/machinery/light_switch/directional/west,
 /obj/structure/cable,
+/obj/structure/transmitter/ussp{
+	pixel_x = -4;
+	pixel_y = 14;
+	name = "Советская 2 - Подъезд 2 - Этаж 2 -  Квартира 3"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_2/fifth_apartment/bedroom)
 "xtr" = (
@@ -38790,6 +39131,11 @@
 	pixel_y = 32
 	},
 /obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/transmitter/ussp{
+	pixel_x = 5;
+	pixel_y = -1;
+	name = "Советская 2 - Подъезд 2 - Этаж 1 -  Квартира 2"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_2/second_apartment)
 "xEd" = (
@@ -39294,6 +39640,11 @@
 	pixel_x = -6;
 	pixel_y = 11
 	},
+/obj/structure/transmitter/ussp{
+	pixel_x = 6;
+	pixel_y = 0;
+	name = "Ленина 2 - Этаж 2 - Квартира 4"
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment)
 "xUq" = (
@@ -39329,7 +39680,7 @@
 	},
 /area/awaymission/avangarde17/inside/temple)
 "xVv" = (
-/obj/machinery/light/small/directional/north,
+/obj/structure/light_fake/small/directional/north,
 /turf/open/floor/iron/small,
 /area/awaymission/avangarde17/outside/city)
 "xVG" = (
@@ -39511,6 +39862,7 @@
 /area/awaymission/avangarde17/outside/ruin)
 "ycj" = (
 /obj/effect/mapping_helpers/broken_floor,
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside/roofs)
 "ycn" = (
@@ -39541,6 +39893,7 @@
 	dir = 6
 	},
 /obj/structure/flora/tree/dead/style_random,
+/obj/structure/light_fake/small/directional,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "yes" = (
@@ -89860,11 +90213,11 @@ cWo
 efL
 fju
 fju
-vgJ
+ccU
 eGZ
 xVv
 jcp
-qyY
+eFA
 mMo
 hOx
 osI
@@ -89872,13 +90225,13 @@ osI
 osI
 jrS
 jrS
-eel
+pTD
 aAK
 xVv
 jcp
 eca
 wUw
-moW
+nrq
 xJO
 hzh
 fwj
@@ -90122,7 +90475,7 @@ chb
 vgJ
 tth
 nCg
-hOx
+euX
 cuH
 nxM
 qpk
@@ -90130,7 +90483,7 @@ mbw
 hCB
 rpH
 oiZ
-osI
+rgv
 eel
 tth
 nCg
@@ -92462,7 +92815,7 @@ lNs
 vyY
 iru
 wCE
-oXc
+wRK
 vEa
 oIg
 oIg
@@ -93481,7 +93834,7 @@ oXc
 hXt
 qUR
 qUR
-qUR
+rta
 gVl
 bvI
 oXc
@@ -93738,8 +94091,8 @@ oXc
 oXc
 oXc
 cHn
-cHn
-bZR
+dBM
+iru
 oXc
 cHn
 cgR
@@ -93970,8 +94323,8 @@ voq
 tzW
 tfS
 stO
-stO
-stO
+rqq
+wQa
 pJc
 mMy
 oBZ
@@ -93995,7 +94348,7 @@ dAb
 jqj
 vrH
 vrH
-jqj
+qgH
 ppH
 jqj
 vrH
@@ -95765,15 +96118,15 @@ oIg
 efK
 wHc
 acQ
-iqM
+qSV
 lIJ
 mSH
 rPF
-tvv
+dqq
 fIV
 uNS
 nBM
-auk
+prE
 gWM
 lys
 kwE
@@ -95785,19 +96138,19 @@ mOy
 mOy
 mOy
 wyB
-lqI
+uFd
 gWM
 laq
 kwE
-lqI
+uFd
 sCE
 nBM
 uNS
-auk
+prE
 bTZ
 oIg
 wyB
-lqI
+uFd
 bTZ
 phN
 laq
@@ -96025,15 +96378,15 @@ ydH
 oRb
 aaI
 iqM
-fIV
+eUi
 cVD
 kLt
 qyY
-qyY
+eFA
 eSa
 auk
 lqI
-sCE
+ncw
 yfb
 auk
 lqI
@@ -96041,19 +96394,19 @@ bTZ
 gnp
 wyB
 lqI
-sCE
+ncw
 qsb
 auk
 lqI
-sCE
+ncw
 dSJ
 kLt
 qyY
-jcp
+iKN
 pKK
 auk
 lqI
-sCE
+ncw
 sES
 auk
 lqI
@@ -96958,7 +97311,7 @@ kWP
 ekX
 iNG
 nYq
-vXx
+nDv
 wxF
 eOB
 hou
@@ -97217,7 +97570,7 @@ jOP
 nYq
 fIf
 rEJ
-dBM
+vXx
 pxF
 haj
 xHx
@@ -161463,7 +161816,7 @@ bQx
 mZr
 mwS
 bFF
-jyR
+wmd
 eyg
 qbj
 jyR
@@ -161976,7 +162329,7 @@ bQx
 bQx
 mZr
 mZr
-hNg
+eSI
 mZr
 mZr
 mZr
@@ -162495,7 +162848,7 @@ aJY
 sYR
 kah
 oZK
-ujb
+uTk
 ujb
 lcM
 kEd

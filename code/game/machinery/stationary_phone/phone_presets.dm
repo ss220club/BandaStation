@@ -56,6 +56,36 @@
 	dir = EAST
 	pixel_x = -16
 
+/obj/structure/transmitter/mounted/free
+	name = "таксофон"
+	desc = "Настенный таксофон. БЕСПЛАТНЫЙ!!!"
+	icon_state = "wall_phone"
+	post_init_icon_state = "wall_phone"
+	is_advanced = FALSE
+	greyscale_colors = "#6e7766"
+	phone_category = null // эта штобы нельзя было звонить на таксофоны
+
+/obj/structure/transmitter/mounted/free/examine(mob/user)
+	. = ..()
+	. += span_notice("Мелким шрифтом на металлической табличке выгравировано:")
+	. += span_notice("«Все звонки - бесплатно! Жалобы на качество обслуживания принимаются по... \[нечитаемо\]»")
+
+/obj/structure/transmitter/mounted/free/directional/north
+	dir = NORTH
+	pixel_y = 24
+
+/obj/structure/transmitter/mounted/free/directional/south
+	dir = SOUTH
+	pixel_y = -26
+
+/obj/structure/transmitter/mounted/free/directional/west
+	dir = WEST
+	pixel_x = 16
+
+/obj/structure/transmitter/mounted/free/directional/east
+	dir = EAST
+	pixel_x = -16
+
 // A personal command line for private offices.
 /obj/structure/transmitter/command
 	phone_category = PHONE_NET_COMMAND
@@ -115,6 +145,8 @@
 	was_renamed = TRUE
 
 /obj/structure/transmitter/ussp
+	name = "телефон"
+	desc = "Простое и надежное устройство связи. Надежное до тех пор, пока провода не сдали на цветмет..."
 	phone_category = PHONE_NET_PUBLIC
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
 	greyscale_colors = "#b10a0a"
@@ -122,6 +154,8 @@
 	was_renamed = TRUE
 
 /obj/structure/transmitter/ussp_militsia
+	name = "телефон"
+	desc = "Простое и надежное устройство связи. Надежное до тех пор, пока провода не сдали на цветмет..."
 	phone_category = PHONE_NET_BRIDGE
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
 	greyscale_colors = "#b10a0a"
@@ -129,6 +163,8 @@
 	was_renamed = TRUE
 
 /obj/structure/transmitter/ussp_army
+	name = "телефон"
+	desc = "Простое и надежное устройство связи. Надежное до тех пор, пока провода не сдали на цветмет..."
 	phone_category = PHONE_NET_BRIDGE
 	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
 	greyscale_colors = "#283803"
