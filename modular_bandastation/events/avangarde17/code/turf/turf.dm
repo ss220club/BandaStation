@@ -20,3 +20,6 @@
 	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	turf_type = /turf/open/misc/asteroid/moon
 	defer_change = TRUE
+
+/turf/closed/indestructible/rock/avangarde
+	color = "#292929"

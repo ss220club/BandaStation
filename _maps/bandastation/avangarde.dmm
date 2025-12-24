@@ -839,9 +839,7 @@
 /obj/structure/flora/rock/style_4{
 	color = "#292929"
 	},
-/turf/closed/indestructible/rock{
-	color = "#292929"
-	},
+/turf/closed/indestructible/rock/avangarde,
 /area/awaymission/avangarde17/inside/temple)
 "aIp" = (
 /obj/structure/cable,
@@ -4792,6 +4790,18 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
+"cOc" = (
+/obj/structure/spider/stickyweb,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "cOt" = (
 /obj/machinery/power/port_gen/pacman/pre_loaded{
 	sheets = 50;
@@ -5804,9 +5814,7 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
 "dog" = (
-/turf/closed/indestructible/rock{
-	color = "#292929"
-	},
+/turf/closed/indestructible/rock/avangarde,
 /area/awaymission/avangarde17/inside/temple)
 "doj" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -5871,6 +5879,25 @@
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/miner/second_floor)
+"dpN" = (
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 10
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 5
+	},
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646"
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "dqa" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
@@ -5947,6 +5974,18 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
+"dsP" = (
+/obj/structure/stone_tile/block{
+	color = "#464646"
+	},
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 1
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "dsR" = (
 /obj/structure/closet/secure_closet/freezer/empty,
 /obj/item/reagent_containers/condiment/enzyme,
@@ -6638,6 +6677,15 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/old_hangar)
+"dMK" = (
+/mob/living/basic/faithless,
+/obj/structure/stone_tile/slab/cracked{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "dMY" = (
 /obj/structure/table/wood,
 /obj/item/kitchen/fork{
@@ -8382,6 +8430,18 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/gov)
+"ePJ" = (
+/obj/structure/tomb/obelisk_2,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/slab/cracked{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "eQo" = (
 /obj/structure/chair/comfy/brown{
 	dir = 1
@@ -13177,6 +13237,27 @@
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/first_apartment)
+"hPC" = (
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	color = "#464646"
+	},
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "hPJ" = (
 /obj/structure/sign/plaques/kiddie/badger{
 	name = "Улица Лазаря, дом 1";
@@ -13351,6 +13432,20 @@
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_1/second_apartment/third_bedroom)
+"hTH" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 4
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "hUj" = (
 /obj/structure/shelves,
 /obj/item/reagent_containers/condiment/saltshaker{
@@ -13490,6 +13585,15 @@
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/first_apartment/bedroom)
+"hWn" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/trap/punji,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "hWA" = (
 /obj/structure/fence,
 /obj/structure/light_fake/floodlight{
@@ -13747,6 +13851,23 @@
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hospital/hall)
+"igv" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/spider/stickyweb,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "igO" = (
 /obj/item/cigbutt{
 	pixel_x = 7;
@@ -14105,6 +14226,18 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_1)
+"ixc" = (
+/obj/structure/stone_tile/block{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 1
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "ixH" = (
 /obj/machinery/oven/range,
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -15832,6 +15965,20 @@
 /obj/structure/flora/grass/both/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
+"jAf" = (
+/mob/living/basic/faithless,
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "jBi" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /obj/item/stack/ore/iron,
@@ -17553,6 +17700,15 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/hangar)
+"kzB" = (
+/mob/living/basic/faithless,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "kzS" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -17584,6 +17740,9 @@
 /turf/open/floor/carpet/green,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "kBd" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
 /mob/living/basic/construct/juggernaut/hostile,
 /turf/open/floor/cult{
 	color = "#4b4b4b"
@@ -18400,6 +18559,20 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple)
+"kWb" = (
+/obj/structure/stone_tile/surrounding/cracked{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/tomb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "kWd" = (
 /obj/machinery/door/airlock/hatch,
 /turf/open/floor/pod/light,
@@ -18975,6 +19148,18 @@
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
+"lqF" = (
+/obj/structure/stone_tile/surrounding/cracked{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_3,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "lqG" = (
 /obj/effect/turf_decal/tile/neutral/tram{
 	dir = 4;
@@ -19275,6 +19460,21 @@
 /obj/structure/stone_tile/block/cracked{
 	color = "#464646";
 	dir = 1
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
+"lBI" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
 	},
 /turf/open/floor/cult{
 	color = "#4b4b4b"
@@ -19620,6 +19820,16 @@
 /obj/machinery/door/airlock/hatch,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/base)
+"lNm" = (
+/obj/structure/stone_tile/slab/burnt{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_3,
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "lNs" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
@@ -20502,6 +20712,18 @@
 	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_4/fifth_apartment)
+"mrQ" = (
+/obj/structure/stone_tile/surrounding{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_2,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "mti" = (
 /obj/structure/platform/iron,
 /obj/structure/window/reinforced/survival_pod/spawner/directional/west,
@@ -20850,6 +21072,16 @@
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/shop_1)
+"mGd" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_2,
+/obj/effect/decal/cleanable/cobweb/cobweb2,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "mGz" = (
 /obj/structure/stone_tile/slab{
 	color = "#464646";
@@ -20965,6 +21197,19 @@
 	},
 /turf/open/floor/wood/oak,
 /area/space)
+"mJe" = (
+/obj/structure/stone_tile/surrounding/cracked{
+	color = "#464646";
+	dir = 5
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_2,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "mJp" = (
 /obj/structure/closet/cardboard,
 /obj/effect/turf_decal/delivery,
@@ -21301,6 +21546,21 @@
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
+"mQZ" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	color = "#464646"
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "mRr" = (
 /obj/structure/chair/wood{
 	dir = 1
@@ -21950,11 +22210,13 @@
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
 "nmt" = (
-/obj/item/gun/ballistic/shotgun/lethal,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/machinery/door/window/left/directional/east,
+/obj/structure/transmitter/mounted/free/directional/east,
+/obj/structure/cable,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "nmT" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_3/first_apartment/bathroom)
@@ -22060,6 +22322,15 @@
 	},
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_3)
+"nqn" = (
+/obj/structure/statue/forgoten/forgoten_3/broke_3,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "nqq" = (
 /obj/structure/flora/grass/brown/style_random,
 /obj/structure/flora/tree/dead/style_random,
@@ -22176,6 +22447,18 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/shop_1)
+"ntg" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/obj/structure/trap/projectile_trap,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "nti" = (
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 8
@@ -23268,6 +23551,18 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple)
+"ogr" = (
+/obj/structure/trap/projectile_trap,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "ogK" = (
 /obj/structure/stone_tile/block{
 	color = "#464646";
@@ -23489,6 +23784,22 @@
 /obj/effect/turf_decal/weather/snow/corner,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
+"onj" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	color = "#464646"
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "onr" = (
 /obj/structure/chair/sofa/left/brown{
 	dir = 8
@@ -24459,6 +24770,29 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
+"oWl" = (
+/obj/structure/stone_tile/surrounding{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_3,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
+"oWn" = (
+/obj/structure/flora/rock/style_3{
+	color = "#292929"
+	},
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "oWK" = (
 /obj/structure/closet/crate/wooden,
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -24984,6 +25318,18 @@
 	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/police/cabinet)
+"pky" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_2,
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "plB" = (
 /obj/structure/filingcabinet/security{
 	pixel_x = -10;
@@ -26036,6 +26382,18 @@
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment)
+"pQA" = (
+/obj/structure/stone_tile/surrounding/burnt{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/obj/structure/tomb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "pQY" = (
 /obj/structure/closet/cardboard,
 /obj/effect/turf_decal/delivery,
@@ -26280,6 +26638,19 @@
 /obj/structure/swings/style_2,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
+"pYj" = (
+/mob/living/basic/faithless,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "pYo" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
@@ -26937,6 +27308,23 @@
 "qpA" = (
 /obj/structure/flora/rock/style_4{
 	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
+"qpD" = (
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 4
 	},
 /turf/open/floor/cult{
 	color = "#4b4b4b"
@@ -30026,6 +30414,15 @@
 /obj/structure/window/reinforced/survival_pod/spawner/directional/north,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_2/second_apartment/third_bedroom)
+"soW" = (
+/obj/structure/statue/forgoten/forgoten_3/broke/broke_2,
+/obj/structure/stone_tile/slab/cracked{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "spq" = (
 /obj/structure/rack{
 	color = "#A1662F"
@@ -30425,6 +30822,26 @@
 /obj/structure/railing,
 /turf/open/openspace,
 /area/awaymission/avangarde17/inside/house_2)
+"sBv" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/burnt{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "sBw" = (
 /obj/structure/hedge,
 /turf/open/floor/wood/parquet/cherry,
@@ -30561,6 +30978,18 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
+"sDR" = (
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/obj/structure/spider/stickyweb,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "sEp" = (
 /obj/structure/chair/sofa/left/brown{
 	dir = 4
@@ -31368,6 +31797,15 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple)
+"thP" = (
+/obj/structure/stone_tile/slab/cracked{
+	color = "#464646"
+	},
+/obj/structure/tomb/tomb_3,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "tii" = (
 /obj/structure/stone_tile/block{
 	color = "#464646";
@@ -31528,6 +31966,17 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/police/cabinet)
+"tnp" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "tnq" = (
 /obj/structure/girder,
 /turf/open/floor/plating,
@@ -31770,6 +32219,26 @@
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/police/custodials)
+"tup" = (
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "tuE" = (
 /obj/structure/stone_tile/slab{
 	color = "#464646"
@@ -33307,6 +33776,25 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple)
+"utP" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 10
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "uub" = (
 /obj/effect/turf_decal/tile/neutral/tram{
 	alpha = 200;
@@ -33657,6 +34145,18 @@
 /obj/structure/flora/tree/pine/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
+"uDP" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/statue/forgoten/broke{
+	pixel_x = -16;
+	pixel_y = 2
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "uDQ" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/structure/cable,
@@ -33684,6 +34184,20 @@
 	},
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
+"uER" = (
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/tomb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "uFd" = (
 /obj/structure/railing/platform{
 	dir = 4
@@ -34019,6 +34533,19 @@
 	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_3/eighth_apartment)
+"uPM" = (
+/obj/structure/altar{
+	icon_state = "sacrificealtar";
+	color = "#4b4b4b"
+	},
+/obj/item/clothing/suit/hooded/cultrobes/eldritch/ash{
+	pixel_x = 0;
+	pixel_y = 6
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "uPX" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
@@ -35373,6 +35900,10 @@
 	},
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
+"vFM" = (
+/obj/structure/cable,
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/outside/city)
 "vFW" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
@@ -35586,6 +36117,23 @@
 /obj/structure/bed/maint,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/ruin)
+"vMv" = (
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 5
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 10
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "vMP" = (
 /obj/machinery/light/small/directional/south,
 /obj/structure/cable,
@@ -36128,6 +36676,19 @@
 /obj/structure/sign/flag/ussp/directional/north,
 /turf/open/floor/iron/dark/small,
 /area/space)
+"weH" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 1
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "weN" = (
 /obj/structure/bed{
 	dir = 1
@@ -37212,6 +37773,17 @@
 /obj/structure/fans/tiny/invisible,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/base)
+"wEB" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/flora/rock/style_3{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "wEF" = (
 /obj/structure/table,
 /obj/item/storage/medkit/brute{
@@ -37270,6 +37842,17 @@
 /obj/structure/cable,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/shop_1)
+"wFJ" = (
+/obj/structure/stone_tile/slab/cracked{
+	color = "#464646"
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "wGg" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
@@ -37403,6 +37986,15 @@
 "wGN" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/third_apartment/bedroom)
+"wGZ" = (
+/obj/structure/spider/stickyweb,
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "wHb" = (
 /obj/structure/railing,
 /obj/effect/turf_decal/weather/snow{
@@ -37782,6 +38374,27 @@
 /obj/structure/transmitter/mounted/free/directional/north,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"wQd" = (
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	color = "#464646"
+	},
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "wQm" = (
 /obj/structure/flora/bush/snow/style_random,
 /turf/open/misc/snow/avangarde,
@@ -37903,6 +38516,15 @@
 	},
 /turf/open/floor/iron/white/small,
 /area/space)
+"wSC" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "wSV" = (
 /obj/structure/chair/comfy/brown{
 	dir = 8
@@ -38976,6 +39598,20 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_3/second_apartment/bathroom)
+"xxR" = (
+/mob/living/basic/faithless,
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 4
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "xxV" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Этаж 1 - Квартира 1"
@@ -39037,6 +39673,21 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
+"xAs" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "xAD" = (
 /obj/structure/chair/comfy/brown{
 	dir = 1
@@ -39482,6 +40133,21 @@
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/base)
 "xOZ" = (
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	color = "#464646"
+	},
 /mob/living/basic/faithless,
 /turf/open/floor/cult{
 	color = "#4b4b4b"
@@ -85085,7 +85751,7 @@ jzb
 wzS
 wzS
 gVl
-haC
+rta
 fsS
 rgL
 ozU
@@ -85342,7 +86008,7 @@ xXL
 xXL
 gXc
 xXL
-xXL
+nmt
 hRa
 fsS
 dFX
@@ -86859,8 +87525,8 @@ wCE
 lpc
 oXc
 ocX
-dDv
-pFb
+vFM
+wQa
 oIg
 oIg
 iru
@@ -114042,7 +114708,7 @@ dky
 dky
 dky
 dky
-gyX
+jNp
 dky
 dky
 dky
@@ -114297,11 +114963,11 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+hWn
+xpJ
+rlr
+dky
 dky
 dky
 dog
@@ -114554,11 +115220,11 @@ dog
 dky
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+hWn
+ixc
+hWn
+dky
 dky
 dky
 dky
@@ -114812,9 +115478,9 @@ dky
 dky
 dky
 dky
-gyX
-gyX
-gyX
+dky
+jNp
+dky
 dky
 dky
 dky
@@ -115066,15 +115732,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+dky
+dky
+sgf
+jNp
+sgf
+dky
+dky
+dky
 dky
 dky
 dog
@@ -115323,15 +115989,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
+dky
+dky
+rlr
+rlr
 kBd
-gyX
-gyX
-gyX
-gyX
+rlr
+sgf
+dky
+dky
 dky
 dky
 dog
@@ -115580,15 +116246,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+xrL
+xrL
+xrL
+hra
+vkL
+vkL
+hra
+dky
 dky
 dky
 dog
@@ -115837,15 +116503,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+sAy
+tup
+mQZ
+hra
+hra
+vkL
+vMv
+nbL
+mQZ
 dky
 dky
 dog
@@ -116094,15 +116760,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+nbL
+xpJ
+nbL
+sgf
+nbL
+tnp
+tup
+tup
+weS
 dky
 dky
 dog
@@ -116351,15 +117017,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+weS
+dky
+rlr
+rlr
+sAy
+sgf
+rlr
+dky
+mhN
 dky
 dky
 dog
@@ -116608,15 +117274,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+weS
+dky
+dky
+rlr
+weS
+rlr
+dky
+dky
+weS
 dky
 dky
 dog
@@ -116865,15 +117531,15 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+tup
+utP
+hra
+vkL
+jNp
+mQZ
+vkL
+hra
+nbL
 dky
 dky
 dog
@@ -117122,15 +117788,15 @@ dog
 dog
 dky
 dky
+rlr
+nbL
+tup
+tup
+dpN
 gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+nbL
+tup
+rlr
 dky
 dky
 dog
@@ -117381,11 +118047,11 @@ dky
 dky
 dky
 dky
+weS
 gyX
+jNp
 gyX
-gyX
-gyX
-gyX
+weS
 dky
 dky
 dky
@@ -117638,11 +118304,11 @@ dog
 dky
 dky
 dky
+weS
 gyX
+jNp
 gyX
-gyX
-gyX
-gyX
+weS
 dky
 dky
 dky
@@ -117895,11 +118561,11 @@ dog
 dog
 dky
 dky
+dky
 gyX
+jNp
 gyX
-gyX
-gyX
-gyX
+dky
 dky
 dky
 dog
@@ -118152,11 +118818,11 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+dky
+jNp
+dky
+dky
 dky
 dky
 dog
@@ -118411,7 +119077,7 @@ dky
 dky
 dky
 dky
-gyX
+jNp
 dky
 dky
 dky
@@ -124821,9 +125487,9 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
+rlr
+sAy
+sgf
 dky
 dog
 dog
@@ -125082,7 +125748,7 @@ dky
 tzD
 dky
 dky
-dog
+dky
 dog
 dog
 dog
@@ -125596,7 +126262,7 @@ dky
 jNp
 dky
 dky
-dog
+dky
 dog
 dog
 dog
@@ -125853,7 +126519,7 @@ dky
 npA
 dky
 dky
-dog
+dky
 dog
 dog
 dog
@@ -126110,7 +126776,7 @@ dky
 qNA
 dky
 dky
-dog
+dky
 dog
 dog
 dog
@@ -126367,7 +127033,7 @@ dky
 lBF
 dky
 dky
-dog
+dky
 dog
 dog
 dog
@@ -127629,21 +128295,21 @@ dog
 dog
 dog
 dog
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
 dky
 dky
 dky
@@ -127886,21 +128552,21 @@ dog
 dog
 dog
 dog
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
+dog
 dky
 dky
 dky
@@ -129970,7 +130636,7 @@ dky
 dky
 dky
 dky
-gyX
+jNp
 dky
 dky
 dky
@@ -130225,11 +130891,11 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+rlr
+xpJ
+hWn
+dky
 dky
 dky
 dog
@@ -130482,11 +131148,11 @@ dog
 dog
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+hWn
+ixc
+rlr
+dky
 dky
 dky
 dky
@@ -130741,7 +131407,7 @@ dky
 dky
 dky
 dky
-gyX
+jNp
 dky
 dky
 dky
@@ -130994,15 +131660,15 @@ dky
 dog
 dog
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+pYj
+kzB
+rlr
+hTH
+wSC
+xOZ
+rlr
+kzB
+rlr
 dky
 dky
 dky
@@ -131251,15 +131917,15 @@ dky
 dky
 dky
 dky
-gyX
-xOZ
-gyX
+sgf
+dMK
+weS
 dky
 dky
 dky
-gyX
-gyX
-gyX
+weS
+dMK
+rlr
 dky
 dky
 dky
@@ -131505,20 +132171,20 @@ rlr
 ihK
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+rlr
 xOZ
-gyX
-gyX
-xOZ
+tup
+kzB
+weS
+xxR
+weH
+jAf
+weS
+kzB
+nbL
+tup
+kzB
 dky
 dky
 dog
@@ -131762,20 +132428,20 @@ rlr
 rlr
 dky
 dky
-xOZ
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+nbL
+tup
+sgf
+sgf
+weS
 dky
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+weS
+sgf
+nbL
+tup
+sgf
 dky
 dky
 dog
@@ -132019,20 +132685,20 @@ rlr
 ihK
 dky
 dky
-gyX
-gyX
+dky
+weS
 dky
 dky
 dky
-gyX
+lBI
 dky
 dky
 dky
-gyX
+weS
 dky
 dky
 dky
-gyX
+weS
 dky
 dky
 dog
@@ -132276,20 +132942,20 @@ rwY
 rlr
 dky
 dky
-gyX
-gyX
 dky
-gyX
-gyX
-xOZ
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+mhN
 dky
-gyX
+lNm
+vkL
+rlr
+rlr
+uDP
+rlr
+sgf
+hra
+thP
+dky
+mhN
 dky
 dky
 dog
@@ -132533,20 +133199,20 @@ rlr
 ihK
 dky
 dky
-gyX
-gyX
 dky
-gyX
-gyX
-gyX
+weS
 dky
+weS
+xrL
+xrL
+xrL
+hra
+vkL
+vkL
+hra
+hPC
 dky
-dky
-gyX
-gyX
-gyX
-dky
-gyX
+weS
 dky
 dky
 dog
@@ -132790,20 +133456,20 @@ rwY
 rlr
 dky
 dky
-gyX
-gyX
 dky
-gyX
-gyX
-gyX
+sAy
 dky
+sAy
+tup
+mQZ
 dky
+uPM
 dky
-gyX
-gyX
-gyX
+vMv
+nbL
+onj
 dky
-gyX
+sAy
 dky
 dky
 dog
@@ -133047,20 +133713,20 @@ rlr
 ihK
 dky
 dky
-gyX
-gyX
-gyX
-xOZ
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+wQd
+tup
+nbL
+xpJ
+nbL
+sgf
+nbL
+tnp
+tup
+tup
+weS
+qpD
+tup
 dky
 dky
 dog
@@ -133304,20 +133970,20 @@ ihK
 rwY
 dky
 dky
-gyX
-gyX
-gyX
-gyX
 dky
+hPC
+mQZ
+weS
 dky
-gyX
-xOZ
-gyX
+nvi
+rlr
+sAy
+sgf
+wVP
 dky
-dky
-gyX
-gyX
-gyX
+mhN
+tup
+tup
 dky
 dky
 dog
@@ -133561,20 +134227,20 @@ rlr
 dky
 dky
 dky
-gyX
-gyX
-gyX
-gyX
+dky
+cMT
+hPC
+weS
 dky
 dky
-gyX
-gyX
-gyX
+rlr
+weS
+rlr
 dky
 dky
-gyX
-gyX
-xOZ
+weS
+nbL
+cMT
 dky
 dky
 dog
@@ -133821,15 +134487,15 @@ dky
 dky
 dky
 dky
-gyX
-xOZ
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+tup
+utP
+hra
+vkL
+tup
+mQZ
+vkL
+hra
+nbL
 dky
 dky
 dky
@@ -134078,15 +134744,15 @@ dky
 dky
 dky
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+mGd
+nbL
+tup
+tup
+dpN
+iJz
+nbL
+tup
+uic
 dky
 dky
 dog
@@ -134337,11 +135003,11 @@ dky
 dky
 dky
 dky
-dky
-dky
-gyX
-dky
-dky
+mZx
+nbL
+weS
+tup
+vHb
 dky
 dky
 dky
@@ -134594,11 +135260,11 @@ dog
 dog
 dog
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+dky
+weS
+dky
+dky
 dky
 dky
 dog
@@ -134814,35 +135480,35 @@ dky
 dky
 dky
 dky
-gyX
-gyX
-gyX
+rlr
+wVP
+wFJ
 dky
-gyX
-gyX
-gyX
-dky
-gyX
-gyX
-nmt
-gyX
-gyX
-nmt
-gyX
-dky
-gyX
-gyX
-gyX
+rlr
+ogr
+rlr
+sgf
+rlr
+ogr
+sAy
+rlr
+qaH
+ogr
+ogr
+ogr
+rlr
+wFJ
+rlr
 dky
 dky
 jNp
 dky
 dky
+rlr
+uCm
 gyX
-gyX
-gyX
-gyX
-gyX
+ofJ
+rlr
 dky
 dky
 dog
@@ -134852,9 +135518,9 @@ dog
 dog
 dky
 dky
-dky
-gyX
-dky
+mrQ
+weS
+kWb
 dky
 dky
 dky
@@ -135070,26 +135736,26 @@ dog
 dky
 dky
 dky
-gyX
-gyX
+mqX
+qyB
 rlr
 xrL
 xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
+rlr
+ogr
+rlr
+ogr
+qaH
+wFJ
+sgf
+ogr
+rlr
+kVT
+ogr
+rlr
+sgf
+ogr
+rlr
 xrL
 xrL
 rlr
@@ -135109,10 +135775,10 @@ dog
 dog
 dky
 gyX
-gyX
-gyX
-gyX
-gyX
+soW
+gaX
+lhY
+dky
 dky
 dky
 dog
@@ -135328,25 +135994,25 @@ dky
 dky
 dky
 dky
-gyX
-jNp
+uCm
+iZk
+nvi
 dky
-dky
-gyX
-gyX
-gyX
-dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-dky
-gyX
-gyX
-gyX
+sgf
+qaH
+xAs
+ogr
+rlr
+ogr
+ogr
+sgf
+ogr
+rlr
+rwY
+rlr
+ogr
+ogr
+ogr
 dky
 dky
 dky
@@ -135365,11 +136031,11 @@ dog
 dog
 dog
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+mJe
+weS
+lqF
+dky
 dky
 dky
 dog
@@ -135586,7 +136252,7 @@ dky
 dky
 dky
 dky
-jNp
+ixc
 dky
 dky
 dky
@@ -135624,7 +136290,7 @@ dog
 dky
 dky
 dky
-gyX
+iZk
 dky
 dky
 dky
@@ -135843,7 +136509,7 @@ dky
 dky
 dky
 dky
-jNp
+xAs
 dky
 dky
 dky
@@ -135879,11 +136545,11 @@ dog
 dog
 dog
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+mrQ
+jNp
+lqF
+dky
 dky
 dky
 dog
@@ -136099,25 +136765,25 @@ dky
 dky
 dky
 dky
-gyX
+uCm
 jNp
-gyX
+pky
 dky
-gyX
-gyX
-gyX
-dky
-gyX
-gyX
-nmt
-gyX
-gyX
-nmt
-gyX
-dky
-gyX
-gyX
-gyX
+sgf
+ogr
+ogr
+sgf
+ogr
+rlr
+wFJ
+ntg
+ogr
+sgf
+ogr
+ogr
+rlr
+sgf
+rlr
 dky
 dky
 dky
@@ -136136,11 +136802,11 @@ dog
 dog
 dog
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+rlr
+kNb
+dsP
+nqn
+dky
 dky
 dky
 dog
@@ -136355,31 +137021,31 @@ dog
 dky
 dky
 dky
-gyX
-gyX
+mqX
+wFJ
 rlr
 xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
-xrL
+oBG
 rlr
+rlr
+rlr
+ogr
+sgf
+qaH
+ogr
+rlr
+rlr
+rlr
+ogr
+sgf
+kVT
+ogr
+rlr
+xrL
+qaH
+sgf
 dky
-dky
+iJz
 dky
 dky
 dky
@@ -136393,11 +137059,11 @@ dog
 dog
 dog
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+oWl
+sAy
+pQA
+dky
 dky
 dky
 dky
@@ -136613,46 +137279,46 @@ dky
 dky
 dky
 dky
-gyX
-gyX
-gyX
+rlr
+wVP
+sgf
 dky
-gyX
-gyX
-gyX
-dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-dky
-gyX
-gyX
-gyX
+ogr
+ogr
+rlr
+kVT
+rlr
+ogr
+rlr
+rlr
+ogr
+rlr
+sBv
+sgf
+ogr
+rlr
+ogr
 dky
 dky
 jNp
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
-dky
+iJz
+iJz
 gyX
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+dky
+tii
 dky
 dky
 dky
@@ -136891,28 +137557,28 @@ dky
 dky
 dky
 dky
-jNp
+xpJ
 dky
 dky
-dky
-dky
-dky
-dky
-gyX
-gyX
-dky
-gyX
 iJz
-gyX
-skE
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+dky
+dky
+kVT
+wEB
+dky
+sDR
+oWn
+kVT
+wGZ
+dky
+rlr
+wVP
+rlr
+rlr
+rlr
+uER
+rlr
 dky
 dky
 dog
@@ -137148,28 +137814,28 @@ dky
 dky
 dky
 dky
-rlr
+sgf
 xrL
 xrL
+qaH
+xrL
+rwY
 xrL
 xrL
+oBG
+igv
+oWn
+wGZ
+pXO
+wGZ
+wGZ
+cOc
 xrL
-xrL
-gyX
-gyX
-gyX
-iJz
-gyX
-gyX
-skE
-gyX
-skE
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+rwY
+ePJ
+rwY
+sgf
+sgf
 dky
 dky
 dog
@@ -137412,21 +138078,21 @@ dky
 dky
 dky
 dky
-gyX
-gyX
+rlr
+iZk
 dky
-skE
-iJz
-gyX
-iJz
+cOc
+oWn
+rlr
+oWn
 dky
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
-gyX
+rlr
+wVP
+rlr
+rlr
+rlr
+thP
+rlr
 dky
 dky
 dog
@@ -137669,8 +138335,8 @@ dky
 dky
 dky
 dky
-gyX
-gyX
+rlr
+jNp
 dky
 dky
 dky
