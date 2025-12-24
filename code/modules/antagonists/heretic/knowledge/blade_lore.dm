@@ -13,7 +13,7 @@
 	description = list(
 		"Путь Клинка, как следует из названия.",
 		"Вы очень компетентны в разрезании своих противников на кусочки.",
-		"Выберайте этот путь, если хотите драться и быть лучшим в этом деле.",
+		"Выбирайте этот путь, если хотите сражаться и быть лучшим в этом деле.",
 	)
 	pros = list(
 		"Способен блокировать атаки противника и наносить ответные удары.",
@@ -107,11 +107,11 @@
 
 /datum/heretic_knowledge/duel_stance
 	name = "Stance of the Torn Champion"
-	desc = "Grants resilience to blood loss from wounds and immunity to having your limbs dismembered. \
-		Additionally, when damaged below 50% of your maximum health, \
-		you gain increased resistance to gaining wounds and resistance to slowdown."
-	gain_text = "In time, it was he who stood alone among the bodies of his former comrades, awash in blood, none of it his own. \
-		He was without rival, equal, or purpose."
+	desc = "Повышает устойчивость к потере крови при ранениях и даёт иммунитет к расчленению ваших конечностей. \
+		Кроме того, при уровне здоровья ниже 50 % от максимального, \
+		вы становитесь более устойчивыми к получению ранений и замедлению."
+	gain_text = "Однажды, он остался один среди тел своих бывших товарищей, умытым в крови, но не в его крови. \
+		У него не было ни соперников, ни равных, ни цели."
 	cost = 2
 	research_tree_icon_path = 'icons/effects/blood.dmi'
 	research_tree_icon_state = "suitblood"
@@ -173,11 +173,11 @@
 #undef BLOOD_FLOW_PER_SEVEIRTY
 
 /datum/heretic_knowledge/armor/blade
-	desc = "Allows you to transmute a table (or a suit), a mask and a sheet of titanium or silver to create a Shattered Panoply. \
-			Provides baton resistance and shock insulation while worn. \
-			Acts as a focus while hooded."
-	gain_text = "The echoing, directionless cacophony of violence reverberates about me. \
-				Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers."
+	desc = "Позволяет трансмутировать стол (или костюм), маску и лист титана или серебра для создания Shattered Panoply. \
+			Обеспечивает устойчивость к ударам дубинкой и изоляцию рт электричества при ношении. \
+			Выступает в роли фокуса, находясь в капюшоне."
+	gain_text = "Разносящаяся эхом во все стороны какофония насилия окружает меня. \
+				Даже после того, как стальной панцирь Чемпиона был разорван, каждая его часть по-прежнему служит определённой цели, стремясь отразить невидимых или воображаемых нападающих."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/blade)
 	research_tree_icon_state = "blade_armor"
 	required_atoms = list(
